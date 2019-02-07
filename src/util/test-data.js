@@ -29,6 +29,7 @@ export const createUser = (id, attributes = {}) => ({
   type: 'user',
   attributes: {
     banned: false,
+    deleted: false,
     profile: {
       displayName: `${id} display name`,
       abbreviatedName: 'TT',
@@ -43,6 +44,7 @@ export const createCurrentUser = (id, attributes = {}) => ({
   type: 'currentUser',
   attributes: {
     banned: false,
+    deleted: false,
     email: `${id}@example.com`,
     emailVerified: true,
     profile: {

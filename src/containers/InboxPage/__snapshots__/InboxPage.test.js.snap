@@ -174,6 +174,7 @@ exports[`InboxPage matches snapshot 1`] = `
                 "customer": Object {
                   "attributes": Object {
                     "banned": false,
+                    "deleted": false,
                     "profile": Object {
                       "abbreviatedName": "TT",
                       "displayName": "customer-user-id display name",
@@ -191,6 +192,7 @@ exports[`InboxPage matches snapshot 1`] = `
                 "provider": Object {
                   "attributes": Object {
                     "banned": false,
+                    "deleted": false,
                     "profile": Object {
                       "abbreviatedName": "TT",
                       "displayName": "provider-user-id display name",
@@ -308,6 +310,7 @@ exports[`InboxPage matches snapshot 1`] = `
                 "customer": Object {
                   "attributes": Object {
                     "banned": false,
+                    "deleted": false,
                     "profile": Object {
                       "abbreviatedName": "TT",
                       "displayName": "customer-user-id display name",
@@ -325,6 +328,7 @@ exports[`InboxPage matches snapshot 1`] = `
                 "provider": Object {
                   "attributes": Object {
                     "banned": false,
+                    "deleted": false,
                     "profile": Object {
                       "abbreviatedName": "TT",
                       "displayName": "provider-user-id display name",
@@ -584,6 +588,7 @@ exports[`InboxPage matches snapshot 3`] = `
                 "customer": Object {
                   "attributes": Object {
                     "banned": false,
+                    "deleted": false,
                     "profile": Object {
                       "abbreviatedName": "TT",
                       "displayName": "customer-user-id display name",
@@ -601,6 +606,7 @@ exports[`InboxPage matches snapshot 3`] = `
                 "provider": Object {
                   "attributes": Object {
                     "banned": false,
+                    "deleted": false,
                     "profile": Object {
                       "abbreviatedName": "TT",
                       "displayName": "provider-user-id display name",
@@ -718,6 +724,7 @@ exports[`InboxPage matches snapshot 3`] = `
                 "customer": Object {
                   "attributes": Object {
                     "banned": false,
+                    "deleted": false,
                     "profile": Object {
                       "abbreviatedName": "TT",
                       "displayName": "customer-user-id display name",
@@ -735,6 +742,7 @@ exports[`InboxPage matches snapshot 3`] = `
                 "provider": Object {
                   "attributes": Object {
                     "banned": false,
+                    "deleted": false,
                     "profile": Object {
                       "abbreviatedName": "TT",
                       "displayName": "provider-user-id display name",

@@ -28,6 +28,7 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
             Object {
               "attributes": Object {
                 "banned": false,
+                "deleted": false,
                 "email": "customer1@example.com",
                 "emailVerified": true,
                 "profile": Object {
@@ -135,6 +136,7 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
               "customer": Object {
                 "attributes": Object {
                   "banned": false,
+                  "deleted": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
                     "displayName": "customer1 display name",
@@ -172,6 +174,7 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
               "provider": Object {
                 "attributes": Object {
                   "banned": false,
+                  "deleted": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
                     "displayName": "provider1 display name",
@@ -228,6 +231,7 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
             Object {
               "attributes": Object {
                 "banned": false,
+                "deleted": false,
                 "email": "provider1@example.com",
                 "emailVerified": true,
                 "profile": Object {
@@ -334,6 +338,7 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
               "customer": Object {
                 "attributes": Object {
                   "banned": false,
+                  "deleted": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
                     "displayName": "customer1 display name",
@@ -371,6 +376,7 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
               "provider": Object {
                 "attributes": Object {
                   "banned": false,
+                  "deleted": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
                     "displayName": "provider1 display name",

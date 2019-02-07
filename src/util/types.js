@@ -109,18 +109,29 @@ propTypes.currentUser = shape({
   profileImage: propTypes.image,
 });
 
+const userAttributes = shape({
+  banned: propTypes.value(false).isRequired,
+  deleted: propTypes.value(false).isRequired,
+  profile: shape({
+    displayName: string.isRequired,
+    abbreviatedName: string.isRequired,
+    bio: string,
+  }),
+});
+
+const deletedUserAttributes = shape({
+  deleted: propTypes.value(true).isRequired,
+});
+
+const bannedUserAttributes = shape({
+  banned: propTypes.value(true).isRequired,
+});
+
 // Denormalised user object
 propTypes.user = shape({
   id: propTypes.uuid.isRequired,
   type: propTypes.value('user').isRequired,
-  attributes: shape({
-    banned: bool.isRequired,
-    profile: shape({
-      displayName: string.isRequired,
-      abbreviatedName: string.isRequired,
-      bio: string,
-    }),
-  }),
+  attributes: oneOfType([userAttributes, deletedUserAttributes, bannedUserAttributes]).isRequired,
   profileImage: propTypes.image,
 });
 
