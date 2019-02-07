@@ -86,6 +86,8 @@
 
 /* Passed-in props for DetailCardImage subcomponent */
 .imageWrapperMobile {
+  position: relative;
+
   @media (--viewportLarge) {
     display: none;
   }

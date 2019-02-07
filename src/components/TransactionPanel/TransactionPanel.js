@@ -239,8 +239,8 @@ export class TransactionPanelComponent extends Component {
       bannedUserDisplayName
     );
 
-    const { publicData = {}, geolocation } = currentListing.attributes;
-    const location = publicData.location || {};
+    const { publicData, geolocation } = currentListing.attributes;
+    const location = publicData && publicData.location ? publicData.location : {};
     const listingTitle = currentListing.attributes.deleted
       ? deletedListingTitle
       : currentListing.attributes.title;
