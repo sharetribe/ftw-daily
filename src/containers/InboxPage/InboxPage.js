@@ -15,7 +15,7 @@ import {
 } from '../../util/transaction';
 import { LINE_ITEM_DAY, LINE_ITEM_UNITS, propTypes } from '../../util/types';
 import { formatMoney } from '../../util/currency';
-import { ensureCurrentUser, userDisplayName } from '../../util/data';
+import { ensureCurrentUser } from '../../util/data';
 import { dateFromAPIToLocalNoon, daysBetween } from '../../util/dates';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
@@ -33,6 +33,7 @@ import {
   LayoutWrapperFooter,
   Footer,
   IconSpinner,
+  UserDisplayName,
 } from '../../components';
 import { TopbarContainer, NotFoundPage } from '../../containers';
 import config from '../../config';
@@ -189,11 +190,8 @@ export const InboxItem = props => {
   const isOrder = type === 'order';
 
   const otherUser = isOrder ? provider : customer;
-  const bannedUserDisplayName = intl.formatMessage({
-    id: 'InboxPage.bannedUserDisplayName',
-  });
+  const otherUserDisplayName = <UserDisplayName user={otherUser} intl={intl} />;
   const isOtherUserBanned = otherUser.attributes.banned;
-  const otherUserDisplayName = userDisplayName(otherUser, bannedUserDisplayName);
 
   const isSaleNotification = !isOrder && txIsRequested(tx);
   const rowNotificationDot = isSaleNotification ? <div className={css.notificationDot} /> : null;
