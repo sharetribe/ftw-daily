@@ -3,9 +3,9 @@ import { string, arrayOf, bool, func, number } from 'prop-types';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import dropWhile from 'lodash/dropWhile';
 import classNames from 'classnames';
-import { Avatar, InlineTextButton, ReviewRating } from '../../components';
+import { Avatar, InlineTextButton, ReviewRating, UserDisplayName } from '../../components';
 import { formatDate } from '../../util/dates';
-import { ensureTransaction, ensureUser, ensureListing, userDisplayName } from '../../util/data';
+import { ensureTransaction, ensureUser, ensureListing } from '../../util/data';
 import {
   TRANSITION_ACCEPT,
   TRANSITION_CANCEL,
@@ -223,12 +223,11 @@ const Transition = props => {
 
   const ownRole = getUserTxRole(currentUser.id, currentTransaction);
 
-  const bannedUserDisplayName = intl.formatMessage({
-    id: 'ActivityFeed.bannedUserDisplayName',
-  });
-  const otherUsersName = txRoleIsProvider(ownRole)
-    ? userDisplayName(customer, bannedUserDisplayName)
-    : userDisplayName(provider, bannedUserDisplayName);
+  const otherUsersName = txRoleIsProvider(ownRole) ? (
+    <UserDisplayName user={customer} intl={intl} />
+  ) : (
+    <UserDisplayName user={provider} intl={intl} />
+  );
 
   const transitionMessage = resolveTransitionMessage(
     transaction,
