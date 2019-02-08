@@ -37,6 +37,7 @@
   "AuthenticationPage.verifyEmailText": "Thanks for signing up! There's one quick step left. To be able to contact you, we need you to verify your email address. Please click the link we sent to {email}.",
   "AuthenticationPage.verifyEmailTitle": "{name}, check your inbox to verify your email",
   "Avatar.bannedUserDisplayName": "Banned user",
+  "Avatar.deletedUserDisplayName": "Deleted user",
   "BookingBreakdown.bookingPeriod": "{bookingStart} – {bookingEnd}",
   "BookingBreakdown.commission": "Saunatime fee *",
   "BookingBreakdown.commissionFeeNote": "* The fee helps us run the platform and provide the best possible service to you!",
