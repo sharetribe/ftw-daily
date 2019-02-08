@@ -348,6 +348,21 @@
   }
 }
 
+.sendingMessageNotAllowed {
+  color: var(--matterColorAnti);
+
+  position: relative;
+  margin: 46px 24px 0 24px;
+
+  @media (--viewportMedium) {
+    margin: 49px 24px 0 24px;
+    border-top: 0;
+  }
+  @media (--viewportLarge) {
+    margin: 47px 0 0 0;
+  }
+}
+
 /* SaleActionButtonsMaybe subcomponent */
 .actionButtons {
   /* Position action button row above the footer */

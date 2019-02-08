@@ -275,10 +275,17 @@ export class TransactionPanelComponent extends Component {
       />
     );
 
+    const showSendMessageForm =
+      !isCustomerBanned && !isCustomerDeleted && !isProviderBanned && !isProviderDeleted;
+
     const sendMessagePlaceholder = intl.formatMessage(
       { id: 'TransactionPanel.sendMessagePlaceholder' },
       { name: otherUserDisplayName }
     );
+
+    const sendingMessageNotAllowed = intl.formatMessage({
+      id: 'TransactionPanel.sendingMessageNotAllowed',
+    });
 
     const classes = classNames(rootClassName || css.root, className);
 
@@ -334,17 +341,21 @@ export class TransactionPanelComponent extends Component {
               onShowMoreMessages={() => onShowMoreMessages(currentTransaction.id)}
               totalMessagePages={totalMessagePages}
             />
+            {showSendMessageForm ? (
+              <SendMessageForm
+                form={this.sendMessageFormName}
+                rootClassName={css.sendMessageForm}
+                messagePlaceholder={sendMessagePlaceholder}
+                inProgress={sendMessageInProgress}
+                sendMessageError={sendMessageError}
+                onFocus={this.onSendMessageFormFocus}
+                onBlur={this.onSendMessageFormBlur}
+                onSubmit={this.onMessageSubmit}
+              />
+            ) : (
+              <div className={css.sendingMessageNotAllowed}>{sendingMessageNotAllowed}</div>
+            )}
 
-            <SendMessageForm
-              form={this.sendMessageFormName}
-              rootClassName={css.sendMessageForm}
-              messagePlaceholder={sendMessagePlaceholder}
-              inProgress={sendMessageInProgress}
-              sendMessageError={sendMessageError}
-              onFocus={this.onSendMessageFormFocus}
-              onBlur={this.onSendMessageFormBlur}
-              onSubmit={this.onMessageSubmit}
-            />
             {stateData.showSaleButtons ? (
               <div className={css.mobileActionButtons}>{saleButtons}</div>
             ) : null}

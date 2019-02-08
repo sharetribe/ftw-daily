@@ -848,6 +848,7 @@
   "TransactionPanel.saleEnquiredTitle": "{customerName} enquired about {listingLink}",
   "TransactionPanel.saleRequestedInfo": "{customerName} is waiting for your response.",
   "TransactionPanel.saleRequestedTitle": "{customerName} has requested to book {listingLink}.",
+  "TransactionPanel.sendingMessageNotAllowed": "Sending message to the user is not possible.",
   "TransactionPanel.sendMessagePlaceholder": "Send a message to {name}…",
   "UserCard.contactUser": "Contact",
   "UserCard.heading": "Hello, I'm {name}.",
