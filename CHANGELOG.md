@@ -14,6 +14,13 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [change] A new component `UserDisplayName` is added for showing user display name and also
+  handling the cases where a user is banned or deleted. When the user name must be a string instead
+  of a component (e.g. in `Avatar` and in `ListingPage`) you can use a new function
+  `userDisplayNameAsString`. Together these will replace the old `userDisplayName` function which is
+  now deprecated. Also some small bug fixes to showing banned user. There is quite a lot of file
+  changes caused by updating test files.
+  [#1022](https://github.com/sharetribe/flex-template-web/pull/1022)
 - [change] Remove error handling for unverified email from PasswordRecoveryPage and translations
   related to that. [#1021](https://github.com/sharetribe/flex-template-web/pull/1021)
 
