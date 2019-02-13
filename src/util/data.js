@@ -1,5 +1,6 @@
 import isArray from 'lodash/isArray';
 import reduce from 'lodash/reduce';
+import { sanitizeEntity } from './sanitize';
 
 /**
  * Combine the given relationships objects
@@ -42,9 +43,14 @@ export const updatedEntities = (oldEntities, apiResponse) => {
 
   const newEntities = objects.reduce((entities, curr) => {
     const { id, type } = curr;
+
+    // Some entities (e.g. listing and user) might include extended data,
+    // you should check if src/util/sanitize.js needs to be updated.
+    const current = sanitizeEntity(curr);
+
     entities[type] = entities[type] || {};
     const entity = entities[type][id.uuid];
-    entities[type][id.uuid] = entity ? combinedResourceObjects(entity, curr) : curr;
+    entities[type][id.uuid] = entity ? combinedResourceObjects(entity, current) : current;
     return entities;
   }, oldEntities);
 
