@@ -18,7 +18,12 @@ import {
 } from '../../util/urlHelpers';
 import { formatMoney } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
-import { ensureListing, ensureOwnListing, ensureUser, userDisplayName } from '../../util/data';
+import {
+  ensureListing,
+  ensureOwnListing,
+  ensureUser,
+  userDisplayNameAsString,
+} from '../../util/data';
 import { richText } from '../../util/richText';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
@@ -303,10 +308,10 @@ export class ListingPageComponent extends Component {
     const currentAuthor = authorAvailable ? currentListing.author : null;
     const ensuredAuthor = ensureUser(currentAuthor);
 
-    const bannedUserDisplayName = intl.formatMessage({
-      id: 'ListingPage.bannedUserDisplayName',
-    });
-    const authorDisplayName = userDisplayName(ensuredAuthor, bannedUserDisplayName);
+    // When user is banned or deleted the listing is also deleted.
+    // Because listing can be never showed with banned or deleted user we don't have to provide
+    // banned or deleted display names for the function
+    const authorDisplayName = userDisplayNameAsString(ensuredAuthor, '');
 
     const { formattedPrice, priceTitle } = priceData(price, intl);
 

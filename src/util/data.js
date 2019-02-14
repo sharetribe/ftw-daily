@@ -238,11 +238,31 @@ export const ensureAvailabilityException = availabilityException => {
 };
 
 /**
- * Get the display name of the given user. This function handles
+ * Get the display name of the given user as string. This function handles
  * missing data (e.g. when the user object is still being downloaded),
  * fully loaded users, as well as banned users.
  *
- * For banned users, a translated name should be provided.
+ * For banned or deleted users, a translated name should be provided.
+ *
+ * @param {propTypes.user} user
+ * @param {String} defaultUserDisplayName
+ *
+ * @return {String} display name that can be rendered in the UI
+ */
+export const userDisplayNameAsString = (user, defaultUserDisplayName) => {
+  const hasAttributes = user && user.attributes;
+  const hasProfile = hasAttributes && user.attributes.profile;
+  const hasDisplayName = hasProfile && user.attributes.profile.displayName;
+
+  if (hasDisplayName) {
+    return user.attributes.profile.displayName;
+  } else {
+    return defaultUserDisplayName || '';
+  }
+};
+
+/**
+ * DEPRECATED: Use userDisplayNameAsString function or UserDisplayName component instead
  *
  * @param {propTypes.user} user
  * @param {String} bannedUserDisplayName
@@ -250,16 +270,12 @@ export const ensureAvailabilityException = availabilityException => {
  * @return {String} display name that can be rendered in the UI
  */
 export const userDisplayName = (user, bannedUserDisplayName) => {
-  const hasAttributes = user && user.attributes;
-  const hasProfile = hasAttributes && user.attributes.profile;
+  console.warn(
+    `Function userDisplayName is deprecated! 
+User function userDisplayNameAsString or component UserDisplayName instead.`
+  );
 
-  if (hasAttributes && user.attributes.banned) {
-    return bannedUserDisplayName;
-  } else if (hasProfile) {
-    return user.attributes.profile.displayName;
-  } else {
-    return '';
-  }
+  return userDisplayNameAsString(user, bannedUserDisplayName);
 };
 
 /**
@@ -267,24 +283,23 @@ export const userDisplayName = (user, bannedUserDisplayName) => {
  * missing data (e.g. when the user object is still being downloaded),
  * fully loaded users, as well as banned users.
  *
- * For banned users, a translated name should be provided.
+ * For banned  or deleted users, a default abbreviated name should be provided.
  *
  * @param {propTypes.user} user
- * @param {String} bannedUserAbbreviatedName
+ * @param {String} defaultUserAbbreviatedName
  *
  * @return {String} abbreviated name that can be rendered in the UI
  * (e.g. in Avatar initials)
  */
-export const userAbbreviatedName = (user, bannedUserAbbreviatedName) => {
+export const userAbbreviatedName = (user, defaultUserAbbreviatedName) => {
   const hasAttributes = user && user.attributes;
   const hasProfile = hasAttributes && user.attributes.profile;
+  const hasDisplayName = hasProfile && user.attributes.profile.abbreviatedName;
 
-  if (hasAttributes && user.attributes.banned) {
-    return bannedUserAbbreviatedName;
-  } else if (hasProfile) {
+  if (hasDisplayName) {
     return user.attributes.profile.abbreviatedName;
   } else {
-    return '';
+    return defaultUserAbbreviatedName || '';
   }
 };
 

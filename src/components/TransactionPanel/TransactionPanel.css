@@ -86,6 +86,8 @@
 
 /* Passed-in props for DetailCardImage subcomponent */
 .imageWrapperMobile {
+  position: relative;
+
   @media (--viewportLarge) {
     display: none;
   }
@@ -334,6 +336,21 @@
 
 /* Prop to be passed to SendMessageForm component */
 .sendMessageForm {
+  position: relative;
+  margin: 46px 24px 0 24px;
+
+  @media (--viewportMedium) {
+    margin: 49px 24px 0 24px;
+    border-top: 0;
+  }
+  @media (--viewportLarge) {
+    margin: 47px 0 0 0;
+  }
+}
+
+.sendingMessageNotAllowed {
+  color: var(--matterColorAnti);
+
   position: relative;
   margin: 46px 24px 0 24px;
 

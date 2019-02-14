@@ -198,6 +198,7 @@ describe('TransactionPanel - Sale', () => {
       }),
       listing: createListing('listing1'),
       customer: createUser('customer1'),
+      provider: createUser('provider1'),
       lastTransitionedAt: new Date(Date.UTC(2017, 5, 10)),
     });
     const props = {

@@ -9,6 +9,7 @@ const bannedUser = {
   type: 'user',
   attributes: {
     banned: true,
+    deleted: false,
   },
 };
 
@@ -17,6 +18,7 @@ const userWithoutProfileImage = {
   type: 'user',
   attributes: {
     banned: false,
+    deleted: false,
     profile: {
       displayName: 'No Profile',
       abbreviatedName: 'NP',
@@ -29,6 +31,7 @@ const userWithProfileImage = {
   type: 'user',
   attributes: {
     banned: false,
+    deleted: false,
     profile: {
       displayName: 'Has Profile',
       abbreviatedName: 'HP',

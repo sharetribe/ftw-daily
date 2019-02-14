@@ -66,6 +66,7 @@ exports[`ListingPage matches snapshot 1`] = `
               "author": Object {
                 "attributes": Object {
                   "banned": false,
+                  "deleted": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
                     "displayName": "user-1 display name",
@@ -99,6 +100,7 @@ exports[`ListingPage matches snapshot 1`] = `
               Object {
                 "attributes": Object {
                   "banned": false,
+                  "deleted": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
                     "displayName": "user-1 display name",
@@ -199,6 +201,7 @@ exports[`ListingPage matches snapshot 1`] = `
                 Object {
                   "attributes": Object {
                     "banned": false,
+                    "deleted": false,
                     "email": "user-2@example.com",
                     "emailVerified": true,
                     "profile": Object {
@@ -236,6 +239,7 @@ exports[`ListingPage matches snapshot 1`] = `
                   "author": Object {
                     "attributes": Object {
                       "banned": false,
+                      "deleted": false,
                       "profile": Object {
                         "abbreviatedName": "TT",
                         "displayName": "user-1 display name",
@@ -286,6 +290,7 @@ exports[`ListingPage matches snapshot 1`] = `
                 "author": Object {
                   "attributes": Object {
                     "banned": false,
+                    "deleted": false,
                     "profile": Object {
                       "abbreviatedName": "TT",
                       "displayName": "user-1 display name",

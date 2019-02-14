@@ -39,6 +39,7 @@ export const WithProfileImageAndBioCurrentUser = {
       type: 'user',
       attributes: {
         banned: false,
+        deleted: false,
         profile: {
           displayName: 'Has P',
           abbreviatedName: 'HP',
@@ -81,6 +82,7 @@ export const WithProfileImageAndBio = {
       type: 'user',
       attributes: {
         banned: false,
+        deleted: false,
         profile: {
           displayName: 'Has P',
           abbreviatedName: 'HP',

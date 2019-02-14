@@ -11,10 +11,15 @@ import {
   txHasBeenDelivered,
 } from '../../util/transaction';
 import { LINE_ITEM_NIGHT, LINE_ITEM_DAY, propTypes } from '../../util/types';
-import { ensureListing, ensureTransaction, ensureUser, userDisplayName } from '../../util/data';
+import {
+  ensureListing,
+  ensureTransaction,
+  ensureUser,
+  userDisplayNameAsString,
+} from '../../util/data';
 import { isMobileSafari } from '../../util/userAgent';
 import { formatMoney } from '../../util/currency';
-import { AvatarLarge, BookingPanel, ReviewModal } from '../../components';
+import { AvatarLarge, BookingPanel, ReviewModal, UserDisplayName } from '../../components';
 import { SendMessageForm } from '../../forms';
 import config from '../../config';
 
@@ -37,11 +42,12 @@ import PanelHeading, {
 import css from './TransactionPanel.css';
 
 // Helper function to get display names for different roles
-const displayNames = (currentUser, currentProvider, currentCustomer, bannedUserDisplayName) => {
-  const authorDisplayName = userDisplayName(currentProvider, bannedUserDisplayName);
-  const customerDisplayName = userDisplayName(currentCustomer, bannedUserDisplayName);
+const displayNames = (currentUser, currentProvider, currentCustomer, intl) => {
+  const authorDisplayName = <UserDisplayName user={currentProvider} intl={intl} />;
+  const customerDisplayName = <UserDisplayName user={currentCustomer} intl={intl} />;
 
   let otherUserDisplayName = '';
+  let otherUserDisplayNameString = '';
   const currentUserIsCustomer =
     currentUser.id && currentCustomer.id && currentUser.id.uuid === currentCustomer.id.uuid;
   const currentUserIsProvider =
@@ -49,14 +55,17 @@ const displayNames = (currentUser, currentProvider, currentCustomer, bannedUserD
 
   if (currentUserIsCustomer) {
     otherUserDisplayName = authorDisplayName;
+    otherUserDisplayNameString = userDisplayNameAsString(currentProvider, '');
   } else if (currentUserIsProvider) {
     otherUserDisplayName = customerDisplayName;
+    otherUserDisplayNameString = userDisplayNameAsString(currentCustomer, '');
   }
 
   return {
     authorDisplayName,
     customerDisplayName,
     otherUserDisplayName,
+    otherUserDisplayNameString,
   };
 };
 
@@ -180,10 +189,12 @@ export class TransactionPanelComponent extends Component {
 
     const listingLoaded = !!currentListing.id;
     const listingDeleted = listingLoaded && currentListing.attributes.deleted;
-    const customerLoaded = !!currentCustomer.id;
-    const isCustomerBanned = customerLoaded && currentCustomer.attributes.banned;
+    const iscustomerLoaded = !!currentCustomer.id;
+    const isCustomerBanned = iscustomerLoaded && currentCustomer.attributes.banned;
+    const isCustomerDeleted = iscustomerLoaded && currentCustomer.attributes.deleted;
     const isProviderLoaded = !!currentProvider.id;
     const isProviderBanned = isProviderLoaded && currentProvider.attributes.banned;
+    const isProviderDeleted = isProviderLoaded && currentProvider.attributes.deleted;
 
     const stateDataFn = tx => {
       if (txIsEnquired(tx)) {
@@ -225,22 +236,19 @@ export class TransactionPanelComponent extends Component {
     };
     const stateData = stateDataFn(currentTransaction);
 
-    const bannedUserDisplayName = intl.formatMessage({
-      id: 'TransactionPanel.bannedUserDisplayName',
-    });
     const deletedListingTitle = intl.formatMessage({
       id: 'TransactionPanel.deletedListingTitle',
     });
 
-    const { authorDisplayName, customerDisplayName, otherUserDisplayName } = displayNames(
-      currentUser,
-      currentProvider,
-      currentCustomer,
-      bannedUserDisplayName
-    );
+    const {
+      authorDisplayName,
+      customerDisplayName,
+      otherUserDisplayName,
+      otherUserDisplayNameString,
+    } = displayNames(currentUser, currentProvider, currentCustomer, intl);
 
-    const { publicData = {}, geolocation } = currentListing.attributes;
-    const location = publicData.location || {};
+    const { publicData, geolocation } = currentListing.attributes;
+    const location = publicData && publicData.location ? publicData.location : {};
     const listingTitle = currentListing.attributes.deleted
       ? deletedListingTitle
       : currentListing.attributes.title;
@@ -275,10 +283,17 @@ export class TransactionPanelComponent extends Component {
       />
     );
 
+    const showSendMessageForm =
+      !isCustomerBanned && !isCustomerDeleted && !isProviderBanned && !isProviderDeleted;
+
     const sendMessagePlaceholder = intl.formatMessage(
       { id: 'TransactionPanel.sendMessagePlaceholder' },
-      { name: otherUserDisplayName }
+      { name: otherUserDisplayNameString }
     );
+
+    const sendingMessageNotAllowed = intl.formatMessage({
+      id: 'TransactionPanel.sendingMessageNotAllowed',
+    });
 
     const classes = classNames(rootClassName || css.root, className);
 
@@ -334,17 +349,21 @@ export class TransactionPanelComponent extends Component {
               onShowMoreMessages={() => onShowMoreMessages(currentTransaction.id)}
               totalMessagePages={totalMessagePages}
             />
+            {showSendMessageForm ? (
+              <SendMessageForm
+                form={this.sendMessageFormName}
+                rootClassName={css.sendMessageForm}
+                messagePlaceholder={sendMessagePlaceholder}
+                inProgress={sendMessageInProgress}
+                sendMessageError={sendMessageError}
+                onFocus={this.onSendMessageFormFocus}
+                onBlur={this.onSendMessageFormBlur}
+                onSubmit={this.onMessageSubmit}
+              />
+            ) : (
+              <div className={css.sendingMessageNotAllowed}>{sendingMessageNotAllowed}</div>
+            )}
 
-            <SendMessageForm
-              form={this.sendMessageFormName}
-              rootClassName={css.sendMessageForm}
-              messagePlaceholder={sendMessagePlaceholder}
-              inProgress={sendMessageInProgress}
-              sendMessageError={sendMessageError}
-              onFocus={this.onSendMessageFormFocus}
-              onBlur={this.onSendMessageFormBlur}
-              onSubmit={this.onMessageSubmit}
-            />
             {stateData.showSaleButtons ? (
               <div className={css.mobileActionButtons}>{saleButtons}</div>
             ) : null}

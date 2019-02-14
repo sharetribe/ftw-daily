@@ -6,7 +6,7 @@ import { propTypes } from '../../util/types';
 import {
   ensureUser,
   ensureCurrentUser,
-  userDisplayName,
+  userDisplayNameAsString,
   userAbbreviatedName,
 } from '../../util/data';
 import { ResponsiveImage, IconBannedUser, NamedLink } from '../../components/';
@@ -34,14 +34,26 @@ export const AvatarComponent = props => {
   const avatarUser = userIsCurrentUser ? ensureCurrentUser(user) : ensureUser(user);
 
   const isBannedUser = avatarUser.attributes.banned;
+  const isDeletedUser = avatarUser.attributes.deleted;
 
   const bannedUserDisplayName = intl.formatMessage({
     id: 'Avatar.bannedUserDisplayName',
   });
-  const bannedUserAbbreviatedName = '';
 
-  const displayName = userDisplayName(avatarUser, bannedUserDisplayName);
-  const abbreviatedName = userAbbreviatedName(avatarUser, bannedUserAbbreviatedName);
+  const deletedUserDisplayName = intl.formatMessage({
+    id: 'Avatar.deletedUserDisplayName',
+  });
+
+  const defaultUserDisplayName = isBannedUser
+    ? bannedUserDisplayName
+    : isDeletedUser
+    ? deletedUserDisplayName
+    : '';
+
+  const defaultUserAbbreviatedName = '';
+
+  const displayName = userDisplayNameAsString(avatarUser, defaultUserDisplayName);
+  const abbreviatedName = userAbbreviatedName(avatarUser, defaultUserAbbreviatedName);
   const rootProps = { className: classes, title: displayName };
   const linkProps = avatarUser.id
     ? { name: 'ProfilePage', params: { id: avatarUser.id.uuid } }
@@ -49,7 +61,7 @@ export const AvatarComponent = props => {
   const hasProfileImage = avatarUser.profileImage && avatarUser.profileImage.id;
   const profileLinkEnabled = !disableProfileLink;
 
-  if (isBannedUser) {
+  if (isBannedUser || isDeletedUser) {
     return (
       <div {...rootProps}>
         <IconBannedUser className={css.bannedUserIcon} />
