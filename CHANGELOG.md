@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [add] This adds an example how user-generated content could be sanitized. If you have extended
+  data you should consider if sanitization is needed for that.
+  [#1023](https://github.com/sharetribe/flex-template-web/pull/1023)
 - [change] A new component `UserDisplayName` is added for showing user display name and also
   handling the cases where a user is banned or deleted. When the user name must be a string instead
   of a component (e.g. in `Avatar` and in `ListingPage`) you can use a new function
