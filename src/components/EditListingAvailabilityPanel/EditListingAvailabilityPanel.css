@@ -19,6 +19,7 @@
 
 @media (--viewportLarge) {
   .title {
-    margin-bottom: 44px;
+    margin-bottom: 38px;
+    padding: 1px 0 7px 0;
   }
 }

@@ -322,7 +322,7 @@
   margin: 0;
 }
 
-@media (min-width: 550px) {
+@media (--viewportSmall) {
   /* day aka table cell content should have bigger paddings when there's more space */
   .day {
     padding: 16px;

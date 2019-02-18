@@ -11,9 +11,14 @@
 
   @media (--viewportLarge) {
     flex-direction: row;
-    max-width: 1156px; /* 1060 + (paddingLeft + paddingRight) */
+    max-width: 1128px;
     margin: 0 auto 57px auto;
-    padding: 0 48px;
+    padding: 0 36px;
+  }
+
+  @media (--viewportXLarge) {
+    max-width: 1056px;
+    padding: 0;
   }
 }
 

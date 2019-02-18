@@ -55,7 +55,7 @@
   /* shadows */
   box-shadow: var(--boxShadowLight);
 
-  @media (min-width: 1024px) {
+  @media (--viewportLarge) {
     padding: 0 24px 0 0;
   }
 }
@@ -67,7 +67,7 @@
   padding: 21px 24px 21px 24px;
   height: 100%;
 
-  @media (min-width: 1024px) {
+  @media (--viewportLarge) {
     padding: 21px 36px 21px 36px;
   }
 }
@@ -93,7 +93,7 @@
   border-left-width: 1px;
   border-left-color: var(--matterColorNegative);
 
-  @media (min-width: 1024px) {
+  @media (--viewportLarge) {
     padding-left: 0;
   }
 }
@@ -108,7 +108,7 @@
   padding-left: 24px;
   height: var(--topbarHeightDesktop);
 
-  @media (min-width: 1024px) {
+  @media (--viewportLarge) {
     padding-left: 34px;
   }
 }
