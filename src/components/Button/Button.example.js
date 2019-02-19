@@ -157,7 +157,7 @@ const ButtonsComponent = () => {
       </a>
 
       <h3>Button with custom styles:</h3>
-      <Button className={css.customButton}>Click me</Button>
+      <Button rootClassName={css.customButton}>Click me</Button>
     </div>
   );
 };
