@@ -30,6 +30,19 @@
 }
 
 .filtersButton {
+  @apply --marketplaceButtonStylesSecondary;
+  @apply --marketplaceTinyFontStyles;
+  font-weight: var(--fontWeightBold);
+
+  height: 35px;
+  min-height: 35px;
+  padding: 0 18px;
+  margin: 0 9px 0 0;
+  border-radius: 4px;
+}
+
+.filtersButtonSelected {
+  @apply --marketplaceButtonStyles;
   @apply --marketplaceTinyFontStyles;
   font-weight: var(--fontWeightBold);
 
