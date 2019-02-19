@@ -193,7 +193,7 @@ const PayoutDetailsFormCompanyComponent = ({ fieldRenderProps }) => {
                 <React.Fragment>
                   <InlineTextButton
                     type="button"
-                    className={css.fieldArrayAdd}
+                    rootClassName={css.fieldArrayAdd}
                     onClick={() => push('company.additionalOwners', undefined)}
                   >
                     <span className={css.additionalOwnerLabel}>

@@ -17,7 +17,7 @@ const EmailReminder = props => {
   const email = user.id ? <span className={css.email}>{user.attributes.email}</span> : '';
 
   const resendEmailLink = (
-    <InlineTextButton className={css.helperLink} onClick={onResendVerificationEmail}>
+    <InlineTextButton rootClassName={css.helperLink} onClick={onResendVerificationEmail}>
       <FormattedMessage id="ModalMissingInformation.resendEmailLinkText" />
     </InlineTextButton>
   );

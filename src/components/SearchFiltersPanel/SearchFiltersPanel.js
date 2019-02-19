@@ -158,13 +158,13 @@ class SearchFiltersPanelComponent extends Component {
       <div className={classes}>
         <div className={css.filtersWrapper}>{/* Add filters here */}</div>
         <div className={css.footer}>
-          <InlineTextButton className={css.resetAllButton} onClick={this.resetAll}>
+          <InlineTextButton rootClassName={css.resetAllButton} onClick={this.resetAll}>
             <FormattedMessage id={'SearchFiltersPanel.resetAll'} />
           </InlineTextButton>
-          <InlineTextButton className={css.cancelButton} onClick={this.cancelFilters}>
+          <InlineTextButton rootClassName={css.cancelButton} onClick={this.cancelFilters}>
             <FormattedMessage id={'SearchFiltersPanel.cancel'} />
           </InlineTextButton>
-          <InlineTextButton className={css.applyButton} onClick={this.applyFilters}>
+          <InlineTextButton rootClassName={css.applyButton} onClick={this.applyFilters}>
             <FormattedMessage id={'SearchFiltersPanel.apply'} />
           </InlineTextButton>
         </div>

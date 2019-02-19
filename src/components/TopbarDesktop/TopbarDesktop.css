@@ -304,6 +304,7 @@
 }
 
 .logoutButton {
+  @apply --marketplaceLinkStyles;
   /* Font is specific to this component */
   @apply --marketplaceH4FontStyles;
   font-size: 14px;

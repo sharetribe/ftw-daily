@@ -164,6 +164,7 @@
 }
 
 .menuItem {
+  @apply --marketplaceLinkStyles;
   @apply --marketplaceH5FontStyles;
   color: var(--matterColorLight);
   font-weight: var(--fontWeightMedium);
@@ -269,6 +270,7 @@
 }
 
 .title {
+  @apply --marketplaceLinkStyles;
   /* Font */
   @apply --marketplaceH3FontStyles;
   color: var(--matterColor);

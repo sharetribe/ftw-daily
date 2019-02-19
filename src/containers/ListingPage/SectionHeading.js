@@ -45,7 +45,7 @@ const SectionHeading = props => {
           {showContactUser ? (
             <span className={css.contactWrapper}>
               <span className={css.separator}>•</span>
-              <InlineTextButton className={css.contactLink} onClick={onContactUser}>
+              <InlineTextButton rootClassName={css.contactLink} onClick={onContactUser}>
                 <FormattedMessage id="ListingPage.contactUser" />
               </InlineTextButton>
             </span>
