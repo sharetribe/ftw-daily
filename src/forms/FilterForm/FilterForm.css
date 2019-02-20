@@ -1,6 +1,7 @@
 @import '../../marketplace.css';
 
 .root {
+  outline: none;
 }
 
 .contentWrapper {
