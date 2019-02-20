@@ -14,6 +14,10 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] SelectMultipleFilter had a bug on mobile layout - `onSubmit` didn't get called. This fixes
+  also two other issues with SelectMultipleFilter: hovering on ListingCard removed dirty values on
+  repaint and there was an outline flashing on FilterForm when clicking checkboxes.
+  [#1025](https://github.com/sharetribe/flex-template-web/pull/1025)
 - [fix] Small changes in CSS files in order to match content width with the footer in pages where
   the footer is visible. Also, make side layout (used e.g. in `TermsOfServicePage`, `InboxPage`,
   `ContactDetailsPage`) align width footer better. Check responsive layouts carefulle after taking
