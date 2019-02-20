@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+## [v2.11.0] 2019-02-20
+
 - [fix] SelectMultipleFilter had a bug on mobile layout - `onSubmit` didn't get called. This fixes
   also two other issues with SelectMultipleFilter: hovering on ListingCard removed dirty values on
   repaint and there was an outline flashing on FilterForm when clicking checkboxes.
@@ -34,6 +36,8 @@ way to update this template, but currently, we follow a pattern:
   [#1022](https://github.com/sharetribe/flex-template-web/pull/1022)
 - [change] Remove error handling for unverified email from PasswordRecoveryPage and translations
   related to that. [#1021](https://github.com/sharetribe/flex-template-web/pull/1021)
+
+  [v2.11.0]: https://github.com/sharetribe/flex-template-web/compare/v2.10.0...v2.11.0
 
 ## [v2.10.0] 2019-01-31
 
