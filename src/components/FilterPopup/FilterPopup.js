@@ -106,6 +106,7 @@ class FilterPopup extends Component {
       isSelected,
       children,
       initialValues,
+      keepDirtyOnReinitialize,
       contentPlacementOffset,
     } = this.props;
 
@@ -142,6 +143,7 @@ class FilterPopup extends Component {
                 showAsPopup
                 contentPlacementOffset={contentPlacementOffset}
                 initialValues={initialValues}
+                keepDirtyOnReinitialize={keepDirtyOnReinitialize}
                 onSubmit={this.handleSubmit}
                 onCancel={this.handleCancel}
                 onClear={this.handleClear}
@@ -161,6 +163,7 @@ FilterPopup.defaultProps = {
   className: null,
   popupClassName: null,
   initialValues: null,
+  keepDirtyOnReinitialize: false,
   contentPlacementOffset: 0,
   liveEdit: false,
   label: null,
@@ -174,6 +177,7 @@ FilterPopup.propTypes = {
   urlParam: string.isRequired,
   onSubmit: func.isRequired,
   initialValues: object,
+  keepDirtyOnReinitialize: bool,
   contentPlacementOffset: number,
   label: string.isRequired,
   isSelected: bool.isRequired,

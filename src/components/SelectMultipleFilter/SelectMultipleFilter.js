@@ -120,6 +120,7 @@ class SelectMultipleFilter extends Component {
         onSubmit={handleSubmit}
         initialValues={namedInitialValues}
         urlParam={urlParam}
+        keepDirtyOnReinitialize
         {...rest}
       >
         <GroupOfFieldCheckboxes

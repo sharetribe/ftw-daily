@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { bool, func, node, string } from 'prop-types';
+import { bool, func, node, object, string } from 'prop-types';
 import classNames from 'classnames';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 
@@ -45,6 +45,7 @@ class FilterPlainComponent extends Component {
       isSelected,
       children,
       initialValues,
+      keepDirtyOnReinitialize,
       contentPlacementOffset,
     } = this.props;
     const classes = classNames(rootClassName || css.root, className);
@@ -74,6 +75,7 @@ class FilterPlainComponent extends Component {
             contentPlacementOffset={contentPlacementOffset}
             onChange={this.handleChange}
             initialValues={initialValues}
+            keepDirtyOnReinitialize={keepDirtyOnReinitialize}
           >
             {children}
           </FilterForm>
@@ -88,6 +90,7 @@ FilterPlainComponent.defaultProps = {
   className: null,
   plainClassName: null,
   initialValues: null,
+  keepDirtyOnReinitialize: false,
 };
 
 FilterPlainComponent.propTypes = {
@@ -99,6 +102,8 @@ FilterPlainComponent.propTypes = {
   label: node.isRequired,
   isSelected: bool.isRequired,
   children: node.isRequired,
+  initialValues: object,
+  keepDirtyOnReinitialize: bool,
 
   // form injectIntl
   intl: intlShape.isRequired,
