@@ -36,6 +36,7 @@
   "AuthenticationPage.verifyEmailText": "¡Gracias por registrarte! Sólo te queda un paso más. Para poder contactarte, necesitamos que verifiques tu cuenta de correo electrónico. Por favor, haz clic en el link que te hemos enviado a {email}.",
   "AuthenticationPage.verifyEmailTitle": "{name}, revisa tu buzón para verificar tu correo electrónico",
   "Avatar.bannedUserDisplayName": "Usuario bloqueado",
+  "Avatar.deletedUserDisplayName": "Usuario borrado",
   "BookingBreakdown.bookingPeriod": "{bookingStart} – {bookingEnd}",
   "BookingBreakdown.commission": "Comisión de Saunatime *",
   "BookingBreakdown.commissionFeeNote": "* La comisión ayuda a mantener la comunidad y nos permite ofrecerte un buen servicio.",
@@ -842,9 +843,12 @@
   "TransactionPanel.saleEnquiredTitle": "{customerName} pregunta por {listingLink}",
   "TransactionPanel.saleRequestedInfo": "{customerName} está esperando tu respuesta.",
   "TransactionPanel.saleRequestedTitle": "{customerName} ha solicitado reservar {listingLink}.",
+  "TransactionPanel.sendingMessageNotAllowed": "Este usuario ha sido eliminado. No es posible mandarle un mensaje.",
   "TransactionPanel.sendMessagePlaceholder": "Envía un mensaje a {name}…",
   "UserCard.contactUser": "Contactar",
   "UserCard.heading": "Hola, soy {name}.",
   "UserCard.showFullBioLink": "más",
-  "UserCard.viewProfileLink": "Ver perfil"
+  "UserCard.viewProfileLink": "Ver perfil",
+  "UserDisplayName.banned": "Usuario bloqueado",
+  "UserDisplayName.deleted": "Usuario borrado"
 }
