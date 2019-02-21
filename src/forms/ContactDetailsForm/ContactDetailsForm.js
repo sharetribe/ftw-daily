@@ -316,6 +316,7 @@ class ContactDetailsFormComponent extends Component {
               <div className={css.bottomWrapper}>
                 {genericError}
                 <PrimaryButton
+                  className={css.submitButton}
                   type="submit"
                   inProgress={inProgress}
                   ready={pristineSinceLastSubmit}

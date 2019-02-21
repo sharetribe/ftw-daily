@@ -45,13 +45,13 @@ export const PasswordRecoveryPageComponent = props => {
   });
 
   const resendEmailLink = (
-    <InlineTextButton rootClassName={css.helperLink} onClick={() => onSubmitEmail(submittedEmail)}>
+    <InlineTextButton className={css.helperLink} onClick={() => onSubmitEmail(submittedEmail)}>
       <FormattedMessage id="PasswordRecoveryPage.resendEmailLinkText" />
     </InlineTextButton>
   );
 
   const fixEmailLink = (
-    <InlineTextButton rootClassName={css.helperLink} onClick={onRetypeEmail}>
+    <InlineTextButton className={css.helperLink} onClick={onRetypeEmail}>
       <FormattedMessage id="PasswordRecoveryPage.fixEmailLinkText" />
     </InlineTextButton>
   );

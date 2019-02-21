@@ -219,7 +219,7 @@ export const ManageListingCardComponent = props => {
               <MenuContent rootClassName={css.menuContent}>
                 <MenuItem key="close-listing">
                   <InlineTextButton
-                    rootClassName={menuItemClasses}
+                    className={menuItemClasses}
                     onClick={event => {
                       event.preventDefault();
                       event.stopPropagation();
@@ -315,7 +315,7 @@ export const ManageListingCardComponent = props => {
         <div className={css.mainInfo}>
           <div className={css.titleWrapper}>
             <InlineTextButton
-              rootClassName={titleClasses}
+              className={titleClasses}
               onClick={event => {
                 event.preventDefault();
                 event.stopPropagation();

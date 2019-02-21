@@ -122,7 +122,6 @@
 
 /* Helper links */
 .modalHelperLink {
-  @apply --marketplaceLinkStyles;
   @apply --marketplaceModalHelperLink;
 }
 

@@ -9,6 +9,7 @@ import routeConfiguration from '../../routeConfiguration';
 import { parseDateFromISO8601, stringifyDateToISO8601 } from '../../util/dates';
 import { createResourceLocatorString } from '../../util/routes';
 import {
+  SecondaryButton,
   ModalInMobile,
   Button,
   PriceFilter,
@@ -203,8 +204,16 @@ class SearchFiltersMobileComponent extends Component {
       { count: resultsCount }
     );
 
-    const filtersButtonClasses =
-      selectedFiltersCount > 0 ? css.filtersButtonSelected : css.filtersButton;
+    const filtersButton =
+      selectedFiltersCount > 0 ? (
+        <Button className={css.filtersButton} onClick={this.openFilters}>
+          <FormattedMessage id="SearchFilters.filtersButtonLabel" className={css.mapIconText} />
+        </Button>
+      ) : (
+        <SecondaryButton className={css.filtersButton} onClick={this.openFilters}>
+          <FormattedMessage id="SearchFilters.filtersButtonLabel" className={css.mapIconText} />
+        </SecondaryButton>
+      );
 
     const categoryLabel = intl.formatMessage({
       id: 'SearchFiltersMobile.categoryLabel',
@@ -275,9 +284,7 @@ class SearchFiltersMobileComponent extends Component {
           {searchInProgress ? loadingResults : null}
         </div>
         <div className={css.buttons}>
-          <Button rootClassName={filtersButtonClasses} onClick={this.openFilters}>
-            <FormattedMessage id="SearchFilters.filtersButtonLabel" className={css.mapIconText} />
-          </Button>
+          {filtersButton}
           <div className={css.mapIcon} onClick={onMapIconClick}>
             <FormattedMessage id="SearchFilters.openMapView" className={css.mapIconText} />
           </div>
