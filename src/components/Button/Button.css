@@ -7,14 +7,14 @@
   padding: 0;
 }
 
-.primaryButton {
+.primaryButtonRoot {
   @apply --marketplaceButtonStylesPrimary;
 
   /* Clear padding that is set for link elements looking like buttons */
   padding: 0;
 }
 
-.secondaryButton {
+.secondaryButtonRoot {
   @apply --marketplaceButtonStylesSecondary;
 
   /* We must lift up the text from the center since it looks better with
@@ -23,35 +23,15 @@
   padding: 0 0 2px 0;
 }
 
-.inlineTextButton {
+.inlineTextButtonRoot {
   @apply --marketplaceLinkStyles;
 }
 
-.inlineButton {
-  display: inline-block;
-
-  /* fill colors should be in sync with marketplace color palette */
-  background-color: transparent;
-
-  /* border-width should be in sync with marketplace strike-widths */
-  border-width: 0px;
-
-  /* Font configuration */
-  text-decoration: none;
-
-  /* Hovers */
-  &:enabled {
-    cursor: pointer;
-  }
-  &:enabled:hover,
-  &:enabled:active {
-    background-color: transparent;
-    text-decoration: underline;
-  }
-  &:disabled {
-    background-color: transparent;
-    cursor: auto;
-  }
+.primaryButton {
+  /* Class handle for primary button state styles */
+}
+.secondaryButton {
+  /* Class handle for secondary button state styles */
 }
 
 .inProgress {

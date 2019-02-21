@@ -93,12 +93,7 @@ const LoginFormComponent = props => (
                 />
               </span>
             </p>
-            <PrimaryButton
-              className={css.submitButton}
-              type="submit"
-              inProgress={submitInProgress}
-              disabled={submitDisabled}
-            >
+            <PrimaryButton type="submit" inProgress={submitInProgress} disabled={submitDisabled}>
               <FormattedMessage id="LoginForm.logIn" />
             </PrimaryButton>
           </div>

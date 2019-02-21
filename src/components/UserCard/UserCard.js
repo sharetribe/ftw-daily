@@ -42,7 +42,7 @@ class ExpandableBio extends Component {
       this.setState({ expand: true });
     };
     const showMore = (
-      <InlineTextButton className={css.showMore} onClick={handleShowMoreClick}>
+      <InlineTextButton rootClassName={css.showMore} onClick={handleShowMoreClick}>
         <FormattedMessage id="UserCard.showFullBioLink" />
       </InlineTextButton>
     );
@@ -86,7 +86,7 @@ const UserCard = props => {
   const separator = isCurrentUser ? null : <span className={css.linkSeparator}>•</span>;
 
   const contact = (
-    <InlineTextButton className={css.contact} onClick={handleContactUserClick}>
+    <InlineTextButton rootClassName={css.contact} onClick={handleContactUserClick}>
       <FormattedMessage id="UserCard.contactUser" />
     </InlineTextButton>
   );

@@ -383,6 +383,7 @@
 }
 
 .contactLink {
+  @apply --marketplaceLinkStyles;
   @apply --marketplaceH4FontStyles;
   margin: 0;
 }

@@ -78,8 +78,8 @@ exports[`ManageListingCard matches snapshot 1`] = `
               rootClassName=""
             >
               <InlineTextButton
-                className=""
                 onClick={[Function]}
+                rootClassName=""
               >
                 <FormattedMessage
                   id="ManageListingCard.closeListing"
@@ -109,8 +109,8 @@ exports[`ManageListingCard matches snapshot 1`] = `
     <div>
       <div>
         <InlineTextButton
-          className=""
           onClick={[Function]}
+          rootClassName=""
         >
           <span
             key="1"
