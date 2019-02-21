@@ -14,10 +14,14 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+## [v2.11.1] 2019-02-21
+
 - [add] New translations for French and Spanish (fr.json & es.json)
   [#1028](https://github.com/sharetribe/flex-template-web/pull/1028)
 - [add] New translation file German (de.json). This also adds hyphenation to some of the titles.
   [#1027](https://github.com/sharetribe/flex-template-web/pull/1027)
+
+  [v2.11.0]: https://github.com/sharetribe/flex-template-web/compare/v2.11.0...v2.11.1
 
 ## [v2.11.0] 2019-02-20
 
