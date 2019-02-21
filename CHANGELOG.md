@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [add] New translation file German (de.json). This also adds hyphenation to some of the titles.
+  [#1027](https://github.com/sharetribe/flex-template-web/pull/1027)
+
 ## [v2.11.0] 2019-02-20
 
 - [fix] SelectMultipleFilter had a bug on mobile layout - `onSubmit` didn't get called. This fixes
