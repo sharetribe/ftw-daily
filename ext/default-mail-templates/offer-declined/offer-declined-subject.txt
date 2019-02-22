@@ -1,0 +1,1 @@
+{{other-party.display-name}} declined your offer

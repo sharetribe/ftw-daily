@@ -1,0 +1,18 @@
+
+{{~#*inline "format-date"~}}
+{{date date format="MMM d, YYYY"}}
+{{~/inline~}}
+
+<html>
+  <body>
+    <h1>Payment was expired</h1>
+
+    {{#with transaction}}
+    <p>Unfortunately, booking request for {{listing.title}} from {{> format-date date=booking.start}} to {{> format-date date=booking.end}} is now declined because payment was expired.</p>
+    {{/with}}
+
+    <hr />
+
+    <p>You have received this email notification because you are a member of {{marketplace.name}}. If you no longer wish to receive these emails, please contact {{marketplace.name}} team.</p>
+  </body>
+</html>
