@@ -18,7 +18,9 @@ export const createBooking = (id, attributes = {}) => ({
   type: 'booking',
   attributes: {
     start: new Date(Date.UTC(2017, 5, 10)),
+    displayStart: new Date(Date.UTC(2017, 5, 10)),
     end: new Date(Date.UTC(2017, 5, 10)),
+    displayEnd: new Date(Date.UTC(2017, 5, 10)),
     ...attributes,
   },
 });
