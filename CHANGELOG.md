@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [change] Improve German translations.
+  [#1034](https://github.com/sharetribe/flex-template-web/pull/1034)
 - [change] Reordered import/exports on src/components/index.js. This helps to mitigate possible
   circular dependency problems and strange bugs in CSS bundle. In addition, derivative buttons were
   refactored to work with `rootClassName` prop (PrimaryButton, SecondaryButton and
