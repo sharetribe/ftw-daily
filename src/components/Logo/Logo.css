@@ -4,4 +4,5 @@
   & path {
     fill: var(--marketplaceColor);
   }
+  height: 40px;
 }
