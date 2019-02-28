@@ -450,22 +450,46 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
   const idNumber =
     country === 'US' ? { ssn_last_4: personalIdNumber } : { personal_id_number: personalIdNumber };
 
-  // Params for Stripe SDK
-  const params = {
-    legal_entity: {
-      first_name: firstName,
-      last_name: lastName,
-      address: omitBy(addressValue, isUndefined),
-      dob: birthDate,
-      type: accountType,
-      business_name: companyName,
-      business_tax_id: companyTaxId,
-      personal_address: personalAddressValue,
-      additional_owners: additionalOwnersValue,
-      ...idNumber,
-    },
-    tos_shown_and_accepted: true,
-  };
+  let params;
+
+  // You can check which API version you are using from Stripe Dasboard -> Developers.
+  // If you are using older version than '2019-02-19'
+  // edit 'useDeprecatedLegalEntityWithStripe' config in the stripe-config.js
+
+  const isNewAPI = !config.stripe.useDeprecatedLegalEntityWithStripe;
+  const isIndividualAccount = accountType === 'individual';
+
+  if (isNewAPI && isIndividualAccount) {
+    params = {
+      business_type: 'individual',
+      individual: {
+        first_name: firstName,
+        last_name: lastName,
+        address: omitBy(addressValue, isUndefined),
+        dob: birthDate,
+        ...idNumber,
+      },
+      tos_shown_and_accepted: true,
+    };
+  } else if (isNewAPI && !isIndividualAccount) {
+    // TODO new company accounst
+  } else {
+    params = {
+      legal_entity: {
+        first_name: firstName,
+        last_name: lastName,
+        address: omitBy(addressValue, isUndefined),
+        dob: birthDate,
+        type: accountType,
+        business_name: companyName,
+        business_tax_id: companyTaxId,
+        personal_address: personalAddressValue,
+        additional_owners: additionalOwnersValue,
+        ...idNumber,
+      },
+      tos_shown_and_accepted: true,
+    };
+  }
 
   let accountResponse;
 

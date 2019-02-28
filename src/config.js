@@ -1,6 +1,10 @@
 import * as custom from './marketplace-custom-config.js';
 import defaultLocationSearches from './default-location-searches';
-import { stripePublishableKey, stripeSupportedCountries } from './stripe-config';
+import {
+  stripePublishableKey,
+  useDeprecatedLegalEntityWithStripe,
+  stripeSupportedCountries,
+} from './stripe-config';
 
 const env = process.env.REACT_APP_ENV;
 const dev = process.env.REACT_APP_ENV === 'development';
@@ -205,7 +209,11 @@ const config = {
   currency,
   listingMinimumPriceSubUnits,
   currencyConfig,
-  stripe: { publishableKey: stripePublishableKey, supportedCountries: stripeSupportedCountries },
+  stripe: {
+    publishableKey: stripePublishableKey,
+    supportedCountries: stripeSupportedCountries,
+    useDeprecatedLegalEntityWithStripe,
+  },
   canonicalRootURL,
   address: {
     addressCountry,
