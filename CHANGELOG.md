@@ -14,6 +14,14 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [change] Update creating Stripe account token to support the latest Stripe API update. See also
+  [Stripe API changelog](https://stripe.com/docs/upgrades#api-changelog). **IMPORTANT:** If you are
+  using a Stripe account created earlier than 19th of February 2019 you need to change the value of
+  `useDeprecatedLegalEntityWithStripe` in `stripe-config.js`. You can check the Stripe API version
+  you are using from Stripe Dashboard -> Developers. Since the change in Stripe API was quite big we
+  are not able to support company accounts with new Stripe API yet! The option for company accounts
+  will be hidden if the value `useDeprecatedLegalEntityWithStripe` is set to `false`.
+  [#1035](https://github.com/sharetribe/flex-template-web/pull/1035)
 - [change] Improve German translations.
   [#1034](https://github.com/sharetribe/flex-template-web/pull/1034)
 - [change] Reordered import/exports on src/components/index.js. This helps to mitigate possible
