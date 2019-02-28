@@ -20,14 +20,8 @@ yarn run config                                                # add the mandato
 yarn run dev                                                   # start the dev server, this will open a browser in localhost:3000
 ```
 
-### If you are using Stripe account created after 19th of February 2019 there might be problems saving the payout details in FTW (22.2.2019)
-
-We found out that Stripe has updated their API 19.2.2019 and after that, the `legal_entity`
-parameter used in creating stripe account has been broken into 3 dictionaries of `individual`,
-`company` and `business_type` (https://stripe.com/docs/upgrades#api-changelog). Legal entity is
-passed to Stripe in function `createStripeAccount` in `user.duck.js'`` file and it's used for avaing
-the user's payout details. Because of the issue, saving the payout details is not currently working
-in FTW. We will continue investigating the issue on Monday 25.2.2019.
+### If you are using Stripe account created after 19th of February 2019 creating compan accounts is temporalily unavailable. 
+This is due the changes in Stripe API (https://stripe.com/docs/upgrades#api-changelog). Issues with individual accounts were fixed in release [2.12.0](https://github.com/sharetribe/flex-template-web/releases/tag/v2.12.0).
 
 You can also follow along the
 [Getting started with FTW](https://www.sharetribe.com/docs/tutorials/getting-started-with-ftw/)
