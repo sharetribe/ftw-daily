@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+## [v2.12.0] 2019-02-28
+
 - [fix] Fix to PR [#1035](https://github.com/sharetribe/flex-template-web/pull/1035). In
   `user.duck.js` send correct params depending on Stripe API in use.
   [#1037](https://github.com/sharetribe/flex-template-web/pull/1037)
@@ -31,6 +33,8 @@ way to update this template, but currently, we follow a pattern:
   circular dependency problems and strange bugs in CSS bundle. In addition, derivative buttons were
   refactored to work with `rootClassName` prop (PrimaryButton, SecondaryButton and
   InlineTextButton). [#1024](https://github.com/sharetribe/flex-template-web/pull/1024)
+
+  [v2.11.0]: https://github.com/sharetribe/flex-template-web/compare/v2.11.1...v2.12.0
 
 ## [v2.11.1] 2019-02-21
 
