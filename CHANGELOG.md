@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] Fix to PR [#1035](https://github.com/sharetribe/flex-template-web/pull/1035). In
+  `user.duck.js` send correct params depending on Stripe API in use.
+  [#1037](https://github.com/sharetribe/flex-template-web/pull/1037)
 - [change] Update creating Stripe account token to support the latest Stripe API update. See also
   [Stripe API changelog](https://stripe.com/docs/upgrades#api-changelog). **IMPORTANT:** If you are
   using a Stripe account created earlier than 19th of February 2019 you need to change the value of

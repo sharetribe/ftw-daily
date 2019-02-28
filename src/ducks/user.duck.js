@@ -391,7 +391,7 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
   let payoutDetailValues;
   if (accountType === 'company') {
     payoutDetailValues = payoutDetails['company'];
-  } else if (accountType === 'individual') {
+  } else {
     payoutDetailValues = payoutDetails['individual'];
   }
 
@@ -457,9 +457,8 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
   // edit 'useDeprecatedLegalEntityWithStripe' config in the stripe-config.js
 
   const isNewAPI = !config.stripe.useDeprecatedLegalEntityWithStripe;
-  const isIndividualAccount = accountType === 'individual';
 
-  if (isNewAPI && isIndividualAccount) {
+  if (isNewAPI) {
     params = {
       business_type: 'individual',
       individual: {
@@ -471,8 +470,6 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
       },
       tos_shown_and_accepted: true,
     };
-  } else if (isNewAPI && !isIndividualAccount) {
-    // TODO new company accounst
   } else {
     params = {
       legal_entity: {
