@@ -3,19 +3,19 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import config from '../../config';
-import IconLogo from './IconLogo';
-import LogoImage from './saunatime-logo.png';
+import LogoImage from './horse-deal-logo.png';
 import css from './Logo.css';
 
 const Logo = props => {
   const { className, format, ...rest } = props;
   const mobileClasses = classNames(css.logoMobile, className);
 
-  if (format === 'desktop') {
-    return <img className={className} src={LogoImage} alt={config.siteTitle} {...rest} />;
-  }
-
-  return <IconLogo className={mobileClasses} {...rest} />;
+  return <img
+    className={format === 'desktop' ? className : mobileClasses}
+    src={LogoImage}
+    alt={config.siteTitle}
+    {...rest}
+  />;
 };
 
 const { oneOf, string } = PropTypes;

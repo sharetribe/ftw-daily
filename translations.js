@@ -16,7 +16,8 @@ const chalk = require('chalk');
 
 const PATH = './src/translations/';
 
-const SOURCE_LANG = { name: 'English', code: 'en' };
+// const SOURCE_LANG = { name: 'English', code: 'en' };
+const SOURCE_LANG = { name: 'German', code: 'de' };
 const TARGET_LANG_NAMES = {
   es: 'Spanish',
   de: 'German',

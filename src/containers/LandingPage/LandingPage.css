@@ -46,6 +46,8 @@
   flex-grow: 1;
   justify-content: flex-end;
   padding-bottom: 32px;
+  max-width: 1500px;
+  margin: auto;
 
   @media (--viewportMedium) {
     padding-bottom: 83px;

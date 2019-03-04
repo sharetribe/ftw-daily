@@ -21,8 +21,8 @@ import config from './config';
 // the wanted locale.
 //
 // Remember to also change the language in the config.js file.
-import localeData from 'react-intl/locale-data/en';
-import messages from './translations/en.json';
+import localeData from 'react-intl/locale-data/de';
+import messages from './translations/de.json';
 
 const isTestEnv = process.env.NODE_ENV === 'test';
 
