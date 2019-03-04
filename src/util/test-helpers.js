@@ -12,7 +12,7 @@ import configureStore from '../store';
 // In case you have translated the template and have new translations that
 // are missing from the en translations file, the language for the tests can
 // be changed here so that there are no missing translation keys in tests.
-import messages from '../translations/en.json';
+import messages from '../translations/de.json';
 
 Enzyme.configure({ adapter: new Adapter() });
 
