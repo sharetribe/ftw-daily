@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] FieldBirthdayInput: placeholder text was not selected by default.
+  [#1039](https://github.com/sharetribe/flex-template-web/pull/1039)
+
 ## [v2.12.0] 2019-02-28
 
 - [fix] Fix to PR [#1035](https://github.com/sharetribe/flex-template-web/pull/1035). In
