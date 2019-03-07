@@ -8,7 +8,7 @@ import omit from 'lodash/omit';
 
 import {
   BookingDateRangeFilter,
-  SelectSingleFilter,
+  // SelectSingleFilter,
   SelectMultipleFilter,
   PriceFilter,
 } from '../../components';
@@ -23,9 +23,9 @@ const FILTER_DROPDOWN_OFFSET = -14;
 const RADIX = 10;
 
 // resolve initial value for a single value filter
-const initialValue = (queryParams, paramName) => {
-  return queryParams[paramName];
-};
+// const initialValue = (queryParams, paramName) => {
+//   return queryParams[paramName];
+// };
 
 // resolve initial values for a multi value filter
 const initialValues = (queryParams, paramName) => {
@@ -66,7 +66,7 @@ const SearchFiltersComponent = props => {
     listingsAreLoaded,
     resultsCount,
     searchInProgress,
-    categoryFilter,
+    // categoryFilter,
     amenitiesFilter,
     priceFilter,
     dateRangeFilter,
@@ -80,9 +80,9 @@ const SearchFiltersComponent = props => {
   const hasNoResult = listingsAreLoaded && resultsCount === 0;
   const classes = classNames(rootClassName || css.root, { [css.longInfo]: hasNoResult }, className);
 
-  const categoryLabel = intl.formatMessage({
-    id: 'SearchFilters.categoryLabel',
-  });
+  // const categoryLabel = intl.formatMessage({
+  //   id: 'SearchFilters.categoryLabel',
+  // });
 
   const amenitiesLabel = intl.formatMessage({
     id: 'SearchFilters.amenitiesLabel',
@@ -92,9 +92,9 @@ const SearchFiltersComponent = props => {
     ? initialValues(urlQueryParams, amenitiesFilter.paramName)
     : null;
 
-  const initialCategory = categoryFilter
-    ? initialValue(urlQueryParams, categoryFilter.paramName)
-    : null;
+  // const initialCategory = categoryFilter
+  //   ? initialValue(urlQueryParams, categoryFilter.paramName)
+  //   : null;
 
   const initialPriceRange = priceFilter
     ? initialPriceRangeValue(urlQueryParams, priceFilter.paramName)
@@ -113,15 +113,15 @@ const SearchFiltersComponent = props => {
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   };
 
-  const handleSelectOption = (urlParam, option) => {
-    // query parameters after selecting the option
-    // if no option is passed, clear the selection for the filter
-    const queryParams = option
-      ? { ...urlQueryParams, [urlParam]: option }
-      : omit(urlQueryParams, urlParam);
+  // const handleSelectOption = (urlParam, option) => {
+  //   // query parameters after selecting the option
+  //   // if no option is passed, clear the selection for the filter
+  //   const queryParams = option
+  //     ? { ...urlQueryParams, [urlParam]: option }
+  //     : omit(urlQueryParams, urlParam);
 
-    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
-  };
+  //   history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+  // };
 
   const handlePrice = (urlParam, range) => {
     const { minPrice, maxPrice } = range || {};

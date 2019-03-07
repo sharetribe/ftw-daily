@@ -40,8 +40,8 @@ const AboutPage = () => {
 
           <div className={css.contentWrapper}>
             <div className={css.contentSide}>
-              <p>Did you know that over <b>1 trillion</b> photos were taken in 2018 - that's more than <b>114 million</b> per hour!</p> <p role="image" aria-label="star_eyes">🤩</p>
-              <p>How many were you in? </p>
+              <p>Did you know that over <b>1 trillion</b> photos were taken in 2018 - that's more than <b>114 million</b> per hour!</p> <p><span role="img" aria-label="star_eyes">🤩</span></p>
+              <p>How many were you in? </p> 
             </div>
 
             <div className={css.contentMain}>
@@ -58,7 +58,7 @@ const AboutPage = () => {
               </p>
 
               <p>
-                The Shoot finds affordable yet high quality photographers in your area. Contact, discuss and book your shoot today. And you’ll be (almost) as happy as our founders. </p> <p role="image" aria-label="tongue_out">😛</p>
+                The Shoot finds affordable yet high quality photographers in your area. Contact, discuss and book your shoot today. And you’ll be (almost) as happy as our founders. <span role="img" aria-label="tongue_out">😛</span></p>
 
               <p>
                 You can checkout our community on{' '}
