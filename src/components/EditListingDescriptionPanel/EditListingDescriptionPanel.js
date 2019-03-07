@@ -6,7 +6,7 @@ import { ensureOwnListing } from '../../util/data';
 import { ListingLink } from '../../components';
 import { LISTING_STATE_DRAFT } from '../../util/types';
 import { EditListingDescriptionForm } from '../../forms';
-import config from '../../config';
+// import config from '../../config';
 
 import css from './EditListingDescriptionPanel.css';
 
@@ -25,7 +25,7 @@ const EditListingDescriptionPanel = props => {
 
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
-  const { description, title, publicData } = currentListing.attributes;
+  const { description, title } = currentListing.attributes;
 
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
