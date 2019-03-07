@@ -20,7 +20,7 @@ yarn run config                                                # add the mandato
 yarn run dev                                                   # start the dev server, this will open a browser in localhost:3000
 ```
 
-### If you are using Stripe account created after 19th of February 2019 creating compan accounts is temporalily unavailable.
+### If you are using Stripe account created after 19th of February 2019 creating company accounts is temporalily unavailable.
 
 This is due the changes in Stripe API (https://stripe.com/docs/upgrades#api-changelog). Issues with
 individual accounts were fixed in release
