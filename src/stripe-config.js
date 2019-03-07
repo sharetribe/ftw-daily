@@ -7,6 +7,13 @@
 // To make Stripe connection work, you also need to set Stripe's private key in the Flex Console.
 export const stripePublishableKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY;
 
+// You can check your Stripe API version from Stripe Dashboard -> Developers.
+// If you are using the API version that is earlier than '2019-02-19' change this value to 'true'
+// See Stripe API changelog: https://stripe.com/docs/upgrades#api-changelog
+// NOTE: we are not supporting company accounts with new Stripe API yet!
+// The option for company accounts will be hidden if this value is set to 'false'
+export const useDeprecatedLegalEntityWithStripe = false;
+
 // Stripe only supports payments in certain countries, see full list
 // at https://stripe.com/global
 //

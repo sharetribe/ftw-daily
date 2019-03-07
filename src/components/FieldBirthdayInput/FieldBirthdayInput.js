@@ -155,7 +155,9 @@ class BirthdayInputComponent extends Component {
             onBlur={() => this.handleSelectBlur()}
             onChange={e => this.handleSelectChange('day', e.target.value)}
           >
-            <option disabled>{datePlaceholder}</option>
+            <option disabled value="">
+              {datePlaceholder}
+            </option>
             {days.map(d => (
               <option key={d} value={d}>
                 {pad(d)}
@@ -176,7 +178,9 @@ class BirthdayInputComponent extends Component {
             onBlur={() => this.handleSelectBlur()}
             onChange={e => this.handleSelectChange('month', e.target.value)}
           >
-            <option disabled>{monthPlaceholder}</option>
+            <option disabled value="">
+              {monthPlaceholder}
+            </option>
             {months.map(m => (
               <option key={m} value={m}>
                 {pad(m)}
@@ -197,7 +201,9 @@ class BirthdayInputComponent extends Component {
             onBlur={() => this.handleSelectBlur()}
             onChange={e => this.handleSelectChange('year', e.target.value)}
           >
-            <option disabled>{yearPlaceholder}</option>
+            <option disabled value="">
+              {yearPlaceholder}
+            </option>
             {years.map(y => (
               <option key={y} value={y}>
                 {y}

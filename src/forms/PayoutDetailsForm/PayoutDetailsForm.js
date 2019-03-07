@@ -46,7 +46,11 @@ const PayoutDetailsFormComponent = props => (
         values,
       } = fieldRenderProps;
 
-      const { country, accountType } = values;
+      const { country } = values;
+
+      const usesOldAPI = config.stripe.useDeprecatedLegalEntityWithStripe;
+
+      const accountType = usesOldAPI ? values.accountType : 'individual';
 
       const individualAccountLabel = intl.formatMessage({
         id: 'PayoutDetailsForm.individualAccount',
@@ -97,29 +101,31 @@ const PayoutDetailsFormComponent = props => (
         </ExternalLink>
       );
 
-      return (
+      return config.stripe.publishableKey ? (
         <Form className={classes} onSubmit={handleSubmit}>
-          <div className={css.sectionContainer}>
-            <h3 className={css.subTitle}>
-              <FormattedMessage id="PayoutDetailsForm.accountTypeTitle" />
-            </h3>
-            <div className={css.radioButtonRow}>
-              <FieldRadioButton
-                id="individual"
-                name="accountType"
-                label={individualAccountLabel}
-                value="individual"
-                showAsRequired={showAsRequired}
-              />
-              <FieldRadioButton
-                id="company"
-                name="accountType"
-                label={companyAccountLabel}
-                value="company"
-                showAsRequired={showAsRequired}
-              />
+          {usesOldAPI ? (
+            <div className={css.sectionContainer}>
+              <h3 className={css.subTitle}>
+                <FormattedMessage id="PayoutDetailsForm.accountTypeTitle" />
+              </h3>
+              <div className={css.radioButtonRow}>
+                <FieldRadioButton
+                  id="individual"
+                  name="accountType"
+                  label={individualAccountLabel}
+                  value="individual"
+                  showAsRequired={showAsRequired}
+                />
+                <FieldRadioButton
+                  id="company"
+                  name="accountType"
+                  label={companyAccountLabel}
+                  value="company"
+                  showAsRequired={showAsRequired}
+                />
+              </div>
             </div>
-          </div>
+          ) : null}
 
           {accountType ? (
             <React.Fragment>
@@ -178,6 +184,10 @@ const PayoutDetailsFormComponent = props => (
             </React.Fragment>
           ) : null}
         </Form>
+      ) : (
+        <div className={css.missingStripeKey}>
+          <FormattedMessage id="PayoutDetailsForm.missingStripeKey" />
+        </div>
       );
     }}
   />

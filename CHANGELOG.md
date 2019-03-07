@@ -14,10 +14,32 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [Fix] Add error handling to `PayoutDetailsForm` and `StripePaymentForm` in case Stripe publishable
+  key is not configured yet. [#1042](https://github.com/sharetribe/flex-template-web/pull/1042)
+- [fix] FieldBirthdayInput: placeholder text was not selected by default.
+  [#1039](https://github.com/sharetribe/flex-template-web/pull/1039)
+
+## [v2.12.0] 2019-02-28
+
+- [fix] Fix to PR [#1035](https://github.com/sharetribe/flex-template-web/pull/1035). In
+  `user.duck.js` send correct params depending on Stripe API in use.
+  [#1037](https://github.com/sharetribe/flex-template-web/pull/1037)
+- [change] Update creating Stripe account token to support the latest Stripe API update. See also
+  [Stripe API changelog](https://stripe.com/docs/upgrades#api-changelog). **IMPORTANT:** If you are
+  using a Stripe account created earlier than 19th of February 2019 you need to change the value of
+  `useDeprecatedLegalEntityWithStripe` in `stripe-config.js`. You can check the Stripe API version
+  you are using from Stripe Dashboard -> Developers. Since the change in Stripe API was quite big we
+  are not able to support company accounts with new Stripe API yet! The option for company accounts
+  will be hidden if the value `useDeprecatedLegalEntityWithStripe` is set to `false`.
+  [#1035](https://github.com/sharetribe/flex-template-web/pull/1035)
+- [change] Improve German translations.
+  [#1034](https://github.com/sharetribe/flex-template-web/pull/1034)
 - [change] Reordered import/exports on src/components/index.js. This helps to mitigate possible
   circular dependency problems and strange bugs in CSS bundle. In addition, derivative buttons were
   refactored to work with `rootClassName` prop (PrimaryButton, SecondaryButton and
   InlineTextButton). [#1024](https://github.com/sharetribe/flex-template-web/pull/1024)
+
+  [v2.11.0]: https://github.com/sharetribe/flex-template-web/compare/v2.11.1...v2.12.0
 
 ## [v2.11.1] 2019-02-21
 
