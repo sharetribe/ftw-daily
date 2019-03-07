@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [Fix] Add error handling to `PayoutDetailsForm` and `StripePaymentForm` in case Stripe publishable
+  key is not configured yet. [#1042](https://github.com/sharetribe/flex-template-web/pull/1042)
 - [fix] FieldBirthdayInput: placeholder text was not selected by default.
   [#1039](https://github.com/sharetribe/flex-template-web/pull/1039)
 

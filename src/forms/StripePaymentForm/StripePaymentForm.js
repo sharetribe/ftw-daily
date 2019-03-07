@@ -98,20 +98,22 @@ class StripePaymentForm extends Component {
     if (!window.Stripe) {
       throw new Error('Stripe must be loaded for StripePaymentForm');
     }
-    this.stripe = window.Stripe(config.stripe.publishableKey);
-    const elements = this.stripe.elements(stripeElementsOptions);
-    this.card = elements.create('card', { style: cardStyles });
-    this.card.mount(this.cardContainer);
-    this.card.addEventListener('change', this.handleCardValueChange);
 
-    // EventListener is the only way to simulate breakpoints with Stripe.
-    window.addEventListener('resize', () => {
-      if (window.innerWidth < 1024) {
-        this.card.update({ style: { base: { fontSize: '18px', lineHeight: '24px' } } });
-      } else {
-        this.card.update({ style: { base: { fontSize: '20px', lineHeight: '32px' } } });
-      }
-    });
+    if (config.stripe.publishableKey) {
+      this.stripe = window.Stripe(config.stripe.publishableKey);
+      const elements = this.stripe.elements(stripeElementsOptions);
+      this.card = elements.create('card', { style: cardStyles });
+      this.card.mount(this.cardContainer);
+      this.card.addEventListener('change', this.handleCardValueChange);
+      // EventListener is the only way to simulate breakpoints with Stripe.
+      window.addEventListener('resize', () => {
+        if (window.innerWidth < 1024) {
+          this.card.update({ style: { base: { fontSize: '18px', lineHeight: '24px' } } });
+        } else {
+          this.card.update({ style: { base: { fontSize: '20px', lineHeight: '32px' } } });
+        }
+      });
+    }
   }
   componentWillUnmount() {
     if (this.card) {
@@ -244,7 +246,7 @@ class StripePaymentForm extends Component {
       </div>
     ) : null;
 
-    return (
+    return config.stripe.publishableKey ? (
       <Form className={classes} onSubmit={this.handleSubmit}>
         <h3 className={css.paymentHeading}>
           <FormattedMessage id="StripePaymentForm.paymentHeading" />
@@ -275,6 +277,10 @@ class StripePaymentForm extends Component {
           </PrimaryButton>
         </div>
       </Form>
+    ) : (
+      <div className={css.missingStripeKey}>
+        <FormattedMessage id="StripePaymentForm.missingStripeKey" />
+      </div>
     );
   }
 }

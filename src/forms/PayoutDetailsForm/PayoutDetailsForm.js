@@ -101,7 +101,7 @@ const PayoutDetailsFormComponent = props => (
         </ExternalLink>
       );
 
-      return (
+      return config.stripe.publishableKey ? (
         <Form className={classes} onSubmit={handleSubmit}>
           {usesOldAPI ? (
             <div className={css.sectionContainer}>
@@ -184,6 +184,10 @@ const PayoutDetailsFormComponent = props => (
             </React.Fragment>
           ) : null}
         </Form>
+      ) : (
+        <div className={css.missingStripeKey}>
+          <FormattedMessage id="PayoutDetailsForm.missingStripeKey" />
+        </div>
       );
     }}
   />

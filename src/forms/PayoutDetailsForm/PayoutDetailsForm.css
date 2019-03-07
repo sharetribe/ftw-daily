@@ -178,3 +178,7 @@
     padding-bottom: 2px;
   }
 }
+
+.missingStripeKey {
+  color: var(--failColor);
+}
