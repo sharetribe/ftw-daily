@@ -147,17 +147,17 @@ const SearchFiltersComponent = props => {
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   };
 
-  const categoryFilterElement = categoryFilter ? (
-    <SelectSingleFilter
-      urlParam={categoryFilter.paramName}
-      label={categoryLabel}
-      onSelect={handleSelectOption}
-      showAsPopup
-      options={categoryFilter.options}
-      initialValue={initialCategory}
-      contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
-    />
-  ) : null;
+  // const categoryFilterElement = categoryFilter ? (
+  //   <SelectSingleFilter
+  //     urlParam={categoryFilter.paramName}
+  //     label={categoryLabel}
+  //     onSelect={handleSelectOption}
+  //     showAsPopup
+  //     options={categoryFilter.options}
+  //     initialValue={initialCategory}
+  //     contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+  //   />
+  // ) : null;
 
   const amenitiesFilterElement = amenitiesFilter ? (
     <SelectMultipleFilter
@@ -217,7 +217,7 @@ const SearchFiltersComponent = props => {
   return (
     <div className={classes}>
       <div className={css.filters}>
-        {categoryFilterElement}
+        
         {amenitiesFilterElement}
         {priceFilterElement}
         {dateRangeFilterElement}

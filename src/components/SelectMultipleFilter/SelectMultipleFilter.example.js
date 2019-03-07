@@ -58,7 +58,7 @@ const AmenitiesFilterPopup = withRouter(props => {
       id="SelectMultipleFilterPopupExample"
       name="amenities"
       urlParam={URL_PARAM}
-      label="Amenities"
+      label="Shoot Style"
       onSubmit={(urlParam, values) => handleSubmit(urlParam, values, history)}
       showAsPopup={true}
       liveEdit={false}
