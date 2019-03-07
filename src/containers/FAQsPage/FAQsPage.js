@@ -11,22 +11,22 @@ import {
   ExternalLink,
 } from '../../components';
 
-import css from './AboutPage.css';
-import image from './about-us-1056.jpg';
+import css from './FAQsPage.css';
+import image from './FAQs.jpg';
 
-const AboutPage = () => {
+const FAQsPage = () => {
   const { siteTwitterHandle, siteFacebookPage } = config;
   const siteTwitterPage = twitterPageURL(siteTwitterHandle);
 
   // prettier-ignore
   return (
     <StaticPage
-      title="About Us"
+      title="FAQs"
       schema={{
         '@context': 'http://schema.org',
-        '@type': 'AboutPage',
-        description: 'About The Shoot',
-        name: 'About page',
+        '@type': 'FAQsPage',
+        description: 'Frequently Asked Questions',
+        name: 'FAQs Page',
       }}
     >
       <LayoutSingleColumn>
@@ -35,12 +35,12 @@ const AboutPage = () => {
         </LayoutWrapperTopbar>
 
         <LayoutWrapperMain className={css.staticPageWrapper}>
-          <h1 className={css.pageTitle}>About Us.</h1>
+          <h1 className={css.pageTitle}>Frequently Asked Questions</h1>
           <img className={css.coverImage} src={image} alt="Fiona & Tristan" />
 
           <div className={css.contentWrapper}>
             <div className={css.contentSide}>
-              <p>Did you know that over <b>1 trillion</b> photos were taken in 2018 - that's more than <b>114 million</b> per hour!</p> <p role="image" aria-label="star_eyes">🤩</p>
+              <p>Did you know that over <b>1 trillion</b> photos were taken in 2018 - that's more than <b>114 million</b> per hour!</p>
               <p>How many were you in? </p>
             </div>
 
@@ -58,7 +58,8 @@ const AboutPage = () => {
               </p>
 
               <p>
-                The Shoot finds affordable yet high quality photographers in your area. Contact, discuss and book your shoot today. And you’ll be (almost) as happy as our founders. </p> <p role="image" aria-label="tongue_out">😛</p>
+                The Shoot finds affordable yet high quality photographers in your area. Contact, discuss and book your shoot today. And you’ll be (almost) as happy as our founders.
+                </p>
 
               <p>
                 You can checkout our community on{' '}
@@ -77,4 +78,4 @@ const AboutPage = () => {
   );
 };
 
-export default AboutPage;
+export default FAQsPage;
