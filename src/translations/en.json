@@ -552,7 +552,7 @@
   "PayoutDetailsForm.lastNameLabel": "Last name",
   "PayoutDetailsForm.lastNamePlaceholder": "Doe",
   "PayoutDetailsForm.lastNameRequired": "This field is required",
-  "PayoutDetailsForm.missingStripeKey": "You need to configure the Stripe publishable key to continue.",
+  "PayoutDetailsForm.missingStripeKey": "Stripe publishable key has not been configured to this marketplace. Unfortunately, you can't save your payout preferences yet.",
   "PayoutDetailsForm.personalDetailsAdditionalOwnerTitle": "Additional owner details",
   "PayoutDetailsForm.personalDetailsTitle": "Personal details",
   "PayoutDetailsForm.personalIdNumberTitle": "Personal id number",
