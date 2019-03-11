@@ -86,8 +86,5 @@
     "singleQuote": true,
     "trailingComma": "es5",
     "proseWrap": "always"
-  },
-  "engines": {
-    "node": "10.14"
   }
 }
