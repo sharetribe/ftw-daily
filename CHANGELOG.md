@@ -14,7 +14,11 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
-- [Fix] Add error handling to `PayoutDetailsForm` and `StripePaymentForm` in case Stripe publishable
+- [change] Removed Node-engine setup from package.json. Fixed version was causing problems for quite
+  many in their first FTW installation. Note: when troubleshooting your Heroku installation, you
+  might want to reintroduce engine setup.
+  [#1043](https://github.com/sharetribe/flex-template-web/pull/1043)
+- [fix] Add error handling to `PayoutDetailsForm` and `StripePaymentForm` in case Stripe publishable
   key is not configured yet. [#1042](https://github.com/sharetribe/flex-template-web/pull/1042)
 - [fix] FieldBirthdayInput: placeholder text was not selected by default.
   [#1039](https://github.com/sharetribe/flex-template-web/pull/1039)
