@@ -127,7 +127,7 @@ const Footer = props => {
                     name="SearchPage"
                     to={{
                       search:
-                        'address=Aargau%2C%20Switzerland&bounds=47.621104%2C8.455111%2C47.137478%2C7.713575',
+                        '?address=Aargau%2C%20Switzerland&bounds=48.04509095%2C8.60959767%2C46.71479074%2C7.38796464&mapSearch=true',
                     }}
                     className={css.link}
                   >
