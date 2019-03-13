@@ -203,7 +203,7 @@ const Footer = props => {
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=Schwyz%2C%20Canton%20of%20Schwyz%2C%20Switzerland&bounds=47.066359%2C8.69512%2C46.985194%2C8.638355',
+                        '?address=Schwyz%2C%20Canton%20of%20Schwyz%2C%20Switzerland&bounds=47.6784065%2C9.32045944%2C46.37994062%2C8.2004517&mapSearch=true',
                     }}
                     className={css.link}
                   >
