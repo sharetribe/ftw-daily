@@ -191,7 +191,7 @@ const Footer = props => {
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=Solothurn%2C%20Canton%20of%20Solothurn%2C%20Switzerland&bounds=47.223168%2C7.552309%2C47.190883%2C7.504217',
+                        '?address=Solothurn%2C%20Canton%20of%20Solothurn%2C%20Switzerland&bounds=48.38947993%2C8.71781782%2C46.07014286%2C6.70936838&mapSearch=true',
                     }}
                     className={css.link}
                   >
