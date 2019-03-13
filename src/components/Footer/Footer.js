@@ -115,7 +115,7 @@ const Footer = props => {
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=Zurich%2C%20Canton%20of%20Zürich%2C%20Switzerland&bounds=47.434662%2C8.625334%2C47.320258%2C8.447982',
+                        '?address=Zurich%2C%20Canton%20of%20Z%C3%BCrich%2C%20Switzerland&bounds=47.75031113%2C8.74622137%2C47.11457643%2C8.16186927&mapSearch=true',
                     }}
                     className={css.link}
                   >
