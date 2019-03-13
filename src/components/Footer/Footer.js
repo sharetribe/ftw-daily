@@ -139,7 +139,7 @@ const Footer = props => {
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=Lucerne%2C%20Canton%20of%20Lucerne%2C%20Switzerland&bounds=47.60117183%2C8.77316274%2C46.54574404%2C7.86205604&mapSearch=true',
+                        '?address=Lucerne%2C%20Canton%20of%20Lucerne%2C%20Switzerland&bounds=47.61802365%2C8.83002879%2C46.56293299%2C7.66021279&mapSearch=true',
                     }}
                     className={css.link}
                   >
@@ -151,7 +151,7 @@ const Footer = props => {
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=Bern%2C%20Canton%20of%20Bern%2C%20Switzerland&bounds=46.99027%2C7.49555%2C46.919033%2C7.294318',
+                        '?address=Bern%2C%20Canton%20of%20Bern%2C%20Switzerland&bounds=48.18692884%2C8.83537674%2C45.2640319%2C6.32771643&mapSearch=true',
                     }}
                     className={css.link}
                   >
