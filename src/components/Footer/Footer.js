@@ -115,7 +115,7 @@ const Footer = props => {
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=Zurich%2C%20Canton%20of%20Zürich%2C%20Switzerland&bounds=48.03439456%2C9.21423359%2C46.76216594%2C8.04552939&mapSearch=true',
+                        '?address=Zurich%2C%20Canton%20of%20Zürich%2C%20Switzerland&bounds=48.03439456%2C9.21423359%2C46.76216594%2C8.04552939',
                     }}
                     className={css.link}
                   >
@@ -127,7 +127,7 @@ const Footer = props => {
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=Aargau%2C%20Switzerland&bounds=48.04509095%2C8.60959767%2C46.71479074%2C7.38796464&mapSearch=true',
+                        '?address=Aargau%2C%20Switzerland&bounds=48.04509095%2C8.60959767%2C46.71479074%2C7.38796464',
                     }}
                     className={css.link}
                   >
@@ -139,7 +139,7 @@ const Footer = props => {
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=Lucerne%2C%20Canton%20of%20Lucerne%2C%20Switzerland&bounds=47.61802365%2C8.83002879%2C46.56293299%2C7.66021279&mapSearch=true',
+                        '?address=Lucerne%2C%20Canton%20of%20Lucerne%2C%20Switzerland&bounds=47.61802365%2C8.83002879%2C46.56293299%2C7.66021279',
                     }}
                     className={css.link}
                   >
@@ -151,7 +151,7 @@ const Footer = props => {
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=Bern%2C%20Canton%20of%20Bern%2C%20Switzerland&bounds=48.18692884%2C8.83537674%2C45.2640319%2C6.32771643&mapSearch=true',
+                        '?address=Bern%2C%20Canton%20of%20Bern%2C%20Switzerland&bounds=48.18692884%2C8.83537674%2C45.2640319%2C6.32771643',
                     }}
                     className={css.link}
                   >
@@ -163,7 +163,7 @@ const Footer = props => {
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=Basel%2C%20Basel-Stadt%2C%20Switzerland&bounds=47.97975327%2C8.19880895%2C46.8479182%2C7.21543715&mapSearch=true',
+                        '?address=Basel%2C%20Basel-Stadt%2C%20Switzerland&bounds=47.97975327%2C8.19880895%2C46.8479182%2C7.21543715',
                     }}
                     className={css.link}
                   >
@@ -179,7 +179,7 @@ const Footer = props => {
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=St.%20Gallen%2C%20Canton%20of%20St.%20Gallen%2C%20Switzerland&bounds=48.37292177%2C10.24753452%2C46.25794811%2C8.41315868&mapSearch=true',
+                        '?address=St.%20Gallen%2C%20Canton%20of%20St.%20Gallen%2C%20Switzerland&bounds=48.37292177%2C10.24753452%2C46.25794811%2C8.41315868',
                     }}
                     className={css.link}
                   >
@@ -191,7 +191,7 @@ const Footer = props => {
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=Solothurn%2C%20Canton%20of%20Solothurn%2C%20Switzerland&bounds=48.38947993%2C8.71781782%2C46.07014286%2C6.70936838&mapSearch=true',
+                        '?address=Solothurn%2C%20Canton%20of%20Solothurn%2C%20Switzerland&bounds=48.38947993%2C8.71781782%2C46.07014286%2C6.70936838',
                     }}
                     className={css.link}
                   >
@@ -203,7 +203,7 @@ const Footer = props => {
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=Schwyz%2C%20Canton%20of%20Schwyz%2C%20Switzerland&bounds=47.6784065%2C9.32045944%2C46.37994062%2C8.2004517&mapSearch=true',
+                        '?address=Schwyz%2C%20Canton%20of%20Schwyz%2C%20Switzerland&bounds=47.6784065%2C9.32045944%2C46.37994062%2C8.2004517',
                     }}
                     className={css.link}
                   >
@@ -215,7 +215,7 @@ const Footer = props => {
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=Waadt&bounds=47.710466%2C7.95099205%2C45.37554257%2C5.38795205&mapSearch=true',
+                        '?address=Waadt&bounds=47.710466%2C7.95099205%2C45.37554257%2C5.38795205',
                     }}
                     className={css.link}
                   >
@@ -227,7 +227,7 @@ const Footer = props => {
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=Freiburg&bounds=47.75298377%2C8.32192402%2C45.80215255%2C6.17133202&mapSearch=true',
+                        '?address=Freiburg&bounds=47.75298377%2C8.32192402%2C45.80215255%2C6.17133202',
                     }}
                     className={css.link}
                   >
