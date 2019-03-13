@@ -163,7 +163,7 @@ const Footer = props => {
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=Basel%2C%20Basel-Stadt%2C%20Switzerland&bounds=47.589902%2C7.634148%2C47.519342%2C7.554664',
+                        '?address=Basel%2C%20Basel-Stadt%2C%20Switzerland&bounds=47.97975327%2C8.19880895%2C46.8479182%2C7.21543715&mapSearch=true',
                     }}
                     className={css.link}
                   >
