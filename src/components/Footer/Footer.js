@@ -215,7 +215,7 @@ const Footer = props => {
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=Waadtländerhalle%2C%20Marktgasse%2023%2C%20Olten%2C%20Canton%20of%20Solothurn%204600%2C%20Switzerland&bounds=47.36736630554143%2C7.930298523131814%2C47.331433694458575%2C7.877263476868187',
+                        '?address=Waadt&bounds=47.710466%2C7.95099205%2C45.37554257%2C5.38795205&mapSearch=true',
                     }}
                     className={css.link}
                   >
