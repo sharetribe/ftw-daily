@@ -139,7 +139,7 @@ const Footer = props => {
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=Lucerne%2C%20Canton%20of%20Lucerne%2C%20Switzerland&bounds=47.07497%2C8.358228%2C47.015855%2C8.212001',
+                        '?address=Lucerne%2C%20Canton%20of%20Lucerne%2C%20Switzerland&bounds=47.60117183%2C8.77316274%2C46.54574404%2C7.86205604&mapSearch=true',
                     }}
                     className={css.link}
                   >
