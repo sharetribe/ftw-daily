@@ -227,7 +227,7 @@ const Footer = props => {
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=Freiburg%20im%20Breisgau%2C%20Baden-Württemberg%2C%20Germany&bounds=48.07106%2C7.930827%2C47.903592%2C7.662003',
+                        '?address=Freiburg&bounds=47.75298377%2C8.32192402%2C45.80215255%2C6.17133202&mapSearch=true',
                     }}
                     className={css.link}
                   >
