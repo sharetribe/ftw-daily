@@ -179,7 +179,7 @@ const Footer = props => {
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=St.%20Gallen%2C%20Canton%20of%20St.%20Gallen%2C%20Switzerland&bounds=47.453073%2C9.431492%2C47.395155%2C9.284289',
+                        '?address=St.%20Gallen%2C%20Canton%20of%20St.%20Gallen%2C%20Switzerland&bounds=48.37292177%2C10.24753452%2C46.25794811%2C8.41315868&mapSearch=true',
                     }}
                     className={css.link}
                   >
