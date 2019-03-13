@@ -145,6 +145,7 @@ class BirthdayInputComponent extends Component {
         <div className={css.selectWrapper}>
           {dateLabel}
           <select
+            autoComplete="bday-day"
             disabled={disabled}
             id={dateId}
             value={selectedValue(this.state.selected.day)}
@@ -168,6 +169,7 @@ class BirthdayInputComponent extends Component {
         <div className={css.selectWrapper}>
           {monthLabel}
           <select
+            autoComplete="bday-month"
             disabled={disabled}
             id={monthId}
             value={selectedValue(this.state.selected.month)}
@@ -191,6 +193,7 @@ class BirthdayInputComponent extends Component {
         <div className={css.selectWrapper}>
           {yearLabel}
           <select
+            autoComplete="bday-year"
             disabled={disabled}
             id={yearId}
             value={selectedValue(this.state.selected.year)}
