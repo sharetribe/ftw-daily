@@ -101,7 +101,7 @@
   @apply --marketplaceButtonStyles;
   @apply --SectionHero_animation;
 
-  font-family: GilroyExtraBold, Helvetica, Arial, sans-serif;
+  font-family: GilroyExtraBold;
 
   animation-delay: 0.8s;
 

@@ -58,7 +58,7 @@
 
 /* Overwrite Mapbox's specific font rules */
 .root .card {
-  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+  font-family: sofiapro;
   font-weight: var(--fontWeightSemiBold);
 }
 
