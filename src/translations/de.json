@@ -17,10 +17,7 @@
   "ActivityFeed.transitionExpire": "Booking request expired. { displayName } did not reply on time.",
   "ActivityFeed.transitionRequest": "{ displayName } requested to book { listingTitle }.",
   "ActivityFeed.transitionReview": "{ displayName } left a review for you. { reviewLink }",
-  "AuthenticationPage.emailAlreadyInUse": "
-  
-  
-  with this email address already exists. Try logging in instead.",
+  "AuthenticationPage.emailAlreadyInUse": "with this email address already exists. Try logging in instead.",
   "AuthenticationPage.fixEmail": "Whoops, typo in your email? {fixEmailLink}.",
   "AuthenticationPage.fixEmailLinkText": "Fix it",
   "AuthenticationPage.loginFailed": "The email and password you entered did not match our records. Please double-check and try again.",
