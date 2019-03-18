@@ -197,3 +197,34 @@
   }
 }
 
+/* Company owners and directors */
+.additionalPersonsWrapper {
+  margin-bottom: 35px;
+
+  @media (--viewportMedium) {
+    margin-bottom: 56px;
+  }
+}
+.additionalPersonWrapper .sectionContainer {
+  margin-bottom: 24px;
+}
+
+.additionalPersonLabel {
+  display: inline-block;
+}
+
+.additionalPersonInfo {
+  @apply --marketplaceH5FontStyles;
+  color: var(--matterColorAnti);
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 5px;
+  padding-bottom: 1px;
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 6px;
+    padding-bottom: 2px;
+  }
+}
