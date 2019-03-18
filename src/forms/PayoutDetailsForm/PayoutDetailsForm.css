@@ -110,6 +110,10 @@
   @apply --marketplaceH4FontStyles;
 }
 
+.missingStripeKey {
+  color: var(--failColor);
+}
+
 .personalAddressContainer {
   margin-bottom: 28px;
 }
@@ -134,25 +138,6 @@
 
 .closeIcon {
   @apply --marketplaceModalCloseIcon;
-}
-
-.additionalOwnerWrapper {
-  margin-bottom: 35px;
-
-  @media (--viewportMedium) {
-    margin-bottom: 56px;
-  }
-}
-
-.additionalOwnerWrapper .sectionContainer {
-  margin-bottom: 24px;
-}
-
-.additionalOwnerLabel {
-  display: inline-block;
-}
-
-.closeIcon {
   margin-right: 5px;
 }
 
@@ -163,7 +148,40 @@
   padding-top: 1px;
 }
 
-.additionalOwnerInfo {
+.roleField {
+  border: 0;
+  padding: 0;
+  margin-bottom: 24px;
+}
+
+.ownershipPercentage {
+  position: relative;
+  max-width: 90px;
+  padding-right: 24px;
+  margin-bottom: 24px;
+  white-space: nowrap;
+
+  &:after {
+    content: '%';
+    position: absolute;
+    top: 36px;
+    right: 6px;
+  }
+}
+
+/* Company account opener */
+.accountOpenerWrapper {
+  margin-bottom: 35px;
+
+  @media (--viewportMedium) {
+    margin-bottom: 56px;
+  }
+}
+.accountOpenerInputsWrapper .sectionContainer {
+  margin-bottom: 24px;
+}
+
+.accountOpenerInfo {
   @apply --marketplaceH5FontStyles;
   color: var(--matterColorAnti);
   margin-top: 0;
@@ -179,6 +197,3 @@
   }
 }
 
-.missingStripeKey {
-  color: var(--failColor);
-}

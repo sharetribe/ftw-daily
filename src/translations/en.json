@@ -455,6 +455,8 @@
   "PasswordResetPage.recoveryLinkText": "password recovery page",
   "PasswordResetPage.resetFailed": "Reset failed. Please try again.",
   "PasswordResetPage.title": "Reset password",
+  "PayoutDetailsForm.accountOpenerInfoText": "Account opener needs to be an individual with authorization to sign on behalf of the organization.",
+  "PayoutDetailsForm.accountOpenerTitle": "Account opener",
   "PayoutDetailsForm.accountTypeTitle": "Account type",
   "PayoutDetailsForm.addressTitle": "Address",
   "PayoutDetailsForm.bankDetails": "Bank details",
