@@ -56,7 +56,7 @@
   /* ================ Hero title ================ */
 
   --marketplaceHeroTitleFontStyles: {
-    font-family: GilroyExtraBold;
+    font-family: gilroyextrabold;
     font-weight: var(--fontWeightBold);
     font-size: 42px;
     line-height: 42px;
@@ -102,7 +102,7 @@
   /* ================ H1, H2, H3, H4, H5 & H6 ================ */
 
   --marketplaceH1FontStyles: {
-    font-family: GilroyExtraBold;
+    font-family: gilroyextrabold;
     font-weight: var(--fontWeightBold);
     font-size: 30px;
     line-height: 36px;
@@ -123,7 +123,7 @@
   }
 
   --marketplaceH2FontStyles: {
-    font-family: GilroyExtraBold;
+    font-family: gilroyextrabold;
     font-weight: var(--fontWeightSemiBold);
     font-size: 24px;
     line-height: 30px;
@@ -141,7 +141,7 @@
   }
 
   --marketplaceH3FontStyles: {
-    font-family: GilroyExtraBold;
+    font-family: gilroyextrabold;
     font-weight: var(--fontWeightSemiBold);
     font-size: 20px;
     line-height: 24px;
@@ -158,7 +158,7 @@
   }
 
   --marketplaceH4FontStyles: {
-    font-family: GilroyExtraBold;
+    font-family: gilroyextrabold;
     font-weight: var(--fontWeightMedium);
     font-size: 16px;
     line-height: 24px;
@@ -176,7 +176,7 @@
   }
 
   --marketplaceH5FontStyles: {
-    font-family: GilroyExtraBold;
+    font-family: gilroyextrabold;
     font-weight: var(--fontWeightRegular);
     font-size: 14px;
     line-height: 18px;
@@ -194,7 +194,7 @@
   }
 
   --marketplaceH6FontStyles: {
-    font-family: GilroyExtraBold;
+    font-family: gilroyextrabold;
     font-weight: var(--fontWeightBold);
     font-size: 12px;
     line-height: 18px;
