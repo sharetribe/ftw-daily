@@ -469,6 +469,7 @@
   "PayoutDetailsForm.businessMCCForUSLabel": "Merchant Category Code (MCC)",
   "PayoutDetailsForm.businessMCCForUSPlaceholder": "Select MCC",
   "PayoutDetailsForm.businessMCCForUSRequired": "This field is required",
+  "PayoutDetailsForm.businessProfile": "Business profile",
   "PayoutDetailsForm.businessURLLabel": "Business URL",
   "PayoutDetailsForm.businessURLPlaceholder": "The business’s publicly available website.",
   "PayoutDetailsForm.businessURLRequired": "Valid business URL is required.",
