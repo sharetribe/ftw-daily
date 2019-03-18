@@ -79,8 +79,9 @@
   width: calc(60% - 9px);
 }
 
-.taxId {
-  margin-top: 24px;
+.selectMCC,
+.textInputRow {
+  margin-bottom: 24px;
 }
 
 .error {

@@ -1,17 +1,18 @@
 import React from 'react';
-import { bool, object, string } from 'prop-types';
+import { bool, func, object, shape, string } from 'prop-types';
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Form as FinalForm } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import classNames from 'classnames';
 import config from '../../config';
-import { Button, ExternalLink, FieldRadioButton, FieldSelect, Form } from '../../components';
+import { propTypes } from '../../util/types';
 import { isStripeInvalidPostalCode } from '../../util/errors';
 import * as validators from '../../util/validators';
+import { Button, ExternalLink, FieldRadioButton, FieldSelect, Form } from '../../components';
 
-import PayoutDetailsFormCompany from './PayoutDetailsFormCompany';
-import PayoutDetailsFormIndividual from './PayoutDetailsFormIndividual';
+import PayoutDetailsCompanyAccount from './PayoutDetailsCompanyAccount';
+import PayoutDetailsIndividualAccount from './PayoutDetailsIndividualAccount';
 import css from './PayoutDetailsForm.css';
 
 const supportedCountries = config.stripe.supportedCountries.map(c => c.code);
@@ -43,14 +44,13 @@ const PayoutDetailsFormComponent = props => (
         pristine,
         ready,
         submitButtonText,
+        currentUserId,
         values,
       } = fieldRenderProps;
 
       const { country } = values;
 
-      const usesOldAPI = config.stripe.useDeprecatedLegalEntityWithStripe;
-
-      const accountType = usesOldAPI ? values.accountType : 'individual';
+      const accountType = values.accountType;
 
       const individualAccountLabel = intl.formatMessage({
         id: 'PayoutDetailsForm.individualAccount',
@@ -103,29 +103,27 @@ const PayoutDetailsFormComponent = props => (
 
       return config.stripe.publishableKey ? (
         <Form className={classes} onSubmit={handleSubmit}>
-          {usesOldAPI ? (
-            <div className={css.sectionContainer}>
-              <h3 className={css.subTitle}>
-                <FormattedMessage id="PayoutDetailsForm.accountTypeTitle" />
-              </h3>
-              <div className={css.radioButtonRow}>
-                <FieldRadioButton
-                  id="individual"
-                  name="accountType"
-                  label={individualAccountLabel}
-                  value="individual"
-                  showAsRequired={showAsRequired}
-                />
-                <FieldRadioButton
-                  id="company"
-                  name="accountType"
-                  label={companyAccountLabel}
-                  value="company"
-                  showAsRequired={showAsRequired}
-                />
-              </div>
+          <div className={css.sectionContainer}>
+            <h3 className={css.subTitle}>
+              <FormattedMessage id="PayoutDetailsForm.accountTypeTitle" />
+            </h3>
+            <div className={css.radioButtonRow}>
+              <FieldRadioButton
+                id="individual"
+                name="accountType"
+                label={individualAccountLabel}
+                value="individual"
+                showAsRequired={showAsRequired}
+              />
+              <FieldRadioButton
+                id="company"
+                name="accountType"
+                label={companyAccountLabel}
+                value="company"
+                showAsRequired={showAsRequired}
+              />
             </div>
-          ) : null}
+          </div>
 
           {accountType ? (
             <React.Fragment>
@@ -152,12 +150,16 @@ const PayoutDetailsFormComponent = props => (
               </div>
 
               {showIndividual ? (
-                <PayoutDetailsFormIndividual
+                <PayoutDetailsIndividualAccount
+                  fieldRenderProps={fieldRenderProps}
+                  country={country}
+                  currentUserId={currentUserId}
+                />
+              ) : showCompany ? (
+                <PayoutDetailsCompanyAccount
                   fieldRenderProps={fieldRenderProps}
                   country={country}
                 />
-              ) : showCompany ? (
-                <PayoutDetailsFormCompany fieldRenderProps={fieldRenderProps} country={country} />
               ) : null}
 
               {error}
@@ -195,12 +197,13 @@ const PayoutDetailsFormComponent = props => (
 
 PayoutDetailsFormComponent.defaultProps = {
   className: null,
-  country: null,
   createStripeAccountError: null,
   disabled: false,
   inProgress: false,
   ready: false,
   submitButtonText: null,
+  currentUserId: null,
+  fieldRenderProps: null,
 };
 
 PayoutDetailsFormComponent.propTypes = {
@@ -210,6 +213,13 @@ PayoutDetailsFormComponent.propTypes = {
   inProgress: bool,
   ready: bool,
   submitButtonText: string,
+  currentUserId: propTypes.uuid,
+  fieldRenderProps: shape({
+    handleSubmit: func,
+    invalid: bool,
+    pristine: bool,
+    values: object,
+  }),
 
   // from injectIntl
   intl: intlShape.isRequired,
