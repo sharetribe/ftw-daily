@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] A listing title that contained only stripped-off characters caused bugs in slug / pathName
+  generation. [#1048](https://github.com/sharetribe/flex-template-web/pull/1048)
 - [change] Removed Node-engine setup from package.json. Fixed version was causing problems for quite
   many in their first FTW installation. Note: when troubleshooting your Heroku installation, you
   might want to reintroduce engine setup.

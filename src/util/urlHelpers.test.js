@@ -18,7 +18,7 @@ const COMMA = encodeURIComponent(',');
 describe('urlHelpers', () => {
   describe('parseFloatNum()', () => {
     it('handles empty string (returns "")', () => {
-      expect(createSlug('')).toEqual('');
+      expect(createSlug('')).toEqual('no-slug');
     });
 
     it('handles space characters', () => {
