@@ -172,9 +172,8 @@ class EditListingWizard extends Component {
   }
 
   handlePayoutSubmit(values) {
-    const { fname: firstName, lname: lastName, ...rest } = values;
     this.props
-      .onPayoutDetailsSubmit({ firstName, lastName, ...rest })
+      .onPayoutDetailsSubmit(values)
       .then(() => {
         this.setState({ showPayoutDetails: false });
         this.props.onManageDisableScrolling('EditListingWizard.payoutModal', false);
