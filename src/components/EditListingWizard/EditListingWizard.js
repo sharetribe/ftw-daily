@@ -288,6 +288,7 @@ class EditListingWizard extends Component {
               className={css.payoutDetails}
               inProgress={fetchInProgress}
               createStripeAccountError={errors ? errors.createStripeAccountError : null}
+              currentUserId={this.props.currentUser.id}
               onChange={onPayoutDetailsFormChange}
               onSubmit={this.handlePayoutSubmit}
             />

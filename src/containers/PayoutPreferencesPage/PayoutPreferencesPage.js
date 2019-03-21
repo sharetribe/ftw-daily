@@ -87,6 +87,7 @@ export const PayoutPreferencesPageComponent = props => {
       createStripeAccountError={createStripeAccountError}
       onChange={onPayoutDetailsFormChange}
       onSubmit={onPayoutDetailsFormSubmit}
+      currentUserId={ensuredCurrentUser.id}
     />
   ) : null;
 
