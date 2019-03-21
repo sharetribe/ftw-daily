@@ -392,7 +392,6 @@ exports[`TransactionPanel - Order accepted matches snapshot 1`] = `
                 "firstName": "customer first name",
                 "lastName": "customer last name",
               },
-              "stripeConnected": true,
             },
             "id": UUID {
               "uuid": "customer",
@@ -1084,7 +1083,6 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
                 "firstName": "customer first name",
                 "lastName": "customer last name",
               },
-              "stripeConnected": true,
             },
             "id": UUID {
               "uuid": "customer",
@@ -1776,7 +1774,6 @@ exports[`TransactionPanel - Order canceled matches snapshot 1`] = `
                 "firstName": "customer first name",
                 "lastName": "customer last name",
               },
-              "stripeConnected": true,
             },
             "id": UUID {
               "uuid": "customer",
@@ -2468,7 +2465,6 @@ exports[`TransactionPanel - Order declined matches snapshot 1`] = `
                 "firstName": "customer first name",
                 "lastName": "customer last name",
               },
-              "stripeConnected": true,
             },
             "id": UUID {
               "uuid": "customer",
@@ -3170,7 +3166,6 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
                 "firstName": "customer first name",
                 "lastName": "customer last name",
               },
-              "stripeConnected": true,
             },
             "id": UUID {
               "uuid": "customer",
@@ -3867,7 +3862,6 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
                 "firstName": "customer first name",
                 "lastName": "customer last name",
               },
-              "stripeConnected": true,
             },
             "id": UUID {
               "uuid": "customer",
@@ -4557,7 +4551,6 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
                 "firstName": "customer first name",
                 "lastName": "customer last name",
               },
-              "stripeConnected": true,
             },
             "id": UUID {
               "uuid": "customer",
@@ -5249,7 +5242,6 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                 "firstName": "provider first name",
                 "lastName": "provider last name",
               },
-              "stripeConnected": true,
             },
             "id": UUID {
               "uuid": "provider",
@@ -5941,7 +5933,6 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
                 "firstName": "provider first name",
                 "lastName": "provider last name",
               },
-              "stripeConnected": true,
             },
             "id": UUID {
               "uuid": "provider",
@@ -6633,7 +6624,6 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
                 "firstName": "provider first name",
                 "lastName": "provider last name",
               },
-              "stripeConnected": true,
             },
             "id": UUID {
               "uuid": "provider",
@@ -7325,7 +7315,6 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
                 "firstName": "provider first name",
                 "lastName": "provider last name",
               },
-              "stripeConnected": true,
             },
             "id": UUID {
               "uuid": "provider",
@@ -8027,7 +8016,6 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                 "firstName": "provider first name",
                 "lastName": "provider last name",
               },
-              "stripeConnected": true,
             },
             "id": UUID {
               "uuid": "provider",
@@ -8724,7 +8712,6 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
                 "firstName": "provider first name",
                 "lastName": "provider last name",
               },
-              "stripeConnected": true,
             },
             "id": UUID {
               "uuid": "provider",
@@ -9414,7 +9401,6 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
                 "firstName": "provider first name",
                 "lastName": "provider last name",
               },
-              "stripeConnected": true,
             },
             "id": UUID {
               "uuid": "provider",

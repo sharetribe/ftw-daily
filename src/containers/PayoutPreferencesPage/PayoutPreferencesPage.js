@@ -37,7 +37,10 @@ export const PayoutPreferencesPageComponent = props => {
 
   const ensuredCurrentUser = ensureCurrentUser(currentUser);
   const currentUserLoaded = !!ensuredCurrentUser.id;
-  const { stripeConnected } = ensuredCurrentUser.attributes;
+  const stripeConnected =
+    currentUserLoaded &&
+    !!ensuredCurrentUser.stripeAccount &&
+    !!ensuredCurrentUser.stripeAccount.id;
 
   const tabs = [
     {

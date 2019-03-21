@@ -104,7 +104,6 @@ propTypes.currentUser = shape({
       abbreviatedName: string.isRequired,
       bio: string,
     }).isRequired,
-    stripeConnected: bool.isRequired,
   }),
   profileImage: propTypes.image,
 });
