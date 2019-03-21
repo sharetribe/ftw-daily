@@ -283,6 +283,15 @@ propTypes.review = shape({
   subject: propTypes.user,
 });
 
+// A Stripe account entity
+propTypes.stripeAccount = shape({
+  id: propTypes.uuid.isRequired,
+  type: propTypes.value('stripeAccount').isRequired,
+  attributes: shape({
+    stripeAccountId: string.isRequired,
+  }),
+});
+
 export const LINE_ITEM_NIGHT = 'line-item/night';
 export const LINE_ITEM_DAY = 'line-item/day';
 export const LINE_ITEM_UNITS = 'line-item/units';
