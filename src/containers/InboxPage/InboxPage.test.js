@@ -22,13 +22,24 @@ describe('InboxPage', () => {
     const currentUserProvider = createCurrentUser('provider-user-id');
     const currentUserCustomer = createCurrentUser('customer-user-id');
 
+    const startBooking1 = new Date(Date.UTC(2017, 1, 15));
+    const endBooking1 = new Date(Date.UTC(2017, 1, 16));
+
     const booking1 = createBooking('booking1', {
-      start: new Date(Date.UTC(2017, 1, 15)),
-      end: new Date(Date.UTC(2017, 1, 16)),
+      start: startBooking1,
+      end: endBooking1,
+      displayStart: startBooking1,
+      displayEnd: endBooking1,
     });
+
+    const startBooking2 = new Date(Date.UTC(2017, 2, 15));
+    const endBooking2 = new Date(Date.UTC(2017, 2, 16));
+
     const booking2 = createBooking('booking2', {
-      start: new Date(Date.UTC(2017, 2, 15)),
-      end: new Date(Date.UTC(2017, 2, 16)),
+      start: startBooking2,
+      end: endBooking2,
+      displayStart: startBooking2,
+      displayEnd: endBooking2,
     });
 
     const ordersProps = {

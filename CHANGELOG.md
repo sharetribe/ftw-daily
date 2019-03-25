@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [add] Booking: use attributes `displayStart` and `displayEnd`, instead of reading booking period
+  directly from `start` and `end` attributes.
+  [#1050](https://github.com/sharetribe/flex-template-web/pull/1050)
 - [fix] A listing title that contained only stripped-off characters caused bugs in slug / pathName
   generation. [#1048](https://github.com/sharetribe/flex-template-web/pull/1048)
 - [change] Removed Node-engine setup from package.json. Fixed version was causing problems for quite

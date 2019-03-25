@@ -136,9 +136,13 @@ export const txState = (intl, tx, type) => {
 };
 
 const bookingData = (unitType, tx, isOrder, intl) => {
-  const { start, end } = tx.booking.attributes;
-  const startDate = dateFromAPIToLocalNoon(start);
-  const endDateRaw = dateFromAPIToLocalNoon(end);
+  // Attributes: displayStart and displayEnd can be used to differentiate shown time range
+  // from actual start and end times used for availability reservation. It can help in situations
+  // where there are preparation time needed between bookings.
+  // Read more: https://www.sharetribe.com/api-reference/#bookings
+  const { start, end, displayStart, displayEnd } = tx.booking.attributes;
+  const startDate = dateFromAPIToLocalNoon(displayStart || start);
+  const endDateRaw = dateFromAPIToLocalNoon(displayEnd || end);
   const isDaily = unitType === LINE_ITEM_DAY;
   const isUnits = unitType === LINE_ITEM_UNITS;
   const isSingleDay = isDaily && daysBetween(startDate, endDateRaw) === 1;
