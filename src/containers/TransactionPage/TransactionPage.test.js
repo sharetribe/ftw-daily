@@ -16,12 +16,16 @@ const noop = () => null;
 describe('TransactionPage - Sale', () => {
   it('matches snapshot', () => {
     const txId = 'tx-sale-1';
+    const start = new Date(Date.UTC(2017, 5, 10));
+    const end = new Date(Date.UTC(2017, 5, 13));
     const transaction = createTransaction({
       id: txId,
       lastTransition: TRANSITION_REQUEST,
       booking: createBooking('booking1', {
-        start: new Date(Date.UTC(2017, 5, 10)),
-        end: new Date(Date.UTC(2017, 5, 13)),
+        start,
+        end,
+        displayStart: start,
+        displayEnd: end,
       }),
       listing: createListing('listing1'),
       customer: createUser('customer1'),
@@ -68,12 +72,17 @@ describe('TransactionPage - Sale', () => {
 describe('TransactionPage - Order', () => {
   it('matches snapshot', () => {
     const txId = 'tx-order-1';
+    const start = new Date(Date.UTC(2017, 5, 10));
+    const end = new Date(Date.UTC(2017, 5, 13));
+
     const transaction = createTransaction({
       id: txId,
       lastTransition: TRANSITION_REQUEST,
       booking: createBooking('booking1', {
-        start: new Date(Date.UTC(2017, 5, 10)),
-        end: new Date(Date.UTC(2017, 5, 13)),
+        start,
+        end,
+        displayStart: start,
+        displayEnd: end,
       }),
       listing: createListing('listing1'),
       customer: createUser('customer1'),
