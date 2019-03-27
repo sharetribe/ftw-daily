@@ -7,7 +7,7 @@ import arrayMutators from 'final-form-arrays';
 import classNames from 'classnames';
 import config from '../../config';
 import { propTypes } from '../../util/types';
-import { isStripeInvalidPostalCode } from '../../util/errors';
+import { isStripeInvalidPostalCode, isStripeError } from '../../util/errors';
 import * as validators from '../../util/validators';
 import { Button, ExternalLink, FieldRadioButton, FieldSelect, Form } from '../../components';
 
@@ -85,6 +85,16 @@ const PayoutDetailsFormComponent = props => (
         error = (
           <div className={css.error}>
             <FormattedMessage id="PayoutDetailsForm.createStripeAccountFailedInvalidPostalCode" />
+          </div>
+        );
+      } else if (isStripeError(createStripeAccountError)) {
+        const stripeMessage = createStripeAccountError.apiErrors[0].meta.stripeMessage;
+        error = (
+          <div className={css.error}>
+            <FormattedMessage
+              id="PayoutDetailsForm.createStripeAccountFailedWithStripeError"
+              values={{ stripeMessage }}
+            />
           </div>
         );
       } else if (createStripeAccountError) {

@@ -557,6 +557,7 @@
   "PayoutDetailsForm.countryRequired": "This field is required",
   "PayoutDetailsForm.createStripeAccountFailed": "Whoops, something went wrong. Please try again.",
   "PayoutDetailsForm.createStripeAccountFailedInvalidPostalCode": "Whoops, check that the selected country and postal code are correct and try again.",
+  "PayoutDetailsForm.createStripeAccountFailedWithStripeError": "Whoops, something went wrong. Stripe returned an error message: \"{stripeMessage}\"",
   "PayoutDetailsForm.firstNameLabel": "First name",
   "PayoutDetailsForm.firstNamePlaceholder": "John",
   "PayoutDetailsForm.firstNameRequired": "This field is required",

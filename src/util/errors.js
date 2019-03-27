@@ -204,6 +204,14 @@ export const isStripeInvalidPostalCode = error => {
   });
 };
 
+export const isStripeError = error => {
+  return errorAPIErrors(error).some(apiError => {
+    // Stripe doesn't seem to give an error code for this specific
+    // case, so we have to recognize it from the message.
+    return !!(apiError.meta && apiError.meta.stripeMessage);
+  });
+};
+
 export const storableError = err => {
   const error = err || {};
   const { name, message, status, statusText } = error;
