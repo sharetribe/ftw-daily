@@ -6,7 +6,7 @@ import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { ensureCurrentUser } from '../../util/data';
 import { propTypes } from '../../util/types';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { stripeAccountClearError } from '../../ducks/user.duck';
+import { stripeAccountClearError } from '../../ducks/stripe.duck';
 import {
   LayoutSideNavigation,
   LayoutWrapperMain,
@@ -143,7 +143,8 @@ PayoutPreferencesPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { createStripeAccountError, currentUser } = state.user;
+  const { createStripeAccountError } = state.stripe;
+  const { currentUser } = state.user;
   const { payoutDetailsSaveInProgress, payoutDetailsSaved } = state.PayoutPreferencesPage;
   return {
     currentUser,
