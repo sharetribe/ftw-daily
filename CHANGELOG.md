@@ -14,6 +14,11 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [add] Complete rewrite to `PayoutDetailsForm` due to breaking changes in Stripe API.
+  [#1049](https://github.com/sharetribe/flex-template-web/pull/1049)
+  - You should track all your customizations to `PayoutDetailsForm` and related changes in
+    `user.duck.js` and elsewhere before merging this upstream-update.
+  - You should update Stripe API to "2019-02-19" or later
 - [add] Booking: use attributes `displayStart` and `displayEnd`, instead of reading booking period
   directly from `start` and `end` attributes.
   [#1050](https://github.com/sharetribe/flex-template-web/pull/1050)
