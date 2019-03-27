@@ -78,6 +78,8 @@ const currencyConfig = {
   currency,
   currencyDisplay: 'symbol',
   useGrouping: true,
+  // Note: you should change fraction digits to 0,
+  //       if the currency is not using subunits (like JPY).
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
 };

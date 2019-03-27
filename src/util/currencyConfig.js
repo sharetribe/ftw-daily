@@ -7,7 +7,7 @@ export const subUnitDivisors = {
   AUD: 100,
   CAD: 100,
   DKK: 100,
-  JPY: 100,
+  JPY: 1,
   SGD: 100,
   SEK: 100,
   CHF: 100,
