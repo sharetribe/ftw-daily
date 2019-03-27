@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] JPY currency was configured wrongly: it doesn't use subunits.
+  [#1051](https://github.com/sharetribe/flex-template-web/pull/1051)
 - [add] Complete rewrite to `PayoutDetailsForm` due to breaking changes in Stripe API.
   [#1049](https://github.com/sharetribe/flex-template-web/pull/1049)
   - You should track all your customizations to `PayoutDetailsForm` and related changes in
