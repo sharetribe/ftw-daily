@@ -1,8 +1,8 @@
 import React from 'react';
-import { bool, object, string } from 'prop-types';
-import { FieldSelect, FieldTextInput } from '../../components';
-import * as validators from '../../util/validators';
 import { intlShape } from 'react-intl';
+import { bool, object, string } from 'prop-types';
+import * as validators from '../../util/validators';
+import { FieldSelect, FieldTextInput } from '../../components';
 
 import { stripeCountryConfigs } from './PayoutDetailsForm';
 import css from './PayoutDetailsForm.css';
@@ -155,7 +155,7 @@ const PayoutDetailsAddress = props => {
           disabled={disabled}
           className={css.state}
           type="text"
-          autoComplete="state"
+          autoComplete="address-level1"
           label={stateLabel}
           placeholder={statePlaceholder}
           validate={stateRequired}
@@ -169,7 +169,7 @@ const PayoutDetailsAddress = props => {
           name={`${fieldId}.province`}
           disabled={disabled}
           className={css.selectCountry}
-          autoComplete="province"
+          autoComplete="address-level1"
           label={provinceLabel}
           validate={provinceRequired}
         >

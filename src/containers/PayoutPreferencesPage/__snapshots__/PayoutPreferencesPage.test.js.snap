@@ -170,6 +170,11 @@ exports[`PayoutPreferencesPage matches snapshot with Stripe not connected 1`] = 
         </p>
         <InjectIntl(PayoutDetailsFormComponent)
           createStripeAccountError={null}
+          currentUserId={
+            UUID {
+              "uuid": "stripe-not-connected",
+            }
+          }
           disabled={false}
           inProgress={false}
           onChange={[Function]}
@@ -269,6 +274,11 @@ exports[`PayoutPreferencesPage matches snapshot with details submitted 1`] = `
         </p>
         <InjectIntl(PayoutDetailsFormComponent)
           createStripeAccountError={null}
+          currentUserId={
+            UUID {
+              "uuid": "stripe-connected",
+            }
+          }
           disabled={true}
           inProgress={false}
           onChange={[Function]}

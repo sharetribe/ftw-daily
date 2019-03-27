@@ -6,7 +6,7 @@ import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { ensureCurrentUser } from '../../util/data';
 import { propTypes } from '../../util/types';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { stripeAccountClearError } from '../../ducks/user.duck';
+import { stripeAccountClearError } from '../../ducks/stripe.duck';
 import {
   LayoutSideNavigation,
   LayoutWrapperMain,
@@ -37,7 +37,10 @@ export const PayoutPreferencesPageComponent = props => {
 
   const ensuredCurrentUser = ensureCurrentUser(currentUser);
   const currentUserLoaded = !!ensuredCurrentUser.id;
-  const { stripeConnected } = ensuredCurrentUser.attributes;
+  const stripeConnected =
+    currentUserLoaded &&
+    !!ensuredCurrentUser.stripeAccount &&
+    !!ensuredCurrentUser.stripeAccount.id;
 
   const tabs = [
     {
@@ -76,11 +79,6 @@ export const PayoutPreferencesPageComponent = props => {
     message = <FormattedMessage id="PayoutPreferencesPage.stripeNotConnected" />;
   }
 
-  const handlePayoutDetailsSubmit = values => {
-    const { fname: firstName, lname: lastName, ...rest } = values;
-    onPayoutDetailsFormSubmit({ firstName, lastName, ...rest });
-  };
-
   const showForm =
     currentUserLoaded && (payoutDetailsSaveInProgress || payoutDetailsSaved || !stripeConnected);
   const form = showForm ? (
@@ -91,7 +89,8 @@ export const PayoutPreferencesPageComponent = props => {
       submitButtonText={intl.formatMessage({ id: 'PayoutPreferencesPage.submitButtonText' })}
       createStripeAccountError={createStripeAccountError}
       onChange={onPayoutDetailsFormChange}
-      onSubmit={handlePayoutDetailsSubmit}
+      onSubmit={onPayoutDetailsFormSubmit}
+      currentUserId={ensuredCurrentUser.id}
     />
   ) : null;
 
@@ -144,7 +143,8 @@ PayoutPreferencesPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { createStripeAccountError, currentUser } = state.user;
+  const { createStripeAccountError } = state.stripe;
+  const { currentUser } = state.user;
   const { payoutDetailsSaveInProgress, payoutDetailsSaved } = state.PayoutPreferencesPage;
   return {
     currentUser,

@@ -37,7 +37,6 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
                   "firstName": "customer1 first name",
                   "lastName": "customer1 last name",
                 },
-                "stripeConnected": true,
               },
               "id": UUID {
                 "uuid": "customer1",
@@ -242,7 +241,6 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
                   "firstName": "provider1 first name",
                   "lastName": "provider1 last name",
                 },
-                "stripeConnected": true,
               },
               "id": UUID {
                 "uuid": "provider1",

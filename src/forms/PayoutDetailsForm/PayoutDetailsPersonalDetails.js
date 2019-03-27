@@ -1,23 +1,40 @@
 import React from 'react';
-import { bool, string } from 'prop-types';
-import { FieldBirthdayInput, FieldTextInput } from '../../components';
+import { bool, node, object, oneOf, string } from 'prop-types';
+import { FormattedMessage, intlShape } from 'react-intl';
 import * as validators from '../../util/validators';
-import { intlShape } from 'react-intl';
+import { FieldBirthdayInput, FieldCheckbox, FieldTextInput } from '../../components';
 
-import { stripeCountryConfigs } from './PayoutDetailsForm';
+import * as normalizePhoneNumberUS from './normalizePhoneNumberUS';
 import css from './PayoutDetailsForm.css';
 
 const MIN_STRIPE_ACCOUNT_AGE = 18;
 
 const PayoutDetailsPersonalDetails = props => {
-  const { intl, disabled, values, country, fieldId } = props;
+  const {
+    intl,
+    disabled,
+    values,
+    country,
+    fieldId,
+    sectionTitle,
+    showEmailField,
+    showOrganizationTitleField,
+    showOwnerField,
+    showOwnershipPercentageField,
+    showPersonalIdNumberField,
+    showPhoneNumberField,
+  } = props;
 
-  const personalDetailsTitle = intl.formatMessage({
-    id:
-      fieldId === 'company' || fieldId === 'individual'
-        ? 'PayoutDetailsForm.personalDetailsTitle'
-        : 'PayoutDetailsForm.personalDetailsAdditionalOwnerTitle',
+  const organizationTitleLabel = intl.formatMessage({
+    id: 'PayoutDetailsForm.organizationTitleLabel',
   });
+  const organizationTitlePlaceholder = intl.formatMessage({
+    id: 'PayoutDetailsForm.organizationTitlePlaceholder',
+  });
+
+  const personalDetailsTitle = sectionTitle
+    ? sectionTitle
+    : intl.formatMessage({ id: 'PayoutDetailsForm.personalDetailsTitle' });
 
   const firstNameLabel = intl.formatMessage({ id: 'PayoutDetailsForm.firstNameLabel' });
   const firstNamePlaceholder = intl.formatMessage({
@@ -61,10 +78,6 @@ const PayoutDetailsPersonalDetails = props => {
     MIN_STRIPE_ACCOUNT_AGE
   );
 
-  const showPersonalIdNumber =
-    (country && stripeCountryConfigs(country).personalIdNumberRequired) ||
-    (country && stripeCountryConfigs(country).ssnLast4Required);
-
   const personalIdNumberRequired = validators.required(
     intl.formatMessage({
       id: `PayoutDetailsForm.personalIdNumberRequired`,
@@ -104,13 +117,45 @@ const PayoutDetailsPersonalDetails = props => {
     personalIdNumberValid = validators.composeValidators(personalIdNumberRequired, validHKID);
   }
 
+  const phoneLabel = intl.formatMessage({ id: 'PayoutDetailsForm.personalPhoneLabel' });
+  const phonePlaceholder = intl.formatMessage({ id: 'PayoutDetailsForm.personalPhonePlaceholder' });
+  const phoneNumberForUSRequired = validators.required(
+    intl.formatMessage({ id: 'PayoutDetailsForm.personalPhoneRequired' })
+  );
+
+  const emailLabel = intl.formatMessage({ id: 'PayoutDetailsForm.personalEmailLabel' });
+  const emailPlaceholder = intl.formatMessage({ id: 'PayoutDetailsForm.personalEmailPlaceholder' });
+  const emailRequired = validators.required(
+    intl.formatMessage({ id: 'PayoutDetailsForm.personalEmailRequired' })
+  );
+
+  const parseOwnershipPercentage = value => {
+    if (!value) {
+      return value;
+    }
+
+    const pattern = /^\d{0,3}(?:\.\d{1,2})?$/;
+    const hasCorrectFormat = value.match(pattern);
+    const floatValue = Number.parseFloat(value);
+    const isInRange = 0 <= floatValue && floatValue <= 100;
+
+    return hasCorrectFormat && isInRange
+      ? value
+      : hasCorrectFormat && floatValue < 0
+      ? 0
+      : hasCorrectFormat && floatValue > 100
+      ? 100
+      : value.substring(0, value.length - 1);
+  };
+
+  // Note: fname and lname are input names for browser autofill functionality.
   return (
     <div className={css.sectionContainer}>
       <h3 className={css.subTitle}>{personalDetailsTitle}</h3>
       <div className={css.formRow}>
         <FieldTextInput
           id={`${fieldId}.firstName`}
-          name={`${fieldId}.firstName`}
+          name={`${fieldId}.fname`}
           disabled={disabled}
           className={css.firstName}
           type="text"
@@ -121,7 +166,7 @@ const PayoutDetailsPersonalDetails = props => {
         />
         <FieldTextInput
           id={`${fieldId}.lastName`}
-          name={`${fieldId}.lastName`}
+          name={`${fieldId}.lname`}
           disabled={disabled}
           className={css.lastName}
           type="text"
@@ -131,6 +176,53 @@ const PayoutDetailsPersonalDetails = props => {
           validate={lastNameRequired}
         />
       </div>
+
+      {showOwnerField ? (
+        <fieldset className={css.roleField}>
+          <legend>
+            <FormattedMessage id="PayoutDetailsForm.role" />
+          </legend>
+          <FieldCheckbox
+            id={`${fieldId}.owner`}
+            className={css.textInputRow}
+            name={`${fieldId}.role`}
+            label={intl.formatMessage({ id: 'PayoutDetailsForm.owner' })}
+            value="owner"
+          />
+        </fieldset>
+      ) : null}
+
+      {showOwnershipPercentageField ? (
+        <FieldTextInput
+          id={`${fieldId}.ownershipPercentage`}
+          name={`${fieldId}.ownershipPercentage`}
+          className={css.ownershipPercentage}
+          disabled={disabled}
+          label={intl.formatMessage({ id: 'PayoutDetailsForm.ownershipPercentageLabel' })}
+          placeholder={intl.formatMessage({
+            id: 'PayoutDetailsForm.ownershipPercentagePlaceholder',
+          })}
+          type="number"
+          min={0}
+          max={100}
+          step="0.01"
+          parse={parseOwnershipPercentage}
+        />
+      ) : null}
+
+      {showOrganizationTitleField ? (
+        <FieldTextInput
+          id={`${fieldId}.title`}
+          name={`${fieldId}.title`}
+          className={css.textInputRow}
+          autoComplete="organization-title"
+          disabled={disabled}
+          label={organizationTitleLabel}
+          placeholder={organizationTitlePlaceholder}
+          type="text"
+        />
+      ) : null}
+
       <div className={css.formRow}>
         <FieldBirthdayInput
           id={`${fieldId}.birthDate`}
@@ -146,16 +238,45 @@ const PayoutDetailsPersonalDetails = props => {
         />
       </div>
 
-      {showPersonalIdNumber ? (
+      {showPersonalIdNumberField ? (
         <FieldTextInput
           id={`${fieldId}.personalIdNumber`}
           name={`${fieldId}.personalIdNumber`}
           disabled={disabled}
-          className={css.personalIdNumber}
+          className={css.textInputRow}
           type="text"
           label={personalIdNumberLabel}
           placeholder={personalIdNumberPlaceholder}
           validate={personalIdNumberValid}
+        />
+      ) : null}
+
+      {showPhoneNumberField ? (
+        <FieldTextInput
+          id={`${fieldId}.phone`}
+          name={`${fieldId}.phone`}
+          className={css.textInputRow}
+          autoComplete="tel-national"
+          disabled={disabled}
+          format={normalizePhoneNumberUS.format}
+          label={phoneLabel}
+          parse={normalizePhoneNumberUS.parse}
+          placeholder={phonePlaceholder}
+          type="text"
+          validate={phoneNumberForUSRequired}
+        />
+      ) : null}
+      {showEmailField ? (
+        <FieldTextInput
+          id={`${fieldId}.email`}
+          name={`${fieldId}.email`}
+          className={css.textInputRow}
+          autoComplete="email"
+          disabled={disabled}
+          label={emailLabel}
+          placeholder={emailPlaceholder}
+          type="text"
+          validate={emailRequired}
         />
       ) : null}
     </div>
@@ -165,13 +286,30 @@ PayoutDetailsPersonalDetails.defaultProps = {
   country: null,
   disabled: false,
   fieldId: null,
+  sectionTitle: null,
+  showEmailField: false,
+  showOrganizationTitleField: false,
+  showOwnerField: false,
+  showOwnershipPercentageField: false,
+  showPersonalIdNumberField: false,
+  showPhoneNumberField: false,
+  values: null,
 };
 
 PayoutDetailsPersonalDetails.propTypes = {
+  accountType: oneOf(['company', 'individual']).isRequired,
   country: string,
   disabled: bool,
   fieldId: string,
   intl: intlShape.isRequired,
+  sectionTitle: node,
+  showEmailField: bool,
+  showOrganizationTitleField: bool,
+  showOwnerField: bool,
+  showOwnershipPercentageField: bool,
+  showPersonalIdNumberField: bool,
+  showPhoneNumberField: bool,
+  values: object,
 };
 
 export default PayoutDetailsPersonalDetails;

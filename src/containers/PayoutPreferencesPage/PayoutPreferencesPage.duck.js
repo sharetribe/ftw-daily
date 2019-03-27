@@ -1,4 +1,5 @@
-import { fetchCurrentUser, createStripeAccount } from '../../ducks/user.duck';
+import { createStripeAccount } from '../../ducks/stripe.duck';
+import { fetchCurrentUser } from '../../ducks/user.duck';
 
 // ================ Action types ================ //
 

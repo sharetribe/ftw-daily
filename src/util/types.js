@@ -104,7 +104,6 @@ propTypes.currentUser = shape({
       abbreviatedName: string.isRequired,
       bio: string,
     }).isRequired,
-    stripeConnected: bool.isRequired,
   }),
   profileImage: propTypes.image,
 });
@@ -281,6 +280,15 @@ propTypes.review = shape({
   }).isRequired,
   author: propTypes.user,
   subject: propTypes.user,
+});
+
+// A Stripe account entity
+propTypes.stripeAccount = shape({
+  id: propTypes.uuid.isRequired,
+  type: propTypes.value('stripeAccount').isRequired,
+  attributes: shape({
+    stripeAccountId: string.isRequired,
+  }),
 });
 
 export const LINE_ITEM_NIGHT = 'line-item/night';

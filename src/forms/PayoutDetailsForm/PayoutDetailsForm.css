@@ -79,8 +79,9 @@
   width: calc(60% - 9px);
 }
 
-.taxId {
-  margin-top: 24px;
+.selectMCC,
+.textInputRow {
+  margin-bottom: 24px;
 }
 
 .error {
@@ -110,6 +111,10 @@
   @apply --marketplaceH4FontStyles;
 }
 
+.missingStripeKey {
+  color: var(--failColor);
+}
+
 .personalAddressContainer {
   margin-bottom: 28px;
 }
@@ -134,25 +139,6 @@
 
 .closeIcon {
   @apply --marketplaceModalCloseIcon;
-}
-
-.additionalOwnerWrapper {
-  margin-bottom: 35px;
-
-  @media (--viewportMedium) {
-    margin-bottom: 56px;
-  }
-}
-
-.additionalOwnerWrapper .sectionContainer {
-  margin-bottom: 24px;
-}
-
-.additionalOwnerLabel {
-  display: inline-block;
-}
-
-.closeIcon {
   margin-right: 5px;
 }
 
@@ -163,7 +149,40 @@
   padding-top: 1px;
 }
 
-.additionalOwnerInfo {
+.roleField {
+  border: 0;
+  padding: 0;
+  margin-bottom: 24px;
+}
+
+.ownershipPercentage {
+  position: relative;
+  max-width: 90px;
+  padding-right: 24px;
+  margin-bottom: 24px;
+  white-space: nowrap;
+
+  &:after {
+    content: '%';
+    position: absolute;
+    top: 36px;
+    right: 6px;
+  }
+}
+
+/* Company account opener */
+.accountOpenerWrapper {
+  margin-bottom: 35px;
+
+  @media (--viewportMedium) {
+    margin-bottom: 56px;
+  }
+}
+.accountOpenerInputsWrapper .sectionContainer {
+  margin-bottom: 24px;
+}
+
+.accountOpenerInfo {
   @apply --marketplaceH5FontStyles;
   color: var(--matterColorAnti);
   margin-top: 0;
@@ -179,6 +198,34 @@
   }
 }
 
-.missingStripeKey {
-  color: var(--failColor);
+/* Company owners and directors */
+.additionalPersonsWrapper {
+  margin-bottom: 35px;
+
+  @media (--viewportMedium) {
+    margin-bottom: 56px;
+  }
+}
+.additionalPersonWrapper .sectionContainer {
+  margin-bottom: 24px;
+}
+
+.additionalPersonLabel {
+  display: inline-block;
+}
+
+.additionalPersonInfo {
+  @apply --marketplaceH5FontStyles;
+  color: var(--matterColorAnti);
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 5px;
+  padding-bottom: 1px;
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 6px;
+    padding-bottom: 2px;
+  }
 }
