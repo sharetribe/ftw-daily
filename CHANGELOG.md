@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+## [v2.13.0] 2019-03-28
+
 - [add] Add translations for recent Stripe API related changes. (German will be included later.)
   [#1052](https://github.com/sharetribe/flex-template-web/pull/1052)
 - [fix] JPY currency was configured wrongly: it doesn't use subunits.
@@ -37,6 +39,8 @@ way to update this template, but currently, we follow a pattern:
 - [fix] FieldBirthdayInput: placeholder text was not selected by default.
   [#1039](https://github.com/sharetribe/flex-template-web/pull/1039)
 
+  [v2.13.0]: https://github.com/sharetribe/flex-template-web/compare/v2.12.1...v2.13.0
+
 ## [v2.12.0] 2019-02-28
 
 - [fix] Fix to PR [#1035](https://github.com/sharetribe/flex-template-web/pull/1035). In
@@ -57,7 +61,7 @@ way to update this template, but currently, we follow a pattern:
   refactored to work with `rootClassName` prop (PrimaryButton, SecondaryButton and
   InlineTextButton). [#1024](https://github.com/sharetribe/flex-template-web/pull/1024)
 
-  [v2.11.0]: https://github.com/sharetribe/flex-template-web/compare/v2.11.1...v2.12.0
+  [v2.12.0]: https://github.com/sharetribe/flex-template-web/compare/v2.11.1...v2.12.0
 
 ## [v2.11.1] 2019-02-21
 
