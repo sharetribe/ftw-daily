@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [add] a comment about category and amenities filters. They don't work out-of-the-box, extended
+  data needs a schema before it can work as a search filter.
+  [#1055](https://github.com/sharetribe/flex-template-web/pull/1055)
 - [fix] EditListingWizard: currentUser was null when the EditListingPage got reloaded causing
   TypeError. [#1056](https://github.com/sharetribe/flex-template-web/pull/1056)
 
