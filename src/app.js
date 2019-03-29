@@ -89,7 +89,7 @@ export const ClientApp = props => {
   return (
     <IntlProvider locale={config.locale} messages={localeMessages}>
       <Provider store={store}>
-        <BrowserRouter>
+        <BrowserRouter basename={config.basename}>
           <Routes routes={routeConfiguration()} />
         </BrowserRouter>
       </Provider>
