@@ -93,6 +93,9 @@ const streetAddress = 'Bulevardi 14';
 // Canonical root url is needed in social media sharing and SEO optimization purposes.
 const canonicalRootURL = process.env.REACT_APP_CANONICAL_ROOT_URL;
 
+// subdirectory support
+const basename = process.env.REACT_APP_BASENAME || "";
+
 // Site title is needed in meta tags (bots and social media sharing reads those)
 const siteTitle = 'Saunatime';
 
