@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] EditListingWizard: currentUser was null when the EditListingPage got reloaded causing
+  TypeError. [#1056](https://github.com/sharetribe/flex-template-web/pull/1056)
+
 ## [v2.13.0] 2019-03-28
 
 - [add] Add translations for recent Stripe API related changes. (German will be included later.)

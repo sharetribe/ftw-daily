@@ -10,7 +10,7 @@ import {
   LISTING_PAGE_PARAM_TYPE_NEW,
   LISTING_PAGE_PARAM_TYPES,
 } from '../../util/urlHelpers';
-import { ensureListing } from '../../util/data';
+import { ensureListing, ensureCurrentUser } from '../../util/data';
 import { PayoutDetailsForm } from '../../forms';
 import { Modal, NamedRedirect, Tabs } from '../../components';
 
@@ -288,7 +288,7 @@ class EditListingWizard extends Component {
               className={css.payoutDetails}
               inProgress={fetchInProgress}
               createStripeAccountError={errors ? errors.createStripeAccountError : null}
-              currentUserId={this.props.currentUser.id}
+              currentUserId={ensureCurrentUser(this.props.currentUser).id}
               onChange={onPayoutDetailsFormChange}
               onSubmit={this.handlePayoutSubmit}
             />
