@@ -35,15 +35,13 @@ export const EditListingPricingFormComponent = props => (
       const isNightly = unitType === LINE_ITEM_NIGHT;
       const isDaily = unitType === LINE_ITEM_DAY;
 
-      const translationKey = isNightly
-        ? 'EditListingPricingForm.pricePerNight'
-        : isDaily
-        ? 'EditListingPricingForm.pricePerDay'
-        : 'EditListingPricingForm.pricePerUnit';
+      const currencyUnit = intl.formatMessage({
+        id: ['Currency.Code.' + config.currencyConfig.currency]
+      })
 
       const pricePerUnitMessage = intl.formatMessage({
-        id: translationKey,
-      });
+        id: translationKey
+      }) + (translationKey == "EditListingPricingForm.pricePerUnit" ? currencyUnit : "");
 
       const pricePlaceholderMessage = intl.formatMessage({
         id: 'EditListingPricingForm.priceInputPlaceholder',
