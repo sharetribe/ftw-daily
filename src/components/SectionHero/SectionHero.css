@@ -101,8 +101,6 @@
   @apply --marketplaceButtonStyles;
   @apply --SectionHero_animation;
 
-  font-family: gilroyextrabold;
-
   animation-delay: 0.8s;
 
   @media (--viewportMedium) {

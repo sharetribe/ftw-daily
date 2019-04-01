@@ -157,7 +157,7 @@
   /* ================ Buttons ================ */
 
   --marketplaceButtonFontStyles: {
-    font-family: sofiapro;
+    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightSemiBold);
     font-size: 18px;
     line-height: 24px;
