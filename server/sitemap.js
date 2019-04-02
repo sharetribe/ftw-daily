@@ -31,18 +31,6 @@ const domain = rootURL => {
 };
 
 /**
- * Resolves the port number from a URL. If the port
- * can not be found `undefined` will be returned.
- */
-const port = rootURL => {
-  if (!rootURL) {
-    return 'INVALID_URL';
-  }
-
-  return domainAndPort(rootURL).split(':')[1];
-};
-
-/**
  * Return a structure for sitemap.xml and robots.txt to be used by the
  * express-sitemap library. Uses the canonical URL value from env
  * config for domain and port information.
@@ -53,7 +41,7 @@ exports.sitemapStructure = () => {
   return {
     url: domain(process.env.REACT_APP_CANONICAL_ROOT_URL),
     http: USING_SSL ? 'https' : 'http',
-    port: port(process.env.REACT_APP_CANONICAL_ROOT_URL),
+    port: process.env.PORT,
     sitemap: path.join(buildPath, 'static', 'sitemap.xml'),
     robots: path.join(buildPath, 'robots.txt'),
     sitemapSubmission: '/static/sitemap.xml',
