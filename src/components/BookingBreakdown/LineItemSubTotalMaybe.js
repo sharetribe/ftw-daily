@@ -44,13 +44,9 @@ const LineItemSubTotalMaybe = props => {
     item => item.code === unitType && !item.reversal
   );
 
-  if (!unitPurchase) {
-    throw new Error(`LineItemSubTotalMaybe: lineItem (${unitType}) missing`);
-  }
+  const formattedSubTotal = unitPurchase ? formatMoney(intl, unitPurchase.lineTotal) : null;
 
-  const formattedSubTotal = formatMoney(intl, unitPurchase.lineTotal);
-
-  return showSubTotal ? (
+  return formattedSubTotal && showSubTotal ? (
     <div className={css.lineItem}>
       <span className={css.itemLabel}>
         <FormattedMessage id="BookingBreakdown.subTotal" />

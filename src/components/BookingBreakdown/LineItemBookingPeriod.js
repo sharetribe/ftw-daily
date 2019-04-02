@@ -59,12 +59,8 @@ const LineItemBookingPeriod = props => {
     item => item.code === unitType && !item.reversal
   );
 
-  if (!unitPurchase) {
-    throw new Error(`LineItemBookingPeriod: lineItem (${unitType}) missing`);
-  }
-
   const useQuantityForDayCount = isNightly || isDaily;
-  const count = useQuantityForDayCount ? unitPurchase.quantity.toFixed() : dayCount;
+  const count = useQuantityForDayCount && unitPurchase ? unitPurchase.quantity.toFixed() : dayCount;
 
   const unitCountMessage = (
     <FormattedHTMLMessage

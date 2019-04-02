@@ -307,6 +307,17 @@ const LINE_ITEMS = [
 
 propTypes.bookingUnitType = oneOf([LINE_ITEM_NIGHT, LINE_ITEM_DAY, LINE_ITEM_UNITS]);
 
+const requiredLineItemPropType = (props, propName, componentName) => {
+  const prop = props[propName];
+
+  if (!prop || prop === '') {
+    return new Error(`Missing line item code prop from ${componentName}.`);
+  }
+  if (!/^line-item\/.+/.test(prop)) {
+    return new Error(`Invalid line item code value ${prop} passed to ${componentName}.`);
+  }
+};
+
 // Denormalised transaction object
 propTypes.transaction = shape({
   id: propTypes.uuid.isRequired,
@@ -323,7 +334,7 @@ propTypes.transaction = shape({
 
     lineItems: arrayOf(
       shape({
-        code: oneOf(LINE_ITEMS).isRequired,
+        code: requiredLineItemPropType,
         includeFor: arrayOf(oneOf(['customer', 'provider'])).isRequired,
         quantity: instanceOf(Decimal),
         unitPrice: propTypes.money.isRequired,

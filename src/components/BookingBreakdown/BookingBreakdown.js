@@ -12,7 +12,7 @@ import {
   LINE_ITEM_PROVIDER_COMMISSION,
 } from '../../util/types';
 
-import LineItemUnitPrice from './LineItemUnitPrice';
+import LineItemUnitPriceMaybe from './LineItemUnitPriceMaybe';
 import LineItemBookingPeriod from './LineItemBookingPeriod';
 import LineItemUnitsMaybe from './LineItemUnitsMaybe';
 import LineItemSubTotalMaybe from './LineItemSubTotalMaybe';
@@ -40,7 +40,7 @@ export const BookingBreakdownComponent = props => {
 
   return (
     <div className={classes}>
-      <LineItemUnitPrice transaction={transaction} unitType={unitType} intl={intl} />
+      <LineItemUnitPriceMaybe transaction={transaction} unitType={unitType} intl={intl} />
       <LineItemBookingPeriod transaction={transaction} booking={booking} unitType={unitType} />
       <LineItemUnitsMaybe transaction={transaction} unitType={unitType} />
 
