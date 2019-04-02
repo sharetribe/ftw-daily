@@ -33,7 +33,11 @@ const PayoutDetailsIndividualAccountComponent = props => {
   const showMCCForUSField = !!individualConfig.mccForUS;
   const showBusinssProfileSection = showBusinessURLField || showMCCForUSField;
 
-  const hasBusinessURL = values && values.businessProfile && values.businessProfile.url;
+  const hasBusinessURL =
+    values &&
+    values.individual &&
+    values.individual.businessProfile &&
+    values.individual.businessProfile.url;
 
   // Use user profile page as business_url on this marketplace
   // or just fake it if it's dev environment using Stripe test endpoints.

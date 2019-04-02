@@ -14,6 +14,10 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] US individual accounts had a non-editable business url in PayoutDetailsForm. It was probably
+  OK, but there wasn't any reason to for it.
+  [#1061](https://github.com/sharetribe/flex-template-web/pull/1061)
+
 ## [v2.13.1] 2019-03-29
 
 - [add] a comment about category and amenities filters. They don't work out-of-the-box, extended
