@@ -37,10 +37,17 @@ export const amenities = [
   },
 ];
 
+// export const categories = [
+//   { key: 'smoke', label: 'Smoke' },
+//   { key: 'electric', label: 'Electric' },
+//   { key: 'wood', label: 'Wood' },
+//   { key: 'other', label: 'Other' },
+// ];
+
 export const categories = [
-  { key: 'smoke', label: 'Smoke' },
-  { key: 'electric', label: 'Electric' },
-  { key: 'wood', label: 'Wood' },
+  { key: 'springen', label: 'Springen' },
+  { key: 'dressur', label: 'Dressur' },
+  { key: 'freizeit', label: 'Freizeit' },
   { key: 'other', label: 'Other' },
 ];
 
