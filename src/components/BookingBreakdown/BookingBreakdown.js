@@ -54,7 +54,7 @@ export const BookingBreakdownComponent = props => {
         userRole={userRole}
         intl={intl}
       />
-      <LineItemRefundMaybe transaction={transaction} unitType={unitType} intl={intl} />
+      <LineItemRefundMaybe transaction={transaction} intl={intl} />
 
       <LineItemCustomerCommissionMaybe
         transaction={transaction}
