@@ -1,6 +1,7 @@
 import * as custom from './marketplace-custom-config.js';
 import defaultLocationSearches from './default-location-searches';
 import { stripePublishableKey, stripeSupportedCountries } from './stripe-config';
+import { currencyConfiguration } from './currency-config';
 
 const env = process.env.REACT_APP_ENV;
 const dev = process.env.REACT_APP_ENV === 'development';
@@ -59,6 +60,10 @@ const sdkTransitVerbose = process.env.REACT_APP_SHARETRIBE_SDK_TRANSIT_VERBOSE =
 
 const currency = process.env.REACT_APP_SHARETRIBE_MARKETPLACE_CURRENCY;
 
+// Currency formatting options.
+// See: https://github.com/yahoo/react-intl/wiki/API#formatnumber
+const currencyConfig = currencyConfiguration(currency);
+
 // Listing minimum price in currency sub units, e.g. cents.
 // 0 means no restriction to the price
 const listingMinimumPriceSubUnits = 0;
@@ -68,21 +73,6 @@ const sentryDsn = process.env.REACT_APP_SENTRY_DSN;
 
 // If webapp is using SSL (i.e. it's behind 'https' protocol)
 const usingSSL = process.env.REACT_APP_SHARETRIBE_USING_SSL === 'true';
-
-// Currency formatting options.
-// See: https://github.com/yahoo/react-intl/wiki/API#formatnumber
-//
-// TODO: Remove this and hide formating within the util/currency module
-const currencyConfig = {
-  style: 'currency',
-  currency,
-  currencyDisplay: 'symbol',
-  useGrouping: true,
-  // Note: you should change fraction digits to 0,
-  //       if the currency is not using subunits (like JPY).
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-};
 
 // Address information is used in SEO schema for Organization (http://schema.org/PostalAddress)
 const addressCountry = 'FI';
@@ -205,8 +195,8 @@ const config = {
   },
   sortSearchByDistance,
   currency,
-  listingMinimumPriceSubUnits,
   currencyConfig,
+  listingMinimumPriceSubUnits,
   stripe: {
     publishableKey: stripePublishableKey,
     supportedCountries: stripeSupportedCountries,

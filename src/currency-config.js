@@ -18,3 +18,30 @@ export const subUnitDivisors = {
   SGD: 100,
   USD: 100,
 };
+
+// Currency formatting options.
+// See: https://github.com/yahoo/react-intl/wiki/API#formatnumber
+export const currencyConfiguration = currency => {
+  if (!subUnitDivisors[currency]) {
+    throw new Error(`Configuration missing for currency: ${currency}.`);
+  }
+
+  return subUnitDivisors[currency] === 1
+    ? {
+        style: 'currency',
+        currency,
+        currencyDisplay: 'symbol',
+        useGrouping: true,
+        // If the currency is not using subunits (like JPY), remove fractions.
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      }
+    : {
+        style: 'currency',
+        currency,
+        currencyDisplay: 'symbol',
+        useGrouping: true,
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      };
+};
