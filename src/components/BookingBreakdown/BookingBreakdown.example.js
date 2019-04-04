@@ -497,3 +497,135 @@ export const UnitsType = {
     }),
   },
 };
+
+export const CustomPricing = {
+  component: BookingBreakdown,
+  props: {
+    userRole: 'customer',
+    unitType: LINE_ITEM_NIGHT,
+    transaction: exampleTransaction({
+      payinTotal: new Money(12800, CURRENCY),
+      payoutTotal: new Money(12600, CURRENCY),
+      lineItems: [
+        {
+          code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
+          quantity: new Decimal(2),
+          unitPrice: new Money(4500, CURRENCY),
+          lineTotal: new Money(9000, CURRENCY),
+          reversal: false,
+        },
+        {
+          code: 'line-item/car-cleaning',
+          includeFor: ['customer', 'provider'],
+          quantity: new Decimal(1),
+          unitPrice: new Money(5000, CURRENCY),
+          lineTotal: new Money(5000, CURRENCY),
+          reversal: false,
+        },
+        {
+          code: 'line-item/season-discount',
+          includeFor: ['customer', 'provider'],
+          percentage: new Decimal(-10),
+          unitPrice: new Money(14000, CURRENCY),
+          lineTotal: new Money(-1400, CURRENCY),
+          reversal: false,
+        },
+        {
+          code: 'line-item/customer-commission',
+          includeFor: ['customer'],
+          percentage: new Decimal(10),
+          unitPrice: new Money(2000, CURRENCY),
+          lineTotal: new Money(200, CURRENCY),
+          reversal: false,
+        },
+      ],
+    }),
+    booking: exampleBooking({
+      start: new Date(Date.UTC(2017, 3, 14)),
+      end: new Date(Date.UTC(2017, 3, 16)),
+    }),
+  },
+};
+
+export const CustomPricingWithRefund = {
+  component: BookingBreakdown,
+  props: {
+    userRole: 'customer',
+    unitType: LINE_ITEM_NIGHT,
+    transaction: exampleTransaction({
+      payinTotal: new Money(0, CURRENCY),
+      payoutTotal: new Money(0, CURRENCY),
+      lineItems: [
+        {
+          code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
+          quantity: new Decimal(2),
+          unitPrice: new Money(4500, CURRENCY),
+          lineTotal: new Money(9000, CURRENCY),
+          reversal: false,
+        },
+        {
+          code: 'line-item/night',
+          includeFor: ['customer', 'provider'],
+          quantity: new Decimal(-2),
+          unitPrice: new Money(4500, CURRENCY),
+          lineTotal: new Money(-9000, CURRENCY),
+          reversal: true,
+        },
+        {
+          code: 'line-item/car-cleaning',
+          includeFor: ['customer', 'provider'],
+          quantity: new Decimal(1),
+          unitPrice: new Money(5000, CURRENCY),
+          lineTotal: new Money(5000, CURRENCY),
+          reversal: false,
+        },
+        {
+          code: 'line-item/car-cleaning',
+          includeFor: ['customer', 'provider'],
+          quantity: new Decimal(-1),
+          unitPrice: new Money(5000, CURRENCY),
+          lineTotal: new Money(-5000, CURRENCY),
+          reversal: true,
+        },
+        {
+          code: 'line-item/season-discount',
+          includeFor: ['customer', 'provider'],
+          percentage: new Decimal(-10),
+          unitPrice: new Money(14000, CURRENCY),
+          lineTotal: new Money(-1400, CURRENCY),
+          reversal: false,
+        },
+        {
+          code: 'line-item/season-discount',
+          includeFor: ['customer', 'provider'],
+          percentage: new Decimal(10),
+          unitPrice: new Money(14000, CURRENCY),
+          lineTotal: new Money(1400, CURRENCY),
+          reversal: true,
+        },
+        {
+          code: 'line-item/customer-commission',
+          includeFor: ['customer'],
+          percentage: new Decimal(10),
+          unitPrice: new Money(2000, CURRENCY),
+          lineTotal: new Money(200, CURRENCY),
+          reversal: false,
+        },
+        {
+          code: 'line-item/customer-commission',
+          includeFor: ['customer'],
+          percentage: new Decimal(-10),
+          unitPrice: new Money(2000, CURRENCY),
+          lineTotal: new Money(-200, CURRENCY),
+          reversal: true,
+        },
+      ],
+    }),
+    booking: exampleBooking({
+      start: new Date(Date.UTC(2017, 3, 14)),
+      end: new Date(Date.UTC(2017, 3, 16)),
+    }),
+  },
+};
