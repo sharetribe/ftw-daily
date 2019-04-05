@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+## [v2.14.0] 2019-04-05
+
 - [add] German translations for recent PayoutDetailsForm changes.
   [#1064](https://github.com/sharetribe/flex-template-web/pull/1064)
 - [add] Added NZD and HKD subunit divisors and refactored currency configuration.
@@ -23,6 +25,8 @@ way to update this template, but currently, we follow a pattern:
 - [fix] US individual accounts had a non-editable business url in PayoutDetailsForm. It was probably
   OK, but there wasn't any reason to for it.
   [#1061](https://github.com/sharetribe/flex-template-web/pull/1061)
+
+  [v2.14.0]: https://github.com/sharetribe/flex-template-web/compare/v2.13.1...v2.14.0
 
 ## [v2.13.1] 2019-03-29
 
