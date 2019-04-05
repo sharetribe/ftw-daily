@@ -32,6 +32,21 @@
   justify-content: space-between;
 }
 
+.subTotalLineItem {
+  @apply --marketplaceH4FontStyles;
+  font-weight: var(--fontWeightBold);
+
+  margin: 4px 0 1px 0;
+
+  @media (--viewportMedium) {
+    margin: 6px 0 9px 0;
+  }
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .itemLabel {
   flex: 1;
   margin-top: 1px; /* align with baseline */

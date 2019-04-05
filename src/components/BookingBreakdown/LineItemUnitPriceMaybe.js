@@ -5,7 +5,7 @@ import { LINE_ITEM_NIGHT, LINE_ITEM_DAY, propTypes } from '../../util/types';
 
 import css from './BookingBreakdown.css';
 
-const LineItemUnitPrice = props => {
+const LineItemUnitPriceMaybe = props => {
   const { transaction, unitType, intl } = props;
   const isNightly = unitType === LINE_ITEM_NIGHT;
   const isDaily = unitType === LINE_ITEM_DAY;
@@ -19,26 +19,22 @@ const LineItemUnitPrice = props => {
     item => item.code === unitType && !item.reversal
   );
 
-  if (!unitPurchase) {
-    throw new Error(`LineItemUnitPrice: lineItem (${unitType}) missing`);
-  }
+  const formattedUnitPrice = unitPurchase ? formatMoney(intl, unitPurchase.unitPrice) : null;
 
-  const formattedUnitPrice = formatMoney(intl, unitPurchase.unitPrice);
-
-  return (
+  return formattedUnitPrice ? (
     <div className={css.lineItem}>
       <span className={css.itemLabel}>
         <FormattedMessage id={translationKey} />
       </span>
       <span className={css.itemValue}>{formattedUnitPrice}</span>
     </div>
-  );
+  ) : null;
 };
 
-LineItemUnitPrice.propTypes = {
+LineItemUnitPriceMaybe.propTypes = {
   transaction: propTypes.transaction.isRequired,
   unitType: propTypes.bookingUnitType.isRequired,
   intl: intlShape.isRequired,
 };
 
-export default LineItemUnitPrice;
+export default LineItemUnitPriceMaybe;

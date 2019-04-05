@@ -12,7 +12,7 @@ import {
   LINE_ITEM_PROVIDER_COMMISSION,
 } from '../../util/types';
 
-import LineItemUnitPrice from './LineItemUnitPrice';
+import LineItemUnitPriceMaybe from './LineItemUnitPriceMaybe';
 import LineItemBookingPeriod from './LineItemBookingPeriod';
 import LineItemUnitsMaybe from './LineItemUnitsMaybe';
 import LineItemSubTotalMaybe from './LineItemSubTotalMaybe';
@@ -22,6 +22,8 @@ import LineItemProviderCommissionMaybe from './LineItemProviderCommissionMaybe';
 import LineItemProviderCommissionRefundMaybe from './LineItemProviderCommissionRefundMaybe';
 import LineItemRefundMaybe from './LineItemRefundMaybe';
 import LineItemTotalPrice from './LineItemTotalPrice';
+import LineItemUnknownItemsMaybe from './LineItemUnknownItemsMaybe';
+
 import css from './BookingBreakdown.css';
 
 export const BookingBreakdownComponent = props => {
@@ -40,9 +42,11 @@ export const BookingBreakdownComponent = props => {
 
   return (
     <div className={classes}>
-      <LineItemUnitPrice transaction={transaction} unitType={unitType} intl={intl} />
+      <LineItemUnitPriceMaybe transaction={transaction} unitType={unitType} intl={intl} />
       <LineItemBookingPeriod transaction={transaction} booking={booking} unitType={unitType} />
       <LineItemUnitsMaybe transaction={transaction} unitType={unitType} />
+
+      <LineItemUnknownItemsMaybe transaction={transaction} intl={intl} />
 
       <LineItemSubTotalMaybe
         transaction={transaction}
@@ -50,7 +54,7 @@ export const BookingBreakdownComponent = props => {
         userRole={userRole}
         intl={intl}
       />
-      <LineItemRefundMaybe transaction={transaction} unitType={unitType} intl={intl} />
+      <LineItemRefundMaybe transaction={transaction} intl={intl} />
 
       <LineItemCustomerCommissionMaybe
         transaction={transaction}
