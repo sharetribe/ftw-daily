@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [add] German translations for recent PayoutDetailsForm changes.
+  [#1064](https://github.com/sharetribe/flex-template-web/pull/1064)
 - [add] Added NZD and HKD subunit divisors and refactored currency configuration.
   [#1063](https://github.com/sharetribe/flex-template-web/pull/1063)
 - [add] Add support for arbitrary line items.
