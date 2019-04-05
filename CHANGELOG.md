@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [add] Add support for arbitrary line items.
+  [#1062](https://github.com/sharetribe/flex-template-web/pull/1062)
 - [fix] US individual accounts had a non-editable business url in PayoutDetailsForm. It was probably
   OK, but there wasn't any reason to for it.
   [#1061](https://github.com/sharetribe/flex-template-web/pull/1061)
