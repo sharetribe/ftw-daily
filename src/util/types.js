@@ -118,6 +118,17 @@ const userAttributes = shape({
   }),
 });
 
+// Listing queries can include author.
+// Banned and deleted are not relevant then
+// since banned and deleted users can't have listings.
+const authorAttributes = shape({
+  profile: shape({
+    displayName: string.isRequired,
+    abbreviatedName: string.isRequired,
+    bio: string,
+  }),
+});
+
 const deletedUserAttributes = shape({
   deleted: propTypes.value(true).isRequired,
 });
@@ -130,7 +141,12 @@ const bannedUserAttributes = shape({
 propTypes.user = shape({
   id: propTypes.uuid.isRequired,
   type: propTypes.value('user').isRequired,
-  attributes: oneOfType([userAttributes, deletedUserAttributes, bannedUserAttributes]).isRequired,
+  attributes: oneOfType([
+    userAttributes,
+    authorAttributes,
+    deletedUserAttributes,
+    bannedUserAttributes,
+  ]).isRequired,
   profileImage: propTypes.image,
 });
 
@@ -148,12 +164,12 @@ const LISTING_STATES = [
 
 const listingAttributes = shape({
   title: string.isRequired,
-  description: string.isRequired,
+  description: string,
   geolocation: propTypes.latlng,
-  deleted: propTypes.value(false).isRequired,
-  state: oneOf(LISTING_STATES).isRequired,
+  deleted: propTypes.value(false),
+  state: oneOf(LISTING_STATES),
   price: propTypes.money,
-  publicData: object.isRequired,
+  publicData: object,
 });
 
 const AVAILABILITY_PLAN_DAY = 'availability-plan/day';
