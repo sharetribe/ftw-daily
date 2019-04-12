@@ -8,7 +8,7 @@ import css from './SectionRulesMaybe.css';
 const SectionRulesMaybe = props => {
   const { className, rootClassName, publicData } = props;
   const classes = classNames(rootClassName || css.root, className);
-  return publicData.rules ? (
+  return publicData && publicData.rules ? (
     <div className={classes}>
       <h2 className={css.title}>
         <FormattedMessage id="ListingPage.rulesTitle" />
@@ -25,7 +25,7 @@ SectionRulesMaybe.propTypes = {
   rootClassName: string,
   publicData: shape({
     rules: string,
-  }).isRequired,
+  }),
 };
 
 export default SectionRulesMaybe;

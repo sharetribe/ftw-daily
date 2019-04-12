@@ -14,6 +14,11 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [add] Use sparse fields on SearchPage to reduce data load.
+  [#1066](https://github.com/sharetribe/flex-template-web/pull/1066)
+  - NOTE: if you need more fields on `ListingCard` than title, price and geolocation - you need to
+    add those to `loadData` function.
+
 ## [v2.14.0] 2019-04-05
 
 - [add] German translations for recent PayoutDetailsForm changes.

@@ -4,8 +4,13 @@ import { PropertyGroup } from '../../components';
 
 import css from './ListingPage.css';
 
-const SectionFeatures = props => {
-  const { options, selectedOptions } = props;
+const SectionFeaturesMaybe = props => {
+  const { options, publicData } = props;
+  if (!publicData) {
+    return null;
+  }
+
+  const selectedOptions = publicData && publicData.amenities ? publicData.amenities : [];
   return (
     <div className={css.sectionFeatures}>
       <h2 className={css.featuresTitle}>
@@ -21,4 +26,4 @@ const SectionFeatures = props => {
   );
 };
 
-export default SectionFeatures;
+export default SectionFeaturesMaybe;
