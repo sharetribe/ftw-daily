@@ -5,7 +5,7 @@ import { EnquiryForm } from '../../forms';
 
 import css from './ListingPage.css';
 
-const SectionHost = props => {
+const SectionHostMaybe = props => {
   const {
     title,
     listing,
@@ -19,6 +19,11 @@ const SectionHost = props => {
     currentUser,
     onManageDisableScrolling,
   } = props;
+
+  if (!listing.author) {
+    return null;
+  }
+
   return (
     <div id="host" className={css.sectionHost}>
       <h2 className={css.yourHostHeading}>
@@ -46,4 +51,4 @@ const SectionHost = props => {
   );
 };
 
-export default SectionHost;
+export default SectionHostMaybe;

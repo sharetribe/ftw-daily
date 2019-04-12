@@ -22,7 +22,7 @@ class SectionMapMaybe extends Component {
       return null;
     }
 
-    const address = publicData.location ? publicData.location.address : '';
+    const address = publicData && publicData.location ? publicData.location.address : '';
     const classes = classNames(rootClassName || css.sectionMap, className);
     const cacheKey = listingId ? `${listingId.uuid}_${geolocation.lat}_${geolocation.lng}` : null;
 
