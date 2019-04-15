@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [add] Use sparse fields on InboxPage query to reduce data load.
+  [#1067](https://github.com/sharetribe/flex-template-web/pull/1067)
+  - NOTE: if you need more fields on `InboxPage`, you need to add those to `loadData` function.
 - [add] Use sparse fields on SearchPage to reduce data load.
   [#1066](https://github.com/sharetribe/flex-template-web/pull/1066)
   - NOTE: if you need more fields on `ListingCard` than title, price and geolocation - you need to

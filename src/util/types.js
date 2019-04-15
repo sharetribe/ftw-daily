@@ -339,7 +339,7 @@ propTypes.transaction = shape({
   id: propTypes.uuid.isRequired,
   type: propTypes.value('transaction').isRequired,
   attributes: shape({
-    createdAt: instanceOf(Date).isRequired,
+    createdAt: instanceOf(Date),
     lastTransitionedAt: instanceOf(Date).isRequired,
     lastTransition: oneOf(TRANSITIONS).isRequired,
 
@@ -357,7 +357,7 @@ propTypes.transaction = shape({
         lineTotal: propTypes.money.isRequired,
         reversal: bool.isRequired,
       })
-    ).isRequired,
+    ),
     transitions: arrayOf(propTypes.transition).isRequired,
   }),
   booking: propTypes.booking,
