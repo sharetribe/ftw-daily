@@ -75,26 +75,17 @@ const nextMonthFn = currentMoment =>
     .add(1, 'months')
     .startOf('month');
 
-// Get the start and end Dates in UTC
-const dateStartAndEndInUTC = date => {
+// Get the start and end Dates
+const dateStartAndEnd = date => {
   const start = moment(date)
-    .utc()
     .startOf('day')
     .toDate();
   const end = moment(date)
-    .utc()
     .add(1, 'days')
     .startOf('day')
     .toDate();
   return { start, end };
 };
-
-const momentToUTCDate = dateMoment =>
-  dateMoment
-    .clone()
-    .utc()
-    .add(dateMoment.utcOffset(), 'minutes')
-    .toDate();
 
 // outside range -><- today ... today+MAX_AVAILABILITY_EXCEPTIONS_RANGE -1 -><- outside range
 const isDateOutsideRange = date => {
@@ -119,10 +110,9 @@ const isBooked = (bookings, day) => {
     const booking = ensureBooking(b);
     const start = booking.attributes.start;
     const end = booking.attributes.end;
-    const dayInUTC = day.clone().utc();
 
     // '[)' means that the range start is inclusive and range end is exclusive
-    return dayInUTC.isBetween(moment(start).utc(), moment(end).utc(), null, '[)');
+    return day.isBetween(moment(start), moment(end), null, '[)');
   });
 };
 
@@ -130,8 +120,7 @@ const findException = (exceptions, day) => {
   return exceptions.find(exception => {
     const availabilityException = ensureAvailabilityException(exception.availabilityException);
     const start = availabilityException.attributes.start;
-    const dayInUTC = day.clone().utc();
-    return isSameDay(moment(start).utc(), dayInUTC);
+    return isSameDay(moment(start), day);
   });
 };
 
@@ -234,14 +223,14 @@ class ManageAvailabilityCalendar extends Component {
     if (isMonthInRange(monthMoment, TODAY_MOMENT, END_OF_RANGE_MOMENT)) {
       // Use "today", if the first day of given month is in the past
       const startMoment = isPast(monthMoment) ? TODAY_MOMENT : monthMoment;
-      const start = momentToUTCDate(startMoment);
+      const start = startMoment.toDate();
 
       // Use END_OF_RANGE_MOMENT, if the first day of the next month is too far in the future
       const nextMonthMoment = nextMonthFn(monthMoment);
       const endMoment = isAfterEndOfRange(nextMonthMoment)
         ? END_OF_RANGE_MOMENT.clone().add(1, 'days')
         : nextMonthMoment;
-      const end = momentToUTCDate(endMoment);
+      const end = endMoment.toDate();
 
       // Fetch AvailabilityExceptions for this month
       availability.onFetchAvailabilityExceptions({ listingId, start, end });
@@ -251,7 +240,7 @@ class ManageAvailabilityCalendar extends Component {
         const endMomentForBookings = isAfterEndOfBookingRange(nextMonthMoment)
           ? END_OF_BOOKING_RANGE_MOMENT.clone().add(1, 'days')
           : nextMonthMoment;
-        const endForBookings = momentToUTCDate(endMomentForBookings);
+        const endForBookings = endMomentForBookings.toDate();
 
         // Fetch Bookings for this month (if they are in pending or accepted state)
         const state = ['pending', 'accepted'].join(',');
@@ -262,7 +251,7 @@ class ManageAvailabilityCalendar extends Component {
 
   onDayAvailabilityChange(date, seats, exceptions) {
     const { availabilityPlan, listingId } = this.props;
-    const { start, end } = dateStartAndEndInUTC(date);
+    const { start, end } = dateStartAndEnd(date);
 
     const planEntries = ensureDayAvailabilityPlan(availabilityPlan).entries;
     const seatsFromPlan = planEntries.find(
