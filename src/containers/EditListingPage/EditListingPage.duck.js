@@ -1,7 +1,12 @@
 import omit from 'lodash/omit';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { denormalisedResponseEntities, ensureAvailabilityException } from '../../util/data';
-import { isSameDate, monthIdString } from '../../util/dates';
+import {
+  dateFromAPIToLocal,
+  dateFromLocalToAPI,
+  isSameDate,
+  monthIdString,
+} from '../../util/dates';
 import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import * as log from '../../util/log';
@@ -519,13 +524,29 @@ export function requestImageUpload(actionPayload) {
 export const requestFetchBookings = fetchParams => (dispatch, getState, sdk) => {
   const { listingId, start, end, state } = fetchParams;
   const monthId = monthIdString(start);
+  const params = {
+    listingId,
+    start: dateFromLocalToAPI(start),
+    end: dateFromLocalToAPI(end),
+    state,
+  };
 
   dispatch(fetchBookingsRequest({ ...fetchParams, monthId }));
 
   return sdk.bookings
-    .query({ listingId, start, end, state }, { expand: true })
+    .query(params, { expand: true })
     .then(response => {
-      const bookings = denormalisedResponseEntities(response);
+      const bookings = denormalisedResponseEntities(response).map(booking => {
+        const attributes = booking.attributes;
+        return {
+          ...booking,
+          attributes: {
+            ...attributes,
+            start: dateFromAPIToLocal(attributes.start),
+            end: dateFromAPIToLocal(attributes.end),
+          },
+        };
+      });
       return dispatch(fetchBookingsSuccess({ data: { monthId, bookings } }));
     })
     .catch(e => {
@@ -536,15 +557,26 @@ export const requestFetchBookings = fetchParams => (dispatch, getState, sdk) => 
 export const requestFetchAvailabilityExceptions = fetchParams => (dispatch, getState, sdk) => {
   const { listingId, start, end } = fetchParams;
   const monthId = monthIdString(start);
+  const params = { listingId, start: dateFromLocalToAPI(start), end: dateFromLocalToAPI(end) };
 
   dispatch(fetchAvailabilityExceptionsRequest({ ...fetchParams, monthId }));
 
   return sdk.availabilityExceptions
-    .query({ listingId, start, end }, { expand: true })
+    .query(params, { expand: true })
     .then(response => {
-      const exceptions = denormalisedResponseEntities(response).map(availabilityException => ({
-        availabilityException,
-      }));
+      const exceptions = denormalisedResponseEntities(response).map(availabilityException => {
+        const attributes = availabilityException.attributes;
+        return {
+          availabilityException: {
+            ...availabilityException,
+            attributes: {
+              ...attributes,
+              start: dateFromAPIToLocal(attributes.start),
+              end: dateFromAPIToLocal(attributes.end),
+            },
+          },
+        };
+      });
       return dispatch(fetchAvailabilityExceptionsSuccess({ data: { monthId, exceptions } }));
     })
     .catch(e => {
@@ -556,15 +588,29 @@ export const requestCreateAvailabilityException = params => (dispatch, getState,
   const { currentException, ...createParams } = params;
 
   dispatch(createAvailabilityExceptionRequest(createParams));
+  const createParamsForAPI = {
+    ...createParams,
+    start: dateFromLocalToAPI(createParams.start),
+    end: dateFromLocalToAPI(createParams.end),
+  };
 
   return sdk.availabilityExceptions
-    .create(createParams, { expand: true })
+    .create(createParamsForAPI, { expand: true })
     .then(response => {
+      const createdException = response.data.data;
+      const attributes = createdException.attributes;
       dispatch(
         createAvailabilityExceptionSuccess({
           data: {
             exception: {
-              availabilityException: response.data.data,
+              availabilityException: {
+                ...createdException,
+                attributes: {
+                  ...attributes,
+                  start: dateFromAPIToLocal(attributes.start),
+                  end: dateFromAPIToLocal(attributes.end),
+                },
+              },
             },
           },
         })

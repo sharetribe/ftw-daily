@@ -56,6 +56,31 @@ export const dateFromAPIToLocalNoon = date => {
 };
 
 /**
+ * Convert date given by API to something meaningful on browser's timezone.
+ * A date given by API must be modified so that browser shows a time that is relative to
+ * the current timezone.
+ *
+ * We achieve this by substracting timezone offset from Date object given by API.
+ * If API gives Fri Mar 30 2018 00:00 UTC which (in our example) would be presented
+ * in local timezone Date object "Thu Mar 29 2018 13:00:00 GMT-1100 (SST)".
+ * Substracting the timezone difference (-11h) results to "Fri Mar 30 2018 00:00 GMT-1100 (SST)"
+ *
+ * So, this function can be used to adjust the timezone difference for day/night bookings.
+ *
+ * @param {Date} date is a local date object (representing UTC timestamp)
+ *
+ * @returns {Date} date (given by API as UTC 00:00) converted back to local timezone.
+ */
+export const dateFromAPIToLocal = date => {
+  const timezoneDiffInMinutes = moment(date).utcOffset();
+  // Example timezone SST:
+  // We get a Fri Mar 30 2018 00:00 UTC aka "Thu Mar 29 2018 13:00:00 GMT-1100 (SST)"
+  // We need to subtract timezone difference (-11h), effectively adding 11h - to get to correct date
+  const momentInLocalTimezone = moment(date).subtract(timezoneDiffInMinutes, 'minutes');
+  return momentInLocalTimezone.toDate();
+};
+
+/**
  * Convert local date for API.
  * Date given by browser
  * ("Fri Mar 30 2018 12:00:00 GMT-1100 (SST)" aka "Fri Mar 30 2018 23:00:00 GMT+0000 (UTC)")
