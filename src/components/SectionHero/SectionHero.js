@@ -7,10 +7,10 @@ import { NamedLink } from '../../components';
 import css from './SectionHero.css';
 
 const SectionHero = props => {
-  const { rootClassName, className } = props;
+  const { rootClassName, className, userType } = props;
 
   const classes = classNames(rootClassName || css.root, className);
-
+  const browserButtonMessageId = userType === 'p' ? 'SectionHero.browseImporterButton' : 'SectionHero.browseButton';
   return (
     <div className={classes}>
       <div className={css.heroContent}>
@@ -24,11 +24,11 @@ const SectionHero = props => {
           name="SearchPage"
           to={{
             search:
-              's?address=Finland&bounds=70.0922932%2C31.5870999%2C59.693623%2C20.456500199999937',
+              's?address=Italy&bounds=43.769562%2C11.255814%2C41.773540%2C12.239712',
           }}
           className={css.heroButton}
         >
-          <FormattedMessage id="SectionHero.browseButton" />
+          <FormattedMessage id={browserButtonMessageId} />
         </NamedLink>
       </div>
     </div>

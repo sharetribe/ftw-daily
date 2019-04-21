@@ -24,7 +24,7 @@ import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg';
 import css from './LandingPage.css';
 
 export const LandingPageComponent = props => {
-  const { history, intl, location, scrollingDisabled } = props;
+  const { history, intl, location, scrollingDisabled, userType } = props;
 
   // Schema for search engines (helps them to understand what this page is about)
   // http://schema.org
@@ -59,7 +59,7 @@ export const LandingPageComponent = props => {
         </LayoutWrapperTopbar>
         <LayoutWrapperMain>
           <div className={css.heroContainer}>
-            <SectionHero className={css.hero} history={history} location={location} />
+            <SectionHero className={css.hero} history={history} location={location} userType={userType}/>
           </div>
           <ul className={css.sections}>
             <li className={css.section}>
@@ -96,8 +96,10 @@ LandingPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
+  console.log('Landing page state', state);
   return {
     scrollingDisabled: isScrollingDisabled(state),
+    userType: state.user.currentUser ? state.user.currentUser.attributes.profile.protectedData.userType : 'na'
   };
 };
 

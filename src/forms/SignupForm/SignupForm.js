@@ -5,9 +5,10 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Form as FinalForm } from 'react-final-form';
 import classNames from 'classnames';
 import * as validators from '../../util/validators';
-import { Form, PrimaryButton, FieldTextInput } from '../../components';
+import { Form, PrimaryButton, FieldTextInput, FieldSelect } from '../../components';
 
 import css from './SignupForm.css';
+
 
 const KEY_CODE_ENTER = 13;
 
@@ -105,6 +106,19 @@ const SignupFormComponent = props => (
       const lastNameRequiredMessage = intl.formatMessage({
         id: 'SignupForm.lastNameRequired',
       });
+
+      const typeLabelMessage = intl.formatMessage({
+        id: 'SignupForm.typeLabel',
+      });
+
+      const typeProducerMessage = intl.formatMessage({
+        id: 'SignupForm.typeProducer',
+      });
+
+      const typeImporterMessage = intl.formatMessage({
+        id: 'SignupForm.typeImporter',
+      });
+
       const lastNameRequired = validators.required(lastNameRequiredMessage);
 
       const classes = classNames(rootClassName || css.root, className);
@@ -117,6 +131,7 @@ const SignupFormComponent = props => (
           onOpenTermsOfService();
         }
       };
+      const required = validators.required('This field is required');
       const termsLink = (
         <span
           className={css.termsLink}
@@ -173,6 +188,14 @@ const SignupFormComponent = props => (
               placeholder={passwordPlaceholder}
               validate={passwordValidators}
             />
+            <div className={css.name}>
+              <FieldSelect id="userType" name="userType" label={typeLabelMessage} validate={required}>
+                <option value="p">{typeProducerMessage}</option>
+                <option value="i">{typeImporterMessage}</option>
+              </FieldSelect>
+            </div>
+
+
           </div>
 
           <div className={css.bottomWrapper}>
