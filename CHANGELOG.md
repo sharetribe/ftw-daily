@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [add] Improve printing API errors on web inspector (console.table)
+  [#1070](https://github.com/sharetribe/flex-template-web/pull/1070)
 - [fix] ManageAvailabilityCalendar.js didn't use UTC time when fetching data for calendar months.
   [#1069](https://github.com/sharetribe/flex-template-web/pull/1069)
 - [add] Use sparse fields on InboxPage query to reduce data load.

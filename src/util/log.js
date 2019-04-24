@@ -47,6 +47,13 @@ export const clearUserId = () => {
   });
 };
 
+const printAPIErrorsAsConsoleTable = apiErrors => {
+  if (typeof console.table === 'function') {
+    console.log('Errors returned by Marketplace API call:');
+    console.table(apiErrors.map(err => ({ status: err.status, code: err.code, ...err.meta })));
+  }
+};
+
 /**
  * Logs an execption. If Sentry is configured
  * sends the error information there. Otherwise
@@ -57,8 +64,9 @@ export const clearUserId = () => {
  * @param {Object} data Additional data to be sent to Sentry
  */
 export const error = (e, code, data) => {
+  const apiErrors = responseApiErrorInfo(e);
   if (config.sentryDsn) {
-    const extra = { ...data, apiErrorData: responseApiErrorInfo(e) };
+    const extra = { ...data, apiErrorData: apiErrors };
 
     Sentry.withScope(scope => {
       scope.setTag('code', code);
@@ -67,8 +75,11 @@ export const error = (e, code, data) => {
       });
       Sentry.captureException(e);
     });
+
+    printAPIErrorsAsConsoleTable(apiErrors);
   } else {
-    console.error(e); // eslint-disable-line
+    console.error(e);
     console.error('Error code:', code, 'data:', data);
+    printAPIErrorsAsConsoleTable(apiErrors);
   }
 };
