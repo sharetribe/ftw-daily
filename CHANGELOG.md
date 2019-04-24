@@ -14,8 +14,10 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+## [v2.15.0] 2019-04-24
+
 - [add] Improve printing API errors on web inspector (console.table)
-  [#1070](https://github.com/sharetribe/flex-template-web/pull/1070)
+  [#1071](https://github.com/sharetribe/flex-template-web/pull/1071)
 - [fix] ManageAvailabilityCalendar.js didn't use UTC time when fetching data for calendar months.
   [#1069](https://github.com/sharetribe/flex-template-web/pull/1069)
 - [add] Use sparse fields on InboxPage query to reduce data load.
@@ -25,6 +27,8 @@ way to update this template, but currently, we follow a pattern:
   [#1066](https://github.com/sharetribe/flex-template-web/pull/1066)
   - NOTE: if you need more fields on `ListingCard` than title, price and geolocation - you need to
     add those to `loadData` function.
+
+  [v2.15.0]: https://github.com/sharetribe/flex-template-web/compare/v2.14.0...v2.15.0
 
 ## [v2.14.0] 2019-04-05
 
