@@ -16,11 +16,12 @@ const chalk = require('chalk');
 
 const PATH = './src/translations/';
 
-const SOURCE_LANG = { name: 'English', code: 'en' };
+const SOURCE_LANG = { name: 'Portuguese', code: 'pt' };
 const TARGET_LANG_NAMES = {
   es: 'Spanish',
   de: 'German',
   fr: 'French',
+  pt: 'Portuguese',
 };
 
 class BreakToRun {}

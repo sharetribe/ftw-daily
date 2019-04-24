@@ -19,7 +19,7 @@ import Routes from './Routes';
 import config from './config';
 
 // Flex template application uses English translations as default.
-import defaultMessages from './translations/en.json';
+import defaultMessages from './translations/pt.json';
 
 // If you want to change the language, change the imports to match the wanted locale:
 //   1) Change the language in the config.js file!
@@ -29,7 +29,7 @@ import defaultMessages from './translations/en.json';
 
 // Step 2:
 // Import locale rules for React Intl library
-import localeData from 'react-intl/locale-data/en';
+import localeData from 'react-intl/locale-data/pt';
 
 // Step 3:
 // If you are using a non-english locale with moment library,
@@ -56,7 +56,7 @@ const addMissingTranslations = (sourceLangTranslations, targetLangTranslations) 
   return missingKeys.reduce(addMissingTranslation, targetLangTranslations);
 };
 
-const isDefaultLanguageInUse = config.locale === 'en';
+const isDefaultLanguageInUse = config.locale === 'pt';
 
 const messages = isDefaultLanguageInUse
   ? defaultMessages
@@ -81,6 +81,7 @@ const setupLocale = () => {
   // Set the Moment locale globally
   // See: http://momentjs.com/docs/#/i18n/changing-locale/
   moment.locale(config.locale);
+  console.log((moment.locale()))
 };
 
 export const ClientApp = props => {
