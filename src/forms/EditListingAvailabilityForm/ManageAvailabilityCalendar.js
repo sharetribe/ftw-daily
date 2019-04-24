@@ -16,7 +16,7 @@ import {
   ensureDayAvailabilityPlan,
 } from '../../util/data';
 import { DAYS_OF_WEEK } from '../../util/types';
-import { monthIdString } from '../../util/dates';
+import { monthIdString, monthIdStringInUTC } from '../../util/dates';
 import { IconArrowHead, IconSpinner } from '../../components';
 
 import css from './ManageAvailabilityCalendar.css';
@@ -162,7 +162,9 @@ const dateModifiers = (availabilityPlan, exceptions, bookings, date) => {
 };
 
 const renderDayContents = (calendar, availabilityPlan) => date => {
-  const { exceptions = [], bookings = [] } = calendar[monthIdString(date)] || {};
+  // This component is for day/night based processes. If time-based process is used,
+  // you might want to deal with local dates using monthIdString instead of monthIdStringInUTC.
+  const { exceptions = [], bookings = [] } = calendar[monthIdStringInUTC(date)] || {};
   const { isOutsideRange, isSameDay, isBlocked, isBooked, isInProgress, isFailed } = dateModifiers(
     availabilityPlan,
     exceptions,
@@ -308,7 +310,9 @@ class ManageAvailabilityCalendar extends Component {
 
     const { availabilityPlan, availability } = this.props;
     const calendar = availability.calendar;
-    const { exceptions = [], bookings = [] } = calendar[monthIdString(date)] || {};
+    // This component is for day/night based processes. If time-based process is used,
+    // you might want to deal with local dates using monthIdString instead of monthIdStringInUTC.
+    const { exceptions = [], bookings = [] } = calendar[monthIdStringInUTC(date)] || {};
     const { isPast, isBlocked, isBooked, isInProgress } = dateModifiers(
       availabilityPlan,
       exceptions,

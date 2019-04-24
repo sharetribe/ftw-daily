@@ -115,13 +115,25 @@ export const daysBetween = (startDate, endDate) => {
 };
 
 /**
- * Format the given date
+ * Format the given date to month id/string
  *
  * @param {Date} date to be formatted
  *
  * @returns {String} formatted month string
  */
 export const monthIdString = date => moment(date).format('YYYY-MM');
+
+/**
+ * Format the given date to UTC month id/string
+ *
+ * @param {Date} date to be formatted
+ *
+ * @returns {String} formatted month string
+ */
+export const monthIdStringInUTC = date =>
+  moment(date)
+    .utc()
+    .format('YYYY-MM');
 
 /**
  * Format the given date

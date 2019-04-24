@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] ManageAvailabilityCalendar.js didn't use UTC time when fetching data for calendar months.
+  [#1069](https://github.com/sharetribe/flex-template-web/pull/1069)
 - [add] Use sparse fields on InboxPage query to reduce data load.
   [#1067](https://github.com/sharetribe/flex-template-web/pull/1067)
   - NOTE: if you need more fields on `InboxPage`, you need to add those to `loadData` function.
