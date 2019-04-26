@@ -77,6 +77,8 @@ const SearchFiltersComponent = props => {
     intl,
   } = props;
 
+  console.log(amenitiesFilter)
+
   const hasNoResult = listingsAreLoaded && resultsCount === 0;
   const classes = classNames(rootClassName || css.root, { [css.longInfo]: hasNoResult }, className);
 

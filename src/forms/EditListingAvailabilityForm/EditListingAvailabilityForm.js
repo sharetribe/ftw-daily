@@ -6,9 +6,10 @@ import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import { Form, Button } from '../../components';
-
 import ManageAvailabilityCalendar from './ManageAvailabilityCalendar';
+
 import css from './EditListingAvailabilityForm.css';
+import marketPlaceCss from './../../marketplace.css';
 
 export class EditListingAvailabilityFormComponent extends Component {
   render() {
@@ -54,16 +55,17 @@ export class EditListingAvailabilityFormComponent extends Component {
                   listingId={listingId}
                 />
               </div>
-
-              <Button
-                className={css.submitButton}
-                type="submit"
-                inProgress={submitInProgress}
-                disabled={submitDisabled}
-                ready={submitReady}
-              >
-                {saveActionMsg}
-              </Button>
+              <div className={marketPlaceCss.alignRight}>
+                <Button
+                  className={css.submitButton}
+                  type="submit"
+                  inProgress={submitInProgress}
+                  disabled={submitDisabled}
+                  ready={submitReady}
+                >
+                  {saveActionMsg}
+                </Button>
+              </div>
             </Form>
           );
         }}

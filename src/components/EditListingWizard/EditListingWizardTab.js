@@ -20,6 +20,7 @@ import {
 } from '../../components';
 
 import css from './EditListingWizard.css';
+import { createInstance } from '../../util/sdkLoader';
 
 export const AVAILABILITY = 'availability';
 export const DESCRIPTION = 'description';
@@ -318,7 +319,6 @@ EditListingWizardTab.propTypes = {
   onChange: func.isRequired,
   updatedTab: string,
   updateInProgress: bool.isRequired,
-
   intl: intlShape.isRequired,
 };
 

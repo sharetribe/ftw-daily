@@ -5,7 +5,7 @@ import { FieldSelect } from '../../components';
 import css from './EditListingDescriptionForm.css';
 
 const CustomCategorySelectFieldMaybe = props => {
-  const { name, id, categories, intl } = props;
+  const { name, id, label, categories, intl } = props;
   const categoryLabel = intl.formatMessage({
     id: 'EditListingDescriptionForm.categoryLabel',
   });
@@ -26,7 +26,7 @@ const CustomCategorySelectFieldMaybe = props => {
       validate={categoryRequired}
     >
       <option disabled value="">
-        {categoryPlaceholder}
+        -{categoryPlaceholder}-{label}
       </option>
       {categories.map(c => (
         <option key={c.key} value={c.key}>

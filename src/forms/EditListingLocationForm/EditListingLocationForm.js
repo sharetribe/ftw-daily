@@ -13,6 +13,7 @@ import {
 import { Form, LocationAutocompleteInputField, Button, FieldTextInput } from '../../components';
 
 import css from './EditListingLocationForm.css';
+import marketPlaceCss from './../../marketplace.css';
 
 export const EditListingLocationFormComponent = props => (
   <FinalForm
@@ -97,16 +98,17 @@ export const EditListingLocationFormComponent = props => (
             label={buildingMessage}
             placeholder={buildingPlaceholderMessage}
           />
-
-          <Button
-            className={css.submitButton}
-            type="submit"
-            inProgress={submitInProgress}
-            disabled={submitDisabled}
-            ready={submitReady}
-          >
-            {saveActionMsg}
-          </Button>
+          <div className={marketPlaceCss.alignRight}>
+            <Button
+              className={css.submitButton}
+              type="submit"
+              inProgress={submitInProgress}
+              disabled={submitDisabled}
+              ready={submitReady}
+            >
+              {saveActionMsg}
+            </Button>
+          </div>
         </Form>
       );
     }}

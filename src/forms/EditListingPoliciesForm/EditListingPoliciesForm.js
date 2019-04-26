@@ -8,6 +8,7 @@ import { propTypes } from '../../util/types';
 import { Form, Button, FieldTextInput } from '../../components';
 
 import css from './EditListingPoliciesForm.css';
+import marketPlaceCss from './../../marketplace.css';
 
 export const EditListingPoliciesFormComponent = props => (
   <FinalForm
@@ -63,16 +64,17 @@ export const EditListingPoliciesFormComponent = props => (
             label={rulesLabelMessage}
             placeholder={rulesPlaceholderMessage}
           />
-
-          <Button
-            className={css.submitButton}
-            type="submit"
-            inProgress={submitInProgress}
-            disabled={submitDisabled}
-            ready={submitReady}
-          >
-            {saveActionMsg}
-          </Button>
+          <div className={marketPlaceCss.alignRight}>
+            <Button
+              className={css.submitButton}
+              type="submit"
+              inProgress={submitInProgress}
+              disabled={submitDisabled}
+              ready={submitReady}
+            >
+              {saveActionMsg}
+            </Button>
+          </div>
         </Form>
       );
     }}

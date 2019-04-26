@@ -10,6 +10,7 @@ import config from '../../config';
 import { Button, FieldCheckboxGroup, Form } from '../../components';
 
 import css from './EditListingFeaturesForm.css';
+import marketPlaceCss from './../../marketplace.css';
 
 const EditListingFeaturesFormComponent = props => (
   <FinalForm
@@ -59,15 +60,17 @@ const EditListingFeaturesFormComponent = props => (
             options={config.custom.amenities}
           />
 
-          <Button
-            className={css.submitButton}
-            type="submit"
-            inProgress={submitInProgress}
-            disabled={submitDisabled}
-            ready={submitReady}
-          >
-            {saveActionMsg}
-          </Button>
+          <div className={marketPlaceCss.alignRight}>
+            <Button
+              className={css.submitButton}
+              type="submit"
+              inProgress={submitInProgress}
+              disabled={submitDisabled}
+              ready={submitReady}
+            >
+              {saveActionMsg}
+            </Button>
+          </div>
         </Form>
       );
     }}

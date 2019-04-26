@@ -37,8 +37,23 @@ export const amenities = [
   },
 ];
 
+export const traderCategories = [
+  { key: 'hotel', label: 'Pool.hotel' },
+  { key: 'localAccomodation', label: 'Pool.localAccomodation' },
+  { key: 'individual', label: 'Pool.individual' }
+];
+
+
+
 export const categories = [
-  { key: 'smoke', label: 'Smoke' },
+  { key: 'interior', label: 'Pool.exterior' },
+  { key: 'exterior', label: 'Pool.interior' }
+];
+
+//To Remove
+
+export const type = [
+  { key: 'interior', label: 'Smoke' },
   { key: 'electric', label: 'Electric' },
   { key: 'wood', label: 'Wood' },
   { key: 'other', label: 'Other' },

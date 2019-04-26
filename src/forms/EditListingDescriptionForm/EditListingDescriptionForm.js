@@ -7,9 +7,10 @@ import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import { maxLength, required, composeValidators } from '../../util/validators';
 import { Form, Button, FieldTextInput } from '../../components';
-import CustomCategorySelectFieldMaybe from './CustomCategorySelectFieldMaybe';
+import CategoriesSelect from './CategoriesSelect';
 
 import css from './EditListingDescriptionForm.css';
+import marketPlaceCss from './../../marketplace.css';
 
 const TITLE_MAX_LENGTH = 60;
 
@@ -19,6 +20,7 @@ const EditListingDescriptionFormComponent = props => (
     render={fieldRenderProps => {
       const {
         categories,
+        traderCategories,
         className,
         disabled,
         handleSubmit,
@@ -31,6 +33,7 @@ const EditListingDescriptionFormComponent = props => (
         fetchErrors,
       } = fieldRenderProps;
 
+      
       const titleMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.title' });
       const titlePlaceholderMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.titlePlaceholder',
@@ -44,6 +47,20 @@ const EditListingDescriptionFormComponent = props => (
           maxLength: TITLE_MAX_LENGTH,
         }
       );
+
+      const categoryLabel = intl.formatMessage({ id: 'EditListingDescriptionForm.categoryLabel' });
+      const categoryPlaceholder = intl.formatMessage({ id: 'EditListingDescriptionForm.categoryPlaceholder' });
+      const categoryRequired = required( intl.formatMessage({ id: 'EditListingDescriptionForm.categoryRequired' }));
+      categories.map(c => {
+        return c.label = intl.formatMessage({ id: c.label })
+      })
+      
+      const traderCategoryLabel = intl.formatMessage({ id: 'EditListingDescriptionForm.categoryLabel' });
+      const traderCategoryPlaceholder = intl.formatMessage({ id: 'EditListingDescriptionForm.traderCategoryPlaceholder' });
+      const traderCategoryRequired = required( intl.formatMessage({ id: 'EditListingDescriptionForm.traderCategoryRequired' }));
+      traderCategories.map(c => {
+        return c.label = intl.formatMessage({ id: c.label })
+      })
 
       const descriptionMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.description',
@@ -108,22 +125,33 @@ const EditListingDescriptionFormComponent = props => (
             validate={composeValidators(required(descriptionRequiredMessage))}
           />
 
-          <CustomCategorySelectFieldMaybe
+          <CategoriesSelect
             id="category"
             name="category"
+            label={categoryLabel}
+            placeholder={categoryPlaceholder}
             categories={categories}
-            intl={intl}
+            errorMessage={categoryRequired}
           />
-
-          <Button
-            className={css.submitButton}
-            type="submit"
-            inProgress={submitInProgress}
-            disabled={submitDisabled}
-            ready={submitReady}
-          >
-            {saveActionMsg}
-          </Button>
+          
+          <CategoriesSelect
+            id="traderCategory"
+            name="traderCategory"
+            label={traderCategoryLabel}
+            placeholder={traderCategoryPlaceholder}
+            categories={traderCategories}
+            errorMessage={traderCategoryRequired}
+          />
+          <div className={marketPlaceCss.alignRight}>
+            <Button
+              className={css.submitButton}
+              type="submit"
+              inProgress={submitInProgress}
+              disabled={submitDisabled}
+              ready={submitReady}>
+              {saveActionMsg}
+            </Button>
+          </div>
         </Form>
       );
     }}

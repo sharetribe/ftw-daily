@@ -11,6 +11,7 @@ import { isUploadImageOverLimitError } from '../../util/errors';
 import { AddImages, Button, Form, ValidationError } from '../../components';
 
 import css from './EditListingPhotosForm.css';
+import marketPlaceCss from './../../marketplace.css';
 
 const ACCEPT_IMAGES = 'image/*';
 
@@ -205,16 +206,17 @@ export class EditListingPhotosFormComponent extends Component {
               </p>
               {publishListingFailed}
               {showListingFailed}
-
-              <Button
-                className={css.submitButton}
-                type="submit"
-                inProgress={submitInProgress}
-                disabled={submitDisabled}
-                ready={submitReady}
-              >
-                {saveActionMsg}
-              </Button>
+              <div className={marketPlaceCss.alignRight}>
+                <Button
+                  className={css.submitButton}
+                  type="submit"
+                  inProgress={submitInProgress}
+                  disabled={submitDisabled}
+                  ready={submitReady}
+                >
+                  {saveActionMsg}
+                </Button>
+              </div>
             </Form>
           );
         }}
