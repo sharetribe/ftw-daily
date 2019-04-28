@@ -27,13 +27,13 @@ const LocationSearchFormComponent = props => {
 
         // Allow form submit only when the place has changed
         const preventFormSubmit = e => e.preventDefault();
-
         return (
           <Form className={classes} onSubmit={preventFormSubmit}>
             <Field
               name="location"
               format={null}
               render={({ input, meta }) => {
+                console.log('teste', meta)
                 const { onChange, ...restInput } = input;
 
                 // Merge the standard onChange function with custom behaviur. A better solution would

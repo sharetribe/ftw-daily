@@ -1,0 +1,70 @@
+@import '../../marketplace.css';
+
+.root {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.formContainer {
+    background-color: var(--matterColorLight);
+    width:30%;
+    min-width: 450px;
+    padding: 24px;
+    border-radius: 5px;
+}
+
+.searchInputIcon {
+    box-sizing: content-box;
+    padding-left: 24px;
+    margin-top: 2px;
+  
+    display: flex;
+    width: 24px;
+    align-self: stretch;
+    border-bottom: 2px solid var(--marketplaceColor);
+    background-color: var(--matterColorLight);
+}
+
+.searchInput {
+    flex-grow: 1;
+    height: 69px;
+    padding-left: 10px;
+    margin: 0;
+    line-height: unset;
+    border-bottom-width: 2px;
+  
+    /* Safari bugfix: without this Safari will print placeholder to a wrong place */
+    &::-webkit-input-placeholder {
+      line-height: normal;
+    }
+  
+    &:hover,
+    &:focus {
+      border-bottom-color: var(--marketplaceColor);
+      outline: none;
+    }
+  
+    &:hover::placeholder,
+    &:focus::placeholder {
+      color: var(--matterColor);
+    }
+  
+    &::placeholder {
+      text-overflow: ellipsis;
+      overflow-x: hidden;
+      font-weight: var(--fontWeightRegular);
+      transition: var(--transitionStyleButton);
+    }
+}
+
+.submitButton {
+    margin-bottom: 0px;
+    justify-content: center;
+  
+    @media (--viewportLarge) {
+      display: inline-block;
+      width: 241px;
+      margin-top: 16px;
+    }
+}

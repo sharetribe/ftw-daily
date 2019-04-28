@@ -582,3 +582,8 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.alignCenter {
+  display: flex;
+  justify-content: center;
+}

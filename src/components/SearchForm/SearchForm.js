@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { Form as FinalForm, Field } from 'react-final-form';
 import { intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
-import { Form, LocationAutocompleteInput } from '../../components';
+import { Form, LocationAutocompleteInput } from '..';
 
-import css from './TopbarSearchForm.css';
+import css from './SearchForm.css';
 
-class TopbarSearchFormComponent extends Component {
+class SearchFormComponent extends Component {
   constructor(props) {
     super(props);
     this.onChange = this.onChange.bind(this);
@@ -92,14 +92,14 @@ class TopbarSearchFormComponent extends Component {
 
 const { func, string, bool } = PropTypes;
 
-TopbarSearchFormComponent.defaultProps = {
+SearchFormComponent.defaultProps = {
   rootClassName: null,
   className: null,
   desktopInputRoot: null,
   isMobile: false,
 };
 
-TopbarSearchFormComponent.propTypes = {
+SearchFormComponent.propTypes = {
   rootClassName: string,
   className: string,
   desktopInputRoot: string,
@@ -110,6 +110,6 @@ TopbarSearchFormComponent.propTypes = {
   intl: intlShape.isRequired,
 };
 
-const TopbarSearchForm = injectIntl(TopbarSearchFormComponent);
+const TopbarSearchForm = injectIntl(SearchFormComponent);
 
 export default TopbarSearchForm;

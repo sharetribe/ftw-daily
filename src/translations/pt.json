@@ -886,5 +886,6 @@
   "Pool.interior": "Piscina Interior",
   "Pool.hotel": "Hotel",
   "Pool.localAccomodation": "Alojamento Local",
-  "Pool.individual": "Particular"
+  "Pool.individual": "Particular",
+  "MainSearch.location": "Localização..."
 }
