@@ -10,8 +10,10 @@ import { richText } from '../../util/richText';
 import { createSlug } from '../../util/urlHelpers';
 import config from '../../config';
 import { NamedLink, ResponsiveImage } from '../../components';
+import { categories, traderCategories} from '../../marketplace-custom-config'
 
 import css from './ListingCard.css';
+import marketCss from './../../marketplace.css'
 
 const MIN_LENGTH_FOR_LONG_WORDS = 10;
 
@@ -39,14 +41,24 @@ class ListingImage extends Component {
     return <ResponsiveImage {...this.props} />;
   }
 }
-const LazyImage = lazyLoadWithDimensions(ListingImage, { loadAfterInitialRendering: 3000 });
+const LazyImage = lazyLoadWithDimensions(ListingImage, { maxWidth: '300px', maxHeight: '200px', loadAfterInitialRendering: 3000 });
 
 export const ListingCardComponent = props => {
   const { className, rootClassName, intl, listing, renderSizes, setActiveListing } = props;
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureListing(listing);
   const id = currentListing.id.uuid;
-  const { title = '', price } = currentListing.attributes;
+  const { title = '', price, description } = currentListing.attributes;
+  
+  const { category, traderCategory } = currentListing.attributes.publicData;
+  console.log(traderCategory)
+  const categoryUi = intl.formatMessage({
+    id: categories.find(c => c.key === category).label
+  })
+  const traderCategoryUi = intl.formatMessage({
+    id: traderCategories.find(c => c.key === traderCategory).label
+  })
+
   const slug = createSlug(title);
   const author = ensureUser(listing.author);
   const authorName = author.attributes.profile.displayName;
@@ -65,24 +77,26 @@ export const ListingCardComponent = props => {
     ? 'ListingCard.perDay'
     : 'ListingCard.perUnit';
 
+  
+  const infoBoxCss = classNames(marketCss.row, marketCss.fullWidth, marketCss.p);
+  const categoryCss = classNames(css.authorInfo, );
   return (
-    <NamedLink className={classes} name="ListingPage" params={{ id, slug }}>
-      <div
-        className={css.threeToTwoWrapper}
-        onMouseEnter={() => setActiveListing(currentListing.id)}
-        onMouseLeave={() => setActiveListing(null)}
-      >
-        <div className={css.aspectWrapper}>
-          <LazyImage
-            rootClassName={css.rootForImage}
-            alt={title}
-            image={firstImage}
-            variants={['landscape-crop', 'landscape-crop2x']}
-            sizes={renderSizes}
-          />
-        </div>
+    <NamedLink className={css.root1} name="ListingPage" params={{ id, slug }}>
+      <div className={css.aspectWrapper1}>
+        <LazyImage
+          rootClassName={css.rootForImage}
+          alt={title}
+          image={firstImage}
+          variants={['landscape-crop', 'landscape-crop2x']}
+          sizes={renderSizes}
+        />
       </div>
-      <div className={css.info}>
+
+      <div className={infoBoxCss}>
+        <div className={css.detailsBox}>
+          <h3 className={css.title}>{title}</h3>
+          <div className={categoryCss}><h5 className={marketCss.noMargin}>{`${categoryUi} | ${traderCategoryUi}`}</h5></div>
+        </div>
         <div className={css.price}>
           <div className={css.priceValue} title={priceTitle}>
             {formattedPrice}
@@ -91,18 +105,18 @@ export const ListingCardComponent = props => {
             <FormattedMessage id={unitTranslationKey} />
           </div>
         </div>
-        <div className={css.mainInfo}>
-          <div className={css.title}>
-            {richText(title, {
-              longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS,
-              longWordClass: css.longWord,
-            })}
-          </div>
-          <div className={css.authorInfo}>
-            <FormattedMessage id="ListingCard.hostedBy" values={{ authorName }} />
+      </div>
+      {/* <div className={infoBoxCss}>
+        <div className={marketCss.row}>
+          <h3 className={css.title}>{title}</h3>
+          <div className={marketCss.row}>
+            <div className={categoryCss}><h4>{`${categoryUi} | ${traderCategoryUi}`}</h4></div>
           </div>
         </div>
-      </div>
+        <div>
+
+        </div>
+      </div> */}
     </NamedLink>
   );
 };

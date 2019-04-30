@@ -43,8 +43,6 @@ export const traderCategories = [
   { key: 'individual', label: 'Pool.individual' }
 ];
 
-
-
 export const categories = [
   { key: 'interior', label: 'Pool.exterior' },
   { key: 'exterior', label: 'Pool.interior' }
