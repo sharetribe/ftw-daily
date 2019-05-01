@@ -1,9 +1,15 @@
 {
   "name": "app",
   "version": "2.15.0",
+  "engines": {
+    "node": "8.9.4"
+  },
   "private": true,
   "license": "Apache-2.0",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.17",
+    "@fortawesome/free-solid-svg-icons": "^5.8.1",
+    "@fortawesome/react-fontawesome": "^0.1.4",
     "@mapbox/polyline": "^1.0.0",
     "@sentry/browser": "4.5.1",
     "@sentry/node": "4.5.1",
@@ -25,9 +31,11 @@
     "final-form": "^4.11.0",
     "final-form-arrays": "^1.1.0",
     "helmet": "^3.15.0",
+    "i": "^0.3.6",
     "lodash": "^4.17.11",
     "mapbox-gl-multitouch": "^1.0.3",
     "moment": "^2.22.2",
+    "npm": "^6.9.0",
     "object.entries": "^1.0.4",
     "object.values": "^1.0.4",
     "path-to-regexp": "^2.4.0",
@@ -45,6 +53,7 @@
     "react-moment-proptypes": "^1.6.0",
     "react-redux": "^5.1.1",
     "react-router-dom": "^4.3.0",
+    "react-tooltip": "^3.10.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "sanitize.css": "^5.0.0",

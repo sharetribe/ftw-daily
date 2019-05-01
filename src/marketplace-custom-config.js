@@ -6,35 +6,23 @@ export const amenities = [
   {
     key: 'towels',
     label: 'Towels',
+    icon: "layer-group"
   },
   {
     key: 'bathroom',
     label: 'Bathroom',
-  },
-  {
-    key: 'swimming_pool',
-    label: 'Swimming pool',
-  },
-  {
-    key: 'own_drinks',
-    label: 'Own drinks allowed',
+    icon: "shower"
   },
   {
     key: 'jacuzzi',
     label: 'Jacuzzi',
-  },
-  {
-    key: 'audiovisual_entertainment',
-    label: 'Audiovisual entertainment',
+    icon: 'hot-tub'
   },
   {
     key: 'barbeque',
     label: 'Barbeque',
-  },
-  {
-    key: 'own_food_allowed',
-    label: 'Own food allowed',
-  },
+    icon: 'gripfire'
+  }
 ];
 
 export const traderCategories = [

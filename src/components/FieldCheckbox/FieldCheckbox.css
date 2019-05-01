@@ -60,7 +60,7 @@
 }
 
 .text {
-  @apply --marketplaceListingAttributeFontStyles;
+  /* @apply --marketplaceListingAttributeFontStyles; */
   color: var(--matterColor);
   margin-top: -1px;
   margin-bottom: 1px;

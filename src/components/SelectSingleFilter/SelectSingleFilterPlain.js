@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 
 import css from './SelectSingleFilterPlain.css';
+import marketPlaceCss from './../../marketplace.css'
 
 class SelectSingleFilterPlain extends Component {
   constructor(props) {
@@ -82,7 +83,7 @@ class SelectSingleFilterPlain extends Component {
                 onClick={() => this.selectOption(option.key)}
               >
                 <span className={optionBorderClass} />
-                {option.label}
+                <h5 className={marketPlaceCss.noMargin}>{option.label}</h5>
               </button>
             );
           })}

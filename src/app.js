@@ -40,6 +40,7 @@ import localeData from 'react-intl/locale-data/pt';
 // If you are using a non-english locale, point `messagesInLocale` to correct .json file
 import messagesInLocale from './translations/fr.json';
 
+
 // If translation key is missing from `messagesInLocale` (e.g. fr.json),
 // corresponding key will be added to messages from `defaultMessages` (en.json)
 // to prevent missing translation key errors.
@@ -55,6 +56,7 @@ const addMissingTranslations = (sourceLangTranslations, targetLangTranslations) 
 
   return missingKeys.reduce(addMissingTranslation, targetLangTranslations);
 };
+
 
 const isDefaultLanguageInUse = config.locale === 'pt';
 

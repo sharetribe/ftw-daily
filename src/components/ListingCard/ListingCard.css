@@ -149,6 +149,8 @@
   width: 100%;
   background-color: var(--matterColorLighte);
   box-shadow: var(--boxShadow);
+  margin-top: 8px;
+  margin-bottom: 8px;
 
   /* Remove link's hover effect */
   &:hover {
@@ -178,4 +180,8 @@
   display: flex;
   flex-direction: column;
   width: 80%;
+}
+
+.icon {
+  padding-right: 10px;
 }
