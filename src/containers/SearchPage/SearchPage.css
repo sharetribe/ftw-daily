@@ -45,7 +45,7 @@
 .searchResultContainer {
   flex-grow: 1;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   padding: 2px 0 0 0;
 
   @media (--viewportMedium) {
@@ -86,11 +86,21 @@
   }
 }
 
+.searchFilters1 {
+  display: none;
+  width: 30%;
+  @media (--viewportMedium) {
+    display: flex;
+    padding: 0 24px;
+    margin-bottom: 21px;
+  }
+}
+
 .searchFiltersMobile {
   padding: 16px 24px;
 
   @media (--viewportMedium) {
-    display: none;
+    
   }
 }
 

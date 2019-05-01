@@ -9,6 +9,7 @@ import {
   SearchFilters,
   SearchFiltersMobile,
   SearchFiltersPanel,
+  SearchFilters1
 } from '../../components';
 import { validFilterParams } from './SearchPage.helpers';
 
@@ -67,7 +68,7 @@ class MainPanel extends Component {
     const listingsAreLoaded = !searchInProgress && searchParamsAreInSync && hasPaginationInfo;
 
     const classes = classNames(rootClassName || css.searchResultContainer, className);
-
+    console.log(rootClassName)
     const filterParamNames = Object.values(filters).map(f => f.paramName);
     const secondaryFilterParamNames = secondaryFilters
       ? Object.values(secondaryFilters).map(f => f.paramName)
@@ -75,18 +76,7 @@ class MainPanel extends Component {
 
     return (
       <div className={classes}>
-        <SearchFilters
-          className={css.searchFilters}
-          urlQueryParams={urlQueryParams}
-          listingsAreLoaded={listingsAreLoaded}
-          resultsCount={totalItems}
-          searchInProgress={searchInProgress}
-          searchListingsError={searchListingsError}
-          onManageDisableScrolling={onManageDisableScrolling}
-          {...searchFiltersPanelProps}
-          {...primaryFilters}
-        />
-        <SearchFiltersMobile
+        <SearchFilters1
           className={css.searchFiltersMobile}
           urlQueryParams={urlQueryParams}
           listingsAreLoaded={listingsAreLoaded}
@@ -103,36 +93,15 @@ class MainPanel extends Component {
           {...primaryFilters}
           {...secondaryFilters}
         />
-        {isSearchFiltersPanelOpen ? (
-          <div className={classNames(css.searchFiltersPanel)}>
-            <SearchFiltersPanel
-              urlQueryParams={urlQueryParams}
-              listingsAreLoaded={listingsAreLoaded}
-              onClosePanel={() => this.setState({ isSearchFiltersPanelOpen: false })}
-              filterParamNames={secondaryFilterParamNames}
-              {...secondaryFilters}
-            />
-          </div>
-        ) : (
-          <div
-            className={classNames(css.listings, {
-              [css.newSearchInProgress]: !listingsAreLoaded,
-            })}
-          >
-            {searchListingsError ? (
-              <h2 className={css.error}>
-                <FormattedMessage id="SearchPage.searchError" />
-              </h2>
-            ) : null}
-            <SearchResultsPanel
-              className={css.searchListingsPanel}
-              listings={listings}
-              pagination={listingsAreLoaded ? pagination : null}
-              search={searchParamsForPagination}
-              setActiveListing={onActivateListing}
-            />
-          </div>
-        )}
+
+        <SearchResultsPanel
+          className={css.searchListingsPanel}
+          listings={listings}
+          pagination={listingsAreLoaded ? pagination : null}
+          search={searchParamsForPagination}
+          setActiveListing={onActivateListing}
+        />
+      
       </div>
     );
   }

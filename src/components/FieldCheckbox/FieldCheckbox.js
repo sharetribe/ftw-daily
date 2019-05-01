@@ -52,7 +52,7 @@ const FieldCheckboxComponent = props => {
         <span className={css.checkboxWrapper}>
           <IconCheckbox className={svgClassName} />
         </span>
-        <span className={css.text}>{label}</span>
+        <h5 className={css.text}>{label}</h5>
       </label>
     </span>
   );

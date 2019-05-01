@@ -105,7 +105,8 @@ const PriceFilterFormComponent = props => {
           >
             <div className={css.contentWrapper}>
               <span className={css.label}>
-                <FormattedMessage id="PriceFilterForm.label" />
+                {/* <FormattedMessage id="PriceFilterForm.label" /> */}
+                <h5>Preço</h5>
               </span>
               <div className={css.inputsWrapper}>
                 <Field
@@ -120,7 +121,9 @@ const PriceFilterFormComponent = props => {
                   step={step}
                   parse={parseMin(min, maxPrice)}
                 />
-                <span className={css.priceSeparator}>-</span>
+                <span className={css.priceSeparator}>
+                  <h5>-</h5>
+                </span>
                 <Field
                   className={css.maxPrice}
                   id={`${id}.maxPrice`}

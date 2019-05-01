@@ -9,9 +9,9 @@ import { ensureListing, ensureUser } from '../../util/data';
 import { richText } from '../../util/richText';
 import { createSlug } from '../../util/urlHelpers';
 import config from '../../config';
-import { NamedLink, ResponsiveImage } from '../../components';
-import { categories, traderCategories} from '../../marketplace-custom-config'
-
+import { NamedLink, ResponsiveImage, Icon } from '../../components';
+import { categories, traderCategories, amenities} from '../../marketplace-custom-config'
+import './../../icons.js'
 import css from './ListingCard.css';
 import marketCss from './../../marketplace.css'
 
@@ -49,15 +49,26 @@ export const ListingCardComponent = props => {
   const currentListing = ensureListing(listing);
   const id = currentListing.id.uuid;
   const { title = '', price, description } = currentListing.attributes;
-  
   const { category, traderCategory } = currentListing.attributes.publicData;
-  console.log(traderCategory)
+  const poolAmenities = currentListing.attributes.publicData.amenities;
   const categoryUi = intl.formatMessage({
     id: categories.find(c => c.key === category).label
   })
   const traderCategoryUi = intl.formatMessage({
     id: traderCategories.find(c => c.key === traderCategory).label
   })
+
+  
+  const amenitiesUi = poolAmenities.map(amenity => {
+    const configAmenity = amenities.find(a => a.key === amenity )
+    return {
+      label: amenity,
+      icon: configAmenity.icon,
+      key: configAmenity.key
+    }
+  })
+
+  
 
   const slug = createSlug(title);
   const author = ensureUser(listing.author);
@@ -79,6 +90,7 @@ export const ListingCardComponent = props => {
 
   
   const infoBoxCss = classNames(marketCss.row, marketCss.fullWidth, marketCss.p);
+  const mainBox = classNames(marketCss.column, marketCss.fullWidth);
   const categoryCss = classNames(css.authorInfo, );
   return (
     <NamedLink className={css.root1} name="ListingPage" params={{ id, slug }}>
@@ -92,31 +104,60 @@ export const ListingCardComponent = props => {
         />
       </div>
 
-      <div className={infoBoxCss}>
-        <div className={css.detailsBox}>
-          <h3 className={css.title}>{title}</h3>
-          <div className={categoryCss}><h5 className={marketCss.noMargin}>{`${categoryUi} | ${traderCategoryUi}`}</h5></div>
-        </div>
-        <div className={css.price}>
-          <div className={css.priceValue} title={priceTitle}>
-            {formattedPrice}
+      {/* <div className={mainBox}>
+        <div className={infoBoxCss}>
+          <div className={css.detailsBox}>
+            <h3 className={css.title}>{title}</h3>
+            <div className={categoryCss}><h5 className={marketCss.noMargin}>{`${categoryUi} | ${traderCategoryUi}`}</h5></div>
           </div>
-          <div className={css.perUnit}>
-            <FormattedMessage id={unitTranslationKey} />
-          </div>
-        </div>
-      </div>
-      {/* <div className={infoBoxCss}>
-        <div className={marketCss.row}>
-          <h3 className={css.title}>{title}</h3>
-          <div className={marketCss.row}>
-            <div className={categoryCss}><h4>{`${categoryUi} | ${traderCategoryUi}`}</h4></div>
+          <div className={css.price}>
+            <div className={css.priceValue} title={priceTitle}>
+              {formattedPrice}
+            </div>
+            <div className={css.perUnit}>
+              <FormattedMessage id={unitTranslationKey} />
+            </div>
           </div>
         </div>
         <div>
-
+          1234
+        </div>
+        <div>
+          1234
         </div>
       </div> */}
+
+
+
+      <div style={{display: 'flex', flexDirection: 'column', width: '100%', padding: '16px'}}>
+        <div style={{display: 'flex', flexDirection: 'row', width: '100%'}}>
+          <div style={{display: 'flex', flexDirection: 'column', width: '80%'}}>
+            <h3 className={css.title}>{title}</h3>
+            <div className={categoryCss}><h5 className={marketCss.noMargin}>{`${categoryUi} | ${traderCategoryUi}`}</h5></div>
+          </div>
+          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-end',width: '20%'}}>
+            <div className={css.price}>
+              <div className={css.priceValue} title={priceTitle}>
+                {formattedPrice}
+              </div>
+              <div className={css.perUnit}>
+                <FormattedMessage id={unitTranslationKey} />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style={{display: 'flex', flexDirection: 'row', flexGrow: '1'}}>
+        {amenitiesUi.map(amenity => (
+          <div className={css.icon} key={amenity.key}>
+            <Icon icon={amenity.icon} message={amenity.label}/>
+          </div>
+        ))}
+        </div>
+        <div>
+          <div className={categoryCss}><h5 className={marketCss.noMargin}>{`Anunciante: ${authorName}`}</h5></div>
+        </div>
+      </div>
+      
     </NamedLink>
   );
 };

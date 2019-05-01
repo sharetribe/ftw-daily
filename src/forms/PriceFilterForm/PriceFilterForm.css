@@ -72,6 +72,18 @@
   }
 }
 
+
+.priceSeparator {
+  @apply --marketplaceSearchFilterSublabelFontStyles;
+  padding: 8px 0 12px 0;
+  margin-right: 18px;
+}
+@media (--viewportMedium) {
+  .priceSeparator {
+    padding: 8px 0 16px 0;
+  }
+}
+
 .inputsWrapper {
   display: flex;
 }
@@ -79,9 +91,12 @@
 .minPrice {
   @apply --marketplaceSearchFilterSublabelFontStyles;
   width: 48px;
+  max-height: 48px;
+  font-size: 14px;
   text-align: center;
   border-bottom-color: var(--attentionColor);
   border-bottom-width: 3px;
+  padding-bottom: 0px;
 
   -moz-appearance: textfield;
   &::-webkit-inner-spin-button,
@@ -93,9 +108,12 @@
 .maxPrice {
   @apply --marketplaceSearchFilterSublabelFontStyles;
   width: 48px;
+  max-height: 48px;
+  font-size: 14px;
   text-align: center;
   border-bottom-color: var(--attentionColor);
   border-bottom-width: 3px;
+  padding-bottom: 0px;
 
   -moz-appearance: textfield;
   &::-webkit-inner-spin-button,
@@ -117,11 +135,11 @@
 
 .sliderWrapper {
   display: flex;
-  padding: 17px 0 25px 0;
+  padding: 0px 0 17px 0;
 }
 @media (--viewportMedium) {
   .sliderWrapper {
-    padding: 16px 0 24px 0;
+    padding: 0px 0 17px 0;
   }
 }
 

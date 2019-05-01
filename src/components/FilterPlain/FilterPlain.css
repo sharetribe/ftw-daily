@@ -3,7 +3,7 @@
 .root {
   position: relative;
   padding-top: 24px;
-  padding-bottom: 17px;
+  padding-bottom: 0px;
   border-bottom: 1px solid var(--matterColorNegative);
 }
 
