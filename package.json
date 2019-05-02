@@ -50,7 +50,7 @@
     "sanitize.css": "^5.0.0",
     "seedrandom": "^2.4.4",
     "sharetribe-flex-sdk": "^1.3.0",
-    "sharetribe-scripts": "1.1.5",
+    "sharetribe-scripts": "2.1.8",
     "smoothscroll-polyfill": "^0.4.0",
     "source-map-support": "^0.5.9",
     "url": "^0.11.0"
@@ -74,13 +74,21 @@
     "format": "prettier --write '**/*.{js,css}'",
     "format-ci": "prettier --list-different '**/*.{js,css}'",
     "format-docs": "prettier --write '**/*.md'",
-    "test": "sharetribe-scripts test --env=jsdom",
-    "test-ci": "sharetribe-scripts test --env=jsdom --runInBand",
+    "test": "sharetribe-scripts test",
+    "test-ci": "sharetribe-scripts test --runInBand",
     "eject": "sharetribe-scripts eject",
     "start": "node server/index.js",
     "dev-server": "export NODE_ENV=development PORT=4000 REACT_APP_CANONICAL_ROOT_URL=http://localhost:4000&&yarn run build&&nodemon --watch server server/index.js",
     "heroku-postbuild": "yarn run build",
     "translate": "node scripts/translations.js"
+  },
+  "browserslist": {
+    "production": [">0.2%", "not dead", "not op_mini all"],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "prettier": {
     "singleQuote": true,
