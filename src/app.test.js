@@ -15,6 +15,16 @@ const render = (url, context) => {
   return { head, body };
 };
 
+const jsdomScroll = window.scroll;
+beforeAll(() => {
+  // Mock window.scroll - otherwise, Jest/JSDOM will print a not-implemented error.
+  window.scroll = () => {};
+});
+
+afterAll(() => {
+  window.scroll = jsdomScroll;
+});
+
 describe('Application', () => {
   it('renders in the client without crashing', () => {
     window.google = { maps: {} };
