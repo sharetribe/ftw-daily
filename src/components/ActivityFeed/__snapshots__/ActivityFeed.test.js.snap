@@ -53,8 +53,8 @@ exports[`ActivityFeed matches snapshot 1`] = `
       <div>
         <p>
           Message msg1
-          
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
         <p>
           2017-11-09, 08:12
@@ -70,8 +70,8 @@ exports[`ActivityFeed matches snapshot 1`] = `
       <div>
         <p>
           Message msg2
-          
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
       </div>
       <p>

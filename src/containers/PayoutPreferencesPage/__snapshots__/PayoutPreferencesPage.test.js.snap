@@ -36,7 +36,7 @@ exports[`PayoutPreferencesPage matches snapshot with Stripe connected 1`] = `
             "text": <FormattedMessage
               id="PayoutPreferencesPage.contactDetailsTabTitle"
               values={Object {}}
-        />,
+            />,
           },
           Object {
             "linkProps": Object {
@@ -46,7 +46,7 @@ exports[`PayoutPreferencesPage matches snapshot with Stripe connected 1`] = `
             "text": <FormattedMessage
               id="PayoutPreferencesPage.passwordTabTitle"
               values={Object {}}
-        />,
+            />,
           },
           Object {
             "linkProps": Object {
@@ -56,7 +56,7 @@ exports[`PayoutPreferencesPage matches snapshot with Stripe connected 1`] = `
             "text": <FormattedMessage
               id="PayoutPreferencesPage.paymentsTabTitle"
               values={Object {}}
-        />,
+            />,
           },
         ]
       }
@@ -126,7 +126,7 @@ exports[`PayoutPreferencesPage matches snapshot with Stripe not connected 1`] = 
             "text": <FormattedMessage
               id="PayoutPreferencesPage.contactDetailsTabTitle"
               values={Object {}}
-        />,
+            />,
           },
           Object {
             "linkProps": Object {
@@ -136,7 +136,7 @@ exports[`PayoutPreferencesPage matches snapshot with Stripe not connected 1`] = 
             "text": <FormattedMessage
               id="PayoutPreferencesPage.passwordTabTitle"
               values={Object {}}
-        />,
+            />,
           },
           Object {
             "linkProps": Object {
@@ -146,7 +146,7 @@ exports[`PayoutPreferencesPage matches snapshot with Stripe not connected 1`] = 
             "text": <FormattedMessage
               id="PayoutPreferencesPage.paymentsTabTitle"
               values={Object {}}
-        />,
+            />,
           },
         ]
       }
@@ -230,7 +230,7 @@ exports[`PayoutPreferencesPage matches snapshot with details submitted 1`] = `
             "text": <FormattedMessage
               id="PayoutPreferencesPage.contactDetailsTabTitle"
               values={Object {}}
-        />,
+            />,
           },
           Object {
             "linkProps": Object {
@@ -240,7 +240,7 @@ exports[`PayoutPreferencesPage matches snapshot with details submitted 1`] = `
             "text": <FormattedMessage
               id="PayoutPreferencesPage.passwordTabTitle"
               values={Object {}}
-        />,
+            />,
           },
           Object {
             "linkProps": Object {
@@ -250,7 +250,7 @@ exports[`PayoutPreferencesPage matches snapshot with details submitted 1`] = `
             "text": <FormattedMessage
               id="PayoutPreferencesPage.paymentsTabTitle"
               values={Object {}}
-        />,
+            />,
           },
         ]
       }

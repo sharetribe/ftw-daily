@@ -30,7 +30,7 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
     >
       <div>
         <div>
-          <Component
+          <LinkTabNavHorizontal
             className={null}
             rootClassName={null}
             skin="light"
@@ -48,14 +48,12 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
                     },
                   },
                   "selected": false,
-                  "text": <h1
-                    className={undefined}
-              >
+                  "text": <h1>
                     <FormattedMessage
-                          id="AuthenticationPage.signupLinkText"
-                          values={Object {}}
+                      id="AuthenticationPage.signupLinkText"
+                      values={Object {}}
                     />
-              </h1>,
+                  </h1>,
                 },
                 Object {
                   "linkProps": Object {
@@ -67,14 +65,12 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
                     },
                   },
                   "selected": true,
-                  "text": <h1
-                    className={undefined}
-              >
+                  "text": <h1>
                     <FormattedMessage
-                          id="AuthenticationPage.loginLinkText"
-                          values={Object {}}
+                      id="AuthenticationPage.loginLinkText"
+                      values={Object {}}
                     />
-              </h1>,
+                  </h1>,
                 },
               ]
             }
