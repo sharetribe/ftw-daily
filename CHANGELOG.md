@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] ListingPage.duck: fix minor bug on dispatching the fetchReviewsRequest action [#1074](https://github.com/sharetribe/flex-template-web/pull/1074)
+
 ## [v2.15.0] 2019-04-24
 
 - [add] Improve printing API errors on web inspector (console.table)
