@@ -14,7 +14,10 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
-- [fix] ListingPage.duck: fix minor bug on dispatching the fetchReviewsRequest action [#1074](https://github.com/sharetribe/flex-template-web/pull/1074)
+- [fix] New npm vulnerability alerts checked and added to exception list.
+  [#1075](https://github.com/sharetribe/flex-template-web/pull/1075)
+- [fix] ListingPage.duck: fix minor bug on dispatching the fetchReviewsRequest action
+  [#1074](https://github.com/sharetribe/flex-template-web/pull/1074)
 
 ## [v2.15.0] 2019-04-24
 
@@ -27,6 +30,7 @@ way to update this template, but currently, we follow a pattern:
   - NOTE: if you need more fields on `InboxPage`, you need to add those to `loadData` function.
 - [add] Use sparse fields on SearchPage to reduce data load.
   [#1066](https://github.com/sharetribe/flex-template-web/pull/1066)
+
   - NOTE: if you need more fields on `ListingCard` than title, price and geolocation - you need to
     add those to `loadData` function.
 
