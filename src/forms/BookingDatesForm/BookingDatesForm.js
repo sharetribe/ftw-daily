@@ -82,7 +82,7 @@ export class BookingDatesFormComponent extends Component {
           const { startDate, endDate } = values && values.bookingDates ? values.bookingDates : {};
 
           const bookingStartLabel = intl.formatMessage({
-            id: 'BookingDatesForm.bookingStartTitle',
+            id: 'BookingDatesForm.bookingDateTitle',
           });
           const bookingEndLabel = intl.formatMessage({ id: 'BookingDatesForm.bookingEndTitle' });
           const requiredMessage = intl.formatMessage({ id: 'BookingDatesForm.requiredDate' });
@@ -150,12 +150,9 @@ export class BookingDatesFormComponent extends Component {
                 className={css.bookingDates}
                 name="bookingDates"
                 unitType={unitType}
-                startDateId={`${form}.bookingStartDate`}
-                startDateLabel={bookingStartLabel}
-                startDatePlaceholderText={startDatePlaceholderText}
-                endDateId={`${form}.bookingEndDate`}
-                endDateLabel={bookingEndLabel}
-                endDatePlaceholderText={endDatePlaceholderText}
+                id={`${form}.bookingStartDate`}
+                label={bookingStartLabel}
+                placeholderText={startDatePlaceholderText}
                 focusedInput={this.state.focusedInput}
                 onFocusedInputChange={this.onFocusedInputChange}
                 format={null}

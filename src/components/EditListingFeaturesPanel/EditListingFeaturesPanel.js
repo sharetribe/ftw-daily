@@ -23,6 +23,7 @@ const EditListingFeaturesPanel = props => {
     panelUpdated,
     updateInProgress,
     errors,
+    intl
   } = props;
 
   const classes = classNames(rootClassName || css.root, className);
@@ -62,6 +63,7 @@ const EditListingFeaturesPanel = props => {
         updated={panelUpdated}
         updateInProgress={updateInProgress}
         fetchErrors={errors}
+        intl={intl}
       />
     </div>
   );

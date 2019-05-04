@@ -4,11 +4,11 @@ import classNames from 'classnames';
 import { Form as FinalForm } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import { FormattedMessage } from 'react-intl';
-
+import { amenities } from './../../marketplace-custom-config'
 import { propTypes } from '../../util/types';
 import config from '../../config';
 import { Button, FieldCheckboxGroup, Form } from '../../components';
-
+import { injectIntl, intlShape } from 'react-intl';
 import css from './EditListingFeaturesForm.css';
 import marketPlaceCss from './../../marketplace.css';
 
@@ -28,6 +28,7 @@ const EditListingFeaturesFormComponent = props => (
         updated,
         updateInProgress,
         fetchErrors,
+        intl
       } = fieldRenderProps;
 
       const classes = classNames(rootClassName || css.root, className);
@@ -47,6 +48,11 @@ const EditListingFeaturesFormComponent = props => (
           <FormattedMessage id="EditListingFeaturesForm.showListingFailed" />
         </p>
       ) : null;
+
+      config.custom.amenities.map(option => {
+        const amenity = amenities.find(c => c.key === option.key)
+        option.label = intl.formatMessage({ id: amenity.label })
+      })
 
       return (
         <Form className={classes} onSubmit={handleSubmit}>
@@ -98,5 +104,5 @@ EditListingFeaturesFormComponent.propTypes = {
 };
 
 const EditListingFeaturesForm = EditListingFeaturesFormComponent;
-
+// const EditListingFeaturesForm = injectIntl(EditListingFeaturesForm);
 export default EditListingFeaturesForm;

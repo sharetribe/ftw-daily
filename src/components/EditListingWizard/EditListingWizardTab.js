@@ -175,6 +175,7 @@ const EditListingWizardTab = props => {
         : 'EditListingWizard.saveEditFeatures';
       return (
         <EditListingFeaturesPanel
+          intl={intl}
           {...panelProps(FEATURES)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={values => {
