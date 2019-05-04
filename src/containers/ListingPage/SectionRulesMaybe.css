@@ -13,7 +13,6 @@
 .title {
   /* Font */
   @apply --marketplaceH3FontStyles;
-  color: var(--matterColorAnti);
 
   margin-top: 0;
   margin-bottom: 13px;
@@ -24,6 +23,7 @@
 }
 
 .rules {
+  @apply --marketplaceH4FontStyles;
   margin-top: 0;
   margin-bottom: 0;
 

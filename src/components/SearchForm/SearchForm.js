@@ -15,7 +15,6 @@ class SearchFormComponent extends Component {
   }
 
   onChange(location) {
-    console.log('location',location)
     if (location.selectedPlace) {
       // Note that we use `onSubmit` instead of the conventional
       // `handleSubmit` prop for submitting. We want to autosubmit

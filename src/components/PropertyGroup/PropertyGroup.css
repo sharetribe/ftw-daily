@@ -62,7 +62,7 @@
 
 .selectedLabel,
 .notSelectedLabel {
-  @apply --marketplaceBodyFontStyles;
+  @apply --marketplaceH4FontStyles;;
   line-height: var(--PropertyGroup_lineHeight);
   margin: 0;
 }

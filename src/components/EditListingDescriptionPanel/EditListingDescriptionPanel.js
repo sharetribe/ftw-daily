@@ -37,8 +37,6 @@ const EditListingDescriptionPanel = props => {
     <FormattedMessage id="EditListingDescriptionPanel.createListingTitle" />
   );
 
-  console.log(listing)
-
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>

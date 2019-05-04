@@ -1,6 +1,7 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { InlineTextButton } from '../../components';
+import SectionAvatar from './SectionAvatar';
 import { LINE_ITEM_NIGHT, LINE_ITEM_DAY } from '../../util/types';
 import config from '../../config';
 
@@ -10,46 +11,40 @@ const SectionHeading = props => {
   const {
     priceTitle,
     formattedPrice,
+    completePrice,
     richTitle,
     category,
+    traderCategory,
     hostLink,
     showContactUser,
     onContactUser,
+    user,
+    params
   } = props;
 
   const unitType = config.bookingUnitType;
   const isNightly = unitType === LINE_ITEM_NIGHT;
   const isDaily = unitType === LINE_ITEM_DAY;
-
+  
   const unitTranslationKey = isNightly
-    ? 'ListingPage.perNight'
-    : isDaily
-    ? 'ListingPage.perDay'
-    : 'ListingPage.perUnit';
-
+  ? 'ListingPage.perNight'
+  : isDaily
+  ? 'ListingPage.perDay'
+  : 'ListingPage.perUnit';
+  
   return (
     <div className={css.sectionHeading}>
       <div className={css.desktopPriceContainer}>
-        <div className={css.desktopPriceValue} title={priceTitle}>
-          {formattedPrice}
-        </div>
-        <div className={css.desktopPerUnit}>
-          <FormattedMessage id={unitTranslationKey} />
-        </div>
+        <SectionAvatar user={user} params={params} />
       </div>
       <div className={css.heading}>
         <h1 className={css.title}>{richTitle}</h1>
         <div className={css.author}>
+          <FormattedMessage id={completePrice} />
+          <span className={css.separator}>•</span>
           {category}
-          <FormattedMessage id="ListingPage.hostedBy" values={{ name: hostLink }} />
-          {showContactUser ? (
-            <span className={css.contactWrapper}>
-              <span className={css.separator}>•</span>
-              <InlineTextButton rootClassName={css.contactLink} onClick={onContactUser}>
-                <FormattedMessage id="ListingPage.contactUser" />
-              </InlineTextButton>
-            </span>
-          ) : null}
+          <span className={css.separator}>•</span>
+          {traderCategory}
         </div>
       </div>
     </div>

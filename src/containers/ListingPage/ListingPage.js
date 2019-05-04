@@ -51,27 +51,37 @@ import SectionHostMaybe from './SectionHostMaybe';
 import SectionRulesMaybe from './SectionRulesMaybe';
 import SectionMapMaybe from './SectionMapMaybe';
 import css from './ListingPage.css';
+import { traderCategories } from './../../marketplace-custom-config'
 
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
 
 const { UUID } = sdkTypes;
 
 const priceData = (price, intl) => {
+  const unit = intl.formatMessage({ id: 'BookingPanel.perNight' })
   if (price && price.currency === config.currency) {
     const formattedPrice = formatMoney(intl, price);
-    return { formattedPrice, priceTitle: formattedPrice };
+    const completePrice = `${formattedPrice} ${unit}`;
+    return { formattedPrice, priceTitle: formattedPrice, completePrice };
   } else if (price) {
     return {
       formattedPrice: `(${price.currency})`,
       priceTitle: `Unsupported currency (${price.currency})`,
+      completeTitle: `(${price.currency} ${unit})`
     };
   }
   return {};
 };
 
-const categoryLabel = (categories, key) => {
+const categoryLabel = (categories, key, intl) => {
   const cat = categories.find(c => c.key === key);
-  return cat ? cat.label : key;
+  return cat ? intl.formatMessage({ id: cat.label }): key;
+};
+
+const traderCategoryLabel = (traderCategories, key, intl) => {
+  const cat = traderCategories.find(c => c.key === key);
+  const x = cat ? intl.formatMessage({ id: cat.label }): key;
+  return x
 };
 
 export class ListingPageComponent extends Component {
@@ -95,13 +105,20 @@ export class ListingPageComponent extends Component {
     const listing = getListing(listingId);
 
     const { bookingDates, ...bookingData } = values;
+    const date = bookingDates.date;
+    const day = date.getDate()
+    const month = date.getMonth()
+    const year = date.getFullYear()
 
+    const startDate = new Date(year, month, day, 0, 0, 0)
+    const endDate = new Date(year, month, day+1, 23, 59, 0)
+    
     const initialValues = {
       listing,
       bookingData,
       bookingDates: {
-        bookingStart: bookingDates.startDate,
-        bookingEnd: bookingDates.endDate,
+        bookingStart: startDate,
+        bookingEnd: endDate
       },
     };
 
@@ -313,8 +330,8 @@ export class ListingPageComponent extends Component {
     // banned or deleted display names for the function
     const authorDisplayName = userDisplayNameAsString(ensuredAuthor, '');
 
-    const { formattedPrice, priceTitle } = priceData(price, intl);
-
+    const { formattedPrice, priceTitle, completePrice } = priceData(price, intl);
+    
     const handleBookingSubmit = values => {
       const isCurrentlyClosed = currentListing.attributes.state === LISTING_STATE_CLOSED;
       if (isOwnListing || isCurrentlyClosed) {
@@ -362,8 +379,14 @@ export class ListingPageComponent extends Component {
     const category =
       publicData && publicData.category ? (
         <span>
-          {categoryLabel(categoriesConfig, publicData.category)}
-          <span className={css.separator}>•</span>
+          {categoryLabel(categoriesConfig, publicData.category, intl )}
+        </span>
+      ) : null;
+
+    const traderCategory =
+      publicData && publicData.traderCategory ? (
+        <span>
+          {traderCategoryLabel(traderCategories, publicData.traderCategory, intl )}
         </span>
       ) : null;
 
@@ -404,14 +427,20 @@ export class ListingPageComponent extends Component {
                 onManageDisableScrolling={onManageDisableScrolling}
               />
               <div className={css.contentContainer}>
-                <SectionAvatar user={currentAuthor} params={params} />
+                <div>
+                  {/* <SectionAvatar user={currentAuthor} params={params} /> */}
+                </div>
                 <div className={css.mainContent}>
                   <SectionHeading
                     priceTitle={priceTitle}
                     formattedPrice={formattedPrice}
+                    completePrice={completePrice}
                     richTitle={richTitle}
                     category={category}
+                    traderCategory={traderCategory}
                     hostLink={hostLink}
+                    user={currentAuthor} 
+                    params={params} 
                     showContactUser={showContactUser}
                     onContactUser={this.onContactUser}
                   />

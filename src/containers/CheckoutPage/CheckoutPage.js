@@ -138,6 +138,7 @@ export class CheckoutPageComponent extends Component {
   }
 
   handleSubmit(values) {
+    console.log('------------')
     if (this.state.submitting) {
       return;
     }
@@ -219,7 +220,7 @@ export class CheckoutPageComponent extends Component {
       isTransactionInitiateListingNotFoundError(initiateOrderError);
 
     const isLoading = !this.state.dataLoaded || speculateTransactionInProgress;
-
+    console.log(this.state.pageData)
     const { listing, bookingDates, enquiredTransaction } = this.state.pageData;
     const currentTransaction = ensureTransaction(speculatedTransaction, {}, null);
     const currentBooking = ensureBooking(currentTransaction.booking);
@@ -513,8 +514,8 @@ CheckoutPageComponent.propTypes = {
   listing: propTypes.listing,
   bookingData: object,
   bookingDates: shape({
-    bookingStart: instanceOf(Date).isRequired,
-    bookingEnd: instanceOf(Date).isRequired,
+    bookingStart: instanceOf(Date),
+    bookingEnd: instanceOf(Date),
   }),
   fetchSpeculatedTransaction: func.isRequired,
   speculateTransactionInProgress: bool.isRequired,

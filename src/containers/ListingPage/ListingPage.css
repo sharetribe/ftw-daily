@@ -259,9 +259,6 @@
   width: 60px;
 
   @media (--viewportMedium) {
-    position: absolute;
-    left: 60px;
-    top: -49px;
     margin-left: 0;
     margin-top: 0;
   }
@@ -401,7 +398,6 @@
 .descriptionTitle {
   /* Font */
   @apply --marketplaceH3FontStyles;
-  color: var(--matterColorAnti);
 
   margin-top: 0;
   margin-bottom: 13px;
@@ -424,7 +420,6 @@
 .featuresTitle {
   /* Font */
   @apply --marketplaceH3FontStyles;
-  color: var(--matterColorAnti);
 
   margin-top: 0;
   margin-bottom: 16px;
@@ -437,6 +432,7 @@
 .description {
   margin-top: 0;
   margin-bottom: 0;
+  @apply --marketplaceH4FontStyles;
 
   /* Preserve newlines, but collapse other whitespace */
   white-space: pre-line;
@@ -460,7 +456,6 @@
 .locationTitle {
   /* Font */
   @apply --marketplaceH3FontStyles;
-  color: var(--matterColorAnti);
 
   margin-top: 0;
   margin-bottom: 20px;
@@ -484,7 +479,6 @@
 
 .reviewsHeading {
   @apply --marketplaceH3FontStyles;
-  color: var(--matterColorAnti);
 
   margin: 52px 0 20px 0;
 
@@ -511,7 +505,6 @@
 
 .yourHostHeading {
   @apply --marketplaceH3FontStyles;
-  color: var(--matterColorAnti);
 
   margin: 54px 0 23px 0;
 

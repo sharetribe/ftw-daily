@@ -70,7 +70,6 @@ class SearchFiltersMobileComponent extends Component {
   }
 
   handleSelectSingle(urlParam, option) {
-    console.log('here', urlParam, option)
     const { urlQueryParams, history } = this.props;
 
     // query parameters after selecting the option
