@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import omit from 'lodash/omit';
-
+import { categories, amenities } from './../../marketplace-custom-config'
 import routeConfiguration from '../../routeConfiguration';
 import { parseDateFromISO8601, stringifyDateToISO8601 } from '../../util/dates';
 import { createResourceLocatorString } from '../../util/routes';
@@ -209,7 +209,23 @@ class SearchFiltersMobileComponent extends Component {
     const categoryLabel = intl.formatMessage({
       id: 'SearchFiltersMobile.categoryLabel',
     });
+
     const initialCategory = categoryFilter ? this.initialValue(categoryFilter.paramName) : null;
+  
+    categoryFilter.options.map(option => {
+      const category = categories.find(c => c.key === option.key)
+      option.label = intl.formatMessage({ id: category.label })
+    })
+
+    categoryFilter.options.map(option => {
+      const category = categories.find(c => c.key === option.key)
+      option.label = intl.formatMessage({ id: category.label })
+    })
+
+    amenitiesFilter.options.map(option => {
+      const amenity = amenities.find(c => c.key === option.key)
+      option.label = intl.formatMessage({ id: amenity.label })
+    })
 
     const categoryFilterElement = categoryFilter ? (
       <SelectSingleFilter

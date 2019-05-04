@@ -10,12 +10,9 @@ const dev = process.env.REACT_APP_ENV === 'development';
 // locale data and the messages in the app.js file.
 const locale = 'pt';
 const i18n = {
-  /*
-    0: Sunday
-    1: Monday
-    ...
-    6: Saturday
-  */
+  0: 'Domingo',
+  1: 'Monday',
+  6: 'Saturday',
   firstDayOfWeek: 0,
 };
 

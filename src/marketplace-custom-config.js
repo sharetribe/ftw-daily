@@ -5,22 +5,22 @@
 export const amenities = [
   {
     key: 'towels',
-    label: 'Towels',
+    label: 'Amenity.towels',
     icon: "layer-group"
   },
   {
     key: 'bathroom',
-    label: 'Bathroom',
+    label: 'Amenity.bathroom',
     icon: "shower"
   },
   {
     key: 'jacuzzi',
-    label: 'Jacuzzi',
+    label: 'Amenity.jacuzzi',
     icon: 'hot-tub'
   },
   {
     key: 'barbeque',
-    label: 'Barbeque',
+    label: 'Amenity.barbeque',
     icon: 'gripfire'
   }
 ];
