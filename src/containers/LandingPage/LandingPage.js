@@ -55,7 +55,7 @@ export const LandingPageComponent = props => {
     >
       <LayoutSingleColumn>
         <LayoutWrapperTopbar>
-          <TopbarContainer />
+          <TopbarContainer displaySearch={false} />
         </LayoutWrapperTopbar>
         <LayoutWrapperMain>
           <div className={css.heroContainer}>

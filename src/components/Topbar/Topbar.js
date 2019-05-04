@@ -148,6 +148,7 @@ class TopbarComponent extends Component {
       sendVerificationEmailInProgress,
       sendVerificationEmailError,
       showGenericError,
+      displaySearch
     } = this.props;
 
     const { mobilemenu, mobilesearch, address, origin, bounds } = parse(location.search, {
@@ -224,6 +225,7 @@ class TopbarComponent extends Component {
             isAuthenticated={isAuthenticated}
             notificationCount={notificationCount}
             onLogout={this.handleLogout}
+            displaySearch={displaySearch}
             onSearchSubmit={this.handleSubmit}
           />
         </div>
@@ -284,6 +286,7 @@ TopbarComponent.defaultProps = {
   currentUserHasOrders: null,
   currentPage: null,
   sendVerificationEmailError: null,
+  displaySearch: true
 };
 
 const { func, number, shape, string } = PropTypes;

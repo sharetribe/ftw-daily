@@ -31,19 +31,26 @@ const TopbarDesktop = props => {
     onLogout,
     onSearchSubmit,
     initialSearchFormValues,
+    displaySearch
   } = props;
 
   const classes = classNames(rootClassName || css.root, className);
 
-  const search = (
-    <TopbarSearchForm
-      className={css.searchLink}
-      desktopInputRoot={css.topbarSearchWithLeftPadding}
-      form="TopbarSearchFormDesktop"
-      onSubmit={onSearchSubmit}
-      initialValues={initialSearchFormValues}
-    />
-  );
+  let search
+  if(displaySearch) {
+    search = (
+      <TopbarSearchForm
+        className={css.searchLink}
+        desktopInputRoot={css.topbarSearchWithLeftPadding}
+        form="TopbarSearchFormDesktop"
+        onSubmit={onSearchSubmit}
+        initialValues={initialSearchFormValues}
+      />
+    );
+  } else {
+    search = <div style={{flexGrow: '1'}}>&nbsp;</div>
+  }
+  
 
   const notificationDot = notificationCount > 0 ? <div className={css.notificationDot} /> : null;
 
