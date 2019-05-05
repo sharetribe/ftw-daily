@@ -75,7 +75,7 @@
     "prettier": "^1.15.3"
   },
   "scripts": {
-    "audit": "yarn audit --json | node scripts/audit.js",
+    "audit": "npm audit --json | node scripts/audit.js",
     "clean": "rm -rf build/*",
     "config": "node scripts/config.js",
     "dev": "node scripts/config.js --check && sharetribe-scripts start",
@@ -87,8 +87,8 @@
     "test-ci": "sharetribe-scripts test --env=jsdom --runInBand",
     "eject": "sharetribe-scripts eject",
     "start": "node server/index.js",
-    "dev-server": "export NODE_ENV=development PORT=4000 REACT_APP_CANONICAL_ROOT_URL=http://localhost:4000&&yarn run build&&nodemon --watch server server/index.js",
-    "heroku-postbuild": "yarn run build",
+    "dev-server": "export NODE_ENV=development PORT=4000 REACT_APP_CANONICAL_ROOT_URL=http://localhost:4000&&npm run build&&nodemon --watch server server/index.js",
+    "heroku-postbuild": "npm run build",
     "translate": "node scripts/translations.js"
   },
   "prettier": {
