@@ -119,7 +119,6 @@ exports[`ListingPage matches snapshot 1`] = `
               formattedPrice={55}
               hostLink={
                 <NamedLink
-                  className={undefined}
                   name="ListingPage"
                   params={
                     Object {
@@ -323,7 +322,7 @@ exports[`ListingPage matches snapshot 1`] = `
                        
                       title
                       
-                  </span>,
+                    </span>,
                   }
                 }
               />

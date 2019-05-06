@@ -36,7 +36,7 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
             "text": <FormattedMessage
               id="ContactDetailsPage.contactDetailsTabTitle"
               values={Object {}}
-        />,
+            />,
           },
           Object {
             "linkProps": Object {
@@ -46,7 +46,7 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
             "text": <FormattedMessage
               id="ContactDetailsPage.passwordTabTitle"
               values={Object {}}
-        />,
+            />,
           },
           Object {
             "linkProps": Object {
@@ -56,7 +56,7 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
             "text": <FormattedMessage
               id="ContactDetailsPage.paymentsTabTitle"
               values={Object {}}
-        />,
+            />,
           },
         ]
       }

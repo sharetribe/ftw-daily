@@ -46,10 +46,10 @@ exports[`InboxPage matches snapshot 1`] = `
               "selected": true,
               "text": <span>
                 <FormattedMessage
-                      id="InboxPage.ordersTabTitle"
-                      values={Object {}}
+                  id="InboxPage.ordersTabTitle"
+                  values={Object {}}
                 />
-          </span>,
+              </span>,
             },
             Object {
               "linkProps": Object {
@@ -61,10 +61,10 @@ exports[`InboxPage matches snapshot 1`] = `
               "selected": false,
               "text": <span>
                 <FormattedMessage
-                      id="InboxPage.salesTabTitle"
-                      values={Object {}}
+                  id="InboxPage.salesTabTitle"
+                  values={Object {}}
                 />
-          </span>,
+              </span>,
             },
           ]
         }
@@ -78,7 +78,7 @@ exports[`InboxPage matches snapshot 1`] = `
         <li
           key="order-1"
         >
-          <Component
+          <InboxItem
             intl={
               Object {
                 "formatDate": [Function],
@@ -216,7 +216,7 @@ exports[`InboxPage matches snapshot 1`] = `
         <li
           key="order-2"
         >
-          <Component
+          <InboxItem
             intl={
               Object {
                 "formatDate": [Function],
@@ -468,10 +468,10 @@ exports[`InboxPage matches snapshot 3`] = `
               "selected": false,
               "text": <span>
                 <FormattedMessage
-                      id="InboxPage.ordersTabTitle"
-                      values={Object {}}
+                  id="InboxPage.ordersTabTitle"
+                  values={Object {}}
                 />
-          </span>,
+              </span>,
             },
             Object {
               "linkProps": Object {
@@ -483,10 +483,10 @@ exports[`InboxPage matches snapshot 3`] = `
               "selected": true,
               "text": <span>
                 <FormattedMessage
-                      id="InboxPage.salesTabTitle"
-                      values={Object {}}
+                  id="InboxPage.salesTabTitle"
+                  values={Object {}}
                 />
-          </span>,
+              </span>,
             },
           ]
         }
@@ -500,7 +500,7 @@ exports[`InboxPage matches snapshot 3`] = `
         <li
           key="sale-1"
         >
-          <Component
+          <InboxItem
             intl={
               Object {
                 "formatDate": [Function],
@@ -638,7 +638,7 @@ exports[`InboxPage matches snapshot 3`] = `
         <li
           key="sale-2"
         >
-          <Component
+          <InboxItem
             intl={
               Object {
                 "formatDate": [Function],
