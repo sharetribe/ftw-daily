@@ -14,6 +14,13 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [change] Update sharetribe-scripts (CRA fork) to v2.1.8. There are a couple of changes that you
+  should check from [#1073](https://github.com/sharetribe/flex-template-web/pull/1073)
+  - package.json has now a "browserlist" configuration key. This gives you an option to affect
+    Autoprefixer configs (aka CSS vendor prefixes / browser support). You might want to update it.
+  - IE support is removed from Create React App, but you can add polyfills yourself if needed.
+  - Test snapshots were also changed a bit. (Update your own custom tests if needed.)
+  - Some CSS and React rules were more strict, you might need to make changes to your custom code.
 - [fix] New npm vulnerability alerts checked and added to exception list.
   [#1075](https://github.com/sharetribe/flex-template-web/pull/1075)
 - [fix] ListingPage.duck: fix minor bug on dispatching the fetchReviewsRequest action
