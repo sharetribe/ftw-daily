@@ -171,7 +171,7 @@ export const showListing = (listingId, isOwn = false) => (dispatch, getState, sd
 };
 
 export const fetchReviews = listingId => (dispatch, getState, sdk) => {
-  dispatch(fetchReviewsRequest);
+  dispatch(fetchReviewsRequest());
   return sdk.reviews
     .query({
       listing_id: listingId,

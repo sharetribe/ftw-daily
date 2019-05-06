@@ -119,7 +119,6 @@ exports[`ListingPage matches snapshot 1`] = `
               formattedPrice={55}
               hostLink={
                 <NamedLink
-                  className={undefined}
                   name="ListingPage"
                   params={
                     Object {
@@ -152,7 +151,7 @@ exports[`ListingPage matches snapshot 1`] = `
             <SectionDescriptionMaybe
               description="listing1 description"
             />
-            <SectionFeatures
+            <SectionFeaturesMaybe
               options={
                 Array [
                   Object {
@@ -169,6 +168,7 @@ exports[`ListingPage matches snapshot 1`] = `
                   },
                 ]
               }
+              publicData={Object {}}
             />
             <SectionRulesMaybe
               className={null}
@@ -195,7 +195,7 @@ exports[`ListingPage matches snapshot 1`] = `
               fetchReviewsError={null}
               reviews={Array []}
             />
-            <SectionHost
+            <SectionHostMaybe
               authorDisplayName="user-1 display name"
               currentUser={
                 Object {
@@ -210,7 +210,6 @@ exports[`ListingPage matches snapshot 1`] = `
                       "firstName": "user-2 first name",
                       "lastName": "user-2 last name",
                     },
-                    "stripeConnected": true,
                   },
                   "id": UUID {
                     "uuid": "user-2",
@@ -323,7 +322,7 @@ exports[`ListingPage matches snapshot 1`] = `
                        
                       title
                       
-                  </span>,
+                    </span>,
                   }
                 }
               />

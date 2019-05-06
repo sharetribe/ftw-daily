@@ -31,12 +31,17 @@ const { Money } = sdkTypes;
 describe('TransactionPanel - Sale', () => {
   const providerId = 'provider';
   const customerId = 'customer';
+  const start = new Date(Date.UTC(2017, 5, 10));
+  const end = new Date(Date.UTC(2017, 5, 13));
+
   const baseTxAttrs = {
     total: new Money(16500, 'USD'),
     commission: new Money(1000, 'USD'),
     booking: createBooking('booking1', {
-      start: new Date(Date.UTC(2017, 5, 10)),
-      end: new Date(Date.UTC(2017, 5, 13)),
+      start,
+      end,
+      displayStart: start,
+      displayEnd: end,
     }),
     listing: createListing('listing1'),
     customer: createUser(customerId),
@@ -187,14 +192,19 @@ describe('TransactionPanel - Sale', () => {
     expect(tree).toMatchSnapshot();
   });
   it('renders correct total price', () => {
+    const start = new Date(Date.UTC(2017, 5, 10));
+    const end = new Date(Date.UTC(2017, 5, 13));
+
     const transaction = createTransaction({
       id: 'sale-tx',
       lastTransition: TRANSITION_REQUEST,
       total: new Money(16500, 'USD'),
       commission: new Money(1000, 'USD'),
       booking: createBooking('booking1', {
-        start: new Date(Date.UTC(2017, 5, 10)),
-        end: new Date(Date.UTC(2017, 5, 13)),
+        start,
+        end,
+        displayStart: start,
+        displayEnd: end,
       }),
       listing: createListing('listing1'),
       customer: createUser('customer1'),
@@ -219,11 +229,15 @@ describe('TransactionPanel - Sale', () => {
 describe('TransactionPanel - Order', () => {
   const providerId = 'provider';
   const customerId = 'customer';
+  const start = new Date(Date.UTC(2017, 5, 10));
+  const end = new Date(Date.UTC(2017, 5, 13));
   const baseTxAttrs = {
     total: new Money(16500, 'USD'),
     booking: createBooking('booking1', {
-      start: new Date(Date.UTC(2017, 5, 10)),
-      end: new Date(Date.UTC(2017, 5, 13)),
+      start,
+      end,
+      displayStart: start,
+      displayEnd: end,
     }),
     listing: createListing('listing1'),
     provider: createUser(providerId),
@@ -375,13 +389,17 @@ describe('TransactionPanel - Order', () => {
     expect(tree).toMatchSnapshot();
   });
   it('renders correct total price', () => {
+    const start = new Date(Date.UTC(2017, 5, 10));
+    const end = new Date(Date.UTC(2017, 5, 13));
     const tx = createTransaction({
       id: 'order-tx',
       lastTransition: TRANSITION_REQUEST,
       total: new Money(16500, 'USD'),
       booking: createBooking('booking1', {
-        start: new Date(Date.UTC(2017, 5, 10)),
-        end: new Date(Date.UTC(2017, 5, 13)),
+        start,
+        end,
+        displayStart: start,
+        displayEnd: end,
       }),
       listing: createListing('listing1'),
       provider: createUser(providerId),

@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { bool, func, object, shape, string, oneOf } from 'prop-types';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { intlShape, injectIntl } from 'react-intl';
@@ -16,7 +16,7 @@ import { LISTING_STATE_DRAFT, LISTING_STATE_PENDING_APPROVAL, propTypes } from '
 import { ensureOwnListing } from '../../util/data';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { stripeAccountClearError, createStripeAccount } from '../../ducks/user.duck';
+import { stripeAccountClearError, createStripeAccount } from '../../ducks/stripe.duck';
 import { EditListingWizard, NamedRedirect, Page } from '../../components';
 import { TopbarContainer } from '../../containers';
 
@@ -210,8 +210,6 @@ EditListingPageComponent.defaultProps = {
   sendVerificationEmailError: null,
 };
 
-const { bool, func, object, shape, string, oneOf } = PropTypes;
-
 EditListingPageComponent.propTypes = {
   createStripeAccountError: propTypes.error,
   currentUser: propTypes.currentUser,
@@ -249,7 +247,8 @@ EditListingPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const page = state.EditListingPage;
-  const { createStripeAccountInProgress, createStripeAccountError, currentUser } = state.user;
+  const { createStripeAccountInProgress, createStripeAccountError } = state.stripe;
+  const { currentUser } = state.user;
 
   const fetchInProgress = createStripeAccountInProgress;
 

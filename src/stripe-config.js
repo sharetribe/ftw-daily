@@ -1,18 +1,15 @@
 /*
  * Stripe related configuration.
+ *
+ * Note: this setup is for API version '2019-02-19' and later.
+ * If you have an older API version in use, you need to update your Stripe API.
+ * You can check your Stripe API version from Stripe Dashboard -> Developers.
  */
 
 // NOTE: REACT_APP_STRIPE_PUBLISHABLE_KEY is mandatory environment variable.
 // This variable is set in a hidden file: .env
 // To make Stripe connection work, you also need to set Stripe's private key in the Flex Console.
 export const stripePublishableKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY;
-
-// You can check your Stripe API version from Stripe Dashboard -> Developers.
-// If you are using the API version that is earlier than '2019-02-19' change this value to 'true'
-// See Stripe API changelog: https://stripe.com/docs/upgrades#api-changelog
-// NOTE: we are not supporting company accounts with new Stripe API yet!
-// The option for company accounts will be hidden if this value is set to 'false'
-export const useDeprecatedLegalEntityWithStripe = false;
 
 // Stripe only supports payments in certain countries, see full list
 // at https://stripe.com/global
@@ -47,7 +44,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
-      additionalOwners: true,
+      owners: true,
     },
   },
   {
@@ -64,7 +61,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
-      additionalOwners: true,
+      owners: true,
     },
   },
   {
@@ -97,7 +94,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
-      additionalOwners: true,
+      owners: true,
     },
   },
   {
@@ -114,7 +111,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
-      additionalOwners: true,
+      owners: true,
     },
   },
   {
@@ -131,7 +128,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
-      additionalOwners: true,
+      owners: true,
     },
   },
   {
@@ -148,7 +145,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
-      additionalOwners: true,
+      owners: true,
     },
   },
   {
@@ -164,9 +161,12 @@ export const stripeSupportedCountries = [
       branchCode: true,
       accountNumber: true,
     },
-    personalIdNumberRequired: true,
     companyConfig: {
       personalAddress: true,
+      personalIdNumberRequired: true,
+    },
+    individualConfig: {
+      personalIdNumberRequired: true,
     },
   },
   {
@@ -183,7 +183,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
-      additionalOwners: true,
+      owners: true,
     },
   },
   {
@@ -200,7 +200,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
-      additionalOwners: true,
+      owners: true,
     },
   },
   {
@@ -217,7 +217,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
-      additionalOwners: true,
+      owners: true,
     },
   },
   {
@@ -234,7 +234,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
-      additionalOwners: true,
+      owners: true,
     },
   },
   {
@@ -264,7 +264,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
-      additionalOwners: true,
+      owners: true,
     },
   },
   {
@@ -281,7 +281,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
-      additionalOwners: true,
+      owners: true,
     },
   },
   {
@@ -298,7 +298,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
-      additionalOwners: true,
+      owners: true,
     },
   },
   {
@@ -315,7 +315,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
-      additionalOwners: true,
+      owners: true,
     },
   },
   {
@@ -332,7 +332,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
-      additionalOwners: true,
+      owners: true,
     },
   },
   {
@@ -350,7 +350,7 @@ export const stripeSupportedCountries = [
     },
     companyConfig: {
       personalAddress: true,
-      additionalOwners: true,
+      owners: true,
     },
   },
   {
@@ -367,6 +367,22 @@ export const stripeSupportedCountries = [
       routingNumber: true,
       accountNumber: true,
     },
-    ssnLast4Required: true,
+    companyConfig: {
+      businessURL: true,
+      companyPhone: true,
+      mccForUS: true,
+      owners: true,
+      personalAddress: true,
+      personalEmail: true,
+      personalPhone: true,
+      ssnLast4Required: true,
+    },
+    individualConfig: {
+      businessURL: true,
+      mccForUS: true,
+      ssnLast4Required: true,
+      personalEmail: true,
+      personalPhone: true,
+    },
   },
 ];

@@ -10,7 +10,7 @@ import {
   LISTING_PAGE_PARAM_TYPE_NEW,
   LISTING_PAGE_PARAM_TYPES,
 } from '../../util/urlHelpers';
-import { ensureListing } from '../../util/data';
+import { ensureListing, ensureCurrentUser } from '../../util/data';
 import { PayoutDetailsForm } from '../../forms';
 import { Modal, NamedRedirect, Tabs } from '../../components';
 
@@ -156,7 +156,7 @@ class EditListingWizard extends Component {
   handlePublishListing(id) {
     const { onPublishListingDraft, currentUser } = this.props;
     const stripeConnected =
-      currentUser && currentUser.attributes && currentUser.attributes.stripeConnected;
+      currentUser && currentUser.stripeAccount && !!currentUser.stripeAccount.id;
     if (stripeConnected) {
       onPublishListingDraft(id);
     } else {
@@ -172,9 +172,8 @@ class EditListingWizard extends Component {
   }
 
   handlePayoutSubmit(values) {
-    const { fname: firstName, lname: lastName, ...rest } = values;
     this.props
-      .onPayoutDetailsSubmit({ firstName, lastName, ...rest })
+      .onPayoutDetailsSubmit(values)
       .then(() => {
         this.setState({ showPayoutDetails: false });
         this.props.onManageDisableScrolling('EditListingWizard.payoutModal', false);
@@ -289,6 +288,7 @@ class EditListingWizard extends Component {
               className={css.payoutDetails}
               inProgress={fetchInProgress}
               createStripeAccountError={errors ? errors.createStripeAccountError : null}
+              currentUserId={ensureCurrentUser(this.props.currentUser).id}
               onChange={onPayoutDetailsFormChange}
               onSubmit={this.handlePayoutSubmit}
             />

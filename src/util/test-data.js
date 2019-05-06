@@ -18,7 +18,19 @@ export const createBooking = (id, attributes = {}) => ({
   type: 'booking',
   attributes: {
     start: new Date(Date.UTC(2017, 5, 10)),
+    displayStart: new Date(Date.UTC(2017, 5, 10)),
     end: new Date(Date.UTC(2017, 5, 10)),
+    displayEnd: new Date(Date.UTC(2017, 5, 10)),
+    ...attributes,
+  },
+});
+
+// Create a stripeAccount that conforms to the util/types stripeAccount schema
+export const createStripeAccount = (id, attributes = {}) => ({
+  id: new UUID(id),
+  type: 'stripeAccount',
+  attributes: {
+    stripeAccountId: 'acc_testiaccountid',
     ...attributes,
   },
 });
@@ -39,7 +51,7 @@ export const createUser = (id, attributes = {}) => ({
 });
 
 // Create a user that conforms to the util/types currentUser schema
-export const createCurrentUser = (id, attributes = {}) => ({
+export const createCurrentUser = (id, attributes = {}, includes = {}) => ({
   id: new UUID(id),
   type: 'currentUser',
   attributes: {
@@ -53,9 +65,9 @@ export const createCurrentUser = (id, attributes = {}) => ({
       displayName: `${id} display name`,
       abbreviatedName: `${id} abbreviated name`,
     },
-    stripeConnected: true,
     ...attributes,
   },
+  ...includes,
 });
 
 // Create a user that conforms to the util/types user schema

@@ -54,6 +54,11 @@ export class SearchPageComponent extends Component {
   filters() {
     const { categories, amenities, priceFilterConfig, dateRangeFilterConfig } = this.props;
 
+    // Note: "category" and "amenities" filters are not actually filtering anything by default.
+    // Currently, if you want to use them, we need to manually configure them to be available
+    // for search queries. Read more from extended data document:
+    // https://www.sharetribe.com/docs/references/extended-data/#data-schema
+
     return {
       categoryFilter: {
         paramName: 'pub_category',
@@ -361,6 +366,8 @@ SearchPage.loadData = (params, search) => {
     page,
     perPage: RESULT_PAGE_SIZE,
     include: ['author', 'images'],
+    'fields.listing': ['title', 'geolocation', 'price'],
+    'fields.user': ['profile.displayName', 'profile.abbreviatedName'],
     'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
     'limit.images': 1,
   });

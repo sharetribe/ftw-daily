@@ -69,7 +69,9 @@ const BookingPanel = props => {
   } = props;
 
   const price = listing.attributes.price;
-  const isClosed = listing.attributes.state === LISTING_STATE_CLOSED;
+  const hasListingState = !!listing.attributes.state;
+  const isClosed = hasListingState && listing.attributes.state === LISTING_STATE_CLOSED;
+  const showBookingDatesForm = hasListingState && !isClosed;
   const showClosedListingHelpText = listing.id && isClosed;
   const { formattedPrice, priceTitle } = priceData(price, intl);
   const isBook = !!parse(location.search).book;
@@ -113,7 +115,7 @@ const BookingPanel = props => {
           <h2 className={titleClasses}>{title}</h2>
           {subTitleText ? <div className={css.bookingHelp}>{subTitleText}</div> : null}
         </div>
-        {!isClosed ? (
+        {showBookingDatesForm ? (
           <BookingDatesForm
             className={css.bookingForm}
             submitButtonWrapperClassName={css.bookingDatesSubmitButtonWrapper}
@@ -136,7 +138,7 @@ const BookingPanel = props => {
           </div>
         </div>
 
-        {!isClosed ? (
+        {showBookingDatesForm ? (
           <Button
             rootClassName={css.bookButton}
             onClick={() => openBookModal(isOwnListing, isClosed, history, location)}

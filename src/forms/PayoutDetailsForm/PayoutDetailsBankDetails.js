@@ -1,8 +1,8 @@
 import React from 'react';
 import { bool, string } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { StripeBankAccountTokenInputField } from '../../components';
 import * as validators from '../../util/validators';
+import { StripeBankAccountTokenInputField } from '../../components';
 
 import { stripeCountryConfigs } from './PayoutDetailsForm';
 import css from './PayoutDetailsForm.css';

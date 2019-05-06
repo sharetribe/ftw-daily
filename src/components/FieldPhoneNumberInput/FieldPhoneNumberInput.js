@@ -11,10 +11,10 @@ import { format, parse } from './fiFormatter';
 
 const FieldPhoneNumberInput = props => {
   const inputProps = {
-    ...props,
     type: 'text',
     format: format,
     parse: parse,
+    ...props,
   };
 
   return <FieldTextInput {...inputProps} />;

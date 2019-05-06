@@ -191,7 +191,7 @@ export const isChangePasswordWrongPassword = error => error && error.status === 
 
 /**
  * Check if the given API error (from
- * 'sdk.currentUser.createStripeAccount(payoutDetails)') is due to
+ * 'sdk.stripeAccount.create(payoutDetails)') is due to
  * invalid postal code in the given country.
  */
 export const isStripeInvalidPostalCode = error => {
@@ -201,6 +201,14 @@ export const isStripeInvalidPostalCode = error => {
     // case, so we have to recognize it from the message.
     const msg = apiError.meta && apiError.meta.stripeMessage ? apiError.meta.stripeMessage : '';
     return msgRe.test(msg);
+  });
+};
+
+export const isStripeError = error => {
+  return errorAPIErrors(error).some(apiError => {
+    // Stripe doesn't seem to give an error code for this specific
+    // case, so we have to recognize it from the message.
+    return !!(apiError.meta && apiError.meta.stripeMessage);
   });
 };
 
