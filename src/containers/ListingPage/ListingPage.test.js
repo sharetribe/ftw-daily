@@ -70,7 +70,7 @@ describe('ListingPage', () => {
       onLoadListing: noop,
       onManageDisableScrolling: noop,
       scrollingDisabled: false,
-      useInitialValues: noop,
+      callSetInitialValues: noop,
       sendVerificationEmailInProgress: false,
       onResendVerificationEmail: noop,
       sendEnquiryInProgress: false,
