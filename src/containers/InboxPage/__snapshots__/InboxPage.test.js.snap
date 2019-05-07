@@ -114,12 +114,14 @@ exports[`InboxPage matches snapshot 1`] = `
                         "provider",
                       ],
                       "lineTotal": Money {
+                        "_sdkType": "Money",
                         "amount": 1000,
                         "currency": "USD",
                       },
                       "quantity": "1",
                       "reversal": false,
                       "unitPrice": Money {
+                        "_sdkType": "Money",
                         "amount": 1000,
                         "currency": "USD",
                       },
@@ -130,21 +132,25 @@ exports[`InboxPage matches snapshot 1`] = `
                         "provider",
                       ],
                       "lineTotal": Money {
+                        "_sdkType": "Money",
                         "amount": -100,
                         "currency": "USD",
                       },
                       "reversal": false,
                       "unitPrice": Money {
+                        "_sdkType": "Money",
                         "amount": -100,
                         "currency": "USD",
                       },
                     },
                   ],
                   "payinTotal": Money {
+                    "_sdkType": "Money",
                     "amount": 1000,
                     "currency": "USD",
                   },
                   "payoutTotal": Money {
+                    "_sdkType": "Money",
                     "amount": 900,
                     "currency": "USD",
                   },
@@ -169,6 +175,7 @@ exports[`InboxPage matches snapshot 1`] = `
                     "start": 2017-02-15T00:00:00.000Z,
                   },
                   "id": UUID {
+                    "_sdkType": "UUID",
                     "uuid": "booking1",
                   },
                   "type": "booking",
@@ -183,11 +190,13 @@ exports[`InboxPage matches snapshot 1`] = `
                     },
                   },
                   "id": UUID {
+                    "_sdkType": "UUID",
                     "uuid": "customer-user-id",
                   },
                   "type": "user",
                 },
                 "id": UUID {
+                  "_sdkType": "UUID",
                   "uuid": "order-1",
                 },
                 "listing": null,
@@ -201,6 +210,7 @@ exports[`InboxPage matches snapshot 1`] = `
                     },
                   },
                   "id": UUID {
+                    "_sdkType": "UUID",
                     "uuid": "provider-user-id",
                   },
                   "type": "user",
@@ -252,12 +262,14 @@ exports[`InboxPage matches snapshot 1`] = `
                         "provider",
                       ],
                       "lineTotal": Money {
+                        "_sdkType": "Money",
                         "amount": 1000,
                         "currency": "USD",
                       },
                       "quantity": "1",
                       "reversal": false,
                       "unitPrice": Money {
+                        "_sdkType": "Money",
                         "amount": 1000,
                         "currency": "USD",
                       },
@@ -268,21 +280,25 @@ exports[`InboxPage matches snapshot 1`] = `
                         "provider",
                       ],
                       "lineTotal": Money {
+                        "_sdkType": "Money",
                         "amount": -100,
                         "currency": "USD",
                       },
                       "reversal": false,
                       "unitPrice": Money {
+                        "_sdkType": "Money",
                         "amount": -100,
                         "currency": "USD",
                       },
                     },
                   ],
                   "payinTotal": Money {
+                    "_sdkType": "Money",
                     "amount": 1000,
                     "currency": "USD",
                   },
                   "payoutTotal": Money {
+                    "_sdkType": "Money",
                     "amount": 900,
                     "currency": "USD",
                   },
@@ -307,6 +323,7 @@ exports[`InboxPage matches snapshot 1`] = `
                     "start": 2017-03-15T00:00:00.000Z,
                   },
                   "id": UUID {
+                    "_sdkType": "UUID",
                     "uuid": "booking2",
                   },
                   "type": "booking",
@@ -321,11 +338,13 @@ exports[`InboxPage matches snapshot 1`] = `
                     },
                   },
                   "id": UUID {
+                    "_sdkType": "UUID",
                     "uuid": "customer-user-id",
                   },
                   "type": "user",
                 },
                 "id": UUID {
+                  "_sdkType": "UUID",
                   "uuid": "order-2",
                 },
                 "listing": null,
@@ -339,6 +358,7 @@ exports[`InboxPage matches snapshot 1`] = `
                     },
                   },
                   "id": UUID {
+                    "_sdkType": "UUID",
                     "uuid": "provider-user-id",
                   },
                   "type": "user",
@@ -536,12 +556,14 @@ exports[`InboxPage matches snapshot 3`] = `
                         "provider",
                       ],
                       "lineTotal": Money {
+                        "_sdkType": "Money",
                         "amount": 1000,
                         "currency": "USD",
                       },
                       "quantity": "1",
                       "reversal": false,
                       "unitPrice": Money {
+                        "_sdkType": "Money",
                         "amount": 1000,
                         "currency": "USD",
                       },
@@ -552,21 +574,25 @@ exports[`InboxPage matches snapshot 3`] = `
                         "provider",
                       ],
                       "lineTotal": Money {
+                        "_sdkType": "Money",
                         "amount": -100,
                         "currency": "USD",
                       },
                       "reversal": false,
                       "unitPrice": Money {
+                        "_sdkType": "Money",
                         "amount": -100,
                         "currency": "USD",
                       },
                     },
                   ],
                   "payinTotal": Money {
+                    "_sdkType": "Money",
                     "amount": 1000,
                     "currency": "USD",
                   },
                   "payoutTotal": Money {
+                    "_sdkType": "Money",
                     "amount": 900,
                     "currency": "USD",
                   },
@@ -591,6 +617,7 @@ exports[`InboxPage matches snapshot 3`] = `
                     "start": 2017-02-15T00:00:00.000Z,
                   },
                   "id": UUID {
+                    "_sdkType": "UUID",
                     "uuid": "booking1",
                   },
                   "type": "booking",
@@ -605,11 +632,13 @@ exports[`InboxPage matches snapshot 3`] = `
                     },
                   },
                   "id": UUID {
+                    "_sdkType": "UUID",
                     "uuid": "customer-user-id",
                   },
                   "type": "user",
                 },
                 "id": UUID {
+                  "_sdkType": "UUID",
                   "uuid": "sale-1",
                 },
                 "listing": null,
@@ -623,6 +652,7 @@ exports[`InboxPage matches snapshot 3`] = `
                     },
                   },
                   "id": UUID {
+                    "_sdkType": "UUID",
                     "uuid": "provider-user-id",
                   },
                   "type": "user",
@@ -674,12 +704,14 @@ exports[`InboxPage matches snapshot 3`] = `
                         "provider",
                       ],
                       "lineTotal": Money {
+                        "_sdkType": "Money",
                         "amount": 1000,
                         "currency": "USD",
                       },
                       "quantity": "1",
                       "reversal": false,
                       "unitPrice": Money {
+                        "_sdkType": "Money",
                         "amount": 1000,
                         "currency": "USD",
                       },
@@ -690,21 +722,25 @@ exports[`InboxPage matches snapshot 3`] = `
                         "provider",
                       ],
                       "lineTotal": Money {
+                        "_sdkType": "Money",
                         "amount": -100,
                         "currency": "USD",
                       },
                       "reversal": false,
                       "unitPrice": Money {
+                        "_sdkType": "Money",
                         "amount": -100,
                         "currency": "USD",
                       },
                     },
                   ],
                   "payinTotal": Money {
+                    "_sdkType": "Money",
                     "amount": 1000,
                     "currency": "USD",
                   },
                   "payoutTotal": Money {
+                    "_sdkType": "Money",
                     "amount": 900,
                     "currency": "USD",
                   },
@@ -729,6 +765,7 @@ exports[`InboxPage matches snapshot 3`] = `
                     "start": 2017-03-15T00:00:00.000Z,
                   },
                   "id": UUID {
+                    "_sdkType": "UUID",
                     "uuid": "booking2",
                   },
                   "type": "booking",
@@ -743,11 +780,13 @@ exports[`InboxPage matches snapshot 3`] = `
                     },
                   },
                   "id": UUID {
+                    "_sdkType": "UUID",
                     "uuid": "customer-user-id",
                   },
                   "type": "user",
                 },
                 "id": UUID {
+                  "_sdkType": "UUID",
                   "uuid": "sale-2",
                 },
                 "listing": null,
@@ -761,6 +800,7 @@ exports[`InboxPage matches snapshot 3`] = `
                     },
                   },
                   "id": UUID {
+                    "_sdkType": "UUID",
                     "uuid": "provider-user-id",
                   },
                   "type": "user",
