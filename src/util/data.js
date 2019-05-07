@@ -40,6 +40,7 @@ export const combinedResourceObjects = (oldRes, newRes) => {
 export const updatedEntities = (oldEntities, apiResponse) => {
   const { data, included = [] } = apiResponse;
   const objects = (Array.isArray(data) ? data : [data]).concat(included);
+  const originalEntities = { ...oldEntities };
 
   const newEntities = objects.reduce((entities, curr) => {
     const { id, type } = curr;
@@ -52,7 +53,7 @@ export const updatedEntities = (oldEntities, apiResponse) => {
     const entity = entities[type][id.uuid];
     entities[type][id.uuid] = entity ? combinedResourceObjects(entity, current) : current;
     return entities;
-  }, oldEntities);
+  }, originalEntities);
 
   return newEntities;
 };
