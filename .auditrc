@@ -1,34 +1,5 @@
 exports.exceptions = [
-  // Severity: low, moment (< 2.19.3), currently used by react-dates
-  "https://npmjs.com/advisories/532",
-
-  // Severity: low, lodash (< 4.17.5), used heavily in our CRA fork
-  "https://npmjs.com/advisories/577",
-
-  // Severity: low, merge (< 1.2.1), used by Jest (CRA fork)
-  "https://npmjs.com/advisories/722",
-
-  // Severity: high, webpack-dev-server (< 3.1.10), (CRA fork)
-  // Note: don't run webpack-dev-server on public web.
-  "https://npmjs.com/advisories/725",
-
-  // Severity: high, handlebars (< 4.1.2), (CRA fork)
-  // Note: this is about Jest i.e. tests
-  "https://npmjs.com/advisories/755",
-
-  // Severity: moderate, lodash (< 4.17.11), (CRA fork)
-  // Note: this is mainly about Jest/tests and deps used in build
-  "https://npmjs.com/advisories/782",
-
-  // Severity: low, braces (< 2.3.1), (CRA fork)
-  // Note: this is about Jest and dev server
-  "https://npmjs.com/advisories/786",
-
-  // Severity: moderate, js-yaml (< 3.13.0), (CRA fork)
-  // Note: this called in deps used in build
-  "https://npmjs.com/advisories/788",
-
-  // Severity: high, js-yaml (< 3.13.1), (CRA fork)
-  // Note: this is called in deps used in build
-  "https://npmjs.com/advisories/813",
+  // Add exceptions to audit script:
+  // // Severity: low, lodash (< 4.17.5), used heavily in our CRA fork
+  // "https://npmjs.com/advisories/577",
 ];
