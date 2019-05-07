@@ -14,6 +14,10 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] Ensure on `TransactionPage` that all the required data is loaded before showing the page.
+  [#1080](https://github.com/sharetribe/flex-template-web/pull/1080),
+- [fix] Use proper method for Sentry on logout to avoid error message.
+  [#1082](https://github.com/sharetribe/flex-template-web/pull/1082)
 - [change] Update sharetribe-scripts (CRA fork) to v2.1.8. There are a couple of changes that you
   should check from [#1073](https://github.com/sharetribe/flex-template-web/pull/1073)
   - package.json has now a "browserlist" configuration key. This gives you an option to affect

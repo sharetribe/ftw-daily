@@ -118,6 +118,7 @@ export const TransactionPageComponent = props => {
     currentUser &&
     currentTransaction.id &&
     currentTransaction.id.uuid === params.id &&
+    currentTransaction.attributes.lineItems &&
     currentTransaction.customer &&
     currentTransaction.provider &&
     !fetchTransactionError;
