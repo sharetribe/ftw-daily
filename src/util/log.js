@@ -43,7 +43,7 @@ export const setUserId = userId => {
 
 export const clearUserId = () => {
   Sentry.configureScope(scope => {
-    scope.remove_user();
+    scope.setUser(null);
   });
 };
 
