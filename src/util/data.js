@@ -27,7 +27,7 @@ export const combinedResourceObjects = (oldRes, newRes) => {
     throw new Error('Cannot merge resource objects with different ids or types');
   }
   const attributes = newRes.attributes || oldRes.attributes;
-  const attrs = attributes ? { attributes } : null;
+  const attrs = attributes ? { attributes: { ...attributes } } : null;
   const relationships = combinedRelationships(oldRes.relationships, newRes.relationships);
   const rels = relationships ? { relationships } : null;
   return { id, type, ...attrs, ...rels };
@@ -40,7 +40,6 @@ export const combinedResourceObjects = (oldRes, newRes) => {
 export const updatedEntities = (oldEntities, apiResponse) => {
   const { data, included = [] } = apiResponse;
   const objects = (Array.isArray(data) ? data : [data]).concat(included);
-  const originalEntities = { ...oldEntities };
 
   const newEntities = objects.reduce((entities, curr) => {
     const { id, type } = curr;
@@ -51,9 +50,10 @@ export const updatedEntities = (oldEntities, apiResponse) => {
 
     entities[type] = entities[type] || {};
     const entity = entities[type][id.uuid];
-    entities[type][id.uuid] = entity ? combinedResourceObjects(entity, current) : current;
+    entities[type][id.uuid] = entity ? combinedResourceObjects({ ...entity }, current) : current;
+
     return entities;
-  }, originalEntities);
+  }, oldEntities);
 
   return newEntities;
 };
