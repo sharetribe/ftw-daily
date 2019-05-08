@@ -14,8 +14,12 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
-- [fix] Edit `updatedEntities` function in `util/data.js` so that it doesn't mutate the `oldEntities`
-  argument. [#1079](https://github.com/sharetribe/flex-template-web/pull/1079)
+- [fix] Previous change from `currentUser.attributes.stripeConnected` to separately included
+  `stripeAccount` caused errors since updates to currentUser entity didn't include `stripeAccount`.
+  Including it every time sounds quite error-prone, so we reversed that change.
+  [#1084](https://github.com/sharetribe/flex-template-web/pull/1084)
+- [fix] Edit `updatedEntities` function in `util/data.js` so that it doesn't mutate the
+  `oldEntities` argument. [#1079](https://github.com/sharetribe/flex-template-web/pull/1079)
 - [change] Update sharetribe-scripts (CRA fork) to v3.0.0. There are a couple of changes that you
   should check from [#1081](https://github.com/sharetribe/flex-template-web/pull/1081)
   - Reserve use\* function naming pattern for React Hooks.
