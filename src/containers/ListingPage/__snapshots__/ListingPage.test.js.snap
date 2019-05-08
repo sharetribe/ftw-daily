@@ -52,10 +52,12 @@ exports[`ListingPage matches snapshot 1`] = `
                 "deleted": false,
                 "description": "listing1 description",
                 "geolocation": LatLng {
+                  "_sdkType": "LatLng",
                   "lat": 40,
                   "lng": 60,
                 },
                 "price": Money {
+                  "_sdkType": "Money",
                   "amount": 5500,
                   "currency": "USD",
                 },
@@ -73,11 +75,13 @@ exports[`ListingPage matches snapshot 1`] = `
                   },
                 },
                 "id": UUID {
+                  "_sdkType": "UUID",
                   "uuid": "user-1",
                 },
                 "type": "user",
               },
               "id": UUID {
+                "_sdkType": "UUID",
                 "uuid": "listing1",
               },
               "images": Array [],
@@ -107,6 +111,7 @@ exports[`ListingPage matches snapshot 1`] = `
                   },
                 },
                 "id": UUID {
+                  "_sdkType": "UUID",
                   "uuid": "user-1",
                 },
                 "type": "user",
@@ -179,12 +184,14 @@ exports[`ListingPage matches snapshot 1`] = `
               className={null}
               geolocation={
                 LatLng {
+                  "_sdkType": "LatLng",
                   "lat": 40,
                   "lng": 60,
                 }
               }
               listingId={
                 UUID {
+                  "_sdkType": "UUID",
                   "uuid": "listing1",
                 }
               }
@@ -212,6 +219,7 @@ exports[`ListingPage matches snapshot 1`] = `
                     },
                   },
                   "id": UUID {
+                    "_sdkType": "UUID",
                     "uuid": "user-2",
                   },
                   "type": "currentUser",
@@ -224,10 +232,12 @@ exports[`ListingPage matches snapshot 1`] = `
                     "deleted": false,
                     "description": "listing1 description",
                     "geolocation": LatLng {
+                      "_sdkType": "LatLng",
                       "lat": 40,
                       "lng": 60,
                     },
                     "price": Money {
+                      "_sdkType": "Money",
                       "amount": 5500,
                       "currency": "USD",
                     },
@@ -245,11 +255,13 @@ exports[`ListingPage matches snapshot 1`] = `
                       },
                     },
                     "id": UUID {
+                      "_sdkType": "UUID",
                       "uuid": "user-1",
                     },
                     "type": "user",
                   },
                   "id": UUID {
+                    "_sdkType": "UUID",
                     "uuid": "listing1",
                   },
                   "images": Array [],
@@ -275,10 +287,12 @@ exports[`ListingPage matches snapshot 1`] = `
                   "deleted": false,
                   "description": "listing1 description",
                   "geolocation": LatLng {
+                    "_sdkType": "LatLng",
                     "lat": 40,
                     "lng": 60,
                   },
                   "price": Money {
+                    "_sdkType": "Money",
                     "amount": 5500,
                     "currency": "USD",
                   },
@@ -296,11 +310,13 @@ exports[`ListingPage matches snapshot 1`] = `
                     },
                   },
                   "id": UUID {
+                    "_sdkType": "UUID",
                     "uuid": "user-1",
                   },
                   "type": "user",
                 },
                 "id": UUID {
+                  "_sdkType": "UUID",
                   "uuid": "listing1",
                 },
                 "images": Array [],

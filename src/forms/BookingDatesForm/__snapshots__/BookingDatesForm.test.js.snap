@@ -25,6 +25,7 @@ exports[`BookingDatesForm matches snapshot without selected dates 1`] = `
   timeSlots={null}
   unitPrice={
     Money {
+      "_sdkType": "Money",
       "amount": 1099,
       "currency": "USD",
     }

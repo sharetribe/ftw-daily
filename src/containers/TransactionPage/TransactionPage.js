@@ -71,7 +71,7 @@ export const TransactionPageComponent = props => {
     onDeclineSale,
     timeSlots,
     fetchTimeSlotsError,
-    useInitialValues,
+    callSetInitialValues,
   } = props;
 
   const currentTransaction = ensureTransaction(transaction);
@@ -93,7 +93,7 @@ export const TransactionPageComponent = props => {
     const routes = routeConfiguration();
     // Customize checkout page state with current listing and selected bookingDates
     const { setInitialValues } = findRouteByRouteName('CheckoutPage', routes);
-    useInitialValues(setInitialValues, initialValues);
+    callSetInitialValues(setInitialValues, initialValues);
 
     // Redirect to CheckoutPage
     history.push(
@@ -264,7 +264,7 @@ TransactionPageComponent.propTypes = {
   onSendMessage: func.isRequired,
   timeSlots: arrayOf(propTypes.timeSlot),
   fetchTimeSlotsError: propTypes.error,
-  useInitialValues: func.isRequired,
+  callSetInitialValues: func.isRequired,
 
   // from withRouter
   history: shape({
@@ -338,7 +338,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(manageDisableScrolling(componentId, disableScrolling)),
     onSendReview: (role, tx, reviewRating, reviewContent) =>
       dispatch(sendReview(role, tx, reviewRating, reviewContent)),
-    useInitialValues: (setInitialValues, values) => dispatch(setInitialValues(values)),
+    callSetInitialValues: (setInitialValues, values) => dispatch(setInitialValues(values)),
   };
 };
 

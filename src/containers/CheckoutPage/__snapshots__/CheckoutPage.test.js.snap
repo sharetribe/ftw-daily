@@ -53,6 +53,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
               },
             },
             "id": UUID {
+              "_sdkType": "UUID",
               "uuid": "author",
             },
             "type": "user",
@@ -125,6 +126,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
                 },
               },
               "id": UUID {
+                "_sdkType": "UUID",
                 "uuid": "author",
               },
               "type": "user",

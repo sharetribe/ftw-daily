@@ -172,6 +172,7 @@ exports[`PayoutPreferencesPage matches snapshot with Stripe not connected 1`] = 
           createStripeAccountError={null}
           currentUserId={
             UUID {
+              "_sdkType": "UUID",
               "uuid": "stripe-not-connected",
             }
           }
@@ -276,6 +277,7 @@ exports[`PayoutPreferencesPage matches snapshot with details submitted 1`] = `
           createStripeAccountError={null}
           currentUserId={
             UUID {
+              "_sdkType": "UUID",
               "uuid": "stripe-connected",
             }
           }

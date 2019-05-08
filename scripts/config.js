@@ -65,9 +65,9 @@ Remember to restart the application after editing the environment variables! You
           name: 'createEmptyEnv',
           message: `Do you want to configure required environment variables now?
 ${chalk.dim(
-            `If you don't set up variables now .env file is created based on .env-template file. The application will not work correctly without Flex client ID, Stripe publishable API key and MapBox acces token.
+  `If you don't set up variables now .env file is created based on .env-template file. The application will not work correctly without Flex client ID, Stripe publishable API key and MapBox acces token.
 We recommend setting up the required variables before starting the application!`
-          )}`,
+)}`,
           default: true,
         },
       ])
@@ -121,8 +121,8 @@ const mandatoryVariables = settings => {
       name: 'REACT_APP_SHARETRIBE_SDK_CLIENT_ID',
       message: `What is your Flex client ID?
 ${chalk.dim(
-        'Client ID is needed for connecting with Flex API. You can find your client ID from Flex Console.'
-      )}
+  'Client ID is needed for connecting with Flex API. You can find your client ID from Flex Console.'
+)}
 `,
       validate: function(value) {
         if (value.match(/^[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/i)) {
@@ -137,9 +137,9 @@ ${chalk.dim(
       name: 'REACT_APP_STRIPE_PUBLISHABLE_KEY',
       message: `What is your Stripe publishable key?
 ${chalk.dim(
-        `Stripe publishable API key is for generating tokens with Stripe API. Use test key (prefix pk_test_) for development. Remember to also add the Stripe secret key to Console before testing the payments.
+  `Stripe publishable API key is for generating tokens with Stripe API. Use test key (prefix pk_test_) for development. Remember to also add the Stripe secret key to Console before testing the payments.
 If you don't set the Stripe key, payments won't work in the application.`
-      )}
+)}
 `,
       validate: function(value) {
         if (value.match(/^pk_/) || value === '') {
@@ -154,9 +154,9 @@ If you don't set the Stripe key, payments won't work in the application.`
       name: 'REACT_APP_MAPBOX_ACCESS_TOKEN',
       message: `What is your Mapbox access token?
 ${chalk.dim(
-        `Mapbox is the default map provider of the application. Sign up for Mapbox and go the to account page. Then click Create access token. For more information see the: Integrating to map providers documentation.
+  `Mapbox is the default map provider of the application. Sign up for Mapbox and go the to account page. Then click Create access token. For more information see the: Integrating to map providers documentation.
 If you don't set the Mapbox key, the map components won't work in the application.`
-      )}
+)}
 `,
       ...mapBoxDefaultMaybe,
     },
@@ -165,8 +165,8 @@ If you don't set the Mapbox key, the map components won't work in the applicatio
       name: 'REACT_APP_SHARETRIBE_MARKETPLACE_CURRENCY',
       message: `What is your marketplace currency?
 ${chalk.dim(
-        'The currency used in the Marketplace must be in ISO 4217 currency code. For example USD, EUR, CAD, AUD, etc. The default value is USD.'
-      )} 
+  'The currency used in the Marketplace must be in ISO 4217 currency code. For example USD, EUR, CAD, AUD, etc. The default value is USD.'
+)} 
 `,
       default: function() {
         return currencyDefault;
@@ -213,8 +213,8 @@ const advancedSettings = settings => {
       name: 'REACT_APP_CANONICAL_ROOT_URL',
       message: `What is your canonical root URL? 
 ${chalk.dim(
-        'Canonical root URL of the marketplace is needed for social media sharing and SEO optimization. When developing the template application locally URL is usually http://localhost:3000'
-      )}
+  'Canonical root URL of the marketplace is needed for social media sharing and SEO optimization. When developing the template application locally URL is usually http://localhost:3000'
+)}
 `,
       default: function() {
         return rootUrlDefault ? rootUrlDefault : 'http://localhost:3000';
@@ -228,8 +228,8 @@ ${chalk.dim(
       name: 'REACT_APP_AVAILABILITY_ENABLED',
       message: `Do you want to enable availability calendar?
 ${chalk.dim(
-        'This setting enables the Availability Calendar for listings. The default value for this setting is true.'
-      )}
+  'This setting enables the Availability Calendar for listings. The default value for this setting is true.'
+)}
 `,
       default: availabilityDefault,
       when: function(answers) {
@@ -241,8 +241,8 @@ ${chalk.dim(
       name: 'REACT_APP_DEFAULT_SEARCHES_ENABLED',
       message: `Do you want to enable default search suggestions?
 ${chalk.dim(
-        'This setting enables the Default Search Suggestions in location autocomplete search input. The default value for this setting is true.'
-      )}    
+  'This setting enables the Default Search Suggestions in location autocomplete search input. The default value for this setting is true.'
+)}    
 `,
       default: searchesDefault,
       when: function(answers) {
