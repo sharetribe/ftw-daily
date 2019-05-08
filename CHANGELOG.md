@@ -14,9 +14,11 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] Edit `updatedEntities` function in `util/data.js` so that it doesn't mutate the `oldEntities`
+  argument. [#1079](https://github.com/sharetribe/flex-template-web/pull/1079)
 - [change] Update sharetribe-scripts (CRA fork) to v3.0.0. There are a couple of changes that you
   should check from [#1081](https://github.com/sharetribe/flex-template-web/pull/1081)
-  - Reserve use* function naming pattern for React Hooks.
+  - Reserve use\* function naming pattern for React Hooks.
   - Recent SDK update changed the proptypes for snapshots.
   - Updated scripts/config.js after Prettier version bump
   - Removed unnecessary audit exceptions
