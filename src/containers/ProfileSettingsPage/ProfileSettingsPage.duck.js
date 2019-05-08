@@ -139,7 +139,7 @@ export const updateProfile = actionPayload => {
 
     const queryParams = {
       expand: true,
-      include: ['profileImage'],
+      include: ['profileImage', 'stripeAccount'],
       'fields.image': ['variants.square-small', 'variants.square-small2x'],
     };
 
