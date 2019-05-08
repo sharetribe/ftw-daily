@@ -14,6 +14,28 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+## [v2.16.0] 2019-05-08
+
+This release makes 2 big updates to `sharetribe-scripts` package (which is our fork from Create
+React App). It is updated from v1.1.5 ->
+[2.1.8](https://github.com/sharetribe/create-react-app/blob/master/CHANGELOG-2.x.md#migrating-from-1x-to-203)
+-> [3.0.0](https://github.com/sharetribe/create-react-app/blob/master/CHANGELOG.md). This brought up
+a couple of changes:
+
+- package.json has now a **"browserlist"** configuration key. This gives you an option to affect
+  browser support (it affects CSS Autoprefixer and JS build output).
+  [You might want to update it.](https://github.com/sharetribe/flex-template-web/pull/1073)
+- IE support is removed from Create React App, but you can add polyfills yourself if needed.
+- React was updated to a version that supports _Hooks_ and _Rules of React_ eslint plugin is
+  included.
+- All the npm vulnerability report exceptions were removed from `.auditrc`
+
+There was also a couple of bug fixes you should check carefully:
+[#1082](https://github.com/sharetribe/flex-template-web/pull/1082),
+[#1084](https://github.com/sharetribe/flex-template-web/pull/1084).
+
+**Changes:**
+
 - [fix] Previous change from `currentUser.attributes.stripeConnected` to separately included
   `stripeAccount` caused errors since updates to currentUser entity didn't include `stripeAccount`.
   Including it every time sounds quite error-prone, so we reversed that change.
@@ -27,9 +49,9 @@ way to update this template, but currently, we follow a pattern:
   - Updated scripts/config.js after Prettier version bump
   - Removed unnecessary audit exceptions
 - [fix] Ensure on `TransactionPage` that all the required data is loaded before showing the page.
-  [#1080](https://github.com/sharetribe/flex-template-web/pull/1080),
-- [fix] Use proper method for Sentry on logout to avoid error message.
   [#1082](https://github.com/sharetribe/flex-template-web/pull/1082)
+- [fix] Use proper method for Sentry on logout to avoid error message.
+  [#1080](https://github.com/sharetribe/flex-template-web/pull/1080),
 - [change] Update sharetribe-scripts (CRA fork) to v2.1.8. There are a couple of changes that you
   should check from [#1073](https://github.com/sharetribe/flex-template-web/pull/1073)
   - package.json has now a "browserlist" configuration key. This gives you an option to affect
@@ -41,6 +63,8 @@ way to update this template, but currently, we follow a pattern:
   [#1075](https://github.com/sharetribe/flex-template-web/pull/1075)
 - [fix] ListingPage.duck: fix minor bug on dispatching the fetchReviewsRequest action
   [#1074](https://github.com/sharetribe/flex-template-web/pull/1074)
+
+  [v2.16.0]: https://github.com/sharetribe/flex-template-web/compare/v2.15.0...v2.16.0
 
 ## [v2.15.0] 2019-04-24
 
