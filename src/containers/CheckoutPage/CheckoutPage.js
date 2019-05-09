@@ -515,6 +515,7 @@ CheckoutPageComponent.defaultProps = {
   speculatedTransaction: null,
   enquiredTransaction: null,
   currentUser: null,
+  stripePaymentToken: null,
 };
 
 CheckoutPageComponent.propTypes = {
@@ -537,6 +538,10 @@ CheckoutPageComponent.propTypes = {
     slug: string,
   }).isRequired,
   sendOrderRequest: func.isRequired,
+  onCreateStripePaymentToken: func.isRequired,
+  stripePaymentTokenInProgress: bool.isRequired,
+  stripePaymentTokenError: bool.isRequired,
+  stripePaymentToken: object,
 
   // from connect
   dispatch: func.isRequired,

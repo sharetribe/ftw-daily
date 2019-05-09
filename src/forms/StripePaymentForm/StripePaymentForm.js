@@ -271,6 +271,7 @@ StripePaymentForm.defaultProps = {
   inProgress: false,
   onChange: () => null,
   showInitialMessageInput: true,
+  stripePaymentToken: null,
 };
 
 const { bool, func, string, object } = PropTypes;
@@ -286,6 +287,10 @@ StripePaymentForm.propTypes = {
   paymentInfo: string.isRequired,
   authorDisplayName: string.isRequired,
   showInitialMessageInput: bool,
+  onCreateStripePaymentToken: func.isRequired,
+  stripePaymentTokenInProgress: bool.isRequired,
+  stripePaymentTokenError: bool.isRequired,
+  stripePaymentToken: object,
 };
 
 export default injectIntl(StripePaymentForm);
