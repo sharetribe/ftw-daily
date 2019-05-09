@@ -208,6 +208,9 @@ export class CheckoutPageComponent extends Component {
       params,
       currentUser,
       onCreateStripePaymentToken,
+      stripePaymentTokenInProgress,
+      stripePaymentTokenError,
+      stripePaymentToken,
     } = this.props;
 
     // Since the listing data is already given from the ListingPage
@@ -467,6 +470,9 @@ export class CheckoutPageComponent extends Component {
                   authorDisplayName={currentAuthor.attributes.profile.displayName}
                   showInitialMessageInput={showInitialMessageInput}
                   onCreateStripePaymentToken={onCreateStripePaymentToken}
+                  stripePaymentTokenInProgress={stripePaymentTokenInProgress}
+                  stripePaymentTokenError={stripePaymentTokenError}
+                  stripePaymentToken={stripePaymentToken}
                 />
               ) : null}
             </section>
@@ -556,6 +562,11 @@ const mapStateToProps = state => {
     initiateOrderError,
   } = state.CheckoutPage;
   const { currentUser } = state.user;
+  const {
+    stripePaymentTokenInProgress,
+    stripePaymentTokenError,
+    stripePaymentToken,
+  } = state.stripe;
   return {
     scrollingDisabled: isScrollingDisabled(state),
     currentUser,
@@ -567,6 +578,9 @@ const mapStateToProps = state => {
     enquiredTransaction,
     listing,
     initiateOrderError,
+    stripePaymentTokenInProgress,
+    stripePaymentTokenError,
+    stripePaymentToken,
   };
 };
 

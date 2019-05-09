@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import { Form, PrimaryButton, ExpandingTextarea } from '../../components';
-import * as log from '../../util/log';
 import config from '../../config';
 
 import css from './StripePaymentForm.css';
@@ -142,47 +141,27 @@ class StripePaymentForm extends Component {
   }
   handleSubmit(event) {
     event.preventDefault();
+    const { onSubmit, stripePaymentTokenInProgress, stripePaymentToken } = this.props;
 
-    if (this.state.submitting || !this.state.cardValueValid) {
+    if (stripePaymentTokenInProgress || !this.state.cardValueValid) {
       // Already submitting or card value incomplete/invalid
       return;
     }
 
-    const { intl, onSubmit } = this.props;
-
-    if (this.state.token) {
+    if (stripePaymentToken) {
       // Token already fetched for the current card value
-      onSubmit({ token: this.state.token, message: this.state.message.trim() });
+      onSubmit({ token: stripePaymentToken, message: this.state.message.trim() });
       return;
     }
 
-    this.setState({ submitting: true });
     const params = {
       stripe: this.stripe,
       card: this.card,
     };
 
-    this.props
-      .onCreateStripePaymentToken(params)
-      .then(response => {
-        const { error, token } = response;
-        if (error) {
-          this.setState({
-            submitting: false,
-            error: stripeErrorTranslation(intl, error),
-            token: null,
-          });
-        } else {
-          this.setState({ submitting: false, token: token.id });
-          onSubmit({ token: token.id, message: this.state.message.trim() });
-        }
-      })
-      .catch(e => {
-        log.error(e, 'stripe-payment-form-submit-failed', {
-          stripeErrorType: e.type,
-          stripeErrorCode: e.code,
-        });
-      });
+    this.props.onCreateStripePaymentToken(params).then(() => {
+      onSubmit({ token: this.props.stripePaymentToken.id, message: this.state.message.trim() });
+    });
   }
   render() {
     const {
@@ -195,13 +174,15 @@ class StripePaymentForm extends Component {
       authorDisplayName,
       showInitialMessageInput,
       intl,
+      stripePaymentTokenInProgress,
+      stripePaymentTokenError,
     } = this.props;
-    const submitInProgress = this.state.submitting || inProgress;
+    const submitInProgress = stripePaymentTokenInProgress || inProgress;
     const submitDisabled = !this.state.cardValueValid || submitInProgress;
     const classes = classNames(rootClassName || css.root, className);
     const cardClasses = classNames(css.card, {
       [css.cardSuccess]: this.state.cardValueValid,
-      [css.cardError]: this.state.error && !submitInProgress,
+      [css.cardError]: stripePaymentTokenError && !submitInProgress,
     });
 
     const messagePlaceholder = intl.formatMessage(
@@ -260,8 +241,8 @@ class StripePaymentForm extends Component {
             this.cardContainer = el;
           }}
         />
-        {this.state.error && !submitInProgress ? (
-          <span style={{ color: 'red' }}>{this.state.error}</span>
+        {stripePaymentTokenError && !submitInProgress ? (
+          <span style={{ color: 'red' }}>{stripePaymentTokenError}</span>
         ) : null}
         {initialMessage}
         <div className={css.submitContainer}>
@@ -292,7 +273,7 @@ StripePaymentForm.defaultProps = {
   showInitialMessageInput: true,
 };
 
-const { bool, func, string } = PropTypes;
+const { bool, func, string, object } = PropTypes;
 
 StripePaymentForm.propTypes = {
   className: string,

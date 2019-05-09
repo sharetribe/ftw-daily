@@ -504,7 +504,7 @@ export const createStripePaymentToken = params => dispatch => {
   return stripe
     .createToken(card)
     .then(response => {
-      dispatch(stripePaymentTokenCreateSuccess(response));
+      dispatch(stripePaymentTokenCreateSuccess(response.token));
       return response;
     })
     .catch(err => {
