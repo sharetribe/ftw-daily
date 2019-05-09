@@ -18,6 +18,10 @@ export const PERSON_CREATE_REQUEST = 'app/stripe/PERSON_CREATE_REQUEST';
 export const PERSON_CREATE_SUCCESS = 'app/stripe/PERSON_CREATE_SUCCESS';
 export const PERSON_CREATE_ERROR = 'app/stripe/PERSON_CREATE_ERROR';
 
+export const STRIPE_PAYMENT_TOKEN_CREATE_REQUEST = 'app/stripe/STRIPE_PAYMENT_TOKEN_CREATE_REQUEST';
+export const STRIPE_PAYMENT_TOKEN_CREATE_SUCCESS = 'app/stripe/STRIPE_PAYMENT_TOKEN_CREATE_SUCCESS';
+export const STRIPE_PAYMENT_TOKEN_CREATE_ERROR = 'app/stripe/STRIPE_PAYMENT_TOKEN_CREATE_ERROR';
+
 // ================ Reducer ================ //
 
 const initialState = {
@@ -29,6 +33,9 @@ const initialState = {
   persons: [],
   stripeAccount: null,
   stripeAccountFetched: false,
+  stripePaymentTokenInProgress: false,
+  stripePaymentTokenError: false,
+  stripePaymentToken: null,
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -94,6 +101,18 @@ export default function reducer(state = initialState, action = {}) {
         }),
       };
 
+    case STRIPE_PAYMENT_TOKEN_CREATE_REQUEST:
+      return {
+        ...state,
+        stripePaymentTokenError: null,
+        stripePaymentTokenInProgress: true,
+      };
+    case STRIPE_PAYMENT_TOKEN_CREATE_SUCCESS:
+      return { ...state, stripePaymentTokenInProgress: false, stripePaymentToken: payload };
+    case STRIPE_PAYMENT_TOKEN_CREATE_ERROR:
+      console.error(payload);
+      return { ...state, stripePaymentTokenError: payload, stripePaymentTokenInProgress: false };
+
     default:
       return state;
   }
@@ -146,6 +165,21 @@ export const personCreateSuccess = payload => ({
 
 export const personCreateError = payload => ({
   type: PERSON_CREATE_ERROR,
+  payload,
+  error: true,
+});
+
+export const stripePaymentTokenCreateRequest = () => ({
+  type: STRIPE_PAYMENT_TOKEN_CREATE_REQUEST,
+});
+
+export const stripePaymentTokenCreateSuccess = payload => ({
+  type: STRIPE_PAYMENT_TOKEN_CREATE_SUCCESS,
+  payload,
+});
+
+export const stripePaymentTokenCreateError = payload => ({
+  type: STRIPE_PAYMENT_TOKEN_CREATE_ERROR,
   payload,
   error: true,
 });
@@ -458,4 +492,29 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
   } else {
     return dispatch(createStripeCompanyAccount(payoutDetails, stripe));
   }
+};
+
+export const createStripePaymentToken = params => dispatch => {
+  // It's required to use the same instance of Stripe as where the card has been created
+  // so that's why Stripe needs to be passed here and we can't create a new instance.
+  const { stripe, card } = params;
+
+  dispatch(stripePaymentTokenCreateRequest());
+
+  return stripe
+    .createToken(card)
+    .then(response => {
+      dispatch(stripePaymentTokenCreateSuccess(response));
+      return response;
+    })
+    .catch(err => {
+      const e = storableError(err);
+      dispatch(stripeAccountCreateError(e));
+      const stripeMessage =
+        e.apiErrors && e.apiErrors.length > 0 && e.apiErrors[0].meta
+          ? e.apiErrors[0].meta.stripeMessage
+          : null;
+      log.error(err, 'create-stripe-payment-token-failed', { stripeMessage });
+      throw e;
+    });
 };

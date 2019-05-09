@@ -157,11 +157,15 @@ class StripePaymentForm extends Component {
     }
 
     this.setState({ submitting: true });
+    const params = {
+      stripe: this.stripe,
+      card: this.card,
+    };
 
-    this.stripe
-      .createToken(this.card)
-      .then(result => {
-        const { error, token } = result;
+    this.props
+      .onCreateStripePaymentToken(params)
+      .then(response => {
+        const { error, token } = response;
         if (error) {
           this.setState({
             submitting: false,
@@ -177,11 +181,6 @@ class StripePaymentForm extends Component {
         log.error(e, 'stripe-payment-form-submit-failed', {
           stripeErrorType: e.type,
           stripeErrorCode: e.code,
-        });
-
-        this.setState({
-          submitting: false,
-          error: stripeErrorTranslation(intl, e),
         });
       });
   }
