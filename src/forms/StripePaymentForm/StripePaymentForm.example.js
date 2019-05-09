@@ -1,6 +1,8 @@
 import { fakeIntl } from '../../util/test-data';
 import StripePaymentForm from './StripePaymentForm';
 
+const noop = () => null;
+
 export const Empty = {
   component: StripePaymentForm,
   props: {
@@ -14,6 +16,9 @@ export const Empty = {
       console.log('form onSubmit:', values);
     },
     intl: fakeIntl,
+    onCreateStripePaymentToken: noop,
+    stripePaymentTokenInProgress: false,
+    stripePaymentTokenError: false,
   },
   group: 'forms',
 };

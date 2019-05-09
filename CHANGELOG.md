@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [change] Move Stripe SDK call from `StripePaymentForm` to `stripe.duck.js` for consistency.
+  [#1086](https://github.com/sharetribe/flex-template-web/pull/1086)
+
 ## [v2.16.0] 2019-05-08
 
 This release makes 2 big updates to `sharetribe-scripts` package (which is our fork from Create

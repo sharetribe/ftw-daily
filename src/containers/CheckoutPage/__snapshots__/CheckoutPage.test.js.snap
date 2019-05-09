@@ -90,9 +90,13 @@ exports[`CheckoutPage matches snapshot 1`] = `
           authorDisplayName="author display name"
           formId="CheckoutPagePaymentForm"
           inProgress={false}
+          onCreateStripePaymentToken={[Function]}
           onSubmit={[Function]}
           paymentInfo="CheckoutPage.paymentInfo"
           showInitialMessageInput={true}
+          stripePaymentToken={null}
+          stripePaymentTokenError={false}
+          stripePaymentTokenInProgress={false}
         />
       </section>
     </div>
