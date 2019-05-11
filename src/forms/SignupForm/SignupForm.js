@@ -174,7 +174,6 @@ const SignupFormComponent = props => (
               validate={passwordValidators}
             />
           </div>
-
           <div className={css.bottomWrapper}>
             <p className={css.bottomWrapperText}>
               <span className={css.termsText}>

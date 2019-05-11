@@ -231,7 +231,7 @@ export class AuthenticationPageComponent extends Component {
       >
         <LayoutSingleColumn>
           <LayoutWrapperTopbar>
-            <TopbarContainer className={topbarClasses} />
+            <TopbarContainer className={topbarClasses} displaySearch={false}/>
           </LayoutWrapperTopbar>
           <LayoutWrapperMain className={css.layoutWrapperMain}>
             <div className={css.root}>
