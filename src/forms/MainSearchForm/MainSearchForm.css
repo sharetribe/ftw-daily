@@ -60,6 +60,7 @@
 
 .submitButton {
     margin-bottom: 0px;
+    margin-top: 24px;
     justify-content: center;
   
     @media (--viewportLarge) {
