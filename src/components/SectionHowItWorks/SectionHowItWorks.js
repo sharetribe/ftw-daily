@@ -16,12 +16,8 @@ const SectionHowItWorks = props => {
       <div className={css.title}>
         <FormattedMessage id="SectionHowItWorks.titleLineOne" />
       </div>
-      <FormattedMessage id="Plataforma online que te permite reservar o acesso a uma piscina durante uma manhã, tarde ou dia inteiro. Mergulha na nossa plataforma e encontra a piscina indicada para um dia bem passado, seja ela localizada numa casa particular ou num estabelecimento turístico. O conceito assemelha-se muito às plataformas de reserva de casas e hotéis. Neste caso, em vez da reserva de quartos/casas, poderás reservar o acesso a uma piscina." />
-      <div>
 
-      </div>
-
-      {/* <div className={css.steps}>
+      <div className={css.steps}>
         <div className={css.step}>
           <h2 className={css.stepTitle}>
             <FormattedMessage id="SectionHowItWorks.part1Title" />
@@ -48,12 +44,6 @@ const SectionHowItWorks = props => {
             <FormattedMessage id="SectionHowItWorks.part3Text" />
           </p>
         </div>
-      </div> */}
-
-      <div className={css.createListingLink}>
-        <NamedLink name="NewListingPage">
-          <FormattedMessage id="SectionHowItWorks.createListingLink" />
-        </NamedLink>
       </div>
     </div>
   );
