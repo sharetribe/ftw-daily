@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import config from '../../config';
 import IconLogo from './IconLogo';
 import LogoImage from './Bpool.png';
+import MobileLogoImage from './bpoolfavicon.jpg';
 import css from './Logo.css';
 
 const Logo = props => {
@@ -14,8 +15,8 @@ const Logo = props => {
   if (format === 'desktop') {
     return <img className={className} src={LogoImage} alt={config.siteTitle} {...rest} />;
   }
-
-  return <IconLogo className={mobileClasses} {...rest} />;
+  return <img className={className} src={MobileLogoImage} alt={config.siteTitle} {...rest} />;
+  return <IconLogo className={mobileClasses} logoImage={LogoImage} {...rest} />;
 };
 
 const { oneOf, string } = PropTypes;

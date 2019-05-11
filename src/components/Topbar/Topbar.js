@@ -237,6 +237,7 @@ class TopbarComponent extends Component {
         >
           {authInProgress ? null : mobileMenu}
         </Modal>
+        
         <Modal
           id="TopbarMobileSearch"
           containerClassName={css.modalContainer}
