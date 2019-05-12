@@ -78,7 +78,6 @@ const setupLocale = () => {
   }
 
   // Add the translation messages
-  console.log('here',localeData)
   addLocaleData([...localeData]);
 
   // Set the Moment locale globally

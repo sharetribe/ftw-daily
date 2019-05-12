@@ -104,38 +104,13 @@ export const ListingCardComponent = props => {
         />
       </div>
 
-      {/* <div className={mainBox}>
-        <div className={infoBoxCss}>
-          <div className={css.detailsBox}>
-            <h3 className={css.title}>{title}</h3>
-            <div className={categoryCss}><h5 className={marketCss.noMargin}>{`${categoryUi} | ${traderCategoryUi}`}</h5></div>
-          </div>
-          <div className={css.price}>
-            <div className={css.priceValue} title={priceTitle}>
-              {formattedPrice}
-            </div>
-            <div className={css.perUnit}>
-              <FormattedMessage id={unitTranslationKey} />
-            </div>
-          </div>
-        </div>
-        <div>
-          1234
-        </div>
-        <div>
-          1234
-        </div>
-      </div> */}
-
-
-
       <div style={{display: 'flex', flexDirection: 'column', width: '100%', padding: '16px'}}>
         <div style={{display: 'flex', flexDirection: 'row', width: '100%'}}>
-          <div style={{display: 'flex', flexDirection: 'column', width: '80%'}}>
+          <div className={css.characteristics}>
             <h3 className={css.title}>{title}</h3>
             <div className={categoryCss}><h5 className={marketCss.noMargin}>{`${categoryUi} | ${traderCategoryUi}`}</h5></div>
           </div>
-          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-end',width: '20%'}}>
+          <div className={css.priceContainer}>
             <div className={css.price}>
               <div className={css.priceValue} title={priceTitle}>
                 {formattedPrice}

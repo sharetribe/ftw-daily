@@ -185,3 +185,16 @@
 .icon {
   padding-right: 10px;
 }
+
+.characteristics {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.priceContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 20%;
+}
