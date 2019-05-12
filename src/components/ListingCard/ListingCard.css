@@ -34,6 +34,7 @@
 .rootForImage {
   /* Layout - image will take space defined by aspect ratio wrapper */
   height: 100%;
+  width: 100%;
   border-radius: var(--borderRadius);
 }
 
@@ -47,12 +48,17 @@
 .price {
   /* Layout */
   display: flex;
-  flex-direction: column;
   justify-content: flex-start;
   flex-shrink: 0;
   margin-right: 0px;
-  width: 20%;
-  align-items: flex-end;
+  width: 100%;
+  align-items: center;
+  
+  @media (--viewportMedium) {
+    width: 20%;
+    flex-direction: column;
+    align-items: flex-end;
+  }
 }
 
 .priceValue {
@@ -145,12 +151,16 @@
 .root1 {
   /* Layout */
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
   background-color: var(--matterColorLighte);
   box-shadow: var(--boxShadow);
   margin-top: 8px;
   margin-bottom: 8px;
+
+  @media (--viewportMedium) {
+    flex-Direction: row;
+  }
 
   /* Remove link's hover effect */
   &:hover {
@@ -162,7 +172,12 @@
 
 .aspectWrapper1 {
   height: 180px;
-  width: 270px;
+  width: 100%;
+  
+  @media (--viewportMedium) {
+    width: 270px;
+    flex-Direction: column;
+  }
 }
 
 .info {
@@ -186,15 +201,39 @@
   padding-right: 10px;
 }
 
-.characteristics {
+.firstRow {
   display: flex;
   flex-direction: column;
   width: 80%;
 }
 
+.firstRowContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  
+  @media (--viewportMedium) {
+    width: 100%;
+    flex-Direction: row;
+  }
+}
+
 .priceContainer {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  width: 20%;
+  align-items: flex-start;
+  width: 100%;
+  
+  @media (--viewportMedium) {
+    width: 20%;
+    align-items: flex-end;
+    flex-Direction: column;
+  }
+}
+
+.characteristicsContainer {
+  display: flex;
+  flex-Direction: column;
+  width: 100%;
+  padding: 16px;
 }

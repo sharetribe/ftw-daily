@@ -45,10 +45,11 @@
 .searchResultContainer {
   flex-grow: 1;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding: 2px 0 0 0;
-
+  
   @media (--viewportMedium) {
+    flex-direction: row;
     padding: 18px 0 0 0;
     /**
      * .container is using flexbox,
@@ -97,6 +98,14 @@
 }
 
 .searchFiltersMobile {
+  padding: 16px 24px;
+
+  @media (--viewportMedium) {
+    display: none
+  }
+}
+
+.searchFiltersDesktop {
   padding: 16px 24px;
 
   @media (--viewportMedium) {

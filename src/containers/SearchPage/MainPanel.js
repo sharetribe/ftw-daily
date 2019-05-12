@@ -68,7 +68,6 @@ class MainPanel extends Component {
     const listingsAreLoaded = !searchInProgress && searchParamsAreInSync && hasPaginationInfo;
 
     const classes = classNames(rootClassName || css.searchResultContainer, className);
-    console.log(rootClassName)
     const filterParamNames = Object.values(filters).map(f => f.paramName);
     const secondaryFilterParamNames = secondaryFilters
       ? Object.values(secondaryFilters).map(f => f.paramName)
@@ -76,32 +75,51 @@ class MainPanel extends Component {
 
     return (
       <div className={classes}>
-        <SearchFilters1
-          className={css.searchFiltersMobile}
-          urlQueryParams={urlQueryParams}
-          listingsAreLoaded={listingsAreLoaded}
-          resultsCount={totalItems}
-          searchInProgress={searchInProgress}
-          searchListingsError={searchListingsError}
-          showAsModalMaxWidth={showAsModalMaxWidth}
-          onMapIconClick={onMapIconClick}
-          onManageDisableScrolling={onManageDisableScrolling}
-          onOpenModal={onOpenModal}
-          onCloseModal={onCloseModal}
-          filterParamNames={filterParamNames}
-          selectedFiltersCount={selectedFiltersCount}
-          {...primaryFilters}
-          {...secondaryFilters}
-        />
-
-        <SearchResultsPanel
-          className={css.searchListingsPanel}
-          listings={listings}
-          pagination={listingsAreLoaded ? pagination : null}
-          search={searchParamsForPagination}
-          setActiveListing={onActivateListing}
-        />
-      
+        <div>
+          <SearchFilters1
+            className={css.searchFiltersDesktop}
+            urlQueryParams={urlQueryParams}
+            listingsAreLoaded={listingsAreLoaded}
+            resultsCount={totalItems}
+            searchInProgress={searchInProgress}
+            searchListingsError={searchListingsError}
+            showAsModalMaxWidth={showAsModalMaxWidth}
+            onMapIconClick={onMapIconClick}
+            onManageDisableScrolling={onManageDisableScrolling}
+            onOpenModal={onOpenModal}
+            onCloseModal={onCloseModal}
+            filterParamNames={filterParamNames}
+            selectedFiltersCount={selectedFiltersCount}
+            {...primaryFilters}
+            {...secondaryFilters}
+          />
+          <SearchFiltersMobile
+            className={css.searchFiltersMobile}
+            urlQueryParams={urlQueryParams}
+            listingsAreLoaded={listingsAreLoaded}
+            resultsCount={totalItems}
+            searchInProgress={searchInProgress}
+            searchListingsError={searchListingsError}
+            showAsModalMaxWidth={showAsModalMaxWidth}
+            onMapIconClick={onMapIconClick}
+            onManageDisableScrolling={onManageDisableScrolling}
+            onOpenModal={onOpenModal}
+            onCloseModal={onCloseModal}
+            filterParamNames={filterParamNames}
+            selectedFiltersCount={selectedFiltersCount}
+            {...primaryFilters}
+            {...secondaryFilters}
+          />
+        </div>
+        <div>
+          <SearchResultsPanel
+            className={css.searchListingsPanel}
+            listings={listings}
+            pagination={listingsAreLoaded ? pagination : null}
+            search={searchParamsForPagination}
+            setActiveListing={onActivateListing}
+          />
+        </div> 
       </div>
     );
   }

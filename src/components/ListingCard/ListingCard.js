@@ -41,7 +41,7 @@ class ListingImage extends Component {
     return <ResponsiveImage {...this.props} />;
   }
 }
-const LazyImage = lazyLoadWithDimensions(ListingImage, { maxWidth: '300px', maxHeight: '200px', loadAfterInitialRendering: 3000 });
+const LazyImage = lazyLoadWithDimensions(ListingImage, { maxWidth: '100%', maxHeight: '100%', loadAfterInitialRendering: 3000 });
 
 export const ListingCardComponent = props => {
   const { className, rootClassName, intl, listing, renderSizes, setActiveListing } = props;
@@ -82,12 +82,7 @@ export const ListingCardComponent = props => {
   const isNightly = unitType === LINE_ITEM_NIGHT;
   const isDaily = unitType === LINE_ITEM_DAY;
 
-  const unitTranslationKey = isNightly
-    ? 'ListingCard.perNight'
-    : isDaily
-    ? 'ListingCard.perDay'
-    : 'ListingCard.perUnit';
-
+  const unitTranslationKey = 'ListingCard.perDay';
   
   const infoBoxCss = classNames(marketCss.row, marketCss.fullWidth, marketCss.p);
   const mainBox = classNames(marketCss.column, marketCss.fullWidth);
@@ -104,9 +99,9 @@ export const ListingCardComponent = props => {
         />
       </div>
 
-      <div style={{display: 'flex', flexDirection: 'column', width: '100%', padding: '16px'}}>
-        <div style={{display: 'flex', flexDirection: 'row', width: '100%'}}>
-          <div className={css.characteristics}>
+      <div className={css.characteristicsContainer}>
+        <div className={css.firstRowContainer}>
+          <div className={css.firstRow}>
             <h3 className={css.title}>{title}</h3>
             <div className={categoryCss}><h5 className={marketCss.noMargin}>{`${categoryUi} | ${traderCategoryUi}`}</h5></div>
           </div>

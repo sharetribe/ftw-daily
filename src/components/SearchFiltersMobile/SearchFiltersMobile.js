@@ -269,11 +269,6 @@ class SearchFiltersMobileComponent extends Component {
 
     return (
       <div className={classes}>
-        <div className={css.searchResultSummary}>
-          {listingsAreLoaded && resultsCount > 0 ? resultsFound : null}
-          {listingsAreLoaded && resultsCount === 0 ? noResults : null}
-          {searchInProgress ? loadingResults : null}
-        </div>
         <div className={css.buttons}>
           <Button rootClassName={filtersButtonClasses} onClick={this.openFilters}>
             <FormattedMessage id="SearchFilters.filtersButtonLabel" className={css.mapIconText} />
