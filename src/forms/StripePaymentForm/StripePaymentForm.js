@@ -1,3 +1,8 @@
+/**
+ * Note: This form is using card from Stripe Elements https://stripe.com/docs/stripe-js#elements
+ * Card is not a Final Form field so it's not available trough Final Form.
+ * It's also handled separately in handleSubmit function.
+ */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
