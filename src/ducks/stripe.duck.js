@@ -34,7 +34,7 @@ const initialState = {
   stripeAccount: null,
   stripeAccountFetched: false,
   stripePaymentTokenInProgress: false,
-  stripePaymentTokenError: false,
+  stripePaymentTokenError: null,
   stripePaymentToken: null,
 };
 
