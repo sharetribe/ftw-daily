@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { Form as FinalForm } from 'react-final-form';
 import classNames from 'classnames';
-import { Form, PrimaryButton, ExpandingTextarea } from '../../components';
 import config from '../../config';
+import { propTypes } from '../../util/types';
+import { Form, PrimaryButton, FieldTextInput } from '../../components';
 
 import css from './StripePaymentForm.css';
 
@@ -74,7 +76,6 @@ const initialState = {
   submitting: false,
   cardValueValid: false,
   token: null,
-  message: '',
 };
 
 /**
@@ -92,6 +93,7 @@ class StripePaymentForm extends Component {
     this.state = initialState;
     this.handleCardValueChange = this.handleCardValueChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.paymentForm = this.paymentForm.bind(this);
   }
   componentDidMount() {
     if (!window.Stripe) {
@@ -139,9 +141,9 @@ class StripePaymentForm extends Component {
       };
     });
   }
-  handleSubmit(event) {
-    event.preventDefault();
+  handleSubmit(values) {
     const { onSubmit, stripePaymentTokenInProgress, stripePaymentToken } = this.props;
+    const initialMessage = values.initialMessage ? values.initialMessage.trim() : null;
 
     if (stripePaymentTokenInProgress || !this.state.cardValueValid) {
       // Already submitting or card value incomplete/invalid
@@ -150,7 +152,7 @@ class StripePaymentForm extends Component {
 
     if (stripePaymentToken) {
       // Token already fetched for the current card value
-      onSubmit({ token: stripePaymentToken, message: this.state.message.trim() });
+      onSubmit({ token: stripePaymentToken.id, message: initialMessage });
       return;
     }
 
@@ -160,25 +162,28 @@ class StripePaymentForm extends Component {
     };
 
     this.props.onCreateStripePaymentToken(params).then(() => {
-      onSubmit({ token: this.props.stripePaymentToken.id, message: this.state.message.trim() });
+      onSubmit({ token: this.props.stripePaymentToken.id, message: initialMessage });
     });
   }
-  render() {
+
+  paymentForm(formRenderProps) {
     const {
       className,
       rootClassName,
       inProgress,
       formId,
       paymentInfo,
-      onChange,
       authorDisplayName,
       showInitialMessageInput,
       intl,
       stripePaymentTokenInProgress,
       stripePaymentTokenError,
-    } = this.props;
+      invalid,
+      handleSubmit,
+    } = formRenderProps;
+
     const submitInProgress = stripePaymentTokenInProgress || inProgress;
-    const submitDisabled = !this.state.cardValueValid || submitInProgress;
+    const submitDisabled = invalid || !this.state.cardValueValid || submitInProgress;
     const classes = classNames(rootClassName || css.root, className);
     const cardClasses = classNames(css.card, {
       [css.cardSuccess]: this.state.cardValueValid,
@@ -190,22 +195,13 @@ class StripePaymentForm extends Component {
       { name: authorDisplayName }
     );
 
-    const handleMessageChange = e => {
-      // A change in the message should call the onChange prop with
-      // the current token and the new message.
-      const message = e.target.value;
-      this.setState(prevState => {
-        const { token } = prevState;
-        const newState = { token, message };
-        onChange(newState);
-        return newState;
-      });
-    };
+    const messageOptionalText = intl.formatMessage({
+      id: 'StripePaymentForm.messageOptionalText',
+    });
 
-    const messageOptionalText = (
-      <span className={css.messageOptional}>
-        <FormattedMessage id="StripePaymentForm.messageOptionalText" />
-      </span>
+    const initialMessageLabel = intl.formatMessage(
+      { id: 'StripePaymentForm.messageLabel' },
+      { messageOptionalText: messageOptionalText }
     );
 
     const initialMessage = showInitialMessageInput ? (
@@ -213,21 +209,20 @@ class StripePaymentForm extends Component {
         <h3 className={css.messageHeading}>
           <FormattedMessage id="StripePaymentForm.messageHeading" />
         </h3>
-        <label className={css.messageLabel} htmlFor={`${formId}-message`}>
-          <FormattedMessage id="StripePaymentForm.messageLabel" values={{ messageOptionalText }} />
-        </label>
-        <ExpandingTextarea
+
+        <FieldTextInput
+          type="textarea"
           id={`${formId}-message`}
-          className={css.message}
+          name="initialMessage"
+          label={initialMessageLabel}
           placeholder={messagePlaceholder}
-          value={this.state.message}
-          onChange={handleMessageChange}
+          className={css.message}
         />
       </div>
     ) : null;
 
     return config.stripe.publishableKey ? (
-      <Form className={classes} onSubmit={this.handleSubmit}>
+      <Form className={classes} onSubmit={handleSubmit}>
         <h3 className={css.paymentHeading}>
           <FormattedMessage id="StripePaymentForm.paymentHeading" />
         </h3>
@@ -262,6 +257,11 @@ class StripePaymentForm extends Component {
         <FormattedMessage id="StripePaymentForm.missingStripeKey" />
       </div>
     );
+  }
+
+  render() {
+    const { onSubmit, ...rest } = this.props;
+    return <FinalForm onSubmit={this.handleSubmit} {...rest} render={this.paymentForm} />;
   }
 }
 
