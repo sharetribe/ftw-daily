@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
+import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
 import { pathByRouteName, findRouteByRouteName } from '../../util/routes';
 import { propTypes, LINE_ITEM_NIGHT, LINE_ITEM_DAY } from '../../util/types';
@@ -32,14 +33,14 @@ import {
 } from '../../components';
 import { StripePaymentForm } from '../../forms';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
+import { createStripePaymentToken, clearStripePaymentToken } from '../../ducks/stripe.duck.js';
+
 import {
   initiateOrder,
   initiateOrderAfterEnquiry,
   setInitialValues,
   speculateTransaction,
 } from './CheckoutPage.duck';
-import { createStripePaymentToken, clearStripePaymentToken } from '../../ducks/stripe.duck.js';
-import config from '../../config';
 
 import { storeData, storedData, clearData } from './CheckoutPageSessionHelpers';
 import css from './CheckoutPage.css';
