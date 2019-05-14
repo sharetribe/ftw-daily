@@ -135,6 +135,18 @@ export default function reducer(state = initialState, action = {}) {
       console.error(payload);
       return { ...state, handleCardPaymentError: payload, handleCardPaymentInProgress: false };
 
+    case HANDLE_CARD_PAYMENT_REQUEST:
+      return {
+        ...state,
+        handleCardPaymentError: null,
+        handleCardPaymentInProgress: true,
+      };
+    case HANDLE_CARD_PAYMENT_SUCCESS:
+      return { ...state, paymentIntent: payload, handleCardPaymentInProgress: false };
+    case HANDLE_CARD_PAYMENT_ERROR:
+      console.error(payload);
+      return { ...state, handleCardPaymentError: payload, handleCardPaymentInProgress: false };
+
     default:
       return state;
   }
