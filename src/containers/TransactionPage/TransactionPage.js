@@ -84,7 +84,8 @@ export const TransactionPageComponent = props => {
 
     const initialValues = {
       listing: currentListing,
-      enquiredTransaction: currentTransaction,
+      // enquired transaction should be passed to CheckoutPage
+      transaction: currentTransaction,
       bookingData,
       bookingDates: {
         bookingStart: bookingDates.startDate,

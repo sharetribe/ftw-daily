@@ -35,7 +35,7 @@ const initialState = {
   speculateTransactionInProgress: false,
   speculateTransactionError: null,
   speculatedTransaction: null,
-  enquiredTransaction: null,
+  transaction: null,
   initiateOrderError: null,
   confirmPaymentError: null,
 };
@@ -70,7 +70,7 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
     case INITIATE_ORDER_REQUEST:
       return { ...state, initiateOrderError: null };
     case INITIATE_ORDER_SUCCESS:
-      return state;
+      return { ...state, transaction: payload };
     case INITIATE_ORDER_ERROR:
       console.error(payload); // eslint-disable-line no-console
       return { ...state, initiateOrderError: payload };
@@ -99,9 +99,9 @@ export const setInitialValues = initialValues => ({
 
 const initiateOrderRequest = () => ({ type: INITIATE_ORDER_REQUEST });
 
-const initiateOrderSuccess = orderId => ({
+const initiateOrderSuccess = order => ({
   type: INITIATE_ORDER_SUCCESS,
-  payload: orderId,
+  payload: order,
 });
 
 const initiateOrderError = e => ({
@@ -151,13 +151,18 @@ export const initiateOrder = (orderParams, transactionId) => (dispatch, getState
         transition: TRANSITION_REQUEST_PAYMENT,
         params: orderParams,
       };
+  const queryParams = {
+    include: ['booking', 'provider'],
+    expand: true,
+  };
 
   const createOrder = transactionId ? sdk.transactions.transition : sdk.transactions.initiate;
 
-  return createOrder(bodyParams, { expand: true })
+  return createOrder(bodyParams, queryParams)
     .then(response => {
-      const order = response.data.data;
-      dispatch(initiateOrderSuccess(order.id));
+      const entities = denormalisedResponseEntities(response);
+      const order = entities[0];
+      dispatch(initiateOrderSuccess(order));
       dispatch(fetchCurrentUserHasOrdersSuccess(true));
       return order;
     })
@@ -180,7 +185,7 @@ export const confirmPayment = orderParams => (dispatch, getState, sdk) => {
   const bodyParams = {
     id: orderParams.transactionId,
     transition: TRANSITION_CONFIRM_PAYMENT,
-    params: orderParams,
+    params: {},
   };
 
   return sdk.transactions

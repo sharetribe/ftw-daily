@@ -9923,7 +9923,7 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
         listingDeleted={false}
         listingId="listing1"
         listingTitle="listing1 title"
-        panelHeadingState="unknown"
+        panelHeadingState="pending-payment"
         providerName={
           <UserDisplayName
             bannedUserDisplayName={null}
@@ -10404,6 +10404,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
           }
           listingTitle="listing1 title"
           location={Object {}}
+          showDetailCardHeadings={false}
           subTitle="55 TransactionPanel.perNight"
         />
         <BreakdownMaybe

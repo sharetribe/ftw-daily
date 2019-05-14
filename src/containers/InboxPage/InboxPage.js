@@ -12,8 +12,8 @@ import {
   txIsEnquired,
   txIsRequested,
   txHasBeenDelivered,
-  txIsExpired,
-  txIsPending,
+  txIsPaymentExpired,
+  txIsPaymentPending,
 } from '../../util/transaction';
 import { LINE_ITEM_DAY, LINE_ITEM_UNITS, propTypes } from '../../util/types';
 import { formatMoney } from '../../util/currency';
@@ -91,7 +91,7 @@ export const txState = (intl, tx, type) => {
         };
 
     return requested;
-  } else if (txIsPending(tx)) {
+  } else if (txIsPaymentPending(tx)) {
     return {
       nameClassName: isOrder ? css.nameNotEmphasized : css.nameEmphasized,
       bookingClassName: css.bookingNoActionNeeded,
@@ -101,7 +101,7 @@ export const txState = (intl, tx, type) => {
         id: 'InboxPage.statePendingPayment',
       }),
     };
-  } else if (txIsExpired(tx)) {
+  } else if (txIsPaymentExpired(tx)) {
     return {
       nameClassName: css.nameNotEmphasized,
       bookingClassName: css.bookingNoActionNeeded,

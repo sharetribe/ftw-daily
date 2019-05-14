@@ -115,6 +115,23 @@ export const daysBetween = (startDate, endDate) => {
 };
 
 /**
+ * Calculate the number of minutes between the given dates
+ *
+ * @param {Date} startDate start of the time period
+ * @param {Date} endDate end of the time period.
+ *
+ * @throws Will throw if the end date is before the start date
+ * @returns {Number} number of minutes between the given Date objects
+ */
+export const minutesBetween = (startDate, endDate) => {
+  const minutes = moment(endDate).diff(startDate, 'minutes');
+  if (minutes < 0) {
+    throw new Error('End Date cannot be before start Date');
+  }
+  return minutes;
+};
+
+/**
  * Format the given date to month id/string
  *
  * @param {Date} date to be formatted

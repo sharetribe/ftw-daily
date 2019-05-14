@@ -62,7 +62,7 @@ describe('CheckoutPage', () => {
         speculateTransactionError: null,
         speculateTransactionInProgress: false,
         speculatedTransaction: null,
-        enquiredTransaction: null,
+        transaction: null,
         confirmPaymentError: null,
       };
 
