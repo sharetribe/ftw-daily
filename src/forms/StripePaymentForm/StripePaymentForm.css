@@ -32,6 +32,10 @@
   border-bottom-color: var(--failColor);
 }
 
+.error {
+  color: var(--failColor);
+}
+
 .paymentHeading {
   margin: 0 0 14px 0;
   color: var(--matterColorAnti);

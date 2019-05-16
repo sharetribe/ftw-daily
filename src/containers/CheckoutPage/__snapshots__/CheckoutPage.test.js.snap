@@ -88,15 +88,16 @@ exports[`CheckoutPage matches snapshot 1`] = `
       <section>
         <InjectIntl(StripePaymentForm)
           authorDisplayName="author display name"
+          errors={
+            Object {
+              "handleCardPaymentError": undefined,
+            }
+          }
           formId="CheckoutPagePaymentForm"
           inProgress={false}
-          onCreateStripePaymentToken={[Function]}
           onSubmit={[Function]}
           paymentInfo="CheckoutPage.paymentInfo"
           showInitialMessageInput={true}
-          stripePaymentToken={null}
-          stripePaymentTokenError={null}
-          stripePaymentTokenInProgress={false}
         />
       </section>
     </div>
