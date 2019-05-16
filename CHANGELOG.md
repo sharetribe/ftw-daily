@@ -14,7 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
-- [cghange] Use Final Form on `StripePaymentForm` for consistency. Note that card form Stripe
+- [fix] Show error when typing credit card number if e.g. the number is invalid. Fixes bug that was
+  introduced in PR #1088. [#1092](https://github.com/sharetribe/flex-template-web/pull/1092)
+- [change] Use Final Form on `StripePaymentForm` for consistency. Note that card form Stripe
   Elements in `StripePaymentForm` is not a Final Form field so it's not available trough Final Form
   but handled separately. [#1088](https://github.com/sharetribe/flex-template-web/pull/1088)
 - [change] Move Stripe SDK call from `StripePaymentForm` to `stripe.duck.js` for consistency.
