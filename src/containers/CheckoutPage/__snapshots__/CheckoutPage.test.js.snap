@@ -95,7 +95,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
           paymentInfo="CheckoutPage.paymentInfo"
           showInitialMessageInput={true}
           stripePaymentToken={null}
-          stripePaymentTokenError={false}
+          stripePaymentTokenError={null}
           stripePaymentTokenInProgress={false}
         />
       </section>

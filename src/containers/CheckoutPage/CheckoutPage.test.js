@@ -26,7 +26,7 @@ describe('CheckoutPage', () => {
       scrollingDisabled: false,
       onCreateStripePaymentToken: noop,
       stripePaymentTokenInProgress: false,
-      stripePaymentTokenError: false,
+      stripePaymentTokenError: null,
     };
     const tree = renderShallow(<CheckoutPageComponent {...props} />);
     expect(tree).toMatchSnapshot();
