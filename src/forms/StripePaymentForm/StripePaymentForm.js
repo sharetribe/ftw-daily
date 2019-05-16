@@ -159,7 +159,6 @@ class StripePaymentForm extends Component {
       formId,
       formValues: values,
     };
-
     onSubmit(params);
   }
 
