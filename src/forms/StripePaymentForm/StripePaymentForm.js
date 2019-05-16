@@ -241,8 +241,8 @@ class StripePaymentForm extends Component {
             this.cardContainer = el;
           }}
         />
-        {stripePaymentTokenError && !submitInProgress ? (
-          <span style={{ color: 'red' }}>{stripePaymentTokenError}</span>
+        {this.state.error && !submitInProgress ? (
+          <span style={{ color: 'red' }}>{this.state.error}</span>
         ) : null}
         {initialMessage}
         <div className={css.submitContainer}>
