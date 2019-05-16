@@ -9,7 +9,13 @@ import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
 import { pathByRouteName, findRouteByRouteName } from '../../util/routes';
 import { propTypes, LINE_ITEM_NIGHT, LINE_ITEM_DAY } from '../../util/types';
-import { ensureListing, ensureUser, ensureTransaction, ensureBooking } from '../../util/data';
+import {
+  ensureListing,
+  ensureCurrentUser,
+  ensureUser,
+  ensureTransaction,
+  ensureBooking,
+} from '../../util/data';
 import { dateFromLocalToAPI } from '../../util/dates';
 import { createSlug } from '../../util/urlHelpers';
 import {
@@ -33,7 +39,7 @@ import {
 } from '../../components';
 import { StripePaymentForm } from '../../forms';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { createStripePaymentToken } from '../../ducks/stripe.duck.js';
+import { handleCardPayment } from '../../ducks/stripe.duck.js';
 
 import {
   initiateOrder,
@@ -46,6 +52,14 @@ import css from './CheckoutPage.css';
 
 const STORAGE_KEY = 'CheckoutPage';
 
+const initializeOrderPage = (initialValues, routes, dispatch) => {
+  const OrderPage = findRouteByRouteName('OrderDetailsPage', routes);
+
+  // Transaction is already created, but if the initial message
+  // sending failed, we tell it to the OrderDetailsPage.
+  dispatch(OrderPage.setInitialValues(initialValues));
+};
+
 export class CheckoutPageComponent extends Component {
   constructor(props) {
     super(props);
@@ -57,6 +71,7 @@ export class CheckoutPageComponent extends Component {
     };
 
     this.loadInitialData = this.loadInitialData.bind(this);
+    this.handlePaymentIntent = this.handlePaymentIntent.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -139,61 +154,128 @@ export class CheckoutPageComponent extends Component {
     this.setState({ pageData: pageData || {}, dataLoaded: true });
   }
 
+  handlePaymentIntent(handlePaymentParams) {
+    const {
+      // onRequestPayment,
+      onHandleCardPayment,
+      // onConfirmPayment,
+    } = this.props;
+
+    const fnRequestPayment = fnParams => {
+      // fnParams should be { listingId, bookingStart, bookingEnd }
+      const { stripePaymentIntentClientSecret, stripePaymentIntentId } = handlePaymentParams;
+      return stripePaymentIntentClientSecret
+        ? Promise.resolve({ stripePaymentIntentClientSecret, stripePaymentIntentId })
+        : Promise.resolve(fnParams); // : onRequestPayment(parameters);
+    };
+
+    const fnHandleCardPayment = fnParams => {
+      // fnParams should be { stripePaymentIntentClientSecret, stripePaymentIntentId }
+      const { stripe, card, cardholderName, email, paymentIntent } = handlePaymentParams;
+      const params = {
+        ...fnParams,
+        stripe,
+        card,
+        paymentParams: {
+          payment_method_data: {
+            billing_details: {
+              name: cardholderName,
+              email,
+              // address: {
+              //   city: null,
+              //   country: null,
+              //   line1: null,
+              //   line2: null,
+              //   postal_code: null,
+              //   state: null
+              // },
+            },
+          },
+        },
+      };
+      const hasPaymentIntentSucceeded = paymentIntent && paymentIntent.status === 'succeeded';
+      return hasPaymentIntentSucceeded
+        ? Promise.resolve(paymentIntent)
+        : onHandleCardPayment(params);
+    };
+
+    const fnConfirmPayment = fnParams => {
+      // fnParams should include { paymentIntent }
+      const { message } = handlePaymentParams;
+      const params = { ...fnParams, message };
+      return Promise.resolve(params); // onConfirmPayment(params);
+    };
+
+    // Here we create promise calls in sequence
+    // This is pretty much the same as:
+    // fnRequestPayment({...initialParams})
+    //   .then(result => fnHandleCardPayment({...result}))
+    //   .then(result => fnConfirmPayment({...result}))
+    const applyAsync = (acc, val) => acc.then(val);
+    const composeAsync = (...funcs) => x => funcs.reduce(applyAsync, Promise.resolve(x));
+    const handlePaymentIntentCreation = composeAsync(
+      fnRequestPayment,
+      fnHandleCardPayment,
+      fnConfirmPayment
+    );
+
+    // Create order aka transaction
+    // NOTE: if unit type is line-item/units, quantity needs to be added.
+    // The way to pass it to checkout page is through pageData.bookingData
+    const { pageData, speculatedTransaction } = handlePaymentParams;
+    const initialParams = {
+      listingId: pageData.listing.id,
+      bookingStart: speculatedTransaction.booking.attributes.start,
+      bookingEnd: speculatedTransaction.booking.attributes.end,
+    };
+    return handlePaymentIntentCreation(initialParams);
+  }
+
   handleSubmit(values) {
     if (this.state.submitting) {
       return;
     }
     this.setState({ submitting: true });
 
-    const cardToken = values.token;
-    const initialMessage = values.message;
-    const {
-      history,
-      sendOrderRequest,
-      sendOrderRequestAfterEnquiry,
-      speculatedTransaction,
-      dispatch,
-    } = this.props;
+    const { history, speculatedTransaction, currentUser, paymentIntent, dispatch } = this.props;
+    const { stripe, card, message } = values;
 
-    // Create order aka transaction
-    // NOTE: if unit type is line-item/units, quantity needs to be added.
-    // The way to pass it to checkout page is through pageData.bookingData
-    const requestParams = {
-      listingId: this.state.pageData.listing.id,
-      cardToken,
-      bookingStart: speculatedTransaction.booking.attributes.start,
-      bookingEnd: speculatedTransaction.booking.attributes.end,
+    const requestPaymentParams = {
+      pageData: this.state.pageData,
+      speculatedTransaction,
+      stripe,
+      card,
+      cardholderName: 'John Doe', // TODO get cardholder's name from form and billing address too
+      email: ensureCurrentUser(currentUser).attributes.email,
+      message,
+
+      // TODO
+      // how can we know/fetch these after page refresh?
+      stripePaymentIntentClientSecret: window.stripePaymentIntentClientSecret,
+      stripePaymentIntentId: window.stripePaymentIntentId,
+      paymentIntent,
     };
 
-    const enquiredTransaction = this.state.pageData.enquiredTransaction;
-
-    // if an enquired transaction is available, use that as basis
-    // otherwise initiate a new transaction
-    const initiateRequest = enquiredTransaction
-      ? sendOrderRequestAfterEnquiry(enquiredTransaction.id, requestParams)
-      : sendOrderRequest(requestParams, initialMessage);
-
-    initiateRequest
-      .then(values => {
-        const { orderId, initialMessageSuccess } = values;
+    this.handlePaymentIntent(requestPaymentParams)
+      .then(res => {
+        const { orderId, initialMessageSuccess } = res;
         this.setState({ submitting: false });
-        const routes = routeConfiguration();
-        const OrderPage = findRouteByRouteName('OrderDetailsPage', routes);
 
-        // Transaction is already created, but if the initial message
-        // sending failed, we tell it to the OrderDetailsPage.
-        dispatch(
-          OrderPage.setInitialValues({
-            initialMessageFailedToTransaction: initialMessageSuccess ? null : orderId,
-          })
-        );
-        const orderDetailsPath = pathByRouteName('OrderDetailsPage', routes, {
-          id: orderId.uuid,
-        });
+        // TODO this should not happen, when everything is ready
+        if (orderId) {
+          return;
+        }
+
+        const routes = routeConfiguration();
+        const initialMessageFailedToTransaction = initialMessageSuccess ? null : orderId;
+        const orderDetailsPath = pathByRouteName('OrderDetailsPage', routes, { id: orderId.uuid });
+
+        initializeOrderPage({ initialMessageFailedToTransaction }, routes, dispatch);
         clearData(STORAGE_KEY);
         history.push(orderDetailsPath);
       })
-      .catch(() => {
+      .catch(err => {
+        console.error(err);
         this.setState({ submitting: false });
       });
   }
@@ -208,10 +290,8 @@ export class CheckoutPageComponent extends Component {
       intl,
       params,
       currentUser,
-      onCreateStripePaymentToken,
-      stripePaymentTokenInProgress,
-      stripePaymentTokenError,
-      stripePaymentToken,
+      handleCardPaymentInProgress,
+      handleCardPaymentError,
     } = this.props;
 
     // Since the listing data is already given from the ListingPage
@@ -472,15 +552,14 @@ export class CheckoutPageComponent extends Component {
                 <StripePaymentForm
                   className={css.paymentForm}
                   onSubmit={this.handleSubmit}
-                  inProgress={this.state.submitting}
+                  inProgress={this.state.submitting || handleCardPaymentInProgress}
                   formId="CheckoutPagePaymentForm"
                   paymentInfo={intl.formatMessage({ id: 'CheckoutPage.paymentInfo' })}
                   authorDisplayName={currentAuthor.attributes.profile.displayName}
                   showInitialMessageInput={showInitialMessageInput}
-                  onCreateStripePaymentToken={onCreateStripePaymentToken}
-                  stripePaymentTokenInProgress={stripePaymentTokenInProgress}
-                  stripePaymentTokenError={stripePaymentTokenError}
-                  stripePaymentToken={stripePaymentToken}
+                  errors={{
+                    handleCardPaymentError,
+                  }}
                 />
               ) : null}
             </section>
@@ -523,9 +602,7 @@ CheckoutPageComponent.defaultProps = {
   speculatedTransaction: null,
   enquiredTransaction: null,
   currentUser: null,
-  stripePaymentToken: null,
-  stripePaymentTokenInProgress: false,
-  stripePaymentTokenError: null,
+  paymentIntent: null,
 };
 
 CheckoutPageComponent.propTypes = {
@@ -548,10 +625,10 @@ CheckoutPageComponent.propTypes = {
     slug: string,
   }).isRequired,
   sendOrderRequest: func.isRequired,
-  onCreateStripePaymentToken: func.isRequired,
-  stripePaymentTokenInProgress: bool,
-  stripePaymentTokenError: propTypes.error,
-  stripePaymentToken: object,
+  onHandleCardPayment: func.isRequired,
+  handleCardPaymentInProgress: bool.isRequired,
+  handleCardPaymentError: propTypes.error,
+  paymentIntent: object,
 
   // from connect
   dispatch: func.isRequired,
@@ -577,11 +654,7 @@ const mapStateToProps = state => {
     initiateOrderError,
   } = state.CheckoutPage;
   const { currentUser } = state.user;
-  const {
-    stripePaymentTokenInProgress,
-    stripePaymentTokenError,
-    stripePaymentToken,
-  } = state.stripe;
+  const { handleCardPaymentInProgress, handleCardPaymentError, paymentIntent } = state.stripe;
   return {
     scrollingDisabled: isScrollingDisabled(state),
     currentUser,
@@ -593,9 +666,9 @@ const mapStateToProps = state => {
     enquiredTransaction,
     listing,
     initiateOrderError,
-    stripePaymentTokenInProgress,
-    stripePaymentTokenError,
-    stripePaymentToken,
+    handleCardPaymentInProgress,
+    handleCardPaymentError,
+    paymentIntent,
   };
 };
 
@@ -605,7 +678,7 @@ const mapDispatchToProps = dispatch => ({
   sendOrderRequestAfterEnquiry: (transactionId, params) =>
     dispatch(initiateOrderAfterEnquiry(transactionId, params)),
   fetchSpeculatedTransaction: params => dispatch(speculateTransaction(params)),
-  onCreateStripePaymentToken: params => dispatch(createStripePaymentToken(params)),
+  onHandleCardPayment: params => dispatch(handleCardPayment(params)),
 });
 
 const CheckoutPage = compose(
