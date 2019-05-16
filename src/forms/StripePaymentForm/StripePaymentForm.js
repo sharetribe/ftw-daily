@@ -10,7 +10,7 @@ import { Form as FinalForm } from 'react-final-form';
 import classNames from 'classnames';
 import config from '../../config';
 import { Form, PrimaryButton, FieldTextInput } from '../../components';
-
+import StripePaymentAddress from './StripePaymentAddress';
 import css from './StripePaymentForm.css';
 
 /**
@@ -141,7 +141,12 @@ class StripePaymentForm extends Component {
     const { onSubmit, handleCardPaymentInProgress } = this.props;
     const { initialMessage } = values;
 
+<<<<<<< HEAD
     if (handleCardPaymentInProgress || !this.state.cardValueValid) {
+=======
+    console.log('Values:', values);
+    if (stripePaymentTokenInProgress || !this.state.cardValueValid) {
+>>>>>>> Add fields for name and address
       // Already submitting or card value incomplete/invalid
       return;
     }
@@ -167,6 +172,8 @@ class StripePaymentForm extends Component {
       errors,
       invalid,
       handleSubmit,
+      disabled,
+      form,
     } = formRenderProps;
 
     const { requestPaymentError, handleCardPaymentError, confirmPaymentError } = errors || {};
@@ -179,6 +186,7 @@ class StripePaymentForm extends Component {
       [css.cardError]: hasCardError,
     });
 
+<<<<<<< HEAD
     // TODO
     const submitErrorMessage = requestPaymentError
       ? requestPaymentError.message
@@ -187,6 +195,39 @@ class StripePaymentForm extends Component {
       : confirmPaymentError
       ? confirmPaymentError.message
       : intl.formatMessage({ id: 'StripePaymentForm.genericError' });
+=======
+    const billingDetailsNameLabel = intl.formatMessage({
+      id: 'StripePaymentForm.billingDetailsNameLabel',
+    });
+    const billingDetailsNamePlaceholder = intl.formatMessage({
+      id: 'StripePaymentForm.billingDetailsNamePlaceholder',
+    });
+
+    const billingDetails = (
+      <div className={css.paymentAddressField}>
+        <h3 className={css.billingHeading}>
+          <FormattedMessage id="StripePaymentForm.billingDetails" />
+        </h3>
+
+        <FieldTextInput
+          className={css.field}
+          type="text"
+          id="name"
+          name="name"
+          label={billingDetailsNameLabel}
+          placeholder={billingDetailsNamePlaceholder}
+        />
+
+        <StripePaymentAddress
+          country="FI"
+          intl={intl}
+          disabled={disabled}
+          form={form}
+          fieldId="address"
+        />
+      </div>
+    );
+>>>>>>> Add fields for name and address
 
     const messagePlaceholder = intl.formatMessage(
       { id: 'StripePaymentForm.messagePlaceholder' },
@@ -236,6 +277,7 @@ class StripePaymentForm extends Component {
         />
         {hasCardError ? <span className={css.error}>{this.state.error}</span> : null}
         {hasSubmitErrors ? <span className={css.error}>{submitErrorMessage}</span> : null}
+        {billingDetails}
         {initialMessage}
         <div className={css.submitContainer}>
           <p className={css.paymentInfo}>{paymentInfo}</p>
