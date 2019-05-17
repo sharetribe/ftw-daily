@@ -9,56 +9,70 @@ import css from './StripePaymentForm.css';
 const StripePaymentAddress = props => {
   const { className, intl, disabled, form, fieldId, card } = props;
 
-  const addressTitle = intl.formatMessage({
-    id:
-      fieldId === 'company.address'
-        ? 'PayoutDetailsForm.companyAddressTitle'
-        : 'PayoutDetailsForm.streetAddressLabel',
+  const optionalText = intl.formatMessage({
+    id: 'StripePaymentAddress.optionalText',
   });
 
-  const streetAddressLabel = intl.formatMessage({
-    id: 'PayoutDetailsForm.streetAddressLabel',
+  const addressLine1Label = intl.formatMessage({
+    id: 'StripePaymentAddress.addressLine1Label',
   });
-  const streetAddressPlaceholder = intl.formatMessage({
-    id: 'PayoutDetailsForm.streetAddressPlaceholder',
+  const addressLine1Placeholder = intl.formatMessage({
+    id: 'StripePaymentAddress.addressLine1Placeholder',
   });
-  const streetAddressRequired = validators.required(
+  const addressLine1Required = validators.required(
     intl.formatMessage({
-      id: 'PayoutDetailsForm.streetAddressRequired',
+      id: 'StripePaymentAddress.addressLine1Required',
     })
   );
 
-  const postalCodeLabel = intl.formatMessage({ id: 'PayoutDetailsForm.postalCodeLabel' });
+  const addressLine2Label = intl.formatMessage(
+    { id: 'StripePaymentAddress.addressLine2Label' },
+    { optionalText: optionalText }
+  );
+
+  const addressLine2Placeholder = intl.formatMessage({
+    id: 'StripePaymentAddress.addressLine2Placeholder',
+  });
+  const addressLine2Required = validators.required(
+    intl.formatMessage({
+      id: 'StripePaymentAddress.addressLine2Required',
+    })
+  );
+
+  const postalCodeLabel = intl.formatMessage({ id: 'StripePaymentAddress.postalCodeLabel' });
   const postalCodePlaceholder = intl.formatMessage({
-    id: 'PayoutDetailsForm.postalCodePlaceholder',
+    id: 'StripePaymentAddress.postalCodePlaceholder',
   });
   const postalCodeRequired = validators.required(
     intl.formatMessage({
-      id: 'PayoutDetailsForm.postalCodeRequired',
+      id: 'StripePaymentAddress.postalCodeRequired',
     })
   );
 
-  const cityLabel = intl.formatMessage({ id: 'PayoutDetailsForm.cityLabel' });
-  const cityPlaceholder = intl.formatMessage({ id: 'PayoutDetailsForm.cityPlaceholder' });
+  const cityLabel = intl.formatMessage({ id: 'StripePaymentAddress.cityLabel' });
+  const cityPlaceholder = intl.formatMessage({ id: 'StripePaymentAddress.cityPlaceholder' });
   const cityRequired = validators.required(
     intl.formatMessage({
-      id: 'PayoutDetailsForm.cityRequired',
+      id: 'StripePaymentAddress.cityRequired',
     })
   );
 
-  const stateLabel = intl.formatMessage({ id: 'PayoutDetailsForm.stateLabel' });
-  const statePlaceholder = intl.formatMessage({ id: 'PayoutDetailsForm.statePlaceholder' });
+  const stateLabel = intl.formatMessage(
+    { id: 'StripePaymentAddress.stateLabel' },
+    { optionalText: optionalText }
+  );
+  const statePlaceholder = intl.formatMessage({ id: 'StripePaymentAddress.statePlaceholder' });
   const stateRequired = validators.required(
     intl.formatMessage({
-      id: 'PayoutDetailsForm.stateRequired',
+      id: 'StripePaymentAddress.stateRequired',
     })
   );
 
-  const countryLabel = intl.formatMessage({ id: 'PayoutDetailsForm.countryLabel' });
-  const countryPlaceholder = intl.formatMessage({ id: 'PayoutDetailsForm.countryPlaceholder' });
+  const countryLabel = intl.formatMessage({ id: 'StripePaymentAddress.countryLabel' });
+  const countryPlaceholder = intl.formatMessage({ id: 'StripePaymentAddress.countryPlaceholder' });
   const countryRequired = validators.required(
     intl.formatMessage({
-      id: 'PayoutDetailsForm.countryRequired',
+      id: 'StripePaymentAddress.countryRequired',
     })
   );
 
@@ -67,29 +81,28 @@ const StripePaymentAddress = props => {
       <h3 className={css.subTitle}>{addressTitle}</h3>
 
       <FieldTextInput
-        id={`${fieldId}.streetAddress`}
-        name={`${fieldId}.streetAddress`}
+        id={`${fieldId}.addressLine1`}
+        name={`${fieldId}.addressLine1`}
         disabled={disabled}
         className={css.field}
         type="text"
-        autoComplete="street-address"
-        label={streetAddressLabel}
-        placeholder={streetAddressPlaceholder}
-        validate={streetAddressRequired}
-        onUnmount={() => form.change(`${fieldId}.streetAddress`, undefined)}
+        autoComplete="street-address-line1"
+        label={addressLine1Label}
+        placeholder={addressLine1Placeholder}
+        validate={addressLine1Required}
+        onUnmount={() => form.change(`${fieldId}.addressLine1`, undefined)}
       />
 
       <FieldTextInput
-        id={`${fieldId}.streetAddress`}
-        name={`${fieldId}.streetAddress`}
+        id={`${fieldId}.addressLine2`}
+        name={`${fieldId}.addressLine2`}
         disabled={disabled}
         className={css.field}
         type="text"
-        autoComplete="street-address"
-        label={streetAddressLabel}
-        placeholder={streetAddressPlaceholder}
-        validate={streetAddressRequired}
-        onUnmount={() => form.change(`${fieldId}.streetAddress`, undefined)}
+        autoComplete="street-address-line2"
+        label={addressLine2Label}
+        placeholder={addressLine2Placeholder}
+        onUnmount={() => form.change(`${fieldId}.addressLine2`, undefined)}
       />
 
       <div className={css.formRow}>
