@@ -88,9 +88,6 @@ exports[`CheckoutPage matches snapshot 1`] = `
       <section>
         <InjectIntl(StripePaymentForm)
           authorDisplayName="author display name"
-          errors={
-            Object {
-              "handleCardPaymentError": undefined,
           currentUser={
             Object {
               "attributes": Object {
@@ -110,6 +107,11 @@ exports[`CheckoutPage matches snapshot 1`] = `
                 "uuid": "currentUser",
               },
               "type": "currentUser",
+            }
+          }
+          errors={
+            Object {
+              "handleCardPaymentError": undefined,
             }
           }
           formId="CheckoutPagePaymentForm"
