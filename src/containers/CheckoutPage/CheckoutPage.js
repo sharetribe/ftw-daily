@@ -552,6 +552,7 @@ export class CheckoutPageComponent extends Component {
                   errors={{
                     handleCardPaymentError,
                   }}
+                  currentUser={currentUser}
                 />
               ) : null}
             </section>

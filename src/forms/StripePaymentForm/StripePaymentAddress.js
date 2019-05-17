@@ -33,11 +33,6 @@ const StripePaymentAddress = props => {
   const addressLine2Placeholder = intl.formatMessage({
     id: 'StripePaymentAddress.addressLine2Placeholder',
   });
-  const addressLine2Required = validators.required(
-    intl.formatMessage({
-      id: 'StripePaymentAddress.addressLine2Required',
-    })
-  );
 
   const postalCodeLabel = intl.formatMessage({ id: 'StripePaymentAddress.postalCodeLabel' });
   const postalCodePlaceholder = intl.formatMessage({
@@ -62,11 +57,6 @@ const StripePaymentAddress = props => {
     { optionalText: optionalText }
   );
   const statePlaceholder = intl.formatMessage({ id: 'StripePaymentAddress.statePlaceholder' });
-  const stateRequired = validators.required(
-    intl.formatMessage({
-      id: 'StripePaymentAddress.stateRequired',
-    })
-  );
 
   const countryLabel = intl.formatMessage({ id: 'StripePaymentAddress.countryLabel' });
   const countryPlaceholder = intl.formatMessage({ id: 'StripePaymentAddress.countryPlaceholder' });
@@ -147,7 +137,6 @@ const StripePaymentAddress = props => {
         autoComplete="address-level1"
         label={stateLabel}
         placeholder={statePlaceholder}
-        validate={stateRequired}
         onUnmount={() => form.change(`${fieldId}.state`, undefined)}
       />
       <FieldTextInput
