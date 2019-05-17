@@ -127,7 +127,7 @@ class StripePaymentForm extends Component {
     }
   }
   handleCardValueChange(event) {
-    const { intl, onChange, formId } = this.props;
+    const { intl, formId } = this.props;
     const { error, complete } = event;
 
     const postalCode = event.value.postalCode;
@@ -176,11 +176,9 @@ class StripePaymentForm extends Component {
       form,
     } = formRenderProps;
 
-    const formId = this.props.formId;
-
     this.form = form;
 
-    const submitInProgress = stripePaymentTokenInProgress || inProgress;
+    const { requestPaymentError, handleCardPaymentError, confirmPaymentError } = errors || {};
     const submitDisabled = invalid || !this.state.cardValueValid || submitInProgress;
     const hasCardError = this.state.error && !submitInProgress;
     const hasSubmitErrors = handleCardPaymentError;
@@ -198,9 +196,11 @@ class StripePaymentForm extends Component {
       : confirmPaymentError
       ? confirmPaymentError.message
       : intl.formatMessage({ id: 'StripePaymentForm.genericError' });
+
     const billingDetailsNameLabel = intl.formatMessage({
       id: 'StripePaymentForm.billingDetailsNameLabel',
     });
+
     const billingDetailsNamePlaceholder = intl.formatMessage({
       id: 'StripePaymentForm.billingDetailsNamePlaceholder',
     });
