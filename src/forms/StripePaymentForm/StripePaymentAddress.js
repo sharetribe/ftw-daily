@@ -7,7 +7,7 @@ import { FieldTextInput } from '../../components';
 import css from './StripePaymentForm.css';
 
 const StripePaymentAddress = props => {
-  const { className, intl, disabled, form, fieldId } = props;
+  const { className, intl, disabled, form, fieldId, card } = props;
 
   const addressTitle = intl.formatMessage({
     id:
@@ -104,11 +104,16 @@ const StripePaymentAddress = props => {
           placeholder={postalCodePlaceholder}
           validate={postalCodeRequired}
           onUnmount={() => form.change(`${fieldId}.postalCode`, undefined)}
+          onChange={event => {
+            const value = event.target.value;
+            form.change(`${fieldId}.postalCode`, value);
+            card.update({ value: { postalCode: value } });
+          }}
         />
 
         <FieldTextInput
           id={`${fieldId}.city`}
-          name="address_zip"
+          name={`${fieldId}.city`}
           disabled={disabled}
           className={css.city}
           type="text"
