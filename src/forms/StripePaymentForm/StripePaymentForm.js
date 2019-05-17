@@ -127,8 +127,13 @@ class StripePaymentForm extends Component {
     }
   }
   handleCardValueChange(event) {
-    const { intl } = this.props;
+    const { intl, onChange, formId } = this.props;
     const { error, complete } = event;
+
+    const postalCode = event.value.postalCode;
+    if (this.form) {
+      this.form.change(`${formId}.postalCode`, postalCode);
+    }
 
     this.setState(prevState => {
       return {
@@ -141,12 +146,7 @@ class StripePaymentForm extends Component {
     const { onSubmit, handleCardPaymentInProgress } = this.props;
     const { initialMessage } = values;
 
-<<<<<<< HEAD
     if (handleCardPaymentInProgress || !this.state.cardValueValid) {
-=======
-    console.log('Values:', values);
-    if (stripePaymentTokenInProgress || !this.state.cardValueValid) {
->>>>>>> Add fields for name and address
       // Already submitting or card value incomplete/invalid
       return;
     }
@@ -176,7 +176,11 @@ class StripePaymentForm extends Component {
       form,
     } = formRenderProps;
 
-    const { requestPaymentError, handleCardPaymentError, confirmPaymentError } = errors || {};
+    const formId = this.props.formId;
+
+    this.form = form;
+
+    const submitInProgress = stripePaymentTokenInProgress || inProgress;
     const submitDisabled = invalid || !this.state.cardValueValid || submitInProgress;
     const hasCardError = this.state.error && !submitInProgress;
     const hasSubmitErrors = handleCardPaymentError;
@@ -186,7 +190,6 @@ class StripePaymentForm extends Component {
       [css.cardError]: hasCardError,
     });
 
-<<<<<<< HEAD
     // TODO
     const submitErrorMessage = requestPaymentError
       ? requestPaymentError.message
@@ -195,7 +198,6 @@ class StripePaymentForm extends Component {
       : confirmPaymentError
       ? confirmPaymentError.message
       : intl.formatMessage({ id: 'StripePaymentForm.genericError' });
-=======
     const billingDetailsNameLabel = intl.formatMessage({
       id: 'StripePaymentForm.billingDetailsNameLabel',
     });
@@ -223,11 +225,11 @@ class StripePaymentForm extends Component {
           intl={intl}
           disabled={disabled}
           form={form}
-          fieldId="address"
+          fieldId={formId}
+          card={this.card}
         />
       </div>
     );
->>>>>>> Add fields for name and address
 
     const messagePlaceholder = intl.formatMessage(
       { id: 'StripePaymentForm.messagePlaceholder' },
@@ -305,6 +307,7 @@ class StripePaymentForm extends Component {
       currentUser && currentUser.attributes
         ? `${currentUser.attributes.profile.firstName} ${currentUser.attributes.profile.lastName}`
         : null;
+
     return (
       <FinalForm
         onSubmit={this.handleSubmit}
