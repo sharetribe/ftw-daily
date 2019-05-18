@@ -15,8 +15,11 @@
 }
 
 .step {
+  margin-top: 20px;
+
   @media (--viewportMedium) {
     width: 324px;
+    margin-top: 0px;
     margin-right: 40px;
   }
 }
@@ -43,4 +46,15 @@
   @media (--viewportMedium) {
     margin-top: 52px;
   }
+}
+
+.icon {
+  width: 50%;
+  max-width: 150px;
+}
+
+.iconContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
