@@ -13,9 +13,9 @@ const Logo = props => {
   const mobileClasses = classNames(css.logoMobile, className);
 
   if (format === 'desktop') {
-    return <img className={className} src={LogoImage} alt={config.siteTitle} {...rest} />;
+    return <img className={css.logoDesktop} src={LogoImage} alt={config.siteTitle} {...rest} />;
   }
-  return <img className={className} src={MobileLogoImage} alt={config.siteTitle} {...rest} />;
+  return <img className={css.logoMobile} src={LogoImage} alt={config.siteTitle} {...rest} />;
 };
 
 const { oneOf, string } = PropTypes;
