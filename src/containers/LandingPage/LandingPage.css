@@ -44,8 +44,8 @@
 
 .hero {
   flex-grow: 1;
-  justify-content: flex-end;
-  padding-bottom: 32px;
+  justify-content: center;
+  /* margin-bottom: 32px; */
 
   @media (--viewportMedium) {
     padding-bottom: 83px;
