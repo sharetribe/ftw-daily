@@ -21,6 +21,7 @@ import EditListingWizardTab, {
   POLICY,
   LOCATION,
   PRICING,
+  TIME,
   PHOTOS,
 } from './EditListingWizardTab';
 import css from './EditListingWizard.css';
@@ -37,6 +38,7 @@ export const TABS = [
   LOCATION,
   PRICING,
   ...availabilityMaybe,
+  TIME,
   PHOTOS,
 ];
 
@@ -57,6 +59,8 @@ const tabLabel = (intl, tab) => {
     key = 'EditListingWizard.tabLabelPricing';
   } else if (tab === AVAILABILITY) {
     key = 'EditListingWizard.tabLabelAvailability';
+  } else if (tab === TIME) {
+    key = 'EditListingWizard.tabLabelTime';
   } else if (tab === PHOTOS) {
     key = 'EditListingWizard.tabLabelPhotos';
   }
@@ -80,6 +84,7 @@ const tabCompleted = (tab, listing) => {
     price,
     title,
     publicData,
+    time
   } = listing.attributes;
   const images = listing.images;
 
@@ -96,6 +101,8 @@ const tabCompleted = (tab, listing) => {
       return !!price;
     case AVAILABILITY:
       return !!availabilityPlan;
+    case TIME:
+      return publicData && publicData.morningStartHour && publicData.morningEndHour && publicData.afternoonStartHour && publicData.afternoonEndHour
     case PHOTOS:
       return images && images.length > 0;
     default:

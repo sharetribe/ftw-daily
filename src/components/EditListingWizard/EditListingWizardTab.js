@@ -17,6 +17,7 @@ import {
   EditListingPhotosPanel,
   EditListingPoliciesPanel,
   EditListingPricingPanel,
+  EditListingTimePanel
 } from '../../components';
 
 import css from './EditListingWizard.css';
@@ -29,6 +30,7 @@ export const POLICY = 'policy';
 export const LOCATION = 'location';
 export const PRICING = 'pricing';
 export const PHOTOS = 'photos';
+export const TIME = 'time';
 
 // EditListingWizardTab component supports these tabs
 export const SUPPORTED_TABS = [
@@ -38,6 +40,7 @@ export const SUPPORTED_TABS = [
   LOCATION,
   PRICING,
   AVAILABILITY,
+  TIME,
   PHOTOS,
 ];
 
@@ -238,6 +241,28 @@ const EditListingWizardTab = props => {
           onSubmit={values => {
             onCompleteEditListingWizardTab(tab, values);
           }}
+        />
+      );
+    }
+    case TIME: {
+      const submitButtonTranslationKey = isNewListingFlow
+        ? 'EditListingWizard.saveNewTime'
+        : 'EditListingWizard.saveEditTime';
+
+      // newListingPublished and fetchInProgress are flags for the last wizard tab
+      return (
+        <EditListingTimePanel
+          {...panelProps(TIME)}
+          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          newListingPublished={newListingPublished}
+          fetchInProgress={fetchInProgress}
+          images={images}
+          onImageUpload={onImageUpload}
+          onRemoveImage={onRemoveImage}
+          onSubmit={values => {
+            onCompleteEditListingWizardTab(tab, values);
+          }}
+          onUpdateImageOrder={onUpdateImageOrder}
         />
       );
     }
