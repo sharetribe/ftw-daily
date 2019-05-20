@@ -238,17 +238,30 @@ export class CheckoutPageComponent extends Component {
     this.setState({ submitting: true });
 
     const { history, speculatedTransaction, currentUser, paymentIntent, dispatch } = this.props;
-    const { stripe, card, message } = values;
+    const { stripe, card, message, formId, formValues } = values;
+    const { name } = formValues;
+    const { addressLine1, addressLine2, postalCode, city, state, country } = formValues[formId];
+
+    const billingDetails = {
+      cardholderName: name,
+      billingAddress: {
+        city: city,
+        country: country,
+        line1: addressLine1,
+        line2: addressLine2,
+        postal_code: postalCode,
+        state: state,
+      },
+      email: ensureCurrentUser(currentUser).attributes.email,
+    };
 
     const requestPaymentParams = {
       pageData: this.state.pageData,
       speculatedTransaction,
       stripe,
       card,
-      cardholderName: 'John Doe', // TODO get cardholder's name from form and billing address too
-      email: ensureCurrentUser(currentUser).attributes.email,
+      billingDetails,
       message,
-
       // TODO
       // how can we know/fetch these after page refresh?
       stripePaymentIntentClientSecret: window.stripePaymentIntentClientSecret,

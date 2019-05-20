@@ -98,6 +98,7 @@ class StripePaymentForm extends Component {
     this.handleCardValueChange = this.handleCardValueChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.paymentForm = this.paymentForm.bind(this);
+    this.finalFormAPI = null;
   }
   componentDidMount() {
     if (!window.Stripe) {
@@ -131,8 +132,8 @@ class StripePaymentForm extends Component {
     const { error, complete } = event;
 
     const postalCode = event.value.postalCode;
-    if (this.form) {
-      this.form.change(`${formId}.postalCode`, postalCode);
+    if (this.finalFormAPI) {
+      this.finalFormAPI.change(`${formId}.postalCode`, postalCode);
     }
 
     this.setState(prevState => {
@@ -143,7 +144,7 @@ class StripePaymentForm extends Component {
     });
   }
   handleSubmit(values) {
-    const { onSubmit, handleCardPaymentInProgress } = this.props;
+    const { onSubmit, handleCardPaymentInProgress, formId } = this.props;
     const { initialMessage } = values;
 
     if (handleCardPaymentInProgress || !this.state.cardValueValid) {
@@ -155,7 +156,10 @@ class StripePaymentForm extends Component {
       message: initialMessage ? initialMessage.trim() : null,
       stripe: this.stripe,
       card: this.card,
+      formId,
+      formValues: values,
     };
+
     onSubmit(params);
   }
 
@@ -176,7 +180,7 @@ class StripePaymentForm extends Component {
       form,
     } = formRenderProps;
 
-    this.form = form;
+    this.finalFormAPI = form;
 
     const { requestPaymentError, handleCardPaymentError, confirmPaymentError } = errors || {};
     const submitDisabled = invalid || !this.state.cardValueValid || submitInProgress;
@@ -278,8 +282,8 @@ class StripePaymentForm extends Component {
           }}
         />
         {hasCardError ? <span className={css.error}>{this.state.error}</span> : null}
-        {hasSubmitErrors ? <span className={css.error}>{submitErrorMessage}</span> : null}
         {billingDetails}
+        {hasSubmitErrors ? <span className={css.error}>{submitErrorMessage}</span> : null}
         {initialMessage}
         <div className={css.submitContainer}>
           <p className={css.paymentInfo}>{paymentInfo}</p>
