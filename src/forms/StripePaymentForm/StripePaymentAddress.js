@@ -66,90 +66,90 @@ const StripePaymentAddress = props => {
     })
   );
 
+  const handleOnChange = event => {
+    const value = event.target.value;
+    form.change('postal', value);
+    card.update({ value: { postalCode: value } });
+  };
+
   return (
     <div className={className ? className : css.sectionContainer}>
-      <h3 className={css.subTitle}>{addressTitle}</h3>
-
       <FieldTextInput
         id={`${fieldId}.addressLine1`}
-        name={`${fieldId}.addressLine1`}
+        name="addressLine1"
         disabled={disabled}
         className={css.field}
         type="text"
-        autoComplete="street-address-line1"
+        autoComplete="billing address-line1"
         label={addressLine1Label}
         placeholder={addressLine1Placeholder}
         validate={addressLine1Required}
-        onUnmount={() => form.change(`${fieldId}.addressLine1`, undefined)}
+        onUnmount={() => form.change('addressLine1', undefined)}
       />
 
       <FieldTextInput
         id={`${fieldId}.addressLine2`}
-        name={`${fieldId}.addressLine2`}
+        name="addressLine2"
         disabled={disabled}
         className={css.field}
         type="text"
-        autoComplete="street-address-line2"
+        autoComplete="billing address-line2"
         label={addressLine2Label}
         placeholder={addressLine2Placeholder}
-        onUnmount={() => form.change(`${fieldId}.addressLine2`, undefined)}
+        onUnmount={() => form.change('addressLine2', undefined)}
       />
 
       <div className={css.formRow}>
         <FieldTextInput
           id={`${fieldId}.postalCode`}
-          name={`${fieldId}.postalCode`}
+          name="postal"
           disabled={disabled}
           className={css.postalCode}
           type="text"
-          autoComplete="postal-code"
+          autoComplete="billing postal-code"
           label={postalCodeLabel}
           placeholder={postalCodePlaceholder}
           validate={postalCodeRequired}
-          onUnmount={() => form.change(`${fieldId}.postalCode`, undefined)}
-          onChange={event => {
-            const value = event.target.value;
-            form.change(`${fieldId}.postalCode`, value);
-            card.update({ value: { postalCode: value } });
-          }}
+          onUnmount={() => form.change('postal', undefined)}
+          onChange={event => handleOnChange(event)}
         />
 
         <FieldTextInput
           id={`${fieldId}.city`}
-          name={`${fieldId}.city`}
+          name="city"
           disabled={disabled}
           className={css.city}
           type="text"
-          autoComplete="address-level2"
+          autoComplete="billing address-level2"
           label={cityLabel}
           placeholder={cityPlaceholder}
           validate={cityRequired}
-          onUnmount={() => form.change(`${fieldId}.city`, undefined)}
+          onUnmount={() => form.change('city', undefined)}
         />
       </div>
 
       <FieldTextInput
         id={`${fieldId}.state`}
-        name={`${fieldId}.state`}
+        name="state"
         disabled={disabled}
         className={css.state}
         type="text"
-        autoComplete="address-level1"
+        autoComplete="billing address-level1"
         label={stateLabel}
         placeholder={statePlaceholder}
-        onUnmount={() => form.change(`${fieldId}.state`, undefined)}
+        onUnmount={() => form.change('state', undefined)}
       />
       <FieldTextInput
         id={`${fieldId}.country`}
-        name={`${fieldId}.country`}
+        name="country"
         disabled={disabled}
-        className={css.country}
+        className={css.field}
         type="text"
-        autoComplete="address-level1"
+        autoComplete="billing country-name"
         label={countryLabel}
         placeholder={countryPlaceholder}
         validate={countryRequired}
-        onUnmount={() => form.change(`${fieldId}.country`, undefined)}
+        onUnmount={() => form.change('country', undefined)}
       />
     </div>
   );

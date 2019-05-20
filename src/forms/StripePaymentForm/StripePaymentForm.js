@@ -128,12 +128,12 @@ class StripePaymentForm extends Component {
     }
   }
   handleCardValueChange(event) {
-    const { intl, formId } = this.props;
+    const { intl } = this.props;
     const { error, complete } = event;
 
     const postalCode = event.value.postalCode;
     if (this.finalFormAPI) {
-      this.finalFormAPI.change(`${formId}.postalCode`, postalCode);
+      this.finalFormAPI.change('postal', postalCode);
     }
 
     this.setState(prevState => {
@@ -220,12 +220,12 @@ class StripePaymentForm extends Component {
           type="text"
           id="name"
           name="name"
+          autoComplete="cc-name"
           label={billingDetailsNameLabel}
           placeholder={billingDetailsNamePlaceholder}
         />
 
         <StripePaymentAddress
-          country="FI"
           intl={intl}
           disabled={disabled}
           form={form}
