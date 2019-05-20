@@ -160,3 +160,7 @@
   margin-top: 24px;
   width: calc(60% - 9px);
 }
+
+.field {
+  margin-top: 24px;
+}
