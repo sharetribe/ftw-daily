@@ -171,25 +171,14 @@ export class CheckoutPageComponent extends Component {
 
     const fnHandleCardPayment = fnParams => {
       // fnParams should be { stripePaymentIntentClientSecret, stripePaymentIntentId }
-      const { stripe, card, cardholderName, email, paymentIntent } = handlePaymentParams;
+      const { stripe, card, billingDetails, paymentIntent } = handlePaymentParams;
       const params = {
         ...fnParams,
         stripe,
         card,
         paymentParams: {
           payment_method_data: {
-            billing_details: {
-              name: cardholderName,
-              email,
-              // address: {
-              //   city: null,
-              //   country: null,
-              //   line1: null,
-              //   line2: null,
-              //   postal_code: null,
-              //   state: null
-              // },
-            },
+            billing_details: billingDetails,
           },
         },
       };
@@ -238,22 +227,23 @@ export class CheckoutPageComponent extends Component {
     this.setState({ submitting: true });
 
     const { history, speculatedTransaction, currentUser, paymentIntent, dispatch } = this.props;
-    const { stripe, card, message, formId, formValues } = values;
-    const { name } = formValues;
-    const { addressLine1, addressLine2, postalCode, city, state, country } = formValues[formId];
+    const { stripe, card, message, formValues } = values;
+    const { name, addressLine1, addressLine2, postal, city, state, country } = formValues;
 
     const billingDetails = {
-      cardholderName: name,
-      billingAddress: {
+      name,
+      address: {
         city: city,
         country: country,
         line1: addressLine1,
         line2: addressLine2,
-        postal_code: postalCode,
+        postal_code: postal,
         state: state,
       },
       email: ensureCurrentUser(currentUser).attributes.email,
     };
+
+    debugger;
 
     const requestPaymentParams = {
       pageData: this.state.pageData,
