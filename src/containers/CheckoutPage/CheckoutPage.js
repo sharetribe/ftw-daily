@@ -244,8 +244,6 @@ export class CheckoutPageComponent extends Component {
       email: ensureCurrentUser(currentUser).attributes.email,
     };
 
-    debugger;
-
     const requestPaymentParams = {
       pageData: this.state.pageData,
       speculatedTransaction,
@@ -272,6 +270,7 @@ export class CheckoutPageComponent extends Component {
 
         const routes = routeConfiguration();
         const initialMessageFailedToTransaction = initialMessageSuccess ? null : orderId;
+
         const orderDetailsPath = pathByRouteName('OrderDetailsPage', routes, { id: orderId.uuid });
 
         initializeOrderPage({ initialMessageFailedToTransaction }, routes, dispatch);
