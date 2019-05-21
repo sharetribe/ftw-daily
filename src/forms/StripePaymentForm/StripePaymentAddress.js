@@ -1,8 +1,10 @@
 import React from 'react';
 import { intlShape } from 'react-intl';
 import { bool, object, string } from 'prop-types';
+import config from '../../config';
 import * as validators from '../../util/validators';
-import { FieldTextInput } from '../../components';
+import getCountryCodes from '../../translations/countryCodes';
+import { FieldTextInput, FieldSelect } from '../../components';
 
 import css from './StripePaymentForm.css';
 
@@ -72,6 +74,9 @@ const StripePaymentAddress = props => {
     card.update({ value: { postalCode: value } });
   };
 
+  // Use tha language set in config.locale to get the correct translations of the country names
+  const countryCodes = getCountryCodes(config.locale);
+
   return (
     <div className={className ? className : css.sectionContainer}>
       <FieldTextInput
@@ -139,18 +144,26 @@ const StripePaymentAddress = props => {
         placeholder={statePlaceholder}
         onUnmount={() => form.change('state', undefined)}
       />
-      <FieldTextInput
+
+      <FieldSelect
         id={`${fieldId}.country`}
-        name="country"
+        name={`${fieldId}.country`}
         disabled={disabled}
-        className={css.field}
-        type="text"
-        autoComplete="billing country-name"
+        className={css.selectCountry}
         label={countryLabel}
-        placeholder={countryPlaceholder}
         validate={countryRequired}
-        onUnmount={() => form.change('country', undefined)}
-      />
+      >
+        <option disabled value="">
+          {countryPlaceholder}
+        </option>
+        {countryCodes.map(country => {
+          return (
+            <option key={country.code} value={country.code}>
+              {country.name}
+            </option>
+          );
+        })}
+      </FieldSelect>
     </div>
   );
 };
