@@ -147,7 +147,7 @@ const StripePaymentAddress = props => {
 
       <FieldSelect
         id={`${fieldId}.country`}
-        name={`${fieldId}.country`}
+        name="country"
         disabled={disabled}
         className={css.selectCountry}
         label={countryLabel}
