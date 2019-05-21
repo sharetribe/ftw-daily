@@ -513,6 +513,11 @@ export class CheckoutPageComponent extends Component {
       );
     }
 
+    const userName =
+      currentUser && currentUser.attributes
+        ? `${currentUser.attributes.profile.firstName} ${currentUser.attributes.profile.lastName}`
+        : null;
+
     return (
       <Page {...pageProps}>
         {topbar}
@@ -563,7 +568,7 @@ export class CheckoutPageComponent extends Component {
                   errors={{
                     handleCardPaymentError,
                   }}
-                  currentUser={currentUser}
+                  initialValues={{ name: userName }}
                 />
               ) : null}
             </section>

@@ -88,27 +88,6 @@ exports[`CheckoutPage matches snapshot 1`] = `
       <section>
         <InjectIntl(StripePaymentForm)
           authorDisplayName="author display name"
-          currentUser={
-            Object {
-              "attributes": Object {
-                "banned": false,
-                "deleted": false,
-                "email": "currentUser@example.com",
-                "emailVerified": true,
-                "profile": Object {
-                  "abbreviatedName": "currentUser abbreviated name",
-                  "displayName": "currentUser display name",
-                  "firstName": "currentUser first name",
-                  "lastName": "currentUser last name",
-                },
-              },
-              "id": UUID {
-                "_sdkType": "UUID",
-                "uuid": "currentUser",
-              },
-              "type": "currentUser",
-            }
-          }
           errors={
             Object {
               "handleCardPaymentError": undefined,
@@ -116,6 +95,11 @@ exports[`CheckoutPage matches snapshot 1`] = `
           }
           formId="CheckoutPagePaymentForm"
           inProgress={false}
+          initialValues={
+            Object {
+              "name": "currentUser first name currentUser last name",
+            }
+          }
           onSubmit={[Function]}
           paymentInfo="CheckoutPage.paymentInfo"
           showInitialMessageInput={true}

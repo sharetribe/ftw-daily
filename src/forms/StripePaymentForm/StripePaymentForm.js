@@ -306,20 +306,7 @@ class StripePaymentForm extends Component {
 
   render() {
     const { onSubmit, ...rest } = this.props;
-    const currentUser = this.props.currentUser;
-    const userName =
-      currentUser && currentUser.attributes
-        ? `${currentUser.attributes.profile.firstName} ${currentUser.attributes.profile.lastName}`
-        : null;
-
-    return (
-      <FinalForm
-        onSubmit={this.handleSubmit}
-        {...rest}
-        render={this.paymentForm}
-        initialValues={{ name: userName }}
-      />
-    );
+    return <FinalForm onSubmit={this.handleSubmit} {...rest} render={this.paymentForm} />;
   }
 }
 
