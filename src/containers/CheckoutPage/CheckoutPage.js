@@ -512,10 +512,16 @@ export class CheckoutPageComponent extends Component {
       );
     }
 
+    // Get first and last name of the current user and use it in the StripePaymentForm to autofill the name field
     const userName =
       currentUser && currentUser.attributes
         ? `${currentUser.attributes.profile.firstName} ${currentUser.attributes.profile.lastName}`
         : null;
+
+    // If your marketplace works mostly in one country you can use initial values to select country automatically
+    // e.g. {country: 'FI'}
+
+    const initalValuesForStripePayment = { name: userName };
 
     return (
       <Page {...pageProps}>
@@ -567,7 +573,7 @@ export class CheckoutPageComponent extends Component {
                   errors={{
                     handleCardPaymentError,
                   }}
-                  initialValues={{ name: userName }}
+                  initialValues={initalValuesForStripePayment}
                 />
               ) : null}
             </section>
