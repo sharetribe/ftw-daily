@@ -4,7 +4,7 @@ import findIndex from 'lodash/findIndex';
 import uniqueId from 'lodash/uniqueId';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import AddImages from './AddImages';
-import css from './AddImages.example.css';
+import css from './AddImagesExample.css';
 
 const { UUID } = sdkTypes;
 
