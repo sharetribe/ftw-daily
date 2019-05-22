@@ -44,6 +44,7 @@ import { sendEnquiry, loadData, setInitialValues } from './ListingPage.duck';
 import SectionImages from './SectionImages';
 import SectionAvatar from './SectionAvatar';
 import SectionHeading from './SectionHeading';
+import SectionPrice from './SectionPrice';
 import SectionDescriptionMaybe from './SectionDescriptionMaybe';
 import SectionFeaturesMaybe from './SectionFeaturesMaybe';
 import SectionReviews from './SectionReviews';
@@ -55,11 +56,12 @@ import { traderCategories } from './../../marketplace-custom-config'
 
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
 
-const { UUID } = sdkTypes;
+const { UUID, Money } = sdkTypes;
 
 const priceData = (price, intl) => {
   const unit = intl.formatMessage({ id: 'BookingPanel.perNight' })
   if (price && price.currency === config.currency) {
+    console.log(price)
     const formattedPrice = formatMoney(intl, price);
     const completePrice = `${formattedPrice} ${unit}`;
     return { formattedPrice, priceTitle: formattedPrice, completePrice };
@@ -241,6 +243,15 @@ export class ListingPageComponent extends Component {
       title = '',
       publicData,
     } = currentListing.attributes;
+
+    const priceInfo = {
+      priceMorningAdult: publicData.priceMorningAdult ? new Money(publicData.priceMorningAdult, config.currency): null,
+      priceAfternoonAdult: publicData.priceAfternoonAdult ? new Money(publicData.priceAfternoonAdult, config.currency): null,
+      priceDayAdult: publicData.priceDayAdult ? new Money(publicData.priceDayAdult, config.currency): null,
+      priceMorningChild: publicData.priceMorningChild ? new Money(publicData.priceMorningChild, config.currency): null,
+      priceAfternoonChild: publicData.priceAfternoonChild ? new Money(publicData.priceAfternoonChild, config.currency): null,
+      priceDayChild: publicData.priceDayChild ? new Money(publicData.priceDayChild, config.currency): null,
+    }
 
     const richTitle = (
       <span>
@@ -443,6 +454,10 @@ export class ListingPageComponent extends Component {
                     params={params} 
                     showContactUser={showContactUser}
                     onContactUser={this.onContactUser}
+                  />
+                  <SectionPrice 
+                    priceInfo={priceInfo}
+                    intl={intl}
                   />
                   <SectionDescriptionMaybe description={description} />
                   <SectionFeaturesMaybe options={amenitiesConfig} publicData={publicData} />

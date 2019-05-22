@@ -577,3 +577,13 @@
   word-break: break-word;
   hyphens: auto;
 }
+
+td {
+  min-width: 150px;
+  text-align: center;
+}
+
+tr {
+  height: 40px;
+  border-bottom: 1px solid gray;
+}

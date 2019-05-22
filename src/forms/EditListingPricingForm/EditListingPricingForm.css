@@ -33,3 +33,16 @@
     margin-top: 100px;
   }
 }
+
+.fieldsRow {
+  display: flex;
+  flex-Direction: row;
+  width: 100%;
+  margin-bottom: 32px;
+  margin-top: 32px;
+}
+
+.field {
+  margin-left: 24px;
+  margin-right: 24px;
+}

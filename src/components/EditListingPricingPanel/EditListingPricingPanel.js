@@ -30,6 +30,24 @@ const EditListingPricingPanel = props => {
   const currentListing = ensureOwnListing(listing);
   const { price } = currentListing.attributes;
 
+  const { 
+    priceDayAdult,
+    priceDayChild,
+    priceAfternoonAdult, 
+    priceAfternoonChild, 
+    priceMorningAdult, 
+    priceMorningChild 
+  } = currentListing.attributes.publicData
+  
+  const prices = {
+    priceDayAdult: new Money(priceDayAdult, config.currency),
+    priceDayChild: new Money(priceDayChild, config.currency),
+    priceAfternoonAdult: new Money(priceAfternoonAdult, config.currency),
+    priceAfternoonChild: new Money(priceAfternoonChild, config.currency),
+    priceMorningAdult: new Money(priceMorningAdult, config.currency),
+    priceMorningChild: new Money(priceMorningChild, config.currency),
+  }
+
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
     <FormattedMessage
@@ -44,8 +62,29 @@ const EditListingPricingPanel = props => {
   const form = priceCurrencyValid ? (
     <EditListingPricingForm
       className={css.form}
-      initialValues={{ price }}
-      onSubmit={onSubmit}
+      initialValues={{ 
+        price, 
+        priceDayAdult: prices.priceDayAdult,
+        priceDayChild: prices.priceDayChild,
+        priceAfternoonAdult: prices.priceAfternoonAdult,
+        priceAfternoonChild: prices.priceAfternoonChild,
+        priceMorningAdult: prices.priceMorningAdult, 
+        priceMorningChild: prices.priceMorningChild 
+      }}
+      onSubmit={values => {
+          const updateValues = {
+            publicData: {
+              priceDayAdult: values.priceDayAdult.amount,
+              priceDayChild: values.priceDayChild.amount,
+              priceAfternoonAdult: values.priceAfternoonAdult.amount,
+              priceAfternoonChild: values.priceAfternoonChild.amount,
+              priceMorningAdult: values.priceMorningAdult.amount,
+              priceMorningChild: values.priceMorningChild.amount,
+            }
+          };
+          onSubmit(updateValues)
+        }
+      }
       onChange={onChange}
       saveActionMsg={submitButtonText}
       updated={panelUpdated}

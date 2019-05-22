@@ -42,9 +42,12 @@ export const EditListingPricingFormComponent = props => (
         ? 'EditListingPricingForm.pricePerDay'
         : 'EditListingPricingForm.pricePerUnit';
 
-      const pricePerUnitMessage = intl.formatMessage({
-        id: translationKey,
-      });
+      const pricePerMorningAdult = intl.formatMessage({ id: 'EditListingPricingForm.pricePerMorningAdult' });
+      const pricePerAfternoonAdult = intl.formatMessage({ id: 'EditListingPricingForm.pricePerAfternoonAdult' });
+      const pricePerDayAdult = intl.formatMessage({ id: 'EditListingPricingForm.pricePerDayAdult' });
+      const pricePerMorningChild = intl.formatMessage({ id: 'EditListingPricingForm.pricePerMorningChild' });
+      const pricePerAfternoonChild = intl.formatMessage({ id: 'EditListingPricingForm.pricePerAfternoonChild' });
+      const pricePerDayChild = intl.formatMessage({ id: 'EditListingPricingForm.pricePerDayChild' });
 
       const pricePlaceholderMessage = intl.formatMessage({
         id: 'EditListingPricingForm.priceInputPlaceholder',
@@ -89,16 +92,74 @@ export const EditListingPricingFormComponent = props => (
               <FormattedMessage id="EditListingPricingForm.showListingFailed" />
             </p>
           ) : null}
-          <FieldCurrencyInput
-            id="price"
-            name="price"
-            className={css.priceInput}
-            autoFocus
-            label={pricePerUnitMessage}
-            placeholder={pricePlaceholderMessage}
-            currencyConfig={config.currencyConfig}
-            validate={priceValidators}
-          />
+          <div className={css.fieldsRow}>
+            <FieldCurrencyInput
+              id="priceDayAdult"
+              name="priceDayAdult"
+              className={css.field}
+              autoFocus
+              label={pricePerDayAdult}
+              placeholder={pricePlaceholderMessage}
+              currencyConfig={config.currencyConfig}
+              validate={priceValidators}
+            />
+            <FieldCurrencyInput
+              id="priceDayChild"
+              name="priceDayChild"
+              className={css.field}
+              autoFocus
+              label={pricePerDayChild}
+              placeholder={pricePlaceholderMessage}
+              currencyConfig={config.currencyConfig}
+              validate={priceValidators}
+            />
+          </div>
+
+          <div className={css.fieldsRow}>
+            <FieldCurrencyInput
+              id="priceAfternoonAdult"
+              name="priceAfternoonAdult"
+              className={css.field}
+              autoFocus
+              label={pricePerAfternoonAdult}
+              placeholder={pricePlaceholderMessage}
+              currencyConfig={config.currencyConfig}
+              validate={priceValidators}
+            />
+            <FieldCurrencyInput
+              id="priceAfternoonChild"
+              name="priceAfternoonChild"
+              className={css.field}
+              autoFocus
+              label={pricePerAfternoonChild}
+              placeholder={pricePlaceholderMessage}
+              currencyConfig={config.currencyConfig}
+              validate={priceValidators}
+            />
+          </div>
+
+          <div className={css.fieldsRow}>
+            <FieldCurrencyInput
+              id="priceMorningAdult"
+              name="priceMorningAdult"
+              className={css.field}
+              autoFocus
+              label={pricePerMorningAdult}
+              placeholder={pricePlaceholderMessage}
+              currencyConfig={config.currencyConfig}
+              validate={priceValidators}
+            />
+            <FieldCurrencyInput
+              id="priceMorningChild"
+              name="priceMorningChild"
+              className={css.field}
+              autoFocus
+              label={pricePerMorningChild}
+              placeholder={pricePlaceholderMessage}
+              currencyConfig={config.currencyConfig}
+              validate={priceValidators}
+            />
+          </div>
           <div className={marketPlaceCss.alignRight}>
             <Button
               className={css.submitButton}
