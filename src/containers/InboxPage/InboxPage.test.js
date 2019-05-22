@@ -10,7 +10,7 @@ import {
 } from '../../util/test-data';
 import { InboxPageComponent, InboxItem, txState } from './InboxPage';
 import routeConfiguration from '../../routeConfiguration';
-import { TRANSITION_REQUEST } from '../../util/transaction';
+import { TRANSITION_CONFIRM_PAYMENT } from '../../util/transaction';
 import { LINE_ITEM_NIGHT } from '../../util/types';
 
 const noop = () => null;
@@ -61,7 +61,7 @@ describe('InboxPage', () => {
       transactions: [
         createTransaction({
           id: 'order-1',
-          lastTransition: TRANSITION_REQUEST,
+          lastTransition: TRANSITION_CONFIRM_PAYMENT,
           customer,
           provider,
           lastTransitionedAt: new Date(Date.UTC(2017, 0, 15)),
@@ -69,7 +69,7 @@ describe('InboxPage', () => {
         }),
         createTransaction({
           id: 'order-2',
-          lastTransition: TRANSITION_REQUEST,
+          lastTransition: TRANSITION_CONFIRM_PAYMENT,
           customer,
           provider,
           lastTransitionedAt: new Date(Date.UTC(2016, 0, 15)),
@@ -118,7 +118,7 @@ describe('InboxPage', () => {
       transactions: [
         createTransaction({
           id: 'sale-1',
-          lastTransition: TRANSITION_REQUEST,
+          lastTransition: TRANSITION_CONFIRM_PAYMENT,
           customer,
           provider,
           lastTransitionedAt: new Date(Date.UTC(2017, 0, 15)),
@@ -126,7 +126,7 @@ describe('InboxPage', () => {
         }),
         createTransaction({
           id: 'sale-2',
-          lastTransition: TRANSITION_REQUEST,
+          lastTransition: TRANSITION_CONFIRM_PAYMENT,
           customer,
           provider,
           lastTransitionedAt: new Date(Date.UTC(2016, 0, 15)),
