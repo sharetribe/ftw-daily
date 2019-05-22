@@ -4,7 +4,8 @@ import { types as sdkTypes } from './sdkLoader';
 import { nightsBetween } from '../util/dates';
 import {
   TRANSITION_ACCEPT,
-  TRANSITION_REQUEST,
+  TRANSITION_CONFIRM_PAYMENT,
+  TRANSITION_REQUEST_PAYMENT,
   TX_TRANSITION_ACTOR_CUSTOMER,
   TX_TRANSITION_ACTOR_PROVIDER,
 } from '../util/transaction';
@@ -143,7 +144,7 @@ export const createTxTransition = options => {
   return {
     createdAt: new Date(Date.UTC(2017, 4, 1)),
     by: TX_TRANSITION_ACTOR_CUSTOMER,
-    transition: TRANSITION_REQUEST,
+    transition: TRANSITION_REQUEST_PAYMENT,
     ...options,
   };
 };
@@ -164,7 +165,12 @@ export const createTransaction = options => {
       createTxTransition({
         createdAt: new Date(Date.UTC(2017, 4, 1)),
         by: TX_TRANSITION_ACTOR_CUSTOMER,
-        transition: TRANSITION_REQUEST,
+        transition: TRANSITION_REQUEST_PAYMENT,
+      }),
+      createTxTransition({
+        createdAt: new Date(Date.UTC(2017, 4, 1, 0, 0, 1)),
+        by: TX_TRANSITION_ACTOR_CUSTOMER,
+        transition: TRANSITION_CONFIRM_PAYMENT,
       }),
       createTxTransition({
         createdAt: new Date(Date.UTC(2017, 5, 1)),
