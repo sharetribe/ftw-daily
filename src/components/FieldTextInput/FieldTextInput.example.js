@@ -5,7 +5,7 @@ import * as validators from '../../util/validators';
 import { Button } from '../../components';
 import FieldTextInput from './FieldTextInput';
 
-import css from './FieldTextInput.example.css';
+import css from './FieldTextInputExample.css';
 
 const FormComponent = props => (
   <FinalForm
