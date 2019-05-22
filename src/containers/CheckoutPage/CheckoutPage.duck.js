@@ -2,7 +2,10 @@ import pick from 'lodash/pick';
 import config from '../../config';
 import { denormalisedResponseEntities } from '../../util/data';
 import { storableError } from '../../util/errors';
-import { TRANSITION_REQUEST, TRANSITION_REQUEST_AFTER_ENQUIRY } from '../../util/transaction';
+import {
+  TRANSITION_REQUEST_PAYMENT,
+  TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY,
+} from '../../util/transaction';
 import * as log from '../../util/log';
 import { fetchCurrentUserHasOrdersSuccess } from '../../ducks/user.duck';
 
@@ -110,7 +113,7 @@ export const speculateTransactionError = e => ({
 export const initiateOrder = (orderParams, initialMessage) => (dispatch, getState, sdk) => {
   dispatch(initiateOrderRequest());
   const bodyParams = {
-    transition: TRANSITION_REQUEST,
+    transition: TRANSITION_REQUEST_PAYMENT,
     processAlias: config.bookingProcessAlias,
     params: orderParams,
   };
@@ -158,7 +161,7 @@ export const initiateOrderAfterEnquiry = (transactionId, orderParams) => (
 
   const bodyParams = {
     id: transactionId,
-    transition: TRANSITION_REQUEST_AFTER_ENQUIRY,
+    transition: TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY,
     params: orderParams,
   };
 
@@ -198,7 +201,7 @@ export const initiateOrderAfterEnquiry = (transactionId, orderParams) => (
 export const speculateTransaction = params => (dispatch, getState, sdk) => {
   dispatch(speculateTransactionRequest());
   const bodyParams = {
-    transition: TRANSITION_REQUEST,
+    transition: TRANSITION_REQUEST_PAYMENT,
     processAlias: config.bookingProcessAlias,
     params: {
       ...params,
