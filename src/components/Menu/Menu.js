@@ -38,7 +38,7 @@ class Menu extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { isOpen: false };
+    this.state = { isOpen: false, ready: false };
 
     const { isOpen, onToggleActive } = props;
     const isIndependentMenu = isOpen === null && onToggleActive === null;
@@ -59,6 +59,10 @@ class Menu extends Component {
 
     this.menu = null;
     this.menuContent = null;
+  }
+  componentDidMount() {
+    // Menu needs to know about DOM before it can calculate it's size proberly.
+    this.setState({ ready: true });
   }
 
   onBlur(event) {
@@ -168,7 +172,7 @@ class Menu extends Component {
     const { className, rootClassName } = this.props;
     const rootClass = rootClassName || css.root;
     const classes = classNames(rootClass, className);
-    const menuChildren = this.prepareChildren();
+    const menuChildren = this.state.ready ? this.prepareChildren() : null;
 
     return (
       <div
