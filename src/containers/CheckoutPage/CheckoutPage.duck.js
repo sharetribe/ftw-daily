@@ -110,74 +110,51 @@ export const speculateTransactionError = e => ({
 
 /* ================ Thunks ================ */
 
-export const initiateOrder = (orderParams, initialMessage) => (dispatch, getState, sdk) => {
-  dispatch(initiateOrderRequest());
-  const bodyParams = {
-    transition: TRANSITION_REQUEST_PAYMENT,
-    processAlias: config.bookingProcessAlias,
-    params: orderParams,
-  };
-  return sdk.transactions
-    .initiate(bodyParams)
-    .then(response => {
-      const orderId = response.data.data.id;
-      dispatch(initiateOrderSuccess(orderId));
-      dispatch(fetchCurrentUserHasOrdersSuccess(true));
+// // TODO initial message should be sent at the confirm-payment transition.
+// const sendInitialMessage = (initialMessage, orderId, sdk) => {
+//   if (initialMessage) {
+//     return sdk.messages
+//       .send({ transactionId: orderId, content: initialMessage })
+//       .then(() => {
+//         return { orderId, initialMessageSuccess: true };
+//       })
+//       .catch(e => {
+//         log.error(e, 'initial-message-send-failed', { txId: orderId });
+//         return { orderId, initialMessageSuccess: false };
+//       });
+//   } else {
+//     return Promise.resolve({ orderId, initialMessageSuccess: true });
+//   }
+// };
 
-      if (initialMessage) {
-        return sdk.messages
-          .send({ transactionId: orderId, content: initialMessage })
-          .then(() => {
-            return { orderId, initialMessageSuccess: true };
-          })
-          .catch(e => {
-            log.error(e, 'initial-message-send-failed', { txId: orderId });
-            return { orderId, initialMessageSuccess: false };
-          });
-      } else {
-        return Promise.resolve({ orderId, initialMessageSuccess: true });
+export const initiateOrder = (orderParams, transactionId) => (dispatch, getState, sdk) => {
+  dispatch(initiateOrderRequest());
+  const bodyParams = transactionId
+    ? {
+        id: transactionId,
+        transition: TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY,
+        params: orderParams,
       }
-    })
-    .catch(e => {
-      dispatch(initiateOrderError(storableError(e)));
-      log.error(e, 'initiate-order-failed', {
-        listingId: orderParams.listingId.uuid,
-        bookingStart: orderParams.bookingStart,
-        bookingEnd: orderParams.bookingEnd,
-      });
-      throw e;
-    });
-};
+    : {
+        processAlias: config.bookingProcessAlias,
+        transition: TRANSITION_REQUEST_PAYMENT,
+        params: orderParams,
+      };
 
-/**
- * Initiate an order after an enquiry. Transitions previously created transaction.
- */
-export const initiateOrderAfterEnquiry = (transactionId, orderParams) => (
-  dispatch,
-  getState,
-  sdk
-) => {
-  dispatch(initiateOrderRequest());
+  const createOrder = transactionId ? sdk.transactions.transition : sdk.transactions.initiate;
 
-  const bodyParams = {
-    id: transactionId,
-    transition: TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY,
-    params: orderParams,
-  };
-
-  return sdk.transactions
-    .transition(bodyParams)
+  return createOrder(bodyParams)
     .then(response => {
-      const orderId = response.data.data.id;
-      dispatch(initiateOrderSuccess(orderId));
+      const order = response.data.data;
+      dispatch(initiateOrderSuccess(order.id));
       dispatch(fetchCurrentUserHasOrdersSuccess(true));
-      // set initialMessageSuccess to true to unify promise handling with initiateOrder
-      return Promise.resolve({ orderId, initialMessageSuccess: true });
+      return order;
     })
     .catch(e => {
       dispatch(initiateOrderError(storableError(e)));
+      const transactionIdMaybe = transactionId ? { transactionId: transactionId.uuid } : {};
       log.error(e, 'initiate-order-failed', {
-        transactionId: transactionId.uuid,
+        ...transactionIdMaybe,
         listingId: orderParams.listingId.uuid,
         bookingStart: orderParams.bookingStart,
         bookingEnd: orderParams.bookingEnd,
