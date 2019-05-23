@@ -41,12 +41,7 @@ import { StripePaymentForm } from '../../forms';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import { handleCardPayment } from '../../ducks/stripe.duck.js';
 
-import {
-  initiateOrder,
-  initiateOrderAfterEnquiry,
-  setInitialValues,
-  speculateTransaction,
-} from './CheckoutPage.duck';
+import { initiateOrder, setInitialValues, speculateTransaction } from './CheckoutPage.duck';
 import { storeData, storedData, clearData } from './CheckoutPageSessionHelpers';
 import css from './CheckoutPage.css';
 
@@ -156,19 +151,26 @@ export class CheckoutPageComponent extends Component {
 
   handlePaymentIntent(handlePaymentParams) {
     const {
-      // onRequestPayment,
+      onInitiateOrder,
       onHandleCardPayment,
       // onConfirmPayment,
     } = this.props;
 
+    // Step 1: initiate order by requesting payment from Marketplace API
     const fnRequestPayment = fnParams => {
       // fnParams should be { listingId, bookingStart, bookingEnd }
-      const { stripePaymentIntentClientSecret, stripePaymentIntentId } = handlePaymentParams;
+      const {
+        pageData,
+        stripePaymentIntentClientSecret,
+        stripePaymentIntentId,
+      } = handlePaymentParams;
+      const transactionId = pageData.enquiredTransaction ? pageData.enquiredTransaction.id : null;
       return stripePaymentIntentClientSecret
         ? Promise.resolve({ stripePaymentIntentClientSecret, stripePaymentIntentId })
-        : Promise.resolve(fnParams); // : onRequestPayment(parameters);
+        : onInitiateOrder(fnParams, transactionId);
     };
 
+    // Step 2: pay using Stripe SDK
     const fnHandleCardPayment = fnParams => {
       // fnParams should be { stripePaymentIntentClientSecret, stripePaymentIntentId }
       const { stripe, card, billingDetails, paymentIntent } = handlePaymentParams;
@@ -188,11 +190,12 @@ export class CheckoutPageComponent extends Component {
         : onHandleCardPayment(params);
     };
 
+    // Step 3: complete order by confirming payment to Marketplace API
     const fnConfirmPayment = fnParams => {
       // fnParams should include { paymentIntent }
       const { message } = handlePaymentParams;
       const params = { ...fnParams, message };
-      return Promise.resolve(params); // onConfirmPayment(params);
+      return Promise.resolve(params); // onConfirmPayment(params, message);
     };
 
     // Here we create promise calls in sequence
@@ -212,12 +215,12 @@ export class CheckoutPageComponent extends Component {
     // NOTE: if unit type is line-item/units, quantity needs to be added.
     // The way to pass it to checkout page is through pageData.bookingData
     const { pageData, speculatedTransaction } = handlePaymentParams;
-    const initialParams = {
+    const orderParams = {
       listingId: pageData.listing.id,
       bookingStart: speculatedTransaction.booking.attributes.start,
       bookingEnd: speculatedTransaction.booking.attributes.end,
     };
-    return handlePaymentIntentCreation(initialParams);
+    return handlePaymentIntentCreation(orderParams);
   }
 
   handleSubmit(values) {
@@ -638,7 +641,7 @@ CheckoutPageComponent.propTypes = {
     id: string,
     slug: string,
   }).isRequired,
-  sendOrderRequest: func.isRequired,
+  onInitiateOrder: func.isRequired,
   onHandleCardPayment: func.isRequired,
   handleCardPaymentInProgress: bool.isRequired,
   handleCardPaymentError: propTypes.error,
@@ -688,9 +691,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   dispatch,
-  sendOrderRequest: (params, initialMessage) => dispatch(initiateOrder(params, initialMessage)),
-  sendOrderRequestAfterEnquiry: (transactionId, params) =>
-    dispatch(initiateOrderAfterEnquiry(transactionId, params)),
+  onInitiateOrder: (params, transactionId) => dispatch(initiateOrder(params, transactionId)),
   fetchSpeculatedTransaction: params => dispatch(speculateTransaction(params)),
   onHandleCardPayment: params => dispatch(handleCardPayment(params)),
 });
