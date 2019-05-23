@@ -79,6 +79,7 @@
   "BookingPanel.perUnit": "per unit",
   "BookingPanel.subTitleClosedListing": "Sorry, this listing has been closed.",
   "CheckoutPage.bookingTimeNotAvailableMessage": "Unfortunately, the requested time is already booked.",
+  "CheckoutPage.chargeDisabledMessage": "This provider's payout information is incomplete so this listing cannot be booked. Please contact the administrator.",
   "CheckoutPage.errorlistingLinkText": "the sauna page",
   "CheckoutPage.goToLandingPage": "Go to homepage",
   "CheckoutPage.hostedBy": "Hosted by {name}",
