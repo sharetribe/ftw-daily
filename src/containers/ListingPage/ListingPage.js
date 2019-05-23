@@ -42,9 +42,9 @@ import { TopbarContainer, NotFoundPage } from '../../containers';
 
 import { sendEnquiry, loadData, setInitialValues } from './ListingPage.duck';
 import SectionImages from './SectionImages';
-import SectionAvatar from './SectionAvatar';
 import SectionHeading from './SectionHeading';
 import SectionPrice from './SectionPrice';
+import SectionTime from './SectionTime';
 import SectionDescriptionMaybe from './SectionDescriptionMaybe';
 import SectionFeaturesMaybe from './SectionFeaturesMaybe';
 import SectionReviews from './SectionReviews';
@@ -61,7 +61,6 @@ const { UUID, Money } = sdkTypes;
 const priceData = (price, intl) => {
   const unit = intl.formatMessage({ id: 'BookingPanel.perNight' })
   if (price && price.currency === config.currency) {
-    console.log(price)
     const formattedPrice = formatMoney(intl, price);
     const completePrice = `${formattedPrice} ${unit}`;
     return { formattedPrice, priceTitle: formattedPrice, completePrice };
@@ -251,6 +250,15 @@ export class ListingPageComponent extends Component {
       priceMorningChild: publicData.priceMorningChild ? new Money(publicData.priceMorningChild, config.currency): null,
       priceAfternoonChild: publicData.priceAfternoonChild ? new Money(publicData.priceAfternoonChild, config.currency): null,
       priceDayChild: publicData.priceDayChild ? new Money(publicData.priceDayChild, config.currency): null,
+    }
+
+    const timeInfo = {
+      morningStartHour: publicData.morningStartHour,
+      morningEndHour: publicData.morningEndHour,
+      afternoonStartHour: publicData.afernoonStartHour,
+      afternoonEndHour: publicData.afernoonEndHour,
+      dayStartHour: publicData.dayStartHour,
+      dayEndHour: publicData.dayEndHour
     }
 
     const richTitle = (
@@ -462,6 +470,7 @@ export class ListingPageComponent extends Component {
                   <SectionDescriptionMaybe description={description} />
                   <SectionFeaturesMaybe options={amenitiesConfig} publicData={publicData} />
                   <SectionRulesMaybe publicData={publicData} />
+                  <SectionTime timeInfo={timeInfo} />
                   <SectionMapMaybe
                     geolocation={geolocation}
                     publicData={publicData}
