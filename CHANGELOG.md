@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+## [v2.17.0] 2019-05-23
+
 - [change] Mapbox library dependencies updated to v1.0.0.
   [#1099](https://github.com/sharetribe/flex-template-web/pull/1099)
   - Note: Mapbox changed their pricing scheme!
@@ -33,6 +35,8 @@ way to update this template, but currently, we follow a pattern:
   but handled separately. [#1088](https://github.com/sharetribe/flex-template-web/pull/1088)
 - [change] Move Stripe SDK call from `StripePaymentForm` to `stripe.duck.js` for consistency.
   [#1086](https://github.com/sharetribe/flex-template-web/pull/1086)
+
+  [v2.17.0]: https://github.com/sharetribe/flex-template-web/compare/v2.16.0...v2.17.0
 
 ## [v2.16.0] 2019-05-08
 
