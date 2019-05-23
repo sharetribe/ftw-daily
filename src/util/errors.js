@@ -142,6 +142,31 @@ export const isTransactionInitiateAmountTooLowError = error => {
 
 /**
  * Check if the given API error (from `sdk.transaction.initiate()`) is
+ * due to the transaction charge creation disabled by Stripe.
+ */
+export const isTransactionChargeDisabledError = error => {
+  const chargeCreationDisabled = errorAPIErrors(error).some(apiError => {
+    const isPaymentFailedError =
+      apiError.status === 402 && apiError.code === ERROR_CODE_PAYMENT_FAILED;
+
+    let isChargeCreationDisabled = false;
+    try {
+      const msg = apiError.meta.stripeMessage;
+      isChargeCreationDisabled =
+        msg.startsWith('Your account cannot currently make charges.') ||
+        msg.match(/verification.disabled_reason/);
+    } catch (e) {
+      // Ignore
+    }
+
+    return isPaymentFailedError && isChargeCreationDisabled;
+  });
+
+  return chargeCreationDisabled;
+};
+
+/**
+ * Check if the given API error (from `sdk.transaction.initiate()`) is
  * due to other error in Stripe.
  */
 export const transactionInitiateOrderStripeErrors = error => {

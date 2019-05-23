@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] missing provider information (like SSN in US), might cause payment to fail on
+  `CheckoutPage`. This improves related error message.
+  [#10967](https://github.com/sharetribe/flex-template-web/pull/1097)
 - [fix] Menu needs to wait for mounting to calculate dimensions properly.
   [#1096](https://github.com/sharetribe/flex-template-web/pull/1096)
 - [fix] Renamed Component.example.css files to ComponentExample.css to fix bug introduced in one of
