@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] Emptying the priceFilter component in the searchPage caused a page breaking error.
+  [#1101](https://github.com/sharetribe/flex-template-web/pull/1101)
+
 ## [v2.17.0] 2019-05-23
 
 - [change] Mapbox library dependencies updated to v1.0.0.
