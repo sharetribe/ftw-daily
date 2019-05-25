@@ -70,8 +70,10 @@
   "BookingDatesForm.youWontBeChargedInfo": "Não será cobrado já.",
   "BookingDatesForm.adultsNumber": "Número de adultos",
   "BookingDatesForm.childrenNumber": "Número de crianças (0 - 12 anos)",
+  "BookingDatesForm.timeSlot": "Horário",
   "BookingDatesForm.childrenNumberRequired": "Número de crianças é obrigatório.",
   "BookingDatesForm.adultsNumberRequired": "Número de adultos é obrigatório.",
+  "BookingDatesForm.timeSlotRequired": "Precisa de escolher o horário",
   "BookingDateRangeFilter.labelPlain": "Datas",
   "BookingDateRangeFilter.labelPopup": "Datas",
   "BookingDateRangeFilter.labelSelectedPlain": "{dates}",
@@ -914,5 +916,8 @@
   "Amenity.towels": "Toalhas",
   "Amenity.bathroom": "Balneário",
   "Amenity.jacuzzi": "Jacuzzi",
-  "Amenity.barbeque": "Churrasco"
+  "Amenity.barbeque": "Churrasco",
+  "Time.morning": "Manhã",
+  "Time.afternoon": "Tarde",
+  "Time.entireDay": "Dia Completo"
 }

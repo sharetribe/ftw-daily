@@ -9,8 +9,9 @@ import { required, bookingDatesRequired, composeValidators } from '../../util/va
 import { START_DATE, END_DATE } from '../../util/dates';
 import { propTypes } from '../../util/types';
 import config from '../../config';
-import { Form, PrimaryButton, FieldDateRangeInput, FieldDateInput, FieldNumberInput } from '../../components';
+import { Form, PrimaryButton, FieldSelect, FieldDateInput, FieldNumberInput } from '../../components';
 import EstimatedBreakdownMaybe from './EstimatedBreakdownMaybe';
+import { bookingSlots } from './../../marketplace-custom-config'
 
 import css from './BookingDatesForm.css';
 
@@ -85,8 +86,10 @@ export class BookingDatesFormComponent extends Component {
           const bookingStartLabel = intl.formatMessage({ id: 'BookingDatesForm.bookingDateTitle' });
           const adultsNumberLabel = intl.formatMessage({ id: 'BookingDatesForm.adultsNumber' });
           const childrenNumberLabel = intl.formatMessage({ id: 'BookingDatesForm.childrenNumber' });
+          const timeSlotLabel = intl.formatMessage({ id: 'BookingDatesForm.timeSlot' });
           const adultsNumberRequired = required(intl.formatMessage({ id: 'BookingDatesForm.adultsNumberRequired' }));
           const childrenNumberRequired = required(intl.formatMessage({ id: 'BookingDatesForm.childrenNumberRequired' }));
+          const timeSlotRequired = required(intl.formatMessage({ id: 'BookingDatesForm.timeSlotRequired' }));
         
 
           const timeSlotsError = fetchTimeSlotsError ? (
@@ -160,7 +163,6 @@ export class BookingDatesFormComponent extends Component {
                 id="adultsNumber"
                 name="adultsNumber"
                 className={css.field}
-                
                 label={adultsNumberLabel}
                 placeholder={'4...'}
                 validate={adultsNumberRequired}
@@ -169,11 +171,28 @@ export class BookingDatesFormComponent extends Component {
                 id="childrenNumber"
                 name="childrenNumber"
                 className={css.field}
-                
                 label={childrenNumberLabel}
                 placeholder={'2...'}
                 validate={childrenNumberRequired}
               />
+
+              <FieldSelect
+                className={css.category}
+                name="timeSlot"
+                id="timeSlot"
+                label={timeSlotLabel}
+                validate={timeSlotRequired}
+              >
+                <option disabled value="">
+                  {'-'}
+                </option>
+                {bookingSlots.map( c => (
+                  <option key={c.key} value={c.key}>
+                    {intl.formatMessage({ id: c.label })}
+                  </option>
+                ))}
+              </FieldSelect>
+
               {bookingInfo}
               <p className={css.smallPrint}>
                 <FormattedMessage

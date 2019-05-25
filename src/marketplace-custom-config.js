@@ -87,6 +87,12 @@ export const categories = [
   { key: 'exterior', label: 'Pool.interior' }
 ];
 
+export const bookingSlots = [
+  { key: 'morning', label: 'Time.morning' },
+  { key: 'afternoon', label: 'Time.afternoon' },
+  { key: 'completeDay', label: 'Time.entireDay' },
+]
+
 export const morningStartHour = TIME_SLOTS
 export const morningEndHour = TIME_SLOTS
 export const afternoonStartHour = TIME_SLOTS
