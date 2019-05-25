@@ -38,11 +38,85 @@ import {
   speculateTransaction,
 } from './CheckoutPage.duck';
 import config from '../../config';
-
 import { storeData, storedData, clearData } from './CheckoutPageSessionHelpers';
 import css from './CheckoutPage.css';
+import { types as sdkTypes } from '../../util/sdkLoader';
+
+const { Money } = sdkTypes;
 
 const STORAGE_KEY = 'CheckoutPage';
+
+const getBookingTime = (listing, bookingData, bookingDate) => {
+  
+  const { publicData } = listing.attributes;
+  const { timeSlot } = bookingData;
+  const bookingStartAPI = new Date(bookingDate);
+  const bookingEndAPI = new Date(bookingDate);
+  // console.log({publicData, timeSlot})
+
+  const listingTimeSlots = {
+    morning: {
+      start: {
+        hour: publicData.morningStartHour.split('_')[0],
+        minutes: publicData.morningStartHour.split('_')[1]
+      },
+      end: {
+        hour: publicData.morningEndHour.split('_')[0],
+        minutes: publicData.morningEndHour.split('_')[1]
+      }
+    },
+    afternoon: {
+      start: {
+        hour: publicData.afternoonStartHour.split('_')[0],
+        minutes: publicData.afternoonStartHour.split('_')[1]
+      },
+      end: {
+        hour: publicData.afternoonEndHour.split('_')[0],
+        minutes: publicData.afternoonEndHour.split('_')[1]
+      }
+    }
+  }
+
+  switch(timeSlot) {
+    case 'morning': {
+      bookingStartAPI.setHours(listingTimeSlots.morning.start.hour)
+      bookingStartAPI.setMinutes(listingTimeSlots.morning.start.minutes)
+
+      bookingEndAPI.setHours(listingTimeSlots.morning.end.hour)
+      bookingEndAPI.setMinutes(listingTimeSlots.morning.end.minutes)
+      break;
+    }
+    case 'afternoon': {
+      bookingStartAPI.setHours(listingTimeSlots.afternoon.start.hour)
+      bookingStartAPI.setMinutes(listingTimeSlots.afternoon.start.minutes)
+
+      bookingEndAPI.setHours(listingTimeSlots.afternoon.end.hour)
+      bookingEndAPI.setMinutes(listingTimeSlots.afternoon.end.minutes)
+      break;
+    }
+    case 'completeDay': {
+      bookingStartAPI.setHours(listingTimeSlots.morning.start.hour)
+      bookingStartAPI.setMinutes(listingTimeSlots.morning.start.minutes)
+
+      bookingEndAPI.setHours(listingTimeSlots.afternoon.end.hour)
+      bookingEndAPI.setMinutes(listingTimeSlots.afternoon.end.minutes)
+      break
+    }
+  }
+  
+  // console.log(pageData)
+  // let testDate = bookingStart
+  // testDate.setHours(8);
+  // console.log({pageData, testDate})
+
+
+
+  return {
+    bookingStartAPI,
+    bookingEndAPI
+  }
+}
+
 
 export class CheckoutPageComponent extends Component {
   constructor(props) {
@@ -117,20 +191,38 @@ export class CheckoutPageComponent extends Component {
 
     if (hasData) {
       const listingId = pageData.listing.id;
-      const { bookingStart, bookingEnd } = pageData.bookingDates;
-
+      const { bookingStart } = pageData.bookingDates;
       // Convert picked date to date that will be converted on the API as
       // a noon of correct year-month-date combo in UTC
-      const bookingStartForAPI = dateFromLocalToAPI(bookingStart);
-      const bookingEndForAPI = dateFromLocalToAPI(bookingEnd);
-
+      
+      // const bookingStartForAPI = dateFromLocalToAPI(bookingStart);
+      // const bookingEndForAPI = dateFromLocalToAPI(bookingEnd);
+      
       // Fetch speculated transaction for showing price in booking breakdown
       // NOTE: if unit type is line-item/units, quantity needs to be added.
       // The way to pass it to checkout page is through pageData.bookingData
+      
+  
+
+      // Set Booking Interval
+      const { bookingStartAPI, bookingEndAPI } = getBookingTime(pageData.listing, pageData.bookingData, bookingStart)
+    
       fetchSpeculatedTransaction({
         listingId,
-        bookingStart: bookingStartForAPI,
-        bookingEnd: bookingEndForAPI,
+        bookingStart: bookingStartAPI,
+        bookingEnd: bookingEndAPI,
+        lineItems: [
+          {
+            code: 'line-item/adults',
+            unitPrice: new Money(8000, 'EUR'),
+            quantity: 3,
+          },
+          {
+            code: 'line-item/children',
+            unitPrice: new Money(5000, 'EUR'),
+            quantity: 3,
+          }
+        ]
       });
     }
 
@@ -138,7 +230,6 @@ export class CheckoutPageComponent extends Component {
   }
 
   handleSubmit(values) {
-    console.log('------------')
     if (this.state.submitting) {
       return;
     }
@@ -220,7 +311,6 @@ export class CheckoutPageComponent extends Component {
       isTransactionInitiateListingNotFoundError(initiateOrderError);
 
     const isLoading = !this.state.dataLoaded || speculateTransactionInProgress;
-    console.log(this.state.pageData)
     const { listing, bookingDates, enquiredTransaction } = this.state.pageData;
     const currentTransaction = ensureTransaction(speculatedTransaction, {}, null);
     const currentBooking = ensureBooking(currentTransaction.booking);
@@ -399,7 +489,7 @@ export class CheckoutPageComponent extends Component {
       ? 'CheckoutPage.perDay'
       : 'CheckoutPage.perUnit';
 
-    const price = currentListing.attributes.price;
+    const price = new Money(10, 'EUR');
     const formattedPrice = formatMoney(intl, price);
     const detailsSubTitle = `${formattedPrice} ${intl.formatMessage({ id: unitTranslationKey })}`;
 

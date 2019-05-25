@@ -125,6 +125,15 @@ export class ListingPageComponent extends Component {
       },
     };
 
+    // console.log({
+    //   listing,
+    //   bookingData,
+    //   bookingDates: {
+    //     bookingStart: startDate,
+    //     bookingEnd: endDate
+    //   },
+    // })
+
     const routes = routeConfiguration();
     // Customize checkout page state with current listing and selected bookingDates
     const { setInitialValues } = findRouteByRouteName('CheckoutPage', routes);

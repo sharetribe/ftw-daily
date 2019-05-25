@@ -5,6 +5,8 @@ import { storableError } from '../../util/errors';
 import { TRANSITION_REQUEST, TRANSITION_REQUEST_AFTER_ENQUIRY } from '../../util/transaction';
 import * as log from '../../util/log';
 import { fetchCurrentUserHasOrdersSuccess } from '../../ducks/user.duck';
+import { types as sdkTypes } from '../../util/sdkLoader';
+const { Money } = sdkTypes;
 
 // ================ Action types ================ //
 
@@ -109,11 +111,13 @@ export const speculateTransactionError = e => ({
 
 export const initiateOrder = (orderParams, initialMessage) => (dispatch, getState, sdk) => {
   dispatch(initiateOrderRequest());
+
   const bodyParams = {
     transition: TRANSITION_REQUEST,
     processAlias: config.bookingProcessAlias,
     params: orderParams,
   };
+
   return sdk.transactions
     .initiate(bodyParams)
     .then(response => {
@@ -209,6 +213,22 @@ export const speculateTransaction = params => (dispatch, getState, sdk) => {
     include: ['booking', 'provider'],
     expand: true,
   };
+
+  // orderParams.lineItems = [
+  //   {
+  //     code: 'line-item/morning-adult',
+  //     unitPrice: new Money(800, 'EUR'),
+  //     quantity: 4,
+  //   },
+  //   {
+  //     code: 'line-item/morning-child',
+  //     unitPrice: new Money(800, 'EUR'),
+  //     quantity: 2,
+  //   }
+  // ]
+
+  console.log()
+
   return sdk.transactions
     .initiateSpeculative(bodyParams, queryParams)
     .then(response => {
