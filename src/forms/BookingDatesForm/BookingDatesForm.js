@@ -9,10 +9,11 @@ import { required, bookingDatesRequired, composeValidators } from '../../util/va
 import { START_DATE, END_DATE } from '../../util/dates';
 import { propTypes } from '../../util/types';
 import config from '../../config';
-import { Form, PrimaryButton, FieldDateRangeInput, FieldDateInput } from '../../components';
+import { Form, PrimaryButton, FieldDateRangeInput, FieldDateInput, FieldNumberInput } from '../../components';
 import EstimatedBreakdownMaybe from './EstimatedBreakdownMaybe';
 
 import css from './BookingDatesForm.css';
+
 
 export class BookingDatesFormComponent extends Component {
   constructor(props) {
@@ -81,17 +82,13 @@ export class BookingDatesFormComponent extends Component {
           } = fieldRenderProps;
           const { startDate, endDate } = values && values.bookingDates ? values.bookingDates : {};
 
-          const bookingStartLabel = intl.formatMessage({
-            id: 'BookingDatesForm.bookingDateTitle',
-          });
-          const bookingEndLabel = intl.formatMessage({ id: 'BookingDatesForm.bookingEndTitle' });
-          const requiredMessage = intl.formatMessage({ id: 'BookingDatesForm.requiredDate' });
-          const startDateErrorMessage = intl.formatMessage({
-            id: 'FieldDateRangeInput.invalidStartDate',
-          });
-          const endDateErrorMessage = intl.formatMessage({
-            id: 'FieldDateRangeInput.invalidEndDate',
-          });
+          const bookingStartLabel = intl.formatMessage({ id: 'BookingDatesForm.bookingDateTitle' });
+          const adultsNumberLabel = intl.formatMessage({ id: 'BookingDatesForm.adultsNumber' });
+          const childrenNumberLabel = intl.formatMessage({ id: 'BookingDatesForm.childrenNumber' });
+          const adultsNumberRequired = required(intl.formatMessage({ id: 'BookingDatesForm.adultsNumberRequired' }));
+          const childrenNumberRequired = required(intl.formatMessage({ id: 'BookingDatesForm.childrenNumberRequired' }));
+        
+
           const timeSlotsError = fetchTimeSlotsError ? (
             <p className={css.timeSlotsError}>
               <FormattedMessage id="BookingDatesForm.timeSlotsError" />
@@ -158,6 +155,24 @@ export class BookingDatesFormComponent extends Component {
                 format={null}
                 timeSlots={timeSlots}
                 useMobileMargins
+              />
+              <FieldNumberInput 
+                id="adultsNumber"
+                name="adultsNumber"
+                className={css.field}
+                
+                label={adultsNumberLabel}
+                placeholder={'4...'}
+                validate={adultsNumberRequired}
+              />
+              <FieldNumberInput 
+                id="childrenNumber"
+                name="childrenNumber"
+                className={css.field}
+                
+                label={childrenNumberLabel}
+                placeholder={'2...'}
+                validate={childrenNumberRequired}
               />
               {bookingInfo}
               <p className={css.smallPrint}>

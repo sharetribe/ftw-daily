@@ -86,6 +86,7 @@ export { default as ModalInMobile } from './ModalInMobile/ModalInMobile';
 export { default as FieldBirthdayInput } from './FieldBirthdayInput/FieldBirthdayInput';
 export { default as FieldCheckbox } from './FieldCheckbox/FieldCheckbox';
 export { default as FieldCurrencyInput } from './FieldCurrencyInput/FieldCurrencyInput';
+export { default as FieldNumberInput } from './FieldNumberInput/FieldNumberInput';
 export { default as FieldDateInput } from './FieldDateInput/FieldDateInput';
 export { default as FieldDateRangeController } from './FieldDateRangeController/FieldDateRangeController';
 export { default as FieldDateRangeInput } from './FieldDateRangeInput/FieldDateRangeInput';
