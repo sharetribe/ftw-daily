@@ -19,7 +19,7 @@ const SectionPrice = props => {
 				<h2 className={css.descriptionTitle}>
 					<FormattedMessage id="ListingPage.priceTitle" />
 				</h2>
-				<table >
+				<table className={css.table}>
 					<thead>
 						<tr>
 							<td></td>

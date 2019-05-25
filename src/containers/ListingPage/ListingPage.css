@@ -578,12 +578,12 @@
   hyphens: auto;
 }
 
-td {
+.table td {
   min-width: 150px;
   text-align: center;
 }
 
-tr {
+.table tr {
   height: 40px;
   border-bottom: 1px solid gray;
 }
