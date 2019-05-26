@@ -6,7 +6,6 @@ import { lazyLoadWithDimensions } from '../../util/contextHelpers';
 import { LINE_ITEM_DAY, LINE_ITEM_NIGHT, propTypes } from '../../util/types';
 import { formatMoney } from '../../util/currency';
 import { ensureListing, ensureUser } from '../../util/data';
-import { richText } from '../../util/richText';
 import { createSlug } from '../../util/urlHelpers';
 import config from '../../config';
 import { NamedLink, ResponsiveImage, Icon } from '../../components';
@@ -14,7 +13,6 @@ import { categories, traderCategories, amenities} from '../../marketplace-custom
 import './../../icons.js'
 import css from './ListingCard.css';
 import marketCss from './../../marketplace.css'
-
 const MIN_LENGTH_FOR_LONG_WORDS = 10;
 
 const priceData = (price, intl) => {
@@ -44,7 +42,7 @@ class ListingImage extends Component {
 const LazyImage = lazyLoadWithDimensions(ListingImage, { maxWidth: '100%', maxHeight: '100%', loadAfterInitialRendering: 3000 });
 
 export const ListingCardComponent = props => {
-  const { className, rootClassName, intl, listing, renderSizes, setActiveListing } = props;
+  const { className, rootClassName, intl, listing, renderSizes } = props;
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureListing(listing);
   const id = currentListing.id.uuid;
@@ -62,13 +60,11 @@ export const ListingCardComponent = props => {
   const amenitiesUi = poolAmenities.map(amenity => {
     const configAmenity = amenities.find(a => a.key === amenity )
     return {
-      label: amenity,
+      label: configAmenity.label,
       icon: configAmenity.icon,
       key: configAmenity.key
     }
-  })
-
-  
+  })  
 
   const slug = createSlug(title);
   const author = ensureUser(listing.author);
@@ -119,7 +115,10 @@ export const ListingCardComponent = props => {
         <div style={{display: 'flex', flexDirection: 'row', flexGrow: '1'}}>
         {amenitiesUi.map(amenity => (
           <div className={css.icon} key={amenity.key}>
-            <Icon icon={amenity.icon} message={amenity.label}/>
+            <Icon 
+              icon={amenity.icon} 
+              message={intl.formatMessage({ id: amenity.label })}
+            />
           </div>
         ))}
         </div>
