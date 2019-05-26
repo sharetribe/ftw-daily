@@ -920,6 +920,8 @@
   "Time.morning": "Manhã",
   "Time.afternoon": "Tarde",
   "Time.entireDay": "Dia Completo",
+  "Time.openTime": "Abertura",
+  "Time.closeTime": "Fecho",
   "User.adult": "Adulto",
   "User.child": "Criança"
 }

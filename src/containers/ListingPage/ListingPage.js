@@ -252,13 +252,14 @@ export class ListingPageComponent extends Component {
       priceDayChild: publicData.priceDayChild ? new Money(publicData.priceDayChild, config.currency): null,
     }
 
+    console.log('publicData', publicData)
     const timeInfo = {
       morningStartHour: publicData.morningStartHour,
       morningEndHour: publicData.morningEndHour,
-      afternoonStartHour: publicData.afernoonStartHour,
-      afternoonEndHour: publicData.afernoonEndHour,
-      dayStartHour: publicData.dayStartHour,
-      dayEndHour: publicData.dayEndHour
+      afternoonStartHour: publicData.afternoonStartHour,
+      afternoonEndHour: publicData.afternoonEndHour,
+      dayStartHour: publicData.morningStartHour,
+      dayEndHour: publicData.afternoonEndHour
     }
 
     const richTitle = (
