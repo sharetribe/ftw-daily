@@ -919,5 +919,7 @@
   "Amenity.barbeque": "Churrasco",
   "Time.morning": "Manhã",
   "Time.afternoon": "Tarde",
-  "Time.entireDay": "Dia Completo"
+  "Time.entireDay": "Dia Completo",
+  "User.adult": "Adulto",
+  "User.child": "Criança"
 }

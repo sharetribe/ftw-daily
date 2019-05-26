@@ -587,3 +587,43 @@
   height: 40px;
   border-bottom: 1px solid gray;
 }
+
+.priceContainer {
+  display: flex;
+  flex-direction: column;
+
+  @media (--viewportMedium) {
+    flex-direction: row;
+  }
+}
+
+.priceSection {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: 24px;
+  
+  @media (--viewportMedium) {
+    width: 50%;
+    margin-bottom: 0px;
+  }
+}
+
+.priceTabelLabel {
+  min-width: 70px;
+  margin-right: 16px;
+}
+
+.priceTableValues {
+  display: flex;
+  flex-direction: column;
+}
+
+.priceRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.priceLabel {
+  min-width: 150px;
+}

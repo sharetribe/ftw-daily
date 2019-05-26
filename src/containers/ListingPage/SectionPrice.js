@@ -19,7 +19,50 @@ const SectionPrice = props => {
 				<h2 className={css.descriptionTitle}>
 					<FormattedMessage id="ListingPage.priceTitle" />
 				</h2>
-				<table className={css.table}>
+
+				<div className={css.priceContainer}>
+					<div className={css.priceSection}>
+						<div className={css.priceTabelLabel}>
+							<FormattedMessage id="User.adult" />
+						</div>
+						<div className={css.priceTableValues}>
+							<div className={css.priceRow}>
+								<span className={css.priceLabel}><FormattedMessage id="Time.morning" /></span>
+								<span>{priceMorningAdultFormatted}</span>
+							</div>
+							<div className={css.priceRow}>
+								<span className={css.priceLabel}><FormattedMessage id="Time.afternoon" /></span>
+								<span>{priceAfternoonAdultFormatted}</span>
+							</div>
+							<div className={css.priceRow}>
+								<span className={css.priceLabel}><FormattedMessage id="Time.entireDay" /></span>
+								<span>{priceDayAdultFormatted}</span>
+							</div>
+						</div>
+					</div>
+					<div className={css.priceSection}>
+						<div className={css.priceTabelLabel}>
+							<FormattedMessage id="User.child" />
+						</div>
+						<div className={css.priceTableValues}>
+							<div className={css.priceRow}>
+									<span className={css.priceLabel}><FormattedMessage id="Time.morning" /></span>
+									<span>{priceMorningChildFormatted}</span>
+								</div>
+								<div className={css.priceRow}>
+									<span className={css.priceLabel}><FormattedMessage id="Time.afternoon" /></span>
+									<span>{priceAfternoonChildFormatted}</span>
+								</div>
+								<div className={css.priceRow}>
+									<span className={css.priceLabel}><FormattedMessage id="Time.entireDay" /></span>
+									<span>{priceDayChildFormatted}</span>
+								</div>
+						</div>
+					</div>
+				</div>
+
+
+				{/* <table className={css.table}>
 					<thead>
 						<tr>
 							<td></td>
@@ -42,7 +85,7 @@ const SectionPrice = props => {
 								<td><p className={css.description}>{priceDayChildFormatted}</p></td>
 							</tr>
 					</tbody>
-				</table>
+				</table> */}
 			</div>
     )
 }
