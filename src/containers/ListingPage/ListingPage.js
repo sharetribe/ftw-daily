@@ -252,7 +252,6 @@ export class ListingPageComponent extends Component {
       priceDayChild: publicData.priceDayChild ? new Money(publicData.priceDayChild, config.currency): null,
     }
 
-    console.log('publicData', publicData)
     const timeInfo = {
       morningStartHour: publicData.morningStartHour,
       morningEndHour: publicData.morningEndHour,
@@ -469,7 +468,11 @@ export class ListingPageComponent extends Component {
                     intl={intl}
                   />
                   <SectionDescriptionMaybe description={description} />
-                  <SectionFeaturesMaybe options={amenitiesConfig} publicData={publicData} />
+                  <SectionFeaturesMaybe 
+                    options={amenitiesConfig}
+                    publicData={publicData} 
+                    intl={intl}
+                  />
                   <SectionRulesMaybe publicData={publicData} />
                   <SectionTime timeInfo={timeInfo} />
                   <SectionMapMaybe

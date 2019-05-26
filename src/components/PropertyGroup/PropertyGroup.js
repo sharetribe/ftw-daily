@@ -26,7 +26,7 @@ const checkSelected = (options, selectedOptions) => {
 };
 
 const Item = props => {
-  const { label, isSelected, icon } = props;
+  const { label, isSelected, icon, intl } = props;
   const labelClass = isSelected ? css.selectedLabel : css.notSelectedLabel;
   return (
     <li className={css.item}>
@@ -34,14 +34,14 @@ const Item = props => {
         <Icon icon={icon}/>
       </span>
       <div className={css.labelWrapper}>
-        <span className={labelClass}>{label}</span>
+        <span className={labelClass}>{intl.formatMessage({ id: label })}</span>
       </div>
     </li>
   );
 };
 
 const PropertyGroup = props => {
-  const { rootClassName, className, id, options, selectedOptions, twoColumns } = props;
+  const { rootClassName, className, id, options, selectedOptions, twoColumns, intl } = props;
   const classes = classNames(rootClassName || css.root, className);
   const listClasses = twoColumns ? classNames(classes, css.twoColumns) : classes;
 
@@ -50,7 +50,7 @@ const PropertyGroup = props => {
     <ul className={listClasses}>
       {checked.map(option => (
         option.isSelected ? 
-          <Item key={`${id}.${option.key}`} label={option.label} isSelected={option.isSelected} icon={option.icon} />:
+          <Item key={`${id}.${option.key}`} label={option.label} isSelected={option.isSelected} icon={option.icon} intl={intl}/>:
           null
       ))}
     </ul>

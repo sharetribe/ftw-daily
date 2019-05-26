@@ -5,7 +5,7 @@ import { PropertyGroup } from '../../components';
 import css from './ListingPage.css';
 
 const SectionFeaturesMaybe = props => {
-  const { options, publicData } = props;
+  const { options, publicData, intl } = props;
   if (!publicData) {
     return null;
   }
@@ -21,6 +21,7 @@ const SectionFeaturesMaybe = props => {
         options={options}
         selectedOptions={selectedOptions}
         twoColumns={true}
+        intl={intl}
       />
     </div>
   );

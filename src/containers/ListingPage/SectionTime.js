@@ -6,7 +6,6 @@ import css from './ListingPage.css';
 
 const SectionTime = props => {
 		const { timeInfo } = props
-		console.log(timeInfo)
 		const morningStartHourFormatted = timeInfo.morningStartHour ? formatTime(timeInfo.morningStartHour): '-'
 		const morningEndHourFormatted = timeInfo.morningEndHour ? formatTime(timeInfo.morningEndHour): '-'
 		const afternoonStartHourFormatted = timeInfo.afternoonStartHour ? formatTime(timeInfo.afternoonStartHour): '-'

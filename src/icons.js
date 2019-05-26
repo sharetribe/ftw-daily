@@ -3,12 +3,14 @@ import {
     faStroopwafel, 
     faFlag,
     faLayerGroup,
-    faShower
+    faShower,
+    faHotTub
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
     faStroopwafel, 
     faFlag,
     faLayerGroup,
-    faShower
+    faShower,
+    faHotTub
 );
