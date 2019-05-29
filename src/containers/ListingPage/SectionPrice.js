@@ -27,35 +27,36 @@ const SectionPrice = props => {
 						</div>
 						<div className={css.priceTableValues}>
 							<div className={css.priceRow}>
-								<span className={css.priceLabel}><FormattedMessage id="Time.morning" /></span>
-								<span>{priceMorningAdultFormatted}</span>
+								<p className={css.priceLabel}><FormattedMessage id="Time.morning" /></p>
+								<p className={css.priceValue}>{priceMorningAdultFormatted}</p>
 							</div>
 							<div className={css.priceRow}>
-								<span className={css.priceLabel}><FormattedMessage id="Time.afternoon" /></span>
-								<span>{priceAfternoonAdultFormatted}</span>
+								<p className={css.priceLabel}><FormattedMessage id="Time.afternoon" /></p>
+								<p className={css.priceValue}>{priceAfternoonAdultFormatted}</p>
 							</div>
 							<div className={css.priceRow}>
-								<span className={css.priceLabel}><FormattedMessage id="Time.entireDay" /></span>
-								<span>{priceDayAdultFormatted}</span>
+								<p className={css.priceLabel}><FormattedMessage id="Time.entireDay" /></p>
+								<p className={css.priceValue}>{priceDayAdultFormatted}</p>
 							</div>
 						</div>
 					</div>
+					<div className={css.divider}></div>
 					<div className={css.priceSection}>
 						<div className={css.priceTabelLabel}>
 							<FormattedMessage id="User.child" />
 						</div>
 						<div className={css.priceTableValues}>
 							<div className={css.priceRow}>
-									<span className={css.priceLabel}><FormattedMessage id="Time.morning" /></span>
-									<span>{priceMorningChildFormatted}</span>
+									<p className={css.priceLabel}><FormattedMessage id="Time.morning" /></p>
+									<p className={css.priceValue}>{priceMorningChildFormatted}</p>
 								</div>
 								<div className={css.priceRow}>
-									<span className={css.priceLabel}><FormattedMessage id="Time.afternoon" /></span>
-									<span>{priceAfternoonChildFormatted}</span>
+									<p className={css.priceLabel}><FormattedMessage id="Time.afternoon" /></p>
+									<p className={css.priceValue}>{priceAfternoonChildFormatted}</p>
 								</div>
 								<div className={css.priceRow}>
-									<span className={css.priceLabel}><FormattedMessage id="Time.entireDay" /></span>
-									<span>{priceDayChildFormatted}</span>
+									<p className={css.priceLabel}><FormattedMessage id="Time.entireDay" /></p>
+									<p className={css.priceValue}>{priceDayChildFormatted}</p>
 								</div>
 						</div>
 					</div>

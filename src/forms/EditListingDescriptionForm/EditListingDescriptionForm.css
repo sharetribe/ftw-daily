@@ -68,3 +68,20 @@
 .alignRight {
   @apply --EditListingDescriptionForm_formMargins;
 }
+
+.inputRow {
+  display: flex;
+  flex-direction: column;
+
+  @media (--viewportMedium) {
+    flex-direction: row;
+  }
+}
+
+.leftField {
+  margin-right: 8px;
+}
+
+.rightField {
+  margin-left: 8px;
+}

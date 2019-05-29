@@ -6,9 +6,11 @@ import { ensureOwnListing } from '../../util/data';
 import { ListingLink } from '../../components';
 import { LISTING_STATE_DRAFT } from '../../util/types';
 import { EditListingDescriptionForm } from '../../forms';
-import config from '../../config';
+import { types as sdkTypes } from '../../util/sdkLoader';
 
 import css from './EditListingDescriptionPanel.css';
+import config from '../../config';
+const { Money } = sdkTypes;
 
 const EditListingDescriptionPanel = props => {
   const {
@@ -42,14 +44,30 @@ const EditListingDescriptionPanel = props => {
       <h1 className={css.title}>{panelTitle}</h1>
       <EditListingDescriptionForm
         className={css.form}
-        initialValues={{ title, description, category: publicData.category, traderCategory: publicData.traderCategory }}
+        initialValues={{ 
+          title,
+          description, 
+          category: publicData.category, 
+          traderCategory: publicData.traderCategory,
+          width: +publicData.width,
+          length: +publicData.length,
+          maximumDepth: publicData.maximumDepth,
+          minimumDepth: publicData.minimumDepth
+        }}
         saveActionMsg={submitButtonText}
         onSubmit={values => {
-          const { title, description, category, traderCategory } = values;
+          const { title, description, category, traderCategory, width, length, minimumDepth, maximumDepth } = values;
           const updateValues = {
             title: title.trim(),
             description,
-            publicData: { category, traderCategory }
+            publicData: { 
+              category, 
+              traderCategory,
+              width,
+              length,
+              minimumDepth,
+              maximumDepth
+            }
           };
           onSubmit(updateValues);
         }}

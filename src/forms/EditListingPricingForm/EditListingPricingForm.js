@@ -97,7 +97,6 @@ export const EditListingPricingFormComponent = props => (
               id="priceDayAdult"
               name="priceDayAdult"
               className={css.field}
-              autoFocus
               label={pricePerDayAdult}
               placeholder={pricePlaceholderMessage}
               currencyConfig={config.currencyConfig}
@@ -107,7 +106,6 @@ export const EditListingPricingFormComponent = props => (
               id="priceDayChild"
               name="priceDayChild"
               className={css.field}
-              autoFocus
               label={pricePerDayChild}
               placeholder={pricePlaceholderMessage}
               currencyConfig={config.currencyConfig}
@@ -120,7 +118,6 @@ export const EditListingPricingFormComponent = props => (
               id="priceAfternoonAdult"
               name="priceAfternoonAdult"
               className={css.field}
-              autoFocus
               label={pricePerAfternoonAdult}
               placeholder={pricePlaceholderMessage}
               currencyConfig={config.currencyConfig}
@@ -130,7 +127,6 @@ export const EditListingPricingFormComponent = props => (
               id="priceAfternoonChild"
               name="priceAfternoonChild"
               className={css.field}
-              autoFocus
               label={pricePerAfternoonChild}
               placeholder={pricePlaceholderMessage}
               currencyConfig={config.currencyConfig}
@@ -143,7 +139,6 @@ export const EditListingPricingFormComponent = props => (
               id="priceMorningAdult"
               name="priceMorningAdult"
               className={css.field}
-              autoFocus
               label={pricePerMorningAdult}
               placeholder={pricePlaceholderMessage}
               currencyConfig={config.currencyConfig}
@@ -153,7 +148,6 @@ export const EditListingPricingFormComponent = props => (
               id="priceMorningChild"
               name="priceMorningChild"
               className={css.field}
-              autoFocus
               label={pricePerMorningChild}
               placeholder={pricePlaceholderMessage}
               currencyConfig={config.currencyConfig}

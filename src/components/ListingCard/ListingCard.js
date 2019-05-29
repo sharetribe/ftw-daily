@@ -13,7 +13,8 @@ import { categories, traderCategories, amenities} from '../../marketplace-custom
 import './../../icons.js'
 import css from './ListingCard.css';
 import marketCss from './../../marketplace.css'
-const MIN_LENGTH_FOR_LONG_WORDS = 10;
+import { types as sdkTypes } from '../../util/sdkLoader';
+const { Money } = sdkTypes;
 
 const priceData = (price, intl) => {
   if (price && price.currency === config.currency) {
@@ -45,8 +46,10 @@ export const ListingCardComponent = props => {
   const { className, rootClassName, intl, listing, renderSizes } = props;
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureListing(listing);
+  const priceAfternoonAdult = currentListing.attributes.publicData.priceAfternoonAdult;
   const id = currentListing.id.uuid;
-  const { title = '', price, description } = currentListing.attributes;
+  const { title = '', description } = currentListing.attributes;
+  const price = new Money(priceAfternoonAdult, 'EUR')
   const { category, traderCategory } = currentListing.attributes.publicData;
   const poolAmenities = currentListing.attributes.publicData.amenities;
   const categoryUi = intl.formatMessage({
@@ -73,12 +76,11 @@ export const ListingCardComponent = props => {
     currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
 
   const { formattedPrice, priceTitle } = priceData(price, intl);
-
   const unitType = config.bookingUnitType;
   const isNightly = unitType === LINE_ITEM_NIGHT;
   const isDaily = unitType === LINE_ITEM_DAY;
 
-  const unitTranslationKey = 'ListingCard.perDay';
+  const unitTranslationKey = 'ListingCard.perAfternoon';
   
   const infoBoxCss = classNames(marketCss.row, marketCss.fullWidth, marketCss.p);
   const mainBox = classNames(marketCss.column, marketCss.fullWidth);

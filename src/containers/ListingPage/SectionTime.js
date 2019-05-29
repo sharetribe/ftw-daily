@@ -16,46 +16,17 @@ const SectionTime = props => {
     return (
 			<div className={css.sectionDescription}>
 				<h2 className={css.descriptionTitle}>
-					<FormattedMessage id="ListingPage.priceTitle" />
+					<FormattedMessage id="ListingPage.dimensionsSchedule" />
 				</h2>
-				<div className={css.priceContainer}>
-					<div className={css.priceSection}>
-						<div className={css.priceTabelLabel}>
-							<FormattedMessage id="Time.openTime" />
-						</div>
-						<div className={css.priceTableValues}>
-							<div className={css.priceRow}>
-								<span className={css.priceLabel}><FormattedMessage id="Time.morning" /></span>
-								<span>{morningStartHourFormatted}</span>
-							</div>
-							<div className={css.priceRow}>
-								<span className={css.priceLabel}><FormattedMessage id="Time.afternoon" /></span>
-								<span>{afternoonStartHourFormatted}</span>
-							</div>
-							<div className={css.priceRow}>
-								<span className={css.priceLabel}><FormattedMessage id="Time.entireDay" /></span>
-								<span>{dayStartHourFormatted}</span>
-							</div>
-						</div>
+				<div className={css.timeContainer}>
+					<div className={css.dimensionsRow}>
+						<p className={css.description}><b><FormattedMessage id="Time.morning" />:</b> {morningStartHourFormatted}-{morningEndHourFormatted}</p>
 					</div>
-					<div className={css.priceSection}>
-						<div className={css.priceTabelLabel}>
-							<FormattedMessage id="Time.closeTime" />
-						</div>
-						<div className={css.priceTableValues}>
-							<div className={css.priceRow}>
-									<span className={css.priceLabel}><FormattedMessage id="Time.morning" /></span>
-									<span>{morningEndHourFormatted}</span>
-								</div>
-								<div className={css.priceRow}>
-									<span className={css.priceLabel}><FormattedMessage id="Time.afternoon" /></span>
-									<span>{afternoonEndHourFormatted}</span>
-								</div>
-								<div className={css.priceRow}>
-									<span className={css.priceLabel}><FormattedMessage id="Time.entireDay" /></span>
-									<span>{dayEndHourFormatted}</span>
-								</div>
-						</div>
+					<div className={css.dimensionsRow}>
+						<p className={css.description}><b><FormattedMessage id="Time.afternoon" />:</b> {afternoonStartHourFormatted}-{afternoonEndHourFormatted}</p>
+					</div>
+					<div className={css.dimensionsRow}>
+						<p className={css.description}><b><FormattedMessage id="Time.entireDay" />:</b> {dayStartHourFormatted}-{dayEndHourFormatted}</p>
 					</div>
 				</div>
 			</div>

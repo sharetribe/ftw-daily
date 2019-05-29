@@ -6,7 +6,7 @@ import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import { maxLength, required, composeValidators } from '../../util/validators';
-import { Form, Button, FieldTextInput } from '../../components';
+import { Form, Button, FieldTextInput, FieldNumberInput, FieldCurrencyInput } from '../../components';
 import CategoriesSelect from './CategoriesSelect';
 
 import css from './EditListingDescriptionForm.css';
@@ -32,7 +32,6 @@ const EditListingDescriptionFormComponent = props => (
         updateInProgress,
         fetchErrors,
       } = fieldRenderProps;
-
       
       const titleMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.title' });
       const titlePlaceholderMessage = intl.formatMessage({
@@ -54,7 +53,7 @@ const EditListingDescriptionFormComponent = props => (
       categories.map(c => {
         return c.label = intl.formatMessage({ id: c.label })
       })
-      
+  
       const traderCategoryLabel = intl.formatMessage({ id: 'EditListingDescriptionForm.categoryLabel' });
       const traderCategoryPlaceholder = intl.formatMessage({ id: 'EditListingDescriptionForm.traderCategoryPlaceholder' });
       const traderCategoryRequired = required( intl.formatMessage({ id: 'EditListingDescriptionForm.traderCategoryRequired' }));
@@ -62,16 +61,22 @@ const EditListingDescriptionFormComponent = props => (
         return c.label = intl.formatMessage({ id: c.label })
       })
 
-      const descriptionMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.description',
-      });
-      const descriptionPlaceholderMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.descriptionPlaceholder',
-      });
+      const descriptionMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.description' });
+      const descriptionPlaceholderMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.descriptionPlaceholder' });
       const maxLength60Message = maxLength(maxLengthMessage, TITLE_MAX_LENGTH);
-      const descriptionRequiredMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.descriptionRequired',
-      });
+      const descriptionRequiredMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.descriptionRequired' });
+
+      const widthLabel = intl.formatMessage({ id: 'Pool.width' }) + ' (m)';
+      const widthPlaceholder = '4...';
+
+      const lengthLabel = intl.formatMessage({ id: 'Pool.length' }) + ' (m)';
+      const lengthPlaceholder = '8...';
+
+      const minimumDepthLabel = intl.formatMessage({ id: 'Pool.minimumDepth' }) + ' (m)';
+      const minimumDepthPlaceholder = '1...';
+
+      const maximumDepthLabel = intl.formatMessage({ id: 'Pool.maximumDepth' }) + ' (m)';
+      const maximumDepthPlaceholder = '3...';
 
       const { updateListingError, createListingDraftError, showListingsError } = fetchErrors || {};
       const errorMessageUpdateListing = updateListingError ? (
@@ -142,6 +147,42 @@ const EditListingDescriptionFormComponent = props => (
             categories={traderCategories}
             errorMessage={traderCategoryRequired}
           />
+
+          <div className={css.inputRow}>
+            <FieldNumberInput 
+              id="width"
+              name="width"
+              className={css.leftField}
+              label={widthLabel}
+              placeholder={widthPlaceholder}
+            />
+  
+            <FieldNumberInput 
+              id="length"
+              name="length"
+              className={css.rightField}
+              label={lengthLabel}
+              placeholder={lengthPlaceholder}
+            />
+          </div>
+
+          <div className={css.inputRow}>
+            <FieldNumberInput 
+              id="minimumDepth"
+              name="minimumDepth"
+              className={css.leftField}
+              label={minimumDepthLabel}
+              placeholder={minimumDepthPlaceholder}
+            />
+  
+            <FieldNumberInput 
+              id="maximumDepth"
+              name="maximumDepth"
+              className={css.rightField}
+              label={maximumDepthLabel}
+              placeholder={maximumDepthPlaceholder}
+            />
+          </div>
           <div className={marketPlaceCss.alignRight}>
             <Button
               className={css.submitButton}

@@ -111,7 +111,7 @@ class MainPanel extends Component {
             {...secondaryFilters}
           />
         </div>
-        <div>
+        <div className={css.listingWrapper}>
           <SearchResultsPanel
             className={css.searchListingsPanel}
             listings={listings}

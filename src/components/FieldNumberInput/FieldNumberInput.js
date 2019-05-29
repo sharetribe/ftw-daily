@@ -24,6 +24,7 @@ import { propTypes } from '../../util/types';
 import * as log from '../../util/log';
 
 import css from './FieldNumberInput.css';
+import { init } from '@sentry/browser';
 
 const { Money } = sdkTypes;
 
@@ -54,15 +55,15 @@ class NumberInputComponent extends Component {
     super(props);
     const { currencyConfig, defaultValue, input, intl } = props;
     const initialValueIsMoney = input.value instanceof Money;
-
     if (initialValueIsMoney && input.value.currency !== currencyConfig.currency) {
       const e = new Error('Value currency different from marketplace currency');
       log.error(e, 'currency-input-invalid-currency', { currencyConfig, inputValue: input.value });
       throw e;
     }
-
-    const initialValue = initialValueIsMoney ? convertMoneyToNumber(input.value) : defaultValue;
+    
+    let initialValue = +input.value
     const hasInitialValue = typeof initialValue === 'number' && !isNaN(initialValue);
+    console.log('input', hasInitialValue)
 
     // We need to handle number format - some locales use dots and some commas as decimal separator
     // TODO Figure out if this could be digged from React-Intl directly somehow
@@ -75,7 +76,7 @@ class NumberInputComponent extends Component {
         : '';
       // Formatted value fully localized currency string ("$1,000.99")
       const formattedValue = hasInitialValue
-        ? intl.formatNumber(ensureDotSeparator(unformattedValue), currencyConfig)
+        ? unformattedValue 
         : '';
 
       this.state = {
@@ -247,7 +248,7 @@ const FieldNumberInputComponent = props => {
   });
 
   const inputProps = { className: inputClasses, id, input, ...rest };
-  const classes = classNames(rootClassName, className);
+  const classes = classNames(rootClassName, className, css.input);
   return (
     <div className={classes}>
       {label ? <label htmlFor={id}>{label}</label> : null}

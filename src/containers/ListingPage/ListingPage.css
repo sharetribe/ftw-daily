@@ -303,6 +303,7 @@
   }
 }
 
+
 .desktopPriceValue {
   /* Font */
   @apply --marketplaceH1FontStyles;
@@ -597,16 +598,9 @@
   }
 }
 
-.priceSection {
+.timeContainer {
   display: flex;
-  flex-direction: row;
-  width: 100%;
-  margin-bottom: 24px;
-  
-  @media (--viewportMedium) {
-    width: 50%;
-    margin-bottom: 0px;
-  }
+  flex-direction: column;
 }
 
 .priceTabelLabel {
@@ -622,8 +616,45 @@
 .priceRow {
   display: flex;
   flex-direction: row;
+  width: 100%
 }
 
 .priceLabel {
   min-width: 150px;
+  font-size: 16px;
+  margin:  0px;
+}
+
+.priceValue {
+  margin-top: 1px;
+  margin-bottom: 0;
+  @apply --marketplaceH4FontStyles;
+
+  /* Preserve newlines, but collapse other whitespace */
+  white-space: pre-line;
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+/* span {
+  font-size: 16px;
+} */
+
+.divider {
+  border-right: 1px solid black;
+  margin-right: 4px;
+}
+
+.dimensionsRow {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.dimensionsCell {
+  width: 50%;
 }

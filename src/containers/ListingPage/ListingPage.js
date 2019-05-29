@@ -46,6 +46,7 @@ import SectionHeading from './SectionHeading';
 import SectionPrice from './SectionPrice';
 import SectionTime from './SectionTime';
 import SectionDescriptionMaybe from './SectionDescriptionMaybe';
+import SectionDimensionsMaybe from './SectionDimensionsMaybe';
 import SectionFeaturesMaybe from './SectionFeaturesMaybe';
 import SectionReviews from './SectionReviews';
 import SectionHostMaybe from './SectionHostMaybe';
@@ -474,6 +475,7 @@ export class ListingPageComponent extends Component {
                     intl={intl}
                   />
                   <SectionRulesMaybe publicData={publicData} />
+                  <SectionDimensionsMaybe publicData={publicData} />
                   <SectionTime timeInfo={timeInfo} />
                   <SectionMapMaybe
                     geolocation={geolocation}

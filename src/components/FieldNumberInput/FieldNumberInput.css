@@ -1,6 +1,7 @@
 @import '../../marketplace.css';
 
 .input {
+  width: 100%;
   border-bottom-color: var(--attentionColor);
 }
 
