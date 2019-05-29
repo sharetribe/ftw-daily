@@ -81,6 +81,7 @@ export class BookingDatesFormComponent extends Component {
             timeSlots,
             fetchTimeSlotsError,
           } = fieldRenderProps;
+
           const { startDate, endDate } = values && values.bookingDates ? values.bookingDates : {};
 
           const bookingStartLabel = intl.formatMessage({ id: 'BookingDatesForm.bookingDateTitle' });

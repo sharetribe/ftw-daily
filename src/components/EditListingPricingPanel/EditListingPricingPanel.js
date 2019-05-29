@@ -29,7 +29,6 @@ const EditListingPricingPanel = props => {
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
   const { price } = currentListing.attributes;
-
   const { 
     priceDayAdult,
     priceDayChild,
@@ -40,12 +39,12 @@ const EditListingPricingPanel = props => {
   } = currentListing.attributes.publicData
   
   const prices = {
-    priceDayAdult: new Money(priceDayAdult, config.currency),
-    priceDayChild: new Money(priceDayChild, config.currency),
-    priceAfternoonAdult: new Money(priceAfternoonAdult, config.currency),
-    priceAfternoonChild: new Money(priceAfternoonChild, config.currency),
-    priceMorningAdult: new Money(priceMorningAdult, config.currency),
-    priceMorningChild: new Money(priceMorningChild, config.currency),
+    priceDayAdult: priceDayAdult ? new Money(priceDayAdult, config.currency): null,
+    priceDayChild: priceDayChild ? new Money(priceDayChild, config.currency): null,
+    priceAfternoonAdult: priceAfternoonAdult ? new Money(priceAfternoonAdult, config.currency): null,
+    priceAfternoonChild: priceAfternoonChild ? new Money(priceAfternoonChild, config.currency): null,
+    priceMorningAdult: priceMorningAdult ? new Money(priceMorningAdult, config.currency): null,
+    priceMorningChild: priceMorningChild ? new Money(priceMorningChild, config.currency): null,
   }
 
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;

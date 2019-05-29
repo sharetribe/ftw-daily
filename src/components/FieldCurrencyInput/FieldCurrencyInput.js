@@ -60,7 +60,6 @@ class CurrencyInputComponent extends Component {
       log.error(e, 'currency-input-invalid-currency', { currencyConfig, inputValue: input.value });
       throw e;
     }
-
     const initialValue = initialValueIsMoney ? convertMoneyToNumber(input.value) : defaultValue;
     const hasInitialValue = typeof initialValue === 'number' && !isNaN(initialValue);
 

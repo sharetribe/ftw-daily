@@ -60,7 +60,8 @@ const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
 const { UUID, Money } = sdkTypes;
 
 const priceData = (price, intl) => {
-  const unit = intl.formatMessage({ id: 'BookingPanel.perNight' })
+  price = new Money(price, config.currency)
+  const unit = intl.formatMessage({ id: 'BookingPanel.perAfternoon' })
   if (price && price.currency === config.currency) {
     const formattedPrice = formatMoney(intl, price);
     const completePrice = `${formattedPrice} ${unit}`;
@@ -350,7 +351,7 @@ export class ListingPageComponent extends Component {
     // banned or deleted display names for the function
     const authorDisplayName = userDisplayNameAsString(ensuredAuthor, '');
 
-    const { formattedPrice, priceTitle, completePrice } = priceData(price, intl);
+    const { formattedPrice, priceTitle, completePrice } = priceData(publicData.priceAfternoonAdult, intl);
     
     const handleBookingSubmit = values => {
       const isCurrentlyClosed = currentListing.attributes.state === LISTING_STATE_CLOSED;

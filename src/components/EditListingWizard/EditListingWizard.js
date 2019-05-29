@@ -98,7 +98,14 @@ const tabCompleted = (tab, listing) => {
     case LOCATION:
       return !!(geolocation && publicData && publicData.location && publicData.location.address);
     case PRICING:
-      return !!price;
+      return !!(publicData 
+        && typeof publicData.priceAfternoonAdult !== 'undefined'
+        && typeof publicData.priceAfternoonChild !== 'undefined'
+        && typeof publicData.priceDayAdult !== 'undefined'
+        && typeof publicData.priceDayChild !== 'undefined'
+        && typeof publicData.priceMorningAdult !== 'undefined'
+        && typeof publicData.priceMorningChild !== 'undefined'
+      );
     case AVAILABILITY:
       return !!availabilityPlan;
     case TIME:

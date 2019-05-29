@@ -14,6 +14,9 @@ import { ModalInMobile, Button } from '../../components';
 import { BookingDatesForm } from '../../forms';
 
 import css from './BookingPanel.css';
+import { types as sdkTypes } from '../../util/sdkLoader';
+
+const { Money } = sdkTypes;
 
 // This defines when ModalInMobile shows content as Modal
 const MODAL_BREAKPOINT = 1023;
@@ -67,8 +70,8 @@ const BookingPanel = props => {
     location,
     intl,
   } = props;
-
-  const price = listing.attributes.price;
+  const priceAmmount = listing.attributes.publicData.priceAfternoonAdult;
+  const price = new Money(priceAmmount, config.currency);
   const hasListingState = !!listing.attributes.state;
   const isClosed = hasListingState && listing.attributes.state === LISTING_STATE_CLOSED;
   const showBookingDatesForm = hasListingState && !isClosed;
@@ -85,11 +88,7 @@ const BookingPanel = props => {
   const isNightly = unitType === LINE_ITEM_NIGHT;
   const isDaily = unitType === LINE_ITEM_DAY;
 
-  const unitTranslationKey = isNightly
-    ? 'BookingPanel.perNight'
-    : isDaily
-    ? 'BookingPanel.perDay'
-    : 'BookingPanel.perUnit';
+  const unitTranslationKey = 'BookingPanel.perAfternoon'
 
   const classes = classNames(rootClassName || css.root, className);
   const titleClasses = classNames(titleClassName || css.bookingTitle);

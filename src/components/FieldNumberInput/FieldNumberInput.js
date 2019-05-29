@@ -248,7 +248,7 @@ const FieldNumberInputComponent = props => {
   });
 
   const inputProps = { className: inputClasses, id, input, ...rest };
-  const classes = classNames(rootClassName, className, css.input);
+  const classes = classNames(rootClassName, className, css.input, css.inputContainer);
   return (
     <div className={classes}>
       {label ? <label htmlFor={id}>{label}</label> : null}

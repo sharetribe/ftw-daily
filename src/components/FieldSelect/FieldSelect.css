@@ -1,6 +1,13 @@
 @import '../../marketplace.css';
 
 .root {
+  width: calc(100vw - 48px);
+  margin: 0 24px;
+  
+  @media (--viewportMedium) {
+    width: 100%;
+    margin: 0px;
+  }
 }
 
 .select {

@@ -21,7 +21,7 @@ const SectionPrice = props => {
 				</h2>
 
 				<div className={css.priceContainer}>
-					<div className={css.priceSection}>
+					<div className={css.priceSectionLeft}>
 						<div className={css.priceTabelLabel}>
 							<FormattedMessage id="User.adult" />
 						</div>
@@ -41,7 +41,7 @@ const SectionPrice = props => {
 						</div>
 					</div>
 					<div className={css.divider}></div>
-					<div className={css.priceSection}>
+					<div className={css.priceSectionRight}>
 						<div className={css.priceTabelLabel}>
 							<FormattedMessage id="User.child" />
 						</div>

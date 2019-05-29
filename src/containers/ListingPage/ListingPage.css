@@ -625,10 +625,24 @@
   margin:  0px;
 }
 
+.priceSectionLeft {
+  width: 100%
+}
+
+.priceSectionRight {
+  width: 100%;
+  margin-top: 36px;
+  
+  @media (--viewportMedium) {
+    margin-top: 0px;
+    margin-left: 8px;
+  }
+}
+
 .priceValue {
+  @apply --marketplaceH4FontStyles;
   margin-top: 1px;
   margin-bottom: 0;
-  @apply --marketplaceH4FontStyles;
 
   /* Preserve newlines, but collapse other whitespace */
   white-space: pre-line;
@@ -652,7 +666,6 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  margin-bottom: 24px;
 }
 
 .dimensionsCell {
