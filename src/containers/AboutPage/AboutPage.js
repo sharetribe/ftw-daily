@@ -12,7 +12,7 @@ import {
 } from '../../components';
 
 import css from './AboutPage.css';
-import image from './about-us-1056.jpg';
+import image from './Jam-Spaces.jpg';
 
 const AboutPage = () => {
   const { siteTwitterHandle, siteFacebookPage } = config;
