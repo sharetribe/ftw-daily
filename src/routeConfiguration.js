@@ -2,10 +2,13 @@ import React from 'react';
 import {
   AboutPage,
   AuthenticationPage,
+  CancellationPolicyPage,
   CheckoutPage,
+  CommunityGuidelinesPage,
   ContactDetailsPage,
   EditListingPage,
   EmailVerificationPage,
+  FeesPage,
   InboxPage,
   LandingPage,
   ListingPage,
@@ -249,6 +252,21 @@ const routeConfiguration = () => {
       component: props => <PayoutPreferencesPage {...props} />,
       loadData: PayoutPreferencesPage.loadData,
     },
+    {
+      path: '/cancellation-policy',
+      name: 'CancellationPolicyPage',
+      component: props => <CancellationPolicyPage {...props} />,
+    },
+    {
+      path: '/community-guidelines',
+      name: 'CommunityGuidelinesPage',
+      component: props => <CommunityGuidelinesPage {...props} />,
+    },
+    {
+      path: '/fees',
+      name: 'FeesPage',
+      component: props => <FeesPage {...props} />,
+    },    
     {
       path: '/terms-of-service',
       name: 'TermsOfServicePage',

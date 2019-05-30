@@ -1,0 +1,26 @@
+@import '../../marketplace.css';
+
+.root {
+  & p {
+    @apply --marketplaceH4FontStyles;
+  }
+  & h2 {
+    /* Adjust heading margins to work with the reduced body font size */
+    margin: 23px 0 19px 0;
+
+    @media (--viewportMedium) {
+      margin: 24px 0 24px 0;
+    }
+  }
+
+  & .lastUpdated {
+    @apply --marketplaceBodyFontStyles;
+    margin-top: 0;
+    margin-bottom: 55px;
+
+    @media (--viewportMedium) {
+      margin-top: 0;
+      margin-bottom: 54px;
+    }
+  }
+}
