@@ -24,15 +24,36 @@ const PrivacyPolicyPageComponent = props => {
 
   const tabs = [
     {
-      text: intl.formatMessage({ id: 'PrivacyPolicyPage.privacyTabTitle' }),
+      text: intl.formatMessage({ id: 'PrivacyPolicyPage.communityguidelinesTabTitle' }),
       selected: true,
+      linkProps: {
+        name: 'CommunityGuidelinesPage',
+      },
+    },
+    {
+      text: intl.formatMessage({ id: 'PrivacyPolicyPage.feesTabTitle' }),
+      selected: true,
+      linkProps: {
+        name: 'FeesPage',
+      },
+    },    
+    {
+      text: intl.formatMessage({ id: 'PrivacyPolicyPage.cancellationpolicyTabTitle' }),
+      selected: true,
+      linkProps: {
+        name: 'CancellationPolicyPage',
+      },
+    },    
+    {
+      text: intl.formatMessage({ id: 'PrivacyPolicyPage.privacyTabTitle' }),
+      selected: false,
       linkProps: {
         name: 'PrivacyPolicyPage',
       },
     },
     {
       text: intl.formatMessage({ id: 'PrivacyPolicyPage.tosTabTitle' }),
-      selected: false,
+      selected: true,
       linkProps: {
         name: 'TermsOfServicePage',
       },

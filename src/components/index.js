@@ -142,6 +142,9 @@ export { default as UserCard } from './UserCard/UserCard';
 // Page sections and modal content wrappers //
 //////////////////////////////////////////////
 
+export { default as CommunityGuidelines } from './CommunityGuidelines/CommunityGuidelines';
+export { default as Fees } from './Fees/Fees';
+export { default as CancellationPolicy } from './CancellationPolicy/CancellationPolicy';
 export { default as ModalMissingInformation } from './ModalMissingInformation/ModalMissingInformation';
 export { default as ReviewModal } from './ReviewModal/ReviewModal';
 export { default as PrivacyPolicy } from './PrivacyPolicy/PrivacyPolicy';
