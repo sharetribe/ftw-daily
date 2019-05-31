@@ -11,16 +11,13 @@ const   CommunityGuidelines = props => {
   // prettier-ignore
   return (
     <div className={classes}>
-      <p className={css.lastUpdated}>Last updated: October 30, 2017</p>
+      <p className={css.lastUpdated}>Last updated: May 31, 2019</p>
       <p> 
-        JamInTime is the most trusted online marketplace to rent music studios for a reason, which is the outstanding community that we have of both artists and studios. We’re built on the foundation of trust, best interest of our community, and thus we do have Community Guidelines that we’ve created and actively enforce. We take violations of these Community Guidelines seriously and may suspend or terminate an Account for ongoing or serious violations. Fraudulent or illegal activity may also be subject to legal action taken. We reserve the right to also edit or remove content on our site that violates these Community Guidelines or if we believe it adversely affects the integrity of the JamInTime marketplace or it’s users.
+        JamInTime seeks to bridge the digital gap between musicians and studios in order to fund current and future products to help musicians succeed in pursuing a career in music. We’re built on the foundation of trust, respect, best interest of our community, and thus we do have Community Guidelines that we’ve created and actively enforce. We take violations of these Community Guidelines seriously and may suspend or terminate an Account for ongoing or serious violations. Fraudulent or illegal activity may also be subject to legal action taken. We reserve the right to also edit or remove content on our site that violates these Community Guidelines or if we believe it adversely affects the integrity of the JamInTime marketplace or it’s users.
       </p>
 
       <p> 
-        These Community Guidelines are part of and use words and phrases that are identified in our
-        Terms of Service (Services Agreement). If you have any questions about these Community
-        Guidelines or if you believe that a user has violated these Community Guidelines, please
-        email us immediately at admin@JamInTime.io.
+        These Community Guidelines are part of and use words and phrases that are identified in our Terms of Service (Services Agreement). If you have any questions about these Community Guidelines or if you believe that a user has violated these Community Guidelines, please email us immediately at <a href="mailto:info@audiobarn.ca">info@audiobarn.ca</a>.
       </p>
 
       <h2>Studios Must:</h2>
@@ -53,22 +50,17 @@ const   CommunityGuidelines = props => {
       <h2>Everyone must:</h2>
       <h3>1. Communicate honestly with others.</h3>
       <p> 
-        JamInTime is a trusted marketplace and depends on the honesty, integrity, and best interest of everyone that uses the platform. Only message others with the best intent in mind, do not make false claims, misrepresentations, do not engage in fraudulent activity, and do not willingly be deceitful.
+        JamInTime is a trusted marketplace and depends on the respect, honesty, integrity, and best interest of everyone that uses the platform. Only message others with the best intent in mind, do not make false claims, misrepresentations, do not engage in fraudulent activity, and do not willingly be deceitful.
       </p>
 
       <h3>2. Transact honestly and with the intended use of JamInTime.</h3> 
       <p> 
-        JamInTime is intended to be a marketplace for artists to book music studios and studios to offer their studios. Any transactions that are not intended for this purpose, are misrepresented, have fraudulent intent, or otherwise deemed harmful to either user will be immediately reviewed and if fraudulent, legal action will be taken by JamInTime if deemed necessary. All users and transactions are also applicable to the Terms of Service that is agreed upon by using the platform.
+        JamInTime is intended to be a marketplace for artists to book rehearsal studios and studios to offer their studios. Any transactions that are not intended for this purpose, are misrepresented, have fraudulent intent, or otherwise deemed harmful to either user will be immediately reviewed and if fraudulent, legal action will be taken by JamInTime if deemed necessary. All users and transactions are also applicable to the Terms of Service that is agreed upon by using the platform.
       </p>
-
-      <h3>Use of Information</h3>
-      <p> 
-        We may use personal information for various purposes, including to do the following: 
-      </p> 
 
       <h3>3. Respect others privacy and information.</h3>
       <p> 
-        Many studios are owned and operated by world-renowned professionals. Some studios may also have well-known artists present at the studio during your booking. It is professional and common courtesy to respect the privacy of the studios, others on the premise, and the information of both the studios and professionals that may be offering studio services. In some cases, studios may require artists to sign a Non-Disclosure Agreement (NDA) at the studio prior to their booking. If there is ever an issue with privacy, studio security, or studio rules, please send us an email immediately at admin@JamInTime.io.
+        Many studios are owned and operated by world-renowned professionals. Some studios may also have well-known artists present at the studio during your booking. It is professional and common courtesy to respect the privacy of the studios, others on the premise, and the information of both the studios and professionals that may be offering studio services. In some cases, studios may require artists to sign a Non-Disclosure Agreement (NDA) at the studio prior to their booking. If there is ever an issue with privacy, studio security, or studio rules, please send us an email immediately at <a href="mailto:info@audiobarn.ca">info@audiobarn.ca</a>.
       </p>
     </div>
   );
