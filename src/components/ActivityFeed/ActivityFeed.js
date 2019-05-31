@@ -25,6 +25,7 @@ import {
   isCustomerReview,
   isProviderReview,
   txRoleIsProvider,
+  txRoleIsCustomer,
   getUserTxRole,
   isRelevantPastTransition,
 } from '../../util/transaction';
@@ -94,10 +95,10 @@ Review.propTypes = {
 };
 
 const hasUserLeftAReviewFirst = (userRole, transaction) => {
-  const isProvider = txRoleIsProvider(userRole);
-  return isProvider
-    ? txIsInFirstReviewBy(transaction, isProvider)
-    : txIsInFirstReviewBy(transaction, !isProvider);
+  // Because function txIsInFirstReviewBy uses isCustomer to check in which state the reviews are
+  // we should also use isCustomer insted of isProvider
+  const isCustomer = txRoleIsCustomer(userRole);
+  return txIsInFirstReviewBy(transaction, isCustomer);
 };
 
 const resolveTransitionMessage = (
@@ -145,20 +146,21 @@ const resolveTransitionMessage = (
     case TRANSITION_CANCEL:
       return <FormattedMessage id="ActivityFeed.transitionCancel" />;
     case TRANSITION_COMPLETE:
-      // Show the leave a review link if the state is delivered or
-      // if current user is not the first to leave a review
+      // Show the leave a review link if the state is delivered and if the current user is the first to leave a review
       const reviewPeriodJustStarted = txIsDelivered(transaction);
-      const reviewPeriodIsOver = txIsReviewed(transaction);
-      const userHasLeftAReview = hasUserLeftAReviewFirst(ownRole, transaction);
 
-      const reviewLink =
-        reviewPeriodJustStarted || !(reviewPeriodIsOver || userHasLeftAReview) ? (
-          <InlineTextButton onClick={onOpenReviewModal}>
-            <FormattedMessage id="ActivityFeed.leaveAReview" values={{ displayName }} />
-          </InlineTextButton>
-        ) : null;
+      const reviewAsFirstLink = reviewPeriodJustStarted ? (
+        <InlineTextButton onClick={onOpenReviewModal}>
+          <FormattedMessage id="ActivityFeed.leaveAReview" values={{ displayName }} />
+        </InlineTextButton>
+      ) : null;
 
-      return <FormattedMessage id="ActivityFeed.transitionComplete" values={{ reviewLink }} />;
+      return (
+        <FormattedMessage
+          id="ActivityFeed.transitionComplete"
+          values={{ reviewLink: reviewAsFirstLink }}
+        />
+      );
 
     case TRANSITION_REVIEW_1_BY_PROVIDER:
     case TRANSITION_REVIEW_1_BY_CUSTOMER:
@@ -169,7 +171,7 @@ const resolveTransitionMessage = (
         // one to leave a review
         const reviewPeriodIsOver = txIsReviewed(transaction);
         const userHasLeftAReview = hasUserLeftAReviewFirst(ownRole, transaction);
-        const reviewLink = !(reviewPeriodIsOver || userHasLeftAReview) ? (
+        const reviewAsSecondLink = !(reviewPeriodIsOver || userHasLeftAReview) ? (
           <InlineTextButton onClick={onOpenReviewModal}>
             <FormattedMessage id="ActivityFeed.leaveAReviewSecond" values={{ displayName }} />
           </InlineTextButton>
@@ -177,7 +179,7 @@ const resolveTransitionMessage = (
         return (
           <FormattedMessage
             id="ActivityFeed.transitionReview"
-            values={{ displayName, reviewLink }}
+            values={{ displayName, reviewLink: reviewAsSecondLink }}
           />
         );
       }
