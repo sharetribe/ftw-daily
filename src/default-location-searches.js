@@ -9,10 +9,10 @@ const { LatLng, LatLngBounds } = sdkTypes;
 // `predictionPlace` (util.types.place) properties.
 export default [
   {
-    id: 'default-greater-montreal',
+    id: 'default-montreal-north',
     predictionPlace: {
       address: 'Greater Montreal',
-      bounds: new LatLngBounds(new LatLng(45.330504, -74.001668), new LatLng(45.799914, -73.353174)),
+      bounds: new LatLngBounds(new LatLng(45.70557, -73.47303), new LatLng(45.41008, -73.97290)),
     },
-  },           
+  },              
 ];
