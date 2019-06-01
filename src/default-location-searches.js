@@ -12,7 +12,7 @@ export default [
     id: 'default-greater-montreal',
     predictionPlace: {
       address: 'Greater Montreal',
-      bounds: new LatLngBounds(new LatLng(45.330504, -74.001668), new LatLng(45.799914, -73.353174)),
+      bounds: new LatLngBounds(new LatLng(45.81500724, -73.4037316), new LatLng(45.799914, -74.05197108)),
     },
   },           
 ];
