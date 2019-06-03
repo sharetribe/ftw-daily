@@ -10,7 +10,7 @@ import css from './SectionLocations.css';
 
 import bandImage from './images/band_studio.jpg';
 import soloImage from './images/solo_studio.jpg';
-import allImage from './images/ab_color.jpg';
+import allImage from './images/ab_color.png';
 
 class LocationImage extends Component {
   render() {
@@ -52,17 +52,17 @@ const SectionLocations = props => {
       <div className={css.locations}>
         {locationLink(
           'Band Rehearsals',
-          helsinkiImage,
+          bandImage,
           '?address=Greater%20Montreal&bounds=45.70557%2C-73.47303%2C45.41008%2C-73.9729&pub_category=Band%20Studios'
         )}
         {locationLink(
           'Solo Practice',
-          rovaniemiImage,
+          soloImage,
           '?address=Greater%20Montreal&bounds=45.70557%2C-73.47303%2C45.41008%2C-73.9729&pub_category=Solo%20Studios'
         )}
         {locationLink(
           'All',
-          rukaImage,
+          allImage,
           '?address=Greater%20Montreal&bounds=45.70557%2C-73.47303%2C45.41008%2C-73.9729'
         )}
       </div>
