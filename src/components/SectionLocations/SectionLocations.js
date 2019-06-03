@@ -51,9 +51,9 @@ const SectionLocations = props => {
       </div>
       <div className={css.locations}>
         {locationLink(
-          'Helsinki',
-          helsinkiImage,
-          '?address=Helsinki%2C%20Finland&bounds=60.2978389%2C25.254484899999966%2C59.9224887%2C24.782875800000056&origin=60.16985569999999%2C24.93837910000002'
+          'Band Rehearsal',
+          bandImage,
+          '?address=Greater%20Montreal&bounds=45.70557%2C-73.47303%2C45.41008%2C-73.9729&pub_category=Band%20Studios'
         )}
         {locationLink(
           'Rovaniemi',
