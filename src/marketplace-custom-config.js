@@ -38,10 +38,8 @@ export const amenities = [
 ];
 
 export const categories = [
-  { key: 'smoke', label: 'Smoke' },
-  { key: 'electric', label: 'Electric' },
-  { key: 'wood', label: 'Wood' },
-  { key: 'other', label: 'Other' },
+  { key: 'Band Studios', label: 'Band Studios' },
+  { key: 'Solo Studios', label: 'Solo Studios' },
 ];
 
 // Price filter configuration
