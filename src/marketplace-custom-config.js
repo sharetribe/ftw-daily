@@ -18,12 +18,8 @@ export const amenities = [
 ];
 
 export const categories = [
-<<<<<<< HEAD
   { key: 'Band Studios', label: 'Band Studios' },
   { key: 'Solo Studios', label: 'Solo Studios' },
-=======
-  { key: 'jam-space', label: 'Jam Space' },
->>>>>>> 2752f8cfdf6aa31d77da53cf1e500689f9d3afed
 ];
 
 // Price filter configuration
