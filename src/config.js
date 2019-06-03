@@ -22,7 +22,7 @@ const i18n = {
 // Should search results be ordered by distance to origin.
 // NOTE: If this is set to true add parameter 'origin' to every location in default-location-searches.js
 // Without the 'origin' parameter, search will not work correctly
-const sortSearchByDistance = false;
+const sortSearchByDistance = true;
 
 // API supports custom processes to be used in booking process.
 // We need to specify it when we are initiating a new order
@@ -75,10 +75,10 @@ const sentryDsn = process.env.REACT_APP_SENTRY_DSN;
 const usingSSL = process.env.REACT_APP_SHARETRIBE_USING_SSL === 'true';
 
 // Address information is used in SEO schema for Organization (http://schema.org/PostalAddress)
-const addressCountry = 'FI';
-const addressRegion = 'Helsinki';
-const postalCode = '00100';
-const streetAddress = 'Bulevardi 14';
+const addressCountry = 'CA';
+const addressRegion = 'Montreal';
+const postalCode = 'H3B5J8';
+const streetAddress = '987 Rue de la Gauchetiere Ouest';
 
 // Canonical root url is needed in social media sharing and SEO optimization purposes.
 const canonicalRootURL = process.env.REACT_APP_CANONICAL_ROOT_URL;
@@ -127,7 +127,7 @@ const maps = {
     // Limit location autocomplete to a one or more countries
     // using ISO 3166 alpha 2 country codes separated by commas.
     // If you want to limit the autocomplete, uncomment this value:
-    // countryLimit: ['AU'],
+    countryLimit: ['CA']
   },
 
   // When fuzzy locations are enabled, coordinates on maps are
