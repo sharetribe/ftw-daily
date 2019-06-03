@@ -13,7 +13,7 @@ const   CommunityGuidelines = props => {
     <div className={classes}>
       <p className={css.lastUpdated}>Last updated: May 31, 2019</p>
       <p> 
-        JamInTime seeks to bridge the digital gap between musicians and studios in order to fund current and future products to help musicians succeed in pursuing a career in music. We’re built on the foundation of trust, respect, best interest of our community, and thus we do have Community Guidelines that we’ve created and actively enforce. We take violations of these Community Guidelines seriously and may suspend or terminate an Account for ongoing or serious violations. Fraudulent or illegal activity may also be subject to legal action taken. We reserve the right to also edit or remove content on our site that violates these Community Guidelines or if we believe it adversely affects the integrity of the JamInTime marketplace or it’s users.
+        JAMinTime seeks to bridge the digital gap between musicians and studios in order to fund current and future products to help musicians succeed in pursuing a career in music. We’re built on the foundation of trust, respect, best interest of our community, and thus we do have Community Guidelines that we’ve created and actively enforce. We take violations of these Community Guidelines seriously and may suspend or terminate an Account for ongoing or serious violations. Fraudulent or illegal activity may also be subject to legal action taken. We reserve the right to also edit or remove content on our site that violates these Community Guidelines or if we believe it adversely affects the integrity of the JAMinTime marketplace or it’s users.
       </p>
 
       <p> 
@@ -23,7 +23,7 @@ const   CommunityGuidelines = props => {
       <h2>Studios Must:</h2>
       <h3>1. Comply with local laws, zoning ordinances, and tax laws at all times.</h3>
       <p> 
-        JamInTime is not liable for ensuring compliance and it is the responsibility of studios and each listing owner to ensure all local laws, zoning ordinance, and also tax compliance are met. You must also legally report income generated from JamInTime to your business and it is your responsibility to do so. If you are responsible for charging local taxes on services, you must also comply with these regulations.
+        JAMinTime is not liable for ensuring compliance and it is the responsibility of studios and each listing owner to ensure all local laws, zoning ordinance, and also tax compliance are met. You must also legally report income generated from JAMinTime to your business and it is your responsibility to do so. If you are responsible for charging local taxes on services, you must also comply with these regulations.
       </p>
 
       <h3>2. Accurate representation of the studios, pricing, and services of each studio.</h3> 
@@ -33,13 +33,13 @@ const   CommunityGuidelines = props => {
 
       <h3>3. Only list and offer a studio that you are permissioned to offer.</h3> 
       <p>
-        Only list the studio that you are permissioned to offer and have the authority to do so for. If you are subletting a space and are not permitted to then further offer it, do not offer it on JamInTime without consent by the owner to do so. If it is discovered that you are offering a studio on JamInTime that you do not have permission to offer, the listing will be immediately removed and your account is subject to be removed from our site.
+        Only list the studio that you are permissioned to offer and have the authority to do so for. If you are subletting a space and are not permitted to then further offer it, do not offer it on JAMinTime without consent by the owner to do so. If it is discovered that you are offering a studio on JAMinTime that you do not have permission to offer, the listing will be immediately removed and your account is subject to be removed from our site.
       </p>
 
       <h2>Artists must:</h2>
       <h3>1. Comply with all studio rules, policies, and booking agreement.</h3> 
       <p> 
-        All artists and those that have booked a studio through JamInTime must only use the studio as described by the studio listing owner, and as agreed upon in the booking agreement. Studios take pride in their space, the equipment, and their profession and will be expecting the same professional respect and courtesy that they are providing.
+        All artists and those that have booked a studio through JAMinTime must only use the studio as described by the studio listing owner, and as agreed upon in the booking agreement. Studios take pride in their space, the equipment, and their profession and will be expecting the same professional respect and courtesy that they are providing.
       </p>
 
       <h3>2. Never engage in illegal or prohibited activity on studio premises.</h3>
@@ -50,12 +50,12 @@ const   CommunityGuidelines = props => {
       <h2>Everyone must:</h2>
       <h3>1. Communicate honestly with others.</h3>
       <p> 
-        JamInTime is a trusted marketplace and depends on the respect, honesty, integrity, and best interest of everyone that uses the platform. Only message others with the best intent in mind, do not make false claims, misrepresentations, do not engage in fraudulent activity, and do not willingly be deceitful.
+        JAMinTime is a trusted marketplace and depends on the respect, honesty, integrity, and best interest of everyone that uses the platform. Only message others with the best intent in mind, do not make false claims, misrepresentations, do not engage in fraudulent activity, and do not willingly be deceitful.
       </p>
 
-      <h3>2. Transact honestly and with the intended use of JamInTime.</h3> 
+      <h3>2. Transact honestly and with the intended use of JAMinTime.</h3> 
       <p> 
-        JamInTime is intended to be a marketplace for artists to book rehearsal studios and studios to offer their studios. Any transactions that are not intended for this purpose, are misrepresented, have fraudulent intent, or otherwise deemed harmful to either user will be immediately reviewed and if fraudulent, legal action will be taken by JamInTime if deemed necessary. All users and transactions are also applicable to the Terms of Service that is agreed upon by using the platform.
+        JAMinTime is intended to be a marketplace for artists to book rehearsal studios and studios to offer their studios. Any transactions that are not intended for this purpose, are misrepresented, have fraudulent intent, or otherwise deemed harmful to either user will be immediately reviewed and if fraudulent, legal action will be taken by JAMinTime if deemed necessary. All users and transactions are also applicable to the Terms of Service that is agreed upon by using the platform.
       </p>
 
       <h3>3. Respect others privacy and information.</h3>
