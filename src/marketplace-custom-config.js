@@ -4,49 +4,33 @@
 
 export const amenities = [
   {
-    key: 'towels',
-    label: 'Towels',
+    key: 'audio-engineer',
+    label: 'Audio Engineer Included',
   },
   {
-    key: 'bathroom',
-    label: 'Bathroom',
+    key: 'parking-studio',
+    label: 'Studio Parking Available',
   },
   {
-    key: 'swimming_pool',
-    label: 'Swimming pool',
-  },
-  {
-    key: 'own_drinks',
-    label: 'Own drinks allowed',
-  },
-  {
-    key: 'jacuzzi',
-    label: 'Jacuzzi',
-  },
-  {
-    key: 'audiovisual_entertainment',
-    label: 'Audiovisual entertainment',
-  },
-  {
-    key: 'barbeque',
-    label: 'Barbeque',
-  },
-  {
-    key: 'own_food_allowed',
-    label: 'Own food allowed',
-  },
+    key: 'parking-nearby',
+    label: 'Parking Available Nearby',
+  },  
 ];
 
 export const categories = [
+<<<<<<< HEAD
   { key: 'Band Studios', label: 'Band Studios' },
   { key: 'Solo Studios', label: 'Solo Studios' },
+=======
+  { key: 'jam-space', label: 'Jam Space' },
+>>>>>>> 2752f8cfdf6aa31d77da53cf1e500689f9d3afed
 ];
 
 // Price filter configuration
 // Note: unlike most prices this is not handled in subunits
 export const priceFilterConfig = {
   min: 0,
-  max: 1000,
+  max: 100,
   step: 5,
 };
 
