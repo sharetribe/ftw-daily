@@ -8,9 +8,9 @@ import { NamedLink } from '../../components';
 
 import css from './SectionLocations.css';
 
-import bandImage from './images/band_studio.jpg';
-import soloImage from './images/solo_studio.jpg';
-import allImage from './images/ab_color.png';
+import helsinkiImage from './images/location_helsinki.jpg';
+import rovaniemiImage from './images/location_rovaniemi.jpg';
+import rukaImage from './images/location_ruka.jpg';
 
 class LocationImage extends Component {
   render() {
@@ -56,14 +56,14 @@ const SectionLocations = props => {
           '?address=Greater%20Montreal&bounds=45.70557%2C-73.47303%2C45.41008%2C-73.9729&pub_category=Band%20Studios'
         )}
         {locationLink(
-          'Solo Practice',
-          soloImage,
-          '?address=Greater%20Montreal&bounds=45.70557%2C-73.47303%2C45.41008%2C-73.9729&pub_category=Solo%20Studios'
+          'Rovaniemi',
+          rovaniemiImage,
+          '?address=Rovaniemi%2C%20Finland&bounds=67.18452510000002%2C27.32667850000007%2C66.1553745%2C24.736871199999996&origin=66.50394779999999%2C25.729390599999988'
         )}
         {locationLink(
-          'All',
-          allImage,
-          '?address=Greater%20Montreal&bounds=45.70557%2C-73.47303%2C45.41008%2C-73.9729'
+          'Ruka',
+          rukaImage,
+          '?address=Ruka%2C%20Finland&bounds=66.1704578%2C29.14246849999995%2C66.1614402%2C29.110453699999994&origin=66.16594940000002%2C29.12646110000003'
         )}
       </div>
     </div>
