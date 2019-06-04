@@ -135,18 +135,6 @@ export default function reducer(state = initialState, action = {}) {
       console.error(payload);
       return { ...state, handleCardPaymentError: payload, handleCardPaymentInProgress: false };
 
-    case HANDLE_CARD_PAYMENT_REQUEST:
-      return {
-        ...state,
-        handleCardPaymentError: null,
-        handleCardPaymentInProgress: true,
-      };
-    case HANDLE_CARD_PAYMENT_SUCCESS:
-      return { ...state, paymentIntent: payload, handleCardPaymentInProgress: false };
-    case HANDLE_CARD_PAYMENT_ERROR:
-      console.error(payload);
-      return { ...state, handleCardPaymentError: payload, handleCardPaymentInProgress: false };
-
     default:
       return state;
   }
@@ -550,7 +538,8 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
 export const handleCardPayment = params => dispatch => {
   // It's required to use the same instance of Stripe as where the card has been created
   // so that's why Stripe needs to be passed here and we can't create a new instance.
-  const { stripe, card, stripePaymentIntentClientSecret, paymentParams } = params;
+  const { stripe, card, paymentParams, stripePaymentIntentClientSecret } = params;
+  const transactionId = params.orderId;
 
   dispatch(handleCardPaymentRequest());
 
@@ -561,7 +550,7 @@ export const handleCardPayment = params => dispatch => {
         return Promise.reject(response);
       } else {
         dispatch(handleCardPaymentSuccess(response));
-        return response;
+        return { ...response, transactionId };
       }
     })
     .catch(err => {

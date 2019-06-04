@@ -5,6 +5,7 @@ import { storableError } from '../../util/errors';
 import {
   TRANSITION_REQUEST_PAYMENT,
   TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY,
+  TRANSITION_CONFIRM_PAYMENT,
 } from '../../util/transaction';
 import * as log from '../../util/log';
 import { fetchCurrentUserHasOrdersSuccess } from '../../ducks/user.duck';
@@ -139,6 +140,7 @@ export const speculateTransactionError = e => ({
 
 // TODO initial message should be sent at the confirm-payment transition.
 const sendInitialMessage = (initialMessage, orderId, sdk) => {
+  console.log('Sending initial meesage', initialMessage, orderId);
   if (initialMessage) {
     return sdk.messages
       .send({ transactionId: orderId, content: initialMessage })
@@ -170,7 +172,7 @@ export const initiateOrder = (orderParams, transactionId) => (dispatch, getState
 
   const createOrder = transactionId ? sdk.transactions.transition : sdk.transactions.initiate;
 
-  return createOrder(bodyParams)
+  return createOrder(bodyParams, { expand: true })
     .then(response => {
       const order = response.data.data;
       dispatch(initiateOrderSuccess(order.id));
@@ -190,30 +192,31 @@ export const initiateOrder = (orderParams, transactionId) => (dispatch, getState
     });
 };
 
-export const confirmPayment = (orderParams, transactionId) => (dispatch, getState, sdk) => {
+export const confirmPayment = orderParams => (dispatch, getState, sdk) => {
   dispatch(confirmPaymentRequest());
+
   const bodyParams = {
-    id: transactionId,
+    id: orderParams.transactionId,
+    transition: TRANSITION_CONFIRM_PAYMENT,
     params: orderParams,
   };
 
-  const initialMessage = bodyParams.params.message;
+  const initialMessage = orderParams.message;
 
-  return sdk.transaction
-    .confirmPayment(bodyParams)
+  return sdk.transactions
+    .transition(bodyParams)
     .then(response => {
       const order = response.data.data;
       dispatch(confirmPaymentSuccess(order.id));
-      dispatch(sendInitialMessage(initialMessage, order.id, sdk));
       return order;
     })
     .catch(e => {
       dispatch(confirmPaymentError(storableError(e)));
+      const transactionIdMaybe = orderParams.transactionId
+        ? { transactionId: orderParams.transactionId.uuid }
+        : {};
       log.error(e, 'initiate-order-failed', {
-        transactionId: transactionId.uuid,
-        listingId: orderParams.listingId.uuid,
-        bookingStart: orderParams.bookingStart,
-        bookingEnd: orderParams.bookingEnd,
+        ...transactionIdMaybe,
       });
       throw e;
     });
