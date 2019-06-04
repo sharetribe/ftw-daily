@@ -17,6 +17,10 @@ export const INITIATE_ORDER_REQUEST = 'app/CheckoutPage/INITIATE_ORDER_REQUEST';
 export const INITIATE_ORDER_SUCCESS = 'app/CheckoutPage/INITIATE_ORDER_SUCCESS';
 export const INITIATE_ORDER_ERROR = 'app/CheckoutPage/INITIATE_ORDER_ERROR';
 
+export const CONFIRM_PAYMENT_REQUEST = 'app/CheckoutPage/CONFIRM_PAYMENT_REQUEST';
+export const CONFIRM_PAYMENT_SUCCESS = 'app/CheckoutPage/CONFIRM_PAYMENT_SUCCESS';
+export const CONFIRM_PAYMENT_ERROR = 'app/CheckoutPage/CONFIRM_PAYMENT_ERROR';
+
 export const SPECULATE_TRANSACTION_REQUEST = 'app/ListingPage/SPECULATE_TRANSACTION_REQUEST';
 export const SPECULATE_TRANSACTION_SUCCESS = 'app/ListingPage/SPECULATE_TRANSACTION_SUCCESS';
 export const SPECULATE_TRANSACTION_ERROR = 'app/ListingPage/SPECULATE_TRANSACTION_ERROR';
@@ -32,6 +36,7 @@ const initialState = {
   speculatedTransaction: null,
   enquiredTransaction: null,
   initiateOrderError: null,
+  confirmPaymentError: null,
 };
 
 export default function checkoutPageReducer(state = initialState, action = {}) {
@@ -68,6 +73,15 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
     case INITIATE_ORDER_ERROR:
       console.error(payload); // eslint-disable-line no-console
       return { ...state, initiateOrderError: payload };
+
+    case CONFIRM_PAYMENT_REQUEST:
+      return { ...state, confirmPaymentError: null };
+    case CONFIRM_PAYMENT_SUCCESS:
+      return state;
+    case CONFIRM_PAYMENT_ERROR:
+      console.error(payload); // eslint-disable-line no-console
+      return { ...state, confirmPaymentError: payload };
+
     default:
       return state;
   }
@@ -95,6 +109,19 @@ const initiateOrderError = e => ({
   payload: e,
 });
 
+const confirmPaymentRequest = () => ({ type: CONFIRM_PAYMENT_REQUEST });
+
+const confirmPaymentSuccess = orderId => ({
+  type: CONFIRM_PAYMENT_SUCCESS,
+  payload: orderId,
+});
+
+const confirmPaymentError = e => ({
+  type: CONFIRM_PAYMENT_ERROR,
+  error: true,
+  payload: e,
+});
+
 export const speculateTransactionRequest = () => ({ type: SPECULATE_TRANSACTION_REQUEST });
 
 export const speculateTransactionSuccess = transaction => ({
@@ -110,22 +137,22 @@ export const speculateTransactionError = e => ({
 
 /* ================ Thunks ================ */
 
-// // TODO initial message should be sent at the confirm-payment transition.
-// const sendInitialMessage = (initialMessage, orderId, sdk) => {
-//   if (initialMessage) {
-//     return sdk.messages
-//       .send({ transactionId: orderId, content: initialMessage })
-//       .then(() => {
-//         return { orderId, initialMessageSuccess: true };
-//       })
-//       .catch(e => {
-//         log.error(e, 'initial-message-send-failed', { txId: orderId });
-//         return { orderId, initialMessageSuccess: false };
-//       });
-//   } else {
-//     return Promise.resolve({ orderId, initialMessageSuccess: true });
-//   }
-// };
+// TODO initial message should be sent at the confirm-payment transition.
+const sendInitialMessage = (initialMessage, orderId, sdk) => {
+  if (initialMessage) {
+    return sdk.messages
+      .send({ transactionId: orderId, content: initialMessage })
+      .then(() => {
+        return { orderId, initialMessageSuccess: true };
+      })
+      .catch(e => {
+        log.error(e, 'initial-message-send-failed', { txId: orderId });
+        return { orderId, initialMessageSuccess: false };
+      });
+  } else {
+    return Promise.resolve({ orderId, initialMessageSuccess: true });
+  }
+};
 
 export const initiateOrder = (orderParams, transactionId) => (dispatch, getState, sdk) => {
   dispatch(initiateOrderRequest());
@@ -155,6 +182,35 @@ export const initiateOrder = (orderParams, transactionId) => (dispatch, getState
       const transactionIdMaybe = transactionId ? { transactionId: transactionId.uuid } : {};
       log.error(e, 'initiate-order-failed', {
         ...transactionIdMaybe,
+        listingId: orderParams.listingId.uuid,
+        bookingStart: orderParams.bookingStart,
+        bookingEnd: orderParams.bookingEnd,
+      });
+      throw e;
+    });
+};
+
+export const confirmPayment = (orderParams, transactionId) => (dispatch, getState, sdk) => {
+  dispatch(confirmPaymentRequest());
+  const bodyParams = {
+    id: transactionId,
+    params: orderParams,
+  };
+
+  const initialMessage = bodyParams.params.message;
+
+  return sdk.transaction
+    .confirmPayment(bodyParams)
+    .then(response => {
+      const order = response.data.data;
+      dispatch(confirmPaymentSuccess(order.id));
+      dispatch(sendInitialMessage(initialMessage, order.id, sdk));
+      return order;
+    })
+    .catch(e => {
+      dispatch(confirmPaymentError(storableError(e)));
+      log.error(e, 'initiate-order-failed', {
+        transactionId: transactionId.uuid,
         listingId: orderParams.listingId.uuid,
         bookingStart: orderParams.bookingStart,
         bookingEnd: orderParams.bookingEnd,
