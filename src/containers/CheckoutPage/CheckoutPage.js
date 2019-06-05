@@ -1,7 +1,5 @@
 import { nightsBetween, daysBetween } from '../../util/dates';
 import { types as sdkTypes } from '../../util/sdkLoader';
-
-const { Money } = sdkTypes;
 import React, { Component } from 'react';
 import { bool, func, instanceOf, object, shape, string } from 'prop-types';
 import { compose } from 'redux';
@@ -48,6 +46,7 @@ import config from '../../config';
 import { storeData, storedData, clearData } from './CheckoutPageSessionHelpers';
 import css from './CheckoutPage.css';
 
+const { Money } = sdkTypes;
 const STORAGE_KEY = 'CheckoutPage';
 
 export class CheckoutPageComponent extends Component {
@@ -196,12 +195,12 @@ export class CheckoutPageComponent extends Component {
     // Create order aka transaction
     // NOTE: if unit type is line-item/units, quantity needs to be added.
     // The way to pass it to checkout page is through pageData.bookingData
-    const requestParams = {
-      listingId: this.state.pageData.listing.id,
+    const requestParams = this.customPricingParams({
+      listing: this.state.pageData.listing,
       cardToken,
       bookingStart: speculatedTransaction.booking.attributes.start,
       bookingEnd: speculatedTransaction.booking.attributes.end,
-    };
+    });
 
     const enquiredTransaction = this.state.pageData.enquiredTransaction;
 
