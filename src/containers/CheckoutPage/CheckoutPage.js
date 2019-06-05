@@ -196,12 +196,12 @@ export class CheckoutPageComponent extends Component {
     // Create order aka transaction
     // NOTE: if unit type is line-item/units, quantity needs to be added.
     // The way to pass it to checkout page is through pageData.bookingData
-    const requestParams = {
-      listingId: this.state.pageData.listing.id,
+    const requestParams = this.customPricingParams({
+      listing: this.state.pageData.listing,
       cardToken,
       bookingStart: speculatedTransaction.booking.attributes.start,
       bookingEnd: speculatedTransaction.booking.attributes.end,
-    };
+    });
 
     const enquiredTransaction = this.state.pageData.enquiredTransaction;
 
