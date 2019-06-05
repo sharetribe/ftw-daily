@@ -51,7 +51,7 @@ const SectionLocations = props => {
       </div>
       <div className={css.locations}>
         {locationLink(
-          'Band Rehearsals',
+          'Band Rehearsal',
           bandImage,
           '?address=Greater%20Montreal&bounds=45.70557%2C-73.47303%2C45.41008%2C-73.9729&pub_category=Band%20Studios'
         )}
