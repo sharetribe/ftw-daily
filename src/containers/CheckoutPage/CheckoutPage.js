@@ -1,7 +1,5 @@
 import { nightsBetween, daysBetween } from '../../util/dates';
 import { types as sdkTypes } from '../../util/sdkLoader';
-
-const { Money } = sdkTypes;
 import React, { Component } from 'react';
 import { bool, func, instanceOf, object, shape, string } from 'prop-types';
 import { compose } from 'redux';
@@ -48,6 +46,7 @@ import config from '../../config';
 import { storeData, storedData, clearData } from './CheckoutPageSessionHelpers';
 import css from './CheckoutPage.css';
 
+const { Money } = sdkTypes;
 const STORAGE_KEY = 'CheckoutPage';
 
 export class CheckoutPageComponent extends Component {
