@@ -1,3 +1,7 @@
+import { nightsBetween, daysBetween } from '../../util/dates';
+import { types as sdkTypes } from '../../util/sdkLoader';
+
+const { Money } = sdkTypes;
 import React, { Component } from 'react';
 import { bool, func, instanceOf, object, shape, string } from 'prop-types';
 import { compose } from 'redux';
@@ -47,6 +51,38 @@ import css from './CheckoutPage.css';
 const STORAGE_KEY = 'CheckoutPage';
 
 export class CheckoutPageComponent extends Component {
+    /**
+   * Constructs a request params object that can be used when creating bookings
+   * using custom pricing.
+   * @param {} params An object that contains bookingStart, bookingEnd and listing
+   * @return a params object for custom pricing bookings
+   */
+
+  customPricingParams(params) {
+    const { bookingStart, bookingEnd, listing, ...rest } = params;
+    const { amount, currency } = listing.attributes.price;
+
+    const unitType = config.bookingUnitType;
+    const isNightly = unitType === LINE_ITEM_NIGHT;
+
+    const quantity = isNightly
+      ? nightsBetween(bookingStart, bookingEnd)
+      : daysBetween(bookingStart, bookingEnd);
+
+    return {
+      listingId: listing.id,
+      bookingStart,
+      bookingEnd,
+      lineItems: [
+        {
+          code: unitType,
+          unitPrice: new Money(amount, currency),
+          quantity,
+        },
+      ],
+      ...rest,
+    };
+  }
   constructor(props) {
     super(props);
 
@@ -129,11 +165,13 @@ export class CheckoutPageComponent extends Component {
       // Fetch speculated transaction for showing price in booking breakdown
       // NOTE: if unit type is line-item/units, quantity needs to be added.
       // The way to pass it to checkout page is through pageData.bookingData
-      fetchSpeculatedTransaction({
-        listingId,
-        bookingStart: bookingStartForAPI,
-        bookingEnd: bookingEndForAPI,
-      });
+      fetchSpeculatedTransaction(
+        this.customPricingParams({
+          listing,
+          bookingStart: bookingStartForAPI,
+          bookingEnd: bookingEndForAPI,
+        })
+      );
     }
 
     this.setState({ pageData: pageData || {}, dataLoaded: true });
