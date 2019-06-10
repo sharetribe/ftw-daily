@@ -14,6 +14,10 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] In `LineItemProviderCommissionMaybe.js` file check that `providerCommissionLineItem` exists.
+  In default transaction process the `providerCommissionLineItem` can be expected to be there but if
+  the process is using only customer commission there will be error.
+  [#1112](https://github.com/sharetribe/flex-template-web/pull/1112)
 - [fix] Fix a bug in showing review links. Because of the bug the second review link was not visible
   in `ActivityFeed`. [#1106](https://github.com/sharetribe/flex-template-web/pull/1106)
 - [fix] Emptying the priceFilter component in the searchPage caused a page breaking error.
