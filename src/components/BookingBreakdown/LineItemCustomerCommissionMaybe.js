@@ -12,7 +12,11 @@ const { Money } = sdkTypes;
 // Validate the assumption that the commission exists and the amount
 // is zero or positive.
 const isValidCommission = commissionLineItem => {
-  return commissionLineItem.lineTotal instanceof Money && commissionLineItem.lineTotal.amount >= 0;
+  return (
+    commissionLineItem &&
+    commissionLineItem.lineTotal instanceof Money &&
+    commissionLineItem.lineTotal.amount >= 0
+  );
 };
 
 const LineItemCustomerCommissionMaybe = props => {
