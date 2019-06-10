@@ -18,6 +18,8 @@ way to update this template, but currently, we follow a pattern:
   In default transaction process the `providerCommissionLineItem` can be expected to be there but if
   the process is using only customer commission there will be error.
   [#1112](https://github.com/sharetribe/flex-template-web/pull/1112)
+- [security] Update Flex SDK version to v1.4.1. The new versionupdates depencencies with security issues
+  [#1111](https://github.com/sharetribe/flex-template-web/pull/1111)
 - [fix] Fix a bug in showing review links. Because of the bug the second review link was not visible
   in `ActivityFeed`. [#1106](https://github.com/sharetribe/flex-template-web/pull/1106)
 - [fix] Emptying the priceFilter component in the searchPage caused a page breaking error.
