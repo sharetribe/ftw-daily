@@ -25,6 +25,9 @@ const LineItemProviderCommissionMaybe = props => {
   // If commission is passed it will be shown as a fee already reduces from the total price
   let commissionItem = null;
 
+  // Flex Template for Web is using the default transaction process (https://www.sharetribe.com/docs/background/transaction-process/#sharetribe-flex-default-transaction-process)
+  // which containt provider commissions so by default the providerCommissionLineItem should exist.
+  // If you are not using provider commisison you might want to remove this whole component from BookingBreakdown.js file.
   if (isProvider && providerCommissionLineItem) {
     if (!isValidCommission(providerCommissionLineItem)) {
       // eslint-disable-next-line no-console
