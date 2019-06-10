@@ -1,0 +1,30 @@
+{
+  // The number of spaces in a tab.
+  "editor.tabSize": 2,
+  // Specifies workbench icon theme.
+  "workbench.iconTheme": "vscode-icons",
+  // Format a file on save.
+  "editor.formatOnSave": true,
+  // Support using flow through your node_modules folder. (For Flow)
+  "flow.useNPMPackagedFlow": true,
+  // Enable/disable JavaScript validation. (For Flow)
+  "javascript.validate.enable": false,
+  // Enable/disable default JavaScript formatter. (For Prettier)
+  "javascript.format.enable": false,
+  // vscode-icons extension will restart automatically on project detection. (For vscode-icons)
+  "vsicons.projectDetection.autoReload": true,
+  // Controls how the editor should render whitespace characters.
+  "editor.renderWhitespace": "boundary",
+  // Quickly toggle between hiding and showing folders and files. (For Peep)
+  // To quickly hide/show files execute the Peep Toggle in Command Palette.
+  "files.exclude": {
+    ".*": false,
+    "ios/": false,
+    "*.lo*": false,
+    "*.json": false,
+    "LICENSE": false,
+    "android/": false,
+    "__tests__": false,
+    "node_modules/": false
+  }
+}
