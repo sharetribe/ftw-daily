@@ -38,7 +38,7 @@ import {
   setInitialValues,
   speculateTransaction,
 } from './CheckoutPage.duck';
-import { createStripePaymentToken } from '../../ducks/stripe.duck.js';
+import { createStripePaymentToken, clearStripePaymentToken } from '../../ducks/stripe.duck.js';
 import config from '../../config';
 
 import { storeData, storedData, clearData } from './CheckoutPageSessionHelpers';
@@ -152,6 +152,7 @@ export class CheckoutPageComponent extends Component {
       sendOrderRequest,
       sendOrderRequestAfterEnquiry,
       speculatedTransaction,
+      onClearStripePaymentToken,
       dispatch,
     } = this.props;
 
@@ -190,6 +191,7 @@ export class CheckoutPageComponent extends Component {
         const orderDetailsPath = pathByRouteName('OrderDetailsPage', routes, {
           id: orderId.uuid,
         });
+        onClearStripePaymentToken();
         clearData(STORAGE_KEY);
         history.push(orderDetailsPath);
       })
@@ -606,6 +608,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(initiateOrderAfterEnquiry(transactionId, params)),
   fetchSpeculatedTransaction: params => dispatch(speculateTransaction(params)),
   onCreateStripePaymentToken: params => dispatch(createStripePaymentToken(params)),
+  onClearStripePaymentToken: () => dispatch(clearStripePaymentToken()),
 });
 
 const CheckoutPage = compose(
