@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+## [v2.17.1] 2019-06-11
+
 - [fix] `stripeCardToken` didn't update when the user tried to book the same listing for a second
   time. This update will clear the old cardtoken from Redux store when redirecting to
   `TransactionPage`. [#1114](https://github.com/sharetribe/flex-template-web/pull/1114)
@@ -27,6 +29,8 @@ way to update this template, but currently, we follow a pattern:
   in `ActivityFeed`. [#1106](https://github.com/sharetribe/flex-template-web/pull/1106)
 - [fix] Emptying the priceFilter component in the searchPage caused a page breaking error.
   [#1101](https://github.com/sharetribe/flex-template-web/pull/1101)
+
+  [v2.17.1]: https://github.com/sharetribe/flex-template-web/compare/v2.17.0...v2.17.1
 
 ## [v2.17.0] 2019-05-23
 
