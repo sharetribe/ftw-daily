@@ -46,6 +46,7 @@ import {
   setInitialValues,
   speculateTransaction,
   confirmPayment,
+  sendMessage,
 } from './CheckoutPage.duck';
 import { storeData, storedData, clearData } from './CheckoutPageSessionHelpers';
 import css from './CheckoutPage.css';
@@ -155,7 +156,7 @@ export class CheckoutPageComponent extends Component {
   }
 
   handlePaymentIntent(handlePaymentParams) {
-    const { onInitiateOrder, onHandleCardPayment, onConfirmPayment } = this.props;
+    const { onInitiateOrder, onHandleCardPayment, onConfirmPayment, onSendMessage } = this.props;
 
     // Step 1: initiate order by requesting payment from Marketplace API
     const fnRequestPayment = fnParams => {
@@ -211,9 +212,14 @@ export class CheckoutPageComponent extends Component {
     // Step 3: complete order by confirming payment to Marketplace API
     const fnConfirmPayment = fnParams => {
       // fnParams should include { paymentIntent }
+      return onConfirmPayment(fnParams);
+    };
+
+    // Step 4: send initial message
+    const fnSendMessage = fnParams => {
       const { message } = handlePaymentParams;
       const params = { ...fnParams, message };
-      return onConfirmPayment(params);
+      return onSendMessage(params);
     };
 
     // Here we create promise calls in sequence
@@ -226,7 +232,8 @@ export class CheckoutPageComponent extends Component {
     const handlePaymentIntentCreation = composeAsync(
       fnRequestPayment,
       fnHandleCardPayment,
-      fnConfirmPayment
+      fnConfirmPayment,
+      fnSendMessage
     );
 
     // Create order aka transaction
@@ -282,14 +289,14 @@ export class CheckoutPageComponent extends Component {
 
     this.handlePaymentIntent(requestPaymentParams)
       .then(res => {
-        const { orderId, initialMessageSuccess } = res;
+        const { orderId, messageSuccess } = res;
         this.setState({ submitting: false });
 
         const routes = routeConfiguration();
-        const initialMessageFailedToTransaction = initialMessageSuccess ? null : orderId;
+        const messageFailedToTransaction = messageSuccess ? null : orderId;
         const orderDetailsPath = pathByRouteName('OrderDetailsPage', routes, { id: orderId.uuid });
 
-        initializeOrderPage({ initialMessageFailedToTransaction }, routes, dispatch);
+        initializeOrderPage({ messageFailedToTransaction }, routes, dispatch);
         clearData(STORAGE_KEY);
         history.push(orderDetailsPath);
       })
@@ -709,6 +716,7 @@ const mapDispatchToProps = dispatch => ({
   fetchSpeculatedTransaction: params => dispatch(speculateTransaction(params)),
   onHandleCardPayment: params => dispatch(handleCardPayment(params)),
   onConfirmPayment: params => dispatch(confirmPayment(params)),
+  onSendMessage: params => dispatch(sendMessage(params)),
 });
 
 const CheckoutPage = compose(

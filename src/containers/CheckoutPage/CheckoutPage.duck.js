@@ -138,24 +138,6 @@ export const speculateTransactionError = e => ({
 
 /* ================ Thunks ================ */
 
-// TODO initial message should be sent at the confirm-payment transition.
-const sendInitialMessage = (initialMessage, orderId, sdk) => {
-  console.log('Sending initial meesage', initialMessage, orderId);
-  if (initialMessage) {
-    return sdk.messages
-      .send({ transactionId: orderId, content: initialMessage })
-      .then(() => {
-        return { orderId, initialMessageSuccess: true };
-      })
-      .catch(e => {
-        log.error(e, 'initial-message-send-failed', { txId: orderId });
-        return { orderId, initialMessageSuccess: false };
-      });
-  } else {
-    return Promise.resolve({ orderId, initialMessageSuccess: true });
-  }
-};
-
 export const initiateOrder = (orderParams, transactionId) => (dispatch, getState, sdk) => {
   dispatch(initiateOrderRequest());
   const bodyParams = transactionId
@@ -201,8 +183,6 @@ export const confirmPayment = orderParams => (dispatch, getState, sdk) => {
     params: orderParams,
   };
 
-  const initialMessage = orderParams.message;
-
   return sdk.transactions
     .transition(bodyParams)
     .then(response => {
@@ -220,6 +200,25 @@ export const confirmPayment = orderParams => (dispatch, getState, sdk) => {
       });
       throw e;
     });
+};
+
+export const sendMessage = params => (dispatch, getState, sdk) => {
+  const message = params.message;
+  const orderId = params.id;
+
+  if (message) {
+    return sdk.messages
+      .send({ transactionId: orderId, content: message })
+      .then(() => {
+        return { orderId, messageSuccess: true };
+      })
+      .catch(e => {
+        log.error(e, 'initial-message-send-failed', { txId: orderId });
+        return { orderId, messageSuccess: false };
+      });
+  } else {
+    return Promise.resolve({ orderId, messageSuccess: true });
+  }
 };
 
 /**
