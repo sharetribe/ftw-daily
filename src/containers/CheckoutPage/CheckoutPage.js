@@ -41,7 +41,13 @@ import { StripePaymentForm } from '../../forms';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import { handleCardPayment } from '../../ducks/stripe.duck.js';
 
-import { initiateOrder, setInitialValues, speculateTransaction } from './CheckoutPage.duck';
+import {
+  initiateOrder,
+  setInitialValues,
+  speculateTransaction,
+  confirmPayment,
+  sendMessage,
+} from './CheckoutPage.duck';
 import { storeData, storedData, clearData } from './CheckoutPageSessionHelpers';
 import css from './CheckoutPage.css';
 
@@ -150,32 +156,45 @@ export class CheckoutPageComponent extends Component {
   }
 
   handlePaymentIntent(handlePaymentParams) {
-    const {
-      onInitiateOrder,
-      onHandleCardPayment,
-      // onConfirmPayment,
-    } = this.props;
+    const { onInitiateOrder, onHandleCardPayment, onConfirmPayment, onSendMessage } = this.props;
 
     // Step 1: initiate order by requesting payment from Marketplace API
     const fnRequestPayment = fnParams => {
       // fnParams should be { listingId, bookingStart, bookingEnd }
-      const {
-        pageData,
-        stripePaymentIntentClientSecret,
-        stripePaymentIntentId,
-      } = handlePaymentParams;
+      const { pageData } = handlePaymentParams;
+
       const transactionId = pageData.enquiredTransaction ? pageData.enquiredTransaction.id : null;
-      return stripePaymentIntentClientSecret
-        ? Promise.resolve({ stripePaymentIntentClientSecret, stripePaymentIntentId })
+
+      // TODO
+      return false
+        ? Promise.resolve(pageData.enquiredTransaction)
         : onInitiateOrder(fnParams, transactionId);
     };
 
     // Step 2: pay using Stripe SDK
     const fnHandleCardPayment = fnParams => {
-      // fnParams should be { stripePaymentIntentClientSecret, stripePaymentIntentId }
+      // fnParams should be returned transaction entity
+      const order = ensureTransaction(fnParams, {}, null);
+
+      const hasPaymentIntents =
+        order.attributes.protectedData && order.attributes.protectedData.stripePaymentIntents;
+
+      if (!hasPaymentIntents) {
+        throw new Error(
+          `Missing StripePaymentIntents key in transaction's protectedData. Check that your transaction process is configured to use payment intents.`
+        );
+      }
+
+      const { stripePaymentIntentClientSecret } = hasPaymentIntents
+        ? order.attributes.protectedData.stripePaymentIntents.default
+        : null;
+      const orderId = order.id;
+
       const { stripe, card, billingDetails, paymentIntent } = handlePaymentParams;
+
       const params = {
-        ...fnParams,
+        stripePaymentIntentClientSecret,
+        orderId,
         stripe,
         card,
         paymentParams: {
@@ -193,9 +212,14 @@ export class CheckoutPageComponent extends Component {
     // Step 3: complete order by confirming payment to Marketplace API
     const fnConfirmPayment = fnParams => {
       // fnParams should include { paymentIntent }
+      return onConfirmPayment(fnParams);
+    };
+
+    // Step 4: send initial message
+    const fnSendMessage = fnParams => {
       const { message } = handlePaymentParams;
       const params = { ...fnParams, message };
-      return Promise.resolve(params); // onConfirmPayment(params, message);
+      return onSendMessage(params);
     };
 
     // Here we create promise calls in sequence
@@ -208,18 +232,21 @@ export class CheckoutPageComponent extends Component {
     const handlePaymentIntentCreation = composeAsync(
       fnRequestPayment,
       fnHandleCardPayment,
-      fnConfirmPayment
+      fnConfirmPayment,
+      fnSendMessage
     );
 
     // Create order aka transaction
     // NOTE: if unit type is line-item/units, quantity needs to be added.
     // The way to pass it to checkout page is through pageData.bookingData
     const { pageData, speculatedTransaction } = handlePaymentParams;
+
     const orderParams = {
       listingId: pageData.listing.id,
       bookingStart: speculatedTransaction.booking.attributes.start,
       bookingEnd: speculatedTransaction.booking.attributes.end,
     };
+
     return handlePaymentIntentCreation(orderParams);
   }
 
@@ -262,20 +289,14 @@ export class CheckoutPageComponent extends Component {
 
     this.handlePaymentIntent(requestPaymentParams)
       .then(res => {
-        const { orderId, initialMessageSuccess } = res;
+        const { orderId, messageSuccess } = res;
         this.setState({ submitting: false });
 
-        // TODO this should not happen, when everything is ready
-        if (orderId) {
-          return;
-        }
-
         const routes = routeConfiguration();
-        const initialMessageFailedToTransaction = initialMessageSuccess ? null : orderId;
-
+        const messageFailedToTransaction = messageSuccess ? null : orderId;
         const orderDetailsPath = pathByRouteName('OrderDetailsPage', routes, { id: orderId.uuid });
 
-        initializeOrderPage({ initialMessageFailedToTransaction }, routes, dispatch);
+        initializeOrderPage({ messageFailedToTransaction }, routes, dispatch);
         clearData(STORAGE_KEY);
         history.push(orderDetailsPath);
       })
@@ -694,6 +715,8 @@ const mapDispatchToProps = dispatch => ({
   onInitiateOrder: (params, transactionId) => dispatch(initiateOrder(params, transactionId)),
   fetchSpeculatedTransaction: params => dispatch(speculateTransaction(params)),
   onHandleCardPayment: params => dispatch(handleCardPayment(params)),
+  onConfirmPayment: params => dispatch(confirmPayment(params)),
+  onSendMessage: params => dispatch(sendMessage(params)),
 });
 
 const CheckoutPage = compose(
