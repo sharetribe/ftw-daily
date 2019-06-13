@@ -313,6 +313,7 @@ export class CheckoutPageComponent extends Component {
       speculateTransactionError,
       speculatedTransaction,
       initiateOrderError,
+      confirmPaymentError,
       intl,
       params,
       currentUser,
@@ -596,6 +597,7 @@ export class CheckoutPageComponent extends Component {
                   authorDisplayName={currentAuthor.attributes.profile.displayName}
                   showInitialMessageInput={showInitialMessageInput}
                   initialValues={initalValuesForStripePayment}
+                  confirmPaymentError={confirmPaymentError}
                   handleCardPaymentError={handleCardPaymentError}
                   paymentIntent={paymentIntent}
                 />
@@ -633,6 +635,7 @@ export class CheckoutPageComponent extends Component {
 
 CheckoutPageComponent.defaultProps = {
   initiateOrderError: null,
+  confirmPaymentError: null,
   listing: null,
   bookingData: {},
   bookingDates: null,
@@ -691,6 +694,7 @@ const mapStateToProps = state => {
     speculatedTransaction,
     enquiredTransaction,
     initiateOrderError,
+    confirmPaymentError,
   } = state.CheckoutPage;
   const { currentUser } = state.user;
   const { handleCardPaymentInProgress, handleCardPaymentError, paymentIntent } = state.stripe;
@@ -705,6 +709,7 @@ const mapStateToProps = state => {
     enquiredTransaction,
     listing,
     initiateOrderError,
+    confirmPaymentError,
     handleCardPaymentInProgress,
     handleCardPaymentError,
     paymentIntent,

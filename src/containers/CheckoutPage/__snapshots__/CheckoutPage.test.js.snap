@@ -88,11 +88,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
       <section>
         <InjectIntl(StripePaymentForm)
           authorDisplayName="author display name"
-          errors={
-            Object {
-              "handleCardPaymentError": undefined,
-            }
-          }
+          confirmPaymentError={null}
           formId="CheckoutPagePaymentForm"
           inProgress={false}
           initialValues={
