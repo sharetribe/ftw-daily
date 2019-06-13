@@ -102,6 +102,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
           }
           onSubmit={[Function]}
           paymentInfo="CheckoutPage.paymentInfo"
+          paymentIntent={null}
           showInitialMessageInput={true}
         />
       </section>

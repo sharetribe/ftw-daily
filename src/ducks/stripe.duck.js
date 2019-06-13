@@ -559,11 +559,6 @@ export const handleCardPayment = params => dispatch => {
 
       dispatch(handleCardPaymentError(e));
 
-      if (config.dev) {
-        // Print sensitive error object only to browser's console in dev mode
-        console.error('stripe.handleCardPayment failed with error', err);
-      }
-
       // Log error
       const { code, doc_url, message, payment_intent } = containsPaymentIntent ? err.error : {};
       const loggableError = containsPaymentIntent

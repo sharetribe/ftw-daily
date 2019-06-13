@@ -36,6 +36,11 @@
   color: var(--failColor);
 }
 
+.errorMessage {
+  margin-top: 24px;
+  color: var(--failColor);
+}
+
 .paymentHeading {
   margin: 0 0 14px 0;
   color: var(--matterColorAnti);

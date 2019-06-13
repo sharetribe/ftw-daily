@@ -137,7 +137,7 @@ const StripePaymentAddress = props => {
         id={`${fieldId}.state`}
         name="state"
         disabled={disabled}
-        className={css.state}
+        className={css.field}
         type="text"
         autoComplete="billing address-level1"
         label={stateLabel}
@@ -149,7 +149,7 @@ const StripePaymentAddress = props => {
         id={`${fieldId}.country`}
         name="country"
         disabled={disabled}
-        className={css.selectCountry}
+        className={css.field}
         label={countryLabel}
         validate={countryRequired}
       >

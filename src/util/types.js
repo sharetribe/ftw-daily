@@ -439,6 +439,7 @@ export const ERROR_CODE_VALIDATION_INVALID_VALUE = 'validation-invalid-value';
 export const ERROR_CODE_NOT_FOUND = 'not-found';
 export const ERROR_CODE_FORBIDDEN = 'forbidden';
 export const ERROR_CODE_MISSING_STRIPE_ACCOUNT = 'transaction-missing-stripe-account';
+export const EROOR_CODE_BOOKING_TIME_NOT_AVAILABLE = 'transaction-booking-time-not-available';
 
 const ERROR_CODES = [
   ERROR_CODE_TRANSACTION_LISTING_NOT_FOUND,
@@ -457,6 +458,7 @@ const ERROR_CODES = [
   ERROR_CODE_NOT_FOUND,
   ERROR_CODE_FORBIDDEN,
   ERROR_CODE_MISSING_STRIPE_ACCOUNT,
+  EROOR_CODE_BOOKING_TIME_NOT_AVAILABLE,
 ];
 
 // API error

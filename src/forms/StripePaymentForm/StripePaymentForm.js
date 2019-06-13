@@ -175,13 +175,12 @@ class StripePaymentForm extends Component {
       errors,
       invalid,
       handleSubmit,
-      disabled,
       form,
+      handleCardPaymentError,
     } = formRenderProps;
 
     this.finalFormAPI = form;
-
-    const { requestPaymentError, handleCardPaymentError, confirmPaymentError } = errors || {};
+    const { requestPaymentError } = errors || {};
     const submitDisabled = invalid || !this.state.cardValueValid || submitInProgress;
     const hasCardError = this.state.error && !submitInProgress;
     const hasSubmitErrors = handleCardPaymentError;
@@ -207,32 +206,6 @@ class StripePaymentForm extends Component {
     const billingDetailsNamePlaceholder = intl.formatMessage({
       id: 'StripePaymentForm.billingDetailsNamePlaceholder',
     });
-
-    const billingDetails = (
-      <div className={css.paymentAddressField}>
-        <h3 className={css.billingHeading}>
-          <FormattedMessage id="StripePaymentForm.billingDetails" />
-        </h3>
-
-        <FieldTextInput
-          className={css.field}
-          type="text"
-          id="name"
-          name="name"
-          autoComplete="cc-name"
-          label={billingDetailsNameLabel}
-          placeholder={billingDetailsNamePlaceholder}
-        />
-
-        <StripePaymentAddress
-          intl={intl}
-          disabled={disabled}
-          form={form}
-          fieldId={formId}
-          card={this.card}
-        />
-      </div>
-    );
 
     const messagePlaceholder = intl.formatMessage(
       { id: 'StripePaymentForm.messagePlaceholder' },
@@ -265,7 +238,8 @@ class StripePaymentForm extends Component {
       </div>
     ) : null;
 
-    return config.stripe.publishableKey ? (
+    const hasStripeKey = config.stripe.publishableKey;
+    return hasStripeKey ? (
       <Form className={classes} onSubmit={handleSubmit}>
         <h3 className={css.paymentHeading}>
           <FormattedMessage id="StripePaymentForm.paymentHeading" />

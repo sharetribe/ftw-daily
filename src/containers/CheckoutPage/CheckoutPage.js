@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { bool, func, instanceOf, object, shape, string } from 'prop-types';
+import { bool, func, instanceOf, object, oneOfType, shape, string } from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
@@ -318,6 +318,7 @@ export class CheckoutPageComponent extends Component {
       currentUser,
       handleCardPaymentInProgress,
       handleCardPaymentError,
+      paymentIntent,
     } = this.props;
 
     // Since the listing data is already given from the ListingPage
@@ -594,10 +595,9 @@ export class CheckoutPageComponent extends Component {
                   paymentInfo={intl.formatMessage({ id: 'CheckoutPage.paymentInfo' })}
                   authorDisplayName={currentAuthor.attributes.profile.displayName}
                   showInitialMessageInput={showInitialMessageInput}
-                  errors={{
-                    handleCardPaymentError,
-                  }}
                   initialValues={initalValuesForStripePayment}
+                  handleCardPaymentError={handleCardPaymentError}
+                  paymentIntent={paymentIntent}
                 />
               ) : null}
             </section>
@@ -665,7 +665,8 @@ CheckoutPageComponent.propTypes = {
   onInitiateOrder: func.isRequired,
   onHandleCardPayment: func.isRequired,
   handleCardPaymentInProgress: bool.isRequired,
-  handleCardPaymentError: propTypes.error,
+  // handleCardPaymentError comes from Stripe so that's why we can't expect it to be in a specific form
+  handleCardPaymentError: oneOfType([propTypes.error, object]),
   paymentIntent: object,
 
   // from connect
