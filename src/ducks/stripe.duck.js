@@ -23,9 +23,12 @@ export const CREATE_PAYMENT_TOKEN_SUCCESS = 'app/stripe/CREATE_PAYMENT_TOKEN_SUC
 export const CREATE_PAYMENT_TOKEN_ERROR = 'app/stripe/CREATE_PAYMENT_TOKEN_ERROR';
 
 export const CLEAR_PAYMENT_TOKEN = 'app/stripe/CLEAR_PAYMENT_TOKEN';
+
 export const HANDLE_CARD_PAYMENT_REQUEST = 'app/stripe/HANDLE_CARD_PAYMENT_REQUEST';
 export const HANDLE_CARD_PAYMENT_SUCCESS = 'app/stripe/HANDLE_CARD_PAYMENT_SUCCESS';
 export const HANDLE_CARD_PAYMENT_ERROR = 'app/stripe/HANDLE_CARD_PAYMENT_ERROR';
+
+export const CLEAR_HANDLE_CARD_PAYMENT = 'app/stripe/CLEAR_HANDLE_CARD_PAYMENT';
 
 // ================ Reducer ================ //
 
@@ -135,6 +138,13 @@ export default function reducer(state = initialState, action = {}) {
       console.error(payload);
       return { ...state, handleCardPaymentError: payload, handleCardPaymentInProgress: false };
 
+    case CLEAR_HANDLE_CARD_PAYMENT:
+      return {
+        ...state,
+        handleCardPaymentInProgress: false,
+        handleCardPaymentError: null,
+        paymentIntent: null,
+      };
     default:
       return state;
   }
@@ -223,6 +233,10 @@ export const handleCardPaymentError = payload => ({
   type: HANDLE_CARD_PAYMENT_ERROR,
   payload,
   error: true,
+});
+
+export const initializeCardPaymentData = () => ({
+  type: CLEAR_HANDLE_CARD_PAYMENT,
 });
 
 // ================ Thunks ================ //
