@@ -175,16 +175,16 @@ class StripePaymentForm extends Component {
       errors,
       invalid,
       handleSubmit,
-      disabled,
       form,
+      confirmPaymentError,
+      handleCardPaymentError,
     } = formRenderProps;
 
     this.finalFormAPI = form;
-
-    const { requestPaymentError, handleCardPaymentError, confirmPaymentError } = errors || {};
+    const { requestPaymentError } = errors || {};
     const submitDisabled = invalid || !this.state.cardValueValid || submitInProgress;
     const hasCardError = this.state.error && !submitInProgress;
-    const hasSubmitErrors = handleCardPaymentError;
+    const hasSubmitErrors = handleCardPaymentError || confirmPaymentError;
     const classes = classNames(rootClassName || css.root, className);
     const cardClasses = classNames(css.card, {
       [css.cardSuccess]: this.state.cardValueValid,
@@ -197,7 +197,7 @@ class StripePaymentForm extends Component {
       : handleCardPaymentError
       ? handleCardPaymentError.message
       : confirmPaymentError
-      ? confirmPaymentError.message
+      ? intl.formatMessage({ id: 'StripePaymentForm.confirmPaymentError' })
       : intl.formatMessage({ id: 'StripePaymentForm.genericError' });
 
     const billingDetailsNameLabel = intl.formatMessage({
@@ -207,32 +207,6 @@ class StripePaymentForm extends Component {
     const billingDetailsNamePlaceholder = intl.formatMessage({
       id: 'StripePaymentForm.billingDetailsNamePlaceholder',
     });
-
-    const billingDetails = (
-      <div className={css.paymentAddressField}>
-        <h3 className={css.billingHeading}>
-          <FormattedMessage id="StripePaymentForm.billingDetails" />
-        </h3>
-
-        <FieldTextInput
-          className={css.field}
-          type="text"
-          id="name"
-          name="name"
-          autoComplete="cc-name"
-          label={billingDetailsNameLabel}
-          placeholder={billingDetailsNamePlaceholder}
-        />
-
-        <StripePaymentAddress
-          intl={intl}
-          disabled={disabled}
-          form={form}
-          fieldId={formId}
-          card={this.card}
-        />
-      </div>
-    );
 
     const messagePlaceholder = intl.formatMessage(
       { id: 'StripePaymentForm.messagePlaceholder' },
@@ -265,24 +239,48 @@ class StripePaymentForm extends Component {
       </div>
     ) : null;
 
-    return config.stripe.publishableKey ? (
+    const hasStripeKey = config.stripe.publishableKey;
+
+    return hasStripeKey ? (
       <Form className={classes} onSubmit={handleSubmit}>
-        <h3 className={css.paymentHeading}>
-          <FormattedMessage id="StripePaymentForm.paymentHeading" />
-        </h3>
-        <label className={css.paymentLabel} htmlFor={`${formId}-card`}>
-          <FormattedMessage id="StripePaymentForm.creditCardDetails" />
-        </label>
-        <div
-          className={cardClasses}
-          id={`${formId}-card`}
-          ref={el => {
-            this.cardContainer = el;
-          }}
-        />
-        {hasCardError ? <span className={css.error}>{this.state.error}</span> : null}
-        {billingDetails}
-        {hasSubmitErrors ? <span className={css.error}>{submitErrorMessage}</span> : null}
+        {confirmPaymentError ? null : (
+          <React.Fragment>
+            <h3 className={css.paymentHeading}>
+              <FormattedMessage id="StripePaymentForm.paymentHeading" />
+            </h3>
+            <label className={css.paymentLabel} htmlFor={`${formId}-card`}>
+              <FormattedMessage id="StripePaymentForm.creditCardDetails" />
+            </label>
+
+            <div
+              className={cardClasses}
+              id={`${formId}-card`}
+              ref={el => {
+                this.cardContainer = el;
+              }}
+            />
+            {hasCardError ? <span className={css.error}>{this.state.error}</span> : null}
+            <div className={css.paymentAddressField}>
+              <h3 className={css.billingHeading}>
+                <FormattedMessage id="StripePaymentForm.billingDetails" />
+              </h3>
+
+              <FieldTextInput
+                className={css.field}
+                type="text"
+                id="name"
+                name="name"
+                autoComplete="cc-name"
+                label={billingDetailsNameLabel}
+                placeholder={billingDetailsNamePlaceholder}
+              />
+
+              <StripePaymentAddress intl={intl} form={form} fieldId={formId} card={this.card} />
+            </div>
+          </React.Fragment>
+        )}
+
+        {hasSubmitErrors ? <span className={css.errorMessage}>{submitErrorMessage}</span> : null}
         {initialMessage}
         <div className={css.submitContainer}>
           <p className={css.paymentInfo}>{paymentInfo}</p>
@@ -292,7 +290,11 @@ class StripePaymentForm extends Component {
             inProgress={submitInProgress}
             disabled={submitDisabled}
           >
-            <FormattedMessage id="StripePaymentForm.submitPaymentInfo" />
+            {!confirmPaymentError ? (
+              <FormattedMessage id="StripePaymentForm.submitPaymentInfo" />
+            ) : (
+              <FormattedMessage id="StripePaymentForm.submitConfirmPaymentInfo" />
+            )}
           </PrimaryButton>
         </div>
       </Form>

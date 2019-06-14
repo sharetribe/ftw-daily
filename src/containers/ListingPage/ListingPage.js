@@ -27,6 +27,7 @@ import {
 import { richText } from '../../util/richText';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
+import { initializeCardPaymentData } from '../../ducks/stripe.duck.js';
 import {
   Page,
   NamedLink,
@@ -90,7 +91,13 @@ export class ListingPageComponent extends Component {
   }
 
   handleSubmit(values) {
-    const { history, getListing, params, callSetInitialValues } = this.props;
+    const {
+      history,
+      getListing,
+      params,
+      callSetInitialValues,
+      onInitializeCardPaymentData,
+    } = this.props;
     const listingId = new UUID(params.id);
     const listing = getListing(listingId);
 
@@ -103,12 +110,16 @@ export class ListingPageComponent extends Component {
         bookingStart: bookingDates.startDate,
         bookingEnd: bookingDates.endDate,
       },
+      confirmPaymentError: null,
     };
 
     const routes = routeConfiguration();
     // Customize checkout page state with current listing and selected bookingDates
     const { setInitialValues } = findRouteByRouteName('CheckoutPage', routes);
     callSetInitialValues(setInitialValues, initialValues);
+
+    // Clear previous Stripe errors from store if there is any
+    onInitializeCardPaymentData();
 
     // Redirect to CheckoutPage
     history.push(
@@ -512,6 +523,7 @@ ListingPageComponent.propTypes = {
   sendEnquiryInProgress: bool.isRequired,
   sendEnquiryError: propTypes.error,
   onSendEnquiry: func.isRequired,
+  onInitializeCardPaymentData: func.isRequired,
 
   categoriesConfig: array,
   amenitiesConfig: array,
@@ -565,6 +577,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
   callSetInitialValues: (setInitialValues, values) => dispatch(setInitialValues(values)),
   onSendEnquiry: (listingId, message) => dispatch(sendEnquiry(listingId, message)),
+  onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
 });
 
 // Note: it is important that the withRouter HOC is **outside** the

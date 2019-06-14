@@ -12,6 +12,7 @@ import { ensureListing, ensureTransaction } from '../../util/data';
 import { createSlug } from '../../util/urlHelpers';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { isScrollingDisabled, manageDisableScrolling } from '../../ducks/UI.duck';
+import { initializeCardPaymentData } from '../../ducks/stripe.duck.js';
 import {
   NamedRedirect,
   TransactionPanel,
@@ -72,6 +73,7 @@ export const TransactionPageComponent = props => {
     timeSlots,
     fetchTimeSlotsError,
     callSetInitialValues,
+    onInitializeCardPaymentData,
   } = props;
 
   const currentTransaction = ensureTransaction(transaction);
@@ -88,12 +90,16 @@ export const TransactionPageComponent = props => {
         bookingStart: bookingDates.startDate,
         bookingEnd: bookingDates.endDate,
       },
+      confirmPaymentError: null,
     };
 
     const routes = routeConfiguration();
     // Customize checkout page state with current listing and selected bookingDates
     const { setInitialValues } = findRouteByRouteName('CheckoutPage', routes);
     callSetInitialValues(setInitialValues, initialValues);
+
+    // Clear previous Stripe errors from store if there is any
+    onInitializeCardPaymentData();
 
     // Redirect to CheckoutPage
     history.push(
@@ -265,6 +271,7 @@ TransactionPageComponent.propTypes = {
   timeSlots: arrayOf(propTypes.timeSlot),
   fetchTimeSlotsError: propTypes.error,
   callSetInitialValues: func.isRequired,
+  onInitializeCardPaymentData: func.isRequired,
 
   // from withRouter
   history: shape({
@@ -339,6 +346,7 @@ const mapDispatchToProps = dispatch => {
     onSendReview: (role, tx, reviewRating, reviewContent) =>
       dispatch(sendReview(role, tx, reviewRating, reviewContent)),
     callSetInitialValues: (setInitialValues, values) => dispatch(setInitialValues(values)),
+    onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
   };
 };
 

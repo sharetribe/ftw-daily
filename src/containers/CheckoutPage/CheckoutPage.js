@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { bool, func, instanceOf, object, shape, string } from 'prop-types';
+import { bool, func, instanceOf, object, oneOfType, shape, string } from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
@@ -313,11 +313,13 @@ export class CheckoutPageComponent extends Component {
       speculateTransactionError,
       speculatedTransaction,
       initiateOrderError,
+      confirmPaymentError,
       intl,
       params,
       currentUser,
       handleCardPaymentInProgress,
       handleCardPaymentError,
+      paymentIntent,
     } = this.props;
 
     // Since the listing data is already given from the ListingPage
@@ -594,10 +596,10 @@ export class CheckoutPageComponent extends Component {
                   paymentInfo={intl.formatMessage({ id: 'CheckoutPage.paymentInfo' })}
                   authorDisplayName={currentAuthor.attributes.profile.displayName}
                   showInitialMessageInput={showInitialMessageInput}
-                  errors={{
-                    handleCardPaymentError,
-                  }}
                   initialValues={initalValuesForStripePayment}
+                  confirmPaymentError={confirmPaymentError}
+                  handleCardPaymentError={handleCardPaymentError}
+                  paymentIntent={paymentIntent}
                 />
               ) : null}
             </section>
@@ -633,6 +635,7 @@ export class CheckoutPageComponent extends Component {
 
 CheckoutPageComponent.defaultProps = {
   initiateOrderError: null,
+  confirmPaymentError: null,
   listing: null,
   bookingData: {},
   bookingDates: null,
@@ -665,7 +668,8 @@ CheckoutPageComponent.propTypes = {
   onInitiateOrder: func.isRequired,
   onHandleCardPayment: func.isRequired,
   handleCardPaymentInProgress: bool.isRequired,
-  handleCardPaymentError: propTypes.error,
+  // handleCardPaymentError comes from Stripe so that's why we can't expect it to be in a specific form
+  handleCardPaymentError: oneOfType([propTypes.error, object]),
   paymentIntent: object,
 
   // from connect
@@ -690,6 +694,7 @@ const mapStateToProps = state => {
     speculatedTransaction,
     enquiredTransaction,
     initiateOrderError,
+    confirmPaymentError,
   } = state.CheckoutPage;
   const { currentUser } = state.user;
   const { handleCardPaymentInProgress, handleCardPaymentError, paymentIntent } = state.stripe;
@@ -704,6 +709,7 @@ const mapStateToProps = state => {
     enquiredTransaction,
     listing,
     initiateOrderError,
+    confirmPaymentError,
     handleCardPaymentInProgress,
     handleCardPaymentError,
     paymentIntent,
