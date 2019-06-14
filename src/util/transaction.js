@@ -25,6 +25,10 @@ export const TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY = 'transition/request-paym
 // to tell that the payment is confirmed.
 export const TRANSITION_CONFIRM_PAYMENT = 'transition/confirm-payment';
 
+// If the payment is not confirmed in the time limit set in transaction process (by default 15min)
+// the transaction will expire automatically.
+export const TRANSITION_EXPIRE_PAYMENT = 'transition/expire-payment';
+
 // When the provider accepts or declines a transaction from the
 // SalePage, it is transitioned with the accept or decline transition.
 export const TRANSITION_ACCEPT = 'transition/accept';
@@ -81,6 +85,7 @@ export const TX_TRANSITION_ACTORS = [
 const STATE_INITIAL = 'initial';
 const STATE_ENQUIRY = 'enquiry';
 const STATE_PENDING_PAYMENT = 'pending-payment';
+const STATE_PAYMENT_EXPIRED = 'payment-expired';
 const STATE_PREAUTHORIZED = 'preauthorized';
 const STATE_DECLINED = 'declined';
 const STATE_ACCEPTED = 'accepted';
@@ -124,10 +129,12 @@ const stateDescription = {
 
     [STATE_PENDING_PAYMENT]: {
       on: {
+        [TRANSITION_EXPIRE_PAYMENT]: STATE_PAYMENT_EXPIRED,
         [TRANSITION_CONFIRM_PAYMENT]: STATE_PREAUTHORIZED,
       },
     },
 
+    [STATE_PAYMENT_EXPIRED]: {},
     [STATE_PREAUTHORIZED]: {
       on: {
         [TRANSITION_DECLINE]: STATE_DECLINED,
@@ -220,6 +227,9 @@ export const txIsEnquired = tx =>
 // However, word "requested" is used in many places so that we decided to keep it.
 export const txIsRequested = tx =>
   getTransitionsToState(STATE_PREAUTHORIZED).includes(txLastTransition(tx));
+
+export const txIsExpired = tx =>
+  getTransitionsToState(STATE_PAYMENT_EXPIRED).includes(txLastTransition(tx));
 
 export const txIsAccepted = tx =>
   getTransitionsToState(STATE_ACCEPTED).includes(txLastTransition(tx));
