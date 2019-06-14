@@ -783,7 +783,7 @@
   "StripePaymentAddress.cityPlaceholder": "Helsinki",
   "StripePaymentAddress.cityRequired": "City is required",
   "StripePaymentAddress.countryLabel": "Country",
-  "StripePaymentAddress.countryPlaceholder": "Finland",
+  "StripePaymentAddress.countryPlaceholder": "Select a country…",
   "StripePaymentAddress.countryRequired": "Country is required",
   "StripePaymentAddress.optionalText": "• optional",
   "StripePaymentAddress.postalCodeLabel": "Postal code",
