@@ -2,46 +2,52 @@
  * Marketplace specific configuration.
  */
 
-export const amenities = [
+export const skills = [
   {
-    key: 'towels',
-    label: 'Towels',
+    key: 'singing',
+    label: 'Singing',
   },
   {
-    key: 'bathroom',
-    label: 'Bathroom',
+    key: 'rap',
+    label: 'Rap',
   },
   {
-    key: 'swimming_pool',
-    label: 'Swimming pool',
+    key: 'bass',
+    label: 'Bass',
   },
   {
-    key: 'own_drinks',
-    label: 'Own drinks allowed',
+    key: 'drummer',
+    label: 'Drummer',
   },
   {
-    key: 'jacuzzi',
-    label: 'Jacuzzi',
+    key: 'musicproduce',
+    label: 'Music Production',
   },
   {
-    key: 'audiovisual_entertainment',
-    label: 'Audiovisual entertainment',
+    key: 'dj',
+    label: 'DJ',
   },
   {
-    key: 'barbeque',
-    label: 'Barbeque',
+    key: 'audioengineer',
+    label: 'Audio Engineer',
   },
   {
-    key: 'own_food_allowed',
-    label: 'Own food allowed',
+    key: 'guitarist',
+    label: 'Guitar',
+  },
+  {
+    key: 'piano',
+    label: 'Piano',
   },
 ];
 
 export const categories = [
-  { key: 'smoke', label: 'Smoke' },
-  { key: 'electric', label: 'Electric' },
-  { key: 'wood', label: 'Wood' },
-  { key: 'other', label: 'Other' },
+  { key: 'singer', label: 'Singer' },
+  { key: 'drummer', label: 'Drummer' },
+  { key: 'stagehand', label: 'Stagehand' },
+  { key: 'rapper', label: 'Rapper' },
+  { key: 'productioncrew', label: 'Production Crew' },
+  { key: 'stagehand', label: 'Stagehand' },
 ];
 
 // Price filter configuration
