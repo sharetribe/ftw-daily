@@ -16,12 +16,14 @@ import { Modal, NamedRedirect, Tabs } from '../../components';
 
 import EditListingWizardTab, {
   AVAILABILITY,
-  DESCRIPTION,
+  ARTISTINFO,
+  BIOGRAPHY,
   FEATURES,
   POLICY,
   LOCATION,
   PRICING,
   PHOTOS,
+  UPCOMINGSHOWS
 } from './EditListingWizardTab';
 import css from './EditListingWizard.css';
 
@@ -31,8 +33,9 @@ const availabilityMaybe = config.enableAvailability ? [AVAILABILITY] : [];
 // TODO: PHOTOS panel needs to be the last one since it currently contains PayoutDetailsForm modal
 // All the other panels can be reordered.
 export const TABS = [
-  DESCRIPTION,
+  ARTISTINFO,
   FEATURES,
+  BIOGRAPHY,
   POLICY,
   LOCATION,
   PRICING,
@@ -45,8 +48,8 @@ const MAX_HORIZONTAL_NAV_SCREEN_WIDTH = 1023;
 
 const tabLabel = (intl, tab) => {
   let key = null;
-  if (tab === DESCRIPTION) {
-    key = 'EditListingWizard.tabLabelDescription';
+  if (tab === ARTISTINFO) {
+    key = 'EditListingWizard.tabLabelArtistinfo';
   } else if (tab === FEATURES) {
     key = 'EditListingWizard.tabLabelFeatures';
   } else if (tab === POLICY) {
@@ -75,7 +78,8 @@ const tabLabel = (intl, tab) => {
 const tabCompleted = (tab, listing) => {
   const {
     availabilityPlan,
-    description,
+    artistinfo,
+    biography,
     geolocation,
     price,
     title,
@@ -84,10 +88,12 @@ const tabCompleted = (tab, listing) => {
   const images = listing.images;
 
   switch (tab) {
-    case DESCRIPTION:
-      return !!(description && title);
+    case ARTISTINFO:
+      return !!(artistinfo && title);
+    case BIOGRAPHY:
+      return !!(biography && publicData);
     case FEATURES:
-      return !!(publicData && publicData.amenities);
+      return !!(publicData && publicData.skills);
     case POLICY:
       return !!(publicData && typeof publicData.rules !== 'undefined');
     case LOCATION:
