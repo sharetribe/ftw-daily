@@ -62,6 +62,14 @@ const initializeOrderPage = (initialValues, routes, dispatch) => {
   dispatch(OrderPage.setInitialValues(initialValues));
 };
 
+const checkIsPaymentExpired = existingTransaction => {
+  return txIsPaymentExpired(existingTransaction)
+    ? true
+    : txIsPaymentPending(existingTransaction)
+    ? minutesBetween(existingTransaction.attributes.lastTransitionedAt, new Date()) >= 15
+    : false;
+};
+
 export class CheckoutPageComponent extends Component {
   constructor(props) {
     super(props);
@@ -390,11 +398,7 @@ export class CheckoutPageComponent extends Component {
         />
       ) : null;
 
-    const isPaymentExpired = txIsPaymentExpired(existingTransaction)
-      ? true
-      : txIsPaymentPending(existingTransaction)
-      ? minutesBetween(existingTransaction.attributes.lastTransitionedAt, new Date()) >= 15
-      : false;
+    const isPaymentExpired = checkIsPaymentExpired(existingTransaction);
 
     // Allow showing page when currentUser is still being downloaded,
     // but show payment form only when user info is loaded.

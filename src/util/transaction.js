@@ -223,16 +223,16 @@ const txLastTransition = tx => ensureTransaction(tx).attributes.lastTransition;
 export const txIsEnquired = tx =>
   getTransitionsToState(STATE_ENQUIRY).includes(txLastTransition(tx));
 
-// Note: state name used in Marketplace API docs (and here) is actually preauthorized
-// However, word "requested" is used in many places so that we decided to keep it.
-export const txIsRequested = tx =>
-  getTransitionsToState(STATE_PREAUTHORIZED).includes(txLastTransition(tx));
-
 export const txIsPaymentPending = tx =>
   getTransitionsToState(STATE_PENDING_PAYMENT).includes(txLastTransition(tx));
 
 export const txIsPaymentExpired = tx =>
   getTransitionsToState(STATE_PAYMENT_EXPIRED).includes(txLastTransition(tx));
+
+// Note: state name used in Marketplace API docs (and here) is actually preauthorized
+// However, word "requested" is used in many places so that we decided to keep it.
+export const txIsRequested = tx =>
+  getTransitionsToState(STATE_PREAUTHORIZED).includes(txLastTransition(tx));
 
 export const txIsAccepted = tx =>
   getTransitionsToState(STATE_ACCEPTED).includes(txLastTransition(tx));

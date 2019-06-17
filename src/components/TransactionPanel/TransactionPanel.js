@@ -7,6 +7,8 @@ import {
   txIsCanceled,
   txIsDeclined,
   txIsEnquired,
+  txIsPaymentExpired,
+  txIsPaymentPending,
   txIsRequested,
   txHasBeenDelivered,
 } from '../../util/transaction';
@@ -32,6 +34,8 @@ import FeedSection from './FeedSection';
 import SaleActionButtonsMaybe from './SaleActionButtonsMaybe';
 import PanelHeading, {
   HEADING_ENQUIRED,
+  HEADING_PAYMENT_PENDING,
+  HEADING_PAYMENT_EXPIRED,
   HEADING_REQUESTED,
   HEADING_ACCEPTED,
   HEADING_DECLINED,
@@ -201,6 +205,16 @@ export class TransactionPanelComponent extends Component {
         return {
           headingState: HEADING_ENQUIRED,
           showBookingPanel: isCustomer && !isProviderBanned,
+        };
+      } else if (txIsPaymentPending(tx)) {
+        return {
+          headingState: HEADING_PAYMENT_PENDING,
+          showDetailCardHeadings: isCustomer,
+        };
+      } else if (txIsPaymentExpired(tx)) {
+        return {
+          headingState: HEADING_PAYMENT_EXPIRED,
+          showDetailCardHeadings: isCustomer,
         };
       } else if (txIsRequested(tx)) {
         return {

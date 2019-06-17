@@ -7,6 +7,8 @@ import { NamedLink } from '../../components';
 import css from './TransactionPanel.css';
 
 export const HEADING_ENQUIRED = 'enquired';
+export const HEADING_PAYMENT_PENDING = 'pending-payment';
+export const HEADING_PAYMENT_EXPIRED = 'payment-expired';
 export const HEADING_REQUESTED = 'requested';
 export const HEADING_ACCEPTED = 'accepted';
 export const HEADING_DECLINED = 'declined';
@@ -121,6 +123,38 @@ const PanelHeading = props => {
         <HeadingProvider
           className={titleClasses}
           id="TransactionPanel.saleEnquiredTitle"
+          values={{ customerName, listingLink }}
+          isCustomerBanned={isCustomerBanned}
+        />
+      );
+    case HEADING_PAYMENT_PENDING:
+      return isCustomer ? (
+        <HeadingCustomer
+          className={titleClasses}
+          id="TransactionPanel.orderPaymentPendingTitle"
+          values={{ listingLink }}
+          listingDeleted={listingDeleted}
+        />
+      ) : (
+        <HeadingProvider
+          className={titleClasses}
+          id="TransactionPanel.salePaymentPendingTitle"
+          values={{ customerName, listingLink }}
+          isCustomerBanned={isCustomerBanned}
+        />
+      );
+    case HEADING_PAYMENT_EXPIRED:
+      return isCustomer ? (
+        <HeadingCustomer
+          className={titleClasses}
+          id="TransactionPanel.orderPaymentExpiredTitle"
+          values={{ listingLink }}
+          listingDeleted={listingDeleted}
+        />
+      ) : (
+        <HeadingProvider
+          className={titleClasses}
+          id="TransactionPanel.salePaymentExpiredTitle"
           values={{ customerName, listingLink }}
           isCustomerBanned={isCustomerBanned}
         />
