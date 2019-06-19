@@ -18,11 +18,17 @@ export const PERSON_CREATE_REQUEST = 'app/stripe/PERSON_CREATE_REQUEST';
 export const PERSON_CREATE_SUCCESS = 'app/stripe/PERSON_CREATE_SUCCESS';
 export const PERSON_CREATE_ERROR = 'app/stripe/PERSON_CREATE_ERROR';
 
-export const CREATE_PAYMENT_TOKEN_REQUEST = 'app/stripe/CREATE_PAYMENT_TOKEN_REQUEST';
-export const CREATE_PAYMENT_TOKEN_SUCCESS = 'app/stripe/CREATE_PAYMENT_TOKEN_SUCCESS';
-export const CREATE_PAYMENT_TOKEN_ERROR = 'app/stripe/CREATE_PAYMENT_TOKEN_ERROR';
-
 export const CLEAR_PAYMENT_TOKEN = 'app/stripe/CLEAR_PAYMENT_TOKEN';
+
+export const HANDLE_CARD_PAYMENT_REQUEST = 'app/stripe/HANDLE_CARD_PAYMENT_REQUEST';
+export const HANDLE_CARD_PAYMENT_SUCCESS = 'app/stripe/HANDLE_CARD_PAYMENT_SUCCESS';
+export const HANDLE_CARD_PAYMENT_ERROR = 'app/stripe/HANDLE_CARD_PAYMENT_ERROR';
+
+export const CLEAR_HANDLE_CARD_PAYMENT = 'app/stripe/CLEAR_HANDLE_CARD_PAYMENT';
+
+export const RETRIEVE_PAYMENT_INTENT_REQUEST = 'app/stripe/RETRIEVE_PAYMENT_INTENT_REQUEST';
+export const RETRIEVE_PAYMENT_INTENT_SUCCESS = 'app/stripe/RETRIEVE_PAYMENT_INTENT_SUCCESS';
+export const RETRIEVE_PAYMENT_INTENT_ERROR = 'app/stripe/RETRIEVE_PAYMENT_INTENT_ERROR';
 
 // ================ Reducer ================ //
 
@@ -35,9 +41,11 @@ const initialState = {
   persons: [],
   stripeAccount: null,
   stripeAccountFetched: false,
-  stripePaymentTokenInProgress: false,
-  stripePaymentTokenError: null,
-  stripePaymentToken: null,
+  handleCardPaymentInProgress: false,
+  handleCardPaymentError: null,
+  paymentIntent: null,
+  retrievePaymentIntentInProgress: false,
+  retrievePaymentIntentError: null,
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -103,19 +111,41 @@ export default function reducer(state = initialState, action = {}) {
         }),
       };
 
-    case CREATE_PAYMENT_TOKEN_REQUEST:
+    case HANDLE_CARD_PAYMENT_REQUEST:
       return {
         ...state,
-        stripePaymentTokenError: null,
-        stripePaymentTokenInProgress: true,
+        handleCardPaymentError: null,
+        handleCardPaymentInProgress: true,
       };
-    case CREATE_PAYMENT_TOKEN_SUCCESS:
-      return { ...state, stripePaymentTokenInProgress: false, stripePaymentToken: payload };
-    case CREATE_PAYMENT_TOKEN_ERROR:
+    case HANDLE_CARD_PAYMENT_SUCCESS:
+      return { ...state, paymentIntent: payload, handleCardPaymentInProgress: false };
+    case HANDLE_CARD_PAYMENT_ERROR:
       console.error(payload);
-      return { ...state, stripePaymentTokenError: payload, stripePaymentTokenInProgress: false };
-    case CLEAR_PAYMENT_TOKEN:
-      return { ...state, stripePaymentToken: null };
+      return { ...state, handleCardPaymentError: payload, handleCardPaymentInProgress: false };
+
+    case CLEAR_HANDLE_CARD_PAYMENT:
+      return {
+        ...state,
+        handleCardPaymentInProgress: false,
+        handleCardPaymentError: null,
+        paymentIntent: null,
+      };
+
+    case RETRIEVE_PAYMENT_INTENT_REQUEST:
+      return {
+        ...state,
+        retrievePaymentIntentError: null,
+        retrievePaymentIntentInProgress: true,
+      };
+    case RETRIEVE_PAYMENT_INTENT_SUCCESS:
+      return { ...state, paymentIntent: payload, retrievePaymentIntentInProgress: false };
+    case RETRIEVE_PAYMENT_INTENT_ERROR:
+      console.error(payload);
+      return {
+        ...state,
+        retrievePaymentIntentError: payload,
+        retrievePaymentIntentInProgress: false,
+      };
 
     default:
       return state;
@@ -173,23 +203,38 @@ export const personCreateError = payload => ({
   error: true,
 });
 
-export const createPaymentTokenRequest = () => ({
-  type: CREATE_PAYMENT_TOKEN_REQUEST,
+export const handleCardPaymentRequest = () => ({
+  type: HANDLE_CARD_PAYMENT_REQUEST,
 });
 
-export const createPaymentTokenSuccess = payload => ({
-  type: CREATE_PAYMENT_TOKEN_SUCCESS,
+export const handleCardPaymentSuccess = payload => ({
+  type: HANDLE_CARD_PAYMENT_SUCCESS,
   payload,
 });
 
-export const createPaymentTokenError = payload => ({
-  type: CREATE_PAYMENT_TOKEN_ERROR,
+export const handleCardPaymentError = payload => ({
+  type: HANDLE_CARD_PAYMENT_ERROR,
   payload,
   error: true,
 });
 
-export const clearPaymentToken = () => ({
-  type: CLEAR_PAYMENT_TOKEN,
+export const initializeCardPaymentData = () => ({
+  type: CLEAR_HANDLE_CARD_PAYMENT,
+});
+
+export const retrievePaymentIntentRequest = () => ({
+  type: RETRIEVE_PAYMENT_INTENT_REQUEST,
+});
+
+export const retrievePaymentIntentSuccess = payload => ({
+  type: RETRIEVE_PAYMENT_INTENT_SUCCESS,
+  payload,
+});
+
+export const retrievePaymentIntentError = payload => ({
+  type: RETRIEVE_PAYMENT_INTENT_ERROR,
+  payload,
+  error: true,
 });
 
 // ================ Thunks ================ //
@@ -502,28 +547,81 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
   }
 };
 
-export const createStripePaymentToken = params => dispatch => {
-  // It's required to use the same instance of Stripe as where the card has been created
-  // so that's why Stripe needs to be passed here and we can't create a new instance.
-  const { stripe, card } = params;
-
-  dispatch(createPaymentTokenRequest());
+export const retrievePaymentIntent = params => dispatch => {
+  const { stripe, stripePaymentIntentClientSecret } = params;
+  dispatch(retrievePaymentIntentRequest());
 
   return stripe
-    .createToken(card)
+    .retrievePaymentIntent(stripePaymentIntentClientSecret)
     .then(response => {
-      dispatch(createPaymentTokenSuccess(response.token));
-      return response;
+      if (response.error) {
+        return Promise.reject(response);
+      } else {
+        dispatch(retrievePaymentIntentSuccess(response.paymentIntent));
+        return response;
+      }
     })
     .catch(err => {
-      const e = storableError(err);
-      dispatch(createPaymentTokenError(e));
-      const stripeMessage = e.message;
-      log.error(err, 'create-stripe-payment-token-failed', { stripeMessage });
-      throw e;
+      // Unwrap Stripe error.
+      const e = err.error || storableError(err);
+      dispatch(retrievePaymentIntentError(e));
+
+      // Log error
+      const { code, doc_url, message, payment_intent } = err.error || {};
+      const loggableError = err.error
+        ? {
+            code,
+            message,
+            doc_url,
+            paymentIntentStatus: payment_intent
+              ? payment_intent.status
+              : 'no payment_intent included',
+          }
+        : e;
+      log.error(loggableError, 'stripe-retrieve-payment-intent-failed', {
+        stripeMessage: loggableError.message,
+      });
+      throw err;
     });
 };
 
-export const clearStripePaymentToken = () => dispatch => {
-  dispatch(clearPaymentToken());
+export const handleCardPayment = params => dispatch => {
+  // It's required to use the same instance of Stripe as where the card has been created
+  // so that's why Stripe needs to be passed here and we can't create a new instance.
+  const { stripe, card, paymentParams, stripePaymentIntentClientSecret } = params;
+  const transactionId = params.orderId;
+
+  dispatch(handleCardPaymentRequest());
+
+  return stripe
+    .handleCardPayment(stripePaymentIntentClientSecret, card, paymentParams)
+    .then(response => {
+      if (response.error) {
+        return Promise.reject(response);
+      } else {
+        dispatch(handleCardPaymentSuccess(response));
+        return { ...response, transactionId };
+      }
+    })
+    .catch(err => {
+      // Unwrap Stripe error.
+      const e = err.error || storableError(err);
+      dispatch(handleCardPaymentError(e));
+
+      // Log error
+      const containsPaymentIntent = err.error && err.error.payment_intent;
+      const { code, doc_url, message, payment_intent } = containsPaymentIntent ? err.error : {};
+      const loggableError = containsPaymentIntent
+        ? {
+            code,
+            message,
+            doc_url,
+            paymentIntentStatus: payment_intent.status,
+          }
+        : e;
+      log.error(loggableError, 'stripe-handle-card-payment-failed', {
+        stripeMessage: loggableError.message,
+      });
+      throw e;
+    });
 };
