@@ -27,6 +27,10 @@ import defaultMessages from './translations/en.json';
 //   3) Import correct locale rules for Moment library
 //   4) Use the `messagesInLocale` import to add the correct translation file.
 
+// Note that there is also translations in './translations/countryCodes.js' file
+// This file contains ISO 3166-1 alpha-2 country codes, country names and their translations in our default languages
+// This used to collect billing address in StripePaymentAddress on CheckoutPage
+
 // Step 2:
 // Import locale rules for React Intl library
 import localeData from 'react-intl/locale-data/en';
