@@ -17,13 +17,11 @@ import { Modal, NamedRedirect, Tabs } from '../../components';
 import EditListingWizardTab, {
   AVAILABILITY,
   ARTISTINFO,
-  BIOGRAPHY,
   FEATURES,
   POLICY,
   LOCATION,
   PRICING,
   PHOTOS,
-  UPCOMINGSHOWS
 } from './EditListingWizardTab';
 import css from './EditListingWizard.css';
 
@@ -35,7 +33,6 @@ const availabilityMaybe = config.enableAvailability ? [AVAILABILITY] : [];
 export const TABS = [
   ARTISTINFO,
   FEATURES,
-  BIOGRAPHY,
   POLICY,
   LOCATION,
   PRICING,
@@ -79,7 +76,6 @@ const tabCompleted = (tab, listing) => {
   const {
     availabilityPlan,
     artistinfo,
-    biography,
     geolocation,
     price,
     title,
@@ -90,10 +86,8 @@ const tabCompleted = (tab, listing) => {
   switch (tab) {
     case ARTISTINFO:
       return !!(artistinfo && title);
-    case BIOGRAPHY:
-      return !!(biography && publicData);
     case FEATURES:
-      return !!(publicData && publicData.skills);
+      return !!(publicData && publicData.amenities);
     case POLICY:
       return !!(publicData && typeof publicData.rules !== 'undefined');
     case LOCATION:
