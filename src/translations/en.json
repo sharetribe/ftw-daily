@@ -576,7 +576,7 @@
   "PayoutDetailsForm.organizationTitlePlaceholder": "CEO, Manager, Partner",
   "PayoutDetailsForm.owner": "Owner (25% or more)",
   "PayoutDetailsForm.ownershipPercentageLabel": "Ownership percentage",
-  "PayoutDetailsForm.ownershipPercentagePlaceholder":"100",
+  "PayoutDetailsForm.ownershipPercentagePlaceholder": "100",
   "PayoutDetailsForm.personalDetailsAdditionalOwnerTitle": "Additional owner details",
   "PayoutDetailsForm.personalDetailsTitle": "Personal details",
   "PayoutDetailsForm.personalEmailLabel": "Email",
