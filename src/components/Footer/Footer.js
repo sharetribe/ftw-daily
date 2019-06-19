@@ -70,7 +70,7 @@ const Footer = props => {
               </NamedLink>
               <div className={css.organizationInfo}>
                 <p className={css.organizationDescription}>
-                  <FormattedMessage id="Footer.organizationDescription" />
+                  The largest talent pool for your local events.
                 </p>
                 <p className={css.organizationCopyright}>
                   <NamedLink name="LandingPage" className={css.copyrightLink}>
@@ -83,7 +83,7 @@ const Footer = props => {
               <ul className={css.list}>
                 <li className={css.listItem}>
                   <NamedLink name="NewListingPage" className={css.link}>
-                    <FormattedMessage id="Footer.toNewListingPage" />
+                    Add a talent
                   </NamedLink>
                 </li>
                 <li className={css.listItem}>
@@ -119,7 +119,7 @@ const Footer = props => {
                     }}
                     className={css.link}
                   >
-                    <FormattedMessage id="Footer.searchHelsinki" />
+                    Bay Area
                   </NamedLink>
                 </li>
                 <li className={css.listItem}>
@@ -131,7 +131,7 @@ const Footer = props => {
                     }}
                     className={css.link}
                   >
-                    <FormattedMessage id="Footer.searchTurku" />
+                    Atlanta
                   </NamedLink>
                 </li>
                 <li className={css.listItem}>
@@ -143,7 +143,7 @@ const Footer = props => {
                     }}
                     className={css.link}
                   >
-                    <FormattedMessage id="Footer.searchTampere" />
+                    New York
                   </NamedLink>
                 </li>
                 <li className={css.listItem}>
@@ -155,7 +155,7 @@ const Footer = props => {
                     }}
                     className={css.link}
                   >
-                    <FormattedMessage id="Footer.searchOulu" />
+                   Honululu
                   </NamedLink>
                 </li>
                 <li className={css.listItem}>
@@ -167,7 +167,7 @@ const Footer = props => {
                     }}
                     className={css.link}
                   >
-                    <FormattedMessage id="Footer.searchRuka" />
+                    Chicago
                   </NamedLink>
                 </li>
               </ul>
@@ -183,7 +183,7 @@ const Footer = props => {
                     }}
                     className={css.link}
                   >
-                    <FormattedMessage id="Footer.searchKuopio" />
+                   Philadelphia
                   </NamedLink>
                 </li>
                 <li className={css.listItem}>
@@ -195,7 +195,7 @@ const Footer = props => {
                     }}
                     className={css.link}
                   >
-                    <FormattedMessage id="Footer.searchMikkeli" />
+                   Florida
                   </NamedLink>
                 </li>
                 <li className={css.listItem}>
@@ -207,7 +207,7 @@ const Footer = props => {
                     }}
                     className={css.link}
                   >
-                    <FormattedMessage id="Footer.searchEspoo" />
+                    New Orleans
                   </NamedLink>
                 </li>
                 <li className={css.listItem}>
@@ -219,7 +219,7 @@ const Footer = props => {
                     }}
                     className={css.link}
                   >
-                    <FormattedMessage id="Footer.searchVantaa" />
+                    Washington
                   </NamedLink>
                 </li>
                 <li className={css.listItem}>
@@ -231,7 +231,7 @@ const Footer = props => {
                     }}
                     className={css.link}
                   >
-                    <FormattedMessage id="Footer.searchAhvenanmaa" />
+                    Toronto
                   </NamedLink>
                 </li>
               </ul>
