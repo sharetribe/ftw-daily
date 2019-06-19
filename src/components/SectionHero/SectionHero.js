@@ -15,10 +15,12 @@ const SectionHero = props => {
     <div className={classes}>
       <div className={css.heroContent}>
         <h1 className={css.heroMainTitle}>
-          <FormattedMessage id="SectionHero.title" />
+        HIRE A LOCAL TALENT
+         
         </h1>
         <h2 className={css.heroSubTitle}>
-          <FormattedMessage id="SectionHero.subTitle" />
+          NEAR YOU
+          
         </h2>
         <NamedLink
           name="SearchPage"
