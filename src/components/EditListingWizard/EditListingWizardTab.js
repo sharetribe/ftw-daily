@@ -11,7 +11,7 @@ import { ensureListing } from '../../util/data';
 import { createResourceLocatorString } from '../../util/routes';
 import {
   EditListingAvailabilityPanel,
-  EditListingDescriptionPanel,
+  EditListingArtistinfoPanel,
   EditListingFeaturesPanel,
   EditListingLocationPanel,
   EditListingPhotosPanel,
@@ -158,10 +158,10 @@ const EditListingWizardTab = props => {
   switch (tab) {
     case ARTISTINFO: {
       const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditListingWizard.saveNewDescription'
-        : 'EditListingWizard.saveEditDescription';
+        ? 'EditListingWizard.saveNewArtistinfo'
+        : 'EditListingWizard.saveEditArtistinfo';
       return (
-        <EditListingDescriptionPanel
+        <EditListingArtistinfoPanel
           {...panelProps(ARTISTINFO)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={values => {
