@@ -3,7 +3,7 @@
   "short_name": "Saunatime",
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#C0392B",
+  "theme_color": "#8f2593",
   "background_color": "#FFFFFF",
   "icons": [
     {

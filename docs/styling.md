@@ -45,7 +45,7 @@ scheme here using CSS Property variables:
 ```css
 /* ================ Colors ================ */
 
---marketplaceColor: #c0392b;
+--marketplaceColor: #8f2593;
 --marketplaceColorLight: #ff4c38;
 --marketplaceColorDark: #8c291e;
 
@@ -65,7 +65,7 @@ scheme here using CSS Property variables:
 --matterColorLight: #ffffff;
 ```
 
-Changing `--marketplaceColor: #c0392b;` to `--marketplaceColor: tomato;` will change the default
+Changing `--marketplaceColor: #8f2593;` to `--marketplaceColor: tomato;` will change the default
 marketplace color to tomato color. (It's a certain kind of red color.)
 
 The `--marketplaceColorEncoded` variable holds the same value as `--marketplaceColor` but with the
