@@ -47,7 +47,7 @@ scheme here using CSS Property variables:
 
 --marketplaceColor: #8f2593;
 --marketplaceColorLight: #ff4c38;
---marketplaceColorDark: #8c291e;
+--marketplaceColorDark: #8f2593;
 
 /* Used with inline CSS SVGs */
 --marketplaceColorEncoded: %23c0392b;
