@@ -73,6 +73,7 @@ describe('ListingPage', () => {
       callSetInitialValues: noop,
       sendVerificationEmailInProgress: false,
       onResendVerificationEmail: noop,
+      onInitializeCardPaymentData: noop,
       sendEnquiryInProgress: false,
       onSendEnquiry: noop,
       categoriesConfig,

@@ -104,7 +104,7 @@ exports[`InboxPage matches snapshot 1`] = `
               Object {
                 "attributes": Object {
                   "createdAt": 2017-05-01T00:00:00.000Z,
-                  "lastTransition": "transition/request",
+                  "lastTransition": "transition/confirm-payment",
                   "lastTransitionedAt": 2017-01-15T00:00:00.000Z,
                   "lineItems": Array [
                     Object {
@@ -158,7 +158,12 @@ exports[`InboxPage matches snapshot 1`] = `
                     Object {
                       "by": "customer",
                       "createdAt": 2017-05-01T00:00:00.000Z,
-                      "transition": "transition/request",
+                      "transition": "transition/request-payment",
+                    },
+                    Object {
+                      "by": "customer",
+                      "createdAt": 2017-05-01T00:00:01.000Z,
+                      "transition": "transition/confirm-payment",
                     },
                     Object {
                       "by": "provider",
@@ -252,7 +257,7 @@ exports[`InboxPage matches snapshot 1`] = `
               Object {
                 "attributes": Object {
                   "createdAt": 2017-05-01T00:00:00.000Z,
-                  "lastTransition": "transition/request",
+                  "lastTransition": "transition/confirm-payment",
                   "lastTransitionedAt": 2016-01-15T00:00:00.000Z,
                   "lineItems": Array [
                     Object {
@@ -306,7 +311,12 @@ exports[`InboxPage matches snapshot 1`] = `
                     Object {
                       "by": "customer",
                       "createdAt": 2017-05-01T00:00:00.000Z,
-                      "transition": "transition/request",
+                      "transition": "transition/request-payment",
+                    },
+                    Object {
+                      "by": "customer",
+                      "createdAt": 2017-05-01T00:00:01.000Z,
+                      "transition": "transition/confirm-payment",
                     },
                     Object {
                       "by": "provider",
@@ -546,7 +556,7 @@ exports[`InboxPage matches snapshot 3`] = `
               Object {
                 "attributes": Object {
                   "createdAt": 2017-05-01T00:00:00.000Z,
-                  "lastTransition": "transition/request",
+                  "lastTransition": "transition/confirm-payment",
                   "lastTransitionedAt": 2017-01-15T00:00:00.000Z,
                   "lineItems": Array [
                     Object {
@@ -600,7 +610,12 @@ exports[`InboxPage matches snapshot 3`] = `
                     Object {
                       "by": "customer",
                       "createdAt": 2017-05-01T00:00:00.000Z,
-                      "transition": "transition/request",
+                      "transition": "transition/request-payment",
+                    },
+                    Object {
+                      "by": "customer",
+                      "createdAt": 2017-05-01T00:00:01.000Z,
+                      "transition": "transition/confirm-payment",
                     },
                     Object {
                       "by": "provider",
@@ -694,7 +709,7 @@ exports[`InboxPage matches snapshot 3`] = `
               Object {
                 "attributes": Object {
                   "createdAt": 2017-05-01T00:00:00.000Z,
-                  "lastTransition": "transition/request",
+                  "lastTransition": "transition/confirm-payment",
                   "lastTransitionedAt": 2016-01-15T00:00:00.000Z,
                   "lineItems": Array [
                     Object {
@@ -748,7 +763,12 @@ exports[`InboxPage matches snapshot 3`] = `
                     Object {
                       "by": "customer",
                       "createdAt": 2017-05-01T00:00:00.000Z,
-                      "transition": "transition/request",
+                      "transition": "transition/request-payment",
+                    },
+                    Object {
+                      "by": "customer",
+                      "createdAt": 2017-05-01T00:00:01.000Z,
+                      "transition": "transition/confirm-payment",
                     },
                     Object {
                       "by": "provider",

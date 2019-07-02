@@ -5,7 +5,7 @@ exports[`ActivityFeed matches snapshot 1`] = `
   className=""
 >
   <li
-    key="transition/request"
+    key="transition/confirm-payment"
   >
     <div>
       <div>
