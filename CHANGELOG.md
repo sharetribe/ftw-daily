@@ -14,6 +14,20 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+## [v3.0.0] 2019-07-02
+
+- [add] Strong Customer Authentication (SCA) with Stripe's new PaymentIntents flow. This is a big
+  change for checkout flow and includes a madatory transaction process change.
+  [#1089](https://github.com/sharetribe/flex-template-web/pull/1089)
+
+  - You should check [the pull request](https://github.com/sharetribe/flex-template-web/pull/1089)
+  - and read 3 Flex Docs articles:
+    [SCA](https://www.sharetribe.com/docs/background/strong-customer-authentication/),
+    [PaymentIntents](https://www.sharetribe.com/docs/background/payment-intents/), and
+    [How to take PaymentIntents into use](https://www.sharetribe.com/docs/guide/how-to-take-payment-intents-into-use/)
+
+  [v3.0.0]: https://github.com/sharetribe/flex-template-web/compare/v2.17.1...v3.0.0
+
 ## [v2.17.1] 2019-06-11
 
 - [fix] `stripeCardToken` didn't update when the user tried to book the same listing for a second
