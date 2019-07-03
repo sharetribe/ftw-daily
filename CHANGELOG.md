@@ -14,6 +14,10 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [change] Verify email automatically once the verification link is clicked. Redirect the user to
+  the landing page after verification.
+  [#1121](https://github.com/sharetribe/flex-template-web/pull/1121)
+
 ## [v3.0.0] 2019-07-02
 
 - [add] Strong Customer Authentication (SCA) with Stripe's new PaymentIntents flow. This is a big
