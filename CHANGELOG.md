@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [add] Add events.mapbox.com to `connect-src` in `csp.js` file.
+  [#1123](https://github.com/sharetribe/flex-template-web/pull/1123)
 - [change] Verify email automatically once the verification link is clicked. Redirect the user to
   the landing page after verification.
   [#1121](https://github.com/sharetribe/flex-template-web/pull/1121)
