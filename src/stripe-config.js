@@ -285,6 +285,28 @@ export const stripeSupportedCountries = [
     },
   },
   {
+    // Singapore
+    code: 'SG',
+    currency: 'SGD',
+    addressConfig: {
+      addressLine: true,
+      postalCode: true,
+    },
+    accountConfig: {
+      bankCode: true,
+      branchCode: true,
+      accountNumber: true,
+    },
+    companyConfig: {
+      personalAddress: true,
+      owners: true,
+      personalIdNumberRequired: true,
+    },
+    individualConfig: {
+      personalIdNumberRequired: true,
+    },
+  },
+  {
     // Spain
     code: 'ES',
     currency: 'EUR',

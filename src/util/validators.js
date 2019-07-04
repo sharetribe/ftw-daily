@@ -219,5 +219,9 @@ export const validHKID = message => value => {
   return isValid ? VALID : message;
 };
 
+export const validSGID = message => value => {
+  return value.length === 9 ? VALID : message;
+};
+
 export const composeValidators = (...validators) => value =>
   validators.reduce((error, validator) => error || validator(value), VALID);
