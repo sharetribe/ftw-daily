@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [add] Add support for Singapore as the payout country of a provider. Also fix a bug in passing the
+  personal ID number to Stripe. [#1122](https://github.com/sharetribe/flex-template-web/pull/1122)
 - [add] Add events.mapbox.com to `connect-src` in `csp.js` file.
   [#1123](https://github.com/sharetribe/flex-template-web/pull/1123)
 - [change] Verify email automatically once the verification link is clicked. Redirect the user to
