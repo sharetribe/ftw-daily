@@ -115,6 +115,19 @@ const PayoutDetailsPersonalDetails = props => {
       })
     );
     personalIdNumberValid = validators.composeValidators(personalIdNumberRequired, validHKID);
+  } else if (country === 'SG') {
+    personalIdNumberLabel = intl.formatMessage({
+      id: `PayoutDetailsForm.personalIdNumberLabel.SG`,
+    });
+    personalIdNumberPlaceholder = intl.formatMessage({
+      id: `PayoutDetailsForm.personalIdNumberPlaceholder.SG`,
+    });
+    const validSGID = validators.validSGID(
+      intl.formatMessage({
+        id: `PayoutDetailsForm.personalIdNumberValid`,
+      })
+    );
+    personalIdNumberValid = validators.composeValidators(personalIdNumberRequired, validSGID);
   }
 
   const phoneLabel = intl.formatMessage({ id: 'PayoutDetailsForm.personalPhoneLabel' });

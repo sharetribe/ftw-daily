@@ -278,7 +278,7 @@ const personTokenParams = (personData, country) => {
     country === 'US'
       ? { ssn_last_4: personalIdNumber }
       : personalIdNumber
-      ? { personal_id_number: personalIdNumber }
+      ? { id_number: personalIdNumber }
       : {};
 
   const accountOpenerMaybe = isAccountOpener ? { account_opener: true } : {};
@@ -476,7 +476,7 @@ const accountTokenParamsForIndividual = (individual, country) => {
     country === 'US'
       ? { ssn_last_4: personalIdNumber }
       : personalIdNumber
-      ? { personal_id_number: personalIdNumber }
+      ? { id_number: personalIdNumber }
       : {};
 
   return {
