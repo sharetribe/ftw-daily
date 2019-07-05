@@ -135,11 +135,25 @@ const TopbarDesktop = props => {
         />
       </NamedLink>
       {search}
+
       <NamedLink className={css.createListingLink} name="NewListingPage">
         <span className={css.createListing}>
           <FormattedMessage id="TopbarDesktop.createListing" />
         </span>
       </NamedLink>
+
+    <NamedLink className={css.createListingLink} name="SearchListingsPage">
+      <span className={css.signup}>
+        <FormattedMessage id="Listings" />
+      </span>
+    </NamedLink>
+
+    <NamedLink className={css.createListingLink} name="FaqPage">
+      <span className={css.signup}>
+        <FormattedMessage id="Faq" />
+      </span>
+    </NamedLink>
+
       {inboxLink}
       {profileMenu}
       {signupLink}

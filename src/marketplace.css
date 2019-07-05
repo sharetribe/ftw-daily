@@ -35,16 +35,16 @@
     background-position: center center;
 
     @media (--viewportLarge) {
-      border-radius: 40px;
-      border: solid 36px var(--matterColorBright);
+      border-radius: 0px;
+      border: solid 0px var(--matterColorBright);
     }
   }
 
   /* ================ Colors ================ */
 
-  --marketplaceColor: #c0392b;
-  --marketplaceColorLight: #ff4c38;
-  --marketplaceColorDark: #8c291e;
+  --marketplaceColor: #41a6df;
+  --marketplaceColorLight: #41a6df;
+  --marketplaceColorDark: #41a6df;
 
   /* Used with inline CSS SVGs */
   --marketplaceColorEncoded: %23c0392b;
@@ -52,7 +52,7 @@
   --successColor: #2ecc71;
   --successColorDark: #239954;
   --failColor: #ff0000;
-  --attentionColor: #ffaa00;
+  --attentionColor: #41a6df;
   --bannedColorLight: var(--marketplaceColorLight);
   --bannedColorDark: var(--marketplaceColor);
 
@@ -574,3 +574,12 @@
 @custom-media --viewportLarge (min-width: 1024px);
 @custom-media --viewportLargeWithPaddings (min-width: 1128px);
 @custom-media --viewportXLarge (min-width: 1921px);
+
+.SectionHero_heroMainTitle__3YHOS {
+    max-width: 100% !important;
+    text-align: center !important;
+}
+
+.SectionHero_heroButton__3j9FY {
+	background-color: #41a6df !important;
+}

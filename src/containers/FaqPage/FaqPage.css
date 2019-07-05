@@ -1,0 +1,133 @@
+@import '../../marketplace.css';
+
+.root {
+  padding: 24px;
+
+  /* Use CSS variable imported from marketplace.css */
+  background-color: var(--marketplaceColor);
+}
+
+.sectionContent {
+  margin: var(--LandingPage_sectionMarginTop) 24px 51px 24px;
+
+  @media (--viewportMedium) {
+    width: 100%;
+    margin: var(--LandingPage_sectionMarginTopMedium) 24px 60px 24px;
+  }
+
+  @media (--viewportLarge) {
+    width: 1128px;
+    padding: 0 36px 0 36px;
+    margin: 50px auto 90px auto;
+  }
+
+  @media (--viewportXLarge) {
+    width: 1056px;
+    padding: 0;
+  }
+}
+
+.faqBg {
+  background: linear-gradient(-45deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./petowner.jpg');
+  background-size: cover;
+  background-position: 0 -250px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding: 90px 0px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.faqBg:hover {
+  background: linear-gradient(-45deg, rgb(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('./petowner.jpg');
+  background-size: cover;
+  background-position: 0 -250px;
+}
+
+.faqBg span {
+  color: #fff;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.faqBg2 {
+  background: linear-gradient(-45deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./petsitter.jpg');
+  background-size: cover;
+  background-position: 0 -150px;
+  padding: 90px 0px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.faqBg2:hover {
+  background: linear-gradient(-45deg, rgb(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('./petsitter.jpg');
+  background-size: cover;
+  background-position: 0 -150px;
+}
+
+.faqBg2 span {
+  color: #fff;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.faqBg3 {
+  background: linear-gradient(-45deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./petservices.jpg');
+  background-size: cover;
+  background-position: 0 -150px;
+  padding: 90px 0px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.faqBg3:hover {
+  background: linear-gradient(-45deg, rgb(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('./petservices.jpg');
+  background-size: cover;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-position: 0 -150px;
+}
+
+.faqBg3 span {
+  color: #fff;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.spanMain {
+  color: #41a6df !important;
+  text-transform: uppercase;
+}
+
+.spanContainer, .spanContainer2, .spanContainer3 {
+  padding: 30px 0px;
+}
+
+.faqBg, .faqBg2, .faqBg3 {
+  cursor: pointer;
+}
+
+.sectionContent a:hover, .sectionContent a {
+  text-decoration: none !important;
+}
+
+.sectionContent h2 {
+  margin-top: 0px !important;
+}
+
+.mainTitle {
+  margin-bottom: 30px;
+}
+
+.mainTitle span {
+  font-weight: 500;
+  float: right;
+  font-size: 16px;
+  position: relative;
+  top: 6px;
+}

@@ -11,6 +11,7 @@
     <link rel="manifest" href="%PUBLIC_URL%/static/manifest.json">
 
     <!-- Start Favicons from https://realfavicongenerator.net/ -->
+    <link rel="stylesheet" href="%PUBLIC_URL%/static/css/customIndex.css">
     <link rel="apple-touch-icon" sizes="180x180" href="/static/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/static/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/static/icons/favicon-16x16.png">
@@ -18,9 +19,12 @@
     <link rel="shortcut icon" href="/static/icons/favicon.ico">
     <meta name="msapplication-config" content="/static/icons/browserconfig.xml">
     <meta name="theme-color" content="#c0392b">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- End Favicons -->
 
     <!--!link-->
+
+<a href="#" id="back-to-top" title="Back to top">&uarr;</a>
 
     <style>
      /**
@@ -71,8 +75,33 @@
           font-weight: 700; /* Bold */
           font-style: normal;
       }
-
+	 
     </style>
+
+    
+    <script>
+       if ($('#back-to-top').length) {
+    var scrollTrigger = 100, // px
+        backToTop = function () {
+            var scrollTop = $(window).scrollTop();
+            if (scrollTop > scrollTrigger) {
+                $('#back-to-top').addClass('show');
+            } else {
+                $('#back-to-top').removeClass('show');
+            }
+        };
+    backToTop();
+    $(window).on('scroll', function () {
+        backToTop();
+    });
+    $('#back-to-top').on('click', function (e) {
+        e.preventDefault();
+        $('html,body').animate({
+            scrollTop: 0
+        }, 700);
+    });
+}</script>
+
     <script>
       (function(document){
         // Optimization for repeated views
@@ -148,7 +177,9 @@
       mapbox-sdk.min.js is included from static folder for CSP purposes.
       We didn't bundle it to the main app since it would unnecessarily slow down initial rendering.
     -->
+    <script src="%PUBLIC_URL%/static/scripts/custom/smooth-scroll.js"></script>
     <script src="%PUBLIC_URL%/static/scripts/mapbox/mapbox-sdk.min.js"></script>
+    <script src="%PUBLIC_URL%/static/scripts/custom/locationHover.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css" rel="stylesheet" />
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js"></script>
     <script>
@@ -176,5 +207,6 @@
 
          See docs/content-security-policy.md for more information.
     -->
+
   </body>
 </html>

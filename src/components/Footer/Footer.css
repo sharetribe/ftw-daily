@@ -326,3 +326,23 @@
 .privacy {
   margin-right: 24px;
 }
+
+.footerTitleContainer {
+   margin: 3px 0px 21px 0px;
+}
+
+.footerTitleContainer a {
+  color: #fff;
+  font-weight: 1000;
+}
+
+.footerTitleContainer a span {
+  position: relative;
+  bottom: -0.5px;
+  left: 3.5px;
+}
+
+.footerTitleContainer a:hover, .footerTitleContainer a span:hover{
+  text-decoration: none;
+}
+

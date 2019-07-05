@@ -4,44 +4,43 @@
 
 export const amenities = [
   {
-    key: 'towels',
-    label: 'Towels',
+    key: 'dog',
+    label: 'Dog',
   },
   {
-    key: 'bathroom',
-    label: 'Bathroom',
+    key: 'cat',
+    label: 'Cat',
   },
   {
-    key: 'swimming_pool',
-    label: 'Swimming pool',
+    key: 'reptiles',
+    label: 'Rptiles',
   },
   {
-    key: 'own_drinks',
-    label: 'Own drinks allowed',
+    key: 'rabbits',
+    label: 'Rabbits',
   },
   {
-    key: 'jacuzzi',
-    label: 'Jacuzzi',
+    key: 'horse',
+    label: 'Horse',
   },
   {
-    key: 'audiovisual_entertainment',
-    label: 'Audiovisual entertainment',
+    key: 'farm_animals',
+    label: 'Farm Animals',
   },
   {
-    key: 'barbeque',
-    label: 'Barbeque',
+    key: 'aquarium_fish',
+    label: 'Aquarium Fish',
   },
   {
-    key: 'own_food_allowed',
-    label: 'Own food allowed',
+    key: 'pet_birds',
+    label: 'Pet Birds',
   },
 ];
 
 export const categories = [
-  { key: 'smoke', label: 'Smoke' },
-  { key: 'electric', label: 'Electric' },
-  { key: 'wood', label: 'Wood' },
-  { key: 'other', label: 'Other' },
+  { key: 'petowners', label: 'Pet Owners' },
+  { key: 'petsitter', label: 'Pet Sitter' },
+  { key: 'petservices', label: 'Pet Services' },
 ];
 
 // Price filter configuration

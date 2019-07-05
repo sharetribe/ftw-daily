@@ -65,9 +65,12 @@ const Footer = props => {
           <div className={css.someLiksMobile}>{socialMediaLinks}</div>
           <div className={css.links}>
             <div className={css.organization} id="organization">
-              <NamedLink name="LandingPage" className={css.logoLink}>
-                <Logo format="desktop" className={css.logo} />
-              </NamedLink>
+              <div className={css.footerTitleContainer}> 
+                 <a href="./">
+                    TRUST MY PET SITTER
+                  <span>&reg;</span>
+                  </a>
+              </div>
               <div className={css.organizationInfo}>
                 <p className={css.organizationDescription}>
                   <FormattedMessage id="Footer.organizationDescription" />
@@ -269,6 +272,7 @@ const Footer = props => {
           </div>
         </div>
       </div>
+
     </div>
   );
 };
