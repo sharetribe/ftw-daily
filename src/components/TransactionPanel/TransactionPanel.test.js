@@ -19,7 +19,8 @@ import {
   TRANSITION_DECLINE,
   TRANSITION_ENQUIRE,
   TRANSITION_EXPIRE,
-  TRANSITION_REQUEST,
+  TRANSITION_REQUEST_PAYMENT,
+  TRANSITION_CONFIRM_PAYMENT,
 } from '../../util/transaction';
 import BreakdownMaybe from './BreakdownMaybe';
 import { TransactionPanelComponent } from './TransactionPanel';
@@ -57,7 +58,7 @@ describe('TransactionPanel - Sale', () => {
 
   const txPreauthorized = createTransaction({
     id: 'sale-preauthorized',
-    lastTransition: TRANSITION_REQUEST,
+    lastTransition: TRANSITION_REQUEST_PAYMENT,
     ...baseTxAttrs,
   });
 
@@ -92,7 +93,7 @@ describe('TransactionPanel - Sale', () => {
       createTxTransition({
         createdAt: new Date(Date.UTC(2017, 4, 1)),
         by: 'customer',
-        transition: TRANSITION_REQUEST,
+        transition: TRANSITION_REQUEST_PAYMENT,
       }),
       createTxTransition({
         createdAt: new Date(Date.UTC(2017, 5, 1)),
@@ -197,7 +198,7 @@ describe('TransactionPanel - Sale', () => {
 
     const transaction = createTransaction({
       id: 'sale-tx',
-      lastTransition: TRANSITION_REQUEST,
+      lastTransition: TRANSITION_REQUEST_PAYMENT,
       total: new Money(16500, 'USD'),
       commission: new Money(1000, 'USD'),
       booking: createBooking('booking1', {
@@ -252,7 +253,7 @@ describe('TransactionPanel - Order', () => {
 
   const txPreauthorized = createTransaction({
     id: 'order-preauthorized',
-    lastTransition: TRANSITION_REQUEST,
+    lastTransition: TRANSITION_CONFIRM_PAYMENT,
     ...baseTxAttrs,
   });
 
@@ -287,7 +288,12 @@ describe('TransactionPanel - Order', () => {
       createTxTransition({
         createdAt: new Date(Date.UTC(2017, 4, 1)),
         by: 'customer',
-        transition: TRANSITION_REQUEST,
+        transition: TRANSITION_REQUEST_PAYMENT,
+      }),
+      createTxTransition({
+        createdAt: new Date(Date.UTC(2017, 4, 1, 0, 0, 1)),
+        by: 'customer',
+        transition: TRANSITION_CONFIRM_PAYMENT,
       }),
       createTxTransition({
         createdAt: new Date(Date.UTC(2017, 5, 1)),
@@ -393,7 +399,7 @@ describe('TransactionPanel - Order', () => {
     const end = new Date(Date.UTC(2017, 5, 13));
     const tx = createTransaction({
       id: 'order-tx',
-      lastTransition: TRANSITION_REQUEST,
+      lastTransition: TRANSITION_REQUEST_PAYMENT,
       total: new Money(16500, 'USD'),
       booking: createBooking('booking1', {
         start,
