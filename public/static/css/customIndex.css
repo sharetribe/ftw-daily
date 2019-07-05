@@ -1,0 +1,329 @@
+    body {
+    overflow-x: hidden !important;
+    }
+
+    .SectionLocations_location__1paVa:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.3);
+    }
+
+    .SectionLocations_aspectWrapper__dh-cu:hover ~ .SectionLocations_linkText__1a8gC {
+    background: linear-gradient(-45deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+    }
+
+    .SectionLocations_aspectWrapper__dh-cu:hover {
+    background: linear-gradient(-45deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+    }
+
+    .SectionHero_heroContent__3kM-n a:hover, .LandingPage_whyContainer__2R9A8 a:hover, #how-padding a:hover {
+    background-image: linear-gradient(to right top, #d16ba5, #c077bd, #a983d0, #8d8fdc, #6d9ae2, #6d9ae2, #6d9ae2, #6d9ae2, #8d8fdc, #a983d0, #c077bd, #d16ba5);
+    color: #fff;
+    text-decoration: none !important;
+    }
+
+    .Button_inlineTextButtonRoot__1A7_R a {
+    color: #b2b2b2 !important;
+    }
+
+    .LandingPage_hero__CxAkT {
+    justify-content: center !important;
+    }
+
+    .TopbarDesktop_createListingLink__5mz2j .TopbarDesktop_signup__2qg3U {
+    color: #000 !important;
+    }
+
+    .listingsLink {
+    color: #000;
+    }
+
+    .SectionLocations_aspectWrapper__dh-cu {
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    }
+
+    .ListingCard_info__2X44s {
+     padding: 15px 20px !important;
+     background: #41a6df;
+     width: 100%;
+    }   
+
+    .SearchResultsPanel_listingCard___Fcmu:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.3);
+    }
+
+    .ListingCard_threeToTwoWrapper__1mtRM:hover {
+    transform: scale(1) !important;
+    box-shadow: 0 !important;
+    }
+
+    .ListingCard_priceValue__IPtpn, .ListingCard_title__2Hja_, .ListingCard_authorInfo__FZ-94, .ListingCard_perUnit__32sU5 {
+     color: #fff !important;
+    }
+
+    .ListingCard_mainInfo__1SEE_ {
+    margin-left: auto;
+    }
+    
+    @media (min-width: 1024px) {
+    .ListingPage_threeToTwoWrapper__11Ru3 {
+    margin: 0 auto;
+    max-width: 1128px;
+    padding: 0 36px;
+    }}
+
+    @media (min-width: 768px) {
+   .ListingPage_sectionAvatar__2wdQw {
+    top: -57px;
+    }}
+
+    .TabNavHorizontal_selectedTabContent__eJ4vb {
+    border-bottom-color: #41a6df !important;
+    }
+
+    .SectionHero_heroMainTitle__3YHOS, .SectionLocations_title__pYWqb {
+    max-width: 100% !important;
+    text-align: center !important;
+    }
+
+    .SectionHero_heroButton__3j9FY {
+	  background-color: #41a6df !important;
+    }
+
+    .FieldTextInput_input__2ddAI {
+    border-bottom-color: #41a6df;
+    }
+
+    .SectionHero_heroSubTitle__3NGW_ {
+    max-width: 100% !important;
+    text-align: center;
+    margin: 0 0 40px 0 !important;
+    }  
+
+    .SectionHero_heroButton__3j9FY {
+    margin: 0 auto !important;
+    }
+
+    .TopbarDesktop_createListingLink__5mz2j, .SectionLocations_locationName__27cSZ {
+    color: #41a6df !important;
+    }
+
+    .LocationAutocompleteInput_iconSvgGroup__2g-R7 {
+    stroke: #41a6df !important;
+    }
+
+    .TopbarDesktop_createListingLink__5mz2j:hover, .TopbarDesktop_signupLink__ynA7h:hover, .TopbarDesktop_loginLink__2GdiG:hover, .TopbarDesktop_logoLink__3mf-U:hover {
+    border-bottom: 4px solid #41a6df !important;
+    }
+
+    .LandingPage_sectionContentFirstChild__1lJzf {
+    margin-top: inherit !important;
+    }
+
+    .LandingPage_sectionContent__1ahe_ {
+    margin: 80px auto 120px auto !important;
+    }
+
+    .SectionLocations_linkText__1a8gC {
+    box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.1);
+    padding: 16px 0px 17px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin: 0 !important;
+    text-align: center;
+    }
+
+    .SectionLocations_location__1paVa {
+    position: relative;
+    }
+
+    .SectionLocations_aspectWrapper__dh-cu {
+    background: linear-gradient(-45deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6));
+    }
+
+   .SectionLocations_aspectWrapper__dh-cu img {
+    z-index: -1;
+   }
+
+   .SectionLocations_linkText__1a8gC span {
+    color: #4a4a4a;
+   }
+
+   .LandingPage_hero__CxAkT {
+    justify-content: center;
+    padding-top: 10px !important;
+    } 
+
+    .LandingPage_section__3Tv0O:nth-of-type(2n) .LandingPage_sectionContent__1ahe_::before {
+    background: #41a6df !important;
+    }
+
+    .TopbarDesktop_logo__1kkDB {
+    height: 70px !important;
+    position: relative;
+    bottom: 21.5px;
+    }
+
+    /* HOW IT WORKS */
+
+    .SectionHowItWorks_title__26n__ {
+    text-align: center;
+    }
+
+    .LandingPage_section__3Tv0O:nth-of-type(2n) .LandingPage_sectionContent__1ahe_::before {
+    margin: 0 auto;
+    }
+
+    .SectionHowItWorks_stepTitle__2pBRA {
+    text-align: center;
+    }
+
+    #how-it-works {
+    display: flex;
+    margin-bottom: 50px;
+    }
+
+    #three-containers {
+    max-width: 33%;
+    flex: 0 0 33%;
+    text-align: center;
+    }
+
+    #howitworks-title {
+    text-align: center;
+    }
+
+    #howitworks-ul li {
+    margin-bottom: 10px;
+    font-weight: 300;
+    }
+
+    #three-containers h2 {
+    margin-bottom: 27px;
+    }
+ 
+    #three-containers:nth-child(1):before {
+    content: url(/static/icons/how-1.png);
+    }
+
+    #three-containers:nth-child(2):before {
+    content: url(/static/icons/how-2.png);
+    }
+
+    #three-containers:nth-child(3):before {
+    content: url(/static/icons/how-3.png);
+    }
+
+    #howitworks-title h1 {
+    margin-bottom: 60px !important; 
+    }
+ 
+    .LandingPage_section__3Tv0O:nth-of-type(2n) .LandingPage_sectionContent__1ahe_::before {
+    display: none !important;
+    }
+
+    #how-padding {
+    margin-top: 80px !important;
+    text-align: center;
+    }
+
+    #how-button {
+    color: #fff;
+    background-color: #41a6df;
+    padding: 10px 20px;
+    border-radius: 5px;
+    }
+
+    .SectionLocations_imageWrapper__2e2Gp:hover {
+    transform: scale(1) !important;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0) !important;
+    }
+
+    @media (max-width: 767px) {
+      #three-containers {
+        max-width: 100%;
+        flex: 0 0 100%;
+        margin-bottom: 60px;
+      }
+
+      #how-it-works {
+        display: inherit;
+      }
+    }
+
+    /* WHY USE */
+
+    .whyUse {
+    background: #41a6df;
+    }
+
+    /* FOOTER */
+
+    .Footer_root__25Pzf {
+    background: #41a6df !important;
+    }
+
+    .Footer_link__d6_fN, .Footer_legalLink__7lT2Z, .Footer_organizationDescription__1HwWf, .Footer_copyrightLink__2Oejv {
+    color: #fff !important;
+    }
+
+    .IconSocialMediaFacebook_root__1B7Mc, .IconSocialMediaTwitter_root__YqfQE {
+    fill: #fff !important;
+    }
+
+    @media (max-width: 520px) {
+    .LandingPage_sectionContent__1ahe_ {
+    margin: 80px 40px 120px 40px !important;
+    }}
+
+    #back-to-top {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 9999;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    line-height: 38px;
+    color: #fff;
+    cursor: pointer;
+    border: 0;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: opacity 0.2s ease-out;
+    opacity: 0;
+    background-image: linear-gradient(to right top, #d16ba5, #c077bd, #a983d0, #8d8fdc, #6d9ae2, #6d9ae2, #6d9ae2, #6d9ae2, #8d8fdc, #a983d0, #c077bd, #d16ba5);
+    font-size: 21px;
+    }
+
+    #back-to-top:hover {
+    background-image: linear-gradient(to right top, #d16ba5, #d16ba5, #d16ba5, #d16ba5, #d16ba5, #d16ba5, #d16ba5, #d16ba5, #d16ba5, #d16ba5, #d16ba5, #d16ba5);
+    color: #fff;
+    }
+
+    #back-to-top.show {
+    opacity: 1;
+    }
+
+    .Footer_organizationCopyright__3CBW- {
+    margin-top: 24px !important;
+    }
+
+    .LayoutWrapperTopbar_root__2UZ56 {
+    position: relative !important;
+    }
+
+    .selected {
+    text-decoration: none !important;
+    color: #41a6df !important;
+    }
+
+    .Button_inlineTextButtonRoot__1A7_R {
+    margin-top: 12px !important;
+    }
+
+    #bread-active:hover {
+    cursor: pointer;
+    color: #41a6df;
+    }

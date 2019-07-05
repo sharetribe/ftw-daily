@@ -128,3 +128,66 @@
     top: calc(-1 * var(--LandingPage_sectionMarginTopLarge));
   }
 }
+
+/* CUSTOM CSS */
+
+.whyUse {
+  display: flex;
+  text-align: center;
+} 
+
+@media (max-width: 700px) {
+  .whyUse {
+    display: inherit;
+  }
+
+  .whyContainer {
+    width: 100% !important;
+  }
+
+  .whyContainer:nth-child(1) {
+    margin-bottom: 60px;
+  }
+
+}
+
+@media (max-width: 520px) {
+.LandingPage_sectionContent__1ahe_ {
+    margin: 80px 40px 120px 40px !important;
+}}
+
+.whyUseBg {
+  padding: 10px 0px;
+  background-image: linear-gradient(to left top, #f6f6f6, #e3e4f2, #cbd3ef, #aec5eb, #89b7e7, #76b1e5, #5face2, #41a6df, #41a6df, #41a6df, #41a6df, #41a6df);
+  text-align: center;
+}
+
+.whyUseBg h1 {
+  color: #fff;
+  margin-bottom: 60px;
+}
+
+.whyUseBg p {
+  padding: 0px 30px;
+  margin-bottom: 35px !important;
+}
+
+.whyUseBg a {
+  background-color: #fff;
+  color: rgb(65,166,223);
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.whyContainer {
+  width: 50%;
+  color: #fff;
+}
+
+.whyContainer:nth-child(1):before {
+    content: url(/static/icons/why-1.png);
+}
+
+.whyContainer:nth-child(2):before {
+    content: url(/static/icons/why-2.png);
+}
