@@ -43,7 +43,7 @@ const PetOwnersPage = () => {
         </div>
 
         <div>
-         <span><span id="bread-active">Faq</span> <span className={css.breadArrow}>></span> <span id="bread-active"><a href="pet-owner-faq">Pet Owners</a></span></span>
+         <span><span id="bread-active"><a id="bread-back" href="/faq">Faq</a></span> <span className={css.breadArrow}>></span> <span id="bread-active"><a href="pet-owner-faq">Pet Owners</a></span></span>
 
          <span>Last updated July 7,2019</span>
         </div>
