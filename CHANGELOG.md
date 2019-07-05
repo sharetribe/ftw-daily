@@ -14,6 +14,10 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+## [v3.1.0] 2019-07-05
+
+- [fix] SectionHero: fix type in search params. There was an extra "/s?".
+  [#1124](https://github.com/sharetribe/flex-template-web/pull/1124)
 - [add] Add support for Singapore as the payout country of a provider. Also fix a bug in passing the
   personal ID number to Stripe. [#1122](https://github.com/sharetribe/flex-template-web/pull/1122)
 - [add] Add events.mapbox.com to `connect-src` in `csp.js` file.
@@ -21,6 +25,8 @@ way to update this template, but currently, we follow a pattern:
 - [change] Verify email automatically once the verification link is clicked. Redirect the user to
   the landing page after verification.
   [#1121](https://github.com/sharetribe/flex-template-web/pull/1121)
+
+  [v3.0.0]: https://github.com/sharetribe/flex-template-web/compare/v3.0.0...v3.1.0
 
 ## [v3.0.0] 2019-07-02
 
