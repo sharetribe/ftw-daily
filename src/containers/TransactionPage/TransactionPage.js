@@ -74,6 +74,7 @@ export const TransactionPageComponent = props => {
     onDeclineSale,
     timeSlots,
     fetchTimeSlotsError,
+    processTransitions,
     callSetInitialValues,
     onInitializeCardPaymentData,
   } = props;
@@ -232,6 +233,7 @@ export const TransactionPageComponent = props => {
       declineInProgress={declineInProgress}
       acceptSaleError={acceptSaleError}
       declineSaleError={declineSaleError}
+      nextTransitions={processTransitions}
       onSubmitBookingRequest={handleSubmitBookingRequest}
       timeSlots={timeSlots}
       fetchTimeSlotsError={fetchTimeSlotsError}
@@ -334,6 +336,7 @@ const mapStateToProps = state => {
     sendReviewError,
     timeSlots,
     fetchTimeSlotsError,
+    processTransitions,
   } = state.TransactionPage;
   const { currentUser } = state.user;
 
@@ -361,6 +364,7 @@ const mapStateToProps = state => {
     sendReviewError,
     timeSlots,
     fetchTimeSlotsError,
+    processTransitions,
   };
 };
 
