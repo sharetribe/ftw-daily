@@ -17,6 +17,7 @@ export const Empty = {
     },
     intl: fakeIntl,
     onCreateStripePaymentToken: noop,
+    onStripeInitialized: noop,
     stripePaymentTokenInProgress: false,
     stripePaymentTokenError: null,
   },

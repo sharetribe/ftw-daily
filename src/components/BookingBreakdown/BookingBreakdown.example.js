@@ -6,7 +6,8 @@ import {
   TRANSITION_COMPLETE,
   TRANSITION_DECLINE,
   TRANSITION_EXPIRE,
-  TRANSITION_REQUEST,
+  TRANSITION_REQUEST_PAYMENT,
+  TRANSITION_CONFIRM_PAYMENT,
   TX_TRANSITION_ACTOR_CUSTOMER,
 } from '../../util/transaction';
 import { LINE_ITEM_DAY, LINE_ITEM_NIGHT, LINE_ITEM_UNITS } from '../../util/types';
@@ -27,18 +28,24 @@ const exampleBooking = attributes => {
 
 const exampleTransaction = params => {
   const created = new Date(Date.UTC(2017, 1, 1));
+  const confirmed = new Date(Date.UTC(2017, 1, 1, 0, 1));
   return {
     id: new UUID('example-transaction'),
     type: 'transaction',
     attributes: {
       createdAt: created,
       lastTransitionedAt: created,
-      lastTransition: TRANSITION_REQUEST,
+      lastTransition: TRANSITION_CONFIRM_PAYMENT,
       transitions: [
         {
           createdAt: created,
           by: TX_TRANSITION_ACTOR_CUSTOMER,
-          transition: TRANSITION_REQUEST,
+          transition: TRANSITION_REQUEST_PAYMENT,
+        },
+        {
+          createdAt: confirmed,
+          by: TX_TRANSITION_ACTOR_CUSTOMER,
+          transition: TRANSITION_CONFIRM_PAYMENT,
         },
       ],
 
@@ -205,7 +212,7 @@ export const ProviderSalePreauthorized = {
     userRole: 'provider',
     unitType: LINE_ITEM_NIGHT,
     transaction: exampleTransaction({
-      lastTransition: TRANSITION_REQUEST,
+      lastTransition: TRANSITION_CONFIRM_PAYMENT,
       payinTotal: new Money(4500, CURRENCY),
       payoutTotal: new Money(2500, CURRENCY),
       lineItems: [

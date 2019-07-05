@@ -19,7 +19,7 @@
     height: 35px;
   }
   @media (--viewportLarge) {
-    height: 42px;
+    height: 38px;
     padding: 6px 0 14px 0;
   }
 }
@@ -32,9 +32,33 @@
   border-bottom-color: var(--failColor);
 }
 
+.error {
+  color: var(--failColor);
+}
+
+.errorMessage {
+  margin-top: 24px;
+  color: var(--failColor);
+}
+
 .paymentHeading {
   margin: 0 0 14px 0;
   color: var(--matterColorAnti);
+
+  padding-top: 8px;
+  padding-bottom: 0px;
+
+  @media (--viewportMedium) {
+    margin: 0 0 26px 0;
+  }
+}
+
+.billingHeading {
+  margin: 0 0 14px 0;
+  color: var(--matterColorAnti);
+
+  padding-top: 7px;
+  padding-bottom: 1px;
 
   @media (--viewportMedium) {
     margin: 0 0 26px 0;
@@ -55,6 +79,9 @@
 .messageHeading {
   color: var(--matterColorAnti);
   margin: 40px 0 14px 0;
+
+  padding-top: 4px;
+  padding-bottom: 4px;
 
   @media (--viewportMedium) {
     margin: 41px 0 26px 0;
@@ -115,4 +142,30 @@
 
 .missingStripeKey {
   color: var(--failColor);
+}
+
+.paymentAddressField {
+  padding-top: 38px;
+}
+
+.formRow {
+  display: flex;
+  justify-content: space-between;
+  flex-shrink: 0;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.postalCode {
+  margin-top: 24px;
+  width: calc(40% - 9px);
+}
+
+.city {
+  margin-top: 24px;
+  width: calc(60% - 9px);
+}
+
+.field {
+  margin-top: 24px;
 }

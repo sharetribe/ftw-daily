@@ -9,9 +9,12 @@ import { createResourceLocatorString, findRouteByRouteName } from '../../util/ro
 import routeConfiguration from '../../routeConfiguration';
 import { propTypes } from '../../util/types';
 import { ensureListing, ensureTransaction } from '../../util/data';
+import { dateFromAPIToLocalNoon } from '../../util/dates';
 import { createSlug } from '../../util/urlHelpers';
+import { txIsPaymentPending } from '../../util/transaction';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { isScrollingDisabled, manageDisableScrolling } from '../../ducks/UI.duck';
+import { initializeCardPaymentData } from '../../ducks/stripe.duck.js';
 import {
   NamedRedirect,
   TransactionPanel,
@@ -72,28 +75,22 @@ export const TransactionPageComponent = props => {
     timeSlots,
     fetchTimeSlotsError,
     callSetInitialValues,
+    onInitializeCardPaymentData,
   } = props;
 
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
+  const isProviderRole = transactionRole === PROVIDER;
+  const isCustomerRole = transactionRole === CUSTOMER;
 
-  const handleSubmitBookingRequest = values => {
-    const { bookingDates, ...bookingData } = values;
-
-    const initialValues = {
-      listing: currentListing,
-      enquiredTransaction: currentTransaction,
-      bookingData,
-      bookingDates: {
-        bookingStart: bookingDates.startDate,
-        bookingEnd: bookingDates.endDate,
-      },
-    };
-
+  const redirectToCheckoutPageWithInitialValues = (initialValues, listing) => {
     const routes = routeConfiguration();
     // Customize checkout page state with current listing and selected bookingDates
     const { setInitialValues } = findRouteByRouteName('CheckoutPage', routes);
     callSetInitialValues(setInitialValues, initialValues);
+
+    // Clear previous Stripe errors from store if there is any
+    onInitializeCardPaymentData();
 
     // Redirect to CheckoutPage
     history.push(
@@ -104,6 +101,46 @@ export const TransactionPageComponent = props => {
         {}
       )
     );
+  };
+
+  // If payment is pending, redirect to CheckoutPage
+  if (txIsPaymentPending(currentTransaction) && isCustomerRole) {
+    const currentBooking = ensureListing(currentTransaction.booking);
+
+    const initialValues = {
+      listing: currentListing,
+      // Transaction with payment pending should be passed to CheckoutPage
+      transaction: currentTransaction,
+      // Original bookingData content is not available,
+      // but it is already used since booking is created.
+      // (E.g. quantity is used when booking is created.)
+      bookingData: {},
+      bookingDates: {
+        bookingStart: dateFromAPIToLocalNoon(currentBooking.attributes.start),
+        bookingEnd: dateFromAPIToLocalNoon(currentBooking.attributes.end),
+      },
+    };
+
+    redirectToCheckoutPageWithInitialValues(initialValues, currentListing);
+  }
+
+  // Customer can create a booking, if the tx is in "enquiry" state.
+  const handleSubmitBookingRequest = values => {
+    const { bookingDates, ...bookingData } = values;
+
+    const initialValues = {
+      listing: currentListing,
+      // enquired transaction should be passed to CheckoutPage
+      transaction: currentTransaction,
+      bookingData,
+      bookingDates: {
+        bookingStart: bookingDates.startDate,
+        bookingEnd: bookingDates.endDate,
+      },
+      confirmPaymentError: null,
+    };
+
+    redirectToCheckoutPageWithInitialValues(initialValues, currentListing);
   };
 
   const deletedListingTitle = intl.formatMessage({
@@ -123,8 +160,6 @@ export const TransactionPageComponent = props => {
     currentTransaction.provider &&
     !fetchTransactionError;
 
-  const isProviderRole = transactionRole === PROVIDER;
-  const isCustomerRole = transactionRole === CUSTOMER;
   const isOwnSale =
     isDataAvailable &&
     isProviderRole &&
@@ -265,6 +300,7 @@ TransactionPageComponent.propTypes = {
   timeSlots: arrayOf(propTypes.timeSlot),
   fetchTimeSlotsError: propTypes.error,
   callSetInitialValues: func.isRequired,
+  onInitializeCardPaymentData: func.isRequired,
 
   // from withRouter
   history: shape({
@@ -339,6 +375,7 @@ const mapDispatchToProps = dispatch => {
     onSendReview: (role, tx, reviewRating, reviewContent) =>
       dispatch(sendReview(role, tx, reviewRating, reviewContent)),
     callSetInitialValues: (setInitialValues, values) => dispatch(setInitialValues(values)),
+    onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
   };
 };
 
