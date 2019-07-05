@@ -56,3 +56,8 @@ export const priceFilterConfig = {
 export const dateRangeFilterConfig = {
   active: true,
 };
+
+// Activate keyword filter on search page
+export const keywordFilterConfig = {
+  active: true,
+};

@@ -52,7 +52,13 @@ export class SearchPageComponent extends Component {
   }
 
   filters() {
-    const { categories, amenities, priceFilterConfig, dateRangeFilterConfig } = this.props;
+    const {
+      categories,
+      amenities,
+      priceFilterConfig,
+      dateRangeFilterConfig,
+      keywordFilterConfig,
+    } = this.props;
 
     // Note: "category" and "amenities" filters are not actually filtering anything by default.
     // Currently, if you want to use them, we need to manually configure them to be available
@@ -75,6 +81,10 @@ export class SearchPageComponent extends Component {
       dateRangeFilter: {
         paramName: 'dates',
         config: dateRangeFilterConfig,
+      },
+      keywordFilter: {
+        paramName: 'keywords',
+        config: keywordFilterConfig,
       },
     };
   }
@@ -220,6 +230,7 @@ export class SearchPageComponent extends Component {
               amenitiesFilter: filters.amenitiesFilter,
               priceFilter: filters.priceFilter,
               dateRangeFilter: filters.dateRangeFilter,
+              keywordFilter: filters.keywordFilter,
             }}
           />
           <ModalInMobile
@@ -267,6 +278,7 @@ SearchPageComponent.defaultProps = {
   amenities: config.custom.amenities,
   priceFilterConfig: config.custom.priceFilterConfig,
   dateRangeFilterConfig: config.custom.dateRangeFilterConfig,
+  keywordFilterConfig: config.custom.keywordFilterConfig,
   activeListingId: null,
 };
 
