@@ -3,6 +3,10 @@
   "version": "2.17.1",
   "private": "true",
   "license": "UNLICENSED",
+  "name": "app",
+  "version": "3.0.0",
+  "private": true,
+  "license": "Apache-2.0",
   "dependencies": {
     "@mapbox/polyline": "^1.0.0",
     "@sentry/browser": "4.5.1",

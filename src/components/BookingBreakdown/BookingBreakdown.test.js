@@ -5,7 +5,7 @@ import { renderDeep } from '../../util/test-helpers';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import {
   TRANSITION_CANCEL,
-  TRANSITION_REQUEST,
+  TRANSITION_REQUEST_PAYMENT,
   TX_TRANSITION_ACTOR_CUSTOMER,
 } from '../../util/transaction';
 import { LINE_ITEM_NIGHT } from '../../util/types';
@@ -21,12 +21,12 @@ const exampleTransaction = params => {
     attributes: {
       createdAt: created,
       lastTransitionedAt: created,
-      lastTransition: TRANSITION_REQUEST,
+      lastTransition: TRANSITION_REQUEST_PAYMENT,
       transitions: [
         {
           createdAt: created,
           by: TX_TRANSITION_ACTOR_CUSTOMER,
-          transition: TRANSITION_REQUEST,
+          transition: TRANSITION_REQUEST_PAYMENT,
         },
       ],
 

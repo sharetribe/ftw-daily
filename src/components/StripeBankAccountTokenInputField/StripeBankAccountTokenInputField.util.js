@@ -12,8 +12,10 @@ export const INSTITUTION_NUMBER = 'institutionNumber';
 export const TRANSIT_NUMBER = 'transitNumber';
 // Needed for creating full routing number in Hong Kong
 export const CLEARING_CODE = 'clearingCode';
-// Needed for creating full routing number in Hong Kong
+// Needed for creating full routing number in Hong Kong and Singapore
 export const BRANCH_CODE = 'branchCode';
+// Needed for creating full routing number in Singapore
+export const BANK_CODE = 'bankCode';
 // International bank account number (e.g. EU countries use this)
 export const IBAN = 'iban';
 // Routing number to separate bank account in different areas
@@ -29,6 +31,7 @@ export const BANK_ACCOUNT_INPUTS = [
   INSTITUTION_NUMBER,
   CLEARING_CODE,
   BRANCH_CODE,
+  BANK_CODE,
   SORT_CODE,
   ROUTING_NUMBER,
   ACCOUNT_NUMBER,
@@ -188,6 +191,14 @@ export const mapInputsToStripeAccountKeys = (country, values) => {
     case 'US':
       return {
         routing_number: cleanedString(values[ROUTING_NUMBER]),
+        account_number: cleanedString(values[ACCOUNT_NUMBER]),
+      };
+    case 'SG':
+      return {
+        routing_number: cleanedString(values[BANK_CODE]).concat(
+          '-',
+          cleanedString(values[BRANCH_CODE])
+        ),
         account_number: cleanedString(values[ACCOUNT_NUMBER]),
       };
     case 'HK':

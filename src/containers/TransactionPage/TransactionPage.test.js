@@ -8,7 +8,7 @@ import {
   fakeIntl,
 } from '../../util/test-data';
 import { renderShallow } from '../../util/test-helpers';
-import { TRANSITION_REQUEST } from '../../util/transaction';
+import { TRANSITION_CONFIRM_PAYMENT } from '../../util/transaction';
 import { TransactionPageComponent } from './TransactionPage';
 
 const noop = () => null;
@@ -20,7 +20,7 @@ describe('TransactionPage - Sale', () => {
     const end = new Date(Date.UTC(2017, 5, 13));
     const transaction = createTransaction({
       id: txId,
-      lastTransition: TRANSITION_REQUEST,
+      lastTransition: TRANSITION_CONFIRM_PAYMENT,
       booking: createBooking('booking1', {
         start,
         end,
@@ -49,6 +49,7 @@ describe('TransactionPage - Sale', () => {
       oldestMessagePageFetched: 0,
       messages: [],
       sendMessageInProgress: false,
+      onInitializeCardPaymentData: noop,
       onShowMoreMessages: noop,
       onSendMessage: noop,
       onResetForm: noop,
@@ -77,7 +78,7 @@ describe('TransactionPage - Order', () => {
 
     const transaction = createTransaction({
       id: txId,
-      lastTransition: TRANSITION_REQUEST,
+      lastTransition: TRANSITION_CONFIRM_PAYMENT,
       booking: createBooking('booking1', {
         start,
         end,
@@ -103,6 +104,7 @@ describe('TransactionPage - Order', () => {
       scrollingDisabled: false,
       callSetInitialValues: noop,
       transaction,
+      onInitializeCardPaymentData: noop,
       onShowMoreMessages: noop,
       onSendMessage: noop,
       onResetForm: noop,
