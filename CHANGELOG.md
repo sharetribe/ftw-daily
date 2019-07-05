@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] SectionHero: fix type in search params. There was an extra "/s?".
+  [#1124](https://github.com/sharetribe/flex-template-web/pull/1124)
 - [add] Add support for Singapore as the payout country of a provider. Also fix a bug in passing the
   personal ID number to Stripe. [#1122](https://github.com/sharetribe/flex-template-web/pull/1122)
 - [add] Add events.mapbox.com to `connect-src` in `csp.js` file.
