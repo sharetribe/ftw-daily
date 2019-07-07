@@ -100,7 +100,7 @@
 }
 
 .heroButton {
-  margin: 0 auto;
+  margin: 0 auto !important;
   @apply --marketplaceButtonStyles;
   @apply --SectionHero_animation;
 
