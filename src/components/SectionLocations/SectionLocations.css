@@ -54,7 +54,7 @@
   position: relative;
   width: 100%;
   border-radius: 4px;
-  transition: var(--transitionStyleButton);
+  transition: var(--transitionStyleButton); 
 }
 
 .aspectWrapper:hover ~ .linkText {
