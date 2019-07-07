@@ -71,6 +71,7 @@
 }
 
 .heroMainTitle {
+  text-align: center;
   @apply --marketplaceHeroTitleFontStyles;
   color: var(--matterColorLight);
 
@@ -83,6 +84,7 @@
 }
 
 .heroSubTitle {
+  text-align: center;
   @apply --marketplaceBodyFontStyles;
 
   color: var(--matterColorLight);
@@ -98,8 +100,7 @@
 }
 
 .heroButton {
-  display: flex;
-  justify-content: center;
+  margin: 0 auto;
   @apply --marketplaceButtonStyles;
   @apply --SectionHero_animation;
 

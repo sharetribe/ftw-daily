@@ -3,19 +3,6 @@
     background: #F7F7F7;
     }
 
-    .SectionLocations_location__1paVa:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.3);
-    }
-
-    .SectionLocations_aspectWrapper__dh-cu:hover ~ .SectionLocations_linkText__1a8gC {
-    background: linear-gradient(-45deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
-    }
-
-    .SectionLocations_aspectWrapper__dh-cu:hover {
-    background: linear-gradient(-45deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
-    }
-
     .SectionHero_heroContent__3kM-n a:hover, .LandingPage_whyContainer__2R9A8 a:hover, #how-padding a:hover {
     background-image: linear-gradient(to right top, #d16ba5, #c077bd, #a983d0, #8d8fdc, #6d9ae2, #6d9ae2, #6d9ae2, #6d9ae2, #8d8fdc, #a983d0, #c077bd, #d16ba5);
     color: #fff;
@@ -30,17 +17,8 @@
     justify-content: center !important;
     }
 
-    .TopbarDesktop_createListingLink__5mz2j .TopbarDesktop_signup__2qg3U {
-    color: #000 !important;
-    }
-
     .listingsLink {
     color: #000;
-    }
-
-    .SectionLocations_aspectWrapper__dh-cu {
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
     }
 
     .ListingCard_info__2X44s {
@@ -106,24 +84,12 @@
     margin: 0 auto !important;
     }
 
-    .TopbarDesktop_createListingLink__5mz2j, .SectionLocations_locationName__27cSZ {
-    color: #41a6df !important;
-    }
-
     .LocationAutocompleteInput_iconSvgGroup__2g-R7 {
     stroke: #41a6df !important;
     }
 
     .TopbarDesktop_createListingLink__5mz2j:hover, .TopbarDesktop_signupLink__ynA7h:hover, .TopbarDesktop_loginLink__2GdiG:hover, .TopbarDesktop_logoLink__3mf-U:hover {
     border-bottom: 4px solid #41a6df !important;
-    }
-
-    .LandingPage_sectionContentFirstChild__1lJzf {
-    margin-top: inherit !important;
-    }
-
-    .LandingPage_sectionContent__1ahe_ {
-    margin: 80px auto 120px auto !important;
     }
 
     .SectionLocations_linkText__1a8gC {
@@ -260,18 +226,6 @@
     }
 
     /* FOOTER */
-
-    .Footer_root__25Pzf {
-    background: #41a6df !important;
-    }
-
-    .Footer_link__d6_fN, .Footer_legalLink__7lT2Z, .Footer_organizationDescription__1HwWf, .Footer_copyrightLink__2Oejv {
-    color: #fff !important;
-    }
-
-    .IconSocialMediaFacebook_root__1B7Mc, .IconSocialMediaTwitter_root__YqfQE {
-    fill: #fff !important;
-    }
 
     @media (max-width: 520px) {
     .LandingPage_sectionContent__1ahe_ {

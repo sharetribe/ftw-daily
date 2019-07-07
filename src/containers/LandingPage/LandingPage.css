@@ -102,8 +102,9 @@
 }
 
 .sectionContentFirstChild {
+  margin: 80px auto 120px auto !important;
   composes: sectionContent;
-  margin-top: 3vh;
+  margin-top: 0px;
 }
 
 /* A bar on top of light sections */

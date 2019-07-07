@@ -236,7 +236,7 @@
   height: 100%;
   padding: 0 12px 0 12px;
 
-  color: var(--matterColor);
+  color: #000 !important;
 
   &:hover {
     color: var(--matterColorDark);
@@ -258,6 +258,7 @@
 
 .signup,
 .login {
+  color: #000 !important;
   @apply --marketplaceH4FontStyles;
   @apply --TopbarDesktop_label;
 }

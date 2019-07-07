@@ -62,9 +62,26 @@
   }
 }
 
+.location:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.3);
+}
+
+.aspectWrapper:hover ~ .linkText {
+  background: linear-gradient(-45deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+}
+
+.aspectWrapper:hover {
+  background: linear-gradient(-45deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+}
+
+
 /* An image wrapper that defines the images aspect ratio */
 .aspectWrapper {
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
   padding-bottom: calc(6 / 13 * 100%); /* 13:6 Aspect Ratio */
+  background: linear-gradient(-45deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6));
 
   @media (--viewportMedium) {
     padding-bottom: calc(2 / 3 * 100%); /* 3:2 Aspect Ratio */
