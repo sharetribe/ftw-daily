@@ -256,7 +256,7 @@
   }
 }
 
-.signup,
+.signup, 
 .login {
   color: #000 !important;
   @apply --marketplaceH4FontStyles;
