@@ -14,6 +14,13 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+## [v3.1.1] 2019-07-08
+
+- [fix] Ensure on `TransactionPanel` that enquiry has a correct transition when a customer tries to
+  book the listing. This might happen with transaction process changes (e.g. when changing from
+  previous default to SCA process).
+  [#1131](https://github.com/sharetribe/flex-template-web/pull/1131)
+
 ## [v3.1.0] 2019-07-05
 
 - [fix] SectionHero: fix type in search params. There was an extra "/s?".
