@@ -22,6 +22,8 @@ const i18n = {
 // Should search results be ordered by distance to origin.
 // NOTE: If this is set to true add parameter 'origin' to every location in default-location-searches.js
 // Without the 'origin' parameter, search will not work correctly
+// NOTE: Keyword search and ordering search results by distance can't be used at the same time. You can turn keyword
+// search off by changing the keywordFilterConfig parameter active to false in marketplace-custom-config.js
 const sortSearchByDistance = false;
 
 // API supports custom processes to be used in booking process.
