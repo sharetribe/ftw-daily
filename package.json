@@ -15,7 +15,7 @@
     "classnames": "^2.2.6",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.4",
-    "core-js": "^2.5.7",
+    "core-js": "^3.1.4",
     "decimal.js": "10.0.1",
     "dotenv": "6.2.0",
     "dotenv-expand": "4.2.0",
