@@ -178,7 +178,7 @@ export class ListingPageComponent extends Component {
       timeSlots,
       fetchTimeSlotsError,
       categoriesConfig,
-      amenitiesConfig,
+      filtersConfig,
     } = this.props;
 
     const listingId = new UUID(rawParams.id);
@@ -416,7 +416,7 @@ export class ListingPageComponent extends Component {
                     onContactUser={this.onContactUser}
                   />
                   <SectionDescriptionMaybe description={description} />
-                  <SectionFeaturesMaybe options={amenitiesConfig} publicData={publicData} />
+                  <SectionFeaturesMaybe options={filtersConfig} publicData={publicData} />
                   <SectionRulesMaybe publicData={publicData} />
                   <SectionMapMaybe
                     geolocation={geolocation}
@@ -474,7 +474,7 @@ ListingPageComponent.defaultProps = {
   fetchTimeSlotsError: null,
   sendEnquiryError: null,
   categoriesConfig: config.custom.categories,
-  amenitiesConfig: config.custom.amenities,
+  filtersConfig: config.custom.filters,
 };
 
 ListingPageComponent.propTypes = {
@@ -514,7 +514,7 @@ ListingPageComponent.propTypes = {
   onSendEnquiry: func.isRequired,
 
   categoriesConfig: array,
-  amenitiesConfig: array,
+  filtersConfig: array,
 };
 
 const mapStateToProps = state => {

@@ -40,7 +40,7 @@ exports[`SearchPageComponent matches snapshot 1`] = `
       }
       primaryFilters={
         Object {
-          "amenitiesFilter": Object {
+          "filtersFilter": Object {
             "options": Array [
               Object {
                 "key": "dog1",
@@ -51,7 +51,7 @@ exports[`SearchPageComponent matches snapshot 1`] = `
                 "label": "Dog 2",
               },
             ],
-            "paramName": "pub_amenities",
+            "paramName": "pub_filters",
           },
           "categoryFilter": Object {
             "options": Array [

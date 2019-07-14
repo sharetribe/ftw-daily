@@ -2,7 +2,7 @@
  * Marketplace specific configuration.
  */
 
-export const amenities = [
+export const filters = [
   {
     key: 'first_aid',
     label: 'First Aid',
@@ -42,10 +42,10 @@ export const amenities = [
 ];
 
 export const categories = [
-  { key: 'smoke', label: 'Smoke' },
-  { key: 'electric', label: 'Electric' },
-  { key: 'wood', label: 'Wood' },
-  { key: 'other', label: 'Other' },
+  { key: 'babysitter', label: 'Babysitter' },
+  { key: 'nanny', label: 'Nanny' },
+  { key: 'childminder', label: 'Childminder' },
+  { key: 'day_care', label: 'Day Care' },
 ];
 
 // Price filter configuration

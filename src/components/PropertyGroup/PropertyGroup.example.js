@@ -42,7 +42,7 @@ const exampleOptions = [
 export const WithSomeSelected = {
   component: PropertyGroup,
   props: {
-    id: 'amenities',
+    id: 'filters',
     options: exampleOptions,
     selectedOptions: ['first_aid', 'own_transport', 'evenings'],
     twoColumns: true,

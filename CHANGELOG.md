@@ -102,7 +102,7 @@ There was also a couple of bug fixes you should check carefully:
 
 ## [v2.13.1] 2019-03-29
 
-- [add] a comment about category and amenities filters. They don't work out-of-the-box, extended
+- [add] a comment about category and filters filters. They don't work out-of-the-box, extended
   data needs a schema before it can work as a search filter.
   [#1055](https://github.com/sharetribe/flex-template-web/pull/1055)
 - [fix] EditListingWizard: currentUser was null when the EditListingPage got reloaded causing

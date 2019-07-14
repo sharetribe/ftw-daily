@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import SelectMultipleFilter from './SelectMultipleFilter';
 import { stringify, parse } from '../../util/urlHelpers';
 
-const URL_PARAM = 'pub_amenities';
+const URL_PARAM = 'pub_filters';
 
 const options = [
   {
@@ -50,19 +50,19 @@ const handleSubmit = (urlParam, values, history) => {
   history.push(`${window.location.pathname}${queryParams}`);
 };
 
-const AmenitiesFilterPopup = withRouter(props => {
+const FiltersFilterPopup = withRouter(props => {
   const { history, location } = props;
 
   const params = parse(location.search);
-  const amenities = params[URL_PARAM];
-  const initialValues = !!amenities ? amenities.split(',') : [];
+  const filters = params[URL_PARAM];
+  const initialValues = !!filters ? filters.split(',') : [];
 
   return (
     <SelectMultipleFilter
       id="SelectMultipleFilterPopupExample"
-      name="amenities"
+      name="filters"
       urlParam={URL_PARAM}
-      label="Amenities"
+      label="Filters"
       onSubmit={(urlParam, values) => handleSubmit(urlParam, values, history)}
       showAsPopup={true}
       liveEdit={false}
@@ -73,25 +73,25 @@ const AmenitiesFilterPopup = withRouter(props => {
   );
 });
 
-export const AmenitiesFilterPopupExample = {
-  component: AmenitiesFilterPopup,
+export const FiltersFilterPopupExample = {
+  component: FiltersFilterPopup,
   props: {},
   group: 'filters',
 };
 
-const AmenitiesFilterPlain = withRouter(props => {
+const FiltersFilterPlain = withRouter(props => {
   const { history, location } = props;
 
   const params = parse(location.search);
-  const amenities = params[URL_PARAM];
-  const initialValues = !!amenities ? amenities.split(',') : [];
+  const filters = params[URL_PARAM];
+  const initialValues = !!filters ? filters.split(',') : [];
 
   return (
     <SelectMultipleFilter
       id="SelectMultipleFilterPlainExample"
-      name="amenities"
+      name="filters"
       urlParam={URL_PARAM}
-      label="Amenities"
+      label="Filters"
       onSubmit={(urlParam, values) => {
         handleSubmit(urlParam, values, history);
       }}
@@ -103,8 +103,8 @@ const AmenitiesFilterPlain = withRouter(props => {
   );
 });
 
-export const AmenitiesFilterPlainExample = {
-  component: AmenitiesFilterPlain,
+export const FiltersFilterPlainExample = {
+  component: FiltersFilterPlain,
   props: {},
   group: 'filters',
 };

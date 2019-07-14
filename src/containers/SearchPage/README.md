@@ -1,6 +1,6 @@
 # SearchPage
 
-> **Note:** _category_ and _amenities_ filters are not actually filtering anything by default. They
+> **Note:** _category_ and _filters_ filters are not actually filtering anything by default. They
 > are tied to [extended data](https://www.sharetribe.com/docs/references/extended-data/), which is
 > likely to be customized in every marketplace. You can add public data to listing entity in your
 > client app, but to make it work as a search filter, we need to manually add

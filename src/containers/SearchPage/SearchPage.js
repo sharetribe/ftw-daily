@@ -52,9 +52,9 @@ export class SearchPageComponent extends Component {
   }
 
   filters() {
-    const { categories, amenities, priceFilterConfig, dateRangeFilterConfig } = this.props;
+    const { categories, filters, priceFilterConfig, dateRangeFilterConfig } = this.props;
 
-    // Note: "category" and "amenities" filters are not actually filtering anything by default.
+    // Note: "category" and "filters" filters are not actually filtering anything by default.
     // Currently, if you want to use them, we need to manually configure them to be available
     // for search queries. Read more from extended data document:
     // https://www.sharetribe.com/docs/references/extended-data/#data-schema
@@ -64,9 +64,9 @@ export class SearchPageComponent extends Component {
         paramName: 'pub_category',
         options: categories,
       },
-      amenitiesFilter: {
-        paramName: 'pub_amenities',
-        options: amenities,
+      filtersFilter: {
+        paramName: 'pub_filters',
+        options: filters,
       },
       priceFilter: {
         paramName: 'price',
@@ -217,7 +217,7 @@ export class SearchPageComponent extends Component {
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             primaryFilters={{
               categoryFilter: filters.categoryFilter,
-              amenitiesFilter: filters.amenitiesFilter,
+              filtersFilter: filters.filtersFilter,
               priceFilter: filters.priceFilter,
               dateRangeFilter: filters.dateRangeFilter,
             }}
@@ -264,7 +264,7 @@ SearchPageComponent.defaultProps = {
   searchParams: {},
   tab: 'listings',
   categories: config.custom.categories,
-  amenities: config.custom.amenities,
+  filters: config.custom.filters,
   priceFilterConfig: config.custom.priceFilterConfig,
   dateRangeFilterConfig: config.custom.dateRangeFilterConfig,
   activeListingId: null,
@@ -283,7 +283,7 @@ SearchPageComponent.propTypes = {
   searchParams: object,
   tab: oneOf(['filters', 'listings', 'map']).isRequired,
   categories: array,
-  amenities: array,
+  filters: array,
   priceFilterConfig: shape({
     min: number.isRequired,
     max: number.isRequired,

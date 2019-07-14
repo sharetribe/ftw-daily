@@ -1,17 +1,17 @@
 import EditListingFeaturesForm from './EditListingFeaturesForm';
 
-const NAME = 'amenities';
+const NAME = 'filters';
 
 const initialValueArray = ['first_aid', 'qualifications', 'own_transport'];
 const initialValues = { [NAME]: initialValueArray };
 
-export const Amenities = {
+export const Filters = {
   component: EditListingFeaturesForm,
   props: {
     name: NAME,
     onSubmit: values => console.log('EditListingFeaturesForm submit:', values),
     initialValues: initialValues,
-    saveActionMsg: 'Save amenities',
+    saveActionMsg: 'Save filters',
     updated: false,
     updateInProgress: false,
   },

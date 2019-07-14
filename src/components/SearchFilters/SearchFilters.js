@@ -67,7 +67,7 @@ const SearchFiltersComponent = props => {
     resultsCount,
     searchInProgress,
     categoryFilter,
-    amenitiesFilter,
+    filtersFilter,
     priceFilter,
     dateRangeFilter,
     isSearchFiltersPanelOpen,
@@ -84,12 +84,12 @@ const SearchFiltersComponent = props => {
     id: 'SearchFilters.categoryLabel',
   });
 
-  const amenitiesLabel = intl.formatMessage({
-    id: 'SearchFilters.amenitiesLabel',
+  const filtersLabel = intl.formatMessage({
+    id: 'SearchFilters.filtersLabel',
   });
 
-  const initialAmenities = amenitiesFilter
-    ? initialValues(urlQueryParams, amenitiesFilter.paramName)
+  const initialFilters = filtersFilter
+    ? initialValues(urlQueryParams, filtersFilter.paramName)
     : null;
 
   const initialCategory = categoryFilter
@@ -159,16 +159,16 @@ const SearchFiltersComponent = props => {
     />
   ) : null;
 
-  const amenitiesFilterElement = amenitiesFilter ? (
+  const filtersFilterElement = filtersFilter ? (
     <SelectMultipleFilter
-      id={'SearchFilters.amenitiesFilter'}
-      name="amenities"
-      urlParam={amenitiesFilter.paramName}
-      label={amenitiesLabel}
+      id={'SearchFilters.filtersFilter'}
+      name="filters"
+      urlParam={filtersFilter.paramName}
+      label={filtersLabel}
       onSubmit={handleSelectOptions}
       showAsPopup
-      options={amenitiesFilter.options}
-      initialValues={initialAmenities}
+      options={filtersFilter.options}
+      initialValues={initialFilters}
       contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
     />
   ) : null;
@@ -218,7 +218,7 @@ const SearchFiltersComponent = props => {
     <div className={classes}>
       <div className={css.filters}>
         {categoryFilterElement}
-        {amenitiesFilterElement}
+        {filtersFilterElement}
         {priceFilterElement}
         {dateRangeFilterElement}
         {toggleSearchFiltersPanelButton}
@@ -253,7 +253,7 @@ SearchFiltersComponent.defaultProps = {
   resultsCount: null,
   searchingInProgress: false,
   categoryFilter: null,
-  amenitiesFilter: null,
+  filtersFilter: null,
   priceFilter: null,
   dateRangeFilter: null,
   isSearchFiltersPanelOpen: false,
@@ -270,7 +270,7 @@ SearchFiltersComponent.propTypes = {
   searchingInProgress: bool,
   onManageDisableScrolling: func.isRequired,
   categoriesFilter: propTypes.filterConfig,
-  amenitiesFilter: propTypes.filterConfig,
+  filtersFilter: propTypes.filterConfig,
   priceFilter: propTypes.filterConfig,
   dateRangeFilter: propTypes.filterConfig,
   isSearchFiltersPanelOpen: bool,
