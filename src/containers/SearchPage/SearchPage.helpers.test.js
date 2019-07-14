@@ -7,7 +7,7 @@ import {
 
 const urlParams = {
   pub_category: 'smoke',
-  pub_amenities: 'towels,bathroom',
+  pub_amenities: 'first_aid,own_transport',
 };
 
 const filters = {
@@ -17,7 +17,7 @@ const filters = {
   },
   amenitiesFilter: {
     paramName: 'pub_amenities',
-    options: [{ key: 'towels' }, { key: 'bathroom' }],
+    options: [{ key: 'first_aid' }, { key: 'own_transport' }],
   },
 };
 
@@ -39,7 +39,7 @@ describe('SearchPage.helpers', () => {
     });
 
     it('drops a param with invalid name', () => {
-      const validParam = validURLParamForExtendedData('pub_invalid', 'towels', filters);
+      const validParam = validURLParamForExtendedData('pub_invalid', 'first_aid', filters);
       expect(validParam).toEqual({});
     });
   });

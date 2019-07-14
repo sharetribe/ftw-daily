@@ -1,10 +1,7 @@
 {
-  "name": "Sharetribe Flex Template Demo",
-  "description": "Sharetribe Flex Template Demo - Saunatime!",
-  "keywords": [
-    "node", 
-    "react"
-  ],
+  "name": "öogo",
+  "description": "Book the Right-Fit Childcare, every time with öogo",
+  "keywords": ["node", "react"],
   "repository": "https://github.com/sharetribe/flex-template-web/",
   "env": {
     "REACT_APP_MAPBOX_ACCESS_TOKEN": {

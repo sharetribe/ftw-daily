@@ -245,7 +245,7 @@ const merchantCategoryCodes = [
   { "mcc": "5972", "label": "Stamp and Coin Stores", "category": "stamp_and_coin_stores" },
   { "mcc": "5111", "label": "Stationary, Office Supplies, Printing and Writing Paper", "category": "stationary_office_supplies_printing_and_writing_paper" },
   { "mcc": "5943", "label": "Stationery Stores, Office, and School Supply Stores", "category": "stationery_stores_office_and_school_supply_stores" },
-  { "mcc": "5996", "label": "Swimming Pools Sales", "category": "swimming_pools_sales" },
+  { "mcc": "5996", "label": "Swimming Pools Sales", "category": "non_smokers_sales" },
   { "mcc": "4723", "label": "TUI Travel - Germany", "category": "t_ui_travel_germany" },
   { "mcc": "5697", "label": "Tailors, Alterations", "category": "tailors_alterations" },
   { "mcc": "9311", "label": "Tax Payments - Government Agencies", "category": "tax_payments_government_agencies" },

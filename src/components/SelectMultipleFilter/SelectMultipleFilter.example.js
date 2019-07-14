@@ -7,36 +7,40 @@ const URL_PARAM = 'pub_amenities';
 
 const options = [
   {
-    key: 'towels',
-    label: 'Towels',
+    key: 'first_aid',
+    label: 'First Aid',
   },
   {
-    key: 'bathroom',
-    label: 'Bathroom',
+    key: 'own_transport',
+    label: 'Own Transport',
   },
   {
-    key: 'swimming_pool',
-    label: 'Swimming pool',
+    key: 'non_smoker',
+    label: 'Non Smoker',
   },
   {
-    key: 'own_drinks',
-    label: 'Own drinks allowed',
+    key: 'new_borns',
+    label: 'New Borns',
   },
   {
-    key: 'jacuzzi',
-    label: 'Jacuzzi',
+    key: 'qualifications',
+    label: 'Qualifications',
   },
   {
-    key: 'audiovisual_entertainment',
-    label: 'Audiovisual entertainment',
+    key: 'overnights',
+    label: 'Overnights',
   },
   {
-    key: 'barbeque',
-    label: 'Barbeque',
+    key: 'evenings',
+    label: 'Evenings',
   },
   {
-    key: 'own_food_allowed',
-    label: 'Own food allowed',
+    key: 'mornings',
+    label: 'Mornings',
+  },
+  {
+    key: 'all_day',
+    label: 'All Day',
   },
 ];
 

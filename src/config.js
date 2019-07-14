@@ -84,7 +84,7 @@ const streetAddress = 'Bulevardi 14';
 const canonicalRootURL = process.env.REACT_APP_CANONICAL_ROOT_URL;
 
 // Site title is needed in meta tags (bots and social media sharing reads those)
-const siteTitle = 'Saunatime';
+const siteTitle = 'öogo';
 
 // Twitter handle is needed in meta tags (twitter:site). Start it with '@' character
 const siteTwitterHandle = '@sharetribe';
@@ -150,7 +150,7 @@ const maps = {
     defaultZoomLevel: 13,
 
     // Color of the circle on the Map component.
-    circleColor: '#c0392b',
+    circleColor: '#02CFCA',
   },
 
   // Custom marker image to use in the Map component.

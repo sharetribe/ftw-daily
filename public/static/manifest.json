@@ -1,9 +1,9 @@
 {
-  "name": "Saunatime",
-  "short_name": "Saunatime",
+  "name": "öogo",
+  "short_name": "öogo",
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#C0392B",
+  "theme_color": "#02CFCA",
   "background_color": "#FFFFFF",
   "icons": [
     {
