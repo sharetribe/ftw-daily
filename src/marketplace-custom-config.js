@@ -46,6 +46,7 @@ export const categories = [
   { key: 'nanny', label: 'Nanny' },
   { key: 'childminder', label: 'Childminder' },
   { key: 'day_care', label: 'Day Care' },
+  { key: 'maternity_nurse', label: 'Maternity Nurse' },
 ];
 
 // Price filter configuration
