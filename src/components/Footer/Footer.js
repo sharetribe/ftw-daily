@@ -62,50 +62,62 @@ const Footer = props => {
     <div className={classes}>
       <div className={css.topBorderWrapper}>
         <div className={css.content}>
-
-          {/*css.organization*/}
-          {/*css.infoLinks*/}
-          {/*css.searches*/}
-          {/*css.searchesExtra*/}
-          {/*css.extraLinks*/}
-
-
           <div className={css.links}>
             <div className={css.footerContainerHorizontal}>
 
-              <div className={css.footerContainerVertical}>
+              <div className={css.footerContainerVertical23}>
                 <div className={css.verticalContainerHeader}>
-                  <p>Some header</p>
+                  <div>Get started</div>
                 </div>
                 <div className={css.verticalContainerContent}>
-                  <p>Some Item</p>
+                  <div>So functionlet's</div>
+                  <div>Jetzt Pferd mleten (NEU)</div>
                 </div>
               </div>
 
-              <div className={css.footerContainerVertical}>
+              <div className={css.footerContainerVertical23}>
                 <div className={css.verticalContainerHeader}>
-                  <p>Some header</p>
+                  <div>LearnMore</div>
                 </div>
                 <div className={css.verticalContainerContent}>
-                  <p>Some Item</p>
+                  <div>Community</div>
+                  <div>Karriere</div>
+                  <div>Kontakt</div>
+                  <div>FAQ</div>
+                  <div>Hilfe</div>
                 </div>
               </div>
 
-              <div className={css.footerContainerVertical}>
+              <div className={css.footerContainerVertical31}>
                 <div className={css.verticalContainerHeader}>
-                  <p>Some header</p>
+                  <div>Top cities</div>
                 </div>
                 <div className={css.verticalContainerContent}>
-                  <p>Some Item</p>
+                  <div className={css.topCitiesContainer}>
+                    <div className={css.topCitiesColumn}>
+                      <div className={css.topCityItem}>Zürich</div>
+                      <div className={css.topCityItem}>Aargau</div>
+                      <div className={css.topCityItem}>Luzern</div>
+                      <div className={css.topCityItem}>Bern</div>
+                      <div className={css.topCityItem}>Basel</div>
+                    </div>
+                    <div className={css.topCitiesColumn}>
+                      <div className={css.topCityItem}>St. Gallen</div>
+                      <div className={css.topCityItem}>Solothurn</div>
+                      <div className={css.topCityItem}>Schwyz</div>
+                      <div className={css.topCityItem}>Waadt</div>
+                      <div className={css.topCityItem}>Freiburg</div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div className={css.footerContainerVertical}>
+              <div className={css.footerContainerVertical23}>
                 <div className={css.verticalContainerHeader}>
-                  <p>Some header</p>
+                  <div>Socials will be here</div>
                 </div>
                 <div className={css.verticalContainerContent}>
-                  <p>Some Item</p>
+                  <div>Entdecke unseren Store</div>
                 </div>
               </div>
 
@@ -113,26 +125,22 @@ const Footer = props => {
             <div className={css.footerContainerHorizontal}>
               <div className={css.bottomLine}>
                 <div className={css.bottomLineItem}>
-                  <p>
+                  <div>
                     <FormattedMessage id="Footer.copyright" />
-                  </p>
+                  </div>
                 </div>
                 <div className={css.bottomLineItem}>
-                  <p>Impressum</p>
+                  <div>Impressum</div>
                 </div>
                 <div className={css.bottomLineItem}>
-                  <p>Kontakt</p>
+                  <div>Kontakt</div>
                 </div>
                 <div className={css.bottomLineItem}>
-                  <p>Kontakt</p>
+                  <div>Datenschutz</div>
                 </div>
                 <div className={css.bottomLineItem}>
-                  <p>Datenschutz</p>
+                  <div>Nutzungsbedingungen</div>
                 </div>
-                <div className={css.bottomLineItem}>
-                  <p>Nutzungsbedingungen</p>
-                </div>
-
               </div>
             </div>
           </div>

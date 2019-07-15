@@ -317,8 +317,13 @@
   flex-direction: row;
 }
 
-.footerContainerVertical {
-  width: 25%;
+.footerContainerVertical23 {
+  width: 23%;
+  padding-right: 15px;
+}
+
+.footerContainerVertical31 {
+  width: 31%;
   padding-right: 15px;
 }
 
@@ -336,5 +341,19 @@
 }
 
 .verticalContainerContent {
+
+}
+
+.topCitiesContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.topCitiesColumn {
+  padding-right: 20px;
+  width: 50%;
+}
+
+.topCityItem {
 
 }
