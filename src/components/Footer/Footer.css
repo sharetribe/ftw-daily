@@ -75,6 +75,7 @@
   justify-content: flex-start;
   width: 100%;
   margin-bottom: 18px;
+  flex-direction: column;
 
   @media (--viewportMedium) {
     flex-wrap: nowrap;
@@ -309,4 +310,31 @@
 
 .privacy {
   margin-right: 24px;
+}
+
+.footerContainerHorizontal {
+  display: flex;
+  flex-direction: row;
+}
+
+.footerContainerVertical {
+  width: 25%;
+  padding-right: 15px;
+}
+
+.bottomLine {
+  display: flex;
+  margin-top: 40px;
+}
+
+.bottomLineItem {
+  margin-right: 25px;
+}
+
+.verticalContainerHeader {
+
+}
+
+.verticalContainerContent {
+
 }
