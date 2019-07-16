@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [change] Update outdated dependencies. This includes updating lodash to fix the security issue.
+  [#1135](https://github.com/sharetribe/flex-template-web/pull/1135)
+
 ## [v3.1.1] 2019-07-08
 
 - [fix] Ensure on `TransactionPanel` that enquiry has a correct transition when a customer tries to
