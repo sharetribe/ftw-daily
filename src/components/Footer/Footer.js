@@ -1,8 +1,8 @@
 import React from 'react';
 import { string } from 'prop-types';
+import { Link } from 'react-router-dom';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
-import { twitterPageURL } from '../../util/urlHelpers';
 import config from '../../config';
 import {
   IconSocialMediaYoutube,
@@ -66,10 +66,6 @@ const Footer = props => {
   const { rootClassName, className, intl } = props;
   const socialMediaLinks = renderSocialMediaLinks(intl);
   const classes = classNames(rootClassName || css.root, className);
-
-  console.log('intl ', intl);
-  console.log('socialMediaLinks ', socialMediaLinks);
-
 
   return (
     <div className={classes}>
@@ -244,7 +240,9 @@ const Footer = props => {
                   <div>{socialMediaLinks}</div>
                 </div>
                 <div className={css.verticalContainerContent}>
-                  <div>Entdecke unseren Store</div>
+                  <Link to='#' className={css.link}>
+                    Entdecke unseren Store
+                  </Link>
                 </div>
               </div>
 
