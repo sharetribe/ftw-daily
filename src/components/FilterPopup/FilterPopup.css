@@ -41,6 +41,11 @@
     border: 1px solid var(--marketplaceColorDark);
   }
 }
+.labelEllipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 .popup {
   /* By default hide the content */
