@@ -75,6 +75,7 @@
   justify-content: flex-start;
   width: 100%;
   margin-bottom: 18px;
+  flex-direction: column;
 
   @media (--viewportMedium) {
     flex-wrap: nowrap;
@@ -309,4 +310,61 @@
 
 .privacy {
   margin-right: 24px;
+}
+
+.footerContainerHorizontal {
+  display: flex;
+  flex-direction: row;
+}
+
+.footerContainerVertical23 {
+  width: 23%;
+  padding-right: 15px;
+}
+
+.footerContainerVertical31 {
+  width: 31%;
+  padding-right: 15px;
+}
+
+.bottomLine {
+  display: flex;
+  margin-top: 40px;
+}
+
+.bottomLineItem {
+  margin-right: 25px;
+}
+
+.verticalContainerHeader {
+
+}
+
+.verticalContainerContent {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.topCitiesContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.topCitiesColumn {
+  padding-right: 20px;
+  width: 50%;
+}
+
+.topCityItem {
+
+}
+
+.greenLabel {
+  border: 1px solid green;
+  background-color: green;
+  color: white;
+  border-radius: 8px;
+  padding: 2px 5px;
+  font-size: 75%;
 }

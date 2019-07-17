@@ -95,11 +95,14 @@ const siteTitle = 'Saunatime';
 // Twitter handle is needed in meta tags (twitter:site). Start it with '@' character
 const siteTwitterHandle = '@sharetribe';
 
-// Instagram page is used in SEO schema (http://schema.org/Organization)
-const siteInstagramPage = null;
 
+const siteYoutubePage = 'https://www.youtube.com/channel/UC-lrVxsEtC7qSWZATji2E_A';
+// Instagram page is used in SEO schema (http://schema.org/Organization)
+const siteInstagramPage = 'https://www.instagram.com/horsedeal24/';
+const siteSnapchatPage = 'https://www.snapchat.com/add/horsedeal24';
 // Facebook page is used in SEO schema (http://schema.org/Organization)
-const siteFacebookPage = 'https://www.facebook.com/Sharetribe/';
+const siteFacebookPage = 'https://api.whatsapp.com/send?phone=41762660505&text=Hallo!%20Ich%20brauche%20Hilfe,%20k%C3%B6nnt%20ihr%20mir%20weiterhelfen?%20';
+
 
 // Facebook counts shares with app or page associated by this id
 // Currently it is unset, but you can read more about fb:app_id from

@@ -45,6 +45,8 @@ export { default as IconSearch } from './IconSearch/IconSearch';
 export { default as IconSocialMediaFacebook } from './IconSocialMediaFacebook/IconSocialMediaFacebook';
 export { default as IconSocialMediaInstagram } from './IconSocialMediaInstagram/IconSocialMediaInstagram';
 export { default as IconSocialMediaTwitter } from './IconSocialMediaTwitter/IconSocialMediaTwitter';
+export { default as IconSocialMediaYoutube } from './IconSocialMediaYoutube';
+export { default as IconSocialMediaSnapchat } from './IconSocialMediaSnapchat';
 export { default as IconSpinner } from './IconSpinner/IconSpinner';
 export { default as ImageCarousel } from './ImageCarousel/ImageCarousel';
 export { default as ImageFromFile } from './ImageFromFile/ImageFromFile';
