@@ -80,7 +80,9 @@ const Footer = props => {
                 </div>
                 <div className={css.verticalContainerContent}>
                   <Link to='#' className={css.link}>So functionlet's</Link>
-                  <Link to='#' className={css.link}>Jetzt Pferd mleten (NEU)</Link>
+                  <Link to='#' className={css.link}>
+                    Jetzt Pferd mleten <span className={css.greenLabel}>NEU</span>
+                  </Link>
                 </div>
               </div>
 

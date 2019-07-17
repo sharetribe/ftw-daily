@@ -359,3 +359,12 @@
 .topCityItem {
 
 }
+
+.greenLabel {
+  border: 1px solid green;
+  background-color: green;
+  color: white;
+  border-radius: 8px;
+  padding: 2px 5px;
+  font-size: 75%;
+}
