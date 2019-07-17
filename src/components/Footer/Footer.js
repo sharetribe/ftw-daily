@@ -76,30 +76,30 @@ const Footer = props => {
 
               <div className={css.footerContainerVertical23}>
                 <div className={css.verticalContainerHeader}>
-                  <div>Get started</div>
+                  <Link to='#'>Get started</Link>
                 </div>
                 <div className={css.verticalContainerContent}>
-                  <div>So functionlet's</div>
-                  <div>Jetzt Pferd mleten (NEU)</div>
+                  <Link to='#' className={css.link}>So functionlet's</Link>
+                  <Link to='#' className={css.link}>Jetzt Pferd mleten (NEU)</Link>
                 </div>
               </div>
 
               <div className={css.footerContainerVertical23}>
                 <div className={css.verticalContainerHeader}>
-                  <div>LearnMore</div>
+                  <Link to='#'>LearnMore</Link>
                 </div>
                 <div className={css.verticalContainerContent}>
-                  <div>Community</div>
-                  <div>Karriere</div>
-                  <div>Kontakt</div>
-                  <div>FAQ</div>
-                  <div>Hilfe</div>
+                  <Link to='#' className={css.link}>Community</Link>
+                  <Link to='#' className={css.link}>Karriere</Link>
+                  <Link to='#' className={css.link}>Kontakt</Link>
+                  <Link to='#' className={css.link}>FAQ</Link>
+                  <Link to='#' className={css.link}>Hilfe</Link>
                 </div>
               </div>
 
               <div className={css.footerContainerVertical31}>
                 <div className={css.verticalContainerHeader}>
-                  <div>Top cities</div>
+                  <Link to='#'>Top cities</Link>
                 </div>
                 <div className={css.verticalContainerContent}>
                   <div className={css.topCitiesContainer}>
@@ -250,26 +250,25 @@ const Footer = props => {
             <div className={css.footerContainerHorizontal}>
               <div className={css.bottomLine}>
                 <div className={css.bottomLineItem}>
-                  <div>
+                  <Link to='#' className={css.link}>
                     <FormattedMessage id="Footer.copyright" />
-                  </div>
+                  </Link>
                 </div>
                 <div className={css.bottomLineItem}>
-                  <div>Impressum</div>
+                  <Link to='#' className={css.link}>Impressum</Link>
                 </div>
                 <div className={css.bottomLineItem}>
-                  <div>Kontakt</div>
+                  <Link to='#' className={css.link}>Kontakt</Link>
                 </div>
                 <div className={css.bottomLineItem}>
-                  <div>Datenschutz</div>
+                  <Link to='#' className={css.link}>Datenschutz</Link>
                 </div>
                 <div className={css.bottomLineItem}>
-                  <div>Nutzungsbedingungen</div>
+                  <Link to='#' className={css.link}>Nutzungsbedingungen</Link>
                 </div>
               </div>
             </div>
           </div>
-
 
         </div>
       </div>
