@@ -119,6 +119,7 @@ export { default as BookingPanel } from './BookingPanel/BookingPanel';
 export { default as Discussion } from './Discussion/Discussion';
 export { default as FilterPlain } from './FilterPlain/FilterPlain';
 export { default as FilterPopup } from './FilterPopup/FilterPopup';
+export { default as KeywordFilter } from './KeywordFilter/KeywordFilter';
 export { default as ListingCard } from './ListingCard/ListingCard';
 export { default as ManageListingCard } from './ManageListingCard/ManageListingCard';
 export { default as Map } from './Map/Map';

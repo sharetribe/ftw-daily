@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [add] Keyword search/filter added to SearchPage component.
+  [#1129](https://github.com/sharetribe/flex-template-web/pull/1129)
 - [fix] temporarily remove audit CI job.
   [#1136](https://github.com/sharetribe/flex-template-web/pull/1136)
 - [change] Update outdated dependencies. This includes updating lodash to fix the security issue.

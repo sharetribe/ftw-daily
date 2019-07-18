@@ -11,6 +11,7 @@ import {
   SelectSingleFilter,
   SelectMultipleFilter,
   PriceFilter,
+  KeywordFilter,
 } from '../../components';
 import routeConfiguration from '../../routeConfiguration';
 import { parseDateFromISO8601, stringifyDateToISO8601 } from '../../util/dates';
@@ -70,6 +71,7 @@ const SearchFiltersComponent = props => {
     amenitiesFilter,
     priceFilter,
     dateRangeFilter,
+    keywordFilter,
     isSearchFiltersPanelOpen,
     toggleSearchFiltersPanel,
     searchFiltersPanelSelectedCount,
@@ -88,6 +90,10 @@ const SearchFiltersComponent = props => {
     id: 'SearchFilters.amenitiesLabel',
   });
 
+  const keywordLabel = intl.formatMessage({
+    id: 'SearchFilters.keywordLabel',
+  });
+
   const initialAmenities = amenitiesFilter
     ? initialValues(urlQueryParams, amenitiesFilter.paramName)
     : null;
@@ -102,6 +108,10 @@ const SearchFiltersComponent = props => {
 
   const initialDateRange = dateRangeFilter
     ? initialDateRangeValue(urlQueryParams, dateRangeFilter.paramName)
+    : null;
+
+  const initialKeyword = keywordFilter
+    ? initialValue(urlQueryParams, keywordFilter.paramName)
     : null;
 
   const handleSelectOptions = (urlParam, options) => {
@@ -144,6 +154,14 @@ const SearchFiltersComponent = props => {
       start != null && end != null
         ? { ...urlQueryParams, [urlParam]: `${start},${end}` }
         : omit(urlQueryParams, urlParam);
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+  };
+
+  const handleKeyword = (urlParam, values) => {
+    const queryParams = values
+      ? { ...urlQueryParams, [urlParam]: values }
+      : omit(urlQueryParams, urlParam);
+
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   };
 
@@ -197,6 +215,20 @@ const SearchFiltersComponent = props => {
       />
     ) : null;
 
+  const keywordFilterElement =
+    keywordFilter && keywordFilter.config.active ? (
+      <KeywordFilter
+        id={'SearchFilters.keywordFilter'}
+        name="keyword"
+        urlParam={keywordFilter.paramName}
+        label={keywordLabel}
+        onSubmit={handleKeyword}
+        showAsPopup
+        initialValues={initialKeyword}
+        contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+      />
+    ) : null;
+
   const toggleSearchFiltersPanelButtonClasses =
     isSearchFiltersPanelOpen || searchFiltersPanelSelectedCount > 0
       ? css.searchFiltersPanelOpen
@@ -221,6 +253,7 @@ const SearchFiltersComponent = props => {
         {amenitiesFilterElement}
         {priceFilterElement}
         {dateRangeFilterElement}
+        {keywordFilterElement}
         {toggleSearchFiltersPanelButton}
       </div>
 

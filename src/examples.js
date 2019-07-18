@@ -42,6 +42,7 @@ import * as IconSocialMediaInstagram from './components/IconSocialMediaInstagram
 import * as IconSocialMediaTwitter from './components/IconSocialMediaTwitter/IconSocialMediaTwitter.example';
 import * as IconSpinner from './components/IconSpinner/IconSpinner.example';
 import * as ImageCarousel from './components/ImageCarousel/ImageCarousel.example';
+import * as KeywordFilter from './components/KeywordFilter/KeywordFilter.example';
 import * as ListingCard from './components/ListingCard/ListingCard.example';
 import * as LocationAutocompleteInput from './components/LocationAutocompleteInput/LocationAutocompleteInput.example';
 import * as ManageListingCard from './components/ManageListingCard/ManageListingCard.example';
@@ -148,6 +149,7 @@ export {
   IconSocialMediaTwitter,
   IconSpinner,
   ImageCarousel,
+  KeywordFilter,
   ListingCard,
   LocationAutocompleteInput,
   LoginForm,
