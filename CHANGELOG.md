@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [add] Add new French translations related to payment intents. Also few small changes to en.json
+  for consistency. [#1139](https://github.com/sharetribe/flex-template-web/pull/1139)
+
 ## [v3.2.0] 2019-07-08
 
 - [add] Keyword search/filter added to SearchPage component.
