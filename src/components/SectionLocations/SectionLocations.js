@@ -58,27 +58,27 @@ const SectionLocations = props => {
         {locationLink(
           'Skerries',
           skerriesImage,
-          '?address=Helsinki%2C%20Finland&bounds=60.2978389%2C25.254484899999966%2C59.9224887%2C24.782875800000056&origin=60.16985569999999%2C24.93837910000002'
+          'bounds=53.586009%2C-6.099428%2C53.567828%2C-6.135285&origin=53.58%2C-6.1097'
         )}
         {locationLink(
           'Maynooth',
           maynoothImage,
-          '?address=Rovaniemi%2C%20Finland&bounds=67.18452510000002%2C27.32667850000007%2C66.1553745%2C24.736871199999996&origin=66.50394779999999%2C25.729390599999988'
+          '?address=Maynooth%2C%20Ireland&bounds=53.405202%2C-6.507408%2C53.339263%2C-6.650373&origin=53.385%2C-6.5936'
         )}
         {locationLink(
           'Adare Manor',
           adaremanorImage,
-          '?address=Ruka%2C%20Finland&bounds=66.1704578%2C29.14246849999995%2C66.1614402%2C29.110453699999994&origin=66.16594940000002%2C29.12646110000003'
+          '?address=Adare%20Manor%2C%20Ireland&bounds=52.616983%2C-8.703934%2C52.543157%2C-8.856438&origin=52.56389%2C-8.79'
         )}
         {locationLink(
           'Fota Island',
           fotaImage,
-          '?address=Ruka%2C%20Finland&bounds=66.1704578%2C29.14246849999995%2C66.1614402%2C29.110453699999994&origin=66.16594940000002%2C29.12646110000003'
+          '?address=Fota%20Island%2C%20Ireland&bounds=51.956439%2C-8.18943%2C51.880051%2C-8.336577&origin=51.9083%2C-8.2633'
         )}
         {locationLink(
           'Kinsale',
           kinsaleImage,
-          '?address=Ruka%2C%20Finland&bounds=66.1704578%2C29.14246849999995%2C66.1614402%2C29.110453699999994&origin=66.16594940000002%2C29.12646110000003'
+          '?address=Kinsale%2C%20Ireland&bounds=51.759218%2C-8.450977%2C51.670687%2C-8.612987&origin=51.7075%2C-8.53056'
         )}
       </div>
     </div>
