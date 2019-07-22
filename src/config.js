@@ -1,6 +1,7 @@
 import * as custom from './marketplace-custom-config.js';
 import defaultLocationSearches from './default-location-searches';
 import { stripePublishableKey, stripeSupportedCountries } from './stripe-config';
+import { currencyConfiguration } from './currency-config';
 
 const env = process.env.REACT_APP_ENV;
 const dev = process.env.REACT_APP_ENV === 'development';
@@ -19,6 +20,10 @@ const i18n = {
 };
 
 // Should search results be ordered by distance to origin.
+// NOTE: If this is set to true add parameter 'origin' to every location in default-location-searches.js
+// Without the 'origin' parameter, search will not work correctly
+// NOTE: Keyword search and ordering search results by distance can't be used at the same time. You can turn keyword
+// search off by changing the keywordFilterConfig parameter active to false in marketplace-custom-config.js
 const sortSearchByDistance = false;
 
 // API supports custom processes to be used in booking process.
@@ -27,7 +32,7 @@ const sortSearchByDistance = false;
 //
 // In a way, 'processAlias' defines which transaction process (or processes)
 // this particular web application is able to handle.
-const bookingProcessAlias = 'preauth-with-nightly-booking/release-1';
+const bookingProcessAlias = 'sca-preauth-nightly-booking/release-1';
 
 // The transaction line item code for the main unit type in bookings.
 //
@@ -39,7 +44,7 @@ const bookingUnitType = 'line-item/night';
 
 // Should the application fetch available time slots (currently defined as
 // start and end dates) to be shown on listing page.
-const fetchAvailableTimeSlots = process.env.REACT_APP_AVAILABILITY_ENABLED === 'true';
+const enableAvailability = process.env.REACT_APP_AVAILABILITY_ENABLED === 'true';
 
 // A maximum number of days forwards during which a booking can be made.
 // This is limited due to Stripe holding funds up to 90 days from the
@@ -57,28 +62,19 @@ const sdkTransitVerbose = process.env.REACT_APP_SHARETRIBE_SDK_TRANSIT_VERBOSE =
 
 const currency = process.env.REACT_APP_SHARETRIBE_MARKETPLACE_CURRENCY;
 
+// Currency formatting options.
+// See: https://github.com/yahoo/react-intl/wiki/API#formatnumber
+const currencyConfig = currencyConfiguration(currency);
+
 // Listing minimum price in currency sub units, e.g. cents.
 // 0 means no restriction to the price
 const listingMinimumPriceSubUnits = 0;
 
 // Sentry DSN (Data Source Name), a client key for authenticating calls to Sentry
-const sentryDsn = process.env.REACT_APP_PUBLIC_SENTRY_DSN;
+const sentryDsn = process.env.REACT_APP_SENTRY_DSN;
 
 // If webapp is using SSL (i.e. it's behind 'https' protocol)
 const usingSSL = process.env.REACT_APP_SHARETRIBE_USING_SSL === 'true';
-
-// Currency formatting options.
-// See: https://github.com/yahoo/react-intl/wiki/API#formatnumber
-//
-// TODO: Remove this and hide formating within the util/currency module
-const currencyConfig = {
-  style: 'currency',
-  currency,
-  currencyDisplay: 'symbol',
-  useGrouping: true,
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-};
 
 // Address information is used in SEO schema for Organization (http://schema.org/PostalAddress)
 const addressCountry = 'FI';
@@ -129,6 +125,11 @@ const maps = {
     // `default-location-searches.js` file.
     defaults:
       process.env.REACT_APP_DEFAULT_SEARCHES_ENABLED === 'true' ? defaultLocationSearches : [],
+
+    // Limit location autocomplete to a one or more countries
+    // using ISO 3166 alpha 2 country codes separated by commas.
+    // If you want to limit the autocomplete, uncomment this value:
+    // countryLimit: ['AU'],
   },
 
   // When fuzzy locations are enabled, coordinates on maps are
@@ -186,7 +187,7 @@ const config = {
   locale,
   bookingProcessAlias,
   bookingUnitType,
-  fetchAvailableTimeSlots,
+  enableAvailability,
   dayCountAvailableForBooking,
   i18n,
   sdk: {
@@ -196,9 +197,12 @@ const config = {
   },
   sortSearchByDistance,
   currency,
-  listingMinimumPriceSubUnits,
   currencyConfig,
-  stripe: { publishableKey: stripePublishableKey, supportedCountries: stripeSupportedCountries },
+  listingMinimumPriceSubUnits,
+  stripe: {
+    publishableKey: stripePublishableKey,
+    supportedCountries: stripeSupportedCountries,
+  },
   canonicalRootURL,
   address: {
     addressCountry,

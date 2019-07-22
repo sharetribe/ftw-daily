@@ -17,6 +17,7 @@ const Example = props => {
     description,
     props: exampleProps,
     useDefaultWrapperStyles,
+    rawOnly,
   } = props;
 
   const exampleWrapperClassName = useDefaultWrapperStyles ? css.defaultWrapperStyles : '';
@@ -51,7 +52,20 @@ const Example = props => {
       </span>
       {desc}
       <div className={exampleWrapperClassName}>
-        <ExampleComponent {...exampleProps} />
+        {rawOnly ? (
+          <p>
+            This component is available in{' '}
+            <NamedLink
+              name="StyleguideComponentExampleRaw"
+              params={{ component: componentName, example: exampleName }}
+            >
+              raw mode
+            </NamedLink>{' '}
+            only.
+          </p>
+        ) : (
+          <ExampleComponent {...exampleProps} />
+        )}
       </div>
     </li>
   );

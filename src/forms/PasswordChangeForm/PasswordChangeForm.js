@@ -183,7 +183,6 @@ class PasswordChangeFormComponent extends Component {
               <div className={css.bottomWrapper}>
                 {genericFailure}
                 <PrimaryButton
-                  className={css.submitButton}
                   type="submit"
                   inProgress={inProgress}
                   ready={ready}

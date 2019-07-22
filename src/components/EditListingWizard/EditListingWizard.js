@@ -3,17 +3,19 @@ import { array, bool, func, number, object, oneOf, shape, string } from 'prop-ty
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
+import config from '../../config';
 import { withViewport } from '../../util/contextHelpers';
 import {
   LISTING_PAGE_PARAM_TYPE_DRAFT,
   LISTING_PAGE_PARAM_TYPE_NEW,
   LISTING_PAGE_PARAM_TYPES,
 } from '../../util/urlHelpers';
-import { ensureListing } from '../../util/data';
+import { ensureListing, ensureCurrentUser } from '../../util/data';
 import { PayoutDetailsForm } from '../../forms';
 import { Modal, NamedRedirect, Tabs } from '../../components';
 
 import EditListingWizardTab, {
+  AVAILABILITY,
   DESCRIPTION,
   FEATURES,
   POLICY,
@@ -23,9 +25,20 @@ import EditListingWizardTab, {
 } from './EditListingWizardTab';
 import css from './EditListingWizard.css';
 
+// Show availability calendar only if environment variable availabilityEnabled is true
+const availabilityMaybe = config.enableAvailability ? [AVAILABILITY] : [];
+
 // TODO: PHOTOS panel needs to be the last one since it currently contains PayoutDetailsForm modal
 // All the other panels can be reordered.
-export const TABS = [DESCRIPTION, FEATURES, POLICY, LOCATION, PRICING, PHOTOS];
+export const TABS = [
+  DESCRIPTION,
+  FEATURES,
+  POLICY,
+  LOCATION,
+  PRICING,
+  ...availabilityMaybe,
+  PHOTOS,
+];
 
 // Tabs are horizontal in small screens
 const MAX_HORIZONTAL_NAV_SCREEN_WIDTH = 1023;
@@ -42,6 +55,8 @@ const tabLabel = (intl, tab) => {
     key = 'EditListingWizard.tabLabelLocation';
   } else if (tab === PRICING) {
     key = 'EditListingWizard.tabLabelPricing';
+  } else if (tab === AVAILABILITY) {
+    key = 'EditListingWizard.tabLabelAvailability';
   } else if (tab === PHOTOS) {
     key = 'EditListingWizard.tabLabelPhotos';
   }
@@ -58,7 +73,14 @@ const tabLabel = (intl, tab) => {
  * @return true if tab / step is completed.
  */
 const tabCompleted = (tab, listing) => {
-  const { description, geolocation, price, title, publicData } = listing.attributes;
+  const {
+    availabilityPlan,
+    description,
+    geolocation,
+    price,
+    title,
+    publicData,
+  } = listing.attributes;
   const images = listing.images;
 
   switch (tab) {
@@ -72,6 +94,8 @@ const tabCompleted = (tab, listing) => {
       return !!(geolocation && publicData && publicData.location && publicData.location.address);
     case PRICING:
       return !!price;
+    case AVAILABILITY:
+      return !!availabilityPlan;
     case PHOTOS:
       return images && images.length > 0;
     default:
@@ -132,7 +156,7 @@ class EditListingWizard extends Component {
   handlePublishListing(id) {
     const { onPublishListingDraft, currentUser } = this.props;
     const stripeConnected =
-      currentUser && currentUser.attributes && currentUser.attributes.stripeConnected;
+      currentUser && currentUser.stripeAccount && !!currentUser.stripeAccount.id;
     if (stripeConnected) {
       onPublishListingDraft(id);
     } else {
@@ -148,9 +172,8 @@ class EditListingWizard extends Component {
   }
 
   handlePayoutSubmit(values) {
-    const { fname: firstName, lname: lastName, ...rest } = values;
     this.props
-      .onPayoutDetailsSubmit({ firstName, lastName, ...rest })
+      .onPayoutDetailsSubmit(values)
       .then(() => {
         this.setState({ showPayoutDetails: false });
         this.props.onManageDisableScrolling('EditListingWizard.payoutModal', false);
@@ -252,7 +275,7 @@ class EditListingWizard extends Component {
           onClose={this.handlePayoutModalClose}
           onManageDisableScrolling={onManageDisableScrolling}
         >
-          <div className={css.modalHeaderWrapper}>
+          <div className={css.modalPayoutDetailsWrapper}>
             <h1 className={css.modalTitle}>
               <FormattedMessage id="EditListingPhotosPanel.payoutModalTitleOneMoreThing" />
               <br />
@@ -261,14 +284,15 @@ class EditListingWizard extends Component {
             <p className={css.modalMessage}>
               <FormattedMessage id="EditListingPhotosPanel.payoutModalInfo" />
             </p>
+            <PayoutDetailsForm
+              className={css.payoutDetails}
+              inProgress={fetchInProgress}
+              createStripeAccountError={errors ? errors.createStripeAccountError : null}
+              currentUserId={ensureCurrentUser(this.props.currentUser).id}
+              onChange={onPayoutDetailsFormChange}
+              onSubmit={this.handlePayoutSubmit}
+            />
           </div>
-          <PayoutDetailsForm
-            className={css.payoutDetails}
-            inProgress={fetchInProgress}
-            createStripeAccountError={errors ? errors.createStripeAccountError : null}
-            onChange={onPayoutDetailsFormChange}
-            onSubmit={this.handlePayoutSubmit}
-          />
         </Modal>
       </div>
     );

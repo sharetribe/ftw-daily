@@ -1,7 +1,10 @@
 import React from 'react';
 import { string } from 'prop-types';
 import { FormattedMessage, intlShape } from 'react-intl';
+import Decimal from 'decimal.js';
 import { formatMoney } from '../../util/currency';
+import config from '../../config';
+import { types as sdkTypes } from '../../util/sdkLoader';
 import {
   propTypes,
   LINE_ITEM_CUSTOMER_COMMISSION,
@@ -9,6 +12,35 @@ import {
 } from '../../util/types';
 
 import css from './BookingBreakdown.css';
+
+const { Money } = sdkTypes;
+
+/**
+ * Calculates the total price in sub units for multiple line items.
+ */
+const lineItemsTotal = lineItems => {
+  const amount = lineItems.reduce((total, item) => {
+    return total.plus(item.lineTotal.amount);
+  }, new Decimal(0));
+  return new Money(amount, config.currency);
+};
+
+/**
+ * Checks if line item represents commission
+ */
+const isCommission = lineItem => {
+  return (
+    lineItem.code === LINE_ITEM_PROVIDER_COMMISSION ||
+    lineItem.code === LINE_ITEM_CUSTOMER_COMMISSION
+  );
+};
+
+/**
+ * Returns non-commission, non-reversal line items
+ */
+const nonCommissionNonReversalLineItems = transaction => {
+  return transaction.attributes.lineItems.filter(item => !isCommission(item) && !item.reversal);
+};
 
 /**
  * Checks if a transaction has a commission line-item for
@@ -40,18 +72,16 @@ const LineItemSubTotalMaybe = props => {
   // PLEASE NOTE that this assumes that the transaction doesn't have other
   // line item types than the defined unit type (e.g. week, month, year).
   const showSubTotal = txHasCommission(transaction, userRole) || refund;
-  const unitPurchase = transaction.attributes.lineItems.find(
-    item => item.code === unitType && !item.reversal
-  );
 
-  if (!unitPurchase) {
-    throw new Error(`LineItemSubTotalMaybe: lineItem (${unitType}) missing`);
-  }
+  // all non-reversal, non-commission line items
+  const subTotalLineItems = nonCommissionNonReversalLineItems(transaction);
+  // line totals of those line items combined
+  const subTotal = lineItemsTotal(subTotalLineItems);
 
-  const formattedSubTotal = formatMoney(intl, unitPurchase.lineTotal);
+  const formattedSubTotal = subTotalLineItems.length > 0 ? formatMoney(intl, subTotal) : null;
 
-  return showSubTotal ? (
-    <div className={css.lineItem}>
+  return formattedSubTotal && showSubTotal ? (
+    <div className={css.subTotalLineItem}>
       <span className={css.itemLabel}>
         <FormattedMessage id="BookingBreakdown.subTotal" />
       </span>

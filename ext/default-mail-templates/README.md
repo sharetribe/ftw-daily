@@ -1,7 +1,7 @@
 # Mail templates
 
-This directory contains the default templates for transaction emails.
-Built-in email templates can be edited in Console.
+This directory contains the default templates for transaction emails. Built-in email templates can
+be edited in Console.
 
 Before making customizations, copy the templates to another directory (e.g. `mail-templates`). Note
 that, at present, changes made to the template files in this repository will not take effect
@@ -37,8 +37,10 @@ Example html:
 
     <hr />
 
-    <p>You have received this email notification because you are a member of {{marketplace.name}}.
-     If you no longer wish to receive these emails, please contact {{marketplace.name}} team.</p>
+    <p>
+      You have received this email notification because you are a member of {{marketplace.name}}. If
+      you no longer wish to receive these emails, please contact {{marketplace.name}} team.
+    </p>
   </body>
 </html>
 ```
@@ -51,7 +53,6 @@ The template syntax supports conditionals, loops, helpers and other constructs. 
 [Handlebars documentation](http://handlebarsjs.com/).
 
 ## List of templates
-
 
 The templates in the list below correspond to mails defined in the default transaction process.
 Customized transaction processes can have different set of mail templates.

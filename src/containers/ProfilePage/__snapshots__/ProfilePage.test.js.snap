@@ -37,12 +37,14 @@ exports[`ProfilePage matches snapshot 1`] = `
             Object {
               "attributes": Object {
                 "banned": false,
+                "deleted": false,
                 "profile": Object {
                   "abbreviatedName": "TT",
                   "displayName": "test-user display name",
                 },
               },
               "id": UUID {
+                "_sdkType": "UUID",
                 "uuid": "test-user",
               },
               "type": "user",
@@ -77,7 +79,7 @@ exports[`ProfilePage matches snapshot 1`] = `
           />
         </h1>
         <div>
-          <Component
+          <ButtonTabNavHorizontal
             className={null}
             rootClassName={null}
             skin="light"
@@ -88,34 +90,30 @@ exports[`ProfilePage matches snapshot 1`] = `
                 Object {
                   "onClick": [Function],
                   "selected": true,
-                  "text": <h3
-                    className={undefined}
-              >
+                  "text": <h3>
                     <FormattedMessage
-                          id="ProfilePage.reviewsOfProviderTitle"
-                          values={
-                                Object {
-                                      "count": 0,
-                                    }
-                          }
+                      id="ProfilePage.reviewsOfProviderTitle"
+                      values={
+                        Object {
+                          "count": 0,
+                        }
+                      }
                     />
-              </h3>,
+                  </h3>,
                 },
                 Object {
                   "onClick": [Function],
                   "selected": false,
-                  "text": <h3
-                    className={undefined}
-              >
+                  "text": <h3>
                     <FormattedMessage
-                          id="ProfilePage.reviewsOfCustomerTitle"
-                          values={
-                                Object {
-                                      "count": 0,
-                                    }
-                          }
+                      id="ProfilePage.reviewsOfCustomerTitle"
+                      values={
+                        Object {
+                          "count": 0,
+                        }
+                      }
                     />
-              </h3>,
+                  </h3>,
                 },
               ]
             }

@@ -154,10 +154,6 @@
 }
 
 .menuContent {
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-
   position: absolute;
   right: 0;
   z-index: var(--zIndexPopup);
@@ -168,6 +164,7 @@
 }
 
 .menuItem {
+  @apply --marketplaceLinkStyles;
   @apply --marketplaceH5FontStyles;
   color: var(--matterColorLight);
   font-weight: var(--fontWeightMedium);
@@ -273,6 +270,7 @@
 }
 
 .title {
+  @apply --marketplaceLinkStyles;
   /* Font */
   @apply --marketplaceH3FontStyles;
   color: var(--matterColor);

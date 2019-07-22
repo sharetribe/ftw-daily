@@ -8,9 +8,10 @@ import {
   createTransaction,
   createBooking,
 } from '../../util/test-data';
-import { InboxPageComponent, InboxItem } from './InboxPage';
+import { InboxPageComponent, InboxItem, txState } from './InboxPage';
 import routeConfiguration from '../../routeConfiguration';
-import { LINE_ITEM_NIGHT, TRANSITION_REQUEST } from '../../util/types';
+import { TRANSITION_CONFIRM_PAYMENT } from '../../util/transaction';
+import { LINE_ITEM_NIGHT } from '../../util/types';
 
 const noop = () => null;
 
@@ -21,13 +22,24 @@ describe('InboxPage', () => {
     const currentUserProvider = createCurrentUser('provider-user-id');
     const currentUserCustomer = createCurrentUser('customer-user-id');
 
+    const startBooking1 = new Date(Date.UTC(2017, 1, 15));
+    const endBooking1 = new Date(Date.UTC(2017, 1, 16));
+
     const booking1 = createBooking('booking1', {
-      start: new Date(Date.UTC(2017, 1, 15)),
-      end: new Date(Date.UTC(2017, 1, 16)),
+      start: startBooking1,
+      end: endBooking1,
+      displayStart: startBooking1,
+      displayEnd: endBooking1,
     });
+
+    const startBooking2 = new Date(Date.UTC(2017, 2, 15));
+    const endBooking2 = new Date(Date.UTC(2017, 2, 16));
+
     const booking2 = createBooking('booking2', {
-      start: new Date(Date.UTC(2017, 2, 15)),
-      end: new Date(Date.UTC(2017, 2, 16)),
+      start: startBooking2,
+      end: endBooking2,
+      displayStart: startBooking2,
+      displayEnd: endBooking2,
     });
 
     const ordersProps = {
@@ -49,7 +61,7 @@ describe('InboxPage', () => {
       transactions: [
         createTransaction({
           id: 'order-1',
-          lastTransition: TRANSITION_REQUEST,
+          lastTransition: TRANSITION_CONFIRM_PAYMENT,
           customer,
           provider,
           lastTransitionedAt: new Date(Date.UTC(2017, 0, 15)),
@@ -57,7 +69,7 @@ describe('InboxPage', () => {
         }),
         createTransaction({
           id: 'order-2',
-          lastTransition: TRANSITION_REQUEST,
+          lastTransition: TRANSITION_CONFIRM_PAYMENT,
           customer,
           provider,
           lastTransitionedAt: new Date(Date.UTC(2016, 0, 15)),
@@ -73,6 +85,8 @@ describe('InboxPage', () => {
     const ordersTree = renderShallow(<InboxPageComponent {...ordersProps} />);
     expect(ordersTree).toMatchSnapshot();
 
+    const stateDataOrder = txState(fakeIntl, ordersProps.transactions[0], 'order');
+
     // Deeply render one InboxItem
     const orderItem = renderDeep(
       <InboxItem
@@ -80,6 +94,7 @@ describe('InboxPage', () => {
         type="order"
         tx={ordersProps.transactions[0]}
         intl={fakeIntl}
+        stateData={stateDataOrder}
       />
     );
     expect(orderItem).toMatchSnapshot();
@@ -103,7 +118,7 @@ describe('InboxPage', () => {
       transactions: [
         createTransaction({
           id: 'sale-1',
-          lastTransition: TRANSITION_REQUEST,
+          lastTransition: TRANSITION_CONFIRM_PAYMENT,
           customer,
           provider,
           lastTransitionedAt: new Date(Date.UTC(2017, 0, 15)),
@@ -111,7 +126,7 @@ describe('InboxPage', () => {
         }),
         createTransaction({
           id: 'sale-2',
-          lastTransition: TRANSITION_REQUEST,
+          lastTransition: TRANSITION_CONFIRM_PAYMENT,
           customer,
           provider,
           lastTransitionedAt: new Date(Date.UTC(2016, 0, 15)),
@@ -127,6 +142,8 @@ describe('InboxPage', () => {
     const salesTree = renderShallow(<InboxPageComponent {...salesProps} />);
     expect(salesTree).toMatchSnapshot();
 
+    const stateDataSale = txState(fakeIntl, salesProps.transactions[0], 'sale');
+
     // Deeply render one InboxItem
     const saleItem = renderDeep(
       <InboxItem
@@ -134,6 +151,7 @@ describe('InboxPage', () => {
         type="sale"
         tx={salesProps.transactions[0]}
         intl={fakeIntl}
+        stateData={stateDataSale}
       />
     );
     expect(saleItem).toMatchSnapshot();

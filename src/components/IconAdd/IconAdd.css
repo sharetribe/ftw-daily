@@ -1,0 +1,5 @@
+@import '../../marketplace.css';
+
+.root {
+  fill: var(--marketplaceColor);
+}

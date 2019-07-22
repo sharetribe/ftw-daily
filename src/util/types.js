@@ -32,7 +32,7 @@ import {
 } from 'prop-types';
 import Decimal from 'decimal.js';
 import { types as sdkTypes } from './sdkLoader';
-import { ensureTransaction } from './data';
+import { TRANSITIONS, TX_TRANSITION_ACTORS } from './transaction';
 
 const { UUID, LatLng, LatLngBounds, Money } = sdkTypes;
 
@@ -104,23 +104,50 @@ propTypes.currentUser = shape({
       abbreviatedName: string.isRequired,
       bio: string,
     }).isRequired,
-    stripeConnected: bool.isRequired,
+    stripeConnected: bool,
   }),
   profileImage: propTypes.image,
+});
+
+const userAttributes = shape({
+  banned: propTypes.value(false).isRequired,
+  deleted: propTypes.value(false).isRequired,
+  profile: shape({
+    displayName: string.isRequired,
+    abbreviatedName: string.isRequired,
+    bio: string,
+  }),
+});
+
+// Listing queries can include author.
+// Banned and deleted are not relevant then
+// since banned and deleted users can't have listings.
+const authorAttributes = shape({
+  profile: shape({
+    displayName: string.isRequired,
+    abbreviatedName: string.isRequired,
+    bio: string,
+  }),
+});
+
+const deletedUserAttributes = shape({
+  deleted: propTypes.value(true).isRequired,
+});
+
+const bannedUserAttributes = shape({
+  banned: propTypes.value(true).isRequired,
 });
 
 // Denormalised user object
 propTypes.user = shape({
   id: propTypes.uuid.isRequired,
   type: propTypes.value('user').isRequired,
-  attributes: shape({
-    banned: bool.isRequired,
-    profile: shape({
-      displayName: string.isRequired,
-      abbreviatedName: string.isRequired,
-      bio: string,
-    }),
-  }),
+  attributes: oneOfType([
+    userAttributes,
+    authorAttributes,
+    deletedUserAttributes,
+    bannedUserAttributes,
+  ]).isRequired,
   profileImage: propTypes.image,
 });
 
@@ -138,12 +165,29 @@ const LISTING_STATES = [
 
 const listingAttributes = shape({
   title: string.isRequired,
-  description: string.isRequired,
+  description: string,
   geolocation: propTypes.latlng,
-  deleted: propTypes.value(false).isRequired,
-  state: oneOf(LISTING_STATES).isRequired,
+  deleted: propTypes.value(false),
+  state: oneOf(LISTING_STATES),
   price: propTypes.money,
-  publicData: object.isRequired,
+  publicData: object,
+});
+
+const AVAILABILITY_PLAN_DAY = 'availability-plan/day';
+const AVAILABILITY_PLAN_TIME = 'availability-plan/time';
+export const DAYS_OF_WEEK = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+const availabilityPlan = shape({
+  type: oneOf([AVAILABILITY_PLAN_DAY, AVAILABILITY_PLAN_TIME]).isRequired,
+  timezone: string,
+  entries: arrayOf(
+    shape({
+      dayOfWeek: oneOf(DAYS_OF_WEEK).isRequired,
+      seats: number.isRequired,
+      start: string,
+      end: string,
+    })
+  ),
 });
 
 const ownListingAttributes = shape({
@@ -153,6 +197,7 @@ const ownListingAttributes = shape({
   deleted: propTypes.value(false).isRequired,
   state: oneOf(LISTING_STATES).isRequired,
   price: propTypes.money,
+  availabilityPlan: availabilityPlan,
   publicData: object.isRequired,
 });
 
@@ -178,6 +223,17 @@ propTypes.ownListing = shape({
   images: arrayOf(propTypes.image),
 });
 
+export const BOOKING_STATE_PENDING = 'pending';
+export const BOOKING_STATE_ACCEPTED = 'accepted';
+export const BOOKING_STATE_DECLINED = 'declined';
+export const BOOKING_STATE_CANCELLED = 'cancelled';
+export const BOOKING_STATES = [
+  BOOKING_STATE_PENDING,
+  BOOKING_STATE_ACCEPTED,
+  BOOKING_STATE_DECLINED,
+  BOOKING_STATE_CANCELLED,
+];
+
 // Denormalised booking object
 propTypes.booking = shape({
   id: propTypes.uuid.isRequired,
@@ -185,6 +241,9 @@ propTypes.booking = shape({
   attributes: shape({
     end: instanceOf(Date).isRequired,
     start: instanceOf(Date).isRequired,
+    displayStart: instanceOf(Date),
+    displayEnd: instanceOf(Date),
+    state: oneOf(BOOKING_STATES),
   }),
 });
 
@@ -202,130 +261,22 @@ propTypes.timeSlot = shape({
   }),
 });
 
-// When a customer makes a booking to a listing, a transaction is
-// created with the initial request transition.
-export const TRANSITION_REQUEST = 'transition/request';
-
-// A customer can also initiate a transaction with an enquiry, and
-// then transition that with a request.
-export const TRANSITION_ENQUIRE = 'transition/enquire';
-export const TRANSITION_REQUEST_AFTER_ENQUIRY = 'transition/request-after-enquiry';
-
-// When the provider accepts or declines a transaction from the
-// SalePage, it is transitioned with the accept or decline transition.
-export const TRANSITION_ACCEPT = 'transition/accept';
-export const TRANSITION_DECLINE = 'transition/decline';
-
-// The backend automatically expire the transaction.
-export const TRANSITION_EXPIRE = 'transition/expire';
-
-// Admin can also cancel the transition.
-export const TRANSITION_CANCEL = 'transition/cancel';
-
-// The backend will mark the transaction completed.
-export const TRANSITION_COMPLETE = 'transition/complete';
-
-// Reviews are given through transaction transitions. Review 1 can be
-// by provider or customer, and review 2 will be the other party of
-// the transaction.
-export const TRANSITION_REVIEW_1_BY_PROVIDER = 'transition/review-1-by-provider';
-export const TRANSITION_REVIEW_2_BY_PROVIDER = 'transition/review-2-by-provider';
-export const TRANSITION_REVIEW_1_BY_CUSTOMER = 'transition/review-1-by-customer';
-export const TRANSITION_REVIEW_2_BY_CUSTOMER = 'transition/review-2-by-customer';
-export const TRANSITION_EXPIRE_CUSTOMER_REVIEW_PERIOD = 'transition/expire-customer-review-period';
-export const TRANSITION_EXPIRE_PROVIDER_REVIEW_PERIOD = 'transition/expire-provider-review-period';
-export const TRANSITION_EXPIRE_REVIEW_PERIOD = 'transition/expire-review-period';
-
-export const TRANSITIONS = [
-  TRANSITION_ACCEPT,
-  TRANSITION_CANCEL,
-  TRANSITION_COMPLETE,
-  TRANSITION_DECLINE,
-  TRANSITION_ENQUIRE,
-  TRANSITION_EXPIRE,
-  TRANSITION_EXPIRE_CUSTOMER_REVIEW_PERIOD,
-  TRANSITION_EXPIRE_PROVIDER_REVIEW_PERIOD,
-  TRANSITION_EXPIRE_REVIEW_PERIOD,
-  TRANSITION_REQUEST,
-  TRANSITION_REQUEST_AFTER_ENQUIRY,
-  TRANSITION_REVIEW_1_BY_CUSTOMER,
-  TRANSITION_REVIEW_1_BY_PROVIDER,
-  TRANSITION_REVIEW_2_BY_CUSTOMER,
-  TRANSITION_REVIEW_2_BY_PROVIDER,
-];
-
-// Roles of actors that perform transaction transitions
-export const TX_TRANSITION_ACTOR_CUSTOMER = 'customer';
-export const TX_TRANSITION_ACTOR_PROVIDER = 'provider';
-export const TX_TRANSITION_ACTOR_SYSTEM = 'system';
-export const TX_TRANSITION_ACTOR_OPERATOR = 'operator';
-
-export const TX_TRANSITION_ACTORS = [
-  TX_TRANSITION_ACTOR_CUSTOMER,
-  TX_TRANSITION_ACTOR_PROVIDER,
-  TX_TRANSITION_ACTOR_SYSTEM,
-  TX_TRANSITION_ACTOR_OPERATOR,
-];
-
-const txLastTransition = tx => ensureTransaction(tx).attributes.lastTransition;
-
-export const txIsEnquired = tx => txLastTransition(tx) === TRANSITION_ENQUIRE;
-
-export const txIsRequested = tx => {
-  const transition = txLastTransition(tx);
-  return transition === TRANSITION_REQUEST || transition === TRANSITION_REQUEST_AFTER_ENQUIRY;
-};
-
-export const txIsAccepted = tx => txLastTransition(tx) === TRANSITION_ACCEPT;
-
-export const txIsDeclined = tx => txLastTransition(tx) === TRANSITION_DECLINE;
-
-export const txIsExpired = tx => txLastTransition(tx) === TRANSITION_EXPIRE;
-
-export const txIsDeclinedOrExpired = tx => txIsDeclined(tx) || txIsExpired(tx);
-
-export const txIsCanceled = tx => txLastTransition(tx) === TRANSITION_CANCEL;
-
-export const txIsCompleted = tx => txLastTransition(tx) === TRANSITION_COMPLETE;
-
-export const txHasFirstReview = tx => firstReviewTransitions.includes(txLastTransition(tx));
-
-export const txIsReviewed = tx => areReviewsCompleted(txLastTransition(tx));
+// Denormalised availability exception object
+propTypes.availabilityException = shape({
+  id: propTypes.uuid.isRequired,
+  type: propTypes.value('availabilityException').isRequired,
+  attributes: shape({
+    end: instanceOf(Date).isRequired,
+    seats: number.isRequired,
+    start: instanceOf(Date).isRequired,
+  }),
+});
 
 propTypes.transition = shape({
   createdAt: instanceOf(Date).isRequired,
   by: oneOf(TX_TRANSITION_ACTORS).isRequired,
   transition: oneOf(TRANSITIONS).isRequired,
 });
-
-const firstReviewTransitions = [TRANSITION_REVIEW_1_BY_CUSTOMER, TRANSITION_REVIEW_1_BY_PROVIDER];
-
-// Check if tx transition is followed by a state where
-// reviews are completed
-export const areReviewsCompleted = transition => {
-  return [
-    TRANSITION_EXPIRE_CUSTOMER_REVIEW_PERIOD,
-    TRANSITION_EXPIRE_PROVIDER_REVIEW_PERIOD,
-    TRANSITION_EXPIRE_REVIEW_PERIOD,
-    TRANSITION_REVIEW_2_BY_CUSTOMER,
-    TRANSITION_REVIEW_2_BY_PROVIDER,
-  ].includes(transition);
-};
-
-export const txHasBeenAccepted = tx => {
-  const transition = txLastTransition(tx);
-  return [
-    TRANSITION_ACCEPT,
-    TRANSITION_REVIEW_1_BY_CUSTOMER,
-    TRANSITION_REVIEW_1_BY_PROVIDER,
-    TRANSITION_REVIEW_2_BY_CUSTOMER,
-    TRANSITION_REVIEW_2_BY_PROVIDER,
-    TRANSITION_EXPIRE_CUSTOMER_REVIEW_PERIOD,
-    TRANSITION_EXPIRE_PROVIDER_REVIEW_PERIOD,
-    TRANSITION_EXPIRE_REVIEW_PERIOD,
-    TRANSITION_COMPLETE,
-  ].includes(transition);
-};
 
 // Possible amount of stars in a review
 export const REVIEW_RATINGS = [1, 2, 3, 4, 5];
@@ -348,13 +299,22 @@ propTypes.review = shape({
   subject: propTypes.user,
 });
 
+// A Stripe account entity
+propTypes.stripeAccount = shape({
+  id: propTypes.uuid.isRequired,
+  type: propTypes.value('stripeAccount').isRequired,
+  attributes: shape({
+    stripeAccountId: string.isRequired,
+  }),
+});
+
 export const LINE_ITEM_NIGHT = 'line-item/night';
 export const LINE_ITEM_DAY = 'line-item/day';
 export const LINE_ITEM_UNITS = 'line-item/units';
 export const LINE_ITEM_CUSTOMER_COMMISSION = 'line-item/customer-commission';
 export const LINE_ITEM_PROVIDER_COMMISSION = 'line-item/provider-commission';
 
-const LINE_ITEMS = [
+export const LINE_ITEMS = [
   LINE_ITEM_NIGHT,
   LINE_ITEM_DAY,
   LINE_ITEM_UNITS,
@@ -364,12 +324,23 @@ const LINE_ITEMS = [
 
 propTypes.bookingUnitType = oneOf([LINE_ITEM_NIGHT, LINE_ITEM_DAY, LINE_ITEM_UNITS]);
 
+const requiredLineItemPropType = (props, propName, componentName) => {
+  const prop = props[propName];
+
+  if (!prop || prop === '') {
+    return new Error(`Missing line item code prop from ${componentName}.`);
+  }
+  if (!/^line-item\/.+/.test(prop)) {
+    return new Error(`Invalid line item code value ${prop} passed to ${componentName}.`);
+  }
+};
+
 // Denormalised transaction object
 propTypes.transaction = shape({
   id: propTypes.uuid.isRequired,
   type: propTypes.value('transaction').isRequired,
   attributes: shape({
-    createdAt: instanceOf(Date).isRequired,
+    createdAt: instanceOf(Date),
     lastTransitionedAt: instanceOf(Date).isRequired,
     lastTransition: oneOf(TRANSITIONS).isRequired,
 
@@ -380,14 +351,14 @@ propTypes.transaction = shape({
 
     lineItems: arrayOf(
       shape({
-        code: oneOf(LINE_ITEMS).isRequired,
+        code: requiredLineItemPropType,
         includeFor: arrayOf(oneOf(['customer', 'provider'])).isRequired,
         quantity: instanceOf(Decimal),
         unitPrice: propTypes.money.isRequired,
         lineTotal: propTypes.money.isRequired,
         reversal: bool.isRequired,
       })
-    ).isRequired,
+    ),
     transitions: arrayOf(propTypes.transition).isRequired,
   }),
   booking: propTypes.booking,
@@ -435,7 +406,18 @@ const filterWithPriceConfig = shape({
   }).isRequired,
 });
 
-propTypes.filterConfig = oneOfType([filterWithOptions, filterWithPriceConfig]);
+const filterIsActiveConfig = shape({
+  paramName: string.isRequired,
+  config: shape({
+    active: bool.isRequired,
+  }).isRequired,
+});
+
+propTypes.filterConfig = oneOfType([
+  filterWithOptions,
+  filterWithPriceConfig,
+  filterIsActiveConfig,
+]);
 
 export const ERROR_CODE_TRANSACTION_LISTING_NOT_FOUND = 'transaction-listing-not-found';
 export const ERROR_CODE_TRANSACTION_INVALID_TRANSITION = 'transaction-invalid-transition';
@@ -450,7 +432,6 @@ export const ERROR_CODE_CHARGE_ZERO_PAYIN = 'transaction-charge-zero-payin';
 export const ERROR_CODE_CHARGE_ZERO_PAYOUT = 'transaction-charge-zero-payout';
 export const ERROR_CODE_EMAIL_TAKEN = 'email-taken';
 export const ERROR_CODE_EMAIL_NOT_FOUND = 'email-not-found';
-export const ERROR_CODE_EMAIL_NOT_VERIFIED = 'email-unverified';
 export const ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS = 'email-too-many-verification-requests';
 export const ERROR_CODE_UPLOAD_OVER_LIMIT = 'request-upload-over-limit';
 export const ERROR_CODE_VALIDATION_INVALID_PARAMS = 'validation-invalid-params';
@@ -469,7 +450,6 @@ const ERROR_CODES = [
   ERROR_CODE_CHARGE_ZERO_PAYOUT,
   ERROR_CODE_EMAIL_TAKEN,
   ERROR_CODE_EMAIL_NOT_FOUND,
-  ERROR_CODE_EMAIL_NOT_VERIFIED,
   ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS,
   ERROR_CODE_UPLOAD_OVER_LIMIT,
   ERROR_CODE_VALIDATION_INVALID_PARAMS,

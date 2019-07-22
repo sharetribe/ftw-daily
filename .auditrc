@@ -1,0 +1,5 @@
+exports.exceptions = [
+  // Add exceptions to audit script:
+  // // Severity: low, lodash (< 4.17.5), used heavily in our CRA fork
+  // "https://npmjs.com/advisories/577",
+];

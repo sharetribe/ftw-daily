@@ -1,16 +1,18 @@
 import pick from 'lodash/pick';
 import pickBy from 'lodash/pickBy';
 import isEmpty from 'lodash/isEmpty';
+import moment from 'moment';
+import config from '../../config';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { isTransactionsTransitionInvalidTransition, storableError } from '../../util/errors';
 import {
+  txIsEnquired,
+  getReview1Transition,
+  getReview2Transition,
+  txIsInFirstReviewBy,
   TRANSITION_ACCEPT,
   TRANSITION_DECLINE,
-  TRANSITION_REVIEW_1_BY_CUSTOMER,
-  TRANSITION_REVIEW_1_BY_PROVIDER,
-  TRANSITION_REVIEW_2_BY_CUSTOMER,
-  TRANSITION_REVIEW_2_BY_PROVIDER,
-} from '../../util/types';
+} from '../../util/transaction';
 import * as log from '../../util/log';
 import {
   updatedEntities,
@@ -33,6 +35,10 @@ export const FETCH_TRANSACTION_REQUEST = 'app/TransactionPage/FETCH_TRANSACTION_
 export const FETCH_TRANSACTION_SUCCESS = 'app/TransactionPage/FETCH_TRANSACTION_SUCCESS';
 export const FETCH_TRANSACTION_ERROR = 'app/TransactionPage/FETCH_TRANSACTION_ERROR';
 
+export const FETCH_TRANSITIONS_REQUEST = 'app/TransactionPage/FETCH_TRANSITIONS_REQUEST';
+export const FETCH_TRANSITIONS_SUCCESS = 'app/TransactionPage/FETCH_TRANSITIONS_SUCCESS';
+export const FETCH_TRANSITIONS_ERROR = 'app/TransactionPage/FETCH_TRANSITIONS_ERROR';
+
 export const ACCEPT_SALE_REQUEST = 'app/TransactionPage/ACCEPT_SALE_REQUEST';
 export const ACCEPT_SALE_SUCCESS = 'app/TransactionPage/ACCEPT_SALE_SUCCESS';
 export const ACCEPT_SALE_ERROR = 'app/TransactionPage/ACCEPT_SALE_ERROR';
@@ -52,6 +58,10 @@ export const SEND_MESSAGE_ERROR = 'app/TransactionPage/SEND_MESSAGE_ERROR';
 export const SEND_REVIEW_REQUEST = 'app/TransactionPage/SEND_REVIEW_REQUEST';
 export const SEND_REVIEW_SUCCESS = 'app/TransactionPage/SEND_REVIEW_SUCCESS';
 export const SEND_REVIEW_ERROR = 'app/TransactionPage/SEND_REVIEW_ERROR';
+
+export const FETCH_TIME_SLOTS_REQUEST = 'app/TransactionPage/FETCH_TIME_SLOTS_REQUEST';
+export const FETCH_TIME_SLOTS_SUCCESS = 'app/TransactionPage/FETCH_TIME_SLOTS_SUCCESS';
+export const FETCH_TIME_SLOTS_ERROR = 'app/TransactionPage/FETCH_TIME_SLOTS_ERROR';
 
 // ================ Reducer ================ //
 
@@ -74,6 +84,11 @@ const initialState = {
   sendMessageError: null,
   sendReviewInProgress: false,
   sendReviewError: null,
+  timeSlots: null,
+  fetchTimeSlotsError: null,
+  fetchTransitionsInProgress: false,
+  fetchTransitionsError: null,
+  processTransitions: null,
 };
 
 // Merge entity arrays using ids, so that conflicting items in newer array (b) overwrite old values (a).
@@ -100,6 +115,14 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
     case FETCH_TRANSACTION_ERROR:
       console.error(payload); // eslint-disable-line
       return { ...state, fetchTransactionInProgress: false, fetchTransactionError: payload };
+
+    case FETCH_TRANSITIONS_REQUEST:
+      return { ...state, fetchTransitionsInProgress: true, fetchTransitionsError: null };
+    case FETCH_TRANSITIONS_SUCCESS:
+      return { ...state, fetchTransitionsInProgress: false, processTransitions: payload };
+    case FETCH_TRANSITIONS_ERROR:
+      console.error(payload); // eslint-disable-line
+      return { ...state, fetchTransitionsInProgress: false, fetchTransitionsError: payload };
 
     case ACCEPT_SALE_REQUEST:
       return { ...state, acceptInProgress: true, acceptSaleError: null, declineSaleError: null };
@@ -153,6 +176,13 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
     case SEND_REVIEW_ERROR:
       return { ...state, sendReviewInProgress: false, sendReviewError: payload };
 
+    case FETCH_TIME_SLOTS_REQUEST:
+      return { ...state, fetchTimeSlotsError: null };
+    case FETCH_TIME_SLOTS_SUCCESS:
+      return { ...state, timeSlots: payload };
+    case FETCH_TIME_SLOTS_ERROR:
+      return { ...state, fetchTimeSlotsError: payload };
+
     default:
       return state;
   }
@@ -177,6 +207,13 @@ const fetchTransactionSuccess = response => ({
 });
 const fetchTransactionError = e => ({ type: FETCH_TRANSACTION_ERROR, error: true, payload: e });
 
+const fetchTransitionsRequest = () => ({ type: FETCH_TRANSITIONS_REQUEST });
+const fetchTransitionsSuccess = response => ({
+  type: FETCH_TRANSITIONS_SUCCESS,
+  payload: response,
+});
+const fetchTransitionsError = e => ({ type: FETCH_TRANSITIONS_ERROR, error: true, payload: e });
+
 const acceptSaleRequest = () => ({ type: ACCEPT_SALE_REQUEST });
 const acceptSaleSuccess = () => ({ type: ACCEPT_SALE_SUCCESS });
 const acceptSaleError = e => ({ type: ACCEPT_SALE_ERROR, error: true, payload: e });
@@ -200,13 +237,24 @@ const sendReviewRequest = () => ({ type: SEND_REVIEW_REQUEST });
 const sendReviewSuccess = () => ({ type: SEND_REVIEW_SUCCESS });
 const sendReviewError = e => ({ type: SEND_REVIEW_ERROR, error: true, payload: e });
 
+const fetchTimeSlotsRequest = () => ({ type: FETCH_TIME_SLOTS_REQUEST });
+const fetchTimeSlotsSuccess = timeSlots => ({
+  type: FETCH_TIME_SLOTS_SUCCESS,
+  payload: timeSlots,
+});
+const fetchTimeSlotsError = e => ({
+  type: FETCH_TIME_SLOTS_ERROR,
+  error: true,
+  payload: e,
+});
+
 // ================ Thunks ================ //
 
 const listingRelationship = txResponse => {
   return txResponse.data.data.relationships.listing.data;
 };
 
-export const fetchTransaction = id => (dispatch, getState, sdk) => {
+export const fetchTransaction = (id, txRole) => (dispatch, getState, sdk) => {
   dispatch(fetchTransactionRequest());
   let txResponse = null;
 
@@ -234,11 +282,23 @@ export const fetchTransaction = id => (dispatch, getState, sdk) => {
       const listingId = listingRelationship(response).id;
       const entities = updatedEntities({}, response.data);
       const listingRef = { id: listingId, type: 'listing' };
-      const denormalised = denormalisedEntities(entities, [listingRef]);
+      const transactionRef = { id, type: 'transaction' };
+      const denormalised = denormalisedEntities(entities, [listingRef, transactionRef]);
       const listing = denormalised[0];
+      const transaction = denormalised[1];
+
+      // Fetch time slots for transactions that are in enquired state
+      const canFetchTimeslots =
+        txRole === 'customer' &&
+        config.enableAvailability &&
+        transaction &&
+        txIsEnquired(transaction);
+
+      if (canFetchTimeslots) {
+        dispatch(fetchTimeSlots(listingId));
+      }
 
       const canFetchListing = listing && listing.attributes && !listing.attributes.deleted;
-
       if (canFetchListing) {
         return sdk.listings.show({
           id: listingId,
@@ -404,8 +464,7 @@ const IMAGE_VARIANTS = {
 // If other party has already sent a review, we need to make transition to
 // TRANSITION_REVIEW_2_BY_<CUSTOMER/PROVIDER>
 const sendReviewAsSecond = (id, params, role, dispatch, sdk) => {
-  const transition =
-    role === CUSTOMER ? TRANSITION_REVIEW_2_BY_CUSTOMER : TRANSITION_REVIEW_2_BY_PROVIDER;
+  const transition = getReview2Transition(role === CUSTOMER);
 
   const include = REVIEW_TX_INCLUDES;
 
@@ -431,8 +490,7 @@ const sendReviewAsSecond = (id, params, role, dispatch, sdk) => {
 // So, error is likely to happen and then we must try another state transition
 // by calling sendReviewAsSecond().
 const sendReviewAsFirst = (id, params, role, dispatch, sdk) => {
-  const transition =
-    role === CUSTOMER ? TRANSITION_REVIEW_1_BY_CUSTOMER : TRANSITION_REVIEW_1_BY_PROVIDER;
+  const transition = getReview1Transition(role === CUSTOMER);
   const include = REVIEW_TX_INCLUDES;
 
   return sdk.transactions
@@ -459,10 +517,7 @@ const sendReviewAsFirst = (id, params, role, dispatch, sdk) => {
 export const sendReview = (role, tx, reviewRating, reviewContent) => (dispatch, getState, sdk) => {
   const params = { reviewRating, reviewContent };
 
-  const txStateOtherPartyFirst =
-    role === CUSTOMER
-      ? tx.attributes.lastTransition === TRANSITION_REVIEW_1_BY_PROVIDER
-      : tx.attributes.lastTransition === TRANSITION_REVIEW_1_BY_CUSTOMER;
+  const txStateOtherPartyFirst = txIsInFirstReviewBy(tx, role !== CUSTOMER);
 
   dispatch(sendReviewRequest());
 
@@ -475,12 +530,82 @@ const isNonEmpty = value => {
   return typeof value === 'object' || Array.isArray(value) ? !isEmpty(value) : !!value;
 };
 
+const timeSlotsRequest = params => (dispatch, getState, sdk) => {
+  return sdk.timeslots.query(params).then(response => {
+    return denormalisedResponseEntities(response);
+  });
+};
+
+const fetchTimeSlots = listingId => (dispatch, getState, sdk) => {
+  dispatch(fetchTimeSlotsRequest);
+
+  // Time slots can be fetched for 90 days at a time,
+  // for at most 180 days from now. If max number of bookable
+  // day exceeds 90, a second request is made.
+
+  const maxTimeSlots = 90;
+  // booking range: today + bookable days -1
+  const bookingRange = config.dayCountAvailableForBooking - 1;
+  const timeSlotsRange = Math.min(bookingRange, maxTimeSlots);
+
+  const start = moment
+    .utc()
+    .startOf('day')
+    .toDate();
+  const end = moment()
+    .utc()
+    .startOf('day')
+    .add(timeSlotsRange, 'days')
+    .toDate();
+  const params = { listingId, start, end };
+
+  return dispatch(timeSlotsRequest(params))
+    .then(timeSlots => {
+      const secondRequest = bookingRange > maxTimeSlots;
+
+      if (secondRequest) {
+        const secondRange = Math.min(maxTimeSlots, bookingRange - maxTimeSlots);
+        const secondParams = {
+          listingId,
+          start: end,
+          end: moment(end)
+            .add(secondRange, 'days')
+            .toDate(),
+        };
+
+        return dispatch(timeSlotsRequest(secondParams)).then(secondBatch => {
+          const combined = timeSlots.concat(secondBatch);
+          dispatch(fetchTimeSlotsSuccess(combined));
+        });
+      } else {
+        dispatch(fetchTimeSlotsSuccess(timeSlots));
+      }
+    })
+    .catch(e => {
+      dispatch(fetchTimeSlotsError(storableError(e)));
+    });
+};
+
+export const fetchNextTransitions = id => (dispatch, getState, sdk) => {
+  dispatch(fetchTransitionsRequest());
+
+  return sdk.processTransitions
+    .query({ transactionId: id })
+    .then(res => {
+      dispatch(fetchTransitionsSuccess(res.data.data));
+    })
+    .catch(e => {
+      dispatch(fetchTransitionsError(storableError(e)));
+    });
+};
+
 // loadData is a collection of async calls that need to be made
 // before page has all the info it needs to render itself
 export const loadData = params => (dispatch, getState) => {
   const txId = new UUID(params.id);
   const state = getState().TransactionPage;
   const txRef = state.transactionRef;
+  const txRole = params.transactionRole;
 
   // In case a transaction reference is found from a previous
   // data load -> clear the state. Otherwise keep the non-null
@@ -489,5 +614,9 @@ export const loadData = params => (dispatch, getState) => {
   dispatch(setInitialValues(initialValues));
 
   // Sale / order (i.e. transaction entity in API)
-  return Promise.all([dispatch(fetchTransaction(txId)), dispatch(fetchMessages(txId, 1))]);
+  return Promise.all([
+    dispatch(fetchTransaction(txId, txRole)),
+    dispatch(fetchMessages(txId, 1)),
+    dispatch(fetchNextTransitions(txId)),
+  ]);
 };

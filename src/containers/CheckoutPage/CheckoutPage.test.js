@@ -24,6 +24,10 @@ describe('CheckoutPage', () => {
       fetchSpeculatedTransaction: noop,
       speculateTransactionInProgress: false,
       scrollingDisabled: false,
+      onHandleCardPayment: noop,
+      onInitiateOrder: noop,
+      onRetrievePaymentIntent: noop,
+      handleCardPaymentInProgress: false,
     };
     const tree = renderShallow(<CheckoutPageComponent {...props} />);
     expect(tree).toMatchSnapshot();
@@ -59,6 +63,8 @@ describe('CheckoutPage', () => {
         speculateTransactionError: null,
         speculateTransactionInProgress: false,
         speculatedTransaction: null,
+        transaction: null,
+        confirmPaymentError: null,
       };
 
       it('should return the initial state', () => {

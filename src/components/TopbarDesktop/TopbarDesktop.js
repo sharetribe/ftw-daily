@@ -100,7 +100,7 @@ const TopbarDesktop = props => {
           </NamedLink>
         </MenuItem>
         <MenuItem key="logout">
-          <InlineTextButton className={css.logoutButton} onClick={onLogout}>
+          <InlineTextButton rootClassName={css.logoutButton} onClick={onLogout}>
             <span className={css.menuItemBorder} />
             <FormattedMessage id="TopbarDesktop.logout" />
           </InlineTextButton>

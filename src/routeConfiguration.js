@@ -193,7 +193,7 @@ const routeConfiguration = () => {
       auth: true,
       authPage: 'LoginPage',
       component: props => <TransactionPage {...props} transactionRole="customer" />,
-      loadData: TransactionPage.loadData,
+      loadData: params => TransactionPage.loadData({ ...params, transactionRole: 'customer' }),
       setInitialValues: TransactionPage.setInitialValues,
     },
     {
@@ -209,7 +209,7 @@ const routeConfiguration = () => {
       auth: true,
       authPage: 'LoginPage',
       component: props => <TransactionPage {...props} transactionRole="provider" />,
-      loadData: TransactionPage.loadData,
+      loadData: params => TransactionPage.loadData({ ...params, transactionRole: 'provider' }),
     },
     {
       path: '/listings',
@@ -308,6 +308,7 @@ const routeConfiguration = () => {
       auth: true,
       authPage: 'LoginPage',
       component: props => <EmailVerificationPage {...props} />,
+      loadData: EmailVerificationPage.loadData,
     },
   ];
 };

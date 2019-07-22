@@ -2,16 +2,10 @@ import React from 'react';
 import { injectIntl, intlShape } from 'react-intl';
 import { arrayOf, string } from 'prop-types';
 import classNames from 'classnames';
-import { Avatar, ReviewRating } from '../../components';
+import { Avatar, ReviewRating, UserDisplayName } from '../../components';
 import { propTypes } from '../../util/types';
 
 import css from './Reviews.css';
-
-const authorDisplayName = (review, intl) => {
-  return review.author.attributes.banned
-    ? intl.formatMessage({ id: 'Reviews.bannedUserDisplayName' })
-    : review.author.attributes.profile.displayName;
-};
 
 const Review = props => {
   const { review, intl } = props;
@@ -30,7 +24,7 @@ const Review = props => {
         />
         <p className={css.reviewContent}>{review.attributes.content}</p>
         <p className={css.reviewInfo}>
-          {authorDisplayName(review, intl)}
+          <UserDisplayName user={review.author} intl={intl} />
           <span className={css.separator}>•</span>
           {dateString}
           <span className={css.desktopSeparator}>•</span>

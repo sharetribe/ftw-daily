@@ -9,7 +9,7 @@ const path = require('path');
 const buildPath = path.resolve(__dirname, '..', 'build');
 const manifestPath = path.join(buildPath, 'asset-manifest.json');
 const manifest = require(manifestPath);
-const mainJsPath = path.join(buildPath, manifest['main.js']);
+const mainJsPath = path.join(buildPath, manifest['files']['main.js']);
 const mainJs = require(mainJsPath);
 
 module.exports = {

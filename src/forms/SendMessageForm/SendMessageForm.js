@@ -91,7 +91,7 @@ class SendMessageFormComponent extends Component {
                   ) : null}
                 </div>
                 <SecondaryButton
-                  className={css.submitButton}
+                  rootClassName={css.submitButton}
                   inProgress={submitInProgress}
                   disabled={submitDisabled}
                   onFocus={this.handleFocus}

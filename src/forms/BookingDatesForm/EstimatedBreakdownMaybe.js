@@ -30,13 +30,8 @@ import moment from 'moment';
 import Decimal from 'decimal.js';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { dateFromLocalToAPI, nightsBetween, daysBetween } from '../../util/dates';
-import {
-  LINE_ITEM_DAY,
-  LINE_ITEM_NIGHT,
-  LINE_ITEM_UNITS,
-  TRANSITION_REQUEST,
-  TX_TRANSITION_ACTOR_CUSTOMER,
-} from '../../util/types';
+import { TRANSITION_REQUEST_PAYMENT, TX_TRANSITION_ACTOR_CUSTOMER } from '../../util/transaction';
+import { LINE_ITEM_DAY, LINE_ITEM_NIGHT, LINE_ITEM_UNITS } from '../../util/types';
 import { unitDivisor, convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
 import { BookingBreakdown } from '../../components';
 
@@ -91,7 +86,7 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, qua
     attributes: {
       createdAt: now,
       lastTransitionedAt: now,
-      lastTransition: TRANSITION_REQUEST,
+      lastTransition: TRANSITION_REQUEST_PAYMENT,
       payinTotal: totalPrice,
       payoutTotal: totalPrice,
       lineItems: [
@@ -108,7 +103,7 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, qua
         {
           createdAt: now,
           by: TX_TRANSITION_ACTOR_CUSTOMER,
-          transition: TRANSITION_REQUEST,
+          transition: TRANSITION_REQUEST_PAYMENT,
         },
       ],
     },

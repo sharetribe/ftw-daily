@@ -81,7 +81,7 @@ const TopbarMobileMenu = props => {
         <span className={css.greeting}>
           <FormattedMessage id="TopbarMobileMenu.greeting" values={{ displayName }} />
         </span>
-        <InlineTextButton className={css.logoutButton} onClick={onLogout}>
+        <InlineTextButton rootClassName={css.logoutButton} onClick={onLogout}>
           <FormattedMessage id="TopbarMobileMenu.logoutLink" />
         </InlineTextButton>
         <NamedLink

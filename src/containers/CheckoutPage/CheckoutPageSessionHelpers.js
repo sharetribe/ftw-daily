@@ -6,7 +6,9 @@
  */
 import moment from 'moment';
 import reduce from 'lodash/reduce';
+import Decimal from 'decimal.js';
 import { types as sdkTypes } from '../../util/sdkLoader';
+import { TRANSITIONS } from '../../util/transaction';
 
 const { UUID, Money } = sdkTypes;
 
@@ -46,24 +48,41 @@ export const isValidListing = listing => {
   return validateProperties(listing, props);
 };
 
+// Validate content of an transaction received from SessionStore.
+// An id is required and the last transition needs to be one of the known transitions
+export const isValidTransaction = transaction => {
+  const props = {
+    id: id => id instanceof UUID,
+    type: type => type === 'transaction',
+    attributes: v => {
+      return typeof v === 'object' && TRANSITIONS.includes(v.lastTransition);
+    },
+  };
+  return validateProperties(transaction, props);
+};
+
 // Stores given bookingDates and listing to sessionStorage
-export const storeData = (bookingData, bookingDates, listing, storageKey) => {
+export const storeData = (bookingData, bookingDates, listing, transaction, storageKey) => {
   if (window && window.sessionStorage && listing && bookingDates && bookingData) {
-    // TODO: How should we deal with Dates when data is serialized?
-    // Hard coded serializable date objects atm.
-    /* eslint-disable no-underscore-dangle */
     const data = {
       bookingData,
-      bookingDates: {
-        bookingStart: { date: bookingDates.bookingStart, _serializedType: 'SerializableDate' },
-        bookingEnd: { date: bookingDates.bookingEnd, _serializedType: 'SerializableDate' },
-      },
+      bookingDates,
       listing,
-      storedAt: { date: new Date(), _serializedType: 'SerializableDate' },
+      transaction,
+      storedAt: new Date(),
     };
-    /* eslint-enable no-underscore-dangle */
 
-    const storableData = JSON.stringify(data, sdkTypes.replacer);
+    const replacer = function(k, v) {
+      if (this[k] instanceof Date) {
+        return { date: v, _serializedType: 'SerializableDate' };
+      }
+      if (this[k] instanceof Decimal) {
+        return { decimal: v, _serializedType: 'SerializableDecimal' };
+      }
+      return sdkTypes.replacer(k, v);
+    };
+
+    const storableData = JSON.stringify(data, replacer);
     window.sessionStorage.setItem(storageKey, storableData);
   }
 };
@@ -73,17 +92,20 @@ export const storedData = storageKey => {
   if (window && window.sessionStorage) {
     const checkoutPageData = window.sessionStorage.getItem(storageKey);
 
-    // TODO How should we deal with Dates when data is serialized?
-    // Dates are expected to be in format: { date: new Date(), _serializedType: 'SerializableDate' }
     const reviver = (k, v) => {
-      // eslint-disable-next-line no-underscore-dangle
       if (v && typeof v === 'object' && v._serializedType === 'SerializableDate') {
+        // Dates are expected to be stored as:
+        // { date: new Date(), _serializedType: 'SerializableDate' }
         return new Date(v.date);
+      } else if (v && typeof v === 'object' && v._serializedType === 'SerializableDecimal') {
+        // Decimals are expected to be stored as:
+        // { decimal: v, _serializedType: 'SerializableDecimal' }
+        return new Decimal(v.decimal);
       }
       return sdkTypes.reviver(k, v);
     };
 
-    const { bookingData, bookingDates, listing, storedAt } = checkoutPageData
+    const { bookingData, bookingDates, listing, transaction, storedAt } = checkoutPageData
       ? JSON.parse(checkoutPageData, reviver)
       : {};
 
@@ -92,8 +114,17 @@ export const storedData = storageKey => {
       ? moment(storedAt).isAfter(moment().subtract(1, 'days'))
       : false;
 
-    if (isFreshlySaved && isValidBookingDates(bookingDates) && isValidListing(listing)) {
-      return { bookingData, bookingDates, listing };
+    // resolve transaction as valid if it is missing
+    const isTransactionValid = !!transaction ? isValidTransaction(transaction) : true;
+
+    const isStoredDataValid =
+      isFreshlySaved &&
+      isValidBookingDates(bookingDates) &&
+      isValidListing(listing) &&
+      isTransactionValid;
+
+    if (isStoredDataValid) {
+      return { bookingData, bookingDates, listing, transaction };
     }
   }
   return {};

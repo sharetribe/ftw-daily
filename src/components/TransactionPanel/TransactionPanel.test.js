@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import {
+  createTxTransition,
   createTransaction,
   createBooking,
   createListing,
@@ -18,9 +19,10 @@ import {
   TRANSITION_DECLINE,
   TRANSITION_ENQUIRE,
   TRANSITION_EXPIRE,
-  TRANSITION_REQUEST,
-} from '../../util/types';
-import { BreakdownMaybe } from './TransactionPanel.helpers';
+  TRANSITION_REQUEST_PAYMENT,
+  TRANSITION_CONFIRM_PAYMENT,
+} from '../../util/transaction';
+import BreakdownMaybe from './BreakdownMaybe';
 import { TransactionPanelComponent } from './TransactionPanel';
 
 const noop = () => null;
@@ -30,12 +32,17 @@ const { Money } = sdkTypes;
 describe('TransactionPanel - Sale', () => {
   const providerId = 'provider';
   const customerId = 'customer';
+  const start = new Date(Date.UTC(2017, 5, 10));
+  const end = new Date(Date.UTC(2017, 5, 13));
+
   const baseTxAttrs = {
     total: new Money(16500, 'USD'),
     commission: new Money(1000, 'USD'),
     booking: createBooking('booking1', {
-      start: new Date(Date.UTC(2017, 5, 10)),
-      end: new Date(Date.UTC(2017, 5, 13)),
+      start,
+      end,
+      displayStart: start,
+      displayEnd: end,
     }),
     listing: createListing('listing1'),
     customer: createUser(customerId),
@@ -51,7 +58,7 @@ describe('TransactionPanel - Sale', () => {
 
   const txPreauthorized = createTransaction({
     id: 'sale-preauthorized',
-    lastTransition: TRANSITION_REQUEST,
+    lastTransition: TRANSITION_REQUEST_PAYMENT,
     ...baseTxAttrs,
   });
 
@@ -82,6 +89,23 @@ describe('TransactionPanel - Sale', () => {
   const txDelivered = createTransaction({
     id: 'sale-delivered',
     lastTransition: TRANSITION_COMPLETE,
+    transitions: [
+      createTxTransition({
+        createdAt: new Date(Date.UTC(2017, 4, 1)),
+        by: 'customer',
+        transition: TRANSITION_REQUEST_PAYMENT,
+      }),
+      createTxTransition({
+        createdAt: new Date(Date.UTC(2017, 5, 1)),
+        by: 'provider',
+        transition: TRANSITION_ACCEPT,
+      }),
+      createTxTransition({
+        createdAt: new Date(Date.UTC(2017, 6, 1)),
+        by: 'system',
+        transition: TRANSITION_COMPLETE,
+      }),
+    ],
     ...baseTxAttrs,
   });
 
@@ -108,6 +132,7 @@ describe('TransactionPanel - Sale', () => {
     onSendMessage: noop,
     onSendReview: noop,
     onResetForm: noop,
+    onSubmitBookingRequest: noop,
     intl: fakeIntl,
   };
 
@@ -168,17 +193,23 @@ describe('TransactionPanel - Sale', () => {
     expect(tree).toMatchSnapshot();
   });
   it('renders correct total price', () => {
+    const start = new Date(Date.UTC(2017, 5, 10));
+    const end = new Date(Date.UTC(2017, 5, 13));
+
     const transaction = createTransaction({
       id: 'sale-tx',
-      lastTransition: TRANSITION_REQUEST,
+      lastTransition: TRANSITION_REQUEST_PAYMENT,
       total: new Money(16500, 'USD'),
       commission: new Money(1000, 'USD'),
       booking: createBooking('booking1', {
-        start: new Date(Date.UTC(2017, 5, 10)),
-        end: new Date(Date.UTC(2017, 5, 13)),
+        start,
+        end,
+        displayStart: start,
+        displayEnd: end,
       }),
       listing: createListing('listing1'),
       customer: createUser('customer1'),
+      provider: createUser('provider1'),
       lastTransitionedAt: new Date(Date.UTC(2017, 5, 10)),
     });
     const props = {
@@ -199,11 +230,15 @@ describe('TransactionPanel - Sale', () => {
 describe('TransactionPanel - Order', () => {
   const providerId = 'provider';
   const customerId = 'customer';
+  const start = new Date(Date.UTC(2017, 5, 10));
+  const end = new Date(Date.UTC(2017, 5, 13));
   const baseTxAttrs = {
     total: new Money(16500, 'USD'),
     booking: createBooking('booking1', {
-      start: new Date(Date.UTC(2017, 5, 10)),
-      end: new Date(Date.UTC(2017, 5, 13)),
+      start,
+      end,
+      displayStart: start,
+      displayEnd: end,
     }),
     listing: createListing('listing1'),
     provider: createUser(providerId),
@@ -218,7 +253,7 @@ describe('TransactionPanel - Order', () => {
 
   const txPreauthorized = createTransaction({
     id: 'order-preauthorized',
-    lastTransition: TRANSITION_REQUEST,
+    lastTransition: TRANSITION_CONFIRM_PAYMENT,
     ...baseTxAttrs,
   });
 
@@ -249,6 +284,28 @@ describe('TransactionPanel - Order', () => {
   const txDelivered = createTransaction({
     id: 'order-delivered',
     lastTransition: TRANSITION_COMPLETE,
+    transitions: [
+      createTxTransition({
+        createdAt: new Date(Date.UTC(2017, 4, 1)),
+        by: 'customer',
+        transition: TRANSITION_REQUEST_PAYMENT,
+      }),
+      createTxTransition({
+        createdAt: new Date(Date.UTC(2017, 4, 1, 0, 0, 1)),
+        by: 'customer',
+        transition: TRANSITION_CONFIRM_PAYMENT,
+      }),
+      createTxTransition({
+        createdAt: new Date(Date.UTC(2017, 5, 1)),
+        by: 'provider',
+        transition: TRANSITION_ACCEPT,
+      }),
+      createTxTransition({
+        createdAt: new Date(Date.UTC(2017, 6, 1)),
+        by: 'system',
+        transition: TRANSITION_COMPLETE,
+      }),
+    ],
     ...baseTxAttrs,
   });
 
@@ -276,6 +333,7 @@ describe('TransactionPanel - Order', () => {
     onDeclineSale: noop,
     acceptInProgress: false,
     declineInProgress: false,
+    onSubmitBookingRequest: noop,
   };
 
   it('enquired matches snapshot', () => {
@@ -337,13 +395,17 @@ describe('TransactionPanel - Order', () => {
     expect(tree).toMatchSnapshot();
   });
   it('renders correct total price', () => {
+    const start = new Date(Date.UTC(2017, 5, 10));
+    const end = new Date(Date.UTC(2017, 5, 13));
     const tx = createTransaction({
       id: 'order-tx',
-      lastTransition: TRANSITION_REQUEST,
+      lastTransition: TRANSITION_REQUEST_PAYMENT,
       total: new Money(16500, 'USD'),
       booking: createBooking('booking1', {
-        start: new Date(Date.UTC(2017, 5, 10)),
-        end: new Date(Date.UTC(2017, 5, 13)),
+        start,
+        end,
+        displayStart: start,
+        displayEnd: end,
       }),
       listing: createListing('listing1'),
       provider: createUser(providerId),

@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditListingAvailabilityForm matches snapshot 1`] = `
+<ReactFinalForm
+  availability={
+    Object {
+      "calendar": Object {},
+      "onCreateAvailabilityException": [Function],
+      "onDeleteAvailabilityException": [Function],
+      "onFetchAvailabilityExceptions": [Function],
+      "onFetchBookings": [Function],
+    }
+  }
+  dispatch={[Function]}
+  intl={
+    Object {
+      "formatDate": [Function],
+      "formatHTMLMessage": [Function],
+      "formatMessage": [Function],
+      "formatNumber": [Function],
+      "formatPlural": [Function],
+      "formatRelative": [Function],
+      "formatTime": [Function],
+      "now": [Function],
+    }
+  }
+  onSubmit={[Function]}
+  render={[Function]}
+  saveActionMsg="Save rules"
+  updateError={null}
+  updateInProgress={false}
+  updated={false}
+/>
+`;

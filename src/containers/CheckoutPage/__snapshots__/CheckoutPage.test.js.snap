@@ -46,12 +46,14 @@ exports[`CheckoutPage matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "banned": false,
+              "deleted": false,
               "profile": Object {
                 "abbreviatedName": "TT",
                 "displayName": "author display name",
               },
             },
             "id": UUID {
+              "_sdkType": "UUID",
               "uuid": "author",
             },
             "type": "user",
@@ -65,16 +67,14 @@ exports[`CheckoutPage matches snapshot 1`] = `
           CheckoutPage.title
         </h1>
         <div>
-          <span>
-            <FormattedMessage
-              id="ListingPage.hostedBy"
-              values={
-                Object {
-                  "name": "author display name",
-                }
+          <FormattedMessage
+            id="CheckoutPage.hostedBy"
+            values={
+              Object {
+                "name": "author display name",
               }
-            />
-          </span>
+            }
+          />
         </div>
       </div>
       <div>
@@ -88,10 +88,21 @@ exports[`CheckoutPage matches snapshot 1`] = `
       <section>
         <InjectIntl(StripePaymentForm)
           authorDisplayName="author display name"
+          confirmPaymentError={null}
           formId="CheckoutPagePaymentForm"
+          hasHandledCardPayment={null}
           inProgress={false}
+          initialValues={
+            Object {
+              "name": "currentUser first name currentUser last name",
+            }
+          }
+          initiateOrderError={null}
+          onStripeInitialized={[Function]}
           onSubmit={[Function]}
           paymentInfo="CheckoutPage.paymentInfo"
+          paymentIntent={null}
+          showInitialMessageInput={true}
         />
       </section>
     </div>
@@ -118,12 +129,14 @@ exports[`CheckoutPage matches snapshot 1`] = `
             Object {
               "attributes": Object {
                 "banned": false,
+                "deleted": false,
                 "profile": Object {
                   "abbreviatedName": "TT",
                   "displayName": "author display name",
                 },
               },
               "id": UUID {
+                "_sdkType": "UUID",
                 "uuid": "author",
               },
               "type": "user",
@@ -136,14 +149,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
           listing1 title
         </h2>
         <p>
-          <FormattedMessage
-            id="CheckoutPage.hostedBy"
-            values={
-              Object {
-                "name": "author display name",
-              }
-            }
-          />
+          55 CheckoutPage.perNight
         </p>
       </div>
       <h3>

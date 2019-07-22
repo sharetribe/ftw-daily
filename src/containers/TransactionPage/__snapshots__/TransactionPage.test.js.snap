@@ -28,6 +28,7 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
             Object {
               "attributes": Object {
                 "banned": false,
+                "deleted": false,
                 "email": "customer1@example.com",
                 "emailVerified": true,
                 "profile": Object {
@@ -36,9 +37,9 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
                   "firstName": "customer1 first name",
                   "lastName": "customer1 last name",
                 },
-                "stripeConnected": true,
               },
               "id": UUID {
+                "_sdkType": "UUID",
                 "uuid": "customer1",
               },
               "type": "currentUser",
@@ -48,6 +49,7 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
           declineSaleError={null}
           fetchMessagesError={null}
           fetchMessagesInProgress={false}
+          fetchTimeSlotsError={null}
           initialMessageFailed={false}
           messages={Array []}
           oldestMessagePageFetched={0}
@@ -55,14 +57,16 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
           onDeclineSale={[Function]}
           onSendMessage={[Function]}
           onShowMoreMessages={[Function]}
+          onSubmitBookingRequest={[Function]}
           sendMessageError={null}
           sendMessageInProgress={false}
+          timeSlots={null}
           totalMessagePages={0}
           transaction={
             Object {
               "attributes": Object {
                 "createdAt": 2017-05-01T00:00:00.000Z,
-                "lastTransition": "transition/request",
+                "lastTransition": "transition/confirm-payment",
                 "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
@@ -72,12 +76,14 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
                       "provider",
                     ],
                     "lineTotal": Money {
+                      "_sdkType": "Money",
                       "amount": 1000,
                       "currency": "USD",
                     },
                     "quantity": "3",
                     "reversal": false,
                     "unitPrice": Money {
+                      "_sdkType": "Money",
                       "amount": 333.3333333333333,
                       "currency": "USD",
                     },
@@ -88,21 +94,25 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
                       "provider",
                     ],
                     "lineTotal": Money {
+                      "_sdkType": "Money",
                       "amount": -100,
                       "currency": "USD",
                     },
                     "reversal": false,
                     "unitPrice": Money {
+                      "_sdkType": "Money",
                       "amount": -100,
                       "currency": "USD",
                     },
                   },
                 ],
                 "payinTotal": Money {
+                  "_sdkType": "Money",
                   "amount": 1000,
                   "currency": "USD",
                 },
                 "payoutTotal": Money {
+                  "_sdkType": "Money",
                   "amount": 900,
                   "currency": "USD",
                 },
@@ -110,7 +120,12 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
                   Object {
                     "by": "customer",
                     "createdAt": 2017-05-01T00:00:00.000Z,
-                    "transition": "transition/request",
+                    "transition": "transition/request-payment",
+                  },
+                  Object {
+                    "by": "customer",
+                    "createdAt": 2017-05-01T00:00:01.000Z,
+                    "transition": "transition/confirm-payment",
                   },
                   Object {
                     "by": "provider",
@@ -121,10 +136,13 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
               },
               "booking": Object {
                 "attributes": Object {
+                  "displayEnd": 2017-06-13T00:00:00.000Z,
+                  "displayStart": 2017-06-10T00:00:00.000Z,
                   "end": 2017-06-13T00:00:00.000Z,
                   "start": 2017-06-10T00:00:00.000Z,
                 },
                 "id": UUID {
+                  "_sdkType": "UUID",
                   "uuid": "booking1",
                 },
                 "type": "booking",
@@ -132,17 +150,20 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
               "customer": Object {
                 "attributes": Object {
                   "banned": false,
+                  "deleted": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
                     "displayName": "customer1 display name",
                   },
                 },
                 "id": UUID {
+                  "_sdkType": "UUID",
                   "uuid": "customer1",
                 },
                 "type": "user",
               },
               "id": UUID {
+                "_sdkType": "UUID",
                 "uuid": "tx-order-1",
               },
               "listing": Object {
@@ -150,10 +171,12 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
                   "deleted": false,
                   "description": "listing1 description",
                   "geolocation": LatLng {
+                    "_sdkType": "LatLng",
                     "lat": 40,
                     "lng": 60,
                   },
                   "price": Money {
+                    "_sdkType": "Money",
                     "amount": 5500,
                     "currency": "USD",
                   },
@@ -162,6 +185,7 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
                   "title": "listing1 title",
                 },
                 "id": UUID {
+                  "_sdkType": "UUID",
                   "uuid": "listing1",
                 },
                 "type": "listing",
@@ -169,12 +193,14 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
               "provider": Object {
                 "attributes": Object {
                   "banned": false,
+                  "deleted": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
                     "displayName": "provider1 display name",
                   },
                 },
                 "id": UUID {
+                  "_sdkType": "UUID",
                   "uuid": "provider1",
                 },
                 "type": "user",
@@ -225,6 +251,7 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
             Object {
               "attributes": Object {
                 "banned": false,
+                "deleted": false,
                 "email": "provider1@example.com",
                 "emailVerified": true,
                 "profile": Object {
@@ -233,9 +260,9 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
                   "firstName": "provider1 first name",
                   "lastName": "provider1 last name",
                 },
-                "stripeConnected": true,
               },
               "id": UUID {
+                "_sdkType": "UUID",
                 "uuid": "provider1",
               },
               "type": "currentUser",
@@ -244,6 +271,7 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
           declineInProgress={false}
           declineSaleError={null}
           fetchMessagesError={null}
+          fetchTimeSlotsError={null}
           initialMessageFailed={false}
           messages={Array []}
           oldestMessagePageFetched={0}
@@ -251,14 +279,16 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
           onDeclineSale={[Function]}
           onSendMessage={[Function]}
           onShowMoreMessages={[Function]}
+          onSubmitBookingRequest={[Function]}
           sendMessageError={null}
           sendMessageInProgress={false}
+          timeSlots={null}
           totalMessagePages={0}
           transaction={
             Object {
               "attributes": Object {
                 "createdAt": 2017-05-01T00:00:00.000Z,
-                "lastTransition": "transition/request",
+                "lastTransition": "transition/confirm-payment",
                 "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
@@ -268,12 +298,14 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
                       "provider",
                     ],
                     "lineTotal": Money {
+                      "_sdkType": "Money",
                       "amount": 1000,
                       "currency": "USD",
                     },
                     "quantity": "3",
                     "reversal": false,
                     "unitPrice": Money {
+                      "_sdkType": "Money",
                       "amount": 333.3333333333333,
                       "currency": "USD",
                     },
@@ -284,21 +316,25 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
                       "provider",
                     ],
                     "lineTotal": Money {
+                      "_sdkType": "Money",
                       "amount": -100,
                       "currency": "USD",
                     },
                     "reversal": false,
                     "unitPrice": Money {
+                      "_sdkType": "Money",
                       "amount": -100,
                       "currency": "USD",
                     },
                   },
                 ],
                 "payinTotal": Money {
+                  "_sdkType": "Money",
                   "amount": 1000,
                   "currency": "USD",
                 },
                 "payoutTotal": Money {
+                  "_sdkType": "Money",
                   "amount": 900,
                   "currency": "USD",
                 },
@@ -306,7 +342,12 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
                   Object {
                     "by": "customer",
                     "createdAt": 2017-05-01T00:00:00.000Z,
-                    "transition": "transition/request",
+                    "transition": "transition/request-payment",
+                  },
+                  Object {
+                    "by": "customer",
+                    "createdAt": 2017-05-01T00:00:01.000Z,
+                    "transition": "transition/confirm-payment",
                   },
                   Object {
                     "by": "provider",
@@ -317,10 +358,13 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
               },
               "booking": Object {
                 "attributes": Object {
+                  "displayEnd": 2017-06-13T00:00:00.000Z,
+                  "displayStart": 2017-06-10T00:00:00.000Z,
                   "end": 2017-06-13T00:00:00.000Z,
                   "start": 2017-06-10T00:00:00.000Z,
                 },
                 "id": UUID {
+                  "_sdkType": "UUID",
                   "uuid": "booking1",
                 },
                 "type": "booking",
@@ -328,17 +372,20 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
               "customer": Object {
                 "attributes": Object {
                   "banned": false,
+                  "deleted": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
                     "displayName": "customer1 display name",
                   },
                 },
                 "id": UUID {
+                  "_sdkType": "UUID",
                   "uuid": "customer1",
                 },
                 "type": "user",
               },
               "id": UUID {
+                "_sdkType": "UUID",
                 "uuid": "tx-sale-1",
               },
               "listing": Object {
@@ -346,10 +393,12 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
                   "deleted": false,
                   "description": "listing1 description",
                   "geolocation": LatLng {
+                    "_sdkType": "LatLng",
                     "lat": 40,
                     "lng": 60,
                   },
                   "price": Money {
+                    "_sdkType": "Money",
                     "amount": 5500,
                     "currency": "USD",
                   },
@@ -358,6 +407,7 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
                   "title": "listing1 title",
                 },
                 "id": UUID {
+                  "_sdkType": "UUID",
                   "uuid": "listing1",
                 },
                 "type": "listing",
@@ -365,12 +415,14 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
               "provider": Object {
                 "attributes": Object {
                   "banned": false,
+                  "deleted": false,
                   "profile": Object {
                     "abbreviatedName": "TT",
                     "displayName": "provider1 display name",
                   },
                 },
                 "id": UUID {
+                  "_sdkType": "UUID",
                   "uuid": "provider1",
                 },
                 "type": "user",

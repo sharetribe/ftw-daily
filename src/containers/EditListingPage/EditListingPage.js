@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { bool, func, object, shape, string, oneOf } from 'prop-types';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { intlShape, injectIntl } from 'react-intl';
@@ -16,11 +16,15 @@ import { LISTING_STATE_DRAFT, LISTING_STATE_PENDING_APPROVAL, propTypes } from '
 import { ensureOwnListing } from '../../util/data';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { stripeAccountClearError, createStripeAccount } from '../../ducks/user.duck';
+import { stripeAccountClearError, createStripeAccount } from '../../ducks/stripe.duck';
 import { EditListingWizard, NamedRedirect, Page } from '../../components';
 import { TopbarContainer } from '../../containers';
 
 import {
+  requestFetchBookings,
+  requestFetchAvailabilityExceptions,
+  requestCreateAvailabilityException,
+  requestDeleteAvailabilityException,
   requestCreateListingDraft,
   requestPublishListingDraft,
   requestUpdateListing,
@@ -44,6 +48,10 @@ export const EditListingPageComponent = props => {
     getOwnListing,
     history,
     intl,
+    onFetchAvailabilityExceptions,
+    onCreateAvailabilityException,
+    onDeleteAvailabilityException,
+    onFetchBookings,
     onCreateListingDraft,
     onPublishListingDraft,
     onUpdateListing,
@@ -157,6 +165,13 @@ export const EditListingPageComponent = props => {
           history={history}
           images={images}
           listing={currentListing}
+          availability={{
+            calendar: page.availabilityCalendar,
+            onFetchAvailabilityExceptions,
+            onCreateAvailabilityException,
+            onDeleteAvailabilityException,
+            onFetchBookings,
+          }}
           onUpdateListing={onUpdateListing}
           onCreateListingDraft={onCreateListingDraft}
           onPublishListingDraft={onPublishListingDraft}
@@ -195,13 +210,13 @@ EditListingPageComponent.defaultProps = {
   sendVerificationEmailError: null,
 };
 
-const { bool, func, object, shape, string, oneOf } = PropTypes;
-
 EditListingPageComponent.propTypes = {
   createStripeAccountError: propTypes.error,
   currentUser: propTypes.currentUser,
   fetchInProgress: bool.isRequired,
   getOwnListing: func.isRequired,
+  onFetchAvailabilityExceptions: func.isRequired,
+  onCreateAvailabilityException: func.isRequired,
   onCreateListingDraft: func.isRequired,
   onPublishListingDraft: func.isRequired,
   onImageUpload: func.isRequired,
@@ -232,7 +247,8 @@ EditListingPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const page = state.EditListingPage;
-  const { createStripeAccountInProgress, createStripeAccountError, currentUser } = state.user;
+  const { createStripeAccountInProgress, createStripeAccountError } = state.stripe;
+  const { currentUser } = state.user;
 
   const fetchInProgress = createStripeAccountInProgress;
 
@@ -253,6 +269,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   onUpdateListing: (tab, values) => dispatch(requestUpdateListing(tab, values)),
+  onFetchBookings: params => dispatch(requestFetchBookings(params)),
+  onFetchAvailabilityExceptions: params => dispatch(requestFetchAvailabilityExceptions(params)),
+  onCreateAvailabilityException: params => dispatch(requestCreateAvailabilityException(params)),
+  onDeleteAvailabilityException: params => dispatch(requestDeleteAvailabilityException(params)),
   onCreateListingDraft: values => dispatch(requestCreateListingDraft(values)),
   onPublishListingDraft: listingId => dispatch(requestPublishListingDraft(listingId)),
   onImageUpload: data => dispatch(requestImageUpload(data)),

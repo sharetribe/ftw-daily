@@ -2,69 +2,40 @@ import React, { Component } from 'react';
 import { array, arrayOf, func, number, string } from 'prop-types';
 import classNames from 'classnames';
 import { injectIntl, intlShape } from 'react-intl';
+import { FieldCheckbox } from '../../components';
 
-import { SelectMultipleFilterForm } from '../../forms';
+import { FilterPopup, FilterPlain } from '../../components';
 import css from './SelectMultipleFilter.css';
 
-const KEY_CODE_ESCAPE = 27;
+// SelectMultipleFilter doesn't need array mutators since it doesn't require validation.
+// TODO: Live edit didn't work with FieldCheckboxGroup
+//       There's a mutation problem: formstate.dirty is not reliable with it.
+const GroupOfFieldCheckboxes = props => {
+  const { id, className, name, options } = props;
+  return (
+    <fieldset className={className}>
+      <ul className={css.list}>
+        {options.map((option, index) => {
+          const fieldId = `${id}.${option.key}`;
+          return (
+            <li key={fieldId} className={css.item}>
+              <FieldCheckbox id={fieldId} name={name} label={option.label} value={option.key} />
+            </li>
+          );
+        })}
+      </ul>
+    </fieldset>
+  );
+};
 
 class SelectMultipleFilter extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { isOpen: false };
     this.filter = null;
     this.filterContent = null;
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleClear = this.handleClear.bind(this);
-    this.handleCancel = this.handleCancel.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.toggleOpen = this.toggleOpen.bind(this);
     this.positionStyleForContent = this.positionStyleForContent.bind(this);
-  }
-
-  handleSubmit(values) {
-    const { name, onSelect, urlParam } = this.props;
-    const paramValues = values[name];
-    this.setState({ isOpen: false });
-    onSelect(urlParam, paramValues);
-  }
-
-  handleClear() {
-    const { onSelect, urlParam } = this.props;
-    this.setState({ isOpen: false });
-    onSelect(urlParam, null);
-  }
-
-  handleCancel() {
-    const { onSelect, initialValues, urlParam } = this.props;
-    this.setState({ isOpen: false });
-    onSelect(urlParam, initialValues);
-  }
-
-  handleBlur(event) {
-    // FocusEvent is fired faster than the link elements native click handler
-    // gets its own event. Therefore, we need to check the origin of this FocusEvent.
-    if (!this.filter.contains(event.relatedTarget)) {
-      this.setState({ isOpen: false });
-    }
-  }
-
-  handleKeyDown(e) {
-    // Gather all escape presses to close menu
-    if (e.keyCode === KEY_CODE_ESCAPE) {
-      this.toggleOpen(false);
-    }
-  }
-
-  toggleOpen(enforcedState) {
-    if (enforcedState) {
-      this.setState({ isOpen: enforcedState });
-    } else {
-      this.setState(prevState => ({ isOpen: !prevState.isOpen }));
-    }
   }
 
   positionStyleForContent() {
@@ -91,15 +62,35 @@ class SelectMultipleFilter extends Component {
   }
 
   render() {
-    const { rootClassName, className, id, name, label, options, initialValues, intl } = this.props;
+    const {
+      rootClassName,
+      className,
+      id,
+      name,
+      label,
+      options,
+      initialValues,
+      contentPlacementOffset,
+      onSubmit,
+      urlParam,
+      intl,
+      showAsPopup,
+      ...rest
+    } = this.props;
+
     const classes = classNames(rootClassName || css.root, className);
 
     const hasInitialValues = initialValues.length > 0;
-    const labelStyles = hasInitialValues ? css.labelSelected : css.label;
-
-    const buttonLabel = hasInitialValues
+    const labelForPopup = hasInitialValues
       ? intl.formatMessage(
           { id: 'SelectMultipleFilter.labelSelected' },
+          { labelText: label, count: initialValues.length }
+        )
+      : label;
+
+    const labelForPlain = hasInitialValues
+      ? intl.formatMessage(
+          { id: 'SelectMultipleFilterPlainForm.labelSelected' },
           { labelText: label, count: initialValues.length }
         )
       : label;
@@ -110,35 +101,56 @@ class SelectMultipleFilter extends Component {
     // they can be passed to the correct field
     const namedInitialValues = { [name]: initialValues };
 
-    return (
-      <div
+    const handleSubmit = (urlParam, values) => {
+      const usedValue = values ? values[name] : values;
+      onSubmit(urlParam, usedValue);
+    };
+
+    return showAsPopup ? (
+      <FilterPopup
         className={classes}
-        onBlur={this.handleBlur}
-        onKeyDown={this.handleKeyDown}
-        ref={node => {
-          this.filter = node;
-        }}
+        rootClassName={rootClassName}
+        popupClassName={css.popupSize}
+        name={name}
+        label={labelForPopup}
+        isSelected={hasInitialValues}
+        id={`${id}.popup`}
+        showAsPopup
+        contentPlacementOffset={contentPlacementOffset}
+        onSubmit={handleSubmit}
+        initialValues={namedInitialValues}
+        urlParam={urlParam}
+        keepDirtyOnReinitialize
+        {...rest}
       >
-        <button className={labelStyles} onClick={() => this.toggleOpen()}>
-          {buttonLabel}
-        </button>
-        <SelectMultipleFilterForm
-          id={id}
-          onSubmit={this.handleSubmit}
-          initialValues={namedInitialValues}
-          enableReinitialize={true}
+        <GroupOfFieldCheckboxes
+          className={css.fieldGroup}
           name={name}
-          onClear={this.handleClear}
-          onCancel={this.handleCancel}
+          id={`${id}-checkbox-group`}
           options={options}
-          isOpen={this.state.isOpen}
-          intl={intl}
-          contentRef={node => {
-            this.filterContent = node;
-          }}
-          style={contentStyle}
         />
-      </div>
+      </FilterPopup>
+    ) : (
+      <FilterPlain
+        className={className}
+        rootClassName={rootClassName}
+        label={labelForPlain}
+        isSelected={hasInitialValues}
+        id={`${id}.plain`}
+        liveEdit
+        contentPlacementOffset={contentStyle}
+        onSubmit={handleSubmit}
+        initialValues={namedInitialValues}
+        urlParam={urlParam}
+        {...rest}
+      >
+        <GroupOfFieldCheckboxes
+          className={css.fieldGroupPlain}
+          name={name}
+          id={`${id}-checkbox-group`}
+          options={options}
+        />
+      </FilterPlain>
     );
   }
 }
@@ -157,7 +169,7 @@ SelectMultipleFilter.propTypes = {
   name: string.isRequired,
   urlParam: string.isRequired,
   label: string.isRequired,
-  onSelect: func.isRequired,
+  onSubmit: func.isRequired,
   options: array.isRequired,
   initialValues: arrayOf(string),
   contentPlacementOffset: number,

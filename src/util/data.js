@@ -1,5 +1,6 @@
 import isArray from 'lodash/isArray';
 import reduce from 'lodash/reduce';
+import { sanitizeEntity } from './sanitize';
 
 /**
  * Combine the given relationships objects
@@ -26,7 +27,7 @@ export const combinedResourceObjects = (oldRes, newRes) => {
     throw new Error('Cannot merge resource objects with different ids or types');
   }
   const attributes = newRes.attributes || oldRes.attributes;
-  const attrs = attributes ? { attributes } : null;
+  const attrs = attributes ? { attributes: { ...attributes } } : null;
   const relationships = combinedRelationships(oldRes.relationships, newRes.relationships);
   const rels = relationships ? { relationships } : null;
   return { id, type, ...attrs, ...rels };
@@ -42,9 +43,15 @@ export const updatedEntities = (oldEntities, apiResponse) => {
 
   const newEntities = objects.reduce((entities, curr) => {
     const { id, type } = curr;
+
+    // Some entities (e.g. listing and user) might include extended data,
+    // you should check if src/util/sanitize.js needs to be updated.
+    const current = sanitizeEntity(curr);
+
     entities[type] = entities[type] || {};
     const entity = entities[type][id.uuid];
-    entities[type][id.uuid] = entity ? combinedResourceObjects(entity, curr) : curr;
+    entities[type][id.uuid] = entity ? combinedResourceObjects({ ...entity }, current) : current;
+
     return entities;
   }, oldEntities);
 
@@ -218,11 +225,51 @@ export const ensureTimeSlot = timeSlot => {
 };
 
 /**
- * Get the display name of the given user. This function handles
+ * Create shell objects to ensure that attributes etc. exists.
+ *
+ * @param {Object} availability exception entity object, which is to be ensured against null values
+ */
+export const ensureDayAvailabilityPlan = availabilityPlan => {
+  const empty = { type: 'availability-plan/day', entries: [] };
+  return { ...empty, ...availabilityPlan };
+};
+
+/**
+ * Create shell objects to ensure that attributes etc. exists.
+ *
+ * @param {Object} availability exception entity object, which is to be ensured against null values
+ */
+export const ensureAvailabilityException = availabilityException => {
+  const empty = { id: null, type: 'availabilityException', attributes: {} };
+  return { ...empty, ...availabilityException };
+};
+
+/**
+ * Get the display name of the given user as string. This function handles
  * missing data (e.g. when the user object is still being downloaded),
  * fully loaded users, as well as banned users.
  *
- * For banned users, a translated name should be provided.
+ * For banned or deleted users, a translated name should be provided.
+ *
+ * @param {propTypes.user} user
+ * @param {String} defaultUserDisplayName
+ *
+ * @return {String} display name that can be rendered in the UI
+ */
+export const userDisplayNameAsString = (user, defaultUserDisplayName) => {
+  const hasAttributes = user && user.attributes;
+  const hasProfile = hasAttributes && user.attributes.profile;
+  const hasDisplayName = hasProfile && user.attributes.profile.displayName;
+
+  if (hasDisplayName) {
+    return user.attributes.profile.displayName;
+  } else {
+    return defaultUserDisplayName || '';
+  }
+};
+
+/**
+ * DEPRECATED: Use userDisplayNameAsString function or UserDisplayName component instead
  *
  * @param {propTypes.user} user
  * @param {String} bannedUserDisplayName
@@ -230,16 +277,12 @@ export const ensureTimeSlot = timeSlot => {
  * @return {String} display name that can be rendered in the UI
  */
 export const userDisplayName = (user, bannedUserDisplayName) => {
-  const hasAttributes = user && user.attributes;
-  const hasProfile = hasAttributes && user.attributes.profile;
+  console.warn(
+    `Function userDisplayName is deprecated!
+User function userDisplayNameAsString or component UserDisplayName instead.`
+  );
 
-  if (hasAttributes && user.attributes.banned) {
-    return bannedUserDisplayName;
-  } else if (hasProfile) {
-    return user.attributes.profile.displayName;
-  } else {
-    return '';
-  }
+  return userDisplayNameAsString(user, bannedUserDisplayName);
 };
 
 /**
@@ -247,24 +290,23 @@ export const userDisplayName = (user, bannedUserDisplayName) => {
  * missing data (e.g. when the user object is still being downloaded),
  * fully loaded users, as well as banned users.
  *
- * For banned users, a translated name should be provided.
+ * For banned  or deleted users, a default abbreviated name should be provided.
  *
  * @param {propTypes.user} user
- * @param {String} bannedUserAbbreviatedName
+ * @param {String} defaultUserAbbreviatedName
  *
  * @return {String} abbreviated name that can be rendered in the UI
  * (e.g. in Avatar initials)
  */
-export const userAbbreviatedName = (user, bannedUserAbbreviatedName) => {
+export const userAbbreviatedName = (user, defaultUserAbbreviatedName) => {
   const hasAttributes = user && user.attributes;
   const hasProfile = hasAttributes && user.attributes.profile;
+  const hasDisplayName = hasProfile && user.attributes.profile.abbreviatedName;
 
-  if (hasAttributes && user.attributes.banned) {
-    return bannedUserAbbreviatedName;
-  } else if (hasProfile) {
+  if (hasDisplayName) {
     return user.attributes.profile.abbreviatedName;
   } else {
-    return '';
+    return defaultUserAbbreviatedName || '';
   }
 };
 
@@ -291,4 +333,22 @@ export const overrideArrays = (objValue, srcValue, key, object, source, stack) =
   if (isArray(objValue)) {
     return srcValue;
   }
+};
+
+/**
+ * Humanizes a line item code. Strips the "line-item/" namespace
+ * definition from the beginnign, replaces dashes with spaces and
+ * capitalizes the first character.
+ *
+ * @param {string} code a line item code
+ *
+ * @return {string} returns the line item code humanized
+ */
+export const humanizeLineItemCode = code => {
+  if (!/^line-item\/.+/.test(code)) {
+    throw new Error(`Invalid line item code: ${code}`);
+  }
+  const lowercase = code.replace(/^line-item\//, '').replace(/-/g, ' ');
+
+  return lowercase.charAt(0).toUpperCase() + lowercase.slice(1);
 };

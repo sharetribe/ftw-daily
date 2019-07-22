@@ -52,7 +52,18 @@ export class SearchPageComponent extends Component {
   }
 
   filters() {
-    const { categories, amenities, priceFilterConfig } = this.props;
+    const {
+      categories,
+      amenities,
+      priceFilterConfig,
+      dateRangeFilterConfig,
+      keywordFilterConfig,
+    } = this.props;
+
+    // Note: "category" and "amenities" filters are not actually filtering anything by default.
+    // Currently, if you want to use them, we need to manually configure them to be available
+    // for search queries. Read more from extended data document:
+    // https://www.sharetribe.com/docs/references/extended-data/#data-schema
 
     return {
       categoryFilter: {
@@ -66,6 +77,14 @@ export class SearchPageComponent extends Component {
       priceFilter: {
         paramName: 'price',
         config: priceFilterConfig,
+      },
+      dateRangeFilter: {
+        paramName: 'dates',
+        config: dateRangeFilterConfig,
+      },
+      keywordFilter: {
+        paramName: 'keywords',
+        config: keywordFilterConfig,
       },
     };
   }
@@ -210,6 +229,8 @@ export class SearchPageComponent extends Component {
               categoryFilter: filters.categoryFilter,
               amenitiesFilter: filters.amenitiesFilter,
               priceFilter: filters.priceFilter,
+              dateRangeFilter: filters.dateRangeFilter,
+              keywordFilter: filters.keywordFilter,
             }}
           />
           <ModalInMobile
@@ -256,6 +277,8 @@ SearchPageComponent.defaultProps = {
   categories: config.custom.categories,
   amenities: config.custom.amenities,
   priceFilterConfig: config.custom.priceFilterConfig,
+  dateRangeFilterConfig: config.custom.dateRangeFilterConfig,
+  keywordFilterConfig: config.custom.keywordFilterConfig,
   activeListingId: null,
 };
 
@@ -278,6 +301,7 @@ SearchPageComponent.propTypes = {
     max: number.isRequired,
     step: number.isRequired,
   }),
+  dateRangeFilterConfig: shape({ active: bool.isRequired }),
 
   // from withRouter
   history: shape({
@@ -354,6 +378,8 @@ SearchPage.loadData = (params, search) => {
     page,
     perPage: RESULT_PAGE_SIZE,
     include: ['author', 'images'],
+    'fields.listing': ['title', 'geolocation', 'price'],
+    'fields.user': ['profile.displayName', 'profile.abbreviatedName'],
     'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
     'limit.images': 1,
   });

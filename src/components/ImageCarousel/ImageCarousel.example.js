@@ -1,7 +1,6 @@
 import React from 'react';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import ImageCarousel from './ImageCarousel';
-import css from './ImageCarousel.example.css';
 
 const { UUID } = sdkTypes;
 
@@ -110,8 +109,6 @@ const imageLandscape = {
 
 const ImageCarouselWrapper = props => {
   const wrapperStyles = {
-    width: '100%',
-    height: 400,
     backgroundColor: '#000',
   };
   return (
@@ -123,15 +120,18 @@ const ImageCarouselWrapper = props => {
 
 export const NoImages = {
   component: ImageCarouselWrapper,
-  props: { images: [], rootClassName: css.root },
+  props: { images: [] },
+  rawOnly: true,
 };
 
 export const SingleImage = {
   component: ImageCarouselWrapper,
-  props: { images: [imageSquare], rootClassName: css.root },
+  props: { images: [imageSquare] },
+  rawOnly: true,
 };
 
 export const MultipleImages = {
   component: ImageCarouselWrapper,
-  props: { images: [imageLandscape, imagePortrait, imageSquare], rootClassName: css.root },
+  props: { images: [imageLandscape, imagePortrait, imageSquare] },
+  rawOnly: true,
 };
