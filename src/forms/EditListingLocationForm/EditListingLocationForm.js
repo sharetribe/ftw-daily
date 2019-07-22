@@ -43,7 +43,14 @@ export const EditListingLocationFormComponent = props => (
         id: 'EditListingLocationForm.addressNotRecognized',
       });
 
-      const buildingMessage = intl.formatMessage({ id: 'EditListingLocationForm.building' });
+      const optionalText = intl.formatMessage({
+        id: 'EditListingLocationForm.optionalText',
+      });
+
+      const buildingMessage = intl.formatMessage(
+        { id: 'EditListingLocationForm.building' },
+        { optionalText: optionalText }
+      );
       const buildingPlaceholderMessage = intl.formatMessage({
         id: 'EditListingLocationForm.buildingPlaceholder',
       });
