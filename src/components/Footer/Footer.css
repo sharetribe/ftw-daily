@@ -6,7 +6,7 @@
   border-top-color: var(--matterColorNegative);
 
   width: 100%;
-  padding: 24px 24px 42px 24px;
+  padding: 24px;
   background-color: var(--matterColorBright);
 
   @media (--viewportMedium) {
@@ -315,25 +315,86 @@
 .footerContainerHorizontal {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+
+  @media (--viewportLarge) {
+    flex-wrap: nowrap;
+  }
 }
 
+.footerContainerHorizontal > div {
+  @media (min-width: 480px) and (max-width: 767px) {
+    &:nth-child(1) { order: 1 }
+    &:nth-child(2) { order: 3 }
+    &:nth-child(3) { order: 4 }
+    &:nth-child(4) { order: 2 }
+  }
+}
+
+
 .footerContainerVertical23 {
-  width: 23%;
   padding-right: 15px;
+  width: 100%;
+
+  @media (--viewportSmall) {
+    width: 50%;
+  }
+
+  @media (--viewportMedium) {
+    width: 33.33%;
+  }
+
+  @media (--viewportLarge) {
+    width: 23%;
+  }
 }
 
 .footerContainerVertical31 {
-  width: 31%;
   padding-right: 15px;
+  width: 100%;
+  margin-bottom: 20px;
+
+  @media (--viewportSmall) {
+    width: 50%;
+  }
+
+  @media (--viewportMedium) {
+    width: 33.33%;
+    margin-bottom: 0;
+  }
+
+  @media (--viewportLarge) {
+    width: 31%;
+  }
 }
 
 .bottomLine {
   display: flex;
   margin-top: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+
+  @media (--viewportMedium) {
+    justify-content: flex-start;
+    text-align: left;
+  }
 }
 
 .bottomLineItem {
   margin-right: 25px;
+
+  &:first-child {
+     flex: 1 1 100%;
+     order: 1;
+     margin-top: 5px;
+
+    @media (--viewportMedium) {
+      flex: none;
+      order: 0;
+      margin-top: 0;
+    }
+   }
 }
 
 .verticalContainerHeader {
