@@ -101,7 +101,7 @@ const siteYoutubePage = 'https://www.youtube.com/channel/UC-lrVxsEtC7qSWZATji2E_
 const siteInstagramPage = 'https://www.instagram.com/horsedeal24/';
 const siteSnapchatPage = 'https://www.snapchat.com/add/horsedeal24';
 // Facebook page is used in SEO schema (http://schema.org/Organization)
-const siteFacebookPage = 'https://api.whatsapp.com/send?phone=41762660505&text=Hallo!%20Ich%20brauche%20Hilfe,%20k%C3%B6nnt%20ihr%20mir%20weiterhelfen?%20';
+const siteFacebookPage = 'https://www.facebook.com/HorseDeal24/';
 
 
 // Facebook counts shares with app or page associated by this id
@@ -213,6 +213,8 @@ const config = {
   siteFacebookPage,
   siteInstagramPage,
   siteTwitterHandle,
+  siteSnapchatPage,
+  siteYoutubePage,
   facebookAppId,
   sentryDsn,
   usingSSL,

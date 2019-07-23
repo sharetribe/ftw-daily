@@ -76,19 +76,19 @@ const Footer = props => {
 
               <div className={css.footerContainerVertical23}>
                 <div className={css.verticalContainerHeader}>
-                  <Link to='#'>Get started</Link>
+                  <Link to='#'>Jetzt anmelden</Link>
                 </div>
                 <div className={css.verticalContainerContent}>
-                  <Link to='#' className={css.link}>So functionlet's</Link>
+                  <Link to='#' className={css.link}>So funktionierts</Link>
                   <Link to='#' className={css.link}>
-                    Jetzt Pferd mleten <span className={css.greenLabel}>NEU</span>
+                    Kostenlos anmelden <span className={css.greenLabel}>NEU</span>
                   </Link>
                 </div>
               </div>
 
               <div className={css.footerContainerVertical23}>
                 <div className={css.verticalContainerHeader}>
-                  <Link to='#'>LearnMore</Link>
+                  <Link to='#'>Unsere Community</Link>
                 </div>
                 <div className={css.verticalContainerContent}>
                   <Link to='#' className={css.link}>Community</Link>
@@ -101,7 +101,7 @@ const Footer = props => {
 
               <div className={css.footerContainerVertical31}>
                 <div className={css.verticalContainerHeader}>
-                  <Link to='#'>Top cities</Link>
+                  <Link to='#'>Finde Dein Pferd</Link>
                 </div>
                 <div className={css.verticalContainerContent}>
                   <div className={css.topCitiesContainer}>
