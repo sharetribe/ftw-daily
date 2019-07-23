@@ -89,6 +89,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
         <InjectIntl(StripePaymentForm)
           authorDisplayName="author display name"
           confirmPaymentError={null}
+          defaultPaymentMethod={null}
           formId="CheckoutPagePaymentForm"
           hasHandledCardPayment={null}
           inProgress={false}
