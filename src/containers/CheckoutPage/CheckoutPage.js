@@ -15,6 +15,8 @@ import {
   ensureUser,
   ensureTransaction,
   ensureBooking,
+  ensureStripeCustomer,
+  ensurePaymentMethodCard,
 } from '../../util/data';
 import { dateFromLocalToAPI, minutesBetween } from '../../util/dates';
 import { createSlug } from '../../util/urlHelpers';
@@ -46,6 +48,7 @@ import {
   initiateOrder,
   setInitialValues,
   speculateTransaction,
+  stripeCustomer,
   confirmPayment,
   sendMessage,
 } from './CheckoutPage.duck';
@@ -120,8 +123,15 @@ export class CheckoutPageComponent extends Component {
       listing,
       transaction,
       fetchSpeculatedTransaction,
+      fetchStripeCustomer,
       history,
     } = this.props;
+
+    // Fetch currentUser with stripeCustomer entity
+    // Note: since there's need for data loading in "componentWillMount" function,
+    //       this is added here instead of loadData static function.
+    fetchStripeCustomer();
+
     // Browser's back navigation should not rewrite data in session store.
     // Action is 'POP' on both history.back() and page refresh cases.
     // Action is 'PUSH' when user has directed through a link
@@ -378,6 +388,7 @@ export class CheckoutPageComponent extends Component {
       handleCardPaymentError,
       paymentIntent,
       retrievePaymentIntentError,
+      stripeCustomerFetched,
     } = this.props;
 
     // Since the listing data is already given from the ListingPage
@@ -443,6 +454,10 @@ export class CheckoutPageComponent extends Component {
       ) : null;
 
     const isPaymentExpired = checkIsPaymentExpired(existingTransaction);
+    const hasDefaultPaymentMethod =
+      stripeCustomerFetched &&
+      ensureStripeCustomer(currentUser.stripeCustomer).attributes.stripeCustomerId &&
+      ensurePaymentMethodCard(currentUser.stripeCustomer.defaultPaymentMethod).id;
 
     // Allow showing page when currentUser is still being downloaded,
     // but show payment form only when user info is loaded.
@@ -683,6 +698,7 @@ export class CheckoutPageComponent extends Component {
                   handleCardPaymentError={handleCardPaymentError}
                   confirmPaymentError={confirmPaymentError}
                   hasHandledCardPayment={hasPaymentIntentUserActionsDone}
+                  hasDefaultPaymentMethod={hasDefaultPaymentMethod}
                   paymentIntent={paymentIntent}
                   onStripeInitialized={this.onStripeInitialized}
                 />
@@ -747,6 +763,8 @@ CheckoutPageComponent.propTypes = {
     bookingStart: instanceOf(Date).isRequired,
     bookingEnd: instanceOf(Date).isRequired,
   }),
+  fetchStripeCustomer: func.isRequired,
+  stripeCustomerFetched: bool.isRequired,
   fetchSpeculatedTransaction: func.isRequired,
   speculateTransactionInProgress: bool.isRequired,
   speculateTransactionError: propTypes.error,
@@ -783,6 +801,7 @@ const mapStateToProps = state => {
     listing,
     bookingData,
     bookingDates,
+    stripeCustomerFetched,
     speculateTransactionInProgress,
     speculateTransactionError,
     speculatedTransaction,
@@ -795,6 +814,7 @@ const mapStateToProps = state => {
   return {
     scrollingDisabled: isScrollingDisabled(state),
     currentUser,
+    stripeCustomerFetched,
     bookingData,
     bookingDates,
     speculateTransactionInProgress,
@@ -812,8 +832,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   dispatch,
-  onInitiateOrder: (params, transactionId) => dispatch(initiateOrder(params, transactionId)),
   fetchSpeculatedTransaction: params => dispatch(speculateTransaction(params)),
+  fetchStripeCustomer: () => dispatch(stripeCustomer()),
+  onInitiateOrder: (params, transactionId) => dispatch(initiateOrder(params, transactionId)),
   onRetrievePaymentIntent: params => dispatch(retrievePaymentIntent(params)),
   onHandleCardPayment: params => dispatch(handleCardPayment(params)),
   onConfirmPayment: params => dispatch(confirmPayment(params)),

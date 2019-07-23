@@ -90,6 +90,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
           authorDisplayName="author display name"
           confirmPaymentError={null}
           formId="CheckoutPagePaymentForm"
+          hasDefaultPaymentMethod={false}
           hasHandledCardPayment={null}
           inProgress={false}
           initialValues={
