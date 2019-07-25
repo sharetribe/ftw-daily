@@ -44,7 +44,7 @@ const LayoutWrapperAccountSettingsSideNavComponent = props => {
 
   const tabs = [
     {
-      text: <FormattedMessage id="PaymentMethodsPage.contactDetailsTabTitle" />,
+      text: <FormattedMessage id="LayoutWrapperAccountSettingsSideNav.contactDetailsTabTitle" />,
       selected: currentTab === 'ContactDetailsPage',
       id: 'ContactDetailsPageTab',
       linkProps: {
@@ -52,7 +52,7 @@ const LayoutWrapperAccountSettingsSideNavComponent = props => {
       },
     },
     {
-      text: <FormattedMessage id="PaymentMethodsPage.passwordTabTitle" />,
+      text: <FormattedMessage id="LayoutWrapperAccountSettingsSideNav.passwordTabTitle" />,
       selected: currentTab === 'PasswordChangePage',
       id: 'PasswordChangePageTab',
       linkProps: {
@@ -60,7 +60,7 @@ const LayoutWrapperAccountSettingsSideNavComponent = props => {
       },
     },
     {
-      text: <FormattedMessage id="PaymentMethodsPage.paymentsTabTitle" />,
+      text: <FormattedMessage id="LayoutWrapperAccountSettingsSideNav.paymentsTabTitle" />,
       selected: currentTab === 'PayoutPreferencesPage',
       id: 'PayoutPreferencesPageTab',
       linkProps: {
@@ -68,7 +68,7 @@ const LayoutWrapperAccountSettingsSideNavComponent = props => {
       },
     },
     {
-      text: <FormattedMessage id="PaymentMethodsPage.paymentMethodsTabTitle" />,
+      text: <FormattedMessage id="LayoutWrapperAccountSettingsSideNav.paymentMethodsTabTitle" />,
       selected: currentTab === 'PaymentMethodsPage',
       id: 'PaymentMethodsPageTab',
       linkProps: {
