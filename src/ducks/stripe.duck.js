@@ -24,6 +24,10 @@ export const HANDLE_CARD_PAYMENT_REQUEST = 'app/stripe/HANDLE_CARD_PAYMENT_REQUE
 export const HANDLE_CARD_PAYMENT_SUCCESS = 'app/stripe/HANDLE_CARD_PAYMENT_SUCCESS';
 export const HANDLE_CARD_PAYMENT_ERROR = 'app/stripe/HANDLE_CARD_PAYMENT_ERROR';
 
+export const HANDLE_CARD_SETUP_REQUEST = 'app/stripe/HANDLE_CARD_SETUP_REQUEST';
+export const HANDLE_CARD_SETUP_SUCCESS = 'app/stripe/HANDLE_CARD_SETUP_SUCCESS';
+export const HANDLE_CARD_SETUP_ERROR = 'app/stripe/HANDLE_CARD_SETUP_ERROR';
+
 export const CLEAR_HANDLE_CARD_PAYMENT = 'app/stripe/CLEAR_HANDLE_CARD_PAYMENT';
 
 export const RETRIEVE_PAYMENT_INTENT_REQUEST = 'app/stripe/RETRIEVE_PAYMENT_INTENT_REQUEST';
@@ -43,7 +47,10 @@ const initialState = {
   stripeAccountFetched: false,
   handleCardPaymentInProgress: false,
   handleCardPaymentError: null,
+  handleCardSetupInProgress: false,
+  handleCardSetupError: null,
   paymentIntent: null,
+  setupIntent: null,
   retrievePaymentIntentInProgress: false,
   retrievePaymentIntentError: null,
 };
@@ -122,6 +129,18 @@ export default function reducer(state = initialState, action = {}) {
     case HANDLE_CARD_PAYMENT_ERROR:
       console.error(payload);
       return { ...state, handleCardPaymentError: payload, handleCardPaymentInProgress: false };
+
+    case HANDLE_CARD_SETUP_REQUEST:
+      return {
+        ...state,
+        handleCardSetupError: null,
+        handleCardSetupInProgress: true,
+      };
+    case HANDLE_CARD_SETUP_SUCCESS:
+      return { ...state, setupIntent: payload, handleCardSetupInProgress: false };
+    case HANDLE_CARD_SETUP_ERROR:
+      console.error(payload);
+      return { ...state, handleCardSetupError: payload, handleCardSetupInProgress: false };
 
     case CLEAR_HANDLE_CARD_PAYMENT:
       return {
@@ -214,6 +233,21 @@ export const handleCardPaymentSuccess = payload => ({
 
 export const handleCardPaymentError = payload => ({
   type: HANDLE_CARD_PAYMENT_ERROR,
+  payload,
+  error: true,
+});
+
+export const handleCardSetupRequest = () => ({
+  type: HANDLE_CARD_SETUP_REQUEST,
+});
+
+export const handleCardSetupSuccess = payload => ({
+  type: HANDLE_CARD_SETUP_SUCCESS,
+  payload,
+});
+
+export const handleCardSetupError = payload => ({
+  type: HANDLE_CARD_SETUP_ERROR,
   payload,
   error: true,
 });
@@ -617,8 +651,15 @@ export const handleCardPayment = params => dispatch => {
 
   dispatch(handleCardPaymentRequest());
 
+  // When using default payment method, card (aka Stripe Element) is not needed.
+  // We also set paymentParams.payment_method already in Flex API side,
+  // when request-payment transition is made - so there's no need for paymentParams
+  const args = card
+    ? [stripePaymentIntentClientSecret, card, paymentParams]
+    : [stripePaymentIntentClientSecret];
+
   return stripe
-    .handleCardPayment(stripePaymentIntentClientSecret, card, paymentParams)
+    .handleCardPayment(...args)
     .then(response => {
       if (response.error) {
         return Promise.reject(response);
@@ -644,6 +685,46 @@ export const handleCardPayment = params => dispatch => {
           }
         : e;
       log.error(loggableError, 'stripe-handle-card-payment-failed', {
+        stripeMessage: loggableError.message,
+      });
+      throw e;
+    });
+};
+
+export const handleCardSetup = params => dispatch => {
+  // It's required to use the same instance of Stripe as where the card has been created
+  // so that's why Stripe needs to be passed here and we can't create a new instance.
+  const { stripe, card, setupIntentClientSecret, paymentParams } = params;
+
+  dispatch(handleCardSetupRequest());
+
+  return stripe
+    .handleCardSetup(setupIntentClientSecret, card, paymentParams)
+    .then(response => {
+      if (response.error) {
+        return Promise.reject(response);
+      } else {
+        dispatch(handleCardSetupSuccess(response));
+        return response;
+      }
+    })
+    .catch(err => {
+      // Unwrap Stripe error.
+      const e = err.error || storableError(err);
+      dispatch(handleCardSetupError(e));
+
+      // Log error
+      const containsSetupIntent = err.error && err.error.setup_intent;
+      const { code, doc_url, message, setup_intent } = containsSetupIntent ? err.error : {};
+      const loggableError = containsSetupIntent
+        ? {
+            code,
+            message,
+            doc_url,
+            paymentIntentStatus: setup_intent.status,
+          }
+        : e;
+      log.error(loggableError, 'stripe-handle-card-setup-failed', {
         stripeMessage: loggableError.message,
       });
       throw e;
