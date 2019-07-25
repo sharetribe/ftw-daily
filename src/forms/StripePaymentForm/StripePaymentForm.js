@@ -9,8 +9,7 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Form as FinalForm } from 'react-final-form';
 import classNames from 'classnames';
 import config from '../../config';
-import { Form, PrimaryButton, FieldTextInput } from '../../components';
-import StripePaymentAddress from './StripePaymentAddress';
+import { Form, PrimaryButton, FieldTextInput, StripePaymentAddress } from '../../components';
 import css from './StripePaymentForm.css';
 
 /**
