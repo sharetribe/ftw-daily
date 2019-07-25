@@ -143,29 +143,3 @@
 .missingStripeKey {
   color: var(--failColor);
 }
-
-.paymentAddressField {
-  padding-top: 38px;
-}
-
-.formRow {
-  display: flex;
-  justify-content: space-between;
-  flex-shrink: 0;
-  width: 100%;
-  margin-bottom: 24px;
-}
-
-.postalCode {
-  margin-top: 24px;
-  width: calc(40% - 9px);
-}
-
-.city {
-  margin-top: 24px;
-  width: calc(60% - 9px);
-}
-
-.field {
-  margin-top: 24px;
-}
