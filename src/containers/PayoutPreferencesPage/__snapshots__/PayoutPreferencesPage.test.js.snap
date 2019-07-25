@@ -58,6 +58,16 @@ exports[`PayoutPreferencesPage matches snapshot with Stripe connected 1`] = `
               values={Object {}}
             />,
           },
+          Object {
+            "linkProps": Object {
+              "name": "PaymentMethodsPage",
+            },
+            "selected": false,
+            "text": <FormattedMessage
+              id="PayoutPreferencesPage.paymentMethodsTabTitle"
+              values={Object {}}
+            />,
+          },
         ]
       }
     />
@@ -145,6 +155,16 @@ exports[`PayoutPreferencesPage matches snapshot with Stripe not connected 1`] = 
             "selected": true,
             "text": <FormattedMessage
               id="PayoutPreferencesPage.paymentsTabTitle"
+              values={Object {}}
+            />,
+          },
+          Object {
+            "linkProps": Object {
+              "name": "PaymentMethodsPage",
+            },
+            "selected": false,
+            "text": <FormattedMessage
+              id="PayoutPreferencesPage.paymentMethodsTabTitle"
               values={Object {}}
             />,
           },
@@ -250,6 +270,16 @@ exports[`PayoutPreferencesPage matches snapshot with details submitted 1`] = `
             "selected": true,
             "text": <FormattedMessage
               id="PayoutPreferencesPage.paymentsTabTitle"
+              values={Object {}}
+            />,
+          },
+          Object {
+            "linkProps": Object {
+              "name": "PaymentMethodsPage",
+            },
+            "selected": false,
+            "text": <FormattedMessage
+              id="PayoutPreferencesPage.paymentMethodsTabTitle"
               values={Object {}}
             />,
           },

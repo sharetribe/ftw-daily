@@ -115,12 +115,11 @@
   }
 }
 
-.paymentInfo {
+.infoText {
   @apply --marketplaceH5FontStyles;
   color: var(--matterColorAnti);
-  text-align: center;
   padding: 0 42px;
-  margin: 28px 0 0 0;
+  margin: 22px 0 0 0;
 
   @media (--viewportLarge) {
     /* TODO this is ugly overwrite to fix unconsistent font styles */
@@ -142,4 +141,30 @@
 
 .missingStripeKey {
   color: var(--failColor);
+}
+
+.paymentAddressField {
+  padding-top: 38px;
+}
+
+.formRow {
+  display: flex;
+  justify-content: space-between;
+  flex-shrink: 0;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.postalCode {
+  margin-top: 24px;
+  width: calc(40% - 9px);
+}
+
+.city {
+  margin-top: 24px;
+  width: calc(60% - 9px);
+}
+
+.field {
+  margin-top: 24px;
 }

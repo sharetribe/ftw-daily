@@ -6,7 +6,7 @@ import * as validators from '../../util/validators';
 import getCountryCodes from '../../translations/countryCodes';
 import { FieldTextInput, FieldSelect } from '../../components';
 
-import css from './StripePaymentForm.css';
+import css from './StripePaymentAddress.css';
 
 const StripePaymentAddress = props => {
   const { className, intl, disabled, form, fieldId, card } = props;
@@ -78,7 +78,7 @@ const StripePaymentAddress = props => {
   const countryCodes = getCountryCodes(config.locale);
 
   return (
-    <div className={className ? className : css.sectionContainer}>
+    <div className={className ? className : css.root}>
       <FieldTextInput
         id={`${fieldId}.addressLine1`}
         name="addressLine1"

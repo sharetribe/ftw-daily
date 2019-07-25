@@ -1,0 +1,37 @@
+@import '../../marketplace.css';
+
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.paymentAddressField {
+  padding-top: 38px;
+}
+
+.formRow {
+  /* parent aka root is flexbox, this container takes all available space */
+  flex-grow: 1;
+  flex-shrink: 0;
+
+  /* This container uses flexbox layout */
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  margin-bottom: 24px;
+}
+
+.postalCode {
+  margin-top: 24px;
+  width: calc(40% - 9px);
+}
+
+.city {
+  margin-top: 24px;
+  width: calc(60% - 9px);
+}
+
+.field {
+  margin-top: 24px;
+}
