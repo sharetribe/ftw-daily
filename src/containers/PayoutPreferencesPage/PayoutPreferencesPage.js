@@ -64,6 +64,13 @@ export const PayoutPreferencesPageComponent = props => {
         name: 'PayoutPreferencesPage',
       },
     },
+    {
+      text: <FormattedMessage id="PayoutPreferencesPage.paymentMethodsTabTitle" />,
+      selected: false,
+      linkProps: {
+        name: 'PaymentMethodsPage',
+      },
+    },
   ];
 
   const title = intl.formatMessage({ id: 'PayoutPreferencesPage.title' });

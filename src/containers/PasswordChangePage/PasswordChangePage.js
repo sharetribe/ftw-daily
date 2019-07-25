@@ -55,6 +55,13 @@ export const PasswordChangePageComponent = props => {
         name: 'PayoutPreferencesPage',
       },
     },
+    {
+      text: <FormattedMessage id="PasswordChangePage.paymentMethodsTabTitle" />,
+      selected: false,
+      linkProps: {
+        name: 'PaymentMethodsPage',
+      },
+    },
   ];
 
   const changePasswordForm =
