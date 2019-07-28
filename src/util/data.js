@@ -245,6 +245,37 @@ export const ensureAvailabilityException = availabilityException => {
 };
 
 /**
+ * Create shell objects to ensure that attributes etc. exists.
+ *
+ * @param {Object} stripeCustomer entity from API, which is to be ensured against null values
+ */
+export const ensureStripeCustomer = stripeCustomer => {
+  const empty = { id: null, type: 'stripeCustomer', attributes: {} };
+  return { ...empty, ...stripeCustomer };
+};
+
+/**
+ * Create shell objects to ensure that attributes etc. exists.
+ *
+ * @param {Object} stripeCustomer entity from API, which is to be ensured against null values
+ */
+export const ensurePaymentMethodCard = stripePaymentMethod => {
+  const empty = {
+    id: null,
+    type: 'stripePaymentMethod',
+    attributes: { type: 'stripe-payment-method/card', card: {} },
+  };
+  const cardPaymentMethod = { ...empty, ...stripePaymentMethod };
+
+  if (cardPaymentMethod.attributes.type !== 'stripe-payment-method/card') {
+    throw new Error(`'ensurePaymentMethodCard' got payment method with wrong type.
+      'stripe-payment-method/card' was expected, received ${cardPaymentMethod.attributes.type}`);
+  }
+
+  return cardPaymentMethod;
+};
+
+/**
  * Get the display name of the given user as string. This function handles
  * missing data (e.g. when the user object is still being downloaded),
  * fully loaded users, as well as banned users.
