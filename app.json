@@ -1,11 +1,11 @@
 {
-  "name": "Sharetribe Flex Template Demo",
-  "description": "Sharetribe Flex Template Demo - Saunatime!",
+  "name": "Outdoorcoach",
+  "description": "Outdoorcoach main webpage",
   "keywords": [
     "node", 
     "react"
   ],
-  "repository": "https://github.com/sharetribe/flex-template-web/",
+  "repository": "https://github.com/Outdoorcoach/flex-template-web",
   "env": {
     "REACT_APP_MAPBOX_ACCESS_TOKEN": {
       "description": "See: Integrating to map providers documentation https://github.com/sharetribe/flex-template-web/blob/master/docs/map-providers.md"
