@@ -8,9 +8,9 @@ import { NamedLink } from '../../components';
 
 import css from './SectionLocations.css';
 
-import helsinkiImage from './images/location_helsinki.jpg';
-import rovaniemiImage from './images/location_rovaniemi.jpg';
-import rukaImage from './images/location_ruka.jpg';
+import ChicagoImage from './images/location_chicago.jpg';
+import DenverImage from './images/location_denver.jpg';
+import LosAngelesImage from './images/location_losangeles.jpg';
 
 class LocationImage extends Component {
   render() {
@@ -51,19 +51,19 @@ const SectionLocations = props => {
       </div>
       <div className={css.locations}>
         {locationLink(
-          'Helsinki',
-          helsinkiImage,
-          '?address=Helsinki%2C%20Finland&bounds=60.2978389%2C25.254484899999966%2C59.9224887%2C24.782875800000056&origin=60.16985569999999%2C24.93837910000002'
+          'Chicago',
+          ChicagoImage,
+          'Chicago%2C%20Illinois%2C%20United%20States%20of%20America&bounds=42.0234323628388%2C-87.523686109734%2C41.6299229800457%2C-87.9058109309507'
         )}
         {locationLink(
-          'Rovaniemi',
-          rovaniemiImage,
-          '?address=Rovaniemi%2C%20Finland&bounds=67.18452510000002%2C27.32667850000007%2C66.1553745%2C24.736871199999996&origin=66.50394779999999%2C25.729390599999988'
+          'Denver',
+          DenverImage,
+          's?address=Denver%2C%20Colorado%2C%20United%20States%20of%20America&bounds=39.94623402%2C-104.600299056%2C39.62371698%2C-105.193616003506'
         )}
         {locationLink(
-          'Ruka',
-          rukaImage,
-          '?address=Ruka%2C%20Finland&bounds=66.1704578%2C29.14246849999995%2C66.1614402%2C29.110453699999994&origin=66.16594940000002%2C29.12646110000003'
+          'Los Angeles',
+          LosAngelesImage,
+          '?address=Los%20Angeles%2C%20California%2C%20United%20States%20of%20America&bounds=34.161440999758%2C-118.121305008073%2C33.9018913203336%2C-118.521456965901'
         )}
       </div>
     </div>

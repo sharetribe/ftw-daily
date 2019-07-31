@@ -4,44 +4,44 @@
 
 export const amenities = [
   {
-    key: 'towels',
-    label: 'Towels',
+    key: 'padcar',
+    label: 'Crash Pad Car',
   },
   {
-    key: 'bathroom',
-    label: 'Bathroom',
+    key: 'wifi',
+    label: 'Wireless Internet',
   },
   {
-    key: 'swimming_pool',
-    label: 'Swimming pool',
+    key: 'cable',
+    label: 'Cable TV',
   },
   {
-    key: 'own_drinks',
-    label: 'Own drinks allowed',
+    key: 'reserveready',
+    label: 'Reserve Ready (less then 10 minutes to the airport)',
   },
   {
-    key: 'jacuzzi',
-    label: 'Jacuzzi',
+    key: 'fullkitchen',
+    label: 'Full kitchen with cooking utensils',
   },
   {
-    key: 'audiovisual_entertainment',
-    label: 'Audiovisual entertainment',
+    key: 'grill',
+    label: 'Grill',
   },
   {
-    key: 'barbeque',
-    label: 'Barbeque',
+    key: 'amenity1',
+    label: 'Amenity 1',
   },
   {
-    key: 'own_food_allowed',
-    label: 'Own food allowed',
+    key: 'amenity2',
+    label: 'Amenity 2',
   },
 ];
 
 export const categories = [
-  { key: 'smoke', label: 'Smoke' },
-  { key: 'electric', label: 'Electric' },
-  { key: 'wood', label: 'Wood' },
-  { key: 'other', label: 'Other' },
+  { key: 'cat1', label: 'Category 1' },
+  { key: 'cat2', label: 'Category 2' },
+  { key: 'cat3', label: 'Category 3' },
+  { key: 'cat4', label: 'Category 4' },
 ];
 
 // Price filter configuration
@@ -54,13 +54,5 @@ export const priceFilterConfig = {
 
 // Activate booking dates filter on search page
 export const dateRangeFilterConfig = {
-  active: true,
-};
-
-// Activate keyword filter on search page
-
-// NOTE: If you are ordering search results by distance the keyword search can't be used at the same time.
-// You can turn off ordering by distance in config.js file
-export const keywordFilterConfig = {
   active: true,
 };
