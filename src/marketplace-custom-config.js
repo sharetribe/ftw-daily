@@ -47,9 +47,9 @@ export const categories = [
 // Price filter configuration
 // Note: unlike most prices this is not handled in subunits
 export const priceFilterConfig = {
-  min: 0,
-  max: 1000,
-  step: 5,
+  min: 400,
+  max: 2000,
+  step: 50,
 };
 
 // Activate booking dates filter on search page

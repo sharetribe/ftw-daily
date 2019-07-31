@@ -16,7 +16,7 @@ const i18n = {
     ...
     6: Saturday
   */
-  firstDayOfWeek: 0,
+  firstDayOfWeek: 1,
 };
 
 // Should search results be ordered by distance to origin.
@@ -77,25 +77,25 @@ const sentryDsn = process.env.REACT_APP_SENTRY_DSN;
 const usingSSL = process.env.REACT_APP_SHARETRIBE_USING_SSL === 'true';
 
 // Address information is used in SEO schema for Organization (http://schema.org/PostalAddress)
-const addressCountry = 'FI';
-const addressRegion = 'Helsinki';
-const postalCode = '00100';
-const streetAddress = 'Bulevardi 14';
+const addressCountry = 'SE';
+const addressRegion = 'Stockholm';
+const postalCode = '12540';
+const streetAddress = 'Aspövägen 35';
 
 // Canonical root url is needed in social media sharing and SEO optimization purposes.
 const canonicalRootURL = process.env.REACT_APP_CANONICAL_ROOT_URL;
 
 // Site title is needed in meta tags (bots and social media sharing reads those)
-const siteTitle = 'Saunatime';
+const siteTitle = 'Outdoorcoach';
 
 // Twitter handle is needed in meta tags (twitter:site). Start it with '@' character
-const siteTwitterHandle = '@sharetribe';
+const siteTwitterHandle = '@outdoorcoach';
 
 // Instagram page is used in SEO schema (http://schema.org/Organization)
 const siteInstagramPage = null;
 
 // Facebook page is used in SEO schema (http://schema.org/Organization)
-const siteFacebookPage = 'https://www.facebook.com/Sharetribe/';
+const siteFacebookPage = 'https://www.facebook.com/Outdoorcoach-370676466916213/';
 
 // Facebook counts shares with app or page associated by this id
 // Currently it is unset, but you can read more about fb:app_id from
@@ -139,13 +139,13 @@ const maps = {
   // coordinates are still accessible in the HTTP requests and the
   // Redux store.
   fuzzy: {
-    enabled: false,
+    enabled: true,
 
     // Amount of maximum offset in meters that is applied to obfuscate
     // the original coordinates. The actual value is random, but the
     // obfuscated coordinates are withing a circle that has the same
     // radius as the offset.
-    offset: 500,
+    offset: 400,
 
     // Default zoom level when showing a single circle on a Map. Should
     // be small enough so the whole circle fits in.
