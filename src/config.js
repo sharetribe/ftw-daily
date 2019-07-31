@@ -40,7 +40,7 @@ const bookingProcessAlias = 'sca-preauth-nightly-booking/release-1';
 //
 // Note: translations will use different translation keys for night, day or unit
 // depending on the value chosen.
-const bookingUnitType = 'line-item/night';
+const bookingUnitType = 'line-item/day';
 
 // Should the application fetch available time slots (currently defined as
 // start and end dates) to be shown on listing page.
