@@ -4,8 +4,8 @@
 
 export const amenities = [
   {
-    key: 'towels',
-    label: 'Towels',
+    key: 'ski_boots',
+    label: 'Ski boots',
   },
   {
     key: 'bathroom',
@@ -38,10 +38,10 @@ export const amenities = [
 ];
 
 export const categories = [
-  { key: 'smoke', label: 'Smoke' },
-  { key: 'electric', label: 'Electric' },
-  { key: 'wood', label: 'Wood' },
-  { key: 'other', label: 'Other' },
+  { key: 'alpine', label: 'Utförsåkning' },
+  { key: 'xcski', label: 'Längdskidåkning' },
+  { key: 'Trailrun', label: 'Traillöpning' },
+  { key: 'Orienteering', label: 'Orientering' },
 ];
 
 // Price filter configuration
