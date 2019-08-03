@@ -104,10 +104,11 @@ class StripePaymentForm extends Component {
     }
 
     if (config.stripe.publishableKey) {
+      const { onStripeInitialized, hasHandledCardPayment, hasDefaultPaymentMethod } = this.props;
       this.stripe = window.Stripe(config.stripe.publishableKey);
-      this.props.onStripeInitialized(this.stripe);
+      onStripeInitialized(this.stripe);
 
-      if (!this.props.hasHandledCardPayment) {
+      if (!(hasHandledCardPayment || hasDefaultPaymentMethod)) {
         const elements = this.stripe.elements(stripeElementsOptions);
         this.card = elements.create('card', { style: cardStyles });
         this.card.mount(this.cardContainer);
@@ -181,11 +182,13 @@ class StripePaymentForm extends Component {
       handleSubmit,
       form,
       hasHandledCardPayment,
+      hasDefaultPaymentMethod,
     } = formRenderProps;
 
     this.finalFormAPI = form;
-    const billingDetailsNeeded = !(confirmPaymentError || hasHandledCardPayment);
-    const cardInputNeedsAttention = !(hasHandledCardPayment || this.state.cardValueValid);
+    const billingDetailsKnown = hasHandledCardPayment || hasDefaultPaymentMethod;
+    const billingDetailsNeeded = !(billingDetailsKnown || confirmPaymentError);
+    const cardInputNeedsAttention = !(billingDetailsKnown || this.state.cardValueValid);
     const submitDisabled = invalid || cardInputNeedsAttention || submitInProgress;
     const hasCardError = this.state.error && !submitInProgress;
     const hasPaymentErrors = handleCardPaymentError || confirmPaymentError;
@@ -275,6 +278,8 @@ class StripePaymentForm extends Component {
               {billingAddress}
             </div>
           </React.Fragment>
+        ) : hasDefaultPaymentMethod ? (
+          <div>This will contain {`<SavedCardPaymentDetails />`} component at some point.</div>
         ) : null}
 
         {initiateOrderError ? (
@@ -334,6 +339,7 @@ StripePaymentForm.defaultProps = {
   inProgress: false,
   showInitialMessageInput: true,
   hasHandledCardPayment: false,
+  hasDefaultPaymentMethod: false,
   initiateOrderError: null,
   handleCardPaymentError: null,
   confirmPaymentError: null,
@@ -353,6 +359,7 @@ StripePaymentForm.propTypes = {
   authorDisplayName: string.isRequired,
   showInitialMessageInput: bool,
   hasHandledCardPayment: bool,
+  hasDefaultPaymentMethod: bool,
 };
 
 export default injectIntl(StripePaymentForm);
