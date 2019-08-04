@@ -18,7 +18,7 @@
     },
     "REACT_APP_SHARETRIBE_MARKETPLACE_CURRENCY": {
       "description": "The currency used in the Marketplace as ISO 4217 currency code. For example: USD, EUR, CAD, AUD, etc.",
-      "value": "USD"
+      "value": "SEK"
     },
     "REACT_APP_CANONICAL_ROOT_URL": {
       "description": "Canonical root url of the marketplace. E.g. https://the-name-of-your-app.herokuapp.com or your actual domain. This is needed for social media sharing and SEO optimization."

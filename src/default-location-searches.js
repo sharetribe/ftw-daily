@@ -12,7 +12,7 @@ export default [
     id: 'default-stockholm',
     predictionPlace: {
       address: 'Stockholm, Sweden',
-      bounds: new LatLngBounds(new LatLng(59.701941, 18.53485), new LatLng(59.334591 ,  18.063240)),
+      bounds: new LatLngBounds(new LatLng(59.41354065, 18.21628065), new LatLng(59.22879168 ,  17.91832901)),
     },
   }
 ];

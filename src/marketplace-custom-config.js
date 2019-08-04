@@ -44,6 +44,8 @@ export const categories = [
   { key: 'Orienteering', label: 'Orientering' },
 ];
 
+
+
 // Price filter configuration
 // Note: unlike most prices this is not handled in subunits
 export const priceFilterConfig = {
