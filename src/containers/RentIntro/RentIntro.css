@@ -1,0 +1,8 @@
+@import '../../marketplace.css';
+
+.root {
+  padding: 24px;
+
+  /* Use CSS variable imported from marketplace.css */
+  background-color: var(--marketplaceColor);
+}

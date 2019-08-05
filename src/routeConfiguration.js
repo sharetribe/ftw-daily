@@ -22,6 +22,9 @@ import {
   StyleguidePage,
   TermsOfServicePage,
   TransactionPage,
+  HostIntro,
+  RentIntro,
+  ContactUs
 } from './containers';
 
 // routeConfiguration needs to initialize containers first
@@ -309,6 +312,21 @@ const routeConfiguration = () => {
       authPage: 'LoginPage',
       component: props => <EmailVerificationPage {...props} />,
       loadData: EmailVerificationPage.loadData,
+    },
+    {
+      path: '/hostintro',
+      name: 'HostIntro',
+      component: HostIntro,
+    },
+    {
+      path: '/rentintro',
+      name: 'RentIntro',
+      component: RentIntro,
+    },
+    {
+      path: '/contactus',
+      name: 'ContactUs',
+      component: ContactUs,
     },
   ];
 };
