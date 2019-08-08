@@ -4,7 +4,7 @@
  * It's also handled separately in handleSubmit function.
  */
 import React, { Component } from 'react';
-import { bool, func, string } from 'prop-types';
+import { bool, func, object, string } from 'prop-types';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Form as FinalForm } from 'react-final-form';
 import classNames from 'classnames';
@@ -80,10 +80,10 @@ const initialState = {
 };
 
 /**
- * Payment form that asks for credit card info using Stripe Elements.
+ * Payment methods form that asks for credit card info using Stripe Elements.
  *
  * When the card is valid and the user submits the form, a request is
- * sent to the Stripe API to handle payment. `stripe.handleCardPayment`
+ * sent to the Stripe API to handle card setup. `stripe.handleCardSetup`
  * may ask more details from cardholder if 3D security steps are needed.
  *
  * See: https://stripe.com/docs/payments/payment-intents
@@ -172,8 +172,11 @@ class PaymentMethodsForm extends Component {
       intl,
       invalid,
       handleSubmit,
+      addPaymentMethodError,
+      deletePaymentMethodError,
+      createStripeCustomerError,
+      handleCardSetupError,
       form,
-      hasPaymentErrors,
     } = formRenderProps;
 
     this.finalFormAPI = form;
@@ -186,7 +189,13 @@ class PaymentMethodsForm extends Component {
       [css.cardError]: hasCardError,
     });
 
-    const paymentErrorMessage = intl.formatMessage({ id: 'PaymentMethodsForm.genericError' });
+    const hasErrors =
+      addPaymentMethodError ||
+      deletePaymentMethodError ||
+      createStripeCustomerError ||
+      handleCardSetupError;
+
+    const errorMessage = intl.formatMessage({ id: 'PaymentMethodsForm.genericError' });
 
     const billingDetailsNameLabel = intl.formatMessage({
       id: 'PaymentMethodsForm.billingDetailsNameLabel',
@@ -210,9 +219,6 @@ class PaymentMethodsForm extends Component {
 
     return hasStripeKey ? (
       <Form className={classes} onSubmit={handleSubmit}>
-        <h3 className={css.paymentHeading}>
-          <FormattedMessage id="PaymentMethodsForm.paymentHeading" />
-        </h3>
         <label className={css.paymentLabel} htmlFor={`${formId}-card`}>
           <FormattedMessage id="PaymentMethodsForm.creditCardDetails" />
         </label>
@@ -245,8 +251,10 @@ class PaymentMethodsForm extends Component {
         </div>
 
         <div className={css.submitContainer}>
-          {hasPaymentErrors ? (
-            <span className={css.errorMessage}>{paymentErrorMessage}</span>
+          {hasErrors ? (
+            <span className={css.errorMessage}>
+              {hasErrors.message ? hasErrors.message : errorMessage}
+            </span>
           ) : null}
           <PrimaryButton
             className={css.submitButton}
@@ -275,17 +283,25 @@ PaymentMethodsForm.defaultProps = {
   className: null,
   rootClassName: null,
   inProgress: false,
-  hasPaymentErrors: false,
+  handleSubmit: null,
+  invalid: false,
+  addPaymentMethodError: null,
+  deletePaymentMethodError: null,
+  createStripeCustomerError: null,
+  handleCardSetupError: null,
+  form: null,
 };
 
 PaymentMethodsForm.propTypes = {
-  className: string,
-  rootClassName: string,
-  inProgress: bool,
-  formId: string.isRequired,
+  formId: string,
   intl: intlShape.isRequired,
-  onSubmit: func.isRequired,
-  hasPaymentErrors: bool,
+  invalid: bool,
+  handleSubmit: func,
+  addPaymentMethodError: object,
+  deletePaymentMethodError: object,
+  createStripeCustomerError: object,
+  handleCardSetupError: object,
+  form: object,
 };
 
 export default injectIntl(PaymentMethodsForm);
