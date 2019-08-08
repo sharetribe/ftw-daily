@@ -103,6 +103,9 @@ const siteFacebookPage = 'https://www.facebook.com/Outdoorcoach-370676466916213/
 // You should create one to track social sharing in Facebook
 const facebookAppId = null;
 
+// Contentful
+const contentfulAPIKey = process.env.CONTENTFUL_DELIVERY_API_ACCESS_TOKEN;
+
 const maps = {
   mapboxAccessToken: process.env.REACT_APP_MAPBOX_ACCESS_TOKEN,
   googleMapsAPIKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -219,6 +222,7 @@ const config = {
   usingSSL,
   maps,
   custom,
+  contentfulAPIKey,
 };
 
 export default config;
