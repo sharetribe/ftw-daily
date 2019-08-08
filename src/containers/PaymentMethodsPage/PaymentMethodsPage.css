@@ -25,22 +25,3 @@
     margin-bottom: 47px;
   }
 }
-
-.savedPaymentMethodTitle {
-  @apply --marketplaceH4FontStyles;
-  font-weight: bold;
-}
-
-.closeIcon {
-  @apply --marketplaceModalCloseIcon;
-  margin-right: 5px;
-}
-
-.savedPaymentMethodDelete {
-  @apply --marketplaceH4FontStyles;
-  color: var(--matterColorAnti);
-
-  &:hover {
-    color: var(--matterColor);
-  }
-}

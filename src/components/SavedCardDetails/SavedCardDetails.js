@@ -76,8 +76,6 @@ const SavedCardDetails = props => {
     const currentYear = currentTime.getFullYear();
     const currentMonth = currentTime.getMonth() + 1; //getMonth() method returns the month (from 0 to 11)
 
-    console.log('currentYear', currentYear, 'currentMonth', currentMonth);
-    console.log('expirationYear', expirationYear, 'expirationMonth', expirationMonth);
     if (expirationYear < currentYear) {
       return true;
     } else if (expirationYear === currentYear && expirationMonth < currentMonth) {
