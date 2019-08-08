@@ -53,7 +53,8 @@ const routeConfiguration = () => {
     {
       path: '/about',
       name: 'AboutPage',
-      component: AboutPage,
+      component: props => <AboutPage {...props}/>,
+      loadData: AboutPage.loadData,
     },
     {
       path: '/s',

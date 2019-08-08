@@ -27,9 +27,6 @@
   display: flex;
   flex-wrap: wrap;
 
-  @media (--viewportMedium) {
-    flex-wrap: nowrap;
-  }
 }
 
 .contentSide {
