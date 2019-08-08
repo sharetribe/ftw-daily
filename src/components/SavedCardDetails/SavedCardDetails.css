@@ -1,0 +1,187 @@
+@import '../../marketplace.css';
+
+.root {
+}
+
+.savedPaymentMethodTitle {
+  @apply --marketplaceH4FontStyles;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.savedPaymentMethod {
+  display: inline-block;
+  width: 80%;
+}
+
+.paymentMethodPlaceholderDesktop {
+  display: none;
+}
+
+.paymentMethodPlaceholderMobile {
+  display: inline-block;
+}
+
+@media (--viewportSmall) {
+  .paymentMethodPlaceholderDesktop {
+    display: inline-block;
+  }
+
+  .paymentMethodPlaceholderMobile {
+    display: none;
+  }
+}
+
+.cardIcon {
+  margin: 0 16px;
+}
+
+.closeIcon {
+  @apply --marketplaceModalCloseIcon;
+  margin-left: 0;
+  margin-right: 5px;
+}
+
+.expirationDate {
+  padding-left: 24px;
+}
+
+.expirationDateExpired {
+  padding-left: 24px;
+  color: var(--failColor);
+}
+
+.cardExpiredText {
+  @apply --marketplaceH4FontStyles;
+  color: var(--failColor);
+  font-weight: var(--fontWeightSemiBold);
+  margin-top: 13px;
+  margin-bottom: 11px;
+}
+
+.menu {
+  width: 564px;
+  max-width: 100%;
+  height: auto;
+}
+
+.menuLabel {
+  text-align: left;
+  padding: 0;
+  &:focus {
+    outline: none;
+    background-color: var(--matterColorLight);
+    border-color: transparent;
+    text-decoration: none;
+    box-shadow: var(--boxShadowFilterButton);
+  }
+}
+
+.menuLabelWrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  border: 1px solid var(--matterColorNegative);
+  border-radius: var(--borderRadius);
+  box-shadow: var(--boxShadow);
+  padding: 11px 16px;
+}
+
+.menuLabelWrapperExpired {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  border: 1px solid var(--failColor);
+  border-radius: var(--borderRadius);
+  box-shadow: var(--boxShadow);
+  padding: 11px 16px;
+}
+
+.menuContent {
+  border-radius: var(--borderRadius);
+  box-shadow: var(--boxShadow);
+  border: 1px solid var(--matterColorNegative);
+  padding: 15px 0;
+}
+
+.menuItem {
+  color: var(--matterColor);
+  &:hover {
+    background-color: var(--matterColorNegative);
+  }
+}
+
+.menuText {
+  @apply --marketplaceMessageFontStyles;
+  padding: 12px 24px;
+  color: var(--matterColor);
+  width: 100%;
+  text-align: left;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:focus {
+    outline: 0;
+    background-color: var(--matterColorNegative);
+  }
+}
+.menuDivider {
+  @apply --marketplaceH5FontStyles;
+  color: var(--matterColorAnti);
+  padding: 16px 24px 0px 24px;
+  margin: 0;
+}
+
+.savedPaymentMethodDelete {
+  @apply --marketplaceH4FontStyles;
+  color: var(--matterColorAnti);
+  cursor: pointer;
+  margin-top: 14px;
+  margin-bottom: 10px;
+
+  &:hover {
+    color: var(--matterColor);
+  }
+
+  &:focus {
+    outline: none;
+    color: var(--matterColor);
+  }
+}
+
+.modalButtonsWrapper {
+  padding-top: 80px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+}
+
+/* Title of the modal */
+.modalTitle {
+  @apply --marketplaceModalTitleStyles;
+  padding-top: 36px;
+}
+
+/* Paragraph for the Modal */
+.modalMessage {
+  @apply --marketplaceModalParagraphStyles;
+  min-height: 200px;
+}
+
+.cancelCardDelete {
+  color: var(--matterColorAnti);
+  cursor: pointer;
+  width: 50%;
+  text-align: right;
+  padding-right: 64px;
+
+  &:hover {
+    color: var(--matterColor);
+  }
+}
