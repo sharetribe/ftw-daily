@@ -46,17 +46,15 @@ const TopbarMobileMenu = props => {
     return (
       <div className={css.root}>
         <div className={css.content}>
-          <div className={css.authenticationGreeting}>
+        <div className={css.authenticationGreeting}>
             <FormattedMessage
               id="TopbarMobileMenu.unauthorizedGreeting"
               values={{ lineBreak: <br />, signupOrLogin }}
             />
-          </div>
         </div>
-        <div className={css.footer}>
-          <NamedLink className={css.createNewListingLink} name="NewListingPage">
-            <FormattedMessage id="TopbarMobileMenu.newListingLink" />
-          </NamedLink>
+        <NamedLink name="AboutPage" className={css.navigationLink}>
+          <FormattedMessage id="StaticPage.AboutUs.linkName" />
+        </NamedLink>
         </div>
       </div>
     );
@@ -81,9 +79,7 @@ const TopbarMobileMenu = props => {
         <span className={css.greeting}>
           <FormattedMessage id="TopbarMobileMenu.greeting" values={{ displayName }} />
         </span>
-        <InlineTextButton rootClassName={css.logoutButton} onClick={onLogout}>
-          <FormattedMessage id="TopbarMobileMenu.logoutLink" />
-        </InlineTextButton>
+        
         <NamedLink
           className={classNames(css.inbox, currentPageClass('InboxPage'))}
           name="InboxPage"
@@ -110,6 +106,9 @@ const TopbarMobileMenu = props => {
         >
           <FormattedMessage id="TopbarMobileMenu.accountSettingsLink" />
         </NamedLink>
+        <InlineTextButton rootClassName={css.logoutButton} onClick={onLogout}>
+          <FormattedMessage id="TopbarMobileMenu.logoutLink" />
+        </InlineTextButton>
       </div>
       <div className={css.footer}>
         <NamedLink className={css.createNewListingLink} name="NewListingPage">

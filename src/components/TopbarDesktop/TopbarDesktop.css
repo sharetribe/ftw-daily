@@ -139,6 +139,24 @@
   @apply --TopbarDesktop_label;
 }
 
+.pageLink {
+  flex-shrink: 0;
+  height: 100%;
+  padding: 0 18px 0 18px;
+
+  color: var(--matterColor);
+
+  &:hover {
+    color: var(--matterColorDark);
+    text-decoration: none;
+  }
+}
+
+.linkText {
+  @apply --marketplaceH4FontStyles;
+  @apply --TopbarDesktop_label;
+}
+
 /* Inbox */
 .inboxLink {
   @apply --TopbarDesktop_linkHover;

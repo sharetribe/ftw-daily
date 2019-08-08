@@ -62,24 +62,24 @@
 
   /* Position component */
   width: initial;
-  margin: 4px 0 6px 0;
+  margin: 12px 0 6px 0;
   padding: 0;
 }
 
 .inbox {
   /* Font */
   @apply --marketplaceH2FontStyles;
-  color: var(--marketplaceColor);
+  color: var(--matterColor);
   position: relative;
 
-  margin-top: auto;
+  margin-top: 26px;
   margin-bottom: 13px;
 }
 
 .navigationLink {
   /* Font */
   @apply --marketplaceH2FontStyles;
-  color: var(--marketplaceColor);
+  color: var(--matterColor);
 
   /* Layout */
   margin-top: 0;

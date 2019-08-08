@@ -740,6 +740,7 @@
   "SignupForm.signUp": "Sign up",
   "SignupForm.termsAndConditionsAcceptText": "By signing up you accept the {termsLink}",
   "SignupForm.termsAndConditionsLinkText": "terms and conditions",
+  "StaticPage.AboutUs.linkName": "Om Outdoorcoach",
   "StripeBankAccountTokenInputField.accountNumber.inline": "account number",
   "StripeBankAccountTokenInputField.accountNumber.label": "Bank account number",
   "StripeBankAccountTokenInputField.accountNumber.placeholder": "Type in bank account number…",

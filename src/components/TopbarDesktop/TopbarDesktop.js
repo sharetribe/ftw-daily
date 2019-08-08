@@ -125,6 +125,14 @@ const TopbarDesktop = props => {
     </NamedLink>
   );
 
+  const aboutPageLink = (
+    <NamedLink name="AboutPage" className={css.pageLink}>
+      <span className={css.linkText}>
+        <FormattedMessage id="StaticPage.AboutUs.linkName" />
+      </span>
+    </NamedLink>
+  )
+
   return (
     <nav className={classes}>
       <NamedLink className={css.logoLink} name="LandingPage">
@@ -141,6 +149,7 @@ const TopbarDesktop = props => {
           <FormattedMessage id="TopbarDesktop.createListing" />
         </span>
       </NamedLink>*/}
+      {aboutPageLink}
       {inboxLink}
       {profileMenu}
       {signupLink}
