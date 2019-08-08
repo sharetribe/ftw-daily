@@ -47,7 +47,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 0 12px 0 0;
+  padding: 0 0 0 0;
 
   /* fill */
   background-color: var(--matterColorLight);
@@ -56,7 +56,7 @@
   box-shadow: var(--boxShadowLight);
 
   @media (--viewportLarge) {
-    padding: 0 24px 0 0;
+    padding: 0 0 0 0;
   }
 }
 
@@ -143,14 +143,20 @@
 .inboxLink {
   @apply --TopbarDesktop_linkHover;
   @apply --marketplaceH4FontStyles;
+
+  background-color: var(--matterColor);
   height: 100%;
-  padding: 0 12px 0 12px;
+  padding: 0 12px 0 18px;
   margin-top: 0;
   margin-bottom: 0;
-  color: var(--matterColor);
+  color: var(--matterColorLight);
+
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-left-color: #e7e7e7;
 
   &:hover {
-    color: var(--matterColorDark);
+    color: var(--matterColorLight);
   }
 
   @media (--viewportMedium) {
@@ -209,8 +215,14 @@
   margin: 0;
   padding: 0 12px 0 12px;
 
+  background-color: var(--matterColor);
+
   &:active {
     border-bottom: 0;
+  }
+  &:hover {
+    background-color: var(--matterColor);
+    box-shadow: none;
   }
 }
 
@@ -234,7 +246,11 @@
   @apply --TopbarDesktop_linkHover;
   flex-shrink: 0;
   height: 100%;
-  padding: 0 12px 0 12px;
+  padding: 0 18px 0 18px;
+
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-left-color: #e7e7e7;
 
   color: var(--matterColor);
 
@@ -247,7 +263,7 @@
   @apply --TopbarDesktop_linkHover;
   flex-shrink: 0;
   height: 100%;
-  padding: 0 12px 0 12px;
+  padding: 0 18px 0 18px;
 
   color: var(--matterColor);
 
