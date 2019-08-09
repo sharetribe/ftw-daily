@@ -17,7 +17,7 @@ import {
   SavedCardDetails,
   LayoutSideNavigation,
   LayoutWrapperMain,
-  LayoutWrapperSideNav,
+  LayoutWrapperAccountSettingsSideNav,
   LayoutWrapperTopbar,
   LayoutWrapperFooter,
   Footer,
@@ -134,37 +134,6 @@ const PaymentMethodsPageComponent = props => {
     });
   };
 
-  const tabs = [
-    {
-      text: <FormattedMessage id="PaymentMethodsPage.contactDetailsTabTitle" />,
-      selected: false,
-      linkProps: {
-        name: 'ContactDetailsPage',
-      },
-    },
-    {
-      text: <FormattedMessage id="PaymentMethodsPage.passwordTabTitle" />,
-      selected: false,
-      linkProps: {
-        name: 'PasswordChangePage',
-      },
-    },
-    {
-      text: <FormattedMessage id="PaymentMethodsPage.paymentsTabTitle" />,
-      selected: false,
-      linkProps: {
-        name: 'PayoutPreferencesPage',
-      },
-    },
-    {
-      text: <FormattedMessage id="PaymentMethodsPage.paymentMethodsTabTitle" />,
-      selected: true,
-      linkProps: {
-        name: 'PaymentMethodsPage',
-      },
-    },
-  ];
-
   const title = intl.formatMessage({ id: 'PaymentMethodsPage.title' });
   const loadingData = intl.formatMessage({ id: 'PaymentMethodsPage.loadingData' });
 
@@ -204,7 +173,7 @@ const PaymentMethodsPageComponent = props => {
           />
           <UserNav selectedPageName="PaymentMethodsPage" />
         </LayoutWrapperTopbar>
-        <LayoutWrapperSideNav tabs={tabs} />
+        <LayoutWrapperAccountSettingsSideNav currentTab="PaymentMethodsPage" />
         <LayoutWrapperMain>
           <div className={css.content}>
             <h1 className={css.title}>

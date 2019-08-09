@@ -118,14 +118,8 @@
 .infoText {
   @apply --marketplaceH5FontStyles;
   color: var(--matterColorAnti);
-  padding: 0 42px;
+  padding: 0;
   margin: 22px 0 0 0;
-
-  @media (--viewportLarge) {
-    /* TODO this is ugly overwrite to fix unconsistent font styles */
-    font-size: 14px;
-    padding: 0;
-  }
 }
 
 .submitButton {
