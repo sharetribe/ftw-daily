@@ -11,7 +11,15 @@ const UserNav = props => {
   const { className, rootClassName, selectedPageName } = props;
   const classes = classNames(rootClassName || css.root, className);
 
+  /*TODO: only display add listing if user is authorized to do so (account has type "coach" ) */
   const tabs = [
+    {
+      text: <FormattedMessage id="TopbarDesktop.createListing" />,
+      selected: selectedPageName === "NewListingPage",
+      linkProps: {
+        name: 'NewListingPage',
+      }
+    },
     {
       text: <FormattedMessage id="ManageListingsPage.yourListings" />,
       selected: selectedPageName === 'ManageListingsPage',
