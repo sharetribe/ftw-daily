@@ -58,9 +58,13 @@
   margin-bottom: 24px;
   flex-shrink: 0;
 
+  padding-left: 5px;
+  padding-right: 5px;
+
+
   @media (--viewportLarge) {
     display: inline-block;
-    width: 241px;
+    max-width: 300px;
     margin-top: 100px;
   }
 }
