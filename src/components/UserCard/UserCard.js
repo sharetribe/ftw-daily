@@ -48,8 +48,9 @@ class ExpandableBio extends Component {
     );
     return (
       <p className={className}>
-        {expand ? bio : truncatedBio}
-        {bio !== truncatedBio && !expand ? showMore : null}
+        {bio}
+        {/*expand ? bio : truncatedBio*/}
+        {/*bio !== truncatedBio && !expand ? showMore : null*/}
       </p>
     );
   }

@@ -415,7 +415,7 @@ export class ListingPageComponent extends Component {
                 onManageDisableScrolling={onManageDisableScrolling}
               />
               <div className={css.contentContainer}>
-                <SectionAvatar user={currentAuthor} params={params} />
+                {/*<SectionAvatar user={currentAuthor} params={params} />*/}
                 <div className={css.mainContent}>
                   <SectionHeading
                     priceTitle={priceTitle}
@@ -426,15 +426,6 @@ export class ListingPageComponent extends Component {
                     showContactUser={showContactUser}
                     onContactUser={this.onContactUser}
                   />
-                  <SectionDescriptionMaybe description={description} />
-                  <SectionFeaturesMaybe options={amenitiesConfig} publicData={publicData} />
-                  <SectionRulesMaybe publicData={publicData} />
-                  <SectionMapMaybe
-                    geolocation={geolocation}
-                    publicData={publicData}
-                    listingId={currentListing.id}
-                  />
-                  <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
                   <SectionHostMaybe
                     title={title}
                     listing={currentListing}
@@ -448,6 +439,16 @@ export class ListingPageComponent extends Component {
                     currentUser={currentUser}
                     onManageDisableScrolling={onManageDisableScrolling}
                   />
+                  <SectionDescriptionMaybe description={description} />
+                  <SectionFeaturesMaybe options={amenitiesConfig} publicData={publicData} />
+                  <SectionRulesMaybe publicData={publicData} />
+                  <SectionMapMaybe
+                    geolocation={geolocation}
+                    publicData={publicData}
+                    listingId={currentListing.id}
+                  />
+                  <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
+                  
                 </div>
                 <BookingPanel
                   className={css.bookingPanel}

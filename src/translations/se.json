@@ -333,6 +333,7 @@
   "ListingPage.ownListing": "Det här är din egen annons",
   "ListingPage.ownListingDraft": "Den här annonsen är ett utkast.",
   "ListingPage.ownListingPendingApproval": "Den här annonsen väntar på godkännande.",
+  "ListingPage.priceLabel": "Pris",
   "ListingPage.perDay": "per dag",
   "ListingPage.perNight": "per natt",
   "ListingPage.perUnit": "per enhet",

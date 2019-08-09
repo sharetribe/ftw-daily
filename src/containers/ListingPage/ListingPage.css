@@ -215,13 +215,13 @@
   margin-bottom: 23px;
 
   @media (--viewportMedium) {
-    margin-top: 50px;
+    margin-top: 20px;
     margin-bottom: 51px;
     flex-shrink: 0;
   }
 
   @media (--viewportLarge) {
-    margin-top: 50px;
+    margin-top: 30px;
     margin-bottom: 0px;
     /* contentContainer's full width - (bookingColumn + two paddings + margin + border) */
     flex-basis: calc(100% - 493px);
@@ -290,10 +290,17 @@
   @media (--viewportMedium) {
     display: flex;
     margin-bottom: 53px;
+    flex-direction: column;
   }
 }
 .desktopPriceContainer {
-  display: none;
+
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 0 0 24px;
+  
 
   @media (--viewportLarge) {
     /* Layout */
@@ -306,14 +313,42 @@
   }
 }
 
-.desktopPriceValue {
-  /* Font */
-  @apply --marketplaceH1FontStyles;
-  color: var(--marketplaceColor);
+.priceHeading {
+  @apply --marketplaceH3FontStyles;
+  font-weight: var(--fontWeightMedium);
+  color: var(--matterColorDark);
+
+  margin: 0;
 
   @media (--viewportMedium) {
-    margin-top: 0;
+    margin: 0;
+  }
+  @media (--viewportLarge) {
+    margin: 0 0 8px 0;
+    font-size: 
+  }
+}
+
+.desktopPriceValue {
+  /* Font */
+  font-weight: var(--fontWeightSemiBold);
+  color: var(--marketplaceColor);
+  
+  font-size: 24px;
+  line-height: 30px;
+  letter-spacing: -0.3px;
+    /* margin-top + n * line-height + margin-bottom => x * 6px */
+  margin-top: 8px;
+  margin-bottom: 0;
+
+  @media (--viewportMedium) {
+    font-size: 36px;
+    margin-top: 12px;
     margin-bottom: 6px;
+    line-height: 32px;
+    /* margin-top + n * line-height + margin-bottom => x * 8px */
+    margin-top: 0;
+    margin-bottom: 0;
   }
 }
 
@@ -321,6 +356,7 @@
   /* Font */
   @apply --marketplaceH5FontStyles;
   color: var(--matterColor);
+  margin-top: 4px;
 
   @media (--viewportMedium) {
     margin-top: 0;
@@ -329,11 +365,11 @@
 }
 
 .heading {
-  margin-bottom: 33px;
+  margin-bottom: 8px;
   padding: 0 24px;
 
   @media (--viewportMedium) {
-    margin-bottom: 0;
+    margin-bottom: 24px;
     padding: 0;
   }
 }
