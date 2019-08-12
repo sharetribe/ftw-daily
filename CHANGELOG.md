@@ -14,6 +14,10 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] Don't send personal id number or business profile to Stripe API when creating a Stripe
+  customer if they are not required in `stripe-config.js`. This happened e.g. if someone filled the
+  form after selecting the US and then before sending changed the country to Finland.
+  [#1151](https://github.com/sharetribe/flex-template-web/pull/1151)
 - [add] Add new French and Spanish translations related to keyword search and Spanish translations
   related to payment intents. [#1148](https://github.com/sharetribe/flex-template-web/pull/1148)
 - [add] Add new French translations related to payment intents. Also few small changes to en.json
