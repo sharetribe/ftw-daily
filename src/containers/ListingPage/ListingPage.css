@@ -535,13 +535,13 @@
 .sectionHost {
   position: relative;
   padding: 0 24px;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
 
   @media (--viewportMedium) {
     padding: 0;
   }
   @media (--viewportLarge) {
-    margin-bottom: 3px;
+    margin-bottom: 35px;
   }
 }
 
