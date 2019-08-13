@@ -308,6 +308,21 @@ propTypes.stripeAccount = shape({
   }),
 });
 
+propTypes.defaultPaymentMethod = shape({
+  id: propTypes.uuid.isRequired,
+  type: propTypes.value('stripePaymentMethod').isRequired,
+  attributes: shape({
+    type: propTypes.value('stripe-payment-method/card').isRequired,
+    stripePaymentMethodId: string.isRequired,
+    card: shape({
+      brand: string.isRequired,
+      expirationMonth: number.isRequired,
+      expirationYear: number.isRequired,
+      last4Digits: string.isRequired,
+    }).isRequired,
+  }),
+});
+
 export const LINE_ITEM_NIGHT = 'line-item/night';
 export const LINE_ITEM_DAY = 'line-item/day';
 export const LINE_ITEM_UNITS = 'line-item/units';
