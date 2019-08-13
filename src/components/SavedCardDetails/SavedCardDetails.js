@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { func, object, string } from 'prop-types';
+import { func, number, shape, string } from 'prop-types';
 import classNames from 'classnames';
 import { injectIntl, intlShape } from 'react-intl';
 import {
@@ -98,7 +98,11 @@ const SavedCardDetails = props => {
     </div>
   );
 
-  const handleClick = item => {
+  const handleClick = item => e => {
+    // Clicking buttons inside a form will call submit
+    e.preventDefault();
+    e.stopPropagation();
+
     setActive(item);
     setMenuOpen(false);
     if (onChange) {
@@ -135,7 +139,7 @@ const SavedCardDetails = props => {
 
   return (
     <div className={classes}>
-      <Menu className={css.menu} isOpen={menuOpen} onToggleActive={onToggleActive}>
+      <Menu className={css.menu} isOpen={menuOpen} onToggleActive={onToggleActive} useArrow={false}>
         <MenuLabel className={css.menuLabel}>
           <div className={showExpired ? css.menuLabelWrapperExpired : css.menuLabelWrapper}>
             {active === DEFAULT_CARD ? defaultCard : replaceCard}
@@ -147,7 +151,7 @@ const SavedCardDetails = props => {
 
         <MenuContent className={css.menuContent}>
           <MenuItem key="first item" className={css.menuItem}>
-            <InlineTextButton className={css.menuText} onClick={() => handleClick(DEFAULT_CARD)}>
+            <InlineTextButton className={css.menuText} onClick={handleClick(DEFAULT_CARD)}>
               {defaultCard}
             </InlineTextButton>
           </MenuItem>
@@ -155,7 +159,7 @@ const SavedCardDetails = props => {
             {replaceCardTitle}
           </MenuItem>
           <MenuItem key="second item" className={css.menuItem}>
-            <InlineTextButton className={css.menuText} onClick={() => handleClick(REPLACE_CARD)}>
+            <InlineTextButton className={css.menuText} onClick={handleClick(REPLACE_CARD)}>
               {replaceCard}
             </InlineTextButton>
           </MenuItem>
@@ -209,7 +213,12 @@ SavedCardDetails.propTypes = {
   rootClassName: string,
   className: string,
   intl: intlShape.isRequired,
-  card: object,
+  card: shape({
+    brand: string.isRequired,
+    expirationMonth: number.isRequired,
+    expirationYear: number.isRequired,
+    last4Digits: string.isRequired,
+  }),
   onChange: func,
   onDeleteCard: func,
   onManageDisableScrolling: func,
