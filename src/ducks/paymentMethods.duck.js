@@ -123,8 +123,7 @@ export const deletePaymentMethodError = e => ({
 
 // ================ Thunks ================ //
 
-export const createStripeCustomer = paymentMethod => (dispatch, getState, sdk) => {
-  const stripePaymentMethodId = paymentMethod;
+export const createStripeCustomer = stripePaymentMethodId => (dispatch, getState, sdk) => {
   dispatch(stripeCustomerCreateRequest());
   return sdk.stripeCustomer
     .create({ stripePaymentMethodId }, { expand: true, include: ['defaultPaymentMethod'] })
@@ -139,9 +138,7 @@ export const createStripeCustomer = paymentMethod => (dispatch, getState, sdk) =
     });
 };
 
-export const addPaymentMethod = paymentMethod => (dispatch, getState, sdk) => {
-  const stripePaymentMethodId = paymentMethod;
-
+export const addPaymentMethod = stripePaymentMethodId => (dispatch, getState, sdk) => {
   dispatch(addPaymentMethodRequest());
   return sdk.stripeCustomer
     .addPaymentMethod({ stripePaymentMethodId }, { expand: true })
@@ -171,12 +168,48 @@ export const deletePaymentMethod = () => (dispatch, getState, sdk) => {
     });
 };
 
-export const updatePaymentMethod = params => (dispatch, getState, sdk) => {
+export const updatePaymentMethod = stripePaymentMethodId => (dispatch, getState, sdk) => {
   return dispatch(deletePaymentMethod())
     .then(() => {
-      return dispatch(addPaymentMethod(params));
+      return dispatch(addPaymentMethod(stripePaymentMethodId));
     })
     .catch(e => {
       log.error(storableError(e), 'updating-payment-method-failed');
+    });
+};
+
+// This function helps to choose correct thunk function
+export const savePaymentMethod = (stripeCustomer, stripePaymentMethodId) => (
+  dispatch,
+  getState,
+  sdk
+) => {
+  const hasAlreadyDefaultPaymentMethod =
+    stripeCustomer && stripeCustomer.defaultPaymentMethod && stripeCustomer.defaultPaymentMethod.id;
+
+  const savePromise = !stripeCustomer
+    ? dispatch(createStripeCustomer(stripePaymentMethodId))
+    : hasAlreadyDefaultPaymentMethod
+    ? dispatch(updatePaymentMethod(stripePaymentMethodId))
+    : dispatch(addPaymentMethod(stripePaymentMethodId));
+
+  return savePromise
+    .then(response => {
+      const {
+        createStripeCustomerError,
+        addPaymentMethodError,
+        deletePaymentMethodError,
+      } = getState().paymentMethods;
+
+      // If there are any errors, return those errors
+      if (createStripeCustomerError || addPaymentMethodError || deletePaymentMethodError) {
+        return {
+          errors: { createStripeCustomerError, addPaymentMethodError, deletePaymentMethodError },
+        };
+      }
+      return response;
+    })
+    .catch(e => {
+      // errors are already catched in other thunk functions.
     });
 };
