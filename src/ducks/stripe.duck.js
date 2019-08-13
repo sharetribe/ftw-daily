@@ -627,8 +627,13 @@ export const handleCardPayment = params => dispatch => {
 
   dispatch(handleCardPaymentRequest());
 
+  // When using default payment method card aka StripeElements is not needed.
+  const args = card
+    ? [stripePaymentIntentClientSecret, card, paymentParams]
+    : [stripePaymentIntentClientSecret, paymentParams];
+
   return stripe
-    .handleCardPayment(stripePaymentIntentClientSecret, card, paymentParams)
+    .handleCardPayment(...args)
     .then(response => {
       if (response.error) {
         return Promise.reject(response);
