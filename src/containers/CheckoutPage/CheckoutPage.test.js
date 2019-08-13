@@ -26,9 +26,12 @@ describe('CheckoutPage', () => {
       fetchSpeculatedTransaction: noop,
       speculateTransactionInProgress: false,
       scrollingDisabled: false,
+      onConfirmPayment: noop,
       onHandleCardPayment: noop,
       onInitiateOrder: noop,
       onRetrievePaymentIntent: noop,
+      onSavePaymentMethod: noop,
+      onSendMessage: noop,
       handleCardPaymentInProgress: false,
     };
     const tree = renderShallow(<CheckoutPageComponent {...props} />);
