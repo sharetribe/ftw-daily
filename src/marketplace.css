@@ -34,10 +34,7 @@
     /* Align the image within the container */
     background-position: center center;
 
-    @media (--viewportLarge) {
-      border-radius: 40px;
-      border: solid 36px var(--matterColorBright);
-    }
+    
   }
 
   /* ================ Colors ================ */
