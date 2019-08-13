@@ -158,8 +158,6 @@ const PaymentMethodsPageComponent = props => {
     ? ensurePaymentMethodCard(currentUser.stripeCustomer.defaultPaymentMethod).attributes.card
     : null;
 
-  const handleUpdatePaymentMethod = () => {};
-
   const showForm = cardState === 'replaceCard' || !hasDefaultPaymentMethod;
   const showCardDetails = !!hasDefaultPaymentMethod;
   return (
@@ -185,9 +183,7 @@ const PaymentMethodsPageComponent = props => {
               <>
                 {showCardDetails ? (
                   <SavedCardDetails
-                    intl={intl}
                     card={card}
-                    onUpdateCard={handleUpdatePaymentMethod}
                     inProgress={deletePaymentMethodInProgress}
                     onManageDisableScrolling={onManageDisableScrolling}
                     onChange={setCardState}
