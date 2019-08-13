@@ -339,6 +339,7 @@
   "ListingPage.loadingListingMessage": "Loading listing…",
   "ListingPage.loadingListingTitle": "Loading listing…",
   "ListingPage.locationTitle": "Location",
+  "ListingPage.locationHelpText": "{name} might be flexible with exact locations. Check with the coach to discuss details",
   "ListingPage.ownClosedListing": "Your listing has been closed and can't be booked.",
   "ListingPage.ownListing": "This is your own listing.",
   "ListingPage.ownListingDraft": "This listing is a draft.",

@@ -499,11 +499,18 @@
   color: var(--matterColorAnti);
 
   margin-top: 0;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
   @media (--viewportMedium) {
     margin-top: 0;
-    margin-bottom: 28px;
+    margin-bottom: 12px;
   }
+}
+.locationHelpText {
+  @apply --marketplaceH5FontStyles;
+
+  font-style: italic;
+
+  margin-bottom: 4px;
 }
 
 .sectionReviews {
@@ -603,6 +610,7 @@
   padding: 0;
   border: 0;
   cursor: pointer;
+  margin-top: 8px;
 
   @media (--viewportMedium) {
     height: 75vh;

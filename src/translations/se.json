@@ -329,6 +329,7 @@
   "ListingPage.loadingListingMessage": "Laddar annons…",
   "ListingPage.loadingListingTitle": "Laddar annons…",
   "ListingPage.locationTitle": "Plats",
+  "ListingPage.locationHelpText": "Kartan anger endast ungefärligt område. Diskutera gärna dina önskemål om specifik plats med tränaren",
   "ListingPage.ownClosedListing": "Din annons har stängts och kan inte bokas.",
   "ListingPage.ownListing": "Det här är din egen annons",
   "ListingPage.ownListingDraft": "Den här annonsen är ett utkast.",

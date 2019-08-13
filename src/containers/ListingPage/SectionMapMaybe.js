@@ -36,6 +36,9 @@ class SectionMapMaybe extends Component {
         <h2 className={css.locationTitle}>
           <FormattedMessage id="ListingPage.locationTitle" />
         </h2>
+        <span className={css.locationHelpText}>
+          <FormattedMessage id="ListingPage.locationHelpText" />
+        </span>
         {this.state.isStatic ? (
           <button
             className={css.map}
