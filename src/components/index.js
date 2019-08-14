@@ -143,6 +143,7 @@ export { default as UserCard } from './UserCard/UserCard';
 // Page sections and modal content wrappers //
 //////////////////////////////////////////////
 
+export { default as Faq } from './Faq/Faq';
 export { default as ModalMissingInformation } from './ModalMissingInformation/ModalMissingInformation';
 export { default as ReviewModal } from './ReviewModal/ReviewModal';
 export { default as PrivacyPolicy } from './PrivacyPolicy/PrivacyPolicy';
