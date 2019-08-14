@@ -46,6 +46,7 @@ export const TransactionPageComponent = props => {
   const {
     currentUser,
     initialMessageFailedToTransaction,
+    savePaymentMethodFailed,
     fetchMessagesError,
     fetchMessagesInProgress,
     totalMessagePages,
@@ -217,6 +218,7 @@ export const TransactionPageComponent = props => {
       oldestMessagePageFetched={oldestMessagePageFetched}
       messages={messages}
       initialMessageFailed={initialMessageFailed}
+      savePaymentMethodFailed={savePaymentMethodFailed}
       fetchMessagesError={fetchMessagesError}
       sendMessageInProgress={sendMessageInProgress}
       sendMessageError={sendMessageError}
@@ -270,6 +272,7 @@ TransactionPageComponent.defaultProps = {
   transaction: null,
   fetchMessagesError: null,
   initialMessageFailedToTransaction: null,
+  savePaymentMethodFailed: false,
   sendMessageError: null,
   timeSlots: null,
   fetchTimeSlotsError: null,
@@ -295,6 +298,7 @@ TransactionPageComponent.propTypes = {
   oldestMessagePageFetched: number.isRequired,
   messages: arrayOf(propTypes.message).isRequired,
   initialMessageFailedToTransaction: propTypes.uuid,
+  savePaymentMethodFailed: bool,
   sendMessageInProgress: bool.isRequired,
   sendMessageError: propTypes.error,
   onShowMoreMessages: func.isRequired,
@@ -330,6 +334,7 @@ const mapStateToProps = state => {
     oldestMessagePageFetched,
     messages,
     initialMessageFailedToTransaction,
+    savePaymentMethodFailed,
     sendMessageInProgress,
     sendMessageError,
     sendReviewInProgress,
@@ -358,6 +363,7 @@ const mapStateToProps = state => {
     oldestMessagePageFetched,
     messages,
     initialMessageFailedToTransaction,
+    savePaymentMethodFailed,
     sendMessageInProgress,
     sendMessageError,
     sendReviewInProgress,
