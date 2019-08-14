@@ -43,11 +43,6 @@ export const EditListingLocationFormComponent = props => (
         id: 'EditListingLocationForm.addressNotRecognized',
       });
 
-      const buildingMessage = intl.formatMessage({ id: 'EditListingLocationForm.building' });
-      const buildingPlaceholderMessage = intl.formatMessage({
-        id: 'EditListingLocationForm.buildingPlaceholder',
-      });
-
       const { updateListingError, showListingsError } = fetchErrors || {};
       const errorMessage = updateListingError ? (
         <p className={css.error}>
@@ -88,16 +83,6 @@ export const EditListingLocationFormComponent = props => (
               autocompletePlaceSelected(addressNotRecognizedMessage)
             )}
           />
-
-          <FieldTextInput
-            className={css.building}
-            type="text"
-            name="building"
-            id="building"
-            label={buildingMessage}
-            placeholder={buildingPlaceholderMessage}
-          />
-
           <Button
             className={css.submitButton}
             type="submit"
