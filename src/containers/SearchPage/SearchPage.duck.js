@@ -145,7 +145,7 @@ export const searchListings = searchParams => (dispatch, getState, sdk) => {
           start: formatDateStringToUTC(startDate),
           end: formatDateStringToUTC(endDate),
           // Availability can be full or partial. Default value is full.
-          availability: 'full',
+          availability: 'partial',
         }
       : {};
   };
