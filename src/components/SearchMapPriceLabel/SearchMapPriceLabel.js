@@ -27,7 +27,10 @@ class SearchMapPriceLabel extends Component {
     const currentListing = ensureListing(listing);
     const { price } = currentListing.attributes;
 
+    const { title } = currentListing.attributes;
     // Create formatted price if currency is known or alternatively show just the unknown currency.
+
+    
     const formattedPrice =
       price && price.currency === config.currency ? formatMoney(intl, price) : price.currency;
 
@@ -38,7 +41,7 @@ class SearchMapPriceLabel extends Component {
     return (
       <button className={classes} onClick={() => onListingClicked(currentListing)}>
         <div className={css.caretShadow} />
-        <div className={priceLabelClasses}>{formattedPrice}</div>
+        <div className={priceLabelClasses}>{title}</div>
         <div className={caretClasses} />
       </button>
     );
