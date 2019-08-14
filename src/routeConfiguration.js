@@ -6,6 +6,7 @@ import {
   ContactDetailsPage,
   EditListingPage,
   EmailVerificationPage,
+  EnterprisePage,
   FaqPage,
   InboxPage,
   LandingPage,
@@ -56,6 +57,11 @@ const routeConfiguration = () => {
       name: 'AboutPage',
       component: props => <AboutPage {...props}/>,
       loadData: AboutPage.loadData,
+    },
+    {
+      path: '/enterprise',
+      name: 'EnterprisePage',
+      component: props => <EnterprisePage {...props} />,
     },
     {
       path: '/FAQ',

@@ -4,6 +4,7 @@ export { default as CheckoutPage } from './CheckoutPage/CheckoutPage';
 export { default as ContactDetailsPage } from './ContactDetailsPage/ContactDetailsPage';
 export { default as EditListingPage } from './EditListingPage/EditListingPage';
 export { default as EmailVerificationPage } from './EmailVerificationPage/EmailVerificationPage';
+export { default as EnterprisePage } from './EnterprisePage/EnterprisePage';
 export { default as FaqPage } from './FaqPage/FaqPage';
 export { default as InboxPage } from './InboxPage/InboxPage';
 export { default as LandingPage } from './LandingPage/LandingPage';
