@@ -712,7 +712,7 @@ export class CheckoutPageComponent extends Component {
             </div>
             <div className={css.detailsHeadings}>
               <h2 className={css.detailsTitle}>{listingTitle}</h2>
-              <p className={css.detailsSubtitle}>{detailsSubTitle}</p>
+              
             </div>
             <h3 className={css.bookingBreakdownTitle}>
               <FormattedMessage id="CheckoutPage.priceBreakdownTitle" />
