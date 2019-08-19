@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] Rehydrate bug: existing DOM elements were populated incorrectly
+  [#1154](https://github.com/sharetribe/flex-template-web/pull/1154)
 - [fix] Don't send personal id number or business profile to Stripe API when creating a Stripe
   customer if they are not required in `stripe-config.js`. This happened e.g. if someone filled the
   form after selecting the US and then before sending changed the country to Finland.
