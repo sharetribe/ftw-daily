@@ -23,6 +23,7 @@ const PayoutDetailsPersonalDetails = props => {
     showOwnershipPercentageField,
     showPersonalIdNumberField,
     showPhoneNumberField,
+    form,
   } = props;
 
   const organizationTitleLabel = intl.formatMessage({
@@ -261,6 +262,7 @@ const PayoutDetailsPersonalDetails = props => {
           label={personalIdNumberLabel}
           placeholder={personalIdNumberPlaceholder}
           validate={personalIdNumberValid}
+          onUnmount={() => form.change(`${fieldId}.personalIdNumber`, undefined)}
         />
       ) : null}
 

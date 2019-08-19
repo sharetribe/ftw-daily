@@ -65,6 +65,7 @@ const PayoutDetailsIndividualAccountComponent = props => {
         showEmailField={showEmailField}
         showPersonalIdNumberField={showPersonalIdNumberField}
         showPhoneNumberField={showPhoneNumberField}
+        form={form}
       />
 
       <PayoutDetailsAddress

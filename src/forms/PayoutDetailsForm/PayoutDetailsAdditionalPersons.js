@@ -74,6 +74,7 @@ const PayoutDetailsAdditionalPersons = props => {
                 showPersonalIdNumberField={showPersonalIdNumberField}
                 showPhoneNumberField={showPhoneNumberField}
                 showRoleField
+                form={form}
               />
               {showPersonalAddressField ? (
                 <PayoutDetailsAddress
