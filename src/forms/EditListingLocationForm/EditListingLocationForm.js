@@ -43,8 +43,6 @@ export const EditListingLocationFormComponent = props => (
         id: 'EditListingLocationForm.addressNotRecognized',
       });
 
-<<<<<<< HEAD
-=======
       const optionalText = intl.formatMessage({
         id: 'EditListingLocationForm.optionalText',
       });
@@ -57,7 +55,6 @@ export const EditListingLocationFormComponent = props => (
         id: 'EditListingLocationForm.buildingPlaceholder',
       });
 
->>>>>>> upstream/master
       const { updateListingError, showListingsError } = fetchErrors || {};
       const errorMessage = updateListingError ? (
         <p className={css.error}>

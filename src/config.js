@@ -32,7 +32,7 @@ const sortSearchByDistance = false;
 //
 // In a way, 'processAlias' defines which transaction process (or processes)
 // this particular web application is able to handle.
-const bookingProcessAlias = 'sca-preauth-nightly-booking/release-1';
+const bookingProcessAlias = 'preauth-nightly-booking/release-1';
 
 // The transaction line item code for the main unit type in bookings.
 //
@@ -40,7 +40,7 @@ const bookingProcessAlias = 'sca-preauth-nightly-booking/release-1';
 //
 // Note: translations will use different translation keys for night, day or unit
 // depending on the value chosen.
-const bookingUnitType = 'line-item/day';
+const bookingUnitType = 'line-item/night';
 
 // Should the application fetch available time slots (currently defined as
 // start and end dates) to be shown on listing page.
@@ -104,7 +104,7 @@ const siteFacebookPage = 'https://www.facebook.com/Outdoorcoach-370676466916213/
 const facebookAppId = null;
 
 // Contentful
-const contentfulAPIKey = process.env.CONTENTFUL_DELIVERY_API_ACCESS_TOKEN;
+const contentfulAPIKey = 'h4xG4is0Ak-rh4GF2CzuHYl_EuIwsOcta3rYEwcm4b0';//process.env.CONTENTFUL_DELIVERY_API_ACCESS_TOKEN;
 
 const maps = {
   mapboxAccessToken: process.env.REACT_APP_MAPBOX_ACCESS_TOKEN,

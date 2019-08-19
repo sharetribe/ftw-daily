@@ -5,19 +5,20 @@ import { withRouter } from 'react-router-dom';
 import { StaticPage, TopbarContainer } from '../../containers';
 import {
   LayoutSingleColumn,
+  LayoutFullWidth,
   LayoutWrapperTopbar,
   LayoutWrapperMain,
   LayoutWrapperFooter,
   Footer,
 } from '../../components';
 
-//import { loadData } from './EnterprisePage.duck';
+import { loadData } from './EnterprisePage.duck';
 
 import { BLOCKS } from '@contentful/rich-text-types';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import css from './EnterprisePage.css';
-//import image from './about-us-1056.jpg';
+import image from './enterprise-pic.jpg';
 
 
 export class EnterprisePageComponent extends Component {
@@ -27,13 +28,20 @@ export class EnterprisePageComponent extends Component {
     this.state = {
     };
 
+    const Heading = ({ children }) => <h1 className={css.pageTitle}>{children}</h1>;
+    const Text = ({ children }) => <p>{children}</p>;
+    const List = ({ children }) => <ul className={css.bodyUnorderedList}>{children}</ul>;
+
     const staticPageRenderOptions = {
       renderNode: {
         [BLOCKS.PARAGRAPH]: (node, children) => (
-          <p>{children}</p>
+          <Text>{children}</Text>
         ),
         [BLOCKS.HEADING_1]: (node, children) => (
-          <h1 className={css.pageTitle}>{children}</h1>
+          <Heading>{children}</Heading>
+        ),
+        [BLOCKS.UL_LIST]: (node, children) => (
+          <List>{children}</List>
         )
       },
     };
@@ -48,15 +56,13 @@ export class EnterprisePageComponent extends Component {
 
   
   render() {
-    //const pageData = this.props.enterprisePageData['body'];
+    const pageData = this.props.enterprisePageData['body'];
     
-    //let renderedData = this.renderData(pageData, this.staticPageRenderOptions);
-    //let renderedHeading = renderedData[0];
-    //let renderedBody = renderedData.shift();
-    // prettier-ignore
+    let renderedData = this.renderData(pageData, this.staticPageRenderOptions);
+    
     return (
       <StaticPage
-        title="Enterprise sports coaching"
+        title="Outdoorcoach for business"
         schema={{
           '@context': 'http://schema.org',
           '@type': 'EnterprisePage',
@@ -70,8 +76,9 @@ export class EnterprisePageComponent extends Component {
           </LayoutWrapperTopbar>
 
           <LayoutWrapperMain className={css.staticPageWrapper}>
+            <img className={css.coverImage} src={image} alt="Picture of a sauna" />
             <div className={css.contentWrapper}>
-            Looking for page 
+              {renderedData}
             </div>
           </LayoutWrapperMain>
 
@@ -87,28 +94,30 @@ export class EnterprisePageComponent extends Component {
 };
 
 const mapStateToProps = state => {
-  const { temp
-    //enterprisePageEntryId,
-    //enterprisePageFetched,
-    //enterprisePageData,
-    //enterprisePageFetchError,
-  } = 'null';
+  const { 
+    enterprisePageEntryId,
+    enterprisePageFetched,
+    enterprisePageData,
+    enterprisePageFetchError,
+  } = state.EnterprisePage;
 
   return {
-    temp
+    enterprisePageEntryId,
+    enterprisePageFetched,
+    enterprisePageData,
+    enterprisePageFetchError,
   };
 };
 
 const EnterprisePage = compose(
-  withRouter,
   connect(
     mapStateToProps
-  )
+  ),withRouter,
 )(EnterprisePageComponent);
 
 EnterprisePage.loadData = () => {
-  let entryId = "2ANXWkYxw6pMjL4qEWyria";
-  //return loadData(entryId);
+  let entryId = "G554w29YnmNw5AcuVhoyW";
+  return loadData(entryId);
 };
 
 

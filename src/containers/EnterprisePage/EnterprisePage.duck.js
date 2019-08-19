@@ -6,31 +6,31 @@ import contentfulClient from '../../util/contentful';
 // ================ Action types ================ //
 
 
-export const FETCH_FORCOMPANIESPAGEDATA_REQUEST = 'app/ForCompaniesPage/FETCH_FORCOMPANIESPAGEDATA_REQUEST';
-export const FETCH_FORCOMPANIESPAGEDATA_SUCCESS = 'app/ForCompaniesPage/FETCH_FORCOMPANIESPAGEDATA_SUCCESS';
-export const FETCH_FORCOMPANIESPAGEDATA_ERROR = 'app/ForCompaniesPage/FETCH_FORCOMPANIESPAGEDATA_ERROR';
-export const SET_INITIAL_STATE = 'app/ForCompaniesPage/SET_INITIAL_STATE';
+export const FETCH_ENTERPRISEPAGEDATA_REQUEST = 'app/EnterprisePage/FETCH_ENTERPRISEPAGEDATA_REQUEST';
+export const FETCH_ENTERPRISEPAGEDATA_SUCCESS = 'app/EnterprisePage/FETCH_ENTERPRISEPAGEDATA_SUCCESS';
+export const FETCH_ENTERPRISEPAGEDATA_ERROR = 'app/EnterprisePage/FETCH_ENTERPRISEPAGEDATA_ERROR';
+export const SET_INITIAL_STATE = 'app/EnterprisePage/SET_INITIAL_STATE';
 
 // ================ Reducer ================ //
 
 const initialState = {
-  forCompaniesPageEntryId: null,
-  forCompaniesPageFetched: false,
-  forCompaniesPageData: {},
-  forCompaniesPageFetchError: null,
+  enterprisePageEntryId: '0',
+  enterprisePageFetched: false,
+  enterprisePageData: {},
+  enterprisePageFetchError: null,
 };
 
-export default function ForCompaniesPageReducer(state = initialState, action = {}) {
+export default function EnterprisePageReducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
     case SET_INITIAL_STATE:
       return { ...initialState };
-    case FETCH_FORCOMPANIESPAGEDATA_REQUEST:
-      return { ...state, forCompaniesPageFetchError: null , forCompaniesPageEntryId: payload};
-    case FETCH_FORCOMPANIESPAGEDATA_SUCCESS:
-      return { ...state, forCompaniesPageData: payload.entryData, forCompaniesPageFetched: true };
-    case FETCH_FORCOMPANIESPAGEDATA_ERROR:
-      return { ...state, forCompaniesPageFetchError: true };
+    case FETCH_ENTERPRISEPAGEDATA_REQUEST:
+      return { ...state, enterprisePageFetchError: null , enterprisePageEntryId: payload};
+    case FETCH_ENTERPRISEPAGEDATA_SUCCESS:
+      return { ...state, enterprisePageData: payload.entryData, enterprisePageFetched: true };
+    case FETCH_ENTERPRISEPAGEDATA_ERROR:
+      return { ...state, enterprisePageFetchError: true };
     default:
       return state;
   }
@@ -41,36 +41,36 @@ export const setInitialState = () => ({
   type: SET_INITIAL_STATE,
 });
 
-const fetchForCompaniesPageDataRequest = entryId => ({
-  type: FETCH_FORCOMPANIESPAGEDATA_REQUEST,
+const fetchEnterprisePageDataRequest = entryId => ({
+  type: FETCH_ENTERPRISEPAGEDATA_REQUEST,
   payload: {entryId}
 });
 
-export const fetchForCompaniesPageDataSuccess = entryData => ({
-  type: FETCH_FORCOMPANIESPAGEDATA_SUCCESS,
+export const fetchEnterprisePageDataSuccess = entryData => ({
+  type: FETCH_ENTERPRISEPAGEDATA_SUCCESS,
   payload: { entryData },
 });
 
-const fetchForCompaniesPageDataError = e => ({
-  type: FETCH_FORCOMPANIESPAGEDATA_ERROR,
+const fetchEnterprisePageDataError = e => ({
+  type: FETCH_ENTERPRISEPAGEDATA_ERROR,
   error: true,
   payload: e,
 });
 // ================ Thunks ================ //
 
-export const fetchForCompaniesPageData = entryId => (dispatch, getState) => {
-  dispatch(fetchForCompaniesPageDataRequest());
+export const fetchEnterprisePageData = entryId => (dispatch, getState) => {
+  dispatch(fetchEnterprisePageDataRequest(entryId));
 
   contentfulClient
   .getEntry(entryId)
   .then(response => {
     const entryData = response.fields;
-    
+    console.log(entryData);
 
-    dispatch(fetchForCompaniesPageDataSuccess(entryData));
+    dispatch(fetchEnterprisePageDataSuccess(entryData));
     return entryData;
   })
-  .catch(e => dispatch(fetchForCompaniesPageDataError(e)));
+  .catch(e => dispatch(fetchEnterprisePageDataError(e)));
 
 };
 
@@ -80,6 +80,6 @@ export const loadData = entryId => (dispatch, getState, sdk) => {
   dispatch(setInitialState(entryId));
 
   return Promise.all([
-    dispatch(fetchForCompaniesPageData(entryId)),
+    dispatch(fetchEnterprisePageData(entryId)),
   ]);
 };

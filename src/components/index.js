@@ -70,6 +70,7 @@ export { default as LayoutWrapperSideNav } from './LayoutWrapperSideNav/LayoutWr
 export { default as LayoutWrapperTopbar } from './LayoutWrapperTopbar/LayoutWrapperTopbar';
 export { default as LayoutSideNavigation } from './LayoutSideNavigation/LayoutSideNavigation';
 export { default as LayoutSingleColumn } from './LayoutSingleColumn/LayoutSingleColumn';
+export { default as LayoutFullWidth } from './LayoutFullWidth/LayoutFullWidth';
 
 // Menu
 export { default as MenuItem } from './MenuItem/MenuItem';

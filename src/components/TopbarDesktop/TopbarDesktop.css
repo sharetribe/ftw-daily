@@ -142,7 +142,7 @@
 .pageLink {
   flex-shrink: 0;
   height: 100%;
-  padding: 0 18px 0 18px;
+  padding: 0 12px 0 12px;
 
   color: var(--matterColor);
 
@@ -150,6 +150,21 @@
     color: var(--matterColorDark);
     text-decoration: none;
   }
+}
+.activePageLink {
+  flex-shrink: 0;
+  height: 100%;
+  padding: 0 12px 0 12px;
+
+  color: var(--matterColorDark);
+
+  &:hover {
+    color: var(--matterColorDark);
+    text-decoration: none;
+  }
+}
+.activePageLink .linkText {
+  font-weight: 600;
 }
 
 .linkText {

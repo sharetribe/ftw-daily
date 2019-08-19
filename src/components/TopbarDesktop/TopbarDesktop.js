@@ -126,9 +126,16 @@ const TopbarDesktop = props => {
   );
 
   const aboutPageLink = (
-    <NamedLink name="AboutPage" className={css.pageLink}>
+    <NamedLink name="AboutPage" className={css.pageLink} activeClassName={css.activePageLink}>
       <span className={css.linkText}>
         <FormattedMessage id="StaticPage.AboutUs.linkName" />
+      </span>
+    </NamedLink>
+  )
+  const enterprisePageLink = (
+    <NamedLink name="EnterprisePage" className={css.pageLink} activeClassName={css.activePageLink}>
+      <span className={css.linkText}>
+        <FormattedMessage id="EnterprisePage.topBarLinkText" />
       </span>
     </NamedLink>
   )
@@ -150,6 +157,7 @@ const TopbarDesktop = props => {
         </span>
       </NamedLink>*/}
       {aboutPageLink}
+      {enterprisePageLink}
       {inboxLink}
       {profileMenu}
       {signupLink}

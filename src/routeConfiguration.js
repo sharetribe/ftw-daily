@@ -62,6 +62,7 @@ const routeConfiguration = () => {
       path: '/enterprise',
       name: 'EnterprisePage',
       component: props => <EnterprisePage {...props} />,
+      loadData: EnterprisePage.loadData,
     },
     {
       path: '/FAQ',

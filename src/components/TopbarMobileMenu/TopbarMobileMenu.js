@@ -43,6 +43,14 @@ const TopbarMobileMenu = props => {
         <FormattedMessage id="TopbarMobileMenu.signupOrLogin" values={{ signup, login }} />
       </span>
     );
+
+    const enterprisePageLink = (
+      <NamedLink name="EnterprisePage" className={css.pageLink} activeClassName={css.activePageLink}>
+        <span className={css.linkText}>
+          <FormattedMessage id="EnterprisePage.topBarLinkText" />
+        </span>
+      </NamedLink>
+    )
     return (
       <div className={css.root}>
         <div className={css.content}>
@@ -54,6 +62,9 @@ const TopbarMobileMenu = props => {
         </div>
         <NamedLink name="AboutPage" className={css.navigationLink}>
           <FormattedMessage id="StaticPage.AboutUs.linkName" />
+        </NamedLink>
+        <NamedLink name="EnterprisePage" className={css.navigationLink}>
+          <FormattedMessage id="EnterprisePage.topBarLinkText" />
         </NamedLink>
         </div>
       </div>
