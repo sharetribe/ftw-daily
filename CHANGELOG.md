@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] On `ListingPage` align avatar with the left side of the content and fix content width so
+  that it aligns with the header image.
+  [#1155](https://github.com/sharetribe/flex-template-web/pull/1155)
 - [fix] Rehydrate bug: existing DOM elements were populated incorrectly
   [#1154](https://github.com/sharetribe/flex-template-web/pull/1154)
 - [fix] Don't send personal id number or business profile to Stripe API when creating a Stripe
