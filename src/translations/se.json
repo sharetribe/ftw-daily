@@ -287,6 +287,7 @@
   "Footer.toFAQPage": "FAQ",
   "Footer.toHelpPage": "Hjälp",
   "Footer.toNewListingPage": "Lägg till tjänst",
+  "Footer.toSportsPage": "Idrotter",
   "ImageCarousel.imageAltText": "Listing image {index}/{count}",
   "ImageFromFile.couldNotReadFile": "Could not read file",
   "InboxPage.fetchFailed": "Could not load all messages. Please try again.",
