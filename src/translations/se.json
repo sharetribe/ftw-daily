@@ -724,6 +724,8 @@
   "SectionHowItWorks.titleLineTwo": "",
   "SectionLocations.listingsInLocation": "Tränare för",
   "SectionLocations.title": "Hitta en personlig tränare för just din idrott",
+  "SectionCategories.listingsbyCategory": "Träna",
+  "SectionCategories.title": "Certifierade coacher inom flera idrotter",
   "SelectMultipleFilter.labelSelected": "{labelText} • {count}",
   "SelectMultipleFilterPlainForm.labelSelected": "{labelText} • {count}",
   "SelectSingleFilter.popupClear": "Clear",
