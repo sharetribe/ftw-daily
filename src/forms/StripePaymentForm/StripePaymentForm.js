@@ -91,7 +91,7 @@ const OneTimePaymentWithCardElement = props => {
   return (
     <React.Fragment>
       <label className={css.paymentLabel} htmlFor={`${formId}-card`}>
-        <FormattedMessage id="StripePaymentForm.creditCardDetails" />
+        <FormattedMessage id="StripePaymentForm.paymentCardDetails" />
       </label>
       <div className={cardClasses} id={`${formId}-card`} ref={handleStripeElementRef} />
       {hasCardError ? <span className={css.error}>{error}</span> : null}
@@ -161,7 +161,7 @@ const initialState = {
   cardValueValid: false,
   // The mode can be 'onetimePayment', 'defaultCard', or 'replaceCard'
   // Check SavedCardDetails component for more information
-  paymentMethod: 'onetimePayment',
+  paymentMethod: 'onetimeCardPayment',
 };
 
 /**
@@ -375,7 +375,7 @@ class StripePaymentForm extends Component {
 
     const hasStripeKey = config.stripe.publishableKey;
     const showPaymentMethodSelector = ensuredDefaultPaymentMethod.id;
-    const showOnetimePaymentFields = ['onetimePayment', 'replaceCard'].includes(
+    const showOnetimePaymentFields = ['onetimeCardPayment', 'replaceCard'].includes(
       this.state.paymentMethod
     );
 
