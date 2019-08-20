@@ -4,4 +4,9 @@
   & path {
     fill: var(--marketplaceColor);
   }
+
+}
+.iconLogo {
+  height: 24px;
+  width: auto;
 }
