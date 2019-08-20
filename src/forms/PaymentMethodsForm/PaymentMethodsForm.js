@@ -220,7 +220,7 @@ class PaymentMethodsForm extends Component {
     return hasStripeKey ? (
       <Form className={classes} onSubmit={handleSubmit}>
         <label className={css.paymentLabel} htmlFor={`${formId}-card`}>
-          <FormattedMessage id="PaymentMethodsForm.creditCardDetails" />
+          <FormattedMessage id="PaymentMethodsForm.paymentCardDetails" />
         </label>
 
         <div
