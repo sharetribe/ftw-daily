@@ -18,6 +18,7 @@ import PayoutPreferencesPage from './PayoutPreferencesPage/PayoutPreferencesPage
 import ProfilePage from './ProfilePage/ProfilePage.duck';
 import ProfileSettingsPage from './ProfileSettingsPage/ProfileSettingsPage.duck';
 import SearchPage from './SearchPage/SearchPage.duck';
+import SportsPage from './SportsPage/SportsPage.duck';
 import TransactionPage from './TransactionPage/TransactionPage.duck';
 
 
@@ -38,5 +39,6 @@ export {
   ProfilePage,
   ProfileSettingsPage,
   SearchPage,
+  SportsPage,
   TransactionPage,
 };

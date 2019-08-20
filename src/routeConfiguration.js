@@ -21,6 +21,7 @@ import {
   ProfilePage,
   ProfileSettingsPage,
   SearchPage,
+  SportsPage,
   StyleguidePage,
   TermsOfServicePage,
   TransactionPage,
@@ -74,6 +75,12 @@ const routeConfiguration = () => {
       name: 'SearchPage',
       component: props => <SearchPage {...props} />,
       loadData: SearchPage.loadData,
+    },
+    {
+      path: '/sports',
+      name: 'SportsPage',
+      component: props => <SportsPage {...props} />,
+      loadData: SportsPage.loadData,
     },
     {
       path: '/s/filters',
