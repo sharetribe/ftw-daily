@@ -651,10 +651,12 @@ export const handleCardPayment = params => dispatch => {
 
   dispatch(handleCardPaymentRequest());
 
-  // When using default payment method card aka StripeElements is not needed.
+  // When using default payment method, card (aka Stripe Element) is not needed.
+  // We also set paymentParams.payment_method already in Flex API side,
+  // when request-payment transition is made - so there's no need for paymentParams
   const args = card
     ? [stripePaymentIntentClientSecret, card, paymentParams]
-    : [stripePaymentIntentClientSecret, paymentParams];
+    : [stripePaymentIntentClientSecret];
 
   return stripe
     .handleCardPayment(...args)
