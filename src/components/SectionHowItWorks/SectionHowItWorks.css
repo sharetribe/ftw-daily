@@ -3,6 +3,7 @@
 .title {
   @apply --marketplaceH1FontStyles;
   margin-top: 0;
+  margin-bottom: 32px;
 }
 
 .steps {
