@@ -475,8 +475,6 @@
   "PaymentMethodsPage.deletePaymentMethod": "Delete card",
   "PaymentMethodsPage.heading": "Payment methods",
   "PaymentMethodsPage.loadingData": "Loading data…",
-  "PaymentMethodsPage.savedPaymentMethodTitle": "Credit card details",
-  "PaymentMethodsPage.savedPaymentMethodPlaceholder": "•••• •••• •••• {lastFour}",
   "PaymentMethodsForm.submitPaymentInfo": "Save payment card",
   "PaymentMethodsPage.title": "Payment methods",
   "PayoutDetailsForm.accountOpenerInfoText": "Account opener needs to be an individual with authorization to sign on behalf of the organization.",
