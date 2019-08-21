@@ -17,6 +17,7 @@ import {
   PrimaryButton,
   FieldCheckbox,
   FieldTextInput,
+  IconSpinner,
   SavedCardDetails,
   StripePaymentAddress,
 } from '../../components';
@@ -156,12 +157,20 @@ const PaymentMethodSelector = props => {
   );
 };
 
+const getPaymentMethod = (selectedPaymentMethod, hasDefaultPaymentMethod) => {
+  return selectedPaymentMethod == null && hasDefaultPaymentMethod
+    ? 'defaultCard'
+    : selectedPaymentMethod == null
+    ? 'onetimeCardPayment'
+    : selectedPaymentMethod;
+};
+
 const initialState = {
   error: null,
   cardValueValid: false,
   // The mode can be 'onetimePayment', 'defaultCard', or 'replaceCard'
   // Check SavedCardDetails component for more information
-  paymentMethod: 'onetimeCardPayment',
+  paymentMethod: null,
 };
 
 /**
@@ -194,16 +203,16 @@ class StripePaymentForm extends Component {
     }
 
     if (config.stripe.publishableKey) {
-      const { onStripeInitialized, hasHandledCardPayment, defaultPaymentMethod } = this.props;
+      const {
+        onStripeInitialized,
+        hasHandledCardPayment,
+        defaultPaymentMethod,
+        loadingData,
+      } = this.props;
       this.stripe = window.Stripe(config.stripe.publishableKey);
       onStripeInitialized(this.stripe);
 
-      if (defaultPaymentMethod) {
-        // If there's default payment method, payment mode should be that.
-        this.setState({ paymentMethod: 'defaultCard' });
-      }
-
-      if (!(hasHandledCardPayment || defaultPaymentMethod)) {
+      if (!(hasHandledCardPayment || defaultPaymentMethod || loadingData)) {
         this.initializeStripeElement();
       }
     }
@@ -292,7 +301,10 @@ class StripePaymentForm extends Component {
       card: this.card,
       formId,
       formValues: values,
-      paymentMethod,
+      paymentMethod: getPaymentMethod(
+        paymentMethod,
+        ensurePaymentMethodCard(defaultPaymentMethod).id
+      ),
     };
     onSubmit(params);
   }
@@ -302,6 +314,7 @@ class StripePaymentForm extends Component {
       className,
       rootClassName,
       inProgress: submitInProgress,
+      loadingData,
       formId,
       paymentInfo,
       authorDisplayName,
@@ -375,13 +388,19 @@ class StripePaymentForm extends Component {
 
     const hasStripeKey = config.stripe.publishableKey;
     const showPaymentMethodSelector = ensuredDefaultPaymentMethod.id;
-    const showOnetimePaymentFields = ['onetimeCardPayment', 'replaceCard'].includes(
-      this.state.paymentMethod
+    const selectedPaymentMethod = getPaymentMethod(
+      this.state.paymentMethod,
+      showPaymentMethodSelector
     );
+    const showOnetimePaymentFields = ['onetimeCardPayment', 'replaceCard'].includes(
+      selectedPaymentMethod
+    );
+
+    console.log('this.state.paymentMethod', this.state.paymentMethod);
 
     return hasStripeKey ? (
       <Form className={classes} onSubmit={handleSubmit}>
-        {billingDetailsNeeded ? (
+        {billingDetailsNeeded && !loadingData ? (
           <React.Fragment>
             {showPaymentMethodSelector ? (
               <PaymentMethodSelector
@@ -392,7 +411,7 @@ class StripePaymentForm extends Component {
                 handleStripeElementRef={this.handleStripeElementRef}
                 hasCardError={hasCardError}
                 error={this.state.error}
-                paymentMethod={this.state.paymentMethod}
+                paymentMethod={selectedPaymentMethod}
                 intl={intl}
               />
             ) : (
@@ -431,6 +450,10 @@ class StripePaymentForm extends Component {
               </div>
             ) : null}
           </React.Fragment>
+        ) : loadingData ? (
+          <p className={css.spinner}>
+            <IconSpinner />
+          </p>
         ) : null}
 
         {initiateOrderError ? (
@@ -488,6 +511,7 @@ StripePaymentForm.defaultProps = {
   className: null,
   rootClassName: null,
   inProgress: false,
+  loadingData: false,
   showInitialMessageInput: true,
   hasHandledCardPayment: false,
   defaultPaymentMethod: null,
@@ -500,6 +524,7 @@ StripePaymentForm.propTypes = {
   className: string,
   rootClassName: string,
   inProgress: bool,
+  loadingData: bool,
   initiateOrderError: object,
   handleCardPaymentError: object,
   confirmPaymentError: object,
