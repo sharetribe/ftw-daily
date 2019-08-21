@@ -10,28 +10,27 @@
 }
 
 .formRow {
-  /* parent aka root is flexbox, this container takes all available space */
-  flex-grow: 1;
-  flex-shrink: 0;
-
   /* This container uses flexbox layout */
   display: flex;
   justify-content: space-between;
   width: 100%;
 
-  margin-bottom: 24px;
-}
+  /* parent aka root is flexbox, this container takes all available space */
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-wrap: wrap;
 
-.postalCode {
-  margin-top: 24px;
-  width: calc(40% - 9px);
-}
-
-.city {
-  margin-top: 24px;
-  width: calc(60% - 9px);
+  @media (--viewportSmall) {
+    margin-bottom: 24px;
+    flex-wrap: no-wrap;
+  }
 }
 
 .field {
+  width: 100%;
   margin-top: 24px;
+
+  @media (--viewportSmall) {
+    width: calc(50% - 12px);
+  }
 }
