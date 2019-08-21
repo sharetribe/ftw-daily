@@ -724,14 +724,7 @@ export class CheckoutPageComponent extends Component {
     const pageProps = { title, scrollingDisabled };
 
     if (isLoading) {
-      return (
-        <Page {...pageProps}>
-          {topbar}
-          <div className={css.loading}>
-            <FormattedMessage id="CheckoutPage.loadingData" />
-          </div>
-        </Page>
-      );
+      return <Page {...pageProps}>{topbar}</Page>;
     }
 
     // Get first and last name of the current user and use it in the StripePaymentForm to autofill the name field
@@ -810,6 +803,7 @@ export class CheckoutPageComponent extends Component {
                   handleCardPaymentError={handleCardPaymentError}
                   confirmPaymentError={confirmPaymentError}
                   hasHandledCardPayment={hasPaymentIntentUserActionsDone}
+                  loadingData={!stripeCustomerFetched}
                   defaultPaymentMethod={
                     hasDefaultPaymentMethod ? currentUser.stripeCustomer.defaultPaymentMethod : null
                   }
