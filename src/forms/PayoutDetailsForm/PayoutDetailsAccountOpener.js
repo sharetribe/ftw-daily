@@ -47,6 +47,7 @@ const PayoutDetailsAccountOpener = props => {
           showPhoneNumberField={showPhoneNumberField}
           sectionTitle={intl.formatMessage({ id: 'PayoutDetailsForm.accountOpenerTitle' })}
           values={values}
+          form={form}
         />
         {showPersonalAddressField ? (
           <PayoutDetailsAddress
