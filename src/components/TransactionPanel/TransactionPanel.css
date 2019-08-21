@@ -34,7 +34,7 @@
   }
 }
 
-.errorMessage {
+.genericError {
   color: var(--failColor);
   margin: 24px 24px 0 24px;
 

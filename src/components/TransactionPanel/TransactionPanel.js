@@ -373,7 +373,7 @@ export class TransactionPanelComponent extends Component {
             </div>
 
             {savePaymentMethodFailed ? (
-              <p className={css.error}>
+              <p className={css.genericError}>
                 <FormattedMessage
                   id="TransactionPanel.savePaymentMethodFailed"
                   values={{ paymentMethodsPageLink }}

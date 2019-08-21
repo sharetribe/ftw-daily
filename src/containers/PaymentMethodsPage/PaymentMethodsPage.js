@@ -24,7 +24,7 @@ import {
   Page,
   UserNav,
 } from '../../components';
-import { TopbarContainer } from '..';
+import { TopbarContainer } from '../../containers';
 import { PaymentMethodsForm } from '../../forms';
 import { createStripeSetupIntent, stripeCustomer, loadData } from './PaymentMethodsPage.duck.js';
 

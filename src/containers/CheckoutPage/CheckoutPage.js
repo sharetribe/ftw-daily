@@ -67,10 +67,10 @@ const ONETIME_PAYMENT = 'ONETIME_PAYMENT';
 const PAY_AND_SAVE_FOR_LATER_USE = 'PAY_AND_SAVE_FOR_LATER_USE';
 const USE_SAVED_CARD = 'USE_SAVED_CARD';
 
-const paymentChargeMode = (paymentMode, saveAfterOnetimePayment) => {
+const paymentFlow = (selectedPaymentMethod, saveAfterOnetimePayment) => {
   // Payment mode could be 'replaceCard', but without explicit saveAfterOnetimePayment flag,
   // we'll handle it as one-time payment
-  return paymentMode === 'defaultCard'
+  return selectedPaymentMethod === 'defaultCard'
     ? USE_SAVED_CARD
     : saveAfterOnetimePayment
     ? PAY_AND_SAVE_FOR_LATER_USE
@@ -216,7 +216,7 @@ export class CheckoutPageComponent extends Component {
       speculatedTransaction,
       message,
       paymentIntent,
-      paymentMode,
+      selectedPaymentMethod,
       saveAfterOnetimePayment,
     } = handlePaymentParams;
     const storedTx = ensureTransaction(pageData.transaction);
@@ -234,8 +234,11 @@ export class CheckoutPageComponent extends Component {
       ensuredStripeCustomer.attributes.stripeCustomerId &&
       ensuredDefaultPaymentMethod.id
     );
+    const stripePaymentMethodId = hasDefaultPaymentMethod
+      ? ensuredDefaultPaymentMethod.attributes.stripePaymentMethodId
+      : null;
 
-    const paymentChargeFlow = paymentChargeMode(paymentMode, saveAfterOnetimePayment);
+    const selectedPaymentFlow = paymentFlow(selectedPaymentMethod, saveAfterOnetimePayment);
 
     // Step 1: initiate order by requesting payment from Marketplace API
     const fnRequestPayment = fnParams => {
@@ -273,18 +276,26 @@ export class CheckoutPageComponent extends Component {
         : null;
 
       const { stripe, card, billingDetails, paymentIntent } = handlePaymentParams;
-      const stripeElementMaybe = paymentChargeFlow !== USE_SAVED_CARD ? { card } : {};
+      const stripeElementMaybe = selectedPaymentFlow !== USE_SAVED_CARD ? { card } : {};
+
+      // Note: payment_method could be set here for USE_SAVED_CARD flow.
+      // { payment_method: stripePaymentMethodId }
+      // However, we have set it already on API side, when PaymentIntent was created.
+      const paymentParams =
+        selectedPaymentFlow !== USE_SAVED_CARD
+          ? {
+              payment_method_data: {
+                billing_details: billingDetails,
+              },
+            }
+          : {};
 
       const params = {
         stripePaymentIntentClientSecret,
         orderId: order.id,
         stripe,
         ...stripeElementMaybe,
-        paymentParams: {
-          payment_method_data: {
-            billing_details: billingDetails,
-          },
-        },
+        paymentParams,
       };
 
       // If paymentIntent status is not waiting user action,
@@ -312,7 +323,7 @@ export class CheckoutPageComponent extends Component {
     const fnSavePaymentMethod = fnParams => {
       const pi = createdPaymentIntent || paymentIntent;
 
-      if (paymentChargeFlow === PAY_AND_SAVE_FOR_LATER_USE) {
+      if (selectedPaymentFlow === PAY_AND_SAVE_FOR_LATER_USE) {
         return onSavePaymentMethod(ensuredStripeCustomer, pi.payment_method)
           .then(response => {
             if (response.errors) {
@@ -349,10 +360,13 @@ export class CheckoutPageComponent extends Component {
     // The way to pass it to checkout page is through pageData.bookingData
     const tx = speculatedTransaction ? speculatedTransaction : storedTx;
 
+    // Note: optionalPaymentParams contains Stripe paymentMethod,
+    // but that can also be passed on Step 2
+    // stripe.handleCardPayment(stripe, { payment_method: stripePaymentMethodId })
     const optionalPaymentParams =
-      paymentChargeFlow === USE_SAVED_CARD && hasDefaultPaymentMethod
-        ? { paymentMethod: ensuredDefaultPaymentMethod.id }
-        : paymentChargeFlow === PAY_AND_SAVE_FOR_LATER_USE
+      selectedPaymentFlow === USE_SAVED_CARD && hasDefaultPaymentMethod
+        ? { paymentMethod: stripePaymentMethodId }
+        : selectedPaymentFlow === PAY_AND_SAVE_FOR_LATER_USE
         ? { setupPaymentMethodForSaving: true }
         : {};
 
@@ -373,7 +387,7 @@ export class CheckoutPageComponent extends Component {
     this.setState({ submitting: true });
 
     const { history, speculatedTransaction, currentUser, paymentIntent, dispatch } = this.props;
-    const { card, message, formValues } = values;
+    const { card, message, paymentMethod, formValues } = values;
     const {
       name,
       addressLine1,
@@ -382,7 +396,6 @@ export class CheckoutPageComponent extends Component {
       city,
       state,
       country,
-      paymentMode,
       saveAfterOnetimePayment,
     } = formValues;
 
@@ -417,7 +430,7 @@ export class CheckoutPageComponent extends Component {
       billingDetails,
       message,
       paymentIntent,
-      paymentMode,
+      selectedPaymentMethod: paymentMethod,
       saveAfterOnetimePayment: !!saveAfterOnetimePayment,
     };
 
