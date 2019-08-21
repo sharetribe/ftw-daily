@@ -6,6 +6,7 @@ import {
   IconArrowHead,
   IconCard,
   IconClose,
+  IconCheckmark,
   Button,
   InlineTextButton,
   Menu,
@@ -20,9 +21,8 @@ const DEFAULT_CARD = 'defaultCard';
 const REPLACE_CARD = 'replaceCard';
 
 const SavedCardDetails = props => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [arrowDeg, setArrowDeg] = useState(90);
   const [active, setActive] = useState(DEFAULT_CARD);
 
   const {
@@ -111,18 +111,14 @@ const SavedCardDetails = props => {
   };
 
   const onToggleActive = isOpen => {
-    setArrowDeg(arrowDeg + 180);
     setMenuOpen(isOpen);
   };
 
   const handleDeleteCard = () => {
-    setIsOpen(true);
+    setIsModalOpen(true);
   };
 
-  const arrowStyle = {
-    transform: `rotate(${arrowDeg}deg)`,
-    transition: 'transform 0.5s ease-out',
-  };
+  const iconArrowClassName = menuOpen ? css.IconArrowAnimation : null;
 
   const replaceCardTitle = intl.formatMessage({
     id: 'SavedCardDetails.replaceCardTitle',
@@ -143,14 +139,23 @@ const SavedCardDetails = props => {
         <MenuLabel className={css.menuLabel}>
           <div className={showExpired ? css.menuLabelWrapperExpired : css.menuLabelWrapper}>
             {active === DEFAULT_CARD ? defaultCard : replaceCard}
-            <span style={arrowStyle}>
-              <IconArrowHead direction="right" size="small" rootClassName={css.arrowIcon} />
+            <span>
+              <IconArrowHead
+                direction="down"
+                size="small"
+                rootClassName={css.iconArrow}
+                className={iconArrowClassName}
+              />
             </span>
           </div>
         </MenuLabel>
 
-        <MenuContent className={css.menuContent}>
+        <MenuContent rootClassName={css.menuContent}>
           <MenuItem key="first item" className={css.menuItem}>
+            <IconCheckmark
+              className={active === DEFAULT_CARD ? css.iconCheckmark : css.iconCheckmarkHidden}
+              size="small"
+            />
             <InlineTextButton className={css.menuText} onClick={handleClick(DEFAULT_CARD)}>
               {defaultCard}
             </InlineTextButton>
@@ -159,7 +164,14 @@ const SavedCardDetails = props => {
             {replaceCardTitle}
           </MenuItem>
           <MenuItem key="second item" className={css.menuItem}>
-            <InlineTextButton className={css.menuText} onClick={handleClick(REPLACE_CARD)}>
+            <IconCheckmark
+              className={active === REPLACE_CARD ? css.iconCheckmark : css.iconCheckmarkHidden}
+              size="small"
+            />
+            <InlineTextButton
+              className={css.menuTextReplaceCard}
+              onClick={handleClick(REPLACE_CARD)}
+            >
               {replaceCard}
             </InlineTextButton>
           </MenuItem>
@@ -176,9 +188,9 @@ const SavedCardDetails = props => {
 
       <Modal
         id="VerifyDeletingPaymentMethod"
-        isOpen={isOpen}
+        isOpen={isModalOpen}
         onClose={() => {
-          setIsOpen(false);
+          setIsModalOpen(false);
         }}
         contentClassName={css.modalContent}
         onManageDisableScrolling={onManageDisableScrolling}
@@ -187,7 +199,7 @@ const SavedCardDetails = props => {
           <div className={css.modalTitle}>{removeCardModalTitle}</div>
           <p className={css.modalMessage}>{removeCardModalContent}</p>
           <div className={css.modalButtonsWrapper}>
-            <div onClick={() => setIsOpen(false)} className={css.cancelCardDelete}>
+            <div onClick={() => setIsModalOpen(false)} className={css.cancelCardDelete}>
               {cancel}
             </div>
             <Button onClick={onDeleteCard} inProgress={deleteInProgress}>
