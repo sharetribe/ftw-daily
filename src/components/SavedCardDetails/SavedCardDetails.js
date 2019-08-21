@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { func, number, shape, string } from 'prop-types';
+import { bool, func, number, shape, string } from 'prop-types';
 import classNames from 'classnames';
 import { injectIntl, intlShape } from 'react-intl';
 import {
@@ -33,7 +33,7 @@ const SavedCardDetails = props => {
     onChange,
     onDeleteCard,
     onManageDisableScrolling,
-    deleteInProgress,
+    deletePaymentMethodInProgress,
   } = props;
 
   const { last4Digits, expirationMonth, expirationYear, brand } = card || {};
@@ -202,7 +202,7 @@ const SavedCardDetails = props => {
             <div onClick={() => setIsModalOpen(false)} className={css.cancelCardDelete}>
               {cancel}
             </div>
-            <Button onClick={onDeleteCard} inProgress={deleteInProgress}>
+            <Button onClick={onDeleteCard} inProgress={deletePaymentMethodInProgress}>
               {removeCard}
             </Button>
           </div>
@@ -219,6 +219,7 @@ SavedCardDetails.defaultProps = {
   onChange: null,
   onDeleteCard: null,
   onManageDisableScrolling: () => null,
+  deletePaymentMethodInProgress: false,
 };
 
 SavedCardDetails.propTypes = {
@@ -234,6 +235,7 @@ SavedCardDetails.propTypes = {
   onChange: func,
   onDeleteCard: func,
   onManageDisableScrolling: func,
+  deletePaymentMethodInProgress: bool,
 };
 
 export default injectIntl(SavedCardDetails);
