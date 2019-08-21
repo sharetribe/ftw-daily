@@ -3,6 +3,7 @@
 .root {
   display: flex;
   flex-direction: column;
+  margin-top: 40px;
 }
 
 .card {
@@ -119,7 +120,7 @@
   @apply --marketplaceH5FontStyles;
   color: var(--matterColorAnti);
   padding: 0;
-  margin: 22px 0 0 0;
+  margin: 14px 0 0 0;
 }
 
 .submitButton {

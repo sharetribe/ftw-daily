@@ -79,37 +79,38 @@ const StripePaymentAddress = props => {
 
   return (
     <div className={className ? className : css.root}>
-      <FieldTextInput
-        id={`${fieldId}.addressLine1`}
-        name="addressLine1"
-        disabled={disabled}
-        className={css.field}
-        type="text"
-        autoComplete="billing address-line1"
-        label={addressLine1Label}
-        placeholder={addressLine1Placeholder}
-        validate={addressLine1Required}
-        onUnmount={() => form.change('addressLine1', undefined)}
-      />
+      <div className={css.formRow}>
+        <FieldTextInput
+          id={`${fieldId}.addressLine1`}
+          name="addressLine1"
+          disabled={disabled}
+          className={css.field}
+          type="text"
+          autoComplete="billing address-line1"
+          label={addressLine1Label}
+          placeholder={addressLine1Placeholder}
+          validate={addressLine1Required}
+          onUnmount={() => form.change('addressLine1', undefined)}
+        />
 
-      <FieldTextInput
-        id={`${fieldId}.addressLine2`}
-        name="addressLine2"
-        disabled={disabled}
-        className={css.field}
-        type="text"
-        autoComplete="billing address-line2"
-        label={addressLine2Label}
-        placeholder={addressLine2Placeholder}
-        onUnmount={() => form.change('addressLine2', undefined)}
-      />
-
+        <FieldTextInput
+          id={`${fieldId}.addressLine2`}
+          name="addressLine2"
+          disabled={disabled}
+          className={css.field}
+          type="text"
+          autoComplete="billing address-line2"
+          label={addressLine2Label}
+          placeholder={addressLine2Placeholder}
+          onUnmount={() => form.change('addressLine2', undefined)}
+        />
+      </div>
       <div className={css.formRow}>
         <FieldTextInput
           id={`${fieldId}.postalCode`}
           name="postal"
           disabled={disabled}
-          className={css.postalCode}
+          className={css.field}
           type="text"
           autoComplete="billing postal-code"
           label={postalCodeLabel}
@@ -123,7 +124,7 @@ const StripePaymentAddress = props => {
           id={`${fieldId}.city`}
           name="city"
           disabled={disabled}
-          className={css.city}
+          className={css.field}
           type="text"
           autoComplete="billing address-level2"
           label={cityLabel}
@@ -132,38 +133,39 @@ const StripePaymentAddress = props => {
           onUnmount={() => form.change('city', undefined)}
         />
       </div>
+      <div className={css.formRow}>
+        <FieldTextInput
+          id={`${fieldId}.state`}
+          name="state"
+          disabled={disabled}
+          className={css.field}
+          type="text"
+          autoComplete="billing address-level1"
+          label={stateLabel}
+          placeholder={statePlaceholder}
+          onUnmount={() => form.change('state', undefined)}
+        />
 
-      <FieldTextInput
-        id={`${fieldId}.state`}
-        name="state"
-        disabled={disabled}
-        className={css.field}
-        type="text"
-        autoComplete="billing address-level1"
-        label={stateLabel}
-        placeholder={statePlaceholder}
-        onUnmount={() => form.change('state', undefined)}
-      />
-
-      <FieldSelect
-        id={`${fieldId}.country`}
-        name="country"
-        disabled={disabled}
-        className={css.field}
-        label={countryLabel}
-        validate={countryRequired}
-      >
-        <option disabled value="">
-          {countryPlaceholder}
-        </option>
-        {countryCodes.map(country => {
-          return (
-            <option key={country.code} value={country.code}>
-              {country.name}
-            </option>
-          );
-        })}
-      </FieldSelect>
+        <FieldSelect
+          id={`${fieldId}.country`}
+          name="country"
+          disabled={disabled}
+          className={css.field}
+          label={countryLabel}
+          validate={countryRequired}
+        >
+          <option disabled value="">
+            {countryPlaceholder}
+          </option>
+          {countryCodes.map(country => {
+            return (
+              <option key={country.code} value={country.code}>
+                {country.name}
+              </option>
+            );
+          })}
+        </FieldSelect>
+      </div>
     </div>
   );
 };
