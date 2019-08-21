@@ -106,7 +106,11 @@ export const TransactionPageComponent = props => {
   };
 
   // If payment is pending, redirect to CheckoutPage
-  if (txIsPaymentPending(currentTransaction) && isCustomerRole) {
+  if (
+    txIsPaymentPending(currentTransaction) &&
+    isCustomerRole &&
+    currentTransaction.attributes.lineItems
+  ) {
     const currentBooking = ensureListing(currentTransaction.booking);
 
     const initialValues = {
