@@ -1,19 +1,22 @@
+import pick from 'lodash/pick';
 import { storableError } from '../util/errors';
 import * as log from '../util/log';
 
 // ================ Action types ================ //
 
-export const CREATE_STRIPE_CUSTOMER_REQUEST = 'app/stripe/CREATE_STRIPE_CUSTOMER_REQUEST';
-export const CREATE_STRIPE_CUSTOMER_SUCCESS = 'app/stripe/CREATE_STRIPE_CUSTOMER_SUCCESS';
-export const CREATE_STRIPE_CUSTOMER_ERROR = 'app/stripe/CREATE_STRIPE_CUSTOMER_ERROR';
+export const SET_INITIAL_VALUES = 'app/paymentMethods/SET_INITIAL_VALUES';
 
-export const ADD_PAYMENT_METHOD_REQUEST = 'app/stripe/ADD_PAYMENT_METHOD_REQUEST';
-export const ADD_PAYMENT_METHOD_SUCCESS = 'app/stripe/ADD_PAYMENT_METHOD_SUCCESS';
-export const ADD_PAYMENT_METHOD_ERROR = 'app/stripe/ADD_PAYMENT_METHOD_ERROR';
+export const CREATE_STRIPE_CUSTOMER_REQUEST = 'app/paymentMethods/CREATE_STRIPE_CUSTOMER_REQUEST';
+export const CREATE_STRIPE_CUSTOMER_SUCCESS = 'app/paymentMethods/CREATE_STRIPE_CUSTOMER_SUCCESS';
+export const CREATE_STRIPE_CUSTOMER_ERROR = 'app/paymentMethods/CREATE_STRIPE_CUSTOMER_ERROR';
 
-export const DELETE_PAYMENT_METHOD_REQUEST = 'app/stripe/DELETE_PAYMENT_METHOD_REQUEST';
-export const DELETE_PAYMENT_METHOD_SUCCESS = 'app/stripe/DELETE_PAYMENT_METHOD_SUCCESS';
-export const DELETE_PAYMENT_METHOD_ERROR = 'app/stripe/DELETE_PAYMENT_METHOD_ERROR';
+export const ADD_PAYMENT_METHOD_REQUEST = 'app/paymentMethods/ADD_PAYMENT_METHOD_REQUEST';
+export const ADD_PAYMENT_METHOD_SUCCESS = 'app/paymentMethods/ADD_PAYMENT_METHOD_SUCCESS';
+export const ADD_PAYMENT_METHOD_ERROR = 'app/paymentMethods/ADD_PAYMENT_METHOD_ERROR';
+
+export const DELETE_PAYMENT_METHOD_REQUEST = 'app/paymentMethods/DELETE_PAYMENT_METHOD_REQUEST';
+export const DELETE_PAYMENT_METHOD_SUCCESS = 'app/paymentMethods/DELETE_PAYMENT_METHOD_SUCCESS';
+export const DELETE_PAYMENT_METHOD_ERROR = 'app/paymentMethods/DELETE_PAYMENT_METHOD_ERROR';
 
 // ================ Reducer ================ //
 
@@ -30,6 +33,8 @@ const initialState = {
 export default function payoutMethodsPageReducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
+    case SET_INITIAL_VALUES:
+      return { ...initialState, ...payload };
     case CREATE_STRIPE_CUSTOMER_REQUEST:
       return { ...state, createStripeCustomerError: null, createStripeCustomerInProgress: true };
     case CREATE_STRIPE_CUSTOMER_SUCCESS:
@@ -81,6 +86,11 @@ export default function payoutMethodsPageReducer(state = initialState, action = 
 }
 
 // ================ Action creators ================ //
+
+export const setInitialValues = initialValues => ({
+  type: SET_INITIAL_VALUES,
+  payload: pick(initialValues, Object.keys(initialState)),
+});
 
 export const stripeCustomerCreateRequest = () => ({ type: CREATE_STRIPE_CUSTOMER_REQUEST });
 
