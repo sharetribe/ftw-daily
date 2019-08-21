@@ -135,7 +135,6 @@ const PaymentMethodsPageComponent = props => {
   };
 
   const title = intl.formatMessage({ id: 'PaymentMethodsPage.title' });
-  const loadingData = intl.formatMessage({ id: 'PaymentMethodsPage.loadingData' });
 
   const ensuredCurrentUser = ensureCurrentUser(currentUser);
   const currentUserLoaded = !!ensuredCurrentUser.id;
@@ -177,14 +176,11 @@ const PaymentMethodsPageComponent = props => {
             <h1 className={css.title}>
               <FormattedMessage id="PaymentMethodsPage.heading" />
             </h1>
-            {!stripeCustomerFetched ? (
-              <>{loadingData}</>
-            ) : (
+            {!stripeCustomerFetched ? null : (
               <>
                 {showCardDetails ? (
                   <SavedCardDetails
                     card={card}
-                    inProgress={deletePaymentMethodInProgress}
                     onManageDisableScrolling={onManageDisableScrolling}
                     onChange={setCardState}
                     onDeleteCard={handleRemovePaymentMethod}
