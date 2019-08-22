@@ -11,9 +11,10 @@ const UserNav = props => {
   const { className, rootClassName, selectedPageName } = props;
   const classes = classNames(rootClassName || css.root, className);
 
+
   /*TODO: only display add listing if user is authorized to do so (account has type "coach" ) */
-  const tabs = [
-    {
+
+  const tabs = [{
       text: <FormattedMessage id="TopbarDesktop.createListing" />,
       selected: selectedPageName === "NewListingPage",
       linkProps: {
@@ -45,6 +46,10 @@ const UserNav = props => {
     },
   ];
 
+  if(!props.hasProviderAccess) {
+    tabs.shift();
+  }
+
   return (
     <LinkTabNavHorizontal className={classes} tabRootClassName={css.tab} tabs={tabs} skin="dark" />
   );
@@ -53,6 +58,7 @@ const UserNav = props => {
 UserNav.defaultProps = {
   className: null,
   rootClassName: null,
+  hasProviderAccess: false,
 };
 
 const { string } = PropTypes;
