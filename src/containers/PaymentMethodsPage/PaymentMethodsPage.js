@@ -5,12 +5,7 @@ import { connect } from 'react-redux';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { ensureCurrentUser, ensureStripeCustomer, ensurePaymentMethodCard } from '../../util/data';
 import { propTypes } from '../../util/types';
-import {
-  createStripeCustomer,
-  addPaymentMethod,
-  deletePaymentMethod,
-  updatePaymentMethod,
-} from '../../ducks/paymentMethods.duck';
+import { savePaymentMethod, deletePaymentMethod } from '../../ducks/paymentMethods.duck';
 import { handleCardSetup } from '../../ducks/stripe.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import {
@@ -43,9 +38,7 @@ const PaymentMethodsPageComponent = props => {
     deletePaymentMethodInProgress,
     onCreateSetupIntent,
     onHandleCardSetup,
-    onCreateStripeCustomer,
-    onAddPaymentMethod,
-    onUpdatePaymentMethod,
+    onSavePaymentMethod,
     onDeletePaymentMethod,
     fetchStripeCustomer,
     scrollingDisabled,
@@ -91,8 +84,6 @@ const PaymentMethodsPageComponent = props => {
     setIsSubmitting(true);
     const ensuredCurrentUser = ensureCurrentUser(currentUser);
     const stripeCustomer = ensuredCurrentUser.stripeCustomer;
-    const hasSavedPaymentMethod = stripeCustomer ? stripeCustomer.defaultPaymentMethod : null;
-
     const { stripe, card, formValues } = params;
 
     onCreateSetupIntent()
@@ -110,11 +101,7 @@ const PaymentMethodsPageComponent = props => {
         const newPaymentMethod = result.setupIntent.payment_method;
         // Note: stripe.handleCardSetup might return an error inside successful call (200), but those are rejected in thunk functions.
 
-        return !stripeCustomer
-          ? onCreateStripeCustomer(newPaymentMethod)
-          : hasSavedPaymentMethod
-          ? onUpdatePaymentMethod(newPaymentMethod)
-          : onAddPaymentMethod(newPaymentMethod);
+        return onSavePaymentMethod(stripeCustomer, newPaymentMethod);
       })
       .then(() => {
         // Update currentUser entity and its sub entities: stripeCustomer and defaultPaymentMethod
@@ -231,9 +218,7 @@ PaymentMethodsPageComponent.propTypes = {
   handleCardSetupError: object,
   onCreateSetupIntent: func.isRequired,
   onHandleCardSetup: func.isRequired,
-  onCreateStripeCustomer: func.isRequired,
-  onAddPaymentMethod: func.isRequired,
-  onUpdatePaymentMethod: func.isRequired,
+  onSavePaymentMethod: func.isRequired,
   onDeletePaymentMethod: func.isRequired,
   fetchStripeCustomer: func.isRequired,
 
@@ -272,10 +257,9 @@ const mapDispatchToProps = dispatch => ({
   fetchStripeCustomer: () => dispatch(stripeCustomer()),
   onHandleCardSetup: params => dispatch(handleCardSetup(params)),
   onCreateSetupIntent: params => dispatch(createStripeSetupIntent(params)),
-  onCreateStripeCustomer: params => dispatch(createStripeCustomer(params)),
-  onAddPaymentMethod: params => dispatch(addPaymentMethod(params)),
+  onSavePaymentMethod: (stripeCustomer, newPaymentMethod) =>
+    dispatch(savePaymentMethod(stripeCustomer, newPaymentMethod)),
   onDeletePaymentMethod: params => dispatch(deletePaymentMethod(params)),
-  onUpdatePaymentMethod: params => dispatch(updatePaymentMethod(params)),
 });
 
 const PaymentMethodsPage = compose(
