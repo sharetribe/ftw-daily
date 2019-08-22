@@ -14,6 +14,33 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+## [v3.3.0] 2019-08-22
+
+- [add] Saving payment card after payment or without initial payment. This release contains quite a
+  lot changes to many files. This includes:
+
+  - UI changes to `CheckoutPage` for showing the saved payment method
+  - One more step to `handlePaymentIntent` flow on `CheckoutPage` if the user decides to save the
+    payment card
+  - Showing error notification on `TransactionPage` if saving the payment method has failed
+  - Use Flex SDK v1.5.0 which has new endpoints for creating Stripe Customer and using Stripe
+    SetupIntents
+  - Add `handleCardSetup` function to `stripe.duck.js`
+  - New shared duck file `paymentMethods.duck.js` for handling saving, deleting and replacing the
+    payment method
+  - New page `PaymentMethodsPage` in user's account settings
+  - `StripePaymenAddress` used in `StripePaymentForm` is now a separate component used also in new
+    `PaymentMethodsForm`
+  - New `LayoutWrapperAccountSettingsSideNav` component which is used in account settings pages:
+    `ContactDetailsPage`, `PasswordChangePage`, `PayoutPreferencesPage`, `PaymentMethodsPage`
+
+  [#1138](https://github.com/sharetribe/flex-template-web/pull/1138)
+
+Read more from Flex docs:
+[How saving payment card works in FTW](https://www.sharetribe.com/docs/background/save-payment-card/)
+
+[v3.3.0]: https://github.com/sharetribe/flex-template-web/compare/v3.2.0...v3.2.1
+
 ## [v3.2.1] 2019-08-22
 
 - [fix] On `ListingPage` align avatar with the left side of the content and fix content width so
