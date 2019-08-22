@@ -89,6 +89,14 @@ propTypes.image = shape({
   }),
 });
 
+
+//user Types
+export const USER_TYPE_MEMBER = 'member';
+export const USER_TYPE_COACH = 'coach';
+
+
+
+ 
 // Denormalised user object
 propTypes.currentUser = shape({
   id: propTypes.uuid.isRequired,

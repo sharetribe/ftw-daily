@@ -21,6 +21,13 @@ export const FETCH_CURRENT_USER_HAS_LISTINGS_SUCCESS =
 export const FETCH_CURRENT_USER_HAS_LISTINGS_ERROR =
   'app/user/FETCH_CURRENT_USER_HAS_LISTINGS_ERROR';
 
+export const FETCH_CURRENT_USER_HAS_PROVIDERACCESS_REQUEST = 
+  'app/user/FETCH_CURRENT_USER_HAS_PROVIDER_ACCESS_REQUEST';
+export const FETCH_CURRENT_USER_HAS_PROVIDERACCESS_SUCCESS = 
+  'app/user/FETCH_CURRENT_USER_HAS_PROVIDER_ACCESS_SUCCESS';
+export const FETCH_CURRENT_USER_HAS_PROVIDERACCESS_ERROR = 
+  'app/user/FETCH_CURRENT_USER_HAS_PROVIDER_ACCESS_ERROR';
+
 export const FETCH_CURRENT_USER_NOTIFICATIONS_REQUEST =
   'app/user/FETCH_CURRENT_USER_NOTIFICATIONS_REQUEST';
 export const FETCH_CURRENT_USER_NOTIFICATIONS_SUCCESS =
@@ -42,6 +49,8 @@ export const SEND_VERIFICATION_EMAIL_ERROR = 'app/user/SEND_VERIFICATION_EMAIL_E
 
 const initialState = {
   currentUser: null,
+  currentUserType: null,
+  currentUserHasProviderAccess: false,
   currentUserShowError: null,
   currentUserHasListings: false,
   currentUserHasListingsError: null,
@@ -59,7 +68,7 @@ export default function reducer(state = initialState, action = {}) {
     case CURRENT_USER_SHOW_REQUEST:
       return { ...state, currentUserShowError: null };
     case CURRENT_USER_SHOW_SUCCESS:
-      return { ...state, currentUser: payload };
+      return { ...state, currentUser: payload.user, currentUserType: payload.userType, currentUserHasProviderAccess: payload.hasProviderAccess };
     case CURRENT_USER_SHOW_ERROR:
       // eslint-disable-next-line no-console
       console.error(payload);
@@ -69,6 +78,8 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         currentUser: null,
+        currentUserType: null,
+        currentUserHasProviderAccess: false,
         currentUserShowError: null,
         currentUserHasListings: false,
         currentUserHasListingsError: null,
@@ -143,9 +154,13 @@ export const verificationSendingInProgress = state => {
 
 export const currentUserShowRequest = () => ({ type: CURRENT_USER_SHOW_REQUEST });
 
-export const currentUserShowSuccess = user => ({
+export const currentUserShowSuccess = (user, usertype, hasprovideraccess) => ({
   type: CURRENT_USER_SHOW_SUCCESS,
-  payload: user,
+  payload: { 
+    user: user,
+    userType: usertype,
+    hasProviderAccess: hasprovideraccess
+  },
 });
 
 export const currentUserShowError = e => ({
@@ -322,7 +337,11 @@ export const fetchCurrentUser = () => (dispatch, getState, sdk) => {
 
       // set current user id to the logger
       log.setUserId(currentUser.id.uuid);
-      dispatch(currentUserShowSuccess(currentUser));
+
+      const userType = currentUser.attributes.profile.publicData.memberType;
+      const hasProviderAccess = currentUser.attributes.profile.privateData.hasProviderAccess;
+
+      dispatch(currentUserShowSuccess(currentUser, userType, hasProviderAccess));
       return currentUser;
     })
     .then(currentUser => {

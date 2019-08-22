@@ -2,6 +2,7 @@ import isEmpty from 'lodash/isEmpty';
 import { clearCurrentUser, fetchCurrentUser } from './user.duck';
 import { storableError } from '../util/errors';
 import * as log from '../util/log';
+import { USER_TYPE_MEMBER } from '../util/types';
 
 const authenticated = authInfo => authInfo && authInfo.grantType === 'refresh_token';
 
@@ -172,10 +173,14 @@ export const signup = params => (dispatch, getState, sdk) => {
   }
   dispatch(signupRequest());
   const { email, password, firstName, lastName, ...rest } = params;
+  
+  //set extended data variables used to create account without provider permission
+  const userType = USER_TYPE_MEMBER;
+  const hasProviderAccess = false;
 
   const createUserParams = isEmpty(rest)
-    ? { email, password, firstName, lastName }
-    : { email, password, firstName, lastName, protectedData: { ...rest } };
+    ? { email, password, firstName, lastName, publicData: {userType: USER_TYPE_MEMBER}, privateData: { hasProviderAccess: false } }
+    : { email, password, firstName, lastName, publicData: {userType: USER_TYPE_MEMBER}, protectedData: { ...rest }, privateData: { hasProviderAccess: false } };
 
   // We must login the user if signup succeeds since the API doesn't
   // do that automatically.

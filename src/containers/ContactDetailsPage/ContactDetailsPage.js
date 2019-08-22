@@ -29,6 +29,8 @@ export const ContactDetailsPageComponent = props => {
     savePhoneNumberError,
     saveContactDetailsInProgress,
     currentUser,
+    currentUserType,
+    currentUserHasProviderAccess,
     contactDetailsChanged,
     onChange,
     scrollingDisabled,
@@ -95,7 +97,7 @@ export const ContactDetailsPageComponent = props => {
             desktopClassName={css.desktopTopbar}
             mobileClassName={css.mobileTopbar}
           />
-          <UserNav selectedPageName="ContactDetailsPage" />
+          <UserNav selectedPageName="ContactDetailsPage" hasProviderAccess={currentUserHasProviderAccess}/>
         </LayoutWrapperTopbar>
         <LayoutWrapperSideNav tabs={tabs} />
         <LayoutWrapperMain>
@@ -142,7 +144,7 @@ ContactDetailsPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   // Topbar needs user info.
-  const { currentUser, sendVerificationEmailInProgress, sendVerificationEmailError } = state.user;
+  const { currentUser, sendVerificationEmailInProgress, sendVerificationEmailError, currentUserType, currentUserHasProviderAccess } = state.user;
   const {
     saveEmailError,
     savePhoneNumberError,
@@ -154,6 +156,8 @@ const mapStateToProps = state => {
     savePhoneNumberError,
     saveContactDetailsInProgress,
     currentUser,
+    currentUserType, 
+    currentUserHasProviderAccess,
     contactDetailsChanged,
     scrollingDisabled: isScrollingDisabled(state),
     sendVerificationEmailInProgress,
