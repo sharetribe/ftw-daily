@@ -17,12 +17,12 @@
   flex-direction: column;
   width: 100%;
 
+  /* When side nav is shown as a column, Topbar's box-shadow should be visible */
+  z-index: calc(var(--zIndexTopbar) - 1);
+
   @media (--viewportLarge) {
     flex-direction: row;
     justify-content: center;
-
-    /* When side nav is shown as a column, Topbar's box-shadow should be visible */
-    z-index: calc(var(--zIndexTopbar) - 1);
   }
 }
 

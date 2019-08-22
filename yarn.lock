@@ -6375,9 +6375,9 @@ jest@24.7.1:
     jest-cli "^24.7.1"
 
 js-cookie@^2.1.3:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-2.2.0.tgz#1b2c279a6eece380a12168b92485265b35b1effb"
-  integrity sha1-Gywnmm7s44ChIWi5JIUmWzWx7/s=
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-2.2.1.tgz#69e106dc5d5806894562902aa5baec3744e9b2b8"
+  integrity sha512-HvdH2LzI/EAZcUwA8+0nKNtWHqS+ZmijLA30RwZA0bo7ToCckjK5MkGhjED9KoRcXO6BaGI3I9UIzSA1FKFPOQ==
 
 js-levenshtein@^1.1.3:
   version "1.1.6"
@@ -9999,10 +9999,10 @@ shallowequal@^1.0.1:
   resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-1.1.0.tgz#188d521de95b9087404fd4dcb68b13df0ae4e7f8"
   integrity sha512-y0m1JoUZSlPAjXVtPPW70aZWfIL/dSP7AFkRnniLCrK/8MDKog3TySTBmckD+RObVxH0v4Tox67+F14PdED2oQ==
 
-sharetribe-flex-sdk@^1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/sharetribe-flex-sdk/-/sharetribe-flex-sdk-1.4.1.tgz#abf1af12d34a31e05abb0121cd55f2f0716c46c1"
-  integrity sha512-QcsEoOf2SdTW2NwkNbpaAKhT5P8s640dGZg9NPuzz5NaSESgl+gkkeHNIDRHnycyvINvl6IjGPmUFTPHYA1XkA==
+sharetribe-flex-sdk@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/sharetribe-flex-sdk/-/sharetribe-flex-sdk-1.5.0.tgz#a1bb9c603f8a52a1f53053cb610fdf15ff223288"
+  integrity sha512-l/3vX9GEz9Uz9z+9+WDHH6/O1GMSh8sa1kQpEHBjypx3kDjFT2a6SSxEzk3YQ/qIaUEHvGj9G+Xy3AszF6pCrA==
   dependencies:
     axios "^0.19.0"
     js-cookie "^2.1.3"

@@ -10,7 +10,7 @@ import { stripeAccountClearError } from '../../ducks/stripe.duck';
 import {
   LayoutSideNavigation,
   LayoutWrapperMain,
-  LayoutWrapperSideNav,
+  LayoutWrapperAccountSettingsSideNav,
   LayoutWrapperTopbar,
   LayoutWrapperFooter,
   Footer,
@@ -41,30 +41,6 @@ export const PayoutPreferencesPageComponent = props => {
     currentUserLoaded &&
     !!ensuredCurrentUser.stripeAccount &&
     !!ensuredCurrentUser.stripeAccount.id;
-
-  const tabs = [
-    {
-      text: <FormattedMessage id="PayoutPreferencesPage.contactDetailsTabTitle" />,
-      selected: false,
-      linkProps: {
-        name: 'ContactDetailsPage',
-      },
-    },
-    {
-      text: <FormattedMessage id="PayoutPreferencesPage.passwordTabTitle" />,
-      selected: false,
-      linkProps: {
-        name: 'PasswordChangePage',
-      },
-    },
-    {
-      text: <FormattedMessage id="PayoutPreferencesPage.paymentsTabTitle" />,
-      selected: true,
-      linkProps: {
-        name: 'PayoutPreferencesPage',
-      },
-    },
-  ];
 
   const title = intl.formatMessage({ id: 'PayoutPreferencesPage.title' });
   const formDisabled = !currentUserLoaded || stripeConnected || payoutDetailsSaved;
@@ -105,7 +81,7 @@ export const PayoutPreferencesPageComponent = props => {
           />
           <UserNav selectedPageName="PayoutPreferencesPage" />
         </LayoutWrapperTopbar>
-        <LayoutWrapperSideNav tabs={tabs} />
+        <LayoutWrapperAccountSettingsSideNav currentTab="PayoutPreferencesPage" />
         <LayoutWrapperMain>
           <div className={css.content}>
             <h1 className={css.title}>

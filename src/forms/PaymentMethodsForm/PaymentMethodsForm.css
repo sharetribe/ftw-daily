@@ -3,6 +3,7 @@
 .root {
   display: flex;
   flex-direction: column;
+  margin-top: 40px;
 }
 
 .card {
@@ -16,7 +17,7 @@
   border-bottom-color: var(--attentionColor);
 
   @media (--viewportMedium) {
-    height: 38px;
+    height: 35px;
   }
   @media (--viewportLarge) {
     height: 38px;
@@ -42,80 +43,26 @@
 }
 
 .paymentHeading {
-  margin: 0 0 12px 0;
+  margin: 0 0 14px 0;
   color: var(--matterColorAnti);
 
-  padding-top: 4px;
-  padding-bottom: 2px;
+  padding-top: 8px;
+  padding-bottom: 0px;
 
   @media (--viewportMedium) {
-    margin: 0 0 16px 0;
-    padding-top: 4px;
-    padding-bottom: 4px;
-  }
-}
-
-.paymentMethodSelector {
-  margin-bottom: 36px;
-
-  @media (--viewportMedium) {
-    margin-bottom: 40px;
-  }
-}
-
-.saveForLaterUse {
-  padding-top: 6px;
-  margin-bottom: 36px;
-
-  @media (--viewportMedium) {
-    padding-top: 8px;
-    margin-top: 0px;
-    margin-bottom: 48px;
-  }
-}
-
-.saveForLaterUseCheckbox {
-  display: inline-block;
-  padding: 2px 0 3px 0;
-
-  @media (--viewportMedium) {
-    padding: 1px 0 0px 0;
-  }
-}
-
-.saveForLaterUseLabel {
-  @apply --marketplaceH5FontStyles;
-  color: var(--matterColor);
-  margin-top: 3px;
-  margin-bottom: 0px;
-  cursor: pointer;
-}
-
-.saveForLaterUseLegalInfo {
-  @apply --marketplaceH5FontStyles;
-  color: var(--matterColorAnti);
-  display: inline-block;
-  padding: 0px 0 0px 26px;
-  margin-top: -2px;
-  margin-bottom: 2px;
-
-  @media (--viewportMedium) {
-    margin-top: -1px;
-    margin-bottom: 1px;
+    margin: 0 0 26px 0;
   }
 }
 
 .billingHeading {
-  margin: 0 0 12px 0;
+  margin: 0 0 14px 0;
   color: var(--matterColorAnti);
 
-  padding-top: 4px;
+  padding-top: 3px;
   padding-bottom: 2px;
 
   @media (--viewportMedium) {
-    margin: 0 0 24px 0;
-    padding-top: 4px;
-    padding-bottom: 4px;
+    margin: 0 0 26px 0;
   }
 }
 
@@ -123,22 +70,25 @@
   margin: 0;
 
   @media (--viewportMedium) {
-    margin-top: 0px;
     margin-bottom: 2px;
+  }
+  @media (--viewportLarge) {
+    margin-bottom: 4px;
   }
 }
 
 .messageHeading {
   color: var(--matterColorAnti);
-  margin: 36px 0 12px 0;
+  margin: 40px 0 14px 0;
 
   padding-top: 4px;
-  padding-bottom: 2px;
+  padding-bottom: 4px;
 
   @media (--viewportMedium) {
-    margin: 24px 0 24px 0;
-    padding-top: 4px;
-    padding-bottom: 4px;
+    margin: 41px 0 26px 0;
+  }
+  @media (--viewportLarge) {
+    margin: 40px 0 26px 0;
   }
 }
 
@@ -160,24 +110,17 @@
 
 .submitContainer {
   margin-top: auto;
-
+  margin-top: 48px;
   @media (--viewportLarge) {
     margin-top: 72px;
   }
 }
 
-.paymentInfo {
+.infoText {
   @apply --marketplaceH5FontStyles;
   color: var(--matterColorAnti);
-  text-align: center;
-  padding: 0 42px;
-  margin: 28px 0 0 0;
-
-  @media (--viewportLarge) {
-    /* TODO this is ugly overwrite to fix unconsistent font styles */
-    font-size: 14px;
-    padding: 0;
-  }
+  padding: 0;
+  margin: 14px 0 0 0;
 }
 
 .submitButton {
@@ -193,4 +136,30 @@
 
 .missingStripeKey {
   color: var(--failColor);
+}
+
+.paymentAddressField {
+  padding-top: 38px;
+}
+
+.formRow {
+  display: flex;
+  justify-content: space-between;
+  flex-shrink: 0;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.postalCode {
+  margin-top: 24px;
+  width: calc(40% - 9px);
+}
+
+.city {
+  margin-top: 24px;
+  width: calc(60% - 9px);
+}
+
+.field {
+  margin-top: 24px;
 }
