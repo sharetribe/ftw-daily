@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+## [v3.2.1] 2019-08-22
+
 - [fix] On `ListingPage` align avatar with the left side of the content and fix content width so
   that it aligns with the header image.
   [#1155](https://github.com/sharetribe/flex-template-web/pull/1155)
@@ -27,6 +29,8 @@ way to update this template, but currently, we follow a pattern:
   related to payment intents. [#1148](https://github.com/sharetribe/flex-template-web/pull/1148)
 - [add] Add new French translations related to payment intents. Also few small changes to en.json
   for consistency. [#1139](https://github.com/sharetribe/flex-template-web/pull/1139)
+
+[v3.2.1]: https://github.com/sharetribe/flex-template-web/compare/v3.2.0...v3.2.1
 
 ## [v3.2.0] 2019-07-08
 
