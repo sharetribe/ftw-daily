@@ -14,6 +14,10 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- Update dependecies: all the easily updateable minor and batch updates: array.prototype.find,
+  babel-jest, core-js, enzyme (et al.), express, helmet, inquirer, lodash, nodemon, raf, redux,
+  source-map-support [#1163](https://github.com/sharetribe/flex-template-web/pull/1163)
+
 ## [v3.3.0] 2019-08-22
 
 - [add] Saving payment card after payment or without initial payment. This release contains quite a
@@ -39,7 +43,7 @@ way to update this template, but currently, we follow a pattern:
 Read more from Flex docs:
 [How saving payment card works in FTW](https://www.sharetribe.com/docs/background/save-payment-card/)
 
-[v3.3.0]: https://github.com/sharetribe/flex-template-web/compare/v3.2.0...v3.2.1
+[v3.3.0]: https://github.com/sharetribe/flex-template-web/compare/v3.2.1...v3.3.0
 
 ## [v3.2.1] 2019-08-22
 
