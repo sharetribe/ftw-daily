@@ -36,8 +36,8 @@
   /* ================ Body font ================ */
 
   --marketplaceBodyFontStyles: {
-    font-family: 'Work Sans', Helvetica, Arial, sans-serif;
-    font-weight: var(--fontWeightMedium);
+    font-family: 'Open Sans', 'Work Sans', Helvetica, Arial, sans-serif;
+    font-weight: var(--fontWeightRegular);
     font-size: 18px;
     line-height: 24px;
     letter-spacing: -0.1px;
