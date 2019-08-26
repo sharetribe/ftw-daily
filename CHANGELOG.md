@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [change] Update `react-dates` from v18.5.0 ti v20.3.0
+  [#1171](https://github.com/sharetribe/flex-template-web/pull/1171)
 - [change] Update Prettier to v1.18.2
   [#1170](https://github.com/sharetribe/flex-template-web/pull/1170)
 - [change] Update `path-to-regexp` to v3.0.0
