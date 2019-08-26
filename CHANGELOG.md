@@ -14,7 +14,11 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
-- [fix] Small change to remove card tect on `SavedCardDetails` modal.
+- [change] Update `path-to-regexp` to v3.0.0
+  [#1169](https://github.com/sharetribe/flex-template-web/pull/1169)
+- [change] Update `sharetribe-scripts` to v3.1.1
+  [#1167](https://github.com/sharetribe/flex-template-web/pull/1167)
+- [fix] Small change to remove card text on `SavedCardDetails` modal.
   [#1166](https://github.com/sharetribe/flex-template-web/pull/1166)
 - [change] Update Sentry (@sentry/browser / @sentry/node) from v4.5.1 to v5.6.2
   [#1164](https://github.com/sharetribe/flex-template-web/pull/1164)
