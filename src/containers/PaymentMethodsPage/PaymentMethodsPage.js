@@ -133,9 +133,7 @@ const PaymentMethodsPageComponent = props => {
 
   // Get first and last name of the current user and use it in the StripePaymentForm to autofill the name field
   const userName = currentUserLoaded
-    ? `${ensuredCurrentUser.attributes.profile.firstName} ${
-        ensuredCurrentUser.attributes.profile.lastName
-      }`
+    ? `${ensuredCurrentUser.attributes.profile.firstName} ${ensuredCurrentUser.attributes.profile.lastName}`
     : null;
 
   const initalValuesForStripePayment = { name: userName };
