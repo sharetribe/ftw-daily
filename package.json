@@ -50,6 +50,7 @@
     "react-router-dom": "^5.0.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
     "sanitize.css": "^5.0.0",
     "seedrandom": "^2.4.4",
     "sharetribe-flex-sdk": "^1.4.1",

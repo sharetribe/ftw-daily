@@ -33,8 +33,6 @@ export class ProfileSettingsPageComponent extends Component {
   render() {
     const {
       currentUser,
-      currentUserType,
-      currentUserHasProviderAccess,
       image,
       onImageUpload,
       onUpdateProfile,
@@ -45,6 +43,7 @@ export class ProfileSettingsPageComponent extends Component {
       uploadInProgress,
       intl,
     } = this.props;
+
 
     const handleSubmit = values => {
       const { firstName, lastName, bio: rawBio } = values;
@@ -96,7 +95,7 @@ export class ProfileSettingsPageComponent extends Component {
         <LayoutSingleColumn>
           <LayoutWrapperTopbar>
             <TopbarContainer currentPage="ProfileSettingsPage" />
-            <UserNav selectedPageName="ProfileSettingsPage" hasProviderAccess={currentUserHasProviderAccess}/>
+            <UserNav selectedPageName="ProfileSettingsPage"/>
           </LayoutWrapperTopbar>
           <LayoutWrapperMain>
             <div className={css.content}>
@@ -156,7 +155,7 @@ ProfileSettingsPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { currentUser, currentUserType, currentUserHasProviderAccess } = state.user;
+  const { currentUser } = state.user;
   const {
     image,
     uploadImageError,
@@ -166,8 +165,6 @@ const mapStateToProps = state => {
   } = state.ProfileSettingsPage;
   return {
     currentUser,
-    currentUserType,
-    currentUserHasProviderAccess,
     image,
     scrollingDisabled: isScrollingDisabled(state),
     updateInProgress,

@@ -5,6 +5,7 @@ import { LISTING_STATE_DRAFT } from '../util/types';
 import * as log from '../util/log';
 import { authInfo } from './Auth.duck';
 import { stripeAccountCreateSuccess } from './stripe.duck.js';
+import { createSelector } from 'reselect';
 
 // ================ Action types ================ //
 
@@ -68,7 +69,7 @@ export default function reducer(state = initialState, action = {}) {
     case CURRENT_USER_SHOW_REQUEST:
       return { ...state, currentUserShowError: null };
     case CURRENT_USER_SHOW_SUCCESS:
-      return { ...state, currentUser: payload.user, currentUserType: payload.userType, currentUserHasProviderAccess: payload.hasProviderAccess };
+      return { ...state, currentUser: payload };
     case CURRENT_USER_SHOW_ERROR:
       // eslint-disable-next-line no-console
       console.error(payload);
@@ -150,17 +151,28 @@ export const verificationSendingInProgress = state => {
   return state.user.sendVerificationEmailInProgress;
 };
 
+export const currentUserHasProviderAccess = state => {
+  const { user } = state;
+  if (user.currentUser) {
+    return user.currentUser.attributes.profile.privateData.hasProviderAccess;
+  }
+  return false;
+}
+
+export const getCurrentUserType = state => {
+  const { user } = state;
+  if (user.currentUser) {
+    return user.currentUser.attributes.profile.publicData.memberType;
+  }
+  return 'member';
+}
 // ================ Action creators ================ //
 
 export const currentUserShowRequest = () => ({ type: CURRENT_USER_SHOW_REQUEST });
 
-export const currentUserShowSuccess = (user, usertype, hasprovideraccess) => ({
+export const currentUserShowSuccess = (user) => ({
   type: CURRENT_USER_SHOW_SUCCESS,
-  payload: { 
-    user: user,
-    userType: usertype,
-    hasProviderAccess: hasprovideraccess
-  },
+  payload: user ,
 });
 
 export const currentUserShowError = e => ({

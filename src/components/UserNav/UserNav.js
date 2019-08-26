@@ -1,13 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { ACCOUNT_SETTINGS_PAGES } from '../../routeConfiguration';
 import { LinkTabNavHorizontal } from '../../components';
 
+import { currentUserHasProviderAccess } from '../../ducks/user.duck';
+
 import css from './UserNav.css';
 
-const UserNav = props => {
+const UserNavComponent = props => {
   const { className, rootClassName, selectedPageName } = props;
   const classes = classNames(rootClassName || css.root, className);
 
@@ -55,18 +59,25 @@ const UserNav = props => {
   );
 };
 
-UserNav.defaultProps = {
+UserNavComponent.defaultProps = {
   className: null,
   rootClassName: null,
-  hasProviderAccess: false,
 };
 
 const { string } = PropTypes;
 
-UserNav.propTypes = {
+UserNavComponent.propTypes = {
   className: string,
   rootClassName: string,
   selectedPageName: string.isRequired,
 };
+
+const mapStateToProps = state => {
+  return {
+    hasProviderAccess: currentUserHasProviderAccess(state),
+  }
+}
+
+const UserNav = connect(mapStateToProps)(UserNavComponent);
 
 export default UserNav;
