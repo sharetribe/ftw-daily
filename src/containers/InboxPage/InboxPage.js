@@ -42,6 +42,7 @@ import config from '../../config';
 
 import { loadData } from './InboxPage.duck';
 import css from './InboxPage.css';
+import { currentUserHasProviderAccess } from '../../ducks/user.duck';
 
 const { arrayOf, bool, number, oneOf, shape, string } = PropTypes;
 
@@ -277,6 +278,7 @@ export const InboxPageComponent = props => {
   const {
     unitType,
     currentUser,
+    hasProviderAccess,
     fetchInProgress,
     fetchOrdersOrSalesError,
     intl,
@@ -371,6 +373,10 @@ export const InboxPageComponent = props => {
       },
     },
   ];
+
+  if(!hasProviderAccess) {
+    tabs.pop()
+  }
   const nav = <TabNav rootClassName={css.tabs} tabRootClassName={css.tab} tabs={tabs} />;
 
   return (
@@ -445,6 +451,7 @@ const mapStateToProps = state => {
   const { currentUser, currentUserNotificationCount: providerNotificationCount } = state.user;
   return {
     currentUser,
+    hasProviderAccess: currentUserHasProviderAccess(state),
     fetchInProgress,
     fetchOrdersOrSalesError,
     pagination,

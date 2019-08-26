@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FormattedMessage, intlShape } from 'react-intl';
 import classNames from 'classnames';
@@ -16,15 +17,18 @@ import {
 } from '../../components';
 import { TopbarSearchForm } from '../../forms';
 
+import { currentUserHasProviderAccess } from '../../ducks/user.duck';
+
 import css from './TopbarDesktop.css';
 
-const TopbarDesktop = props => {
+const TopbarDesktopComponent = props => {
   const {
     className,
     currentUser,
     currentPage,
     rootClassName,
     currentUserHasListings,
+    hasProviderAccess,
     notificationCount,
     intl,
     isAuthenticated,
@@ -59,7 +63,7 @@ const TopbarDesktop = props => {
     <NamedLink
       className={css.inboxLink}
       name="InboxPage"
-      params={{ tab: currentUserHasListings ? 'sales' : 'orders' }}
+      params={{ tab: (currentUserHasListings && hasProviderAccess) ? 'sales' : 'orders' }}
     >
       <span className={css.inbox}>
         <FormattedMessage id="TopbarDesktop.inbox" />
@@ -176,7 +180,7 @@ const TopbarDesktop = props => {
 
 const { bool, func, object, number, string } = PropTypes;
 
-TopbarDesktop.defaultProps = {
+TopbarDesktopComponent.defaultProps = {
   rootClassName: null,
   className: null,
   currentUser: null,
@@ -185,7 +189,7 @@ TopbarDesktop.defaultProps = {
   initialSearchFormValues: {},
 };
 
-TopbarDesktop.propTypes = {
+TopbarDesktopComponent.propTypes = {
   rootClassName: string,
   className: string,
   currentUserHasListings: bool.isRequired,
@@ -199,4 +203,11 @@ TopbarDesktop.propTypes = {
   intl: intlShape.isRequired,
 };
 
+const mapStateToProps = state => {
+  return {
+    hasProviderAccess: currentUserHasProviderAccess(state),
+  }
+}
+
+const TopbarDesktop = connect(mapStateToProps)(TopbarDesktopComponent);
 export default TopbarDesktop;
