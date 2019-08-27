@@ -7,6 +7,8 @@ import { Form, LocationAutocompleteInput } from '../../components';
 
 import css from './TopbarSearchForm.css';
 
+const identity = v => v;
+
 class TopbarSearchFormComponent extends Component {
   constructor(props) {
     super(props);
@@ -45,7 +47,7 @@ class TopbarSearchFormComponent extends Component {
             <Form className={classes} onSubmit={preventFormSubmit}>
               <Field
                 name="location"
-                format={null}
+                format={identity}
                 render={({ input, meta }) => {
                   const { onChange, ...restInput } = input;
 

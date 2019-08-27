@@ -10,9 +10,9 @@ const formName = 'Styleguide.FieldReviewRating.Form';
 const FormComponent = props => (
   <FinalForm
     {...props}
-    form={formName}
+    formId={formName}
     render={fieldRenderProps => {
-      const { form, handleSubmit, onChange, invalid, pristine, submitting } = fieldRenderProps;
+      const { formId, handleSubmit, onChange, invalid, pristine, submitting } = fieldRenderProps;
       const required = validators.required('This field is required');
       const submitDisabled = invalid || pristine || submitting;
 
@@ -25,7 +25,7 @@ const FormComponent = props => (
         >
           <FormSpy onChange={onChange} />
           <FieldReviewRating
-            id={`${form}.rate1`}
+            id={`${formId}.rate1`}
             name="rating"
             label="Rate your experience"
             validate={required}

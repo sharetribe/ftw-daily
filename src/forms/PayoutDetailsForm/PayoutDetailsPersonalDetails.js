@@ -9,6 +9,8 @@ import css from './PayoutDetailsForm.css';
 
 const MIN_STRIPE_ACCOUNT_AGE = 18;
 
+const identity = v => v;
+
 const PayoutDetailsPersonalDetails = props => {
   const {
     intl,
@@ -246,7 +248,7 @@ const PayoutDetailsPersonalDetails = props => {
           label={birthdayLabel}
           labelForMonth={birthdayLabelMonth}
           labelForYear={birthdayLabelYear}
-          format={null}
+          format={identity}
           valueFromForm={values.birthDate}
           validate={validators.composeValidators(birthdayRequired, birthdayMinAge)}
         />

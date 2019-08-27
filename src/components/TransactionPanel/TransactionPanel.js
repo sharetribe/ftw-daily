@@ -395,7 +395,7 @@ export class TransactionPanelComponent extends Component {
             />
             {showSendMessageForm ? (
               <SendMessageForm
-                form={this.sendMessageFormName}
+                formId={this.sendMessageFormName}
                 rootClassName={css.sendMessageForm}
                 messagePlaceholder={sendMessagePlaceholder}
                 inProgress={sendMessageInProgress}

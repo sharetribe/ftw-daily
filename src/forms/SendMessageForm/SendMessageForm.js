@@ -66,6 +66,7 @@ class SendMessageFormComponent extends Component {
             sendMessageError,
             invalid,
             form,
+            formId,
           } = formRenderProps;
 
           const classes = classNames(rootClassName || css.root, className);
@@ -76,7 +77,7 @@ class SendMessageFormComponent extends Component {
               <FieldTextInput
                 inputRootClass={css.textarea}
                 type="textarea"
-                id="message"
+                id={formId ? `${formId}.message` : 'message'}
                 name="message"
                 placeholder={messagePlaceholder}
                 onFocus={this.handleFocus}

@@ -8,6 +8,8 @@ import { LINE_ITEM_NIGHT, LINE_ITEM_DAY } from '../../util/types';
 import { createTimeSlots } from '../../util/test-data';
 import FieldDateRangeInput from './FieldDateRangeInput';
 
+const identity = v => v;
+
 const createAvailableTimeSlots = (dayCount, availableDayCount) => {
   const slots = createTimeSlots(new Date(), dayCount);
 
@@ -70,7 +72,7 @@ export const Empty = {
       endDatePlaceholderText: moment()
         .add(1, 'days')
         .format('ddd, MMMM D'),
-      format: null,
+      format: identity,
       validate: composeValidators(
         required('Required'),
         bookingDatesRequired('Start date is not valid', 'End date is not valid')
@@ -101,12 +103,12 @@ export const WithAvailableTimeSlotsNighlyBooking = {
       startDateId: 'WithAvailableTimeSlotsDateRangeNightly.bookingStartDate',
       startDateLabel: 'Start date',
       startDatePlaceholderText: moment().format('ddd, MMMM D'),
-      endDateId: 'WithAvailableTimeSlotsDateRangeInputForm.bookingEndDate',
+      endDateId: 'WithAvailableTimeSlotsDateRangeNightly.bookingEndDate',
       endDateLabel: 'End date',
       endDatePlaceholderText: moment()
         .add(1, 'days')
         .format('ddd, MMMM D'),
-      format: null,
+      format: identity,
       timeSlots: createAvailableTimeSlots(90, 60),
       validate: composeValidators(
         required('Required'),
@@ -137,12 +139,12 @@ export const WithAvailableTimeSlotsDailyBooking = {
       startDateId: 'WithAvailableTimeSlotsDateRangeDaily.bookingStartDate',
       startDateLabel: 'Start date',
       startDatePlaceholderText: moment().format('ddd, MMMM D'),
-      endDateId: 'WithAvailableTimeSlotsDateRangeInputForm.bookingEndDate',
+      endDateId: 'WithAvailableTimeSlotsDateRangeDaily.bookingEndDate',
       endDateLabel: 'End date',
       endDatePlaceholderText: moment()
         .add(1, 'days')
         .format('ddd, MMMM D'),
-      format: null,
+      format: identity,
       timeSlots: createAvailableTimeSlots(90, 60),
       validate: composeValidators(
         required('Required'),

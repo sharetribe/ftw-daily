@@ -303,6 +303,7 @@ EditListingWizard.defaultProps = {
   className: null,
   rootClassName: null,
   listing: null,
+  updateInProgress: false,
 };
 
 EditListingWizard.propTypes = {
@@ -340,6 +341,7 @@ EditListingWizard.propTypes = {
   onPayoutDetailsFormChange: func.isRequired,
   onPayoutDetailsSubmit: func.isRequired,
   onManageDisableScrolling: func.isRequired,
+  updateInProgress: bool,
 
   // from withViewport
   viewport: shape({

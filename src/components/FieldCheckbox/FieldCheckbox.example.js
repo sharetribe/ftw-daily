@@ -8,7 +8,7 @@ const formName = 'Styleguide.FieldCheckbox.Form';
 const FormComponent = props => (
   <FinalForm
     {...props}
-    form={formName}
+    formId={formName}
     render={fieldRenderProps => {
       const { form, handleSubmit, onChange, invalid, pristine, submitting } = fieldRenderProps;
 
