@@ -79,7 +79,7 @@ export class BookingDatesFormComponent extends Component {
           const {
             endDatePlaceholder,
             startDatePlaceholder,
-            form,
+            formId,
             handleSubmit,
             intl,
             isOwnListing,
@@ -161,10 +161,10 @@ export class BookingDatesFormComponent extends Component {
                 className={css.bookingDates}
                 name="bookingDates"
                 unitType={unitType}
-                startDateId={`${form}.bookingStartDate`}
+                startDateId={`${formId}.bookingStartDate`}
                 startDateLabel={bookingStartLabel}
                 startDatePlaceholderText={startDatePlaceholderText}
-                endDateId={`${form}.bookingEndDate`}
+                endDateId={`${formId}.bookingEndDate`}
                 endDateLabel={bookingEndLabel}
                 endDatePlaceholderText={endDatePlaceholderText}
                 focusedInput={this.state.focusedInput}
