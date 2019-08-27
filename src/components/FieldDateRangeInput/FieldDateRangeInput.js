@@ -117,7 +117,7 @@ class FieldDateRangeInputComponent extends Component {
       ) : null;
 
     // eslint-disable-next-line no-unused-vars
-    const { onBlur, onFocus, ...restOfInput } = input;
+    const { onBlur, onFocus, type, ...restOfInput } = input;
     const inputProps = {
       unitType,
       onBlur: this.handleBlur,

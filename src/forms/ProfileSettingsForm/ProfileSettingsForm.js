@@ -198,16 +198,8 @@ class ProfileSettingsFormComponent extends Component {
                   disabled={uploadInProgress}
                 >
                   {fieldProps => {
-                    const {
-                      accept,
-                      id,
-                      input,
-                      label,
-                      type,
-                      disabled,
-                      uploadImageError,
-                    } = fieldProps;
-                    const { name } = input;
+                    const { accept, id, input, label, disabled, uploadImageError } = fieldProps;
+                    const { name, type } = input;
                     const onChange = e => {
                       const file = e.target.files[0];
                       form.change(`profileImage`, file);
