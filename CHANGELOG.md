@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [change] Update `inquirer` from v6.5.0 ti v7.0.0
+  [#1174](https://github.com/sharetribe/flex-template-web/pull/1174)
 - [change] Update final-form, final-form-arrays, react-final-form and react-final-form-arrays. This
   forced to make some code changes:
 
