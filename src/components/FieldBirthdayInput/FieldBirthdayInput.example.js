@@ -43,7 +43,7 @@ export const Empty = {
     onChange: formState => {
       const birthday = formState.values.birthday;
       if (birthday) {
-        console.log('birthday changed to:', birthday.toUTCString());
+        console.log('birthday changed to:', birthday);
       }
     },
     onSubmit: values => {
