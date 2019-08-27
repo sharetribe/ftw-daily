@@ -103,7 +103,7 @@ export const WithAvailableTimeSlotsNighlyBooking = {
       startDateId: 'WithAvailableTimeSlotsDateRangeNightly.bookingStartDate',
       startDateLabel: 'Start date',
       startDatePlaceholderText: moment().format('ddd, MMMM D'),
-      endDateId: 'WithAvailableTimeSlotsDateRangeInputForm.bookingEndDate',
+      endDateId: 'WithAvailableTimeSlotsDateRangeNightly.bookingEndDate',
       endDateLabel: 'End date',
       endDatePlaceholderText: moment()
         .add(1, 'days')
@@ -139,7 +139,7 @@ export const WithAvailableTimeSlotsDailyBooking = {
       startDateId: 'WithAvailableTimeSlotsDateRangeDaily.bookingStartDate',
       startDateLabel: 'Start date',
       startDatePlaceholderText: moment().format('ddd, MMMM D'),
-      endDateId: 'WithAvailableTimeSlotsDateRangeInputForm.bookingEndDate',
+      endDateId: 'WithAvailableTimeSlotsDateRangeDaily.bookingEndDate',
       endDateLabel: 'End date',
       endDatePlaceholderText: moment()
         .add(1, 'days')
