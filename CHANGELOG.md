@@ -14,7 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
-- [change] Update `inquirer` from v6.5.0 ti v7.0.0
+- [change] Update `seedrandom` from v2.4.4 to v3.0.3
+  [#1174](https://github.com/sharetribe/flex-template-web/pull/1174)
+- [change] Update `inquirer` from v6.5.0 to v7.0.0
   [#1174](https://github.com/sharetribe/flex-template-web/pull/1174)
 - [change] Update final-form, final-form-arrays, react-final-form and react-final-form-arrays. This
   forced to make some code changes:
@@ -29,7 +31,7 @@ way to update this template, but currently, we follow a pattern:
 
   [#1173](https://github.com/sharetribe/flex-template-web/pull/1173)
 
-- [change] Update `react-dates` from v18.5.0 ti v20.3.0
+- [change] Update `react-dates` from v18.5.0 to v20.3.0
   [#1171](https://github.com/sharetribe/flex-template-web/pull/1171)
 - [change] Update Prettier to v1.18.2
   [#1170](https://github.com/sharetribe/flex-template-web/pull/1170)
