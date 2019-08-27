@@ -25,10 +25,10 @@ class ProfileSettingsFormComponent extends Component {
     this.submittedValues = {};
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     // Upload delay is additional time window where Avatar is added to the DOM,
     // but not yet visible (time to load image URL from srcset)
-    if (this.props.uploadInProgress && !nextProps.uploadInProgress) {
+    if (prevProps.uploadInProgress && !this.props.uploadInProgress) {
       this.setState({ uploadDelay: true });
       this.uploadDelayTimeoutId = window.setTimeout(() => {
         this.setState({ uploadDelay: false });
