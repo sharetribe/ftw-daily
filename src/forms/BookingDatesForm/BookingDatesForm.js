@@ -14,6 +14,8 @@ import EstimatedBreakdownMaybe from './EstimatedBreakdownMaybe';
 
 import css from './BookingDatesForm.css';
 
+const identity = v => v;
+
 export class BookingDatesFormComponent extends Component {
   constructor(props) {
     super(props);
@@ -167,7 +169,7 @@ export class BookingDatesFormComponent extends Component {
                 endDatePlaceholderText={endDatePlaceholderText}
                 focusedInput={this.state.focusedInput}
                 onFocusedInputChange={this.onFocusedInputChange}
-                format={null}
+                format={identity}
                 timeSlots={timeSlots}
                 useMobileMargins
                 validate={composeValidators(

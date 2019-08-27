@@ -7,6 +7,8 @@ import { required, bookingDateRequired, composeValidators } from '../../util/val
 import { createTimeSlots } from '../../util/test-data';
 import FieldDateInput from './FieldDateInput';
 
+const identity = v => v;
+
 const createAvailableTimeSlots = (dayCount, availableDayCount) => {
   const slots = createTimeSlots(new Date(), dayCount);
   const availableSlotIndices = Array.from({ length: availableDayCount }, () =>
@@ -64,7 +66,7 @@ export const Empty = {
       id: `EmptyDateInputForm.bookingDate`,
       label: 'Date',
       placeholderText: moment().format('ddd, MMMM D'),
-      format: null,
+      format: identity,
       validate: composeValidators(required('Required'), bookingDateRequired('Date is not valid')),
       onBlur: () => console.log('onBlur called from DateInput props.'),
       onFocus: () => console.log('onFocus called from DateInput props.'),
@@ -91,7 +93,7 @@ export const WithAvailableTimeSlots = {
       id: `AvailableTimeSlotsDateInputForm.bookingDate`,
       label: 'Date',
       placeholderText: moment().format('ddd, MMMM D'),
-      format: null,
+      format: identity,
       timeSlots: createAvailableTimeSlots(90, 60),
       validate: composeValidators(required('Required'), bookingDateRequired('Date is not valid')),
       onBlur: () => console.log('onBlur called from DateInput props.'),

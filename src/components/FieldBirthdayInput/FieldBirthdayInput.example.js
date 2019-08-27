@@ -4,6 +4,8 @@ import { Form as FinalForm, FormSpy } from 'react-final-form';
 import * as validators from '../../util/validators';
 import FieldBirthdayInput from './FieldBirthdayInput';
 
+const identity = v => v;
+
 const FormComponent = props => (
   <FinalForm
     {...props}
@@ -25,7 +27,7 @@ const FormComponent = props => (
             id={`birthday`}
             name="birthday"
             label="Date of birth"
-            format={null}
+            format={identity}
             valueFromForm={values.birthDate}
             validate={validators.composeValidators(required, minAgeRequired)}
           />
