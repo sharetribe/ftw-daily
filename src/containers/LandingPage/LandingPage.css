@@ -49,8 +49,7 @@
   /*max-width: 1500px;*/
   margin: auto;
 
-  border-right: 0;
-  border-left: 0;
+  border: 0;
   border-radius: 0;
 
   @media (--viewportMedium) {
