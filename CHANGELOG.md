@@ -14,6 +14,19 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [change] Update final-form, final-form-arrays, react-final-form and react-final-form-arrays. This
+  forced to make some code changes:
+
+  - Old recommendation of by-passing default field formatting or parsin isn't accepted anymore
+    - `format={null}` => use identity function instead: `format={v => v}`
+    - `parse={null}` => use identity function instead: `parse={v => v}`
+  - Final Form passes input props (name, value, onChange, onBlur, etc. ) grouped inside input key
+    - those props now include `type` attribute too.
+  - We had old form naming pattern with prop 'form', which now conflicted with updated Final Form
+    (The 'form' prop was used when Redux-Form was the form library)
+
+  [#1173](https://github.com/sharetribe/flex-template-web/pull/1173)
+
 - [change] Update `react-dates` from v18.5.0 ti v20.3.0
   [#1171](https://github.com/sharetribe/flex-template-web/pull/1171)
 - [change] Update Prettier to v1.18.2
