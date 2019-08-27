@@ -31,10 +31,10 @@ export class ModalComponent extends Component {
     document.body.addEventListener('keyup', this.handleBodyKeyUp);
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { id, isOpen, onManageDisableScrolling } = this.props;
-    if (nextProps.isOpen !== isOpen) {
-      onManageDisableScrolling(id, nextProps.isOpen);
+  componentDidUpdate(prevProps) {
+    const { id, isOpen, onManageDisableScrolling } = prevProps;
+    if (this.props.isOpen !== isOpen) {
+      onManageDisableScrolling(id, this.props.isOpen);
     }
   }
 
