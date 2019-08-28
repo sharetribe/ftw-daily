@@ -190,6 +190,8 @@ const availabilityPlan = shape({
   ),
 });
 
+propTypes.availabilityPlan = availabilityPlan;
+
 const ownListingAttributes = shape({
   title: string.isRequired,
   description: string,
