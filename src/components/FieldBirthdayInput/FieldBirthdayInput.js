@@ -259,6 +259,7 @@ const FieldBirthdayInputComponent = props => {
     disabled,
     input,
     meta,
+    valueFromForm,
   } = props;
   const { valid, invalid, touched, error } = meta;
 
@@ -287,6 +288,7 @@ const FieldBirthdayInputComponent = props => {
     monthLabel,
     yearLabel,
     disabled,
+    valueFromForm,
     ...input,
   };
   const classes = classNames(rootClassName || css.fieldRoot, className);
