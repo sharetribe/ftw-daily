@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [change] Use `sanitize.css` from own file instead of npm package because updating it accidentally
+  might break the UI. [#1177](https://github.com/sharetribe/flex-template-web/pull/1177)
 - [fix] Change app.test.js after `react-redux` update
   [#1178](https://github.com/sharetribe/flex-template-web/pull/1178)
 - [change] Update `react-redux`: v5.1.1 -> v7.1.1
