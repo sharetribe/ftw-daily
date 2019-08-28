@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [change] Migrate from `react-helmet` to `react-helmet-async`
+  [#1179](https://github.com/sharetribe/flex-template-web/pull/1179)
 - [change] Use `sanitize.css` from own file instead of npm package because updating it accidentally
   might break the UI. [#1177](https://github.com/sharetribe/flex-template-web/pull/1177)
 - [fix] Change app.test.js after `react-redux` update
