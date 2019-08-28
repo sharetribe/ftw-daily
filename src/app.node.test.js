@@ -5,17 +5,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import forEach from 'lodash/forEach';
 import { ClientApp, ServerApp } from './app';
 import configureStore from './store';
 
 const render = (url, context) => {
   const store = configureStore();
+
+  const helmetContext = {};
+
   const body = ReactDOMServer.renderToString(
-    <ServerApp url={url} context={context} store={store} />
+    <ServerApp url={url} context={context} helmetContext={helmetContext} store={store} />
   );
-  const head = Helmet.peek();
+
+  const { helmet: head } = helmetContext;
   return { head, body };
 };
 
