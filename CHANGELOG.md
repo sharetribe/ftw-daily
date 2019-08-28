@@ -14,8 +14,12 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] Change app.test.js after `react-redux` update
+  [#1178](https://github.com/sharetribe/flex-template-web/pull/1178)
+- [change] Update `react-redux`: v5.1.1 -> v7.1.1
+  [#1176](https://github.com/sharetribe/flex-template-web/pull/1176)
 - [change] Update `seedrandom` from v2.4.4 to v3.0.3
-  [#1174](https://github.com/sharetribe/flex-template-web/pull/1174)
+  [#1175](https://github.com/sharetribe/flex-template-web/pull/1175)
 - [change] Update `inquirer` from v6.5.0 to v7.0.0
   [#1174](https://github.com/sharetribe/flex-template-web/pull/1174)
 - [change] Update final-form, final-form-arrays, react-final-form and react-final-form-arrays. This
