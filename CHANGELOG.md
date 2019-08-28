@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] Bug fix: valueFromForm prop wasn't passed through different subcomponents.
+  [#1182](https://github.com/sharetribe/flex-template-web/pull/1182)
 - [add] Update German and French translations.
   [#1184](https://github.com/sharetribe/flex-template-web/pull/1184)
 - [change] Migrate from `react-helmet` to `react-helmet-async`
