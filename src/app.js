@@ -12,7 +12,7 @@ import { Provider } from 'react-redux';
 import difference from 'lodash/difference';
 import mapValues from 'lodash/mapValues';
 import moment from 'moment';
-import { IntlProvider } from 'react-intl';
+import { IntlProvider } from './util/reactIntl';
 import configureStore from './store';
 import routeConfiguration from './routeConfiguration';
 import Routes from './Routes';
@@ -86,7 +86,7 @@ export const ClientApp = props => {
   const { store } = props;
   setupLocale();
   return (
-    <IntlProvider locale={config.locale} messages={localeMessages}>
+    <IntlProvider locale={config.locale} messages={localeMessages} textComponent="span">
       <Provider store={store}>
         <HelmetProvider>
           <BrowserRouter>
@@ -107,7 +107,7 @@ export const ServerApp = props => {
   setupLocale();
   HelmetProvider.canUseDOM = false;
   return (
-    <IntlProvider locale={config.locale} messages={localeMessages}>
+    <IntlProvider locale={config.locale} messages={localeMessages} textComponent="span">
       <Provider store={store}>
         <HelmetProvider context={helmetContext}>
           <StaticRouter location={url} context={context}>
