@@ -1,6 +1,6 @@
 import React from 'react';
 import { bool, string } from 'prop-types';
-import { intlShape } from 'react-intl';
+import { intlShape } from '../../util/reactIntl';
 import * as validators from '../../util/validators';
 import { FieldSelect, FieldTextInput } from '../../components';
 

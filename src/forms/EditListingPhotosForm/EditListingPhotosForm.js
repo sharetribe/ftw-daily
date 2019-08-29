@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { array, bool, func, shape, string } from 'prop-types';
 import { compose } from 'redux';
 import { Form as FinalForm, Field } from 'react-final-form';
-import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
+import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 import isEqual from 'lodash/isEqual';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';

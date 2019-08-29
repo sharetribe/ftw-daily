@@ -2,7 +2,7 @@ import React from 'react';
 import { bool, func, object, shape, string, oneOf } from 'prop-types';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
-import { intlShape, injectIntl } from 'react-intl';
+import { intlShape, injectIntl } from '../../util/reactIntl';
 import { connect } from 'react-redux';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import {

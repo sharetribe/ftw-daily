@@ -1,7 +1,7 @@
 import React from 'react';
 import { bool, object, shape } from 'prop-types';
 import { compose } from 'redux';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
 import { propTypes } from '../../util/types';

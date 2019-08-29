@@ -5,7 +5,7 @@
 import React from 'react';
 import { node, number, string, shape } from 'prop-types';
 import { compose } from 'redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from '../../util/reactIntl';
 import { withViewport } from '../../util/contextHelpers';
 import { LayoutWrapperSideNav } from '../../components';
 

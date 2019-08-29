@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { func, instanceOf, object, node, string, bool } from 'prop-types';
 import { Field } from 'react-final-form';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, intlShape } from '../../util/reactIntl';
 import classNames from 'classnames';
 import range from 'lodash/range';
 import { ValidationError } from '../../components';
