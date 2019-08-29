@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [change] Update helmet (v3.20.0 > v3.20.1).
+  [#1186](https://github.com/sharetribe/flex-template-web/pull/1186)
 - [fix] Lodash vulnerability: enforce newer version for react-google-maps and react-dates
   [#1188](https://github.com/sharetribe/flex-template-web/pull/1188)
 - [change] Update `React`, `react-test-renderer` and `react-dom` to 16.9.0. After these updates old
