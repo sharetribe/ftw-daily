@@ -14,6 +14,10 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [change] Update `React`, `react-test-renderer` and `react-dom` to 16.9.0. After these updates old
+  lifecycle methods `componentWillMount`, `componentWillUpdate` and `componentWillUpdate` will cause
+  deprecation warnings. Check the updated components from the PR
+  [#1172](https://github.com/sharetribe/flex-template-web/pull/1172)
 - [fix] ProfileSettingsForm: clear correct timeout.
   [#1185](https://github.com/sharetribe/flex-template-web/pull/1185)
 - [fix] `availabilityPlan` prop in `EditListingAvailabilityForm` was missing.
