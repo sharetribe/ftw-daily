@@ -84,6 +84,7 @@ EditListingAvailabilityFormComponent.propTypes = {
   updateError: propTypes.error,
   updateInProgress: bool.isRequired,
   availability: object.isRequired,
+  availabilityPlan: propTypes.availabilityPlan.isRequired,
 };
 
 export default compose(injectIntl)(EditListingAvailabilityFormComponent);

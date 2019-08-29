@@ -15,7 +15,7 @@ import {
   ensureAvailabilityException,
   ensureDayAvailabilityPlan,
 } from '../../util/data';
-import { DAYS_OF_WEEK } from '../../util/types';
+import { DAYS_OF_WEEK, propTypes } from '../../util/types';
 import { monthIdString, monthIdStringInUTC } from '../../util/dates';
 import { IconArrowHead, IconSpinner } from '../../components';
 
@@ -510,6 +510,7 @@ ManageAvailabilityCalendar.propTypes = {
     onDeleteAvailabilityException: func.isRequired,
     onCreateAvailabilityException: func.isRequired,
   }).isRequired,
+  availabilityPlan: propTypes.availabilityPlan.isRequired,
   onMonthChanged: func,
 };
 
