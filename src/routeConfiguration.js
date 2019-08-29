@@ -22,6 +22,7 @@ import {
   StyleguidePage,
   TermsOfServicePage,
   TransactionPage,
+  OperatorAuthPage,
 } from './containers';
 
 // routeConfiguration needs to initialize containers first
@@ -158,7 +159,8 @@ const routeConfiguration = () => {
     {
       path: '/signup',
       name: 'SignupPage',
-      component: props => <AuthenticationPage {...props} tab="signup" />,
+      // component: props => <AuthenticationPage {...props} tab="signup" />,
+      component: props => <OperatorAuthPage {...props} tab="signup" />,
     },
     {
       path: '/recover-password',
