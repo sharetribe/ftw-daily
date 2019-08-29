@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] ProfileSettingsForm: clear correct timeout.
+  [#1185](https://github.com/sharetribe/flex-template-web/pull/1185)
 - [fix] `availabilityPlan` prop in `EditListingAvailabilityForm` was missing.
   [#1183](https://github.com/sharetribe/flex-template-web/pull/1183)
 - [fix] Bug fix: valueFromForm prop wasn't passed through different subcomponents.

@@ -37,7 +37,7 @@ class ProfileSettingsFormComponent extends Component {
   }
 
   componentWillUnmount() {
-    window.clearTimeout(this.blurTimeoutId);
+    window.clearTimeout(this.uploadDelayTimeoutId);
   }
 
   render() {
