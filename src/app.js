@@ -6,7 +6,7 @@ import ReactDOMServer from 'react-dom/server';
 // https://github.com/airbnb/react-dates#initialize
 // NOTE: Initializing it here will initialize it also for app.test.js
 import 'react-dates/initialize';
-import Helmet from 'react-helmet';
+import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter, StaticRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import difference from 'lodash/difference';
@@ -93,9 +93,11 @@ export const ClientApp = props => {
   return (
     <IntlProvider locale={config.locale} messages={localeMessages}>
       <Provider store={store}>
-        <BrowserRouter>
-          <Routes routes={routeConfiguration()} />
-        </BrowserRouter>
+        <HelmetProvider>
+          <BrowserRouter>
+            <Routes routes={routeConfiguration()} />
+          </BrowserRouter>
+        </HelmetProvider>
       </Provider>
     </IntlProvider>
   );
@@ -106,14 +108,17 @@ const { any, string } = PropTypes;
 ClientApp.propTypes = { store: any.isRequired };
 
 export const ServerApp = props => {
-  const { url, context, store } = props;
+  const { url, context, helmetContext, store } = props;
   setupLocale();
+  HelmetProvider.canUseDOM = false;
   return (
     <IntlProvider locale={config.locale} messages={localeMessages}>
       <Provider store={store}>
-        <StaticRouter location={url} context={context}>
-          <Routes routes={routeConfiguration()} />
-        </StaticRouter>
+        <HelmetProvider context={helmetContext}>
+          <StaticRouter location={url} context={context}>
+            <Routes routes={routeConfiguration()} />
+          </StaticRouter>
+        </HelmetProvider>
       </Provider>
     </IntlProvider>
   );
@@ -137,9 +142,11 @@ export const renderApp = (url, serverContext, preloadedState) => {
   // shouldn't do any SDK calls in the (server) rendering lifecycle.
   const store = configureStore(preloadedState);
 
+  const helmetContext = {};
+
   const body = ReactDOMServer.renderToString(
-    <ServerApp url={url} context={serverContext} store={store} />
+    <ServerApp url={url} context={serverContext} helmetContext={helmetContext} store={store} />
   );
-  const head = Helmet.renderStatic();
+  const { helmet: head } = helmetContext;
   return { head, body };
 };

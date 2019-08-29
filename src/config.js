@@ -50,7 +50,7 @@ const enableAvailability = process.env.REACT_APP_AVAILABILITY_ENABLED === 'true'
 // This is limited due to Stripe holding funds up to 90 days from the
 // moment they are charged. Also note that available time slots can only
 // be fetched for 180 days in the future.
-const dayCountAvailableForBooking = 90;
+const dayCountAvailableForBooking = 45;
 
 // To pass environment variables to the client app in the build
 // script, react-scripts (and the sharetribe-scripts fork of
@@ -68,7 +68,7 @@ const currencyConfig = currencyConfiguration(currency);
 
 // Listing minimum price in currency sub units, e.g. cents.
 // 0 means no restriction to the price
-const listingMinimumPriceSubUnits = 300;
+const listingMinimumPriceSubUnits = 30000;
 
 // Sentry DSN (Data Source Name), a client key for authenticating calls to Sentry
 const sentryDsn = process.env.REACT_APP_SENTRY_DSN;
@@ -122,7 +122,7 @@ const maps = {
 
     // Distance in meters for calculating the bounding box around the
     // current location.
-    currentLocationBoundsDistance: 1000,
+    currentLocationBoundsDistance: 3000,
 
     // Example location can be edited in the
     // `default-location-searches.js` file.

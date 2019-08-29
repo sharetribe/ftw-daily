@@ -244,7 +244,6 @@ class TopbarComponent extends Component {
         >
           <div className={css.searchContainer}>
             <TopbarSearchForm
-              form="TopbarSearchForm"
               onSubmit={this.handleSubmit}
               initialValues={initialSearchFormValues}
               isMobile

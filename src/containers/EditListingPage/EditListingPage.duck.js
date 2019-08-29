@@ -208,8 +208,15 @@ export default function reducer(state = initialState, action = {}) {
       };
     case PUBLISH_LISTING_SUCCESS:
       return {
+        ...state,
         redirectToListing: true,
         publishingListing: null,
+        createListingDraftError: null,
+        updateListingError: null,
+        showListingsError: null,
+        uploadImageError: null,
+        createListingDraftInProgress: false,
+        updateInProgress: false,
       };
     case PUBLISH_LISTING_ERROR: {
       // eslint-disable-next-line no-console

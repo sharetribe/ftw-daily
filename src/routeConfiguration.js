@@ -17,6 +17,7 @@ import {
   PasswordRecoveryPage,
   PasswordResetPage,
   PayoutPreferencesPage,
+  PaymentMethodsPage,
   PrivacyPolicyPage,
   ProfilePage,
   ProfileSettingsPage,
@@ -36,6 +37,7 @@ export const ACCOUNT_SETTINGS_PAGES = [
   'ContactDetailsPage',
   'PasswordChangePage',
   'PayoutPreferencesPage',
+  'PaymentMethodsPage',
 ];
 
 // https://en.wikipedia.org/wiki/Universally_unique_identifier#Nil_UUID
@@ -269,6 +271,14 @@ const routeConfiguration = () => {
       authPage: 'LoginPage',
       component: props => <PayoutPreferencesPage {...props} />,
       loadData: PayoutPreferencesPage.loadData,
+    },
+    {
+      path: '/account/payment-methods',
+      name: 'PaymentMethodsPage',
+      auth: true,
+      authPage: 'LoginPage',
+      component: props => <PaymentMethodsPage {...props} />,
+      loadData: PaymentMethodsPage.loadData,
     },
     {
       path: '/terms-of-service',

@@ -83,15 +83,15 @@ class BirthdayInputComponent extends Component {
     this.handleSelectBlur = this.handleSelectBlur.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
   }
-  componentWillMount() {
+  componentDidMount() {
     const value = this.props.valueFromForm;
     if (value instanceof Date) {
       this.setState({ selected: selectedFromDate(value) });
     }
   }
-  componentWillReceiveProps(newProps) {
-    const oldValue = this.props.valueFromForm;
-    const newValue = newProps.valueFromForm;
+  componentDidUpdate(prevProps) {
+    const oldValue = prevProps.valueFromForm;
+    const newValue = this.props.valueFromForm;
     const valueChanged = oldValue !== newValue;
     if (valueChanged && newValue instanceof Date) {
       this.setState({ selected: selectedFromDate(newValue) });
@@ -259,6 +259,7 @@ const FieldBirthdayInputComponent = props => {
     disabled,
     input,
     meta,
+    valueFromForm,
   } = props;
   const { valid, invalid, touched, error } = meta;
 
@@ -287,6 +288,7 @@ const FieldBirthdayInputComponent = props => {
     monthLabel,
     yearLabel,
     disabled,
+    valueFromForm,
     ...input,
   };
   const classes = classNames(rootClassName || css.fieldRoot, className);

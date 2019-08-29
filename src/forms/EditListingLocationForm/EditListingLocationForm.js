@@ -14,6 +14,8 @@ import { Form, LocationAutocompleteInputField, Button, FieldTextInput } from '..
 
 import css from './EditListingLocationForm.css';
 
+const identity = v => v;
+
 export const EditListingLocationFormComponent = props => (
   <FinalForm
     {...props}
@@ -88,7 +90,7 @@ export const EditListingLocationFormComponent = props => (
             label={titleRequiredMessage}
             placeholder={addressPlaceholderMessage}
             useDefaultPredictions={false}
-            format={null}
+            format={identity}
             valueFromForm={values.location}
             validate={composeValidators(
               autocompleteSearchRequired(addressRequiredMessage),

@@ -7,6 +7,8 @@ import { Form, LocationAutocompleteInput } from '../../components';
 
 import css from './LocationSearchForm.css';
 
+const identity = v => v;
+
 const LocationSearchFormComponent = props => {
   const handleChange = location => {
     if (location.selectedPlace) {
@@ -32,7 +34,7 @@ const LocationSearchFormComponent = props => {
           <Form className={classes} onSubmit={preventFormSubmit}>
             <Field
               name="location"
-              format={null}
+              format={identity}
               render={({ input, meta }) => {
                 const { onChange, ...restInput } = input;
 

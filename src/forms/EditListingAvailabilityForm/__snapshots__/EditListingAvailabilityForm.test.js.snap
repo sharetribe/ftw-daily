@@ -11,6 +11,41 @@ exports[`EditListingAvailabilityForm matches snapshot 1`] = `
       "onFetchBookings": [Function],
     }
   }
+  availabilityPlan={
+    Object {
+      "entries": Array [
+        Object {
+          "dayOfWeek": "mon",
+          "seats": 1,
+        },
+        Object {
+          "dayOfWeek": "tue",
+          "seats": 1,
+        },
+        Object {
+          "dayOfWeek": "wed",
+          "seats": 1,
+        },
+        Object {
+          "dayOfWeek": "thu",
+          "seats": 1,
+        },
+        Object {
+          "dayOfWeek": "fri",
+          "seats": 1,
+        },
+        Object {
+          "dayOfWeek": "sat",
+          "seats": 1,
+        },
+        Object {
+          "dayOfWeek": "sun",
+          "seats": 1,
+        },
+      ],
+      "type": "availability-plan/day",
+    }
+  }
   dispatch={[Function]}
   intl={
     Object {

@@ -34,6 +34,18 @@
   }
 }
 
+.genericError {
+  color: var(--failColor);
+  margin: 24px 24px 0 24px;
+
+  @media (--viewportMedium) {
+    margin: 32px 24px 0 24px;
+  }
+  @media (--viewportLarge) {
+    margin: 32px 0 0 0;
+  }
+}
+
 /* DetailCardImage subcomponent */
 .detailCardImageWrapper {
   /* Layout */
