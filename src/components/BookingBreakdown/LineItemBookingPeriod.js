@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage, FormattedHTMLMessage, FormattedDate } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage, FormattedDate } from '../../util/reactIntl';
 import moment from 'moment';
 import { LINE_ITEM_NIGHT, LINE_ITEM_DAY, propTypes } from '../../util/types';
 import { daysBetween, dateFromAPIToLocalNoon } from '../../util/dates';

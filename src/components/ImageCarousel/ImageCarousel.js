@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, intlShape } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { ResponsiveImage, IconSpinner } from '../../components';
 import { propTypes } from '../../util/types';

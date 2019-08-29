@@ -1,6 +1,6 @@
 import React from 'react';
 import { string, oneOfType, bool } from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, intlShape } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import {

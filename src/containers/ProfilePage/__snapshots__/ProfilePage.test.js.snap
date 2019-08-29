@@ -118,7 +118,7 @@ exports[`ProfilePage matches snapshot 1`] = `
               ]
             }
           />
-          <InjectIntl(ReviewsComponent)
+          <injectIntl(ReviewsComponent)
             reviews={Array []}
           />
         </div>
@@ -128,7 +128,7 @@ exports[`ProfilePage matches snapshot 1`] = `
       className={null}
       rootClassName={null}
     >
-      <InjectIntl(Footer) />
+      <injectIntl(Footer) />
     </LayoutWrapperFooter>
   </LayoutSideNavigation>
 </Page>

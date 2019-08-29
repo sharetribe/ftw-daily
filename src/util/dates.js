@@ -166,7 +166,10 @@ export const formatDate = (intl, todayString, d) => {
   if (!paramsValid) {
     throw new Error(`Invalid params for formatDate: (${intl}, ${todayString}, ${d})`);
   }
-  const now = moment(intl.now());
+
+  // By default we can use moment() directly but in tests we need to use a specific dates.
+  // fakeIntl used in tests contains now() function wich returns predefined date
+  const now = intl.now ? moment(intl.now()) : moment();
   const formattedTime = intl.formatTime(d);
   let formattedDate;
 

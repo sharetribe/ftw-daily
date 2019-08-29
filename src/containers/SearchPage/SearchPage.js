@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { array, bool, func, number, oneOf, object, shape, string } from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, intlShape } from '../../util/reactIntl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { string, bool, func } from 'prop-types';
 import { compose } from 'redux';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import { Form as FinalForm } from 'react-final-form';
 import classNames from 'classnames';
 import { Form, FieldTextInput, SecondaryButton } from '../../components';

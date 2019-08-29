@@ -86,7 +86,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
         </h3>
       </div>
       <section>
-        <InjectIntl(StripePaymentForm)
+        <injectIntl(StripePaymentForm)
           authorDisplayName="author display name"
           confirmPaymentError={null}
           defaultPaymentMethod={null}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, intlShape } from '../../util/reactIntl';
 import { arrayOf, string } from 'prop-types';
 import classNames from 'classnames';
 import { Avatar, ReviewRating, UserDisplayName } from '../../components';

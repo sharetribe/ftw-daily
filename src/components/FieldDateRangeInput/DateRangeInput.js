@@ -7,7 +7,7 @@
 import React, { Component } from 'react';
 import { bool, func, instanceOf, oneOf, shape, string, arrayOf } from 'prop-types';
 import { DateRangePicker, isInclusivelyAfterDay, isInclusivelyBeforeDay } from 'react-dates';
-import { intlShape, injectIntl } from 'react-intl';
+import { intlShape, injectIntl } from '../../util/reactIntl';
 import classNames from 'classnames';
 import moment from 'moment';
 import { START_DATE, END_DATE } from '../../util/dates';

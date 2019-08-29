@@ -14,6 +14,29 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [change] Update `react-intl` to 3.1.13. More information about the changes can be found from
+  [Upgrade guide for react-intl@3.x](https://github.com/formatjs/react-intl/blob/master/docs/Upgrade-Guide.md)
+
+  - Proptype `intlShape` was removed so we needed to create it again. Because of this we added a new
+    `util/reactIntl.js` file. This file is now used to wrap all the react-intl related imports.
+  - `addLocaleDate` function was removed and react-intl library is now relying on native Intl APIs:
+    [Intl.PluralRules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/PluralRules)
+    and
+    [Intl.RelativeTimeFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RelativeTimeFormat).
+    In order to support older browsers we needed to add `intl-pluralrules` and
+    `intl-relativetimeformat` to `util/polyfills.js`
+  - Also Node must be now compiled with `full-icu` which caused changes to `start` and `test`
+    scripts in `package.json`. We also needed to add a specific config for `nodemon`
+  - Default `textComponent`in `IntlProvider` changed to `React.Fragment` so we need to explicitly
+    set `textComponent` to `span`. Otherwise all the snapshots would have changed and it might
+    affect to UI if there is styles added to these spans generally in customization projects.
+
+    Note: `FormattedMessage` component now supports
+    [`tagName` prop](https://github.com/formatjs/react-intl/blob/master/docs/Components.md#formattedmessage)
+    and
+    [improved rich-text formatting](https://github.com/formatjs/react-intl/blob/master/docs/Components.md#rich-text-formatting).
+    [#1181](https://github.com/sharetribe/flex-template-web/pull/1181)
+
 - [change] Update helmet (v3.20.0 > v3.20.1).
   [#1186](https://github.com/sharetribe/flex-template-web/pull/1186)
 - [fix] Lodash vulnerability: enforce newer version for react-google-maps and react-dates

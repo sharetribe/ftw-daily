@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
+import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
 import { Field } from 'react-final-form';
 import classNames from 'classnames';
 import debounce from 'lodash/debounce';

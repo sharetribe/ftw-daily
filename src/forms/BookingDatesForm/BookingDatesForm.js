@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { string, bool, arrayOf } from 'prop-types';
 import { compose } from 'redux';
 import { Form as FinalForm } from 'react-final-form';
-import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
+import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 import classNames from 'classnames';
 import moment from 'moment';
 import { required, bookingDatesRequired, composeValidators } from '../../util/validators';

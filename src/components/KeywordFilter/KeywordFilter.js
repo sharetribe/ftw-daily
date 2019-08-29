@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { func, number, string } from 'prop-types';
 import classNames from 'classnames';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, intlShape } from '../../util/reactIntl';
 import debounce from 'lodash/debounce';
 import { FieldTextInput } from '../../components';
 

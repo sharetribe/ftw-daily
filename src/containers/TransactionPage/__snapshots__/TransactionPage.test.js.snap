@@ -20,7 +20,7 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
       rootClassName={null}
     >
       <div>
-        <InjectIntl(TransactionPanelComponent)
+        <injectIntl(TransactionPanelComponent)
           acceptInProgress={false}
           acceptSaleError={null}
           className=""
@@ -218,7 +218,7 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
       className={null}
       rootClassName={null}
     >
-      <InjectIntl(Footer) />
+      <injectIntl(Footer) />
     </LayoutWrapperFooter>
   </LayoutSingleColumn>
 </Page>
@@ -244,7 +244,7 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
       rootClassName={null}
     >
       <div>
-        <InjectIntl(TransactionPanelComponent)
+        <injectIntl(TransactionPanelComponent)
           acceptInProgress={false}
           acceptSaleError={null}
           className=""
@@ -441,7 +441,7 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
       className={null}
       rootClassName={null}
     >
-      <InjectIntl(Footer) />
+      <injectIntl(Footer) />
     </LayoutWrapperFooter>
   </LayoutSingleColumn>
 </Page>
