@@ -12,7 +12,7 @@ import { Provider } from 'react-redux';
 import difference from 'lodash/difference';
 import mapValues from 'lodash/mapValues';
 import moment from 'moment';
-import { IntlProvider, addLocaleData } from 'react-intl';
+import { IntlProvider } from 'react-intl';
 import configureStore from './store';
 import routeConfiguration from './routeConfiguration';
 import Routes from './Routes';
@@ -23,24 +23,20 @@ import defaultMessages from './translations/en.json';
 
 // If you want to change the language, change the imports to match the wanted locale:
 //   1) Change the language in the config.js file!
-//   2) Import correct locale rules for React Intl library
-//   3) Import correct locale rules for Moment library
-//   4) Use the `messagesInLocale` import to add the correct translation file.
+//   2) Import correct locale rules for Moment library
+//   3) Use the `messagesInLocale` import to add the correct translation file.
+//   4) To support older browsers we need add the correct locale for intl-relativetimeformat to `util/polyfills.js`
 
 // Note that there is also translations in './translations/countryCodes.js' file
 // This file contains ISO 3166-1 alpha-2 country codes, country names and their translations in our default languages
 // This used to collect billing address in StripePaymentAddress on CheckoutPage
 
 // Step 2:
-// Import locale rules for React Intl library
-import localeData from 'react-intl/locale-data/en';
-
-// Step 3:
 // If you are using a non-english locale with moment library,
 // you should also import time specific formatting rules for that locale
 // e.g. for French: import 'moment/locale/fr';
 
-// Step 4:
+// Step 3:
 // If you are using a non-english locale, point `messagesInLocale` to correct .json file
 import messagesInLocale from './translations/fr.json';
 
@@ -75,12 +71,11 @@ const localeMessages = isTestEnv ? testMessages : messages;
 
 const setupLocale = () => {
   if (isTestEnv) {
-    // Don't change the locale in tests
+    // Use english as a default locale in tests
+    // This affects app.test.js and app.node.test.js tests
+    config.locale = 'en';
     return;
   }
-
-  // Add the translation messages
-  addLocaleData([...localeData]);
 
   // Set the Moment locale globally
   // See: http://momentjs.com/docs/#/i18n/changing-locale/
