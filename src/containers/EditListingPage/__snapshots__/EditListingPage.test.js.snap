@@ -6,7 +6,7 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
   title="EditListingPage.titleCreateListing"
 >
   <withRouter(Connect(TopbarContainerComponent)) />
-  <withViewport(InjectIntl(EditListingWizard))
+  <withViewport(injectIntl(EditListingWizard))
     availability={
       Object {
         "calendar": undefined,

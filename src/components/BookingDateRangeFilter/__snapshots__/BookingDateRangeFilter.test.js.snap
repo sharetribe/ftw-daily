@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BookingDateRangeFilter matches plain snapshot 1`] = `
-<InjectIntl(FilterPlainComponent)
+<injectIntl(FilterPlainComponent)
   className={null}
   contentPlacementOffset={-14}
   id="BookingDateRangeFilter.plain"
@@ -23,11 +23,11 @@ exports[`BookingDateRangeFilter matches plain snapshot 1`] = `
     name="dates"
     rootClassName={null}
   />
-</InjectIntl(FilterPlainComponent)>
+</injectIntl(FilterPlainComponent)>
 `;
 
 exports[`BookingDateRangeFilter matches popup snapshot 1`] = `
-<InjectIntl(FilterPopup)
+<injectIntl(FilterPopup)
   className={null}
   contentPlacementOffset={-14}
   id="BookingDateRangeFilter.popup"
@@ -50,5 +50,5 @@ exports[`BookingDateRangeFilter matches popup snapshot 1`] = `
     name="dates"
     rootClassName={null}
   />
-</InjectIntl(FilterPopup)>
+</injectIntl(FilterPopup)>
 `;
