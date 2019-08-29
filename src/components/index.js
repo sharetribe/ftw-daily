@@ -8,6 +8,7 @@ export { default as CookieConsent } from './CookieConsent/CookieConsent';
 export { default as Discussion } from './Discussion/Discussion';
 export { default as EditListingDescriptionPanel } from './EditListingDescriptionPanel/EditListingDescriptionPanel';
 export { default as EditListingFeaturesPanel } from './EditListingFeaturesPanel/EditListingFeaturesPanel';
+export { default as EditListingHorsePanel } from './EditListingHorsePanel/EditListingHorsePanel';
 export { default as EditListingLocationPanel } from './EditListingLocationPanel/EditListingLocationPanel';
 export { default as EditListingPhotosPanel } from './EditListingPhotosPanel/EditListingPhotosPanel';
 export { default as EditListingPoliciesPanel } from './EditListingPoliciesPanel/EditListingPoliciesPanel';

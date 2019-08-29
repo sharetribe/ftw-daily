@@ -14,7 +14,7 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
     <img
       alt="TopbarDesktop.logo"
       className={null}
-      src="saunatime-logo.png"
+      src="horse-deal-logo.png"
     />
   </a>
   <form
