@@ -391,7 +391,7 @@
       padding: var(--modalPaddingMedium);
       margin-top: 12.5vh;
       margin-bottom: 12.5vh;
-      border-bottom: 8px solid var(--marketplaceColor);
+      border-bottom: 8px solid var(--marketplaceSecondaryColor);
     }
   }
 
