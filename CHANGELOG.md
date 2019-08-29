@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [add] Update German and French translations.
+  [#1184](https://github.com/sharetribe/flex-template-web/pull/1184)
 - [change] Migrate from `react-helmet` to `react-helmet-async`
   [#1179](https://github.com/sharetribe/flex-template-web/pull/1179)
 - [change] Use `sanitize.css` from own file instead of npm package because updating it accidentally
