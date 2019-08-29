@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+## [v3.4.0] 2019-08-29
+
 - [change] Update `react-intl` to 3.1.13. More information about the changes can be found from
   [Upgrade guide for react-intl@3.x](https://github.com/formatjs/react-intl/blob/master/docs/Upgrade-Guide.md)
 
