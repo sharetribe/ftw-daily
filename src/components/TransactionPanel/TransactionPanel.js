@@ -99,7 +99,7 @@ export class TransactionPanelComponent extends Component {
     this.scrollToMessage = this.scrollToMessage.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.isMobSaf = isMobileSafari();
   }
 

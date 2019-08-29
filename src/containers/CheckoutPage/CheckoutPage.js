@@ -110,7 +110,7 @@ export class CheckoutPageComponent extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (window) {
       this.loadInitialData();
     }
@@ -520,6 +520,31 @@ export class CheckoutPageComponent extends Component {
     const currentListing = ensureListing(listing);
     const currentAuthor = ensureUser(currentListing.author);
 
+    const listingTitle = currentListing.attributes.title;
+    const title = intl.formatMessage({ id: 'CheckoutPage.title' }, { listingTitle });
+
+    const pageProps = { title, scrollingDisabled };
+    const topbar = (
+      <div className={css.topbar}>
+        <NamedLink className={css.home} name="LandingPage">
+          <Logo
+            className={css.logoMobile}
+            title={intl.formatMessage({ id: 'CheckoutPage.goToLandingPage' })}
+            format="mobile"
+          />
+          <Logo
+            className={css.logoDesktop}
+            alt={intl.formatMessage({ id: 'CheckoutPage.goToLandingPage' })}
+            format="desktop"
+          />
+        </NamedLink>
+      </div>
+    );
+
+    if (isLoading) {
+      return <Page {...pageProps}>{topbar}</Page>;
+    }
+
     const isOwnListing =
       currentUser &&
       currentUser.id &&
@@ -582,9 +607,6 @@ export class CheckoutPageComponent extends Component {
       !retrievePaymentIntentError &&
       !isPaymentExpired
     );
-
-    const listingTitle = currentListing.attributes.title;
-    const title = intl.formatMessage({ id: 'CheckoutPage.title' }, { listingTitle });
 
     const firstImage =
       currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
@@ -686,23 +708,6 @@ export class CheckoutPageComponent extends Component {
       );
     }
 
-    const topbar = (
-      <div className={css.topbar}>
-        <NamedLink className={css.home} name="LandingPage">
-          <Logo
-            className={css.logoMobile}
-            title={intl.formatMessage({ id: 'CheckoutPage.goToLandingPage' })}
-            format="mobile"
-          />
-          <Logo
-            className={css.logoDesktop}
-            alt={intl.formatMessage({ id: 'CheckoutPage.goToLandingPage' })}
-            format="desktop"
-          />
-        </NamedLink>
-      </div>
-    );
-
     const unitType = config.bookingUnitType;
     const isNightly = unitType === LINE_ITEM_NIGHT;
     const isDaily = unitType === LINE_ITEM_DAY;
@@ -720,12 +725,6 @@ export class CheckoutPageComponent extends Component {
     const showInitialMessageInput = !(
       existingTransaction && existingTransaction.attributes.lastTransition === TRANSITION_ENQUIRE
     );
-
-    const pageProps = { title, scrollingDisabled };
-
-    if (isLoading) {
-      return <Page {...pageProps}>{topbar}</Page>;
-    }
 
     // Get first and last name of the current user and use it in the StripePaymentForm to autofill the name field
     const userName =

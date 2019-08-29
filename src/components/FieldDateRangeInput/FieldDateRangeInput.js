@@ -26,12 +26,12 @@ class FieldDateRangeInputComponent extends Component {
     this.handleFocus = this.handleFocus.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     // Update focusedInput in case a new value for it is
     // passed in the props. This may occur if the focus
     // is manually set to the date picker.
-    if (nextProps.focusedInput && nextProps.focusedInput !== this.props.focusedInput) {
-      this.setState({ focusedInput: nextProps.focusedInput });
+    if (this.props.focusedInput && this.props.focusedInput !== prevProps.focusedInput) {
+      this.setState({ focusedInput: this.props.focusedInput });
     }
   }
 
