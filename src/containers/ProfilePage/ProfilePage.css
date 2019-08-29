@@ -32,17 +32,33 @@
 }
 
 .avatar {
-  margin: 30px 26px 29px 0;
+  margin: 30px auto 0 auto;
   flex-shrink: 0;
 
   @media (--viewportLarge) {
-    margin: 0 96px 44px 0;
+    margin: 0 auto 6px auto;
   }
 }
+.avatarContainer {
+  display: inherit;
+  flex-direction: column;
+}
+
+.accountTypeBadge {
+  @apply --marketplaceH4FontStyles;
+  padding: 2px 8px 3px 8px;
+  background: var(--memberColorCoach);
+  color: white;
+  border-radius: 18px;
+  display: inline;
+  width: fit-content;
+  margin: 12px auto 54px auto;
+}
+
 
 .mobileHeading {
   flex-shrink: 0;
-  margin: 47px 0 0 0;
+  margin: 58px 0 0 12px;
 
   @media (--viewportMedium) {
     margin: 49px 0 0 0;

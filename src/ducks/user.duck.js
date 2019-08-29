@@ -162,7 +162,7 @@ export const currentUserHasProviderAccess = state => {
 export const getCurrentUserType = state => {
   const { user } = state;
   if (user.currentUser) {
-    return user.currentUser.attributes.profile.publicData.memberType;
+    return user.currentUser.attributes.profile.publicData.userType;
   }
   return 'member';
 }

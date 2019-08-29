@@ -46,7 +46,7 @@ export class ProfileSettingsPageComponent extends Component {
       intl,
     } = this.props;
 
-
+    
     const handleSubmit = values => {
       const { firstName, lastName, bio: rawBio } = values;
 
@@ -110,10 +110,10 @@ export class ProfileSettingsPageComponent extends Component {
                   <FormattedMessage id="ProfileSettingsPage.accountTypeDescription"/>
                   </h3>
                   <h4 className={css.accountType}>
-                  {(memberType == "member") ? 
-                    (<FormattedMessage id="ProfileSettingsPage.memberTypeName" />) : 
-                    (<FormattedMessage id="ProfileSettingsPage.providerTypeName" />)
-                  }
+                  {(memberType == 'coach') ? 
+                    (<FormattedMessage id="ProfileSettingsPage.providerTypeName"/>): 
+                    (<FormattedMessage id="ProfileSettingsPage.memberTypeName"/>)}
+                    
                   </h4>
                 </div>
                 {user.id ? (

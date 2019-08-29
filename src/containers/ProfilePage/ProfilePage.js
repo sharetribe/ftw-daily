@@ -96,12 +96,18 @@ export class ProfilePageComponent extends Component {
 
     const asideContent = (
       <div className={css.asideContent}>
-        <AvatarLarge className={css.avatar} user={user} disableProfileLink />
+        <div className={css.avatarContainer}>
+          <AvatarLarge className={css.avatar} user={user} disableProfileLink />
+          {userType && (userType=="coach") ? 
+            (<h3 className={css.accountTypeBadge}><FormattedMessage id="ProfileSettingsPage.providerTypeName"/></h3>) : ""}
+        </div>
+        
         <h1 className={css.mobileHeading}>
           {displayName ? (
             <FormattedMessage id="ProfilePage.mobileHeading" values={{ name: displayName }} />
           ) : null}
         </h1>
+        
         {editLinkMobile}
         {editLinkDesktop}
       </div>
@@ -188,8 +194,6 @@ export class ProfilePageComponent extends Component {
         <h1 className={css.desktopHeading}>
           <FormattedMessage id="ProfilePage.desktopHeading" values={{ name: displayName }} />
         </h1>
-        {userType && (userType=="coach") ? 
-          (<h3><FormattedMessage id="ProfileSettingsPage.providerTypeName"/></h3>) : ""}
         {hasBio ? <p className={css.bio}>{bio}</p> : null}
         {hasListings ? (
           <div className={listingsContainerClasses}>
