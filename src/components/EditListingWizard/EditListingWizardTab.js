@@ -10,6 +10,7 @@ import {
 import { ensureListing } from '../../util/data';
 import { createResourceLocatorString } from '../../util/routes';
 import {
+  EditListingCharacterPanel,
   EditListingHorsePanel,
   EditListingDisciplinePanel,
   EditListingDescriptionPanel,
@@ -24,6 +25,7 @@ import css from './EditListingWizard.css';
 
 export const HORSE = 'horse';
 export const DISCIPLINE = 'discipline';
+export const CHARACTER = 'character';
 export const DESCRIPTION = 'description';
 export const FEATURES = 'features';
 export const POLICY = 'policy';
@@ -35,6 +37,7 @@ export const PHOTOS = 'photos';
 export const SUPPORTED_TABS = [
   HORSE,
   DISCIPLINE,
+  CHARACTER,
   DESCRIPTION,
   FEATURES,
   POLICY,
@@ -177,6 +180,20 @@ const EditListingWizardTab = props => {
       return (
         <EditListingDisciplinePanel
           {...panelProps(DISCIPLINE)}
+          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          onSubmit={values => {
+            onCompleteEditListingWizardTab(tab, values);
+          }}
+        />
+      );
+    }
+    case CHARACTER: {
+      const submitButtonTranslationKey = isNewListingFlow
+        ? 'EditListingWizard.saveNewDescription'
+        : 'EditListingWizard.saveEditDescription';
+      return (
+        <EditListingCharacterPanel
+          {...panelProps(CHARACTER)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={values => {
             onCompleteEditListingWizardTab(tab, values);

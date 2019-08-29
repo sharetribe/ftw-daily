@@ -5,12 +5,12 @@ import { FormattedMessage } from 'react-intl';
 import { ensureOwnListing } from '../../util/data';
 import { ListingLink } from '..';
 import { LISTING_STATE_DRAFT } from '../../util/types';
-import { EditListingDisciplineForm } from '../../forms';
+import { EditListingCharacterForm } from '../../forms';
 import config from '../../config';
 
-import css from './EditListingDisciplinePanel.css';
+import css from './EditListingCharacterPanel.css';
 
-const EditListingDisciplinePanel = props => {
+const EditListingCharacterPanel = props => {
   const {
     className,
     rootClassName,
@@ -25,7 +25,7 @@ const EditListingDisciplinePanel = props => {
 
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
-  const { mainDiscipline, additionalDisciplines } = currentListing.attributes.publicData;
+  const { characteristics } = currentListing.attributes.publicData;
 
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
@@ -34,26 +34,20 @@ const EditListingDisciplinePanel = props => {
       values={{ listingTitle: <ListingLink listing={listing} /> }}
     />
   ) : (
-    <FormattedMessage id="EditListingDisciplinePanel.createListingTitle" />
+    <FormattedMessage id="EditListingCharacterPanel.createListingTitle" />
   );
 
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
-      <EditListingDisciplineForm
+      <EditListingCharacterForm
         className={css.form}
-        initialValues={{ mainDiscipline, additionalDisciplines }}
+        initialValues={{ characteristics }}
         saveActionMsg={submitButtonText}
         onSubmit={values => {
-          const { mainDiscipline, additionalDisciplines } = values;
-          const index = additionalDisciplines.indexOf(mainDiscipline);
-
-          if (index > -1) {
-            additionalDisciplines.splice(index, 1);
-          }
-
+          const { characteristics } = values;
           const updateValues = {
-            publicData: { mainDiscipline, additionalDisciplines },
+            publicData: { characteristics },
           };
           onSubmit(updateValues);
         }}
@@ -61,20 +55,20 @@ const EditListingDisciplinePanel = props => {
         updated={panelUpdated}
         updateInProgress={updateInProgress}
         fetchErrors={errors}
-        disciplines={config.custom.disciplines}
+        characteristics={config.custom.characteristics}
       />
     </div>
   );
 };
 
-EditListingDisciplinePanel.defaultProps = {
+EditListingCharacterPanel.defaultProps = {
   className: null,
   rootClassName: null,
   errors: null,
   listing: null,
 };
 
-EditListingDisciplinePanel.propTypes = {
+EditListingCharacterPanel.propTypes = {
   className: string,
   rootClassName: string,
 
@@ -89,4 +83,4 @@ EditListingDisciplinePanel.propTypes = {
   errors: object.isRequired,
 };
 
-export default EditListingDisciplinePanel;
+export default EditListingCharacterPanel;

@@ -16,6 +16,7 @@ import { Modal, NamedRedirect, Tabs } from '../../components';
 import EditListingWizardTab, {
   HORSE,
   DISCIPLINE,
+  CHARACTER,
   DESCRIPTION,
   FEATURES,
   POLICY,
@@ -27,7 +28,7 @@ import css from './EditListingWizard.css';
 
 // TODO: PHOTOS panel needs to be the last one since it currently contains PayoutDetailsForm modal
 // All the other panels can be reordered.
-export const TABS = [HORSE, DISCIPLINE, FEATURES, POLICY, LOCATION, PRICING, PHOTOS];
+export const TABS = [HORSE, DISCIPLINE, CHARACTER, FEATURES, POLICY, LOCATION, PRICING, PHOTOS];
 
 // Tabs are horizontal in small screens
 const MAX_HORIZONTAL_NAV_SCREEN_WIDTH = 1023;
@@ -38,6 +39,8 @@ const tabLabel = (intl, tab) => {
     key = 'EditListingWizard.tabLabelHorse';
   } else if (tab === DISCIPLINE) {
     key = 'EditListingWizard.tabLabelDiscipline';
+  } else if (tab === CHARACTER) {
+    key = 'EditListingWizard.tabLabelCharacter';
   } else if (tab === DESCRIPTION) {
     key = 'EditListingWizard.tabLabelDescription';
   } else if (tab === FEATURES) {
@@ -72,6 +75,8 @@ const tabCompleted = (tab, listing) => {
       return !!(publicData.gender && title);
     case DISCIPLINE:
       return !!publicData.mainDiscipline;
+    case CHARACTER:
+      return true;
     case DESCRIPTION:
       return !!(description && title);
     case FEATURES:

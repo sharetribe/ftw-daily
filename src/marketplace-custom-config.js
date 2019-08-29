@@ -79,6 +79,23 @@ export const disciplines = [
   { key: 'galopp', label: 'Galopp' },
   { key: 'traber', label: 'Traber' },
 ];
+export const characteristics = [
+  { key: 'licensed', label: 'Licensed' },
+  { key: 'Competition_experience', label: 'Competition experience' },
+  { key: 'greed', label: 'Greed' },
+  { key: 'lunged', label: 'Lunged' },
+  { key: 'broken-in', label: 'Broken-in' },
+  { key: 'incl_papers', label: 'Incl. Papers' },
+  { key: 'safe_in_the_fields', label: 'Safe in the fields' },
+  { key: 'used_to_the_blacksmith', label: 'Used to the blacksmith' },
+  { key: 'easy_to_load', label: 'Easy to load' },
+  { key: 'no_eczema', label: 'No eczema' },
+  { key: 'vet_check', label: 'Vet Check' },
+  { key: 'allrounder', label: 'Allrounder' },
+  { key: 'barefoot', label: 'Barefoot' },
+  { key: 'for_beginners', label: 'For Beginners' },
+  { key: 'from_the_breeder', label: 'From the breeder' },
+];
 
 // Price filter configuration
 // Note: unlike most prices this is not handled in subunits
