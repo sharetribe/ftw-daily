@@ -66,6 +66,8 @@
     "prettier": "^1.18.2"
   },
   "resolutions": {
+    "react-dates/lodash": "^4.17.14",
+    "react-google-maps/lodash": "^4.17.14",
     "react-test-renderer": "^16.9.0"
   },
   "scripts": {
