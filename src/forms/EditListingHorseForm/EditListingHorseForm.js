@@ -202,7 +202,31 @@ EditListingHorseFormComponent.propTypes = {
     showListingsError: propTypes.error,
     updateListingError: propTypes.error,
   }),
-  categories: arrayOf(
+  genders: arrayOf(
+    shape({
+      key: string.isRequired,
+      label: string.isRequired,
+    })
+  ),
+  ages: arrayOf(
+    shape({
+      key: string.isRequired,
+      label: string.isRequired,
+    })
+  ),
+  breeds: arrayOf(
+    shape({
+      key: string.isRequired,
+      label: string.isRequired,
+    })
+  ),
+  hights: arrayOf(
+    shape({
+      key: string.isRequired,
+      label: string.isRequired,
+    })
+  ),
+  colors: arrayOf(
     shape({
       key: string.isRequired,
       label: string.isRequired,
