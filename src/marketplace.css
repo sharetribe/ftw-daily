@@ -45,6 +45,8 @@
   --marketplaceColor: #c0392b;
   --marketplaceColorLight: #ff4c38;
   --marketplaceColorDark: #8c291e;
+  --marketplaceSecondaryColor: #1F5DAB;
+  --marketplaceSecondaryColorDarker: #1a4e8e;
 
   /* Used with inline CSS SVGs */
   --marketplaceColorEncoded: %23c0392b;
@@ -252,6 +254,22 @@
       background-color: var(--matterColorNegative);
       color: var(--matterColorLight);
       border-color: var(--matterColorNegative);
+    }
+  }
+
+  --marketplaceButtonStylesSubmit {
+    @apply --marketplaceButtonStyles;
+
+    background-color: var(--marketplaceSecondaryColor);
+    color: var(--matterColorLight);
+
+    &:hover,
+    &:focus {
+      background-color: var(--marketplaceSecondaryColorDarker);
+    }
+    &:disabled {
+      background-color: var(--matterColorNegative);
+      color: var(--matterColorLight);
     }
   }
 
