@@ -15,12 +15,39 @@
 
 .headingContainer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .heading {
   margin-right: 24px;
   hyphens: auto;
+  margin-bottom: 18px;
+}
+
+.accountTypeHeading {
+  /* Font */
+  @apply --marketplaceH4FontStyles;
+  color: var(--matterColor);
+  display: inline-block;
+
+  margin-top: 0;
+  margin-bottom: 8px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 12px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+}
+.accountType {
+  @apply --marketplaceH4FontStyles;
+  color: var(--matterColor);
+  margin-left: 8px;
+  display: inline-block;
+
 }
 
 .profileLink {
@@ -35,10 +62,10 @@
   float: right;
   flex-shrink: 0;
 
-  margin: 19px 0 0 auto;
+  margin: 8px auto 18px 0;
   padding: 9px 16px 8px 16px;
 
   @media (--viewportMedium) {
-    margin: 37px 0 0 auto;
+    margin: 12px auto 28px 0;
   }
 }

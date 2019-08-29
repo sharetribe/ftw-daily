@@ -21,6 +21,7 @@ import { TopbarContainer } from '../../containers';
 
 import { updateProfile, uploadImage } from './ProfileSettingsPage.duck';
 import css from './ProfileSettingsPage.css';
+import { getCurrentUserType } from '../../ducks/user.duck';
 
 const onImageUploadHandler = (values, fn) => {
   const { id, imageId, file } = values;
@@ -33,6 +34,7 @@ export class ProfileSettingsPageComponent extends Component {
   render() {
     const {
       currentUser,
+      memberType,
       image,
       onImageUpload,
       onUpdateProfile,
@@ -103,6 +105,17 @@ export class ProfileSettingsPageComponent extends Component {
                 <h1 className={css.heading}>
                   <FormattedMessage id="ProfileSettingsPage.heading" />
                 </h1>
+                <div>
+                  <h3 className={css.accountTypeHeading}>
+                  <FormattedMessage id="ProfileSettingsPage.accountTypeDescription"/>
+                  </h3>
+                  <h4 className={css.accountType}>
+                  {(memberType == "member") ? 
+                    (<FormattedMessage id="ProfileSettingsPage.memberTypeName" />) : 
+                    (<FormattedMessage id="ProfileSettingsPage.providerTypeName" />)
+                  }
+                  </h4>
+                </div>
                 {user.id ? (
                   <NamedLink
                     className={css.profileLink}
@@ -112,6 +125,7 @@ export class ProfileSettingsPageComponent extends Component {
                     <FormattedMessage id="ProfileSettingsPage.viewProfileLink" />
                   </NamedLink>
                 ) : null}
+                
               </div>
               {profileSettingsForm}
             </div>
@@ -165,6 +179,7 @@ const mapStateToProps = state => {
   } = state.ProfileSettingsPage;
   return {
     currentUser,
+    memberType: getCurrentUserType(state),
     image,
     scrollingDisabled: isScrollingDisabled(state),
     updateInProgress,

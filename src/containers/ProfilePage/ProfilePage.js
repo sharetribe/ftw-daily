@@ -81,6 +81,8 @@ export class ProfilePageComponent extends Component {
     const hasListings = listings.length > 0;
     const isMobileLayout = viewport.width < MAX_MOBILE_SCREEN_WIDTH;
 
+    const userType = user ? user.attributes.profile.publicData.userType : null;
+
     const editLinkMobile = isCurrentUser ? (
       <NamedLink className={css.editLinkMobile} name="ProfileSettingsPage">
         <FormattedMessage id="ProfilePage.editProfileLinkMobile" />
@@ -186,6 +188,8 @@ export class ProfilePageComponent extends Component {
         <h1 className={css.desktopHeading}>
           <FormattedMessage id="ProfilePage.desktopHeading" values={{ name: displayName }} />
         </h1>
+        {userType && (userType=="coach") ? 
+          (<h3><FormattedMessage id="ProfileSettingsPage.providerTypeName"/></h3>) : ""}
         {hasBio ? <p className={css.bio}>{bio}</p> : null}
         {hasListings ? (
           <div className={listingsContainerClasses}>
