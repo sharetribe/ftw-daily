@@ -18,8 +18,6 @@ import EditListingWizardTab, {
   DISCIPLINE,
   CHARACTER,
   DESCRIPTION,
-  FEATURES,
-  POLICY,
   LOCATION,
   PRICING,
   PHOTOS,
@@ -28,7 +26,7 @@ import css from './EditListingWizard.css';
 
 // TODO: PHOTOS panel needs to be the last one since it currently contains PayoutDetailsForm modal
 // All the other panels can be reordered.
-export const TABS = [HORSE, DISCIPLINE, CHARACTER, FEATURES, POLICY, LOCATION, PRICING, PHOTOS];
+export const TABS = [HORSE, DISCIPLINE, CHARACTER, DESCRIPTION, LOCATION, PRICING, PHOTOS];
 
 // Tabs are horizontal in small screens
 const MAX_HORIZONTAL_NAV_SCREEN_WIDTH = 1023;
@@ -43,10 +41,6 @@ const tabLabel = (intl, tab) => {
     key = 'EditListingWizard.tabLabelCharacter';
   } else if (tab === DESCRIPTION) {
     key = 'EditListingWizard.tabLabelDescription';
-  } else if (tab === FEATURES) {
-    key = 'EditListingWizard.tabLabelFeatures';
-  } else if (tab === POLICY) {
-    key = 'EditListingWizard.tabLabelPolicy';
   } else if (tab === LOCATION) {
     key = 'EditListingWizard.tabLabelLocation';
   } else if (tab === PRICING) {
@@ -76,13 +70,9 @@ const tabCompleted = (tab, listing) => {
     case DISCIPLINE:
       return !!publicData.mainDiscipline;
     case CHARACTER:
-      return true;
+      return !!(publicData.gender && title && publicData.mainDiscipline);
     case DESCRIPTION:
       return !!(description && title);
-    case FEATURES:
-      return !!(publicData && publicData.amenities);
-    case POLICY:
-      return !!(publicData && typeof publicData.rules !== 'undefined');
     case LOCATION:
       return !!(geolocation && publicData && publicData.location && publicData.location.address);
     case PRICING:

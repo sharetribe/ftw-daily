@@ -14,10 +14,8 @@ import {
   EditListingHorsePanel,
   EditListingDisciplinePanel,
   EditListingDescriptionPanel,
-  EditListingFeaturesPanel,
   EditListingLocationPanel,
   EditListingPhotosPanel,
-  EditListingPoliciesPanel,
   EditListingPricingPanel,
 } from '../../components';
 
@@ -27,8 +25,6 @@ export const HORSE = 'horse';
 export const DISCIPLINE = 'discipline';
 export const CHARACTER = 'character';
 export const DESCRIPTION = 'description';
-export const FEATURES = 'features';
-export const POLICY = 'policy';
 export const LOCATION = 'location';
 export const PRICING = 'pricing';
 export const PHOTOS = 'photos';
@@ -39,8 +35,6 @@ export const SUPPORTED_TABS = [
   DISCIPLINE,
   CHARACTER,
   DESCRIPTION,
-  FEATURES,
-  POLICY,
   LOCATION,
   PRICING,
   PHOTOS,
@@ -208,34 +202,6 @@ const EditListingWizardTab = props => {
       return (
         <EditListingDescriptionPanel
           {...panelProps(DESCRIPTION)}
-          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
-          onSubmit={values => {
-            onCompleteEditListingWizardTab(tab, values);
-          }}
-        />
-      );
-    }
-    case FEATURES: {
-      const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditListingWizard.saveNewFeatures'
-        : 'EditListingWizard.saveEditFeatures';
-      return (
-        <EditListingFeaturesPanel
-          {...panelProps(FEATURES)}
-          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
-          onSubmit={values => {
-            onCompleteEditListingWizardTab(tab, values);
-          }}
-        />
-      );
-    }
-    case POLICY: {
-      const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditListingWizard.saveNewPolicies'
-        : 'EditListingWizard.saveEditPolicies';
-      return (
-        <EditListingPoliciesPanel
-          {...panelProps(POLICY)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={values => {
             onCompleteEditListingWizardTab(tab, values);

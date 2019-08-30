@@ -46,7 +46,7 @@ const EditListingDisciplinePanel = props => {
         saveActionMsg={submitButtonText}
         onSubmit={values => {
           const { mainDiscipline, additionalDisciplines } = values;
-          const index = additionalDisciplines.indexOf(mainDiscipline);
+          const index = additionalDisciplines && additionalDisciplines.indexOf(mainDiscipline);
 
           if (index > -1) {
             additionalDisciplines.splice(index, 1);
