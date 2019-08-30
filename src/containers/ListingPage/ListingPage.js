@@ -36,6 +36,7 @@ import {
 import { TopbarContainer, NotFoundPage } from '../../containers';
 
 import { sendEnquiry, loadData, setInitialValues } from './ListingPage.duck';
+import SectionHorseInfo from './SectionHorseInfo';
 import SectionImages from './SectionImages';
 import SectionAvatar from './SectionAvatar';
 import SectionHeading from './SectionHeading';
@@ -410,6 +411,7 @@ export class ListingPageComponent extends Component {
                     showContactUser={showContactUser}
                     onContactUser={this.onContactUser}
                   />
+                  <SectionHorseInfo options={publicData.horseInfo} />
                   <SectionDescriptionMaybe description={description} />
                   <SectionFeatures
                     options={amenitiesConfig}
