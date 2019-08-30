@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] Update yarn.lock (there was Lodash version resolution missing)
+  [#1190](https://github.com/sharetribe/flex-template-web/pull/1190)
+
 ## [v3.4.0] 2019-08-29
 
 - [change] Update `react-intl` to 3.1.13. More information about the changes can be found from
