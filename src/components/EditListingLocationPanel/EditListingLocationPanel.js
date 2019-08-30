@@ -77,19 +77,18 @@ class EditListingLocationPanel extends Component {
           className={css.form}
           initialValues={this.state.initialValues}
           onSubmit={values => {
-            const { building = '', location } = values;
+            const { location } = values;
             const {
               selectedPlace: { address, origin },
             } = location;
             const updateValues = {
               geolocation: origin,
               publicData: {
-                location: { address, building },
+                location: { address },
               },
             };
             this.setState({
               initialValues: {
-                building,
                 location: { search: address, selectedPlace: { address, origin } },
               },
             });
