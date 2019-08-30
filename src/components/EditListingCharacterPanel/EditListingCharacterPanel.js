@@ -45,7 +45,7 @@ const EditListingCharacterPanel = props => {
         initialValues={{ characteristics }}
         saveActionMsg={submitButtonText}
         onSubmit={values => {
-          const { characteristics } = values;
+          const { characteristics = [] } = values;
           const updateValues = {
             publicData: { characteristics },
           };

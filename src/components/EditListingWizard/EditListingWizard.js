@@ -70,9 +70,9 @@ const tabCompleted = (tab, listing) => {
     case DISCIPLINE:
       return !!publicData.mainDiscipline;
     case CHARACTER:
-      return !!(publicData.gender && title && publicData.mainDiscipline);
+      return !!(publicData && typeof publicData.characteristics !== 'undefined');
     case DESCRIPTION:
-      return !!(description && title);
+      return !!description;
     case LOCATION:
       return !!(geolocation && publicData && publicData.location && publicData.location.address);
     case PRICING:
