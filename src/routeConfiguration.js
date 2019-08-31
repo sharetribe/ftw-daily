@@ -159,7 +159,27 @@ const routeConfiguration = () => {
     {
       path: '/signup',
       name: 'SignupPage',
-      // component: props => <AuthenticationPage {...props} tab="signup" />,
+      component: props => <AuthenticationPage {...props} tab="signup" />,
+    },
+    {
+      // ***************************
+      // operator path for login
+      // USE ROUTE WHEN ON OPERATOR
+      // LANDING PAGE
+      // ***************************
+      path: '/operator/login',
+      name: 'LoginPage',
+      component: props => <OperatorAuthPage {...props} tab="login" />,
+    },
+    {
+      // ***************************
+      // operator paths added
+      // for signup
+      // USE ROUTE WHEN ON OPERATOR
+      // LANDING PAGE
+      // ***************************
+      path: '/operator/signup',
+      name: 'SignupPage',
       component: props => <OperatorAuthPage {...props} tab="signup" />,
     },
     {
