@@ -12,7 +12,7 @@
   @apply --marketplaceModalRootStyles;
 
   @media (--viewportMedium) {
-    @apply --backgroundImage;
+    @apply --backgroundImageOperatorAuth;
   }
 }
 

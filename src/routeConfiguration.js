@@ -159,7 +159,7 @@ const routeConfiguration = () => {
     {
       path: '/signup',
       name: 'SignupPage',
-      component: props => <OperatorAuthPage {...props} tab="signup" />,
+      component: props => <AuthenticationPage {...props} tab="signup" />,
     },
     {
       // ***************************
