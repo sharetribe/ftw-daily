@@ -250,9 +250,7 @@ export class OperatorAuthPageComponent extends Component {
             <TopbarContainer className={topbarClasses} />
           </LayoutWrapperTopbar>
           <LayoutWrapperMain className={css.layoutWrapperMain}>
-            <div className={css.root}>
-              {showEmailVerification ? emailVerificationContent : formContent}
-            </div>
+            <div className={css.root}>{true ? emailVerificationContent : formContent}</div>
             <Modal
               id="AuthenticationPage.tos"
               isOpen={this.state.tosModalOpen}

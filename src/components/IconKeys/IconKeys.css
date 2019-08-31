@@ -1,5 +1,5 @@
 @import '../../marketplace.css';
 
 .strokeMarketplaceColor {
-  stroke: var(--marketplaceColor);
+  stroke: var(--marketplaceSecondaryColor);
 }
