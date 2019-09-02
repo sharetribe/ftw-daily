@@ -14,9 +14,10 @@ import { PayoutDetailsForm } from '../../forms';
 import { Modal, NamedRedirect, Tabs } from '../../components';
 
 import EditListingWizardTab, {
+  HORSE,
+  DISCIPLINE,
+  CHARACTER,
   DESCRIPTION,
-  FEATURES,
-  POLICY,
   LOCATION,
   PRICING,
   PHOTOS,
@@ -25,19 +26,21 @@ import css from './EditListingWizard.css';
 
 // TODO: PHOTOS panel needs to be the last one since it currently contains PayoutDetailsForm modal
 // All the other panels can be reordered.
-export const TABS = [DESCRIPTION, FEATURES, POLICY, LOCATION, PRICING, PHOTOS];
+export const TABS = [HORSE, DISCIPLINE, CHARACTER, DESCRIPTION, LOCATION, PRICING, PHOTOS];
 
 // Tabs are horizontal in small screens
 const MAX_HORIZONTAL_NAV_SCREEN_WIDTH = 1023;
 
 const tabLabel = (intl, tab) => {
   let key = null;
-  if (tab === DESCRIPTION) {
+  if (tab === HORSE) {
+    key = 'EditListingWizard.tabLabelHorse';
+  } else if (tab === DISCIPLINE) {
+    key = 'EditListingWizard.tabLabelDiscipline';
+  } else if (tab === CHARACTER) {
+    key = 'EditListingWizard.tabLabelCharacter';
+  } else if (tab === DESCRIPTION) {
     key = 'EditListingWizard.tabLabelDescription';
-  } else if (tab === FEATURES) {
-    key = 'EditListingWizard.tabLabelFeatures';
-  } else if (tab === POLICY) {
-    key = 'EditListingWizard.tabLabelPolicy';
   } else if (tab === LOCATION) {
     key = 'EditListingWizard.tabLabelLocation';
   } else if (tab === PRICING) {
@@ -62,12 +65,14 @@ const tabCompleted = (tab, listing) => {
   const images = listing.images;
 
   switch (tab) {
+    case HORSE:
+      return !!(publicData.horseInfo && title);
+    case DISCIPLINE:
+      return !!(publicData.horseInfo && publicData.horseInfo.mainDiscipline);
+    case CHARACTER:
+      return !!(publicData && typeof publicData.characteristics !== 'undefined');
     case DESCRIPTION:
-      return !!(description && title);
-    case FEATURES:
-      return !!(publicData && publicData.amenities);
-    case POLICY:
-      return !!(publicData && typeof publicData.rules !== 'undefined');
+      return !!description;
     case LOCATION:
       return !!(geolocation && publicData && publicData.location && publicData.location.address);
     case PRICING:

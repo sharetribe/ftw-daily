@@ -8,7 +8,7 @@
  */
 
 import React from 'react';
-import { arrayOf, bool, node, shape, string } from 'prop-types';
+import { arrayOf, number, node, shape, string } from 'prop-types';
 import classNames from 'classnames';
 import { FieldArray } from 'react-final-form-arrays';
 import { FieldCheckbox, ValidationError } from '../../components';
@@ -16,10 +16,23 @@ import { FieldCheckbox, ValidationError } from '../../components';
 import css from './FieldCheckboxGroup.css';
 
 const FieldCheckboxRenderer = props => {
-  const { className, rootClassName, label, twoColumns, id, fields, options, meta } = props;
+  const { className, rootClassName, label, columns, id, fields, options, meta } = props;
 
   const classes = classNames(rootClassName || css.root, className);
-  const listClasses = twoColumns ? classNames(css.list, css.twoColumns) : css.list;
+  let listClasses;
+  switch (columns) {
+    case 2:
+      listClasses = classNames(css.list, css.twoColumns);
+      break;
+
+    case 3:
+      listClasses = classNames(css.list, css.threeColumns);
+      break;
+
+    default:
+      listClasses = css.list;
+      break;
+  }
 
   return (
     <fieldset className={classes}>
@@ -48,7 +61,7 @@ FieldCheckboxRenderer.defaultProps = {
   rootClassName: null,
   className: null,
   label: null,
-  twoColumns: false,
+  columns: 1,
 };
 
 FieldCheckboxRenderer.propTypes = {
@@ -62,7 +75,7 @@ FieldCheckboxRenderer.propTypes = {
       label: node.isRequired,
     })
   ).isRequired,
-  twoColumns: bool,
+  columns: number,
 };
 
 const FieldCheckboxGroup = props => <FieldArray component={FieldCheckboxRenderer} {...props} />;

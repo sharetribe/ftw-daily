@@ -3,13 +3,14 @@ import { bool, func, object, string } from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import { ensureOwnListing } from '../../util/data';
-import { ListingLink } from '../../components';
+import { ListingLink } from '..';
 import { LISTING_STATE_DRAFT } from '../../util/types';
-import { EditListingDescriptionForm } from '../../forms';
+import { EditListingCharacterForm } from '../../forms';
+import config from '../../config';
 
-import css from './EditListingDescriptionPanel.css';
+import css from './EditListingCharacterPanel.css';
 
-const EditListingDescriptionPanel = props => {
+const EditListingCharacterPanel = props => {
   const {
     className,
     rootClassName,
@@ -24,7 +25,7 @@ const EditListingDescriptionPanel = props => {
 
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
-  const { description } = currentListing.attributes;
+  const { characteristics } = currentListing.attributes.publicData;
 
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
@@ -33,41 +34,41 @@ const EditListingDescriptionPanel = props => {
       values={{ listingTitle: <ListingLink listing={listing} /> }}
     />
   ) : (
-    <FormattedMessage id="EditListingDescriptionPanel.createListingTitle" />
+    <FormattedMessage id="EditListingCharacterPanel.createListingTitle" />
   );
 
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
-      <EditListingDescriptionForm
+      <EditListingCharacterForm
         className={css.form}
-        initialValues={{ description }}
+        initialValues={{ characteristics }}
         saveActionMsg={submitButtonText}
         onSubmit={values => {
-          const { description } = values;
+          const { characteristics = [] } = values;
           const updateValues = {
-            description: description.trim(),
+            publicData: { characteristics },
           };
-
           onSubmit(updateValues);
         }}
         onChange={onChange}
         updated={panelUpdated}
         updateInProgress={updateInProgress}
         fetchErrors={errors}
+        characteristics={config.custom.characteristics}
       />
     </div>
   );
 };
 
-EditListingDescriptionPanel.defaultProps = {
+EditListingCharacterPanel.defaultProps = {
   className: null,
   rootClassName: null,
   errors: null,
   listing: null,
 };
 
-EditListingDescriptionPanel.propTypes = {
+EditListingCharacterPanel.propTypes = {
   className: string,
   rootClassName: string,
 
@@ -82,4 +83,4 @@ EditListingDescriptionPanel.propTypes = {
   errors: object.isRequired,
 };
 
-export default EditListingDescriptionPanel;
+export default EditListingCharacterPanel;

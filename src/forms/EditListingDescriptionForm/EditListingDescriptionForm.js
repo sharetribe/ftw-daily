@@ -1,24 +1,20 @@
 import React from 'react';
-import { arrayOf, bool, func, shape, string } from 'prop-types';
+import { bool, func, shape, string } from 'prop-types';
 import { compose } from 'redux';
 import { Form as FinalForm } from 'react-final-form';
 import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
-import { maxLength, required, composeValidators } from '../../util/validators';
+import { required, composeValidators } from '../../util/validators';
 import { Form, Button, FieldTextInput } from '../../components';
-import CustomCategorySelectFieldMaybe from './CustomCategorySelectFieldMaybe';
 
 import css from './EditListingDescriptionForm.css';
-
-const TITLE_MAX_LENGTH = 60;
 
 const EditListingDescriptionFormComponent = props => (
   <FinalForm
     {...props}
     render={fieldRenderProps => {
       const {
-        categories,
         className,
         disabled,
         handleSubmit,
@@ -31,27 +27,12 @@ const EditListingDescriptionFormComponent = props => (
         fetchErrors,
       } = fieldRenderProps;
 
-      const titleMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.title' });
-      const titlePlaceholderMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.titlePlaceholder',
-      });
-      const titleRequiredMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.titleRequired',
-      });
-      const maxLengthMessage = intl.formatMessage(
-        { id: 'EditListingDescriptionForm.maxLength' },
-        {
-          maxLength: TITLE_MAX_LENGTH,
-        }
-      );
-
       const descriptionMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.description',
       });
       const descriptionPlaceholderMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.descriptionPlaceholder',
       });
-      const maxLength60Message = maxLength(maxLengthMessage, TITLE_MAX_LENGTH);
       const descriptionRequiredMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.descriptionRequired',
       });
@@ -86,17 +67,6 @@ const EditListingDescriptionFormComponent = props => (
           {errorMessageCreateListingDraft}
           {errorMessageUpdateListing}
           {errorMessageShowListing}
-          <FieldTextInput
-            id="title"
-            name="title"
-            className={css.title}
-            type="text"
-            label={titleMessage}
-            placeholder={titlePlaceholderMessage}
-            maxLength={TITLE_MAX_LENGTH}
-            validate={composeValidators(required(titleRequiredMessage), maxLength60Message)}
-            autoFocus
-          />
 
           <FieldTextInput
             id="description"
@@ -106,13 +76,6 @@ const EditListingDescriptionFormComponent = props => (
             label={descriptionMessage}
             placeholder={descriptionPlaceholderMessage}
             validate={composeValidators(required(descriptionRequiredMessage))}
-          />
-
-          <CustomCategorySelectFieldMaybe
-            id="category"
-            name="category"
-            categories={categories}
-            intl={intl}
           />
 
           <Button
@@ -144,12 +107,6 @@ EditListingDescriptionFormComponent.propTypes = {
     showListingsError: propTypes.error,
     updateListingError: propTypes.error,
   }),
-  categories: arrayOf(
-    shape({
-      key: string.isRequired,
-      label: string.isRequired,
-    })
-  ),
 };
 
 export default compose(injectIntl)(EditListingDescriptionFormComponent);

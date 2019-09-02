@@ -5,11 +5,13 @@ import { FormattedMessage } from 'react-intl';
 import { ensureOwnListing } from '../../util/data';
 import { ListingLink } from '../../components';
 import { LISTING_STATE_DRAFT } from '../../util/types';
-import { EditListingDescriptionForm } from '../../forms';
+import { EditListingHorseForm } from '../../forms';
 
-import css from './EditListingDescriptionPanel.css';
+import config from '../../config';
 
-const EditListingDescriptionPanel = props => {
+import css from './EditListingHorsePanel.css';
+
+const EditListingHorsePanel = props => {
   const {
     className,
     rootClassName,
@@ -24,29 +26,41 @@ const EditListingDescriptionPanel = props => {
 
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
-  const { description } = currentListing.attributes;
+  const { title, publicData } = currentListing.attributes;
+  const horseInfo = publicData.horseInfo || {};
+  const { gender, age, breed, hight, color } = horseInfo;
+  const { genders, ages, breeds, hights, colors } = config.custom;
+  console.log(horseInfo);
 
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
     <FormattedMessage
-      id="EditListingDescriptionPanel.title"
+      id="EditListingHorsePanel.title"
       values={{ listingTitle: <ListingLink listing={listing} /> }}
     />
   ) : (
-    <FormattedMessage id="EditListingDescriptionPanel.createListingTitle" />
+    <FormattedMessage id="EditListingHorsePanel.createListingTitle" />
   );
 
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
-      <EditListingDescriptionForm
+      <EditListingHorseForm
         className={css.form}
-        initialValues={{ description }}
+        initialValues={{
+          title,
+          gender,
+          age,
+          breed,
+          hight,
+          color,
+        }}
         saveActionMsg={submitButtonText}
         onSubmit={values => {
-          const { description } = values;
+          const { title, gender, age, breed, hight, color } = values;
           const updateValues = {
-            description: description.trim(),
+            title: title.trim(),
+            publicData: { horseInfo: { ...horseInfo, gender, age, breed, hight, color } },
           };
 
           onSubmit(updateValues);
@@ -55,19 +69,24 @@ const EditListingDescriptionPanel = props => {
         updated={panelUpdated}
         updateInProgress={updateInProgress}
         fetchErrors={errors}
+        genders={genders}
+        ages={ages}
+        breeds={breeds}
+        hights={hights}
+        colors={colors}
       />
     </div>
   );
 };
 
-EditListingDescriptionPanel.defaultProps = {
+EditListingHorsePanel.defaultProps = {
   className: null,
   rootClassName: null,
   errors: null,
   listing: null,
 };
 
-EditListingDescriptionPanel.propTypes = {
+EditListingHorsePanel.propTypes = {
   className: string,
   rootClassName: string,
 
@@ -82,4 +101,4 @@ EditListingDescriptionPanel.propTypes = {
   errors: object.isRequired,
 };
 
-export default EditListingDescriptionPanel;
+export default EditListingHorsePanel;
