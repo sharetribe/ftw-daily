@@ -43,7 +43,6 @@ import SectionAvatar from './SectionAvatar';
 import SectionHeading from './SectionHeading';
 import SectionDescriptionMaybe from './SectionDescriptionMaybe';
 import SectionDisciplinesMaybe from './SectionDisciplinesMaybe';
-import SectionFeatures from './SectionFeatures';
 import SectionReviews from './SectionReviews';
 import SectionHost from './SectionHost';
 import SectionRulesMaybe from './SectionRulesMaybe';
@@ -65,11 +64,6 @@ const priceData = (price, intl) => {
     };
   }
   return {};
-};
-
-const categoryLabel = (categories, key) => {
-  const cat = categories.find(c => c.key === key);
-  return cat ? cat.label : key;
 };
 
 export class ListingPageComponent extends Component {
@@ -357,14 +351,6 @@ export class ListingPageComponent extends Component {
       </NamedLink>
     );
 
-    const category =
-      publicData && publicData.category ? (
-        <span>
-          {categoryLabel(categoriesConfig, publicData.category)}
-          <span className={css.separator}>•</span>
-        </span>
-      ) : null;
-
     return (
       <Page
         title={schemaTitle}
@@ -408,7 +394,6 @@ export class ListingPageComponent extends Component {
                     priceTitle={priceTitle}
                     formattedPrice={formattedPrice}
                     richTitle={richTitle}
-                    category={category}
                     hostLink={hostLink}
                     showContactUser={showContactUser}
                     onContactUser={this.onContactUser}

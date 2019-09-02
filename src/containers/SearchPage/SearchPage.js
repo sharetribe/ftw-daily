@@ -52,12 +52,12 @@ export class SearchPageComponent extends Component {
   }
 
   filters() {
-    const { categories, amenities, priceFilterConfig } = this.props;
-
+    const { categories, disciplines, amenities, priceFilterConfig } = this.props;
+    console.log(123123, this.props);
     return {
-      categoryFilter: {
+      disciplinesFilter: {
         paramName: 'pub_horseInfo.mainDiscipline',
-        options: categories,
+        options: disciplines,
       },
       amenitiesFilter: {
         paramName: 'pub_amenities',
@@ -209,6 +209,7 @@ export class SearchPageComponent extends Component {
             primaryFilters={{
               // categoryFilter: filters.categoryFilter,
               // amenitiesFilter: filters.amenitiesFilter,
+              disciplinesFilter: filters.disciplinesFilter,
               priceFilter: filters.priceFilter,
             }}
           />
@@ -253,6 +254,7 @@ SearchPageComponent.defaultProps = {
   searchListingsError: null,
   searchParams: {},
   tab: 'listings',
+  disciplines: config.custom.disciplines,
   categories: config.custom.categories,
   amenities: config.custom.amenities,
   priceFilterConfig: config.custom.priceFilterConfig,

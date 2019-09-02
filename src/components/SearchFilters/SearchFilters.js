@@ -46,7 +46,7 @@ const SearchFiltersComponent = props => {
     listingsAreLoaded,
     resultsCount,
     searchInProgress,
-    categoryFilter,
+    disciplinesFilter,
     amenitiesFilter,
     priceFilter,
     isSearchFiltersPanelOpen,
@@ -59,8 +59,8 @@ const SearchFiltersComponent = props => {
   const hasNoResult = listingsAreLoaded && resultsCount === 0;
   const classes = classNames(rootClassName || css.root, { [css.longInfo]: hasNoResult }, className);
 
-  const categoryLabel = intl.formatMessage({
-    id: 'SearchFilters.categoryLabel',
+  const disciplinesLabel = intl.formatMessage({
+    id: 'SearchFilters.disciplinesLabel',
   });
 
   const amenitiesLabel = intl.formatMessage({
@@ -71,8 +71,8 @@ const SearchFiltersComponent = props => {
     ? initialValues(urlQueryParams, amenitiesFilter.paramName)
     : null;
 
-  const initialCategory = categoryFilter
-    ? initialValue(urlQueryParams, categoryFilter.paramName)
+  const initialDisciplines = disciplinesFilter
+    ? initialValue(urlQueryParams, disciplinesFilter.paramName)
     : null;
 
   const initialPriceRange = priceFilter
@@ -108,13 +108,13 @@ const SearchFiltersComponent = props => {
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   };
 
-  const categoryFilterElement = categoryFilter ? (
+  const disciplinesFilterElement = disciplinesFilter ? (
     <SelectSingleFilter
-      urlParam={categoryFilter.paramName}
-      label={categoryLabel}
+      urlParam={disciplinesFilter.paramName}
+      label={disciplinesLabel}
       onSelect={handleSelectOption}
-      options={categoryFilter.options}
-      initialValue={initialCategory}
+      options={disciplinesFilter.options}
+      initialValue={initialDisciplines}
       contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
     />
   ) : null;
@@ -164,7 +164,7 @@ const SearchFiltersComponent = props => {
   return (
     <div className={classes}>
       <div className={css.filters}>
-        {categoryFilterElement}
+        {disciplinesFilterElement}
         {amenitiesFilterElement}
         {priceFilterElement}
         {toggleSearchFiltersPanelButton}

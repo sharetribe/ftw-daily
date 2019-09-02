@@ -56,12 +56,17 @@ export class CheckoutPageComponent extends Component {
 
     this.loadInitialData = this.loadInitialData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.goBack = this.goBack.bind(this);
   }
 
   componentWillMount() {
     if (window) {
       this.loadInitialData();
     }
+  }
+
+  goBack() {
+    this.props.history.goBack();
   }
 
   /**
@@ -433,6 +438,9 @@ export class CheckoutPageComponent extends Component {
             <AvatarMedium user={currentAuthor} disableProfileLink />
           </div>
           <div className={css.bookListingContainer}>
+            <button className={css.backBtn} onClick={this.goBack}>
+              Back
+            </button>
             <div className={css.heading}>
               <h1 className={css.title}>{title}</h1>
               <div className={css.author}>
