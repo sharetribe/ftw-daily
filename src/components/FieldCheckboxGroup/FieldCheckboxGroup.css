@@ -15,6 +15,11 @@
     columns: 2;
   }
 }
+.threeColumns {
+  @media (--viewportMedium) {
+    columns: 3;
+  }
+}
 
 .item {
   padding: 2px 0;

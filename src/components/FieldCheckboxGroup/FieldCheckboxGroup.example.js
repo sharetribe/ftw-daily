@@ -46,7 +46,7 @@ const commonProps = {
       label: 'Own food allowed',
     },
   ],
-  twoColumns: true,
+  columns: 2,
 };
 
 const optionalProps = {

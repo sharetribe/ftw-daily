@@ -24,17 +24,17 @@ const TermsOfServicePageComponent = props => {
 
   const tabs = [
     {
-      text: intl.formatMessage({ id: 'TermsOfServicePage.privacyTabTitle' }),
-      selected: false,
-      linkProps: {
-        name: 'PrivacyPolicyPage',
-      },
-    },
-    {
       text: intl.formatMessage({ id: 'TermsOfServicePage.tosTabTitle' }),
       selected: true,
       linkProps: {
         name: 'TermsOfServicePage',
+      },
+    },
+    {
+      text: intl.formatMessage({ id: 'TermsOfServicePage.privacyTabTitle' }),
+      selected: false,
+      linkProps: {
+        name: 'PrivacyPolicyPage',
       },
     },
   ];
@@ -45,6 +45,7 @@ const TermsOfServicePageComponent = props => {
     '@type': 'WebPage',
     name: schemaTitle,
   };
+
   return (
     <Page title={schemaTitle} scrollingDisabled={scrollingDisabled} schema={schema}>
       <LayoutSideNavigation>

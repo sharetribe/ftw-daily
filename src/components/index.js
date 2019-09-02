@@ -6,8 +6,11 @@ export { default as Button, PrimaryButton, SecondaryButton, InlineTextButton } f
 export { default as BookingPanel } from './BookingPanel/BookingPanel';
 export { default as CookieConsent } from './CookieConsent/CookieConsent';
 export { default as Discussion } from './Discussion/Discussion';
+export { default as EditListingCharacterPanel } from './EditListingCharacterPanel/EditListingCharacterPanel';
 export { default as EditListingDescriptionPanel } from './EditListingDescriptionPanel/EditListingDescriptionPanel';
+export { default as EditListingDisciplinePanel } from './EditListingDisciplinePanel/EditListingDisciplinePanel';
 export { default as EditListingFeaturesPanel } from './EditListingFeaturesPanel/EditListingFeaturesPanel';
+export { default as EditListingHorsePanel } from './EditListingHorsePanel/EditListingHorsePanel';
 export { default as EditListingLocationPanel } from './EditListingLocationPanel/EditListingLocationPanel';
 export { default as EditListingPhotosPanel } from './EditListingPhotosPanel/EditListingPhotosPanel';
 export { default as EditListingPoliciesPanel } from './EditListingPoliciesPanel/EditListingPoliciesPanel';
