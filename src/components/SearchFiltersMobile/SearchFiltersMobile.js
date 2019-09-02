@@ -196,21 +196,21 @@ class SearchFiltersMobileComponent extends Component {
       />
     ) : null;
 
-    const amenitiesLabel = intl.formatMessage({ id: 'SearchFiltersMobile.amenitiesLabel' });
+    // const amenitiesLabel = intl.formatMessage({ id: 'SearchFiltersMobile.amenitiesLabel' });
 
-    const initialAmenities = this.initialValues(amenitiesFilter.paramName);
+    // const initialAmenities = this.initialValues(amenitiesFilter.paramName);
 
-    const amenitiesFilterElement = amenitiesFilter ? (
-      <SelectMultipleFilterPlain
-        id="SearchFiltersMobile.amenitiesFilter"
-        name="amenities"
-        urlParam={amenitiesFilter.paramName}
-        label={amenitiesLabel}
-        onSelect={this.handleSelectMultiple}
-        options={amenitiesFilter.options}
-        initialValues={initialAmenities}
-      />
-    ) : null;
+    // const amenitiesFilterElement = amenitiesFilter ? (
+    //   <SelectMultipleFilterPlain
+    //     id="SearchFiltersMobile.amenitiesFilter"
+    //     name="amenities"
+    //     urlParam={amenitiesFilter.paramName}
+    //     label={amenitiesLabel}
+    //     onSelect={this.handleSelectMultiple}
+    //     options={amenitiesFilter.options}
+    //     initialValues={initialAmenities}
+    //   />
+    // ) : null;
 
     const initialPriceRange = this.initialPriceRangeValue(priceFilter.paramName);
 
@@ -255,7 +255,7 @@ class SearchFiltersMobileComponent extends Component {
           </div>
           <div className={css.filtersWrapper}>
             {categoryFilterElement}
-            {amenitiesFilterElement}
+            {/* {amenitiesFilterElement} */}
             {priceFilterElement}
           </div>
           <div className={css.showListingsContainer}>

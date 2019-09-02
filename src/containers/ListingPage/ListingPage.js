@@ -36,11 +36,13 @@ import {
 import { TopbarContainer, NotFoundPage } from '../../containers';
 
 import { sendEnquiry, loadData, setInitialValues } from './ListingPage.duck';
+import SectionCharacteristicsMaybe from './SectionCharacteristicsMaybe';
 import SectionHorseInfo from './SectionHorseInfo';
 import SectionImages from './SectionImages';
 import SectionAvatar from './SectionAvatar';
 import SectionHeading from './SectionHeading';
 import SectionDescriptionMaybe from './SectionDescriptionMaybe';
+import SectionDisciplinesMaybe from './SectionDisciplinesMaybe';
 import SectionFeatures from './SectionFeatures';
 import SectionReviews from './SectionReviews';
 import SectionHost from './SectionHost';
@@ -412,11 +414,9 @@ export class ListingPageComponent extends Component {
                     onContactUser={this.onContactUser}
                   />
                   <SectionHorseInfo options={publicData.horseInfo} />
+                  <SectionDisciplinesMaybe disciplines={publicData.additionalDisciplines} />
                   <SectionDescriptionMaybe description={description} />
-                  <SectionFeatures
-                    options={amenitiesConfig}
-                    selectedOptions={publicData.amenities}
-                  />
+                  <SectionCharacteristicsMaybe characteristics={publicData.characteristics} />
                   <SectionRulesMaybe publicData={publicData} />
                   <SectionMapMaybe
                     geolocation={geolocation}

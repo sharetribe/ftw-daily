@@ -8,8 +8,11 @@ const IconCheckmark = props => {
   const { rootClassName, className } = props;
   const classes = classNames(rootClassName || css.root, className);
   return (
-    <svg className={classes} strokeWidth="2" xmlns="http://www.w3.org/2000/svg">
-      <path d="M22.6 1.2c-.4-.3-1-.2-1.3.2L7.8 19l-5.2-5c-.4-.4-1-.4-1.3 0-.4.3-.4.8 0 1l6 5.6.6.2s.2 0 .4-.4l14.3-18c.3-.5.2-1-.2-1" />
+    <svg className={classes} viewBox="0 0 488.878 488.878" xmlns="http://www.w3.org/2000/svg">
+      <polygon
+        points="143.294,340.058 50.837,247.602 0,298.439 122.009,420.447 122.149,420.306 
+			144.423,442.58 488.878,98.123 437.055,46.298 		"
+      />
     </svg>
   );
 };

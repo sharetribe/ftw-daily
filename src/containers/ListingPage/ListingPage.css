@@ -577,38 +577,45 @@
   hyphens: auto;
 }
 
-.horseInfoTitle {
-  /* Font */
+.threeColumns {
+  columns: 3;
+}
+.listingSectionContainer {
+  margin-bottom: 40px;
+}
+
+.listingSectionTitle {
   @apply --marketplaceH3FontStyles;
   color: var(--matterColorDark);
+  font-weight: bold;
 
   margin-top: 0;
-  margin-bottom: 13px;
+  margin-bottom: 12px;
   @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 20px;
   }
 }
-.horseInfoItemTitle {
-  margin-top: 0;
-  margin-bottom: 0;
-
-  /* Preserve newlines, but collapse other whitespace */
-  white-space: pre-line;
-
-  @media (--viewportMedium) {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-}
-.horseInfoItemValue {
+.listingPrimaryText {
   @apply --marketplaceH3FontStyles;
   color: var(--matterColorDark);
-
+  font-weight: normal;
   margin: 0;
 }
-.horseInfoItem {
+.listingSecondaryText {
+  @apply --marketplaceH4FontStyles;
+  color: var(--matterColorDark);
+  font-weight: normal;
+  margin: 0;
+}
+.bold {
+  font-weight: bold;
+}
+.listingItemContainer {
   display: flex;
   align-items: center;
   margin-bottom: 24px;
+}
+.listingIcon {
+  margin-right: 12px;
 }

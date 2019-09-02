@@ -56,7 +56,7 @@ export class SearchPageComponent extends Component {
 
     return {
       categoryFilter: {
-        paramName: 'pub_category',
+        paramName: 'pub_horseInfo.mainDiscipline',
         options: categories,
       },
       amenitiesFilter: {
@@ -207,8 +207,8 @@ export class SearchPageComponent extends Component {
             searchParamsForPagination={parse(location.search)}
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             primaryFilters={{
-              categoryFilter: filters.categoryFilter,
-              amenitiesFilter: filters.amenitiesFilter,
+              // categoryFilter: filters.categoryFilter,
+              // amenitiesFilter: filters.amenitiesFilter,
               priceFilter: filters.priceFilter,
             }}
           />

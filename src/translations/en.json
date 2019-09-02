@@ -310,7 +310,7 @@
   "ListingPage.errorLoadingListingTitle": "Error in loading listing",
   "ListingPage.featuresTitle": "Amenities",
   "ListingPage.finishListing": "Finish listing",
-  "ListingPage.hostedBy": "Hosted by {name}",
+  "ListingPage.hostedBy": "horse - by {name}",
   "ListingPage.loadingListingMessage": "Loading listing…",
   "ListingPage.loadingListingTitle": "Loading listing…",
   "ListingPage.locationTitle": "Location",
