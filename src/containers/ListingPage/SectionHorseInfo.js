@@ -10,14 +10,19 @@ const SectionHorseInfo = props => {
       <h2 className={css.horseInfoTitle}>
         <FormattedMessage id="ListingPage.horseInfoTitle" />
       </h2>
-      <div>
+      <ul style={{ columns: 3 }}>
         {Object.keys(options).map(key => (
-          <div>
-            <span>{key}</span>
-            <span>{options[key]}</span>
-          </div>
+          <li className={css.horseInfoItem}>
+            <p>icon</p>
+            <div>
+              <p className={css.horseInfoItemTitle}>
+                <FormattedMessage id={`ListingPage.horseInfo.${key}`} />
+              </p>
+              <p className={css.horseInfoItemValue}>{options[key]}</p>
+            </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };

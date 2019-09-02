@@ -576,3 +576,39 @@
   word-break: break-word;
   hyphens: auto;
 }
+
+.horseInfoTitle {
+  /* Font */
+  @apply --marketplaceH3FontStyles;
+  color: var(--matterColorDark);
+
+  margin-top: 0;
+  margin-bottom: 13px;
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+}
+.horseInfoItemTitle {
+  margin-top: 0;
+  margin-bottom: 0;
+
+  /* Preserve newlines, but collapse other whitespace */
+  white-space: pre-line;
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+.horseInfoItemValue {
+  @apply --marketplaceH3FontStyles;
+  color: var(--matterColorDark);
+
+  margin: 0;
+}
+.horseInfoItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
