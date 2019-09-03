@@ -27,10 +27,20 @@
   @apply --marketplaceLinkStyles;
 }
 
+.submitButtonRoot {
+  @apply --marketplaceButtonStylesSubmit;
+
+  padding: 0;
+}
+
 .primaryButton {
   /* Class handle for primary button state styles */
 }
 .secondaryButton {
+  /* Class handle for secondary button state styles */
+}
+
+.submitButton {
   /* Class handle for secondary button state styles */
 }
 

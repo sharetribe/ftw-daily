@@ -192,3 +192,30 @@ export const signup = params => (dispatch, getState, sdk) => {
       });
     });
 };
+
+// Signup for Operators
+export const signupOperator = params => (dispatch, getState, sdk) => {
+  if (authenticationInProgress(getState())) {
+    return Promise.reject(new Error('Login or logout already in progress'));
+  }
+  dispatch(signupRequest());
+  const { email, password, displayName, ...rest } = params;
+
+  const createUserParams = isEmpty(rest)
+    ? { email, password, firstName: ' ', lastName: ' ', displayName }
+    : { email, password, firstName: ' ', lastName: ' ', displayName, protectedData: { ...rest } };
+
+  // We must login the user if signup succeeds since the API doesn't
+  // do that automatically.
+  return sdk.currentUser
+    .create(createUserParams)
+    .then(() => dispatch(signupSuccess()))
+    .then(() => dispatch(login(email, password)))
+    .catch(e => {
+      dispatch(signupError(storableError(e)));
+      log.error(e, 'signup-failed', {
+        email: params.email,
+        displayName: params.displayName,
+      });
+    });
+};

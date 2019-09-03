@@ -24,7 +24,7 @@
     /* Gradient direction and overlaying the black color on top of the image for better readability */
     background: linear-gradient(-45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)),
       url('../../assets/background-1440.jpg');
-
+  
     /* Add loading color for the div */
     background-color: var(--matterColor);
 
@@ -39,12 +39,33 @@
       border: solid 36px var(--matterColorBright);
     }
   }
+  
+  --backgroundImageOperatorAuth: {
+    /* Gradient direction and overlaying the black color on top of the image for better readability */
+    background: linear-gradient(-45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
+      url('../../assets/operator-mountains.jpg');
+      /* Add loading color for the div */
+    background-color: var(--matterColor);
 
+    /* Cover the whole screen with the background image */
+    background-size: cover;
+
+    /* Align the image within the container */
+    background-position: center center;
+    /* add min height to stop background image resizing from signup to login switch */
+    min-height: 890px;
+    @media (--viewportLarge) {
+      border-radius: 40px;
+      border: solid 36px var(--matterColorBright);
+    }
+  }
   /* ================ Colors ================ */
 
   --marketplaceColor: #c0392b;
   --marketplaceColorLight: #ff4c38;
   --marketplaceColorDark: #8c291e;
+  --marketplaceSecondaryColor: #1F5DAB;
+  --marketplaceSecondaryColorDarker: #1a4e8e;
 
   /* Used with inline CSS SVGs */
   --marketplaceColorEncoded: %23c0392b;
@@ -255,6 +276,22 @@
     }
   }
 
+  --marketplaceButtonStylesSubmit {
+    @apply --marketplaceButtonStyles;
+
+    background-color: var(--marketplaceSecondaryColor);
+    color: var(--matterColorLight);
+
+    &:hover,
+    &:focus {
+      background-color: var(--marketplaceSecondaryColorDarker);
+    }
+    &:disabled {
+      background-color: var(--matterColorNegative);
+      color: var(--matterColorLight);
+    }
+  }
+
   /* ================ Inputs ================ */
 
   --marketplaceInputStyles: {
@@ -373,7 +410,7 @@
       padding: var(--modalPaddingMedium);
       margin-top: 12.5vh;
       margin-bottom: 12.5vh;
-      border-bottom: 8px solid var(--marketplaceColor);
+      border-bottom: 8px solid var(--marketplaceSecondaryColor);
     }
   }
 

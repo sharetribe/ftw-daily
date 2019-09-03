@@ -86,3 +86,9 @@ export const InlineTextButton = props => {
   return <Button {...props} rootClassName={classes} />;
 };
 InlineTextButton.displayName = 'InlineTextButton';
+
+export const SubmitButton = props => {
+  const classes = classNames(props.rootClassName || css.submitButtonRoot, css.submitButton);
+  return <Button {...props} rootClassName={classes} />;
+};
+SubmitButton.displayName = 'SubmitButton';

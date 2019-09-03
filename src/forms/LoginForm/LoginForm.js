@@ -4,8 +4,9 @@ import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Form as FinalForm } from 'react-final-form';
 import classNames from 'classnames';
-import { Form, PrimaryButton, FieldTextInput, NamedLink } from '../../components';
+import { Form, FieldTextInput, NamedLink } from '../../components';
 import * as validators from '../../util/validators';
+import { SubmitButton } from '../../components/Button/Button';
 
 import css from './LoginForm.css';
 
@@ -93,9 +94,9 @@ const LoginFormComponent = props => (
                 />
               </span>
             </p>
-            <PrimaryButton type="submit" inProgress={submitInProgress} disabled={submitDisabled}>
+            <SubmitButton type="submit" inProgress={submitInProgress} disabled={submitDisabled}>
               <FormattedMessage id="LoginForm.logIn" />
-            </PrimaryButton>
+            </SubmitButton>
           </div>
         </Form>
       );
