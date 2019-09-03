@@ -2,7 +2,7 @@ import React from 'react';
 import ResponsiveImage from './ResponsiveImage';
 import { types as sdkTypes } from '../../util/sdkLoader';
 
-import css from './ResponsiveImage.example.css';
+import css from './ResponsiveImageExample.css';
 
 const { UUID } = sdkTypes;
 

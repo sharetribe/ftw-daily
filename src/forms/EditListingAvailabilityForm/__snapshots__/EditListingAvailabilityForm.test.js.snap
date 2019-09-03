@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditListingAvailabilityForm matches snapshot 1`] = `
+<ReactFinalForm
+  availability={
+    Object {
+      "calendar": Object {},
+      "onCreateAvailabilityException": [Function],
+      "onDeleteAvailabilityException": [Function],
+      "onFetchAvailabilityExceptions": [Function],
+      "onFetchBookings": [Function],
+    }
+  }
+  availabilityPlan={
+    Object {
+      "entries": Array [
+        Object {
+          "dayOfWeek": "mon",
+          "seats": 1,
+        },
+        Object {
+          "dayOfWeek": "tue",
+          "seats": 1,
+        },
+        Object {
+          "dayOfWeek": "wed",
+          "seats": 1,
+        },
+        Object {
+          "dayOfWeek": "thu",
+          "seats": 1,
+        },
+        Object {
+          "dayOfWeek": "fri",
+          "seats": 1,
+        },
+        Object {
+          "dayOfWeek": "sat",
+          "seats": 1,
+        },
+        Object {
+          "dayOfWeek": "sun",
+          "seats": 1,
+        },
+      ],
+      "type": "availability-plan/day",
+    }
+  }
+  dispatch={[Function]}
+  intl={
+    Object {
+      "formatDate": [Function],
+      "formatHTMLMessage": [Function],
+      "formatMessage": [Function],
+      "formatNumber": [Function],
+      "formatPlural": [Function],
+      "formatRelativeTime": [Function],
+      "formatTime": [Function],
+      "now": [Function],
+    }
+  }
+  onSubmit={[Function]}
+  render={[Function]}
+  saveActionMsg="Save rules"
+  updateError={null}
+  updateInProgress={false}
+  updated={false}
+/>
+`;

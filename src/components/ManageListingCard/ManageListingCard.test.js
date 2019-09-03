@@ -18,6 +18,7 @@ describe('ManageListingCard', () => {
         onToggleMenu={noop}
         hasClosingError={false}
         hasOpeningError={false}
+        availabilityEnabled={true}
       />
     );
     expect(tree).toMatchSnapshot();

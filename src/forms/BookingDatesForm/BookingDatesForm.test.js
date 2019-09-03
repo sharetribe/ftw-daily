@@ -4,7 +4,7 @@ import Decimal from 'decimal.js';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { renderShallow, renderDeep } from '../../util/test-helpers';
 import { fakeIntl } from '../../util/test-data';
-import { LINE_ITEM_NIGHT, TRANSITION_REQUEST } from '../../util/types';
+import { LINE_ITEM_NIGHT } from '../../util/types';
 import { dateFromAPIToLocalNoon } from '../../util/dates';
 import { BookingBreakdown } from '../../components';
 import { BookingDatesFormComponent } from './BookingDatesForm';
@@ -70,7 +70,6 @@ describe('EstimatedBreakdownMaybe', () => {
     expect(dateFromAPIToLocalNoon(booking.attributes.start)).toEqual(startDate);
     expect(dateFromAPIToLocalNoon(booking.attributes.end)).toEqual(endDate);
 
-    expect(transaction.attributes.lastTransition).toEqual(TRANSITION_REQUEST);
     expect(transaction.attributes.payinTotal).toEqual(new Money(2198, 'USD'));
     expect(transaction.attributes.payoutTotal).toEqual(new Money(2198, 'USD'));
     expect(transaction.attributes.lineItems).toEqual([

@@ -2,15 +2,15 @@ import React from 'react';
 import { bool, func } from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import { ensureCurrentUser } from '../../util/data';
 import { propTypes } from '../../util/types';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { stripeAccountClearError } from '../../ducks/user.duck';
+import { stripeAccountClearError } from '../../ducks/stripe.duck';
 import {
   LayoutSideNavigation,
   LayoutWrapperMain,
-  LayoutWrapperSideNav,
+  LayoutWrapperAccountSettingsSideNav,
   LayoutWrapperTopbar,
   LayoutWrapperFooter,
   Footer,
@@ -37,31 +37,10 @@ export const PayoutPreferencesPageComponent = props => {
 
   const ensuredCurrentUser = ensureCurrentUser(currentUser);
   const currentUserLoaded = !!ensuredCurrentUser.id;
-  const { stripeConnected } = ensuredCurrentUser.attributes;
-
-  const tabs = [
-    {
-      text: <FormattedMessage id="PayoutPreferencesPage.contactDetailsTabTitle" />,
-      selected: false,
-      linkProps: {
-        name: 'ContactDetailsPage',
-      },
-    },
-    {
-      text: <FormattedMessage id="PayoutPreferencesPage.passwordTabTitle" />,
-      selected: false,
-      linkProps: {
-        name: 'PasswordChangePage',
-      },
-    },
-    {
-      text: <FormattedMessage id="PayoutPreferencesPage.paymentsTabTitle" />,
-      selected: true,
-      linkProps: {
-        name: 'PayoutPreferencesPage',
-      },
-    },
-  ];
+  const stripeConnected =
+    currentUserLoaded &&
+    !!ensuredCurrentUser.stripeAccount &&
+    !!ensuredCurrentUser.stripeAccount.id;
 
   const title = intl.formatMessage({ id: 'PayoutPreferencesPage.title' });
   const formDisabled = !currentUserLoaded || stripeConnected || payoutDetailsSaved;
@@ -76,11 +55,6 @@ export const PayoutPreferencesPageComponent = props => {
     message = <FormattedMessage id="PayoutPreferencesPage.stripeNotConnected" />;
   }
 
-  const handlePayoutDetailsSubmit = values => {
-    const { fname: firstName, lname: lastName, ...rest } = values;
-    onPayoutDetailsFormSubmit({ firstName, lastName, ...rest });
-  };
-
   const showForm =
     currentUserLoaded && (payoutDetailsSaveInProgress || payoutDetailsSaved || !stripeConnected);
   const form = showForm ? (
@@ -91,7 +65,8 @@ export const PayoutPreferencesPageComponent = props => {
       submitButtonText={intl.formatMessage({ id: 'PayoutPreferencesPage.submitButtonText' })}
       createStripeAccountError={createStripeAccountError}
       onChange={onPayoutDetailsFormChange}
-      onSubmit={handlePayoutDetailsSubmit}
+      onSubmit={onPayoutDetailsFormSubmit}
+      currentUserId={ensuredCurrentUser.id}
     />
   ) : null;
 
@@ -106,7 +81,7 @@ export const PayoutPreferencesPageComponent = props => {
           />
           <UserNav selectedPageName="PayoutPreferencesPage" />
         </LayoutWrapperTopbar>
-        <LayoutWrapperSideNav tabs={tabs} />
+        <LayoutWrapperAccountSettingsSideNav currentTab="PayoutPreferencesPage" />
         <LayoutWrapperMain>
           <div className={css.content}>
             <h1 className={css.title}>
@@ -144,7 +119,8 @@ PayoutPreferencesPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { createStripeAccountError, currentUser } = state.user;
+  const { createStripeAccountError } = state.stripe;
+  const { currentUser } = state.user;
   const { payoutDetailsSaveInProgress, payoutDetailsSaved } = state.PayoutPreferencesPage;
   return {
     currentUser,

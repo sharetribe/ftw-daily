@@ -75,6 +75,7 @@
 }
 
 .submitButton {
+  @apply --marketplaceButtonStylesSecondary;
   @apply --marketplaceH5FontStyles;
   font-weight: var(--fontWeightMedium);
 

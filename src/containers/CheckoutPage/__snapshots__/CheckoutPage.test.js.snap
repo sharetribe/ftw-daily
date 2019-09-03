@@ -46,12 +46,14 @@ exports[`CheckoutPage matches snapshot 1`] = `
           Object {
             "attributes": Object {
               "banned": false,
+              "deleted": false,
               "profile": Object {
                 "abbreviatedName": "TT",
                 "displayName": "author display name",
               },
             },
             "id": UUID {
+              "_sdkType": "UUID",
               "uuid": "author",
             },
             "type": "user",
@@ -84,12 +86,24 @@ exports[`CheckoutPage matches snapshot 1`] = `
         </h3>
       </div>
       <section>
-        <InjectIntl(StripePaymentForm)
+        <injectIntl(StripePaymentForm)
           authorDisplayName="author display name"
+          confirmPaymentError={null}
+          defaultPaymentMethod={null}
           formId="CheckoutPagePaymentForm"
+          hasHandledCardPayment={null}
           inProgress={false}
+          initialValues={
+            Object {
+              "name": "currentUser first name currentUser last name",
+            }
+          }
+          initiateOrderError={null}
+          loadingData={true}
+          onStripeInitialized={[Function]}
           onSubmit={[Function]}
           paymentInfo="CheckoutPage.paymentInfo"
+          paymentIntent={null}
           showInitialMessageInput={true}
         />
       </section>
@@ -117,12 +131,14 @@ exports[`CheckoutPage matches snapshot 1`] = `
             Object {
               "attributes": Object {
                 "banned": false,
+                "deleted": false,
                 "profile": Object {
                   "abbreviatedName": "TT",
                   "displayName": "author display name",
                 },
               },
               "id": UUID {
+                "_sdkType": "UUID",
                 "uuid": "author",
               },
               "type": "user",

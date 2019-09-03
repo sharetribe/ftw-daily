@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { intlShape } from 'react-intl';
+import { intlShape } from '../../util/reactIntl';
 import routeConfiguration from '../../routeConfiguration';
 import {
   LISTING_PAGE_PARAM_TYPE_DRAFT,
@@ -13,6 +13,7 @@ import {
   EditListingCharacterPanel,
   EditListingHorsePanel,
   EditListingDisciplinePanel,
+  EditListingAvailabilityPanel,
   EditListingDescriptionPanel,
   EditListingLocationPanel,
   EditListingPhotosPanel,
@@ -24,6 +25,7 @@ import css from './EditListingWizard.css';
 export const HORSE = 'horse';
 export const DISCIPLINE = 'discipline';
 export const CHARACTER = 'character';
+export const AVAILABILITY = 'availability';
 export const DESCRIPTION = 'description';
 export const LOCATION = 'location';
 export const PRICING = 'pricing';
@@ -81,6 +83,7 @@ const EditListingWizardTab = props => {
     newListingPublished,
     history,
     images,
+    availability,
     listing,
     handleCreateFlowTabScrolling,
     handlePublishListing,
@@ -237,6 +240,21 @@ const EditListingWizardTab = props => {
         />
       );
     }
+    case AVAILABILITY: {
+      const submitButtonTranslationKey = isNewListingFlow
+        ? 'EditListingWizard.saveNewAvailability'
+        : 'EditListingWizard.saveEditAvailability';
+      return (
+        <EditListingAvailabilityPanel
+          {...panelProps(AVAILABILITY)}
+          availability={availability}
+          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          onSubmit={values => {
+            onCompleteEditListingWizardTab(tab, values);
+          }}
+        />
+      );
+    }
     case PHOTOS: {
       const submitButtonTranslationKey = isNewListingFlow
         ? 'EditListingWizard.saveNewPhotos'
@@ -292,6 +310,7 @@ EditListingWizardTab.propTypes = {
     replace: func.isRequired,
   }).isRequired,
   images: array.isRequired,
+  availability: object.isRequired,
 
   // We cannot use propTypes.listing since the listing might be a draft.
   listing: shape({

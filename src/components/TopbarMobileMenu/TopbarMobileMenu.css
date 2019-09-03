@@ -55,6 +55,7 @@
 }
 
 .logoutButton {
+  @apply --marketplaceLinkStyles;
   /* Logout font is smaller and gray since the action is not recommended. */
   @apply --marketplaceH3FontStyles;
   color: var(--matterColorAnti);

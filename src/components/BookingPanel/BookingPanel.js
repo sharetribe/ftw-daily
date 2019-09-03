@@ -1,9 +1,8 @@
 import React from 'react';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
-import { intlShape, injectIntl } from 'react-intl';
+import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
 import { arrayOf, bool, func, node, oneOfType, shape, string } from 'prop-types';
-import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
 import { propTypes, LISTING_STATE_CLOSED, LINE_ITEM_NIGHT, LINE_ITEM_DAY } from '../../util/types';
@@ -69,7 +68,9 @@ const BookingPanel = props => {
   } = props;
 
   const price = listing.attributes.price;
-  const isClosed = listing.attributes.state === LISTING_STATE_CLOSED;
+  const hasListingState = !!listing.attributes.state;
+  const isClosed = hasListingState && listing.attributes.state === LISTING_STATE_CLOSED;
+  const showBookingDatesForm = hasListingState && !isClosed;
   const showClosedListingHelpText = listing.id && isClosed;
   const { formattedPrice, priceTitle } = priceData(price, intl);
   const isBook = !!parse(location.search).book;
@@ -113,9 +114,10 @@ const BookingPanel = props => {
           <h2 className={titleClasses}>{title}</h2>
           {subTitleText ? <div className={css.bookingHelp}>{subTitleText}</div> : null}
         </div>
-        {!isClosed ? (
+        {showBookingDatesForm ? (
           <BookingDatesForm
             className={css.bookingForm}
+            formId="BookingPanel"
             submitButtonWrapperClassName={css.bookingDatesSubmitButtonWrapper}
             unitType={unitType}
             onSubmit={onSubmit}
@@ -136,7 +138,7 @@ const BookingPanel = props => {
           </div>
         </div>
 
-        {!isClosed ? (
+        {showBookingDatesForm ? (
           <Button
             rootClassName={css.bookButton}
             onClick={() => openBookModal(isOwnListing, isClosed, history, location)}
@@ -168,13 +170,13 @@ BookingPanel.propTypes = {
   rootClassName: string,
   className: string,
   titleClassName: string,
-  listing: propTypes.listing.isRequired,
+  listing: oneOfType([propTypes.listing, propTypes.ownListing]),
   isOwnListing: bool,
   unitType: propTypes.bookingUnitType,
   onSubmit: func.isRequired,
   title: oneOfType([node, string]).isRequired,
   subTitle: oneOfType([node, string]),
-  authorDisplayName: string.isRequired,
+  authorDisplayName: oneOfType([node, string]).isRequired,
   onManageDisableScrolling: func.isRequired,
   timeSlots: arrayOf(propTypes.timeSlot),
   fetchTimeSlotsError: propTypes.error,
