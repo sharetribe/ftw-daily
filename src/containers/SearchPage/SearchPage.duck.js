@@ -120,7 +120,7 @@ export const searchMapListingsError = e => ({
 
 export const searchListings = searchParams => (dispatch, getState, sdk) => {
   dispatch(searchListingsRequest(searchParams));
-
+  
   const priceSearchParams = priceParam => {
     const inSubunits = value =>
       convertUnitToSubUnit(value, unitDivisor(config.currencyConfig.currency));
@@ -161,12 +161,15 @@ export const searchListings = searchParams => (dispatch, getState, sdk) => {
     per_page: perPage,
   };
 
+  console.log(params);
   return sdk.listings
     .query(params)
     .then(response => {
       dispatch(addMarketplaceEntities(response));
       dispatch(searchListingsSuccess(response));
+      console.log(response);
       return response;
+      
     })
     .catch(e => {
       dispatch(searchListingsError(storableError(e)));
