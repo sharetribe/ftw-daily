@@ -46,7 +46,7 @@ const SearchFiltersComponent = props => {
     listingsAreLoaded,
     resultsCount,
     searchInProgress,
-    characteristicsFilter,
+    mainDisciplineFilter,
     amenitiesFilter,
     priceFilter,
     isSearchFiltersPanelOpen,
@@ -59,8 +59,8 @@ const SearchFiltersComponent = props => {
   const hasNoResult = listingsAreLoaded && resultsCount === 0;
   const classes = classNames(rootClassName || css.root, { [css.longInfo]: hasNoResult }, className);
 
-  const characteristicsLabel = intl.formatMessage({
-    id: 'SearchFilters.characteristicsLabel',
+  const disciplinesLabel = intl.formatMessage({
+    id: 'SearchFilters.disciplinesLabel',
   });
 
   const amenitiesLabel = intl.formatMessage({
@@ -71,8 +71,8 @@ const SearchFiltersComponent = props => {
     ? initialValues(urlQueryParams, amenitiesFilter.paramName)
     : null;
 
-  const initialCharacteristics = characteristicsFilter
-    ? initialValue(urlQueryParams, characteristicsFilter.paramName)
+  const initialDisciplines = mainDisciplineFilter
+    ? initialValue(urlQueryParams, mainDisciplineFilter.paramName)
     : null;
 
   const initialPriceRange = priceFilter
@@ -108,13 +108,13 @@ const SearchFiltersComponent = props => {
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   };
 
-  const characteristicsFilterElement = characteristicsFilter ? (
+  const mainDisciplineFilterElement = mainDisciplineFilter ? (
     <SelectSingleFilter
-      urlParam={characteristicsFilter.paramName}
-      label={characteristicsLabel}
+      urlParam={mainDisciplineFilter.paramName}
+      label={disciplinesLabel}
       onSelect={handleSelectOption}
-      options={characteristicsFilter.options}
-      initialValue={initialCharacteristics}
+      options={mainDisciplineFilter.options}
+      initialValue={initialDisciplines}
       contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
     />
   ) : null;
@@ -164,7 +164,7 @@ const SearchFiltersComponent = props => {
   return (
     <div className={classes}>
       <div className={css.filters}>
-        {characteristicsFilterElement}
+        {mainDisciplineFilterElement}
         {amenitiesFilterElement}
         {priceFilterElement}
         {toggleSearchFiltersPanelButton}

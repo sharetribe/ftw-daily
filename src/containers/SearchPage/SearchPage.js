@@ -52,11 +52,11 @@ export class SearchPageComponent extends Component {
   }
 
   filters() {
-    const { characteristics, priceFilterConfig } = this.props;
+    const { disciplines, priceFilterConfig } = this.props;
     return {
-      characteristicsFilter: {
-        paramName: 'pub_characteristics',
-        options: characteristics,
+      mainDisciplineFilter: {
+        paramName: 'pub_mainDiscipline',
+        options: disciplines,
       },
       priceFilter: {
         paramName: 'price',
@@ -202,7 +202,7 @@ export class SearchPageComponent extends Component {
             searchParamsForPagination={parse(location.search)}
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             primaryFilters={{
-              characteristicsFilter: filters.characteristicsFilter,
+              mainDisciplineFilter: filters.mainDisciplineFilter,
               priceFilter: filters.priceFilter,
             }}
           />
@@ -247,8 +247,7 @@ SearchPageComponent.defaultProps = {
   searchListingsError: null,
   searchParams: {},
   tab: 'listings',
-  characteristics: config.custom.characteristics,
-  amenities: config.custom.amenities,
+  disciplines: config.custom.disciplines,
   priceFilterConfig: config.custom.priceFilterConfig,
   activeListingId: null,
 };
@@ -265,7 +264,7 @@ SearchPageComponent.propTypes = {
   searchListingsError: propTypes.error,
   searchParams: object,
   tab: oneOf(['filters', 'listings', 'map']).isRequired,
-  characteristics: array,
+  disciplines: array,
   priceFilterConfig: shape({
     min: number.isRequired,
     max: number.isRequired,
