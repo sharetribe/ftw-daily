@@ -53,7 +53,6 @@ export class SearchPageComponent extends Component {
 
   filters() {
     const { characteristics, priceFilterConfig } = this.props;
-    console.log(123123, this.props);
     return {
       characteristicsFilter: {
         paramName: 'pub_characteristics',
