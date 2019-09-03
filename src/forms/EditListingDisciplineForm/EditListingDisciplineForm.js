@@ -113,7 +113,6 @@ EditListingDisciplineFormComponent.propTypes = {
   rootClassName: string,
   className: string,
   intl: intlShape.isRequired,
-  name: string.isRequired,
   onSubmit: func.isRequired,
   saveActionMsg: string.isRequired,
   updated: bool.isRequired,

@@ -257,7 +257,9 @@ export function requestShowListing(actionPayload) {
 
 export function requestCreateListingDraft(data) {
   return (dispatch, getState, sdk) => {
-    dispatch(createListingDraft(data));
+    // Create listing with default title
+    const customData = { ...data, title: 'title' };
+    dispatch(createListingDraft(customData));
 
     const queryParams = {
       expand: true,
@@ -266,7 +268,7 @@ export function requestCreateListingDraft(data) {
     };
 
     return sdk.ownListings
-      .createDraft(data, queryParams)
+      .createDraft(customData, queryParams)
       .then(response => {
         //const id = response.data.data.id.uuid;
 
@@ -278,7 +280,7 @@ export function requestCreateListingDraft(data) {
         return response;
       })
       .catch(e => {
-        log.error(e, 'create-listing-draft-failed', { listingData: data });
+        log.error(e, 'create-listing-draft-failed', { listingData: customData });
         return dispatch(createListingDraftError(storableError(e)));
       });
   };

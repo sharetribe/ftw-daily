@@ -26,7 +26,7 @@ import css from './EditListingWizard.css';
 
 // TODO: PHOTOS panel needs to be the last one since it currently contains PayoutDetailsForm modal
 // All the other panels can be reordered.
-export const TABS = [HORSE, DISCIPLINE, CHARACTER, DESCRIPTION, LOCATION, PRICING, PHOTOS];
+export const TABS = [PHOTOS, HORSE, DISCIPLINE, CHARACTER, DESCRIPTION, LOCATION, PRICING];
 
 // Tabs are horizontal in small screens
 const MAX_HORIZONTAL_NAV_SCREEN_WIDTH = 1023;

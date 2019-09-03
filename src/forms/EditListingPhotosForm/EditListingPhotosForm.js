@@ -239,7 +239,7 @@ EditListingPhotosFormComponent.propTypes = {
   onSubmit: func.isRequired,
   saveActionMsg: string.isRequired,
   updated: bool.isRequired,
-  ready: bool.isRequired,
+
   updateInProgress: bool.isRequired,
   onRemoveImage: func.isRequired,
 };
