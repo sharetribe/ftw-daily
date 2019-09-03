@@ -149,7 +149,6 @@ export const searchListings = searchParams => (dispatch, getState, sdk) => {
         }
       : {};
   };
-  console.log(666, searchParams);
 
   const { perPage, price, dates, ...rest } = searchParams;
   const priceMaybe = priceSearchParams(price);
@@ -164,8 +163,6 @@ export const searchListings = searchParams => (dispatch, getState, sdk) => {
   return sdk.listings
     .query(params)
     .then(response => {
-      console.log(123123, response);
-
       dispatch(addMarketplaceEntities(response));
       dispatch(searchListingsSuccess(response));
 
