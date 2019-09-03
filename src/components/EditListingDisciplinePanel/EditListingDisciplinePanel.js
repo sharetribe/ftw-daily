@@ -25,7 +25,7 @@ const EditListingDisciplinePanel = props => {
 
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
-  const { horseInfo, additionalDisciplines } = currentListing.attributes.publicData;
+  const { mainDiscipline, additionalDisciplines } = currentListing.attributes.publicData;
 
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
@@ -42,7 +42,7 @@ const EditListingDisciplinePanel = props => {
       <h1 className={css.title}>{panelTitle}</h1>
       <EditListingDisciplineForm
         className={css.form}
-        initialValues={{ mainDiscipline: horseInfo.mainDiscipline, additionalDisciplines }}
+        initialValues={{ mainDiscipline, additionalDisciplines }}
         saveActionMsg={submitButtonText}
         onSubmit={values => {
           const { mainDiscipline, additionalDisciplines } = values;
@@ -53,7 +53,7 @@ const EditListingDisciplinePanel = props => {
           }
 
           const updateValues = {
-            publicData: { horseInfo: { ...horseInfo, mainDiscipline }, additionalDisciplines },
+            publicData: { mainDiscipline, additionalDisciplines },
           };
           onSubmit(updateValues);
         }}

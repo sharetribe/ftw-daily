@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from '../../util/reactIntl';
 import { LINE_ITEM_UNITS, propTypes } from '../../util/types';
 
 import css from './BookingBreakdown.css';

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import classNames from 'classnames';
 import config from '../../config';
 import { propTypes } from '../../util/types';
@@ -157,7 +157,7 @@ export class AuthenticationPageComponent extends Component {
     const email = <span className={css.email}>{user.attributes.email}</span>;
 
     const resendEmailLink = (
-      <InlineTextButton className={css.modalHelperLink} onClick={onResendVerificationEmail}>
+      <InlineTextButton rootClassName={css.modalHelperLink} onClick={onResendVerificationEmail}>
         <FormattedMessage id="AuthenticationPage.resendEmailLinkText" />
       </InlineTextButton>
     );

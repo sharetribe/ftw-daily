@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { array, bool, func, object, string } from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { LISTING_STATE_DRAFT } from '../../util/types';
 import { EditListingPhotosForm } from '../../forms';
@@ -83,8 +83,6 @@ EditListingPhotosPanel.propTypes = {
   className: string,
   rootClassName: string,
   errors: object,
-  fetchInProgress: bool.isRequired,
-  newListingPublished: bool.isRequired,
   images: array,
 
   // We cannot use propTypes.listing since the listing might be a draft.

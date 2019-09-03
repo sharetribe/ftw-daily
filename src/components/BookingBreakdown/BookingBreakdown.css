@@ -32,6 +32,21 @@
   justify-content: space-between;
 }
 
+.subTotalLineItem {
+  @apply --marketplaceH4FontStyles;
+  font-weight: var(--fontWeightBold);
+
+  margin: 4px 0 1px 0;
+
+  @media (--viewportMedium) {
+    margin: 6px 0 9px 0;
+  }
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .itemLabel {
   flex: 1;
   margin-top: 1px; /* align with baseline */
@@ -66,7 +81,7 @@
   font-weight: var(--fontWeightSemiBold);
 
   /* Move so that baseline aligns with the total price */
-  padding-top: 7px;
+  padding-top: 6px;
 
   @media (--viewportMedium) {
     padding-top: 8px;
@@ -77,9 +92,11 @@
   @apply --marketplaceBodyFontStyles;
   font-weight: var(--fontWeightSemiBold);
   margin: 0 0 0 10px;
+  padding-top: 4px;
 
   @media (--viewportMedium) {
     margin: 2px 0 0 10px;
+    padding-top: 0;
   }
 }
 

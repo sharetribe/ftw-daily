@@ -5,7 +5,7 @@ import { types as sdkTypes } from '../../util/sdkLoader';
 import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { denormalisedResponseEntities } from '../../util/data';
-import { TRANSITION_ENQUIRE } from '../../util/types';
+import { TRANSITION_ENQUIRE } from '../../util/transaction';
 import {
   LISTING_PAGE_DRAFT_VARIANT,
   LISTING_PAGE_PENDING_APPROVAL_VARIANT,
@@ -171,7 +171,7 @@ export const showListing = (listingId, isOwn = false) => (dispatch, getState, sd
 };
 
 export const fetchReviews = listingId => (dispatch, getState, sdk) => {
-  dispatch(fetchReviewsRequest);
+  dispatch(fetchReviewsRequest());
   return sdk.reviews
     .query({
       listing_id: listingId,
@@ -277,7 +277,7 @@ export const loadData = (params, search) => dispatch => {
     return dispatch(showListing(listingId, true));
   }
 
-  if (config.fetchAvailableTimeSlots) {
+  if (config.enableAvailability) {
     return Promise.all([
       dispatch(showListing(listingId)),
       dispatch(fetchTimeSlots(listingId)),

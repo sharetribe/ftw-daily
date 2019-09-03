@@ -6,7 +6,16 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
   title="EditListingPage.titleCreateListing"
 >
   <withRouter(Connect(TopbarContainerComponent)) />
-  <withViewport(InjectIntl(EditListingWizard))
+  <withViewport(injectIntl(EditListingWizard))
+    availability={
+      Object {
+        "calendar": undefined,
+        "onCreateAvailabilityException": [Function],
+        "onDeleteAvailabilityException": [Function],
+        "onFetchAvailabilityExceptions": [Function],
+        "onFetchBookings": [Function],
+      }
+    }
     currentUser={null}
     errors={
       Object {

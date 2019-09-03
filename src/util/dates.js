@@ -7,6 +7,26 @@ export const START_DATE = 'startDate';
 export const END_DATE = 'endDate';
 
 /**
+ * Check that the given parameter is a Date object.
+ *
+ * @param {Date} object that should be a Date.
+ *
+ * @returns {boolean} true if given parameter is a Date object.
+ */
+export const isDate = d =>
+  d && Object.prototype.toString.call(d) === '[object Date]' && !Number.isNaN(d.getTime());
+
+/**
+ * Check if the given parameters represent the same Date value (timestamps are compared)
+ *
+ * @param {Date} first param that should be a Date and it should have same timestamp as second param.
+ * @param {Date} second param that should be a Date and it should have same timestamp as second param.
+ *
+ * @returns {boolean} true if given parameters have the same timestamp.
+ */
+export const isSameDate = (a, b) => a && isDate(a) && b && isDate(b) && a.getTime() === b.getTime();
+
+/**
  * Convert date given by API to something meaningful noon on browser's timezone
  * So, what happens is that date given by client
  * ("Fri Mar 30 2018 12:00:00 GMT-1100 (SST)" aka "Fri Mar 30 2018 23:00:00 GMT+0000 (UTC)")
@@ -95,6 +115,44 @@ export const daysBetween = (startDate, endDate) => {
 };
 
 /**
+ * Calculate the number of minutes between the given dates
+ *
+ * @param {Date} startDate start of the time period
+ * @param {Date} endDate end of the time period.
+ *
+ * @throws Will throw if the end date is before the start date
+ * @returns {Number} number of minutes between the given Date objects
+ */
+export const minutesBetween = (startDate, endDate) => {
+  const minutes = moment(endDate).diff(startDate, 'minutes');
+  if (minutes < 0) {
+    throw new Error('End Date cannot be before start Date');
+  }
+  return minutes;
+};
+
+/**
+ * Format the given date to month id/string
+ *
+ * @param {Date} date to be formatted
+ *
+ * @returns {String} formatted month string
+ */
+export const monthIdString = date => moment(date).format('YYYY-MM');
+
+/**
+ * Format the given date to UTC month id/string
+ *
+ * @param {Date} date to be formatted
+ *
+ * @returns {String} formatted month string
+ */
+export const monthIdStringInUTC = date =>
+  moment(date)
+    .utc()
+    .format('YYYY-MM');
+
+/**
  * Format the given date
  *
  * @param {Object} intl Intl object from react-intl
@@ -108,7 +166,10 @@ export const formatDate = (intl, todayString, d) => {
   if (!paramsValid) {
     throw new Error(`Invalid params for formatDate: (${intl}, ${todayString}, ${d})`);
   }
-  const now = moment(intl.now());
+
+  // By default we can use moment() directly but in tests we need to use a specific dates.
+  // fakeIntl used in tests contains now() function wich returns predefined date
+  const now = intl.now ? moment(intl.now()) : moment();
   const formattedTime = intl.formatTime(d);
   let formattedDate;
 
@@ -139,4 +200,60 @@ export const formatDate = (intl, todayString, d) => {
   }
 
   return `${formattedDate}, ${formattedTime}`;
+};
+
+/**
+ * Converts string given in ISO8601 format to date object.
+ * This is used e.g. when when dates are parsed form urlParams
+ *
+ * @param {String} dateString in 'YYYY-MM-DD'format
+ *
+ * @returns {Date} parsed date object
+ */
+export const parseDateFromISO8601 = dateString => {
+  return moment(dateString, 'YYYY-MM-DD').toDate();
+};
+
+/**
+ * Converts date to string ISO8601 format ('YYYY-MM-DD').
+ * This string is used e.g. in urlParam.
+ *
+ * @param {Date} date
+ *
+ * @returns {String} string in 'YYYY-MM-DD'format
+ */
+
+export const stringifyDateToISO8601 = date => {
+  return moment(date).format('YYYY-MM-DD');
+};
+
+/**
+ * Formats string ('YYYY-MM-DD') to UTC format ('0000-00-00T00:00:00.000Z').
+ * This is used in search query.
+ *
+ * @param {String} string in 'YYYY-MM-DD'format
+ *
+ * @returns {String} string in '0000-00-00T00:00:00.000Z' format
+ */
+
+export const formatDateStringToUTC = dateString => {
+  return moment.utc(dateString).toDate();
+};
+
+/**
+ * Formats string ('YYYY-MM-DD') to UTC format ('0000-00-00T00:00:00.000Z') and adds one day.
+ * This is used as end date of the search query.
+ * One day must be added because end of the availability is exclusive in API.
+ *
+ * @param {String} string in 'YYYY-MM-DD'format
+ *
+ * @returns {String} string in '0000-00-00T00:00:00.000Z' format
+ */
+
+export const getExclusiveEndDate = dateString => {
+  return moment
+    .utc(dateString)
+    .add(1, 'days')
+    .startOf('day')
+    .toDate();
 };

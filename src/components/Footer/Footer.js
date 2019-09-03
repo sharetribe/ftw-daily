@@ -1,7 +1,7 @@
 import React from 'react';
 import { string } from 'prop-types';
 import { Link } from 'react-router-dom';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import classNames from 'classnames';
 import config from '../../config';
 import {
@@ -17,12 +17,7 @@ import {
 import css from './Footer.css';
 
 const renderSocialMediaLinks = intl => {
-  const {
-    siteYoutubePage,
-    siteInstagramPage,
-    siteSnapchatPage,
-    siteFacebookPage,
-  } = config;
+  const { siteYoutubePage, siteInstagramPage, siteSnapchatPage, siteFacebookPage } = config;
 
   return [
     <ExternalLink
@@ -56,7 +51,8 @@ const renderSocialMediaLinks = intl => {
       key="linkToFacebook"
       href={siteFacebookPage}
       className={css.icon}
-      title={intl.formatMessage({ id: 'Footer.goToFacebook' })}>
+      title={intl.formatMessage({ id: 'Footer.goToFacebook' })}
+    >
       <IconSocialMediaFacebook />
     </ExternalLink>,
   ];
@@ -73,14 +69,15 @@ const Footer = props => {
         <div className={css.content}>
           <div className={css.links}>
             <div className={css.footerContainerHorizontal}>
-
               <div className={css.footerContainerVertical23}>
                 <div className={css.verticalContainerHeader}>
-                  <Link to='#'>Jetzt anmelden</Link>
+                  <Link to="#">Jetzt anmelden</Link>
                 </div>
                 <div className={css.verticalContainerContent}>
-                  <Link to='#' className={css.link}>So funktionierts</Link>
-                  <Link to='#' className={css.link}>
+                  <Link to="#" className={css.link}>
+                    So funktionierts
+                  </Link>
+                  <Link to="#" className={css.link}>
                     Kostenlos anmelden <span className={css.greenLabel}>NEU</span>
                   </Link>
                 </div>
@@ -88,20 +85,30 @@ const Footer = props => {
 
               <div className={css.footerContainerVertical23}>
                 <div className={css.verticalContainerHeader}>
-                  <Link to='#'>Unsere Community</Link>
+                  <Link to="#">Unsere Community</Link>
                 </div>
                 <div className={css.verticalContainerContent}>
-                  <Link to='#' className={css.link}>Community</Link>
-                  <Link to='#' className={css.link}>Karriere</Link>
-                  <Link to='#' className={css.link}>Kontakt</Link>
-                  <Link to='#' className={css.link}>FAQ</Link>
-                  <Link to='#' className={css.link}>Hilfe</Link>
+                  <Link to="#" className={css.link}>
+                    Community
+                  </Link>
+                  <Link to="#" className={css.link}>
+                    Karriere
+                  </Link>
+                  <Link to="#" className={css.link}>
+                    Kontakt
+                  </Link>
+                  <Link to="#" className={css.link}>
+                    FAQ
+                  </Link>
+                  <Link to="#" className={css.link}>
+                    Hilfe
+                  </Link>
                 </div>
               </div>
 
               <div className={css.footerContainerVertical31}>
                 <div className={css.verticalContainerHeader}>
-                  <Link to='#'>Finde Dein Pferd</Link>
+                  <Link to="#">Finde Dein Pferd</Link>
                 </div>
                 <div className={css.verticalContainerContent}>
                   <div className={css.topCitiesContainer}>
@@ -242,47 +249,51 @@ const Footer = props => {
                   <div>{socialMediaLinks}</div>
                 </div>
                 <div className={css.verticalContainerContent}>
-                  <Link to='#' className={css.link}>
+                  <Link to="#" className={css.link}>
                     Entdecke unseren Store
                   </Link>
                 </div>
               </div>
-
             </div>
             <div className={css.footerContainerHorizontal}>
               <div className={css.bottomLine}>
                 <div className={css.bottomLineItem}>
-                  <Link to='#' className={css.link}>
+                  <Link to="#" className={css.link}>
                     <FormattedMessage id="Footer.copyright" />
                   </Link>
                 </div>
                 <div className={css.bottomLineItem}>
-                  <Link to='#' className={css.link}>Impressum</Link>
+                  <Link to="#" className={css.link}>
+                    Impressum
+                  </Link>
                 </div>
                 <div className={css.bottomLineItem}>
-                  <Link to='#' className={css.link}>Kontakt</Link>
+                  <Link to="#" className={css.link}>
+                    Kontakt
+                  </Link>
                 </div>
                 <div className={css.bottomLineItem}>
-                  <Link to='#' className={css.link}>Datenschutz</Link>
+                  <Link to="#" className={css.link}>
+                    Datenschutz
+                  </Link>
                 </div>
                 <div className={css.bottomLineItem}>
-                  <Link to='#' className={css.link}>Nutzungsbedingungen</Link>
+                  <Link to="#" className={css.link}>
+                    Nutzungsbedingungen
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
   );
 
-
   return (
     <div className={classes}>
       <div className={css.topBorderWrapper}>
         <div className={css.content}>
-
           <div className={css.someLiksMobile}>{socialMediaLinks}</div>
 
           <div className={css.links}>
@@ -490,8 +501,6 @@ const Footer = props => {
               </NamedLink>
             </div>
           </div>
-
-
         </div>
       </div>
     </div>

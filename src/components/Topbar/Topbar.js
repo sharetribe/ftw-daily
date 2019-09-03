@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
-import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
+import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 import pickBy from 'lodash/pickBy';
 import classNames from 'classnames';
 import config from '../../config';
@@ -244,7 +244,6 @@ class TopbarComponent extends Component {
         >
           <div className={css.searchContainer}>
             <TopbarSearchForm
-              form="TopbarSearchForm"
               onSubmit={this.handleSubmit}
               initialValues={initialSearchFormValues}
               isMobile

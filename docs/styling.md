@@ -1,8 +1,6 @@
 # Flex Template for Web: styling
 
-The goal for creating styling for Flex template app was to keep styling as close as possible to
-plain CSS while still trying to avoid the mess that comes along with globally defined cascading
-behavior that CSS is all about.
+Documentation moved to the Flex Docs site:
 
 To tackle this goal, we have split the styling into two levels in this template application:
 

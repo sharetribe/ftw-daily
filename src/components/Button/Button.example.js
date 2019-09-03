@@ -1,14 +1,14 @@
-/* eslint-disable jsx-a11y/href-no-hash */
 import React, { Component } from 'react';
 import { IconCheckmark } from '../../components';
 import Button, { PrimaryButton, SecondaryButton, InlineTextButton } from './Button';
 
-import css from './Button.example.css';
+import css from './ButtonExample.css';
 
 const preventDefault = e => {
   e.preventDefault();
 };
 
+const hashLink = '#';
 class InteractiveButton extends Component {
   constructor(props) {
     super(props);
@@ -130,34 +130,34 @@ const ButtonsComponent = () => {
       </p>
       <p>
         Lorem ipsum{' '}
-        <a href="#" onClick={preventDefault}>
+        <a href={hashLink} onClick={preventDefault}>
           a normal link
         </a>{' '}
         dolor sit amet
       </p>
 
       <h3>Link that looks like a default button:</h3>
-      <a className={css.buttonLink} href="#" onClick={preventDefault}>
+      <a className={css.buttonLink} href={hashLink} onClick={preventDefault}>
         Click me
       </a>
 
       <h3>Translated link that looks like a default button:</h3>
-      <a className={css.buttonLink} href="#" onClick={preventDefault}>
+      <a className={css.buttonLink} href={hashLink} onClick={preventDefault}>
         <span>Clique moi</span>
       </a>
 
       <h3>Link that looks like a primary button:</h3>
-      <a className={css.buttonLinkPrimary} href="#" onClick={preventDefault}>
+      <a className={css.buttonLinkPrimary} href={hashLink} onClick={preventDefault}>
         Click me
       </a>
 
       <h3>Link that looks like a secondary button:</h3>
-      <a className={css.buttonLinkSecondary} href="#" onClick={preventDefault}>
+      <a className={css.buttonLinkSecondary} href={hashLink} onClick={preventDefault}>
         Click me
       </a>
 
       <h3>Button with custom styles:</h3>
-      <Button className={css.customButton}>Click me</Button>
+      <Button rootClassName={css.customButton}>Click me</Button>
     </div>
   );
 };

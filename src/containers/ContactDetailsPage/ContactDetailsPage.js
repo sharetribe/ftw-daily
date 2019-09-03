@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import { propTypes } from '../../util/types';
 import { ensureCurrentUser } from '../../util/data';
 import { fetchCurrentUser, sendVerificationEmail } from '../../ducks/user.duck';
 import {
   LayoutSideNavigation,
   LayoutWrapperMain,
-  LayoutWrapperSideNav,
+  LayoutWrapperAccountSettingsSideNav,
   LayoutWrapperTopbar,
   LayoutWrapperFooter,
   Footer,
@@ -38,30 +38,6 @@ export const ContactDetailsPageComponent = props => {
     onSubmitContactDetails,
     intl,
   } = props;
-
-  const tabs = [
-    {
-      text: <FormattedMessage id="ContactDetailsPage.contactDetailsTabTitle" />,
-      selected: true,
-      linkProps: {
-        name: 'ContactDetailsPage',
-      },
-    },
-    {
-      text: <FormattedMessage id="ContactDetailsPage.passwordTabTitle" />,
-      selected: false,
-      linkProps: {
-        name: 'PasswordChangePage',
-      },
-    },
-    {
-      text: <FormattedMessage id="ContactDetailsPage.paymentsTabTitle" />,
-      selected: false,
-      linkProps: {
-        name: 'PayoutPreferencesPage',
-      },
-    },
-  ];
 
   const user = ensureCurrentUser(currentUser);
   const currentEmail = user.attributes.email || '';
@@ -97,7 +73,7 @@ export const ContactDetailsPageComponent = props => {
           />
           <UserNav selectedPageName="ContactDetailsPage" />
         </LayoutWrapperTopbar>
-        <LayoutWrapperSideNav tabs={tabs} />
+        <LayoutWrapperAccountSettingsSideNav currentTab="ContactDetailsPage" />
         <LayoutWrapperMain>
           <div className={css.content}>
             <h1 className={css.title}>

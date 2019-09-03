@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import { Form as FinalForm } from 'react-final-form';
 import isEqual from 'lodash/isEqual';
 import classNames from 'classnames';
@@ -183,7 +183,6 @@ class PasswordChangeFormComponent extends Component {
               <div className={css.bottomWrapper}>
                 {genericFailure}
                 <PrimaryButton
-                  className={css.submitButton}
                   type="submit"
                   inProgress={inProgress}
                   ready={ready}

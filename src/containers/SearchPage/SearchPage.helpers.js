@@ -13,26 +13,32 @@ import routeConfiguration from '../../routeConfiguration';
  * @param {Object} paramValue Search parameter value
  * @param {Object} filters Filters configuration
  */
-export const validURLParamForExtendedData = (paramName, paramValue, filters) => {
+export const validURLParamForExtendedData = (paramName, paramValueRaw, filters) => {
   const filtersArray = Object.values(filters);
   // resolve configuration for this filter
   const filterConfig = filtersArray.find(f => f.paramName === paramName);
 
+  const paramValue = paramValueRaw.toString();
   const valueArray = paramValue ? paramValue.split(',') : [];
 
   if (filterConfig && valueArray.length > 0) {
-    const { min, max } = filterConfig.config || {};
+    const { min, max, active } = filterConfig.config || {};
 
     if (filterConfig.options) {
+      // Single and multiselect filters
       const allowedValues = filterConfig.options.map(o => o.key);
 
       const validValues = intersection(valueArray, allowedValues).join(',');
       return validValues.length > 0 ? { [paramName]: validValues } : {};
     } else if (filterConfig.config && min != null && max != null) {
+      // Price filter
       const validValues = valueArray.map(v => {
         return v < min ? min : v > max ? max : v;
       });
       return validValues.length === 2 ? { [paramName]: validValues.join(',') } : {};
+    } else if (filterConfig.config && active) {
+      // Generic filter
+      return paramValue.length > 0 ? { [paramName]: paramValue } : {};
     }
   }
   return {};

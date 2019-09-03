@@ -1,15 +1,10 @@
-import omitBy from 'lodash/omitBy';
-import isUndefined from 'lodash/isUndefined';
-import config from '../config';
 import { denormalisedResponseEntities, ensureOwnListing } from '../util/data';
 import { storableError } from '../util/errors';
-import {
-  LISTING_STATE_DRAFT,
-  TRANSITION_REQUEST,
-  TRANSITION_REQUEST_AFTER_ENQUIRY,
-} from '../util/types';
+import { transitionsToRequested } from '../util/transaction';
+import { LISTING_STATE_DRAFT } from '../util/types';
 import * as log from '../util/log';
 import { authInfo } from './Auth.duck';
+import { stripeAccountCreateSuccess } from './stripe.duck.js';
 
 // ================ Action types ================ //
 
@@ -18,12 +13,6 @@ export const CURRENT_USER_SHOW_SUCCESS = 'app/user/CURRENT_USER_SHOW_SUCCESS';
 export const CURRENT_USER_SHOW_ERROR = 'app/user/CURRENT_USER_SHOW_ERROR';
 
 export const CLEAR_CURRENT_USER = 'app/user/CLEAR_CURRENT_USER';
-
-export const STRIPE_ACCOUNT_CREATE_REQUEST = 'app/user/STRIPE_ACCOUNT_CREATE_REQUEST';
-export const STRIPE_ACCOUNT_CREATE_SUCCESS = 'app/user/STRIPE_ACCOUNT_CREATE_SUCCESS';
-export const STRIPE_ACCOUNT_CREATE_ERROR = 'app/user/STRIPE_ACCOUNT_CREATE_ERROR';
-
-export const STRIPE_ACCOUNT_CLEAR_ERROR = 'app/user/STRIPE_ACCOUNT_CLEAR_ERROR';
 
 export const FETCH_CURRENT_USER_HAS_LISTINGS_REQUEST =
   'app/user/FETCH_CURRENT_USER_HAS_LISTINGS_REQUEST';
@@ -51,11 +40,23 @@ export const SEND_VERIFICATION_EMAIL_ERROR = 'app/user/SEND_VERIFICATION_EMAIL_E
 
 // ================ Reducer ================ //
 
+const mergeCurrentUser = (oldCurrentUser, newCurrentUser) => {
+  const { id: oId, type: oType, attributes: oAttr, ...oldRelationships } = oldCurrentUser || {};
+  const { id, type, attributes, ...relationships } = newCurrentUser || {};
+
+  // Passing null will remove currentUser entity.
+  // Only relationships are merged.
+  // TODO figure out if sparse fields handling needs a better handling.
+  return newCurrentUser === null
+    ? null
+    : oldCurrentUser === null
+    ? newCurrentUser
+    : { id, type, attributes, ...oldRelationships, ...relationships };
+};
+
 const initialState = {
   currentUser: null,
   currentUserShowError: null,
-  createStripeAccountInProgress: false,
-  createStripeAccountError: null,
   currentUserHasListings: false,
   currentUserHasListingsError: null,
   currentUserNotificationCount: 0,
@@ -72,7 +73,7 @@ export default function reducer(state = initialState, action = {}) {
     case CURRENT_USER_SHOW_REQUEST:
       return { ...state, currentUserShowError: null };
     case CURRENT_USER_SHOW_SUCCESS:
-      return { ...state, currentUser: payload };
+      return { ...state, currentUser: mergeCurrentUser(state.currentUser, payload) };
     case CURRENT_USER_SHOW_ERROR:
       // eslint-disable-next-line no-console
       console.error(payload);
@@ -112,18 +113,6 @@ export default function reducer(state = initialState, action = {}) {
     case FETCH_CURRENT_USER_HAS_ORDERS_ERROR:
       console.error(payload); // eslint-disable-line
       return { ...state, currentUserHasOrdersError: payload };
-
-    case STRIPE_ACCOUNT_CREATE_REQUEST:
-      return { ...state, createStripeAccountError: null, createStripeAccountInProgress: true };
-    case STRIPE_ACCOUNT_CREATE_SUCCESS:
-      return { ...state, createStripeAccountInProgress: false };
-    case STRIPE_ACCOUNT_CREATE_ERROR:
-      // eslint-disable-next-line no-console
-      console.error(payload);
-      return { ...state, createStripeAccountError: payload, createStripeAccountInProgress: false };
-
-    case STRIPE_ACCOUNT_CLEAR_ERROR:
-      return { ...state, createStripeAccountError: null, createStripeAccountInProgress: false };
 
     case SEND_VERIFICATION_EMAIL_REQUEST:
       return {
@@ -180,23 +169,6 @@ export const currentUserShowError = e => ({
 });
 
 export const clearCurrentUser = () => ({ type: CLEAR_CURRENT_USER });
-
-export const stripeAccountCreateRequest = () => ({ type: STRIPE_ACCOUNT_CREATE_REQUEST });
-
-export const stripeAccountCreateSuccess = response => ({
-  type: STRIPE_ACCOUNT_CREATE_SUCCESS,
-  payload: response,
-});
-
-export const stripeAccountCreateError = e => ({
-  type: STRIPE_ACCOUNT_CREATE_ERROR,
-  payload: e,
-  error: true,
-});
-
-export const stripeAccountClearError = () => ({
-  type: STRIPE_ACCOUNT_CLEAR_ERROR,
-});
 
 const fetchCurrentUserHasListingsRequest = () => ({
   type: FETCH_CURRENT_USER_HAS_LISTINGS_REQUEST,
@@ -319,7 +291,7 @@ export const fetchCurrentUserNotifications = () => (dispatch, getState, sdk) => 
 
   const apiQueryParams = {
     only: 'sale',
-    last_transitions: [TRANSITION_REQUEST, TRANSITION_REQUEST_AFTER_ENQUIRY],
+    last_transitions: transitionsToRequested,
     page: 1,
     per_page: NOTIFICATION_PAGE_SIZE,
   };
@@ -333,7 +305,7 @@ export const fetchCurrentUserNotifications = () => (dispatch, getState, sdk) => 
     .catch(e => dispatch(fetchCurrentUserNotificationsError(storableError(e))));
 };
 
-export const fetchCurrentUser = () => (dispatch, getState, sdk) => {
+export const fetchCurrentUser = (params = null) => (dispatch, getState, sdk) => {
   dispatch(currentUserShowRequest());
   const { isAuthenticated } = getState().Auth;
 
@@ -343,19 +315,24 @@ export const fetchCurrentUser = () => (dispatch, getState, sdk) => {
     return Promise.resolve({});
   }
 
-  const params = {
-    include: ['profileImage'],
+  const parameters = params || {
+    include: ['profileImage', 'stripeAccount'],
     'fields.image': ['variants.square-small', 'variants.square-small2x'],
   };
 
   return sdk.currentUser
-    .show(params)
+    .show(parameters)
     .then(response => {
       const entities = denormalisedResponseEntities(response);
       if (entities.length !== 1) {
         throw new Error('Expected a resource in the sdk.currentUser.show response');
       }
       const currentUser = entities[0];
+
+      // Save stripeAccount to store.stripe.stripeAccount if it exists
+      if (currentUser.stripeAccount) {
+        dispatch(stripeAccountCreateSuccess(currentUser.stripeAccount));
+      }
 
       // set current user id to the logger
       log.setUserId(currentUser.id.uuid);
@@ -377,81 +354,6 @@ export const fetchCurrentUser = () => (dispatch, getState, sdk) => {
       dispatch(authInfo());
       log.error(e, 'fetch-current-user-failed');
       dispatch(currentUserShowError(storableError(e)));
-    });
-};
-
-export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) => {
-  if (typeof window === 'undefined' || !window.Stripe) {
-    throw new Error('Stripe must be loaded for submitting PayoutPreferences');
-  }
-
-  const stripe = window.Stripe(config.stripe.publishableKey);
-
-  dispatch(stripeAccountCreateRequest());
-
-  const {
-    firstName,
-    lastName,
-    birthDate,
-    country,
-    streetAddress,
-    postalCode,
-    city,
-    state,
-    province,
-    bankAccountToken,
-    personalIdNumber,
-  } = payoutDetails;
-
-  const hasProvince = province && !state;
-
-  const address = {
-    city,
-    line1: streetAddress,
-    postal_code: postalCode,
-    state: hasProvince ? province : state,
-  };
-
-  const idNumber =
-    country === 'US' ? { ssn_last_4: personalIdNumber } : { personal_id_number: personalIdNumber };
-
-  // Params for Stripe SDK
-  const params = {
-    legal_entity: {
-      first_name: firstName,
-      last_name: lastName,
-      address: omitBy(address, isUndefined),
-      dob: birthDate,
-      type: 'individual',
-      ...idNumber,
-    },
-    tos_shown_and_accepted: true,
-  };
-
-  let accountResponse;
-
-  return stripe
-    .createToken('account', params)
-    .then(response => {
-      const accountToken = response.token.id;
-      return sdk.currentUser.createStripeAccount({ accountToken, bankAccountToken, country });
-    })
-    .then(response => {
-      accountResponse = response;
-      return dispatch(fetchCurrentUser());
-    })
-    .then(() => {
-      dispatch(stripeAccountCreateSuccess(accountResponse));
-    })
-    .catch(err => {
-      const e = storableError(err);
-      dispatch(stripeAccountCreateError(e));
-      const stripeMessage =
-        e.apiErrors && e.apiErrors.length > 0 && e.apiErrors[0].meta
-          ? e.apiErrors[0].meta.stripeMessage
-          : null;
-      log.error(err, 'create-stripe-account-failed', { stripeMessage });
-      throw e;
     });
 };
 
