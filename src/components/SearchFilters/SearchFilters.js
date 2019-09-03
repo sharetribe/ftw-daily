@@ -6,13 +6,7 @@ import classNames from 'classnames';
 import { withRouter } from 'react-router-dom';
 import omit from 'lodash/omit';
 
-import {
-  BookingDateRangeFilter,
-  SelectSingleFilter,
-  SelectMultipleFilter,
-  PriceFilter,
-  KeywordFilter,
-} from '../../components';
+import { SelectSingleFilter, SelectMultipleFilter, PriceFilter } from '..';
 import routeConfiguration from '../../routeConfiguration';
 import { parseDateFromISO8601, stringifyDateToISO8601 } from '../../util/dates';
 import { createResourceLocatorString } from '../../util/routes';
@@ -67,7 +61,7 @@ const SearchFiltersComponent = props => {
     listingsAreLoaded,
     resultsCount,
     searchInProgress,
-    categoryFilter,
+    mainDisciplineFilter,
     amenitiesFilter,
     priceFilter,
     dateRangeFilter,
@@ -82,8 +76,8 @@ const SearchFiltersComponent = props => {
   const hasNoResult = listingsAreLoaded && resultsCount === 0;
   const classes = classNames(rootClassName || css.root, { [css.longInfo]: hasNoResult }, className);
 
-  const categoryLabel = intl.formatMessage({
-    id: 'SearchFilters.categoryLabel',
+  const disciplinesLabel = intl.formatMessage({
+    id: 'SearchFilters.disciplinesLabel',
   });
 
   const amenitiesLabel = intl.formatMessage({
@@ -98,8 +92,8 @@ const SearchFiltersComponent = props => {
     ? initialValues(urlQueryParams, amenitiesFilter.paramName)
     : null;
 
-  const initialCategory = categoryFilter
-    ? initialValue(urlQueryParams, categoryFilter.paramName)
+  const initialDisciplines = mainDisciplineFilter
+    ? initialValue(urlQueryParams, mainDisciplineFilter.paramName)
     : null;
 
   const initialPriceRange = priceFilter
@@ -165,14 +159,14 @@ const SearchFiltersComponent = props => {
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   };
 
-  const categoryFilterElement = categoryFilter ? (
+  const mainDisciplineFilterElement = mainDisciplineFilter ? (
     <SelectSingleFilter
-      urlParam={categoryFilter.paramName}
-      label={categoryLabel}
+      urlParam={mainDisciplineFilter.paramName}
+      label={disciplinesLabel}
       onSelect={handleSelectOption}
       showAsPopup
-      options={categoryFilter.options}
-      initialValue={initialCategory}
+      options={mainDisciplineFilter.options}
+      initialValue={initialDisciplines}
       contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
     />
   ) : null;
@@ -203,32 +197,6 @@ const SearchFiltersComponent = props => {
     />
   ) : null;
 
-  const dateRangeFilterElement =
-    dateRangeFilter && dateRangeFilter.config.active ? (
-      <BookingDateRangeFilter
-        id="SearchFilters.dateRangeFilter"
-        urlParam={dateRangeFilter.paramName}
-        onSubmit={handleDateRange}
-        showAsPopup
-        contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
-        initialValues={initialDateRange}
-      />
-    ) : null;
-
-  const keywordFilterElement =
-    keywordFilter && keywordFilter.config.active ? (
-      <KeywordFilter
-        id={'SearchFilters.keywordFilter'}
-        name="keyword"
-        urlParam={keywordFilter.paramName}
-        label={keywordLabel}
-        onSubmit={handleKeyword}
-        showAsPopup
-        initialValues={initialKeyword}
-        contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
-      />
-    ) : null;
-
   const toggleSearchFiltersPanelButtonClasses =
     isSearchFiltersPanelOpen || searchFiltersPanelSelectedCount > 0
       ? css.searchFiltersPanelOpen
@@ -249,11 +217,8 @@ const SearchFiltersComponent = props => {
   return (
     <div className={classes}>
       <div className={css.filters}>
-        {categoryFilterElement}
-        {amenitiesFilterElement}
+        {mainDisciplineFilterElement}
         {priceFilterElement}
-        {dateRangeFilterElement}
-        {keywordFilterElement}
         {toggleSearchFiltersPanelButton}
       </div>
 

@@ -345,3 +345,14 @@
     margin: 0 48px;
   }
 }
+
+.backBtn {
+  display: inline-flex;
+  max-width: 120px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid;
+  cursor: pointer;
+  outline: none;
+}

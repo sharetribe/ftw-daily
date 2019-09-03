@@ -9,9 +9,7 @@ import youtubeIcon from './youtube.svg';
 const IconSocialMediaYoutube = props => {
   const { rootClassName, className } = props;
   const classes = classNames(rootClassName || css.root, className);
-  return (
-    <img className={classes} src={youtubeIcon} />
-  );
+  return <img className={classes} alt="youtube icon" src={youtubeIcon} />;
 };
 
 IconSocialMediaYoutube.defaultProps = { rootClassName: null, className: null };

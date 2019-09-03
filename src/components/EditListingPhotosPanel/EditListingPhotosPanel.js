@@ -83,8 +83,6 @@ EditListingPhotosPanel.propTypes = {
   className: string,
   rootClassName: string,
   errors: object,
-  fetchInProgress: bool.isRequired,
-  newListingPublished: bool.isRequired,
   images: array,
 
   // We cannot use propTypes.listing since the listing might be a draft.

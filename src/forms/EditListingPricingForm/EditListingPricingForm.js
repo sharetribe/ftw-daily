@@ -117,6 +117,7 @@ export const EditListingPricingFormComponent = props => (
 EditListingPricingFormComponent.defaultProps = { fetchErrors: null };
 
 EditListingPricingFormComponent.propTypes = {
+  ready: bool.isRequired,
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
   saveActionMsg: string.isRequired,

@@ -42,11 +42,13 @@ import {
 import { TopbarContainer, NotFoundPage } from '../../containers';
 
 import { sendEnquiry, loadData, setInitialValues } from './ListingPage.duck';
+import SectionCharacteristicsMaybe from './SectionCharacteristicsMaybe';
+import SectionHorseInfo from './SectionHorseInfo';
 import SectionImages from './SectionImages';
 import SectionAvatar from './SectionAvatar';
 import SectionHeading from './SectionHeading';
 import SectionDescriptionMaybe from './SectionDescriptionMaybe';
-import SectionFeaturesMaybe from './SectionFeaturesMaybe';
+import SectionDisciplinesMaybe from './SectionDisciplinesMaybe';
 import SectionReviews from './SectionReviews';
 import SectionHostMaybe from './SectionHostMaybe';
 import SectionRulesMaybe from './SectionRulesMaybe';
@@ -68,11 +70,6 @@ const priceData = (price, intl) => {
     };
   }
   return {};
-};
-
-const categoryLabel = (categories, key) => {
-  const cat = categories.find(c => c.key === key);
-  return cat ? cat.label : key;
 };
 
 export class ListingPageComponent extends Component {
@@ -188,8 +185,6 @@ export class ListingPageComponent extends Component {
       sendEnquiryError,
       timeSlots,
       fetchTimeSlotsError,
-      categoriesConfig,
-      amenitiesConfig,
     } = this.props;
 
     const listingId = new UUID(rawParams.id);
@@ -235,6 +230,8 @@ export class ListingPageComponent extends Component {
       title = '',
       publicData,
     } = currentListing.attributes;
+
+    const { breed, gender, age, color, hight, mainDiscipline } = publicData;
 
     const richTitle = (
       <span>
@@ -370,14 +367,6 @@ export class ListingPageComponent extends Component {
       </NamedLink>
     );
 
-    const category =
-      publicData && publicData.category ? (
-        <span>
-          {categoryLabel(categoriesConfig, publicData.category)}
-          <span className={css.separator}>•</span>
-        </span>
-      ) : null;
-
     return (
       <Page
         title={schemaTitle}
@@ -421,13 +410,16 @@ export class ListingPageComponent extends Component {
                     priceTitle={priceTitle}
                     formattedPrice={formattedPrice}
                     richTitle={richTitle}
-                    category={category}
                     hostLink={hostLink}
                     showContactUser={showContactUser}
                     onContactUser={this.onContactUser}
                   />
+                  <SectionHorseInfo
+                    options={{ breed, gender, age, color, hight, mainDiscipline }}
+                  />
+                  <SectionDisciplinesMaybe disciplines={publicData.additionalDisciplines} />
                   <SectionDescriptionMaybe description={description} />
-                  <SectionFeaturesMaybe options={amenitiesConfig} publicData={publicData} />
+                  <SectionCharacteristicsMaybe characteristics={publicData.characteristics} />
                   <SectionRulesMaybe publicData={publicData} />
                   <SectionMapMaybe
                     geolocation={geolocation}

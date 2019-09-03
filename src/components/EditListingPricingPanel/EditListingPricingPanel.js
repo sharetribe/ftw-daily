@@ -77,7 +77,8 @@ EditListingPricingPanel.defaultProps = {
 EditListingPricingPanel.propTypes = {
   className: string,
   rootClassName: string,
-
+  fetchInProgress: bool.isRequired,
+  newListingPublished: bool.isRequired,
   // We cannot use propTypes.listing since the listing might be a draft.
   listing: object,
 

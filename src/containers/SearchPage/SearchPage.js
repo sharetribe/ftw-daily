@@ -52,39 +52,15 @@ export class SearchPageComponent extends Component {
   }
 
   filters() {
-    const {
-      categories,
-      amenities,
-      priceFilterConfig,
-      dateRangeFilterConfig,
-      keywordFilterConfig,
-    } = this.props;
-
-    // Note: "category" and "amenities" filters are not actually filtering anything by default.
-    // Currently, if you want to use them, we need to manually configure them to be available
-    // for search queries. Read more from extended data document:
-    // https://www.sharetribe.com/docs/references/extended-data/#data-schema
-
+    const { disciplines, priceFilterConfig } = this.props;
     return {
-      categoryFilter: {
-        paramName: 'pub_category',
-        options: categories,
-      },
-      amenitiesFilter: {
-        paramName: 'pub_amenities',
-        options: amenities,
+      mainDisciplineFilter: {
+        paramName: 'pub_mainDiscipline',
+        options: disciplines,
       },
       priceFilter: {
         paramName: 'price',
         config: priceFilterConfig,
-      },
-      dateRangeFilter: {
-        paramName: 'dates',
-        config: dateRangeFilterConfig,
-      },
-      keywordFilter: {
-        paramName: 'keywords',
-        config: keywordFilterConfig,
       },
     };
   }
@@ -226,11 +202,8 @@ export class SearchPageComponent extends Component {
             searchParamsForPagination={parse(location.search)}
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             primaryFilters={{
-              categoryFilter: filters.categoryFilter,
-              amenitiesFilter: filters.amenitiesFilter,
+              mainDisciplineFilter: filters.mainDisciplineFilter,
               priceFilter: filters.priceFilter,
-              dateRangeFilter: filters.dateRangeFilter,
-              keywordFilter: filters.keywordFilter,
             }}
           />
           <ModalInMobile
@@ -274,8 +247,7 @@ SearchPageComponent.defaultProps = {
   searchListingsError: null,
   searchParams: {},
   tab: 'listings',
-  categories: config.custom.categories,
-  amenities: config.custom.amenities,
+  disciplines: config.custom.disciplines,
   priceFilterConfig: config.custom.priceFilterConfig,
   dateRangeFilterConfig: config.custom.dateRangeFilterConfig,
   keywordFilterConfig: config.custom.keywordFilterConfig,
@@ -294,8 +266,7 @@ SearchPageComponent.propTypes = {
   searchListingsError: propTypes.error,
   searchParams: object,
   tab: oneOf(['filters', 'listings', 'map']).isRequired,
-  categories: array,
-  amenities: array,
+  disciplines: array,
   priceFilterConfig: shape({
     min: number.isRequired,
     max: number.isRequired,
@@ -378,7 +349,7 @@ SearchPage.loadData = (params, search) => {
     page,
     perPage: RESULT_PAGE_SIZE,
     include: ['author', 'images'],
-    'fields.listing': ['title', 'geolocation', 'price'],
+    'fields.listing': ['title', 'geolocation', 'price', 'publicData'],
     'fields.user': ['profile.displayName', 'profile.abbreviatedName'],
     'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
     'limit.images': 1,

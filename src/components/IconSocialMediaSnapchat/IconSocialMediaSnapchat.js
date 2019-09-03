@@ -9,9 +9,7 @@ import snapchatIcon from './snapchat.svg';
 const IconSocialMediaSnapchat = props => {
   const { rootClassName, className } = props;
   const classes = classNames(rootClassName || css.root, className);
-  return (
-    <img className={classes} src={snapchatIcon} />
-  );
+  return <img className={classes} alt="snapchat icon" src={snapchatIcon} />;
 };
 
 IconSocialMediaSnapchat.defaultProps = { rootClassName: null, className: null };

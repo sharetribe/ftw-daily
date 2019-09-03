@@ -584,3 +584,47 @@
   word-break: break-word;
   hyphens: auto;
 }
+
+.threeColumns {
+  columns: 3;
+}
+.listingSectionContainer {
+  margin-bottom: 40px;
+}
+
+.listingSectionTitle {
+  padding: 0 24px;
+  margin-bottom: 5px;
+
+  @media (--viewportMedium) {
+    padding: 0;
+  }
+  @media (--viewportLarge) {
+    margin-bottom: 3px;
+  }
+}
+.listingPrimaryText {
+  padding: 0 24px;
+  margin: 0;
+
+  @media (--viewportMedium) {
+    padding: 0;
+  }
+}
+.listingSecondaryText {
+  @apply --marketplaceH4FontStyles;
+  color: var(--matterColorDark);
+  font-weight: normal;
+  margin: 0;
+}
+.bold {
+  font-weight: bold;
+}
+.listingItemContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.listingIcon {
+  margin-right: 12px;
+}
