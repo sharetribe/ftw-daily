@@ -138,12 +138,13 @@ export const searchListings = searchParams => (dispatch, getState, sdk) => {
     ...priceMaybe,
     per_page: perPage,
   };
-
+  console.log(6666666666, params);
   return sdk.listings
     .query(params)
     .then(response => {
       dispatch(addMarketplaceEntities(response));
       dispatch(searchListingsSuccess(response));
+
       return response;
     })
     .catch(e => {
@@ -169,6 +170,8 @@ export const searchMapListings = searchParams => (dispatch, getState, sdk) => {
   return sdk.listings
     .query(params)
     .then(response => {
+      console.log(666, response);
+
       dispatch(addMarketplaceEntities(response));
       dispatch(searchMapListingsSuccess(response));
       return response;

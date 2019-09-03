@@ -52,16 +52,12 @@ export class SearchPageComponent extends Component {
   }
 
   filters() {
-    const { categories, disciplines, amenities, priceFilterConfig } = this.props;
+    const { characteristics, priceFilterConfig } = this.props;
     console.log(123123, this.props);
     return {
-      disciplinesFilter: {
-        paramName: 'pub_horseInfo.mainDiscipline',
-        options: disciplines,
-      },
-      amenitiesFilter: {
-        paramName: 'pub_amenities',
-        options: amenities,
+      characteristicsFilter: {
+        paramName: 'pub_characteristics',
+        options: characteristics,
       },
       priceFilter: {
         paramName: 'price',
@@ -207,9 +203,7 @@ export class SearchPageComponent extends Component {
             searchParamsForPagination={parse(location.search)}
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             primaryFilters={{
-              // categoryFilter: filters.categoryFilter,
-              // amenitiesFilter: filters.amenitiesFilter,
-              disciplinesFilter: filters.disciplinesFilter,
+              characteristicsFilter: filters.characteristicsFilter,
               priceFilter: filters.priceFilter,
             }}
           />
@@ -254,8 +248,7 @@ SearchPageComponent.defaultProps = {
   searchListingsError: null,
   searchParams: {},
   tab: 'listings',
-  disciplines: config.custom.disciplines,
-  categories: config.custom.categories,
+  characteristics: config.custom.characteristics,
   amenities: config.custom.amenities,
   priceFilterConfig: config.custom.priceFilterConfig,
   activeListingId: null,
@@ -273,8 +266,7 @@ SearchPageComponent.propTypes = {
   searchListingsError: propTypes.error,
   searchParams: object,
   tab: oneOf(['filters', 'listings', 'map']).isRequired,
-  categories: array,
-  amenities: array,
+  characteristics: array,
   priceFilterConfig: shape({
     min: number.isRequired,
     max: number.isRequired,

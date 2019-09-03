@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { withRouter } from 'react-router-dom';
 import omit from 'lodash/omit';
 
-import { SelectSingleFilter, SelectMultipleFilter, PriceFilter } from '../../components';
+import { SelectSingleFilter, SelectMultipleFilter, PriceFilter } from '..';
 import routeConfiguration from '../../routeConfiguration';
 import { createResourceLocatorString } from '../../util/routes';
 import { propTypes } from '../../util/types';
@@ -46,7 +46,7 @@ const SearchFiltersComponent = props => {
     listingsAreLoaded,
     resultsCount,
     searchInProgress,
-    disciplinesFilter,
+    characteristicsFilter,
     amenitiesFilter,
     priceFilter,
     isSearchFiltersPanelOpen,
@@ -59,8 +59,8 @@ const SearchFiltersComponent = props => {
   const hasNoResult = listingsAreLoaded && resultsCount === 0;
   const classes = classNames(rootClassName || css.root, { [css.longInfo]: hasNoResult }, className);
 
-  const disciplinesLabel = intl.formatMessage({
-    id: 'SearchFilters.disciplinesLabel',
+  const characteristicsLabel = intl.formatMessage({
+    id: 'SearchFilters.characteristicsLabel',
   });
 
   const amenitiesLabel = intl.formatMessage({
@@ -71,8 +71,8 @@ const SearchFiltersComponent = props => {
     ? initialValues(urlQueryParams, amenitiesFilter.paramName)
     : null;
 
-  const initialDisciplines = disciplinesFilter
-    ? initialValue(urlQueryParams, disciplinesFilter.paramName)
+  const initialCharacteristics = characteristicsFilter
+    ? initialValue(urlQueryParams, characteristicsFilter.paramName)
     : null;
 
   const initialPriceRange = priceFilter
@@ -108,13 +108,13 @@ const SearchFiltersComponent = props => {
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   };
 
-  const disciplinesFilterElement = disciplinesFilter ? (
+  const characteristicsFilterElement = characteristicsFilter ? (
     <SelectSingleFilter
-      urlParam={disciplinesFilter.paramName}
-      label={disciplinesLabel}
+      urlParam={characteristicsFilter.paramName}
+      label={characteristicsLabel}
       onSelect={handleSelectOption}
-      options={disciplinesFilter.options}
-      initialValue={initialDisciplines}
+      options={characteristicsFilter.options}
+      initialValue={initialCharacteristics}
       contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
     />
   ) : null;
@@ -164,7 +164,7 @@ const SearchFiltersComponent = props => {
   return (
     <div className={classes}>
       <div className={css.filters}>
-        {disciplinesFilterElement}
+        {characteristicsFilterElement}
         {amenitiesFilterElement}
         {priceFilterElement}
         {toggleSearchFiltersPanelButton}
