@@ -10,7 +10,7 @@ import {
   autocompletePlaceSelected,
   composeValidators,
 } from '../../util/validators';
-import { Form, LocationAutocompleteInputField, Button, FieldTextInput } from '../../components';
+import { Form, LocationAutocompleteInputField, Button } from '../../components';
 
 import css from './EditListingLocationForm.css';
 

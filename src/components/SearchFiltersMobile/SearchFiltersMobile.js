@@ -13,7 +13,6 @@ import {
   Button,
   PriceFilter,
   SelectSingleFilterPlain,
-  SelectMultipleFilterPlain,
 } from '../../components';
 import { propTypes } from '../../util/types';
 import css from './SearchFiltersMobile.css';
@@ -149,7 +148,6 @@ class SearchFiltersMobileComponent extends Component {
       onManageDisableScrolling,
       selectedFiltersCount,
       categoryFilter,
-      amenitiesFilter,
       priceFilter,
       intl,
     } = this.props;
@@ -195,22 +193,6 @@ class SearchFiltersMobileComponent extends Component {
         intl={intl}
       />
     ) : null;
-
-    // const amenitiesLabel = intl.formatMessage({ id: 'SearchFiltersMobile.amenitiesLabel' });
-
-    // const initialAmenities = this.initialValues(amenitiesFilter.paramName);
-
-    // const amenitiesFilterElement = amenitiesFilter ? (
-    //   <SelectMultipleFilterPlain
-    //     id="SearchFiltersMobile.amenitiesFilter"
-    //     name="amenities"
-    //     urlParam={amenitiesFilter.paramName}
-    //     label={amenitiesLabel}
-    //     onSelect={this.handleSelectMultiple}
-    //     options={amenitiesFilter.options}
-    //     initialValues={initialAmenities}
-    //   />
-    // ) : null;
 
     const initialPriceRange = this.initialPriceRangeValue(priceFilter.paramName);
 
@@ -295,7 +277,6 @@ SearchFiltersMobileComponent.propTypes = {
   selectedFiltersCount: number,
   filterParamNames: array,
   categoriesFilter: propTypes.filterConfig,
-  amenitiesFilter: propTypes.filterConfig,
 
   // from injectIntl
   intl: intlShape.isRequired,

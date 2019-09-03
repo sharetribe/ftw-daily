@@ -169,8 +169,6 @@ export class ListingPageComponent extends Component {
       sendEnquiryError,
       timeSlots,
       fetchTimeSlotsError,
-      categoriesConfig,
-      amenitiesConfig,
     } = this.props;
 
     const listingId = new UUID(rawParams.id);
