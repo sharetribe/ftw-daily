@@ -8,7 +8,7 @@ const dev = process.env.REACT_APP_ENV === 'development';
 
 // If you want to change the language, remember to also change the
 // locale data and the messages in the app.js file.
-const locale = 'en';
+const locale = 'ge';
 const i18n = {
   /*
     0: Sunday
@@ -91,14 +91,12 @@ const siteTitle = 'Saunatime';
 // Twitter handle is needed in meta tags (twitter:site). Start it with '@' character
 const siteTwitterHandle = '@sharetribe';
 
-
 const siteYoutubePage = 'https://www.youtube.com/channel/UC-lrVxsEtC7qSWZATji2E_A';
 // Instagram page is used in SEO schema (http://schema.org/Organization)
 const siteInstagramPage = 'https://www.instagram.com/horsedeal24/';
 const siteSnapchatPage = 'https://www.snapchat.com/add/horsedeal24';
 // Facebook page is used in SEO schema (http://schema.org/Organization)
 const siteFacebookPage = 'https://www.facebook.com/HorseDeal24/';
-
 
 // Facebook counts shares with app or page associated by this id
 // Currently it is unset, but you can read more about fb:app_id from
