@@ -215,6 +215,8 @@ export class ListingPageComponent extends Component {
       publicData,
     } = currentListing.attributes;
 
+    const { breed, gender, age, color, hight, mainDiscipline } = publicData;
+
     const richTitle = (
       <span>
         {richText(title, {
@@ -396,7 +398,9 @@ export class ListingPageComponent extends Component {
                     showContactUser={showContactUser}
                     onContactUser={this.onContactUser}
                   />
-                  <SectionHorseInfo options={publicData.horseInfo} />
+                  <SectionHorseInfo
+                    options={{ breed, gender, age, color, hight, mainDiscipline }}
+                  />
                   <SectionDisciplinesMaybe disciplines={publicData.additionalDisciplines} />
                   <SectionDescriptionMaybe description={description} />
                   <SectionCharacteristicsMaybe characteristics={publicData.characteristics} />

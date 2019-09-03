@@ -27,10 +27,8 @@ const EditListingHorsePanel = props => {
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
   const { title, publicData } = currentListing.attributes;
-  const horseInfo = publicData.horseInfo || {};
-  const { gender, age, breed, hight, color } = horseInfo;
+  const { gender, age, breed, hight, color } = publicData;
   const { genders, ages, breeds, hights, colors } = config.custom;
-  console.log(horseInfo);
 
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
@@ -60,7 +58,7 @@ const EditListingHorsePanel = props => {
           const { title, gender, age, breed, hight, color } = values;
           const updateValues = {
             title: title.trim(),
-            publicData: { horseInfo: { ...horseInfo, gender, age, breed, hight, color } },
+            publicData: { gender, age, breed, hight, color },
           };
 
           onSubmit(updateValues);

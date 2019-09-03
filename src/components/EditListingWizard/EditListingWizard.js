@@ -66,9 +66,16 @@ const tabCompleted = (tab, listing) => {
 
   switch (tab) {
     case HORSE:
-      return !!(publicData.horseInfo && title);
+      return !!(
+        publicData.age &&
+        publicData.gender &&
+        publicData.color &&
+        publicData.hight &&
+        publicData.breed &&
+        title
+      );
     case DISCIPLINE:
-      return !!(publicData.horseInfo && publicData.horseInfo.mainDiscipline);
+      return !!publicData.mainDiscipline;
     case CHARACTER:
       return !!(publicData && typeof publicData.characteristics !== 'undefined');
     case DESCRIPTION:
