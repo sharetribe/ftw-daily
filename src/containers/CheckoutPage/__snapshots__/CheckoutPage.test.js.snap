@@ -86,9 +86,10 @@ exports[`CheckoutPage matches snapshot 1`] = `
         </h3>
       </div>
       <section>
-        <InjectIntl(StripePaymentForm)
+        <injectIntl(StripePaymentForm)
           authorDisplayName="author display name"
           confirmPaymentError={null}
+          defaultPaymentMethod={null}
           formId="CheckoutPagePaymentForm"
           hasHandledCardPayment={null}
           inProgress={false}
@@ -98,6 +99,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
             }
           }
           initiateOrderError={null}
+          loadingData={true}
           onStripeInitialized={[Function]}
           onSubmit={[Function]}
           paymentInfo="CheckoutPage.paymentInfo"

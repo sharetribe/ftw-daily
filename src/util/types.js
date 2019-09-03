@@ -190,6 +190,8 @@ const availabilityPlan = shape({
   ),
 });
 
+propTypes.availabilityPlan = availabilityPlan;
+
 const ownListingAttributes = shape({
   title: string.isRequired,
   description: string,
@@ -305,6 +307,21 @@ propTypes.stripeAccount = shape({
   type: propTypes.value('stripeAccount').isRequired,
   attributes: shape({
     stripeAccountId: string.isRequired,
+  }),
+});
+
+propTypes.defaultPaymentMethod = shape({
+  id: propTypes.uuid.isRequired,
+  type: propTypes.value('stripePaymentMethod').isRequired,
+  attributes: shape({
+    type: propTypes.value('stripe-payment-method/card').isRequired,
+    stripePaymentMethodId: string.isRequired,
+    card: shape({
+      brand: string.isRequired,
+      expirationMonth: number.isRequired,
+      expirationYear: number.isRequired,
+      last4Digits: string.isRequired,
+    }).isRequired,
   }),
 });
 

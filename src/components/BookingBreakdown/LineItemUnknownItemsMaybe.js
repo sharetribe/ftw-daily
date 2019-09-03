@@ -10,7 +10,7 @@
  * component for them that can be used in the `BookingBreakdown` component.
  */
 import React from 'react';
-import { intlShape } from 'react-intl';
+import { intlShape } from '../../util/reactIntl';
 import { formatMoney } from '../../util/currency';
 import { humanizeLineItemCode } from '../../util/data';
 import { LINE_ITEMS, propTypes } from '../../util/types';

@@ -42,6 +42,7 @@ import * as IconSocialMediaInstagram from './components/IconSocialMediaInstagram
 import * as IconSocialMediaTwitter from './components/IconSocialMediaTwitter/IconSocialMediaTwitter.example';
 import * as IconSpinner from './components/IconSpinner/IconSpinner.example';
 import * as ImageCarousel from './components/ImageCarousel/ImageCarousel.example';
+import * as KeywordFilter from './components/KeywordFilter/KeywordFilter.example';
 import * as ListingCard from './components/ListingCard/ListingCard.example';
 import * as LocationAutocompleteInput from './components/LocationAutocompleteInput/LocationAutocompleteInput.example';
 import * as ManageListingCard from './components/ManageListingCard/ManageListingCard.example';
@@ -58,6 +59,7 @@ import * as RangeSlider from './components/RangeSlider/RangeSlider.example';
 import * as ResponsiveImage from './components/ResponsiveImage/ResponsiveImage.example';
 import * as ReviewRating from './components/ReviewRating/ReviewRating.example';
 import * as Reviews from './components/Reviews/Reviews.example';
+import * as SavedCardDetails from './components/SavedCardDetails/SavedCardDetails.example';
 import * as SectionThumbnailLinks from './components/SectionThumbnailLinks/SectionThumbnailLinks.example';
 import * as SelectMultipleFilter from './components/SelectMultipleFilter/SelectMultipleFilter.example';
 import * as StripeBankAccountTokenInputField from './components/StripeBankAccountTokenInputField/StripeBankAccountTokenInputField.example';
@@ -148,6 +150,7 @@ export {
   IconSocialMediaTwitter,
   IconSpinner,
   ImageCarousel,
+  KeywordFilter,
   ListingCard,
   LocationAutocompleteInput,
   LoginForm,
@@ -169,6 +172,7 @@ export {
   ReviewForm,
   ReviewRating,
   Reviews,
+  SavedCardDetails,
   SectionThumbnailLinks,
   SelectMultipleFilter,
   SendMessageForm,

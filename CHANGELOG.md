@@ -14,12 +14,155 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] Update yarn.lock (there was Lodash version resolution missing)
+  [#1190](https://github.com/sharetribe/flex-template-web/pull/1190)
+
+## [v3.4.0] 2019-08-29
+
+- [change] Update `react-intl` to 3.1.13. More information about the changes can be found from
+  [Upgrade guide for react-intl@3.x](https://github.com/formatjs/react-intl/blob/master/docs/Upgrade-Guide.md)
+
+  - Proptype `intlShape` was removed so we needed to create it again. Because of this we added a new
+    `util/reactIntl.js` file. This file is now used to wrap all the react-intl related imports.
+  - `addLocaleDate` function was removed and react-intl library is now relying on native Intl APIs:
+    [Intl.PluralRules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/PluralRules)
+    and
+    [Intl.RelativeTimeFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RelativeTimeFormat).
+    In order to support older browsers we needed to add `intl-pluralrules` and
+    `intl-relativetimeformat` to `util/polyfills.js`
+  - Also Node must be now compiled with `full-icu` which caused changes to `start` and `test`
+    scripts in `package.json`. We also needed to add a specific config for `nodemon`
+  - Default `textComponent`in `IntlProvider` changed to `React.Fragment` so we need to explicitly
+    set `textComponent` to `span`. Otherwise all the snapshots would have changed and it might
+    affect to UI if there is styles added to these spans generally in customization projects.
+
+    Note: `FormattedMessage` component now supports
+    [`tagName` prop](https://github.com/formatjs/react-intl/blob/master/docs/Components.md#formattedmessage)
+    and
+    [improved rich-text formatting](https://github.com/formatjs/react-intl/blob/master/docs/Components.md#rich-text-formatting).
+    [#1181](https://github.com/sharetribe/flex-template-web/pull/1181)
+
+- [change] Update helmet (v3.20.0 > v3.20.1).
+  [#1186](https://github.com/sharetribe/flex-template-web/pull/1186)
+- [fix] Lodash vulnerability: enforce newer version for react-google-maps and react-dates
+  [#1188](https://github.com/sharetribe/flex-template-web/pull/1188)
+- [change] Update `React`, `react-test-renderer` and `react-dom` to 16.9.0. After these updates old
+  lifecycle methods `componentWillMount`, `componentWillUpdate` and `componentWillUpdate` will cause
+  deprecation warnings. Check the updated components from the PR
+  [#1172](https://github.com/sharetribe/flex-template-web/pull/1172)
+- [fix] ProfileSettingsForm: clear correct timeout.
+  [#1185](https://github.com/sharetribe/flex-template-web/pull/1185)
+- [fix] `availabilityPlan` prop in `EditListingAvailabilityForm` was missing.
+  [#1183](https://github.com/sharetribe/flex-template-web/pull/1183)
+- [fix] Bug fix: valueFromForm prop wasn't passed through different subcomponents.
+  [#1182](https://github.com/sharetribe/flex-template-web/pull/1182)
+- [add] Update German and French translations.
+  [#1184](https://github.com/sharetribe/flex-template-web/pull/1184)
+- [change] Migrate from `react-helmet` to `react-helmet-async`
+  [#1179](https://github.com/sharetribe/flex-template-web/pull/1179)
+- [change] Use `sanitize.css` from own file instead of npm package because updating it accidentally
+  might break the UI. [#1177](https://github.com/sharetribe/flex-template-web/pull/1177)
+- [fix] Change app.test.js after `react-redux` update
+  [#1178](https://github.com/sharetribe/flex-template-web/pull/1178)
+- [change] Update `react-redux`: v5.1.1 -> v7.1.1
+  [#1176](https://github.com/sharetribe/flex-template-web/pull/1176)
+- [change] Update `seedrandom` from v2.4.4 to v3.0.3
+  [#1175](https://github.com/sharetribe/flex-template-web/pull/1175)
+- [change] Update `inquirer` from v6.5.0 to v7.0.0
+  [#1174](https://github.com/sharetribe/flex-template-web/pull/1174)
+- [change] Update final-form, final-form-arrays, react-final-form and react-final-form-arrays. This
+  forced to make some code changes:
+
+  - Old recommendation of by-passing default field formatting or parsin isn't accepted anymore
+    - `format={null}` => use identity function instead: `format={v => v}`
+    - `parse={null}` => use identity function instead: `parse={v => v}`
+  - Final Form passes input props (name, value, onChange, onBlur, etc. ) grouped inside input key
+    - those props now include `type` attribute too.
+  - We had old form naming pattern with prop 'form', which now conflicted with updated Final Form
+    (The 'form' prop was used when Redux-Form was the form library)
+
+  [#1173](https://github.com/sharetribe/flex-template-web/pull/1173)
+
+- [change] Update `react-dates` from v18.5.0 to v20.3.0
+  [#1171](https://github.com/sharetribe/flex-template-web/pull/1171)
+- [change] Update Prettier to v1.18.2
+  [#1170](https://github.com/sharetribe/flex-template-web/pull/1170)
+- [change] Update `path-to-regexp` to v3.0.0
+  [#1169](https://github.com/sharetribe/flex-template-web/pull/1169)
+- [change] Update `sharetribe-scripts` to v3.1.1
+  [#1167](https://github.com/sharetribe/flex-template-web/pull/1167)
+- [fix] Small change to remove card tect on `SavedCardDetails` modal.
+  [#1166](https://github.com/sharetribe/flex-template-web/pull/1166)
+- [change] Update Sentry (@sentry/browser / @sentry/node) from v4.5.1 to v5.6.2
+  [#1164](https://github.com/sharetribe/flex-template-web/pull/1164)
+- Update dependecies: all the easily updateable minor and batch updates: array.prototype.find,
+  babel-jest, core-js, enzyme (et al.), express, helmet, inquirer, lodash, nodemon, raf, redux,
+  source-map-support [#1163](https://github.com/sharetribe/flex-template-web/pull/1163)
+
+## [v3.3.0] 2019-08-22
+
+- [add] Saving payment card after payment or without initial payment. This release contains quite a
+  lot changes to many files. This includes:
+
+  - UI changes to `CheckoutPage` for showing the saved payment method
+  - One more step to `handlePaymentIntent` flow on `CheckoutPage` if the user decides to save the
+    payment card
+  - Showing error notification on `TransactionPage` if saving the payment method has failed
+  - Use Flex SDK v1.5.0 which has new endpoints for creating Stripe Customer and using Stripe
+    SetupIntents
+  - Add `handleCardSetup` function to `stripe.duck.js`
+  - New shared duck file `paymentMethods.duck.js` for handling saving, deleting and replacing the
+    payment method
+  - New page `PaymentMethodsPage` in user's account settings
+  - `StripePaymenAddress` used in `StripePaymentForm` is now a separate component used also in new
+    `PaymentMethodsForm`
+  - New `LayoutWrapperAccountSettingsSideNav` component which is used in account settings pages:
+    `ContactDetailsPage`, `PasswordChangePage`, `PayoutPreferencesPage`, `PaymentMethodsPage`
+
+  [#1138](https://github.com/sharetribe/flex-template-web/pull/1138)
+
+Read more from Flex docs:
+[How saving payment card works in FTW](https://www.sharetribe.com/docs/background/save-payment-card/)
+
+[v3.3.0]: https://github.com/sharetribe/flex-template-web/compare/v3.2.1...v3.3.0
+
+## [v3.2.1] 2019-08-22
+
+- [fix] On `ListingPage` align avatar with the left side of the content and fix content width so
+  that it aligns with the header image.
+  [#1155](https://github.com/sharetribe/flex-template-web/pull/1155)
+- [fix] Rehydrate bug: existing DOM elements were populated incorrectly
+  [#1154](https://github.com/sharetribe/flex-template-web/pull/1154)
+- [fix] Don't send personal id number or business profile to Stripe API when creating a Stripe
+  customer if they are not required in `stripe-config.js`. This happened e.g. if someone filled the
+  form after selecting the US and then before sending changed the country to Finland.
+  [#1151](https://github.com/sharetribe/flex-template-web/pull/1151)
+- [add] Add new French and Spanish translations related to keyword search and Spanish translations
+  related to payment intents. [#1148](https://github.com/sharetribe/flex-template-web/pull/1148)
+- [add] Add new French translations related to payment intents. Also few small changes to en.json
+  for consistency. [#1139](https://github.com/sharetribe/flex-template-web/pull/1139)
+
+[v3.2.1]: https://github.com/sharetribe/flex-template-web/compare/v3.2.0...v3.2.1
+
+## [v3.2.0] 2019-07-08
+
+- [add] Keyword search/filter added to SearchPage component.
+  [#1129](https://github.com/sharetribe/flex-template-web/pull/1129)
+- [fix] temporarily remove audit CI job.
+  [#1136](https://github.com/sharetribe/flex-template-web/pull/1136)
+- [change] Update outdated dependencies. This includes updating lodash to fix the security issue.
+  [#1135](https://github.com/sharetribe/flex-template-web/pull/1135)
+
+  [v3.2.0]: https://github.com/sharetribe/flex-template-web/compare/v3.1.1...v3.2.0
+
 ## [v3.1.1] 2019-07-08
 
 - [fix] Ensure on `TransactionPanel` that enquiry has a correct transition when a customer tries to
   book the listing. This might happen with transaction process changes (e.g. when changing from
   previous default to SCA process).
   [#1131](https://github.com/sharetribe/flex-template-web/pull/1131)
+
+  [v3.1.1]: https://github.com/sharetribe/flex-template-web/compare/v3.1.0...v3.1.1
 
 ## [v3.1.0] 2019-07-05
 

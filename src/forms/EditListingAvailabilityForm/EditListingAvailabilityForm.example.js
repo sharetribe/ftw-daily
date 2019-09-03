@@ -26,6 +26,39 @@ export const Empty = {
       onFetchAvailabilityExceptions: () => console.log('onFetchAvailabilityExceptions called'),
       onFetchBookings: () => console.log('onFetchBookings called'),
     },
+    availabilityPlan: {
+      type: 'availability-plan/day',
+      entries: [
+        {
+          dayOfWeek: 'mon',
+          seats: 1,
+        },
+        {
+          dayOfWeek: 'tue',
+          seats: 1,
+        },
+        {
+          dayOfWeek: 'wed',
+          seats: 1,
+        },
+        {
+          dayOfWeek: 'thu',
+          seats: 1,
+        },
+        {
+          dayOfWeek: 'fri',
+          seats: 1,
+        },
+        {
+          dayOfWeek: 'sat',
+          seats: 1,
+        },
+        {
+          dayOfWeek: 'sun',
+          seats: 1,
+        },
+      ],
+    },
   },
   group: 'forms',
 };

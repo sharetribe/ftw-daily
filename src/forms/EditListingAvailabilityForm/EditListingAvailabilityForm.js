@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bool, func, object, string } from 'prop-types';
 import { compose } from 'redux';
 import { Form as FinalForm } from 'react-final-form';
-import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
+import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import { Form, Button } from '../../components';
@@ -84,6 +84,7 @@ EditListingAvailabilityFormComponent.propTypes = {
   updateError: propTypes.error,
   updateInProgress: bool.isRequired,
   availability: object.isRequired,
+  availabilityPlan: propTypes.availabilityPlan.isRequired,
 };
 
 export default compose(injectIntl)(EditListingAvailabilityFormComponent);

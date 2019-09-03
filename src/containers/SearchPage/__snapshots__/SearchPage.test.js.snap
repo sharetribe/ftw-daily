@@ -72,6 +72,12 @@ exports[`SearchPageComponent matches snapshot 1`] = `
             },
             "paramName": "dates",
           },
+          "keywordFilter": Object {
+            "config": Object {
+              "active": true,
+            },
+            "paramName": "keywords",
+          },
           "priceFilter": Object {
             "config": Object {
               "max": 1000,

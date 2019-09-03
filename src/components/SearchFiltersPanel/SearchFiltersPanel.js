@@ -29,7 +29,7 @@
 import React, { Component } from 'react';
 import { array, func, object, shape, string } from 'prop-types';
 import classNames from 'classnames';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import { withRouter } from 'react-router-dom';
 import omit from 'lodash/omit';
 

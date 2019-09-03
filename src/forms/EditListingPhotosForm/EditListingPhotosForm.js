@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { array, bool, func, shape, string } from 'prop-types';
 import { compose } from 'redux';
 import { Form as FinalForm, Field } from 'react-final-form';
-import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
+import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 import isEqual from 'lodash/isEqual';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
@@ -159,8 +159,8 @@ export class EditListingPhotosFormComponent extends Component {
                   disabled={imageUploadRequested}
                 >
                   {fieldprops => {
-                    const { accept, input, label, type, disabled } = fieldprops;
-                    const { name } = input;
+                    const { accept, input, label, disabled } = fieldprops;
+                    const { name, type } = input;
                     const onChange = e => {
                       const file = e.target.files[0];
                       form.change(`addImage`, file);
@@ -185,10 +185,10 @@ export class EditListingPhotosFormComponent extends Component {
 
                 <Field
                   component={props => {
-                    const { input, type, meta } = props;
+                    const { input, meta } = props;
                     return (
                       <div className={css.imageRequiredWrapper}>
-                        <input {...input} type={type} />
+                        <input {...input} />
                         <ValidationError fieldMeta={meta} />
                       </div>
                     );

@@ -11,7 +11,7 @@ exports[`EditListingLocationForm matches snapshot 1`] = `
       "formatMessage": [Function],
       "formatNumber": [Function],
       "formatPlural": [Function],
-      "formatRelative": [Function],
+      "formatRelativeTime": [Function],
       "formatTime": [Function],
       "now": [Function],
     }

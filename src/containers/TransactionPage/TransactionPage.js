@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
-import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
+import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
 import routeConfiguration from '../../routeConfiguration';
 import { propTypes } from '../../util/types';
@@ -46,6 +46,7 @@ export const TransactionPageComponent = props => {
   const {
     currentUser,
     initialMessageFailedToTransaction,
+    savePaymentMethodFailed,
     fetchMessagesError,
     fetchMessagesInProgress,
     totalMessagePages,
@@ -105,7 +106,11 @@ export const TransactionPageComponent = props => {
   };
 
   // If payment is pending, redirect to CheckoutPage
-  if (txIsPaymentPending(currentTransaction) && isCustomerRole) {
+  if (
+    txIsPaymentPending(currentTransaction) &&
+    isCustomerRole &&
+    currentTransaction.attributes.lineItems
+  ) {
     const currentBooking = ensureListing(currentTransaction.booking);
 
     const initialValues = {
@@ -217,6 +222,7 @@ export const TransactionPageComponent = props => {
       oldestMessagePageFetched={oldestMessagePageFetched}
       messages={messages}
       initialMessageFailed={initialMessageFailed}
+      savePaymentMethodFailed={savePaymentMethodFailed}
       fetchMessagesError={fetchMessagesError}
       sendMessageInProgress={sendMessageInProgress}
       sendMessageError={sendMessageError}
@@ -270,6 +276,7 @@ TransactionPageComponent.defaultProps = {
   transaction: null,
   fetchMessagesError: null,
   initialMessageFailedToTransaction: null,
+  savePaymentMethodFailed: false,
   sendMessageError: null,
   timeSlots: null,
   fetchTimeSlotsError: null,
@@ -295,6 +302,7 @@ TransactionPageComponent.propTypes = {
   oldestMessagePageFetched: number.isRequired,
   messages: arrayOf(propTypes.message).isRequired,
   initialMessageFailedToTransaction: propTypes.uuid,
+  savePaymentMethodFailed: bool,
   sendMessageInProgress: bool.isRequired,
   sendMessageError: propTypes.error,
   onShowMoreMessages: func.isRequired,
@@ -330,6 +338,7 @@ const mapStateToProps = state => {
     oldestMessagePageFetched,
     messages,
     initialMessageFailedToTransaction,
+    savePaymentMethodFailed,
     sendMessageInProgress,
     sendMessageError,
     sendReviewInProgress,
@@ -358,6 +367,7 @@ const mapStateToProps = state => {
     oldestMessagePageFetched,
     messages,
     initialMessageFailedToTransaction,
+    savePaymentMethodFailed,
     sendMessageInProgress,
     sendMessageError,
     sendReviewInProgress,

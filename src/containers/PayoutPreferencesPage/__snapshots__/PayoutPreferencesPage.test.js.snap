@@ -23,43 +23,8 @@ exports[`PayoutPreferencesPage matches snapshot with Stripe connected 1`] = `
         selectedPageName="PayoutPreferencesPage"
       />
     </LayoutWrapperTopbar>
-    <LayoutWrapperSideNav
-      className={null}
-      rootClassName={null}
-      tabs={
-        Array [
-          Object {
-            "linkProps": Object {
-              "name": "ContactDetailsPage",
-            },
-            "selected": false,
-            "text": <FormattedMessage
-              id="PayoutPreferencesPage.contactDetailsTabTitle"
-              values={Object {}}
-            />,
-          },
-          Object {
-            "linkProps": Object {
-              "name": "PasswordChangePage",
-            },
-            "selected": false,
-            "text": <FormattedMessage
-              id="PayoutPreferencesPage.passwordTabTitle"
-              values={Object {}}
-            />,
-          },
-          Object {
-            "linkProps": Object {
-              "name": "PayoutPreferencesPage",
-            },
-            "selected": true,
-            "text": <FormattedMessage
-              id="PayoutPreferencesPage.paymentsTabTitle"
-              values={Object {}}
-            />,
-          },
-        ]
-      }
+    <withViewport(LayoutWrapperAccountSettingsSideNavComponent)
+      currentTab="PayoutPreferencesPage"
     />
     <LayoutWrapperMain
       className={null}
@@ -84,7 +49,7 @@ exports[`PayoutPreferencesPage matches snapshot with Stripe connected 1`] = `
       className={null}
       rootClassName={null}
     >
-      <InjectIntl(Footer) />
+      <injectIntl(Footer) />
     </LayoutWrapperFooter>
   </LayoutSideNavigation>
 </Page>
@@ -113,43 +78,8 @@ exports[`PayoutPreferencesPage matches snapshot with Stripe not connected 1`] = 
         selectedPageName="PayoutPreferencesPage"
       />
     </LayoutWrapperTopbar>
-    <LayoutWrapperSideNav
-      className={null}
-      rootClassName={null}
-      tabs={
-        Array [
-          Object {
-            "linkProps": Object {
-              "name": "ContactDetailsPage",
-            },
-            "selected": false,
-            "text": <FormattedMessage
-              id="PayoutPreferencesPage.contactDetailsTabTitle"
-              values={Object {}}
-            />,
-          },
-          Object {
-            "linkProps": Object {
-              "name": "PasswordChangePage",
-            },
-            "selected": false,
-            "text": <FormattedMessage
-              id="PayoutPreferencesPage.passwordTabTitle"
-              values={Object {}}
-            />,
-          },
-          Object {
-            "linkProps": Object {
-              "name": "PayoutPreferencesPage",
-            },
-            "selected": true,
-            "text": <FormattedMessage
-              id="PayoutPreferencesPage.paymentsTabTitle"
-              values={Object {}}
-            />,
-          },
-        ]
-      }
+    <withViewport(LayoutWrapperAccountSettingsSideNavComponent)
+      currentTab="PayoutPreferencesPage"
     />
     <LayoutWrapperMain
       className={null}
@@ -168,7 +98,7 @@ exports[`PayoutPreferencesPage matches snapshot with Stripe not connected 1`] = 
             values={Object {}}
           />
         </p>
-        <InjectIntl(PayoutDetailsFormComponent)
+        <injectIntl(PayoutDetailsFormComponent)
           createStripeAccountError={null}
           currentUserId={
             UUID {
@@ -189,7 +119,7 @@ exports[`PayoutPreferencesPage matches snapshot with Stripe not connected 1`] = 
       className={null}
       rootClassName={null}
     >
-      <InjectIntl(Footer) />
+      <injectIntl(Footer) />
     </LayoutWrapperFooter>
   </LayoutSideNavigation>
 </Page>
@@ -218,43 +148,8 @@ exports[`PayoutPreferencesPage matches snapshot with details submitted 1`] = `
         selectedPageName="PayoutPreferencesPage"
       />
     </LayoutWrapperTopbar>
-    <LayoutWrapperSideNav
-      className={null}
-      rootClassName={null}
-      tabs={
-        Array [
-          Object {
-            "linkProps": Object {
-              "name": "ContactDetailsPage",
-            },
-            "selected": false,
-            "text": <FormattedMessage
-              id="PayoutPreferencesPage.contactDetailsTabTitle"
-              values={Object {}}
-            />,
-          },
-          Object {
-            "linkProps": Object {
-              "name": "PasswordChangePage",
-            },
-            "selected": false,
-            "text": <FormattedMessage
-              id="PayoutPreferencesPage.passwordTabTitle"
-              values={Object {}}
-            />,
-          },
-          Object {
-            "linkProps": Object {
-              "name": "PayoutPreferencesPage",
-            },
-            "selected": true,
-            "text": <FormattedMessage
-              id="PayoutPreferencesPage.paymentsTabTitle"
-              values={Object {}}
-            />,
-          },
-        ]
-      }
+    <withViewport(LayoutWrapperAccountSettingsSideNavComponent)
+      currentTab="PayoutPreferencesPage"
     />
     <LayoutWrapperMain
       className={null}
@@ -273,7 +168,7 @@ exports[`PayoutPreferencesPage matches snapshot with details submitted 1`] = `
             values={Object {}}
           />
         </p>
-        <InjectIntl(PayoutDetailsFormComponent)
+        <injectIntl(PayoutDetailsFormComponent)
           createStripeAccountError={null}
           currentUserId={
             UUID {
@@ -294,7 +189,7 @@ exports[`PayoutPreferencesPage matches snapshot with details submitted 1`] = `
       className={null}
       rootClassName={null}
     >
-      <InjectIntl(Footer) />
+      <injectIntl(Footer) />
     </LayoutWrapperFooter>
   </LayoutSideNavigation>
 </Page>

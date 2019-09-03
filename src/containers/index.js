@@ -12,6 +12,7 @@ export { default as NotFoundPage } from './NotFoundPage/NotFoundPage';
 export { default as PasswordChangePage } from './PasswordChangePage/PasswordChangePage';
 export { default as PasswordRecoveryPage } from './PasswordRecoveryPage/PasswordRecoveryPage';
 export { default as PasswordResetPage } from './PasswordResetPage/PasswordResetPage';
+export { default as PaymentMethodsPage } from './PaymentMethodsPage/PaymentMethodsPage';
 export { default as PayoutPreferencesPage } from './PayoutPreferencesPage/PayoutPreferencesPage';
 export { default as PrivacyPolicyPage } from './PrivacyPolicyPage/PrivacyPolicyPage';
 export { default as ProfilePage } from './ProfilePage/ProfilePage';

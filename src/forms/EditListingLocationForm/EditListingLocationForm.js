@@ -2,7 +2,7 @@ import React from 'react';
 import { bool, func, shape, string } from 'prop-types';
 import { compose } from 'redux';
 import { Form as FinalForm } from 'react-final-form';
-import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
+import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import {
@@ -13,6 +13,8 @@ import {
 import { Form, LocationAutocompleteInputField, Button, FieldTextInput } from '../../components';
 
 import css from './EditListingLocationForm.css';
+
+const identity = v => v;
 
 export const EditListingLocationFormComponent = props => (
   <FinalForm
@@ -43,7 +45,14 @@ export const EditListingLocationFormComponent = props => (
         id: 'EditListingLocationForm.addressNotRecognized',
       });
 
-      const buildingMessage = intl.formatMessage({ id: 'EditListingLocationForm.building' });
+      const optionalText = intl.formatMessage({
+        id: 'EditListingLocationForm.optionalText',
+      });
+
+      const buildingMessage = intl.formatMessage(
+        { id: 'EditListingLocationForm.building' },
+        { optionalText: optionalText }
+      );
       const buildingPlaceholderMessage = intl.formatMessage({
         id: 'EditListingLocationForm.buildingPlaceholder',
       });
@@ -81,7 +90,7 @@ export const EditListingLocationFormComponent = props => (
             label={titleRequiredMessage}
             placeholder={addressPlaceholderMessage}
             useDefaultPredictions={false}
-            format={null}
+            format={identity}
             valueFromForm={values.location}
             validate={composeValidators(
               autocompleteSearchRequired(addressRequiredMessage),
