@@ -54,6 +54,11 @@ export { default as ResponsiveImage } from './ResponsiveImage/ResponsiveImage';
 export { default as UserDisplayName } from './UserDisplayName/UserDisplayName';
 export { default as ValidationError } from './ValidationError/ValidationError';
 
+// GalleryCarousel
+export {default as GalleryCarouselSlider} from './GalleryCarouselSlider/GalleryCarouselSlider';
+export {default as GalleryCarouselWrapper} from './GalleryCarouselWrapper/GalleryCarouselWrapper';
+export {default as GalleryCarouselPagination} from './GalleryCarouselPagination/GalleryCarouselPagination';
+
 /**
  * Composite components
  * These components include other components

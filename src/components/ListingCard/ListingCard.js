@@ -12,6 +12,7 @@ import config from '../../config';
 import { NamedLink, ResponsiveImage } from '../../components';
 
 import css from './ListingCard.css';
+import GalleryCarouselWrapper from '../GalleryCarouselWrapper/GalleryCarouselWrapper';
 
 const MIN_LENGTH_FOR_LONG_WORDS = 10;
 
@@ -76,13 +77,17 @@ export const ListingCardComponent = props => {
         onMouseLeave={() => setActiveListing(null)}
       >
         <div className={css.aspectWrapper}>
-          <LazyImage
-            rootClassName={css.rootForImage}
-            alt={title}
-            image={firstImage}
-            variants={['landscape-crop', 'landscape-crop2x']}
-            sizes={renderSizes}
-          />
+          {currentListing.images.length > 1 ? (
+            <GalleryCarouselWrapper items={currentListing.images} renderSizes={renderSizes} />
+          ) : (
+            <LazyImage
+              rootClassName={css.rootForImage}
+              alt={title}
+              image={firstImage}
+              variants={['landscape-crop', 'landscape-crop2x']}
+              sizes={renderSizes}
+            />
+          )}
         </div>
       </div>
       <div className={css.info}>
