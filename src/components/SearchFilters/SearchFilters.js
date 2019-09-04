@@ -61,11 +61,13 @@ const SearchFiltersComponent = props => {
     listingsAreLoaded,
     resultsCount,
     searchInProgress,
+    genderFilter,
+    ageFilter,
+    breedFilter,
+    hightFilter,
+    colorFilter,
     mainDisciplineFilter,
-    amenitiesFilter,
     priceFilter,
-    dateRangeFilter,
-    keywordFilter,
     isSearchFiltersPanelOpen,
     toggleSearchFiltersPanel,
     searchFiltersPanelSelectedCount,
@@ -76,36 +78,41 @@ const SearchFiltersComponent = props => {
   const hasNoResult = listingsAreLoaded && resultsCount === 0;
   const classes = classNames(rootClassName || css.root, { [css.longInfo]: hasNoResult }, className);
 
-  const disciplinesLabel = intl.formatMessage({
-    id: 'SearchFilters.disciplinesLabel',
+  const genderLabel = intl.formatMessage({
+    id: 'SearchFilters.genderLabel',
+  });
+  const ageLabel = intl.formatMessage({
+    id: 'SearchFilters.ageLabel',
+  });
+  const breedLabel = intl.formatMessage({
+    id: 'SearchFilters.breedLabel',
+  });
+  const hightLabel = intl.formatMessage({
+    id: 'SearchFilters.hightLabel',
+  });
+  const colorLabel = intl.formatMessage({
+    id: 'SearchFilters.colorLabel',
+  });
+  const mainDisciplineLabel = intl.formatMessage({
+    id: 'SearchFilters.mainDisciplineLabel',
   });
 
-  const amenitiesLabel = intl.formatMessage({
-    id: 'SearchFilters.amenitiesLabel',
-  });
+  const initialGender = genderFilter ? initialValues(urlQueryParams, genderFilter.paramName) : null;
 
-  const keywordLabel = intl.formatMessage({
-    id: 'SearchFilters.keywordLabel',
-  });
+  const initialAge = ageFilter ? initialValues(urlQueryParams, ageFilter.paramName) : null;
 
-  const initialAmenities = amenitiesFilter
-    ? initialValues(urlQueryParams, amenitiesFilter.paramName)
-    : null;
+  const initialBreed = breedFilter ? initialValues(urlQueryParams, breedFilter.paramName) : null;
 
-  const initialDisciplines = mainDisciplineFilter
-    ? initialValue(urlQueryParams, mainDisciplineFilter.paramName)
+  const initialHight = hightFilter ? initialValues(urlQueryParams, hightFilter.paramName) : null;
+
+  const initialColor = colorFilter ? initialValues(urlQueryParams, colorFilter.paramName) : null;
+
+  const initialMainDiscipline = mainDisciplineFilter
+    ? initialValues(urlQueryParams, mainDisciplineFilter.paramName)
     : null;
 
   const initialPriceRange = priceFilter
     ? initialPriceRangeValue(urlQueryParams, priceFilter.paramName)
-    : null;
-
-  const initialDateRange = dateRangeFilter
-    ? initialDateRangeValue(urlQueryParams, dateRangeFilter.paramName)
-    : null;
-
-  const initialKeyword = keywordFilter
-    ? initialValue(urlQueryParams, keywordFilter.paramName)
     : null;
 
   const handleSelectOptions = (urlParam, options) => {
@@ -159,28 +166,86 @@ const SearchFiltersComponent = props => {
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   };
 
-  const mainDisciplineFilterElement = mainDisciplineFilter ? (
-    <SelectSingleFilter
-      urlParam={mainDisciplineFilter.paramName}
-      label={disciplinesLabel}
-      onSelect={handleSelectOption}
+  const genderFilterElement = genderFilter ? (
+    <SelectMultipleFilter
+      id={'SearchFilters.genderFilter'}
+      name="gender"
+      urlParam={genderFilter.paramName}
+      label={genderLabel}
+      onSubmit={handleSelectOptions}
       showAsPopup
-      options={mainDisciplineFilter.options}
-      initialValue={initialDisciplines}
+      options={genderFilter.options}
+      initialValues={initialGender}
       contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
     />
   ) : null;
 
-  const amenitiesFilterElement = amenitiesFilter ? (
+  const ageFilterElement = ageFilter ? (
     <SelectMultipleFilter
-      id={'SearchFilters.amenitiesFilter'}
-      name="amenities"
-      urlParam={amenitiesFilter.paramName}
-      label={amenitiesLabel}
+      id={'SearchFilters.ageFilter'}
+      name="age"
+      urlParam={ageFilter.paramName}
+      label={ageLabel}
       onSubmit={handleSelectOptions}
       showAsPopup
-      options={amenitiesFilter.options}
-      initialValues={initialAmenities}
+      options={ageFilter.options}
+      initialValues={initialAge}
+      contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+    />
+  ) : null;
+
+  const breedFilterElement = breedFilter ? (
+    <SelectMultipleFilter
+      id={'SearchFilters.breedFilter'}
+      name="breed"
+      urlParam={breedFilter.paramName}
+      label={breedLabel}
+      onSubmit={handleSelectOptions}
+      showAsPopup
+      options={breedFilter.options}
+      initialValues={initialBreed}
+      contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+    />
+  ) : null;
+
+  const hightFilterElement = hightFilter ? (
+    <SelectMultipleFilter
+      id={'SearchFilters.hightFilter'}
+      name="hight"
+      urlParam={hightFilter.paramName}
+      label={hightLabel}
+      onSubmit={handleSelectOptions}
+      showAsPopup
+      options={hightFilter.options}
+      initialValues={initialHight}
+      contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+    />
+  ) : null;
+
+  const colorFilterElement = colorFilter ? (
+    <SelectMultipleFilter
+      id={'SearchFilters.colorFilter'}
+      name="color"
+      urlParam={colorFilter.paramName}
+      label={colorLabel}
+      onSubmit={handleSelectOptions}
+      showAsPopup
+      options={colorFilter.options}
+      initialValues={initialColor}
+      contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+    />
+  ) : null;
+
+  const mainDisciplineFilterElement = mainDisciplineFilter ? (
+    <SelectMultipleFilter
+      id={'SearchFilters.mainDisciplineFilter'}
+      name="mainDiscipline"
+      urlParam={mainDisciplineFilter.paramName}
+      label={mainDisciplineLabel}
+      onSubmit={handleSelectOptions}
+      showAsPopup
+      options={mainDisciplineFilter.options}
+      initialValues={initialMainDiscipline}
       contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
     />
   ) : null;
@@ -217,6 +282,11 @@ const SearchFiltersComponent = props => {
   return (
     <div className={classes}>
       <div className={css.filters}>
+        {genderFilterElement}
+        {ageFilterElement}
+        {breedFilterElement}
+        {hightFilterElement}
+        {colorFilterElement}
         {mainDisciplineFilterElement}
         {priceFilterElement}
         {toggleSearchFiltersPanelButton}
@@ -250,10 +320,13 @@ SearchFiltersComponent.defaultProps = {
   className: null,
   resultsCount: null,
   searchingInProgress: false,
-  categoryFilter: null,
-  amenitiesFilter: null,
+  genderFilter: null,
+  ageFilter: null,
+  breedFilter: null,
+  hightFilter: null,
+  colorFilter: null,
+  mainDisciplineFilter: null,
   priceFilter: null,
-  dateRangeFilter: null,
   isSearchFiltersPanelOpen: false,
   toggleSearchFiltersPanel: null,
   searchFiltersPanelSelectedCount: 0,
@@ -267,10 +340,13 @@ SearchFiltersComponent.propTypes = {
   resultsCount: number,
   searchingInProgress: bool,
   onManageDisableScrolling: func.isRequired,
-  categoriesFilter: propTypes.filterConfig,
-  amenitiesFilter: propTypes.filterConfig,
+  genderFilter: propTypes.filterConfig,
+  ageFilter: propTypes.filterConfig,
+  breedFilter: propTypes.filterConfig,
+  hightFilter: propTypes.filterConfig,
+  colorFilter: propTypes.filterConfig,
+  mainDisciplineFilter: propTypes.filterConfig,
   priceFilter: propTypes.filterConfig,
-  dateRangeFilter: propTypes.filterConfig,
   isSearchFiltersPanelOpen: bool,
   toggleSearchFiltersPanel: func,
   searchFiltersPanelSelectedCount: number,

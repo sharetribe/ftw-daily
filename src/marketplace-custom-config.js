@@ -155,7 +155,7 @@ export const disciplines = [
   { key: 'Springen', label: 'Springen' },
   { key: 'Dressur', label: 'Dressur' },
   { key: 'Voltegieren', label: 'Voltegieren' },
-  { key: 'Freizei', label: 'Freizei' },
+  { key: 'Freizeit', label: 'Freizeit' },
   { key: 'Western', label: 'Western' },
   { key: 'Polo', label: 'Polo' },
   { key: 'Decken', label: 'Decken' },
