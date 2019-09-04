@@ -81,7 +81,7 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
           />
         </div>
       </div>
-      <InjectIntl(ModalComponent)
+      <injectIntl(ModalComponent)
         id="AuthenticationPage.tos"
         isOpen={false}
         onClose={[Function]}
@@ -99,13 +99,13 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
             rootClassName={null}
           />
         </div>
-      </InjectIntl(ModalComponent)>
+      </injectIntl(ModalComponent)>
     </LayoutWrapperMain>
     <LayoutWrapperFooter
       className={null}
       rootClassName={null}
     >
-      <InjectIntl(Footer) />
+      <injectIntl(Footer) />
     </LayoutWrapperFooter>
   </LayoutSingleColumn>
 </Page>

@@ -4,7 +4,7 @@
  */
 import React from 'react';
 import { oneOf, string } from 'prop-types';
-import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
+import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 import classNames from 'classnames';
 import {
   propTypes,

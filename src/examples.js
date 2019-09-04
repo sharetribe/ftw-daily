@@ -59,6 +59,7 @@ import * as RangeSlider from './components/RangeSlider/RangeSlider.example';
 import * as ResponsiveImage from './components/ResponsiveImage/ResponsiveImage.example';
 import * as ReviewRating from './components/ReviewRating/ReviewRating.example';
 import * as Reviews from './components/Reviews/Reviews.example';
+import * as SavedCardDetails from './components/SavedCardDetails/SavedCardDetails.example';
 import * as SectionThumbnailLinks from './components/SectionThumbnailLinks/SectionThumbnailLinks.example';
 import * as SelectMultipleFilter from './components/SelectMultipleFilter/SelectMultipleFilter.example';
 import * as StripeBankAccountTokenInputField from './components/StripeBankAccountTokenInputField/StripeBankAccountTokenInputField.example';
@@ -171,6 +172,7 @@ export {
   ReviewForm,
   ReviewRating,
   Reviews,
+  SavedCardDetails,
   SectionThumbnailLinks,
   SelectMultipleFilter,
   SendMessageForm,

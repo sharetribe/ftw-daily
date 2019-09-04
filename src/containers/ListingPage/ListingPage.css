@@ -224,7 +224,8 @@
     margin-top: 50px;
     margin-bottom: 0px;
     /* contentContainer's full width - (bookingColumn + two paddings + margin + border) */
-    flex-basis: calc(100% - 493px);
+    max-width: calc(100% - 433px);
+    flex-basis: calc(100% - 433px);
     flex-shrink: 0;
     flex-grow: 1;
   }
@@ -260,7 +261,6 @@
 
   @media (--viewportMedium) {
     position: absolute;
-    left: 60px;
     top: -49px;
     margin-left: 0;
     margin-top: 0;

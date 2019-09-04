@@ -14,10 +14,6 @@
   --CheckoutPage_logoHeightDesktop: 27px;
 }
 
-.loading {
-  margin: 24px;
-}
-
 /* Dummy Topbar */
 
 .topbar {
@@ -201,7 +197,7 @@
 
 .priceBreakdownContainer {
   padding: 0 24px;
-  margin-bottom: 40px;
+  margin-bottom: 37px;
 
   @media (--viewportMedium) {
     margin-bottom: 38px;
@@ -236,7 +232,12 @@
   padding: 0 24px;
   margin-bottom: 35px;
 
+  @media (--viewportMedium) {
+    margin-top: 2px;
+  }
+
   @media (--viewportLarge) {
+    margin-top: 4px;
     padding: 0;
   }
 }

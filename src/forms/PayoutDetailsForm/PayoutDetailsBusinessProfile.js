@@ -1,6 +1,6 @@
 import React from 'react';
 import { bool, string } from 'prop-types';
-import { intlShape } from 'react-intl';
+import { intlShape } from '../../util/reactIntl';
 import * as validators from '../../util/validators';
 import { FieldSelect, FieldTextInput } from '../../components';
 
@@ -27,6 +27,10 @@ const PayoutDetailsBusinessProfile = props => {
   const businessUrlRequired = validators.validBusinessURL(
     intl.formatMessage({ id: 'PayoutDetailsForm.businessURLRequired' })
   );
+
+  // By default, all merchant category codes (MCC) are listed in the select field. You can edit the
+  // merchantCategoryCodesUS.js and remove the codes that are not relevant to your marketplace or use a hard-coded
+  // value if there is only one code you want to use.
 
   return isBusinessProfileNeeded ? (
     <React.Fragment>

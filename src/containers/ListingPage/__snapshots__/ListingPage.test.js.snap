@@ -277,7 +277,7 @@ exports[`ListingPage matches snapshot 1`] = `
               title="listing1 title"
             />
           </div>
-          <withRouter(InjectIntl(BookingPanel))
+          <withRouter(injectIntl(BookingPanel))
             authorDisplayName="user-1 display name"
             fetchTimeSlotsError={null}
             isOwnListing={false}
@@ -352,7 +352,7 @@ exports[`ListingPage matches snapshot 1`] = `
       className={null}
       rootClassName={null}
     >
-      <InjectIntl(Footer) />
+      <injectIntl(Footer) />
     </LayoutWrapperFooter>
   </LayoutSingleColumn>
 </Page>

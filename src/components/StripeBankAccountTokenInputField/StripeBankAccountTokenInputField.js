@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
+import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
 import { Field } from 'react-final-form';
 import classNames from 'classnames';
 import debounce from 'lodash/debounce';
@@ -78,14 +78,14 @@ class TokenInputFieldComponent extends Component {
     this._isMounted = true;
   }
 
-  componentWillReceiveProps(nextProps) {
-    const countryChanged = nextProps.country !== this.props.country;
-    const currencyChanged = nextProps.currency !== this.props.currency;
+  componentDidUpdate(prevProps) {
+    const countryChanged = this.props.country !== prevProps.country;
+    const currencyChanged = this.props.currency !== prevProps.currency;
     if (countryChanged || currencyChanged) {
       // Clear the possible input values from the state
       // if the given country or currency changes.
       this.setState(this.initialState);
-      nextProps.input.onChange('');
+      this.props.input.onChange('');
     }
   }
 

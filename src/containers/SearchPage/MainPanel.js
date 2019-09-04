@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { array, bool, func, number, object, objectOf, string } from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import merge from 'lodash/merge';
 import { propTypes } from '../../util/types';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from '../../util/reactIntl';
 import { isTooManyEmailVerificationRequestsError } from '../../util/errors';
 import { IconEmailAttention, InlineTextButton, NamedLink } from '../../components';
 

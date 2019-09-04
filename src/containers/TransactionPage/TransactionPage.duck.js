@@ -80,6 +80,7 @@ const initialState = {
   oldestMessagePageFetched: 0,
   messages: [],
   initialMessageFailedToTransaction: null,
+  savePaymentMethodFailed: false,
   sendMessageInProgress: false,
   sendMessageError: null,
   sendReviewInProgress: false,
