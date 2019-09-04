@@ -48,6 +48,7 @@ export const ListingCardComponent = props => {
   const currentListing = ensureListing(listing);
   const id = currentListing.id.uuid;
   const { title = '', price, publicData } = currentListing.attributes;
+  const { breed, gender, age } = publicData;
 
   const slug = createSlug(title);
   const author = ensureUser(listing.author);
@@ -99,6 +100,7 @@ export const ListingCardComponent = props => {
               longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS,
               longWordClass: css.longWord,
             })}
+            , {breed}, {gender}, {age}
           </div>
           <div className={css.authorInfo}>
             <FormattedMessage id="ListingCard.hostedBy" values={{ authorName }} />

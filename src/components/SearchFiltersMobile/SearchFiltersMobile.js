@@ -8,13 +8,7 @@ import omit from 'lodash/omit';
 import routeConfiguration from '../../routeConfiguration';
 import { parseDateFromISO8601, stringifyDateToISO8601 } from '../../util/dates';
 import { createResourceLocatorString } from '../../util/routes';
-import {
-  ModalInMobile,
-  Button,
-  PriceFilter,
-  SelectMultipleFilter,
-  SelectSingleFilter,
-} from '../../components';
+import { ModalInMobile, Button, PriceFilter, SelectMultipleFilter } from '../../components';
 import { propTypes } from '../../util/types';
 import css from './SearchFiltersMobile.css';
 
