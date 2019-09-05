@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { CarouselProvider, ButtonBack, ButtonNext } from 'pure-react-carousel';
+import { CarouselProvider } from 'pure-react-carousel';
 import classNames from 'classnames';
-import { GalleryCarouselSlider, IconArrowHead } from '..';
+import { GalleryCarouselSlider } from '..';
 
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import css from './GalleryCarouselWrapper.css';
@@ -25,30 +25,16 @@ class GalleryCarouselWrapper extends Component {
     const { showArrow } = this.state;
     const { items, renderSizes } = this.props;
 
-    const carouselNextButton = classNames(css.carouselArrow, css.nextSlide);
-    const carouselPrevButton = classNames(css.carouselArrow, css.prevSlide);
-
     return (
       <CarouselProvider
         naturalSlideWidth={100}
         naturalSlideHeight={50}
         totalSlides={items.length}
-        dragEnabled={false}
         className={classNames(css.galleryCarouselWrapper)}
         onMouseEnter={() => this.setShowArrow(true)}
         onMouseLeave={() => this.setShowArrow(false)}
       >
-        <GalleryCarouselSlider items={items} renderSizes={renderSizes} />
-        {showArrow && (
-          <>
-            <ButtonBack onClick={event => event.preventDefault()} className={carouselPrevButton}>
-              <IconArrowHead direction="left" size="big" className={css.iconArrow} />
-            </ButtonBack>
-            <ButtonNext onClick={event => event.preventDefault()} className={carouselNextButton}>
-              <IconArrowHead direction="right" size="big" className={css.iconArrow} />
-            </ButtonNext>
-          </>
-        )}
+        <GalleryCarouselSlider showArrow={showArrow} items={items} renderSizes={renderSizes} />
       </CarouselProvider>
     );
   }
