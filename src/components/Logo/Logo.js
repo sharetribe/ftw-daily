@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 
 import config from '../../config';
 import IconLogo from './IconLogo';
 import LogoImage from './safersit-logo.png';
-import css from './Logo.css';
 
 const Logo = props => {
   const { className, format, ...rest } = props;
