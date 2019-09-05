@@ -16,6 +16,7 @@
 import 'core-js/features/map';
 import 'core-js/features/set';
 import 'raf/polyfill';
+import 'pure-react-carousel/dist/react-carousel.es.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';

@@ -52,8 +52,28 @@ export class SearchPageComponent extends Component {
   }
 
   filters() {
-    const { disciplines, priceFilterConfig } = this.props;
+    const { genders, ages, breeds, hights, colors, disciplines, priceFilterConfig } = this.props;
     return {
+      genderFilter: {
+        paramName: 'pub_gender',
+        options: genders,
+      },
+      ageFilter: {
+        paramName: 'pub_age',
+        options: ages,
+      },
+      breedFilter: {
+        paramName: 'pub_breed',
+        options: breeds,
+      },
+      hightFilter: {
+        paramName: 'pub_hight',
+        options: hights,
+      },
+      colorFilter: {
+        paramName: 'pub_color',
+        options: colors,
+      },
       mainDisciplineFilter: {
         paramName: 'pub_mainDiscipline',
         options: disciplines,
@@ -202,6 +222,11 @@ export class SearchPageComponent extends Component {
             searchParamsForPagination={parse(location.search)}
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             primaryFilters={{
+              genderFilter: filters.genderFilter,
+              ageFilter: filters.ageFilter,
+              breedFilter: filters.breedFilter,
+              hightFilter: filters.hightFilter,
+              colorFilter: filters.colorFilter,
               mainDisciplineFilter: filters.mainDisciplineFilter,
               priceFilter: filters.priceFilter,
             }}
@@ -247,6 +272,11 @@ SearchPageComponent.defaultProps = {
   searchListingsError: null,
   searchParams: {},
   tab: 'listings',
+  genders: config.custom.genders,
+  ages: config.custom.ages,
+  breeds: config.custom.breeds,
+  hights: config.custom.hights,
+  colors: config.custom.colors,
   disciplines: config.custom.disciplines,
   priceFilterConfig: config.custom.priceFilterConfig,
   dateRangeFilterConfig: config.custom.dateRangeFilterConfig,
@@ -266,6 +296,11 @@ SearchPageComponent.propTypes = {
   searchListingsError: propTypes.error,
   searchParams: object,
   tab: oneOf(['filters', 'listings', 'map']).isRequired,
+  genders: array,
+  ages: array,
+  breeds: array,
+  hights: array,
+  colors: array,
   disciplines: array,
   priceFilterConfig: shape({
     min: number.isRequired,
@@ -352,7 +387,6 @@ SearchPage.loadData = (params, search) => {
     'fields.listing': ['title', 'geolocation', 'price', 'publicData'],
     'fields.user': ['profile.displayName', 'profile.abbreviatedName'],
     'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
-    'limit.images': 1,
   });
 };
 

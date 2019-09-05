@@ -56,7 +56,7 @@ const addMissingTranslations = (sourceLangTranslations, targetLangTranslations) 
   return missingKeys.reduce(addMissingTranslation, targetLangTranslations);
 };
 
-const isDefaultLanguageInUse = config.locale === 'en';
+const isDefaultLanguageInUse = config.locale === 'ge';
 
 const messages = isDefaultLanguageInUse
   ? defaultMessages
