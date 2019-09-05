@@ -1,0 +1,7 @@
+@import '../../marketplace.css';
+
+.root {
+  min-width: 24px;
+  height: 24px;
+  stroke: var(--matterColorDark);
+}

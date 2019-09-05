@@ -16,6 +16,7 @@
 }
 
 .resetAllButton {
+  @apply --marketplaceLinkStyles;
   @apply --marketplaceH5FontStyles;
   font-weight: var(--fontWeightMedium);
   color: var(--matterColorAnti);
@@ -33,6 +34,7 @@
 }
 
 .cancelButton {
+  @apply --marketplaceLinkStyles;
   @apply --marketplaceH5FontStyles;
   font-weight: var(--fontWeightMedium);
   color: var(--matterColorAnti);
@@ -50,6 +52,7 @@
 }
 
 .applyButton {
+  @apply --marketplaceLinkStyles;
   @apply --marketplaceH5FontStyles;
   font-weight: var(--fontWeightMedium);
 

@@ -55,7 +55,7 @@ export const createSlug = str => {
     text = text.replace(new RegExp(`[${set.from}]`, 'gi'), set.to);
   });
 
-  return encodeURIComponent(
+  const slug = encodeURIComponent(
     text
       .replace(/\s+/g, '-') // Replace spaces with -
       .replace(/[^\w-]+/g, '') // Remove all non-word chars
@@ -63,6 +63,8 @@ export const createSlug = str => {
       .replace(/^-+/, '') // Trim - from start of text
       .replace(/-+$/, '') // Trim - from end of text
   );
+
+  return slug.length > 0 ? slug : 'no-slug';
 };
 
 /**

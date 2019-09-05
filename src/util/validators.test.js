@@ -6,6 +6,7 @@ import {
   maxLength,
   moneySubUnitAmountAtLeast,
   composeValidators,
+  validBusinessURL,
   validHKID,
 } from './validators';
 
@@ -148,6 +149,35 @@ describe('validators', () => {
       expect(moneySubUnitAmountAtLeast('fail', 0)(new Money(0, 'USD'))).toBeUndefined();
       expect(moneySubUnitAmountAtLeast('fail', 50)(new Money(50, 'USD'))).toBeUndefined();
       expect(moneySubUnitAmountAtLeast('fail', 50)(new Money(100, 'USD'))).toBeUndefined();
+    });
+  });
+  describe('validBusinessURL()', () => {
+    it('should fail on example.com', () => {
+      expect(validBusinessURL('fail')('example.com')).toEqual('fail');
+    });
+    it('should fail on http://example.com', () => {
+      expect(validBusinessURL('fail')('http://example.com')).toEqual('fail');
+    });
+    it('should fail on localhost', () => {
+      expect(validBusinessURL('fail')('localhost/')).toEqual('fail');
+    });
+    it('should fail on http://localhost', () => {
+      expect(validBusinessURL('fail')('http://localhost/')).toEqual('fail');
+    });
+    it('should fail on localhost:3000', () => {
+      expect(validBusinessURL('fail')('localhost:3000')).toEqual('fail');
+    });
+    it('should fail on <localhosttunnel.com>', () => {
+      expect(validBusinessURL('fail')('<localhosttunnel.com>')).toEqual('fail');
+    });
+    it('should allow on localhosttunnel.com', () => {
+      expect(validBusinessURL('fail')('localhosttunnel.com')).toBeUndefined();
+    });
+    it('should allow on http://localhosttunnel.com', () => {
+      expect(validBusinessURL('fail')('http://localhosttunnel.com')).toBeUndefined();
+    });
+    it('should allow on https://localhosttunnel.com', () => {
+      expect(validBusinessURL('fail')('https://localhosttunnel.com')).toBeUndefined();
     });
   });
   describe('composeValidators()', () => {

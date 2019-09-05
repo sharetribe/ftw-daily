@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { array, bool, func, number, oneOf, object, shape, string } from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, intlShape } from '../../util/reactIntl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
@@ -52,16 +52,11 @@ export class SearchPageComponent extends Component {
   }
 
   filters() {
-    const { categories, amenities, priceFilterConfig } = this.props;
-
+    const { disciplines, priceFilterConfig } = this.props;
     return {
-      categoryFilter: {
-        paramName: 'pub_category',
-        options: categories,
-      },
-      amenitiesFilter: {
-        paramName: 'pub_amenities',
-        options: amenities,
+      mainDisciplineFilter: {
+        paramName: 'pub_mainDiscipline',
+        options: disciplines,
       },
       priceFilter: {
         paramName: 'price',
@@ -207,8 +202,7 @@ export class SearchPageComponent extends Component {
             searchParamsForPagination={parse(location.search)}
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             primaryFilters={{
-              categoryFilter: filters.categoryFilter,
-              amenitiesFilter: filters.amenitiesFilter,
+              mainDisciplineFilter: filters.mainDisciplineFilter,
               priceFilter: filters.priceFilter,
             }}
           />
@@ -253,9 +247,10 @@ SearchPageComponent.defaultProps = {
   searchListingsError: null,
   searchParams: {},
   tab: 'listings',
-  categories: config.custom.categories,
-  amenities: config.custom.amenities,
+  disciplines: config.custom.disciplines,
   priceFilterConfig: config.custom.priceFilterConfig,
+  dateRangeFilterConfig: config.custom.dateRangeFilterConfig,
+  keywordFilterConfig: config.custom.keywordFilterConfig,
   activeListingId: null,
 };
 
@@ -271,13 +266,13 @@ SearchPageComponent.propTypes = {
   searchListingsError: propTypes.error,
   searchParams: object,
   tab: oneOf(['filters', 'listings', 'map']).isRequired,
-  categories: array,
-  amenities: array,
+  disciplines: array,
   priceFilterConfig: shape({
     min: number.isRequired,
     max: number.isRequired,
     step: number.isRequired,
   }),
+  dateRangeFilterConfig: shape({ active: bool.isRequired }),
 
   // from withRouter
   history: shape({
@@ -354,6 +349,8 @@ SearchPage.loadData = (params, search) => {
     page,
     perPage: RESULT_PAGE_SIZE,
     include: ['author', 'images'],
+    'fields.listing': ['title', 'geolocation', 'price', 'publicData'],
+    'fields.user': ['profile.displayName', 'profile.abbreviatedName'],
     'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
     'limit.images': 1,
   });

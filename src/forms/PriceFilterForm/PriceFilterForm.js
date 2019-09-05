@@ -3,7 +3,7 @@ import { bool, func, number, object, string } from 'prop-types';
 import classNames from 'classnames';
 import debounce from 'lodash/debounce';
 import { Field, Form as FinalForm, FormSpy } from 'react-final-form';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 
 import { Form, RangeSlider } from '../../components';
 import css from './PriceFilterForm.css';
@@ -13,20 +13,20 @@ const DEBOUNCE_WAIT_TIME = 400;
 // Helper function to parse value for min handle
 // Value needs to be between slider's minimum value and current maximum value
 const parseMin = (min, currentMax) => value => {
-  if (isNaN(value)) {
-    return min;
-  }
   const parsedValue = Number.parseInt(value, 10);
+  if (isNaN(parsedValue)) {
+    return '';
+  }
   return parsedValue < min ? min : parsedValue > currentMax ? currentMax : parsedValue;
 };
 
 // Helper function to parse value for max handle
 // Value needs to be between slider's max value and current minimum value
 const parseMax = (max, currentMin) => value => {
-  if (isNaN(value)) {
-    return max;
-  }
   const parsedValue = Number.parseInt(value, 10);
+  if (isNaN(parsedValue)) {
+    return '';
+  }
   return parsedValue < currentMin ? currentMin : parsedValue > max ? max : parsedValue;
 };
 
@@ -47,14 +47,30 @@ const PriceFilterFormComponent = props => {
   const handleChange = debounce(
     formState => {
       if (formState.dirty) {
-        onChange(formState.values);
+        const { minPrice, maxPrice, ...restValues } = formState.values;
+        onChange({
+          minPrice: minPrice === '' ? rest.min : minPrice,
+          maxPrice: maxPrice === '' ? rest.max : maxPrice,
+          ...restValues,
+        });
       }
     },
     DEBOUNCE_WAIT_TIME,
     { leading: false, trailing: true }
   );
 
-  const formCallbacks = liveEdit ? { onSubmit: () => null } : { onSubmit, onCancel, onClear };
+  const handleSubmit = values => {
+    const { minPrice, maxPrice, ...restValues } = values;
+    return onSubmit({
+      minPrice: minPrice === '' ? rest.min : minPrice,
+      maxPrice: maxPrice === '' ? rest.max : maxPrice,
+      ...restValues,
+    });
+  };
+
+  const formCallbacks = liveEdit
+    ? { onSubmit: () => null }
+    : { onSubmit: handleSubmit, onCancel, onClear };
   return (
     <FinalForm
       {...rest}
@@ -76,7 +92,9 @@ const PriceFilterFormComponent = props => {
           max,
           step,
         } = formRenderProps;
-        const { minPrice, maxPrice } = values;
+        const { minPrice: minPriceRaw, maxPrice: maxPriceRaw } = values;
+        const minPrice = typeof minPriceRaw !== 'string' ? minPriceRaw : min;
+        const maxPrice = typeof maxPriceRaw !== 'string' ? maxPriceRaw : max;
 
         const handleCancel = () => {
           // reset the final form to initialValues

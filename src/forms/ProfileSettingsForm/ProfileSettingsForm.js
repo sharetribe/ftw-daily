@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bool, string } from 'prop-types';
 import { compose } from 'redux';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import { Field, Form as FinalForm } from 'react-final-form';
 import isEqual from 'lodash/isEqual';
 import classNames from 'classnames';
@@ -25,10 +25,10 @@ class ProfileSettingsFormComponent extends Component {
     this.submittedValues = {};
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     // Upload delay is additional time window where Avatar is added to the DOM,
     // but not yet visible (time to load image URL from srcset)
-    if (this.props.uploadInProgress && !nextProps.uploadInProgress) {
+    if (prevProps.uploadInProgress && !this.props.uploadInProgress) {
       this.setState({ uploadDelay: true });
       this.uploadDelayTimeoutId = window.setTimeout(() => {
         this.setState({ uploadDelay: false });
@@ -37,7 +37,7 @@ class ProfileSettingsFormComponent extends Component {
   }
 
   componentWillUnmount() {
-    window.clearTimeout(this.blurTimeoutId);
+    window.clearTimeout(this.uploadDelayTimeoutId);
   }
 
   render() {
@@ -198,16 +198,8 @@ class ProfileSettingsFormComponent extends Component {
                   disabled={uploadInProgress}
                 >
                   {fieldProps => {
-                    const {
-                      accept,
-                      id,
-                      input,
-                      label,
-                      type,
-                      disabled,
-                      uploadImageError,
-                    } = fieldProps;
-                    const { name } = input;
+                    const { accept, id, input, label, disabled, uploadImageError } = fieldProps;
+                    const { name, type } = input;
                     const onChange = e => {
                       const file = e.target.files[0];
                       form.change(`profileImage`, file);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { bool } from 'prop-types';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage, intlShape } from '../../util/reactIntl';
 import { formatMoney } from '../../util/currency';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { LINE_ITEM_PROVIDER_COMMISSION, propTypes } from '../../util/types';
@@ -12,11 +12,7 @@ const { Money } = sdkTypes;
 // Validate the assumption that the commission exists and the amount
 // is zero or negative.
 const isValidCommission = commissionLineItem => {
-  return (
-    commissionLineItem &&
-    commissionLineItem.lineTotal instanceof Money &&
-    commissionLineItem.lineTotal.amount <= 0
-  );
+  return commissionLineItem.lineTotal instanceof Money && commissionLineItem.lineTotal.amount <= 0;
 };
 
 const LineItemProviderCommissionMaybe = props => {
@@ -29,7 +25,10 @@ const LineItemProviderCommissionMaybe = props => {
   // If commission is passed it will be shown as a fee already reduces from the total price
   let commissionItem = null;
 
-  if (isProvider) {
+  // Flex Template for Web is using the default transaction process (https://www.sharetribe.com/docs/background/transaction-process/#sharetribe-flex-default-transaction-process)
+  // which containt provider commissions so by default the providerCommissionLineItem should exist.
+  // If you are not using provider commisison you might want to remove this whole component from BookingBreakdown.js file.
+  if (isProvider && providerCommissionLineItem) {
     if (!isValidCommission(providerCommissionLineItem)) {
       // eslint-disable-next-line no-console
       console.error('invalid commission line item:', providerCommissionLineItem);

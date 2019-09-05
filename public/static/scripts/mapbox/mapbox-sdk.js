@@ -1,3 +1,4 @@
+// version 0.6.0
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
@@ -347,11 +348,9 @@
     var url = request.url(accessToken);
     var xhr = new window.XMLHttpRequest();
     xhr.open(request.method, url);
-    if (request.headers) {
-      Object.keys(request.headers).forEach(function(key) {
-        xhr.setRequestHeader(key, request.headers[key]);
-      });
-    }
+    Object.keys(request.headers).forEach(function(key) {
+      xhr.setRequestHeader(key, request.headers[key]);
+    });
     return xhr;
   }
 
@@ -1093,7 +1092,7 @@
    *   a URL query string.
    * @property {Object} params - A route parameters object, whose values will
    *   be interpolated the path.
-   * @property {Object} headers - The request's headers,
+   * @property {Object} headers - The request's headers.
    * @property {Object|string|null} body - Data to send with the request.
    *   If the request has a body, it will also be sent with the header
    *   `'Content-Type: application/json'`.
@@ -1315,6 +1314,8 @@
    * @class MapiClient
    * @property {string} accessToken - The Mapbox access token assigned
    *   to this client.
+   * @property {string} [origin] - The origin
+   *   to use for API requests. Defaults to https://api.mapbox.com.
    */
 
   function MapiClient(options) {
@@ -1841,16 +1842,29 @@
    * Datasets API service.
    *
    * Learn more about this service and its responses in
-   * [the HTTP service documentation](https://www.mapbox.com/api-documentation/#datasets).
+   * [the HTTP service documentation](https://www.mapbox.com/api-documentation/maps/#datasets).
    */
   var Datasets = {};
 
   /**
    * List datasets in your account.
    *
-   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/#list-datasets).
+   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/maps/#list-datasets).
    *
    * @return {MapiRequest}
+   *
+   * @example
+   * datasetsClient.listDatasets()
+   *   .send()
+   *   .then(response => {
+   *     const datasets = response.body;
+   *   });
+   *
+   * @example
+   * datasetsClient.listDatasets()
+   *   .eachPage((error, response, next) => {
+   *     // Handle error or response and call next.
+   *   });
    */
   Datasets.listDatasets = function() {
     return this.client.createRequest({
@@ -1862,12 +1876,22 @@
   /**
    * Create a new, empty dataset.
    *
-   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/#create-dataset).
+   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/maps/#create-a-dataset).
    *
    * @param {Object} config
    * @param {string} [config.name]
    * @param {string} [config.description]
    * @return {MapiRequest}
+   *
+   * @example
+   * datasetsClient.createDataset({
+   *   name: 'example',
+   *   description: 'An example dataset'
+   * })
+   *   .send()
+   *   .then(response => {
+   *     const datasetMetadata = response.body;
+   *   });
    */
   Datasets.createDataset = function(config) {
     validator.assertShape({
@@ -1885,11 +1909,20 @@
   /**
    * Get metadata about a dataset.
    *
-   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/#retrieve-a-dataset).
+   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/maps/#retrieve-a-dataset).
    *
    * @param {Object} config
    * @param {string} config.datasetId
    * @return {MapiRequest}
+   *
+   * @example
+   * datasetsClient.getMetadata({
+   *   datasetId: 'dataset-id'
+   * })
+   *   .send()
+   *   .then(response => {
+   *     const datasetMetadata = response.body;
+   *   })
    */
   Datasets.getMetadata = function(config) {
     validator.assertShape({
@@ -1907,13 +1940,23 @@
   /**
    * Update user-defined properties of a dataset's metadata.
    *
-   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/#update-a-dataset).
+   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/maps/#update-a-dataset).
    *
    * @param {Object} config
    * @param {string} config.datasetId
    * @param {string} [config.name]
    * @param {string} [config.description]
    * @return {MapiRequest}
+   *
+   * @example
+   * datasetsClient.updateMetadata({
+   *   datasetId: 'dataset-id',
+   *   name: 'foo'
+   * })
+   *   .send()
+   *   .then(response => {
+   *     const datasetMetadata = response.body;
+   *   });
    */
   Datasets.updateMetadata = function(config) {
     validator.assertShape({
@@ -1933,11 +1976,20 @@
   /**
    * Delete a dataset, including all features it contains.
    *
-   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/#delete-a-dataset).
+   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/maps/#delete-a-dataset).
    *
    * @param {Object} config
    * @param {string} config.datasetId
    * @return {MapiRequest}
+   *
+   * @example
+   * datasetsClient.deleteDataset({
+   *   datasetId: 'dataset-id'
+   * })
+   *   .send()
+   *   .then(response => {
+   *     // Dataset is successfully deleted.
+   *   });
    */
   Datasets.deleteDataset = function(config) {
     validator.assertShape({
@@ -1957,7 +2009,7 @@
    * This endpoint supports pagination. Use `MapiRequest#eachPage` or manually specify
    * the `limit` and `start` options.
    *
-   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/#list-features).
+   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/maps/#list-features).
    *
    * @param {Object} config
    * @param {string} config.datasetId
@@ -1965,6 +2017,15 @@
    * @param {string} [config.start] - The ID of the feature from which the listing should
    *   start.
    * @return {MapiRequest}
+   *
+   * @example
+   * datasetsClient.listFeatures({
+   *   datasetId: 'dataset-id'
+   * })
+   *   .send()
+   *   .then(response => {
+   *     const features = response.body;
+   *   });
    */
   Datasets.listFeatures = function(config) {
     validator.assertShape({
@@ -1984,7 +2045,7 @@
   /**
    * Add a feature to a dataset or update an existing one.
    *
-   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/#insert-or-update-a-feature).
+   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/maps/#insert-or-update-a-feature).
    *
    * @param {Object} config
    * @param {string} config.datasetId
@@ -1992,6 +2053,24 @@
    * @param {Object} config.feature - Valid GeoJSON that is not a `FeatureCollection`.
    *   If the feature has a top-level `id` property, it must match the `featureId` you specify.
    * @return {MapiRequest}
+   *
+   * @example
+   * datasetsClient.putFeature({
+   *   datasetId: 'dataset-id',
+   *   featureId: 'null-island',
+   *   feature: {
+   *     "type": "Feature",
+   *     "properties": { "name": "Null Island" },
+   *     "geometry": {
+   *       "type": "Point",
+   *       "coordinates": [0, 0]
+   *     }
+   *   }
+   * })
+   *   .send()
+   *   .then(response => {
+   *     const feature = response.body;
+   *   });
    */
   Datasets.putFeature = function(config) {
     validator.assertShape({
@@ -2018,12 +2097,22 @@
   /**
    * Get a feature in a dataset.
    *
-   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/#retrieve-a-feature).
+   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/maps/#retrieve-a-feature).
    *
    * @param {Object} config
    * @param {string} config.datasetId
    * @param {string} config.featureId
    * @return {MapiRequest}
+   *
+   * @example
+   * datasetsClient.getFeature({
+   *   datasetId: 'dataset-id',
+   *   featureId: 'feature-id'
+   * })
+   *   .send()
+   *   .then(response => {
+   *     const feature = response.body;
+   *   });
    */
   Datasets.getFeature = function(config) {
     validator.assertShape({
@@ -2041,12 +2130,22 @@
   /**
    * Delete a feature in a dataset.
    *
-   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/#delete-a-feature).
+   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/maps/#delete-a-feature).
    *
    * @param {Object} config
    * @param {string} config.datasetId
    * @param {string} config.featureId
    * @return {MapiRequest}
+   *
+   * @example
+   * datasetsClient.deleteFeature({
+   *   datasetId: 'dataset-id',
+   *   featureId: 'feature-id'
+   * })
+   *   .send()
+   *   .then(response => {
+   *     // Feature is successfully deleted.
+   *   });
    */
   Datasets.deleteFeature = function(config) {
     validator.assertShape({
@@ -2098,14 +2197,14 @@
    * Directions API service.
    *
    * Learn more about this service and its responses in
-   * [the HTTP service documentation](https://www.mapbox.com/api-documentation/#directions).
+   * [the HTTP service documentation](https://www.mapbox.com/api-documentation/navigation/#directions).
    */
   var Directions = {};
 
   /**
    * Get directions.
    *
-   * Please read [the full HTTP service documentation](https://www.mapbox.com/api-documentation/#directions)
+   * Please read [the full HTTP service documentation](https://www.mapbox.com/api-documentation/navigation/#directions)
    * to understand all of the available options.
    *
    * @param {Object} config
@@ -2118,13 +2217,35 @@
    * @param {string} [config.exclude] - Exclude certain road types from routing. See HTTP service documentation for options.
    * @param {'geojson'|'polyline'|'polyline6'} [config.geometries="polyline"] - Format of the returned geometry.
    * @param {string} [config.language="en"] - Language of returned turn-by-turn text instructions.
-   *   See options listed in [the HTTP service documentation](https://www.mapbox.com/api-documentation/#instructions-languages).
+   *   See options listed in [the HTTP service documentation](https://www.mapbox.com/api-documentation/navigation/#instructions-languages).
    * @param {'simplified'|'full'|'false'} [config.overview="simplified"] - Type of returned overview geometry.
    * @param {boolean} [config.roundaboutExits=false] - Emit insbtructions at roundabout exits.
    * @param {boolean} [config.steps=false] - Whether to return steps and turn-by-turn instructions.
    * @param {boolean} [config.voiceInstructions=false] - Whether or not to return SSML marked-up text for voice guidance along the route.
    * @param {'imperial'|'metric'} [config.voiceUnits="imperial"] - Which type of units to return in the text for voice instructions.
    * @return {MapiRequest}
+   *
+   * @example
+   * directionsClient.getDirections({
+   *   profile: 'driving-traffic',
+   *   waypoints: [
+   *     {
+   *       coordinates: [13.4301, 52.5109],
+   *       approach: 'unrestricted'
+   *     },
+   *     {
+   *       coordinates: [13.4265, 52.508]
+   *     },
+   *     {
+   *       coordinates: [13.4194, 52.5072],
+   *       bearing: [100, 60]
+   *     }
+   *   ]
+   * })
+   *   .send()
+   *   .then(response => {
+   *     const directions = response.body;
+   *   });
    */
   Directions.getDirections = function(config) {
     validator.assertShape({
@@ -2253,7 +2374,7 @@
    * Geocoding API service.
    *
    * Learn more about this service and its responses in
-   * [the HTTP service documentation](https://www.mapbox.com/api-documentation/#geocoding).
+   * [the HTTP service documentation](https://www.mapbox.com/api-documentation/search/#geocoding).
    */
   var Geocoding = {};
 
@@ -2273,7 +2394,7 @@
   /**
    * Search for a place.
    *
-   * See the [public documentation](https://www.mapbox.com/api-documentation/#search-for-places).
+   * See the [public documentation](https://www.mapbox.com/api-documentation/search/#forward-geocoding).
    *
    * @param {Object} config
    * @param {string} config.query - A place name.
@@ -2289,6 +2410,47 @@
    *  Options are [IETF language tags](https://en.wikipedia.org/wiki/IETF_language_tag) comprised of a mandatory
    *  [ISO 639-1 language code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) and optionally one or more IETF subtags for country or script.
    * @return {MapiRequest}
+   *
+   * @example
+   * geocodingClient.forwardGeocode({
+   *   query: 'Paris, France',
+   *   limit: 2
+   * })
+   *   .send()
+   *   .then(response => {
+   *     const match = response.body;
+   *   });
+   *
+   * @example
+   * // geocoding with proximity
+   * geocodingClient.forwardGeocode({
+   *   query: 'Paris, France',
+   *   proximity: [-95.4431142, 33.6875431]
+   * })
+   *   .send()
+   *   .then(response => {
+   *     const match = response.body;
+   *   });
+   *
+   * // geocoding with countries
+   * geocodingClient.forwardGeocode({
+   *   query: 'Paris, France',
+   *   countries: ['fr']
+   * })
+   *   .send()
+   *   .then(response => {
+   *     const match = response.body;
+   *   });
+   *
+   * // geocoding with bounding box
+   * geocodingClient.forwardGeocode({
+   *   query: 'Paris, France',
+   *   bbox: [2.14, 48.72, 2.55, 48.96]
+   * })
+   *   .send()
+   *   .then(response => {
+   *     const match = response.body;
+   *   });
    */
   Geocoding.forwardGeocode = function(config) {
     validator.assertShape({
@@ -2330,7 +2492,7 @@
   /**
    * Search for places near coordinates.
    *
-   * See the [public documentation](https://www.mapbox.com/api-documentation/#retrieve-places-near-a-location).
+   * See the [public documentation](https://www.mapbox.com/api-documentation/search/#reverse-geocoding).
    *
    * @param {Object} config
    * @param {Coordinates} config.query - Coordinates at which features will be searched.
@@ -2345,6 +2507,17 @@
    *  [ISO 639-1 language code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) and optionally one or more IETF subtags for country or script.
    * @param {'distance'|'score'} [config.reverseMode='distance'] - Set the factors that are used to sort nearby results.
    * @return {MapiRequest}
+   *
+   * @example
+   * geocodingClient.reverseGeocode({
+   *   query: [-95.4431142, 33.6875431],
+   *   limit: 2
+   * })
+   *   .send()
+   *   .then(response => {
+   *     // GeoJSON document with geocoding matches
+   *     const match = response.body;
+   *   });
    */
   Geocoding.reverseGeocode = function(config) {
     validator.assertShape({
@@ -2388,7 +2561,7 @@
    * Map Matching API service.
    *
    * Learn more about this service and its responses in
-   * [the HTTP service documentation](https://www.mapbox.com/api-documentation/#map-matching).
+   * [the HTTP service documentation](https://www.mapbox.com/api-documentation/navigation/#map-matching).
    */
   var MapMatching = {};
 
@@ -2401,11 +2574,47 @@
    * @param {Array<'duration'|'distance'|'speed'>} [config.annotations] - Specify additional metadata that should be returned.
    * @param {'geojson'|'polyline'|'polyline6'} [config.geometries="polyline"] - Format of the returned geometry.
    * @param {string} [config.language="en"] - Language of returned turn-by-turn text instructions.
-   *   See [supported languages](https://www.mapbox.com/api-documentation/#instructions-languages).
+   *   See [supported languages](https://www.mapbox.com/api-documentation/navigation/#instructions-languages).
    * @param {'simplified'|'full'|'false'} [config.overview="simplified"] - Type of returned overview geometry.
    * @param {boolean} [config.steps=false] - Whether to return steps and turn-by-turn instructions.
    * @param {boolean} [config.tidy=false] - Whether or not to transparently remove clusters and re-sample traces for improved map matching results.
    * @return {MapiRequest}
+   *
+   * @example
+   * mapMatchingClient.getMatch({
+   *   points: [
+   *     {
+   *       coordinates: [-117.17283, 32.712041],
+   *       approach: 'curb'
+   *     },
+   *     {
+   *       coordinates: [-117.17291, 32.712256],
+   *       isWaypoint: false
+   *     },
+   *     {
+   *       coordinates: [-117.17292, 32.712444]
+   *     },
+   *     {
+   *       coordinates: [-117.172922, 32.71257],
+   *       waypointName: 'point-a',
+   *       approach: 'unrestricted'
+   *     },
+   *     {
+   *       coordinates: [-117.172985, 32.7126]
+   *     },
+   *     {
+   *       coordinates: [-117.173143, 32.712597]
+   *     },
+   *     {
+   *       coordinates: [-117.173345, 32.712546]
+   *     }
+   *   ],
+   *   tidy: false,
+   * })
+   *   .send()
+   *   .then(response => {
+   *     const matching = response.body;
+   *   })
    */
   MapMatching.getMatch = function(config) {
     validator.assertShape({
@@ -2552,7 +2761,7 @@
    * Map Matching API service.
    *
    * Learn more about this service and its responses in
-   * [the HTTP service documentation](https://www.mapbox.com/api-documentation/#matrix).
+   * [the HTTP service documentation](https://www.mapbox.com/api-documentation/navigation/#matrix).
    */
   var Matrix = {};
 
@@ -2566,6 +2775,30 @@
    * @param {'all'|Array<number>} [config.destinations] - Use coordinates with given index as destinations.
    * @param {Array<'distance'|'duration'>} [config.annotations] - Used to specify resulting matrices.
    * @return {MapiRequest}
+   *
+   * @example
+   * matrixClient.getMatrix({
+   *   points: [
+   *     {
+   *       coordinates: [2.2, 1.1]
+   *     },
+   *     {
+   *       coordinates: [2.2, 1.1],
+   *       approach: 'curb'
+   *     },
+   *     {
+   *       coordinates: [3.2, 1.1]
+   *     },
+   *     {
+   *       coordinates: [4.2, 1.1]
+   *     }
+   *   ],
+   *   profile: 'walking'
+   * })
+   *   .send()
+   *   .then(response => {
+   *       const matrix = response.body;
+   *   });
    */
   Matrix.getMatrix = function(config) {
     validator.assertShape({
@@ -2647,14 +2880,14 @@
    * Optimization API service.
    *
    * Learn more about this service and its responses in
-   * [the HTTP service documentation](https://www.mapbox.com/api-documentation/#optimization).
+   * [the HTTP service documentation](https://www.mapbox.com/api-documentation/navigation/#optimization).
    */
   var Optimization = {};
 
   /**
    * Get a duration-optimized route.
    *
-   * Please read [the full HTTP service documentation](https://www.mapbox.com/api-documentation/#optimization)
+   * Please read [the full HTTP service documentation](https://www.mapbox.com/api-documentation/navigation/#optimization)
    * to understand all of the available options.
    *
    * @param {Object} config
@@ -2662,10 +2895,10 @@
    * @param {Array<OptimizationWaypoint>} config.waypoints - An ordered array of [`OptimizationWaypoint`](#optimizationwaypoint) objects, between 2 and 12 (inclusive).
    * @param {Array<'duration'|'distance'|'speed'>} [config.annotations] - Specify additional metadata that should be returned.
    * @param {'any'|'last'} [config.destination="any"] - Returned route ends at `any` or `last` coordinate.
-   * @param {[object, object]} [config.distributions] - Array of objects, each of which includes a `pickup` and `dropoff` property. `pickup` and `dropoff` properties correspond to an index in the coordinates array.
+   * @param {Array<Distribution>} [config.distributions] - An ordered array of [`Distribution`](#distribution) objects, each of which includes a `pickup` and `dropoff` property. `pickup` and `dropoff` properties correspond to an index in the OptimizationWaypoint array.
    * @param {'geojson'|'polyline'|'polyline6'} [config.geometries="polyline"] - Format of the returned geometries.
    * @param {string} [config.language="en"] - Language of returned turn-by-turn text instructions.
-   *   See options listed in [the HTTP service documentation](https://www.mapbox.com/api-documentation/#instructions-languages).
+   *   See options listed in [the HTTP service documentation](https://www.mapbox.com/api-documentation/navigation/#instructions-languages).
    * @param {'simplified'|'full'|'false'} [config.overview="simplified"] - Type of returned overview geometry.
    * @param {boolean} [config.roundtrip=true] - Specifies whether the trip should complete by returning to the first location.
    * @param {'any'|'first'} [config.source="any"] - To begin the route, start either from the first coordinate or let the Optimization API choose.
@@ -2746,6 +2979,11 @@
       });
     });
 
+    /**
+     * @typedef {Object} Distribution
+     * @property {number} pickup - Array index of the item containing coordinates for the pick-up location in the OptimizationWaypoint array.
+     * @property {number} dropoff - Array index of the item containing coordinates for the drop-off location in the OptimizationWaypoint array.
+     */
     // distributions aren't a property of OptimizationWaypoint, so join them separately
     if (config.distributions) {
       config.distributions.forEach(function(dist) {
@@ -2959,7 +3197,7 @@
    * Static API service.
    *
    * Learn more about this service and its responses in
-   * [the HTTP service documentation](https://www.mapbox.com/api-documentation/#static).
+   * [the HTTP service documentation](https://www.mapbox.com/api-documentation/maps/#static).
    */
   var Static = {};
 
@@ -2978,7 +3216,7 @@
    * @param {'auto'|Object} config.position - If `"auto"`, the viewport will fit the
    *   bounds of the overlay(s). Otherwise, the maps' position is described by an object
    *   with the following properties:
-   *   `coordinates` (required): `[longitude, latitude]` for the center of image.
+   *   `coordinates` (required): [`coordinates`](#coordinates) for the center of image.
    *   `zoom` (required): Between 0 and 20.
    *   `bearing` (optional): Between 0 and 360.
    *   `pitch` (optional): Between 0 and 60.
@@ -2999,6 +3237,85 @@
    * @param {boolean} [config.logo=true] - Whether there is a Mapbox logo
    *   on the map image.
    * @return {MapiRequest}
+   *
+   * @example
+   * staticClient.getStaticImage({
+   *   ownerId: 'mapbox',
+   *   styleId: 'streets-v11',
+   *   width: 200,
+   *   height: 300,
+   *   position: {
+   *     coordinates: [12, 13],
+   *     zoom: 4
+   *   }
+   * })
+   *   .send()
+   *   .then(response => {
+   *     const image = response.body;
+   *   });
+   *
+   * @example
+   * staticClient.getStaticImage({
+   *   ownerId: 'mapbox',
+   *   styleId: 'streets-v11',
+   *   width: 200,
+   *   height: 300,
+   *   position: {
+   *     coordinates: [12, 13],
+   *     zoom: 3
+   *   },
+   *   overlays: [
+   *     // Simple markers.
+   *     {
+   *       marker: {
+   *         coordinates: [12.2, 12.8]
+   *       }
+   *     },
+   *     {
+   *       marker: {
+   *         size: 'large',
+   *         coordinates: [14, 13.2],
+   *         label: 'm',
+   *         color: '#000'
+   *       }
+   *     },
+   *     {
+   *       marker: {
+   *         coordinates: [15, 15.2],
+   *         label: 'airport',
+   *         color: '#ff0000'
+   *       }
+   *     },
+   *     // Custom marker
+   *     {
+   *       marker: {
+   *         coordinates: [10, 11],
+   *         url:  'https://upload.wikimedia.org/wikipedia/commons/6/6f/0xff_timetracker.png'
+   *       }
+   *     }
+   *   ]
+   * })
+   *   .send()
+   *   .then(response => {
+   *     const image = response.body;
+   *   });
+   *
+   * @example
+   * // To get the URL instead of the image, create a request
+   * // and get its URL without sending it.
+   * const request = staticClient
+   *   .getStaticImage({
+   *     ownerId: 'mapbox',
+   *     styleId: 'streets-v11',
+   *     width: 200,
+   *     height: 300,
+   *     position: {
+   *       coordinates: [12, 13],
+   *       zoom: 4
+   *     }
+   *   });
+   * const staticImageUrl = request.url();
+   * // Now you can open staticImageUrl in a browser.
    */
   Static.getStaticImage = function(config) {
     validator.assertShape({
@@ -3211,19 +3528,28 @@
    * Styles API service.
    *
    * Learn more about this service and its responses in
-   * [the HTTP service documentation](https://www.mapbox.com/api-documentation/#styles).
+   * [the HTTP service documentation](https://www.mapbox.com/api-documentation/maps/#styles).
    */
   var Styles = {};
 
   /**
    * Get a style.
    *
-   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/#retrieve-a-style).
+   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/maps/#retrieve-a-style).
    *
    * @param {Object} config
    * @param {string} config.styleId
    * @param {string} [config.ownerId]
    * @return {MapiRequest}
+   *
+   * @example
+   * stylesClient.getStyle({
+   *   styleId: 'style-id'
+   * })
+   *   .send()
+   *   .then(response => {
+   *     const style = response.body;
+   *   });
    */
   Styles.getStyle = function(config) {
     validator.assertShape({
@@ -3241,12 +3567,28 @@
   /**
    * Create a style.
    *
-   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/#create-a-style).
+   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/maps/#create-a-style).
    *
    * @param {Object} config
    * @param {Object} config.style - Stylesheet JSON object.
    * @param {string} [config.ownerId]
    * @return {MapiRequest}
+   *
+   * @example
+   * stylesClient.createStyle({
+   *   style: {
+   *     version: 8,
+   *     name: "My Awesome Style",
+   *     metadata: {},
+   *     sources: {},
+   *     layers: [],
+   *     glyphs: "mapbox://fonts/{owner}/{fontstack}/{range}.pbf"
+   *   }
+   * })
+   *   .send()
+   *   .then(response => {
+   *     const style = response.body;
+   *   });
    */
   Styles.createStyle = function(config) {
     validator.assertShape({
@@ -3265,7 +3607,7 @@
   /**
    * Update a style.
    *
-   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/#update-a-style).
+   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/maps/#update-a-style).
    *
    * @param {Object} config
    * @param {string} config.styleId
@@ -3274,6 +3616,23 @@
    *   known update. Passed as 'If-Unmodified-Since' HTTP header.
    * @param {string} [config.ownerId]
    * @return {MapiRequest}
+   *
+   * @example
+   * stylesClient.updateStyle({
+   *   styleId: 'style-id',
+   *   style: {
+   *     version: 8,
+   *     name: 'My Awesome Style',
+   *     metadata: {},
+   *     sources: {},
+   *     layers: [],
+   *     glyphs: 'mapbox://fonts/{owner}/{fontstack}/{range}.pbf'
+   *   }
+   * })
+   *   .send()
+   *   .then(response => {
+   *     const style = response.body;
+   *   });
    */
   Styles.updateStyle = function(config) {
     validator.assertShape({
@@ -3305,6 +3664,15 @@
    * @param {string} config.styleId
    * @param {string} [config.ownerId]
    * @return {MapiRequest}
+   *
+   * @example
+   * stylesClient.deleteStyle({
+   *   styleId: 'style-id'
+   * })
+   *   .send()
+   *   .then(response => {
+   *     // delete successful
+   *   });
    */
   Styles.deleteStyle = function(config) {
     validator.assertShape({
@@ -3326,6 +3694,13 @@
    * @param {string} [config.start] - The style ID to start at, for paginated results.
    * @param {string} [config.ownerId]
    * @return {MapiRequest}
+   *
+   * @example
+   * stylesClient.listStyles()
+   *   .send()
+   *   .then(response => {
+   *     const styles = response.body;
+   *   });
    */
   Styles.listStyles = function(config) {
     config = config || {};
@@ -3355,6 +3730,19 @@
    * @param {UploadableFile} config.file - An SVG file.
    * @param {string} [config.ownerId]
    * @return {MapiRequest}
+   *
+   * @example
+   * stylesClient.putStyleIcon({
+   *   styleId: 'foo',
+   *   iconId: 'bar',
+   *   // The string filename value works in Node.
+   *   // In the browser, provide a Blob.
+   *   file: 'path/to/file.svg'
+   * })
+   *   .send()
+   *   .then(response => {
+   *     const newSprite = response.body;
+   *   });
    */
   Styles.putStyleIcon = function(config) {
     validator.assertShape({
@@ -3380,6 +3768,16 @@
    * @param {string} config.iconId
    * @param {string} [config.ownerId]
    * @return {MapiRequest}
+   *
+   * @example
+   * stylesClient.deleteStyleIcon({
+   *   styleId: 'foo',
+   *   iconId: 'bar'
+   * })
+   *   .send()
+   *   .then(response => {
+   *     // delete successful
+   *   });
    */
   Styles.deleteStyleIcon = function(config) {
     validator.assertShape({
@@ -3398,7 +3796,7 @@
   /**
    * Get a style sprite's image or JSON document.
    *
-   * See [the corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/?language=JavaScript#retrieve-a-sprite-image-or-json).
+   * See [the corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/maps/#retrieve-a-sprite-image-or-json).
    *
    * @param {Object} config
    * @param {string} config.styleId
@@ -3407,6 +3805,17 @@
    *   resolution.
    * @param {string} [config.ownerId]
    * @return {MapiRequest}
+   *
+   * @example
+   * stylesClient.getStyleSprite({
+   *   format: 'json',
+   *   styleId: 'foo',
+   *   highRes: true
+   * })
+   *   .send()
+   *   .then(response => {
+   *     const sprite = response.body;
+   *   });
    */
   Styles.getStyleSprite = function(config) {
     validator.assertShape({
@@ -3431,7 +3840,7 @@
   /**
    * Get a font glyph range.
    *
-   * See [the corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/?language=JavaScript#retrieve-font-glyph-ranges).
+   * See [the corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/maps/#retrieve-font-glyph-ranges).
    *
    * @param {Object} config
    * @param {string|Array<string>} config.fonts - An array of font names.
@@ -3440,6 +3849,17 @@
    *   typically equivalent to`config.start + 255`.
    * @param {string} [config.ownerId]
    * @return {MapiRequest}
+   *
+   * @example
+   * stylesClient.getFontGlyphRange({
+   *   fonts: 'Arial Unicode',
+   *   start: 0,
+   *   end: 255
+   * })
+   *   .send()
+   *   .then(response => {
+   *     const glyph = response.body;
+   *   });
    */
   Styles.getFontGlyphRange = function(config) {
     validator.assertShape({
@@ -3464,7 +3884,7 @@
   /**
    * Get embeddable HTML displaying a map.
    *
-   * See [the corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/?language=JavaScript#embed-a-style).
+   * See [the corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/maps/#request-embeddable-html).
    *
    * @param {Object} config
    * @param {string} styleId
@@ -3507,7 +3927,7 @@
    * Tilequery API service.
    *
    * Learn more about this service and its responses in
-   * [the HTTP service documentation](https://www.mapbox.com/api-documentation/#tilequery).
+   * [the HTTP service documentation](https://www.mapbox.com/api-documentation/maps/#tilequery).
    */
   var Tilequery = {};
 
@@ -3524,6 +3944,17 @@
    * @param {'polygon'|'linestring'|'point'} [config.geometry] - Queries for a specific geometry type.
    * @param {Array<string>} [config.layers] - IDs of vector layers to query.
    * @return {MapiRequest}
+   *
+   * @example
+   * tilequeryClient.listFeatures({
+   *   mapIds: ['mapbox.mapbox-streets-v8'],
+   *   coordinates: [-122.42901, 37.80633],
+   *   radius: 10
+   * })
+   *   .send()
+   *   .then(response => {
+   *     const features = response.body;
+   *   });
    */
   Tilequery.listFeatures = function(config) {
     validator.assertShape({
@@ -3552,7 +3983,7 @@
    * Tilesets API service.
    *
    * Learn more about this service and its responses in
-   * [the HTTP service documentation](https://www.mapbox.com/api-documentation/#tilesets).
+   * [the HTTP service documentation](https://www.mapbox.com/api-documentation/maps/#tilesets).
    */
   var Tilesets = {};
 
@@ -3562,6 +3993,18 @@
    * @param {Object} [config]
    * @param {string} [config.ownerId]
    * @return {MapiRequest}
+   *
+   * @example
+   * tilesetsClient.listTilesets()
+   *   .then(response => {
+   *     const tilesets = response.body;
+   *   });
+   *
+   * @example
+   * tilesetsClient.listTilesets()
+   *   .eachPage((error, response, next) => {
+   *     // Handle error or response and call next.
+   *   });
    */
   Tilesets.listTilesets = function(config) {
     validator.assertShape({
@@ -3581,16 +4024,23 @@
    * Tokens API service.
    *
    * Learn more about this service and its responses in
-   * [the HTTP service documentation](https://www.mapbox.com/api-documentation/#tokens).
+   * [the HTTP service documentation](https://www.mapbox.com/api-documentation/accounts/#tokens).
    */
   var Tokens = {};
 
   /**
    * List your access tokens.
    *
-   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/#list-tokens).
+   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/accounts/#list-tokens).
    *
    * @return {MapiRequest}
+   *
+   * @example
+   * tokensClient.listTokens()
+   *   .send()
+   *   .then(response => {
+   *     const tokens = response.body;
+   *   });
    */
   Tokens.listTokens = function() {
     return this.client.createRequest({
@@ -3602,20 +4052,32 @@
   /**
    * Create a new access token.
    *
-   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/#create-token).
+   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/accounts/#create-a-token).
    *
    * @param {Object} [config]
    * @param {string} [config.note]
    * @param {Array<string>} [config.scopes]
    * @param {Array<string>} [config.resources]
+   * @param {Array<string>} [config.allowedUrls]
    * @return {MapiRequest}
+   *
+   * @example
+   * tokensClient.createToken({
+   *   note: 'datasets-token',
+   *   scopes: ['datasets:write', 'datasets:read']
+   * })
+   *   .send()
+   *   .then(response => {
+   *     const token = response.body;
+   *   });
    */
   Tokens.createToken = function(config) {
     config = config || {};
     validator.assertShape({
       note: validator.string,
       scopes: validator.arrayOf(validator.string),
-      resources: validator.arrayOf(validator.string)
+      resources: validator.arrayOf(validator.string),
+      allowedUrls: validator.arrayOf(validator.string)
     })(config);
 
     var body = {};
@@ -3625,6 +4087,9 @@
     }
     if (config.resources) {
       body.resources = config.resources;
+    }
+    if (config.allowedUrls) {
+      body.allowedUrls = config.allowedUrls;
     }
 
     return this.client.createRequest({
@@ -3638,15 +4103,23 @@
   /**
    * Create a new temporary access token.
    *
-   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/#create-temporary-token).
+   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/accounts/#create-a-temporary-token).
    *
-   * @param {Object} [config]
-   * @param {string} [config.expires]
-   * @param {Array<string>} [config.scopes]
+   * @param {Object} config
+   * @param {string} config.expires
+   * @param {Array<string>} config.scopes
    * @return {MapiRequest}
+   *
+   * @example
+   * tokensClient.createTemporaryToken({
+   *   scopes: ['datasets:write', 'datasets:read']
+   * })
+   *   .send()
+   *   .then(response => {
+   *     const token = response.body;
+   *   });
    */
   Tokens.createTemporaryToken = function(config) {
-    config = config || {};
     validator.assertShape({
       expires: validator.required(validator.date),
       scopes: validator.required(validator.arrayOf(validator.string))
@@ -3666,21 +4139,34 @@
   /**
    * Update an access token.
    *
-   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/#update-a-token).
+   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/accounts/#update-a-token).
    *
    * @param {Object} config
    * @param {string} config.tokenId
    * @param {string} [config.note]
    * @param {Array<string>} [config.scopes]
    * @param {Array<string>} [config.resources]
+   * @param {Array<string>} [config.allowedUrls]
    * @return {MapiRequest}
+   *
+   * @example
+   * tokensClient.updateToken({
+   *   tokenId: 'cijucimbe000brbkt48d0dhcx',
+   *   note: 'datasets-token',
+   *   scopes: ['datasets:write', 'datasets:read']
+   * })
+   *   .send()
+   *   .then(response => {
+   *     const token = response.body;
+   *   });
    */
   Tokens.updateToken = function(config) {
     validator.assertShape({
       tokenId: validator.required(validator.string),
       note: validator.string,
       scopes: validator.arrayOf(validator.string),
-      resources: validator.arrayOf(validator.string)
+      resources: validator.arrayOf(validator.string),
+      allowedUrls: validator.arrayOf(validator.string)
     })(config);
 
     var body = {};
@@ -3690,8 +4176,11 @@
     if (config.note !== undefined) {
       body.note = config.note;
     }
-    if (config.resources) {
+    if (config.resources || config.resources === null) {
       body.resources = config.resources;
+    }
+    if (config.allowedUrls || config.allowedUrls === null) {
+      body.allowedUrls = config.allowedUrls;
     }
 
     return this.client.createRequest({
@@ -3705,9 +4194,16 @@
   /**
    * Get data about the client's access token.
    *
-   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/#retrieve-a-token).
+   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/accounts/#retrieve-a-token).
    *
    * @return {MapiRequest}
+   *
+   * @example
+   * tokensClient.getToken()
+   *   .send()
+   *   .then(response => {
+   *     const token = response.body;
+   *   });
    */
   Tokens.getToken = function() {
     return this.client.createRequest({
@@ -3719,11 +4215,20 @@
   /**
    * Delete an access token.
    *
-   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/?language=cURL#delete-a-token).
+   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/accounts/#delete-a-token).
    *
    * @param {Object} config
    * @param {string} config.tokenId
    * @return {MapiRequest}
+   *
+   * @example
+   * tokensClient.deleteToken({
+   *   tokenId: 'cijucimbe000brbkt48d0dhcx'
+   * })
+   *   .send()
+   *   .then(response => {
+   *     // Token successfully deleted.
+   *   });
    */
   Tokens.deleteToken = function(config) {
     validator.assertShape({
@@ -3741,9 +4246,16 @@
    * List your available scopes. Each item is a metadata
    * object about the scope, not just the string scope.
    *
-   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/#list-scopes).
+   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/accounts/#list-scopes).
    *
    * @return {MapiRequest}
+   *
+   * @example
+   * tokensClient.listScopes()
+   *   .send()
+   *   .then(response => {
+   *     const scopes = response.body;
+   *   });
    */
   Tokens.listScopes = function() {
     return this.client.createRequest({
@@ -3758,18 +4270,25 @@
    * Uploads API service.
    *
    * Learn more about this service and its responses in
-   * [the HTTP service documentation](https://www.mapbox.com/api-documentation/#uploads).
+   * [the HTTP service documentation](https://www.mapbox.com/api-documentation/maps/#uploads).
    */
   var Uploads = {};
 
   /**
    * List the statuses of all recent uploads.
    *
-   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/#retrieve-recent-upload-statuses).
+   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/maps/#retrieve-recent-upload-statuses).
    *
    * @param {Object} [config]
    * @param {boolean} [config.reverse] - List uploads in chronological order, rather than reverse chronological order.
    * @return {MapiRequest}
+   *
+   * @example
+   * uploadsClient.listUploads()
+   *   .send()
+   *   .then(response => {
+   *     const uploads = response.body;
+   *   });
    */
   Uploads.listUploads = function(config) {
     validator.assertShape({
@@ -3786,9 +4305,33 @@
   /**
    * Create S3 credentials.
    *
-   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/#retrieve-s3-credentials).
+   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/maps/#retrieve-s3-credentials).
    *
    * @return {MapiRequest}
+   *
+   * @example
+   * const AWS = require('aws-sdk');
+   * const getCredentials = () => {
+   *   return uploadsClient
+   *     .createUploadCredentials()
+   *     .send()
+   *     .then(response => response.body);
+   * }
+   * const putFileOnS3 = (credentials) => {
+   *   const s3 = new AWS.S3({
+   *     accessKeyId: credentials.accessKeyId,
+   *     secretAccessKey: credentials.secretAccessKey,
+   *     sessionToken: credentials.sessionToken,
+   *     region: 'us-east-1'
+   *   });
+   *   return s3.putObject({
+   *     Bucket: credentials.bucket,
+   *     Key: credentials.key,
+   *     Body: fs.createReadStream('/path/to/file.mbtiles')
+   *   }).promise();
+   * };
+   *
+   * getCredentials().then(putFileOnS3);
    */
   Uploads.createUploadCredentials = function() {
     return this.client.createRequest({
@@ -3800,7 +4343,7 @@
   /**
    * Create an upload.
    *
-   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/#create-an-upload).
+   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/maps/#create-an-upload).
    *
    * @param {Object} config
    * @param {string} config.mapId - The map ID to create or replace in the format `username.nameoftileset`.
@@ -3811,6 +4354,25 @@
    *     This should be in the format `mapbox://datasets/{username}/{datasetId}`.
    * @param {string} [config.tilesetName] - Name for the tileset. Limited to 64 characters.
    * @return {MapiRequest}
+   *
+   * @example
+   *  // Response from a call to createUploadCredentials
+   * const credentials = {
+   *   accessKeyId: '{accessKeyId}',
+   *   bucket: '{bucket}',
+   *   key: '{key}',
+   *   secretAccessKey: '{secretAccessKey}',
+   *   sessionToken: '{sessionToken}',
+   *   url: '{s3 url}'
+   * };
+   * uploadsClient.createUpload({
+   *   mapId: `${myUsername}.${myTileset}`,
+   *   url: credentials.url
+   * })
+   *   .send()
+   *   .then(response => {
+   *     const upload = response.body;
+   *   });
    */
   Uploads.createUpload = function(config) {
     validator.assertShape({
@@ -3833,11 +4395,20 @@
   /**
    * Get an upload's status.
    *
-   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/#retrieve-upload-status).
+   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/maps/#retrieve-upload-status).
    *
    * @param {Object} config
    * @param {string} config.uploadId
    * @return {MapiRequest}
+   *
+   * @example
+   * uploadsClient.getUpload({
+   *   uploadId: '{upload_id}'
+   * })
+   *   .send()
+   *   .then(response => {
+   *     const status = response.body;
+   *   });
    */
   Uploads.getUpload = function(config) {
     validator.assertShape({
@@ -3854,11 +4425,20 @@
   /**
    * Delete an upload.
    *
-   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/#remove-an-upload).
+   * See the [corresponding HTTP service documentation](https://www.mapbox.com/api-documentation/maps/#remove-an-upload-status).
    *
    * @param {Object} config
    * @param {string} config.uploadId
    * @return {MapiRequest}
+   *
+   * @example
+   * uploadsClient.deleteUpload({
+   *   uploadId: '{upload_id}'
+   * })
+   * .send()
+   * .then(response => {
+   *   // Upload successfully deleted.
+   * });
    */
   Uploads.deleteUpload = function(config) {
     validator.assertShape({

@@ -365,10 +365,10 @@ class SearchMapWithGoogleMap extends Component {
     this.onIdle = this.onIdle.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (!isEqual(this.props.location, nextProps.location)) {
+  componentDidUpdate(prevProps) {
+    if (!isEqual(prevProps.location, this.props.location)) {
       // If no mapSearch url parameter is given, this is original location search
-      const { mapSearch } = parse(nextProps.location.search, {
+      const { mapSearch } = parse(this.props.location.search, {
         latlng: ['origin'],
         latlngBounds: ['bounds'],
       });
@@ -383,8 +383,8 @@ class SearchMapWithGoogleMap extends Component {
       // Do not call fitMapToBounds if bounds are the same.
       // Our bounds are viewport bounds, and fitBounds will try to add margins around those bounds
       // that would result to zoom-loop (bound change -> fitmap -> bounds change -> ...)
-      if (!isEqual(nextProps.bounds, currentBounds) && !this.viewportBounds) {
-        fitMapToBounds(this.map, nextProps.bounds, { padding: 0 });
+      if (!isEqual(this.props.bounds, currentBounds) && !this.viewportBounds) {
+        fitMapToBounds(this.map, this.props.bounds, { padding: 0 });
       }
     }
   }

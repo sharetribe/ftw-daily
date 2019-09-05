@@ -20,6 +20,7 @@
 }
 
 .helperLink {
+  @apply --marketplaceLinkStyles;
   @apply --marketplaceModalHelperLink;
 }
 

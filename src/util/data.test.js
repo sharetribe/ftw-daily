@@ -6,6 +6,7 @@ import {
   denormalisedEntities,
   arrayToFormValues,
   formValuesToArray,
+  humanizeLineItemCode,
 } from './data';
 
 const { UUID } = sdkTypes;
@@ -327,5 +328,23 @@ describe('data utils', () => {
         listing2,
       ]);
     });
+  });
+});
+
+describe('humanizeLineItemCode', () => {
+  it('should humanize a line item code', () => {
+    expect(humanizeLineItemCode('line-item/new-line-item')).toEqual('New line item');
+  });
+
+  it('should capitalize a one word code', () => {
+    expect(humanizeLineItemCode('line-item/booking')).toEqual('Booking');
+  });
+
+  it('should reject a code with missing namespace', () => {
+    expect(() => humanizeLineItemCode('new-line-item')).toThrowError(Error);
+  });
+
+  it('should reject a code with missing code value', () => {
+    expect(() => humanizeLineItemCode('line-item/')).toThrowError(Error);
   });
 });

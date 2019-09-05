@@ -7,13 +7,12 @@ import { types as sdkTypes } from '../../util/sdkLoader';
 import { isTransactionsTransitionInvalidTransition, storableError } from '../../util/errors';
 import {
   txIsEnquired,
+  getReview1Transition,
+  getReview2Transition,
+  txIsInFirstReviewBy,
   TRANSITION_ACCEPT,
   TRANSITION_DECLINE,
-  TRANSITION_REVIEW_1_BY_CUSTOMER,
-  TRANSITION_REVIEW_1_BY_PROVIDER,
-  TRANSITION_REVIEW_2_BY_CUSTOMER,
-  TRANSITION_REVIEW_2_BY_PROVIDER,
-} from '../../util/types';
+} from '../../util/transaction';
 import * as log from '../../util/log';
 import {
   updatedEntities,
@@ -35,6 +34,10 @@ export const SET_INITAL_VALUES = 'app/TransactionPage/SET_INITIAL_VALUES';
 export const FETCH_TRANSACTION_REQUEST = 'app/TransactionPage/FETCH_TRANSACTION_REQUEST';
 export const FETCH_TRANSACTION_SUCCESS = 'app/TransactionPage/FETCH_TRANSACTION_SUCCESS';
 export const FETCH_TRANSACTION_ERROR = 'app/TransactionPage/FETCH_TRANSACTION_ERROR';
+
+export const FETCH_TRANSITIONS_REQUEST = 'app/TransactionPage/FETCH_TRANSITIONS_REQUEST';
+export const FETCH_TRANSITIONS_SUCCESS = 'app/TransactionPage/FETCH_TRANSITIONS_SUCCESS';
+export const FETCH_TRANSITIONS_ERROR = 'app/TransactionPage/FETCH_TRANSITIONS_ERROR';
 
 export const ACCEPT_SALE_REQUEST = 'app/TransactionPage/ACCEPT_SALE_REQUEST';
 export const ACCEPT_SALE_SUCCESS = 'app/TransactionPage/ACCEPT_SALE_SUCCESS';
@@ -77,12 +80,16 @@ const initialState = {
   oldestMessagePageFetched: 0,
   messages: [],
   initialMessageFailedToTransaction: null,
+  savePaymentMethodFailed: false,
   sendMessageInProgress: false,
   sendMessageError: null,
   sendReviewInProgress: false,
   sendReviewError: null,
   timeSlots: null,
   fetchTimeSlotsError: null,
+  fetchTransitionsInProgress: false,
+  fetchTransitionsError: null,
+  processTransitions: null,
 };
 
 // Merge entity arrays using ids, so that conflicting items in newer array (b) overwrite old values (a).
@@ -109,6 +116,14 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
     case FETCH_TRANSACTION_ERROR:
       console.error(payload); // eslint-disable-line
       return { ...state, fetchTransactionInProgress: false, fetchTransactionError: payload };
+
+    case FETCH_TRANSITIONS_REQUEST:
+      return { ...state, fetchTransitionsInProgress: true, fetchTransitionsError: null };
+    case FETCH_TRANSITIONS_SUCCESS:
+      return { ...state, fetchTransitionsInProgress: false, processTransitions: payload };
+    case FETCH_TRANSITIONS_ERROR:
+      console.error(payload); // eslint-disable-line
+      return { ...state, fetchTransitionsInProgress: false, fetchTransitionsError: payload };
 
     case ACCEPT_SALE_REQUEST:
       return { ...state, acceptInProgress: true, acceptSaleError: null, declineSaleError: null };
@@ -193,6 +208,13 @@ const fetchTransactionSuccess = response => ({
 });
 const fetchTransactionError = e => ({ type: FETCH_TRANSACTION_ERROR, error: true, payload: e });
 
+const fetchTransitionsRequest = () => ({ type: FETCH_TRANSITIONS_REQUEST });
+const fetchTransitionsSuccess = response => ({
+  type: FETCH_TRANSITIONS_SUCCESS,
+  payload: response,
+});
+const fetchTransitionsError = e => ({ type: FETCH_TRANSITIONS_ERROR, error: true, payload: e });
+
 const acceptSaleRequest = () => ({ type: ACCEPT_SALE_REQUEST });
 const acceptSaleSuccess = () => ({ type: ACCEPT_SALE_SUCCESS });
 const acceptSaleError = e => ({ type: ACCEPT_SALE_ERROR, error: true, payload: e });
@@ -269,7 +291,7 @@ export const fetchTransaction = (id, txRole) => (dispatch, getState, sdk) => {
       // Fetch time slots for transactions that are in enquired state
       const canFetchTimeslots =
         txRole === 'customer' &&
-        config.fetchAvailableTimeSlots &&
+        config.enableAvailability &&
         transaction &&
         txIsEnquired(transaction);
 
@@ -443,8 +465,7 @@ const IMAGE_VARIANTS = {
 // If other party has already sent a review, we need to make transition to
 // TRANSITION_REVIEW_2_BY_<CUSTOMER/PROVIDER>
 const sendReviewAsSecond = (id, params, role, dispatch, sdk) => {
-  const transition =
-    role === CUSTOMER ? TRANSITION_REVIEW_2_BY_CUSTOMER : TRANSITION_REVIEW_2_BY_PROVIDER;
+  const transition = getReview2Transition(role === CUSTOMER);
 
   const include = REVIEW_TX_INCLUDES;
 
@@ -470,8 +491,7 @@ const sendReviewAsSecond = (id, params, role, dispatch, sdk) => {
 // So, error is likely to happen and then we must try another state transition
 // by calling sendReviewAsSecond().
 const sendReviewAsFirst = (id, params, role, dispatch, sdk) => {
-  const transition =
-    role === CUSTOMER ? TRANSITION_REVIEW_1_BY_CUSTOMER : TRANSITION_REVIEW_1_BY_PROVIDER;
+  const transition = getReview1Transition(role === CUSTOMER);
   const include = REVIEW_TX_INCLUDES;
 
   return sdk.transactions
@@ -498,10 +518,7 @@ const sendReviewAsFirst = (id, params, role, dispatch, sdk) => {
 export const sendReview = (role, tx, reviewRating, reviewContent) => (dispatch, getState, sdk) => {
   const params = { reviewRating, reviewContent };
 
-  const txStateOtherPartyFirst =
-    role === CUSTOMER
-      ? tx.attributes.lastTransition === TRANSITION_REVIEW_1_BY_PROVIDER
-      : tx.attributes.lastTransition === TRANSITION_REVIEW_1_BY_CUSTOMER;
+  const txStateOtherPartyFirst = txIsInFirstReviewBy(tx, role !== CUSTOMER);
 
   dispatch(sendReviewRequest());
 
@@ -570,6 +587,19 @@ const fetchTimeSlots = listingId => (dispatch, getState, sdk) => {
     });
 };
 
+export const fetchNextTransitions = id => (dispatch, getState, sdk) => {
+  dispatch(fetchTransitionsRequest());
+
+  return sdk.processTransitions
+    .query({ transactionId: id })
+    .then(res => {
+      dispatch(fetchTransitionsSuccess(res.data.data));
+    })
+    .catch(e => {
+      dispatch(fetchTransitionsError(storableError(e)));
+    });
+};
+
 // loadData is a collection of async calls that need to be made
 // before page has all the info it needs to render itself
 export const loadData = params => (dispatch, getState) => {
@@ -585,5 +615,9 @@ export const loadData = params => (dispatch, getState) => {
   dispatch(setInitialValues(initialValues));
 
   // Sale / order (i.e. transaction entity in API)
-  return Promise.all([dispatch(fetchTransaction(txId, txRole)), dispatch(fetchMessages(txId, 1))]);
+  return Promise.all([
+    dispatch(fetchTransaction(txId, txRole)),
+    dispatch(fetchMessages(txId, 1)),
+    dispatch(fetchNextTransitions(txId)),
+  ]);
 };

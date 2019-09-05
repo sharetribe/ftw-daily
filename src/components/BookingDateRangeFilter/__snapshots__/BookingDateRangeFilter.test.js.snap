@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BookingDateRangeFilter matches plain snapshot 1`] = `
+<injectIntl(FilterPlainComponent)
+  className={null}
+  contentPlacementOffset={-14}
+  id="BookingDateRangeFilter.plain"
+  initialValues={
+    Object {
+      "dates": null,
+    }
+  }
+  isSelected={false}
+  label="BookingDateRangeFilter.labelPlain"
+  liveEdit={true}
+  onSubmit={[Function]}
+  rootClassName={null}
+  urlParam="dates"
+>
+  <FieldDateRangeController
+    className={null}
+    controllerRef={[Function]}
+    name="dates"
+    rootClassName={null}
+  />
+</injectIntl(FilterPlainComponent)>
+`;
+
+exports[`BookingDateRangeFilter matches popup snapshot 1`] = `
+<injectIntl(FilterPopup)
+  className={null}
+  contentPlacementOffset={-14}
+  id="BookingDateRangeFilter.popup"
+  initialValues={
+    Object {
+      "dates": null,
+    }
+  }
+  isSelected={false}
+  label="BookingDateRangeFilter.labelPopup"
+  liveEdit={false}
+  onSubmit={[Function]}
+  rootClassName={null}
+  showAsPopup={true}
+  urlParam="dates"
+>
+  <FieldDateRangeController
+    className={null}
+    controllerRef={[Function]}
+    name="dates"
+    rootClassName={null}
+  />
+</injectIntl(FilterPopup)>
+`;

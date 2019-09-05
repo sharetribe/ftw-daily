@@ -1,7 +1,7 @@
 import React from 'react';
 import { bool } from 'prop-types';
 import { compose } from 'redux';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl } from '../../util/reactIntl';
 import { Form as FinalForm, Field } from 'react-final-form';
 import {
   Form,

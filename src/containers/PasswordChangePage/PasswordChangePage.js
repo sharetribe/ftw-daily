@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import { propTypes } from '../../util/types';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import {
   LayoutSideNavigation,
   LayoutWrapperMain,
-  LayoutWrapperSideNav,
+  LayoutWrapperAccountSettingsSideNav,
   LayoutWrapperTopbar,
   LayoutWrapperFooter,
   Footer,
@@ -32,30 +32,6 @@ export const PasswordChangePageComponent = props => {
     scrollingDisabled,
     intl,
   } = props;
-
-  const tabs = [
-    {
-      text: <FormattedMessage id="PasswordChangePage.contactDetailsTabTitle" />,
-      selected: false,
-      linkProps: {
-        name: 'ContactDetailsPage',
-      },
-    },
-    {
-      text: <FormattedMessage id="PasswordChangePage.passwordTabTitle" />,
-      selected: true,
-      linkProps: {
-        name: 'PasswordChangePage',
-      },
-    },
-    {
-      text: <FormattedMessage id="PasswordChangePage.paymentsTabTitle" />,
-      selected: false,
-      linkProps: {
-        name: 'PayoutPreferencesPage',
-      },
-    },
-  ];
 
   const changePasswordForm =
     currentUser && currentUser.id ? (
@@ -83,7 +59,7 @@ export const PasswordChangePageComponent = props => {
           />
           <UserNav selectedPageName="PasswordChangePage" />
         </LayoutWrapperTopbar>
-        <LayoutWrapperSideNav tabs={tabs} />
+        <LayoutWrapperAccountSettingsSideNav currentTab="PasswordChangePage" />
         <LayoutWrapperMain>
           <div className={css.content}>
             <h1 className={css.title}>

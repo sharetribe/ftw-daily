@@ -78,8 +78,8 @@ exports[`ManageListingCard matches snapshot 1`] = `
               rootClassName=""
             >
               <InlineTextButton
-                className=""
                 onClick={[Function]}
+                rootClassName=""
               >
                 <FormattedMessage
                   id="ManageListingCard.closeListing"
@@ -109,8 +109,8 @@ exports[`ManageListingCard matches snapshot 1`] = `
     <div>
       <div>
         <InlineTextButton
-          className=""
           onClick={[Function]}
+          rootClassName=""
         >
           <span
             key="1"
@@ -141,6 +141,25 @@ exports[`ManageListingCard matches snapshot 1`] = `
       >
         <FormattedMessage
           id="ManageListingCard.editListing"
+          values={Object {}}
+        />
+      </NamedLink>
+      <span>
+         • 
+      </span>
+      <NamedLink
+        name="EditListingPage"
+        params={
+          Object {
+            "id": "listing1",
+            "slug": "listing1-title",
+            "tab": "availability",
+            "type": "edit",
+          }
+        }
+      >
+        <FormattedMessage
+          id="ManageListingCard.manageAvailability"
           values={Object {}}
         />
       </NamedLink>
