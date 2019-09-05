@@ -156,8 +156,8 @@ const EditListingWizardTab = props => {
   switch (tab) {
     case HORSE: {
       const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditListingWizard.saveNewDescription'
-        : 'EditListingWizard.saveEditDescription';
+        ? 'EditListingWizard.saveNewHorseInfo'
+        : 'EditListingWizard.saveEditHorseInfo';
       return (
         <EditListingHorsePanel
           {...panelProps(HORSE)}
@@ -170,8 +170,8 @@ const EditListingWizardTab = props => {
     }
     case DISCIPLINE: {
       const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditListingWizard.saveNewDescription'
-        : 'EditListingWizard.saveEditDescription';
+        ? 'EditListingWizard.saveNewDiscipline'
+        : 'EditListingWizard.saveEditDiscipline';
       return (
         <EditListingDisciplinePanel
           {...panelProps(DISCIPLINE)}
@@ -184,8 +184,8 @@ const EditListingWizardTab = props => {
     }
     case CHARACTER: {
       const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditListingWizard.saveNewDescription'
-        : 'EditListingWizard.saveEditDescription';
+        ? 'EditListingWizard.saveNewCharacter'
+        : 'EditListingWizard.saveEditCharacter';
       return (
         <EditListingCharacterPanel
           {...panelProps(CHARACTER)}
