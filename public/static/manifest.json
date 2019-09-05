@@ -1,9 +1,9 @@
 {
-  "name": "Saunatime",
-  "short_name": "Saunatime",
+  "name": "SaferSit",
+  "short_name": "SaferSit",
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#C0392B",
+  "theme_color": "#5300C6",
   "background_color": "#FFFFFF",
   "icons": [
     {

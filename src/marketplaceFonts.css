@@ -19,7 +19,7 @@
   /* ================ Default font ================ */
 
   --marketplaceDefaultFontStyles: {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'Crimson Text', 'Liberation Serif', Georgia, serif;
     font-weight: var(--fontWeightMedium);
     font-size: 18px;
     line-height: 24px;
@@ -35,7 +35,7 @@
   /* ================ Body font ================ */
 
   --marketplaceBodyFontStyles: {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'Crimson Text', 'Liberation Serif', Georgia, serif;
     font-weight: var(--fontWeightMedium);
     font-size: 18px;
     line-height: 24px;
@@ -56,6 +56,7 @@
   /* ================ Hero title ================ */
 
   --marketplaceHeroTitleFontStyles: {
+    font-family: 'Poppins', "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightBold);
     font-size: 42px;
     line-height: 42px;
@@ -83,6 +84,7 @@
   /* ================ Modal title ================ */
 
   --marketplaceModalTitleStyles {
+    font-family: 'Poppins', "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightSemiBold);
     font-size: 30px;
     line-height: 36px;
@@ -101,6 +103,7 @@
   /* ================ H1, H2, H3, H4, H5 & H6 ================ */
 
   --marketplaceH1FontStyles: {
+    font-family: 'Poppins', "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightBold);
     font-size: 30px;
     line-height: 36px;
@@ -121,6 +124,7 @@
   }
 
   --marketplaceH2FontStyles: {
+    font-family: 'Poppins', "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightSemiBold);
     font-size: 24px;
     line-height: 30px;
@@ -138,6 +142,7 @@
   }
 
   --marketplaceH3FontStyles: {
+    font-family: 'Poppins', "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightSemiBold);
     font-size: 20px;
     line-height: 24px;
@@ -154,6 +159,7 @@
   }
 
   --marketplaceH4FontStyles: {
+    font-family: 'Poppins', "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightMedium);
     font-size: 16px;
     line-height: 24px;
@@ -171,6 +177,7 @@
   }
 
   --marketplaceH5FontStyles: {
+    font-family: 'Poppins', "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightRegular);
     font-size: 14px;
     line-height: 18px;
@@ -188,6 +195,7 @@
   }
 
   --marketplaceH6FontStyles: {
+    font-family: 'Poppins', "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightBold);
     font-size: 12px;
     line-height: 18px;
@@ -208,7 +216,7 @@
   /* ================ Other fonts ================ */
 
   --marketplaceTinyFontStyles: {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'Crimson Text', 'Liberation Serif', Georgia, serif;
     font-weight: var(--fontWeightRegular);
     font-size: 13px;
     line-height: 18px;
@@ -226,14 +234,14 @@
   }
 
   --marketplaceMessageFontStyles {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'Crimson Text', 'Liberation Serif', Georgia, serif;
     font-weight: var(--fontWeightRegular);
     font-size: 16px;
     line-height: 24px;
   }
 
   --marketplaceMessageDateFontStyles {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'Crimson Text', 'Liberation Serif', Georgia, serif;
     font-weight: var(--fontWeightRegular);
     font-size: 13px;
     line-height: 18px;
@@ -247,7 +255,7 @@
   }
 
   --marketplaceTxTransitionFontStyles {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'Crimson Text', 'Liberation Serif', Georgia, serif;
     font-weight: var(--fontWeightMedium);
     font-size: 16px;
     line-height: 18px;
@@ -259,7 +267,7 @@
   }
 
   --marketplaceSearchFilterLabelFontStyles {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'Crimson Text', 'Liberation Serif', Georgia, serif;
     font-weight: var(--fontWeightSemiBold);
     font-size: 13px;
     line-height: 18px;
@@ -272,14 +280,14 @@
   }
 
   --marketplaceSearchFilterSublabelFontStyles {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'Crimson Text', 'Liberation Serif', Georgia, serif;
     font-weight: var(--fontWeightMedium);
     font-size: 18px;
     line-height: 18px;
   }
 
   --marketplaceListingAttributeFontStyles {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'Crimson Text', 'Liberation Serif', Georgia, serif;
     font-weight: var(--fontWeightMedium);
     font-size: 18px;
     line-height: 32px;

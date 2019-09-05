@@ -14,63 +14,16 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/static/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/static/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/static/icons/favicon-16x16.png">
-    <link rel="mask-icon" href="/static/icons/safari-pinned-tab.svg" color="#c0392b">
+    <link rel="mask-icon" href="/static/icons/safari-pinned-tab.svg" color="#5300C6">
     <link rel="shortcut icon" href="/static/icons/favicon.ico">
     <meta name="msapplication-config" content="/static/icons/browserconfig.xml">
-    <meta name="theme-color" content="#c0392b">
+    <meta name="theme-color" content="#5300C6">
     <!-- End Favicons -->
 
     <!--!link-->
 
     <style>
-     /**
-      * The fonts included are copyrighted by the vendor listed below.
-      *
-      * Vendor:      Mostardesign
-      * License URL: https://www.fontspring.com/licenses/mostardesign/webfont
-      *
-      */
-
-      @font-face {
-        /* 'SofiaPro-Regular' */
-        font-family: 'sofiapro';
-        src: url('https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-regular-webfont.woff2') format('woff2'),
-             url('https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-regular-webfont.woff') format('woff');
-        font-weight: 400; /* Regular */
-        font-style: normal;
-      }
-
-      @font-face {
-          font-family: 'sofiapro';
-          src: url('https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-medium-webfont.woff2') format('woff2'),
-               url('https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-medium-webfont.woff') format('woff');
-          font-weight: 500; /* Medium */
-          font-style: normal;
-      }
-
-      @font-face {
-          font-family: 'sofiapro';
-          src: url('https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-mediumit-webfont.woff2') format('woff2'),
-               url('https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-mediumit-webfont.woff') format('woff');
-          font-weight: 500; /* Medium italics */
-          font-style: italic;
-      }
-
-      @font-face {
-          font-family: 'sofiapro';
-          src: url('https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-semibold-webfont.woff2') format('woff2'),
-               url('https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-semibold-webfont.woff') format('woff');
-          font-weight: 600; /* SemiBold */
-          font-style: normal;
-      }
-
-      @font-face {
-          font-family: 'sofiapro';
-          src: url('https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-bold-webfont.woff2') format('woff2'),
-               url('https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-bold-webfont.woff') format('woff');
-          font-weight: 700; /* Bold */
-          font-style: normal;
-      }
+      @import url('https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,600,700|Poppins:400,500,600,700&display=swap');
 
     </style>
     <script>
@@ -118,18 +71,27 @@
 
 
         // Fonts we use (Check font-face rules from <style> tag in <head> section)
-        var sofiaproRegular = new FontFaceObserver('sofiapro', { weight: 400 });
-        var sofiaproMedium = new FontFaceObserver('sofiapro', { weight: 500 });
-        var sofiaproSemibold = new FontFaceObserver('sofiapro', { weight: 600 });
-        var sofiaproBold = new FontFaceObserver('sofiapro', { weight: 700 });
+        var poppinsRegular = new FontFaceObserver('Poppins', {weight: 400});
+        var poppinsMedium = new FontFaceObserver('Poppins', {weight: 500});
+        var poppinsSemiBold = new FontFaceObserver('Poppins', {weight: 600});
+        var poppinsBold = new FontFaceObserver('Poppins', {weight: 700});
+
+        var crimsonTextRegular = new FontFaceObserver('Crimson Text', {weight: 400});
+        var crimsonTextRegularItalics = new FontFaceObserver('Crimson Text', {weight: '400i'});
+        var crimsonTextSemiBold = new FontFaceObserver('Crimson Text', {weight: 600});
+        var crimsonTextBold = new FontFaceObserver('Crimson Text', {weight: 700});
 
         var fontLoadingTimeout = 5000;
 
         Promise.all([
-          sofiaproRegular.load(null, fontLoadingTimeout),
-          sofiaproMedium.load(null, fontLoadingTimeout),
-          sofiaproSemibold.load(null, fontLoadingTimeout),
-          sofiaproBold.load(null, fontLoadingTimeout)
+          poppinsRegular.load(null, fontLoadingTimeout),
+          poppinsMedium.load(null, fontLoadingTimeout),
+          poppinsSemiBold.load(null, fontLoadingTimeout),
+          poppinsBold.load(null, fontLoadingTimeout),
+          crimsonTextRegular.load(null, fontLoadingTimeout),
+          crimsonTextRegularItalics.load(null, fontLoadingTimeout),
+          crimsonTextSemiBold.load(null, fontLoadingTimeout),
+          crimsonTextBold.load(null, fontLoadingTimeout)
         ])
           .then(function () {
             document.documentElement.classList.add("fontsLoaded");
