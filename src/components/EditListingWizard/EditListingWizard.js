@@ -3,7 +3,6 @@ import { array, bool, func, number, object, oneOf, shape, string } from 'prop-ty
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import classNames from 'classnames';
-import config from '../../config';
 import { withViewport } from '../../util/contextHelpers';
 import {
   LISTING_PAGE_PARAM_TYPE_DRAFT,
@@ -62,14 +61,7 @@ const tabLabel = (intl, tab) => {
  * @return true if tab / step is completed.
  */
 const tabCompleted = (tab, listing) => {
-  const {
-    availabilityPlan,
-    description,
-    geolocation,
-    price,
-    title,
-    publicData,
-  } = listing.attributes;
+  const { description, geolocation, price, title, publicData } = listing.attributes;
   const images = listing.images;
 
   switch (tab) {

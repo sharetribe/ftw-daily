@@ -9,7 +9,7 @@ import { ensureListing, ensureUser } from '../../util/data';
 import { richText } from '../../util/richText';
 import { createSlug } from '../../util/urlHelpers';
 import config from '../../config';
-import { NamedLink, ResponsiveImage } from '../../components';
+import { NamedLink, ResponsiveImage, GalleryCarouselWrapper } from '../../components';
 
 import css from './ListingCard.css';
 
@@ -48,6 +48,7 @@ export const ListingCardComponent = props => {
   const currentListing = ensureListing(listing);
   const id = currentListing.id.uuid;
   const { title = '', price, publicData } = currentListing.attributes;
+  const { breed, gender, age } = publicData;
 
   const slug = createSlug(title);
   const author = ensureUser(listing.author);
@@ -75,13 +76,21 @@ export const ListingCardComponent = props => {
         onMouseLeave={() => setActiveListing(null)}
       >
         <div className={css.aspectWrapper}>
-          <LazyImage
-            rootClassName={css.rootForImage}
-            alt={title}
-            image={firstImage}
-            variants={['landscape-crop', 'landscape-crop2x']}
-            sizes={renderSizes}
-          />
+          {currentListing.images.length > 1 ? (
+            <GalleryCarouselWrapper
+              dragEnabled={false}
+              items={currentListing.images}
+              renderSizes={renderSizes}
+            />
+          ) : (
+            <LazyImage
+              rootClassName={css.rootForImage}
+              alt={title}
+              image={firstImage}
+              variants={['landscape-crop', 'landscape-crop2x']}
+              sizes={renderSizes}
+            />
+          )}
         </div>
       </div>
       <div className={css.info}>
@@ -99,6 +108,7 @@ export const ListingCardComponent = props => {
               longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS,
               longWordClass: css.longWord,
             })}
+            , {breed}, {gender}, {age}
           </div>
           <div className={css.authorInfo}>
             <FormattedMessage id="ListingCard.hostedBy" values={{ authorName }} />

@@ -8,13 +8,7 @@ import omit from 'lodash/omit';
 import routeConfiguration from '../../routeConfiguration';
 import { parseDateFromISO8601, stringifyDateToISO8601 } from '../../util/dates';
 import { createResourceLocatorString } from '../../util/routes';
-import {
-  ModalInMobile,
-  Button,
-  KeywordFilter,
-  PriceFilter,
-  SelectSingleFilter,
-} from '../../components';
+import { ModalInMobile, Button, PriceFilter, SelectMultipleFilter } from '../../components';
 import { propTypes } from '../../util/types';
 import css from './SearchFiltersMobile.css';
 
@@ -190,10 +184,13 @@ class SearchFiltersMobileComponent extends Component {
       onMapIconClick,
       onManageDisableScrolling,
       selectedFiltersCount,
-      categoryFilter,
+      genderFilter,
+      ageFilter,
+      breedFilter,
+      hightFilter,
+      colorFilter,
+      mainDisciplineFilter,
       priceFilter,
-      dateRangeFilter,
-      keywordFilter,
       intl,
     } = this.props;
 
@@ -215,20 +212,111 @@ class SearchFiltersMobileComponent extends Component {
     const filtersButtonClasses =
       selectedFiltersCount > 0 ? css.filtersButtonSelected : css.filtersButton;
 
-    const categoryLabel = intl.formatMessage({
-      id: 'SearchFiltersMobile.categoryLabel',
+    const genderLabel = intl.formatMessage({
+      id: 'SearchFilters.genderLabel',
     });
-    const initialCategory = categoryFilter ? this.initialValue(categoryFilter.paramName) : null;
+    const ageLabel = intl.formatMessage({
+      id: 'SearchFilters.ageLabel',
+    });
+    const breedLabel = intl.formatMessage({
+      id: 'SearchFilters.breedLabel',
+    });
+    const hightLabel = intl.formatMessage({
+      id: 'SearchFilters.hightLabel',
+    });
+    const colorLabel = intl.formatMessage({
+      id: 'SearchFilters.colorLabel',
+    });
+    const mainDisciplineLabel = intl.formatMessage({
+      id: 'SearchFilters.mainDisciplineLabel',
+    });
 
-    const categoryFilterElement = categoryFilter ? (
-      <SelectSingleFilter
-        urlParam={categoryFilter.paramName}
-        label={categoryLabel}
-        onSelect={this.handleSelectSingle}
-        liveEdit
-        options={categoryFilter.options}
-        initialValue={initialCategory}
-        intl={intl}
+    const initialGender = this.initialValues(genderFilter.paramName);
+
+    const initialAge = this.initialValues(ageFilter.paramName);
+
+    const initialBreed = this.initialValues(breedFilter.paramName);
+
+    const initialHight = this.initialValues(hightFilter.paramName);
+
+    const initialColor = this.initialValues(colorFilter.paramName);
+
+    const initialMainDiscipline = this.initialValues(mainDisciplineFilter.paramName);
+
+    const filterElementProps = {
+      onSubmit: this.handleSelectSingle,
+      liveEdit: true,
+    };
+
+    const genderFilterElement = genderFilter ? (
+      <SelectMultipleFilter
+        id="SearchFiltersMobile.genderFilter"
+        name="gender"
+        urlParam={genderFilter.paramName}
+        label={genderLabel}
+        options={genderFilter.options}
+        initialValues={initialGender}
+        {...filterElementProps}
+      />
+    ) : null;
+
+    const ageFilterElement = ageFilter ? (
+      <SelectMultipleFilter
+        id="SearchFiltersMobile.ageFilter"
+        name="age"
+        urlParam={ageFilter.paramName}
+        label={ageLabel}
+        options={ageFilter.options}
+        initialValues={initialAge}
+        {...filterElementProps}
+      />
+    ) : null;
+
+    const breedFilterElement = breedFilter ? (
+      <SelectMultipleFilter
+        id="SearchFiltersMobile.breedFilter"
+        name="breed"
+        urlParam={breedFilter.paramName}
+        label={breedLabel}
+        options={breedFilter.options}
+        initialValues={initialBreed}
+        {...filterElementProps}
+      />
+    ) : null;
+
+    const hightFilterElement = hightFilter ? (
+      <SelectMultipleFilter
+        id="SearchFiltersMobile.hightFilter"
+        name="hight"
+        urlParam={hightFilter.paramName}
+        label={hightLabel}
+        options={hightFilter.options}
+        initialValues={initialHight}
+        {...filterElementProps}
+      />
+    ) : null;
+
+    const colorFilterElement = colorFilter ? (
+      <SelectMultipleFilter
+        id="SearchFiltersMobile.colorFilter"
+        name="color"
+        urlParam={colorFilter.paramName}
+        label={colorLabel}
+        options={colorFilter.options}
+        initialValues={initialColor}
+        {...filterElementProps}
+      />
+    ) : null;
+
+    const mainDisciplineFilterElement = mainDisciplineFilter ? (
+      <SelectMultipleFilter
+        id="SearchFiltersMobile.mainDisciplineFilter"
+        name="mainDiscipline"
+        urlParam={mainDisciplineFilter.paramName}
+        label={mainDisciplineLabel}
+        options={mainDisciplineFilter.options}
+        initialValues={initialMainDiscipline}
+        {...filterElementProps}
       />
     ) : null;
 
@@ -277,7 +365,12 @@ class SearchFiltersMobileComponent extends Component {
           </div>
           {this.state.isFiltersOpenOnMobile ? (
             <div className={css.filtersWrapper}>
-              {categoryFilterElement}
+              {genderFilterElement}
+              {ageFilterElement}
+              {breedFilterElement}
+              {hightFilterElement}
+              {colorFilterElement}
+              {mainDisciplineFilterElement}
               {priceFilterElement}
             </div>
           ) : null}
@@ -300,10 +393,13 @@ SearchFiltersMobileComponent.defaultProps = {
   searchingInProgress: false,
   selectedFiltersCount: 0,
   filterParamNames: [],
-  categoryFilter: null,
-  amenitiesFilter: null,
+  genderFilter: null,
+  ageFilter: null,
+  breedFilter: null,
+  hightFilter: null,
+  colorFilter: null,
+  mainDisciplineFilter: null,
   priceFilter: null,
-  dateRangeFilter: null,
 };
 
 SearchFiltersMobileComponent.propTypes = {
@@ -320,7 +416,13 @@ SearchFiltersMobileComponent.propTypes = {
   onCloseModal: func.isRequired,
   selectedFiltersCount: number,
   filterParamNames: array,
-  categoriesFilter: propTypes.filterConfig,
+  genderFilter: propTypes.filterConfig,
+  ageFilter: propTypes.filterConfig,
+  breedFilter: propTypes.filterConfig,
+  hightFilter: propTypes.filterConfig,
+  colorFilter: propTypes.filterConfig,
+  mainDisciplineFilter: propTypes.filterConfig,
+  priceFilter: propTypes.filterConfig,
 
   // from injectIntl
   intl: intlShape.isRequired,
