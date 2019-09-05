@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import T from 'prop-types';
+import _ from 'lodash';
 import { CarouselProvider } from 'pure-react-carousel';
 import { GalleryCarouselSlider } from '..';
 
@@ -12,6 +13,23 @@ class GalleryCarouselWrapper extends Component {
     this.state = {
       showArrow: false,
     };
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const { items, renderSizes, dragEnabled, pagination } = this.props;
+    const {
+      items: nextItems,
+      renderSizes: nextRenderSizes,
+      dragEnabled: nextDragEnabled,
+      pagination: nextPagination,
+    } = nextProps;
+    return (
+      !_.isEqual(items, nextItems) ||
+      renderSizes !== nextRenderSizes ||
+      dragEnabled !== nextDragEnabled ||
+      pagination !== nextPagination ||
+      this.state.showArrow !== nextState.showArrow
+    );
   }
 
   setShowArrow = value =>
