@@ -273,12 +273,12 @@ const Footer = props => {
                   </Link>
                 </div>
                 <div className={css.bottomLineItem}>
-                  <Link to="#" className={css.link}>
+                  <Link to="/privacy-policy" className={css.link}>
                     Datenschutz
                   </Link>
                 </div>
                 <div className={css.bottomLineItem}>
-                  <Link to="#" className={css.link}>
+                  <Link to="/terms-of-service" className={css.link}>
                     Nutzungsbedingungen
                   </Link>
                 </div>
