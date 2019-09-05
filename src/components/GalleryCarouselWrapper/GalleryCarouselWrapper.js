@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import T from 'prop-types';
 import { CarouselProvider } from 'pure-react-carousel';
-import classNames from 'classnames';
 import { GalleryCarouselSlider } from '..';
 
 import 'pure-react-carousel/dist/react-carousel.es.css';
@@ -15,11 +14,10 @@ class GalleryCarouselWrapper extends Component {
     };
   }
 
-  setShowArrow = value => {
+  setShowArrow = value =>
     this.setState({
       showArrow: value,
     });
-  };
 
   render() {
     const { showArrow } = this.state;
@@ -31,7 +29,7 @@ class GalleryCarouselWrapper extends Component {
         naturalSlideHeight={50}
         totalSlides={items.length}
         dragEnabled={dragEnabled}
-        className={classNames(css.galleryCarouselWrapper)}
+        className={css.galleryCarouselWrapper}
         onMouseEnter={() => this.setShowArrow(true)}
         onMouseLeave={() => this.setShowArrow(false)}
       >
@@ -46,13 +44,11 @@ class GalleryCarouselWrapper extends Component {
   }
 }
 
-const { string, array, bool } = PropTypes;
-
 GalleryCarouselWrapper.propTypes = {
-  items: array,
-  renderSizes: string,
-  dragEnabled: bool,
-  pagination: bool,
+  items: T.array.isRequired,
+  renderSizes: T.string.isRequired,
+  dragEnabled: T.bool,
+  pagination: T.bool,
 };
 
 export default GalleryCarouselWrapper;

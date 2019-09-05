@@ -1,107 +1,76 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import T from 'prop-types';
+import _ from 'lodash';
+import { Slider, Slide, WithStore } from 'pure-react-carousel';
 import {
-  Slider,
-  Slide,
-  WithStore,
-  ButtonBack,
-  ButtonNext,
-  ButtonLast,
-  ButtonFirst,
-} from 'pure-react-carousel';
-import classNames from 'classnames';
-import { ResponsiveImage, GalleryCarouselPagination, IconArrowHead } from '..';
+  ResponsiveImage,
+  GalleryCarouselPagination,
+  GalleryCarouselNavigationButtonPrev,
+  GalleryCarouselNavigationButtonNext,
+} from '..';
 import '../../../node_modules/pure-react-carousel/dist/react-carousel.es.css';
 
 import css from './GalleryCarouselSlider.css';
 
-const CarouselSlider = ({
-  items,
-  renderSizes,
-  currentSlide,
-  totalSlides,
-  showArrow,
-  pagination,
-}) => {
-  const carouselNextButton = classNames(css.carouselArrow, css.nextSlide);
-  const carouselPrevButton = classNames(css.carouselArrow, css.prevSlide);
+class CarouselSlider extends Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    const { items, renderSizes, currentSlide, totalSlides, showArrow, pagination } = this.props;
+    const {
+      items: nextItems,
+      renderSizes: nextRenderSizes,
+      currentSlide: nextCurrentSlide,
+      totalSlides: nextTotalSlides,
+      showArrow: nextShowArrow,
+      pagination: nextPagination,
+    } = nextProps;
+    return (
+      !_.isEqual(items, nextItems) ||
+      renderSizes !== nextRenderSizes ||
+      currentSlide !== nextCurrentSlide ||
+      totalSlides !== nextTotalSlides ||
+      showArrow !== nextShowArrow ||
+      pagination !== nextPagination
+    );
+  }
 
-  return (
-    <>
-      <Slider className={classNames(css.sliderWrapper)}>
-        {items.map((item, index) => (
-          <Slide index={index} key={index}>
-            <ResponsiveImage
-              image={item}
-              variants={['landscape-crop', 'landscape-crop2x']}
-              sizes={renderSizes}
+  render() {
+    const { items, renderSizes, currentSlide, totalSlides, showArrow, pagination } = this.props;
+    return (
+      <>
+        <Slider className={css.sliderWrapper}>
+          {items.map((item, index) => (
+            <Slide index={index} key={index}>
+              <ResponsiveImage
+                image={item}
+                variants={['landscape-crop', 'landscape-crop2x']}
+                sizes={renderSizes}
+              />
+            </Slide>
+          ))}
+        </Slider>
+        {showArrow && (
+          <>
+            <GalleryCarouselNavigationButtonPrev currentSlide={currentSlide} />
+            <GalleryCarouselNavigationButtonNext
+              currentSlide={currentSlide}
+              totalSlides={totalSlides}
             />
-          </Slide>
-        ))}
-      </Slider>
-      {showArrow && (
-        <>
-          {currentSlide === 0 ? (
-            <ButtonLast
-              onClick={event => {
-                event.preventDefault();
-                event.stopPropagation();
-              }}
-              className={carouselPrevButton}
-            >
-              <IconArrowHead direction="left" size="big" className={css.iconArrow} />
-            </ButtonLast>
-          ) : (
-            <ButtonBack
-              disabled={false}
-              onClick={event => {
-                event.preventDefault();
-                event.stopPropagation();
-              }}
-              className={carouselPrevButton}
-            >
-              <IconArrowHead direction="left" size="big" className={css.iconArrow} />
-            </ButtonBack>
-          )}
-          {currentSlide === totalSlides - 1 ? (
-            <ButtonFirst
-              onClick={event => {
-                event.preventDefault();
-                event.stopPropagation();
-              }}
-              className={carouselNextButton}
-            >
-              <IconArrowHead direction="right" size="big" className={css.iconArrow} />
-            </ButtonFirst>
-          ) : (
-            <ButtonNext
-              disabled={false}
-              onClick={event => {
-                event.preventDefault();
-                event.stopPropagation();
-              }}
-              className={carouselNextButton}
-            >
-              <IconArrowHead direction="right" size="big" className={css.iconArrow} />
-            </ButtonNext>
-          )}
-        </>
-      )}
+          </>
+        )}
 
-      {pagination && <GalleryCarouselPagination index={currentSlide} slideCount={totalSlides} />}
-    </>
-  );
-};
-
-const { string, number, array, bool } = PropTypes;
+        {pagination && <GalleryCarouselPagination index={currentSlide} slideCount={totalSlides} />}
+      </>
+    );
+  }
+}
 
 CarouselSlider.propTypes = {
-  items: array,
-  renderSizes: string,
-  currentSlide: number,
-  totalSlides: number,
-  showArrow: bool,
-  pagination: bool,
+  items: T.array.isRequired,
+  renderSizes: T.string.isRequired,
+  currentSlide: T.number.isRequired,
+  totalSlides: T.number.isRequired,
+  showArrow: T.bool.isRequired,
+  pagination: T.bool.isRequired,
 };
 
 export default WithStore(CarouselSlider, state => ({

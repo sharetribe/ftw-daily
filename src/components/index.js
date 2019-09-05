@@ -58,6 +58,8 @@ export { default as ValidationError } from './ValidationError/ValidationError';
 export {default as GalleryCarouselSlider} from './GalleryCarouselSlider/GalleryCarouselSlider';
 export {default as GalleryCarouselWrapper} from './GalleryCarouselWrapper/GalleryCarouselWrapper';
 export {default as GalleryCarouselPagination} from './GalleryCarouselPagination/GalleryCarouselPagination';
+export {default as GalleryCarouselNavigationButtonNext} from './GalleryCarouselNavigationButtonNext/GalleryCarouselNavigationButtonNext';
+export {default as GalleryCarouselNavigationButtonPrev} from './GalleryCarouselNavigationButtonPrev/GalleryCarouselNavigationButtonPrev';
 
 /**
  * Composite components

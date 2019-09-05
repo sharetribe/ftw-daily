@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import T from 'prop-types';
 import { Dot } from 'pure-react-carousel';
 import SwipeableViews from 'react-swipeable-views';
 import classNames from 'classnames';
@@ -42,25 +42,24 @@ const GalleryCarouselPagination = ({ index, slideCount }) => {
     );
   }
 
-  let numberOfDots = slideCount > 5 ? 5 : slideCount;
-  let sliderPadding = (numberOfDots - 1) / 2;
+  const numberOfDots = slideCount > 5 ? 5 : slideCount;
+  const sliderPadding = slideCount < 6 ? (5 - slideCount) / 2 : (numberOfDots - 1) / 2;
 
-  let fixedIndex = index;
-  if (index < 2) {
-    fixedIndex = 2;
-  } else if (index > slideCount - 3) {
-    fixedIndex = slideCount - 3;
-  }
-
-  if (slideCount < 6) {
-    fixedIndex = 0;
-    sliderPadding = (5 - slideCount) / 2;
-  }
+  const getFixedIndex = (index, slideCount) => {
+    if (slideCount < 6) {
+      return 0;
+    } else if (index < 2) {
+      return 2;
+    } else if (index > slideCount - 3) {
+      return slideCount - 3;
+    }
+    return index;
+  };
 
   return (
     <div className={css.paginationWrapper}>
       <SwipeableViews
-        index={fixedIndex}
+        index={getFixedIndex(index, slideCount)}
         style={{
           width: `90px`,
           padding: `0px ${sliderPadding * 18}px`,
@@ -74,11 +73,9 @@ const GalleryCarouselPagination = ({ index, slideCount }) => {
   );
 };
 
-const { number } = PropTypes;
-
 GalleryCarouselPagination.propTypes = {
-  index: number,
-  slideCount: number,
+  index: T.number.isRequired,
+  slideCount: T.number.isRequired,
 };
 
 export default GalleryCarouselPagination;

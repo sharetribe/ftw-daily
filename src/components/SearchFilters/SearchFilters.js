@@ -166,17 +166,21 @@ const SearchFiltersComponent = props => {
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   };
 
+  const filterElementProps = {
+    onSubmit: handleSelectOptions,
+    showAsPopup: true,
+    contentPlacementOffset: FILTER_DROPDOWN_OFFSET,
+  };
+
   const genderFilterElement = genderFilter ? (
     <SelectMultipleFilter
       id={'SearchFilters.genderFilter'}
       name="gender"
       urlParam={genderFilter.paramName}
       label={genderLabel}
-      onSubmit={handleSelectOptions}
-      showAsPopup
       options={genderFilter.options}
       initialValues={initialGender}
-      contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+      {...filterElementProps}
     />
   ) : null;
 
@@ -186,11 +190,9 @@ const SearchFiltersComponent = props => {
       name="age"
       urlParam={ageFilter.paramName}
       label={ageLabel}
-      onSubmit={handleSelectOptions}
-      showAsPopup
       options={ageFilter.options}
       initialValues={initialAge}
-      contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+      {...filterElementProps}
     />
   ) : null;
 
@@ -200,11 +202,9 @@ const SearchFiltersComponent = props => {
       name="breed"
       urlParam={breedFilter.paramName}
       label={breedLabel}
-      onSubmit={handleSelectOptions}
-      showAsPopup
       options={breedFilter.options}
       initialValues={initialBreed}
-      contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+      {...filterElementProps}
     />
   ) : null;
 
@@ -214,11 +214,9 @@ const SearchFiltersComponent = props => {
       name="hight"
       urlParam={hightFilter.paramName}
       label={hightLabel}
-      onSubmit={handleSelectOptions}
-      showAsPopup
       options={hightFilter.options}
       initialValues={initialHight}
-      contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+      {...filterElementProps}
     />
   ) : null;
 
@@ -228,11 +226,9 @@ const SearchFiltersComponent = props => {
       name="color"
       urlParam={colorFilter.paramName}
       label={colorLabel}
-      onSubmit={handleSelectOptions}
-      showAsPopup
       options={colorFilter.options}
       initialValues={initialColor}
-      contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+      {...filterElementProps}
     />
   ) : null;
 
@@ -242,11 +238,9 @@ const SearchFiltersComponent = props => {
       name="mainDiscipline"
       urlParam={mainDisciplineFilter.paramName}
       label={mainDisciplineLabel}
-      onSubmit={handleSelectOptions}
-      showAsPopup
       options={mainDisciplineFilter.options}
       initialValues={initialMainDiscipline}
-      contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+      {...filterElementProps}
     />
   ) : null;
 

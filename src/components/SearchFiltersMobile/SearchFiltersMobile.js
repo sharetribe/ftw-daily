@@ -243,16 +243,20 @@ class SearchFiltersMobileComponent extends Component {
 
     const initialMainDiscipline = this.initialValues(mainDisciplineFilter.paramName);
 
+    const filterElementProps = {
+      onSubmit: this.handleSelectSingle,
+      liveEdit: true,
+    };
+
     const genderFilterElement = genderFilter ? (
       <SelectMultipleFilter
         id="SearchFiltersMobile.genderFilter"
         name="gender"
         urlParam={genderFilter.paramName}
         label={genderLabel}
-        onSubmit={this.handleSelectSingle}
-        liveEdit
         options={genderFilter.options}
         initialValues={initialGender}
+        {...filterElementProps}
       />
     ) : null;
 
@@ -262,10 +266,9 @@ class SearchFiltersMobileComponent extends Component {
         name="age"
         urlParam={ageFilter.paramName}
         label={ageLabel}
-        onSubmit={this.handleSelectSingle}
-        liveEdit
         options={ageFilter.options}
         initialValues={initialAge}
+        {...filterElementProps}
       />
     ) : null;
 
@@ -275,10 +278,9 @@ class SearchFiltersMobileComponent extends Component {
         name="breed"
         urlParam={breedFilter.paramName}
         label={breedLabel}
-        onSubmit={this.handleSelectSingle}
-        liveEdit
         options={breedFilter.options}
         initialValues={initialBreed}
+        {...filterElementProps}
       />
     ) : null;
 
@@ -288,10 +290,9 @@ class SearchFiltersMobileComponent extends Component {
         name="hight"
         urlParam={hightFilter.paramName}
         label={hightLabel}
-        onSubmit={this.handleSelectSingle}
-        liveEdit
         options={hightFilter.options}
         initialValues={initialHight}
+        {...filterElementProps}
       />
     ) : null;
 
@@ -301,10 +302,9 @@ class SearchFiltersMobileComponent extends Component {
         name="color"
         urlParam={colorFilter.paramName}
         label={colorLabel}
-        onSubmit={this.handleSelectSingle}
-        liveEdit
         options={colorFilter.options}
         initialValues={initialColor}
+        {...filterElementProps}
       />
     ) : null;
 
@@ -314,10 +314,9 @@ class SearchFiltersMobileComponent extends Component {
         name="mainDiscipline"
         urlParam={mainDisciplineFilter.paramName}
         label={mainDisciplineLabel}
-        onSubmit={this.handleSelectSingle}
-        liveEdit
         options={mainDisciplineFilter.options}
         initialValues={initialMainDiscipline}
+        {...filterElementProps}
       />
     ) : null;
 
