@@ -15,7 +15,14 @@ import '../../../node_modules/pure-react-carousel/dist/react-carousel.es.css';
 
 import css from './GalleryCarouselSlider.css';
 
-const CarouselSlider = ({ items, renderSizes, currentSlide, totalSlides, showArrow }) => {
+const CarouselSlider = ({
+  items,
+  renderSizes,
+  currentSlide,
+  totalSlides,
+  showArrow,
+  pagination,
+}) => {
   const carouselNextButton = classNames(css.carouselArrow, css.nextSlide);
   const carouselPrevButton = classNames(css.carouselArrow, css.prevSlide);
 
@@ -38,6 +45,7 @@ const CarouselSlider = ({ items, renderSizes, currentSlide, totalSlides, showArr
             <ButtonLast
               onClick={event => {
                 event.preventDefault();
+                event.stopPropagation();
               }}
               className={carouselPrevButton}
             >
@@ -48,6 +56,7 @@ const CarouselSlider = ({ items, renderSizes, currentSlide, totalSlides, showArr
               disabled={false}
               onClick={event => {
                 event.preventDefault();
+                event.stopPropagation();
               }}
               className={carouselPrevButton}
             >
@@ -55,13 +64,22 @@ const CarouselSlider = ({ items, renderSizes, currentSlide, totalSlides, showArr
             </ButtonBack>
           )}
           {currentSlide === totalSlides - 1 ? (
-            <ButtonFirst onClick={event => event.preventDefault()} className={carouselNextButton}>
+            <ButtonFirst
+              onClick={event => {
+                event.preventDefault();
+                event.stopPropagation();
+              }}
+              className={carouselNextButton}
+            >
               <IconArrowHead direction="right" size="big" className={css.iconArrow} />
             </ButtonFirst>
           ) : (
             <ButtonNext
               disabled={false}
-              onClick={event => event.preventDefault()}
+              onClick={event => {
+                event.preventDefault();
+                event.stopPropagation();
+              }}
               className={carouselNextButton}
             >
               <IconArrowHead direction="right" size="big" className={css.iconArrow} />
@@ -70,7 +88,7 @@ const CarouselSlider = ({ items, renderSizes, currentSlide, totalSlides, showArr
         </>
       )}
 
-      <GalleryCarouselPagination index={currentSlide} slideCount={totalSlides} />
+      {pagination && <GalleryCarouselPagination index={currentSlide} slideCount={totalSlides} />}
     </>
   );
 };
@@ -83,6 +101,7 @@ CarouselSlider.propTypes = {
   currentSlide: number,
   totalSlides: number,
   showArrow: bool,
+  pagination: bool,
 };
 
 export default WithStore(CarouselSlider, state => ({

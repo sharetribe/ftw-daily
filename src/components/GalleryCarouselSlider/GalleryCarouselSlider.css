@@ -5,8 +5,8 @@
 }
 
 .iconArrow {
-  width: 60px;
-  height: 60px;
+  width: 50%;
+  height: 50%;
   stroke-width: 0px;
   stroke: var(--matterColorLight);
   fill: var(--matterColorLight);

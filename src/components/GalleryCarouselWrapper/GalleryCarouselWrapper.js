@@ -23,28 +23,36 @@ class GalleryCarouselWrapper extends Component {
 
   render() {
     const { showArrow } = this.state;
-    const { items, renderSizes } = this.props;
+    const { items, renderSizes, dragEnabled = true, pagination = true } = this.props;
 
     return (
       <CarouselProvider
         naturalSlideWidth={100}
         naturalSlideHeight={50}
         totalSlides={items.length}
+        dragEnabled={dragEnabled}
         className={classNames(css.galleryCarouselWrapper)}
         onMouseEnter={() => this.setShowArrow(true)}
         onMouseLeave={() => this.setShowArrow(false)}
       >
-        <GalleryCarouselSlider showArrow={showArrow} items={items} renderSizes={renderSizes} />
+        <GalleryCarouselSlider
+          pagination={pagination}
+          showArrow={showArrow}
+          items={items}
+          renderSizes={renderSizes}
+        />
       </CarouselProvider>
     );
   }
 }
 
-const { string, array } = PropTypes;
+const { string, array, bool } = PropTypes;
 
 GalleryCarouselWrapper.propTypes = {
   items: array,
   renderSizes: string,
+  dragEnabled: bool,
+  pagination: bool,
 };
 
 export default GalleryCarouselWrapper;

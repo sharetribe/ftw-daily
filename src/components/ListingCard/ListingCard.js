@@ -9,10 +9,9 @@ import { ensureListing, ensureUser } from '../../util/data';
 import { richText } from '../../util/richText';
 import { createSlug } from '../../util/urlHelpers';
 import config from '../../config';
-import { NamedLink, ResponsiveImage } from '../../components';
+import { NamedLink, ResponsiveImage, GalleryCarouselWrapper } from '../../components';
 
 import css from './ListingCard.css';
-import GalleryCarouselWrapper from '../GalleryCarouselWrapper/GalleryCarouselWrapper';
 
 const MIN_LENGTH_FOR_LONG_WORDS = 10;
 
@@ -78,7 +77,11 @@ export const ListingCardComponent = props => {
       >
         <div className={css.aspectWrapper}>
           {currentListing.images.length > 1 ? (
-            <GalleryCarouselWrapper items={currentListing.images} renderSizes={renderSizes} />
+            <GalleryCarouselWrapper
+              dragEnabled={false}
+              items={currentListing.images}
+              renderSizes={renderSizes}
+            />
           ) : (
             <LazyImage
               rootClassName={css.rootForImage}

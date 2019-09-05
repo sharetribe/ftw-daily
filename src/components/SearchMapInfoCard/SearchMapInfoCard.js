@@ -7,7 +7,7 @@ import config from '../../config';
 import { propTypes } from '../../util/types';
 import { formatMoney } from '../../util/currency';
 import { ensureListing } from '../../util/data';
-import { ResponsiveImage } from '../../components';
+import { ResponsiveImage, GalleryCarouselWrapper } from '../../components';
 
 import css from './SearchMapInfoCard.css';
 
@@ -46,14 +46,23 @@ const ListingCard = props => {
       >
         <div className={classNames(css.threeToTwoWrapper, css.borderRadiusInheritTop)}>
           <div className={classNames(css.aspectWrapper, css.borderRadiusInheritTop)}>
-            <ResponsiveImage
-              rootClassName={classNames(css.rootForImage, css.borderRadiusInheritTop)}
-              alt={title}
-              noImageMessage={intl.formatMessage({ id: 'SearchMapInfoCard.noImage' })}
-              image={firstImage}
-              variants={['landscape-crop', 'landscape-crop2x']}
-              sizes="250px"
-            />
+            {listing.images.length > 1 ? (
+              <GalleryCarouselWrapper
+                dragEnabled={false}
+                items={listing.images}
+                renderSizes="250px"
+                pagination={false}
+              />
+            ) : (
+              <ResponsiveImage
+                rootClassName={classNames(css.rootForImage, css.borderRadiusInheritTop)}
+                alt={title}
+                noImageMessage={intl.formatMessage({ id: 'SearchMapInfoCard.noImage' })}
+                image={firstImage}
+                variants={['landscape-crop', 'landscape-crop2x']}
+                sizes="250px"
+              />
+            )}
           </div>
         </div>
         <div className={classNames(css.info, { [css.borderRadiusInheritBottom]: !isInCarousel })}>
