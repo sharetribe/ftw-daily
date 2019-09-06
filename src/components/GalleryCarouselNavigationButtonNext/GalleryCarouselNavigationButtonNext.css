@@ -1,8 +1,10 @@
 @import '../../marketplace.css';
 
 .iconArrow {
-  width: 50%;
-  height: 50%;
+  width: 32%;
+  height: 32%;
+  min-width: 24px;
+  min-height: 24px;
   stroke-width: 0px;
   stroke: var(--matterColorLight);
   fill: var(--matterColorLight);

@@ -43,7 +43,7 @@ const GalleryCarouselPagination = ({ index, slideCount }) => {
   }
 
   const numberOfDots = slideCount > 5 ? 5 : slideCount;
-  const sliderPadding = slideCount < 6 ? (5 - slideCount) / 2 : (numberOfDots - 1) / 2;
+  const sliderPadding = slideCount < 5 ? (5 - slideCount) / 2 : (numberOfDots - 1) / 2;
 
   const getFixedIndex = (index, slideCount) => {
     if (slideCount < 6) {
@@ -65,6 +65,7 @@ const GalleryCarouselPagination = ({ index, slideCount }) => {
           padding: `0px ${sliderPadding * 18}px`,
           boxSizing: 'border-box',
         }}
+        slideStyle={{ width: '18px', height: '18px' }}
         disabled
       >
         {children}
