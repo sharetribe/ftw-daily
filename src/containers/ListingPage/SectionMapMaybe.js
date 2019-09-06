@@ -23,7 +23,7 @@ class SectionMapMaybe extends Component {
     }
 
     const address = publicData && publicData.location ? publicData.location.address : '';
-    const classes = classNames(rootClassName || css.sectionMap, className);
+    const classes = classNames(rootClassName || css.listingSectionContainer, className);
     const cacheKey = listingId ? `${listingId.uuid}_${geolocation.lat}_${geolocation.lng}` : null;
 
     const mapProps = config.maps.fuzzy.enabled

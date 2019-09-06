@@ -25,7 +25,7 @@ const SectionHostMaybe = props => {
   }
 
   return (
-    <div id="host" className={css.sectionHost}>
+    <div id="host" className={css.listingSectionContainer}>
       <h2 className={css.yourHostHeading}>
         <FormattedMessage id="ListingPage.yourHostHeading" />
       </h2>

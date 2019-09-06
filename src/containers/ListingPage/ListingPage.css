@@ -20,9 +20,6 @@
   margin: 24px;
 }
 
-.sectionImages {
-}
-
 .threeToTwoWrapper {
   /* Layout */
   display: block;
@@ -221,7 +218,17 @@
 }
 
 .bookingPanel {
-  display: none;
+  z-index: 9;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  padding: 18px 24px 18px 16px;
+  background-color: #fff;
+  box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  transform: translateZ(0);
   @media (--viewportLarge) {
     display: block;
     margin-top: 95px;
@@ -229,8 +236,10 @@
     border-left-style: solid;
     border-left-width: 1px;
     border-left-color: var(--matterColorNegative);
-
-    padding-left: 60px;
+    box-shadow: none;
+    position: static;
+    z-index: 1;
+    padding: 0 0 0 60px;
 
     /* The calendar needs 312px */
     flex-basis: 312px;

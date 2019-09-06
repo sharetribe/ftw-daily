@@ -15,12 +15,14 @@ const ContactAuthorPanel = ({ author, onContactUser, currentUser, className }) =
 
   return (
     <div className={className}>
-      <h2>
-        <FormattedMessage id="ListingPage.contactAuthorTitle" />
-      </h2>
-      <p>
-        <FormattedMessage id="ListingPage.contactAuthorText" />
-      </p>
+      <div className={css.textContainer}>
+        <h2>
+          <FormattedMessage id="ListingPage.contactAuthorTitle" />
+        </h2>
+        <p>
+          <FormattedMessage id="ListingPage.contactAuthorText" />
+        </p>
+      </div>
       <button className={css.contactButton} onClick={onContactUser}>
         <FormattedMessage id="ListingPage.contactAuthorButton" />
       </button>
