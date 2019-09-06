@@ -80,6 +80,7 @@ export class ListingPageComponent extends Component {
     this.state = {
       pageClassNames: [],
       imageCarouselOpen: false,
+      selectedImageIndex: 0,
       enquiryModalOpen: enquiryModalOpenForListingId === params.id,
     };
 
@@ -300,12 +301,13 @@ export class ListingPageComponent extends Component {
       );
     }
 
-    const handleViewPhotosClick = e => {
+    const handleViewPhotosClick = (e, index) => {
       // Stop event from bubbling up to prevent image click handler
       // trying to open the carousel as well.
       e.stopPropagation();
       this.setState({
         imageCarouselOpen: true,
+        selectedImageIndex: index,
       });
     };
     const authorAvailable = currentListing && currentListing.author;
@@ -367,7 +369,6 @@ export class ListingPageComponent extends Component {
         {authorDisplayName}
       </NamedLink>
     );
-
     return (
       <Page
         title={schemaTitle}
@@ -399,6 +400,7 @@ export class ListingPageComponent extends Component {
                   type: listingType,
                   tab: listingTab,
                 }}
+                selectedImageIndex={this.state.selectedImageIndex}
                 imageCarouselOpen={this.state.imageCarouselOpen}
                 onImageCarouselClose={() => this.setState({ imageCarouselOpen: false })}
                 handleViewPhotosClick={handleViewPhotosClick}

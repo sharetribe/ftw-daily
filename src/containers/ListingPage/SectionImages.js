@@ -10,6 +10,11 @@ import css from './ListingPage.css';
 const GALLERY_TWO_COLUMNS = 1128;
 const GALLERY_ONE_COLUMN = 740;
 
+const ImageContainer = ({ handleViewPhotosClick, image, ...imageProps }) => (
+  <div className={css.gallerySecondaryImageContainer} onClick={handleViewPhotosClick}>
+    <ResponsiveImage image={image} {...imageProps} />
+  </div>
+);
 class SectionImages extends Component {
   constructor(props) {
     super(props);
@@ -30,11 +35,13 @@ class SectionImages extends Component {
       onImageCarouselClose,
       onManageDisableScrolling,
       viewport,
+      selectedImageIndex,
     } = this.props;
     const { isHovered } = this.state;
+    const { images } = listing;
 
-    const hasImages = listing.images && listing.images.length > 0;
-    const firstImage = hasImages ? listing.images[0] : null;
+    const hasImages = images && images.length > 0;
+    const firstImage = hasImages ? images[0] : null;
 
     // Action bar is wrapped with a div that prevents the click events
     // to the parent that would otherwise open the image carousel
@@ -46,17 +53,14 @@ class SectionImages extends Component {
 
     const viewPhotosButton = hasImages ? (
       <button className={css.viewPhotos} onClick={handleViewPhotosClick}>
-        <FormattedMessage
-          id="ListingPage.viewImagesButton"
-          values={{ count: listing.images.length }}
-        />
+        <FormattedMessage id="ListingPage.viewImagesButton" values={{ count: images.length }} />
       </button>
     ) : null;
 
     const gallerySecondaryColumns =
-      listing.images && listing.images.length >= 5 && viewport.width > GALLERY_TWO_COLUMNS
+      images && images.length >= 5 && viewport.width > GALLERY_TWO_COLUMNS
         ? 2
-        : listing.images && listing.images.length >= 3 && viewport.width > GALLERY_ONE_COLUMN
+        : images && images.length >= 3 && viewport.width > GALLERY_ONE_COLUMN
         ? 1
         : 0;
 
@@ -71,12 +75,16 @@ class SectionImages extends Component {
       for (let i = 1; i <= gallerySecondaryColumns; i++) {
         galleryColumns.push(
           <div className={css.galleryColumn}>
-            <div className={css.gallerySecondaryImageContainer}>
-              <ResponsiveImage image={listing.images[i * 2]} {...imageProps} />
-            </div>
-            <div className={css.gallerySecondaryImageContainer}>
-              <ResponsiveImage image={listing.images[i * 2 - 1]} {...imageProps} />
-            </div>
+            <ImageContainer
+              image={images[i * 2 - 1]}
+              handleViewPhotosClick={e => handleViewPhotosClick(e, i * 2 - 1)}
+              {...imageProps}
+            />
+            <ImageContainer
+              image={images[i * 2]}
+              handleViewPhotosClick={e => handleViewPhotosClick(e, i * 2)}
+              {...imageProps}
+            />
           </div>
         );
       }
@@ -84,14 +92,17 @@ class SectionImages extends Component {
     return (
       <div className={css.sectionImages}>
         <div className={css.threeToTwoWrapper}>
-          <div className={css.aspectWrapper} onClick={handleViewPhotosClick}>
+          <div className={css.aspectWrapper}>
             {actionBar}
             <div
               className={css.galleryImagesWrapper}
               onMouseEnter={() => this.setState({ isHovered: true })}
               onMouseLeave={() => this.setState({ isHovered: false })}
             >
-              <div className={css.galleryMainImageContainer}>
+              <div
+                className={css.galleryMainImageContainer}
+                onClick={e => handleViewPhotosClick(e, 0)}
+              >
                 <ResponsiveImage image={firstImage} {...imageProps} />
               </div>
               {galleryColumns}
@@ -108,7 +119,9 @@ class SectionImages extends Component {
           onClose={onImageCarouselClose}
           onManageDisableScrolling={onManageDisableScrolling}
         >
-          <ImageCarousel images={listing.images} />
+          {imageCarouselOpen && (
+            <ImageCarousel selectedImageIndex={selectedImageIndex} images={images} />
+          )}
         </Modal>
       </div>
     );
