@@ -14,13 +14,13 @@
   position: absolute;
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 100%;
   width: 20%;
   top: 0;
   border: none;
   outline: none;
   cursor: pointer;
-  justify-content: flex-end;
   left: 0;
   background: linear-gradient(-90deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
 }
