@@ -37,7 +37,7 @@ import {
   LayoutWrapperMain,
   LayoutWrapperFooter,
   Footer,
-  BookingPanel,
+  ContactAuthorPanelMaybe,
 } from '../../components';
 import { TopbarContainer, NotFoundPage } from '../../containers';
 
@@ -441,18 +441,11 @@ export class ListingPageComponent extends Component {
                     onManageDisableScrolling={onManageDisableScrolling}
                   />
                 </div>
-                <BookingPanel
+                <ContactAuthorPanelMaybe
+                  author={currentListing.author}
+                  onContactUser={this.onContactUser}
+                  currentUser={currentUser}
                   className={css.bookingPanel}
-                  listing={currentListing}
-                  isOwnListing={isOwnListing}
-                  unitType={unitType}
-                  onSubmit={handleBookingSubmit}
-                  title={bookingTitle}
-                  subTitle={bookingSubTitle}
-                  authorDisplayName={authorDisplayName}
-                  onManageDisableScrolling={onManageDisableScrolling}
-                  timeSlots={timeSlots}
-                  fetchTimeSlotsError={fetchTimeSlotsError}
                 />
               </div>
             </div>
