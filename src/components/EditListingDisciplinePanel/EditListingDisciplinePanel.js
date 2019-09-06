@@ -30,7 +30,7 @@ const EditListingDisciplinePanel = props => {
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
     <FormattedMessage
-      id="EditListingDescriptionPanel.title"
+      id="EditListingDisciplinePanel.title"
       values={{ listingTitle: <ListingLink listing={listing} /> }}
     />
   ) : (

@@ -213,22 +213,22 @@ class SearchFiltersMobileComponent extends Component {
       selectedFiltersCount > 0 ? css.filtersButtonSelected : css.filtersButton;
 
     const genderLabel = intl.formatMessage({
-      id: 'SearchFilters.genderLabel',
+      id: 'SearchFiltersMobile.genderLabel',
     });
     const ageLabel = intl.formatMessage({
-      id: 'SearchFilters.ageLabel',
+      id: 'SearchFiltersMobile.ageLabel',
     });
     const breedLabel = intl.formatMessage({
-      id: 'SearchFilters.breedLabel',
+      id: 'SearchFiltersMobile.breedLabel',
     });
     const hightLabel = intl.formatMessage({
-      id: 'SearchFilters.hightLabel',
+      id: 'SearchFiltersMobile.hightLabel',
     });
     const colorLabel = intl.formatMessage({
-      id: 'SearchFilters.colorLabel',
+      id: 'SearchFiltersMobile.colorLabel',
     });
     const mainDisciplineLabel = intl.formatMessage({
-      id: 'SearchFilters.mainDisciplineLabel',
+      id: 'SearchFiltersMobile.mainDisciplineLabel',
     });
 
     const initialGender = this.initialValues(genderFilter.paramName);

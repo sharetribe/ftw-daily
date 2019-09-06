@@ -13,7 +13,11 @@ const KEY_CODE_RIGHT_ARROW = 39;
 class ImageCarousel extends Component {
   constructor(props) {
     super(props);
-    this.state = { selectedImageIndex: 0, selectedImageLoaded: false };
+
+    this.state = {
+      selectedImageIndex: this.props.selectedImageIndex,
+      selectedImageLoaded: false,
+    };
     this.onKeyUp = this.onKeyUp.bind(this);
     this.prev = this.prev.bind(this);
     this.next = this.next.bind(this);
@@ -124,11 +128,12 @@ ImageCarousel.defaultProps = {
   className: null,
 };
 
-const { string, arrayOf } = PropTypes;
+const { string, arrayOf, number } = PropTypes;
 
 ImageCarousel.propTypes = {
   rootClassName: string,
   className: string,
+  selectedImageIndex: number,
   images: arrayOf(propTypes.image).isRequired,
 
   // from injectIntl

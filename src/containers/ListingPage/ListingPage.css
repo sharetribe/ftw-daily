@@ -20,9 +20,6 @@
   margin: 24px;
 }
 
-.sectionImages {
-}
-
 .threeToTwoWrapper {
   /* Layout */
   display: block;
@@ -32,23 +29,19 @@
   @media (--viewportMedium) {
     padding: 0;
   }
-
-  @media (--viewportLarge) {
-    padding: 36px 36px 0 36px;
-  }
 }
 
 /* Firefox doesn't support image aspect ratio inside flexbox */
 .aspectWrapper {
   position: relative; /* allow positioning own listing action bar */
-  padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
-  background-color: var(--matterColorNegative); /* Loading BG color */
+  background-color: var(--matterColorDark); /* Loading BG color */
 
   /* Image carousel can be opened from the image, therefore we should show a pointer */
   cursor: pointer;
 
   @media (--viewportMedium) {
     padding-bottom: 0; /* No fixed aspect on desktop layouts */
+    height: 592px;
   }
 }
 
@@ -118,32 +111,25 @@
   margin: -6px 7px 0 0;
 }
 
+.hoveredImage {
+  opacity: 0.7;
+}
+
 .rootForImage {
-  /* Layout - image will take space defined by aspect ratio wrapper */
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
   width: 100%;
+  transition: ease-in-out 0.3s;
 
-  transition: var(--transitionStyleButton);
-
-  @media (--viewportMedium) {
-    position: static;
-    top: auto;
-    bottom: auto;
-    left: auto;
-    right: auto;
-    height: calc(0.41 * 100vw);
-    max-height: 50vh;
-    object-fit: cover;
-    border-radius: var(--borderRadius);
-
-    &:hover {
-      transform: scale(1.005);
-      box-shadow: var(--boxShadowListingCard);
-    }
+  position: static;
+  top: auto;
+  bottom: auto;
+  left: auto;
+  right: auto;
+  height: 100%;
+  object-fit: cover;
+  &:hover {
+    opacity: 1;
+    transform: scale(1.05);
+    box-shadow: var(--boxShadowListingCard);
   }
 }
 
@@ -232,6 +218,17 @@
 }
 
 .bookingPanel {
+  z-index: 9;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  padding: 18px 24px 18px 16px;
+  background-color: #fff;
+  box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  transform: translateZ(0);
   @media (--viewportLarge) {
     display: block;
     margin-top: 95px;
@@ -239,8 +236,10 @@
     border-left-style: solid;
     border-left-width: 1px;
     border-left-color: var(--matterColorNegative);
-
-    padding-left: 60px;
+    box-shadow: none;
+    position: static;
+    z-index: 1;
+    padding: 0 0 0 60px;
 
     /* The calendar needs 312px */
     flex-basis: 312px;
@@ -586,14 +585,17 @@
 }
 
 .threeColumns {
-  columns: 3;
+  columns: 2;
+  @media (--viewportMedium) {
+    columns: 3;
+  }
 }
 .listingSectionContainer {
+  padding: 0 24px;
   margin-bottom: 40px;
 }
 
 .listingSectionTitle {
-  padding: 0 24px;
   margin-bottom: 5px;
 
   @media (--viewportMedium) {
@@ -604,7 +606,6 @@
   }
 }
 .listingPrimaryText {
-  padding: 0 24px;
   margin: 0;
 
   @media (--viewportMedium) {
@@ -627,4 +628,31 @@
 }
 .listingIcon {
   margin-right: 12px;
+}
+.fullWidth {
+  max-width: 100%;
+  flex-basis: 100%;
+}
+
+.galleryImagesWrapper {
+  display: flex;
+  height: 100%;
+}
+.gallerySecondaryImageContainer {
+  border: 1px solid black;
+  position: relative;
+  height: 50%;
+  overflow: hidden;
+}
+.galleryMainImageContainer {
+  min-width: 50%;
+  flex: 1;
+  width: auto;
+  height: 100%;
+  border: 1px solid black;
+  position: relative;
+  overflow: hidden;
+}
+.galleryColumn {
+  width: 25%;
 }

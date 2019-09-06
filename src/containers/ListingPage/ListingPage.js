@@ -5,6 +5,7 @@ import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import classNames from 'classnames';
 import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
 import { LISTING_STATE_PENDING_APPROVAL, LISTING_STATE_CLOSED, propTypes } from '../../util/types';
@@ -37,7 +38,7 @@ import {
   LayoutWrapperMain,
   LayoutWrapperFooter,
   Footer,
-  BookingPanel,
+  ContactAuthorPanelMaybe,
 } from '../../components';
 import { TopbarContainer, NotFoundPage } from '../../containers';
 
@@ -79,6 +80,7 @@ export class ListingPageComponent extends Component {
     this.state = {
       pageClassNames: [],
       imageCarouselOpen: false,
+      selectedImageIndex: 0,
       enquiryModalOpen: enquiryModalOpenForListingId === params.id,
     };
 
@@ -299,12 +301,13 @@ export class ListingPageComponent extends Component {
       );
     }
 
-    const handleViewPhotosClick = e => {
+    const handleViewPhotosClick = (e, index) => {
       // Stop event from bubbling up to prevent image click handler
       // trying to open the carousel as well.
       e.stopPropagation();
       this.setState({
         imageCarouselOpen: true,
+        selectedImageIndex: index,
       });
     };
     const authorAvailable = currentListing && currentListing.author;
@@ -366,7 +369,6 @@ export class ListingPageComponent extends Component {
         {authorDisplayName}
       </NamedLink>
     );
-
     return (
       <Page
         title={schemaTitle}
@@ -398,6 +400,7 @@ export class ListingPageComponent extends Component {
                   type: listingType,
                   tab: listingTab,
                 }}
+                selectedImageIndex={this.state.selectedImageIndex}
                 imageCarouselOpen={this.state.imageCarouselOpen}
                 onImageCarouselClose={() => this.setState({ imageCarouselOpen: false })}
                 handleViewPhotosClick={handleViewPhotosClick}
@@ -405,7 +408,7 @@ export class ListingPageComponent extends Component {
               />
               <div className={css.contentContainer}>
                 <SectionAvatar user={currentAuthor} params={params} />
-                <div className={css.mainContent}>
+                <div className={classNames(css.mainContent, isOwnListing && css.fullWidth)}>
                   <SectionHeading
                     priceTitle={priceTitle}
                     formattedPrice={formattedPrice}
@@ -441,18 +444,11 @@ export class ListingPageComponent extends Component {
                     onManageDisableScrolling={onManageDisableScrolling}
                   />
                 </div>
-                <BookingPanel
+                <ContactAuthorPanelMaybe
+                  author={currentListing.author}
+                  onContactUser={this.onContactUser}
+                  currentUser={currentUser}
                   className={css.bookingPanel}
-                  listing={currentListing}
-                  isOwnListing={isOwnListing}
-                  unitType={unitType}
-                  onSubmit={handleBookingSubmit}
-                  title={bookingTitle}
-                  subTitle={bookingSubTitle}
-                  authorDisplayName={authorDisplayName}
-                  onManageDisableScrolling={onManageDisableScrolling}
-                  timeSlots={timeSlots}
-                  fetchTimeSlotsError={fetchTimeSlotsError}
                 />
               </div>
             </div>
