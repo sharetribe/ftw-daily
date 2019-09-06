@@ -232,6 +232,7 @@
 }
 
 .bookingPanel {
+  display: none;
   @media (--viewportLarge) {
     display: block;
     margin-top: 95px;
@@ -586,14 +587,17 @@
 }
 
 .threeColumns {
-  columns: 3;
+  columns: 2;
+  @media (--viewportMedium) {
+    columns: 3;
+  }
 }
 .listingSectionContainer {
+  padding: 0 24px;
   margin-bottom: 40px;
 }
 
 .listingSectionTitle {
-  padding: 0 24px;
   margin-bottom: 5px;
 
   @media (--viewportMedium) {
@@ -604,7 +608,6 @@
   }
 }
 .listingPrimaryText {
-  padding: 0 24px;
   margin: 0;
 
   @media (--viewportMedium) {
@@ -627,4 +630,8 @@
 }
 .listingIcon {
   margin-right: 12px;
+}
+.fullWidth {
+  max-width: 100%;
+  flex-basis: 100%;
 }

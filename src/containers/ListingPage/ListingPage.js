@@ -5,6 +5,7 @@ import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import classNames from 'classnames';
 import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
 import { LISTING_STATE_PENDING_APPROVAL, LISTING_STATE_CLOSED, propTypes } from '../../util/types';
@@ -405,7 +406,7 @@ export class ListingPageComponent extends Component {
               />
               <div className={css.contentContainer}>
                 <SectionAvatar user={currentAuthor} params={params} />
-                <div className={css.mainContent}>
+                <div className={classNames(css.mainContent, isOwnListing && css.fullWidth)}>
                   <SectionHeading
                     priceTitle={priceTitle}
                     formattedPrice={formattedPrice}

@@ -5,8 +5,6 @@ import { ensureUser, ensureCurrentUser } from '../../util/data';
 import css from './ContactAuthorPanelMaybe.css';
 
 const ContactAuthorPanel = ({ author, onContactUser, currentUser, className }) => {
-  console.log(author);
-
   const userIsCurrentUser = author && author.type === 'currentUser';
   const ensuredUser = userIsCurrentUser ? ensureCurrentUser(author) : ensureUser(author);
   const ensuredCurrentUser = ensureCurrentUser(currentUser);
