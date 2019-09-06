@@ -871,5 +871,8 @@
   "SearchFiltersMobile.breedLabel": "",
   "SearchFiltersMobile.hightLabel": "",
   "SearchFiltersMobile.colorLabel": "",
-  "SearchFiltersMobile.mainDisciplineLabel": ""
+  "SearchFiltersMobile.mainDisciplineLabel": "",
+  "ListingPage.contactAuthorTitle": "",
+  "ListingPage.contactAuthorText": "",
+  "ListingPage.contactAuthorButton": ""
 }
