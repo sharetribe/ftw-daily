@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import { TopbarContainer } from '../../containers';
 import {
@@ -80,8 +80,7 @@ const { bool } = PropTypes;
 FaqPageComponent.propTypes = {
   scrollingDisabled: bool.isRequired,
 
-  // from injectIntl
-  intl: intlShape.isRequired,
+  
 };
 
 const mapStateToProps = state => {

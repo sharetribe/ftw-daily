@@ -31,9 +31,7 @@ import defaultMessages from './translations/en.json';
 // This file contains ISO 3166-1 alpha-2 country codes, country names and their translations in our default languages
 // This used to collect billing address in StripePaymentAddress on CheckoutPage
 
-// Step 2:
-// Import locale rules for React Intl library
-import localeData from 'react-intl/locale-data/se';
+
 
 // Step 3:
 // If you are using a non-english locale with moment library,
