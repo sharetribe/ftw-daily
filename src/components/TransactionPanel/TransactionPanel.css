@@ -132,7 +132,7 @@
 
   @media (--viewportLarge) {
     display: block;
-    margin-top: 119px;
+    margin-top: 42px;
   }
 }
 .avatarDesktop {
@@ -153,7 +153,7 @@
 
   @media (--viewportLarge) {
     max-width: 100%;
-    margin: 152px 0 0 0;
+    margin: 42px 0 0 0;
     padding: 0;
   }
 }
@@ -479,4 +479,19 @@
 
   margin-top: 0;
   margin-bottom: 1px;
+}
+
+.backBtn {
+  margin: 40px 0 32px 32px;
+  display: block;
+  font-size: 16px;
+  text-decoration: underline;
+  border: none;
+  padding: 0;
+  outline: none;
+  cursor: pointer;
+
+  @media (--viewportLarge) {
+    margin: 80px 0 0;
+  }
 }

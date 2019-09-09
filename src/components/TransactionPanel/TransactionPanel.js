@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
 import { array, arrayOf, bool, func, number, string } from 'prop-types';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import classNames from 'classnames';
@@ -97,6 +99,7 @@ export class TransactionPanelComponent extends Component {
     this.onSendMessageFormBlur = this.onSendMessageFormBlur.bind(this);
     this.onMessageSubmit = this.onMessageSubmit.bind(this);
     this.scrollToMessage = this.scrollToMessage.bind(this);
+    this.goBack = this.goBack.bind(this);
   }
 
   componentDidMount() {
@@ -105,6 +108,10 @@ export class TransactionPanelComponent extends Component {
 
   onOpenReviewModal() {
     this.setState({ isReviewModalOpen: true });
+  }
+
+  goBack() {
+    this.props.history.goBack();
   }
 
   onSubmitReview(values) {
@@ -337,6 +344,9 @@ export class TransactionPanelComponent extends Component {
       <div className={classes}>
         <div className={css.container}>
           <div className={css.txInfo}>
+            <button class={css.backBtn} onClick={this.goBack}>
+              Go back
+            </button>
             <DetailCardImage
               rootClassName={css.imageWrapperMobile}
               avatarWrapperClassName={css.avatarWrapperMobile}
@@ -528,6 +538,9 @@ TransactionPanelComponent.propTypes = {
   intl: intlShape,
 };
 
-const TransactionPanel = injectIntl(TransactionPanelComponent);
+const TransactionPanel = compose(
+  withRouter,
+  injectIntl
+)(TransactionPanelComponent);
 
 export default TransactionPanel;
