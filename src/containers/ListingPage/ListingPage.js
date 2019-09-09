@@ -301,7 +301,7 @@ export class ListingPageComponent extends Component {
       );
     }
 
-    const handleViewPhotosClick = (e, index) => {
+    const handleViewPhotosClick = (e, index = 0) => {
       // Stop event from bubbling up to prevent image click handler
       // trying to open the carousel as well.
       e.stopPropagation();
@@ -417,9 +417,7 @@ export class ListingPageComponent extends Component {
                     showContactUser={showContactUser}
                     onContactUser={this.onContactUser}
                   />
-                  <SectionHorseInfo
-                    options={{ breed, gender, age, color, hight, mainDiscipline }}
-                  />
+                  <SectionHorseInfo data={{ breed, gender, age, color, hight, mainDiscipline }} />
                   <SectionDisciplinesMaybe disciplines={publicData.additionalDisciplines} />
                   <SectionDescriptionMaybe description={description} />
                   <SectionCharacteristicsMaybe characteristics={publicData.characteristics} />

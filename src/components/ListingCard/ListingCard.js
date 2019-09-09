@@ -42,7 +42,17 @@ class ListingImage extends Component {
 const LazyImage = lazyLoadWithDimensions(ListingImage, { loadAfterInitialRendering: 3000 });
 
 export const ListingCardComponent = props => {
-  const { className, rootClassName, intl, listing, renderSizes, setActiveListing } = props;
+  const {
+    className,
+    rootClassName,
+    intl,
+    listing,
+    renderSizes,
+    setActiveListing,
+    ages,
+    breeds,
+    genders,
+  } = props;
   const classes = classNames(rootClassName || css.root, className);
 
   const currentListing = ensureListing(listing);
@@ -108,7 +118,9 @@ export const ListingCardComponent = props => {
               longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS,
               longWordClass: css.longWord,
             })}
-            , {breed}, {gender}, {age}
+            , {breeds.find(value => value.key === breed).label},{' '}
+            {genders.find(value => value.key === gender).label},{' '}
+            {ages.find(value => value.key === age).label}
           </div>
           <div className={css.authorInfo}>
             <FormattedMessage id="ListingCard.hostedBy" values={{ authorName }} />
@@ -124,6 +136,9 @@ ListingCardComponent.defaultProps = {
   rootClassName: null,
   renderSizes: null,
   setActiveListing: () => null,
+  ages: config.custom.ages,
+  breeds: config.custom.breeds,
+  genders: config.custom.genders,
 };
 
 ListingCardComponent.propTypes = {
