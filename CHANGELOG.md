@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [add] Add new Spanish translations related to storing payment card.
+  [#1193](https://github.com/sharetribe/flex-template-web/pull/1193)
 - [fix] Update yarn.lock (there was Lodash version resolution missing)
   [#1190](https://github.com/sharetribe/flex-template-web/pull/1190)
 
