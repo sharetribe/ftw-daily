@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [change] Move `BookingTimeInfo` to separate component from `InboxPage`. Add options to show only
+  booking dates or booking dates and times.
+  [#1194](https://github.com/sharetribe/flex-template-web/pull/1194)
 - [add] Add new Spanish translations related to storing payment card.
   [#1193](https://github.com/sharetribe/flex-template-web/pull/1193)
 - [fix] Update yarn.lock (there was Lodash version resolution missing)
