@@ -44,4 +44,9 @@
       "value": "report"
     }
   }
+  "formation": {
+    "web": {
+      "size": "free"
+    }
+  }
 }
