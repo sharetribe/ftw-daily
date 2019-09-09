@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { bool, func, string } from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import routeConfiguration from '../../routeConfiguration';
 import { ensureCurrentUser } from '../../util/data';

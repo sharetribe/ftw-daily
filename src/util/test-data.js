@@ -294,7 +294,7 @@ export const fakeIntl = {
   formatMessage: msg => msg.id,
   formatNumber: d => d,
   formatPlural: d => d,
-  formatRelative: d => d,
+  formatRelativeTime: d => d,
   formatTime: d => `${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}`,
   now: () => Date.UTC(2017, 10, 23, 12, 59),
 };

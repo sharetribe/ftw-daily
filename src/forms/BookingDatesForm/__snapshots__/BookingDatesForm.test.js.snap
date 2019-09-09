@@ -12,7 +12,7 @@ exports[`BookingDatesForm matches snapshot without selected dates 1`] = `
       "formatMessage": [Function],
       "formatNumber": [Function],
       "formatPlural": [Function],
-      "formatRelative": [Function],
+      "formatRelativeTime": [Function],
       "formatTime": [Function],
       "now": [Function],
     }

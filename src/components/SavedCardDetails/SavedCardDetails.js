@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { bool, func, number, shape, string } from 'prop-types';
 import classNames from 'classnames';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, intlShape } from '../../util/reactIntl';
 import {
   IconArrowHead,
   IconCard,

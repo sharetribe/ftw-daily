@@ -6,7 +6,7 @@ import {
   isInclusivelyBeforeDay,
   isInclusivelyAfterDay,
 } from 'react-dates';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from '../../util/reactIntl';
 import memoize from 'lodash/memoize';
 import classNames from 'classnames';
 import moment from 'moment';

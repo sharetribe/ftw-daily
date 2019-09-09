@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { string, func, arrayOf, shape, number } from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 
 import { Menu, MenuContent, MenuItem, MenuLabel } from '..';

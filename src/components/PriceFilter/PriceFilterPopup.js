@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { func, number, shape, string } from 'prop-types';
 import classNames from 'classnames';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, intlShape } from '../../util/reactIntl';
 import { propTypes } from '../../util/types';
 import { formatCurrencyMajorUnit } from '../../util/currency';
 import config from '../../config';
