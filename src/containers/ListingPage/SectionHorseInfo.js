@@ -9,18 +9,19 @@ import {
   IconIncreaseSize,
   IconThunder,
 } from '../../components';
+import config from '../../config';
 
 import css from './ListingPage.css';
 
 const SectionHorseInfo = props => {
-  const { options } = props;
+  const { data, options } = props;
   return (
     <div className={css.listingSectionContainer}>
       <h2 className={css.listingSectionTitle}>
         <FormattedMessage id="ListingPage.horseInfoTitle" />
       </h2>
       <ul className={css.threeColumns}>
-        {Object.keys(options).map(key => (
+        {Object.keys(data).map(key => (
           <li key={key.toString()} className={css.listingItemContainer}>
             {(() => {
               switch (key) {
@@ -45,13 +46,26 @@ const SectionHorseInfo = props => {
               <p className={css.listingSecondaryText}>
                 <FormattedMessage id={`ListingPage.horseInfo.${key}`} />
               </p>
-              <p className={classNames(css.listingPrimaryText, css.bold)}>{options[key]}</p>
+              <p className={classNames(css.listingPrimaryText, css.bold)}>
+                {options[key].find(value => value.key === data[key]).label}
+              </p>
             </div>
           </li>
         ))}
       </ul>
     </div>
   );
+};
+
+SectionHorseInfo.defaultProps = {
+  options: {
+    age: config.custom.ages,
+    breed: config.custom.breeds,
+    color: config.custom.colors,
+    gender: config.custom.genders,
+    hight: config.custom.hights,
+    mainDiscipline: config.custom.disciplines,
+  },
 };
 
 export default SectionHorseInfo;
