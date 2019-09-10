@@ -8,6 +8,7 @@ const ContactAuthorPanel = ({ author, onContactUser, currentUser, className }) =
   const userIsCurrentUser = author && author.type === 'currentUser';
   const ensuredUser = userIsCurrentUser ? ensureCurrentUser(author) : ensureUser(author);
   const ensuredCurrentUser = ensureCurrentUser(currentUser);
+  
   const isCurrentUser =
     ensuredUser.id && ensuredCurrentUser.id && ensuredUser.id.uuid === ensuredCurrentUser.id.uuid;
 
@@ -19,8 +20,8 @@ const ContactAuthorPanel = ({ author, onContactUser, currentUser, className }) =
         <h2>
           <FormattedMessage id="ListingPage.contactAuthorTitle" />
         </h2>
-        <p>
-          <FormattedMessage id="ListingPage.contactAuthorText" />
+        <p className={css.contactAuthorText}>
+          <FormattedMessage id="ListingPage.contactAuthorText" values={{user: author.attributes.profile.displayName}} />
         </p>
       </div>
       <button className={css.contactButton} onClick={onContactUser}>
