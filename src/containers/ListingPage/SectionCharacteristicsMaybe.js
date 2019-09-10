@@ -7,8 +7,6 @@ import css from './ListingPage.css';
 
 const SectionCharacteristicsMaybe = props => {
   const { characteristics, options } = props;
-  console.log(123123, characteristics);
-  console.log(666666, options);
 
   return characteristics && characteristics.length ? (
     <div className={css.listingSectionContainer}>

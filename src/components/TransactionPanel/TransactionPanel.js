@@ -99,7 +99,6 @@ export class TransactionPanelComponent extends Component {
     this.onSendMessageFormBlur = this.onSendMessageFormBlur.bind(this);
     this.onMessageSubmit = this.onMessageSubmit.bind(this);
     this.scrollToMessage = this.scrollToMessage.bind(this);
-    this.goBack = this.goBack.bind(this);
   }
 
   componentDidMount() {
@@ -110,9 +109,7 @@ export class TransactionPanelComponent extends Component {
     this.setState({ isReviewModalOpen: true });
   }
 
-  goBack() {
-    this.props.history.goBack();
-  }
+  goBack = () => this.props.history.goBack();
 
   onSubmitReview(values) {
     const { onSendReview, transaction, transactionRole } = this.props;

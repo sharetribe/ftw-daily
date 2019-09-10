@@ -61,7 +61,6 @@ const FieldCheckboxComponent = props => {
         boxClassName: css.boxSuccess,
       }
     : {};
-  console.log(123123, label);
 
   return (
     <span className={classes}>
