@@ -22,7 +22,7 @@
   /* ================ Default font ================ */
 
   --marketplaceDefaultFontStyles: {
-    font-family: 'circular-medium', 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightMedium);
     font-size: 18px;
     line-height: 24px;
@@ -38,7 +38,7 @@
   /* ================ Body font ================ */
 
   --marketplaceBodyFontStyles: {
-    font-family: 'circular-medium', 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightMedium);
     font-size: 18px;
     line-height: 24px;
@@ -104,7 +104,6 @@
   /* ================ H1, H2, H3, H4, H5 & H6 ================ */
 
   --marketplaceH1FontStyles: {
-    font-family: 'circular-bold';
     font-weight: var(--fontWeightBold);
     font-size: 30px;
     line-height: 36px;
@@ -125,7 +124,6 @@
   }
 
   --marketplaceH2FontStyles: {
-    font-family: 'circular-bold';
     font-weight: var(--fontWeightSemiBold);
     font-size: 24px;
     line-height: 30px;
@@ -213,7 +211,7 @@
   /* ================ Other fonts ================ */
 
   --marketplaceTinyFontStyles: {
-    font-family: 'circular-medium', 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightRegular);
     font-size: 13px;
     line-height: 18px;
@@ -231,14 +229,14 @@
   }
 
   --marketplaceMessageFontStyles {
-    font-family: 'circular-medium', 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightRegular);
     font-size: 16px;
     line-height: 24px;
   }
 
   --marketplaceMessageDateFontStyles {
-    font-family: 'circular-medium', 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightRegular);
     font-size: 13px;
     line-height: 18px;
@@ -252,7 +250,7 @@
   }
 
   --marketplaceTxTransitionFontStyles {
-    font-family: 'circular-medium', 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightMedium);
     font-size: 16px;
     line-height: 18px;
@@ -264,7 +262,7 @@
   }
 
   --marketplaceSearchFilterLabelFontStyles {
-    font-family: 'circular-medium', 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightSemiBold);
     font-size: 13px;
     line-height: 18px;
@@ -277,14 +275,14 @@
   }
 
   --marketplaceSearchFilterSublabelFontStyles {
-    font-family: 'circular-medium', 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightMedium);
     font-size: 18px;
     line-height: 18px;
   }
 
   --marketplaceListingAttributeFontStyles {
-    font-family: 'circular-medium', 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightMedium);
     font-size: 18px;
     line-height: 32px;
