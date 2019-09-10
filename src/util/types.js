@@ -497,3 +497,7 @@ propTypes.error = shape({
 });
 
 export { propTypes };
+
+// Options for showing just date or date and time on BookingTimeInfo and BookingBreakdown
+export const DATE_TYPE_DATE = 'date';
+export const DATE_TYPE_DATETIME = 'datetime';
