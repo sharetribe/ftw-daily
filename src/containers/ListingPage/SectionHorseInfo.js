@@ -46,7 +46,7 @@ const SectionHorseInfo = props => {
               <p className={css.listingSecondaryText}>
                 <FormattedMessage id={`ListingPage.horseInfo.${key}`} />
               </p>
-              <p className={classNames(css.listingPrimaryText, css.bold)}>
+              <p className={classNames(css.listingPrimaryText, css.weight600)}>
                 {options[key].find(value => value.key === data[key]).label}
               </p>
             </div>
