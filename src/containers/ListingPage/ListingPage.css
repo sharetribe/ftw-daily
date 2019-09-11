@@ -593,21 +593,26 @@
 .listingSectionContainer {
   padding: 0 24px;
   margin-bottom: 40px;
+    @media (--viewportMedium) {
+      padding: 0;
+    }
 }
 
 .listingSectionTitle {
-  margin-bottom: 5px;
+  /* Font */
+  @apply --marketplaceH3FontStyles;
+  color: var(--matterColorAnti);
 
+  margin-top: 0;
+  margin-bottom: 13px;
   @media (--viewportMedium) {
-    padding: 0;
-  }
-  @media (--viewportLarge) {
-    margin-bottom: 3px;
+    margin-top: 0;
+    margin-bottom: 20px;
   }
 }
 .listingPrimaryText {
   margin: 0;
-
+  font-weight: 600;
   @media (--viewportMedium) {
     padding: 0;
   }
@@ -615,11 +620,11 @@
 .listingSecondaryText {
   @apply --marketplaceH4FontStyles;
   color: var(--matterColorDark);
-  font-weight: normal;
+  font-weight: 600;
   margin: 0;
 }
-.bold {
-  font-weight: bold;
+.weight600 {
+  font-weight: 600;
 }
 .listingItemContainer {
   display: flex;

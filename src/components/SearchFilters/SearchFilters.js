@@ -276,13 +276,13 @@ const SearchFiltersComponent = props => {
   return (
     <div className={classes}>
       <div className={css.filters}>
-        {genderFilterElement}
-        {ageFilterElement}
-        {breedFilterElement}
-        {hightFilterElement}
-        {colorFilterElement}
         {mainDisciplineFilterElement}
+        {breedFilterElement}
         {priceFilterElement}
+        {ageFilterElement}
+        {colorFilterElement}
+        {hightFilterElement}
+        {genderFilterElement}
         {toggleSearchFiltersPanelButton}
       </div>
 

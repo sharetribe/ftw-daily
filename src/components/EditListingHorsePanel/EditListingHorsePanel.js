@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import { ensureOwnListing } from '../../util/data';
 import { ListingLink } from '../../components';
-import { LISTING_STATE_DRAFT } from '../../util/types';
+import { LISTING_STATE_DRAFT, ERROR_CODE_TRANSACTION_ALREADY_REVIEWED_BY_CUSTOMER } from '../../util/types';
 import { EditListingHorseForm } from '../../forms';
 
 import config from '../../config';
@@ -44,9 +44,8 @@ const EditListingHorsePanel = props => {
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
       <EditListingHorseForm
-        className={css.form}
         initialValues={{
-          title,
+          title: gender ? title : '',
           gender,
           age,
           breed,
