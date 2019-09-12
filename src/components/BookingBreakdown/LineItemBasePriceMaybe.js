@@ -15,6 +15,9 @@ const LineItemBasePriceMaybe = props => {
     ? 'BookingBreakdown.baseUnitDay'
     : 'BookingBreakdown.baseUnitQuantity';
 
+  // Find correct line-item for given unitType prop.
+  // It should be one of the following: 'line-item/night, 'line-item/day', 'line-item/units', or 'line-item/time'
+  // These are defined in '../../util/types';
   const unitPurchase = transaction.attributes.lineItems.find(
     item => item.code === unitType && !item.reversal
   );
