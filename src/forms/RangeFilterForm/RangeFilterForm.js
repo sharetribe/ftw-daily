@@ -69,7 +69,6 @@ const RangeFilterFormComponent = props => {
 
   const handleSubmit = values => {
     const { minValue, maxValue, ...restValues } = values;
-    console.log(onSubmit);
     return onSubmit({
       minValue: minValue === '' ? rest.min : minValue,
       maxValue: maxValue === '' ? rest.max : maxValue,

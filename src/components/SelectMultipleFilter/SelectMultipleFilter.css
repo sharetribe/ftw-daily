@@ -69,3 +69,6 @@
     padding: 4px 0;
   }
 }
+.twoColumns {
+  columns: 2;
+}

@@ -29,7 +29,6 @@ class RangeFilterPopup extends Component {
 
   handleSubmit(values) {
     const { onSubmit, urlParam } = this.props;
-    console.log(1231231);
     this.setState({ isOpen: false });
     onSubmit(urlParam, values);
   }
@@ -111,7 +110,6 @@ class RangeFilterPopup extends Component {
     const hasValue = value => value != null;
     const hasInitialValues = initialValues && hasValue(minValue) && hasValue(maxValue);
 
-    console.log(typeof buttonLabelId);
     const label = hasInitialValues
       ? intl.formatMessage(
           { id: 'RangeFilter.labelSelectedButton' },

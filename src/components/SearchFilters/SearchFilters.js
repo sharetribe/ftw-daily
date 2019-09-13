@@ -154,14 +154,11 @@ const SearchFiltersComponent = props => {
 
   const handleRange = (urlParam, range) => {
     const { minValue, maxValue } = range || {};
-    console.log(range);
 
     const queryParams =
       minValue != null && maxValue != null
         ? { ...urlQueryParams, [urlParam]: `${minValue},${maxValue}` }
         : omit(urlQueryParams, urlParam);
-
-    console.log(queryParams);
 
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   };
@@ -228,6 +225,7 @@ const SearchFiltersComponent = props => {
       label={breedLabel}
       options={breedFilter.options}
       initialValues={initialBreed}
+      twoColumns
       {...filterElementProps}
     />
   ) : null;
@@ -254,6 +252,7 @@ const SearchFiltersComponent = props => {
       label={colorLabel}
       options={colorFilter.options}
       initialValues={initialColor}
+      twoColumns
       {...filterElementProps}
     />
   ) : null;
@@ -266,6 +265,7 @@ const SearchFiltersComponent = props => {
       label={mainDisciplineLabel}
       options={mainDisciplineFilter.options}
       initialValues={initialMainDiscipline}
+      twoColumns
       {...filterElementProps}
     />
   ) : null;

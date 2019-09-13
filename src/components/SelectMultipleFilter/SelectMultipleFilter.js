@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { array, arrayOf, func, number, string } from 'prop-types';
+import { array, arrayOf, func, number, string, bool } from 'prop-types';
 import classNames from 'classnames';
 import { injectIntl, intlShape } from '../../util/reactIntl';
 import { FieldCheckbox } from '../../components';
@@ -11,10 +11,10 @@ import css from './SelectMultipleFilter.css';
 // TODO: Live edit didn't work with FieldCheckboxGroup
 //       There's a mutation problem: formstate.dirty is not reliable with it.
 const GroupOfFieldCheckboxes = props => {
-  const { id, className, name, options } = props;
+  const { id, className, name, options, twoColumns } = props;
   return (
     <fieldset className={className}>
-      <ul className={css.list}>
+      <ul className={classNames(css.list, twoColumns && css.twoColumns)}>
         {options.map((option, index) => {
           const fieldId = `${id}.${option.key}`;
           return (
@@ -80,6 +80,7 @@ class SelectMultipleFilter extends Component {
       urlParam,
       intl,
       showAsPopup,
+      twoColumns,
       ...rest
     } = this.props;
 
@@ -110,7 +111,7 @@ class SelectMultipleFilter extends Component {
       const usedValue = values ? values[name] : values;
       onSubmit(urlParam, usedValue);
     };
-
+    console.log(twoColumns);
     return showAsPopup ? (
       <FilterPopup
         className={classes}
@@ -133,6 +134,7 @@ class SelectMultipleFilter extends Component {
           name={name}
           id={`${id}-checkbox-group`}
           options={options}
+          twoColumns={twoColumns}
         />
       </FilterPopup>
     ) : (
@@ -154,6 +156,7 @@ class SelectMultipleFilter extends Component {
           name={name}
           id={`${id}-checkbox-group`}
           options={options}
+          twoColumns={twoColumns}
         />
       </FilterPlain>
     );
@@ -165,6 +168,7 @@ SelectMultipleFilter.defaultProps = {
   className: null,
   initialValues: [],
   contentPlacementOffset: 0,
+  twoColumns: false,
 };
 
 SelectMultipleFilter.propTypes = {
@@ -178,7 +182,7 @@ SelectMultipleFilter.propTypes = {
   options: array.isRequired,
   initialValues: arrayOf(string),
   contentPlacementOffset: number,
-
+  twoColumns: bool,
   // form injectIntl
   intl: intlShape.isRequired,
 };
