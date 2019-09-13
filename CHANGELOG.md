@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+## [v3.5.0] 2019-08-29
+
 - [change] Change the design of `BookingBreakdown` and add options to show only dates or booking
   date and time there. [#1195](https://github.com/sharetribe/flex-template-web/pull/1195)
 - [change] Move `BookingTimeInfo` to separate component from `InboxPage`. Add options to show only
@@ -23,6 +25,8 @@ way to update this template, but currently, we follow a pattern:
   [#1193](https://github.com/sharetribe/flex-template-web/pull/1193)
 - [fix] Update yarn.lock (there was Lodash version resolution missing)
   [#1190](https://github.com/sharetribe/flex-template-web/pull/1190)
+
+  [v3.5.0]: https://github.com/sharetribe/flex-template-web/compare/v3.4.0...v3.5.0
 
 ## [v3.4.0] 2019-08-29
 
@@ -105,6 +109,8 @@ way to update this template, but currently, we follow a pattern:
 - Update dependecies: all the easily updateable minor and batch updates: array.prototype.find,
   babel-jest, core-js, enzyme (et al.), express, helmet, inquirer, lodash, nodemon, raf, redux,
   source-map-support [#1163](https://github.com/sharetribe/flex-template-web/pull/1163)
+
+  [v3.4.0]: https://github.com/sharetribe/flex-template-web/compare/v3.3.0...v3.4.0
 
 ## [v3.3.0] 2019-08-22
 
