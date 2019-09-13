@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [change] Change the design of `BookingBreakdown` and add options to show only dates or booking
+  date and time there. [#1195](https://github.com/sharetribe/flex-template-web/pull/1195)
 - [change] Move `BookingTimeInfo` to separate component from `InboxPage`. Add options to show only
   booking dates or booking dates and times.
   [#1194](https://github.com/sharetribe/flex-template-web/pull/1194)
