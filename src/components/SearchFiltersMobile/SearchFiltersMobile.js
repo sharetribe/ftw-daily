@@ -8,7 +8,13 @@ import omit from 'lodash/omit';
 import routeConfiguration from '../../routeConfiguration';
 import { parseDateFromISO8601, stringifyDateToISO8601 } from '../../util/dates';
 import { createResourceLocatorString } from '../../util/routes';
-import { ModalInMobile, Button, PriceFilter, SelectMultipleFilter } from '../../components';
+import {
+  ModalInMobile,
+  Button,
+  PriceFilter,
+  SelectMultipleFilter,
+  RangeFilter,
+} from '../../components';
 import { propTypes } from '../../util/types';
 import css from './SearchFiltersMobile.css';
 
@@ -26,11 +32,13 @@ class SearchFiltersMobileComponent extends Component {
     this.handleSelectSingle = this.handleSelectSingle.bind(this);
     this.handleSelectMultiple = this.handleSelectMultiple.bind(this);
     this.handlePrice = this.handlePrice.bind(this);
+    this.handleRange = this.handleRange.bind(this);
     this.handleDateRange = this.handleDateRange.bind(this);
     this.handleKeyword = this.handleKeyword.bind(this);
     this.initialValue = this.initialValue.bind(this);
     this.initialValues = this.initialValues.bind(this);
     this.initialPriceRangeValue = this.initialPriceRangeValue.bind(this);
+    this.initialRangeValues = this.initialRangeValues.bind(this);
     this.initialDateRangeValue = this.initialDateRangeValue.bind(this);
   }
 
@@ -97,6 +105,18 @@ class SearchFiltersMobileComponent extends Component {
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   }
 
+  handleRange = (urlParam, range) => {
+    const { urlQueryParams, history } = this.props;
+    const { minValue, maxValue } = range || {};
+
+    const queryParams =
+      minValue != null && maxValue != null
+        ? { ...urlQueryParams, [urlParam]: `${minValue},${maxValue}` }
+        : omit(urlQueryParams, urlParam);
+
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+  };
+
   handleDateRange(urlParam, dateRange) {
     const { urlQueryParams, history } = this.props;
     const hasDates = dateRange && dateRange.dates;
@@ -157,6 +177,17 @@ class SearchFiltersMobileComponent extends Component {
         }
       : null;
   }
+  initialRangeValues = paramName => {
+    const urlQueryParams = this.props.urlQueryParams;
+    const value = urlQueryParams[paramName];
+    const valuesFromParams = !!value ? value.split(',').map(v => Number.parseInt(v, RADIX)) : [];
+    return !!value && valuesFromParams.length === 2
+      ? {
+          minValue: valuesFromParams[0],
+          maxValue: valuesFromParams[1],
+        }
+      : null;
+  };
 
   initialDateRangeValue(paramName) {
     const urlQueryParams = this.props.urlQueryParams;
@@ -215,14 +246,8 @@ class SearchFiltersMobileComponent extends Component {
     const genderLabel = intl.formatMessage({
       id: 'SearchFiltersMobile.genderLabel',
     });
-    const ageLabel = intl.formatMessage({
-      id: 'SearchFiltersMobile.ageLabel',
-    });
     const breedLabel = intl.formatMessage({
       id: 'SearchFiltersMobile.breedLabel',
-    });
-    const hightLabel = intl.formatMessage({
-      id: 'SearchFiltersMobile.hightLabel',
     });
     const colorLabel = intl.formatMessage({
       id: 'SearchFiltersMobile.colorLabel',
@@ -233,11 +258,11 @@ class SearchFiltersMobileComponent extends Component {
 
     const initialGender = this.initialValues(genderFilter.paramName);
 
-    const initialAge = this.initialValues(ageFilter.paramName);
+    const initialAge = this.initialRangeValues(ageFilter.paramName);
 
     const initialBreed = this.initialValues(breedFilter.paramName);
 
-    const initialHight = this.initialValues(hightFilter.paramName);
+    const initialHight = this.initialRangeValues(hightFilter.paramName);
 
     const initialColor = this.initialValues(colorFilter.paramName);
 
@@ -261,14 +286,15 @@ class SearchFiltersMobileComponent extends Component {
     ) : null;
 
     const ageFilterElement = ageFilter ? (
-      <SelectMultipleFilter
-        id="SearchFiltersMobile.ageFilter"
-        name="age"
+      <RangeFilter
+        id="SearchFilters.ageFilter"
         urlParam={ageFilter.paramName}
-        label={ageLabel}
-        options={ageFilter.options}
+        onSubmit={this.handleRange}
+        buttonLabelId="SearchFilters.ageLabel"
+        rangeFilterFormLabelId="SearchFilters.ageLabel"
+        {...ageFilter.config}
+        liveEdit
         initialValues={initialAge}
-        {...filterElementProps}
       />
     ) : null;
 
@@ -285,14 +311,15 @@ class SearchFiltersMobileComponent extends Component {
     ) : null;
 
     const hightFilterElement = hightFilter ? (
-      <SelectMultipleFilter
-        id="SearchFiltersMobile.hightFilter"
-        name="hight"
+      <RangeFilter
+        id="SearchFilters.hightFilter"
         urlParam={hightFilter.paramName}
-        label={hightLabel}
-        options={hightFilter.options}
+        onSubmit={this.handleRange}
+        buttonLabelId="SearchFilters.hightLabel"
+        rangeFilterFormLabelId="SearchFilters.hightLabel"
+        {...hightFilter.config}
+        liveEdit
         initialValues={initialHight}
-        {...filterElementProps}
       />
     ) : null;
 

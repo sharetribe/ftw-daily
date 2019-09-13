@@ -42,7 +42,7 @@ class RangeFilterPlainComponent extends Component {
       step,
       intl,
       buttonLabelId,
-      rangeFilterClearLabelId,
+      rangeFilterFormLabelId,
     } = this.props;
     const classes = classNames(rootClassName || css.root, className);
     const { minValue, maxValue } = initialValues || {};
@@ -53,10 +53,10 @@ class RangeFilterPlainComponent extends Component {
     const labelClass = hasInitialValues ? css.filterLabelSelected : css.filterLabel;
     const labelText = hasInitialValues
       ? intl.formatMessage(
-          { id: 'RangeFilter.labelSelectedPlain' },
+          { id: rangeFilterFormLabelId },
           {
-            minValue: `${buttonLabelId} ${minValue}`,
-            maxValue: `${buttonLabelId} ${maxValue}`,
+            minValue: `${intl.formatMessage({ id: buttonLabelId })} ${minValue}`,
+            maxValue: `${intl.formatMessage({ id: buttonLabelId })} ${maxValue}`,
           }
         )
       : intl.formatMessage({ id: buttonLabelId });
@@ -68,7 +68,7 @@ class RangeFilterPlainComponent extends Component {
             <span className={labelClass}>{labelText}</span>
           </button>
           <button type="button" className={css.clearButton} onClick={this.handleClear}>
-            <FormattedMessage id={rangeFilterClearLabelId} />
+            <FormattedMessage id={rangeFilterFormLabelId} />
           </button>
         </div>
         <div className={css.formWrapper}>
@@ -85,6 +85,7 @@ class RangeFilterPlainComponent extends Component {
             step={step}
             liveEdit
             isOpen={this.state.isOpen}
+            rangeFilterFormLabelId={rangeFilterFormLabelId}
           />
         </div>
       </div>
