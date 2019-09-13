@@ -195,6 +195,18 @@ export const priceFilterConfig = {
   step: 5,
 };
 
+export const heightFilterConfig = {
+  min: 150,
+  max: 190,
+  step: 5,
+};
+
+export const ageFilterConfig = {
+  min: 4,
+  max: 30,
+  step: 1,
+};
+
 // Activate booking dates filter on search page
 export const dateRangeFilterConfig = {
   active: true,

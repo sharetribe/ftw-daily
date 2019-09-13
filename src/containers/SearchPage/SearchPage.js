@@ -52,7 +52,15 @@ export class SearchPageComponent extends Component {
   }
 
   filters() {
-    const { genders, ages, breeds, hights, colors, disciplines, priceFilterConfig } = this.props;
+    const {
+      genders,
+      breeds,
+      colors,
+      disciplines,
+      priceFilterConfig,
+      heightFilterConfig,
+      ageFilterConfig,
+    } = this.props;
     return {
       genderFilter: {
         paramName: 'pub_gender',
@@ -60,7 +68,7 @@ export class SearchPageComponent extends Component {
       },
       ageFilter: {
         paramName: 'pub_age',
-        options: ages,
+        config: ageFilterConfig,
       },
       breedFilter: {
         paramName: 'pub_breed',
@@ -68,7 +76,7 @@ export class SearchPageComponent extends Component {
       },
       hightFilter: {
         paramName: 'pub_hight',
-        options: hights,
+        config: heightFilterConfig,
       },
       colorFilter: {
         paramName: 'pub_color',
@@ -279,6 +287,8 @@ SearchPageComponent.defaultProps = {
   colors: config.custom.colors,
   disciplines: config.custom.disciplines,
   priceFilterConfig: config.custom.priceFilterConfig,
+  heightFilterConfig: config.custom.heightFilterConfig,
+  ageFilterConfig: config.custom.ageFilterConfig,
   dateRangeFilterConfig: config.custom.dateRangeFilterConfig,
   keywordFilterConfig: config.custom.keywordFilterConfig,
   activeListingId: null,
@@ -303,6 +313,16 @@ SearchPageComponent.propTypes = {
   colors: array,
   disciplines: array,
   priceFilterConfig: shape({
+    min: number.isRequired,
+    max: number.isRequired,
+    step: number.isRequired,
+  }),
+  heightFilterConfig: shape({
+    min: number.isRequired,
+    max: number.isRequired,
+    step: number.isRequired,
+  }),
+  ageFilterConfig: shape({
     min: number.isRequired,
     max: number.isRequired,
     step: number.isRequired,

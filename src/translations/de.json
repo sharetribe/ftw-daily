@@ -1055,5 +1055,6 @@
   "TransactionPanel.savePaymentMethodFailed": "Speichern der Standardzahlungsmethode fehlgeschlagen. Gehe zur {paymentMethodsPageLink} um erneut zu versuchen.",
   "TransactionPanel.sendingMessageNotAllowed": "Dieser Benutzer wurde gelöscht. Es ist nicht mehr möglich, diesem Benutzer eine Nachricht zu schicken.",
   "UserDisplayName.banned": "Gesperrter Benutzer",
-  "UserDisplayName.deleted": "Gelöschter Benutzer"
+  "UserDisplayName.deleted": "Gelöschter Benutzer",
+  "RangeFilter.labelSelectedButton": "{minValue} - {maxValue}"
 }
