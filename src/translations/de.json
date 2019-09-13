@@ -498,8 +498,8 @@
   "PayoutDetailsForm.countryRequired": "Dieses Feld wird benötigt",
   "PayoutDetailsForm.createStripeAccountFailed": "Whoops, etwas ist schief gelaufen. Bitte versuche es noch einmal.",
   "PayoutDetailsForm.createStripeAccountFailedInvalidPostalCode": "Whoops, stelle sicher, dass die Postleitzahl zum ausgewählten Land gehört und versuche es noch einmal.",
-  "PayoutDetailsForm.firstNameLabel": "",
-  "PayoutDetailsForm.firstNamePlaceholder": "",
+  "PayoutDetailsForm.firstNameLabel": "Vorname",
+  "PayoutDetailsForm.firstNamePlaceholder": "Max",
   "PayoutDetailsForm.firstNameRequired": "Dieses Feld wird benötigt",
   "PayoutDetailsForm.information": "Since this was your first listing, we need to know bit more about you in order to send you money. We only ask these once.",
   "PayoutDetailsForm.lastNameLabel": "Nachname",
@@ -1055,5 +1055,6 @@
   "TransactionPanel.savePaymentMethodFailed": "Speichern der Standardzahlungsmethode fehlgeschlagen. Gehe zur {paymentMethodsPageLink} um erneut zu versuchen.",
   "TransactionPanel.sendingMessageNotAllowed": "Dieser Benutzer wurde gelöscht. Es ist nicht mehr möglich, diesem Benutzer eine Nachricht zu schicken.",
   "UserDisplayName.banned": "Gesperrter Benutzer",
-  "UserDisplayName.deleted": "Gelöschter Benutzer"
+  "UserDisplayName.deleted": "Gelöschter Benutzer",
+  "RangeFilter.labelSelectedButton": "{minValue} - {maxValue}"
 }

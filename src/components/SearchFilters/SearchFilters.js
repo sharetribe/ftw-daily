@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { withRouter } from 'react-router-dom';
 import omit from 'lodash/omit';
 
-import { SelectMultipleFilter, PriceFilter } from '..';
+import { SelectMultipleFilter, PriceFilter, RangeFilter } from '..';
 import routeConfiguration from '../../routeConfiguration';
 import { parseDateFromISO8601, stringifyDateToISO8601 } from '../../util/dates';
 import { createResourceLocatorString } from '../../util/routes';
@@ -35,6 +35,17 @@ const initialPriceRangeValue = (queryParams, paramName) => {
     ? {
         minPrice: valuesFromParams[0],
         maxPrice: valuesFromParams[1],
+      }
+    : null;
+};
+
+const initialRangeValues = (queryParams, paramName) => {
+  const value = queryParams[paramName];
+  const valuesFromParams = !!value ? value.split(',').map(v => Number.parseInt(v, RADIX)) : [];
+  return !!value && valuesFromParams.length === 2
+    ? {
+        minValue: valuesFromParams[0],
+        maxValue: valuesFromParams[1],
       }
     : null;
 };
@@ -81,14 +92,8 @@ const SearchFiltersComponent = props => {
   const genderLabel = intl.formatMessage({
     id: 'SearchFilters.genderLabel',
   });
-  const ageLabel = intl.formatMessage({
-    id: 'SearchFilters.ageLabel',
-  });
   const breedLabel = intl.formatMessage({
     id: 'SearchFilters.breedLabel',
-  });
-  const hightLabel = intl.formatMessage({
-    id: 'SearchFilters.hightLabel',
   });
   const colorLabel = intl.formatMessage({
     id: 'SearchFilters.colorLabel',
@@ -99,11 +104,13 @@ const SearchFiltersComponent = props => {
 
   const initialGender = genderFilter ? initialValues(urlQueryParams, genderFilter.paramName) : null;
 
-  const initialAge = ageFilter ? initialValues(urlQueryParams, ageFilter.paramName) : null;
+  const initialAge = ageFilter ? initialRangeValues(urlQueryParams, ageFilter.paramName) : null;
 
   const initialBreed = breedFilter ? initialValues(urlQueryParams, breedFilter.paramName) : null;
 
-  const initialHight = hightFilter ? initialValues(urlQueryParams, hightFilter.paramName) : null;
+  const initialHight = hightFilter
+    ? initialRangeValues(urlQueryParams, hightFilter.paramName)
+    : null;
 
   const initialColor = colorFilter ? initialValues(urlQueryParams, colorFilter.paramName) : null;
 
@@ -136,9 +143,21 @@ const SearchFiltersComponent = props => {
 
   const handlePrice = (urlParam, range) => {
     const { minPrice, maxPrice } = range || {};
+
     const queryParams =
       minPrice != null && maxPrice != null
         ? { ...urlQueryParams, [urlParam]: `${minPrice},${maxPrice}` }
+        : omit(urlQueryParams, urlParam);
+
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+  };
+
+  const handleRange = (urlParam, range) => {
+    const { minValue, maxValue } = range || {};
+
+    const queryParams =
+      minValue != null && maxValue != null
+        ? { ...urlQueryParams, [urlParam]: `${minValue},${maxValue}` }
         : omit(urlQueryParams, urlParam);
 
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
@@ -185,14 +204,16 @@ const SearchFiltersComponent = props => {
   ) : null;
 
   const ageFilterElement = ageFilter ? (
-    <SelectMultipleFilter
-      id={'SearchFilters.ageFilter'}
-      name="age"
+    <RangeFilter
+      id="SearchFilters.ageFilter"
       urlParam={ageFilter.paramName}
-      label={ageLabel}
-      options={ageFilter.options}
+      onSubmit={handleRange}
+      showAsPopup
+      buttonLabelId="SearchFilters.ageLabel"
+      rangeFilterFormLabelId="SearchFilters.ageLabel"
+      {...ageFilter.config}
       initialValues={initialAge}
-      {...filterElementProps}
+      contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
     />
   ) : null;
 
@@ -204,19 +225,22 @@ const SearchFiltersComponent = props => {
       label={breedLabel}
       options={breedFilter.options}
       initialValues={initialBreed}
+      twoColumns
       {...filterElementProps}
     />
   ) : null;
 
   const hightFilterElement = hightFilter ? (
-    <SelectMultipleFilter
-      id={'SearchFilters.hightFilter'}
-      name="hight"
+    <RangeFilter
+      id="SearchFilters.hightFilter"
       urlParam={hightFilter.paramName}
-      label={hightLabel}
-      options={hightFilter.options}
+      onSubmit={handleRange}
+      showAsPopup
+      buttonLabelId="SearchFilters.hightLabel"
+      rangeFilterFormLabelId="SearchFilters.hightLabel"
+      {...hightFilter.config}
       initialValues={initialHight}
-      {...filterElementProps}
+      contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
     />
   ) : null;
 
@@ -228,6 +252,7 @@ const SearchFiltersComponent = props => {
       label={colorLabel}
       options={colorFilter.options}
       initialValues={initialColor}
+      twoColumns
       {...filterElementProps}
     />
   ) : null;
@@ -240,6 +265,7 @@ const SearchFiltersComponent = props => {
       label={mainDisciplineLabel}
       options={mainDisciplineFilter.options}
       initialValues={initialMainDiscipline}
+      twoColumns
       {...filterElementProps}
     />
   ) : null;

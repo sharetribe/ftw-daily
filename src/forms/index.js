@@ -22,6 +22,7 @@ export { default as PaymentMethodsForm } from './PaymentMethodsForm/PaymentMetho
 export { default as PayoutDetailsForm } from './PayoutDetailsForm/PayoutDetailsForm';
 export { default as PriceFilterForm } from './PriceFilterForm/PriceFilterForm';
 export { default as ProfileSettingsForm } from './ProfileSettingsForm/ProfileSettingsForm';
+export { default as RangeFilterForm } from './RangeFilterForm/RangeFilterForm';
 export { default as ReviewForm } from './ReviewForm/ReviewForm';
 export { default as SendMessageForm } from './SendMessageForm/SendMessageForm';
 export { default as SignupForm } from './SignupForm/SignupForm';

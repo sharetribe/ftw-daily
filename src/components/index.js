@@ -142,6 +142,7 @@ export { default as Map } from './Map/Map';
 export { default as OrderDiscussionPanel } from './OrderDiscussionPanel/OrderDiscussionPanel';
 export { default as Page } from './Page/Page';
 export { default as PriceFilter } from './PriceFilter/PriceFilter';
+export { default as RangeFilter } from './RangeFilter/RangeFilter';
 export { default as Reviews } from './Reviews/Reviews';
 export { default as SavedCardDetails } from './SavedCardDetails/SavedCardDetails';
 export { default as SearchFilters } from './SearchFilters/SearchFilters';

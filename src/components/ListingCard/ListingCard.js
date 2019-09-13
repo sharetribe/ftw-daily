@@ -120,7 +120,7 @@ export const ListingCardComponent = props => {
             })}
             , {breeds.find(value => value.key === breed).label},{' '}
             {genders.find(value => value.key === gender).label},{' '}
-            {ages.find(value => value.key === age).label}
+            {ages.find(value => value.key === age.toString()).label}
           </div>
           <div className={css.authorInfo}>
             <FormattedMessage id="ListingCard.hostedBy" values={{ authorName }} />

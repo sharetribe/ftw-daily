@@ -4,7 +4,10 @@ import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import { ensureOwnListing } from '../../util/data';
 import { ListingLink } from '../../components';
-import { LISTING_STATE_DRAFT, ERROR_CODE_TRANSACTION_ALREADY_REVIEWED_BY_CUSTOMER } from '../../util/types';
+import {
+  LISTING_STATE_DRAFT,
+  ERROR_CODE_TRANSACTION_ALREADY_REVIEWED_BY_CUSTOMER,
+} from '../../util/types';
 import { EditListingHorseForm } from '../../forms';
 
 import config from '../../config';
@@ -57,7 +60,7 @@ const EditListingHorsePanel = props => {
           const { title, gender, age, breed, hight, color } = values;
           const updateValues = {
             title: title.trim(),
-            publicData: { gender, age, breed, hight, color },
+            publicData: { gender, age: parseInt(age), breed, hight: parseInt(hight), color },
           };
 
           onSubmit(updateValues);
