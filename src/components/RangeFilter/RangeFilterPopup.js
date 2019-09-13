@@ -17,58 +17,50 @@ class RangeFilterPopup extends Component {
     this.state = { isOpen: false };
     this.filter = null;
     this.filterContent = null;
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleClear = this.handleClear.bind(this);
-    this.handleCancel = this.handleCancel.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.toggleOpen = this.toggleOpen.bind(this);
-    this.positionStyleForContent = this.positionStyleForContent.bind(this);
   }
 
-  handleSubmit(values) {
+  handleSubmit = values => {
     const { onSubmit, urlParam } = this.props;
     this.setState({ isOpen: false });
     onSubmit(urlParam, values);
-  }
+  };
 
-  handleClear() {
+  handleClear = () => {
     const { onSubmit, urlParam } = this.props;
     this.setState({ isOpen: false });
     onSubmit(urlParam, null);
-  }
+  };
 
-  handleCancel() {
+  handleCancel = () => {
     const { onSubmit, initialValues, urlParam } = this.props;
     this.setState({ isOpen: false });
     onSubmit(urlParam, initialValues);
-  }
+  };
 
-  handleBlur(event) {
+  handleBlur = event => {
     // FocusEvent is fired faster than the link elements native click handler
     // gets its own event. Therefore, we need to check the origin of this FocusEvent.
     if (!this.filter.contains(event.relatedTarget)) {
       this.setState({ isOpen: false });
     }
-  }
+  };
 
-  handleKeyDown(e) {
+  handleKeyDown = e => {
     // Gather all escape presses to close menu
     if (e.keyCode === KEY_CODE_ESCAPE) {
       this.toggleOpen(false);
     }
-  }
+  };
 
-  toggleOpen(enforcedState) {
+  toggleOpen = enforcedState => {
     if (enforcedState) {
       this.setState({ isOpen: enforcedState });
     } else {
       this.setState(prevState => ({ isOpen: !prevState.isOpen }));
     }
-  }
+  };
 
-  positionStyleForContent() {
+  positionStyleForContent = () => {
     if (this.filter && this.filterContent) {
       // Render the filter content to the right from the menu
       // unless there's no space in which case it is rendered
@@ -89,7 +81,7 @@ class RangeFilterPopup extends Component {
       return { ...offset, ...minWidth };
     }
     return {};
-  }
+  };
 
   render() {
     const {

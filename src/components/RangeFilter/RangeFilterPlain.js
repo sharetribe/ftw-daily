@@ -11,25 +11,21 @@ class RangeFilterPlainComponent extends Component {
   constructor(props) {
     super(props);
     this.state = { isOpen: true };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleClear = this.handleClear.bind(this);
-    this.toggleIsOpen = this.toggleIsOpen.bind(this);
   }
 
-  handleChange(values) {
+  handleChange = values => {
     const { onSubmit, urlParam } = this.props;
     onSubmit(urlParam, values);
-  }
+  };
 
-  handleClear() {
+  handleClear = () => {
     const { onSubmit, urlParam } = this.props;
     onSubmit(urlParam, null);
-  }
+  };
 
-  toggleIsOpen() {
+  toggleIsOpen = () => {
     this.setState(prevState => ({ isOpen: !prevState.isOpen }));
-  }
+  };
 
   render() {
     const {
@@ -73,19 +69,19 @@ class RangeFilterPlainComponent extends Component {
         </div>
         <div className={css.formWrapper}>
           <RangeFilterForm
-            id={id}
+            {...id}
             initialValues={hasInitialValues ? initialValues : { minValue: min, maxValue: max }}
             onChange={this.handleChange}
-            intl={intl}
+            {...intl}
             contentRef={node => {
               this.filterContent = node;
             }}
-            min={min}
-            max={max}
-            step={step}
+            {...min}
+            {...max}
+            {...step}
             liveEdit
             isOpen={this.state.isOpen}
-            rangeFilterFormLabelId={rangeFilterFormLabelId}
+            {...rangeFilterFormLabelId}
           />
         </div>
       </div>

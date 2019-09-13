@@ -225,6 +225,8 @@ class SearchFiltersMobileComponent extends Component {
       intl,
     } = this.props;
 
+    const { initialRangeValues, initialValues } = this;
+
     const classes = classNames(rootClassName || css.root, className);
 
     const resultsFound = (
@@ -256,17 +258,17 @@ class SearchFiltersMobileComponent extends Component {
       id: 'SearchFiltersMobile.mainDisciplineLabel',
     });
 
-    const initialGender = this.initialValues(genderFilter.paramName);
+    const initialGender = initialValues(genderFilter.paramName);
 
-    const initialAge = this.initialRangeValues(ageFilter.paramName);
+    const initialAge = initialRangeValues(ageFilter.paramName);
 
-    const initialBreed = this.initialValues(breedFilter.paramName);
+    const initialBreed = initialValues(breedFilter.paramName);
 
-    const initialHight = this.initialRangeValues(hightFilter.paramName);
+    const initialHight = initialRangeValues(hightFilter.paramName);
 
-    const initialColor = this.initialValues(colorFilter.paramName);
+    const initialColor = initialValues(colorFilter.paramName);
 
-    const initialMainDiscipline = this.initialValues(mainDisciplineFilter.paramName);
+    const initialMainDiscipline = initialValues(mainDisciplineFilter.paramName);
 
     const filterElementProps = {
       onSubmit: this.handleSelectSingle,
