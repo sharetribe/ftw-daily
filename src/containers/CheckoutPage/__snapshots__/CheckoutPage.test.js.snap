@@ -77,14 +77,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
           />
         </div>
       </div>
-      <div>
-        <h3>
-          <FormattedMessage
-            id="CheckoutPage.priceBreakdownTitle"
-            values={Object {}}
-          />
-        </h3>
-      </div>
+      <div />
       <section>
         <injectIntl(StripePaymentForm)
           authorDisplayName="author display name"
@@ -154,12 +147,6 @@ exports[`CheckoutPage matches snapshot 1`] = `
           55 CheckoutPage.perNight
         </p>
       </div>
-      <h3>
-        <FormattedMessage
-          id="CheckoutPage.priceBreakdownTitle"
-          values={Object {}}
-        />
-      </h3>
     </div>
   </div>
 </Page>
