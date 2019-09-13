@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { bool, oneOf } from 'prop-types';
+import { bool } from 'prop-types';
 import classNames from 'classnames';
 import { txIsEnquired } from '../../util/transaction';
 import { dateFromAPIToLocalNoon, daysBetween, formatDateToText } from '../../util/dates';
@@ -90,7 +90,7 @@ BookingTimeInfoComponent.propTypes = {
   isOrder: bool.isRequired,
   tx: propTypes.transaction.isRequired,
   unitType: propTypes.bookingUnitType.isRequired,
-  dateType: oneOf(DATE_TYPE_DATE, DATE_TYPE_DATETIME),
+  dateType: propTypes.dateType,
 };
 
 const BookingTimeInfo = injectIntl(BookingTimeInfoComponent);
