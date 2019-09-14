@@ -17,15 +17,15 @@ import {
   LayoutWrapperFooter,
   Footer,
 } from '../../components';
-import { TopbarContainer } from '../../containers';
+import { TopbarContainer } from '..';
 
 import {
   closeListing,
   openListing,
   getOwnListingsById,
   queryOwnListings,
-} from './ManageListingsPage.duck';
-import css from './ManageListingsPage.css';
+} from './OperatorAddAircraftPage.duck';
+import css from './OperatorAddAircraftPage.css';
 import { Button } from 'semantic-ui-react'
 
 // Pagination page size might need to be dynamic on responsive page layouts
@@ -33,7 +33,7 @@ import { Button } from 'semantic-ui-react'
 // So, there's enough cards to fill all columns on full pagination pages
 const RESULT_PAGE_SIZE = 42;
 
-export class ManageListingsPageComponent extends Component {
+export class OperatorAddAircraftPageComponent extends Component {
   constructor(props) {
     super(props);
 
@@ -67,13 +67,13 @@ export class ManageListingsPageComponent extends Component {
 
     const loadingResults = (
       <h2>
-        <FormattedMessage id="ManageListingsPage.loadingOwnListings" />
+        <FormattedMessage id="OperatorAddAircraftPage.loadingOwnListings" />
       </h2>
     );
 
     const queryError = (
       <h2 className={css.error}>
-        <FormattedMessage id="ManageListingsPage.queryError" />
+        <FormattedMessage id="OperatorAddAircraftPage.queryError" />
       </h2>
     );
 
@@ -81,7 +81,7 @@ export class ManageListingsPageComponent extends Component {
       listingsAreLoaded && pagination.totalItems === 0 ? (
         <div className={css.noResultStyle}>
           <h1 className={css.title}>
-            <FormattedMessage id="ManageListingsPage.noResults" />
+            <FormattedMessage id="OperatorAddAircraft.noResults" />
           </h1>
           <p>But we can fix that, you can easily add aircraft <br /> to your account.
         Lets get started.</p>
@@ -94,7 +94,7 @@ export class ManageListingsPageComponent extends Component {
       listingsAreLoaded && pagination.totalItems > 0 ? (
         <h1 className={css.title}>
           <FormattedMessage
-            id="ManageListingsPage.youHaveListings"
+            id="OperatorAddAircraftPage.youHaveListings"
             values={{ count: pagination.totalItems }}
           />
         </h1>
@@ -107,7 +107,7 @@ export class ManageListingsPageComponent extends Component {
       listingsAreLoaded && pagination && pagination.totalPages > 1 ? (
         <PaginationLinks
           className={css.pagination}
-          pageName="ManageListingsPage"
+          pageName="OperatorAddAircraftPage"
           pageSearchParams={{ page }}
           pagination={pagination}
         />
@@ -117,7 +117,7 @@ export class ManageListingsPageComponent extends Component {
     const closingErrorListingId = !!closingListingError && closingListingError.listingId;
     const openingErrorListingId = !!openingListingError && openingListingError.listingId;
 
-    const title = intl.formatMessage({ id: 'ManageListingsPage.title' });
+    const title = intl.formatMessage({ id: 'OperatorAddAircraft.addPage' });
 
     const panelWidth = 62.5;
     // Render hints for responsive image
@@ -131,8 +131,8 @@ export class ManageListingsPageComponent extends Component {
       <Page title={title} scrollingDisabled={scrollingDisabled}>
         <LayoutSingleColumn>
           <LayoutWrapperTopbar>
-            <TopbarContainer currentPage="ManageListingsPage" />
-            <UserNav selectedPageName="ManageListingsPage" />
+            <TopbarContainer currentPage="OperatorAddAircraftPage" />
+            <UserNav selectedPageName="OperatorAddAircraftPage" />
           </LayoutWrapperTopbar>
           <LayoutWrapperMain>
             {queryInProgress ? loadingResults : null}
@@ -168,7 +168,7 @@ export class ManageListingsPageComponent extends Component {
   }
 }
 
-ManageListingsPageComponent.defaultProps = {
+OperatorAddAircraftPageComponent.defaultProps = {
   listings: [],
   pagination: null,
   queryListingsError: null,
@@ -181,7 +181,7 @@ ManageListingsPageComponent.defaultProps = {
 
 const { arrayOf, bool, func, object, shape, string } = PropTypes;
 
-ManageListingsPageComponent.propTypes = {
+OperatorAddAircraftPageComponent.propTypes = {
   closingListing: shape({ uuid: string.isRequired }),
   closingListingError: shape({
     listingId: propTypes.uuid.isRequired,
@@ -216,7 +216,7 @@ const mapStateToProps = state => {
     openingListingError,
     closingListing,
     closingListingError,
-  } = state.ManageListingsPage;
+  } = state.OperatorAddAircraftPage;
   const listings = getOwnListingsById(state, currentPageResultIds);
   return {
     currentPageResultIds,
@@ -238,15 +238,15 @@ const mapDispatchToProps = dispatch => ({
   onOpenListing: listingId => dispatch(openListing(listingId)),
 });
 
-const ManageListingsPage = compose(
+const OperatorAddAircraftPage = compose(
   connect(
     mapStateToProps,
     mapDispatchToProps
   ),
   injectIntl
-)(ManageListingsPageComponent);
+)(OperatorAddAircraftPageComponent);
 
-ManageListingsPage.loadData = (params, search) => {
+OperatorAddAircraftPage.loadData = (params, search) => {
   const queryParams = parse(search);
   const page = queryParams.page || 1;
   return queryOwnListings({
@@ -259,4 +259,4 @@ ManageListingsPage.loadData = (params, search) => {
   });
 };
 
-export default ManageListingsPage;
+export default OperatorAddAircraftPage;

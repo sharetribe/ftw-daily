@@ -8,6 +8,7 @@ export { default as InboxPage } from './InboxPage/InboxPage';
 export { default as LandingPage } from './LandingPage/LandingPage';
 export { default as ListingPage } from './ListingPage/ListingPage';
 export { default as ManageListingsPage } from './ManageListingsPage/ManageListingsPage';
+export { default as OperatorAddAircraftPage } from './OperatorAddAircraftPage/OperatorAddAircraftPage';
 export { default as NotFoundPage } from './NotFoundPage/NotFoundPage';
 export { default as PasswordChangePage } from './PasswordChangePage/PasswordChangePage';
 export { default as PasswordRecoveryPage } from './PasswordRecoveryPage/PasswordRecoveryPage';

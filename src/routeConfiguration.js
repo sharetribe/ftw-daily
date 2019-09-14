@@ -10,6 +10,7 @@ import {
   LandingPage,
   ListingPage,
   ManageListingsPage,
+  OperatorAddAircraftPage,
   NotFoundPage,
   PasswordChangePage,
   PasswordRecoveryPage,
@@ -242,6 +243,14 @@ const routeConfiguration = () => {
       authPage: 'LoginPage',
       component: props => <ManageListingsPage {...props} />,
       loadData: ManageListingsPage.loadData,
+    },
+    {
+      path: '/aircrafts',
+      name: 'OperatorAddAircraftPage',
+      auth: true,
+      authPage: 'LoginPage',
+      component: props => <OperatorAddAircraftPage {...props} />,
+      loadData: OperatorAddAircraftPage.loadData,
     },
     {
       path: '/account',

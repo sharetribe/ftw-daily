@@ -28,6 +28,14 @@ const UserNav = props => {
       },
     },
     {
+      text: <FormattedMessage id="OperatorAddAircraft.addPage" />,
+      selected: selectedPageName === 'OperatorAddAircraftPage',
+      disabled: false,
+      linkProps: {
+        name: 'OperatorAddAircraftPage',
+      },
+    },
+    {
       text: <FormattedMessage id="ManageListingsPage.accountSettings" />,
       selected: ACCOUNT_SETTINGS_PAGES.includes(selectedPageName),
       disabled: false,
@@ -35,6 +43,7 @@ const UserNav = props => {
         name: 'ContactDetailsPage',
       },
     },
+
   ];
 
   return (

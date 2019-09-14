@@ -99,6 +99,15 @@ const TopbarDesktop = props => {
             <FormattedMessage id="TopbarDesktop.accountSettingsLink" />
           </NamedLink>
         </MenuItem>
+        <MenuItem key="OperatorAddAircraftPage">
+          <NamedLink
+            className={classNames(css.yourListingsLink, currentPageClass('OperatorAddAircraftPage'))}
+            name="OperatorAddAircraftPage"
+          >
+            <span className={css.menuItemBorder} />
+            <FormattedMessage id="TopbarDesktop.OperatorAddAircraftLink" />
+          </NamedLink>
+        </MenuItem>
         <MenuItem key="logout">
           <InlineTextButton rootClassName={css.logoutButton} onClick={onLogout}>
             <span className={css.menuItemBorder} />
