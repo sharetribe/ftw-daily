@@ -74,7 +74,8 @@
 
 .logo {
   /* If height is increased, change link paddings accordingly */
-  height: 27px;
+  /* height: 27px; */
+  height: 100%;
 
   /* Good aspect ratio should be less than 160/27 (width/height) */
   /* NOTE: extremely wide logos, need special handling. */
@@ -102,6 +103,10 @@
   @apply --marketplaceH4FontStyles;
   @apply --TopbarDesktop_label;
   color: var(--matterColor);
+}
+
+.requestDemo {
+  color: #85A6D1;
 }
 
 .topbarSearchWithLeftPadding {

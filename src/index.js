@@ -33,6 +33,7 @@ import * as log from './util/log';
 import { LoggingAnalyticsHandler, GoogleAnalyticsHandler } from './analytics/handlers';
 
 import './marketplaceIndex.css';
+import 'semantic-ui-css/semantic.min.css'
 
 const { BigDecimal } = sdkTypes;
 

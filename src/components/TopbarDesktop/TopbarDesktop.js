@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, intlShape } from '../../util/reactIntl';
 import classNames from 'classnames';
@@ -32,14 +32,6 @@ const TopbarDesktop = props => {
     onSearchSubmit,
     initialSearchFormValues,
   } = props;
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const authenticatedOnClientSide = mounted && isAuthenticated;
-  const isAuthenticatedOrJustHydrated = isAuthenticated || !mounted;
 
   const classes = classNames(rootClassName || css.root, className);
 
@@ -47,6 +39,7 @@ const TopbarDesktop = props => {
     <TopbarSearchForm
       className={css.searchLink}
       desktopInputRoot={css.topbarSearchWithLeftPadding}
+      form="TopbarSearchFormDesktop"
       onSubmit={onSearchSubmit}
       initialValues={initialSearchFormValues}
     />
@@ -54,7 +47,7 @@ const TopbarDesktop = props => {
 
   const notificationDot = notificationCount > 0 ? <div className={css.notificationDot} /> : null;
 
-  const inboxLink = authenticatedOnClientSide ? (
+  const inboxLink = isAuthenticated ? (
     <NamedLink
       className={css.inboxLink}
       name="InboxPage"
@@ -73,7 +66,7 @@ const TopbarDesktop = props => {
     return currentPage === page || isAccountSettingsPage ? css.currentPage : null;
   };
 
-  const profileMenu = authenticatedOnClientSide ? (
+  const profileMenu = isAuthenticated ? (
     <Menu>
       <MenuLabel className={css.profileMenuLabel} isOpenClassName={css.profileMenuIsOpen}>
         <Avatar className={css.avatar} user={currentUser} disableProfileLink />
@@ -116,7 +109,7 @@ const TopbarDesktop = props => {
     </Menu>
   ) : null;
 
-  const signupLink = isAuthenticatedOrJustHydrated ? null : (
+  const signupLink = isAuthenticated ? null : (
     <NamedLink name="SignupPage" className={css.signupLink}>
       <span className={css.signup}>
         <FormattedMessage id="TopbarDesktop.signup" />
@@ -124,7 +117,7 @@ const TopbarDesktop = props => {
     </NamedLink>
   );
 
-  const loginLink = isAuthenticatedOrJustHydrated ? null : (
+  const loginLink = isAuthenticated ? null : (
     <NamedLink name="LoginPage" className={css.loginLink}>
       <span className={css.login}>
         <FormattedMessage id="TopbarDesktop.login" />
@@ -141,16 +134,20 @@ const TopbarDesktop = props => {
           alt={intl.formatMessage({ id: 'TopbarDesktop.logo' })}
         />
       </NamedLink>
-      {search}
-      <NamedLink className={css.createListingLink} name="NewListingPage">
-        <span className={css.createListing}>
-          <FormattedMessage id="TopbarDesktop.createListing" />
-        </span>
-      </NamedLink>
-      {inboxLink}
-      {profileMenu}
-      {signupLink}
-      {loginLink}
+      <div>
+        {/* {search} */}
+        <NamedLink className={css.createListingLink} name="NewListingPage">
+          {/* <span className={css.createListing}> */}
+          <span className={css.requestDemo}>
+            {/* <FormattedMessage id="TopbarDesktop.createListing" /> */}
+            <FormattedMessage id="Request a Demo"/>
+          </span>
+        </NamedLink>
+        {inboxLink}
+        {profileMenu}
+        {signupLink}
+        {loginLink}
+      </div>
     </nav>
   );
 };
