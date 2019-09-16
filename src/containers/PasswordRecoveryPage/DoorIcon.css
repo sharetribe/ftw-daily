@@ -1,10 +1,10 @@
 @import '../../marketplace.css';
 
 .stroke {
-  stroke: var(--marketplaceSecondaryColor);
+  stroke: var(--marketplaceColor);
 }
 
 .strokeAndFill {
-  fill: var(--marketplaceSecondaryColor);
-  stroke: var(--marketplaceSecondaryColor);
+  stroke: var(--marketplaceColor);
+  fill: var(--marketplaceColor);
 }
