@@ -38,7 +38,6 @@ class SearchFiltersMobileComponent extends Component {
     this.initialValue = this.initialValue.bind(this);
     this.initialValues = this.initialValues.bind(this);
     this.initialPriceRangeValue = this.initialPriceRangeValue.bind(this);
-    this.initialRangeValues = this.initialRangeValues.bind(this);
     this.initialDateRangeValue = this.initialDateRangeValue.bind(this);
   }
 

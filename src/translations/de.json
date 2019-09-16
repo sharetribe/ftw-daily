@@ -1056,5 +1056,8 @@
   "TransactionPanel.sendingMessageNotAllowed": "Dieser Benutzer wurde gelöscht. Es ist nicht mehr möglich, diesem Benutzer eine Nachricht zu schicken.",
   "UserDisplayName.banned": "Gesperrter Benutzer",
   "UserDisplayName.deleted": "Gelöschter Benutzer",
-  "RangeFilter.labelSelectedButton": "{minValue} - {maxValue}"
+  "RangeFilter.labelSelectedButton": "{minValue} - {maxValue}",
+  "TransactionPanel.backButtonLabel": "Zurück",
+  "SearchFilter.typeHeightValue": "cm",
+  "SearchFilter.typeAgeValue": "Jahre"
 }

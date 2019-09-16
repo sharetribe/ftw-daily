@@ -213,6 +213,7 @@ const SearchFiltersComponent = props => {
       rangeFilterFormLabelId="SearchFilters.ageLabel"
       {...ageFilter.config}
       initialValues={initialAge}
+      valueTypeLabelId="SearchFilter.typeAgeValue"
       contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
     />
   ) : null;
@@ -240,6 +241,7 @@ const SearchFiltersComponent = props => {
       rangeFilterFormLabelId="SearchFilters.hightLabel"
       {...hightFilter.config}
       initialValues={initialHight}
+      valueTypeLabelId="SearchFilter.typeHeightValue"
       contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
     />
   ) : null;

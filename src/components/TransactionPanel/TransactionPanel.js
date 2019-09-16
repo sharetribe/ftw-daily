@@ -342,7 +342,7 @@ export class TransactionPanelComponent extends Component {
         <div className={css.container}>
           <div className={css.txInfo}>
             <button class={css.backBtn} onClick={this.goBack}>
-              Go back
+              <FormattedMessage id="TransactionPanel.backButtonLabel" />
             </button>
             <DetailCardImage
               rootClassName={css.imageWrapperMobile}

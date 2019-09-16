@@ -95,7 +95,9 @@ class RangeFilterPopup extends Component {
       intl,
       buttonLabelId,
       rangeFilterFormLabelId,
+      valueTypeLabelId,
     } = this.props;
+    console.log(123123, valueTypeLabelId);
     const classes = classNames(rootClassName || css.root, className);
     const { minValue, maxValue } = initialValues || {};
 
@@ -106,8 +108,8 @@ class RangeFilterPopup extends Component {
       ? intl.formatMessage(
           { id: 'RangeFilter.labelSelectedButton' },
           {
-            minValue: `${intl.formatMessage({ id: buttonLabelId })} ${minValue}`,
-            maxValue: `${intl.formatMessage({ id: buttonLabelId })} ${maxValue}`,
+            minValue: `${minValue} ${intl.formatMessage({ id: valueTypeLabelId })} `,
+            maxValue: `${maxValue} ${intl.formatMessage({ id: valueTypeLabelId })}`,
           }
         )
       : intl.formatMessage({ id: buttonLabelId });
