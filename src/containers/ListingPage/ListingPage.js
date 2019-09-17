@@ -47,7 +47,7 @@ import SectionAvatar from './SectionAvatar';
 import SectionHeading from './SectionHeading';
 import SectionDescriptionMaybe from './SectionDescriptionMaybe';
 import SectionFeaturesMaybe from './SectionFeaturesMaybe';
-import SectionReviews from './SectionReviews';
+// import SectionReviews from './SectionReviews';
 import SectionHostMaybe from './SectionHostMaybe';
 import SectionRulesMaybe from './SectionRulesMaybe';
 import SectionMapMaybe from './SectionMapMaybe';
@@ -182,8 +182,8 @@ export class ListingPageComponent extends Component {
       location,
       scrollingDisabled,
       showListingError,
-      reviews,
-      fetchReviewsError,
+      // reviews,
+      // fetchReviewsError,
       sendEnquiryInProgress,
       sendEnquiryError,
       timeSlots,
@@ -447,8 +447,8 @@ export class ListingPageComponent extends Component {
                     publicData={publicData}
                     listingId={currentListing.id}
                   />
-                  <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
-                  
+                  {/* <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} /> */}
+
                 </div>
                 <BookingPanel
                   className={css.bookingPanel}
@@ -480,8 +480,8 @@ ListingPageComponent.defaultProps = {
   currentUser: null,
   enquiryModalOpenForListingId: null,
   showListingError: null,
-  reviews: [],
-  fetchReviewsError: null,
+  // reviews: [],
+  // fetchReviewsError: null,
   timeSlots: null,
   fetchTimeSlotsError: null,
   sendEnquiryError: null,
@@ -517,8 +517,8 @@ ListingPageComponent.propTypes = {
   enquiryModalOpenForListingId: string,
   showListingError: propTypes.error,
   callSetInitialValues: func.isRequired,
-  reviews: arrayOf(propTypes.review),
-  fetchReviewsError: propTypes.error,
+  // reviews: arrayOf(propTypes.review),
+  // fetchReviewsError: propTypes.error,
   timeSlots: arrayOf(propTypes.timeSlot),
   fetchTimeSlotsError: propTypes.error,
   sendEnquiryInProgress: bool.isRequired,
@@ -534,8 +534,8 @@ const mapStateToProps = state => {
   const { isAuthenticated } = state.Auth;
   const {
     showListingError,
-    reviews,
-    fetchReviewsError,
+    // reviews,
+    // fetchReviewsError,
     timeSlots,
     fetchTimeSlotsError,
     sendEnquiryInProgress,
@@ -564,8 +564,8 @@ const mapStateToProps = state => {
     scrollingDisabled: isScrollingDisabled(state),
     enquiryModalOpenForListingId,
     showListingError,
-    reviews,
-    fetchReviewsError,
+    // reviews,
+    // fetchReviewsError,
     timeSlots,
     fetchTimeSlotsError,
     sendEnquiryInProgress,
