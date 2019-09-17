@@ -20,9 +20,11 @@ way to update this template, but currently, we follow a pattern:
   `SearchMapWithGoogleMap` to abide to React rules and do not `unmountComponentAtNode` when a
   component is rendered by React and use `appendChild` on `onAdd` instead of `draw` to
   [improve performance](https://github.com/tomchentw/react-google-maps/issues/817).
+  [#1200](https://github.com/sharetribe/flex-template-web/pull/1200)
 - [fix] fix `CustomOverlayView` in `SearchMapWithGoogleMap` to work with new `react-intl` version,
   overriding `render` method to render child object by using `createPortal` instead of
   `unstable_renderSubtreeIntoContainer`.
+  [#1200](https://github.com/sharetribe/flex-template-web/pull/1200)
 
 ## [v3.5.0] 2019-08-29
 
