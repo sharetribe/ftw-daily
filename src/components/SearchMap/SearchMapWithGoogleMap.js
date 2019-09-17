@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import invariant from 'invariant';
 import { arrayOf, func, node, number, oneOfType, shape, string } from 'prop-types';
 import isEqual from 'lodash/isEqual';
 import { withGoogleMap, GoogleMap, OverlayView } from 'react-google-maps';
@@ -86,12 +88,46 @@ export const isMapsLibLoaded = () =>
  * https://github.com/tomchentw/react-google-maps/issues/482
  */
 class CustomOverlayView extends OverlayView {
+  onRemove() {
+    this.containerElement.parentNode.removeChild(this.containerElement);
+    //Remove `unmountComponentAtNode` for react version 16
+    //I decided to keep the code here incase React decides not to give out warning when `unmountComponentAtNode` in newer version
+    if (!React.version.match(/^16/)) {
+      ReactDOM.unmountComponentAtNode(this.containerElement);
+    }
+    this.containerElement = null;
+  }
+
+  onAdd() {
+    this.containerElement = document.createElement(`div`);
+    this.containerElement.style.position = `absolute`;
+
+    const { mapPaneName } = this.props;
+    invariant(
+      !!mapPaneName,
+      `OverlayView requires either props.mapPaneName or props.defaultMapPaneName but got %s`,
+      mapPaneName
+    );
+
+    const mapPanes = this.state[OVERLAY_VIEW].getPanes();
+    mapPanes[mapPaneName].appendChild(this.containerElement);
+    this.onPositionElement();
+    this.forceUpdate();
+  }
+
+  render() {
+    if (React.version.match(/^16/) && this.containerElement) {
+      return ReactDOM.createPortal(React.Children.only(this.props.children), this.containerElement);
+    }
+    return false;
+  }
+
   draw() {
     // https://developers.google.com/maps/documentation/javascript/3.exp/reference#MapPanes
     const mapPanes = this.state[OVERLAY_VIEW].getPanes();
     // Add conditional to ensure panes and container exist before drawing
     if (mapPanes && this.containerElement) {
-      super.draw();
+      this.onPositionElement();
     }
   }
 }
