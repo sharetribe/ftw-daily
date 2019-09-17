@@ -16,8 +16,13 @@ way to update this template, but currently, we follow a pattern:
 
 ## [v3.5.1] 2019-09-16
 
-- [add] add orverriding function `onAdd` and `onRemove` for `CustomOverlayView` in `SearchMapWithGoogleMap` to abide to React rules and do not `unmountComponentAtNode` when a component is rendered by React and use `appendChild` on `onAdd` instead of `draw` to [improve performance](https://github.com/tomchentw/react-google-maps/issues/817).
-- [fix] fix `CustomOverlayView` in `SearchMapWithGoogleMap` to work with new `react-intl` version, overriding `render` method to render child object by using `createPortal` instead of `unstable_renderSubtreeIntoContainer`.
+- [add] add orverriding function `onAdd` and `onRemove` for `CustomOverlayView` in
+  `SearchMapWithGoogleMap` to abide to React rules and do not `unmountComponentAtNode` when a
+  component is rendered by React and use `appendChild` on `onAdd` instead of `draw` to
+  [improve performance](https://github.com/tomchentw/react-google-maps/issues/817).
+- [fix] fix `CustomOverlayView` in `SearchMapWithGoogleMap` to work with new `react-intl` version,
+  overriding `render` method to render child object by using `createPortal` instead of
+  `unstable_renderSubtreeIntoContainer`.
 
 ## [v3.5.0] 2019-08-29
 

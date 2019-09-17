@@ -88,7 +88,6 @@ export const isMapsLibLoaded = () =>
  * https://github.com/tomchentw/react-google-maps/issues/482
  */
 class CustomOverlayView extends OverlayView {
-
   onRemove() {
     this.containerElement.parentNode.removeChild(this.containerElement);
     //Remove `unmountComponentAtNode` for react version 16
@@ -118,10 +117,7 @@ class CustomOverlayView extends OverlayView {
 
   render() {
     if (React.version.match(/^16/) && this.containerElement) {
-      return ReactDOM.createPortal(
-        React.Children.only(this.props.children),
-        this.containerElement
-      );
+      return ReactDOM.createPortal(React.Children.only(this.props.children), this.containerElement);
     }
     return false;
   }
