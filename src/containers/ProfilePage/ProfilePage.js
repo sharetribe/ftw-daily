@@ -21,7 +21,7 @@ import {
   AvatarLarge,
   NamedLink,
   ListingCard,
-  Reviews,
+  // Reviews,
   ButtonTabNavHorizontal,
 } from '../../components';
 import { TopbarContainer, NotFoundPage } from '../../containers';
@@ -34,29 +34,29 @@ const { UUID } = sdkTypes;
 const MAX_MOBILE_SCREEN_WIDTH = 768;
 
 export class ProfilePageComponent extends Component {
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    this.state = {
-      // keep track of which reviews tab to show in desktop viewport
-      showReviewsType: REVIEW_TYPE_OF_PROVIDER,
-    };
+  //   this.state = {
+  //     // keep track of which reviews tab to show in desktop viewport
+  //     showReviewsType: REVIEW_TYPE_OF_PROVIDER,
+  //   };
 
-    this.showOfProviderReviews = this.showOfProviderReviews.bind(this);
-    this.showOfCustomerReviews = this.showOfCustomerReviews.bind(this);
-  }
+  //   this.showOfProviderReviews = this.showOfProviderReviews.bind(this);
+  //   this.showOfCustomerReviews = this.showOfCustomerReviews.bind(this);
+  // }
 
-  showOfProviderReviews() {
-    this.setState({
-      showReviewsType: REVIEW_TYPE_OF_PROVIDER,
-    });
-  }
+  // showOfProviderReviews() {
+  //   this.setState({
+  //     showReviewsType: REVIEW_TYPE_OF_PROVIDER,
+  //   });
+  // }
 
-  showOfCustomerReviews() {
-    this.setState({
-      showReviewsType: REVIEW_TYPE_OF_CUSTOMER,
-    });
-  }
+  // showOfCustomerReviews() {
+  //   this.setState({
+  //     showReviewsType: REVIEW_TYPE_OF_CUSTOMER,
+  //   });
+  // }
 
   render() {
     const {
@@ -66,8 +66,8 @@ export class ProfilePageComponent extends Component {
       userShowError,
       queryListingsError,
       listings,
-      reviews,
-      queryReviewsError,
+      // reviews,
+      // queryReviewsError,
       viewport,
       intl,
     } = this.props;
@@ -98,16 +98,16 @@ export class ProfilePageComponent extends Component {
       <div className={css.asideContent}>
         <div className={css.avatarContainer}>
           <AvatarLarge className={css.avatar} user={user} disableProfileLink />
-          {userType && (userType=="coach") ? 
-            (<h3 className={css.accountTypeBadge}><FormattedMessage id="ProfileSettingsPage.providerTypeName"/></h3>) : ""}
+          {userType && (userType == "coach") ?
+            (<h3 className={css.accountTypeBadge}><FormattedMessage id="ProfileSettingsPage.providerTypeName" /></h3>) : ""}
         </div>
-        
+
         <h1 className={css.mobileHeading}>
           {displayName ? (
             <FormattedMessage id="ProfilePage.mobileHeading" values={{ name: displayName }} />
           ) : null}
         </h1>
-        
+
         {editLinkMobile}
         {editLinkDesktop}
       </div>
@@ -117,77 +117,77 @@ export class ProfilePageComponent extends Component {
       [css.withBioMissingAbove]: !hasBio,
     });
 
-    const reviewsError = (
-      <p className={css.error}>
-        <FormattedMessage id="ProfilePage.loadingReviewsFailed" />
-      </p>
-    );
+    // const reviewsError = (
+    //   <p className={css.error}>
+    //     <FormattedMessage id="ProfilePage.loadingReviewsFailed" />
+    //   </p>
+    // );
 
-    const reviewsOfProvider = reviews.filter(r => r.attributes.type === REVIEW_TYPE_OF_PROVIDER);
+    // const reviewsOfProvider = reviews.filter(r => r.attributes.type === REVIEW_TYPE_OF_PROVIDER);
 
-    const reviewsOfCustomer = reviews.filter(r => r.attributes.type === REVIEW_TYPE_OF_CUSTOMER);
+    // const reviewsOfCustomer = reviews.filter(r => r.attributes.type === REVIEW_TYPE_OF_CUSTOMER);
 
-    const mobileReviews = (
-      <div className={css.mobileReviews}>
-        <h2 className={css.mobileReviewsTitle}>
-          <FormattedMessage
-            id="ProfilePage.reviewsOfProviderTitle"
-            values={{ count: reviewsOfProvider.length }}
-          />
-        </h2>
-        {queryReviewsError ? reviewsError : null}
-        <Reviews reviews={reviewsOfProvider} />
-        <h2 className={css.mobileReviewsTitle}>
-          <FormattedMessage
-            id="ProfilePage.reviewsOfCustomerTitle"
-            values={{ count: reviewsOfCustomer.length }}
-          />
-        </h2>
-        {queryReviewsError ? reviewsError : null}
-        <Reviews reviews={reviewsOfCustomer} />
-      </div>
-    );
+    // const mobileReviews = (
+    //   <div className={css.mobileReviews}>
+    //     <h2 className={css.mobileReviewsTitle}>
+    //       <FormattedMessage
+    //         id="ProfilePage.reviewsOfProviderTitle"
+    //         values={{ count: reviewsOfProvider.length }}
+    //       />
+    //     </h2>
+    //     {queryReviewsError ? reviewsError : null}
+    //     <Reviews reviews={reviewsOfProvider} />
+    //     <h2 className={css.mobileReviewsTitle}>
+    //       <FormattedMessage
+    //         id="ProfilePage.reviewsOfCustomerTitle"
+    //         values={{ count: reviewsOfCustomer.length }}
+    //       />
+    //     </h2>
+    //     {queryReviewsError ? reviewsError : null}
+    //     <Reviews reviews={reviewsOfCustomer} />
+    //   </div>
+    // );
 
-    const desktopReviewTabs = [
-      {
-        text: (
-          <h3 className={css.desktopReviewsTitle}>
-            <FormattedMessage
-              id="ProfilePage.reviewsOfProviderTitle"
-              values={{ count: reviewsOfProvider.length }}
-            />
-          </h3>
-        ),
-        selected: this.state.showReviewsType === REVIEW_TYPE_OF_PROVIDER,
-        onClick: this.showOfProviderReviews,
-      },
-      {
-        text: (
-          <h3 className={css.desktopReviewsTitle}>
-            <FormattedMessage
-              id="ProfilePage.reviewsOfCustomerTitle"
-              values={{ count: reviewsOfCustomer.length }}
-            />
-          </h3>
-        ),
-        selected: this.state.showReviewsType === REVIEW_TYPE_OF_CUSTOMER,
-        onClick: this.showOfCustomerReviews,
-      },
-    ];
+    // const desktopReviewTabs = [
+    //   {
+    //     text: (
+    //       <h3 className={css.desktopReviewsTitle}>
+    //         <FormattedMessage
+    //           id="ProfilePage.reviewsOfProviderTitle"
+    //           values={{ count: reviewsOfProvider.length }}
+    //         />
+    //       </h3>
+    //     ),
+    //     selected: this.state.showReviewsType === REVIEW_TYPE_OF_PROVIDER,
+    //     onClick: this.showOfProviderReviews,
+    //   },
+    //   {
+    //     text: (
+    //       <h3 className={css.desktopReviewsTitle}>
+    //         <FormattedMessage
+    //           id="ProfilePage.reviewsOfCustomerTitle"
+    //           values={{ count: reviewsOfCustomer.length }}
+    //         />
+    //       </h3>
+    //     ),
+    //     selected: this.state.showReviewsType === REVIEW_TYPE_OF_CUSTOMER,
+    //     onClick: this.showOfCustomerReviews,
+    //   },
+    // ];
 
-    const desktopReviews = (
-      <div className={css.desktopReviews}>
-        <ButtonTabNavHorizontal className={css.desktopReviewsTabNav} tabs={desktopReviewTabs} />
+    // const desktopReviews = (
+    //   <div className={css.desktopReviews}>
+    //     <ButtonTabNavHorizontal className={css.desktopReviewsTabNav} tabs={desktopReviewTabs} />
 
-        {queryReviewsError ? reviewsError : null}
+    //     {queryReviewsError ? reviewsError : null}
 
-        {this.state.showReviewsType === REVIEW_TYPE_OF_PROVIDER ? (
-          <Reviews reviews={reviewsOfProvider} />
-        ) : (
-          <Reviews reviews={reviewsOfCustomer} />
-        )}
-      </div>
-    );
+    //     {this.state.showReviewsType === REVIEW_TYPE_OF_PROVIDER ? (
+    //       <Reviews reviews={reviewsOfProvider} />
+    //     ) : (
+    //         <Reviews reviews={reviewsOfCustomer} />
+    //       )}
+    //   </div>
+    // );
 
     const mainContent = (
       <div>
@@ -212,7 +212,7 @@ export class ProfilePageComponent extends Component {
             </ul>
           </div>
         ) : null}
-        {isMobileLayout ? mobileReviews : desktopReviews}
+        {/* {isMobileLayout ? mobileReviews : desktopReviews} */}
       </div>
     );
 
@@ -270,8 +270,8 @@ ProfilePageComponent.defaultProps = {
   user: null,
   userShowError: null,
   queryListingsError: null,
-  reviews: [],
-  queryReviewsError: null,
+  // reviews: [],
+  // queryReviewsError: null,
 };
 
 const { bool, arrayOf, number, shape } = PropTypes;
@@ -283,8 +283,8 @@ ProfilePageComponent.propTypes = {
   userShowError: propTypes.error,
   queryListingsError: propTypes.error,
   listings: arrayOf(propTypes.listing).isRequired,
-  reviews: arrayOf(propTypes.review),
-  queryReviewsError: propTypes.error,
+  // reviews: arrayOf(propTypes.review),
+  // queryReviewsError: propTypes.error,
 
   // form withViewport
   viewport: shape({
@@ -303,8 +303,8 @@ const mapStateToProps = state => {
     userShowError,
     queryListingsError,
     userListingRefs,
-    reviews,
-    queryReviewsError,
+    // reviews,
+    // queryReviewsError,
   } = state.ProfilePage;
   const userMatches = getMarketplaceEntities(state, [{ type: 'user', id: userId }]);
   const user = userMatches.length === 1 ? userMatches[0] : null;
@@ -316,8 +316,8 @@ const mapStateToProps = state => {
     userShowError,
     queryListingsError,
     listings,
-    reviews,
-    queryReviewsError,
+    // reviews,
+    // queryReviewsError,
   };
 };
 
