@@ -97,7 +97,6 @@ class RangeFilterPopup extends Component {
       rangeFilterFormLabelId,
       valueTypeLabelId,
     } = this.props;
-    console.log(123123, valueTypeLabelId);
     const classes = classNames(rootClassName || css.root, className);
     const { minValue, maxValue } = initialValues || {};
 

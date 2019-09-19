@@ -393,13 +393,13 @@ class SearchFiltersMobileComponent extends Component {
           </div>
           {this.state.isFiltersOpenOnMobile ? (
             <div className={css.filtersWrapper}>
-              {genderFilterElement}
-              {ageFilterElement}
-              {breedFilterElement}
-              {hightFilterElement}
-              {colorFilterElement}
-              {mainDisciplineFilterElement}
               {priceFilterElement}
+              {hightFilterElement}
+              {ageFilterElement}
+              {mainDisciplineFilterElement}
+              {breedFilterElement}
+              {colorFilterElement}
+              {genderFilterElement}
             </div>
           ) : null}
 
