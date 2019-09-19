@@ -3,6 +3,7 @@ import { string } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { NamedLink } from '../../components';
+import video from '../../videos/logo.mp4';
 
 import css from './SectionHero.css';
 
@@ -32,7 +33,7 @@ const SectionHero = props => {
         </NamedLink>
         <div className={css.heroVideoContainer}>
           <video width="300" height="146" autoPlay="true">
-            <source src="/videos/logo.mp4" type="video/mp4" />
+            <source src={video} type="video/mp4" />
           </video>
         </div>
       </div>
