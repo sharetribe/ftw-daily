@@ -10,7 +10,7 @@
     since browsers support CSS Properties already.
  */
 
-  --SectionHero_desktopTitleMaxWidth: 625px;
+  --SectionHero_desktopTitleMaxWidth: 100%;
 
   --SectionHero_animation: {
     animation-name: animationTitle;
@@ -40,7 +40,8 @@
 }
 
 .root {
-  @apply --backgroundImage;
+  /* @apply --backgroundImage; */
+  background: white;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -72,7 +73,7 @@
 
 .heroMainTitle {
   @apply --marketplaceHeroTitleFontStyles;
-  color: var(--matterColorLight);
+  color: var(--matterColorDark);
 
   @apply --SectionHero_animation;
   animation-delay: 0.5s;
@@ -85,7 +86,7 @@
 .heroSubTitle {
   @apply --marketplaceBodyFontStyles;
 
-  color: var(--matterColorLight);
+  color: var(--matterColor);
   margin: 0 0 32px 0;
 
   @apply --SectionHero_animation;
@@ -94,6 +95,15 @@
   @media (--viewportMedium) {
     max-width: var(--SectionHero_desktopTitleMaxWidth);
     margin: 0 0 63px 0;
+  }
+}
+
+.heroVideoContainer {
+  position: absolute;
+  right: 0;
+  margin-top: -120px;
+  @media only screen and (max-width: 768px) {
+    margin-top: -420px;
   }
 }
 

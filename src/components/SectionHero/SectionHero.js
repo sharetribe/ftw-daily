@@ -30,6 +30,11 @@ const SectionHero = props => {
         >
           <FormattedMessage id="SectionHero.browseButton" />
         </NamedLink>
+        <div className={css.heroVideoContainer}>
+          <video width="300" height="146" autoPlay="true">
+            <source src="/videos/logo.mp4" type="video/mp4" />
+          </video>
+        </div>
       </div>
     </div>
   );
