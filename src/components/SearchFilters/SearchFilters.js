@@ -226,7 +226,7 @@ const SearchFiltersComponent = props => {
       label={breedLabel}
       options={breedFilter.options}
       initialValues={initialBreed}
-      twoColumns
+      threeColumns
       {...filterElementProps}
     />
   ) : null;
@@ -254,7 +254,7 @@ const SearchFiltersComponent = props => {
       label={colorLabel}
       options={colorFilter.options}
       initialValues={initialColor}
-      twoColumns
+      threeColumns
       {...filterElementProps}
     />
   ) : null;
@@ -267,7 +267,7 @@ const SearchFiltersComponent = props => {
       label={mainDisciplineLabel}
       options={mainDisciplineFilter.options}
       initialValues={initialMainDiscipline}
-      twoColumns
+      threeColumns
       {...filterElementProps}
     />
   ) : null;

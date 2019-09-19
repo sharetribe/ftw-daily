@@ -11,10 +11,10 @@ import css from './SelectMultipleFilter.css';
 // TODO: Live edit didn't work with FieldCheckboxGroup
 //       There's a mutation problem: formstate.dirty is not reliable with it.
 const GroupOfFieldCheckboxes = props => {
-  const { id, className, name, options, twoColumns } = props;
+  const { id, className, name, options, threeColumns } = props;
   return (
     <fieldset className={className}>
-      <ul className={classNames(css.list, twoColumns && css.twoColumns)}>
+      <ul className={classNames(css.list, threeColumns && css.threeColumns)}>
         {options.map((option, index) => {
           const fieldId = `${id}.${option.key}`;
           return (
@@ -80,7 +80,7 @@ class SelectMultipleFilter extends Component {
       urlParam,
       intl,
       showAsPopup,
-      twoColumns,
+      threeColumns,
       ...rest
     } = this.props;
 
@@ -133,7 +133,7 @@ class SelectMultipleFilter extends Component {
           name={name}
           id={`${id}-checkbox-group`}
           options={options}
-          twoColumns={twoColumns}
+          threeColumns={threeColumns}
         />
       </FilterPopup>
     ) : (
@@ -155,7 +155,7 @@ class SelectMultipleFilter extends Component {
           name={name}
           id={`${id}-checkbox-group`}
           options={options}
-          twoColumns={twoColumns}
+          threeColumns={threeColumns}
         />
       </FilterPlain>
     );
@@ -167,7 +167,7 @@ SelectMultipleFilter.defaultProps = {
   className: null,
   initialValues: [],
   contentPlacementOffset: 0,
-  twoColumns: false,
+  threeColumns: false,
 };
 
 SelectMultipleFilter.propTypes = {
@@ -181,7 +181,7 @@ SelectMultipleFilter.propTypes = {
   options: array.isRequired,
   initialValues: arrayOf(string),
   contentPlacementOffset: number,
-  twoColumns: bool,
+  threeColumns: bool,
   // form injectIntl
   intl: intlShape.isRequired,
 };
