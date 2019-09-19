@@ -6,6 +6,7 @@ import { NamedLink } from '../../components';
 import video from '../../videos/logo.mp4';
 import videoWebm from '../../videos/logo.webm';
 import videoOgg from '../../videos/logo.ogg';
+import videoPoster from '../../videos/logo.png';
 
 import css from './SectionHero.css';
 
@@ -34,7 +35,7 @@ const SectionHero = props => {
           <FormattedMessage id="SectionHero.browseButton" />
         </NamedLink>
         <div className={css.heroVideoContainer}>
-          <video width="300" height="146" autoPlay="true">
+          <video poster={videoPoster} width="300" height="146" autoPlay="true">
             <source src={video} type="video/mp4" />
             <source src={videoWebm} type="video/webm" />
             <source src={videoOgg} type="video/ogg" />

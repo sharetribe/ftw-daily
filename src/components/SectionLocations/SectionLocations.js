@@ -81,6 +81,12 @@ const SectionLocations = props => {
           '?address=Kinsale%2C%20Ireland&bounds=51.759218%2C-8.450977%2C51.670687%2C-8.612987&origin=51.7075%2C-8.53056'
         )}
       </div>
+      <div className={css.locationRequest}>
+        Don’t see your area?{' '}
+        <a className={css.locationRequestLink} href="/" title="Request your area" target="_blank">
+          Request your location is added
+        </a>
+      </div>
     </div>
   );
 };

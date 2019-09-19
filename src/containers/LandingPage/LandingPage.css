@@ -36,9 +36,10 @@
   }
 
   @media (--viewportLarge) {
-    max-height: 800px;
-    min-height: 600px;
-    height: calc(70vh - var(--topbarHeightDesktop));
+    max-height: 600px;
+    min-height: 460px;
+
+    height: calc(65vh - var(--topbarHeightDesktop));
   }
 }
 

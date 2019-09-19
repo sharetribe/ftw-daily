@@ -44,7 +44,9 @@
   background: white;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  border-radius: 4px;
+  width: 95%;
+  margin: 2.5%;
   height: 100%;
 
   /* Text positioning is done with paddings */
@@ -52,7 +54,7 @@
 
 .heroContent {
   margin: 0 24px 0 24px;
-
+  background: white;
   @media (--viewportMedium) {
     margin: 0 7.5vw 0 7.5vw;
   }
@@ -73,8 +75,8 @@
 
 .heroMainTitle {
   @apply --marketplaceHeroTitleFontStyles;
-  color: var(--matterColorDark);
-
+  color: var(--marketplaceColor);
+  margin-top: 0;
   @apply --SectionHero_animation;
   animation-delay: 0.5s;
 
@@ -100,8 +102,8 @@
 
 .heroVideoContainer {
   position: absolute;
-  right: 0;
-  margin-top: -120px;
+  right: 2.5%;
+  margin-top: -105px;
   @media only screen and (max-width: 768px) {
     margin-top: -420px;
   }
