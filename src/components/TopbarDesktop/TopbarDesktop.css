@@ -68,7 +68,7 @@
   height: 100%;
 
   @media (--viewportLarge) {
-    padding: 21px 36px 21px 36px;
+    padding: 15px 36px;
   }
 }
 
