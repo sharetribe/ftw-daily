@@ -32,6 +32,8 @@ const initialState = {
 const resultIds = data => data.data.map(l => l.id);
 
 const listingPageReducer = (state = initialState, action = {}) => {
+  console.log("type", action.type)
+  console.log("payload", action.payload)
   const { type, payload } = action;
   switch (type) {
     case SEARCH_LISTINGS_REQUEST:
@@ -120,15 +122,15 @@ export const searchMapListingsError = e => ({
 
 export const searchListings = searchParams => (dispatch, getState, sdk) => {
   dispatch(searchListingsRequest(searchParams));
-  
+
   const priceSearchParams = priceParam => {
     const inSubunits = value =>
       convertUnitToSubUnit(value, unitDivisor(config.currencyConfig.currency));
     const values = priceParam ? priceParam.split(',') : [];
     return priceParam && values.length === 2
       ? {
-          price: [inSubunits(values[0]), inSubunits(values[1]) + 1].join(','),
-        }
+        price: [inSubunits(values[0]), inSubunits(values[1]) + 1].join(','),
+      }
       : {};
   };
 
@@ -142,11 +144,11 @@ export const searchListings = searchParams => (dispatch, getState, sdk) => {
 
     return hasValues
       ? {
-          start: formatDateStringToUTC(startDate),
-          end: formatDateStringToUTC(endDate),
-          // Availability can be full or partial. Default value is full.
-          availability: 'partial',
-        }
+        start: formatDateStringToUTC(startDate),
+        end: formatDateStringToUTC(endDate),
+        // Availability can be full or partial. Default value is full.
+        availability: 'partial',
+      }
       : {};
   };
 
@@ -161,15 +163,14 @@ export const searchListings = searchParams => (dispatch, getState, sdk) => {
     per_page: perPage,
   };
 
-  console.log(params);
   return sdk.listings
     .query(params)
     .then(response => {
       dispatch(addMarketplaceEntities(response));
       dispatch(searchListingsSuccess(response));
-      console.log(response);
+      console.log("sdk response ", response);
       return response;
-      
+
     })
     .catch(e => {
       dispatch(searchListingsError(storableError(e)));

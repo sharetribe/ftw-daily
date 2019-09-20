@@ -232,6 +232,7 @@ export class SearchPageComponent extends Component {
               dateRangeFilter: filters.dateRangeFilter,
               keywordFilter: filters.keywordFilter,
             }}
+
           />
           <ModalInMobile
             className={css.mapPanel}
