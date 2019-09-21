@@ -32,8 +32,6 @@ const initialState = {
 const resultIds = data => data.data.map(l => l.id);
 
 const listingPageReducer = (state = initialState, action = {}) => {
-  console.log("type", action.type)
-  console.log("payload", action.payload)
   const { type, payload } = action;
   switch (type) {
     case SEARCH_LISTINGS_REQUEST:
@@ -97,6 +95,7 @@ export const searchListingsRequest = searchParams => ({
 });
 
 export const searchListingsSuccess = response => ({
+
   type: SEARCH_LISTINGS_SUCCESS,
   payload: { data: response.data },
 });
@@ -166,9 +165,9 @@ export const searchListings = searchParams => (dispatch, getState, sdk) => {
   return sdk.listings
     .query(params)
     .then(response => {
+
       dispatch(addMarketplaceEntities(response));
       dispatch(searchListingsSuccess(response));
-      console.log("sdk response ", response);
       return response;
 
     })

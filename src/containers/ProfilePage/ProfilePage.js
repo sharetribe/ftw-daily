@@ -98,16 +98,16 @@ export class ProfilePageComponent extends Component {
       <div className={css.asideContent}>
         <div className={css.avatarContainer}>
           <AvatarLarge className={css.avatar} user={user} disableProfileLink />
-          {userType && (userType=="coach") ? 
-            (<h3 className={css.accountTypeBadge}><FormattedMessage id="ProfileSettingsPage.providerTypeName"/></h3>) : ""}
+          {userType && (userType == "coach") ?
+            (<h3 className={css.accountTypeBadge}><FormattedMessage id="ProfileSettingsPage.providerTypeName" /></h3>) : ""}
         </div>
-        
+
         <h1 className={css.mobileHeading}>
           {displayName ? (
             <FormattedMessage id="ProfilePage.mobileHeading" values={{ name: displayName }} />
           ) : null}
         </h1>
-        
+
         {editLinkMobile}
         {editLinkDesktop}
       </div>
@@ -184,8 +184,8 @@ export class ProfilePageComponent extends Component {
         {this.state.showReviewsType === REVIEW_TYPE_OF_PROVIDER ? (
           <Reviews reviews={reviewsOfProvider} />
         ) : (
-          <Reviews reviews={reviewsOfCustomer} />
-        )}
+            <Reviews reviews={reviewsOfCustomer} />
+          )}
       </div>
     );
 
