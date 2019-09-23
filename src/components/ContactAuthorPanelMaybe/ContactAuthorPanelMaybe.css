@@ -47,3 +47,31 @@
     margin-top: 0;
   }
 }
+.contactAuthorTitle {
+  display: none;
+  @media (--viewportLarge){ 
+    display: block;
+  }
+}
+.priceValue {
+  display: block;
+  @apply --marketplaceH2FontStyles;
+  color: var(--matterColor);
+
+  margin-top: 0;
+  margin-bottom: 0px;
+  @media (--viewportLarge){ 
+    display: none;
+  }
+}
+.perUnit {
+  display: block;
+  @apply --marketplaceTinyFontStyles;
+  color: var(--matterColor);
+
+  margin-top: 0;
+  margin-bottom: 0px;
+  @media (--viewportLarge){ 
+    display: none;
+  }
+}

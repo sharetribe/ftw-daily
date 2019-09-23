@@ -445,7 +445,9 @@ export class ListingPageComponent extends Component {
                 <ContactAuthorPanelMaybe
                   author={currentListing.author}
                   onContactUser={this.onContactUser}
+                  unitType={unitType}
                   currentUser={currentUser}
+                  formattedPrice={formattedPrice}
                   className={css.bookingPanel}
                 />
               </div>
