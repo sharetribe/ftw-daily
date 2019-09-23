@@ -82,7 +82,7 @@ const Footer = props => {
                     </li>
                     <li className={css.listItem}>
                       <Link to="#" className={css.link}>
-                        Kostenlos anmelden <span className={css.greenLabel}>NEU</span>
+                        Kostenlos anmelden <span className={css.greenLabel}>Neu</span>
                       </Link>
                     </li>
                   </ul>
