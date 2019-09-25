@@ -36,7 +36,7 @@ Docs.
 
 ## Deploying to Heroku
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+Every push to master is automatically deployed to the [heroku site](https://rather-rent-ftw.herokuapp.com/)
 
 ## Documentation
 
