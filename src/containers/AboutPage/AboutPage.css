@@ -3,8 +3,12 @@
 .pageTitle {
   text-align: center;
 }
-
+.darkTheme{
+  background-color: var(--marketplaceColorDark);
+  color: var(--matterColorLight);
+}
 .staticPageWrapper {
+ 
   width: calc(100% - 48px);
   max-width: 1056px;
   margin: 24px auto;

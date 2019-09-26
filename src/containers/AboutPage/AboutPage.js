@@ -46,10 +46,10 @@ export class AboutPageComponent extends Component {
     return renderedData
   }
 
-  
+
   render() {
     const pageData = this.props.aboutPageData['body'];
-    
+
     let renderedData = this.renderData(pageData, this.staticPageRenderOptions);
     //let renderedHeading = renderedData[0];
     //let renderedBody = renderedData.shift();
@@ -64,14 +64,14 @@ export class AboutPageComponent extends Component {
           name: 'About page',
         }}
       >
-        <LayoutSingleColumn>
+        <LayoutSingleColumn className={css.darkTheme}>
           <LayoutWrapperTopbar>
             <TopbarContainer />
           </LayoutWrapperTopbar>
 
           <LayoutWrapperMain className={css.staticPageWrapper}>
             <div className={css.contentWrapper}>
-            {renderedData}  
+              {renderedData}
             </div>
           </LayoutWrapperMain>
 
@@ -83,7 +83,7 @@ export class AboutPageComponent extends Component {
     );
   }
 
-  
+
 };
 
 const mapStateToProps = state => {
