@@ -39,9 +39,9 @@ const initialPriceRangeValue = (queryParams, paramName) => {
 
   return !!price && valuesFromParams.length === 2
     ? {
-        minPrice: valuesFromParams[0],
-        maxPrice: valuesFromParams[1],
-      }
+      minPrice: valuesFromParams[0],
+      maxPrice: valuesFromParams[1],
+    }
     : null;
 };
 
@@ -52,8 +52,8 @@ const initialDateRangeValue = (queryParams, paramName) => {
   const initialValues =
     !!dates && valuesFromParams.length === 2
       ? {
-          dates: { startDate: valuesFromParams[0], endDate: valuesFromParams[1] },
-        }
+        dates: { startDate: valuesFromParams[0], endDate: valuesFromParams[1] },
+      }
       : { dates: null };
 
   return initialValues;
@@ -250,9 +250,7 @@ const SearchFiltersComponent = props => {
     <div className={classes}>
       <div className={css.filters}>
         {categoryFilterElement}
-        {amenitiesFilterElement}
         {priceFilterElement}
-        {dateRangeFilterElement}
         {keywordFilterElement}
         {toggleSearchFiltersPanelButton}
       </div>

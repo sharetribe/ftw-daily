@@ -62,8 +62,8 @@ export const ListingCardComponent = props => {
   const unitTranslationKey = isNightly
     ? 'ListingCard.perNight'
     : isDaily
-    ? 'ListingCard.perDay'
-    : 'ListingCard.perUnit';
+      ? 'ListingCard.perDay'
+      : 'ListingCard.perUnit';
 
   return (
     <NamedLink className={classes} name="ListingPage" params={{ id, slug }}>

@@ -14,7 +14,9 @@ import css from './EditListingDescriptionForm.css';
 const TITLE_MAX_LENGTH = 60;
 
 const EditListingDescriptionFormComponent = props => (
-  <FinalForm
+
+
+  < FinalForm
     {...props}
     render={fieldRenderProps => {
       const {
@@ -80,7 +82,7 @@ const EditListingDescriptionFormComponent = props => (
       const submitReady = updated && pristine;
       const submitInProgress = updateInProgress;
       const submitDisabled = invalid || disabled || submitInProgress;
-
+      console.log("hello", props)
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessageCreateListingDraft}

@@ -22,6 +22,7 @@ import css from './EditListingWizard.css';
 
 export const AVAILABILITY = 'availability';
 export const DESCRIPTION = 'description';
+export const CATEGORY = 'category';
 export const POLICY = 'policy';
 export const LOCATION = 'location';
 export const PRICING = 'pricing';
@@ -31,6 +32,7 @@ export const PHOTOS = 'photos';
 export const SUPPORTED_TABS = [
   DESCRIPTION,
   POLICY,
+  CATEGORY,
   LOCATION,
   PRICING,
   AVAILABILITY,
