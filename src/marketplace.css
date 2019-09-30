@@ -23,7 +23,7 @@
   --backgroundImage: {
     /* Gradient direction and overlaying the black color on top of the image for better readability */
     background: linear-gradient(-45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)),
-      url('../../assets/background-1440-2.jpg');
+      url('../../assets/background-1440-3.jpg');
 
     /* Add loading color for the div */
     background-color: var(--matterColor);
@@ -44,7 +44,8 @@
 
   --marketplaceColor: #8f2593;
   --marketplaceColorLight: #ff4c38;
-  --marketplaceColorDark: #8f2593;
+  /*--marketplaceColorDark: #8f2593;*/
+  --marketplaceColorDark: #7a217d;
 
   /* Used with inline CSS SVGs */
   --marketplaceColorEncoded: %23c0392b;
@@ -57,7 +58,7 @@
   --bannedColorDark: var(--marketplaceColor);
 
   --matterColorDark: #000000;
-  --matterColor: #4a4a4a;
+  --matterColor: #1a2b49;
   --matterColorAnti: #b2b2b2;
   --matterColorNegative: #e7e7e7;
   --matterColorBright: #fcfcfc;
