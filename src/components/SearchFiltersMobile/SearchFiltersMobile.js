@@ -193,7 +193,7 @@ class SearchFiltersMobileComponent extends Component {
       onManageDisableScrolling,
       selectedFiltersCount,
       categoryFilter,
-      amenitiesFilter,
+      typesFilter,
       priceFilter,
       dateRangeFilter,
       keywordFilter,
@@ -235,20 +235,23 @@ class SearchFiltersMobileComponent extends Component {
       />
     ) : null;
 
-    const amenitiesLabel = intl.formatMessage({ id: 'SearchFiltersMobile.amenitiesLabel' });
 
-    const initialAmenities = this.initialValues(amenitiesFilter.paramName);
 
-    const amenitiesFilterElement = amenitiesFilter ? (
+    const typesLabel = intl.formatMessage({ id: 'SearchFiltersMobile.typesLabel' });
+
+    const initialTypes = this.initialValues(typesFilter.paramName);
+
+
+    const typesFilterElement = typesFilter ? (
       <SelectMultipleFilter
-        id="SearchFiltersMobile.amenitiesFilter"
-        name="amenities"
-        urlParam={amenitiesFilter.paramName}
-        label={amenitiesLabel}
+        id="SearchFiltersMobile.typesFilter"
+        name="types"
+        urlParam={typesFilter.paramName}
+        label={typesLabel}
         onSubmit={this.handleSelectMultiple}
         liveEdit
-        options={amenitiesFilter.options}
-        initialValues={initialAmenities}
+        options={typesFilter.options}
+        initialValues={initialTypes}
       />
     ) : null;
 
@@ -331,7 +334,7 @@ class SearchFiltersMobileComponent extends Component {
             <div className={css.filtersWrapper}>
               {keywordFilterElement}
               {categoryFilterElement}
-              {amenitiesFilterElement}
+              {typesFilterElement}
               {priceFilterElement}
               {dateRangeFilterElement}
             </div>
@@ -356,7 +359,7 @@ SearchFiltersMobileComponent.defaultProps = {
   selectedFiltersCount: 0,
   filterParamNames: [],
   categoryFilter: null,
-  amenitiesFilter: null,
+  typesFilter: null,
   priceFilter: null,
   dateRangeFilter: null,
 };
@@ -376,7 +379,7 @@ SearchFiltersMobileComponent.propTypes = {
   selectedFiltersCount: number,
   filterParamNames: array,
   categoriesFilter: propTypes.filterConfig,
-  amenitiesFilter: propTypes.filterConfig,
+  typesFilter: propTypes.filterConfig,
   priceFilter: propTypes.filterConfig,
   dateRangeFilter: propTypes.filterConfig,
 

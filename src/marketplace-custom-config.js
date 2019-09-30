@@ -2,7 +2,7 @@
  * Marketplace specific configuration.
  */
 
-export const amenities = [
+export const types = [
   {
     key: 'towels',
     label: 'Towels',
@@ -38,11 +38,13 @@ export const amenities = [
 ];
 
 export const categories = [
-  { key: 'smoke', label: 'Smoke' },
-  { key: 'electric', label: 'Electric' },
-  { key: 'wood', label: 'Wood' },
+  { key: 'Marquee & Canopy', label: 'Marquee & Canopy' },
+  { key: 'Photo Booth', label: 'Photo Booth' },
+  { key: 'Event Furniture', label: 'Event Furniture' },
   { key: 'other', label: 'Other' },
 ];
+
+
 
 // Price filter configuration
 // Note: unlike most prices this is not handled in subunits

@@ -10,14 +10,14 @@ const SectionFeaturesMaybe = props => {
     return null;
   }
 
-  const selectedOptions = publicData && publicData.amenities ? publicData.amenities : [];
+  const selectedOptions = publicData && publicData.types ? publicData.types : [];
   return (
     <div className={css.sectionFeatures}>
       <h2 className={css.featuresTitle}>
         <FormattedMessage id="ListingPage.featuresTitle" />
       </h2>
       <PropertyGroup
-        id="ListingPage.amenities"
+        id="ListingPage.types"
         options={options}
         selectedOptions={selectedOptions}
         twoColumns={true}
