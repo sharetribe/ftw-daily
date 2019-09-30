@@ -23,7 +23,7 @@
   --backgroundImage: {
     /* Gradient direction and overlaying the black color on top of the image for better readability */
     background: linear-gradient(-45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)),
-      url('../../assets/background-1440.jpg');
+      url('../../assets/ideas-image.jpg');
 
     /* Add loading color for the div */
     background-color: var(--matterColor);
@@ -42,9 +42,9 @@
 
   /* ================ Colors ================ */
 
-  --marketplaceColor: #c0392b;
-  --marketplaceColorLight: #ff4c38;
-  --marketplaceColorDark: #8c291e;
+  --marketplaceColor: #ffbe0e;
+  --marketplaceColorLight: #ffffff;
+  --marketplaceColorDark: #000000;
 
   /* Used with inline CSS SVGs */
   --marketplaceColorEncoded: %23c0392b;

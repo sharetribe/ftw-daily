@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import config from '../../config';
-import IconLogo from './IconLogo';
-import LogoImage from './saunatime-logo.png';
+// import IconLogo from './IconLogo';
+import LogoImage from './inventionpad-logo.png';
 import css from './Logo.css';
 
 const Logo = props => {
@@ -15,7 +15,7 @@ const Logo = props => {
     return <img className={className} src={LogoImage} alt={config.siteTitle} {...rest} />;
   }
 
-  return <IconLogo className={mobileClasses} {...rest} />;
+  return <img src={LogoImage} width="80px" height="30px" alt={config.siteTitle} className={mobileClasses} {...rest} />;
 };
 
 const { oneOf, string } = PropTypes;
