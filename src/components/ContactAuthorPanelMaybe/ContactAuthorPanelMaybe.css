@@ -42,14 +42,14 @@
     line-height: 24px;
     margin-top: 10px;
     margin-bottom: 14px;
-    color: #4a4a4a;
+    color: #1a2b49;
     display: block;
     margin-top: 0;
   }
 }
 .contactAuthorTitle {
   display: none;
-  @media (--viewportLarge){ 
+  @media (--viewportLarge){
     display: block;
   }
 }
@@ -60,7 +60,7 @@
 
   margin-top: 0;
   margin-bottom: 0px;
-  @media (--viewportLarge){ 
+  @media (--viewportLarge){
     display: none;
   }
 }
@@ -71,7 +71,7 @@
 
   margin-top: 0;
   margin-bottom: 0px;
-  @media (--viewportLarge){ 
+  @media (--viewportLarge){
     display: none;
   }
 }
