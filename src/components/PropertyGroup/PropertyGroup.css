@@ -26,6 +26,13 @@
     column-count: 2;
   }
 }
+.threeColumns {
+  columns: 2;
+  @media (--viewportMedium) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 
 .item {
   display: flex;

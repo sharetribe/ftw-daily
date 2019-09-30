@@ -26,27 +26,33 @@ const SectionHorseInfo = props => {
             {(() => {
               switch (key) {
                 case 'age':
-                  return <IconCalendar className={css.listingIcon} />;
+                  return <img className={css.listingIcon} src='/static/icons/streamline-icon-calendar.png' />
+                  {/* return <IconCalendar className={css.listingIcon} />; */}
                 case 'breed':
-                  return <IconGavel className={css.listingIcon} />;
+                  return <img className={css.listingIcon} src='/static/icons/streamline-icon-certified-ribbon.png' />
+                  {/* return <IconGavel className={css.listingIcon} />; */}
                 case 'color':
-                  return <IconDrop className={css.listingIcon} />;
+                  {/* return <IconDrop className={css.listingIcon} />; */}
+                  return <img className={css.listingIcon} src='/static/icons/streamline-icon-blood-drop.png' />
                 case 'gender':
-                  return <IconGender className={css.listingIcon} />;
+                  return <img className={css.listingIcon} src='/static/icons/streamline-icon-gender-hetero.png' />
+                  {/* return <IconGender className={css.listingIcon} />; */}
                 case 'hight':
-                  return <IconIncreaseSize className={css.listingIcon} />;
+                  return <img className={css.listingIcon} src='/static/icons/streamline-icon-expand-vertical.png' />
+                  {/* return <IconIncreaseSize className={css.listingIcon} />; */}
                 case 'mainDiscipline':
-                  return <IconThunder className={css.listingIcon} />;
+                  return <img className={css.listingIcon} src='/static/icons/streamline-icon-flash.png' />
+                  {/* return <IconThunder className={css.listingIcon} />; */}
                 default:
                   return null;
               }
             })()}
 
             <div>
-              <p className={css.listingSecondaryText}>
+              <p className={classNames(css.listingSecondaryText, css.horseInfoItemTitle)}>
                 <FormattedMessage id={`ListingPage.horseInfo.${key}`} />
               </p>
-              <p className={classNames(css.listingPrimaryText, css.weight600)}>
+              <p className={classNames(css.listingPrimaryText, css.horseInfoItemValue)}>
                 {options[key].find(value => value.key === data[key].toString()).label}
               </p>
             </div>

@@ -53,17 +53,17 @@ const SectionLocations = props => {
         {locationLink(
           'Springen',
           springenImage,
-          '?address=Switzerland&bounds=47.808453%2C10.492064%2C45.817981%2C5.955902&pub_mainDiscipline=Springen'
+          '?address=Switzerland&bounds=47.808453%2C10.492064%2C45.817981%2C5.955902&pub_mainDiscipline=springen'
         )}
         {locationLink(
           'Dressur',
           dressurImage,
-          '?address=Switzerland&bounds=47.808453%2C10.492064%2C45.817981%2C5.955902&pub_mainDiscipline=Dressur'
+          '?address=Switzerland&bounds=47.808453%2C10.492064%2C45.817981%2C5.955902&pub_mainDiscipline=dressur'
         )}
         {locationLink(
           'Freizeit',
           freizeitImage,
-          '?address=Switzerland&bounds=47.808453%2C10.492064%2C45.817981%2C5.955902&pub_mainDiscipline=Freizeit'
+          '?address=Switzerland&bounds=47.808453%2C10.492064%2C45.817981%2C5.955902&pub_mainDiscipline=freizeit'
         )}
       </div>
     </div>
