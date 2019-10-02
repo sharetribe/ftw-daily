@@ -25,7 +25,7 @@ import routeConfiguration from '../../routeConfiguration';
 import { pathByRouteName } from '../../util/routes';
 
 export const NamedLinkComponent = props => {
-  const { name, params, title } = props;
+  const { name, params, title, openInNewTab } = props;
 
   // Link props
   const { to, children } = props;
@@ -41,6 +41,10 @@ export const NamedLinkComponent = props => {
     title,
   };
 
+  if (openInNewTab) {
+    Object.assign(aElemProps, { target: '_blank' });
+  }
+
   return (
     <Link to={{ pathname, ...to }} {...aElemProps}>
       {children}
@@ -48,7 +52,7 @@ export const NamedLinkComponent = props => {
   );
 };
 
-const { object, string, shape, any } = PropTypes;
+const { object, string, shape, any, bool } = PropTypes;
 
 NamedLinkComponent.defaultProps = {
   params: {},
@@ -59,6 +63,7 @@ NamedLinkComponent.defaultProps = {
   activeClassName: 'NamedLink_active',
   title: null,
   match: {},
+  openInNewTab: false,
 };
 
 // This ensures a nice display name in snapshots etc.
@@ -78,6 +83,7 @@ NamedLinkComponent.propTypes = {
   style: object,
   activeClassName: string,
   title: string,
+  openInNewTab: bool,
 
   // from withRouter
   match: object,
