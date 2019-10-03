@@ -251,6 +251,9 @@ export class ListingPageComponent extends Component {
 
     const topbar = <TopbarContainer />;
 
+    console.log('showListingError ', showListingError);
+
+
     if (showListingError && showListingError.status === 404) {
       // 404 listing not found
 
