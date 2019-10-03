@@ -20,7 +20,7 @@ const SectionHorseInfo = props => {
                 case 'age':
                   return <img className={css.listingIcon} src='/static/icons/streamline-icon-calendar.png' />
                 case 'breed':
-                  return <img className={css.listingIcon} src='/static/icons/streamline-icon-certified-ribbon.png' />
+                  return <img className={css.listingIcon} src='/static/icons/streamline-icon-flash.png' />
                 case 'color':
                   return <img className={css.listingIcon} src='/static/icons/streamline-icon-blood-drop.png' />
                 case 'gender':
@@ -28,7 +28,7 @@ const SectionHorseInfo = props => {
                 case 'hight':
                   return <img className={css.listingIcon} src='/static/icons/streamline-icon-expand-vertical.png' />
                 case 'mainDiscipline':
-                  return <img className={css.listingIcon} src='/static/icons/streamline-icon-flash.png' />
+                  return <img className={css.listingIcon} src='/static/icons/streamline-icon-certified-ribbon.png' />
                 default:
                   return null;
               }
