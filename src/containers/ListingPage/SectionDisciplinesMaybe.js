@@ -7,7 +7,6 @@ import css from './ListingPage.css';
 
 const SectionDisciplinesMaybe = props => {
   const { disciplines, options } = props;
-  console.log(123123, options)
   return disciplines && disciplines.length ? (
     <div className={css.listingSectionContainer}>
       <h2 className={css.listingSectionTitle}>

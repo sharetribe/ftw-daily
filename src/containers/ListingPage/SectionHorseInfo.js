@@ -1,14 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import {
-  IconCalendar,
-  IconDrop,
-  IconGavel,
-  IconGender,
-  IconIncreaseSize,
-  IconThunder,
-} from '../../components';
 import config from '../../config';
 
 import css from './ListingPage.css';
@@ -27,22 +19,16 @@ const SectionHorseInfo = props => {
               switch (key) {
                 case 'age':
                   return <img className={css.listingIcon} src='/static/icons/streamline-icon-calendar.png' />
-                  {/* return <IconCalendar className={css.listingIcon} />; */}
                 case 'breed':
                   return <img className={css.listingIcon} src='/static/icons/streamline-icon-certified-ribbon.png' />
-                  {/* return <IconGavel className={css.listingIcon} />; */}
                 case 'color':
-                  {/* return <IconDrop className={css.listingIcon} />; */}
                   return <img className={css.listingIcon} src='/static/icons/streamline-icon-blood-drop.png' />
                 case 'gender':
                   return <img className={css.listingIcon} src='/static/icons/streamline-icon-gender-hetero.png' />
-                  {/* return <IconGender className={css.listingIcon} />; */}
                 case 'hight':
                   return <img className={css.listingIcon} src='/static/icons/streamline-icon-expand-vertical.png' />
-                  {/* return <IconIncreaseSize className={css.listingIcon} />; */}
                 case 'mainDiscipline':
                   return <img className={css.listingIcon} src='/static/icons/streamline-icon-flash.png' />
-                  {/* return <IconThunder className={css.listingIcon} />; */}
                 default:
                   return null;
               }

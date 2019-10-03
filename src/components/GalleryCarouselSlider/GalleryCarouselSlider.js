@@ -34,7 +34,7 @@ class CarouselSlider extends Component {
   }
 
   render() {
-    const { items, renderSizes, currentSlide, totalSlides, showArrow, pagination } = this.props;
+    const { items, renderSizes, currentSlide, totalSlides, showArrow, pagination, small } = this.props;
     return (
       <>
         <Slider className={css.sliderWrapper}>
@@ -50,10 +50,11 @@ class CarouselSlider extends Component {
         </Slider>
         {showArrow && (
           <>
-            <GalleryCarouselNavigationButtonPrev currentSlide={currentSlide} />
+            <GalleryCarouselNavigationButtonPrev small={small} currentSlide={currentSlide} />
             <GalleryCarouselNavigationButtonNext
               currentSlide={currentSlide}
               totalSlides={totalSlides}
+              small={small} 
             />
           </>
         )}
