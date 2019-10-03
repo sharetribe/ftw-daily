@@ -100,7 +100,7 @@ export const breeds = [
   { key: 'lipizzaner', label: 'Lipizzaner' },
   { key: 'lusitanos', label: 'Lusitanos' },
   { key: 'oldenburger', label: 'Oldenburger' },
-  { key: 'osterreichisches_warmblug', label: 'Österreichisches Warmblug' },
+  { key: 'osterreichisches_warmblut', label: 'Österreichisches Warmblut' },
   { key: 'pre', label: 'P.R.E.' },
   { key: 'paint_horse', label: 'Paint Horse' },
   { key: 'pinto', label: 'Pinto' },

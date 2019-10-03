@@ -56,6 +56,7 @@ class GalleryCarouselWrapper extends Component {
           showArrow={showArrow}
           items={items}
           renderSizes={renderSizes}
+          {...this.props}
         />
       </CarouselProvider>
     );

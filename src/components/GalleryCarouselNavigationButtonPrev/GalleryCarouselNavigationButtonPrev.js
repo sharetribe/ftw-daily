@@ -6,7 +6,7 @@ import '../../../node_modules/pure-react-carousel/dist/react-carousel.es.css';
 
 import css from './GalleryCarouselNavigationButtonPrev.css';
 
-const GalleryCarouselNavigationButtonPrev = ({ currentSlide }) => {
+const GalleryCarouselNavigationButtonPrev = ({ currentSlide, small }) => {
   if (currentSlide === 0)
     return (
       <ButtonLast
@@ -16,7 +16,7 @@ const GalleryCarouselNavigationButtonPrev = ({ currentSlide }) => {
         }}
         className={css.buttonPrev}
       >
-        <IconArrowHead direction="left" size="big" className={css.iconArrow} />
+        <img className={small && css.small} src='/static/icons/arrow_left_white.png' />
       </ButtonLast>
     );
 
@@ -29,7 +29,7 @@ const GalleryCarouselNavigationButtonPrev = ({ currentSlide }) => {
       }}
       className={css.buttonPrev}
     >
-      <IconArrowHead direction="left" size="big" className={css.iconArrow} />
+      <img className={small && css.small} src='/static/icons/arrow_left_white.png' />
     </ButtonBack>
   );
 };

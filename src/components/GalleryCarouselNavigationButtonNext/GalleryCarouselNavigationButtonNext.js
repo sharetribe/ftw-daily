@@ -6,7 +6,7 @@ import '../../../node_modules/pure-react-carousel/dist/react-carousel.es.css';
 
 import css from './GalleryCarouselNavigationButtonNext.css';
 
-const GalleryCarouselNavigationButtonNext = ({ currentSlide, totalSlides }) => {
+const GalleryCarouselNavigationButtonNext = ({ currentSlide, totalSlides, small }) => {
   if (currentSlide === totalSlides - 1)
     return (
       <ButtonFirst
@@ -16,7 +16,7 @@ const GalleryCarouselNavigationButtonNext = ({ currentSlide, totalSlides }) => {
         }}
         className={css.buttonNext}
       >
-        <IconArrowHead direction="right" size="big" className={css.iconArrow} />
+        <img className={small && css.small} src='/static/icons/arrow_right_white.png' />
       </ButtonFirst>
     );
 
@@ -29,7 +29,7 @@ const GalleryCarouselNavigationButtonNext = ({ currentSlide, totalSlides }) => {
       }}
       className={css.buttonNext}
     >
-      <IconArrowHead direction="right" size="big" className={css.iconArrow} />
+      <img className={small && css.small} src='/static/icons/arrow_right_white.png' />
     </ButtonNext>
   );
 };

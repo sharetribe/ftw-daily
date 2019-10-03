@@ -52,6 +52,7 @@ const ListingCard = props => {
                 items={listing.images}
                 renderSizes="250px"
                 pagination={false}
+                small
               />
             ) : (
               <ResponsiveImage

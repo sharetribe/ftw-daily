@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { IconCheckmark } from '../../components';
+import { PropertyGroup } from '../../components';
 import config from '../../config';
 
 import css from './ListingPage.css';
@@ -12,16 +12,12 @@ const SectionDisciplinesMaybe = props => {
       <h2 className={css.listingSectionTitle}>
         <FormattedMessage id="ListingPage.disciplinesTitle" />
       </h2>
-      <ul className={css.threeColumns}>
-        {disciplines.map(item => (
-          <li key={item.toString()} className={css.listingItemContainer}>
-            <IconCheckmark size="small" className={css.listingIcon} />
-            <p className={css.listingPrimaryText}>
-              {options.find(value => value.key === item).label}
-            </p>
-          </li>
-        ))}
-      </ul>
+      <PropertyGroup
+        id="ListingPage.disciplines"
+        options={options}
+        selectedOptions={disciplines}
+        threeColumns={true}
+      />
     </div>
   ) : null;
 };

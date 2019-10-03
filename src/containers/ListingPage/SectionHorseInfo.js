@@ -1,14 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import {
-  IconCalendar,
-  IconDrop,
-  IconGavel,
-  IconGender,
-  IconIncreaseSize,
-  IconThunder,
-} from '../../components';
 import config from '../../config';
 
 import css from './ListingPage.css';
@@ -26,27 +18,27 @@ const SectionHorseInfo = props => {
             {(() => {
               switch (key) {
                 case 'age':
-                  return <IconCalendar className={css.listingIcon} />;
+                  return <img className={css.listingIcon} src='/static/icons/streamline-icon-calendar.png' />
                 case 'breed':
-                  return <IconGavel className={css.listingIcon} />;
+                  return <img className={css.listingIcon} src='/static/icons/streamline-icon-certified-ribbon.png' />
                 case 'color':
-                  return <IconDrop className={css.listingIcon} />;
+                  return <img className={css.listingIcon} src='/static/icons/streamline-icon-blood-drop.png' />
                 case 'gender':
-                  return <IconGender className={css.listingIcon} />;
+                  return <img className={css.listingIcon} src='/static/icons/streamline-icon-gender-hetero.png' />
                 case 'hight':
-                  return <IconIncreaseSize className={css.listingIcon} />;
+                  return <img className={css.listingIcon} src='/static/icons/streamline-icon-expand-vertical.png' />
                 case 'mainDiscipline':
-                  return <IconThunder className={css.listingIcon} />;
+                  return <img className={css.listingIcon} src='/static/icons/streamline-icon-flash.png' />
                 default:
                   return null;
               }
             })()}
 
             <div>
-              <p className={css.listingSecondaryText}>
+              <p className={classNames(css.listingSecondaryText, css.horseInfoItemTitle)}>
                 <FormattedMessage id={`ListingPage.horseInfo.${key}`} />
               </p>
-              <p className={classNames(css.listingPrimaryText, css.weight600)}>
+              <p className={classNames(css.listingPrimaryText, css.horseInfoItemValue)}>
                 {options[key].find(value => value.key === data[key].toString()).label}
               </p>
             </div>

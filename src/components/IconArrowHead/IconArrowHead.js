@@ -26,30 +26,18 @@ const IconArrowHead = props => {
     return (
       <svg
         className={classes}
-        width="9"
-        height="13"
-        viewBox="0 0 9 13"
-        xmlns="http://www.w3.org/2000/svg"
+        width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"
       >
-        <path
-          d="M7.472 6.97c.26-.26.26-.68 0-.94L2.14.694c-.263-.26-.684-.26-.944 0-.26.26-.26.683 0 .943L6.056 6.5l-4.86 4.862c-.26.26-.26.683 0 .943.26.26.68.26.943 0L7.47 6.97z"
-          fillRule="evenodd"
-        />
+        <path d="M11.5 7L20.5 16L11.5 25" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     );
   } else if (isLeft && isSmall) {
     return (
       <svg
         className={classes}
-        width="9"
-        height="13"
-        viewBox="0 0 9 13"
-        xmlns="http://www.w3.org/2000/svg"
+        width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"
       >
-        <path
-          d="M1.195 6.03c-.26.26-.26.68 0 .94l5.333 5.335c.262.26.683.26.943 0 .262-.26.262-.683 0-.943L2.61 6.5l4.86-4.862c.262-.26.262-.683 0-.943-.26-.26-.68-.26-.942 0L1.195 6.03z"
-          fillRule="evenodd"
-        />
+        <path d="M20.5 7L11.5 16L20.5 25" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     );
   } else if (isDown && isSmall) {
