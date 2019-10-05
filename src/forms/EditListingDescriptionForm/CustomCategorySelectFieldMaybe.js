@@ -17,6 +17,7 @@ const CustomCategorySelectFieldMaybe = props => {
       id: 'EditListingDescriptionForm.categoryRequired',
     })
   );
+  console.log("custom aekect", props)
   return categories ? (
     <FieldSelect
       className={css.category}

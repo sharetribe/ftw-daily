@@ -117,15 +117,15 @@ export class ProfilePageComponent extends Component {
       [css.withBioMissingAbove]: !hasBio,
     });
 
-    // const reviewsError = (
-    //   <p className={css.error}>
-    //     <FormattedMessage id="ProfilePage.loadingReviewsFailed" />
-    //   </p>
-    // );
+    const reviewsError = (
+      <p className={css.error}>
+        <FormattedMessage id="ProfilePage.loadingReviewsFailed" />
+      </p>
+    );
 
-    // const reviewsOfProvider = reviews.filter(r => r.attributes.type === REVIEW_TYPE_OF_PROVIDER);
+    //const reviewsOfProvider = reviews.filter(r => r.attributes.type === REVIEW_TYPE_OF_PROVIDER);
 
-    // const reviewsOfCustomer = reviews.filter(r => r.attributes.type === REVIEW_TYPE_OF_CUSTOMER);
+    //const reviewsOfCustomer = reviews.filter(r => r.attributes.type === REVIEW_TYPE_OF_CUSTOMER);
 
     // const mobileReviews = (
     //   <div className={css.mobileReviews}>
@@ -188,6 +188,7 @@ export class ProfilePageComponent extends Component {
     //       )}
     //   </div>
     // );
+
 
     const mainContent = (
       <div>
