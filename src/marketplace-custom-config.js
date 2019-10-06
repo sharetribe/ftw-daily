@@ -4,7 +4,7 @@
 
 export const types = [
   {
-    key: 'towels',
+    key: 'Towels',
     label: 'Towels',
   },
   {
@@ -50,7 +50,6 @@ export const categories = [
   { key: 'Event Furniture', label: 'Event Furniture' },
   { key: 'other', label: 'Other' },
 ];
-
 
 
 

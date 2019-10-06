@@ -20,11 +20,14 @@
 }
 
 .mobileInputRoot {
-  width: 100%;
+  width: 80%;
+  margin-left: 30px;
 }
 
 .desktopInputRoot {
   height: var(--topbarHeightDesktop);
+  margin-left: 30px;
+  
 }
 
 .mobileIcon {
