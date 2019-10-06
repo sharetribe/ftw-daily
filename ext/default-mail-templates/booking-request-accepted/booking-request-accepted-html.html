@@ -25,16 +25,49 @@
       <tbody>
       {{#each tx-line-items}}
         {{#contains include-for "customer"}}
-          <tr>
-            {{#eq "line-item/day" code}}
-            <td>{{> format-money money=unit-price}} &times; {{number quantity}} {{inflect quantity "day" "days"}}</td>
-            <td style="padding-left: 20px;">{{> format-money money=line-total}}</td>
-            {{/eq}}
-            {{#eq "line-item/night" code}}
-            <td>{{> format-money money=unit-price}} &times; {{number quantity}} {{inflect quantity "night" "nights"}}</td>
-            <td style="padding-left: 20px;">{{> format-money money=line-total}}</td>
-            {{/eq}}
-          </tr>
+          {{#eq "line-item/day" code}}
+              <tr>
+                <td>Price per day</td>
+                <td style="text-align: right; padding-left: 20px">{{> format-money money=unit-price}}</td>
+              </tr>
+              {{#if seats}}
+              <tr>
+                <td>Days</td>
+                <td style="text-align: right; padding-left: 20px">&times; {{number units}}</td>
+              </tr>
+              <tr>
+                <td>Seats</td>
+                <td style="text-align: right; padding-left: 20px">&times; {{number seats}}</td>
+              </tr>
+              {{else}}
+              <tr>
+                <td>Days</td>
+                <td style="text-align: right; padding-left: 20px">&times; {{number quantity}}</td>
+              </tr>
+              {{/if}}
+          {{/eq}}
+
+          {{#eq "line-item/night" code}}
+            <tr>
+              <td>Price per night</td>
+              <td style="text-align: right; padding-left: 20px">{{> format-money money=unit-price}}</td>
+            </tr>
+            {{#if seats}}
+            <tr>
+              <td>Nights</td>
+              <td style="text-align: right; padding-left: 20px">&times; {{number units}}</td>
+            </tr>
+            <tr>
+              <td>Seats</td>
+              <td style="text-align: right; padding-left: 20px">&times; {{number seats}}</td>
+            </tr>
+            {{else}}
+            <tr>
+              <td>Nights</td>
+              <td style="text-align: right; padding-left: 20px">&times; {{number quantity}}</td>
+            </tr>
+            {{/if}}
+          {{/eq}}
         {{/contains}}
       {{/each}}
       </tbody>

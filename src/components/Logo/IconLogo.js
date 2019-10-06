@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+
 const IconLogo = props => {
   const { className, ...rest } = props;
 

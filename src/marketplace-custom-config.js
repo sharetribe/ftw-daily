@@ -28,6 +28,10 @@ export const types = [
     label: 'Audiovisual entertainment',
   },
   {
+    key: 'distant',
+    label: 'distant',
+  },
+  {
     key: 'barbeque',
     label: 'Barbeque',
   },
@@ -38,11 +42,15 @@ export const types = [
 ];
 
 export const categories = [
+    { key: 'Event Hire', label: 'Event Hire' },
+    { key: 'Event Service', label: 'Event service' },
+    { key: 'Venues', label: 'Venues' },
   { key: 'Marquee & Canopy', label: 'Marquee & Canopy' },
   { key: 'Photo Booth', label: 'Photo Booth' },
   { key: 'Event Furniture', label: 'Event Furniture' },
   { key: 'other', label: 'Other' },
 ];
+
 
 
 
