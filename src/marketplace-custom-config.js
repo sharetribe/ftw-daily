@@ -15,6 +15,20 @@ export const types = [
     key: 'swimming_pool',
     label: 'Swimming pool',
   },
+  //balloon styling
+  {
+    key: 'swimming_pool',
+    label: 'Swimming pool',
+  },
+  {
+    key: 'swimming_pool',
+    label: 'Swimming pool',
+  },
+  {
+    key: 'swimming_pool',
+    label: 'Swimming pool',
+  },
+  //balloon styling
   {
     key: 'own_drinks',
     label: 'Own drinks allowed',
@@ -42,13 +56,11 @@ export const types = [
 ];
 
 export const categories = [
-    { key: 'Event Hire', label: 'Event Hire' },
-    { key: 'Event Service', label: 'Event service' },
+     { key: 'Balloon Styling', label: 'Balloon Styling' },
     { key: 'Venues', label: 'Venues' },
   { key: 'Marquee & Canopy', label: 'Marquee & Canopy' },
   { key: 'Photo Booth', label: 'Photo Booth' },
   { key: 'Event Furniture', label: 'Event Furniture' },
-  { key: 'other', label: 'Other' },
 ];
 
 
