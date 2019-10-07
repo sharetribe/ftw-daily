@@ -2,67 +2,64 @@
  * Marketplace specific configuration.
  */
 
-export const types = [
-  {
-    key: 'Towels',
-    label: 'Towels',
-  },
-  {
-    key: 'bathroom',
-    label: 'Bathroom',
-  },
-  {
-    key: 'swimming_pool',
-    label: 'Swimming pool',
-  },
-  //balloon styling
-  {
-    key: 'swimming_pool',
-    label: 'Swimming pool',
-  },
-  {
-    key: 'swimming_pool',
-    label: 'Swimming pool',
-  },
-  {
-    key: 'swimming_pool',
-    label: 'Swimming pool',
-  },
-  //balloon styling
-  {
-    key: 'own_drinks',
-    label: 'Own drinks allowed',
-  },
-  {
-    key: 'jacuzzi',
-    label: 'Jacuzzi',
-  },
-  {
-    key: 'audiovisual_entertainment',
-    label: 'Audiovisual entertainment',
-  },
-  {
-    key: 'distant',
-    label: 'distant',
-  },
-  {
-    key: 'barbeque',
-    label: 'Barbeque',
-  },
-  {
-    key: 'own_food_allowed',
-    label: 'Own food allowed',
-  },
+export const eventstype = [
+ //type of ocassions
+ {
+   key: 'Wedding',
+   label: 'Wedding',
+ },
+ {
+   key: 'Kids party',
+   label: 'Kids party',
+ },
+ {
+   key: 'Event',
+   label: 'Event',
+ },
 ];
+
+export const types = [
+//Jumping Castle Types
+    {
+      key: 'Frozen',
+      label: 'Frozen',
+    },
+    {
+      key: 'Slide',
+      label: 'Slide',
+    },
+    {
+      key: 'Paw Patrol',
+      label: 'Paw Patrol',
+       },
+//Photobooths
+{
+  key: 'Open-Air',
+  label: 'Open-Air',
+},
+{
+  key: 'Traditional',
+  label: 'Traditional',
+},
+{
+  key: 'Mirrorless',
+  label: 'Mirrorless',
+   },
+   {
+     key: 'GIF-maker',
+     label: 'GIF-maker',
+      },
+ ];
 
 export const categories = [
-     { key: 'Balloon Styling', label: 'Balloon Styling' },
-    { key: 'Venues', label: 'Venues' },
+    { key: 'Balloon Styling', label: 'Balloon Styling' },
   { key: 'Marquee & Canopy', label: 'Marquee & Canopy' },
   { key: 'Photo Booth', label: 'Photo Booth' },
+  { key: 'Jumping Castles', label: 'Jumping Castles' },
   { key: 'Event Furniture', label: 'Event Furniture' },
+  { key: 'Venues', label: 'Venues' },
+  { key: 'Platters', label: 'Platters' },
 ];
-
 
 
 // Price filter configuration
