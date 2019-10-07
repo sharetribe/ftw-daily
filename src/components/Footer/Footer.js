@@ -53,6 +53,9 @@ const renderSocialMediaLinks = intl => {
   return [fbLink, twitterLink, instragramLink].filter(v => v != null);
 };
 
+
+//
+
 const Footer = props => {
   const { rootClassName, className, intl } = props;
   const socialMediaLinks = renderSocialMediaLinks(intl);
@@ -86,20 +89,14 @@ const Footer = props => {
                     <FormattedMessage id="Footer.toNewListingPage" />
                   </NamedLink>
                 </li>
-                <li className={css.listItem}>
-                  <NamedLink name="AboutPage" className={css.link}>
-                    <FormattedMessage id="Footer.toAboutPage" />
-                  </NamedLink>
+                <li className={css.listItemb}>
+                   <ExternalLink href="https://hypley.com.au/about-us/">About us</ExternalLink>
                 </li>
-                <li className={css.listItem}>
-                  <NamedLink name="LandingPage" className={css.link}>
-                    <FormattedMessage id="Footer.toFAQPage" />
-                  </NamedLink>
+                <li className={css.listItemb}>
+                  <ExternalLink href="https://hypley.zendesk.com/hc/en-us">Help</ExternalLink>
                 </li>
-                <li className={css.listItem}>
-                  <NamedLink name="LandingPage" className={css.link}>
-                    <FormattedMessage id="Footer.toHelpPage" />
-                  </NamedLink>
+                <li className={css.listItemb}>
+                  <ExternalLink href="https://hypley.com.au/how-hireitem-works/">How it works</ExternalLink>
                 </li>
                 <li className={css.listItem}>
                   <NamedLink name="AboutPage" to={{ hash: '#contact' }} className={css.link}>
@@ -115,11 +112,11 @@ const Footer = props => {
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=Helsinki%2C%20Finland&bounds=60.2978389%2C25.254484899999966%2C59.9224887%2C24.782875800000056&origin=60.16985569999999%2C24.93837910000002',
+                        '?address=Brisbane%2C%20Queensland%2C%20Australia&bounds=-26.996844991%2C153.31787024%2C-27.767436998%2C152.668522848',
                     }}
                     className={css.link}
                   >
-                    <FormattedMessage id="Footer.searchHelsinki" />
+                    <FormattedMessage id="Brisbane" />
                   </NamedLink>
                 </li>
                 <li className={css.listItem}>
