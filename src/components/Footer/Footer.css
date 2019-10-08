@@ -434,10 +434,10 @@
 }
 
 .greenLabel {
-  border: 1px solid green;
-  background-color: green;
+  border: 1px solid #006a6f;
+  background-color: #006a6f;
   color: white;
-  border-radius: 8px;
+  border-radius: 5px;
   padding: 2px 5px;
   font-size: 75%;
 }
