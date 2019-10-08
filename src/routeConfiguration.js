@@ -50,7 +50,8 @@ const routeConfiguration = () => {
     {
       path: '/',
       name: 'LandingPage',
-      component: props => <LandingPage {...props} />,
+      component: props => <SearchPage {...props} />,
+	  loadData: SearchPage.loadData,
     },
     {
       path: '/about',
