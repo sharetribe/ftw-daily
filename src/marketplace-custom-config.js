@@ -22,6 +22,8 @@ export const eventstype = [
  },
 ];
 
+
+
 //devDependencies
 
 export const types = [

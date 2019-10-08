@@ -13,6 +13,7 @@ import {
   EditListingAvailabilityPanel,
   EditListingDescriptionPanel,
   EditListingFeaturesPanel,
+  EditListingEventTypePanel,
   EditListingLocationPanel,
   EditListingPhotosPanel,
   EditListingPoliciesPanel,
@@ -33,6 +34,7 @@ export const PHOTOS = 'photos';
 export const SUPPORTED_TABS = [
   DESCRIPTION,
   FEATURES,
+
   // POLICY,
   LOCATION,
   PRICING,
