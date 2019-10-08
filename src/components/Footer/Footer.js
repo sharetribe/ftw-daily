@@ -263,7 +263,7 @@ const Footer = props => {
               </div>
 
               <div className={css.footerContainerVertical23}>
-                <div>
+                <div className={css.verticalContainerHeader}>
                   <div>{socialMediaLinks}</div>
                 </div>
                 <div className={css.verticalContainerContent}>
