@@ -77,7 +77,7 @@ const Footer = props => {
                   <ul className={css.list}>
                     <li className={css.listItem}>
                       <Link to="#" className={css.link}>
-                        So funktionierts
+                        So funktioniert's
                       </Link>
                     </li>
                     <li className={css.listItem}>
