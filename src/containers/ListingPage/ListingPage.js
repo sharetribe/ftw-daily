@@ -524,7 +524,6 @@ ListingPageComponent.propTypes = {
   sendEnquiryError: propTypes.error,
   onSendEnquiry: func.isRequired,
   onInitializeCardPaymentData: func.isRequired,
-
   categoriesConfig: array,
   typesConfig: array,
 };

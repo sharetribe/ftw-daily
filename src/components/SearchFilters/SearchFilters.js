@@ -68,6 +68,7 @@ const SearchFiltersComponent = props => {
     resultsCount,
     searchInProgress,
     categoryFilter,
+    subCategoryFilter,
     typesFilter,
     priceFilter,
     dateRangeFilter,
@@ -86,6 +87,10 @@ const SearchFiltersComponent = props => {
     id: 'SearchFilters.categoryLabel',
   });
 
+  const subCategoryLabel = intl.formatMessage({
+    id: 'SearchFilters.subCategoryLabel',
+  });
+
   const typesLabel = intl.formatMessage({
     id: 'SearchFilters.typesLabel',
   });
@@ -101,6 +106,10 @@ const SearchFiltersComponent = props => {
   const initialCategory = categoryFilter
     ? initialValue(urlQueryParams, categoryFilter.paramName)
     : null;
+
+    const initialSubCategory = subCategoryFilter
+      ? initialValue(urlQueryParams, subCategoryFilter.paramName)
+      : null;
 
   const initialPriceRange = priceFilter
     ? initialPriceRangeValue(urlQueryParams, priceFilter.paramName)
@@ -177,6 +186,17 @@ const SearchFiltersComponent = props => {
     />
   ) : null;
 
+  const subCategoryFilterElement = subCategoryFilter ? (
+    <SelectSingleFilter
+      urlParam={subCategoryFilter.paramName}
+      label={subCategoryLabel}
+      onSelect={handleSelectOption}
+      showAsPopup
+      options={subCategoryFilter.options}
+      initialValue={initialSubCategory}
+      contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+    />
+  ) : null;
 
 
   const typesFilterElement = typesFilter ? (
@@ -252,6 +272,7 @@ const SearchFiltersComponent = props => {
     <div className={classes}>
       <div className={css.filters}>
         {categoryFilterElement}
+        {subCategoryFilterElement}
         {typesFilterElement}
         {priceFilterElement}
         {dateRangeFilterElement}
@@ -288,6 +309,7 @@ SearchFiltersComponent.defaultProps = {
   resultsCount: null,
   searchingInProgress: false,
   categoryFilter: null,
+  subCategoryFilter: null,
   typesFilter: null,
   priceFilter: null,
   dateRangeFilter: null,

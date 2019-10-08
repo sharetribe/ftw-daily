@@ -56,6 +56,10 @@ See the Flex Docs site: https://www.sharetribe.com/docs/
 
 See also the [docs/](docs/) directory for some additional internal documentation.
 
+## Get help – join Sharetribe Flex Developer Slack channel
+
+If you have any questions about development, the best place to ask them is the Flex Developer Slack channel at https://www.sharetribe.com/flex-slack
+
 ## License
 
 This project is licensed under the terms of the Apache-2.0 license.

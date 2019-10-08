@@ -8,7 +8,7 @@ import classNames from 'classnames';
 import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
 import { pathByRouteName, findRouteByRouteName } from '../../util/routes';
-import { propTypes, LINE_ITEM_NIGHT, LINE_ITEM_DAY } from '../../util/types';
+import { propTypes, LINE_ITEM_NIGHT, LINE_ITEM_DAY, DATE_TYPE_DATE } from '../../util/types';
 import {
   ensureListing,
   ensureCurrentUser,
@@ -586,6 +586,7 @@ export class CheckoutPageComponent extends Component {
           unitType={config.bookingUnitType}
           transaction={tx}
           booking={txBooking}
+          dateType={DATE_TYPE_DATE}
         />
       ) : null;
 
@@ -769,9 +770,6 @@ export class CheckoutPageComponent extends Component {
             </div>
 
             <div className={css.priceBreakdownContainer}>
-              <h3 className={css.priceBreakdownTitle}>
-                <FormattedMessage id="CheckoutPage.priceBreakdownTitle" />
-              </h3>
               {speculateTransactionErrorMessage}
               {breakdown}
             </div>
@@ -837,9 +835,6 @@ export class CheckoutPageComponent extends Component {
               <h2 className={css.detailsTitle}>{listingTitle}</h2>
               <p className={css.detailsSubtitle}>{detailsSubTitle}</p>
             </div>
-            <h3 className={css.bookingBreakdownTitle}>
-              <FormattedMessage id="CheckoutPage.priceBreakdownTitle" />
-            </h3>
             {speculateTransactionErrorMessage}
             {breakdown}
           </div>
