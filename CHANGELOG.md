@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] AvailabilityPlan doesn't need to have entries for every day.
+  [#1214](https://github.com/sharetribe/flex-template-web/pull/1214)
+
 ## [v3.5.1] 2019-09-16
 
 - [add] add orverriding function `onAdd` and `onRemove` for `CustomOverlayView` in
