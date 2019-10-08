@@ -55,8 +55,15 @@ const listingPageReducer = (state = initialState, action = {}) => {
 
     case SHOW_LISTING_REQUEST:
       return { ...state, id: payload.id, showListingError: null };
-    case SHOW_LISTING_ERROR:
+    case SHOW_LISTING_ERROR:{
+
+      console.log('SHOW_LISTING_ERROR  action');
+
+
       return { ...state, showListingError: payload };
+
+    }
+
 
     case FETCH_REVIEWS_REQUEST:
       return { ...state, fetchReviewsError: null };

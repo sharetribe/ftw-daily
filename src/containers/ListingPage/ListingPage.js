@@ -84,6 +84,8 @@ export class ListingPageComponent extends Component {
       enquiryModalOpen: enquiryModalOpenForListingId === params.id,
     };
 
+    console.log('props.showListingError ', props.showListingError);
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onContactUser = this.onContactUser.bind(this);
     this.onSubmitEnquiry = this.onSubmitEnquiry.bind(this);
@@ -250,6 +252,9 @@ export class ListingPageComponent extends Component {
     const bookingSubTitle = intl.formatMessage({ id: 'ListingPage.bookingSubTitle' });
 
     const topbar = <TopbarContainer />;
+
+    console.log('showListingError ', showListingError);
+
 
     if (showListingError && showListingError.status === 404) {
       // 404 listing not found
