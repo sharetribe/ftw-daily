@@ -184,6 +184,7 @@ class SearchFiltersMobileComponent extends Component {
   render() {
     const {
       rootClassName,
+      customState,
       className,
       listingsAreLoaded,
       resultsCount,
@@ -199,6 +200,10 @@ class SearchFiltersMobileComponent extends Component {
       keywordFilter,
       intl,
     } = this.props;
+
+     if(this.state.isFiltersOpenOnMobile !== customState){
+       this.openFilters();
+      }
 
     const classes = classNames(rootClassName || css.root, className);
 
