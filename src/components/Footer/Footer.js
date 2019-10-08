@@ -77,7 +77,7 @@ const Footer = props => {
                   <ul className={css.list}>
                     <li className={css.listItem}>
                       <Link to="#" className={css.link}>
-                        So funktionierts
+                        So funktioniert's
                       </Link>
                     </li>
                     <li className={css.listItem}>
@@ -263,7 +263,7 @@ const Footer = props => {
               </div>
 
               <div className={css.footerContainerVertical23}>
-                <div>
+                <div className={css.verticalContainerHeader}>
                   <div>{socialMediaLinks}</div>
                 </div>
                 <div className={css.verticalContainerContent}>
