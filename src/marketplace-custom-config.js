@@ -16,7 +16,13 @@ export const eventstype = [
    key: 'Event',
    label: 'Event',
  },
+ {
+   key: 'Event',
+   label: 'Event',
+ },
 ];
+
+//devDependencies
 
 export const types = [
 //Jumping Castle Types
