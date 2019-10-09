@@ -206,12 +206,14 @@ export class SearchPageComponent extends Component {
         schema={schema}
       >
         <TopbarContainer
+          onOpenSearchN={() => { this.onOpenMobileModal()}}
           className={topbarClasses}
           currentPage="SearchPage"
           currentSearchParams={urlQueryParams}
         />
         <div className={css.container}>
           <MainPanel
+            customState={this.state.isMobileModalOpen}
             urlQueryParams={validQueryParams}
             listings={listings}
             searchInProgress={searchInProgress}

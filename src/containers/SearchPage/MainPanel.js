@@ -96,6 +96,7 @@ class MainPanel extends Component {
           showAsModalMaxWidth={showAsModalMaxWidth}
           onMapIconClick={onMapIconClick}
           onManageDisableScrolling={onManageDisableScrolling}
+          customState={this.props.customState}
           onOpenModal={onOpenModal}
           onCloseModal={onCloseModal}
           filterParamNames={filterParamNames}

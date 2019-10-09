@@ -86,10 +86,10 @@ class TopbarComponent extends Component {
     redirectToURLWithoutModalState(this.props, 'mobilemenu');
   }
 
-  handleMobileSearchOpen() {
-    redirectToURLWithModalState(this.props, 'mobilesearch');
+  handleMobileSearchOpen = () => {
+      if(this.props.onOpenSearchN)return this.props.onOpenSearchN();
+        redirectToURLWithModalState(this.props, 'mobilesearch');
   }
-
   handleMobileSearchClose() {
     redirectToURLWithoutModalState(this.props, 'mobilesearch');
   }
