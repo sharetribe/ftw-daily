@@ -73,7 +73,7 @@ export class SearchPageComponent extends Component {
       },
       typesFilter: {
         paramName: 'pub_types',
-      //   options:  types,
+        options:  types,
       },
       priceFilter: {
         paramName: 'price',
