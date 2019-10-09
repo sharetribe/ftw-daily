@@ -1,0 +1,105 @@
+
+{{~#*inline "format-money"~}}
+{{money-amount money}} {{money.currency}}
+{{~/inline~}}
+
+{{~#*inline "format-date"~}}
+{{date date format="MMM d, YYYY"}}
+{{~/inline~}}
+
+<html>
+  <body>
+    {{#with transaction}}
+    <h1>Please respond to a request by {{customer.display-name}}</h1>
+
+    <p>Good news! {{customer.display-name}} just requested to book {{listing.title}} from {{> format-date date=booking.start}} to {{> format-date date=booking.end}}. Here's the breakdown.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left;">Payment</th>
+        </tr>
+      </thead>
+      <tbody>
+      {{#each tx-line-items}}
+        {{#contains include-for "provider"}}
+          {{#eq "line-item/day" code}}
+            <tr>
+              <td>Price per day</td>
+              <td style="text-align: right; padding-left: 20px">{{> format-money money=unit-price}}</td>
+            </tr>
+            {{#if seats}}
+            <tr>
+              <td>Days</td>
+              <td style="text-align: right; padding-left: 20px">&times; {{number units}}</td>
+            </tr>
+            <tr>
+              <td>Seats</td>
+              <td style="text-align: right; padding-left: 20px">&times; {{number seats}}</td>
+            </tr>
+            {{else}}
+            <tr>
+              <td>Days</td>
+              <td style="text-align: right; padding-left: 20px">&times; {{number quantity}}</td>
+            </tr>
+            {{/if}}
+            <tr>
+              <th style="text-align: left;">Subtotal</th>
+              <th style="text-align: right; padding-left: 20px">{{> format-money money=line-total}}</th>
+            </tr>
+          {{/eq}}
+
+          {{#eq "line-item/night" code}}
+            <tr>
+              <td>Price per night</td>
+              <td style="text-align: right; padding-left: 20px">{{> format-money money=unit-price}}</td>
+            </tr>
+            {{#if seats}}
+            <tr>
+              <td>Nights</td>
+              <td style="text-align: right; padding-left: 20px">&times; {{number units}}</td>
+            </tr>
+            <tr>
+              <td>Seats</td>
+              <td style="text-align: right; padding-left: 20px">&times; {{number seats}}</td>
+            </tr>
+            {{else}}
+            <tr>
+              <td>Nights</td>
+              <td style="text-align: right; padding-left: 20px">&times; {{number quantity}}</td>
+            </tr>
+            {{/if}}
+            <tr>
+              <th style="text-align: left;">Subtotal</th>
+              <th style="text-align: right; padding-left: 20px">{{> format-money money=line-total}}</th>
+            </tr>
+          {{/eq}}
+
+          {{#eq "line-item/provider-commission" code}}
+            <tr>
+              <td>{{marketplace.name}} fee</td>
+              <td style="text-align: right; padding-left: 20px;">{{> format-money money=line-total}}</td>
+            </tr>
+          {{/eq}}
+        {{/contains}}
+      {{/each}}
+      </tbody>
+      <tfoot>
+        <tr>
+          <th style="text-align: left;">You earn</th>
+          <th style="text-align: left; padding-left: 20px;">{{> format-money money=payout-total}}</th>
+        </tr>
+      </tfoot>
+    </table>
+
+    <p>You need to accept the request by {{> format-date date=delayed-transition.run-at}}. Otherwise the request will be expired and you won't get paid. If the booked dates won't work for you, you can also choose to decline the request.</p>
+
+    <p><a href="{{marketplace.url}}/sale/{{url-encode id}}/details">Accept or decline the booking</a></p>
+
+    {{/with}}
+
+    <hr />
+
+    <p>You have received this email notification because you are a member of {{marketplace.name}}. If you no longer wish to receive these emails, please contact {{marketplace.name}} team.</p>
+  </body>
+</html>
