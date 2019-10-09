@@ -24,3 +24,4 @@ export { default as SendMessageForm } from './SendMessageForm/SendMessageForm';
 export { default as SignupForm } from './SignupForm/SignupForm';
 export { default as StripePaymentForm } from './StripePaymentForm/StripePaymentForm';
 export { default as TopbarSearchForm } from './TopbarSearchForm/TopbarSearchForm';
+export { default as CustomSearchForm } from './CustomForm/CustomForm';

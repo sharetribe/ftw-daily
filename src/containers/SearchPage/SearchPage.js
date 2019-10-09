@@ -210,6 +210,9 @@ export class SearchPageComponent extends Component {
           onOpenSearchN={() => { this.onOpenMobileModal()}}
           className={topbarClasses}
           currentPage="SearchPage"
+          history
+          urlQueryParams={validQueryParams}
+          keywordFilter={filters.keywordFilter}
           currentSearchParams={urlQueryParams}
         />
         <div className={css.container}>
@@ -228,6 +231,9 @@ export class SearchPageComponent extends Component {
             pagination={pagination}
             searchParamsForPagination={parse(location.search)}
             showAsModalMaxWidth={MODAL_BREAKPOINT}
+            location
+            history
+            currentSearchParams={urlQueryParams}
             primaryFilters={{
               categoryFilter: filters.categoryFilter,
               typesFilter: filters.typesFilter,

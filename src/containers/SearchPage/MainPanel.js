@@ -29,6 +29,7 @@ class MainPanel extends Component {
       searchInProgress,
       searchListingsError,
       searchParamsAreInSync,
+      currentSearchParams,
       onActivateListing,
       onManageDisableScrolling,
       onOpenModal,
@@ -42,7 +43,6 @@ class MainPanel extends Component {
     } = this.props;
 
     const isSearchFiltersPanelOpen = !!secondaryFilters && this.state.isSearchFiltersPanelOpen;
-
     const filters = merge(primaryFilters, secondaryFilters);
     const selectedFilters = validFilterParams(urlQueryParams, filters);
     const selectedFiltersCount = Object.keys(selectedFilters).length;
@@ -72,7 +72,7 @@ class MainPanel extends Component {
     const secondaryFilterParamNames = secondaryFilters
       ? Object.values(secondaryFilters).map(f => f.paramName)
       : [];
-
+  
     return (
       <div className={classes}>
         <SearchFilters
@@ -84,7 +84,7 @@ class MainPanel extends Component {
           searchListingsError={searchListingsError}
           onManageDisableScrolling={onManageDisableScrolling}
           {...searchFiltersPanelProps}
-          {...primaryFilters}
+          {...extractKeys(primaryFilters)}
         />
         <SearchFiltersMobile
           className={css.searchFiltersMobile}
@@ -100,6 +100,7 @@ class MainPanel extends Component {
           onOpenModal={onOpenModal}
           onCloseModal={onCloseModal}
           filterParamNames={filterParamNames}
+          currentSearchParams
           selectedFiltersCount={selectedFiltersCount}
           {...primaryFilters}
           {...secondaryFilters}
@@ -170,5 +171,15 @@ MainPanel.propTypes = {
   primaryFilters: objectOf(propTypes.filterConfig),
   secondaryFilters: objectOf(propTypes.filterConfig),
 };
+
+const extractKeys = (obj) => {
+  let returnedObject = {};
+  Object.keys(obj)
+             .forEach(k => {
+                if(k === 'keywordFilter') return;
+                returnedObject[k] = obj[k];
+           });
+          return returnedObject;
+}
 
 export default MainPanel;
