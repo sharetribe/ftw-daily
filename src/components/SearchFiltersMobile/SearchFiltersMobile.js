@@ -201,9 +201,9 @@ class SearchFiltersMobileComponent extends Component {
       intl,
     } = this.props;
 
-     if(this.state.isFiltersOpenOnMobile !== customState){
-       this.openFilters();
-      }
+    if(this.state.isFiltersOpenOnMobile !== customState){
+      this.openFilters();
+     }
 
     const classes = classNames(rootClassName || css.root, className);
 

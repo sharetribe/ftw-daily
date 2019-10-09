@@ -2,7 +2,7 @@
  * Marketplace specific configuration.
  */
 
-export const eventstype = [
+export const eventsType = [
  //type of ocassions
  {
    key: 'Wedding',

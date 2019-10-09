@@ -51,6 +51,7 @@ export class SearchPageComponent extends Component {
     this.onCloseMobileModal = this.onCloseMobileModal.bind(this);
   }
 
+    break;
   filters() {
     const {
       categories,
@@ -72,7 +73,7 @@ export class SearchPageComponent extends Component {
       },
       typesFilter: {
         paramName: 'pub_types',
-        options:  types,
+      //   options:  types,
       },
       priceFilter: {
         paramName: 'price',
