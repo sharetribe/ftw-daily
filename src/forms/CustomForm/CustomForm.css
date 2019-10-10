@@ -8,11 +8,11 @@
   box-sizing: content-box;
   padding-left: 24px;
   margin-top: 2px;
-
+  border: none;
   display: flex;
   width: 24px;
   align-self: stretch;
-  border-bottom: 2px solid var(--marketplaceColor);
+  border-bottom: 2px solid var(--marketplaceColor); 
   background-color: var(--matterColorLight);
 }
 
@@ -23,6 +23,7 @@
   margin: 0;
   line-height: unset;
   border-bottom-width: 2px;
+  
 
   /* Safari bugfix: without this Safari will print placeholder to a wrong place */
   &::-webkit-input-placeholder {
@@ -66,4 +67,9 @@
   @media (--viewportXLarge) {
     margin-bottom: 0;
   }
+}
+
+.customBorder{
+border-bottom-color: pink!important;
+font-size: 404px;
 }

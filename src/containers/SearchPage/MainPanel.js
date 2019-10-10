@@ -75,6 +75,9 @@ class MainPanel extends Component {
   
     return (
       <div className={classes}>
+         {/* <div className={css.mapIcon} onClick={onMapIconClick}>
+            <FormattedMessage id="SearchFilters.openMapView" className={css.mapIconText} />
+          </div> */}
         <SearchFilters
           className={css.searchFilters}
           urlQueryParams={urlQueryParams}
@@ -82,10 +85,11 @@ class MainPanel extends Component {
           resultsCount={totalItems}
           searchInProgress={searchInProgress}
           searchListingsError={searchListingsError}
+          onMapIconClick={onMapIconClick}
           onManageDisableScrolling={onManageDisableScrolling}
           {...searchFiltersPanelProps}
           {...extractKeys(primaryFilters)}
-        />
+        />        
         <SearchFiltersMobile
           className={css.searchFiltersMobile}
           urlQueryParams={urlQueryParams}
@@ -105,6 +109,7 @@ class MainPanel extends Component {
           {...primaryFilters}
           {...secondaryFilters}
         />
+       
         {isSearchFiltersPanelOpen ? (
           <div className={classNames(css.searchFiltersPanel)}>
             <SearchFiltersPanel

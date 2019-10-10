@@ -224,7 +224,7 @@ class TopbarComponent extends Component {
             onClick={this.handleMobileSearchOpen}
             title={intl.formatMessage({ id: 'Topbar.searchIcon' })}
           >
-            <SearchIcon className={css.searchMenuIcon} />
+            {/* <SearchIcon className={css.searchMenuIcon} /> */}
           </Button>
         </div>
         <div className={css.desktop}>

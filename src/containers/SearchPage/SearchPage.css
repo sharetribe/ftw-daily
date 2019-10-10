@@ -54,11 +54,11 @@
      * .container is using flexbox,
      * This specifies that searchResultContainer is taking 60% from the viewport width
      */
-    flex-basis: 50%;
+    flex-basis: 100%;
   }
 
   @media (--viewportLarge) {
-    flex-basis: 62.5%;
+    flex-basis: 100%;
     padding: 23px 0 0 0;
   }
 }
@@ -125,7 +125,7 @@
      * .container is using flexbox,
      * This specifies that mapPanel is taking 34% from the viewport width
      */
-    flex-basis: 50%;
+    flex-basis: 0%;
 
     /* Own layout settings */
     display: flex;
@@ -133,7 +133,7 @@
   }
 
   @media (--viewportLarge) {
-    flex-basis: 37.5%;
+    flex-basis: 0%;
   }
 }
 
@@ -160,4 +160,19 @@
   @media (--viewportLarge) {
     width: 37.5vw;
   }
+}
+.mapIcon {
+  /* Font */
+  @apply --marketplaceTinyFontStyles;
+  font-weight: var(--fontWeightBold);
+
+  /* background map image */
+  background-image: url(../../components/SearchFiltersMobile/images/map_icon216x105.png);
+  background-size: cover;
+
+  border-radius: 3px;
+  width: 72px;
+  height: 35px;
+  padding: 9px 22px;
+  margin: 0;
 }

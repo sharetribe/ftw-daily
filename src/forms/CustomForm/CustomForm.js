@@ -4,6 +4,7 @@ import { Form as FinalForm, Field } from 'react-final-form';
 import { intlShape, injectIntl } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { Form } from '../../components';
+import SearchIcon from '../../components/Topbar/SearchIcon';
 
 import css from './CustomForm.css';
 
@@ -36,8 +37,16 @@ class CustomFormComponent extends Component {
               handleSubmit,
             } = formRenderProps;
             const classes = classNames(rootClassName, className);
+            const customStyledForm = {
+              display:'flex',
+              width:'100%',
+              height:'100%',
+              paddingLeft:'15px',
+              alignItems: 'center'
+            }
             return (
-              <Form style={{display:'flex'}} className={classes} onSubmit={handleSubmit}>
+              <Form style={customStyledForm} className={[classes, 'customBorder']} onSubmit={handleSubmit}>
+               <SearchIcon className={css.searchMenuIcon} />
                 <Field
                   name="keywords"
                   render={({ input, meta }) => {
@@ -45,14 +54,15 @@ class CustomFormComponent extends Component {
                       <input
                         className={
                           isMobile
-                            ? css.mobileInputRoot
-                            : css.desktopInputRoot
+                            ? [css.mobileInputRoot]
+                            : [css.desktopInputRoot]
                         }
                         {...input}
+                        style={{border: 'none'}}
                         id="keyword-search"
                         ref={this.searchInput}
                         type="text"
-                        placeholder='Search Keywords.......'
+                        placeholder=' Filter by Keywords.......'
                         autoComplete="off"
                       />
                     );

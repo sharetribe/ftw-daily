@@ -18,6 +18,8 @@ import { parseDateFromISO8601, stringifyDateToISO8601 } from '../../util/dates';
 import { createResourceLocatorString } from '../../util/routes';
 import { propTypes } from '../../util/types';
 import css from './SearchFilters.css';
+import { TopbarSearchForm } from '../../forms';
+import config from '../../config';
 
 // Dropdown container can have a positional offset (in pixels)
 const FILTER_DROPDOWN_OFFSET = -14;
@@ -78,6 +80,7 @@ const SearchFiltersComponent = props => {
     searchFiltersPanelSelectedCount,
     history,
     intl,
+    onMapIconClick
   } = props;
 
   const hasNoResult = listingsAreLoaded && resultsCount === 0;
@@ -174,6 +177,21 @@ const SearchFiltersComponent = props => {
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   };
 
+  const handleSubmit = (values) => {
+    const { currentSearchParams } = props;
+    const { search, selectedPlace } = values.location;
+    const { history } = props;
+    const { origin, bounds } = selectedPlace;
+    const originMaybe = config.sortSearchByDistance ? { origin } : {};
+    const searchParams = {
+      ...currentSearchParams,
+      ...originMaybe,
+      address: search,
+      bounds,
+    };
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, searchParams));
+  }
+
   const categoryFilterElement = categoryFilter ? (
     <SelectSingleFilter
       urlParam={categoryFilter.paramName}
@@ -237,6 +255,14 @@ const SearchFiltersComponent = props => {
       />
     ) : null;
 
+  const locationFilter = 
+                <TopbarSearchForm
+                  onSubmit={handleSubmit}
+                  initialValues={false}
+                  isMobile={false}
+                  isCustomCss={true}
+                  contentPlacementOffset={FILTER_DROPDOWN_OFFSET}                 />
+
   const keywordFilterElement =
     keywordFilter && keywordFilter.config.active ? (
       <KeywordFilter
@@ -268,14 +294,22 @@ const SearchFiltersComponent = props => {
       />
     </button>
   ) : null;
+
+  const mapButton = 
+     <div style={{display:'inline-block'}} className={css.mapIcon} onClick={onMapIconClick}>
+       <FormattedMessage id="SearchFilters.openMapView" className={css.mapIconText} />
+      </div>
+
   return (
     <div className={classes}>
-      <div className={css.filters}>
+      <div className={css.filters} style={{ display:'flex'}}>
         {categoryFilterElement}
         {subCategoryFilterElement}
         {typesFilterElement}
         {priceFilterElement}
         {dateRangeFilterElement}
+        {locationFilter}
+        {mapButton}
         {keywordFilterElement}
         {toggleSearchFiltersPanelButton}
       </div>

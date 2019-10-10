@@ -104,3 +104,19 @@
     border: 1px solid var(--marketplaceColorDark);
   }
 }
+
+.mapIcon {
+  /* Font */
+  @apply --marketplaceTinyFontStyles;
+  font-weight: var(--fontWeightBold);
+  /* background map image */
+  background-image: url(../SearchFiltersMobile/images/map_icon216x105.png);
+  background-size: cover;
+  border-radius: 3px;
+  height: 52px;
+  font-size: 18px;
+  /* width: 72px;
+  height: 35px; */
+  padding: 15px 20px 5px 20px;
+  margin: 0;
+}

@@ -32,6 +32,14 @@ onChange(location) {
 }
 
 render() {
+  let customStyles = {
+    border: '1px solid #e7e7e7e7',
+    borderRadius: '4px',
+    height: '54px',
+    paddingLeft: '8px',
+    display: 'inline-block'
+  }
+  console.log('IS CUSTOME', this.props.isCustomCss);
   return (
     <FinalForm
       {...this.props}
@@ -45,13 +53,14 @@ render() {
         const preventFormSubmit = e => e.preventDefault();
 
         return (
-          <Form className={classes} onSubmit={preventFormSubmit}>
+          <Form className={classes} style={this.props.isCustomCss ? customStyles: null} onSubmit={preventFormSubmit}>
             <Field
               name="location"
               format={identity}
+              isCustomCss={this.props.isCustomCss}
               render={({ input, meta }) => {
                 const { onChange, ...restInput } = input;
-
+                
                 // Merge the standard onChange function with custom behaviur. A better solution would
                 // be to use the FormSpy component from Final Form and pass this.onChange to the
                 // onChange prop but that breaks due to insufficient subscription handling.
@@ -64,6 +73,7 @@ render() {
                 const searchInput = { ...restInput, onChange: searchOnChange };
                 return (
                   <LocationAutocompleteInput
+                    isCustomCss={this.props.isCustomCss}
                     className={isMobile ? css.mobileInputRoot : desktopInputRootClass}
                     iconClassName={isMobile ? css.mobileIcon : css.desktopIcon}
                     inputClassName={isMobile ? css.mobileInput : css.desktopInput}

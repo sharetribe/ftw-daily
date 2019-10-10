@@ -41,6 +41,7 @@ export class SearchPageComponent extends Component {
     this.state = {
       isSearchMapOpenOnMobile: props.tab === 'map',
       isMobileModalOpen: false,
+      isCustomClick: false,
     };
 
     this.searchMapListingsInProgress = false;
@@ -140,7 +141,7 @@ export class SearchPageComponent extends Component {
   // Invoked when a modal is closed from a child component,
   // for example when a filter modal is opened in mobile view
   onCloseMobileModal() {
-    this.setState({ isMobileModalOpen: false });
+    this.setState({ isMobileModalOpen: false , isCustomClick:false});
   }
 
   render() {
@@ -180,11 +181,16 @@ export class SearchPageComponent extends Component {
     const isWindowDefined = typeof window !== 'undefined';
     const isMobileLayout = isWindowDefined && window.innerWidth < MODAL_BREAKPOINT;
     const shouldShowSearchMap =
-      !isMobileLayout || (isMobileLayout && this.state.isSearchMapOpenOnMobile);
+      !false || (true && this.state.isSearchMapOpenOnMobile);
 
     const onMapIconClick = () => {
       this.useLocationSearchBounds = true;
-      this.setState({ isSearchMapOpenOnMobile: true });
+      this.setState({ isSearchMapOpenOnMobile: true }); 
+      this.setState( {isCustomClick: true});
+      setTimeout(() => {
+      console.log(isMobileLayout, shouldShowSearchMap,this.state.isCustomClick)
+        
+      }, 2000);
     };
 
     const { address, bounds, origin } = searchInURL || {};
@@ -244,9 +250,10 @@ export class SearchPageComponent extends Component {
           />
           <ModalInMobile
             className={css.mapPanel}
+            isCustomClick={this.state.isCustomClick}
             id="SearchPage.map"
             isModalOpenOnMobile={this.state.isSearchMapOpenOnMobile}
-            onClose={() => this.setState({ isSearchMapOpenOnMobile: false })}
+            onClose={() => this.setState({ isSearchMapOpenOnMobile: false})}
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             onManageDisableScrolling={onManageDisableScrolling}
           >

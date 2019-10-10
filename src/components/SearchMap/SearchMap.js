@@ -43,7 +43,6 @@ const withCoordinatesObfuscated = listings => {
 export class SearchMapComponent extends Component {
   constructor(props) {
     super(props);
-
     this.listings = [];
     this.mapRef = null;
 
