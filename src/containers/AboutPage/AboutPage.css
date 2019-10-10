@@ -55,3 +55,33 @@
   margin-top: 48px;
   margin-bottom: 24px;
 }
+
+
+ol, ul {
+
+}
+
+.contentList {
+    display: block;
+    list-style: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+.contentListNumbered {
+    display: block;
+    list-style: decimal;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+.contentQuote {
+  font-style: italic;
+  color: #FF685B;
+}
