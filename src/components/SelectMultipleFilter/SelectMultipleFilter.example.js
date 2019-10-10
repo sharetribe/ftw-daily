@@ -41,7 +41,6 @@ const options = [
 ];
 
 const handleSubmit = (urlParam, values, history) => {
-  console.log('Submitting values', values);
   const queryParams = values ? `?${stringify({ [urlParam]: values.join(',') })}` : '';
   history.push(`${window.location.pathname}${queryParams}`);
 };

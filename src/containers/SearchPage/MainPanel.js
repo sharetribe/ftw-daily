@@ -39,6 +39,7 @@ class MainPanel extends Component {
       searchParamsForPagination,
       showAsModalMaxWidth,
       primaryFilters,
+      updateTypes,
       secondaryFilters,
     } = this.props;
 
@@ -80,6 +81,7 @@ class MainPanel extends Component {
           </div> */}
         <SearchFilters
           className={css.searchFilters}
+          updateTypes={updateTypes}
           urlQueryParams={urlQueryParams}
           listingsAreLoaded={listingsAreLoaded}
           resultsCount={totalItems}
@@ -184,7 +186,7 @@ const extractKeys = (obj) => {
                 if(k === 'keywordFilter') return;
                 returnedObject[k] = obj[k];
            });
-          return returnedObject;
+    return returnedObject;
 }
 
 export default MainPanel;

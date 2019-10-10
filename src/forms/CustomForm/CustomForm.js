@@ -29,13 +29,13 @@ class CustomFormComponent extends Component {
           {...this.props}
           onSubmit={this.onSubmit}
           render={formRenderProps => {
-            const {
+           const {
               rootClassName,
               className,
               intl,
               isMobile,
               handleSubmit,
-            } = formRenderProps;
+             } = formRenderProps;
             const classes = classNames(rootClassName, className);
             const customStyledForm = {
               display:'flex',
@@ -46,19 +46,21 @@ class CustomFormComponent extends Component {
             }
             return (
               <Form style={customStyledForm} className={[classes, 'customBorder']} onSubmit={handleSubmit}>
-               <SearchIcon className={css.searchMenuIcon} />
-                <Field
+               <div style={{ marginTop: '-15px'}}>
+                <SearchIcon className={css.searchMenuIcon}/>
+              </div>
+               <Field
                   name="keywords"
                   render={({ input, meta }) => {
                     return (
                       <input
-                        className={
+                       className={
                           isMobile
                             ? [css.mobileInputRoot]
                             : [css.desktopInputRoot]
-                        }
+                         }
                         {...input}
-                        style={{border: 'none'}}
+                        style={{border: 'none', marginLeft: '5px'}}
                         id="keyword-search"
                         ref={this.searchInput}
                         type="text"

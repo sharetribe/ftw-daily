@@ -468,7 +468,7 @@ class LocationAutocompleteInputImpl extends Component {
       this.setState({ inputHasFocus: true });
       onFocus(e);
     };
- console.log('Is Custom css', isCustomCss);
+ 
     const rootClass = classNames(rootClassName || css.root, className);
     const iconClass = classNames(iconClassName || css.icon);
     const inputClass = classNames(inputClassName || css.input, { [validClassName]: isValid });
@@ -479,7 +479,7 @@ class LocationAutocompleteInputImpl extends Component {
     // might want to hardcode this to `true`. Otherwise the dropdown
     // list will disappear.
     const renderPredictions = this.state.inputHasFocus;
-    console.log(this.props)
+  
     return (
       
       <div className={[rootClass, isCustomCss ? 'customHeights': '']} style={{ minWidth:'300px'}} >

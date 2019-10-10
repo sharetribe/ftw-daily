@@ -90,7 +90,7 @@ class ModalInMobileComponent extends Component {
     // - mobile layout: content hidden
     const closedClassName = isClosedInMobile ? css.modalHidden : null;
     const classes = classNames({ [css.modalInMobile]: isOpenInMobile }, css.root, className);
-  console.log('MODAL IN MOBILE UPDATES', isCustomClick);
+    
     return (
       <Modal
         className={classes}

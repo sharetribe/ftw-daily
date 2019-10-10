@@ -61,7 +61,7 @@ export class SearchPageComponent extends Component {
       dateRangeFilterConfig,
       keywordFilterConfig,
     } = this.props;
-
+   
     // Note: "category" and "amenities" filters are not actually filtering anything by default.
     // Currently, if you want to use them, we need to manually configure them to be available
     // for search queries. Read more from extended data document:
@@ -131,6 +131,23 @@ export class SearchPageComponent extends Component {
       history.push(createResourceLocatorString('SearchPage', routes, {}, searchParams));
     }
   }
+  updateTypes = (props) => {
+   
+    if(props.urlQueryParams.pub_category && props.urlQueryParams.pub_types){
+      const { pub_category, pub_types} = props.urlQueryParams;
+      if(!pub_category || !pub_types) return;
+      pub_types === "Traditional,Open-Air" && pub_category === "Photo Booth" ? 
+      ( this.filterTypes(props.typesFilter) ) : this.props.types = {...this.props.types}
+    } 
+    return;
+  }
+
+  filterTypes = (types) => {
+    const newTypes = types.options
+     .filter(typ => typ.key === "Open-Air" || typ.key === "Traditional" );
+     
+     this.props.types = newTypes;
+  }
 
   // Invoked when a modal is opened from a child component,
   // for example when a filter modal is opened in mobile view
@@ -144,7 +161,7 @@ export class SearchPageComponent extends Component {
     this.setState({ isMobileModalOpen: false , isCustomClick:false});
   }
 
-  render() {
+  render() {    
     const {
       intl,
       listings,
@@ -167,6 +184,8 @@ export class SearchPageComponent extends Component {
 
     const filters = this.filters();
 
+    
+
     // urlQueryParams doesn't contain page specific url params
     // like mapSearch, page or origin (origin depends on config.sortSearchByDistance)
     const urlQueryParams = pickSearchParamsOnly(searchInURL, filters);
@@ -187,10 +206,6 @@ export class SearchPageComponent extends Component {
       this.useLocationSearchBounds = true;
       this.setState({ isSearchMapOpenOnMobile: true }); 
       this.setState( {isCustomClick: true});
-      setTimeout(() => {
-      console.log(isMobileLayout, shouldShowSearchMap,this.state.isCustomClick)
-        
-      }, 2000);
     };
 
     const { address, bounds, origin } = searchInURL || {};
@@ -212,7 +227,7 @@ export class SearchPageComponent extends Component {
         title={title}
         schema={schema}
       >
-        <TopbarContainer
+      <TopbarContainer
           onOpenSearchN={() => { this.onOpenMobileModal()}}
           className={topbarClasses}
           currentPage="SearchPage"
@@ -220,8 +235,8 @@ export class SearchPageComponent extends Component {
           urlQueryParams={validQueryParams}
           keywordFilter={filters.keywordFilter}
           currentSearchParams={urlQueryParams}
-        />
-        <div className={css.container}>
+      />
+      <div className={css.container}>
           <MainPanel
             customState={this.state.isMobileModalOpen}
             urlQueryParams={validQueryParams}
@@ -239,6 +254,7 @@ export class SearchPageComponent extends Component {
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             location
             history
+            updateTypes={this.updateTypes}
             currentSearchParams={urlQueryParams}
             primaryFilters={{
               categoryFilter: filters.categoryFilter,
@@ -247,13 +263,13 @@ export class SearchPageComponent extends Component {
               dateRangeFilter: filters.dateRangeFilter,
               keywordFilter: filters.keywordFilter,
             }}
-          />
+        />
           <ModalInMobile
             className={css.mapPanel}
             isCustomClick={this.state.isCustomClick}
             id="SearchPage.map"
             isModalOpenOnMobile={this.state.isSearchMapOpenOnMobile}
-            onClose={() => this.setState({ isSearchMapOpenOnMobile: false})}
+            onClose={() => this.setState({ isSearchMapOpenOnMobile: false, isCustomClick: false})}
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             onManageDisableScrolling={onManageDisableScrolling}
           >

@@ -186,7 +186,6 @@ class SearchFiltersMobileComponent extends Component {
   }
 
   handleSubmit(values) {
-    console.log(this.props)
     const { currentSearchParams } = this.props;
     const { search, selectedPlace } = values.location;
     const { history } = this.props;
@@ -202,6 +201,7 @@ class SearchFiltersMobileComponent extends Component {
   }
 
   render() {
+    
     const {
       rootClassName,
       customState,
@@ -354,7 +354,6 @@ class SearchFiltersMobileComponent extends Component {
                         isMobile={false}
                        />
      </div>
-     
 
     return (
       <div className={classes}>
@@ -390,7 +389,6 @@ class SearchFiltersMobileComponent extends Component {
             <div className={css.filtersWrapper}>
               {keywordFilterElement}
               {categoryFilterElement}
-              
               {locationFilter}
               {typesFilterElement}
               {priceFilterElement}
@@ -407,7 +405,10 @@ class SearchFiltersMobileComponent extends Component {
       </div>
     );
   }
+  
 }
+
+
 
 SearchFiltersMobileComponent.defaultProps = {
   rootClassName: null,
@@ -451,5 +452,7 @@ SearchFiltersMobileComponent.propTypes = {
 };
 
 const SearchFiltersMobile = injectIntl(withRouter(SearchFiltersMobileComponent));
+
+
 
 export default SearchFiltersMobile;

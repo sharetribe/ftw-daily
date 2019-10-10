@@ -299,8 +299,10 @@ const SearchFiltersComponent = props => {
      <div style={{display:'inline-block'}} className={css.mapIcon} onClick={onMapIconClick}>
        <FormattedMessage id="SearchFilters.openMapView" className={css.mapIconText} />
       </div>
-
+ 
+  // props.updateTypes(props);
   return (
+    
     <div className={classes}>
       <div className={css.filters} style={{ display:'flex'}}>
         {categoryFilterElement}

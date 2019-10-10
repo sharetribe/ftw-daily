@@ -39,7 +39,7 @@ render() {
     paddingLeft: '8px',
     display: 'inline-block'
   }
-  console.log('IS CUSTOME', this.props.isCustomCss);
+
   return (
     <FinalForm
       {...this.props}
