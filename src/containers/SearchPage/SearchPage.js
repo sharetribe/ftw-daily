@@ -51,7 +51,7 @@ export class SearchPageComponent extends Component {
     this.onCloseMobileModal = this.onCloseMobileModal.bind(this);
   }
 
-    break;
+  break;
   filters() {
     const {
       categories,
@@ -89,6 +89,8 @@ export class SearchPageComponent extends Component {
       },
     };
   }
+
+
 
   // Callback to determine if new search is needed
   // when map is moved by user or viewport has changed
@@ -207,14 +209,14 @@ export class SearchPageComponent extends Component {
         schema={schema}
       >
         <TopbarContainer
-          onOpenSearchN={() => { this.onOpenMobileModal()}}
+        onOpenSearchN={() => { this.onOpenMobileModal()}}
           className={topbarClasses}
           currentPage="SearchPage"
           currentSearchParams={urlQueryParams}
         />
         <div className={css.container}>
           <MainPanel
-            customState={this.state.isMobileModalOpen}
+          customState={this.state.isMobileModalOpen}
             urlQueryParams={validQueryParams}
             listings={listings}
             searchInProgress={searchInProgress}
