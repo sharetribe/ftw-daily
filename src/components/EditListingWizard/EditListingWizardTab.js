@@ -13,7 +13,7 @@ import {
   EditListingAvailabilityPanel,
   EditListingDescriptionPanel,
   EditListingFeaturesPanel,
-  EditListingEventTypePanel,
+  // EditListingEventsPanel,
   EditListingLocationPanel,
   EditListingPhotosPanel,
   EditListingPoliciesPanel,
@@ -25,6 +25,7 @@ import css from './EditListingWizard.css';
 export const AVAILABILITY = 'availability';
 export const DESCRIPTION = 'description';
 export const FEATURES = 'features';
+// export const EVENTS = 'events'
 // export const POLICY = 'policy';
 export const LOCATION = 'location';
 export const PRICING = 'pricing';
@@ -34,7 +35,7 @@ export const PHOTOS = 'photos';
 export const SUPPORTED_TABS = [
   DESCRIPTION,
   FEATURES,
-
+  // EVENTS,
   // POLICY,
   LOCATION,
   PRICING,
@@ -184,6 +185,21 @@ const EditListingWizardTab = props => {
         />
       );
     }
+    // case EVENTS: {
+    //   const submitButtonTranslationKey = isNewListingFlow
+    //     ? 'EditListingWizard.saveNewEvents'
+    //     : 'EditListingWizard.saveEditEvents';
+    //   return (
+    //     <EditListingEventsPanel
+    //       {...panelProps(EVENTS)}
+    //       submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+    //       onSubmit={values => {
+    //         onCompleteEditListingWizardTab(tab, values);
+    //       }}
+    //     />
+    //   );
+    // }
+
     // case POLICY: {
     //   const submitButtonTranslationKey = isNewListingFlow
     //     ? 'EditListingWizard.saveNewPolicies'
