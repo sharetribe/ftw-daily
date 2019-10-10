@@ -1,11 +1,12 @@
 {
+    "engines": {
+        "node": "10.16.3"
+    },
+
   "name": "app",
   "version": "3.5.1",
   "private": true,
   "license": "Apache-2.0",
-  "engines": {
-   "node": "10.16.3"
- }
   "dependencies": {
     "@formatjs/intl-relativetimeformat": "^2.8.2",
     "@mapbox/polyline": "^1.0.0",
