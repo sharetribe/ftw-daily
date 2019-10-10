@@ -3,6 +3,9 @@
   "version": "3.5.1",
   "private": true,
   "license": "Apache-2.0",
+  "engines": {
+   "node": "10.16.3"
+ }
   "dependencies": {
     "@formatjs/intl-relativetimeformat": "^2.8.2",
     "@mapbox/polyline": "^1.0.0",
@@ -55,13 +58,7 @@
     "sharetribe-scripts": "3.1.1",
     "smoothscroll-polyfill": "^0.4.0",
     "source-map-support": "^0.5.9",
-    "url": "^0.11.0",
-    "engines": {
-      "node": "10.16.3"
-       "yarn": "1.19.1"
-        "npm": "6.9.0",
-}
-}
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "babel-jest": "24.9.0",
