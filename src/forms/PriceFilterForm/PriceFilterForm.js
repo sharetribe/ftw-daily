@@ -91,7 +91,6 @@ const PriceFilterFormComponent = props => {
           min,
           max,
           step,
-          valueFormat,
           hideSlider,
         } = formRenderProps;
         const { minPrice: minPriceRaw, maxPrice: maxPriceRaw } = values;
@@ -140,7 +139,6 @@ const PriceFilterFormComponent = props => {
                   step={step}
                   parse={parseMin(min, maxPrice)}
                 />
-                <span className={css.valueFormat}>{valueFormat}</span>
                 <span className={css.priceSeparator}>-</span>
                 <Field
                   className={css.maxPrice}
@@ -154,7 +152,6 @@ const PriceFilterFormComponent = props => {
                   step={step}
                   parse={parseMax(max, minPrice)}
                 />
-                <span className={css.valueFormat}>{valueFormat}</span>
               </div>
             </div>
 

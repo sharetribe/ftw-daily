@@ -148,7 +148,6 @@ const RangeFilterFormComponent = props => {
                   step={step}
                   parse={parseMin(min, maxValue)}
                 />
-                <span className={css.valueFormat}>{valueFormat}</span>
                 <span className={css.rangeSeparator}>-</span>
                 <Field
                   className={css.maxValue}
@@ -162,7 +161,6 @@ const RangeFilterFormComponent = props => {
                   step={step}
                   parse={parseMax(max, minValue)}
                 />
-                <span className={css.valueFormat}>{valueFormat}</span>
               </div>
             </div>
 

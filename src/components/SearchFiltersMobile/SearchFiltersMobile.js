@@ -291,9 +291,8 @@ class SearchFiltersMobileComponent extends Component {
         id="SearchFilters.ageFilter"
         urlParam={ageFilter.paramName}
         onSubmit={this.handleRange}
-        buttonLabelId="SearchFilters.ageLabel"
+        buttonLabelId="SearchFilters.ageLabelWithValue"
         rangeFilterFormLabelId="SearchFilters.ageLabel"
-        valueFormat="Jahre"
         valueTypeLabelId="SearchFilter.typeAgeValue"
         {...ageFilter.config}
         liveEdit
@@ -318,10 +317,9 @@ class SearchFiltersMobileComponent extends Component {
         id="SearchFilters.hightFilter"
         urlParam={hightFilter.paramName}
         onSubmit={this.handleRange}
-        buttonLabelId="SearchFilters.hightLabel"
+        buttonLabelId="SearchFilters.hightLabelWithValue"
         rangeFilterFormLabelId="SearchFilters.hightLabel"
         valueTypeLabelId="SearchFilter.typeHeightValue"
-        valueFormat="cm"
         {...hightFilter.config}
         liveEdit
         initialValues={initialHight}
@@ -360,7 +358,6 @@ class SearchFiltersMobileComponent extends Component {
         urlParam={priceFilter.paramName}
         onSubmit={this.handlePrice}
         liveEdit
-        valueFormat="CHF"
         {...priceFilter.config}
         initialValues={initialPriceRange}
       />
