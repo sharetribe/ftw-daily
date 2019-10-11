@@ -13,7 +13,6 @@ export const subUnitDivisors = {
   JPY: 1,
   MXN: 100,
   NOK: 100,
-  NZD: 100,
   SEK: 100,
   SGD: 100,
   USD: 100,
