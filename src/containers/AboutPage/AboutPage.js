@@ -36,15 +36,15 @@ const AboutPage = () => {
 
         <LayoutWrapperMain className={css.staticPageWrapper}>
           <h1 className={css.pageTitle}>öogo</h1>
-          <img className={css.coverImage} src={image} alt="My first ice cream." />
+          <img className={css.coverImage} src={image} alt="öogo" />
 
           <div className={css.contentWrapper}>
              <div className={css.contentSide}>
-              <p className={css.contentQuote}>“our business is to enhance your guest’s experience”</p>
+              <p className={css.contentQuote}>Book the Right-Fit Childcare, every time</p>
             </div> 
 
             <div className={css.contentMain}>
-              <h2>
+              {/* <h2>
                 What is öogo?
               </h2>
               <p>
@@ -124,21 +124,7 @@ const AboutPage = () => {
               <p>The öogo platform is fully GDPR compliant and is hosted through Finish company, ShareTribe’s, platform with data securely stored on AWS.</p>
               <p id="contact">
                 <ExternalLink href="https://öogo.me">öogo.me</ExternalLink> / <ExternalLink href="mailto:hello@öogo.me">hello@öogo.me</ExternalLink> / <ExternalLink href="help@öogo.me">help@öogo.me</ExternalLink> / <ExternalLink href="tel:18000000000">1800 xxx xxx</ExternalLink>
-              </p>
-
-
-
-
-
-
-              {/* <h3 className={css.subtitle}>Are you a sauna owner?</h3> */}
-
-{/*
-
-                You can also checkout our{' '}
-                <ExternalLink href={siteFacebookPage}>Facebook</ExternalLink> and{' '}
-                <ExternalLink href={siteTwitterPage}>Twitter</ExternalLink>. */}
-
+              </p> */}
             </div>
           </div>
         </LayoutWrapperMain>
