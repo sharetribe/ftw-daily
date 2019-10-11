@@ -40,6 +40,7 @@ class RangeFilterPlainComponent extends Component {
       buttonLabelId,
       valueTypeLabelId,
       rangeFilterFormLabelId,
+      valueFormat
     } = this.props;
 
     const classes = classNames(rootClassName || css.root, className);
@@ -52,10 +53,6 @@ class RangeFilterPlainComponent extends Component {
     const labelText = hasInitialValues
       ? intl.formatMessage(
           { id: rangeFilterFormLabelId },
-          {
-            minValue: `${minValue} ${intl.formatMessage({ id: valueTypeLabelId })}`,
-            maxValue: `${maxValue} ${intl.formatMessage({ id: valueTypeLabelId })}`,
-          }
         )
       : intl.formatMessage({ id: buttonLabelId });
 
@@ -66,17 +63,18 @@ class RangeFilterPlainComponent extends Component {
             <span className={labelClass}>{labelText}</span>
           </button>
           <button type="button" className={css.clearButton} onClick={this.handleClear}>
-            <FormattedMessage id={rangeFilterFormLabelId} />
+            <FormattedMessage id='PriceFilter.clear' />
           </button>
         </div>
         <div className={css.formWrapper}>
           <RangeFilterForm
-            {...{ id, min, max, step, intl, rangeFilterFormLabelId }}
+            {...{ id, min, max, step, intl, valueFormat, rangeFilterFormLabelId }}
             initialValues={hasInitialValues ? initialValues : { minValue: min, maxValue: max }}
             onChange={this.handleChange}
             contentRef={node => {
               this.filterContent = node;
             }}
+            hideSlider
             liveEdit
             isOpen={this.state.isOpen}
           />

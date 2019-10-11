@@ -70,6 +70,7 @@
 .selectedLabel,
 .notSelectedLabel {
   @apply --marketplaceBodyFontStyles;
+  font-size: 16px;
   line-height: var(--PropertyGroup_lineHeight);
   margin: 0;
 }

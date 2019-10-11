@@ -1,5 +1,10 @@
 @import '../../marketplace.css';
 
+.arrow {
+  width: 36px;
+  height: 36px;
+}
+
 .small {
   width: 24px;
   height: 24px;

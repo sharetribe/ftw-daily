@@ -99,6 +99,8 @@ const RangeFilterFormComponent = props => {
           min,
           max,
           step,
+          hideSlider,
+          valueFormat
         } = formRenderProps;
         const { minValue: minValueRaw, maxValue: maxValueRaw } = values;
         const minValue = typeof minValueRaw !== 'string' ? minValueRaw : min;
@@ -146,6 +148,7 @@ const RangeFilterFormComponent = props => {
                   step={step}
                   parse={parseMin(min, maxValue)}
                 />
+                <span className={css.valueFormat}>{valueFormat}</span>
                 <span className={css.rangeSeparator}>-</span>
                 <Field
                   className={css.maxValue}
@@ -159,10 +162,11 @@ const RangeFilterFormComponent = props => {
                   step={step}
                   parse={parseMax(max, minValue)}
                 />
+                <span className={css.valueFormat}>{valueFormat}</span>
               </div>
             </div>
 
-            <div className={css.sliderWrapper}>
+            {!hideSlider && <div className={css.sliderWrapper}>
               <RangeSlider
                 min={min}
                 max={max}
@@ -173,7 +177,7 @@ const RangeFilterFormComponent = props => {
                   form.change('maxValue', handles[1]);
                 }}
               />
-            </div>
+            </div>}
 
             {liveEdit ? (
               <FormSpy onChange={handleChange} subscription={{ values: true, dirty: true }} />
@@ -209,6 +213,8 @@ RangeFilterFormComponent.defaultProps = {
   onChange: null,
   onClear: null,
   onSubmit: null,
+  hideSlider: false,
+  valueFormat: ''
 };
 
 RangeFilterFormComponent.propTypes = {
@@ -226,7 +232,8 @@ RangeFilterFormComponent.propTypes = {
   max: number.isRequired,
   step: number,
   rangeFilterFormLabelId: string.isRequired,
-
+  hideSlider: bool,
+  valueFormat: string,
   // form injectIntl
   intl: intlShape.isRequired,
 };

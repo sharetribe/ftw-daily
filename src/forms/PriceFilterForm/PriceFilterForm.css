@@ -196,3 +196,8 @@
     transition: width var(--transitionStyleButton);
   }
 }
+
+.valueFormat {
+  display: flex;
+  align-items: center;
+}

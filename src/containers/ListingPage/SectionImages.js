@@ -42,6 +42,7 @@ class SectionImages extends Component {
 
     const hasImages = images && images.length > 0;
     const firstImage = hasImages ? images[0] : null;
+    const secondImage = hasImages ? images[1] : null;
 
     // Action bar is wrapped with a div that prevents the click events
     // to the parent that would otherwise open the image carousel
@@ -105,6 +106,14 @@ class SectionImages extends Component {
               >
                 <ResponsiveImage image={firstImage} {...imageProps} />
               </div>
+              {secondImage && !gallerySecondaryColumns && (<div
+                className={css.galleryMainImageContainer}
+                onClick={e => handleViewPhotosClick(e, 1)}
+              >
+                <ResponsiveImage image={secondImage} {...imageProps} />
+                
+              </div>)}
+              
               {galleryColumns}
             </div>
             {viewPhotosButton}
