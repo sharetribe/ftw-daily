@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { string, func, oneOfType } from 'prop-types';
 import { FormattedMessage } from '../../util/reactIntl';
-import truncate from 'lodash/truncate';
 import classNames from 'classnames';
 import { AvatarLarge, NamedLink, InlineTextButton } from '../../components';
 import { ensureUser, ensureCurrentUser } from '../../util/data';
@@ -11,8 +10,9 @@ import css from './UserCard.css';
 
 // Approximated collapsed size so that there are ~three lines of text
 // in the desktop layout in the host section of the ListingPage.
-const BIO_COLLAPSED_LENGTH = 170;
+//const BIO_COLLAPSED_LENGTH = 170;
 
+/*
 const truncated = s => {
   return truncate(s, {
     length: BIO_COLLAPSED_LENGTH,
@@ -26,7 +26,7 @@ const truncated = s => {
     separator: /\s|,|\.|:|;/,
     omission: '…',
   });
-};
+};*/
 
 class ExpandableBio extends Component {
   constructor(props) {
@@ -34,18 +34,19 @@ class ExpandableBio extends Component {
     this.state = { expand: false };
   }
   render() {
-    const { expand } = this.state;
+    //const { expand } = this.state;
     const { className, bio } = this.props;
-    const truncatedBio = truncated(bio);
+    //const truncatedBio = truncated(bio);
 
+    /*
     const handleShowMoreClick = () => {
       this.setState({ expand: true });
-    };
-    const showMore = (
+    };*/
+    /*const showMore = (
       <InlineTextButton rootClassName={css.showMore} onClick={handleShowMoreClick}>
         <FormattedMessage id="UserCard.showFullBioLink" />
       </InlineTextButton>
-    );
+    );*/
     return (
       <p className={className}>
         {bio}

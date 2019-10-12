@@ -29,7 +29,6 @@ export const ContactDetailsPageComponent = props => {
     savePhoneNumberError,
     saveContactDetailsInProgress,
     currentUser,
-    currentUserType,
     currentUserHasProviderAccess,
     contactDetailsChanged,
     onChange,

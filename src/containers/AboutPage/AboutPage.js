@@ -27,7 +27,7 @@ export class AboutPageComponent extends Component {
     this.state = {
     };
 
-    const staticPageRenderOptions = {
+    this.staticPageRenderOptions = {
       renderNode: {
         [BLOCKS.PARAGRAPH]: (node, children) => (
           <p>{children}</p>

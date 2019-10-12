@@ -110,7 +110,7 @@ export class ProfileSettingsPageComponent extends Component {
                   <FormattedMessage id="ProfileSettingsPage.accountTypeDescription"/>
                   </h3>
                   <h4 className={css.accountType}>
-                  {(memberType == 'coach') ? 
+                  {(memberType === 'coach') ? 
                     (<FormattedMessage id="ProfileSettingsPage.providerTypeName"/>): 
                     (<FormattedMessage id="ProfileSettingsPage.memberTypeName"/>)}
                     

@@ -10,7 +10,7 @@ import {
   autocompletePlaceSelected,
   composeValidators,
 } from '../../util/validators';
-import { Form, LocationAutocompleteInputField, Button, FieldTextInput } from '../../components';
+import { Form, LocationAutocompleteInputField, Button } from '../../components';
 
 import css from './EditListingLocationForm.css';
 
@@ -43,18 +43,6 @@ export const EditListingLocationFormComponent = props => (
       });
       const addressNotRecognizedMessage = intl.formatMessage({
         id: 'EditListingLocationForm.addressNotRecognized',
-      });
-
-      const optionalText = intl.formatMessage({
-        id: 'EditListingLocationForm.optionalText',
-      });
-
-      const buildingMessage = intl.formatMessage(
-        { id: 'EditListingLocationForm.building' },
-        { optionalText: optionalText }
-      );
-      const buildingPlaceholderMessage = intl.formatMessage({
-        id: 'EditListingLocationForm.buildingPlaceholder',
       });
 
       const { updateListingError, showListingsError } = fetchErrors || {};

@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom';
 import { StaticPage, TopbarContainer } from '../../containers';
 import {
   LayoutSingleColumn,
-  LayoutFullWidth,
   LayoutWrapperTopbar,
   LayoutWrapperMain,
   LayoutWrapperFooter,
@@ -32,7 +31,7 @@ export class SportsPageComponent extends Component {
     const Text = ({ children }) => <p>{children}</p>;
     const List = ({ children }) => <ul className={css.bodyUnorderedList}>{children}</ul>;
 
-    const staticPageRenderOptions = {
+    this.staticPageRenderOptions = {
       renderNode: {
         [BLOCKS.PARAGRAPH]: (node, children) => (
           <Text>{children}</Text>
@@ -77,7 +76,7 @@ export class SportsPageComponent extends Component {
           </LayoutWrapperTopbar>
 
           <LayoutWrapperMain className={css.staticPageWrapper}>
-            <img className={css.coverImage} src={image} alt="Picture of a sauna" />
+            <img className={css.coverImage} src={image} alt="Outdoorcoach logotyp" />
             <div className={css.contentWrapper}>
               {}Hi
             </div>

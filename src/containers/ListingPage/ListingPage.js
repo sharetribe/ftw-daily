@@ -43,10 +43,10 @@ import { TopbarContainer, NotFoundPage } from '../../containers';
 
 import { sendEnquiry, loadData, setInitialValues } from './ListingPage.duck';
 import SectionImages from './SectionImages';
-import SectionAvatar from './SectionAvatar';
+
 import SectionHeading from './SectionHeading';
 import SectionDescriptionMaybe from './SectionDescriptionMaybe';
-import SectionFeaturesMaybe from './SectionFeaturesMaybe';
+//import SectionFeaturesMaybe from './SectionFeaturesMaybe';
 // import SectionReviews from './SectionReviews';
 import SectionHostMaybe from './SectionHostMaybe';
 import SectionRulesMaybe from './SectionRulesMaybe';
@@ -189,7 +189,6 @@ export class ListingPageComponent extends Component {
       timeSlots,
       fetchTimeSlotsError,
       categoriesConfig,
-      amenitiesConfig,
     } = this.props;
 
     const listingId = new UUID(rawParams.id);

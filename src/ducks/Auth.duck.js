@@ -175,8 +175,8 @@ export const signup = params => (dispatch, getState, sdk) => {
   const { email, password, firstName, lastName, ...rest } = params;
   
   //set extended data variables used to create account without provider permission
-  const userType = USER_TYPE_MEMBER;
-  const hasProviderAccess = false;
+  //const userType = USER_TYPE_MEMBER;
+  //const hasProviderAccess = false;
 
   const createUserParams = isEmpty(rest)
     ? { email, password, firstName, lastName, publicData: {userType: USER_TYPE_MEMBER}, privateData: { hasProviderAccess: false } }

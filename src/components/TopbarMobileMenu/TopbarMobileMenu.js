@@ -44,13 +44,7 @@ const TopbarMobileMenu = props => {
       </span>
     );
 
-    const enterprisePageLink = (
-      <NamedLink name="EnterprisePage" className={css.pageLink} activeClassName={css.activePageLink}>
-        <span className={css.linkText}>
-          <FormattedMessage id="EnterprisePage.topBarLinkText" />
-        </span>
-      </NamedLink>
-    )
+    
     return (
       <div className={css.root}>
         <div className={css.content}>

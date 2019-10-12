@@ -5,7 +5,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { types as sdkTypes } from '../../util/sdkLoader';
-import { REVIEW_TYPE_OF_PROVIDER, REVIEW_TYPE_OF_CUSTOMER, propTypes } from '../../util/types';
+import { propTypes } from '../../util/types';
 import { ensureCurrentUser, ensureUser } from '../../util/data';
 import { withViewport } from '../../util/contextHelpers';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
@@ -22,7 +22,6 @@ import {
   NamedLink,
   ListingCard,
   // Reviews,
-  ButtonTabNavHorizontal,
 } from '../../components';
 import { TopbarContainer, NotFoundPage } from '../../containers';
 import { loadData } from './ProfilePage.duck';
@@ -31,7 +30,7 @@ import config from '../../config';
 import css from './ProfilePage.css';
 
 const { UUID } = sdkTypes;
-const MAX_MOBILE_SCREEN_WIDTH = 768;
+//const MAX_MOBILE_SCREEN_WIDTH = 768;
 
 export class ProfilePageComponent extends Component {
   // constructor(props) {
@@ -68,7 +67,6 @@ export class ProfilePageComponent extends Component {
       listings,
       // reviews,
       // queryReviewsError,
-      viewport,
       intl,
     } = this.props;
     const ensuredCurrentUser = ensureCurrentUser(currentUser);
@@ -79,7 +77,7 @@ export class ProfilePageComponent extends Component {
     const bio = profileUser.attributes.profile.bio;
     const hasBio = !!bio;
     const hasListings = listings.length > 0;
-    const isMobileLayout = viewport.width < MAX_MOBILE_SCREEN_WIDTH;
+    
 
     const userType = user ? user.attributes.profile.publicData.userType : null;
 
@@ -98,7 +96,7 @@ export class ProfilePageComponent extends Component {
       <div className={css.asideContent}>
         <div className={css.avatarContainer}>
           <AvatarLarge className={css.avatar} user={user} disableProfileLink />
-          {userType && (userType == "coach") ?
+          {userType && (userType === "coach") ?
             (<h3 className={css.accountTypeBadge}><FormattedMessage id="ProfileSettingsPage.providerTypeName" /></h3>) : ""}
         </div>
 
@@ -117,11 +115,12 @@ export class ProfilePageComponent extends Component {
       [css.withBioMissingAbove]: !hasBio,
     });
 
-    const reviewsError = (
+    // uncomment when displaying reviews
+    /*const reviewsError = (
       <p className={css.error}>
         <FormattedMessage id="ProfilePage.loadingReviewsFailed" />
       </p>
-    );
+    );*/
 
     //const reviewsOfProvider = reviews.filter(r => r.attributes.type === REVIEW_TYPE_OF_PROVIDER);
 

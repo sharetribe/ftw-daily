@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import logoImg from './OC-svg.svg';
-import css from './Logo.css';
 
 const IconLogo = props => {
-  const { className, ...rest } = props;
+  const { className } = props;
 
   return (
     /*<svg
@@ -18,7 +17,7 @@ const IconLogo = props => {
       
       
     </svg>*/
-    <img src={logoImg} className={className}/>
+    <img src={logoImg} className={className} alt="outdoorcoach logotyp"/>
   );
 };
 
