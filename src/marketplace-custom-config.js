@@ -4,44 +4,49 @@
 
 export const amenities = [
   {
-    key: 'towels',
-    label: 'Towels',
+    key: 'electricity',
+    label: 'Electricity',
   },
   {
-    key: 'bathroom',
-    label: 'Bathroom',
+    key: 'drivable',
+    label: 'Drivable',
   },
   {
-    key: 'swimming_pool',
-    label: 'Swimming pool',
+    key: 'roof',
+    label: 'Roof',
   },
   {
-    key: 'own_drinks',
-    label: 'Own drinks allowed',
+    key: 'gated',
+    label: 'Gated',
   },
   {
     key: 'jacuzzi',
     label: 'Jacuzzi',
   },
   {
-    key: 'audiovisual_entertainment',
-    label: 'Audiovisual entertainment',
+    key: 'climate_control',
+    label: 'Climate Control',
   },
   {
-    key: 'barbeque',
-    label: 'Barbeque',
+    key: 'garage_units',
+    label: 'Garage Units',
   },
   {
-    key: 'own_food_allowed',
-    label: 'Own food allowed',
+    key: 'wifi',
+    label: 'Wifi',
+  },
+  {
+    key: 'security',
+    label: 'Security',
   },
 ];
 
 export const categories = [
-  { key: 'smoke', label: 'Smoke' },
-  { key: 'electric', label: 'Electric' },
-  { key: 'wood', label: 'Wood' },
-  { key: 'other', label: 'Other' },
+  { key: 'storage_unit', label: 'Storage Unit' },
+  { key: 'shed', label: 'Shed' },
+  { key: 'pole_barn', label: 'Pole Barn' },
+  { key: 'acerage', label: 'Acerage' },
+  { key: 'parking', label: 'Parking' },
 ];
 
 // Price filter configuration
