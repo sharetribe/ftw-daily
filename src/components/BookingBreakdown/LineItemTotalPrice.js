@@ -31,10 +31,13 @@ const LineItemUnitPrice = props => {
   const formattedTotalPrice = formatMoney(intl, totalPrice);
 
   return (
-    <div className={css.lineItem}>
-      <div className={css.totalLabel}>{totalLabel}</div>
-      <div className={css.totalPrice}>{formattedTotalPrice}</div>
-    </div>
+    <>
+      <hr className={css.totalDivider} />
+      <div className={css.lineItemTotal}>
+        <div className={css.totalLabel}>{totalLabel}</div>
+        <div className={css.totalPrice}>{formattedTotalPrice}</div>
+      </div>
+    </>
   );
 };
 
