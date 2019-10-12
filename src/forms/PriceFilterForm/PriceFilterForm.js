@@ -91,6 +91,7 @@ const PriceFilterFormComponent = props => {
           min,
           max,
           step,
+          hideSlider,
         } = formRenderProps;
         const { minPrice: minPriceRaw, maxPrice: maxPriceRaw } = values;
         const minPrice = typeof minPriceRaw !== 'string' ? minPriceRaw : min;
@@ -154,7 +155,7 @@ const PriceFilterFormComponent = props => {
               </div>
             </div>
 
-            <div className={css.sliderWrapper}>
+            {!hideSlider && <div className={css.sliderWrapper}>
               <RangeSlider
                 min={min}
                 max={max}
@@ -165,7 +166,7 @@ const PriceFilterFormComponent = props => {
                   form.change('maxPrice', handles[1]);
                 }}
               />
-            </div>
+            </div> }
 
             {liveEdit ? (
               <FormSpy onChange={handleChange} subscription={{ values: true, dirty: true }} />
@@ -201,6 +202,8 @@ PriceFilterFormComponent.defaultProps = {
   onChange: null,
   onClear: null,
   onSubmit: null,
+  hideSlider: false,
+  valueFormat: ''
 };
 
 PriceFilterFormComponent.propTypes = {
@@ -217,6 +220,8 @@ PriceFilterFormComponent.propTypes = {
   min: number.isRequired,
   max: number.isRequired,
   step: number,
+  hideSlider: bool,
+  valueFormat: string,
 
   // form injectIntl
   intl: intlShape.isRequired,

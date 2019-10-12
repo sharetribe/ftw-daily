@@ -17,7 +17,11 @@ const parseMin = (min, currentMax) => value => {
   if (isNaN(parsedValue)) {
     return '';
   }
-  return parsedValue < min ? min : parsedValue > currentMax ? currentMax : parsedValue;
+  return parsedValue < min && currentMax > min
+    ? min
+    : parsedValue > currentMax
+    ? currentMax
+    : parsedValue;
 };
 
 // Helper function to parse value for max handle
@@ -27,7 +31,11 @@ const parseMax = (max, currentMin) => value => {
   if (isNaN(parsedValue)) {
     return '';
   }
-  return parsedValue < currentMin ? currentMin : parsedValue > max ? max : parsedValue;
+  return parsedValue < currentMin && currentMin < max
+    ? currentMin
+    : parsedValue > max
+    ? max
+    : parsedValue;
 };
 
 // RangeFilterForm component
@@ -56,9 +64,11 @@ const RangeFilterFormComponent = props => {
     formState => {
       if (formState.dirty) {
         const { minValue, maxValue, ...restValues } = formState.values;
+        const parsedMin = parseMin(rest.min, maxValue)(minValue);
+        const parsedMax = parseMax(rest.max, minValue)(maxValue);
         onChange({
-          minValue: minValue === '' ? rest.min : minValue,
-          maxValue: maxValue === '' ? rest.max : maxValue,
+          minValue: minValue === '' ? rest.min : parsedMin,
+          maxValue: maxValue === '' ? rest.max : parsedMax,
           ...restValues,
         });
       }
@@ -69,9 +79,11 @@ const RangeFilterFormComponent = props => {
 
   const handleSubmit = values => {
     const { minValue, maxValue, ...restValues } = values;
+    const parsedMin = parseMin(rest.min, maxValue)(minValue);
+    const parsedMax = parseMax(rest.max, minValue)(maxValue);
     return onSubmit({
-      minValue: minValue === '' ? rest.min : minValue,
-      maxValue: maxValue === '' ? rest.max : maxValue,
+      minValue: minValue === '' ? rest.min : parsedMin,
+      maxValue: maxValue === '' ? rest.max : parsedMax,
       ...restValues,
     });
   };
@@ -99,6 +111,7 @@ const RangeFilterFormComponent = props => {
           min,
           max,
           step,
+          hideSlider,
         } = formRenderProps;
         const { minValue: minValueRaw, maxValue: maxValueRaw } = values;
         const minValue = typeof minValueRaw !== 'string' ? minValueRaw : min;
@@ -144,7 +157,9 @@ const RangeFilterFormComponent = props => {
                   min={min}
                   max={max}
                   step={step}
-                  parse={parseMin(min, maxValue)}
+                  format={parseMin(min, maxValue)}
+                  formatOnBlur
+                  // parse={parseMin(min, maxValue)}
                 />
                 <span className={css.rangeSeparator}>-</span>
                 <Field
@@ -157,23 +172,27 @@ const RangeFilterFormComponent = props => {
                   min={min}
                   max={max}
                   step={step}
-                  parse={parseMax(max, minValue)}
+                  format={parseMax(max, minValue)}
+                  formatOnBlur
+                  // parse={parseMax(max, minValue)}
                 />
               </div>
             </div>
 
-            <div className={css.sliderWrapper}>
-              <RangeSlider
-                min={min}
-                max={max}
-                step={step}
-                handles={[minValue, maxValue]}
-                onChange={handles => {
-                  form.change('minValue', handles[0]);
-                  form.change('maxValue', handles[1]);
-                }}
-              />
-            </div>
+            {!hideSlider && (
+              <div className={css.sliderWrapper}>
+                <RangeSlider
+                  min={min}
+                  max={max}
+                  step={step}
+                  handles={[minValue, maxValue]}
+                  onChange={handles => {
+                    form.change('minValue', handles[0]);
+                    form.change('maxValue', handles[1]);
+                  }}
+                />
+              </div>
+            )}
 
             {liveEdit ? (
               <FormSpy onChange={handleChange} subscription={{ values: true, dirty: true }} />
@@ -209,6 +228,8 @@ RangeFilterFormComponent.defaultProps = {
   onChange: null,
   onClear: null,
   onSubmit: null,
+  hideSlider: false,
+  valueFormat: '',
 };
 
 RangeFilterFormComponent.propTypes = {
@@ -226,7 +247,8 @@ RangeFilterFormComponent.propTypes = {
   max: number.isRequired,
   step: number,
   rangeFilterFormLabelId: string.isRequired,
-
+  hideSlider: bool,
+  valueFormat: string,
   // form injectIntl
   intl: intlShape.isRequired,
 };

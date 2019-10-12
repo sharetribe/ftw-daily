@@ -42,6 +42,7 @@ class CarouselSlider extends Component {
             <Slide index={index} key={index}>
               <ResponsiveImage
                 image={item}
+                alt="listing-image"
                 variants={['landscape-crop', 'landscape-crop2x']}
                 sizes={renderSizes}
               />

@@ -45,6 +45,7 @@ class PriceFilterPlainComponent extends Component {
       step,
       intl,
       currencyConfig,
+      valueFormat,
     } = this.props;
     const classes = classNames(rootClassName || css.root, className);
     const { minPrice, maxPrice } = initialValues || {};
@@ -61,7 +62,7 @@ class PriceFilterPlainComponent extends Component {
             maxPrice: formatCurrencyMajorUnit(intl, currencyConfig.currency, maxPrice),
           }
         )
-      : intl.formatMessage({ id: 'PriceFilter.label' });
+      : intl.formatMessage({ id: 'PriceFilter.labelMobile' });
 
     return (
       <div className={classes}>
@@ -84,7 +85,9 @@ class PriceFilterPlainComponent extends Component {
             }}
             min={min}
             max={max}
+            valueFormat={valueFormat}
             step={step}
+            hideSlider
             liveEdit
             isOpen={this.state.isOpen}
           />

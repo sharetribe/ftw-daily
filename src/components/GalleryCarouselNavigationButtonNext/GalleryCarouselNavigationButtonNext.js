@@ -2,6 +2,7 @@ import React from 'react';
 import T from 'prop-types';
 import { ButtonNext, ButtonFirst } from 'pure-react-carousel';
 import { IconArrowHead } from '..';
+import classNames from 'classnames';
 import '../../../node_modules/pure-react-carousel/dist/react-carousel.es.css';
 
 import css from './GalleryCarouselNavigationButtonNext.css';
@@ -16,7 +17,7 @@ const GalleryCarouselNavigationButtonNext = ({ currentSlide, totalSlides, small 
         }}
         className={css.buttonNext}
       >
-        <img className={small && css.small} src='/static/icons/arrow_right_white.png' />
+        <img className={classNames(css.arrow, small && css.small)} src='/static/icons/arrow_right_white.png' />
       </ButtonFirst>
     );
 
@@ -29,7 +30,7 @@ const GalleryCarouselNavigationButtonNext = ({ currentSlide, totalSlides, small 
       }}
       className={css.buttonNext}
     >
-      <img className={small && css.small} src='/static/icons/arrow_right_white.png' />
+      <img className={classNames(css.arrow, small && css.small)} src='/static/icons/arrow_right_white.png' />
     </ButtonNext>
   );
 };
