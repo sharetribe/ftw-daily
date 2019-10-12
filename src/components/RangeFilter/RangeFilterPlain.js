@@ -38,9 +38,9 @@ class RangeFilterPlainComponent extends Component {
       step,
       intl,
       buttonLabelId,
-      valueTypeLabelId,
       rangeFilterFormLabelId,
-      valueFormat
+      buttonLabelSelectedId,
+      valueFormat,
     } = this.props;
 
     const classes = classNames(rootClassName || css.root, className);
@@ -52,7 +52,11 @@ class RangeFilterPlainComponent extends Component {
     const labelClass = hasInitialValues ? css.filterLabelSelected : css.filterLabel;
     const labelText = hasInitialValues
       ? intl.formatMessage(
-          { id: rangeFilterFormLabelId },
+          { id: buttonLabelSelectedId },
+          {
+            minValue: minValue,
+            maxValue: maxValue,
+          }
         )
       : intl.formatMessage({ id: buttonLabelId });
 
@@ -63,7 +67,7 @@ class RangeFilterPlainComponent extends Component {
             <span className={labelClass}>{labelText}</span>
           </button>
           <button type="button" className={css.clearButton} onClick={this.handleClear}>
-            <FormattedMessage id='PriceFilter.clear' />
+            <FormattedMessage id="PriceFilter.clear" />
           </button>
         </div>
         <div className={css.formWrapper}>
