@@ -78,7 +78,6 @@ class RangeFilterPlainComponent extends Component {
             contentRef={node => {
               this.filterContent = node;
             }}
-            hideSlider
             liveEdit
             isOpen={this.state.isOpen}
           />

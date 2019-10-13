@@ -87,7 +87,6 @@ class PriceFilterPlainComponent extends Component {
             max={max}
             valueFormat={valueFormat}
             step={step}
-            hideSlider
             liveEdit
             isOpen={this.state.isOpen}
           />
