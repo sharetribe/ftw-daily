@@ -143,13 +143,13 @@ const TopbarDesktopComponent = props => {
       </span>
     </NamedLink>
   )
-  const enterprisePageLink = (
+  /*const enterprisePageLink = (
     <NamedLink name="EnterprisePage" className={css.pageLink} activeClassName={css.activePageLink}>
       <span className={css.linkText}>
         <FormattedMessage id="EnterprisePage.topBarLinkText" />
       </span>
     </NamedLink>
-  )
+  )*/
 
   return (
     <nav className={classes}>

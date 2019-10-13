@@ -12,6 +12,7 @@ import { Provider } from 'react-redux';
 import difference from 'lodash/difference';
 import mapValues from 'lodash/mapValues';
 import moment from 'moment';
+import 'moment/locale/sv';
 import { IntlProvider } from './util/reactIntl';
 import configureStore from './store';
 import routeConfiguration from './routeConfiguration';
@@ -40,7 +41,7 @@ import defaultMessages from './translations/en.json';
 
 // Step 3:
 // If you are using a non-english locale, point `messagesInLocale` to correct .json file
-import messagesInLocale from './translations/se.json';
+import messagesInLocale from './translations/sv.json';
 
 // If translation key is missing from `messagesInLocale` (e.g. fr.json),
 // corresponding key will be added to messages from `defaultMessages` (en.json)

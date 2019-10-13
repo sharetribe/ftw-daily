@@ -40,7 +40,7 @@
   /* ================ Colors ================ */
 
   --marketplaceColor: #11b9af;
-  --marketplaceColorLight: #86CBCF;
+  --marketplaceColorLight: rgb(133, 216, 216);
   --marketplaceColorDark: #1c2123;
 
   /* Used with inline CSS SVGs */
@@ -156,7 +156,7 @@
   /* ================ Buttons ================ */
 
   --marketplaceButtonFontStyles: {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'Work Sans', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightSemiBold);
     font-size: 18px;
     line-height: 24px;

@@ -22,19 +22,19 @@
   --marketplaceDefaultFontStyles: {
     font-family: 'Work Sans', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightMedium);
-    font-size: 18px;
+    font-size: 16px;
     line-height: 24px;
     letter-spacing: -0.1px;
     /* No margins for default font */
 
     @media (--viewportMedium) {
-      font-size: 20px;
+      font-size: 18px;
       line-height: 24px;
     }
   }
 
   --marketplaceSmallFontStyles: {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'Work Sans', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightMedium);
     font-size: 15px;
     line-height: 24px;
@@ -45,7 +45,7 @@
   --marketplaceBodyFontStyles: {
     font-family: 'Open Sans', 'Work Sans', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightRegular);
-    font-size: 18px;
+    font-size: 16px;
     line-height: 24px;
     letter-spacing: -0.1px;
     /* margin-top + n * line-height + margin-bottom => x * 6px */

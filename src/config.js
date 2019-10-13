@@ -8,7 +8,7 @@ const dev = process.env.REACT_APP_ENV === 'development';
 
 // If you want to change the language, remember to also change the
 // locale data and the messages in the app.js file.
-const locale = 'se';
+const locale = 'sv';
 const i18n = {
   /*
     0: Sunday

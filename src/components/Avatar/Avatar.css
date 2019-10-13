@@ -16,7 +16,7 @@
 
   /* Base for all avatars */
   --Avatar_base: {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'Work Sans', Helvetica, Arial, sans-serif;
     border-radius: 50%;
 
     /* Position possible initials to the center of the component */
