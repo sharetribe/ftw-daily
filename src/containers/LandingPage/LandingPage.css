@@ -59,11 +59,11 @@
 
 .sections {
   margin: 0;
-  padding-top: 1px;
 }
 
 .section {
   overflow: auto;
+  
 }
 
 /* Square corners for the last section if it's even */
@@ -75,7 +75,8 @@
 
 /* Every other section has a light background */
 .section:nth-of-type(2n) {
-  background-color: var(--matterColorLight);
+  background-color: var(--marketplaceColorDark);
+  color: var(--matterColorLight);
   @media (--viewportMedium) {
     border-radius: 4px;
   }
@@ -100,10 +101,29 @@
     padding: 0;
   }
 }
+.sectionContentHowItWorks {
+  margin: var(--LandingPage_sectionMarginTop) 24px 51px 24px;
+
+  @media (--viewportMedium) {
+    max-width: 100%;
+    margin: var(--LandingPage_sectionMarginTopMedium) 24px 60px 24px;
+  }
+
+  @media (--viewportLarge) {
+    max-width: 1128px;
+    padding: 0 36px 0 36px;
+    margin: var(--LandingPage_sectionMarginTopLarge) auto 93px auto;
+  }
+
+  @media (--viewportXLarge) {
+    max-width: 1056px;
+    padding: 0;
+  }
+}
 
 .sectionContentFirstChild {
   composes: sectionContent;
-  margin-top: 3vh;
+  margin-top: 5vh;
 }
 
 /* A bar on top of light sections */
