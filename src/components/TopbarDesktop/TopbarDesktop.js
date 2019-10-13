@@ -168,7 +168,7 @@ const TopbarDesktopComponent = props => {
         </span>
       </NamedLink>*/}
       {aboutPageLink}
-      {enterprisePageLink}
+      {/*enterprisePageLink*/}
       {inboxLink}
       {profileMenu}
       {signupLink}
