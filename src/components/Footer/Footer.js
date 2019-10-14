@@ -74,12 +74,18 @@ const Footer = props => {
                   <Link to="#">Jetzt anmelden</Link>
                 </div>
                 <div className={css.verticalContainerContent}>
-                  <Link to="#" className={css.link}>
-                    So funktionierts
-                  </Link>
-                  <Link to="#" className={css.link}>
-                    Kostenlos anmelden <span className={css.greenLabel}>NEU</span>
-                  </Link>
+                  <ul className={css.list}>
+                    <li className={css.listItem}>
+                      <Link to="#" className={css.link}>
+                        So funktioniert's
+                      </Link>
+                    </li>
+                    <li className={css.listItem}>
+                      <Link to="#" className={css.link}>
+                        Kostenlos anmelden <Link to="/signup" className={css.greenLabel}>Neu</Link>
+                      </Link>
+                    </li>
+                  </ul>
                 </div>
               </div>
 
@@ -88,21 +94,33 @@ const Footer = props => {
                   <Link to="#">Unsere Community</Link>
                 </div>
                 <div className={css.verticalContainerContent}>
-                  <Link to="#" className={css.link}>
-                    Community
-                  </Link>
-                  <Link to="#" className={css.link}>
-                    Karriere
-                  </Link>
-                  <Link to="#" className={css.link}>
-                    Kontakt
-                  </Link>
-                  <Link to="#" className={css.link}>
-                    FAQ
-                  </Link>
-                  <Link to="#" className={css.link}>
-                    Hilfe
-                  </Link>
+                  <ul className={css.list}>
+                    <li className={css.listItem}>
+                      <Link to="#" className={css.link}>
+                        Community
+                      </Link>
+                    </li>
+                    <li className={css.listItem}>
+                      <Link to="#" className={css.link}>
+                        Karriere
+                      </Link>
+                    </li>
+                    <li className={css.listItem}>
+                      <Link to="#" className={css.link}>
+                        Kontakt
+                      </Link>
+                    </li>
+                    <li className={css.listItem}>
+                      <Link to="#" className={css.link}>
+                        FAQ
+                      </Link>
+                    </li>
+                    <li className={css.listItem}>
+                      <Link to="#" className={css.link}>
+                        Hilfe
+                      </Link>
+                    </li>
+                  </ul>
                 </div>
               </div>
 
@@ -245,7 +263,7 @@ const Footer = props => {
               </div>
 
               <div className={css.footerContainerVertical23}>
-                <div>
+                <div className={css.verticalContainerHeader}>
                   <div>{socialMediaLinks}</div>
                 </div>
                 <div className={css.verticalContainerContent}>

@@ -67,7 +67,7 @@ const cardStyles = {
     fontSmoothing: 'antialiased',
     lineHeight: '24px',
     letterSpacing: '-0.1px',
-    color: '#4A4A4A',
+    color: '#1a2b49',
     '::placeholder': {
       color: '#B2B2B2',
     },
