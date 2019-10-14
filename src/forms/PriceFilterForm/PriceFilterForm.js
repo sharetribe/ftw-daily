@@ -153,7 +153,7 @@ const PriceFilterFormComponent = props => {
                   parse={parseMax(max, minPrice)}
                 />
               <span className={css.label}>
-                <FormattedMessage id="CHF" />
+                <FormattedMessage id="MarketplaceCurency" />
               </span>
               </div>
             </div>
