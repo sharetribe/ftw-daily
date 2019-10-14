@@ -24,6 +24,7 @@ const defaultDirectives = {
     '*.tiles.mapbox.com',
     'api.mapbox.com',
     'events.mapbox.com',
+    'sleeknotecustomerscripts.sleeknote.com',
 
     // Google Analytics
     'www.google-analytics.com',

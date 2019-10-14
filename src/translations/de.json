@@ -1064,5 +1064,6 @@
   "RangeFilter.labelSelectedButton": "{minValue} - {maxValue}",
   "TransactionPanel.backButtonLabel": "Zurück",
   "SearchFilter.typeHeightValue": "cm",
-  "SearchFilter.typeAgeValue": "Jahre"
+  "SearchFilter.typeAgeValue": "Jahre",
+  "MarketplaceCurency": "CHF"
 }
