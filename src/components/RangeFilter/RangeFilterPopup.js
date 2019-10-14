@@ -95,6 +95,7 @@ class RangeFilterPopup extends Component {
       intl,
       buttonLabelId,
       rangeFilterFormLabelId,
+      rangeFilterFormValueId,
       valueTypeLabelId,
     } = this.props;
     const classes = classNames(rootClassName || css.root, className);
@@ -145,6 +146,7 @@ class RangeFilterPopup extends Component {
           showAsPopup
           isOpen={this.state.isOpen}
           rangeFilterFormLabelId={rangeFilterFormLabelId}
+          rangeFilterFormValueId={rangeFilterFormValueId}
         />
       </div>
     );

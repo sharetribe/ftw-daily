@@ -123,9 +123,9 @@ const PriceFilterFormComponent = props => {
             style={{ minWidth: '300px', ...style }}
           >
             <div className={css.contentWrapper}>
-              <span className={css.label}>
+              {/* <span className={css.label}>
                 <FormattedMessage id="PriceFilterForm.label" />
-              </span>
+              </span> */}
               <div className={css.inputsWrapper}>
                 <Field
                   className={css.minPrice}
@@ -152,6 +152,9 @@ const PriceFilterFormComponent = props => {
                   step={step}
                   parse={parseMax(max, minPrice)}
                 />
+              <span className={css.label}>
+                <FormattedMessage id="CHF" />
+              </span>
               </div>
             </div>
 

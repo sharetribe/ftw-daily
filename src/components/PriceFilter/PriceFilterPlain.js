@@ -54,15 +54,17 @@ class PriceFilterPlainComponent extends Component {
     const hasInitialValues = initialValues && hasValue(minPrice) && hasValue(maxPrice);
 
     const labelClass = hasInitialValues ? css.filterLabelSelected : css.filterLabel;
-    const labelText = hasInitialValues
-      ? intl.formatMessage(
-          { id: 'PriceFilter.labelSelectedPlain' },
-          {
-            minPrice: formatCurrencyMajorUnit(intl, currencyConfig.currency, minPrice),
-            maxPrice: formatCurrencyMajorUnit(intl, currencyConfig.currency, maxPrice),
-          }
-        )
-      : intl.formatMessage({ id: 'PriceFilter.labelMobile' });
+    const labelText = intl.formatMessage(
+          { id: 'PriceFilter.labelMobile' })
+    // const labelText = hasInitialValues
+    //   ? intl.formatMessage(
+    //       { id: 'PriceFilter.labelSelectedPlain' },
+    //       {
+    //         minPrice: formatCurrencyMajorUnit(intl, currencyConfig.currency, minPrice),
+    //         maxPrice: formatCurrencyMajorUnit(intl, currencyConfig.currency, maxPrice),
+    //       }
+    //     )
+    //   : intl.formatMessage({ id: 'PriceFilter.labelMobile' });
 
     return (
       <div className={classes}>
@@ -87,7 +89,6 @@ class PriceFilterPlainComponent extends Component {
             max={max}
             valueFormat={valueFormat}
             step={step}
-            hideSlider
             liveEdit
             isOpen={this.state.isOpen}
           />

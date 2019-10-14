@@ -112,6 +112,7 @@ const RangeFilterFormComponent = props => {
           max,
           step,
           hideSlider,
+          rangeFilterFormValueId
         } = formRenderProps;
         const { minValue: minValueRaw, maxValue: maxValueRaw } = values;
         const minValue = typeof minValueRaw !== 'string' ? minValueRaw : min;
@@ -143,9 +144,9 @@ const RangeFilterFormComponent = props => {
             style={{ minWidth: '300px', ...style }}
           >
             <div className={css.contentWrapper}>
-              <span className={css.label}>
+              {/* <span className={css.label}>
                 <FormattedMessage id={rangeFilterFormLabelId} />
-              </span>
+              </span> */}
               <div className={css.inputsWrapper}>
                 <Field
                   className={css.minValue}
@@ -177,6 +178,9 @@ const RangeFilterFormComponent = props => {
                   // parse={parseMax(max, minValue)}
                 />
               </div>
+              <span className={css.label}>
+                <FormattedMessage id={rangeFilterFormValueId} />
+              </span>
             </div>
 
             {!hideSlider && (
@@ -230,6 +234,7 @@ RangeFilterFormComponent.defaultProps = {
   onSubmit: null,
   hideSlider: false,
   valueFormat: '',
+  rangeFilterFormValueId: '',
 };
 
 RangeFilterFormComponent.propTypes = {
@@ -249,6 +254,7 @@ RangeFilterFormComponent.propTypes = {
   rangeFilterFormLabelId: string.isRequired,
   hideSlider: bool,
   valueFormat: string,
+  rangeFilterFormValueId: string,
   // form injectIntl
   intl: intlShape.isRequired,
 };

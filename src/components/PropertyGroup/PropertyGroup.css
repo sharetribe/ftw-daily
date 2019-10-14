@@ -82,9 +82,10 @@
 .notSelectedLabel {
   color: var(--matterColorNegative);
   position: relative;
+  text-decoration: line-through;
 
   /* line-through */
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
     transparent var(--PropertyGroup_lineThroughTopMobile),
     var(--matterColorNegative) var(--PropertyGroup_lineThroughTopMobile),
     var(--matterColorNegative) var(--PropertyGroup_lineThroughBottomMobile),
@@ -98,5 +99,5 @@
       var(--matterColorNegative) var(--PropertyGroup_lineThroughBottom),
       transparent var(--PropertyGroup_lineThroughBottom)
     );
-  }
+  } */
 }

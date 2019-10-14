@@ -418,8 +418,8 @@ export class ListingPageComponent extends Component {
                     onContactUser={this.onContactUser}
                   />
                   <SectionHorseInfo data={{ breed, gender, age, color, hight, mainDiscipline }} />
-                  <SectionDisciplinesMaybe disciplines={publicData.additionalDisciplines} />
                   <SectionDescriptionMaybe description={description} />
+                  <SectionDisciplinesMaybe disciplines={publicData.additionalDisciplines} />
                   <SectionCharacteristicsMaybe characteristics={publicData.characteristics} />
                   <SectionRulesMaybe publicData={publicData} />
                   <SectionMapMaybe

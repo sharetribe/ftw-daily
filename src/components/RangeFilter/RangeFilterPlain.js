@@ -41,6 +41,7 @@ class RangeFilterPlainComponent extends Component {
       rangeFilterFormLabelId,
       buttonLabelSelectedId,
       valueFormat,
+      rangeFilterFormValueId
     } = this.props;
 
     const classes = classNames(rootClassName || css.root, className);
@@ -50,15 +51,18 @@ class RangeFilterPlainComponent extends Component {
     const hasInitialValues = initialValues && hasValue(minValue) && hasValue(maxValue);
 
     const labelClass = hasInitialValues ? css.filterLabelSelected : css.filterLabel;
-    const labelText = hasInitialValues
-      ? intl.formatMessage(
-          { id: buttonLabelSelectedId },
-          {
-            minValue: minValue,
-            maxValue: maxValue,
-          }
+    const labelText =  intl.formatMessage(
+          { id: buttonLabelId }
         )
-      : intl.formatMessage({ id: buttonLabelId });
+    // const labelText = hasInitialValues
+    //   ? intl.formatMessage(
+    //       { id: buttonLabelSelectedId },
+    //       {
+    //         minValue: minValue,
+    //         maxValue: maxValue,
+    //       }
+    //     )
+    //   : intl.formatMessage({ id: buttonLabelId });
 
     return (
       <div className={classes}>
@@ -72,13 +76,13 @@ class RangeFilterPlainComponent extends Component {
         </div>
         <div className={css.formWrapper}>
           <RangeFilterForm
-            {...{ id, min, max, step, intl, valueFormat, rangeFilterFormLabelId }}
+            {...{ id, min, max, step, intl, valueFormat, rangeFilterFormLabelId, rangeFilterFormValueId }}
             initialValues={hasInitialValues ? initialValues : { minValue: min, maxValue: max }}
             onChange={this.handleChange}
             contentRef={node => {
               this.filterContent = node;
             }}
-            hideSlider
+            
             liveEdit
             isOpen={this.state.isOpen}
           />
@@ -93,6 +97,7 @@ RangeFilterPlainComponent.defaultProps = {
   className: null,
   initialValues: null,
   step: number,
+  rangeFilterFormValueId: ''
 };
 
 RangeFilterPlainComponent.propTypes = {
@@ -108,6 +113,7 @@ RangeFilterPlainComponent.propTypes = {
   min: number.isRequired,
   max: number.isRequired,
   step: number,
+  rangeFilterFormValueId: string,
 
   // form injectIntl
   intl: intlShape.isRequired,
