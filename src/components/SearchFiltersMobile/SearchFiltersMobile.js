@@ -291,12 +291,13 @@ class SearchFiltersMobileComponent extends Component {
         id="SearchFilters.ageFilter"
         urlParam={ageFilter.paramName}
         onSubmit={this.handleRange}
-        buttonLabelId="SearchFilters.ageLabelWithValue"
-        buttonLabelSelectedId="SearchFilters.ageSelectedLabelWithValue"
+        buttonLabelId="SearchFilters.ageLabel"
+        buttonLabelSelectedId="SearchFilters.ageSelectedLabel"
         rangeFilterFormLabelId="SearchFilters.ageLabel"
         valueTypeLabelId="SearchFilter.typeAgeValue"
-        {...ageFilter.config}
         initialValues={initialAge}
+        rangeFilterFormValueId="SearchFilter.typeAgeValue"
+        {...ageFilter.config}
       />
     ) : null;
 
@@ -317,12 +318,13 @@ class SearchFiltersMobileComponent extends Component {
         id="SearchFilters.hightFilter"
         urlParam={hightFilter.paramName}
         onSubmit={this.handleRange}
-        buttonLabelId="SearchFilters.hightLabelWithValue"
-        buttonLabelSelectedId="SearchFilters.hightSelectedLabelWithValue"
+        buttonLabelId="SearchFilters.hightLabel"
+        buttonLabelSelectedId="SearchFilters.hightSelectedLabel"
         rangeFilterFormLabelId="SearchFilters.hightLabel"
         valueTypeLabelId="SearchFilter.typeHeightValue"
-        {...hightFilter.config}
         initialValues={initialHight}
+        rangeFilterFormValueId="SearchFilter.typeHeightValue"
+        {...hightFilter.config}
       />
     ) : null;
 

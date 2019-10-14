@@ -538,7 +538,7 @@
   "PayoutPreferencesPage.title": "Zahlungseinstellungen",
   "PriceFilter.clear": "Löschen",
   "PriceFilter.label": "Preis",
-  "PriceFilter.labelMobile": "Preis (CHF)",
+  "PriceFilter.labelMobile": "Preis",
   "PriceFilter.labelSelectedPlain": "Preis pro Monat: {minPrice} - {maxPrice}",
   "PriceFilter.labelSelectedButton": "{minPrice} - {maxPrice}",
   "PriceFilterForm.cancel": "Abbrechen",
