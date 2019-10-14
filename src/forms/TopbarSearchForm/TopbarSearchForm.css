@@ -71,6 +71,7 @@
   height: var(--topbarHeightDesktop);
   border: none;
   padding-top: 3px;
+  margin-left: 20px;
 
   display: flex;
   width: 24px;

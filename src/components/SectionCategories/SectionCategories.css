@@ -37,9 +37,11 @@
 }
 
 .location {
+  height: 200px;
   @media (--viewportMedium) {
-    margin-right: 40px;
+    margin-right: 0;
     margin-bottom: 0;
+    height: auto;
   }
 }
 
@@ -53,9 +55,14 @@
 .imageWrapper {
   position: relative;
   width: 100%;
-  border-radius: 4px;
+  height: 100%;
+  border-radius: 0;
   transition: var(--transitionStyleButton);
+  background: linear-gradient(-45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6));
 
+  @media (--viewportMedium) {
+    height: auto;
+  }
   &:hover {
     transform: scale(1.02);
     box-shadow: var(--boxShadowSectionLocationHover);
@@ -80,18 +87,21 @@
   right: 0;
   width: 100%;
   height: 100%;
-  border-radius: 4px;
+  border-radius: 0;
   object-fit: cover;
+  opacity: 0.6;
 }
 
 .linkText {
   @apply --marketplaceH2FontStyles;
-  color: var(--matterColor);
-  margin-top: 15px;
-  margin-bottom: 0;
+  position: relative;
+  bottom: 50%;
+  color: var(--matterColorLight);
+  margin: 0 auto;
+  text-align: center;
 
   @media (--viewportMedium) {
-    margin-top: 21px;
+    
   }
 }
 

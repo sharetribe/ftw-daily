@@ -88,23 +88,49 @@
   color: var(--matterColorLight);
   margin: 0 0 32px 0;
 
-  @apply --SectionHero_animation;
-  animation-delay: 0.65s;
-
   @media (--viewportMedium) {
     max-width: var(--SectionHero_desktopTitleMaxWidth);
-    margin: 0 0 63px 0;
+    margin: 0 0 48px 0;
   }
 }
 
 .heroButton {
   @apply --marketplaceButtonStyles;
-  @apply --SectionHero_animation;
-
+  
+  margin-top: 8px;
   animation-delay: 0.8s;
 
   @media (--viewportMedium) {
     display: block;
-    width: 260px;
+    width: 150px;
+    margin-top: 0;
+  }
+}
+
+/* Search */
+.heroSearchLink {
+  
+  flex-grow: 1;
+  height: auto;
+  background: #fff;
+  margin-right: 0;
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-left-color: var(--matterColorNegative);
+
+  @media (--viewportLarge) {
+    padding-left: 0;
+  }
+}
+
+.searchFieldWrapper {
+  display: flex;
+  flex-direction: column;
+  @apply --SectionHero_animation;
+  animation-delay: 0.65s;
+
+  @media (--viewportMedium) {
+    padding-left: 0;
+    flex-direction:  row;
   }
 }
