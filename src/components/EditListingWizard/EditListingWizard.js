@@ -157,14 +157,17 @@ class EditListingWizard extends Component {
     const { onPublishListingDraft, currentUser } = this.props;
     const stripeConnected =
       currentUser && currentUser.stripeAccount && !!currentUser.stripeAccount.id;
-    if (stripeConnected) {
+    
       onPublishListingDraft(id);
-    } else {
-      this.setState({
-        draftId: id,
-        showPayoutDetails: true,
-      });
-    }
+    
+    // if (stripeConnected) {
+    //   onPublishListingDraft(id);
+    // } else {
+    //   this.setState({
+    //     draftId: id,
+    //     showPayoutDetails: true,
+    //   });
+    // }
   }
 
   handlePayoutModalClose() {
@@ -173,7 +176,7 @@ class EditListingWizard extends Component {
 
   handlePayoutSubmit(values) {
     this.props
-      // .onPayoutDetailsSubmit(values)
+      .onPayoutDetailsSubmit(values)
       .then(() => {
         this.setState({ showPayoutDetails: false });
         this.props.onManageDisableScrolling('EditListingWizard.payoutModal', false);
