@@ -14,6 +14,7 @@ import { NamedLink, ResponsiveImage, GalleryCarouselWrapper } from '../../compon
 import css from './ListingCard.css';
 
 const MIN_LENGTH_FOR_LONG_WORDS = 10;
+const MODAL_BREAKPOINT = 768;
 
 const priceData = (price, intl) => {
   if (price && price.currency === config.currency) {
@@ -78,6 +79,9 @@ export const ListingCardComponent = props => {
     ? 'ListingCard.perDay'
     : 'ListingCard.perUnit';
 
+  const isWindowDefined = typeof window !== 'undefined';
+  const isMobileLayout = isWindowDefined && window.innerWidth < MODAL_BREAKPOINT;
+
   return (
     <NamedLink className={classes} name="ListingPage" params={{ id, slug }} openInNewTab>
       <div
@@ -89,6 +93,8 @@ export const ListingCardComponent = props => {
           {currentListing.images.length > 1 ? (
             <GalleryCarouselWrapper
               dragEnabled={false}
+              pagination={!isMobileLayout}
+              touchEnabled={!isMobileLayout}
               items={currentListing.images}
               renderSizes={renderSizes}
             />
