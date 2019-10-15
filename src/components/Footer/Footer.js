@@ -110,7 +110,7 @@ const Footer = props => {
             </div>
             <div className={css.searches}>
               <ul className={css.list}>
-                <li className={css.listItem}>
+                {/* <li className={css.listItem}>
                   <NamedLink
                     name="SearchPage"
                     to={{
@@ -169,12 +169,12 @@ const Footer = props => {
                   >
                     <FormattedMessage id="Footer.searchRuka" />
                   </NamedLink>
-                </li>
+                </li> */}
               </ul>
             </div>
             <div className={css.searchesExtra}>
               <ul className={css.list}>
-                <li className={css.listItem}>
+                {/* <li className={css.listItem}>
                   <NamedLink
                     name="SearchPage"
                     to={{
@@ -233,7 +233,7 @@ const Footer = props => {
                   >
                     <FormattedMessage id="Footer.searchAhvenanmaa" />
                   </NamedLink>
-                </li>
+                </li> */}
               </ul>
             </div>
             <div className={css.extraLinks}>
