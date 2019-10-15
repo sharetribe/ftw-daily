@@ -8,7 +8,6 @@ import { isScrollingDisabled } from '../../ducks/UI.duck';
 import config from '../../config';
 import { getLatestListing } from './LandingPage.duck.js';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
-
 import {
   Page,
   SectionHero,
@@ -70,18 +69,7 @@ export const LandingPageComponent = props => {
           <ul className={css.sections}>
             <li className={css.section}>
               <div className={css.sectionContentFirstChild}>
-                <SectionLatestListings />
-                {/* <div className={css.listingCards}>
-                  {listings.map(l => (
-                    <ListingCard
-                      className={css.listingCard}
-                      key={l.id.uuid}
-                      listing={l}
-                      // renderSizes={cardRenderSizes}
-                      // setActiveListing={setActiveListing}
-                    />
-                  ))}
-                </div> */}
+                <SectionLatestListings listings={listings} />
               </div>
 
               <div className={css.sectionContentFirstChild}>
