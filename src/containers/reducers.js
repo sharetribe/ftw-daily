@@ -18,6 +18,7 @@ import ProfilePage from './ProfilePage/ProfilePage.duck';
 import ProfileSettingsPage from './ProfileSettingsPage/ProfileSettingsPage.duck';
 import SearchPage from './SearchPage/SearchPage.duck';
 import TransactionPage from './TransactionPage/TransactionPage.duck';
+import LandingPage from './LandingPage/LandingPage.duck';
 
 export {
   CheckoutPage,
@@ -35,4 +36,5 @@ export {
   ProfileSettingsPage,
   SearchPage,
   TransactionPage,
+  LandingPage,
 };

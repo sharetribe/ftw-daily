@@ -160,6 +160,8 @@ export const searchListings = searchParams => (dispatch, getState, sdk) => {
     ...datesMaybe,
     per_page: perPage,
   };
+  console.log({params})
+
   return sdk.listings
     .query(params)
     .then(response => {
@@ -187,7 +189,7 @@ export const searchMapListings = searchParams => (dispatch, getState, sdk) => {
     ...rest,
     per_page: perPage,
   };
-
+  
   return sdk.listings
     .query(params)
     .then(response => {
