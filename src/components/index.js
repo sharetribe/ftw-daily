@@ -184,6 +184,7 @@ export { default as SectionHero } from './SectionHero/SectionHero';
 export { default as SectionHowItWorks } from './SectionHowItWorks/SectionHowItWorks';
 export { default as SectionLatestListings } from './SectionLatestListings/SectionLatestListings';
 export { default as SectionLocations } from './SectionLocations/SectionLocations';
+export { default as SectionPartners } from './SectionPartners/SectionPartners';
 export { default as SectionThumbnailLinks } from './SectionThumbnailLinks/SectionThumbnailLinks';
 export { default as SectionUserReviews } from './SectionUserReviews/SectionUserReviews';
 export { default as Topbar } from './Topbar/Topbar';

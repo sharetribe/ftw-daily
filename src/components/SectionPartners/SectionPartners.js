@@ -3,34 +3,26 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { FormattedMessage } from '../../util/reactIntl';
 import { ListingCard } from '../../components';
-import css from './SectionUserReviews.css';
+import css from './SectionPartners.css';
 
 const Review = ({ name, text }) => <div>Review</div>;
 
-const SectionUserReviews = () => {
+const SectionPartners = () => {
   return (
     <>
       <div className={css.title}>
-        <FormattedMessage id="SectionUserReviews.titleLineOne" />
+        <FormattedMessage id="SectionPartners.titleLineOne" />
       </div>
 
-      <div className={css.reviewsCards}>
-        <div className={css.reviewCard}>
-          <div className={css.userInfo}>
-            <div className={css.userAvatarStub}></div>
-            <div>
-              <FormattedMessage id="SectionUserReviews.reviewOneName" />
-            </div>
-          </div>
-
-          <div>
-            <FormattedMessage id="SectionUserReviews.reviewOneText" />
-          </div>
-        </div>
- 
+      <div className={css.partnersList}>
+        <div className={css.partnerIconStub}></div>
+        <div className={css.partnerIconStub}></div>
+        <div className={css.partnerIconStub}></div>
+        <div className={css.partnerIconStub}></div>
+        <div className={css.partnerIconStub}></div>
       </div>
     </>
   );
 };
 
-export default SectionUserReviews;
+export default SectionPartners;
