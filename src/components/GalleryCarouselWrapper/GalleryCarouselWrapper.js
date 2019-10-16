@@ -7,6 +7,8 @@ import { GalleryCarouselSlider } from '..';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import css from './GalleryCarouselWrapper.css';
 
+const MODAL_BREAKPOINT = 768;
+
 class GalleryCarouselWrapper extends Component {
   constructor(props) {
     super(props);
@@ -39,7 +41,16 @@ class GalleryCarouselWrapper extends Component {
 
   render() {
     const { showArrow } = this.state;
-    const { items, renderSizes, dragEnabled = true, pagination = true } = this.props;
+    const {
+      items,
+      renderSizes,
+      dragEnabled = true,
+      touchEnabled = true,
+      pagination = true,
+    } = this.props;
+
+    const isWindowDefined = typeof window !== 'undefined';
+    const isMobileLayout = isWindowDefined && window.innerWidth < MODAL_BREAKPOINT;
 
     return (
       <CarouselProvider
@@ -47,13 +58,14 @@ class GalleryCarouselWrapper extends Component {
         naturalSlideHeight={50}
         totalSlides={items.length}
         dragEnabled={dragEnabled}
+        touchEnabled={touchEnabled}
         className={css.galleryCarouselWrapper}
         onMouseEnter={() => this.setShowArrow(true)}
         onMouseLeave={() => this.setShowArrow(false)}
       >
         <GalleryCarouselSlider
           pagination={pagination}
-          showArrow={showArrow}
+          showArrow={!isMobileLayout && showArrow}
           items={items}
           renderSizes={renderSizes}
           {...this.props}

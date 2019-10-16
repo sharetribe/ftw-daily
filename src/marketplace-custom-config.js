@@ -83,7 +83,7 @@ export const breeds = [
   { key: 'anglo_araber', label: 'Anglo Araber' },
   { key: 'appaloosa', label: 'Appaloosa' },
   { key: 'bayerisches_warmblut', label: 'Bayerisches Warmblut' },
-  { key: 'belgisches_warmblug', label: 'Belgisches Warmblug' },
+  { key: 'belgisches_warmblut', label: 'Belgisches Warmblut' },
   { key: 'connemara', label: 'Connemara' },
   { key: 'curly_horse', label: 'Curly Horse' },
   { key: 'deutsches_reitpferd', label: 'Deutsches Reitpferd' },
