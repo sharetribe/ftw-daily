@@ -61,19 +61,11 @@ export const getLatestListingsError = e => ({
   payload: e,
 });
 
-export const getLatestListing = () => (dispatch, getState, sdk) => {
+export const getLatestListing = searchParams => (dispatch, getState, sdk) => {
   dispatch(getLatestListingsRequest());
-  
-  const params = { 
-    include: ['author', 'images'],
-    'fields.listing': ['title', 'geolocation', 'price', 'publicData'],
-    'fields.user': ['profile.displayName', 'profile.abbreviatedName'],
-    'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
-    per_page: 3,
-  };
 
   return sdk.listings
-  .query(params)
+  .query(searchParams)
   .then(res => {
     dispatch(addMarketplaceEntities(res));
     const resultIds = res.data.data.map(i=> i.id);

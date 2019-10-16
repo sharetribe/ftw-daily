@@ -57,7 +57,6 @@ export const LandingPageComponent = props => {
         image: [schemaImage],
       }}
     >
-      {console.log({ props })}
       <LayoutSingleColumn>
         <LayoutWrapperTopbar>
           <TopbarContainer />
@@ -138,7 +137,13 @@ const LandingPage = compose(
 )(LandingPageComponent);
 
 LandingPage.loadData = (params, search) => {
-  return getLatestListing();
+  return getLatestListing({
+    include: ['author', 'images'],
+    'fields.listing': ['title', 'geolocation', 'price', 'publicData'],
+    'fields.user': ['profile.displayName', 'profile.abbreviatedName'],
+    'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
+    per_page: 3,
+  });
 };
 
 export default LandingPage;
