@@ -342,7 +342,6 @@ SearchPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  console.log({ state });
   const {
     currentPageResultIds,
     pagination,

@@ -79,6 +79,9 @@ export const ListingCardComponent = props => {
     ? 'ListingCard.perDay'
     : 'ListingCard.perUnit';
 
+  const isWindowDefined = typeof window !== 'undefined';
+  const isMobileLayout = isWindowDefined && window.innerWidth < MODAL_BREAKPOINT;
+
   const cardTitle = richText(title, {
     longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS,
     longWordClass: css.longWord,

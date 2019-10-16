@@ -17,13 +17,7 @@ const LatestListing = ({ listings }) => {
       </div>
       <div className={css.listingCards}>
         {listignsInfoForLandingPage.map(l => (
-          <ListingCard
-            className={css.listingCard}
-            key={l.id.uuid}
-            listing={l}
-            // renderSizes={cardRenderSizes}
-            // setActiveListing={setActiveListing}
-          />
+          <ListingCard className={css.listingCard} key={l.id.uuid} listing={l} />
         ))}
       </div>
     </>
