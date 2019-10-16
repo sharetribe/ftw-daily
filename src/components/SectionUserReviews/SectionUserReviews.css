@@ -1,0 +1,50 @@
+@import '../../marketplace.css';
+
+.title {
+  @apply --marketplaceH1FontStyles;
+
+  margin-top: 0;
+  max-width: 735px;
+
+  @media (--viewportMedium) {
+    margin-bottom: 23px;
+  }
+}
+
+.reviewsCards {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 30px;
+  padding: 10px;
+
+  @media (--viewportMedium) {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 30px;
+  }
+}
+
+.reviewCard {
+   min-height: 100px;
+  display: grid;
+  grid-template-rows: max-content max-content;
+  grid-row-gap: 25px;
+  padding: 15px;
+
+  @media (--viewportMedium) {
+    min-height: 180px;
+  }
+}
+
+.userInfo {
+  display: inline-grid;
+  grid-template-columns: min-content 1fr;
+  grid-column-gap: 10px;
+  align-items: center;
+}
+
+.userAvatarStub {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid black;
+}
