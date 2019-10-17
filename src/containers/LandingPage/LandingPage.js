@@ -6,15 +6,21 @@ import { withRouter } from 'react-router-dom';
 import { injectIntl, intlShape } from '../../util/reactIntl';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import config from '../../config';
+import { getLatestListing } from './LandingPage.duck.js';
+import { getListingsById } from '../../ducks/marketplaceData.duck';
 import {
   Page,
   SectionHero,
   SectionHowItWorks,
+  SectionLatestListings,
   SectionLocations,
+  SectionPartners,
+  SectionUserReviews,
   LayoutSingleColumn,
   LayoutWrapperTopbar,
   LayoutWrapperMain,
   LayoutWrapperFooter,
+  ListingCard,
   Footer,
 } from '../../components';
 import { TopbarContainer } from '../../containers';
@@ -24,7 +30,7 @@ import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg';
 import css from './LandingPage.css';
 
 export const LandingPageComponent = props => {
-  const { history, intl, location, scrollingDisabled } = props;
+  const { history, intl, listings, location, scrollingDisabled } = props;
 
   // Schema for search engines (helps them to understand what this page is about)
   // http://schema.org
@@ -61,9 +67,15 @@ export const LandingPageComponent = props => {
           <div className={css.heroContainer}>
             <SectionHero className={css.hero} history={history} location={location} />
           </div>
+
           <ul className={css.sections}>
             <li className={css.section}>
               <div className={css.sectionContentFirstChild}>
+                <SectionLatestListings listings={listings} />
+              </div>
+            </li>
+            <li className={css.section}>
+              <div className={css.sectionContent}>
                 <SectionLocations />
               </div>
             </li>
@@ -72,7 +84,17 @@ export const LandingPageComponent = props => {
                 <SectionHowItWorks />
               </div>
             </li>
+            <li className={css.section}>
+              <div className={css.sectionContent}>
+                <SectionUserReviews />
+              </div>
+              <div className={css.sectionContent}>
+                <SectionPartners />
+              </div>
+            </li>
+          
           </ul>
+          
         </LayoutWrapperMain>
         <LayoutWrapperFooter>
           <Footer />
@@ -82,9 +104,14 @@ export const LandingPageComponent = props => {
   );
 };
 
-const { bool, object } = PropTypes;
+const { bool, object, array } = PropTypes;
+
+LandingPageComponent.defaultProps = {
+  listings: [],
+};
 
 LandingPageComponent.propTypes = {
+  listings: array,
   scrollingDisabled: bool.isRequired,
 
   // from withRouter
@@ -96,10 +123,16 @@ LandingPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
+  const { latestListingsIds } = state.LandingPage;
+  const pageListings = getListingsById(state, latestListingsIds);
+
   return {
+    listings: pageListings,
     scrollingDisabled: isScrollingDisabled(state),
   };
 };
+
+const mapDispatchToProps = dispatch => ({});
 
 // Note: it is important that the withRouter HOC is **outside** the
 // connect HOC, otherwise React Router won't rerender any Route
@@ -107,10 +140,24 @@ const mapStateToProps = state => {
 // lifecycle hook.
 //
 // See: https://github.com/ReactTraining/react-router/issues/4671
+
 const LandingPage = compose(
   withRouter,
-  connect(mapStateToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   injectIntl
 )(LandingPageComponent);
+
+LandingPage.loadData = (params, search) => {
+  return getLatestListing({
+    include: ['author', 'images'],
+    'fields.listing': ['title', 'geolocation', 'price', 'publicData'],
+    'fields.user': ['profile.displayName', 'profile.abbreviatedName'],
+    'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
+    per_page: 3,
+  });
+};
 
 export default LandingPage;

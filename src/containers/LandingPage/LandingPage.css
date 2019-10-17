@@ -18,6 +18,17 @@
 .root {
 }
 
+.listingCards {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: var(--LandingPage_sectionMarginTop);
+
+  @media (--viewportMedium) {
+    grid-template-columns: 1fr 1fr 1fr; 
+  grid-column-gap: var(--LandingPage_sectionMarginTop);
+  }
+}
+
 /* heroContainer gives the height for SectionHero */
 /* Safari has a bug with vw padding inside flexbox. Therefore we need an extra div (container) */
 /* If you've lot of content for the hero, multiple lines of text, make sure to adjust min-heights for each media breakpoint accordingly */

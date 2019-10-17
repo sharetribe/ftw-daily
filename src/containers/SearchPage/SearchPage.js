@@ -398,6 +398,7 @@ SearchPage.loadData = (params, search) => {
   });
   const { page = 1, address, origin, ...rest } = queryParams;
   const originMaybe = config.sortSearchByDistance && origin ? { origin } : {};
+
   return searchListings({
     ...rest,
     ...originMaybe,

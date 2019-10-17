@@ -1,0 +1,24 @@
+@import '../../marketplace.css';
+
+.title {
+  @apply --marketplaceH1FontStyles;
+
+  margin-top: 0;
+  max-width: 735px;
+
+  @media (--viewportMedium) {
+    margin-bottom: 23px;
+  }
+}
+
+.partnersList {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-column-gap: 20px;
+}
+
+.partnerIconStub {
+  border: 2px solid black;
+  height: 65px;
+  width: 165px; 
+}

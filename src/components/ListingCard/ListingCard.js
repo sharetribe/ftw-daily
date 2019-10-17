@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { string, func } from 'prop-types';
+import _ from 'lodash';
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { lazyLoadWithDimensions } from '../../util/contextHelpers';
@@ -82,6 +83,17 @@ export const ListingCardComponent = props => {
   const isWindowDefined = typeof window !== 'undefined';
   const isMobileLayout = isWindowDefined && window.innerWidth < MODAL_BREAKPOINT;
 
+  const cardTitle = richText(title, {
+    longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS,
+    longWordClass: css.longWord,
+  }).join('');
+  const cardBreed = _.get(breeds.find(value => value.key === breed), 'label', null);
+  const cardGender = _.get(genders.find(value => value.key === gender), 'label', null);
+  const cardTitles = [cardTitle, cardBreed, cardGender]
+    .filter(i => typeof i === 'string')
+    .join(', ');
+
+
   return (
     <NamedLink className={classes} name="ListingPage" params={{ id, slug }} openInNewTab>
       <div
@@ -119,14 +131,7 @@ export const ListingCardComponent = props => {
           </div>
         </div>
         <div className={css.mainInfo}>
-          <div className={css.title}>
-            {richText(title, {
-              longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS,
-              longWordClass: css.longWord,
-            })}
-            , {breeds.find(value => value.key === breed).label},{' '}
-            {genders.find(value => value.key === gender).label}
-          </div>
+          <div className={css.title}>{cardTitles}</div>
           <div className={css.authorInfo}>
             <FormattedMessage id="ListingCard.hostedBy" values={{ authorName }} />
           </div>
