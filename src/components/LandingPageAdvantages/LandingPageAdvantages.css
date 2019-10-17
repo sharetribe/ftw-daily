@@ -1,0 +1,19 @@
+@import '../../marketplace.css';
+
+.advantage {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    grid-column-gap: 20px
+}
+
+ .advantages { 
+     display: grid;
+     grid-column-gap: 40px;
+     grid-row-gap: 10px;
+     grid-template-columns: 1fr; 
+    
+
+     @media (--viewportMedium) {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+ }
