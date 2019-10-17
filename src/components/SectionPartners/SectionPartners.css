@@ -13,12 +13,26 @@
 
 .partnersList {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-column-gap: 20px;
+  grid-template-columns: auto;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  justify-items: center;
+  
+  @media (min-width: 600px) {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+  }
+
+  @media (--viewportLarge) {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+  }
 }
 
 .partnerIconStub {
   border: 2px solid black;
   height: 65px;
-  width: 165px; 
+  width: 165px;
 }

@@ -24,8 +24,8 @@
   grid-row-gap: var(--LandingPage_sectionMarginTop);
 
   @media (--viewportMedium) {
-    grid-template-columns: 1fr 1fr 1fr; 
-  grid-column-gap: var(--LandingPage_sectionMarginTop);
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: var(--LandingPage_sectionMarginTop);
   }
 }
 
@@ -109,6 +109,26 @@
     max-width: 1128px;
     padding: 0 36px 0 36px;
     margin: var(--LandingPage_sectionMarginTopLarge) auto 93px auto;
+  }
+
+  @media (--viewportXLarge) {
+    max-width: 1056px;
+    padding: 0;
+  }
+}
+
+.sectionContentLowVerticalMargin {
+  margin: 18px 24px 18px 24px;
+
+  @media (--viewportMedium) {
+    max-width: 100%;
+    margin: 18px 24px 18px 24px;
+  }
+
+  @media (--viewportLarge) {
+    max-width: 1128px;
+    padding: 0 36px 0 36px;
+    margin: 18px auto 18px auto;
   }
 
   @media (--viewportXLarge) {

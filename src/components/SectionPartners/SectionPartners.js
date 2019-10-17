@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { FormattedMessage } from '../../util/reactIntl';
-import { ListingCard } from '../../components';
-import css from './SectionPartners.css';
-
-const Review = ({ name, text }) => <div>Review</div>;
+import { FormattedMessage } from '../../util/reactIntl'; 
+import css from './SectionPartners.css'; 
 
 const SectionPartners = () => {
   return (
