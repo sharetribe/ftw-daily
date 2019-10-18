@@ -7,11 +7,10 @@
 }
 
  .advantages { 
-     display: grid;
-     grid-column-gap: 40px;
-     grid-row-gap: 10px;
-     grid-template-columns: 1fr; 
-    
+    display: grid;
+    grid-column-gap: 40px;
+    grid-row-gap: 10px;
+    grid-template-columns: 1fr;
 
      @media (--viewportMedium) {
         grid-template-columns: 1fr 1fr 1fr;

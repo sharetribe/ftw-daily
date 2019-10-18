@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
-import { ListingCard } from '../../components';
+import _ from 'lodash'; 
 import css from './LandingPageAdvantages.css';
 import { FormattedMessage } from '../../util/reactIntl';
 
 const Advantage = ({ messageId }) => (
   <div className={css.advantage}>
-     <img src='/static/icons/checkmark-in-circle.png' />
+     <img src='/static/icons/streamline-icon-check-circle@48x48.png' style={{width: 22}}/>
     <FormattedMessage id={messageId} />
   </div>
 );

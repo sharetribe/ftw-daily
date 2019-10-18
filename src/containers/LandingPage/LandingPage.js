@@ -69,36 +69,41 @@ export const LandingPageComponent = props => {
             <SectionHero className={css.hero} history={history} location={location} />
           </div>
 
-          <div>
-            <div className={css.sectionContentLowVerticalMargin}>
-              <LandingPageAdvantages />
+          <div className={css.sections}>
+
+            <div className={css.section}>
+              <div className={css.sectionContentLowVerticalMargin}>
+                <LandingPageAdvantages />
+              </div>
             </div>
-          </div>
-          <ul className={css.sections}>
-            <li className={css.section}>
-              <div className={css.sectionContentFirstChild}>
+
+
+            <div className={css.section}>
+              <div className={css.sectionContentLowVerticalMargin}>
                 <SectionLatestListings listings={listings} />
               </div>
-            </li>
-            <li className={css.section}>
-              <div className={css.sectionContent}>
+            </div>
+            <div className={css.section}>
+              <div className={css.sectionContentLowVerticalMargin}>
                 <SectionLocations />
               </div>
-            </li>
-            <li className={css.section}>
-              <div className={css.sectionContent}>
+            </div>
+            <div className={css.section}>
+              <div className={css.sectionContentLowVerticalMargin}>
                 <SectionHowItWorks />
               </div>
-            </li>
-            <li className={css.section}>
-              <div className={css.sectionContent}>
+            </div>
+            <div className={css.section}>
+              <div className={css.sectionContentLowVerticalMargin}>
                 <SectionUserReviews />
               </div>
-              <div className={css.sectionContent}>
+            </div>
+            <div className={css.section}>
+              <div className={css.sectionContentLowVerticalMargin}>
                 <SectionPartners />
               </div>
-            </li>
-          </ul>
+            </div>
+          </div>
         </LayoutWrapperMain>
         <LayoutWrapperFooter>
           <Footer />
