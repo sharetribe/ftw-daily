@@ -2,7 +2,7 @@
 
 .title {
   @apply --marketplaceH1FontStyles;
-
+  font-size: 44px;
   margin-top: 0;
   max-width: 735px;
 
@@ -15,7 +15,6 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-row-gap: 30px;
-  padding: 10px;
 
   @media (--viewportMedium) {
     grid-template-columns: 1fr 1fr 1fr;
@@ -23,16 +22,10 @@
   }
 }
 
-.reviewCard {
-   min-height: 100px;
+.reviewCard { 
   display: grid;
   grid-template-rows: max-content max-content;
-  grid-row-gap: 25px;
-  padding: 15px;
-
-  @media (--viewportMedium) {
-    min-height: 180px;
-  }
+  grid-row-gap: 25px;  
 }
 
 .userInfo {
@@ -42,9 +35,8 @@
   align-items: center;
 }
 
-.userAvatarStub {
+.userAvatar {
   width: 50px;
-  height: 50px;
+  object-fit: cover;
   border-radius: 50%;
-  border: 2px solid black;
 }

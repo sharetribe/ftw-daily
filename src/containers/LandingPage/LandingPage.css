@@ -69,18 +69,19 @@
 
   @media (--viewportLarge) {
     justify-content: center;
-    padding-top: 60px;
+    padding-top: var(--LandingPage_sectionMarginTopMedium);
   }
 }
 
 .sections {
-  margin: 0;
-  padding-top: 1px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-row-gap:46px;
+  margin-top:var(--LandingPage_sectionMarginTop);
+  margin-bottom:var(--LandingPage_sectionMarginTop);
 }
 
-.section {
-  overflow: auto;
-}
 
 /* Square corners for the last section if it's even */
 .section:nth-of-type(2n):last-of-type {
@@ -90,12 +91,12 @@
 }
 
 /* Every other section has a light background */
-.section:nth-of-type(2n) {
+/* .section:nth-of-type(2n) {
   background-color: var(--matterColorLight);
   @media (--viewportMedium) {
     border-radius: 4px;
   }
-}
+} */
 
 .sectionContent {
   margin: var(--LandingPage_sectionMarginTop) 24px 51px 24px;
@@ -118,17 +119,17 @@
 }
 
 .sectionContentLowVerticalMargin {
-  margin: 18px 24px 18px 24px;
+  margin: 0px 24px;
 
   @media (--viewportMedium) {
     max-width: 100%;
-    margin: 18px 24px 18px 24px;
+    margin: 0px 24px;
   }
 
   @media (--viewportLarge) {
     max-width: 1128px;
     padding: 0 36px 0 36px;
-    margin: 18px auto 18px auto;
+    margin: 0px auto 0px auto;
   }
 
   @media (--viewportXLarge) {
@@ -143,8 +144,7 @@
 }
 
 /* A bar on top of light sections */
-.section:nth-of-type(2n) .sectionContent::before {
-  background: var(--marketplaceColor);
+.section:nth-of-type(2n) .sectionContent::before { 
   content: '';
   display: block;
   width: 109px;

@@ -3,6 +3,7 @@
 .title {
   @apply --marketplaceH1FontStyles;
 
+  font-size:44px;
   margin-top: 0;
   max-width: 735px;
 
@@ -19,20 +20,20 @@
   justify-items: center;
   
   @media (min-width: 600px) {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-column-gap: 20px;
     grid-row-gap: 20px;
   }
 
   @media (--viewportLarge) {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-column-gap: 20px;
     grid-row-gap: 20px;
   }
 }
 
-.partnerIconStub {
-  border: 2px solid black;
+.partnerIcon {
+  /* border: 2px solid black; */
   height: 65px;
-  width: 165px;
+  /* width: 165px; */
 }

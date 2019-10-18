@@ -2,6 +2,7 @@
 
 .title {
   @apply --marketplaceH1FontStyles;
+  font-size: 44px;
   margin-top: 0;
 }
 
@@ -38,9 +39,9 @@
 }
 
 .createListingLink {
-  margin-top: 36px;
+  margin-top: 6px;
 
   @media (--viewportMedium) {
-    margin-top: 52px;
+    margin-top: 12px;
   }
 }

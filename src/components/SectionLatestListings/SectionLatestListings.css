@@ -5,7 +5,7 @@
 
   margin-top: 0;
   max-width: 735px;
-
+  font-size: 44px;
   @media (--viewportMedium) {
     margin-bottom: 23px;
   }
