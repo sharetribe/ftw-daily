@@ -29,11 +29,11 @@
 }
 
 .stepTitle {
-  margin-top: 18px;
+  margin-top: 0;
   margin-bottom: 18px;
 
   @media (--viewportMedium) {
-    margin-top: 21px;
+    margin-top: 0;
     margin-bottom: 18px;
   }
 }
