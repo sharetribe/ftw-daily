@@ -1,1 +1,0 @@
-Write a review for {{transaction.listing.title}}
