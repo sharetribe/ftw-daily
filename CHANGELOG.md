@@ -16,8 +16,10 @@ way to update this template, but currently, we follow a pattern:
 
 - [fix] AvailabilityPlan doesn't need to have entries for every day.
   [#1214](https://github.com/sharetribe/flex-template-web/pull/1214)
-- [change] Default transaction process alias changed
+- [change] Default transaction process alias changed.
   [#1219](https://github.com/sharetribe/flex-template-web/pull/1219)
+- [change] Add default tx process definition. Remove default email templates.
+  [#1220](https://github.com/sharetribe/flex-template-web/pull/1220)
 
 ## [v3.5.1] 2019-09-16
 
