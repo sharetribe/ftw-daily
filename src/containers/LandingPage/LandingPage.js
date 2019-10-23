@@ -77,6 +77,14 @@ export const LandingPageComponent = props => {
               </div>
             </div>
 
+            <div className={css.section}>
+              <div className={css.sectionContentLowVerticalMargin}>
+                <div className={css.moto}>
+                  <div>Teile <b>Dein Pferd</b> mit Privaten in Deiner</div>
+                  <div>Umgebung oder finde <b>Deine Reitbeteiligung</b>.</div>
+                </div>
+              </div>
+            </div>
 
             <div className={css.section}>
               <div className={css.sectionContentLowVerticalMargin}>

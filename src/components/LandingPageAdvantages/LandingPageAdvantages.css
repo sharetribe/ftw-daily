@@ -6,7 +6,17 @@
     grid-column-gap: 20px
 }
 
- .advantages { 
+.advantageTitle {
+  margin: 0;
+}
+
+.advantageText {
+  margin: 0;
+  line-height: inherit;
+  font-size: 16px;
+}
+
+ .advantages {
     display: grid;
     grid-column-gap: 40px;
     grid-row-gap: 10px;

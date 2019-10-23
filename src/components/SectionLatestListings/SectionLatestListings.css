@@ -26,7 +26,8 @@
   @apply --marketplaceButtonStyles;
 
   animation-delay: 0.8s;
-  margin: 0 auto;
+  margin: 30px auto 0 auto;
+  border-radius: 4px;
 
   @media (--viewportMedium) {
     display: block;

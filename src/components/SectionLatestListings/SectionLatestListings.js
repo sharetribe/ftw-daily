@@ -12,9 +12,6 @@ const LatestListing = ({ listings }) => {
 
   return (
     <>
-      <div className={css.title}>
-        <FormattedMessage id="SectionLatestListings.titleLineOne" />
-      </div>
       <div className={css.listingCards}>
         {listignsInfoForLandingPage.map(l => (
           <ListingCard className={css.listingCard} key={l.id.uuid} listing={l} />
@@ -28,7 +25,7 @@ const LatestListing = ({ listings }) => {
         }}
         className={css.bigButton}
       >
-        <FormattedMessage id="SectionHero.viewAllListingsButton" />
+        <FormattedMessage id="LandingPage.viewAllListingsButton" />
       </NamedLink>
     </>
   );

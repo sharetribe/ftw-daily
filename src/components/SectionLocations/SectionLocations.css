@@ -23,6 +23,19 @@
   }
 }
 
+.bigButton {
+  @apply --marketplaceButtonStyles;
+
+  animation-delay: 0.8s;
+  margin: 30px auto 0 auto;
+  border-radius: 4px;
+
+  @media (--viewportMedium) {
+    display: block;
+    width: 260px;
+  }
+}
+
 .location {
   width: 100%;
   margin-top: 25px;

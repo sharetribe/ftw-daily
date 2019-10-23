@@ -164,3 +164,15 @@
     top: calc(-1 * var(--LandingPage_sectionMarginTopLarge));
   }
 }
+
+.moto {
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 44px;
+  margin-bottom: 20px;
+}
+
+.moto b {
+  color: purple;
+  font-weight: 800;
+}
