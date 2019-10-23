@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { FormattedMessage } from '../../util/reactIntl';
-import { ListingCard } from '../../components';
+import { ListingCard, NamedLink } from '../../components';
 import css from './SectionLatestListings.css';
 
 const LatestListing = ({ listings }) => {
