@@ -24,7 +24,7 @@ const SectionUserReviews = () => {
           </div>
 
           <div>
-            <FormattedMessage id="SectionUserReviews.reviewOneText" />
+            «<FormattedMessage id="SectionUserReviews.reviewOneText" />»
           </div>
         </div>
 
@@ -37,7 +37,7 @@ const SectionUserReviews = () => {
           </div>
 
           <div>
-            <FormattedMessage id="SectionUserReviews.reviewTwoText" />
+            «<FormattedMessage id="SectionUserReviews.reviewTwoText" />»
           </div>
         </div>
 
@@ -50,7 +50,7 @@ const SectionUserReviews = () => {
           </div>
 
           <div>
-            <FormattedMessage id="SectionUserReviews.reviewThreeText" />
+            «<FormattedMessage id="SectionUserReviews.reviewThreeText" />»
           </div>
         </div>
       </div>

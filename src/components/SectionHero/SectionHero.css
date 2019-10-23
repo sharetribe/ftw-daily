@@ -64,7 +64,7 @@
 
   @media only screen and (min-width: 1367px) {
     margin: 0 auto;
-    max-width: calc(1052px + 36px + 36px);
+    max-width: calc(1152px + 36px + 36px);
     width: 100%;
     padding: 0 36px 0 36px;
   }

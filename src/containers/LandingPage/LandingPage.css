@@ -107,7 +107,7 @@
   }
 
   @media (--viewportLarge) {
-    max-width: 1128px;
+    max-width: 1228px;
     padding: 0 36px 0 36px;
     margin: var(--LandingPage_sectionMarginTopLarge) auto 93px auto;
   }
@@ -127,7 +127,7 @@
   }
 
   @media (--viewportLarge) {
-    max-width: 1128px;
+    max-width: 1228px;
     padding: 0 36px 0 36px;
     margin: 0px auto 0px auto;
   }
@@ -144,7 +144,7 @@
 }
 
 /* A bar on top of light sections */
-.section:nth-of-type(2n) .sectionContent::before { 
+.section:nth-of-type(2n) .sectionContent::before {
   content: '';
   display: block;
   width: 109px;
