@@ -28,7 +28,7 @@ const LatestListing = ({ listings }) => {
         }}
         className={css.heroButton}
       >
-        <FormattedMessage id="SectionHero.browseButton" />
+        <FormattedMessage id="SectionHero.bigButton" />
       </NamedLink>
     </>
   );

@@ -17,7 +17,19 @@
   grid-row-gap: 40px;
 
   @media (--viewportMedium) {
-    grid-template-columns: 1fr 1fr 1fr; 
+    grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 40px;
+  }
+}
+
+.bigButton {
+  @apply --marketplaceButtonStyles;
+
+  animation-delay: 0.8s;
+  margin: 0 auto;
+
+  @media (--viewportMedium) {
+    display: block;
+    width: 260px;
   }
 }
