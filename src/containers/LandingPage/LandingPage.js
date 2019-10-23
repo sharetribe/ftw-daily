@@ -99,9 +99,7 @@ export const LandingPageComponent = props => {
               </div>
             </div>
             <div className={css.section}>
-              <div className={css.sectionContentLowVerticalMargin}>
-                <SectionPartners />
-              </div>
+              <SectionPartners />
             </div>
           </div>
         </LayoutWrapperMain>
