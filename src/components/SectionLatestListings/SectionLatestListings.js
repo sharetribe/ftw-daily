@@ -20,6 +20,16 @@ const LatestListing = ({ listings }) => {
           <ListingCard className={css.listingCard} key={l.id.uuid} listing={l} />
         ))}
       </div>
+      <NamedLink
+        name="SearchPage"
+        to={{
+          search:
+            'address=Switzerland&bounds=47.808453%2C10.492064%2C45.817981%2C5.955902',
+        }}
+        className={css.heroButton}
+      >
+        <FormattedMessage id="SectionHero.browseButton" />
+      </NamedLink>
     </>
   );
 };

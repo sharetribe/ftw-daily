@@ -17,8 +17,22 @@
 
 .step {
   @media (--viewportMedium) {
-    width: 324px;
-    margin-right: 40px;
+    width: 304px;
+    margin-right: 120px;
+  }
+}
+
+.step::after {
+  @media (--viewportMedium) {
+    content: '';
+    position: absolute;
+    background-image: url('/static/icons/big-right-arrow.webp');
+    width: 64px;
+    height: 64px;
+    top: 50%;
+    background-size: contain;
+    margin-top: -32px;
+    right: -90px;
   }
 }
 
@@ -26,6 +40,10 @@
   @media (--viewportMedium) {
     margin-right: 0;
   }
+}
+
+.step:last-of-type::after {
+  content: none;
 }
 
 .stepTitle {

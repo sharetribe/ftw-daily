@@ -85,12 +85,12 @@ export const LandingPageComponent = props => {
             </div>
             <div className={css.section}>
               <div className={css.sectionContentLowVerticalMargin}>
-                <SectionLocations />
+                <SectionHowItWorks />
               </div>
             </div>
             <div className={css.section}>
               <div className={css.sectionContentLowVerticalMargin}>
-                <SectionHowItWorks />
+                <SectionLocations />
               </div>
             </div>
             <div className={css.section}>
