@@ -10,7 +10,7 @@ import { ensureListing, ensureUser } from '../../util/data';
 import { richText } from '../../util/richText';
 import { createSlug } from '../../util/urlHelpers';
 import config from '../../config';
-import { NamedLink, ResponsiveImage, GalleryCarouselWrapper } from '../../components';
+import { AvatarMedium, NamedLink, ResponsiveImage, GalleryCarouselWrapper } from '../../components';
 
 import css from './ListingCard.css';
 
@@ -44,6 +44,8 @@ class ListingImage extends Component {
 const LazyImage = lazyLoadWithDimensions(ListingImage, { loadAfterInitialRendering: 3000 });
 
 export const ListingCardComponent = props => {
+  console.log('listing card')
+  console.log({props})
   const {
     className,
     rootClassName,
@@ -53,7 +55,7 @@ export const ListingCardComponent = props => {
     setActiveListing,
     ages,
     breeds,
-    genders,
+    genders 
   } = props;
   const classes = classNames(rootClassName || css.root, className);
 
@@ -122,6 +124,7 @@ export const ListingCardComponent = props => {
         </div>
       </div>
       <div className={css.info}>
+        <div className={css.avatarAuthor}><AvatarMedium user={listing.author}/></div> 
         <div className={css.price}>
           <div className={css.priceValue} title={priceTitle}>
             {formattedPrice}
@@ -159,7 +162,6 @@ ListingCardComponent.propTypes = {
 
   // Responsive image sizes hint
   renderSizes: string,
-
   setActiveListing: func,
 };
 
