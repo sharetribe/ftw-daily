@@ -27,8 +27,6 @@ const AVATAR_IMAGE_VARIANTS = [
 ];
 
 export const AvatarComponent = props => {
-  // console.log("avatar")
-  // console.log({props})
   const { rootClassName, className, user, renderSizes, disableProfileLink, intl } = props;
   const classes = classNames(rootClassName || css.root, className);
 

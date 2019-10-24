@@ -44,8 +44,6 @@ class ListingImage extends Component {
 const LazyImage = lazyLoadWithDimensions(ListingImage, { loadAfterInitialRendering: 3000 });
 
 export const ListingCardComponent = props => {
-  console.log('listing card')
-  console.log({props})
   const {
     className,
     rootClassName,
