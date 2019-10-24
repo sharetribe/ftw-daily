@@ -91,7 +91,6 @@ export const LandingPageComponent = props => {
 
             <div className={css.section}>
               <div className={css.sectionContentLowVerticalMargin}>
-                {console.log({ listings })}
                 <SectionLatestListings listings={listings} />
               </div>
             </div>
@@ -148,7 +147,6 @@ const mapStateToProps = state => {
   // const ref = { id, type: 'listing' };
   const ref2 = latestListingsIds.map(i => ({ id: i, type: 'listing' }));
   const listings = getMarketplaceEntities(state, ref2);
-  console.log({ listings });
   return {
     listings: pageListings,
     scrollingDisabled: isScrollingDisabled(state),
