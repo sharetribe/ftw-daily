@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] Use currency of the `lineItem` on every line of the `BookingBreakdown` if possible.
+  [#1221](https://github.com/sharetribe/flex-template-web/pull/1221)
 - [fix] AvailabilityPlan doesn't need to have entries for every day.
   [#1214](https://github.com/sharetribe/flex-template-web/pull/1214)
 - [change] Default transaction process alias changed.
