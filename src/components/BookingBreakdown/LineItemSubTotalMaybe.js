@@ -22,7 +22,8 @@ const lineItemsTotal = lineItems => {
   const amount = lineItems.reduce((total, item) => {
     return total.plus(item.lineTotal.amount);
   }, new Decimal(0));
-  return new Money(amount, config.currency);
+  const currency = lineItems[0] ? lineItems[0].lineTotal.currency : config.currency;
+  return new Money(amount, currency);
 };
 
 /**
