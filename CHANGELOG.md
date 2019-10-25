@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [change] Update @formatjs/intl-relativetimeformat from 2.8.3 to 4.2.1
+  [#1222](https://github.com/sharetribe/flex-template-web/pull/1222)
 - [fix] Use currency of the `lineItem` on every line of the `BookingBreakdown` if possible.
   [#1221](https://github.com/sharetribe/flex-template-web/pull/1221)
 - [fix] AvailabilityPlan doesn't need to have entries for every day.
