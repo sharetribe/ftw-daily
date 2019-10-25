@@ -6,8 +6,8 @@
   "dependencies": {
     "@formatjs/intl-relativetimeformat": "^4.2.1",
     "@mapbox/polyline": "^1.0.0",
-    "@sentry/browser": "5.6.2",
-    "@sentry/node": "5.6.2",
+    "@sentry/browser": "5.7.1",
+    "@sentry/node": "5.7.1",
     "array-includes": "^3.0.3",
     "array.prototype.find": "^2.0.4",
     "autosize": "^4.0.0",
