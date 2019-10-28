@@ -4,7 +4,7 @@
 {{~/inline~}}
 
 {{~#*inline "format-date"~}}
-{{date date format="MMM d, YYYY"}}
+{{date date format="MMM d, YYYY" tz="Etc/UTC"}}
 {{~/inline~}}
 
 <html>
@@ -48,12 +48,12 @@
           <td class="right">End date</td>
         </tr>
         <tr>
-          <th class="left">{{date booking.start format="EEEE"}}</th>
-          <th class="right">{{date booking.end format="EEEE"}}</th>
+          <th class="left">{{date booking.start format="EEEE" tz="Etc/UTC"}}</th>
+          <th class="right">{{date booking.end format="EEEE" tz="Etc/UTC"}}</th>
         </tr>
         <tr class="bottom-row">
-          <th class="left">{{date booking.start format="MMM d"}}</th>
-          <th class="right">{{date booking.end format="MMM d"}}</th>
+          <th class="left">{{date booking.start format="MMM d" tz="Etc/UTC"}}</th>
+          <th class="right">{{date booking.end format="MMM d" tz="Etc/UTC"}}</th>
         </tr>
       </thead>
       {{#each tx-line-items}}
