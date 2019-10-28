@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [add] Add default timezone to date formatting in example transaction process
+  email templates.
+  [#1227](https://github.com/sharetribe/flex-template-web/pull/1227)
 - [change] Update @formatjs/intl-relativetimeformat from 2.8.3 to 4.2.1
   [#1222](https://github.com/sharetribe/flex-template-web/pull/1222)
 - [fix] Use currency of the `lineItem` on every line of the `BookingBreakdown` if possible.
