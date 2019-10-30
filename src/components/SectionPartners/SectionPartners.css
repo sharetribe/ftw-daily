@@ -35,7 +35,9 @@
 }
 
 .partnerIcon {
-  /* border: 2px solid black; */
-  height: 65px;
-  /* width: 165px; */
+  height: 35px;
+
+  @media (min-width: 600px) {
+    height: 65px;
+  }
 }

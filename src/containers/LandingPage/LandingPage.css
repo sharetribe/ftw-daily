@@ -89,6 +89,7 @@
 .section {
   padding-top:var(--LandingPage_sectionMarginTop);
   padding-bottom:var(--LandingPage_sectionMarginTop);
+  max-width: 100%;
 }
 
 /* Every other section has a light background */
