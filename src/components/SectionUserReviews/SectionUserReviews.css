@@ -2,13 +2,9 @@
 
 .title {
   @apply --marketplaceH1FontStyles;
-  font-size: 44px;
   margin-top: 0;
-  max-width: 735px;
-
-  @media (--viewportMedium) {
-    margin-bottom: 23px;
-  }
+  text-align: center;
+  margin-bottom: 40px;
 }
 
 .reviewsCards {
@@ -22,10 +18,14 @@
   }
 }
 
-.reviewCard { 
+.reviewCard {
   display: grid;
   grid-template-rows: max-content max-content;
-  grid-row-gap: 25px;  
+  grid-row-gap: 16px;
+  background: #fff;
+  border-radius: 4px;
+  padding: 20px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
 }
 
 .userInfo {

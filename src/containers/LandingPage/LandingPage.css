@@ -10,7 +10,7 @@
     since browsers support CSS Properties already.
  */
 
-  --LandingPage_sectionMarginTop: 40px;
+  --LandingPage_sectionMarginTop: 50px;
   --LandingPage_sectionMarginTopMedium: 60px;
   --LandingPage_sectionMarginTopLarge: 94px;
 }
@@ -77,9 +77,6 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
-  grid-row-gap: 40px;
-  margin-top:var(--LandingPage_sectionMarginTop);
-  margin-bottom:var(--LandingPage_sectionMarginTop);
 }
 
 
@@ -89,14 +86,30 @@
     border-radius: 4px 4px 0 0;
   }
 }
+.section {
+  padding-top:var(--LandingPage_sectionMarginTop);
+  padding-bottom:var(--LandingPage_sectionMarginTop);
+}
 
 /* Every other section has a light background */
-/* .section:nth-of-type(2n) {
-  background-color: var(--matterColorLight);
+.section:nth-of-type(odd) {
+  background-color: #efefef;
   @media (--viewportMedium) {
     border-radius: 4px;
   }
-} */
+}
+
+.section:last-of-type(odd) {
+  border-top: 1px solid #e7e7e7;
+}
+
+.section.landingPageAdvantages {
+  display: none;
+
+  @media (--viewportMedium) {
+    display: block;
+  }
+}
 
 .sectionContent {
   margin: var(--LandingPage_sectionMarginTop) 24px 51px 24px;

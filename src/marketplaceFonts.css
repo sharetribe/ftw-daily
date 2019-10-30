@@ -113,7 +113,7 @@
     margin-bottom: 18px;
 
     @media (--viewportMedium) {
-      font-size: 48px;
+      font-size: 40px;
       font-weight: var(--fontWeightSemiBold);
       line-height: 56px;
       letter-spacing: -2px;

@@ -11,7 +11,10 @@ const LatestListing = ({ listings }) => {
   );
 
   return (
-    <>
+    <div>
+      <div className={css.title}>
+        <FormattedMessage id="SectionLatestListings.titleLineOne" />
+      </div>
       <div className={css.listingCards}>
         {listignsInfoForLandingPage.map(l => (
           <ListingCard className={css.listingCard} key={l.id.uuid} listing={l} />
@@ -27,7 +30,7 @@ const LatestListing = ({ listings }) => {
       >
         <FormattedMessage id="LandingPage.viewAllListingsButton" />
       </NamedLink>
-    </>
+    </div>
   );
 };
 

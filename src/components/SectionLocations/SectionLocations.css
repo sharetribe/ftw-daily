@@ -2,14 +2,9 @@
 
 .title {
   @apply --marketplaceH1FontStyles;
-
   margin-top: 0;
-  max-width: 735px;
-  font-size: 44px;
-
-  @media (--viewportMedium) {
-    margin-bottom: 23px;
-  }
+  text-align: center;
+  margin-bottom: 40px;
 }
 
 .locations {
@@ -34,6 +29,10 @@
     display: block;
     width: 260px;
   }
+}
+
+.location:first-of-type {
+  margin-top: 0;
 }
 
 .location {

@@ -12,6 +12,7 @@ const SectionPartners = () => {
         <div><img src='/static/partners/starhorse.png' className={css.partnerIcon} /></div>
         <div><img src='/static/partners/cavallets.png' className={css.partnerIcon} /></div>
         <div><img src='/static/partners/SM.png' className={css.partnerIcon} /></div>
+        <div><img src='/static/partners/AEK_Pellets.png' className={css.partnerIcon} /></div>
       </div>
     </>
   );

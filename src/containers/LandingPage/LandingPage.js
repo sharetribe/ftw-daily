@@ -71,21 +71,11 @@ export const LandingPageComponent = props => {
 
           <div className={css.sections}>
 
-            <div className={css.section}>
+            <div className={css.section + ' ' + css.landingPageAdvantages}>
               <div className={css.sectionContentLowVerticalMargin}>
                 <LandingPageAdvantages />
               </div>
             </div>
-
-            <div className={css.section}>
-              <div className={css.sectionContentLowVerticalMargin}>
-                <div className={css.moto}>
-                  <div>Teile <b>Dein Pferd</b> mit Privaten in Deiner</div>
-                  <div>Umgebung oder finde <b>Deine Reitbeteiligung</b>.</div>
-                </div>
-              </div>
-            </div>
-
             <div className={css.section}>
               <div className={css.sectionContentLowVerticalMargin}>
                 <SectionLatestListings listings={listings} />
