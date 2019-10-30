@@ -7,7 +7,7 @@ import { injectIntl, intlShape } from '../../util/reactIntl';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import config from '../../config';
 import { getLatestListing } from './LandingPage.duck.js';
-import { getListingsById } from '../../ducks/marketplaceData.duck';
+import { getListingsById, getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import {
   Page,
   SectionHero,
@@ -131,6 +131,9 @@ const mapStateToProps = state => {
   const { latestListingsIds } = state.LandingPage;
   const pageListings = getListingsById(state, latestListingsIds);
 
+  // const ref = { id, type: 'listing' };
+  const ref2 = latestListingsIds.map(i => ({ id: i, type: 'listing' }));
+  const listings = getMarketplaceEntities(state, ref2);
   return {
     listings: pageListings,
     scrollingDisabled: isScrollingDisabled(state),
@@ -157,10 +160,30 @@ const LandingPage = compose(
 
 LandingPage.loadData = (params, search) => {
   return getLatestListing({
-    include: ['author', 'images'],
+    include: ['author', 'author.profileImage', 'images'],
     'fields.listing': ['title', 'geolocation', 'price', 'publicData'],
     'fields.user': ['profile.displayName', 'profile.abbreviatedName'],
-    'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
+    'fields.image': [
+      // Listing page
+      'variants.landscape-crop',
+      'variants.landscape-crop2x',
+      'variants.landscape-crop4x',
+      'variants.landscape-crop6x',
+
+      // Social media
+      'variants.facebook',
+      'variants.twitter',
+
+      // Image carousel
+      'variants.scaled-small',
+      'variants.scaled-medium',
+      'variants.scaled-large',
+      'variants.scaled-xlarge',
+
+      // Avatars
+      'variants.square-small',
+      'variants.square-small2x',
+    ],
     per_page: 3,
   });
 };
