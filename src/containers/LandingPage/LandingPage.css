@@ -106,6 +106,7 @@
 
 .section.landingPageAdvantages {
   display: none;
+  padding: 30px 0;
 
   @media (--viewportMedium) {
     display: block;
