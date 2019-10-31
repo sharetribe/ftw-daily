@@ -81,7 +81,7 @@ export const LandingPageComponent = props => {
                 <SectionLatestListings listings={listings} />
               </div>
             </div>
-            <div className={css.section}>
+            <div className={css.section + ' ' + css.sectionHowItWorks}>
               <div className={css.sectionContentLowVerticalMargin}>
                 <SectionHowItWorks />
               </div>
@@ -96,8 +96,10 @@ export const LandingPageComponent = props => {
                 <SectionUserReviews />
               </div>
             </div>
-            <div className={css.section}>
-              <SectionPartners />
+            <div className={css.section + ' ' + css.sectionPartners}>
+              <div className={css.sectionContentLowVerticalMargin}>
+                <SectionPartners />
+              </div>
             </div>
           </div>
         </LayoutWrapperMain>

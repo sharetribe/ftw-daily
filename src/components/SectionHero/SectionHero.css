@@ -93,7 +93,7 @@
 
   @media (--viewportMedium) {
     max-width: var(--SectionHero_desktopTitleMaxWidth);
-    margin: 0 0 63px 0;
+    margin: 0 0 50px 0;
   }
 }
 
@@ -107,4 +107,9 @@
     display: block;
     width: 260px;
   }
+}
+
+.iconSearch {
+  margin-right: 10px;
+  stroke: #fff;
 }

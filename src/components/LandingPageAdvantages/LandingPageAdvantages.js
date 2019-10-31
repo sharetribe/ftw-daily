@@ -6,7 +6,7 @@ import { FormattedMessage } from '../../util/reactIntl';
 
 const Advantage = ({ title, messageId }) => (
   <div className={css.advantage}>
-    <img src='/static/icons/streamline-icon-check-circle@48x48.png' style={{width: 40}}/>
+    <img src='/static/icons/streamline-icon-check-circle@48x48.png' style={{width: 40, marginTop: '14px'}}/>
     <div>
       <h3 className={css.advantageTitle}><FormattedMessage id={title} /></h3>
       <p className={css.advantageText}><FormattedMessage id={messageId} /></p>

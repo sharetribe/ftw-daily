@@ -87,30 +87,38 @@
   }
 }
 .section {
-  padding-top:var(--LandingPage_sectionMarginTop);
-  padding-bottom:var(--LandingPage_sectionMarginTop);
+  padding-top: var(--LandingPage_sectionMarginTop);
+  padding-bottom: 70px;
   max-width: 100%;
 }
 
 /* Every other section has a light background */
 .section:nth-of-type(odd) {
-  background-color: #efefef;
+  background-color: #f6f6f6;
   @media (--viewportMedium) {
     border-radius: 4px;
   }
 }
 
 .section:last-of-type(odd) {
-  border-top: 1px solid #e7e7e7;
+  border-top: 1px solid #f5f5f5;
 }
 
 .section.landingPageAdvantages {
   display: none;
-  padding: 30px 0;
+  padding: 19px 0;
 
   @media (--viewportMedium) {
     display: block;
   }
+}
+
+.section.sectionHowItWorks {
+  background: url('/static/patterns/ps-pattern.png');
+}
+
+.section.sectionPartners {
+  padding: 26px 0;
 }
 
 .sectionContent {
