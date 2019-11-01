@@ -4,7 +4,11 @@
   @apply --marketplaceH1FontStyles;
   margin-top: 0;
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
+
+  @media (--viewportMedium) {
+    margin-bottom: 50px;
+  }
 }
 
 .locations {
