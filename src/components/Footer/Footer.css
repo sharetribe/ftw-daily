@@ -14,7 +14,7 @@
   }
 
   @media (--viewportLarge) {
-    padding: 0 0 81px 0;
+    padding: 0 0 80px 0;
     border-top: none;
   }
 }
@@ -23,11 +23,11 @@
  * view from the outermost paddings*/
 .topBorderWrapper {
   @media (--viewportMedium) {
-    padding-top: 41px;
+    padding-top: 40px;
   }
 
   @media (--viewportLarge) {
-    padding-top: 73px;
+    padding-top: 60px;
 
     border-top-style: solid;
     border-top-width: 1px;
