@@ -39,6 +39,14 @@
     position: relative;
     width: 100%;
   }
+
+  & :global(.DayPickerNavigation__bottom) {
+    display: none;
+    &:first-of-type {
+      display: block;
+    }
+  }
+
   & :global(.DayPickerNavigation_button__horizontal) {
     padding: 6px 9px;
     top: 21px;
