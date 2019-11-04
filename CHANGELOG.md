@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+## [v3.6.0] 2019-11-04
+
 - [change] update react-dates from 20.3.0 to 21.3.1
   [#1223](https://github.com/sharetribe/flex-template-web/pull/1223)
 - [change] Update helmet from 3.18.0 to 3.21.2
@@ -35,6 +37,8 @@ way to update this template, but currently, we follow a pattern:
 - [change] Add default tx process definition. Remove default email templates.
   [#1220](https://github.com/sharetribe/flex-template-web/pull/1220)
 
+  [v3.6.0]: https://github.com/sharetribe/flex-template-web/compare/v3.5.1...v3.6.0
+
 ## [v3.5.1] 2019-09-16
 
 - [add] add orverriding function `onAdd` and `onRemove` for `CustomOverlayView` in
@@ -46,6 +50,8 @@ way to update this template, but currently, we follow a pattern:
   overriding `render` method to render child object by using `createPortal` instead of
   `unstable_renderSubtreeIntoContainer`.
   [#1200](https://github.com/sharetribe/flex-template-web/pull/1200)
+
+  [v3.5.1]: https://github.com/sharetribe/flex-template-web/compare/v3.5.0...v3.5.1
 
 ## [v3.5.0] 2019-08-29
 
