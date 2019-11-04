@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [change] Update helmet from 3.18.0 to 3.21.2
+  [#1225](https://github.com/sharetribe/flex-template-web/pull/1225)
 - [change] Update @sentry/browser and @sentry/node from 5.6.2 to 5.7.1. Due to some refactoring
   Sentry has done internally which is included to this update, you might need to remove
   `node_modules` and run `yarn install` again.
