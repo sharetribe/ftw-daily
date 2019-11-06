@@ -10,9 +10,9 @@
     since browsers support CSS Properties already.
  */
 
-  --LandingPage_sectionMarginTop: 50px;
-  --LandingPage_sectionMarginTopMedium: 60px;
-  --LandingPage_sectionMarginTopLarge: 94px;
+  --LandingPage_sectionMarginTop: 40px;
+  --LandingPage_sectionMarginTopMedium: 40px;
+  --LandingPage_sectionMarginTopLarge: 60px;
 }
 
 .root {
@@ -64,7 +64,7 @@
   border-radius: 0;
 
   @media (--viewportMedium) {
-    padding-bottom: 83px;
+    padding-bottom: 90px;
   }
 
   @media (--viewportLarge) {
@@ -100,6 +100,7 @@
 /* Every other section has a light background */
 .section:nth-of-type(odd) {
   background-color: #f6f6f6;
+  background: url('/static/patterns/ps-pattern.png');
   @media (--viewportMedium) {
     border-radius: 4px;
   }
@@ -116,10 +117,6 @@
   @media (--viewportMedium) {
     display: block;
   }
-}
-
-.section.sectionHowItWorks {
-  background: url('/static/patterns/ps-pattern.png');
 }
 
 .section.sectionPartners {
