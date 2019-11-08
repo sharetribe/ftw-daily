@@ -49,7 +49,7 @@
   @media (--viewportLarge) {
     max-height: 800px;
     min-height: 600px;
-    height: calc(70vh - var(--topbarHeightDesktop));
+    height: calc(100vh - var(--topbarHeightDesktop));
   }
 }
 
