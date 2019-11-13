@@ -41,7 +41,8 @@
 
   @media (--viewportMedium) {
     padding-bottom: 0; /* No fixed aspect on desktop layouts */
-    height: 592px;
+    height: 40vw;
+    max-height: 60vh;
   }
 }
 
@@ -229,9 +230,12 @@
   display: flex;
   align-items: center;
   transform: translateZ(0);
+  @media (--viewportMedium) {
+    padding: 18px 50px;
+  }
   @media (--viewportLarge) {
     display: block;
-    margin-top: 95px;
+    margin-top: 70px;
     margin-left: 60px;
     border-left-style: solid;
     border-left-width: 1px;
@@ -656,6 +660,15 @@
   position: relative;
   overflow: hidden;
 }
+
+.galleryMainImageContainer:not(:first-of-type) {
+  display: none;
+
+  @media (--viewportMedium) {
+    display: block;
+  }
+}
+
 .galleryColumn {
   width: 25%;
 }

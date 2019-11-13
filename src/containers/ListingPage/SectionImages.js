@@ -111,9 +111,9 @@ class SectionImages extends Component {
                 onClick={e => handleViewPhotosClick(e, 1)}
               >
                 <ResponsiveImage image={secondImage} {...imageProps} />
-                
+
               </div>)}
-              
+
               {galleryColumns}
             </div>
             {viewPhotosButton}

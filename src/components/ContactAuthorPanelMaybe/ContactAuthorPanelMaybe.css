@@ -27,7 +27,11 @@
 }
 
 .textContainer {
-  flex: 1;
+  margin-right: 16px;
+
+  @media (--viewportMedium) {
+    margin-right: 30px;
+  }
 }
 
 .contactAuthorText {
