@@ -160,6 +160,7 @@ class EditListingWizard extends Component {
     
       onPublishListingDraft(id);
     
+    // TODO: Add back once stripe is setup
     // if (stripeConnected) {
     //   onPublishListingDraft(id);
     // } else {
