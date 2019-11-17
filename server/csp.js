@@ -24,16 +24,19 @@ const defaultDirectives = {
     '*.tiles.mapbox.com',
     'api.mapbox.com',
     'events.mapbox.com',
+    '*.hotjar.com',
+    '*.googletagmanager.com',
 
     // Google Analytics
     'www.google-analytics.com',
     'stats.g.doubleclick.net',
 
+
     'sentry.io',
     '*.stripe.com',
   ],
   fontSrc: [self, data, 'assets-sharetribecom.sharetribe.com', 'fonts.gstatic.com'],
-  frameSrc: [self, '*.stripe.com'],
+  frameSrc: [self, '*.stripe.com', '*.hotjar.com', '*.googletagmanager.com'],
   imgSrc: [
     self,
     data,
