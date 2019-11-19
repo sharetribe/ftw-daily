@@ -273,26 +273,20 @@
   }
 }
 
-.bookingInfo {
+.bookingInfoWrapper {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
   font-size: 14px;
   line-height: 14px;
-  margin-top: 3px;
+  margin-top: 2px;
+  padding-top: 2px;
 
   @media (--viewportMedium) {
+    padding-top: 0px;
     margin-top: 8px;
     line-height: 16px;
-  }
-}
-
-.itemTimestamp {
-  /* Font */
-  @apply --marketplaceH5FontStyles;
-
-  margin-top: 0px;
-  margin-bottom: 0px;
-  @media (--viewportMedium) {
-    margin-top: 4px;
-    margin-bottom: 0;
   }
 }
 

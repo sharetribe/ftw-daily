@@ -14,8 +14,58 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+## [v3.6.0] 2019-11-04
+
+- [change] update react-dates from 20.3.0 to 21.3.1
+  [#1223](https://github.com/sharetribe/flex-template-web/pull/1223)
+- [change] Update helmet from 3.18.0 to 3.21.2
+  [#1225](https://github.com/sharetribe/flex-template-web/pull/1225)
+- [change] Update @sentry/browser and @sentry/node from 5.6.2 to 5.7.1. Due to some refactoring
+  Sentry has done internally which is included to this update, you might need to remove
+  `node_modules` and run `yarn install` again.
+  [#1224](https://github.com/sharetribe/flex-template-web/pull/1224)
+- [add] Add default timezone to date formatting in example transaction process email templates.
+  [#1227](https://github.com/sharetribe/flex-template-web/pull/1227)
+- [change] Update @formatjs/intl-relativetimeformat from 2.8.3 to 4.2.1
+  [#1222](https://github.com/sharetribe/flex-template-web/pull/1222)
+- [fix] Use currency of the `lineItem` on every line of the `BookingBreakdown` if possible.
+  [#1221](https://github.com/sharetribe/flex-template-web/pull/1221)
+- [fix] AvailabilityPlan doesn't need to have entries for every day.
+  [#1214](https://github.com/sharetribe/flex-template-web/pull/1214)
+- [change] Default transaction process alias changed.
+  [#1219](https://github.com/sharetribe/flex-template-web/pull/1219)
+- [change] Add default tx process definition. Remove default email templates.
+  [#1220](https://github.com/sharetribe/flex-template-web/pull/1220)
+
+  [v3.6.0]: https://github.com/sharetribe/flex-template-web/compare/v3.5.1...v3.6.0
+
+## [v3.5.1] 2019-09-16
+
+- [add] add orverriding function `onAdd` and `onRemove` for `CustomOverlayView` in
+  `SearchMapWithGoogleMap` to abide to React rules and do not `unmountComponentAtNode` when a
+  component is rendered by React and use `appendChild` on `onAdd` instead of `draw` to
+  [improve performance](https://github.com/tomchentw/react-google-maps/issues/817).
+  [#1200](https://github.com/sharetribe/flex-template-web/pull/1200)
+- [fix] fix `CustomOverlayView` in `SearchMapWithGoogleMap` to work with new `react-intl` version,
+  overriding `render` method to render child object by using `createPortal` instead of
+  `unstable_renderSubtreeIntoContainer`.
+  [#1200](https://github.com/sharetribe/flex-template-web/pull/1200)
+
+  [v3.5.1]: https://github.com/sharetribe/flex-template-web/compare/v3.5.0...v3.5.1
+
+## [v3.5.0] 2019-08-29
+
+- [change] Change the design of `BookingBreakdown` and add options to show only dates or booking
+  date and time there. [#1195](https://github.com/sharetribe/flex-template-web/pull/1195)
+- [change] Move `BookingTimeInfo` to separate component from `InboxPage`. Add options to show only
+  booking dates or booking dates and times.
+  [#1194](https://github.com/sharetribe/flex-template-web/pull/1194)
+- [add] Add new Spanish translations related to storing payment card.
+  [#1193](https://github.com/sharetribe/flex-template-web/pull/1193)
 - [fix] Update yarn.lock (there was Lodash version resolution missing)
   [#1190](https://github.com/sharetribe/flex-template-web/pull/1190)
+
+  [v3.5.0]: https://github.com/sharetribe/flex-template-web/compare/v3.4.0...v3.5.0
 
 ## [v3.4.0] 2019-08-29
 
@@ -98,6 +148,8 @@ way to update this template, but currently, we follow a pattern:
 - Update dependecies: all the easily updateable minor and batch updates: array.prototype.find,
   babel-jest, core-js, enzyme (et al.), express, helmet, inquirer, lodash, nodemon, raf, redux,
   source-map-support [#1163](https://github.com/sharetribe/flex-template-web/pull/1163)
+
+  [v3.4.0]: https://github.com/sharetribe/flex-template-web/compare/v3.3.0...v3.4.0
 
 ## [v3.3.0] 2019-08-22
 

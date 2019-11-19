@@ -7,6 +7,7 @@ import {
   TRANSITION_CANCEL,
   TRANSITION_REQUEST_PAYMENT,
   TX_TRANSITION_ACTOR_CUSTOMER,
+  DATE_TYPE_DATE,
 } from '../../util/transaction';
 import { LINE_ITEM_NIGHT } from '../../util/types';
 import { BookingBreakdownComponent } from './BookingBreakdown';
@@ -42,6 +43,7 @@ describe('BookingBreakdown', () => {
       <BookingBreakdownComponent
         userRole="customer"
         unitType={LINE_ITEM_NIGHT}
+        dateType={DATE_TYPE_DATE}
         transaction={exampleTransaction({
           payinTotal: new Money(2000, 'USD'),
           payoutTotal: new Money(2000, 'USD'),
@@ -71,6 +73,7 @@ describe('BookingBreakdown', () => {
       <BookingBreakdownComponent
         userRole="customer"
         unitType={LINE_ITEM_NIGHT}
+        dateType={DATE_TYPE_DATE}
         transaction={exampleTransaction({
           payinTotal: new Money(2000, 'USD'),
           payoutTotal: new Money(2000, 'USD'),
@@ -100,6 +103,7 @@ describe('BookingBreakdown', () => {
       <BookingBreakdownComponent
         userRole="provider"
         unitType={LINE_ITEM_NIGHT}
+        dateType={DATE_TYPE_DATE}
         transaction={exampleTransaction({
           payinTotal: new Money(2000, 'USD'),
           payoutTotal: new Money(1800, 'USD'),
@@ -135,6 +139,7 @@ describe('BookingBreakdown', () => {
       <BookingBreakdownComponent
         userRole="provider"
         unitType={LINE_ITEM_NIGHT}
+        dateType={DATE_TYPE_DATE}
         transaction={exampleTransaction({
           lastTransition: TRANSITION_CANCEL,
           payinTotal: new Money(0, 'USD'),

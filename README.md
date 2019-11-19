@@ -7,6 +7,11 @@ customized. It is based on an application bootstrapped with
 [create-react-app](https://github.com/facebookincubator/create-react-app) with some additions,
 namely server side rendering and a custom CSS setup.
 
+> Note: we have created [another template](https://github.com/sharetribe/ftw-time) for time-based
+> processes. It is still in **beta** mode, but if you are taking time-based booking process into use,
+> you should consider using it instead. You can read more from the related
+> [Flex Docs article](https://www.sharetribe.com/docs/background/time-based-template)
+
 ## Quick start
 
 If you just want to get the app running quickly to test it out, first install
@@ -55,6 +60,11 @@ guide in Flex Docs for more information.
 See the Flex Docs site: https://www.sharetribe.com/docs/
 
 See also the [docs/](docs/) directory for some additional internal documentation.
+
+## Get help – join Sharetribe Flex Developer Slack channel
+
+If you have any questions about development, the best place to ask them is the Flex Developer Slack
+channel at https://www.sharetribe.com/flex-slack
 
 ## License
 

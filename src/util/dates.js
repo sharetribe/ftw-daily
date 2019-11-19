@@ -257,3 +257,20 @@ export const getExclusiveEndDate = dateString => {
     .startOf('day')
     .toDate();
 };
+
+export const formatDateToText = (intl, date) => {
+  return {
+    date: intl.formatDate(date, {
+      month: 'short',
+      day: 'numeric',
+    }),
+    time: intl.formatDate(date, {
+      hour: 'numeric',
+      minute: 'numeric',
+    }),
+    dateAndTime: intl.formatTime(date, {
+      month: 'short',
+      day: 'numeric',
+    }),
+  };
+};
