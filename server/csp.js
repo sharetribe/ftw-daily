@@ -30,18 +30,17 @@ const defaultDirectives = {
     // Google Analytics
     'www.google-analytics.com',
     'stats.g.doubleclick.net',
-
-
     'sentry.io',
     '*.stripe.com',
   ],
-  fontSrc: [self, data, 'assets-sharetribecom.sharetribe.com', 'fonts.gstatic.com'],
+  fontSrc: [self, data, 'assets-sharetribecom.sharetribe.com', 'fonts.gstatic.com', '*.hotjar.com'],
   frameSrc: [self, '*.stripe.com', '*.hotjar.com', '*.googletagmanager.com'],
   imgSrc: [
     self,
     data,
     blob,
     ...devImagesMaybe,
+    '*.hotjar.com',
     '*.imgix.net',
     'sharetribe.imgix.net', // Safari 9.1 didn't recognize asterisk rule.
 
@@ -72,6 +71,7 @@ const defaultDirectives = {
     '*.google-analytics.com',
     'js.stripe.com',
     '*.sleeknote.com',
+    '*.hotjar.com'
   ],
   styleSrc: [self, unsafeInline, 'fonts.googleapis.com', 'api.mapbox.com'],
 };
