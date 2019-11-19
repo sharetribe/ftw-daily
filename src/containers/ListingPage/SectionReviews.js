@@ -17,7 +17,6 @@ const SectionReviews = props => {
     <div className={css.listingSectionContainer}>
       <h2 className={css.reviewsHeading}>
         <FormattedMessage id="ListingPage.reviewsHeading" values={{ count: reviews.length }} />
-        q12
       </h2>
       {fetchReviewsError ? reviewsError : null}
       <Reviews reviews={reviews} />
