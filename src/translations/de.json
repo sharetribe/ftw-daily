@@ -298,7 +298,7 @@
   "LandingPage.advantage3Title": "Sichere Bezahlung",
   "LandingPage.advantage3": "Bezahle sicher und direkt über unsere Plattform ohne Papierkram.",
   "LandingPage.viewAllListingsButton": "Alle Pferde anzeigen",
-  "ListingCard.hostedBy": "Von {authorName}.",
+  "ListingCard.hostedBy": "Von {authorName}",
   "ListingCard.perDay": "pro Tag",
   "ListingCard.perNight": "pro Monat",
   "ListingCard.perUnit": "pro Stück",
