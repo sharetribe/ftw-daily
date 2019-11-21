@@ -77,7 +77,10 @@ export const getPlacePredictions = (search, sessionToken, searchConfigurations) 
   new Promise((resolve, reject) => {
     const service = new window.google.maps.places.AutocompleteService();
     const sessionTokenMaybe = sessionToken ? { sessionToken } : {};
-
+    const searchConfigurations = {
+      types: ['(cities)'],
+      componentRestrictions: {country: 'ch'},
+    };
     service.getPlacePredictions(
       { input: search, ...sessionTokenMaybe, ...searchConfigurations },
       (predictions, status) => {
