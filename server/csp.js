@@ -25,6 +25,7 @@ const defaultDirectives = {
     'api.mapbox.com',
     'events.mapbox.com',
     '*.hotjar.com',
+    'www.googletagmanager.com',
     '*.googletagmanager.com',
 
     // Google Analytics
@@ -34,7 +35,7 @@ const defaultDirectives = {
     '*.stripe.com',
   ],
   fontSrc: [self, data, 'assets-sharetribecom.sharetribe.com', 'fonts.gstatic.com', '*.hotjar.com'],
-  frameSrc: [self, '*.stripe.com', '*.hotjar.com', '*.googletagmanager.com'],
+  frameSrc: [self, '*.stripe.com', '*.hotjar.com', '*.googletagmanager.com', 'www.googletagmanager.com',],
   imgSrc: [
     self,
     data,
