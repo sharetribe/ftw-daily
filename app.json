@@ -1,14 +1,11 @@
 {
   "name": "Sharetribe Flex Template Demo",
   "description": "Sharetribe Flex Template Demo - Saunatime!",
-  "keywords": [
-    "node", 
-    "react"
-  ],
-  "repository": "https://github.com/sharetribe/flex-template-web/",
+  "keywords": ["node", "react"],
+  "repository": "https://github.com/sharetribe/ftw-daily/",
   "env": {
     "REACT_APP_MAPBOX_ACCESS_TOKEN": {
-      "description": "See: Integrating to map providers documentation https://github.com/sharetribe/flex-template-web/blob/master/docs/map-providers.md"
+      "description": "See: Integrating to map providers documentation https://github.com/sharetribe/ftw-daily/blob/master/docs/map-providers.md"
     },
     "REACT_APP_SHARETRIBE_SDK_CLIENT_ID": {
       "description": "Client ID (API key). You will get this from the Sharetribe team."
@@ -40,7 +37,7 @@
       "value": "true"
     },
     "REACT_APP_CSP": {
-      "description": "See: Content Security Policy (CSP) documentation https://github.com/sharetribe/flex-template-web/blob/master/docs/content-security-policy.md",
+      "description": "See: Content Security Policy (CSP) documentation https://github.com/sharetribe/ftw-daily/blob/master/docs/content-security-policy.md",
       "value": "report"
     }
   }

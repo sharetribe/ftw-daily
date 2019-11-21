@@ -18,7 +18,7 @@ const SectionFeaturesMaybe = props => {
       </h2>
       <PropertyGroup
         id="ListingPage.amenities"
-        options={options}
+        options={selectedOptions}
         selectedOptions={selectedOptions}
         twoColumns={true}
       />
