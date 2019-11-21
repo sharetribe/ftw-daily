@@ -318,7 +318,7 @@
   "LayoutWrapperAccountSettingsSideNav.passwordTabTitle": "Contraseña",
   "LayoutWrapperAccountSettingsSideNav.paymentsTabTitle": "Configuración de pagos",
   "LayoutWrapperAccountSettingsSideNav.paymentMethodsTabTitle": "Formas de pago",
-  "ListingCard.hostedBy": "Publicado por {authorName}.",
+  "ListingCard.hostedBy": "Publicado por {authorName}",
   "ListingCard.perDay": "por día",
   "ListingCard.perNight": "por noche",
   "ListingCard.perUnit": "por unidad",

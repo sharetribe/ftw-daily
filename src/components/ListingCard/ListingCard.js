@@ -64,7 +64,7 @@ export const ListingCardComponent = props => {
 
   const slug = createSlug(title);
   const author = ensureUser(listing.author);
-  const authorName = author.attributes.profile.displayName;
+  const authorName = author.attributes.profile.displayName.split(' ')[0];
   const firstImage =
     currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
 
