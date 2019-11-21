@@ -15,7 +15,7 @@ way to update this template, but currently, we follow a pattern:
 ## Upcoming version 2019-XX-XX
 
 - [change] Rename repository form `flex-template-web` to `ftw-daily`.
-  [#1224](https://github.com/sharetribe/flex-template-web/pull/1224)
+  [#1230](https://github.com/sharetribe/flex-template-web/pull/1230)
 
 ## [v3.6.0] 2019-11-04
 
