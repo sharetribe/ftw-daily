@@ -29,18 +29,18 @@ export default [
       bounds: new LatLngBounds(new LatLng(61.83657, 24.11838), new LatLng(61.42728, 23.5422)),
     },
   },
-  {
-    id: 'default-bern',
-    predictionPlace: {
-      address: 'Bern, Schweiz',
-      bounds: new LatLngBounds(new LatLng(46.99027, 7.49555), new LatLng(46.919033, 7.294318)),
-    },
-  },
-  {
-    id: 'default-basel',
-    predictionPlace: {
-      address: 'Basel, Schweiz',
-      bounds: new LatLngBounds(new LatLng(47.589902, 7.634148), new LatLng(47.519342, 7.554664)),
-    },
-  },
+  // {
+  //   id: 'default-bern',
+  //   predictionPlace: {
+  //     address: 'Bern, Schweiz',
+  //     bounds: new LatLngBounds(new LatLng(46.99027, 7.49555), new LatLng(46.919033, 7.294318)),
+  //   },
+  // },
+  // {
+  //   id: 'default-basel',
+  //   predictionPlace: {
+  //     address: 'Basel, Schweiz',
+  //     bounds: new LatLngBounds(new LatLng(47.589902, 7.634148), new LatLng(47.519342, 7.554664)),
+  //   },
+  // },
 ];

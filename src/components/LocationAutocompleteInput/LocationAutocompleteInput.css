@@ -73,7 +73,6 @@ size and position, etc.
 .predictionsRoot {
   position: absolute;
   width: 100%;
-  padding-bottom: var(--locationAutocompleteBottomPadding);
   top: var(--LocationAutocompleteInput_inputHeight);
   left: 0;
   background-color: var(--marketplaceColor);
@@ -83,31 +82,12 @@ size and position, etc.
   z-index: calc(var(--zIndexPopup) + 1);
 }
 
-/*
-The Google Maps API TOS requires us to show a Powered by Google logo
-next to the autocomplete service predictions. It is rendered to the
-bottom of the container.
-*/
-.poweredByGoogle {
-  position: absolute;
-  bottom: 30px;
-  width: 100%;
-  height: 18px;
-  background-image: url(./images/powered_by_google_on_non_white_hdpi.png);
-  background-size: auto 18px;
-  background-position: center;
-
-  @media (--viewportMedium) {
-    background-position: center left var(--LocationAutocompleteInput_sidePaddingDesktop);
-  }
-}
-
 /* List of predictions, with a responsive padding size */
 .predictions {
   @apply --marketplaceBodyFontStyles;
 
   margin: 0;
-  padding: 14px 0;
+  padding: 14px 0 20px 0;
 
   & li {
     color: var(--matterColorLight);

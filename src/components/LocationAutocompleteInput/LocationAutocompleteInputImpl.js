@@ -9,7 +9,7 @@ import config from '../../config';
 
 import IconHourGlass from './IconHourGlass';
 import IconCurrentLocation from './IconCurrentLocation';
-import Geocoder, { GeocoderAttribution, CURRENT_LOCATION_ID } from './GeocoderGoogleMaps';
+import Geocoder, { CURRENT_LOCATION_ID } from './GeocoderGoogleMaps';
 // import Geocoder, { GeocoderAttribution, CURRENT_LOCATION_ID } from './GeocoderMapbox';
 
 import css from './LocationAutocompleteInput.css';
@@ -105,7 +105,6 @@ const LocationPredictionsList = props => {
   return (
     <div className={classes}>
       <ul className={css.predictions}>{predictions.map(item)}</ul>
-      <GeocoderAttribution className={attributionClassName} />
     </div>
   );
 };
