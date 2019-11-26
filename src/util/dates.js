@@ -170,25 +170,28 @@ export const formatDate = (intl, todayString, d) => {
   // By default we can use moment() directly but in tests we need to use a specific dates.
   // fakeIntl used in tests contains now() function wich returns predefined date
   const now = intl.now ? moment(intl.now()) : moment();
-  const formattedTime = intl.formatTime(d);
+  const formattedTime = intl.formatTime(d, {
+    hour12: false,
+  });
+ 
   let formattedDate;
 
   if (now.isSame(d, 'day')) {
-    // e.g. "Today, 9:10pm"
+    // e.g. "Today, 21:10"
     formattedDate = todayString;
   } else if (now.isSame(d, 'week')) {
-    // e.g. "Wed, 8:00pm"
+    // e.g. "Wed, 20:00"
     formattedDate = intl.formatDate(d, {
       weekday: 'short',
     });
   } else if (now.isSame(d, 'year')) {
-    // e.g. "Aug 22, 7:40pm"
+    // e.g. "Aug 22, 19:40"
     formattedDate = intl.formatDate(d, {
       month: 'short',
       day: 'numeric',
     });
   } else {
-    // e.g. "Jul 17 2016, 6:02pm"
+    // e.g. "Jul 17 2016, 18:02"
     const date = intl.formatDate(d, {
       month: 'short',
       day: 'numeric',
@@ -267,6 +270,7 @@ export const formatDateToText = (intl, date) => {
     time: intl.formatDate(date, {
       hour: 'numeric',
       minute: 'numeric',
+      hour12: false,
     }),
     dateAndTime: intl.formatTime(date, {
       month: 'short',
