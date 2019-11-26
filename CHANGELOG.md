@@ -14,7 +14,7 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
-## [v3.6.1] 2019-11-04
+## [v3.6.1] 2019-11-26
 
 - [fix] Fix XSS-vulnerability on SearchPage where URL param 'address' was exposed directly to
   schema, which is just a script tag: <script type="application/ld+json">. On server-side, this
@@ -28,6 +28,8 @@ from Flex docs: https://www.sharetribe.com/docs/guides/how-to-set-up-csp-for-ftw
 
 - [change] Rename repository form `flex-template-web` to `ftw-daily`.
   [#1230](https://github.com/sharetribe/flex-template-web/pull/1230)
+
+  [v3.6.1]: https://github.com/sharetribe/flex-template-web/compare/v3.6.0...v3.6.1
 
 ## [v3.6.0] 2019-11-04
 
