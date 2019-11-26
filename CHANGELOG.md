@@ -14,6 +14,18 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+## [v3.6.1] 2019-11-04
+
+- [fix] Fix XSS-vulnerability on SearchPage where URL param 'address' was exposed directly to
+  schema, which is just a script tag: <script type="application/ld+json">. On server-side, this
+  could leak malformed HTML through to browsers and made it possible to inject own script tags.
+
+However, CSP prevents any data breach: injected js can't send data to unknonwn 3rd party sites.
+
+NOTE: Check that `REACT_APP_CSP` is in block mode on your production environment. You can read more
+from Flex docs: https://www.sharetribe.com/docs/guides/how-to-set-up-csp-for-ftw/
+[#1233](https://github.com/sharetribe/flex-template-web/pull/1233)
+
 - [change] Rename repository form `flex-template-web` to `ftw-daily`.
   [#1230](https://github.com/sharetribe/flex-template-web/pull/1230)
 
