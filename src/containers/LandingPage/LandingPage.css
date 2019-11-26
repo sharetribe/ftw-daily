@@ -42,7 +42,7 @@
 
   @media (--viewportMedium) {
     min-height: 500px;
-    height: 70vh;
+    height: 100vh;
     max-height: none;
   }
 
@@ -71,13 +71,6 @@
     padding-top: var(--LandingPage_sectionMarginTopMedium);
   }
 }
-
-.sections {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
-}
-
 
 /* Square corners for the last section if it's even */
 .section:nth-of-type(2n):last-of-type {
