@@ -199,7 +199,9 @@ class PageComponent extends Component {
           <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
           <meta httpEquiv="Content-Language" content={intl.locale} />
           {metaTags}
-          <script type="application/ld+json">{schemaArrayJSONString}</script>
+          <script type="application/ld+json">
+            {schemaArrayJSONString.replace(/</g, '\\u003c')}
+          </script>
           <meta name="google-site-verification" content="fudx6zsj9uWoycJsdJlN1s_fkN0hytWu3moaC7ekHmI" /><meta name="google-site-verification" content="fudx6zsj9uWoycJsdJlN1s_fkN0hytWu3moaC7ekHmI" />
 
           // Hotjar
