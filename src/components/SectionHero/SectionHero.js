@@ -41,7 +41,7 @@ const SectionHero = props => {
           <FormattedMessage id="SectionHero.browseButton" />
         </NamedLink>
         <div className={css.heroVideoContainer}>
-          <Lottie options={LOTTIE_OPTIONS} />
+          <Lottie options={LOTTIE_OPTIONS} isClickToPauseDisabled />
         </div>
       </div>
     </div>
