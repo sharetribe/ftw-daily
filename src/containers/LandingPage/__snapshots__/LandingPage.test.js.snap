@@ -69,7 +69,7 @@ exports[`LandingPage matches snapshot 1`] = `
       <ul>
         <li>
           <div>
-            <SectionLocations
+            <SectionCategories
               className={null}
               rootClassName={null}
             />

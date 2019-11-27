@@ -26,6 +26,7 @@ exports[`SectionHero matches snapshot 1`] = `
         SectionHero.browseButton
       </span>
     </a>
+    <div />
   </div>
 </div>
 `;

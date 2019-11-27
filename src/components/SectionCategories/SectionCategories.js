@@ -4,13 +4,10 @@ import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { lazyLoadWithDimensions } from '../../util/contextHelpers';
 
-import { NamedLink } from '../../components';
+import { NamedLink } from '..';
 
-import css from './SectionLocations.css';
+import css from './SectionCategories.css';
 
-import helsinkiImage from './images/location_helsinki.jpg';
-import rovaniemiImage from './images/location_rovaniemi.jpg';
-import rukaImage from './images/location_ruka.jpg';
 import skerriesImage from './images/location_skerries.jpg';
 import adaremanorImage from './images/location_adaremanor.jpg';
 import maynoothImage from './images/location_maynooth.jpg';
@@ -25,7 +22,7 @@ class LocationImage extends Component {
 }
 const LazyImage = lazyLoadWithDimensions(LocationImage);
 
-const locationLink = (name, image, searchQuery) => {
+const categoryLink = (name, image, searchQuery) => {
   const nameText = <span className={css.locationName}>{name}</span>;
   return (
     <NamedLink name="SearchPage" to={{ search: searchQuery }} className={css.location}>
@@ -35,16 +32,16 @@ const locationLink = (name, image, searchQuery) => {
         </div>
       </div>
       <div className={css.linkText}>
-        <FormattedMessage
-          id="SectionLocations.listingsInLocation"
-          values={{ location: nameText }}
+      <FormattedMessage
+          id="SectionCategories.listingsInCategory"
+          values={{ category: nameText }}
         />
       </div>
     </NamedLink>
   );
 };
 
-const SectionLocations = props => {
+const SectionCategories = props => {
   const { rootClassName, className } = props;
 
   const classes = classNames(rootClassName || css.root, className);
@@ -52,33 +49,28 @@ const SectionLocations = props => {
   return (
     <div className={classes}>
       <div className={css.title}>
-        <FormattedMessage id="SectionLocations.title" />
+        <FormattedMessage id="SectionCategories.title" />
       </div>
       <div className={css.locations}>
-        {locationLink(
-          'Skerries',
+        {categoryLink(
+          'Babysitters',
           skerriesImage,
-          'bounds=53.586009%2C-6.099428%2C53.567828%2C-6.135285&origin=53.58%2C-6.1097'
+          'pub_category=babysitter'
         )}
-        {locationLink(
-          'Maynooth',
+        {categoryLink(
+          'Childminders',
           maynoothImage,
-          '?address=Maynooth%2C%20Ireland&bounds=53.405202%2C-6.507408%2C53.339263%2C-6.650373&origin=53.385%2C-6.5936'
+          'pub_category=childminder'
         )}
-        {locationLink(
-          'Adare Manor',
+        {categoryLink(
+          'Nannies',
           adaremanorImage,
-          '?address=Adare%20Manor%2C%20Ireland&bounds=52.616983%2C-8.703934%2C52.543157%2C-8.856438&origin=52.56389%2C-8.79'
+          'pub_category=nanny'
         )}
-        {locationLink(
-          'Fota Island',
+        {categoryLink(
+          'Maternity Nurses',
           fotaImage,
-          '?address=Fota%20Island%2C%20Ireland&bounds=51.956439%2C-8.18943%2C51.880051%2C-8.336577&origin=51.9083%2C-8.2633'
-        )}
-        {locationLink(
-          'Kinsale',
-          kinsaleImage,
-          '?address=Kinsale%2C%20Ireland&bounds=51.759218%2C-8.450977%2C51.670687%2C-8.612987&origin=51.7075%2C-8.53056'
+          'pub_category=maternity_nurse'
         )}
       </div>
       <div className={css.locationRequest}>
@@ -91,13 +83,13 @@ const SectionLocations = props => {
   );
 };
 
-SectionLocations.defaultProps = { rootClassName: null, className: null };
+SectionCategories.defaultProps = { rootClassName: null, className: null };
 
 const { string } = PropTypes;
 
-SectionLocations.propTypes = {
+SectionCategories.propTypes = {
   rootClassName: string,
   className: string,
 };
 
-export default SectionLocations;
+export default SectionCategories;

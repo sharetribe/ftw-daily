@@ -40,19 +40,6 @@ exports[`SearchPageComponent matches snapshot 1`] = `
       }
       primaryFilters={
         Object {
-          "filtersFilter": Object {
-            "options": Array [
-              Object {
-                "key": "dog1",
-                "label": "Dog 1",
-              },
-              Object {
-                "key": "dog2",
-                "label": "Dog 2",
-              },
-            ],
-            "paramName": "pub_filters",
-          },
           "categoryFilter": Object {
             "options": Array [
               Object {
@@ -71,6 +58,19 @@ exports[`SearchPageComponent matches snapshot 1`] = `
               "active": true,
             },
             "paramName": "dates",
+          },
+          "filtersFilter": Object {
+            "options": Array [
+              Object {
+                "key": "dog1",
+                "label": "Dog 1",
+              },
+              Object {
+                "key": "dog2",
+                "label": "Dog 2",
+              },
+            ],
+            "paramName": "pub_filters",
           },
           "priceFilter": Object {
             "config": Object {
