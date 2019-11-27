@@ -10,7 +10,7 @@ import Lottie from "react-lottie";
 const LOTTIE_OPTIONS = {
   autoplay: false, 
   animationData: animationData,
-  renderer: 'canvas',
+  renderer: 'svg',
   rendererSettings: {
     preserveAspectRatio: 'xMidYMid slice'
   }
