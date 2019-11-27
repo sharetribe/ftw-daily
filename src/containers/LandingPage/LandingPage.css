@@ -54,16 +54,16 @@
 
 .hero {
   flex-grow: 1;
-  justify-content: center;
+  justify-content: flex-end;
   padding-bottom: 32px;
   /*max-width: 1500px;*/
   margin: auto;
-
   border: 0;
   border-radius: 0;
 
   @media (--viewportMedium) {
     padding-bottom: 90px;
+    justify-content: center;
   }
 
   @media (--viewportLarge) {
