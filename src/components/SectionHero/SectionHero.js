@@ -4,10 +4,17 @@ import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { NamedLink } from '../../components';
 import css from './SectionHero.css';
-import video from '../../videos/logo.mp4';
-import videoWebm from '../../videos/logo.webm';
-import videoOgv from '../../videos/logo.ogv';
-import videoPoster from '../../videos/logo.png';
+import * as animationData from '../../assets/oogo-animation';
+import Lottie from "react-lottie";
+
+const LOTTIE_OPTIONS = {
+  autoplay: false, 
+  animationData: animationData,
+  renderer: 'canvas',
+  rendererSettings: {
+    preserveAspectRatio: 'xMidYMid slice'
+  }
+}
 
 const SectionHero = props => {
   const { rootClassName, className } = props;
@@ -34,11 +41,7 @@ const SectionHero = props => {
           <FormattedMessage id="SectionHero.browseButton" />
         </NamedLink>
         <div className={css.heroVideoContainer}>
-          <video poster={videoPoster} width="300" height="146" autoPlay="true">
-            <source src={video} type="video/mp4" />
-            <source src={videoWebm} type="video/webm" />
-            <source src={videoOgv} type="video/ogv" />
-          </video>
+          <Lottie options={LOTTIE_OPTIONS} />
         </div>
       </div>
     </div>
