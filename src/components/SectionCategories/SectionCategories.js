@@ -32,7 +32,7 @@ const categoryLink = (name, image, searchQuery) => {
         </div>
       </div>
       <div className={css.linkText}>
-        <FormattedMessage
+      <FormattedMessage
           id="SectionCategories.listingsInCategory"
           values={{ category: nameText }}
         />
@@ -55,27 +55,22 @@ const SectionCategories = props => {
         {categoryLink(
           'Babysitters',
           skerriesImage,
-          'category=babysitter&origin=53.58%2C-6.1097'
+          'pub_category=babysitter'
         )}
         {categoryLink(
           'Childminders',
           maynoothImage,
-          'category=childminder&origin=53.58%2C-6.1097'
+          'pub_category=childminder'
         )}
         {categoryLink(
           'Nannies',
           adaremanorImage,
-          'category=nanny&origin=53.58%2C-6.1097'
+          'pub_category=nanny'
         )}
         {categoryLink(
           'Maternity Nurses',
           fotaImage,
-          'category=maternitynurse&origin=53.58%2C-6.1097'
-        )}
-        {categoryLink(
-          'Vouchers',
-          kinsaleImage,
-          'category=voucher&origin=53.58%2C-6.1097'
+          'pub_category=maternity_nurse'
         )}
       </div>
       <div className={css.locationRequest}>
