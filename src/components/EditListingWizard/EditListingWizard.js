@@ -10,8 +10,8 @@ import {
   LISTING_PAGE_PARAM_TYPE_NEW,
   LISTING_PAGE_PARAM_TYPES,
 } from '../../util/urlHelpers';
-import { ensureListing, ensureCurrentUser } from '../../util/data';
-import { PayoutDetailsForm } from '../../forms';
+import { ensureListing } from '../../util/data';
+
 import { Modal, NamedRedirect, Tabs } from '../../components';
 
 import EditListingWizardTab, {
@@ -286,14 +286,7 @@ class EditListingWizard extends Component {
             <p className={css.modalMessage}>
               <FormattedMessage id="EditListingPhotosPanel.payoutModalInfo" />
             </p>
-            <PayoutDetailsForm
-              className={css.payoutDetails}
-              inProgress={fetchInProgress}
-              createStripeAccountError={errors ? errors.createStripeAccountError : null}
-              currentUserId={ensureCurrentUser(this.props.currentUser).id}
-              onChange={onPayoutDetailsFormChange}
-              onSubmit={this.handlePayoutSubmit}
-            />
+            <p>TODO: Connect Onboarding flow</p>
           </div>
         </Modal>
       </div>
