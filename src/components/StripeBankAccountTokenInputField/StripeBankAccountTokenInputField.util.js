@@ -4,6 +4,8 @@ import config from '../../config';
 
 // Bank account number (used in countries where IBAN is not in use)
 export const ACCOUNT_NUMBER = 'accountNumber';
+// Required for Japan
+export const ACCOUNT_OWNER_NAME = 'accountOwnerName';
 // Australian equivalent for routing number
 export const BSB = 'bsb';
 // Needed for creating full routing number in Canada
@@ -14,8 +16,14 @@ export const TRANSIT_NUMBER = 'transitNumber';
 export const CLEARING_CODE = 'clearingCode';
 // Needed for creating full routing number in Hong Kong and Singapore
 export const BRANCH_CODE = 'branchCode';
-// Needed for creating full routing number in Singapore
+// Required for Japan
+export const BRANCH_NAME = 'branchName';
+// Required for Japan
+export const BANK_NAME = 'bankName';
+// Needed for creating full routing number in e.g. Singapore
 export const BANK_CODE = 'bankCode';
+// Clave Bancaria Estandarizada (standardized banking cipher) used in Mexico
+export const CLABE = 'clabe';
 // International bank account number (e.g. EU countries use this)
 export const IBAN = 'iban';
 // Routing number to separate bank account in different areas
@@ -30,12 +38,16 @@ export const BANK_ACCOUNT_INPUTS = [
   TRANSIT_NUMBER,
   INSTITUTION_NUMBER,
   CLEARING_CODE,
+  BRANCH_NAME,
   BRANCH_CODE,
+  BANK_NAME,
   BANK_CODE,
   SORT_CODE,
   ROUTING_NUMBER,
+  ACCOUNT_OWNER_NAME,
   ACCOUNT_NUMBER,
   IBAN,
+  CLABE,
 ];
 
 export const supportedCountries = config.stripe.supportedCountries.map(c => c.code);

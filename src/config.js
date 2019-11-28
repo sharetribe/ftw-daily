@@ -1,6 +1,6 @@
 import * as custom from './marketplace-custom-config.js';
 import defaultLocationSearches from './default-location-searches';
-import { stripePublishableKey, stripeSupportedCountries } from './stripe-config';
+import { stripePublishableKey, stripeCountryDetails } from './stripe-config';
 import { currencyConfiguration } from './currency-config';
 
 const env = process.env.REACT_APP_ENV;
@@ -201,7 +201,7 @@ const config = {
   listingMinimumPriceSubUnits,
   stripe: {
     publishableKey: stripePublishableKey,
-    supportedCountries: stripeSupportedCountries,
+    supportedCountries: stripeCountryDetails,
   },
   canonicalRootURL,
   address: {
