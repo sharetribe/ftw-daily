@@ -1,3 +1,15 @@
+/** NOTE: This code will not be updated!
+ * If you want to use this form you need to add the import back to `containers/index.js` and use this page in the routeConfiguration.js and reducers.js instead of StripePayoutPage.
+ *
+ * We are currently using Connect Onboarding flow provided by Stripe.
+ * You can read more from Stripe documentation: https://stripe.com/docs/connect/connect-onboarding
+ * If you want to handle creating user's Stripe account and passing the required information to Stripe manually, you can use this page with PayoutDetailsForm as a starting point.
+ *
+ * Keep in mind that this code might be outdated so make sure you check the current requirements from Stripe and modify the code accordingly.
+ *  You can read more about required information from Stripe documentation: https://stripe.com/docs/connect/required-verification-information
+ *
+ */
+
 import React from 'react';
 import { bool, func } from 'prop-types';
 import { compose } from 'redux';
