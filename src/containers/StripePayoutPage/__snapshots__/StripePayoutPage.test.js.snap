@@ -1,0 +1,167 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StripePayoutPage matches snapshot with Stripe connected 1`] = `
+<Page
+  scrollingDisabled={false}
+  title="StripePayoutPage.title"
+>
+  <LayoutSideNavigation
+    className={null}
+    containerClassName={null}
+    rootClassName={null}
+  >
+    <LayoutWrapperTopbar
+      className={null}
+      rootClassName={null}
+    >
+      <withRouter(Connect(TopbarContainerComponent))
+        currentPage="StripePayoutPage"
+      />
+      <UserNav
+        className={null}
+        rootClassName={null}
+        selectedPageName="StripePayoutPage"
+      />
+    </LayoutWrapperTopbar>
+    <withViewport(LayoutWrapperAccountSettingsSideNavComponent)
+      currentTab="StripePayoutPage"
+    />
+    <LayoutWrapperMain
+      className={null}
+      rootClassName={null}
+    >
+      <div>
+        <h1>
+          <FormattedMessage
+            id="StripePayoutPage.heading"
+            values={Object {}}
+          />
+        </h1>
+        <p>
+          TODO: show edit verification information
+        </p>
+        <p>
+          TODO: Connect Onboarding flow
+        </p>
+      </div>
+    </LayoutWrapperMain>
+    <LayoutWrapperFooter
+      className={null}
+      rootClassName={null}
+    >
+      <injectIntl(Footer) />
+    </LayoutWrapperFooter>
+  </LayoutSideNavigation>
+</Page>
+`;
+
+exports[`StripePayoutPage matches snapshot with Stripe not connected 1`] = `
+<Page
+  scrollingDisabled={false}
+  title="StripePayoutPage.title"
+>
+  <LayoutSideNavigation
+    className={null}
+    containerClassName={null}
+    rootClassName={null}
+  >
+    <LayoutWrapperTopbar
+      className={null}
+      rootClassName={null}
+    >
+      <withRouter(Connect(TopbarContainerComponent))
+        currentPage="StripePayoutPage"
+      />
+      <UserNav
+        className={null}
+        rootClassName={null}
+        selectedPageName="StripePayoutPage"
+      />
+    </LayoutWrapperTopbar>
+    <withViewport(LayoutWrapperAccountSettingsSideNavComponent)
+      currentTab="StripePayoutPage"
+    />
+    <LayoutWrapperMain
+      className={null}
+      rootClassName={null}
+    >
+      <div>
+        <h1>
+          <FormattedMessage
+            id="StripePayoutPage.heading"
+            values={Object {}}
+          />
+        </h1>
+        <FormattedMessage
+          id="StripePayoutPage.stripeNotConnected"
+          values={Object {}}
+        />
+        <p>
+          TODO: Connect Onboarding flow
+        </p>
+      </div>
+    </LayoutWrapperMain>
+    <LayoutWrapperFooter
+      className={null}
+      rootClassName={null}
+    >
+      <injectIntl(Footer) />
+    </LayoutWrapperFooter>
+  </LayoutSideNavigation>
+</Page>
+`;
+
+exports[`StripePayoutPage matches snapshot with details submitted 1`] = `
+<Page
+  scrollingDisabled={false}
+  title="StripePayoutPage.title"
+>
+  <LayoutSideNavigation
+    className={null}
+    containerClassName={null}
+    rootClassName={null}
+  >
+    <LayoutWrapperTopbar
+      className={null}
+      rootClassName={null}
+    >
+      <withRouter(Connect(TopbarContainerComponent))
+        currentPage="StripePayoutPage"
+      />
+      <UserNav
+        className={null}
+        rootClassName={null}
+        selectedPageName="StripePayoutPage"
+      />
+    </LayoutWrapperTopbar>
+    <withViewport(LayoutWrapperAccountSettingsSideNavComponent)
+      currentTab="StripePayoutPage"
+    />
+    <LayoutWrapperMain
+      className={null}
+      rootClassName={null}
+    >
+      <div>
+        <h1>
+          <FormattedMessage
+            id="StripePayoutPage.heading"
+            values={Object {}}
+          />
+        </h1>
+        <p>
+          TODO: show edit verification information
+        </p>
+        <p>
+          TODO: Connect Onboarding flow
+        </p>
+      </div>
+    </LayoutWrapperMain>
+    <LayoutWrapperFooter
+      className={null}
+      rootClassName={null}
+    >
+      <injectIntl(Footer) />
+    </LayoutWrapperFooter>
+  </LayoutSideNavigation>
+</Page>
+`;
