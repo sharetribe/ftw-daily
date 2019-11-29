@@ -495,3 +495,94 @@
     margin: 80px 0 0;
   }
 }
+
+.openBookingForm {
+  /* Ensure that mobile button is over Footer too */
+  z-index: 9;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  padding: 18px 24px 18px 16px;
+  background-color: var(--matterColorLight);
+  box-shadow: var(--boxShadowTop);
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  column-gap:24px;
+  /* Contain repainting to this component only */
+  /* 3D painting container helps scrolling */
+  transform: translate3d(0, 0, 0);
+
+  @media (--viewportMedium) {
+    padding: 18px 60px 18px 60px;
+  }
+
+  @media (--viewportLarge) {
+    display: none;
+  }
+}
+
+.bookingHeading {
+  display: none;
+
+  @media (--viewportLarge) {
+    display: block;
+    margin-top: -2px;
+    margin-bottom: 33px;
+  }
+}
+
+.bookingHelp {
+  display: none;
+  @apply --marketplaceH5FontStyles;
+
+  @media (--viewportMedium) {
+    color: var(--matterColor);
+    display: block;
+    margin-top: 0;
+  }
+}
+
+.smallPrint {
+  @apply --marketplaceTinyFontStyles;
+  color: var(--matterColorAnti);
+  text-align: center;
+  margin: auto 24px 20px 24px;
+  flex-shrink: 0;
+
+  @media (--viewportMedium) {
+    margin-top: auto;
+    margin-bottom: 20px;
+  }
+
+  @media (--viewportLarge) {
+    margin-top: 4px;
+    margin-bottom: 21px;
+  }
+}
+
+
+.bookingDatesSubmitButtonWrapper {
+  flex-shrink: 0;
+  padding: 0 24px 24px 24px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background-color: var(--matterColorLight);
+
+  @media (--viewportMedium) {
+    padding: 0;
+    width: 100%;
+    position: static;
+    bottom: unset;
+    background-color: transparent;
+  }
+}
+
+.bookExpertWrapper {
+  padding:16px 48px 48px 48px;
+  display: none;
+  @media (--viewportLarge) {
+    display: block;
+  }
+}
