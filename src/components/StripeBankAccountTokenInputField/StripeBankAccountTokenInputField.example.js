@@ -12,6 +12,7 @@ const formComponent = country => props => (
     render={fieldRenderProps => {
       const { formName, handleSubmit, onChange } = fieldRenderProps;
       const currency = stripeCountryConfigs(country).currency;
+
       return (
         <form
           onSubmit={e => {
@@ -110,6 +111,23 @@ export const CA_CAD = {
   component: formComponent('CA'),
   props: {
     formName: 'CA_CAD',
+    onChange: formState => {
+      if (formState.dirty) {
+        console.log('form values changed to:', formState.values);
+      }
+    },
+    onSubmit: values => {
+      console.log('values submitted:', values);
+    },
+  },
+  group: 'custom inputs',
+};
+
+// JP
+export const JP_JPY = {
+  component: formComponent('JP'),
+  props: {
+    formName: 'JP_JPY',
     onChange: formState => {
       if (formState.dirty) {
         console.log('form values changed to:', formState.values);
