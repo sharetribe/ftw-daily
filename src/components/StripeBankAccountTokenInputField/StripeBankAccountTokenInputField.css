@@ -5,14 +5,34 @@
 }
 
 .root {
+  /* Parent component should not shrink this field */
+  flex-shrink: 0;
+
+  /* This component uses flexbox layout too */
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .input {
+  /* Parent component should not shrink this field */
+  flex-shrink: 0;
   border-bottom-color: var(--attentionColor);
   margin-bottom: 24px;
-
+  width: 100%;
   &:last-of-type {
     margin-bottom: 0;
+  }
+}
+
+.longForm {
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+@media (--viewportSmall) {
+  .longForm {
+    width: calc(50% - 9px);
   }
 }
 

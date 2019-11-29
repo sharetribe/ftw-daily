@@ -20,6 +20,7 @@ const StripeBankAccountRequiredInput = props => {
     showStripeError,
     inputError,
     disabled,
+    showInColumns,
   } = props;
 
   const showInputError = isTouched && !!inputError;
@@ -28,6 +29,8 @@ const StripeBankAccountRequiredInput = props => {
     [css.inputSuccess]: !!value,
     [css.inputError]: showInputError || showStripeError,
   });
+
+  const columnsClass = showInColumns ? css.longForm : null;
 
   const inputProps = {
     className: classes,
@@ -43,7 +46,7 @@ const StripeBankAccountRequiredInput = props => {
   const errorMessage = <p className={css.error}>{inputError}</p>;
 
   return (
-    <div className={classes}>
+    <div className={classNames(classes, columnsClass)}>
       <label htmlFor={inputProps.id}>
         <FormattedMessage id={`StripeBankAccountTokenInputField.${inputType}.label`} />
       </label>
