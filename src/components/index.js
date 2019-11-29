@@ -17,6 +17,7 @@ export { default as IconBannedUser } from './IconBannedUser/IconBannedUser';
 export { default as IconCard } from './IconCard/IconCard';
 export { default as IconCheckmark } from './IconCheckmark/IconCheckmark';
 export { default as IconClose } from './IconClose/IconClose';
+export { default as IconEdit } from './IconEdit/IconEdit';
 export { default as IconEmailAttention } from './IconEmailAttention/IconEmailAttention';
 export { default as IconEmailSent } from './IconEmailSent/IconEmailSent';
 export { default as IconEmailSuccess } from './IconEmailSuccess/IconEmailSuccess';
