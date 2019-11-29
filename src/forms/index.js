@@ -22,4 +22,5 @@ export { default as ReviewForm } from './ReviewForm/ReviewForm';
 export { default as SendMessageForm } from './SendMessageForm/SendMessageForm';
 export { default as SignupForm } from './SignupForm/SignupForm';
 export { default as StripePaymentForm } from './StripePaymentForm/StripePaymentForm';
+export { default as StripePayoutForm } from './StripePayoutForm/StripePayoutForm';
 export { default as TopbarSearchForm } from './TopbarSearchForm/TopbarSearchForm';
