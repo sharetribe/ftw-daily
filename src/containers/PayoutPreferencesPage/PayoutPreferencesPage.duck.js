@@ -1,4 +1,4 @@
-import { createStripeAccount } from '../../ducks/stripe.duck';
+import { createStripeAccountWithToken } from '../../ducks/stripe.duck';
 import { fetchCurrentUser } from '../../ducks/user.duck';
 
 // ================ Action types ================ //
@@ -54,7 +54,7 @@ export const savePayoutDetailsSuccess = () => ({
 export const savePayoutDetails = values => (dispatch, getState, sdk) => {
   dispatch(savePayoutDetailsRequest());
 
-  return dispatch(createStripeAccount(values))
+  return dispatch(createStripeAccountWithToken(values))
     .then(() => dispatch(savePayoutDetailsSuccess()))
     .catch(() => dispatch(savePayoutDetailsError()));
 };
