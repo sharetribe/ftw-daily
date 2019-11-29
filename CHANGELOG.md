@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [add] Add IconEdit [#1237](https://github.com/sharetribe/ftw-daily/pull/1237)
+
 ## [v3.6.1] 2019-11-26
 
 - [fix] Fix XSS-vulnerability on SearchPage where URL param 'address' was exposed directly to
