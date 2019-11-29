@@ -569,7 +569,6 @@
   position: fixed;
   bottom: 0;
   background-color: var(--matterColorLight);
-
   @media (--viewportMedium) {
     padding: 0;
     width: 100%;
@@ -577,6 +576,10 @@
     bottom: unset;
     background-color: transparent;
   }
+}
+ 
+.bookingDatesSubmitButtonWrapper a:hover {
+  text-decoration: none;
 }
 
 .bookExpertWrapper {
@@ -586,3 +589,5 @@
     display: block;
   }
 }
+
+ 
