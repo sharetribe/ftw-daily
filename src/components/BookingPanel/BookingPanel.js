@@ -128,6 +128,7 @@ const BookingPanel = props => {
           />
         ) : null}
       </ModalInMobile>
+
       <div className={css.openBookingForm}>
         <div className={css.priceContainer}>
           <div className={css.priceValue} title={priceTitle}>
@@ -151,6 +152,7 @@ const BookingPanel = props => {
           </div>
         )}
       </div>
+      
     </div>
   );
 };

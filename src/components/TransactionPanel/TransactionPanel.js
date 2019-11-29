@@ -51,6 +51,7 @@ import PanelHeading, {
   HEADING_CANCELED,
   HEADING_DELIVERED,
 } from './PanelHeading';
+import { PrimaryButton } from '../';
 
 import css from './TransactionPanel.css';
 
@@ -438,21 +439,34 @@ export class TransactionPanelComponent extends Component {
                 geolocation={geolocation}
                 showAddress={stateData.showAddress}
               />
-              {stateData.showBookingPanel ? (
-                <BookingPanel
-                  className={css.bookingPanel}
-                  titleClassName={css.bookingTitle}
-                  isOwnListing={false}
-                  listing={currentListing}
-                  title={listingTitle}
-                  subTitle={bookingSubTitle}
-                  authorDisplayName={authorDisplayName}
-                  onSubmit={onSubmitBookingRequest}
-                  onManageDisableScrolling={onManageDisableScrolling}
-                  timeSlots={timeSlots}
-                  fetchTimeSlotsError={fetchTimeSlotsError}
-                />
-              ) : null}
+
+              <div className={css.bookExpertWrapper}>
+                <div className={css.bookingHeading}>
+                  <h2 className={css.bookingTitle}>{listingTitle}</h2>
+                  <div className={css.bookingHelp}>{bookingSubTitle}</div>
+                </div>
+                <p className={css.smallPrint}>
+                  <FormattedMessage id={'BookingDatesForm.youWontBeChargedInfo'} />
+                </p>
+                <div className={css.bookingDatesSubmitButtonWrapper}>
+                  <a href="http://expert.horsedeal24.com/">
+                    <PrimaryButton type="submit">
+                      <FormattedMessage id="BookingDatesForm.expertLink" />
+                    </PrimaryButton>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div className={css.openBookingForm}>
+              <div className={css.bookingHelp}>{bookingSubTitle}</div>
+              <div className={css.bookingDatesSubmitButtonWrapper}>
+                <a href="http://expert.horsedeal24.com/">
+                  <PrimaryButton type="submit">
+                    <FormattedMessage id="BookingDatesForm.expertLink" />
+                  </PrimaryButton>
+                </a>
+              </div>
+
               <BreakdownMaybe
                 className={css.breakdownContainer}
                 transaction={currentTransaction}
@@ -535,9 +549,6 @@ TransactionPanelComponent.propTypes = {
   intl: intlShape,
 };
 
-const TransactionPanel = compose(
-  withRouter,
-  injectIntl
-)(TransactionPanelComponent);
+const TransactionPanel = compose(withRouter, injectIntl)(TransactionPanelComponent);
 
 export default TransactionPanel;
