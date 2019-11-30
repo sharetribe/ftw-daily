@@ -449,7 +449,7 @@ export class TransactionPanelComponent extends Component {
                   <FormattedMessage id={'BookingDatesForm.youWontBeChargedInfo'} />
                 </p>
                 <div className={css.bookingDatesSubmitButtonWrapper}>
-                  <a href="http://expert.horsedeal24.com/">
+                  <a href="http://expert.horsedeal24.com/" target="_blank">
                     <PrimaryButton type="submit">
                       <FormattedMessage id="BookingDatesForm.expertLink" />
                     </PrimaryButton>
@@ -460,7 +460,7 @@ export class TransactionPanelComponent extends Component {
             <div className={css.openBookingForm}>
               <div className={css.bookingHelp}>{bookingSubTitle}</div>
               <div className={css.bookingDatesSubmitButtonWrapper}>
-                <a href="http://expert.horsedeal24.com/">
+                <a href="http://expert.horsedeal24.com/" className target="_blank">
                   <PrimaryButton type="submit">
                     <FormattedMessage id="BookingDatesForm.expertLink" />
                   </PrimaryButton>
