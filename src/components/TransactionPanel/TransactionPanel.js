@@ -460,7 +460,7 @@ export class TransactionPanelComponent extends Component {
             <div className={css.openBookingForm}>
               <div className={css.bookingHelp}>{bookingSubTitle}</div>
               <div className={css.bookingDatesSubmitButtonWrapper}>
-                <a href="http://expert.horsedeal24.com/" className target="_blank">
+                <a href="https://calendly.com/horsedeal24" className target="_blank">
                   <PrimaryButton type="submit">
                     <FormattedMessage id="BookingDatesForm.expertLink" />
                   </PrimaryButton>
