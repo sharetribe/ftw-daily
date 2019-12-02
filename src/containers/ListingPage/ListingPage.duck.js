@@ -56,14 +56,8 @@ const listingPageReducer = (state = initialState, action = {}) => {
     case SHOW_LISTING_REQUEST:
       return { ...state, id: payload.id, showListingError: null };
     case SHOW_LISTING_ERROR:{
-
-      console.log('SHOW_LISTING_ERROR  action');
-
-
       return { ...state, showListingError: payload };
-
     }
-
 
     case FETCH_REVIEWS_REQUEST:
       return { ...state, fetchReviewsError: null };
@@ -100,16 +94,20 @@ export const setInitialValues = initialValues => ({
   payload: pick(initialValues, Object.keys(initialState)),
 });
 
-export const showListingRequest = id => ({
+export const showListingRequest = id => {
+  console.log(`showListingRequest ${JSON.stringify(id)}`);
+  return {
   type: SHOW_LISTING_REQUEST,
   payload: { id },
-});
+}};
 
-export const showListingError = e => ({
+export const showListingError = e => {
+  console.log(`showListingError ${JSON.stringify(e)}`);
+  return{
   type: SHOW_LISTING_ERROR,
   error: true,
   payload: e,
-});
+}};
 
 export const fetchReviewsRequest = () => ({ type: FETCH_REVIEWS_REQUEST });
 export const fetchReviewsSuccess = reviews => ({ type: FETCH_REVIEWS_SUCCESS, payload: reviews });
