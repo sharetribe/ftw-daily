@@ -169,10 +169,12 @@ export const showListing = (listingId, isOwn = false) => (dispatch, getState, sd
 
   return show
     .then(data => {
+        console.log(`listing page duck 172 data ${data}`)
       dispatch(addMarketplaceEntities(data));
       return data;
     })
     .catch(e => {
+      console.log(`listing page duck 177 ERROR ${e}`)
       dispatch(showListingError(storableError(e)));
     });
 };

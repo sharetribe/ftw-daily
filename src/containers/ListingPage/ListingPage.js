@@ -253,8 +253,8 @@ export class ListingPageComponent extends Component {
 
     if (showListingError && showListingError.status === 404) {
       // 404 listing not found
-
-      return <NotFoundPage />;
+      console.log(`listing page 256 showListingError ${showListingError}`)
+      return <NotFoundPage />;  
     } else if (showListingError) {
       // Other error in fetching listing
 
