@@ -169,7 +169,7 @@ export const showListing = (listingId, isOwn = false) => (dispatch, getState, sd
 
   return show
     .then(data => {
-        console.log(`listing page duck 172 data ${data}`)
+        console.log(`listing page duck 172 data ${JSON.stringify(data)}`)
       dispatch(addMarketplaceEntities(data));
       return data;
     })
