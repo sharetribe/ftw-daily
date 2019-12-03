@@ -7,6 +7,10 @@ export const STRIPE_ACCOUNT_CREATE_REQUEST = 'app/stripe/STRIPE_ACCOUNT_CREATE_R
 export const STRIPE_ACCOUNT_CREATE_SUCCESS = 'app/stripe/STRIPE_ACCOUNT_CREATE_SUCCESS';
 export const STRIPE_ACCOUNT_CREATE_ERROR = 'app/stripe/STRIPE_ACCOUNT_CREATE_ERROR';
 
+export const STRIPE_ACCOUNT_UPDATE_REQUEST = 'app/stripe/STRIPE_ACCOUNT_UPDATE_REQUEST';
+export const STRIPE_ACCOUNT_UPDATE_SUCCESS = 'app/stripe/STRIPE_ACCOUNT_UPDATE_SUCCESS';
+export const STRIPE_ACCOUNT_UPDATE_ERROR = 'app/stripe/STRIPE_ACCOUNT_UPDATE_ERROR';
+
 export const STRIPE_ACCOUNT_CLEAR_ERROR = 'app/stripe/STRIPE_ACCOUNT_CLEAR_ERROR';
 
 export const ACCOUNT_OPENER_CREATE_REQUEST = 'app/stripe/ACCOUNT_OPENER_CREATE_REQUEST';
@@ -38,6 +42,8 @@ export const RETRIEVE_PAYMENT_INTENT_ERROR = 'app/stripe/RETRIEVE_PAYMENT_INTENT
 const initialState = {
   createStripeAccountInProgress: false,
   createStripeAccountError: null,
+  updateStripeAccountInProgress: false,
+  updateStripeAccountError: null,
   createAccountOpenerInProgress: false,
   createAccountOpenerError: false,
   personAccountOpener: null,
@@ -69,6 +75,19 @@ export default function reducer(state = initialState, action = {}) {
     case STRIPE_ACCOUNT_CREATE_ERROR:
       console.error(payload);
       return { ...state, createStripeAccountError: payload, createStripeAccountInProgress: false };
+
+    case STRIPE_ACCOUNT_UPDATE_REQUEST:
+      return { ...state, updateStripeAccountError: null, updateStripeAccountInProgress: true };
+    case STRIPE_ACCOUNT_UPDATE_SUCCESS:
+      return {
+        ...state,
+        updateStripeAccountInProgress: false,
+        stripeAccount: payload,
+        stripeAccountFetched: true,
+      };
+    case STRIPE_ACCOUNT_UPDATE_ERROR:
+      console.error(payload);
+      return { ...state, updateStripeAccountError: payload, createStripeAccountInProgress: false };
 
     case STRIPE_ACCOUNT_CLEAR_ERROR:
       return { ...initialState };
@@ -180,6 +199,19 @@ export const stripeAccountCreateSuccess = stripeAccount => ({
 });
 
 export const stripeAccountCreateError = e => ({
+  type: STRIPE_ACCOUNT_CREATE_ERROR,
+  payload: e,
+  error: true,
+});
+
+export const stripeAccountUpdateRequest = () => ({ type: STRIPE_ACCOUNT_CREATE_REQUEST });
+
+export const stripeAccountUpdateSuccess = stripeAccount => ({
+  type: STRIPE_ACCOUNT_CREATE_SUCCESS,
+  payload: stripeAccount,
+});
+
+export const stripeAccountUpdateError = e => ({
   type: STRIPE_ACCOUNT_CREATE_ERROR,
   payload: e,
   error: true,
@@ -394,6 +426,30 @@ export const handleCardSetup = params => dispatch => {
       log.error(loggableError, 'stripe-handle-card-setup-failed', {
         stripeMessage: loggableError.message,
       });
+      throw e;
+    });
+};
+
+// This function is used for updating the bank account token but could be expanded to other information as well. If the Stripe account has been created with account token, you need to use account token also to update the account. By default the account token will not be used.
+// See API reference for more information: https://www.sharetribe.com/api-reference/?javascript#update-stripe-account
+
+export const updateStripeAccount = params => (dispatch, getState, sdk) => {
+  const bankAccountToken = params.bankAccountToken;
+
+  dispatch(stripeAccountUpdateRequest());
+  return sdk.stripeAccount
+    .update({ bankAccountToken }, { expand: true })
+    .then(response => {
+      dispatch(stripeAccountUpdateSuccess(response.data.data));
+    })
+    .catch(err => {
+      const e = storableError(err);
+      dispatch(stripeAccountUpdateError(e));
+      const stripeMessage =
+        e.apiErrors && e.apiErrors.length > 0 && e.apiErrors[0].meta
+          ? e.apiErrors[0].meta.stripeMessage
+          : null;
+      log.error(err, 'update-stripe-account-failed', { stripeMessage });
       throw e;
     });
 };
