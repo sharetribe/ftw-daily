@@ -252,6 +252,22 @@ const routeConfiguration = () => {
       loadData: StripePayoutPage.loadData,
     },
     {
+      path: '/account/payments/verification-failed',
+      name: 'StripePayoutVerificationFailedPage',
+      auth: true,
+      authPage: 'LoginPage',
+      component: props => <StripePayoutPage {...props} verificationFailed />,
+      loadData: StripePayoutPage.loadData,
+    },
+    {
+      path: '/account/payments/verification-success',
+      name: 'StripePayoutVerificationSuccessPage',
+      auth: true,
+      authPage: 'LoginPage',
+      component: props => <StripePayoutPage {...props} verificationSuccess />,
+      loadData: StripePayoutPage.loadData,
+    },
+    {
       path: '/account/payment-methods',
       name: 'PaymentMethodsPage',
       auth: true,
