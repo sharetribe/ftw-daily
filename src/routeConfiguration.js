@@ -125,6 +125,13 @@ const routeConfiguration = () => {
       component: props => <EditListingPage {...props} />,
       loadData: EditListingPage.loadData,
     },
+    {
+      path: '/l/:slug/:id/:type/:tab/:returnURLType',
+      name: 'EditListingStripeOnboardingPage',
+      auth: true,
+      component: props => <EditListingPage {...props} />,
+      loadData: EditListingPage.loadData,
+    },
 
     // Canonical path should be after the `/l/new` path since they
     // conflict and `new` is not a valid listing UUID.
@@ -246,6 +253,14 @@ const routeConfiguration = () => {
     {
       path: '/account/payments',
       name: 'StripePayoutPage',
+      auth: true,
+      authPage: 'LoginPage',
+      component: props => <StripePayoutPage {...props} />,
+      loadData: StripePayoutPage.loadData,
+    },
+    {
+      path: '/account/payments/:returnURLType',
+      name: 'StripePayoutOnboardingPage',
       auth: true,
       authPage: 'LoginPage',
       component: props => <StripePayoutPage {...props} />,
