@@ -60,7 +60,7 @@ const StripePayoutFormComponent = props => {
           values,
           onGetVerificationLink,
           stripeConnected,
-          stripeAccountId,
+          stripeAccount,
           verificationFailed,
           successUrl,
           failureUrl,
@@ -114,18 +114,13 @@ const StripePayoutFormComponent = props => {
         );
 
         // TODO: fetch status of Stripe account and check if there is any requirements missing
-        const requirementsMissing = false;
+        const accountId = stripeAccount ? stripeAccount.id : null;
+        const requirementsMissing =
+          stripeAccount &&
+          (stripeAccount.requirements.currently_due || stripeAccount.requirements.past_due);
 
         const showVerificationError = verificationFailed;
         const showVerificationNeeded = stripeConnected && requirementsMissing;
-
-        //TODO:Required: account id, success & fail url, type (verificate/update)
-        const getVerificationLinkParams = {
-          acoountId: stripeAccountId,
-          successUrl,
-          failureUrl,
-          type: showVerificationNeeded ? 'verificate' : 'update',
-        };
 
         // TODO: Remove the default when we can get the country from Stripe Account
         const savedCountry = 'CA';
@@ -197,23 +192,27 @@ const StripePayoutFormComponent = props => {
             )}
             {error}
 
-            {showVerificationError ? (
+            {stripeConnected && (showVerificationError || showVerificationNeeded) ? (
               <StripeVerificationStatusBox
-                type="verificationError"
+                type={showVerificationError ? 'verificationError' : 'verificationNeeded'}
                 onGetVerificationLink={onGetVerificationLink}
-                getVerificationLinkParams={getVerificationLinkParams}
-              />
-            ) : showVerificationNeeded ? (
-              <StripeVerificationStatusBox
-                type="verificationNeeded"
-                onGetVerificationLink={onGetVerificationLink}
-                getVerificationLinkParams={getVerificationLinkParams}
+                getVerificationLinkParams={{
+                  accountId,
+                  successUrl,
+                  failureUrl,
+                  type: 'verificate',
+                }}
               />
             ) : stripeConnected ? (
               <StripeVerificationStatusBox
                 type="verificationSuccess"
                 onGetVerificationLink={onGetVerificationLink}
-                getVerificationLinkParams={getVerificationLinkParams}
+                getVerificationLinkParams={{
+                  accountId,
+                  successUrl,
+                  failureUrl,
+                  type: 'update',
+                }}
               />
             ) : null}
 

@@ -37,12 +37,32 @@ exports[`StripePayoutPage matches snapshot with Stripe connected 1`] = `
             values={Object {}}
           />
         </h1>
-        <p>
-          TODO: show edit verification information
-        </p>
-        <p>
-          TODO: Connect Onboarding flow
-        </p>
+        <injectIntl(StripePayoutFormComponent)
+          currentUserId={
+            UUID {
+              "_sdkType": "UUID",
+              "uuid": "stripe-connected",
+            }
+          }
+          disabled={false}
+          failureUrl="http://localhost:3000/account/payments/verification-failed"
+          inProgress={false}
+          onChange={[Function]}
+          onGetVerificationLink={[Function]}
+          onSubmit={[Function]}
+          ready={false}
+          stripeAccountId={
+            UUID {
+              "_sdkType": "UUID",
+              "uuid": undefined,
+            }
+          }
+          stripeConnected={true}
+          submitButtonText="PayoutPreferencesPage.submitButtonText"
+          successUrl="http://localhost:3000/account/payments/verification-success"
+          verificationFailed={null}
+          verificationSuccess={null}
+        />
       </div>
     </LayoutWrapperMain>
     <LayoutWrapperFooter
@@ -92,13 +112,27 @@ exports[`StripePayoutPage matches snapshot with Stripe not connected 1`] = `
             values={Object {}}
           />
         </h1>
-        <FormattedMessage
-          id="StripePayoutPage.stripeNotConnected"
-          values={Object {}}
+        <injectIntl(StripePayoutFormComponent)
+          currentUserId={
+            UUID {
+              "_sdkType": "UUID",
+              "uuid": "stripe-not-connected",
+            }
+          }
+          disabled={false}
+          failureUrl="http://localhost:3000/account/payments/verification-failed"
+          inProgress={false}
+          onChange={[Function]}
+          onGetVerificationLink={[Function]}
+          onSubmit={[Function]}
+          ready={false}
+          stripeAccountId={null}
+          stripeConnected={false}
+          submitButtonText="PayoutPreferencesPage.submitButtonText"
+          successUrl="http://localhost:3000/account/payments/verification-success"
+          verificationFailed={null}
+          verificationSuccess={null}
         />
-        <p>
-          TODO: Connect Onboarding flow
-        </p>
       </div>
     </LayoutWrapperMain>
     <LayoutWrapperFooter
@@ -148,12 +182,32 @@ exports[`StripePayoutPage matches snapshot with details submitted 1`] = `
             values={Object {}}
           />
         </h1>
-        <p>
-          TODO: show edit verification information
-        </p>
-        <p>
-          TODO: Connect Onboarding flow
-        </p>
+        <injectIntl(StripePayoutFormComponent)
+          currentUserId={
+            UUID {
+              "_sdkType": "UUID",
+              "uuid": "stripe-connected",
+            }
+          }
+          disabled={false}
+          failureUrl="http://localhost:3000/account/payments/verification-failed"
+          inProgress={false}
+          onChange={[Function]}
+          onGetVerificationLink={[Function]}
+          onSubmit={[Function]}
+          ready={true}
+          stripeAccountId={
+            UUID {
+              "_sdkType": "UUID",
+              "uuid": undefined,
+            }
+          }
+          stripeConnected={true}
+          submitButtonText="PayoutPreferencesPage.submitButtonText"
+          successUrl="http://localhost:3000/account/payments/verification-success"
+          verificationFailed={null}
+          verificationSuccess={null}
+        />
       </div>
     </LayoutWrapperMain>
     <LayoutWrapperFooter

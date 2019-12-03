@@ -1,4 +1,4 @@
-import { createStripeAccount } from '../../ducks/stripe.duck';
+import { createStripeAccount, updateStripeAccount } from '../../ducks/stripe.duck';
 import { fetchCurrentUser } from '../../ducks/user.duck';
 
 // ================ Action types ================ //
@@ -54,9 +54,26 @@ export const savePayoutDetailsSuccess = () => ({
 export const savePayoutDetails = values => (dispatch, getState, sdk) => {
   dispatch(savePayoutDetailsRequest());
 
+  if (!values.country) {
+    return dispatch(updateStripeAccount(values))
+      .then(() => dispatch(savePayoutDetailsSuccess()))
+      .catch(() => dispatch(savePayoutDetailsError()));
+  }
+
   return dispatch(createStripeAccount(values))
     .then(() => dispatch(savePayoutDetailsSuccess()))
     .catch(() => dispatch(savePayoutDetailsError()));
+};
+
+export const getVerificationLink = values => (dispatch, getState, sdk) => {
+  // const { accountId, failureUrl, successUrl, type } = values;
+  console.log('TODO: get verification link');
+  console.log('Params:', values);
+
+  // TODO fetch the real link
+  return new Promise((resolve, reject) => {
+    resolve('https://connect.stripe.com/setup/c/trhRkuxi2SZo');
+  });
 };
 
 export const loadData = () => (dispatch, getState, sdk) => {

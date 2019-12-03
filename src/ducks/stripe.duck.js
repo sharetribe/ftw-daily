@@ -459,16 +459,23 @@ export const createStripeAccount = params => (dispatch, getState, sdk) => {
   const country = params.country;
   const bankAccountToken = params.bankAccountToken;
 
-  return sdk.stripeAccount.create({ country, bankAccountToken }, { expand: true }).catch(err => {
-    const e = storableError(err);
-    dispatch(stripeAccountCreateError(e));
-    const stripeMessage =
-      e.apiErrors && e.apiErrors.length > 0 && e.apiErrors[0].meta
-        ? e.apiErrors[0].meta.stripeMessage
-        : null;
-    log.error(err, 'create-stripe-account-failed', { stripeMessage });
-    throw e;
-  });
+  dispatch(stripeAccountCreateRequest());
+
+  return sdk.stripeAccount
+    .create({ country, bankAccountToken }, { expand: true })
+    .then(response => {
+      dispatch(stripeAccountCreateSuccess(response.data.data));
+    })
+    .catch(err => {
+      const e = storableError(err);
+      dispatch(stripeAccountCreateError(e));
+      const stripeMessage =
+        e.apiErrors && e.apiErrors.length > 0 && e.apiErrors[0].meta
+          ? e.apiErrors[0].meta.stripeMessage
+          : null;
+      log.error(err, 'create-stripe-account-failed', { stripeMessage });
+      throw e;
+    });
 };
 
 // ================ Deprecated thunk functions ================ //

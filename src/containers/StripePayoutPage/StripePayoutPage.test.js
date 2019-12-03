@@ -17,6 +17,7 @@ describe('StripePayoutPage', () => {
         payoutDetailsSaved={false}
         onPayoutDetailsFormChange={noop}
         onPayoutDetailsFormSubmit={noop}
+        onGetVerificationLink={noop}
         intl={fakeIntl}
       />
     );
@@ -39,6 +40,7 @@ describe('StripePayoutPage', () => {
         payoutDetailsSaved={false}
         onPayoutDetailsFormChange={noop}
         onPayoutDetailsFormSubmit={noop}
+        onGetVerificationLink={noop}
         intl={fakeIntl}
       />
     );
@@ -61,6 +63,7 @@ describe('StripePayoutPage', () => {
         payoutDetailsSaved={true}
         onPayoutDetailsFormChange={noop}
         onPayoutDetailsFormSubmit={noop}
+        onGetVerificationLink={noop}
         intl={fakeIntl}
       />
     );
