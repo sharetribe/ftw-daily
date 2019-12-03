@@ -1,16 +1,16 @@
 import React from 'react';
 import { renderShallow } from '../../util/test-helpers';
 import { fakeIntl, createCurrentUser, createStripeAccount } from '../../util/test-data';
-import { PayoutPreferencesPageComponent } from './PayoutPreferencesPage';
+import { StripePayoutPageComponent } from './StripePayoutPage';
 
 const noop = () => null;
 
-describe('PayoutPreferencesPage', () => {
+describe('StripePayoutPage', () => {
   it('matches snapshot with Stripe not connected', () => {
     const currentUser = createCurrentUser('stripe-not-connected');
     expect(currentUser.stripeAccount).toBeUndefined();
     const tree = renderShallow(
-      <PayoutPreferencesPageComponent
+      <StripePayoutPageComponent
         currentUser={currentUser}
         scrollingDisabled={false}
         payoutDetailsSaveInProgress={false}
@@ -32,7 +32,7 @@ describe('PayoutPreferencesPage', () => {
     );
     expect(currentUser.stripeAccount).toBeDefined();
     const tree = renderShallow(
-      <PayoutPreferencesPageComponent
+      <StripePayoutPageComponent
         currentUser={currentUser}
         scrollingDisabled={false}
         payoutDetailsSaveInProgress={false}
@@ -54,7 +54,7 @@ describe('PayoutPreferencesPage', () => {
     );
     expect(currentUser.stripeAccount).toBeDefined();
     const tree = renderShallow(
-      <PayoutPreferencesPageComponent
+      <StripePayoutPageComponent
         currentUser={currentUser}
         scrollingDisabled={false}
         payoutDetailsSaveInProgress={false}

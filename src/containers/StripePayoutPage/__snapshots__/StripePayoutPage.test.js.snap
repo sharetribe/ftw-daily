@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PayoutPreferencesPage matches snapshot with Stripe connected 1`] = `
+exports[`StripePayoutPage matches snapshot with Stripe connected 1`] = `
 <Page
   scrollingDisabled={false}
-  title="PayoutPreferencesPage.title"
+  title="StripePayoutPage.title"
 >
   <LayoutSideNavigation
     className={null}
@@ -15,16 +15,16 @@ exports[`PayoutPreferencesPage matches snapshot with Stripe connected 1`] = `
       rootClassName={null}
     >
       <withRouter(Connect(TopbarContainerComponent))
-        currentPage="PayoutPreferencesPage"
+        currentPage="StripePayoutPage"
       />
       <UserNav
         className={null}
         rootClassName={null}
-        selectedPageName="PayoutPreferencesPage"
+        selectedPageName="StripePayoutPage"
       />
     </LayoutWrapperTopbar>
     <withViewport(LayoutWrapperAccountSettingsSideNavComponent)
-      currentTab="PayoutPreferencesPage"
+      currentTab="StripePayoutPage"
     />
     <LayoutWrapperMain
       className={null}
@@ -33,15 +33,15 @@ exports[`PayoutPreferencesPage matches snapshot with Stripe connected 1`] = `
       <div>
         <h1>
           <FormattedMessage
-            id="PayoutPreferencesPage.heading"
+            id="StripePayoutPage.heading"
             values={Object {}}
           />
         </h1>
         <p>
-          <FormattedMessage
-            id="PayoutPreferencesPage.stripeAlreadyConnected"
-            values={Object {}}
-          />
+          TODO: show edit verification information
+        </p>
+        <p>
+          TODO: Connect Onboarding flow
         </p>
       </div>
     </LayoutWrapperMain>
@@ -55,10 +55,10 @@ exports[`PayoutPreferencesPage matches snapshot with Stripe connected 1`] = `
 </Page>
 `;
 
-exports[`PayoutPreferencesPage matches snapshot with Stripe not connected 1`] = `
+exports[`StripePayoutPage matches snapshot with Stripe not connected 1`] = `
 <Page
   scrollingDisabled={false}
-  title="PayoutPreferencesPage.title"
+  title="StripePayoutPage.title"
 >
   <LayoutSideNavigation
     className={null}
@@ -70,16 +70,16 @@ exports[`PayoutPreferencesPage matches snapshot with Stripe not connected 1`] = 
       rootClassName={null}
     >
       <withRouter(Connect(TopbarContainerComponent))
-        currentPage="PayoutPreferencesPage"
+        currentPage="StripePayoutPage"
       />
       <UserNav
         className={null}
         rootClassName={null}
-        selectedPageName="PayoutPreferencesPage"
+        selectedPageName="StripePayoutPage"
       />
     </LayoutWrapperTopbar>
     <withViewport(LayoutWrapperAccountSettingsSideNavComponent)
-      currentTab="PayoutPreferencesPage"
+      currentTab="StripePayoutPage"
     />
     <LayoutWrapperMain
       className={null}
@@ -88,31 +88,17 @@ exports[`PayoutPreferencesPage matches snapshot with Stripe not connected 1`] = 
       <div>
         <h1>
           <FormattedMessage
-            id="PayoutPreferencesPage.heading"
+            id="StripePayoutPage.heading"
             values={Object {}}
           />
         </h1>
-        <p>
-          <FormattedMessage
-            id="PayoutPreferencesPage.stripeNotConnected"
-            values={Object {}}
-          />
-        </p>
-        <injectIntl(PayoutDetailsFormComponent)
-          createStripeAccountError={null}
-          currentUserId={
-            UUID {
-              "_sdkType": "UUID",
-              "uuid": "stripe-not-connected",
-            }
-          }
-          disabled={false}
-          inProgress={false}
-          onChange={[Function]}
-          onSubmit={[Function]}
-          ready={false}
-          submitButtonText="PayoutPreferencesPage.submitButtonText"
+        <FormattedMessage
+          id="StripePayoutPage.stripeNotConnected"
+          values={Object {}}
         />
+        <p>
+          TODO: Connect Onboarding flow
+        </p>
       </div>
     </LayoutWrapperMain>
     <LayoutWrapperFooter
@@ -125,10 +111,10 @@ exports[`PayoutPreferencesPage matches snapshot with Stripe not connected 1`] = 
 </Page>
 `;
 
-exports[`PayoutPreferencesPage matches snapshot with details submitted 1`] = `
+exports[`StripePayoutPage matches snapshot with details submitted 1`] = `
 <Page
   scrollingDisabled={false}
-  title="PayoutPreferencesPage.title"
+  title="StripePayoutPage.title"
 >
   <LayoutSideNavigation
     className={null}
@@ -140,16 +126,16 @@ exports[`PayoutPreferencesPage matches snapshot with details submitted 1`] = `
       rootClassName={null}
     >
       <withRouter(Connect(TopbarContainerComponent))
-        currentPage="PayoutPreferencesPage"
+        currentPage="StripePayoutPage"
       />
       <UserNav
         className={null}
         rootClassName={null}
-        selectedPageName="PayoutPreferencesPage"
+        selectedPageName="StripePayoutPage"
       />
     </LayoutWrapperTopbar>
     <withViewport(LayoutWrapperAccountSettingsSideNavComponent)
-      currentTab="PayoutPreferencesPage"
+      currentTab="StripePayoutPage"
     />
     <LayoutWrapperMain
       className={null}
@@ -158,31 +144,16 @@ exports[`PayoutPreferencesPage matches snapshot with details submitted 1`] = `
       <div>
         <h1>
           <FormattedMessage
-            id="PayoutPreferencesPage.heading"
+            id="StripePayoutPage.heading"
             values={Object {}}
           />
         </h1>
         <p>
-          <FormattedMessage
-            id="PayoutPreferencesPage.payoutDetailsSaved"
-            values={Object {}}
-          />
+          TODO: show edit verification information
         </p>
-        <injectIntl(PayoutDetailsFormComponent)
-          createStripeAccountError={null}
-          currentUserId={
-            UUID {
-              "_sdkType": "UUID",
-              "uuid": "stripe-connected",
-            }
-          }
-          disabled={true}
-          inProgress={false}
-          onChange={[Function]}
-          onSubmit={[Function]}
-          ready={true}
-          submitButtonText="PayoutPreferencesPage.submitButtonText"
-        />
+        <p>
+          TODO: Connect Onboarding flow
+        </p>
       </div>
     </LayoutWrapperMain>
     <LayoutWrapperFooter

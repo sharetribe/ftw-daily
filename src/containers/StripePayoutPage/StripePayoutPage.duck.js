@@ -1,12 +1,12 @@
-import { createStripeAccountWithToken } from '../../ducks/stripe.duck';
+import { createStripeAccount } from '../../ducks/stripe.duck';
 import { fetchCurrentUser } from '../../ducks/user.duck';
 
 // ================ Action types ================ //
 
-export const SET_INITIAL_STATE = 'app/PayoutPreferencesPage/SET_INITIAL_STATE';
-export const SAVE_PAYOUT_DETAILS_REQUEST = 'app/PayoutPreferencesPage/SAVE_PAYOUT_DETAILS_REQUEST';
-export const SAVE_PAYOUT_DETAILS_SUCCESS = 'app/PayoutPreferencesPage/SAVE_PAYOUT_DETAILS_SUCCESS';
-export const SAVE_PAYOUT_DETAILS_ERROR = 'app/PayoutPreferencesPage/SAVE_PAYOUT_DETAILS_ERROR';
+export const SET_INITIAL_STATE = 'app/StripePayoutPage/SET_INITIAL_STATE';
+export const SAVE_PAYOUT_DETAILS_REQUEST = 'app/StripePayoutPage/SAVE_PAYOUT_DETAILS_REQUEST';
+export const SAVE_PAYOUT_DETAILS_SUCCESS = 'app/StripePayoutPage/SAVE_PAYOUT_DETAILS_SUCCESS';
+export const SAVE_PAYOUT_DETAILS_ERROR = 'app/StripePayoutPage/SAVE_PAYOUT_DETAILS_ERROR';
 
 // ================ Reducer ================ //
 
@@ -54,7 +54,7 @@ export const savePayoutDetailsSuccess = () => ({
 export const savePayoutDetails = values => (dispatch, getState, sdk) => {
   dispatch(savePayoutDetailsRequest());
 
-  return dispatch(createStripeAccountWithToken(values))
+  return dispatch(createStripeAccount(values))
     .then(() => dispatch(savePayoutDetailsSuccess()))
     .catch(() => dispatch(savePayoutDetailsError()));
 };

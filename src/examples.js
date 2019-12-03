@@ -86,7 +86,6 @@ import * as FilterForm from './forms/FilterForm/FilterForm.example';
 import * as LoginForm from './forms/LoginForm/LoginForm.example';
 import * as PasswordRecoveryForm from './forms/PasswordRecoveryForm/PasswordRecoveryForm.example';
 import * as PasswordResetForm from './forms/PasswordResetForm/PasswordResetForm.example';
-import * as PayoutDetailsForm from './forms/PayoutDetailsForm/PayoutDetailsForm.example';
 import * as ReviewForm from './forms/ReviewForm/ReviewForm.example';
 import * as SendMessageForm from './forms/SendMessageForm/SendMessageForm.example';
 import * as SignupForm from './forms/SignupForm/SignupForm.example';
@@ -168,7 +167,6 @@ export {
   PaginationLinks,
   PasswordRecoveryForm,
   PasswordResetForm,
-  PayoutDetailsForm,
   PriceFilter,
   PropertyGroup,
   RangeSlider,
