@@ -23,7 +23,7 @@ export const stripeSupportedCountries = [
       addressLine: true,
       city: true,
       postalCode: true,
-      state: true,
+      stateAU: true,
     },
     accountConfig: {
       bsb: true,
@@ -72,7 +72,7 @@ export const stripeSupportedCountries = [
       addressLine: true,
       city: true,
       postalCode: true,
-      province: true,
+      provinceCA: true,
     },
     accountConfig: {
       transitNumber: true,
@@ -383,7 +383,7 @@ export const stripeSupportedCountries = [
       addressLine: true,
       city: true,
       postalCode: true,
-      state: true,
+      stateUS: true,
     },
     accountConfig: {
       routingNumber: true,
