@@ -187,7 +187,6 @@ class PageComponent extends Component {
 
     return (
       <div className={classes}>
-        <Iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M9VZDR4" />
         <Helmet
           htmlAttributes={{
             lang: intl.locale,
@@ -203,31 +202,6 @@ class PageComponent extends Component {
             {schemaArrayJSONString.replace(/</g, '\\u003c')}
           </script>
           <meta name="google-site-verification" content="fudx6zsj9uWoycJsdJlN1s_fkN0hytWu3moaC7ekHmI" /><meta name="google-site-verification" content="fudx6zsj9uWoycJsdJlN1s_fkN0hytWu3moaC7ekHmI" />
-
-          // Hotjar
-          <script>
-            {`
-              (function(h,o,t,j,a,r){
-                h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-                h._hjSettings={hjid:1513714,hjsv:6};
-                a=o.getElementsByTagName('head')[0];
-                r=o.createElement('script');r.async=1;
-                r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-                a.appendChild(r);
-              })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-            `}
-          </script>
-
-          // Google Tag Manager
-          <script>
-            {`
-              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','GTM-M9VZDR4');
-            `}
-          </script>
         </Helmet>
         <CookieConsent />
         <div
