@@ -9,6 +9,7 @@ import Lottie from "react-lottie";
 
 const LOTTIE_OPTIONS = {
   autoplay: false, 
+  loop: false,
   animationData: animationData,
   renderer: 'svg',
   rendererSettings: {
