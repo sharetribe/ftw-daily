@@ -15,11 +15,12 @@ export class EditListingAvailabilityFormComponent extends Component {
     return (
       <FinalForm
         {...this.props}
-        render={fieldRenderProps => {
+        render={formRenderProps => {
           const {
             className,
             rootClassName,
             disabled,
+            ready,
             handleSubmit,
             //intl,
             invalid,
@@ -31,7 +32,7 @@ export class EditListingAvailabilityFormComponent extends Component {
             availability,
             availabilityPlan,
             listingId,
-          } = fieldRenderProps;
+          } = formRenderProps;
 
           const errorMessage = updateError ? (
             <p className={css.error}>
@@ -40,7 +41,7 @@ export class EditListingAvailabilityFormComponent extends Component {
           ) : null;
 
           const classes = classNames(rootClassName || css.root, className);
-          const submitReady = updated && pristine;
+          const submitReady = (updated && pristine) || ready;
           const submitInProgress = updateInProgress;
           const submitDisabled = invalid || disabled || submitInProgress;
 
@@ -80,6 +81,8 @@ EditListingAvailabilityFormComponent.propTypes = {
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
   saveActionMsg: string.isRequired,
+  disabled: bool.isRequired,
+  ready: bool.isRequired,
   updated: bool.isRequired,
   updateError: propTypes.error,
   updateInProgress: bool.isRequired,

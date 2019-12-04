@@ -12,10 +12,11 @@ import css from './EditListingPoliciesForm.css';
 export const EditListingPoliciesFormComponent = props => (
   <FinalForm
     {...props}
-    render={fieldRenderProps => {
+    render={formRenderProps => {
       const {
         className,
         disabled,
+        ready,
         handleSubmit,
         intl,
         invalid,
@@ -24,7 +25,7 @@ export const EditListingPoliciesFormComponent = props => (
         updated,
         updateInProgress,
         fetchErrors,
-      } = fieldRenderProps;
+      } = formRenderProps;
 
       const rulesLabelMessage = intl.formatMessage({
         id: 'EditListingPoliciesForm.rulesLabel',
@@ -46,7 +47,7 @@ export const EditListingPoliciesFormComponent = props => (
       ) : null;
 
       const classes = classNames(css.root, className);
-      const submitReady = updated && pristine;
+      const submitReady = (updated && pristine) || ready;
       const submitInProgress = updateInProgress;
       const submitDisabled = invalid || disabled || submitInProgress;
 
@@ -89,6 +90,8 @@ EditListingPoliciesFormComponent.propTypes = {
   onSubmit: func.isRequired,
   saveActionMsg: string.isRequired,
   selectedPlace: propTypes.place,
+  disabled: bool.isRequired,
+  ready: bool.isRequired,
   updated: bool.isRequired,
   updateInProgress: bool.isRequired,
   fetchErrors: shape({
