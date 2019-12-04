@@ -94,20 +94,16 @@ export const setInitialValues = initialValues => ({
   payload: pick(initialValues, Object.keys(initialState)),
 });
 
-export const showListingRequest = id => {
-  console.log(`showListingRequest ${JSON.stringify(id)}`);
-  return {
+export const showListingRequest = id => ({
   type: SHOW_LISTING_REQUEST,
   payload: { id },
-}};
+});
 
-export const showListingError = e => {
-  console.log(`showListingError ${JSON.stringify(e)}`);
-  return{
+export const showListingError = e => ({
   type: SHOW_LISTING_ERROR,
   error: true,
   payload: e,
-}};
+});
 
 export const fetchReviewsRequest = () => ({ type: FETCH_REVIEWS_REQUEST });
 export const fetchReviewsSuccess = reviews => ({ type: FETCH_REVIEWS_SUCCESS, payload: reviews });
@@ -167,12 +163,10 @@ export const showListing = (listingId, isOwn = false) => (dispatch, getState, sd
 
   return show
     .then(data => {
-        console.log(`listing page duck 172 data ${JSON.stringify(data)}`)
       dispatch(addMarketplaceEntities(data));
       return data;
     })
     .catch(e => {
-      console.log(`listing page duck 177 ERROR ${e}`)
       dispatch(showListingError(storableError(e)));
     });
 };

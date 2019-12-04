@@ -253,13 +253,9 @@ export class ListingPageComponent extends Component {
 
     if (showListingError && showListingError.status === 404) {
       // 404 listing not found
-      console.log(`listing page 256 showListingError ${showListingError}`)
-      console.log(`listing page 256 showListingError ${JSON.stringify(showListingError)}`)
       return <NotFoundPage />;  
     } else if (showListingError) {
       // Other error in fetching listing
-      console.log(`showListingError ${showListingError}`)
-      console.log(`showListingError ${JSON.stringify(showListingError)}`)
 
       const errorTitle = intl.formatMessage({
         id: 'ListingPage.errorLoadingListingTitle',
@@ -282,8 +278,6 @@ export class ListingPageComponent extends Component {
       );
     } else if (!currentListing.id) {
       // Still loading the listing
-      console.log(`currentListing ${JSON.stringify(currentListing)}`)
-      console.log(`currentListing ${currentListing}`)
       const loadingTitle = intl.formatMessage({
         id: 'ListingPage.loadingListingTitle',
       });
