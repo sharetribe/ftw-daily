@@ -449,7 +449,7 @@ export class TransactionPanelComponent extends Component {
                   <FormattedMessage id={'BookingDatesForm.youWontBeChargedInfo'} />
                 </p>
                 <div className={css.bookingDatesSubmitButtonWrapper}>
-                  <a href="http://expert.horsedeal24.com/" target="_blank">
+                  <a href="https://calendly.com/horsedeal24" target="_blank">
                     <PrimaryButton type="submit">
                       <FormattedMessage id="BookingDatesForm.expertLink" />
                     </PrimaryButton>
