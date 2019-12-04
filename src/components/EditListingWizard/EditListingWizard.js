@@ -4,6 +4,8 @@ import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import classNames from 'classnames';
 import config from '../../config';
+import routeConfiguration from '../../routeConfiguration';
+import { createResourceLocatorString } from '../../util/routes';
 import { withViewport } from '../../util/contextHelpers';
 import {
   LISTING_PAGE_PARAM_TYPE_DRAFT,
@@ -131,6 +133,14 @@ const scrollToTab = (tabPrefix, tabId) => {
   }
 };
 
+// TODO: this is a test / remove this piece of code
+const validateStripeOnboarding = () => {
+  const tmpDelay = 3000;
+  return new Promise((resolve, reject) => {
+    setTimeout(() => resolve(true), tmpDelay);
+  });
+};
+
 // Create a new or edit listing through EditListingWizard
 class EditListingWizard extends Component {
   constructor(props) {
@@ -147,6 +157,41 @@ class EditListingWizard extends Component {
     this.handlePublishListing = this.handlePublishListing.bind(this);
     this.handlePayoutModalClose = this.handlePayoutModalClose.bind(this);
     this.handlePayoutSubmit = this.handlePayoutSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    const { params, history, stripeOnboardingReturnURL } = this.props;
+
+    if (stripeOnboardingReturnURL === 'success') {
+      this.setState({ showPayoutDetails: true });
+
+      const closeStripeOnboardingModal = isOpen => this.setState({ showPayoutDetails: isOpen });
+      validateStripeOnboarding()
+        .then(response => {
+          if (response) {
+            // Close modal
+            closeStripeOnboardingModal(false);
+
+            // Redirect to URL without modal open. (replace history)
+            const currentPathParams = { ...params };
+            delete currentPathParams.returnURLType;
+            const routes = routeConfiguration();
+            const currentPanelWithoutModal = createResourceLocatorString(
+              'EditListingPage',
+              routes,
+              currentPathParams,
+              {}
+            );
+            history.replace(currentPanelWithoutModal);
+          }
+        })
+        .catch(e => {
+          // Do nothing or console.log(e);
+        });
+    } else if (stripeOnboardingReturnURL != null) {
+      this.setState({ showPayoutDetails: true });
+      // Show some failure content in the modal
+    }
   }
 
   handleCreateFlowTabScrolling(shouldScroll) {
@@ -285,6 +330,7 @@ class EditListingWizard extends Component {
               <FormattedMessage id="EditListingPhotosPanel.payoutModalInfo" />
             </p>
             <p>TODO: Connect Onboarding flow</p>
+            <p>The return URL is used. It was: {this.props.stripeOnboardingReturnURL}</p>
           </div>
         </Modal>
       </div>
@@ -308,6 +354,10 @@ EditListingWizard.propTypes = {
     slug: string.isRequired,
     type: oneOf(LISTING_PAGE_PARAM_TYPES).isRequired,
     tab: oneOf(TABS).isRequired,
+  }).isRequired,
+  history: shape({
+    push: func.isRequired,
+    replace: func.isRequired,
   }).isRequired,
 
   // We cannot use propTypes.listing since the listing might be a draft.

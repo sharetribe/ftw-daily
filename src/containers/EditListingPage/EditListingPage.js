@@ -37,6 +37,7 @@ import {
 
 import css from './EditListingPage.css';
 
+const STRIPE_ONBOARDING_RETURN_URL_TYPES = ['success', 'failure'];
 const { UUID } = sdkTypes;
 
 // N.B. All the presentational content needs to be extracted to their own components
@@ -67,17 +68,20 @@ export const EditListingPageComponent = props => {
     scrollingDisabled,
   } = props;
 
-  const { id, type } = params;
+  const { id, type, returnURLType } = params;
   const isNewURI = type === LISTING_PAGE_PARAM_TYPE_NEW;
   const isDraftURI = type === LISTING_PAGE_PARAM_TYPE_DRAFT;
+  const isNewListingFlow = isNewURI || isDraftURI;
 
   const listingId = page.submittedListingId || (id ? new UUID(id) : null);
   const currentListing = ensureOwnListing(getOwnListing(listingId));
   const { state: currentListingState } = currentListing.attributes;
 
   const isPastDraft = currentListingState && currentListingState !== LISTING_STATE_DRAFT;
-  const shouldRedirect = (isNewURI || isDraftURI) && listingId && isPastDraft;
-  const showForm = isNewURI || currentListing.id;
+  const shouldRedirect = isNewListingFlow && listingId && isPastDraft;
+
+  const hasStripeOnboardingDataIfNeeded = returnURLType ? !!(currentUser && currentUser.id) : true;
+  const showForm = hasStripeOnboardingDataIfNeeded && (isNewURI || currentListing.id);
 
   if (shouldRedirect) {
     const isPendingApproval =
@@ -121,6 +125,7 @@ export const EditListingPageComponent = props => {
       uploadImageError,
       createStripeAccountError,
     };
+    // TODO: is this dead code? (shouldRedirect is checked before)
     const newListingPublished =
       isDraftURI && currentListing && currentListingState !== LISTING_STATE_DRAFT;
 
@@ -141,10 +146,9 @@ export const EditListingPageComponent = props => {
       return !removedImageIds.includes(img.id);
     });
 
-    const title =
-      isNewURI || isDraftURI
-        ? intl.formatMessage({ id: 'EditListingPage.titleCreateListing' })
-        : intl.formatMessage({ id: 'EditListingPage.titleEditListing' });
+    const title = isNewListingFlow
+      ? intl.formatMessage({ id: 'EditListingPage.titleCreateListing' })
+      : intl.formatMessage({ id: 'EditListingPage.titleEditListing' });
 
     return (
       <Page title={title} scrollingDisabled={scrollingDisabled}>
@@ -183,6 +187,7 @@ export const EditListingPageComponent = props => {
           onChange={onChange}
           currentUser={currentUser}
           onManageDisableScrolling={onManageDisableScrolling}
+          stripeOnboardingReturnURL={params.returnURLType}
           updatedTab={page.updatedTab}
           updateInProgress={page.updateInProgress || page.createListingDraftInProgress}
         />
@@ -233,6 +238,7 @@ EditListingPageComponent.propTypes = {
     slug: string.isRequired,
     type: oneOf(LISTING_PAGE_PARAM_TYPES).isRequired,
     tab: string.isRequired,
+    returnURLType: oneOf(STRIPE_ONBOARDING_RETURN_URL_TYPES),
   }).isRequired,
   scrollingDisabled: bool.isRequired,
 
