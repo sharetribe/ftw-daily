@@ -6,20 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--!meta-->
     <meta http-equiv="Content-Security-Policy" content="">
-
     <!--!googleAnalyticsScript-->
 
     <link rel="manifest" href="%PUBLIC_URL%/static/manifest.json">
 
     <!-- Start Favicons from https://realfavicongenerator.net/ -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/static/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/static/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/static/icons/favicon-16x16.png">
-    <link rel="mask-icon" href="/static/icons/safari-pinned-tab.svg" color="#8f2593">
+    <link rel="apple-touch-icon" sizes="180x180"
+      href="/static/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32"
+      href="/static/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16"
+      href="/static/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/static/icons/safari-pinned-tab.svg"
+      color="#8f2593">
     <link rel="shortcut icon" href="/static/icons/favicon.ico">
     <meta name="msapplication-config" content="/static/icons/browserconfig.xml">
     <meta name="theme-color" content="#8f2593">
-    
+
     <!-- End Favicons -->
 
     <!--!link-->
@@ -85,7 +88,30 @@
         }
       })(document);
     </script>
+    <!-- Hotjar -->
 
+    <script>
+ 
+    (function(h,o,t,j,a,r){
+      h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+      h._hjSettings={hjid:1513714,hjsv:6};
+      a=o.getElementsByTagName('head')[0];
+      r=o.createElement('script');r.async=1;
+      r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+      a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    </script>
+    <!-- Google Tag Manager -->
+    <script>
+  
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-M9VZDR4');
+    </script>
+    
+    <script src="https://www.googletagmanager.com/ns.html?id=GTM-M9VZDR4"></script>
     <link rel="stylesheet" href="%PUBLIC_URL%/static/reactDates.css" />
 
     <!-- Start of Sleeknote signup and lead generation tool - www.sleeknote.com -->
@@ -99,7 +125,6 @@
         s.parentNode.insertBefore(sleeknoteScriptTag, s);
       })(); </script>
     <!-- End of Sleeknote signup and lead generation tool - www.sleeknote.com -->
-
   </head>
   <body>
     <div id="root"><!--!body--></div>
@@ -158,7 +183,6 @@
           });
       })(document);
     </script>
-
     <!--
       NOTE: remember to update mapbox-sdk.min.js to a new version regularly.
       mapbox-sdk.min.js is included from static folder for CSP purposes.
@@ -170,11 +194,9 @@
     <script>
       window.mapboxgl.accessToken = '%REACT_APP_MAPBOX_ACCESS_TOKEN%';
     </script> -->
-    
     <!-- If Google Maps is used instead of Mapbox, you need to include Google's script instead: -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=%REACT_APP_GOOGLE_MAPS_API_KEY%&libraries=places&language=de&region=CH"></script>
-   
-
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=%REACT_APP_GOOGLE_MAPS_API_KEY%&libraries=places&language=de&region=CH"></script>
     <!--
          Stripe script should be on every page, not just the pages that
          use the API:
@@ -182,10 +204,10 @@
          https://stripe.com/docs/stripe.js#including-stripejs
        -->
     <script src="https://js.stripe.com/v3/"></script>
-  <!--!preloadedStateScript-->
-  <!--!script-->
+    <!--!preloadedStateScript-->
+    <!--!script-->
 
-  <!--
+    <!--
        Note when adding new external scripts/styles/fonts/etc.:
        If a Content Security Policy (CSP) is turned on, the new URLs
        should be whitelisted in the policy.
