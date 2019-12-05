@@ -28,8 +28,10 @@ import css from './EditListingWizard.css';
 // Show availability calendar only if environment variable availabilityEnabled is true
 const availabilityMaybe = config.enableAvailability ? [AVAILABILITY] : [];
 
-// TODO: PHOTOS panel needs to be the last one since it currently contains PayoutDetailsForm modal
-// All the other panels can be reordered.
+// You can reorder these panels.
+// Note 1: You need to change save button translations for new listing flow
+// Note 2: Ensure that draft listing is created after the first panel
+// and listing publishing happens after last panel.
 export const TABS = [
   DESCRIPTION,
   FEATURES,
