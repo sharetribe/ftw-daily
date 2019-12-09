@@ -13,7 +13,8 @@ const LOTTIE_OPTIONS = {
   animationData: animationData,
   renderer: 'svg',
   rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice'
+    preserveAspectRatio: 'xMidYMid slice',
+    progressiveLoad: true
   }
 }
 
