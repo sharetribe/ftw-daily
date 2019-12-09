@@ -1,18 +1,25 @@
 import React from 'react';
 import { string } from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { NamedLink } from '../../components';
 import css from './SectionHero.css';
 import * as animationData from '../../assets/oogo-animation';
-import Lottie from "react-lottie";
+import Lottie from 'react-lottie';
 
-const LOTTIE_OPTIONS = {
-  autoplay: false, 
-  animationData: animationData,
-  renderer: 'svg',
-  rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice'
+class LottieWrapper extends PureComponent {
+  LOTTIE_OPTIONS = {
+    autoplay: false,
+    loop: false,
+    animationData,
+    renderer: 'svg',
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+      progressiveLoad: true,
+    },
+  };
+  render() {
+    return <Lottie options={this.LOTTIE_OPTIONS} isClickToPauseDisabled />;
   }
 }
 
@@ -34,14 +41,14 @@ const SectionHero = props => {
           name="SearchPage"
           to={{
             search:
-              's?address=Finland&bounds=70.0922932%2C31.5870999%2C59.693623%2C20.456500199999937',
+              'address=United%20States%20of%20America&bounds=71.540724%2C-66.885444%2C18.765563%2C-179.9',
           }}
           className={css.heroButton}
         >
           <FormattedMessage id="SectionHero.browseButton" />
         </NamedLink>
         <div className={css.heroVideoContainer}>
-          <Lottie options={LOTTIE_OPTIONS} isClickToPauseDisabled />
+          <LottieWrapper />
         </div>
       </div>
     </div>
