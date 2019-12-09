@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { string } from 'prop-types';
-import { FormattedMessage } from '../../util/reactIntl';
+import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { NamedLink } from '../../components';
 import css from './SectionHero.css';
