@@ -123,7 +123,7 @@
     margin: 0;
   }
   & .sliderAnimation___300FY {
-    transition: transform 0.5s;
+    transition: transform 0.3s;
     transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
     will-change: transform;
   }
