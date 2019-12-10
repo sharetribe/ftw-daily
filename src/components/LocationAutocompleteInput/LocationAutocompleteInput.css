@@ -24,7 +24,7 @@
   display: flex;
   width: 24px;
   align-self: stretch;
-  border-bottom: 2px solid var(--marketplaceColor);
+  border-bottom: 2px solid var(--marketplaceColorDark);
   background-color: var(--matterColorLight);
 }
 
@@ -76,7 +76,7 @@ size and position, etc.
   padding-bottom: var(--locationAutocompleteBottomPadding);
   top: var(--LocationAutocompleteInput_inputHeight);
   left: 0;
-  background-color: var(--marketplaceColor);
+  background-color: var(--marketplaceColorDark);
   border-bottom-left-radius: var(--borderRadius);
   border-bottom-right-radius: var(--borderRadius);
   box-shadow: var(--boxShadowPopup);
@@ -107,7 +107,8 @@ bottom of the container.
   @apply --marketplaceBodyFontStyles;
 
   margin: 0;
-  padding: 14px 0;
+  padding: 14px 0 25px 0;
+  background-color: var(--marketplaceColorDark);
 
   & li {
     color: var(--matterColorLight);
