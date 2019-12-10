@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] Update links to API Reference docs. [#1231](https://github.com/sharetribe/ftw-daily/pull/1231)
+
 ## [v3.7.0] 2019-12-09
 
 - [change] Make it easier to reorder EditListingWizard tabs/panels.
