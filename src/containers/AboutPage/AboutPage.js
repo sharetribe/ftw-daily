@@ -35,27 +35,23 @@ const AboutPage = () => {
         </LayoutWrapperTopbar>
 
         <LayoutWrapperMain className={css.staticPageWrapper}>
-          <h1 className={css.pageTitle}>Experience the unique Finnish home sauna.</h1>
+          <h1 className={css.pageTitle}>Loan it like you own it.</h1>
           <img className={css.coverImage} src={image} alt="My first ice cream." />
 
           <div className={css.contentWrapper}>
             <div className={css.contentSide}>
-              <p>Did you know that Finland has 3.2 million saunas - almost one sauna per person!</p>
+              <p>Did you know that the average $300 item in your garage gets used less than twice a year?</p>
             </div>
 
             <div className={css.contentMain}>
               <h2>
-                Most of the Finnish saunas are located at the homes of individuals - indeed, most
-                people in Finland live in an apartment with sauna in it. In addition, lots of people
-                have lakeside summer cottages, which also typically come with a separate sauna
-                building near the waterfront.
+              From My Garage makes it easy to rent expensive, rarely used items from your neighbor, which saves you money and room in your house, makes your neighbor money, all while reducing waste in the world.
+              
+              
               </h2>
 
               <p>
-                To truly experience a Finnish sauna, you need to look beyond the public saunas, and
-                instead visit a real home or cottage sauna. Saunatime makes this possible for
-                everyone. All our saunas are owned by individuals willing to let tourists and other
-                curious visitors to enter their sacred spaces.
+               Our mission is to create a safe, fun, peer-to-peer rental platform for communities all around the world. Save money, reduce waste, impact your community. 
               </p>
 
               <h3 className={css.subtitle}>Are you a sauna owner?</h3>

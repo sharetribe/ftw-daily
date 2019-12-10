@@ -4,16 +4,16 @@
 
 export const amenities = [
   {
-    key: 'towels',
-    label: 'Towels',
+    key: 'battery pack',
+    label: 'Battery pack',
   },
   {
-    key: 'bathroom',
-    label: 'Bathroom',
+    key: '20 voltage',
+    label: '20 Voltage',
   },
   {
-    key: 'swimming_pool',
-    label: 'Swimming pool',
+    key: '40 voltage',
+    label: '40 Voltage',
   },
   {
     key: 'own_drinks',
@@ -38,10 +38,10 @@ export const amenities = [
 ];
 
 export const categories = [
-  { key: 'smoke', label: 'Smoke' },
-  { key: 'electric', label: 'Electric' },
-  { key: 'wood', label: 'Wood' },
-  { key: 'other', label: 'Other' },
+  { key: 'tools and equipment', label: 'Tools and Equipment' },
+  { key: 'outdoors', label: 'Outdoors' },
+  { key: 'cameras', label: 'Cameras' },
+
 ];
 
 // Price filter configuration
