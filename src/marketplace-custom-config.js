@@ -36,11 +36,10 @@ export const amenities = [
     label: 'Own food allowed',
   },
 ];
-
 export const categories = [
-  { key: 'smoke', label: 'Smoke' },
-  { key: 'electric', label: 'Electric' },
-  { key: 'wood', label: 'Wood' },
+  { key: 'coliving-accommodation', label: 'Coliving Accommodation' },
+  { key: 'coworking-space', label: 'Coworking space' },
+  { key: 'group-and-team-packages', label: 'Group & Team Packages' },
   { key: 'other', label: 'Other' },
 ];
 
