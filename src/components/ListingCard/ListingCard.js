@@ -135,7 +135,7 @@ export const ListingCardComponent = props => {
         </div>
         <div className={css.price}>
           <div className={css.priceValue} title={priceTitle.replace(/,/,"\'").replace(/\'dd$/,"")}>
-            {formattedPrice.replace(/,/,"\'").replace(/\'dd$/,"")}}
+            {formattedPrice.replace(/,/,"\'").replace(/\'dd$/,"")}
           </div>
           <div className={css.perUnit}>
             <FormattedMessage id={unitTranslationKey} />

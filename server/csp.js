@@ -25,8 +25,6 @@ const defaultDirectives = {
     'api.mapbox.com',
     'events.mapbox.com',
     '*.hotjar.com',
-    'www.googletagmanager.com',
-    '*.googletagmanager.com',
 
     // Google Analytics
     'www.google-analytics.com',
@@ -61,6 +59,7 @@ const defaultDirectives = {
     'stats.g.doubleclick.net',
 
     '*.stripe.com',
+    '*.googletagmanager.com'
   ],
   scriptSrc: [
     self,
@@ -72,7 +71,8 @@ const defaultDirectives = {
     '*.google-analytics.com',
     'js.stripe.com',
     '*.sleeknote.com',
-    '*.hotjar.com'
+    '*.hotjar.com',
+    '*.googletagmanager.com'
   ],
   styleSrc: [self, unsafeInline, 'fonts.googleapis.com', 'api.mapbox.com'],
 };
@@ -101,10 +101,7 @@ module.exports = (reportUri, enforceSsl, reportOnly) => {
   // const exampleImgSrc = imgSrc.concat('my-custom-domain.example.com');
 
   const customDirectives = {
-    // Example: Add custom directive override
-    // imgSrc: exampleImgSrc,
-    // googletagmanager: "*.googletagmanager.com",
-    // hotjar: "*.hotjar.com",
+    
   };
 
   // ================ END CUSTOM CSP URLs ================ //
