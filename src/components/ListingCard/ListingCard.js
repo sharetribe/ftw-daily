@@ -83,13 +83,14 @@ export const ListingCardComponent = props => {
   const isWindowDefined = typeof window !== 'undefined';
   const isMobileLayout = isWindowDefined && window.innerWidth < MODAL_BREAKPOINT;
 
-  const cardTitle = richText(title, {
-    longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS,
-    longWordClass: css.longWord,
-  }).join('');
+  // const cardTitle = richText(title, {
+  //   longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS,
+  //   longWordClass: css.longWord,
+  // }).join('');
+
   const cardBreed = _.get(breeds.find(value => value.key === breed), 'label', null);
   const cardGender = _.get(genders.find(value => value.key === gender), 'label', null);
-  const cardTitles = [cardTitle, cardBreed, cardGender]
+  const cardTitles = [title, cardBreed, cardGender]
     .filter(i => typeof i === 'string')
     .join(', ');
 
