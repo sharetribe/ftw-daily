@@ -134,8 +134,8 @@ export const ListingCardComponent = props => {
           <AvatarMedium user={listing.author} />
         </div>
         <div className={css.price}>
-          <div className={css.priceValue} title={priceTitle.replace(/,/,"\'")}>
-            {formattedPrice.replace(/,/,"\'")}
+          <div className={css.priceValue} title={priceTitle.replace(/,/,"\'").replace(/\'dd$/,"")}>
+            {formattedPrice.replace(/,/,"\'").replace(/\'dd$/,"")}}
           </div>
           <div className={css.perUnit}>
             <FormattedMessage id={unitTranslationKey} />
