@@ -41,7 +41,7 @@ export const currencyConfiguration = currency => {
         currency,
         currencyDisplay: 'symbol',
         useGrouping: true,
-        minimumFractionDigits: 2,
+        minimumFractionDigits: 0,
         maximumFractionDigits: 2,
       };
 };
