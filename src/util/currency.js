@@ -253,8 +253,9 @@ export const formatMoney = (intl, value) => {
     currencyDisplay: 'symbol',
     useGrouping: true,
     minimumFractionDigits: 0,
-    maximumFractionDigits: 2,
+    maximumFractionDigits: 0,
   };
+  
   return intl.formatNumber(valueAsNumber, numberFormatOptions);
 };
 
