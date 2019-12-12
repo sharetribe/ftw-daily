@@ -20,6 +20,7 @@ const MODAL_BREAKPOINT = 768;
 const priceData = (price, intl) => {
   if (price && price.currency === config.currency) {
     const formattedPrice = formatMoney(intl, price);
+    
     return { formattedPrice, priceTitle: formattedPrice };
   } else if (price) {
     return {
@@ -53,7 +54,7 @@ export const ListingCardComponent = props => {
     setActiveListing,
     ages,
     breeds,
-    genders 
+    genders,
   } = props;
   const classes = classNames(rootClassName || css.root, className);
 
@@ -70,6 +71,7 @@ export const ListingCardComponent = props => {
 
   const { formattedPrice, priceTitle } = priceData(price, intl);
 
+
   const unitType = config.bookingUnitType;
   const isNightly = unitType === LINE_ITEM_NIGHT;
   const isDaily = unitType === LINE_ITEM_DAY;
@@ -83,16 +85,22 @@ export const ListingCardComponent = props => {
   const isWindowDefined = typeof window !== 'undefined';
   const isMobileLayout = isWindowDefined && window.innerWidth < MODAL_BREAKPOINT;
 
-  const cardTitle = richText(title, {
-    longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS,
-    longWordClass: css.longWord,
-  }).join('');
-  const cardBreed = _.get(breeds.find(value => value.key === breed), 'label', null);
-  const cardGender = _.get(genders.find(value => value.key === gender), 'label', null);
-  const cardTitles = [cardTitle, cardBreed, cardGender]
-    .filter(i => typeof i === 'string')
-    .join(', ');
+  // const cardTitle = richText(title, {
+  //   longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS,
+  //   longWordClass: css.longWord,
+  // }).join('');
 
+  const cardBreed = _.get(
+    breeds.find(value => value.key === breed),
+    'label',
+    null
+  );
+  const cardGender = _.get(
+    genders.find(value => value.key === gender),
+    'label',
+    null
+  );
+  const cardTitles = [title, cardBreed, cardGender].filter(i => typeof i === 'string').join(', ');
 
   return (
     <NamedLink className={classes} name="ListingPage" params={{ id, slug }} openInNewTab>
@@ -122,10 +130,12 @@ export const ListingCardComponent = props => {
         </div>
       </div>
       <div className={css.info}>
-        <div className={css.avatarAuthor}><AvatarMedium user={listing.author}/></div> 
+        <div className={css.avatarAuthor}>
+          <AvatarMedium user={listing.author} />
+        </div>
         <div className={css.price}>
-          <div className={css.priceValue} title={priceTitle}>
-            {formattedPrice}
+          <div className={css.priceValue} title={priceTitle.replace(/,/,"\'").replace(/\'dd$/,"")}>
+            {formattedPrice.replace(/,/,"\'").replace(/\'dd$/,"")}
           </div>
           <div className={css.perUnit}>
             <FormattedMessage id={unitTranslationKey} />

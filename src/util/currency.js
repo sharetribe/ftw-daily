@@ -255,6 +255,7 @@ export const formatMoney = (intl, value) => {
     minimumFractionDigits: 0,
     maximumFractionDigits: 2,
   };
+  
   return intl.formatNumber(valueAsNumber, numberFormatOptions);
 };
 
