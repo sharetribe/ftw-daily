@@ -8,13 +8,16 @@
 
 .advantageTitle {
   margin: 0;
-  font-size: 18px
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.5;
 }
 
 .advantageText {
   margin: 0;
-  line-height: inherit;
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
 }
 
  .advantages {
