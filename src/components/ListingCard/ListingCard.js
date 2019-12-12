@@ -20,7 +20,7 @@ const MODAL_BREAKPOINT = 768;
 const priceData = (price, intl) => {
   if (price && price.currency === config.currency) {
     const formattedPrice = formatMoney(intl, price);
-    console.log({formattedPrice})
+    
     return { formattedPrice, priceTitle: formattedPrice };
   } else if (price) {
     return {
