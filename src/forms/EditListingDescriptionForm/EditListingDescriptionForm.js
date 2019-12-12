@@ -98,6 +98,13 @@ const EditListingDescriptionFormComponent = props => (
             autoFocus
           />
 
+          <CustomCategorySelectFieldMaybe
+            id="category"
+            name="category"
+            categories={categories}
+            intl={intl}
+          />
+
           <FieldTextInput
             id="description"
             name="description"
@@ -106,13 +113,6 @@ const EditListingDescriptionFormComponent = props => (
             label={descriptionMessage}
             placeholder={descriptionPlaceholderMessage}
             validate={composeValidators(required(descriptionRequiredMessage))}
-          />
-
-          <CustomCategorySelectFieldMaybe
-            id="category"
-            name="category"
-            categories={categories}
-            intl={intl}
           />
 
           <Button
