@@ -36,6 +36,7 @@ export const amenities = [
     label: 'Own food allowed',
   },
 ];
+
 export const categories = [
   { key: 'coliving-accommodation', label: 'Coliving Accommodation' },
   { key: 'coworking-space', label: 'Coworking space' },

@@ -178,6 +178,11 @@ export class BookingDatesFormComponent extends Component {
                 )}
               />
               {bookingInfo}
+              <div className={submitButtonClasses}>
+                <PrimaryButton type="submit">
+                  <FormattedMessage id="BookingDatesForm.requestToBook" />
+                </PrimaryButton>
+              </div>
               <p className={css.smallPrint}>
                 <FormattedMessage
                   id={
@@ -187,11 +192,6 @@ export class BookingDatesFormComponent extends Component {
                   }
                 />
               </p>
-              <div className={submitButtonClasses}>
-                <PrimaryButton type="submit">
-                  <FormattedMessage id="BookingDatesForm.requestToBook" />
-                </PrimaryButton>
-              </div>
             </Form>
           );
         }}
