@@ -6,7 +6,7 @@ import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import { ensureCurrentUser } from '../../util/data';
 import { propTypes } from '../../util/types';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { stripeAccountClearError } from '../../ducks/stripe.duck';
+import { stripeAccountClearError } from '../../ducks/stripeConnectAccount.duck';
 import {
   LayoutSideNavigation,
   LayoutWrapperMain,
