@@ -1,11 +1,14 @@
+import pick from 'lodash/pick';
 import {
   createStripeAccount,
+  updateStripeAccount,
+  fetchStripeAccount,
 } from '../../ducks/stripeConnectAccount.duck';
 import { fetchCurrentUser } from '../../ducks/user.duck';
 
 // ================ Action types ================ //
 
-export const SET_INITIAL_STATE = 'app/StripePayoutPage/SET_INITIAL_STATE';
+export const SET_INITIAL_VALUES = 'app/StripePayoutPage/SET_INITIAL_VALUES';
 export const SAVE_PAYOUT_DETAILS_REQUEST = 'app/StripePayoutPage/SAVE_PAYOUT_DETAILS_REQUEST';
 export const SAVE_PAYOUT_DETAILS_SUCCESS = 'app/StripePayoutPage/SAVE_PAYOUT_DETAILS_SUCCESS';
 export const SAVE_PAYOUT_DETAILS_ERROR = 'app/StripePayoutPage/SAVE_PAYOUT_DETAILS_ERROR';
@@ -15,13 +18,14 @@ export const SAVE_PAYOUT_DETAILS_ERROR = 'app/StripePayoutPage/SAVE_PAYOUT_DETAI
 const initialState = {
   payoutDetailsSaveInProgress: false,
   payoutDetailsSaved: false,
+  fromReturnURL: false,
 };
 
-export default function payoutPreferencesPageReducer(state = initialState, action = {}) {
-  const { type } = action;
+export default function reducer(state = initialState, action = {}) {
+  const { type, payload } = action;
   switch (type) {
-    case SET_INITIAL_STATE:
-      return initialState;
+    case SET_INITIAL_VALUES:
+      return { ...initialState, ...payload };
 
     case SAVE_PAYOUT_DETAILS_REQUEST:
       return { ...state, payoutDetailsSaveInProgress: true };
@@ -37,8 +41,9 @@ export default function payoutPreferencesPageReducer(state = initialState, actio
 
 // ================ Action creators ================ //
 
-export const setInitialState = () => ({
-  type: SET_INITIAL_STATE,
+export const setInitialValues = initialValues => ({
+  type: SET_INITIAL_VALUES,
+  payload: pick(initialValues, Object.keys(initialState)),
 });
 
 export const savePayoutDetailsRequest = () => ({
@@ -53,18 +58,28 @@ export const savePayoutDetailsSuccess = () => ({
 
 // ================ Thunks ================ //
 
-export const savePayoutDetails = values => (dispatch, getState, sdk) => {
+export const savePayoutDetails = (values, isUpdateCall) => (dispatch, getState, sdk) => {
+  const upsertThunk = isUpdateCall ? updateStripeAccount : createStripeAccount;
   dispatch(savePayoutDetailsRequest());
 
-  return dispatch(createStripeAccount(values))
-    .then(() => dispatch(savePayoutDetailsSuccess()))
+  return dispatch(upsertThunk(values, { expand: true }))
+    .then(response => {
+      dispatch(savePayoutDetailsSuccess());
+      return response;
+    })
     .catch(() => dispatch(savePayoutDetailsError()));
 };
 
 export const loadData = () => (dispatch, getState, sdk) => {
   // Clear state so that previously loaded data is not visible
   // in case this page load fails.
-  dispatch(setInitialState());
+  dispatch(setInitialValues());
 
-  return dispatch(fetchCurrentUser());
+  return dispatch(fetchCurrentUser()).then(response => {
+    const currentUser = getState().user.currentUser;
+    if (currentUser && currentUser.stripeAccount) {
+      dispatch(fetchStripeAccount());
+    }
+    return response;
+  });
 };

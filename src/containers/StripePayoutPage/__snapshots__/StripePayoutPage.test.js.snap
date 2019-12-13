@@ -37,12 +37,19 @@ exports[`StripePayoutPage matches snapshot with Stripe connected 1`] = `
             values={Object {}}
           />
         </h1>
-        <p>
-          TODO: show edit verification information
-        </p>
-        <p>
-          TODO: Connect Onboarding flow
-        </p>
+        <injectIntl(StripeConnectAccountFormComponent)
+          disabled={false}
+          inProgress={false}
+          onChange={[Function]}
+          onGetStripeConnectAccountLink={[Function]}
+          onSubmit={[Function]}
+          ready={false}
+          savedCountry={null}
+          stripeAccountError={null}
+          stripeBankAccountLastDigits={null}
+          stripeConnected={false}
+          submitButtonText="StripePayoutPage.submitButtonText"
+        />
       </div>
     </LayoutWrapperMain>
     <LayoutWrapperFooter
@@ -92,13 +99,19 @@ exports[`StripePayoutPage matches snapshot with Stripe not connected 1`] = `
             values={Object {}}
           />
         </h1>
-        <FormattedMessage
-          id="StripePayoutPage.stripeNotConnected"
-          values={Object {}}
+        <injectIntl(StripeConnectAccountFormComponent)
+          disabled={false}
+          inProgress={false}
+          onChange={[Function]}
+          onGetStripeConnectAccountLink={[Function]}
+          onSubmit={[Function]}
+          ready={false}
+          savedCountry={null}
+          stripeAccountError={null}
+          stripeBankAccountLastDigits={null}
+          stripeConnected={false}
+          submitButtonText="StripePayoutPage.submitButtonText"
         />
-        <p>
-          TODO: Connect Onboarding flow
-        </p>
       </div>
     </LayoutWrapperMain>
     <LayoutWrapperFooter
@@ -148,12 +161,19 @@ exports[`StripePayoutPage matches snapshot with details submitted 1`] = `
             values={Object {}}
           />
         </h1>
-        <p>
-          TODO: show edit verification information
-        </p>
-        <p>
-          TODO: Connect Onboarding flow
-        </p>
+        <injectIntl(StripeConnectAccountFormComponent)
+          disabled={false}
+          inProgress={false}
+          onChange={[Function]}
+          onGetStripeConnectAccountLink={[Function]}
+          onSubmit={[Function]}
+          ready={true}
+          savedCountry={null}
+          stripeAccountError={null}
+          stripeBankAccountLastDigits={null}
+          stripeConnected={false}
+          submitButtonText="StripePayoutPage.submitButtonText"
+        />
       </div>
     </LayoutWrapperMain>
     <LayoutWrapperFooter
