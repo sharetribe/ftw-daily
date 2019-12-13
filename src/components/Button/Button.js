@@ -14,7 +14,17 @@ class Button extends Component {
     this.setState({ mounted: true }); // eslint-disable-line react/no-did-mount-set-state
   }
   render() {
-    const { children, className, rootClassName, inProgress, ready, disabled, ...rest } = this.props;
+    const {
+      children,
+      className,
+      rootClassName,
+      spinnerClassName,
+      checkmarkClassName,
+      inProgress,
+      ready,
+      disabled,
+      ...rest
+    } = this.props;
 
     const rootClass = rootClassName || css.root;
     const classes = classNames(rootClass, className, {
@@ -25,9 +35,9 @@ class Button extends Component {
     let content;
 
     if (inProgress) {
-      content = <IconSpinner rootClassName={css.spinner} />;
+      content = <IconSpinner rootClassName={spinnerClassName || css.spinner} />;
     } else if (ready) {
-      content = <IconCheckmark rootClassName={css.checkmark} />;
+      content = <IconCheckmark rootClassName={checkmarkClassName || css.checkmark} />;
     } else {
       content = children;
     }
@@ -50,6 +60,8 @@ const { node, string, bool } = PropTypes;
 Button.defaultProps = {
   rootClassName: null,
   className: null,
+  spinnerClassName: null,
+  checkmarkClassName: null,
   inProgress: false,
   ready: false,
   disabled: false,
@@ -59,6 +71,8 @@ Button.defaultProps = {
 Button.propTypes = {
   rootClassName: string,
   className: string,
+  spinnerClassName: string,
+  checkmarkClassName: string,
 
   inProgress: bool,
   ready: bool,
