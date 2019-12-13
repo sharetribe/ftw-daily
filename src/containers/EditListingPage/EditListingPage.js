@@ -16,7 +16,10 @@ import { LISTING_STATE_DRAFT, LISTING_STATE_PENDING_APPROVAL, propTypes } from '
 import { ensureOwnListing } from '../../util/data';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { stripeAccountClearError, createStripeAccount } from '../../ducks/stripe.duck';
+import {
+  stripeAccountClearError,
+  createStripeAccount,
+} from '../../ducks/stripeConnectAccount.duck';
 import { EditListingWizard, NamedRedirect, Page } from '../../components';
 import { TopbarContainer } from '../../containers';
 
