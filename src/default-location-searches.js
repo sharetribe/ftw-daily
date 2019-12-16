@@ -11,43 +11,43 @@ export default [
   {
     id: 'default-portugal',
     predictionPlace: {
-      address: 'Helsinki, Finland',
-      bounds: new LatLngBounds(new LatLng(60.29783, 25.25448), new LatLng(59.92248, 24.78287)),
+      address: 'Portugal',
+      bounds: new LatLngBounds(new LatLng(42.45802935,-1.71652766), new LatLng(35.58022367,-14.30559766)),
     },
   },
   {
     id: 'default-mexico',
     predictionPlace: {
       address: 'Puerto Escondido, Mexico',
-      bounds: new LatLngBounds(new LatLng(60.53045, 22.38197), new LatLng(60.33361, 22.06644)),
-    },
+      bounds: new LatLngBounds(new LatLng(15.92616567,-96.99633449), new LatLng(15.82495534,-97.14576471)),
+    }, 
   },
   {
     id: 'default-bali',
     predictionPlace: {
       address: 'Bali, Indonesia',
-      bounds: new LatLngBounds(new LatLng(-8.322555, 115.150983), new LatLng(-8.322555, 115.150983)),
-    },
+      bounds: new LatLngBounds(new LatLng(-7.96383669,115.7425148 ), new LatLng(-8.91510534,114.3767958)),
+    }, 
   },
   {
     id: 'default-norway',
     predictionPlace: {
       address: 'Lofoten, Norway',
-      bounds: new LatLngBounds(new LatLng(65.56434, 26.77069), new LatLng(64.8443, 24.11494)),
-    },
+      bounds: new LatLngBounds(new LatLng(69.46234685,18.48689067), new LatLng(67.75571749,11.83848165)),
+    },  
   },
   {
     id: 'default-spain',
     predictionPlace: {
       address: 'Tenerife, Spain',
-      bounds: new LatLngBounds(new LatLng(66.16997, 29.16773), new LatLng(66.16095, 29.13572)),
-    },
+      bounds: new LatLngBounds(new LatLng(28.75487995,-15.87553649), new LatLng(27.73415888,-17.52103053)),
+    },  
   },
   {
     id: 'default-sri-lanka',
     predictionPlace: {
       address: 'Ahanagama, Sri Lanka',
-      bounds: new LatLngBounds(new LatLng(65.56434, 26.77069), new LatLng(64.8443, 24.11494)),
-    },
+      bounds: new LatLngBounds(new LatLng(9.932083,81.980383), new LatLng(5.814558,79.422098)),
+    }, 
   },
 ];
