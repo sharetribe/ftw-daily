@@ -4,38 +4,135 @@
 
 export const amenities = [
   {
-    key: 'towels',
-    label: 'Towels',
+    key: "team_retreat_friendly",
+    label: "Team retreat friendly"
   },
   {
-    key: 'bathroom',
-    label: 'Bathroom',
+    key: "surfboard_included",
+    label: "Surfboard included"
   },
   {
-    key: 'swimming_pool',
-    label: 'Swimming pool',
+    key: "wetsuit_included",
+    label: "Wetsuit included"
   },
   {
-    key: 'own_drinks',
-    label: 'Own drinks allowed',
+    key: "free_coffee_and_tea",
+    label: "Free coffee and tea"
   },
   {
-    key: 'jacuzzi',
-    label: 'Jacuzzi',
+    key: "surf_lessons_included",
+    label: "Surf lessons included"
   },
   {
-    key: 'audiovisual_entertainment',
-    label: 'Audiovisual entertainment',
+    key: "surf_lessons_available",
+    label: "Surf lessons available"
   },
   {
-    key: 'barbeque',
-    label: 'Barbeque',
+    key: "surfboard_rental_available",
+    label: "Surfboard rental available"
   },
   {
-    key: 'own_food_allowed',
-    label: 'Own food allowed',
+    key: "wetsuit_rental_available",
+    label: "Wetsuit rental available"
+  },
+  {
+    key: "car_rental_available",
+    label: "Car rental available"
+  },
+  {
+    key: "scooter_rental_available",
+    label: "Scooter rental available"
+  },
+  {
+    key: "coworking_space",
+    label: "Coworking space"
+  },
+  {
+    key: "ergonomic_office_chairs",
+    label: "Ergonomic office chairs"
+  },
+  {
+    key: "private_desk(s)",
+    label: "Private desk(s)"
+  },
+  {
+    key: "recording_studio",
+    label: "Recording studio"
+  },
+  {
+    key: "close_to_supermarket",
+    label: "Close to supermarket"
+  },
+  {
+    key: "desk_supplies_(staples,_post-it_notes,_tape,_highlighter,_etc.)",
+    label: "Desk supplies (staples, post-it notes, tape, highlighter, etc.)"
+  },
+  {
+    key: "standing_desk",
+    label: "Standing desk"
+  },
+  {
+    key: "white_board",
+    label: "White board"
+  },
+  {
+    key: "projector",
+    label: "Projector"
+  },
+  {
+    key: "international_power_adapter(s)",
+    label: "International power adapter(s)"
+  },
+  {
+    key: "community_events",
+    label: "Community events"
+  },
+  {
+    key: "community_workshops",
+    label: "Community workshops"
+  },
+  {
+    key: "(communal)_kitchen",
+    label: "(Communal) kitchen"
+  },
+  {
+    key: "community_meals",
+    label: "Community meals"
+  },
+  {
+    key: "community_activities_(e.g._weekend_adventures,_group_surfs,_beach_cleanups,_movie_nights)",
+    label: "Community activities (E.g. Weekend adventures, group surfs, beach cleanups, movie nights)"
+  },
+  {
+    key: "essentials_(towels,_bed_sheets,_soap,_and_toilet_paper)",
+    label: "Essentials (Towels, bed sheets, soap, and toilet paper)"
+  },
+  {
+    key: "air_conditioning",
+    label: "Air conditioning"
+  },
+  {
+    key: "dryer",
+    label: "Dryer"
+  },
+  {
+    key: "washer",
+    label: "Washer"
+  },
+  {
+    key: "free_parking",
+    label: "Free parking"
+  },
+  {
+    key: "locker",
+    label: "Locker"
+  },
+  {
+    key: "patio_or_balcony",
+    label: "Patio or balcony"
   },
 ];
+
 
 export const categories = [
   { key: 'coliving-accommodation', label: 'Coliving Accommodation' },
