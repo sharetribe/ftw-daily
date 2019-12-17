@@ -5,7 +5,7 @@ import { Form as FinalForm } from 'react-final-form';
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
-import { maxLength, required, composeValidators } from '../../util/validators';
+import { maxLength, required, wifiSpeedValid, composeValidators } from '../../util/validators';
 import { Form, Button, FieldTextInput } from '../../components';
 import CustomCategorySelectFieldMaybe from './CustomCategorySelectFieldMaybe';
 
@@ -45,6 +45,38 @@ const EditListingDescriptionFormComponent = props => (
         }
       );
 
+
+      const surfMessage = intl.formatMessage({
+        id: 'EditListingDescriptionForm.surf',
+      });
+      const surfPlaceholderMessage = intl.formatMessage({
+        id: 'EditListingDescriptionForm.surfPlaceholder',
+      });
+      const vibeMessage = intl.formatMessage({
+        id: 'EditListingDescriptionForm.vibe',
+      });
+      const vibePlaceholderMessage = intl.formatMessage({
+        id: 'EditListingDescriptionForm.vibePlaceholder',
+      });
+      const communityMessage = intl.formatMessage({
+        id: 'EditListingDescriptionForm.community',
+      });
+      const communityPlaceholderMessage = intl.formatMessage({
+        id: 'EditListingDescriptionForm.communityPlaceholder',
+      });
+      const wifiMessage = intl.formatMessage({
+        id: 'EditListingDescriptionForm.wifi',
+      });
+      const wifiPlaceholderMessage = intl.formatMessage({
+        id: 'EditListingDescriptionForm.wifiPlaceholder',
+      });
+      const wifiValidMessage = intl.formatMessage({
+        id: 'EditListingDescriptionForm.wifiValid',
+      });
+
+
+
+
       const descriptionMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.description',
       });
@@ -55,6 +87,7 @@ const EditListingDescriptionFormComponent = props => (
       const descriptionRequiredMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.descriptionRequired',
       });
+
 
       const { updateListingError, createListingDraftError, showListingsError } = fetchErrors || {};
       const errorMessageUpdateListing = updateListingError ? (
@@ -113,6 +146,43 @@ const EditListingDescriptionFormComponent = props => (
             label={descriptionMessage}
             placeholder={descriptionPlaceholderMessage}
             validate={composeValidators(required(descriptionRequiredMessage))}
+          />
+
+          <FieldTextInput
+            id="surf"
+            name="surf"
+            className={css.description}
+            type="textarea"
+            label={surfMessage}
+            placeholder={surfPlaceholderMessage}
+          />
+
+          <FieldTextInput
+            id="vibe"
+            name="vibe"
+            className={css.description}
+            type="textarea"
+            label={vibeMessage}
+            placeholder={vibePlaceholderMessage}
+          />
+
+          <FieldTextInput
+            id="community"
+            name="community"
+            className={css.description}
+            type="textarea"
+            label={communityMessage}
+            placeholder={communityPlaceholderMessage}
+          />
+
+          <FieldTextInput
+            id="wifi"
+            name="wifi"
+            className={css.description}
+            type="text"
+            label={wifiMessage}
+            placeholder={wifiPlaceholderMessage}
+            validate={composeValidators(wifiSpeedValid(wifiValidMessage))}
           />
 
           <Button

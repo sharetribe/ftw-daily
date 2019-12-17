@@ -119,6 +119,10 @@ const parseNum = str => {
   return Number.isNaN(num) ? null : num;
 };
 
+export const wifiSpeedValid = message => value => {
+  return value && isNaN(value) ? message : VALID;
+};
+
 export const ageAtLeast = (message, minYears) => value => {
   const { year, month, day } = value;
   const dayNum = parseNum(day);
