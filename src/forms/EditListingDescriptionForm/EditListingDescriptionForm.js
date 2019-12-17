@@ -44,8 +44,6 @@ const EditListingDescriptionFormComponent = props => (
           maxLength: TITLE_MAX_LENGTH,
         }
       );
-
-
       const surfMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.surf',
       });
@@ -73,10 +71,6 @@ const EditListingDescriptionFormComponent = props => (
       const wifiValidMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.wifiValid',
       });
-
-
-
-
       const descriptionMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.description',
       });

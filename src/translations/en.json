@@ -157,6 +157,19 @@
   "EditListingDescriptionForm.updateFailed": "Failed to update listing. Please try again.",
   "EditListingDescriptionPanel.createListingTitle": "Add your space",
   "EditListingDescriptionPanel.title": "Edit details of {listingTitle}",
+
+
+  "EditListingDescriptionForm.surf": "The surf",
+  "EditListingDescriptionForm.surfPlaceholder": "How is the surf?",
+  "EditListingDescriptionForm.vibe": "The vibe",
+  "EditListingDescriptionForm.vibePlaceholder": "How is the vibe?",
+  "EditListingDescriptionForm.community": "The community",
+  "EditListingDescriptionForm.communityPlaceholder": "How is the community?",
+  "EditListingDescriptionForm.wifi": "WiFi",
+  "EditListingDescriptionForm.wifiPlaceholder": "How is the internet connection?",
+  "EditListingDescriptionForm.wifiValid": "WiFi speed is usually measured in numbers. Try that :-)",
+
+
   "EditListingFeaturesForm.showListingFailed": "Fetching listing data failed",
   "EditListingFeaturesForm.updateFailed": "Failed to update listing. Please try again.",
   "EditListingFeaturesPanel.createListingTitle": "What amenities does your space have?",
