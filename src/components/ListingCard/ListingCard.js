@@ -100,6 +100,7 @@ export const ListingCardComponent = props => {
     'label',
     null
   );
+  
   const cardTitles = [title, cardBreed, cardGender].filter(i => typeof i === 'string').join(', ');
 
   return (

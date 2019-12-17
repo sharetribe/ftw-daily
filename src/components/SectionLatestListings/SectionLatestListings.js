@@ -6,9 +6,6 @@ import { ListingCard, NamedLink } from '../../components';
 import css from './SectionLatestListings.css';
 
 const LatestListing = ({ listings }) => {
-  const listignsInfoForLandingPage = listings.map(i =>
-    _.omit(i, 'attributes.publicData.gender', 'attributes.publicData.breed')
-  );
 
   return (
     <div>
@@ -16,7 +13,7 @@ const LatestListing = ({ listings }) => {
         <FormattedMessage id="SectionLatestListings.titleLineOne" />
       </div>
       <div className={css.listingCards}>
-        {listignsInfoForLandingPage.map(l => (
+        {listings.map(l => (
           <ListingCard className={css.listingCard} key={l.id.uuid} listing={l} />
         ))}
       </div>
