@@ -125,6 +125,14 @@ const TopbarDesktop = props => {
     </NamedLink>
   );
 
+  const partnersLink = (
+    <NamedLink name="PartnersPage" className={css.loginLink}>
+      <span className={css.partners}>
+        <FormattedMessage id="TopbarDesktop.partners" />
+      </span>
+    </NamedLink>
+  );
+
   return (
     <nav className={classes}>
       <NamedLink className={css.logoLink} name="LandingPage">
@@ -144,6 +152,8 @@ const TopbarDesktop = props => {
       {profileMenu}
       {signupLink}
       {loginLink}
+      <div className={css.divider} />
+      {partnersLink}
     </nav>
   );
 };

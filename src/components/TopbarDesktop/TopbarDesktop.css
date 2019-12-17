@@ -257,7 +257,8 @@
 }
 
 .signup,
-.login {
+.login,
+.partners {
   @apply --marketplaceH4FontStyles;
   @apply --TopbarDesktop_label;
 }
@@ -357,4 +358,12 @@
       background-color: var(--matterColorDark);
     }
   }
+}
+
+.divider {
+  border-left: 4px solid #ccc;
+  height: 50%;
+  opacity: 0.1;
+  align-self: center;
+  margin: 0 0.5em 0 0.5em;
 }

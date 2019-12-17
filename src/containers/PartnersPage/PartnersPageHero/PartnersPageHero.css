@@ -1,0 +1,147 @@
+@import '../../../marketplace.css';
+
+:root {
+  /*
+    These variables are available in global scope through ":root"
+    element (<html> tag). Variables with the same names are going to
+    overwrite each other if CSS Properties' (PostCSS plugin)
+    configuration "preserve: true" is used - meaning that variables
+    are left to CSS bundle. We are planning to enable it in the future
+    since browsers support CSS Properties already.
+ */
+
+  --SectionHero_desktopTitleMaxWidth: 100%;
+
+  --SectionHero_animation: {
+    animation-name: animationTitle;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    -webkit-animation-fill-mode: forwards;
+
+    visibility: hidden;
+    opacity: 1;
+    position: relative;
+  }
+}
+
+/* Animation for the hero elements */
+
+@keyframes animationTitle {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+    top: -20px;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+    top: 0;
+  }
+}
+
+.root {
+  /* @apply --backgroundImage; */
+  background: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  width: 95%;
+  margin: 2.5%;
+  height: 100%;
+
+  /* Text positioning is done with paddings */
+}
+
+.heroContent {
+  margin: 0 24px 0 24px;
+  background: white;
+  @media (--viewportMedium) {
+    margin: 0 7.5vw 0 7.5vw;
+  }
+
+  /* Special viewport for adjusting the heroContent's placement */
+
+  @media only screen and (min-width: 1025px) and (max-width: 1366px) {
+    padding: 0 36px 0 36px;
+  }
+
+  @media only screen and (min-width: 1367px) {
+    margin: 0 auto;
+    max-width: calc(1052px + 36px + 36px);
+    width: 100%;
+    padding: 0 36px 0 36px;
+  }
+}
+
+.heroMainTitle {
+  @apply --marketplaceHeroTitleFontStyles;
+  color: var(--marketplaceColor);
+  margin-top: 0;
+  @apply --SectionHero_animation;
+  animation-delay: 0.5s;
+
+  @media (--viewportMedium) {
+    max-width: var(--SectionHero_desktopTitleMaxWidth);
+  }
+}
+
+.heroSubTitle {
+  @apply --marketplaceBodyFontStyles;
+
+  color: var(--matterColor);
+  margin: 0 0 32px 0;
+
+  @apply --SectionHero_animation;
+  animation-delay: 0.65s;
+
+  @media (--viewportMedium) {
+    max-width: var(--SectionHero_desktopTitleMaxWidth);
+    margin: 0 0 63px 0;
+  }
+}
+@keyframes run {
+  0% {
+    background-position: 0;
+  }
+  100% {
+    background-position: -36000px;
+  }
+}
+
+.heroVideoContainer {
+  background: url('../../../assets/logo-animation.png') left top;
+  animation-name: run;
+  animation-duration: 4s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-timing-function: steps(120);
+  animation-fill-mode: forwards;
+
+  width: 300px;
+  height: 146px;
+  position: absolute;
+  right: 2.5%;
+  margin-top: -105px;
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
+}
+
+.heroButton {
+  @apply --marketplaceButtonStyles;
+  @apply --SectionHero_animation;
+
+  animation-delay: 0.8s;
+
+  @media (--viewportMedium) {
+    display: block;
+    width: 260px;
+  }
+}
+
+.heroLinksList {
+  list-style-type: initial;
+  color: var(--marketplaceColor);
+  list-style-position: inside;
+  margin-left: 5px;
+}
