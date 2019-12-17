@@ -49,11 +49,12 @@ const EditListingDescriptionPanel = props => {
           surf: publicData.surf,
           vibe: publicData.vibe,
           community: publicData.community,
-          wifi: publicData.wifi
+          wifi: publicData.wifi,
+          retreat: publicData.retreat
         }}
         saveActionMsg={submitButtonText}
         onSubmit={values => {
-          const { title, description, category, surf, vibe, community, wifi } = values;
+          const { title, description, category, surf, vibe, community, wifi, retreat } = values;
           const updateValues = {
             title: title.trim(),
             description,
@@ -62,7 +63,8 @@ const EditListingDescriptionPanel = props => {
               surf,
               vibe,
               community,
-              wifi
+              wifi,
+              retreat
             },
           };
 

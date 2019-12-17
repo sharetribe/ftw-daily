@@ -167,7 +167,15 @@
   "EditListingDescriptionForm.communityPlaceholder": "How is the community?",
   "EditListingDescriptionForm.wifi": "WiFi",
   "EditListingDescriptionForm.wifiPlaceholder": "How is the internet connection?",
-  "EditListingDescriptionForm.wifiValid": "WiFi speed is usually measured in numbers. Try that :-)",
+  "EditListingDescriptionForm.wifiInvalid": "WiFi speed is usually measured in numbers. Try that :-)",
+  "EditListingDescriptionForm.retreat": "Do you accept team retreats?",
+  "EditListingDescriptionForm.retreatCapacity": "Capacity",
+  "EditListingDescriptionForm.retreatCapacityPlaceholder": "How many people?",
+  "EditListingDescriptionForm.retreatCapacityInvalid": "Quantity should be stated in numbers",
+  "EditListingDescriptionForm.retreatDescription": "Description",
+  "EditListingDescriptionForm.retreatDescriptionPlaceholder": "What do you want people to know about the team retreats?",
+
+
 
 
   "EditListingFeaturesForm.showListingFailed": "Fetching listing data failed",

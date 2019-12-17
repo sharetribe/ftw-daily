@@ -40,17 +40,13 @@
   color: var(--failColor);
 }
 
-.title {
+.title, .category, .wifi, .retreat  {
   @apply --EditListingDescriptionForm_formMargins;
 }
 
-.description {
+.description, .surf, .vibe, .community {
   @apply --EditListingDescriptionForm_formMargins;
   flex-shrink: 0;
-}
-
-.category {
-  @apply --EditListingDescriptionForm_formMargins;
 }
 
 .submitButton {

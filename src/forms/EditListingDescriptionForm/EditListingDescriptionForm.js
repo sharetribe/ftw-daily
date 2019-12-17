@@ -5,8 +5,8 @@ import { Form as FinalForm } from 'react-final-form';
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
-import { maxLength, required, wifiSpeedValid, composeValidators } from '../../util/validators';
-import { Form, Button, FieldTextInput } from '../../components';
+import { maxLength, required, isValidNumber, composeValidators } from '../../util/validators';
+import { Form, Button, FieldTextInput, FieldCheckbox, FieldBoolean } from '../../components';
 import CustomCategorySelectFieldMaybe from './CustomCategorySelectFieldMaybe';
 
 import css from './EditListingDescriptionForm.css';
@@ -69,7 +69,25 @@ const EditListingDescriptionFormComponent = props => (
         id: 'EditListingDescriptionForm.wifiPlaceholder',
       });
       const wifiValidMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.wifiValid',
+        id: 'EditListingDescriptionForm.wifiInvalid',
+      });
+      const retreatMessage = intl.formatMessage({
+        id: 'EditListingDescriptionForm.retreat',
+      });
+      const retreatCapacityMessage = intl.formatMessage({
+        id: 'EditListingDescriptionForm.retreatCapacity',
+      });
+      const retreatCapacityPlaceholderMessage = intl.formatMessage({
+        id: 'EditListingDescriptionForm.retreatCapacityPlaceholder',
+      });
+      const retreatCapacityValidMessage = intl.formatMessage({
+        id: 'EditListingDescriptionForm.retreatCapacityInvalid',
+      });
+      const retreatDescriptionMessage = intl.formatMessage({
+        id: 'EditListingDescriptionForm.retreatDescription',
+      });
+      const retreatDescriptionPlaceholderMessage = intl.formatMessage({
+        id: 'EditListingDescriptionForm.retreatDescriptionPlaceholder',
       });
       const descriptionMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.description',
@@ -101,6 +119,31 @@ const EditListingDescriptionFormComponent = props => (
         <p className={css.error}>
           <FormattedMessage id="EditListingDescriptionForm.showListingFailed" />
         </p>
+      ) : null;
+
+      const showRetreatForm = fieldRenderProps.values.retreat && fieldRenderProps.values.retreat !== ''
+
+      const retreatShowFields = showRetreatForm ? (
+        <>
+          <FieldTextInput
+            id="retreatCapacity"
+            name="retreatCapacity"
+            className={css.description}
+            type="text"
+            label={retreatCapacityMessage}
+            placeholder={retreatCapacityPlaceholderMessage}
+            validate={composeValidators(isValidNumber(retreatCapacityValidMessage))}
+          />
+
+          <FieldTextInput
+            id="retreatDescription"
+            name="retreatDescription"
+            className={css.description}
+            type="textarea"
+            label={retreatDescriptionMessage}
+            placeholder={retreatDescriptionPlaceholderMessage}
+          />
+        </>
       ) : null;
 
       const classes = classNames(css.root, className);
@@ -145,7 +188,7 @@ const EditListingDescriptionFormComponent = props => (
           <FieldTextInput
             id="surf"
             name="surf"
-            className={css.description}
+            className={css.surf}
             type="textarea"
             label={surfMessage}
             placeholder={surfPlaceholderMessage}
@@ -154,7 +197,7 @@ const EditListingDescriptionFormComponent = props => (
           <FieldTextInput
             id="vibe"
             name="vibe"
-            className={css.description}
+            className={css.vibe}
             type="textarea"
             label={vibeMessage}
             placeholder={vibePlaceholderMessage}
@@ -163,7 +206,7 @@ const EditListingDescriptionFormComponent = props => (
           <FieldTextInput
             id="community"
             name="community"
-            className={css.description}
+            className={css.community}
             type="textarea"
             label={communityMessage}
             placeholder={communityPlaceholderMessage}
@@ -172,12 +215,22 @@ const EditListingDescriptionFormComponent = props => (
           <FieldTextInput
             id="wifi"
             name="wifi"
-            className={css.description}
+            className={css.wifi}
             type="text"
             label={wifiMessage}
             placeholder={wifiPlaceholderMessage}
-            validate={composeValidators(wifiSpeedValid(wifiValidMessage))}
+            validate={composeValidators(isValidNumber(wifiValidMessage))}
           />
+
+          <FieldBoolean
+            id="retreat"
+            name="retreat"
+            className={css.retreat}
+            label={retreatMessage}
+            placeholder="Choose yes/no"
+          />
+
+          {retreatShowFields}
 
           <Button
             className={css.submitButton}

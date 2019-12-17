@@ -119,7 +119,7 @@ const parseNum = str => {
   return Number.isNaN(num) ? null : num;
 };
 
-export const wifiSpeedValid = message => value => {
+export const isValidNumber = message => value => {
   return value && isNaN(value) ? message : VALID;
 };
 
