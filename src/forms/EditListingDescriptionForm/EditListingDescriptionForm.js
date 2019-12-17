@@ -6,7 +6,7 @@ import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import { maxLength, required, isValidNumber, composeValidators } from '../../util/validators';
-import { Form, Button, FieldTextInput, FieldCheckbox, FieldBoolean } from '../../components';
+import { Form, Button, FieldTextInput, FieldBoolean } from '../../components';
 import CustomCategorySelectFieldMaybe from './CustomCategorySelectFieldMaybe';
 
 import css from './EditListingDescriptionForm.css';

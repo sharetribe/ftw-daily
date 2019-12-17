@@ -15,7 +15,7 @@ import {
   EditListingFeaturesPanel,
   EditListingLocationPanel,
   EditListingPhotosPanel,
-  EditListingPoliciesPanel,
+  // EditListingPoliciesPanel,
   EditListingPricingPanel,
 } from '../../components';
 

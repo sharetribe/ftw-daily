@@ -378,6 +378,20 @@ export class ListingPageComponent extends Component {
         </span>
       ) : null;
 
+
+    const retreat =
+      publicData && publicData.retreat && publicData.retreat.accepted ? (
+        <>
+          <span className={css.tag}>Team retreat friendly</span>
+          <span className={css.tag}>{`Capacity: ${publicData.retreat.capacity}`}</span>
+        </>
+      ) : null;
+
+    const wifi =
+      publicData && publicData.wifi ? (
+        <span className={css.tag}>{publicData.wifi} Mbit</span>
+      ) : null;
+
     return (
       <Page
         title={schemaTitle}
@@ -425,6 +439,8 @@ export class ListingPageComponent extends Component {
                     hostLink={hostLink}
                     showContactUser={showContactUser}
                     onContactUser={this.onContactUser}
+                    retreat={retreat}
+                    wifi={wifi}
                   />
                   <SectionDescriptionMaybe description={description} />
                   <SectionFeaturesMaybe options={amenitiesConfig} publicData={publicData} />
