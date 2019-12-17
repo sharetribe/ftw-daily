@@ -121,13 +121,13 @@ const EditListingDescriptionFormComponent = props => (
         </p>
       ) : null;
 
-      const showRetreatForm = fieldRenderProps.values.retreat && fieldRenderProps.values.retreat !== ''
+      const showRetreatForm = fieldRenderProps.values.retreat && fieldRenderProps.values.retreat.accepted
 
       const retreatShowFields = showRetreatForm ? (
         <>
           <FieldTextInput
-            id="retreatCapacity"
-            name="retreatCapacity"
+            id="retreat.capacity"
+            name="retreat.capacity"
             className={css.description}
             type="text"
             label={retreatCapacityMessage}
@@ -136,8 +136,8 @@ const EditListingDescriptionFormComponent = props => (
           />
 
           <FieldTextInput
-            id="retreatDescription"
-            name="retreatDescription"
+            id="retreat.description"
+            name="retreat.description"
             className={css.description}
             type="textarea"
             label={retreatDescriptionMessage}
@@ -223,8 +223,8 @@ const EditListingDescriptionFormComponent = props => (
           />
 
           <FieldBoolean
-            id="retreat"
-            name="retreat"
+            id="retreat.accepted"
+            name="retreat.accepted"
             className={css.retreat}
             label={retreatMessage}
             placeholder="Choose yes/no"
