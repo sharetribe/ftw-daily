@@ -30,6 +30,8 @@ const defaultDirectives = {
     'stats.g.doubleclick.net',
     'sentry.io',
     '*.stripe.com',
+    '*.hotjar.com',
+    '*.hotjar.io'
   ],
   fontSrc: [self, data, 'assets-sharetribecom.sharetribe.com', 'fonts.gstatic.com', '*.hotjar.com'],
   frameSrc: [self, '*.stripe.com', '*.hotjar.com', '*.googletagmanager.com', 'www.googletagmanager.com',],
@@ -59,7 +61,8 @@ const defaultDirectives = {
 
     '*.stripe.com',
     '*.googletagmanager.com',
-    '*.hotjar.com'
+    '*.hotjar.com',
+    '*.hotjar.io'
   ],
   scriptSrc: [
     self,
@@ -73,7 +76,7 @@ const defaultDirectives = {
     '*.sleeknote.com',
     '*.hotjar.com',
     '*.googletagmanager.com',
-    '*.hotjar.com'
+    '*.hotjar.io'
   ],
   styleSrc: [self, unsafeInline, 'fonts.googleapis.com', 'api.mapbox.com'],
 };
