@@ -24,7 +24,6 @@ const defaultDirectives = {
     '*.tiles.mapbox.com',
     'api.mapbox.com',
     'events.mapbox.com',
-    '*.hotjar.com',
 
     // Google Analytics
     'www.google-analytics.com',
@@ -59,7 +58,8 @@ const defaultDirectives = {
     'stats.g.doubleclick.net',
 
     '*.stripe.com',
-    '*.googletagmanager.com'
+    '*.googletagmanager.com',
+    '*.hotjar.com'
   ],
   scriptSrc: [
     self,
@@ -72,7 +72,8 @@ const defaultDirectives = {
     'js.stripe.com',
     '*.sleeknote.com',
     '*.hotjar.com',
-    '*.googletagmanager.com'
+    '*.googletagmanager.com',
+    '*.hotjar.com'
   ],
   styleSrc: [self, unsafeInline, 'fonts.googleapis.com', 'api.mapbox.com'],
 };
