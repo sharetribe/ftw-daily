@@ -19,7 +19,9 @@ import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck
 import {
   stripeAccountClearError,
   createStripeAccount,
+  getStripeConnectAccountLink,
 } from '../../ducks/stripeConnectAccount.duck';
+
 import { EditListingWizard, NamedRedirect, Page } from '../../components';
 import { TopbarContainer } from '../../containers';
 
@@ -36,9 +38,17 @@ import {
   removeListingImage,
   loadData,
   clearUpdatedTab,
+  savePayoutDetails,
 } from './EditListingPage.duck';
 
 import css from './EditListingPage.css';
+
+const STRIPE_ONBOARDING_RETURN_URL_SUCCESS = 'success';
+const STRIPE_ONBOARDING_RETURN_URL_FAILURE = 'failure';
+const STRIPE_ONBOARDING_RETURN_URL_TYPES = [
+  STRIPE_ONBOARDING_RETURN_URL_SUCCESS,
+  STRIPE_ONBOARDING_RETURN_URL_FAILURE,
+];
 
 const { UUID } = sdkTypes;
 
@@ -61,26 +71,32 @@ export const EditListingPageComponent = props => {
     onImageUpload,
     onRemoveListingImage,
     onManageDisableScrolling,
-    onPayoutDetailsSubmit,
+    onPayoutDetailsFormSubmit,
     onPayoutDetailsFormChange,
+    onGetStripeConnectAccountLink,
     onUpdateImageOrder,
     onChange,
     page,
     params,
     scrollingDisabled,
+    stripeAccountFetched,
+    stripeAccount,
   } = props;
 
-  const { id, type } = params;
+  const { id, type, returnURLType } = params;
   const isNewURI = type === LISTING_PAGE_PARAM_TYPE_NEW;
   const isDraftURI = type === LISTING_PAGE_PARAM_TYPE_DRAFT;
+  const isNewListingFlow = isNewURI || isDraftURI;
 
   const listingId = page.submittedListingId || (id ? new UUID(id) : null);
   const currentListing = ensureOwnListing(getOwnListing(listingId));
   const { state: currentListingState } = currentListing.attributes;
 
   const isPastDraft = currentListingState && currentListingState !== LISTING_STATE_DRAFT;
-  const shouldRedirect = (isNewURI || isDraftURI) && listingId && isPastDraft;
-  const showForm = isNewURI || currentListing.id;
+  const shouldRedirect = isNewListingFlow && listingId && isPastDraft;
+
+  const hasStripeOnboardingDataIfNeeded = returnURLType ? !!(currentUser && currentUser.id) : true;
+  const showForm = hasStripeOnboardingDataIfNeeded && (isNewURI || currentListing.id);
 
   if (shouldRedirect) {
     const isPendingApproval =
@@ -124,6 +140,7 @@ export const EditListingPageComponent = props => {
       uploadImageError,
       createStripeAccountError,
     };
+    // TODO: is this dead code? (shouldRedirect is checked before)
     const newListingPublished =
       isDraftURI && currentListing && currentListingState !== LISTING_STATE_DRAFT;
 
@@ -144,10 +161,9 @@ export const EditListingPageComponent = props => {
       return !removedImageIds.includes(img.id);
     });
 
-    const title =
-      isNewURI || isDraftURI
-        ? intl.formatMessage({ id: 'EditListingPage.titleCreateListing' })
-        : intl.formatMessage({ id: 'EditListingPage.titleEditListing' });
+    const title = isNewListingFlow
+      ? intl.formatMessage({ id: 'EditListingPage.titleCreateListing' })
+      : intl.formatMessage({ id: 'EditListingPage.titleEditListing' });
 
     return (
       <Page title={title} scrollingDisabled={scrollingDisabled}>
@@ -179,15 +195,21 @@ export const EditListingPageComponent = props => {
           onCreateListingDraft={onCreateListingDraft}
           onPublishListingDraft={onPublishListingDraft}
           onPayoutDetailsFormChange={onPayoutDetailsFormChange}
-          onPayoutDetailsSubmit={onPayoutDetailsSubmit}
+          onPayoutDetailsSubmit={onPayoutDetailsFormSubmit}
+          onGetStripeConnectAccountLink={onGetStripeConnectAccountLink}
           onImageUpload={onImageUpload}
           onUpdateImageOrder={onUpdateImageOrder}
           onRemoveImage={onRemoveListingImage}
           onChange={onChange}
           currentUser={currentUser}
           onManageDisableScrolling={onManageDisableScrolling}
+          stripeOnboardingReturnURL={params.returnURLType}
           updatedTab={page.updatedTab}
           updateInProgress={page.updateInProgress || page.createListingDraftInProgress}
+          payoutDetailsSaveInProgress={page.payoutDetailsSaveInProgress}
+          payoutDetailsSaved={page.payoutDetailsSaved}
+          stripeAccountFetched={stripeAccountFetched}
+          stripeAccount={stripeAccount}
         />
       </Page>
     );
@@ -236,6 +258,7 @@ EditListingPageComponent.propTypes = {
     slug: string.isRequired,
     type: oneOf(LISTING_PAGE_PARAM_TYPES).isRequired,
     tab: string.isRequired,
+    returnURLType: oneOf(STRIPE_ONBOARDING_RETURN_URL_TYPES),
   }).isRequired,
   scrollingDisabled: bool.isRequired,
 
@@ -250,7 +273,16 @@ EditListingPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const page = state.EditListingPage;
-  const { createStripeAccountInProgress, createStripeAccountError } = state.stripe;
+  const {
+    getAccountLinkInProgress,
+    createStripeAccountInProgress,
+    createStripeAccountError,
+    updateStripeAccountError,
+    fetchStripeAccountError,
+    stripeAccount,
+    stripeAccountFetched,
+  } = state.stripeConnectAccount;
+
   const { currentUser } = state.user;
 
   const fetchInProgress = createStripeAccountInProgress;
@@ -261,7 +293,12 @@ const mapStateToProps = state => {
     return listings.length === 1 ? listings[0] : null;
   };
   return {
+    getAccountLinkInProgress,
     createStripeAccountError,
+    updateStripeAccountError,
+    fetchStripeAccountError,
+    stripeAccount,
+    stripeAccountFetched,
     currentUser,
     fetchInProgress,
     getOwnListing,
@@ -283,6 +320,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
   onPayoutDetailsFormChange: () => dispatch(stripeAccountClearError()),
   onPayoutDetailsSubmit: values => dispatch(createStripeAccount(values)),
+  onPayoutDetailsFormSubmit: (values, isUpdateCall) =>
+    dispatch(savePayoutDetails(values, isUpdateCall)),
+  onGetStripeConnectAccountLink: params => dispatch(getStripeConnectAccountLink(params)),
   onUpdateImageOrder: imageOrder => dispatch(updateImageOrder(imageOrder)),
   onRemoveListingImage: imageId => dispatch(removeListingImage(imageId)),
   onChange: () => dispatch(clearUpdatedTab()),
