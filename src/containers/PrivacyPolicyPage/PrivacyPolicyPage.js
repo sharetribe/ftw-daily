@@ -55,7 +55,7 @@ const PrivacyPolicyPageComponent = props => {
         <LayoutWrapperMain>
           <div className={css.content}>
             <h1 className={css.heading}>
-              <FormattedMessage id="PrivacyPolicyPage.heading" />
+              Öogo’s Privacy and Cookies Policy
             </h1>
             <PrivacyPolicy />
           </div>
