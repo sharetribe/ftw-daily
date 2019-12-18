@@ -38,6 +38,9 @@ import {
   LayoutWrapperFooter,
   Footer,
   BookingPanel,
+  IconLike,
+  IconNetwork,
+  IconPeople
 } from '../../components';
 import { TopbarContainer, NotFoundPage } from '../../containers';
 
@@ -385,14 +388,14 @@ export class ListingPageComponent extends Component {
     const retreat =
       publicData && publicData.retreat && publicData.retreat.accepted ? (
         <>
-          <span className={css.tag}>Team retreat friendly</span>
-          <span className={css.tag}>{`Capacity: ${publicData.retreat.capacity}`}</span>
+          <span className={css.tag}><IconLike />Team retreat friendly</span>
+          <span className={css.tag}><IconPeople />{`Capacity: ${publicData.retreat.capacity}`}</span>
         </>
       ) : null;
 
     const wifi =
       publicData && publicData.wifi ? (
-        <span className={css.tag}>{publicData.wifi} Mbit</span>
+        <span className={css.tag}><IconNetwork />{`${publicData.wifi} Mbit`}</span>
       ) : null;
 
     return (

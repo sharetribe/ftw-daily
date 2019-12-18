@@ -303,6 +303,13 @@
 
 .tags {
   display: flex;
+  margin-bottom: 33px;
+  padding: 0 24px;
+
+  @media (--viewportMedium) {
+    margin-bottom: 0;
+    padding: 0;
+  }
 
   & > *:not(:last-child) {
     margin-right: 8px;
@@ -311,6 +318,8 @@
 }
 
 .tag {
+  align-items: center;
+  display: flex;
   padding: 4px 10px 5px 10px;
   width: auto;
   height: 100%;
@@ -320,6 +329,10 @@
   font-weight: 800;
   @apply --marketplaceH5FontStyles;
   color: var(--matterColor);
+
+  & svg {
+    margin-right: 6px;
+  }
 }
 
 .desktopPriceContainer {
