@@ -57,6 +57,8 @@ import SectionFeaturesMaybe from './SectionFeaturesMaybe';
 import SectionReviews from './SectionReviews';
 import SectionHostMaybe from './SectionHostMaybe';
 import SectionMapMaybe from './SectionMapMaybe';
+import SectionRetreatMaybe from './SectionRetreatMaybe';
+
 import css from './ListingPage.css';
 
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
@@ -459,7 +461,6 @@ export class ListingPageComponent extends Component {
                     publicData={publicData}
                     listingId={currentListing.id}
                   />
-                  <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
                   <SectionHostMaybe
                     title={title}
                     listing={currentListing}
@@ -473,6 +474,8 @@ export class ListingPageComponent extends Component {
                     currentUser={currentUser}
                     onManageDisableScrolling={onManageDisableScrolling}
                   />
+                  <SectionRetreatMaybe publicData={publicData} />
+                  <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
                 </div>
                 <BookingPanel
                   className={css.bookingPanel}

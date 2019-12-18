@@ -454,7 +454,7 @@
   }
 }
 
-.sectionCommunity, .sectionVibe, .sectionSurf {
+.sectionCommunity, .sectionVibe, .sectionSurf, .sectionRetreat, .sectionHost {
   padding: 0 24px;
   margin-bottom: 35px;
 
@@ -464,7 +464,7 @@
   }
 }
 
-.communityTitle, .vibeTitle, .surfTitle {
+.communityTitle, .vibeTitle, .surfTitle, .retreatTitle {
   /* Font */
   @apply --marketplaceH3FontStyles;
   color: var(--matterColorAnti);
@@ -562,7 +562,7 @@
   }
 }
 
-.sectionHost {
+/*.sectionHost {
   position: relative;
   padding: 0 24px;
   margin-bottom: 5px;
@@ -573,7 +573,7 @@
   @media (--viewportLarge) {
     margin-bottom: 3px;
   }
-}
+}*/
 
 .yourHostHeading {
   @apply --marketplaceH3FontStyles;
