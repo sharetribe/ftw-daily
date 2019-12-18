@@ -46,6 +46,7 @@ import SectionImages from './SectionImages';
 import SectionAvatar from './SectionAvatar';
 import SectionHeading from './SectionHeading';
 import SectionDescriptionMaybe from './SectionDescriptionMaybe';
+import SectionVideoMaybe from './SectionVideoMaybe';
 import SectionFeaturesMaybe from './SectionFeaturesMaybe';
 import SectionReviews from './SectionReviews';
 import SectionHostMaybe from './SectionHostMaybe';
@@ -443,6 +444,7 @@ export class ListingPageComponent extends Component {
                     wifi={wifi}
                   />
                   <SectionDescriptionMaybe description={description} />
+                  <SectionVideoMaybe publicData={publicData} />
                   <SectionFeaturesMaybe options={amenitiesConfig} publicData={publicData} />
                   <SectionRulesMaybe publicData={publicData} />
                   <SectionMapMaybe
