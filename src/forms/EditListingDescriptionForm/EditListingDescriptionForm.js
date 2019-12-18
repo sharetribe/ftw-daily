@@ -243,6 +243,8 @@ const EditListingDescriptionFormComponent = props => (
             validate={composeValidators(isValidNumber(wifiValidMessage))}
           />
 
+          <h3 className={css.sectionTitle}>Retreats</h3>
+
           <FieldBoolean
             id="retreat.accepted"
             name="retreat.accepted"
