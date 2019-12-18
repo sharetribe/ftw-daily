@@ -4,10 +4,6 @@
 
 export const amenities = [
   {
-    key: "team_retreat_friendly",
-    label: "Team retreat friendly"
-  },
-  {
     key: "surfboard_included",
     label: "Surfboard included"
   },
