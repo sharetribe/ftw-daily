@@ -174,8 +174,9 @@
   "EditListingDescriptionForm.retreatCapacityInvalid": "Quantity should be stated in numbers",
   "EditListingDescriptionForm.retreatDescription": "Description",
   "EditListingDescriptionForm.retreatDescriptionPlaceholder": "What do you want people to know about the team retreats?",
-
-
+  "EditListingDescriptionForm.video": "Embed a video",
+  "EditListingDescriptionForm.videoPlaceholder": "Add a YouTube video link to embed",
+  "EditListingDescriptionForm.videoInvalid": "The URL is not valid",
 
 
   "EditListingFeaturesForm.showListingFailed": "Fetching listing data failed",

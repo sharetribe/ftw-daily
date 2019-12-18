@@ -40,7 +40,7 @@
   color: var(--failColor);
 }
 
-.title, .category, .wifi, .retreat  {
+.title, .category, .wifi, .retreat, .video  {
   @apply --EditListingDescriptionForm_formMargins;
 }
 
@@ -48,6 +48,17 @@
   @apply --EditListingDescriptionForm_formMargins;
   flex-shrink: 0;
 }
+
+.sectionTitle {
+  @apply --marketplaceH3FontStyles;
+  color: var(--matterColorAnti);
+
+  margin-bottom: 13px;
+  @media (--viewportMedium) {
+    margin-bottom: 20px;
+  }
+}
+
 
 .submitButton {
   margin-top: auto;

@@ -140,6 +140,19 @@ export const ageAtLeast = (message, minYears) => value => {
   return message;
 };
 
+export const validYouTubeURL = message => value => {
+  if (typeof value === 'undefined' || value === null) {
+    return message;
+  }
+
+  const regExp = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+  const match = value.match(regExp);
+
+  if (match) return VALID;
+
+  return message;
+};
+
 export const validBusinessURL = message => value => {
   if (typeof value === 'undefined' || value === null) {
     return message;

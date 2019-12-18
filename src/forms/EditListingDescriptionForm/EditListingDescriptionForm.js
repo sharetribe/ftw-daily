@@ -5,7 +5,7 @@ import { Form as FinalForm } from 'react-final-form';
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
-import { maxLength, required, isValidNumber, composeValidators } from '../../util/validators';
+import { maxLength, required, isValidNumber, validYouTubeURL, composeValidators } from '../../util/validators';
 import { Form, Button, FieldTextInput, FieldBoolean } from '../../components';
 import CustomCategorySelectFieldMaybe from './CustomCategorySelectFieldMaybe';
 
@@ -88,6 +88,15 @@ const EditListingDescriptionFormComponent = props => (
       });
       const retreatDescriptionPlaceholderMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.retreatDescriptionPlaceholder',
+      });
+      const videoMessage = intl.formatMessage({
+        id: 'EditListingDescriptionForm.video',
+      });
+      const videoPlaceholderMessage = intl.formatMessage({
+        id: 'EditListingDescriptionForm.videoPlaceholder',
+      });
+      const videoValidMessage = intl.formatMessage({
+        id: 'EditListingDescriptionForm.videoInvalid',
       });
       const descriptionMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.description',
@@ -175,6 +184,8 @@ const EditListingDescriptionFormComponent = props => (
             intl={intl}
           />
 
+          <h3 className={css.sectionTitle}>Description</h3>
+
           <FieldTextInput
             id="description"
             name="description"
@@ -183,6 +194,16 @@ const EditListingDescriptionFormComponent = props => (
             label={descriptionMessage}
             placeholder={descriptionPlaceholderMessage}
             validate={composeValidators(required(descriptionRequiredMessage))}
+          />
+
+          <FieldTextInput
+            id="video"
+            name="video"
+            className={css.video}
+            type="text"
+            label={videoMessage}
+            placeholder={videoPlaceholderMessage}
+            validate={composeValidators(validYouTubeURL(videoValidMessage))}
           />
 
           <FieldTextInput
