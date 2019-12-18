@@ -47,10 +47,12 @@ import SectionAvatar from './SectionAvatar';
 import SectionHeading from './SectionHeading';
 import SectionDescriptionMaybe from './SectionDescriptionMaybe';
 import SectionVideoMaybe from './SectionVideoMaybe';
+import SectionCommunityMaybe from './SectionCommunityMaybe';
+import SectionVibeMaybe from './SectionVibeMaybe';
+import SectionSurfMaybe from './SectionSurfMaybe';
 import SectionFeaturesMaybe from './SectionFeaturesMaybe';
 import SectionReviews from './SectionReviews';
 import SectionHostMaybe from './SectionHostMaybe';
-import SectionRulesMaybe from './SectionRulesMaybe';
 import SectionMapMaybe from './SectionMapMaybe';
 import css from './ListingPage.css';
 
@@ -446,7 +448,9 @@ export class ListingPageComponent extends Component {
                   <SectionDescriptionMaybe description={description} />
                   <SectionVideoMaybe publicData={publicData} />
                   <SectionFeaturesMaybe options={amenitiesConfig} publicData={publicData} />
-                  <SectionRulesMaybe publicData={publicData} />
+                  <SectionCommunityMaybe publicData={publicData} />
+                  <SectionVibeMaybe publicData={publicData} />
+                  <SectionSurfMaybe publicData={publicData} />
                   <SectionMapMaybe
                     geolocation={geolocation}
                     publicData={publicData}
