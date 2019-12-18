@@ -120,5 +120,5 @@
 }
 
 .locationName {
-  color: var(--marketplaceColor);
+  color: var(--marketplaceColorDark);
 }

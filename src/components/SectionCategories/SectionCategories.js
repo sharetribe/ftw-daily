@@ -8,11 +8,11 @@ import { NamedLink } from '..';
 
 import css from './SectionCategories.css';
 
-import skerriesImage from './images/location_skerries.jpg';
-import adaremanorImage from './images/location_adaremanor.jpg';
-import maynoothImage from './images/location_maynooth.jpg';
-import kinsaleImage from './images/location_kinsale.jpg';
-import fotaImage from './images/location_fota.jpg';
+import babysitterImage from './images/babysitters.jpg';
+import childminderImage from './images/childminders.jpg';
+import nannyImage from './images/nannies.jpg';
+import maternityNurseImage from './images/maternity-nurses.jpg';
+import vouchersImage from './images/vouchers.jpg';
 
 class LocationImage extends Component {
   render() {
@@ -31,13 +31,23 @@ const categoryLink = (name, image, searchQuery) => {
           <LazyImage src={image} alt={name} className={css.locationImage} />
         </div>
       </div>
-      <div className={css.linkText}>
-      <FormattedMessage
-          id="SectionCategories.listingsInCategory"
-          values={{ category: nameText }}
-        />
-      </div>
+      <div className={css.linkText}>{nameText}</div>
     </NamedLink>
+  );
+};
+
+const vouchersLink = () => {
+  return (
+    <a href="https://mailchi.mp/ff51d27655af/oogo-vouchers" className={css.location}>
+      <div className={css.imageWrapper}>
+        <div className={css.aspectWrapper}>
+          <LazyImage src={vouchersImage} alt={'Vouchers'} className={css.locationImage} />
+        </div>
+      </div>
+      <div className={css.linkText}>
+        <span className={css.locationName}>Vouchers</span>
+      </div>
+    </a>
   );
 };
 
@@ -52,29 +62,14 @@ const SectionCategories = props => {
         <FormattedMessage id="SectionCategories.title" />
       </div>
       <div className={css.locations}>
-        {categoryLink(
-          'Babysitters',
-          skerriesImage,
-          'pub_category=babysitter'
-        )}
-        {categoryLink(
-          'Childminders',
-          maynoothImage,
-          'pub_category=childminder'
-        )}
-        {categoryLink(
-          'Nannies',
-          adaremanorImage,
-          'pub_category=nanny'
-        )}
-        {categoryLink(
-          'Maternity Nurses',
-          fotaImage,
-          'pub_category=maternity_nurse'
-        )}
+        {categoryLink('Babysitters', babysitterImage, 'pub_category=babysitter')}
+        {categoryLink('Childminders', childminderImage, 'pub_category=childminder')}
+        {categoryLink('Nannies', nannyImage, 'pub_category=nanny')}
+        {categoryLink('Maternity Nurses', maternityNurseImage, 'pub_category=maternity_nurse')}
+        {vouchersLink()}
       </div>
       <div className={css.locationRequest}>
-        Don’t see your area?{' '}
+        Don’t see your area?
         <a className={css.locationRequestLink} href="/" title="Request your area" target="_blank">
           Request your location is added
         </a>
