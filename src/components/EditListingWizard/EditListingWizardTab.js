@@ -17,6 +17,7 @@ import {
   EditListingPhotosPanel,
   // EditListingPoliciesPanel,
   EditListingPricingPanel,
+  EditListingProductsPanel
 } from '../../components';
 
 import css from './EditListingWizard.css';
@@ -27,6 +28,7 @@ export const FEATURES = 'features';
 // export const POLICY = 'policy';
 export const LOCATION = 'location';
 export const PRICING = 'pricing';
+export const PRODUCTS = 'products';
 export const PHOTOS = 'photos';
 
 // EditListingWizardTab component supports these tabs
@@ -36,6 +38,7 @@ export const SUPPORTED_TABS = [
   // POLICY,
   LOCATION,
   PRICING,
+  PRODUCTS,
   AVAILABILITY,
   PHOTOS,
 ];
@@ -203,6 +206,20 @@ const EditListingWizardTab = props => {
       return (
         <EditListingLocationPanel
           {...panelProps(LOCATION)}
+          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          onSubmit={values => {
+            onCompleteEditListingWizardTab(tab, values);
+          }}
+        />
+      );
+    }
+    case PRODUCTS: {
+      const submitButtonTranslationKey = isNewListingFlow
+        ? 'EditListingWizard.saveNewPricing'
+        : 'EditListingWizard.saveEditPricing';
+      return (
+        <EditListingProductsPanel
+          {...panelProps(PRODUCTS)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={values => {
             onCompleteEditListingWizardTab(tab, values);

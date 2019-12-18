@@ -10,6 +10,7 @@ const SectionVideoMaybe = props => {
     <div className={css.sectionVideo}>
       <div className={css.iframeContainer}>
         <iframe
+          title="Description video"
           className={css.iframe}
           src={publicData.video}
           frameBorder="0"
