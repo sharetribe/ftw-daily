@@ -4,6 +4,8 @@ import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import { ListingCard, PaginationLinks } from '../../components';
 import css from './SearchResultsPanel.css';
+import LetUsKnow from './LetUsKnow';
+
 
 const SearchResultsPanel = props => {
   const { className, rootClassName, listings, pagination, search, setActiveListing } = props;
@@ -41,6 +43,7 @@ const SearchResultsPanel = props => {
             setActiveListing={setActiveListing}
           />
         ))}
+        <LetUsKnow />
         {props.children}
       </div>
       {paginationLinks}
