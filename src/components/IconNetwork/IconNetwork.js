@@ -3,8 +3,8 @@ import React from 'react';
 const IconNetwork= props => {
   return (
   <svg width="15px" height="11px" viewBox="0 0 15 11" version="1.1" xmlns="http://www.w3.org/2000/svg">
-    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-      <g id="Listing/Info" transform="translate(-10.000000, -261.000000)" fill="#000000" fill-rule="nonzero">
+    <g id="Symbols" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+      <g id="Listing/Info" transform="translate(-10.000000, -261.000000)" fill="#000000" fillRule="nonzero">
         <g id="Group-4" transform="translate(0.000000, 250.000000)">
           <g id="Group-5">
             <g id="Group-6">

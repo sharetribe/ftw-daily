@@ -3,8 +3,8 @@ import React from 'react';
 const IconLike = props => {
   return (
     <svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg">
-      <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Listing/Info" transform="translate(-130.000000, -258.000000)" fill="#000000" fill-rule="nonzero">
+      <g id="Symbols" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+        <g id="Listing/Info" transform="translate(-130.000000, -258.000000)" fill="#000000" fillRule="nonzero">
           <g id="Group-4-Copy" transform="translate(118.000000, 250.000000)">
             <g id="Group-5">
               <g id="Group-3">
