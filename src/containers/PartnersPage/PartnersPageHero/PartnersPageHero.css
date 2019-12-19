@@ -140,8 +140,10 @@
 }
 
 .heroLinksList {
-  list-style-type: initial;
   color: var(--marketplaceColor);
   list-style-position: inside;
   margin-left: 5px;
+}
+.heroLinksList li {
+  margin-bottom: 10px;
 }

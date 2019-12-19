@@ -41,12 +41,12 @@ const SectionHero = props => {
           <h1><FormattedMessage id="PartnersPageHero.becomeAPartner" /></h1>
           <ul className={css.heroLinksList}>
             <li>
-              <a>
+              <a className={css.heroButton}>
                 <FormattedMessage id="PartnersPageHero.hospitalityPartner" />
               </a>
             </li>
             <li>
-              <a>
+              <a className={css.heroButton}>
                 <FormattedMessage id="PartnersPageHero.corporatePartner" />
               </a>
             </li>
@@ -56,7 +56,7 @@ const SectionHero = props => {
           </h1>
           <ul className={css.heroLinksList}>
             <li>
-              <NamedLink name="LoginPage" className={css.loginLink}>
+              <NamedLink name="LoginPage" className={css.heroButton}>
                 <FormattedMessage id="PartnersPageHero.login" />
               </NamedLink>
             </li>
