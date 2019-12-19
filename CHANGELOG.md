@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] Add missing props to examples related to EditListingWizard
+  [#1247](https://github.com/sharetribe/ftw-daily/pull/1247)
 - [fix] Add missing props to tests related to EditListingWizard
   [#1246](https://github.com/sharetribe/ftw-daily/pull/1246)
 - [fix] Update links to API Reference docs.
