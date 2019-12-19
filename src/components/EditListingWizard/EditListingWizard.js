@@ -99,7 +99,7 @@ const tabCompleted = (tab, listing) => {
     // case PRICING:
     //   return !!price;
     case PRODUCTS:
-      return publicData.products && publicData.products.length && publicData.products[0].price;
+      return publicData.products && publicData.products.length;
     case AVAILABILITY:
       return !!availabilityPlan;
     case PHOTOS:

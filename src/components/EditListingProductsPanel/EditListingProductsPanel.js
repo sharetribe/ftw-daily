@@ -44,7 +44,16 @@ const EditListingProductsPanel = props => {
       <EditListingProductsForm
         className={css.form}
         initialValues={{ products }}
-        onSubmit={onSubmit}
+        onSubmit={values => {
+          onSubmit({
+            publicData: {
+              products: values.products.map(p => {
+                p.price = { amount: p.price.amount, currency: p.price.currency }
+                return p
+              })
+            }
+          });
+        }}
         onChange={onChange}
         saveActionMsg={submitButtonText}
         updated={panelUpdated}

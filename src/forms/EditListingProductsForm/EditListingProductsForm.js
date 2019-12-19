@@ -30,8 +30,6 @@ export const EditListingProductsFormComponent = props => (
         values
       } = fieldRenderProps;
 
-      console.log(fieldRenderProps);
-
       const { push } = form && form.mutators ? form.mutators : {};
       const submitReady = updated && pristine;
       const submitInProgress = updateInProgress;

@@ -45,7 +45,6 @@ const EditListingProductsProduct = props => {
     ? composeValidators(priceRequired, minPriceRequired)
     : priceRequired;
 
-
   return (
     <div className={css.sectionContainer}>
       <h3 className={css.subTitle}>{productTitle}</h3>
@@ -60,6 +59,7 @@ const EditListingProductsProduct = props => {
           validate={required(intl.formatMessage({ id: "EditListingProductsForm.additionalProductTypeInvalid" }))}
         />
       </div>
+
       <div className={css.formRow}>
         <FieldTextInput
           id={`${fieldId}.description`}
@@ -70,6 +70,7 @@ const EditListingProductsProduct = props => {
           placeholder={intl.formatMessage({ id: "EditListingProductsForm.additionalProductDescriptionPlaceholder" })}
         />
       </div>
+
       <div className={css.formRow}>
         <FieldCurrencyInput
           id={`${fieldId}.price`}

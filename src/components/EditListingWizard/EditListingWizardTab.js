@@ -215,8 +215,8 @@ const EditListingWizardTab = props => {
     }
     case PRODUCTS: {
       const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditListingWizard.saveNewPricing'
-        : 'EditListingWizard.saveEditPricing';
+        ? 'EditListingWizard.saveNewProducts'
+        : 'EditListingWizard.saveEditProducts';
       return (
         <EditListingProductsPanel
           {...panelProps(PRODUCTS)}
