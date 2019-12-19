@@ -15,7 +15,6 @@ const EditListingProductsProduct = props => {
   const {
     intl,
     disabled,
-    values,
     fieldId,
     sectionTitle
   } = props;
@@ -89,16 +88,14 @@ const EditListingProductsProduct = props => {
 EditListingProductsProduct.defaultProps = {
   disabled: false,
   fieldId: null,
-  sectionTitle: null,
-  values: null,
+  sectionTitle: null
 };
 
 EditListingProductsProduct.propTypes = {
   disabled: bool,
   fieldId: string,
   intl: intlShape.isRequired,
-  sectionTitle: node,
-  values: object,
+  sectionTitle: node
 };
 
 export default EditListingProductsProduct;
