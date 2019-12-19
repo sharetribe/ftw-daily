@@ -15,6 +15,8 @@ describe('EditListingPricingForm', () => {
         saveActionMsg="Save price"
         updated={false}
         updateInProgress={false}
+        disabled={false}
+        ready={false}
       />
     );
     expect(tree).toMatchSnapshot();
