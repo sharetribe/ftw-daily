@@ -1,9 +1,4 @@
 @import '../../marketplace.css';
-
-.root {
-  margin-top: 48px;
-}
-
 .disabled {
   opacity: 0.5;
 }
