@@ -81,7 +81,7 @@ const tabCompleted = (tab, listing) => {
     availabilityPlan,
     description,
     geolocation,
-    price,
+    // price,
     title,
     publicData,
   } = listing.attributes;

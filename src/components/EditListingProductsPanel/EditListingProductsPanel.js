@@ -37,7 +37,6 @@ const EditListingProductsPanel = props => {
   );
 
   const products = publicData && publicData.products;
-  const initialValues = { products };
 
   return (
     <div className={classes}>

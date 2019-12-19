@@ -178,8 +178,9 @@
   "EditListingDescriptionForm.videoPlaceholder": "Add a YouTube video link to embed",
   "EditListingDescriptionForm.videoInvalid": "The URL is not valid. Make sure it contains: /embed. ex: https://www.youtube.com/embed/kfprl2r85LM",
 
-
-
+  "EditListingProductsForm.additionalProductLink": "Add another product",
+  "EditListingProductsForm.additionalProductRemove": "Remove product",
+  "EditListingProductsForm.additionalProductTitle": "Product",
 
   "EditListingFeaturesForm.showListingFailed": "Fetching listing data failed",
   "EditListingFeaturesForm.updateFailed": "Failed to update listing. Please try again.",
