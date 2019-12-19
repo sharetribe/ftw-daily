@@ -4,14 +4,10 @@ import classNames from 'classnames';
 import { FormattedMessage } from '../../util/reactIntl';
 import { LISTING_STATE_DRAFT } from '../../util/types';
 import { ListingLink } from '../../components';
-import { EditListingPricingForm } from '../../forms';
+import { EditListingProductsForm } from '../../forms';
 import { ensureOwnListing } from '../../util/data';
-import { types as sdkTypes } from '../../util/sdkLoader';
-import config from '../../config';
 
 import css from './EditListingProductsPanel.css';
-
-const { Money } = sdkTypes;
 
 const EditListingProductsPanel = props => {
   const {
@@ -28,40 +24,34 @@ const EditListingProductsPanel = props => {
 
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
-  const { price } = currentListing.attributes;
+  const { publicData } = currentListing.attributes;
 
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
     <FormattedMessage
-      id="EditListingPricingPanel.title"
+      id="EditListingProductsPanel.title"
       values={{ listingTitle: <ListingLink listing={listing} /> }}
     />
   ) : (
-    <FormattedMessage id="EditListingPricingPanel.createListingTitle" />
+    <FormattedMessage id="EditListingProductsPanel.createListingTitle" />
   );
 
-  const priceCurrencyValid = price instanceof Money ? price.currency === config.currency : true;
-  const form = priceCurrencyValid ? (
-    <EditListingPricingForm
-      className={css.form}
-      initialValues={{ price }}
-      onSubmit={onSubmit}
-      onChange={onChange}
-      saveActionMsg={submitButtonText}
-      updated={panelUpdated}
-      updateInProgress={updateInProgress}
-      fetchErrors={errors}
-    />
-  ) : (
-    <div className={css.priceCurrencyInvalid}>
-      <FormattedMessage id="EditListingPricingPanel.listingPriceCurrencyInvalid" />
-    </div>
-  );
+  const products = publicData && publicData.products;
+  const initialValues = { products };
 
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
-      {form}
+      <EditListingProductsForm
+        className={css.form}
+        initialValues={{ products }}
+        onSubmit={onSubmit}
+        onChange={onChange}
+        saveActionMsg={submitButtonText}
+        updated={panelUpdated}
+        updateInProgress={updateInProgress}
+        fetchErrors={errors}
+      />
     </div>
   );
 };

@@ -232,6 +232,12 @@
   "EditListingPricingPanel.createListingTitle": "How much does it cost?",
   "EditListingPricingPanel.listingPriceCurrencyInvalid": "Listing currency is different from the marketplace currency. You cannot edit the price.",
   "EditListingPricingPanel.title": "Edit the pricing of {listingTitle}",
+
+
+  "EditListingProductsPanel.createListingTitle": "Tell us about your products",
+  "EditListingProductsPanel.title": "Edit the product",
+
+
   "EditListingWizard.saveEditDescription": "Save description",
   "EditListingWizard.saveEditFeatures": "Save amenities",
   "EditListingWizard.saveEditLocation": "Save location",
