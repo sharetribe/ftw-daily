@@ -3,10 +3,9 @@ import { arrayOf, bool, func, string } from 'prop-types';
 import { compose } from 'redux';
 import { injectIntl, intlShape } from '../../util/reactIntl';
 import classNames from 'classnames';
-import config from '../../config';
 import { propTypes } from '../../util/types';
-import { formatMoney } from '../../util/currency';
 import { ensureListing } from '../../util/data';
+import { priceRangeData, priceData } from '../../util/pricing';
 import { ResponsiveImage } from '../../components';
 
 import css from './SearchMapInfoCard.css';
@@ -15,9 +14,15 @@ import css from './SearchMapInfoCard.css';
 const ListingCard = props => {
   const { className, clickHandler, intl, isInCarousel, listing, urlToListing } = props;
 
-  const { title, price } = listing.attributes;
-  const formattedPrice =
-    price && price.currency === config.currency ? formatMoney(intl, price) : price.currency;
+  const { title, price, publicData = {} } = listing.attributes;
+
+  // Use product prices if available and fallback to price
+  const { formattedPrice } =
+    publicData.products && publicData.products.length ?
+    priceRangeData(publicData.products, intl) :
+    priceData(price, intl);
+
+
   const firstImage = listing.images && listing.images.length > 0 ? listing.images[0] : null;
 
   // listing card anchor needs sometimes inherited border radius.

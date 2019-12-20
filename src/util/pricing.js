@@ -1,15 +1,18 @@
-import { types as sdkTypes } from './sdkLoader';
 import config from '../config';
+import { formatMoney } from './currency';
 
-import {
-  // formatCurrencyMajorUnit
-} from './currency';
-
-const {
-  UUID,
-  // Money,
-  // BigDecimal
-} = sdkTypes;
+export const priceData = (price, intl) => {
+  if (price && price.currency === config.currency) {
+    const formattedPrice = formatMoney(intl, price);
+    return { formattedPrice, priceTitle: formattedPrice };
+  } else if (price) {
+    return {
+      formattedPrice: `(${price.currency})`,
+      priceTitle: `Unsupported currency (${price.currency})`,
+    };
+  }
+  return {};
+};
 
 export const priceRangeData = (products, intl) => {
   if (!products || !products.length) return {}

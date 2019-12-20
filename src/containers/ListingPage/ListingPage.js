@@ -8,7 +8,7 @@ import { withRouter } from 'react-router-dom';
 import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
 import { LISTING_STATE_PENDING_APPROVAL, LISTING_STATE_CLOSED, propTypes } from '../../util/types';
-import { priceRangeData } from '../../util/priceRange';
+import { priceRangeData, priceData } from '../../util/pricing';
 
 import { types as sdkTypes } from '../../util/sdkLoader';
 import {
@@ -18,7 +18,6 @@ import {
   LISTING_PAGE_PARAM_TYPE_EDIT,
   createSlug,
 } from '../../util/urlHelpers';
-import { formatMoney } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
 import {
   ensureListing,
@@ -66,20 +65,6 @@ import css from './ListingPage.css';
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
 
 const { UUID } = sdkTypes;
-
-
-const priceData = (price, intl) => {
-  if (price && price.currency === config.currency) {
-    const formattedPrice = formatMoney(intl, price);
-    return { formattedPrice, priceTitle: formattedPrice };
-  } else if (price) {
-    return {
-      formattedPrice: `(${price.currency})`,
-      priceTitle: `Unsupported currency (${price.currency})`,
-    };
-  }
-  return {};
-};
 
 const categoryLabel = (categories, key) => {
   const cat = categories.find(c => c.key === key);
