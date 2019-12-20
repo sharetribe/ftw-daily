@@ -22,7 +22,6 @@ const ListingCard = props => {
     priceRangeData(publicData.products, intl) :
     priceData(price, intl);
 
-
   const firstImage = listing.images && listing.images.length > 0 ? listing.images[0] : null;
 
   // listing card anchor needs sometimes inherited border radius.

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { string, bool, arrayOf } from 'prop-types';
+import { string, object, bool, arrayOf } from 'prop-types';
 import { compose } from 'redux';
 import { Form as FinalForm } from 'react-final-form';
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
@@ -9,11 +9,13 @@ import { required, bookingDatesRequired, composeValidators } from '../../util/va
 import { START_DATE, END_DATE } from '../../util/dates';
 import { propTypes } from '../../util/types';
 import config from '../../config';
-import { Form, PrimaryButton, FieldDateRangeInput } from '../../components';
+import { Form, PrimaryButton, FieldDateRangeInput, FieldSelect } from '../../components';
 import EstimatedBreakdownMaybe from './EstimatedBreakdownMaybe';
+import { types as sdkTypes } from '../../util/sdkLoader';
 
 import css from './BookingDatesForm.css';
 
+const { Money } = sdkTypes;
 const identity = v => v;
 
 export class BookingDatesFormComponent extends Component {
@@ -48,33 +50,12 @@ export class BookingDatesFormComponent extends Component {
   }
 
   render() {
-    const { rootClassName, className, price: unitPrice, ...rest } = this.props;
+    const { rootClassName, className, ...rest } = this.props;
     const classes = classNames(rootClassName || css.root, className);
-
-    // console.log(this.props);
-    // if (!unitPrice) {
-    //   return (
-    //     <div className={classes}>
-    //       <p className={css.error}>
-    //         <FormattedMessage id="BookingDatesForm.listingPriceMissing" />
-    //       </p>
-    //     </div>
-    //   );
-    // }
-    // if (unitPrice.currency !== config.currency) {
-    //   return (
-    //     <div className={classes}>
-    //       <p className={css.error}>
-    //         <FormattedMessage id="BookingDatesForm.listingCurrencyInvalid" />
-    //       </p>
-    //     </div>
-    //   );
-    // }
 
     return (
       <FinalForm
         {...rest}
-        unitPrice={unitPrice}
         onSubmit={this.handleFormSubmit}
         render={fieldRenderProps => {
           const {
@@ -85,30 +66,24 @@ export class BookingDatesFormComponent extends Component {
             intl,
             isOwnListing,
             submitButtonWrapperClassName,
-            unitPrice,
             unitType,
+            listing,
             values,
             timeSlots,
             fetchTimeSlotsError,
           } = fieldRenderProps;
-          const { startDate, endDate } = values && values.bookingDates ? values.bookingDates : {};
 
-          const bookingStartLabel = intl.formatMessage({
-            id: 'BookingDatesForm.bookingStartTitle',
-          });
-          const bookingEndLabel = intl.formatMessage({ id: 'BookingDatesForm.bookingEndTitle' });
-          const requiredMessage = intl.formatMessage({ id: 'BookingDatesForm.requiredDate' });
-          const startDateErrorMessage = intl.formatMessage({
-            id: 'FieldDateRangeInput.invalidStartDate',
-          });
-          const endDateErrorMessage = intl.formatMessage({
-            id: 'FieldDateRangeInput.invalidEndDate',
-          });
-          const timeSlotsError = fetchTimeSlotsError ? (
-            <p className={css.timeSlotsError}>
-              <FormattedMessage id="BookingDatesForm.timeSlotsError" />
-            </p>
-          ) : null;
+          const { publicData = {} } = listing.attributes;
+
+          const productPrice = values && values.bookingProduct ?
+            publicData.products.find(p => p.id === values.bookingProduct).price :
+            undefined;
+
+          const unitPrice = productPrice ?
+            new Money(productPrice.amount, productPrice.currency) : 
+            listing.attributes.price
+
+          const { startDate, endDate } = values && values.bookingDates ? values.bookingDates : {};
 
           // This is the place to collect breakdown estimation data. See the
           // EstimatedBreakdownMaybe component to change the calculations
@@ -126,6 +101,10 @@ export class BookingDatesFormComponent extends Component {
                   quantity: 1,
                 }
               : null;
+
+
+          console.log('bookingData', bookingData);
+
           const bookingInfo = bookingData ? (
             <div className={css.priceBreakdownContainer}>
               <h3 className={css.priceBreakdownTitle}>
@@ -155,9 +134,57 @@ export class BookingDatesFormComponent extends Component {
             submitButtonWrapperClassName || css.submitButtonWrapper
           );
 
+          const bookingStartLabel = intl.formatMessage({
+            id: 'BookingDatesForm.bookingStartTitle',
+          });
+          const bookingEndLabel = intl.formatMessage({ id: 'BookingDatesForm.bookingEndTitle' });
+          const requiredMessage = intl.formatMessage({ id: 'BookingDatesForm.requiredDate' });
+          const startDateErrorMessage = intl.formatMessage({
+            id: 'FieldDateRangeInput.invalidStartDate',
+          });
+          const endDateErrorMessage = intl.formatMessage({
+            id: 'FieldDateRangeInput.invalidEndDate',
+          });
+          const timeSlotsError = fetchTimeSlotsError ? (
+            <p className={css.timeSlotsError}>
+              <FormattedMessage id="BookingDatesForm.timeSlotsError" />
+            </p>
+          ) : null;
+
+          const productRequired = intl.formatMessage({
+            id: 'BookingDatesForm.requiredDate',
+          });
+          const productPlaceholder = intl.formatMessage({
+            id: 'BookingDatesForm.productPlaceholder',
+          });
+          const productTitle = intl.formatMessage({
+            id: 'BookingDatesForm.productTitle',
+          });
+
+          const products = listing.attributes.publicData && listing.attributes.publicData.products;
+
           return (
             <Form onSubmit={handleSubmit} className={classes}>
-              {timeSlotsError}
+              { products && products.length ?
+                <FieldSelect
+                  className={css.bookingProduct}
+                  name="bookingProduct"
+                  id="bookingProduct"
+                  label={productTitle}
+                  validate={required(productRequired)}
+                >
+                  <option disabled value="">
+                    {productPlaceholder}
+                  </option>
+                  {products.map((p, i) => (
+                    <option key={`${p.type}-${p.i}`} value={p.id}>
+                      {p.type}
+                    </option>
+                  ))}
+                </FieldSelect> :
+                null
+              }
+
               <FieldDateRangeInput
                 className={css.bookingDates}
                 name="bookingDates"
@@ -178,6 +205,8 @@ export class BookingDatesFormComponent extends Component {
                   bookingDatesRequired(startDateErrorMessage, endDateErrorMessage)
                 )}
               />
+
+              {timeSlotsError}
               {bookingInfo}
               <div className={submitButtonClasses}>
                 <PrimaryButton type="submit">
@@ -205,7 +234,6 @@ BookingDatesFormComponent.defaultProps = {
   rootClassName: null,
   className: null,
   submitButtonWrapperClassName: null,
-  price: null,
   isOwnListing: false,
   startDatePlaceholder: null,
   endDatePlaceholder: null,
@@ -218,7 +246,7 @@ BookingDatesFormComponent.propTypes = {
   submitButtonWrapperClassName: string,
 
   unitType: propTypes.bookingUnitType.isRequired,
-  price: propTypes.money,
+  listing: object.isRequired,
   isOwnListing: bool,
   timeSlots: arrayOf(propTypes.timeSlot),
 

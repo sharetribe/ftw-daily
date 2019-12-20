@@ -71,6 +71,11 @@
   "BookingDatesForm.requiredDate": "Oops, make sure your date is correct!",
   "BookingDatesForm.timeSlotsError": "Loading listing availability failed. Please refresh the page.",
   "BookingDatesForm.youWontBeChargedInfo": "Coworksurf guarantee: No questions asked 48 hour refund.",
+
+  "BookingDatesForm.productTitle": "Product type",
+  "BookingDatesForm.productPlaceholder": "Choose a type…",
+
+
   "BookingDateRangeFilter.labelPlain": "Dates",
   "BookingDateRangeFilter.labelPopup": "Dates",
   "BookingDateRangeFilter.labelSelectedPlain": "{dates}",
