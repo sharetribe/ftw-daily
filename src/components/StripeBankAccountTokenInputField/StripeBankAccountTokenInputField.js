@@ -28,6 +28,7 @@ import css from './StripeBankAccountTokenInputField.css';
 // value and moves on to another input within this component.
 const BLUR_TIMEOUT = 100;
 const DEBOUNCE_WAIT_TIME = 1000;
+const MIN_INPUT_COUNT_FOR_TWO_COLUMNS = 6;
 
 class TokenInputFieldComponent extends Component {
   constructor(props) {
@@ -260,6 +261,10 @@ class TokenInputFieldComponent extends Component {
 
     const inputConfiguration = requiredInputs(country);
 
+    // E.g. Japan has 6 fields in the bank account details so we want to
+    // show the inputs in two columns on bigger screens
+    const showInColumns = inputConfiguration.length >= MIN_INPUT_COUNT_FOR_TWO_COLUMNS;
+
     return (
       <div className={classNames(rootClassName || css.root, className)}>
         {inputConfiguration.map(inputType => {
@@ -277,6 +282,7 @@ class TokenInputFieldComponent extends Component {
               isTouched={this.state[inputType].touched || formMeta.touched}
               showStripeError={showStripeError}
               inputError={this.state[inputType].error}
+              showInColumns={showInColumns}
             />
           );
         })}
