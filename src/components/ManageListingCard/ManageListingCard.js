@@ -23,6 +23,7 @@ import {
   createSlug,
 } from '../../util/urlHelpers';
 import { createResourceLocatorString } from '../../util/routes';
+import { priceRangeData, priceData } from '../../util/pricing';
 import config from '../../config';
 import {
   InlineTextButton,
@@ -42,25 +43,6 @@ import css from './ManageListingCard.css';
 // Menu content needs the same padding
 const MENU_CONTENT_OFFSET = -12;
 const MAX_LENGTH_FOR_WORDS_IN_TITLE = 7;
-
-const priceData = (price, intl) => {
-  if (price && price.currency === config.currency) {
-    const formattedPrice = formatMoney(intl, price);
-    return { formattedPrice, priceTitle: formattedPrice };
-  } else if (price) {
-    return {
-      formattedPrice: intl.formatMessage(
-        { id: 'ManageListingCard.unsupportedPrice' },
-        { currency: price.currency }
-      ),
-      priceTitle: intl.formatMessage(
-        { id: 'ManageListingCard.unsupportedPriceTitle' },
-        { currency: price.currency }
-      ),
-    };
-  }
-  return {};
-};
 
 const createListingURL = (routes, listing) => {
   const id = listing.id.uuid;
@@ -128,7 +110,7 @@ export const ManageListingCardComponent = props => {
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
   const id = currentListing.id.uuid;
-  const { title = '', price, state } = currentListing.attributes;
+  const { title = '', price, state, publicData = {} } = currentListing.attributes;
   const slug = createSlug(title);
   const isPendingApproval = state === LISTING_STATE_PENDING_APPROVAL;
   const isClosed = state === LISTING_STATE_CLOSED;
@@ -140,7 +122,11 @@ export const ManageListingCardComponent = props => {
     [css.menuItemDisabled]: !!actionsInProgressListingId,
   });
 
-  const { formattedPrice, priceTitle } = priceData(price, intl);
+  // Use product prices if available and fallback to price
+  const { formattedPrice, priceTitle } =
+    publicData.products && publicData.products.length ?
+    priceRangeData(publicData.products, intl) :
+    priceData(price, intl);
 
   const hasError = hasOpeningError || hasClosingError;
   const thisListingInProgress =
