@@ -7,8 +7,14 @@ export const priceData = (price, intl) => {
     return { formattedPrice, priceTitle: formattedPrice };
   } else if (price) {
     return {
-      formattedPrice: `(${price.currency})`,
-      priceTitle: `Unsupported currency (${price.currency})`,
+      formattedPrice: intl.formatMessage(
+        { id: 'ManageListingCard.unsupportedPrice' },
+        { currency: price.currency }
+      ),
+      priceTitle: intl.formatMessage(
+        { id: 'ManageListingCard.unsupportedPriceTitle' },
+        { currency: price.currency }
+      )
     };
   }
   return {};
@@ -21,8 +27,14 @@ export const priceRangeData = (products, intl) => {
     const amounts = [...products.map(p => {
       if (p.price.currency !== config.currency) throw {
         type: 'unsupportedCurrency',
-        formattedPrice: `(${p.price.currency})`,
-        priceTitle: `Unsupported currency (${p.price.currency})`,
+        formattedPrice: intl.formatMessage(
+          { id: 'ManageListingCard.unsupportedPrice' },
+          { currency: p.price.currency }
+        ),
+        priceTitle: intl.formatMessage(
+          { id: 'ManageListingCard.unsupportedPriceTitle' },
+          { currency: p.price.currency }
+        )
       };
 
       return p.price.amount;

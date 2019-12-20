@@ -372,13 +372,11 @@
   "ListingPage.closedListing": "This listing has been closed and can't be booked.",
   "ListingPage.contactUser": "Contact",
   "ListingPage.descriptionTitle": "About the space",
-
   "ListingPage.communityTitle": "The remote working community",
   "ListingPage.vibeTitle": "The coworking vibe",
   "ListingPage.surfTitle": "About the surf",
   "ListingPage.productsTitle": "Products",
   "ListingPage.retreatTitle": "Team retreat options",
-
   "ListingPage.editListing": "Edit listing",
   "ListingPage.editProfileLink": "Edit profile",
   "ListingPage.errorLoadingListingMessage": "Could not load listing. Please try again.",
