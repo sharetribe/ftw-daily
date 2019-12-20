@@ -29,7 +29,7 @@ import {
   isTransactionZeroPaymentError,
   transactionInitiateOrderStripeErrors,
 } from '../../util/errors';
-import { formatMoney } from '../../util/currency';
+import { priceRangeData, priceData } from '../../util/pricing';
 import { TRANSITION_ENQUIRE, txIsPaymentPending, txIsPaymentExpired } from '../../util/transaction';
 import {
   AvatarMedium,
@@ -719,8 +719,15 @@ export class CheckoutPageComponent extends Component {
       ? 'CheckoutPage.perDay'
       : 'CheckoutPage.perUnit';
 
-    const price = currentListing.attributes.price;
-    const formattedPrice = formatMoney(intl, price);
+    const { price, publicData = {} } = currentListing.attributes;
+
+    // Use product prices if available and fallback to price
+    const { formattedPrice } =
+      publicData.products && publicData.products.length ?
+      priceRangeData(publicData.products, intl) :
+      priceData(price, intl);
+
+
     const detailsSubTitle = `${formattedPrice} ${intl.formatMessage({ id: unitTranslationKey })}`;
 
     const showInitialMessageInput = !(
