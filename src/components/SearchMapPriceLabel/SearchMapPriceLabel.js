@@ -29,7 +29,7 @@ class SearchMapPriceLabel extends Component {
 
     // Create formatted price if currency is known or alternatively show just the unknown currency.
     const formattedPrice =
-      price && price.currency === config.currency ? formatMoney(intl, price) : price.currency;
+      price ? price.currency === config.currency ? formatMoney(intl, price) : price.currency : 'Unknown price';
 
     const classes = classNames(rootClassName || css.root, className);
     const priceLabelClasses = classNames(css.priceLabel, { [css.priceLabelActive]: isActive });
