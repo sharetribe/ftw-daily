@@ -10132,10 +10132,10 @@ shallowequal@1.1.0:
   resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-1.1.0.tgz#188d521de95b9087404fd4dcb68b13df0ae4e7f8"
   integrity sha512-y0m1JoUZSlPAjXVtPPW70aZWfIL/dSP7AFkRnniLCrK/8MDKog3TySTBmckD+RObVxH0v4Tox67+F14PdED2oQ==
 
-sharetribe-flex-sdk@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/sharetribe-flex-sdk/-/sharetribe-flex-sdk-1.5.0.tgz#a1bb9c603f8a52a1f53053cb610fdf15ff223288"
-  integrity sha512-l/3vX9GEz9Uz9z+9+WDHH6/O1GMSh8sa1kQpEHBjypx3kDjFT2a6SSxEzk3YQ/qIaUEHvGj9G+Xy3AszF6pCrA==
+sharetribe-flex-sdk@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/sharetribe-flex-sdk/-/sharetribe-flex-sdk-1.8.0.tgz#d7f24bf416f15c5f20d7b6830e0d6e5832082b43"
+  integrity sha512-600NLlvQamxQP8hKhyWlytl5cycoYxAMce1xXAFxTMAoNiOyLEh9K/6I4nrf9AowpDL+2IoPvWGZd9ftl4xeGQ==
   dependencies:
     axios "^0.19.0"
     js-cookie "^2.1.3"
