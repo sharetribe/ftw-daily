@@ -31,12 +31,8 @@ const EditListingProductsProduct = props => {
   const minPrice = new Money(config.listingMinimumPriceSubUnits, config.currency);
   const minPriceRequired = moneySubUnitAmountAtLeast(
     intl.formatMessage(
-      {
-        id: 'EditListingPricingForm.priceTooLow',
-      },
-      {
-        minPrice: formatMoney(intl, minPrice),
-      }
+      { id: 'EditListingPricingForm.priceTooLow' },
+      { minPrice: formatMoney(intl, minPrice) }
     ),
     config.listingMinimumPriceSubUnits
   );
