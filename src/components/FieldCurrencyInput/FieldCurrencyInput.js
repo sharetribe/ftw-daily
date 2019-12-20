@@ -53,7 +53,13 @@ class CurrencyInputComponent extends Component {
   constructor(props) {
     super(props);
     const { currencyConfig, defaultValue, input, intl } = props;
-    const initialValueIsMoney = input.value instanceof Money;
+    let initialValueIsMoney = input.value instanceof Money;
+
+    // Convert object to Money
+    if (!initialValueIsMoney && input.value.amount && input.value.currency) {
+      input.value = new Money(input.value.amount, input.value.currency)
+      initialValueIsMoney = true
+    }
 
     if (initialValueIsMoney && input.value.currency !== currencyConfig.currency) {
       const e = new Error('Value currency different from marketplace currency');
@@ -229,7 +235,7 @@ CurrencyInputComponent.propTypes = {
   defaultValue: number,
   intl: intlShape.isRequired,
   input: shape({
-    value: oneOfType([string, propTypes.money]),
+    value: oneOfType([string, propTypes.money, object]),
     onBlur: func,
     onChange: func.isRequired,
     onFocus: func,

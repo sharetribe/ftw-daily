@@ -48,7 +48,7 @@ const EditListingProductsPanel = props => {
           onSubmit({
             publicData: {
               products: values.products.map(p => {
-                p.price = { amount: p.price.amount, currency: p.price.currency }
+                if (p.price) p.price = { amount: p.price.amount, currency: p.price.currency }
                 return p
               })
             }
