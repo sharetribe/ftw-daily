@@ -16,7 +16,10 @@ import {
   LISTING_PAGE_PARAM_TYPE_EDIT,
   createSlug,
 } from '../../util/urlHelpers';
-import { formatMoney, formatCurrencyMajorUnit } from '../../util/currency';
+import {
+  formatMoney,
+  // formatCurrencyMajorUnit
+} from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
 import {
   ensureListing,
@@ -63,14 +66,17 @@ import css from './ListingPage.css';
 
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
 
-const { UUID, Money, BigDecimal } = sdkTypes;
+const {
+  UUID,
+  // Money,
+  // BigDecimal
+} = sdkTypes;
 
 const priceRangeData = (products, intl) => {
   if (!products || !products.length) return {}
 
   try {
     const amounts = [...products.map(p => {
-
       if (p.price.currency !== config.currency) throw {
         type: 'unsupportedCurrency',
         formattedPrice: `(${p.price.currency})`,

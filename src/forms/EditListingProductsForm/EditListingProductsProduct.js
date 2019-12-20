@@ -1,5 +1,5 @@
 import React from 'react';
-import { bool, node, object, string } from 'prop-types';
+import { bool, node, string } from 'prop-types';
 import { intlShape } from '../../util/reactIntl';
 import { composeValidators, moneySubUnitAmountAtLeast, required } from '../../util/validators';
 import { FieldTextInput, FieldCurrencyInput } from '../../components';
