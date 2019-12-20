@@ -10,10 +10,13 @@ import { richText } from '../../util/richText';
 import { createSlug } from '../../util/urlHelpers';
 import config from '../../config';
 import { NamedLink, ResponsiveImage } from '../../components';
+import { priceRangeData } from '../../util/priceRange';
 
 import css from './ListingCard.css';
 
 const MIN_LENGTH_FOR_LONG_WORDS = 10;
+
+
 
 const priceData = (price, intl) => {
   if (price && price.currency === config.currency) {
@@ -21,14 +24,8 @@ const priceData = (price, intl) => {
     return { formattedPrice, priceTitle: formattedPrice };
   } else if (price) {
     return {
-      formattedPrice: intl.formatMessage(
-        { id: 'ListingCard.unsupportedPrice' },
-        { currency: price.currency }
-      ),
-      priceTitle: intl.formatMessage(
-        { id: 'ListingCard.unsupportedPriceTitle' },
-        { currency: price.currency }
-      ),
+      formattedPrice: `(${price.currency})`,
+      priceTitle: `Unsupported currency (${price.currency})`,
     };
   }
   return {};
@@ -46,16 +43,18 @@ export const ListingCardComponent = props => {
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureListing(listing);
   const id = currentListing.id.uuid;
-  const { title = '', price } = currentListing.attributes;
+  const { title = '', price, publicData = {} } = currentListing.attributes;
   const slug = createSlug(title);
   const author = ensureUser(listing.author);
   const authorName = author.attributes.profile.displayName;
   const firstImage =
     currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
 
-console.log(currentListing);
-
-  const { formattedPrice, priceTitle } = priceData(price, intl);
+  // Use product prices if available and fallback to price
+  const { formattedPrice, priceTitle } =
+    publicData.products && publicData.products.length ?
+    priceRangeData(publicData.products, intl) :
+    priceData(price, intl);
 
   const unitType = config.bookingUnitType;
   const isNightly = unitType === LINE_ITEM_NIGHT;
