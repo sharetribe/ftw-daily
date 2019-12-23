@@ -102,7 +102,7 @@ export const ListingCardComponent = props => {
   );
   
   const cardTitles = [title, cardBreed, cardGender].filter(i => typeof i === 'string').join(', ');
-
+console.log({listing})
   return (
     <NamedLink className={classes} name="ListingPage" params={{ id, slug }} openInNewTab>
       <div
