@@ -23,7 +23,7 @@
   --backgroundImage: {
     /* Gradient direction and overlaying the black color on top of the image for better readability */
     background: linear-gradient(-45deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3)),
-      url('../../assets/background-1440-3.jpg');
+      url('../../assets/background-1440-7.jpeg');
 
     /* Add loading color for the div */
     background-color: var(--matterColor);
