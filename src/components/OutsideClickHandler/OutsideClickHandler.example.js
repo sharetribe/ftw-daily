@@ -3,7 +3,6 @@ import OutsideClickHandler from './OutsideClickHandler';
 
 const childStyle = {
   padding: '16px',
-  background: '#e7e7e7',
 };
 
 class OutsideClickHandlerWrapper extends Component {

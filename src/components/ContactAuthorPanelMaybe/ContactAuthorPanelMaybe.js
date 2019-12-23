@@ -18,21 +18,6 @@ const ContactAuthorPanel = ({ author, onContactUser,unitType, currentUser, class
 
   return (
     <div className={className}>
-      <div className={css.textContainer}>
-          <div className={css.priceValue}>
-            {formattedPrice}
-          </div>
-          <div className={css.perUnit}>
-            <FormattedMessage id={unitTranslationKey} />
-          </div>
-        <h2 className={css.contactAuthorTitle}>
-          <FormattedMessage id="ListingPage.contactAuthorTitle" />
-        </h2>
-        <p className={css.contactAuthorText}>
-          <FormattedMessage id="ListingPage.contactAuthorText" values={{user: author.attributes.profile.displayName}} />
-        </p>
-
-      </div>
       <button className={css.contactButton} onClick={onContactUser}>
         <FormattedMessage id="ListingPage.contactAuthorButton" />
       </button>

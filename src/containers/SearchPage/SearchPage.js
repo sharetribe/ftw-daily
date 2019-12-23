@@ -384,10 +384,7 @@ const mapDispatchToProps = dispatch => ({
 // See: https://github.com/ReactTraining/react-router/issues/4671
 const SearchPage = compose(
   withRouter,
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
+  connect(mapStateToProps, mapDispatchToProps),
   injectIntl
 )(SearchPageComponent);
 
@@ -404,10 +401,14 @@ SearchPage.loadData = (params, search) => {
     ...originMaybe,
     page,
     perPage: RESULT_PAGE_SIZE,
-    include: ['author', 'images'],
+    include: ['author', 'author.profileImage', 'images'],
     'fields.listing': ['title', 'geolocation', 'price', 'publicData'],
     'fields.user': ['profile.displayName', 'profile.abbreviatedName'],
-    'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
+    'fields.image': [
+      'variants.landscape-crop',
+      'variants.landscape-crop2x',
+      'variants.square-small',
+    ],
   });
 };
 
