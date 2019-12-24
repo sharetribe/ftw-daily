@@ -51,19 +51,19 @@ const SectionLocations = props => {
       </div>
       <div className={css.locations}>
         {locationLink(
-          'Helsinki',
+          'Seattle',
           helsinkiImage,
-          '?address=Helsinki%2C%20Finland&bounds=60.2978389%2C25.254484899999966%2C59.9224887%2C24.782875800000056&origin=60.16985569999999%2C24.93837910000002'
+          '?address=Seattle%2C%20Washington%2C%20United%20States%20of%20America&bounds=47.7779392908564%2C-122.216605992108%2C47.3403950185547%2C-122.441233019046'
         )}
         {locationLink(
-          'Rovaniemi',
+          'Portland',
           rovaniemiImage,
-          '?address=Rovaniemi%2C%20Finland&bounds=67.18452510000002%2C27.32667850000007%2C66.1553745%2C24.736871199999996&origin=66.50394779999999%2C25.729390599999988'
+          '?address=Portland%2C%20Oregon%2C%20United%20States%20of%20America&bounds=45.858099013046%2C-122.441059986416%2C45.3794799927623%2C-122.929215816001'
         )}
         {locationLink(
-          'Ruka',
+          'San Francisco Bay Area',
           rukaImage,
-          '?address=Ruka%2C%20Finland&bounds=66.1704578%2C29.14246849999995%2C66.1614402%2C29.110453699999994&origin=66.16594940000002%2C29.12646110000003'
+          '?address=San%20Francisco%2C%20California%2C%20United%20States%20of%20America&bounds=37.9362767%2C-121.96495537%2C37.4358923%2C-122.54932319&mapSearch=true'
         )}
       </div>
     </div>
