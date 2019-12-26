@@ -22,7 +22,7 @@
   /* Full screen Background image located in root-folder/src/assets */
   --backgroundImage: {
     /* Gradient direction and overlaying the black color on top of the image for better readability */
-    background: linear-gradient(-45deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3)),
+    background: linear-gradient(-45deg, #00000063, #00000063),
       url('../../assets/background-1440-7.jpeg');
 
     /* Add loading color for the div */
