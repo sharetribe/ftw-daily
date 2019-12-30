@@ -11,15 +11,16 @@
   padding: 0;
   border: none;
   color: white;
-  background-color: #8f2593;
+  background-color: var(--marketplaceColor);
   transition: all .1s ease-in-out;
   font-weight: 600;
   border-radius: 4px;
   cursor: pointer;
   outline:none;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-  &:hover {
-    background-color: #7a217d;
+  &:hover,
+  &:focus {
+    background-color: var(--marketplaceColorDark);
+    box-shadow: var(--boxShadowButton);
   }
   @media (--viewportLarge) {
     margin-top: 32px;

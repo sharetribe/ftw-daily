@@ -224,6 +224,7 @@
     &:hover,
     &:focus {
       background-color: var(--successColorDark);
+      box-shadow: var(--boxShadowButton);
     }
     &:disabled {
       background-color: var(--matterColorNegative);
