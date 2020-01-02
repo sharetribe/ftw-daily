@@ -39,7 +39,7 @@
     max-height: 700px;
     min-height: 460px;
 
-    height: calc(80vh - var(--topbarHeightDesktop));
+    height: 100vh;
   }
 }
 
