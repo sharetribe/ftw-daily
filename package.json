@@ -71,7 +71,8 @@
   "resolutions": {
     "react-dates/lodash": "^4.17.14",
     "react-google-maps/lodash": "^4.17.14",
-    "react-test-renderer": "^16.9.0"
+    "react-test-renderer": "^16.9.0",
+    "handlebars": "^4.5.3"
   },
   "nodemonConfig": {
     "execMap": {
