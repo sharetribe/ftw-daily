@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2019-XX-XX
 
+- [fix] Add missing countries (e.g. MX and JP) to `StripeBankAccountTokenInput` validations.
+  [#1250])(https://github.com/sharetribe/ftw-daily/pull/1250)
+
 ## [v4.0.0] 2019-12-19
 
 - [change] Use Stripe's [Connect onboarding](https://stripe.com/docs/connect/connect-onboarding) for
