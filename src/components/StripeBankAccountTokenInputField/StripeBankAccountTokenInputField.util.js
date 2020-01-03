@@ -166,14 +166,21 @@ export const mapInputsToStripeAccountKeys = (country, values) => {
     case 'AT':
     case 'BE':
     case 'DK':
+    case 'EE':
     case 'FI':
     case 'FR':
     case 'DE':
+    case 'GR':
     case 'IE':
     case 'IT':
+    case 'LV':
+    case 'LT':
     case 'LU':
     case 'NL':
+    case 'PL':
     case 'PT':
+    case 'SK':
+    case 'SI':
     case 'ES':
     case 'SE':
     case 'CH':
@@ -222,6 +229,19 @@ export const mapInputsToStripeAccountKeys = (country, values) => {
         account_number: cleanedString(values[ACCOUNT_NUMBER]),
       };
 
+    case 'JP':
+      return {
+        bank_name: cleanedString(values[BANK_NAME]),
+        branch_name: cleanedString(values[BRANCH_NAME]),
+        routing_number: cleanedString(values[BANK_CODE]).concat(values[BRANCH_CODE]),
+        account_number: cleanedString(values[ACCOUNT_NUMBER]),
+        account_holder_name: cleanedString(values[ACCOUNT_OWNER_NAME]),
+      };
+
+    case 'MX':
+      return {
+        account_number: cleanedString(values[CLABE]),
+      };
     default:
       throw new Error(`Not supported country (${country}) given to validator`);
   }
