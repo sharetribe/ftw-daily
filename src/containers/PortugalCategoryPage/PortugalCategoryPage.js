@@ -12,7 +12,7 @@ import {
 } from '../../components';
 
 import css from './PortugalCategoryPage.css';
-import image from './about-us-1056.jpg';
+import image from './hero-img.jpg';
 import json from './PortugalCategoryPage.json';
 
 const PortugalCategoryPage = () => {
