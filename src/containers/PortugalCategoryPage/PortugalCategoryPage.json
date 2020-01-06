@@ -1,13 +1,11 @@
 {
   "title": "Portugal",
-  "description": "Some description of the page",
-  "altText": "Description for cover image for google",
+  "description": "Portugal has some of the best surf spots in the world and we've compiled our favourite coliving and coworking locations and communities.",
+  "altText": "Porto in Portugal",
   "videoURL": "https://www.youtube.com/embed/Ftok14M5p8g",
-  "ingress": "This is an ingress with extra ephesis",
-  "sidecontent": "Some interesting fact about the place",
+  "ingress": "Portugal has some of the best surf spots in the world and we've compiled our favourite coliving and coworking locations and communities.",
+  "sidecontent": "Nazaré in Portugal was where the world record in bigwave surfing was made.",
   "content": [
-	  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-	  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+	  "Are you a remote worker or digital nomad who froths on surfing in Portugal? Discover a community near the Portuguese waves that suits you. We've got coliving and coworking spots near some of the best surf beaches, breaks and reefs this beautiful country has to offer. From the most south westerly tip in Sagres, up along the beautiful coast through Aljezur, Arrifana, Porto Covo, Sines, Lisbon, Ericeira, Peniche, Nazare, Figueira and on up to Spain."
 	]
 }
