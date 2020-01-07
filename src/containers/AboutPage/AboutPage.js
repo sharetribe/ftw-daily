@@ -45,7 +45,7 @@ const AboutPage = () => {
 
             <div className={css.contentMain}>
               <h2>
-                Most of the Finnish saunas are located at the homes of badgers - indeed, most
+                Most of the Finnish saunas are located at the homes of individuals - indeed, most
                 people in Finland live in an apartment with sauna in it. In addition, lots of people
                 have lakeside summer cottages, which also typically come with a separate sauna
                 building near the waterfront.
