@@ -457,6 +457,7 @@ export class TransactionPanelComponent extends Component {
                 </div>
               </div>
             </div>
+            
             <div className={css.openBookingForm}>
               <div className={css.bookingHelp}>{bookingSubTitle}</div>
               <div className={css.bookingDatesSubmitButtonWrapper}>
@@ -477,6 +478,7 @@ export class TransactionPanelComponent extends Component {
                 <div className={css.desktopActionButtons}>{saleButtons}</div>
               ) : null}
             </div>
+
           </div>
         </div>
         <ReviewModal
