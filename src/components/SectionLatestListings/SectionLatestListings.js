@@ -5,8 +5,9 @@ import { FormattedMessage } from '../../util/reactIntl';
 import { ListingCard, NamedLink } from '../../components';
 import css from './SectionLatestListings.css';
 
-const LatestListing = ({ listings }) => {
+const cardRenderSizes = '(min-width: 480px) 250px, 80vw'
 
+const LatestListing = ({ listings }) => {
   return (
     <div>
       <div className={css.title}>
@@ -14,7 +15,7 @@ const LatestListing = ({ listings }) => {
       </div>
       <div className={css.listingCards}>
         {listings.map(l => (
-          <ListingCard className={css.listingCard} key={l.id.uuid} listing={l} />
+          <ListingCard className={css.listingCard} key={l.id.uuid} listing={l} renderSizes={cardRenderSizes} />
         ))}
       </div>
       <NamedLink

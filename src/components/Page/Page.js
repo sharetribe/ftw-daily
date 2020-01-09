@@ -194,8 +194,16 @@ class PageComponent extends Component {
           <title>{title}</title>
           {referrerMeta}
           <link rel="canonical" href={canonicalUrl} />
-          <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
-          <meta httpEquiv="Content-Language" content={intl.locale} />
+          {
+           // according to W3 recommendations, there should be only one meta tag
+           // responsible for encoding: either <meta charset="utf-8"> 
+           // which is currently set at index.html or the one commented below
+           // <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
+          }
+          {
+            // This use of the Content-Language value for an http-equiv attribute is deprecated by the HTML specification
+            // <meta httpEquiv="Content-Language" content={intl.locale} />
+          }
           {metaTags}
           <script type="application/ld+json">
             {schemaArrayJSONString.replace(/</g, '\\u003c')}

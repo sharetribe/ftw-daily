@@ -4,7 +4,7 @@ import {
   FormattedMessage,
   FormattedDate,
   FormattedHTMLMessage,
-  injectIntl,
+  injectIntl 
 } from 'react-intl';
 
 const intlShape = shape({
@@ -22,5 +22,5 @@ export {
   FormattedDate,
   FormattedHTMLMessage,
   injectIntl,
-  intlShape,
+  intlShape 
 };

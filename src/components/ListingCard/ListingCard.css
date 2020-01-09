@@ -8,6 +8,7 @@
   /* Remove link's hover effect */
   &:hover {
     text-decoration: none;
+    cursor: pointer;
   }
 }
 
