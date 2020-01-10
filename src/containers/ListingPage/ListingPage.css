@@ -252,6 +252,11 @@
     /* The calendar needs 312px */
     flex-basis: 312px;
     flex-shrink: 0;
+
+    & > div {
+      position: sticky;
+      top: 95px;
+    }
   }
 }
 
