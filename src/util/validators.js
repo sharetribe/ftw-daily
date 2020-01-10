@@ -142,7 +142,7 @@ export const ageAtLeast = (message, minYears) => value => {
 
 export const validYouTubeURL = message => value => {
   if (typeof value === 'undefined' || value === null) {
-    return message;
+    return null;
   }
 
   const regExp = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
