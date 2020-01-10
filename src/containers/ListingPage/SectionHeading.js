@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from '../../util/reactIntl';
-import { InlineTextButton } from '../../components';
+import { Button } from '../../components';
 import { LINE_ITEM_NIGHT, LINE_ITEM_DAY } from '../../util/types';
 import config from '../../config';
 
@@ -46,17 +46,14 @@ const SectionHeading = props => {
           <div className={css.author}>
             {category}
             <FormattedMessage id="ListingPage.hostedBy" values={{ name: hostLink }} />
-            {showContactUser ? (
-              <span className={css.contactWrapper}>
-                <span className={css.separator}>•</span>
-                <InlineTextButton rootClassName={css.contactLink} onClick={onContactUser}>
-                  <FormattedMessage id="ListingPage.contactUser" />
-                </InlineTextButton>
-              </span>
-            ) : null}
-
-
           </div>
+          {showContactUser ? (
+            <span className={css.contactWrapper}>
+              <Button className={css.contactHost} onClick={onContactUser}>
+                <FormattedMessage id="ListingPage.contactUser" />
+              </Button>
+            </span>
+          ) : null}
         </div>
       </div>
       <div className={css.tags}>

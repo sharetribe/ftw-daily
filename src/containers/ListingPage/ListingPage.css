@@ -15,6 +15,13 @@
   margin: 24px;
 }
 
+.contactHost {
+  min-height: 35px;
+  width: 140px;
+  font-size: 16px;
+  margin-top: 8px;
+}
+
 .errorText {
   color: var(--failColor);
   margin: 24px;
