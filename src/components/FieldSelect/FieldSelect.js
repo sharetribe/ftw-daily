@@ -7,7 +7,7 @@ import { ValidationError } from '../../components';
 import css from './FieldSelect.css';
 
 const FieldSelectComponent = props => {
-  const { rootClassName, className, id, label, input, meta, children, ...rest } = props;
+  const { rootClassName, className, id, label, input, meta, children, useMobileMargins, ...rest } = props;
 
   if (label && !id) {
     throw new Error('id required when a label is given');
@@ -27,7 +27,7 @@ const FieldSelectComponent = props => {
 
   const classes = classNames(rootClassName || css.root, className);
   return (
-    <div className={classes}>
+    <div className={classNames(classes, { [css.mobileMargins]: useMobileMargins })}>
       {label ? <label htmlFor={id}>{label}</label> : null}
       <select {...selectProps}>{children}</select>
       <ValidationError fieldMeta={meta} />
@@ -48,6 +48,7 @@ const { string, object, node } = PropTypes;
 FieldSelectComponent.propTypes = {
   rootClassName: string,
   className: string,
+  useMobileMargins: PropTypes.bool,
 
   // Label is optional, but if it is given, an id is also required so
   // the label can reference the input in the `for` attribute

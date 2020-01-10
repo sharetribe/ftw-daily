@@ -170,6 +170,7 @@ export class BookingDatesFormComponent extends Component {
                   name="bookingProduct"
                   id="bookingProduct"
                   label={productTitle}
+                  useMobileMargins
                   validate={required(productRequired)}
                 >
                   <option disabled value="">

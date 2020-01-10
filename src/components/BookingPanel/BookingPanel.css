@@ -4,7 +4,6 @@
 /* since "inMobile" breakpoint is actually --viewportLarge */
 .modalContainer {
   @apply --marketplaceModalInMobileBaseStyles;
-
   height: 100vh;
 
   @media (--viewportMedium) {

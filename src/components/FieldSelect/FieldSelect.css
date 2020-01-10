@@ -24,3 +24,29 @@
 .selectError {
   border-bottom-color: var(--failColor);
 }
+
+
+/**
+ * Mobile margins mean that labels, inputs (incl separate borders) get margins.
+ */
+.mobileMargins {
+  /* Mobile Safari couldn't handle width: calc(100vw - 48px); */
+  width: calc(100vw - 48px);
+  margin: 0 24px;
+
+  & .select {
+    /* Mobile Safari couldn't handle width: calc(50% - 6px); */
+    flex-basis: calc(50vw - 30px);
+    transition: all 0.15s ease-out;
+  }
+
+  @media (--viewportMedium) {
+    width: 100%;
+    margin: 0;
+
+    & .select {
+      flex-basis: calc(50% - 12px);
+      transition: all 0.15s ease-out;
+    }
+  }
+}
