@@ -15,7 +15,7 @@ import {
 } from '../../components';
 
 import css from './PortugalCategoryPage.css';
-import image from './about-us-1056.jpg';
+import image from './hero-img.jpg';
 import json from './PortugalCategoryPage.json';
 
 const PORTUGAL_BOUNDS = [40.10246427,-6.189352,32.36728955,-31.367492];
