@@ -25,6 +25,7 @@ export const priceRangeData = (products, intl) => {
 
   try {
     const amounts = [...products.map(p => {
+      // eslint-disable-next-line
       if (p.price.currency !== config.currency) throw {
         type: 'unsupportedCurrency',
         formattedPrice: intl.formatMessage(

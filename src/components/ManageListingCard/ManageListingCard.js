@@ -13,7 +13,6 @@ import {
   LISTING_STATE_DRAFT,
   propTypes,
 } from '../../util/types';
-import { formatMoney } from '../../util/currency';
 import { ensureOwnListing } from '../../util/data';
 import {
   LISTING_PAGE_PENDING_APPROVAL_VARIANT,

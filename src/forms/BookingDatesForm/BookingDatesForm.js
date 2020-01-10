@@ -8,7 +8,6 @@ import moment from 'moment';
 import { required, bookingDatesRequired, composeValidators } from '../../util/validators';
 import { START_DATE, END_DATE } from '../../util/dates';
 import { propTypes } from '../../util/types';
-import config from '../../config';
 import { Form, PrimaryButton, FieldDateRangeInput, FieldSelect } from '../../components';
 import EstimatedBreakdownMaybe from './EstimatedBreakdownMaybe';
 import { types as sdkTypes } from '../../util/sdkLoader';
