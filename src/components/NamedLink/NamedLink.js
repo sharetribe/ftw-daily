@@ -45,7 +45,7 @@ export const NamedLinkComponent = props => {
     Object.assign(aElemProps, { target: '_blank' });
   }
 
-  const changePathProgrammatiacally = () => {
+  const changePathProgrammatically = () => {
     let { target, title } = aElemProps
     let win = target ? window.open(pathname, '_blank') : window.open(pathname);
     win.document.title = title;
@@ -66,7 +66,7 @@ export const NamedLinkComponent = props => {
           customProps.className = aElemProps.className;
           customProps.style = aElemProps.style;
     return (
-      <div onClick={changePathProgrammatiacally} {...customProps} >
+      <div onClick={changePathProgrammatically} {...customProps} >
         {children}
       </div>
       )

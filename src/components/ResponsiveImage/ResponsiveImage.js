@@ -67,6 +67,18 @@ const ResponsiveImage = props => {
 
   const imageVariants = image.attributes.variants;
 
+  const imageVariantKeys = Object.keys(imageVariants);
+  let index = -1
+
+  variants.some((v, i) => {
+    if (imageVariantKeys.indexOf(v) !== -1) {
+      index = i
+      return true
+    }
+  })
+
+  const src = index !== -1 ? imageVariants[variants[index]].url : null
+
   const srcSet = variants
     .map(variantName => {
       const variant = imageVariants[variantName];
@@ -79,14 +91,14 @@ const ResponsiveImage = props => {
     })
     .filter(v => v != null)
     .join(', ');
-
+  
   const imgProps = {
     className: classes,
     alt,
     srcSet,
-    src: imageVariants[variants[variants.length - 1]].url,
+    src,
     ...rest
-  };
+  }
 
   if (dimensions) {
     if (dimensions.width) imgProps.width = dimensions.width;

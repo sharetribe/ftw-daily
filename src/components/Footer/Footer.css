@@ -439,5 +439,6 @@
   color: white;
   border-radius: 5px;
   padding: 2px 5px;
-  font-size: 75%;
+  margin-left: 5px;
+  font-size: 12px;
 }
