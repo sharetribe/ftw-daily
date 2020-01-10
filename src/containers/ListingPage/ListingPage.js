@@ -39,7 +39,7 @@ import {
   LayoutWrapperFooter,
   Footer,
   BookingPanel,
-  IconLike,
+  IconCrosshair,
   IconNetwork,
   IconPeople
 } from '../../components';
@@ -382,8 +382,8 @@ export class ListingPageComponent extends Component {
     const retreat =
       publicData && publicData.retreat && publicData.retreat.accepted ? (
         <>
-          <span className={css.tag}><IconLike />Team retreat friendly</span>
-          <span className={css.tag}><IconPeople />{`Capacity: ${publicData.retreat.capacity}`}</span>
+          <span className={css.tag}><IconPeople />Team retreat friendly</span>
+          <span className={css.tag}><IconCrosshair />{`Capacity: ${publicData.retreat.capacity}`}</span>
         </>
       ) : null;
 
