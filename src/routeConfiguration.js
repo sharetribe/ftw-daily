@@ -23,6 +23,7 @@ import {
   StyleguidePage,
   TermsOfServicePage,
   TransactionPage,
+  PortugalCategoryPage,
 } from './containers';
 
 // routeConfiguration needs to initialize containers first
@@ -319,6 +320,13 @@ const routeConfiguration = () => {
       authPage: 'LoginPage',
       component: props => <EmailVerificationPage {...props} />,
       loadData: EmailVerificationPage.loadData,
+    },
+
+    {
+      path: '/category/portugal',
+      name: 'PortugalCategoryPage',
+      component: props => <PortugalCategoryPage {...props} />,
+      loadData: PortugalCategoryPage.loadData,
     },
   ];
 };
