@@ -322,12 +322,11 @@ const routeConfiguration = () => {
       loadData: EmailVerificationPage.loadData,
     },
 
-    // Category pages
-
     {
       path: '/category/portugal',
       name: 'PortugalCategoryPage',
-      component: PortugalCategoryPage,
+      component: props => <PortugalCategoryPage {...props} />,
+      loadData: PortugalCategoryPage.loadData,
     },
   ];
 };
