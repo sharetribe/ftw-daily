@@ -160,6 +160,7 @@ export const showListing = (listingId, isOwn = false) => (dispatch, getState, sd
 
   const show = isOwn ? sdk.ownListings.show(params) : sdk.listings.show(params);
 
+
   return show
     .then(data => {
       dispatch(addMarketplaceEntities(data));

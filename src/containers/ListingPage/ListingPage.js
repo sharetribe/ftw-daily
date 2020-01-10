@@ -443,7 +443,7 @@ export class ListingPageComponent extends Component {
                     wifi={wifi}
                   />
                   <SectionDescriptionMaybe description={description} />
-                  <SectionVideoMaybe publicData={publicData} />
+                  <SectionVideoMaybe video={publicData.video} />
                   <SectionFeaturesMaybe options={amenitiesConfig} publicData={publicData} />
                   <SectionCommunityMaybe publicData={publicData} />
                   <SectionVibeMaybe publicData={publicData} />
@@ -453,6 +453,13 @@ export class ListingPageComponent extends Component {
                     publicData={publicData}
                     listingId={currentListing.id}
                   />
+                  { publicData.location ?
+                    <>
+                      <h2 className={css.descriptionTitle}>About the location</h2>
+                      <SectionVideoMaybe video={publicData.location.video} />
+                    </> :
+                    null
+                  }
                   <SectionHostMaybe
                     title={title}
                     listing={currentListing}

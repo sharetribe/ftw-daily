@@ -8,6 +8,7 @@ import { propTypes } from '../../util/types';
 import {
   autocompleteSearchRequired,
   autocompletePlaceSelected,
+  validYouTubeURL,
   composeValidators,
 } from '../../util/validators';
 import { Form, LocationAutocompleteInputField, Button, FieldTextInput } from '../../components';
@@ -55,6 +56,16 @@ export const EditListingLocationFormComponent = props => (
       );
       const buildingPlaceholderMessage = intl.formatMessage({
         id: 'EditListingLocationForm.buildingPlaceholder',
+      });
+
+      const videoMessage = intl.formatMessage({
+        id: 'EditListingDescriptionForm.video',
+      });
+      const videoPlaceholderMessage = intl.formatMessage({
+        id: 'EditListingDescriptionForm.videoPlaceholder',
+      });
+      const videoValidMessage = intl.formatMessage({
+        id: 'EditListingDescriptionForm.videoInvalid',
       });
 
       const { updateListingError, showListingsError } = fetchErrors || {};
@@ -105,6 +116,18 @@ export const EditListingLocationFormComponent = props => (
             id="building"
             label={buildingMessage}
             placeholder={buildingPlaceholderMessage}
+          />
+
+          <h3 className={css.sectionTitle}>About the location</h3>
+
+          <FieldTextInput
+            id="video"
+            name="video"
+            className={css.video}
+            type="text"
+            label={videoMessage}
+            placeholder={videoPlaceholderMessage}
+            validate={composeValidators(validYouTubeURL(videoValidMessage))}
           />
 
           <Button

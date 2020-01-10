@@ -78,6 +78,16 @@
   }
 }
 
+.sectionTitle {
+  @apply --marketplaceH3FontStyles;
+  color: var(--matterColorAnti);
+
+  margin-bottom: 13px;
+  @media (--viewportMedium) {
+    margin-bottom: 20px;
+  }
+}
+
 .submitButton {
   margin-top: auto;
   margin-bottom: 24px;
