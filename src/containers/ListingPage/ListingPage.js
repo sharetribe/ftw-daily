@@ -453,7 +453,7 @@ export class ListingPageComponent extends Component {
                     publicData={publicData}
                     listingId={currentListing.id}
                   />
-                  { publicData.location ?
+                  { publicData.location.video ?
                     <>
                       <h2 className={css.descriptionTitle}>About the location</h2>
                       <SectionVideoMaybe video={publicData.location.video} />
