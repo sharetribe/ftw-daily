@@ -59,7 +59,7 @@ class PortugalCategoryPageComponent extends Component {
               </div>
 
               <div className={css.contentMain}>
-                <div>
+                <div className={css.contentSection}>
                   <h2>{ingress}</h2>
                   {content.map((s, i) => (<p key={i}>{s}</p>))}
                 </div>

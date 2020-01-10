@@ -56,6 +56,15 @@
   margin-bottom: 24px;
 }
 
+.contentSection {
+  padding: 0 24px;
+  margin-bottom: 35px;
+
+  @media (--viewportMedium) {
+    padding: 0;
+    margin-bottom: 52px;
+  }
+}
 
 .listings {
   margin: 0;
