@@ -156,8 +156,8 @@
   transition: var(--transitionStyleButton);
 
   &:hover {
-    background-color: var(--marketplaceColor);
-    color: var(--matterColorLight);
+     @apply --marketplaceGradientButton;
+     color: var(--matterColorLight);
   }
 
   @media (--viewportMedium) {

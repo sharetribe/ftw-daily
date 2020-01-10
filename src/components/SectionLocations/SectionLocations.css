@@ -24,6 +24,7 @@
 
 .bigButton {
   @apply --marketplaceButtonStyles;
+  @apply --marketplaceGradientButton;
 
   animation-delay: 0.8s;
   margin: 30px auto 0 auto;

@@ -101,6 +101,7 @@
 .heroButton {
   @apply --marketplaceButtonStyles;
   @apply --SectionHero_animation;
+  @apply --marketplaceGradientButton;
 
   animation-delay: 0.8s;
 
