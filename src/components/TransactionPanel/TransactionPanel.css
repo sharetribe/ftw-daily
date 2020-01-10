@@ -546,6 +546,18 @@
   }
 }
 
+.priceValue {
+  display: block;
+  @apply --marketplaceH2FontStyles;
+  color: var(--matterColor);
+
+  margin-top: 0;
+  margin-bottom: 0px;
+  @media (--viewportLarge){
+    display: none;
+  }
+}
+
 .smallPrint {
   @apply --marketplaceTinyFontStyles;
   color: var(--matterColorAnti);

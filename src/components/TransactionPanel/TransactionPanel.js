@@ -303,6 +303,8 @@ export class TransactionPanelComponent extends Component {
       ? `${formatMoney(intl, price)} ${intl.formatMessage({ id: unitTranslationKey })}`
       : '';
 
+      console.log(intl.formatMessage({ id: unitTranslationKey }))
+
     const firstImage =
       currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
 
@@ -459,7 +461,9 @@ export class TransactionPanelComponent extends Component {
             </div>
             
             <div className={css.openBookingForm}>
-              <div className={css.bookingHelp}>{bookingSubTitle}</div>
+              <div className={css.bookingHelp}>
+              <div className={css.priceValue}>{formatMoney(intl, price)}</div> 
+              {intl.formatMessage({ id: unitTranslationKey })}</div>
               <div className={css.bookingDatesSubmitButtonWrapper}>
                 <a href="https://calendly.com/horsedeal24" className target="_blank">
                   <PrimaryButton type="submit">
