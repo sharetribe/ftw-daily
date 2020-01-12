@@ -476,7 +476,7 @@
 .bookingTitle {
   /* Font */
   color: var(--matterColor);
-
+  
   margin-top: 0;
   margin-bottom: 1px;
 }
@@ -513,12 +513,12 @@
   /* 3D painting container helps scrolling */
   transform: translate3d(0, 0, 0);
 
-  @media (--viewportMedium) {
-    padding: 18px 60px 18px 60px;
-  }
-
   @media (--viewportLarge) {
     display: none;
+  }
+
+  @media (--viewportMedium) {
+    padding: 18px 60px 18px 60px;
   }
 }
 
@@ -533,13 +533,28 @@
 }
 
 .bookingHelp {
-  display: none;
   @apply --marketplaceH5FontStyles;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
 
   @media (--viewportMedium) {
     color: var(--matterColor);
     display: block;
     margin-top: 0;
+  }
+}
+
+.priceValue {
+  display: block;
+  @apply --marketplaceH2FontStyles;
+  color: var(--matterColor);
+
+  margin-top: 0;
+  margin-bottom: 0px;
+  @media (--viewportLarge){
+    display: none;
   }
 }
 
@@ -566,9 +581,18 @@
   flex-shrink: 0;
   padding: 0 24px 24px 24px;
   width: 100%;
-  position: fixed;
+  position: fixed ;
   bottom: 0;
   background-color: var(--matterColorLight);
+
+  @media (max-width: 768px) {
+    padding: 0;
+    width: 100%;
+    position: static;
+    bottom: unset;
+    background-color: transparent;
+  }
+
   @media (--viewportMedium) {
     padding: 0;
     width: 100%;
