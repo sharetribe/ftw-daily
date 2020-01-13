@@ -46,10 +46,8 @@ export const NamedLinkComponent = props => {
   }
 
   const changePathProgrammatically = () => {
-    let { target, title } = aElemProps
-    let win = target ? window.open(pathname, '_blank') : window.open(pathname);
-    win.document.title = title;
-    win.focus();
+    let { target } = aElemProps
+    target ? window.open(pathname, '_blank') : window.open(pathname)
   }
 
   /*
