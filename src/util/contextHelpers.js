@@ -279,7 +279,7 @@ export const lazyLoadWithDimensions = (Component, options = {}) => {
     render() {
       const dimensions = this.state;
       const { width, height } = dimensions;
-      const props = { ...this.props, width, height };
+      const props = { ...this.props, dimensions };
 
       // lazyLoadWithDimensions HOC needs to take all given space
       // unless max dimensions are provided through options.
