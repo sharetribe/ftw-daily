@@ -1,11 +1,16 @@
 import React from 'react';
 import { bool } from 'prop-types';
+import moment from 'moment';
 import { FormattedMessage, intlShape } from '../../util/reactIntl';
-import { formatMoney } from '../../util/currency';
+import { formatMoney, convertMoneyToNumber } from '../../util/currency';
 import { txIsCanceled, txIsDelivered, txIsDeclined } from '../../util/transaction';
 import { propTypes } from '../../util/types';
+import { nightsBetween, formatDateToText } from '../../util/dates';
+import { types as sdkTypes } from '../../util/sdkLoader';
 
 import css from './BookingBreakdown.css';
+
+const { Money } = sdkTypes;
 
 const LineItemUnitPrice = props => {
   const { transaction, isProvider, intl } = props;
@@ -25,18 +30,36 @@ const LineItemUnitPrice = props => {
     <FormattedMessage id="BookingBreakdown.total" />
   );
 
+  const startDate = transaction.booking.attributes.start;
+  const nightsUntilStartDate = nightsBetween(transaction.attributes.createdAt, startDate);
+  const isSplitPayment = nightsUntilStartDate >= 14;
+  const dueDate = moment(startDate).subtract(3, 'days');
+
   const totalPrice = isProvider
     ? transaction.attributes.payoutTotal
     : transaction.attributes.payinTotal;
-  const formattedTotalPrice = formatMoney(intl, totalPrice);
+
+  const splitPrice = new Money(convertMoneyToNumber(totalPrice) * 100 / 2, totalPrice.currency)
 
   return (
     <>
       <hr className={css.totalDivider} />
-      <div className={css.lineItemTotal}>
-        <div className={css.totalLabel}>{totalLabel}</div>
-        <div className={css.totalPrice}>{formattedTotalPrice}</div>
-      </div>
+      { isSplitPayment ?
+        <>
+          <div className={css.subTotalLineItem}>
+            <div className={css.totalLabel}>Due now</div>
+            <div className={css.totalPrice}>{formatMoney(intl, splitPrice)}</div>
+          </div>
+          <div className={css.lineItemTotal}>
+            <div className={css.totalLabel}>Due {formatDateToText(intl, dueDate).date}</div>
+            <div className={css.totalPrice}>{formatMoney(intl, splitPrice)}</div>
+          </div>
+        </> :
+        <div className={css.lineItemTotal}>
+          <div className={css.totalLabel}>{totalLabel}</div>
+          <div className={css.totalPrice}>{formatMoney(intl, totalPrice)}</div>
+        </div>
+      }
     </>
   );
 };

@@ -101,9 +101,6 @@ export class BookingDatesFormComponent extends Component {
                 }
               : null;
 
-
-          console.log('bookingData', bookingData);
-
           const bookingInfo = bookingData ? (
             <div className={css.priceBreakdownContainer}>
               <h3 className={css.priceBreakdownTitle}>
