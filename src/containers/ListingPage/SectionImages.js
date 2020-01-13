@@ -12,7 +12,7 @@ const GALLERY_ONE_COLUMN = 740;
 
 const ImageContainer = ({ handleViewPhotosClick, image, ...imageProps }) => (
   <div className={css.gallerySecondaryImageContainer} onClick={handleViewPhotosClick}>
-    <ResponsiveImage image={image} {...imageProps} />
+    <ResponsiveImage image={image} {...imageProps} sizes='25vw' />
   </div>
 );
 class SectionImages extends Component {
@@ -104,13 +104,13 @@ class SectionImages extends Component {
                 className={css.galleryMainImageContainer}
                 onClick={e => handleViewPhotosClick(e, 0)}
               >
-                <ResponsiveImage image={firstImage} {...imageProps} />
+                <ResponsiveImage image={firstImage} {...imageProps} sizes='75vw' />
               </div>
               {secondImage && !gallerySecondaryColumns && (<div
                 className={css.galleryMainImageContainer}
                 onClick={e => handleViewPhotosClick(e, 1)}
               >
-                <ResponsiveImage image={secondImage} {...imageProps} />
+                <ResponsiveImage image={secondImage} {...imageProps} sizes='75vw' />
 
               </div>)}
 

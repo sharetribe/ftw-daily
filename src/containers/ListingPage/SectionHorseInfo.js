@@ -18,17 +18,17 @@ const SectionHorseInfo = props => {
             {(() => {
               switch (key) {
                 case 'age':
-                  return <img className={css.listingIcon} src='/static/icons/streamline-icon-calendar.png' />
+                  return <img className={css.listingIcon} src='/static/icons/streamline-icon-calendar.png' alt='calendar' />
                 case 'breed':
-                  return <img className={css.listingIcon} src='/static/icons/streamline-icon-flash.png' />
+                  return <img className={css.listingIcon} src='/static/icons/streamline-icon-flash.png' alt='flash'/>
                 case 'color':
-                  return <img className={css.listingIcon} src='/static/icons/streamline-icon-blood-drop.png' />
+                  return <img className={css.listingIcon} src='/static/icons/streamline-icon-blood-drop.png' alt='blood drop'/>
                 case 'gender':
-                  return <img className={css.listingIcon} src='/static/icons/streamline-icon-gender-hetero.png' />
+                  return <img className={css.listingIcon} src='/static/icons/streamline-icon-gender-hetero.png' alt='gender hetero'/>
                 case 'hight':
-                  return <img className={css.listingIcon} src='/static/icons/streamline-icon-expand-vertical.png' />
+                  return <img className={css.listingIcon} src='/static/icons/streamline-icon-expand-vertical.png' alt='expand vertical'/>
                 case 'mainDiscipline':
-                  return <img className={css.listingIcon} src='/static/icons/streamline-icon-certified-ribbon.png' />
+                  return <img className={css.listingIcon} src='/static/icons/streamline-icon-certified-ribbon.png' alt='certified ribbon'/>
                 default:
                   return null;
               }

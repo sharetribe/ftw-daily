@@ -13,10 +13,7 @@ import { ResponsiveImage, IconBannedUser, NamedLink } from '../../components/';
 
 import css from './Avatar.css';
 
-// Responsive image sizes hint
-const AVATAR_SIZES = '40px';
-const AVATAR_SIZES_MEDIUM = '60px';
-const AVATAR_SIZES_LARGE = '96px';
+const AVATAR_SIZES = '(max-width: 240px) 40px, (max-width: 480px) 60px, 96px';
 
 const AVATAR_IMAGE_VARIANTS = [
   // 240x240
@@ -60,7 +57,7 @@ export const AvatarComponent = props => {
     : { name: 'ProfileBasePage' };
   const hasProfileImage = avatarUser.profileImage && avatarUser.profileImage.id;
   const profileLinkEnabled = !disableProfileLink;
-
+  
   if (isBannedUser || isDeletedUser) {
     return (
       <div {...rootProps}>
@@ -133,11 +130,11 @@ const Avatar = injectIntl(AvatarComponent);
 export default Avatar;
 
 export const AvatarMedium = props => (
-  <Avatar rootClassName={css.mediumAvatar} renderSizes={AVATAR_SIZES_MEDIUM} {...props} />
+  <Avatar rootClassName={css.mediumAvatar} renderSizes={AVATAR_SIZES} {...props} />
 );
 AvatarMedium.displayName = 'AvatarMedium';
 
 export const AvatarLarge = props => (
-  <Avatar rootClassName={css.largeAvatar} renderSizes={AVATAR_SIZES_LARGE} {...props} />
+  <Avatar rootClassName={css.largeAvatar} renderSizes={AVATAR_SIZES} {...props} />
 );
 AvatarLarge.displayName = 'AvatarLarge';

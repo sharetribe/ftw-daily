@@ -11,14 +11,13 @@
   padding: 0;
   border: none;
   color: white;
-  background-color: var(--marketplaceColor);
+  @apply --marketplaceGradientButton;
   transition: all .1s ease-in-out;
   font-weight: 600;
   border-radius: 4px;
   cursor: pointer;
-  outline:none;
-  &:hover,
-  &:focus {
+  outline: none;
+  &:hover, &:focus {
     background-color: var(--marketplaceColorDark);
     box-shadow: var(--boxShadowButton);
   }

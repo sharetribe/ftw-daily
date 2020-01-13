@@ -17,7 +17,7 @@ const SectionUserReviews = () => {
       <div className={css.reviewsCards}>
         <div className={css.reviewCard}>
           <div className={css.userInfo}>
-            <img className={css.userAvatar} src='/static/userReviews/Marcel.jpg'/>
+            <img className={css.userAvatar} src='/static/userReviews/Marcel.jpg' alt='Marcel'/>
             <div>
               <FormattedMessage id="SectionUserReviews.reviewOneName" />
             </div>
@@ -30,7 +30,7 @@ const SectionUserReviews = () => {
 
         <div className={css.reviewCard}>
           <div className={css.userInfo}>
-            <img className={css.userAvatar} src='/static/userReviews/Michelle.jpg'/>
+            <img className={css.userAvatar} src='/static/userReviews/Michelle.jpg' alt='Michelle'/>
             <div>
               <FormattedMessage id="SectionUserReviews.reviewTwoName" />
             </div>
@@ -43,7 +43,7 @@ const SectionUserReviews = () => {
 
         <div className={css.reviewCard}>
           <div className={css.userInfo}>
-            <img className={css.userAvatar} src='/static/userReviews/Katja.jpg'/>
+            <img className={css.userAvatar} src='/static/userReviews/Katja.jpg' alt='Katja'/>
             <div>
               <FormattedMessage id="SectionUserReviews.reviewThreeName" />
             </div>

@@ -82,7 +82,7 @@ class StaticGoogleMap extends Component {
   render() {
     const { center, zoom, address, mapsConfig, dimensions } = this.props;
     const { lat, lng } = center || {};
-    const { width, height } = dimensions;
+    const { width, height } = dimensions || {};
 
     // Extra graphics for the static map image
     // 1. if fuzzy coordinates are used, return circle path
