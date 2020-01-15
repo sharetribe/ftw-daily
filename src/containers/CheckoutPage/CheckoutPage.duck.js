@@ -260,7 +260,7 @@ export const sendMessage = params => (dispatch, getState, sdk) => {
  * the price with the chosen information.
  */
 
-const initSpeculativeTransaction = (processAlias, params, dispatch, sdk) => {
+const initSpeculativeTransaction = (processAlias, params, sdk) => {
   const bodyParams = {
     transition: TRANSITION_REQUEST_PAYMENT,
     processAlias,
@@ -293,7 +293,7 @@ export const speculateTransaction = params => (dispatch, getState, sdk) => {
   const aliasDueNow = config.bookingProcessAliases[0];
   const aliasDueLater = config.bookingProcessAliases[1];
 
-  const processDueLater = initSpeculativeTransaction(aliasDueLater, params, dispatch, sdk);
+  const processDueLater = initSpeculativeTransaction(aliasDueLater, params, sdk);
 
   // Create due now process and link to due later process
   processDueLater.then(txLater => {
@@ -301,7 +301,7 @@ export const speculateTransaction = params => (dispatch, getState, sdk) => {
       linkedProcessId: txLater.id.uuid
     }
 
-    initSpeculativeTransaction(aliasDueNow, params, dispatch, sdk).then(txNow => {
+    initSpeculativeTransaction(aliasDueNow, params, sdk).then(txNow => {
       dispatch(speculateTransactionSuccess(txNow));
     });
   }).catch(e => {

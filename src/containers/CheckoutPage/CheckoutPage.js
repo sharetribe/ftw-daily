@@ -192,8 +192,20 @@ export class CheckoutPageComponent extends Component {
       // Fetch speculated transaction for showing price in booking breakdown
       // NOTE: if unit type is line-item/units, quantity needs to be added.
       // The way to pass it to checkout page is through pageData.bookingData
+
+
+      // Calculate price based on chosen product
+      const { bookingProduct } = pageData.bookingData;
+      const { publicData, price } = pageData.listing.attributes;
+      const productPrice = bookingProduct ?
+            publicData.products.find(p => p.id === bookingProduct).price :
+            undefined;
+      const unitPrice = productPrice ?
+        new Money(productPrice.amount, productPrice.currency) : 
+        price
+
       fetchSpeculatedTransaction(
-        this.customPricingParams({
+        this.customPricingParams(unitPrice, {
           listing: pageData.listing,
           bookingStart: bookingStartForAPI,
           bookingEnd: bookingEndForAPI,
@@ -373,7 +385,17 @@ export class CheckoutPageComponent extends Component {
         ? { setupPaymentMethodForSaving: true }
         : {};
 
-    const orderParams = this.customPricingParams({
+    // Calculate price based on chosen product
+    const { bookingProduct } = pageData.bookingData;
+    const { publicData, price } = pageData.listing.attributes;
+    const productPrice = bookingProduct ?
+          publicData.products.find(p => p.id === bookingProduct).price :
+          undefined;
+    const unitPrice = productPrice ?
+      new Money(productPrice.amount, productPrice.currency) : 
+      price
+
+    const orderParams = this.customPricingParams(unitPrice, {
       listing: pageData.listing,
       bookingStart: tx.booking.attributes.start,
       bookingEnd: tx.booking.attributes.end,
@@ -495,10 +517,7 @@ export class CheckoutPageComponent extends Component {
    * @return a params object for custom pricing bookings
    */
 
-  customPricingParams(params) {
-    const { bookingStart, bookingEnd, listing, ...rest } = params;
-    const { amount, currency } = listing.attributes.price;
-
+  customPricingParams(unitPrice, { bookingStart, bookingEnd, listing, ...rest }) {
     const unitType = config.bookingUnitType;
     const isNightly = unitType === LINE_ITEM_NIGHT;
 
@@ -513,7 +532,7 @@ export class CheckoutPageComponent extends Component {
       lineItems: [
         {
           code: unitType,
-          unitPrice: new Money(amount, currency),
+          unitPrice,
           quantity,
         },
       ],
