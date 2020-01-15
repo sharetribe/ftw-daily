@@ -83,7 +83,7 @@
   padding-bottom: 60px;
 
   @media (--viewportMedium) {
-    padding-top: var(--LandingPage_sectionMarginTop);
+    padding-top: 70px;
     padding-bottom: 70px;
   }
   max-width: 100%;
@@ -104,7 +104,7 @@
 
 .section.landingPageAdvantages {
   display: none;
-  padding: 19px 0;
+  padding: 33px 0;
   border-bottom: 1px solid #e7e7e7;
 
   @media (--viewportMedium) {
@@ -115,7 +115,9 @@
 .section.sectionPartners {
   padding: 26px 0;
 }
-
+.section.sectionHowItWorks {
+  padding-bottom: 90px;
+}
 .sectionContent {
   margin: var(--LandingPage_sectionMarginTop) 24px 51px 24px;
 

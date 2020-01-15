@@ -21,7 +21,6 @@
 
   &:hover {
     transform: scale(1.02);
-    box-shadow: var(--boxShadowListingCard);
   }
 }
 
@@ -29,6 +28,7 @@
 .aspectWrapper {
   padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
   background: var(--matterColorNegative); /* Loading BG color */
+  border-radius: 5px;
 }
 
 .rootForImage {
@@ -46,7 +46,7 @@
   /* Layout */
   display: flex;
   flex-direction: row;
-  padding: 16px 0 2px 0;
+  padding: 32px 0 2px 0;
   position:relative;
 }
 
@@ -62,7 +62,7 @@
 .priceValue {
   /* Font */
   @apply --marketplaceH3FontStyles;
-
+  color: var(--marketplaceColor);
   /* Remove default margins from font */
   margin-top: 0;
   margin-bottom: 0;
@@ -101,6 +101,7 @@
   /* Remove default margins from font */
   margin-top: 0;
   margin-bottom: 0;
+  transition: .3s;
 
   @media (--viewportMedium) {
     margin-top: 0;
@@ -108,20 +109,23 @@
   }
 }
 
-.authorInfo {
-  /* Font */
-  @apply --marketplaceTinyFontStyles;
-  color: var(--matterColor);
+  .title:hover {
+    color: var(--marketplaceColor);
+  }
 
-  /* Remove default margins from font */
-  margin-top: 0;
-  margin-bottom: 0;
-
-  @media (--viewportMedium) {
+  .authorInfo {
+    /* Font */
+    @apply --marketplaceTinyFontStyles;
+    color: var(--matterColor);
+    /* Remove default margins from font */
     margin-top: 0;
     margin-bottom: 0;
+
+    @media (--viewportMedium) {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
   }
-}
 
 .longWord {
   /* fallback option */

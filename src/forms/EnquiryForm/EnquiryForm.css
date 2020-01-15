@@ -5,7 +5,7 @@
 
 .icon {
   display: none;
-
+  fill: none;
   @media (--viewportMedium) {
     display: block;
     margin-bottom: 36px;

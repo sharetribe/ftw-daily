@@ -7,7 +7,7 @@
   margin-bottom: 30px;
 
   @media (--viewportMedium) {
-    margin-bottom: 50px;
+    margin-bottom: 60px;
   }
 }
 
@@ -20,12 +20,18 @@
   }
 }
 
+.step:nth-of-type(1) {
+  margin-top: 0;
+}
+
 .step {
   position: relative;
+  margin-top: 60px;
 
   @media (--viewportMedium) {
-    width: 304px;
-    margin-right: 120px;
+    width: 330px;
+    margin-right: 105px;
+    margin-top: 0;
   }
 }
 
@@ -34,12 +40,11 @@
     content: '';
     position: absolute;
     background-image: url('/static/icons/big-right-arrow.webp');
-    width: 64px;
-    height: 64px;
-    top: 50%;
+    width: 20px;
+    height: 40px;
+    top: 10px;
     background-size: contain;
-    margin-top: -32px;
-    right: -90px;
+    right: -50px;
   }
 }
 
@@ -53,9 +58,28 @@
   content: none;
 }
 
+.stepCount {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
+  font-weight: 600;
+  font-size: 20px;
+  text-align: center;
+  background-color: var(--marketplaceColor);
+  color: white;
+  border-radius: 50%;
+}
+.stepParagraph {
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 150%;
+  letter-spacing: -.25px;
+}
 .stepTitle {
   margin-top: 0;
   margin-bottom: 18px;
+  display: flex;
 
   @media (--viewportMedium) {
     margin-top: 0;
