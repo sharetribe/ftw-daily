@@ -96,19 +96,19 @@ const STATE_REVIEWED_BY_CUSTOMER = 'reviewed-by-customer';
 const STATE_REVIEWED_BY_PROVIDER = 'reviewed-by-provider';
 
 /**
- * Description of transaction process
+ * Description of transaction processes
  *
- * You should keep this in sync with transaction process defined in Marketplace API
+ * You should keep this in sync with transaction processes defined in Marketplace API
  *
  * Note: we don't use yet any state machine library,
  *       but this description format is following Xstate (FSM library)
  *       https://xstate.js.org/docs/
  */
-const stateDescription = {
+const stateDescriptions = [{
   // id is defined only to support Xstate format.
   // However if you have multiple transaction processes defined,
   // it is best to keep them in sync with transaction process aliases.
-  id: 'preauth-with-nightly-booking/release-1',
+  id: 'sca-preauth-nightly-booking-due-now/release-2',
 
   // This 'initial' state is a starting point for new transaction
   initial: STATE_INITIAL,
@@ -174,10 +174,74 @@ const stateDescription = {
     },
     [STATE_REVIEWED]: { type: 'final' },
   },
-};
+}, {
+  id: 'sca-preauth-nightly-booking-due-later/release-1',
+  initial: STATE_INITIAL,
+  states: {
+    [STATE_INITIAL]: {
+      on: {
+        [TRANSITION_ENQUIRE]: STATE_ENQUIRY,
+        [TRANSITION_REQUEST_PAYMENT]: STATE_PENDING_PAYMENT,
+      },
+    },
+    [STATE_ENQUIRY]: {
+      on: {
+        [TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY]: STATE_PENDING_PAYMENT,
+      },
+    },
+
+    [STATE_PENDING_PAYMENT]: {
+      on: {
+        [TRANSITION_EXPIRE_PAYMENT]: STATE_PAYMENT_EXPIRED,
+        [TRANSITION_CONFIRM_PAYMENT]: STATE_PREAUTHORIZED,
+      },
+    },
+
+    [STATE_PAYMENT_EXPIRED]: {},
+    [STATE_PREAUTHORIZED]: {
+      on: {
+        [TRANSITION_DECLINE]: STATE_DECLINED,
+        [TRANSITION_EXPIRE]: STATE_DECLINED,
+        [TRANSITION_ACCEPT]: STATE_ACCEPTED,
+      },
+    },
+
+    [STATE_DECLINED]: {},
+    [STATE_ACCEPTED]: {
+      on: {
+        [TRANSITION_CANCEL]: STATE_CANCELED,
+        [TRANSITION_COMPLETE]: STATE_DELIVERED,
+      },
+    },
+
+    [STATE_CANCELED]: {},
+    [STATE_DELIVERED]: {
+      on: {
+        [TRANSITION_EXPIRE_REVIEW_PERIOD]: STATE_REVIEWED,
+        [TRANSITION_REVIEW_1_BY_CUSTOMER]: STATE_REVIEWED_BY_CUSTOMER,
+        [TRANSITION_REVIEW_1_BY_PROVIDER]: STATE_REVIEWED_BY_PROVIDER,
+      },
+    },
+
+    [STATE_REVIEWED_BY_CUSTOMER]: {
+      on: {
+        [TRANSITION_REVIEW_2_BY_PROVIDER]: STATE_REVIEWED,
+        [TRANSITION_EXPIRE_PROVIDER_REVIEW_PERIOD]: STATE_REVIEWED,
+      },
+    },
+    [STATE_REVIEWED_BY_PROVIDER]: {
+      on: {
+        [TRANSITION_REVIEW_2_BY_CUSTOMER]: STATE_REVIEWED,
+        [TRANSITION_EXPIRE_CUSTOMER_REVIEW_PERIOD]: STATE_REVIEWED,
+      },
+    },
+    [STATE_REVIEWED]: { type: 'final' },
+  },
+}];
+
 
 // Note: currently we assume that state description doesn't contain nested states.
-const statesFromStateDescription = description => description.states || {};
+const statesFromStateDescriptions = descriptions => descriptions.map(d => d.states) || {}; // Merge arrays
 
 // Get all the transitions from states object in an array
 const getTransitions = states => {
@@ -196,18 +260,18 @@ const getTransitions = states => {
 };
 
 // This is a list of all the transitions that this app should be able to handle.
-export const TRANSITIONS = getTransitions(statesFromStateDescription(stateDescription)).map(
+export const TRANSITIONS = getTransitions(statesFromStateDescriptions(stateDescriptions)).map(
   t => t.key
 );
 
 // This function returns a function that has given stateDesc in scope chain.
-const getTransitionsToStateFn = stateDesc => state =>
-  getTransitions(statesFromStateDescription(stateDesc))
+const getTransitionsToStateFn = stateDescriptions => state =>
+  getTransitions(statesFromStateDescriptions(stateDescriptions))
     .filter(t => t.value === state)
     .map(t => t.key);
 
 // Get all the transitions that lead to specified state.
-const getTransitionsToState = getTransitionsToStateFn(stateDescription);
+const getTransitionsToState = getTransitionsToStateFn(stateDescriptions);
 
 // This is needed to fetch transactions that need response from provider.
 // I.e. transactions which provider needs to accept or decline
