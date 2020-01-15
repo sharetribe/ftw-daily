@@ -259,20 +259,22 @@ export const sendMessage = params => (dispatch, getState, sdk) => {
  * pricing info for the booking breakdown to get a proper estimate for
  * the price with the chosen information.
  */
-export const speculateTransaction = params => (dispatch, getState, sdk) => {
-  dispatch(speculateTransactionRequest());
+
+const initSpeculativeTransaction = (processAlias, params, dispatch, sdk) => {
   const bodyParams = {
     transition: TRANSITION_REQUEST_PAYMENT,
-    processAlias: config.bookingProcessAlias,
+    processAlias,
     params: {
       ...params,
       cardToken: 'CheckoutPage_speculative_card_token',
     },
   };
+
   const queryParams = {
     include: ['booking', 'provider'],
     expand: true,
   };
+
   return sdk.transactions
     .initiateSpeculative(bodyParams, queryParams)
     .then(response => {
@@ -281,17 +283,36 @@ export const speculateTransaction = params => (dispatch, getState, sdk) => {
         throw new Error('Expected a resource in the sdk.transactions.initiateSpeculative response');
       }
       const tx = entities[0];
-      dispatch(speculateTransactionSuccess(tx));
-    })
-    .catch(e => {
-      const { listingId, bookingStart, bookingEnd } = params;
-      log.error(e, 'speculate-transaction-failed', {
-        listingId: listingId.uuid,
-        bookingStart,
-        bookingEnd,
-      });
-      return dispatch(speculateTransactionError(storableError(e)));
+      return tx;
     });
+};
+
+export const speculateTransaction = params => (dispatch, getState, sdk) => {
+  dispatch(speculateTransactionRequest());
+
+  const aliasDueNow = config.bookingProcessAliases[0];
+  const aliasDueLater = config.bookingProcessAliases[1];
+
+  const processDueLater = initSpeculativeTransaction(aliasDueLater, params, dispatch, sdk);
+
+  // Create due now process and link to due later process
+  processDueLater.then(txLater => {
+    params.protectedData = {
+      linkedProcessId: txLater.id.uuid
+    }
+
+    initSpeculativeTransaction(aliasDueNow, params, dispatch, sdk).then(txNow => {
+      dispatch(speculateTransactionSuccess(txNow));
+    });
+  }).catch(e => {
+    const { listingId, bookingStart, bookingEnd } = params;
+    log.error(e, 'speculate-transaction-failed', {
+      listingId: listingId.uuid,
+      bookingStart,
+      bookingEnd,
+    });
+    return dispatch(speculateTransactionError(storableError(e)));
+  });
 };
 
 // StripeCustomer is a relantionship to currentUser
