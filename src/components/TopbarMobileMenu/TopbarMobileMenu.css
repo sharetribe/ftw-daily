@@ -111,9 +111,6 @@
   margin-bottom: 24px;
   margin-top: var(--TopbarMobileMenu_topMargin);
 }
-.authenticationLinks {
-  white-space: nowrap;
-}
 
 .signupLink {
   text-decoration: none;

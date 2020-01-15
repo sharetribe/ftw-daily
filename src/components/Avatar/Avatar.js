@@ -58,6 +58,8 @@ export const AvatarComponent = props => {
   const hasProfileImage = avatarUser.profileImage && avatarUser.profileImage.id;
   const profileLinkEnabled = !disableProfileLink;
   
+  if (hasProfileImage) rootProps.className = classes + ' ' + css.hasProfileImage
+
   if (isBannedUser || isDeletedUser) {
     return (
       <div {...rootProps}>
@@ -74,6 +76,7 @@ export const AvatarComponent = props => {
           variants={AVATAR_IMAGE_VARIANTS}
           sizes={renderSizes}
         />
+        <i className={css.avatarLayer}></i>
       </NamedLink>
     );
   } else if (hasProfileImage) {
@@ -86,6 +89,7 @@ export const AvatarComponent = props => {
           variants={AVATAR_IMAGE_VARIANTS}
           sizes={renderSizes}
         />
+        <i className={css.avatarLayer}></i>
       </div>
     );
   } else if (profileLinkEnabled) {

@@ -3,21 +3,26 @@
 .advantage {
   display: grid;
   grid-template-columns: min-content 1fr;
-  grid-column-gap: 20px;
+  grid-column-gap: 24px;
+}
+
+.advantageIcon {
+  fill: none;
 }
 
 .advantageTitle {
   margin: 0;
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 1.5;
+  margin-bottom: 12px;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 24px;
 }
 
 .advantageText {
   margin: 0;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 1.5;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 22px;
 }
 
  .advantages {

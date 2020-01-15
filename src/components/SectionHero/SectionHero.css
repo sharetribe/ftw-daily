@@ -101,17 +101,36 @@
 .heroButton {
   @apply --marketplaceButtonStyles;
   @apply --SectionHero_animation;
-  @apply --marketplaceGradientButton;
 
   animation-delay: 0.8s;
 
   @media (--viewportMedium) {
-    display: block;
     width: 260px;
   }
 }
-
-.iconSearch {
-  margin-right: 10px;
-  stroke: #fff;
+.heroText {
+  position: relative;
+  display: inline-block;
 }
+  .heroText:after,
+  .heroText:before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 2px;
+    height: 8px;
+    background-color: white;
+    right: -30px;
+    top: 50%;
+    border-radius: 5px;
+  }
+  .heroText:after {
+    transform: rotate(45deg) translateY(3px) translateX(-2.5px);
+  }
+  .heroText:before {
+    transform: rotate(-45deg) translateY(-6px);
+  }
+  .iconSearch {
+    margin-right: 10px;
+    stroke: #fff;
+  }

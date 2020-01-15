@@ -2,7 +2,7 @@ import React from 'react';
 import { string } from 'prop-types';
 import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
-import { NamedLink, IconSearch } from '../../components';
+import { NamedLink } from '../../components';
 
 import css from './SectionHero.css';
 
@@ -28,8 +28,9 @@ const SectionHero = props => {
           }}
           className={css.heroButton}
         >
-          <IconSearch className={css.iconSearch} />
-          <FormattedMessage id="SectionHero.browseButton" />
+          <span className={css.heroText}>
+            <FormattedMessage  id="SectionHero.browseButton" />
+          </span>
         </NamedLink>
       </div>
     </div>

@@ -11,14 +11,12 @@
     are left to CSS bundle. We are planning to enable it in the future
     since browsers support CSS Properties already.
  */
-
   /**
    * Font variables are separated to different file so that the amount of font styling rules
    * doesn't overflow this one.
    * see ./marketplaceFonts.css
    * Usage example: .root { @apply --marketplaceH1FontStyles; }
    */
-
   /* Full screen Background image located in root-folder/src/assets */
   --backgroundImage: {
     /* Gradient direction and overlaying the black color on top of the image for better readability */
@@ -39,41 +37,31 @@
       border: solid 36px var(--matterColorBright);
     }
   }
-
   /* ================ Colors ================ */
-
-  --marketplaceColor: #8f2593;
+  --marketplaceColor: #923395;
   --marketplaceColorLight: #ff4c38;
   /*--marketplaceColorDark: #8f2593;*/
-  --marketplaceColorDark: #7a217d;
-
+  --marketplaceColorDark: #88298B;
   /* Used with inline CSS SVGs */
   --marketplaceColorEncoded: %23c0392b;
-
   --marketplaceLinearGradientMainColor: linear-gradient(135deg, rgba(210,170,225,1) 0%, rgba(191,120,215,1) 27%, rgba(165,77,175,1) 100%);
-
   --successColor: #2ecc71;
   --successColorDark: #239954;
   --failColor: #ff0000;
   --attentionColor: #ffaa00;
   --bannedColorLight: var(--marketplaceColorLight);
   --bannedColorDark: var(--marketplaceColor);
-
   --matterColorDark: #000000;
   --matterColor: #1a2b49;
   --matterColorAnti: #b2b2b2;
-  --matterColorNegative: #e7e7e7;
+  --matterColorNegative: #bababa;
   --matterColorBright: #ffffff;
   --matterColorLight: #ffffff;
-
   --matterColorLightTransparent: rgba(255, 255, 255, 0.65);
-
   /* ================ Spacing unites ================ */
-
   /* Multiples of mobile and desktop spacing units should be used with margins and paddings. */
   --spacingUnit: 6px;
   --spacingUnitDesktop: 8px;
-
   /* Shadows */
   --boxShadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
   --boxShadowTop: 0 -2px 4px 0 rgba(0, 0, 0, 0.1);
@@ -87,9 +75,7 @@
   --boxShadowSectionLocationHover: 0 10px 30px 0 rgba(0, 0, 0, 0.1);
   --boxShadowBottomForm: 0 -2px 4px 0 rgba(0, 0, 0, 0.05);
   --boxShadowFilterButton: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
-
   /* ================ Z-index base levels ================ */
-
   /* topbar is positioned slightly above content */
   --zIndexTopbar: 10;
   /* small popups on UI should use z-indexes above 50 */
@@ -98,34 +84,22 @@
   --zIndexModal: 100;
   /* generic error message should overlay even modals */
   --zIndexGenericError: 200;
-
   /* ================ Border radius ================ */
-
   --borderRadius: 5px;
   --borderRadiusMobileSearch: 3px;
-
   /* ================ Transition styles ================ */
-
   --transitionStyle: ease-in 0.2s;
   --transitionStyleButton: ease-in-out 0.1s;
-
   /* ================ Topbar heights ================ */
-
   --topbarHeight: 60px;
   --topbarHeightDesktop: 72px;
-
   /* ================ Modal default padding ================ */
-
   --modalPadding: 24px 24px 48px 24px;
   --modalPaddingMedium: 55px 60px 55px 60px;
-
   /* ================ LocationAutocompleteInput bottom attribution padding ================ */
-
   /* Google Maps needs 72px bottom padding to accommodate logo, Mapbox doesn't have one */
   --locationAutocompleteBottomPadding: 72px;
-
   /* ================ Clearfix solution ================ */
-
   --clearfix {
     &::after {
       content: '';
@@ -133,9 +107,7 @@
       clear: both;
     }
   }
-
   /* ================ Links ================ */
-
   --marketplaceLinkStyles: {
     /* Position and dimensions */
     display: inline;
@@ -156,9 +128,7 @@
       cursor: pointer;
     }
   }
-
   /* ================ Buttons ================ */
-
   --marketplaceButtonFontStyles: {
     font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightSemiBold);
@@ -169,19 +139,16 @@
     @media (--viewportMedium) {
       /* TODO: Make sure button text aligns with the baseline */
     }
-  }
-  --marketplaceButtonStyles {
+  } --marketplaceButtonStyles {
     @apply --marketplaceButtonFontStyles;
 
     /* Dimensions */
-    display: block;
+     display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     min-height: 59px;
     margin: 0;
-
-    /* Padding is only for <a> elements where button styles are applied,
-		buttons elements should have zero padding */
-    padding: 20px 0 0 0;
 
     /* Borders */
     border: none;
@@ -217,13 +184,9 @@
     @media (--viewportMedium) {
       min-height: 65px;
     }
-  }
-
-  --marketplaceGradientButton {
+  } --marketplaceGradientButton {
       background-image: var(--marketplaceLinearGradientMainColor);
-    }
-
-  --marketplaceButtonStylesPrimary {
+    } --marketplaceButtonStylesPrimary {
     @apply --marketplaceButtonStyles;
 
     background-color: var(--successColor);
@@ -238,8 +201,7 @@
       background-color: var(--matterColorNegative);
       color: var(--matterColorLight);
     }
-  }
-  --marketplaceButtonStylesSecondary {
+  } --marketplaceButtonStylesSecondary {
     @apply --marketplaceButtonStyles;
 
     background-color: var(--matterColorLight);
@@ -264,9 +226,7 @@
       border-color: var(--matterColorNegative);
     }
   }
-
   /* ================ Inputs ================ */
-
   --marketplaceInputStyles: {
     /* Dimensions */
     display: block;
@@ -298,9 +258,7 @@
     @media (--viewportMedium) {
       padding: 4px 0 10px 0;
     }
-  }
-
-  --marketplaceSelectStyles: {
+  } --marketplaceSelectStyles: {
     /* Dimensions */
     display: block;
     width: 100%;
@@ -337,9 +295,7 @@
       padding: 4px 0 10px 0;
     }
   }
-
   /* ================ Modals ================ */
-
   --marketplaceModalRootStyles {
     /* Page is using flex: AuthenticationPage's .root takes all available space */
     flex-grow: 1;
@@ -351,17 +307,13 @@
       justify-content: center;
       align-items: flex-start;
     }
-  }
-
-  --marketplaceModalFormRootStyles {
+  } --marketplaceModalFormRootStyles {
     display: flex;
     flex-direction: column;
     flex: 1;
     justify-content: space-between;
     height: 100%;
-  }
-
-  --marketplaceModalBaseStyles {
+  } --marketplaceModalBaseStyles {
     flex-grow: 1;
 
     /* Create context so the close button can be positioned within it */
@@ -383,11 +335,9 @@
       padding: var(--modalPaddingMedium);
       margin-top: 12.5vh;
       margin-bottom: 12.5vh;
-      border-bottom: 8px solid var(--marketplaceColor);
+      border-top: 8px solid var(--marketplaceColor);
     }
-  }
-
-  --marketplaceModalInMobileBaseStyles {
+  } --marketplaceModalInMobileBaseStyles {
     flex-grow: 1;
 
     /* Create context so the close button can be positioned within it */
@@ -411,9 +361,7 @@
       border-radius: 0;
     }
   }
-
   /* Modal title */
-
   --marketplaceModalTitleStyles {
     font-weight: var(--fontWeightSemiBold);
     font-size: 30px;
@@ -429,9 +377,7 @@
       margin: 0;
     }
   }
-
   /* Modal message */
-
   --marketplaceModalParagraphStyles {
     margin: 18px 0 0 0;
 
@@ -439,9 +385,7 @@
       margin: 24px 0 0 0;
     }
   }
-
   /* Bottom wrapper for the modal */
-
   --marketplaceModalBottomWrapper {
     text-align: center;
     margin-top: 60px;
@@ -451,7 +395,6 @@
       margin-top: 96px;
     }
   }
-
   /* Adjust the bottomWrapper's margin to match modals without the helper text */
   --marketplaceModalBottomWrapperText {
     margin-top: -24px;
@@ -460,9 +403,7 @@
     @media (--viewportMedium) {
       padding-bottom: 0;
     }
-  }
-
-  --marketplaceModalHelperText {
+  } --marketplaceModalHelperText {
     @apply --marketplaceH5FontStyles;
     color: var(--matterColorAnti);
     margin: 0;
@@ -470,9 +411,7 @@
     @media (--viewportMedium) {
       margin: 0;
     }
-  }
-
-  --marketplaceModalHelperLink {
+  } --marketplaceModalHelperLink {
     @apply --marketplaceH5FontStyles;
     color: var(--matterColor);
     margin: 0;
@@ -481,9 +420,7 @@
       margin: 0;
     }
   }
-
   /* Modal Close icon */
-
   --marketplaceModalCloseStyles {
     /* Position inside modal */
     position: fixed;
@@ -527,9 +464,7 @@
     &:disabled {
       background-color: transparent;
     }
-  }
-
-  --marketplaceModalIconStyles {
+  } --marketplaceModalIconStyles {
     height: 48px;
     margin-bottom: 12px;
 
@@ -537,9 +472,7 @@
       height: 64px;
       margin-bottom: 23px;
     }
-  }
-
-  --marketplaceModalCloseText {
+  } --marketplaceModalCloseText {
     /* Font */
     @apply --marketplaceH6FontStyles;
     margin: -2.5px 0 0 0;
@@ -547,26 +480,18 @@
     @media (--viewportMedium) {
       margin-top: -1px;
     }
-  }
-
-  --marketplaceModalCloseIcon {
+  } --marketplaceModalCloseIcon {
     display: inline-block;
     margin-left: 8px;
     padding: 2px 0 4px;
     box-sizing: content-box;
-  }
-
-  --marketplaceModalErrorStyles {
+  } --marketplaceModalErrorStyles {
     @apply --marketplaceH4FontStyles;
     margin-top: 24px;
     color: var(--failColor);
-  }
-
-  --marketplaceModalHighlightEmail {
+  } --marketplaceModalHighlightEmail {
     font-weight: var(--fontWeightBold);
-  }
-
-  --marketplaceModalPasswordMargins {
+  } --marketplaceModalPasswordMargins {
     /* Leave space between the input and the button below when the
     viewport height is small */
     margin-top: 24px;
