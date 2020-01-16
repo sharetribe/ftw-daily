@@ -175,7 +175,7 @@ const stateDescriptions = [{
     [STATE_REVIEWED]: { type: 'final' },
   },
 }, {
-  id: 'sca-preauth-nightly-booking-due-later/release-1',
+  id: 'sca-preauth-nightly-booking-due-later/release-2',
   initial: STATE_INITIAL,
   states: {
     [STATE_INITIAL]: {
@@ -215,27 +215,7 @@ const stateDescriptions = [{
     },
 
     [STATE_CANCELED]: {},
-    [STATE_DELIVERED]: {
-      on: {
-        [TRANSITION_EXPIRE_REVIEW_PERIOD]: STATE_REVIEWED,
-        [TRANSITION_REVIEW_1_BY_CUSTOMER]: STATE_REVIEWED_BY_CUSTOMER,
-        [TRANSITION_REVIEW_1_BY_PROVIDER]: STATE_REVIEWED_BY_PROVIDER,
-      },
-    },
-
-    [STATE_REVIEWED_BY_CUSTOMER]: {
-      on: {
-        [TRANSITION_REVIEW_2_BY_PROVIDER]: STATE_REVIEWED,
-        [TRANSITION_EXPIRE_PROVIDER_REVIEW_PERIOD]: STATE_REVIEWED,
-      },
-    },
-    [STATE_REVIEWED_BY_PROVIDER]: {
-      on: {
-        [TRANSITION_REVIEW_2_BY_CUSTOMER]: STATE_REVIEWED,
-        [TRANSITION_EXPIRE_CUSTOMER_REVIEW_PERIOD]: STATE_REVIEWED,
-      },
-    },
-    [STATE_REVIEWED]: { type: 'final' },
+    [STATE_DELIVERED]: { type: 'final' },
   },
 }];
 

@@ -1,6 +1,8 @@
 import pick from 'lodash/pick';
+import moment from 'moment';
 import config from '../../config';
 import { denormalisedResponseEntities } from '../../util/data';
+import { daysBetween } from '../../util/dates';
 import { storableError } from '../../util/errors';
 import {
   TRANSITION_REQUEST_PAYMENT,
@@ -289,9 +291,26 @@ const initSpeculativeTransaction = (processAlias, params, sdk) => {
 
 export const speculateTransaction = params => (dispatch, getState, sdk) => {
   dispatch(speculateTransactionRequest());
-
+  const { listingId, bookingStart, bookingEnd } = params;
   const aliasDueNow = config.bookingProcessAliases[0];
   const aliasDueLater = config.bookingProcessAliases[1];
+
+  const daysUntilStart = daysBetween(new Date, bookingStart);
+  const isSplitPayment = daysUntilStart >= config.splitPaymentCapDays;
+  // const dueDate = moment(bookingStart).subtract(3, 'days');
+
+  if (!isSplitPayment) {
+    return initSpeculativeTransaction(aliasDueNow, params, sdk).then(txNow => {
+      dispatch(speculateTransactionSuccess(txNow));
+    }).catch(e => {
+      log.error(e, 'speculate-transaction-failed', {
+        listingId: listingId.uuid,
+        bookingStart,
+        bookingEnd,
+      });
+      dispatch(speculateTransactionError(storableError(e)));
+    });
+  }
 
   const processDueLater = initSpeculativeTransaction(aliasDueLater, params, sdk);
 
@@ -305,13 +324,12 @@ export const speculateTransaction = params => (dispatch, getState, sdk) => {
       dispatch(speculateTransactionSuccess(txNow));
     });
   }).catch(e => {
-    const { listingId, bookingStart, bookingEnd } = params;
     log.error(e, 'speculate-transaction-failed', {
       listingId: listingId.uuid,
       bookingStart,
       bookingEnd,
     });
-    return dispatch(speculateTransactionError(storableError(e)));
+    dispatch(speculateTransactionError(storableError(e)));
   });
 };
 

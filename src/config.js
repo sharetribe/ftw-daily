@@ -26,6 +26,8 @@ const i18n = {
 // search off by changing the keywordFilterConfig parameter active to false in marketplace-custom-config.js
 const sortSearchByDistance = false;
 
+const splitPaymentCapDays = 14;
+
 // API supports custom processes to be used in booking process.
 // We need to specify it when we are initiating a new order
 // (or fetching price information by calling 'initiateSpeculative' endpoint).
@@ -35,7 +37,7 @@ const sortSearchByDistance = false;
 
 const bookingProcessAliases = [
   'sca-preauth-nightly-booking-due-now/release-2',
-  'sca-preauth-nightly-booking-due-later/release-1'
+  'sca-preauth-nightly-booking-due-later/release-2'
 ];
 
 // The transaction line item code for the main unit type in bookings.
@@ -223,6 +225,7 @@ const config = {
   usingSSL,
   maps,
   custom,
+  splitPaymentCapDays
 };
 
 export default config;

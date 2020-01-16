@@ -7,6 +7,7 @@ import { txIsCanceled, txIsDelivered, txIsDeclined } from '../../util/transactio
 import { propTypes } from '../../util/types';
 import { nightsBetween, formatDateToText } from '../../util/dates';
 import { types as sdkTypes } from '../../util/sdkLoader';
+import config from '../../config';
 
 import css from './BookingBreakdown.css';
 
@@ -32,7 +33,7 @@ const LineItemUnitPrice = props => {
 
   const startDate = transaction.booking.attributes.start;
   const nightsUntilStartDate = nightsBetween(transaction.attributes.createdAt, startDate);
-  const isSplitPayment = nightsUntilStartDate >= 14;
+  const isSplitPayment = nightsUntilStartDate >= config.splitPaymentCapDays;
   const dueDate = moment(startDate).subtract(3, 'days');
 
   const totalPrice = isProvider
