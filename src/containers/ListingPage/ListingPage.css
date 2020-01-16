@@ -326,7 +326,7 @@
 
 .desktopPerUnit {
   /* Font */
-  @apply --marketplaceH5FontStyles;
+  @apply --marketplaceTinyFontStyles;
   color: var(--matterColor);
 
   @media (--viewportMedium) {
