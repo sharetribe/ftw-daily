@@ -175,18 +175,12 @@ const stateDescriptions = [{
     [STATE_REVIEWED]: { type: 'final' },
   },
 }, {
-  id: 'sca-preauth-nightly-booking-due-later/release-2',
+  id: 'sca-preauth-nightly-booking-due-later/release-3',
   initial: STATE_INITIAL,
   states: {
     [STATE_INITIAL]: {
       on: {
-        [TRANSITION_ENQUIRE]: STATE_ENQUIRY,
         [TRANSITION_REQUEST_PAYMENT]: STATE_PENDING_PAYMENT,
-      },
-    },
-    [STATE_ENQUIRY]: {
-      on: {
-        [TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY]: STATE_PENDING_PAYMENT,
       },
     },
 
@@ -221,7 +215,9 @@ const stateDescriptions = [{
 
 
 // Note: currently we assume that state description doesn't contain nested states.
-const statesFromStateDescriptions = descriptions => descriptions.map(d => d.states) || {}; // Merge arrays
+const statesFromStateDescriptions = descriptions => {
+  return {...descriptions[0].states, ...descriptions[1].states};
+}
 
 // Get all the transitions from states object in an array
 const getTransitions = states => {
