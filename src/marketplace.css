@@ -1,4 +1,4 @@
-@import './marketplaceFonts.css';
+  @import './marketplaceFonts.css';
 
 /* ================ Custom properties aka variables ================ */
 
@@ -42,7 +42,7 @@
 
   /* ================ Colors ================ */
 
-  --marketplaceColor: #50fcce;
+  --marketplaceColor: #1cf2b8;
   --marketplaceColorLight: #9EFFE5;
   --marketplaceColorDark: #41CCA7;
 
