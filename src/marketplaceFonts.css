@@ -122,7 +122,8 @@
     margin-bottom: 17px;
 
     @media (--viewportMedium) {
-      line-height: 32px;
+      line-height: 42px;
+      font-size: 40px;
       /* margin-top + n * line-height + margin-bottom => x * 8px */
       margin-top: 21px;
       margin-bottom: 19px;
@@ -192,8 +193,8 @@
   --marketplaceTinyFontStyles: {
     font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightRegular);
-    font-size: 13px;
-    line-height: 18px;
+    font-size: 16px;
+    line-height: 24px;
     letter-spacing: -0.1px;
     /* margin-top + n * line-height + margin-bottom => x * 6px */
     margin-top: 9.5px;

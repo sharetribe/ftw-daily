@@ -66,9 +66,11 @@
   font-weight: 600;
   font-size: 20px;
   text-align: center;
+  line-height: 35px;
   background-color: var(--marketplaceColor);
   color: white;
   border-radius: 50%;
+  flex-shrink: 0;
 }
 .stepParagraph {
   font-weight: normal;

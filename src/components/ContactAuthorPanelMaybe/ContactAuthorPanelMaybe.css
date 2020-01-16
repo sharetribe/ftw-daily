@@ -37,14 +37,10 @@
 
 .contactAuthorText {
   display: none;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 18px;
-  letter-spacing: 0;
   margin-top: 10px;
   margin-bottom: 8px;
   @media (--viewportLarge) {
-    line-height: 24px;
+    @apply --marketplaceTinyFontStyles;
     margin-top: 10px;
     margin-bottom: 14px;
     color: #1a2b49;
