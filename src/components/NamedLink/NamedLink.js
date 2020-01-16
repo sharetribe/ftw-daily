@@ -25,7 +25,7 @@ import routeConfiguration from '../../routeConfiguration';
 import { pathByRouteName } from '../../util/routes';
 
 export const NamedLinkComponent = props => {
-  const { name, params, title, openInNewTab, isNotRouterLink } = props;
+  const { name, params, title, openInNewTab, isNotRouterLink, history } = props;
 
   // Link props
   const { to, children } = props;
@@ -45,11 +45,6 @@ export const NamedLinkComponent = props => {
     Object.assign(aElemProps, { target: '_blank' });
   }
 
-  const changePathProgrammatically = () => {
-    let { target } = aElemProps
-    target ? window.open(pathname, '_blank') : window.open(pathname)
-  }
-
   /*
    * isNotRouterLink prop is used to prevent forbidden html elements
    * to be nested inside <a /> tag
@@ -64,7 +59,7 @@ export const NamedLinkComponent = props => {
           customProps.className = aElemProps.className;
           customProps.style = aElemProps.style;
     return (
-      <div onClick={changePathProgrammatically} {...customProps} >
+      <div onClick={() => history.push(pathname) } {...customProps} >
         {children}
       </div>
       )
