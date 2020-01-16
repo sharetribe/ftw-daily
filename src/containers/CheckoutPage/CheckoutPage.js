@@ -587,11 +587,6 @@ export class CheckoutPageComponent extends Component {
             title={intl.formatMessage({ id: 'CheckoutPage.goToLandingPage' })}
             format="mobile"
           />
-          <Logo
-            className={css.logoDesktop}
-            alt={intl.formatMessage({ id: 'CheckoutPage.goToLandingPage' })}
-            format="desktop"
-          />
         </NamedLink>
       </div>
     );
