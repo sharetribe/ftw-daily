@@ -10,6 +10,7 @@ import {
   TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY,
   TRANSITION_CONFIRM_PAYMENT,
   TRANSITION_INITIATE_SPLIT_PAYMENT,
+  TRANSITION_ACTIVATE,
 } from '../../util/transaction';
 import * as log from '../../util/log';
 import { fetchCurrentUserHasOrdersSuccess, fetchCurrentUser } from '../../ducks/user.duck';
