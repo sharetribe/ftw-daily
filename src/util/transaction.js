@@ -54,6 +54,11 @@ export const TRANSITION_EXPIRE_CUSTOMER_REVIEW_PERIOD = 'transition/expire-custo
 export const TRANSITION_EXPIRE_PROVIDER_REVIEW_PERIOD = 'transition/expire-provider-review-period';
 export const TRANSITION_EXPIRE_REVIEW_PERIOD = 'transition/expire-review-period';
 
+
+// Initiate split payment
+export const TRANSITION_INITIATE_SPLIT_PAYMENT = 'transition/initiate-split-payment';
+
+
 /**
  * Actors
  *
@@ -95,6 +100,8 @@ const STATE_REVIEWED = 'reviewed';
 const STATE_REVIEWED_BY_CUSTOMER = 'reviewed-by-customer';
 const STATE_REVIEWED_BY_PROVIDER = 'reviewed-by-provider';
 
+
+const STATE_INITIATED_SPLIT_PAYMENT = 'initiated-split-payment';
 /**
  * Description of transaction processes
  *
@@ -175,10 +182,16 @@ const stateDescriptions = [{
     [STATE_REVIEWED]: { type: 'final' },
   },
 }, {
-  id: 'sca-preauth-nightly-booking-due-later/release-4',
+  id: 'sca-preauth-nightly-booking-due-later/release-8',
   initial: STATE_INITIAL,
   states: {
     [STATE_INITIAL]: {
+      on: {
+        [TRANSITION_INITIATE_SPLIT_PAYMENT]: STATE_INITIATED_SPLIT_PAYMENT,
+      },
+    },
+
+    [STATE_INITIATED_SPLIT_PAYMENT]: {
       on: {
         [TRANSITION_REQUEST_PAYMENT]: STATE_PENDING_PAYMENT,
       },
