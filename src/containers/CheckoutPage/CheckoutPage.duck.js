@@ -166,8 +166,6 @@ export const stripeCustomerError = e => ({
 export const confirmPayment = orderParams => (dispatch, getState, sdk) => {
   dispatch(confirmPaymentRequest());
 
-  // RUN TRANSITION_ACTIVATE_PAYMENT ON LATER
-
   const bodyParams = {
     id: orderParams.transactionId,
     transition: TRANSITION_CONFIRM_PAYMENT,
@@ -190,6 +188,113 @@ export const confirmPayment = orderParams => (dispatch, getState, sdk) => {
         ...transactionIdMaybe,
       });
       throw e;
+    });
+};
+
+export const initiateOrder = (orderParams, transactionId) => async (dispatch, getState, sdk) => {
+  dispatch(initiateOrderRequest());
+  const bodyParams = transactionId
+    ? {
+        id: transactionId,
+        transition: TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY,
+        params: orderParams,
+      }
+    : {
+        processAlias: config.bookingProcessAliases[0],
+        transition: TRANSITION_REQUEST_PAYMENT,
+        params: orderParams,
+      };
+  const queryParams = {
+    include: ['booking', 'provider'],
+    expand: true,
+  };
+
+  const createOrder = transactionId ? sdk.transactions.transition : sdk.transactions.initiate;
+
+  // Initiate second transaction if more than 14 days to check-in
+  const splitPayment = shouldSplitPayment(orderParams.bookingStart);
+  if (splitPayment) {
+    const txSecondPayment = await initiateSecondPayment(orderParams, sdk);
+    bodyParams.params = {
+      ...bodyParams.params,
+      protectedData: {
+        linkedProcessId: txSecondPayment.id.uuid
+      }
+    }
+  }
+
+  return createOrder(bodyParams, queryParams)
+    .then(response => {
+      const entities = denormalisedResponseEntities(response);
+      const order = entities[0];
+      dispatch(initiateOrderSuccess(order));
+      dispatch(fetchCurrentUserHasOrdersSuccess(true));
+      return order;
+    })
+    .catch(e => {
+      dispatch(initiateOrderError(storableError(e)));
+      const transactionIdMaybe = transactionId ? { transactionId: transactionId.uuid } : {};
+      log.error(e, 'initiate-order-failed', {
+        ...transactionIdMaybe,
+        listingId: orderParams.listingId.uuid,
+        bookingStart: orderParams.bookingStart,
+        bookingEnd: orderParams.bookingEnd,
+      });
+      throw e;
+    });
+
+};
+
+const shouldSplitPayment = bookingStart => {
+  const daysUntilStart = daysBetween(new Date, bookingStart);
+  return daysUntilStart >= config.splitPaymentCapDays;
+}
+
+const initiateSecondPayment = (orderParams, sdk) => {
+  const bodyParams = {
+    processAlias: config.bookingProcessAliases[1],
+    transition: TRANSITION_INITIATE_SPLIT_PAYMENT,
+    params: orderParams,
+  };
+
+  const queryParams = {
+    include: ['booking', 'provider'],
+    expand: true,
+  };
+
+  return sdk.transactions
+    .initiate(bodyParams, queryParams)
+    .then(response => {
+      const entities = denormalisedResponseEntities(response);
+      const tx = entities[0];
+      return tx;
+    })
+    .catch(e => {
+      throw e
+    });
+};
+
+const requestSecondPayment = (orderParams, sdk) => {
+  const bodyParams = {
+    id: orderParams.transactionId,
+    transition: TRANSITION_REQUEST_PAYMENT,
+    params: {},
+  };
+
+  const queryParams = {
+    include: ['booking', 'provider'],
+    expand: true,
+  };
+
+  return sdk.transactions
+    .transition(bodyParams, queryParams)
+    .then(response => {
+      const entities = denormalisedResponseEntities(response);
+      const tx = entities[0];
+      return tx;
+    })
+    .catch(e => {
+      throw e
     });
 };
 
@@ -224,48 +329,6 @@ export const sendMessage = params => (dispatch, getState, sdk) => {
  * pricing info for the booking breakdown to get a proper estimate for
  * the price with the chosen information.
  */
-
-
-export const initiateOrder = (orderParams, transactionId) => (dispatch, getState, sdk) => {
-  dispatch(initiateOrderRequest());
-  const bodyParams = transactionId
-    ? {
-        id: transactionId,
-        transition: TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY,
-        params: orderParams,
-      }
-    : {
-        processAlias: config.bookingProcessAlias,
-        transition: TRANSITION_REQUEST_PAYMENT,
-        params: orderParams,
-      };
-  const queryParams = {
-    include: ['booking', 'provider'],
-    expand: true,
-  };
-
-  const createOrder = transactionId ? sdk.transactions.transition : sdk.transactions.initiate;
-
-  return createOrder(bodyParams, queryParams)
-    .then(response => {
-      const entities = denormalisedResponseEntities(response);
-      const order = entities[0];
-      dispatch(initiateOrderSuccess(order));
-      dispatch(fetchCurrentUserHasOrdersSuccess(true));
-      return order;
-    })
-    .catch(e => {
-      dispatch(initiateOrderError(storableError(e)));
-      const transactionIdMaybe = transactionId ? { transactionId: transactionId.uuid } : {};
-      log.error(e, 'initiate-order-failed', {
-        ...transactionIdMaybe,
-        listingId: orderParams.listingId.uuid,
-        bookingStart: orderParams.bookingStart,
-        bookingEnd: orderParams.bookingEnd,
-      });
-      throw e;
-    });
-};
 
 const initSpeculativeTransaction = (processAlias, params, sdk) => {
   const transition = processAlias === config.bookingProcessAliases[0]
@@ -303,11 +366,9 @@ export const speculateTransaction = params => (dispatch, getState, sdk) => {
   const { listingId, bookingStart, bookingEnd } = params;
   const aliasDueNow = config.bookingProcessAliases[0];
   const aliasDueLater = config.bookingProcessAliases[1];
+  const splitPayment = shouldSplitPayment(bookingStart);
 
-  const daysUntilStart = daysBetween(new Date, bookingStart);
-  const isSplitPayment = daysUntilStart >= config.splitPaymentCapDays;
-
-  if (!isSplitPayment) {
+  if (!splitPayment) {
     return initSpeculativeTransaction(aliasDueNow, params, sdk).then(txNow => {
       dispatch(speculateTransactionSuccess(txNow));
     }).catch(e => {
