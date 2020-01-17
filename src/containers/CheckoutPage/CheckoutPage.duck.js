@@ -4,6 +4,7 @@ import config from '../../config';
 import { denormalisedResponseEntities } from '../../util/data';
 import { daysBetween } from '../../util/dates';
 import { storableError } from '../../util/errors';
+import { types as sdkTypes } from '../../util/sdkLoader';
 import {
   TRANSITION_REQUEST_PAYMENT,
   TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY,
@@ -12,6 +13,9 @@ import {
 } from '../../util/transaction';
 import * as log from '../../util/log';
 import { fetchCurrentUserHasOrdersSuccess, fetchCurrentUser } from '../../ducks/user.duck';
+
+const { Money } = sdkTypes;
+
 
 // ================ Action types ================ //
 
@@ -191,6 +195,16 @@ export const confirmPayment = orderParams => (dispatch, getState, sdk) => {
     });
 };
 
+// Divide amounts by 2
+const formatLineItems = orderParams => {
+  const lineItems = orderParams.lineItems.map(i => {
+    i.unitPrice = new Money(i.unitPrice.amount / 2, i.unitPrice.currency)
+    return i
+  });
+
+  return lineItems;
+}
+
 export const initiateOrder = (orderParams, transactionId) => async (dispatch, getState, sdk) => {
   dispatch(initiateOrderRequest());
   const bodyParams = transactionId
@@ -214,7 +228,16 @@ export const initiateOrder = (orderParams, transactionId) => async (dispatch, ge
   // Initiate second transaction if more than 14 days to check-in
   const splitPayment = shouldSplitPayment(orderParams.bookingStart);
   if (splitPayment) {
+
+    // Split price in 2
+    bodyParams.params = {
+      ...bodyParams.params,
+      lineItems: formatLineItems(orderParams),
+    }
+
     const txSecondPayment = await initiateSecondPayment(orderParams, sdk);
+
+    // Link processes by adding the id of process #2 to process #1
     bodyParams.params = {
       ...bodyParams.params,
       protectedData: {
