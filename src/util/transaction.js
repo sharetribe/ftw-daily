@@ -175,7 +175,7 @@ const stateDescriptions = [{
     [STATE_REVIEWED]: { type: 'final' },
   },
 }, {
-  id: 'sca-preauth-nightly-booking-due-later/release-3',
+  id: 'sca-preauth-nightly-booking-due-later/release-4',
   initial: STATE_INITIAL,
   states: {
     [STATE_INITIAL]: {
