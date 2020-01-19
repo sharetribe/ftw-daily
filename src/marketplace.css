@@ -36,7 +36,7 @@
 
     @media (--viewportLarge) {
       border-radius: 40px;
-      border: solid 36px var(--matterColorBright);
+      border: solid 40px var(--matterColorBright);
     }
   }
 
@@ -159,7 +159,7 @@
   --marketplaceButtonFontStyles: {
     font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightSemiBold);
-    font-size: 18px;
+    font-size: 24px;
     line-height: 24px;
     letter-spacing: -0.3px;
 
