@@ -108,16 +108,6 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
 }
 
 // ================ Selectors ================ //
-const getLinkedTransactionId = state => {
-  const pageState = state.CheckoutPage;
-  const transaction = pageState.speculateTransactionInProgress
-    ? pageState.speculatedTransaction
-    : pageState.transaction;
-
-  if (!transaction || !transaction.attributes || !transaction.attributes.protectedData) return null;
-
-  return transaction.attributes.protectedData.linkedProcessId;
-};
 
 // ================ Action creators ================ //
 
