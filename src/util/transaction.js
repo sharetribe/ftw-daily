@@ -1,3 +1,4 @@
+import { merge } from 'lodash';
 import { ensureTransaction } from './data';
 
 /**
@@ -56,8 +57,12 @@ export const TRANSITION_EXPIRE_REVIEW_PERIOD = 'transition/expire-review-period'
 
 
 // Initiate split payment
-export const TRANSITION_INITIATE_SPLIT_PAYMENT = 'transition/initiate-split-payment';
-export const TRANSITION_ACTIVATE = 'transition/activate;'
+export const TRANSITION_INITIATE_GHOST_BOOKING = 'transition/initiate-ghost-booking';
+export const TRANSITION_ACTIVATE = 'transition/activate';
+export const TRANSITION_AUTO_PAYMENT = 'transition/auto-payment';
+export const TRANSITION_INITIATE_PAYMENT = 'transition/initiate-payment';
+export const TRANSITION_CANCEL_AND_REFUND = 'transition/cancel-and-refund';
+export const TRANSITION_CANCEL_BOOKING = 'transtion/cancel-booking';
 
 /**
  * Actors
@@ -92,17 +97,19 @@ const STATE_ENQUIRY = 'enquiry';
 const STATE_PENDING_PAYMENT = 'pending-payment';
 const STATE_PAYMENT_EXPIRED = 'payment-expired';
 const STATE_PREAUTHORIZED = 'preauthorized';
-const STATE_DECLINED = 'declined';
-const STATE_ACCEPTED = 'accepted';
-const STATE_CANCELED = 'canceled';
 const STATE_DELIVERED = 'delivered';
 const STATE_REVIEWED = 'reviewed';
 const STATE_REVIEWED_BY_CUSTOMER = 'reviewed-by-customer';
 const STATE_REVIEWED_BY_PROVIDER = 'reviewed-by-provider';
 
 
-const STATE_INITIATED_SPLIT_PAYMENT = 'initiated-split-payment';
+const STATE_PENDING_PROVIDER_DECISION = 'pending-provider-decision';
 const STATE_REQUESTED = 'requested';
+const STATE_PAID = 'paid';
+const STATE_ACCEPTED = 'accepted';
+const STATE_DECLINED = 'declined';
+const STATE_CANCELED = 'canceled';
+const STATE_PENDING_CONFIRMATION = 'pending-confirmation';
 
 /**
  * Description of transaction processes
@@ -184,51 +191,50 @@ const stateDescriptions = [{
     [STATE_REVIEWED]: { type: 'final' },
   },
 }, {
-  id: 'sca-preauth-nightly-booking-due-later/release-18',
+  id: 'sca-preauth-nightly-booking-due-later/release-23',
   initial: STATE_INITIAL,
   states: {
     [STATE_INITIAL]: {
       on: {
-        [TRANSITION_INITIATE_SPLIT_PAYMENT]: STATE_INITIATED_SPLIT_PAYMENT,
+        [TRANSITION_INITIATE_GHOST_BOOKING]: STATE_PENDING_PROVIDER_DECISION,
       },
     },
 
-    [STATE_INITIATED_SPLIT_PAYMENT]: {
+    [STATE_PENDING_PROVIDER_DECISION]: {
       on: {
-        [TRANSITION_REQUEST_PAYMENT]: STATE_REQUESTED,
+        [TRANSITION_DECLINE]: STATE_DECLINED,
+        [TRANSITION_ACCEPT]: STATE_ACCEPTED,
       },
     },
 
-    [STATE_REQUESTED]: {
+    [STATE_ACCEPTED]: {
       on: {
+        [TRANSITION_CANCEL_BOOKING]: STATE_CANCELED,
         [TRANSITION_ACTIVATE]: STATE_PENDING_PAYMENT,
       },
     },
 
     [STATE_PENDING_PAYMENT]: {
       on: {
-        [TRANSITION_EXPIRE_PAYMENT]: STATE_PAYMENT_EXPIRED,
-        [TRANSITION_CONFIRM_PAYMENT]: STATE_PREAUTHORIZED,
+        [TRANSITION_AUTO_PAYMENT]: STATE_PAID,
+        [TRANSITION_INITIATE_PAYMENT]: STATE_PENDING_CONFIRMATION,
       },
     },
 
-    [STATE_PAYMENT_EXPIRED]: {},
-    [STATE_PREAUTHORIZED]: {
+    [STATE_PENDING_CONFIRMATION]: {
       on: {
-        [TRANSITION_DECLINE]: STATE_DECLINED,
-        [TRANSITION_EXPIRE]: STATE_DECLINED,
-        [TRANSITION_ACCEPT]: STATE_ACCEPTED,
+        [TRANSITION_CONFIRM_PAYMENT]: STATE_PAID,
       },
     },
 
-    [STATE_DECLINED]: {},
-    [STATE_ACCEPTED]: {
+    [STATE_PAID]: {
       on: {
-        [TRANSITION_CANCEL]: STATE_CANCELED,
+        [TRANSITION_CANCEL_AND_REFUND]: STATE_CANCELED,
         [TRANSITION_COMPLETE]: STATE_DELIVERED,
       },
     },
 
+    [STATE_DECLINED]: {},
     [STATE_CANCELED]: {},
     [STATE_DELIVERED]: { type: 'final' },
   },
@@ -237,7 +243,7 @@ const stateDescriptions = [{
 
 // Note: currently we assume that state description doesn't contain nested states.
 const statesFromStateDescriptions = descriptions => {
-  return {...descriptions[0].states, ...descriptions[1].states};
+  return merge(descriptions[0].states, descriptions[1].states);
 }
 
 // Get all the transitions from states object in an array

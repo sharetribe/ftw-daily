@@ -11,8 +11,7 @@ import {
   getReview2Transition,
   txIsInFirstReviewBy,
   TRANSITION_ACCEPT,
-  TRANSITION_DECLINE,
-  TRANSITION_REQUEST_PAYMENT
+  TRANSITION_DECLINE
 } from '../../util/transaction';
 import * as log from '../../util/log';
 import {
@@ -255,7 +254,7 @@ const fetchTimeSlotsError = e => ({
 const requestSecondPayment = (transactionId, sdk) => {
   const bodyParams = {
     id: transactionId,
-    transition: TRANSITION_REQUEST_PAYMENT,
+    transition: TRANSITION_ACCEPT,
     params: {},
   };
 
