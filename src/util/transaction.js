@@ -57,7 +57,7 @@ export const TRANSITION_EXPIRE_REVIEW_PERIOD = 'transition/expire-review-period'
 
 
 // Initiate split payment
-export const TRANSITION_INITIATE_GHOST_BOOKING = 'transition/initiate-ghost-booking';
+export const TRANSITION_INITIATE_SECOND_PAYMENT = 'transition/initiate-second-payment';
 export const TRANSITION_ACTIVATE = 'transition/activate';
 export const TRANSITION_AUTO_PAYMENT = 'transition/auto-payment';
 export const TRANSITION_INITIATE_PAYMENT = 'transition/initiate-payment';
@@ -191,12 +191,12 @@ const stateDescriptions = [{
     [STATE_REVIEWED]: { type: 'final' },
   },
 }, {
-  id: 'sca-preauth-nightly-booking-due-later/release-23',
+  id: 'sca-preauth-nightly-booking-due-later/release-24',
   initial: STATE_INITIAL,
   states: {
     [STATE_INITIAL]: {
       on: {
-        [TRANSITION_INITIATE_GHOST_BOOKING]: STATE_PENDING_PROVIDER_DECISION,
+        [TRANSITION_INITIATE_SECOND_PAYMENT]: STATE_PENDING_PROVIDER_DECISION,
       },
     },
 

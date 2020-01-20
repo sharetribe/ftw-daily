@@ -8,7 +8,7 @@ import {
   TRANSITION_REQUEST_PAYMENT,
   TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY,
   TRANSITION_CONFIRM_PAYMENT,
-  TRANSITION_INITIATE_GHOST_BOOKING
+  TRANSITION_INITIATE_SECOND_PAYMENT
 } from '../../util/transaction';
 import * as log from '../../util/log';
 import { fetchCurrentUserHasOrdersSuccess, fetchCurrentUser } from '../../ducks/user.duck';
@@ -285,7 +285,7 @@ const shouldSplitPayment = bookingStart => {
 const initiateSecondPayment = (orderParams, sdk) => {
   const bodyParams = {
     processAlias: config.bookingProcessAliases[1],
-    transition: TRANSITION_INITIATE_GHOST_BOOKING,
+    transition: TRANSITION_INITIATE_SECOND_PAYMENT,
     params: orderParams,
   };
 
@@ -341,7 +341,7 @@ export const sendMessage = params => (dispatch, getState, sdk) => {
 const initSpeculativeTransaction = (processAlias, params, sdk) => {
   const transition = processAlias === config.bookingProcessAliases[0]
     ? TRANSITION_REQUEST_PAYMENT
-    : TRANSITION_INITIATE_GHOST_BOOKING
+    : TRANSITION_INITIATE_SECOND_PAYMENT
 
   const bodyParams = {
     transition,

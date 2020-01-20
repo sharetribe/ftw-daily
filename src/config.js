@@ -37,7 +37,7 @@ const splitPaymentCapDays = 14;
 
 const bookingProcessAliases = [
   'sca-preauth-nightly-booking-due-now/release-3',
-  'sca-preauth-nightly-booking-due-later/release-23'
+  'sca-preauth-nightly-booking-due-later/release-24'
 ];
 
 // The transaction line item code for the main unit type in bookings.
