@@ -188,13 +188,9 @@ export const confirmPayment = orderParams => (dispatch, getState, sdk) => {
 
   return sdk.transactions
     .transition(bodyParams)
-    .then(async response => {
+    .then(response => {
       const order = response.data.data;
       dispatch(confirmPaymentSuccess(order.id));
-
-      const linkedTransactionId = getLinkedTransactionId(getState());
-      await requestSecondPayment(linkedTransactionId, sdk);
-
       return order;
     })
     .catch(e => {
@@ -301,30 +297,6 @@ const initiateSecondPayment = (orderParams, sdk) => {
 
   return sdk.transactions
     .initiate(bodyParams, queryParams)
-    .then(response => {
-      const entities = denormalisedResponseEntities(response);
-      const tx = entities[0];
-      return tx;
-    })
-    .catch(e => {
-      throw e
-    });
-};
-
-const requestSecondPayment = (transactionId, sdk) => {
-  const bodyParams = {
-    id: transactionId,
-    transition: TRANSITION_REQUEST_PAYMENT,
-    params: {},
-  };
-
-  const queryParams = {
-    include: ['booking', 'provider'],
-    expand: true,
-  };
-
-  return sdk.transactions
-    .transition(bodyParams, queryParams)
     .then(response => {
       const entities = denormalisedResponseEntities(response);
       const tx = entities[0];

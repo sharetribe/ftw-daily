@@ -12,6 +12,7 @@ import {
   txIsInFirstReviewBy,
   TRANSITION_ACCEPT,
   TRANSITION_DECLINE,
+  TRANSITION_REQUEST_PAYMENT
 } from '../../util/transaction';
 import * as log from '../../util/log';
 import {
@@ -251,6 +252,30 @@ const fetchTimeSlotsError = e => ({
 
 // ================ Thunks ================ //
 
+const requestSecondPayment = (transactionId, sdk) => {
+  const bodyParams = {
+    id: transactionId,
+    transition: TRANSITION_REQUEST_PAYMENT,
+    params: {},
+  };
+
+  const queryParams = {
+    include: ['booking', 'provider'],
+    expand: true,
+  };
+
+  return sdk.transactions
+    .transition(bodyParams, queryParams)
+    .then(response => {
+      const entities = denormalisedResponseEntities(response);
+      const tx = entities[0];
+      return tx;
+    })
+    .catch(e => {
+      throw e
+    });
+};
+
 const listingRelationship = txResponse => {
   return txResponse.data.data.relationships.listing.data;
 };
@@ -330,7 +355,14 @@ export const acceptSale = id => (dispatch, getState, sdk) => {
 
   return sdk.transactions
     .transition({ id, transition: TRANSITION_ACCEPT, params: {} }, { expand: true })
-    .then(response => {
+    .then(async response => {
+
+      const data = response.data.data;
+      const protectedData = data ? data.attributes.protectedData : null;
+      if (protectedData && protectedData.linkedProcessId) {
+        await requestSecondPayment(protectedData.linkedProcessId, sdk);
+      }
+
       dispatch(addMarketplaceEntities(response));
       dispatch(acceptSaleSuccess());
       dispatch(fetchCurrentUserNotifications());
