@@ -251,10 +251,10 @@ const fetchTimeSlotsError = e => ({
 
 // ================ Thunks ================ //
 
-const requestSecondPayment = (transactionId, sdk) => {
+const transitionSecondPayment = (transactionId, transition, sdk) => {
   const bodyParams = {
     id: transactionId,
-    transition: TRANSITION_ACCEPT,
+    transition,
     params: {},
   };
 
@@ -355,11 +355,10 @@ export const acceptSale = id => (dispatch, getState, sdk) => {
   return sdk.transactions
     .transition({ id, transition: TRANSITION_ACCEPT, params: {} }, { expand: true })
     .then(async response => {
-
       const data = response.data.data;
       const protectedData = data ? data.attributes.protectedData : null;
       if (protectedData && protectedData.linkedProcessId) {
-        await requestSecondPayment(protectedData.linkedProcessId, sdk);
+        await transitionSecondPayment(protectedData.linkedProcessId, TRANSITION_ACCEPT, sdk);
       }
 
       dispatch(addMarketplaceEntities(response));
@@ -385,7 +384,13 @@ export const declineSale = id => (dispatch, getState, sdk) => {
 
   return sdk.transactions
     .transition({ id, transition: TRANSITION_DECLINE, params: {} }, { expand: true })
-    .then(response => {
+    .then(async response => {
+      const data = response.data.data;
+      const protectedData = data ? data.attributes.protectedData : null;
+      if (protectedData && protectedData.linkedProcessId) {
+        await transitionSecondPayment(protectedData.linkedProcessId, TRANSITION_DECLINE, sdk);
+      }
+
       dispatch(addMarketplaceEntities(response));
       dispatch(declineSaleSuccess());
       dispatch(fetchCurrentUserNotifications());
