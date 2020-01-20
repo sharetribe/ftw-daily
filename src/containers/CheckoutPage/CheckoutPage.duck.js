@@ -328,7 +328,7 @@ export const sendMessage = params => (dispatch, getState, sdk) => {
  * the price with the chosen information.
  */
 
-const initSpeculativeTransaction = (processAlias, params, sdk) => {
+const initSpeculativeTransaction = (processAlias, orderParams, sdk) => {
   const transition = processAlias === config.bookingProcessAliases[0]
     ? TRANSITION_REQUEST_PAYMENT
     : TRANSITION_INITIATE_SECOND_PAYMENT
@@ -337,10 +337,17 @@ const initSpeculativeTransaction = (processAlias, params, sdk) => {
     transition,
     processAlias,
     params: {
-      ...params,
+      ...orderParams,
       cardToken: 'CheckoutPage_speculative_card_token',
     },
   };
+
+  // Split price in 2
+  if (transition === TRANSITION_INITIATE_SECOND_PAYMENT) bodyParams.params = {
+    ...bodyParams.params,
+    lineItems: formatLineItems(orderParams),
+  }
+
 
   const queryParams = {
     include: ['booking', 'provider'],
@@ -359,37 +366,22 @@ const initSpeculativeTransaction = (processAlias, params, sdk) => {
     });
 };
 
-export const speculateTransaction = params => (dispatch, getState, sdk) => {
+export const speculateTransaction = params => async (dispatch, getState, sdk) => {
   dispatch(speculateTransactionRequest());
   const { listingId, bookingStart, bookingEnd } = params;
-  const aliasDueNow = config.bookingProcessAliases[0];
-  const aliasDueLater = config.bookingProcessAliases[1];
   const splitPayment = shouldSplitPayment(bookingStart);
 
-  if (!splitPayment) {
-    return initSpeculativeTransaction(aliasDueNow, params, sdk).then(txNow => {
-      dispatch(speculateTransactionSuccess(txNow));
-    }).catch(e => {
-      log.error(e, 'speculate-transaction-failed', {
-        listingId: listingId.uuid,
-        bookingStart,
-        bookingEnd,
-      });
-      dispatch(speculateTransactionError(storableError(e)));
-    });
+  if (splitPayment) {
+    const aliasDueLater = config.bookingProcessAliases[1];
+    const processDueLater = await initSpeculativeTransaction(aliasDueLater, params, sdk);
+    params.protectedData = {
+      linkedProcessId: processDueLater.id.uuid
+    }
   }
 
-  const processDueLater = initSpeculativeTransaction(aliasDueLater, params, sdk);
-
-  // Create due now process and link to due later process
-  processDueLater.then(txLater => {
-    params.protectedData = {
-      linkedProcessId: txLater.id.uuid
-    }
-
-    initSpeculativeTransaction(aliasDueNow, params, sdk).then(txNow => {
-      dispatch(speculateTransactionSuccess(txNow));
-    });
+  const aliasDueNow = config.bookingProcessAliases[0];
+  return initSpeculativeTransaction(aliasDueNow, params, sdk).then(response => {
+    dispatch(speculateTransactionSuccess(response));
   }).catch(e => {
     log.error(e, 'speculate-transaction-failed', {
       listingId: listingId.uuid,

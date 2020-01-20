@@ -34,6 +34,7 @@ import { TRANSITION_REQUEST_PAYMENT, TX_TRANSITION_ACTOR_CUSTOMER } from '../../
 import { LINE_ITEM_DAY, LINE_ITEM_NIGHT, LINE_ITEM_UNITS, DATE_TYPE_DATE } from '../../util/types';
 import { unitDivisor, convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
 import { BookingBreakdown } from '../../components';
+import config from '../../config';
 
 import css from './BookingDatesForm.css';
 
@@ -80,6 +81,10 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, qua
       .toDate()
   );
 
+  const dueDate = moment(serverDayStart).subtract(3, 'days');
+  const nightsUntilStartDate = nightsBetween(now, serverDayStart);
+  const isSplitPayment = nightsUntilStartDate >= config.splitPaymentCapDays;
+
   return {
     id: new UUID('estimated-transaction'),
     type: 'transaction',
@@ -106,6 +111,9 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, qua
           transition: TRANSITION_REQUEST_PAYMENT,
         },
       ],
+      protectedData: {
+        linkedProcessId: isSplitPayment ? '000' : null
+      }
     },
     booking: {
       id: new UUID('estimated-booking'),
