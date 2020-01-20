@@ -124,7 +124,7 @@ const stateDescriptions = [{
   // id is defined only to support Xstate format.
   // However if you have multiple transaction processes defined,
   // it is best to keep them in sync with transaction process aliases.
-  id: 'sca-preauth-nightly-booking-due-now/release-3',
+  id: 'sca-preauth-nightly-booking-due-now/release-4',
 
   // This 'initial' state is a starting point for new transaction
   initial: STATE_INITIAL,
@@ -191,7 +191,7 @@ const stateDescriptions = [{
     [STATE_REVIEWED]: { type: 'final' },
   },
 }, {
-  id: 'sca-preauth-nightly-booking-due-later/release-24',
+  id: 'sca-preauth-nightly-booking-due-later/release-8',
   initial: STATE_INITIAL,
   states: {
     [STATE_INITIAL]: {
