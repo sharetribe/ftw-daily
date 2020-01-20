@@ -1,5 +1,4 @@
 import pick from 'lodash/pick';
-import moment from 'moment';
 import config from '../../config';
 import { denormalisedResponseEntities } from '../../util/data';
 import { daysBetween } from '../../util/dates';
@@ -110,6 +109,16 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
 }
 
 // ================ Selectors ================ //
+const getLinkedTransactionId = state => {
+  const pageState = state.CheckoutPage;
+  const transaction = pageState.speculateTransactionInProgress
+    ? pageState.speculatedTransaction
+    : pageState.transaction;
+
+  if (!transaction || !transaction.attributes || !transaction.attributes.protectedData) return null;
+
+  return transaction.attributes.protectedData.linkedProcessId;
+};
 
 // ================ Action creators ================ //
 
@@ -179,9 +188,13 @@ export const confirmPayment = orderParams => (dispatch, getState, sdk) => {
 
   return sdk.transactions
     .transition(bodyParams)
-    .then(response => {
+    .then(async response => {
       const order = response.data.data;
       dispatch(confirmPaymentSuccess(order.id));
+
+      const linkedTransactionId = getLinkedTransactionId(getState());
+      await requestSecondPayment(linkedTransactionId, sdk);
+
       return order;
     })
     .catch(e => {
@@ -270,7 +283,7 @@ export const initiateOrder = (orderParams, transactionId) => async (dispatch, ge
 };
 
 const shouldSplitPayment = bookingStart => {
-  const daysUntilStart = daysBetween(new Date, bookingStart);
+  const daysUntilStart = daysBetween(new Date(), bookingStart);
   return daysUntilStart >= config.splitPaymentCapDays;
 }
 
@@ -298,9 +311,9 @@ const initiateSecondPayment = (orderParams, sdk) => {
     });
 };
 
-const requestSecondPayment = (orderParams, sdk) => {
+const requestSecondPayment = (transactionId, sdk) => {
   const bodyParams = {
-    id: orderParams.transactionId,
+    id: transactionId,
     transition: TRANSITION_REQUEST_PAYMENT,
     params: {},
   };
