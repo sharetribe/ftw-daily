@@ -246,8 +246,8 @@
     border-left-style: solid;
     border-left-width: 1px;
     border-left-color: var(--matterColorNegative);
-
     padding-left: 60px;
+    z-index: 1;
 
     /* The calendar needs 312px */
     flex-basis: 312px;
