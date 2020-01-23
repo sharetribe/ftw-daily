@@ -249,7 +249,7 @@ export const sendEnquiry = (listingId, message) => (dispatch, getState, sdk) => 
   dispatch(sendEnquiryRequest());
   const bodyParams = {
     transition: TRANSITION_ENQUIRE,
-    processAlias: config.bookingProcessAlias,
+    processAlias: config.bookingProcessAliases[0],
     params: { listingId },
   };
   return sdk.transactions
