@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from '../../util/reactIntl';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import {
   createUser,
@@ -73,6 +73,7 @@ describe('ListingPage', () => {
       callSetInitialValues: noop,
       sendVerificationEmailInProgress: false,
       onResendVerificationEmail: noop,
+      onInitializeCardPaymentData: noop,
       sendEnquiryInProgress: false,
       onSendEnquiry: noop,
       categoriesConfig,

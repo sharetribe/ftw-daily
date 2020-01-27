@@ -1,6 +1,6 @@
 import React from 'react';
 import { string } from 'prop-types';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { twitterPageURL } from '../../util/urlHelpers';
 import config from '../../config';

@@ -6,7 +6,7 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
   title="EditListingPage.titleCreateListing"
 >
   <withRouter(Connect(TopbarContainerComponent)) />
-  <withViewport(InjectIntl(EditListingWizard))
+  <withViewport(injectIntl(EditListingWizard))
     availability={
       Object {
         "calendar": undefined,
@@ -51,7 +51,6 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
     onImageUpload={[Function]}
     onManageDisableScrolling={[Function]}
     onPayoutDetailsFormChange={[Function]}
-    onPayoutDetailsSubmit={[Function]}
     onPublishListingDraft={[Function]}
     onRemoveImage={[Function]}
     onUpdateImageOrder={[Function]}

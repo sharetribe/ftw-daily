@@ -1,6 +1,6 @@
 import React from 'react';
 import { bool, func, object, string } from 'prop-types';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage, intlShape } from '../../util/reactIntl';
 import { FieldArray } from 'react-final-form-arrays';
 import { ExternalLink, IconAdd, IconClose, InlineTextButton } from '../../components';
 
@@ -74,6 +74,7 @@ const PayoutDetailsAdditionalPersons = props => {
                 showPersonalIdNumberField={showPersonalIdNumberField}
                 showPhoneNumberField={showPhoneNumberField}
                 showRoleField
+                form={form}
               />
               {showPersonalAddressField ? (
                 <PayoutDetailsAddress

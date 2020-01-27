@@ -11,35 +11,60 @@
 
 .lineItem {
   @apply --marketplaceH4FontStyles;
-
-  /* Since the line items have different font sizes in the label and the
-   value columns, we have to balance the line to align to the
-   baseline. */
-  margin: -1px 0 0 0;
+  margin: 0;
 
   @media (--viewportMedium) {
-    margin: -1px 0 8px 0;
-
-    &:last-of-type {
-      /* Last item should not have bottom margin that goes to the bottom of
-         the component */
-      margin-bottom: 0;
-    }
+    padding-top: 6px;
+    padding-bottom: 2px;
   }
 
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.bookingPeriod {
+  flex: 1 1;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-bottom: 6px;
+
+  @media (--viewportMedium) {
+    padding-bottom: 8px;
+  }
+}
+
+.bookingPeriodSectionRigth {
+  text-align: right;
+}
+
+.dayLabel {
+  @apply --marketplaceH5FontStyles;
+  margin: 0;
+  color: var(--matterColorAnti);
+  line-height: 24px;
+  padding-top: 2px;
+  padding-bottom: 4px;
+
+  @media (--viewportMedium) {
+    padding-top: 1px;
+    padding-bottom: 7px;
+  }
+}
+
+.dayInfo {
+  @apply --marketplaceButtonFontStyles;
 }
 
 .subTotalLineItem {
   @apply --marketplaceH4FontStyles;
   font-weight: var(--fontWeightBold);
-
-  margin: 4px 0 1px 0;
+  margin: 0;
+  padding: 5px 0 1px 0;
 
   @media (--viewportMedium) {
-    margin: 6px 0 9px 0;
+    padding: 6px 0 2px 0;
   }
 
   display: flex;
@@ -47,72 +72,65 @@
   justify-content: space-between;
 }
 
+.lineItemTotal {
+  @apply --marketplaceH4FontStyles;
+  margin: 0;
+  padding-top: 6px;
+  padding-bottom: 6px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  @media (--viewportMedium) {
+    padding-bottom: 2px;
+  }
+}
 .itemLabel {
+  @apply --marketplaceSmallFontStyles;
   flex: 1;
-  margin-top: 1px; /* align with baseline */
 }
 
 .itemValue {
-  @apply --marketplaceH4FontStyles;
-  font-weight: 600;
+  @apply --marketplaceSmallFontStyles;
   margin: 0 0 0 10px;
-
-  @media (--viewportMedium) {
-    font-weight: 700;
-    margin: 0 0 0 10px;
-  }
 }
 
 .totalDivider {
   /* dimensions */
   width: 100%;
   height: 1px;
-  margin: 13px 0 4px 0;
+  margin: 12px 0 5px 0;
 
   border: none;
   background-color: var(--matterColorNegative);
 
   @media (--viewportMedium) {
-    margin: 2px 0 14px 0;
+    margin: 7px 0 0px 0;
   }
 }
 
 .totalLabel {
-  font-weight: var(--fontWeightSemiBold);
-
-  /* Move so that baseline aligns with the total price */
-  padding-top: 6px;
-
-  @media (--viewportMedium) {
-    padding-top: 8px;
-  }
+  font-weight: var(--fontWeightNormal);
 }
 
 .totalPrice {
-  @apply --marketplaceBodyFontStyles;
-  font-weight: var(--fontWeightSemiBold);
+  @apply --marketplaceButtonFontStyles;
   margin: 0 0 0 10px;
-  padding-top: 4px;
-
-  @media (--viewportMedium) {
-    margin: 2px 0 0 10px;
-    padding-top: 0;
-  }
+  padding-top: 0px;
 }
 
 .feeInfo {
   @apply --marketplaceTinyFontStyles;
-  color: var(--matterColorAnti);
-  margin: 0 0 20px 0;
   flex-shrink: 0;
+  margin: 0;
+  color: var(--matterColorAnti);
+  padding-top: 4px;
+  padding-bottom: 14px;
 
   @media (--viewportMedium) {
-    margin-top: auto;
-    margin-bottom: 20px;
-  }
-
-  @media (--viewportLarge) {
-    margin-top: 4px;
-    margin-bottom: 22px;
+    padding-top: 11px;
+    padding-bottom: 21px;
   }
 }

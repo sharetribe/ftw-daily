@@ -1,11 +1,13 @@
 import React from 'react';
 import { func, string } from 'prop-types';
 import { Form as FinalForm, Field } from 'react-final-form';
-import { intlShape, injectIntl } from 'react-intl';
+import { intlShape, injectIntl } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { Form, LocationAutocompleteInput } from '../../components';
 
 import css from './LocationSearchForm.css';
+
+const identity = v => v;
 
 const LocationSearchFormComponent = props => {
   const handleChange = location => {
@@ -32,7 +34,7 @@ const LocationSearchFormComponent = props => {
           <Form className={classes} onSubmit={preventFormSubmit}>
             <Field
               name="location"
-              format={null}
+              format={identity}
               render={({ input, meta }) => {
                 const { onChange, ...restInput } = input;
 

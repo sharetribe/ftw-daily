@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { intlShape } from 'react-intl';
+import { intlShape } from '../../util/reactIntl';
 import routeConfiguration from '../../routeConfiguration';
 import {
   LISTING_PAGE_PARAM_TYPE_DRAFT,
@@ -150,6 +150,9 @@ const EditListingWizardTab = props => {
       onChange,
       panelUpdated: updatedTab === tab,
       updateInProgress,
+      // newListingPublished and fetchInProgress are flags for the last wizard tab
+      ready: newListingPublished,
+      disabled: fetchInProgress,
     };
   };
 
@@ -244,13 +247,10 @@ const EditListingWizardTab = props => {
         ? 'EditListingWizard.saveNewPhotos'
         : 'EditListingWizard.saveEditPhotos';
 
-      // newListingPublished and fetchInProgress are flags for the last wizard tab
       return (
         <EditListingPhotosPanel
           {...panelProps(PHOTOS)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
-          newListingPublished={newListingPublished}
-          fetchInProgress={fetchInProgress}
           images={images}
           onImageUpload={onImageUpload}
           onRemoveImage={onRemoveImage}

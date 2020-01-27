@@ -1,10 +1,8 @@
 /* eslint-disable no-console */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { IntlProvider, addLocaleData } from 'react-intl';
 import { Form as FinalForm, FormSpy } from 'react-final-form';
-import en from 'react-intl/locale-data/en';
-import fi from 'react-intl/locale-data/fi';
+import { IntlProvider } from '../../util/reactIntl';
 import { currencyConfig } from '../../util/test-data';
 import * as validators from '../../util/validators';
 import FieldCurrencyInput, { CurrencyInput } from './FieldCurrencyInput';
@@ -24,13 +22,8 @@ const onChange = price => console.log('CurrencyInput - value:', price);
 
 // Different locales need to be initialized before their currency formatting is in use
 const CurrencyInputWithIntl = ({ locale, ...rest }) => {
-  if (locale === 'en') {
-    addLocaleData([...en]);
-  } else {
-    addLocaleData([...fi]);
-  }
   return (
-    <IntlProvider locale={locale}>
+    <IntlProvider locale={locale} textComponent="span">
       <CurrencyInput {...rest} input={{ onChange }} />
     </IntlProvider>
   );

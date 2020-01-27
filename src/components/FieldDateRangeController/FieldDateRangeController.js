@@ -5,7 +5,8 @@ import DateRangeController from './DateRangeController';
 
 const component = props => {
   const { input, controllerRef, ...rest } = props;
-  return <DateRangeController ref={controllerRef} {...input} {...rest} />;
+  const { type, ...restOfInput } = input;
+  return <DateRangeController ref={controllerRef} {...restOfInput} {...rest} />;
 };
 
 const FieldDateRangeController = props => {

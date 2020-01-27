@@ -1,9 +1,8 @@
-/* eslint-disable jsx-a11y/href-no-hash */
 import React, { Component } from 'react';
 import { IconCheckmark } from '../../components';
 import Button, { PrimaryButton, SecondaryButton, InlineTextButton } from './Button';
 
-import css from './Button.example.css';
+import css from './ButtonExample.css';
 
 const preventDefault = e => {
   e.preventDefault();

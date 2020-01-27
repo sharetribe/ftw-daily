@@ -51,6 +51,17 @@ exports.errorHandler = () => {
   }
 };
 
+const responseAPIErrors = error => {
+  return error && error.data && error.data.errors ? error.data.errors : [];
+};
+
+const responseApiErrorInfo = err =>
+  responseAPIErrors(err).map(e => ({
+    status: e.status,
+    code: e.code,
+    meta: e.meta,
+  }));
+
 /**
  * Logs a error. If Sentry client is set up
  * passes the error to that. Otherwise prints

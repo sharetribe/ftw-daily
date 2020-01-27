@@ -33,3 +33,19 @@ if (typeof Number.isNaN === 'undefined') {
   // eslint-disable-next-line no-self-compare
   Number.isNaN = value => value !== value;
 }
+
+// To support browsers that do not have Intl.PluralRules (e.g IE11 & Safari 12-), include this polyfill in your build.
+
+if (!Intl.PluralRules) {
+  require('intl-pluralrules');
+}
+
+// To support  browsers that do not have Intl.RelativeTimeFormat (e.g IE11, Edge, Safari 12-), include this polyfill in your build along with individual CLDR data for each locale you support.
+if (!Intl.RelativeTimeFormat) {
+  require('@formatjs/intl-relativetimeformat/polyfill');
+  require('@formatjs/intl-relativetimeformat/dist/locale-data/en');
+
+  // By default, this library comes with en data. To load additional locale, you need include them on demand.
+  // e.g.
+  // require('@formatjs/intl-relativetimeformat/dist/locale-data/fr');
+}

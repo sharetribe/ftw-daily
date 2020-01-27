@@ -88,6 +88,7 @@
   </head>
   <body>
     <div id="root"><!--!body--></div>
+    <div id="portal-root"></div>
     <script>
       (function(document){
         // Check if Promise exists in window
@@ -149,8 +150,8 @@
       We didn't bundle it to the main app since it would unnecessarily slow down initial rendering.
     -->
     <script src="%PUBLIC_URL%/static/scripts/mapbox/mapbox-sdk.min.js"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.css" rel="stylesheet" />
-    <script src="https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css" rel="stylesheet" />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js"></script>
     <script>
       window.mapboxgl.accessToken = '%REACT_APP_MAPBOX_ACCESS_TOKEN%';
     </script>

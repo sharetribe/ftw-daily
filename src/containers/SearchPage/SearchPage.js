@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { array, bool, func, number, oneOf, object, shape, string } from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, intlShape } from '../../util/reactIntl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
@@ -76,6 +76,10 @@ export class SearchPageComponent extends Component {
         paramName: 'dates',
         config: dateRangeFilterConfig,
       },
+      // keywordFilter: {
+      //   paramName: 'keywords',
+      //   config: keywordFilterConfig,
+      // },
     };
   }
 
@@ -220,6 +224,7 @@ export class SearchPageComponent extends Component {
               filtersFilter: filters.filtersFilter,
               priceFilter: filters.priceFilter,
               dateRangeFilter: filters.dateRangeFilter,
+              keywordFilter: filters.keywordFilter,
             }}
           />
           <ModalInMobile
@@ -267,6 +272,7 @@ SearchPageComponent.defaultProps = {
   filters: config.custom.filters,
   priceFilterConfig: config.custom.priceFilterConfig,
   dateRangeFilterConfig: config.custom.dateRangeFilterConfig,
+  keywordFilterConfig: config.custom.keywordFilterConfig,
   activeListingId: null,
 };
 

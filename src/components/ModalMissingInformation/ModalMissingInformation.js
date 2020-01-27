@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { bool, func, string } from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import routeConfiguration from '../../routeConfiguration';
 import { ensureCurrentUser } from '../../util/data';
@@ -18,7 +18,7 @@ const MISSING_INFORMATION_MODAL_WHITELIST = [
   'ContactDetailsPage',
   'EmailVerificationPage',
   'PasswordResetPage',
-  'PayoutPreferencesPage',
+  'StripePayoutPage',
 ];
 
 const EMAIL_VERIFICATION = 'EMAIL_VERIFICATION';
@@ -35,8 +35,8 @@ class ModalMissingInformation extends Component {
     this.handleMissingInformationReminder = this.handleMissingInformationReminder.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { currentUser, currentUserHasListings, currentUserHasOrders, location } = nextProps;
+  componentDidUpdate() {
+    const { currentUser, currentUserHasListings, currentUserHasOrders, location } = this.props;
     const user = ensureCurrentUser(currentUser);
     this.handleMissingInformationReminder(
       user,

@@ -16,10 +16,10 @@
   border-bottom-color: var(--attentionColor);
 
   @media (--viewportMedium) {
-    height: 35px;
+    height: 38px;
   }
   @media (--viewportLarge) {
-    height: 42px;
+    height: 38px;
     padding: 6px 0 14px 0;
   }
 }
@@ -32,12 +32,90 @@
   border-bottom-color: var(--failColor);
 }
 
+.error {
+  color: var(--failColor);
+}
+
+.errorMessage {
+  margin-top: 24px;
+  color: var(--failColor);
+}
+
 .paymentHeading {
-  margin: 0 0 14px 0;
+  margin: 0 0 12px 0;
   color: var(--matterColorAnti);
 
+  padding-top: 4px;
+  padding-bottom: 2px;
+
   @media (--viewportMedium) {
-    margin: 0 0 26px 0;
+    margin: 0 0 16px 0;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+}
+
+.paymentMethodSelector {
+  margin-bottom: 36px;
+
+  @media (--viewportMedium) {
+    margin-bottom: 40px;
+  }
+}
+
+.saveForLaterUse {
+  padding-top: 6px;
+  margin-bottom: 36px;
+
+  @media (--viewportMedium) {
+    padding-top: 8px;
+    margin-top: 0px;
+    margin-bottom: 48px;
+  }
+}
+
+.saveForLaterUseCheckbox {
+  display: inline-block;
+  padding: 2px 0 3px 0;
+
+  @media (--viewportMedium) {
+    padding: 1px 0 0px 0;
+  }
+}
+
+.saveForLaterUseLabel {
+  @apply --marketplaceH5FontStyles;
+  color: var(--matterColor);
+  margin-top: 3px;
+  margin-bottom: 0px;
+  cursor: pointer;
+}
+
+.saveForLaterUseLegalInfo {
+  @apply --marketplaceH5FontStyles;
+  color: var(--matterColorAnti);
+  display: inline-block;
+  padding: 0px 0 0px 26px;
+  margin-top: -2px;
+  margin-bottom: 2px;
+
+  @media (--viewportMedium) {
+    margin-top: -1px;
+    margin-bottom: 1px;
+  }
+}
+
+.billingHeading {
+  margin: 0 0 12px 0;
+  color: var(--matterColorAnti);
+
+  padding-top: 4px;
+  padding-bottom: 2px;
+
+  @media (--viewportMedium) {
+    margin: 0 0 24px 0;
+    padding-top: 4px;
+    padding-bottom: 4px;
   }
 }
 
@@ -45,22 +123,22 @@
   margin: 0;
 
   @media (--viewportMedium) {
+    margin-top: 0px;
     margin-bottom: 2px;
-  }
-  @media (--viewportLarge) {
-    margin-bottom: 4px;
   }
 }
 
 .messageHeading {
   color: var(--matterColorAnti);
-  margin: 40px 0 14px 0;
+  margin: 36px 0 12px 0;
+
+  padding-top: 4px;
+  padding-bottom: 2px;
 
   @media (--viewportMedium) {
-    margin: 41px 0 26px 0;
-  }
-  @media (--viewportLarge) {
-    margin: 40px 0 26px 0;
+    margin: 24px 0 24px 0;
+    padding-top: 4px;
+    padding-bottom: 4px;
   }
 }
 

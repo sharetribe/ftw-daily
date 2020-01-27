@@ -20,7 +20,7 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
       rootClassName={null}
     >
       <div>
-        <InjectIntl(TransactionPanelComponent)
+        <injectIntl(TransactionPanelComponent)
           acceptInProgress={false}
           acceptSaleError={null}
           className=""
@@ -58,6 +58,7 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
           onSendMessage={[Function]}
           onShowMoreMessages={[Function]}
           onSubmitBookingRequest={[Function]}
+          savePaymentMethodFailed={false}
           sendMessageError={null}
           sendMessageInProgress={false}
           timeSlots={null}
@@ -66,7 +67,7 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
             Object {
               "attributes": Object {
                 "createdAt": 2017-05-01T00:00:00.000Z,
-                "lastTransition": "transition/request",
+                "lastTransition": "transition/confirm-payment",
                 "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
@@ -120,7 +121,12 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
                   Object {
                     "by": "customer",
                     "createdAt": 2017-05-01T00:00:00.000Z,
-                    "transition": "transition/request",
+                    "transition": "transition/request-payment",
+                  },
+                  Object {
+                    "by": "customer",
+                    "createdAt": 2017-05-01T00:00:01.000Z,
+                    "transition": "transition/confirm-payment",
                   },
                   Object {
                     "by": "provider",
@@ -212,7 +218,7 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
       className={null}
       rootClassName={null}
     >
-      <InjectIntl(Footer) />
+      <injectIntl(Footer) />
     </LayoutWrapperFooter>
   </LayoutSingleColumn>
 </Page>
@@ -238,7 +244,7 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
       rootClassName={null}
     >
       <div>
-        <InjectIntl(TransactionPanelComponent)
+        <injectIntl(TransactionPanelComponent)
           acceptInProgress={false}
           acceptSaleError={null}
           className=""
@@ -275,6 +281,7 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
           onSendMessage={[Function]}
           onShowMoreMessages={[Function]}
           onSubmitBookingRequest={[Function]}
+          savePaymentMethodFailed={false}
           sendMessageError={null}
           sendMessageInProgress={false}
           timeSlots={null}
@@ -283,7 +290,7 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
             Object {
               "attributes": Object {
                 "createdAt": 2017-05-01T00:00:00.000Z,
-                "lastTransition": "transition/request",
+                "lastTransition": "transition/confirm-payment",
                 "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
@@ -337,7 +344,12 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
                   Object {
                     "by": "customer",
                     "createdAt": 2017-05-01T00:00:00.000Z,
-                    "transition": "transition/request",
+                    "transition": "transition/request-payment",
+                  },
+                  Object {
+                    "by": "customer",
+                    "createdAt": 2017-05-01T00:00:01.000Z,
+                    "transition": "transition/confirm-payment",
                   },
                   Object {
                     "by": "provider",
@@ -429,7 +441,7 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
       className={null}
       rootClassName={null}
     >
-      <InjectIntl(Footer) />
+      <injectIntl(Footer) />
     </LayoutWrapperFooter>
   </LayoutSingleColumn>
 </Page>

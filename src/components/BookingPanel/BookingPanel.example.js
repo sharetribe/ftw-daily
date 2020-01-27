@@ -2,7 +2,7 @@ import React from 'react';
 import { createListing } from '../../util/test-data';
 import { LISTING_STATE_CLOSED } from '../../util/types';
 import BookingPanel from './BookingPanel';
-import css from './BookingPanel.example.css';
+import css from './BookingPanelExample.css';
 
 export const Default = {
   component: BookingPanel,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from '../../util/reactIntl';
 import { NamedLink } from '../../components';
 
 import css from './ModalMissingInformation.css';
@@ -16,7 +16,7 @@ const StripeAccountReminder = props => {
         <FormattedMessage id="ModalMissingInformation.missingStripeAccountText" />
       </p>
       <div className={css.bottomWrapper}>
-        <NamedLink className={css.reminderModalLinkButton} name="PayoutPreferencesPage">
+        <NamedLink className={css.reminderModalLinkButton} name="StripePayoutPage">
           <FormattedMessage id="ModalMissingInformation.gotoPaymentSettings" />
         </NamedLink>
       </div>

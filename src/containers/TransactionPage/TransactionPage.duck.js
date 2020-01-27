@@ -35,6 +35,10 @@ export const FETCH_TRANSACTION_REQUEST = 'app/TransactionPage/FETCH_TRANSACTION_
 export const FETCH_TRANSACTION_SUCCESS = 'app/TransactionPage/FETCH_TRANSACTION_SUCCESS';
 export const FETCH_TRANSACTION_ERROR = 'app/TransactionPage/FETCH_TRANSACTION_ERROR';
 
+export const FETCH_TRANSITIONS_REQUEST = 'app/TransactionPage/FETCH_TRANSITIONS_REQUEST';
+export const FETCH_TRANSITIONS_SUCCESS = 'app/TransactionPage/FETCH_TRANSITIONS_SUCCESS';
+export const FETCH_TRANSITIONS_ERROR = 'app/TransactionPage/FETCH_TRANSITIONS_ERROR';
+
 export const ACCEPT_SALE_REQUEST = 'app/TransactionPage/ACCEPT_SALE_REQUEST';
 export const ACCEPT_SALE_SUCCESS = 'app/TransactionPage/ACCEPT_SALE_SUCCESS';
 export const ACCEPT_SALE_ERROR = 'app/TransactionPage/ACCEPT_SALE_ERROR';
@@ -76,12 +80,16 @@ const initialState = {
   oldestMessagePageFetched: 0,
   messages: [],
   initialMessageFailedToTransaction: null,
+  savePaymentMethodFailed: false,
   sendMessageInProgress: false,
   sendMessageError: null,
   sendReviewInProgress: false,
   sendReviewError: null,
   timeSlots: null,
   fetchTimeSlotsError: null,
+  fetchTransitionsInProgress: false,
+  fetchTransitionsError: null,
+  processTransitions: null,
 };
 
 // Merge entity arrays using ids, so that conflicting items in newer array (b) overwrite old values (a).
@@ -108,6 +116,14 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
     case FETCH_TRANSACTION_ERROR:
       console.error(payload); // eslint-disable-line
       return { ...state, fetchTransactionInProgress: false, fetchTransactionError: payload };
+
+    case FETCH_TRANSITIONS_REQUEST:
+      return { ...state, fetchTransitionsInProgress: true, fetchTransitionsError: null };
+    case FETCH_TRANSITIONS_SUCCESS:
+      return { ...state, fetchTransitionsInProgress: false, processTransitions: payload };
+    case FETCH_TRANSITIONS_ERROR:
+      console.error(payload); // eslint-disable-line
+      return { ...state, fetchTransitionsInProgress: false, fetchTransitionsError: payload };
 
     case ACCEPT_SALE_REQUEST:
       return { ...state, acceptInProgress: true, acceptSaleError: null, declineSaleError: null };
@@ -191,6 +207,13 @@ const fetchTransactionSuccess = response => ({
   payload: response,
 });
 const fetchTransactionError = e => ({ type: FETCH_TRANSACTION_ERROR, error: true, payload: e });
+
+const fetchTransitionsRequest = () => ({ type: FETCH_TRANSITIONS_REQUEST });
+const fetchTransitionsSuccess = response => ({
+  type: FETCH_TRANSITIONS_SUCCESS,
+  payload: response,
+});
+const fetchTransitionsError = e => ({ type: FETCH_TRANSITIONS_ERROR, error: true, payload: e });
 
 const acceptSaleRequest = () => ({ type: ACCEPT_SALE_REQUEST });
 const acceptSaleSuccess = () => ({ type: ACCEPT_SALE_SUCCESS });
@@ -564,6 +587,19 @@ const fetchTimeSlots = listingId => (dispatch, getState, sdk) => {
     });
 };
 
+export const fetchNextTransitions = id => (dispatch, getState, sdk) => {
+  dispatch(fetchTransitionsRequest());
+
+  return sdk.processTransitions
+    .query({ transactionId: id })
+    .then(res => {
+      dispatch(fetchTransitionsSuccess(res.data.data));
+    })
+    .catch(e => {
+      dispatch(fetchTransitionsError(storableError(e)));
+    });
+};
+
 // loadData is a collection of async calls that need to be made
 // before page has all the info it needs to render itself
 export const loadData = params => (dispatch, getState) => {
@@ -579,5 +615,9 @@ export const loadData = params => (dispatch, getState) => {
   dispatch(setInitialValues(initialValues));
 
   // Sale / order (i.e. transaction entity in API)
-  return Promise.all([dispatch(fetchTransaction(txId, txRole)), dispatch(fetchMessages(txId, 1))]);
+  return Promise.all([
+    dispatch(fetchTransaction(txId, txRole)),
+    dispatch(fetchMessages(txId, 1)),
+    dispatch(fetchNextTransitions(txId)),
+  ]);
 };

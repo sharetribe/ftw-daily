@@ -21,12 +21,18 @@ describe('CheckoutPage', () => {
       currentUser: createCurrentUser('currentUser'),
       params: { id: 'listing1', slug: 'listing1' },
       sendOrderRequest: noop,
+      fetchStripeCustomer: noop,
+      stripeCustomerFetched: false,
       fetchSpeculatedTransaction: noop,
       speculateTransactionInProgress: false,
       scrollingDisabled: false,
-      onCreateStripePaymentToken: noop,
-      stripePaymentTokenInProgress: false,
-      stripePaymentTokenError: false,
+      onConfirmPayment: noop,
+      onHandleCardPayment: noop,
+      onInitiateOrder: noop,
+      onRetrievePaymentIntent: noop,
+      onSavePaymentMethod: noop,
+      onSendMessage: noop,
+      handleCardPaymentInProgress: false,
     };
     const tree = renderShallow(<CheckoutPageComponent {...props} />);
     expect(tree).toMatchSnapshot();
@@ -59,10 +65,12 @@ describe('CheckoutPage', () => {
         listing: null,
         bookingData: null,
         bookingDates: null,
+        stripeCustomerFetched: false,
         speculateTransactionError: null,
         speculateTransactionInProgress: false,
         speculatedTransaction: null,
-        enquiredTransaction: null,
+        transaction: null,
+        confirmPaymentError: null,
       };
 
       it('should return the initial state', () => {

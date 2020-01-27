@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage, intlShape } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { ACCOUNT_SETTINGS_PAGES } from '../../routeConfiguration';
 import { propTypes } from '../../util/types';
@@ -32,6 +32,14 @@ const TopbarDesktop = props => {
     onSearchSubmit,
     initialSearchFormValues,
   } = props;
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const authenticatedOnClientSide = mounted && isAuthenticated;
+  const isAuthenticatedOrJustHydrated = isAuthenticated || !mounted;
 
   const classes = classNames(rootClassName || css.root, className);
 
@@ -39,7 +47,6 @@ const TopbarDesktop = props => {
     <TopbarSearchForm
       className={css.searchLink}
       desktopInputRoot={css.topbarSearchWithLeftPadding}
-      form="TopbarSearchFormDesktop"
       onSubmit={onSearchSubmit}
       initialValues={initialSearchFormValues}
     />
@@ -47,7 +54,7 @@ const TopbarDesktop = props => {
 
   const notificationDot = notificationCount > 0 ? <div className={css.notificationDot} /> : null;
 
-  const inboxLink = isAuthenticated ? (
+  const inboxLink = authenticatedOnClientSide ? (
     <NamedLink
       className={css.inboxLink}
       name="InboxPage"
@@ -66,7 +73,7 @@ const TopbarDesktop = props => {
     return currentPage === page || isAccountSettingsPage ? css.currentPage : null;
   };
 
-  const profileMenu = isAuthenticated ? (
+  const profileMenu = authenticatedOnClientSide ? (
     <Menu>
       <MenuLabel className={css.profileMenuLabel} isOpenClassName={css.profileMenuIsOpen}>
         <Avatar className={css.avatar} user={currentUser} disableProfileLink />
@@ -109,7 +116,7 @@ const TopbarDesktop = props => {
     </Menu>
   ) : null;
 
-  const signupLink = isAuthenticated ? null : (
+  const signupLink = isAuthenticatedOrJustHydrated ? null : (
     <NamedLink name="SignupPage" className={css.signupLink}>
       <span className={css.signup}>
         <FormattedMessage id="TopbarDesktop.signup" />
@@ -117,7 +124,7 @@ const TopbarDesktop = props => {
     </NamedLink>
   );
 
-  const loginLink = isAuthenticated ? null : (
+  const loginLink = isAuthenticatedOrJustHydrated ? null : (
     <NamedLink name="LoginPage" className={css.loginLink}>
       <span className={css.login}>
         <FormattedMessage id="TopbarDesktop.login" />

@@ -14,6 +14,8 @@ export const Filters = {
     saveActionMsg: 'Save filters',
     updated: false,
     updateInProgress: false,
+    disabled: false,
+    ready: false,
   },
   group: 'forms',
 };

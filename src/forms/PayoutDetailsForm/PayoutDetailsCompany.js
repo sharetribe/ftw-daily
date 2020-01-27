@@ -1,6 +1,6 @@
 import React from 'react';
 import { bool, string } from 'prop-types';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage, intlShape } from '../../util/reactIntl';
 import * as validators from '../../util/validators';
 import { FieldPhoneNumberInput, FieldTextInput } from '../../components';
 

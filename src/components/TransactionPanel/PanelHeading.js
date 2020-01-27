@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { createSlug, stringify } from '../../util/urlHelpers';
 import { NamedLink } from '../../components';
@@ -7,6 +7,8 @@ import { NamedLink } from '../../components';
 import css from './TransactionPanel.css';
 
 export const HEADING_ENQUIRED = 'enquired';
+export const HEADING_PAYMENT_PENDING = 'pending-payment';
+export const HEADING_PAYMENT_EXPIRED = 'payment-expired';
 export const HEADING_REQUESTED = 'requested';
 export const HEADING_ACCEPTED = 'accepted';
 export const HEADING_DECLINED = 'declined';
@@ -74,7 +76,7 @@ const CustomerBannedInfoMaybe = props => {
 };
 
 const HeadingProvider = props => {
-  const { className, id, values, isCustomerBanned } = props;
+  const { className, id, values, isCustomerBanned, children } = props;
   return (
     <React.Fragment>
       <h1 className={className}>
@@ -82,6 +84,7 @@ const HeadingProvider = props => {
           <FormattedMessage id={id} values={values} />
         </span>
       </h1>
+      {children}
       <CustomerBannedInfoMaybe isCustomerBanned={isCustomerBanned} />
     </React.Fragment>
   );
@@ -121,6 +124,45 @@ const PanelHeading = props => {
         <HeadingProvider
           className={titleClasses}
           id="TransactionPanel.saleEnquiredTitle"
+          values={{ customerName, listingLink }}
+          isCustomerBanned={isCustomerBanned}
+        />
+      );
+    case HEADING_PAYMENT_PENDING:
+      return isCustomer ? (
+        <HeadingCustomer
+          className={titleClasses}
+          id="TransactionPanel.orderPaymentPendingTitle"
+          values={{ listingLink }}
+          listingDeleted={listingDeleted}
+        />
+      ) : (
+        <HeadingProvider
+          className={titleClasses}
+          id="TransactionPanel.salePaymentPendingTitle"
+          values={{ customerName, listingLink }}
+          isCustomerBanned={isCustomerBanned}
+        >
+          <p className={css.transactionInfoMessage}>
+            <FormattedMessage
+              id="TransactionPanel.salePaymentPendingInfo"
+              values={{ customerName }}
+            />
+          </p>
+        </HeadingProvider>
+      );
+    case HEADING_PAYMENT_EXPIRED:
+      return isCustomer ? (
+        <HeadingCustomer
+          className={titleClasses}
+          id="TransactionPanel.orderPaymentExpiredTitle"
+          values={{ listingLink }}
+          listingDeleted={listingDeleted}
+        />
+      ) : (
+        <HeadingProvider
+          className={titleClasses}
+          id="TransactionPanel.salePaymentExpiredTitle"
           values={{ customerName, listingLink }}
           isCustomerBanned={isCustomerBanned}
         />
@@ -218,7 +260,7 @@ const PanelHeading = props => {
         />
       );
     default:
-      console.warning('Unknown state given to panel heading.');
+      console.warn('Unknown state given to panel heading.');
       return null;
   }
 };

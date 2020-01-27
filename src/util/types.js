@@ -190,6 +190,8 @@ const availabilityPlan = shape({
   ),
 });
 
+propTypes.availabilityPlan = availabilityPlan;
+
 const ownListingAttributes = shape({
   title: string.isRequired,
   description: string,
@@ -305,6 +307,22 @@ propTypes.stripeAccount = shape({
   type: propTypes.value('stripeAccount').isRequired,
   attributes: shape({
     stripeAccountId: string.isRequired,
+    stripeAccountData: object,
+  }),
+});
+
+propTypes.defaultPaymentMethod = shape({
+  id: propTypes.uuid.isRequired,
+  type: propTypes.value('stripePaymentMethod').isRequired,
+  attributes: shape({
+    type: propTypes.value('stripe-payment-method/card').isRequired,
+    stripePaymentMethodId: string.isRequired,
+    card: shape({
+      brand: string.isRequired,
+      expirationMonth: number.isRequired,
+      expirationYear: number.isRequired,
+      last4Digits: string.isRequired,
+    }).isRequired,
   }),
 });
 
@@ -478,5 +496,11 @@ propTypes.error = shape({
   statusText: string,
   apiErrors: arrayOf(propTypes.apiError),
 });
+
+// Options for showing just date or date and time on BookingTimeInfo and BookingBreakdown
+export const DATE_TYPE_DATE = 'date';
+export const DATE_TYPE_DATETIME = 'datetime';
+
+propTypes.dateType = oneOf([DATE_TYPE_DATE, DATE_TYPE_DATETIME]);
 
 export { propTypes };

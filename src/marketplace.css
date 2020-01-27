@@ -53,6 +53,9 @@
   --successColorDark: #799B00;
   --failColor: #FF685B;
   --attentionColor: #FEC23D;
+  --successColorLight: #f0fff6;
+  --failColorLight: #fff0f0;
+  --attentionColorLight: #fff7f0;
   --bannedColorLight: var(--marketplaceColorLight);
   --bannedColorDark: var(--marketplaceColor);
 

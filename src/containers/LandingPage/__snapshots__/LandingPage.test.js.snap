@@ -89,7 +89,7 @@ exports[`LandingPage matches snapshot 1`] = `
       className={null}
       rootClassName={null}
     >
-      <InjectIntl(Footer) />
+      <injectIntl(Footer) />
     </LayoutWrapperFooter>
   </LayoutSingleColumn>
 </Page>

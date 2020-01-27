@@ -1,9 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { arrayOf, bool, number, oneOf, shape, string } from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import moment from 'moment';
+import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import classNames from 'classnames';
 import {
   txIsAccepted,
@@ -12,15 +11,16 @@ import {
   txIsEnquired,
   txIsRequested,
   txHasBeenDelivered,
+  txIsPaymentExpired,
+  txIsPaymentPending,
 } from '../../util/transaction';
-import { LINE_ITEM_DAY, LINE_ITEM_UNITS, propTypes } from '../../util/types';
-import { formatMoney } from '../../util/currency';
+import { propTypes, DATE_TYPE_DATE } from '../../util/types';
 import { ensureCurrentUser } from '../../util/data';
-import { dateFromAPIToLocalNoon, daysBetween } from '../../util/dates';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import {
   Avatar,
+  BookingTimeInfo,
   NamedLink,
   NotificationBadge,
   Page,
@@ -40,8 +40,6 @@ import config from '../../config';
 
 import { loadData } from './InboxPage.duck';
 import css from './InboxPage.css';
-
-const { arrayOf, bool, number, oneOf, shape, string } = PropTypes;
 
 const formatDate = (intl, date) => {
   return {
@@ -89,6 +87,26 @@ export const txState = (intl, tx, type) => {
         };
 
     return requested;
+  } else if (txIsPaymentPending(tx)) {
+    return {
+      nameClassName: isOrder ? css.nameNotEmphasized : css.nameEmphasized,
+      bookingClassName: css.bookingNoActionNeeded,
+      lastTransitionedAtClassName: css.lastTransitionedAtNotEmphasized,
+      stateClassName: isOrder ? css.stateActionNeeded : css.stateNoActionNeeded,
+      state: intl.formatMessage({
+        id: 'InboxPage.statePendingPayment',
+      }),
+    };
+  } else if (txIsPaymentExpired(tx)) {
+    return {
+      nameClassName: css.nameNotEmphasized,
+      bookingClassName: css.bookingNoActionNeeded,
+      lastTransitionedAtClassName: css.lastTransitionedAtNotEmphasized,
+      stateClassName: css.stateNoActionNeeded,
+      state: intl.formatMessage({
+        id: 'InboxPage.stateExpired',
+      }),
+    };
   } else if (txIsDeclined(tx)) {
     return {
       nameClassName: css.nameNotEmphasized,
@@ -135,33 +153,7 @@ export const txState = (intl, tx, type) => {
   }
 };
 
-const bookingData = (unitType, tx, isOrder, intl) => {
-  // Attributes: displayStart and displayEnd can be used to differentiate shown time range
-  // from actual start and end times used for availability reservation. It can help in situations
-  // where there are preparation time needed between bookings.
-  // Read more: https://www.sharetribe.com/api-reference/#bookings
-  const { start, end, displayStart, displayEnd } = tx.booking.attributes;
-  const startDate = dateFromAPIToLocalNoon(displayStart || start);
-  const endDateRaw = dateFromAPIToLocalNoon(displayEnd || end);
-  const isDaily = unitType === LINE_ITEM_DAY;
-  const isUnits = unitType === LINE_ITEM_UNITS;
-  const isSingleDay = isDaily && daysBetween(startDate, endDateRaw) === 1;
-  const bookingStart = formatDate(intl, startDate);
-
-  // Shift the exclusive API end date with daily bookings
-  const endDate =
-    isDaily || isUnits
-      ? moment(endDateRaw)
-          .subtract(1, 'days')
-          .toDate()
-      : endDateRaw;
-  const bookingEnd = formatDate(intl, endDate);
-  const bookingPrice = isOrder ? tx.attributes.payinTotal : tx.attributes.payoutTotal;
-  const price = formatMoney(intl, bookingPrice);
-  return { bookingStart, bookingEnd, price, isSingleDay };
-};
-
-// Functional component as internal helper to print BookingInfo if that is needed
+// Functional component as internal helper to print BookingTimeInfo if that is needed
 const BookingInfoMaybe = props => {
   const { bookingClassName, isOrder, intl, tx, unitType } = props;
   const isEnquiry = txIsEnquired(tx);
@@ -170,13 +162,26 @@ const BookingInfoMaybe = props => {
     return null;
   }
 
-  const { bookingStart, bookingEnd, price, isSingleDay } = bookingData(unitType, tx, isOrder, intl);
-  const dateInfo = isSingleDay ? bookingStart.short : `${bookingStart.short} - ${bookingEnd.short}`;
+  // If you want to show the booking price after the booking time on InboxPage you can
+  // add the price after the BookingTimeInfo component. You can get the price by uncommenting
+  // sthe following lines:
+
+  // const bookingPrice = isOrder ? tx.attributes.payinTotal : tx.attributes.payoutTotal;
+  // const price = bookingPrice ? formatMoney(intl, bookingPrice) : null;
+
+  // Remember to also add formatMoney function from 'util/currency.js' and add this after BookingTimeInfo:
+  // <div className={css.itemPrice}>{price}</div>
 
   return (
-    <div className={classNames(css.bookingInfo, bookingClassName)}>
-      {dateInfo}
-      <span className={css.itemPrice}>{price}</span>
+    <div className={classNames(css.bookingInfoWrapper, bookingClassName)}>
+      <BookingTimeInfo
+        bookingClassName={bookingClassName}
+        isOrder={isOrder}
+        intl={intl}
+        tx={tx}
+        unitType={unitType}
+        dateType={DATE_TYPE_DATE}
+      />
     </div>
   );
 };

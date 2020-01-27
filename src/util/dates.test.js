@@ -4,6 +4,7 @@ import {
   isSameDate,
   nightsBetween,
   daysBetween,
+  minutesBetween,
   formatDate,
   parseDateFromISO8601,
   stringifyDateToISO8601,
@@ -77,6 +78,28 @@ describe('date utils', () => {
       const start = new Date(2017, 0, 1);
       const end = new Date(2017, 0, 3);
       expect(daysBetween(start, end)).toEqual(2);
+    });
+  });
+
+  describe('minutesBetween()', () => {
+    it('should fail if end Date is before start Date', () => {
+      const start = new Date(2017, 0, 2);
+      const end = new Date(2017, 0, 1);
+      expect(() => minutesBetween(start, end)).toThrow('End Date cannot be before start Date');
+    });
+    it('should handle equal start and end Dates', () => {
+      const d = new Date(2017, 0, 1, 10, 35, 0);
+      expect(minutesBetween(d, d)).toEqual(0);
+    });
+    it('should calculate minutes count for one hour', () => {
+      const start = new Date(2017, 0, 1, 10, 35, 0);
+      const end = new Date(2017, 0, 1, 11, 35, 0);
+      expect(minutesBetween(start, end)).toEqual(60);
+    });
+    it('should calculate minutes', () => {
+      const start = new Date(2017, 0, 1, 10, 35, 0);
+      const end = new Date(2017, 0, 1, 10, 55, 0);
+      expect(minutesBetween(start, end)).toEqual(20);
     });
   });
 

@@ -2,6 +2,7 @@
 
 exports[`EditListingPhotosForm matches snapshot 1`] = `
 <ReactFinalForm
+  disabled={false}
   dispatch={[Function]}
   fetchErrors={null}
   imageUploadRequested={false}
@@ -18,7 +19,7 @@ exports[`EditListingPhotosForm matches snapshot 1`] = `
       "formatMessage": [Function],
       "formatNumber": [Function],
       "formatPlural": [Function],
-      "formatRelative": [Function],
+      "formatRelativeTime": [Function],
       "formatTime": [Function],
       "now": [Function],
     }

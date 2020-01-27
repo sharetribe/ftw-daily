@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import invariant from 'invariant';
 import { arrayOf, func, node, number, oneOfType, shape, string } from 'prop-types';
 import isEqual from 'lodash/isEqual';
 import { withGoogleMap, GoogleMap, OverlayView } from 'react-google-maps';
@@ -86,12 +88,46 @@ export const isMapsLibLoaded = () =>
  * https://github.com/tomchentw/react-google-maps/issues/482
  */
 class CustomOverlayView extends OverlayView {
+  onRemove() {
+    this.containerElement.parentNode.removeChild(this.containerElement);
+    //Remove `unmountComponentAtNode` for react version 16
+    //I decided to keep the code here incase React decides not to give out warning when `unmountComponentAtNode` in newer version
+    if (!React.version.match(/^16/)) {
+      ReactDOM.unmountComponentAtNode(this.containerElement);
+    }
+    this.containerElement = null;
+  }
+
+  onAdd() {
+    this.containerElement = document.createElement(`div`);
+    this.containerElement.style.position = `absolute`;
+
+    const { mapPaneName } = this.props;
+    invariant(
+      !!mapPaneName,
+      `OverlayView requires either props.mapPaneName or props.defaultMapPaneName but got %s`,
+      mapPaneName
+    );
+
+    const mapPanes = this.state[OVERLAY_VIEW].getPanes();
+    mapPanes[mapPaneName].appendChild(this.containerElement);
+    this.onPositionElement();
+    this.forceUpdate();
+  }
+
+  render() {
+    if (React.version.match(/^16/) && this.containerElement) {
+      return ReactDOM.createPortal(React.Children.only(this.props.children), this.containerElement);
+    }
+    return false;
+  }
+
   draw() {
     // https://developers.google.com/maps/documentation/javascript/3.exp/reference#MapPanes
     const mapPanes = this.state[OVERLAY_VIEW].getPanes();
     // Add conditional to ensure panes and container exist before drawing
     if (mapPanes && this.containerElement) {
-      super.draw();
+      this.onPositionElement();
     }
   }
 }
@@ -365,10 +401,10 @@ class SearchMapWithGoogleMap extends Component {
     this.onIdle = this.onIdle.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (!isEqual(this.props.location, nextProps.location)) {
+  componentDidUpdate(prevProps) {
+    if (!isEqual(prevProps.location, this.props.location)) {
       // If no mapSearch url parameter is given, this is original location search
-      const { mapSearch } = parse(nextProps.location.search, {
+      const { mapSearch } = parse(this.props.location.search, {
         latlng: ['origin'],
         latlngBounds: ['bounds'],
       });
@@ -383,8 +419,8 @@ class SearchMapWithGoogleMap extends Component {
       // Do not call fitMapToBounds if bounds are the same.
       // Our bounds are viewport bounds, and fitBounds will try to add margins around those bounds
       // that would result to zoom-loop (bound change -> fitmap -> bounds change -> ...)
-      if (!isEqual(nextProps.bounds, currentBounds) && !this.viewportBounds) {
-        fitMapToBounds(this.map, nextProps.bounds, { padding: 0 });
+      if (!isEqual(this.props.bounds, currentBounds) && !this.viewportBounds) {
+        fitMapToBounds(this.map, this.props.bounds, { padding: 0 });
       }
     }
   }

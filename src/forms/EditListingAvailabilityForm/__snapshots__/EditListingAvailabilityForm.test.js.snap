@@ -11,6 +11,42 @@ exports[`EditListingAvailabilityForm matches snapshot 1`] = `
       "onFetchBookings": [Function],
     }
   }
+  availabilityPlan={
+    Object {
+      "entries": Array [
+        Object {
+          "dayOfWeek": "mon",
+          "seats": 1,
+        },
+        Object {
+          "dayOfWeek": "tue",
+          "seats": 1,
+        },
+        Object {
+          "dayOfWeek": "wed",
+          "seats": 1,
+        },
+        Object {
+          "dayOfWeek": "thu",
+          "seats": 1,
+        },
+        Object {
+          "dayOfWeek": "fri",
+          "seats": 1,
+        },
+        Object {
+          "dayOfWeek": "sat",
+          "seats": 1,
+        },
+        Object {
+          "dayOfWeek": "sun",
+          "seats": 1,
+        },
+      ],
+      "type": "availability-plan/day",
+    }
+  }
+  disabled={false}
   dispatch={[Function]}
   intl={
     Object {
@@ -19,12 +55,13 @@ exports[`EditListingAvailabilityForm matches snapshot 1`] = `
       "formatMessage": [Function],
       "formatNumber": [Function],
       "formatPlural": [Function],
-      "formatRelative": [Function],
+      "formatRelativeTime": [Function],
       "formatTime": [Function],
       "now": [Function],
     }
   }
   onSubmit={[Function]}
+  ready={false}
   render={[Function]}
   saveActionMsg="Save rules"
   updateError={null}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { bool } from 'prop-types';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage, intlShape } from '../../util/reactIntl';
 import { formatMoney } from '../../util/currency';
 import { txIsCanceled, txIsDelivered, txIsDeclined } from '../../util/transaction';
 import { propTypes } from '../../util/types';
@@ -31,10 +31,13 @@ const LineItemUnitPrice = props => {
   const formattedTotalPrice = formatMoney(intl, totalPrice);
 
   return (
-    <div className={css.lineItem}>
-      <div className={css.totalLabel}>{totalLabel}</div>
-      <div className={css.totalPrice}>{formattedTotalPrice}</div>
-    </div>
+    <>
+      <hr className={css.totalDivider} />
+      <div className={css.lineItemTotal}>
+        <div className={css.totalLabel}>{totalLabel}</div>
+        <div className={css.totalPrice}>{formattedTotalPrice}</div>
+      </div>
+    </>
   );
 };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose } from 'redux';
 import { object, string, bool, number, func, shape } from 'prop-types';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { withRouter } from 'react-router-dom';
 import omit from 'lodash/omit';
@@ -11,6 +11,7 @@ import {
   SelectSingleFilter,
   SelectMultipleFilter,
   PriceFilter,
+  KeywordFilter,
 } from '../../components';
 import routeConfiguration from '../../routeConfiguration';
 import { parseDateFromISO8601, stringifyDateToISO8601 } from '../../util/dates';
@@ -70,6 +71,7 @@ const SearchFiltersComponent = props => {
     filtersFilter,
     priceFilter,
     dateRangeFilter,
+    keywordFilter,
     isSearchFiltersPanelOpen,
     toggleSearchFiltersPanel,
     searchFiltersPanelSelectedCount,
@@ -102,6 +104,10 @@ const SearchFiltersComponent = props => {
 
   const initialDateRange = dateRangeFilter
     ? initialDateRangeValue(urlQueryParams, dateRangeFilter.paramName)
+    : null;
+
+  const initialKeyword = keywordFilter
+    ? initialValue(urlQueryParams, keywordFilter.paramName)
     : null;
 
   const handleSelectOptions = (urlParam, options) => {
@@ -144,6 +150,14 @@ const SearchFiltersComponent = props => {
       start != null && end != null
         ? { ...urlQueryParams, [urlParam]: `${start},${end}` }
         : omit(urlQueryParams, urlParam);
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+  };
+
+  const handleKeyword = (urlParam, values) => {
+    const queryParams = values
+      ? { ...urlQueryParams, [urlParam]: values }
+      : omit(urlQueryParams, urlParam);
+
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   };
 
@@ -196,6 +210,20 @@ const SearchFiltersComponent = props => {
         initialValues={initialDateRange}
       />
     ) : null;
+
+  // const keywordFilterElement =
+  //   keywordFilter && keywordFilter.config.active ? (
+  //     <KeywordFilter
+  //       id={'SearchFilters.keywordFilter'}
+  //       name="keyword"
+  //       urlParam={keywordFilter.paramName}
+  //       label={keywordLabel}
+  //       onSubmit={handleKeyword}
+  //       showAsPopup
+  //       initialValues={initialKeyword}
+  //       contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+  //     />
+  //   ) : null;
 
   const toggleSearchFiltersPanelButtonClasses =
     isSearchFiltersPanelOpen || searchFiltersPanelSelectedCount > 0

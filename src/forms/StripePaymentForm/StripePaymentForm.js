@@ -1,10 +1,26 @@
+/**
+ * Note: This form is using card from Stripe Elements https://stripe.com/docs/stripe-js#elements
+ * Card is not a Final Form field so it's not available trough Final Form.
+ * It's also handled separately in handleSubmit function.
+ */
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { bool, func, object, string } from 'prop-types';
+import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
+import { Form as FinalForm } from 'react-final-form';
 import classNames from 'classnames';
-import { Form, PrimaryButton, ExpandingTextarea } from '../../components';
 import config from '../../config';
+import { propTypes } from '../../util/types';
+import { ensurePaymentMethodCard } from '../../util/data';
 
+import {
+  Form,
+  PrimaryButton,
+  FieldCheckbox,
+  FieldTextInput,
+  IconSpinner,
+  SavedCardDetails,
+  StripePaymentAddress,
+} from '../../components';
 import css from './StripePaymentForm.css';
 
 /**
@@ -69,22 +85,103 @@ const cardStyles = {
   },
 };
 
+const OneTimePaymentWithCardElement = props => {
+  const { cardClasses, formId, handleStripeElementRef, hasCardError, error, label, intl } = props;
+  const labelText =
+    label || intl.formatMessage({ id: 'StripePaymentForm.saveAfterOnetimePayment' });
+  return (
+    <React.Fragment>
+      <label className={css.paymentLabel} htmlFor={`${formId}-card`}>
+        <FormattedMessage id="StripePaymentForm.paymentCardDetails" />
+      </label>
+      <div className={cardClasses} id={`${formId}-card`} ref={handleStripeElementRef} />
+      {hasCardError ? <span className={css.error}>{error}</span> : null}
+      <div className={css.saveForLaterUse}>
+        <FieldCheckbox
+          className={css.saveForLaterUseCheckbox}
+          textClassName={css.saveForLaterUseLabel}
+          id="saveAfterOnetimePayment"
+          name="saveAfterOnetimePayment"
+          label={labelText}
+          value="saveAfterOnetimePayment"
+          useSuccessColor
+        />
+        <span className={css.saveForLaterUseLegalInfo}>
+          <FormattedMessage id="StripePaymentForm.saveforLaterUseLegalInfo" />
+        </span>
+      </div>
+    </React.Fragment>
+  );
+};
+
+const PaymentMethodSelector = props => {
+  const {
+    cardClasses,
+    formId,
+    changePaymentMethod,
+    defaultPaymentMethod,
+    handleStripeElementRef,
+    hasCardError,
+    error,
+    paymentMethod,
+    intl,
+  } = props;
+  const last4Digits = defaultPaymentMethod.attributes.card.last4Digits;
+  const labelText = intl.formatMessage(
+    { id: 'StripePaymentForm.replaceAfterOnetimePayment' },
+    { last4Digits }
+  );
+
+  return (
+    <React.Fragment>
+      <h3 className={css.paymentHeading}>
+        <FormattedMessage id="StripePaymentForm.payWithHeading" />
+      </h3>
+      <SavedCardDetails
+        className={css.paymentMethodSelector}
+        card={defaultPaymentMethod.attributes.card}
+        onChange={changePaymentMethod}
+      />
+      {paymentMethod === 'replaceCard' ? (
+        <OneTimePaymentWithCardElement
+          cardClasses={cardClasses}
+          formId={formId}
+          handleStripeElementRef={handleStripeElementRef}
+          hasCardError={hasCardError}
+          error={error}
+          label={labelText}
+          intl={intl}
+        />
+      ) : null}
+    </React.Fragment>
+  );
+};
+
+const getPaymentMethod = (selectedPaymentMethod, hasDefaultPaymentMethod) => {
+  return selectedPaymentMethod == null && hasDefaultPaymentMethod
+    ? 'defaultCard'
+    : selectedPaymentMethod == null
+    ? 'onetimeCardPayment'
+    : selectedPaymentMethod;
+};
+
 const initialState = {
   error: null,
-  submitting: false,
   cardValueValid: false,
-  token: null,
-  message: '',
+  // The mode can be 'onetimePayment', 'defaultCard', or 'replaceCard'
+  // Check SavedCardDetails component for more information
+  paymentMethod: null,
 };
 
 /**
  * Payment form that asks for credit card info using Stripe Elements.
  *
  * When the card is valid and the user submits the form, a request is
- * sent to the Stripe API to fetch a token that is passed to the
- * onSubmit prop of this form.
+ * sent to the Stripe API to handle payment. `stripe.handleCardPayment`
+ * may ask more details from cardholder if 3D security steps are needed.
  *
- * See: https://stripe.com/docs/elements
+ * See: https://stripe.com/docs/payments/payment-intents
+ *      https://stripe.com/docs/elements
  */
 class StripePaymentForm extends Component {
   constructor(props) {
@@ -92,97 +189,181 @@ class StripePaymentForm extends Component {
     this.state = initialState;
     this.handleCardValueChange = this.handleCardValueChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.paymentForm = this.paymentForm.bind(this);
+    this.initializeStripeElement = this.initializeStripeElement.bind(this);
+    this.handleStripeElementRef = this.handleStripeElementRef.bind(this);
+    this.changePaymentMethod = this.changePaymentMethod.bind(this);
+    this.finalFormAPI = null;
+    this.cardContainer = null;
   }
+
   componentDidMount() {
     if (!window.Stripe) {
       throw new Error('Stripe must be loaded for StripePaymentForm');
     }
 
     if (config.stripe.publishableKey) {
+      const {
+        onStripeInitialized,
+        hasHandledCardPayment,
+        defaultPaymentMethod,
+        loadingData,
+      } = this.props;
       this.stripe = window.Stripe(config.stripe.publishableKey);
-      const elements = this.stripe.elements(stripeElementsOptions);
-      this.card = elements.create('card', { style: cardStyles });
-      this.card.mount(this.cardContainer);
-      this.card.addEventListener('change', this.handleCardValueChange);
-      // EventListener is the only way to simulate breakpoints with Stripe.
-      window.addEventListener('resize', () => {
-        if (window.innerWidth < 1024) {
-          this.card.update({ style: { base: { fontSize: '18px', lineHeight: '24px' } } });
-        } else {
-          this.card.update({ style: { base: { fontSize: '20px', lineHeight: '32px' } } });
-        }
-      });
+      onStripeInitialized(this.stripe);
+
+      if (!(hasHandledCardPayment || defaultPaymentMethod || loadingData)) {
+        this.initializeStripeElement();
+      }
     }
   }
+
   componentWillUnmount() {
     if (this.card) {
       this.card.removeEventListener('change', this.handleCardValueChange);
       this.card.unmount();
+      this.card = null;
     }
   }
+
+  initializeStripeElement(element) {
+    const elements = this.stripe.elements(stripeElementsOptions);
+
+    if (!this.card) {
+      this.card = elements.create('card', { style: cardStyles });
+      this.card.mount(element || this.cardContainer);
+      this.card.addEventListener('change', this.handleCardValueChange);
+      // EventListener is the only way to simulate breakpoints with Stripe.
+      window.addEventListener('resize', () => {
+        if (this.card) {
+          if (window.innerWidth < 1024) {
+            this.card.update({ style: { base: { fontSize: '18px', lineHeight: '24px' } } });
+          } else {
+            this.card.update({ style: { base: { fontSize: '20px', lineHeight: '32px' } } });
+          }
+        }
+      });
+    }
+  }
+
+  changePaymentMethod(changedTo) {
+    if (this.card && changedTo === 'defaultCard') {
+      this.card.removeEventListener('change', this.handleCardValueChange);
+      this.card.unmount();
+      this.card = null;
+    }
+    this.setState({ paymentMethod: changedTo });
+  }
+
+  handleStripeElementRef(el) {
+    this.cardContainer = el;
+    if (this.stripe && el) {
+      this.initializeStripeElement(el);
+    }
+  }
+
   handleCardValueChange(event) {
-    const { intl, onChange } = this.props;
+    const { intl } = this.props;
     const { error, complete } = event;
 
-    // A change in the card should clear the token and trigger a call
-    // to the onChange prop with the cleared token and the current
-    // message.
+    const postalCode = event.value.postalCode;
+    if (this.finalFormAPI) {
+      this.finalFormAPI.change('postal', postalCode);
+    }
 
     this.setState(prevState => {
-      const { message } = prevState;
-      const token = null;
-      onChange({ token, message });
       return {
         error: error ? stripeErrorTranslation(intl, error) : null,
         cardValueValid: complete,
-        token,
       };
     });
   }
-  handleSubmit(event) {
-    event.preventDefault();
-    const { onSubmit, stripePaymentTokenInProgress, stripePaymentToken } = this.props;
+  handleSubmit(values) {
+    const {
+      onSubmit,
+      inProgress,
+      formId,
+      hasHandledCardPayment,
+      defaultPaymentMethod,
+    } = this.props;
+    const { initialMessage } = values;
+    const { cardValueValid, paymentMethod } = this.state;
+    const billingDetailsKnown = hasHandledCardPayment || defaultPaymentMethod;
+    const onetimePaymentNeedsAttention = !billingDetailsKnown && !cardValueValid;
 
-    if (stripePaymentTokenInProgress || !this.state.cardValueValid) {
+    if (inProgress || onetimePaymentNeedsAttention) {
       // Already submitting or card value incomplete/invalid
       return;
     }
 
-    if (stripePaymentToken) {
-      // Token already fetched for the current card value
-      onSubmit({ token: stripePaymentToken, message: this.state.message.trim() });
-      return;
-    }
-
     const params = {
-      stripe: this.stripe,
+      message: initialMessage ? initialMessage.trim() : null,
       card: this.card,
+      formId,
+      formValues: values,
+      paymentMethod: getPaymentMethod(
+        paymentMethod,
+        ensurePaymentMethodCard(defaultPaymentMethod).id
+      ),
     };
-
-    this.props.onCreateStripePaymentToken(params).then(() => {
-      onSubmit({ token: this.props.stripePaymentToken.id, message: this.state.message.trim() });
-    });
+    onSubmit(params);
   }
-  render() {
+
+  paymentForm(formRenderProps) {
     const {
       className,
       rootClassName,
-      inProgress,
+      inProgress: submitInProgress,
+      loadingData,
       formId,
       paymentInfo,
-      onChange,
       authorDisplayName,
       showInitialMessageInput,
       intl,
-      stripePaymentTokenInProgress,
-      stripePaymentTokenError,
-    } = this.props;
-    const submitInProgress = stripePaymentTokenInProgress || inProgress;
-    const submitDisabled = !this.state.cardValueValid || submitInProgress;
+      initiateOrderError,
+      handleCardPaymentError,
+      confirmPaymentError,
+      invalid,
+      handleSubmit,
+      form,
+      hasHandledCardPayment,
+      defaultPaymentMethod,
+    } = formRenderProps;
+
+    this.finalFormAPI = form;
+
+    const ensuredDefaultPaymentMethod = ensurePaymentMethodCard(defaultPaymentMethod);
+    const billingDetailsNeeded = !(hasHandledCardPayment || confirmPaymentError);
+    const billingDetailsKnown = hasHandledCardPayment || ensuredDefaultPaymentMethod;
+    const onetimePaymentNeedsAttention = !billingDetailsKnown && !this.state.cardValueValid;
+    const submitDisabled = invalid || onetimePaymentNeedsAttention || submitInProgress;
+    const hasCardError = this.state.error && !submitInProgress;
+    const hasPaymentErrors = handleCardPaymentError || confirmPaymentError;
     const classes = classNames(rootClassName || css.root, className);
     const cardClasses = classNames(css.card, {
       [css.cardSuccess]: this.state.cardValueValid,
-      [css.cardError]: stripePaymentTokenError && !submitInProgress,
+      [css.cardError]: hasCardError,
+    });
+
+    // TODO: handleCardPayment can create all kinds of errors.
+    // Currently, we provide translation support for one:
+    // https://stripe.com/docs/error-codes
+    const piAuthenticationFailure = 'payment_intent_authentication_failure';
+    const paymentErrorMessage =
+      handleCardPaymentError && handleCardPaymentError.code === piAuthenticationFailure
+        ? intl.formatMessage({ id: 'StripePaymentForm.handleCardPaymentError' })
+        : handleCardPaymentError
+        ? handleCardPaymentError.message
+        : confirmPaymentError
+        ? intl.formatMessage({ id: 'StripePaymentForm.confirmPaymentError' })
+        : intl.formatMessage({ id: 'StripePaymentForm.genericError' });
+
+    const billingDetailsNameLabel = intl.formatMessage({
+      id: 'StripePaymentForm.billingDetailsNameLabel',
+    });
+
+    const billingDetailsNamePlaceholder = intl.formatMessage({
+      id: 'StripePaymentForm.billingDetailsNamePlaceholder',
     });
 
     const messagePlaceholder = intl.formatMessage(
@@ -190,62 +371,111 @@ class StripePaymentForm extends Component {
       { name: authorDisplayName }
     );
 
-    const handleMessageChange = e => {
-      // A change in the message should call the onChange prop with
-      // the current token and the new message.
-      const message = e.target.value;
-      this.setState(prevState => {
-        const { token } = prevState;
-        const newState = { token, message };
-        onChange(newState);
-        return newState;
-      });
-    };
+    const messageOptionalText = intl.formatMessage({
+      id: 'StripePaymentForm.messageOptionalText',
+    });
 
-    const messageOptionalText = (
-      <span className={css.messageOptional}>
-        <FormattedMessage id="StripePaymentForm.messageOptionalText" />
-      </span>
+    const initialMessageLabel = intl.formatMessage(
+      { id: 'StripePaymentForm.messageLabel' },
+      { messageOptionalText: messageOptionalText }
     );
 
-    const initialMessage = showInitialMessageInput ? (
-      <div>
-        <h3 className={css.messageHeading}>
-          <FormattedMessage id="StripePaymentForm.messageHeading" />
-        </h3>
-        <label className={css.messageLabel} htmlFor={`${formId}-message`}>
-          <FormattedMessage id="StripePaymentForm.messageLabel" values={{ messageOptionalText }} />
-        </label>
-        <ExpandingTextarea
-          id={`${formId}-message`}
-          className={css.message}
-          placeholder={messagePlaceholder}
-          value={this.state.message}
-          onChange={handleMessageChange}
-        />
-      </div>
-    ) : null;
+    // Asking billing address is recommended in PaymentIntent flow.
+    // In CheckoutPage, we send name and email as billing details, but address only if it exists.
+    const billingAddress = (
+      <StripePaymentAddress intl={intl} form={form} fieldId={formId} card={this.card} />
+    );
 
-    return config.stripe.publishableKey ? (
-      <Form className={classes} onSubmit={this.handleSubmit}>
-        <h3 className={css.paymentHeading}>
-          <FormattedMessage id="StripePaymentForm.paymentHeading" />
-        </h3>
-        <label className={css.paymentLabel} htmlFor={`${formId}-card`}>
-          <FormattedMessage id="StripePaymentForm.creditCardDetails" />
-        </label>
-        <div
-          className={cardClasses}
-          id={`${formId}-card`}
-          ref={el => {
-            this.cardContainer = el;
-          }}
-        />
-        {stripePaymentTokenError && !submitInProgress ? (
-          <span style={{ color: 'red' }}>{stripePaymentTokenError}</span>
+    const hasStripeKey = config.stripe.publishableKey;
+    const showPaymentMethodSelector = ensuredDefaultPaymentMethod.id;
+    const selectedPaymentMethod = getPaymentMethod(
+      this.state.paymentMethod,
+      showPaymentMethodSelector
+    );
+    const showOnetimePaymentFields = ['onetimeCardPayment', 'replaceCard'].includes(
+      selectedPaymentMethod
+    );
+    return hasStripeKey ? (
+      <Form className={classes} onSubmit={handleSubmit}>
+        {billingDetailsNeeded && !loadingData ? (
+          <React.Fragment>
+            {showPaymentMethodSelector ? (
+              <PaymentMethodSelector
+                cardClasses={cardClasses}
+                formId={formId}
+                defaultPaymentMethod={ensuredDefaultPaymentMethod}
+                changePaymentMethod={this.changePaymentMethod}
+                handleStripeElementRef={this.handleStripeElementRef}
+                hasCardError={hasCardError}
+                error={this.state.error}
+                paymentMethod={selectedPaymentMethod}
+                intl={intl}
+              />
+            ) : (
+              <React.Fragment>
+                <h3 className={css.paymentHeading}>
+                  <FormattedMessage id="StripePaymentForm.paymentHeading" />
+                </h3>
+                <OneTimePaymentWithCardElement
+                  cardClasses={cardClasses}
+                  formId={formId}
+                  handleStripeElementRef={this.handleStripeElementRef}
+                  hasCardError={hasCardError}
+                  error={this.state.error}
+                  intl={intl}
+                />
+              </React.Fragment>
+            )}
+
+            {showOnetimePaymentFields ? (
+              <div className={css.paymentAddressField}>
+                <h3 className={css.billingHeading}>
+                  <FormattedMessage id="StripePaymentForm.billingDetails" />
+                </h3>
+
+                <FieldTextInput
+                  className={css.field}
+                  type="text"
+                  id="name"
+                  name="name"
+                  autoComplete="cc-name"
+                  label={billingDetailsNameLabel}
+                  placeholder={billingDetailsNamePlaceholder}
+                />
+
+                {billingAddress}
+              </div>
+            ) : null}
+          </React.Fragment>
+        ) : loadingData ? (
+          <p className={css.spinner}>
+            <IconSpinner />
+          </p>
         ) : null}
-        {initialMessage}
+
+        {initiateOrderError ? (
+          <span className={css.errorMessage}>{initiateOrderError.message}</span>
+        ) : null}
+        {showInitialMessageInput ? (
+          <div>
+            <h3 className={css.messageHeading}>
+              <FormattedMessage id="StripePaymentForm.messageHeading" />
+            </h3>
+
+            <FieldTextInput
+              type="textarea"
+              id={`${formId}-message`}
+              name="initialMessage"
+              label={initialMessageLabel}
+              placeholder={messagePlaceholder}
+              className={css.message}
+            />
+          </div>
+        ) : null}
         <div className={css.submitContainer}>
+          {hasPaymentErrors ? (
+            <span className={css.errorMessage}>{paymentErrorMessage}</span>
+          ) : null}
           <p className={css.paymentInfo}>{paymentInfo}</p>
           <PrimaryButton
             className={css.submitButton}
@@ -253,7 +483,11 @@ class StripePaymentForm extends Component {
             inProgress={submitInProgress}
             disabled={submitDisabled}
           >
-            <FormattedMessage id="StripePaymentForm.submitPaymentInfo" />
+            {billingDetailsNeeded ? (
+              <FormattedMessage id="StripePaymentForm.submitPaymentInfo" />
+            ) : (
+              <FormattedMessage id="StripePaymentForm.submitConfirmPaymentInfo" />
+            )}
           </PrimaryButton>
         </div>
       </Form>
@@ -263,34 +497,42 @@ class StripePaymentForm extends Component {
       </div>
     );
   }
+
+  render() {
+    const { onSubmit, ...rest } = this.props;
+    return <FinalForm onSubmit={this.handleSubmit} {...rest} render={this.paymentForm} />;
+  }
 }
 
 StripePaymentForm.defaultProps = {
   className: null,
   rootClassName: null,
   inProgress: false,
-  onChange: () => null,
+  loadingData: false,
   showInitialMessageInput: true,
-  stripePaymentToken: null,
+  hasHandledCardPayment: false,
+  defaultPaymentMethod: null,
+  initiateOrderError: null,
+  handleCardPaymentError: null,
+  confirmPaymentError: null,
 };
-
-const { bool, func, string, object } = PropTypes;
 
 StripePaymentForm.propTypes = {
   className: string,
   rootClassName: string,
   inProgress: bool,
+  loadingData: bool,
+  initiateOrderError: object,
+  handleCardPaymentError: object,
+  confirmPaymentError: object,
   formId: string.isRequired,
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
-  onChange: func,
   paymentInfo: string.isRequired,
   authorDisplayName: string.isRequired,
   showInitialMessageInput: bool,
-  onCreateStripePaymentToken: func.isRequired,
-  stripePaymentTokenInProgress: bool.isRequired,
-  stripePaymentTokenError: bool.isRequired,
-  stripePaymentToken: object,
+  hasHandledCardPayment: bool,
+  defaultPaymentMethod: propTypes.defaultPaymentMethod,
 };
 
 export default injectIntl(StripePaymentForm);

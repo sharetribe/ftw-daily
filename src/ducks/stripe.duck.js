@@ -1,12 +1,7 @@
-import config from '../config';
 import { storableError } from '../util/errors';
 import * as log from '../util/log';
 
 // ================ Action types ================ //
-
-export const STRIPE_ACCOUNT_CREATE_REQUEST = 'app/stripe/STRIPE_ACCOUNT_CREATE_REQUEST';
-export const STRIPE_ACCOUNT_CREATE_SUCCESS = 'app/stripe/STRIPE_ACCOUNT_CREATE_SUCCESS';
-export const STRIPE_ACCOUNT_CREATE_ERROR = 'app/stripe/STRIPE_ACCOUNT_CREATE_ERROR';
 
 export const STRIPE_ACCOUNT_CLEAR_ERROR = 'app/stripe/STRIPE_ACCOUNT_CLEAR_ERROR';
 
@@ -18,42 +13,38 @@ export const PERSON_CREATE_REQUEST = 'app/stripe/PERSON_CREATE_REQUEST';
 export const PERSON_CREATE_SUCCESS = 'app/stripe/PERSON_CREATE_SUCCESS';
 export const PERSON_CREATE_ERROR = 'app/stripe/PERSON_CREATE_ERROR';
 
-export const STRIPE_PAYMENT_TOKEN_CREATE_REQUEST = 'app/stripe/STRIPE_PAYMENT_TOKEN_CREATE_REQUEST';
-export const STRIPE_PAYMENT_TOKEN_CREATE_SUCCESS = 'app/stripe/STRIPE_PAYMENT_TOKEN_CREATE_SUCCESS';
-export const STRIPE_PAYMENT_TOKEN_CREATE_ERROR = 'app/stripe/STRIPE_PAYMENT_TOKEN_CREATE_ERROR';
+export const CLEAR_PAYMENT_TOKEN = 'app/stripe/CLEAR_PAYMENT_TOKEN';
+
+export const HANDLE_CARD_PAYMENT_REQUEST = 'app/stripe/HANDLE_CARD_PAYMENT_REQUEST';
+export const HANDLE_CARD_PAYMENT_SUCCESS = 'app/stripe/HANDLE_CARD_PAYMENT_SUCCESS';
+export const HANDLE_CARD_PAYMENT_ERROR = 'app/stripe/HANDLE_CARD_PAYMENT_ERROR';
+
+export const HANDLE_CARD_SETUP_REQUEST = 'app/stripe/HANDLE_CARD_SETUP_REQUEST';
+export const HANDLE_CARD_SETUP_SUCCESS = 'app/stripe/HANDLE_CARD_SETUP_SUCCESS';
+export const HANDLE_CARD_SETUP_ERROR = 'app/stripe/HANDLE_CARD_SETUP_ERROR';
+
+export const CLEAR_HANDLE_CARD_PAYMENT = 'app/stripe/CLEAR_HANDLE_CARD_PAYMENT';
+
+export const RETRIEVE_PAYMENT_INTENT_REQUEST = 'app/stripe/RETRIEVE_PAYMENT_INTENT_REQUEST';
+export const RETRIEVE_PAYMENT_INTENT_SUCCESS = 'app/stripe/RETRIEVE_PAYMENT_INTENT_SUCCESS';
+export const RETRIEVE_PAYMENT_INTENT_ERROR = 'app/stripe/RETRIEVE_PAYMENT_INTENT_ERROR';
 
 // ================ Reducer ================ //
 
 const initialState = {
-  createStripeAccountInProgress: false,
-  createStripeAccountError: null,
-  createAccountOpenerInProgress: false,
-  createAccountOpenerError: false,
-  personAccountOpener: null,
-  persons: [],
-  stripeAccount: null,
-  stripeAccountFetched: false,
-  stripePaymentTokenInProgress: false,
-  stripePaymentTokenError: false,
-  stripePaymentToken: null,
+  handleCardPaymentInProgress: false,
+  handleCardPaymentError: null,
+  handleCardSetupInProgress: false,
+  handleCardSetupError: null,
+  paymentIntent: null,
+  setupIntent: null,
+  retrievePaymentIntentInProgress: false,
+  retrievePaymentIntentError: null,
 };
 
 export default function reducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
-    case STRIPE_ACCOUNT_CREATE_REQUEST:
-      return { ...state, createStripeAccountError: null, createStripeAccountInProgress: true };
-    case STRIPE_ACCOUNT_CREATE_SUCCESS:
-      return {
-        ...state,
-        createStripeAccountInProgress: false,
-        stripeAccount: payload,
-        stripeAccountFetched: true,
-      };
-    case STRIPE_ACCOUNT_CREATE_ERROR:
-      console.error(payload);
-      return { ...state, createStripeAccountError: payload, createStripeAccountInProgress: false };
-
     case STRIPE_ACCOUNT_CLEAR_ERROR:
       return { ...initialState };
 
@@ -101,17 +92,53 @@ export default function reducer(state = initialState, action = {}) {
         }),
       };
 
-    case STRIPE_PAYMENT_TOKEN_CREATE_REQUEST:
+    case HANDLE_CARD_PAYMENT_REQUEST:
       return {
         ...state,
-        stripePaymentTokenError: null,
-        stripePaymentTokenInProgress: true,
+        handleCardPaymentError: null,
+        handleCardPaymentInProgress: true,
       };
-    case STRIPE_PAYMENT_TOKEN_CREATE_SUCCESS:
-      return { ...state, stripePaymentTokenInProgress: false, stripePaymentToken: payload };
-    case STRIPE_PAYMENT_TOKEN_CREATE_ERROR:
+    case HANDLE_CARD_PAYMENT_SUCCESS:
+      return { ...state, paymentIntent: payload, handleCardPaymentInProgress: false };
+    case HANDLE_CARD_PAYMENT_ERROR:
       console.error(payload);
-      return { ...state, stripePaymentTokenError: payload, stripePaymentTokenInProgress: false };
+      return { ...state, handleCardPaymentError: payload, handleCardPaymentInProgress: false };
+
+    case HANDLE_CARD_SETUP_REQUEST:
+      return {
+        ...state,
+        handleCardSetupError: null,
+        handleCardSetupInProgress: true,
+      };
+    case HANDLE_CARD_SETUP_SUCCESS:
+      return { ...state, setupIntent: payload, handleCardSetupInProgress: false };
+    case HANDLE_CARD_SETUP_ERROR:
+      console.error(payload);
+      return { ...state, handleCardSetupError: payload, handleCardSetupInProgress: false };
+
+    case CLEAR_HANDLE_CARD_PAYMENT:
+      return {
+        ...state,
+        handleCardPaymentInProgress: false,
+        handleCardPaymentError: null,
+        paymentIntent: null,
+      };
+
+    case RETRIEVE_PAYMENT_INTENT_REQUEST:
+      return {
+        ...state,
+        retrievePaymentIntentError: null,
+        retrievePaymentIntentInProgress: true,
+      };
+    case RETRIEVE_PAYMENT_INTENT_SUCCESS:
+      return { ...state, paymentIntent: payload, retrievePaymentIntentInProgress: false };
+    case RETRIEVE_PAYMENT_INTENT_ERROR:
+      console.error(payload);
+      return {
+        ...state,
+        retrievePaymentIntentError: payload,
+        retrievePaymentIntentInProgress: false,
+      };
 
     default:
       return state;
@@ -120,401 +147,183 @@ export default function reducer(state = initialState, action = {}) {
 
 // ================ Action creators ================ //
 
-export const stripeAccountCreateRequest = () => ({ type: STRIPE_ACCOUNT_CREATE_REQUEST });
-
-export const stripeAccountCreateSuccess = stripeAccount => ({
-  type: STRIPE_ACCOUNT_CREATE_SUCCESS,
-  payload: stripeAccount,
-});
-
-export const stripeAccountCreateError = e => ({
-  type: STRIPE_ACCOUNT_CREATE_ERROR,
-  payload: e,
-  error: true,
-});
-
 export const stripeAccountClearError = () => ({
   type: STRIPE_ACCOUNT_CLEAR_ERROR,
 });
 
-export const accountOpenerCreateRequest = personToken => ({
-  type: ACCOUNT_OPENER_CREATE_REQUEST,
-  payload: personToken,
+export const handleCardPaymentRequest = () => ({
+  type: HANDLE_CARD_PAYMENT_REQUEST,
 });
 
-export const accountOpenerCreateSuccess = payload => ({
-  type: ACCOUNT_OPENER_CREATE_SUCCESS,
+export const handleCardPaymentSuccess = payload => ({
+  type: HANDLE_CARD_PAYMENT_SUCCESS,
   payload,
 });
 
-export const accountOpenerCreateError = payload => ({
-  type: ACCOUNT_OPENER_CREATE_ERROR,
-  payload,
-  error: true,
-});
-
-export const personCreateRequest = personToken => ({
-  type: PERSON_CREATE_REQUEST,
-  payload: personToken,
-});
-
-export const personCreateSuccess = payload => ({
-  type: PERSON_CREATE_SUCCESS,
-  payload,
-});
-
-export const personCreateError = payload => ({
-  type: PERSON_CREATE_ERROR,
+export const handleCardPaymentError = payload => ({
+  type: HANDLE_CARD_PAYMENT_ERROR,
   payload,
   error: true,
 });
 
-export const stripePaymentTokenCreateRequest = () => ({
-  type: STRIPE_PAYMENT_TOKEN_CREATE_REQUEST,
+export const handleCardSetupRequest = () => ({
+  type: HANDLE_CARD_SETUP_REQUEST,
 });
 
-export const stripePaymentTokenCreateSuccess = payload => ({
-  type: STRIPE_PAYMENT_TOKEN_CREATE_SUCCESS,
+export const handleCardSetupSuccess = payload => ({
+  type: HANDLE_CARD_SETUP_SUCCESS,
   payload,
 });
 
-export const stripePaymentTokenCreateError = payload => ({
-  type: STRIPE_PAYMENT_TOKEN_CREATE_ERROR,
+export const handleCardSetupError = payload => ({
+  type: HANDLE_CARD_SETUP_ERROR,
+  payload,
+  error: true,
+});
+
+export const initializeCardPaymentData = () => ({
+  type: CLEAR_HANDLE_CARD_PAYMENT,
+});
+
+export const retrievePaymentIntentRequest = () => ({
+  type: RETRIEVE_PAYMENT_INTENT_REQUEST,
+});
+
+export const retrievePaymentIntentSuccess = payload => ({
+  type: RETRIEVE_PAYMENT_INTENT_SUCCESS,
+  payload,
+});
+
+export const retrievePaymentIntentError = payload => ({
+  type: RETRIEVE_PAYMENT_INTENT_ERROR,
   payload,
   error: true,
 });
 
 // ================ Thunks ================ //
 
-// Util: rename address fields to match Stripe API specifications
-const formatAddress = address => {
-  const { city, streetAddress, postalCode, state, province } = address;
-  const cityMaybe = city ? { city } : {};
-  const streetAddressMaybe = streetAddress ? { line1: streetAddress } : {};
-  const postalCodeMaybe = postalCode ? { postal_code: postalCode } : {};
-  const stateMaybe = state ? { state } : province ? { state: province } : {};
+export const retrievePaymentIntent = params => dispatch => {
+  const { stripe, stripePaymentIntentClientSecret } = params;
+  dispatch(retrievePaymentIntentRequest());
 
-  return {
-    ...cityMaybe,
-    ...streetAddressMaybe,
-    ...postalCodeMaybe,
-    ...stateMaybe,
-  };
-};
-
-// Util: rename personToken params to match Stripe API specifications
-const personTokenParams = (personData, country) => {
-  const {
-    isAccountOpener,
-    fname: firstName,
-    lname: lastName,
-    birthDate,
-    address,
-    personalIdNumber,
-    email,
-    phone,
-    role,
-    ownershipPercentage,
-    title,
-  } = personData;
-
-  const addressMaybe = address ? { address: formatAddress(address) } : {};
-  const emailMaybe = email ? { email } : {};
-  const phoneMaybe = phone ? { phone } : {};
-  const idNumberMaybe =
-    country === 'US'
-      ? { ssn_last_4: personalIdNumber }
-      : personalIdNumber
-      ? { personal_id_number: personalIdNumber }
-      : {};
-
-  const accountOpenerMaybe = isAccountOpener ? { account_opener: true } : {};
-  const jobTitleMaybe = title ? { title } : {};
-  const ownerMaybe = role && role.find(r => r === 'owner') ? { owner: true } : {};
-  const ownershipPercentageMaybe = ownershipPercentage
-    ? { percent_ownership: Number.parseFloat(ownershipPercentage) }
-    : {};
-
-  const relationshipMaybe =
-    isAccountOpener || title || role
-      ? {
-          relationship: {
-            ...accountOpenerMaybe,
-            ...jobTitleMaybe,
-            ...ownerMaybe,
-            ...ownershipPercentageMaybe,
-          },
-        }
-      : {};
-
-  return {
-    person: {
-      first_name: firstName,
-      last_name: lastName,
-      dob: birthDate,
-      ...addressMaybe,
-      ...idNumberMaybe,
-      ...emailMaybe,
-      ...phoneMaybe,
-      ...relationshipMaybe,
-    },
-  };
-};
-
-const createStripePerson = (personParams, country, stripe) => (dispatch, getState, sdk) => {
-  const { isAccountOpener } = personParams;
-  let personToken = 'no-token';
   return stripe
-    .createToken('person', personTokenParams(personParams, country))
+    .retrievePaymentIntent(stripePaymentIntentClientSecret)
     .then(response => {
-      personToken = response.token.id;
-
-      // Request to create person in progress
-      // Account opener is mandatory for all - so it's handled separately
-      const createPersonRequest = isAccountOpener
-        ? accountOpenerCreateRequest
-        : personCreateRequest;
-      dispatch(createPersonRequest({ personToken }));
-
-      return sdk.stripePersons.create({ personToken }, { expand: true });
-    })
-    .then(response => {
-      // Stripe person created successfully
-      const createPersonSuccess = isAccountOpener
-        ? accountOpenerCreateSuccess
-        : personCreateSuccess;
-      dispatch(createPersonSuccess({ personToken, stripePerson: response.data.data }));
-
-      return response;
-    })
-    .catch(err => {
-      const e = storableError(err);
-
-      // Stripe person creation failed
-      const createPersonError = isAccountOpener ? accountOpenerCreateError : personCreateError;
-      dispatch(createPersonError({ personToken, error: e }));
-
-      const stripeMessage =
-        e.apiErrors && e.apiErrors.length > 0 && e.apiErrors[0].meta
-          ? e.apiErrors[0].meta.stripeMessage
-          : null;
-      log.error(err, 'create-stripe-person-failed', { stripeMessage });
-      throw e;
-    });
-};
-
-// accountData should be either individual or company
-const bankAccountTokenParams = accountData => accountData.bankAccountToken;
-const businessProfileParams = accountData => {
-  const { mcc, url } =
-    accountData && accountData.businessProfile ? accountData.businessProfile : {};
-  return mcc && url
-    ? {
-        businessProfileMCC: mcc,
-        businessProfileURL: url,
+      if (response.error) {
+        return Promise.reject(response);
+      } else {
+        dispatch(retrievePaymentIntentSuccess(response.paymentIntent));
+        return response;
       }
-    : {};
-};
+    })
+    .catch(err => {
+      // Unwrap Stripe error.
+      const e = err.error || storableError(err);
+      dispatch(retrievePaymentIntentError(e));
 
-// Util: rename accountToken params to match Stripe API specifications
-const accountTokenParamsForCompany = company => {
-  const { address, name, phone, taxId } = company;
-  const addressMaybe = address ? { address: formatAddress(address) } : {};
-  const phoneMaybe = phone ? { phone } : {};
-  return {
-    business_type: 'company',
-    company: {
-      name,
-      tax_id: taxId,
-      ...addressMaybe,
-      ...phoneMaybe,
-    },
-    tos_shown_and_accepted: true,
-  };
-};
-
-export const createStripeCompanyAccount = (payoutDetails, stripe) => (dispatch, getState, sdk) => {
-  const { company, country, accountOpener, persons = [] } = payoutDetails;
-  const state = getState();
-  let stripeAccount =
-    state.stripe && state.stripe.stripeAccount ? state.stripe.stripeAccount : null;
-
-  dispatch(stripeAccountCreateRequest());
-
-  const createPersons = () => {
-    return Promise.all([
-      dispatch(createStripePerson({ ...accountOpener, isAccountOpener: true }, country, stripe)),
-      ...persons.map(p => dispatch(createStripePerson(p, country, stripe))),
-    ]);
-  };
-
-  // If stripeAccount exists, stripePersons call must have failed.
-  // Retry person creation
-  if (stripeAccount) {
-    return createPersons()
-      .then(response => {
-        // Return created stripe account from this thunk function
-        return stripeAccount;
-      })
-      .catch(err => {
-        const e = storableError(err);
-        dispatch(stripeAccountCreateError(e));
-        const stripeMessage =
-          e.apiErrors && e.apiErrors.length > 0 && e.apiErrors[0].meta
-            ? e.apiErrors[0].meta.stripeMessage
-            : null;
-        log.error(err, 'create-stripe-company-persons-failed', { stripeMessage });
-        throw e;
+      // Log error
+      const { code, doc_url, message, payment_intent } = err.error || {};
+      const loggableError = err.error
+        ? {
+            code,
+            message,
+            doc_url,
+            paymentIntentStatus: payment_intent
+              ? payment_intent.status
+              : 'no payment_intent included',
+          }
+        : e;
+      log.error(loggableError, 'stripe-retrieve-payment-intent-failed', {
+        stripeMessage: loggableError.message,
       });
-  }
-
-  return stripe
-    .createToken('account', accountTokenParamsForCompany(company))
-    .then(response => {
-      const accountToken = response.token.id;
-      const bankAccountToken = bankAccountTokenParams(company);
-      const stripeAccountParams = {
-        accountToken,
-        bankAccountToken,
-        country,
-        ...businessProfileParams(company),
-      };
-      return sdk.stripeAccount.create(stripeAccountParams, { expand: true });
-    })
-    .then(response => {
-      stripeAccount = response;
-      dispatch(stripeAccountCreateSuccess(response.data.data));
-      return createPersons();
-    })
-    .then(response => {
-      // Return created stripe account from this thunk function
-      return stripeAccount;
-    })
-    .catch(err => {
-      const e = storableError(err);
-      dispatch(stripeAccountCreateError(e));
-      const stripeMessage =
-        e.apiErrors && e.apiErrors.length > 0 && e.apiErrors[0].meta
-          ? e.apiErrors[0].meta.stripeMessage
-          : null;
-      const errorFlag = !stripeAccount
-        ? 'create-stripe-company-account-failed'
-        : 'create-stripe-company-persons-failed';
-      log.error(err, errorFlag, { stripeMessage });
-      throw e;
+      throw err;
     });
 };
 
-const accountTokenParamsForIndividual = (individual, country) => {
-  const {
-    fname: firstName,
-    lname: lastName,
-    birthDate,
-    address,
-    phone,
-    email,
-    personalIdNumber,
-  } = individual;
-  const addressMaybe = address ? { address: formatAddress(address) } : {};
-  const dobMaybe = birthDate ? { dob: birthDate } : {};
-  const emailMaybe = email ? { email } : {};
-  const phoneMaybe = phone ? { phone } : {};
-  const idNumberMaybe =
-    country === 'US'
-      ? { ssn_last_4: personalIdNumber }
-      : personalIdNumber
-      ? { personal_id_number: personalIdNumber }
-      : {};
-
-  return {
-    business_type: 'individual',
-    individual: {
-      first_name: firstName,
-      last_name: lastName,
-      ...dobMaybe,
-      ...addressMaybe,
-      ...emailMaybe,
-      ...phoneMaybe,
-      ...idNumberMaybe,
-    },
-    tos_shown_and_accepted: true,
-  };
-};
-
-export const createStripeIndividualAccount = (payoutDetails, stripe) => (
-  dispatch,
-  getState,
-  sdk
-) => {
-  const { country, individual } = payoutDetails;
-  let stripeAccount;
-  dispatch(stripeAccountCreateRequest());
-
-  return stripe
-    .createToken('account', accountTokenParamsForIndividual(individual, country))
-    .then(response => {
-      const accountToken = response.token.id;
-      const bankAccountToken = bankAccountTokenParams(individual);
-      const stripeAccountParams = {
-        accountToken,
-        bankAccountToken,
-        country,
-        ...businessProfileParams(individual),
-      };
-      return sdk.stripeAccount.create(stripeAccountParams, { expand: true });
-    })
-    .then(response => {
-      stripeAccount = response;
-      dispatch(stripeAccountCreateSuccess(response.data.data));
-      return stripeAccount;
-    })
-    .catch(err => {
-      const e = storableError(err);
-      dispatch(stripeAccountCreateError(e));
-      const stripeMessage =
-        e.apiErrors && e.apiErrors.length > 0 && e.apiErrors[0].meta
-          ? e.apiErrors[0].meta.stripeMessage
-          : null;
-      log.error(err, 'create-stripe-individual-account-failed', { stripeMessage });
-      throw e;
-    });
-};
-
-export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) => {
-  if (typeof window === 'undefined' || !window.Stripe) {
-    throw new Error('Stripe must be loaded for submitting PayoutPreferences');
-  }
-
-  const stripe = window.Stripe(config.stripe.publishableKey);
-
-  if (payoutDetails.accountType === 'individual') {
-    return dispatch(createStripeIndividualAccount(payoutDetails, stripe));
-  } else {
-    return dispatch(createStripeCompanyAccount(payoutDetails, stripe));
-  }
-};
-
-export const createStripePaymentToken = params => dispatch => {
+export const handleCardPayment = params => dispatch => {
   // It's required to use the same instance of Stripe as where the card has been created
   // so that's why Stripe needs to be passed here and we can't create a new instance.
-  const { stripe, card } = params;
+  const { stripe, card, paymentParams, stripePaymentIntentClientSecret } = params;
+  const transactionId = params.orderId;
 
-  dispatch(stripePaymentTokenCreateRequest());
+  dispatch(handleCardPaymentRequest());
+
+  // When using default payment method, card (aka Stripe Element) is not needed.
+  // We also set paymentParams.payment_method already in Flex API side,
+  // when request-payment transition is made - so there's no need for paymentParams
+  const args = card
+    ? [stripePaymentIntentClientSecret, card, paymentParams]
+    : [stripePaymentIntentClientSecret];
 
   return stripe
-    .createToken(card)
+    .handleCardPayment(...args)
     .then(response => {
-      dispatch(stripePaymentTokenCreateSuccess(response.token));
-      return response;
+      if (response.error) {
+        return Promise.reject(response);
+      } else {
+        dispatch(handleCardPaymentSuccess(response));
+        return { ...response, transactionId };
+      }
     })
     .catch(err => {
-      const e = storableError(err);
-      dispatch(stripeAccountCreateError(e));
-      const stripeMessage =
-        e.apiErrors && e.apiErrors.length > 0 && e.apiErrors[0].meta
-          ? e.apiErrors[0].meta.stripeMessage
-          : null;
-      log.error(err, 'create-stripe-payment-token-failed', { stripeMessage });
+      // Unwrap Stripe error.
+      const e = err.error || storableError(err);
+      dispatch(handleCardPaymentError(e));
+
+      // Log error
+      const containsPaymentIntent = err.error && err.error.payment_intent;
+      const { code, doc_url, message, payment_intent } = containsPaymentIntent ? err.error : {};
+      const loggableError = containsPaymentIntent
+        ? {
+            code,
+            message,
+            doc_url,
+            paymentIntentStatus: payment_intent.status,
+          }
+        : e;
+      log.error(loggableError, 'stripe-handle-card-payment-failed', {
+        stripeMessage: loggableError.message,
+      });
+      throw e;
+    });
+};
+
+export const handleCardSetup = params => dispatch => {
+  // It's required to use the same instance of Stripe as where the card has been created
+  // so that's why Stripe needs to be passed here and we can't create a new instance.
+  const { stripe, card, setupIntentClientSecret, paymentParams } = params;
+
+  dispatch(handleCardSetupRequest());
+
+  return stripe
+    .handleCardSetup(setupIntentClientSecret, card, paymentParams)
+    .then(response => {
+      if (response.error) {
+        return Promise.reject(response);
+      } else {
+        dispatch(handleCardSetupSuccess(response));
+        return response;
+      }
+    })
+    .catch(err => {
+      // Unwrap Stripe error.
+      const e = err.error || storableError(err);
+      dispatch(handleCardSetupError(e));
+
+      // Log error
+      const containsSetupIntent = err.error && err.error.setup_intent;
+      const { code, doc_url, message, setup_intent } = containsSetupIntent ? err.error : {};
+      const loggableError = containsSetupIntent
+        ? {
+            code,
+            message,
+            doc_url,
+            paymentIntentStatus: setup_intent.status,
+          }
+        : e;
+      log.error(loggableError, 'stripe-handle-card-setup-failed', {
+        stripeMessage: loggableError.message,
+      });
       throw e;
     });
 };

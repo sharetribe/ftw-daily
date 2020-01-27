@@ -10,6 +10,8 @@ export const Empty = {
     saveActionMsg: 'Save location',
     updated: false,
     updateInProgress: false,
+    disabled: false,
+    ready: false,
   },
   group: 'forms',
 };

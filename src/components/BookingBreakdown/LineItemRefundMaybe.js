@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage, intlShape } from '../../util/reactIntl';
 import Decimal from 'decimal.js';
 import { formatMoney } from '../../util/currency';
 import { types as sdkTypes } from '../../util/sdkLoader';
@@ -21,7 +21,8 @@ const lineItemsTotal = lineItems => {
   const amount = lineItems.reduce((total, item) => {
     return total.plus(item.lineTotal.amount);
   }, new Decimal(0));
-  return new Money(amount, config.currency);
+  const currency = lineItems[0] ? lineItems[0].lineTotal.currency : config.currency;
+  return new Money(amount, currency);
 };
 
 /**

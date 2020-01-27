@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import { withRouter } from 'react-router-dom';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, intlShape } from '../../util/reactIntl';
 import classNames from 'classnames';
 import routeConfiguration from '../../routeConfiguration';
 import config from '../../config';
@@ -33,6 +33,7 @@ class PageComponent extends Component {
     // Keeping scrollPosition out of state reduces rendering cycles (and no bad states rendered)
     this.scrollPosition = 0;
     this.contentDiv = null;
+    this.scrollingDisabledChanged = this.scrollingDisabledChanged.bind(this);
   }
 
   componentDidMount() {
@@ -49,13 +50,13 @@ class PageComponent extends Component {
     document.removeEventListener('drop', preventDefault);
   }
 
-  componentWillReceiveProps(nextProps) {
-    const scrollingDisabled = nextProps.scrollingDisabled;
-    const scrollingDisabledHasChanged = scrollingDisabled !== this.props.scrollingDisabled;
-
-    if (scrollingDisabled && scrollingDisabledHasChanged) {
+  scrollingDisabledChanged(currentScrollingDisabled) {
+    if (currentScrollingDisabled && currentScrollingDisabled !== this.scrollingDisabled) {
       // Update current scroll position, if scrolling is disabled (e.g. modal is open)
       this.scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+      this.scrollingDisabled = currentScrollingDisabled;
+    } else if (currentScrollingDisabled !== this.scrollingDisabled) {
+      this.scrollingDisabled = currentScrollingDisabled;
     }
   }
 
@@ -85,6 +86,7 @@ class PageComponent extends Component {
       [css.scrollingDisabled]: scrollingDisabled,
     });
 
+    this.scrollingDisabledChanged(scrollingDisabled);
     const referrerMeta = referrer ? <meta name="referrer" content={referrer} /> : null;
 
     const canonicalRootURL = config.canonicalRootURL;
@@ -195,7 +197,9 @@ class PageComponent extends Component {
           <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
           <meta httpEquiv="Content-Language" content={intl.locale} />
           {metaTags}
-          <script type="application/ld+json">{schemaArrayJSONString}</script>
+          <script type="application/ld+json">
+            {schemaArrayJSONString.replace(/</g, '\\u003c')}
+          </script>
         </Helmet>
         <CookieConsent />
         <div

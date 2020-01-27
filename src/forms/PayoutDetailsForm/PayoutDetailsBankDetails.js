@@ -1,6 +1,6 @@
 import React from 'react';
 import { bool, string } from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from '../../util/reactIntl';
 import * as validators from '../../util/validators';
 import { StripeBankAccountTokenInputField } from '../../components';
 
