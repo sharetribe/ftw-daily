@@ -111,19 +111,19 @@
     font-weight: var(--fontWeightBold);
     font-size: 30px;
     line-height: 36px;
-    letter-spacing: -1px;
+    letter-spacing: 0px;
     /* margin-top + n * line-height + margin-bottom => x * 6px */
     margin-top: 18px;
     margin-bottom: 18px;
 
     @media (--viewportMedium) {
-      font-size: 48px;
+      font-size: 36px;
       font-weight: var(--fontWeightSemiBold);
-      line-height: 56px;
+      line-height: 40px;
       letter-spacing: -2px;
       /* margin-top + n * line-height + margin-bottom => x * 8px */
       margin-top: 24px;
-      margin-bottom: 24px;
+      margin-bottom: 10px;
     }
   }
 
@@ -161,19 +161,19 @@
   }
 
   --marketplaceH4FontStyles: {
-    font-weight: var(--fontWeightMedium);
+    font-weight: var(--fontWeightBold);
     font-size: 16px;
-    line-height: 24px;
+    line-height: 22px;
     letter-spacing: 0;
     /* margin-top + n * line-height + margin-bottom => x * 6px */
     margin-top: 12px;
     margin-bottom: 12px;
 
     @media (--viewportMedium) {
-      font-weight: var(--fontWeightMedium);
+      font-weight: var(--fontWeightBold);
       /* margin-top + n * line-height + margin-bottom => x * 8px */
       margin-top: 17px;
-      margin-bottom: 15px;
+      margin-bottom: 14px;
     }
   }
 
@@ -221,13 +221,13 @@
     line-height: 18px;
     letter-spacing: -0.1px;
     /* margin-top + n * line-height + margin-bottom => x * 6px */
-    margin-top: 9.5px;
+    margin-top: 12px;
     margin-bottom: 8.5px;
 
     @media (--viewportMedium) {
       line-height: 16px;
       /* margin-top + n * line-height + margin-bottom => x * 8px */
-      margin-top: 10.5px;
+      margin-top: 20px;
       margin-bottom: 13.5px;
     }
   }

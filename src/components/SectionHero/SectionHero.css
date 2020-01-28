@@ -104,7 +104,7 @@
   animation-delay: 0.8s;
 
   @media (--viewportMedium) {
-    display: block;
+    display: inline-block;
     width: 260px;
   }
 }

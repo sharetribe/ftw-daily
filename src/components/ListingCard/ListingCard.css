@@ -93,7 +93,7 @@
 
 .title {
   /* Font */
-  @apply --marketplaceH3FontStyles;
+  @apply --marketplaceH4FontStyles;
   color: var(--matterColor);
 
   /* Remove default margins from font */

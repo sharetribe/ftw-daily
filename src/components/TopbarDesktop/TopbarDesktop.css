@@ -89,8 +89,8 @@
   flex-grow: 1;
   height: 100%;
   margin-right: 24px;
-  border-left-style: solid;
-  border-left-width: 1px;
+  border-left-style: transparent;
+  border-left-width: 2px;
   border-left-color: var(--matterColorNegative);
 
   @media (--viewportLarge) {
@@ -101,7 +101,7 @@
 .search {
   @apply --marketplaceH4FontStyles;
   @apply --TopbarDesktop_label;
-  color: var(--matterColor);
+  color: var(--matterColorNegative);
 }
 
 .topbarSearchWithLeftPadding {

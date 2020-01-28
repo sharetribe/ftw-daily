@@ -35,6 +35,7 @@ const SearchResultsPanel = props => {
         {listings.map(l => (
           <ListingCard
             className={css.listingCard}
+            
             key={l.id.uuid}
             listing={l}
             renderSizes={cardRenderSizes}
