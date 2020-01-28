@@ -1,4 +1,7 @@
 export { default as AboutPage } from './AboutPage/AboutPage';
+export { default as FaqPage } from './FaqPage/FaqPage';
+export { default as FeesPage } from './FeesPage/FeesPage';
+export { default as CancellationPage } from './CancellationPage/CancellationPage';
 export { default as AuthenticationPage } from './AuthenticationPage/AuthenticationPage';
 export { default as CheckoutPage } from './CheckoutPage/CheckoutPage';
 export { default as ContactDetailsPage } from './ContactDetailsPage/ContactDetailsPage';
