@@ -17,10 +17,11 @@ const { Money } = sdkTypes;
 export const EditListingPricingFormComponent = props => (
   <FinalForm
     {...props}
-    render={fieldRenderProps => {
+    render={formRenderProps => {
       const {
         className,
         disabled,
+        ready,
         handleSubmit,
         intl,
         invalid,
@@ -29,7 +30,7 @@ export const EditListingPricingFormComponent = props => (
         updated,
         updateInProgress,
         fetchErrors,
-      } = fieldRenderProps;
+      } = formRenderProps;
 
       const unitType = config.bookingUnitType;
       const isNightly = unitType === LINE_ITEM_NIGHT;
@@ -71,7 +72,7 @@ export const EditListingPricingFormComponent = props => (
         : priceRequired;
 
       const classes = classNames(css.root, className);
-      const submitReady = updated && pristine;
+      const submitReady = (updated && pristine) || ready;
       const submitInProgress = updateInProgress;
       const submitDisabled = invalid || disabled || submitInProgress;
       const { updateListingError, showListingsError } = fetchErrors || {};
@@ -120,6 +121,8 @@ EditListingPricingFormComponent.propTypes = {
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
   saveActionMsg: string.isRequired,
+  disabled: bool.isRequired,
+  ready: bool.isRequired,
   updated: bool.isRequired,
   updateInProgress: bool.isRequired,
   fetchErrors: shape({

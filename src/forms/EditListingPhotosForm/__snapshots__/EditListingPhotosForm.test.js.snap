@@ -2,6 +2,7 @@
 
 exports[`EditListingPhotosForm matches snapshot 1`] = `
 <ReactFinalForm
+  disabled={false}
   dispatch={[Function]}
   fetchErrors={null}
   imageUploadRequested={false}

@@ -43,11 +43,10 @@ export class EditListingPhotosFormComponent extends Component {
         onImageUploadHandler={this.onImageUploadHandler}
         imageUploadRequested={this.state.imageUploadRequested}
         initialValues={{ images: this.props.images }}
-        render={fieldRenderProps => {
+        render={formRenderProps => {
           const {
             form,
             className,
-            disabled,
             fetchErrors,
             handleSubmit,
             images,
@@ -56,11 +55,12 @@ export class EditListingPhotosFormComponent extends Component {
             invalid,
             onImageUploadHandler,
             onRemoveImage,
+            disabled,
             ready,
             saveActionMsg,
             updated,
             updateInProgress,
-          } = fieldRenderProps;
+          } = formRenderProps;
 
           const chooseImageText = (
             <span className={css.chooseImageText}>
@@ -159,7 +159,7 @@ export class EditListingPhotosFormComponent extends Component {
                   disabled={imageUploadRequested}
                 >
                   {fieldprops => {
-                    const { accept, input, label, disabled } = fieldprops;
+                    const { accept, input, label, disabled: fieldDisabled } = fieldprops;
                     const { name, type } = input;
                     const onChange = e => {
                       const file = e.target.files[0];
@@ -171,7 +171,7 @@ export class EditListingPhotosFormComponent extends Component {
                     return (
                       <div className={css.addImageWrapper}>
                         <div className={css.aspectRatioWrapper}>
-                          {disabled ? null : (
+                          {fieldDisabled ? null : (
                             <input {...inputProps} className={css.addImageInput} />
                           )}
                           <label htmlFor={name} className={css.addImage}>
@@ -238,8 +238,9 @@ EditListingPhotosFormComponent.propTypes = {
   onUpdateImageOrder: func.isRequired,
   onSubmit: func.isRequired,
   saveActionMsg: string.isRequired,
-  updated: bool.isRequired,
+  disabled: bool.isRequired,
   ready: bool.isRequired,
+  updated: bool.isRequired,
   updateInProgress: bool.isRequired,
   onRemoveImage: func.isRequired,
 };

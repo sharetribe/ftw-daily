@@ -4,7 +4,7 @@ import { transitionsToRequested } from '../util/transaction';
 import { LISTING_STATE_DRAFT } from '../util/types';
 import * as log from '../util/log';
 import { authInfo } from './Auth.duck';
-import { stripeAccountCreateSuccess } from './stripe.duck.js';
+import { stripeAccountCreateSuccess } from './stripeConnectAccount.duck';
 
 // ================ Action types ================ //
 

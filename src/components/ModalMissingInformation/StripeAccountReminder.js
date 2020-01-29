@@ -16,7 +16,7 @@ const StripeAccountReminder = props => {
         <FormattedMessage id="ModalMissingInformation.missingStripeAccountText" />
       </p>
       <div className={css.bottomWrapper}>
-        <NamedLink className={css.reminderModalLinkButton} name="PayoutPreferencesPage">
+        <NamedLink className={css.reminderModalLinkButton} name="StripePayoutPage">
           <FormattedMessage id="ModalMissingInformation.gotoPaymentSettings" />
         </NamedLink>
       </div>

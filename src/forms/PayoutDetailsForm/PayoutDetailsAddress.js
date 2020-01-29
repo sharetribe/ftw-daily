@@ -5,23 +5,8 @@ import * as validators from '../../util/validators';
 import { FieldSelect, FieldTextInput } from '../../components';
 
 import { stripeCountryConfigs } from './PayoutDetailsForm';
+import { CA_PROVINCES, US_STATES, AU_STATES } from './statesAndProvinces';
 import css from './PayoutDetailsForm.css';
-
-const CANADIAN_PROVINCES = [
-  'AB',
-  'BC',
-  'MB',
-  'NB',
-  'NL',
-  'NS',
-  'NT',
-  'NU',
-  'ON',
-  'PE',
-  'QC',
-  'SK',
-  'YT',
-];
 
 const PayoutDetailsAddress = props => {
   const { className, country, intl, disabled, form, fieldId } = props;
@@ -78,27 +63,41 @@ const PayoutDetailsAddress = props => {
     })
   );
 
-  const showState = country && isRequired(countryConfig, 'state');
+  const showStateUS = country && isRequired(countryConfig, 'stateUS');
+  const showStateAU = country && isRequired(countryConfig, 'stateAU');
+  const showProvinceCA = country && isRequired(countryConfig, 'provinceCA');
 
-  const stateLabel = intl.formatMessage({ id: 'PayoutDetailsForm.stateLabel' });
-  const statePlaceholder = intl.formatMessage({ id: 'PayoutDetailsForm.statePlaceholder' });
-  const stateRequired = validators.required(
-    intl.formatMessage({
-      id: 'PayoutDetailsForm.stateRequired',
-    })
-  );
+  // Choose the correct list of states/provinces to the source of data for dropdown
+  const states = showStateUS
+    ? US_STATES
+    : showProvinceCA
+    ? CA_PROVINCES
+    : showStateAU
+    ? AU_STATES
+    : [];
 
-  const showProvince = country && isRequired(countryConfig, 'province');
+  // Choose the translations depending on if the text should be province or state
+  const stateLabel = showProvinceCA
+    ? intl.formatMessage({ id: 'PayoutDetailsForm.canadianProvinceLabel' })
+    : intl.formatMessage({ id: 'PayoutDetailsForm.stateLabel' });
 
-  const provinceLabel = intl.formatMessage({ id: 'PayoutDetailsForm.canadianProvinceLabel' });
-  const provincePlaceholder = intl.formatMessage({
-    id: 'PayoutDetailsForm.canadianProvincePlaceholder',
-  });
-  const provinceRequired = validators.required(
-    intl.formatMessage({
-      id: 'PayoutDetailsForm.canadianProvinceRequired',
-    })
-  );
+  const statePlaceholder = showProvinceCA
+    ? intl.formatMessage({
+        id: 'PayoutDetailsForm.canadianProvincePlaceholder',
+      })
+    : intl.formatMessage({ id: 'PayoutDetailsForm.statePlaceholder' });
+
+  const stateRequired = showProvinceCA
+    ? validators.required(
+        intl.formatMessage({
+          id: 'PayoutDetailsForm.canadianProvinceRequired',
+        })
+      )
+    : validators.required(
+        intl.formatMessage({
+          id: 'PayoutDetailsForm.stateRequired',
+        })
+      );
 
   return (
     <div className={className ? className : css.sectionContainer}>
@@ -148,37 +147,23 @@ const PayoutDetailsAddress = props => {
           />
         ) : null}
       </div>
-      {showState ? (
-        <FieldTextInput
+
+      {states.length > 0 ? (
+        <FieldSelect
           id={`${fieldId}.state`}
           name={`${fieldId}.state`}
           disabled={disabled}
-          className={css.state}
-          type="text"
-          autoComplete="address-level1"
-          label={stateLabel}
-          placeholder={statePlaceholder}
-          validate={stateRequired}
-          onUnmount={() => form.change(`${fieldId}.state`, undefined)}
-        />
-      ) : null}
-
-      {showProvince ? (
-        <FieldSelect
-          id={`${fieldId}.province`}
-          name={`${fieldId}.province`}
-          disabled={disabled}
           className={css.selectCountry}
           autoComplete="address-level1"
-          label={provinceLabel}
-          validate={provinceRequired}
+          label={stateLabel}
+          validate={stateRequired}
         >
           <option disabled value="">
-            {provincePlaceholder}
+            {statePlaceholder}
           </option>
-          {CANADIAN_PROVINCES.map(p => (
-            <option key={p} value={p}>
-              {intl.formatMessage({ id: `PayoutDetailsForm.canadianProvinceNames.${p}` })}
+          {states.map(p => (
+            <option key={p.key} value={p.key}>
+              {p.label}
             </option>
           ))}
         </FieldSelect>

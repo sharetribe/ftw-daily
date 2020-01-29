@@ -16,6 +16,8 @@ describe('EditListingAvailabilityForm', () => {
         saveActionMsg="Save rules"
         updated={false}
         updateInProgress={false}
+        disabled={false}
+        ready={false}
         availability={{
           calendar: {
             // '2018-12': {

@@ -16,6 +16,7 @@ export const Empty = {
     updated: false,
     ready: false,
     updateInProgress: false,
+    disabled: false,
     onUpdateImageOrder: imageOrder => {
       console.log('onUpdateImageOrder with new imageOrder:', imageOrder);
     },

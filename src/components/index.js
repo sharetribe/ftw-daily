@@ -17,6 +17,7 @@ export { default as IconBannedUser } from './IconBannedUser/IconBannedUser';
 export { default as IconCard } from './IconCard/IconCard';
 export { default as IconCheckmark } from './IconCheckmark/IconCheckmark';
 export { default as IconClose } from './IconClose/IconClose';
+export { default as IconEdit } from './IconEdit/IconEdit';
 export { default as IconEmailAttention } from './IconEmailAttention/IconEmailAttention';
 export { default as IconEmailSent } from './IconEmailSent/IconEmailSent';
 export { default as IconEmailSuccess } from './IconEmailSuccess/IconEmailSuccess';
@@ -30,6 +31,7 @@ export { default as IconSocialMediaFacebook } from './IconSocialMediaFacebook/Ic
 export { default as IconSocialMediaInstagram } from './IconSocialMediaInstagram/IconSocialMediaInstagram';
 export { default as IconSocialMediaTwitter } from './IconSocialMediaTwitter/IconSocialMediaTwitter';
 export { default as IconSpinner } from './IconSpinner/IconSpinner';
+export { default as IconSuccess } from './IconSuccess/IconSuccess';
 
 // Other independent components
 export { default as ExternalLink } from './ExternalLink/ExternalLink';
@@ -140,6 +142,7 @@ export { default as SearchMapPriceLabel } from './SearchMapPriceLabel/SearchMapP
 export { default as SearchResultsPanel } from './SearchResultsPanel/SearchResultsPanel';
 export { default as SelectMultipleFilter } from './SelectMultipleFilter/SelectMultipleFilter';
 export { default as SelectSingleFilter } from './SelectSingleFilter/SelectSingleFilter';
+export { default as StripeConnectAccountStatusBox } from './StripeConnectAccountStatusBox/StripeConnectAccountStatusBox';
 export { default as StripePaymentAddress } from './StripePaymentAddress/StripePaymentAddress';
 export { default as UserCard } from './UserCard/UserCard';
 
