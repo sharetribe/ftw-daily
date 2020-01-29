@@ -4,6 +4,7 @@ import {
   FaqPage,
   FeesPage,
   CancellationPage,
+  GuidelinesPage,
   AuthenticationPage,
   CheckoutPage,
   ContactDetailsPage,
@@ -74,6 +75,11 @@ const routeConfiguration = () => {
       path: '/cancellations',
       name: 'CancellationPage',
       component: CancellationPage,
+    },
+    {
+      path: '/guidelines',
+      name: 'GuidelinesPage',
+      component: GuidelinesPage,
     },
     {
       path: '/s',
