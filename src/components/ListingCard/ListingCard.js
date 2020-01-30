@@ -56,15 +56,13 @@ export const ListingCardComponent = props => {
   const { formattedPrice, priceTitle } = priceData(price, intl);
 
   const unitType = config.bookingUnitType;
-  const isNightly = unitType === LINE_ITEM_NIGHT;
+  const isNightly = unitType === LINE_ITEM_NIGHT && getListingCategory(currentListing) !== "babysitter"
   const isDaily = unitType === LINE_ITEM_DAY;
 
   const unitTranslationKey = isNightly
     ? 'ListingCard.perNight'
     : isDaily
     ? 'ListingCard.perDay'
-    : getListingCategory(listing) === "babysitter"
-    ? 'ListingCard.perUnit'
     : 'ListingCard.perUnit';
 
   return (
