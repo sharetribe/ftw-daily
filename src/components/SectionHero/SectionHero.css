@@ -97,17 +97,40 @@
     margin: 0 0 40px 0;
   }
 }
+.heroButtonsWrapper {
+  @apply --SectionHero_animation;
+  display: block;
 
+  @media (--viewportMedium) {
+    display: flex;
+  }
+}
 .heroButton {
   @apply --marketplaceButtonStyles;
-  @apply --SectionHero_animation;
-
+ 
   animation-delay: 0.8s;
 
   @media (--viewportMedium) {
     width: 260px;
   }
 }
+
+.heroButtonSecodary {
+  background: none;
+  border: 2px solid var(--marketplaceColor);
+  border-radius: 3px;
+  margin-top: 14px;
+
+  @media (--viewportMedium) {
+    margin-left: 14px;
+    margin-top: 0;
+  }
+
+  &:hover {
+    border: 2px solid var(--marketplaceColorDark);
+  }
+}
+
 .heroText {
   @apply --withArrowIcon; 
   display: inline-block;

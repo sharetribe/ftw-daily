@@ -119,15 +119,24 @@
   @apply --marketplaceH4FontStyles;
 
   flex-shrink: 0;
-  height: 100%;
+  height: 36px;
+  align-self: center;
   padding: 0 12px 0 12px;
   color: var(--marketplaceColor);
   margin-top: 0;
   margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--marketPlaceColorLightSecondary);
+  box-sizing: border-box;
+  border-radius: 3px;
 
   &:hover {
-    color: var(--marketplaceColorDark);
-  }
+  color: white;
+  background-color: var(--marketplaceColor);
+  border: 1px solid var(--marketplaceColor);
+  border-radius: 3px;
+}
 
   @media (--viewportMedium) {
     margin-top: 0;

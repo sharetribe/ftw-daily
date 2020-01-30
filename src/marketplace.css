@@ -42,6 +42,7 @@
   --marketplaceColorLight: #ff4c38;
   /*--marketplaceColorDark: #8f2593;*/
   --marketplaceColorDark: #88298B;
+  --marketPlaceColorLightSecondary: #E0E0E0;
   /* Used with inline CSS SVGs */
   --marketplaceColorEncoded: %23c0392b;
   --marketplaceLinearGradientMainColor: linear-gradient(135deg, rgba(210,170,225,1) 0%, rgba(191,120,215,1) 27%, rgba(165,77,175,1) 100%);
@@ -54,7 +55,8 @@
   --matterColorDark: #000000;
   --matterColor: #1a2b49;
   --matterColorAnti: #b2b2b2;
-  --matterColorNegative: #bababa;
+  --matterColorNegative: #e7e7e7;
+  --matterColorCrossed: #bababa;
   --matterColorBright: #ffffff;
   --matterColorLight: #ffffff;
   --matterColorLightTransparent: rgba(255, 255, 255, 0.65);

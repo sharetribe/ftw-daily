@@ -20,18 +20,29 @@ const SectionHero = props => {
         <h2 className={css.heroSubTitle}>
           <FormattedMessage id="SectionHero.subTitle" />
         </h2>
-        <NamedLink
-          name="SearchPage"
-          to={{
-            search:
-              'address=Schweiz&bounds=47.808453%2C10.492064%2C45.817981%2C5.955902',
-          }}
-          className={css.heroButton}
-        >
-          <span className={css.heroText}>
-            <FormattedMessage  id="SectionHero.browseButton" />
-          </span>
-        </NamedLink>
+        <div className={css.heroButtonsWrapper}>
+          <NamedLink
+            name="SearchPage"
+            to={{
+              search:
+                'address=Schweiz&bounds=47.808453%2C10.492064%2C45.817981%2C5.955902',
+            }}
+            className={css.heroButton}
+          >
+            <span className={css.heroText}>
+              <FormattedMessage id="SectionHero.browseButton" />
+            </span>
+          </NamedLink>
+
+          <NamedLink
+            name="NewListingPage"
+            className={`${css.heroButton} ${css.heroButtonSecodary}`}
+          >
+            <FormattedMessage id="TopbarDesktop.createListingSecondary" />
+          </NamedLink>
+
+        </div>
+        
       </div>
     </div>
   );

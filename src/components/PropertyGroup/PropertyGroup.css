@@ -80,10 +80,9 @@
 }
 
 .notSelectedLabel {
-  color: var(--matterColorNegative);
+  color: var(--matterColorCrossed);
   position: relative;
   text-decoration: line-through;
-
   /* line-through */
   /* background-image: linear-gradient(
     transparent var(--PropertyGroup_lineThroughTopMobile),

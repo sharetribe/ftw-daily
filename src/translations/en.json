@@ -884,6 +884,7 @@
   "Topbar.searchIcon": "Open search",
   "TopbarDesktop.accountSettingsLink": "Account settings",
   "TopbarDesktop.createListing": "+ Add your sauna",
+  "TopbarDesktop.createListingSecondary": "Add your sauna",
   "TopbarDesktop.inbox": "Inbox",
   "TopbarDesktop.login": "Log in",
   "TopbarDesktop.logo": "Saunatime",
