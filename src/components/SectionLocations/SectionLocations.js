@@ -29,12 +29,12 @@ const locationLink = (name, image, searchQuery) => {
           <LazyImage src={image} alt={name} className={css.locationImage} />
         </div>
       </div>
-      <div className={css.linkText}>
+      <h3 className={css.linkText}>
         <FormattedMessage
           id="SectionLocations.listingsInLocation"
           values={{ location: nameText }}
         />
-      </div>
+      </h3>
     </NamedLink>
   );
 };

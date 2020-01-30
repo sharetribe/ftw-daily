@@ -240,12 +240,11 @@
     display: block;
     margin-top: 70px;
     margin-left: 60px;
-    border-left-style: solid;
-    border-left-width: 1px;
-    border-left-color: var(--matterColorNegative);
+    background-color: #F6F6F6;
+    border-radius: 4px;
     box-shadow: none;
     z-index: 1;
-    padding: 0 0 0 60px;
+    padding: 50px;
     /* The calendar needs 312px */
     flex-basis: 312px;
     flex-shrink: 0;

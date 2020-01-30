@@ -100,7 +100,7 @@
 }
 
 .linkText {
-  @apply --marketplaceH2FontStyles;
+  @apply --marketplaceH3FontStyles;
   color: var(--matterColor);
   margin-top: 15px;
   margin-bottom: 0;

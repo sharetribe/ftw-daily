@@ -68,7 +68,7 @@
       line-height: 70px;
       /* margin-top + n * line-height + margin-bottom => x * 8px */
       margin-top: 25px;
-      margin-bottom: 100px;
+      margin-bottom: 60px;
     }
 
     @media (min-width: 1681px) {
@@ -130,8 +130,8 @@
     }
   } --marketplaceH3FontStyles: {
     font-weight: var(--fontWeightSemiBold);
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 24px;
+    line-height: 30px;
     letter-spacing: -0.2px;
     /* margin-top + n * line-height + margin-bottom => x * 6px */
     margin-top: 16px;
