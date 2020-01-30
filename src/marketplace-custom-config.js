@@ -38,11 +38,43 @@ export const amenities = [
 ];
 
 export const categories = [
-  { key: 'smoke', label: 'Smoke' },
-  { key: 'electric', label: 'Electric' },
-  { key: 'wood', label: 'Wood' },
-  { key: 'other', label: 'Other' },
+  { key: 'hair-stylist', label: 'Hair Stylist' },
+  { key: 'barber', label: 'Barber' },
+  { key: 'makeup-artist', label: 'Makeup Artist' },
+  { key: 'nail-technician', label: 'Nail Technician' },
+  { key: 'cosmetics', label: 'Cosmetics' },
+  { key: 'tattoo-artist', label: 'Tattoo Artist' },
+  { key: 'fitness', label: 'Fitness' },
+  { key: 'yoga', label: 'Yoga' },
+  { key: 'dance', label: 'Dance' },
+  { key: 'martial-arts', label: 'Martial Arts' },
+  { key: 'massage', label: 'Massage' },
+  { key: 'reiki', label: 'Reiki' },
+  { key: 'acupuncture', label: 'Acupuncture' },
+  { key: 'chiropractor', label: 'Chiropractor' },
+  { key: 'art', label: 'Art' },
+  { key: 'photography', label: 'Photography' },
+  { key: 'music', label: 'Music' },
+  { key: 'desk-space', label: 'Desk space' },
+  { key: 'office-space', label: 'Office space' },
+  { key: 'event-space', label: 'Event space' },
 ];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Price filter configuration
 // Note: unlike most prices this is not handled in subunits
