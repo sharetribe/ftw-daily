@@ -9,7 +9,7 @@ import { LINE_ITEM_NIGHT, LINE_ITEM_DAY, propTypes } from '../../util/types';
 import * as validators from '../../util/validators';
 import { formatMoney } from '../../util/currency';
 import { types as sdkTypes } from '../../util/sdkLoader';
-import { Button, Form, FieldCurrencyInput } from '../../components';
+import { Button, Form, FieldCurrencyInput, FieldTextInput, FieldSelect } from '../../components';
 import css from './EditListingPricingForm.css';
 
 const { Money } = sdkTypes;
@@ -99,6 +99,45 @@ export const EditListingPricingFormComponent = props => (
             currencyConfig={config.currencyConfig}
             validate={priceValidators}
           />
+
+          <h3>{intl.formatMessage({ id: 'EditListingPricingForm.discountHeader' })}</h3>
+          <p className={css.discountDescription}>{intl.formatMessage({ id: 'EditListingPricingForm.discountSubHeader' })}</p>
+
+          <div className={css.discountContainer}>
+            <FieldTextInput
+              id="discount.amount"
+              name="discount.amount"
+              className={css.priceInput}
+              label={intl.formatMessage({ id: 'EditListingPricingForm.discountAmountMessage' })}
+              placeholder={intl.formatMessage({ id: 'EditListingPricingForm.discountAmountPlaceholder' })}
+              type='number'
+              min='0'
+              max='100'
+              validate={priceValidators}
+            />
+
+            <FieldTextInput
+              id="discount.breakpoint"
+              name="discount.breakpoint"
+              className={css.priceInput}
+              label={intl.formatMessage({ id: 'EditListingPricingForm.discountBreakpointMessage' })}
+              placeholder={intl.formatMessage({ id: 'EditListingPricingForm.discountBreakpointPlaceholder' })}
+              type='number'
+              min='0'
+              max='100'
+            />
+
+            <FieldSelect
+              id="discount.unitType"
+              name="discount.unitType"
+              label={intl.formatMessage({ id: 'EditListingPricingForm.discountUnitTypeMessage' })}
+            >
+              <option value=""></option>
+              <option value="weeks">Weeks</option>
+              <option value="days">Days</option>
+              <option value="hours">Hours</option>
+            </FieldSelect>
+          </div>
 
           <Button
             className={css.submitButton}

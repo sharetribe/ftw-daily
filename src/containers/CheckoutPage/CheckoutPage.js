@@ -8,7 +8,13 @@ import classNames from 'classnames';
 import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
 import { pathByRouteName, findRouteByRouteName } from '../../util/routes';
-import { propTypes, LINE_ITEM_NIGHT, LINE_ITEM_DAY, DATE_TYPE_DATE } from '../../util/types';
+import {
+  propTypes,
+  LINE_ITEM_NIGHT,
+  LINE_ITEM_DAY,
+  LINE_ITEM_DISCOUNT,
+  DATE_TYPE_DATE
+} from '../../util/types';
 import {
   ensureListing,
   ensureCurrentUser,
@@ -507,7 +513,7 @@ export class CheckoutPageComponent extends Component {
     const { bookingStart, bookingEnd, listing, ...rest } = params;
     const { amount, currency } = listing.attributes.price;
 
-    const unitType = config.bookingUnitType;
+    const unitType = config.bookingUnitType; // Change this to dynamic
     const isNightly = unitType === LINE_ITEM_NIGHT;
 
     const quantity = isNightly
@@ -523,6 +529,11 @@ export class CheckoutPageComponent extends Component {
           code: unitType,
           unitPrice: new Money(amount, currency),
           quantity,
+        },
+        {
+          code: LINE_ITEM_DISCOUNT,
+          unitPrice: new Money(amount, currency),
+          percentage: -15,
         },
       ],
       ...rest,
