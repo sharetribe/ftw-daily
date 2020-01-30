@@ -420,6 +420,43 @@
       margin: 0;
     }
   }
+  /* Arrow icon */
+  --withArrowIcon {
+    position: relative;
+
+    &:after,
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 2px;
+      height: 8px;
+      background-color: white;
+      right: calc(-50% + 2px);
+      top: 49.5%;
+      border-radius: 5px;
+    }
+    &:after {
+      transform: rotate(45deg) translateY(3px) translateX(-2.5px);
+    }
+    &:before {
+      transform: rotate(-45deg) translateY(-6px);
+    }
+  } --withArrowIconDown {
+      &:before {
+        transform: rotate(-45deg) translateY(-1px);
+      }
+      &:after {
+        transform: rotate(223deg) translateY(3px) translateX(-2px);
+      }
+    } --withArrowIconUp {
+    &:before {
+        transform: rotate(45deg) translateY(-1px);
+      }
+      &:after {
+        transform: rotate(-223deg) translateY(-3px) translateX(-4px);
+      }
+    }
   /* Modal Close icon */
   --marketplaceModalCloseStyles {
     /* Position inside modal */
@@ -501,11 +538,9 @@
     }
   }
 }
-
-/* ================ Custom media queries ================ */
-
-@custom-media --viewportSmall (min-width: 480px);
-@custom-media --viewportMedium (min-width: 768px);
-@custom-media --viewportLarge (min-width: 1024px);
-@custom-media --viewportLargeWithPaddings (min-width: 1128px);
-@custom-media --viewportXLarge (min-width: 1921px);
+  /* ================ Custom media queries ================ */
+  @custom-media --viewportSmall (min-width: 480px);
+  @custom-media --viewportMedium (min-width: 768px);
+  @custom-media --viewportLarge (min-width: 1024px);
+  @custom-media --viewportLargeWithPaddings (min-width: 1128px);
+  @custom-media --viewportXLarge (min-width: 1921px);
