@@ -6,9 +6,10 @@ import { LINE_ITEM_NIGHT, LINE_ITEM_DAY, propTypes } from '../../util/types';
 import css from './BookingBreakdown.css';
 
 const LineItemBasePriceMaybe = props => {
-  const { transaction, unitType, intl } = props;
-  const isNightly = unitType === LINE_ITEM_NIGHT;
+  const { transaction, unitType, intl, listingCategory } = props;
+  const isNightly = unitType === LINE_ITEM_NIGHT && listingCategory !== 'babysitter';
   const isDaily = unitType === LINE_ITEM_DAY;
+  console.log(transaction);
   const translationKey = isNightly
     ? 'BookingBreakdown.baseUnitNight'
     : isDaily

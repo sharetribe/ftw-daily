@@ -76,10 +76,6 @@ export class SearchPageComponent extends Component {
         paramName: 'dates',
         config: dateRangeFilterConfig,
       },
-      // keywordFilter: {
-      //   paramName: 'keywords',
-      //   config: keywordFilterConfig,
-      // },
     };
   }
 
@@ -223,8 +219,7 @@ export class SearchPageComponent extends Component {
               categoryFilter: filters.categoryFilter,
               filtersFilter: filters.filtersFilter,
               priceFilter: filters.priceFilter,
-              dateRangeFilter: filters.dateRangeFilter,
-              keywordFilter: filters.keywordFilter,
+              dateRangeFilter: filters.dateRangeFilter
             }}
           />
           <ModalInMobile
@@ -272,7 +267,6 @@ SearchPageComponent.defaultProps = {
   filters: config.custom.filters,
   priceFilterConfig: config.custom.priceFilterConfig,
   dateRangeFilterConfig: config.custom.dateRangeFilterConfig,
-  keywordFilterConfig: config.custom.keywordFilterConfig,
   activeListingId: null,
 };
 

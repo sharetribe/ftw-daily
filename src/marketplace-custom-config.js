@@ -66,6 +66,6 @@ export const dateRangeFilterConfig = {
 
 // NOTE: If you are ordering search results by distance the keyword search can't be used at the same time.
 // You can turn off ordering by distance in config.js file
-export const keywordFilterConfig = {
-  active: true,
-};
+// export const keywordFilterConfig = {
+//   active: true,
+// };

@@ -23,6 +23,7 @@ import {
   ensureOwnListing,
   ensureUser,
   userDisplayNameAsString,
+  getListingCategory
 } from '../../util/data';
 import { richText } from '../../util/richText';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
@@ -316,6 +317,7 @@ export class ListingPageComponent extends Component {
       userAndListingAuthorAvailable && currentListing.author.id.uuid === currentUser.id.uuid;
     const showContactUser = authorAvailable && (!currentUser || (currentUser && !isOwnListing));
 
+    const listingCategory = getListingCategory(currentListing);
     const currentAuthor = authorAvailable ? currentListing.author : null;
     const ensuredAuthor = ensureUser(currentAuthor);
 
@@ -425,6 +427,7 @@ export class ListingPageComponent extends Component {
                     hostLink={hostLink}
                     showContactUser={showContactUser}
                     onContactUser={this.onContactUser}
+                    listingCategory={listingCategory}
                   />
                   <SectionDescriptionMaybe description={description} />
                   <SectionFeaturesMaybe options={filtersConfig} publicData={publicData} />

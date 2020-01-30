@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { lazyLoadWithDimensions } from '../../util/contextHelpers';
 import { LINE_ITEM_DAY, LINE_ITEM_NIGHT, propTypes } from '../../util/types';
 import { formatMoney } from '../../util/currency';
-import { ensureListing, ensureUser } from '../../util/data';
+import { ensureListing, ensureUser, getListingCategory } from '../../util/data';
 import { richText } from '../../util/richText';
 import { createSlug } from '../../util/urlHelpers';
 import config from '../../config';
@@ -63,6 +63,8 @@ export const ListingCardComponent = props => {
     ? 'ListingCard.perNight'
     : isDaily
     ? 'ListingCard.perDay'
+    : getListingCategory(listing) === "babysitter"
+    ? 'ListingCard.perUnit'
     : 'ListingCard.perUnit';
 
   return (

@@ -6,6 +6,7 @@ import { arrayOf, bool, func, node, oneOfType, shape, string } from 'prop-types'
 import classNames from 'classnames';
 import omit from 'lodash/omit';
 import { propTypes, LISTING_STATE_CLOSED, LINE_ITEM_NIGHT, LINE_ITEM_DAY } from '../../util/types';
+import { getListingCategory } from '../../util/data';
 import { formatMoney } from '../../util/currency';
 import { parse, stringify } from '../../util/urlHelpers';
 import config from '../../config';
@@ -81,7 +82,7 @@ const BookingPanel = props => {
     ? intl.formatMessage({ id: 'BookingPanel.subTitleClosedListing' })
     : null;
 
-  const isNightly = unitType === LINE_ITEM_NIGHT;
+  const isNightly = unitType === LINE_ITEM_NIGHT && getListingCategory(listing) !== 'babysitter';
   const isDaily = unitType === LINE_ITEM_DAY;
 
   const unitTranslationKey = isNightly

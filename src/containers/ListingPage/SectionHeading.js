@@ -18,7 +18,7 @@ const SectionHeading = props => {
   } = props;
 
   const unitType = config.bookingUnitType;
-  const isNightly = unitType === LINE_ITEM_NIGHT;
+  const isNightly = unitType === LINE_ITEM_NIGHT && props.listingCategory !== 'babysitter';
   const isDaily = unitType === LINE_ITEM_DAY;
 
   const unitTranslationKey = isNightly

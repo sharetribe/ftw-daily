@@ -179,6 +179,10 @@ export const ensureListing = listing => {
   return { ...empty, ...listing };
 };
 
+export const getListingCategory = (listing) => {
+  return listing && listing.attributes && listing.attributes.publicData && listing.attributes.publicData.category;
+};
+
 /**
  * Create shell objects to ensure that attributes etc. exists.
  *
