@@ -205,6 +205,7 @@
   "EditListingPricingForm.discountBreakpointMessage": "Booking length",
   "EditListingPricingForm.discountBreakpointPlaceholder": "14",
   "EditListingPricingForm.discountUnitTypeMessage": "Unit type",
+  "EditListingPricingForm.discountRequired": "Don't leave me empty.",
 
   "EditListingPricingForm.priceInputPlaceholder": "Choose your price…",
   "EditListingPricingForm.pricePerDay": "Price per day in GBP",

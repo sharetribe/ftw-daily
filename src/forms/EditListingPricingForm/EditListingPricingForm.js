@@ -30,6 +30,9 @@ export const EditListingPricingFormComponent = props => (
         updated,
         updateInProgress,
         fetchErrors,
+        values: {
+          discount
+        }
       } = formRenderProps;
 
       const unitType = config.bookingUnitType;
@@ -49,6 +52,17 @@ export const EditListingPricingFormComponent = props => (
       const pricePlaceholderMessage = intl.formatMessage({
         id: 'EditListingPricingForm.priceInputPlaceholder',
       });
+
+      const discountRequired = (discount, value) => {
+        const isRequired = discount && discount.amount
+        const msg = intl.formatMessage({
+          id: 'EditListingPricingForm.discountRequired',
+        })
+
+        if (isRequired && !value) return msg
+        return undefined;
+      };
+
 
       const priceRequired = validators.required(
         intl.formatMessage({
@@ -76,6 +90,25 @@ export const EditListingPricingFormComponent = props => (
       const submitInProgress = updateInProgress;
       const submitDisabled = invalid || disabled || submitInProgress;
       const { updateListingError, showListingsError } = fetchErrors || {};
+
+      const parsePercentage = value => {
+        if (!value) {
+          return value;
+        }
+
+        const pattern = /^\d{0,3}(?:\.\d{1,2})?$/;
+        const hasCorrectFormat = value.match(pattern);
+        const floatValue = Number.parseFloat(value);
+        const isInRange = 0 <= floatValue && floatValue <= 100;
+
+        return hasCorrectFormat && isInRange
+          ? value
+          : hasCorrectFormat && floatValue < 0
+          ? 0
+          : hasCorrectFormat && floatValue > 100
+          ? 100
+          : value.substring(0, value.length - 1);
+      };
 
       return (
         <Form onSubmit={handleSubmit} className={classes}>
@@ -111,9 +144,10 @@ export const EditListingPricingFormComponent = props => (
               label={intl.formatMessage({ id: 'EditListingPricingForm.discountAmountMessage' })}
               placeholder={intl.formatMessage({ id: 'EditListingPricingForm.discountAmountPlaceholder' })}
               type='number'
-              min='0'
-              max='100'
-              validate={priceValidators}
+              min={0}
+              max={100}
+              step="0.01"
+              parse={parsePercentage}
             />
 
             <FieldTextInput
@@ -123,14 +157,15 @@ export const EditListingPricingFormComponent = props => (
               label={intl.formatMessage({ id: 'EditListingPricingForm.discountBreakpointMessage' })}
               placeholder={intl.formatMessage({ id: 'EditListingPricingForm.discountBreakpointPlaceholder' })}
               type='number'
-              min='0'
-              max='100'
+              min='1'
+              validate={value => discountRequired(discount, value)}
             />
 
             <FieldSelect
               id="discount.unitType"
               name="discount.unitType"
               label={intl.formatMessage({ id: 'EditListingPricingForm.discountUnitTypeMessage' })}
+              validate={value => discountRequired(discount, value)}
             >
               <option value=""></option>
               <option value="weeks">Weeks</option>
