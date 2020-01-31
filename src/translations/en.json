@@ -58,6 +58,7 @@
   "BookingBreakdown.refund": "Refund",
   "BookingBreakdown.refundCustomerFee": "Refund Hotpatch fee",
   "BookingBreakdown.refundProviderFee": "Refund Hotpatch fee",
+  "BookingBreakdown.discount": "Discount {reason}",
   "BookingBreakdown.subTotal": "Subtotal",
   "BookingBreakdown.total": "Total price",
   "BookingDatesForm.bookingEndTitle": "End date",
