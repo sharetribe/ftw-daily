@@ -19,6 +19,7 @@ import {
   ensureBooking,
   ensureStripeCustomer,
   ensurePaymentMethodCard,
+  getListingCategory,
 } from '../../util/data';
 import { dateFromLocalToAPI, minutesBetween } from '../../util/dates';
 import { createSlug } from '../../util/urlHelpers';
@@ -183,7 +184,6 @@ export class CheckoutPageComponent extends Component {
       !isBookingCreated;
 
     if (shouldFetchSpeculatedTransaction) {
-      const listingId = pageData.listing.id;
       const { bookingStart, bookingEnd } = pageData.bookingDates;
 
       // Convert picked date to date that will be converted on the API as
@@ -194,48 +194,51 @@ export class CheckoutPageComponent extends Component {
       // Fetch speculated transaction for showing price in booking breakdown
       // NOTE: if unit type is line-item/units, quantity needs to be added.
       // The way to pass it to checkout page is through pageData.bookingData
-      fetchSpeculatedTransaction(this.customPricingParams({
-        listingId,
-        bookingStart: bookingStartForAPI,
-        bookingEnd: bookingEndForAPI,
-      }));
+      fetchSpeculatedTransaction(
+        this.customPricingParams({
+          quantity: pageData.bookingData.quantity,
+          listing: pageData.listing,
+          bookingStart: bookingStartForAPI,
+          bookingEnd: bookingEndForAPI,
+        })
+      );
     }
 
     this.setState({ pageData: pageData || {}, dataLoaded: true });
   }
 
   /**
- * Constructs a request params object that can be used when creating bookings
- * using custom pricing.
- * @param {} params An object that contains bookingStart, bookingEnd and listing
- * @return a params object for custom pricing bookings
- */
+   * Constructs a request params object that can be used when creating bookings
+   * using custom pricing.
+   * @param {} params An object that contains bookingStart, bookingEnd and listing
+   * @return a params object for custom pricing bookings
+   */
+  customPricingParams(params) {
+    const { bookingStart, bookingEnd, listing, quantity, ...rest } = params;
+    const { amount, currency } = listing.attributes.price;
 
-customPricingParams(params) {
-  const { bookingStart, bookingEnd, listing, ...rest } = params;
-  const { amount, currency } = listing.attributes.price;
+    const isBabysitter = getListingCategory(listing) === "babysitter";
+    const unitType = isBabysitter ? "line-item/hour" : config.bookingUnitType;
+    const isNightly = unitType === LINE_ITEM_NIGHT && !isBabysitter;
 
-  const unitType = config.bookingUnitType;
-  const isNightly = unitType === LINE_ITEM_NIGHT;
+    const numItems = quantity ? quantity : isNightly
+      ? nightsBetween(bookingStart, bookingEnd)
+      : daysBetween(bookingStart, bookingEnd);
 
-  const quantity = isNightly
-    ? nightsBetween(bookingStart, bookingEnd)
-    : daysBetween(bookingStart, bookingEnd);
-
-  return {
-    listingId: listing.id,
-    bookingStart,
-    bookingEnd,
-    lineItems: [
-      {
-        code: unitType,
-        unitPrice: new Money(amount, currency),
-        quantity,
-      },
-    ],
-    ...rest,
-  };
-}
+    return {
+      listingId: listing.id,
+      bookingStart,
+      bookingEnd,
+      lineItems: [
+        {
+          code: unitType,
+          unitPrice: new Money(amount, currency),
+          quantity: numItems,
+        },
+      ],
+      ...rest,
+    };
+  }
 
   handlePaymentIntent(handlePaymentParams) {
     const {
@@ -407,6 +410,7 @@ customPricingParams(params) {
         : {};
 
     const orderParams = this.customPricingParams({
+      quantity: pageData.bookingData.quantity,
       listing: pageData.listing,
       bookingStart: tx.booking.attributes.start,
       bookingEnd: tx.booking.attributes.end,
@@ -550,7 +554,7 @@ customPricingParams(params) {
 
     const isLoading = !this.state.dataLoaded || speculateTransactionInProgress;
 
-    const { listing, bookingDates, transaction } = this.state.pageData;
+    const { listing, bookingDates, transaction, bookingData } = this.state.pageData;
     const existingTransaction = ensureTransaction(transaction);
     const speculatedTransaction = ensureTransaction(speculatedTransactionMaybe, {}, null);
     const currentListing = ensureListing(listing);
@@ -594,6 +598,9 @@ customPricingParams(params) {
       bookingDates.bookingStart &&
       bookingDates.bookingEnd
     );
+
+    const hasBookingTimes = bookingData.startTime && bookingData.endTime;
+
     const hasRequiredData = hasListingAndAuthor && hasBookingDates;
     const canShowPage = hasRequiredData && !isOwnListing;
     const shouldRedirect = !isLoading && !canShowPage;
@@ -617,9 +624,11 @@ customPricingParams(params) {
     const breakdown =
       tx.id && txBooking.id ? (
         <BookingBreakdown
+          hourly={hasBookingTimes}
+          bookingData={bookingData}
           className={css.bookingBreakdown}
           userRole="customer"
-          unitType={config.bookingUnitType}
+          unitType={hasBookingTimes ? "line-item/hour" : config.bookingUnitType}
           transaction={tx}
           booking={txBooking}
           dateType={DATE_TYPE_DATE}
@@ -746,7 +755,7 @@ customPricingParams(params) {
     }
 
     const unitType = config.bookingUnitType;
-    const isNightly = unitType === LINE_ITEM_NIGHT;
+    const isNightly = unitType === LINE_ITEM_NIGHT && getListingCategory(listing) !== "babysitter";
     const isDaily = unitType === LINE_ITEM_DAY;
 
     const unitTranslationKey = isNightly

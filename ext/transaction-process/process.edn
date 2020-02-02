@@ -9,7 +9,7 @@
    :actions
    [{:name :action/create-booking,
      :config {:observe-availability? true}}
-    {:name :action/calculate-tx-nightly-total-price}
+    {:name :action/set-line-items-and-total}
     {:name :action/calculate-tx-provider-commission,
      :config {:commission 0.1M}}
     {:name :action/stripe-create-payment-intent}],
@@ -19,7 +19,7 @@
    :actions
    [{:name :action/create-booking,
      :config {:observe-availability? true}}
-    {:name :action/calculate-tx-nightly-total-price}
+    {:name :action/set-line-items-and-total}
     {:name :action/calculate-tx-provider-commission,
      :config {:commission 0.1M}}
     {:name :action/stripe-create-payment-intent}],

@@ -17,9 +17,10 @@ const BreakdownMaybe = props => {
   return loaded ? (
     <div className={classes}>
       <BookingBreakdown
+        hourly={props.hourly}
         className={breakdownClasses}
         userRole={transactionRole}
-        unitType={config.bookingUnitType}
+        unitType={props.hourly ? "line-item/hour" : config.bookingUnitType}
         transaction={transaction}
         booking={transaction.booking}
         dateType={DATE_TYPE_DATE}

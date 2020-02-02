@@ -9,7 +9,7 @@ const LineItemBasePriceMaybe = props => {
   const { transaction, unitType, intl, listingCategory } = props;
   const isNightly = unitType === LINE_ITEM_NIGHT && listingCategory !== 'babysitter';
   const isDaily = unitType === LINE_ITEM_DAY;
-  console.log(transaction);
+
   const translationKey = isNightly
     ? 'BookingBreakdown.baseUnitNight'
     : isDaily

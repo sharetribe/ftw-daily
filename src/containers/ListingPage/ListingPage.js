@@ -23,7 +23,7 @@ import {
   ensureOwnListing,
   ensureUser,
   userDisplayNameAsString,
-  getListingCategory
+  getListingCategory,
 } from '../../util/data';
 import { richText } from '../../util/richText';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
@@ -113,6 +113,11 @@ export class ListingPageComponent extends Component {
       },
       confirmPaymentError: null,
     };
+
+    if (getListingCategory(listing) === 'babysitter') {
+      initialValues.bookingData.quantity =
+        parseInt(initialValues.bookingData.endTime) - parseInt(initialValues.bookingData.startTime);
+    }
 
     const routes = routeConfiguration();
     // Customize checkout page state with current listing and selected bookingDates

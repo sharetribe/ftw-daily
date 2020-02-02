@@ -89,6 +89,19 @@ export const bookingDateRequired = inValidDateMessage => value => {
   return !dateIsValid ? inValidDateMessage : VALID;
 };
 
+export const bookingTimesRequired = () => value => {
+  const startTimeValid = value && value.startTime;
+  const endTimeValid = value && value.endTime;
+
+  if (!startTimeValid) {
+    return "START TIME NAT VALID";
+  } else if (!endTimeValid) {
+    return "END TIME NAT VALID";
+  } else {
+    return VALID;
+  }
+}
+
 export const bookingDatesRequired = (inValidStartDateMessage, inValidEndDateMessage) => value => {
   const startDateIsValid = value && value.startDate instanceof Date;
   const endDateIsValid = value && value.endDate instanceof Date;

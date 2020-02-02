@@ -19,6 +19,7 @@ import {
   ensureTransaction,
   ensureUser,
   userDisplayNameAsString,
+  getListingCategory,
 } from '../../util/data';
 import { isMobileSafari } from '../../util/userAgent';
 import { formatMoney } from '../../util/currency';
@@ -284,7 +285,8 @@ export class TransactionPanelComponent extends Component {
       : currentListing.attributes.title;
 
     const unitType = config.bookingUnitType;
-    const isNightly = unitType === LINE_ITEM_NIGHT;
+    const isBabysitter = getListingCategory(currentListing) === 'babysitter';
+    const isNightly = unitType === LINE_ITEM_NIGHT && !isBabysitter;
     const isDaily = unitType === LINE_ITEM_DAY;
 
     const unitTranslationKey = isNightly
@@ -447,6 +449,7 @@ export class TransactionPanelComponent extends Component {
                 />
               ) : null}
               <BreakdownMaybe
+                hourly={isBabysitter}
                 className={css.breakdownContainer}
                 transaction={currentTransaction}
                 transactionRole={transactionRole}

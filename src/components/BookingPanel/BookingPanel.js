@@ -11,7 +11,7 @@ import { formatMoney } from '../../util/currency';
 import { parse, stringify } from '../../util/urlHelpers';
 import config from '../../config';
 import { ModalInMobile, Button } from '../../components';
-import { BookingDatesForm } from '../../forms';
+import { BookingDatesForm, BookingDatesTimeForm } from '../../forms';
 
 import css from './BookingPanel.css';
 
@@ -82,7 +82,9 @@ const BookingPanel = props => {
     ? intl.formatMessage({ id: 'BookingPanel.subTitleClosedListing' })
     : null;
 
-  const isNightly = unitType === LINE_ITEM_NIGHT && getListingCategory(listing) !== 'babysitter';
+  const isBabysitter = getListingCategory(listing) === 'babysitter';
+
+  const isNightly = unitType === LINE_ITEM_NIGHT && !isBabysitter;
   const isDaily = unitType === LINE_ITEM_DAY;
 
   const unitTranslationKey = isNightly
@@ -93,6 +95,8 @@ const BookingPanel = props => {
 
   const classes = classNames(rootClassName || css.root, className);
   const titleClasses = classNames(titleClassName || css.bookingTitle);
+
+  const BookingDatesFormComponent = isBabysitter ? BookingDatesTimeForm : BookingDatesForm;
 
   return (
     <div className={classes}>
@@ -116,7 +120,7 @@ const BookingPanel = props => {
           {subTitleText ? <div className={css.bookingHelp}>{subTitleText}</div> : null}
         </div>
         {showBookingDatesForm ? (
-          <BookingDatesForm
+          <BookingDatesFormComponent
             className={css.bookingForm}
             formId="BookingPanel"
             submitButtonWrapperClassName={css.bookingDatesSubmitButtonWrapper}

@@ -5,13 +5,14 @@
  * you should convert value.date to start date and end date before submitting it to API
  */
 
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { bool, func, object, oneOf, string, arrayOf } from 'prop-types';
 import { Field } from 'react-final-form';
 import classNames from 'classnames';
 import { START_DATE, END_DATE } from '../../util/dates';
 import { propTypes } from '../../util/types';
 import { ValidationError } from '../../components';
+import FieldSelect from '../../components/FieldSelect/FieldSelect';
 
 import DateRangeInput from './DateRangeInput';
 import css from './FieldDateRangeInput.css';
@@ -63,6 +64,7 @@ class FieldDateRangeInputComponent extends Component {
       input,
       meta,
       useMobileMargins,
+      hourly,
       // Extract focusedInput and onFocusedInputChange so that
       // the same values will not be passed on to subcomponents.
       focusedInput,
@@ -130,8 +132,15 @@ class FieldDateRangeInputComponent extends Component {
       startDateId,
       endDateId,
     };
+
     const classes = classNames(rootClassName || css.fieldRoot, className);
     const errorClasses = classNames({ [css.mobileMargins]: useMobileMargins });
+
+    const times = [];
+
+    for (let i = 0; i < 24; i++) {
+      times.push(<option value={i}>{i}:00</option>);
+    }
 
     return (
       <div className={classes}>
@@ -145,6 +154,16 @@ class FieldDateRangeInputComponent extends Component {
           <div className={startDateBorderClasses} />
           <div className={endDateBorderClasses} />
         </div>
+        {hourly && (
+          <Fragment>
+            <FieldSelect defaultValue={'9'} id="startTime" name="startTime" label="Start time:">
+              {times}
+            </FieldSelect>
+            <FieldSelect defaultValue={'17'} id="endTime" name="endTime" label="End time:">
+              {times}
+            </FieldSelect>
+          </Fragment>
+        )}
         <ValidationError className={errorClasses} fieldMeta={meta} />
       </div>
     );
