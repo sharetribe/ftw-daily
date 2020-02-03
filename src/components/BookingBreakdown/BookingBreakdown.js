@@ -23,6 +23,7 @@ import LineItemProviderCommissionRefundMaybe from './LineItemProviderCommissionR
 import LineItemRefundMaybe from './LineItemRefundMaybe';
 import LineItemTotalPrice from './LineItemTotalPrice';
 import LineItemUnknownItemsMaybe from './LineItemUnknownItemsMaybe';
+import LineItemDiscountMaybe from './LineItemDiscountMaybe';
 
 import css from './BookingBreakdown.css';
 
@@ -100,6 +101,9 @@ export const BookingBreakdownComponent = props => {
         userRole={userRole}
         intl={intl}
       />
+
+      <LineItemDiscountMaybe transaction={transaction} intl={intl} />
+
       <LineItemRefundMaybe transaction={transaction} intl={intl} />
 
       <LineItemCustomerCommissionMaybe

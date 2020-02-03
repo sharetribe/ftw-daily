@@ -31,7 +31,7 @@ import Decimal from 'decimal.js';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { dateFromLocalToAPI, nightsBetween, daysBetween } from '../../util/dates';
 import { TRANSITION_REQUEST_PAYMENT, TX_TRANSITION_ACTOR_CUSTOMER } from '../../util/transaction';
-import { LINE_ITEM_DAY, LINE_ITEM_NIGHT, LINE_ITEM_UNITS, DATE_TYPE_DATE } from '../../util/types';
+import { LINE_ITEM_DAY, LINE_ITEM_NIGHT, LINE_ITEM_UNITS, LINE_ITEM_DISCOUNT, DATE_TYPE_DATE } from '../../util/types';
 import { unitDivisor, convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
 import { BookingBreakdown } from '../../components';
 
@@ -39,19 +39,41 @@ import css from './BookingDatesForm.css';
 
 const { Money, UUID } = sdkTypes;
 
-const estimatedTotalPrice = (unitPrice, unitCount) => {
+
+
+const estimatedNumericLineItemPrice = (unitPrice, unitCount) => {
   const numericPrice = convertMoneyToNumber(unitPrice);
-  const numericTotalPrice = new Decimal(numericPrice).times(unitCount).toNumber();
-  return new Money(
-    convertUnitToSubUnit(numericTotalPrice, unitDivisor(unitPrice.currency)),
-    unitPrice.currency
-  );
+  const numericLineItemPrice = new Decimal(numericPrice).times(unitCount).toNumber();
+  return numericLineItemPrice;
 };
+
+const estimatedNumericTotalDiscount = (discount, unitPrice, unitCount) => {
+  const {
+    amount: discountAmount,
+    breakpoint: discountBreakpoint,
+    unitType: discountUnitType
+  } = discount || {};
+
+  if (!discountAmount || !discountBreakpoint || !discountUnitType) return null;
+
+  const breakpointCount = parseInt(discountBreakpoint);
+
+  if (unitCount <= breakpointCount) return null;
+
+  const eligibleDiscountedDays = unitCount - breakpointCount;
+  const numericUnitPrice = convertMoneyToNumber(unitPrice);
+  const numericTotalPrice = new Decimal(numericUnitPrice).times(eligibleDiscountedDays).toNumber();
+  const discountPercentage = new Decimal(discountAmount).times(0.01).toNumber();
+  const numericTotalDiscount = new Decimal(numericTotalPrice).times(discountPercentage).toNumber();
+
+  return numericTotalDiscount || 0;
+};
+
 
 // When we cannot speculatively initiate a transaction (i.e. logged
 // out), we must estimate the booking breakdown. This function creates
 // an estimated transaction object for that use case.
-const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, quantity) => {
+const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, quantity, discount) => {
   const now = new Date();
   const isNightly = unitType === LINE_ITEM_NIGHT;
   const isDaily = unitType === LINE_ITEM_DAY;
@@ -62,7 +84,18 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, qua
     ? daysBetween(bookingStart, bookingEnd)
     : quantity;
 
-  const totalPrice = estimatedTotalPrice(unitPrice, unitCount);
+
+  const numericLineItemPrice = estimatedNumericLineItemPrice(unitPrice, unitCount);
+  const numericTotalDiscount = estimatedNumericTotalDiscount(discount, unitPrice, unitCount);
+  const numericTotalPrice = numericLineItemPrice - numericTotalDiscount;
+
+  const totalPrice = new Money(
+    convertUnitToSubUnit(numericTotalPrice, unitDivisor(unitPrice.currency)),
+    unitPrice.currency
+  );
+
+
+
 
   // bookingStart: "Fri Mar 30 2018 12:00:00 GMT-1100 (SST)" aka "Fri Mar 30 2018 23:00:00 GMT+0000 (UTC)"
   // Server normalizes night/day bookings to start from 00:00 UTC aka "Thu Mar 29 2018 13:00:00 GMT-1100 (SST)"
@@ -80,7 +113,7 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, qua
       .toDate()
   );
 
-  return {
+  let tx = {
     id: new UUID('estimated-transaction'),
     type: 'transaction',
     attributes: {
@@ -95,7 +128,10 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, qua
           includeFor: ['customer', 'provider'],
           unitPrice: unitPrice,
           quantity: new Decimal(unitCount),
-          lineTotal: totalPrice,
+          lineTotal: new Money(
+            convertUnitToSubUnit(numericLineItemPrice, unitDivisor(unitPrice.currency)),
+            unitPrice.currency
+          ),
           reversal: false,
         },
       ],
@@ -116,10 +152,20 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, qua
       },
     },
   };
+
+  if (numericTotalDiscount) tx.attributes.lineItems.push({
+    code: LINE_ITEM_DISCOUNT,
+    lineTotal: new Money(
+      convertUnitToSubUnit(numericTotalDiscount * -1, unitDivisor(unitPrice.currency)),
+      unitPrice.currency
+    ),
+  });
+
+  return tx;
 };
 
 const EstimatedBreakdownMaybe = props => {
-  const { unitType, unitPrice, startDate, endDate, quantity } = props.bookingData;
+  const { unitType, unitPrice, startDate, endDate, quantity, discount } = props.bookingData;
   const isUnits = unitType === LINE_ITEM_UNITS;
   const quantityIfUsingUnits = !isUnits || Number.isInteger(quantity);
   const canEstimatePrice = startDate && endDate && unitPrice && quantityIfUsingUnits;
@@ -127,7 +173,7 @@ const EstimatedBreakdownMaybe = props => {
     return null;
   }
 
-  const tx = estimatedTransaction(unitType, startDate, endDate, unitPrice, quantity);
+  const tx = estimatedTransaction(unitType, startDate, endDate, unitPrice, quantity, discount);
 
   return (
     <BookingBreakdown

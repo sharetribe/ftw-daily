@@ -511,7 +511,13 @@ export class CheckoutPageComponent extends Component {
 
   customPricingParams(params) {
     const { bookingStart, bookingEnd, listing, ...rest } = params;
-    const { amount, currency } = listing.attributes.price;
+    const { amount: priceAmount, currency } = listing.attributes.price;
+    const { discount } = listing.attributes.publicData || {};
+    const {
+      amount: discountPercentage,
+      breakpoint: discountBreakpoint,
+      unitType: discountUnitType
+    } = discount || {};
 
     const unitType = config.bookingUnitType; // Change this to dynamic
     const isNightly = unitType === LINE_ITEM_NIGHT;
@@ -520,24 +526,39 @@ export class CheckoutPageComponent extends Component {
       ? nightsBetween(bookingStart, bookingEnd)
       : daysBetween(bookingStart, bookingEnd);
 
-    return {
+    let tx = {
       listingId: listing.id,
       bookingStart,
       bookingEnd,
       lineItems: [
         {
           code: unitType,
-          unitPrice: new Money(amount, currency),
+          unitPrice: new Money(priceAmount, currency),
           quantity,
-        },
-        {
-          code: LINE_ITEM_DISCOUNT,
-          unitPrice: new Money(amount, currency),
-          percentage: -15,
-        },
+        }
       ],
       ...rest,
     };
+
+    const breakpoint = parseInt(discountBreakpoint);
+    const discountBase = (quantity - breakpoint) * priceAmount;
+    const hasDiscount = discount && quantity > breakpoint;
+
+    if (hasDiscount) {
+      tx.lineItems.push({
+        code: LINE_ITEM_DISCOUNT,
+        includeFor: ['customer', 'provider'],
+        unitPrice: new Money(discountBase, currency),
+        percentage: parseInt(discountPercentage) * -1
+      });
+
+      tx.protectedData = {
+        ...tx.protectedData,
+        discountReason: `${discountPercentage}% off above ${discountBreakpoint} ${discountUnitType}`
+      }
+    }
+
+    return tx;
   }
 
   render() {
