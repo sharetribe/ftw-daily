@@ -6,20 +6,286 @@
   height: auto;
   display: flex;
   flex-direction: column;
-  padding: 11px 24px 0 24px;
+  padding: 12px 24px 0 24px;
 }
 
 .form {
   flex-grow: 1;
 }
 
+.sectionHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .title {
-  margin-bottom: 19px;
+  margin-bottom: 18px;
+}
+
+.sectionTitle {
+  @apply --marketplaceSearchFilterSublabelFontStyles;
+  color: var(--matterColorAnti);
+
+  margin-top: 18px;
+  margin-bottom: 18px;
+  padding: 3px 0 3px 0;
+}
+
+.editPlanButton {
+  @apply --marketplaceH5FontStyles;
+  margin: 0;
+  padding-top: 5px;
+}
+
+.editPlanIcon {
+  margin: 0px 3px 4px 0;
+}
+
+.week {
+  display: flex;
+  flex-direction: column;
+  border-top: solid 1px var(--matterColorNegative);
+  border-right: solid 1px var(--matterColorNegative);
+  border-left: solid 1px var(--matterColorNegative);
+  border-radius: 4px;
+  margin-bottom: 23px;
+
+  & > .weekDay {
+    border-bottom: solid 1px var(--matterColorNegative);
+  }
+}
+
+.weekDay {
+  @apply --marketplaceTabNavHorizontalFontStyles;
+  display: flex;
+  flex-direction: row;
+  padding: 24px 24px 23px 24px;
+}
+
+.dayOfWeek {
+  width: 100px;
+}
+
+.blockedWeekDay {
+  background-color: #f3f3f3;
+  & > .dayOfWeek {
+    color: var(--matterColorAnti);
+  }
+
+  &:hover > .dayOfWeek {
+    color: var(--matterColor);
+  }
+}
+
+.entries {
+}
+
+.entry {
+  display: block;
+}
+
+.exceptionsLoading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.noExceptions {
+  @apply --marketplaceH4FontStyles;
+  display: flex;
+  align-items: center;
+  margin: 0 0 24px 0;
+}
+
+.exceptions {
+  display: flex;
+  flex-direction: column;
+  border-top: solid 1px var(--matterColorNegative);
+  border-right: solid 1px var(--matterColorNegative);
+  border-left: solid 1px var(--matterColorNegative);
+  border-radius: 4px;
+  margin-top: 0;
+  margin-bottom: 11px;
+
+  & > .exception {
+    border-bottom: solid 1px var(--matterColorNegative);
+  }
+}
+
+.exceptionHeader {
+  display: flex;
+  flex-direction: row;
+}
+
+.exceptionAvailability {
+  padding-right: 12px;
+  margin: 12px auto 0px 24px;
+  display: flex;
+  flex-direction: row;
+  margin-right: auto;
+}
+
+.exceptionAvailabilityDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  margin-top: 8px;
+  margin-right: 12px;
+  background-color: var(--failColor);
+}
+
+.isAvailable {
+  background-color: var(--successColor);
+}
+
+.exceptionAvailabilityStatus {
+  @apply --marketplaceH4FontStyles;
+  color: var(--matterColor);
+  font-weight: var(--fontWeightSemiBold);
+  margin: 0;
+  padding: 0;
+}
+
+.timeRange {
+  @apply --marketplaceH5FontStyles;
+  margin: -2px 12px 13px 32px;
+  color: var(--matterColorAnti);
+}
+
+.removeIcon {
+  width: 10px;
+  height: 10px;
+  stroke: var(--matterColorAnti);
+  fill: var(--matterColorAnti);
+}
+
+.removeExceptionButton {
+  padding: 0 24px 0 24px;
+  border: 0;
+  cursor: pointer;
+
+  &:hover .removeIcon {
+    stroke: var(--matterColorDark);
+    fill: var(--matterColorDark);
+  }
+}
+
+.addExceptionButton {
+  @apply --marketplaceH4FontStyles;
+  padding: 1px 0 5px 0;
+  margin: 0 0 24px 0;
+}
+
+.goToNextTabButton {
+  margin-top: auto;
+  margin-bottom: 24px;
+  flex-shrink: 0;
+}
+
+.modalContainer {
+  @apply --marketplaceModalBaseStyles;
+  min-height: 100vh;
+  height: 100%;
+
+  padding-left: 0;
+  padding-right: 0;
+
+  background-color: var(--matterColorBright);
+}
+
+.error {
+  color: var(--failColor);
+}
+
+@media (--viewportMedium) {
+  .root {
+    padding: 11px 24px 0 24px;
+  }
+
+  .sectionHeader {
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
+
+  .title {
+    margin-bottom: 16px;
+  }
+
+  .sectionTitle {
+    margin-top: 21px;
+    margin-bottom: 17px;
+    padding: 0;
+  }
+
+  .weekDay {
+    padding-top: 22px;
+    padding-bottom: 25px;
+    padding-right: 24px;
+    padding-left: 24px;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--matterColorDark);
+    }
+  }
+
+  .dayOfWeek {
+    width: 200px;
+  }
+
+  .exceptions {
+    margin-bottom: 8px;
+  }
+
+  .exceptionAvailability {
+    margin: 8px auto 0px 24px;
+  }
+
+  .exceptionAvailabilityDot {
+    margin-top: 12px;
+  }
+
+  .exceptionAvailabilityStatus {
+    margin: 0px;
+    padding: 5px 0 3px 0;
+  }
+
+  .timeRange {
+    padding: 6px 0 2px 0;
+    margin: -8px 44px 15px 44px;
+  }
+
+  .removeIcon {
+    width: 12px;
+    height: 12px;
+  }
+
+  .removeExceptionButton {
+    padding: 6px 24px 0 24px;
+  }
+
+  .addExceptionButton {
+    padding: 3px 0 5px 0;
+    margin: 0 0 72px 0;
+  }
+
+  .modalContainer {
+    flex-basis: 576px;
+    min-height: auto;
+    height: auto;
+  }
 }
 
 @media (--viewportLarge) {
   .title {
     margin-bottom: 38px;
     padding: 1px 0 7px 0;
+  }
+
+  .goToNextTabButton {
+    display: inline-block;
+    width: 241px;
+    margin-top: 62px;
   }
 }

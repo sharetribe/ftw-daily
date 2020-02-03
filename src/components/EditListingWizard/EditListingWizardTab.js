@@ -1,5 +1,6 @@
  import React from 'react';
 import PropTypes from 'prop-types';
+import { propTypes } from '../../util/types';
 import { intlShape } from '../../util/reactIntl';
 import routeConfiguration from '../../routeConfiguration';
 import {
@@ -91,9 +92,14 @@ const EditListingWizardTab = props => {
     onUpdateImageOrder,
     onRemoveImage,
     onChange,
+    onManageDisableScrolling,
     updatedTab,
     updateInProgress,
     intl,
+    fetchExceptionsInProgress,
+    availabilityExceptions,
+    onAddAvailabilityException,
+    onDeleteAvailabilityException,
   } = props;
 
   const { type } = params;
@@ -150,6 +156,7 @@ const EditListingWizardTab = props => {
       onChange,
       panelUpdated: updatedTab === tab,
       updateInProgress,
+      onManageDisableScrolling,
       // newListingPublished and fetchInProgress are flags for the last wizard tab
       ready: newListingPublished,
       disabled: fetchInProgress,
@@ -232,13 +239,30 @@ const EditListingWizardTab = props => {
         ? 'EditListingWizard.saveNewAvailability'
         : 'EditListingWizard.saveEditAvailability';
       return (
+        // <EditListingAvailabilityPanel
+        //   {...panelProps(AVAILABILITY)}
+        //   availability={availability}
+        //   submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+        //   onSubmit={values => {
+        //     onCompleteEditListingWizardTab(tab, values);
+        //   }}
+        // />
+
         <EditListingAvailabilityPanel
           {...panelProps(AVAILABILITY)}
-          availability={availability}
+          fetchExceptionsInProgress={fetchExceptionsInProgress}
+          availabilityExceptions={availabilityExceptions}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          onAddAvailabilityException={onAddAvailabilityException}
+          onDeleteAvailabilityException={onDeleteAvailabilityException}
           onSubmit={values => {
-            onCompleteEditListingWizardTab(tab, values);
+            // We want to return the Promise to the form,
+            // so that it doesn't close its modal if an error is thrown.
+            return onCompleteEditListingWizardTab(tab, values, true);
           }}
+          onNextTab={() =>
+            redirectAfterDraftUpdate(listing.id.uuid, params, tab, marketplaceTabs, history)
+          }
         />
       );
     }
@@ -269,9 +293,10 @@ const EditListingWizardTab = props => {
 EditListingWizardTab.defaultProps = {
   listing: null,
   updatedTab: null,
+  availabilityExceptions: [],
 };
 
-const { array, bool, func, object, oneOf, shape, string } = PropTypes;
+const { array, arrayOf, bool, func, object, oneOf, shape, string } = PropTypes;
 
 EditListingWizardTab.propTypes = {
   params: shape({
@@ -280,6 +305,7 @@ EditListingWizardTab.propTypes = {
     type: oneOf(LISTING_PAGE_PARAM_TYPES).isRequired,
     tab: oneOf(SUPPORTED_TABS).isRequired,
   }).isRequired,
+  availabilityExceptions: arrayOf(propTypes.availabilityException),
   errors: shape({
     createListingDraftError: object,
     publishListingError: object,
@@ -288,6 +314,7 @@ EditListingWizardTab.propTypes = {
     uploadImageError: object,
   }).isRequired,
   fetchInProgress: bool.isRequired,
+  fetchExceptionsInProgress: bool.isRequired,
   newListingPublished: bool.isRequired,
   history: shape({
     push: func.isRequired,
@@ -310,6 +337,8 @@ EditListingWizardTab.propTypes = {
 
   handleCreateFlowTabScrolling: func.isRequired,
   handlePublishListing: func.isRequired,
+  onAddAvailabilityException: func.isRequired,
+  onDeleteAvailabilityException: func.isRequired,
   onUpdateListing: func.isRequired,
   onCreateListingDraft: func.isRequired,
   onImageUpload: func.isRequired,
