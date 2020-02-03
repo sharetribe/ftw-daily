@@ -97,21 +97,6 @@ const Footer = props => {
                   </NamedLink>
                 </li>
                 <li className={css.listItem}>
-                  <NamedLink name="GuidelinesPage" className={css.link}>
-                    <FormattedMessage id="Community Guidelines" />
-                  </NamedLink>
-                </li>
-                <li className={css.listItem}>
-                  <NamedLink name="FeesPage" className={css.link}>
-                    <FormattedMessage id="Platform fees" />
-                  </NamedLink>
-                </li>
-                <li className={css.listItem}>
-                  <NamedLink name="CancellationPage" className={css.link}>
-                    <FormattedMessage id="Cancellations" />
-                  </NamedLink>
-                </li>
-                <li className={css.listItem}>
                   <NamedLink name="AboutPage" to={{ hash: '#contact' }} className={css.link}>
                     <FormattedMessage id="Footer.toContactPage" />
                   </NamedLink>
@@ -131,6 +116,21 @@ const Footer = props => {
                   <li>
                     <NamedLink name="PrivacyPolicyPage" className={css.legalLink}>
                       <FormattedMessage id="Footer.privacyPolicy" />
+                    </NamedLink>
+                  </li>
+                  <li>
+                    <NamedLink name="CancellationPage" className={css.legalLink}>
+                      <FormattedMessage id="Cancellations" />
+                    </NamedLink>
+                  </li>
+                  <li>
+                  <NamedLink name="GuidelinesPage" className={css.legalLink}>
+                    <FormattedMessage id="Community Guidelines" />
+                  </NamedLink>
+                  </li>
+                  <li>
+                    <NamedLink name="FeesPage" className={css.legalLink}>
+                      <FormattedMessage id="Platform fees" />
                     </NamedLink>
                   </li>
                 </ul>

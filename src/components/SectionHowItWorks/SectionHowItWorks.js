@@ -15,8 +15,6 @@ const SectionHowItWorks = props => {
     <div className={classes}>
       <div className={css.title}>
         <FormattedMessage id="SectionHowItWorks.titleLineOne" />
-        <br />
-        <FormattedMessage id="SectionHowItWorks.titleLineTwo" />
       </div>
 
       <div className={css.steps}>
@@ -46,12 +44,14 @@ const SectionHowItWorks = props => {
             <FormattedMessage id="SectionHowItWorks.part3Text" />
           </p>
         </div>
-      </div>
-
-      <div className={css.createListingLink}>
-        <NamedLink name="NewListingPage">
-          <FormattedMessage id="SectionHowItWorks.createListingLink" />
-        </NamedLink>
+        <div className={css.step}>
+          <h2 className={css.stepTitle}>
+            <FormattedMessage id="SectionHowItWorks.part4Title" />
+          </h2>
+          <p>
+            <FormattedMessage id="SectionHowItWorks.part4Text" />
+          </p>
+        </div>
       </div>
     </div>
   );
