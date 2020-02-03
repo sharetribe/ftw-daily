@@ -48,7 +48,7 @@ export class BookingDatesFormComponent extends Component {
   }
 
   render() {
-    const { rootClassName, className, price: unitPrice, ...rest } = this.props;
+    const { rootClassName, className, price: unitPrice, discount, ...rest } = this.props;
     const classes = classNames(rootClassName || css.root, className);
 
     if (!unitPrice) {
@@ -74,6 +74,7 @@ export class BookingDatesFormComponent extends Component {
       <FinalForm
         {...rest}
         unitPrice={unitPrice}
+        discount={discount}
         onSubmit={this.handleFormSubmit}
         render={fieldRenderProps => {
           const {
@@ -85,6 +86,7 @@ export class BookingDatesFormComponent extends Component {
             isOwnListing,
             submitButtonWrapperClassName,
             unitPrice,
+            discount,
             unitType,
             values,
             timeSlots,
@@ -123,6 +125,7 @@ export class BookingDatesFormComponent extends Component {
                   // NOTE: If unitType is `line-item/units`, a new picker
                   // for the quantity should be added to the form.
                   quantity: 1,
+                  discount
                 }
               : null;
           const bookingInfo = bookingData ? (
