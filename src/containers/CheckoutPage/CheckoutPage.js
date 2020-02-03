@@ -540,16 +540,23 @@ export class CheckoutPageComponent extends Component {
       ...rest,
     };
 
-    const breakpointQuantity = parseInt(discountBreakpoint);
-    const hasDiscount = discount && quantity > breakpointQuantity;
-    const discountedAmount = (quantity - breakpointQuantity) * priceAmount;
+    const breakpoint = parseInt(discountBreakpoint);
+    const discountBase = (quantity - breakpoint) * priceAmount;
+    const hasDiscount = discount && quantity > breakpoint;
 
-    if (hasDiscount) tx.lineItems.push({
-      code: LINE_ITEM_DISCOUNT,
-      includeFor: ['customer', 'provider'],
-      unitPrice: new Money(discountedAmount, currency),
-      percentage: parseInt(discountPercentage) * -1
-    });
+    if (hasDiscount) {
+      tx.lineItems.push({
+        code: LINE_ITEM_DISCOUNT,
+        includeFor: ['customer', 'provider'],
+        unitPrice: new Money(discountBase, currency),
+        percentage: parseInt(discountPercentage) * -1
+      });
+
+      tx.protectedData = {
+        ...tx.protectedData,
+        discountReason: `${discountPercentage}% off above ${discountBreakpoint} ${discountUnitType}`
+      }
+    }
 
     return tx;
   }

@@ -7,17 +7,24 @@ import css from './BookingBreakdown.css';
 
 const LineItemDiscountMaybe = props => {
   const { transaction, intl } = props;
+  const {
+    lineItems,
+    protectedData
+  } = transaction.attributes;
 
-  const discount = transaction.attributes.lineItems.find(
+  const discount = lineItems.find(
     item => item.code === LINE_ITEM_DISCOUNT
   );
+
+  const { discountReason } = protectedData || {};
+  const reason = discountReason ? `(${ discountReason })` : '';
 
   return discount ? (
     <div className={css.lineItem}>
       <span className={css.itemLabel}>
         <FormattedMessage
           id="BookingBreakdown.discount"
-          values={{ reason: '' }}
+          values={{ reason }}
         />
       </span>
       <span className={css.itemValue}>{formatMoney(intl, discount.lineTotal)}</span>
