@@ -12,10 +12,14 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 
-## Upcoming version 2019-XX-XX
+## Upcoming version 2020-XX-XX
 
+## [v4.1.0] 2020-02-03
+
+- [fix] Remove unused 'invalid' prop that breaks some versions of Final Form
+  [#1255](https://github.com/sharetribe/ftw-daily/pull/1255)
 - [fix] Fix `console.warn` functions. [#1252](https://github.com/sharetribe/ftw-daily/pull/1252)
-- [fix] Add missing countries (e.g. MX and JP) to `StripeBankAccountTokenInput` validations.
+- [add] Add missing countries (e.g. MX and JP) to `StripeBankAccountTokenInput` validations.
   [#1250](https://github.com/sharetribe/ftw-daily/pull/1250)
 
 ## [v4.0.0] 2019-12-19
