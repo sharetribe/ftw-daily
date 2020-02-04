@@ -136,16 +136,10 @@ class FieldDateRangeInputComponent extends Component {
     const classes = classNames(rootClassName || css.fieldRoot, className);
     const errorClasses = classNames({ [css.mobileMargins]: useMobileMargins });
 
-    const times = [];
-
-    for (let i = 0; i < 24; i++) {
-      times.push(<option value={i}>{i}:00</option>);
-    }
-
     return (
       <div className={classes}>
         {label}
-        <DateRangeInput {...inputProps} />
+        <DateRangeInput {...inputProps} hourly={hourly} />
         <div
           className={classNames(css.inputBorders, {
             [css.mobileMargins]: useMobileMargins && !this.state.focusedInput,
@@ -154,16 +148,6 @@ class FieldDateRangeInputComponent extends Component {
           <div className={startDateBorderClasses} />
           <div className={endDateBorderClasses} />
         </div>
-        {hourly && (
-          <Fragment>
-            <FieldSelect defaultValue={'9'} id="startTime" name="startTime" label="Start time:">
-              {times}
-            </FieldSelect>
-            <FieldSelect defaultValue={'17'} id="endTime" name="endTime" label="End time:">
-              {times}
-            </FieldSelect>
-          </Fragment>
-        )}
         <ValidationError className={errorClasses} fieldMeta={meta} />
       </div>
     );

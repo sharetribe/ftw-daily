@@ -9,10 +9,11 @@ import { required, bookingDatesRequired, composeValidators } from '../../util/va
 import { START_DATE, END_DATE } from '../../util/dates';
 import { propTypes } from '../../util/types';
 import config from '../../config';
-import { Form, PrimaryButton, FieldDateRangeInput } from '../../components';
+import { Form, PrimaryButton, FieldDateInput } from '../../components';
 import EstimatedBreakdownMaybe from './EstimatedBreakdownMaybe';
 
 import css from './BookingDatesForm.css';
+import FieldDatePickerInput from '../../components/FieldDatePickerInput/FieldDatePickerInput';
 
 const identity = v => v;
 
@@ -35,16 +36,18 @@ export class BookingDatesFormComponent extends Component {
   // focus on that input, otherwise continue with the
   // default handleSubmit function.
   handleFormSubmit(e) {
-    const { startDate, endDate } = e.bookingDates || {};
-    if (!startDate) {
+    const { date } = e.bookingDates || {};
+    if (!date) {
       e.preventDefault();
       this.setState({ focusedInput: START_DATE });
-    } else if (!endDate) {
-      e.preventDefault();
-      this.setState({ focusedInput: END_DATE });
-    } else {
-      this.props.onSubmit(e);
     }
+    this.props.onSubmit({
+      ...e,
+      bookingDates: {
+        startDate: e.bookingDates.date,
+        endDate: moment(e.bookingDates.date).add(1, "days").toDate(),
+      }
+    })
   }
 
   render() {
@@ -91,11 +94,11 @@ export class BookingDatesFormComponent extends Component {
             fetchTimeSlotsError,
           } = fieldRenderProps;
 
-          const { startTime, endTime } = values;
+          const { endTime, startTime } = values;
+
           const { 
-            startDate, 
-            endDate,
-          } = values && values.bookingDates ? values.bookingDates : {};
+            date
+          } = values && values.date ? values.date : {};
 
 
           const bookingStartLabel = intl.formatMessage({
@@ -103,12 +106,6 @@ export class BookingDatesFormComponent extends Component {
           });
           const bookingEndLabel = intl.formatMessage({ id: 'BookingDatesForm.bookingEndTitle' });
           const requiredMessage = intl.formatMessage({ id: 'BookingDatesForm.requiredDate' });
-          const startDateErrorMessage = intl.formatMessage({
-            id: 'FieldDateRangeInput.invalidStartDate',
-          });
-          const endDateErrorMessage = intl.formatMessage({
-            id: 'FieldDateRangeInput.invalidEndDate',
-          });
           const timeSlotsError = fetchTimeSlotsError ? (
             <p className={css.timeSlotsError}>
               <FormattedMessage id="BookingDatesForm.timeSlotsError" />
@@ -118,13 +115,11 @@ export class BookingDatesFormComponent extends Component {
           // This is the place to collect breakdown estimation data. See the
           // EstimatedBreakdownMaybe component to change the calculations
           // for customized payment processes.
-          const bookingData =
-            startDate && endDate
-              ? {
+          const bookingData = date ? {
                   unitType,
                   unitPrice,
-                  startDate,
-                  endDate,
+                  startDate: date,
+                  endDate: date,
                   startTime,
                   endTime,
 
@@ -169,10 +164,9 @@ export class BookingDatesFormComponent extends Component {
           return (
             <Form onSubmit={handleSubmit} className={classes}>
               {timeSlotsError}
-              <FieldDateRangeInput
-                hourly
+              <FieldDateInput
                 className={css.bookingDates}
-                name="bookingDates"
+                name="date"
                 unitType={unitType}
                 startDateId={`${formId}.bookingStartDate`}
                 startDateLabel={bookingStartLabel}
@@ -185,10 +179,11 @@ export class BookingDatesFormComponent extends Component {
                 format={identity}
                 timeSlots={timeSlots}
                 useMobileMargins
+                // TODO: fix validations
                 validate={composeValidators(
                   required(requiredMessage),
-                  bookingDatesRequired(),
-                  bookingDatesRequired(startDateErrorMessage, endDateErrorMessage)
+                  // bookingDatesRequired(),
+                  // bookingDatesRequired(startDateErrorMessage, endDateErrorMessage)
                 )}
               />
               {bookingInfo}

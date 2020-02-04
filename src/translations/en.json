@@ -250,6 +250,7 @@
   "FieldDateInput.clearDate": "Clear Date",
   "FieldDateInput.closeDatePicker": "Close",
   "FieldDateInput.invalidDate": "The start date is not valid",
+  "FieldDateInput.placeholder": "Choose Date",
   "FieldDateInput.placeholderText": "Add start date",
   "FieldDateInput.screenReaderInputMessage": "Date input",
   "FieldDateRangeInput.clearDate": "Clear Date",

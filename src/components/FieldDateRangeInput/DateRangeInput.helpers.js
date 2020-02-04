@@ -178,30 +178,27 @@ export const isOutsideRangeFn = (timeSlots, startDate, endDate, focusedInput, un
       );
     };
   }
+};
 
-  // end date selected, start date missing
-  // -> limit the earliest start date for the booking so that it
-  // needs to be after the previous booked date
-  const endDateSelected = timeSlots && endDate && !startDate && focusedInput !== END_DATE;
-  const previousBookedDate = endDateSelected
-    ? lastBlockedBetween(timeSlots, moment(), endDate)
+export const isOutsideRangeFnHourly = (timeSlots, startDate, endDate, focusedInput, unitType) => {
+  const lastBookableDate = moment().add(1, 'days');
+
+  // start date selected, end date missing
+  const startDateSelected = isStartDateSelected(timeSlots, startDate, endDate, focusedInput);
+  const nextBookingStarts = startDateSelected
+    ? firstBlockedBetween(timeSlots, startDate, moment(lastBookableDate).add(1, 'days'))
     : null;
 
-  if (previousBookedDate) {
+  if (nextBookingStarts) {
+    // end the range so that the booking can end at latest on
+    // nightly booking: the day the next booking starts
+    // daily booking: the day before the next booking starts
     return day => {
-      const firstDayToStartBooking = moment(previousBookedDate).add(1, 'days');
+      const lastDayToEndBooking = apiEndDateToPickerDate(unitType, nextBookingStarts.toDate());
+
       return (
-        !isInclusivelyAfterDay(day, firstDayToStartBooking) ||
-        !isInclusivelyBeforeDay(day, lastBookableDate)
+        !isInclusivelyAfterDay(day, startDate) || !isInclusivelyBeforeDay(day, lastDayToEndBooking)
       );
     };
   }
-
-  // standard isOutsideRange function
-  return day => {
-    return (
-      !isInclusivelyAfterDay(day, moment()) ||
-      !isInclusivelyBeforeDay(day, moment().add(endOfRange, 'days'))
-    );
-  };
 };

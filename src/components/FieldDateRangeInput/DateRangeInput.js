@@ -216,6 +216,7 @@ class DateRangeInputComponent extends Component {
       children,
       render,
       timeSlots,
+      hourly,
       ...datePickerProps
     } = this.props;
     /* eslint-enable no-unused-vars */
@@ -225,7 +226,7 @@ class DateRangeInputComponent extends Component {
     const initialEndMoment = initialDates ? moment(initialDates.endDate) : null;
     const startDate =
       value && value.startDate instanceof Date ? moment(value.startDate) : initialStartMoment;
-    const endDate =
+    const endDate = (hourly && startDate) ||
       apiEndDateToPickerDate(unitType, value ? value.endDate : null) || initialEndMoment;
 
     let isDayBlocked = isDayBlockedFn(
@@ -272,7 +273,7 @@ class DateRangeInputComponent extends Component {
           onFocusChange={this.onFocusChange}
           startDate={startDate}
           endDate={endDate}
-          minimumNights={isDaily ? 0 : 1}
+          minimumNights={hourly ? 0 : 1}
           onDatesChange={this.onDatesChange}
           startDatePlaceholderText={startDatePlaceholderTxt}
           endDatePlaceholderText={endDatePlaceholderTxt}
