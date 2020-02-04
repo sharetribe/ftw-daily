@@ -103,7 +103,7 @@ const Footer = props => {
                 </li>
               </ul>
             </div>
-            
+
             <div className={css.extraLinks}>
               <div className={css.someLinks}>{socialMediaLinks}</div>
               <div className={css.legalMatters}>
@@ -120,17 +120,17 @@ const Footer = props => {
                   </li>
                   <li>
                     <NamedLink name="CancellationPage" className={css.legalLink}>
-                      <FormattedMessage id="Cancellations" />
+                      <FormattedMessage id="Footer.cancellations" />
                     </NamedLink>
                   </li>
                   <li>
                   <NamedLink name="GuidelinesPage" className={css.legalLink}>
-                    <FormattedMessage id="Community Guidelines" />
+                    <FormattedMessage id="Footer.guidelines" />
                   </NamedLink>
                   </li>
                   <li>
                     <NamedLink name="FeesPage" className={css.legalLink}>
-                      <FormattedMessage id="Platform fees" />
+                      <FormattedMessage id="Footer.fees" />
                     </NamedLink>
                   </li>
                 </ul>
