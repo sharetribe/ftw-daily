@@ -10,7 +10,6 @@ import {
   Page,
   SectionHero,
   SectionHowItWorks,
-  SectionLocations,
   LayoutSingleColumn,
   LayoutWrapperTopbar,
   LayoutWrapperMain,
@@ -64,7 +63,7 @@ export const LandingPageComponent = props => {
           <ul className={css.sections}>
             <li className={css.section}>
               <div className={css.sectionContentFirstChild}>
-                
+
               </div>
             </li>
             <li className={css.section}>

@@ -1,6 +1,4 @@
 import React from 'react';
-import config from '../../config';
-import { twitterPageURL } from '../../util/urlHelpers';
 import { StaticPage, TopbarContainer } from '../../containers';
 import {
   LayoutSingleColumn,
@@ -8,18 +6,12 @@ import {
   LayoutWrapperMain,
   LayoutWrapperFooter,
   Footer,
-  ExternalLink,
   NamedLink,
-  Button,
 } from '../../components';
 
 import css from './AboutPage.css';
-import image from './about-us-1056.jpg';
 
 const AboutPage = () => {
-  const { siteTwitterHandle, siteFacebookPage } = config;
-  const siteTwitterPage = twitterPageURL(siteTwitterHandle);
-
   // prettier-ignore
   return (
     <StaticPage
@@ -80,7 +72,7 @@ const AboutPage = () => {
 
               <p>Have any questions about Making Space Work? Head over to our FAQ or reach out
               to the HotPatch team at <a href="mailto:hello@hotpatch.com.">hello@hotpatch.com.</a></p>
-                
+
               <br></br>
 
               <h1>How it Works</h1>

@@ -5,9 +5,7 @@ import {
   LayoutWrapperTopbar,
   LayoutWrapperMain,
   LayoutWrapperFooter,
-  Footer,
-  NamedLink,
-  ExternalLink,
+  Footer
 } from '../../components';
 
 import css from './GuidelinesPage.css';

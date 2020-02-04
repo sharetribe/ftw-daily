@@ -11,11 +11,9 @@ import { parse, stringify } from '../../util/urlHelpers';
 import config from '../../config';
 import { ModalInMobile, Button } from '../../components';
 import { BookingDatesForm } from '../../forms';
-import { types as sdkTypes } from '../../util/sdkLoader';
 
 import css from './BookingPanel.css';
 
-const { Money } = sdkTypes;
 
 // This defines when ModalInMobile shows content as Modal
 const MODAL_BREAKPOINT = 1023;

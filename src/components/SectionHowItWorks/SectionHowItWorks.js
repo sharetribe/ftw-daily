@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 
-import { NamedLink } from '../../components';
-
 import css from './SectionHowItWorks.css';
 
 const SectionHowItWorks = props => {
