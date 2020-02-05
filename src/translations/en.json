@@ -185,14 +185,6 @@
   "EditListingAvailabilityPlanForm.timezonePickerTitle": "Choose a time zone",
   "EditListingAvailabilityPlanForm.title": "Edit default schedule for {listingTitle}",
   "EditListingAvailabilityPlanForm.updateFailed": "Failed to update. Please try again.",
-
-
-
-
-
-
-
-
   "EditListingDescriptionForm.categoryLabel": "Patch type",
   "EditListingDescriptionForm.categoryPlaceholder": "Choose the type of your Patch…",
   "EditListingDescriptionForm.categoryRequired": "You need to select a category for your Patch.",
@@ -206,6 +198,10 @@
   "EditListingDescriptionForm.titlePlaceholder": "What's the name of your Patch?",
   "EditListingDescriptionForm.titleRequired": "You need to add a name.",
   "EditListingDescriptionForm.updateFailed": "Failed to update listing. Please try again.",
+  "EditListingDescriptionForm.availabilityPlanRequired": "An availability unit is required.",
+  "EditListingDescriptionForm.availabilityPlanMessage": "Availability unit",
+  "EditListingDescriptionForm.availabilityPlanHeader": "Availability plan",
+  "EditListingDescriptionForm.availabilityPlanSubHeader": "Choose between day- or hour-based availability... Lorem ipsum",
   "EditListingDescriptionPanel.createListingTitle": "Add your Patch",
   "EditListingDescriptionPanel.title": "Edit details of {listingTitle}",
   "EditListingFeaturesForm.showListingFailed": "Fetching listing data failed",

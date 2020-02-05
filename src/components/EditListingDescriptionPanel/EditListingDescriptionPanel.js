@@ -27,7 +27,7 @@ const EditListingDescriptionPanel = props => {
 
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
-  const { description, title, publicData } = currentListing.attributes;
+  const { description, title, publicData, availabilityPlan } = currentListing.attributes;
 
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
@@ -44,15 +44,37 @@ const EditListingDescriptionPanel = props => {
       <h1 className={css.title}>{panelTitle}</h1>
       <EditListingDescriptionForm
         className={css.form}
-        initialValues={{ title, description, category: publicData.category }}
+        initialValues={{ title, description, category: publicData.category, availabilityPlan }}
         saveActionMsg={submitButtonText}
         onSubmit={values => {
-          const { title, description, category } = values;
+          const { title, description, category, availabilityPlan: { type } } = values;
           const updateValues = {
             title: title.trim(),
             description,
-            publicData: { category },
+            publicData: {
+              category
+            },
+            availabilityPlan: {
+              type,
+              entries: []
+            }
           };
+
+          if (type === 'availability-plan/time') {
+            updateValues.availabilityPlan.timezone = 'Etc/UTC';
+          }
+
+          if (type === 'availability-plan/day') {
+            updateValues.availabilityPlan.entries = [
+              { dayOfWeek: 'mon', seats: 1 },
+              { dayOfWeek: 'tue', seats: 1 },
+              { dayOfWeek: 'wed', seats: 1 },
+              { dayOfWeek: 'thu', seats: 1 },
+              { dayOfWeek: 'fri', seats: 1 },
+              { dayOfWeek: 'sat', seats: 1 },
+              { dayOfWeek: 'sun', seats: 1 },
+            ];
+          }
 
           onSubmit(updateValues);
         }}
