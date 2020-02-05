@@ -235,6 +235,7 @@ export class ListingPageComponent extends Component {
       geolocation = null,
       price = null,
       title = '',
+      availabilityPlan = null,
       publicData,
     } = currentListing.attributes;
 
@@ -250,7 +251,15 @@ export class ListingPageComponent extends Component {
     const bookingTitle = (
       <FormattedMessage id="ListingPage.bookingTitle" values={{ title: richTitle }} />
     );
-    const bookingSubTitle = intl.formatMessage({ id: 'ListingPage.bookingSubTitle' });
+
+    const planSubtitle = {
+      'availability-plan/day': 'days',
+      'availability-plan/time': 'hours'
+    };
+    const subtitle = availabilityPlan
+      ? planSubtitle[availabilityPlan.type]
+      : '';
+    const bookingSubTitle = intl.formatMessage({ id: 'ListingPage.bookingSubTitle'}, { availabilityPlan: subtitle });
 
     const topbar = <TopbarContainer />;
 

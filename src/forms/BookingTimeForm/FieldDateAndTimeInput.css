@@ -1,0 +1,162 @@
+@import '../../marketplace.css';
+
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.formRow {
+  /* parent aka root is flexbox, this container takes all available space */
+  flex-grow: 1;
+  flex-shrink: 0;
+
+  /* This container uses flexbox layout */
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  width: 100%;
+  margin-top: 30px;
+
+  @media (--viewportMedium) {
+    flex-wrap: nowrap;
+    padding: 0;
+    margin-top: 24px;
+  }
+}
+
+.field {
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  width: 100%;
+
+  &:nth-child(2n) {
+    margin-top: 12px;
+  }
+
+  @media (--viewportMedium) {
+    width: calc(50% - 12px);
+
+    &:nth-child(2n) {
+      margin-top: unset;
+    }
+  }
+}
+
+.fieldDisabled {
+  background: none;
+  color: --matterColorNegative;
+}
+
+.fieldDateInput {
+  flex-grow: 1;
+}
+
+.fieldSelect {
+  flex-grow: 1;
+  margin-left: 24px;
+  margin-right: 24px;
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 13px;
+    left: 24px;
+    background-image: url('data:image/svg+xml;utf8,<svg width="14" height="14" xmlns="http://www.w3.org/2000/svg"><g transform="translate(1 -3)" fill="none" fill-rule="evenodd"><circle stroke="%234A4A4A" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" cx="6" cy="10" r="6"/><g transform="translate(2 6)" fill="%234A4A4A"><rect x="3.5" width="1" height="5" rx=".5"/><rect transform="rotate(90 2.5 4.5)" x="2" y="2.5" width="1" height="4" rx=".5"/></g></g></svg>');
+    background-size: 12px 12px;
+    width: 12px;
+    height: 12px;
+  }
+
+  @media (--viewportMedium) {
+    margin-left: 0;
+    margin-right: 0;
+
+    &::after {
+      left: 0;
+      bottom: 17px;
+    }
+  }
+}
+
+.fieldSelectDisabled {
+  composes: fieldSelect;
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 13px;
+    left: 24px;
+    background-image: url('data:image/svg+xml;utf8,<svg width="14" height="14" xmlns="http://www.w3.org/2000/svg"><g transform="translate(1 -3)" fill="none" fill-rule="evenodd"><circle stroke="%23E6E6E6" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" cx="6" cy="10" r="6"/><g transform="translate(2 6)" fill="%23E6E6E6"><rect x="3.5" width="1" height="5" rx=".5"/><rect transform="rotate(90 2.5 4.5)" x="2" y="2.5" width="1" height="4" rx=".5"/></g></g></svg>');
+    background-size: 12px 12px;
+    width: 12px;
+    height: 12px;
+  }
+  @media (--viewportMedium) {
+    &::after {
+      left: 0;
+      bottom: 17px;
+    }
+  }
+}
+
+.select {
+  position: relative;
+  padding-left: 24px;
+  padding-right: 16px;
+  background-image: url('data:image/svg+xml;utf8,<svg width="10" height="6" xmlns="http://www.w3.org/2000/svg"><path d="M4.686 5.315a.445.445 0 00.628 0L8.87 1.759a.444.444 0 10-.629-.628L5 4.37 1.759 1.13a.444.444 0 10-.628.628l3.555 3.556z" stroke="%234A4A4A" fill="%234A4A4A" fill-rule="evenodd"/></svg>');
+  background-size: 10px 6px;
+  border-bottom-width: 2px;
+
+  @media (--viewportMedium) {
+    border-bottom-width: 3px;
+  }
+}
+
+.selectDisabled {
+  composes: select;
+  background-image: url('data:image/svg+xml;utf8,<svg width="10" height="6" xmlns="http://www.w3.org/2000/svg"><path d="M4.686 5.315a.445.445 0 00.628 0L8.87 1.759a.444.444 0 10-.629-.628L5 4.37 1.759 1.13a.444.444 0 10-.628.628l3.555 3.556z" fill="%23E6E6E6" stroke="%23E6E6E6" fill-rule="evenodd"/></svg>');
+}
+
+.rootNextMonthIcon,
+.rootPreviousMonthIcon {
+  stroke: var(--matterColorLight);
+  fill: var(--matterColorLight);
+}
+
+/**
+CSS for hiding the end date
+
+If you want to show the field for the end date e.g. for enabling longer bookings,
+you can remove the following code. 
+Remember to do required code changes also in FieldDateAndTimeInput.js!
+**/
+
+.field {
+  width: calc(50% - 5px);
+  @media (--viewportMedium) {
+    width: calc(50% - 12px);
+  }
+}
+
+.startDate {
+  width: 100%;
+}
+.endDateHidden {
+  display: none;
+}
+
+.lineBetween,
+.lineBetweenDisabled {
+  margin-top: 36px;
+}
+.lineBetweenDisabled {
+  color: var(--matterColorNegative);
+}
+
+/**
+CSS for hiding the end date above
+**/

@@ -775,6 +775,24 @@ export const formatDateToText = (intl, date) => {
   };
 };
 
+/**
+ * Calculate the quantity of hours between start and end dates.
+ * If the length of the timeslot is something else than hour (e.g. 30 minutes)
+ * you can change parameter 'hours' to 'minutes' and use that to calculate the
+ * quantity of timeslots.
+ *
+ * See moment documentation about diff:
+ * https://momentjs.com/docs/#/displaying/difference/
+ *
+ * @param {Date} startDate
+ * @param {Date} endDate
+ *
+ * @returns {int} quantity of hours between start and end
+ *
+ */
+export const calculateQuantityFromHours = (startDate, endDate) => {
+  return moment(endDate).diff(moment(startDate), 'hours', true);
+};
 
 // Checks if time-range contains a day (moment)
 // Returns true if the day is inside the range or if the time-range
