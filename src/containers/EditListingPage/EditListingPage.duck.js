@@ -174,6 +174,8 @@ const initialState = {
   images: {},
   imageOrder: [],
   removedImageIds: [],
+  fetchExceptionsInProgress: false,
+  availabilityExceptions: [],
   listingDraft: null,
   updatedTab: null,
   updateInProgress: false,

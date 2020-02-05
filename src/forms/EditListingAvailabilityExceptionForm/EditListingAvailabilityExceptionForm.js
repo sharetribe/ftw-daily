@@ -561,7 +561,6 @@ const EditListingAvailabilityExceptionForm = props => {
                     navNext={<Next currentMonth={currentMonth} timeZone={timeZone} />}
                     navPrev={<Prev currentMonth={currentMonth} timeZone={timeZone} />}
                     useMobileMargins
-                    showErrorMessage={false}
                     validate={bookingDateRequired('Required')}
                   />
                 </div>
@@ -610,10 +609,8 @@ const EditListingAvailabilityExceptionForm = props => {
                     navPrev={<Prev currentMonth={currentMonth} timeZone={timeZone} />}
                     isOutsideRange={isOutsideRange(exceptionStartDay, selectedTimeRange, timeZone)}
                     useMobileMargins
-                    showErrorMessage={false}
                     validate={bookingDateRequired('Required')}
                     disabled={endDateDisabled}
-                    showLabelAsDisabled={endDateDisabled}
                   />
                 </div>
                 <div className={css.field}>

@@ -96,7 +96,6 @@ export const isValidTimeZone = timeZone => {
  */
 export const getTimeZoneNames = relevantZonesRegExp => {
   const allTimeZones = moment.tz.names();
-  console.log(allTimeZones);
   return relevantZonesRegExp ? allTimeZones.filter(z => relevantZonesRegExp.test(z)) : allTimeZones;
 };
 

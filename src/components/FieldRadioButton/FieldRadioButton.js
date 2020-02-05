@@ -6,6 +6,7 @@ import { Field } from 'react-final-form';
 import css from './FieldRadioButton.css';
 
 const IconRadioButton = props => {
+  const { checkedClassName } = props;
   return (
     <div>
       <svg className={props.className} width="14" height="14" xmlns="http://www.w3.org/2000/svg">
@@ -20,7 +21,12 @@ const IconRadioButton = props => {
           fillRule="evenodd"
         />
 
-        <g className={css.checked} transform="translate(2 -12)" fill="none" fillRule="evenodd">
+        <g
+          className={classNames(css.checked, checkedClassName || css.checkedStyle)}
+          transform="translate(2 -12)"
+          fill="none"
+          fillRule="evenodd"
+        >
           <circle strokeWidth="2" cx="5" cy="19" r="6" />
           <circle fill="#FFF" fillRule="nonzero" cx="5" cy="19" r="3" />
         </g>
@@ -34,7 +40,16 @@ IconRadioButton.defaultProps = { className: null };
 IconRadioButton.propTypes = { className: string };
 
 const FieldRadioButtonComponent = props => {
-  const { rootClassName, className, svgClassName, id, label, showAsRequired, ...rest } = props;
+  const {
+    rootClassName,
+    className,
+    svgClassName,
+    checkedClassName,
+    id,
+    label,
+    showAsRequired,
+    ...rest
+  } = props;
 
   const classes = classNames(rootClassName || css.root, className);
   const radioButtonProps = {
@@ -50,7 +65,11 @@ const FieldRadioButtonComponent = props => {
       <Field {...radioButtonProps} />
       <label htmlFor={id} className={css.label}>
         <span className={css.radioButtonWrapper}>
-          <IconRadioButton className={svgClassName} showAsRequired={showAsRequired} />
+          <IconRadioButton
+            className={svgClassName}
+            checkedClassName={checkedClassName}
+            showAsRequired={showAsRequired}
+          />
         </span>
         <span className={css.text}>{label}</span>
       </label>
@@ -62,6 +81,7 @@ FieldRadioButtonComponent.defaultProps = {
   className: null,
   rootClassName: null,
   svgClassName: null,
+  checkedClassName: null,
   label: null,
 };
 
@@ -69,6 +89,7 @@ FieldRadioButtonComponent.propTypes = {
   className: string,
   rootClassName: string,
   svgClassName: string,
+  checkedClassName: string,
 
   // Id is needed to connect the label with input.
   id: string.isRequired,
