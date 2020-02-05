@@ -39,6 +39,14 @@ const EditListingFeaturesFormComponent = props => (
       const miscPlaceholder = intl.formatMessage({
         id: 'EditListingFeaturesForm.miscPlaceholder',
       });
+
+      const equipmentProvidedLabel = intl.formatMessage({
+        id: 'EditListingFeaturesForm.equipmentProvidedLabel',
+      });
+
+      const equipmentProvidedPlaceholder = intl.formatMessage({
+        id: 'EditListingFeaturesForm.equipmentProvidedPlaceholder',
+      });
       
       const classes = classNames(rootClassName || css.root, className);
       const submitReady = (updated && pristine) || ready;
@@ -71,12 +79,23 @@ const EditListingFeaturesFormComponent = props => (
           />
 
            <FieldTextInput
-            id="miscamenities"
-            name="miscamenities"
+            id="miscAmenities"
+            name="miscAmenities"
             className={css.misc}
             type="textarea"
             label={miscLabel}
             placeholder={miscPlaceholder}
+          />
+
+          <br/>
+
+          <FieldTextInput
+            id="equipmentProvided"
+            name="equipmentProvided"
+            className={css.misc}
+            type="textarea"
+            label={equipmentProvidedLabel}
+            placeholder={equipmentProvidedPlaceholder}
           />
 
 
