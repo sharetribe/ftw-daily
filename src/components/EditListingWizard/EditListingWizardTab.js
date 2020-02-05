@@ -243,31 +243,37 @@ const EditListingWizardTab = props => {
       const submitButtonTranslationKey = isNewListingFlow
         ? 'EditListingWizard.saveNewAvailability'
         : 'EditListingWizard.saveEditAvailability';
-      return (
-        // <EditListingAvailabilityPanelDay
-        //   {...panelProps(AVAILABILITY)}
-        //   availability={availability}
-        //   submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
-        //   onSubmit={values => {
-        //     onCompleteEditListingWizardTab(tab, values);
-        //   }}
-        // />
 
-        <EditListingAvailabilityPanelHour
+      const { availabilityPlan } = listing.attributes
+      if (availabilityPlan && availabilityPlan.type === 'availability-plan/time') {
+        return (
+          <EditListingAvailabilityPanelHour
+            {...panelProps(AVAILABILITY)}
+            fetchExceptionsInProgress={fetchExceptionsInProgress}
+            availabilityExceptions={availabilityExceptions}
+            submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+            onAddAvailabilityException={onAddAvailabilityException}
+            onDeleteAvailabilityException={onDeleteAvailabilityException}
+            onSubmit={values => {
+              // We want to return the Promise to the form,
+              // so that it doesn't close its modal if an error is thrown.
+              return onCompleteEditListingWizardTab(tab, values, true);
+            }}
+            onNextTab={() =>
+              redirectAfterDraftUpdate(listing.id.uuid, params, tab, marketplaceTabs, history)
+            }
+          />
+        );
+      }
+
+      return (
+        <EditListingAvailabilityPanelDay
           {...panelProps(AVAILABILITY)}
-          fetchExceptionsInProgress={fetchExceptionsInProgress}
-          availabilityExceptions={availabilityExceptions}
+          availability={availability}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
-          onAddAvailabilityException={onAddAvailabilityException}
-          onDeleteAvailabilityException={onDeleteAvailabilityException}
           onSubmit={values => {
-            // We want to return the Promise to the form,
-            // so that it doesn't close its modal if an error is thrown.
-            return onCompleteEditListingWizardTab(tab, values, true);
+            onCompleteEditListingWizardTab(tab, values);
           }}
-          onNextTab={() =>
-            redirectAfterDraftUpdate(listing.id.uuid, params, tab, marketplaceTabs, history)
-          }
         />
       );
     }
