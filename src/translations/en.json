@@ -165,7 +165,7 @@
   "EditListingAvailabilityPanel.edit": "Edit",
   "EditListingAvailabilityPanel.exceptionAvailable": "Available",
   "EditListingAvailabilityPanel.exceptionNotAvailable": "Not available",
-  "EditListingAvailabilityPanel.listingTitle": "your sessions",
+  "EditListingAvailabilityPanel.listingTitle": "your patch",
   "EditListingAvailabilityPanel.noExceptions": "No exceptions",
   "EditListingAvailabilityPanel.showListingFailed": "Fetching listing data failed",
   "EditListingAvailabilityPanel.title": "Edit the availability of {listingTitle}",

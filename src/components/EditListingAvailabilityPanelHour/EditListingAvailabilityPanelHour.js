@@ -427,7 +427,7 @@ const EditListingAvailabilityPanelHour = props => {
             <EditListingAvailabilityExceptionForm
               formId="EditListingAvailabilityExceptionForm"
               onSubmit={saveException}
-              timeZone={availabilityPlan.timezone}
+              timeZone={availabilityPlan.timezone || 'UTC'}
               availabilityExceptions={sortedAvailabilityExceptions}
               updateInProgress={updateInProgress}
               fetchErrors={errors}
