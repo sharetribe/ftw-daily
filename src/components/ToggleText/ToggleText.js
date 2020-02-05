@@ -42,5 +42,4 @@ export default class ToggleText extends Component {
             </div>
         )
     }
-
 }
