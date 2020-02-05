@@ -3,11 +3,11 @@ import { bool, func, shape, string } from 'prop-types';
 import classNames from 'classnames';
 import { Form as FinalForm } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
-import { FormattedMessage } from '../../util/reactIntl';
+import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
 
 import { propTypes } from '../../util/types';
 import config from '../../config';
-import { Button, FieldCheckboxGroup, Form } from '../../components';
+import { Button, FieldCheckboxGroup, Form, FieldTextInput } from '../../components';
 
 import css from './EditListingFeaturesForm.css';
 
@@ -19,6 +19,7 @@ const EditListingFeaturesFormComponent = props => (
       const {
         disabled,
         ready,
+        intl,
         rootClassName,
         className,
         name,
@@ -30,6 +31,15 @@ const EditListingFeaturesFormComponent = props => (
         fetchErrors,
       } = formRenderProps;
 
+
+      const miscLabel = intl.formatMessage({
+        id: 'EditListingFeaturesForm.miscLabel',
+      });
+
+      const miscPlaceholder = intl.formatMessage({
+        id: 'EditListingFeaturesForm.miscPlaceholder',
+      });
+      
       const classes = classNames(rootClassName || css.root, className);
       const submitReady = (updated && pristine) || ready;
       const submitInProgress = updateInProgress;
@@ -60,6 +70,16 @@ const EditListingFeaturesFormComponent = props => (
             options={config.custom.amenities}
           />
 
+           <FieldTextInput
+            id="miscamenities"
+            name="miscamenities"
+            className={css.misc}
+            type="textarea"
+            label={miscLabel}
+            placeholder={miscPlaceholder}
+          />
+
+
           <Button
             className={css.submitButton}
             type="submit"
@@ -88,6 +108,7 @@ EditListingFeaturesFormComponent.propTypes = {
   onSubmit: func.isRequired,
   saveActionMsg: string.isRequired,
   disabled: bool.isRequired,
+  intl: intlShape.isRequired,
   ready: bool.isRequired,
   updated: bool.isRequired,
   updateInProgress: bool.isRequired,
@@ -99,4 +120,4 @@ EditListingFeaturesFormComponent.propTypes = {
 
 const EditListingFeaturesForm = EditListingFeaturesFormComponent;
 
-export default EditListingFeaturesForm;
+export default injectIntl(EditListingFeaturesForm);
