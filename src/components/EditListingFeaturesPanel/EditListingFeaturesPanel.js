@@ -54,9 +54,7 @@ const EditListingFeaturesPanel = props => {
         name={FEATURES_NAME}
         initialValues={initialValues}
         onSubmit={values => {
-          const { amenities = [] } = values;
-          const { miscAmenities = '' } = values;
-          const { equipmentProvided = '' } = values;
+          const { amenities = [], miscAmenities = '', equipmentProvided = '' } = values;
           const updatedValues = {
             publicData: { 
               amenities, 
