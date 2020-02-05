@@ -5,22 +5,22 @@ import classNames from 'classnames';
 
 import css from './SectionRulesMaybe.css';
 
-const SectionMiscMaybe = props => {
+const SectionEquipmentMaybe = props => {
   const { className, rootClassName, publicData } = props;
   const classes = classNames(rootClassName || css.root, className);
   return publicData && publicData.rules ? (
     <div className={classes}>
       <h2 className={css.title}>
-        <FormattedMessage id="ListingPage.miscTitle" />
+        <FormattedMessage id="ListingPage.equipmentTitle" />
       </h2>
-      <p className={css.rules}>{publicData.miscAmenities}</p>
+      <p className={css.rules}>{publicData.equipmentProvided}</p>
     </div>
   ) : null;
 };
 
-SectionMiscMaybe.defaultProps = { className: null, rootClassName: null };
+SectionEquipmentMaybe.defaultProps = { className: null, rootClassName: null };
 
-SectionMiscMaybe.propTypes = {
+SectionEquipmentMaybe.propTypes = {
   className: string,
   rootClassName: string,
   publicData: shape({
@@ -28,4 +28,4 @@ SectionMiscMaybe.propTypes = {
   }),
 };
 
-export default SectionMiscMaybe;
+export default SectionEquipmentMaybe;

@@ -42,8 +42,9 @@ const EditListingFeaturesPanel = props => {
   );
 
   const amenities = publicData && publicData.amenities;
-  const miscamenities = publicData && publicData.miscamenities;
-  const initialValues = { amenities, miscamenities };
+  const miscAmenities = publicData && publicData.miscAmenities;
+  const equipmentProvided = publicData && publicData.equipmentProvided;
+  const initialValues = { amenities, miscAmenities, equipmentProvided };
 
   return (
     <div className={classes}>
@@ -54,11 +55,13 @@ const EditListingFeaturesPanel = props => {
         initialValues={initialValues}
         onSubmit={values => {
           const { amenities = [] } = values;
-          const { miscamenities = '' } = values;
+          const { miscAmenities = '' } = values;
+          const { equipmentProvided = '' } = values;
           const updatedValues = {
             publicData: { 
               amenities, 
-              miscamenities },
+              miscAmenities,
+              equipmentProvided },
           };
           onSubmit(updatedValues);
         }}
