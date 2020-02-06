@@ -14,7 +14,7 @@ import {
   propTypes,
 } from '../../util/types';
 import { formatMoney } from '../../util/currency';
-import { ensureOwnListing } from '../../util/data';
+import { ensureOwnListing, getListingCategory } from '../../util/data';
 import {
   LISTING_PAGE_PENDING_APPROVAL_VARIANT,
   LISTING_PAGE_DRAFT_VARIANT,
@@ -156,7 +156,7 @@ export const ManageListingCardComponent = props => {
     : LISTING_PAGE_PARAM_TYPE_EDIT;
 
   const unitType = config.bookingUnitType;
-  const isNightly = unitType === LINE_ITEM_NIGHT;
+  const isNightly = unitType === LINE_ITEM_NIGHT && getListingCategory(listing) !== "babysitter";
   const isDaily = unitType === LINE_ITEM_DAY;
 
   const unitTranslationKey = isNightly

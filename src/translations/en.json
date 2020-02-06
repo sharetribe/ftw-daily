@@ -374,7 +374,7 @@
   "ManageListingCard.pendingApproval": "{listingTitle} is pending admin approval and can't be booked.",
   "ManageListingCard.perDay": "per day",
   "ManageListingCard.perNight": "per night",
-  "ManageListingCard.perUnit": "per unit",
+  "ManageListingCard.perUnit": "per hour",
   "ManageListingCard.priceNotSet": "Price not set",
   "ManageListingCard.unsupportedPrice": "({currency})",
   "ManageListingCard.unsupportedPriceTitle": "Unsupported currency ({currency})",
