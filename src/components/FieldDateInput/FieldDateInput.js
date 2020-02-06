@@ -5,11 +5,10 @@
  * you should convert value.date to start date and end date before submitting it to API
  */
 import React, { Component } from 'react';
-import { bool, object, string, arrayOf } from 'prop-types';
+import { bool, func, object, string } from 'prop-types';
 import { Field } from 'react-final-form';
 import classNames from 'classnames';
 import { ValidationError } from '../../components';
-import { propTypes } from '../../util/types';
 
 import DateInput from './DateInput';
 import css from './FieldDateInput.css';
@@ -17,15 +16,33 @@ import css from './FieldDateInput.css';
 const MAX_MOBILE_SCREEN_WIDTH = 768;
 
 class FieldDateInputComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(value) {
+    // If "onChange" callback is passed through the props,
+    // it can notify the parent when the content of the input has changed.
+    if (this.props.onChange) {
+      this.props.onChange(value);
+    }
+    // Notify Final Form that the input has changed.
+    this.props.input.onChange(value);
+  }
+
   render() {
     const {
       className,
       rootClassName,
       id,
       label,
+      showLabelAsDisabled,
       input,
       meta,
       useMobileMargins,
+      showErrorMessage,
+      onChange,
       ...rest
     } = this.props;
 
@@ -47,10 +64,11 @@ class FieldDateInputComponent extends Component {
       [css.pickerError]: hasError,
     });
 
-    const { onBlur, onFocus, type, ...restOfInput } = input;
+    const { onBlur, onFocus, onChange: finalFormOnChange, type, ...restOfInput } = input;
     const inputProps = {
       onBlur: input.onBlur,
       onFocus: input.onFocus,
+      onChange: this.handleChange,
       useMobileMargins,
       id,
       readOnly: typeof window !== 'undefined' && window.innerWidth < MAX_MOBILE_SCREEN_WIDTH,
@@ -63,12 +81,18 @@ class FieldDateInputComponent extends Component {
     return (
       <div className={classes}>
         {label ? (
-          <label className={classNames({ [css.mobileMargins]: useMobileMargins })} htmlFor={id}>
+          <label
+            className={classNames({
+              [css.mobileMargins]: useMobileMargins,
+              [css.labelDisabled]: showLabelAsDisabled,
+            })}
+            htmlFor={id}
+          >
             {label}
           </label>
         ) : null}
         <DateInput className={inputClasses} {...inputProps} />
-        <ValidationError className={errorClasses} fieldMeta={meta} />
+        {showErrorMessage ? <ValidationError className={errorClasses} fieldMeta={meta} /> : null}
       </div>
     );
   }
@@ -78,22 +102,26 @@ FieldDateInputComponent.defaultProps = {
   className: null,
   rootClassName: null,
   useMobileMargins: false,
+  showErrorMessage: true,
   id: null,
   label: null,
+  showLabelAsDisabled: false,
   placeholderText: null,
-  timeSlots: null,
+  onChange: null,
 };
 
 FieldDateInputComponent.propTypes = {
   className: string,
   rootClassName: string,
   useMobileMargins: bool,
+  showErrorMessage: bool,
   id: string,
   label: string,
+  showLabelAsDisabled: bool,
   placeholderText: string,
-  timeSlots: arrayOf(propTypes.timeSlot),
   input: object.isRequired,
   meta: object.isRequired,
+  onChange: func,
 };
 
 const FieldDateInput = props => {

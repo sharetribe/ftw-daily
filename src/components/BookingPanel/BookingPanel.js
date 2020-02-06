@@ -2,7 +2,7 @@ import React from 'react';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
-import { arrayOf, bool, func, node, oneOfType, shape, string } from 'prop-types';
+import { arrayOf, bool, func, object, node, oneOfType, shape, string } from 'prop-types';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
 import { propTypes, LISTING_STATE_CLOSED, LINE_ITEM_NIGHT, LINE_ITEM_DAY } from '../../util/types';
@@ -154,7 +154,7 @@ const BookingPanel = props => {
             price={price}
             isOwnListing={isOwnListing}
             listingId={listing.id}
-            monthlyTimeSlots={monthlyTimeSlots}
+            monthlyTimeSlots={timeSlots}
             onFetchTimeSlots={onFetchTimeSlots}
             startDatePlaceholder={intl.formatDate(TODAY, dateFormattingOptions)}
             endDatePlaceholder={intl.formatDate(TODAY, dateFormattingOptions)}
@@ -213,6 +213,11 @@ BookingPanel.propTypes = {
   subTitle: oneOfType([node, string]),
   authorDisplayName: oneOfType([node, string]).isRequired,
   onManageDisableScrolling: func.isRequired,
+
+  onFetchTimeSlots: func.isRequired,
+  monthlyTimeSlots: object,
+
+
   timeSlots: arrayOf(propTypes.timeSlot),
   fetchTimeSlotsError: propTypes.error,
 

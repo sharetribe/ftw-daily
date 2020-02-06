@@ -319,6 +319,8 @@
   "EnquiryForm.submitButtonText": "Send enquiry",
   "FieldBoolean.no": "No",
   "FieldBoolean.yes": "Yes",
+  "FieldDateTimeInput.startTime": "Start time",
+  "FieldDateTimeInput.endTime": "End time",
   "FieldDateInput.clearDate": "Clear Date",
   "FieldDateInput.closeDatePicker": "Close",
   "FieldDateInput.invalidDate": "The start date is not valid",

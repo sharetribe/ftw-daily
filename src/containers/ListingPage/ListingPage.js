@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
-import { array, arrayOf, bool, func, shape, string, oneOf } from 'prop-types';
+import { array, arrayOf, bool, object, func, shape, string, oneOf } from 'prop-types';
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -41,7 +41,7 @@ import {
 } from '../../components';
 import { TopbarContainer, NotFoundPage } from '../../containers';
 
-import { sendEnquiry, loadData, setInitialValues } from './ListingPage.duck';
+import { sendEnquiry, loadData, setInitialValues, fetchTimeSlots } from './ListingPage.duck';
 import SectionImages from './SectionImages';
 import SectionAvatar from './SectionAvatar';
 import SectionHeading from './SectionHeading';
@@ -180,6 +180,7 @@ export class ListingPageComponent extends Component {
       getOwnListing,
       intl,
       onManageDisableScrolling,
+      onFetchTimeSlots,
       params: rawParams,
       location,
       scrollingDisabled,
@@ -189,6 +190,7 @@ export class ListingPageComponent extends Component {
       sendEnquiryInProgress,
       sendEnquiryError,
       timeSlots,
+      monthlyTimeSlots,
       fetchTimeSlotsError,
       categoriesConfig,
       amenitiesConfig,
@@ -474,6 +476,9 @@ export class ListingPageComponent extends Component {
                   onManageDisableScrolling={onManageDisableScrolling}
                   timeSlots={timeSlots}
                   fetchTimeSlotsError={fetchTimeSlotsError}
+
+                  monthlyTimeSlots={monthlyTimeSlots}
+                  onFetchTimeSlots={onFetchTimeSlots}
                 />
               </div>
             </div>
@@ -495,6 +500,7 @@ ListingPageComponent.defaultProps = {
   reviews: [],
   fetchReviewsError: null,
   timeSlots: null,
+  monthlyTimeSlots: null,
   fetchTimeSlotsError: null,
   sendEnquiryError: null,
   categoriesConfig: config.custom.categories,
@@ -532,6 +538,8 @@ ListingPageComponent.propTypes = {
   reviews: arrayOf(propTypes.review),
   fetchReviewsError: propTypes.error,
   timeSlots: arrayOf(propTypes.timeSlot),
+  monthlyTimeSlots: object,
+
   fetchTimeSlotsError: propTypes.error,
   sendEnquiryInProgress: bool.isRequired,
   sendEnquiryError: propTypes.error,
@@ -591,6 +599,8 @@ const mapDispatchToProps = dispatch => ({
   callSetInitialValues: (setInitialValues, values) => dispatch(setInitialValues(values)),
   onSendEnquiry: (listingId, message) => dispatch(sendEnquiry(listingId, message)),
   onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
+  onFetchTimeSlots: (listingId, start, end, timeZone) =>
+    dispatch(fetchTimeSlots(listingId, start, end, timeZone)),
 });
 
 // Note: it is important that the withRouter HOC is **outside** the
