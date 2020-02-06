@@ -119,7 +119,6 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, qua
 };
 
 const EstimatedBreakdownMaybe = props => {
-  console.log(props.bookingData);
   const { unitType, unitPrice, startDate, endDate, quantity } = props.bookingData;
   const isUnits = unitType === LINE_ITEM_UNITS;
   const quantityIfUsingUnits = !isUnits || Number.isInteger(quantity);
@@ -134,6 +133,7 @@ const EstimatedBreakdownMaybe = props => {
 
   return (
     <BookingBreakdown
+      hourly
       className={css.receipt}
       userRole="customer"
       unitType={unitType}

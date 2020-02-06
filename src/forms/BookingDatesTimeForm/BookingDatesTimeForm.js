@@ -5,15 +5,14 @@ import { Form as FinalForm } from 'react-final-form';
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 import classNames from 'classnames';
 import moment from 'moment';
-import { required, bookingDatesRequired, composeValidators } from '../../util/validators';
-import { START_DATE, END_DATE } from '../../util/dates';
+import { required, composeValidators } from '../../util/validators';
+import { START_DATE } from '../../util/dates';
 import { propTypes } from '../../util/types';
 import config from '../../config';
 import { Form, PrimaryButton, FieldDateInput } from '../../components';
 import EstimatedBreakdownMaybe from './EstimatedBreakdownMaybe';
 
 import css from './BookingDatesForm.css';
-import FieldDatePickerInput from '../../components/FieldDatePickerInput/FieldDatePickerInput';
 
 const identity = v => v;
 
@@ -36,16 +35,16 @@ export class BookingDatesFormComponent extends Component {
   // focus on that input, otherwise continue with the
   // default handleSubmit function.
   handleFormSubmit(e) {
-    const { date } = e.bookingDates || {};
+    const { date } = e.date || {};
     if (!date) {
-      e.preventDefault();
+      // e.preventDefault();
       this.setState({ focusedInput: START_DATE });
     }
     this.props.onSubmit({
       ...e,
       bookingDates: {
-        startDate: e.bookingDates.date,
-        endDate: moment(e.bookingDates.date).add(1, "days").toDate(),
+        startDate: e.date.date,
+        endDate: moment(e.date.date).add(1, "days").toDate(),
       }
     })
   }
@@ -135,7 +134,6 @@ export class BookingDatesFormComponent extends Component {
                 <FormattedMessage id="BookingDatesForm.priceBreakdownTitle" />
               </h3>
               <EstimatedBreakdownMaybe 
-                hourly
                 bookingData={bookingData} 
               />
             </div>
@@ -179,11 +177,8 @@ export class BookingDatesFormComponent extends Component {
                 format={identity}
                 timeSlots={timeSlots}
                 useMobileMargins
-                // TODO: fix validations
                 validate={composeValidators(
-                  required(requiredMessage),
-                  // bookingDatesRequired(),
-                  // bookingDatesRequired(startDateErrorMessage, endDateErrorMessage)
+                  required(requiredMessage)
                 )}
               />
               {bookingInfo}

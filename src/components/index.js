@@ -91,7 +91,6 @@ export { default as FieldCurrencyInput } from './FieldCurrencyInput/FieldCurrenc
 export { default as FieldDateInput } from './FieldDateInput/FieldDateInput';
 export { default as FieldDateRangeController } from './FieldDateRangeController/FieldDateRangeController';
 export { default as FieldDateRangeInput } from './FieldDateRangeInput/FieldDateRangeInput';
-export { default as FieldDatePickerInput } from './FieldDatePickerInput/FieldDatePickerInput';
 export { default as FieldRadioButton } from './FieldRadioButton/FieldRadioButton';
 export { default as FieldReviewRating } from './FieldReviewRating/FieldReviewRating';
 export { default as FieldSelect } from './FieldSelect/FieldSelect';
