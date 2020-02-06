@@ -29,7 +29,7 @@ const EditListingDescriptionPanel = props => {
   const currentListing = ensureOwnListing(listing);
   const { description, title, publicData, availabilityPlan } = currentListing.attributes;
 
-  const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
+  const isPublished = !!currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
     <FormattedMessage
       id="EditListingDescriptionPanel.title"
@@ -49,7 +49,7 @@ const EditListingDescriptionPanel = props => {
         saveActionMsg={submitButtonText}
         onSubmit={values => {
           const { title, description, category, availabilityPlan: { type } } = values;
-          const updateValues = {
+          let updateValues = {
             title: title.trim(),
             description,
             publicData: {
@@ -57,15 +57,18 @@ const EditListingDescriptionPanel = props => {
             },
             availabilityPlan: {
               type,
-              entries: []
+              entries: [],
+              ...availabilityPlan
             }
           };
 
           if (type === 'availability-plan/time') {
+            updateValues.publicData.unitType = 'line-item/units'
             updateValues.availabilityPlan.timezone = 'Etc/UTC';
           }
 
           if (type === 'availability-plan/day') {
+            updateValues.publicData.unitType = 'line-item/day'
             updateValues.availabilityPlan.entries = [
               { dayOfWeek: 'mon', seats: 1 },
               { dayOfWeek: 'tue', seats: 1 },

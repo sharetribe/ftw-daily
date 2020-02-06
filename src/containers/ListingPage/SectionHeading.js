@@ -1,8 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from '../../util/reactIntl';
 import { InlineTextButton } from '../../components';
-import { LINE_ITEM_NIGHT, LINE_ITEM_DAY } from '../../util/types';
-import config from '../../config';
+import { LINE_ITEM_UNITS, LINE_ITEM_DAY } from '../../util/types';
 
 import css from './ListingPage.css';
 
@@ -15,14 +14,14 @@ const SectionHeading = props => {
     hostLink,
     showContactUser,
     onContactUser,
+    unitType
   } = props;
 
-  const unitType = config.bookingUnitType;
-  const isNightly = unitType === LINE_ITEM_NIGHT;
+  const isHourly = unitType === LINE_ITEM_UNITS;
   const isDaily = unitType === LINE_ITEM_DAY;
 
-  const unitTranslationKey = isNightly
-    ? 'ListingPage.perNight'
+  const unitTranslationKey = isHourly
+    ? 'ListingPage.perHour'
     : isDaily
     ? 'ListingPage.perDay'
     : 'ListingPage.perUnit';

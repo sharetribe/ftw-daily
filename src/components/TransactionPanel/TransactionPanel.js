@@ -13,7 +13,7 @@ import {
   txIsRequested,
   txHasBeenDelivered,
 } from '../../util/transaction';
-import { LINE_ITEM_NIGHT, LINE_ITEM_DAY, propTypes } from '../../util/types';
+import { LINE_ITEM_UNITS, LINE_ITEM_DAY, propTypes } from '../../util/types';
 import {
   ensureListing,
   ensureTransaction,
@@ -277,23 +277,22 @@ export class TransactionPanelComponent extends Component {
       otherUserDisplayNameString,
     } = displayNames(currentUser, currentProvider, currentCustomer, intl);
 
-    const { publicData, geolocation } = currentListing.attributes;
+    const { publicData, geolocation, price } = currentListing.attributes;
     const location = publicData && publicData.location ? publicData.location : {};
     const listingTitle = currentListing.attributes.deleted
       ? deletedListingTitle
       : currentListing.attributes.title;
 
-    const unitType = config.bookingUnitType;
-    const isNightly = unitType === LINE_ITEM_NIGHT;
+    const unitType = (publicData && publicData.unitType) || config.fallbackUnitType;
+    const isHourly = unitType === LINE_ITEM_UNITS;
     const isDaily = unitType === LINE_ITEM_DAY;
 
-    const unitTranslationKey = isNightly
-      ? 'TransactionPanel.perNight'
+    const unitTranslationKey = isHourly
+      ? 'TransactionPanel.perHour'
       : isDaily
       ? 'TransactionPanel.perDay'
       : 'TransactionPanel.perUnit';
 
-    const price = currentListing.attributes.price;
     const bookingSubTitle = price
       ? `${formatMoney(intl, price)} ${intl.formatMessage({ id: unitTranslationKey })}`
       : '';
@@ -369,7 +368,11 @@ export class TransactionPanelComponent extends Component {
                 geolocation={geolocation}
                 showAddress={stateData.showAddress}
               />
-              <BreakdownMaybe transaction={currentTransaction} transactionRole={transactionRole} />
+              <BreakdownMaybe
+                transaction={currentTransaction}
+                transactionRole={transactionRole}
+                unitType={unitType}
+              />
             </div>
 
             {savePaymentMethodFailed ? (
@@ -450,6 +453,7 @@ export class TransactionPanelComponent extends Component {
                 className={css.breakdownContainer}
                 transaction={currentTransaction}
                 transactionRole={transactionRole}
+                unitType={unitType}
               />
 
               {stateData.showSaleButtons ? (

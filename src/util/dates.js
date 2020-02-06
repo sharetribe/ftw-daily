@@ -450,6 +450,14 @@ export const nightsBetween = (startDate, endDate) => {
   return nights;
 };
 
+export const hoursBetween = (startDate, endDate) => {
+  const hours = moment(endDate).diff(startDate, 'hours');
+  if (hours < 0) {
+    throw new Error('End hour cannot be before start hour');
+  }
+  return hours;
+};
+
 /**
  * Calculate the number of days between the given dates
  *

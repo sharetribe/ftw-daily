@@ -173,7 +173,6 @@ export class ListingPageComponent extends Component {
 
   render() {
     const {
-      unitType,
       isAuthenticated,
       currentUser,
       getListing,
@@ -372,6 +371,8 @@ export class ListingPageComponent extends Component {
       { title, price: formattedPrice, siteTitle }
     );
 
+    const unitType = (publicData && publicData.unitType) || config.fallbackUnitType;
+
     const hostLink = (
       <NamedLink
         className={css.authorNameLink}
@@ -434,6 +435,7 @@ export class ListingPageComponent extends Component {
                     priceTitle={priceTitle}
                     formattedPrice={formattedPrice}
                     richTitle={richTitle}
+                    unitType={unitType}
                     category={category}
                     hostLink={hostLink}
                     showContactUser={showContactUser}
@@ -493,7 +495,6 @@ export class ListingPageComponent extends Component {
 }
 
 ListingPageComponent.defaultProps = {
-  unitType: config.bookingUnitType,
   currentUser: null,
   enquiryModalOpenForListingId: null,
   showListingError: null,
@@ -516,7 +517,6 @@ ListingPageComponent.propTypes = {
     search: string,
   }).isRequired,
 
-  unitType: propTypes.bookingUnitType,
   // from injectIntl
   intl: intlShape.isRequired,
 

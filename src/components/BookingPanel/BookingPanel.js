@@ -5,7 +5,7 @@ import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
 import { arrayOf, bool, func, object, node, oneOfType, shape, string } from 'prop-types';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
-import { propTypes, LISTING_STATE_CLOSED, LINE_ITEM_NIGHT, LINE_ITEM_DAY } from '../../util/types';
+import { propTypes, LISTING_STATE_CLOSED, LINE_ITEM_UNITS, LINE_ITEM_DAY } from '../../util/types';
 import { formatMoney } from '../../util/currency';
 import { parse, stringify } from '../../util/urlHelpers';
 import config from '../../config';
@@ -58,7 +58,6 @@ const BookingPanel = props => {
     titleClassName,
     listing,
     isOwnListing,
-    unitType,
     onSubmit,
     title,
     subTitle,
@@ -73,16 +72,20 @@ const BookingPanel = props => {
     intl,
   } = props;
 
-  const price = listing.attributes.price;
-  const availabilityPlan = listing.attributes.availabilityPlan;
+  const {
+    price,
+    availabilityPlan,
+    state,
+    publicData
+  } = listing.attributes;
+
   const timeZone = availabilityPlan && availabilityPlan.timezone;
-  const hasListingState = !!listing.attributes.state;
-  const isClosed = hasListingState && listing.attributes.state === LISTING_STATE_CLOSED;
+  const isClosed = state && state === LISTING_STATE_CLOSED;
   const showClosedListingHelpText = listing.id && isClosed;
   const { formattedPrice, priceTitle } = priceData(price, intl);
   const isBook = !!parse(location.search).book;
 
-  const showBookingForm = hasListingState && !isClosed;
+  const showBookingForm = !!state && !isClosed;
   const showBookingDatesForm = showBookingForm && availabilityPlan.type === 'availability-plan/day';
   const showBookingTimeForm = showBookingForm && availabilityPlan.type === 'availability-plan/time';
 
@@ -93,11 +96,12 @@ const BookingPanel = props => {
     ? intl.formatMessage({ id: 'BookingPanel.subTitleClosedListing' })
     : null;
 
-  const isNightly = unitType === LINE_ITEM_NIGHT;
+  const unitType = (publicData && publicData.unitType) || config.fallbackUnitType;
+  const isHourly = unitType === LINE_ITEM_UNITS;
   const isDaily = unitType === LINE_ITEM_DAY;
 
-  const unitTranslationKey = isNightly
-    ? 'BookingPanel.perNight'
+  const unitTranslationKey = isHourly
+    ? 'BookingPanel.perHour'
     : isDaily
     ? 'BookingPanel.perDay'
     : 'BookingPanel.perUnit';
@@ -196,7 +200,6 @@ BookingPanel.defaultProps = {
   titleClassName: null,
   isOwnListing: false,
   subTitle: null,
-  unitType: config.bookingUnitType,
   timeSlots: null,
   fetchTimeSlotsError: null,
 };
@@ -207,7 +210,6 @@ BookingPanel.propTypes = {
   titleClassName: string,
   listing: oneOfType([propTypes.listing, propTypes.ownListing]),
   isOwnListing: bool,
-  unitType: propTypes.bookingUnitType,
   onSubmit: func.isRequired,
   title: oneOfType([node, string]).isRequired,
   subTitle: oneOfType([node, string]),

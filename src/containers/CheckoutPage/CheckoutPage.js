@@ -10,7 +10,7 @@ import routeConfiguration from '../../routeConfiguration';
 import { pathByRouteName, findRouteByRouteName } from '../../util/routes';
 import {
   propTypes,
-  LINE_ITEM_NIGHT,
+  LINE_ITEM_UNITS,
   LINE_ITEM_DAY,
   LINE_ITEM_DISCOUNT,
   DATE_TYPE_DATE
@@ -27,7 +27,7 @@ import {
 import {
   dateFromLocalToAPI,
   minutesBetween ,
-  nightsBetween,
+  hoursBetween,
   daysBetween
 } from '../../util/dates';
 import { createSlug } from '../../util/urlHelpers';
@@ -512,18 +512,18 @@ export class CheckoutPageComponent extends Component {
   customPricingParams(params) {
     const { bookingStart, bookingEnd, listing, ...rest } = params;
     const { amount: priceAmount, currency } = listing.attributes.price;
-    const { discount } = listing.attributes.publicData || {};
+    const { discount, unitType: uT } = listing.attributes.publicData || {};
     const {
       amount: discountPercentage,
       breakpoint: discountBreakpoint,
       unitType: discountUnitType
     } = discount || {};
 
-    const unitType = config.bookingUnitType; // Change this to dynamic
-    const isNightly = unitType === LINE_ITEM_NIGHT;
+    const unitType = uT || config.fallbackUnitType;
+    const isHourly = unitType === LINE_ITEM_UNITS;
 
-    const quantity = isNightly
-      ? nightsBetween(bookingStart, bookingEnd)
+    const quantity = isHourly
+      ? hoursBetween(bookingStart, bookingEnd)
       : daysBetween(bookingStart, bookingEnd);
 
     let tx = {
@@ -649,6 +649,8 @@ export class CheckoutPageComponent extends Component {
       });
       return <NamedRedirect name="ListingPage" params={params} />;
     }
+    const publicData = currentListing.attributes.publicData || {};
+    const unitType = publicData.unitType || config.fallbackUnitType;
 
     // Show breakdown only when speculated transaction and booking are loaded
     // (i.e. have an id)
@@ -659,7 +661,7 @@ export class CheckoutPageComponent extends Component {
         <BookingBreakdown
           className={css.bookingBreakdown}
           userRole="customer"
-          unitType={config.bookingUnitType}
+          unitType={unitType}
           transaction={tx}
           booking={txBooking}
           dateType={DATE_TYPE_DATE}
@@ -785,12 +787,11 @@ export class CheckoutPageComponent extends Component {
       );
     }
 
-    const unitType = config.bookingUnitType;
-    const isNightly = unitType === LINE_ITEM_NIGHT;
+    const isHourly = unitType === LINE_ITEM_UNITS;
     const isDaily = unitType === LINE_ITEM_DAY;
 
-    const unitTranslationKey = isNightly
-      ? 'CheckoutPage.perNight'
+    const unitTranslationKey = isHourly
+      ? 'CheckoutPage.perHour'
       : isDaily
       ? 'CheckoutPage.perDay'
       : 'CheckoutPage.perUnit';
