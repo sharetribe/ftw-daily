@@ -30,6 +30,7 @@ const EditListingDescriptionFormComponent = props => (
         updated,
         updateInProgress,
         fetchErrors,
+        isPublished
       } = formRenderProps;
 
       const titleMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.title' });
@@ -126,6 +127,7 @@ const EditListingDescriptionFormComponent = props => (
           <FieldSelect
             id="availabilityPlan.type"
             name="availabilityPlan.type"
+            disabled={isPublished}
             label={intl.formatMessage({ id: 'EditListingDescriptionForm.availabilityPlanMessage' })}
             validate={composeValidators(required(availabilityPlanRequiredMessage))}
           >
@@ -160,6 +162,7 @@ EditListingDescriptionFormComponent.propTypes = {
   ready: bool.isRequired,
   updated: bool.isRequired,
   updateInProgress: bool.isRequired,
+  isPublished: bool.isRequired,
   fetchErrors: shape({
     createListingDraftError: propTypes.error,
     showListingsError: propTypes.error,

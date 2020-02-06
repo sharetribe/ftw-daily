@@ -389,7 +389,7 @@ class EditListingWizard extends Component {
     }
 
     return (
-      <div className={classes}>
+      <div className={classes} ref={setPortalRootAfterInitialRender}>
         <Tabs
           rootClassName={css.tabsContainer}
           navRootClassName={css.nav}
