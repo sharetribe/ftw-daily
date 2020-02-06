@@ -99,8 +99,6 @@ const EditListingWizardTab = props => {
     intl,
     fetchExceptionsInProgress,
     availabilityExceptions,
-    onAddAvailabilityException,
-    onDeleteAvailabilityException,
   } = props;
 
   const { type } = params;
@@ -252,8 +250,8 @@ const EditListingWizardTab = props => {
             fetchExceptionsInProgress={fetchExceptionsInProgress}
             availabilityExceptions={availabilityExceptions}
             submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
-            onAddAvailabilityException={onAddAvailabilityException}
-            onDeleteAvailabilityException={onDeleteAvailabilityException}
+            onCreateAvailabilityException={availability.onCreateAvailabilityException}
+            onDeleteAvailabilityException={availability.onDeleteAvailabilityException}
             onSubmit={values => {
               // We want to return the Promise to the form,
               // so that it doesn't close its modal if an error is thrown.
@@ -348,8 +346,6 @@ EditListingWizardTab.propTypes = {
 
   handleCreateFlowTabScrolling: func.isRequired,
   handlePublishListing: func.isRequired,
-  onAddAvailabilityException: func.isRequired,
-  onDeleteAvailabilityException: func.isRequired,
   onUpdateListing: func.isRequired,
   onCreateListingDraft: func.isRequired,
   onImageUpload: func.isRequired,

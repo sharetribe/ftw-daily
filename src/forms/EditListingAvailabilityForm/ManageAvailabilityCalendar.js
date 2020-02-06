@@ -231,7 +231,7 @@ class ManageAvailabilityCalendar extends Component {
   }
 
   fetchMonthData(monthMoment) {
-    const { availability, listingId } = this.props;
+    const { availability, listingId, availabilityPlan } = this.props;
 
     // Don't fetch exceptions for past months or too far in the future
     if (isMonthInRange(monthMoment, TODAY_MOMENT, END_OF_RANGE_MOMENT)) {
@@ -247,7 +247,7 @@ class ManageAvailabilityCalendar extends Component {
       const end = momentToUTCDate(endMoment);
 
       // Fetch AvailabilityExceptions for this month
-      availability.onFetchAvailabilityExceptions({ listingId, start, end });
+      availability.onFetchAvailabilityExceptions({ listingId, start, end }, availabilityPlan);
 
       // Fetch Bookings if the month is within bookable range (180 days)
       if (isMonthInRange(startMoment, TODAY_MOMENT, END_OF_BOOKING_RANGE_MOMENT)) {
@@ -288,21 +288,25 @@ class ManageAvailabilityCalendar extends Component {
           id,
           currentException: exception,
           seats: seatsFromPlan,
-        });
+        }, availabilityPlan);
       } else {
         // If availability exception exists, delete it first and then create a new one.
         // NOTE: currently, API does not support update (only deleting and creating)
         this.props.availability
-          .onDeleteAvailabilityException({ id, currentException: exception, seats: seatsFromPlan })
+          .onDeleteAvailabilityException({
+            id,
+            currentException: exception,
+            seats: seatsFromPlan
+          }, availabilityPlan)
           .then(r => {
             const params = { listingId, start, end, seats, currentException: exception };
-            this.props.availability.onCreateAvailabilityException(params);
+            this.props.availability.onCreateAvailabilityException(params, availabilityPlan);
           });
       }
     } else {
       // If there is no existing AvailabilityExceptions, just create a new one
       const params = { listingId, start, end, seats, currentException: exception };
-      this.props.availability.onCreateAvailabilityException(params);
+      this.props.availability.onCreateAvailabilityException(params, availabilityPlan);
     }
   }
 

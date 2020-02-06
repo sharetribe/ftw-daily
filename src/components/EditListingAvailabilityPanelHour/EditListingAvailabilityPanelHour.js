@@ -180,7 +180,7 @@ const EditListingAvailabilityPanelHour = props => {
     listing,
     availabilityExceptions,
     fetchExceptionsInProgress,
-    onAddAvailabilityException,
+    onCreateAvailabilityException,
     onDeleteAvailabilityException,
     disabled,
     ready,
@@ -246,12 +246,12 @@ const EditListingAvailabilityPanelHour = props => {
     // TODO: add proper seat handling
     const seats = availability === 'available' ? 1 : 0;
 
-    return onAddAvailabilityException({
+    return onCreateAvailabilityException({
       listingId: listing.id,
       seats,
       start: timestampToDate(exceptionStartTime),
       end: timestampToDate(exceptionEndTime),
-    })
+    }, availabilityPlan)
       .then(() => {
         setIsEditExceptionsModalOpen(false);
       })
@@ -348,7 +348,7 @@ const EditListingAvailabilityPanelHour = props => {
                     <button
                       className={css.removeExceptionButton}
                       onClick={() =>
-                        onDeleteAvailabilityException({ id: availabilityException.id })
+                        onDeleteAvailabilityException({ id: availabilityException.id }, availabilityPlan)
                       }
                     >
                       <IconClose size="normal" className={css.removeIcon} />
@@ -456,7 +456,7 @@ EditListingAvailabilityPanelHour.propTypes = {
   ready: bool.isRequired,
   availabilityExceptions: arrayOf(propTypes.availabilityException),
   fetchExceptionsInProgress: bool.isRequired,
-  onAddAvailabilityException: func.isRequired,
+  onCreateAvailabilityException: func.isRequired,
   onDeleteAvailabilityException: func.isRequired,
   onSubmit: func.isRequired,
   onManageDisableScrolling: func.isRequired,
