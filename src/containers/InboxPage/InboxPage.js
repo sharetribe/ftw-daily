@@ -194,9 +194,12 @@ BookingInfoMaybe.propTypes = {
 };
 
 export const InboxItem = props => {
-  const { unitType, type, tx, intl, stateData } = props;
-  const { customer, provider } = tx;
+  const { type, tx, intl, stateData } = props;
+  const { customer, provider, listing } = tx;
   const isOrder = type === 'order';
+
+  const { publicData } = listing.attributes || {};
+  const unitType = (publicData && publicData.unitType) || config.fallbackUnitType;
 
   const otherUser = isOrder ? provider : customer;
   const otherUserDisplayName = <UserDisplayName user={otherUser} intl={intl} />;
@@ -250,7 +253,6 @@ export const InboxItem = props => {
 };
 
 InboxItem.propTypes = {
-  unitType: propTypes.bookingUnitType.isRequired,
   type: oneOf(['order', 'sale']).isRequired,
   tx: propTypes.transaction.isRequired,
   intl: intlShape.isRequired,
@@ -258,7 +260,6 @@ InboxItem.propTypes = {
 
 export const InboxPageComponent = props => {
   const {
-    unitType,
     currentUser,
     fetchInProgress,
     fetchOrdersOrSalesError,
@@ -290,7 +291,7 @@ export const InboxPageComponent = props => {
     // Render InboxItem only if the latest transition of the transaction is handled in the `txState` function.
     return stateData ? (
       <li key={tx.id.uuid} className={css.listItem}>
-        <InboxItem unitType={unitType} type={type} tx={tx} intl={intl} stateData={stateData} />
+        <InboxItem type={type} tx={tx} intl={intl} stateData={stateData} />
       </li>
     ) : null;
   };
@@ -396,7 +397,6 @@ export const InboxPageComponent = props => {
 };
 
 InboxPageComponent.defaultProps = {
-  unitType: config.bookingUnitType,
   currentUser: null,
   currentUserHasOrders: null,
   fetchOrdersOrSalesError: null,
@@ -410,7 +410,6 @@ InboxPageComponent.propTypes = {
     tab: string.isRequired,
   }).isRequired,
 
-  unitType: propTypes.bookingUnitType,
   currentUser: propTypes.currentUser,
   fetchInProgress: bool.isRequired,
   fetchOrdersOrSalesError: propTypes.error,
