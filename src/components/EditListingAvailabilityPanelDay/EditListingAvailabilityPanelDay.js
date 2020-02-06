@@ -23,6 +23,7 @@ const EditListingAvailabilityPanelDay = props => {
     panelUpdated,
     updateInProgress,
     errors,
+    onNextTab
   } = props;
 
   const classes = classNames(rootClassName || css.root, className);
@@ -67,6 +68,7 @@ const EditListingAvailabilityPanelDay = props => {
           // which is visible on this panel.
           onSubmit({ availabilityPlan });
         }}
+        onNextTab={onNextTab}
         onChange={onChange}
         saveActionMsg={submitButtonText}
         disabled={disabled}
@@ -98,6 +100,7 @@ EditListingAvailabilityPanelDay.propTypes = {
     onCreateAvailabilityException: func.isRequired,
     onDeleteAvailabilityException: func.isRequired,
   }).isRequired,
+  onNextTab: func.isRequired,
   disabled: bool.isRequired,
   ready: bool.isRequired,
   onSubmit: func.isRequired,
