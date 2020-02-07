@@ -653,6 +653,9 @@ export class CheckoutPageComponent extends Component {
     // (i.e. have an id)
     const tx = existingTransaction.booking ? existingTransaction : speculatedTransaction;
     const txBooking = ensureBooking(tx.booking);
+    const timeZone = currentListing.attributes.availabilityPlan
+      ? currentListing.attributes.availabilityPlan.timezone
+      : 'Etc/UTC';
     const breakdown =
       tx.id && txBooking.id ? (
         <BookingBreakdown
@@ -662,6 +665,7 @@ export class CheckoutPageComponent extends Component {
           transaction={tx}
           booking={txBooking}
           dateType={DATE_TYPE_DATE}
+          timeZone={timeZone}
         />
       ) : null;
 
