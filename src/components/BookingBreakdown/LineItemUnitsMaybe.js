@@ -6,10 +6,9 @@ import css from './BookingBreakdown.css';
 
 const LineItemUnitsMaybe = props => {
   const { transaction, unitType } = props;
+  const isHourly = unitType === LINE_ITEM_UNITS;
 
-  if (unitType !== LINE_ITEM_UNITS) {
-    return null;
-  }
+  if (!isHourly) return null;
 
   const unitPurchase = transaction.attributes.lineItems.find(
     item => item.code === unitType && !item.reversal

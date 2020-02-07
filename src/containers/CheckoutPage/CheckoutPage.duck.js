@@ -7,6 +7,7 @@ import {
   TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY,
   TRANSITION_CONFIRM_PAYMENT,
 } from '../../util/transaction';
+import { LINE_ITEM_UNITS } from '../../util/types';
 import * as log from '../../util/log';
 import { fetchCurrentUserHasOrdersSuccess, fetchCurrentUser } from '../../ducks/user.duck';
 
@@ -159,8 +160,12 @@ export const stripeCustomerError = e => ({
 
 /* ================ Thunks ================ */
 
-export const initiateOrder = (orderParams, transactionId) => (dispatch, getState, sdk) => {
+export const initiateOrder = (orderParams, transactionId, unitType) => (dispatch, getState, sdk) => {
   dispatch(initiateOrderRequest());
+
+  const aliasIndex = unitType === LINE_ITEM_UNITS ? 1 : 0;
+  const processAlias = config.bookingProcessAliases[aliasIndex];
+
   const bodyParams = transactionId
     ? {
         id: transactionId,
@@ -168,7 +173,7 @@ export const initiateOrder = (orderParams, transactionId) => (dispatch, getState
         params: orderParams,
       }
     : {
-        processAlias: config.bookingProcessAlias,
+        processAlias,
         transition: TRANSITION_REQUEST_PAYMENT,
         params: orderParams,
       };
@@ -259,11 +264,15 @@ export const sendMessage = params => (dispatch, getState, sdk) => {
  * pricing info for the booking breakdown to get a proper estimate for
  * the price with the chosen information.
  */
-export const speculateTransaction = params => (dispatch, getState, sdk) => {
+export const speculateTransaction = (params, unitType) => (dispatch, getState, sdk) => {
   dispatch(speculateTransactionRequest());
+
+  const aliasIndex = unitType === LINE_ITEM_UNITS ? 1 : 0;
+  const processAlias = config.bookingProcessAliases[aliasIndex];
+
   const bodyParams = {
     transition: TRANSITION_REQUEST_PAYMENT,
-    processAlias: config.bookingProcessAlias,
+    processAlias,
     params: {
       ...params,
       cardToken: 'CheckoutPage_speculative_card_token',

@@ -204,16 +204,16 @@ export class CheckoutPageComponent extends Component {
       // Fetch speculated transaction for showing price in booking breakdown
       // NOTE: if unit type is line-item/units, quantity needs to be added.
       // The way to pass it to checkout page is through pageData.bookingData
+      const { unitType = config.fallbackUnitType } = listing.attributes.publicData || {};
+
       fetchSpeculatedTransaction(
         this.customPricingParams({
           listing,
           bookingStart: bookingStartForAPI,
           bookingEnd: bookingEndForAPI,
-        })
+        }), unitType
       );
     }
-
-
 
     this.setState({ pageData: pageData || {}, dataLoaded: true });
   }
@@ -263,8 +263,11 @@ export class CheckoutPageComponent extends Component {
       const hasPaymentIntents =
         storedTx.attributes.protectedData && storedTx.attributes.protectedData.stripePaymentIntents;
 
+      const { publicData = {} } = pageData.listing.attributes;
+      const { unitType } = publicData;
+
       // If paymentIntent exists, order has been initiated previously.
-      return hasPaymentIntents ? Promise.resolve(storedTx) : onInitiateOrder(fnParams, storedTx.id);
+      return hasPaymentIntents ? Promise.resolve(storedTx) : onInitiateOrder(fnParams, storedTx.id, unitType);
     };
 
     // Step 2: pay using Stripe SDK
@@ -1008,9 +1011,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   dispatch,
-  fetchSpeculatedTransaction: params => dispatch(speculateTransaction(params)),
+  fetchSpeculatedTransaction: (params, unitType) => dispatch(speculateTransaction(params, unitType)),
   fetchStripeCustomer: () => dispatch(stripeCustomer()),
-  onInitiateOrder: (params, transactionId) => dispatch(initiateOrder(params, transactionId)),
+  onInitiateOrder: (params, transactionId, unitType) => dispatch(initiateOrder(params, transactionId, unitType)),
   onRetrievePaymentIntent: params => dispatch(retrievePaymentIntent(params)),
   onHandleCardPayment: params => dispatch(handleCardPayment(params)),
   onConfirmPayment: params => dispatch(confirmPayment(params)),

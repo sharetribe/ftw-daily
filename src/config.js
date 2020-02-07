@@ -32,7 +32,10 @@ const sortSearchByDistance = false;
 //
 // In a way, 'processAlias' defines which transaction process (or processes)
 // this particular web application is able to handle.
-const bookingProcessAlias = 'preauth-custom-pricing/release-1';
+const bookingProcessAliases = [
+  'preauth-custom-pricing-day/release-1',
+  'preauth-custom-pricing-time/release-1',
+]
 
 // Fallback of the transaction line item code for the main unit type in bookings.
 //
@@ -185,7 +188,7 @@ const config = {
   env,
   dev,
   locale,
-  bookingProcessAlias,
+  bookingProcessAliases,
   fallbackUnitType,
   enableAvailability,
   dayCountAvailableForBooking,
