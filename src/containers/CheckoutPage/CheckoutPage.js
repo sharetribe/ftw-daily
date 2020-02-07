@@ -512,16 +512,9 @@ export class CheckoutPageComponent extends Component {
   customPricingParams(params) {
     const { bookingStart, bookingEnd, listing, ...rest } = params;
     const { amount: priceAmount, currency } = listing.attributes.price;
-    const { discount, unitType: uT } = listing.attributes.publicData || {};
-    const {
-      amount: discountPercentage,
-      breakpoint: discountBreakpoint,
-      unitType: discountUnitType
-    } = discount || {};
+    const { discount, unitType = config.fallbackUnitType } = listing.attributes.publicData || {};
 
-    const unitType = uT || config.fallbackUnitType;
     const isHourly = unitType === LINE_ITEM_UNITS;
-
     const quantity = isHourly
       ? hoursBetween(bookingStart, bookingEnd)
       : daysBetween(bookingStart, bookingEnd);
@@ -540,6 +533,7 @@ export class CheckoutPageComponent extends Component {
       ...rest,
     };
 
+    const { amount: discountPercentage, breakpoint: discountBreakpoint } = discount || {};
     const breakpoint = parseInt(discountBreakpoint);
     const discountBase = (quantity - breakpoint) * priceAmount;
     const hasDiscount = discount && quantity > breakpoint;
@@ -554,7 +548,7 @@ export class CheckoutPageComponent extends Component {
 
       tx.protectedData = {
         ...tx.protectedData,
-        discountReason: `${discountPercentage}% off above ${discountBreakpoint} ${discountUnitType}`
+        discountReason: `${discountPercentage}% off above ${discountBreakpoint}`
       }
     }
 

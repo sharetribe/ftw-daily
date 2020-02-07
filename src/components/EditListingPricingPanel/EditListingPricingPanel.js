@@ -50,6 +50,7 @@ const EditListingPricingPanel = props => {
         price,
         discount: publicData.discount
       }}
+      unitType={publicData.unitType}
       onSubmit={({ price, discount }) => {
         onSubmit({
           publicData: {

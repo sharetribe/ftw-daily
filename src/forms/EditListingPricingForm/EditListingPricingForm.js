@@ -5,7 +5,7 @@ import { Form as FinalForm } from 'react-final-form';
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import config from '../../config';
-import { LINE_ITEM_NIGHT, LINE_ITEM_DAY, propTypes } from '../../util/types';
+import { LINE_ITEM_UNITS, LINE_ITEM_DAY, propTypes } from '../../util/types';
 import * as validators from '../../util/validators';
 import { formatMoney } from '../../util/currency';
 import { types as sdkTypes } from '../../util/sdkLoader';
@@ -32,15 +32,21 @@ export const EditListingPricingFormComponent = props => (
         fetchErrors,
         values: {
           discount
-        }
+        },
+        unitType
       } = formRenderProps;
 
-      const unitType = config.bookingUnitType;
-      const isNightly = unitType === LINE_ITEM_NIGHT;
+      const isHourly = unitType === LINE_ITEM_UNITS;
       const isDaily = unitType === LINE_ITEM_DAY;
 
-      const translationKey = isNightly
-        ? 'EditListingPricingForm.pricePerNight'
+      const translationKeyUnitType = isHourly
+        ? 'EditListingPricingForm.unitTypeHour'
+        : isDaily
+        ? 'EditListingPricingForm.unitTypeDay'
+        : 'EditListingPricingForm.unitTypeUnit';
+
+      const translationKey = isHourly
+        ? 'EditListingPricingForm.pricePerHour'
         : isDaily
         ? 'EditListingPricingForm.pricePerDay'
         : 'EditListingPricingForm.pricePerUnit';
@@ -154,24 +160,12 @@ export const EditListingPricingFormComponent = props => (
               id="discount.breakpoint"
               name="discount.breakpoint"
               className={css.priceInput}
-              label={intl.formatMessage({ id: 'EditListingPricingForm.discountBreakpointMessage' })}
+              label={intl.formatMessage({ id: 'EditListingPricingForm.discountBreakpointMessage' }, { unitType: intl.formatMessage({ id: translationKeyUnitType }) })}
               placeholder={intl.formatMessage({ id: 'EditListingPricingForm.discountBreakpointPlaceholder' })}
               type='number'
               min='1'
               validate={value => discountRequired(discount, value)}
             />
-
-            <FieldSelect
-              id="discount.unitType"
-              name="discount.unitType"
-              label={intl.formatMessage({ id: 'EditListingPricingForm.discountUnitTypeMessage' })}
-              validate={value => discountRequired(discount, value)}
-            >
-              <option value=""></option>
-              <option value="weeks">Weeks</option>
-              <option value="days">Days</option>
-              <option value="hours">Hours</option>
-            </FieldSelect>
           </div>
 
           <Button
@@ -203,6 +197,7 @@ EditListingPricingFormComponent.propTypes = {
     showListingsError: propTypes.error,
     updateListingError: propTypes.error,
   }),
+  unitType: string,
 };
 
 export default compose(injectIntl)(EditListingPricingFormComponent);

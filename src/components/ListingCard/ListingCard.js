@@ -46,7 +46,7 @@ export const ListingCardComponent = props => {
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureListing(listing);
   const id = currentListing.id.uuid;
-  const { title = '', price, publicData } = currentListing.attributes;
+  const { title = '', price, publicData = {} } = currentListing.attributes;
   const slug = createSlug(title);
   const author = ensureUser(listing.author);
   const authorName = author.attributes.profile.displayName;
@@ -56,9 +56,8 @@ export const ListingCardComponent = props => {
   const { formattedPrice, priceTitle } = priceData(price, intl);
 
 
-  const unitType = (publicData && publicData.unitType) || config.fallbackUnitType;
+  const unitType = publicData.unitType || config.fallbackUnitType;
 
-  console.log(config.fallbackUnitType);
   const isHourly = unitType === LINE_ITEM_UNITS;
   const isDaily = unitType === LINE_ITEM_DAY;
 

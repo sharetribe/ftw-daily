@@ -6,7 +6,7 @@ import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 import classNames from 'classnames';
 import routeConfiguration from '../../routeConfiguration';
 import {
-  LINE_ITEM_NIGHT,
+  LINE_ITEM_UNITS,
   LINE_ITEM_DAY,
   LISTING_STATE_PENDING_APPROVAL,
   LISTING_STATE_CLOSED,
@@ -128,7 +128,7 @@ export const ManageListingCardComponent = props => {
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
   const id = currentListing.id.uuid;
-  const { title = '', price, state } = currentListing.attributes;
+  const { title = '', price, state, publicData = {} } = currentListing.attributes;
   const slug = createSlug(title);
   const isPendingApproval = state === LISTING_STATE_PENDING_APPROVAL;
   const isClosed = state === LISTING_STATE_CLOSED;
@@ -155,12 +155,12 @@ export const ManageListingCardComponent = props => {
     ? LISTING_PAGE_PARAM_TYPE_DRAFT
     : LISTING_PAGE_PARAM_TYPE_EDIT;
 
-  const unitType = config.bookingUnitType;
-  const isNightly = unitType === LINE_ITEM_NIGHT;
+  const unitType = publicData.unitType || config.fallbackUnitType;
+  const isHourly = unitType === LINE_ITEM_UNITS;
   const isDaily = unitType === LINE_ITEM_DAY;
 
-  const unitTranslationKey = isNightly
-    ? 'ManageListingCard.perNight'
+  const unitTranslationKey = isHourly
+    ? 'ManageListingCard.perHour'
     : isDaily
     ? 'ManageListingCard.perDay'
     : 'ManageListingCard.perUnit';
