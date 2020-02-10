@@ -9,7 +9,7 @@ import { createResourceLocatorString, findRouteByRouteName } from '../../util/ro
 import routeConfiguration from '../../routeConfiguration';
 import { propTypes } from '../../util/types';
 import { ensureListing, ensureTransaction } from '../../util/data';
-import { dateFromAPIToLocalNoon } from '../../util/dates';
+import { dateFromAPIToLocalNoon, timestampToDate, calculateQuantityFromHours } from '../../util/dates';
 import { createSlug } from '../../util/urlHelpers';
 import { txIsPaymentPending } from '../../util/transaction';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
@@ -35,6 +35,7 @@ import {
   sendMessage,
   sendReview,
   fetchMoreMessages,
+  fetchTimeSlots
 } from './TransactionPage.duck';
 import css from './TransactionPage.css';
 
@@ -55,6 +56,7 @@ export const TransactionPageComponent = props => {
     history,
     intl,
     messages,
+    onFetchTimeSlots,
     onManageDisableScrolling,
     onSendMessage,
     onSendReview,
@@ -74,6 +76,7 @@ export const TransactionPageComponent = props => {
     onAcceptSale,
     onDeclineSale,
     timeSlots,
+    monthlyTimeSlots,
     fetchTimeSlotsError,
     processTransitions,
     callSetInitialValues,
@@ -122,8 +125,10 @@ export const TransactionPageComponent = props => {
       // (E.g. quantity is used when booking is created.)
       bookingData: {},
       bookingDates: {
-        bookingStart: dateFromAPIToLocalNoon(currentBooking.attributes.start),
-        bookingEnd: dateFromAPIToLocalNoon(currentBooking.attributes.end),
+        // bookingStart: dateFromAPIToLocalNoon(currentBooking.attributes.start),
+        // bookingEnd: dateFromAPIToLocalNoon(currentBooking.attributes.end),
+        bookingStart: currentBooking.attributes.start,
+        bookingEnd: currentBooking.attributes.end,
       },
     };
 
@@ -131,8 +136,34 @@ export const TransactionPageComponent = props => {
   }
 
   // Customer can create a booking, if the tx is in "enquiry" state.
+  // const handleSubmitBookingRequest = values => {
+  //   const { bookingDates, ...bookingData } = values;
+
+  //   const initialValues = {
+  //     listing: currentListing,
+  //     // enquired transaction should be passed to CheckoutPage
+  //     transaction: currentTransaction,
+  //     bookingData,
+  //     bookingDates: {
+  //       bookingStart: bookingDates.startDate,
+  //       bookingEnd: bookingDates.endDate,
+  //     },
+  //     confirmPaymentError: null,
+  //   };
+
+  //   redirectToCheckoutPageWithInitialValues(initialValues, currentListing);
+  // };
+
+  // Customer can create a booking, if the tx is in "enquiry" state.
   const handleSubmitBookingRequest = values => {
-    const { bookingDates, ...bookingData } = values;
+    const { bookingStartTime, bookingEndTime, ...restOfValues } = values;
+    const bookingStart = timestampToDate(bookingStartTime);
+    const bookingEnd = timestampToDate(bookingEndTime);
+
+    const bookingData = {
+      quantity: calculateQuantityFromHours(bookingStart, bookingEnd),
+      ...restOfValues,
+    };
 
     const initialValues = {
       listing: currentListing,
@@ -140,8 +171,8 @@ export const TransactionPageComponent = props => {
       transaction: currentTransaction,
       bookingData,
       bookingDates: {
-        bookingStart: bookingDates.startDate,
-        bookingEnd: bookingDates.endDate,
+        bookingStart,
+        bookingEnd,
       },
       confirmPaymentError: null,
     };
@@ -228,6 +259,7 @@ export const TransactionPageComponent = props => {
       sendMessageError={sendMessageError}
       sendReviewInProgress={sendReviewInProgress}
       sendReviewError={sendReviewError}
+      onFetchTimeSlots={onFetchTimeSlots}
       onManageDisableScrolling={onManageDisableScrolling}
       onShowMoreMessages={onShowMoreMessages}
       onSendMessage={onSendMessage}
@@ -243,6 +275,7 @@ export const TransactionPageComponent = props => {
       onSubmitBookingRequest={handleSubmitBookingRequest}
       timeSlots={timeSlots}
       fetchTimeSlotsError={fetchTimeSlotsError}
+      monthlyTimeSlots={monthlyTimeSlots}
     />
   ) : (
     loadingOrFailedFetching
@@ -279,10 +312,11 @@ TransactionPageComponent.defaultProps = {
   savePaymentMethodFailed: false,
   sendMessageError: null,
   timeSlots: null,
+  monthlyTimeSlots: null,
   fetchTimeSlotsError: null,
 };
 
-const { bool, func, oneOf, shape, string, arrayOf, number } = PropTypes;
+const { bool, func, object, oneOf, shape, string, arrayOf, number } = PropTypes;
 
 TransactionPageComponent.propTypes = {
   params: shape({ id: string }).isRequired,
@@ -307,6 +341,8 @@ TransactionPageComponent.propTypes = {
   sendMessageError: propTypes.error,
   onShowMoreMessages: func.isRequired,
   onSendMessage: func.isRequired,
+  onFetchTimeSlots: func.isRequired,
+  monthlyTimeSlots: object,
   timeSlots: arrayOf(propTypes.timeSlot),
   fetchTimeSlotsError: propTypes.error,
   callSetInitialValues: func.isRequired,
@@ -344,6 +380,7 @@ const mapStateToProps = state => {
     sendReviewInProgress,
     sendReviewError,
     timeSlots,
+    monthlyTimeSlots,
     fetchTimeSlotsError,
     processTransitions,
   } = state.TransactionPage;
@@ -373,6 +410,7 @@ const mapStateToProps = state => {
     sendReviewInProgress,
     sendReviewError,
     timeSlots,
+    monthlyTimeSlots,
     fetchTimeSlotsError,
     processTransitions,
   };
@@ -390,6 +428,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(sendReview(role, tx, reviewRating, reviewContent)),
     callSetInitialValues: (setInitialValues, values) => dispatch(setInitialValues(values)),
     onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
+    onFetchTimeSlots: (listingId, start, end, timeZone) =>
+      dispatch(fetchTimeSlots(listingId, start, end, timeZone)),
   };
 };
 
