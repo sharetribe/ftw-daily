@@ -34,6 +34,7 @@ export { default as IconSpinner } from './IconSpinner/IconSpinner';
 export { default as IconCrosshair } from './IconCrosshair/IconCrosshair';
 export { default as IconNetwork } from './IconNetwork/IconNetwork';
 export { default as IconPeople } from './IconPeople/IconPeople';
+export { default as IconSuccess } from './IconSuccess/IconSuccess';
 
 // Other independent components
 export { default as ExternalLink } from './ExternalLink/ExternalLink';
@@ -144,6 +145,7 @@ export { default as SearchMapPriceLabel } from './SearchMapPriceLabel/SearchMapP
 export { default as SearchResultsPanel } from './SearchResultsPanel/SearchResultsPanel';
 export { default as SelectMultipleFilter } from './SelectMultipleFilter/SelectMultipleFilter';
 export { default as SelectSingleFilter } from './SelectSingleFilter/SelectSingleFilter';
+export { default as StripeConnectAccountStatusBox } from './StripeConnectAccountStatusBox/StripeConnectAccountStatusBox';
 export { default as StripePaymentAddress } from './StripePaymentAddress/StripePaymentAddress';
 export { default as UserCard } from './UserCard/UserCard';
 

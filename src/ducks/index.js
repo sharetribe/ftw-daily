@@ -13,6 +13,7 @@ import UI from './UI.duck';
 import marketplaceData from './marketplaceData.duck';
 import paymentMethods from './paymentMethods.duck';
 import stripe from './stripe.duck';
+import stripeConnectAccount from './stripeConnectAccount.duck';
 import user from './user.duck';
 
 export {
@@ -25,5 +26,6 @@ export {
   marketplaceData,
   paymentMethods,
   stripe,
+  stripeConnectAccount,
   user,
 };

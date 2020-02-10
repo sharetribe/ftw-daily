@@ -14,7 +14,7 @@ import {
   PasswordChangePage,
   PasswordRecoveryPage,
   PasswordResetPage,
-  PayoutPreferencesPage,
+  StripePayoutPage,
   PaymentMethodsPage,
   PrivacyPolicyPage,
   ProfilePage,
@@ -34,7 +34,7 @@ import { NamedRedirect } from './components';
 export const ACCOUNT_SETTINGS_PAGES = [
   'ContactDetailsPage',
   'PasswordChangePage',
-  'PayoutPreferencesPage',
+  'StripePayoutPage',
   'PaymentMethodsPage',
 ];
 
@@ -122,6 +122,13 @@ const routeConfiguration = () => {
     {
       path: '/l/:slug/:id/:type/:tab',
       name: 'EditListingPage',
+      auth: true,
+      component: props => <EditListingPage {...props} />,
+      loadData: EditListingPage.loadData,
+    },
+    {
+      path: '/l/:slug/:id/:type/:tab/:returnURLType',
+      name: 'EditListingStripeOnboardingPage',
       auth: true,
       component: props => <EditListingPage {...props} />,
       loadData: EditListingPage.loadData,
@@ -246,11 +253,19 @@ const routeConfiguration = () => {
     },
     {
       path: '/account/payments',
-      name: 'PayoutPreferencesPage',
+      name: 'StripePayoutPage',
       auth: true,
       authPage: 'LoginPage',
-      component: props => <PayoutPreferencesPage {...props} />,
-      loadData: PayoutPreferencesPage.loadData,
+      component: props => <StripePayoutPage {...props} />,
+      loadData: StripePayoutPage.loadData,
+    },
+    {
+      path: '/account/payments/:returnURLType',
+      name: 'StripePayoutOnboardingPage',
+      auth: true,
+      authPage: 'LoginPage',
+      component: props => <StripePayoutPage {...props} />,
+      loadData: StripePayoutPage.loadData,
     },
     {
       path: '/account/payment-methods',

@@ -46,6 +46,7 @@ exports[`EditListingAvailabilityForm matches snapshot 1`] = `
       "type": "availability-plan/day",
     }
   }
+  disabled={false}
   dispatch={[Function]}
   intl={
     Object {
@@ -60,6 +61,7 @@ exports[`EditListingAvailabilityForm matches snapshot 1`] = `
     }
   }
   onSubmit={[Function]}
+  ready={false}
   render={[Function]}
   saveActionMsg="Save rules"
   updateError={null}

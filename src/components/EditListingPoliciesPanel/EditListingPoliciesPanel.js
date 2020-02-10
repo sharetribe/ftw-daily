@@ -14,6 +14,8 @@ const EditListingPoliciesPanel = props => {
     className,
     rootClassName,
     listing,
+    disabled,
+    ready,
     onSubmit,
     onChange,
     submitButtonText,
@@ -53,6 +55,8 @@ const EditListingPoliciesPanel = props => {
           onSubmit(updateValues);
         }}
         onChange={onChange}
+        disabled={disabled}
+        ready={ready}
         saveActionMsg={submitButtonText}
         updated={panelUpdated}
         updateInProgress={updateInProgress}
@@ -77,6 +81,8 @@ EditListingPoliciesPanel.propTypes = {
   // We cannot use propTypes.listing since the listing might be a draft.
   listing: object,
 
+  disabled: bool.isRequired,
+  ready: bool.isRequired,
   onSubmit: func.isRequired,
   onChange: func.isRequired,
   submitButtonText: string.isRequired,
