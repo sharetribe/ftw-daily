@@ -81,7 +81,6 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, qua
       .toDate()
   );
 
-  const dueDate = moment(serverDayStart).subtract(3, 'days');
   const nightsUntilStartDate = nightsBetween(now, serverDayStart);
   const isSplitPayment = nightsUntilStartDate >= config.splitPaymentCapDays;
 

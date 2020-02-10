@@ -104,7 +104,6 @@ const STATE_REVIEWED_BY_PROVIDER = 'reviewed-by-provider';
 
 
 const STATE_PENDING_PROVIDER_DECISION = 'pending-provider-decision';
-const STATE_REQUESTED = 'requested';
 const STATE_PAID = 'paid';
 const STATE_ACCEPTED = 'accepted';
 const STATE_DECLINED = 'declined';

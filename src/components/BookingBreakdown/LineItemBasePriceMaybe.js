@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormattedMessage, intlShape } from '../../util/reactIntl';
-import { formatMoney, convertMoneyToNumber, convertUnitToSubUnit, unitDivisor } from '../../util/currency';
+import { formatMoney } from '../../util/currency';
 import { LINE_ITEM_NIGHT, LINE_ITEM_DAY, propTypes } from '../../util/types';
 import { types as sdkTypes } from '../../util/sdkLoader';
 

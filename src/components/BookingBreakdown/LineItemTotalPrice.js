@@ -5,7 +5,7 @@ import { FormattedMessage, intlShape } from '../../util/reactIntl';
 import { formatMoney, convertMoneyToNumber, convertUnitToSubUnit, unitDivisor } from '../../util/currency';
 import { txIsCanceled, txIsDelivered, txIsDeclined } from '../../util/transaction';
 import { propTypes } from '../../util/types';
-import { nightsBetween, formatDateToText } from '../../util/dates';
+import { formatDateToText } from '../../util/dates';
 import { types as sdkTypes } from '../../util/sdkLoader';
 
 import css from './BookingBreakdown.css';
