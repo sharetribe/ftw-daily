@@ -14,7 +14,7 @@ import {
   txIsPaymentExpired,
   txIsPaymentPending,
 } from '../../util/transaction';
-import { propTypes, DATE_TYPE_DATE } from '../../util/types';
+import { propTypes, DATE_TYPE_DATE, DATE_TYPE_DATETIME, LINE_ITEM_DAY } from '../../util/types';
 import { ensureCurrentUser } from '../../util/data';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
@@ -172,6 +172,8 @@ const BookingInfoMaybe = props => {
   // Remember to also add formatMoney function from 'util/currency.js' and add this after BookingTimeInfo:
   // <div className={css.itemPrice}>{price}</div>
 
+  const dateType = unitType === LINE_ITEM_DAY ? DATE_TYPE_DATE : DATE_TYPE_DATETIME;
+
   return (
     <div className={classNames(css.bookingInfoWrapper, bookingClassName)}>
       <BookingTimeInfo
@@ -180,7 +182,7 @@ const BookingInfoMaybe = props => {
         intl={intl}
         tx={tx}
         unitType={unitType}
-        dateType={DATE_TYPE_DATE}
+        dateType={dateType}
       />
     </div>
   );

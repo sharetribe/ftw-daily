@@ -13,7 +13,8 @@ import {
   LINE_ITEM_UNITS,
   LINE_ITEM_DAY,
   LINE_ITEM_DISCOUNT,
-  DATE_TYPE_DATE
+  DATE_TYPE_DATE,
+  DATE_TYPE_DATETIME
 } from '../../util/types';
 import {
   ensureListing,
@@ -656,6 +657,8 @@ export class CheckoutPageComponent extends Component {
     const timeZone = currentListing.attributes.availabilityPlan
       ? currentListing.attributes.availabilityPlan.timezone
       : 'Etc/UTC';
+    const dateType = unitType === LINE_ITEM_DAY ? DATE_TYPE_DATE : DATE_TYPE_DATETIME;
+
     const breakdown =
       tx.id && txBooking.id ? (
         <BookingBreakdown
@@ -664,7 +667,7 @@ export class CheckoutPageComponent extends Component {
           unitType={unitType}
           transaction={tx}
           booking={txBooking}
-          dateType={DATE_TYPE_DATE}
+          dateType={dateType}
           timeZone={timeZone}
         />
       ) : null;
