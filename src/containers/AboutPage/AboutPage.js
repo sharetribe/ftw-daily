@@ -75,30 +75,6 @@ const AboutPage = () => {
 
               <br></br>
 
-              <h1>How it Works</h1>
-
-              <h3 className={css.subtitle}>1. Find your Patch</h3>
-
-              <p>Browse and apply filters to find your perfect Patch.
-              If you’re a Patch Host, just hit ‘Add my Patch’ and follow the steps to get your
-              Patch online in no time!</p>
-
-              <h3 className={css.subtitle}>2. Request and Book</h3>
-
-              <p>Questions for your Host or User? Not a problem.
-              Use our direct chat and make sure everything is in order before your booking starts.</p>
-              <h3 className={css.subtitle}>3. Confirm and Pay</h3>
-
-              <p>Review your booking and confirm payment.
-              Simple as that.</p>
-
-              <h3 className={css.subtitle}>4. Make Your Space Work</h3>
-
-              <p>Complete your booking and collect your payment.
-              Once you finish your booking, leave a review on your HotPatch experience!</p>
-
-              <br></br>
-
               <NamedLink
                 name="LandingPage"
                 className={css.heroButton}
