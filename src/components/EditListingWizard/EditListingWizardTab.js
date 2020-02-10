@@ -1,5 +1,6 @@
  import React from 'react';
 import PropTypes from 'prop-types';
+import { propTypes } from '../../util/types';
 import { intlShape } from '../../util/reactIntl';
 import routeConfiguration from '../../routeConfiguration';
 import {
@@ -10,7 +11,8 @@ import {
 import { ensureListing } from '../../util/data';
 import { createResourceLocatorString } from '../../util/routes';
 import {
-  EditListingAvailabilityPanel,
+  EditListingAvailabilityPanelDay,
+  EditListingAvailabilityPanelHour,
   EditListingDescriptionPanel,
   EditListingFeaturesPanel,
   EditListingLocationPanel,
@@ -91,9 +93,12 @@ const EditListingWizardTab = props => {
     onUpdateImageOrder,
     onRemoveImage,
     onChange,
+    onManageDisableScrolling,
     updatedTab,
     updateInProgress,
     intl,
+    fetchExceptionsInProgress,
+    availabilityExceptions,
   } = props;
 
   const { type } = params;
@@ -106,7 +111,7 @@ const EditListingWizardTab = props => {
     return images ? images.map(img => img.imageId || img.id) : null;
   };
 
-  const onCompleteEditListingWizardTab = (tab, updateValues) => {
+  const onCompleteEditListingWizardTab = (tab, updateValues, passThrownErrors = false) => {
     // Normalize images for API call
     const { images: updatedImages, ...otherValues } = updateValues;
     const imageProperty =
@@ -122,23 +127,26 @@ const EditListingWizardTab = props => {
         ? updateValuesWithImages
         : { ...updateValuesWithImages, id: currentListing.id };
 
-      onUpsertListingDraft(tab, upsertValues)
+      return onUpsertListingDraft(tab, upsertValues)
         .then(r => {
-          if (tab !== marketplaceTabs[marketplaceTabs.length - 1]) {
+          if (tab !== AVAILABILITY && tab !== marketplaceTabs[marketplaceTabs.length - 1]) {
             // Create listing flow: smooth scrolling polyfill to scroll to correct tab
             handleCreateFlowTabScrolling(false);
-
             // After successful saving of draft data, user should be redirected to next tab
             redirectAfterDraftUpdate(r.data.data.id.uuid, params, tab, marketplaceTabs, history);
-          } else {
+          } else if (tab === marketplaceTabs[marketplaceTabs.length - 1]) {
             handlePublishListing(currentListing.id);
           }
         })
         .catch(e => {
+          if (passThrownErrors) {
+            throw e;
+          }
           // No need for extra actions
+          // Error is logged in EditListingPage.duck file.
         });
     } else {
-      onUpdateListing(tab, { ...updateValuesWithImages, id: currentListing.id });
+      return onUpdateListing(tab, { ...updateValuesWithImages, id: currentListing.id });
     }
   };
 
@@ -150,6 +158,7 @@ const EditListingWizardTab = props => {
       onChange,
       panelUpdated: updatedTab === tab,
       updateInProgress,
+      onManageDisableScrolling,
       // newListingPublished and fetchInProgress are flags for the last wizard tab
       ready: newListingPublished,
       disabled: fetchInProgress,
@@ -231,14 +240,40 @@ const EditListingWizardTab = props => {
       const submitButtonTranslationKey = isNewListingFlow
         ? 'EditListingWizard.saveNewAvailability'
         : 'EditListingWizard.saveEditAvailability';
+
+      const { availabilityPlan } = listing.attributes
+      if (availabilityPlan && availabilityPlan.type === 'availability-plan/time') {
+        return (
+          <EditListingAvailabilityPanelHour
+            {...panelProps(AVAILABILITY)}
+            fetchExceptionsInProgress={fetchExceptionsInProgress}
+            availabilityExceptions={availabilityExceptions}
+            submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+            onCreateAvailabilityException={availability.onCreateAvailabilityException}
+            onDeleteAvailabilityException={availability.onDeleteAvailabilityException}
+            onSubmit={values => {
+              // We want to return the Promise to the form,
+              // so that it doesn't close its modal if an error is thrown.
+              return onCompleteEditListingWizardTab(tab, values, true);
+            }}
+            onNextTab={() =>
+              redirectAfterDraftUpdate(listing.id.uuid, params, tab, marketplaceTabs, history)
+            }
+          />
+        );
+      }
+
       return (
-        <EditListingAvailabilityPanel
+        <EditListingAvailabilityPanelDay
           {...panelProps(AVAILABILITY)}
           availability={availability}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={values => {
             onCompleteEditListingWizardTab(tab, values);
           }}
+          onNextTab={() =>
+            redirectAfterDraftUpdate(listing.id.uuid, params, tab, marketplaceTabs, history)
+          }
         />
       );
     }
@@ -269,9 +304,10 @@ const EditListingWizardTab = props => {
 EditListingWizardTab.defaultProps = {
   listing: null,
   updatedTab: null,
+  availabilityExceptions: [],
 };
 
-const { array, bool, func, object, oneOf, shape, string } = PropTypes;
+const { array, arrayOf, bool, func, object, oneOf, shape, string } = PropTypes;
 
 EditListingWizardTab.propTypes = {
   params: shape({
@@ -280,6 +316,7 @@ EditListingWizardTab.propTypes = {
     type: oneOf(LISTING_PAGE_PARAM_TYPES).isRequired,
     tab: oneOf(SUPPORTED_TABS).isRequired,
   }).isRequired,
+  availabilityExceptions: arrayOf(propTypes.availabilityException),
   errors: shape({
     createListingDraftError: object,
     publishListingError: object,
@@ -288,6 +325,7 @@ EditListingWizardTab.propTypes = {
     uploadImageError: object,
   }).isRequired,
   fetchInProgress: bool.isRequired,
+  fetchExceptionsInProgress: bool.isRequired,
   newListingPublished: bool.isRequired,
   history: shape({
     push: func.isRequired,

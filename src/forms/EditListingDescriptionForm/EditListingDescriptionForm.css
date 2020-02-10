@@ -53,6 +53,13 @@
   @apply --EditListingDescriptionForm_formMargins;
 }
 
+.availabilityPlanDescription {
+  font-size: 16px;
+  line-height: 24px;
+  margin-top: 0;
+  margin-bottom: 32px;
+}
+
 .submitButton {
   margin-top: auto;
   margin-bottom: 24px;

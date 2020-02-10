@@ -7,9 +7,9 @@ import { LISTING_STATE_DRAFT } from '../../util/types';
 import { ListingLink } from '../../components';
 import { EditListingAvailabilityForm } from '../../forms';
 
-import css from './EditListingAvailabilityPanel.css';
+import css from './EditListingAvailabilityPanelDay.css';
 
-const EditListingAvailabilityPanel = props => {
+const EditListingAvailabilityPanelDay = props => {
   const {
     className,
     rootClassName,
@@ -23,6 +23,7 @@ const EditListingAvailabilityPanel = props => {
     panelUpdated,
     updateInProgress,
     errors,
+    onNextTab
   } = props;
 
   const classes = classNames(rootClassName || css.root, className);
@@ -67,6 +68,7 @@ const EditListingAvailabilityPanel = props => {
           // which is visible on this panel.
           onSubmit({ availabilityPlan });
         }}
+        onNextTab={onNextTab}
         onChange={onChange}
         saveActionMsg={submitButtonText}
         disabled={disabled}
@@ -79,13 +81,13 @@ const EditListingAvailabilityPanel = props => {
   );
 };
 
-EditListingAvailabilityPanel.defaultProps = {
+EditListingAvailabilityPanelDay.defaultProps = {
   className: null,
   rootClassName: null,
   listing: null,
 };
 
-EditListingAvailabilityPanel.propTypes = {
+EditListingAvailabilityPanelDay.propTypes = {
   className: string,
   rootClassName: string,
 
@@ -98,6 +100,7 @@ EditListingAvailabilityPanel.propTypes = {
     onCreateAvailabilityException: func.isRequired,
     onDeleteAvailabilityException: func.isRequired,
   }).isRequired,
+  onNextTab: func.isRequired,
   disabled: bool.isRequired,
   ready: bool.isRequired,
   onSubmit: func.isRequired,
@@ -108,4 +111,4 @@ EditListingAvailabilityPanel.propTypes = {
   errors: object.isRequired,
 };
 
-export default EditListingAvailabilityPanel;
+export default EditListingAvailabilityPanelDay;

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
-import { array, arrayOf, bool, func, shape, string, oneOf } from 'prop-types';
+import { array, arrayOf, bool, object, func, shape, string, oneOf } from 'prop-types';
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -24,6 +24,7 @@ import {
   ensureUser,
   userDisplayNameAsString,
 } from '../../util/data';
+import { timestampToDate, calculateQuantityFromHours } from '../../util/dates';
 import { richText } from '../../util/richText';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
@@ -41,7 +42,7 @@ import {
 } from '../../components';
 import { TopbarContainer, NotFoundPage } from '../../containers';
 
-import { sendEnquiry, loadData, setInitialValues } from './ListingPage.duck';
+import { sendEnquiry, loadData, setInitialValues, fetchTimeSlotsTime } from './ListingPage.duck';
 import SectionImages from './SectionImages';
 import SectionAvatar from './SectionAvatar';
 import SectionHeading from './SectionHeading';
@@ -103,17 +104,33 @@ export class ListingPageComponent extends Component {
     const listingId = new UUID(params.id);
     const listing = getListing(listingId);
 
-    const { bookingDates, ...bookingData } = values;
-
-    const initialValues = {
+    let initialValues = {
       listing,
-      bookingData,
+      bookingData: null,
       bookingDates: {
-        bookingStart: bookingDates.startDate,
-        bookingEnd: bookingDates.endDate,
+        bookingStart: null,
+        bookingEnd: null
       },
       confirmPaymentError: null,
     };
+
+    const { bookingDates, bookingStartTime, bookingEndTime, ...bookingData } = values;
+
+    if (bookingDates) {
+      initialValues.bookingDates.bookingStart = bookingDates.startDate;
+      initialValues.bookingDates.bookingEnd = bookingDates.endDate;
+      initialValues.bookingData = bookingData;
+    } else {
+      initialValues.bookingDates.bookingStart = timestampToDate(bookingStartTime);
+      initialValues.bookingDates.bookingEnd = timestampToDate(bookingEndTime);
+      initialValues.bookingData = {
+        quantity: calculateQuantityFromHours(
+          timestampToDate(bookingStartTime),
+          timestampToDate(bookingEndTime)
+        ),
+        ...bookingData,
+      };
+    }
 
     const routes = routeConfiguration();
     // Customize checkout page state with current listing and selected bookingDates
@@ -151,13 +168,13 @@ export class ListingPageComponent extends Component {
     }
   }
 
-  onSubmitEnquiry(values) {
+  onSubmitEnquiry(values, unitType) {
     const { history, params, onSendEnquiry } = this.props;
     const routes = routeConfiguration();
     const listingId = new UUID(params.id);
     const { message } = values;
 
-    onSendEnquiry(listingId, message.trim())
+    onSendEnquiry(listingId, message.trim(), unitType)
       .then(txId => {
         this.setState({ enquiryModalOpen: false });
 
@@ -173,13 +190,13 @@ export class ListingPageComponent extends Component {
 
   render() {
     const {
-      unitType,
       isAuthenticated,
       currentUser,
       getListing,
       getOwnListing,
       intl,
       onManageDisableScrolling,
+      onFetchTimeSlots,
       params: rawParams,
       location,
       scrollingDisabled,
@@ -189,6 +206,7 @@ export class ListingPageComponent extends Component {
       sendEnquiryInProgress,
       sendEnquiryError,
       timeSlots,
+      monthlyTimeSlots,
       fetchTimeSlotsError,
       categoriesConfig,
       amenitiesConfig,
@@ -235,6 +253,7 @@ export class ListingPageComponent extends Component {
       geolocation = null,
       price = null,
       title = '',
+      availabilityPlan = null,
       publicData,
     } = currentListing.attributes;
 
@@ -250,7 +269,15 @@ export class ListingPageComponent extends Component {
     const bookingTitle = (
       <FormattedMessage id="ListingPage.bookingTitle" values={{ title: richTitle }} />
     );
-    const bookingSubTitle = intl.formatMessage({ id: 'ListingPage.bookingSubTitle' });
+
+    const planSubtitle = {
+      'availability-plan/day': 'days',
+      'availability-plan/time': 'hours'
+    };
+    const subtitle = availabilityPlan
+      ? planSubtitle[availabilityPlan.type]
+      : '';
+    const bookingSubTitle = intl.formatMessage({ id: 'ListingPage.bookingSubTitle'}, { availabilityPlan: subtitle });
 
     const topbar = <TopbarContainer />;
 
@@ -361,6 +388,8 @@ export class ListingPageComponent extends Component {
       { title, price: formattedPrice, siteTitle }
     );
 
+    const unitType = (publicData && publicData.unitType) || config.fallbackUnitType;
+
     const hostLink = (
       <NamedLink
         className={css.authorNameLink}
@@ -423,6 +452,7 @@ export class ListingPageComponent extends Component {
                     priceTitle={priceTitle}
                     formattedPrice={formattedPrice}
                     richTitle={richTitle}
+                    unitType={unitType}
                     category={category}
                     hostLink={hostLink}
                     showContactUser={showContactUser}
@@ -448,7 +478,10 @@ export class ListingPageComponent extends Component {
                     onCloseEnquiryModal={() => this.setState({ enquiryModalOpen: false })}
                     sendEnquiryError={sendEnquiryError}
                     sendEnquiryInProgress={sendEnquiryInProgress}
-                    onSubmitEnquiry={this.onSubmitEnquiry}
+                    onSubmitEnquiry={params => {
+                      const { unitType = config.fallbackUnitType } = currentListing.attributes.publicData || {};
+                      this.onSubmitEnquiry(params, unitType)
+                    }}
                     currentUser={currentUser}
                     onManageDisableScrolling={onManageDisableScrolling}
                   />
@@ -465,6 +498,9 @@ export class ListingPageComponent extends Component {
                   onManageDisableScrolling={onManageDisableScrolling}
                   timeSlots={timeSlots}
                   fetchTimeSlotsError={fetchTimeSlotsError}
+
+                  monthlyTimeSlots={monthlyTimeSlots}
+                  onFetchTimeSlots={onFetchTimeSlots}
                 />
               </div>
             </div>
@@ -479,13 +515,13 @@ export class ListingPageComponent extends Component {
 }
 
 ListingPageComponent.defaultProps = {
-  unitType: config.bookingUnitType,
   currentUser: null,
   enquiryModalOpenForListingId: null,
   showListingError: null,
   reviews: [],
   fetchReviewsError: null,
   timeSlots: null,
+  monthlyTimeSlots: null,
   fetchTimeSlotsError: null,
   sendEnquiryError: null,
   categoriesConfig: config.custom.categories,
@@ -501,7 +537,6 @@ ListingPageComponent.propTypes = {
     search: string,
   }).isRequired,
 
-  unitType: propTypes.bookingUnitType,
   // from injectIntl
   intl: intlShape.isRequired,
 
@@ -523,6 +558,8 @@ ListingPageComponent.propTypes = {
   reviews: arrayOf(propTypes.review),
   fetchReviewsError: propTypes.error,
   timeSlots: arrayOf(propTypes.timeSlot),
+  monthlyTimeSlots: object,
+
   fetchTimeSlotsError: propTypes.error,
   sendEnquiryInProgress: bool.isRequired,
   sendEnquiryError: propTypes.error,
@@ -539,6 +576,7 @@ const mapStateToProps = state => {
     showListingError,
     reviews,
     fetchReviewsError,
+    monthlyTimeSlots,
     timeSlots,
     fetchTimeSlotsError,
     sendEnquiryInProgress,
@@ -569,6 +607,7 @@ const mapStateToProps = state => {
     showListingError,
     reviews,
     fetchReviewsError,
+    monthlyTimeSlots,
     timeSlots,
     fetchTimeSlotsError,
     sendEnquiryInProgress,
@@ -580,8 +619,10 @@ const mapDispatchToProps = dispatch => ({
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
   callSetInitialValues: (setInitialValues, values) => dispatch(setInitialValues(values)),
-  onSendEnquiry: (listingId, message) => dispatch(sendEnquiry(listingId, message)),
+  onSendEnquiry: (listingId, message, unitType) => dispatch(sendEnquiry(listingId, message, unitType)),
   onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
+  onFetchTimeSlots: (listingId, start, end, timeZone) =>
+    dispatch(fetchTimeSlotsTime(listingId, start, end, timeZone)),
 });
 
 // Note: it is important that the withRouter HOC is **outside** the

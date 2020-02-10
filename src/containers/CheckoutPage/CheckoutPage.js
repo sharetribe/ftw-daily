@@ -10,10 +10,11 @@ import routeConfiguration from '../../routeConfiguration';
 import { pathByRouteName, findRouteByRouteName } from '../../util/routes';
 import {
   propTypes,
-  LINE_ITEM_NIGHT,
+  LINE_ITEM_UNITS,
   LINE_ITEM_DAY,
   LINE_ITEM_DISCOUNT,
-  DATE_TYPE_DATE
+  DATE_TYPE_DATE,
+  DATE_TYPE_DATETIME
 } from '../../util/types';
 import {
   ensureListing,
@@ -27,7 +28,7 @@ import {
 import {
   dateFromLocalToAPI,
   minutesBetween ,
-  nightsBetween,
+  hoursBetween,
   daysBetween
 } from '../../util/dates';
 import { createSlug } from '../../util/urlHelpers';
@@ -204,16 +205,16 @@ export class CheckoutPageComponent extends Component {
       // Fetch speculated transaction for showing price in booking breakdown
       // NOTE: if unit type is line-item/units, quantity needs to be added.
       // The way to pass it to checkout page is through pageData.bookingData
+      const { unitType = config.fallbackUnitType } = listing.attributes.publicData || {};
+
       fetchSpeculatedTransaction(
         this.customPricingParams({
           listing,
           bookingStart: bookingStartForAPI,
           bookingEnd: bookingEndForAPI,
-        })
+        }), unitType
       );
     }
-
-
 
     this.setState({ pageData: pageData || {}, dataLoaded: true });
   }
@@ -263,8 +264,11 @@ export class CheckoutPageComponent extends Component {
       const hasPaymentIntents =
         storedTx.attributes.protectedData && storedTx.attributes.protectedData.stripePaymentIntents;
 
+      const { publicData = {} } = pageData.listing.attributes;
+      const { unitType } = publicData;
+
       // If paymentIntent exists, order has been initiated previously.
-      return hasPaymentIntents ? Promise.resolve(storedTx) : onInitiateOrder(fnParams, storedTx.id);
+      return hasPaymentIntents ? Promise.resolve(storedTx) : onInitiateOrder(fnParams, storedTx.id, unitType);
     };
 
     // Step 2: pay using Stripe SDK
@@ -512,18 +516,11 @@ export class CheckoutPageComponent extends Component {
   customPricingParams(params) {
     const { bookingStart, bookingEnd, listing, ...rest } = params;
     const { amount: priceAmount, currency } = listing.attributes.price;
-    const { discount } = listing.attributes.publicData || {};
-    const {
-      amount: discountPercentage,
-      breakpoint: discountBreakpoint,
-      unitType: discountUnitType
-    } = discount || {};
+    const { discount, unitType = config.fallbackUnitType } = listing.attributes.publicData || {};
 
-    const unitType = config.bookingUnitType; // Change this to dynamic
-    const isNightly = unitType === LINE_ITEM_NIGHT;
-
-    const quantity = isNightly
-      ? nightsBetween(bookingStart, bookingEnd)
+    const isHourly = unitType === LINE_ITEM_UNITS;
+    const quantity = isHourly
+      ? hoursBetween(bookingStart, bookingEnd)
       : daysBetween(bookingStart, bookingEnd);
 
     let tx = {
@@ -540,6 +537,7 @@ export class CheckoutPageComponent extends Component {
       ...rest,
     };
 
+    const { amount: discountPercentage, breakpoint: discountBreakpoint } = discount || {};
     const breakpoint = parseInt(discountBreakpoint);
     const discountBase = (quantity - breakpoint) * priceAmount;
     const hasDiscount = discount && quantity > breakpoint;
@@ -554,7 +552,7 @@ export class CheckoutPageComponent extends Component {
 
       tx.protectedData = {
         ...tx.protectedData,
-        discountReason: `${discountPercentage}% off above ${discountBreakpoint} ${discountUnitType}`
+        discountReason: `${discountPercentage}% off above ${discountBreakpoint}`
       }
     }
 
@@ -649,20 +647,28 @@ export class CheckoutPageComponent extends Component {
       });
       return <NamedRedirect name="ListingPage" params={params} />;
     }
+    const publicData = currentListing.attributes.publicData || {};
+    const unitType = publicData.unitType || config.fallbackUnitType;
 
     // Show breakdown only when speculated transaction and booking are loaded
     // (i.e. have an id)
     const tx = existingTransaction.booking ? existingTransaction : speculatedTransaction;
     const txBooking = ensureBooking(tx.booking);
+    const timeZone = currentListing.attributes.availabilityPlan
+      ? currentListing.attributes.availabilityPlan.timezone
+      : 'Etc/UTC';
+    const dateType = unitType === LINE_ITEM_DAY ? DATE_TYPE_DATE : DATE_TYPE_DATETIME;
+
     const breakdown =
       tx.id && txBooking.id ? (
         <BookingBreakdown
           className={css.bookingBreakdown}
           userRole="customer"
-          unitType={config.bookingUnitType}
+          unitType={unitType}
           transaction={tx}
           booking={txBooking}
-          dateType={DATE_TYPE_DATE}
+          dateType={dateType}
+          timeZone={timeZone}
         />
       ) : null;
 
@@ -785,12 +791,11 @@ export class CheckoutPageComponent extends Component {
       );
     }
 
-    const unitType = config.bookingUnitType;
-    const isNightly = unitType === LINE_ITEM_NIGHT;
+    const isHourly = unitType === LINE_ITEM_UNITS;
     const isDaily = unitType === LINE_ITEM_DAY;
 
-    const unitTranslationKey = isNightly
-      ? 'CheckoutPage.perNight'
+    const unitTranslationKey = isHourly
+      ? 'CheckoutPage.perHour'
       : isDaily
       ? 'CheckoutPage.perDay'
       : 'CheckoutPage.perUnit';
@@ -1013,9 +1018,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   dispatch,
-  fetchSpeculatedTransaction: params => dispatch(speculateTransaction(params)),
+  fetchSpeculatedTransaction: (params, unitType) => dispatch(speculateTransaction(params, unitType)),
   fetchStripeCustomer: () => dispatch(stripeCustomer()),
-  onInitiateOrder: (params, transactionId) => dispatch(initiateOrder(params, transactionId)),
+  onInitiateOrder: (params, transactionId, unitType) => dispatch(initiateOrder(params, transactionId, unitType)),
   onRetrievePaymentIntent: params => dispatch(retrievePaymentIntent(params)),
   onHandleCardPayment: params => dispatch(handleCardPayment(params)),
   onConfirmPayment: params => dispatch(confirmPayment(params)),

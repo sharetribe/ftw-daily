@@ -6,7 +6,7 @@ import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import { maxLength, required, composeValidators } from '../../util/validators';
-import { Form, Button, FieldTextInput } from '../../components';
+import { Form, Button, FieldTextInput, FieldSelect } from '../../components';
 import CustomCategorySelectFieldMaybe from './CustomCategorySelectFieldMaybe';
 
 import css from './EditListingDescriptionForm.css';
@@ -30,6 +30,7 @@ const EditListingDescriptionFormComponent = props => (
         updated,
         updateInProgress,
         fetchErrors,
+        isPublished
       } = formRenderProps;
 
       const titleMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.title' });
@@ -55,6 +56,10 @@ const EditListingDescriptionFormComponent = props => (
       const maxLength60Message = maxLength(maxLengthMessage, TITLE_MAX_LENGTH);
       const descriptionRequiredMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.descriptionRequired',
+      });
+
+      const availabilityPlanRequiredMessage = intl.formatMessage({
+        id: 'EditListingDescriptionForm.availabilityPlanRequired',
       });
 
       const { updateListingError, createListingDraftError, showListingsError } = fetchErrors || {};
@@ -116,6 +121,21 @@ const EditListingDescriptionFormComponent = props => (
             intl={intl}
           />
 
+          <h3>{intl.formatMessage({ id: 'EditListingDescriptionForm.availabilityPlanHeader' })}</h3>
+          <p className={css.availabilityPlanDescription}>{intl.formatMessage({ id: 'EditListingDescriptionForm.availabilityPlanSubHeader' })}</p>
+
+          <FieldSelect
+            id="availabilityPlan.type"
+            name="availabilityPlan.type"
+            disabled={isPublished}
+            label={intl.formatMessage({ id: 'EditListingDescriptionForm.availabilityPlanMessage' })}
+            validate={composeValidators(required(availabilityPlanRequiredMessage))}
+          >
+            <option value=""></option>
+            <option value="availability-plan/day">Day</option>
+            <option value="availability-plan/time">Hour</option>
+          </FieldSelect>
+
           <Button
             className={css.submitButton}
             type="submit"
@@ -142,6 +162,7 @@ EditListingDescriptionFormComponent.propTypes = {
   ready: bool.isRequired,
   updated: bool.isRequired,
   updateInProgress: bool.isRequired,
+  isPublished: bool.isRequired,
   fetchErrors: shape({
     createListingDraftError: propTypes.error,
     showListingsError: propTypes.error,

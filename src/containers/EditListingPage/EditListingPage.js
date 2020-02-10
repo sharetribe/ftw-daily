@@ -191,6 +191,7 @@ export const EditListingPageComponent = props => {
             onDeleteAvailabilityException,
             onFetchBookings,
           }}
+
           onUpdateListing={onUpdateListing}
           onCreateListingDraft={onCreateListingDraft}
           onPublishListingDraft={onPublishListingDraft}
@@ -206,6 +207,8 @@ export const EditListingPageComponent = props => {
           stripeOnboardingReturnURL={params.returnURLType}
           updatedTab={page.updatedTab}
           updateInProgress={page.updateInProgress || page.createListingDraftInProgress}
+          fetchExceptionsInProgress={page.fetchExceptionsInProgress}
+          availabilityExceptions={page.availabilityExceptions}
           payoutDetailsSaveInProgress={page.payoutDetailsSaveInProgress}
           payoutDetailsSaved={page.payoutDetailsSaved}
           stripeAccountFetched={stripeAccountFetched}
@@ -310,9 +313,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   onUpdateListing: (tab, values) => dispatch(requestUpdateListing(tab, values)),
   onFetchBookings: params => dispatch(requestFetchBookings(params)),
-  onFetchAvailabilityExceptions: params => dispatch(requestFetchAvailabilityExceptions(params)),
-  onCreateAvailabilityException: params => dispatch(requestCreateAvailabilityException(params)),
-  onDeleteAvailabilityException: params => dispatch(requestDeleteAvailabilityException(params)),
+  onFetchAvailabilityExceptions: (params, availabilityPlan) => dispatch(requestFetchAvailabilityExceptions(params, availabilityPlan)),
+  onCreateAvailabilityException: (params, availabilityPlan) => dispatch(requestCreateAvailabilityException(params, availabilityPlan)),
+  onDeleteAvailabilityException: (params, availabilityPlan) => dispatch(requestDeleteAvailabilityException(params, availabilityPlan)),
   onCreateListingDraft: values => dispatch(requestCreateListingDraft(values)),
   onPublishListingDraft: listingId => dispatch(requestPublishListingDraft(listingId)),
   onImageUpload: data => dispatch(requestImageUpload(data)),

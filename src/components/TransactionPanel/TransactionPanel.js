@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { array, arrayOf, bool, func, number, string } from 'prop-types';
+import { array, arrayOf, object, bool, func, number, string } from 'prop-types';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import classNames from 'classnames';
 import {
@@ -13,7 +13,7 @@ import {
   txIsRequested,
   txHasBeenDelivered,
 } from '../../util/transaction';
-import { LINE_ITEM_NIGHT, LINE_ITEM_DAY, propTypes } from '../../util/types';
+import { LINE_ITEM_UNITS, LINE_ITEM_DAY, propTypes } from '../../util/types';
 import {
   ensureListing,
   ensureTransaction,
@@ -177,6 +177,7 @@ export class TransactionPanelComponent extends Component {
       sendMessageError,
       sendReviewInProgress,
       sendReviewError,
+      onFetchTimeSlots,
       onManageDisableScrolling,
       onShowMoreMessages,
       transactionRole,
@@ -188,6 +189,7 @@ export class TransactionPanelComponent extends Component {
       acceptSaleError,
       declineSaleError,
       onSubmitBookingRequest,
+      monthlyTimeSlots,
       timeSlots,
       fetchTimeSlotsError,
       nextTransitions,
@@ -277,23 +279,22 @@ export class TransactionPanelComponent extends Component {
       otherUserDisplayNameString,
     } = displayNames(currentUser, currentProvider, currentCustomer, intl);
 
-    const { publicData, geolocation } = currentListing.attributes;
+    const { publicData, geolocation, price } = currentListing.attributes;
     const location = publicData && publicData.location ? publicData.location : {};
     const listingTitle = currentListing.attributes.deleted
       ? deletedListingTitle
       : currentListing.attributes.title;
 
-    const unitType = config.bookingUnitType;
-    const isNightly = unitType === LINE_ITEM_NIGHT;
+    const unitType = (publicData && publicData.unitType) || config.fallbackUnitType;
+    const isHourly = unitType === LINE_ITEM_UNITS;
     const isDaily = unitType === LINE_ITEM_DAY;
 
-    const unitTranslationKey = isNightly
-      ? 'TransactionPanel.perNight'
+    const unitTranslationKey = isHourly
+      ? 'TransactionPanel.perHour'
       : isDaily
       ? 'TransactionPanel.perDay'
       : 'TransactionPanel.perUnit';
 
-    const price = currentListing.attributes.price;
     const bookingSubTitle = price
       ? `${formatMoney(intl, price)} ${intl.formatMessage({ id: unitTranslationKey })}`
       : '';
@@ -369,7 +370,11 @@ export class TransactionPanelComponent extends Component {
                 geolocation={geolocation}
                 showAddress={stateData.showAddress}
               />
-              <BreakdownMaybe transaction={currentTransaction} transactionRole={transactionRole} />
+              <BreakdownMaybe
+                transaction={currentTransaction}
+                transactionRole={transactionRole}
+                unitType={unitType}
+              />
             </div>
 
             {savePaymentMethodFailed ? (
@@ -444,12 +449,15 @@ export class TransactionPanelComponent extends Component {
                   onManageDisableScrolling={onManageDisableScrolling}
                   timeSlots={timeSlots}
                   fetchTimeSlotsError={fetchTimeSlotsError}
+                  monthlyTimeSlots={monthlyTimeSlots}
+                  onFetchTimeSlots={onFetchTimeSlots}
                 />
               ) : null}
               <BreakdownMaybe
                 className={css.breakdownContainer}
                 transaction={currentTransaction}
                 transactionRole={transactionRole}
+                unitType={unitType}
               />
 
               {stateData.showSaleButtons ? (
@@ -486,6 +494,7 @@ TransactionPanelComponent.defaultProps = {
   sendMessageError: null,
   sendReviewError: null,
   timeSlots: null,
+  monthlyTimeSlots: null,
   fetchTimeSlotsError: null,
   nextTransitions: null,
 };
@@ -507,11 +516,13 @@ TransactionPanelComponent.propTypes = {
   sendMessageError: propTypes.error,
   sendReviewInProgress: bool.isRequired,
   sendReviewError: propTypes.error,
+  onFetchTimeSlots: func.isRequired,
   onManageDisableScrolling: func.isRequired,
   onShowMoreMessages: func.isRequired,
   onSendMessage: func.isRequired,
   onSendReview: func.isRequired,
   onSubmitBookingRequest: func.isRequired,
+  monthlyTimeSlots: object,
   timeSlots: arrayOf(propTypes.timeSlot),
   fetchTimeSlotsError: propTypes.error,
   nextTransitions: array,

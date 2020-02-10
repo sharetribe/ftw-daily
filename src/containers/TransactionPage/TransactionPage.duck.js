@@ -19,6 +19,7 @@ import {
   denormalisedEntities,
   denormalisedResponseEntities,
 } from '../../util/data';
+import { findNextBoundary, nextMonthFn, monthIdStringInTimeZone } from '../../util/dates';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { fetchCurrentUserNotifications } from '../../ducks/user.duck';
 
@@ -537,54 +538,102 @@ const timeSlotsRequest = params => (dispatch, getState, sdk) => {
   });
 };
 
-const fetchTimeSlots = listingId => (dispatch, getState, sdk) => {
-  dispatch(fetchTimeSlotsRequest);
+// const fetchTimeSlots = listingId => (dispatch, getState, sdk) => {
+//   dispatch(fetchTimeSlotsRequest);
 
-  // Time slots can be fetched for 90 days at a time,
-  // for at most 180 days from now. If max number of bookable
-  // day exceeds 90, a second request is made.
+//   // Time slots can be fetched for 90 days at a time,
+//   // for at most 180 days from now. If max number of bookable
+//   // day exceeds 90, a second request is made.
 
-  const maxTimeSlots = 90;
-  // booking range: today + bookable days -1
-  const bookingRange = config.dayCountAvailableForBooking - 1;
-  const timeSlotsRange = Math.min(bookingRange, maxTimeSlots);
+//   const maxTimeSlots = 90;
+//   // booking range: today + bookable days -1
+//   const bookingRange = config.dayCountAvailableForBooking - 1;
+//   const timeSlotsRange = Math.min(bookingRange, maxTimeSlots);
 
-  const start = moment
-    .utc()
-    .startOf('day')
-    .toDate();
-  const end = moment()
-    .utc()
-    .startOf('day')
-    .add(timeSlotsRange, 'days')
-    .toDate();
-  const params = { listingId, start, end };
+//   const start = moment
+//     .utc()
+//     .startOf('day')
+//     .toDate();
+//   const end = moment()
+//     .utc()
+//     .startOf('day')
+//     .add(timeSlotsRange, 'days')
+//     .toDate();
+//   const params = { listingId, start, end };
 
-  return dispatch(timeSlotsRequest(params))
+//   return dispatch(timeSlotsRequest(params))
+//     .then(timeSlots => {
+//       const secondRequest = bookingRange > maxTimeSlots;
+
+//       if (secondRequest) {
+//         const secondRange = Math.min(maxTimeSlots, bookingRange - maxTimeSlots);
+//         const secondParams = {
+//           listingId,
+//           start: end,
+//           end: moment(end)
+//             .add(secondRange, 'days')
+//             .toDate(),
+//         };
+
+//         return dispatch(timeSlotsRequest(secondParams)).then(secondBatch => {
+//           const combined = timeSlots.concat(secondBatch);
+//           dispatch(fetchTimeSlotsSuccess(combined));
+//         });
+//       } else {
+//         dispatch(fetchTimeSlotsSuccess(timeSlots));
+//       }
+//     })
+//     .catch(e => {
+//       dispatch(fetchTimeSlotsError(storableError(e)));
+//     });
+// };
+
+
+export const fetchTimeSlots = (listingId, start, end, timeZone) => (dispatch, getState, sdk) => {
+  const monthId = monthIdStringInTimeZone(start, timeZone);
+
+  dispatch(fetchTimeSlotsRequest(monthId));
+
+  // The maximum pagination page size for timeSlots is 500
+  const extraParams = {
+    per_page: 500,
+    page: 1,
+  };
+
+  return dispatch(timeSlotsRequest({ listingId, start, end, ...extraParams }))
     .then(timeSlots => {
-      const secondRequest = bookingRange > maxTimeSlots;
-
-      if (secondRequest) {
-        const secondRange = Math.min(maxTimeSlots, bookingRange - maxTimeSlots);
-        const secondParams = {
-          listingId,
-          start: end,
-          end: moment(end)
-            .add(secondRange, 'days')
-            .toDate(),
-        };
-
-        return dispatch(timeSlotsRequest(secondParams)).then(secondBatch => {
-          const combined = timeSlots.concat(secondBatch);
-          dispatch(fetchTimeSlotsSuccess(combined));
-        });
-      } else {
-        dispatch(fetchTimeSlotsSuccess(timeSlots));
-      }
+      dispatch(fetchTimeSlotsSuccess(monthId, timeSlots));
     })
     .catch(e => {
-      dispatch(fetchTimeSlotsError(storableError(e)));
+      dispatch(fetchTimeSlotsError(monthId, storableError(e)));
     });
+};
+
+
+// Helper function for fetchTransaction call.
+const fetchMonthlyTimeSlots = (dispatch, listing) => {
+  const hasWindow = typeof window !== 'undefined';
+  const attributes = listing.attributes;
+  // Listing could be ownListing entity too, so we just check if attributes key exists
+  const hasTimeZone =
+    attributes && attributes.availabilityPlan && attributes.availabilityPlan.timezone;
+
+  // Fetch time-zones on client side only.
+  if (hasWindow && listing.id && hasTimeZone) {
+    const tz = listing.attributes.availabilityPlan.timezone;
+    const nextBoundary = findNextBoundary(tz, new Date());
+
+    const nextMonth = nextMonthFn(nextBoundary, tz);
+    const nextAfterNextMonth = nextMonthFn(nextMonth, tz);
+
+    return Promise.all([
+      dispatch(fetchTimeSlots(listing.id, nextBoundary, nextMonth, tz)),
+      dispatch(fetchTimeSlots(listing.id, nextMonth, nextAfterNextMonth, tz)),
+    ]);
+  }
+
+  // By default return an empty array
+  return Promise.all([]);
 };
 
 export const fetchNextTransitions = id => (dispatch, getState, sdk) => {

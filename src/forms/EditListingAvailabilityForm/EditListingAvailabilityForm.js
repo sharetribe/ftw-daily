@@ -32,6 +32,7 @@ export class EditListingAvailabilityFormComponent extends Component {
             availability,
             availabilityPlan,
             listingId,
+            onNextTab
           } = formRenderProps;
 
           const errorMessage = updateError ? (
@@ -62,6 +63,7 @@ export class EditListingAvailabilityFormComponent extends Component {
                 inProgress={submitInProgress}
                 disabled={submitDisabled}
                 ready={submitReady}
+                onClick={onNextTab}
               >
                 {saveActionMsg}
               </Button>
@@ -80,6 +82,7 @@ EditListingAvailabilityFormComponent.defaultProps = {
 EditListingAvailabilityFormComponent.propTypes = {
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
+  onNextTab: func.isRequired,
   saveActionMsg: string.isRequired,
   disabled: bool.isRequired,
   ready: bool.isRequired,

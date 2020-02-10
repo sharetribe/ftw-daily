@@ -1,15 +1,21 @@
 import React from 'react';
 import classNames from 'classnames';
-import config from '../../config';
-import { DATE_TYPE_DATE } from '../../util/types';
+import { DATE_TYPE_DATE, DATE_TYPE_DATETIME, LINE_ITEM_DAY } from '../../util/types';
+import { ensureListing } from '../../util/data';
 import { BookingBreakdown } from '../../components';
 
 import css from './TransactionPanel.css';
 
 // Functional component as a helper to build BookingBreakdown
 const BreakdownMaybe = props => {
-  const { className, rootClassName, breakdownClassName, transaction, transactionRole } = props;
+  const { className, rootClassName, breakdownClassName, transaction, transactionRole, unitType } = props;
   const loaded = transaction && transaction.id && transaction.booking && transaction.booking.id;
+  const listingAttributes = ensureListing(transaction.listing).attributes;
+  const timeZone =
+    loaded && listingAttributes.availabilityPlan
+      ? listingAttributes.availabilityPlan.timezone
+      : 'Etc/UTC';
+  const dateType = unitType === LINE_ITEM_DAY ? DATE_TYPE_DATE : DATE_TYPE_DATETIME;
 
   const classes = classNames(rootClassName || css.breakdownMaybe, className);
   const breakdownClasses = classNames(breakdownClassName || css.breakdown);
@@ -19,10 +25,11 @@ const BreakdownMaybe = props => {
       <BookingBreakdown
         className={breakdownClasses}
         userRole={transactionRole}
-        unitType={config.bookingUnitType}
+        unitType={unitType}
         transaction={transaction}
         booking={transaction.booking}
-        dateType={DATE_TYPE_DATE}
+        dateType={dateType}
+        timeZone={timeZone}
       />
     </div>
   ) : null;
