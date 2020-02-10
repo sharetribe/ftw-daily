@@ -158,7 +158,7 @@ const BookingPanel = props => {
             price={price}
             isOwnListing={isOwnListing}
             listingId={listing.id}
-            monthlyTimeSlots={timeSlots}
+            monthlyTimeSlots={monthlyTimeSlots}
             onFetchTimeSlots={onFetchTimeSlots}
             startDatePlaceholder={intl.formatDate(TODAY, dateFormattingOptions)}
             endDatePlaceholder={intl.formatDate(TODAY, dateFormattingOptions)}

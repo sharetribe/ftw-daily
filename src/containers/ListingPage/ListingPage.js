@@ -24,6 +24,7 @@ import {
   ensureUser,
   userDisplayNameAsString,
 } from '../../util/data';
+import { timestampToDate, calculateQuantityFromHours } from '../../util/dates';
 import { richText } from '../../util/richText';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
@@ -41,7 +42,7 @@ import {
 } from '../../components';
 import { TopbarContainer, NotFoundPage } from '../../containers';
 
-import { sendEnquiry, loadData, setInitialValues, fetchTimeSlots } from './ListingPage.duck';
+import { sendEnquiry, loadData, setInitialValues, fetchTimeSlotsTime } from './ListingPage.duck';
 import SectionImages from './SectionImages';
 import SectionAvatar from './SectionAvatar';
 import SectionHeading from './SectionHeading';
@@ -103,17 +104,33 @@ export class ListingPageComponent extends Component {
     const listingId = new UUID(params.id);
     const listing = getListing(listingId);
 
-    const { bookingDates, ...bookingData } = values;
-
-    const initialValues = {
+    let initialValues = {
       listing,
-      bookingData,
+      bookingData: null,
       bookingDates: {
-        bookingStart: bookingDates.startDate,
-        bookingEnd: bookingDates.endDate,
+        bookingStart: null,
+        bookingEnd: null
       },
       confirmPaymentError: null,
     };
+
+    const { bookingDates, bookingStartTime, bookingEndTime, ...bookingData } = values;
+
+    if (bookingDates) {
+      initialValues.bookingDates.bookingStart = bookingDates.startDate;
+      initialValues.bookingDates.bookingEnd = bookingDates.endDate;
+      initialValues.bookingData = bookingData;
+    } else {
+      initialValues.bookingDates.bookingStart = timestampToDate(bookingStartTime);
+      initialValues.bookingDates.bookingEnd = timestampToDate(bookingEndTime);
+      initialValues.bookingData = {
+        quantity: calculateQuantityFromHours(
+          timestampToDate(bookingStartTime),
+          timestampToDate(bookingEndTime)
+        ),
+        ...bookingData,
+      };
+    }
 
     const routes = routeConfiguration();
     // Customize checkout page state with current listing and selected bookingDates
@@ -151,13 +168,13 @@ export class ListingPageComponent extends Component {
     }
   }
 
-  onSubmitEnquiry(values) {
+  onSubmitEnquiry(values, unitType) {
     const { history, params, onSendEnquiry } = this.props;
     const routes = routeConfiguration();
     const listingId = new UUID(params.id);
     const { message } = values;
 
-    onSendEnquiry(listingId, message.trim())
+    onSendEnquiry(listingId, message.trim(), unitType)
       .then(txId => {
         this.setState({ enquiryModalOpen: false });
 
@@ -461,7 +478,10 @@ export class ListingPageComponent extends Component {
                     onCloseEnquiryModal={() => this.setState({ enquiryModalOpen: false })}
                     sendEnquiryError={sendEnquiryError}
                     sendEnquiryInProgress={sendEnquiryInProgress}
-                    onSubmitEnquiry={this.onSubmitEnquiry}
+                    onSubmitEnquiry={params => {
+                      const { unitType = config.fallbackUnitType } = currentListing.attributes.publicData || {};
+                      this.onSubmitEnquiry(params, unitType)
+                    }}
                     currentUser={currentUser}
                     onManageDisableScrolling={onManageDisableScrolling}
                   />
@@ -556,6 +576,7 @@ const mapStateToProps = state => {
     showListingError,
     reviews,
     fetchReviewsError,
+    monthlyTimeSlots,
     timeSlots,
     fetchTimeSlotsError,
     sendEnquiryInProgress,
@@ -586,6 +607,7 @@ const mapStateToProps = state => {
     showListingError,
     reviews,
     fetchReviewsError,
+    monthlyTimeSlots,
     timeSlots,
     fetchTimeSlotsError,
     sendEnquiryInProgress,
@@ -597,10 +619,10 @@ const mapDispatchToProps = dispatch => ({
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
   callSetInitialValues: (setInitialValues, values) => dispatch(setInitialValues(values)),
-  onSendEnquiry: (listingId, message) => dispatch(sendEnquiry(listingId, message)),
+  onSendEnquiry: (listingId, message, unitType) => dispatch(sendEnquiry(listingId, message, unitType)),
   onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
   onFetchTimeSlots: (listingId, start, end, timeZone) =>
-    dispatch(fetchTimeSlots(listingId, start, end, timeZone)),
+    dispatch(fetchTimeSlotsTime(listingId, start, end, timeZone)),
 });
 
 // Note: it is important that the withRouter HOC is **outside** the
