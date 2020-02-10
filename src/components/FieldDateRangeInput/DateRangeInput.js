@@ -5,6 +5,7 @@
  * N.B. *isOutsideRange* in defaultProps is defining what dates are available to booking.
  */
 import React, { Component } from 'react';
+import omit from 'lodash/omit';
 import { bool, func, instanceOf, oneOf, shape, string, arrayOf } from 'prop-types';
 import { DateRangePicker, isInclusivelyAfterDay, isInclusivelyBeforeDay } from 'react-dates';
 import { intlShape, injectIntl } from '../../util/reactIntl';
@@ -267,7 +268,7 @@ class DateRangeInputComponent extends Component {
     return (
       <div className={classes}>
         <DateRangePicker
-          {...datePickerProps}
+          {...omit(datePickerProps, ['checked'])}
           focusedInput={this.state.focusedInput}
           onFocusChange={this.onFocusChange}
           startDate={startDate}
