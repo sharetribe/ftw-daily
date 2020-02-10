@@ -30,6 +30,7 @@ const EditListingDescriptionFormComponent = props => (
         updated,
         updateInProgress,
         fetchErrors,
+        values
       } = formRenderProps;
 
       const titleMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.title' });
@@ -131,7 +132,7 @@ const EditListingDescriptionFormComponent = props => (
         </p>
       ) : null;
 
-      const showRetreatForm = fieldRenderProps.values.retreat && fieldRenderProps.values.retreat.accepted
+      const showRetreatForm = values.retreat && values.retreat.accepted
 
       const retreatShowFields = showRetreatForm ? (
         <>
