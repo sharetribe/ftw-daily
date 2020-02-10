@@ -172,9 +172,9 @@ class DateInputComponent extends Component {
 
     const date = value && value.date instanceof Date ? moment(value.date) : initialMoment;
 
-    const isDayBlocked = timeSlots
-      ? day => !timeSlots.find(timeSlot => timeSlotEqualsDay(timeSlot, day))
-      : () => false;
+    // const isDayBlocked = timeSlots
+    //   ? day => !timeSlots.find(timeSlot => timeSlotEqualsDay(timeSlot, day))
+    //   : () => false;
 
     const placeholder = placeholderText || intl.formatMessage({ id: 'FieldDateInput.placeholder' });
 
@@ -205,7 +205,6 @@ class DateInputComponent extends Component {
           placeholder={placeholder}
           screenReaderInputMessage={screenReaderInputText}
           phrases={{ closeDatePicker: closeDatePickerText, clearDate: clearDateText }}
-          isDayBlocked={isDayBlocked}
         />
       </div>
     );
@@ -230,6 +229,7 @@ DateInputComponent.propTypes = {
   onChange: func.isRequired,
   onBlur: func.isRequired,
   onFocus: func.isRequired,
+  isDayBlocked: func,
   phrases: shape({
     closeDatePicker: string,
     clearDate: string,
