@@ -1,7 +1,7 @@
 import omit from 'lodash/omit';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { denormalisedResponseEntities, ensureAvailabilityException } from '../../util/data';
-import { isSameDate, monthIdStringInUTC } from '../../util/dates';
+import { isSameDate, monthIdStringInUTC, resetToStartOfDay } from '../../util/dates';
 import { storableError } from '../../util/errors';
 import * as log from '../../util/log';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
@@ -900,6 +900,33 @@ export const loadData = params => (dispatch, getState, sdk) => {
       if (currentUser && currentUser.stripeAccount) {
         dispatch(fetchStripeAccount());
       }
+
+      // Because of two dispatch functions, response is an array.
+      // sWe are only interest the response from requestShowListing here,
+      // so we need to pick the first one
+      if (response[0].data && response[0].data.data) {
+        const listing = response[0].data.data;
+        const availabilityPlan = listing.attributes.availabilityPlan;
+
+        if (availabilityPlan.type === 'availability-plan/time') {
+          const today = new Date();
+          const tz = availabilityPlan.timezone;
+          const start = resetToStartOfDay(today, tz, 0);
+          // Query range: today + 364 days
+          const exceptionRange = 364;
+          const end = resetToStartOfDay(today, tz, exceptionRange);
+
+          // NOTE: in this template, we don't expect more than 100 exceptions.
+          // If there are more exceptions, pagination kicks in and we can't use frontend sorting.
+          const params = {
+            listingId: listing.id,
+            start,
+            end,
+          };
+          dispatch(requestFetchAvailabilityExceptions(params, availabilityPlan));
+        }
+      }
+
       return response;
     })
     .catch(e => {
