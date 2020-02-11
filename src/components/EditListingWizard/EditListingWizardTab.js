@@ -271,9 +271,6 @@ const EditListingWizardTab = props => {
           onSubmit={values => {
             onCompleteEditListingWizardTab(tab, values);
           }}
-          onNextTab={() =>
-            redirectAfterDraftUpdate(listing.id.uuid, params, tab, marketplaceTabs, history)
-          }
         />
       );
     }

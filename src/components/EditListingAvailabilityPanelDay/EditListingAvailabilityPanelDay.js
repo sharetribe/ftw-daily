@@ -22,13 +22,18 @@ const EditListingAvailabilityPanelDay = props => {
     submitButtonText,
     panelUpdated,
     updateInProgress,
-    errors,
-    onNextTab
+    errors
   } = props;
 
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
-  const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
+  const {
+    state,
+    availabilityPlan: currentAvailabilityPlan,
+    publicData
+  } = currentListing.attributes;
+
+  const isPublished = currentListing.id && state !== LISTING_STATE_DRAFT;
   const defaultAvailabilityPlan = {
     type: 'availability-plan/day',
     entries: [
@@ -41,7 +46,9 @@ const EditListingAvailabilityPanelDay = props => {
       { dayOfWeek: 'sun', seats: 1 },
     ],
   };
-  const availabilityPlan = currentListing.attributes.availabilityPlan || defaultAvailabilityPlan;
+
+  const availabilityPlan = currentAvailabilityPlan || defaultAvailabilityPlan;
+  const minimumLength = [publicData.minimumLength] || [1];
 
   return (
     <div className={classes}>
@@ -58,17 +65,17 @@ const EditListingAvailabilityPanelDay = props => {
       <EditListingAvailabilityForm
         className={css.form}
         listingId={currentListing.id}
-        initialValues={{ availabilityPlan }}
+        initialValues={{ availabilityPlan, minimumLength }}
         availability={availability}
         availabilityPlan={availabilityPlan}
-        onSubmit={() => {
+        onSubmit={values => {
           // We save the default availability plan
           // I.e. this listing is available every night.
           // Exceptions are handled with live edit through a calendar,
           // which is visible on this panel.
-          onSubmit({ availabilityPlan });
+          const minimumLength = values.minimumLength[0]
+          onSubmit({ availabilityPlan, publicData: { minimumLength } });
         }}
-        onNextTab={onNextTab}
         onChange={onChange}
         saveActionMsg={submitButtonText}
         disabled={disabled}
@@ -100,7 +107,6 @@ EditListingAvailabilityPanelDay.propTypes = {
     onCreateAvailabilityException: func.isRequired,
     onDeleteAvailabilityException: func.isRequired,
   }).isRequired,
-  onNextTab: func.isRequired,
   disabled: bool.isRequired,
   ready: bool.isRequired,
   onSubmit: func.isRequired,

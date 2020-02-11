@@ -5,7 +5,7 @@ import { Form as FinalForm } from 'react-final-form';
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
-import { Form, Button } from '../../components';
+import { Form, Button, FieldRangeSlider } from '../../components';
 
 import ManageAvailabilityCalendar from './ManageAvailabilityCalendar';
 import css from './EditListingAvailabilityForm.css';
@@ -32,7 +32,7 @@ export class EditListingAvailabilityFormComponent extends Component {
             availability,
             availabilityPlan,
             listingId,
-            onNextTab
+            values
           } = formRenderProps;
 
           const errorMessage = updateError ? (
@@ -46,6 +46,9 @@ export class EditListingAvailabilityFormComponent extends Component {
           const submitInProgress = updateInProgress;
           const submitDisabled = invalid || disabled || submitInProgress;
 
+          const minLength = Array.isArray(values.minimumLength) ? values.minimumLength[0] : 1;
+          const minLengthString = minLength > 1 ? `${minLength} days` : '1 day';
+
           return (
             <Form className={classes} onSubmit={handleSubmit}>
               {errorMessage}
@@ -57,13 +60,22 @@ export class EditListingAvailabilityFormComponent extends Component {
                 />
               </div>
 
+              <FieldRangeSlider
+                id="minimumLength"
+                name="minimumLength"
+                label={`Minimum booking length: ${minLengthString}`}
+                min={1}
+                max={100}
+                step={1}
+                handles={[1]}
+              />
+
               <Button
                 className={css.submitButton}
                 type="submit"
                 inProgress={submitInProgress}
                 disabled={submitDisabled}
                 ready={submitReady}
-                onClick={onNextTab}
               >
                 {saveActionMsg}
               </Button>
@@ -82,7 +94,6 @@ EditListingAvailabilityFormComponent.defaultProps = {
 EditListingAvailabilityFormComponent.propTypes = {
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
-  onNextTab: func.isRequired,
   saveActionMsg: string.isRequired,
   disabled: bool.isRequired,
   ready: bool.isRequired,

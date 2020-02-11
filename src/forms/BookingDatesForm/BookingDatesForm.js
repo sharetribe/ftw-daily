@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { string, bool, arrayOf } from 'prop-types';
+import { string, number, bool, arrayOf } from 'prop-types';
 import { compose } from 'redux';
 import { Form as FinalForm } from 'react-final-form';
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
@@ -88,6 +88,7 @@ export class BookingDatesFormComponent extends Component {
             unitPrice,
             discount,
             unitType,
+            minimumLength,
             values,
             timeSlots,
             fetchTimeSlotsError,
@@ -164,6 +165,7 @@ export class BookingDatesFormComponent extends Component {
                 className={css.bookingDates}
                 name="bookingDates"
                 unitType={unitType}
+                minimumLength={minimumLength}
                 startDateId={`${formId}.bookingStartDate`}
                 startDateLabel={bookingStartLabel}
                 startDatePlaceholderText={startDatePlaceholderText}
@@ -218,7 +220,7 @@ BookingDatesFormComponent.propTypes = {
   rootClassName: string,
   className: string,
   submitButtonWrapperClassName: string,
-
+  minimumLength: number,
   unitType: propTypes.bookingUnitType.isRequired,
   price: propTypes.money,
   isOwnListing: bool,

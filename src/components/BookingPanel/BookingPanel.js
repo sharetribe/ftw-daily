@@ -79,6 +79,8 @@ const BookingPanel = props => {
     publicData
   } = listing.attributes;
 
+  const { discount, minimumLength } = publicData || {};
+
   const timeZone = availabilityPlan && availabilityPlan.timezone;
   const isClosed = state && state === LISTING_STATE_CLOSED;
   const showClosedListingHelpText = listing.id && isClosed;
@@ -86,15 +88,21 @@ const BookingPanel = props => {
   const isBook = !!parse(location.search).book;
 
   const showBookingForm = !!state && !isClosed;
-  const showBookingDatesForm = showBookingForm && availabilityPlan.type === 'availability-plan/day';
-  const showBookingTimeForm = showBookingForm && availabilityPlan.type === 'availability-plan/time';
+  const showBookingDatesForm = showBookingForm && availabilityPlan && availabilityPlan.type === 'availability-plan/day';
+  const showBookingTimeForm = showBookingForm && availabilityPlan && availabilityPlan.type === 'availability-plan/time';
 
+  const subTitleMinLengthText = (
+    showBookingDatesForm &&
+    minimumLength &&
+    minimumLength > 1
+  ) ? ` Minimum booking length is ${minimumLength} days.` : '';
 
   const subTitleText = !!subTitle
-    ? subTitle
+    ? subTitle + subTitleMinLengthText
     : showClosedListingHelpText
     ? intl.formatMessage({ id: 'BookingPanel.subTitleClosedListing' })
     : null;
+
 
   const unitType = (publicData && publicData.unitType) || config.fallbackUnitType;
   const isHourly = unitType === LINE_ITEM_UNITS;
@@ -109,7 +117,6 @@ const BookingPanel = props => {
   const classes = classNames(rootClassName || css.root, className);
   const titleClasses = classNames(titleClassName || css.bookingTitle);
 
-  const { discount } = listing.attributes.publicData || {};
 
   return (
     <div className={classes}>
@@ -139,6 +146,7 @@ const BookingPanel = props => {
             formId="BookingPanel"
             submitButtonWrapperClassName={css.bookingDatesSubmitButtonWrapper}
             unitType={unitType}
+            minimumLength={minimumLength}
             onSubmit={onSubmit}
             price={price}
             discount={discount}

@@ -6,7 +6,7 @@
  */
 import React, { Component } from 'react';
 import omit from 'lodash/omit';
-import { bool, func, instanceOf, oneOf, shape, string, arrayOf } from 'prop-types';
+import { bool, func, instanceOf, oneOf, shape, string, number, arrayOf } from 'prop-types';
 import { DateRangePicker, isInclusivelyAfterDay, isInclusivelyBeforeDay } from 'react-dates';
 import { intlShape, injectIntl } from '../../util/reactIntl';
 import classNames from 'classnames';
@@ -217,11 +217,11 @@ class DateRangeInputComponent extends Component {
       children,
       render,
       timeSlots,
+      minimumLength: minimumNights,
       ...datePickerProps
     } = this.props;
     /* eslint-enable no-unused-vars */
 
-    const isDaily = unitType === LINE_ITEM_DAY;
     const initialStartMoment = initialDates ? moment(initialDates.startDate) : null;
     const initialEndMoment = initialDates ? moment(initialDates.endDate) : null;
     const startDate =
@@ -265,6 +265,8 @@ class DateRangeInputComponent extends Component {
       [css.withMobileMargins]: useMobileMargins,
     });
 
+    const minimumDays = minimumNights - 1;
+
     return (
       <div className={classes}>
         <DateRangePicker
@@ -273,7 +275,7 @@ class DateRangeInputComponent extends Component {
           onFocusChange={this.onFocusChange}
           startDate={startDate}
           endDate={endDate}
-          minimumNights={isDaily ? 0 : 1}
+          minimumNights={minimumDays}
           onDatesChange={this.onDatesChange}
           startDatePlaceholderText={startDatePlaceholderTxt}
           endDatePlaceholderText={endDatePlaceholderTxt}
@@ -299,6 +301,7 @@ DateRangeInputComponent.propTypes = {
   startDateId: string,
   endDateId: string,
   unitType: propTypes.bookingUnitType.isRequired,
+  minimumLength: number,
   focusedInput: oneOf([START_DATE, END_DATE]),
   initialDates: instanceOf(Date),
   intl: intlShape.isRequired,

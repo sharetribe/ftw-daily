@@ -6,7 +6,7 @@
  */
 
 import React, { Component } from 'react';
-import { bool, func, object, oneOf, string, arrayOf } from 'prop-types';
+import { bool, func, object, oneOf, string, number, arrayOf } from 'prop-types';
 import { Field } from 'react-final-form';
 import classNames from 'classnames';
 import { START_DATE, END_DATE } from '../../util/dates';
@@ -56,6 +56,7 @@ class FieldDateRangeInputComponent extends Component {
       className,
       rootClassName,
       unitType,
+      minimumLength,
       startDateId,
       startDateLabel,
       endDateId,
@@ -120,6 +121,7 @@ class FieldDateRangeInputComponent extends Component {
     const { onBlur, onFocus, type, ...restOfInput } = input;
     const inputProps = {
       unitType,
+      minimumLength,
       onBlur: this.handleBlur,
       onFocus: this.handleFocus,
       useMobileMargins,
@@ -170,6 +172,7 @@ FieldDateRangeInputComponent.propTypes = {
   className: string,
   rootClassName: string,
   unitType: propTypes.bookingUnitType.isRequired,
+  minimumLength: number,
   useMobileMargins: bool,
   endDateId: string,
   endDateLabel: string,

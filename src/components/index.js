@@ -97,6 +97,7 @@ export { default as FieldReviewRating } from './FieldReviewRating/FieldReviewRat
 export { default as FieldSelect } from './FieldSelect/FieldSelect';
 export { default as FieldTextInput } from './FieldTextInput/FieldTextInput';
 export { default as FieldTimeZoneSelect } from './FieldTimeZoneSelect/FieldTimeZoneSelect';
+export { default as FieldRangeSlider } from './FieldRangeSlider/FieldRangeSlider';
 
 // Fields that use other Fields
 export { default as FieldBoolean } from './FieldBoolean/FieldBoolean';
