@@ -214,14 +214,15 @@ app.get('*', (req, res) => {
         // authentication.
 
         const token = tokenStore.getToken();
-        const refreshTokenExists = !!token && !!token.refresh_token;
-
-        if (refreshTokenExists) {
-          // If refresh token exists, we assume that client can handle the situation
+        const scopes = !!token && token.scopes;
+        const isAnonymous = !!scopes && scopes.length === 1 && scopes[0] === 'public-read';
+        if (isAnonymous) {
+          res.status(401).send(html);
+        } else {
+          // If the token is associated with other than public-read scopes, we
+          // assume that client can handle the situation
           // TODO: improve by checking if the token is valid (needs an API call)
           res.status(200).send(html);
-        } else {
-          res.status(401).send(html);
         }
       } else if (context.forbidden) {
         res.status(403).send(html);
