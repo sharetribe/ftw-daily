@@ -11,15 +11,18 @@ import {
   SingleDatePicker,
   isInclusivelyAfterDay,
   isInclusivelyBeforeDay,
-  isSameDay,
+  // isSameDay,
 } from 'react-dates';
 import { intlShape, injectIntl } from '../../util/reactIntl';
 import classNames from 'classnames';
 import moment from 'moment';
 import config from '../../config';
-import { propTypes, TIME_SLOT_DAY } from '../../util/types';
-import { dateFromAPIToLocalNoon } from '../../util/dates';
-import { ensureTimeSlot } from '../../util/data';
+import {
+  propTypes,
+  // TIME_SLOT_DAY
+} from '../../util/types';
+// import { dateFromAPIToLocalNoon } from '../../util/dates';
+// import { ensureTimeSlot } from '../../util/data';
 
 import NextMonthIcon from './NextMonthIcon';
 import PreviousMonthIcon from './PreviousMonthIcon';
@@ -106,16 +109,16 @@ const defaultProps = {
   },
 };
 
-// Checks if time slot (propTypes.timeSlot) start time equals a day (moment)
-const timeSlotEqualsDay = (timeSlot, day) => {
-  // Time slots describe available dates by providing a start and
-  // an end date which is the following day. In the single date picker
-  // the start date is used to represent available dates.
-  const localStartDate = dateFromAPIToLocalNoon(timeSlot.attributes.start);
+// // Checks if time slot (propTypes.timeSlot) start time equals a day (moment)
+// const timeSlotEqualsDay = (timeSlot, day) => {
+//   // Time slots describe available dates by providing a start and
+//   // an end date which is the following day. In the single date picker
+//   // the start date is used to represent available dates.
+//   const localStartDate = dateFromAPIToLocalNoon(timeSlot.attributes.start);
 
-  const isDay = ensureTimeSlot(timeSlot).attributes.type === TIME_SLOT_DAY;
-  return isDay && isSameDay(day, moment(localStartDate));
-};
+//   const isDay = ensureTimeSlot(timeSlot).attributes.type === TIME_SLOT_DAY;
+//   return isDay && isSameDay(day, moment(localStartDate));
+// };
 
 class DateInputComponent extends Component {
   constructor(props) {

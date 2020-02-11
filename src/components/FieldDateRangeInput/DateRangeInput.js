@@ -12,7 +12,7 @@ import { intlShape, injectIntl } from '../../util/reactIntl';
 import classNames from 'classnames';
 import moment from 'moment';
 import { START_DATE, END_DATE } from '../../util/dates';
-import { LINE_ITEM_DAY, propTypes } from '../../util/types';
+import { propTypes } from '../../util/types';
 import config from '../../config';
 import {
   isDayBlockedFn,

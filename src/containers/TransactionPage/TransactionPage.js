@@ -9,7 +9,11 @@ import { createResourceLocatorString, findRouteByRouteName } from '../../util/ro
 import routeConfiguration from '../../routeConfiguration';
 import { propTypes } from '../../util/types';
 import { ensureListing, ensureTransaction } from '../../util/data';
-import { dateFromAPIToLocalNoon, timestampToDate, calculateQuantityFromHours } from '../../util/dates';
+import {
+  // dateFromAPIToLocalNoon,
+  timestampToDate,
+  calculateQuantityFromHours
+} from '../../util/dates';
 import { createSlug } from '../../util/urlHelpers';
 import { txIsPaymentPending } from '../../util/transaction';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';

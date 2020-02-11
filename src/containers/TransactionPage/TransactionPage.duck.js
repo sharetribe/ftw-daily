@@ -1,7 +1,7 @@
 import pick from 'lodash/pick';
 import pickBy from 'lodash/pickBy';
 import isEmpty from 'lodash/isEmpty';
-import moment from 'moment';
+// import moment from 'moment';
 import config from '../../config';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { isTransactionsTransitionInvalidTransition, storableError } from '../../util/errors';
@@ -19,7 +19,11 @@ import {
   denormalisedEntities,
   denormalisedResponseEntities,
 } from '../../util/data';
-import { findNextBoundary, nextMonthFn, monthIdStringInTimeZone } from '../../util/dates';
+import {
+  // findNextBoundary,
+  // nextMonthFn,
+  monthIdStringInTimeZone
+} from '../../util/dates';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { fetchCurrentUserNotifications } from '../../ducks/user.duck';
 
@@ -611,30 +615,30 @@ export const fetchTimeSlots = (listingId, start, end, timeZone) => (dispatch, ge
 
 
 // Helper function for fetchTransaction call.
-const fetchMonthlyTimeSlots = (dispatch, listing) => {
-  const hasWindow = typeof window !== 'undefined';
-  const attributes = listing.attributes;
-  // Listing could be ownListing entity too, so we just check if attributes key exists
-  const hasTimeZone =
-    attributes && attributes.availabilityPlan && attributes.availabilityPlan.timezone;
+// const fetchMonthlyTimeSlots = (dispatch, listing) => {
+//   const hasWindow = typeof window !== 'undefined';
+//   const attributes = listing.attributes;
+//   // Listing could be ownListing entity too, so we just check if attributes key exists
+//   const hasTimeZone =
+//     attributes && attributes.availabilityPlan && attributes.availabilityPlan.timezone;
 
-  // Fetch time-zones on client side only.
-  if (hasWindow && listing.id && hasTimeZone) {
-    const tz = listing.attributes.availabilityPlan.timezone;
-    const nextBoundary = findNextBoundary(tz, new Date());
+//   // Fetch time-zones on client side only.
+//   if (hasWindow && listing.id && hasTimeZone) {
+//     const tz = listing.attributes.availabilityPlan.timezone;
+//     const nextBoundary = findNextBoundary(tz, new Date());
 
-    const nextMonth = nextMonthFn(nextBoundary, tz);
-    const nextAfterNextMonth = nextMonthFn(nextMonth, tz);
+//     const nextMonth = nextMonthFn(nextBoundary, tz);
+//     const nextAfterNextMonth = nextMonthFn(nextMonth, tz);
 
-    return Promise.all([
-      dispatch(fetchTimeSlots(listing.id, nextBoundary, nextMonth, tz)),
-      dispatch(fetchTimeSlots(listing.id, nextMonth, nextAfterNextMonth, tz)),
-    ]);
-  }
+//     return Promise.all([
+//       dispatch(fetchTimeSlots(listing.id, nextBoundary, nextMonth, tz)),
+//       dispatch(fetchTimeSlots(listing.id, nextMonth, nextAfterNextMonth, tz)),
+//     ]);
+//   }
 
-  // By default return an empty array
-  return Promise.all([]);
-};
+//   // By default return an empty array
+//   return Promise.all([]);
+// };
 
 export const fetchNextTransitions = id => (dispatch, getState, sdk) => {
   dispatch(fetchTransitionsRequest());
