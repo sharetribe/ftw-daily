@@ -240,6 +240,7 @@ class TopbarComponent extends Component {
           id="TopbarMobileMenu"
           isOpen={isMobileMenuOpen}
           onClose={this.handleMobileMenuClose}
+          usePortal
           onManageDisableScrolling={onManageDisableScrolling}
         >
           {authInProgress ? null : mobileMenu}
@@ -249,6 +250,7 @@ class TopbarComponent extends Component {
           containerClassName={css.modalContainer}
           isOpen={isMobileSearchOpen}
           onClose={this.handleMobileSearchClose}
+          usePortal
           onManageDisableScrolling={onManageDisableScrolling}
         >
           <div className={css.searchContainer}>

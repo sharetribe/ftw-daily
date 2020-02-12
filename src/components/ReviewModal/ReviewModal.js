@@ -36,6 +36,7 @@ const ReviewModal = props => {
       isOpen={isOpen}
       onClose={onCloseModal}
       onManageDisableScrolling={onManageDisableScrolling}
+      usePortal
       closeButtonMessage={closeButtonMessage}
     >
       <IconReviewUser className={css.modalIcon} />
