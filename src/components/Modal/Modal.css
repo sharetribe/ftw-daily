@@ -76,3 +76,9 @@
     color: var(--matterColorLight);
   }
 }
+
+.focusedDiv {
+  &:focus {
+    outline: none;
+  }
+}
