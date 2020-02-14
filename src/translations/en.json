@@ -322,6 +322,8 @@
   "LayoutWrapperAccountSettingsSideNav.passwordTabTitle": "Password",
   "LayoutWrapperAccountSettingsSideNav.paymentsTabTitle": "Payout details",
   "LayoutWrapperAccountSettingsSideNav.paymentMethodsTabTitle": "Payment methods",
+  "LimitedAccessBanner.message": "Your are logged in as {firstName} {lastName}. You have limited rights for actions.",
+  "LimitedAccessBanner.logout": "Log out",
   "ListingCard.hostedBy": "Hosted by {authorName}.",
   "ListingCard.perDay": "per day",
   "ListingCard.perNight": "per night",
