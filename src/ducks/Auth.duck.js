@@ -3,7 +3,7 @@ import { clearCurrentUser, fetchCurrentUser } from './user.duck';
 import { storableError } from '../util/errors';
 import * as log from '../util/log';
 
-const authenticated = authInfo => authInfo && authInfo.grantType === 'refresh_token';
+const authenticated = authInfo => authInfo && authInfo.isAnonymous === false;
 
 // ================ Action types ================ //
 
