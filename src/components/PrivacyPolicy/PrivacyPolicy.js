@@ -50,11 +50,111 @@ const PrivacyPolicy = props => {
         <p>All financial transactions via our Website are handled directly by our payment service provider, Stripe. We only share that information as is necessary to conclude the transaction and will not share any personal information with this third-party provider, nor will we receive the financial information that you provide to them except for the last 4 digits of your payment card.</p>
         <h2 id="how-do-we-use-your-personal-data-and-on-what-basis-">How do we use your personal data and on what basis?</h2>
         <p>When you visit our Website, whether to browse our content or make a reservation (the Service), we may use the personal information that you provide for the following purposes:</p>
-        <p><strong>Table</strong></p>
+        
+
+        <table className={css.pureTable}>
+            <thead>
+                <tr>
+                    <td>
+                        <p><strong>Processing</strong></p>
+                    </td>
+                    <td>
+                        <p><strong>Purpose</strong></p>
+                    </td>
+                    <td>
+                        <p><strong>Basis</strong></p>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <p>Account creation &amp; administration</p>
+                    </td>
+                    <td>
+                        <p>To enable you to use the Service, to contact you with information about your account and the Service, to enable you to make reservations and to enable you to raise support queries.</p>
+                    </td>
+                    <td>
+                        <p>To allow us to perform our Service contract with you.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p><span>Transactional correspondence</span></p>
+                    </td>
+                    <td>
+                        <p>To notify you that your registration for an account is successful, and to provide information in relation to your use of the Service, including confirmation of reservations.</p>
+                    </td>
+                    <td>
+                        <p>To allow us to perform our Service contract with you.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Customer support</p>
+                    </td>
+                    <td>
+                        <p>To respond to your support queries.</p>
+                    </td>
+                    <td>
+                        <p>>To allow us to perform our Service contract with you.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Service usage monitoring (including Analytics)</p>
+                    </td>
+                    <td>
+                        <p>To monitor performance of the Service, identify errors, and improve the Service.</p>
+                    </td>
+                    <td>
+                        <p>Legitimate interests of our own to operate our business</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Lead Generation</p>
+                    </td>
+                    <td>
+                        <p>To market the Service to prospective customers and business partners.</p>
+                    </td>
+                    <td>
+                        <p>Legitimate interests of our own or of third parties to operate our business</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Marketing</p>
+                    </td>
+                    <td>
+                        <p>To market the Service to prospective customers and business partners.</p>
+                    </td>
+                    <td>
+                        <p>Legitimate interests of our own or of third parties to operate our business</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Targeted Marketing</p>
+                    </td>
+                    <td>
+                        <p>To understand your interests so that we can render more relevant advertisements to you [through online advertising platforms including social media].</p>
+                    </td>
+                    <td>
+                        <p>Consent</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
         <p>Where we rely on legitimate interests as a lawful basis for processing your personal data, we will always consider whether or not our interests are overridden by your rights and freedoms.</p>
         <h2 id="do-we-share-your-personal-information-with-anyone-else-">Do we share your personal information with anyone else?</h2>
         <p>We will only ever share your information with third parties in the ways that are described in this privacy policy.</p>
-        <p><strong>Personnel, Suppliers and Subcontractors</strong> We keep your information confidential but may disclose it to our personnel (including personnel in our group companies), suppliers or subcontractors (including our cloud-based data processing, data analytics and payment service providers) insofar as it is reasonably necessary for the purposes set out in this privacy policy, provided that they do not make independent use of the information. In some instances, this data sharing may involve the transfer of information outside the EU. Please see our section on International Data Transfers below. </p>
+        <h3>Personnel, Suppliers and Subcontractors</h3> 
+        <p>We keep your information confidential but may disclose it to our personnel (including personnel in our group companies), suppliers or subcontractors (including our cloud-based data processing, data analytics and payment service providers) insofar as it is reasonably necessary for the purposes set out in this privacy policy, provided that they do not make independent use of the information. In some instances, this data sharing may involve the transfer of information outside the EU. Please see our section on International Data Transfers below. </p>
         <p>We will provide your personal information to third party service providers such as:</p>
         <ul>
             <li>Sendgrid (based in the US), who will deliver emails to you in connection with your reservations made through the Website, such as confirmation of registration for an account, and confirmation of reservations.</li>

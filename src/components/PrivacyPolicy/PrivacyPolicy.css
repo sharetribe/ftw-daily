@@ -41,3 +41,38 @@
 }
 
 
+.pureTable {
+    /* Remove spacing between table cells (from Normalize.css) */
+    border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+    border: 1px solid  var(--matterColorDark);
+}
+
+.pureTable caption {
+    color: #000;
+    padding: 1em 0;
+    text-align: center;
+}
+
+.pureTable td,
+.pureTable th {
+    border-bottom: 1px solid  var(--matterColorDark);
+    border-left: 1px solid  var(--matterColorDark);
+    font-size: inherit;
+    margin: 0;
+    overflow: visible; /*to make ths where the title is really long work*/
+    padding: 1em 1em; /* cell padding */
+    line-height: 1.5;
+}
+
+.pureTable thead {
+    background-color: var(--marketplaceColorLight);
+    color: #000;
+    text-align: left;
+    vertical-align: bottom;
+}
+
+
+
+
