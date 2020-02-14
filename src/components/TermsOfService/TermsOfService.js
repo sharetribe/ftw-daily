@@ -19,7 +19,7 @@ const TermsOfService = props => {
       <p>Throughout this Agreement, the term “Service” means the service allowing you to book workspace or offer your workspace to others through our website or apps (the “Platform”). The term Service does not include any services provided by third parties. The terms “User” and “Host” refer to the party Booking or Listing a workspace or “Patch”, respectively. Collectively, Users and Hosts of the platform may be referred from time to time as “Members”. </p>
       <p>A “Patch” is the physical space made available to a User to use during specific times, and subject to specific Fees and any site-specific terms or limitations. A Host may “List” a Patch by providing certain details about the Patch including availability, pricing, and terms or limitations of use; this posting about a Patch is called a “Listing.”</p>
       <p>A User may “Book” a Patch by accepting the times, fees, and any additional terms (such as confirmation of all payment conditions between Host and User if required) or limitations of the Listing. A “Booking” is (i) only the grant of a limited, temporary, revocable license to use a Patch subject to all restrictions provided, subject to this Agreement, and as confirmed through the Platform. The scope of the use, including times, specific fees, and other additional terms or limitations, constitutes a “Booking Agreement” that incorporates the terms and conditions of this Agreement and referenced policies. A Booking does not provide you a lease but only allows you limited access to use the Patch or other service only as permitted in the Agreement and, as applicable, the Booking Agreement.</p>
-      <h2 id="2-intro">2. INTRO</h2>
+      <h2 id="2-intro">2. Intro</h2>
       <ol>
           <li>You may only apply to register as a Member:
               <ol type="a">
@@ -126,34 +126,36 @@ const TermsOfService = props => {
       </ol>
       <h2 id="10-liability">10. Liability</h2>
       <ol>
-          <li>We provide and maintain the Platform on an “as is” and “as available” basis and we are liable only to provide our services with reasonable skill and care.</li>
-          <li>We give no other warranty in connection with the Platform and we disclaim all liability for:<pre><code> <span className="hljs-number">1</span>. the accuracy, currency <span className="hljs-keyword">or</span> validity <span className="hljs-keyword">of</span> information <span className="hljs-keyword">and</span> material contained within the <span className="hljs-type">Platform</span>, including the accuracy <span className="hljs-keyword">of</span> <span className="hljs-built_in">any</span> ratings <span className="hljs-keyword">or</span> reviews given to <span className="hljs-type">Members</span>;
-       <span className="hljs-number">2</span>. <span className="hljs-built_in">any</span> changes <span className="hljs-keyword">in</span> applicable law <span className="hljs-keyword">or</span> regulation, <span className="hljs-keyword">or</span> the acts <span className="hljs-keyword">of</span> <span className="hljs-built_in">any</span> legislator <span className="hljs-keyword">or</span> regulator <span className="hljs-keyword">in</span> <span className="hljs-built_in">any</span> part <span className="hljs-keyword">of</span> the world;
-       <span className="hljs-number">3</span>. <span className="hljs-built_in">any</span> interruptions to <span className="hljs-keyword">or</span> error <span className="hljs-keyword">of</span> the <span className="hljs-type">Platform</span> <span className="hljs-keyword">or</span> other communications network;
-       <span className="hljs-number">4</span>. the infringement by <span className="hljs-built_in">any</span> other person <span className="hljs-keyword">of</span> <span className="hljs-built_in">any</span> copyright <span className="hljs-keyword">or</span> other intellectual property rights <span className="hljs-keyword">of</span> <span className="hljs-built_in">any</span> third party through <span className="hljs-built_in">any</span> <span className="hljs-type">User</span> <span className="hljs-type">Content</span> <span className="hljs-keyword">or</span> use <span className="hljs-keyword">of</span> the <span className="hljs-type">Platform</span>;
-       <span className="hljs-number">5</span>. the availability, quality, content <span className="hljs-keyword">or</span> nature <span className="hljs-keyword">of</span> external sites;
-       <span className="hljs-number">6</span>. <span className="hljs-built_in">any</span> amount <span className="hljs-keyword">or</span> kind <span className="hljs-keyword">of</span> loss <span className="hljs-keyword">or</span> damage due to viruses <span className="hljs-keyword">or</span> other malicious software that may infect a <span className="hljs-type">User</span>’s computer equipment, software, data <span className="hljs-keyword">or</span> other property caused by <span className="hljs-built_in">any</span> other person accessing, <span className="hljs-keyword">using</span> <span className="hljs-keyword">or</span> downloading the <span className="hljs-type">Platform</span> <span className="hljs-keyword">or</span> <span className="hljs-built_in">any</span> <span className="hljs-type">User</span> <span className="hljs-type">Content</span>; <span className="hljs-keyword">and</span>
-       <span className="hljs-number">7</span>. all representations, warranties, conditions <span className="hljs-keyword">and</span> other terms <span className="hljs-keyword">and</span> conditions which, but <span className="hljs-keyword">for</span> this notice, would have effect.<span className="hljs-type">We</span> have <span className="hljs-keyword">not</span> verified <span className="hljs-keyword">or</span> reviewed <span className="hljs-built_in">any</span> additional terms <span className="hljs-keyword">of</span> <span className="hljs-built_in">any</span> <span className="hljs-type">Reservation</span> <span className="hljs-keyword">and</span> we are <span className="hljs-keyword">not</span> liable <span className="hljs-keyword">for</span> the additional terms <span className="hljs-keyword">of</span> <span className="hljs-built_in">any</span> <span className="hljs-type">Reservation</span>.
-      </code></pre>
-              <ol>
-                  <li>We will not be liable in any amount for failure to perform any obligation under these terms of use if that failure is caused by the occurrence of an event beyond our reasonable control.</li>
-                  <li>Except as provided above there are no other warranties, conditions or other terms and conditions, express or implied, statutory or otherwise, and all of those terms and conditions are hereby excluded to the maximum extent permitted by law.</li>
-                  <li>To the maximum extent permitted by law, we exclude liability (whether in contract, tort (including negligence), breach of statutory duty, or otherwise) for any indirect, special, punitive or consequential loss whether or not that loss arises out of something of which we have been made aware.</li>
-                  <li>To the maximum extent permitted by law, our aggregate liability in respect of any claims made in connection with or arising out of the use of the Platform (whether in contract, tort (including negligence), breach of statutory duty, or otherwise) for direct losses will be limited to the amount paid by you to us under these Terms in the 12 months immediately prior to the date upon which the cause of action arose.</li>
-                  <li>You agree not to use the Platform in any way which: – is unlawful; – may give rise to civil or criminal liability for HotPatch; or – may bring HotPatch into disrepute.</li>
-                  <li>You hereby agree to indemnify, defend and hold us and our officers, directors, owners, agents, information providers, affiliates, licensors and licensees, and all Hosts (collectively, the “Indemnified Parties”) harmless from and against any and all damage, loss, liability, expenses and costs (including reasonable legal fees) incurred by the Indemnified Parties in connection with any claim arising out of:
-                      <ol>
-                          <li>any fraud or fraudulent misrepresentation you commit;</li>
-                          <li>any inaccuracy or defect in any of the information you have provided to us;</li>
-                          <li>any breach of applicable law or regulation you commit;</li>
-                          <li>any other person’s use of your Account;</li>
-                          <li>any breach by you of these Terms; and</li>
-                          <li>third party claims arising from your use of the Platform or any use of your Account (whether or not such use was by you) and any of your Reservations.You shall cooperate with us in the defence of any claim. We reserve the right, at our own expense, to assume the exclusive defence and control of any matter otherwise subject to indemnification by you. \</li>
-                      </ol>
-                  </li>
-              </ol>
-          </li>
+      <li>We provide and maintain the Platform on an “as is” and “as available” basis and we are liable only to provide our services with reasonable skill and care.</li>
+      <li>We give no other warranty in connection with the Platform and we disclaim all liability for:<ol>
+      <li>the accuracy, currency or validity of information and material contained within the Platform, including the accuracy of any ratings or reviews given to Members;</li>
+      <li>any changes in applicable law or regulation, or the acts of any legislator or regulator in any part of the world;</li>
+      <li>any interruptions to or error of the Platform or other communications network;</li>
+      <li>the infringement by any other person of any copyright or other intellectual property rights of any third party through any User Content or use of the Platform;</li>
+      <li>the availability, quality, content or nature of external sites;</li>
+      <li>any amount or kind of loss or damage due to viruses or other malicious software that may infect a User’s computer equipment, software, data or other property caused by any other person accessing, using or downloading the Platform or any User Content; and</li>
+      <li>all representations, warranties, conditions and other terms and conditions which, but for this notice, would have effect. We have not verified or reviewed any additional terms of any Reservation and we are not liable for the additional terms of any Reservation.<ol>
+      <li>We will not be liable in any amount for failure to perform any obligation under these terms of use if that failure is caused by the occurrence of an event beyond our reasonable control.</li>
+      <li>Except as provided above there are no other warranties, conditions or other terms and conditions, express or implied, statutory or otherwise, and all of those terms and conditions are hereby excluded to the maximum extent permitted by law.</li>
+      <li>To the maximum extent permitted by law, we exclude liability (whether in contract, tort (including negligence), breach of statutory duty, or otherwise) for any indirect, special, punitive or consequential loss whether or not that loss arises out of something of which we have been made aware.</li>
+      <li>To the maximum extent permitted by law, our aggregate liability in respect of any claims made in connection with or arising out of the use of the Platform (whether in contract, tort (including negligence), breach of statutory duty, or otherwise) for direct losses will be limited to the amount paid by you to us under these Terms in the 12 months immediately prior to the date upon which the cause of action arose.</li>
+      <li>You agree not to use the Platform in any way which: – is unlawful; – may give rise to civil or criminal liability for HotPatch; or – may bring HotPatch into disrepute.</li>
+      <li>You hereby agree to indemnify, defend and hold us and our officers, directors, owners, agents, information providers, affiliates, licensors and licensees, and all Hosts (collectively, the “Indemnified Parties”) harmless from and against any and all damage, loss, liability, expenses and costs (including reasonable legal fees) incurred by the Indemnified Parties in connection with any claim arising out of:<ol>
+      <li>any fraud or fraudulent misrepresentation you commit;</li>
+      <li>any inaccuracy or defect in any of the information you have provided to us;</li>
+      <li>any breach of applicable law or regulation you commit;</li>
+      <li>any other person’s use of your Account;</li>
+      <li>any breach by you of these Terms; and</li>
+      <li>third party claims arising from your use of the Platform or any use of your Account (whether or not such use was by you) and any of your Reservations. You shall cooperate with us in the defence of any claim. We reserve the right, at our own expense, to assume the exclusive defense and control of any matter otherwise subject to indemnification by you.</li>
       </ol>
+      </li>
+      </ol>
+      </li>
+      </ol>
+      </li>
+      </ol>
+
+
       <h2 id="11-breach-suspension-and-termination">11. Breach, suspension, and termination</h2>
       <ol>
           <li>Without limiting any other rights we have, we may suspend or terminate access to your Account or the Platform if you breach any of these Terms.</li>
@@ -166,7 +168,7 @@ const TermsOfService = props => {
           <li>If you become aware of or suspect another User’s breach of these Terms, or any fraud or impropriety by another user, you must contact us immediately.</li>
           <li>We may cancel, amend or suspend a Reservation at any time for any reason.</li>
       </ol>
-      <h2 id="12-patch-specific-terms-maximum-capacities">12. PATCH SPECIFIC TERMS &amp; MAXIMUM CAPACITIES</h2>
+      <h2 id="12-patch-specific-terms-maximum-capacities">12. Patch specific terms &amp; maximum capacities</h2>
       <ol>
           <li>Members are advised not to exceed the recommended Patch maximum capacities specified by the Host as well as any other specific terms to the Patch.</li>
       </ol>
