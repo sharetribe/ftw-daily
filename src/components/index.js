@@ -37,6 +37,7 @@ export { default as IconSuccess } from './IconSuccess/IconSuccess';
 export { default as ExternalLink } from './ExternalLink/ExternalLink';
 export { default as ExpandingTextarea } from './ExpandingTextarea/ExpandingTextarea';
 export { default as Form } from './Form/Form';
+export { default as LimitedAccessBanner } from './LimitedAccessBanner/LimitedAccessBanner';
 export { default as Logo } from './Logo/Logo';
 export { default as NamedLink } from './NamedLink/NamedLink';
 export { default as NamedRedirect } from './NamedRedirect/NamedRedirect';
