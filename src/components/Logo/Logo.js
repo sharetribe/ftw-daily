@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import config from '../../config';
 import IconLogo from './IconLogo';
-import LogoImage from './hotpatch-logo-temp.png';
+import LogoImage from './hotpatch-logo.png';
 import css from './Logo.css';
 
 const Logo = props => {
