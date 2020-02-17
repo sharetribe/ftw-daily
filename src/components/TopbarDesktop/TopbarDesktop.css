@@ -129,13 +129,13 @@
   align-items: center;
   border: 1px solid var(--marketPlaceColorLightSecondary);
   box-sizing: border-box;
-  border-radius: 3px;
+  border-radius: 25px;
 
   &:hover {
   color: white;
   background-color: var(--marketplaceColor);
   border: 1px solid var(--marketplaceColor);
-  border-radius: 3px;
+  border-radius: 25px;
 }
 
   @media (--viewportMedium) {

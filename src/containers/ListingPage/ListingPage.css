@@ -231,12 +231,16 @@
   align-items: center;
   transform: translateZ(0);
   text-align: center;
-
+  background: url('/static/patterns/ps-pattern.png');
+  
   @media (--viewportMedium) {
     padding: 18px 50px;
+    background-size: 17%;
+  
   }
 
   @media (--viewportLarge) {
+    background-size: 100%;
     display: block;
     margin-top: 70px;
     margin-left: 60px;

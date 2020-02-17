@@ -33,13 +33,13 @@ const SectionHero = props => {
               <FormattedMessage id="SectionHero.browseButton" />
             </span>
           </NamedLink>
-
+         {/* 
           <NamedLink
             name="NewListingPage"
             className={`${css.heroButton} ${css.heroButtonSecodary}`}
           >
             <FormattedMessage id="TopbarDesktop.createListingSecondary" />
-          </NamedLink>
+          </NamedLink> */}
 
         </div>
         
