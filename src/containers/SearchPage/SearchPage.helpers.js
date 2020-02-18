@@ -16,8 +16,7 @@ import routeConfiguration from '../../routeConfiguration';
 export const validURLParamForExtendedData = (paramName, paramValueRaw, filters) => {
   const filtersArray = Object.values(filters);
   // resolve configuration for this filter
-  const filterConfig = filtersArray.find(f => f.paramName === paramName);
-
+  const filterConfig = filtersArray.find(f => f.paramName === paramName)
   const paramValue = paramValueRaw.toString();
   const valueArray = paramValue ? paramValue.split(',') : [];
 
@@ -25,8 +24,9 @@ export const validURLParamForExtendedData = (paramName, paramValueRaw, filters) 
     const { min, max, active } = filterConfig.config || {};
 
     if (filterConfig.options) {
+
       // Single and multiselect filters
-      const allowedValues = filterConfig.options.map(o => o.key);
+      const allowedValues = flattenOptions(filterConfig.options);
 
       const validValues = intersection(valueArray, allowedValues).join(',');
       return validValues.length > 0 ? { [paramName]: validValues } : {};
@@ -92,6 +92,17 @@ export const validURLParamsForExtendedData = (params, filters) => {
         }
       : { ...validParams, [paramName]: paramValue };
   }, {});
+};
+
+// Flatten nested options
+const flattenOptions = options => {
+  return options.reduce((acc, o) => {
+    o.children && o.children.length
+      ? o.children.map(c => acc.push(c.key))
+      : acc.push(o.key)
+
+    return acc
+  }, [])
 };
 
 // extract search parameters, including a custom URL params

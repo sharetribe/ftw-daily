@@ -4,291 +4,303 @@
 
 export const amenities = [
   {
-      key: "free-parking",
-      label: "Free parking",
-    },
+    label: "General",
+    children: [
+      {
+        key: "free-parking",
+        label: "Free parking",
+      },
 
 
-    {
-      key: "key/electronic-access-card",
-      label: "Key/electronic access card",
-    },
+      {
+        key: "key/electronic-access-card",
+        label: "Key/electronic access card",
+      },
 
 
-    {
-      key: "wheelchair-access",
-      label: "Wheelchair access",
-    },
+      {
+        key: "wheelchair-access",
+        label: "Wheelchair access",
+      },
 
 
-    {
-      key: "wifi",
-      label: "WiFi",
-    },
+      {
+        key: "wifi",
+        label: "WiFi",
+      },
 
 
-    {
-      key: "receptionist",
-      label: "Receptionist",
-    },
+      {
+        key: "receptionist",
+        label: "Receptionist",
+      },
 
 
-    {
-      key: "kitchen",
-      label: "Kitchen",
-    },
+      {
+        key: "kitchen",
+        label: "Kitchen",
+      },
 
 
-    {
-      key: "fridge/freezer",
-      label: "Fridge/freezer",
-    },
+      {
+        key: "fridge/freezer",
+        label: "Fridge/freezer",
+      },
 
 
-    {
-      key: "tea/coffee-making-facilities",
-      label: "Tea/coffee making facilities",
-    },
+      {
+        key: "tea/coffee-making-facilities",
+        label: "Tea/coffee making facilities",
+      },
 
 
-    {
-      key: "refreshments",
-      label: "Refreshments",
-    },
+      {
+        key: "refreshments",
+        label: "Refreshments",
+      },
 
 
-    {
-      key: "toilet",
-      label: "Toilet",
-    },
+      {
+        key: "toilet",
+        label: "Toilet",
+      },
 
 
-    {
-      key: "air-conditioning",
-      label: "Air conditioning",
-    },
+      {
+        key: "air-conditioning",
+        label: "Air conditioning",
+      },
 
 
-    {
-      key: "heating",
-      label: "Heating",
-    },
+      {
+        key: "heating",
+        label: "Heating",
+      },
+      {
+        key: "accepts-card-payments",
+        label: "Accepts card payments",
+      },
 
 
-    {
-      key: "accepts-card-payments",
-      label: "Accepts card payments",
-    },
+      {
+        key: "accepts-mail-and-packages",
+        label: "Accepts mail and packages",
+      },
 
 
-    {
-      key: "accepts-mail-and-packages",
-      label: "Accepts mail and packages",
-    },
+      {
+        key: "cleaner",
+        label: "Cleaner",
+      },
 
 
-    {
-      key: "cleaner",
-      label: "Cleaner",
-    },
+      {
+        key: "waiting-area",
+        label: "Waiting area",
+      },
 
 
-    {
-      key: "waiting-area",
-      label: "Waiting area",
-    },
+      {
+        key: "changing-areas-with-showers",
+        label: "Changing areas with showers",
+      },
 
 
-    {
-      key: "changing-areas-with-showers",
-      label: "Changing areas with showers",
-    },
+      {
+        key: "cctv-monitoring",
+        label: "CCTV monitoring",
+      },
 
 
-    {
-      key: "cctv-monitoring",
-      label: "CCTV monitoring",
-    },
+      {
+        key: "secure-locker",
+        label: "Secure locker",
+      }
+    ]
+  },
+  {
+    label: 'Beauty',
+    children: [
+      {
+        key: "chair",
+        label: "Chair",
+      },
 
 
-    {
-      key: "secure-locker",
-      label: "Secure locker",
-    },
+      {
+        key: "mirror",
+        label: "Mirror",
+      },
 
 
-    {
-      key: "chair",
-      label: "Chair",
-    },
+      {
+        key: "gowns",
+        label: "Gowns",
+      },
 
 
-    {
-      key: "mirror",
-      label: "Mirror",
-    },
+      {
+        key: "towels",
+        label: "Towels",
+      },
 
 
-    {
-      key: "gowns",
-      label: "Gowns",
-    },
+      {
+        key: "washing-point",
+        label: "Washing point",
+      },
 
 
-    {
-      key: "towels",
-      label: "Towels",
-    },
+      {
+        key: "trolley",
+        label: "Trolley",
+      },
 
 
-    {
-      key: "washing-point",
-      label: "Washing point",
-    },
+      {
+        key: "locked-cupboards",
+        label: "Locked cupboards",
+      },
 
 
-    {
-      key: "trolley",
-      label: "Trolley",
-    },
+      {
+        key: "massage-chair",
+        label: "Massage chair",
+      },
 
 
-    {
-      key: "locked-cupboards",
-      label: "Locked cupboards",
-    },
+      {
+        key: "led-magnifying-light",
+        label: "LED magnifying light",
+      },
 
 
-    {
-      key: "massage-chair",
-      label: "Massage chair",
-    },
+      {
+        key: "dim-lighting",
+        label: "Dim lighting",
+      },
 
 
-    {
-      key: "led-magnifying-light",
-      label: "LED magnifying light",
-    },
+      {
+        key: "wax-equipment",
+        label: "Wax equipment",
+      },
+    ]
+  },
+  {
+    label: "Fitness & Wellbeing",
+    children: [
+      {
+        key: "treadmill",
+        label: "Treadmill",
+      },
 
 
-    {
-      key: "dim-lighting",
-      label: "Dim lighting",
-    },
+      {
+        key: "bike",
+        label: "Bike",
+      },
 
 
-    {
-      key: "wax-equipment",
-      label: "Wax equipment",
-    },
+      {
+        key: "resistance-bands",
+        label: "Resistance bands",
+      },
 
 
-    {
-      key: "treadmill",
-      label: "Treadmill",
-    },
+      {
+        key: "stepper",
+        label: "Stepper",
+      },
 
 
-    {
-      key: "bike",
-      label: "Bike",
-    },
+      {
+        key: "kettlebells",
+        label: "Kettlebells",
+      },
 
 
-    {
-      key: "resistance-bands",
-      label: "Resistance bands",
-    },
+      {
+        key: "free-weights",
+        label: "Free weights",
+      },
 
 
-    {
-      key: "stepper",
-      label: "Stepper",
-    },
+      {
+        key: "machine-weights",
+        label: "Machine weights",
+      },
 
 
-    {
-      key: "kettlebells",
-      label: "Kettlebells",
-    },
+      {
+        key: "yoga-mats",
+        label: "Yoga mats",
+      },
 
 
-    {
-      key: "free-weights",
-      label: "Free weights",
-    },
+      {
+        key: "yoga-props",
+        label: "Yoga props",
+      },
 
 
-    {
-      key: "machine-weights",
-      label: "Machine weights",
-    },
+      {
+        key: "pilates-balls",
+        label: "Pilates balls",
+      },
 
 
-    {
-      key: "yoga-mats",
-      label: "Yoga mats",
-    },
+      {
+        key: "treatment-table",
+        label: "Treatment table",
+      },
 
 
-    {
-      key: "yoga-props",
-      label: "Yoga props",
-    },
+      {
+        key: "water-point",
+        label: "Water point",
+      },
 
 
-    {
-      key: "pilates-balls",
-      label: "Pilates balls",
-    },
+      {
+        key: "secure-lockers-(for-user-clients)",
+        label: "Secure lockers (for User clients)",
+      },
+    ]
+  },
+  {
+    label: "Office",
+    children: [
+      {
+        key: "lockable-drawers-/-file-cabinet",
+        label: "Lockable drawers / file cabinet",
+      },
 
 
-    {
-      key: "treatment-table",
-      label: "Treatment table",
-    },
+      {
+        key: "laser-printer-and-scanner",
+        label: "Laser printer and scanner",
+      },
 
 
-    {
-      key: "water-point",
-      label: "Water point",
-    },
+      {
+        key: "ethernet-connection",
+        label: "Ethernet connection",
+      },
 
 
-    {
-      key: "secure-lockers-(for-user-clients)",
-      label: "Secure lockers (for User clients)",
-    },
+      {
+        key: "power-bank",
+        label: "Power bank",
+      },
 
 
-    {
-      key: "lockable-drawers-/-file-cabinet",
-      label: "Lockable drawers / file cabinet",
-    },
-
-
-    {
-      key: "laser-printer-and-scanner",
-      label: "Laser printer and scanner",
-    },
-
-
-    {
-      key: "ethernet-connection",
-      label: "Ethernet connection",
-    },
-
-
-    {
-      key: "power-bank",
-      label: "Power bank",
-    },
-
-
-    {
-      key: "meeting-/-breakout-room-access",
-      label: "Meeting / breakout room access",
-    },
+      {
+        key: "meeting-/-breakout-room-access",
+        label: "Meeting / breakout room access",
+      },
+    ]
+  },
 ];
 
 
@@ -317,17 +329,6 @@ export const categories = [
   { key: 'office-space', label: 'Office space' },
   { key: 'event-space', label: 'Event space' },
 ];
-
-
-
-
-
-
-
-
-
-
-
 
 
 

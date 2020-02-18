@@ -409,6 +409,16 @@ propTypes.pagination = shape({
 });
 
 // Search filter definition
+const filterWithGroupedOptions = shape({
+  paramName: string.isRequired,
+  options: arrayOf(
+    shape({
+      label: string.isRequired,
+      children: arrayOf(object)
+    })
+  ).isRequired,
+});
+
 const filterWithOptions = shape({
   paramName: string.isRequired,
   options: arrayOf(
@@ -418,6 +428,7 @@ const filterWithOptions = shape({
     })
   ).isRequired,
 });
+
 const filterWithPriceConfig = shape({
   paramName: string.isRequired,
   config: shape({
@@ -435,6 +446,7 @@ const filterIsActiveConfig = shape({
 });
 
 propTypes.filterConfig = oneOfType([
+  filterWithGroupedOptions,
   filterWithOptions,
   filterWithPriceConfig,
   filterIsActiveConfig,

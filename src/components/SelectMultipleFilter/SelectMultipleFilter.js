@@ -12,16 +12,30 @@ import css from './SelectMultipleFilter.css';
 //       There's a mutation problem: formstate.dirty is not reliable with it.
 const GroupOfFieldCheckboxes = props => {
   const { id, className, name, options } = props;
+
+  const item = option => {
+    const fieldId = `${id}.${option.key}`;
+
+    return (
+      <li key={fieldId} className={css.item}>
+        <FieldCheckbox id={fieldId} name={name} label={option.label} value={option.key} />
+      </li>
+    );
+  };
+
   return (
     <fieldset className={className}>
       <ul className={css.list}>
         {options.map((option, index) => {
-          const fieldId = `${id}.${option.key}`;
-          return (
-            <li key={fieldId} className={css.item}>
-              <FieldCheckbox id={fieldId} name={name} label={option.label} value={option.key} />
-            </li>
+          if (option.children && option.children.length) return (
+            <ul className={css.item} key={`${id}.${option.label}`}>
+              <li><h3>{option.label}</h3></li>
+              {option.children.map((c, i) => (item(c)))}
+            </ul>
           );
+
+          if (option.key) return item(option)
+          return null
         })}
       </ul>
     </fieldset>
@@ -81,6 +95,7 @@ class SelectMultipleFilter extends Component {
     const classes = classNames(rootClassName || css.root, className);
 
     const hasInitialValues = initialValues.length > 0;
+
     const labelForPopup = hasInitialValues
       ? intl.formatMessage(
           { id: 'SelectMultipleFilter.labelSelected' },

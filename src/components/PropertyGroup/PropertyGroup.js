@@ -14,12 +14,26 @@ import includes from 'lodash/includes';
 import css from './PropertyGroup.css';
 
 const checkSelected = (options, selectedOptions) => {
-  return options.map(option => ({
-    key: option.key,
-    label: option.label,
-    isSelected: includes(selectedOptions, option.key),
-  }));
-};
+  return options.reduce((acc, o) => {
+    if (o.children && o.children.length) {
+      o.children.forEach(c => {
+        acc.push({
+          key: c.key,
+          label: c.label,
+          isSelected: includes(selectedOptions, c.key),
+        })
+      });
+    } else {
+      acc.push({
+        key: o.key,
+        label: o.label,
+        isSelected: includes(selectedOptions, o.key),
+      })
+    }
+
+    return acc
+  }, [])
+}
 
 const IconCheck = props => {
   const isVisible = props.isVisible;
@@ -74,17 +88,23 @@ PropertyGroup.defaultProps = {
   twoColumns: false,
 };
 
-const { arrayOf, bool, node, shape, string } = PropTypes;
+const { arrayOf, oneOfType, array, bool, node, shape, string } = PropTypes;
 
 PropertyGroup.propTypes = {
   rootClassName: string,
   className: string,
   id: string.isRequired,
   options: arrayOf(
-    shape({
-      key: string.isRequired,
-      label: node.isRequired,
-    })
+    oneOfType([
+      shape({
+        key: string.isRequired,
+        label: node.isRequired,
+      }),
+      shape({
+        label: string.isRequired,
+        children: array,
+      })
+    ])
   ),
   selectedOptions: arrayOf(string),
   twoColumns: bool,

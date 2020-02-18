@@ -47,7 +47,7 @@ const EditListingFeaturesFormComponent = props => (
       const equipmentProvidedPlaceholder = intl.formatMessage({
         id: 'EditListingFeaturesForm.equipmentProvidedPlaceholder',
       });
-      
+
       const classes = classNames(rootClassName || css.root, className);
       const submitReady = (updated && pristine) || ready;
       const submitInProgress = updateInProgress;
@@ -66,33 +66,43 @@ const EditListingFeaturesFormComponent = props => (
         </p>
       ) : null;
 
+      const amenities = config.custom.amenities || []
+      const amenitiesCheckboxGroups = amenities.map((o, i) => {
+        return o.children && o.children.length
+          ? (
+            <span key={`${i}.${name}`}>
+              <h3>{o.label}</h3>
+              <FieldCheckboxGroup
+                className={css.features}
+                id={name}
+                name={name}
+                options={o.children}
+              />
+            </span>
+          )
+          : null
+      });
+
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessage}
           {errorMessageShowListing}
 
-          <FieldCheckboxGroup
-            className={css.features}
-            id={name}
-            name={name}
-            options={config.custom.amenities}
-          />
+          { amenitiesCheckboxGroups }
 
-           <FieldTextInput
+          <FieldTextInput
             id="miscAmenities"
             name="miscAmenities"
-            className={css.misc}
+            className={css.features}
             type="textarea"
             label={miscLabel}
             placeholder={miscPlaceholder}
           />
 
-          <br/>
-
           <FieldTextInput
             id="equipmentProvided"
             name="equipmentProvided"
-            className={css.misc}
+            className={css.features}
             type="textarea"
             label={equipmentProvidedLabel}
             placeholder={equipmentProvidedPlaceholder}
