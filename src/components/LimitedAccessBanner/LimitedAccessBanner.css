@@ -1,0 +1,31 @@
+@import '../../marketplace.css';
+
+.root {
+  background-color: #df492a;
+  text-align: center;
+  padding: 10px 20px 9px;
+}
+
+.text {
+  margin: 0;
+  display: inline-block;
+  color: #fff;
+  font-size: 16px;
+  margin-bottom: 16px;
+  line-height: 20px;
+}
+
+.button {
+  background: #2a3d4b;
+  margin: 0 16px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #fff;
+  border: 0;
+
+  &:hover {
+    text-decoration: none;
+    background: #364f61;
+  }
+}
