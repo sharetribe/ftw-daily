@@ -388,7 +388,7 @@
   margin: 0;
 }
 
-.sectionDescription {
+.sectionDescription, .sectionCapacity {
   padding: 0 24px;
   margin-bottom: 35px;
 
@@ -398,7 +398,7 @@
   }
 }
 
-.descriptionTitle {
+.descriptionTitle, .capacityTitle {
   /* Font */
   @apply --marketplaceH3FontStyles;
   color: var(--matterColorAnti);
@@ -434,7 +434,7 @@
   }
 }
 
-.description {
+.description, .capacity {
   margin-top: 0;
   margin-bottom: 0;
 
