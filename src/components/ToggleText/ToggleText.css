@@ -8,6 +8,9 @@
   @apply --marketplaceButtonStylesSecondary;
   @apply --marketplaceSearchFilterLabelFontStyles;
   @apply --withArrowIcon;
+
+  border: 1px solid #E0E0E0;
+
   &:after, &:before {
     right: 27px;
     top: 44%;
@@ -26,10 +29,9 @@
 
   &:focus{
     outline: none;
-    background-color: var(--matterColorLight);
-    border-color: transparent;
+    background-color: var(--matterColorLight);  
     text-decoration: none;
-    box-shadow: var(--boxShadowFilterButton);
+    box-shadow: none;
   }
 }
 .toggleButtonExpanded {

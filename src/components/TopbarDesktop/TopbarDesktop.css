@@ -117,25 +117,24 @@
 .createListingLink {
   @apply --TopbarDesktop_linkHover;
   @apply --marketplaceH4FontStyles;
-
   flex-shrink: 0;
   height: 36px;
   align-self: center;
   padding: 0 12px 0 12px;
-  color: var(--marketplaceColor);
+  color: white;
   margin-top: 0;
   margin-bottom: 0;
   display: flex;
   align-items: center;
-  border: 1px solid var(--marketPlaceColorLightSecondary);
+  border: none;
   box-sizing: border-box;
   border-radius: 25px;
-
-  &:hover {
-  color: white;
   background-color: var(--marketplaceColor);
-  border: 1px solid var(--marketplaceColor);
+  &:hover
+{
+  border: none;
   border-radius: 25px;
+  background-color: var(--marketplaceColorDark);
 }
 
   @media (--viewportMedium) {

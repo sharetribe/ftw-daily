@@ -39,7 +39,7 @@ export default class ToggleText extends Component {
           <button
             className={`${css.toggleButton} ${textExpanded ? css.toggleButtonExpanded : ''}`}
             onClick={this.handleTextToggling}>
-            Read {textExpanded ? 'weniger' : 'mehr'}
+            {textExpanded ? 'Weniger' : 'Mehr'}
           </button>
         }
       </div>
