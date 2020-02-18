@@ -3,7 +3,7 @@
  * tasks that can not be handled in the browser.
  *
  * The endpoints should not clash with the application routes. Therefore, the
- * enpoints are prefixed in the main server where this file is used.
+ * endpoints are prefixed in the main server where this file is used.
  */
 
 const http = require('http');
@@ -23,8 +23,8 @@ const USING_SSL = process.env.REACT_APP_SHARETRIBE_USING_SSL === 'true';
 
 const router = express.Router();
 
-// redirect_uri param used when initiating a login as authenitcation flow and
-// when requesting a token useing an authorization code
+// redirect_uri param used when initiating a login as authentication flow and
+// when requesting a token using an authorization code
 const loginAsRedirectUri = `${ROOT_URL.replace(/\/$/, '')}/api/login-as`;
 
 // Instantiate HTTP(S) Agents with keepAlive set to true.
@@ -50,14 +50,14 @@ const urlifyBase64 = base64Str =>
 
 // Initiates an authorization code authentication flow. This authentication flow
 // enables marketplace operators that have an ongoing Console session to log
-// into their marketplace as a user of the marketpalce.
+// into their marketplace as a user of the marketplace.
 //
-// The authroization code is requested from Console and it is used to request a
+// The authorization code is requested from Console and it is used to request a
 // token from the Flex Auth API.
 //
 // This endpoint will return a 302 to Console which requests the authorization
 // code. Console returns a 302 with the code to the `redirect_uri` that is
-// passed in this reponse. The request to the redirect URI is handled with the
+// passed in this response. The request to the redirect URI is handled with the
 // `/login-as` endpoint.
 router.get('/initiate-login-as', (req, res) => {
   const userId = req.query.user_id;
