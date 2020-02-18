@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+## [v4.2.0] 2020-02-18
+
 - [add] Show a banner when a user is logged in with limited access.
   [#1259](https://github.com/sharetribe/ftw-daily/pull/1259)
   [#1261](https://github.com/sharetribe/ftw-daily/pull/1261)
