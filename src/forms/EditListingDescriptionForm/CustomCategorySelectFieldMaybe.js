@@ -17,6 +17,25 @@ const CustomCategorySelectFieldMaybe = props => {
       id: 'EditListingDescriptionForm.categoryRequired',
     })
   );
+
+  const categoryOptions = categories.map(cat => {
+    return cat.children && cat.children.length
+      ? (
+        <optgroup key={cat.label} label={cat.label}>
+          { cat.children.map(c => (
+            <option key={c.key} value={c.key}>
+              {c.label}
+            </option>
+          )) }
+        </optgroup>
+      )
+      : (
+        <option key={cat.key} value={cat.key}>
+          {cat.label}
+        </option>
+      )
+  });
+
   return categories ? (
     <FieldSelect
       className={css.category}
@@ -28,11 +47,8 @@ const CustomCategorySelectFieldMaybe = props => {
       <option disabled value="">
         {categoryPlaceholder}
       </option>
-      {categories.map(c => (
-        <option key={c.key} value={c.key}>
-          {c.label}
-        </option>
-      ))}
+
+      { categoryOptions }
     </FieldSelect>
   ) : null;
 };

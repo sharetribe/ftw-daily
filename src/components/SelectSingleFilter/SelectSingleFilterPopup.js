@@ -1,15 +1,62 @@
 import React, { Component } from 'react';
-import { string, func, arrayOf, shape, number } from 'prop-types';
+import { string, func, array, number } from 'prop-types';
 import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 
 import { Menu, MenuContent, MenuItem, MenuLabel } from '..';
 import css from './SelectSingleFilterPopup.css';
 
+const flattenOptions = options => {
+  return options.reduce((acc, o) => {
+    o.children && o.children.length
+      ? o.children.map(c => acc.push(c))
+      : acc.push(o)
+
+    return acc
+  }, [])
+};
+
 const optionLabel = (options, key) => {
-  const option = options.find(o => o.key === key);
+  const flattened = flattenOptions(options);
+  const option = flattened.find(o => o.key === key);
   return option ? option.label : key;
 };
+
+const CategoryItems = (urlParam, initialValue, selectOption, options) => {
+  const item = option => {
+    // check if this option is selected
+    const selected = initialValue === option.key;
+
+    // menu item border class
+    const menuItemBorderClass = selected ? css.menuItemBorderSelected : css.menuItemBorder;
+
+    return (
+      <MenuItem key={option.key}>
+        <button
+          className={css.menuItem}
+          onClick={() => selectOption(urlParam, option.key)}
+        >
+          <span className={menuItemBorderClass} />
+          {option.label}
+        </button>
+      </MenuItem>
+    )
+  }
+
+  return options.map((option, index) => {
+    if (option.children && option.children.length) return (
+      <ul className={css.menuContent} key={`${index}.${option.label}`}>
+        <li className={css.menuItem}><h3>{option.label}</h3></li>
+        {option.children.map((c, i) => (item(c)))}
+      </ul>
+    );
+
+    if (option.key) return item(option)
+    return null
+  })
+};
+
+
 
 class SelectSingleFilterPopup extends Component {
   constructor(props) {
@@ -56,24 +103,10 @@ class SelectSingleFilterPopup extends Component {
       >
         <MenuLabel className={menuLabelClass}>{menuLabel}</MenuLabel>
         <MenuContent className={css.menuContent}>
-          {options.map(option => {
-            // check if this option is selected
-            const selected = initialValue === option.key;
-            // menu item border class
-            const menuItemBorderClass = selected ? css.menuItemBorderSelected : css.menuItemBorder;
 
-            return (
-              <MenuItem key={option.key}>
-                <button
-                  className={css.menuItem}
-                  onClick={() => this.selectOption(urlParam, option.key)}
-                >
-                  <span className={menuItemBorderClass} />
-                  {option.label}
-                </button>
-              </MenuItem>
-            );
-          })}
+
+          { CategoryItems(urlParam, initialValue, this.selectOption, options)  }
+
           <MenuItem key={'clearLink'}>
             <button className={css.clearMenuItem} onClick={() => this.selectOption(urlParam, null)}>
               <FormattedMessage id={'SelectSingleFilter.popupClear'} />
@@ -98,12 +131,7 @@ SelectSingleFilterPopup.propTypes = {
   urlParam: string.isRequired,
   label: string.isRequired,
   onSelect: func.isRequired,
-  options: arrayOf(
-    shape({
-      key: string.isRequired,
-      label: string.isRequired,
-    })
-  ).isRequired,
+  options: array.isRequired,
   initialValue: string,
   contentPlacementOffset: number,
 };

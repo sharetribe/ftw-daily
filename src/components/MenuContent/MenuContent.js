@@ -5,7 +5,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { MenuItem } from '../../components';
 
 import css from './MenuContent.css';
 
@@ -37,15 +36,6 @@ const MenuContent = props => {
       <div className={css.arrowTop} />
     </div>
   ) : null;
-
-  React.Children.forEach(children, child => {
-    if (child.type !== MenuItem) {
-      throw new Error('All children of MenuContent must be MenuItems.');
-    }
-    if (child.key == null) {
-      throw new Error('All children of MenuContent must have a "key" prop.');
-    }
-  });
 
   return (
     <div className={classes} ref={contentRef} style={style}>

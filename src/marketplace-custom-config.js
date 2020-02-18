@@ -308,26 +308,51 @@ export const amenities = [
 
 
 export const categories = [
-  { key: 'hair-stylist', label: 'Hair Stylist' },
-  { key: 'barber', label: 'Barber' },
-  { key: 'makeup-artist', label: 'Makeup Artist' },
-  { key: 'nail-technician', label: 'Nail Technician' },
-  { key: 'cosmetics', label: 'Cosmetics' },
-  { key: 'tattoo-artist', label: 'Tattoo Artist' },
-  { key: 'fitness', label: 'Fitness' },
-  { key: 'yoga', label: 'Yoga' },
-  { key: 'dance', label: 'Dance' },
-  { key: 'martial-arts', label: 'Martial Arts' },
-  { key: 'massage', label: 'Massage' },
-  { key: 'reiki', label: 'Reiki' },
-  { key: 'acupuncture', label: 'Acupuncture' },
-  { key: 'chiropractor', label: 'Chiropractor' },
-  { key: 'art', label: 'Art' },
-  { key: 'photography', label: 'Photography' },
-  { key: 'music', label: 'Music' },
-  { key: 'desk-space', label: 'Desk space' },
-  { key: 'office-space', label: 'Office space' },
-  { key: 'event-space', label: 'Event space' },
+  {
+    label: 'Beauty',
+    children: [
+      { key: 'hair-stylist', label: 'Hair Stylist' },
+      { key: 'barber', label: 'Barber' },
+      { key: 'makeup-artist', label: 'Makeup Artist' },
+      { key: 'nail-technician', label: 'Nail Technician' },
+      { key: 'cosmetics', label: 'Cosmetics' },
+      { key: 'tattoo-artist', label: 'Tattoo Artist' },
+    ]
+  },
+  {
+    label: 'Fitness & Wellbeing',
+    children: [
+      { key: 'fitness', label: 'Fitness' },
+      { key: 'yoga', label: 'Yoga' },
+      { key: 'dance', label: 'Dance' },
+      { key: 'martial-arts', label: 'Martial Arts' },
+      { key: 'massage', label: 'Massage' },
+      { key: 'reiki', label: 'Reiki' },
+      { key: 'acupuncture', label: 'Acupuncture' },
+      { key: 'chiropractor', label: 'Chiropractor' },
+    ]
+  },
+  {
+    label: 'Arts',
+    children: [
+      { key: 'art', label: 'Art' },
+      { key: 'photography', label: 'Photography' },
+      { key: 'music', label: 'Music' },
+    ]
+  },
+  {
+    label: 'Office',
+    children: [
+      { key: 'desk-space', label: 'Desk space' },
+      { key: 'office-space', label: 'Office space' },
+    ]
+  },
+  {
+    label: 'Events',
+    children: [
+      { key: 'event-space', label: 'Event space' },
+    ]
+  }
 ];
 
 
