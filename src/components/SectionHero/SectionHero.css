@@ -40,11 +40,11 @@
 }
 
 .root {
+  @apply --backgroundImage;
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
-  background-color: var(--marketplaceColor);
 
   /* Text positioning is done with paddings */
 }
@@ -100,7 +100,6 @@
 .heroButton {
   @apply --marketplaceButtonStyles;
   @apply --SectionHero_animation;
-  background-color: var(--marketplaceColorLight);
 
   animation-delay: 0.8s;
 
