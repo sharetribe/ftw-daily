@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { array, bool, func, shape, string } from 'prop-types';
+import { array, bool, func, string } from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from '../../util/reactIntl';
 
