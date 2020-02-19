@@ -1,7 +1,7 @@
 {
   "name": "HorseDeal24",
-  "description": "Reitbeteiligung finden mit nur einem Klick",
-  "keywords": [
+  "description": "Die Sharing-Plattform für Pferd & Reiter",
+  "keywords": [Reitbeteiligung, Pferd]
     "node",
     "react"
   ],
