@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { arrayOf, bool, func, shape, string } from 'prop-types';
+import { array, bool, func, shape, string } from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from '../../util/reactIntl';
 
@@ -39,7 +39,7 @@ class SelectSingleFilterPlain extends Component {
     } = this.props;
 
     const labelClass = initialValue ? css.filterLabelSelected : css.filterLabel;
-
+    const classes = classNames(rootClassName || css.root, className);
     const hasBullets = useBullets || twoColumns;
     const optionsContainerClass = classNames({
       [css.optionsContainerOpen]: this.state.isOpen,
@@ -48,18 +48,8 @@ class SelectSingleFilterPlain extends Component {
       [css.twoColumns]: twoColumns,
     });
 
-    const classes = classNames(rootClassName || css.root, className);
-
-    return (
-      <div className={classes}>
-        <div className={labelClass}>
-          <button className={css.labelButton} onClick={this.toggleIsOpen}>
-            <span className={labelClass}>{label}</span>
-          </button>
-          <button className={css.clearButton} onClick={e => this.selectOption(null, e)}>
-            <FormattedMessage id={'SelectSingleFilter.plainClear'} />
-          </button>
-        </div>
+    const CategoryOptions = categories => {
+      const childrenEl = options => (
         <div className={optionsContainerClass}>
           {options.map(option => {
             // check if this option is selected
@@ -75,6 +65,7 @@ class SelectSingleFilterPlain extends Component {
                   [css.optionBorderSelected]: selected,
                   [css.optionBorder]: !selected,
                 });
+
             return (
               <button
                 key={option.key}
@@ -84,9 +75,35 @@ class SelectSingleFilterPlain extends Component {
                 <span className={optionBorderClass} />
                 {option.label}
               </button>
-            );
+            )
           })}
         </div>
+      );
+
+      return categories.map((cat, index) => {
+        if (cat.children && cat.children.length) return (
+          <span key={cat.label}>
+            <h3>{cat.label}</h3>
+            { childrenEl(cat.children) }
+          </span>
+        )
+
+        return null
+      });
+    }
+
+    return (
+      <div className={classes}>
+        <div className={labelClass}>
+          <button className={css.labelButton} onClick={this.toggleIsOpen}>
+            <span className={labelClass}>{label}</span>
+          </button>
+          <button className={css.clearButton} onClick={e => this.selectOption(null, e)}>
+            <FormattedMessage id={'SelectSingleFilter.plainClear'} />
+          </button>
+        </div>
+
+        { CategoryOptions(options) }
       </div>
     );
   }
@@ -107,12 +124,7 @@ SelectSingleFilterPlain.propTypes = {
   label: string.isRequired,
   onSelect: func.isRequired,
 
-  options: arrayOf(
-    shape({
-      key: string.isRequired,
-      label: string.isRequired,
-    })
-  ).isRequired,
+  options: array.isRequired,
   initialValue: string,
   twoColumns: bool,
   useBullets: bool,
