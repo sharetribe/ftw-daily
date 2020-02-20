@@ -268,8 +268,8 @@ const Footer = props => {
                   <div>{socialMediaLinks}</div>
                 </div>
                 <div className={css.verticalContainerContent}>
-                  <Link to="https://shop.spreadshirt.ch/HorseDeal24" className={css.link}>
-                    Entdecke unseren Store
+                  <a href="https://shop.spreadshirt.ch/HorseDeal24" target="_blank" className={css.link}>
+                   Entdecke unseren Store</a>
                   </Link>
                 </div>
               </div>
