@@ -102,6 +102,11 @@
   }
 }
 
+.imageDraggedOver {
+  background-color: #e5edf1;
+  border-color: #92b0b3;
+}
+
 .chooseImageText {
   display: flex;
   flex-direction: column;

@@ -17,8 +17,13 @@ const ACCEPT_IMAGES = 'image/*';
 export class EditListingPhotosFormComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { imageUploadRequested: false };
+    this.state = { 
+      dragOverFORM: false,
+      imageUploadRequested: false
+     };
     this.onImageUploadHandler = this.onImageUploadHandler.bind(this);
+    this.onDragHandler = this.onDragHandler.bind(this);
+    this.onDropHandler = this.onDropHandler.bind(this);
     this.submittedImages = [];
   }
 
@@ -36,7 +41,25 @@ export class EditListingPhotosFormComponent extends Component {
     }
   }
 
+  onDragHandler(e, flag) {
+    // function responsible for changing label background
+    e.preventDefault();
+    e.stopPropagation();
+    this.setState({ dragOverFORM: flag })
+  }
+
+  onDropHandler(e) {
+    this.setState({ dragOverFORM: false })
+
+    const droppedFiles = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]
+
+    if(!droppedFiles) return 
+    
+    this.onImageUploadHandler(droppedFiles)
+  }
+
   render() {
+    const { dragOverFORM } = this.state
     return (
       <FinalForm
         {...this.props}
@@ -61,7 +84,7 @@ export class EditListingPhotosFormComponent extends Component {
             updated,
             updateInProgress,
           } = fieldRenderProps;
-
+          
           const chooseImageText = (
             <span className={css.chooseImageText}>
               <span className={css.chooseImage}>
@@ -126,6 +149,7 @@ export class EditListingPhotosFormComponent extends Component {
             invalid || disabled || submitInProgress || imageUploadRequested || ready;
 
           const classes = classNames(css.root, className);
+          const labelClasses = classNames(css.addImage, dragOverFORM ? css.imageDraggedOver : '' );
 
           return (
             <Form
@@ -134,6 +158,11 @@ export class EditListingPhotosFormComponent extends Component {
                 this.submittedImages = images;
                 handleSubmit(e);
               }}
+              onDragOver={(e) => this.onDragHandler(e, true)}
+              onDragEnter={(e) => this.onDragHandler(e, true)}
+              onDragLeave={(e) => this.onDragHandler(e, false)}
+              onDragEnd={(e) => this.onDragHandler(e, false)}
+              onDrop={(e) => this.onDropHandler(e)}
             >
               {updateListingError ? (
                 <p className={css.error}>
@@ -174,7 +203,7 @@ export class EditListingPhotosFormComponent extends Component {
                           {disabled ? null : (
                             <input {...inputProps} className={css.addImageInput} />
                           )}
-                          <label htmlFor={name} className={css.addImage}>
+                          <label htmlFor={name} className={labelClasses}>
                             {label}
                           </label>
                         </div>
