@@ -86,7 +86,7 @@
   @apply --marketplaceBodyFontStyles;
 
   color: var(--matterColorLight);
-  margin: 0 0 32px 0;
+  margin: 0 0 50px 0;
 
   @apply --SectionHero_animation;
   animation-delay: 0.65s;
@@ -98,8 +98,21 @@
 }
 
 .heroButton {
-  @apply --marketplaceButtonStyles;
   @apply --SectionHero_animation;
+
+  background-color: var(--matterColorLight);
+  color: var(--marketplaceColor);
+  padding: 1em 1em; 
+  border-radius: 4px;
+  text-align: center;
+  opacity: 0.5;
+  
+
+  &:hover {
+    background-color: #ffffffbf;
+    text-decoration: none;
+  }
+
 
   animation-delay: 0.8s;
 
