@@ -9,38 +9,38 @@ const { LatLng, LatLngBounds } = sdkTypes;
 // `predictionPlace` (util.types.place) properties.
 export default [
   {
-    id: 'default-helsinki',
+    id: 'default-GoldCoast',
     predictionPlace: {
-      address: 'Helsinki, Finland',
-      bounds: new LatLngBounds(new LatLng(60.29783, 25.25448), new LatLng(59.92248, 24.78287)),
+      address: 'Gold Coast, Australia',
+      bounds: new LatLngBounds(new LatLng(-27.28257185, 152.23278439), new LatLng(-29.48854627, 155.03641781)),
+    },
+  },
+    {
+    id: 'default-SunshineCoast',
+    predictionPlace: {
+      address: 'Sunshine Coast, Australia',
+      bounds: new LatLngBounds(new LatLng(-26.03154436, 152.50210187), new LatLng(-27.58334397, 154.44603288)),
     },
   },
   {
-    id: 'default-turku',
+    id: 'default-Torquay',
     predictionPlace: {
-      address: 'Turku, Finland',
-      bounds: new LatLngBounds(new LatLng(60.53045, 22.38197), new LatLng(60.33361, 22.06644)),
+      address: 'Torquay, Australia',
+      bounds: new LatLngBounds(new LatLng(-38.304366854, 144.280124032), new LatLng(-38.3594261655, 144.359813536)),
     },
   },
   {
-    id: 'default-tampere',
+    id: 'default-Bali',
     predictionPlace: {
-      address: 'Tampere, Finland',
-      bounds: new LatLngBounds(new LatLng(61.83657, 24.11838), new LatLng(61.42728, 23.5422)),
+      address: 'Canngu, Bali',
+      bounds: new LatLngBounds(new LatLng(-7.95536, 114.447927), new LatLng(-8.951668, 115.813646)),
     },
   },
   {
-    id: 'default-oulu',
+    id: 'default-NewZealand',
     predictionPlace: {
-      address: 'Oulu, Finland',
-      bounds: new LatLngBounds(new LatLng(65.56434, 26.77069), new LatLng(64.8443, 24.11494)),
-    },
-  },
-  {
-    id: 'default-ruka',
-    predictionPlace: {
-      address: 'Ruka, Finland',
-      bounds: new LatLngBounds(new LatLng(66.16997, 29.16773), new LatLng(66.16095, 29.13572)),
+      address: 'Queenstown, New Zealand',
+      bounds: new LatLngBounds(new LatLng(-33.858724, 166.326153), new LatLng(-47.389803, 178.676862)),
     },
   },
 ];

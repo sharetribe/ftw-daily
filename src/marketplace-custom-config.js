@@ -4,44 +4,55 @@
 
 export const amenities = [
   {
-    key: 'towels',
-    label: 'Towels',
+    key: 'Surfboard',
+    label: 'Surfboard',
   },
   {
-    key: 'bathroom',
-    label: 'Bathroom',
+    key: 'Skateboard',
+    label: 'Skateboard',
   },
   {
-    key: 'swimming_pool',
-    label: 'Swimming pool',
+    key: 'Snowboard',
+    label: 'Snowboard',
   },
   {
-    key: 'own_drinks',
-    label: 'Own drinks allowed',
+    key: 'Paddle board',
+    label: 'Paddle board',
   },
   {
-    key: 'jacuzzi',
-    label: 'Jacuzzi',
+    key: 'Skis',
+    label: 'Skis',
   },
   {
-    key: 'audiovisual_entertainment',
-    label: 'Audiovisual entertainment',
+    key: 'Kayak',
+    label: 'Kayak',
   },
   {
-    key: 'barbeque',
-    label: 'Barbeque',
+    key: 'Windsurfing board',
+    label: 'Windsurfing board',
   },
   {
-    key: 'own_food_allowed',
-    label: 'Own food allowed',
+    key: 'Kiteboard',
+    label: 'Kiteboard',
+  },
+  {
+    key: 'Tent',
+    label: 'Tent',
+  },
+  {
+    key: 'Other camping gear',
+    label: 'Other camping gear',
+  },
+  {
+    key: 'Other',
+    label: 'Other',
   },
 ];
 
 export const categories = [
-  { key: 'smoke', label: 'Smoke' },
-  { key: 'electric', label: 'Electric' },
-  { key: 'wood', label: 'Wood' },
-  { key: 'other', label: 'Other' },
+  { key: 'Earth', label: 'Earth' },
+  { key: 'Water', label: 'Water' },
+  { key: 'Air', label: 'Air' },
 ];
 
 // Price filter configuration
