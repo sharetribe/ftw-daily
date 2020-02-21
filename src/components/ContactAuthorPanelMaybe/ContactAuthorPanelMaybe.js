@@ -30,13 +30,13 @@ const ContactAuthorPanel = ({
           <FormattedMessage id={unitTranslationKey} />
         </div>
         <h2 className={css.contactAuthorTitle}>
-          <FormattedMessage id="ListingPage.contactAuthorTitle" />
+          <FormattedMessage
+           id="ListingPage.contactAuthorTitle" 
+           values={{ user: author.attributes.profile.displayName }}
+           />
         </h2>
         <p className={css.contactAuthorText}>
-          <FormattedMessage
-            id="ListingPage.contactAuthorText"
-            values={{ user: author.attributes.profile.displayName }}
-          />
+          <FormattedMessage id="ListingPage.contactAuthorText" />
         </p>
       </div>
       <button className={css.contactButton} onClick={onContactUser}>

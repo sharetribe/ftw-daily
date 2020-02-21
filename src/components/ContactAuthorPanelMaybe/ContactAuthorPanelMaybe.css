@@ -39,8 +39,8 @@
   display: none;
   margin-top: 10px;
   margin-bottom: 8px;
+  line-height: 24px;
   @media (--viewportLarge) {
-    @apply --marketplaceTinyFontStyles;
     margin-top: 10px;
     margin-bottom: 14px;
     color: #1a2b49;
