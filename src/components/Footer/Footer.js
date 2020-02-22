@@ -71,18 +71,18 @@ const Footer = props => {
             <div className={css.footerContainerHorizontal}>
               <div className={css.footerContainerVertical23}>
                 <div className={css.verticalContainerHeader}>
-                  <Link to="#">Jetzt anmelden</Link>
+                  <Link to="#">Speziell für Dich</Link>
                 </div>
                 <div className={css.verticalContainerContent}>
                   <ul className={css.list}>
                     <li className={css.listItem}>
                       <Link to="#" className={css.link}>
-                        So funktioniert's
+                        Kostenloses E-Book
                       </Link>
                     </li>
                     <li className={css.listItem}>
                       <Link to="#" className={css.link}>
-                        Kostenlos anmelden
+                        Exklusive Gutscheine
                       </Link>
                       <Link to="/signup" className={css.greenLabel}>Neu</Link>
                     </li>
@@ -97,27 +97,27 @@ const Footer = props => {
                 <div className={css.verticalContainerContent}>
                   <ul className={css.list}>
                     <li className={css.listItem}>
-                      <Link to="#" className={css.link}>
+                      <Link to="https://www.horsedeal24.com/community" className={css.link}>
                         Community
                       </Link>
                     </li>
                     <li className={css.listItem}>
-                      <Link to="#" className={css.link}>
-                        Karriere
-                      </Link>
-                    </li>
-                    <li className={css.listItem}>
-                      <Link to="#" className={css.link}>
+                      <Link to="https://www.horsedeal24.com/contact" className={css.link}>
                         Kontakt
                       </Link>
                     </li>
                     <li className={css.listItem}>
-                      <Link to="#" className={css.link}>
+                      <Link to="https://www.horsedeal24.com/blog" className={css.link}>
+                        Blog
+                      </Link>
+                    </li>
+                    <li className={css.listItem}>
+                      <Link to="https://www.horsedeal24.com/faq" className={css.link}>
                         FAQ
                       </Link>
                     </li>
                     <li className={css.listItem}>
-                      <Link to="#" className={css.link}>
+                      <Link to="www.horsedeal24.com/help" className={css.link}>
                         Hilfe
                       </Link>
                     </li>
@@ -127,7 +127,7 @@ const Footer = props => {
 
               <div className={css.footerContainerVertical31}>
                 <div className={css.verticalContainerHeader}>
-                  <Link to="#">Finde Dein Pferd</Link>
+                  <Link to="#">Reitbeteiligungen in</Link>
                 </div>
                 <div className={css.verticalContainerContent}>
                   <div className={css.topCitiesContainer}>
@@ -269,7 +269,7 @@ const Footer = props => {
                 </div>
                 <div className={css.verticalContainerContent}>
                   <a href="https://shop.spreadshirt.ch/HorseDeal24" target="_blank" className={css.link}>
-                   Entdecke unseren Store</a>
+                   Merchandise Store</a>
                 </div>
               </div>
             </div>
@@ -281,13 +281,13 @@ const Footer = props => {
                   </Link>
                 </div>
                 <div className={css.bottomLineItem}>
-                  <Link to="#" className={css.link}>
-                    Impressum
+                  <Link to="https://www.horsedeal24.com/about" className={css.link}>
+                    Über uns
                   </Link>
                 </div>
                 <div className={css.bottomLineItem}>
-                  <Link to="#" className={css.link}>
-                    Kontakt
+                  <Link to="https://www.horsedeal24.com/legal" className={css.link}>
+                    Impressum
                   </Link>
                 </div>
                 <div className={css.bottomLineItem}>
