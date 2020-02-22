@@ -97,27 +97,27 @@ const Footer = props => {
                 <div className={css.verticalContainerContent}>
                   <ul className={css.list}>
                     <li className={css.listItem}>
-                      <Link to="https://www.horsedeal24.com/community" className={css.link}>
+                      <Link to="/community" className={css.link}>
                         Community
                       </Link>
                     </li>
                     <li className={css.listItem}>
-                      <Link to="https://www.horsedeal24.com/contact" className={css.link}>
+                      <Link to="/contact" className={css.link}>
                         Kontakt
                       </Link>
                     </li>
                     <li className={css.listItem}>
-                      <Link to="https://www.horsedeal24.com/blog" className={css.link}>
+                      <Link to="/blog" className={css.link}>
                         Blog
                       </Link>
                     </li>
                     <li className={css.listItem}>
-                      <Link to="https://www.horsedeal24.com/faq" className={css.link}>
+                      <Link to="/faq" className={css.link}>
                         FAQ
                       </Link>
                     </li>
                     <li className={css.listItem}>
-                      <Link to="www.horsedeal24.com/help" className={css.link}>
+                      <Link to="/help" className={css.link}>
                         Hilfe
                       </Link>
                     </li>
@@ -281,12 +281,12 @@ const Footer = props => {
                   </Link>
                 </div>
                 <div className={css.bottomLineItem}>
-                  <Link to="https://www.horsedeal24.com/about" className={css.link}>
+                  <Link to="/about" className={css.link}>
                     Über uns
                   </Link>
                 </div>
                 <div className={css.bottomLineItem}>
-                  <Link to="https://www.horsedeal24.com/legal" className={css.link}>
+                  <Link to="/legal" className={css.link}>
                     Impressum
                   </Link>
                 </div>
