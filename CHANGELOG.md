@@ -14,6 +14,10 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [change] Update `Modal` component to have option to use `Portal` with `usePortal` flag. Keep also
+  possibility to use modals without Portal because of `ModalInMobile` component.
+  [#1258](https://github.com/sharetribe/ftw-daily/pull/1258)
+
 ## [v4.2.0] 2020-02-18
 
 - [add] Show a banner when a user is logged in with limited access.
@@ -24,6 +28,8 @@ way to update this template, but currently, we follow a pattern:
 - [change] Add `handlebars` 4.5.3 and `serialize-javascript` 2.1.1 to resolutions in `package.json`.
   [#1251](https://github.com/sharetribe/ftw-daily/pull/1251)
 
+  [v4.2.0]: https://github.com/sharetribe/flex-template-web/compare/v4.1.0...v4.2.0
+
 ## [v4.1.0] 2020-02-03
 
 - [fix] Remove unused 'invalid' prop that breaks some versions of Final Form
@@ -32,7 +38,7 @@ way to update this template, but currently, we follow a pattern:
 - [add] Add missing countries (e.g. MX and JP) to `StripeBankAccountTokenInput` validations.
   [#1250](https://github.com/sharetribe/ftw-daily/pull/1250)
 
-  [v4.0.1]: https://github.com/sharetribe/flex-template-web/compare/v4.0.0...v4.0.1
+  [v4.0.1]: https://github.com/sharetribe/flex-template-web/compare/v4.0.0...v4.1.0
 
 ## [v4.0.0] 2019-12-19
 
