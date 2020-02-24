@@ -63,6 +63,7 @@ const SectionImages = props => {
         lightCloseButton
         isOpen={imageCarouselOpen}
         onClose={onImageCarouselClose}
+        usePortal
         onManageDisableScrolling={onManageDisableScrolling}
       >
         <ImageCarousel images={listing.images} />

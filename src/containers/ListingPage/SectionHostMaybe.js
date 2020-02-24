@@ -35,6 +35,7 @@ const SectionHostMaybe = props => {
         contentClassName={css.enquiryModalContent}
         isOpen={isEnquiryModalOpen}
         onClose={onCloseEnquiryModal}
+        usePortal
         onManageDisableScrolling={onManageDisableScrolling}
       >
         <EnquiryForm

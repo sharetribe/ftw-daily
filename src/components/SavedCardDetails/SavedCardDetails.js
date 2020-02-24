@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 import { bool, func, number, shape, string } from 'prop-types';
 import classNames from 'classnames';
 import { injectIntl, intlShape } from '../../util/reactIntl';
@@ -21,45 +20,10 @@ import css from './SavedCardDetails.css';
 const DEFAULT_CARD = 'defaultCard';
 const REPLACE_CARD = 'replaceCard';
 
-// TODO: change all the modals to use portals at some point.
-// Portal is used here to circumvent the problems that rise
-// from different levels of z-indexes in DOM tree. In this case
-// either TopBar or Menu element were overlapping the modal due
-// to stacking context. All the modals should be made with portals
-// but portals didn't exist when we originally created modals.
-
-class Portal extends React.Component {
-  constructor(props) {
-    super(props);
-    this.el = document.createElement('div');
-  }
-
-  componentDidMount() {
-    // The portal element is inserted in the DOM tree after
-    // the Modal's children are mounted, meaning that children
-    // will be mounted on a detached DOM node. If a child
-    // component requires to be attached to the DOM tree
-    // immediately when mounted, for example to measure a
-    // DOM node, or uses 'autoFocus' in a descendant, add
-    // state to Modal and only render the children when Modal
-    // is inserted in the DOM tree.
-    this.props.portalRoot.appendChild(this.el);
-  }
-
-  componentWillUnmount() {
-    this.props.portalRoot.removeChild(this.el);
-  }
-
-  render() {
-    return ReactDOM.createPortal(this.props.children, this.el);
-  }
-}
-
 const SavedCardDetails = props => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState(DEFAULT_CARD);
-  const [portalRoot, setPortalRoot] = useState(null);
 
   const {
     rootClassName,
@@ -170,11 +134,8 @@ const SavedCardDetails = props => {
 
   const showExpired = isCardExpired && active === DEFAULT_CARD;
 
-  const setPortalRootAfterInitialRender = () => {
-    setPortalRoot(document.getElementById('portal-root'));
-  };
   return (
-    <div className={classes} ref={setPortalRootAfterInitialRender}>
+    <div className={classes}>
       <Menu className={css.menu} isOpen={menuOpen} onToggleActive={onToggleActive} useArrow={false}>
         <MenuLabel className={css.menuLabel}>
           <div className={showExpired ? css.menuLabelWrapperExpired : css.menuLabelWrapper}>
@@ -226,31 +187,34 @@ const SavedCardDetails = props => {
         </InlineTextButton>
       ) : null}
 
-      {portalRoot && onManageDisableScrolling ? (
-        <Portal portalRoot={portalRoot}>
-          <Modal
-            id="VerifyDeletingPaymentMethod"
-            isOpen={isModalOpen}
-            onClose={() => {
-              setIsModalOpen(false);
-            }}
-            contentClassName={css.modalContent}
-            onManageDisableScrolling={onManageDisableScrolling}
-          >
-            <div>
-              <div className={css.modalTitle}>{removeCardModalTitle}</div>
-              <p className={css.modalMessage}>{removeCardModalContent}</p>
-              <div className={css.modalButtonsWrapper}>
-                <div onClick={() => setIsModalOpen(false)} className={css.cancelCardDelete}>
-                  {cancel}
-                </div>
-                <Button onClick={onDeleteCard} inProgress={deletePaymentMethodInProgress}>
-                  {removeCard}
-                </Button>
+      {onManageDisableScrolling ? (
+        <Modal
+          id="VerifyDeletingPaymentMethod"
+          isOpen={isModalOpen}
+          onClose={() => {
+            setIsModalOpen(false);
+          }}
+          usePortal
+          contentClassName={css.modalContent}
+          onManageDisableScrolling={onManageDisableScrolling}
+        >
+          <div>
+            <div className={css.modalTitle}>{removeCardModalTitle}</div>
+            <p className={css.modalMessage}>{removeCardModalContent}</p>
+            <div className={css.modalButtonsWrapper}>
+              <div
+                onClick={() => setIsModalOpen(false)}
+                className={css.cancelCardDelete}
+                tabIndex="0"
+              >
+                {cancel}
               </div>
+              <Button onClick={onDeleteCard} inProgress={deletePaymentMethodInProgress}>
+                {removeCard}
+              </Button>
             </div>
-          </Modal>
-        </Portal>
+          </div>
+        </Modal>
       ) : null}
     </div>
   );
