@@ -6,7 +6,7 @@ import {
   LayoutWrapperMain,
   LayoutWrapperFooter,
   Footer,
-} from '../../components';
+} from '../../components';29.-
 
 import css from './SubscriptionPage.css';
 
@@ -22,8 +22,8 @@ export default class SubscriptionPage extends Component {
           premium: 20
         },
         semiannual: {
-          basic: 30,
-          premium: 40
+          basic: 29,
+          premium: 49
         },
         annual: {
           basic: 50,
@@ -61,26 +61,27 @@ export default class SubscriptionPage extends Component {
           <LayoutWrapperMain className={css.staticPageWrapper}>
             <div className={css.sectionOffer}>
               <div className={css.sectionOfferContent}>
-                <h1 className={css.pageHeader}>Accumsan sit amet nulla facilisi morbi tempus iaculis</h1>
+                <h1 className={css.pageHeader}>Wähle Dein passendes Paket</h1>
                 <p className={css.pageSubheader}>nibh ipsum consequat nisl vel pretium lectus quam id leo in vitae turpis massa sed elementum tempus egestas sed</p>
                 <div className={css.plansContainer}>
                   <div className={css.billingOptions}> 
-                    <button onClick={() => this.setState({ billing: 'semiannual' })} className={css.linkBillingSwitch + ' ' + (billing === 'semiannual' ? css.activeBilling : '')}>Semi-annual billing - save 20%</button>         
+                    <button onClick={() => this.setState({ billing: 'semiannual' })} className={css.linkBillingSwitch + ' ' + (billing === 'semiannual' ? css.activeBilling : '')}>20% Aktion bis 29.03.2020</button>         
                   </div>
                   <div className={css.billingOptionsMobile}>
                     <h3>Choose billing period</h3>
                     <select onChange={this.change} value={this.state.billing}>
                       <option value="monthly">Monthly Billing</option>
-                      <option value="semiannual">Semi-annual billing - save 20%</option>
+                      <option value="semiannual">20% Aktion bis zum 29.03.2020</option>
                       <option value="annual">Yearly billing - save 30%</option>
                     </select>
                   </div>
                   <div className={css.columns}>
                     <div className={css.linkBillingSwitch}className={css.leftColumn}>
                       <div className={css.planContainer}>
-                        <div className={css.planName}>Basic Plan</div>
+                        <div className={css.planName}>Standard Suche</div>
                         <div className={css.price}>
-                          <span className={css.priceValue}>${types[billing].basic}</span>/month
+                          <span className={css.priceValue}>${types[billing].basic}</span>
+
                         </div>
                         <ul className={css.features}>
                           <li className={css.feature}>
@@ -98,17 +99,17 @@ export default class SubscriptionPage extends Component {
                         </ul>
                         <div className={css.actions}>
                           <div className={css.buttonContainer}>
-                            <a href="plans/basic-semi-annual" className={css.buyButton}>GET BASIC</a>
+                            <a href="plans/basic-semi-annual" className={css.buyButton}>Kostenlos testen</a>
                           </div>
-                          <div className={css.priceDetails}>Billed every 6 months</div>
+                          <div className={css.priceDetails}>14 Tage kostenlos testen</div>
                         </div>
                       </div>
                     </div>
                     <div className={css.rightColumn}>
                       <div className={css.planContainer + ' ' + css.highlightedPlan}>
-                        <div className={css.planName}>Premium Plan</div>
+                        <div className={css.planName}>Premium Suche</div>
                         <div className={css.price}>
-                          <span className={css.priceValue}>${types[billing].premium}</span> /month
+                          <span className={css.priceValue}>${types[billing].premium}</span> /Monat
                         </div>
                         <ul className={css.features}>
                           <li className={css.feature}>
@@ -135,9 +136,9 @@ export default class SubscriptionPage extends Component {
                         </ul>
                         <div className={css.actions}>
                           <div className={css.buttonContainer}>
-                            <a href="plans/premium-semi-annual" className={css.premiumButton}>GET PREMIUM</a>
+                            <a href="plans/premium-semi-annual" className={css.premiumButton}>Kostenlos testen</a>
                           </div>
-                          <div className={css.priceDetails}>Billed every 6 months</div>
+                          <div className={css.priceDetails}>14 Tage kostenlos testen</div>
                         </div>
                       </div>
                     </div>
