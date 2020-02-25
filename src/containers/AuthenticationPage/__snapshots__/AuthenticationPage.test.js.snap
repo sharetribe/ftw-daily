@@ -86,6 +86,7 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
         isOpen={false}
         onClose={[Function]}
         onManageDisableScrolling={[Function]}
+        usePortal={true}
       >
         <div>
           <h2>
