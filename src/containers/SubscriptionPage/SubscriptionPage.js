@@ -64,10 +64,8 @@ export default class SubscriptionPage extends Component {
                 <h1 className={css.pageHeader}>Accumsan sit amet nulla facilisi morbi tempus iaculis</h1>
                 <p className={css.pageSubheader}>nibh ipsum consequat nisl vel pretium lectus quam id leo in vitae turpis massa sed elementum tempus egestas sed</p>
                 <div className={css.plansContainer}>
-                  <div className={css.billingOptions}>
-                    <button onClick={() => this.setState({ billing: 'monthly' })} className={css.linkBillingSwitch + ' ' + (billing === 'monthly' ? css.activeBilling : '')}>Monthly billing</button>
-                    <button onClick={() => this.setState({ billing: 'semiannual' })} className={css.linkBillingSwitch + ' ' + (billing === 'semiannual' ? css.activeBilling : '')}>Semi-annual billing - save 20%</button>
-                    <button onClick={() => this.setState({ billing: 'annual' })} className={css.linkBillingSwitch + ' ' + (billing === 'annual' ? css.activeBilling : '')}>Yearly billing - save 30%</button>
+                  <div className={css.billingOptions}> 
+                    <button onClick={() => this.setState({ billing: 'semiannual' })} className={css.linkBillingSwitch + ' ' + (billing === 'semiannual' ? css.activeBilling : '')}>Semi-annual billing - save 20%</button>         
                   </div>
                   <div className={css.billingOptionsMobile}>
                     <h3>Choose billing period</h3>
