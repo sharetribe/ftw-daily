@@ -6,9 +6,9 @@ import {
   LayoutWrapperMain,
   LayoutWrapperFooter,
   Footer,
-} from '../../components';29.-
+} from '../../components';$29
 
-import .css from './SubscriptionPage.css';
+import css from './SubscriptionPage.css';
 
 export default class SubscriptionPage extends Component {
 
