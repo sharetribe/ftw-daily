@@ -80,7 +80,7 @@ export default class SubscriptionPage extends Component {
                       <div className={css.planContainer}>
                         <div className={css.planName}>Standard Suche</div>
                         <div className={css.price}>
-                          <span className={css.priceValue}>${types[billing].basic}</span>
+                          <span className={css.priceValue}>${types[billing].basic}</span> /Monat
 
                         </div>
                         <ul className={css.features}>
