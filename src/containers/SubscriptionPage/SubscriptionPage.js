@@ -6,7 +6,7 @@ import {
   LayoutWrapperMain,
   LayoutWrapperFooter,
   Footer,
-} from '../../components';$29
+} from '../../components';29
 
 import css from './SubscriptionPage.css';
 
