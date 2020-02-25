@@ -1,5 +1,5 @@
 .staticPageWrapper {
-	width: 100vw;
+	width: 100%;
 	background-color: #ffffff;
 }
 
@@ -210,6 +210,7 @@
 	border: 1px #e7e7e7 solid;
 	background-color: #ffffff;
 	padding: 42px 44px 23px 44px;
+	border-radius: 5px;
 }
 
 .highlightedPlan {
