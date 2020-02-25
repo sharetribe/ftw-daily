@@ -214,8 +214,10 @@
 }
 
 .highlightedPlan {
-	border: solid 6px #923395;
+	border-radius: 9px;
+	box-shadow: inset 0px 0px 0px 6px #923395;
 	padding: 37px 39px 18px 39px;
+	border: 0;
 }
 
 .planName {
