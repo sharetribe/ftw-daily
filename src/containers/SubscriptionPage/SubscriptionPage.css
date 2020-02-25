@@ -213,7 +213,7 @@
 }
 
 .highlightedPlan {
-	border: solid 6px #c4a03e;
+	border: solid 6px #923395;
 	padding: 37px 39px 18px 39px;
 }
 
@@ -408,14 +408,14 @@
 
 .premiumButton {
 	composes: buyButton;
-	background-color: #c4a03e;
+	background-color: #923395;
 	color: #ffffff;
-	border: solid 1px #c4a03e
+	border: solid 1px #923395
 }
 
 .premiumButton:hover,
 .premiumButton:focus {
-	background-color: #c4a03e;
+	background-color: #923395;
 	color: #ffffff;
 	-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .1);
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .1);
