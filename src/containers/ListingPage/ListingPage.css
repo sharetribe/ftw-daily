@@ -1,6 +1,10 @@
 @import '../../marketplace.css';
 
-.root {
+:root {
+  --listingPageContainer {
+    max-width: 1128px;
+    padding: 0 36px;
+  }
 }
 
 .pageRoot {
@@ -30,7 +34,84 @@
     padding: 0;
   }
 }
+.listingCards {
+  padding: 0 24px 96px 24px;
+  display: block;
+  position: relative;
 
+  @media (--viewportLarge) {
+    padding: 0 36px 96px 36px;
+  }
+}
+.sliderOuterContainer {
+  position: relative;
+
+  @apply --listingPageContainer;
+  
+  @media (max-width: 480px) {
+    padding: 0;
+  }
+  margin: 0 auto;
+}
+.sliderButton {
+  position: absolute;
+  top: 27%;
+  transform: translateY(-50%);
+  border: none;
+  background: none;
+  outline: none;
+
+  & > svg {
+    fill: none;
+
+    & path {
+      stroke: rgb(118, 118, 118);
+    }
+  }
+}
+.sliderButtonBack {
+  left: -20px;
+}
+.sliderButtonNext {
+  right: -20px;
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.sliderWrapper {
+  height: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+.listingPageCard {
+  margin-bottom: 36px;
+  flex-basis: calc(100% - 30px);
+
+
+  @media (--viewportMedium) {
+    flex-basis: calc(50% - 30px);
+  }
+
+  @media (--viewportLarge) {
+    flex-basis: calc(33.33% - 30px);
+  }
+
+  margin: 0 15px;
+}
+
+.listingPageCardSingle {
+  max-width: 100%;
+  padding: 0 36px;
+  @media (--viewportMedium) {
+    max-width: 50%;
+  }
+
+  @media (--viewportLarge) {
+    max-width: 33%;
+  }
+}
+.sliderAnimation {
+  transition: transform 0.6s;
+}
 /* Firefox doesn't support image aspect ratio inside flexbox */
 .aspectWrapper {
   position: relative; /* allow positioning own listing action bar */
@@ -186,8 +267,7 @@
   }
 
   @media (--viewportLarge) {
-    max-width: 1128px;
-    padding: 0 36px;
+    @apply --listingPageContainer;
     margin: 0 auto 117px;
   }
 

@@ -29,11 +29,15 @@ import { richText } from '../../util/richText';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { initializeCardPaymentData } from '../../ducks/stripe.duck.js';
+import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
+import { getListingsById } from '../../ducks/marketplaceData.duck';
+
 import {
   Page,
   NamedLink,
   NamedRedirect,
   LayoutSingleColumn,
+  ListingCard,
   LayoutWrapperTopbar,
   LayoutWrapperMain,
   LayoutWrapperFooter,
@@ -54,6 +58,7 @@ import SectionReviews from './SectionReviews';
 import SectionHostMaybe from './SectionHostMaybe';
 import SectionRulesMaybe from './SectionRulesMaybe';
 import SectionMapMaybe from './SectionMapMaybe';
+import ButtonBackIcon from './ButtonBackIcon';
 import css from './ListingPage.css';
 
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
@@ -77,16 +82,25 @@ export class ListingPageComponent extends Component {
   constructor(props) {
     super(props);
     const { enquiryModalOpenForListingId, params } = props;
+
+    this.slider = React.createRef();
+
     this.state = {
       pageClassNames: [],
       imageCarouselOpen: false,
       selectedImageIndex: 0,
       enquiryModalOpen: enquiryModalOpenForListingId === params.id,
+      sliderCurrentIndex: 0
+
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onContactUser = this.onContactUser.bind(this);
     this.onSubmitEnquiry = this.onSubmitEnquiry.bind(this);
+  }
+
+  handlerSliderTransition = () => {
+    this.setState({ sliderCurrentIndex: this.slider.current.state.currentSlide })
   }
 
   handleSubmit(values) {
@@ -187,6 +201,7 @@ export class ListingPageComponent extends Component {
       sendEnquiryError,
       timeSlots,
       fetchTimeSlotsError,
+      listings
     } = this.props;
 
     const listingId = new UUID(rawParams.id);
@@ -234,6 +249,24 @@ export class ListingPageComponent extends Component {
     } = currentListing.attributes;
 
     const { breed, gender, age, color, hight, mainDiscipline } = publicData;
+
+    const thisListing = listings.length && listings.filter( l => l.id.uuid === listingId.uuid)[0]
+    const currentMainDiscipline = thisListing && thisListing.attributes.publicData.mainDiscipline
+    const listingsWithSimilarDiscipline = thisListing && listings.filter(l => l.attributes.publicData.mainDiscipline === currentMainDiscipline && l.id.uuid !== listingId.uuid); // similar mainDiscipline but without current horse
+
+    const { sliderCurrentIndex } = this.state;
+    const isMobile = window.innerWidth < 480; // viewportSmall
+
+    const sliderVisibleSlides = 
+    isMobile && listingsWithSimilarDiscipline.length === 1 ? 1
+    : isMobile && listingsWithSimilarDiscipline.length > 1 ? 1.25
+    : window.innerWidth < 900 ? 2 
+    : 3; 
+
+    const sliderBtnsVisible = !isMobile && (listingsWithSimilarDiscipline.length > sliderVisibleSlides);
+
+    const sliderBackBtnVisible = sliderCurrentIndex !== 0;
+    const sliderNextBtnVisible = sliderCurrentIndex !== (listingsWithSimilarDiscipline.length - sliderVisibleSlides)
 
     const richTitle = (
       <span>
@@ -345,6 +378,16 @@ export class ListingPageComponent extends Component {
         })
         .filter(variant => variant != null);
 
+      // Panel width relative to the viewport
+      const panelMediumWidth = 50;
+      const panelLargeWidth = 62.5;
+      const cardRenderSizes = [
+        '(max-width: 767px) 100vw',
+        `(max-width: 1023px) ${panelMediumWidth}vw`,
+        `(max-width: 1920px) ${panelLargeWidth / 2}vw`,
+        `${panelLargeWidth / 3}vw`,
+      ].join(', ');     
+
     const facebookImages = listingImages(currentListing, 'facebook');
     const twitterImages = listingImages(currentListing, 'twitter');
     const schemaImages = JSON.stringify(facebookImages.map(img => img.url));
@@ -446,6 +489,56 @@ export class ListingPageComponent extends Component {
                   className={css.bookingPanel}
                 />
               </div>
+                  {listingsWithSimilarDiscipline.length ? (
+                    <div className={css.sliderOuterContainer}>
+                      { listingsWithSimilarDiscipline.length === 1 ? 
+                        (<ListingCard
+                          rootClassName={css.listingPageCardSingle}
+                          listing={listingsWithSimilarDiscipline[0]}
+                          renderSizes={cardRenderSizes}
+                          setActiveListing={() => {}}
+                        />)
+                        : 
+                        (<CarouselProvider
+                          naturalSlideWidth={100}
+                          naturalSlideHeight={isMobile ? 130 : 110}
+                          totalSlides={listingsWithSimilarDiscipline.length}
+                          visibleSlides={sliderVisibleSlides}
+                          infinite={false}
+                          dragEnabled={isMobile}
+                          touchEnabled={isMobile}
+                        >
+                          <Slider
+                              className={css.sliderWrapper}
+                              ref={this.slider}
+                              onTransitionEnd={this.handlerSliderTransition}
+                              classNameAnimation={css.sliderAnimation}
+                            >
+                            {listingsWithSimilarDiscipline.map( (l, index) => (
+                              <Slide index={index} key={l.id.uuid}>
+                                <ListingCard
+                                  rootClassName={css.listingPageCard}
+                                  listing={l}
+                                  renderSizes={cardRenderSizes}
+                                  setActiveListing={() => {}}
+                                />
+                              </Slide>
+                            ))}
+                          </Slider>
+                          {sliderBtnsVisible && sliderBackBtnVisible && 
+                            <ButtonBack className={classNames(css.sliderButton, css.sliderButtonBack)}>
+                              <ButtonBackIcon />
+                            </ButtonBack>
+                          }
+                          {sliderBtnsVisible && sliderNextBtnVisible && 
+                            <ButtonNext className={classNames(css.sliderButton, css.sliderButtonNext)}>
+                              <ButtonBackIcon />
+                            </ButtonNext>
+                          }
+                        </CarouselProvider>)
+                    }
+                </div>
+                ) : null}
             </div>
           </LayoutWrapperMain>
           <LayoutWrapperFooter>
@@ -524,7 +617,12 @@ const mapStateToProps = state => {
     sendEnquiryError,
     enquiryModalOpenForListingId,
   } = state.ListingPage;
+
+  const {currentPageResultIds} = state.SearchPage;
+ 
   const { currentUser } = state.user;
+
+  const pageListings = getListingsById(state, currentPageResultIds) || []
 
   const getListing = id => {
     const ref = { id, type: 'listing' };
@@ -552,6 +650,7 @@ const mapStateToProps = state => {
     fetchTimeSlotsError,
     sendEnquiryInProgress,
     sendEnquiryError,
+    listings: pageListings
   };
 };
 

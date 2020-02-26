@@ -6,7 +6,14 @@ import { ListingCard, PaginationLinks } from '../../components';
 import css from './SearchResultsPanel.css';
 
 const SearchResultsPanel = props => {
-  const { className, rootClassName, listings, pagination, search, setActiveListing } = props;
+  const { 
+    className,
+    rootClassName,
+    listings,
+    pagination,
+    search,
+    setActiveListing
+  } = props;
   const classes = classNames(rootClassName || css.root, className);
 
   const paginationLinks =
@@ -32,7 +39,8 @@ const SearchResultsPanel = props => {
   return (
     <div className={classes}>
       <div className={css.listingCards}>
-        {listings.map(l => (
+      {
+        listings.map( l => (
           <ListingCard
             className={css.listingCard}
             key={l.id.uuid}
@@ -40,7 +48,8 @@ const SearchResultsPanel = props => {
             renderSizes={cardRenderSizes}
             setActiveListing={setActiveListing}
           />
-        ))}
+        ))
+      }
         {props.children}
       </div>
       {paginationLinks}
@@ -54,7 +63,7 @@ SearchResultsPanel.defaultProps = {
   listings: [],
   pagination: null,
   rootClassName: null,
-  search: null,
+  search: null
 };
 
 const { array, node, object, string } = PropTypes;
@@ -65,7 +74,7 @@ SearchResultsPanel.propTypes = {
   listings: array,
   pagination: propTypes.pagination,
   rootClassName: string,
-  search: object,
+  search: object
 };
 
 export default SearchResultsPanel;
