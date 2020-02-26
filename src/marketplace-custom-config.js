@@ -38,9 +38,22 @@ export const amenities = [
 ];
 
 export const categories = [
-  { key: 'tools and equipment', label: 'Tools and Equipment' },
-  { key: 'outdoors', label: 'Outdoors' },
-  { key: 'cameras', label: 'Cameras' },
+{key: 'Gear: Camera', label: 'Gear: Camera'},
+{key: 'Gear: Camping & Hiking', label: 'Gear: Camping & Hiking'},
+{key: 'Gear: Climbing', label: 'Gear: Climbing'},
+{key: 'Gear: Cycling', label: 'Gear: Cycling'},
+{key: 'Gear: Paddling & Surfing', label: 'Gear: Paddling & Surfing'},
+{key: 'Gear: Snow', label: 'Gear: Snow'},
+{key: 'Gear: Travel', label: 'Gear: Travel'},
+
+{key: 'Equipment: Automotive', label: 'Equipment: Automotive'},
+{key: 'Equipment: Carpet Cleaners & Vacuums', label: 'Equipment: Carpet Cleaners & Vacuums'},
+{key: 'Equipment: Cooling & Heating', label: 'Equipment: Cooling & Heating'},
+{key: 'Equipment: Hand Tools', label: 'Equipment: Hand Tools'},
+{key: 'Equipment: Ladders', label: 'Equipment: Ladders'},
+{key: 'Equipment: Lawn & Garden', label: 'Equipment: Lawn & Garden'},
+{key: 'Equipment: Power Tools', label: 'Equipment: Power Tools'},
+{key: 'Equipment: Pressure Washers', label: 'Equipment: Pressure Washers'},
 
 ];
 

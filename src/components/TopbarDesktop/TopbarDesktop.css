@@ -29,7 +29,7 @@
     transition: var(--transitionStyleButton);
 
     &:hover {
-      border-bottom: 4px solid var(--marketplaceColor);
+      border-bottom: 0px solid var(--marketplaceColor);
       border-radius: 0;
       text-decoration: none;
     }
@@ -90,7 +90,7 @@
   height: 100%;
   margin-right: 24px;
   border-left-style: transparent;
-  border-left-width: 2px;
+  border-left-width: 0px;
   border-left-color: var(--matterColorNegative);
 
   @media (--viewportLarge) {

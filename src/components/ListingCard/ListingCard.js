@@ -59,7 +59,7 @@ export const ListingCardComponent = props => {
   const isNightly = unitType === LINE_ITEM_NIGHT;
   const isDaily = unitType === LINE_ITEM_DAY;
 
-  const unitTranslationKey = isDaily
+  const unitTranslationKey = isNightly
     ? 'ListingCard.perNight'
     : isDaily
     ? 'ListingCard.perDay'

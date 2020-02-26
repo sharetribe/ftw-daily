@@ -9,6 +9,7 @@ import config from '../../config';
 import {
   Page,
   SectionHero,
+  SectionHero2,
   SectionHowItWorks,
   SectionLocations,
   LayoutSingleColumn,
@@ -78,6 +79,7 @@ export const LandingPageComponent = props => {
           <Footer />
         </LayoutWrapperFooter>
       </LayoutSingleColumn>
+
     </Page>
   );
 };

@@ -11,6 +11,7 @@ const SectionHero = props => {
 
   const classes = classNames(rootClassName || css.root, className);
 
+
   return (
     <div className={classes}>
       <div className={css.heroContent}>
@@ -34,6 +35,7 @@ const SectionHero = props => {
     </div>
   );
 };
+
 
 SectionHero.defaultProps = { rootClassName: null, className: null };
 

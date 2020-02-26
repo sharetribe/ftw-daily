@@ -23,7 +23,7 @@
   }
 
   @media (--viewportLargeWithPaddings) {
-    padding: 112px 0 82px calc((100% - 1056px) / 2);
+    padding: 0);
   }
 }
 
