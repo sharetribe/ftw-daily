@@ -491,6 +491,7 @@ export class ListingPageComponent extends Component {
               </div>
                   {listingsWithSimilarDiscipline.length ? (
                     <div className={css.sliderOuterContainer}>
+                      <h3 className={classNames(css.titleShiftedLeft, css.listingSectionTitle)}>Könnten Dir auch gefallen</h3>
                       { listingsWithSimilarDiscipline.length === 1 ? 
                         (<ListingCard
                           rootClassName={css.listingPageCardSingle}

@@ -702,6 +702,9 @@
     margin-bottom: 20px;
   }
 }
+.titleShiftedLeft {
+  margin-left: 15px;
+}
 .listingPrimaryText {
   margin: 0;
   font-weight: 600;
