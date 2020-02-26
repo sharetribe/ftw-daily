@@ -21,7 +21,7 @@ const ContactAuthorPanel = ({
     ? 'BookingPanel.perDay'
     : 'BookingPanel.perUnit';
   const userIsCurrentUser = author && author.type === 'currentUser';
-
+  const displayName = author.attributes.profile.displayName
   return (
     <div className={className}>
       <div className={css.textContainer}>
@@ -32,7 +32,7 @@ const ContactAuthorPanel = ({
         <h2 className={css.contactAuthorTitle}>
           <FormattedMessage
            id="ListingPage.contactAuthorTitle" 
-           values={{ user: author.attributes.profile.displayName }}
+           values={{ user: displayName && displayName.split(" ").slice(0,1)[0] }}
            />
         </h2>
         <p className={css.contactAuthorText}>
