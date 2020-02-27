@@ -1,10 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { TopbarContainer } from '../../containers';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { TopbarContainer } from '../../containers';
+import { FormattedMessage, injectIntl } from '../../util/reactIntl';
 import {
   Page,
   LayoutSideNavigation,
@@ -13,19 +12,25 @@ import {
   LayoutWrapperTopbar,
   LayoutWrapperFooter,
   Footer,
-  TermsOfService,
+  Impressum,
 } from '../../components';
-import config from '../../config';
 
-import css from './TermsOfServicePage.css';
+import css from '../TermsOfServicePage/TermsOfServicePage.css';
 
-const TermsOfServicePageComponent = props => {
-  const { scrollingDisabled, intl } = props;
 
+const ImpressumPageComponent = ({intl, scrollingDisabled}) => {
+  const siteTitle = "Impressum";
+  const schemaTitle = intl.formatMessage({ id: 'PrivacyPolicyPage.schemaTitle' }, { siteTitle });
+  
+  const schema = {
+    '@context': 'http://schema.org',
+    '@type': 'WebPage',
+    name: schemaTitle,
+  };
   const tabs = [
     {
       text: intl.formatMessage({ id: 'TermsOfServicePage.tosTabTitle' }),
-      selected: true,
+      selected: false,
       linkProps: {
         name: 'TermsOfServicePage',
       },
@@ -39,33 +44,26 @@ const TermsOfServicePageComponent = props => {
     },
     {
       text: intl.formatMessage({ id: 'Impressum.Impressum' }),
-      selected: false,
+      selected: true,
       linkProps: {
         name: 'ImpressumPage',
       }
     }
   ];
-  const siteTitle = config.siteTitle;
-  const schemaTitle = intl.formatMessage({ id: 'TermsOfServicePage.schemaTitle' }, { siteTitle });
-  const schema = {
-    '@context': 'http://schema.org',
-    '@type': 'WebPage',
-    name: schemaTitle,
-  };
 
   return (
-    <Page title={schemaTitle} scrollingDisabled={scrollingDisabled} schema={schema}>
+    <Page title={"Impressum"} schema={schema} scrollingDisabled={scrollingDisabled}>
       <LayoutSideNavigation>
         <LayoutWrapperTopbar>
-          <TopbarContainer currentPage="TermsOfServicePage" />
+          <TopbarContainer currentPage="ImpressumPage" />
         </LayoutWrapperTopbar>
         <LayoutWrapperSideNav tabs={tabs} />
         <LayoutWrapperMain>
           <div className={css.content}>
             <h1 className={css.heading}>
-              <FormattedMessage id="TermsOfServicePage.heading" />
+              <FormattedMessage id="Impressum.Impressum" />
             </h1>
-            <TermsOfService />
+           <Impressum />
           </div>
         </LayoutWrapperMain>
         <LayoutWrapperFooter>
@@ -75,25 +73,16 @@ const TermsOfServicePageComponent = props => {
     </Page>
   );
 };
-
-const { bool } = PropTypes;
-
-TermsOfServicePageComponent.propTypes = {
-  scrollingDisabled: bool.isRequired,
-
-  // from injectIntl
-  intl: intlShape.isRequired,
-};
-
 const mapStateToProps = state => {
   return {
     scrollingDisabled: isScrollingDisabled(state),
   };
 };
 
-const TermsOfServicePage = compose(
-  connect(mapStateToProps),
-  injectIntl
-)(TermsOfServicePageComponent);
+const ImpressumPage = compose(
+    injectIntl,
+    connect(mapStateToProps)
+  )
+  (ImpressumPageComponent);
 
-export default TermsOfServicePage;
+export default ImpressumPage;

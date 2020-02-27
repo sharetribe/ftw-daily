@@ -169,6 +169,7 @@ export { default as ModalMissingInformation } from './ModalMissingInformation/Mo
 export { default as ReviewModal } from './ReviewModal/ReviewModal';
 export { default as PrivacyPolicy } from './PrivacyPolicy/PrivacyPolicy';
 export { default as TermsOfService } from './TermsOfService/TermsOfService';
+export { default as Impressum } from './Impressum/Impressum';
 export { default as EditListingAvailabilityPanel } from './EditListingAvailabilityPanel/EditListingAvailabilityPanel';
 export { default as EditListingCharacterPanel } from './EditListingCharacterPanel/EditListingCharacterPanel';
 export { default as EditListingDescriptionPanel } from './EditListingDescriptionPanel/EditListingDescriptionPanel';

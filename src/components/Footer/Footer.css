@@ -162,6 +162,7 @@
 }
 
 .link {
+  display: inline;
   /* Font */
   @apply --marketplaceH4FontStyles;
   line-height: 20px;
@@ -409,6 +410,7 @@
 .verticalContainerHeader {
   margin-top: 20px;
   margin-bottom: 10px;
+  color: var(--marketplaceColor);
 }
 
 .verticalContainerContent {

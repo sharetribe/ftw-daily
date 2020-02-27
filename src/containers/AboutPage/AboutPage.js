@@ -13,15 +13,22 @@ import {
 
 import css from './AboutPage.css';
 import image from './about-us-1056.jpg';
+import { string } from 'prop-types';
 
-const AboutPage = () => {
+const AboutPage = ({ title }) => {
+
+  /* 
+  Title is a temporary prop which is used by HelpPage, FAQPage, KontaktPage, CommunityPage at routeConfiguration.
+  These pages have not been created yet, so AboutePage is used instead as a temporary component.
+  After befomentioned pages are created title prop have to be deleted.
+  */
   const { siteTwitterHandle, siteFacebookPage } = config;
   const siteTwitterPage = twitterPageURL(siteTwitterHandle);
-
+  
   // prettier-ignore
   return (
     <StaticPage
-      title="About Us"
+      title={ title || "About Us" }
       schema={{
         '@context': 'http://schema.org',
         '@type': 'AboutPage',
@@ -93,6 +100,14 @@ const AboutPage = () => {
       </LayoutSingleColumn>
     </StaticPage>
   );
+};
+
+AboutPage.defaultProps = {
+  title: null
+};
+
+AboutPage.propTypes = {
+  title: string
 };
 
 export default AboutPage;

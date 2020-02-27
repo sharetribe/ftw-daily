@@ -37,6 +37,13 @@ const PrivacyPolicyPageComponent = props => {
         name: 'PrivacyPolicyPage',
       },
     },
+    {
+      text: intl.formatMessage({ id: 'Impressum.Impressum' }),
+      selected: false,
+      linkProps: {
+        name: 'ImpressumPage',
+      }
+    }
   ];
   const siteTitle = config.siteTitle;
   const schemaTitle = intl.formatMessage({ id: 'PrivacyPolicyPage.schemaTitle' }, { siteTitle });

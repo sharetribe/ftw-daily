@@ -24,6 +24,7 @@ import {
   StyleguidePage,
   TermsOfServicePage,
   TransactionPage,
+  ImpressumPage
 } from './containers';
 
 // routeConfiguration needs to initialize containers first
@@ -59,10 +60,40 @@ const routeConfiguration = () => {
       name: 'AboutPage',
       component: AboutPage,
     },
+    /* 
+    'component' fields for help, faq, contact, and community
+    routes should be changed in the future
+    currently theirs component are temporary mocks
+    */
+    {
+      path: '/help',
+      name: 'HelpPage',
+      component: () => <AboutPage title={"Hilfe"} />
+    },
+    {
+      path: '/faq',
+      name: 'FAQPage',
+      component: () => <AboutPage title={"Community"} />
+    },
+    {
+      path: '/contact',
+      name: 'KontaktPage',
+      component: () => <AboutPage title={"Kontakt"} />
+    },
+    {
+      path: '/community',
+      name: 'CommunityPage',
+      component: () => <AboutPage title={"Community"} />
+    },
+    {
+      path: '/legal',
+      name: 'ImpressumPage',
+      component: () => <ImpressumPage />
+    },
     {
       path: '/subscription',
-      name: 'SubscriptionPage',
-      component: SubscriptionPage,
+      name: 'ImpressumPage',
+      component: ImpressumPage,
     },
     {
       path: '/s',

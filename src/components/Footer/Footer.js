@@ -71,19 +71,19 @@ const Footer = props => {
             <div className={css.footerContainerHorizontal}>
               <div className={css.footerContainerVertical23}>
                 <div className={css.verticalContainerHeader}>
-                  <Link to="#">Speziell für Dich</Link>
+                  Speziell für Dich
                 </div>
                 <div className={css.verticalContainerContent}>
                   <ul className={css.list}>
                     <li className={css.listItem}>
-                      <Link to="#" className={css.link}>
+                      <div className={css.link}>
                         Kostenloses E-Book
-                      </Link>
+                      </div>
                     </li>
                     <li className={css.listItem}>
-                      <Link to="#" className={css.link}>
+                      <div className={css.link}>
                         Exklusive Gutscheine
-                      </Link>
+                      </div>
                       <Link to="/signup" className={css.greenLabel}>Neu</Link>
                     </li>
                   </ul>
@@ -92,7 +92,7 @@ const Footer = props => {
 
               <div className={css.footerContainerVertical23}>
                 <div className={css.verticalContainerHeader}>
-                  <Link to="#">Unsere Community</Link>
+                  Unsere Community
                 </div>
                 <div className={css.verticalContainerContent}>
                   <ul className={css.list}>
@@ -127,7 +127,7 @@ const Footer = props => {
 
               <div className={css.footerContainerVertical31}>
                 <div className={css.verticalContainerHeader}>
-                  <Link to="#">Reitbeteiligungen in</Link>
+                  Reitbeteiligungen in
                 </div>
                 <div className={css.verticalContainerContent}>
                   <div className={css.topCitiesContainer}>
@@ -276,9 +276,9 @@ const Footer = props => {
             <div className={css.footerContainerHorizontal}>
               <div className={css.bottomLine}>
                 <div className={css.bottomLineItem}>
-                  <Link to="#" className={css.link}>
+                  <div className={css.link}>
                     <FormattedMessage id="Footer.copyright" />
-                  </Link>
+                  </div>
                 </div>
                 <div className={css.bottomLineItem}>
                   <Link to="/about" className={css.link}>
