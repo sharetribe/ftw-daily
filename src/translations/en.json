@@ -222,7 +222,7 @@
   "EditListingFeaturesForm.miscLabel": "Other amenities",
   "EditListingFeaturesForm.miscPlaceholder": "Anything we have missed? You can write it down here.",
   "EditListingFeaturesForm.equipmentProvidedLabel": "Equipment provided",
-  "EditListingFeaturesForm.equipmentProvidedPlaceholder": "Write down all equipment provided at the Patch…",
+  "EditListingFeaturesForm.equipmentProvidedPlaceholder": "If there is any more equipment you want to let your guest know about, you can write it down here",
   "EditListingFeaturesPanel.createListingTitle": "What amenities does your Patch have?",
   "EditListingFeaturesPanel.title": "Edit the amenities of {listingTitle}",
   "EditListingLocationForm.address": "Address",
