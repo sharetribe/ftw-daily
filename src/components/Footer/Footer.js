@@ -96,11 +96,11 @@ const Footer = props => {
                     <FormattedMessage id="Footer.toFAQPage" />
                   </NamedLink>
                 </li>
-                {/*<li className={css.listItem}>
-                  <NamedLink name="AboutPage" to={{ hash: '#contact' }} className={css.link}>
+                <li className={css.listItem}>
+                  <a href="mailto:hello@hotpatch.com" className={css.link}>
                     <FormattedMessage id="Footer.toContactPage" />
-                  </NamedLink>
-                </li>*/}
+                  </a>
+                </li>
               </ul>
             </div>
 
