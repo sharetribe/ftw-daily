@@ -22,15 +22,14 @@ export class EditListingPhotosFormComponent extends Component {
       imageUploadRequested: false
      };
     this.onImageUploadHandler = this.onImageUploadHandler.bind(this);
-    this.onDragHandler = this.onDragHandler.bind(this);
-    this.onDropHandler = this.onDropHandler.bind(this);
     this.submittedImages = [];
   }
 
-  onImageUploadHandler(file) {
-    if (file) {
-      this.setState({ imageUploadRequested: true });
-      this.props
+  onImageUploadHandler(files) {
+    if (typeof files === "object") {
+      for (let file of files) {
+        this.setState({ imageUploadRequested: true });
+        this.props
         .onImageUpload({ id: `${file.name}_${Date.now()}`, file })
         .then(() => {
           this.setState({ imageUploadRequested: false });
@@ -38,20 +37,21 @@ export class EditListingPhotosFormComponent extends Component {
         .catch(() => {
           this.setState({ imageUploadRequested: false });
         });
+      }
     }
   }
 
-  onDragHandler(e, flag) {
+  onDragHandler = (e, flag) => {
     // function responsible for changing label background
     e.preventDefault();
     e.stopPropagation();
     this.setState({ dragOverFORM: flag })
   }
 
-  onDropHandler(e) {
+  onDropHandler = e => {
     this.setState({ dragOverFORM: false })
-
-    const droppedFiles = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]
+    
+    const droppedFiles = e.dataTransfer && e.dataTransfer.files
 
     if(!droppedFiles) return 
     
@@ -191,17 +191,19 @@ export class EditListingPhotosFormComponent extends Component {
                     const { accept, input, label, disabled } = fieldprops;
                     const { name, type } = input;
                     const onChange = e => {
-                      const file = e.target.files[0];
-                      form.change(`addImage`, file);
+                      const files = e.target.files;
+                      for (let file of files) {
+                        form.change(`addImage`, file);
+                      }
                       form.blur(`addImage`);
-                      onImageUploadHandler(file);
+                      onImageUploadHandler(files);
                     };
                     const inputProps = { accept, id: name, name, onChange, type };
                     return (
                       <div className={css.addImageWrapper}>
                         <div className={css.aspectRatioWrapper}>
                           {disabled ? null : (
-                            <input {...inputProps} className={css.addImageInput} />
+                            <input {...inputProps} className={css.addImageInput} multiple />
                           )}
                           <label htmlFor={name} className={labelClasses}>
                             {label}
