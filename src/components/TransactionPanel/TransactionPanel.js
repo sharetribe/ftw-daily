@@ -303,8 +303,6 @@ export class TransactionPanelComponent extends Component {
       ? `${formatMoney(intl, price)} ${intl.formatMessage({ id: unitTranslationKey })}`
       : '';
 
-      console.log(intl.formatMessage({ id: unitTranslationKey }))
-
     const firstImage =
       currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
 
@@ -344,7 +342,7 @@ export class TransactionPanelComponent extends Component {
       <div className={classes}>
         <div className={css.container}>
           <div className={css.txInfo}>
-            <button class={css.backBtn} onClick={this.goBack}>
+            <button className={css.backBtn} onClick={this.goBack}>
               <FormattedMessage id="TransactionPanel.backButtonLabel" />
             </button>
             <DetailCardImage
