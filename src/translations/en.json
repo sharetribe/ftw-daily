@@ -214,7 +214,7 @@
   "EditListingDescriptionForm.availabilityPlanRequired": "An availability unit is required.",
   "EditListingDescriptionForm.availabilityPlanMessage": "Time unit",
   "EditListingDescriptionForm.availabilityPlanHeader": "Availability plan",
-  "EditListingDescriptionForm.availabilityPlanSubHeader": "Choose if people will book your space based on hours or days. Once the Patch has been published you will not be able to change this setting.",
+  "EditListingDescriptionForm.availabilityPlanSubHeader": "Choose if people will book your space based on hours or days. Once saved you will not be able to change this setting.",
   "EditListingDescriptionPanel.createListingTitle": "Add your Patch",
   "EditListingDescriptionPanel.title": "Edit details of {listingTitle}",
   "EditListingFeaturesForm.showListingFailed": "Fetching listing data failed",

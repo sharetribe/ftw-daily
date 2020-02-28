@@ -31,6 +31,7 @@ const FieldSelectComponent = props => {
     meta,
     children,
     onChange,
+    disabled,
     ...rest
   } = props;
 
@@ -45,6 +46,7 @@ const FieldSelectComponent = props => {
   const hasError = touched && invalid && error;
 
   const selectClasses = classNames(selectClassName, css.select, {
+    [css.selectDisabled]: disabled,
     [css.selectSuccess]: input.value && valid,
     [css.selectError]: hasError,
   });
@@ -62,7 +64,7 @@ const FieldSelectComponent = props => {
   return (
     <div className={classes}>
       {label ? <label htmlFor={id}>{label}</label> : null}
-      <select {...selectProps}>{children}</select>
+      <select {...selectProps} disabled={disabled}>{children}</select>
       <ValidationError fieldMeta={meta} />
     </div>
   );

@@ -30,7 +30,11 @@ const EditListingDescriptionFormComponent = props => (
         updated,
         updateInProgress,
         fetchErrors,
-        isPublished
+        isPublished,
+        initialValues: {
+          availabilityPlan
+        }
+
       } = formRenderProps;
 
       const titleMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.title' });
@@ -127,11 +131,11 @@ const EditListingDescriptionFormComponent = props => (
           <FieldSelect
             id="availabilityPlan.type"
             name="availabilityPlan.type"
-            disabled={isPublished}
+            disabled={availabilityPlan}
             label={intl.formatMessage({ id: 'EditListingDescriptionForm.availabilityPlanMessage' })}
             validate={composeValidators(required(availabilityPlanRequiredMessage))}
           >
-            <option value=""></option>
+            <option value="" disabled hidden>Pick an option...</option>
             <option value="availability-plan/day">Day</option>
             <option value="availability-plan/time">Hour</option>
           </FieldSelect>

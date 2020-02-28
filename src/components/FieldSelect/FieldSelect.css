@@ -24,3 +24,13 @@
 .selectError {
   border-bottom-color: var(--failColor);
 }
+
+.selectDisabled {
+  color: var(--matterColorAnti);
+  border-bottom-color: var(--matterColorAnti);
+  cursor: default;
+
+  &:hover {
+    border-bottom-color: var(--matterColorAnti);
+  }
+}
