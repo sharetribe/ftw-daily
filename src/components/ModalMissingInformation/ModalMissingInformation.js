@@ -139,6 +139,7 @@ class ModalMissingInformation extends Component {
             hasSeenMissingInformationReminder: true,
           });
         }}
+        usePortal
         onManageDisableScrolling={onManageDisableScrolling}
         closeButtonMessage={closeButtonMessage}
       >

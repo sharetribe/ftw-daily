@@ -3,7 +3,7 @@ import { clearCurrentUser, fetchCurrentUser } from './user.duck';
 import { storableError } from '../util/errors';
 import * as log from '../util/log';
 
-const authenticated = authInfo => authInfo && authInfo.grantType === 'refresh_token';
+const authenticated = authInfo => authInfo && authInfo.isAnonymous === false;
 
 // ================ Action types ================ //
 
@@ -31,6 +31,9 @@ export const USER_LOGOUT = 'app/USER_LOGOUT';
 const initialState = {
   isAuthenticated: false,
 
+  // scopes associated with current token
+  authScopes: [],
+
   // auth info
   authInfoLoaded: false,
 
@@ -53,7 +56,12 @@ export default function reducer(state = initialState, action = {}) {
     case AUTH_INFO_REQUEST:
       return state;
     case AUTH_INFO_SUCCESS:
-      return { ...state, authInfoLoaded: true, isAuthenticated: authenticated(payload) };
+      return {
+        ...state,
+        authInfoLoaded: true,
+        isAuthenticated: authenticated(payload),
+        authScopes: payload.scopes,
+      };
 
     case LOGIN_REQUEST:
       return {
@@ -71,7 +79,7 @@ export default function reducer(state = initialState, action = {}) {
     case LOGOUT_REQUEST:
       return { ...state, logoutInProgress: true, loginError: null, logoutError: null };
     case LOGOUT_SUCCESS:
-      return { ...state, logoutInProgress: false, isAuthenticated: false };
+      return { ...state, logoutInProgress: false, isAuthenticated: false, authScopes: [] };
     case LOGOUT_ERROR:
       return { ...state, logoutInProgress: false, logoutError: payload };
 
