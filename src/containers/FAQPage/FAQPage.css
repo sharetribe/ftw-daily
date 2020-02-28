@@ -1,0 +1,122 @@
+@import '../../marketplace.css';
+
+.staticPageWrapper {
+  width: calc(100% - 48px);
+  max-width: 1056px;
+  margin: 24px auto;
+
+  @media (--viewportMedium) {
+    width: calc(100% - 72px);
+    margin: 72px auto;
+  }
+}
+
+
+.contentWrapper {
+  @media (--viewportMedium) {
+    flex-wrap: nowrap;
+  }
+}
+
+.contentSide {
+  font-style: italic;
+
+  @media (--viewportMedium) {
+    width: 193px;
+    margin-right: 103px;
+    margin-top: 8px;
+  }
+}
+
+.contentMain {
+  width: 90%;
+
+  @media (--viewportMedium) {
+    max-width: 650px;
+  }
+}
+
+.subtitle {
+  @apply --marketplaceH3FontStyles;
+  margin-top: 48px;
+  margin-bottom: 24px;
+}
+
+.FAQCollapsible {
+  border: 1px solid #b2b2b2;
+  margin-bottom: 8px;
+  display: block;
+  font-weight: 400;
+  text-decoration: none;
+  color: #4a4a4a;
+  position: relative;
+  padding: 11px 48px 11px 24px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.FAQCollapsible::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 9px;
+  top: 20px;
+  right: 24px;
+  background-image: url(./../../assets/downArrow.svg);
+  background-repeat: no-repeat;
+  background-size: 14px 10px;
+  -webkit-transition: -webkit-transform .2s ease-in;
+  transition: -webkit-transform .2s ease-in;
+  -o-transition: transform ease-in .2s;
+  transition: transform .2s ease-in;
+  transition: transform .2s ease-in,-webkit-transform .2s ease-in;
+}
+
+.FAQCollapsibleOpen {
+  border-top: 1px solid #b2b2b2;
+  border-bottom: none;
+  border-right: 1px solid #b2b2b2;
+  border-left: 1px solid #b2b2b2;
+  margin-bottom: 0;
+  display: block;
+  font-weight: 400;
+  text-decoration: none;
+  color: #4a4a4a;
+  position: relative;
+  padding: 11px 48px 11px 24px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.FAQCollapsibleOpen::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 9px;
+  top: 20px;
+  right: 24px;
+  background-image: url(./../../assets/upArrow.svg);
+  background-repeat: no-repeat;
+  background-size: 14px 10px;
+  -webkit-transition: -webkit-transform .2s ease-in;
+  transition: -webkit-transform .2s ease-in;
+  -o-transition: transform ease-in .2s;
+  transition: transform .2s ease-in;
+  transition: transform .2s ease-in,-webkit-transform .2s ease-in;
+}
+
+.FAQCollapsibleOpenContent {
+  border: 1px solid #b2b2b2;
+  margin-bottom: 10px;
+  display: block;
+  font-weight: 400;
+  text-decoration: none;
+  color: #4a4a4a;
+  position: relative;
+  padding: 11px 48px 11px 24px;
+  width: 100%;
+}
+
+
+
+
