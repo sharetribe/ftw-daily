@@ -38,6 +38,7 @@ const EditListingCapacityPanel = props => {
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
+      <p>Are you hosting a Patch that your guest will use for multiple people? Let them know the maximum capacity here so they can plan ahead!</p>
       <EditListingCapacityForm
         className={css.form}
         initialValues={{ capacity: publicData.capacity }}
