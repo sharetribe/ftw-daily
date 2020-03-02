@@ -239,7 +239,7 @@
   "EditListingPage.loadingListingData": "Loading listing data…",
   "EditListingPage.titleCreateListing": "Create a listing",
   "EditListingPage.titleEditListing": "Edit listing",
-  "EditListingPhotosForm.addImagesTip": "Good photos will help your Patch userrs get a better idea of your awesome space. We reccomend you upload at least 3 photos in good light to show off your Patch!",
+  "EditListingPhotosForm.addImagesTip": "Good photos will help your Patch users get a better idea of your awesome space. We recommend you upload at least 3 photos in good light to show off your Patch!",
   "EditListingPhotosForm.bankAccountNumberRequired": "You need to add a bank account number.",
   "EditListingPhotosForm.chooseImage": "+ Choose an image…",
   "EditListingPhotosForm.imageRequired": "You need to add at least one image.",
