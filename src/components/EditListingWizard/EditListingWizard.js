@@ -103,11 +103,16 @@ const tabCompleted = (tab, listing) => {
       return !!(publicData && typeof publicData.rules !== 'undefined');
     case LOCATION:
       return !!(geolocation && publicData && publicData.location && publicData.location.address);
+    case AVAILABILITY:
+      // Since we are setting parts of availabilityPlan in description Panel we need to make sure
+      // it is not marked as completed in description.
+      return !!availabilityPlan &&
+        !!(geolocation && publicData && publicData.location && publicData.location.address) &&
+        !!(typeof publicData.rules !== 'undefined') &&
+        publicData.capacity &&
+        publicData.amenities;
     case PRICING:
       return !!price;
-    case AVAILABILITY:
-      // Check price as well since we are setting availabilityPlan in description panel.
-      return !!availabilityPlan && !!price;
     case PHOTOS:
       return images && images.length > 0;
     default:
