@@ -502,7 +502,7 @@
   "ModalMissingInformation.resendFailed": "Resending verification email failed. Please try again.",
   "ModalMissingInformation.resendFailedTooManyRequests": "Resending verification email failed. You already have too many verification emails sent.",
   "ModalMissingInformation.sendingEmail": "Sending verification email…",
-  "ModalMissingInformation.verifyEmailText": "We are currently unable to send you email notifications if other HotPatch users contact you because you haven't verified your email address.",
+  "ModalMissingInformation.verifyEmailText": "We are currently unable to send you email notifications if other HotPatch users contact you because you haven't verified your email address. If you can't find the email, check you spam folder.",
   "ModalMissingInformation.verifyEmailTitle": "Please verify your email address",
   "NotFoundPage.description": "We can't find the page or Patch you're looking for. Make sure you've typed in the URL correctly or try searching HotPatch.",
   "NotFoundPage.heading": "Sorry, we couldn't find that page.",
