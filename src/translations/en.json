@@ -1052,7 +1052,7 @@
   "TopbarMobileMenu.unauthorizedGreeting": "Hello there,{lineBreak}would you like to {signupOrLogin}?",
   "TopbarMobileMenu.yourListingsLink": "Your listings",
   "TopbarSearchForm.placeholder": "Search Patches…",
-  "TopbarSearchForm.searchHelp": "Tip: You can also search Patches by zip code, for example \"00500\" or city district \"Sörnäinen\".",
+  "TopbarSearchForm.searchHelp": "Tip: You can also search Patches by area code, for example \"00500\" or city district \"Sörnäinen\".",
   "TransactionPage.deletedListing": "deleted listing",
   "TransactionPage.fetchOrderFailed": "Fetching order data failed.",
   "TransactionPage.fetchSaleFailed": "Fetching sale data failed.",
