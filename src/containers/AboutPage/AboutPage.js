@@ -42,7 +42,8 @@ const AboutPage = ({ title }) => {
         </LayoutWrapperTopbar>
 
         <LayoutWrapperMain className={css.staticPageWrapper}>
-          <h1 className={css.pageTitle}>Experience the unique Finnish home sauna.</h1>
+          <h1 className={css.pageTitle}>Hallo! Wir sind HorseDeal24</h1>
+          <h1 className={css.pageTitle}>Die Pferde-Sharing Plattform</h1>
           <img className={css.coverImage} src={image} alt="My first ice cream." />
 
           <div className={css.contentWrapper}>
