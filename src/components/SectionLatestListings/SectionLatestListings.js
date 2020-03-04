@@ -26,6 +26,7 @@ const LatestListing = ({ listings }) => {
         }}
         className={css.bigButton}
       >
+       <br/>
         <FormattedMessage id="LandingPage.viewAllListingsButton" />
       </NamedLink>
     </div>
