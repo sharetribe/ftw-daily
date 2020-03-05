@@ -26,11 +26,12 @@
   margin-bottom: 210px;
 
   @media (--viewportLarge) {
-    flex-basis: 538px;
+    flex-basis: 555px;
     flex-grow: 0;
     flex-shrink: 1;
     margin-right: 56px;
     margin-bottom: 0;
+    margin: 123px 0 0 0;
   }
 }
 
@@ -57,6 +58,9 @@
     display: block;
     max-height: 268px;
     overflow-y: hidden;
+  }
+  &:hover {
+    cursor: pointer;
   }
 }
 

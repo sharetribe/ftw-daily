@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import { Form as FinalForm } from 'react-final-form';
 import classNames from 'classnames';
-import { Form, FieldTextInput, SecondaryButton } from '../../components';
+import { Form, FieldTextInput, SecondaryButton, EmojiPicker } from '../../components';
 import { propTypes } from '../../util/types';
 
 import css from './SendMessageForm.css';
@@ -35,8 +35,14 @@ class SendMessageFormComponent extends Component {
     this.handleFocus = this.handleFocus.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.blurTimeoutId = null;
+    this.messageInput = React.createRef();
   }
 
+  handleEmojiSelect = (event, emoji) => {
+    event.preventDefault()
+    this.messageInput.current.textarea.value += emoji
+  }
+   
   handleFocus() {
     this.props.onFocus();
     window.clearTimeout(this.blurTimeoutId);
@@ -72,8 +78,9 @@ class SendMessageFormComponent extends Component {
           const classes = classNames(rootClassName || css.root, className);
           const submitInProgress = inProgress;
           const submitDisabled = invalid || submitInProgress;
+          
           return (
-            <Form className={classes} onSubmit={values => handleSubmit(values, form)}>
+            <Form className={classes} onSubmit={values => handleSubmit(values, form) }>
               <FieldTextInput
                 inputRootClass={css.textarea}
                 type="textarea"
@@ -82,7 +89,9 @@ class SendMessageFormComponent extends Component {
                 placeholder={messagePlaceholder}
                 onFocus={this.handleFocus}
                 onBlur={this.handleBlur}
+                inputRef={this.messageInput}
               />
+              
               <div className={css.submitContainer}>
                 <div className={css.errorContainer}>
                   {sendMessageError ? (
@@ -102,6 +111,7 @@ class SendMessageFormComponent extends Component {
                   <FormattedMessage id="SendMessageForm.sendMessage" />
                 </SecondaryButton>
               </div>
+              <EmojiPicker handleEmojiSelect={ (event, emoji) => this.handleEmojiSelect(event, emoji)}/>
             </Form>
           );
         }}

@@ -80,10 +80,13 @@ class FieldTextInputComponent extends Component {
       : { className: inputClasses, id, type, ...refMaybe, ...input, ...rest };
 
     const classes = classNames(rootClassName || css.root, className);
+
+    inputProps.value = (inputProps.ref && inputProps.ref.current && inputProps.ref.current.textarea) ? inputProps.ref.current.textarea.value : inputProps.value 
+    
     return (
       <div className={classes}>
         {label ? <label htmlFor={id}>{label}</label> : null}
-        {isTextarea ? <ExpandingTextarea {...inputProps} /> : <input {...inputProps} />}
+        {isTextarea ? <ExpandingTextarea value={inputProps.value} {...inputProps} /> : <input value={inputProps.value } {...inputProps} />}
         <ValidationError fieldMeta={fieldMeta} />
       </div>
     );
@@ -99,7 +102,7 @@ FieldTextInputComponent.defaultProps = {
   id: null,
   label: null,
   isUncontrolled: false,
-  inputRef: null,
+  inputRef: null
 };
 
 FieldTextInputComponent.propTypes = {
@@ -130,7 +133,7 @@ FieldTextInputComponent.propTypes = {
     // Either 'textarea' or something that is passed to the input element
     type: string.isRequired,
   }).isRequired,
-  meta: object.isRequired,
+  meta: object.isRequired
 };
 
 class FieldTextInput extends Component {

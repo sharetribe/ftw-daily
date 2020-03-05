@@ -263,7 +263,7 @@ export class ListingPageComponent extends Component {
     : window.innerWidth < 900 ? 2 
     : 3; 
 
-    const sliderBtnsVisible = !isMobile && (listingsWithSimilarDiscipline.length > sliderVisibleSlides);
+    const sliderBtnsVisible = !isMobile && listingsWithSimilarDiscipline && (listingsWithSimilarDiscipline.length > sliderVisibleSlides);
 
     const sliderBackBtnVisible = sliderCurrentIndex !== 0;
     const sliderNextBtnVisible = sliderCurrentIndex !== (listingsWithSimilarDiscipline.length - sliderVisibleSlides)
@@ -489,7 +489,7 @@ export class ListingPageComponent extends Component {
                   className={css.bookingPanel}
                 />
               </div>
-                  {listingsWithSimilarDiscipline.length ? (
+                  {listingsWithSimilarDiscipline && listingsWithSimilarDiscipline.length ? (
                     <div className={css.sliderOuterContainer}>
                       <h3 className={classNames(css.titleShiftedLeft, css.listingSectionTitle)}>Könnten Dir auch gefallen</h3>
                       { listingsWithSimilarDiscipline.length === 1 ? 
@@ -498,6 +498,7 @@ export class ListingPageComponent extends Component {
                           listing={listingsWithSimilarDiscipline[0]}
                           renderSizes={cardRenderSizes}
                           setActiveListing={() => {}}
+                          maxParagraphHeight={89}
                         />)
                         : 
                         (<CarouselProvider
@@ -522,6 +523,7 @@ export class ListingPageComponent extends Component {
                                   listing={l}
                                   renderSizes={cardRenderSizes}
                                   setActiveListing={() => {}}
+                                  maxParagraphHeight={89}
                                 />
                               </Slide>
                             ))}

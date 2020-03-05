@@ -68,7 +68,7 @@ export const AvatarComponent = props => {
     );
   } else if (hasProfileImage && profileLinkEnabled) {
     return (
-      <NamedLink {...rootProps} {...linkProps}>
+      <NamedLink {...rootProps} {...linkProps} isNotRouterLink>
         <ResponsiveImage
           rootClassName={css.avatarImage}
           alt={displayName}
@@ -95,7 +95,7 @@ export const AvatarComponent = props => {
   } else if (profileLinkEnabled) {
     // Placeholder avatar (initials)
     return (
-      <NamedLink {...rootProps} {...linkProps}>
+      <NamedLink {...rootProps} {...linkProps} isNotRouterLink>
         <span className={css.initials}>{abbreviatedName}</span>
       </NamedLink>
     );

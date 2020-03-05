@@ -137,7 +137,13 @@ export class TransactionPanelComponent extends Component {
   }
 
   onMessageSubmit(values, form) {
-    const message = values.message ? values.message.trim() : null;
+    let textareaValue = null
+    try {
+      textareaValue = window.event.target.getElementsByTagName("textarea")[0].value
+    }
+    catch(e) {}
+
+    const message = textareaValue ? textareaValue : values.message ? values.message.trim() : null;
     const { transaction, onSendMessage } = this.props;
     const ensuredTransaction = ensureTransaction(transaction);
 
@@ -197,13 +203,15 @@ export class TransactionPanelComponent extends Component {
       fetchTimeSlotsError,
       nextTransitions,
     } = this.props;
-
+   
     const currentTransaction = ensureTransaction(transaction);
     const currentListing = ensureListing(currentTransaction.listing);
     const currentProvider = ensureUser(currentTransaction.provider);
     const currentCustomer = ensureUser(currentTransaction.customer);
     const isCustomer = transactionRole === 'customer';
     const isProvider = transactionRole === 'provider';
+
+    const transactionProviderID = currentProvider ? currentProvider.id.uuid : null;
 
     const listingLoaded = !!currentListing.id;
     const listingDeleted = listingLoaded && currentListing.attributes.deleted;
@@ -288,6 +296,8 @@ export class TransactionPanelComponent extends Component {
       ? deletedListingTitle
       : currentListing.attributes.title;
 
+    const substitutionalLinkText = currentListing.author.attributes.profile.displayName.split(" ").slice(0,1)[0]
+
     const unitType = config.bookingUnitType;
     const isNightly = unitType === LINE_ITEM_NIGHT;
     const isDaily = unitType === LINE_ITEM_DAY;
@@ -320,12 +330,12 @@ export class TransactionPanelComponent extends Component {
 
     const showSendMessageForm =
       !isCustomerBanned && !isCustomerDeleted && !isProviderBanned && !isProviderDeleted;
-
+    
     const sendMessagePlaceholder = intl.formatMessage(
       { id: 'TransactionPanel.sendMessagePlaceholder' },
-      { name: otherUserDisplayNameString }
+      { name: otherUserDisplayNameString.split(" ").slice(0,1)[0] }
     );
-
+    
     const sendingMessageNotAllowed = intl.formatMessage({
       id: 'TransactionPanel.sendingMessageNotAllowed',
     });
@@ -338,13 +348,17 @@ export class TransactionPanelComponent extends Component {
 
     const classes = classNames(rootClassName || css.root, className);
 
+    const isMobile = window.innerWidth < 560;
+    
+    const IsWrappedWithLink = ({ condition, wrapper, children }) => condition ? wrapper(children) : children;
+
     return (
       <div className={classes}>
         <div className={css.container}>
           <div className={css.txInfo}>
-            <button className={css.backBtn} onClick={this.goBack}>
+            {/* <button className={css.backBtn} onClick={this.goBack}>
               <FormattedMessage id="TransactionPanel.backButtonLabel" />
-            </button>
+            </button> */}
             <DetailCardImage
               rootClassName={css.imageWrapperMobile}
               avatarWrapperClassName={css.avatarWrapperMobile}
@@ -361,13 +375,15 @@ export class TransactionPanelComponent extends Component {
 
             <PanelHeading
               panelHeadingState={stateData.headingState}
-              transactionRole={transactionRole}
+              transactionRole="provider"
               providerName={authorDisplayName}
               customerName={customerDisplayName}
               isCustomerBanned={isCustomerBanned}
               listingId={currentListing.id && currentListing.id.uuid}
               listingTitle={listingTitle}
               listingDeleted={listingDeleted}
+              substitutionalLinkText={substitutionalLinkText}
+              providerID={transactionProviderID}
             />
 
             <div className={css.bookingDetailsMobile}>
@@ -423,14 +439,19 @@ export class TransactionPanelComponent extends Component {
 
           <div className={css.asideDesktop}>
             <div className={css.detailCard}>
-              <DetailCardImage
-                avatarWrapperClassName={css.avatarWrapperDesktop}
-                listingTitle={listingTitle}
-                image={firstImage}
-                provider={currentProvider}
-                isCustomer={isCustomer}
-              />
-
+              <IsWrappedWithLink
+                condition={!isMobile}
+                wrapper={children => <NamedLink isNotRouterLink name="SearchListingsPage">{children}</NamedLink>}
+              >
+                 <DetailCardImage
+                    avatarWrapperClassName={css.avatarWrapperDesktop}
+                    listingTitle={listingTitle}
+                    image={firstImage}
+                    provider={currentProvider}
+                    isCustomer={isCustomer}
+                  />
+              </IsWrappedWithLink>
+         
               <DetailCardHeadingsMaybe
                 showDetailCardHeadings={stateData.showDetailCardHeadings}
                 listingTitle={listingTitle}

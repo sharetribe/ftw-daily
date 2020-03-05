@@ -78,7 +78,7 @@ export { default as ImageFromFile } from './ImageFromFile/ImageFromFile';
 export { default as ListingLink } from './ListingLink/ListingLink';
 export { default as PaginationLinks } from './PaginationLinks/PaginationLinks';
 export { default as ReviewRating } from './ReviewRating/ReviewRating';
-
+export { default as EmojiPicker } from './EmojiPicker/EmojiPicker';
 // Layout helpers
 export { default as LayoutWrapperFooter } from './LayoutWrapperFooter/LayoutWrapperFooter';
 export { default as LayoutWrapperMain } from './LayoutWrapperMain/LayoutWrapperMain';

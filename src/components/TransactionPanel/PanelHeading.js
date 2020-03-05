@@ -15,19 +15,26 @@ export const HEADING_DECLINED = 'declined';
 export const HEADING_CANCELED = 'canceled';
 export const HEADING_DELIVERED = 'deliveded';
 
-const createListingLink = (listingId, label, listingDeleted, searchParams = {}, className = '') => {
+const createListingLink = (listingId, label, listingDeleted, searchParams = {}, className = '', substitutionalLinkText = false) => {
   if (!listingDeleted) {
     const params = { id: listingId, slug: createSlug(label) };
     const to = { search: stringify(searchParams) };
     return (
       <NamedLink className={className} name="ListingPage" params={params} to={to}>
-        {label}
+        {substitutionalLinkText ? substitutionalLinkText : label}
       </NamedLink>
     );
   } else {
     return <FormattedMessage id="TransactionPanel.deletedListingOrderTitle" />;
   }
 };
+
+const createProfileLink = (profileID, label, className = '', substitutionalLinkText = false) => (
+    <NamedLink className={className} name="ProfilePage" params={{id: profileID }}>
+      {substitutionalLinkText ? substitutionalLinkText : label}
+    </NamedLink>
+  );
+
 
 const ListingDeletedInfoMaybe = props => {
   return props.listingDeleted ? (
@@ -103,14 +110,17 @@ const PanelHeading = props => {
     listingTitle,
     listingDeleted,
     isCustomerBanned,
+    substitutionalLinkText,
+    providerID
   } = props;
 
   const isCustomer = props.transactionRole === 'customer';
 
   const defaultRootClassName = isCustomer ? css.headingOrder : css.headingSale;
   const titleClasses = classNames(rootClassName || defaultRootClassName, className);
-  const listingLink = createListingLink(listingId, listingTitle, listingDeleted);
-
+  const listingLink = createListingLink(listingId, listingTitle, listingDeleted, {}, "", substitutionalLinkText);
+  const providerLink = providerID ? createProfileLink(providerID, listingTitle, null, substitutionalLinkText) : null
+  
   switch (panelHeadingState) {
     case HEADING_ENQUIRED:
       return isCustomer ? (
@@ -124,7 +134,7 @@ const PanelHeading = props => {
         <HeadingProvider
           className={titleClasses}
           id="TransactionPanel.saleEnquiredTitle"
-          values={{ customerName, listingLink }}
+          values={{ providerLink }}
           isCustomerBanned={isCustomerBanned}
         />
       );
@@ -140,7 +150,7 @@ const PanelHeading = props => {
         <HeadingProvider
           className={titleClasses}
           id="TransactionPanel.salePaymentPendingTitle"
-          values={{ customerName, listingLink }}
+          values={{ customerName, providerLink }}
           isCustomerBanned={isCustomerBanned}
         >
           <p className={css.transactionInfoMessage}>
@@ -163,7 +173,7 @@ const PanelHeading = props => {
         <HeadingProvider
           className={titleClasses}
           id="TransactionPanel.salePaymentExpiredTitle"
-          values={{ customerName, listingLink }}
+          values={{ customerName, providerLink }}
           isCustomerBanned={isCustomerBanned}
         />
       );
@@ -211,7 +221,7 @@ const PanelHeading = props => {
         <HeadingProvider
           className={titleClasses}
           id="TransactionPanel.saleAcceptedTitle"
-          values={{ customerName, listingLink }}
+          values={{ customerName, providerLink }}
         />
       );
     case HEADING_DECLINED:
@@ -225,7 +235,7 @@ const PanelHeading = props => {
         <HeadingProvider
           className={titleClasses}
           id="TransactionPanel.saleDeclinedTitle"
-          values={{ customerName, listingLink }}
+          values={{ customerName, providerLink }}
           isCustomerBanned={isCustomerBanned}
         />
       );
@@ -240,7 +250,7 @@ const PanelHeading = props => {
         <HeadingProvider
           className={titleClasses}
           id="TransactionPanel.saleCancelledTitle"
-          values={{ customerName, listingLink }}
+          values={{ customerName, providerLink }}
         />
       );
     case HEADING_DELIVERED:
@@ -255,7 +265,7 @@ const PanelHeading = props => {
         <HeadingProvider
           className={titleClasses}
           id="TransactionPanel.saleDeliveredTitle"
-          values={{ customerName, listingLink }}
+          values={{ customerName, providerLink }}
           isCustomerBanned={isCustomerBanned}
         />
       );

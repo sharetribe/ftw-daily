@@ -59,7 +59,11 @@ export const NamedLinkComponent = props => {
           customProps.className = aElemProps.className;
           customProps.style = aElemProps.style;
     return (
-      <div onClick={() => history.push(pathname) } {...customProps} >
+      <div onClick={event => { 
+          event.preventDefault()
+          event.stopPropagation()
+          history.push(pathname) 
+        }} {...customProps} >
         {children}
       </div>
       )
