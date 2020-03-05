@@ -30,7 +30,6 @@ const EditListingDescriptionFormComponent = props => (
         updated,
         updateInProgress,
         fetchErrors,
-        isPublished,
         initialValues: {
           availabilityPlan
         }
@@ -166,7 +165,6 @@ EditListingDescriptionFormComponent.propTypes = {
   ready: bool.isRequired,
   updated: bool.isRequired,
   updateInProgress: bool.isRequired,
-  isPublished: bool.isRequired,
   fetchErrors: shape({
     createListingDraftError: propTypes.error,
     showListingsError: propTypes.error,

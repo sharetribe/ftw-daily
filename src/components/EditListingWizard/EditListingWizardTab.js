@@ -70,6 +70,7 @@ const redirectAfterDraftUpdate = (listingId, params, tab, marketplaceTabs, histo
     history.replace(draftURI);
   }
 
+
   // Redirect to next tab
   const nextPathParams = pathParamsToNextTab(currentPathParams, tab, marketplaceTabs);
   const to = createResourceLocatorString('EditListingPage', routes, nextPathParams, {});
@@ -130,9 +131,10 @@ const EditListingWizardTab = props => {
         ? updateValuesWithImages
         : { ...updateValuesWithImages, id: currentListing.id };
 
+
       return onUpsertListingDraft(tab, upsertValues)
         .then(r => {
-          if (tab !== AVAILABILITY && tab !== marketplaceTabs[marketplaceTabs.length - 1]) {
+          if (tab !== marketplaceTabs[marketplaceTabs.length - 1]) {
             // Create listing flow: smooth scrolling polyfill to scroll to correct tab
             handleCreateFlowTabScrolling(false);
             // After successful saving of draft data, user should be redirected to next tab
