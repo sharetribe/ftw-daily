@@ -1,4 +1,8 @@
 export { default as AboutPage } from './AboutPage/AboutPage';
+export { default as FAQPage } from './FAQPage/FAQPage';
+export { default as HelpPage } from './HelpPage/HelpPage';
+export { default as ContactPage } from './ContactPage/ContactPage';
+export { default as CommunityPage } from './CommunityPage/CommunityPage';
 export { default as ImpressumPage } from './ImpressumPage/ImpressumPage';
 export { default as SubscriptionPage } from './SubscriptionPage/SubscriptionPage';
 export { default as AuthenticationPage } from './AuthenticationPage/AuthenticationPage';

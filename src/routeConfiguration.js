@@ -1,6 +1,10 @@
 import React from 'react';
 import {
   AboutPage,
+  FAQPage,
+  HelpPage,
+  ContactPage,
+  CommunityPage,
   SubscriptionPage,
   AuthenticationPage,
   CheckoutPage,
@@ -60,30 +64,25 @@ const routeConfiguration = () => {
       name: 'AboutPage',
       component: AboutPage,
     },
-    /* 
-    'component' fields for help, faq, contact, and community
-    routes should be changed in the future
-    currently theirs component are temporary mocks
-    */
     {
       path: '/help',
       name: 'HelpPage',
-      component: () => <AboutPage title={"Hilfe"} />
+      component: () => <HelpPage title={"Hilfe"} />
     },
     {
       path: '/faq',
       name: 'FAQPage',
-      component: () => <AboutPage title={"Community"} />
+      component: () => <FAQPage title={"FAQ"} />
     },
     {
       path: '/contact',
       name: 'KontaktPage',
-      component: () => <AboutPage title={"Kontakt"} />
+      component: () => <ContactPage title={"Kontakt"} />
     },
     {
       path: '/community',
       name: 'CommunityPage',
-      component: () => <AboutPage title={"Community"} />
+      component: () => <CommunityPage title={"Community"} />
     },
     {
       path: '/legal',
