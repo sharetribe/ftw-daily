@@ -1051,7 +1051,7 @@
   "TopbarMobileMenu.signupOrLogin": "{signup} or {login}",
   "TopbarMobileMenu.unauthorizedGreeting": "Hello there,{lineBreak}would you like to {signupOrLogin}?",
   "TopbarMobileMenu.yourListingsLink": "Your listings",
-  "TopbarSearchForm.placeholder": "Browse patches by location…",
+  "TopbarSearchForm.placeholder": "Browse by location…",
   "TopbarSearchForm.searchHelp": "Tip: You can also search Patches by area code, for example \"00500\" or city district \"Sörnäinen\".",
   "TransactionPage.deletedListing": "deleted listing",
   "TransactionPage.fetchOrderFailed": "Fetching order data failed.",
