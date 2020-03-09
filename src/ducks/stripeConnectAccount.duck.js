@@ -1,6 +1,6 @@
 // This file deals with Flex API which will create Stripe Custom Connect accounts
 // from given bank_account tokens.
-
+import config from '../config';
 import { storableError } from '../util/errors';
 import * as log from '../util/log';
 
@@ -154,16 +154,43 @@ export const getAccountLinkSuccess = () => ({
 // ================ Thunks ================ //
 
 export const createStripeAccount = params => (dispatch, getState, sdk) => {
-  const country = params.country;
-  const bankAccountToken = params.bankAccountToken;
+  if (typeof window === 'undefined' || !window.Stripe) {
+    throw new Error('Stripe must be loaded for submitting PayoutPreferences');
+  }
+  const stripe = window.Stripe(config.stripe.publishableKey);
+
+  const { country, accountType, bankAccountToken, businessProfileMCC, businessProfileURL } = params;
+
+  // Capabilities are a collection of settings that can be requested for each provider.
+  // What Capabilities are required determines what information Stripe requires to be
+  // collected from the providers.
+  // You can read more from here: https://stripe.com/docs/connect/capabilities-overview
+  // In Flex both 'card_payments' and 'transfers' are required.
+  const requestedCapabilities = ['card_payments', 'transfers'];
+
+  const accountInfo = {
+    business_type: accountType,
+    tos_shown_and_accepted: true,
+  };
 
   dispatch(stripeAccountCreateRequest());
 
-  return sdk.stripeAccount
-    .create(
-      { country, bankAccountToken, requestedCapabilities: ['card_payments', 'transfers'] },
-      { expand: true }
-    )
+  return stripe
+    .createToken('account', accountInfo)
+    .then(response => {
+      const accountToken = response.token.id;
+      return sdk.stripeAccount.create(
+        {
+          country,
+          accountToken,
+          bankAccountToken,
+          requestedCapabilities,
+          businessProfileMCC,
+          businessProfileURL,
+        },
+        { expand: true }
+      );
+    })
     .then(response => {
       const stripeAccount = response.data.data;
       dispatch(stripeAccountCreateSuccess(stripeAccount));

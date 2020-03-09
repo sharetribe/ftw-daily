@@ -38,6 +38,38 @@ exports[`StripePayoutPage matches snapshot with Stripe connected 1`] = `
           />
         </h1>
         <injectIntl(StripeConnectAccountFormComponent)
+          currentUser={
+            Object {
+              "attributes": Object {
+                "banned": false,
+                "deleted": false,
+                "email": "stripe-connected@example.com",
+                "emailVerified": true,
+                "profile": Object {
+                  "abbreviatedName": "stripe-connected abbreviated name",
+                  "displayName": "stripe-connected display name",
+                  "firstName": "stripe-connected first name",
+                  "lastName": "stripe-connected last name",
+                },
+              },
+              "id": UUID {
+                "_sdkType": "UUID",
+                "uuid": "stripe-connected",
+              },
+              "profileImage": Object {},
+              "stripeAccount": Object {
+                "attributes": Object {
+                  "stripeAccountId": "acc_testiaccountid",
+                },
+                "id": UUID {
+                  "_sdkType": "UUID",
+                  "uuid": undefined,
+                },
+                "type": "stripeAccount",
+              },
+              "type": "currentUser",
+            }
+          }
           disabled={false}
           inProgress={false}
           onChange={[Function]}
@@ -100,6 +132,28 @@ exports[`StripePayoutPage matches snapshot with Stripe not connected 1`] = `
           />
         </h1>
         <injectIntl(StripeConnectAccountFormComponent)
+          currentUser={
+            Object {
+              "attributes": Object {
+                "banned": false,
+                "deleted": false,
+                "email": "stripe-not-connected@example.com",
+                "emailVerified": true,
+                "profile": Object {
+                  "abbreviatedName": "stripe-not-connected abbreviated name",
+                  "displayName": "stripe-not-connected display name",
+                  "firstName": "stripe-not-connected first name",
+                  "lastName": "stripe-not-connected last name",
+                },
+              },
+              "id": UUID {
+                "_sdkType": "UUID",
+                "uuid": "stripe-not-connected",
+              },
+              "profileImage": Object {},
+              "type": "currentUser",
+            }
+          }
           disabled={false}
           inProgress={false}
           onChange={[Function]}
@@ -162,6 +216,38 @@ exports[`StripePayoutPage matches snapshot with details submitted 1`] = `
           />
         </h1>
         <injectIntl(StripeConnectAccountFormComponent)
+          currentUser={
+            Object {
+              "attributes": Object {
+                "banned": false,
+                "deleted": false,
+                "email": "stripe-connected@example.com",
+                "emailVerified": true,
+                "profile": Object {
+                  "abbreviatedName": "stripe-connected abbreviated name",
+                  "displayName": "stripe-connected display name",
+                  "firstName": "stripe-connected first name",
+                  "lastName": "stripe-connected last name",
+                },
+              },
+              "id": UUID {
+                "_sdkType": "UUID",
+                "uuid": "stripe-connected",
+              },
+              "profileImage": Object {},
+              "stripeAccount": Object {
+                "attributes": Object {
+                  "stripeAccountId": "acc_testiaccountid",
+                },
+                "id": UUID {
+                  "_sdkType": "UUID",
+                  "uuid": undefined,
+                },
+                "type": "stripeAccount",
+              },
+              "type": "currentUser",
+            }
+          }
           disabled={false}
           inProgress={false}
           onChange={[Function]}
