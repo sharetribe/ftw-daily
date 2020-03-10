@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import { Form as FinalForm } from 'react-final-form';
 import classNames from 'classnames';
-import { Form, FieldTextInput, SecondaryButton, EmojiPicker } from '../../components';
+import { Form, FieldTextInput, SecondaryButton } from '../../components'; //,EmojiPicker } 
 import { propTypes } from '../../util/types';
 
 import css from './SendMessageForm.css';
@@ -38,10 +38,10 @@ class SendMessageFormComponent extends Component {
     this.messageInput = React.createRef();
   }
 
-  handleEmojiSelect = (event, emoji) => {
-    event.preventDefault()
-    this.messageInput.current.textarea.value += emoji
-  }
+  // handleEmojiSelect = (event, emoji) => {
+  //   event.preventDefault()
+  //   this.messageInput.current.textarea.value += emoji
+  // }
    
   handleFocus() {
     this.props.onFocus();
@@ -111,7 +111,7 @@ class SendMessageFormComponent extends Component {
                   <FormattedMessage id="SendMessageForm.sendMessage" />
                 </SecondaryButton>
               </div>
-              <EmojiPicker handleEmojiSelect={ (event, emoji) => this.handleEmojiSelect(event, emoji)}/>
+              {/* <EmojiPicker handleEmojiSelect={ (event, emoji) => this.handleEmojiSelect(event, emoji)}/> */}
             </Form>
           );
         }}
