@@ -92,7 +92,7 @@
   animation-delay: 0.65s;
 
   @media (--viewportMedium) {
-    display: none;
+    /* display: none; */
     max-width: var(--SectionHero_desktopTitleMaxWidth);
     margin: 0 0 40px 0;
   }

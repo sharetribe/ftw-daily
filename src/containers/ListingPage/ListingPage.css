@@ -55,7 +55,7 @@
 }
 .sliderButton {
   position: absolute;
-  top: 35%;
+  top: 40%;
   transform: translateY(-50%);
   border: none;
   background: none;
@@ -99,6 +99,12 @@
   }
 
   margin: 0 15px;
+  display: block;
+
+  &:hover {
+    outline: none;
+    text-decoration: none;
+  }
 }
 
 .listingPageCardSingle {

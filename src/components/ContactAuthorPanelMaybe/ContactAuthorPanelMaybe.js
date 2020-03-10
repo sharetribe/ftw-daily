@@ -4,6 +4,7 @@ import { ensureUser, ensureCurrentUser } from '../../util/data';
 import { LINE_ITEM_NIGHT, LINE_ITEM_DAY } from '../../util/types';
 
 import css from './ContactAuthorPanelMaybe.css';
+import MessageIcon from './MessageIcon.js';
 
 const ContactAuthorPanel = ({
   author,
@@ -41,6 +42,7 @@ const ContactAuthorPanel = ({
       </div>
       <button className={css.contactButton} onClick={onContactUser}>
         <FormattedMessage id="ListingPage.contactAuthorButton" />
+        <MessageIcon />
       </button>
     </div>
   );

@@ -49,6 +49,9 @@ const SectionLocations = props => {
       <div className={css.title}>
         <FormattedMessage id="SectionLocations.title" />
       </div>
+      <div className={css.subTitle}>
+        <FormattedMessage id="SectionLocations.subTitle" />
+      </div>
       <div className={css.locations}>
         {locationLink(
           'Springen',
@@ -74,7 +77,9 @@ const SectionLocations = props => {
         }}
         className={css.bigButton}
       >
-        <FormattedMessage id="LandingPage.viewAllListingsButton" />
+        <div>
+          <FormattedMessage id="LandingPage.viewAllListingsButton" />
+        </div> 
       </NamedLink>
     </div>
   );

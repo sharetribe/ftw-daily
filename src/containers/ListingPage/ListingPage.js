@@ -352,7 +352,7 @@ export class ListingPageComponent extends Component {
     // Because listing can be never showed with banned or deleted user we don't have to provide
     // banned or deleted display names for the function
     const authorDisplayName = userDisplayNameAsString(ensuredAuthor, '');
-
+    
     const { formattedPrice, priceTitle } = priceData(price, intl);
 
     const handleBookingSubmit = values => {
@@ -405,7 +405,7 @@ export class ListingPageComponent extends Component {
         params={params}
         to={{ hash: '#host' }}
       >
-        {authorDisplayName}
+        {authorDisplayName.split(" ").slice(0,1)[0]}
       </NamedLink>
     );
     return (
@@ -619,7 +619,7 @@ const mapStateToProps = state => {
     fetchTimeSlotsError,
     sendEnquiryInProgress,
     sendEnquiryError,
-    enquiryModalOpenForListingId,
+    enquiryModalOpenForListingId
   } = state.ListingPage;
 
   const {currentPageResultIds} = state.SearchPage;
@@ -639,7 +639,7 @@ const mapStateToProps = state => {
     const listings = getMarketplaceEntities(state, [ref]);
     return listings.length === 1 ? listings[0] : null;
   };
-
+ 
   return {
     isAuthenticated,
     currentUser,

@@ -25,6 +25,11 @@
     margin-top: 32px;
     min-width: 312px;
   }
+  & > svg {
+    fill: none;
+    margin-right: -25px;
+    margin-left: 20px;
+  }
 }
 
 .textContainer {

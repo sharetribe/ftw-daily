@@ -4,12 +4,26 @@
   @apply --marketplaceH1FontStyles;
   margin-top: 0;
   text-align: center;
+  /* margin-bottom: 30px; */
+
+  /* @media (--viewportMedium) {
+    margin-bottom: 50px;
+  } */
+}
+
+.subTitle {
+  @apply --marketplaceH3FontStyles;
+  margin-top: 0;
+  text-align: center;
   margin-bottom: 30px;
+  font-size: 20px;
+  color: var(--marketPlaceColorSubTitleLandingPage);
 
   @media (--viewportMedium) {
     margin-bottom: 50px;
   }
 }
+
 
 .listingCards {
   display: grid;
@@ -26,10 +40,37 @@
   @apply --marketplaceButtonStyles;
 
   animation-delay: 0.8s;
-  margin: 30px auto 0 auto;
+  margin: 40px auto 0 auto;
   border-radius: 4px;
 
   @media (--viewportMedium) {
     width: 260px;
+    margin: 60px auto 0 auto;
   }
+
+  & > div {
+    display: inline-block;
+    @apply --withArrowIcon; 
+  
+    &:before,
+    &:after {
+      right: -10%;
+      transition: .5s;
+      opacity: 0;
+    }
+  }
+
+  &:hover {
+
+    & > div {
+      &:before,
+      &:after {
+      right: -18%;
+      transition: .5s;
+      opacity: 1;
+    }
+    }
+
+  }
+  
 }
