@@ -255,12 +255,12 @@ export class ListingPageComponent extends Component {
     const listingsWithSimilarDiscipline = thisListing && listings.filter(l => l.attributes.publicData.mainDiscipline === currentMainDiscipline && l.id.uuid !== listingId.uuid); // similar mainDiscipline but without current horse
 
     const { sliderCurrentIndex } = this.state;
-    const isMobile = window.innerWidth < 480; // viewportSmall
+    const isMobile = (typeof window !== 'undefined' && window.innerWidth < 480); // viewportSmall
 
     const sliderVisibleSlides = 
     isMobile && listingsWithSimilarDiscipline.length === 1 ? 1
     : isMobile && listingsWithSimilarDiscipline.length > 1 ? 1.25
-    : window.innerWidth < 900 ? 2 
+    : (typeof window !== 'undefined' && window.innerWidth < 900) ? 2 
     : 3; 
 
     const sliderBtnsVisible = !isMobile && listingsWithSimilarDiscipline && (listingsWithSimilarDiscipline.length > sliderVisibleSlides);

@@ -139,7 +139,9 @@ export class TransactionPanelComponent extends Component {
   onMessageSubmit(values, form) {
     let textareaValue = null
     try {
-      textareaValue = window.event.target.getElementsByTagName("textarea")[0].value
+      if(typeof window !== 'undefined') {
+        textareaValue = window.event.target.getElementsByTagName("textarea")[0].value
+      }
     }
     catch(e) {}
 
@@ -348,7 +350,7 @@ export class TransactionPanelComponent extends Component {
 
     const classes = classNames(rootClassName || css.root, className);
 
-    const isMobile = window.innerWidth < 560;
+    const isMobile = (typeof window !== 'undefined' && window.innerWidth < 560);
     
     const IsWrappedWithLink = ({ condition, wrapper, children }) => condition ? wrapper(children) : children;
 
