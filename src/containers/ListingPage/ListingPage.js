@@ -203,6 +203,7 @@ export class ListingPageComponent extends Component {
       fetchTimeSlotsError,
       listings
     } = this.props;
+    const windowIsDefined = typeof window !== 'undefined'; // for server-side rendering
 
     const listingId = new UUID(rawParams.id);
     const isPendingApprovalVariant = rawParams.variant === LISTING_PAGE_PENDING_APPROVAL_VARIANT;
@@ -255,12 +256,12 @@ export class ListingPageComponent extends Component {
     const listingsWithSimilarDiscipline = thisListing && listings.filter(l => l.attributes.publicData.mainDiscipline === currentMainDiscipline && l.id.uuid !== listingId.uuid); // similar mainDiscipline but without current horse
 
     const { sliderCurrentIndex } = this.state;
-    const isMobile = (typeof window !== 'undefined' && window.innerWidth < 480); // viewportSmall
+    const isMobile = (windowIsDefined && window.innerWidth < 480); // viewportSmall
 
     const sliderVisibleSlides = 
     isMobile && listingsWithSimilarDiscipline.length === 1 ? 1
     : isMobile && listingsWithSimilarDiscipline.length > 1 ? 1.25
-    : (typeof window !== 'undefined' && window.innerWidth < 900) ? 2 
+    : (windowIsDefined && window.innerWidth < 900) ? 2 
     : 3; 
 
     const sliderBtnsVisible = !isMobile && listingsWithSimilarDiscipline && (listingsWithSimilarDiscipline.length > sliderVisibleSlides);
@@ -356,7 +357,7 @@ export class ListingPageComponent extends Component {
 
     const handleBookingSubmit = values => {
       const isCurrentlyClosed = currentListing.attributes.state === LISTING_STATE_CLOSED;
-      if (isOwnListing || isCurrentlyClosed) {
+      if (windowIsDefined && (isOwnListing || isCurrentlyClosed)) {
         window.scrollTo(0, 0);
       } else {
         this.handleSubmit(values);
