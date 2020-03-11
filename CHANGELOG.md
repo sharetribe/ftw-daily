@@ -14,6 +14,11 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [change] Use some default values to improve Stripe Connect onboarding. When creating a new Stripe
+  the account we will pass the account type, business URL and MCC to Stripe in order to avoid a
+  couple of steps in Connect Onboarding. We will also pass `tos_shown_and_accepted` flag. This PR
+  will bring back the previously used `accountToken` which is now used for passing e.g. the account
+  type to Stripe. [#1267](https://github.com/sharetribe/ftw-daily/pull/1267)
 - [change] Update `Modal` component to have option to use `Portal` with `usePortal` flag. Keep also
   possibility to use modals without Portal because of `ModalInMobile` component.
   [#1258](https://github.com/sharetribe/ftw-daily/pull/1258)

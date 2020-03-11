@@ -29,12 +29,44 @@
   margin-bottom: 24px;
 }
 
+.radioButtonRow {
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 24px;
+  white-space: nowrap;
+}
+
+.radioButtonRow > :first-child {
+  margin-right: 36px;
+}
+
 .selectCountry {
   margin-bottom: 24px;
 }
 
 .error {
   @apply --marketplaceModalErrorStyles;
+}
+
+.termsText {
+  @apply --marketplaceModalHelperText;
+  margin-bottom: 12px;
+  text-align: center;
+
+  @media (--viewportMedium) {
+    margin-bottom: 16px;
+  }
+}
+
+.termsLink {
+  @apply --marketplaceModalHelperLink;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
 }
 
 .bankDetailsStripeField p {
