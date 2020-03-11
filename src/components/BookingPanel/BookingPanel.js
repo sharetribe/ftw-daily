@@ -145,11 +145,11 @@ const BookingPanel = props => {
           >
             <FormattedMessage id="BookingPanel.ctaButtonMessage" />
           </Button>
-        ) : (
+        ) : isClosed ? (
           <div className={css.closedListingButton}>
             <FormattedMessage id="BookingPanel.closedListingButtonText" />
           </div>
-        )}
+        ) : null}
       </div>
     </div>
   );
