@@ -159,6 +159,7 @@ export const StripePayoutPageComponent = props => {
                 disabled={formDisabled}
                 inProgress={payoutDetailsSaveInProgress}
                 ready={payoutDetailsSaved}
+                currentUser={ensuredCurrentUser}
                 stripeBankAccountLastDigits={getBankAccountLast4Digits(stripeAccountData)}
                 savedCountry={savedCountry}
                 submitButtonText={intl.formatMessage({
