@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [fix] Don't flash listing closed text on mobile view of `BookingPanel` when the listing data is
+  not loaded yet. Instead, check that text is shown only for closed listings.
+  [#1268](https://github.com/sharetribe/ftw-daily/pull/1268)
 - [change] Use some default values to improve Stripe Connect onboarding. When creating a new Stripe
   the account we will pass the account type, business URL and MCC to Stripe in order to avoid a
   couple of steps in Connect Onboarding. We will also pass `tos_shown_and_accepted` flag. This PR
