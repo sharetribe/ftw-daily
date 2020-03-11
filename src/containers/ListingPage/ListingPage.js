@@ -212,7 +212,7 @@ export class ListingPageComponent extends Component {
       isPendingApprovalVariant || isDraftVariant
         ? ensureOwnListing(getOwnListing(listingId))
         : ensureListing(getListing(listingId));
-
+    
     const listingSlug = rawParams.slug || createSlug(currentListing.attributes.title || '');
     const params = { slug: listingSlug, ...rawParams };
 
@@ -251,8 +251,9 @@ export class ListingPageComponent extends Component {
 
     const { breed, gender, age, color, hight, mainDiscipline } = publicData;
 
-    const thisListing = listings.length && listings.filter( l => l.id.uuid === listingId.uuid)[0]
-    const currentMainDiscipline = thisListing && thisListing.attributes.publicData.mainDiscipline
+    const thisListing = listings && listings.length && listings.filter( l => l.id.uuid === listingId.uuid)[0];
+    
+    const currentMainDiscipline = thisListing && thisListing.attributes.publicData.mainDiscipline;
     const listingsWithSimilarDiscipline = thisListing && listings.filter(l => l.attributes.publicData.mainDiscipline === currentMainDiscipline && l.id.uuid !== listingId.uuid); // similar mainDiscipline but without current horse
 
     const { sliderCurrentIndex } = this.state;
@@ -267,7 +268,7 @@ export class ListingPageComponent extends Component {
     const sliderBtnsVisible = !isMobile && listingsWithSimilarDiscipline && (listingsWithSimilarDiscipline.length > sliderVisibleSlides);
 
     const sliderBackBtnVisible = sliderCurrentIndex !== 0;
-    const sliderNextBtnVisible = sliderCurrentIndex !== (listingsWithSimilarDiscipline.length - sliderVisibleSlides)
+    const sliderNextBtnVisible = listingsWithSimilarDiscipline && ( sliderCurrentIndex !== (listingsWithSimilarDiscipline.length - sliderVisibleSlides))
 
     const richTitle = (
       <span>
@@ -639,7 +640,7 @@ const mapStateToProps = state => {
     const listings = getMarketplaceEntities(state, [ref]);
     return listings.length === 1 ? listings[0] : null;
   };
- 
+  
   return {
     isAuthenticated,
     currentUser,

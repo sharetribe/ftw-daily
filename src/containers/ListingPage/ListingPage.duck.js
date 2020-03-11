@@ -11,7 +11,7 @@ import {
   LISTING_PAGE_PENDING_APPROVAL_VARIANT,
 } from '../../util/urlHelpers';
 import { fetchCurrentUser, fetchCurrentUserHasOrdersSuccess } from '../../ducks/user.duck';
-import { searchListings } from '../SearchPage/SearchPage.duck';
+//import { searchListings } from '../SearchPage/SearchPage.duck';
 
 const { UUID } = sdkTypes;
 
@@ -286,18 +286,18 @@ export const loadData = (params, search) => dispatch => {
   // const { page = 1, address, origin, ...rest } = queryParams;
   // const originMaybe = config.sortSearchByDistance && origin ? { origin } : {};
 
-  dispatch(searchListings({
-    page: 1,
-    perPage: 24,
-    include: ['author', 'author.profileImage', 'images'],
-    'fields.listing': ['title', 'geolocation', 'price', 'publicData'],
-    'fields.user': ['profile.displayName', 'profile.abbreviatedName'],
-    'fields.image': [
-      'variants.landscape-crop',
-      'variants.landscape-crop2x',
-      'variants.square-small',
-    ],
-  }))
+  // dispatch(searchListings({
+  //   page: 1,
+  //   perPage: 24,
+  //   include: ['author', 'author.profileImage', 'images'],
+  //   'fields.listing': ['title', 'geolocation', 'price', 'publicData'],
+  //   'fields.user': ['profile.displayName', 'profile.abbreviatedName'],
+  //   'fields.image': [
+  //     'variants.landscape-crop',
+  //     'variants.landscape-crop2x',
+  //     'variants.square-small',
+  //   ],
+  // }))
 
   if (config.enableAvailability) {
     return Promise.all([

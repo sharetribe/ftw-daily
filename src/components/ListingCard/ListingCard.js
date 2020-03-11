@@ -140,7 +140,7 @@ export const ListingCardComponent = props => {
   }
 
   return (
-    <NamedLink className={classes} name="ListingPage" params={{ id, slug }} openInNewTab isNotRouterLink={(isWindowDefined && window.innerWidth < 560) ? true : false}>
+    <NamedLink className={classes} name="ListingPage" params={{ id, slug }} openInNewTab isNotRouterLink>
       <div
         className={css.threeToTwoWrapper}
         onMouseEnter={() => setActiveListing(currentListing.id)}
