@@ -8,7 +8,9 @@ const MIN_LENGTH_FOR_LONG_WORDS_IN_DESCRIPTION = 20;
 
 const SectionDescriptionMaybe = props => {
   const { description } = props;
-  const maxLength = window.innerWidth > 540 ? 250 : 160
+  const windowIsDefined = typeof window !== 'undefined';
+
+  const maxLength = (windowIsDefined && window.innerWidth > 540) ? 250 : 160
 
   return description ? (
     <div className={css.listingSectionContainer}>

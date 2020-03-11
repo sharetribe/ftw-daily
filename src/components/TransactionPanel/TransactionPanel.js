@@ -128,7 +128,7 @@ export class TransactionPanelComponent extends Component {
     this.setState({ sendMessageFormFocused: true });
     if (this.isMobSaf) {
       // Scroll to bottom
-      window.scroll({ top: document.body.scrollHeight, left: 0, behavior: 'smooth' });
+      window && window.scroll({ top: document.body.scrollHeight, left: 0, behavior: 'smooth' });
     }
   }
 
