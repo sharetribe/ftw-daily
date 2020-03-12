@@ -144,7 +144,7 @@
   "ContactDetailsPage.title": "Contact details",
   "CookieConsent.continue": "Continue",
   "CookieConsent.cookieLink": "cookies",
-  "CookieConsent.message": "Welcome to HotPatch, friend! We use {cookieLink} to enhance your browsing experience.",
+  "CookieConsent.message": "Welcome to HotPatch! We use {cookieLink} to enhance your browsing experience.",
   "DateInput.clearDate": "Clear Date",
   "DateInput.closeDatePicker": "Close",
   "DateInput.defaultPlaceholder": "Date input",
