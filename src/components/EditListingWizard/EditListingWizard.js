@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { array, bool, func, number, object, oneOf, shape, string } from 'prop-types';
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
@@ -7,6 +7,7 @@ import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
 import { createResourceLocatorString } from '../../util/routes';
 import { withViewport } from '../../util/contextHelpers';
+import { propTypes } from '../../util/types';
 import {
   LISTING_PAGE_PARAM_TYPE_DRAFT,
   LISTING_PAGE_PARAM_TYPE_NEW,
@@ -47,6 +48,9 @@ export const TABS = [
 
 // Tabs are horizontal in small screens
 const MAX_HORIZONTAL_NAV_SCREEN_WIDTH = 1023;
+
+const STRIPE_ONBOARDING_RETURN_URL_SUCCESS = 'success';
+const STRIPE_ONBOARDING_RETURN_URL_FAILURE = 'failure';
 
 const tabLabel = (intl, tab) => {
   let key = null;
@@ -173,6 +177,11 @@ const handleGetStripeConnectAccountLinkFn = (getLinkFn, commonParams) => type =>
     .catch(err => console.error(err));
 };
 
+const RedirectToStripe = ({ redirectFn }) => {
+  useEffect(redirectFn('custom_account_verification'), []);
+  return <FormattedMessage id="EditListingWizard.redirectingToStripe" />;
+};
+
 // Create a new or edit listing through EditListingWizard
 class EditListingWizard extends Component {
   constructor(props) {
@@ -194,7 +203,7 @@ class EditListingWizard extends Component {
   componentDidMount() {
     const { stripeOnboardingReturnURL } = this.props;
 
-    if (stripeOnboardingReturnURL != null) {
+    if (stripeOnboardingReturnURL != null && !this.showPayoutDetails) {
       this.setState({ showPayoutDetails: true });
     }
   }
@@ -263,6 +272,8 @@ class EditListingWizard extends Component {
       fetchStripeAccountError,
       stripeAccountFetched,
       stripeAccount,
+      stripeAccountError,
+      stripeAccountLinkError,
       currentUser,
       ...rest
     } = this.props;
@@ -314,8 +325,18 @@ class EditListingWizard extends Component {
     const rootURL = config.canonicalRootURL;
     const routes = routeConfiguration();
     const { returnURLType, ...pathParams } = params;
-    const successURL = createReturnURL('success', rootURL, routes, pathParams);
-    const failureURL = createReturnURL('failure', rootURL, routes, pathParams);
+    const successURL = createReturnURL(
+      STRIPE_ONBOARDING_RETURN_URL_SUCCESS,
+      rootURL,
+      routes,
+      pathParams
+    );
+    const failureURL = createReturnURL(
+      STRIPE_ONBOARDING_RETURN_URL_FAILURE,
+      rootURL,
+      routes,
+      pathParams
+    );
 
     const accountId = stripeConnected ? stripeAccount.id : null;
     const stripeAccountData = stripeConnected ? getStripeAccountData(stripeAccount) : null;
@@ -336,8 +357,8 @@ class EditListingWizard extends Component {
       }
     );
 
-    const returnedNormallyFromStripe = returnURLType === 'success';
-    const showVerificationError = returnURLType === 'failure';
+    const returnedNormallyFromStripe = returnURLType === STRIPE_ONBOARDING_RETURN_URL_SUCCESS;
+    const returnedAbnormallyFromStripe = returnURLType === STRIPE_ONBOARDING_RETURN_URL_FAILURE;
     const showVerificationNeeded = stripeConnected && requirementsMissing;
 
     // Redirect from success URL to basic path for StripePayoutPage
@@ -384,54 +405,59 @@ class EditListingWizard extends Component {
         >
           <div className={css.modalPayoutDetailsWrapper}>
             <h1 className={css.modalTitle}>
-              <FormattedMessage id="EditListingPhotosPanel.payoutModalTitleOneMoreThing" />
+              <FormattedMessage id="EditListingWizard.payoutModalTitleOneMoreThing" />
               <br />
-              <FormattedMessage id="EditListingPhotosPanel.payoutModalTitlePayoutPreferences" />
+              <FormattedMessage id="EditListingWizard.payoutModalTitlePayoutPreferences" />
             </h1>
-            <p className={css.modalMessage}>
-              <FormattedMessage id="EditListingPhotosPanel.payoutModalInfo" />
-            </p>
             {!currentUserLoaded ? (
               <FormattedMessage id="StripePayoutPage.loadingData" />
+            ) : returnedAbnormallyFromStripe && !stripeAccountLinkError ? (
+              <p className={css.modalMessage}>
+                <RedirectToStripe redirectFn={handleGetStripeConnectAccountLink} />
+              </p>
             ) : (
-              <StripeConnectAccountForm
-                disabled={formDisabled}
-                inProgress={payoutDetailsSaveInProgress}
-                ready={payoutDetailsSaved}
-                currentUser={ensuredCurrentUser}
-                stripeBankAccountLastDigits={getBankAccountLast4Digits(stripeAccountData)}
-                savedCountry={savedCountry}
-                submitButtonText={intl.formatMessage({
-                  id: 'StripePayoutPage.submitButtonText',
-                })}
-                stripeAccountError={
-                  createStripeAccountError || updateStripeAccountError || fetchStripeAccountError
-                }
-                stripeAccountFetched={stripeAccountFetched}
-                onChange={onPayoutDetailsFormChange}
-                onSubmit={rest.onPayoutDetailsSubmit}
-                onGetStripeConnectAccountLink={handleGetStripeConnectAccountLink}
-                stripeConnected={stripeConnected}
-              >
-                {stripeConnected && (showVerificationError || showVerificationNeeded) ? (
-                  <StripeConnectAccountStatusBox
-                    type={showVerificationError ? 'verificationError' : 'verificationNeeded'}
-                    inProgress={getAccountLinkInProgress}
-                    onGetStripeConnectAccountLink={handleGetStripeConnectAccountLink(
-                      'custom_account_verification'
-                    )}
-                  />
-                ) : stripeConnected && savedCountry ? (
-                  <StripeConnectAccountStatusBox
-                    type="verificationSuccess"
-                    inProgress={getAccountLinkInProgress}
-                    disabled={payoutDetailsSaveInProgress}
-                    onGetStripeConnectAccountLink={handleGetStripeConnectAccountLink(
-                      'custom_account_update'
-                    )}
-                  />
-                ) : null}
-              </StripeConnectAccountForm>
+              <>
+                <p className={css.modalMessage}>
+                  <FormattedMessage id="EditListingWizard.payoutModalInfo" />
+                </p>
+                <StripeConnectAccountForm
+                  disabled={formDisabled}
+                  inProgress={payoutDetailsSaveInProgress}
+                  ready={payoutDetailsSaved}
+                  currentUser={ensuredCurrentUser}
+                  stripeBankAccountLastDigits={getBankAccountLast4Digits(stripeAccountData)}
+                  savedCountry={savedCountry}
+                  submitButtonText={intl.formatMessage({
+                    id: 'StripePayoutPage.submitButtonText',
+                  })}
+                  stripeAccountError={stripeAccountError}
+                  stripeAccountFetched={stripeAccountFetched}
+                  stripeAccountLinkError={stripeAccountLinkError}
+                  onChange={onPayoutDetailsFormChange}
+                  onSubmit={rest.onPayoutDetailsSubmit}
+                  onGetStripeConnectAccountLink={handleGetStripeConnectAccountLink}
+                  stripeConnected={stripeConnected}
+                >
+                  {stripeConnected && !returnedAbnormallyFromStripe && showVerificationNeeded ? (
+                    <StripeConnectAccountStatusBox
+                      type="verificationNeeded"
+                      inProgress={getAccountLinkInProgress}
+                      onGetStripeConnectAccountLink={handleGetStripeConnectAccountLink(
+                        'custom_account_verification'
+                      )}
+                    />
+                  ) : stripeConnected && savedCountry && !returnedAbnormallyFromStripe ? (
+                    <StripeConnectAccountStatusBox
+                      type="verificationSuccess"
+                      inProgress={getAccountLinkInProgress}
+                      disabled={payoutDetailsSaveInProgress}
+                      onGetStripeConnectAccountLink={handleGetStripeConnectAccountLink(
+                        'custom_account_update'
+                      )}
+                    />
+                  ) : null}
+                </StripeConnectAccountForm>
+              </>
             )}
           </div>
         </Modal>
@@ -442,14 +468,23 @@ class EditListingWizard extends Component {
 
 EditListingWizard.defaultProps = {
   className: null,
+  currentUser: null,
   rootClassName: null,
   listing: null,
+  stripeAccount: null,
+  stripeAccountFetched: null,
   updateInProgress: false,
+  createStripeAccountError: null,
+  updateStripeAccountError: null,
+  fetchStripeAccountError: null,
+  stripeAccountError: null,
+  stripeAccountLinkError: null,
 };
 
 EditListingWizard.propTypes = {
   id: string.isRequired,
   className: string,
+  currentUser: propTypes.currentUser,
   rootClassName: string,
   params: shape({
     id: string.isRequired,
@@ -457,10 +492,8 @@ EditListingWizard.propTypes = {
     type: oneOf(LISTING_PAGE_PARAM_TYPES).isRequired,
     tab: oneOf(TABS).isRequired,
   }).isRequired,
-  history: shape({
-    push: func.isRequired,
-    replace: func.isRequired,
-  }).isRequired,
+  stripeAccount: object,
+  stripeAccountFetched: bool,
 
   // We cannot use propTypes.listing since the listing might be a draft.
   listing: shape({
@@ -480,16 +513,20 @@ EditListingWizard.propTypes = {
     publishListingError: object,
     showListingsError: object,
     uploadImageError: object,
-    createStripeAccountError: object,
   }).isRequired,
+  createStripeAccountError: propTypes.error,
+  updateStripeAccountError: propTypes.error,
+  fetchStripeAccountError: propTypes.error,
+  stripeAccountError: propTypes.error,
+  stripeAccountLinkError: propTypes.error,
+
   fetchInProgress: bool.isRequired,
+  getAccountLinkInProgress: bool.isRequired,
   payoutDetailsSaveInProgress: bool.isRequired,
   payoutDetailsSaved: bool.isRequired,
   onPayoutDetailsFormChange: func.isRequired,
-  onPayoutDetailsSubmit: func.isRequired,
   onGetStripeConnectAccountLink: func.isRequired,
   onManageDisableScrolling: func.isRequired,
-  updateInProgress: bool,
 
   // from withViewport
   viewport: shape({

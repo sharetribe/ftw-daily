@@ -112,3 +112,7 @@
     padding-top: 11px;
   }
 }
+
+.modalMessage {
+  @apply --marketplaceModalParagraphStyles;
+}
