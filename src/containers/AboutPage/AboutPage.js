@@ -58,7 +58,7 @@ const AboutPage = () => {
               the disconnect between those with space and those who need it, by offering a
               trustworthy platform that’s easy to use, and transparent in its approach.</p>
 
-              <p>Maybe you’re a fitness professional or a hairdresser? Maybe you are a tattoo artist
+              <p>Maybe you’re a badger professional or a hairdresser? Maybe you are a tattoo artist
               or beautician? Perhaps a business owner who wants to make the most of their
               awesome space?</p>
 
