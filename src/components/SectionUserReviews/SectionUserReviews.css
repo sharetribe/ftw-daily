@@ -5,6 +5,9 @@
   margin-top: 0;
   text-align: center;
   font-weight: 600;
+  &:nth-of-type(1) {
+    margin: 0;
+  }
 }
 
 .subTitle {

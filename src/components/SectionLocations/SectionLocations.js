@@ -49,6 +49,9 @@ const SectionLocations = props => {
       <div className={css.title}>
         <FormattedMessage id="SectionLocations.title" />
       </div>
+      <div className={css.title}>
+        <FormattedMessage id="SectionLocations.secondTitle" />
+      </div>
       <div className={css.subTitle}>
         <FormattedMessage id="SectionLocations.subTitle" />
       </div>

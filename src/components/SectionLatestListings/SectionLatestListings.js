@@ -13,8 +13,11 @@ const LatestListing = ({ listings }) => {
       <div className={css.title}>
         <FormattedMessage id="SectionLatestListings.titleLineOne" />
       </div>
-      <div className={css.subTitle}>
+      <div className={css.title}>
         <FormattedMessage id="SectionLatestListings.titleLineTwo" />
+      </div>
+      <div className={css.subTitle}>
+        <FormattedMessage id="SectionLatestListings.subLine" />
       </div>
       <div className={css.listingCards}>
         {listings.map(l => (

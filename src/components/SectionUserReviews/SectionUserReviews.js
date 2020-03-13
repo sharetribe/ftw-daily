@@ -13,10 +13,12 @@ const SectionUserReviews = () => {
       <div className={css.title}>
         <FormattedMessage id="SectionUserReviews.titleLineOne" />
       </div>
-      <div className={css.subTitle}>
+      <div className={css.title}>
         <FormattedMessage id="SectionUserReviews.titleLineTwo" />
       </div>
-
+      <div className={css.subTitle}>
+        <FormattedMessage id="SectionUserReviews.subLine" />
+      </div>
       <div className={css.reviewsCards}>
         <div className={css.reviewCard}>
           <div className={css.userInfo}>
