@@ -922,7 +922,7 @@
   "StripePaymentAddress.addressLine2Label": "Apt # {optionalText}",
   "StripePaymentAddress.addressLine2Placeholder": "A 42",
   "StripePaymentAddress.cityLabel": "City",
-  "StripePaymentAddress.cityPlaceholder": "Helsinki",
+  "StripePaymentAddress.cityPlaceholder": "...i",
   "StripePaymentAddress.cityRequired": "City is required",
   "StripePaymentAddress.countryLabel": "Country",
   "StripePaymentAddress.countryPlaceholder": "Select a country…",
