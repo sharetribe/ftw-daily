@@ -36,6 +36,7 @@ const ContactPage = ({ title }) => {
         </LayoutWrapperTopbar>
 
         <LayoutWrapperMain className={css.staticPageWrapper}>
+        <h1 className={css.pageTitle}>Hallo! Wir sind HorseDeal24<br/>Das ist ein Test</h1>
           <img className={css.coverImage} src={image} alt="My first ice cream." />
 
           <div className={css.contentWrapper}>
