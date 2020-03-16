@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [change] Redirect user back to Stripe during Connect Onboarding Flow when user is returned to
+  failure URL provided that the Account Link generation is successful.
+  [#1269](https://github.com/sharetribe/ftw-daily/pull/1269)
 - [fix] Don't flash listing closed text on mobile view of `BookingPanel` when the listing data is
   not loaded yet. Instead, check that text is shown only for closed listings.
   [#1268](https://github.com/sharetribe/ftw-daily/pull/1268)
