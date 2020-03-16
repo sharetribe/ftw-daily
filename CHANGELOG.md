@@ -14,6 +14,11 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+## [v4.3.0] 2020-03-16
+
+- [change] Redirect user back to Stripe during Connect Onboarding Flow when user is returned to
+  failure URL provided that the Account Link generation is successful.
+  [#1269](https://github.com/sharetribe/ftw-daily/pull/1269)
 - [fix] Don't flash listing closed text on mobile view of `BookingPanel` when the listing data is
   not loaded yet. Instead, check that text is shown only for closed listings.
   [#1268](https://github.com/sharetribe/ftw-daily/pull/1268)
@@ -25,6 +30,8 @@ way to update this template, but currently, we follow a pattern:
 - [change] Update `Modal` component to have option to use `Portal` with `usePortal` flag. Keep also
   possibility to use modals without Portal because of `ModalInMobile` component.
   [#1258](https://github.com/sharetribe/ftw-daily/pull/1258)
+
+  [v4.3.0]: https://github.com/sharetribe/flex-template-web/compare/v4.2.0...v4.3.0
 
 ## [v4.2.0] 2020-02-18
 

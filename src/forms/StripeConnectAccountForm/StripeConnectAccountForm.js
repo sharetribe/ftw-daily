@@ -188,7 +188,7 @@ const UpdateStripeAccountFields = props => {
 };
 
 const ErrorsMaybe = props => {
-  const { stripeAccountError } = props;
+  const { stripeAccountError, stripeAccountLinkError } = props;
   return isStripeError(stripeAccountError) ? (
     <div className={css.error}>
       <FormattedMessage
@@ -199,6 +199,10 @@ const ErrorsMaybe = props => {
   ) : stripeAccountError ? (
     <div className={css.error}>
       <FormattedMessage id="StripeConnectAccountForm.createStripeAccountFailed" />
+    </div>
+  ) : stripeAccountLinkError ? (
+    <div className={css.error}>
+      <FormattedMessage id="StripeConnectAccountForm.createStripeAccountLinkFailed" />
     </div>
   ) : null;
 };
@@ -220,6 +224,7 @@ const StripeConnectAccountFormComponent = props => {
           className,
           children,
           stripeAccountError,
+          stripeAccountLinkError,
           disabled,
           handleSubmit,
           inProgress,
@@ -328,7 +333,10 @@ const StripeConnectAccountFormComponent = props => {
               </div>
             )}
 
-            <ErrorsMaybe stripeAccountError={stripeAccountError} />
+            <ErrorsMaybe
+              stripeAccountError={stripeAccountError}
+              stripeAccountLinkError={stripeAccountLinkError}
+            />
 
             {children}
 

@@ -58,7 +58,10 @@ export const EditListingPageComponent = props => {
     currentUser,
     createStripeAccountError,
     fetchInProgress,
+    fetchStripeAccountError,
     getOwnListing,
+    getAccountLinkError,
+    getAccountLinkInProgress,
     history,
     intl,
     onFetchAvailabilityExceptions,
@@ -81,6 +84,7 @@ export const EditListingPageComponent = props => {
     scrollingDisabled,
     stripeAccountFetched,
     stripeAccount,
+    updateStripeAccountError,
   } = props;
 
   const { id, type, returnURLType } = params;
@@ -197,6 +201,7 @@ export const EditListingPageComponent = props => {
           onPayoutDetailsFormChange={onPayoutDetailsFormChange}
           onPayoutDetailsSubmit={onPayoutDetailsFormSubmit}
           onGetStripeConnectAccountLink={onGetStripeConnectAccountLink}
+          getAccountLinkInProgress={getAccountLinkInProgress}
           onImageUpload={onImageUpload}
           onUpdateImageOrder={onUpdateImageOrder}
           onRemoveImage={onRemoveListingImage}
@@ -210,6 +215,10 @@ export const EditListingPageComponent = props => {
           payoutDetailsSaved={page.payoutDetailsSaved}
           stripeAccountFetched={stripeAccountFetched}
           stripeAccount={stripeAccount}
+          stripeAccountError={
+            createStripeAccountError || updateStripeAccountError || fetchStripeAccountError
+          }
+          stripeAccountLinkError={getAccountLinkError}
         />
       </Page>
     );
@@ -227,7 +236,12 @@ export const EditListingPageComponent = props => {
 
 EditListingPageComponent.defaultProps = {
   createStripeAccountError: null,
+  fetchStripeAccountError: null,
+  getAccountLinkError: null,
+  getAccountLinkInProgress: null,
+  stripeAccountFetched: null,
   currentUser: null,
+  stripeAccount: null,
   currentUserHasOrders: null,
   listing: null,
   listingDraft: null,
@@ -237,17 +251,24 @@ EditListingPageComponent.defaultProps = {
 
 EditListingPageComponent.propTypes = {
   createStripeAccountError: propTypes.error,
+  fetchStripeAccountError: propTypes.error,
+  getAccountLinkError: propTypes.error,
+  getAccountLinkInProgress: bool,
+  updateStripeAccountError: propTypes.error,
   currentUser: propTypes.currentUser,
   fetchInProgress: bool.isRequired,
   getOwnListing: func.isRequired,
   onFetchAvailabilityExceptions: func.isRequired,
   onCreateAvailabilityException: func.isRequired,
+  onDeleteAvailabilityException: func.isRequired,
+  onFetchBookings: func.isRequired,
+  onGetStripeConnectAccountLink: func.isRequired,
   onCreateListingDraft: func.isRequired,
   onPublishListingDraft: func.isRequired,
   onImageUpload: func.isRequired,
   onManageDisableScrolling: func.isRequired,
   onPayoutDetailsFormChange: func.isRequired,
-  onPayoutDetailsSubmit: func.isRequired,
+  onPayoutDetailsFormSubmit: func.isRequired,
   onUpdateImageOrder: func.isRequired,
   onRemoveListingImage: func.isRequired,
   onUpdateListing: func.isRequired,
@@ -260,6 +281,8 @@ EditListingPageComponent.propTypes = {
     tab: string.isRequired,
     returnURLType: oneOf(STRIPE_ONBOARDING_RETURN_URL_TYPES),
   }).isRequired,
+  stripeAccountFetched: bool,
+  stripeAccount: object,
   scrollingDisabled: bool.isRequired,
 
   /* from withRouter */
@@ -275,6 +298,7 @@ const mapStateToProps = state => {
   const page = state.EditListingPage;
   const {
     getAccountLinkInProgress,
+    getAccountLinkError,
     createStripeAccountInProgress,
     createStripeAccountError,
     updateStripeAccountError,
@@ -294,6 +318,7 @@ const mapStateToProps = state => {
   };
   return {
     getAccountLinkInProgress,
+    getAccountLinkError,
     createStripeAccountError,
     updateStripeAccountError,
     fetchStripeAccountError,

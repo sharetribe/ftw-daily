@@ -34,7 +34,7 @@ const initialState = {
   fetchStripeAccountInProgress: false,
   fetchStripeAccountError: null,
   getAccountLinkInProgress: false,
-  getAccountLinkError: false,
+  getAccountLinkError: null,
   stripeAccount: null,
   stripeAccountFetched: false,
 };
@@ -87,7 +87,8 @@ export default function reducer(state = initialState, action = {}) {
     case GET_ACCOUNT_LINK_REQUEST:
       return { ...state, getAccountLinkError: null, getAccountLinkInProgress: true };
     case GET_ACCOUNT_LINK_ERROR:
-      return { ...state, getAccountLinkInProgress: false, getAccountLinkError: true };
+      console.error(payload);
+      return { ...state, getAccountLinkInProgress: false, getAccountLinkError: payload };
     case GET_ACCOUNT_LINK_SUCCESS:
       return { ...state, getAccountLinkInProgress: false };
 
@@ -144,8 +145,10 @@ export const stripeAccountClearError = () => ({
 export const getAccountLinkRequest = () => ({
   type: GET_ACCOUNT_LINK_REQUEST,
 });
-export const getAccountLinkError = () => ({
+export const getAccountLinkError = e => ({
   type: GET_ACCOUNT_LINK_ERROR,
+  payload: e,
+  error: true,
 });
 export const getAccountLinkSuccess = () => ({
   type: GET_ACCOUNT_LINK_SUCCESS,

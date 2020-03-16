@@ -75,7 +75,7 @@ export class ModalComponent extends Component {
 
       // Because we are using portal,
       // we need to set the focus inside Modal manually
-      if (this.props.usePorta && this.props.isOpen) {
+      if (this.props.usePortal && this.props.isOpen) {
         this.refDiv.current.focus();
       }
     }
