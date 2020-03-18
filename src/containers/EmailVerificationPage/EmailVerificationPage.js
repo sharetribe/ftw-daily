@@ -64,7 +64,7 @@ export const EmailVerificationPageComponent = props => {
   };
 
   const user = ensureCurrentUser(currentUser);
-  if (user && user.attributes.emailVerified) {
+  if (user && user.attributes.emailVerified && !verificationError) {
     return <NamedRedirect name="LandingPage" />;
   }
 
