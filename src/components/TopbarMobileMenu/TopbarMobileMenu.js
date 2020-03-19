@@ -25,8 +25,6 @@ const TopbarMobileMenu = props => {
 
   const user = ensureCurrentUser(currentUser);
 
-  console.log("[Report only] Auth", isAuthenticated)
-
   if (!isAuthenticated) {
     const signup = (
       <NamedLink name="SignupPage" className={css.signupLink}>
@@ -70,23 +68,17 @@ const TopbarMobileMenu = props => {
     ) : null;
 
   const displayName = user.attributes.profile.firstName;
-  const currentPageClass = page => {
-    const isAccountSettingsPage =
-      page === 'AccountSettingsPage' && ACCOUNT_SETTINGS_PAGES.includes(currentPage);
-    return currentPage === page || isAccountSettingsPage ? css.currentPage : null;
-  };
 
-  
-  const mobileMenuFooter = (
-    <div className={css.footer}>
-        <NamedLink className={css.createNewListingLink} name="NewListingPage">
-          <FormattedMessage id="TopbarMobileMenu.newListingLink" />
-        </NamedLink>
-      </div>
-  )
+  // const currentPageClass = page => {
+  //   const isAccountSettingsPage =
+  //     page === 'AccountSettingsPage' && ACCOUNT_SETTINGS_PAGES.includes(currentPage);
+  //   return currentPage === page || isAccountSettingsPage ? css.currentPage : null;
+  // };
 
-  const mobileMenuContent = (
-    <div className={css.content}>
+  return (
+    <div className={css.root}>
+      <AvatarLarge className={css.avatar} user={currentUser} />
+       <div className={css.content}>
 
         <span className={css.greeting}>
           <FormattedMessage id="TopbarMobileMenu.greeting" values={{ displayName }} />
@@ -97,7 +89,7 @@ const TopbarMobileMenu = props => {
         </InlineTextButton>
 
         <NamedLink
-          className={classNames(css.inbox, currentPageClass('InboxPage'))}
+          className={css.inbox}
           name="InboxPage"
           params={{ tab: currentUserHasListings ? 'sales' : 'orders' }}
         >
@@ -106,34 +98,32 @@ const TopbarMobileMenu = props => {
         </NamedLink>
 
         <NamedLink
-          className={classNames(css.navigationLink, currentPageClass('ManageListingsPage'))}
+          className={css.navigationLink}
           name="ManageListingsPage"
         >
           <FormattedMessage id="TopbarMobileMenu.yourListingsLink" />
         </NamedLink>
 
         <NamedLink
-          className={classNames(css.navigationLink, currentPageClass('ProfileSettingsPage'))}
+          className={css.navigationLink}
           name="ProfileSettingsPage"
         >
           <FormattedMessage id="TopbarMobileMenu.profileSettingsLink" />
         </NamedLink>
 
         <NamedLink
-          className={classNames(css.navigationLink, currentPageClass('AccountSettingsPage'))}
+          className={css.navigationLink}
           name="AccountSettingsPage"
         >
           <FormattedMessage id="TopbarMobileMenu.accountSettingsLink" />
         </NamedLink>
 
       </div>
-  )
-
-  return (
-    <div className={css.root}>
-      <AvatarLarge className={css.avatar} user={currentUser} />
-      {mobileMenuContent}
-      {mobileMenuFooter}
+      <div className={css.footer}>
+        <NamedLink className={css.createNewListingLink} name="NewListingPage">
+          <FormattedMessage id="TopbarMobileMenu.newListingLink" />
+        </NamedLink>
+      </div>
     </div>
   );
 };
