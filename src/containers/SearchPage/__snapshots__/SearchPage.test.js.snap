@@ -40,32 +40,6 @@ exports[`SearchPageComponent matches snapshot 1`] = `
       }
       primaryFilters={
         Object {
-          "amenitiesFilter": Object {
-            "options": Array [
-              Object {
-                "key": "dog1",
-                "label": "Dog 1",
-              },
-              Object {
-                "key": "dog2",
-                "label": "Dog 2",
-              },
-            ],
-            "paramName": "pub_amenities",
-          },
-          "categoryFilter": Object {
-            "options": Array [
-              Object {
-                "key": "cat1",
-                "label": "Cat 1",
-              },
-              Object {
-                "key": "cat2",
-                "label": "Cat 2",
-              },
-            ],
-            "paramName": "pub_category",
-          },
           "dateRangeFilter": Object {
             "config": Object {
               "active": true,
@@ -94,7 +68,36 @@ exports[`SearchPageComponent matches snapshot 1`] = `
       searchListingsError={null}
       searchParamsAreInSync={true}
       searchParamsForPagination={Object {}}
-      secondaryFilters={null}
+      secondaryFilters={
+        Object {
+          "amenitiesFilter": Object {
+            "options": Array [
+              Object {
+                "key": "dog1",
+                "label": "Dog 1",
+              },
+              Object {
+                "key": "dog2",
+                "label": "Dog 2",
+              },
+            ],
+            "paramName": "pub_amenities",
+          },
+          "categoryFilter": Object {
+            "options": Array [
+              Object {
+                "key": "cat1",
+                "label": "Cat 1",
+              },
+              Object {
+                "key": "cat2",
+                "label": "Cat 2",
+              },
+            ],
+            "paramName": "pub_category",
+          },
+        }
+      }
       showAsModalMaxWidth={768}
       urlQueryParams={Object {}}
     />
