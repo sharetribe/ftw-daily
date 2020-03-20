@@ -165,11 +165,11 @@ class SearchFiltersPanelComponent extends Component {
     const initialAmenities = this.initialValues(amenitiesFilter.paramName);
 
     const categoryLabel = intl.formatMessage({
-      id: 'SearchFilters.categoryLabel',
+      id: 'SearchFiltersPanel.categoryLabel',
     });
 
     const amenitiesLabel = intl.formatMessage({
-      id: 'SearchFilters.amenitiesLabel',
+      id: 'SearchFiltersPanel.amenitiesLabel',
     });
 
     const categoryFilterElement = categoryFilter ? (
