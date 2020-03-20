@@ -35,8 +35,15 @@ import omit from 'lodash/omit';
 
 import routeConfiguration from '../../routeConfiguration';
 import { createResourceLocatorString } from '../../util/routes';
-import { InlineTextButton } from '../../components';
+import {
+  SelectSingleFilter,
+  SelectMultipleFilter,
+  InlineTextButton,
+} from '../../components';
 import css from './SearchFiltersPanel.css';
+
+// Dropdown container can have a positional offset (in pixels)
+const FILTER_DROPDOWN_OFFSET = -14;
 
 class SearchFiltersPanelComponent extends Component {
   constructor(props) {
@@ -151,12 +158,52 @@ class SearchFiltersPanelComponent extends Component {
   }
 
   render() {
-    const { rootClassName, className } = this.props;
+    const { rootClassName, className, intl, categoryFilter, amenitiesFilter } = this.props;
     const classes = classNames(rootClassName || css.root, className);
+
+    const initialCategory = this.initialValue(categoryFilter.paramName);
+    const initialAmenities = this.initialValues(amenitiesFilter.paramName);
+
+    const categoryLabel = intl.formatMessage({
+      id: 'SearchFilters.categoryLabel',
+    });
+
+    const amenitiesLabel = intl.formatMessage({
+      id: 'SearchFilters.amenitiesLabel',
+    });
+
+    const categoryFilterElement = categoryFilter ? (
+      <SelectSingleFilter
+        urlParam={categoryFilter.paramName}
+        label={categoryLabel}
+        onSelect={this.handleSelectSingle}
+        liveEdit
+        options={categoryFilter.options}
+        initialValue={initialCategory}
+        contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+      />
+    ) : null;
+
+    const amenitiesFilterElement = amenitiesFilter ? (
+      <SelectMultipleFilter
+        id={'SearchFiltersPanel.amenitiesFilter'}
+        name="amenities"
+        urlParam={amenitiesFilter.paramName}
+        label={amenitiesLabel}
+        onSubmit={this.handleSelectMultiple}
+        liveEdit
+        options={amenitiesFilter.options}
+        initialValues={initialAmenities}
+        contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+      />
+    ) : null;
 
     return (
       <div className={classes}>
-        <div className={css.filtersWrapper}>{/* Add filters here */}</div>
+        <div className={css.filtersWrapper}>
+          {categoryFilterElement}
+          {amenitiesFilterElement}
+        </div>
         <div className={css.footer}>
           <InlineTextButton rootClassName={css.resetAllButton} onClick={this.resetAll}>
             <FormattedMessage id={'SearchFiltersPanel.resetAll'} />
