@@ -6,11 +6,7 @@ import classNames from 'classnames';
 import { withRouter } from 'react-router-dom';
 import omit from 'lodash/omit';
 
-import {
-  BookingDateRangeFilter,
-  PriceFilter,
-  KeywordFilter,
-} from '../../components';
+import { BookingDateRangeFilter, PriceFilter, KeywordFilter } from '../../components';
 import routeConfiguration from '../../routeConfiguration';
 import { parseDateFromISO8601, stringifyDateToISO8601 } from '../../util/dates';
 import { createResourceLocatorString } from '../../util/routes';
