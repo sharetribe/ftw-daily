@@ -101,7 +101,7 @@ class SearchFiltersPanelComponent extends Component {
       // if no option is passed, clear the selection for the filter
       const currentQueryParams = option
         ? { ...mergedQueryParams, [urlParam]: option }
-        : omit(mergedQueryParams, urlParam);
+        : { ...mergedQueryParams, [urlParam]: null };
 
       return { currentQueryParams };
     });
