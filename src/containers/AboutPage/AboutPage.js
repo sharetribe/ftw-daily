@@ -12,7 +12,7 @@ import {
 } from '../../components';
 
 import css from './AboutPage.css';
-import image from './about-us-1056.jpg';
+import image from './about-us-1056.png';
 import { string } from 'prop-types';
 
 const AboutPage = ({ title }) => {
