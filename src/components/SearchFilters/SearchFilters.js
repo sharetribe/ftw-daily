@@ -6,7 +6,8 @@ import classNames from 'classnames';
 import { withRouter } from 'react-router-dom';
 import omit from 'lodash/omit';
 
-import { BookingDateRangeFilter, PriceFilter, KeywordFilter } from '../../components';
+import config from '../../config';
+import { BookingDateRangeFilter, PriceFilter, KeywordFilter, SortBy } from '../../components';
 import routeConfiguration from '../../routeConfiguration';
 import { parseDateFromISO8601, stringifyDateToISO8601 } from '../../util/dates';
 import { createResourceLocatorString } from '../../util/routes';
@@ -53,6 +54,7 @@ const SearchFiltersComponent = props => {
     rootClassName,
     className,
     urlQueryParams,
+    sort,
     listingsAreLoaded,
     resultsCount,
     searchInProgress,
@@ -84,6 +86,8 @@ const SearchFiltersComponent = props => {
   const initialKeyword = keywordFilter
     ? initialValue(urlQueryParams, keywordFilter.paramName)
     : null;
+
+  const isKeywordFilterActive = !!initialKeyword;
 
   const handlePrice = (urlParam, range) => {
     const { minPrice, maxPrice } = range || {};
@@ -172,6 +176,25 @@ const SearchFiltersComponent = props => {
       />
     </button>
   ) : null;
+
+  const handleSortBy = (urlParam, values) => {
+    const queryParams = values
+      ? { ...urlQueryParams, [urlParam]: values }
+      : omit(urlQueryParams, urlParam);
+
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+  };
+
+  const sortBy = config.custom.sortConfig.active ? (
+    <SortBy
+      sort={sort}
+      showAsPopup
+      isKeywordFilterActive={isKeywordFilterActive}
+      onSelect={handleSortBy}
+      contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+    />
+  ) : null;
+
   return (
     <div className={classes}>
       <div className={css.filters}>
@@ -180,6 +203,8 @@ const SearchFiltersComponent = props => {
         {keywordFilterElement}
         {toggleSearchFiltersPanelButton}
       </div>
+
+      {sortBy}
 
       {listingsAreLoaded && resultsCount > 0 ? (
         <div className={css.searchResultSummary}>

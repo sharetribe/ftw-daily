@@ -64,3 +64,24 @@ export const dateRangeFilterConfig = {
 export const keywordFilterConfig = {
   active: true,
 };
+
+const relevanceKey = 'relevance';
+
+export const sortConfig = {
+  // Enable/disable the sorting control in the SearchPage
+  active: true,
+
+  relevanceKey,
+
+  options: [
+    { key: 'createdAt', label: 'Newest' },
+    { key: '-createdAt', label: 'Oldest' },
+    { key: '-price', label: 'Lowest price' },
+    { key: 'price', label: 'Highest price' },
+
+    // The relevance is only used for keyword search, but the
+    // parameter isn't sent to the Marketplace API. The key is purely
+    // for handling the internal state of the sorting dropdown.
+    { key: relevanceKey, label: 'Relevance', longLabel: 'Relevance (Keyword search)' },
+  ],
+};

@@ -25,6 +25,7 @@ class MainPanel extends Component {
       className,
       rootClassName,
       urlQueryParams,
+      sort,
       listings,
       searchInProgress,
       searchListingsError,
@@ -78,6 +79,7 @@ class MainPanel extends Component {
         <SearchFilters
           className={css.searchFilters}
           urlQueryParams={urlQueryParams}
+          sort={sort}
           listingsAreLoaded={listingsAreLoaded}
           resultsCount={totalItems}
           searchInProgress={searchInProgress}
@@ -89,6 +91,7 @@ class MainPanel extends Component {
         <SearchFiltersMobile
           className={css.searchFiltersMobile}
           urlQueryParams={urlQueryParams}
+          sort={sort}
           listingsAreLoaded={listingsAreLoaded}
           resultsCount={totalItems}
           searchInProgress={searchInProgress}
@@ -107,6 +110,7 @@ class MainPanel extends Component {
           <div className={classNames(css.searchFiltersPanel)}>
             <SearchFiltersPanel
               urlQueryParams={urlQueryParams}
+              sort={sort}
               listingsAreLoaded={listingsAreLoaded}
               onClosePanel={() => this.setState({ isSearchFiltersPanelOpen: false })}
               filterParamNames={secondaryFilterParamNames}
