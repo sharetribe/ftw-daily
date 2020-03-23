@@ -187,27 +187,27 @@ class TopbarComponent extends Component {
 
     const classes = classNames(rootClassName || css.root, className);
 
-    // const currentPath = this.props.location.pathname
+    const currentPath = this.props.location.pathname
     
-    // const listingPageRegExp = /^\/l\/[\w\d-]+\/[\w\d-]+$/i; // routeConfiguration path for ListingPage: '/l/:slug/:id'
-    // const isListingPage = listingPageRegExp.test(currentPath)
+    const listingPageRegExp = /^\/l\/[\w\d-]+\/[\w\d-]+$/i; // routeConfiguration path for ListingPage: '/l/:slug/:id'
+    const isListingPage = listingPageRegExp.test(currentPath)
 
-    // const orderDetailsPageRegExp =  /^\/order\/[\w\d-]+\/details$/i; // routeConfiguration path for OrderDetailsPage: '/order/:id/details'
-    // const isOrderDetailsPage = orderDetailsPageRegExp.test(currentPath)
-    // // if the current page is either ListingPage or OrderDetailsPage
-    // // show back icon 
-    // // otherwise show burger menu icon
-    // const { goBack }  = this.props.history; 
+    const orderDetailsPageRegExp =  /^\/order\/[\w\d-]+\/details$/i; // routeConfiguration path for OrderDetailsPage: '/order/:id/details'
+    const isOrderDetailsPage = orderDetailsPageRegExp.test(currentPath)
+    // if the current page is either ListingPage or OrderDetailsPage
+    // show back icon 
+    // otherwise show burger menu icon
+    const { goBack }  = this.props.history; 
     
     return (
       <div className={classes}>
         <div className={classNames(mobileRootClassName || css.container, mobileClassName)}>
           <Button
             rootClassName={css.menu}
-            onClick={this.handleMobileMenuOpen}
+            onClick={ (isListingPage || isOrderDetailsPage) ? goBack : this.handleMobileMenuOpen }
             title={intl.formatMessage({ id: 'Topbar.menuIcon' })}
           >
-            <MenuIcon className={css.menuIcon}/>
+            <MenuIcon className={css.menuIcon} isBackButtonIcon={isListingPage || isOrderDetailsPage}/>
             {notificationDot}
           </Button>
           <NamedLink

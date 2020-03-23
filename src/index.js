@@ -66,7 +66,7 @@ const setupAnalyticsHandlers = () => {
   }
 
   // Add Google Analytics handler if tracker ID is found
-  if (process.env.REACT_APP_GOOGLE_ANALYTICS_ID && window.ga) {
+  if (process.env.REACT_APP_GOOGLE_ANALYTICS_ID) {
     handlers.push(new GoogleAnalyticsHandler(window.ga));
   }
 

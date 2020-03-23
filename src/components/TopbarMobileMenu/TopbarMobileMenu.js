@@ -69,11 +69,11 @@ const TopbarMobileMenu = props => {
 
   const displayName = user.attributes.profile.firstName;
 
-  // const currentPageClass = page => {
-  //   const isAccountSettingsPage =
-  //     page === 'AccountSettingsPage' && ACCOUNT_SETTINGS_PAGES.includes(currentPage);
-  //   return currentPage === page || isAccountSettingsPage ? css.currentPage : null;
-  // };
+  const currentPageClass = page => {
+    const isAccountSettingsPage =
+      page === 'AccountSettingsPage' && ACCOUNT_SETTINGS_PAGES.includes(currentPage);
+    return currentPage === page || isAccountSettingsPage ? css.currentPage : null;
+  };
 
   return (
     <div className={css.root}>
@@ -88,37 +88,37 @@ const TopbarMobileMenu = props => {
           <FormattedMessage id="TopbarMobileMenu.logoutLink" />
         </InlineTextButton>
 
-        <NamedLink
-          className={css.inbox}
+        {/*<NamedLink
+          className={classNames(css.inbox, currentPageClass('InboxPage'))}
           name="InboxPage"
           params={{ tab: currentUserHasListings ? 'sales' : 'orders' }}
         >
           <FormattedMessage id="TopbarMobileMenu.inboxLink" />
-          {notificationCountBadge}
-        </NamedLink>
+          notificationCountBadge 
+        </NamedLink>*/}
 
         <NamedLink
-          className={css.navigationLink}
+          className={classNames(css.navigationLink, currentPageClass('ManageListingsPage'))}
           name="ManageListingsPage"
         >
           <FormattedMessage id="TopbarMobileMenu.yourListingsLink" />
         </NamedLink>
 
         <NamedLink
-          className={css.navigationLink}
+          className={classNames(css.navigationLink, currentPageClass('ProfileSettingsPage'))}
           name="ProfileSettingsPage"
         >
           <FormattedMessage id="TopbarMobileMenu.profileSettingsLink" />
         </NamedLink>
 
         <NamedLink
-          className={css.navigationLink}
+          className={classNames(css.navigationLink, currentPageClass('AccountSettingsPage'))}
           name="AccountSettingsPage"
         >
           <FormattedMessage id="TopbarMobileMenu.accountSettingsLink" />
         </NamedLink>
-
       </div>
+
       <div className={css.footer}>
         <NamedLink className={css.createNewListingLink} name="NewListingPage">
           <FormattedMessage id="TopbarMobileMenu.newListingLink" />
