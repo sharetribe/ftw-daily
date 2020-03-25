@@ -69,7 +69,7 @@ const SearchFiltersComponent = props => {
   } = props;
 
   const hasNoResult = listingsAreLoaded && resultsCount === 0;
-  const classes = classNames(rootClassName || css.root, { [css.longInfo]: hasNoResult }, className);
+  const classes = classNames(rootClassName || css.root, className);
 
   const keywordLabel = intl.formatMessage({
     id: 'SearchFilters.keywordLabel',
@@ -197,22 +197,23 @@ const SearchFiltersComponent = props => {
 
   return (
     <div className={classes}>
-      <div className={css.filters}>
-        {priceFilterElement}
-        {dateRangeFilterElement}
-        {keywordFilterElement}
-        {toggleSearchFiltersPanelButton}
-      </div>
-
-      {sortBy}
-
-      {listingsAreLoaded && resultsCount > 0 ? (
-        <div className={css.searchResultSummary}>
-          <span className={css.resultsFound}>
-            <FormattedMessage id="SearchFilters.foundResults" values={{ count: resultsCount }} />
-          </span>
+      <div className={css.filterWrapper}>
+        <div className={css.filters}>
+          {priceFilterElement}
+          {dateRangeFilterElement}
+          {keywordFilterElement}
+          {toggleSearchFiltersPanelButton}
         </div>
-      ) : null}
+
+        {listingsAreLoaded && resultsCount > 0 ? (
+          <div className={css.searchResultSummary}>
+            <span className={css.resultsFound}>
+              <FormattedMessage id="SearchFilters.foundResults" values={{ count: resultsCount }} />
+            </span>
+          </div>
+        ) : null}
+        {sortBy}
+      </div>
 
       {hasNoResult ? (
         <div className={css.noSearchResults}>
