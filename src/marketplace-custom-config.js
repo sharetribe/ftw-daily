@@ -65,13 +65,12 @@ export const keywordFilterConfig = {
   active: true,
 };
 
-const relevanceKey = 'relevance';
-
 export const sortConfig = {
   // Enable/disable the sorting control in the SearchPage
   active: true,
 
-  relevanceKey,
+  // Internal key for the relevance option, see notes below.
+  relevanceKey: 'relevance',
 
   options: [
     { key: 'createdAt', label: 'Newest' },
@@ -82,6 +81,6 @@ export const sortConfig = {
     // The relevance is only used for keyword search, but the
     // parameter isn't sent to the Marketplace API. The key is purely
     // for handling the internal state of the sorting dropdown.
-    { key: relevanceKey, label: 'Relevance', longLabel: 'Relevance (Keyword search)' },
+    { key: 'relevance', label: 'Relevance', longLabel: 'Relevance (Keyword search)' },
   ],
 };

@@ -80,7 +80,6 @@
 }
 
 .menuHeading {
-  /* @apply --marketplaceListingAttributeFontStyles; */
   font-weight: var(--fontWeightSemiBold);
   color: var(--matterColor);
   margin-left: 30px;
