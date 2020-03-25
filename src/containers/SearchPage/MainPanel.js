@@ -43,7 +43,7 @@ class MainPanel extends Component {
 
     const isSearchFiltersPanelOpen = !!secondaryFilters && this.state.isSearchFiltersPanelOpen;
 
-    const filters = merge(primaryFilters, secondaryFilters);
+    const filters = merge({}, primaryFilters, secondaryFilters);
     const selectedFilters = validFilterParams(urlQueryParams, filters);
     const selectedFiltersCount = Object.keys(selectedFilters).length;
 

@@ -226,11 +226,13 @@ export class SearchPageComponent extends Component {
             searchParamsForPagination={parse(location.search)}
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             primaryFilters={{
-              categoryFilter: filters.categoryFilter,
-              amenitiesFilter: filters.amenitiesFilter,
               priceFilter: filters.priceFilter,
               dateRangeFilter: filters.dateRangeFilter,
               keywordFilter: filters.keywordFilter,
+            }}
+            secondaryFilters={{
+              categoryFilter: filters.categoryFilter,
+              amenitiesFilter: filters.amenitiesFilter,
             }}
           />
           <ModalInMobile
