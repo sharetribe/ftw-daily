@@ -4,12 +4,10 @@
   display: flex;
   flex-direction: column;
   background-color: var(--matterColorBright);
-}
 
-.filterWrapper {
-  display: flex;
-  justify-content: space-between;
-  position: relative;
+  @media (--viewportLarge) {
+    flex-direction: row;
+  }
 }
 
 .longInfo {
@@ -24,17 +22,26 @@
   }
 }
 
+.organization {
+  display: flex;
+  flex-direction: row;
+
+  @media (--viewportLarge) {
+    margin-left: auto;
+  }
+}
+
 .searchResultSummary {
   @apply --marketplaceH4FontStyles;
   line-height: 20px;
-  margin-top: 9px;
+  margin-top: 10px;
   margin-bottom: 11px;
-  margin-left: auto;
-  margin-right: 8px;
+  margin-left: 0px;
+  margin-right: auto;
 
-  /* parent uses flexbox: this defines minimum width for text "6 results" */
-  flex-basis: 55px;
-  flex-shrink: 0;
+  @media (--viewportLarge) {
+    margin-right: 8px;
+  }
 }
 
 .noSearchResults {
