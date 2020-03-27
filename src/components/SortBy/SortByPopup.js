@@ -41,6 +41,7 @@ class SortByPopup extends Component {
     const {
       rootClassName,
       className,
+      menuLabelRootClassName,
       urlParam,
       label,
       options,
@@ -52,6 +53,7 @@ class SortByPopup extends Component {
     const menuLabel = initialValue ? optionLabel(options, initialValue) : label;
 
     const classes = classNames(rootClassName || css.root, className);
+    const menuLabelClasses = classNames(menuLabelRootClassName || css.menuLabel);
 
     return (
       <Menu
@@ -61,7 +63,7 @@ class SortByPopup extends Component {
         onToggleActive={this.onToggleActive}
         isOpen={this.state.isOpen}
       >
-        <MenuLabel className={css.menuLabel}>
+        <MenuLabel className={menuLabelClasses}>
           <SortByIcon />
           {menuLabel}
         </MenuLabel>
@@ -97,6 +99,7 @@ class SortByPopup extends Component {
 SortByPopup.defaultProps = {
   rootClassName: null,
   className: null,
+  menuLabelRootClassName: null,
   initialValue: null,
   contentPlacementOffset: 0,
 };
@@ -104,6 +107,7 @@ SortByPopup.defaultProps = {
 SortByPopup.propTypes = {
   rootClassName: string,
   className: string,
+  menuLabelRootClassName: string,
   urlParam: string.isRequired,
   label: string.isRequired,
   onSelect: func.isRequired,
