@@ -35,52 +35,45 @@ const AboutPage = () => {
         </LayoutWrapperTopbar>
 
         <LayoutWrapperMain className={css.staticPageWrapper}>
-          <h1 className={css.pageTitle}>Experience the unique Finnish home sauna.</h1>
+          <h1 className={css.pageTitle}>Support vor Ort</h1>
           <img className={css.coverImage} src={image} alt="My first ice cream." />
 
           <div className={css.contentWrapper}>
             <div className={css.contentSide}>
-              <p>Did you know that Finland has 3.2 million saunas - almost one sauna per person!</p>
+              <p>Wusstest du dass es Deutschland mehr als 3 Millionen Kleinunternehmer gibt - 
+                jeder davon mit einer eigenen Geschichte den es zu supporten gilt!</p>
             </div>
 
             <div className={css.contentMain}>
               <h2>
-                Most of the Finnish saunas are located at the homes of individuals - indeed, most
-                people in Finland live in an apartment with sauna in it. In addition, lots of people
-                have lakeside summer cottages, which also typically come with a separate sauna
-                building near the waterfront.
+Support vor Ort möchte lokale Kleinunternehmer und deren Kunden zusammenbringen um so virtuellen Handel zu 
+ermöglichen. Steht das analoge Geschäft still, können Gutscheine über unsere Plattform verkauft werden.
+So bieten wir Dir eine Möglichkeit, deine Lieblingsgeschäfte zu unterstützen und vereinfachen es Unternehmen, 
+diese Krise zu überleben. Hierbei fungieren wir lediglich als Mittelsmann und das selbstverständlich auf 
+ehrenamtlicher Basis.
               </h2>
 
               <p>
-                To truly experience a Finnish sauna, you need to look beyond the public saunas, and
-                instead visit a real home or cottage sauna. Saunatime makes this possible for
-                everyone. All our saunas are owned by individuals willing to let tourists and other
-                curious visitors to enter their sacred spaces.
+              Die Corona-Krise hat schwerwiegende betriebswirtschaftliche Folgen - durch die nötigen Ausgangssperren und 
+verkürzten Öffnungszeiten erleben vor allem kleine Geschäfte fallende oder sogar ganz ausbleibende Einkünfte.
               </p>
 
-              <h3 className={css.subtitle}>Are you a sauna owner?</h3>
+              <h3 className={css.subtitle}>Keine Kunden = Kein Verkauf.</h3>
 
               <p>
-                Saunatime offers you a good way to earn some extra cash! If you're not using your
-                sauna every evening, why not rent it to other people while it's free. And even if
-                you are using your sauna every evening (we understand, it's so good), why not invite
-                other people to join you when the sauna is already warm! A shared sauna experience
-                is often a more fulfilling one.
-              </p>
-
-              <h3 id="contact" className={css.subtitle}>
-                Create your own marketplace like Saunatime
-              </h3>
-              <p>
-                Saunatime is brought to you by the good folks at{' '}
-                <ExternalLink href="http://sharetribe.com">Sharetribe</ExternalLink>. Would you like
-                to create your own marketplace platform a bit like Saunatime? Or perhaps a mobile
-                app? With Sharetribe it's really easy. If you have a marketplace idea in mind, do
-                get in touch!
+              Jedoch müssen weiter Mieten und Löhne bezahlt werden. So kann es zu Engpässen kommen, eventuell müssen sogar einige Läden schließen. Doch wir können helfen! 
+Stellt es euch vor wie eine Urlaubsreise, die wir Monate im Voraus buchen. Nur fliegen wir hier nicht in die Sonne,
+sondern trinken einen Kaffee. Wenn niemand bucht, gibt es keinen Flug. Genauso ist es nun mit unserem Café - 
+da sie aktuell nichts verkaufen können, haben sie keine Einkünfte und müssen eventuell schließen. 
+Doch „buchen“ wir bereits jetzt unseren Kaffee für den Sommer haben sie eine Chance zu überleben. 
+Können wir das überhaupt schaffen? Bucht nur eine Person einen Flug, muss man höchstwahrscheinlich die Maschine 
+chartern - das wird teuer. Doch tun sich mehrere mit kleineren Beträgen zusammen, kann man die Last schultern!
+So funktioniert auch Support vor Ort. Wir alle haben „unser“ Café oder „unsere“ Buchhandlung. Gemeinsam können 
+wir ihnen helfen diese schwierige Phase durchzustehen!
               </p>
               <p>
-                You can also checkout our{' '}
-                <ExternalLink href={siteFacebookPage}>Facebook</ExternalLink> and{' '}
+                Schaut bei uns vorbei auf {' '}
+                <ExternalLink href={siteFacebookPage}>Facebook</ExternalLink> und{' '}
                 <ExternalLink href={siteTwitterPage}>Twitter</ExternalLink>.
               </p>
             </div>
