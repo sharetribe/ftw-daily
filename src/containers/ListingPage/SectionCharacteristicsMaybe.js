@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { PropertyGroup } from '../../components';
+import ToggleProperties from '../../components/ToggleProperties/ToggleProperties'
 import config from '../../config';
 
 import css from './ListingPage.css';
@@ -13,7 +13,7 @@ const SectionCharacteristicsMaybe = props => {
       <h2 className={css.listingSectionTitle}>
         <FormattedMessage id="ListingPage.characteristicsTitle" />
       </h2>
-      <PropertyGroup
+      <ToggleProperties
         id="ListingPage.characteristics"
         options={options}
         selectedOptions={characteristics}

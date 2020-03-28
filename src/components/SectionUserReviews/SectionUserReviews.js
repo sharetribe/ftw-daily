@@ -25,6 +25,9 @@ const SectionUserReviews = () => {
             <img className={css.userAvatar} src='/static/userReviews/Marcel.jpg' alt='Marcel'/>
             <div>
               <FormattedMessage id="SectionUserReviews.reviewOneName" />
+              <div className={css.userLocation}>
+                <FormattedMessage id="SectionUserReviews.reviewOneLocation" />
+              </div>
             </div>
           </div>
 
@@ -38,6 +41,9 @@ const SectionUserReviews = () => {
             <img className={css.userAvatar} src='/static/userReviews/Michelle.jpg' alt='Michelle'/>
             <div>
               <FormattedMessage id="SectionUserReviews.reviewTwoName" />
+              <div className={css.userLocation}>
+                <FormattedMessage id="SectionUserReviews.reviewTwoLocation" />
+              </div>
             </div>
           </div>
 
@@ -51,6 +57,9 @@ const SectionUserReviews = () => {
             <img className={css.userAvatar} src='/static/userReviews/Katja.jpg' alt='Katja'/>
             <div>
               <FormattedMessage id="SectionUserReviews.reviewThreeName" />
+              <div className={css.userLocation}>
+                <FormattedMessage id="SectionUserReviews.reviewThreeLocation" />
+              </div>
             </div>
           </div>
 
