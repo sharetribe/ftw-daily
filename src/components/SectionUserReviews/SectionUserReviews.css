@@ -19,7 +19,7 @@
   font-size: 20px;
   font-weight: 400;
   color: var(--marketPlaceColorSubTitleLandingPage);
-  
+
   @media (--viewportMedium) {
     margin-bottom: 50px;
   }
@@ -58,4 +58,8 @@
   width: 50px;
   object-fit: cover;
   border-radius: 50%;
+}
+
+.userLocation {
+  font-size: 15px;
 }
