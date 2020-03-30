@@ -50,6 +50,9 @@
   @apply --marketplaceTinyFontStyles;
   font-weight: var(--fontWeightBold);
 
+  /* Avoid stretching button width. */
+  flex-basis: 0;
+
   height: 35px;
   min-height: 35px;
   padding: 0 18px;

@@ -5,21 +5,12 @@
 
 .icon {
   position: relative;
-  font-size: 10px;
-  margin-right: 15px;
-  color: var(--matterColor);
-}
+  bottom: 1px;
+  margin-right: 5px;
 
-.iconUp {
-  position: absolute;
-  left: 0;
-  top: -9px;
-}
-
-.iconDown {
-  position: absolute;
-  left: 0;
-  top: -0px;
+  @media (--viewportMedium) {
+    bottom: 2px;
+  }
 }
 
 .menuLabel {
