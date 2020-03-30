@@ -45,7 +45,7 @@
 
 .menuContent {
   margin-top: 7px;
-  padding-top: 13px;
+  padding-top: 0;
   padding-bottom: 24px;
   min-width: 300px;
   border-radius: 4px;
@@ -75,6 +75,7 @@
 .menuHeading {
   font-weight: var(--fontWeightSemiBold);
   color: var(--matterColor);
+  margin-top: 24px;
   margin-left: 30px;
   margin-right: 30px;
 }
