@@ -4,10 +4,6 @@
   display: flex;
   flex-direction: column;
   background-color: var(--matterColorBright);
-
-  @media (--viewportLarge) {
-    flex-direction: row;
-  }
 }
 
 .longInfo {
@@ -22,13 +18,10 @@
   }
 }
 
-.organization {
+.resultOrganization {
   display: flex;
   flex-direction: row;
-
-  @media (--viewportLarge) {
-    margin-left: auto;
-  }
+  margin-bottom: 24px;
 }
 
 .searchResultSummary {
@@ -37,11 +30,7 @@
   margin-top: 10px;
   margin-bottom: 11px;
   margin-left: 0px;
-  margin-right: auto;
-
-  @media (--viewportLarge) {
-    margin-right: 8px;
-  }
+  margin-right: 8px;
 }
 
 .noSearchResults {

@@ -2,6 +2,7 @@
 
 .root {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   background-color: var(--matterColorBright);
 
@@ -33,6 +34,9 @@
   @apply --marketplaceButtonStylesSecondary;
   @apply --marketplaceTinyFontStyles;
   font-weight: var(--fontWeightBold);
+
+  /* Avoid stretching button width. */
+  flex-basis: 0;
 
   height: 35px;
   min-height: 35px;
