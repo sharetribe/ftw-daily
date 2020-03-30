@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+## [v4.4.1] 2020-03-30
+
 - [change] Improve the search page sorting and filters UI for different screen sizes [#1280](https://github.com/sharetribe/ftw-daily/pull/1280)
 
 ## [v4.4.0] 2020-03-25
