@@ -27,6 +27,7 @@ const KEY_CODE_ESCAPE = 27;
 const CONTENT_PLACEMENT_OFFSET = 0;
 const CONTENT_TO_LEFT = 'left';
 const CONTENT_TO_RIGHT = 'right';
+const MAX_MOBILE_SCREEN_WIDTH = 768;
 
 const isControlledMenu = (isOpenProp, onToggleActiveProp) => {
   return isOpenProp !== null && onToggleActiveProp !== null;
@@ -103,12 +104,24 @@ class Menu extends Component {
 
   positionStyleForMenuContent(contentPosition) {
     if (this.menu && this.menuContent) {
+      const windowWidth = window.innerWidth;
+      const rect = this.menu.getBoundingClientRect();
+
       // Calculate wether we should show the menu to the left of the component or right
-      const distanceToRight = window.innerWidth - this.menu.getBoundingClientRect().right;
+      const distanceToRight = windowWidth - rect.right;
       const menuWidth = this.menu.offsetWidth;
       const contentWidthBiggerThanLabel = this.menuContent.offsetWidth - menuWidth;
       const usePositionLeftFromLabel = contentPosition === CONTENT_TO_LEFT;
       const contentPlacementOffset = this.props.contentPlacementOffset;
+
+      if (windowWidth <= MAX_MOBILE_SCREEN_WIDTH) {
+        // Take full screen width on mobile
+        return {
+          left: -1 * (rect.left - 24),
+          width: 'calc(100vw - 48px)',
+        };
+      }
+
       // Render menu content to the left according to the contentPosition
       // prop or if the content does not fit to the right. Otherwise render to
       // the right.
