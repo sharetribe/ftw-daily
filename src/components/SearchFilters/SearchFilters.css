@@ -6,12 +6,6 @@
   background-color: var(--matterColorBright);
 }
 
-.filterWrapper {
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-}
-
 .longInfo {
   flex-wrap: wrap;
 }
@@ -24,17 +18,19 @@
   }
 }
 
+.searchOptions {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 24px;
+}
+
 .searchResultSummary {
   @apply --marketplaceH4FontStyles;
   line-height: 20px;
-  margin-top: 9px;
+  margin-top: 10px;
   margin-bottom: 11px;
-  margin-left: auto;
+  margin-left: 0px;
   margin-right: 8px;
-
-  /* parent uses flexbox: this defines minimum width for text "6 results" */
-  flex-basis: 55px;
-  flex-shrink: 0;
 }
 
 .noSearchResults {
