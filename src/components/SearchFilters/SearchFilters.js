@@ -197,7 +197,7 @@ const SearchFiltersComponent = props => {
 
   return (
     <div className={classes}>
-      <div className={css.resultOrganization}>
+      <div className={css.searchOptions}>
         {listingsAreLoaded ? (
           <div className={css.searchResultSummary}>
             <span className={css.resultsFound}>
