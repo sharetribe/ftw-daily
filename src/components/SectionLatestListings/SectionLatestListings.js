@@ -10,11 +10,13 @@ const cardRenderSizes = '(min-width: 480px) 250px, 80vw'
 const LatestListing = ({ listings }) => {
   return (
     <div>
-      <div className={css.title}>
-        <FormattedMessage id="SectionLatestListings.titleLineOne" />
-      </div>
-      <div className={css.title}>
-        <FormattedMessage id="SectionLatestListings.titleLineTwo" />
+      <div className={css.titleWrapper}>
+        <div className={css.title}>
+          <FormattedMessage id="SectionLatestListings.titleLineOne" />
+        </div>
+        <div className={css.title}>
+          <FormattedMessage id="SectionLatestListings.titleLineTwo" />
+        </div>
       </div>
       <div className={css.subTitle}>
         <FormattedMessage id="SectionLatestListings.subLine" />

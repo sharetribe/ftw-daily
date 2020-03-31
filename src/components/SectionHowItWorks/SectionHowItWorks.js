@@ -13,11 +13,13 @@ const SectionHowItWorks = props => {
   const classes = classNames(rootClassName || css.root, className);
   return (
     <div className={classes}>
-      <div className={css.title}>
-        <FormattedMessage id="SectionHowItWorks.titleLineOne" />
-      </div>
-      <div className={css.title}>
-        <FormattedMessage id="SectionHowItWorks.titleLineTwo" />
+       <div className={css.titleWrapper}>
+        <div className={css.title}>
+          <FormattedMessage id="SectionHowItWorks.titleLineOne" />
+        </div>
+        <div className={css.title}>
+          <FormattedMessage id="SectionHowItWorks.titleLineTwo" />
+        </div>
       </div>
       <div className={css.subTitle}>
         <FormattedMessage id="SectionHowItWorks.subLine" />

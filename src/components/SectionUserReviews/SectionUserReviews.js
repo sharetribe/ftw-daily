@@ -10,11 +10,13 @@ const Review = ({ name, text }) => <div>Review</div>;
 const SectionUserReviews = () => {
   return (
     <>
-      <div className={css.title}>
-        <FormattedMessage id="SectionUserReviews.titleLineOne" />
-      </div>
-      <div className={css.title}>
-        <FormattedMessage id="SectionUserReviews.titleLineTwo" />
+      <div className={css.titleWrapper}>
+        <div className={css.title}>
+          <FormattedMessage id="SectionUserReviews.titleLineOne" />
+        </div>
+        <div className={css.title}>
+          <FormattedMessage id="SectionUserReviews.titleLineTwo" />
+        </div>
       </div>
       <div className={css.subTitle}>
         <FormattedMessage id="SectionUserReviews.subLine" />
