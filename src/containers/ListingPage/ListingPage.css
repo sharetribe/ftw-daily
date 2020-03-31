@@ -320,7 +320,7 @@
   align-items: center;
   transform: translateZ(0);
   text-align: center;
-  background: url('/static/patterns/ps-pattern.png');
+  background: none;
   
   @media (--viewportMedium) {
     padding: 18px 50px;
@@ -333,7 +333,7 @@
     display: block;
     margin-top: 70px;
     margin-left: 60px;
-    background-color: #F6F6F6;
+    background-color: none;
     border-radius: 4px;
     box-shadow: none;
     z-index: 1;
