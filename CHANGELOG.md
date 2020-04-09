@@ -14,16 +14,25 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+## [v4.4.2] 2020-04-09
+
 - [fix] Handle deleted reviews in ActivityFeed [#1283](https://github.com/sharetribe/ftw-daily/pull/1283)
+
+[v4.4.2]: https://github.com/sharetribe/flex-template-web/compare/v4.4.1...v4.4.2
+
 
 ## [v4.4.1] 2020-03-30
 
 - [change] Improve the search page sorting and filters UI for different screen sizes [#1280](https://github.com/sharetribe/ftw-daily/pull/1280)
 
+[v4.4.1]: https://github.com/sharetribe/flex-template-web/compare/v4.4.0...v4.4.1
+
 ## [v4.4.0] 2020-03-25
 
 - [add] Search result sorting [#1277](https://github.com/sharetribe/ftw-daily/pull/1277)
 - [change] Move category and amenities search filters from primary filters to secondary filters. [#1275](https://github.com/sharetribe/ftw-daily/pull/1275)
+
+[v4.4.0]: https://github.com/sharetribe/flex-template-web/compare/v4.3.0...v4.4.0
 
 ## [v4.3.0] 2020-03-16
 
