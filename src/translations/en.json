@@ -1,5 +1,6 @@
 {
   "ActivityFeed.deletedListing": "deleted listing",
+  "ActivityFeed.deletedReviewContent": "This review is deleted.",
   "ActivityFeed.leaveAReview": "Leave a review for { displayName }.",
   "ActivityFeed.leaveAReviewSecond": "Leave a review for { displayName } to see their review.",
   "ActivityFeed.ownTransitionAccept": "You accepted the booking request.",
