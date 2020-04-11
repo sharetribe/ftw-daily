@@ -320,7 +320,6 @@
   align-items: center;
   transform: translateZ(0);
   text-align: center;
-  background: none;
   
   @media (--viewportMedium) {
     padding: 18px 50px;
