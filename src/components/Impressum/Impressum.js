@@ -40,7 +40,7 @@ const Impressum = props => {
         Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. 
         Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten 
         ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortliche. Die verlinkten Seiten wurden zum Zeitpunkt 
-        der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht 
+        der Verlinkung auf mögliche Rechtsverstösse überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht 
         erkennbar.<br/>
         <br/>
         <h3>Urheberrecht</h3><br/>
