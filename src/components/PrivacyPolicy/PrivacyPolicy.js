@@ -23,8 +23,10 @@ const PrivacyPolicy = props => {
         Sie können unsere Seite besuchen, ohne Angaben zu Ihrer Person zu machen. Wir speichern lediglich 
         Zugriffsdaten ohne Personenbezug wie z.B. den Namen Ihres Internet Service Providers, die Seite, 
         von der aus Sie uns besuchen oder den Namen der angeforderten Datei. Diese Daten werden wir ausschliesslich 
-        zur Verbesserung unseres Angebots auswerten und erlauben keinen Rückschluss auf Ihre Person.</br>
-    
+        zur Verbesserung unseres Angebots auswerten und erlauben keinen Rückschluss auf Ihre Person.
+      </p>
+    </br>
+      <p>
         Personendaten werden nur erhoben, wenn Sie uns diese im Rahmen Ihrer Warenbestellung, bei Eröffnung 
         eines Kundenkontos oder bei der Anmeldung für unseren Newsletter freiwillig mitteilen. Wir verwenden 
         die von Ihnen mitgeteilten Daten ohne Ihre gesonderte Einwilligung ausschliesslich zur Erfüllung und 
