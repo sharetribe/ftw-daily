@@ -53,7 +53,7 @@ const AboutPage = ({ title }) => {
 
             <div className={css.contentMain}>
               <h2>
-                Wir sind angetreten, um mit unserer Horse-Sharing Plattform den Pferdesport digital zu revolutionieren.
+                Wir sind angetreten, um mit unserer Pferde-Sharing Plattform den Pferdesport digital zu revolutionieren.
               </h2>
 
               <p>
