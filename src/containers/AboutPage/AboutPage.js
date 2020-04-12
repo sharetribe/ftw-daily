@@ -25,7 +25,6 @@ const AboutPage = ({ title }) => {
   After befomentioned pages are created title prop have to be deleted.
   */
   const { siteTwitterHandle, siteFacebookPage } = config;
-  const siteTwitterPage = twitterPageURL(siteTwitterHandle);
   
   // prettier-ignore
   return (
