@@ -102,7 +102,7 @@ const AboutPage = ({ title }) => {
               <p>
                 Besuche uns auch gerne auf {' '}
                 <ExternalLink href={siteFacebookPage}>Facebook</ExternalLink> und{' '}
-                <ExternalLink href={siteInstagramPage}>Instagram</ExternalLink>.
+                <ExternalLink href="https://www.instagram.com/horsedeal24/">Instagram</ExternalLink>
               </p>
             </div>
           </div>
