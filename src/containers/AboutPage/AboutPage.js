@@ -12,7 +12,7 @@ import {
 } from '../../components';
 
 import css from './AboutPage.css';
-import image1 from './about-us-1056.png';
+import image1 from './horsedeal24-banner.png';
 import image2 from './benjamin-kroeni.png';
 import image3 from './manissa-reichner.png';
 import { string } from 'prop-types';
