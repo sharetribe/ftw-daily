@@ -95,7 +95,7 @@ const AboutPage = ({ title }) => {
               </h3>
               <p>
                 Eine Anmeldung auf {' '} <ExternalLink href="https://www.horsedeal24.com">HorseDeal24</ExternalLink> 
-                ist und bleibt für Reiter und Pferdebesitzer kostenlos. Zudem erhältst du von uns bei jeder 
+                 ist und bleibt für Reiter und Pferdebesitzer kostenlos. Zudem erhältst du von uns bei jeder 
                 erfolgreichen Anmeldung eine kleine Überraschung - also los!
               </p>
               <p>
