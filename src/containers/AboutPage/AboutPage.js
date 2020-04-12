@@ -12,7 +12,9 @@ import {
 } from '../../components';
 
 import css from './AboutPage.css';
-import image from './about-us-1056.png';
+import image1 from './about-us-1056.png';
+import image2 from './benjamin-kroeni.png';
+import image3 from './manissa-reichner.png';
 import { string } from 'prop-types';
 
 const AboutPage = ({ title }) => {
@@ -43,7 +45,7 @@ const AboutPage = ({ title }) => {
 
         <LayoutWrapperMain className={css.staticPageWrapper}>
          <h1 className={css.pageTitle}>Hallo! Wir sind HorseDeal24<br/>Das ist ein Test</h1>
-          <img className={css.coverImage} src={image} alt="My first ice cream." />
+          <img className={css.coverImage} src={image1} alt="My first ice cream." />
 
           <div className={css.contentWrapper}>
             <div className={css.contentSide}>
