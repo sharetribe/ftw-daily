@@ -73,8 +73,7 @@ const AboutPage = ({ title }) => {
               </p>
     
               <img className={css.coverImage} src={image2} alt="Benjamin Kröni" />
-              <strong>Benjamin Kröni</strong><br/>
-              Founder & CEO<br/>
+              <strong>Benjamin Kröni</strong>, Founder<br/>
               <p>
                 Benjamin ist der Gründer und Geschäftsführer der Onlineplattform HorseDeal24. Die Idee
                 Pferde-Sharing Plattform kam ihm 2018 durch seine Freundin. Er liess sich vom Pferdesport inspirieren
@@ -82,8 +81,7 @@ const AboutPage = ({ title }) => {
               </p>
     
               <img className={css.coverImage} src={image3} alt="Manissa Reichner" />
-              <h3 className={css.subtitle}>Manissa Reichner</h3>
-
+              <strong>Manissa Reichner</strong>, Community Manager<br/>
               <p>
                 Manissa ist eine echte Pferdefanatikerin. Sie ist bei uns das Social Media Brain und kümmert
                 sich um unsere Community auf Facebook und Instagram. 
