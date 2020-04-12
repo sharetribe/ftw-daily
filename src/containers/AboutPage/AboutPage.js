@@ -73,7 +73,7 @@ const AboutPage = ({ title }) => {
               </p>
     
               <img className={css.coverImage} src={image2} alt="Benjamin Kröni" />
-              <h3><strong>Benjamin Kröni</strong></h3></br>
+              <h3><strong>Benjamin Kröni</strong></h3><br/>
               <p>
                 Benjamin ist der Gründer und Geschäftsführer der Onlineplattform HorseDeal24. Die Idee
                 Pferde-Sharing Plattform kam ihm 2018 durch seine Freundin. Er liess sich vom Pferdesport inspirieren
