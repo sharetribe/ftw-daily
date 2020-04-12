@@ -11,7 +11,7 @@ const Impressum = props => {
   // prettier-ignore
   return (
     <div className={classes}>
-      <p className={css.lastUpdated}>Last updated: October 30, 2017</p>
+      <p className={css.lastUpdated}>Letztes Update: 12. April 2020</p>
 
       <p>
         <h3>Adresse</h3><br/>
