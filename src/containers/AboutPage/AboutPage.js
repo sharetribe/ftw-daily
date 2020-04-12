@@ -58,18 +58,19 @@ const AboutPage = ({ title }) => {
 
               <p>
                 Ein Pferd zu kaufen und über längere Zeit zu unterhalten kann ganz schön teuer sein - 
-                das finden wir auch und haben die erste Schweizer Horsesharing Plattform ins Leben gerufen. 
-                Wir finden, wenn man Fahrräder, Autos und sogar Wohnungen miteinander teilen kann, dann muss
-                das auch mit Pferden funktionieren.
+                das finden wir auch und haben die erste Schweizer Pferde-Sharing Plattform ins Leben gerufen. 
+                Wir finden, wenn man Fahrräder, Autos und sogar Wohnungen miteinander teilen kann, warum nicht auch
+                einfach ein Pferd teilen? 
               </p>
 
               <h3 className={css.subtitle}>Ideal für Reiter & Pferdebesitzer</h3>
 
               <p>
                 Horsedeal24 bietet Reitern und Pferdebesitzern eine einfache, schnelle und 
-                vorallem sichere Möglichkeit, sich über unsere Plattform kennen zu lernen. 
-                Die Suche, Kommunikation und Abrechnung laufen komplett über uns - so wird 
-                Reiten fast schon zu einem Kinderspiel.
+                vorallem sichere Möglichkeit, sich über unsere Plattform kennen zu lernen und
+                ein Pferd über einen längeren Zeitraum hinweg gemeinsam zu Reiten. 
+                Die Suche, Kommunikation und Abrechnung werden dabei komplett über unsere Plattform abgewickelt,
+                sodass das Reiten schon fast zu einem Kinderspiel wird - und nicht in einem bürokratischen Chaos endet. 
               </p>
     
               <img className={css.coverImage} src={image2} alt="Benjamin Kröni" />
