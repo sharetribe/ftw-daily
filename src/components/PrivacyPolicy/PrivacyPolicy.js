@@ -24,9 +24,7 @@ const PrivacyPolicy = props => {
         Zugriffsdaten ohne Personenbezug wie z.B. den Namen Ihres Internet Service Providers, die Seite, 
         von der aus Sie uns besuchen oder den Namen der angeforderten Datei. Diese Daten werden wir ausschliesslich 
         zur Verbesserung unseres Angebots auswerten und erlauben keinen Rückschluss auf Ihre Person.
-      </p>
-    </br>
-      <p>
+    
         Personendaten werden nur erhoben, wenn Sie uns diese im Rahmen Ihrer Warenbestellung, bei Eröffnung 
         eines Kundenkontos oder bei der Anmeldung für unseren Newsletter freiwillig mitteilen. Wir verwenden 
         die von Ihnen mitgeteilten Daten ohne Ihre gesonderte Einwilligung ausschliesslich zur Erfüllung und 
@@ -44,7 +42,7 @@ const PrivacyPolicy = props => {
         Ihrem Computer abgelegt werden. Die meisten der von uns verwendeten Cookies werden nach Ende der Browser-Sitzung 
         wieder von Ihrer Festplatte gelöscht (sog. Sitzungs- oder Session-Cookies). Andere Cookies verbleiben auf Ihrem 
         Computer und ermöglichen uns, Sie bei Ihrem nächsten Besuch wieder zu erkennen (sog. dauerhafte Cookies). Unseren 
-        Partnerunternehmen ist es nicht gestattet, über unsere Website Personendaten mittels Cookies zu beschaffen oder zu bearbeiten.</br>
+        Partnerunternehmen ist es nicht gestattet, über unsere Website Personendaten mittels Cookies zu beschaffen oder zu bearbeiten.
           
         Sie können die Speicherung von Cookies in Ihrem Browser verhindern, indem Sie über die Menüleiste „Extras > Internetoptionen > Datenschutz“ 
         (Internet Explorer) bzw. „Einstellungen > Datenschutz“ (Firefox) die Speicherung und das Lesen von Cookies einschränken oder ausschalten. 
