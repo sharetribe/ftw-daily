@@ -94,7 +94,7 @@ const AboutPage = ({ title }) => {
                 Melde dich noch heute kostenlos an!
               </h3>
               <p>
-                Eine Anmeldung auf {' '} <ExternalLink href="https://www.horsedeal24.com">Sharetribe</ExternalLink>. 
+                Eine Anmeldung auf {' '} <ExternalLink href="https://www.horsedeal24.com">HorseDeal24</ExternalLink> 
                 ist und bleibt für Reiter und Pferdebesitzer kostenlos. Zudem erhältst du von uns bei jeder 
                 erfolgreichen Anmeldung eine kleine Überraschung - also los!
               </p>
