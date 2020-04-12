@@ -11,36 +11,41 @@ const PrivacyPolicy = props => {
   // prettier-ignore
   return (
     <div className={classes}>
-      <p className={css.lastUpdated}>Last updated: October 30, 2017</p>
+      <p className={css.lastUpdated}>Letztes Update: 12.04.2020</p>
 
       <p>
-        Thank you for using HorseDeal24! Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        Vielen Dank für Ihr Interesse an unserer Website. Der Schutz Ihrer persönlichen Daten ist uns 
+        ein wichtiges Anliegen. Nachfolgend informieren wir Sie umfassend über den Umgang mit Ihren Daten.
       </p>
 
-      <h2>1 Lorem ipsum dolor sit amet</h2>
+      <h2>Beschaffung und Bearbeitung von prozessbezogener Daten</h2>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        Sie können unsere Seite besuchen, ohne Angaben zu Ihrer Person zu machen. Wir speichern lediglich 
+        Zugriffsdaten ohne Personenbezug wie z.B. den Namen Ihres Internet Service Providers, die Seite, 
+        von der aus Sie uns besuchen oder den Namen der angeforderten Datei. Diese Daten werden wir ausschliesslich 
+        zur Verbesserung unseres Angebots auswerten und erlauben keinen Rückschluss auf Ihre Person.<br>
+        Personendaten werden nur erhoben, wenn Sie uns diese im Rahmen Ihrer Warenbestellung, bei Eröffnung 
+        eines Kundenkontos oder bei der Anmeldung für unseren Newsletter freiwillig mitteilen. Wir verwenden 
+        die von Ihnen mitgeteilten Daten ohne Ihre gesonderte Einwilligung ausschliesslich zur Erfüllung und 
+        Abwicklung Ihrer Bestellung. Mit vollständiger Abwicklung des Vertrags und vollständiger Kaufpreiszahlung 
+        werden Ihre Daten für die weitere Verwendung gesperrt und nach Ablauf der gesetzlichen Aufbewahrungsfristen 
+        gelöscht, sofern Sie nicht ausdrücklich in die weitere Nutzung Ihrer Daten eingewilligt haben. Bei Anmeldung 
+        für den Newsletter wird Ihre E-Mail-Adresse für eigene Werbezwecke genutzt, bis Sie sich vom Newsletter abmelden. 
+        Die Abmeldung ist jederzeit möglich.
       </p>
 
-      <h2>2 Sed ut perspiciatis unde</h2>
+      <h2>Verwendung von Cookies</h2>
       <p>
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-        laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-        architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-        aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
-        voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-        consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et
-        dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
-        exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
-        consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil
-        molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+        Auf verschiedenen Seiten verwenden wir Cookies, um den Besuch unserer Website attraktiver zu gestalten 
+        und die Nutzung bestimmter Funktionen zu ermöglichen. Hierbei handelt es sich um kleine Textdateien, die auf 
+        Ihrem Computer abgelegt werden. Die meisten der von uns verwendeten Cookies werden nach Ende der Browser-Sitzung 
+        wieder von Ihrer Festplatte gelöscht (sog. Sitzungs- oder Session-Cookies). Andere Cookies verbleiben auf Ihrem 
+        Computer und ermöglichen uns, Sie bei Ihrem nächsten Besuch wieder zu erkennen (sog. dauerhafte Cookies). Unseren 
+        Partnerunternehmen ist es nicht gestattet, über unsere Website Personendaten mittels Cookies zu beschaffen oder zu bearbeiten.<br>
+          
+        Sie können die Speicherung von Cookies in Ihrem Browser verhindern, indem Sie über die Menüleiste „Extras > Internetoptionen > Datenschutz“ 
+        (Internet Explorer) bzw. „Einstellungen > Datenschutz“ (Firefox) die Speicherung und das Lesen von Cookies einschränken oder ausschalten. 
+        Bitte beachten Sie, dass Sie gewisse Funktionen unserer Website ohne Cookies nicht nutzen können.
       </p>
 
       <h2>3 At vero eos et accusamus</h2>
