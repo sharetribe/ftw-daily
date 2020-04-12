@@ -93,7 +93,7 @@ const PrivacyPolicy = props => {
         Sind Sie bei Facebook eingeloggt, kann Facebook den Besuch unserer Website Ihrem Facebook-Profil unmittelbar zuordnen. Wenn Sie mit den 
         Plugins interagieren, zum Beispiel den „Gefällt mir“-Button betätigen oder einen Kommentar abgeben, wird diese Information ebenfalls direkt 
         an einen Server von Facebook übermittelt und dort gespeichert. Die Informationen werden außerdem auf Ihrem Facebook- Profil veröffentlicht 
-        und Ihren Facebook-Freunden angezeigt.<br/
+        und Ihren Facebook-Freunden angezeigt.<br/>
         <br/>
         Zweck und Umfang der Datenerhebung und die weitere Verarbeitung und Nutzung der Daten durch Facebook sowie Ihre diesbezüglichen Rechte und 
         Einstellungsmöglichkeiten zum Schutz Ihrer Privatsphäre entnehmen Sie bitte den Datenschutzhinweisen von Facebook: http://www.facebook.com/policy.php <br/>
