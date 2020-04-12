@@ -49,7 +49,7 @@ const AboutPage = ({ title }) => {
 
           <div className={css.contentWrapper}>
             <div className={css.contentSide}>
-              <p>Wir suchen Dich! nd has 3.2 million saunas - almost one sauna per person!</p>
+              <p>Wir suchen Dich! Werde ein teil von uns & bewerbe dich <a href="/bewerbung" onclick="return false;">hier</a>!</p>
             </div>
 
             <div className={css.contentMain}>
