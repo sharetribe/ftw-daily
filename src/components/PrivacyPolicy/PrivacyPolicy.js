@@ -18,13 +18,13 @@ const PrivacyPolicy = props => {
         ein wichtiges Anliegen. Nachfolgend informieren wir Sie umfassend über den Umgang mit Ihren Daten.
       </p>
 
-      <h2>Beschaffung und Bearbeitung von prozessbezogener Daten</h2>
+      <h3>Beschaffung und Bearbeitung von prozessbezogener Daten</h3>
       <p>
         Sie können unsere Seite besuchen, ohne Angaben zu Ihrer Person zu machen. Wir speichern lediglich 
         Zugriffsdaten ohne Personenbezug wie z.B. den Namen Ihres Internet Service Providers, die Seite, 
         von der aus Sie uns besuchen oder den Namen der angeforderten Datei. Diese Daten werden wir ausschliesslich 
         zur Verbesserung unseres Angebots auswerten und erlauben keinen Rückschluss auf Ihre Person.
-        </br>
+    
         Personendaten werden nur erhoben, wenn Sie uns diese im Rahmen Ihrer Warenbestellung, bei Eröffnung 
         eines Kundenkontos oder bei der Anmeldung für unseren Newsletter freiwillig mitteilen. Wir verwenden 
         die von Ihnen mitgeteilten Daten ohne Ihre gesonderte Einwilligung ausschliesslich zur Erfüllung und 
@@ -35,7 +35,7 @@ const PrivacyPolicy = props => {
         Die Abmeldung ist jederzeit möglich.
       </p>
 
-      <h2>Verwendung von Cookies</h2>
+      <h3>Verwendung von Cookies</h3>
       <p>
         Auf verschiedenen Seiten verwenden wir Cookies, um den Besuch unserer Website attraktiver zu gestalten 
         und die Nutzung bestimmter Funktionen zu ermöglichen. Hierbei handelt es sich um kleine Textdateien, die auf 
@@ -49,18 +49,31 @@ const PrivacyPolicy = props => {
         Bitte beachten Sie, dass Sie gewisse Funktionen unserer Website ohne Cookies nicht nutzen können.
       </p>
 
-      <h2>3 At vero eos et accusamus</h2>
+      <h3>Bekanntgabe personenbezogener Daten an Dritte</h3>
       <p>
-        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-        voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
-        cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id
-        est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam
-        libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod
-        maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.
-        Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut
-        et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a
-        sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis
-        doloribus asperiores repellat
+        Ihre Daten werden an unsere Lieferunternehmen bekanntgegeben, soweit dies zur Lieferung der Waren notwendig ist. 
+        Zur Abwicklung der Zahlung geben wir Ihre Zahlungsdaten an unsere Zahlungsanbieter weiter. Diese bearbeitet Ihre Daten 
+        nur in dem Umfang, in dem wir sie selbst bearbeiten dürften. Darüber hinaus werden Ihre persönlichen Daten nicht an Dritte 
+        bekanntgegeben.
+      </p>
+  
+      <h3>Recht auf Auskunft und Berichtigung</h3>
+      <p>
+        Nach dem Bundesgesetz über den Datenschutz (DSG) haben Sie ein Recht auf unentgeltliche Auskunft über Ihre gespeicherten 
+        Daten (Art. 8 DSG) sowie ein Recht auf Berichtigung (Art. 5 Abs. 2 DSG). Darüber hinaus können Sie verlangen, dass Ihre 
+        Daten gelöscht werden, so weit diese nicht mehr zur Vertragsab wicklung benötigt werden und auch die Sperrung Ihrer Daten 
+        verlangen. Auskunftsbegehren und Sperrungs- bzw. Löschungverlangen können auch in elektronischer Form an die zuständige 
+        Stelle gerichtet werden. Bei Fragen zur Beschaffung und Bearbeitung Ihrer personenbezogenen Daten und für Auskunfts- und 
+        Berichtigungsanfragen wenden Sie sich an uns:
+  
+        <strong>Per E-Mail:</strong>
+        office@horsedeal24.com
+        
+        <strong>Per Brief:</strong>
+        HorseDeal24
+        Horseplanet GmbH 
+        Bösch 80a
+        6331 Hünenberg
       </p>
     </div>
   );
