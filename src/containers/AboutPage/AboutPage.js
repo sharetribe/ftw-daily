@@ -45,7 +45,7 @@ const AboutPage = ({ title }) => {
 
         <LayoutWrapperMain className={css.staticPageWrapper}>
          <h1 className={css.pageTitle}>Hallo! Wir sind HorseDeal24<br/>Das ist ein Test</h1>
-          <img className={css.coverImage} src={image1} alt="My first ice cream." />
+          <img className={css.coverImage} src={image1} alt="Team Foto" />
 
           <div className={css.contentWrapper}>
             <div className={css.contentSide}>
@@ -77,7 +77,7 @@ const AboutPage = ({ title }) => {
                 is often a more fulfilling one.
               </p>
     
-              <img className={css.coverImage} src={image} alt="My first ice cream." />
+              <img className={css.coverImage} src={image2} alt="Benjamin Kröni" />
               <h3 className={css.subtitle}>Benjamin Kröni</h3>
 
               <p>
@@ -88,7 +88,7 @@ const AboutPage = ({ title }) => {
                 is often a more fulfilling one.
               </p>
     
-              <img className={css.coverImage} src={image} alt="My first ice cream." />
+              <img className={css.coverImage} src={image3} alt="Manissa Reichner" />
               <h3 className={css.subtitle}>Manissa Reichner</h3>
 
               <p>
