@@ -1,6 +1,6 @@
 import React from 'react';
 import config from '../../config';
-import { twitterPageURL } from '../../util/urlHelpers';
+import { InstagramPageURL } from '../../util/urlHelpers';
 import { StaticPage, TopbarContainer } from '../../containers';
 import {
   LayoutSingleColumn,
@@ -44,7 +44,7 @@ const AboutPage = ({ title }) => {
         </LayoutWrapperTopbar>
 
         <LayoutWrapperMain className={css.staticPageWrapper}>
-         <h1 className={css.pageTitle}>Hallo! Wir sind HorseDeal24<br/>Das ist ein Test</h1>
+         <h1 className={css.pageTitle}>Schön, bist du hier gelandet.<br/>Es ist Zeit, uns kennen zu lernen.</h1>
           <img className={css.coverImage} src={image1} alt="Team Foto" />
 
           <div className={css.contentWrapper}>
@@ -92,19 +92,17 @@ const AboutPage = ({ title }) => {
               </p>
 
               <h3 id="contact" className={css.subtitle}>
-                Create your own marketplace like HorseDeal24
+                Melde dich noch heute kostenlos an!
               </h3>
               <p>
-                HorseDeal24 is brought to you by the good folks at{' '}
-                <ExternalLink href="http://sharetribe.com">Sharetribe</ExternalLink>. Would you like
-                to create your own marketplace platform a bit like HorseDeal24? Or perhaps a mobile
-                app? With Sharetribe it's really easy. If you have a marketplace idea in mind, do
-                get in touch!
+                Eine Anmeldung auf {' '} <ExternalLink href="https://www.horsedeal24.com">Sharetribe</ExternalLink>. 
+                ist und bleibt für Reiter und Pferdebesitzer kostenlos. Zudem erhältst du von uns bei jeder 
+                erfolgreichen Anmeldung eine kleine Überraschung - also los!
               </p>
               <p>
-                You can also checkout our{' '}
-                <ExternalLink href={siteFacebookPage}>Facebook</ExternalLink> and{' '}
-                <ExternalLink href={siteTwitterPage}>Twitter</ExternalLink>.
+                Besuche uns auch gerne auf {' '}
+                <ExternalLink href={siteFacebookPage}>Facebook</ExternalLink> und{' '}
+                <ExternalLink href={siteInstagramPage}>Instagram</ExternalLink>.
               </p>
             </div>
           </div>
