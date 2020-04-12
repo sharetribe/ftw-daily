@@ -27,23 +27,23 @@ const Impressum = props => {
         Nicht MwSt-Pflichtig<br/>
         Sitz: Kanton Zug<br/>
         <br/>
-        <strong>Rechtlicher Hinweis</strong><br/>
+        <h3><strong>Rechtlicher Hinweis</strong></h3><br/>
         Im Hinblick auf die technischen Eigenschaften des Internet kann kein Gewähr für die Authentizität, 
         Richtigkeit und Vollständigkeit der im Internet zur Verfügung gestellten Informationen übernommen werden. 
         Es wird auch keine Gewähr für die Verfügbarkeit oder den Betrieb der gegenständlichen Webseite und ihrer 
-        Inhalte übernommen.
+        Inhalte übernommen.<br/>
         <br/>
         Jede Haftung für unmittelbare, mittelbare oder sonstige Schäden, unabhängig von deren Ursachen, die aus 
         der Benutzung oder Nichtverfügbarkeit der Daten und Informationen dieser Homepage erwachsen, wird, soweit 
-        rechtlich zulässig, ausgeschlossen.
+        rechtlich zulässig, ausgeschlossen.<br/>
         <br/>
         Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. 
         Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten 
         ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortliche. Die verlinkten Seiten wurden zum Zeitpunkt 
         der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht 
-        erkennbar.
+        erkennbar.<br/>
         <br/>
-        <strong>Urheberrecht</strong><br/>
+        <h3><strong>Urheberrecht</strong></h3><br/>
         Die Betreiber dieser Webseite sind bemüht, stets die Urheberrechte anderer zu beachten bzw. auf selbst erstellte sowie 
         lizenzfreie Werke zurückzugreifen. Die durch die Seitenbetreiber erstellten Inhalte und Werke auf dieser Webseite unterliegen 
         dem Urheberrecht. Beiträge Dritter sind als solche gekennzeichnet. Die Vervielfältigung. Bearbeitung, Verbreitung und jede Art
