@@ -75,6 +75,70 @@ const PrivacyPolicy = props => {
         Bösch 80a
         6331 Hünenberg
       </p>
+  
+      <h3>Nutzung von Facebook-Plugins</h3>
+      <p>
+        Auf unserer Website werden sogenannte Social Plugins („Plugins“) des sozialen Netzwerkes Facebook verwendet, das von der 
+        Facebook Inc., 1601 S. California Ave, Palo Alto, CA 94304, USA („Facebook“) betrieben wird. Die Plugins sind mit einem 
+        Facebook-Logo oder dem Zusatz „Soziales Plug-in von Facebook“ bzw. „Facebook Social Plugin“ gekennzeichnet. Eine Übersicht 
+        über die Facebook Plugins und deren Aussehen finden Sie hier: http://developers.facebook.com/plugins
+  
+        Wenn Sie eine Seite unseres Webauftritts aufrufen, die ein solches Plugin enthält, stellt Ihr Browser eine direkte Verbindung 
+        zu den Servern von Facebook her. Der Inhalt des Plugins wird von Facebook direkt an Ihren Browser übermittelt und in die Seite 
+        eingebunden. Durch diese Einbindung erhält Facebook die Information, dass Ihr Browser die entsprechende Seite unseres Webauftritts 
+        aufgerufen hat, auch wenn Sie kein Facebook-Profil besitzen oder gerade nicht bei Facebook eingeloggt sind. Diese Information 
+        (einschließlich Ihrer IP-Adresse) wird von Ihrem Browser direkt an einen Server von Facebook in die USA übermittelt und dort gespeichert.
+        
+        Sind Sie bei Facebook eingeloggt, kann Facebook den Besuch unserer Website Ihrem Facebook-Profil unmittelbar zuordnen. Wenn Sie mit den 
+        Plugins interagieren, zum Beispiel den „Gefällt mir“-Button betätigen oder einen Kommentar abgeben, wird diese Information ebenfalls direkt 
+        an einen Server von Facebook übermittelt und dort gespeichert. Die Informationen werden außerdem auf Ihrem Facebook- Profil veröffentlicht 
+        und Ihren Facebook-Freunden angezeigt.
+        
+        Zweck und Umfang der Datenerhebung und die weitere Verarbeitung und Nutzung der Daten durch Facebook sowie Ihre diesbezüglichen Rechte und 
+        Einstellungsmöglichkeiten zum Schutz Ihrer Privatsphäre entnehmen Sie bitte den Datenschutzhinweisen von Facebook: http://www.facebook.com/policy.php
+  
+        Wenn Sie nicht möchten, dass Facebook die über unseren Webauftritt gesammelten Daten unmittelbar Ihrem Facebook-Profil zuordnet, müssen Sie sich vor 
+        Ihrem Besuch unserer Website bei Facebook ausloggen. Sie können das Laden der Facebook Plugins auch mit Add-Ons für Ihren Browser komplett verhindern, 
+        z.B. mit dem „Facebook Blocker“ (http://webgraph.com/resources/facebookblocker/).
+      </p>
+                                         
+      <h3>Nutzung von Twitter-Plugins</h3>
+      <p>
+        Auf unserer Website werden sogenannte Social Plugins („Plugins“) des Mikroblogging-Dienstes Twitter verwendet, der von der Twitter Inc., 1355 Market St, Suite 
+        900, San Francisco, CA 94103, USA („Twitter“) betrieben wird. Die Plugins sind mit einem Twitter-Logo beispielsweise in Form eines blauen „Twitter- Vogels“ gekennzeichnet. 
+        Eine Übersicht über die Twitter Plugins und deren Aussehen finden Sie hier: https://twitter.com/about/resources/buttons
+  
+        Wenn Sie eine Seite unseres Webauftritts aufrufen, die ein solches Plugin enthält, stellt Ihr Browser eine direkte Verbindung zu den Servern von Twitter her. Der Inhalt des
+        Plugins wird von Twitter direkt an Ihren Browser übermittelt und in die Seite eingebunden. Durch die Einbindung erhält Twitter die Information, dass Ihr Browser die entsprechende
+        Seite unseres Webauftritts aufgerufen hat, auch wenn Sie kein Profil bei Twitter besitzen oder gerade nicht bei Twitter eingeloggt sind. Diese Information (einschließlich Ihrer IP-Adresse)
+         wird von Ihrem Browser direkt an einen Server von Twitter in die USA übermittelt und dort gespeichert.
+      
+         Sind Sie bei Twitter eingeloggt, kann Twitter den Besuch unserer Website Ihrem Twitter-Account unmittelbar zuordnen. Wenn Sie mit den Plugins interagieren, zum Beispiel den „Twittern“-Button betätigen, 
+         wird die entsprechende Information ebenfalls direkt an einen Server von Twitter übermittelt und dort gespeichert. Die Informationen werden außerdem auf Ihrem Twitter-Account veröffentlicht und dort 
+         Ihren Kontakten angezeigt.
+      
+         Zweck und Umfang der Datenerhebung und die weitere Verarbeitung und Nutzung der Daten durch Twitter sowie Ihre diesbezüglichen Rechte und Einstellungsmöglichkeiten zum Schutz Ihrer Privatsphäre entnehmen 
+         Sie bitte den Datenschutzhinweisen von Twitter: https://twitter.com/privacy
+  
+         Wenn Sie nicht möchten, dass Twitter die über unseren Webauftritt gesammelten Daten unmittelbar Ihrem Twitter-Account zuordnet, müssen Sie sich vor Ihrem Besuch unserer Website bei Twitter ausloggen. 
+         Sie können das Laden der Twitter Plugins auch mit Add-Ons für Ihren Browser komplett verhindern, z. B. mit dem Skript-Blocker „NoScript“ (http://noscript.net/).
+       </p>
+                                                                                                                                                
+      <h3>Verwendung von Google Analytics</h3>
+      <p>
+        Diese Website benutzt Google Analytics, einen Webanalysedienst der Google Inc. („Google“). Google Analytics verwendet sog. „Cookies“, Textdateien, die auf Ihrem 
+        Computer gespeichert werden und die eine Analyse der Benutzung der Website durch Sie ermöglichen. Die durch den Cookie erzeugten Informationen über Ihre Benutzung 
+        dieser Website werden in der Regel an einen Server von Google in den USA übertragen und dort gespeichert. Im Falle der Aktivierung der IPAnonymisierung auf dieser 
+        Webseite, wird Ihre IP-Adresse von Google jedoch innerhalb von Mitgliedstaaten der Europäischen Union oder in anderen Vertragsstaaten des Abkommens über den Europäischen 
+        Wirtschaftsraum zuvor gekürzt. Nur in Ausnahmefällen wird die volle IP-Adresse an einen Server von Google in den USA übertragen und dort gekürzt. Im Auftrag des Betreibers 
+        dieser Website wird Google diese Informationen benutzen, um Ihre Nutzung der Website auszuwerten, um Reports über die Websiteaktivitäten zusammenzustellen und um weitere mit 
+        der Websitenutzung und der Internetnutzung verbundene Dienstleistungen gegenüber dem Websitebetreiber zu erbringen. Die im Rahmen von Google Analytics von Ihrem Browser übermittelte 
+        IP-Adresse wird nicht mit anderen Daten von Google zusammengeführt. Sie können die Speicherung der Cookies durch eine entsprechende Einstellung Ihrer Browser-Software verhindern; wir 
+        weisen Sie jedoch darauf hin, dass Sie in diesem Fall gegebenenfalls nicht sämtliche Funktionen dieser Website vollumfänglich werden nutzen können.
+        
+        Sie können darüber hinaus die Erfassung der durch das Cookie erzeugten und auf Ihre Nutzung der Website bezogenen Daten (inkl. Ihrer IP-Adresse) an Google sowie die Verarbeitung dieser 
+        Daten durch Google verhindern, indem sie das unter dem folgenden Link verfügbare Browser-Plugin herunterladen und installieren: http://tools.google.com/dlpage/gaoptout?hl=de
+      </p>                                                                                                                                            
     </div>
   );
 };
