@@ -49,54 +49,46 @@ const AboutPage = ({ title }) => {
 
           <div className={css.contentWrapper}>
             <div className={css.contentSide}>
-              <p>Did you know that Finland has 3.2 million saunas - almost one sauna per person!</p>
+              <p>Wir suchen Dich! nd has 3.2 million saunas - almost one sauna per person!</p>
             </div>
 
             <div className={css.contentMain}>
               <h2>
-                Most of the Finnish saunas are located at the homes of individuals - indeed, most
-                people in Finland live in an apartment with sauna in it. In addition, lots of people
-                have lakeside summer cottages, which also typically come with a separate sauna
-                building near the waterfront.
+                Wir sind angetreten, um mit unserer Horse-Sharing Plattform den Pferdesport digital zu revolutionieren.
               </h2>
 
               <p>
-                To truly experience a Finnish sauna, you need to look beyond the public saunas, and
-                instead visit a real home or cottage sauna. HorseDeal24 makes this possible for
-                everyone. All our saunas are owned by individuals willing to let tourists and other
-                curious visitors to enter their sacred spaces.
+                Ein Pferd zu kaufen und über längere Zeit zu unterhalten kann ganz schön teuer sein - 
+                das finden wir auch und haben die erste Schweizer Horsesharing Plattform ins Leben gerufen. 
+                Wir finden, wenn man Fahrräder, Autos und sogar Wohnungen miteinander teilen kann, dann muss
+                das auch mit Pferden funktionieren.
               </p>
 
-              <h3 className={css.subtitle}>Are you a sauna owner?</h3>
+              <h3 className={css.subtitle}>Ideal für Reiter & Pferdebesitzer</h3>
 
               <p>
-                HorseDeal24 offers you a good way to earn some extra cash! If you're not using your
-                sauna every evening, why not rent it to other people while it's free. And even if
-                you are using your sauna every evening (we understand, it's so good), why not invite
-                other people to join you when the sauna is already warm! A shared sauna experience
-                is often a more fulfilling one.
+                Horsedeal24 bietet Reitern und Pferdebesitzern eine einfache, schnelle und 
+                vorallem sichere Möglichkeit, sich über unsere Plattform kennen zu lernen. 
+                Die Suche, Kommunikation und Abrechnung laufen komplett über uns - so wird 
+                Reiten fast schon zu einem Kinderspiel.
               </p>
     
               <img className={css.coverImage} src={image2} alt="Benjamin Kröni" />
               <h3 className={css.subtitle}>Benjamin Kröni</h3>
 
               <p>
-                Benjamin Kröni offers you a good way to earn some extra cash! If you're not using your
-                sauna every evening, why not rent it to other people while it's free. And even if
-                you are using your sauna every evening (we understand, it's so good), why not invite
-                other people to join you when the sauna is already warm! A shared sauna experience
-                is often a more fulfilling one.
+                Benjamin ist der Gründer und Geschäftsführer der Onlineplattform HorseDeal24. Die Idee
+                Pferde-Sharing Plattform kam ihm 2018 durch seine Freundin. Er liess sich vom Pferdesport inspirieren
+                und nutzte seine Technik-Expertise, um nur kurze Zeit später den ersten Prototypen zu bauen. 
               </p>
     
               <img className={css.coverImage} src={image3} alt="Manissa Reichner" />
               <h3 className={css.subtitle}>Manissa Reichner</h3>
 
               <p>
-                Benjamin Kröni offers you a good way to earn some extra cash! If you're not using your
-                sauna every evening, why not rent it to other people while it's free. And even if
-                you are using your sauna every evening (we understand, it's so good), why not invite
-                other people to join you when the sauna is already warm! A shared sauna experience
-                is often a more fulfilling one.
+                Manissa ist eine echte Pferdefanatikerin. Sie ist bei uns das Social Media Brain und kümmert
+                sich um unsere Community auf Facebook und Instagram. 
+                
               </p>
 
               <h3 id="contact" className={css.subtitle}>
