@@ -75,6 +75,7 @@ const AboutPage = ({ title }) => {
                 is often a more fulfilling one.
               </p>
     
+              <img className={css.coverImage} src={image} alt="My first ice cream." />
               <h3 className={css.subtitle}>Benjamin Kröni</h3>
 
               <p>
@@ -85,6 +86,7 @@ const AboutPage = ({ title }) => {
                 is often a more fulfilling one.
               </p>
     
+              <img className={css.coverImage} src={image} alt="My first ice cream." />
               <h3 className={css.subtitle}>Manissa Reichner</h3>
 
               <p>
