@@ -14,7 +14,7 @@ const Impressum = props => {
       <p className={css.lastUpdated}>Last updated: October 30, 2017</p>
 
       <p>
-        <strong>Adresse</strong><br/>
+        <h3>Adresse</h3><br/>
         HorseDeal24<br/>
         Horseplanet GmbH<br/>
         Bösch 80a<br/>
@@ -24,10 +24,10 @@ const Impressum = props => {
         Telefon: 044 520 05 06<br/>
         E-Mail: office@horsedeal24.com<br/>
         <br/>
-        Nicht MwSt-Pflichtig<br/>
+        UID: CHE-211.894.969<br/>
         Sitz: Kanton Zug<br/>
         <br/>
-        <h3><strong>Rechtlicher Hinweis</strong></h3><br/>
+        <h3>Rechtlicher Hinweis</h3><br/>
         Im Hinblick auf die technischen Eigenschaften des Internet kann kein Gewähr für die Authentizität, 
         Richtigkeit und Vollständigkeit der im Internet zur Verfügung gestellten Informationen übernommen werden. 
         Es wird auch keine Gewähr für die Verfügbarkeit oder den Betrieb der gegenständlichen Webseite und ihrer 
@@ -43,7 +43,7 @@ const Impressum = props => {
         der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht 
         erkennbar.<br/>
         <br/>
-        <h3><strong>Urheberrecht</strong></h3><br/>
+        <h3>Urheberrecht</h3><br/>
         Die Betreiber dieser Webseite sind bemüht, stets die Urheberrechte anderer zu beachten bzw. auf selbst erstellte sowie 
         lizenzfreie Werke zurückzugreifen. Die durch die Seitenbetreiber erstellten Inhalte und Werke auf dieser Webseite unterliegen 
         dem Urheberrecht. Beiträge Dritter sind als solche gekennzeichnet. Die Vervielfältigung. Bearbeitung, Verbreitung und jede Art
