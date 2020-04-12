@@ -74,6 +74,26 @@ const AboutPage = ({ title }) => {
                 other people to join you when the sauna is already warm! A shared sauna experience
                 is often a more fulfilling one.
               </p>
+    
+              <h3 className={css.subtitle}>Benjamin Kröni</h3>
+
+              <p>
+                Benjamin Kröni offers you a good way to earn some extra cash! If you're not using your
+                sauna every evening, why not rent it to other people while it's free. And even if
+                you are using your sauna every evening (we understand, it's so good), why not invite
+                other people to join you when the sauna is already warm! A shared sauna experience
+                is often a more fulfilling one.
+              </p>
+    
+              <h3 className={css.subtitle}>Manissa Reichner</h3>
+
+              <p>
+                Benjamin Kröni offers you a good way to earn some extra cash! If you're not using your
+                sauna every evening, why not rent it to other people while it's free. And even if
+                you are using your sauna every evening (we understand, it's so good), why not invite
+                other people to join you when the sauna is already warm! A shared sauna experience
+                is often a more fulfilling one.
+              </p>
 
               <h3 id="contact" className={css.subtitle}>
                 Create your own marketplace like HorseDeal24
