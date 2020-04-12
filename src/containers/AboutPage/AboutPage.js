@@ -73,11 +73,11 @@ const AboutPage = ({ title }) => {
               </p>
     
               <img className={css.coverImage} src={image2} alt="Benjamin Kröni" />
-              <strong>Benjamin Kröni</strong>, Founder<br/>
+              <strong>Benjamin Kröni</strong>, Founder & CEO<br/>
               <p>
-                Benjamin ist der Gründer und Geschäftsführer der Onlineplattform HorseDeal24. Die Idee
-                Pferde-Sharing Plattform kam ihm 2018 durch seine Freundin. Er liess sich vom Pferdesport inspirieren
-                und nutzte seine Technik-Expertise, um nur kurze Zeit später den ersten Prototypen zu bauen. 
+                Die geniale Idee, eine Pferde-Sharing Plattform zu gründen kam Benjamin im Jahr 2018 als er sich durch seine Freundin, eine erfolgreiche Reiterin, inspirieren liess.
+                Er nutzte seine Technik-Expertise, um nur kurze Zeit später den ersten Prototypen zu bauen. Intern kümmert er sich bei uns um 
+                das operative Geschäft und betreut unsere Partner & den reibungslosen Betrieb unserer Plattform.
               </p>
     
               <img className={css.coverImage} src={image3} alt="Manissa Reichner" />
@@ -92,8 +92,8 @@ const AboutPage = ({ title }) => {
                 Melde dich noch heute kostenlos an!
               </h3>
               <p>
-                Eine Anmeldung auf {' '} <ExternalLink href="https://www.horsedeal24.com">HorseDeal24</ExternalLink> 
-                 ist und bleibt für Reiter und Pferdebesitzer kostenlos. Zudem erhältst du von uns bei jeder 
+                Eine Anmeldung auf {' '} <ExternalLink href="https://www.horsedeal24.com">HorseDeal24</ExternalLink> ist 
+                und bleibt für Reiter und Pferdebesitzer kostenlos. Zudem erhältst du von uns bei jeder 
                 erfolgreichen Anmeldung eine kleine Überraschung - also los!
               </p>
               <p>
