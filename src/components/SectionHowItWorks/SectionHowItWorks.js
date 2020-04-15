@@ -20,7 +20,6 @@ const SectionHowItWorks = props => {
         <div className={css.title}>
           <FormattedMessage id="SectionHowItWorks.titleLineTwo" />
         </div>
-       <br/>
       </div>
       <div className={css.subTitle}>
         <FormattedMessage id="SectionHowItWorks.subLine" />
