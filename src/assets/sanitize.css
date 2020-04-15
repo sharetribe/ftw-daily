@@ -284,6 +284,7 @@ audio:not([controls]) {
 
 img {
   border-style: none;
+  border-radius: 5px;
 }
 
 /**
