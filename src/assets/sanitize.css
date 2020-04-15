@@ -24,7 +24,6 @@
 ::after {
   text-decoration: inherit; /* 1 */
   vertical-align: inherit; /* 2 */
-  border-radius: 5px;
 }
 
 /**
