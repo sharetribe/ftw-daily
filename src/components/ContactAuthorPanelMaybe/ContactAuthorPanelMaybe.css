@@ -63,7 +63,7 @@
 }
 .priceValue {
   display: block;
-  @apply --marketplaceH2FontStyles;
+  font-size: 24px;
   color: var(--matterColor);
 
   margin-top: 0;
