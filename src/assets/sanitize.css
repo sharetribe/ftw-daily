@@ -13,6 +13,7 @@
 ::after {
   background-repeat: no-repeat; /* 1 */
   box-sizing: inherit; /* 2 */
+  border-radius: 5px;
 }
 
 /**
@@ -24,6 +25,7 @@
 ::after {
   text-decoration: inherit; /* 1 */
   vertical-align: inherit; /* 2 */
+  border-radius: 5px;
 }
 
 /**
@@ -284,7 +286,6 @@ audio:not([controls]) {
 
 img {
   border-style: none;
-  border-radius: 5px;
 }
 
 /**
