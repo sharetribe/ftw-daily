@@ -564,8 +564,8 @@
   margin-top: 0;
   margin-bottom: 20px;
   @media (--viewportMedium) {
-    margin-top: 0;
-    margin-bottom: 28px;
+    margin-top: 75px;
+    margin-bottom: 40px;
   }
 }
 
@@ -658,7 +658,8 @@
   /* Dimensions: Map takes all available space from viewport (excludes action button and section title) */
   height: calc(100vh - 193px);
   width: 100%;
-
+  border-radius: 5px;
+  overflow: hidden;
   /* Static map: dimensions are 640px */
   max-width: 640px;
   max-height: 640px;
