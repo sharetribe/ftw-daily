@@ -14,7 +14,7 @@ build
 .env
 npm-debug.log
 yarn-error.log
-
+.vs
 .idea/
 package-lock.json
 
