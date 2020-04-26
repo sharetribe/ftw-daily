@@ -35,16 +35,16 @@ export class BookingDatesFormComponent extends Component {
   // focus on that input, otherwise continue with the
   // default handleSubmit function.
   handleFormSubmit(e) {
-    const { startDate, endDate } = e.bookingDates || {};
-    if (!startDate) {
-      e.preventDefault();
-      this.setState({ focusedInput: START_DATE });
-    } else if (!endDate) {
-      e.preventDefault();
-      this.setState({ focusedInput: END_DATE });
-    } else {
+    // const { startDate, endDate } = e.bookingDates || {};
+    // if (!startDate) {
+    //   e.preventDefault();
+    //   this.setState({ focusedInput: START_DATE });
+    // } else if (!endDate) {
+    //   e.preventDefault();
+    //   this.setState({ focusedInput: END_DATE });
+    // } else {
       this.props.onSubmit(e);
-    }
+    // }
   }
 
   render() {
@@ -172,10 +172,10 @@ export class BookingDatesFormComponent extends Component {
                 format={identity}
                 timeSlots={timeSlots}
                 useMobileMargins
-                validate={composeValidators(
-                  required(requiredMessage),
-                  bookingDatesRequired(startDateErrorMessage, endDateErrorMessage)
-                )}
+                // validate={composeValidators(
+                //   required(requiredMessage),
+                //   bookingDatesRequired(startDateErrorMessage, endDateErrorMessage)
+                // )}
               />
               {bookingInfo}
               <p className={css.smallPrint}>

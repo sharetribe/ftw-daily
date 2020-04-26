@@ -224,8 +224,8 @@
     margin-top: 50px;
     margin-bottom: 0px;
     /* contentContainer's full width - (bookingColumn + two paddings + margin + border) */
-    max-width: calc(100%);
-    flex-basis: calc(100%);
+    max-width: calc(100% - 433px);
+    flex-basis: calc(100% - 433px);
     flex-shrink: 0;
     flex-grow: 1;
   }
@@ -450,11 +450,6 @@
 .sectionMap {
   padding: 0 24px;
   margin-bottom: 35px;
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-  justify-content: center;
-  align-items: center;
 
   @media (--viewportMedium) {
     padding: 0;
