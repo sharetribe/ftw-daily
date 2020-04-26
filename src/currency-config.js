@@ -17,6 +17,8 @@ export const subUnitDivisors = {
   SEK: 100,
   SGD: 100,
   USD: 100,
+  PEN: 100,
+
 };
 
 // Currency formatting options.

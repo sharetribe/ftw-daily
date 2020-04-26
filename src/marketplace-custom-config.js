@@ -4,44 +4,70 @@
 
 export const amenities = [
   {
-    key: 'towels',
-    label: 'Towels',
+    key: 'artesanías',
+    label: 'Artesanías',
   },
   {
-    key: 'bathroom',
-    label: 'Bathroom',
+    key: 'accesorios',
+    label: 'Accesorios',
   },
   {
-    key: 'swimming_pool',
-    label: 'Swimming pool',
+    key: 'gourmet y bebidas',
+    label: 'Gourmet y Bebidas',
   },
   {
-    key: 'own_drinks',
-    label: 'Own drinks allowed',
+    key: 'belleza y bienestar',
+    label: 'Belleza y Bienestar',
   },
   {
-    key: 'jacuzzi',
-    label: 'Jacuzzi',
+    key: 'juegos y juguetes',
+    label: 'Juegos y Juguetes',
   },
   {
-    key: 'audiovisual_entertainment',
-    label: 'Audiovisual entertainment',
+    key: 'decoración',
+    label: 'Decoración',
   },
   {
-    key: 'barbeque',
-    label: 'Barbeque',
+    key: 'jardinería y jardín',
+    label: 'Jardinería y jardín',
   },
   {
-    key: 'own_food_allowed',
-    label: 'Own food allowed',
+    key: 'mascotas',
+    label: 'Mascotas',
   },
+   {
+    key: 'librería y artículos de arte',
+    label: 'Librería y Artículos de arte',
+  },
+   {
+    key: 'turismo',
+    label: 'Turismo',
+  },
+   {
+    key: 'artículos deportivos',
+    label: 'Artículos deportivos',
+  },
+   {
+    key: 'servicios',
+    label: 'Servicios',
+  },
+   {
+    key: 'otras categorías',
+    label: 'Otras Categorías',
+  },
+
+
+
+
+
+
 ];
 
 export const categories = [
-  { key: 'smoke', label: 'Smoke' },
-  { key: 'electric', label: 'Electric' },
-  { key: 'wood', label: 'Wood' },
-  { key: 'other', label: 'Other' },
+  { key: 'productos', label: 'Productos' },
+  { key: 'servicios', label: 'Servicios' },
+  { key: 'otros', label: 'Otros' },
+
 ];
 
 // Price filter configuration
@@ -73,14 +99,14 @@ export const sortConfig = {
   relevanceKey: 'relevance',
 
   options: [
-    { key: 'createdAt', label: 'Newest' },
-    { key: '-createdAt', label: 'Oldest' },
-    { key: '-price', label: 'Lowest price' },
-    { key: 'price', label: 'Highest price' },
+    { key: 'createdAt', label: 'Último' },
+    { key: '-createdAt', label: 'Más antiguo' },
+    { key: '-price', label: 'Precio más bajo' },
+    { key: 'price', label: 'Precio más alto' },
 
     // The relevance is only used for keyword search, but the
     // parameter isn't sent to the Marketplace API. The key is purely
     // for handling the internal state of the sorting dropdown.
-    { key: 'relevance', label: 'Relevance', longLabel: 'Relevance (Keyword search)' },
+    { key: 'relevancia', label: 'Relevancia', longLabel: 'Relevancia (búsqueda de palabras)' },
   ],
 };

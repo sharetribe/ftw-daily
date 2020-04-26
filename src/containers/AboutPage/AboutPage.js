@@ -35,53 +35,42 @@ const AboutPage = () => {
         </LayoutWrapperTopbar>
 
         <LayoutWrapperMain className={css.staticPageWrapper}>
-          <h1 className={css.pageTitle}>Experience the unique Finnish home sauna.</h1>
+          <h1 className={css.pageTitle}>¡Reactivemos juntos a las Mypes!</h1>
           <img className={css.coverImage} src={image} alt="My first ice cream." />
 
           <div className={css.contentWrapper}>
             <div className={css.contentSide}>
-              <p>Did you know that Finland has 3.2 million saunas - almost one sauna per person!</p>
+              <p>¿Sabías qué en el Perú hay más 1.9 millones de Mypes (Micro y Pequeñas empresas) - de cada 100 puestos de trabajo 85% se generan de la actividad de Mypes Fuente: {' '}
+                <ExternalLink href="https://andina.com.pe/AGENCIA/andina.pe/Agencia/ndina.pe/agencia/noticia-produce-micro-y-pequenas-empresas-aportan-24-al-pbi-nacional-711589.aspx">PRODUCE</ExternalLink></p>
             </div>
 
             <div className={css.contentMain}>
               <h2>
-                Most of the Finnish saunas are located at the homes of individuals - indeed, most
-                people in Finland live in an apartment with sauna in it. In addition, lots of people
-                have lakeside summer cottages, which also typically come with a separate sauna
-                building near the waterfront.
+                Las Mypes (Micro y Pequeñas Empresas) representan el el 99.4% del total de empresas formales en la economía peruana - en efecto, 96.2% son microempresas y 3.2% pequeñas. La principal actividad es comercio y servicios (87.6%), y el resto (12.4%) se dedican a la actividad productiva. (manufactura, construcción, agropecuaria, minería y pesca).
               </h2>
 
               <p>
-                To truly experience a Finnish sauna, you need to look beyond the public saunas, and
-                instead visit a real home or cottage sauna. Saunatime makes this possible for
-                everyone. All our saunas are owned by individuals willing to let tourists and other
-                curious visitors to enter their sacred spaces.
-              </p>
-
-              <h3 className={css.subtitle}>Are you a sauna owner?</h3>
+                Fuente: {' '}
+                <ExternalLink href="http://ogeiee.produce.gob.pe/index.php/shortcode/estadistica-oee/estadisticas-mipyme">SUNAT 2017 (PRODUCE-OGEIEE)</ExternalLink>  
+               </p>
+        
+              <h3 className={css.subtitle}>¿Eres una Mype?</h3>
 
               <p>
-                Saunatime offers you a good way to earn some extra cash! If you're not using your
-                sauna every evening, why not rent it to other people while it's free. And even if
-                you are using your sauna every evening (we understand, it's so good), why not invite
-                other people to join you when the sauna is already warm! A shared sauna experience
-                is often a more fulfilling one.
-              </p>
+                Sabemos que debido a la crisis por el Covid-19 tu negocio se ha visto afecto. No estás solo, Reactivaté Peru, programa de la {' '}
+                <ExternalLink href="https://www.facebook.com/REDMEPenaccion/">REDMEP</ExternalLink> te acompañara a que tu negocio se adapte a las nuevas tecnologías dandote acceso está plataforma dónde podras conectar con clientes, así como acceder a capacitaciones.              </p>
 
               <h3 id="contact" className={css.subtitle}>
-                Create your own marketplace like Saunatime
+                ¿Cómo me inscribo?
               </h3>
               <p>
-                Saunatime is brought to you by the good folks at{' '}
-                <ExternalLink href="http://sharetribe.com">Sharetribe</ExternalLink>. Would you like
-                to create your own marketplace platform a bit like Saunatime? Or perhaps a mobile
-                app? With Sharetribe it's really easy. If you have a marketplace idea in mind, do
-                get in touch!
+                Para comenzar pulsa {' '}
+                <ExternalLink href="http://localhost:3000/signup">Regístrarte</ExternalLink>. Luego de tu registro nos comunicaremos contigo para completar tu registro y
+                  para que comiencés a subir tus productos o servicios.                
               </p>
               <p>
-                You can also checkout our{' '}
-                <ExternalLink href={siteFacebookPage}>Facebook</ExternalLink> and{' '}
-                <ExternalLink href={siteTwitterPage}>Twitter</ExternalLink>.
+                Si tienes alguna duda puede encontrarnos en{' '}
+                <ExternalLink href={siteFacebookPage}>Facebook</ExternalLink>.
               </p>
             </div>
           </div>

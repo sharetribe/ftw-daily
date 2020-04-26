@@ -216,16 +216,12 @@ class EditListingWizard extends Component {
     const { onPublishListingDraft, currentUser, stripeAccount } = this.props;
 
     const stripeConnected =
-      currentUser && currentUser.stripeAccount && !!currentUser.stripeAccount.id;
+      currentUser ;
 
-    const stripeAccountData = stripeConnected ? getStripeAccountData(stripeAccount) : null;
+    
 
-    const requirementsMissing =
-      stripeAccount &&
-      (hasRequirements(stripeAccountData, 'past_due') ||
-        hasRequirements(stripeAccountData, 'currently_due'));
-
-    if (stripeConnected && !requirementsMissing) {
+    
+    if (stripeConnected) {
       onPublishListingDraft(id);
     } else {
       this.setState({
