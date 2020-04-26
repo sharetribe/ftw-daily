@@ -115,7 +115,10 @@ const Footer = props => {
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=',
+                     
+                        '?address=Lima%2C%20Perú&bounds=-12.4303%2C25.-77.7344%2C-11.6157%2C-76.6879&origin=60.1-12.0230%2C-76.9497',
+
+
                     }}
                     className={css.link}
                   >
