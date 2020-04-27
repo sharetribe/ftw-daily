@@ -154,7 +154,7 @@ export const colors = [
 export const disciplines = [
   { key: 'springen', label: 'Springen' },
   { key: 'dressur', label: 'Dressur' },
-  { key: 'voltegieren', label: 'Voltegieren' },
+  { key: 'voltigieren', label: 'Voltigieren' },
   { key: 'freizeit', label: 'Freizeit' },
   { key: 'western', label: 'Western' },
   { key: 'polo', label: 'Polo' },
@@ -170,7 +170,7 @@ export const disciplines = [
   { key: 'traber', label: 'Traber' },
 ];
 export const characteristics = [
-  { key: 'lizenzeirt', label: 'Lizenzeirt' },
+  { key: 'lizenziert', label: 'Lizenziert' },
   { key: 'turniererfahrung', label: 'Turniererfahrung' },
   { key: 'roh', label: 'Roh' },
   { key: 'longiert', label: 'Longiert' },
