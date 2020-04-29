@@ -2,6 +2,7 @@
 
 .root {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   background-color: var(--matterColorBright);
   position: relative;
@@ -17,6 +18,11 @@
     margin-bottom: 8px;
     height: auto;
   }
+}
+
+.sortingPanel {
+  width: 100%;
+  margin-bottom: 24px;
 }
 
 .searchResultSummary {

@@ -38,8 +38,9 @@ class SelectSingleFilterPopup extends Component {
       options,
       initialValue,
       contentPlacementOffset,
+      elementBeforeLabel
     } = this.props;
-
+    
     // resolve menu label text and class
     const menuLabel = initialValue ? optionLabel(options, initialValue) : label;
     const menuLabelClass = initialValue ? css.menuLabelSelected : css.menuLabel;
@@ -54,7 +55,7 @@ class SelectSingleFilterPopup extends Component {
         onToggleActive={this.onToggleActive}
         isOpen={this.state.isOpen}
       >
-        <MenuLabel className={menuLabelClass}>{menuLabel}</MenuLabel>
+        <MenuLabel className={menuLabelClass}>{elementBeforeLabel} {menuLabel}</MenuLabel>
         <MenuContent className={css.menuContent}>
           {options.map(option => {
             // check if this option is selected
@@ -90,6 +91,7 @@ SelectSingleFilterPopup.defaultProps = {
   className: null,
   initialValue: null,
   contentPlacementOffset: 0,
+  iconBeforeLabel: null,
 };
 
 SelectSingleFilterPopup.propTypes = {

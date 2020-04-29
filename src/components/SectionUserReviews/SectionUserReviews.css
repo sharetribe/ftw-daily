@@ -25,6 +25,7 @@
   @apply --marketplaceH3FontStyles;
   margin-top: 0;
   text-align: center;
+  margin-top: 20px;
   margin-bottom: 30px;
   font-weight: 600;
   font-size: 20px;
@@ -33,6 +34,7 @@
 
   @media (--viewportMedium) {
     margin-bottom: 50px;
+    margin-top: 0;
   }
 }
 .reviewsCards {

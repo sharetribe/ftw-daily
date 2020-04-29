@@ -985,7 +985,7 @@
   "TransactionPanel.sendingMessageNotAllowed": "This user has been removed. Sending message to the user is not possible anymore.",
   "TransactionPanel.sendMessagePlaceholder": "Send a message to {name}…",
   "UserCard.contactUser": "Contact",
-  "UserCard.heading": "Hello, I'm {name}.",
+  "UserCard.heading": "Hello, I'm {name}",
   "UserCard.showFullBioLink": "more",
   "UserCard.viewProfileLink": "View profile",
   "UserDisplayName.banned": "Banned user",
