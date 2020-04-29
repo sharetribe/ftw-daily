@@ -1,5 +1,15 @@
 @import '../../marketplace.css';
 
+.contactBanner {
+  display: none;
+  max-width: 100%;
+  margin-top: 50px;
+  border-radius: 4px;
+  @media (--viewportLarge) {
+    display: block;
+  }
+}
+
 .contactButton {
   flex: 1;
   display: flex;
