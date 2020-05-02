@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form as FinalForm, Field } from 'react-final-form';
-import { intlShape, injectIntl } from '../../util/reactIntl';
+import { intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import { Form, LocationAutocompleteInput } from '../../components';
 
 import css from './TopbarSearchForm.css';
-
-const identity = v => v;
 
 class TopbarSearchFormComponent extends Component {
   constructor(props) {
@@ -47,7 +45,7 @@ class TopbarSearchFormComponent extends Component {
             <Form className={classes} onSubmit={preventFormSubmit}>
               <Field
                 name="location"
-                format={identity}
+                format={null}
                 render={({ input, meta }) => {
                   const { onChange, ...restInput } = input;
 

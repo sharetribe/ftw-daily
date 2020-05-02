@@ -40,36 +40,6 @@ exports[`SearchPageComponent matches snapshot 1`] = `
       }
       primaryFilters={
         Object {
-          "dateRangeFilter": Object {
-            "config": Object {
-              "active": true,
-            },
-            "paramName": "dates",
-          },
-          "keywordFilter": Object {
-            "config": Object {
-              "active": true,
-            },
-            "paramName": "keywords",
-          },
-          "priceFilter": Object {
-            "config": Object {
-              "max": 1000,
-              "min": 0,
-              "step": 5,
-            },
-            "paramName": "price",
-          },
-        }
-      }
-      resultsCount={0}
-      rootClassName={null}
-      searchInProgress={false}
-      searchListingsError={null}
-      searchParamsAreInSync={true}
-      searchParamsForPagination={Object {}}
-      secondaryFilters={
-        Object {
           "amenitiesFilter": Object {
             "options": Array [
               Object {
@@ -96,8 +66,29 @@ exports[`SearchPageComponent matches snapshot 1`] = `
             ],
             "paramName": "pub_category",
           },
+          "dateRangeFilter": Object {
+            "config": Object {
+              "active": true,
+            },
+            "paramName": "dates",
+          },
+          "priceFilter": Object {
+            "config": Object {
+              "max": 1000,
+              "min": 0,
+              "step": 5,
+            },
+            "paramName": "price",
+          },
         }
       }
+      resultsCount={0}
+      rootClassName={null}
+      searchInProgress={false}
+      searchListingsError={null}
+      searchParamsAreInSync={true}
+      searchParamsForPagination={Object {}}
+      secondaryFilters={null}
       showAsModalMaxWidth={768}
       urlQueryParams={Object {}}
     />

@@ -17,6 +17,7 @@
 }
 
 .content {
+  border-bottom-color: #c9bd9c !important;
   @apply --marketplaceModalBaseStyles;
   padding-top: 29px;
 }
@@ -92,7 +93,7 @@
   @apply --marketplaceModalCloseStyles;
 
   /* This is not a real modal, z-index should not be modal's z-index */
-  z-index: 1;
+  z-index: 2;
 }
 
 .closeText {
@@ -146,4 +147,8 @@
 
 .error {
   @apply --marketplaceModalErrorStyles;
+}
+
+.layoutWrapperMain h1 {
+  margin-bottom: 0px !important;
 }

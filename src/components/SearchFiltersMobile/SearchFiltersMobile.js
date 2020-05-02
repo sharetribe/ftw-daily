@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { object, string, bool, number, func, shape, array } from 'prop-types';
 import classNames from 'classnames';
-import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import omit from 'lodash/omit';
-
-import config from '../../config';
 
 import routeConfiguration from '../../routeConfiguration';
 import { parseDateFromISO8601, stringifyDateToISO8601 } from '../../util/dates';
@@ -13,11 +11,9 @@ import { createResourceLocatorString } from '../../util/routes';
 import {
   ModalInMobile,
   Button,
-  KeywordFilter,
   PriceFilter,
   SelectSingleFilter,
   SelectMultipleFilter,
-  SortBy,
   BookingDateRangeFilter,
 } from '../../components';
 import { propTypes } from '../../util/types';
@@ -38,8 +34,6 @@ class SearchFiltersMobileComponent extends Component {
     this.handleSelectMultiple = this.handleSelectMultiple.bind(this);
     this.handlePrice = this.handlePrice.bind(this);
     this.handleDateRange = this.handleDateRange.bind(this);
-    this.handleKeyword = this.handleKeyword.bind(this);
-    this.handleSortBy = this.handleSortBy.bind(this);
     this.initialValue = this.initialValue.bind(this);
     this.initialValues = this.initialValues.bind(this);
     this.initialPriceRangeValue = this.initialPriceRangeValue.bind(this);
@@ -124,24 +118,6 @@ class SearchFiltersMobileComponent extends Component {
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   }
 
-  handleKeyword(urlParam, keywords) {
-    const { urlQueryParams, history } = this.props;
-    const queryParams = urlParam
-      ? { ...urlQueryParams, [urlParam]: keywords }
-      : omit(urlQueryParams, urlParam);
-
-    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
-  }
-
-  handleSortBy(urlParam, sort) {
-    const { urlQueryParams, history } = this.props;
-    const queryParams = urlParam
-      ? { ...urlQueryParams, [urlParam]: sort }
-      : omit(urlQueryParams, urlParam);
-
-    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
-  }
-
   // Reset all filter query parameters
   resetAll(e) {
     const { urlQueryParams, history, filterParamNames } = this.props;
@@ -198,7 +174,6 @@ class SearchFiltersMobileComponent extends Component {
     const {
       rootClassName,
       className,
-      sort,
       listingsAreLoaded,
       resultsCount,
       searchInProgress,
@@ -210,7 +185,6 @@ class SearchFiltersMobileComponent extends Component {
       amenitiesFilter,
       priceFilter,
       dateRangeFilter,
-      keywordFilter,
       intl,
     } = this.props;
 
@@ -284,7 +258,7 @@ class SearchFiltersMobileComponent extends Component {
     const dateRangeFilterElement =
       dateRangeFilter && dateRangeFilter.config.active ? (
         <BookingDateRangeFilter
-          id="SearchFiltersMobile.dateRangeFilter"
+          id="SearchFilters.dateRangeFilter"
           urlParam={dateRangeFilter.paramName}
           onSubmit={this.handleDateRange}
           liveEdit
@@ -292,37 +266,6 @@ class SearchFiltersMobileComponent extends Component {
           initialValues={initialDateRange}
         />
       ) : null;
-
-    const initialKeyword = this.initialValue(keywordFilter.paramName);
-    const keywordLabel = intl.formatMessage({
-      id: 'SearchFiltersMobile.keywordLabel',
-    });
-    const keywordFilterElement =
-      keywordFilter && keywordFilter.config.active ? (
-        <KeywordFilter
-          id={'SearchFiltersMobile.keywordFilter'}
-          name="keyword"
-          urlParam={keywordFilter.paramName}
-          label={keywordLabel}
-          onSubmit={this.handleKeyword}
-          liveEdit
-          showAsPopup={false}
-          initialValues={initialKeyword}
-        />
-      ) : null;
-
-    const isKeywordFilterActive = !!initialKeyword;
-
-    const sortBy = config.custom.sortConfig.active ? (
-      <SortBy
-        rootClassName={css.sortBy}
-        menuLabelRootClassName={css.sortByMenuLabel}
-        sort={sort}
-        showAsPopup
-        isKeywordFilterActive={isKeywordFilterActive}
-        onSelect={this.handleSortBy}
-      />
-    ) : null;
 
     return (
       <div className={classes}>
@@ -335,7 +278,6 @@ class SearchFiltersMobileComponent extends Component {
           <Button rootClassName={filtersButtonClasses} onClick={this.openFilters}>
             <FormattedMessage id="SearchFilters.filtersButtonLabel" className={css.mapIconText} />
           </Button>
-          {sortBy}
           <div className={css.mapIcon} onClick={onMapIconClick}>
             <FormattedMessage id="SearchFilters.openMapView" className={css.mapIconText} />
           </div>
@@ -357,7 +299,6 @@ class SearchFiltersMobileComponent extends Component {
           </div>
           {this.state.isFiltersOpenOnMobile ? (
             <div className={css.filtersWrapper}>
-              {keywordFilterElement}
               {categoryFilterElement}
               {amenitiesFilterElement}
               {priceFilterElement}
@@ -379,7 +320,6 @@ class SearchFiltersMobileComponent extends Component {
 SearchFiltersMobileComponent.defaultProps = {
   rootClassName: null,
   className: null,
-  sort: null,
   resultsCount: null,
   searchingInProgress: false,
   selectedFiltersCount: 0,
@@ -394,7 +334,6 @@ SearchFiltersMobileComponent.propTypes = {
   rootClassName: string,
   className: string,
   urlQueryParams: object.isRequired,
-  sort: string,
   listingsAreLoaded: bool.isRequired,
   resultsCount: number,
   searchingInProgress: bool,

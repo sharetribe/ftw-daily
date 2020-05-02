@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from '../../util/reactIntl';
+import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { createSlug, stringify } from '../../util/urlHelpers';
 import { NamedLink } from '../../components';
@@ -260,7 +260,7 @@ const PanelHeading = props => {
         />
       );
     default:
-      console.warn('Unknown state given to panel heading.');
+      console.warning('Unknown state given to panel heading.');
       return null;
   }
 };

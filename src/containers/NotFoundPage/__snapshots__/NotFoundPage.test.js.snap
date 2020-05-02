@@ -36,7 +36,7 @@ exports[`NotFoundPageComponent matches snapshot 1`] = `
               values={Object {}}
             />
           </p>
-          <injectIntl(LocationSearchFormComponent)
+          <InjectIntl(LocationSearchFormComponent)
             onSubmit={[Function]}
           />
         </div>
@@ -46,7 +46,7 @@ exports[`NotFoundPageComponent matches snapshot 1`] = `
       className={null}
       rootClassName={null}
     >
-      <injectIntl(Footer) />
+      <InjectIntl(Footer) />
     </LayoutWrapperFooter>
   </LayoutSingleColumn>
 </Page>

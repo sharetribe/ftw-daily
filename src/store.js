@@ -3,7 +3,6 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import createReducer from './reducers';
 import * as analytics from './analytics/analytics';
-import config from './config';
 
 /**
  * Create a new store with the given initial state. Adds Redux
@@ -12,12 +11,20 @@ import config from './config';
 export default function configureStore(initialState = {}, sdk = null, analyticsHandlers = []) {
   const middlewares = [thunk.withExtraArgument(sdk), analytics.createMiddleware(analyticsHandlers)];
 
+  // const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  
   // Enable Redux Devtools in client side dev mode.
+  // const composeEnhancers =
+  //   config.dev && typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  //     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  //     : compose;
   const composeEnhancers =
-    config.dev && typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-      ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-      : compose;
-
+  typeof window === 'object' &&
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?   
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+      'trace':true,
+    }) : compose;
+      
   const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 
   const store = createStore(createReducer(), initialState, enhancer);

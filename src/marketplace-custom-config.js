@@ -1,112 +1,316 @@
 /*
  * Marketplace specific configuration.
  */
+export const capacityOptions = [
+  { key: '1to3', label: '1 to 3' },
+  { key: '4to6', label: '4 to 6' },
+  { key: '7to9', label: '7 to 9' },
+  { key: '10plus', label: '10 plus' },
+];
 
 export const amenities = [
   {
     key: 'artesanías',
     label: 'Artesanías',
-  },
-  {
-    key: 'accesorios',
-    label: 'Accesorios',
-  },
-  {
-    key: 'gourmet y bebidas',
-    label: 'Gourmet y Bebidas',
-  },
-  {
-    key: 'belleza y bienestar',
-    label: 'Belleza y Bienestar',
-  },
-  {
-    key: 'juegos y juguetes',
-    label: 'Juegos y Juguetes',
+    tip: 'breed',
+    weight: [
+      {
+        key: 'accesorios',
+        label: 'Accesorios',
+        tip: 'Akitas, Bernese Mountain Dog, Bullmastiff etc...',
+      },
+      {
+        key: 'gourmet y bebidas',
+        label: 'Gourmet y Bebidas',
+        tip: 'German Shepherd, Retriever, Siberian Husky, Weimaraner etc...'
+      },
+      {
+        key: 'belleza y bienestar',
+        label: 'Belleza y Bienestar',
+        tip: 'Whippet, Staffordshire Bull Terrier, Spaniel, Border Collie etc...',
+      },
+      {
+        key: 'juegos y juguetes',
+        label: 'Juegos y Juguetes',
+        tip: 'Pomeranian, Pug, Yorkshire Terrier, Papillion etc...',
+      },
+    ],
   },
   {
     key: 'decoración',
     label: 'Decoración',
+    weight: [
+      {
+        key: 'jardinería y jardín',
+        label: 'Jardinería y jardín',
+      },
+      {
+        key: 'mascotas',
+        label: 'Mascotas',
+      },
+      {
+        key: 'librería y artículos de arte',
+        label: 'Librería y Artículos de arte',
+      },
+      {
+        key: 'turismo',
+        label: 'Turismo',
+      },
+    ],
   },
   {
-    key: 'jardinería y jardín',
-    label: 'Jardinería y jardín',
-  },
-  {
-    key: 'mascotas',
-    label: 'Mascotas',
-  },
-   {
-    key: 'librería y artículos de arte',
-    label: 'Librería y Artículos de arte',
-  },
-   {
-    key: 'turismo',
-    label: 'Turismo',
-  },
-   {
     key: 'artículos deportivos',
     label: 'Artículos deportivos',
+    weight: [
+      {
+        key: 'servicios',
+        label: 'Servicios',
+      },
+      {
+        key: 'otras categorías',
+        label: 'Otras Categorías',
+      },
+      {
+        key: 'medium',
+        label: 'Medium (101+ lbs)',
+      },
+      {
+        key: 'small',
+        label: 'Small (0-15 lbs)',
+      },
+    ],
   },
-   {
-    key: 'servicios',
-    label: 'Servicios',
+  {
+    key: 'cat',
+    label: 'Cats',
+    weight: [
+      {
+        key: 'giant',
+        label: 'Giant (101+ lbs)',
+      },
+      {
+        key: 'large',
+        label: 'Large (41-100 lbs)',
+      },
+      {
+        key: 'medium',
+        label: 'Medium (101+ lbs)',
+      },
+      {
+        key: 'small',
+        label: 'Small (0-15 lbs)',
+      },
+    ],
   },
-   {
-    key: 'otras categorías',
-    label: 'Otras Categorías',
+
+  {
+    key: 'rabbit',
+    label: 'Rabbits',
+    weight: [
+      {
+        key: 'giant',
+        label: 'Giant (101+ lbs)',
+      },
+      {
+        key: 'large',
+        label: 'Large (41-100 lbs)',
+      },
+      {
+        key: 'medium',
+        label: 'Medium (101+ lbs)',
+      },
+      {
+        key: 'small',
+        label: 'Small (0-15 lbs)',
+      },
+    ],
   },
 
-
-
-
-
-
+  {
+    key: 'bird',
+    label: 'Pet Birds',
+    weight: [
+      {
+        key: 'giant',
+        label: 'Giant (101+ lbs)',
+      },
+      {
+        key: 'large',
+        label: 'Large (41-100 lbs)',
+      },
+      {
+        key: 'medium',
+        label: 'Medium (101+ lbs)',
+      },
+      {
+        key: 'small',
+        label: 'Small (0-15 lbs)',
+      },
+    ],
+  },
+  {
+    key: 'fish',
+    label: 'Aquarium Fish',
+    weight: [
+      {
+        key: 'giant',
+        label: 'Giant (101+ lbs)',
+      },
+      {
+        key: 'large',
+        label: 'Large (41-100 lbs)',
+      },
+      {
+        key: 'medium',
+        label: 'Medium (101+ lbs)',
+      },
+      {
+        key: 'small',
+        label: 'Small (0-15 lbs)',
+      },
+    ],
+  },
+  {
+    key: 'horse',
+    label: 'Horses',
+    weight: [
+      {
+        key: 'giant',
+        label: 'Giant (101+ lbs)',
+      },
+      {
+        key: 'large',
+        label: 'Large (41-100 lbs)',
+      },
+      {
+        key: 'medium',
+        label: 'Medium (101+ lbs)',
+      },
+      {
+        key: 'small',
+        label: 'Small (0-15 lbs)',
+      },
+    ],
+  },
+  {
+    key: 'other',
+    label: 'Other (Please state)',
+    weight: [
+      {
+        key: 'giant',
+        label: 'Giant (101+ lbs)',
+      },
+      {
+        key: 'large',
+        label: 'Large (41-100 lbs)',
+      },
+      {
+        key: 'medium',
+        label: 'Medium (101+ lbs)',
+      },
+      {
+        key: 'small',
+        label: 'Small (0-15 lbs)',
+      },
+    ],
+  },
 ];
 
 export const categories = [
-  { key: 'productos', label: 'Productos' },
-  { key: 'servicios', label: 'Servicios' },
-  { key: 'otros', label: 'Otros' },
+  { key: '0', label: 'Pet Owners' },
+  { key: '1', label: 'Pet Sitter' },
+  { key: '2', label: 'Pet Services' },
+];
 
+export const equipments = [
+  { key: 'wifi', label: 'Wifi' },
+  { key: 'garden', label: 'Garden' },
+  { key: 'wheelchair', label: 'Wheelchair Access' },
+  { key: 'parking', label: 'Parking' },
+  { key: 'transport', label: 'Transport Links' },
+  { key: 'cable', label: 'Cable TV' },
+  { key: 'elevator', label: 'Elevator in Building' },
+  { key: 'aircon', label: 'Air Con' },
+  { key: 'suitable', label: 'Suitable for families' },
+  { key: 'laundry', label: 'Laundry Facilities' },
+];
+export const locations = [
+  { key: 'sea', label: 'By the Sea' },
+  { key: 'mountain', label: 'Mountain Views' },
+  { key: 'city', label: 'City Pad' },
+  { key: 'suburbs', label: 'Suburbs' },
+  { key: 'rural', label: 'Rural Location' },
+];
+export const info = [
+  { key: 'travel', label: 'Willing to travel	' },
+  { key: 'admin', label: 'Can Administer Meds' },
+  { key: 'children', label: 'Have children under 18' },
+  { key: 'car', label: 'Car Owner' },
+];
+
+export const service = [
+  { key: 'walking', label: 'Artesanías' },
+  { key: 'surgeon', label: 'Accesorios' },
+  { key: 'groomer', label: 'Belleza y Bienestar' },
+  { key: 'store', label: 'Decoración' },
+  { key: 'food', label: 'Jardinería y jardín' },
+  { key: 'tech', label: 'Mascotas' },
+  { key: 'accessories', label: 'Librería y Artículos de arte' },
+  { key: 'photo', label: 'Turismo' },
+   { key: 'photo', label: 'Artículos deportivos' },
+    { key: 'photo', label: 'Servicios' },
+     { key: 'photo', label: 'Otras Categorías' },
+];
+
+export const size = [
+  {
+    key: 'giant',
+    label: 'giant (101+ lbs)',
+  },
+  {
+    key: 'large',
+    label: 'large (41-100 lbs)',
+  },
+  {
+    key: 'medium',
+    label: 'medium (101+ lbs)',
+  },
+  {
+    key: 'small',
+    label: 'small (0-15 lbs)',
+  },
+];
+
+export const rate = [
+  { key: 'h', label: 'Por Hora' },
+  { key: 'u', label: 'Por Unidad' },
+  { key: 'd', label: 'Por Día' },
+  { key: 'o', label: 'Otro' },
+];
+
+export const preferredLocations = [
+  { key: 'italy', label: 'Italy' },
+  { key: 'germany', label: 'Germany' },
+  { key: 'china', label: 'China' },
 ];
 
 // Price filter configuration
 // Note: unlike most prices this is not handled in subunits
 export const priceFilterConfig = {
   min: 0,
-  max: 1000,
+  max: 100,
   step: 5,
+};
+
+// Price filter configuration
+// Note: unlike most prices this is not handled in subunits
+export const timePickerConfig = {
+  min: 0,
+  max: 23,
+  step: 1,
 };
 
 // Activate booking dates filter on search page
 export const dateRangeFilterConfig = {
   active: true,
-};
-
-// Activate keyword filter on search page
-
-// NOTE: If you are ordering search results by distance the keyword search can't be used at the same time.
-// You can turn off ordering by distance in config.js file
-export const keywordFilterConfig = {
-  active: true,
-};
-
-export const sortConfig = {
-  // Enable/disable the sorting control in the SearchPage
-  active: true,
-
-  // Internal key for the relevance option, see notes below.
-  relevanceKey: 'relevance',
-
-  options: [
-    { key: 'createdAt', label: 'Último' },
-    { key: '-createdAt', label: 'Más antiguo' },
-    { key: '-price', label: 'Precio más bajo' },
-    { key: 'price', label: 'Precio más alto' },
-
-    // The relevance is only used for keyword search, but the
-    // parameter isn't sent to the Marketplace API. The key is purely
-    // for handling the internal state of the sorting dropdown.
-    { key: 'relevancia', label: 'Relevancia', longLabel: 'Relevancia (búsqueda de palabras)' },
-  ],
 };

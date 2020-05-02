@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bool, func, node, object, string } from 'prop-types';
 import classNames from 'classnames';
-import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 
 import { FilterForm } from '../../forms';
 import css from './FilterPlain.css';

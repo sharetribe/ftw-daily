@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape } from '../../util/reactIntl';
+import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import { formatMoney } from '../../util/currency';
@@ -35,10 +35,20 @@ class SearchMapPriceLabel extends Component {
     const priceLabelClasses = classNames(css.priceLabel, { [css.priceLabelActive]: isActive });
     const caretClasses = classNames(css.caret, { [css.caretActive]: isActive });
 
+    let altformattedPrice = formattedPrice;
+
+    if (currentListing.attributes.publicData.user_type == 0) {
+      altformattedPrice = <div className={css.paw} />;
+    } else if (currentListing.attributes.publicData.user_type == 2) {
+      altformattedPrice = <div className={css.location} />;
+    } else if (currentListing.attributes.publicData.user_type == 1) {
+      altformattedPrice = <div className={css.petsitter} />;
+    }
+
     return (
       <button className={classes} onClick={() => onListingClicked(currentListing)}>
         <div className={css.caretShadow} />
-        <div className={priceLabelClasses}>{formattedPrice}</div>
+        <div className={priceLabelClasses}>{altformattedPrice}</div>
         <div className={caretClasses} />
       </button>
     );

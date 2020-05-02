@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { FormattedMessage } from '../../util/reactIntl';
+import { FormattedMessage } from 'react-intl';
 import { LISTING_STATE_DRAFT } from '../../util/types';
 import { ensureOwnListing } from '../../util/data';
 import { ListingLink } from '../../components';
@@ -14,14 +14,14 @@ const EditListingPoliciesPanel = props => {
     className,
     rootClassName,
     listing,
-    disabled,
-    ready,
     onSubmit,
     onChange,
     submitButtonText,
     panelUpdated,
     updateInProgress,
     errors,
+    user_type,
+    currentUser,
   } = props;
 
   const classes = classNames(rootClassName || css.root, className);
@@ -29,38 +29,54 @@ const EditListingPoliciesPanel = props => {
   const { publicData } = currentListing.attributes;
 
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
-  const panelTitle = isPublished ? (
+  const user_name = user_type === 0 ? 'owner' : user_type === 1 ? 'sitter' : 'service';
+  const publish = isPublished ? 'title.' : 'createListingTitle.';
+  const PoliciesPanelTitle = 'EditListingPoliciesPanel.' + publish + user_name;
+
+  let panelTitle = isPublished ? (
     <FormattedMessage
-      id="EditListingPoliciesPanel.title"
+      id={PoliciesPanelTitle}
       values={{ listingTitle: <ListingLink listing={listing} /> }}
     />
   ) : (
-    <FormattedMessage id="EditListingPoliciesPanel.createListingTitle" />
+    <FormattedMessage id={PoliciesPanelTitle} />
   );
+
+  let panelSubTitle = isPublished ? (
+    <span>Please go to your profile and verify your identity to proceed posting your listing.</span>
+  ) : (
+    <span>Please go to your profile and verify your identity to proceed posting your listing.</span>
+  );
+
+
+  if (currentUser.attributes.profile.publicData.yotiVerified == 'YES') {
+    panelSubTitle = 'Your account is already verified';
+  }
 
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
+      {panelSubTitle}
       <EditListingPoliciesForm
         className={css.form}
         publicData={publicData}
-        initialValues={{ rules: publicData.rules }}
+        initialValues={{ identify: publicData.identify }}
         onSubmit={values => {
-          const { rules = '' } = values;
+          const { identify = '' } = values;
           const updateValues = {
             publicData: {
-              rules,
+              identify,
             },
           };
           onSubmit(updateValues);
         }}
         onChange={onChange}
-        disabled={disabled}
-        ready={ready}
         saveActionMsg={submitButtonText}
         updated={panelUpdated}
         updateInProgress={updateInProgress}
         fetchErrors={errors}
+        user_type={user_type}
+        currentUser={currentUser}
       />
     </div>
   );
@@ -81,8 +97,6 @@ EditListingPoliciesPanel.propTypes = {
   // We cannot use propTypes.listing since the listing might be a draft.
   listing: object,
 
-  disabled: bool.isRequired,
-  ready: bool.isRequired,
   onSubmit: func.isRequired,
   onChange: func.isRequired,
   submitButtonText: string.isRequired,

@@ -1,6 +1,6 @@
 import React from 'react';
 import { bool, node, object, oneOf, string } from 'prop-types';
-import { FormattedMessage, intlShape } from '../../util/reactIntl';
+import { FormattedMessage, intlShape } from 'react-intl';
 import * as validators from '../../util/validators';
 import { FieldBirthdayInput, FieldCheckbox, FieldTextInput } from '../../components';
 
@@ -8,8 +8,6 @@ import * as normalizePhoneNumberUS from './normalizePhoneNumberUS';
 import css from './PayoutDetailsForm.css';
 
 const MIN_STRIPE_ACCOUNT_AGE = 18;
-
-const identity = v => v;
 
 const PayoutDetailsPersonalDetails = props => {
   const {
@@ -25,7 +23,6 @@ const PayoutDetailsPersonalDetails = props => {
     showOwnershipPercentageField,
     showPersonalIdNumberField,
     showPhoneNumberField,
-    form,
   } = props;
 
   const organizationTitleLabel = intl.formatMessage({
@@ -248,7 +245,7 @@ const PayoutDetailsPersonalDetails = props => {
           label={birthdayLabel}
           labelForMonth={birthdayLabelMonth}
           labelForYear={birthdayLabelYear}
-          format={identity}
+          format={null}
           valueFromForm={values.birthDate}
           validate={validators.composeValidators(birthdayRequired, birthdayMinAge)}
         />
@@ -264,7 +261,6 @@ const PayoutDetailsPersonalDetails = props => {
           label={personalIdNumberLabel}
           placeholder={personalIdNumberPlaceholder}
           validate={personalIdNumberValid}
-          onUnmount={() => form.change(`${fieldId}.personalIdNumber`, undefined)}
         />
       ) : null}
 

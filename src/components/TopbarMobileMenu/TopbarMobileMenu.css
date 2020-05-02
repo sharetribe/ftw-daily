@@ -39,6 +39,7 @@
   padding: 24px;
   background-color: var(--matterColorLight);
   box-shadow: var(--boxShadowTop);
+  z-index: 9999;
 }
 
 .avatar {
@@ -50,19 +51,20 @@
 .greeting {
   /* Font */
   @apply --marketplaceH1FontStyles;
-  margin-bottom: 1px;
+  margin-bottom: 10px;
   margin-top: 16px;
 }
 
 .logoutButton {
+  font-size: 24px !important;
   @apply --marketplaceLinkStyles;
   /* Logout font is smaller and gray since the action is not recommended. */
   @apply --marketplaceH3FontStyles;
-  color: var(--matterColorAnti);
+  color: #41a6df;
 
   /* Position component */
   width: initial;
-  margin: 4px 0 6px 0;
+  margin: 10px 0 0px 0;
   padding: 0;
 }
 
@@ -71,8 +73,6 @@
   @apply --marketplaceH2FontStyles;
   color: var(--marketplaceColor);
   position: relative;
-
-  margin-top: auto;
   margin-bottom: 13px;
 }
 
@@ -102,6 +102,8 @@
 
 .createNewListingLink {
   @apply --marketplaceButtonStyles;
+  padding: 0 !important;
+  line-height: 57px;
 }
 
 .authenticationGreeting {
@@ -133,4 +135,28 @@
   border-left: 5px solid black;
   margin-left: -24px;
   padding-left: 19px;
+}
+
+.logoutLast {
+  margin: 10px 0 20px !important;
+  font-size: 24px !important;
+  @apply --marketplaceLinkStyles;
+  /* Logout font is smaller and gray since the action is not recommended. */
+  @apply --marketplaceH3FontStyles;
+  color: #41a6df;
+
+  /* Position component */
+  width: initial;
+  margin: 10px 0 33px 0;
+  padding: 0;
+}
+
+.lastlogout {
+  border: none;
+  padding: 0 1px;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 30px;
+  letter-spacing: -0.3px;
+  color: #41a6df;
 }

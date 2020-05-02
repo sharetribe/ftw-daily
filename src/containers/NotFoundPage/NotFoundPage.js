@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -21,8 +21,7 @@ import { TopbarContainer } from '../../containers';
 import css from './NotFoundPage.css';
 
 export class NotFoundPageComponent extends Component {
-  constructor(props) {
-    super(props);
+  componentWillMount() {
     // The StaticRouter component used in server side rendering
     // provides the context object. We attach a `notfound` flag to
     // the context to tell the server to change the response status

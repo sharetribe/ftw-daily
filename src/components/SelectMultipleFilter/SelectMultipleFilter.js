@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { array, arrayOf, func, number, string } from 'prop-types';
 import classNames from 'classnames';
-import { injectIntl, intlShape } from '../../util/reactIntl';
+import { injectIntl, intlShape } from 'react-intl';
 import { FieldCheckbox } from '../../components';
 
 import { FilterPopup, FilterPlain } from '../../components';

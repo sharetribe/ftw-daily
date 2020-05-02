@@ -1,10 +1,13 @@
 import React from 'react';
 import { string } from 'prop-types';
-import { FormattedMessage } from '../../util/reactIntl';
+import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import { NamedLink } from '../../components';
+import { NamedLink, HeroSearch, HeroImages } from '../../components';
+import DayPickerInput from 'react-day-picker/DayPickerInput';
+import Helmet from 'react-helmet';
 
 import css from './SectionHero.css';
+import 'react-day-picker/lib/style.css';
 
 const SectionHero = props => {
   const { rootClassName, className } = props;
@@ -14,24 +17,43 @@ const SectionHero = props => {
   return (
     <div className={classes}>
       <div className={css.heroContent}>
+        <div className={css.heroHalf}>
         <h1 className={css.heroMainTitle}>
-          <FormattedMessage id="SectionHero.title" />
+          <span>Love Pets ♥ Love Travel</span>
         </h1>
-        <h2 className={css.heroSubTitle}>
-          <FormattedMessage id="SectionHero.subTitle" />
-        </h2>
-        <NamedLink
-          name="SearchPage"
-          to={{
-            search:
-              'address=Finland&bounds=70.0922932%2C31.5870999%2C59.693623%2C20.456500199999937',
-          }}
-          className={css.heroButton}
-        >
-          <FormattedMessage id="SectionHero.browseButton" />
-        </NamedLink>
+        <p className={css.seperatorText}>Dogs | Cats | Rabbits | Reptiles | Pet Birds | Aquarium | Poultry</p>
+
+        {/*
+
+        <HeroSearch />
+
+        */}
+
+
+         <div className={css.submitContainer}>
+         
+            <a href="/s?pub_user_type=1">Find a Pet Sitter</a> 
+            <a href="/s?pub_user_type=0">Find Homes to Sit</a>
+          </div>
+
+        </div>
+
+          {/*
+
+          <HeroImages />
+
+          */}
+
       </div>
+       <Helmet>
+          <style>{`
+.DayPickerInput-OverlayWrapper {
+  bottom: 385px !important;
+}
+`}</style>
+        </Helmet>
     </div>
+
   );
 };
 

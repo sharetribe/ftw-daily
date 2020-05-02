@@ -28,7 +28,7 @@ export const NamedLinkComponent = props => {
   const { name, params, title } = props;
 
   // Link props
-  const { to, children } = props;
+  const { to, children, state } = props;
   const pathname = pathByRouteName(name, routeConfiguration(), params);
   const { match } = props;
   const active = match.url && match.url === pathname;
@@ -42,7 +42,7 @@ export const NamedLinkComponent = props => {
   };
 
   return (
-    <Link to={{ pathname, ...to }} {...aElemProps}>
+    <Link to={{ pathname, ...to, state }} {...aElemProps}>
       {children}
     </Link>
   );

@@ -86,7 +86,7 @@ exports[`InboxPage matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -108,7 +108,7 @@ exports[`InboxPage matches snapshot 1`] = `
                   "lastTransitionedAt": 2017-01-15T00:00:00.000Z,
                   "lineItems": Array [
                     Object {
-                      "code": "line-item/night",
+                      "code": "n",
                       "includeFor": Array [
                         "customer",
                         "provider",
@@ -225,7 +225,7 @@ exports[`InboxPage matches snapshot 1`] = `
               }
             }
             type="order"
-            unitType="line-item/night"
+            unitType="n"
           />
         </li>
         <li
@@ -239,7 +239,7 @@ exports[`InboxPage matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -261,7 +261,7 @@ exports[`InboxPage matches snapshot 1`] = `
                   "lastTransitionedAt": 2016-01-15T00:00:00.000Z,
                   "lineItems": Array [
                     Object {
-                      "code": "line-item/night",
+                      "code": "n",
                       "includeFor": Array [
                         "customer",
                         "provider",
@@ -378,7 +378,7 @@ exports[`InboxPage matches snapshot 1`] = `
               }
             }
             type="order"
-            unitType="line-item/night"
+            unitType="n"
           />
         </li>
       </ul>
@@ -387,7 +387,7 @@ exports[`InboxPage matches snapshot 1`] = `
       className={null}
       rootClassName={null}
     >
-      <injectIntl(Footer) />
+      <InjectIntl(Footer) />
     </LayoutWrapperFooter>
   </LayoutSideNavigation>
 </Page>
@@ -429,16 +429,10 @@ exports[`InboxPage matches snapshot 2`] = `
       <div
         className=""
       >
-        <div
-          className=""
-        >
-          <span>
-            Feb 15 -
-          </span>
-          <span>
-            Feb 16
-          </span>
-        </div>
+        2017-02-15 - 2017-02-16
+        <span>
+          10
+        </span>
       </div>
     </div>
     <div>
@@ -544,7 +538,7 @@ exports[`InboxPage matches snapshot 3`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -566,7 +560,7 @@ exports[`InboxPage matches snapshot 3`] = `
                   "lastTransitionedAt": 2017-01-15T00:00:00.000Z,
                   "lineItems": Array [
                     Object {
-                      "code": "line-item/night",
+                      "code": "n",
                       "includeFor": Array [
                         "customer",
                         "provider",
@@ -683,7 +677,7 @@ exports[`InboxPage matches snapshot 3`] = `
               }
             }
             type="sale"
-            unitType="line-item/night"
+            unitType="n"
           />
         </li>
         <li
@@ -697,7 +691,7 @@ exports[`InboxPage matches snapshot 3`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -719,7 +713,7 @@ exports[`InboxPage matches snapshot 3`] = `
                   "lastTransitionedAt": 2016-01-15T00:00:00.000Z,
                   "lineItems": Array [
                     Object {
-                      "code": "line-item/night",
+                      "code": "n",
                       "includeFor": Array [
                         "customer",
                         "provider",
@@ -836,7 +830,7 @@ exports[`InboxPage matches snapshot 3`] = `
               }
             }
             type="sale"
-            unitType="line-item/night"
+            unitType="n"
           />
         </li>
       </ul>
@@ -845,7 +839,7 @@ exports[`InboxPage matches snapshot 3`] = `
       className={null}
       rootClassName={null}
     >
-      <injectIntl(Footer) />
+      <InjectIntl(Footer) />
     </LayoutWrapperFooter>
   </LayoutSideNavigation>
 </Page>
@@ -889,16 +883,10 @@ exports[`InboxPage matches snapshot 4`] = `
       <div
         className=""
       >
-        <div
-          className=""
-        >
-          <span>
-            Feb 15 -
-          </span>
-          <span>
-            Feb 16
-          </span>
-        </div>
+        2017-02-15 - 2017-02-16
+        <span>
+          9
+        </span>
       </div>
     </div>
     <div>

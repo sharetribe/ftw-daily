@@ -1,7 +1,6 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
 import { array, arrayOf, bool, func, shape, string, oneOf } from 'prop-types';
-import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
+import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -28,6 +27,7 @@ import { richText } from '../../util/richText';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { initializeCardPaymentData } from '../../ducks/stripe.duck.js';
+import { claimListing } from '../../containers/EditListingPage/EditListingPage.duck.js';
 import {
   Page,
   NamedLink,
@@ -38,9 +38,11 @@ import {
   LayoutWrapperFooter,
   Footer,
   BookingPanel,
+  Button,
+  YotiVerifiedListing,
 } from '../../components';
 import { TopbarContainer, NotFoundPage } from '../../containers';
-
+import ReactTooltip from 'react-tooltip';
 import { sendEnquiry, loadData, setInitialValues } from './ListingPage.duck';
 import SectionImages from './SectionImages';
 import SectionAvatar from './SectionAvatar';
@@ -51,7 +53,42 @@ import SectionReviews from './SectionReviews';
 import SectionHostMaybe from './SectionHostMaybe';
 import SectionRulesMaybe from './SectionRulesMaybe';
 import SectionMapMaybe from './SectionMapMaybe';
+import SectionHomeMaybe from './SectionHomeMaybe';
+import SectionPreferredLocations from './SectionPreferredLocations';
+import YotiVerified from '../../components/YotiVerified/YotiVerified.js';
 import css from './ListingPage.css';
+
+import stripeimg from './stripe.png';
+import calendar from './calendar.svg';
+import claim from './claim.png';
+
+const SectionCapacity = props => {
+  const { publicData, options } = props;
+
+  const capacity = publicData.capacity;
+  const capacityOption = options.find(
+    option => option.key === capacity
+  );
+
+  return capacityOption ? (
+    <div className={css.sectionCapacity}>
+      <h2 className={css.capacityTitle}>
+        <FormattedMessage id="ListingPage.capacityTitle" />
+      </h2>
+      <p className={css.capacity}>{capacityOption.label}</p>
+    </div>
+  ) : null;
+};
+
+SectionCapacity.propTypes = {
+  options: array.isRequired,
+  publicData: shape({
+    capacity: string,
+  }).isRequired,
+};
+
+
+
 
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
 
@@ -82,12 +119,53 @@ export class ListingPageComponent extends Component {
     this.state = {
       pageClassNames: [],
       imageCarouselOpen: false,
+       capacityOptionsConfig: config.custom.capacityOptions,
       enquiryModalOpen: enquiryModalOpenForListingId === params.id,
     };
 
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onContactUser = this.onContactUser.bind(this);
+    this.onProceedLogin = this.onProceedLogin.bind(this);
     this.onSubmitEnquiry = this.onSubmitEnquiry.bind(this);
+
+  }
+
+  formatDateHelper(date) {
+    var monthNames = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
+
+    var day = date.getDate();
+    var monthIndex = date.getMonth();
+    var year = date.getFullYear();
+
+    return monthNames[monthIndex] + ' ' + day + ', ' + year;
+  }
+
+  formattedDate(dateString) {
+    let dateArray = dateString.split('to');
+    let finalDateString = '';
+    if (dateArray.length > 1) {
+      finalDateString = `${this.formatDateHelper(
+        new Date(dateArray[0])
+      )} to ${this.formatDateHelper(new Date(dateArray[1]))}`;
+    } else {
+      finalDateString = `${this.formatDateHelper(new Date(dateArray[0]))}`;
+    }
+
+    return finalDateString;
   }
 
   handleSubmit(values) {
@@ -106,10 +184,10 @@ export class ListingPageComponent extends Component {
     const initialValues = {
       listing,
       bookingData,
-      // bookingDates: {
-      //   bookingStart: bookingDates.startDate,
-      //   bookingEnd: bookingDates.endDate,
-      // },
+      bookingDates: {
+        bookingStart: bookingDates.startDate,
+        bookingEnd: bookingDates.endDate,
+      },
       confirmPaymentError: null,
     };
 
@@ -132,6 +210,18 @@ export class ListingPageComponent extends Component {
     );
   }
 
+  onProceedLogin() {
+    const { currentUser, history, callSetInitialValues, params, location } = this.props;
+
+    if (!currentUser) {
+      const state = { from: `${location.pathname}${location.search}${location.hash}` };
+
+      history.push(createResourceLocatorString('LoginPage', routeConfiguration(), {}, {}), state);
+    } else {
+      this.setState({ enquiryModalOpen: true });
+    }
+  }
+
   onContactUser() {
     const { currentUser, history, callSetInitialValues, params, location } = this.props;
 
@@ -148,6 +238,7 @@ export class ListingPageComponent extends Component {
       this.setState({ enquiryModalOpen: true });
     }
   }
+
 
   onSubmitEnquiry(values) {
     const { history, params, onSendEnquiry } = this.props;
@@ -190,6 +281,13 @@ export class ListingPageComponent extends Component {
       fetchTimeSlotsError,
       categoriesConfig,
       amenitiesConfig,
+      capacityOptionsConfig,
+      servicesConfig,
+      sizeConfig,
+      equipmentsConfig,
+      locationsConfig,
+      infoConfig,
+      onClaimListing
     } = this.props;
 
     const listingId = new UUID(rawParams.id);
@@ -236,6 +334,8 @@ export class ListingPageComponent extends Component {
       publicData,
     } = currentListing.attributes;
 
+    const user_type = publicData ? publicData.user_type : null;
+    const rate = publicData && publicData.rate ? publicData.rate : config.bookingUnitType;
     const richTitle = (
       <span>
         {richText(title, {
@@ -319,6 +419,12 @@ export class ListingPageComponent extends Component {
     const currentAuthor = authorAvailable ? currentListing.author : null;
     const ensuredAuthor = ensureUser(currentAuthor);
 
+    const preferredLocations = ensuredAuthor.attributes.profile.publicData
+      ? ensuredAuthor.attributes.profile.publicData.preferredlocations
+        ? ensuredAuthor.attributes.profile.publicData.preferredlocations
+        : null
+      : null;
+
     // When user is banned or deleted the listing is also deleted.
     // Because listing can be never showed with banned or deleted user we don't have to provide
     // banned or deleted display names for the function
@@ -350,13 +456,29 @@ export class ListingPageComponent extends Component {
         })
         .filter(variant => variant != null);
 
+    const title_type = user_type === 0 ? 'Pet Owner' : user_type === 1 ? 'Pet Sitter' : 'Pet Service';
     const facebookImages = listingImages(currentListing, 'facebook');
     const twitterImages = listingImages(currentListing, 'twitter');
     const schemaImages = JSON.stringify(facebookImages.map(img => img.url));
     const siteTitle = config.siteTitle;
     const schemaTitle = intl.formatMessage(
       { id: 'ListingPage.schemaTitle' },
-      { title, price: formattedPrice, siteTitle }
+      {
+        title,
+        price: currentListing.attributes.publicData.user_type == 1 ? formattedPrice : title_type,
+        siteTitle,
+      }
+    );
+
+    const makeContact = (
+      <NamedLink
+        className={css.authorNameLink}
+        name="ListingPage"
+        params={params}
+        to={{ hash: '#host' }}
+      >
+        {authorDisplayName}
+      </NamedLink>
     );
 
     const hostLink = (
@@ -370,13 +492,23 @@ export class ListingPageComponent extends Component {
       </NamedLink>
     );
 
-    const category =
-      publicData && publicData.category ? (
-        <span>
-          {categoryLabel(categoriesConfig, publicData.category)}
-          <span className={css.separator}>•</span>
-        </span>
-      ) : null;
+    const user_name = user_type === 0 ? 'owner' : user_type === 1 ? 'sitter' : 'service';
+    const category = user_name ? (
+      <span>
+        {user_name}
+        <span className={css.separator}>•</span>
+      </span>
+    ) : null;
+
+    const idVerify = (
+      <span>
+        {ensuredAuthor.attributes.profile.publicData ? (
+          ensuredAuthor.attributes.profile.publicData.yotiVerified == 'YES' ? (
+            <YotiVerifiedListing />
+          ) : null
+        ) : null}
+      </span>
+    );
 
     return (
       <Page
@@ -423,11 +555,43 @@ export class ListingPageComponent extends Component {
                     richTitle={richTitle}
                     category={category}
                     hostLink={hostLink}
+                    idVerify={idVerify}
                     showContactUser={showContactUser}
                     onContactUser={this.onContactUser}
+                    user_type={user_type}
+                    rate={rate}
                   />
-                  <SectionDescriptionMaybe description={description} />
-                  <SectionFeaturesMaybe options={amenitiesConfig} publicData={publicData} />
+
+                  {currentListing.attributes.publicData.requiredDates ? (
+                    <div className={css.reqdates} data-tip>
+                      <h2 className={css.reqTitle}>Required Dates</h2>
+                      <p>
+                        <img className={css.mobileDates} src={calendar} />
+                        {this.formattedDate(currentListing.attributes.publicData.requiredDates)}
+                      </p>
+                    </div>
+                  ) : null}
+                  <SectionDescriptionMaybe description={description} user_type={user_type} />
+                  <SectionFeaturesMaybe
+                    options={{
+                      options1: servicesConfig,
+                      options2: amenitiesConfig,
+                      options3: sizeConfig,
+                    }}
+                    publicData={publicData}
+                  />
+                  <SectionHomeMaybe
+                    options={{
+                      options1: equipmentsConfig,
+                      options2: locationsConfig,
+                      options3: infoConfig,
+                    }}
+                    publicData={publicData}
+                  />
+                  <SectionPreferredLocations
+                    preferredLocations={preferredLocations}
+                    publicData={publicData}
+                  />
                   <SectionRulesMaybe publicData={publicData} />
                   <SectionMapMaybe
                     geolocation={geolocation}
@@ -449,19 +613,99 @@ export class ListingPageComponent extends Component {
                     onManageDisableScrolling={onManageDisableScrolling}
                   />
                 </div>
-                <BookingPanel
-                  className={css.bookingPanel}
-                  listing={currentListing}
-                  isOwnListing={isOwnListing}
-                  unitType={unitType}
-                  onSubmit={handleBookingSubmit}
-                  title={bookingTitle}
-                  subTitle={bookingSubTitle}
-                  authorDisplayName={authorDisplayName}
-                  onManageDisableScrolling={onManageDisableScrolling}
-                  timeSlots={timeSlots}
-                  fetchTimeSlotsError={fetchTimeSlotsError}
-                />
+
+                {currentUser ? (
+                  user_type == 1 ? (
+                    <BookingPanel
+                      className={css.bookingPanel}
+                      listing={currentListing}
+                      isOwnListing={isOwnListing}
+                      unitType={unitType}
+                      onSubmit={handleBookingSubmit}
+                      title={bookingTitle}
+                      user_type={user_type}
+                      rate={rate}
+                      subTitle={bookingSubTitle}
+                      authorDisplayName={authorDisplayName}
+                      onManageDisableScrolling={onManageDisableScrolling}
+                      timeSlots={timeSlots}
+                      fetchTimeSlotsError={fetchTimeSlotsError}
+                    />
+                  ) :
+
+                    <div className={css.bookingPanel}>
+                      {
+                        user_type == 2 ?
+                          <Button data-tip="" data-for="claim" className={css.claimbtn} onClick={() => {
+                            onClaimListing(currentListing).then((res) => {
+                              this.props.history.push(
+                                createResourceLocatorString('EditListingPage', routeConfiguration(), { slug: createSlug(res.data.data.attributes.title), id: res.data.data.id.uuid, type: 'draft', tab: 'description' }, {})
+                              );
+                            })
+                          }}><span>Claim Listing</span><img src={claim} /></Button> : null
+                      }
+
+                      <ReactTooltip id="claim" className={css.claimTip} effect="solid">
+                        <span className={css.tipColor}>
+                          Are you the Business Owner? Click the button and Claim the Listing!
+                        </span>
+                      </ReactTooltip>
+
+                      {currentListing.attributes.publicData.requiredDates ? (
+                        <div className={css.required}>
+                          <div className={css.bookingHeading}>
+                            <h2 className={css.bookingTitle}>
+                              Contact <span className={css.username}>{makeContact}</span>
+                            </h2>
+                          </div>
+                          <p className={css.bookingTime} data-tip="" data-for="test">
+                            <img className={css.pcDates} src={calendar} />
+                            {this.formattedDate(currentListing.attributes.publicData.requiredDates)}
+                          </p>
+                          <ReactTooltip id="test" className={css.customTip} effect="solid">
+                            <span className={css.tipColor}>
+                              Pet Owner is seeking a Pet Sitter for these dates. Are you available?
+                              Send a Message!
+                            </span>
+                          </ReactTooltip>
+                          <hr className={css.divhr} />
+                        </div>
+                      ) : null}
+
+                      {
+                        currentUser.attributes.profile.publicData.petOwnerMembership ||
+                          currentUser.attributes.profile.publicData.petSitterMembership ||
+                          currentUser.attributes.profile.publicData.petServiceMembership ? (
+                            <div>
+
+                              <p className={css.smallPrint}>
+                                {user_type == 0 ? (
+                                  <span>Contact Pet Owner directly</span>
+                                ) : (
+                                    <span>OR</span>
+                                  )}
+                              </p>
+                              <Button className={css.sendbtn} onClick={this.onContactUser}>
+                                Send Message
+                      </Button>
+                              <div className={css.openBookingFormMobile}>
+                                <Button className={css.sendbtn2} onClick={this.onContactUser}>
+                                  Send Message
+                        </Button>
+                              </div>
+                            </div>
+                          ) : null}
+
+                    </div>
+
+
+                ) : (
+                    <div className={css.bookingPanel}>
+                      <Button onClick={this.onProceedLogin}>
+                        <span>Login to proceed</span>
+                      </Button>
+                    </div>
+                  )}
               </div>
             </div>
           </LayoutWrapperMain>
@@ -485,7 +729,12 @@ ListingPageComponent.defaultProps = {
   fetchTimeSlotsError: null,
   sendEnquiryError: null,
   categoriesConfig: config.custom.categories,
+  sizeConfig: config.custom.amenities[0].weight,
   amenitiesConfig: config.custom.amenities,
+  servicesConfig: config.custom.service,
+  equipmentsConfig: config.custom.equipments,
+  locationsConfig: config.custom.locations,
+  infoConfig: config.custom.info,
 };
 
 ListingPageComponent.propTypes = {
@@ -497,7 +746,7 @@ ListingPageComponent.propTypes = {
     search: string,
   }).isRequired,
 
-  unitType: propTypes.bookingUnitType,
+  // unitType: propTypes.bookingUnitType,
   // from injectIntl
   intl: intlShape.isRequired,
 
@@ -506,7 +755,7 @@ ListingPageComponent.propTypes = {
     slug: string,
     variant: oneOf([LISTING_PAGE_DRAFT_VARIANT, LISTING_PAGE_PENDING_APPROVAL_VARIANT]),
   }).isRequired,
-
+  capacityOptionsConfig: array,
   isAuthenticated: bool.isRequired,
   currentUser: propTypes.currentUser,
   getListing: func.isRequired,
@@ -578,6 +827,7 @@ const mapDispatchToProps = dispatch => ({
   callSetInitialValues: (setInitialValues, values) => dispatch(setInitialValues(values)),
   onSendEnquiry: (listingId, message) => dispatch(sendEnquiry(listingId, message)),
   onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
+  onClaimListing: (data) => dispatch(claimListing(data))
 });
 
 // Note: it is important that the withRouter HOC is **outside** the
@@ -588,10 +838,7 @@ const mapDispatchToProps = dispatch => ({
 // See: https://github.com/ReactTraining/react-router/issues/4671
 const ListingPage = compose(
   withRouter,
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
+  connect(mapStateToProps, mapDispatchToProps),
   injectIntl
 )(ListingPageComponent);
 

@@ -13,8 +13,8 @@
       cursor: pointer;
 
       /* Same as active */
-      background-color: var(--marketplaceColor);
-      border-color: var(--marketplaceColor);
+      background-color: #c9bd9c;
+      border-color: #c9bd9c;
       color: var(--matterColorLight);
       box-shadow: var(--boxShadowPopup);
     }
@@ -58,8 +58,8 @@
 
 .priceLabelActive {
   /* Same as hover */
-  background-color: var(--marketplaceColor);
-  border-color: var(--marketplaceColor);
+  background-color: #c9bd9c;
+  border-color: #c9bd9c;
   color: var(--matterColorLight);
   box-shadow: var(--boxShadowPopup);
 }
@@ -102,6 +102,34 @@
 
 .caretActive {
   /* Same as hover */
-  background-color: var(--marketplaceColor);
-  border-color: var(--marketplaceColor);
+  background-color: #c9bd9c;
+  border-color: #c9bd9c;
 }
+
+.paw {
+  background-image: url('./service.png');
+  width: 30px;
+  height: 30px;
+  display: block;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.location {
+  background-image: url('./bowl.png');
+  width: 35px;
+  height: 35px;
+  display: block;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.petsitter {
+  background-image: url('./walking-outline-hover.png');
+  width: 32px;
+  height: 32px;
+  display: block;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+

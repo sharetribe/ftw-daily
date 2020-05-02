@@ -52,19 +52,119 @@ const Item = props => {
 };
 
 const PropertyGroup = props => {
-  const { rootClassName, className, id, options, selectedOptions, twoColumns } = props;
+  const { rootClassName, className, id, options, selectedOptions, twoColumns,publicData, flag } = props;
   const classes = classNames(rootClassName || css.root, className);
   const listClasses = twoColumns ? classNames(classes, css.twoColumns) : classes;
-
   const checked = checkSelected(options, selectedOptions);
-
-  return (
-    <ul className={listClasses}>
-      {checked.map(option => (
-        <Item key={`${id}.${option.key}`} label={option.label} isSelected={option.isSelected} />
-      ))}
-    </ul>
-  );
+  const weightIndexAry = ['giant','large','medium','small'];
+  const roomAry = ['Bedroom','Bathroom'];
+  
+  return publicData !== null ? (
+    <div>
+      <ul className={listClasses}>
+        {checked.map(option => {
+          
+          return (
+            <Item 
+              key={`${id}.${option.key}`} 
+              label={
+                option.key === "other" && publicData && publicData.other?
+                publicData.other
+                :option.label
+              } 
+              isSelected={option.isSelected} />
+          )
+        })}
+      </ul>
+      {
+        flag === 2?(
+          <div className={css.infoPanel}>
+            {
+              roomAry.map(e => {
+                // console.log('room',e);
+                // console.log('publicData',publicData)
+                const _e = e.toLowerCase();
+                if(publicData && publicData[_e]){
+                  return(
+                  <div>
+                    <label className={css.infoItem}>
+                      <span className={ css.infoItemLabel }>
+                        {e} &#8226; 
+                      </span> 
+                      { publicData[_e] }
+                    </label>
+                  </div>
+                  // 'sdfasdffs'
+                  )
+                }
+              })
+            }
+          {/* {publicData.bedroom?(<div><label className={css.infoItem}><span className={ css.infoItemLabel }> Bedroom </span> { publicData.bedroom }</label></div>):null}
+          {publicData.bathroom?(<div><label className={css.infoItem}><span className={ css.infoItemLabel }> Bathroom </span> { publicData.bathroom }</label></div>):null} */}
+          </div>
+        ):null
+      }
+    </div>
+  ):null
+  // return publicData !== null && flag === 3?(
+    
+  //   <ul className={listClasses}>
+      
+  //     {checked.map(option => {
+  //       var weight=null;
+  //       if(option.isSelected){
+  //         if(String(option.key).toLowerCase() === "other"){
+  //           weight = publicData['other'];
+  //         }else{
+            
+  //           options.forEach(function(e,i){
+              
+  //             if(String(e.key).toLowerCase() === String(option.key).toLowerCase()){
+  //               var weightLabel = publicData[option.key];
+  //               if(weightLabel != null ){
+  //                 var index = weightIndexAry.indexOf(weightLabel);
+  //                 weight = e.weight[index].key + e.weight[index].label;
+  //               }
+                
+  //             }
+  //           })
+          
+  //         }
+  //       }
+       
+  //       if(weight === null){
+  //         return (
+  //           <Item key={`${id}.${option.key}`} label={String(option.label)} isSelected={option.isSelected} />
+  //         )
+  //       }else{
+  //         return (
+  //           <Item key={`${id}.${option.key}`} label={String(option.label) +' => '+ String(weight)} isSelected={option.isSelected} />
+  //         )
+  //       }
+  //     })}
+  //   </ul>
+  // )
+  // :
+  // (
+  //   <div>
+  //     <ul className={listClasses}>
+  //       {checked.map(option => {
+          
+  //         return (
+  //           <Item key={`${id}.${option.key}`} label={option.label} isSelected={option.isSelected} />
+  //         )
+  //       })}
+  //     </ul>
+  //     {
+  //       flag === 2?(
+  //         <div className={css.infoPanel}>
+  //         {publicData.bedroom?(<div><label className={css.infoItem}><span className={ css.infoItemLabel }> Bedroom </span> { publicData.bedroom }</label></div>):null}
+  //         {publicData.bathroom?(<div><label className={css.infoItem}><span className={ css.infoItemLabel }> Bathroom </span> { publicData.bathroom }</label></div>):null}
+  //         </div>
+  //       ):null
+  //     }
+  //   </div>
+  // )
 };
 
 PropertyGroup.defaultProps = {

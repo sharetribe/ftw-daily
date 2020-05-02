@@ -50,28 +50,24 @@ const AboutPage = () => {
               </h2>
 
               <p>
-                Fuente: {' '}
-                <ExternalLink href="http://ogeiee.produce.gob.pe/index.php/shortcode/estadistica-oee/estadisticas-mipyme">SUNAT 2017 (PRODUCE-OGEIEE)</ExternalLink>  
-               </p>
-        
-              <h3 className={css.subtitle}>¿Eres una Mype?</h3>
+               <ExternalLink href="http://ogeiee.produce.gob.pe/index.php/shortcode/estadistica-oee/estadisticas-mipyme">SUNAT 2017 (PRODUCE-OGEIEE)</ExternalLink>  
+              </p>
 
-              <p>
-                Sabemos que debido a la crisis por el Covid-19 tu negocio se ha visto afecto. No estás solo, Reactivaté Peru, programa de la {' '}
-                <ExternalLink href="https://www.facebook.com/REDMEPenaccion/">REDMEP</ExternalLink> te acompañara a que tu negocio se adapte a las nuevas tecnologías dandote acceso está plataforma dónde podras conectar con clientes, así como acceder a capacitaciones.              </p>
+              <h3 className={css.subtitle}>Are you a sauna owner?</h3>
+
+             
 
               <h3 id="contact" className={css.subtitle}>
-                ¿Cómo me inscribo?
+                ¿Eres una Mype?
               </h3>
               <p>
-                Para comenzar pulsa {' '}
-                <ExternalLink href="http://localhost:3000/signup">Regístrarte</ExternalLink>. Luego de tu registro nos comunicaremos contigo para completar tu registro y
-                  para que comiencés a subir tus productos o servicios.                
+               Sabemos que debido a la crisis por el Covid-19 tu negocio se ha visto afecto. No estás solo, Reactivaté Peru, programa de la {' '} <ExternalLink href="https://www.facebook.com/REDMEPenaccion/">REDMEP</ExternalLink> te acompañara a que tu negocio se adapte a las nuevas tecnologías dandote acceso está plataforma dónde podras conectar con clientes, así como acceder a capacitaciones.         
               </p>
-              <p>
-                Si tienes alguna duda puede encontrarnos en{' '}
-                <ExternalLink href={siteFacebookPage}>Facebook</ExternalLink>.
-              </p>
+             <h3 id="contact" className={css.subtitle}>  ¿Cómo me inscribo? </h3>
+
+<p>Para comenzar pulsa {' '}<ExternalLink href="http://localhost:3000/signup">Regístrarte</ExternalLink>. Luego de tu registro nos comunicaremos contigo para completar tu registro y para que comiencés a subir tus productos o servicios. </p>
+
+
             </div>
           </div>
         </LayoutWrapperMain>

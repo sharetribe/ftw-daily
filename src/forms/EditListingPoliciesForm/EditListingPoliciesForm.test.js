@@ -17,8 +17,6 @@ describe('EditListingPoliciesForm', () => {
         saveActionMsg="Save rules"
         updated={false}
         updateInProgress={false}
-        disabled={false}
-        ready={false}
       />
     );
     expect(tree).toMatchSnapshot();

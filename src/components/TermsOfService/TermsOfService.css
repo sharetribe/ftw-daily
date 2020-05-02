@@ -16,11 +16,30 @@
   & .lastUpdated {
     @apply --marketplaceBodyFontStyles;
     margin-top: 0;
-    margin-bottom: 55px;
+    margin-bottom: 30px;
 
     @media (--viewportMedium) {
       margin-top: 0;
-      margin-bottom: 54px;
+      margin-bottom: 30px;
     }
   }
+}
+
+@media (max-width: 700px) {
+  .lastUpdated {
+    margin-bottom: 20px !important;
+  }
+}
+
+.termsul {
+  list-style: inherit !important;
+}
+
+.termsli {
+  margin-bottom: 15px;
+  font-size: 16px !important;
+}
+
+.datecolor {
+  color: #41a6df;
 }

@@ -40,8 +40,8 @@ class ModalInMobileComponent extends Component {
     }
   }
 
-  componentDidUpdate() {
-    const { isModalOpenOnMobile, showAsModalMaxWidth, viewport } = this.props;
+  componentWillReceiveProps(nextProps) {
+    const { isModalOpenOnMobile, showAsModalMaxWidth, viewport } = nextProps;
 
     const isChanging = isModalOpenOnMobile !== this.state.isOpen;
     const isMobileLayout = viewport.width <= showAsModalMaxWidth;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { string, bool } from 'prop-types';
 import { compose } from 'redux';
-import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Form as FinalForm } from 'react-final-form';
 import classNames from 'classnames';
 import { Form, PrimaryButton, FieldTextInput, IconEnquiry } from '../../components';
@@ -48,12 +48,15 @@ const EnquiryFormComponent = props => (
       const submitInProgress = inProgress;
       const submitDisabled = submitInProgress;
 
+
+
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           <IconEnquiry className={css.icon} />
           <h2 className={css.heading}>
             <FormattedMessage id="EnquiryForm.heading" values={{ listingTitle }} />
           </h2>
+
           <FieldTextInput
             className={css.field}
             type="textarea"

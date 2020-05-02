@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { array, bool, func, number, object, objectOf, string } from 'prop-types';
-import { FormattedMessage } from '../../util/reactIntl';
+import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import merge from 'lodash/merge';
 import { propTypes } from '../../util/types';
@@ -17,7 +17,7 @@ import css from './SearchPage.css';
 class MainPanel extends Component {
   constructor(props) {
     super(props);
-    this.state = { isSearchFiltersPanelOpen: false };
+    this.state = { isSearchFiltersPanelOpen: false, isService: false };
   }
 
   render() {
@@ -25,7 +25,6 @@ class MainPanel extends Component {
       className,
       rootClassName,
       urlQueryParams,
-      sort,
       listings,
       searchInProgress,
       searchListingsError,
@@ -44,7 +43,7 @@ class MainPanel extends Component {
 
     const isSearchFiltersPanelOpen = !!secondaryFilters && this.state.isSearchFiltersPanelOpen;
 
-    const filters = merge({}, primaryFilters, secondaryFilters);
+    const filters = merge(primaryFilters, secondaryFilters);
     const selectedFilters = validFilterParams(urlQueryParams, filters);
     const selectedFiltersCount = Object.keys(selectedFilters).length;
 
@@ -74,24 +73,33 @@ class MainPanel extends Component {
       ? Object.values(secondaryFilters).map(f => f.paramName)
       : [];
 
+    const setAsService = () => {
+      this.setState({ isService: true });
+    };
+
+    const removeAsService = () => {
+      this.setState({ isService: false });
+    };
+
     return (
       <div className={classes}>
         <SearchFilters
           className={css.searchFilters}
           urlQueryParams={urlQueryParams}
-          sort={sort}
           listingsAreLoaded={listingsAreLoaded}
           resultsCount={totalItems}
           searchInProgress={searchInProgress}
           searchListingsError={searchListingsError}
           onManageDisableScrolling={onManageDisableScrolling}
+          isService={this.state.isService}
+          setAsService={setAsService}
+          removeAsService={removeAsService}
           {...searchFiltersPanelProps}
           {...primaryFilters}
         />
         <SearchFiltersMobile
           className={css.searchFiltersMobile}
           urlQueryParams={urlQueryParams}
-          sort={sort}
           listingsAreLoaded={listingsAreLoaded}
           resultsCount={totalItems}
           searchInProgress={searchInProgress}
@@ -110,7 +118,6 @@ class MainPanel extends Component {
           <div className={classNames(css.searchFiltersPanel)}>
             <SearchFiltersPanel
               urlQueryParams={urlQueryParams}
-              sort={sort}
               listingsAreLoaded={listingsAreLoaded}
               onClosePanel={() => this.setState({ isSearchFiltersPanelOpen: false })}
               filterParamNames={secondaryFilterParamNames}

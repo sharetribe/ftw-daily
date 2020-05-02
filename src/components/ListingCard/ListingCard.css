@@ -8,7 +8,22 @@
   /* Remove link's hover effect */
   &:hover {
     text-decoration: none;
+    box-shadow: 4px 6px 25px 1px rgba(0, 0, 0, 0.46);
   }
+}
+
+.yotiBadge {
+   position: absolute;
+   z-index: 1;
+   top: 0;
+   right: 0;
+   text-transform: capitalize;
+   color: rgba(0,0,0,.8);
+   padding: 5px 18px;
+   border-bottom-right-radius: 3px;
+   font-weight: 600;
+   font-size: 16px;
+   background: #c9bd9c;
 }
 
 .threeToTwoWrapper {
@@ -17,11 +32,6 @@
   width: 100%;
   position: relative;
   transition: var(--transitionStyleButton);
-
-  &:hover {
-    transform: scale(1.02);
-    box-shadow: var(--boxShadowListingCard);
-  }
 }
 
 /* Firefox doesn't support image aspect ratio inside flexbox */
@@ -34,18 +44,20 @@
   /* Layout - image will take space defined by aspect ratio wrapper */
   position: absolute;
   top: 0;
-  bottom: 0;
+  bottom: 0; 
   left: 0;
   right: 0;
   width: 100%;
-  border-radius: var(--borderRadius);
 }
 
 .info {
   /* Layout */
   display: flex;
   flex-direction: row;
-  padding: 16px 0 2px 0;
+  padding: 15px;
+  background: #c9bd9c;
+  padding: 15px;
+  align-items: center;
 }
 
 .price {
@@ -54,10 +66,10 @@
   flex-direction: column;
   justify-content: flex-start;
   flex-shrink: 0;
-  margin-right: 18px;
 }
 
 .priceValue {
+  color: rgba(0,0,0,.8);
   /* Font */
   @apply --marketplaceH3FontStyles;
 
@@ -74,7 +86,7 @@
 .perUnit {
   /* Font */
   @apply --marketplaceTinyFontStyles;
-  color: var(--matterColor);
+  color: rgba(0,0,0,.8);
 
   /* Remove default margins from font */
   margin-top: 0;
@@ -87,14 +99,19 @@
 }
 
 .mainInfo {
-  display: flex;
-  flex-direction: column;
+  width: 100%;
+  text-align: right;
 }
 
 .title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
   /* Font */
   @apply --marketplaceH3FontStyles;
-  color: var(--matterColor);
+  color: #000;
 
   /* Remove default margins from font */
   margin-top: 0;
@@ -109,7 +126,7 @@
 .authorInfo {
   /* Font */
   @apply --marketplaceTinyFontStyles;
-  color: var(--matterColor);
+  color: rgba(0, 0, 0, .8);
 
   /* Remove default margins from font */
   margin-top: 0;
@@ -127,4 +144,50 @@
   /* use break-word if available */
   word-break: break-word;
   hyphens: auto;
+}
+
+.cardCategory {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  text-transform: capitalize;
+  color: rgba(0, 0, 0, .8);
+  padding: 5px 18px;
+  border-bottom-right-radius: 3px;
+  font-weight: 600;
+  font-size: 16px;
+  background: #c9bd9c;
+}
+
+.categoryImage {
+  height: 24px;
+  position: absolute;
+  transform: rotate(120deg);
+  left: -5px;
+  top: -5px;
+  z-index: 50;
+}
+
+.verifiedBy {
+  height: 16px;
+  margin-right: 7px;
+  position: relative;
+  bottom: 3.71px;
+}
+
+.serviceType{
+  background: #c9bd9c;
+  color: rgba(0, 0, 0, .8);
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+.serviceType > span{
+  max-width: 300px;
+  word-break: break-all;
+}
+
+.serviceType span span{
+  padding: 5px;
 }

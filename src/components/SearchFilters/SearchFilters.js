@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { compose } from 'redux';
 import { object, string, bool, number, func, shape } from 'prop-types';
-import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { withRouter } from 'react-router-dom';
 import omit from 'lodash/omit';
 
-import config from '../../config';
-import { BookingDateRangeFilter, PriceFilter, KeywordFilter, SortBy } from '../../components';
+import {
+  BookingDateRangeFilter,
+  SelectSingleFilter,
+  SelectMultipleFilter,
+  PriceFilter,
+} from '../../components';
 import routeConfiguration from '../../routeConfiguration';
 import { parseDateFromISO8601, stringifyDateToISO8601 } from '../../util/dates';
 import { createResourceLocatorString } from '../../util/routes';
@@ -23,15 +27,20 @@ const initialValue = (queryParams, paramName) => {
   return queryParams[paramName];
 };
 
+// resolve initial values for a multi value filter
+const initialValues = (queryParams, paramName) => {
+  return !!queryParams[paramName] ? queryParams[paramName].split(',') : [];
+};
+
 const initialPriceRangeValue = (queryParams, paramName) => {
   const price = queryParams[paramName];
   const valuesFromParams = !!price ? price.split(',').map(v => Number.parseInt(v, RADIX)) : [];
 
   return !!price && valuesFromParams.length === 2
     ? {
-        minPrice: valuesFromParams[0],
-        maxPrice: valuesFromParams[1],
-      }
+      minPrice: valuesFromParams[0],
+      maxPrice: valuesFromParams[1],
+    }
     : null;
 };
 
@@ -42,38 +51,62 @@ const initialDateRangeValue = (queryParams, paramName) => {
   const initialValues =
     !!dates && valuesFromParams.length === 2
       ? {
-          dates: { startDate: valuesFromParams[0], endDate: valuesFromParams[1] },
-        }
+        dates: { startDate: valuesFromParams[0], endDate: valuesFromParams[1] },
+      }
       : { dates: null };
 
   return initialValues;
 };
 
 const SearchFiltersComponent = props => {
+  const [isSitter, setSitter] = useState(false);
+
   const {
     rootClassName,
     className,
     urlQueryParams,
-    sort,
     listingsAreLoaded,
     resultsCount,
     searchInProgress,
+    categoryFilter,
+    amenitiesFilter,
     priceFilter,
     dateRangeFilter,
-    keywordFilter,
     isSearchFiltersPanelOpen,
     toggleSearchFiltersPanel,
     searchFiltersPanelSelectedCount,
     history,
     intl,
+    isService,
+    setAsService,
+    removeAsService,
   } = props;
 
   const hasNoResult = listingsAreLoaded && resultsCount === 0;
-  const classes = classNames(rootClassName || css.root, className);
+  const classes = classNames(rootClassName || css.root, { [css.longInfo]: hasNoResult }, className);
 
-  const keywordLabel = intl.formatMessage({
-    id: 'SearchFilters.keywordLabel',
+  const categoryLabel = intl.formatMessage({
+    id: 'SearchFilters.categoryLabel',
   });
+
+  const amenitiesLabel = intl.formatMessage({
+    id: 'SearchFilters.amenitiesLabel',
+  });
+
+  const initialAmenities = amenitiesFilter
+    ? initialValues(urlQueryParams, amenitiesFilter.paramName)
+    : null;
+
+  const initialCategory = categoryFilter
+    ? initialValue(urlQueryParams, categoryFilter.paramName)
+    : null;
+
+  const initialServices = initialValues(urlQueryParams, 'pub_service');
+
+  const initialSitterType = initialValue(urlQueryParams, 'pub_sittertype');
+
+
+  const initialFoodType = initialValue(urlQueryParams, 'pub_foodtype');
 
   const initialPriceRange = priceFilter
     ? initialPriceRangeValue(urlQueryParams, priceFilter.paramName)
@@ -83,11 +116,49 @@ const SearchFiltersComponent = props => {
     ? initialDateRangeValue(urlQueryParams, dateRangeFilter.paramName)
     : null;
 
-  const initialKeyword = keywordFilter
-    ? initialValue(urlQueryParams, keywordFilter.paramName)
-    : null;
+  const handleSelectOptions = (urlParam, options) => {
+    const queryParams =
+      options && options.length > 0
+        ? { ...urlQueryParams, [urlParam]: options.join(',') }
+        : omit(urlQueryParams, urlParam);
 
-  const isKeywordFilterActive = !!initialKeyword;
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+  };
+
+  const handleSelectOption = (urlParam, option) => {
+    console.log(urlParam, option);
+    // query parameters after selecting the option
+    // if no option is passed, clear the selection for the filter
+    const queryParams = option
+      ? { ...urlQueryParams, [urlParam]: option }
+      : omit(urlQueryParams, urlParam);
+
+    if (urlParam == 'pub_user_type') {
+      if (option != 2) {
+        if (option == 0) {
+          delete queryParams.pub_sittertype;
+        }
+        delete queryParams.pub_service;
+        delete queryParams.pub_foodtype;
+        removeAsService();
+      } else {
+        delete queryParams.dates;
+        delete queryParams.pub_sittertype;
+        setAsService();
+      }
+    }
+
+
+
+    if (urlParam == 'pub_service') {
+      if (option != 'food') {
+        delete queryParams.pub_foodtype;
+      }
+    }
+
+
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+  };
 
   const handlePrice = (urlParam, range) => {
     const { minPrice, maxPrice } = range || {};
@@ -113,13 +184,31 @@ const SearchFiltersComponent = props => {
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   };
 
-  const handleKeyword = (urlParam, values) => {
-    const queryParams = values
-      ? { ...urlQueryParams, [urlParam]: values }
-      : omit(urlQueryParams, urlParam);
+  const categoryFilterElement = categoryFilter ? (
+    <SelectSingleFilter
+      urlParam={categoryFilter.paramName}
+      label={categoryLabel}
+      onSelect={handleSelectOption}
+      showAsPopup
+      options={categoryFilter.options}
+      initialValue={initialCategory}
+      contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+    />
+  ) : null;
 
-    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
-  };
+  const amenitiesFilterElement = amenitiesFilter ? (
+    <SelectMultipleFilter
+      id={'SearchFilters.amenitiesFilter'}
+      name="amenities"
+      urlParam={amenitiesFilter.paramName}
+      label={amenitiesLabel}
+      onSubmit={handleSelectOptions}
+      showAsPopup
+      options={amenitiesFilter.options}
+      initialValues={initialAmenities}
+      contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+    />
+  ) : null;
 
   const priceFilterElement = priceFilter ? (
     <PriceFilter
@@ -145,20 +234,6 @@ const SearchFiltersComponent = props => {
       />
     ) : null;
 
-  const keywordFilterElement =
-    keywordFilter && keywordFilter.config.active ? (
-      <KeywordFilter
-        id={'SearchFilters.keywordFilter'}
-        name="keyword"
-        urlParam={keywordFilter.paramName}
-        label={keywordLabel}
-        onSubmit={handleKeyword}
-        showAsPopup
-        initialValues={initialKeyword}
-        contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
-      />
-    ) : null;
-
   const toggleSearchFiltersPanelButtonClasses =
     isSearchFiltersPanelOpen || searchFiltersPanelSelectedCount > 0
       ? css.searchFiltersPanelOpen
@@ -176,44 +251,91 @@ const SearchFiltersComponent = props => {
       />
     </button>
   ) : null;
-
-  const handleSortBy = (urlParam, values) => {
-    const queryParams = values
-      ? { ...urlQueryParams, [urlParam]: values }
-      : omit(urlQueryParams, urlParam);
-
-    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
-  };
-
-  const sortBy = config.custom.sortConfig.active ? (
-    <SortBy
-      sort={sort}
-      showAsPopup
-      isKeywordFilterActive={isKeywordFilterActive}
-      onSelect={handleSortBy}
-      contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
-    />
-  ) : null;
-
   return (
     <div className={classes}>
-      <div className={css.searchOptions}>
-        {listingsAreLoaded ? (
-          <div className={css.searchResultSummary}>
-            <span className={css.resultsFound}>
-              <FormattedMessage id="SearchFilters.foundResults" values={{ count: resultsCount }} />
-            </span>
-          </div>
-        ) : null}
-        {sortBy}
-      </div>
-
       <div className={css.filters}>
+        {categoryFilterElement}
+
+
+        {
+          urlQueryParams.pub_user_type == 1 ? (
+            <SelectSingleFilter
+              urlParam="pub_sittertype"
+              label="Sitter Type"
+              onSelect={handleSelectOption}
+              showAsPopup
+              options={[
+                { key: 'overnight', label: 'Overnight' },
+                { key: 'daycare', label: 'Daycare' },
+              ]}
+              initialValue={initialSitterType}
+              contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+            />
+          ) : null
+        }
+
+
+        {isService || urlQueryParams.pub_user_type == 2 ? (
+          <SelectMultipleFilter
+            id="service"
+            name="service"
+            urlParam="pub_service"
+            label="Service Type"
+            onSubmit={handleSelectOptions}
+            showAsPopup
+            options={[
+              { key: 'walking', label: 'Dog Walking' },
+              { key: 'surgeon', label: 'Veterinary Surgeons' },
+              { key: 'groomer', label: 'Pet Groomer' },
+              { key: 'store', label: 'Pet Store' },
+              { key: 'food', label: 'Pet Food' },
+              { key: 'tech', label: 'Pet Tech' },
+              { key: 'accessories', label: 'Accessories' },
+              { key: 'photo', label: 'Photography' },
+            ]}
+            initialValues={initialServices}
+            contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+          />
+        ) : null}
+
+        {
+          urlQueryParams.pub_service == "food" ? (
+            <SelectSingleFilter
+              urlParam="pub_foodtype"
+              label="Food Type"
+              onSelect={handleSelectOption}
+              showAsPopup
+              options={[
+                { key: "treats", label: "Treats" },
+                { key: "raw", label: "Raw" },
+                { key: "fresh", label: "Fresh" },
+                { key: "vegan", label: "Vegan" }
+              ]}
+              initialValue={initialFoodType}
+              contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+            />
+          ) : null
+        }
+
+
+
+
+
+        {amenitiesFilterElement}
         {priceFilterElement}
-        {dateRangeFilterElement}
-        {keywordFilterElement}
+        {
+          !isService && urlQueryParams.pub_user_type != 2 ? dateRangeFilterElement : null
+        }
         {toggleSearchFiltersPanelButton}
       </div>
+
+      {listingsAreLoaded && resultsCount > 0 ? (
+        <div className={css.searchResultSummary}>
+          <span className={css.resultsFound}>
+            <FormattedMessage id="SearchFilters.foundResults" values={{ count: resultsCount }} />
+          </span>
+        </div>
+      ) : null}
 
       {hasNoResult ? (
         <div className={css.noSearchResults}>
@@ -235,6 +357,8 @@ SearchFiltersComponent.defaultProps = {
   className: null,
   resultsCount: null,
   searchingInProgress: false,
+  categoryFilter: null,
+  amenitiesFilter: null,
   priceFilter: null,
   dateRangeFilter: null,
   isSearchFiltersPanelOpen: false,
@@ -250,6 +374,8 @@ SearchFiltersComponent.propTypes = {
   resultsCount: number,
   searchingInProgress: bool,
   onManageDisableScrolling: func.isRequired,
+  categoriesFilter: propTypes.filterConfig,
+  amenitiesFilter: propTypes.filterConfig,
   priceFilter: propTypes.filterConfig,
   dateRangeFilter: propTypes.filterConfig,
   isSearchFiltersPanelOpen: bool,

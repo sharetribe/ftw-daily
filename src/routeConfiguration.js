@@ -1,8 +1,17 @@
 import React from 'react';
 import {
+  YotiPage,
+  QuestionPage,
+  HowItWorksPage,
+  ContactPage,
+  FaqPage,
+  PetSittersPage,
+  PetOwnersPage,
+  PetServicesPage,
   AboutPage,
   AuthenticationPage,
   CheckoutPage,
+  FeaturedOne,
   ContactDetailsPage,
   EditListingPage,
   EmailVerificationPage,
@@ -14,8 +23,7 @@ import {
   PasswordChangePage,
   PasswordRecoveryPage,
   PasswordResetPage,
-  StripePayoutPage,
-  PaymentMethodsPage,
+  PayoutPreferencesPage,
   PrivacyPolicyPage,
   ProfilePage,
   ProfileSettingsPage,
@@ -23,6 +31,30 @@ import {
   StyleguidePage,
   TermsOfServicePage,
   TransactionPage,
+  OrderTypesPage,
+  PresskitPage,
+  HelpCenter,
+  PawSquadPage,
+  PaymentServicePage,
+  PaymentSitterPage,
+  PaymentOwnerPage,
+  PaymentAffiliatePage,
+  PetOwnerQuestions,
+  PetServicesQuestions,
+  GeneralQuestionsPage,
+  MembershipPage,
+  DogSitting,
+  CatSitting,
+  HouseSittersUk,
+  PetSittersUk,
+  AboutUsPage,
+  AffiliatePage,
+  CrowdFundingPage,
+  PetServiceExplainer,
+  WeVetPage,
+  GuaranteePage,
+  SuperHogPage,
+  WhyPetOwnersPage,
 } from './containers';
 
 // routeConfiguration needs to initialize containers first
@@ -33,8 +65,7 @@ import { NamedRedirect } from './components';
 export const ACCOUNT_SETTINGS_PAGES = [
   'ContactDetailsPage',
   'PasswordChangePage',
-  'StripePayoutPage',
-  'PaymentMethodsPage',                  
+  'PayoutPreferencesPage',
 ];
 
 // https://en.wikipedia.org/wiki/Universally_unique_identifier#Nil_UUID
@@ -43,20 +74,167 @@ const draftSlug = 'draft';
 
 const RedirectToLandingPage = () => <NamedRedirect name="LandingPage" />;
 
-// NOTE: Most server-side endpoints are prefixed with /api. Requests to those
-// endpoints are indended to be handled in the server instead of the browser and
-// they will not render the application. So remember to avoid routes starting
-// with /api and if you encounter clashing routes see server/index.js if there's
-// a conflicting route defined there.
-
 // Our routes are exact by default.
 // See behaviour from Routes.js where Route is created.
 const routeConfiguration = () => {
   return [
     {
+      path: '/yoti',
+      name: 'YotiPage',
+      component: YotiPage,
+    },
+    {
+      path: '/pet-sitters-uk',
+      name: 'PetSittersUk',
+      component: PetSittersUk,
+    },
+    {
+      path: '/house-sitters-uk',
+      name: 'HouseSittersUk',
+      component: HouseSittersUk,
+    },
+    {
+      path: '/dog-sitting',
+      name: 'DogSitting',
+      component: DogSitting,
+    },
+    {
+      path: '/cat-sitting',
+      name: 'CatSitting',
+      component: CatSitting,
+    },
+    {
+      path: '/pet-sitter-questions/:id',
+      name: 'QuestionPage',
+      component: QuestionPage,
+    },
+    {
+      path: '/general/:id',
+      name: 'GeneralQuestionsPage',
+      component: GeneralQuestionsPage,
+    },
+    {
+      path: '/howitworks',
+      name: 'HowItWorksPage',
+      component: HowItWorksPage,
+    },
+    {
+      path: '/contact',
+      name: 'ContactPage',
+      component: ContactPage,
+    },
+    {
+      path: '/petservices',
+      name: 'PetServiceExplainer',
+      component: PetServiceExplainer,
+    },
+    {
+      path: '/about',
+      name: 'WeVetPage',
+      component: WeVetPage,
+    },
+    {
+      path: '/guarantee',
+      name: 'GuaranteePage',
+      component: GuaranteePage,
+    },
+    {
+      path: '/faq',
+      name: 'FaqPage',
+      component: FaqPage,
+    },
+    {
+      path: '/helpcenter',
+      name: 'HelpCenter',
+      component: HelpCenter,
+    },
+    {
+      path: '/affiliate',
+      name: 'AffiliatePage',
+      component: AffiliatePage,
+    },
+    {
+      path: '/crowdtest',
+      name: 'CrowdFundingPage',
+      component: CrowdFundingPage,
+    },
+    {
+      path: '/virtualvet',
+      name: 'PawSquadPage',
+      component: PawSquadPage,
+    },
+    {
+      path: '/superhog',
+      name: 'SuperHogPage',
+      component: SuperHogPage,
+    },
+    {
+      path: '/payment-service',
+      name: 'PaymentServicePage',
+      auth: true,
+      component: PaymentServicePage,
+    },
+    {
+      path: '/payment-sitter',
+      name: 'PaymentSitterPage',
+      auth: true,
+      component: PaymentSitterPage,
+    },
+    {
+      path: '/payment-owner',
+      name: 'PaymentOwnerPage',
+      auth: true,
+      component: PaymentOwnerPage,
+    },
+    {
+      path: '/payment-success',
+      name: 'PaymentAffiliatePage',
+      component: PaymentAffiliatePage,
+    },
+    {
+      path: '/pet-sitter-faq',
+      name: 'PetSittersPage',
+      component: PetSittersPage,
+    },
+    {
+      path: '/pet-services-faq',
+      name: 'PetServicesPage',
+      component: PetServicesPage,
+    },
+    {
+      path: '/pet-service-questions/:id',
+      name: 'PetServicesQuestions',
+      component: PetServicesQuestions,
+    },
+    {
+      path: '/pet-owner-questions/:id',
+      name: 'PetOwnerQuestions',
+      component: PetOwnerQuestions,
+    },
+    {
+      path: '/pet-owner-faq',
+      name: 'PetOwnersPage',
+      component: PetOwnersPage,
+    },
+    {
+      path: '/aboutus',
+      name: 'AboutUsPage',
+      component: AboutUsPage,
+    },
+    {
+      path: '/press-private',
+      name: 'PresskitPage',
+      component: PresskitPage,
+    },
+    {
       path: '/',
       name: 'LandingPage',
       component: props => <LandingPage {...props} />,
+    },
+    {
+      path: '/membership',
+      name: 'MembershipPage',
+      component: MembershipPage,
     },
     {
       path: '/about',
@@ -66,24 +244,45 @@ const routeConfiguration = () => {
     {
       path: '/s',
       name: 'SearchPage',
+      auth: true,
       component: props => <SearchPage {...props} />,
       loadData: SearchPage.loadData,
     },
     {
       path: '/s/filters',
       name: 'SearchFiltersPage',
+      auth: true,
       component: props => <SearchPage {...props} tab="filters" />,
       loadData: SearchPage.loadData,
     },
     {
+      path: '/reasons-hesitant-hire-professional-pet-sitter',
+      name: 'WhyPetOwnersPage',
+      component: WhyPetOwnersPage,
+    },
+    {
       path: '/s/listings',
       name: 'SearchListingsPage',
+      auth: true,
+      component: props => <SearchPage {...props} tab="listings" />,
+      loadData: SearchPage.loadData,
+    },
+    {
+      path: '/s?pub_user_type=1',
+      name: 'SearchPetSitter',
+      component: props => <SearchPage {...props} tab="listings" />,
+      loadData: SearchPage.loadData,
+    },
+    {
+      path: '/s?pub_user_type=0',
+      name: 'SearchPetOwner',
       component: props => <SearchPage {...props} tab="listings" />,
       loadData: SearchPage.loadData,
     },
     {
       path: '/s/map',
       name: 'SearchMapPage',
+      auth: true,
       component: props => <SearchPage {...props} tab="map" />,
       loadData: SearchPage.loadData,
     },
@@ -95,6 +294,7 @@ const routeConfiguration = () => {
     {
       path: '/l/:slug/:id',
       name: 'ListingPage',
+      auth: true,
       component: props => <ListingPage {...props} />,
       loadData: ListingPage.loadData,
     },
@@ -125,6 +325,39 @@ const routeConfiguration = () => {
       ),
     },
     {
+      path: '/l/new',
+      name: 'NewListingPage-owner',
+      auth: true,
+      component: () => (
+        <NamedRedirect
+          name="EditListingPage_category"
+          params={{ slug: draftSlug, id: draftId, type: 'new', tab: 'description_owner' }}
+        />
+      ),
+    },
+    {
+      path: '/l/new',
+      name: 'NewListingPage-sitter',
+      auth: true,
+      component: () => (
+        <NamedRedirect
+          name="EditListingPage_category"
+          params={{ slug: draftSlug, id: draftId, type: 'new', tab: 'description_sitter' }}
+        />
+      ),
+    },
+    {
+      path: '/l/new',
+      name: 'NewListingPage-service',
+      auth: true,
+      component: () => (
+        <NamedRedirect
+          name="EditListingPage_category"
+          params={{ slug: draftSlug, id: draftId, type: 'new', tab: 'description_service' }}
+        />
+      ),
+    },
+    {
       path: '/l/:slug/:id/:type/:tab',
       name: 'EditListingPage',
       auth: true,
@@ -132,8 +365,8 @@ const routeConfiguration = () => {
       loadData: EditListingPage.loadData,
     },
     {
-      path: '/l/:slug/:id/:type/:tab/:returnURLType',
-      name: 'EditListingStripeOnboardingPage',
+      path: '/l/:slug/:id/:type/:tab',
+      name: 'EditListingPage_category',
       auth: true,
       component: props => <EditListingPage {...props} />,
       loadData: EditListingPage.loadData,
@@ -258,27 +491,11 @@ const routeConfiguration = () => {
     },
     {
       path: '/account/payments',
-      name: 'StripePayoutPage',
+      name: 'PayoutPreferencesPage',
       auth: true,
       authPage: 'LoginPage',
-      component: props => <StripePayoutPage {...props} />,
-      loadData: StripePayoutPage.loadData,
-    },
-    {
-      path: '/account/payments/:returnURLType',
-      name: 'StripePayoutOnboardingPage',
-      auth: true,
-      authPage: 'LoginPage',
-      component: props => <StripePayoutPage {...props} />,
-      loadData: StripePayoutPage.loadData,
-    },
-    {
-      path: '/account/payment-methods',
-      name: 'PaymentMethodsPage',
-      auth: true,
-      authPage: 'LoginPage',
-      component: props => <PaymentMethodsPage {...props} />,
-      loadData: PaymentMethodsPage.loadData,
+      component: props => <PayoutPreferencesPage {...props} />,
+      loadData: PayoutPreferencesPage.loadData,
     },
     {
       path: '/terms-of-service',
@@ -320,6 +537,13 @@ const routeConfiguration = () => {
       name: 'NotFoundPage',
       component: props => <NotFoundPage {...props} />,
     },
+    {
+      path: '/yoti-verified',
+      name: 'ProfileSettingsPage',
+      auth: true,
+      authPage: 'LoginPage',
+      component: props => <NamedRedirect name="ProfileSettingsPage" {...props} />,
+    },
 
     // Do not change this path!
     //
@@ -340,6 +564,13 @@ const routeConfiguration = () => {
       authPage: 'LoginPage',
       component: props => <EmailVerificationPage {...props} />,
       loadData: EmailVerificationPage.loadData,
+    },
+
+    {
+      path: '/ordertype/:type',
+      name: 'OrderTypesPage',
+      auth: true,
+      component: props => <OrderTypesPage {...props} />,
     },
   ];
 };

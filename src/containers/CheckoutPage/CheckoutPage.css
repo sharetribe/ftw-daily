@@ -14,6 +14,10 @@
   --CheckoutPage_logoHeightDesktop: 27px;
 }
 
+.loading {
+  margin: 24px;
+}
+
 /* Dummy Topbar */
 
 .topbar {
@@ -62,7 +66,9 @@
 .logoDesktop {
   display: none;
   width: auto;
-  height: 27px;
+  height: 60px;
+  position: relative;
+  bottom: 1px;
 
   @media (--viewportLarge) {
     display: block;
@@ -197,7 +203,7 @@
 
 .priceBreakdownContainer {
   padding: 0 24px;
-  margin-bottom: 37px;
+  margin-bottom: 40px;
 
   @media (--viewportMedium) {
     margin-bottom: 38px;
@@ -232,12 +238,7 @@
   padding: 0 24px;
   margin-bottom: 35px;
 
-  @media (--viewportMedium) {
-    margin-top: 2px;
-  }
-
   @media (--viewportLarge) {
-    margin-top: 4px;
     padding: 0;
   }
 }

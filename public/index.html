@@ -2,24 +2,114 @@
 <html data-htmlattr="htmlAttributes">
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <!--!title-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Google Verification -->
+    <meta name="google-site-verification" content="jwFhYYQvlw9O9r6a6rv9F_NbFMRnmYScfwjYNxPJW_E" />
     <!--!meta-->
 
     <!--!googleAnalyticsScript-->
 
+    <link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+  crossorigin="anonymous"
+/>
+
+    <script src="%PUBLIC_URL%/static/progressbar/pace.js"></script>
+    <script src="https://www.yoti.com/share/client/"></script>
+    <link href="%PUBLIC_URL%/static/progressbar/css/progressbar.css" rel="stylesheet" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css" rel="stylesheet" />
+    
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
+
     <link rel="manifest" href="%PUBLIC_URL%/static/manifest.json">
 
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+
     <!-- Start Favicons from https://realfavicongenerator.net/ -->
+    <link rel="stylesheet" href="https://res.cloudinary.com/dtyofozjx/raw/upload/v1568988443/style_fw2gps.css">
+    <link rel="stylesheet" href="%PUBLIC_URL%/static/css/customIndex.css">
+    <link rel="stylesheet" href="%PUBLIC_URL%/static/css/video-react.css">
+    <link rel="stylesheet" href="%PUBLIC_URL%/static/css/alice-carousel.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.2/flatpickr.min.css">
     <link rel="apple-touch-icon" sizes="180x180" href="/static/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/static/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/static/icons/favicon-16x16.png">
-    <link rel="manifest" href="/static/icons/site.webmanifest">
-    <link rel="mask-icon" href="/static/icons/safari-pinned-tab.svg" color="#a22285">
+    <link rel="mask-icon" href="/static/icons/safari-pinned-tab.svg" color="#c0392b">
     <link rel="shortcut icon" href="/static/icons/favicon.ico">
-    <meta name="msapplication-TileColor" content="#9f00a7">
     <meta name="msapplication-config" content="/static/icons/browserconfig.xml">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#c0392b">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Satisfy&display=swap" rel="stylesheet">
+    
+
+   <script src="https://unpkg.com/react/umd/react.production.min.js" crossorigin></script>
+   <script
+   src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"
+   crossorigin></script>
+   <script
+   src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js"
+   crossorigin></script>
+   <script
+   src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"
+   crossorigin></script>
+
+<script
+  src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js"
+  crossorigin></script>
+
+<!-- Hotjar Tracking Code for https://www.trustmypetsitter.com -->
+<script>
+  (function(h,o,t,j,a,r){
+      h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+      h._hjSettings={hjid:1761226,hjsv:6};
+      a=o.getElementsByTagName('head')[0];
+      r=o.createElement('script');r.async=1;
+      r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+      a.appendChild(r);
+  })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+
+<script>var Alert = ReactBootstrap.Alert;</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.2/flatpickr.min.js"></script>
+    <script>
+      { // Initialize and add the map
+      //   function initMap() {
+      //   The location of Uluru
+      //   var uluru = {lat: -25.344, lng: 131.036};
+      //   The map, centered at Uluru
+      //   var map = new google.maps.Map(
+      //       document.getElementById('map'), {zoom: 4, center: uluru});
+      //   The marker, positioned at Uluru
+      //   var marker = new google.maps.Marker({position: uluru, map: map});
+      // }
+      function myMap() {
+        var mapProp= {
+          center:new google.maps.LatLng(51.508742,-0.120850),
+          zoom:5,
+        };
+        var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+      }
+    </script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    api_key = AIzaSyDDtsDdiFwnaIJY80F-5calOZyFFPXHfSQ
+    -->
+    <!-- <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDtsDdiFwnaIJY80F-5calOZyFFPXHfSQ&callback=myMap">
+    </script> -->
+    <!-- <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&callback=initMap">
+    </script> -->
     <!-- End Favicons -->
 
     <!--!link-->
@@ -74,7 +164,14 @@
           font-style: normal;
       }
 
+      .flatpickr-calendar .numInputWrapper{
+        position: absolute;
+        top: 20%;
+        margin-left:20%;
+      }
+	 
     </style>
+ 
     <script>
       (function(document){
         // Optimization for repeated views
@@ -87,10 +184,27 @@
     </script>
 
     <link rel="stylesheet" href="%PUBLIC_URL%/static/reactDates.css" />
+
+    <!-- Start of HubSpot Embed Code -->
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/6801241.js"></script>
+    <!-- End of HubSpot Embed Code -->
   </head>
   <body>
+    <style>
+      @font-face {
+    font-family: "narrow";
+    src: url("%PUBLIC_URL%/static/fonts/narrow/domaine-display-narrow-test-regular.woff") format('woff');
+}
+
+@font-face {
+    font-family: "myfont";
+    src: url("%PUBLIC_URL%/static/fonts/narrow/domaine-display-narrow-test-bold.woff") format('woff');
+    font-weight: bold;
+}
+
+    </style>
     <div id="root"><!--!body--></div>
-    <div id="portal-root"></div>
+
     <script>
       (function(document){
         // Check if Promise exists in window
@@ -151,6 +265,7 @@
       mapbox-sdk.min.js is included from static folder for CSP purposes.
       We didn't bundle it to the main app since it would unnecessarily slow down initial rendering.
     -->
+    <script src="%PUBLIC_URL%/static/scripts/custom/custom.js"></script>
     <script src="%PUBLIC_URL%/static/scripts/mapbox/mapbox-sdk.min.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css" rel="stylesheet" />
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js"></script>
@@ -159,7 +274,7 @@
     </script>
     <!--
       If Google Maps is used instead of Mapbox, you need to include Google's script instead:
-      <script src="https://maps.googleapis.com/maps/api/js?key=%REACT_APP_GOOGLE_MAPS_API_KEY%&libraries=places"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places"></script>
     -->
 
     <!--
@@ -179,5 +294,24 @@
 
          See docs/content-security-policy.md for more information.
     -->
+    
+<!-- Default Statcounter code for Trust My Pet Sitter
+https://www.trustmypetsitter.com -->
+<script type="text/javascript">
+var sc_project=11352732;
+var sc_invisible=1;
+var sc_security="ef55e725";
+var sc_https=1;
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics"
+href="https://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="https://c.statcounter.com/11352732/0/ef55e725/1/"
+alt="Web Analytics"></a></div></noscript>
+<!-- End of Statcounter Code -->
+
   </body>
 </html>

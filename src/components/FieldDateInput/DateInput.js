@@ -12,7 +12,7 @@ import {
   isInclusivelyBeforeDay,
   isSameDay,
 } from 'react-dates';
-import { intlShape, injectIntl } from '../../util/reactIntl';
+import { intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import moment from 'moment';
 import config from '../../config';

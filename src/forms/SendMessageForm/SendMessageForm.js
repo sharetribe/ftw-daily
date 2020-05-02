@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { string, bool, func } from 'prop-types';
 import { compose } from 'redux';
-import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Form as FinalForm } from 'react-final-form';
 import classNames from 'classnames';
 import { Form, FieldTextInput, SecondaryButton } from '../../components';
@@ -66,7 +66,6 @@ class SendMessageFormComponent extends Component {
             sendMessageError,
             invalid,
             form,
-            formId,
           } = formRenderProps;
 
           const classes = classNames(rootClassName || css.root, className);
@@ -77,7 +76,7 @@ class SendMessageFormComponent extends Component {
               <FieldTextInput
                 inputRootClass={css.textarea}
                 type="textarea"
-                id={formId ? `${formId}.message` : 'message'}
+                id="message"
                 name="message"
                 placeholder={messagePlaceholder}
                 onFocus={this.handleFocus}

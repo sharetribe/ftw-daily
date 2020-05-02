@@ -36,12 +36,11 @@
   flex-shrink: 0;
 
   @media (--viewportLarge) {
-    margin: 0 96px 44px 0;
+    margin: 0 96px 20px 0;
   }
 }
 
 .mobileHeading {
-  flex-shrink: 0;
   margin: 47px 0 0 0;
 
   @media (--viewportMedium) {
@@ -51,6 +50,16 @@
     display: none;
   }
 }
+
+.yotiMob {
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 1024px) {
+.yotiPc {
+  display: none;
+}}
 
 .editLinkMobile {
   margin-top: 17px;
@@ -71,6 +80,7 @@
 
   @media (--viewportLarge) {
     display: inline;
+    margin-top: 10px;
   }
 }
 
@@ -92,7 +102,7 @@
     margin: 4px 0 51px 0;
   }
   @media (--viewportLarge) {
-    margin: 0 0 56px 0;
+    margin: 0 0 30px 0;
     max-width: 600px;
   }
 }
@@ -104,21 +114,21 @@
   padding-bottom: 23px;
 
   @media (--viewportMedium) {
-    padding-bottom: 22px;
+    padding-bottom: 10px;
   }
 }
 
 .listingsTitle {
   @apply --marketplaceH3FontStyles;
-  color: var(--matterColorAnti);
+  color: #000;
   margin-bottom: 0;
 
   @media (--viewportMedium) {
-    margin-top: 48px;
+    margin-top: 30px;
     margin-bottom: 8px;
   }
   @media (--viewportLarge) {
-    margin-top: 58px;
+    margin-top: 30px;
     margin-bottom: 8px;
   }
 }
@@ -180,7 +190,7 @@
 }
 
 .desktopReviews {
-  margin-top: 28px;
+  margin-top: 0px;
 
   @media (--viewportMedium) {
     margin-bottom: 48px;
@@ -199,4 +209,8 @@
 
 .desktopReviewsTabNav {
   margin-bottom: 32px;
+}
+
+.YotiMobile {
+  display: flex;
 }

@@ -1,28 +1,26 @@
 import React from 'react';
 import { bool, func, object, string } from 'prop-types';
 import classNames from 'classnames';
-import { FormattedMessage } from '../../util/reactIntl';
+import { FormattedMessage } from 'react-intl';
 import { ensureOwnListing } from '../../util/data';
 import { ListingLink } from '../../components';
 import { LISTING_STATE_DRAFT } from '../../util/types';
 import { EditListingDescriptionForm } from '../../forms';
-import config from '../../config';
-
 import css from './EditListingDescriptionPanel.css';
+import config from '../../config';
 
 const EditListingDescriptionPanel = props => {
   const {
     className,
     rootClassName,
     listing,
-    disabled,
-    ready,
     onSubmit,
     onChange,
     submitButtonText,
     panelUpdated,
     updateInProgress,
     errors,
+    user_type,
   } = props;
 
   const classes = classNames(rootClassName || css.root, className);
@@ -30,39 +28,48 @@ const EditListingDescriptionPanel = props => {
   const { description, title, publicData } = currentListing.attributes;
 
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
+  const user_name = user_type === 0 ? "owner" : user_type === 1 ? "sitter" : "service";
+  const publish = isPublished ? "title." : "createListingTitle.";
+  const DescriptionPanelTitle = 'EditListingDescriptionPanel.' + publish + user_name;
+  const service = config.custom.service;
   const panelTitle = isPublished ? (
     <FormattedMessage
-      id="EditListingDescriptionPanel.title"
+      id={DescriptionPanelTitle}
       values={{ listingTitle: <ListingLink listing={listing} /> }}
     />
   ) : (
-    <FormattedMessage id="EditListingDescriptionPanel.createListingTitle" />
-  );
+      <FormattedMessage id={DescriptionPanelTitle} />
+    );
 
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
       <EditListingDescriptionForm
         className={css.form}
-        initialValues={{ title, description, category: publicData.category }}
+        initialValues={{ title, description, user_type, service: publicData.service, sittertype: publicData.sittertype, foodtype: publicData.foodtype }}
         saveActionMsg={submitButtonText}
         onSubmit={values => {
-          const { title, description, category } = values;
+          const { title, description, user_type, service, foodtype, sittertype } = values;
           const updateValues = {
             title: title.trim(),
-            description,
-            publicData: { category },
+            description: description,
+            publicData:
+            {
+              user_type,
+              service,
+              foodtype,
+              sittertype
+            }
           };
 
           onSubmit(updateValues);
         }}
         onChange={onChange}
-        disabled={disabled}
-        ready={ready}
         updated={panelUpdated}
         updateInProgress={updateInProgress}
         fetchErrors={errors}
-        categories={config.custom.categories}
+        user_type={user_type}
+        service={service}
       />
     </div>
   );
@@ -82,8 +89,6 @@ EditListingDescriptionPanel.propTypes = {
   // We cannot use propTypes.listing since the listing might be a draft.
   listing: object,
 
-  disabled: bool.isRequired,
-  ready: bool.isRequired,
   onSubmit: func.isRequired,
   onChange: func.isRequired,
   submitButtonText: string.isRequired,

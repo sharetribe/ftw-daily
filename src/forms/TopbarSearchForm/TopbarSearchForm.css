@@ -23,10 +23,6 @@
   width: 100%;
 }
 
-.desktopInputRoot {
-  height: var(--topbarHeightDesktop);
-}
-
 .mobileIcon {
   margin-left: 24px;
   padding: 11px 0 17px 0;
@@ -67,27 +63,34 @@
   }
 }
 
+.desktopInput::placeholder {
+  color: rgb(0, 0, 0, .5) !important;
+  font-size: 19px;
+}
+
 .desktopIcon {
   height: var(--topbarHeightDesktop);
   border: none;
-  padding-top: 3px;
-
+  padding-top: 1px;
   display: flex;
   width: 24px;
   align-self: stretch;
-  background-color: var(--matterColorLight);
+  position: relative;
+  left: 10px;
 }
 
 .desktopInput {
+  height: 72px;
+  border-radius: 5px;
   flex-grow: 1;
+  color: #4a4a4a;
   /* Font */
   @apply --marketplaceH4FontStyles;
-  height: var(--topbarHeightDesktop);
   line-height: unset;
   border: none;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 10px;
+  padding-top: 6.5px;
+  padding-bottom: 10px;
+  padding-left: 22px;
 
   /* Search text gets ellipsis if it's too wide */
   text-overflow: ellipsis;
@@ -100,7 +103,7 @@
 
   &:hover,
   &:focus {
-    border-bottom-color: var(--marketplaceColor);
+    
     outline: none;
   }
 
@@ -123,6 +126,8 @@
     margin-top: 0;
     margin-bottom: 0;
     font-weight: var(--fontWeightSemiBold);
+    font-size: 20px;
+    line-height: 24px;
   }
 }
 
@@ -153,7 +158,7 @@
   padding-bottom: var(--locationAutocompleteBottomPadding);
   top: 50px;
   left: 0;
-  background-color: var(--marketplaceColor);
+  background-color: #41a6df;
   border-bottom-left-radius: var(--borderRadius);
   border-bottom-right-radius: var(--borderRadius);
   box-shadow: var(--boxShadowPopup);
@@ -165,3 +170,4 @@
   );
   max-width: 434px;
 }
+

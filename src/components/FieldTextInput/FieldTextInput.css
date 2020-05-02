@@ -4,7 +4,7 @@
 }
 
 .input {
-  border-bottom-color: var(--attentionColor);
+  border-bottom-color: #c9bd9c;
 }
 
 .inputSuccess {
@@ -13,6 +13,10 @@
 
 .inputError {
   border-bottom-color: var(--failColor);
+}
+
+.input:focus {
+  border-bottom-color: #c9bd9c !important;
 }
 
 .textarea {

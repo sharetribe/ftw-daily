@@ -7,10 +7,10 @@
 
 .bookingDates {
   flex-shrink: 0;
-  margin-bottom: 38px;
+  margin-bottom: 7px;
 
   /* Ensure that calendar dropdown gets some stacking context relative to other form items below */
-  z-index: 1;
+  z-index: 2;
 }
 
 .priceBreakdownContainer {
@@ -26,13 +26,12 @@
 
 .priceBreakdownTitle {
   /* Font */
-  color: var(--matterColorAnti);
-
-  margin-top: 5px;
-  margin-bottom: 14px;
+  color: #000;
+  margin-top: 15px;
+  margin-bottom: 15px;
   @media (--viewportMedium) {
-    margin-top: 5px;
-    margin-bottom: 26px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   }
 }
 
@@ -84,4 +83,24 @@
     padding: 0;
     width: 100%;
   }
+}
+
+.stripeImg {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.stripeHr {
+  margin-top: 21px;
+  margin-bottom: 15px;
+  border-color: #e7e7e7;
+  opacity: 0.5;
+}
+
+.smallPrint:nth-child(2) {
+  margin-top: 15px;
+}
+
+.submitHref {
+  text-decoration: none !important;
 }

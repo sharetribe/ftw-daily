@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bool, func, node, number, object, string } from 'prop-types';
 import classNames from 'classnames';
-import { injectIntl, intlShape } from '../../util/reactIntl';
+import { injectIntl, intlShape } from 'react-intl';
 
 import { OutsideClickHandler } from '../../components';
 import { FilterForm } from '../../forms';
@@ -103,7 +103,6 @@ class FilterPopup extends Component {
       popupClassName,
       id,
       label,
-      labelMaxWidth,
       isSelected,
       children,
       initialValues,
@@ -115,8 +114,6 @@ class FilterPopup extends Component {
     const popupClasses = classNames(css.popup, { [css.isOpen]: this.state.isOpen });
     const popupSizeClasses = popupClassName || css.popupSize;
     const labelStyles = isSelected ? css.labelSelected : css.label;
-    const labelMaxWidthMaybe = labelMaxWidth ? { maxWidth: `${labelMaxWidth}px` } : {};
-    const labelMaxWidthStyles = labelMaxWidth ? css.labelEllipsis : null;
     const contentStyle = this.positionStyleForContent();
 
     return (
@@ -128,11 +125,7 @@ class FilterPopup extends Component {
             this.filter = node;
           }}
         >
-          <button
-            className={classNames(labelStyles, labelMaxWidthStyles)}
-            style={labelMaxWidthMaybe}
-            onClick={() => this.toggleOpen()}
-          >
+          <button className={labelStyles} onClick={() => this.toggleOpen()}>
             {label}
           </button>
           <div
@@ -174,7 +167,6 @@ FilterPopup.defaultProps = {
   contentPlacementOffset: 0,
   liveEdit: false,
   label: null,
-  labelMaxWidth: null,
 };
 
 FilterPopup.propTypes = {
@@ -188,7 +180,6 @@ FilterPopup.propTypes = {
   keepDirtyOnReinitialize: bool,
   contentPlacementOffset: number,
   label: string.isRequired,
-  labelMaxWidth: number,
   isSelected: bool.isRequired,
   children: node.isRequired,
 

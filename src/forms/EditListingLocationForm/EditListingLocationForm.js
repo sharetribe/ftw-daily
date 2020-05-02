@@ -2,7 +2,7 @@ import React from 'react';
 import { bool, func, shape, string } from 'prop-types';
 import { compose } from 'redux';
 import { Form as FinalForm } from 'react-final-form';
-import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
+import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import {
@@ -10,20 +10,27 @@ import {
   autocompletePlaceSelected,
   composeValidators,
 } from '../../util/validators';
-import { Form, LocationAutocompleteInputField, Button, FieldTextInput } from '../../components';
+import { ensureOwnListing } from '../../util/data';
+import config from '../../config';
+import {
+  Form,
+  LocationAutocompleteInputField,
+  FieldCheckboxGroup,
+  Button,
+  FieldTextInput,
+  FieldCurrencyInput,
+} from '../../components';
 
+import SectionMapMaybe from '../../containers/ListingPage/SectionMapMaybe';
 import css from './EditListingLocationForm.css';
-
-const identity = v => v;
 
 export const EditListingLocationFormComponent = props => (
   <FinalForm
     {...props}
-    render={formRenderProps => {
+    render={fieldRenderProps => {
       const {
         className,
         disabled,
-        ready,
         handleSubmit,
         intl,
         invalid,
@@ -33,9 +40,13 @@ export const EditListingLocationFormComponent = props => (
         updateInProgress,
         fetchErrors,
         values,
-      } = formRenderProps;
-
-      const titleRequiredMessage = intl.formatMessage({ id: 'EditListingLocationForm.address' });
+        listing,
+        user_type,
+      } = fieldRenderProps;
+      const user_name = user_type === 2 ? 'service' : user_type === 1 ? 'sitter' : 'owner';
+      const titleRequiredMessage = intl.formatMessage({
+        id: 'EditListingLocationForm.address' + '.' + user_name,
+      });
       const addressPlaceholderMessage = intl.formatMessage({
         id: 'EditListingLocationForm.addressPlaceholder',
       });
@@ -46,14 +57,7 @@ export const EditListingLocationFormComponent = props => (
         id: 'EditListingLocationForm.addressNotRecognized',
       });
 
-      const optionalText = intl.formatMessage({
-        id: 'EditListingLocationForm.optionalText',
-      });
-
-      const buildingMessage = intl.formatMessage(
-        { id: 'EditListingLocationForm.building' },
-        { optionalText: optionalText }
-      );
+      const buildingMessage = intl.formatMessage({ id: 'EditListingLocationForm.building' });
       const buildingPlaceholderMessage = intl.formatMessage({
         id: 'EditListingLocationForm.buildingPlaceholder',
       });
@@ -72,9 +76,12 @@ export const EditListingLocationFormComponent = props => (
       ) : null;
 
       const classes = classNames(css.root, className);
-      const submitReady = (updated && pristine) || ready;
+      const submitReady = updated && pristine;
       const submitInProgress = updateInProgress;
       const submitDisabled = invalid || disabled || submitInProgress;
+
+      const currentListing = ensureOwnListing(listing);
+      const { geolocation, publicData } = currentListing.attributes;
 
       return (
         <Form className={classes} onSubmit={handleSubmit}>
@@ -91,7 +98,7 @@ export const EditListingLocationFormComponent = props => (
             label={titleRequiredMessage}
             placeholder={addressPlaceholderMessage}
             useDefaultPredictions={false}
-            format={identity}
+            format={null}
             valueFromForm={values.location}
             validate={composeValidators(
               autocompleteSearchRequired(addressRequiredMessage),
@@ -99,15 +106,28 @@ export const EditListingLocationFormComponent = props => (
             )}
           />
 
-          <FieldTextInput
+          {/* <FieldTextInput
             className={css.building}
             type="text"
             name="building"
             id="building"
             label={buildingMessage}
             placeholder={buildingPlaceholderMessage}
-          />
+          /> */}
 
+          {!user_type ? (
+            <FieldCurrencyInput
+              id="price"
+              name="price"
+              currencyConfig={config.currencyConfig}
+              className={css.hiden}
+            />
+          ) : null}
+          <SectionMapMaybe
+            geolocation={geolocation}
+            publicData={publicData}
+            listingId={currentListing.id}
+          />
           <Button
             className={css.submitButton}
             type="submit"
@@ -133,8 +153,6 @@ EditListingLocationFormComponent.propTypes = {
   onSubmit: func.isRequired,
   saveActionMsg: string.isRequired,
   selectedPlace: propTypes.place,
-  disabled: bool.isRequired,
-  ready: bool.isRequired,
   updated: bool.isRequired,
   updateInProgress: bool.isRequired,
   fetchErrors: shape({

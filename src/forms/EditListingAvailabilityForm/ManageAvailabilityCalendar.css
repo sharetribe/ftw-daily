@@ -2,10 +2,10 @@
 
 :root {
   --ManageAvailabilityCalendar_gridColor: #e0e0e0;
-  --ManageAvailabilityCalendar_availableColor: #ffffff;
-  --ManageAvailabilityCalendar_availableColorHover: #fafafa;
-  --ManageAvailabilityCalendar_blockedColor: #ebebeb;
-  --ManageAvailabilityCalendar_blockedColorHover: #e6e6e6;
+  --ManageAvailabilityCalendar_availableColor: #41a6df;
+  --ManageAvailabilityCalendar_availableColorHover: #5fafff;
+  --ManageAvailabilityCalendar_blockedColor: #fff;
+  --ManageAvailabilityCalendar_blockedColorHover: #41a6df;
   --ManageAvailabilityCalendar_reservedColor: #e6fff0;
   --ManageAvailabilityCalendar_reservedColorHover: #e1faeb;
   --ManageAvailabilityCalendar_failedColor: #fff2f2;
@@ -122,6 +122,7 @@
 
   & :global(.CalendarDay__default) {
     border: 0;
+    color: #fff;
     background-color: var(--ManageAvailabilityCalendar_gridColor);
 
     &:hover {
@@ -131,7 +132,7 @@
   }
 
   & :global(.CalendarDay__selected) {
-    color: var(--matterColor);
+    color: #fff;
   }
 
   & :global(.DayPickerKeyboardShortcuts_show__bottomRight) {
@@ -139,6 +140,10 @@
     right: 19px;
     bottom: -24px;
   }
+}
+
+.CalendarDay__selected .dayNumber:after {
+  background: red !important;
 }
 
 .dayWrapper {
@@ -170,8 +175,12 @@
   background-color: var(--ManageAvailabilityCalendar_availableColor);
 }
 
+.outsideRange:hover .dayNumber {
+  color: lightgrey !important;
+}
+
 .outsideRange {
-  background-color: var(--ManageAvailabilityCalendar_blockedColor);
+  background-color: #ebebeb !important;
 
   &:hover {
     background-color: var(--ManageAvailabilityCalendar_blockedColorHover);
@@ -193,19 +202,20 @@
     /* underline */
     &:after {
       position: absolute;
-      content: '';
+      content: ;
       height: 2px;
       width: 100%;
       right: 0;
       bottom: -4px;
       left: 0;
       margin: 0 auto;
-      background-color: var(--matterColor);
+      background-color: #4a4a4a;
     }
   }
 }
 
 .blocked {
+  color: #4a4a4a;
   background-color: var(--ManageAvailabilityCalendar_blockedColor);
 
   &:hover {
@@ -214,9 +224,11 @@
 }
 
 .reserved {
+  color: #4a4a4a;
   background-color: var(--ManageAvailabilityCalendar_reservedColor);
 
   &:hover {
+    color: #4a4a4a !important;
     background-color: var(--ManageAvailabilityCalendar_reservedColorHover);
   }
 }
@@ -304,8 +316,13 @@
 }
 .legendAvailableColor {
   composes: legendColor;
-  background-color: var(--matterColorLight);
-  border: solid 2px var(--matterColorNegative);
+  background-color: #41a6df;
+  border: solid 2px #41a6df;
+}
+.legendPastColor {
+  composes: legendColor;
+  background-color: #ebebeb;
+  border: solid 2px #ebebeb;
 }
 .legendReservedColor {
   composes: legendColor;
@@ -313,13 +330,18 @@
 }
 .legendBlockedColor {
   composes: legendColor;
-  background-color: var(--ManageAvailabilityCalendar_blockedColorHover);
+    background-color: var(--matterColorLight);
+  border: solid 2px var(--matterColorNegative);
 }
 
 .legendText {
   @apply --marketplaceH4FontStyles;
   white-space: nowrap;
   margin: 0;
+}
+
+.day:hover {
+  color: #fff;
 }
 
 @media (--viewportSmall) {

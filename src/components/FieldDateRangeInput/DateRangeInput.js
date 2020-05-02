@@ -7,7 +7,7 @@
 import React, { Component } from 'react';
 import { bool, func, instanceOf, oneOf, shape, string, arrayOf } from 'prop-types';
 import { DateRangePicker, isInclusivelyAfterDay, isInclusivelyBeforeDay } from 'react-dates';
-import { intlShape, injectIntl } from '../../util/reactIntl';
+import { intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import moment from 'moment';
 import { START_DATE, END_DATE } from '../../util/dates';
@@ -138,12 +138,12 @@ class DateRangeInputComponent extends Component {
     this.onFocusChange = this.onFocusChange.bind(this);
   }
 
-  componentDidUpdate(prevProps) {
+  componentWillReceiveProps(nextProps) {
     // Update focusedInput in case a new value for it is
     // passed in the props. This may occur if the focus
     // is manually set to the date picker.
-    if (this.props.focusedInput && this.props.focusedInput !== prevProps.focusedInput) {
-      this.setState({ focusedInput: this.props.focusedInput });
+    if (nextProps.focusedInput && nextProps.focusedInput !== this.props.focusedInput) {
+      this.setState({ focusedInput: nextProps.focusedInput });
     }
   }
 
@@ -297,7 +297,7 @@ DateRangeInputComponent.propTypes = {
   className: string,
   startDateId: string,
   endDateId: string,
-  unitType: propTypes.bookingUnitType.isRequired,
+  // unitType: propTypes.bookingUnitType.isRequired,
   focusedInput: oneOf([START_DATE, END_DATE]),
   initialDates: instanceOf(Date),
   intl: intlShape.isRequired,

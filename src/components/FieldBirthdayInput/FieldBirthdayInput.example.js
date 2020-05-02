@@ -4,8 +4,6 @@ import { Form as FinalForm, FormSpy } from 'react-final-form';
 import * as validators from '../../util/validators';
 import FieldBirthdayInput from './FieldBirthdayInput';
 
-const identity = v => v;
-
 const FormComponent = props => (
   <FinalForm
     {...props}
@@ -27,8 +25,8 @@ const FormComponent = props => (
             id={`birthday`}
             name="birthday"
             label="Date of birth"
-            format={identity}
-            valueFromForm={values.birthday}
+            format={null}
+            valueFromForm={values.birthDate}
             validate={validators.composeValidators(required, minAgeRequired)}
           />
         </form>
@@ -43,24 +41,7 @@ export const Empty = {
     onChange: formState => {
       const birthday = formState.values.birthday;
       if (birthday) {
-        console.log('birthday changed to:', birthday);
-      }
-    },
-    onSubmit: values => {
-      console.log('BirthdayInput.Form submitted values:', values);
-    },
-  },
-  group: 'custom inputs',
-};
-
-export const WithInitialValue = {
-  component: FormComponent,
-  props: {
-    initialValues: { birthday: new Date('1982-03-01') },
-    onChange: formState => {
-      const birthday = formState.values.birthday;
-      if (birthday && formState.dirty) {
-        console.log('birthday changed to:', birthday);
+        console.log('birthday changed to:', birthday.toUTCString());
       }
     },
     onSubmit: values => {

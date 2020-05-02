@@ -14,8 +14,6 @@ export const Amenities = {
     saveActionMsg: 'Save amenities',
     updated: false,
     updateInProgress: false,
-    disabled: false,
-    ready: false,
   },
   group: 'forms',
 };

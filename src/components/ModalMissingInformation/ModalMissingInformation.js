@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import { bool, func, string } from 'prop-types';
-import { FormattedMessage } from '../../util/reactIntl';
+import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import routeConfiguration from '../../routeConfiguration';
 import { ensureCurrentUser } from '../../util/data';
@@ -18,7 +19,7 @@ const MISSING_INFORMATION_MODAL_WHITELIST = [
   'ContactDetailsPage',
   'EmailVerificationPage',
   'PasswordResetPage',
-  'StripePayoutPage',
+  'PayoutPreferencesPage',
 ];
 
 const EMAIL_VERIFICATION = 'EMAIL_VERIFICATION';
@@ -35,8 +36,8 @@ class ModalMissingInformation extends Component {
     this.handleMissingInformationReminder = this.handleMissingInformationReminder.bind(this);
   }
 
-  componentDidUpdate() {
-    const { currentUser, currentUserHasListings, currentUserHasOrders, location } = this.props;
+  componentWillReceiveProps(nextProps) {
+    const { currentUser, currentUserHasListings, currentUserHasOrders, location } = nextProps;
     const user = ensureCurrentUser(currentUser);
     this.handleMissingInformationReminder(
       user,
@@ -85,7 +86,19 @@ class ModalMissingInformation extends Component {
       if (emailVerificationNeeded) {
         this.setState({ showMissingInformationReminder: EMAIL_VERIFICATION });
       } else if (stripeAccountNeeded) {
-        this.setState({ showMissingInformationReminder: STRIPE_ACCOUNT });
+        // if (localStorage.getItem('notificationShownTime')) {
+        //   if (
+        //     moment
+        //       .duration(moment().diff(moment(localStorage.getItem('notificationShownTime'))))
+        //       .hours() != 0
+        //   ) {
+        //     this.setState({ showMissingInformationReminder: STRIPE_ACCOUNT });
+        //     localStorage.setItem('notificationShownTime', moment());
+        //   }
+        // } else {
+        //   this.setState({ showMissingInformationReminder: STRIPE_ACCOUNT });
+        //   localStorage.setItem('notificationShownTime', moment());
+        // }
       }
     }
   }
@@ -139,7 +152,6 @@ class ModalMissingInformation extends Component {
             hasSeenMissingInformationReminder: true,
           });
         }}
-        usePortal
         onManageDisableScrolling={onManageDisableScrolling}
         closeButtonMessage={closeButtonMessage}
       >

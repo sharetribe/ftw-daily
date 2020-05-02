@@ -3,7 +3,6 @@ import SendMessageForm from './SendMessageForm';
 export const Empty = {
   component: SendMessageForm,
   props: {
-    formId: 'SendMessageForm.Empty.Form',
     messagePlaceholder: 'Send message to Juho…',
     onChange: values => {
       console.log('values changed to:', values);
@@ -24,7 +23,6 @@ export const Empty = {
 export const InProgress = {
   component: SendMessageForm,
   props: {
-    formId: 'SendMessageForm.InProgress.Form',
     messagePlaceholder: 'Send message to Juho…',
     inProgress: true,
     onSubmit: values => {
@@ -37,7 +35,6 @@ export const InProgress = {
 export const Error = {
   component: SendMessageForm,
   props: {
-    formId: 'SendMessageForm.Error.Form',
     messagePlaceholder: 'Send message to Juho…',
     sendMessageError: { type: 'error', name: 'ExampleError' },
     onSubmit: values => {

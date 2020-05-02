@@ -18,7 +18,9 @@
 .error {
   color: var(--failColor);
 }
-
+.hiden {
+  display: none;
+}
 .locationAutocompleteInput {
   flex-grow: 1;
   height: 36px;

@@ -2,21 +2,24 @@ import React from 'react';
 import { bool, func, shape, string } from 'prop-types';
 import { compose } from 'redux';
 import { Form as FinalForm } from 'react-final-form';
-import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
+import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
+import { maxLength, required, composeValidators } from '../../util/validators';
 import { Form, Button, FieldTextInput } from '../../components';
+
+import NamedLink from '../../components/NamedLink/NamedLink';
 
 import css from './EditListingPoliciesForm.css';
 
+const RULES_MAX_LENGTH = 20;
 export const EditListingPoliciesFormComponent = props => (
   <FinalForm
     {...props}
-    render={formRenderProps => {
+    render={fieldRenderProps => {
       const {
         className,
         disabled,
-        ready,
         handleSubmit,
         intl,
         invalid,
@@ -25,7 +28,10 @@ export const EditListingPoliciesFormComponent = props => (
         updated,
         updateInProgress,
         fetchErrors,
-      } = formRenderProps;
+        currentUser,
+      } = fieldRenderProps;
+
+      console.log('Umair', currentUser);
 
       const rulesLabelMessage = intl.formatMessage({
         id: 'EditListingPoliciesForm.rulesLabel',
@@ -33,6 +39,16 @@ export const EditListingPoliciesFormComponent = props => (
       const rulesPlaceholderMessage = intl.formatMessage({
         id: 'EditListingPoliciesForm.rulesPlaceholder',
       });
+      const rulesRequiredMessage = intl.formatMessage({
+        id: 'EditListingPoliciesForm.rulesRequired',
+      });
+      const maxLengthMessage = intl.formatMessage(
+        { id: 'EditListingPoliciesForm.maxLength' },
+        {
+          maxLength: RULES_MAX_LENGTH,
+        }
+      );
+      const maxLength60Message = maxLength(maxLengthMessage, RULES_MAX_LENGTH);
 
       const { updateListingError, showListingsError } = fetchErrors || {};
       const errorMessage = updateListingError ? (
@@ -47,7 +63,7 @@ export const EditListingPoliciesFormComponent = props => (
       ) : null;
 
       const classes = classNames(css.root, className);
-      const submitReady = (updated && pristine) || ready;
+      const submitReady = updated && pristine;
       const submitInProgress = updateInProgress;
       const submitDisabled = invalid || disabled || submitInProgress;
 
@@ -56,24 +72,43 @@ export const EditListingPoliciesFormComponent = props => (
           {errorMessage}
           {errorMessageShowListing}
 
-          <FieldTextInput
-            id="rules"
-            name="rules"
-            className={css.policy}
-            type="textarea"
-            label={rulesLabelMessage}
-            placeholder={rulesPlaceholderMessage}
-          />
-
-          <Button
-            className={css.submitButton}
-            type="submit"
-            inProgress={submitInProgress}
-            disabled={submitDisabled}
-            ready={submitReady}
-          >
-            {saveActionMsg}
-          </Button>
+          {currentUser ? (
+            currentUser.attributes.profile.publicData.yotiVerified == 'YES' ? (
+              <Button
+                className={css.submitButton}
+                type="submit"
+                inProgress={submitInProgress}
+                disabled={submitDisabled}
+                ready={submitReady}
+              >
+                {saveActionMsg}
+              </Button>
+            ) : (
+              <NamedLink name="ProfileSettingsPage">
+                <Button
+                  className={css.submitButton}
+                  type="submit"
+                  inProgress={submitInProgress}
+                  disabled={submitDisabled}
+                  ready={submitReady}
+                >
+                  Go to Profile
+                </Button>
+              </NamedLink>
+            )
+          ) : (
+            <NamedLink name="ProfileSettingsPage">
+              <Button
+                className={css.submitButton}
+                type="submit"
+                inProgress={submitInProgress}
+                disabled={submitDisabled}
+                ready={submitReady}
+              >
+                Go to Profile
+              </Button>
+            </NamedLink>
+          )}
         </Form>
       );
     }}
@@ -90,8 +125,6 @@ EditListingPoliciesFormComponent.propTypes = {
   onSubmit: func.isRequired,
   saveActionMsg: string.isRequired,
   selectedPlace: propTypes.place,
-  disabled: bool.isRequired,
-  ready: bool.isRequired,
   updated: bool.isRequired,
   updateInProgress: bool.isRequired,
   fetchErrors: shape({

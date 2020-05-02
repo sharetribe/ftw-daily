@@ -32,13 +32,6 @@
     }
   }
 
-  --marketplaceSmallFontStyles: {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
-    font-weight: var(--fontWeightMedium);
-    font-size: 15px;
-    line-height: 24px;
-  }
-
   /* ================ Body font ================ */
 
   --marketplaceBodyFontStyles: {
@@ -119,7 +112,7 @@
     @media (--viewportMedium) {
       font-size: 48px;
       font-weight: var(--fontWeightSemiBold);
-      line-height: 56px;
+      line-height: 45px;
       letter-spacing: -2px;
       /* margin-top + n * line-height + margin-bottom => x * 8px */
       margin-top: 24px;
@@ -314,3 +307,4 @@
     letter-spacing: 0;
   }
 }
+

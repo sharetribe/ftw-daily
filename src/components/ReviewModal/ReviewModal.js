@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
+import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import { IconReviewUser, Modal } from '../../components';
@@ -36,7 +36,6 @@ const ReviewModal = props => {
       isOpen={isOpen}
       onClose={onCloseModal}
       onManageDisableScrolling={onManageDisableScrolling}
-      usePortal
       closeButtonMessage={closeButtonMessage}
     >
       <IconReviewUser className={css.modalIcon} />

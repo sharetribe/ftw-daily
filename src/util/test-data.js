@@ -191,7 +191,7 @@ export const createTransaction = options => {
       payoutTotal: new Money(total.amount - commission.amount, total.currency),
       lineItems: [
         {
-          code: 'line-item/night',
+          code: 'n',
           includeFor: ['customer', 'provider'],
           quantity: new Decimal(nightCount),
           unitPrice: new Money(total.amount / nightCount, total.currency),
@@ -294,7 +294,7 @@ export const fakeIntl = {
   formatMessage: msg => msg.id,
   formatNumber: d => d,
   formatPlural: d => d,
-  formatRelativeTime: d => d,
+  formatRelative: d => d,
   formatTime: d => `${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}`,
   now: () => Date.UTC(2017, 10, 23, 12, 59),
 };

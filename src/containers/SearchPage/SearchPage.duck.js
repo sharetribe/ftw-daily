@@ -136,7 +136,7 @@ export const searchListings = searchParams => (dispatch, getState, sdk) => {
     const values = datesParam ? datesParam.split(',') : [];
     const hasValues = datesParam && values.length === 2;
     const startDate = hasValues ? values[0] : null;
-    const isNightlyBooking = config.bookingUnitType === 'line-item/night';
+    const isNightlyBooking = config.bookingUnitType === 'n';
     const endDate =
       hasValues && isNightlyBooking ? values[1] : hasValues ? getExclusiveEndDate(values[1]) : null;
 

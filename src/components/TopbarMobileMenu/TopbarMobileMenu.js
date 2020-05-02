@@ -4,7 +4,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from '../../util/reactIntl';
+import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { ACCOUNT_SETTINGS_PAGES } from '../../routeConfiguration';
 import { propTypes } from '../../util/types';
@@ -81,9 +81,19 @@ const TopbarMobileMenu = props => {
         <span className={css.greeting}>
           <FormattedMessage id="TopbarMobileMenu.greeting" values={{ displayName }} />
         </span>
-        <InlineTextButton rootClassName={css.logoutButton} onClick={onLogout}>
-          <FormattedMessage id="TopbarMobileMenu.logoutLink" />
+
+        <InlineTextButton className={css.logoutButton}>
+          <NamedLink className={css.inbox} name="LandingPage">Home</NamedLink>
         </InlineTextButton>
+
+        <InlineTextButton className={css.logoutButton}>
+          <NamedLink className={css.inbox} name="SearchListingsPage"><FormattedMessage id="Listings" /></NamedLink>
+        </InlineTextButton>
+
+        <InlineTextButton rootClassName={css.logoutButton, css.logoutLast}>
+          <NamedLink className={css.inbox} name="ContactPage"><FormattedMessage id="Contact" /></NamedLink>
+        </InlineTextButton>
+ 
         <NamedLink
           className={classNames(css.inbox, currentPageClass('InboxPage'))}
           name="InboxPage"
@@ -110,9 +120,13 @@ const TopbarMobileMenu = props => {
         >
           <FormattedMessage id="TopbarMobileMenu.accountSettingsLink" />
         </NamedLink>
+
+        <InlineTextButton rootClassName={css.logoutButton, css.lastlogout} onClick={onLogout}>
+          <FormattedMessage className={css.inbox} id="TopbarMobileMenu.logoutLink" />
+        </InlineTextButton>
       </div>
       <div className={css.footer}>
-        <NamedLink className={css.createNewListingLink} name="NewListingPage">
+        <NamedLink className={css.createNewListingLink} name="OrderTypesPage" params={{type:'new'}}>
           <FormattedMessage id="TopbarMobileMenu.newListingLink" />
         </NamedLink>
       </div>

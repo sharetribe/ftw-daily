@@ -6,14 +6,13 @@ import ReactDOMServer from 'react-dom/server';
 // https://github.com/airbnb/react-dates#initialize
 // NOTE: Initializing it here will initialize it also for app.test.js
 import 'react-dates/initialize';
-import { HelmetProvider } from 'react-helmet-async';
+import Helmet from 'react-helmet';
 import { BrowserRouter, StaticRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import difference from 'lodash/difference';
 import mapValues from 'lodash/mapValues';
-import 'moment/locale/es';
 import moment from 'moment';
-import { IntlProvider } from './util/reactIntl';
+import { IntlProvider, addLocaleData } from 'react-intl';
 import configureStore from './store';
 import routeConfiguration from './routeConfiguration';
 import Routes from './Routes';
@@ -24,20 +23,24 @@ import defaultMessages from './translations/en.json';
 
 // If you want to change the language, change the imports to match the wanted locale:
 //   1) Change the language in the config.js file!
-//   2) Import correct locale rules for Moment library
-//   3) Use the `messagesInLocale` import to add the correct translation file.
-//   4) To support older browsers we need add the correct locale for intl-relativetimeformat to `util/polyfills.js`
+//   2) Import correct locale rules for React Intl library
+//   3) Import correct locale rules for Moment library
+//   4) Use the `messagesInLocale` import to add the correct translation file.
 
 // Note that there is also translations in './translations/countryCodes.js' file
 // This file contains ISO 3166-1 alpha-2 country codes, country names and their translations in our default languages
 // This used to collect billing address in StripePaymentAddress on CheckoutPage
 
 // Step 2:
-// If you are using a non-english locale with moment library,
-// you should also import time specific formatting rules for that locale
-// e.g. for French: import 'moment/locale/fr';
+// Import locale rules for React Intl library
+import localeData from 'react-intl/locale-data/es';
 
 // Step 3:
+// If you are using a non-english locale with moment library,
+// you should also import time specific formatting rules for that locale
+// e.g. for French: import 'moment/locale/es';
+
+// Step 4:
 // If you are using a non-english locale, point `messagesInLocale` to correct .json file
 import messagesInLocale from './translations/es.json';
 
@@ -72,11 +75,12 @@ const localeMessages = isTestEnv ? testMessages : messages;
 
 const setupLocale = () => {
   if (isTestEnv) {
-    // Use english as a default locale in tests
-    // This affects app.test.js and app.node.test.js tests
-    config.locale = 'en';
+    // Don't change the locale in tests
     return;
   }
+
+  // Add the translation messages
+  addLocaleData([...localeData]);
 
   // Set the Moment locale globally
   // See: http://momentjs.com/docs/#/i18n/changing-locale/
@@ -87,13 +91,12 @@ export const ClientApp = props => {
   const { store } = props;
   setupLocale();
   return (
-    <IntlProvider locale={config.locale} messages={localeMessages} textComponent="span">
+
+    <IntlProvider locale={config.locale} messages={localeMessages}>
       <Provider store={store}>
-        <HelmetProvider>
-          <BrowserRouter>
-            <Routes routes={routeConfiguration()} />
-          </BrowserRouter>
-        </HelmetProvider>
+        <BrowserRouter>
+          <Routes routes={routeConfiguration()} />
+        </BrowserRouter>
       </Provider>
     </IntlProvider>
   );
@@ -104,17 +107,14 @@ const { any, string } = PropTypes;
 ClientApp.propTypes = { store: any.isRequired };
 
 export const ServerApp = props => {
-  const { url, context, helmetContext, store } = props;
+  const { url, context, store } = props;
   setupLocale();
-  HelmetProvider.canUseDOM = false;
   return (
-    <IntlProvider locale={config.locale} messages={localeMessages} textComponent="span">
+    <IntlProvider locale={config.locale} messages={localeMessages}>
       <Provider store={store}>
-        <HelmetProvider context={helmetContext}>
-          <StaticRouter location={url} context={context}>
-            <Routes routes={routeConfiguration()} />
-          </StaticRouter>
-        </HelmetProvider>
+        <StaticRouter location={url} context={context}>
+          <Routes routes={routeConfiguration()} />
+        </StaticRouter>
       </Provider>
     </IntlProvider>
   );
@@ -138,11 +138,9 @@ export const renderApp = (url, serverContext, preloadedState) => {
   // shouldn't do any SDK calls in the (server) rendering lifecycle.
   const store = configureStore(preloadedState);
 
-  const helmetContext = {};
-
   const body = ReactDOMServer.renderToString(
-    <ServerApp url={url} context={serverContext} helmetContext={helmetContext} store={store} />
+    <ServerApp url={url} context={serverContext} store={store} />
   );
-  const { helmet: head } = helmetContext;
+  const head = Helmet.renderStatic();
   return { head, body };
 };

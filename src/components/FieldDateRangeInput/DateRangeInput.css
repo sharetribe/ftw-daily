@@ -69,7 +69,7 @@
 
   & :global(.DayPickerNavigation_button__horizontal) {
     padding: 6px 9px;
-    top: 19px;
+    top: 14px;
     position: absolute;
     cursor: pointer;
     display: inline;
@@ -115,7 +115,7 @@
   }
 
   & :global(.CalendarMonth_caption) {
-    color: var(--matterColorLight);
+    color: #fff !important;
     @apply --marketplaceH2FontStyles;
     margin: 1px 0 14px;
     font-weight: 400;
@@ -124,6 +124,10 @@
       margin-top: 0;
       margin-bottom: 0;
     }
+  }
+
+  & :global(.CalendarMonth_caption strong) {
+    color: #fff !important;
   }
 
   & :global(.CalendarDay__default) {

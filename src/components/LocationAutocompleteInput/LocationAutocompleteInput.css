@@ -33,7 +33,7 @@
 }
 
 .iconSvgGroup {
-  stroke: var(--marketplaceColor);
+  stroke:#000;
   stroke-width: 2.5px;
 
   @media (--viewportMedium) {

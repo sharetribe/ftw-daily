@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { array, bool, func, number, oneOf, object, shape, string } from 'prop-types';
-import { injectIntl, intlShape } from '../../util/reactIntl';
+import { injectIntl, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
@@ -14,7 +14,7 @@ import { parse, stringify } from '../../util/urlHelpers';
 import { propTypes } from '../../util/types';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { SearchMap, ModalInMobile, Page } from '../../components';
+import { SearchMap, ModalInMobile, Page, SwitchButton } from '../../components';
 import { TopbarContainer } from '../../containers';
 
 import { searchListings, searchMapListings, setActiveListing } from './SearchPage.duck';
@@ -52,13 +52,7 @@ export class SearchPageComponent extends Component {
   }
 
   filters() {
-    const {
-      categories,
-      amenities,
-      priceFilterConfig,
-      dateRangeFilterConfig,
-      keywordFilterConfig,
-    } = this.props;
+    const { categories, amenities, priceFilterConfig, dateRangeFilterConfig } = this.props;
 
     // Note: "category" and "amenities" filters are not actually filtering anything by default.
     // Currently, if you want to use them, we need to manually configure them to be available
@@ -67,7 +61,7 @@ export class SearchPageComponent extends Component {
 
     return {
       categoryFilter: {
-        paramName: 'pub_category',
+        paramName: 'pub_user_type',
         options: categories,
       },
       amenitiesFilter: {
@@ -81,10 +75,6 @@ export class SearchPageComponent extends Component {
       dateRangeFilter: {
         paramName: 'dates',
         config: dateRangeFilterConfig,
-      },
-      keywordFilter: {
-        paramName: 'keywords',
-        config: keywordFilterConfig,
       },
     };
   }
@@ -142,6 +132,8 @@ export class SearchPageComponent extends Component {
     this.setState({ isMobileModalOpen: false });
   }
 
+  state = { showing: true };
+
   render() {
     const {
       intl,
@@ -158,10 +150,12 @@ export class SearchPageComponent extends Component {
       onActivateListing,
     } = this.props;
     // eslint-disable-next-line no-unused-vars
-    const { mapSearch, page, sort, ...searchInURL } = parse(location.search, {
+    const { mapSearch, page, ...searchInURL } = parse(location.search, {
       latlng: ['origin'],
       latlngBounds: ['bounds'],
     });
+
+    const { showing } = this.state;
 
     const filters = this.filters();
 
@@ -198,6 +192,7 @@ export class SearchPageComponent extends Component {
     // N.B. openMobileMap button is sticky.
     // For some reason, stickyness doesn't work on Safari, if the element is <button>
     /* eslint-disable jsx-a11y/no-static-element-interactions */
+
     return (
       <Page
         scrollingDisabled={scrollingDisabled}
@@ -211,9 +206,12 @@ export class SearchPageComponent extends Component {
           currentSearchParams={urlQueryParams}
         />
         <div className={css.container}>
+          <span onClick={() => this.setState({ showing: !showing })}>
+            <SwitchButton />
+          </span>
+
           <MainPanel
             urlQueryParams={validQueryParams}
-            sort={sort}
             listings={listings}
             searchInProgress={searchInProgress}
             searchListingsError={searchListingsError}
@@ -227,42 +225,42 @@ export class SearchPageComponent extends Component {
             searchParamsForPagination={parse(location.search)}
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             primaryFilters={{
-              priceFilter: filters.priceFilter,
-              dateRangeFilter: filters.dateRangeFilter,
-              keywordFilter: filters.keywordFilter,
-            }}
-            secondaryFilters={{
               categoryFilter: filters.categoryFilter,
               amenitiesFilter: filters.amenitiesFilter,
+              priceFilter: filters.priceFilter,
+              dateRangeFilter: filters.dateRangeFilter,
             }}
           />
-          <ModalInMobile
-            className={css.mapPanel}
-            id="SearchPage.map"
-            isModalOpenOnMobile={this.state.isSearchMapOpenOnMobile}
-            onClose={() => this.setState({ isSearchMapOpenOnMobile: false })}
-            showAsModalMaxWidth={MODAL_BREAKPOINT}
-            onManageDisableScrolling={onManageDisableScrolling}
-          >
-            <div className={css.mapWrapper}>
-              {shouldShowSearchMap ? (
-                <SearchMap
-                  reusableContainerClassName={css.map}
-                  activeListingId={activeListingId}
-                  bounds={bounds}
-                  center={origin}
-                  isSearchMapOpenOnMobile={this.state.isSearchMapOpenOnMobile}
-                  location={location}
-                  listings={mapListings || []}
-                  onMapMoveEnd={this.onMapMoveEnd}
-                  onCloseAsModal={() => {
-                    onManageDisableScrolling('SearchPage.map', false);
-                  }}
-                  messages={intl.messages}
-                />
-              ) : null}
-            </div>
-          </ModalInMobile>
+
+          {!showing ? (
+            <ModalInMobile
+              className={css.mapPanel}
+              id="SearchPage.map"
+              isModalOpenOnMobile={this.state.isSearchMapOpenOnMobile}
+              onClose={() => this.setState({ isSearchMapOpenOnMobile: false })}
+              showAsModalMaxWidth={MODAL_BREAKPOINT}
+              onManageDisableScrolling={onManageDisableScrolling}
+            >
+              <div className={css.mapWrapper}>
+                {shouldShowSearchMap ? (
+                  <SearchMap
+                    reusableContainerClassName={css.map}
+                    activeListingId={activeListingId}
+                    bounds={bounds}
+                    center={origin}
+                    isSearchMapOpenOnMobile={this.state.isSearchMapOpenOnMobile}
+                    location={location}
+                    listings={mapListings || []}
+                    onMapMoveEnd={this.onMapMoveEnd}
+                    onCloseAsModal={() => {
+                      onManageDisableScrolling('SearchPage.map', false);
+                    }}
+                    messages={intl.messages}
+                  />
+                ) : null}
+              </div>
+            </ModalInMobile>
+          ) : null}
         </div>
       </Page>
     );
@@ -281,7 +279,6 @@ SearchPageComponent.defaultProps = {
   amenities: config.custom.amenities,
   priceFilterConfig: config.custom.priceFilterConfig,
   dateRangeFilterConfig: config.custom.dateRangeFilterConfig,
-  keywordFilterConfig: config.custom.keywordFilterConfig,
   activeListingId: null,
 };
 
@@ -381,8 +378,16 @@ SearchPage.loadData = (params, search) => {
     page,
     perPage: RESULT_PAGE_SIZE,
     include: ['author', 'images'],
-    'fields.listing': ['title', 'geolocation', 'price'],
-    'fields.user': ['profile.displayName', 'profile.abbreviatedName'],
+    'fields.listing': [
+      'title',
+      'title',
+      'geolocation',
+      'price',
+      'publicData.rate',
+      'publicData.user_type',
+      'publicData.service'
+    ],
+    'fields.user': ['profile.displayName', 'profile.abbreviatedName', 'profile.publicData'],
     'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
     'limit.images': 1,
   });

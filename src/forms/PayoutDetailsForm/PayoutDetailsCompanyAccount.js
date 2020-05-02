@@ -1,7 +1,7 @@
 import React from 'react';
 import { bool, object, shape } from 'prop-types';
 import { compose } from 'redux';
-import { injectIntl, intlShape } from '../../util/reactIntl';
+import { injectIntl, intlShape } from 'react-intl';
 
 import PayoutDetailsAddress from './PayoutDetailsAddress';
 import PayoutDetailsCompany from './PayoutDetailsCompany';

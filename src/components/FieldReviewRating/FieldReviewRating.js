@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { intlShape, injectIntl } from '../../util/reactIntl';
+import { intlShape, injectIntl } from 'react-intl';
 import { Field } from 'react-final-form';
 import classNames from 'classnames';
 import { IconReviewStar, ValidationError } from '../../components';

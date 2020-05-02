@@ -34,18 +34,6 @@
   }
 }
 
-.genericError {
-  color: var(--failColor);
-  margin: 24px 24px 0 24px;
-
-  @media (--viewportMedium) {
-    margin: 32px 24px 0 24px;
-  }
-  @media (--viewportLarge) {
-    margin: 32px 0 0 0;
-  }
-}
-
 /* DetailCardImage subcomponent */
 .detailCardImageWrapper {
   /* Layout */
@@ -225,7 +213,7 @@
     background-color: var(--matterColorLight);
     border: 1px solid var(--matterColorNegative);
     border-radius: 2px;
-    z-index: 1;
+    z-index: 2;
   }
 }
 

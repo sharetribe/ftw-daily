@@ -34,7 +34,7 @@
 
 .sectionTitle {
   /* Font */
-  color: var(--matterColorAnti);
+  color: #000;
 
   margin-top: 0;
   margin-bottom: 12px;
@@ -314,4 +314,190 @@
 
 .submitButton {
   margin-top: 24px;
+}
+
+iframe[title='Yoti - Modal'] {
+  z-index: 10;
+}
+
+.yotiTitle {
+  margin-top: 0;
+  margin-bottom: 24px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.yotiButton {
+  cursor: pointer;
+}
+
+.howverify {
+  position: relative;
+  bottom: 2px;
+  letter-spacing: -0.2px !important;
+}
+
+.yotiContainer {
+  height: 57px;
+  width: 201px;
+}
+
+.needHelp {
+  color: #b2b2b2;
+  font-size: 17px;
+  padding-left: 10px;
+}
+
+.customTip {
+ color: #fff !important;
+ background-color: #41a6df !important;
+ opacity: 0.99 !important;
+ margin-top: -12px !important;
+ padding: 10px 21px 13px !important;
+ text-align: center;
+}
+
+.customTip:after {
+ border-top-color: #41a6df !important;
+ border-top-width: 7px !important;
+}
+
+.yotiBtn1 {
+  display: flex;
+  align-items: center;
+  padding: 10px 0 56px;
+}
+
+.numb {
+  height: 28px;
+  margin-right: 10px;
+  position: relative;
+  bottom: 4px;
+}
+
+.contentinner p, .mobileHelp { 
+  word-wrap: break-word;
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  line-height: 1.375em !important;
+  color: #4a4a4a !important;
+  text-overflow: ellipsis !important;
+  max-height: 2.75em !important;
+  -webkit-box-orient: vertical !important;
+}
+
+.strr {
+  margin-right: 10px;
+}
+
+.str, .strr {
+  width: 110px;
+  position: relative;
+  bottom: 3px;
+}
+
+.yoticont {
+  margin-left: 38px;
+  margin-top: -14px;
+  margin-bottom: -3px;
+}
+
+@media (max-width: 800px) {
+  .yoticont {
+    margin-top: -26px;
+    margin-bottom: 1px;
+    margin-left: 0;
+    text-align: center;
+}
+}
+
+.mobileHelp {
+  display: none !important;
+}
+
+@media (min-width: 620px) {
+  .forMob {
+    display: none;
+  }
+}
+
+@media (max-width: 620px) {
+  .yotiBtn1 {
+    padding: 10px 0 0 !important;
+  }
+  .mobileHelp {
+    padding-bottom: 10px;
+  }
+  .forMob {
+    display: block !important;
+  }
+  .CsS,
+  .forPc {
+    display: none !important;
+  }
+  .needHelp {
+    display: none;
+  }
+  .yotiContainer {
+    height: 60px;
+  }
+  .mobileHelp {
+    display: block !important;
+    margin-bottom: 36px;
+  }
+}
+
+@media (max-width: 850px) {
+  .yoticont {
+    margin: 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .yoticont {
+    margin: 23px 0 0 !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .CsS {
+    margin-bottom: 25px !important;
+  }
+  .forMob {
+    margin-bottom: 25px !important;
+  }
+}
+
+@media (min-width: 1240px) {
+  .yoticont {
+    display: none;
+  }
+  .removePP {
+  margin-top: -3px;
+  }
+  .CsS {
+    margin-top: -1px;
+  }
+  .noWrap {
+    white-space: nowrap !important;
+  }
+  .strr {
+    margin-left: 10px;
+  }
+}
+
+@media (max-width: 1240px) {
+  .yoticont {
+    display: block;
+  }
+  .noWrap .str,
+  .noWrap .strr {
+    display: none;
+  }
+}
+.toolEmail {
+  color: #fff !important;
 }

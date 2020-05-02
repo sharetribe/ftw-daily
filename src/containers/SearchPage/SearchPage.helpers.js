@@ -13,13 +13,13 @@ import routeConfiguration from '../../routeConfiguration';
  * @param {Object} paramValue Search parameter value
  * @param {Object} filters Filters configuration
  */
-export const validURLParamForExtendedData = (paramName, paramValueRaw, filters) => {
+export const validURLParamForExtendedData = (paramName, paramValue, filters) => {
+  paramValue = String(paramValue);
   const filtersArray = Object.values(filters);
   // resolve configuration for this filter
   const filterConfig = filtersArray.find(f => f.paramName === paramName);
 
-  const paramValue = paramValueRaw.toString();
-  const valueArray = paramValue ? paramValue.split(',') : [];
+  const valueArray = paramValue ? String(paramValue).split(',') : [];
 
   if (filterConfig && valueArray.length > 0) {
     const { min, max, active } = filterConfig.config || {};

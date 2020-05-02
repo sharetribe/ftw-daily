@@ -38,9 +38,17 @@
   /* shadows */
   box-shadow: var(--boxShadow);
 
-  @media (--viewportMedium) {
+  @media (--viewportPcMenu) {
     display: none;
   }
+}
+
+.topmenu {
+  position: relative;
+}
+
+.topmenuAbsolute {
+  position: absolute;
 }
 
 .home {
@@ -133,7 +141,7 @@
 .desktop {
   display: none;
 
-  @media (--viewportMedium) {
+  @media (--viewportPcMenu) {
     display: block;
   }
 }

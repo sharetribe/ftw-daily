@@ -34,17 +34,13 @@
   height: auto;
   min-height: 0;
   border-radius: 4px;
-  border: 1px solid var(--marketplaceColor);
+  border: 1px solid #c9bd9c;
 
   &:hover,
   &:focus {
-    border: 1px solid var(--marketplaceColorDark);
+    border: 1px solid #c9bd9c;
+    background-color: #c9bd9c !important;
   }
-}
-.labelEllipsis {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .popup {

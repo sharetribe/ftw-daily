@@ -1,6 +1,6 @@
 import React from 'react';
 import { bool, oneOfType, object } from 'prop-types';
-import { FormattedMessage } from '../../util/reactIntl';
+import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import {
   LISTING_STATE_PENDING_APPROVAL,

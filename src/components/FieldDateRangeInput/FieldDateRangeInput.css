@@ -44,7 +44,7 @@
   flex-basis: 50%;
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  border-bottom-color: var(--attentionColor);
+  border-bottom-color: #c9bd9c;
 
   transition: border-bottom-color var(--transitionStyle);
   transition: all 0.15s ease-out;

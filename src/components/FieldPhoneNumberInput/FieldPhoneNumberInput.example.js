@@ -4,9 +4,12 @@ import * as validators from '../../util/validators';
 import { Button } from '../../components';
 import FieldPhoneNumberInput from './FieldPhoneNumberInput';
 
+const formName = 'Styleguide.FieldPhoneNumberInput.Form';
+
 const FormComponent = props => (
   <FinalForm
     {...props}
+    form={formName}
     render={fieldRenderProps => {
       const { formId, handleSubmit, onChange, invalid, pristine, submitting } = fieldRenderProps;
       const required = validators.required('This field is required');
@@ -38,7 +41,7 @@ const FormComponent = props => (
 export const PhoneNumber = {
   component: FormComponent,
   props: {
-    formId: 'Styleguide.FieldPhoneNumberInput.Form',
+    formId: 'PhoneNumberExample',
     onChange: formState => {
       if (formState.dirty) {
         console.log('form values changed to:', formState.values);

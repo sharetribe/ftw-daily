@@ -10,7 +10,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  z-index: 100;
+  z-index: 99999;
 
   /* scrollLayer is the .root for the Modal */
   & .scrollLayer {
@@ -74,11 +74,5 @@
   &:enabled:hover,
   &:enabled:active {
     color: var(--matterColorLight);
-  }
-}
-
-.focusedDiv {
-  &:focus {
-    outline: none;
   }
 }

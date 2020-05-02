@@ -1,13 +1,16 @@
 @import '../../marketplace.css';
 
 .root {
+
   border-top-style: solid;
   border-top-width: 1px;
   border-top-color: var(--matterColorNegative);
+  position: relative;
+  z-index: 9;
 
   width: 100%;
   padding: 24px 24px 42px 24px;
-  background-color: var(--matterColorBright);
+  background-color: #c9bd9c;
 
   @media (--viewportMedium) {
     padding: 0 24px 33px 24px;
@@ -28,10 +31,6 @@
 
   @media (--viewportLarge) {
     padding-top: 73px;
-
-    border-top-style: solid;
-    border-top-width: 1px;
-    border-top-color: var(--matterColorNegative);
   }
 }
 
@@ -80,6 +79,7 @@
   justify-content: flex-start;
   width: 100%;
   margin-bottom: 18px;
+  color: #fff;
 
   @media (--viewportMedium) {
     flex-wrap: nowrap;
@@ -114,6 +114,7 @@
 .logoLink {
   display: block;
   margin-bottom: 14px;
+  color: #fff;
 }
 
 .logo {
@@ -124,23 +125,28 @@
 }
 
 .organizationInfo {
+  color: #212529;
 }
 
 .organizationDescription {
   @apply --marketplaceTinyFontStyles;
+  color: #212529;
+  margin: 21px 0 !important;
 }
 
 .organizationCopyright {
   @apply --marketplaceTinyFontStyles;
-  margin-top: 32px;
+  margin-top: 23px;
+  color: #212529;
 }
 
 .copyrightLink {
   color: var(--matterColor);
   transition: var(--transitionStyleButton);
+  color: #212529;
 
   &:hover {
-    color: var(--marketplaceColor);
+    color: #212529;
     text-decoration: none;
   }
 }
@@ -151,6 +157,7 @@
   flex-basis: 165px;
   margin-right: 24px;
   margin-bottom: 24px;
+  color: #fff;
 
   @media (--viewportMedium) {
     padding-top: 2px;
@@ -169,6 +176,7 @@
 
   @media (--viewportMedium) {
     margin-bottom: 0;
+    margin-bottom: 0.8px;
   }
 }
 
@@ -178,6 +186,7 @@
   line-height: 20px;
   color: var(--matterColor);
   transition: var(--transitionStyleButton);
+  color: #212529 !important;
 
   margin-top: 0;
   margin-bottom: 12px;
@@ -227,7 +236,7 @@
   display: none;
   flex-basis: 109px;
   margin-right: 24px;
-  margin-bottom: 24px;
+  margin-bottom: 22px;
 
   @media (--viewportMedium) {
     display: flex;
@@ -247,7 +256,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .tosAndPrivacy {
@@ -302,14 +311,12 @@
 }
 
 .organizationCopyrightMobile {
+  text-align: center;
+  width: 100%;
   /* Font */
   @apply --marketplaceTinyFontStyles;
   color: var(--matterColorAnti);
   transition: var(--transitionStyleButton);
-
-  /* Tell parent component how much space this one prefers */
-  flex-basis: 172px;
-
   margin-top: 0;
   margin-bottom: 0;
 
@@ -321,8 +328,89 @@
 
 .tosAndPrivacyMobile {
   flex-basis: 172px;
+  display: none;
 }
 
 .privacy {
   margin-right: 24px;
+}
+
+.footerTitleContainer {
+   margin: 3px 0px 21px 0px;
+}
+
+.footerTitleContainer a {
+  color: #212529;
+  font-weight: 1000;
+}
+
+.footerTitleContainer a span {
+  position: relative;
+  bottom: -0.5px;
+  left: 3.5px;
+}
+
+.footerTitleContainer a:hover, .footerTitleContainer a span:hover{
+  text-decoration: none;
+}
+
+.legalLink {
+  color: #fff !important;
+}
+
+.playIconMobile {
+  display: flex;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.playIconMobile img {
+  width: 120px;
+}
+
+.playIconMobile span {
+  font-size: 12px;
+  line-height: 15px;
+  padding-left: 5px;
+  color: #fff;
+  text-decoration: none !important;
+}
+
+@media (min-width: 768px) {
+  .playIconMobile {
+  display: none;
+}}
+
+.playIcon {
+  display: flex;
+  text-decoration: none !important;
+}
+
+.playIcon span {
+  font-size: 12px;
+  line-height: 15px;
+  padding-left: 5px;
+  color: #fff;
+  text-decoration: none !important;
+}
+
+.googleShape {
+  background: url(images/google.png);
+  width: 30px;
+  height: 30px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.playIcon:hover .googleShape {
+  background: url(images/googlehover.png);
+  width: 30px;
+  height: 30px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.googleBold {
+  padding-left: 0 !important;
+  font-weight: 700;
 }

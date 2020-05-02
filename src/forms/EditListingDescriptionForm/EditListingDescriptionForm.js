@@ -2,12 +2,13 @@ import React from 'react';
 import { arrayOf, bool, func, shape, string } from 'prop-types';
 import { compose } from 'redux';
 import { Form as FinalForm } from 'react-final-form';
-import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
+
+import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import { maxLength, required, composeValidators } from '../../util/validators';
-import { Form, Button, FieldTextInput } from '../../components';
-import CustomCategorySelectFieldMaybe from './CustomCategorySelectFieldMaybe';
+import { Form, Button, FieldTextInput, CategoryField, FieldCheckboxGroup } from '../../components';
+// import CustomCategorySelectFieldMaybe from './CustomCategorySelectFieldMaybe';
 
 import css from './EditListingDescriptionForm.css';
 
@@ -16,12 +17,11 @@ const TITLE_MAX_LENGTH = 60;
 const EditListingDescriptionFormComponent = props => (
   <FinalForm
     {...props}
-    render={formRenderProps => {
+    render={fieldRenderProps => {
       const {
-        categories,
+
         className,
         disabled,
-        ready,
         handleSubmit,
         intl,
         invalid,
@@ -30,11 +30,15 @@ const EditListingDescriptionFormComponent = props => (
         updated,
         updateInProgress,
         fetchErrors,
-      } = formRenderProps;
+        user_type,
+        service,
+      } = fieldRenderProps;
 
-      const titleMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.title' });
+
+      const user_name = user_type === 0 ? "owner" : user_type === 1 ? "sitter" : "service";
+      const titleMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.title.' + user_name });
       const titlePlaceholderMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.titlePlaceholder',
+        id: 'EditListingDescriptionForm.titlePlaceholder.' + user_name,
       });
       const titleRequiredMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.titleRequired',
@@ -47,15 +51,36 @@ const EditListingDescriptionFormComponent = props => (
       );
 
       const descriptionMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.description',
+        id: 'EditListingDescriptionForm.description.' + user_name,
       });
       const descriptionPlaceholderMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.descriptionPlaceholder',
+        id: 'EditListingDescriptionForm.descriptionPlaceholder.' + user_name,
       });
       const maxLength60Message = maxLength(maxLengthMessage, TITLE_MAX_LENGTH);
       const descriptionRequiredMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.descriptionRequired',
       });
+
+      const categoryServiceLabel = intl.formatMessage({
+        id: 'EditListingDescriptionForm.category.service.label',
+        // values: {animal},
+      });
+      const categoryServicePlaceholder = intl.formatMessage({
+        id: 'EditListingDescriptionForm.category.service.placeholder',
+        // values: {animal},
+      });
+      const categoryServiceRequired = required(
+        intl.formatMessage({
+          id: 'EditListingDescriptionForm.category.service.required',
+          // values: {animal},
+        })
+      );
+
+      const sitterTypeRequired = required(
+        intl.formatMessage({
+          id: 'EditListingDescriptionForm.category.sittertype.required',
+        })
+      );
 
       const { updateListingError, createListingDraftError, showListingsError } = fetchErrors || {};
       const errorMessageUpdateListing = updateListingError ? (
@@ -78,7 +103,7 @@ const EditListingDescriptionFormComponent = props => (
       ) : null;
 
       const classes = classNames(css.root, className);
-      const submitReady = (updated && pristine) || ready;
+      const submitReady = updated && pristine;
       const submitInProgress = updateInProgress;
       const submitDisabled = invalid || disabled || submitInProgress;
 
@@ -87,6 +112,86 @@ const EditListingDescriptionFormComponent = props => (
           {errorMessageCreateListingDraft}
           {errorMessageUpdateListing}
           {errorMessageShowListing}
+
+          {/* {
+            user_type ==2?
+            (
+              <FieldTextInput
+                id="business"
+                name="business"
+                className={css.title}
+                type="text"
+                label={titleMessage}
+                placeholder={titlePlaceholderMessage}
+              />
+              
+            ):null
+          } */}
+          {
+            user_type === 2 ?
+              (
+                <>
+                  <div>
+                    <h3>Por favor selecciona tus opciones</h3>
+                    <FieldCheckboxGroup
+                      className={css.features}
+                      id="service"
+                      name="service"
+                      options={service}
+                    />
+                  </div>
+
+                  {
+                    fieldRenderProps.values.service && fieldRenderProps.values.service.includes("food") ?
+                      <div>
+                        <h3>Please choose Food Type</h3>
+                        <FieldCheckboxGroup
+                          className={css.features}
+                          id="foodtype"
+                          name="foodtype"
+                          options={[
+                            { key: "treats", label: "Treats" },
+                            { key: "raw", label: "Raw" },
+                            { key: "fresh", label: "Fresh" },
+                            { key: "vegan", label: "Vegan" }
+                          ]}
+                        />
+                      </div> : null
+
+                  }
+
+
+                </>
+
+
+              ) : null
+
+
+
+
+          }
+
+          {
+            user_type === 1 ?
+              (
+                <div>
+                  <CategoryField
+                    className={css.title}
+                    id="sittertype"
+                    name="sittertype"
+                    categories={[{ key: 'overnight', label: "Overnight" }, { key: "daycare", label: "Daycare" }]}
+                    categoryLabel="Select Type"
+                    categoryPlaceholder="Pet Sitter Type"
+                    categoryRequired={sitterTypeRequired}
+                  >
+                  </CategoryField>
+                </div>
+              ) : null
+          }
+
+
+
+
           <FieldTextInput
             id="title"
             name="title"
@@ -109,11 +214,11 @@ const EditListingDescriptionFormComponent = props => (
             validate={composeValidators(required(descriptionRequiredMessage))}
           />
 
-          <CustomCategorySelectFieldMaybe
-            id="category"
-            name="category"
-            categories={categories}
-            intl={intl}
+          <FieldTextInput
+            id="user_type"
+            name="user_type"
+            className={css.hiden}
+            type="text"
           />
 
           <Button
@@ -131,15 +236,16 @@ const EditListingDescriptionFormComponent = props => (
   />
 );
 
-EditListingDescriptionFormComponent.defaultProps = { className: null, fetchErrors: null };
+EditListingDescriptionFormComponent.defaultProps = {
+  className: null,
+  fetchErrors: null
+};
 
 EditListingDescriptionFormComponent.propTypes = {
   className: string,
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
   saveActionMsg: string.isRequired,
-  disabled: bool.isRequired,
-  ready: bool.isRequired,
   updated: bool.isRequired,
   updateInProgress: bool.isRequired,
   fetchErrors: shape({

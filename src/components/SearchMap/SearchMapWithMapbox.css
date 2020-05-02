@@ -7,12 +7,12 @@
 }
 
 .activeLabel {
-  z-index: 1;
+  z-index: 2;
 }
 
 .labelContainer {
   &:hover {
-    z-index: 1;
+    z-index: 2;
   }
 
   &:focus {
@@ -21,5 +21,5 @@
 }
 
 .infoCardContainer {
-  z-index: 1;
+  z-index: 2;
 }

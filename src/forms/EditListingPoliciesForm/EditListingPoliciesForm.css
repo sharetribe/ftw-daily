@@ -50,7 +50,7 @@
 }
 
 .submitButton {
-  margin-top: auto;
+  margin-top: 50px !important;
   margin-bottom: 24px;
   flex-shrink: 0;
 

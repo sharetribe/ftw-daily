@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { FormattedMessage } from '../../util/reactIntl';
+import { FormattedMessage } from 'react-intl';
 import { LISTING_STATE_DRAFT } from '../../util/types';
 import { ensureOwnListing } from '../../util/data';
 import { ListingLink } from '../../components';
 import { EditListingLocationForm } from '../../forms';
-
+import config from '../../config';
 import css from './EditListingLocationPanel.css';
+import { types as sdkTypes } from '../../util/sdkLoader';
+const { Money } = sdkTypes;
+
 
 class EditListingLocationPanel extends Component {
   constructor(props) {
@@ -48,29 +51,33 @@ class EditListingLocationPanel extends Component {
       className,
       rootClassName,
       listing,
-      disabled,
-      ready,
       onSubmit,
       onChange,
       submitButtonText,
       panelUpdated,
       updateInProgress,
       errors,
+      user_type
     } = this.props;
 
     const classes = classNames(rootClassName || css.root, className);
     const currentListing = ensureOwnListing(listing);
-
-    const isPublished =
-      currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
+  
+    const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
+    const user_name = user_type === 0?"owner":user_type === 1?"sitter":"service";
+    const publish = isPublished ?"title.":"createListingTitle.";
+    const LocationPanelTitle = 'EditListingLocationPanel.' + publish + user_name;
+      
     const panelTitle = isPublished ? (
       <FormattedMessage
-        id="EditListingLocationPanel.title"
+        id={LocationPanelTitle}
         values={{ listingTitle: <ListingLink listing={listing} /> }}
       />
     ) : (
-      <FormattedMessage id="EditListingLocationPanel.createListingTitle" />
+      <FormattedMessage id={LocationPanelTitle} />
     );
+
+    const minPrice = new Money(config.listingMinimumPriceSubUnits, config.currency);
 
     return (
       <div className={classes}>
@@ -79,7 +86,7 @@ class EditListingLocationPanel extends Component {
           className={css.form}
           initialValues={this.state.initialValues}
           onSubmit={values => {
-            const { building = '', location } = values;
+            const { building = '', location, price = minPrice } = values;
             const {
               selectedPlace: { address, origin },
             } = location;
@@ -88,22 +95,24 @@ class EditListingLocationPanel extends Component {
               publicData: {
                 location: { address, building },
               },
+              price: price
             };
             this.setState({
               initialValues: {
                 building,
                 location: { search: address, selectedPlace: { address, origin } },
+                price: minPrice
               },
             });
             onSubmit(updateValues);
           }}
           onChange={onChange}
           saveActionMsg={submitButtonText}
-          disabled={disabled}
-          ready={ready}
           updated={panelUpdated}
           updateInProgress={updateInProgress}
           fetchErrors={errors}
+          listing={ listing }
+          user_type ={ user_type}
         />
       </div>
     );
@@ -125,8 +134,6 @@ EditListingLocationPanel.propTypes = {
   // We cannot use propTypes.listing since the listing might be a draft.
   listing: object,
 
-  disabled: bool.isRequired,
-  ready: bool.isRequired,
   onSubmit: func.isRequired,
   onChange: func.isRequired,
   submitButtonText: string.isRequired,

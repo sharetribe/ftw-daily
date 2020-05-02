@@ -28,10 +28,20 @@ export const openGraphMetaProps = data => {
     url,
   } = data;
 
-  if (!(title && description && contentType && url && facebookImages && canonicalRootURL)) {
+  if (
+    !(
+      title &&
+      description &&
+      contentType &&
+      url &&
+      facebookImages &&
+      facebookImages.length > 0 &&
+      canonicalRootURL
+    )
+  ) {
     /* eslint-disable no-console */
-    if (console && console.warn) {
-      console.warn(
+    if (console && console.warning) {
+      console.warning(
         `Can't create Openg Graph meta tags:
         title, description, contentType, url, facebookImages, and canonicalRootURL are needed.`
       );
@@ -48,19 +58,17 @@ export const openGraphMetaProps = data => {
     { property: 'og:locale', content: ensureOpenGraphLocale(locale) },
   ];
 
-  if (facebookImages && facebookImages.length > 0) {
-    facebookImages.forEach(i => {
-      openGraphMeta.push({
-        property: 'og:image',
-        content: i.url,
-      });
-
-      if (i.width && i.height) {
-        openGraphMeta.push({ property: 'og:image:width', content: i.width });
-        openGraphMeta.push({ property: 'og:image:height', content: i.height });
-      }
+  facebookImages.forEach(i => {
+    openGraphMeta.push({
+      property: 'og:image',
+      content: i.url,
     });
-  }
+
+    if (i.width && i.height) {
+      openGraphMeta.push({ property: 'og:image:width', content: i.width });
+      openGraphMeta.push({ property: 'og:image:height', content: i.height });
+    }
+  });
 
   if (siteTitle) {
     openGraphMeta.push({ property: 'og:site_name', content: siteTitle });
@@ -101,8 +109,8 @@ export const twitterMetaProps = data => {
 
   if (!(title && description && siteTwitterHandle && url)) {
     /* eslint-disable no-console */
-    if (console && console.warn) {
-      console.warn(
+    if (console && console.warning) {
+      console.warning(
         `Can't create twitter card meta tags:
         title, description, siteTwitterHandle, and url are needed.`
       );

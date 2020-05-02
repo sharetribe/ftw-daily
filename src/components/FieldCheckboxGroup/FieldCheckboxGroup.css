@@ -1,28 +1,52 @@
 @import '../../marketplace.css';
-
 .root {
-  margin: 0;
-  padding: 0;
-  border: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+    margin-bottom: 32px;
 }
 
 .list {
-  margin: 0;
+    margin: 0;
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
 }
 
 .twoColumns {
-  @media (--viewportMedium) {
-    columns: 2;
-  }
+    @media (--viewportMedium) {
+        columns: 2;
+    }
+}
+
+.threeColumns {
+    /*your fixed height*/
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
 }
 
 .item {
-  padding: 2px 0;
+    padding: 2px 0;
+    /* Fix broken multi-column layout in Chrome */
+    page-break-inside: avoid;
+    /*your fixed height*/
+    @media (--viewportMedium) {
+        padding: 4px 0;
+    }
+}
 
-  /* Fix broken multi-column layout in Chrome */
-  page-break-inside: avoid;
+.customTip {
+ color: #fff !important;
+ background-color: #41a6df !important;
+ opacity: 0.99 !important;
+ margin-top: -5px !important;
+ padding: 10px 21px 13px !important;
+ text-align: center;
+ width: 250px;
+}
 
-  @media (--viewportMedium) {
-    padding: 4px 0;
-  }
+.customTip:after {
+ border-top-color: #41a6df !important;
+ border-top-width: 7px !important;
 }

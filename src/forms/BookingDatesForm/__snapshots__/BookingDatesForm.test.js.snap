@@ -12,7 +12,7 @@ exports[`BookingDatesForm matches snapshot without selected dates 1`] = `
       "formatMessage": [Function],
       "formatNumber": [Function],
       "formatPlural": [Function],
-      "formatRelativeTime": [Function],
+      "formatRelative": [Function],
       "formatTime": [Function],
       "now": [Function],
     }
@@ -30,6 +30,6 @@ exports[`BookingDatesForm matches snapshot without selected dates 1`] = `
       "currency": "USD",
     }
   }
-  unitType="line-item/night"
+  unitType="n"
 />
 `;

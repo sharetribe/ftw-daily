@@ -2,9 +2,9 @@ import React from 'react';
 import FilterForm from './FilterForm';
 import { FieldTextInput } from '../../components';
 
-const field = formId => (
+const field = (
   <FieldTextInput
-    id={`${formId}.field`}
+    id="field"
     name="field"
     type="textarea"
     label="Field label"
@@ -29,7 +29,7 @@ export const FilterFormExample = {
       console.log('onClear called');
     },
     label: 'Example label',
-    children: field('FilterFormExample'),
+    children: field,
   },
   group: 'forms',
 };
@@ -45,7 +45,7 @@ export const FilterFormExampleLiveEdit = {
       console.log(values);
     },
     label: 'Example label',
-    children: field('FilterFormExampleLiveEdit'),
+    children: field,
   },
   group: 'forms',
 };

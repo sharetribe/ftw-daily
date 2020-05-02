@@ -1,43 +1,52 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { intlShape } from '../../util/reactIntl';
+import { intlShape } from 'react-intl';
 import routeConfiguration from '../../routeConfiguration';
+import css from './EditListingWizard.css';
+
 import {
   LISTING_PAGE_PARAM_TYPE_DRAFT,
   LISTING_PAGE_PARAM_TYPE_NEW,
   LISTING_PAGE_PARAM_TYPES,
 } from '../../util/urlHelpers';
+
 import { ensureListing } from '../../util/data';
 import { createResourceLocatorString } from '../../util/routes';
+
 import {
   EditListingAvailabilityPanel,
+  EditListingCapacityPanel,
   EditListingDescriptionPanel,
   EditListingFeaturesPanel,
   EditListingLocationPanel,
   EditListingPhotosPanel,
   EditListingPoliciesPanel,
   EditListingPricingPanel,
+  EditListingHomePanel,
 } from '../../components';
-
-import css from './EditListingWizard.css';
 
 export const AVAILABILITY = 'availability';
 export const DESCRIPTION = 'description';
 export const FEATURES = 'features';
+export const CAPACITY = 'capacity';
 export const POLICY = 'policy';
 export const LOCATION = 'location';
 export const PRICING = 'pricing';
+export const VIDEO = 'video';
 export const PHOTOS = 'photos';
+export const HOME = 'home';
 
 // EditListingWizardTab component supports these tabs
 export const SUPPORTED_TABS = [
   DESCRIPTION,
   FEATURES,
-  POLICY,
+  HOME,
   LOCATION,
-  PRICING,
   AVAILABILITY,
+  PRICING,
+  CAPACITY,
   PHOTOS,
+  POLICY,
 ];
 
 const pathParamsToNextTab = (params, tab, marketplaceTabs) => {
@@ -94,6 +103,8 @@ const EditListingWizardTab = props => {
     updatedTab,
     updateInProgress,
     intl,
+    user_type,
+    currentUser,
   } = props;
 
   const { type } = params;
@@ -150,15 +161,15 @@ const EditListingWizardTab = props => {
       onChange,
       panelUpdated: updatedTab === tab,
       updateInProgress,
-      // newListingPublished and fetchInProgress are flags for the last wizard tab
-      ready: newListingPublished,
-      disabled: fetchInProgress,
+      user_type,
+      currentUser,
     };
   };
 
+  var submitButtonTranslationKey;
   switch (tab) {
     case DESCRIPTION: {
-      const submitButtonTranslationKey = isNewListingFlow
+      submitButtonTranslationKey = isNewListingFlow
         ? 'EditListingWizard.saveNewDescription'
         : 'EditListingWizard.saveEditDescription';
       return (
@@ -172,9 +183,24 @@ const EditListingWizardTab = props => {
       );
     }
     case FEATURES: {
-      const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditListingWizard.saveNewFeatures'
-        : 'EditListingWizard.saveEditFeatures';
+      if (isNewListingFlow) {
+        if (user_type == 1) {
+          submitButtonTranslationKey = 'EditListingWizard.saveNewFeaturesSitter';
+        }
+        else if (user_type == 0) {
+          submitButtonTranslationKey = 'EditListingWizard.saveNewFeatures';
+        } else {
+          submitButtonTranslationKey = 'EditListingWizard.saveNewHome';
+        }
+      } else {
+        if (user_type == 1) {
+          submitButtonTranslationKey = 'EditListingWizard.EditFeaturesSitter';
+        } else if (user_type == 0) {
+          submitButtonTranslationKey = 'EditListingWizard.saveEditHome';
+        } else {
+          submitButtonTranslationKey = 'EditListingWizard.saveEditPetTypes';
+        }
+      }
       return (
         <EditListingFeaturesPanel
           {...panelProps(FEATURES)}
@@ -185,8 +211,38 @@ const EditListingWizardTab = props => {
         />
       );
     }
+    case HOME: {
+      submitButtonTranslationKey = isNewListingFlow
+        ? 'EditListingWizard.saveNewHome'
+        : 'EditListingWizard.saveEditHome';
+      return (
+        <EditListingHomePanel
+          {...panelProps(HOME)}
+          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          onSubmit={values => {
+            onCompleteEditListingWizardTab(tab, values);
+          }}
+        />
+      );
+    }
+
+case CAPACITY: {
+  const submitButtonTranslationKey = isNewListingFlow
+    ? 'EditListingWizard.saveNewCapacity'
+    : 'EditListingWizard.saveEditCapacity';
+  return (
+    <EditListingCapacityPanel
+      {...panelProps(CAPACITY)}
+      submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+      onSubmit={values => {
+        onCompleteEditListingWizardTab(tab, values);
+      }}
+    />
+  );
+}
+
     case POLICY: {
-      const submitButtonTranslationKey = isNewListingFlow
+      submitButtonTranslationKey = isNewListingFlow
         ? 'EditListingWizard.saveNewPolicies'
         : 'EditListingWizard.saveEditPolicies';
       return (
@@ -200,9 +256,21 @@ const EditListingWizardTab = props => {
       );
     }
     case LOCATION: {
-      const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditListingWizard.saveNewLocation'
-        : 'EditListingWizard.saveEditLocation';
+      if (user_type == 1) {
+        submitButtonTranslationKey = isNewListingFlow
+          ? 'EditListingWizard.saveNewLocation'
+          : 'EditListingWizard.saveEditLocation';
+      }
+      else if (user_type == 0) {
+        submitButtonTranslationKey = isNewListingFlow
+          ? 'EditListingWizard.EditLocationOwner'
+          : 'EditListingWizard.SaveLocationOwner';
+      } else {
+        submitButtonTranslationKey = isNewListingFlow
+          ? 'EditListingWizard.saveNewLocationService'
+          : 'EditListingWizard.saveEditLocation';
+      }
+
       return (
         <EditListingLocationPanel
           {...panelProps(LOCATION)}
@@ -214,7 +282,7 @@ const EditListingWizardTab = props => {
       );
     }
     case PRICING: {
-      const submitButtonTranslationKey = isNewListingFlow
+      submitButtonTranslationKey = isNewListingFlow
         ? 'EditListingWizard.saveNewPricing'
         : 'EditListingWizard.saveEditPricing';
       return (
@@ -228,14 +296,20 @@ const EditListingWizardTab = props => {
       );
     }
     case AVAILABILITY: {
-      const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditListingWizard.saveNewAvailability'
-        : 'EditListingWizard.saveEditAvailability';
+      if (user_type) {
+        submitButtonTranslationKey = isNewListingFlow
+          ? 'EditListingWizard.saveNewAvailability'
+          : 'EditListingWizard.saveEditAvailability';
+      } else {
+        submitButtonTranslationKey = isNewListingFlow
+          ? 'EditListingWizard.saveNewPricing'
+          : 'EditListingWizard.saveEditAvailability';
+      }
       return (
         <EditListingAvailabilityPanel
           {...panelProps(AVAILABILITY)}
           availability={availability}
-          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          submitButtonText={'Save Dates'}
           onSubmit={values => {
             onCompleteEditListingWizardTab(tab, values);
           }}
@@ -243,14 +317,17 @@ const EditListingWizardTab = props => {
       );
     }
     case PHOTOS: {
-      const submitButtonTranslationKey = isNewListingFlow
+      submitButtonTranslationKey = isNewListingFlow
         ? 'EditListingWizard.saveNewPhotos'
         : 'EditListingWizard.saveEditPhotos';
 
+      // newListingPublished and fetchInProgress are flags for the last wizard tab
       return (
         <EditListingPhotosPanel
           {...panelProps(PHOTOS)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          newListingPublished={newListingPublished}
+          fetchInProgress={fetchInProgress}
           images={images}
           onImageUpload={onImageUpload}
           onRemoveImage={onRemoveImage}
@@ -278,7 +355,7 @@ EditListingWizardTab.propTypes = {
     id: string.isRequired,
     slug: string.isRequired,
     type: oneOf(LISTING_PAGE_PARAM_TYPES).isRequired,
-    tab: oneOf(SUPPORTED_TABS).isRequired,
+    // tab: oneOf(SUPPORTED_TABS).isRequired,
   }).isRequired,
   errors: shape({
     createListingDraftError: object,

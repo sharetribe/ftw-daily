@@ -1,6 +1,6 @@
 import * as custom from './marketplace-custom-config.js';
 import defaultLocationSearches from './default-location-searches';
-import { defaultMCC, stripePublishableKey, stripeCountryDetails } from './stripe-config';
+import { stripePublishableKey, stripeSupportedCountries } from './stripe-config';
 import { currencyConfiguration } from './currency-config';
 
 const env = process.env.REACT_APP_ENV;
@@ -22,8 +22,6 @@ const i18n = {
 // Should search results be ordered by distance to origin.
 // NOTE: If this is set to true add parameter 'origin' to every location in default-location-searches.js
 // Without the 'origin' parameter, search will not work correctly
-// NOTE: Keyword search and ordering search results by distance can't be used at the same time. You can turn keyword
-// search off by changing the keywordFilterConfig parameter active to false in marketplace-custom-config.js
 const sortSearchByDistance = false;
 
 // API supports custom processes to be used in booking process.
@@ -32,7 +30,7 @@ const sortSearchByDistance = false;
 //
 // In a way, 'processAlias' defines which transaction process (or processes)
 // this particular web application is able to handle.
-const bookingProcessAlias = 'preauth-nightly-booking/release-1';
+const bookingProcessAlias = 'preauth-with-nightly-booking/release-1';
 
 // The transaction line item code for the main unit type in bookings.
 //
@@ -42,6 +40,7 @@ const bookingProcessAlias = 'preauth-nightly-booking/release-1';
 // depending on the value chosen.
 const bookingUnitType = 'line-item/night';
 
+const bookingHour = 1;
 // Should the application fetch available time slots (currently defined as
 // start and end dates) to be shown on listing page.
 const enableAvailability = process.env.REACT_APP_AVAILABILITY_ENABLED === 'true';
@@ -77,25 +76,25 @@ const sentryDsn = process.env.REACT_APP_SENTRY_DSN;
 const usingSSL = process.env.REACT_APP_SHARETRIBE_USING_SSL === 'true';
 
 // Address information is used in SEO schema for Organization (http://schema.org/PostalAddress)
-const addressCountry = 'PE';
-const addressRegion = 'Lima';
-const postalCode = '15048';
-const streetAddress = 'Manuel Augusto Olaechea 205';
+const addressCountry = 'FI';
+const addressRegion = 'Helsinki';
+const postalCode = '00100';
+const streetAddress = 'Bulevardi 14';
 
 // Canonical root url is needed in social media sharing and SEO optimization purposes.
 const canonicalRootURL = process.env.REACT_APP_CANONICAL_ROOT_URL;
 
 // Site title is needed in meta tags (bots and social media sharing reads those)
-const siteTitle = 'Reactivate Perú';
+const siteTitle = 'Trust My Pet Sitter';
 
 // Twitter handle is needed in meta tags (twitter:site). Start it with '@' character
-const siteTwitterHandle = '@mep_red';
+const siteTwitterHandle = '@trustpetsitter';
 
 // Instagram page is used in SEO schema (http://schema.org/Organization)
 const siteInstagramPage = null;
 
 // Facebook page is used in SEO schema (http://schema.org/Organization)
-const siteFacebookPage = 'https://www.facebook.com/REDMEPenaccion/';
+const siteFacebookPage = 'https://www.facebook.com/trustmypetsitter/';
 
 // Facebook counts shares with app or page associated by this id
 // Currently it is unset, but you can read more about fb:app_id from
@@ -129,7 +128,7 @@ const maps = {
     // Limit location autocomplete to a one or more countries
     // using ISO 3166 alpha 2 country codes separated by commas.
     // If you want to limit the autocomplete, uncomment this value:
-    countryLimit: ['PE'],
+    // countryLimit: ['AU'],
   },
 
   // When fuzzy locations are enabled, coordinates on maps are
@@ -187,6 +186,7 @@ const config = {
   locale,
   bookingProcessAlias,
   bookingUnitType,
+  bookingHour,
   enableAvailability,
   dayCountAvailableForBooking,
   i18n,
@@ -200,9 +200,8 @@ const config = {
   currencyConfig,
   listingMinimumPriceSubUnits,
   stripe: {
-    defaultMCC: defaultMCC,
     publishableKey: stripePublishableKey,
-    supportedCountries: stripeCountryDetails,
+    supportedCountries: stripeSupportedCountries,
   },
   canonicalRootURL,
   address: {

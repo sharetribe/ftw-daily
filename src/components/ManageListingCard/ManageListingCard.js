@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
-import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
+import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import routeConfiguration from '../../routeConfiguration';
 import {
@@ -70,23 +70,23 @@ const createListingURL = (routes, listing) => {
   const variant = isDraft
     ? LISTING_PAGE_DRAFT_VARIANT
     : isPendingApproval
-    ? LISTING_PAGE_PENDING_APPROVAL_VARIANT
-    : null;
+      ? LISTING_PAGE_PENDING_APPROVAL_VARIANT
+      : null;
 
   const linkProps =
     isPendingApproval || isDraft
       ? {
-          name: 'ListingPageVariant',
-          params: {
-            id,
-            slug,
-            variant,
-          },
-        }
+        name: 'ListingPageVariant',
+        params: {
+          id,
+          slug,
+          variant,
+        },
+      }
       : {
-          name: 'ListingPage',
-          params: { id, slug },
-        };
+        name: 'ListingPage',
+        params: { id, slug },
+      };
 
   return createResourceLocatorString(linkProps.name, routes, linkProps.params, {});
 };
@@ -103,8 +103,8 @@ const formatTitle = (title, maxLength) => {
         {word}
       </span>
     ) : (
-      word
-    );
+        word
+      );
   });
 };
 
@@ -120,6 +120,7 @@ export const ManageListingCardComponent = props => {
     actionsInProgressListingId,
     listing,
     onCloseListing,
+    onDeleteListing,
     onOpenListing,
     onToggleMenu,
     renderSizes,
@@ -128,7 +129,7 @@ export const ManageListingCardComponent = props => {
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
   const id = currentListing.id.uuid;
-  const { title = '', price, state } = currentListing.attributes;
+  const { title = '', price, state, publicData } = currentListing.attributes;
   const slug = createSlug(title);
   const isPendingApproval = state === LISTING_STATE_PENDING_APPROVAL;
   const isClosed = state === LISTING_STATE_CLOSED;
@@ -162,8 +163,15 @@ export const ManageListingCardComponent = props => {
   const unitTranslationKey = isNightly
     ? 'ManageListingCard.perNight'
     : isDaily
-    ? 'ManageListingCard.perDay'
-    : 'ManageListingCard.perUnit';
+      ? 'ManageListingCard.perDay'
+      : 'ManageListingCard.perUnit';
+
+
+  const unitMap = {
+    'h': 'Per hour',
+    'u': 'Per unit',
+    'd': 'Per day'
+  }
 
   return (
     <div className={classes}>
@@ -217,21 +225,39 @@ export const ManageListingCardComponent = props => {
                 </div>
               </MenuLabel>
               <MenuContent rootClassName={css.menuContent}>
-                <MenuItem key="close-listing">
-                  <InlineTextButton
-                    rootClassName={menuItemClasses}
-                    onClick={event => {
-                      event.preventDefault();
-                      event.stopPropagation();
-                      if (!actionsInProgressListingId) {
-                        onToggleMenu(null);
-                        onCloseListing(currentListing.id);
-                      }
-                    }}
-                  >
-                    <FormattedMessage id="ManageListingCard.closeListing" />
-                  </InlineTextButton>
-                </MenuItem>
+                {isDraft ? (
+                  <MenuItem key="delete-listing">
+                    <InlineTextButton
+                      rootClassName={menuItemClasses}
+                      onClick={event => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        if (!actionsInProgressListingId) {
+                          onToggleMenu(null);
+                          onDeleteListing(currentListing.id);
+                        }
+                      }}
+                    >
+                      <FormattedMessage id="ManageListingCard.deleteListing" />
+                    </InlineTextButton>
+                  </MenuItem>
+                ) : (
+                    <MenuItem key="close-listing">
+                      <InlineTextButton
+                        rootClassName={menuItemClasses}
+                        onClick={event => {
+                          event.preventDefault();
+                          event.stopPropagation();
+                          if (!actionsInProgressListingId) {
+                            onToggleMenu(null);
+                            onCloseListing(currentListing.id);
+                          }
+                        }}
+                      >
+                        <FormattedMessage id="ManageListingCard.closeListing" />
+                      </InlineTextButton>
+                    </MenuItem>
+                  )}
               </MenuContent>
             </Menu>
           </div>
@@ -302,14 +328,16 @@ export const ManageListingCardComponent = props => {
                 {formattedPrice}
               </div>
               <div className={css.perUnit}>
-                <FormattedMessage id={unitTranslationKey} />
+                {
+                  unitMap[publicData.rate]
+                }
               </div>
             </React.Fragment>
           ) : (
-            <div className={css.noPrice}>
-              <FormattedMessage id="ManageListingCard.priceNotSet" />
-            </div>
-          )}
+              <div className={css.noPrice}>
+                <FormattedMessage id="ManageListingCard.priceNotSet" />
+              </div>
+            )}
         </div>
 
         <div className={css.mainInfo}>
@@ -375,6 +403,7 @@ ManageListingCardComponent.propTypes = {
   isMenuOpen: bool.isRequired,
   actionsInProgressListingId: shape({ uuid: string.isRequired }),
   onCloseListing: func.isRequired,
+  onDeleteListing: func.isRequired,
   onOpenListing: func.isRequired,
   onToggleMenu: func.isRequired,
   availabilityEnabled: bool,

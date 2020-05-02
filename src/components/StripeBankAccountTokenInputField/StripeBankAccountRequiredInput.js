@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from '../../util/reactIntl';
+import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 
 import css from './StripeBankAccountTokenInputField.css';
@@ -20,7 +20,6 @@ const StripeBankAccountRequiredInput = props => {
     showStripeError,
     inputError,
     disabled,
-    showInColumns,
   } = props;
 
   const showInputError = isTouched && !!inputError;
@@ -29,8 +28,6 @@ const StripeBankAccountRequiredInput = props => {
     [css.inputSuccess]: !!value,
     [css.inputError]: showInputError || showStripeError,
   });
-
-  const columnsClass = showInColumns ? css.longForm : null;
 
   const inputProps = {
     className: classes,
@@ -46,7 +43,7 @@ const StripeBankAccountRequiredInput = props => {
   const errorMessage = <p className={css.error}>{inputError}</p>;
 
   return (
-    <div className={classNames(classes, columnsClass)}>
+    <div className={classes}>
       <label htmlFor={inputProps.id}>
         <FormattedMessage id={`StripeBankAccountTokenInputField.${inputType}.label`} />
       </label>

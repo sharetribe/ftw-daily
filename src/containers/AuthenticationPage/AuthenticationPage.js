@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
-import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import config from '../../config';
 import { propTypes } from '../../util/types';
@@ -241,7 +241,6 @@ export class AuthenticationPageComponent extends Component {
               id="AuthenticationPage.tos"
               isOpen={this.state.tosModalOpen}
               onClose={() => this.setState({ tosModalOpen: false })}
-              usePortal
               onManageDisableScrolling={onManageDisableScrolling}
             >
               <div className={css.termsWrapper}>

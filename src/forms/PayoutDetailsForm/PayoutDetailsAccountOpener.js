@@ -1,6 +1,6 @@
 import React from 'react';
 import { bool, object, string } from 'prop-types';
-import { FormattedMessage, intlShape } from '../../util/reactIntl';
+import { FormattedMessage, intlShape } from 'react-intl';
 
 import PayoutDetailsAddress from './PayoutDetailsAddress';
 import PayoutDetailsPersonalDetails from './PayoutDetailsPersonalDetails';
@@ -47,7 +47,6 @@ const PayoutDetailsAccountOpener = props => {
           showPhoneNumberField={showPhoneNumberField}
           sectionTitle={intl.formatMessage({ id: 'PayoutDetailsForm.accountOpenerTitle' })}
           values={values}
-          form={form}
         />
         {showPersonalAddressField ? (
           <PayoutDetailsAddress

@@ -29,17 +29,14 @@
 import React, { Component } from 'react';
 import { array, func, object, shape, string } from 'prop-types';
 import classNames from 'classnames';
-import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import omit from 'lodash/omit';
 
 import routeConfiguration from '../../routeConfiguration';
 import { createResourceLocatorString } from '../../util/routes';
-import { SelectSingleFilter, SelectMultipleFilter, InlineTextButton } from '../../components';
+import { InlineTextButton } from '../../components';
 import css from './SearchFiltersPanel.css';
-
-// Dropdown container can have a positional offset (in pixels)
-const FILTER_DROPDOWN_OFFSET = -14;
 
 class SearchFiltersPanelComponent extends Component {
   constructor(props) {
@@ -104,7 +101,7 @@ class SearchFiltersPanelComponent extends Component {
       // if no option is passed, clear the selection for the filter
       const currentQueryParams = option
         ? { ...mergedQueryParams, [urlParam]: option }
-        : { ...mergedQueryParams, [urlParam]: null };
+        : omit(mergedQueryParams, urlParam);
 
       return { currentQueryParams };
     });
@@ -154,52 +151,12 @@ class SearchFiltersPanelComponent extends Component {
   }
 
   render() {
-    const { rootClassName, className, intl, categoryFilter, amenitiesFilter } = this.props;
+    const { rootClassName, className } = this.props;
     const classes = classNames(rootClassName || css.root, className);
-
-    const initialCategory = this.initialValue(categoryFilter.paramName);
-    const initialAmenities = this.initialValues(amenitiesFilter.paramName);
-
-    const categoryLabel = intl.formatMessage({
-      id: 'SearchFiltersPanel.categoryLabel',
-    });
-
-    const amenitiesLabel = intl.formatMessage({
-      id: 'SearchFiltersPanel.amenitiesLabel',
-    });
-
-    const categoryFilterElement = categoryFilter ? (
-      <SelectSingleFilter
-        urlParam={categoryFilter.paramName}
-        label={categoryLabel}
-        onSelect={this.handleSelectSingle}
-        liveEdit
-        options={categoryFilter.options}
-        initialValue={initialCategory}
-        contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
-      />
-    ) : null;
-
-    const amenitiesFilterElement = amenitiesFilter ? (
-      <SelectMultipleFilter
-        id={'SearchFiltersPanel.amenitiesFilter'}
-        name="amenities"
-        urlParam={amenitiesFilter.paramName}
-        label={amenitiesLabel}
-        onSubmit={this.handleSelectMultiple}
-        liveEdit
-        options={amenitiesFilter.options}
-        initialValues={initialAmenities}
-        contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
-      />
-    ) : null;
 
     return (
       <div className={classes}>
-        <div className={css.filtersWrapper}>
-          {categoryFilterElement}
-          {amenitiesFilterElement}
-        </div>
+        <div className={css.filtersWrapper}>{/* Add filters here */}</div>
         <div className={css.footer}>
           <InlineTextButton rootClassName={css.resetAllButton} onClick={this.resetAll}>
             <FormattedMessage id={'SearchFiltersPanel.resetAll'} />

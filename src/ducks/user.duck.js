@@ -4,7 +4,7 @@ import { transitionsToRequested } from '../util/transaction';
 import { LISTING_STATE_DRAFT } from '../util/types';
 import * as log from '../util/log';
 import { authInfo } from './Auth.duck';
-import { stripeAccountCreateSuccess } from './stripeConnectAccount.duck';
+import { stripeAccountCreateSuccess } from './stripe.duck.js';
 
 // ================ Action types ================ //
 
@@ -40,20 +40,6 @@ export const SEND_VERIFICATION_EMAIL_ERROR = 'app/user/SEND_VERIFICATION_EMAIL_E
 
 // ================ Reducer ================ //
 
-const mergeCurrentUser = (oldCurrentUser, newCurrentUser) => {
-  const { id: oId, type: oType, attributes: oAttr, ...oldRelationships } = oldCurrentUser || {};
-  const { id, type, attributes, ...relationships } = newCurrentUser || {};
-
-  // Passing null will remove currentUser entity.
-  // Only relationships are merged.
-  // TODO figure out if sparse fields handling needs a better handling.
-  return newCurrentUser === null
-    ? null
-    : oldCurrentUser === null
-    ? newCurrentUser
-    : { id, type, attributes, ...oldRelationships, ...relationships };
-};
-
 const initialState = {
   currentUser: null,
   currentUserShowError: null,
@@ -73,7 +59,7 @@ export default function reducer(state = initialState, action = {}) {
     case CURRENT_USER_SHOW_REQUEST:
       return { ...state, currentUserShowError: null };
     case CURRENT_USER_SHOW_SUCCESS:
-      return { ...state, currentUser: mergeCurrentUser(state.currentUser, payload) };
+      return { ...state, currentUser: payload };
     case CURRENT_USER_SHOW_ERROR:
       // eslint-disable-next-line no-console
       console.error(payload);
@@ -305,7 +291,7 @@ export const fetchCurrentUserNotifications = () => (dispatch, getState, sdk) => 
     .catch(e => dispatch(fetchCurrentUserNotificationsError(storableError(e))));
 };
 
-export const fetchCurrentUser = (params = null) => (dispatch, getState, sdk) => {
+export const fetchCurrentUser = () => (dispatch, getState, sdk) => {
   dispatch(currentUserShowRequest());
   const { isAuthenticated } = getState().Auth;
 
@@ -315,13 +301,13 @@ export const fetchCurrentUser = (params = null) => (dispatch, getState, sdk) => 
     return Promise.resolve({});
   }
 
-  const parameters = params || {
+  const params = {
     include: ['profileImage', 'stripeAccount'],
     'fields.image': ['variants.square-small', 'variants.square-small2x'],
   };
 
   return sdk.currentUser
-    .show(parameters)
+    .show(params)
     .then(response => {
       const entities = denormalisedResponseEntities(response);
       if (entities.length !== 1) {
@@ -366,4 +352,18 @@ export const sendVerificationEmail = () => (dispatch, getState, sdk) => {
     .sendVerificationEmail()
     .then(() => dispatch(sendVerificationEmailSuccess()))
     .catch(e => dispatch(sendVerificationEmailError(storableError(e))));
+};
+
+export const updateUserMembership = values => {
+  return (dispatch, getState, sdk) => {
+    return sdk.currentUser.updateProfile({
+      publicData: values,
+    });
+  };
+};
+
+export const getUser = () => {
+  return (dispatch, getState, sdk) => {
+    return sdk.currentUser.show();
+  };
 };

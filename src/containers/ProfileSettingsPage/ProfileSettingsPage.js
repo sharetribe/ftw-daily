@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { propTypes } from '../../util/types';
 import { ensureCurrentUser } from '../../util/data';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
@@ -45,7 +45,8 @@ export class ProfileSettingsPageComponent extends Component {
     } = this.props;
 
     const handleSubmit = values => {
-      const { firstName, lastName, bio: rawBio } = values;
+      console.log(values);
+      const { firstName, lastName, bio: rawBio, preferredlocations } = values;
 
       // Ensure that the optional bio is a string
       const bio = rawBio || '';
@@ -54,6 +55,9 @@ export class ProfileSettingsPageComponent extends Component {
         firstName: firstName.trim(),
         lastName: lastName.trim(),
         bio,
+        publicData: {
+          preferredlocations,
+        },
       };
       const uploadedImage = this.props.image;
 
@@ -67,15 +71,23 @@ export class ProfileSettingsPageComponent extends Component {
     };
 
     const user = ensureCurrentUser(currentUser);
-    const { firstName, lastName, bio } = user.attributes.profile;
+    const { firstName, lastName, bio, publicData } = user.attributes.profile;
     const profileImageId = user.profileImage ? user.profileImage.id : null;
     const profileImage = image || { imageId: profileImageId };
+
+    console.log(publicData);
 
     const profileSettingsForm = user.id ? (
       <ProfileSettingsForm
         className={css.form}
         currentUser={currentUser}
-        initialValues={{ firstName, lastName, bio, profileImage: user.profileImage }}
+        initialValues={{
+          firstName,
+          lastName,
+          bio,
+          profileImage: user.profileImage,
+          preferredlocations: publicData.preferredlocations,
+        }}
         profileImage={profileImage}
         onImageUpload={e => onImageUploadHandler(e, onImageUpload)}
         uploadInProgress={uploadInProgress}
@@ -154,6 +166,7 @@ ProfileSettingsPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const { currentUser } = state.user;
+  console.log(state.user);
   const {
     image,
     uploadImageError,

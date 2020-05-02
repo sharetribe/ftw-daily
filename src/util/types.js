@@ -190,8 +190,6 @@ const availabilityPlan = shape({
   ),
 });
 
-propTypes.availabilityPlan = availabilityPlan;
-
 const ownListingAttributes = shape({
   title: string.isRequired,
   description: string,
@@ -307,28 +305,16 @@ propTypes.stripeAccount = shape({
   type: propTypes.value('stripeAccount').isRequired,
   attributes: shape({
     stripeAccountId: string.isRequired,
-    stripeAccountData: object,
-  }),
-});
-
-propTypes.defaultPaymentMethod = shape({
-  id: propTypes.uuid.isRequired,
-  type: propTypes.value('stripePaymentMethod').isRequired,
-  attributes: shape({
-    type: propTypes.value('stripe-payment-method/card').isRequired,
-    stripePaymentMethodId: string.isRequired,
-    card: shape({
-      brand: string.isRequired,
-      expirationMonth: number.isRequired,
-      expirationYear: number.isRequired,
-      last4Digits: string.isRequired,
-    }).isRequired,
   }),
 });
 
 export const LINE_ITEM_NIGHT = 'line-item/night';
 export const LINE_ITEM_DAY = 'line-item/day';
 export const LINE_ITEM_UNITS = 'line-item/units';
+export const LINE_ITEM_HOUR = 'line-item/hour';
+export const LINE_ITEM_SESSION = 'line-item/session';
+export const LINE_ITEM_WEEK = 'line-item/week';
+
 export const LINE_ITEM_CUSTOMER_COMMISSION = 'line-item/customer-commission';
 export const LINE_ITEM_PROVIDER_COMMISSION = 'line-item/provider-commission';
 
@@ -340,7 +326,14 @@ export const LINE_ITEMS = [
   LINE_ITEM_PROVIDER_COMMISSION,
 ];
 
-propTypes.bookingUnitType = oneOf([LINE_ITEM_NIGHT, LINE_ITEM_DAY, LINE_ITEM_UNITS]);
+propTypes.bookingUnitType = oneOf([
+  LINE_ITEM_NIGHT,
+  LINE_ITEM_HOUR,
+  LINE_ITEM_WEEK,
+  LINE_ITEM_DAY,
+  LINE_ITEM_UNITS,
+  LINE_ITEM_SESSION,
+]);
 
 const requiredLineItemPropType = (props, propName, componentName) => {
   const prop = props[propName];

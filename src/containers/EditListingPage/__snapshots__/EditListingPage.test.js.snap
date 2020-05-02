@@ -6,7 +6,7 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
   title="EditListingPage.titleCreateListing"
 >
   <withRouter(Connect(TopbarContainerComponent)) />
-  <withViewport(injectIntl(EditListingWizard))
+  <withViewport(InjectIntl(EditListingWizard))
     availability={
       Object {
         "calendar": undefined,
@@ -28,7 +28,6 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
       }
     }
     fetchInProgress={false}
-    getAccountLinkInProgress={null}
     history={
       Object {
         "push": [Function],
@@ -49,7 +48,6 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
     newListingPublished={false}
     onChange={[Function]}
     onCreateListingDraft={[Function]}
-    onGetStripeConnectAccountLink={[Function]}
     onImageUpload={[Function]}
     onManageDisableScrolling={[Function]}
     onPayoutDetailsFormChange={[Function]}
@@ -66,10 +64,6 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
         "type": "new",
       }
     }
-    stripeAccount={null}
-    stripeAccountError={null}
-    stripeAccountFetched={null}
-    stripeAccountLinkError={null}
   />
 </Page>
 `;

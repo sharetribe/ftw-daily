@@ -32,13 +32,13 @@ const sharetribeSdk = require('sharetribe-flex-sdk');
 const Decimal = require('decimal.js');
 const sitemap = require('express-sitemap');
 const auth = require('./auth');
-const apiRouter = require('./apiRouter');
 const renderer = require('./renderer');
 const dataLoader = require('./dataLoader');
 const fs = require('fs');
 const log = require('./log');
 const { sitemapStructure } = require('./sitemap');
 const csp = require('./csp');
+const url = require('url');
 
 const buildPath = path.resolve(__dirname, '..', 'build');
 const env = process.env.REACT_APP_ENV;
@@ -53,6 +53,11 @@ const CSP = process.env.REACT_APP_CSP;
 const cspReportUrl = '/csp-report';
 const cspEnabled = CSP === 'block' || CSP === 'report';
 const app = express();
+const yoti = require('yoti');
+const yotiClient = new yoti.Client(
+  'd3dd97cd-10eb-4ea5-9ab4-97bd6acfd172',
+  fs.readFileSync(__dirname + '/yoti.pem')
+);
 
 const errorPage = fs.readFileSync(path.join(buildPath, '500.html'), 'utf-8');
 
@@ -133,9 +138,6 @@ if (!dev) {
   }
 }
 
-// Server-side routes that do not render the application
-app.use('/api', apiRouter);
-
 const noCacheHeaders = {
   'Cache-control': 'no-cache, no-store, must-revalidate',
 };
@@ -190,6 +192,16 @@ app.get('*', (req, res) => {
     ...baseUrl,
   });
 
+  if (req.url.startsWith('/yoti-verified')) {
+    yotiClient.getActivityDetails(url.parse(req.url, true).query.token).then(() => {
+      sdk.currentUser.updateProfile({
+        publicData: {
+          yotiVerified: 'YES',
+        },
+      });
+    });
+  }
+
   // Until we have a better plan for caching dynamic content and we
   // make sure that no sensitive data can appear in the prefetched
   // data, let's disable response caching altogether.
@@ -214,15 +226,14 @@ app.get('*', (req, res) => {
         // authentication.
 
         const token = tokenStore.getToken();
-        const scopes = !!token && token.scopes;
-        const isAnonymous = !!scopes && scopes.length === 1 && scopes[0] === 'public-read';
-        if (isAnonymous) {
-          res.status(401).send(html);
-        } else {
-          // If the token is associated with other than public-read scopes, we
-          // assume that client can handle the situation
+        const refreshTokenExists = !!token && !!token.refresh_token;
+
+        if (refreshTokenExists) {
+          // If refresh token exists, we assume that client can handle the situation
           // TODO: improve by checking if the token is valid (needs an API call)
           res.status(200).send(html);
+        } else {
+          res.status(401).send(html);
         }
       } else if (context.forbidden) {
         res.status(403).send(html);

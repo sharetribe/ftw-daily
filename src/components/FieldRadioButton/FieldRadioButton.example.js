@@ -2,10 +2,12 @@ import React from 'react';
 import { Form as FinalForm, FormSpy } from 'react-final-form';
 import { Button } from '..';
 import FieldRadioButton from './FieldRadioButton';
+const formName = 'Styleguide.FieldRadioButton.Form';
 
 const FormComponent = props => (
   <FinalForm
     {...props}
+    form={formName}
     render={fieldRenderProps => {
       const {
         handleSubmit,

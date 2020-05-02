@@ -5,11 +5,11 @@
 }
 .content {
   width: calc(100% - 48px);
-  margin: 12px 24px 24px 24px;
+  margin: 40px 24px 40px 24px;
 
   @media (--viewportMedium) {
-    max-width: 565px;
-    margin: 55px auto 56px auto;
+    margin: 55px auto 80px auto;
+    max-width: 62.5vw;
   }
 }
 
@@ -42,3 +42,4 @@
     margin: 37px 0 0 auto;
   }
 }
+

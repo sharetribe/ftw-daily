@@ -5,7 +5,7 @@
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { intlShape, injectIntl } from '../../util/reactIntl';
+import { intlShape, injectIntl } from 'react-intl';
 import { Field } from 'react-final-form';
 import classNames from 'classnames';
 import Decimal from 'decimal.js';
@@ -41,9 +41,9 @@ const getPrice = (unformattedValue, currencyConfig) => {
     return isEmptyString
       ? null
       : new Money(
-          convertUnitToSubUnit(unformattedValue, unitDivisor(currencyConfig.currency)),
-          currencyConfig.currency
-        );
+        convertUnitToSubUnit(unformattedValue, unitDivisor(currencyConfig.currency)),
+        currencyConfig.currency
+      );
   } catch (e) {
     return null;
   }
@@ -55,11 +55,11 @@ class CurrencyInputComponent extends Component {
     const { currencyConfig, defaultValue, input, intl } = props;
     const initialValueIsMoney = input.value instanceof Money;
 
-    if (initialValueIsMoney && input.value.currency !== currencyConfig.currency) {
-      const e = new Error('Value currency different from marketplace currency');
-      log.error(e, 'currency-input-invalid-currency', { currencyConfig, inputValue: input.value });
-      throw e;
-    }
+    // if (initialValueIsMoney && input.value.currency !== currencyConfig.currency) {
+    //   const e = new Error('Value currency different from marketplace currency');
+    //   log.error(e, 'currency-input-invalid-currency', { currencyConfig, inputValue: input.value });
+    //   throw e;
+    // }
 
     const initialValue = initialValueIsMoney ? convertMoneyToNumber(input.value) : defaultValue;
     const hasInitialValue = typeof initialValue === 'number' && !isNaN(initialValue);
@@ -74,10 +74,10 @@ class CurrencyInputComponent extends Component {
       // Unformatted value is digits + localized sub unit separator ("9,99")
       const unformattedValue = hasInitialValue
         ? truncateToSubUnitPrecision(
-            ensureSeparator(initialValue.toString(), usesComma),
-            unitDivisor(currencyConfig.currency),
-            usesComma
-          )
+          ensureSeparator(initialValue.toString(), usesComma),
+          unitDivisor(currencyConfig.currency),
+          usesComma
+        )
         : '';
       // Formatted value fully localized currency string ("$1,000.99")
       const formattedValue = hasInitialValue

@@ -9,7 +9,7 @@ const formName = 'Styleguide.FieldBoolean.Form';
 const FormComponent = props => (
   <FinalForm
     {...props}
-    formId={formName}
+    form={formName}
     render={fieldRenderProps => {
       const { form, handleSubmit, onChange, invalid, pristine, submitting } = props;
       const required = validators.requiredBoolean('This field is required');

@@ -3,10 +3,11 @@ import mapValues from 'lodash/mapValues';
 import Enzyme, { shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import toJson from 'enzyme-to-json';
+import { IntlProvider, addLocaleData } from 'react-intl';
+import en from 'react-intl/locale-data/en';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureStore from '../store';
-import { IntlProvider } from './reactIntl';
 
 // In case you have translated the template and have new translations that
 // are missing from the en translations file, the language for the tests can
@@ -23,8 +24,9 @@ const testMessages = mapValues(messages, (val, key) => key);
 // store, i18n, router, etc.
 export const TestProvider = props => {
   const store = configureStore();
+  addLocaleData([...en]);
   return (
-    <IntlProvider locale="en" messages={testMessages} textComponent="span">
+    <IntlProvider locale="en" messages={testMessages}>
       <BrowserRouter>
         <Provider store={store}>{props.children}</Provider>
       </BrowserRouter>

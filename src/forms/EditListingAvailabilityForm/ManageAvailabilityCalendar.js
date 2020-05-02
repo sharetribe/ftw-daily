@@ -6,7 +6,7 @@ import {
   isInclusivelyBeforeDay,
   isInclusivelyAfterDay,
 } from 'react-dates';
-import { FormattedMessage } from '../../util/reactIntl';
+import { FormattedMessage } from 'react-intl';
 import memoize from 'lodash/memoize';
 import classNames from 'classnames';
 import moment from 'moment';
@@ -15,10 +15,11 @@ import {
   ensureAvailabilityException,
   ensureDayAvailabilityPlan,
 } from '../../util/data';
-import { DAYS_OF_WEEK, propTypes } from '../../util/types';
+import { DAYS_OF_WEEK } from '../../util/types';
 import { monthIdString, monthIdStringInUTC } from '../../util/dates';
 import { IconArrowHead, IconSpinner } from '../../components';
-
+import TimePicker  from './TimePicker';
+import config from '../../config';
 import css from './ManageAvailabilityCalendar.css';
 
 // Constants
@@ -33,7 +34,7 @@ const END_OF_RANGE_MOMENT = TODAY_MOMENT.clone()
 const END_OF_BOOKING_RANGE_MOMENT = TODAY_MOMENT.clone()
   .add(MAX_BOOKINGS_RANGE - 1, 'days')
   .startOf('day');
-
+const timePickerConfig = config.custom.timePickerConfig;
 // Constants for calculating day width (aka table cell dimensions)
 const TABLE_BORDER = 2;
 const TABLE_COLUMNS = 7;
@@ -42,9 +43,10 @@ const MIN_CELL_WIDTH = Math.floor(MIN_CONTENT_WIDTH / TABLE_COLUMNS); // 38
 const MAX_CONTENT_WIDTH_DESKTOP = 756;
 const MAX_CELL_WIDTH_DESKTOP = Math.floor(MAX_CONTENT_WIDTH_DESKTOP / TABLE_COLUMNS); // 108
 const VIEWPORT_LARGE = 1024;
-
+const _millisecond = 86400000;
 // Helper functions
-
+const FILTER_DROPDOWN_OFFSET = -14;
+const initialHourRange = {minHour:12, maxHour:14};
 // Calculate the width for a calendar day (table cell)
 const dayWidth = (wrapperWidth, windowWith) => {
   if (windowWith >= VIEWPORT_LARGE) {
@@ -137,10 +139,9 @@ const findException = (exceptions, day) => {
 
 const isBlocked = (availabilityPlan, exception, date) => {
   const planEntries = ensureDayAvailabilityPlan(availabilityPlan).entries;
-  const planEntry = planEntries.find(
+  const seatsFromPlan = planEntries.find(
     weekDayEntry => weekDayEntry.dayOfWeek === DAYS_OF_WEEK[date.isoWeekday() - 1]
-  );
-  const seatsFromPlan = planEntry ? planEntry.seats : 0;
+  ).seats;
 
   const seatsFromException =
     exception && ensureAvailabilityException(exception.availabilityException).attributes.seats;
@@ -166,13 +167,15 @@ const renderDayContents = (calendar, availabilityPlan) => date => {
   // This component is for day/night based processes. If time-based process is used,
   // you might want to deal with local dates using monthIdString instead of monthIdStringInUTC.
   const { exceptions = [], bookings = [] } = calendar[monthIdStringInUTC(date)] || {};
+  
   const { isOutsideRange, isSameDay, isBlocked, isBooked, isInProgress, isFailed } = dateModifiers(
     availabilityPlan,
     exceptions,
     bookings,
     date
   );
-
+  
+  
   const dayClasses = classNames(css.default, {
     [css.outsideRange]: isOutsideRange,
     [css.today]: isSameDay,
@@ -180,7 +183,9 @@ const renderDayContents = (calendar, availabilityPlan) => date => {
     [css.reserved]: isBooked,
     [css.exceptionError]: isFailed,
   });
-
+ 
+  
+  
   return (
     <div className={css.dayWrapper}>
       <span className={dayClasses}>
@@ -214,13 +219,17 @@ class ManageAvailabilityCalendar extends Component {
       currentMonth: moment().startOf('month'),
       focused: true,
       date: null,
+      _renderFlag:false,
+      startId:null,
+      hover:false,
+      chosenDates:[],
     };
-
     this.fetchMonthData = this.fetchMonthData.bind(this);
     this.onDayAvailabilityChange = this.onDayAvailabilityChange.bind(this);
     this.onDateChange = this.onDateChange.bind(this);
     this.onFocusChange = this.onFocusChange.bind(this);
     this.onMonthClick = this.onMonthClick.bind(this);
+    this.setAvailabilityss = this.setAvailability.bind(this);
   }
 
   componentDidMount() {
@@ -306,14 +315,55 @@ class ManageAvailabilityCalendar extends Component {
     }
   }
 
-  onDateChange(date) {
-    this.setState({ date });
+   onDateChange(date) {
+    
+    // console.log('milli',date._d.getMilliseconds())
+    var flag = this.state._renderFlag;
+    
+    // if(!flag){
+    //   this.setState({ date });
+    //     console.log('first',flag,typeof(date),date);
+    //     this.setState({_renderFlag: !flag });
+    // }else{
+    //   console.log('process');
+    //   this.setState({_renderFlag: !flag });
+    //   var _date = this.state.date;
+    //   var _mstring_1 = this.getString(_date);
+    //   var _mstring_2 = this.getString(date);
+    //   var _mfirst = new Date(_mstring_1).getTime();
+    //   var _mlast = new Date(_mstring_2).getTime();
+      
+    //   if(_mlast < _mfirst) {
+    //     var temp;
+    //     temp = _mlast;
+    //     _mlast = _mfirst;
+    //     _mfirst=temp;
+        
+    //   }
 
+    //   for(var i = _mfirst; i <= _mlast; i += _millisecond){
+    //     var temp = new Date(i);
+    //     this.setAvailability(moment(temp));
+    //   }
+    //   this.setState({date:null});
+      
+    // }
+    this.setState({date:date});
+    this.setAvailability(date);
+    
+  }
+  getString(a){
+    return a._d.getYear() + '-' + a._d.getMonth() + '-'+ a._d.getDay();
+  }
+  
+
+  setAvailability(date){
     const { availabilityPlan, availability } = this.props;
     const calendar = availability.calendar;
     // This component is for day/night based processes. If time-based process is used,
     // you might want to deal with local dates using monthIdString instead of monthIdStringInUTC.
     const { exceptions = [], bookings = [] } = calendar[monthIdStringInUTC(date)] || {};
+    
     const { isPast, isBlocked, isBooked, isInProgress } = dateModifiers(
       availabilityPlan,
       exceptions,
@@ -373,6 +423,7 @@ class ManageAvailabilityCalendar extends Component {
       availabilityPlan,
       onMonthChanged,
       monthFormat,
+      user_name,
       ...rest
     } = this.props;
     const { focused, date, currentMonth } = this.state;
@@ -384,6 +435,7 @@ class ManageAvailabilityCalendar extends Component {
     const calendarGridWidth = daySize * TABLE_COLUMNS + TABLE_BORDER;
 
     const calendar = availability.calendar;
+    console.log('availability',availability);
     const currentMonthData = calendar[monthIdString(currentMonth)];
     const {
       fetchExceptionsInProgress,
@@ -405,6 +457,13 @@ class ManageAvailabilityCalendar extends Component {
           this.dayPickerWrapper = c;
         }}
       >
+        {/* <TimePicker
+          id="ManageAvailability.timePicker"
+          onSubmit={this.handleTime}
+          {...config.custom.timePickerConfig}
+          initialValues={initialHourRange}
+          contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+         /> */}
         {width > 0 ? (
           <div style={{ width: `${calendarGridWidth}px` }}>
             <DayPickerSingleDateController
@@ -445,7 +504,7 @@ class ManageAvailabilityCalendar extends Component {
           <div className={css.legendRow}>
             <span className={css.legendBlockedColor} />
             <span className={css.legendText}>
-              <FormattedMessage id="EditListingAvailabilityForm.blockedDay" />
+            <FormattedMessage id={"EditListingAvailabilityForm.blockedDay."+user_name} />
             </span>
           </div>
           <div className={css.legendRow}>
@@ -511,7 +570,6 @@ ManageAvailabilityCalendar.propTypes = {
     onDeleteAvailabilityException: func.isRequired,
     onCreateAvailabilityException: func.isRequired,
   }).isRequired,
-  availabilityPlan: propTypes.availabilityPlan.isRequired,
   onMonthChanged: func,
 };
 

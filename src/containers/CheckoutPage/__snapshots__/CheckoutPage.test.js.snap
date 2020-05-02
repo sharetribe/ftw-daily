@@ -77,12 +77,18 @@ exports[`CheckoutPage matches snapshot 1`] = `
           />
         </div>
       </div>
-      <div />
+      <div>
+        <h3>
+          <FormattedMessage
+            id="CheckoutPage.priceBreakdownTitle"
+            values={Object {}}
+          />
+        </h3>
+      </div>
       <section>
-        <injectIntl(StripePaymentForm)
+        <InjectIntl(StripePaymentForm)
           authorDisplayName="author display name"
           confirmPaymentError={null}
-          defaultPaymentMethod={null}
           formId="CheckoutPagePaymentForm"
           hasHandledCardPayment={null}
           inProgress={false}
@@ -92,7 +98,6 @@ exports[`CheckoutPage matches snapshot 1`] = `
             }
           }
           initiateOrderError={null}
-          loadingData={true}
           onStripeInitialized={[Function]}
           onSubmit={[Function]}
           paymentInfo="CheckoutPage.paymentInfo"
@@ -147,6 +152,12 @@ exports[`CheckoutPage matches snapshot 1`] = `
           55 CheckoutPage.perNight
         </p>
       </div>
+      <h3>
+        <FormattedMessage
+          id="CheckoutPage.priceBreakdownTitle"
+          values={Object {}}
+        />
+      </h3>
     </div>
   </div>
 </Page>

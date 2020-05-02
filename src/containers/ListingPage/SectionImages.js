@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from '../../util/reactIntl';
+import { FormattedMessage } from 'react-intl';
 import { ResponsiveImage, Modal, ImageCarousel } from '../../components';
 import ActionBarMaybe from './ActionBarMaybe';
 
@@ -63,7 +63,6 @@ const SectionImages = props => {
         lightCloseButton
         isOpen={imageCarouselOpen}
         onClose={onImageCarouselClose}
-        usePortal
         onManageDisableScrolling={onManageDisableScrolling}
       >
         <ImageCarousel images={listing.images} />

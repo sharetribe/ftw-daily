@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from '../../util/reactIntl';
+import { FormattedMessage } from 'react-intl';
 import { UserCard, Modal } from '../../components';
 import { EnquiryForm } from '../../forms';
 
@@ -35,7 +35,6 @@ const SectionHostMaybe = props => {
         contentClassName={css.enquiryModalContent}
         isOpen={isEnquiryModalOpen}
         onClose={onCloseEnquiryModal}
-        usePortal
         onManageDisableScrolling={onManageDisableScrolling}
       >
         <EnquiryForm

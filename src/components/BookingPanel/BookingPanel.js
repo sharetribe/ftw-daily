@@ -12,6 +12,9 @@ import config from '../../config';
 import { ModalInMobile, Button } from '../../components';
 import { BookingDatesForm } from '../../forms';
 
+import ReactTooltip from 'react-tooltip';
+import calendar from '../../containers/ListingPage/calendar.svg';
+
 import css from './BookingPanel.css';
 
 // This defines when ModalInMobile shows content as Modal
@@ -71,6 +74,7 @@ const BookingPanel = props => {
   const hasListingState = !!listing.attributes.state;
   const isClosed = hasListingState && listing.attributes.state === LISTING_STATE_CLOSED;
   const showBookingDatesForm = hasListingState && !isClosed;
+  const isNotOwnerListing = listing.attributes.publicData.user_type != 0;
   const showClosedListingHelpText = listing.id && isClosed;
   const { formattedPrice, priceTitle } = priceData(price, intl);
   const isBook = !!parse(location.search).book;
@@ -93,6 +97,43 @@ const BookingPanel = props => {
   const classes = classNames(rootClassName || css.root, className);
   const titleClasses = classNames(titleClassName || css.bookingTitle);
 
+  const formatDateHelper = date => {
+    var monthNames = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
+
+    var day = date.getDate();
+    var monthIndex = date.getMonth();
+    var year = date.getFullYear();
+
+    return monthNames[monthIndex] + ' ' + day + ', ' + year;
+  };
+
+  const formattedDate = dateString => {
+    let dateArray = dateString.split('to');
+    let finalDateString = '';
+    if (dateArray.length > 1) {
+      finalDateString = `${formatDateHelper(new Date(dateArray[0]))} to ${formatDateHelper(
+        new Date(dateArray[1])
+      )}`;
+    } else {
+      finalDateString = `${formatDateHelper(new Date(dateArray[0]))}`;
+    }
+
+    return finalDateString;
+  };
+
   return (
     <div className={classes}>
       <ModalInMobile
@@ -110,11 +151,33 @@ const BookingPanel = props => {
           </div>
         </div>
 
-        <div className={css.bookingHeading}>
+        <div className={css.bookingHeadingOwner}>
           <h2 className={titleClasses}>{title}</h2>
-          {subTitleText ? <div className={css.bookingHelp}>{subTitleText}</div> : null}
+          {isNotOwnerListing ? (
+            subTitleText ? (
+              <div className={css.bookingHelp}>{subTitleText}</div>
+            ) : null
+          ) : (
+            <div>
+            <p className={css.ownerSubtitle}>Get in touch with the Pet Owner</p>
+              {listing.attributes.publicData.requiredDates ? (
+                <div className={css.requiredDates} data-tip="" data-for="test">
+                  <p className={css.bookingReq}>
+                    <img src={calendar} />
+                    {formattedDate(listing.attributes.publicData.requiredDates)}
+                  </p>
+                  <ReactTooltip className={css.customTip} id="test" effect="solid">
+                    <span>
+                      Pet Owner is seeking a Pet Sitter for these dates. Are you available? Send a
+                      Message!
+                    </span>
+                  </ReactTooltip>
+                </div>
+              ) : null}
+            </div>
+          )}
         </div>
-        {showBookingDatesForm ? (
+        {showBookingDatesForm && isNotOwnerListing ? (
           <BookingDatesForm
             className={css.bookingForm}
             formId="BookingPanel"
@@ -128,29 +191,32 @@ const BookingPanel = props => {
           />
         ) : null}
       </ModalInMobile>
-      <div className={css.openBookingForm}>
-        <div className={css.priceContainer}>
-          <div className={css.priceValue} title={priceTitle}>
-            {formattedPrice}
-          </div>
-          <div className={css.perUnit}>
-            <FormattedMessage id={unitTranslationKey} />
-          </div>
-        </div>
 
-        {showBookingDatesForm ? (
-          <Button
-            rootClassName={css.bookButton}
-            onClick={() => openBookModal(isOwnListing, isClosed, history, location)}
-          >
-            <FormattedMessage id="BookingPanel.ctaButtonMessage" />
-          </Button>
-        ) : isClosed ? (
-          <div className={css.closedListingButton}>
-            <FormattedMessage id="BookingPanel.closedListingButtonText" />
+      {isNotOwnerListing ? (
+        <div className={css.openBookingForm}>
+          <div className={css.priceContainer}>
+            <div className={css.priceValue} title={priceTitle}>
+              {formattedPrice}
+            </div>
+            <div className={css.perUnit}>
+              <FormattedMessage id={unitTranslationKey} />
+            </div>
           </div>
-        ) : null}
-      </div>
+
+          {showBookingDatesForm ? (
+            <Button
+              rootClassName={css.bookButton}
+              onClick={() => openBookModal(isOwnListing, isClosed, history, location)}
+            >
+              <FormattedMessage id="BookingPanel.ctaButtonMessage" />
+            </Button>
+          ) : (
+            <div className={css.closedListingButton}>
+              <FormattedMessage id="BookingPanel.closedListingButtonText" />
+            </div>
+          )}
+        </div>
+      ) : null}
     </div>
   );
 };

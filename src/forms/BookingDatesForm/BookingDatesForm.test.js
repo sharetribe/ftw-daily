@@ -74,7 +74,7 @@ describe('EstimatedBreakdownMaybe', () => {
     expect(transaction.attributes.payoutTotal).toEqual(new Money(2198, 'USD'));
     expect(transaction.attributes.lineItems).toEqual([
       {
-        code: 'line-item/night',
+        code: 'n',
         includeFor: ['customer', 'provider'],
         unitPrice,
         quantity: new Decimal(2),

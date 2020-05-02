@@ -41,7 +41,7 @@ exports[`TransactionPanel - Order accepted matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -83,7 +83,7 @@ exports[`TransactionPanel - Order accepted matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -130,7 +130,7 @@ exports[`TransactionPanel - Order accepted matches snapshot 1`] = `
                 "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -280,7 +280,7 @@ exports[`TransactionPanel - Order accepted matches snapshot 1`] = `
               "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
               "lineItems": Array [
                 Object {
-                  "code": "line-item/night",
+                  "code": "n",
                   "includeFor": Array [
                     "customer",
                     "provider",
@@ -509,7 +509,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         totalMessagePages={1}
       />
       <SendMessageForm
-        formId="TransactionPanel.SendMessageForm"
+        form="TransactionPanel.SendMessageForm"
         inProgress={false}
         messagePlaceholder="TransactionPanel.sendMessagePlaceholder"
         onBlur={[Function]}
@@ -565,7 +565,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                 "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -708,7 +708,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
       </div>
     </div>
   </div>
-  <injectIntl(ReviewModal)
+  <InjectIntl(ReviewModal)
     id="ReviewOrderModal"
     isOpen={false}
     onCloseModal={[Function]}
@@ -727,7 +727,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             "formatMessage": [Function],
             "formatNumber": [Function],
             "formatPlural": [Function],
-            "formatRelativeTime": [Function],
+            "formatRelative": [Function],
             "formatTime": [Function],
             "now": [Function],
           }
@@ -799,7 +799,7 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -841,7 +841,7 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -887,7 +887,7 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
                 "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -1037,7 +1037,7 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
               "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
               "lineItems": Array [
                 Object {
-                  "code": "line-item/night",
+                  "code": "n",
                   "includeFor": Array [
                     "customer",
                     "provider",
@@ -1266,7 +1266,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         totalMessagePages={1}
       />
       <SendMessageForm
-        formId="TransactionPanel.SendMessageForm"
+        form="TransactionPanel.SendMessageForm"
         inProgress={false}
         messagePlaceholder="TransactionPanel.sendMessagePlaceholder"
         onBlur={[Function]}
@@ -1321,7 +1321,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                 "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -1464,7 +1464,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
       </div>
     </div>
   </div>
-  <injectIntl(ReviewModal)
+  <InjectIntl(ReviewModal)
     id="ReviewOrderModal"
     isOpen={false}
     onCloseModal={[Function]}
@@ -1483,7 +1483,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             "formatMessage": [Function],
             "formatNumber": [Function],
             "formatPlural": [Function],
-            "formatRelativeTime": [Function],
+            "formatRelative": [Function],
             "formatTime": [Function],
             "now": [Function],
           }
@@ -1555,7 +1555,7 @@ exports[`TransactionPanel - Order canceled matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -1597,7 +1597,7 @@ exports[`TransactionPanel - Order canceled matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -1644,7 +1644,7 @@ exports[`TransactionPanel - Order canceled matches snapshot 1`] = `
                 "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -1794,7 +1794,7 @@ exports[`TransactionPanel - Order canceled matches snapshot 1`] = `
               "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
               "lineItems": Array [
                 Object {
-                  "code": "line-item/night",
+                  "code": "n",
                   "includeFor": Array [
                     "customer",
                     "provider",
@@ -2023,7 +2023,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         totalMessagePages={1}
       />
       <SendMessageForm
-        formId="TransactionPanel.SendMessageForm"
+        form="TransactionPanel.SendMessageForm"
         inProgress={false}
         messagePlaceholder="TransactionPanel.sendMessagePlaceholder"
         onBlur={[Function]}
@@ -2079,7 +2079,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                 "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -2222,7 +2222,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
       </div>
     </div>
   </div>
-  <injectIntl(ReviewModal)
+  <InjectIntl(ReviewModal)
     id="ReviewOrderModal"
     isOpen={false}
     onCloseModal={[Function]}
@@ -2241,7 +2241,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             "formatMessage": [Function],
             "formatNumber": [Function],
             "formatPlural": [Function],
-            "formatRelativeTime": [Function],
+            "formatRelative": [Function],
             "formatTime": [Function],
             "now": [Function],
           }
@@ -2313,7 +2313,7 @@ exports[`TransactionPanel - Order declined matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -2355,7 +2355,7 @@ exports[`TransactionPanel - Order declined matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -2401,7 +2401,7 @@ exports[`TransactionPanel - Order declined matches snapshot 1`] = `
                 "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -2551,7 +2551,7 @@ exports[`TransactionPanel - Order declined matches snapshot 1`] = `
               "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
               "lineItems": Array [
                 Object {
-                  "code": "line-item/night",
+                  "code": "n",
                   "includeFor": Array [
                     "customer",
                     "provider",
@@ -2780,7 +2780,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         totalMessagePages={1}
       />
       <SendMessageForm
-        formId="TransactionPanel.SendMessageForm"
+        form="TransactionPanel.SendMessageForm"
         inProgress={false}
         messagePlaceholder="TransactionPanel.sendMessagePlaceholder"
         onBlur={[Function]}
@@ -2835,7 +2835,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                 "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -2978,7 +2978,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
       </div>
     </div>
   </div>
-  <injectIntl(ReviewModal)
+  <InjectIntl(ReviewModal)
     id="ReviewOrderModal"
     isOpen={false}
     onCloseModal={[Function]}
@@ -2997,7 +2997,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             "formatMessage": [Function],
             "formatNumber": [Function],
             "formatPlural": [Function],
-            "formatRelativeTime": [Function],
+            "formatRelative": [Function],
             "formatTime": [Function],
             "now": [Function],
           }
@@ -3069,7 +3069,7 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -3111,7 +3111,7 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -3158,7 +3158,7 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
                 "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -3313,7 +3313,7 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
               "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
               "lineItems": Array [
                 Object {
-                  "code": "line-item/night",
+                  "code": "n",
                   "includeFor": Array [
                     "customer",
                     "provider",
@@ -3547,7 +3547,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         totalMessagePages={1}
       />
       <SendMessageForm
-        formId="TransactionPanel.SendMessageForm"
+        form="TransactionPanel.SendMessageForm"
         inProgress={false}
         messagePlaceholder="TransactionPanel.sendMessagePlaceholder"
         onBlur={[Function]}
@@ -3603,7 +3603,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                 "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -3751,7 +3751,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
       </div>
     </div>
   </div>
-  <injectIntl(ReviewModal)
+  <InjectIntl(ReviewModal)
     id="ReviewOrderModal"
     isOpen={false}
     onCloseModal={[Function]}
@@ -3770,7 +3770,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             "formatMessage": [Function],
             "formatNumber": [Function],
             "formatPlural": [Function],
-            "formatRelativeTime": [Function],
+            "formatRelative": [Function],
             "formatTime": [Function],
             "now": [Function],
           }
@@ -3842,7 +3842,7 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -3884,7 +3884,7 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -3930,7 +3930,7 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
                 "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -4080,7 +4080,7 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
               "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
               "lineItems": Array [
                 Object {
-                  "code": "line-item/night",
+                  "code": "n",
                   "includeFor": Array [
                     "customer",
                     "provider",
@@ -4309,7 +4309,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         totalMessagePages={1}
       />
       <SendMessageForm
-        formId="TransactionPanel.SendMessageForm"
+        form="TransactionPanel.SendMessageForm"
         inProgress={false}
         messagePlaceholder="TransactionPanel.sendMessagePlaceholder"
         onBlur={[Function]}
@@ -4363,7 +4363,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                 "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -4506,7 +4506,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
       </div>
     </div>
   </div>
-  <injectIntl(ReviewModal)
+  <InjectIntl(ReviewModal)
     id="ReviewOrderModal"
     isOpen={false}
     onCloseModal={[Function]}
@@ -4525,7 +4525,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             "formatMessage": [Function],
             "formatNumber": [Function],
             "formatPlural": [Function],
-            "formatRelativeTime": [Function],
+            "formatRelative": [Function],
             "formatTime": [Function],
             "now": [Function],
           }
@@ -4597,7 +4597,7 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -4639,7 +4639,7 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -4685,7 +4685,7 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
                 "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -4835,7 +4835,7 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
               "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
               "lineItems": Array [
                 Object {
-                  "code": "line-item/night",
+                  "code": "n",
                   "includeFor": Array [
                     "customer",
                     "provider",
@@ -5064,7 +5064,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         totalMessagePages={1}
       />
       <SendMessageForm
-        formId="TransactionPanel.SendMessageForm"
+        form="TransactionPanel.SendMessageForm"
         inProgress={false}
         messagePlaceholder="TransactionPanel.sendMessagePlaceholder"
         onBlur={[Function]}
@@ -5119,7 +5119,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                 "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -5262,7 +5262,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
       </div>
     </div>
   </div>
-  <injectIntl(ReviewModal)
+  <InjectIntl(ReviewModal)
     id="ReviewOrderModal"
     isOpen={false}
     onCloseModal={[Function]}
@@ -5281,7 +5281,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             "formatMessage": [Function],
             "formatNumber": [Function],
             "formatPlural": [Function],
-            "formatRelativeTime": [Function],
+            "formatRelative": [Function],
             "formatTime": [Function],
             "now": [Function],
           }
@@ -5353,7 +5353,7 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -5395,7 +5395,7 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -5442,7 +5442,7 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
                 "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -5592,7 +5592,7 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
               "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
               "lineItems": Array [
                 Object {
-                  "code": "line-item/night",
+                  "code": "n",
                   "includeFor": Array [
                     "customer",
                     "provider",
@@ -5821,7 +5821,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         totalMessagePages={1}
       />
       <SendMessageForm
-        formId="TransactionPanel.SendMessageForm"
+        form="TransactionPanel.SendMessageForm"
         inProgress={false}
         messagePlaceholder="TransactionPanel.sendMessagePlaceholder"
         onBlur={[Function]}
@@ -5877,7 +5877,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                 "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -6020,7 +6020,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
       </div>
     </div>
   </div>
-  <injectIntl(ReviewModal)
+  <InjectIntl(ReviewModal)
     id="ReviewOrderModal"
     isOpen={false}
     onCloseModal={[Function]}
@@ -6039,7 +6039,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             "formatMessage": [Function],
             "formatNumber": [Function],
             "formatPlural": [Function],
-            "formatRelativeTime": [Function],
+            "formatRelative": [Function],
             "formatTime": [Function],
             "now": [Function],
           }
@@ -6111,7 +6111,7 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -6153,7 +6153,7 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -6199,7 +6199,7 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
                 "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -6349,7 +6349,7 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
               "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
               "lineItems": Array [
                 Object {
-                  "code": "line-item/night",
+                  "code": "n",
                   "includeFor": Array [
                     "customer",
                     "provider",
@@ -6578,7 +6578,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         totalMessagePages={1}
       />
       <SendMessageForm
-        formId="TransactionPanel.SendMessageForm"
+        form="TransactionPanel.SendMessageForm"
         inProgress={false}
         messagePlaceholder="TransactionPanel.sendMessagePlaceholder"
         onBlur={[Function]}
@@ -6633,7 +6633,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                 "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -6776,7 +6776,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
       </div>
     </div>
   </div>
-  <injectIntl(ReviewModal)
+  <InjectIntl(ReviewModal)
     id="ReviewOrderModal"
     isOpen={false}
     onCloseModal={[Function]}
@@ -6795,7 +6795,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             "formatMessage": [Function],
             "formatNumber": [Function],
             "formatPlural": [Function],
-            "formatRelativeTime": [Function],
+            "formatRelative": [Function],
             "formatTime": [Function],
             "now": [Function],
           }
@@ -6867,7 +6867,7 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -6909,7 +6909,7 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -6956,7 +6956,7 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
                 "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -7106,7 +7106,7 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
               "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
               "lineItems": Array [
                 Object {
-                  "code": "line-item/night",
+                  "code": "n",
                   "includeFor": Array [
                     "customer",
                     "provider",
@@ -7335,7 +7335,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         totalMessagePages={1}
       />
       <SendMessageForm
-        formId="TransactionPanel.SendMessageForm"
+        form="TransactionPanel.SendMessageForm"
         inProgress={false}
         messagePlaceholder="TransactionPanel.sendMessagePlaceholder"
         onBlur={[Function]}
@@ -7391,7 +7391,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                 "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -7534,7 +7534,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
       </div>
     </div>
   </div>
-  <injectIntl(ReviewModal)
+  <InjectIntl(ReviewModal)
     id="ReviewOrderModal"
     isOpen={false}
     onCloseModal={[Function]}
@@ -7553,7 +7553,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             "formatMessage": [Function],
             "formatNumber": [Function],
             "formatPlural": [Function],
-            "formatRelativeTime": [Function],
+            "formatRelative": [Function],
             "formatTime": [Function],
             "now": [Function],
           }
@@ -7625,7 +7625,7 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -7667,7 +7667,7 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -7713,7 +7713,7 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
                 "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -7863,7 +7863,7 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
               "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
               "lineItems": Array [
                 Object {
-                  "code": "line-item/night",
+                  "code": "n",
                   "includeFor": Array [
                     "customer",
                     "provider",
@@ -8092,7 +8092,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         totalMessagePages={1}
       />
       <SendMessageForm
-        formId="TransactionPanel.SendMessageForm"
+        form="TransactionPanel.SendMessageForm"
         inProgress={false}
         messagePlaceholder="TransactionPanel.sendMessagePlaceholder"
         onBlur={[Function]}
@@ -8147,7 +8147,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                 "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -8290,7 +8290,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
       </div>
     </div>
   </div>
-  <injectIntl(ReviewModal)
+  <InjectIntl(ReviewModal)
     id="ReviewOrderModal"
     isOpen={false}
     onCloseModal={[Function]}
@@ -8309,7 +8309,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             "formatMessage": [Function],
             "formatNumber": [Function],
             "formatPlural": [Function],
-            "formatRelativeTime": [Function],
+            "formatRelative": [Function],
             "formatTime": [Function],
             "now": [Function],
           }
@@ -8381,7 +8381,7 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -8423,7 +8423,7 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -8470,7 +8470,7 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
                 "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -8620,7 +8620,7 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
               "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
               "lineItems": Array [
                 Object {
-                  "code": "line-item/night",
+                  "code": "n",
                   "includeFor": Array [
                     "customer",
                     "provider",
@@ -8849,7 +8849,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         totalMessagePages={1}
       />
       <SendMessageForm
-        formId="TransactionPanel.SendMessageForm"
+        form="TransactionPanel.SendMessageForm"
         inProgress={false}
         messagePlaceholder="TransactionPanel.sendMessagePlaceholder"
         onBlur={[Function]}
@@ -8905,7 +8905,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                 "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -9048,7 +9048,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
       </div>
     </div>
   </div>
-  <injectIntl(ReviewModal)
+  <InjectIntl(ReviewModal)
     id="ReviewOrderModal"
     isOpen={false}
     onCloseModal={[Function]}
@@ -9067,7 +9067,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             "formatMessage": [Function],
             "formatNumber": [Function],
             "formatPlural": [Function],
-            "formatRelativeTime": [Function],
+            "formatRelative": [Function],
             "formatTime": [Function],
             "now": [Function],
           }
@@ -9139,7 +9139,7 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -9181,7 +9181,7 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -9227,7 +9227,7 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
                 "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -9377,7 +9377,7 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
               "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
               "lineItems": Array [
                 Object {
-                  "code": "line-item/night",
+                  "code": "n",
                   "includeFor": Array [
                     "customer",
                     "provider",
@@ -9606,7 +9606,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         totalMessagePages={1}
       />
       <SendMessageForm
-        formId="TransactionPanel.SendMessageForm"
+        form="TransactionPanel.SendMessageForm"
         inProgress={false}
         messagePlaceholder="TransactionPanel.sendMessagePlaceholder"
         onBlur={[Function]}
@@ -9660,7 +9660,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                 "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -9803,7 +9803,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
       </div>
     </div>
   </div>
-  <injectIntl(ReviewModal)
+  <InjectIntl(ReviewModal)
     id="ReviewOrderModal"
     isOpen={false}
     onCloseModal={[Function]}
@@ -9822,7 +9822,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             "formatMessage": [Function],
             "formatNumber": [Function],
             "formatPlural": [Function],
-            "formatRelativeTime": [Function],
+            "formatRelative": [Function],
             "formatTime": [Function],
             "now": [Function],
           }
@@ -9894,7 +9894,7 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -9936,7 +9936,7 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
-                "formatRelativeTime": [Function],
+                "formatRelative": [Function],
                 "formatTime": [Function],
                 "now": [Function],
               }
@@ -9982,7 +9982,7 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
                 "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -10132,7 +10132,7 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
               "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
               "lineItems": Array [
                 Object {
-                  "code": "line-item/night",
+                  "code": "n",
                   "includeFor": Array [
                     "customer",
                     "provider",
@@ -10361,7 +10361,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         totalMessagePages={1}
       />
       <SendMessageForm
-        formId="TransactionPanel.SendMessageForm"
+        form="TransactionPanel.SendMessageForm"
         inProgress={false}
         messagePlaceholder="TransactionPanel.sendMessagePlaceholder"
         onBlur={[Function]}
@@ -10416,7 +10416,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                 "lastTransitionedAt": 2017-06-10T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -10559,7 +10559,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
       </div>
     </div>
   </div>
-  <injectIntl(ReviewModal)
+  <InjectIntl(ReviewModal)
     id="ReviewOrderModal"
     isOpen={false}
     onCloseModal={[Function]}
@@ -10578,7 +10578,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             "formatMessage": [Function],
             "formatNumber": [Function],
             "formatPlural": [Function],
-            "formatRelativeTime": [Function],
+            "formatRelative": [Function],
             "formatTime": [Function],
             "now": [Function],
           }

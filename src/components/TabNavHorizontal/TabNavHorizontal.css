@@ -62,8 +62,8 @@
 }
 
 .selectedTabContent {
-  border-bottom-color: var(--matterColorDark);
-  color: var(--matterColorDark);
+  border-bottom-color: #c9bd9c;
+  color: #c9bd9c;
 }
 
 .disabled {

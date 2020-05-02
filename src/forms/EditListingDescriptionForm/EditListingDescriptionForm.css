@@ -52,6 +52,12 @@
 .category {
   @apply --EditListingDescriptionForm_formMargins;
 }
+.category:nth-child(1) {
+  margin-top: 32px;
+}
+.hiden {
+  display: none;
+}
 
 .submitButton {
   margin-top: auto;
@@ -61,6 +67,6 @@
   @media (--viewportLarge) {
     display: inline-block;
     width: 241px;
-    margin-top: 100px;
+    margin-top: 64px;
   }
 }

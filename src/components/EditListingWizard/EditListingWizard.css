@@ -113,6 +113,40 @@
   }
 }
 
-.modalMessage {
-  @apply --marketplaceModalParagraphStyles;
+.backButtonContainer {
+  text-decoration: none !important;
+  position: absolute;
+}
+
+.backButtonContainer button {
+  margin: 20px;
+  min-height: 40px;
+}
+
+.backButtonContainer button {
+  background: #c9bd9c !important;
+  text-shadow: 1px 1px 1px darkslategrey;
+  color: #fff !important;
+}
+
+.backButtonContainer button:hover {
+  background: #b7a77b !important;
+}
+
+@media (max-width: 1023px) {
+  .backButtonContainer {
+  position: relative;
+}
+
+.backButtonContainer button {
+  margin: 0px; 
+}
+
+.tabsContainer:nth-child(1) {
+  padding: 15px;
+}
+
+.buttonContainer {
+  padding: 15px;
+}
 }

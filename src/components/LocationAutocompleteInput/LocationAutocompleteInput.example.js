@@ -4,8 +4,6 @@ import { propTypes } from '../../util/types';
 import { Button } from '../../components';
 import LocationAutocompleteInput from './LocationAutocompleteInput';
 
-const identity = v => v;
-
 const Form = props => {
   return (
     <FinalForm
@@ -14,7 +12,7 @@ const Form = props => {
         return (
           <form onSubmit={handleSubmit}>
             <label htmlFor="location">Select location:</label>
-            <Field name="location" format={identity} component={LocationAutocompleteInput} />
+            <Field name="location" format={null} component={LocationAutocompleteInput} />
             <Button type="submit" style={{ marginTop: '24px' }} disabled={pristine}>
               Submit
             </Button>

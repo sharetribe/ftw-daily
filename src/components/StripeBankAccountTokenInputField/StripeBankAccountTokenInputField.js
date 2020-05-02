@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
+import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
 import classNames from 'classnames';
 import debounce from 'lodash/debounce';
@@ -28,7 +28,6 @@ import css from './StripeBankAccountTokenInputField.css';
 // value and moves on to another input within this component.
 const BLUR_TIMEOUT = 100;
 const DEBOUNCE_WAIT_TIME = 1000;
-const MIN_INPUT_COUNT_FOR_TWO_COLUMNS = 6;
 
 class TokenInputFieldComponent extends Component {
   constructor(props) {
@@ -79,14 +78,14 @@ class TokenInputFieldComponent extends Component {
     this._isMounted = true;
   }
 
-  componentDidUpdate(prevProps) {
-    const countryChanged = this.props.country !== prevProps.country;
-    const currencyChanged = this.props.currency !== prevProps.currency;
+  componentWillReceiveProps(nextProps) {
+    const countryChanged = nextProps.country !== this.props.country;
+    const currencyChanged = nextProps.currency !== this.props.currency;
     if (countryChanged || currencyChanged) {
       // Clear the possible input values from the state
       // if the given country or currency changes.
       this.setState(this.initialState);
-      this.props.input.onChange('');
+      nextProps.input.onChange('');
     }
   }
 
@@ -261,10 +260,6 @@ class TokenInputFieldComponent extends Component {
 
     const inputConfiguration = requiredInputs(country);
 
-    // E.g. Japan has 6 fields in the bank account details so we want to
-    // show the inputs in two columns on bigger screens
-    const showInColumns = inputConfiguration.length >= MIN_INPUT_COUNT_FOR_TWO_COLUMNS;
-
     return (
       <div className={classNames(rootClassName || css.root, className)}>
         {inputConfiguration.map(inputType => {
@@ -282,7 +277,6 @@ class TokenInputFieldComponent extends Component {
               isTouched={this.state[inputType].touched || formMeta.touched}
               showStripeError={showStripeError}
               inputError={this.state[inputType].error}
-              showInColumns={showInColumns}
             />
           );
         })}

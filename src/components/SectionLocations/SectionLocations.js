@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from '../../util/reactIntl';
+import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { lazyLoadWithDimensions } from '../../util/contextHelpers';
 
@@ -23,19 +23,19 @@ const LazyImage = lazyLoadWithDimensions(LocationImage);
 const locationLink = (name, image, searchQuery) => {
   const nameText = <span className={css.locationName}>{name}</span>;
   return (
-    <NamedLink name="SearchPage" to={{ search: searchQuery }} className={css.location}>
+  <NamedLink name="SearchPage" to={{ search: searchQuery }} className={css.location}>
       <div className={css.imageWrapper}>
-        <div className={css.aspectWrapper}>
+        <div className={css.aspectWrapper} id="wrapperAspect">
           <LazyImage src={image} alt={name} className={css.locationImage} />
         </div>
-      </div>
-      <div className={css.linkText}>
+      <div className={css.linkText} id="textLink">
         <FormattedMessage
-          id="SectionLocations.listingsInLocation"
+          id="SectionLocations.listingsInLocation" 
           values={{ location: nameText }}
         />
       </div>
-    </NamedLink>
+    </div>
+  </NamedLink>
   );
 };
 
@@ -49,7 +49,7 @@ const SectionLocations = props => {
       <div className={css.title}>
         <FormattedMessage id="SectionLocations.title" />
       </div>
-      <div className={css.locations}>
+       <div className={css.locations}>
         {locationLink(
           'Lima Metropolitana',
           helsinkiImage,

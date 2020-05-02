@@ -114,6 +114,22 @@ export const daysBetween = (startDate, endDate) => {
   return days;
 };
 
+export const hoursBetween = (startDate, endDate, bookingHour) => {
+  const days = moment(endDate).diff(startDate, 'days');
+  if (days < 0) {
+    throw new Error('End date cannot be before start date');
+  }
+  return days*bookingHour;
+};
+
+export const weeksBetween = (startDate, endDate) => {
+  const days = moment(endDate).diff(startDate, 'days');
+  if (days < 0) {
+    throw new Error('End date cannot be before start date');
+  }
+  return Math.ceil(days/7);
+};
+
 /**
  * Calculate the number of minutes between the given dates
  *
@@ -166,10 +182,7 @@ export const formatDate = (intl, todayString, d) => {
   if (!paramsValid) {
     throw new Error(`Invalid params for formatDate: (${intl}, ${todayString}, ${d})`);
   }
-
-  // By default we can use moment() directly but in tests we need to use a specific dates.
-  // fakeIntl used in tests contains now() function wich returns predefined date
-  const now = intl.now ? moment(intl.now()) : moment();
+  const now = moment(intl.now());
   const formattedTime = intl.formatTime(d);
   let formattedDate;
 
@@ -256,21 +269,4 @@ export const getExclusiveEndDate = dateString => {
     .add(1, 'days')
     .startOf('day')
     .toDate();
-};
-
-export const formatDateToText = (intl, date) => {
-  return {
-    date: intl.formatDate(date, {
-      month: 'short',
-      day: 'numeric',
-    }),
-    time: intl.formatDate(date, {
-      hour: 'numeric',
-      minute: 'numeric',
-    }),
-    dateAndTime: intl.formatTime(date, {
-      month: 'short',
-      day: 'numeric',
-    }),
-  };
 };

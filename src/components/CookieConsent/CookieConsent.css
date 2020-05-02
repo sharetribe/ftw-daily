@@ -28,6 +28,7 @@
 .message {
   @apply --marketplaceH5FontStyles;
   margin-left: 24px;
+  margin-bottom: 10px !important;
 }
 
 .cookieLink {

@@ -29,7 +29,7 @@
     transition: var(--transitionStyleButton);
 
     &:hover {
-      border-bottom: 4px solid var(--marketplaceColor);
+      border-bottom: 4px solid #000;
       border-radius: 0;
       text-decoration: none;
     }
@@ -50,10 +50,11 @@
   padding: 0 12px 0 0;
 
   /* fill */
-  background-color: var(--matterColorLight);
+  /* background-color: var(--matterColorLight); */
+  background-color: #fff;
 
   /* shadows */
-  box-shadow: var(--boxShadowLight);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
 
   @media (--viewportLarge) {
     padding: 0 24px 0 0;
@@ -66,6 +67,7 @@
   flex-shrink: 0;
   padding: 21px 24px 21px 24px;
   height: 100%;
+  background: #fff;
 
   @media (--viewportLarge) {
     padding: 21px 36px 21px 36px;
@@ -74,7 +76,9 @@
 
 .logo {
   /* If height is increased, change link paddings accordingly */
-  height: 27px;
+    height: 72px !important;
+    position: relative;
+    bottom: 17px;
 
   /* Good aspect ratio should be less than 160/27 (width/height) */
   /* NOTE: extremely wide logos, need special handling. */
@@ -84,6 +88,20 @@
   object-position: left center;
 }
 
+.topbaricon {
+  height: 23px;
+  margin-right: 7px;
+  position: relative;
+  bottom: 3px;
+}
+
+.topbariconTwo {
+  height: 23px;
+  margin-right: 7px;
+  position: relative;
+  bottom: 2px;
+}
+
 /* Search */
 .searchLink {
   flex-grow: 1;
@@ -91,7 +109,8 @@
   margin-right: 24px;
   border-left-style: solid;
   border-left-width: 1px;
-  border-left-color: var(--matterColorNegative);
+  /* border-left-color: var(--matterColorNegative); */
+  border-left-color: rgba(0, 0, 0, 0.2);
 
   @media (--viewportLarge) {
     padding-left: 0;
@@ -121,12 +140,12 @@
   flex-shrink: 0;
   height: 100%;
   padding: 0 12px 0 12px;
-  color: var(--marketplaceColor);
+  color: #000;
   margin-top: 0;
   margin-bottom: 0;
 
   &:hover {
-    color: var(--marketplaceColorDark);
+    color: #000;
   }
 
   @media (--viewportMedium) {
@@ -141,6 +160,8 @@
 
 /* Inbox */
 .inboxLink {
+  overflow: hidden;
+  white-space: nowrap;
   @apply --TopbarDesktop_linkHover;
   @apply --marketplaceH4FontStyles;
   height: 100%;
@@ -162,6 +183,7 @@
 .inbox {
   @apply --TopbarDesktop_label;
   position: relative;
+  color: #000000;
 }
 
 .notificationDot {
@@ -236,7 +258,7 @@
   height: 100%;
   padding: 0 12px 0 12px;
 
-  color: var(--matterColor);
+  color: #000 !important;
 
   &:hover {
     color: var(--matterColorDark);
@@ -256,10 +278,11 @@
   }
 }
 
-.signup,
+.signup, 
 .login {
   @apply --marketplaceH4FontStyles;
   @apply --TopbarDesktop_label;
+  color: #000 !important;
 }
 
 /* left animated "border" like hover element */

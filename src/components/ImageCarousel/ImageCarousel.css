@@ -41,6 +41,7 @@
 
 .prev,
 .next {
+  outline: 0 !important;
   /* Position and dimensions */
   position: absolute;
   top: 0;

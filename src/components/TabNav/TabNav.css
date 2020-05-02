@@ -10,7 +10,7 @@
     since browsers support CSS Properties already.
  */
 
-  --TabNav_linkWidth: 240px;
+  --TabNav_linkWidth: 340px;
   --TabNav_linkBorderWidth: 4px;
 }
 
@@ -34,7 +34,6 @@
 
 .link {
   display: inline-block;
-  white-space: nowrap;
 
   /* Font */
   @apply --marketplaceTabNavFontStyles;

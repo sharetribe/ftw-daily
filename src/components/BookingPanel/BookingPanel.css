@@ -76,6 +76,15 @@
   }
 }
 
+.bookingHeadingOwner {
+  display: none;
+
+  @media (--viewportLarge) {
+    display: block;
+    margin-top: 10px;
+  }
+}
+
 .bookingTitle {
   /* Font */
   color: var(--matterColor);
@@ -202,4 +211,37 @@
   width: 100%;
   padding: 15px 24px 15px 24px;
   text-align: center;
+}
+
+.requiredDates img {
+  position: relative;
+  bottom: 2px;
+  margin-right: 7px;
+}
+
+.customTip {
+ color: #fff !important;
+ background-color: #41a6df !important;
+ opacity: 0.99 !important;
+ margin-top: -5px !important;
+ padding: 10px 21px 13px !important;
+ text-align: center;
+ width: 300px;
+}
+
+.customTip:after {
+ border-top-color: #41a6df !important;
+ border-top-width: 7px !important;
+}
+
+.ownerSubtitle {
+  font-weight: 400;
+  font-size: 14px;
+  margin-top: 9px;
+  margin-bottom: 10px;
+}
+
+.bookingReq {
+  margin-top: 0;
+  margin-bottom: 0;
 }

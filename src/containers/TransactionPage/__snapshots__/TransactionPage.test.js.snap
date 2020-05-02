@@ -20,7 +20,7 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
       rootClassName={null}
     >
       <div>
-        <injectIntl(TransactionPanelComponent)
+        <InjectIntl(TransactionPanelComponent)
           acceptInProgress={false}
           acceptSaleError={null}
           className=""
@@ -58,7 +58,6 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
           onSendMessage={[Function]}
           onShowMoreMessages={[Function]}
           onSubmitBookingRequest={[Function]}
-          savePaymentMethodFailed={false}
           sendMessageError={null}
           sendMessageInProgress={false}
           timeSlots={null}
@@ -71,7 +70,7 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
                 "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -218,7 +217,7 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
       className={null}
       rootClassName={null}
     >
-      <injectIntl(Footer) />
+      <InjectIntl(Footer) />
     </LayoutWrapperFooter>
   </LayoutSingleColumn>
 </Page>
@@ -244,7 +243,7 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
       rootClassName={null}
     >
       <div>
-        <injectIntl(TransactionPanelComponent)
+        <InjectIntl(TransactionPanelComponent)
           acceptInProgress={false}
           acceptSaleError={null}
           className=""
@@ -281,7 +280,6 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
           onSendMessage={[Function]}
           onShowMoreMessages={[Function]}
           onSubmitBookingRequest={[Function]}
-          savePaymentMethodFailed={false}
           sendMessageError={null}
           sendMessageInProgress={false}
           timeSlots={null}
@@ -294,7 +292,7 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
                 "lastTransitionedAt": 2017-06-01T00:00:00.000Z,
                 "lineItems": Array [
                   Object {
-                    "code": "line-item/night",
+                    "code": "n",
                     "includeFor": Array [
                       "customer",
                       "provider",
@@ -441,7 +439,7 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
       className={null}
       rootClassName={null}
     >
-      <injectIntl(Footer) />
+      <InjectIntl(Footer) />
     </LayoutWrapperFooter>
   </LayoutSingleColumn>
 </Page>

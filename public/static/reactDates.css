@@ -112,7 +112,7 @@
   display: block
 }
 .SingleDatePicker_picker {
-  z-index: 1;
+  z-index: 2;
   background-color: #fff;
   position: absolute
 }
@@ -782,7 +782,7 @@
   display: block
 }
 .DateRangePicker_picker {
-  z-index: 1;
+  z-index: 2;
   background-color: #fff;
   position: absolute
 }

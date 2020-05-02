@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { bool, func, object, string } from 'prop-types';
 import { compose } from 'redux';
 import { Form as FinalForm } from 'react-final-form';
-import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
+import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import { Form, Button } from '../../components';
+
+import Calendar from '../../components/Calendar/Calendar.js';
 
 import ManageAvailabilityCalendar from './ManageAvailabilityCalendar';
 import css from './EditListingAvailabilityForm.css';
@@ -15,12 +17,11 @@ export class EditListingAvailabilityFormComponent extends Component {
     return (
       <FinalForm
         {...this.props}
-        render={formRenderProps => {
+        render={fieldRenderProps => {
           const {
             className,
             rootClassName,
             disabled,
-            ready,
             handleSubmit,
             //intl,
             invalid,
@@ -32,7 +33,8 @@ export class EditListingAvailabilityFormComponent extends Component {
             availability,
             availabilityPlan,
             listingId,
-          } = formRenderProps;
+            user_name,
+          } = fieldRenderProps;
 
           const errorMessage = updateError ? (
             <p className={css.error}>
@@ -41,7 +43,7 @@ export class EditListingAvailabilityFormComponent extends Component {
           ) : null;
 
           const classes = classNames(rootClassName || css.root, className);
-          const submitReady = (updated && pristine) || ready;
+          const submitReady = updated && pristine;
           const submitInProgress = updateInProgress;
           const submitDisabled = invalid || disabled || submitInProgress;
 
@@ -49,22 +51,37 @@ export class EditListingAvailabilityFormComponent extends Component {
             <Form className={classes} onSubmit={handleSubmit}>
               {errorMessage}
               <div className={css.calendarWrapper}>
-                <ManageAvailabilityCalendar
-                  availability={availability}
-                  availabilityPlan={availabilityPlan}
-                  listingId={listingId}
-                />
+                {user_name == 'owner' ? (
+                  <Calendar
+                    onUpdate={value => {
+                      this.props.setRequiredDates(value);
+                    }}
+                    publicData={this.props.publicData}
+                    submitInProgress={submitInProgress}
+                    submitDisabled={submitDisabled}
+                    submitReady={submitReady}
+                    saveActionMsg={saveActionMsg}
+                  />
+                ) : (
+                  <div>
+                    <ManageAvailabilityCalendar
+                      availability={availability}
+                      availabilityPlan={availabilityPlan}
+                      listingId={listingId}
+                      user_name={user_name}
+                    />
+                    <Button
+                      className={css.submitButton}
+                      type="submit"
+                      inProgress={submitInProgress}
+                      disabled={submitDisabled}
+                      ready={submitReady}
+                    >
+                      {saveActionMsg}
+                    </Button>
+                  </div>
+                )}
               </div>
-
-              <Button
-                className={css.submitButton}
-                type="submit"
-                inProgress={submitInProgress}
-                disabled={submitDisabled}
-                ready={submitReady}
-              >
-                {saveActionMsg}
-              </Button>
             </Form>
           );
         }}
@@ -81,13 +98,10 @@ EditListingAvailabilityFormComponent.propTypes = {
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
   saveActionMsg: string.isRequired,
-  disabled: bool.isRequired,
-  ready: bool.isRequired,
   updated: bool.isRequired,
   updateError: propTypes.error,
   updateInProgress: bool.isRequired,
   availability: object.isRequired,
-  availabilityPlan: propTypes.availabilityPlan.isRequired,
 };
 
 export default compose(injectIntl)(EditListingAvailabilityFormComponent);

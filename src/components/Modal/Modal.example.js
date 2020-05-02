@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import { Button } from '../../components';
 import Modal from './Modal';
 
@@ -8,49 +8,44 @@ const onManageDisableScrolling = (componentId, scrollingDisabled = true) => {
   console.log('Toggling Modal - scrollingDisabled currently:', componentId, scrollingDisabled);
 };
 
-const ModalWrapper = props => {
-  const [isOpen, setOpen] = useState(false);
+class ModalWrapper extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { isOpen: false };
+    this.handleOpen = this.handleOpen.bind(this);
+  }
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
+  handleOpen() {
+    this.setState({ isOpen: true });
+  }
 
-  return (
-    <div>
-      <div style={{ margin: '1rem' }}>Wrapper text before Modal</div>
-
-      <Modal
-        {...props}
-        isOpen={isOpen}
-        onClose={() => {
-          setOpen(false);
-          console.log('Closing modal');
-        }}
-        onManageDisableScrolling={onManageDisableScrolling}
-      >
-        <div style={{ margin: '1rem' }}>Some content inside Modal component</div>
-      </Modal>
-
-      <div style={{ margin: '1rem' }}>
-        <Button onClick={handleOpen}>Open</Button>
+  render() {
+    return (
+      <div>
+        <div style={{ margin: '1rem' }}>Wrapper text before ModalInMobile</div>
+        <Modal
+          {...this.props}
+          isOpen={this.state.isOpen}
+          onClose={() => {
+            this.setState({ isOpen: false });
+            console.log('Closing modal');
+          }}
+          onManageDisableScrolling={onManageDisableScrolling}
+        >
+          <div style={{ margin: '1rem' }}>Some content inside Modal component</div>
+        </Modal>
+        <div style={{ margin: '1rem' }}>
+          <Button onClick={this.handleOpen}>Open</Button>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
-export const OldModal = {
+export const Empty = {
   component: ModalWrapper,
   useDefaultWrapperStyles: false,
   props: {
-    id: 'OldModal',
-  },
-};
-
-export const ModalWithPortal = {
-  component: ModalWrapper,
-  useDefaultWrapperStyles: false,
-  props: {
-    id: 'ModalWithPortal',
-    usePortal: true,
+    id: 'ExampleModal',
   },
 };

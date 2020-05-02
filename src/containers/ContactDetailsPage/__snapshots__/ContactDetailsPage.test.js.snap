@@ -23,8 +23,43 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
         selectedPageName="ContactDetailsPage"
       />
     </LayoutWrapperTopbar>
-    <withViewport(LayoutWrapperAccountSettingsSideNavComponent)
-      currentTab="ContactDetailsPage"
+    <LayoutWrapperSideNav
+      className={null}
+      rootClassName={null}
+      tabs={
+        Array [
+          Object {
+            "linkProps": Object {
+              "name": "ContactDetailsPage",
+            },
+            "selected": true,
+            "text": <FormattedMessage
+              id="ContactDetailsPage.contactDetailsTabTitle"
+              values={Object {}}
+            />,
+          },
+          Object {
+            "linkProps": Object {
+              "name": "PasswordChangePage",
+            },
+            "selected": false,
+            "text": <FormattedMessage
+              id="ContactDetailsPage.passwordTabTitle"
+              values={Object {}}
+            />,
+          },
+          Object {
+            "linkProps": Object {
+              "name": "PayoutPreferencesPage",
+            },
+            "selected": false,
+            "text": <FormattedMessage
+              id="ContactDetailsPage.paymentsTabTitle"
+              values={Object {}}
+            />,
+          },
+        ]
+      }
     />
     <LayoutWrapperMain
       className={null}
@@ -43,7 +78,7 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
       className={null}
       rootClassName={null}
     >
-      <injectIntl(Footer) />
+      <InjectIntl(Footer) />
     </LayoutWrapperFooter>
   </LayoutSideNavigation>
 </Page>

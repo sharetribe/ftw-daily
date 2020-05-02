@@ -5,15 +5,37 @@
 
   /* Clear padding that is set for link elements looking like buttons */
   padding: 0;
+  background-color: #c9bd9c;
+
+  &:hover{
+    background-color: #b7a77b !important;
+  }
 }
+
+
 
 .primaryButtonRoot {
   @apply --marketplaceButtonStylesPrimary;
-
+  text-decoration: none !important;
+  background-color: #c9bd9c;
+  &:hover{
+  background-color: #b7a77b;
+  color: #fff;
+  text-decoration: none !important;
+  }
   /* Clear padding that is set for link elements looking like buttons */
   padding: 0;
 }
-
+.primaryButtonRootEx{
+  @apply --marketplaceButtonStylesPrimary;
+  text-decoration: none !important;
+  background-color: #c9bd9c;
+  /* Clear padding that is set for link elements looking like buttons */
+  &:hover{
+    background-color: #b7a77b;
+  }
+  padding: 0;
+}
 .secondaryButtonRoot {
   @apply --marketplaceButtonStylesSecondary;
 
@@ -29,9 +51,45 @@
 
 .primaryButton {
   /* Class handle for primary button state styles */
+  text-decoration: none !important;
+}
+.orderTypeButton_first:active, .orderTypeButton_first:active, .orderTypeButton_first:focus {
+  text-decoration: none !important;
 }
 .secondaryButton {
-  /* Class handle for secondary button state styles */
+  text-decoration: none !important;
+}
+.orderTypeButton{
+  
+  text-decoration: none !important;
+  &:hover{
+    background-color: #b7a77b; 
+    color: #fff; 
+    border: none !important;
+    text-decoration: none !important;
+  }
+}
+.orderTypeButton_first{
+  border-top-left-radius: 5px !important;
+  border-top-right-radius: 5px !important;
+  text-decoration: none !important;
+  &:hover{
+    background-color: #b7a77b; 
+    color: #fff; 
+    border: none !important;
+    text-decoration: none !important;
+  }
+}
+.orderTypeButton_last{
+  border-bottom-left-radius: 5px !important;
+  border-bottom-right-radius: 5px !important;
+  text-decoration: none !important;
+  &:hover{
+    background-color: #b7a77b; 
+    color: #fff; 
+    border: none !important;
+    text-decoration: none !important;
+  }
 }
 
 .inProgress {
