@@ -37,6 +37,9 @@ const SectionImages = props => {
     </button>
   ) : null;
 
+  console.log('LISTING', listing);
+  console.log('LISTING IMAGES', listing.images);
+
   return (
     <div className={css.sectionImages}>
       <div className={css.threeToTwoWrapper}>

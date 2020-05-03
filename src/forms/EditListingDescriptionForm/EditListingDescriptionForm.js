@@ -82,6 +82,8 @@ const EditListingDescriptionFormComponent = props => (
         })
       );
 
+      const videoRequiredMessage = required('Por favor agrega video');
+
       const { updateListingError, createListingDraftError, showListingsError } = fetchErrors || {};
       const errorMessageUpdateListing = updateListingError ? (
         <p className={css.error}>
@@ -219,6 +221,17 @@ const EditListingDescriptionFormComponent = props => (
             name="user_type"
             className={css.hiden}
             type="text"
+          />
+
+          <FieldTextInput
+            id="video"
+            name="video"
+            className={css.title}
+            type="text"
+            label="Tu video"
+            placeholder="Agrega tu url"
+            message="esto esa siendo llamado del archivo de fotos"
+            validate={composeValidators(required(videoRequiredMessage))}
           />
 
           <Button
