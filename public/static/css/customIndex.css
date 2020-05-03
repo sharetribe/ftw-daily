@@ -1,0 +1,315 @@
+    .react-switch {
+    display: none;
+    }
+
+    body {
+    overflow-x: hidden !important;
+    background: #F7F7F7;
+    }
+
+    .listingsLink {
+    color: #000;
+    }
+
+    /* HOW IT WORKS */
+
+    #how-it-works {
+    display: flex;
+    margin-bottom: 50px;
+    }
+
+    #three-containers {
+    max-width: 33%;
+    flex: 0 0 33%;
+    text-align: center;
+    }
+
+    #howitworks-title {
+    text-align: center;
+    }
+
+    #howitworks-ul li {
+    margin-bottom: 10px;
+    font-weight: 300;
+    }
+
+    #three-containers h2 {
+    margin-bottom: 27px;
+    }
+ 
+    #three-containers:nth-child(1):before {
+    content: url(/static/icons/how-1.png);
+    }
+
+    #three-containers:nth-child(2):before {
+    content: url(/static/icons/how-2.png);
+    }
+
+    #three-containers:nth-child(3):before {
+    content: url(/static/icons/how-3.png);
+    }
+
+    #howitworks-title h1 {
+    margin-bottom: 60px !important; 
+    }
+
+    #how-padding {
+    text-align: center;
+    }
+
+    #how-button {
+    color: #fff;
+    background-color: #c9bd9c;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid #c9bd9c;
+    }
+
+    #how-button:hover {
+    background-image: linear-gradient(to right top, #d16ba5, #c077bd, #a983d0, #8d8fdc, #6d9ae2, #6d9ae2, #6d9ae2, #6d9ae2, #8d8fdc, #a983d0, #c077bd, #d16ba5);
+    color: #fff;
+    text-decoration: none !important;
+    cursor: pointer;
+    }
+
+    @media (max-width: 767px) {
+      #three-containers {
+        max-width: 100%;
+        flex: 0 0 100%;
+        margin-bottom: 60px;
+      }
+
+      #how-it-works {
+        display: inherit;
+      }
+    }
+
+    /* WHY USE */
+
+    .whyUse {
+    background: #41a6df;
+    }
+
+    /* FOOTER */
+
+    @media (max-width: 760px) {
+      #back-to-top {
+        display: none;
+      }
+    }
+    
+    #back-to-top {
+    display: none !important;
+    position: fixed;
+    text-align: center;
+    right: 10px;
+    top: 45%;
+    width: 70px;
+    background-image: linear-gradient(to right top, #d16ba5, #c077bd, #a983d0, #8d8fdc, #6d9ae2, #6d9ae2, #6d9ae2, #6d9ae2, #8d8fdc, #a983d0, #c077bd, #d16ba5);
+    z-index: 100;
+    cursor: pointer;
+    opacity: 0;
+    padding: 2px 10px 10px 10px;
+    }
+
+    .backToTopContent img {
+    height: 15px;
+    width: 15px;
+    }
+
+    #back-to-top:hover {
+    background-image: linear-gradient(to right top, #d16ba5, #d16ba5, #d16ba5, #d16ba5, #d16ba5, #d16ba5, #d16ba5, #d16ba5, #d16ba5, #d16ba5, #d16ba5, #d16ba5);
+    color: #fff;
+    }
+
+    #back-to-top.show {
+    opacity: 1;
+    }
+
+    .selected {
+    text-decoration: none !important;
+    color: #41a6df !important;
+    }
+
+    #bread-active:hover {
+    cursor: pointer;
+    color: #41a6df;
+    }
+
+    #bread-back {
+     color: rgb(155, 155, 155) !important;
+    }
+
+    #bread-back:hover {
+     color: #41a6df !important;
+    }
+
+    #faqBg:hover #spanContainer {
+    background: rgba(0, 0, 0, 0.6)
+    }
+
+    #faqBg2:hover #spanContainer2 {
+    background: rgba(0, 0, 0, 0.6)
+    }
+
+    #faqBg3:hover #spanContainer3 {
+    background: rgba(0, 0, 0, 0.6)
+    }
+
+    .success-message {
+      border-radius: 3px;
+      color: #659f13;
+      background: #f2fae3;
+      -webkit-box-shadow: 0px 0px 9px -4px rgba(0,0,0,0.75);
+      -moz-box-shadow: 0px 0px 9px -4px rgba(0,0,0,0.75);
+      box-shadow: 0px 0px 9px -4px rgba(0,0,0,0.75);
+      text-align: center;
+      height: 35px;
+      display: none;
+      line-height: 33px;
+    }
+
+    .success-crowd {
+      margin-bottom: 15px;
+    }
+
+    .error-message {
+      border-radius: 3px;
+      color: #fff;
+      background: #aa0e08;
+      -webkit-box-shadow: 0px 0px 9px -4px rgba(0,0,0,0.75);
+      -moz-box-shadow: 0px 0px 9px -4px rgba(0,0,0,0.75);
+      box-shadow: 0px 0px 9px -4px rgba(0,0,0,0.75);
+      text-align: center;
+      height: 35px;
+      display: none;
+      line-height: 33px;
+    }
+
+    .react-tabs__tab--selected {
+    color: #b7a77b !important;
+    }
+
+    .react-tabs__tab--selected span {
+    border-bottom: 1px solid #41a6df !important;
+    }
+
+    @media (max-width: 992px) {
+    .carousel {
+        z-index: 1;
+        }
+    }
+
+    .inlineStep {
+        margin-top: -15px;
+        
+    }
+
+    .articleButton {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: none !important;
+    color: #41a6df !important;
+    border: none !important;
+    font-size: 15px !important;
+    font-weight: 400 !important;
+    display: flex;
+    outline: 0 !important;
+    position: relative;
+}
+
+.articleButton:hover {
+  text-decoration: underline !important;
+  text-underline-position: under !important;
+  background: none !important;
+}
+
+.yoti-button__text {
+  position: relative;
+  top: 1px;
+}
+
+.carousel-indicators {
+  bottom: 122px;
+}
+
+@media (max-width: 700px) {
+  .carousel-indicators {
+    bottom: 0 !important;
+  }
+}
+
+#mTabs {
+  position: relative;
+}
+
+#mTabs .react-tabs {
+  width: 100%;
+}
+
+#mTabs .react-tabs > ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  position: relative;
+  top: -76px;
+}
+
+#mTabs .react-tabs > ul > li {
+  position: relative;
+  line-height: 24px;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #2d4053;
+  background-image: linear-gradient(0deg,#fbfcfe 5%,#fcfcfc 95%);
+  width: 100%;
+  max-width: 346px;
+  text-align: center;
+  padding: 24px 0;
+  border: 1px solid #e3e3e3;
+  border-top: 3px solid transparent;
+  border-radius: 8px 8px 0 0;
+  margin: 0 3px;
+  cursor: pointer;
+  white-space: nowrap !important;
+  text-decoration: none !important;
+}
+
+#mTabs .react-tabs > ul > li > img {
+  display: none;
+}
+
+#mTabs .react-tabs > ul > .react-tabs__tab--selected > img {
+  display: block;
+}
+
+@media (max-width: 992px) {
+  #mTabs .react-tabs > ul > li > img {
+    display: none !important;
+  }
+}
+
+#mTabs .react-tabs > ul > li > span {
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
+#mTabs .react-tabs > ul > .react-tabs__tab--selected {
+  border-top: 3px solid #b7a77b !important;
+  border-bottom: none;
+}
+
+@media (max-width: 400px) {
+  #mTabs .react-tabs > ul > li {
+    padding: 24px 10px !important;
+  }
+}
+
+@media (max-width: 700px) {
+.carousel-inner .carousel-item:nth-child(1) div img {
+   object-position: -200px !important;
+  } 
+}

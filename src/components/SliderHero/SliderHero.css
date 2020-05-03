@@ -1,0 +1,175 @@
+.carouselHero {
+  height: 100vh;
+  width: 100%;
+  display: inline-block;
+}
+
+.carouselHero:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  background: linear-gradient(-45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)); /* W3C */
+}
+
+@media (max-width: 768px) {
+  .btnPc {
+    display: none;
+  }
+  .btnMob {
+    display: block;
+    margin-top: -10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .btnPc {
+    display: block;
+  }
+  .btnMob {
+    display: none;
+  }
+}
+
+.carouselHero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom;
+}
+
+.carouselCaption {
+  position: absolute;
+  color: #fff;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.carouselCaption h1 {
+  font-family: 'narrow', 'Times New Roman', serif;
+  line-height: 48px;
+  font-weight: 500;
+  font-size: 63px;
+  margin-top: 0;
+  line-height: 72px;
+  overflow: visible;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 800px) {
+  .carouselCaption h1 {
+    font-size: 45px !important;
+    line-height: 57px !important;
+    white-space: inherit;
+    margin-bottom: 0 !important;
+  }
+  .carouselCaption p {
+    padding: 15px 15px 0 !important;
+  }
+  .submitContainer {
+    display: block;
+    flex-wrap: wrap;
+  }
+  .submitContainer a {
+    width: 100%;
+    white-space: nowrap;
+  }
+  .submitContainer a:nth-child(3) {
+    white-space: pre-wrap;
+  }
+}
+
+.carouselCaption p {
+  font-family: 'narrow', 'Times New Roman', serif;
+  font-weight: 300;
+  margin: 43px 20px;
+  padding: 0px;
+  text-align: center;
+  color: #fff;
+  margin: 0 0 1px;
+  letter-spacing: 3px;
+  font-size: 25px;
+}
+
+.submitContainer {
+  width: 100%;
+  text-align: center;
+  padding-top: 36px;
+  display: flex;
+  justify-content: center;
+  display: grid;
+  grid-template-columns: initial;
+  grid-gap: 15px;
+
+  @media (--viewportMedium) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.submitContainer a {
+  background: #fff;
+  color: #4a4a4a;
+  font-weight: 600;
+  text-decoration: none !important;
+  padding: 10px 40px;
+  border-radius: 3px;
+}
+
+@media (min-width: 800px) {
+  .submitContainer {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(2, 2fr);
+    grid-gap: 15px;
+  }
+}
+
+@media (min-width: 822px) {
+  .submitContainer a {
+    white-space: nowrap !important;
+  }
+}
+
+.submitContainer a:hover {
+  background: #b7a77b;
+  color: #fff;
+}
+
+@media (max-width: 992px) {
+  .carouselCaption p {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 850px) {
+  .carouselCaption h1,
+  .carouselCaption p {
+    white-space: inherit;
+  }
+
+  .carouselCaption p {
+    padding: 0px 15px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .carouselCaption h1,
+  .carouselCaption p {
+    white-space: nowrap;
+  }
+
+  .carouselCaption p {
+    white-space: nowrap;
+  }
+}
+
+.sSlide {
+  object-position: center !important;
+}

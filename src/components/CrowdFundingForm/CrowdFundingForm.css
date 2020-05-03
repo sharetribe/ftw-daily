@@ -1,0 +1,49 @@
+.FundingForm input,
+.FundingForm select {
+    border: 2px solid #ccc;
+    border-radius: 3px;
+    padding: 8px 10px;
+    color: darkslategray;
+    margin-bottom: 15px;
+    font-weight: 500;
+    background-image: none;
+    transition: border-color ease-in 0.2s;
+}
+
+.FundingForm input:hover, 
+input:focus,
+.FundingForm select:hover,
+.FundingForm select:focus {
+    border-width: 2px;
+    border-color: #41a6df !important;
+    outline: none;
+}
+
+.FundingSelect {
+    position: relative;
+}
+
+.FundingSelect svg {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(-10px, -50%);
+}
+
+.FundingForm input::placeholder {
+    color: #999;
+    font-weight: 500;
+}
+
+.FundingForm button {
+    width: 100%;
+    background: #c9bd9c;
+    border: none;
+    color: #fff;
+    padding: 8px 0;
+    border-radius: 3px;
+}
+
+.FundingForm button:hover {
+    background: rgb(201,189,156, .8);
+}

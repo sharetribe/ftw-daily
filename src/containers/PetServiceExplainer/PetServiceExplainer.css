@@ -1,0 +1,165 @@
+@import '../../marketplace.css';
+
+.pageTitle {
+  text-align: center;
+}
+
+.staticPageWrapper {
+  width: calc(100% - 48px);
+  max-width: 1056px;
+  margin: 60px auto;
+
+  @media (--viewportMedium) {
+    width: calc(100% - 72px);
+    margin: 60px auto 100px;
+  }
+}
+
+.coverImage {
+  width: 100%;
+  height: 528px;
+  border-radius: 4px;
+  object-fit: cover;
+  margin: 32px 0 40px;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-wrap: wrap;
+
+  @media (--viewportMedium) {
+    flex-wrap: nowrap;
+  }
+}
+
+.contentSide {
+  font-style: italic;
+
+  @media (--viewportMedium) {
+    width: 193px;
+    margin-right: 103px;
+    margin-top: 8px;
+  }
+}
+
+.contentMain {
+  width: 90%;
+
+  @media (--viewportMedium) {
+    max-width: 650px;
+  }
+}
+
+.subtitle {
+  @apply --marketplaceH3FontStyles;
+  margin-top: 48px;
+  margin-bottom: 24px;
+}
+
+.contentWrapper {
+  width: 100%;
+}
+
+@media (max-width: 520px) {
+.contentWrapper form { 
+  width: 100% !important;
+  margin-right: 0px !important;
+}
+
+.contentWrapper {
+  position: relative;
+}
+
+.contentWrapper > div:first-of-type {
+  height: 400px;
+  width: 100% !important;
+  margin: 35px 0px 20px !important;
+}}
+
+.contentWrapper form {
+  width: 50%;
+  margin-right: 15px;
+}
+
+.contentWrapper label {
+  font-size: 20px;
+}
+
+.contentWrapper input {
+  margin-bottom: 30px;
+  font-size: 17px;
+}
+
+.contentWrapper textarea {
+  padding: 0;
+  margin-bottom: 30px;
+  margin-top: 10px;
+  font-size: 17px;
+}
+
+.staticPageWrapper h1 {
+	margin-bottom: 55px !important;
+}
+
+.contentWrapper > div:first-of-type {
+    width: 50%;
+    margin-left: 15px;
+}
+
+.serviceIcons {
+  display: flex;
+  width: 100%;
+}
+
+.serviceSingle {
+  width: 33%;
+  padding: 0 10px;
+}
+
+.singleIcon {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease 0s;
+}
+
+.singleIcon img {
+  height: 150px;
+}
+
+.serviceSingle h3 {
+  color: #41a6df !important;
+  margin: 0;
+}
+
+.serviceSingle h2 {
+  margin: 0.5rem 0;
+  color: rgb(100, 100, 105);
+}
+
+.serviceSingle p {
+  margin: 0;
+  color: rgb(100, 100, 105);
+}
+
+.serviceSingle:hover .singleIcon {
+  transform: translate(0px, -20px);
+}
+
+.serviceSingle:hover hr {
+  border-color: rgb(65,166,223);
+}
+
+@media (max-width: 580px) {
+  .serviceSingle {
+    width: 100% !important;
+    padding-bottom: 50px !important;
+  }
+
+  .serviceIcons .serviceSingle:nth-child(3) {
+    padding-bottom: 0 !important;
+  }
+
+  .serviceIcons {
+    flex-wrap: wrap;
+  }
+}

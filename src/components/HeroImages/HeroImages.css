@@ -1,0 +1,14 @@
+.imageHalf {
+  width: 40%;
+  position: relative;
+  top: 10px;
+  margin-left: 35px;
+}
+
+.imageHalf .imageImg {
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

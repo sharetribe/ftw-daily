@@ -1,0 +1,86 @@
+@import '../../marketplace.css';
+
+.sectionContent {
+  margin: 80px auto 80px;
+  padding: 0 36px 0 36px;
+
+  @media (--viewportMedium) {
+    width: 100%;
+    margin: 80px auto 80px;
+  }
+
+  @media (--viewportLarge) {
+    width: 1024px;
+    padding: 0 36px 0 36px;
+    margin: 80px auto 80px;
+  }
+
+  @media (--viewportXLarge) {
+    width: 1024px;
+    padding: 0;
+  }
+}
+
+.pawTitle {
+  text-align: center;
+  margin-top: 0;
+}
+
+.pawSub {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 24px !important;
+}
+
+.pawImg {
+  height: 50px;
+  padding-left: 10px;
+  position: relative;
+  bottom: 6px;
+}
+
+.pawEx {
+  text-align: center;
+  margin-bottom: -10px;
+}
+
+.pawEx img {
+  height: 240px;
+  object-fit: contain;
+}
+
+@media (max-width: 580px) {
+  .pawSub {
+    margin: 30px 0 !important;
+  }
+  .pawImg {
+    margin-top: 15px !important;
+  }
+}
+
+.divLine {
+  margin: 30px 0 35px;
+}
+
+@media (max-width: 450px) {
+  .divLine {
+    margin: 40px 0 15px;
+  }
+}
+
+.joinNow {
+  text-align: center;
+  padding-top: 35px;
+}
+
+.joinNow a {
+  background-color: rgb(65,166,223);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.joinNow a:hover {
+      background-image: linear-gradient(to right top, #d16ba5, #c077bd, #a983d0, #8d8fdc, #6d9ae2, #6d9ae2, #6d9ae2, #6d9ae2, #8d8fdc, #a983d0, #c077bd, #d16ba5);
+      text-decoration: none !important;
+}

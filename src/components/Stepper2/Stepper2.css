@@ -1,0 +1,88 @@
+.alignsteps {
+	text-align: center;
+}
+
+.calendarIcon {
+	position: relative;
+	bottom: 0.2px;
+}
+
+@media (max-width: 700px) {
+	.root {
+		display: none;
+	}
+}
+
+.class {
+	background: transparent !important;
+}
+
+.flexContainer {
+	text-align: center;
+	display: flex;
+	margin-top: 25px;
+}
+
+.lastbtn {
+	padding-top: 55px;
+	text-align: center;
+}
+
+.lastbtn a {
+	background-color: #fff;
+    color: rgb(65,166,223);
+    padding: 10px 20px 12px;
+    border-radius: 5px;
+}
+
+.lastbtn a:hover {
+	background-image: linear-gradient(to right top, #d16ba5, #c077bd, #a983d0, #8d8fdc, #6d9ae2, #6d9ae2, #6d9ae2, #6d9ae2, #8d8fdc, #a983d0, #c077bd, #d16ba5);
+    color: #fff !important;
+    text-decoration: none !important;
+}
+
+.signUp {
+	background-color: rgb(65,166,223);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.signUp:hover {
+    background-image: linear-gradient(to right top, #d16ba5, #c077bd, #a983d0, #8d8fdc, #6d9ae2, #6d9ae2, #6d9ae2, #6d9ae2, #8d8fdc, #a983d0, #c077bd, #d16ba5);
+    color: #fff;
+    text-decoration: none !important;
+}
+
+.flexItem {
+	width: 33%;
+	flex: 0 0 33%;
+	text-align: center;
+	padding: 15px 30px;
+}
+
+.flexItem span {
+	color: #fff;
+	position: relative;
+    float: left;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.stepTitle {
+	font-weight: 600;
+	color: #fff;
+}
+
+.flexItem:nth-child(1), .flexItem:nth-child(2) {
+	border-right: 1px solid rgb(255,255,255,.5);
+}
+
+@media (max-width: 700px) {
+  .disable {
+    display: none;
+  }
+}
+

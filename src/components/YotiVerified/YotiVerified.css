@@ -1,0 +1,66 @@
+.yotiVerified a:hover {
+  color: #41a6df !important;
+}
+
+.yotiVerified {
+  margin-top: 10px;
+  margin-bottom: 50px;
+}
+
+.yotiVerified img {
+  width: 50px;
+}
+
+.yotiVerified span {
+	position: relative;
+	top: 2px;
+	font-weight: 500;
+	margin-left: 4px;
+}
+
+.customTip {
+ color: #fff !important;
+ background-color: #41a6df !important;
+ opacity: 0.99 !important;
+ margin-top: -12px !important;
+ padding: 10px 21px 13px !important;
+}
+
+.customTip:after {
+ border-top-color: #41a6df !important;
+ border-top-width: 7px !important;
+}
+
+.verifiedImg {
+  width: 13px !important;
+  margin-left: 3px;
+  position: relative !important;
+  bottom: 1px !important;
+}
+
+.title {
+  margin-top: 0;
+  margin-bottom: 24px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.yotiContainer {
+  position: inherit !important;
+  top: 0px !important;
+  font-weight: inherit !important;
+  margin-left: 0px !important;
+}
+
+.removelink {
+  text-decoration: none !important;
+  color: #000;
+}
+
+.removeLink:hover {
+  color: #41a6df !important;
+}
+

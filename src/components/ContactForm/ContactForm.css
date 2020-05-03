@@ -1,0 +1,20 @@
+.contactForm input, .contactForm textarea {
+	border-bottom-color: #4a4a4a;
+}
+
+.contactForm input:hover,
+.contactForm textarea:hover, 
+.contactForm input:focus,
+.contactForm textarea:focus {
+	border-bottom-color: #41a6df;
+}
+
+
+.contactForm label {
+	font-family: "narrow", "Times New Roman", serif;
+}
+
+.contactForm button {
+	font-family: "narrow", "Times New Roman", serif !important;
+	letter-spacing: 0.7px;
+}

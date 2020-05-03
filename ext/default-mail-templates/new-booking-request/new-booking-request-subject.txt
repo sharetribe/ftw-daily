@@ -1,0 +1,1 @@
+{{transaction.customer.display-name}} has requested to book {{transaction.listing.title}}

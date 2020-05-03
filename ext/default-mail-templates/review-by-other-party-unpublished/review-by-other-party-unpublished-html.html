@@ -1,0 +1,17 @@
+<html>
+  <body>
+    {{#with transaction}}
+    <h1>Find out what {{other-party.display-name}} wrote!</h1>
+
+    <p>{{other-party.display-name}} has left you a new review. To see what they wrote, please leave them a review to describe your experience.</p>
+
+    <p>
+      <a href="{{marketplace.url}}/{{#eq recipient-role "customer"}}order{{else}}sale{{/eq}}/{{url-encode id}}/details">Leave a review</a>
+    </p>
+    {{/with}}
+
+    <hr />
+
+    <p>You have received this email notification because you are a member of {{marketplace.name}}. If you no longer wish to receive these emails, please contact {{marketplace.name}} team.</p>
+  </body>
+</html>

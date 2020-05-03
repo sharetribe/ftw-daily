@@ -1,0 +1,32 @@
+.DatePick {
+	position: absolute;
+    right: 70px;
+    bottom: 0px;
+}
+
+.DatePick input {
+    color: #fff !important;
+    padding-left: 40px;
+    padding-bottom: 11px;
+}
+
+.DatePick input::placeholder {
+	color: #b2b2b2;
+}
+
+.DatePick input:hover, .DatePick input:focus {
+    border-bottom-color: #fff;
+    outline: none;
+}
+
+.calendarIcon {
+	position: absolute;
+    bottom: 12px;
+    left: 5px;
+}
+
+.calendarIcon img {
+	width: 23px; height: 23px;
+    position: relative;
+    bottom: 1px;
+}

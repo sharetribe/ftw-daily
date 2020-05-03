@@ -1,0 +1,155 @@
+.HeroSearch {
+  display: flex;
+}
+
+.HeroPick {
+  float: left;
+  margin: 0 auto;
+  text-align: center;
+  width: 30%;
+  background: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition-timing-function: ease-in;
+  /* Quick on the way out */
+  transition: 0.2s;
+}
+
+.goBtn {
+  background: #e9e9e9;
+  border: 0;
+  color: #4a4a4a;
+  padding: 10px 30px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  cursor: pointer;
+  font-weight: 700;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.goBtn span {
+  position: relative;
+  bottom: 1.5px;
+}
+
+.goBtn:hover {
+  color: #41a6df;
+}
+
+.HeroPick p {
+  font-weight: 700;
+  margin: 0;
+  padding: 0 0 24px;
+}
+
+.HeroPick .ownerImg {
+  content: url(./images/owner.png);
+  display: block;
+  margin: 0 auto;
+  padding: 24px 0 12px;
+}
+
+.HeroPick:hover .ownerImg,
+.HeroPickActive .ownerImg {
+  content: url(./images/owner-active.png);
+}
+
+.HeroPick:hover p,
+.HeroPickActive p {
+  color: #41a6df;
+}
+
+.HeroPick:hover,
+.HeroPickActive {
+  background: #e9e9e9;
+}
+
+.HeroPick .serviceImg {
+  content: url(./images/service.png);
+  margin: 0 auto;
+  padding: 24px 0 12px;
+}
+
+.HeroPick:hover .serviceImg,
+.HeroPickActive .serviceImg {
+  content: url(./images/service-active.png);
+}
+
+.HeroPick .sitterImg {
+  content: url(./images/sitter.png);
+  margin: 0 auto;
+  padding: 24px 0 12px;
+}
+
+.HeroPick:hover .sitterImg,
+.HeroPickActive .sitterImg {
+  content: url(./images/sitter-active.png);
+}
+
+.HeroMain {
+  margin: 44px 10px;
+  position: relative;
+}
+
+.HeroInput {
+  color: #fff !important;
+  padding-left: 40px;
+  padding-bottom: 11px;
+}
+
+.HeroInput::placeholder {
+  color: #b2b2b2;
+}
+
+.HeroInput:hover,
+.HeroInput:focus {
+  border-bottom-color: #fff;
+  outline: none;
+}
+
+.HeroInput:hover .stroke {
+  stroke: #fff !important;
+  fill: #fff !important;
+}
+
+.locationIcon {
+  position: absolute;
+  bottom: 12px;
+  left: 5px;
+}
+
+.HeroAutocomplete {
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-bottom-color: #fff;
+  height: 44px;
+  background: #fff;
+  border-radius: 3px;
+}
+
+.HeroAutocomplete:hover, .HeroAutocomplete:focus {
+  border-bottom-color: #4a4a4a;
+  outline: none;
+}
+
+.HeroAutocomplete div:first-child {
+  background-color: transparent;
+  color: #fff !important;
+  height: 44px;
+}
+
+.flatpickr {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 62%;
+  color: #4a4a4a;
+  background-image: url(https://i.imgur.com/LTsuzzu.png);
+  background-position: 0px 6px;
+  padding-left: 35px;
+}
+
+

@@ -1,0 +1,79 @@
+@import '../../marketplace.css';
+
+.divider1 {
+  margin-top: -10px;
+    margin-bottom: -20px;
+}
+
+.divider2 {
+  position: relative;
+  top: 23px;
+}
+
+.divider3 {
+    margin-top: -15px;
+    margin-bottom: 5px;
+}
+
+.root {
+  padding: 24px;
+
+  /* Use CSS variable imported from marketplace.css */
+  background-color: var(--marketplaceColor);
+}
+
+.sectionContent {
+  background-size: cover;
+  margin: var(--LandingPage_sectionMarginTop) 24px 51px 24px;
+
+  @media (--viewportMedium) {
+    width: 100%;
+    margin: var(--LandingPage_sectionMarginTopMedium) 24px 60px 24px;
+  }
+
+  @media (--viewportLarge) {
+    width: 1128px;
+    padding: 0 36px 0 36px;
+    margin: 50px auto 90px auto;
+  }
+
+  @media (--viewportXLarge) {
+    width: 1056px;
+    padding: 0;
+  }
+}
+
+.sectionContent {
+    padding-top: 15px;
+    padding-bottom: 40px;
+    background: #fff;
+    border-radius: 15px;
+   -webkit-box-shadow: 0px 1px 37px -5px rgba(140,140,140,1);
+   -moz-box-shadow: 0px 1px 37px -5px rgba(140,140,140,1);
+    box-shadow: 0px 1px 37px -5px rgba(140,140,140,1);
+}
+
+.sectionContent img {
+  width: 100%;
+  cursor: pointer;
+}
+
+.sectionContent img:hover {
+  transform: scale(1.05);
+}
+
+.sectionContent .divider1:hover, .sectionContent .divider2:hover,
+.sectionContent .divider4:hover, .sectionContent .divider3:hover {
+  transform: scale(1) !important;
+  cursor: inherit !important;
+}
+
+.divider2 {
+  position: relative;
+  z-index: 99999;
+}
+
+.sectionContent img:nth-child(3) {
+  position: relative;
+  z-index: 2;
+}

@@ -1,0 +1,102 @@
+@import '../../marketplace.css';
+
+.sectionContent {
+  margin: 80px auto 80px;
+  padding: 0 36px 0 36px;
+
+  @media (--viewportMedium) {
+    width: 100%;
+    margin: 80px auto 80px;
+  }
+
+  @media (--viewportLarge) {
+    width: 1024px;
+    padding: 0 36px 0 36px;
+    margin: 80px auto 80px;
+  }
+
+  @media (--viewportXLarge) {
+    width: 1024px;
+    padding: 0;
+  }
+}
+
+.pawTitle {
+  text-align: center;
+  margin-top: 0;
+}
+
+.pawSub {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 24px !important;
+}
+
+.pawImg {
+  height: 50px;
+  padding-left: 10px;
+  position: relative;
+  bottom: 6px;
+}
+
+.pawEx {
+  text-align: center;
+  margin-bottom: -10px;
+}
+
+.pawEx img {
+  height: 240px;
+  object-fit: contain;
+}
+
+@media (max-width: 580px) {
+  .pawSub {
+    margin: 30px 0 !important;
+  }
+  .pawImg {
+    margin-top: 15px !important;
+  }
+}
+
+.divLine {
+  margin: 30px 0 35px;
+}
+
+@media (max-width: 450px) {
+  .divLine {
+    margin: 40px 0 15px;
+  }
+}
+
+.joinNow {
+  text-align: center;
+  padding-top: 35px;
+}
+
+.joinNow a {
+  background-color: #c9bd9c;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.joinNow a:hover {
+  text-decoration: none !important;
+}
+
+.superhogUl {
+  list-style: inherit;
+  padding-left: 50px;
+}
+
+.superhogUl li {
+  padding-bottom: 10px;
+}
+
+.superhogUl li:last-child {
+  padding-bottom: 0;
+}
+
+.myHr {
+  margin-top: 25px;
+}

@@ -1,0 +1,240 @@
+@import '../../marketplace.css';
+
+.title {
+  @apply --marketplaceH1FontStyles;
+
+  margin-top: 0;
+  text-align: center;
+  max-width: 100%;
+
+  @media (--viewportMedium) {
+    margin-bottom: 23px;
+  }
+}
+
+.locations {
+  display: flex;
+  flex-direction: column;
+  margin-top: 32px;
+
+  @media (--viewportMedium) {
+    flex-direction: row;
+    margin-top: 57px;
+  }
+}
+
+.location {
+  width: 100%;
+  margin-top: 25px;
+
+  /* Remove link's hover effect */
+  &:hover {
+    text-decoration: none;
+  }
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+  }
+}
+
+.location {
+  @media (--viewportMedium) {
+    margin-right: 40px;
+    margin-bottom: 0;
+  }
+}
+
+.location:last-of-type {
+  @media (--viewportMedium) {
+    margin-right: 0;
+  }
+}
+
+/* A wrapper for a responsive image that holds it's aspect ratio */
+.imageWrapper {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  border-radius: 4px;
+  transition: var(--transitionStyleButton); 
+  z-index: 0;
+}
+
+.tipColor {
+  color: #fff !important;
+}
+
+.location:hover {
+  transform: scale(1.03);
+  box-shadow: none !important;
+}
+
+
+/* An image wrapper that defines the images aspect ratio */
+.aspectWrapper {
+  position: relative;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  padding-bottom: calc(6 / 13 * 100%); /* 13:6 Aspect Ratio */
+
+  @media (--viewportMedium) {
+    padding-bottom: calc(2 / 3 * 100%); /* 3:2 Aspect Ratio */
+  }
+}
+
+.locationImage {
+  /* Layout - image will take space defined by aspect ratio wrapper */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.linkText {
+  display: flex;
+  width: 100%;
+  @apply --marketplaceH2FontStyles;
+  color: var(--matterColor);
+  margin-top: 15px;
+  margin-bottom: 0;
+
+  @media (--viewportMedium) {
+    margin-top: 21px;
+  }
+}
+
+.featuredL, .featuredR {
+  width: 50%;
+}
+
+.featuredSorting {
+  width: 100%;
+}
+
+.featuredSortingCat {
+  width: 50%;
+  float: left;
+}
+
+.iconWrapper {
+  align-self: baseline;
+  margin-right: 6px;
+  position: relative;
+  bottom: 2.5px;
+  height: var(--PropertyGroup_lineHeight);
+}
+
+.checkIcon {
+  fill: #41a6df !important;
+}
+
+.nameYoti {
+  width: 100%;
+}
+
+.yotiImg {
+  height: 35px;
+}
+
+.featuredCategories {
+  font-size: 15px;
+}
+
+.locationName {
+  color: var(--marketplaceColor);
+}
+
+.linkText {
+  box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.1);
+  padding: 16px 0px 17px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  margin: 0 !important;
+  text-align: center;
+  background: #fff;
+}
+
+.aspectWrapper {
+  background: linear-gradient(-45deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+}
+
+.aspectWrapper:hover {
+  background: linear-gradient(-45deg, rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.0));
+}
+
+.aspectWrapper img {
+    z-index: -1;
+}
+
+.linkText span {
+    color: #4a4a4a;
+}
+
+.location {
+    position: relative;
+}
+
+.location:hover .aspectWrapper {
+  background: linear-gradient(-45deg, rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.0)) !important;
+}
+
+.categoryBadge {
+    background-color: #41a6df;
+    float: left;
+    position: absolute;
+    transform: rotate(45deg);
+    right: -64px;
+    top: 22px;
+    text-align: center;
+    width: 200px;
+    font-size: 15px;
+    margin: 0;
+    z-index: 999;
+    color: #fff;
+    font-weight: 500;
+    line-height: 28px;
+}
+
+.customTip {
+ color: #fff !important;
+ background-color: #41a6df !important;
+ opacity: 0.99 !important;
+ margin-top: -12px !important;
+}
+
+.customTip:after {
+ border-top-color: #41a6df !important;
+ border-top-width: 7px !important;
+}
+
+.yotismall {
+ position: absolute;
+ height: 21px;
+ right: -10px;
+ top: 13px;
+ opacity: 0.7;
+ border-bottom-left-radius: 3px;
+ border-top-left-radius: 3px;
+}
+
+.yotismallLeft {
+ position: absolute;
+ height: 21px;
+ left: -10px;
+ top: 13px;
+ opacity: 0.7;
+ border-bottom-right-radius: 3px;
+ border-top-right-radius: 3px;
+}
+
+.verifiedImg {
+ width: 13px !important;
+ margin-left: 3px;
+ position: relative !important;
+ bottom: 3.5px !important;
+}

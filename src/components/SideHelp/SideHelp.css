@@ -1,0 +1,604 @@
+@import '../../marketplace.css';
+
+:root {
+  --navcover-z-index: 99;
+  --sidenav-z-index: 100;
+}
+
+.navcover {
+  position: fixed;
+  z-index: var(--navcover-z-index);
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+/*   background-color: rgba(0, 0, 0, 0.5); */
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;  /* to be set in js */
+  position: fixed;
+  overflow-x: hidden;
+  z-index: var(--sidenav-z-index);
+  top: 0;
+  right: 0;
+  background: #fff;
+  transition: 0.5s;
+  box-shadow: rgba(0, 0, 0, 0.05) -3px 0px 3px 0px !important;
+}
+
+.closeX {
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: #818181;
+  display: block;
+  transition: 0.53s;
+}
+
+.sidenav .closenav {
+  position: absolute;
+  top: 0rem;
+  right: 1rem;
+  font-size: 2.2rem;
+  padding: 0;
+  color: #4a4a4a;
+  text-decoration: none !important;
+}
+
+.sidenav .closenav:hover {
+  color: #41a6df;
+}
+
+.sideheader {
+  text-align: center;
+  width: 100%;
+  border-bottom: 1px solid rgb(235, 235, 235);
+  padding: 20px;
+}
+
+.sidefooter {
+  text-align: center;
+  width: inherit;
+  position: fixed;
+  bottom: 0;
+  border-top: 1px solid rgb(235, 235, 235);
+  padding: 20px;
+  background: #fff;
+}
+
+.helptitle {
+  padding: 0 !important;
+  margin: 0 !important;
+  font-size: 20px !important;
+}
+
+.helpcenter {
+  background: #c9bd9c;
+  color: #fff;
+  border-radius: 3px;
+  padding: 10px 0 !important;
+  font-size: 20px !important;
+  margin: 0;
+  display: block;
+}
+
+.helpcenter:hover {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: #b7a77b;
+}
+
+.sidefooter span {
+  position: relative;
+  bottom: 2px;
+}
+
+.sitewrapper {
+  transition: margin-left .5s;
+}
+
+.opennav {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.bsStep {
+  width: 100%;
+  overflow-y: auto;
+  padding: 0 30px;
+}
+
+.articleTitle {
+  padding: 0;
+  margin: 0;
+  font-size: 19px !important;
+}
+
+.insideTitle {
+  padding: 0;
+  margin: 16px 0;
+  font-size: 23px !important;
+}
+
+.articleParagraph {
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  line-height: 1.28571em !important;
+  color: rgb(72, 72, 72) !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.articleButton {
+  margin: 0;
+  padding: 0;
+  background: none;
+  color: #41a6df;
+  border: none;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  display: flex;
+  outline: 0 !important;
+  position: relative;
+}
+
+.articleButton:hover {
+  text-decoration: underline;
+  text-underline-position: under;
+}
+
+.helpContent {
+  width: 100%;
+  padding: 32px;
+  padding-bottom: 0;
+}
+
+.helpT {
+  width: 100%;
+  padding: 32px;
+  padding-bottom: 0;
+  margin-bottom: -16px;
+}
+
+.helpT h4 {
+  margin: 0 !important;
+}
+
+.backImg {
+  height: 10px;
+  position: relative;
+  top: 6.5px;
+  margin-right: 7px;
+}
+
+.readmoreImg {
+  height: 10px;
+  position: relative;
+  top: 7.45px;
+  margin-left: 8px;
+}
+
+.insideP {
+  font-size: 16px !important;
+  line-height: 1.375em !important;
+  font-weight: 400;
+  color: rgb(72, 72, 72) !important;
+}
+
+.insideLinks:hover {
+  color: #41a6df !important;
+}
+
+.helpMainTitle {
+  margin-top: 0 !important;
+  text-transform: uppercase;
+  color: rgb(72, 72, 72) !important;
+}
+
+:root {
+  /*
+    These variables are available in global scope through ":root"
+    element (<html> tag). Variables with the same names are going to
+    overwrite each other if CSS Properties' (PostCSS plugin)
+    configuration "preserve: true" is used - meaning that variables
+    are left to CSS bundle. We are planning to enable it in the future
+    since browsers support CSS Properties already.
+ */
+
+  /* Compose text label items on top of this */
+  /* This stretches inline element (link) to take available vertical space (big hover area),
+   * and align baselines
+   */
+  --TopbarDesktop_label: {
+    display: inline-block;
+    margin: 24px 0;
+    text-decoration: inherit;
+
+    @media (--viewportMedium) {
+      margin: 24px 0;
+    }
+  }
+
+  --TopbarDesktop_linkHover: {
+    border-bottom: 0px solid;
+    transition: var(--transitionStyleButton);
+
+    &:hover {
+      border-bottom: 4px solid #000;
+      border-radius: 0;
+      text-decoration: none;
+    }
+  }
+}
+
+/* Desktop */
+.root {
+  /* Size */
+  width: 100%;
+  height: var(--topbarHeightDesktop);
+
+  /* Layout for child components */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 12px 0 0;
+
+  /* fill */
+  background-color: var(--matterColorLight);
+
+  /* shadows */
+  box-shadow: var(--boxShadowLight);
+
+  @media (--viewportLarge) {
+    padding: 0 24px 0 0;
+  }
+}
+
+/* logo */
+.logoLink {
+  @apply --TopbarDesktop_linkHover;
+  flex-shrink: 0;
+  padding: 21px 24px 21px 24px;
+  height: 100%;
+
+  @media (--viewportLarge) {
+    padding: 21px 36px 21px 36px;
+  }
+}
+
+.logo {
+  /* If height is increased, change link paddings accordingly */
+    height: 70px !important;
+    position: relative;
+    bottom: 21.5px;
+
+  /* Good aspect ratio should be less than 160/27 (width/height) */
+  /* NOTE: extremely wide logos, need special handling. */
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.topbaricon {
+  height: 23px;
+  margin-right: 7px;
+  position: relative;
+  bottom: 3px;
+}
+
+.topbariconTwo {
+  height: 23px;
+  margin-right: 7px;
+  position: relative;
+  bottom: 2px;
+}
+
+/* Search */
+.searchLink {
+  flex-grow: 1;
+  height: 100%;
+  margin-right: 24px;
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-left-color: var(--matterColorNegative);
+
+  @media (--viewportLarge) {
+    padding-left: 0;
+  }
+}
+
+.search {
+  @apply --marketplaceH4FontStyles;
+  @apply --TopbarDesktop_label;
+  color: var(--matterColor);
+}
+
+.topbarSearchWithLeftPadding {
+  padding-left: 24px;
+  height: var(--topbarHeightDesktop);
+
+  @media (--viewportLarge) {
+    padding-left: 34px;
+  }
+}
+
+/* Create listing (CTA for providers) */
+.createListingLink {
+  cursor: pointer;
+  @apply --TopbarDesktop_linkHover;
+  @apply --marketplaceH4FontStyles;
+
+  flex-shrink: 0;
+  height: 100%;
+  padding: 0 12px 0 12px;
+  color: var(--marketplaceColor);
+  margin-top: 0;
+  margin-bottom: 0;
+
+  &:hover {
+    color: var(--marketplaceColorDark);
+  }
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.createListing {
+  @apply --TopbarDesktop_label;
+}
+
+/* Inbox */
+.inboxLink {
+  overflow: hidden;
+  white-space: nowrap;
+  @apply --TopbarDesktop_linkHover;
+  @apply --marketplaceH4FontStyles;
+  height: 100%;
+  padding: 0 12px 0 12px;
+  margin-top: 0;
+  margin-bottom: 0;
+  color: var(--matterColor);
+
+  &:hover {
+    color: var(--matterColorDark);
+  }
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.inbox {
+  @apply --TopbarDesktop_label;
+  position: relative;
+  color: #000000;
+}
+
+.notificationDot {
+  /* Dimensions */
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+
+  /* Position */
+  position: absolute;
+  top: 3px;
+  right: -9px;
+
+  /* Style: red dot */
+  background-color: var(--failColor);
+
+  animation-name: notificationPop;
+  animation-duration: 0.1s;
+  animation-delay: 0.1s;
+  animation-fill-mode: forwards;
+
+  animation-timing-function: ease-in;
+  opacity: 0;
+  transform: scale(0);
+}
+
+@keyframes notificationPop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Profile menu */
+.profileMenuLabel {
+  @apply --TopbarDesktop_linkHover;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin: 0;
+  padding: 0 12px 0 12px;
+
+  &:active {
+    border-bottom: 0;
+  }
+}
+
+.profileMenuIsOpen {
+  &:hover {
+    border-bottom: 0;
+  }
+}
+
+.avatar {
+  margin: 16px 0;
+}
+
+.profileMenuContent {
+  min-width: 276px;
+  padding-top: 20px;
+}
+
+/* Authentication */
+.signupLink {
+  @apply --TopbarDesktop_linkHover;
+  flex-shrink: 0;
+  height: 100%;
+  padding: 0 12px 0 12px;
+
+  color: #000 !important;
+
+  &:hover {
+    color: var(--matterColorDark);
+  }
+}
+
+.loginLink {
+  @apply --TopbarDesktop_linkHover;
+  flex-shrink: 0;
+  height: 100%;
+  padding: 0 12px 0 12px;
+
+  color: var(--matterColor);
+
+  &:hover {
+    color: var(--matterColorDark);
+  }
+}
+
+.signup, 
+.login {
+  @apply --marketplaceH4FontStyles;
+  @apply --TopbarDesktop_label;
+  color: #000 !important;
+}
+
+/* left animated "border" like hover element */
+.menuItemBorder {
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  height: calc(100% - 4px);
+  width: 0;
+  transition: width var(--transitionStyleButton);
+}
+
+.profileSettingsLink,
+.yourListingsLink {
+  @apply --marketplaceH4FontStyles;
+  position: relative;
+  display: block;
+
+  /* Dimensions */
+  width: 100%;
+  margin: 0;
+  padding: 4px 24px;
+
+  /* Layout details */
+  color: var(--matterColor);
+  text-align: left;
+  transition: var(--transitionStyleButton);
+
+  &:hover {
+    color: var(--matterColorDark);
+    text-decoration: none;
+
+    & .menuItemBorder {
+      width: 6px;
+      background-color: var(--marketplaceColor);
+    }
+  }
+
+  @media (--viewportMedium) {
+    margin: 0;
+  }
+}
+
+.logoutButton {
+  @apply --marketplaceLinkStyles;
+  /* Font is specific to this component */
+  @apply --marketplaceH4FontStyles;
+  font-size: 14px;
+
+  /* Dimensions */
+  position: relative;
+  width: 100%;
+  min-width: 276px;
+  margin: 0;
+  padding: 20px 24px;
+
+  /* Layout details */
+  color: var(--matterColorAnti);
+  text-align: left;
+  white-space: nowrap;
+  transition: var(--transitionStyleButton);
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: var(--matterColorNegative);
+
+  &:hover {
+    color: var(--matterColorDark);
+    text-decoration: none;
+
+    & .menuItemBorder {
+      height: 100%;
+      width: 6px;
+      top: 0;
+      background-color: var(--marketplaceColor);
+    }
+  }
+
+  @media (--viewportMedium) {
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+}
+
+.currentPage {
+  color: var(--matterColorDark);
+  position: relative;
+
+  & .menuItemBorder {
+    width: 6px;
+    background-color: var(--matterColorDark);
+  }
+
+  &:hover {
+    & .menuItemBorder {
+      background-color: var(--matterColorDark);
+    }
+  }
+}
+
+.helpContent h4 {
+  font-weight: 600;
+  color: #484848 !important;
+  font-size: 20px;
+}
+
+.dotted {
+  padding-left: 25px;
+  list-style: inherit !important;
+}
+
+.dotted li {
+  font-size: 16px !important;
+  line-height: 1.375em !important;
+  font-weight: 400;
+  margin: 16px 0;
+  color: rgb(72, 72, 72) !important;
+}
+

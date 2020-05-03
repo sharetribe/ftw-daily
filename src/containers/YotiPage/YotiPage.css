@@ -1,0 +1,489 @@
+@import '../../marketplace.css';
+
+.pageTitle {
+  text-align: center;
+}
+
+.staticPageWrapper {
+  width: calc(100% - 48px);
+  max-width: 1056px;
+  margin: 20px auto 90px;
+
+  @media (--viewportMedium) {
+    width: calc(100% - 72px);
+  }
+}
+
+@media (max-width: 1023px) {
+  .staticPageWrapper {
+    margin: 80px auto 90px;
+  }
+
+  .contentdown {
+    width: 100% !important;
+  }
+}
+
+.whatwedoLeft p,
+.whatwedoLeft h2,
+.whatwedoRight h2,
+.whatwedoRight p {
+  font-family: "narrow", "Times New Roman", serif;
+}
+
+.whatwedoLeft p,
+.whatwedoRight p {
+  letter-spacing: 0.7px;
+}
+
+.whatwedoRight p {
+  font-weight: bold;
+}
+
+.whatwedoLeft h2,
+.whatwedoRight h2 {
+  letter-spacing: 0.8px;
+}
+
+.joinNow {
+  background-color: #c9bd9c;
+  color: #fff;
+  padding: 0 20px;
+  border-radius: 3px;
+  float: right;
+  line-height: 36px;
+  height: 40px;
+  position: relative;
+  width: auto !important;
+  float: left !important;
+  margin: 0 !important;
+}
+
+@media (max-width: 1380px) {
+  .joinNow {
+    width: 100%;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+}
+
+.joinNow:hover {
+  color: #fff;
+  background-color: #b7a77b;
+  text-decoration: none !important;
+}
+
+.imgRotate {
+  height: 29px;
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  transform: rotate(230deg);
+}
+
+.coverImage {
+  width: 100%;
+  height: 528px;
+  border-radius: 4px;
+  object-fit: cover;
+  margin: 32px 0 40px;
+}
+
+.numbers {
+  height: 16px;
+  margin-right: 3px;
+  position: relative;
+  bottom: 2px;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-wrap: wrap;
+
+  @media (--viewportMedium) {
+    flex-wrap: nowrap;
+  }
+}
+
+.contentSide {
+  font-style: italic;
+
+  @media (--viewportMedium) {
+    width: 193px;
+    margin-right: 103px;
+    margin-top: 8px;
+  }
+}
+
+.contentMain {
+  width: 90%;
+
+  @media (--viewportMedium) {
+    max-width: 650px;
+  }
+}
+
+.subtitle {
+  @apply --marketplaceH3FontStyles;
+  margin-top: 48px;
+  margin-bottom: 24px;
+}
+
+.whatwedoBg {
+  background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url(https://i.imgur.com/AFAcGVY.jpg);
+  padding: 120px 0px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-align: center;
+  color: #fff;
+}
+
+.whatwedoTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.whatwedoTitle h2 {
+  font-size: 40px !important; 
+  padding: 0;
+  margin: 0;
+}
+
+.reveal {
+  margin: 0 20px;
+  overflow: hidden;
+}
+
+.whatwedoUl {
+  margin: 0;
+}
+
+.whatwedoUl li {
+  font-style: normal;
+  font-weight: 600;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.whatwedoWrapper{
+  width: 100%;
+  display: flex;
+}
+
+.whatwedoLeft {
+  width: 70%;
+  margin: 0;
+}
+
+.whatwedoRight {
+  width: 30%;
+  padding-left: 30px;
+}
+
+.whatwedoRight h2 {
+  margin-top: 0px !important;
+}
+
+.sectionContent {
+  margin: var(--LandingPage_sectionMarginTop) 24px 51px 24px;
+
+  @media (--viewportMedium) {
+    max-width: 100%;
+    margin: var(--LandingPage_sectionMarginTopMedium) 24px 60px 24px;
+  }
+
+  @media (--viewportLarge) {
+    max-width: 1128px;
+    padding: 0 36px 0 36px;
+    margin: 50px auto 35px auto;
+  }
+
+  @media (--viewportXLarge) {
+    max-width: 1056px;
+    padding: 0;
+  }
+}
+
+.trustFollow {
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+}
+
+.trustFollow img {
+  height: 40px;
+}
+
+.trustFb, .trustTw {
+  width: 50%;
+  float: left;
+}
+
+.followLeft {
+  width: 20%;
+}
+
+.followRight {
+  width: 80%;
+  padding-left: 30px;
+}
+
+.pawImg {
+  height: 21px;
+  position: relative;
+  bottom: 5px;
+  margin-right: 4px;
+}
+
+.whatwedoLeft li {
+  margin-bottom: 5px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.whatwedoLeft span {
+  position: relative;
+  left: 30px;
+  bottom: 2px;
+}
+
+@media (max-width: 750px) {
+  .trustTw, .trustFb {
+    width: 100% !important;
+  }
+
+  .trustFb {
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 959px) {
+  .followLeft {
+    display: none;
+  }
+
+  .followRight {
+    width: 100% !important;
+    padding-left: 0px !important;
+  }
+}
+
+@media (min-width: 500px) and (max-width: 650px) {
+  .whatwedoLeft {
+    width: 35% !important;
+  }
+
+  .whatwedoRight {
+    width: 65% !important;
+  }
+}
+
+@media (max-width: 500px) {
+  .whatwedoWrapper {
+    display: inherit !important;
+  }
+
+  .whatwedoLeft {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .whatwedoRight {
+    padding-top: 66px;
+    width: 100%;
+    padding-left: 0px !important;
+  }
+}
+
+.yotiTitle {
+    text-align: center;
+    margin-top: inherit;
+}
+
+.yotiLeft, .yotiRight {
+  width: 50%;
+  float: left;
+  text-align: center;
+}
+
+.yotiVerify {
+  width: 100%;
+}
+
+.yotiImg {
+  height: 50px;
+  border-radius: 5px;
+}
+
+.yotiworld {
+  font-size: 24px;
+}
+
+.yotiLeft, .yotiRight {
+  padding: 25px 75px;
+}
+
+.yotiUl {
+  text-align: left;
+}
+
+.yotiLi {
+  margin-bottom: 12px !important;
+}
+
+.lastP {
+  margin-bottom: 30px;
+}
+
+.yotiIcons {
+  height: 25px;
+  margin-right: 15px;
+  position: relative;
+  bottom: 3px;
+}
+
+.scanImg {
+  height: 55px;
+}
+
+.scanwith {
+  color: #41a6df;
+  position: inherit !important; 
+  left: inherit !important; 
+  bottom: inherit !important; 
+}
+
+.qrCode {
+  position: relative;
+  top: 15px;
+}
+
+.lastPP {
+  margin-bottom: 0px !important;
+}
+
+.h2FirstChild {
+  margin-top: 0px !important;
+}
+
+.astore {
+  width: 45%;
+  margin-right: 10px;
+  float: left;
+  margin-top: 15px;
+}
+
+.gstore {
+  width: 45%;
+  float: left;
+  margin-top: 15px;
+}
+
+.gstore, .astore {
+  margin-bottom: 30px;
+}
+
+.addspace {
+  margin-bottom: 20px;
+  position: relative;
+  left: 0px;
+  transition: all .2s ease;
+}
+
+.addspace:hover {
+  left: 10px;
+  cursor: pointer;
+}
+
+.addspace:hover span {
+  color: #41a6df;
+}
+
+@media (max-width: 1024px) {
+  .yotiLeft, .yotiRight {
+    width: 100% !important;
+    float: inherit;
+    padding: 30px 20px 5px 20px !important;
+  }
+
+  .yotiRight {
+    padding: 30px 20px 40px 20px !important;
+  }
+
+  .qrcode {
+    bottom: 0px !important;
+  }
+}
+
+.nameYoti, .yotiImg {
+  z-index: 9999 !important;
+  position: relative;
+}
+
+.contentdown {
+  margin-top: -15px !important;
+  width: 70%;
+}
+
+.morespace {
+  margin-bottom: 90px;
+}
+
+@media (max-width: 600px) {
+.yotiTitle {
+  margin-bottom: 50px;
+  margin-top: -20px;
+  }   
+}
+
+.arrowImg {
+  background: url('./arrowr.png');
+  height: 16px;
+  width: 16px;
+  position: absolute;
+  left: 0;
+  top: 9px;
+}
+
+.addspace:hover .arrowImg {
+  background: url('./arrowrr.png');
+}
+
+.arrowTxt {
+  padding-left: 20px;
+}
+
+.aText {
+  color: #212529;
+}
+
+.aText:hover {
+  color: #212529;
+  text-decoration: none;
+}
+
+.idn {
+  background-image: linear-gradient(45deg,rgba(0,0,0,.2),rgba(0,0,0,.6)),url('banner.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 160px 20px;
+}
+
+.idn h1 {
+  color: #fff;
+  margin: 0;
+}
+
+@media (max-width: 500px) {
+  .idn h1 {
+    line-height: 50px;
+    font-size: 2rem;
+  }
+}

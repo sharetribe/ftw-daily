@@ -1,0 +1,47 @@
+.yotiVerified a:hover {
+  color: #41a6df !important;
+}
+
+.yotiVerified img {
+  width: 28px;
+}
+
+.verified {
+  margin-left: 1px;
+  bottom: 0px !important;
+}
+
+.yotiVerified img, .verified {
+  position: relative;
+  bottom: 1.5px;
+}
+
+.customTip {
+ color: #fff !important;
+ background-color: #41a6df !important;
+ opacity: 0.99 !important;
+ margin-top: -12px !important;
+ padding: 12px 21px !important;
+}
+
+.customTip:after {
+ border-top-color: #41a6df !important;
+ border-top-width: 7px !important;
+}
+
+.separatorVerified {
+ margin: 0 6px;
+}
+
+.verifiedImg {
+  width: 13px !important;
+  margin-left: 3px;
+  position: relative !important;
+  bottom: 1px !important;
+}
+
+.removelink {
+	text-decoration: none !important;
+	color: #4a4a4a;
+}
+

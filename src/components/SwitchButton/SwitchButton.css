@@ -1,0 +1,18 @@
+.customTip {
+ color: #fff !important;
+ background-color: #41a6df !important;
+ opacity: 0.99 !important;
+}
+
+.customTip span {
+ font-size: 16px !important;
+}
+
+.customTip:after {
+ border-left-color: #41a6df !important;
+ border-left-width: 7px !important;
+}
+
+.disable {
+	display: none;
+}

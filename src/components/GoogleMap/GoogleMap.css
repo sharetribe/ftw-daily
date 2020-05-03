@@ -1,0 +1,12 @@
+.googleMap {
+ height: 100% !important;
+ width: 100% !important;
+ position: relative !important;
+}
+
+@media (max-width: 520px) {
+.googleMap {
+ position: absolute !important;
+ height: 400px !important;
+}}
+
