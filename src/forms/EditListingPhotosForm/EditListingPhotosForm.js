@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { array, bool, func, shape, string } from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -209,6 +209,7 @@ export class EditListingPhotosFormComponent extends Component {
               ) : null}
 
               {!this.state.redirectPage ? (
+                <Fragment>
                 <AddImages
                   className={css.imagesField}
                   images={images}
@@ -266,7 +267,18 @@ export class EditListingPhotosFormComponent extends Component {
                     type="hidden"
                     validate={composeValidators(nonEmptyArray(imageRequiredMessage))}
                   />
+
                 </AddImages>
+                <FieldTextInput
+                  id="title"
+                  name="title"
+                  className={css.title}
+                  type="text"
+                  label={"Tu video"}
+                  placeholder={"Agrega tu url"}
+                  message="esto esa siendo llamado del archivo de fotos"
+                />
+              </Fragment>
               ) : null}
               {uploadImageFailed}
 
@@ -276,25 +288,7 @@ export class EditListingPhotosFormComponent extends Component {
 
               {publishListingFailed}
               {showListingFailed}
-<br />
-<h1>Tu Video</h1>
-<br />
 
-
-        
-          <FieldTextInput
-            id="title"
-            name="title"
-            className={css.title}
-            type="text"
-            label={titleMessage}
-            placeholder={titlePlaceholderMessage}
-            message="esto esa siendo llamado del archivo de fotos"
-          />
-
-         
-    
-<br />
               <Button
                 className={css.submitButton}
                 type="submit"

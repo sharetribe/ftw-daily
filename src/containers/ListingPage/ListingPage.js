@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { array, arrayOf, bool, func, shape, string, oneOf } from 'prop-types';
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { compose } from 'redux';
+import ReactPlayer from "react-player"
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import config from '../../config';
@@ -650,6 +651,11 @@ export class ListingPageComponent extends Component {
                           Are you the Business Owner? Click the button and Claim the Listing!
                         </span>
                       </ReactTooltip>
+
+                      <ReactPlayer
+                        width="450px"
+                        url="https://vimeo.com/414026696"
+                      />
 
                       {currentListing.attributes.publicData.requiredDates ? (
                         <div className={css.required}>

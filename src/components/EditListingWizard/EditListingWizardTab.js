@@ -47,6 +47,7 @@ export const SUPPORTED_TABS = [
   CAPACITY,
   PHOTOS,
   POLICY,
+  VIDEO
 ];
 
 const pathParamsToNextTab = (params, tab, marketplaceTabs) => {
@@ -225,22 +226,20 @@ const EditListingWizardTab = props => {
         />
       );
     }
-
-case CAPACITY: {
-  const submitButtonTranslationKey = isNewListingFlow
-    ? 'EditListingWizard.saveNewCapacity'
-    : 'EditListingWizard.saveEditCapacity';
-  return (
-    <EditListingCapacityPanel
-      {...panelProps(CAPACITY)}
-      submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
-      onSubmit={values => {
-        onCompleteEditListingWizardTab(tab, values);
-      }}
-    />
-  );
-}
-
+    case CAPACITY: {
+      const submitButtonTranslationKey = isNewListingFlow
+        ? 'EditListingWizard.saveNewCapacity'
+        : 'EditListingWizard.saveEditCapacity';
+      return (
+        <EditListingCapacityPanel
+          {...panelProps(CAPACITY)}
+          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          onSubmit={values => {
+            onCompleteEditListingWizardTab(tab, values);
+          }}
+        />
+      );
+    }
     case POLICY: {
       submitButtonTranslationKey = isNewListingFlow
         ? 'EditListingWizard.saveNewPolicies'
