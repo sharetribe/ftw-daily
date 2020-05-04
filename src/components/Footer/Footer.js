@@ -271,6 +271,11 @@ const Footer = props => {
                   <a href="https://shop.spreadshirt.ch/HorseDeal24" target="_blank" className={css.link}>
                    Merchandise Store</a>
                 </div>
+                <div className={css.verticalContainerContent}>
+                <Link to="/mobile" className={css.link}>
+                    <img src='/static/icons/google-play-and-app-store-logo.png' className={css.appPlayStoreIcon} alt='partners starhorse' />
+                  </Link>
+                </div>
               </div>
             </div>
             <div className={css.footerContainerHorizontal}>
