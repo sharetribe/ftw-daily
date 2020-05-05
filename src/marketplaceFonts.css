@@ -64,7 +64,7 @@
 
   --marketplaceHeroTitleFontStyles: {
     font-weight: var(--fontWeightBold);
-    font-size: 10px;
+    font-size: 36px;
     line-height: 42px;
     letter-spacing: -1px;
     /* margin-top + n * line-height + margin-bottom => x * 6px */
