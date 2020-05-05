@@ -79,15 +79,15 @@ const SliderHero = () => (
       <div className={css.carouselCaption}>
         <StyleRoot>
           <div style={styles.fadeInUp}>
-            <h1 style={styles.fadeInUp}>Pets stay in their own home</h1>
-            <p>when you travel</p>
+            <h1 style={styles.fadeInUp}>Juntos por la Reactivación del Perú</h1>
+            
 
             <div className={css.submitContainer}>
-              <a href="s?pub_user_type=1">Find a Pet Sitter</a>
-              <a href="s?pub_user_type=0">Find Homes to Sit</a>
-              <a href="s?pub_user_type=2">Find a Pet Service</a>
+              <a href="s?pub_user_type=1">Ver productos y servicios</a>
+              <a href="s?pub_user_type=0">Anuncia</a>
+              <a href="s?pub_user_type=2">Registrate</a>
               <ExternalLink href="https://trustmypetsitter.seedrs.com/">
-                We Are Crowdfunding on Seedrs
+                Contacto
               </ExternalLink>
             </div>
           </div>
@@ -103,14 +103,14 @@ const SliderHero = () => (
       <div className={css.carouselCaption}>
         <StyleRoot>
           <div style={styles.fadeInUp}>
-            <h1 style={styles.fadeInUp}>Travel the world looking after pets</h1>
+            <h1 style={styles.fadeInUp}>Juntos por la Reactivación del Perú</h1>
 
             <div className={css.submitContainer}>
-              <a href="s?pub_user_type=1">Find a Pet Sitter</a>
-              <a href="s?pub_user_type=0">Find Homes to Sit</a>
-              <a href="s?pub_user_type=2">Find a Pet Service</a>
+              <a href="s?pub_user_type=1">Ver productos y servicios</a>
+              <a href="s?pub_user_type=0">Anuncia</a>
+              <a href="s?pub_user_type=2">Registrate</a>
               <ExternalLink href="https://trustmypetsitter.seedrs.com/">
-                We Are Crowdfunding on Seedrs
+                Contacto
               </ExternalLink>
             </div>
           </div>
@@ -126,14 +126,14 @@ const SliderHero = () => (
       <div className={css.carouselCaption}>
         <StyleRoot>
           <div style={styles.fadeInUp}>
-            <h1 style={styles.fadeInUp}>Stay in wonderful locations</h1>
+            <h1 style={styles.fadeInUp}>Juntos por la Reactivación del Perú</h1>
 
             <div className={css.submitContainer}>
-              <a href="s?pub_user_type=1">Find a Pet Sitter</a>
-              <a href="s?pub_user_type=0">Find Homes to Sit</a>
-              <a href="s?pub_user_type=2">Find a Pet Service</a>
+              <a href="s?pub_user_type=1">Ver productos y servicios</a>
+              <a href="s?pub_user_type=0">Anuncia</a>
+              <a href="s?pub_user_type=2">Registrate</a>
               <ExternalLink href="https://trustmypetsitter.seedrs.com/">
-                We Are Crowdfunding on Seedrs
+                Contacto
               </ExternalLink>
             </div>
           </div>

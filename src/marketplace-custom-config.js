@@ -82,7 +82,7 @@ export const amenities = [
   },
   {
     key: 'cat',
-    label: 'Cats',
+    label: 'Mascotas',
     weight: [
       {
         key: 'giant',
@@ -105,7 +105,7 @@ export const amenities = [
 
   {
     key: 'rabbit',
-    label: 'Rabbits',
+    label: 'Jardinería y jardín',
     weight: [
       {
         key: 'giant',
@@ -128,7 +128,7 @@ export const amenities = [
 
   {
     key: 'bird',
-    label: 'Pet Birds',
+    label: 'Decoración',
     weight: [
       {
         key: 'giant',
@@ -150,7 +150,7 @@ export const amenities = [
   },
   {
     key: 'fish',
-    label: 'Aquarium Fish',
+    label: 'Belleza y Bienestar',
     weight: [
       {
         key: 'giant',
@@ -172,7 +172,7 @@ export const amenities = [
   },
   {
     key: 'horse',
-    label: 'Horses',
+    label: 'Accesorios',
     weight: [
       {
         key: 'giant',
@@ -194,7 +194,7 @@ export const amenities = [
   },
   {
     key: 'other',
-    label: 'Other (Please state)',
+    label: 'Otro',
     weight: [
       {
         key: 'giant',
@@ -217,9 +217,10 @@ export const amenities = [
 ];
 
 export const categories = [
-  { key: '0', label: 'Pet Owners' },
-  { key: '1', label: 'Pet Sitter' },
-  { key: '2', label: 'Pet Services' },
+  { key: '0', label: 'Productos' },
+  
+  { key: '2', label: 'Servicios' },
+  { key: '1', label: 'Otros' },
 ];
 
 export const equipments = [

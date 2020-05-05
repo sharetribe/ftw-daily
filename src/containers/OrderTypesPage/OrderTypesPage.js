@@ -40,35 +40,37 @@ const OrderTypesPage = props => {
           <div className={css.whatwedoBg}>
 
             <div className={css.whatwedoTitle}>
-              <div className={css.headTitle}>Choose your <span className={css.banner}> LISTING </span> Category</div>
+              <div className={css.headTitle}>Elige tu Categoria de <span className={css.banner}> LISTING </span> </div>
             </div>
 
 
             <div className={css.whatwedoTitle}>
-              <img src={yoti} className={css.badgeImgs} /> <span className={css.badgeTextFirst}>Digital Identity</span>
-              <img src={secured} className={css.badgeImgs} /> <span className={css.badgeText}>Verified Listings</span>
+              <img src={yoti} className={css.badgeImgs} /> <span className={css.badgeTextFirst}>Identificación Digital</span>
+              <img src={secured} className={css.badgeImgs} /> <span className={css.badgeText}>Listings Verificados</span>
             </div>
           </div>
 
           <div className={css.staticPageWrapper}>
             <div className={css.sectionContent}>
-              <h2 >Select category:</h2>
+              <h2 >Selecciona una categoria:</h2>
   
               <div>
                 <div name="category">
                   <NamedLink className={css.choose} name="EditListingPage" params={{ slug: draftSlug, id: draftId, type: type, tab: 'description_owner' }}>  
                     <SecondaryButton className={cssButton.orderTypeButton_first}> 
-                        Pet Owner
+                       Productos 
                     </SecondaryButton>
                   </NamedLink>
-                  <NamedLink className={css.choose} name="EditListingPage" params={{ slug: draftSlug, id: draftId, type: type, tab: 'description_sitter' }}>  
-                    <SecondaryButton className={cssButton.orderTypeButton}> 
-                        Pet Sitter
-                    </SecondaryButton>
-                  </NamedLink>
+                  
                   <NamedLink className={css.choose} name="EditListingPage" params={{ slug: draftSlug, id: draftId, type: type, tab: 'description_service' }}>  
                     <SecondaryButton className={cssButton.orderTypeButton_last}> 
-                        Pet Service
+                        Servicios
+                    </SecondaryButton>
+                  </NamedLink>
+
+                  <NamedLink className={css.choose} name="EditListingPage" params={{ slug: draftSlug, id: draftId, type: type, tab: 'description_sitter' }}>  
+                    <SecondaryButton className={cssButton.orderTypeButton}> 
+                       Otros
                     </SecondaryButton>
                   </NamedLink>
                 </div>

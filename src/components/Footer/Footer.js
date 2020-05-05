@@ -126,19 +126,20 @@ const Footer = props => {
                     ¡Anuncia ya!
                   </NamedLink>
                 </li>
-                <li className={css.listItem}>
+               {/* <li className={css.listItem}>
                   <a href="https://blog.trustmypetsitter.com" className={css.link}>
                     Blog
                   </a>
-                </li>
+                </li>*/}
                 <li className={css.listItem}>
                   <NamedLink name="AboutUsPage" className={css.link}>
-                    About
+                    Nosotros
                   </NamedLink>
                 </li>
                 <li className={css.listItem}>
                   <NamedLink name="PrivacyPolicyPage" className={css.link}>
-                    Privacy & Terms
+                    
+Términos y privacidad
                   </NamedLink>
                 </li>
                 <li className={css.listItem}>
@@ -150,20 +151,24 @@ const Footer = props => {
             </div>
             <div className={css.searches}>
               <ul className={css.list}>
-              <li className={css.listItem}>
-                  <a
-                    href="https://help.trustmypetsitter.com/en/"
+             <li className={css.listItem}>
+                  <NamedLink
+                    name="SearchPage"
+                    to={{
+                      search:
+                        '?address=London%2C%20Greater%20London%2C%20England%2C%20United%20Kingdom&bounds=51.669993%2C0.152641%2C51.384598%2C-0.35167',
+                    }}
                     className={css.link}
                   >
-                    Help Center
-                  </a>
+                    <FormattedMessage id="Footer.searchLondon" />
+                  </NamedLink>
                 </li>
                 <li className={css.listItem}>
                   <NamedLink
                     name="MembershipPage"
                     className={css.link}
                   >
-                    Membership
+                    Iquitos
                   </NamedLink>
                 </li>
                 <li className={css.listItem}>
@@ -171,7 +176,7 @@ const Footer = props => {
                     name="PawSquadPage"
                     className={css.link}
                   >
-                    Virtual Vet
+                   Ica
                   </NamedLink>
                 </li>
                  <li className={css.listItem}>
@@ -179,7 +184,7 @@ const Footer = props => {
                     name="AffiliatePage"
                     className={css.link}
                   >
-                    Affiliate
+                    Ayacucho
                   </NamedLink>
                 </li>
                 <li className={css.listItem}>
@@ -187,7 +192,7 @@ const Footer = props => {
                     name="YotiPage"
                     className={css.link}
                   >
-                    ID Verification
+                    Cusco
                   </NamedLink>
                 </li>
               </ul>

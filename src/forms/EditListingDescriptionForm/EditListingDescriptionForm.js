@@ -228,7 +228,7 @@ const EditListingDescriptionFormComponent = props => (
             name="video"
             className={css.title}
             type="text"
-            label="Tu video"
+            label="tu video"
             placeholder="Agrega tu url"
             message="esto esa siendo llamado del archivo de fotos"
             validate={composeValidators(required(videoRequiredMessage))}

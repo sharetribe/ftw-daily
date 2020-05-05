@@ -99,15 +99,15 @@ export const LandingPageComponent = props => {
           <div className={css.featuredIn}>
               <div className={css.featuredSection}>
               <div className={css.featuredMobile} id="fM">
-                <h1>Featured In</h1>
+                <h1>PRESENTADO EN</h1>
                 <FeaturedIn />
               </div>
                 <div className={css.featuredWrapper}>
-                  <div className={css.featuredItem}>FEATURED IN</div>
+                  <div className={css.featuredItem}>PRESENTADO EN</div>
                   <a className={css.featuredItem}>
-                    <img src={featured1} />
+                  <img src="https://redmepenaccion.org/wp-content/uploads/2020/05/logo-redmep.png" />
                   </a>
-                  <a className={css.featuredItem}>
+                {/*  <a className={css.featuredItem}>
                     <img src={featured2} />
                   </a>
                   <a className={css.featuredItem}>
@@ -115,7 +115,7 @@ export const LandingPageComponent = props => {
                   </a>
                   <a className={css.featuredItem}>
                     <img src={featured4} />
-                  </a>
+                  </a>*/}
                 </div>
               </div>
             </div>
@@ -187,7 +187,7 @@ export const LandingPageComponent = props => {
               </div>
             </li>
 
-            <li className={css.sections}>
+           {/* <li className={css.sections}>
               <div className={css.sectionHomestay}>
                 <div className={css.newstandardSection}>
                   <div className={css.carefullyselectedCol}>
@@ -215,9 +215,9 @@ export const LandingPageComponent = props => {
                   </div>
                 </div>
               </div>
-            </li>
+            </li>*/}
 
-            <li className={css.sections}>
+          {/*  <li className={css.sections}>
               <div className={css.sectionHomestay}>
                 <div className={css.newstandardSection}>
                   <h1 className={css.vettitle}>
@@ -361,7 +361,7 @@ export const LandingPageComponent = props => {
 
             <li className={css.section}>
             
-            </li>
+            </li>*/}
 
           </ul>
         </LayoutWrapperMain>
