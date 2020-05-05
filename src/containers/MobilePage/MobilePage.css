@@ -1,0 +1,17 @@
+.pageTitle {
+  @media (--viewportSmall) {
+    text-align: center;
+  }
+}
+
+
+.staticPageWrapper {
+  width: calc(100% - 48px);
+  max-width: 1056px;
+  margin: 24px auto;
+
+  @media (--viewportMedium) {
+    width: calc(100% - 72px);
+    margin: 72px auto;
+  }
+}
