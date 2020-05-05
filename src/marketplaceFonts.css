@@ -72,8 +72,8 @@
     margin-bottom: 20px;
 
     @media (--viewportMedium) {
-      font-size:52px;
-      line-height: 52px;
+      font-size: 10px;
+      line-height: 72px;
       letter-spacing: -1.5px;
       /* margin-top + n * line-height + margin-bottom => x * 8px */
       margin-top: 25px;
