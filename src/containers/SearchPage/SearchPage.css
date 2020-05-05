@@ -88,7 +88,8 @@
 
 .searchFiltersMobile {
   padding: 16px 24px;
-
+  flex-wrap: wrap;
+  
   @media (--viewportMedium) {
     display: none;
   }
