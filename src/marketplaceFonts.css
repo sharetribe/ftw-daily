@@ -55,7 +55,7 @@
       font-size: 18px;
       line-height: 24px;
       /* margin-top + n * line-height + margin-bottom => x * 8px */
-      margin-top: 16px;
+      margin-top: 10px;
       margin-bottom: 16px;
     }
   }
@@ -72,12 +72,12 @@
     margin-bottom: 20px;
 
     @media (--viewportMedium) {
-      font-size:72px;
-      line-height: 72px;
+      font-size:52px;
+      line-height: 52px;
       letter-spacing: -1.5px;
       /* margin-top + n * line-height + margin-bottom => x * 8px */
       margin-top: 25px;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
 
     @media (min-width: 1681px) {
