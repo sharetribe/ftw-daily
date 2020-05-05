@@ -14,7 +14,9 @@ import {
   PriceFilter,
   SelectMultipleFilter,
   RangeFilter,
+  SelectSingleFilter
 } from '../../components';
+import SortingIcon from '../SearchFilters/SortingIcon';
 import { propTypes } from '../../util/types';
 import css from './SearchFiltersMobile.css';
 
@@ -139,6 +141,8 @@ class SearchFiltersMobileComponent extends Component {
 
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   }
+
+  handleSorting = (urlParam, option) => this.props.history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, { ...this.props.urlQueryParams, [urlParam]: option } ));
 
   // Reset all filter query parameters
   resetAll(e) {
@@ -364,6 +368,44 @@ class SearchFiltersMobileComponent extends Component {
       />
     ) : null;
 
+    const sortingParams = [
+      {
+        label: 'Neueste',
+        key: 'createdAt',
+      },
+      {
+        label: 'Älteste',
+        key: '-createdAt',
+      },
+      {
+        label: 'Geringster Preis',
+        key: '-price',
+      },
+      {
+        label: 'Höchster Preis',
+        key: 'price',
+      },
+  ];
+
+  const sortingPanelLabel = (this.props.urlQueryParams && this.props.urlQueryParams.sort)
+   ? sortingParams.filter(s => s.key === this.props.urlQueryParams.sort)[0].label
+    : intl.formatMessage({ id: 'SearchFilters.sortingPanelLabel', })
+
+  const sortingElement = (
+    <SelectSingleFilter
+      id='SearchFilters.sortingElement'
+      name='sortingPanel'
+      urlParam='sort'
+      label={sortingPanelLabel}
+      popupLabelCustomStyle={{ padding: '7px 15px 7px 16px', height: '35px' }}
+      elementBeforeLabel={<SortingIcon />}
+      options={sortingParams}
+      initialValue={null}
+      showAsPopup={true}
+      onSelect={this.handleSorting}
+    />
+  );
+
     return (
       <div className={classes}>
         <div className={css.searchResultSummary}>
@@ -372,6 +414,9 @@ class SearchFiltersMobileComponent extends Component {
           {searchInProgress ? loadingResults : null}
         </div>
         <div className={css.buttons}>
+          <div className={css.sortingPanel}>
+            {sortingElement}
+          </div>
           <Button rootClassName={filtersButtonClasses} onClick={this.openFilters}>
             <FormattedMessage id="SearchFilters.filtersButtonLabel" className={css.mapIconText} />
           </Button>
