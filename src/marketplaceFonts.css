@@ -77,7 +77,7 @@
       letter-spacing: -1.5px;
       /* margin-top + n * line-height + margin-bottom => x * 8px */
       margin-top: 25px;
-      margin-bottom: 31px;
+      margin-bottom: 15px;
     }
 
     @media (min-width: 1681px) {
