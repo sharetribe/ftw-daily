@@ -86,10 +86,36 @@ const AboutUsPage = () => {
               </p>
 
       <div className={css.strike}>
-      <h1 className={css.pressTitle2}>How it Works</h1>
+      <h1 className={css.pressTitle2}>Cómo funciona?</h1>
       <div className={css.pressFlex}>
 
-         <div className={css.divideo}>
+    
+
+ <div className={css.videoSide}>
+       <Player
+      playsInline
+      poster={poster}
+      src={petsitter}>
+      <BigPlayButton position="center" />
+      </Player>
+        </div>
+
+        <div className={css.videoSide}>
+       <Player
+      playsInline
+      poster={petowner}
+      src={video}>
+      <BigPlayButton position="center" />
+      </Player>
+        </div>        
+
+     
+
+
+
+
+
+    {/*     <div className={css.divideo}>
       <ReactPlayer width="450px" 
         url="https://vimeo.com/414026696"/>
     </div>
@@ -98,7 +124,7 @@ const AboutUsPage = () => {
       <ReactPlayer width="450px" 
         url="https://vimeo.com/414026696"
       />
-    </div>     
+    </div>   */}  
 
       </div>
 
