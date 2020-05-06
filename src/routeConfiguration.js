@@ -29,7 +29,6 @@ import {
   TermsOfServicePage,
   TransactionPage,
   ImpressumPage,
-  MobilePage,
 } from './containers';
 
 // routeConfiguration needs to initialize containers first
@@ -357,11 +356,6 @@ const routeConfiguration = () => {
       authPage: 'LoginPage',
       component: props => <EmailVerificationPage {...props} />,
       loadData: EmailVerificationPage.loadData,
-    },
-    {
-      path: '/mobile',
-      name: 'MobilePage',
-      component: MobilePage,
     },
   ];
 };

@@ -272,9 +272,9 @@ const Footer = props => {
                    Merchandise Store</a>
                 </div>
                 <div className={css.verticalContainerContent}>
-                <Link to="/mobile" className={css.link}>
+                  <a href="/mobile" className={css.link}>
                     <img src='/static/icons/google-play-and-app-store-logo.png' className={css.appPlayStoreIcon} alt='partners starhorse' />
-                  </Link>
+                  </a>
                 </div>
               </div>
             </div>
