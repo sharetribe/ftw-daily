@@ -657,6 +657,15 @@ export class ListingPageComponent extends Component {
                         url="https://vimeo.com/414026696"
                       />
 
+                         <div className={css.videoSide}>
+       <Player
+      playsInline
+      poster={petowner}
+      src={video}>
+      <BigPlayButton position="center" />
+      </Player>
+        </div>   
+
                       {currentListing.attributes.publicData.requiredDates ? (
                         <div className={css.required}>
                           <div className={css.bookingHeading}>
