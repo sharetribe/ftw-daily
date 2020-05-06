@@ -1,9 +1,0 @@
-User-Agent: *
-Disallow: /tilda/form*
-Disallow: /tilda/rec*
-Disallow: /tilda/click*
-Disallow: /tilda/scroll*
-Disallow: /tilda/popup*
-Disallow:
-Sitemap: https://www.internetstar.ch/sitemap.xml
-Host: https://www.internetstar.ch
