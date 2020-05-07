@@ -7,7 +7,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Player, BigPlayButton } from 'video-react';
 import video from './tmps.mp4';
-
+import video2 from './bake.m4v';
+import video3 from './reactivate.m4v';
 import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
 import { LISTING_STATE_PENDING_APPROVAL, LISTING_STATE_CLOSED, propTypes } from '../../util/types';
@@ -655,12 +656,11 @@ export class ListingPageComponent extends Component {
                         </span>
                       </ReactTooltip>
 
-                      <ReactPlayer
-                        width="450px"
-                        url="https://vimeo.com/414026696"
-                      />
 
-                         <div className={css.videoSide}>
+
+
+
+ <div className={css.videoSide}>
        <Player
       playsInline
  
@@ -668,6 +668,34 @@ export class ListingPageComponent extends Component {
       <BigPlayButton position="center" />
       </Player>
         </div>   
+<br />
+ <div className={css.videoSide}>
+       <Player
+      playsInline
+ 
+      src={video2}>
+      <BigPlayButton position="center" />
+      </Player>
+        </div>   
+
+
+<br />
+ <div className={css.videoSide}>
+       <Player
+      playsInline
+ 
+      src={video3}>
+      <BigPlayButton position="center" />
+      </Player>
+        </div>   
+
+
+                   <ReactPlayer
+                        width="450px"
+                        url="https://vimeo.com/414026696"
+                      />
+
+                        
 
                       {currentListing.attributes.publicData.requiredDates ? (
                         <div className={css.required}>

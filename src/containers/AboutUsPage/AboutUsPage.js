@@ -19,6 +19,7 @@ import shamus from './team/shamus.jpg';
 import aleksa from './team/aleksa.jpg';
 import poster from './tmpsposter.png';
 import video from './tmps.mp4';
+import video2 from './bake.m4v';
 import petsitter from './petsitter.mp4';
 import phone from './phone.png';
 import follow from './follow.png';
@@ -94,8 +95,8 @@ const AboutUsPage = () => {
  <div className={css.videoSide}>
        <Player
       playsInline
-      poster={poster}
-      src={petsitter}>
+     
+      src={video}>
       <BigPlayButton position="center" />
       </Player>
         </div>
@@ -103,8 +104,8 @@ const AboutUsPage = () => {
         <div className={css.videoSide}>
        <Player
       playsInline
-      poster={petowner}
-      src={video}>
+      
+      src={video2}>
       <BigPlayButton position="center" />
       </Player>
         </div>        
@@ -128,7 +129,7 @@ const AboutUsPage = () => {
 
       </div>
 
-      <div className={css.linksFlex}>
+     {/* <div className={css.linksFlex}>
 
         <div className={css.linkItem}>
         <div className={css.logo}>
@@ -169,7 +170,7 @@ const AboutUsPage = () => {
         Glasgow-based Trust My Pet Sitter goes for global expansion
         <img className={css.arr} src={arrow} />
         </ExternalLink>
-      </p>
+      </p>*/}
      </div>
 
       </div>
