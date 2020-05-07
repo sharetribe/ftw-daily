@@ -88,7 +88,7 @@
   top:-22px; /** (margin between circle (20px * -1)) - (border-width (2px * -1)) = -22px */  
 }
 .jNow {
-  color: #41a6df !important;
+  color: #575757 !important;
   text-align: center;
 }
 .affiliateSecond p {
@@ -146,7 +146,7 @@
 }
 
 .affiliateLast {
-  background-image: linear-gradient(to bottom, #41a6df, #8cb9e9, #bdcdf1, #e2e5f7, #ffffff);
+  background-image: linear-gradient(to bottom, #575757, #8cb9e9, #bdcdf1, #e2e5f7, #ffffff);
   text-align: center;
 }
 
@@ -156,7 +156,7 @@
 
 .jNow a {
   text-decoration: none !important;
-  color: #41a6df !important;
+  color: #575757 !important;
 }
 
 .affiliateLast h1 {
@@ -188,7 +188,7 @@
 }
 
 .affiliateSecond {
-  background: #c9bd9c;
+  background: #5314a2;
 }
 
 .affiliateWrapper h1 {
@@ -499,7 +499,7 @@
 
 .partnersItem:hover .learnMore {
   left: 10px;
-  color: #41a6df !important;
+  color: #575757 !important;
 }
 
 @media (max-width: 970px) {

@@ -36,7 +36,7 @@
 }
 
 .goBtn:hover {
-  color: #41a6df;
+  color: #575757;
 }
 
 .HeroPick p {
@@ -59,7 +59,7 @@
 
 .HeroPick:hover p,
 .HeroPickActive p {
-  color: #41a6df;
+  color: #575757;
 }
 
 .HeroPick:hover,

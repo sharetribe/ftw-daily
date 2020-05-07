@@ -191,7 +191,7 @@ const TermsOfService = props => {
         <li className={css.termsli}>The responses described in this clause 10.3 are not limited, and we may take any other action we reasonably deem appropriate.</li>
         <li className={css.termsli}>Notice and takedown policy.</li>
         <li className={css.termsli}>Any person may contact us by sending us an "Infringement Notice" if any content available through our Service infringes their rights or fails to comply with our Rules of Acceptable Use. The Infringement Notice should be sent by email to <span className={css.datecolor}>team@trustmypetsitter.com</span>. Please provide the information described below in the Infringement Notice.</li>
-        <li className={css.termsli}>If you are contacting us please send name and contact details; a statement explaining in enough detail why you consider that the content available through our Service infringes your rights or fails to comply with our Rules of Acceptable Use; a link to or such other means of identifying the problematic content.</li>
+        <li className={css.termsli}>If you are contacting us please send name and Detalles de Contacto; a statement explaining in enough detail why you consider that the content available through our Service infringes your rights or fails to comply with our Rules of Acceptable Use; a link to or such other means of identifying the problematic content.</li>
       </ul>
 
       <h2>Pet Owner and Pet Sitter obligations</h2>
@@ -446,7 +446,7 @@ const TermsOfService = props => {
       <strong>In order to qualify for Veterinary Reimbursement, you must comply with all obligations set out in these Terms of Service and in addition:</strong>
 
       <p>
-      35. we must be informed us of the incident within 24 hours of it occurring or within 24 hours of returning to your home and pet after care from the Pet Sitter; and
+      35. we must be informed us of the incident within 24 hours of it occurring or within 24 hours of returning to Tu Negocio and pet after care from the Pet Sitter; and
       </p>
 
       <p>

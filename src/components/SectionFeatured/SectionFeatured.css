@@ -130,7 +130,7 @@
 }
 
 .checkIcon {
-  fill: #41a6df !important;
+  fill: #575757 !important;
 }
 
 .nameYoti {
@@ -184,7 +184,7 @@
 }
 
 .categoryBadge {
-    background-color: #41a6df;
+    background-color: #575757;
     float: left;
     position: absolute;
     transform: rotate(45deg);
@@ -202,13 +202,13 @@
 
 .customTip {
  color: #fff !important;
- background-color: #41a6df !important;
+ background-color: #575757 !important;
  opacity: 0.99 !important;
  margin-top: -12px !important;
 }
 
 .customTip:after {
- border-top-color: #41a6df !important;
+ border-top-color: #575757 !important;
  border-top-width: 7px !important;
 }
 

@@ -13,8 +13,8 @@
       cursor: pointer;
 
       /* Same as active */
-      background-color: #c9bd9c;
-      border-color: #c9bd9c;
+      background-color: #5314a2;
+      border-color: #5314a2;
       color: var(--matterColorLight);
       box-shadow: var(--boxShadowPopup);
     }
@@ -58,8 +58,8 @@
 
 .priceLabelActive {
   /* Same as hover */
-  background-color: #c9bd9c;
-  border-color: #c9bd9c;
+  background-color: #5314a2;
+  border-color: #5314a2;
   color: var(--matterColorLight);
   box-shadow: var(--boxShadowPopup);
 }
@@ -102,8 +102,8 @@
 
 .caretActive {
   /* Same as hover */
-  background-color: #c9bd9c;
-  border-color: #c9bd9c;
+  background-color: #5314a2;
+  border-color: #5314a2;
 }
 
 .paw {

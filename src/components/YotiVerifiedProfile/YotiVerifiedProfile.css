@@ -1,5 +1,5 @@
 .yotiVerified a:hover {
-  color: #41a6df !important;
+  color: #575757 !important;
 }
 
 .yotiVerified {
@@ -23,7 +23,7 @@
 
 .customTip {
   color: #fff !important;
-  background-color: #41a6df !important;
+  background-color: #575757 !important;
   opacity: .99 !important;
   margin-top: -10px !important;
   padding: 10px !important;
@@ -38,7 +38,7 @@
 }
 
 .customTip:after {
- border-top-color: #41a6df !important;
+ border-top-color: #575757 !important;
  border-top-width: 7px !important;
 }
 
@@ -55,5 +55,5 @@
 }
 
 .removeLink:hover {
-  color: #41a6df !important;
+  color: #575757 !important;
 }

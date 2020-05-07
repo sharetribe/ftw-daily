@@ -68,7 +68,7 @@ Your Listings
 Managing your Profile
 </h2>
 <p>In order to manage your account, click the icon with your photo on the upper right hand side of the navigation bar.</p>
-<p>Manage your Contact Details by editing your email address and phone number. Both details are covered by our Privacy Policy and only used by Trust My Pet Sitter staff when we need to contact you about your account. </p>
+<p>Manage your Detalles de Contacto by editing your email address and phone number. Both details are covered by our Privacy Policy and only used by Trust My Pet Sitter staff when we need to contact you about your account. </p>
 <p>Edit your Profile Bio – this is where you get to introduce yourself and discuss your motivations.</p>
 <p>For Pet Sitters – you can select the countries where you would like to be considered for pet sitting roles.</p>
 </div>,

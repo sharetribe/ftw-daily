@@ -102,12 +102,12 @@ export const LandingPageComponent = props => {
                 <h1>PRESENTADO EN</h1>
                 <FeaturedIn />
               </div>
-                <div className={css.featuredWrapper}>
-                  <div className={css.featuredItem}>PRESENTADO EN</div>
+                 <div className={css.featuredWrapper}>
+                  <div className={css.featuredItem}>FEATURED IN</div>
                   <a className={css.featuredItem}>
-                  <img src="https://redmepenaccion.org/wp-content/uploads/2020/05/logo-redmep.png" />
+                    <img src={featured1} />
                   </a>
-                {/*  <a className={css.featuredItem}>
+                  <a className={css.featuredItem}>
                     <img src={featured2} />
                   </a>
                   <a className={css.featuredItem}>
@@ -115,7 +115,7 @@ export const LandingPageComponent = props => {
                   </a>
                   <a className={css.featuredItem}>
                     <img src={featured4} />
-                  </a>*/}
+                  </a>
                 </div>
               </div>
             </div>
@@ -335,7 +335,7 @@ export const LandingPageComponent = props => {
                       </div>
                       <div className={css.ourPartnersItem2}>
                         <h2>Superhog</h2>
-                        <p>An Insurance backed guarantee working<br className={css.noPc} /> to protect your home and contents <br className={css.noPc} />for up to £1 million.</p>
+                        <p>An Insurance backed guarantee working<br className={css.noPc} /> to protect Tu Negocio and contents <br className={css.noPc} />for up to £1 million.</p>
                         <p className={css.secondCol}><NamedLink name="SuperHogPage">Learn more <span className={css.WeVetArrow5}>→</span></NamedLink></p>
                       </div>
                     </div>

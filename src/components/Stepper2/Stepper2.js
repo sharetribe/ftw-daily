@@ -87,12 +87,12 @@ const ColorlibConnector = withStyles({
   },
   active: {
     '& $line': {
-      background: '#41a6df',
+      background: '#575757',
     },
   },
   completed: {
     '& $line': {
-      background: '#41a6df',
+      background: '#575757',
     },
   },
   line: {
@@ -116,11 +116,11 @@ const useColorlibStepIconStyles = makeStyles({
     alignItems: 'center',
   },
   active: {
-    background: '#41a6df',
+    background: '#575757',
     boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
   },
   completed: {
-    background: '#41a6df',
+    background: '#575757',
   },
 });
 

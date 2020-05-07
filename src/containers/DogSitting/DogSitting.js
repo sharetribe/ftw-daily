@@ -56,7 +56,7 @@ const DogSitting = () => {
 
     <p>Every day dog owners can browse through the profiles to decide if they want to contact dog sitters using the secure messaging platform. Alternatively they can put up their own profile and allow dog sitting professionals to contact them.</p>
 
-    <p>If your requirement is for dog sitting during the day when you are at work, you can search our Pet Services section and find a dog walker, doggy daycare or even a drop in dog sitter. We’ve even got dog groomers and vets in your local area.</p>
+    <p>If your requirement is for dog sitting during the day when you are at work, you can search our Pet Services section and find a dog walker, doggy Diurno or even a drop in dog sitter. We’ve even got dog groomers and vets in your local area.</p>
 
     </div>
 

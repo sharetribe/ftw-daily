@@ -15,7 +15,7 @@ input:focus,
 .FundingForm select:hover,
 .FundingForm select:focus {
     border-width: 2px;
-    border-color: #41a6df !important;
+    border-color: #575757 !important;
     outline: none;
 }
 
@@ -37,7 +37,7 @@ input:focus,
 
 .FundingForm button {
     width: 100%;
-    background: #c9bd9c;
+    background: #5314a2;
     border: none;
     color: #fff;
     padding: 8px 0;

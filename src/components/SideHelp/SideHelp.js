@@ -107,8 +107,8 @@ class SideHelp extends React.Component {
             and location map.
           </li>
           <li>
-            <strong>Pet Types</strong> – You can choose to search by Pet Type, if none are chosen
-            all Pet Types will be displayed in the search results and location map. Pet Types are
+            <strong>Categorias</strong> – You can choose to search by Pet Type, if none are chosen
+            all Categorias will be displayed in the search results and location map. Categorias are
             Dog, Cat, Reptiles, Farm Animals, Rabbits, Pet Birds, Aquarium Fish, Horses or other.
           </li>
           <li>
@@ -156,7 +156,7 @@ class SideHelp extends React.Component {
             <strong>Category</strong> – Select the Category button from the top toolbar and choose to search for Pet Sitters. The results displayed will show your selection of Pet Sitters and if no selection is made then both categories will be displayed in the search results and location map.
           </li>
           <li>
-            <strong>Pet Types</strong> – You can choose to search by Pet Type, if none are chosen all Pet Types will be displayed in the search results and location map. Pet Types are Dog, Cat, Reptiles, Farm Animals, Rabbits, Pet Birds, Aquarium Fish, Horses or other.
+            <strong>Categorias</strong> – You can choose to search by Pet Type, if none are chosen all Categorias will be displayed in the search results and location map. Categorias are Dog, Cat, Reptiles, Farm Animals, Rabbits, Pet Birds, Aquarium Fish, Horses or other.
           </li>
           <li>
             <strong>Price Range</strong> – When Pet Sitters created their listing, they are asked to provide their price per night to look after your pets in their own home. You can choose to search Pet Sitters by their nightly rate by using the toggle to select the maximum nightly rate you are prepared to pay.

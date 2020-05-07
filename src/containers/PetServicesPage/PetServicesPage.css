@@ -78,7 +78,7 @@
 
 .leftAnchors a:hover {
   text-decoration: none !important;
-  color: #41a6df;
+  color: #575757;
 }
 
 .stickyAnchors {
@@ -99,7 +99,7 @@ input[type='checkbox'] {
  font-size: 20px;
  padding: 1rem;
  color: #fff;
- background: #41a6df;
+ background: #575757;
  cursor: pointer;
  border-radius: 7px;
  transition: all 0.25s ease-out;

@@ -13,7 +13,7 @@
 
 .customTip {
  color: #fff !important;
- background-color: #41a6df !important;
+ background-color: #575757 !important;
  opacity: 0.99 !important;
  margin-top: -5px !important;
  padding: 10px 21px 13px !important;
@@ -22,13 +22,13 @@
 }
 
 .customTip:after {
- border-top-color: #41a6df !important;
+ border-top-color: #575757 !important;
  border-top-width: 7px !important;
 }
 
 .claimTip {
   color: #fff !important;
-  background-color: #41a6df !important;
+  background-color: #575757 !important;
   opacity: 0.99 !important;
   padding: 10px 21px 13px !important;
   text-align: center;
@@ -37,7 +37,7 @@
  }
  
  .claimTip:after {
-  border-top-color: #41a6df !important;
+  border-top-color: #575757 !important;
   border-top-width: 7px !important;
  }
 
@@ -407,7 +407,7 @@
 }
 
 .authorNameLink:hover {
-  color: #41a6df !important;
+  color: #575757 !important;
 }
 
 .contactWrapper {
@@ -641,7 +641,7 @@
 
 .prefLocationBadge:hover {
   color: #fff;
-  background: #41a6df;
+  background: #575757;
 }
 
 .bookingHeading {
@@ -766,7 +766,7 @@
 }
 
 .username a {
-  color: #41a6df !important;
+  color: #575757 !important;
 }
 
 .smallPrint {
@@ -862,7 +862,7 @@
 .claimbtn {
   position: relative;
   overflow: hidden;
-  background-image: linear-gradient(to right, #c9bd9c, #d49f7f, #d97c80, #c7619c, #845ec2);
+  background-image: linear-gradient(to right, #5314a2, #d49f7f, #d97c80, #c7619c, #845ec2);
   color: #fff;
   text-decoration: none;
 }

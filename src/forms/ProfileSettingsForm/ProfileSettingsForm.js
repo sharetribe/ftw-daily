@@ -66,7 +66,7 @@ class ProfileSettingsFormComponent extends Component {
             scenarioId: '8284ca81-3469-4272-91b6-2635014181db',
             clientSdkId: 'd3dd97cd-10eb-4ea5-9ab4-97bd6acfd172',
             button: {
-              label: 'Yoti Verification',
+              label: 'VERIFICACIÓN YOTI',
             },
           },
         ],
@@ -230,12 +230,13 @@ class ProfileSettingsFormComponent extends Component {
               {currentUser.attributes.profile.publicData.yotiVerified != 'YES' ? (
                 <div>
                   <div>
-                    <h3 className={css.yotiTitle}>Verify your identity</h3>
+                    <h3 className={css.yotiTitle}>Verifica tu identidad</h3>
                   </div>
 
 <div className={css.contentinner}>
     <p className={css.noWrap}><img src={number} className={css.numb} />
-        Download the free Yoti app and follow the set-up instructions.
+       
+Descargue la aplicación gratuita Yoti y siga las instrucciones de configuración..
         <img className={css.strr} src={googlestore} />
         <img className={css.str} src={appstore} />
 
@@ -251,7 +252,8 @@ class ProfileSettingsFormComponent extends Component {
         </div>
     </div>
     <p className={css.CsS}><img src={two} className={css.numb} />
-    Add your ID document. Wait a few minutes for your account to be verified and approved.
+    
+Agregue su documento de identificación. Espere unos minutos para que su cuenta sea verificada y aprobada.
     </p>
 
     <p className={css.forMob}><img src={two} className={css.numb} />
@@ -259,7 +261,8 @@ class ProfileSettingsFormComponent extends Component {
     </p>
 
     <p className={css.forPc}><img src={three} className={css.numb} />
-    Once approved, click on the 'Yoti verification' button below and scan the QR code with the Yoti app.
+    
+Una vez aprobado, haga clic en el botón 'Verificación de Yoti' a continuación y escanee el código QR con la aplicación Yoti.
     </p>
 
     <p className={css.forMob}><img src={three} className={css.numb} />
@@ -268,10 +271,11 @@ class ProfileSettingsFormComponent extends Component {
 </div>
 <div className={css.yotiBtn1}>
     <div className={css.yotiContainer} id="yoti-button" />
-        <span className={css.needHelp} data-tip>Need help?</span>
+        <span className={css.needHelp} data-tip>Necesitas ayuda?</span>
         <ReactTooltip className={css.customTip} effect='solid'>
             <span className={css.tipColor}>  
-            Need any help to create your Yoti?<br />Email <strong className={css.toolEmail}>help@yoti.com</strong>
+            
+¿Necesitas ayuda para crear tu Yoti?<br />Email <strong className={css.toolEmail}>help@yoti.com</strong>
             </span>
         </ReactTooltip>
     </div>
@@ -402,23 +406,23 @@ class ProfileSettingsFormComponent extends Component {
 
               <div className={classNames(css.sectionContainer, css.lastSection)}>
                 <h3 className={css.sectionTitle}>
-                  <span>Preferred Locations (For Pet Sitters Only)</span>
+                  <span>Localización </span>
                 </h3>
                 <FieldCheckboxGroup
                   id="preferredlocations"
                   name="preferredlocations"
-                  label="Preferred Locations"
+                  label="Tu localización"
                   options={[
-                    { key: 'UK', label: 'UK' },
-                    { key: 'USA', label: 'USA' },
-                    { key: 'Australia', label: 'Australia' },
-                    { key: 'Canada', label: 'Canada' },
-                    { key: 'France', label: 'France' },
-                    { key: 'Spain', label: 'Spain' },
-                    { key: 'Italy', label: 'Italy' },
-                    { key: 'Germany', label: 'Germany' },
-                    { key: 'India', label: 'India' },
-                    { key: 'China', label: 'China' },
+                    { key: 'LIMA', label: 'LIMA' },
+                    { key: 'IQUITOS', label: 'IQUITOS' },
+                    { key: 'ICA', label: 'ICA' },
+                    { key: 'AYACUCHO', label: 'AYACUCHO' },
+                    { key: 'CUSCO', label: 'CUSCO' },
+                    { key: 'HUANCAYO', label: 'HUANCAYO' },
+                    { key: 'TRUJILLO', label: 'TRUJILLO' },
+                    { key: 'CHIMBOTE', label: 'CHIMBOTE' },
+                    { key: 'CAJAMARCA', label: 'CAJAMARCA' },
+                   
                   ]}
                   handleChange={handleCheckboxChange}
                 />

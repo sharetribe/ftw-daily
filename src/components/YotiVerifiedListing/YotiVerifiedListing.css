@@ -1,5 +1,5 @@
 .yotiVerified a:hover {
-  color: #41a6df !important;
+  color: #575757 !important;
 }
 
 .yotiVerified img {
@@ -18,14 +18,14 @@
 
 .customTip {
  color: #fff !important;
- background-color: #41a6df !important;
+ background-color: #575757 !important;
  opacity: 0.99 !important;
  margin-top: -12px !important;
  padding: 12px 21px !important;
 }
 
 .customTip:after {
- border-top-color: #41a6df !important;
+ border-top-color: #575757 !important;
  border-top-width: 7px !important;
 }
 

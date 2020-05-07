@@ -98,7 +98,7 @@ const CrowdFundingPage = () => {
             <h2>Yoti</h2>
             <p>YOTI works by allowing you to set up a trusted, genuine and verified digital identity.</p>
             <h2>Superhog</h2>
-            <p>An Insurance backed guarantee working to protect your home and contents for up to £1 million.</p>
+            <p>An Insurance backed guarantee working to protect Tu Negocio and contents for up to £1 million.</p>
             <h2>PawSquad</h2>
             <p>PawSquad lets you video call or text chat with a qualified vet free at any time or day or night, 365 days a year.</p>
           </div>

@@ -17,7 +17,7 @@
 }
 
 .content {
-  border-bottom-color: #c9bd9c !important;
+  border-bottom-color: #5314a2 !important;
   @apply --marketplaceModalBaseStyles;
   padding-top: 29px;
 }

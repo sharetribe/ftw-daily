@@ -60,17 +60,15 @@ const SliderHero = () => (
 
             <div className={css.submitContainer}>
               <a href="s?pub_user_type=1">Ver productos y servicios</a>
-              <a href="s?pub_user_type=0">Anuncia</a>
-              <a href="s?pub_user_type=2">Registrate</a>
-              <ExternalLink href="https://trustmypetsitter.seedrs.com/">
-                Contacto
-              </ExternalLink>
+              <a href="/ordertype/new">Anuncia</a>
+              <a href="/signup">Registrate</a>
+              <a href="/aboutus">Nosotros</a>
             </div>
           </div>
         </StyleRoot>
       </div>
     </Carousel.Item>
-
+{/*
     <Carousel.Item>
       <div className={css.carouselHero}>
         <img className={css.sSlide} src={forthSlide}></img>
@@ -140,7 +138,7 @@ const SliderHero = () => (
         </StyleRoot>
       </div>
     </Carousel.Item>
-
+*/}
    
   
   </Carousel>

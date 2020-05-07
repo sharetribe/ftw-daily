@@ -10,7 +10,7 @@
 
   width: 100%;
   padding: 24px 24px 42px 24px;
-  background-color: #c9bd9c;
+  background-color: #5314a2;
 
   @media (--viewportMedium) {
     padding: 0 24px 33px 24px;
@@ -130,7 +130,7 @@
 
 .organizationDescription {
   @apply --marketplaceTinyFontStyles;
-  color: #212529;
+  color: #fff;
   margin: 21px 0 !important;
 }
 
@@ -143,7 +143,7 @@
 .copyrightLink {
   color: var(--matterColor);
   transition: var(--transitionStyleButton);
-  color: #212529;
+  color: #fff;
 
   &:hover {
     color: #212529;
@@ -186,7 +186,7 @@
   line-height: 20px;
   color: var(--matterColor);
   transition: var(--transitionStyleButton);
-  color: #212529 !important;
+  color: #fff !important;
 
   margin-top: 0;
   margin-bottom: 12px;
@@ -340,7 +340,7 @@
 }
 
 .footerTitleContainer a {
-  color: #212529;
+  color: #fff;
   font-weight: 1000;
 }
 

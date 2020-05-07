@@ -44,9 +44,9 @@
 
   /* ================ Colors ================ */
 
-  --marketplaceColor: #41a6df;
-  --marketplaceColorLight: #41a6df;
-  --marketplaceColorDark: #41a6df;
+  --marketplaceColor: #575757;
+  --marketplaceColorLight: #575757;
+  --marketplaceColorDark: #575757;
 
   /* Used with inline CSS SVGs */
   --marketplaceColorEncoded: %23c0392b;
@@ -54,7 +54,7 @@
   --successColor: #2ecc71;
   --successColorDark: #239954;
   --failColor: #ff0000;
-  --attentionColor: #41a6df;
+  --attentionColor: #575757;
   --bannedColorLight: var(--marketplaceColorLight);
   --bannedColorDark: var(--marketplaceColor);
 
@@ -187,7 +187,7 @@
     border-radius: var(--borderRadius);
 
     /* Colors */
-    background-color: #c9bd9c;
+    background-color: #5314a2;
     color: var(--matterColorLight);
 
     /* Text */
@@ -580,9 +580,9 @@
 }
 
 .SectionHero_heroButton__3j9FY {
-  background-color: #41a6df !important;
+  background-color: #575757 !important;
 }
 
 a {
-  color: #41a6df;
+  color: #575757;
 }

@@ -83,7 +83,7 @@ const WhyPetOwnersPage = () => {
 
     <p>But let’s say you did manage to secure a friend or family member to care for your pets and are certain they won’t bail on you. You think your pets are in good hands. Are you sure?</p>
 
-    <p>Does your home insurance cover you for damages? Do they have 24/7 Vet Advice? Are they able to fulfil the schedule your pet needs?</p>
+    <p>Does Tu Negocio insurance cover you for damages? Do they have 24/7 Vet Advice? Are they able to fulfil the schedule your pet needs?</p>
 
     <p>Our Professional Pet Sitters come with all the advantages and none of the disadvantages.  You tell them when you need them, what you need them to do, and you get peace of mind by taking advantage of our Insurance backed guarantees.</p>
 

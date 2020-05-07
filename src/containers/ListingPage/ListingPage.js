@@ -5,6 +5,9 @@ import { compose } from 'redux';
 import ReactPlayer from "react-player"
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { Player, BigPlayButton } from 'video-react';
+import video from './tmps.mp4';
+
 import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
 import { LISTING_STATE_PENDING_APPROVAL, LISTING_STATE_CLOSED, propTypes } from '../../util/types';
@@ -660,7 +663,7 @@ export class ListingPageComponent extends Component {
                          <div className={css.videoSide}>
        <Player
       playsInline
-      poster={petowner}
+ 
       src={video}>
       <BigPlayButton position="center" />
       </Player>

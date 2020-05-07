@@ -33,7 +33,7 @@
 	}
 	.card_content {
 	  margin-top: 0 !important;
-	  background: #41a6df;
+	  background: #575757;
 	  padding: 10px 0 15px;
 	}
   .card_image,
@@ -80,7 +80,7 @@ img {
 }
 .card {
   position: relative;
-  background: #41a6df;
+  background: #575757;
   width: 33%;
   height: auto;
   border-radius: 6px;
@@ -167,7 +167,7 @@ img {
     top: 50%;
     width: 9999px;
     height: 4px;
-    background: #41a6df;
+    background: #575757;
 }
 .strike > h1:before {
     right: 100%;
@@ -254,7 +254,7 @@ img {
 }
 
 .release a:hover {
-  color: #41a6df;
+  color: #575757;
 }
 
 .videoSide {
@@ -266,7 +266,7 @@ img {
 }
 
 .linkItem a:hover {
-  color: #41a6df;
+  color: #575757;
 }
 
 .videoSide:nth-child(1) {

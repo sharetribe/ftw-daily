@@ -221,7 +221,7 @@
 }
 
 .goto a {
-  color: #41a6df !important;
+  color: #575757 !important;
   text-transform: uppercase;
 }
 
@@ -231,7 +231,7 @@
   height: 100%;
   text-align: center;
   padding: 1.25rem 1.25rem 1.25rem 1.25rem;
-  background: #c9bd9c;
+  background: #5314a2;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   background-position: center;
@@ -466,7 +466,7 @@
 
 .whyUseBg {
   padding: 10px 0px;
-  background-image: linear-gradient(to left top, #f6f6f6, #e3e4f2, #cbd3ef, #aec5eb, #89b7e7, #76b1e5, #5face2, #41a6df, #41a6df, #41a6df, #41a6df, #41a6df);
+  background-image: linear-gradient(to left top, #f6f6f6, #e3e4f2, #cbd3ef, #aec5eb, #89b7e7, #76b1e5, #5face2, #575757, #575757, #575757, #575757, #575757);
   text-align: center;
 }
 
@@ -529,7 +529,7 @@
 }
 
 .step {
-  background: #41a6df;
+  background: #575757;
   border-radius: 50%;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
@@ -622,7 +622,7 @@
 }
 
 .serviceSingle h3 {
-  color: #41a6df !important;
+  color: #575757 !important;
   margin: 0;
 }
 
@@ -827,7 +827,7 @@
 }
 
 .sections:nth-child(5) button {
-  background-color: #c9bd9c;
+  background-color: #5314a2;
   min-height: 65px;
   color: #fff;
   font-family: 'sofiapro', Helvetica, Arial, sans-serif;
@@ -836,7 +836,7 @@
   margin: 0;
   border: none;
   border-radius: 2px;
-  background-color: #c9bd9c;
+  background-color: #5314a2;
   color: #ffffff;
   text-align: center;
   cursor: pointer;
@@ -852,7 +852,7 @@
 }
 
 .sections:nth-child(5) input:focus {
-  border-bottom-color: #c9bd9c !important;
+  border-bottom-color: #5314a2 !important;
 }
 
 .sections:nth-child(5) .newstandardCol {
@@ -966,7 +966,7 @@
 
 .carefullyImage {
   padding: 128px;
-  background: #c9bd9c;
+  background: #5314a2;
   border-radius: 5px;
 }
 
@@ -1041,7 +1041,7 @@
 }
 
 .ourPartners:hover .secondCol a {
-  color: #41a6df !important;
+  color: #575757 !important;
   left: 10px;
   opacity: 1;
 }
@@ -1127,12 +1127,12 @@
 }
 
 .WeVetLearn a:hover {
-  color: #41a6df !important;
+  color: #575757 !important;
   left: 10px;
 }
 
 .WeVetLearn a:hover span {
-  color: #41a6df !important;
+  color: #575757 !important;
 }
 
 .carefullyCopy {

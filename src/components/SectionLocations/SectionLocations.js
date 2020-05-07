@@ -53,17 +53,17 @@ const SectionLocations = props => {
         {locationLink(
           'Lima Metropolitana',
           helsinkiImage,
-          '?address='
+          '?address=Lima%2C%20Perú&bounds=-11.94376642%2C-76.87075813%2C-12.21475882%2C-77.23209704'
         )}
         {locationLink(
           'Arequipa',
           rovaniemiImage,
-          '?address='
+          '?address=s?address=Arequipa%2C%20Arequipa%2C%20Perú&bounds=-16.3736953%2C-71.5133359%2C-16.4349863%2C-71.5657969'
         )}
         {locationLink(
           'Cusco',
           rukaImage,
-          '?address='
+          '?address=s?address=Cusco%2C%20Perú&bounds=-13.45955536%2C-71.92894742%2C-13.57124394%2C-71.99672053'
         )}
       </div>
     </div>

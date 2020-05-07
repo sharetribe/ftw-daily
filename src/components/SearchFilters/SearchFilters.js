@@ -265,8 +265,8 @@ const SearchFiltersComponent = props => {
               onSelect={handleSelectOption}
               showAsPopup
               options={[
-                { key: 'overnight', label: 'Overnight' },
-                { key: 'daycare', label: 'Daycare' },
+                { key: 'Nocturno', label: 'Nocturno' },
+                { key: 'Diurno', label: 'Diurno' },
               ]}
               initialValue={initialSitterType}
               contentPlacementOffset={FILTER_DROPDOWN_OFFSET}

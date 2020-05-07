@@ -353,7 +353,7 @@ iframe[title='Yoti - Modal'] {
 
 .customTip {
  color: #fff !important;
- background-color: #41a6df !important;
+ background-color: #575757 !important;
  opacity: 0.99 !important;
  margin-top: -12px !important;
  padding: 10px 21px 13px !important;
@@ -361,7 +361,7 @@ iframe[title='Yoti - Modal'] {
 }
 
 .customTip:after {
- border-top-color: #41a6df !important;
+ border-top-color: #575757 !important;
  border-top-width: 7px !important;
 }
 

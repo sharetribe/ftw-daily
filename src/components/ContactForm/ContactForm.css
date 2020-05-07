@@ -6,7 +6,7 @@
 .contactForm textarea:hover, 
 .contactForm input:focus,
 .contactForm textarea:focus {
-	border-bottom-color: #41a6df;
+	border-bottom-color: #575757;
 }
 
 

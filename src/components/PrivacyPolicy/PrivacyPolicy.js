@@ -29,7 +29,7 @@ const PrivacyPolicy = props => {
       <h2>Information we may collection from you: Please do not submit your personal information to us if you are not agreeable to our collection of it. By using our site you are agreeing that we may collect and process the following Information about you (without limitation):</h2>
       
       <ul className={css.privacyul}>
-        <li className={css.privacyli}>Personal information such as name, address and contact details, property information, housesitting requirements, dates of availability etc that you provide by filling in forms on our site and otherwise by corresponding with us via or in connection with our site;</li>
+        <li className={css.privacyli}>Personal information such as name, address and Detalles de Contacto, property information, housesitting requirements, dates of availability etc that you provide by filling in forms on our site and otherwise by corresponding with us via or in connection with our site;</li>
         <li className={css.privacyli}>Other details of your visits to our site including, but not limited to, traffic data, search criteria, location data, weblogs and other communication data, and the resources that you access; and</li>
         <li className={css.privacyli}>Automatically collected data from your visits to the site, which may involve the use of cookies and web beacons which allow us to facilitate your convenient use of our site and to enhance user experience developments. (Please note that you may refuse to accept cookies by activating the setting on your browser which allows you to refuse the use of cookies. However, if you select this setting you may be unable to access certain parts of our site)</li>
       </ul>

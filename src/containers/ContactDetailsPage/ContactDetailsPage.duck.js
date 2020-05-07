@@ -200,7 +200,7 @@ const saveEmailAndPhoneNumber = params => (dispatch, getState, sdk) => {
 };
 
 /**
- * Update contact details, actions depend on which data has changed
+ * Update Detalles de Contacto, actions depend on which data has changed
  */
 export const saveContactDetails = params => (dispatch, getState, sdk) => {
   dispatch(saveContactDetailsRequest());

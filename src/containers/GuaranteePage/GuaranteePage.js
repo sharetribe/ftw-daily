@@ -96,7 +96,7 @@ const GuaranteePage = () => {
                 </div>
                 <div className={css.partnersContent}>
                   <p><h2>Superhog</h2></p>
-                  <p>An Insurance backed guarantee<br />working to protect your home and<br />contents for up to £1 million.</p>
+                  <p>An Insurance backed guarantee<br />working to protect Tu Negocio and<br />contents for up to £1 million.</p>
                   <p><NamedLink className={css.learnMore} name="SuperHogPage">Learn more →</NamedLink></p>
                 </div>
               </div>

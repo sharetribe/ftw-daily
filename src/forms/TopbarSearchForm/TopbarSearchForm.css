@@ -158,7 +158,7 @@
   padding-bottom: var(--locationAutocompleteBottomPadding);
   top: 50px;
   left: 0;
-  background-color: #41a6df;
+  background-color: #575757;
   border-bottom-left-radius: var(--borderRadius);
   border-bottom-right-radius: var(--borderRadius);
   box-shadow: var(--boxShadowPopup);

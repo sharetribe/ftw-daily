@@ -278,7 +278,7 @@ const PetSittersPage = () => {
                 </p>
 
                 <p>
-                  The average rate for an overnight pet sit for 1 dog (12 hours) is between $25.00-$50.00.
+                  The average rate for an Nocturno pet sit for 1 dog (12 hours) is between $25.00-$50.00.
                 </p>
 
                 <p>
@@ -296,7 +296,7 @@ const PetSittersPage = () => {
               <div className={css.contentInner}>
 
                 <p>
-                  When you create your profile listing at Trust My Pet Sitter there is a Pet Type Selection Box to choose which pets you are experienced and happy to Pet Sit for. Our Pet Types are:
+                  When you create your profile listing at Trust My Pet Sitter there is a Pet Type Selection Box to choose which pets you are experienced and happy to Pet Sit for. Our Categorias are:
                 </p>
 
                 <ul>

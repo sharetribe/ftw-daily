@@ -127,7 +127,7 @@ export const EditListingPricingFormComponent = props => (
           ) : null
           }
 
-          <FieldSelect id="currency" name="currency" label="Select Currency" className={css.currency}>
+          <FieldSelect id="currency" name="currency" label="Selecciona tu moneda" className={css.currency}>
             <option value="GBP">GBP</option>
             <option value="USD">USD</option>
             <option value="PEN">PEN</option>

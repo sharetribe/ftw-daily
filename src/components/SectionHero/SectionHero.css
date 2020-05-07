@@ -126,7 +126,7 @@
 
 .heroButton:hover {
   /* background-image: linear-gradient(to right top, #d16ba5, #c077bd, #a983d0, #8d8fdc, #6d9ae2, #6d9ae2, #6d9ae2, #6d9ae2, #8d8fdc, #a983d0, #c077bd, #d16ba5); */
-  background-color: #41a6df;
+  background-color: #575757;
   color: #fff;
   text-decoration: none !important;
 }
@@ -202,11 +202,11 @@
 }
 
 .inputContainer input:hover, .inputContainer:focus {
-  border-bottom-color: #41a6df;
+  border-bottom-color: #575757;
 }
 
 .testing {
-  background: #41a6df !important;
+  background: #575757 !important;
   color: #4a4a4a;
 }
 

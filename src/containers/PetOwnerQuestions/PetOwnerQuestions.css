@@ -332,7 +332,7 @@ strong, h3 {
 }
 
 .backUrl:last-child {
-  color: #41a6df !important;
+  color: #575757 !important;
   cursor: text;
 }
 
@@ -502,9 +502,9 @@ input[type='checkbox'] {
 }
 
 .activeLink{
-  color: #41a6df;
+  color: #575757;
 }
 
 .activeLink:hover{
-  color: #41a6df;
+  color: #575757;
 }

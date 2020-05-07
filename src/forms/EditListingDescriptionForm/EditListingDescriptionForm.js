@@ -181,9 +181,9 @@ const EditListingDescriptionFormComponent = props => (
                     className={css.title}
                     id="sittertype"
                     name="sittertype"
-                    categories={[{ key: 'overnight', label: "Overnight" }, { key: "daycare", label: "Daycare" }]}
-                    categoryLabel="Select Type"
-                    categoryPlaceholder="Pet Sitter Type"
+                    categories={[{ key: 'Nocturno', label: "Nocturno" }, { key: "Diurno", label: "Diurno" }]}
+                    categoryLabel="Selecciona un tipo"
+                    categoryPlaceholder="Tipo de Negocio"
                     categoryRequired={sitterTypeRequired}
                   >
                   </CategoryField>

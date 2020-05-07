@@ -2,10 +2,10 @@
 
 :root {
   --ManageAvailabilityCalendar_gridColor: #e0e0e0;
-  --ManageAvailabilityCalendar_availableColor: #41a6df;
+  --ManageAvailabilityCalendar_availableColor: #575757;
   --ManageAvailabilityCalendar_availableColorHover: #5fafff;
   --ManageAvailabilityCalendar_blockedColor: #fff;
-  --ManageAvailabilityCalendar_blockedColorHover: #41a6df;
+  --ManageAvailabilityCalendar_blockedColorHover: #575757;
   --ManageAvailabilityCalendar_reservedColor: #e6fff0;
   --ManageAvailabilityCalendar_reservedColorHover: #e1faeb;
   --ManageAvailabilityCalendar_failedColor: #fff2f2;
@@ -316,8 +316,8 @@
 }
 .legendAvailableColor {
   composes: legendColor;
-  background-color: #41a6df;
-  border: solid 2px #41a6df;
+  background-color: #575757;
+  border: solid 2px #575757;
 }
 .legendPastColor {
   composes: legendColor;

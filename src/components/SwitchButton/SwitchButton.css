@@ -1,6 +1,6 @@
 .customTip {
  color: #fff !important;
- background-color: #41a6df !important;
+ background-color: #575757 !important;
  opacity: 0.99 !important;
 }
 
@@ -9,7 +9,7 @@
 }
 
 .customTip:after {
- border-left-color: #41a6df !important;
+ border-left-color: #575757 !important;
  border-left-width: 7px !important;
 }
 

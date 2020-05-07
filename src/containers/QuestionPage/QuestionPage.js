@@ -51,7 +51,7 @@ const articles = [
 
   <div>
     <h2>
-      Do pet sitters stay overnight?
+      Do pet sitters stay Nocturno?
 
 </h2>
     <p>At Trust My Pet Sitter our Pet Sitters watch your pets at home. Our pets always stay at home, not in someone else’s!  Pet Sitters provide 1:1 care and attention looking after your pets in their own  space, in their own environment with familiar routines.</p>
@@ -68,7 +68,7 @@ const articles = [
 
     <p>In addition, we provide 24/7/365 Virtual Vet Advice to every active Pet Sitter no matter where they are in the world – a Vet always on hand to provide help and assistance. </p>
 
-    <p>Our safety pack is completed with an Insurance backed guarantee for your home.</p>
+    <p>Our safety pack is completed with an Insurance backed guarantee for Tu Negocio.</p>
   </div>,
 
   <div>
@@ -84,7 +84,7 @@ const articles = [
 
     <p>When you undertake a pet and house sitting assignment the Pet Owner will provide you with a guide to looking after their pet and home, which sets out what they expect from pet feeding times to walking and looking after.</p>
 
-    <p>You should always try to fully understand the expectations of the Pet Owner and ask any questions if you are unsure.  We always suggest that you have the contact details of the local vets as well as the pet insurance details just in case you need them.</p>
+    <p>You should always try to fully understand the expectations of the Pet Owner and ask any questions if you are unsure.  We always suggest that you have the Detalles de Contacto of the local vets as well as the pet insurance details just in case you need them.</p>
   </div>,
 
   <div>
@@ -204,7 +204,7 @@ const articles = [
 
     <p>Yes, you can work for more than one pet sitting company or person if you are self-employed or a contractor.</p>
 
-    <p>As a self employed individual or company you can choose who to select as your pet care suppliers, one may be better for dog walking contracts, another for pop in visits and another for overnight stays.  It is entirely your choice to pick which Pet Sitting companies you prefer and accept work from.</p>
+    <p>As a self employed individual or company you can choose who to select as your pet care suppliers, one may be better for dog walking contracts, another for pop in visits and another for Nocturno stays.  It is entirely your choice to pick which Pet Sitting companies you prefer and accept work from.</p>
   </div>,
 
   <div>
@@ -279,7 +279,7 @@ const QuestionPage = () => {
                   <Tab>
                     <NavLink to="/pet-sitter-questions/4" className={css.link} activeClassName={css.activeLink} >
                       <div className={css.collapseItem}>
-                        <a>4. Do pet sitters stay overnight?</a>
+                        <a>4. Do pet sitters stay Nocturno?</a>
                       </div>
                     </NavLink>
                   </Tab>

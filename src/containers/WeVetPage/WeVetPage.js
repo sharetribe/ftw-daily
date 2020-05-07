@@ -94,7 +94,7 @@ const WeVetPage = () => {
             <h2>Reliability</h2>
             <p>Some people still believe that asking friends, neighbours or a family member is a better option. The truth is, not a lot of people enjoy driving across town after work, on the weekends or on special days like Christmas to go scoop the litter box of someone else’s cat.</p>
             <p>But let’s say you did manage to secure a friend or family member to care for your pets and are certain they won’t bail on you. You think your pets are in good hands. Are you sure?</p>
-            <p>Does your home insurance cover you for damages? Do they have 24/7 Vet Advice? Are they able to fulfil the schedule your pet needs?</p>
+            <p>Does Tu Negocio insurance cover you for damages? Do they have 24/7 Vet Advice? Are they able to fulfil the schedule your pet needs?</p>
             <p>Our Professional Pet Sitters come with all the advantages and none of the disadvantages. You tell them when you need them, what you need them to do, and you get peace of mind by taking advantage of our Insurance backed guarantees.</p>
             <hr />
             <h2>Insured</h2>
@@ -134,7 +134,7 @@ If not, tell us why! To us, there’s no substitute for the quality of pet care 
                 </div>
                 <div className={css.partnersContent}>
                   <p><h2>Superhog</h2></p>
-                  <p>An Insurance backed guarantee<br />working to protect your home and<br />contents for up to £1 million.</p>
+                  <p>An Insurance backed guarantee<br />working to protect Tu Negocio and<br />contents for up to £1 million.</p>
                   <p><NamedLink className={css.learnMore} name="SuperHogPage">Learn more →</NamedLink></p>
                 </div>
               </div>

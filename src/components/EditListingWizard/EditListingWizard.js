@@ -310,7 +310,7 @@ class EditListingWizard extends Component {
             name="OrderTypesPage"
             params={{ type: params.type }}
           >
-            <SecondaryButton>Go Back</SecondaryButton>
+            <SecondaryButton>Volver</SecondaryButton>
           </NamedLink>
         </div>
 

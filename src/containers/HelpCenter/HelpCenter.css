@@ -110,7 +110,7 @@
 }
 
 .topicsMain ul li:hover a {
-  color: #41a6df !important;
+  color: #575757 !important;
 }
 
 @media (max-width: 992px) {
@@ -227,7 +227,7 @@
   color: #484848 !important;
   overflow: hidden !important;
   max-height: 2.75em !important;
-  color: #41a6df !important;
+  color: #575757 !important;
 }
 
 .arroW {
@@ -282,7 +282,7 @@
 
 .imageItem:hover {
   cursor: pointer;
-  border-color: #41a6df;
+  border-color: #575757;
 }
 
 .imageContainer,

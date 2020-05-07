@@ -9,38 +9,63 @@ const { LatLng, LatLngBounds } = sdkTypes;
 // `predictionPlace` (util.types.place) properties.
 export default [
   {
-    id: 'default-helsinki',
+    id: 'default-lima',
     predictionPlace: {
-      address: 'Helsinki, Finland',
-      bounds: new LatLngBounds(new LatLng(60.29783, 25.25448), new LatLng(59.92248, 24.78287)),
+      address: 'Lima, Perú',
+      bounds: new LatLngBounds(new LatLng(-11.94376642, -76.87075813), new LatLng(-12.21475882, -77.23209704)),
     },
   },
+
+
   {
-    id: 'default-turku',
+    id: 'default-cusco',
     predictionPlace: {
-      address: 'Turku, Finland',
-      bounds: new LatLngBounds(new LatLng(60.53045, 22.38197), new LatLng(60.33361, 22.06644)),
+      address: 'Cusco, Perú',
+      bounds: new LatLngBounds(new LatLng(-13.45955536 , -71.92894742), new LatLng(-13.57124394, -71.99672053)),
     },
   },
+
+
+
+
   {
-    id: 'default-tampere',
+    id: 'default-arequipa',
     predictionPlace: {
-      address: 'Tampere, Finland',
-      bounds: new LatLngBounds(new LatLng(61.83657, 24.11838), new LatLng(61.42728, 23.5422)),
+      address: 'Arequipa, Perú',
+      bounds: new LatLngBounds(new LatLng(-16.3736953 , -71.5133359), new LatLng(-16.4349863 , -71.5657969)),
     },
   },
+
   {
-    id: 'default-oulu',
+    id: 'default-trujillo',
     predictionPlace: {
-      address: 'Oulu, Finland',
-      bounds: new LatLngBounds(new LatLng(65.56434, 26.77069), new LatLng(64.8443, 24.11494)),
+      address: 'Trujillo, Perú',
+      bounds: new LatLngBounds(new LatLng(-8.0440082 , -78.98829761), new LatLng(-8.17877242 , -79.06861201)),
     },
   },
-  {
-    id: 'default-ruka',
+
+    {
+    id: 'default-iquitos',
     predictionPlace: {
-      address: 'Ruka, Finland',
-      bounds: new LatLngBounds(new LatLng(66.16997, 29.16773), new LatLng(66.16095, 29.13572)),
+      address: 'Iquitos, Perú',
+      bounds: new LatLngBounds(new LatLng(-3.66839665 , -73.17539101), new LatLng(-3.93973916 , -73.52996721)),
+    },
+  },
+
+    {
+    id: 'default-chiclayo',
+    predictionPlace: {
+      address: 'Chiclayo, Perú',
+      bounds: new LatLngBounds(new LatLng(-6.72361987 , -79.78440704), new LatLng(-6.81698428 , -79.90699671)),
+    },
+  },
+
+
+    {
+    id: 'default-huancayo',
+    predictionPlace: {
+      address: 'Huancayo, Perú',
+      bounds: new LatLngBounds(new LatLng(-12.02131216, -75.15240279), new LatLng(-12.12638183, -75.29249882)),
     },
   },
 ];

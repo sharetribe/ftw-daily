@@ -214,7 +214,7 @@
   font-weight: 600;
 }
 .headTitle .banner{
-  color:  #41a6df; 
+  color:  #575757; 
   font-weight: 1000;
 }
 @media (max-width: 750px) {
@@ -269,6 +269,6 @@
 }
 
 .choose button:hover {
-  background: #c9bd9c;
+  background: #5314a2;
   text-shadow: 1px 1px 1px darkslategrey;
 }

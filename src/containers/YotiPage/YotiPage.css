@@ -46,7 +46,7 @@
 }
 
 .joinNow {
-  background-color: #c9bd9c;
+  background-color: #5314a2;
   color: #fff;
   padding: 0 20px;
   border-radius: 3px;
@@ -353,7 +353,7 @@
 }
 
 .scanwith {
-  color: #41a6df;
+  color: #575757;
   position: inherit !important; 
   left: inherit !important; 
   bottom: inherit !important; 
@@ -402,7 +402,7 @@
 }
 
 .addspace:hover span {
-  color: #41a6df;
+  color: #575757;
 }
 
 @media (max-width: 1024px) {

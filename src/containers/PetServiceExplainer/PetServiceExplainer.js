@@ -63,7 +63,7 @@ const PetServiceExplainer = () => {
                       <h3>STEP 2</h3>	
                       <h2>Search by Type</h2>	
                       <p>	
-                        Find Dog Walkers, Groomers, Vets, Pet Food, Daycare and	
+                        Find Dog Walkers, Groomers, Vets, Pet Food, Diurno and	
                         more...	
                       </p>	
                     </div>	

@@ -48,7 +48,7 @@
 }
 
 .sidenav .closenav:hover {
-  color: #41a6df;
+  color: #575757;
 }
 
 .sideheader {
@@ -75,7 +75,7 @@
 }
 
 .helpcenter {
-  background: #c9bd9c;
+  background: #5314a2;
   color: #fff;
   border-radius: 3px;
   padding: 10px 0 !important;
@@ -141,7 +141,7 @@
   margin: 0;
   padding: 0;
   background: none;
-  color: #41a6df;
+  color: #575757;
   border: none;
   font-size: 15px !important;
   font-weight: 400 !important;
@@ -194,7 +194,7 @@
 }
 
 .insideLinks:hover {
-  color: #41a6df !important;
+  color: #575757 !important;
 }
 
 .helpMainTitle {

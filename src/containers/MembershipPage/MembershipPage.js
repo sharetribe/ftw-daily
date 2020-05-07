@@ -218,12 +218,12 @@ class MembershipPage extends React.Component {
           <div className={css.flexHr}></div>
           <div>
             <img src={why2} />
-            <p>Peace of mind with our Insurance backed<br className={css.budiNesto} /> guarantee covering your home for<br className={css.budiNesto} /> up to £1 million</p>
+            <p>Peace of mind with our Insurance backed<br className={css.budiNesto} /> guarantee covering Tu Negocio for<br className={css.budiNesto} /> up to £1 million</p>
           </div>
           <div className={css.flexHr}></div>
           <div>
             <img src={why3} />
-            <p>Our trusted partners provide you with the<br className={css.budiNesto} /> knowledge that we've got your home and<br className={css.budiNesto} /> your pet covered when you're not there</p>
+            <p>Our trusted partners provide you with the<br className={css.budiNesto} /> knowledge that we've got Tu Negocio and<br className={css.budiNesto} /> your pet covered when you're not there</p>
           </div>
         </div>
       </div>
@@ -375,7 +375,7 @@ class MembershipPage extends React.Component {
                 <li><img src={check} /> Local advertising</li>
                 <li><img src={check} /> Nationwide advertising</li>
                 <li><img src={check} /> Global advertising</li>
-                <li><img src={check} /> Contact details</li>
+                <li><img src={check} /> Detalles de Contacto</li>
                 <li><img src={check} /> Partner Opportunities</li>
                 <li><img src={check} /> Optional Extras</li>
                 <li><img src={check} /> Targeted email campaigns</li>

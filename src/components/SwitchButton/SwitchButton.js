@@ -22,7 +22,7 @@ class SwitchButton extends Component {
             checked={this.state.checked}
             onChange={this.handleChange}
             onColor="#86d3ff"
-            onHandleColor="#41a6df"
+            onHandleColor="#575757"
             handleDiameter={30}
             uncheckedIcon={false}
             checkedIcon={false}

@@ -4,7 +4,7 @@
 }
 
 .input {
-  border-bottom-color: #c9bd9c;
+  border-bottom-color: #5314a2;
 }
 
 .inputSuccess {
@@ -16,7 +16,7 @@
 }
 
 .input:focus {
-  border-bottom-color: #c9bd9c !important;
+  border-bottom-color: #5314a2 !important;
 }
 
 .textarea {

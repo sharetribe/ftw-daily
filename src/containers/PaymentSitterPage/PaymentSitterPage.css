@@ -77,7 +77,7 @@
 
 .getHelp a:hover {
   text-underline-position: under;
-  color: #41a6df;
+  color: #575757;
 }
 
 .getHelp p {
@@ -110,13 +110,13 @@
 }
 
 .Chargebee:hover {
-  background: #c9bd9c;
+  background: #5314a2;
   cursor: pointer;
 }
 
 .item1 p span,
 .item2 p span {
-  color: #41a6df;
+  color: #575757;
   font-weight: 700;
 }
 
@@ -180,7 +180,7 @@
   font-weight: 400;
   font-size: 18px;
   margin: 0;
-  color: #41a6df;
+  color: #575757;
   padding: 0;
 }
 

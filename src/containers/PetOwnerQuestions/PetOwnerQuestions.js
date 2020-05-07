@@ -28,7 +28,7 @@ const articles = [
     <h2>
       What is a professional pet / housesitter?
 </h2>
-    <p>A professional pet and house sitter is someone who considers this role their primary job.  As part of their duties looking after your pets and your home they are paid a rate agreed before the Pet and House sit commences.</p><p>They should not be confused with pet boarders who look after dogs in their home, or drop in sitters who visit but do not stay overnight.  Trust My Pet Sitters always stay in the pets home and have a pre-agreement with the Pet Owners to the duties and expectations whilst in situ.</p>
+    <p>A professional pet and house sitter is someone who considers this role their primary job.  As part of their duties looking after your pets and Tu Negocio they are paid a rate agreed before the Pet and House sit commences.</p><p>They should not be confused with pet boarders who look after dogs in their home, or drop in sitters who visit but do not stay Nocturno.  Trust My Pet Sitters always stay in the pets home and have a pre-agreement with the Pet Owners to the duties and expectations whilst in situ.</p>
   </div>,
 
   <div>
@@ -52,7 +52,7 @@ const articles = [
 
   <div>
     <h2>
-      Do pet sitters stay overnight?
+      Do pet sitters stay Nocturno?
 
 </h2>
     <p>At Trust My Pet Sitter our Pet Sitters watch your pets at home. Our pets always stay at home, not in someone else’s!  Pet Sitters provide 1:1 care and attention looking after your pets in their own  space, in their own environment with familiar routines.</p>
@@ -66,7 +66,7 @@ const articles = [
     <p>At Trust My Pet Sitter we use Yoti to confirm the identity of both our Pet Sitters and Pet Owners</p>
     <p>We select the finest Pet Sitters for your pets. Only 20% of sitters who apply to Trust My Pet Sitter are successful.</p>
     <p>In addition, we provide 24/7/365 Virtual Vet Advice to every active Pet Sitter no matter where they are in the world – a Vet always on hand to provide help and assistance.</p>
-    <p>Our safety pack is completed with an Insurance backed guarantee for your home.</p>
+    <p>Our safety pack is completed with an Insurance backed guarantee for Tu Negocio.</p>
   </div>,
 
   <div>
@@ -94,7 +94,7 @@ const articles = [
       <li>Drop in Sitters</li>
     </ul>
 
-    <p><strong>Pet Types</strong> – You can choose to search by Pet Type, if none are chosen all Pet Types will be displayed in the search results and location map. Pet Types are Dog, Cat, Reptiles, Farm Animals, Rabbits, Pet Birds, Aquarium Fish, Horses or other.</p>
+    <p><strong>Categorias</strong> – You can choose to search by Pet Type, if none are chosen all Categorias will be displayed in the search results and location map. Categorias are Dog, Cat, Reptiles, Farm Animals, Rabbits, Pet Birds, Aquarium Fish, Horses or other.</p>
     <p><strong>Price Range</strong> – When Pet Services create their listing they are asked to provide their rates. You can choose to search Pet Services by rates by using the toggle to select the maximum rate you are prepared to pay.  For the widest display leave the search toggle at the default maximum.</p>
 
     <h3>Map Search</h3>
@@ -260,7 +260,7 @@ const PetOwnerQuestions = () => {
                   <Tab>
                     <NavLink to="/pet-owner-questions/4" className={css.link} activeClassName={css.activeLink}>
                       <div className={css.collapseItem}>
-                        <a>4. Do Pet Sitters stay overnight?</a>
+                        <a>4. Do Pet Sitters stay Nocturno?</a>
                       </div>
                     </NavLink>
                   </Tab>
