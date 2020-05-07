@@ -19,7 +19,7 @@ import { TopbarSearchForm } from '../../forms';
 
 import home from './home.png';
 import listing from './listing.png';
-import inbox from './inbox.png';
+import inboxx from './inboxx.png';
 import create from './create.png';
 import signup from './signup.png';
 import login from './login.png';
@@ -62,7 +62,7 @@ const TopbarDesktop = props => {
       params={{ tab: currentUserHasListings ? 'sales' : 'orders' }}
     >
       <span className={css.signup}>
-        <img src={inbox} className={css.topbariconTwo} /> <FormattedMessage id="TopbarDesktop.inbox" />
+        <img src={inboxx} className={css.topbariconTwo} /> <FormattedMessage id="TopbarDesktop.inbox" />
         {notificationDot}
       </span>
     </NamedLink>
