@@ -11,513 +11,515 @@ const TermsOfService = props => {
   // prettier-ignore
   return (
     <div className={classes}>
-      <p className={css.lastUpdated}>Last updated: <span className={css.datecolor}>October 29, 2019</span></p>
+        <p className={css.lastUpdated}>Última actualización: Abril 20, 2020</p>
 
-      <h2>Terms of Use</h2>
-      
       <p>
-         1. Trust My Pet Sitter operates a platform which connects Pet owners with Pet lovers who wish to host Pets and/or offer other Pet related services using our website at trustmypetsitter.com and mobile applications (the "Service").
+        Este documento describe los términos y condiciones generales (los "Términos y Condiciones 
+        Generales") aplicables al acceso y uso de los servicios ofrecidos por REMEAP E.I.R.L. ("los Servicios") 
+        dentro del sitio web www.reactivate.pe, sus subdominios y/u otros dominios (urls) relacionados (en adelante el "Sitio"), 
+        en donde éstos Términos y Condiciones se encuentren. Cualquier persona que desee acceder y/o suscribirse y/o usar el Sitio o 
+        los Servicios podrá hacerlo sujetándose a los Términos y Condiciones Generales, junto con todas las demás políticas y principios 
+        que rigen www.reactivate.pe y que son incorporados al presente directamente o por referencia o que son explicados y/o detallados 
+        en otras secciones del Sitio. En consecuencia, todas las visitas, todos los contratos y transacciones que se realicen en este Sitio, 
+        así como sus efectos jurídicos, quedarán regidos por estas reglas y sometidos a la legislación aplicable en Perú.
       </p>
 
       <p>
-         2. The Service is operated by Trust My Pet Sitter.com Ltd (Trust My Pet Sitter, "we", "our", or "us").
+        Los Términos y Condiciones contenidos en este documento se aplicarán y se entenderán como parte integral de todos los actos y contratos 
+        que se ejecuten o celebren mediante los sistemas de oferta y comercialización comprendidos en este sitio entre los usuarios de este sitio 
+        y por cualquiera de las otras sociedades o empresas que sean filiales o vinculadas y que hagan uso de este sitio, a las cuales se las 
+        denominará en adelante también en forma indistinta como las "Empresas", o bien la "Empresa Oferente", el "Merchant Partner" o la "Empresa Vendedora", 
+        según convenga al sentido del texto.
       </p>
 
-      <h2>Key definitions used in these Terms of Service</h2>
-
       <p>
-         1. Pet Sitter means a person that has registered with our Service to offer Pet Sitter Services to Pet Owners;
+        En caso que las Empresas hubieran fijado sus propios Términos y Condiciones y sus Políticas de Privacidad para los actos y contratos que realicen en este sitio, 
+        ellas aparecerán en esta página señalada con un link o indicada como parte de la promoción de sus ofertas y promociones y prevalecerán sobre éstas. CUALQUIER PERSONA 
+        QUE NO ACEPTE ESTOS TÉRMINOS Y CONDICIONES GENERALES Y LAS POLÍTICAS DE PRIVACIDAD, LOS CUALES TIENEN UN CARÁCTER OBLIGATORIO Y VINCULANTE, DEBERÁ ABSTENERSE DE UTILIZAR 
+        EL SITIO Y/O LOS SERVICIOS.
       </p>
 
       <p>
-         2. Pet Owner means a person that has registered with our Service and who seeks Pet Sitter Services; and
+        El Usuario debe leer, entender y aceptar todas las condiciones establecidas en los Términos y Condiciones Generales y en las Políticas de Privacidad de REMEAP E.I.R.L. así 
+        como en los demás documentos incorporados a los mismos por referencia, previo a su registro como Usuario en www.reactivate.pe y/o a la adquisición de productos y/o entrega 
+        de cualquier dato con cualquier fin.
       </p>
 
-      <p>
-         3. Pet Sitter Services means any services offered through our Service by Pet Sitters including but not limited to home Pet Sitting, Pet walking, Pet training and related Pet services.
+         <h2>1.    Capacidad legal</h2>
+      <p> 
+      Los Servicios sólo están disponibles para personas que tengan capacidad legal para contratar. No podrán utilizar los servicios las personas que no tengan esa capacidad entre 
+      estos los menores de edad o Usuarios de www.reactivate.pe que hayan sido suspendidos temporalmente o inhabilitados definitivamente en razón de lo dispuesto en la sección 
+      2 “Registro y Uso del Sitio”. Los actos que los menores realicen en este sitio serán responsabilidad de sus padres, tutores, encargados o curadores, y por tanto se considerarán 
+      realizados por éstos en ejercicio de la representación legal con la que cuentan.
       </p>
 
-      <h2>Your relationship with us</h2>
-
       <p>
-         1. This document and any documents referred to within it (collectively, the "Terms of Service") set out the terms of your relationship with us. It is important that you read and understand the Terms of Service before using the Service. If there is anything within them that you do not understand, then please contact us at <span className={css.datecolor}>team@trustmypetsitter.com</span> to discuss what this means for you.
+      Quien registre un Usuario como empresa afirmará que (i) cuenta con capacidad para contratar en representación de tal entidad y de obligar a la misma en los términos de este Acuerdo, 
+      (ii) la dirección señalada en el registro es el domicilio principal de dicha entidad, y (iii) cualquier otra información presentada a Reactivate Perú será considerada verdadera, precisa, 
+      actualizada y completa.
       </p>
 
-      <p>
-         2. By setting up an account with us or using and accessing the Service you agree to these Terms of Service. If you do not agree to these Terms of Service, please do not browse or otherwise access or use the Service.
-      </p>
+      <h2>2.    Registro y Uso del Sitio</h2>
 
       <p>
-         3. Trust My Pet Sitter is not party to any agreement you, as a Pet Sitter or Pet Owner, may enter into with another Pet Sitter or Pet Owner. The Service merely facilitates the introduction and matching of Pet Owners to Pet Sitters (and vice versa).
+      Es obligatorio completar el formulario de registro en todos sus campos con datos válidos para convertirse en Usuario autorizado de www.reactivate.pe. (El "Miembro Reactivate Perú" o 
+      el "Usuario"), de esta manera, podrá acceder a las promociones, y a la adquisición de productos y/o servicios ofrecidos en este sitio. El futuro Miembro Reactivate Perú deberá completar 
+      el formulario de registro con su información personal de manera exacta, precisa y verdadera ("Datos Personales") y asume el compromiso de actualizar los Datos Personales conforme resulte 
+      necesario. Reactivate Perú podrá utilizar diversos medios para identificar a los Miembros del Sitio, pero NO se responsabiliza por la certeza de los Datos Personales provistos por sus Usuarios. 
+      Los Usuarios garantizan y responden, en cualquier caso, de la exactitud, veracidad, vigencia y autenticidad de los Datos Personales ingresados. En ese sentido, la declaración realizada por los 
+      Usuarios al momento de registrarse se entenderá como una Declaración Jurada.
       </p>
 
-      <h2>Information about us</h2>
-
       <p>
-         1. When these terms mention Trust My Pet Sitter "we", "us" or "our" it refers to the Trust My Pet Sitter company you are contracting with. Your contracting entity will generally be determined based on your Country of Residence. Your Country of Residence is the jurisdiction associated with your Trust My Pet Sitter.com Account as determined by either your express selection or by Trust My Pet Sitter.com's assessment of your residence using various data attributes associated with your Trust My Pet Sitter Account.
+      Cada miembro sólo podrá ser titular de 1 (una) cuenta el Sitio, no pudiendo acceder a más de 1 (una) cuenta con distintas direcciones de correo electrónico o falseando, modificando y/o 
+      alterando sus datos personales de cualquier manera posible. En caso se detecte esta infracción, REMEAP E.I.R.L. a través de www.reactivate.pe comunicará al cliente informándole que todas 
+      sus cuentas serán agrupadas en una sola cuenta anulándose todas sus demás.
       </p>
 
       <p>
-         2. If your Country of Residence is the United States, you are contracting with My Pet Sitter, 30 N Gould St, Ste R, Sheridan, Wyoming, 82801, United States.
+      Si se verificará o sospechará algún uso fraudulento y/o malintencionado y/o contrario a estos Términos y Condiciones y/o contrarios a la buena fe, Reactivate Perú Perú tendrá el derecho 
+      inapelable de dar por terminados los créditos, no hacer efectiva las promociones, cancelar las transacciones en curso, dar de baja las cuentas y hasta de perseguir judicialmente a los infractores.
       </p>
 
       <p>
-         3. If your Country of Residence is outside of the United States, you are contracting with Trust My Pet Sitter.com, a company incorporated and registered in England and Wales with company number 10969708, whose registered office is International House, 142 Cromwell Rd, Kensington, London, SW7 4EF, England.
+      Reactivate Perú podrá realizar controles que crea convenientes para verificar la veracidad de la información dada por el Usuario. En ese sentido, se reserva el derecho de solicitar algún 
+      comprobante y/o dato adicional a efectos de corroborar los Datos Personales, así como de suspender temporal o definitivamente a aquellos Usuarios cuyos datos no hayan podido ser confirmados. 
+      En estos casos de inhabilitación, Reactivate Perú Perú podrá dar de baja la compra efectuada, sin que ello genere derecho alguno a resarcimiento, pago y/o indemnización.
       </p>
 
       <p>
-         4. If you change your Country of Residence, the Trust My Pet Sitter company you contract with will be determined by your new Country of Residence as specified above, from the date on which your Country of Residence changes.
+      El Miembro Reactivate Perú, una vez registrado, dispondrá de su dirección de email y una clave secreta (en adelante la "Clave") que le permitirá el acceso personalizado, confidencial y seguro. 
+      En caso de poseer estos datos, el Usuario tendrá la posibilidad de cambiar la Clave de acceso para lo cual deberá sujetarse al procedimiento establecido en el sitio respectivo. El Usuario se 
+      obliga a mantener la confidencialidad de su Clave de acceso, asumiendo totalmente la responsabilidad por el mantenimiento de la confidencialidad de su Clave secreta registrada en este sitio web, 
+      la cual le permite efectuar compras, solicitar servicios y obtener información (la “Cuenta”). Dicha Clave es de uso personal, y su entrega a terceros no involucra responsabilidad de Reactivate 
+      Perú Perú o de las empresas en caso de utilización indebida, negligente y/o incorrecta.
       </p>
-
-      <h2>Information about you</h2>
 
       <p>
-         1. Your privacy is important to us. You should read our Privacy Policy to understand how we collect, use and share information about you.
+      El Usuario será responsable por todas las operaciones efectuadas en y desde su Cuenta, pues el acceso a la misma está restringido al ingreso y uso de una Clave secreta, de conocimiento exclusivo del 
+      Usuario. El Miembro Reactivate Perú se compromete a notificar a Reactivate Perú Perú en forma inmediata y por medio idóneo y fehaciente, cualquier uso no autorizado de su Cuenta y/o Clave, así como 
+      el ingreso por terceros no autorizados a la misma. Se aclara que está prohibida la venta, cesión, préstamo o transferencia de la Clave y/o Cuenta bajo ningún título.
       </p>
 
-      <h2>Setting up an account</h2>
+      <h2>3.    Modificaciones del acuerdo</h2>
 
       <p>
-         1. In order to access our Service and use certain features and areas of the Service, you must register with us and set up an account with an ID and password or by connecting your Facebook or other social media account to the Service as made available from time to time (your "Account"). We encourage you to use strong passwords with your Account.
+      REMEAP E.I.R.L. y las Empresas vendedoras podrán modificar los Términos y Condiciones Generales en cualquier momento, haciendo públicos en el Sitio los términos modificados. Todos los términos 
+      modificados entrarán en vigor a los 07 (siete) días hábiles después de su publicación. Dentro de los 05 (cinco) días hábiles siguientes a la publicación de las modificaciones introducidas, 
+      el Usuario se deberá comunicar por e-mail a la siguiente dirección: hola@Reactivate Perú.com si no acepta las mismas; en ese caso quedará disuelto el vínculo contractual y será inhabilitado como 
+      Miembro durante las próximas 48 horas hábiles. Vencido este plazo, se considerará que el Usuario acepta los nuevos términos y el contrato continuará vinculando a ambas partes.
       </p>
 
-      <p>
-         2. You must be 18 years or older and capable in your country of residence of entering into a legally binding agreement to use our Service.
-      </p>
+      <h2>4.    Procedimiento para hacer uso de este sitio de internet</h2>
 
       <p>
-         3. You are responsible for maintaining the confidentiality of your login details and any activities that occur under your Account. If you have any concerns that your Account may have been misused, you should contact us at <span className={css.datecolor}>team@trustmypetsitter.com</span> straight away to let us know.
+      En los contratos ofrecidos por medio del Sitio, La Empresa informará, de manera inequívoca y fácilmente accesible, los pasos que deberán seguirse para celebrarlos, e informará, cuando corresponda, 
+      si el documento electrónico en que se formalice el contrato será archivado y si éste será accesible al Miembro. El sólo hecho de seguir los pasos que para tales efectos se indiquen en este sitio para 
+      efectuar una compra, equivale a aceptar que efectivamente ha dado cumplimiento a las condiciones contenidas en este apartado. Indicará, además, su dirección de correo postal o electrónico y los medios 
+      técnicos a disposición del Miembro para identificar y corregir errores en el envío o en sus datos.
       </p>
 
-      <h2>Your Content</h2>
+      <h2>5.    Medios de Pago que se podrán utilizar en el Sitio</h2>
 
       <p>
-         1. You confirm that any images, text or information that you make available or create ("User Content") whilst using the Service will meet the Rules of Acceptable Use.
+      Los productos y servicios ofrecidos en este sitio, salvo que se señale una forma diferente de pago para casos particulares u ofertas de determinados bienes o servicios, podrán ser cancelados 
+      utilizando los siguientes medios de pago permitidos en este sitio:
       </p>
 
       <p>
-         2. We do not claim ownership of your User Content. Instead, you grant us a perpetual, irrevocable, worldwide, non-exclusive, royalty-free licence to use, copy, reproduce and make available the User Content anywhere and in any form for the purposes of providing our Service (including allowing our users to view and use your User Content).
+      a.    Tarjetas de Crédito o Débito. La opción de pago con tarjetas de crédito o débito, está habilitada para tarjetas tipo VISA, Master Card, DINERS o American Express. Asimismo, los pagos con tarjeta de 
+      crédito o débito están sujetas a la aprobación del banco emisor de la tarjeta y a las validaciones internas de las pasarelas de pago encargadas de procesar la transacción. En los casos donde el pago no 
+      es aprobado o rechazado, la orden de compra asociada será cancelada de manera automática por Reactivate Perú.
       </p>
 
       <p>
-         3. We will also occasionally publish media, including but not limited to images and video, contained in your User Content in the context of sharing media updates of Pets on our website, mobile application and across third party social media applications. If you object to our use of the media contained in your User Content in this way, please contact us as <span className={css.datecolor}>team@trustmypetsitter.com</span> and we will remove them.
+      Por otro lado, El Sitio pone a disposición del usuario la opción de pagar con su tarjeta de crédito en cuotas (hasta 48 cuotas). Sin embargo, es responsabilidad exclusiva del usuario seleccionar de manera 
+      correcta las cuotas a pagar al momento de procesar el pago de su pedido, así como de verificar en la confirmación de compra que las cuotas elegidas son las correctas.
       </p>
 
       <p>
-         4. Our right to use your User Content does not in any way affect your privacy rights and we will only use information that identifies you as set out in our Privacy Policy.
+      Las transacciones mayores a S/. 1200.00 soles pasarán por un proceso de validación interna manual, con la finalidad de asegurar el correcto uso de la tarjeta; el cual, deberá ser atendido en un plazo no mayor a 48 horas hábiles.
       </p>
 
       <p>
-         5. We do not check or moderate any User Content before it is added to the Service by users. We may later check, moderate, reject, refuse or delete any User Content if anybody objects to it, or we think that it breaks any of the Rules of Acceptable Use.
+      b.    Empresas de Recaudo. Es un medio de pago donde el cliente hace la reserva de su compra y se le genera un código de pago, con el cual deberá acercarse a cualquier establecimiento o agencias afiliadas a la empresa de recaudo 
+      elegida por el cliente al momento de generar su pedido. El pago debe realizarse dentro del plazo que se establezca al momento de realizar la compra, caso contrario la orden de pedido se cancelará por falta de pago. Una vez realizado el pago, 
+      la validación del mismo se realiza dentro de las 24 horas hábiles. Las empresas de recaudo que actualmente se encuentran habilitadas como medios de pago en El Sitio son:
       </p>
-
-      <h2>Fees and payments</h2>
 
       <p>
-         1. Pet Sitters may set the price of their Pet Sitter Services ("Booking Fee's") within the parameters permitted by the Service. A fee equal to 20% of the Booking Fee (the "Sitter Service Fee") will be subtracted from the Booking Fee before payment to the Pet Sitter. Pet Owners pay the amount requested by the Pet Sitter, plus 10% Service Fee. Pet Services are charged a fee equal to 10% of the Booking Fee (the "Services Service Fee") will be subtraced from the Booking Fee before payment to the Pet Service Provider.
+      5.b.1.    PagoEfectivo: Compra con PagoEfectivo y paga a través de banca por internet o en cualquier oficina de Interbank, KasNet, BBVA, BCP, Scotiabank, BanBif, en agencias Wester Unión y en establecimientos autorizados que tengan el logotipo de 
+      PagoEfectivo y/o Full Carga. La empresa PagoEfectivo no realiza operaciones por devolución de dinero, para los casos de reembolsos el cliente debe comunicarse únicamente con el área de atención al cliente de Reactivate Perú al correo hola@reactivate.pe
       </p>
 
       <p>
-         2. Trust My Pet Sitter will facilitate the payment of the Booking Fee (less any Service Fee or Sitter Service Fee) from the Pet Owner to the Pet Sitter. Such transfer will generally occur 2-3 business days following completion of the relevant Pet Sitter and/or Service.
+      5.b.2.    Safety Pay: Compra con Safety Pay y paga directamente a través de tu cuenta bancaria local en la moneda de tu elección.
       </p>
 
       <p>
-         3. If Trust My Pet Sitter is unable to collect a payment from a Pet Owner for a specific booking, for reasons such as insufficient funds, suspicion of fraud or violation of our terms, we do not have to make a payment to a Pet Sitter (referred to in section 8.2).
-      </p>
 
-      <p>
-         4. Where a Pet Owner has obtained a refund in relation to their first booking in accordance with section 13.1, Pet Sitters agree that Trust My Pet Sitter will only pay the Pet Sitter up to the Minimum Unit Value based on the relevant Pet Sitter Services (the "Minimum Unit Value"being as follows: 1 night for Pet Sitting).
+      5.b.3.    Depósito Bancario: El cliente puede pagar directamente a una cuenta recaudadora de Reactivate Perú Perú en el banco Scotiabank, eligiendo este medio de pago. Para este medio de pago, es necesario tener en cuenta lo siguiente: 
+      i) el plazo máximo para realizar el pago del pedido es de 48 horas calendario, ii) una vez realizado el pago, es responsabilidad del cliente enviar el voucher de pago a nuestro correo de contacto hola@reactivate.pe para realizar la aprobación del pedido.
       </p>
 
       <p>
-         5. Pet Sitters and Pet Owners agree that all bookings (including, for the avoidance of doubt, new and repeat bookings) with a Pet Owner / Pet Sitter where the Pet Owner / Pet Sitter first contacted the Pet Owner / Pet Sitter via the Service ("Initial Contact"), must be made via the Service. Where an Initial Contact has been made, if a Pet Sitter confirms or proceeds with a booking with a Pet Owner outside of the Service, the Pet Sitter must pay an introduction fee of £500 per Pet Owner to TrustMyPetSitter.com.
+      c.    Pago Contra entrega en Efectivo. Mediante este medio de pago el cliente tiene la posibilidad de realizar su compra y pagarla al momento de recibir su pedido al personal logístico encargado de la entrega. Sin embargo, las condiciones de este medio de pago 
+      variaran de acuerdo a las políticas de pago de cada Empresa Vendedora. La opción de pago Contra entrega en efectivo, no está habilitada para ningún producto que supere los 20 kilogramos o tenga un precio de venta mayor o igual a los dos mil soles (S/. 2000.00)
       </p>
 
-      <h2>Your right to use the Service</h2>
+      <h2>6.   Formación del consentimiento en los contratos celebrados a través de este sitio</h2>
 
       <p>
-         1. The materials and content comprising the Service (excluding User Content) belongs to us or our third-party licensors and we give you permission to use these materials and content for the sole purpose of using the Service in accordance with these Terms of Service.
-      </p>
 
-      <p>
-         2. Your right to use the Service is personal to you and you are not allowed to give this right to another person or to sell, gift or transfer your Account to another person. Your right to use the Service does not stop us from giving other people the right to use the Service.
+      A través del Sitio web las empresas vendedoras realizarán ofertas de bienes y servicios, que podrán ser aceptadas a través de la aceptación, por vía electrónica, y utilizando los mecanismos que el mismo Sitio ofrece para ello. Toda aceptación de oferta quedará sujeta 
+      a la condición suspensiva de que la Empresa Vendedora valide la transacción. En consecuencia, para toda operación que se efectúe en este Sitio, la confirmación y/o validación o verificación por parte de la Empresa Vendedora, será requisito para la formación del consentimiento. 
+      Para validar la transacción la empresa vendedora deberá verificar: a) Que valida y acepta el medio de pago ofrecido por el usuario, c) Que los datos registrados por el cliente en el sitio coinciden con los proporcionados al efectuar su aceptación de oferta, d) Que el pago es 
+      acreditado por el Usuario y e) Que la dirección de entrega se encuentre dentro del territorio nacional.
       </p>
 
       <p>
-         3. Other than as allowed in these Terms of Service you are not given a right to use the Trust My Pet Sitter name, or any of the Trust My Pet Sitter trademarks, logos, domain names and other distinctive brand features.
+      Para informar al Usuario o consumidor acerca de esta validación, el Sitio deberá enviar una confirmación escrita a la misma dirección electrónica que haya registrado el Usuario aceptante de la oferta, o por cualquier medio de comunicación que garantice el debido y oportuno conocimiento 
+      del consumidor, o mediante el envío efectivo del producto. El consentimiento se entenderá formado desde el momento en que se envía esta confirmación escrita al Usuario y en el lugar en que fue expedida. La oferta efectuada por el Usuario es irrevocable salvo en circunstancias excepcionales, 
+      tales como que la Empresa Vendedora cambie sustancialmente la descripción del artículo después de realizada alguna oferta, o que exista un claro error tipográfico.
       </p>
 
       <p>
-         4. Unless allowed by these Terms of Service and as permitted by the functionality of the Service, <strong>you agree:</strong>
+      Aviso Legal: La venta y despacho de los productos está condicionada a su disponibilidad y a las existencias de producto. Cuando el producto no se encuentre disponible, El Sitio notificará de inmediato al cliente y devolverá el valor total del precio pagado.
       </p>
-
-      <ul className={css.termsul}>
-        <li className={css.termsli}>not to copy any portion of our Service;</li>
-        <li className={css.termsli}>not to give or sell or otherwise make available any portion of our Service to anybody else;</li>
-        <li className={css.termsli}>not to change our Service in any way;</li>
-        <li className={css.termsli}>not to look for or access the code of our Service that we have not expressly published publicly for general use.</li>
-        <li className={css.termsli}>You agree that you have no rights in or to any portion of the Service other than the right to use them in accordance with these Terms of Service.</li>
-      </ul>
 
-      <h2>Rules of Acceptable Use</h2>
+      <h2>7.   Plazo de validez de la oferta y precio</h2>
 
       <p>
-         1. In addition to the other requirements within these Terms of Service, this section describes specific rules that apply to your use of the Service (the "Rules of Acceptable Use").
+      El plazo de validez de la oferta es aquel que coincide con la fecha de vigencia indicada en la promoción o en virtud del agotamiento de las cantidades de productos disponibles para esa promoción debidamente informados al Usuario, o mientras la oferta se mantenga disponible, 
+      el menor de éstos plazos. Cuando quiera que en una promoción no se indique una fecha de terminación se entenderá que la actividad se extenderá hasta el agotamiento de los inventarios correspondientes.
       </p>
 
       <p>
-         2. When using the Service <strong>you must not</strong>:
+      Los precios de los productos y servicios disponibles en el Sitio, mientras aparezcan en él, solo tendrán vigencia y aplicación en éste y no serán aplicables a otros canales de venta utilizados por las empresas vendedoras, tales como 
+      tiendas físicas, venta telefónica, otros sitios de venta por vía electrónica, catálogos u otros. Los precios de los productos ofrecidos en el Sitio están expresados en soles peruanos salvo que se manifieste lo contrario. Los precios 
+      ofrecidos corresponden exclusivamente al valor del bien ofrecido y no incluyen gastos de transporte, manejo, envío, accesorios que no se describan expresamente ni ningún otro ítem adicional.
       </p>
 
-      <ul className={css.termsul}>
-        <li className={css.termsli}>circumvent, disable or otherwise interfere with any security related features of the Service or features that prevent or restrict use or copying of the content accessible via the Service;</li>
-        <li className={css.termsli}>impersonate any person, or misrepresent your identity or affiliation with any person or give the impression they are linked to Trust My Pet Sitter, if this is not the case</li>
-        <li className={css.termsli}>use the Service other than for its intended purpose as set out in these Terms of Service or if we have suspended or banned you from using it;</li>
-        <li className={css.termsli}>send junk, spam or repetitive messages, advocate, promote or engage in any illegal or unlawful conduct (including fraud or the sale of counterfeit or stolen items) or conduct that causes damage or injury to any person or property;</li>
-        <li className={css.termsli}>modify, interfere, intercept, disrupt or hack the Service or collect any data from the Service other than in accordance with these Terms of Service;</li>
-        <li className={css.termsli}>misuse the Service by knowingly introducing viruses, Trojans, worms, logic bombs or other material which would harm the Service or any user of the Service's own equipment;</li>
-        <li className={css.termsli}>submit or contribute any User Content that contains nudity or violence or is abusive, threatening, obscene, misleading, untrue, inaccurate or offensive;</li>
-        <li className={css.termsli}>submit or contribute any User Content without the permission of the content owner or otherwise infringe the copyright, trademark or other rights of third parties;</li>
-        <li className={css.termsli}>use any User Content in violation of any licensing terms specified by the owner;</li>
-        <li className={css.termsli}>submit or contribute any information or commentary about another person without that person's permission;</li>
-        <li className={css.termsli}>threaten, abuse or invade another's privacy, or cause annoyance, inconvenience or needless anxiety or be likely to harass, upset, embarrass, alarm or annoy any other person in particular any Trust My Pet Sitter staff member; or</li>
-        <li className={css.termsli}>use any automated system, including without limitation "robots", "spiders" or "offline readers" to access the Service in a manner that send more request messages to the Service than a human can reasonably produce in the same period.</li>
-        <li className={css.termsli}>Failure to comply with the Rules of Acceptable Use constitutes a serious breach of these Terms of Service, and may result in our taking all or any of the following actions (with or without notice):</li>
-        <li className={css.termsli}>immediate, temporary or permanent withdrawal of your right to use our Service;</li>
-        <li className={css.termsli}>immediate, temporary or permanent removal of any User Content;</li>
-        <li className={css.termsli}>issuing of a warning to you;</li>
-        <li className={css.termsli}>legal action against you including proceedings for reimbursement of all costs (including, but not limited to, reasonable administrative and legal costs) resulting from the breach;</li>
-        <li className={css.termsli}>disclosure of such information to law enforcement authorities as we reasonably feel is necessary.</li>
-        <li className={css.termsli}>The responses described in this clause 10.3 are not limited, and we may take any other action we reasonably deem appropriate.</li>
-        <li className={css.termsli}>Notice and takedown policy.</li>
-        <li className={css.termsli}>Any person may contact us by sending us an "Infringement Notice" if any content available through our Service infringes their rights or fails to comply with our Rules of Acceptable Use. The Infringement Notice should be sent by email to <span className={css.datecolor}>team@trustmypetsitter.com</span>. Please provide the information described below in the Infringement Notice.</li>
-        <li className={css.termsli}>If you are contacting us please send name and Detalles de Contacto; a statement explaining in enough detail why you consider that the content available through our Service infringes your rights or fails to comply with our Rules of Acceptable Use; a link to or such other means of identifying the problematic content.</li>
-      </ul>
-
-      <h2>Pet Owner and Pet Sitter obligations</h2>
-
-      <p>
-         1. You shall abide by any agreement reached between you and the Pet Sitter including the cancellation policy selected by the Pet Sitter.
-      </p>
-
       <p>
-         2. You shall provide all relevant information to any Pet Sitter you are dealing with including, but not limited to, <strong>the following:</strong>
+      Las empresas vendedoras podrán modificar cualquier información contenida en este Sitio, incluyendo las relacionadas con mercaderías, servicios, precios, existencias y condiciones, en cualquier momento y sin previo aviso, hasta el momento de recibir una aceptación de compra, 
+      la cual obligará al Merchant Partner, sujeto a las condiciones de validación que se indican anteriormente, es decir, una vez que se haya formado el consentimiento entre las partes de una determinada transacción.
       </p>
 
-      <ul className={css.termsul}>
-        <li className={css.termsli}>Medical conditions or nutritional needs of your Pet; and</li>
-        <li className={css.termsli}>Unusual behavioural or similar issues including details of previous incidents of behaviour which is unusual or dangerous (including urinating or defecating indoors).</li>
-        <li className={css.termsli}>You must allow the Pet Sitter at their request to visit and/or inspect your Pet before commencing their Pet Sitter Services.</li>
-        <li className={css.termsli}>Your Pet is not subject to any control order or of a breed subject to the Dangerous Pets Act 1991 or any other equivalent legislation and that you are in compliance with any other applicable law or regulation.</li>
-        <li className={css.termsli}>You shall ensure that your Pet is of good health, has been vaccinated and that all precautions for flea, parasite and other transmittable diseases have been taken.</li>
-        <li className={css.termsli}>If you do not return to collect your Pet from the Pet Sitter at the end of the Pet Sitter Services or if you did not provide the Pet Sitter with the necessary details to allow them to perform the Pet Sitter Services, then the Pet Sitter shall be entitled to place your Pet into alternative accommodation. You will be fully responsible for the costs of any such arrangements.</li>
-      </ul>
+       <h2>8.   Promociones y Campañas</h2>
 
-      <strong>To arrange and pay for bookings in accordance with the following:</strong>
+       <p>
+       Las promociones que se ofrezcan en este Sitio web no son necesariamente las mismas que ofrezcan otros canales de venta utilizados por las empresas, tales como tiendas físicas, 
+       venta telefónica, catálogos u otros, a menos que se señale expresamente en este sitio o en la publicidad que realicen las empresas para cada promoción. Cuando el Sitio ofrezca promociones 
+       que consistan en la entrega gratuita o rebajada de un producto por la compra de otro, el despacho del bien que se entregue gratuitamente o a precio rebajado, se hará en el mismo lugar en el 
+       cual se despacha el producto comprado. El Sitio somete sus promociones y actividades promocionales al cumplimiento de las normas vigentes.
+       </p>
 
-      <p>
-         1. where you send a direct booking request to a Pet Sitter, a hold will be placed on your credit or debit card; if the Pet Sitter accepts within 24 hours, the booking is confirmed,and you will be charged the funds. If the booking is not accepted by the Pet Sitter within 24 hours (or, where the Pet Sitter responds with a message to the Pet Owner within 24 hours but does not accept the booking request, within 6 days), the direct booking request will expire and the hold on your credit or debit card will be released (or, in the case of any payment using a bank transfer, the funds are transferred and refunded with the same execution date.).
-      </p>
+       <p>
+       Toda la información sobre nuestros términos y condiciones para nuestras campañas de marketing serán publicadas en Términos Legales de Campañas | https://reactivate.pe/legales
+       </p>
 
-      <p>
-         2. where you send an enquiry or message to a Pet Sitter without using a credit or debit card and the Pet Sitter confirms their availability, you will be prompted to log in, confirm and pay for the booking using your credit or debit card or via bank transfer or any other payment method we make available from time to time. In this case, you agree to pay for the booking within 48 hours of the Pet Sitter confirming their availability. If you do not pay for the booking within 48 hours of the Pet Sitter confirming their availability, Trust My Pet Sitter retains the right to cancel the booking.
-      </p>
+       <p>
+       Sobre el Uso de Cupones en la web.- Como parte de nuestras campañas promocionales, tanto el Sitio como las empresas vendedoras, impulsan por sus diferentes canales de promoción y marketing el uso de cupones de descuento para acceder a descuentos especiales por tiempo limitado. 
+       El uso de un cupón promocional está sujeto tanto a condiciones generales y a condiciones o restricciones específicas, las cuales se detallan en la siguientes URL: https://Reactivate Perú.com/legales Es responsabilidad del Usuario, leer y comprender las condiciones y restricciones sobre el uso 
+       de un cupón en particular; asimismo, es responsabilidad de Reactivate Perú, publicar de manera oportuna estas condiciones y/o restricciones en la web.
+       </p>
 
-      <strong>Once a booking has been confirmed (by either the Pet Owner or Pet Sitter):</strong>
+      <h2>9.   Despacho de los productos</h2>
 
       <p>
-         3. You will be available to communicate with the Pet Sitter and respond promptly to the Pet Sitter's queries relating to the Pet Sitter Services in order to allow for the smooth execution of the Pet Sitter Services.
+      Los productos adquiridos a través del Sitio se sujetarán a las condiciones de despacho y entrega elegidas por el Usuario y disponibles en el Sitio. La información del lugar de envío es de 
+      exclusiva responsabilidad del Usuario. Los plazos elegidos para el despacho y entrega, se cuentan desde que El Sitio válida la orden de compra y el medio de pago utilizado, considerándose 
+      días hábiles para el cumplimiento de dicho plazo. Asimismo, El Sitio comunicará por correo electrónico a los Usuarios, los datos para que pueda realizar el seguimiento del estado del envío por 
+      Internet.
       </p>
 
       <p>
-         4. You will provide the Pet Sitter with an alternative contact and details of your Pet's veterinarian in case of an emergency.
+      REMEAP E.I.R.L. ofrece una cobertura de despachos a nivel de Lima y Provincias, sin embargo, estas están sujetas a las políticas de despacho de cada Merchant Partner y a la accesibilidad de los destinos, 
+      esto será identificado por el Usuario al momento de realizar su compra y elegir el DEPARTAMENTO, PROVINCIA Y DISTRITO de destino.
       </p>
 
       <p>
-         5.  If the Pet Sitter Services are no longer required, you may cancel the booking (using the cancellation function on our website or mobile application only) up to 48 hours preceding the start date of the Pet Sitter Services. The cancellation fee payable will depend on the cancellation policy of the Pet Sitter which you explicitly agree to when paying for the booking.
-      </p>
-
-      <strong>If you are a Pet Sitter, you agree to the following in respect of any Pet Sitter Services you supply:</strong>
+      REMEAP E.I.R.L. garantiza un (01) intento de entrega a la dirección que el Usuario indicó en su orden de compra. En tal sentido, Si en la primera visita el Usuario está ausente o no dan razón de él, 
+      el transportista informará a Reactivate Perú la visita realizada; asimismo, dejará registro de ella mediante una fotografía al inmueble visitado o dejando una constancia física “debajo de la puerta” 
+      donde se indica la fecha de la misma, y el detalle físico del domicilio. En tal sentido, es responsabilidad del cliente mantenerse informado sobre el estado de su pedido y sobre las notificaciones que 
+      pueda recibir a su correo electrónico o teléfono celular con respecto a la visita del Courier. Asimismo, tener claro que no es obligación de Reactivate Perú, la tienda vendedora o del Courier asignado; 
+      coordinar previamente una fecha o horario de entrega.
 
-      <p>
-         6. You will provide the Pet Sitter with an alternative contact and details of your Pet's veterinarian in case of an emergency.
       </p>
 
       <p>
-         7. Pet Sitter Services shall be in accordance with applicable law (including applicable tax regulations, Pet regulations and that any required licenses are obtained) and with any agreement reached between you and the Pet Owner.
+      Reactivate Perú no garantiza un segundo intento de entrega; no obstante, con el afán de optimizar su servicio el Courier puede optar por hacer un segundo intento de entrega si es que no tuvo éxito en la primera visita; 
+      de ser así, esta se dará al día siguiente del primer intento fallido y sin la obligación de una coordinación previa. En tal sentido, si el cliente nuevamente se encuentra ausente, el paquete retornará a los almacenes del Courier. 
+      El cliente puede solicitar una tercera visita, sin embargo, esta dependerá de las políticas de despacho de cada Merchant Partner y está sujeta al pago del costo logístico.
       </p>
 
       <p>
-         8. You shall keep a register containing a description of any Pets received into your care, date of arrival and departure, and the name and address of the Pet Owner.
+      Conformidad del Paquete Recibido
       </p>
 
       <p>
-         9. You shall keep all Pets on a lead in public areas unless in a zone where specifically permitted to walk Pets off a lead.
+      Cuando el Usuario recibe un producto, deberá revisar que la caja o bolsa que contenga el producto, esté sellado y no tenga signos de apertura previa. En caso detecte esto, 
+      no deberá recibir el producto y deberá ponerse en contactos inmediatamente con El Sitio. En caso que el producto fuera recibido en buenas condiciones y completo, el Usuario 
+      irmará la Guía de Remisión y Boleta de Venta o Factura, dejando así conformidad de la entrega y producto recibido. Luego de la aceptación del producto y firma documentaria, 
+      el Usuario no podrá presentar reclamo por daño del producto o faltante del mismo, sólo se atenderán reclamos por temas de garantía o cualquiera descrita dentro de la Política 
+      de Devolución y Cambios.
       </p>
-
-      <strong>To arrange for bookings in accordance with the following:</strong>
 
       <p>
-      10. where a Pet Owner sends you a direct booking request, you will accept or decline the booking within 24 hours. If you do not accept the booking within 24 hours, the booking request will expire unless you have responded with a message within 24 hours, in which case the booking will expire after 6 days.
-      </p>
+      Cada Tienda Vendedora, al realizar la entrega de un producto de grandes dimensiones, envía con el transportista, un “FORMATO DE CONFORMIDAD DE ENTREGA”, donde el cliente debe firmar al recibir, 
+      dejando constancia que, realizó la revisión física externa del producto y que este se encuentra en buenas condiciones. De tener alguna observación al momento de la recepción, no debe recibir el 
+      producto ni firmar ningún documento, y ponerse en contacto inmediatamente con Reactivate Perú; asimismo el transportista deberá llevarse el producto. Luego de la aceptación del producto y firma 
+      documentaria, el Usuario no podrá presentar reclamo por daño de producto o faltante del mismo, sólo se atenderán reclamos por temas de garantía o cualquiera descrita dentro de la Política de
+      Devolución y Cambios.
 
-      <p>
-      11. where a Pet Owner sends you an enquiry or message, you will respond with your availability within 24 hours.
       </p>
-
-      <strong>Once a booking has been confirmed (by either the Pet Owner or Pet Sitter):</strong>
 
       <p>
-      12. You will be available to communicate with the Pet Owner and respond promptly to the Pet Owner's queries relating to the Pet Sitter Services in order to allow for the smooth execution of the Pet Sitter Services.
-      </p>
 
-      <p>
-      13. You will be available for a "Meet and Greet" (as described in our guidelines made available in the Service from time to time) with the Pet Owner before commencement of the Pet Sitter Services.
-      </p>
+      El Transportista al realizar la entrega de productos de grandes dimensiones, no está facultado ni está autorizado de realizar maniobras especiales, llámese desmontaje de puertas ni ventanas, 
+      ingreso del producto con poleas, sogas, etc. La entrega se realizará hasta un máximo de 3 pisos, siempre y cuando el acceso al mismo sea viable (escaleras amplias o ascensor de grandes dimensiones). 
+      No se ingresará el producto por balcones, ventanas ni tragaluz.
 
-      <p>
-      14. If the response or Meet and Greet obligations set out above are not adhered to, Trust My Pet Sitter may cancel the booking, fully refunding the Pet Owner regardless of the Pet Sitter's selected cancellation policy.
       </p>
 
       <p>
-       15. You acknowledge that if you breach these Terms of Service or any agreement with a Pet Owner, Trust My Pet Sitter at its sole discretion may cancel the booking, fully refunding the Pet Owner regardless of the Pet Sitter's selected cancellation policy.
-      </p>
 
-      <p>
-       16. If a situation arises in the course of the Pet Sitter Services where the Pet Owner's Pet requires emergency veterinary care, the Pet Sitter shall make reasonable efforts to inform the Pet Owner (or, where the Pet Owner is not available, the alternative contact provided by the Pet Owner) and Trust My Pet Sitter as soon as possible.
+      El Transportista no realiza ni instalaciones ni armados de productos (a menos que lo diga expresamente en la descripción de producto).
       </p>
 
-      <h2>Booking Guarantees for Pet Owners</h2>
+  <h2>10.   Política de Devolución o Cambio por derecho de devolución</h2>
 
-      <strong>If, in relation to a Pet Owner's first booking of Pet Sitter Services, the Pet Owner has any genuine concerns about the quality or suitability of the Pet Sitter or the Pet Sitter Services, they may request a refund from Trust My Pet Sitter("Refund Request"), regardless of the Pet Sitter's selected cancellation policy. Any Refund Request must be made in accordance with the following:</strong>
-
-      <p>
-         1. The Refund Request must be by email to Trust My Pet Sitter at <span className={css.datecolor}>team@trustmypetsitter.com</span> within 24 hours of commencement of the Pet Sitter Services (for the purposes of this clause Pet Sitter Services are considered to commence at 8am local time on the first day of the Pet Sitter Services).
+      <p> 
+      Todas las tiendas y/o marcas que venden en www.reactivate.pe están comprometidas a que el cliente se encuentre completamente satisfecho durante toda su experiencia de compra. Sin embargo, somos conscientes 
+      de que en ciertas ocasiones es posible que quieras devolver o cambiar un producto. En ese sentido, Los Merchants tienen la responsabilidad de publicar sus políticas de cambios, devoluciones y garantías en 
+      cada página de información de producto (product page). Asimismo, es responsabilidad de cada comprador/usuario revisar estas políticas antes de realizar la compra de cualquier producto. No obstante, cabe señalar 
+      que estas políticas no afectan los derechos del cliente estipulados en la Ley 29571 del Código de Defensa del Consumidor.
       </p>
 
       <p>
-         2. The Refund Request must include a detailed description, including photographic evidence if applicable.
+      Las solicitudes de cambios y devoluciones serán recibidas y atendidas por nuestro equipo de Servicio al Cliente, que tiene como principal objetivo garantizar una respuesta rápida y oportuna, velando en todo momento 
+      que Los Merchants cumplan con entregar un óptimo servicio de pre y post venta a todos nuestros clientes.
       </p>
 
       <p>
-         3. Following receipt of a Refund Request, Trust My Pet Sitter, in its sole discretion, will determine whether a refund will be paid to the Pet Owner. This review process may take up to 3 weeks. If a refund is to be paid, Trust My Pet Sitter will process the refund to your credit or debit card; it may take up to 10 days for the money to appear in your account.
+      Para mayor información sobre políticas de devolución, ingrese a https://reactivate.pe/pages/changes
       </p>
 
-      <strong>If, at any point following confirmation of a booking or the Pet Sitter Services are in progress but not yet completed, the Pet Sitter cancels the booking, Trust My Pet Sitter shall:</strong>
+    <h2>11.   Política de Garantías</h2>  
 
       <p>
-        4. Refund the Booking Fee and the Owner Service Fee to the Pet Owner in full; and
+      En caso que un producto adquirido a través de www.reactivate.pe presente problemas de funcionamiento, el cliente podrá contactar al Equipo de Servicio al Cliente de Reactivate Perú quien proporcionará los datos de la 
+      Empresa Vendedora para que éste le brinde un soporte adecuado a su solicitud de garantía.
       </p>
 
       <p>
-        5. If the booking is cancelled during, or within 10 days before the commencement of, the Pet Sitter Services, assist the Pet Owner in finding an alternative Pet Sitter and cover up to 25% of any price difference between the original cancelled booking and the alternative booking.
+      La garantía del vendedor o la marca inicia después de haberse cumplido los 7 días hábiles desde la entrega del producto. El tiempo de garantía lo establece cada empresa vendedora, así como los términos para hacer efectiva 
+      la misma. En ese sentido, Reactivate Perú velará para que los casos presentados sean atendidos de manera oportuna por cada tienda; sin embargo, no se hace responsable por los fallos que determine el vendedor luego de inspeccionar un producto.
       </p>
-
-      <strong>Emergency medical situations:</strong>
-
-      <p>
-        6. The Pet Sitter is required to make reasonable efforts to inform the Pet Owner (or, where the Pet Owner is not available, the alternative contact provided by the Pet Owner) and Trust My Pet Sitter as soon as possible where a situation has arisen where Pet requires emergency veterinary care. Where Trust My Pet Sitter has been informed by the Pet Sitter that such a situation has arisen, Trust My Pet Sitter shall also make reasonable efforts to contact the Pet Owner to notify them of the situation where the Pet Sitter has been unable to contact them.
-      </p>     
 
       <p>
-      7. If the Pet Owner cannot be reached following reasonable efforts, the Pet Owner authorises the Pet Sitter to seek care on their behalf to promptly treat the Pet Owner's Pet. The Pet Owner agrees that they will bear the full cost of any such emergency medical treatment and will reimburse the Pet Sitter where the Pet Sitter has paid for such emergency medical treatment accordingly. The Pet Owner may be able to have the cost of such emergency medical treatment reimbursed by Trust My Pet Sitter as described at clause 15 below.
-      </p> 
-
-      <strong>Insurance Coverage and Discretionary Reimbursement of Veterinary Fees:</strong>
-
-      <p>
-      8. All bookings made via the Service automatically include third party liability insurance ("Third Party Liability") for the benefit of Pet Owners at no extra cost. Pet Sitters acknowledge they are not third party beneficiaries of the Third Party Liability.
-      </p> 
-
-      <p>
-      9. Where you have your own insurance, the Third Party Liability will only be available where you have sought reimbursement under your own insurance and reimbursement was denied or to the extent that the reimbursement does not cover all of your costs. We may request any documentation regarding insurance claims made by you to your own insurance provider.
-      </p> 
-
-      <p>
-      10. In the event that you incur any veterinary fees in the course of providing your Pet Sitter Services, arising out of an incident that has occurred during and in connection with the Pet Sitter Services, we may, at our discretion, reimburse you for such veterinary fees up to a maximum of £2,000 per Pet per booking (Veterinary Reimbursement).
+      Condiciones Generales:
       </p>
 
       <p>
-      11. Nothing in this clause 15 limits any liability the Pet Sitter owes to the Pet Owner or Trust My Pet Sitter in connection with the Pet Sitter Services.
+      Los accesorios no cuentan con garantía.
+      Cada producto cuenta con un plazo de garantía determinado en las características del producto señalados en www.reactivate.pe
       </p>
 
-      <strong>Third Party Liability:</strong>
-
       <p>
-      12. Third Party Liability provides you with protection against liability, up to a maximum of €2,000,000, for another party's claims for damage to their property or for bodily injury arising out of an incident that has occurred during and in connection with the Pet Sitter Services, for example, where the Pet has bitten a pedestrian. There's a standard excess of £50 on each claim made.
+      Todas las solicitudes de garantías deben cumplir con las siguientes consideraciones:
       </p>
 
-      <strong>Third Party Liability does not cover the following:</strong>
-
       <p>
-      13. Damage incurred to a Pet Sitter's (or any person related to the Pet Sitter) property;
+      La garantía del producto debe estar vigente.
+      El producto debe contar con boleta o factura y documentos de garantía. Si el producto no tiene un documento que certifique el periodo de garantía, 
+      el producto tendrá la garantía indicada dentro de las características del producto.
+      El daño del producto debe ser por un defecto de fabricación, falla técnica o irregularidad.
+      Ninguna garantía se aplicará si el producto presenta señales de mal uso por parte del cliente o cuando se detecte que fue maniobrado por personal técnico no autorizado.
       </p>
 
       <p>
-      14. Claims relating to services not falling within the Pet Sitter Services as agreed between the Pet Owner and Pet Sitter;
+      Ante la aplicación de la garantía, los representantes de la marca (personal técnico autorizado) determinarán, previa evaluación del producto, si procede la atención por 
+      garantía y entregarán al cliente un informe técnico en señal de conformidad.
       </p>
 
       <p>
-       15. Claims relating to the sale or supply of any products;
+      La asistencia técnica se realizará dentro de los treinta (30) días hábiles siguientes, contados a partir del día siguiente a la entrega del producto a la empresa vendedora. 
+      En casos complejos, dicho plazo puede extenderse por otro de quince (15) días hábiles acabado el primer plazo, lo cual le será comunicado oportunamente vía correo electrónico al cliente.
       </p>
 
       <p>
-       16. Claims relating to any Meet and Greet before the Pet Sitter Services commence;
+      En caso se verifique la falla o defecto de fábrica, la Empresa Vendedora deberá reparar, reponer el producto (sujeto a la disponibilidad del stock actual) o reembolsar el costo del 
+      producto (no incluye flete), esto dependerá del informe técnico emitido por el proveedor o la marca.
       </p>
 
       <p>
-       17. Claims relating to an incident where the Pet Owner's Pet was off the lead in a public space, except in zones where specifically permitted to walk Pets off a lead;
+      En caso de la reposición del producto, se le entregará uno nuevo, sin costo alguno en el plazo de los quince (15) días hábiles siguientes luego de que se notifique al cliente el informe 
+      técnico con la aceptación de la garantía. La reposición del producto, siempre se encontrará sujeta a la disponibilidad del mismo y correrá bajo responsabilidad de la Empresa Vendedora.
       </p>
 
       <p>
-       18. The medical expenses of the Pet Sitter or anyone related to the Pet Sitter;
+      En caso el cliente decida requerir la devolución de dinero, esta se realizará de la siguiente manera:
       </p>
 
       <p>
-       19. Claims relating to an incident where the Pet Owner's Pet is not compliant with legislation, licences or other legal requirements relating to the regulation of dangerous Pets;
+
+      A partir del día siguiente de la aceptación de la garantía por parte del merchant partner y su posterior comunicación al cliente, 
+      Reactivate Perú tiene hasta 15 días hábiles para efectuar el reembolso. De devolverse el monto pagado, se tomará como base el valor del producto 
+      (no incluye gastos de envío).
       </p>
 
       <p>
-       20. Claims relating to an incident outside of the Pet Owner and Pet Sitter's control including without limitation a natural disaster, terrorist attack, fire, explosion or other accident;
+      El tiempo que duren las verificaciones o reparaciones efectuadas al amparo de la garantía no es computable dentro del plazo de la misma. 
+      En el caso de reposición del producto, se renovará el plazo de la garantía.
       </p>
 
       <p>
-      21. Claims relating to an incident where the Pet Sitter Services are not provided in accordance with applicable Pet boarding regulations or any required licenses;
+      Si la garantía no aplica, el producto se enviará de regreso al cliente con la razón del rechazo por escrito.
       </p>
 
       <p>
-      22. Indirect, incidental, special or consequential damages including but not limited to emotional damage;
+      Adicionalmente, las condiciones para aceptar un proceso de garantías dependen de la categoría de cada producto y estas estarán 
+      publicadas en las políticas de garantía de cada uno de estos.
       </p>
 
-      <strong>In order to qualify for Third Party Liability, you must comply with all obligations set out in these Terms of Service and in addition:</strong>
+   <h2>11.   Comprobantes de pago</h2>  
 
       <p>
-      23. We must be informed of the incident within 24 hours of it occurring; and
+      Según el reglamento de Comprobantes de Pago aprobado por la Resolución de Superintendencia N° 007-99 / SUNAT (RCP) y el Texto Único Ordenado de la Ley 
+      del Impuesto General a las Ventas e Impuesto Selectivo al Consumo, aprobado mediante Decreto Supremo N° 055-99-EF y normas modificatorias (TUO del IGV): 
+      “No existe ningún procedimiento vigente que permita el canje de boletas de venta por facturas, más aún las notas de crédito no se encuentran previstas para 
+      modificar al adquirente o usuario que figura en el comprobante de pago original”.
       </p>
 
       <p>
-      24. The Pet Sitter must collect all information from the relevant third party such as their name, address, telephone number and a summary of the incident (including timings and names of witnesses) and relay this information to us in full.
+      Teniendo en cuenta esta resolución, es obligación del consumidor decidir correctamente el documento que solicitará como comprobante al momento de su compra, 
+      ya que según los párrafos citados no procederá cambio alguno.
       </p>
 
-      <p>
-      25. Where you have complied with these Terms of Service and wish to make a claim for Third Party Liability, we will submit the claim to our insurance provider who will deal with you directly. This will usually take around 5 to 10 weeks.
-      </p>
+    <h2>12.   Reembolsos</h2>
 
-      <strong>Veterinary Reimbursement may cover veterinary fees incurred in respect of the following:</strong>
+    <p>
+    Luego que el reembolso es aprobado y ejecutado, el tiempo de procesamiento varía según el método de pago usado.
+    </p>
 
-      <p>
-      26. Emergency visits to a veterinarian during a Pet Sitter Services;
-      </p>
+    <p>
+    Para una compra con tarjeta de crédito, débito o métodos que permitan la devolución del dinero a través de una cuenta asociada, 
+    se hará el reverso a la tarjeta o a la cuenta asociada.
+    </p>
 
-      <p>
-       27. A follow-up visit to a veterinarian after the Pet Sitter Services within 7 days of the date of the initial Emergency visit (only as a follow-up from an initial Emergency visit which occurred during the Pet Sitter Services);.
-      </p>
-      
-      <p>
-       28. Cost of medicine and/or some surgeries performed (as prescribed in relation to the Emergency which occurred during the Pet Sitter Services).
-      </p>
+    <p>
+    Para métodos por depósito bancario o pagos en efectivo, se hará un depósito bancario.
+    </p>
 
-      <strong>Veterinary Reimbursement will not, however, cover veterinary fees incurred in respect of any of the following:</strong>
+    <p>
+     Tiempos de procesamiento:
+    </p>
 
-      <p>
-      29. ehabilitation treatment or other post-emergency treatment (for example follow-up visits after a surgery);
-      </p>
+    <p>
+    Reverso a la tarjeta: El tiempo del reembolso a una tarjeta puede ser hasta 21 días hábiles. En ambos casos, el tiempo de procesamiento es 
+    responsabilidad de la entidad financiera que emitió la tarjeta y es contado desde la ejecución del reembolso.
+    </p>
 
-      <p>
-      30. treatments for the Pet Sitter's own pets;
-      </p>
+    <p>
+    Depósito bancario: Para recibir el dinero en una cuenta bancaria, el titular de la cuenta debe ser el mismo que realizó la compra en www.reactivate.pe. 
+    El tiempo de procesamiento es de 4 días hábiles desde su ejecución. La información bancaria proporcionada por el cliente debe ser correcta para evitar 
+    retrasos en la atención. De no ser así los tiempos de ejecución y procesamiento se prolongarán.
+    </p>
 
-      <p>
-      31. pre-existing conditions, conditions related to pregnancy, pathology or congenital disorder (such us epilepsy, heart problems or cancer) or conditions caused by old age;
-      </p>
+    <p>
+    Los datos necesarios son:
+    </p>
 
-      <p>
-      32. kennel cough or any other diseases that the Pet Owner should have their Pet vaccinated or protected against (including fleas, ticks, leishmania, parasites); and
-      </p>
+    <p>
+    Nombre y apellido,
+    DNI, Carnet de extranjería o Pasaporte,
+    Número de orden,
+    Correo electrónico registrado en www.reactivate.pe,
+    Datos de la cuenta bancaria
+    </p>
 
-      <p>
-      33. claims relating to any Meet and Greet before the Pet Sitter Services commence;
-      </p>
+    <h2>14. Propiedad Intelectual    </h2>
 
-      <p>
-      34. claims relating to any Pet not related to a Pet Sitter Services.
-      </p>
+    <p>
+    Todo el contenido incluido o puesto a disposición del Usuario en el Sitio, incluyendo textos, gráficas, logos, íconos, imágenes, archivos de audio, descargas 
+    digitales y cualquier otra información (el "Contenido"), es de propiedad de REMEAP E.I.R.L. o ha sido licenciada a ésta por las Empresas Vendedoras. La compilación del 
+    Contenido es propiedad exclusiva de REMEAP E.I.R.L. y, en tal sentido, el Usuario debe abstenerse de extraer y/o reutilizar partes del Contenido sin el consentimiento 
+    previo y expreso de la Empresa.
 
-      <strong>In order to qualify for Veterinary Reimbursement, you must comply with all obligations set out in these Terms of Service and in addition:</strong>
+    </p>
 
-      <p>
-      35. we must be informed us of the incident within 24 hours of it occurring or within 24 hours of returning to Tu Negocio and pet after care from the Pet Sitter; and
-      </p>
+    <p>
 
-      <p>
-      36. must provide us with written and signed documentation from a veterinarian in good standing detailing their fees and the amount paid or to be paid and a report detailing the treatment. We may request additional veterinarian records for the Pet Owner's Pet in order to validate any claims.
-      </p>
+    Además del Contenido, las marcas, denominativas o figurativas, marcas de servicio, diseños industriales y cualquier otro elemento de propiedad intelectual 
+    que haga parte del Contenido (la "Propiedad Industrial"), son de propiedad de REMEAP E.I.R.L. o de las Empresas Vendedoras y, por tal razón, están protegidas 
+    por las leyes y los tratados internacionales de derecho de autor, marcas, patentes, modelos y diseños industriales. El uso indebido y la reproducción total o 
+    parcial de dichos contenidos quedan prohibidos, salvo autorización expresa y por escrito de REMEAP E.I.R.L., asimismo, no pueden ser usadas por los Usuarios 
+    en conexión con cualquier producto o servicio que no sea provisto por REMEAP E.I.R.L. En el mismo sentido, la Propiedad Industrial no podrá ser usada por los 
+    Usuarios en conexión con cualquier producto y servicio que no sea de aquellos que comercializan dentro del Sitio o de forma que produzca confusión con sus 
+    clientes o que desacredite a la Empresa o a las Empresas Vendedoras
 
-      <p>
-      37. Qualifying for Veterinary Reimbursement does not, however, entitle you to receive Veterinary Reimbursement, as we may offer or withhold Veterinary Reimbursement entirely at our discretion. Where you have complied with these Terms of Service and wish to request Veterinary Reimbursement, we will inform you if we will reimburse you for any veterinary fees within 2 weeks.
-      </p>
+    </p>
 
-      <strong>Advertisements on the Service</strong>
+    <h2> 15. Propiedad Intelectual DE TERCEROS  </h2>
 
-      <p>
-      38. We and our selected business partners may provide advertising to you through the Service or by other methods such as email. This advertising may be based on your User Content or other information available through the Service. When delivering advertising we will only use information that identifies you as set out in our Privacy Policy.
-      </p>
+    <p>
+
+    REMEAP E.I.R.L. es una empresa respetuosa de las leyes y no pretende aprovecharse de la reputación de terceros, apropiándose de la propiedad intelectual por ellos 
+    protegida. Por lo anterior contamos con herramientas que buscan asegurar que productos que se adquieran a través de nuestra página sean originales y hayan ingresado 
+    legalmente al país. Teniendo en cuenta lo anterior, si usted sospecha que algún producto que se encuentra en nuestra página infringe derecho de propiedad intelectual 
+    de terceros o infringe derechos legalmente protegido por usted, agradecemos notificarnoslo para desactivar dichos productos inmediatamente de nuestra página e iniciar 
+    todas las acciones tendientes a evitar que esto siga sucediendo.
+
+    </p>
+
+    <h2>16. Responsabilidad de Reactivate Perú PERÚ   </h2>
+
+    <p>
 
-      <h2>Ending our relationship</h2>
+    REMEAP E.I.R.L. hará lo posible dentro de sus capacidades para que la transmisión del Sitio sea ininterrumpida y libre de errores. Sin embargo, dada la naturaleza de la 
+    Internet, dichas condiciones no pueden ser garantizadas. En el mismo sentido, el acceso del Usuario a la Cuenta puede ser ocasionalmente restringido o suspendido con el 
+    objeto de efectuar reparaciones, mantenimiento o introducir nuevos Servicios. REMEAP E.I.R.L. no será responsable por pérdidas (i) que no hayan sido causadas por el 
+    incumplimiento de sus obligaciones; (ii) lucro cesante o pérdidas de oportunidades comerciales; (iii) cualquier daño indirecto.
 
-      <p>1. If at any time you do not feel that you can agree to these Terms of Service or any changes made to the Terms of Service or the Service, you must immediately stop using the Service.</p>
-      <p>2. If you wish to end your use of the Service, you may deactivate your account using the "Close Account" section of your account. Alternatively, you may send an email to <span className={css.datecolor}>team@trustmypetsitter.com</span> and we will deactivate your account. If you deactivate your account, you will not be able to access the account or data previously stored in the account. For information on our retention of this data, please refer to our Privacy Policy</p>
-      <p>3. We may immediately end your use of the Service if you break the Rules of Acceptable Use, any other important rule(s), or terms and conditions we set for accessing and using the Service including these Terms of Service.</p>
-      <p>4. We may also withdraw the Service as long as we give you reasonable notice that we plan to do this so that you have a reasonable period of time to download any of your User Content.</p>
-      <p>5. If you or we end your use of the Service or we withdraw the Service as described in this section, we may delete or modify your User Content, account or any other information we hold about you. You will also lose any rights you have to use the Service or access our content or your User Content. We will not offer you compensation for any losses.</p>
-      <p>6. The termination of your use of the Service and the cancellation of your Account shall not affect any of your outstanding obligations to us (including obligation to pay any sums to us), or to any Pet Owner or Pet Sitter pursuant to any agreement with that Pet Owner or Pet Sitter.</p>
+    </p>
 
-      <h2>Liability</h2>
+    <h2>17.  Indemnización  </h2>
 
-      <p>1. You acknowledge that Trust My Pet Sitter is not a party to any agreement between Pet Owners and Pet Sitters. Accordingly, Trust My Pet Sitter will not be liable for any breach of a contract between Pet Owners and Pet Sitters. For the avoidance of doubt, the Pet Sitter is solely responsible for carrying out the Pet Sitting Services. Trust My Pet Sitter assumes no liability for any loss or damage suffered by a Pet Owner, including harm caused to their Pet, which is caused by the Pet Sitter's action or inaction.</p>
-      <p>2. Pet Sitters agree and accept liability for any loss or damage we may suffer in respect of any breach by Pet Sitters of these Terms of Service or any agreement with Pet Owners.</p>
-      <p>3. Pet Sitters agree to indemnify us for any loss or damage we may suffer as a result of any Pet Owner bringing any claim against us or taking any action against us as a result of any breach by Pet Sitters of these Terms of Service or any agreement with Pet Owners.</p>
-      <p>4. Pet Owners agree to indemnify us for any loss or damage we may suffer as a result of any claim or action brought against us as a result of any breach by Pet Owner of these Terms of Service or any agreement with Pet Owners.</p>
-      <p>5. Our Service makes available third party content such as User Content. As we do not produce such third party content, we cannot be responsible for it in any way. In particular, we cannot verify any claims made by a Pet Owner or Pet Sitter.</p>
-      <p>6. We will use reasonable endeavours to ensure that the Service is reasonably available during normal business hours.</p>
-      <p>7. Unfortunately, due to the nature of the Internet and technology, the Service (save as set out in clause 20.1 above) is provided on an "as available" and "as is" basis. This means that we are unable to promise that your use of the Service will be uninterrupted, without delays, error-free or meet your expectations and we do not give any commitment relating to the performance or availability of the Service in these Terms of Service and, to the extent we are able to do so, we exclude any commitments that may be implied by law.</p>
-      <p>8. In the event of a claim arising out of the provision of our Service, our responsibility to you will never be more than the total amount you have paid us or two thousand British pounds (£2,000).</p>
-      <p>9. In every case, we will never be responsible for any loss or damage that is not reasonably foreseeable.</p>
+    <p>
 
-      <h2>Resolving disputes</h2>
+    El Usuario indemnizará y mantendrá indemne a REMEAP E.I.R.L., sus filiales, empresas controladas y/o controlantes, directivos, administradores, representantes y empleados, 
+    por su incumplimiento en los Términos y Condiciones Generales y demás Políticas que se entienden incorporadas al presente o por la violación de cualesquiera leyes o derechos 
+    de terceros, incluyendo los honorarios de abogados en una cantidad razonable.
 
-      <p>1. If you have a dispute with us relating to the Service, in the first instance please contact us at <span className={css.datecolor}>team@trustmypetsitter.com</span> and attempt to resolve the dispute with us informally. In the unlikely event that we are not able to resolve a dispute informally, we will discuss and agree with you the most effective way of resolving the dispute.</p>
-      <p>2. If you have a dispute with another person who has registered with our Service in connection with the Service, we will provide reasonable assistance to resolve such disputes informally. For the avoidance of doubt, we are under no obligation to resolve such a dispute to the satisfaction of both parties.</p>
-    
-      <h2>Changes to the Service</h2>
+    </p>
 
-      <p>1. We are constantly updating and improving the Service to try and find ways to provide you with new and innovative features and services. Improvements and updates are also made to reflect changing technologies, tastes, behaviours and the way people use the Internet and our Service.</p>
-      <p>2. In order to do this, we may need to update, reset, stop offering and/or supporting a particular part of the Service, or feature relating to the Service ("changes to the Service"). These changes to the Service may affect your past activities on the Service, features that you use, your Profile and your User Content ("Service elements"). Any changes to the Service could involve your Service elements being deleted or reset.</p>
-      <p>3. You agree that a key characteristic of our Service is that changes to the Service will take place over time and this is an important basis on which we grant you access to the Service. Once we have made changes to the Service, your continued use of the Service will show that you have accepted any changes to the Service. You are always free to stop using the Service or deactivate your Account in the settings feature of the Service.</p>
-      <p>4. We will try, where possible and reasonable, to contact you to let you know about any significant changes to the Service.</p>
+    <h2>18. Términos de Ley </h2>
 
-      <h2>Changes to the documents</h2>
+    <p>
 
-      <p>1. We may revise these Terms of Service from time to time and the most current version will always be at www.trustmypetsitter.com</p>
-      <p>2. Changes will usually occur because of new features being added to the Service, changes in the law or where we need to clarify our position on something.</p>
-      <p>3. We will try, where possible and reasonable, to contact you to let you know about any significant changes to any of the documents referred to in these Terms of Service. We may contact you through the Service (for example by asking you to accept the changes before you continue to use the Service) or via a separate email.</p>
-      <p>4. Normally, we will try to give you some warning before the new terms become effective. However, sometimes changes will need to be made immediately and if this happens we will not give you any notice.</p>
+    Este acuerdo será gobernado e interpretado de acuerdo con las leyes de Perú, sin dar efecto a cualquier principio de conflictos de ley. Si alguna disposición de estos Términos y   
+    Condiciones es declarada ilegal, o presenta un vacío, o por cualquier razón resulta inaplicable, la misma deberá ser interpretada dentro del marco del mismo y en cualquier caso no 
+    afectará la validez y la aplicabilidad de las provisiones restantes.
 
-      <h2>Documents that apply to our relationship with you</h2>
+    </p>
 
-      <p>1. The current version of the Terms of Service contains the only terms and conditions that apply to our relationship with you. Older versions of the Terms of Service will no longer apply to our relationship and will be completely replaced by the current version.</p>
-      <p>2. We intend to rely on these Terms of Service as setting out the written terms of our agreement with you for the provision of the Service. If part of the Terms of Service cannot be enforced then the remainder of the Terms of Service will still apply to our relationship.</p>
-      <p>3. If you do not comply with these Terms of Service and we do not take action immediately, this does not mean we have given up any right we have and we may still take action in the future.</p>
+   
+    <h2>19. Notificaciones </h2>
 
-      <h2>Severability</h2>
+    <p>
+    Cualquier comentario, inquietud o reclamación respecto de los anteriores Términos y Condiciones, la Política de Privacidad, o la ejecución de cualquiera de éstos, deberá ser notificada 
+    por escrito a Calle Manuel Augusto Olaechea 205, Miraflores, Lima, al correo electrónico: hola@reactivate.pe o al teléfono (+51) 997 583 233.
 
-      <p>1. If any provision of these Terms of Service is judged to be illegal or unenforceable, this will not affect the continuation in full force and effect of the remainder of the provisions.</p>
+    </p>
 
-      <h2>Contact, feedback and complaints</h2>
+    <h2>20. Notificaciones </h2>
 
-      <p>1. If you need to contact us in relation to these Terms of Service or any other document mentioned in them, please email us at <span className={css.datecolor}>team@trustmypetsitter.com</span>.</p>
+    <p>
+    Este acuerdo estará regido en todos sus puntos por las leyes vigentes en la República del Perú. Cualquier controversia derivada del presente acuerdo, su existencia, validez, interpretación, 
+    alcance o cumplimiento, será sometida a los tribunales competentes de la ciudad de Lima, Perú.
 
-      <p>2. We value hearing from our users and are always interested in learning about ways we can improve the Service. By providing your feedback you agree that you are giving up any rights you have in your feedback so that we may use and allow others to use it without any restriction and without any payment to you.</p>
+    </p>
 
     </div>
   );

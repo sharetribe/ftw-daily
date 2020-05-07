@@ -94,7 +94,7 @@ const siteTwitterHandle = '@trustpetsitter';
 const siteInstagramPage = null;
 
 // Facebook page is used in SEO schema (http://schema.org/Organization)
-const siteFacebookPage = 'https://www.facebook.com/trustmypetsitter/';
+const siteFacebookPage = 'https://www.facebook.com/REDMEPenaccion/?__tn__=%2Cd%2CP-R&eid=ARAq8NWJSFw4dbNvkpE6-j7TDle0Q0_O_NzdkhUdVB4TPT03RuxEd1rR43AYfOvz11XsYzswn9TKky1m';
 
 // Facebook counts shares with app or page associated by this id
 // Currently it is unset, but you can read more about fb:app_id from

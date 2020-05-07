@@ -24,7 +24,7 @@ export const defaultPredictions = (config.maps.search.suggestCurrentLocation
 ).concat(config.maps.search.defaults);
 
 const DEBOUNCE_WAIT_TIME = 300;
-const DEBOUNCE_WAIT_TIME_FOR_SHORT_QUERIES = 1000;
+const DEBOUNCE_WAIT_TIME_FOR_SHORT_QUERIES = 6000;
 const KEY_CODE_ARROW_UP = 38;
 const KEY_CODE_ARROW_DOWN = 40;
 const KEY_CODE_ENTER = 13;
