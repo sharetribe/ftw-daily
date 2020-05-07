@@ -146,7 +146,7 @@ const TopbarDesktop = props => {
 
       <NamedLink className={css.createListingLink} name="LandingPage">
         <span className={css.signup}>
-          <img src={home} className={css.topbaricon} /> <FormattedMessage id="Home" />
+          <img src={home} className={css.topbaricon} /> Inicio
         </span>
       </NamedLink>
 
@@ -161,7 +161,7 @@ const TopbarDesktop = props => {
 
       <NamedLink className={css.createListingLink} name="SearchListingsPage">
         <span className={css.signup}>
-          <img src={listing} className={css.topbariconTwo} /> <FormattedMessage id="Listings" />
+          <img src={listing} className={css.topbariconTwo} /> Anuncios
         </span>
       </NamedLink>
 
@@ -185,7 +185,7 @@ const TopbarDesktop = props => {
 
       <NamedLink className={css.createListingLink} name="OrderTypesPage" params={{ type: 'new' }}>
         <span className={css.createListing}>
-          <img src={create} className={css.topbariconTwo} /> <FormattedMessage id="TopbarDesktop.createListing" />
+          <img src={create} className={css.topbariconTwo} /> Crear Anuncio
         </span>
       </NamedLink>
 

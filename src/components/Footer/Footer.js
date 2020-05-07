@@ -43,7 +43,7 @@ const renderSocialMediaLinks = intl => {
     >
       <IconSocialMediaTwitter />
     </ExternalLink>
-  ) : null;
+  ) : null; 
 
   const instragramLink = siteInstagramPage ? (
     <ExternalLink
@@ -55,7 +55,7 @@ const renderSocialMediaLinks = intl => {
       <IconSocialMediaInstagram />
     </ExternalLink>
   ) : null;
-  return [fbLink, twitterLink, instragramLink].filter(v => v != null);
+  return [fbLink,  instragramLink].filter(v => v != null);
 };
 
 const Footer = props => {
@@ -69,36 +69,36 @@ const Footer = props => {
         <div className={css.content}>
           <div className={css.someLiksMobile}>
             {socialMediaLinks}
-              <ExternalLink
+             {/* <ExternalLink
                 href="https://instagram.com/trustmypetsitter"
                 className={css.icon}
                 title="Go to Instagram page"
               >
                   <IconSocialMediaInstagram />
-              </ExternalLink>
-              <ExternalLink
+              </ExternalLink>*/}
+             {/* <ExternalLink
                 href="https://pinterest.com/trustmypetsitter"
                 className={css.icon}
                 title="Go to Pinterest page"
               >
                 <IconSocialMediaPinterest />
-              </ExternalLink>
+              </ExternalLink>*/}
 
-              <ExternalLink
+             {/* <ExternalLink
                 href="https://linkedin.com/company/19270133"
                 className={css.icon}
                 title="Go to Linkedin page"
               >
                 <IconSocialMediaLinkedin />
-              </ExternalLink>
+              </ExternalLink>*/}
 
-              <ExternalLink
+            {/*  <ExternalLink
                 href="https://youtube.com/channel/UCz2CW5OD_eaeIxiNars87aQ"
                 className={css.icon}
                 title="Go to Youtube channel"
               >
                 <IconSocialMediaYoutube />
-              </ExternalLink>
+              </ExternalLink>*/}
           </div>
           <div className={css.links}>
             <div className={css.organization} id="organization">
@@ -265,50 +265,50 @@ Términos y privacidad
             <div className={css.extraLinks}>
               <div className={css.someLinks}>{socialMediaLinks}
               
-              <ExternalLink
+           {/*   <ExternalLink
                 href="https://instagram.com/trustmypetsitter"
                 className={css.icon}
                 title="Go to Instagram page"
               >
                   <IconSocialMediaInstagram />
-              </ExternalLink>
-              <ExternalLink
+              </ExternalLink>*/}
+           {/*   <ExternalLink
                 href="https://pinterest.com/trustmypetsitter"
                 className={css.icon}
                 title="Go to Pinterest page"
               >
                 <IconSocialMediaPinterest />
-              </ExternalLink>
+              </ExternalLink>*/}
 
-              <ExternalLink
+             {/* <ExternalLink
                 href="https://linkedin.com/company/19270133"
                 className={css.icon}
                 title="Go to Linkedin page"
               >
                 <IconSocialMediaLinkedin />
-              </ExternalLink>
+              </ExternalLink>*/}
 
-              <ExternalLink
+            {/*  <ExternalLink
                 href="https://youtube.com/channel/UCz2CW5OD_eaeIxiNars87aQ"
                 className={css.icon}
                 title="Go to Youtube channel"
               >
                 <IconSocialMediaYoutube />
-              </ExternalLink>
+              </ExternalLink>*/}
 
               </div>
               <div className={css.legalMatters}>
                 <ul className={css.tosAndPrivacy}>
-                  <ExternalLink href="https://play.google.com/store/apps/details?id=com.trustmypetsitter" className={css.playIcon}>
+                {/*  <ExternalLink href="https://play.google.com/store/apps/details?id=com.trustmypetsitter" className={css.playIcon}>
                       <img src={googlePlayBadge} />
-                  </ExternalLink>
+                  </ExternalLink>*/}
                   
                 </ul>
               </div>
             </div>
-              <ExternalLink href="https://play.google.com/store/apps/details?id=com.trustmypetsitter" className={css.playIconMobile}>
+             {/* <ExternalLink href="https://play.google.com/store/apps/details?id=com.trustmypetsitter" className={css.playIconMobile}>
                 <img src={googlePlayBadge} />
-             </ExternalLink>
+             </ExternalLink>*/}
           </div>
 
           <div className={css.copyrightAndTermsMobile}>

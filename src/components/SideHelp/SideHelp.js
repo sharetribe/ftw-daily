@@ -225,7 +225,7 @@ class SideHelp extends React.Component {
         <span className={css.createListingLink} onClick={this.openNavClick}>
           <span className={css.signup}>
             <img src={help} className={css.topbaricon} />{' '}
-            <FormattedMessage id="Help">Help</FormattedMessage>
+           Ayuda
           </span>
         </span>
         <div onClick={this.closeNav} className={css.navcover} style={navCoverStyle} />
