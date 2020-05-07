@@ -272,3 +272,10 @@
   background: #5314a2;
   text-shadow: 1px 1px 1px darkslategrey;
 }
+
+
+div.iconitos{    background: #ffffffa8;
+    border-radius: 8px;
+    transform: scale(0.8);
+    padding: 5px;
+    margin-right: -50px;}

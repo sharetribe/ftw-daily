@@ -27,6 +27,9 @@ import number from './number.png';
 import appstore from './app-store-badge.png';
 import googlestore from './google-play-badge.png';
 import two from './two.png';
+import sunat from './sunat.png';
+import remype from './remype.png';
+import reniec from './reniec.png';
 import three from './three.png';
 import four from './four.png';
 
@@ -230,18 +233,18 @@ class ProfileSettingsFormComponent extends Component {
               {currentUser.attributes.profile.publicData.yotiVerified != 'YES' ? (
                 <div>
                   <div>
-                    <h3 className={css.yotiTitle}>Verifica tu identidad</h3>
+                    <h3 className={css.yotiTitle}>Verifica tu identidad personal y la de tu empresa</h3>
                   </div>
 
 <div className={css.contentinner}>
     <p className={css.noWrap}><img src={number} className={css.numb} />
        
-Descargue la aplicación gratuita Yoti y siga las instrucciones de configuración..
-        <img className={css.strr} src={googlestore} />
-        <img className={css.str} src={appstore} />
+Haz clic en el icono a verificar y sigue las instrucciones.
+      {/*<img className={css.strr} src={googlestore} />
+        <img className={css.str} src={appstore} /> */}
 
     </p>
-    <div className={css.yoticont}>
+   {/* <div className={css.yoticont}>
         <div className={css.storeMobile}>
           <ExternalLink href="https://play.google.com/store/apps/details?id=com.yoti.mobile.android.live&hl=sr">
             <img className={css.strr} src={googlestore} />
@@ -250,10 +253,10 @@ Descargue la aplicación gratuita Yoti y siga las instrucciones de configuració
             <img className={css.str} src={appstore} />
           </ExternalLink>
         </div>
-    </div>
+    </div>*/}
     <p className={css.CsS}><img src={two} className={css.numb} />
     
-Agregue su documento de identificación. Espere unos minutos para que su cuenta sea verificada y aprobada.
+Una vez subas los requerimientos y verifiquemos los datos, será aprobado.
     </p>
 
     <p className={css.forMob}><img src={two} className={css.numb} />
@@ -262,7 +265,7 @@ Agregue su documento de identificación. Espere unos minutos para que su cuenta 
 
     <p className={css.forPc}><img src={three} className={css.numb} />
     
-Una vez aprobado, haga clic en el botón 'Verificación de Yoti' a continuación y escanee el código QR con la aplicación Yoti.
+Aparecerá un icono en tus anuncios y en tu perfil que compruebe la verificación.
     </p>
 
     <p className={css.forMob}><img src={three} className={css.numb} />
@@ -271,11 +274,16 @@ Una vez aprobado, haga clic en el botón 'Verificación de Yoti' a continuación
 </div>
 <div className={css.yotiBtn1}>
     <div className={css.yotiContainer} id="yoti-button" />
-        <span className={css.needHelp} data-tip>Necesitas ayuda?</span>
+        
+ <div className={css.fondoboton}> <img className={css.sunat} src={reniec} /></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <div className={css.fondoboton}><img className={css.sunat} src={sunat} /></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    
+         <div className={css.fondoboton}>   <img className={css.sunat} src={remype} /></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className={css.needHelp} data-tip>Necesitas ayuda?</span>
         <ReactTooltip className={css.customTip} effect='solid'>
             <span className={css.tipColor}>  
             
-¿Necesitas ayuda para crear tu Yoti?<br />Email <strong className={css.toolEmail}>help@yoti.com</strong>
+¿Necesitas ayuda para verificar tu cuenta?<br />Email <strong className={css.toolEmail}>soporte@reactivate.pe</strong>
             </span>
         </ReactTooltip>
     </div>

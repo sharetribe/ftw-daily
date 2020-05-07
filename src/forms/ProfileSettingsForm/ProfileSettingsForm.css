@@ -14,6 +14,9 @@
   --ProfileSettingsForm_avatarSizeDesktop: 240px;
 }
 
+
+
+
 .root {
   margin-top: 24px;
 
@@ -331,7 +334,7 @@ iframe[title='Yoti - Modal'] {
 }
 
 .yotiButton {
-  cursor: pointer;
+  cursor: pointer;display: none;
 }
 
 .howverify {
@@ -342,7 +345,7 @@ iframe[title='Yoti - Modal'] {
 
 .yotiContainer {
   height: 57px;
-  width: 201px;
+  width: 201px;display: none;
 }
 
 .needHelp {
@@ -442,7 +445,7 @@ iframe[title='Yoti - Modal'] {
     display: none;
   }
   .yotiContainer {
-    height: 60px;
+    height: 60px;display: none !important;
   }
   .mobileHelp {
     display: block !important;
@@ -501,3 +504,19 @@ iframe[title='Yoti - Modal'] {
 .toolEmail {
   color: #fff !important;
 }
+
+img.sunat {
+    width: 130px !important; transition: 0.5s;
+}
+
+
+
+img.sunat:hover {
+
+    transition: 0.5s;
+}
+
+div.fondoboton{    background: #e6e6e6;padding: 10px;cursor: pointer;
+    border-radius: 9px; transition: 0.6s}
+
+    div.fondoboton:hover{   background: #bbb6b1;}

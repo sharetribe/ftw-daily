@@ -14,6 +14,9 @@ import cssButton from '../../components/Button/Button.css';
 
 import yoti from './yoti.png';
 import secured from './secured.png';
+import sunat from './sunat.png';
+import remype from './remype.png';
+import reniec from './reniec.png';
 
 const OrderTypesPage = props => {
   const draftId = '00000000-0000-0000-0000-000000000000';
@@ -40,13 +43,16 @@ const OrderTypesPage = props => {
           <div className={css.whatwedoBg}>
 
             <div className={css.whatwedoTitle}>
-              <div className={css.headTitle}>Elige tu Categoria de <span className={css.banner}> LISTING </span> </div>
+              <div className={css.headTitle}>Elige tu Categoria de ANUNCIOS <span className={css.banner}> </span> </div>
             </div>
 
 
             <div className={css.whatwedoTitle}>
-              <img src={yoti} className={css.badgeImgs} /> <span className={css.badgeTextFirst}>Identificación Digital</span>
-              <img src={secured} className={css.badgeImgs} /> <span className={css.badgeText}>Listings Verificados</span>
+
+             <div className={css.iconitos} ><img src={reniec} className={css.badgeImgs} /> <span className={css.badgeTextFirst}>Verificación Reciec</span></div>
+              <div className={css.iconitos} ><img src={sunat} className={css.badgeImgs} /> <span className={css.badgeTextFirst}>Verificación de identidad</span></div>
+              <div className={css.iconitos} > <img src={remype} className={css.badgeImgs} /> <span className={css.badgeTextFirst}>Verificación Empresarial</span></div>
+            <div className={css.iconitos} >  <img src={secured} className={css.badgeImgs} /> <span className={css.badgeText}>Anuncios Verificados</span></div>
             </div>
           </div>
 
