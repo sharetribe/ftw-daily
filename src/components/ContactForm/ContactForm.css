@@ -11,10 +11,10 @@
 
 
 .contactForm label {
-	font-family: "narrow", "Times New Roman", serif;
+	font-family: 'sofiapro', Helvetica, Arial, sans-serif;
 }
 
 .contactForm button {
-	font-family: "narrow", "Times New Roman", serif !important;
+	font-family: 'sofiapro', Helvetica, Arial, sans-serif !important;
 	letter-spacing: 0.7px;
 }

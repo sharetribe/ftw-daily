@@ -444,7 +444,7 @@ input[type='checkbox'] {
 }
 
 .helpTitle {
-  font-family: "narrow", "Times New Roman", serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   letter-spacing: 2px;
   margin: 0;
   padding: 0;

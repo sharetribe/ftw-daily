@@ -178,7 +178,7 @@
 .serviceGridContent h1 {
   margin: 0;
   padding: 0;
-  font-family: "narrow", "Times New Roman", serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   letter-spacing: 5px;
   color: #212529;
   font-weight: bold;
@@ -202,8 +202,8 @@
   width: 100%;
   margin: 0;
   color: #4a4a4a;
-  font-family: "narrow", "Times New Roman", serif;
-  letter-spacing: 1.5px;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+  letter-spacing: 0px;
 }
 
 
@@ -717,8 +717,8 @@
 
 .WeVetDiv {
   margin: 25px 0;
-  font-family: "narrow", "Times New Roman", serif;
-  letter-spacing: 1.5px;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+  letter-spacing: 0px;
 }
 
 .WeVetLearn {
@@ -726,8 +726,8 @@
   letter-spacing: 1px;
   margin: 0;
   padding-bottom: 65px;
-  font-family: "narrow", "Times New Roman", serif;
-  letter-spacing: 1.5px;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+  letter-spacing: 0px;
   font-weight: bold;
   display: flex;
   justify-content: center;
@@ -769,7 +769,7 @@
 
 .sectionHomestay h1 {
   text-align: center;
-  font-family: "narrow", "Times New Roman", serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   letter-spacing: 5px;
   font-weight: bold;
   margin: 0;
@@ -810,8 +810,8 @@
 .sections:nth-child(5) p {
   width: 100%;
   color: #4a4a4a;
-  font-family: "narrow", "Times New Roman", serif;
-  letter-spacing: 1.5px;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+  letter-spacing: 0px;
   white-space: nowrap;
   display: flex;
   align-items: center;
@@ -848,7 +848,7 @@
 }
 
 .sections:nth-child(5) button:hover {
-  background-color: #b7a77b;
+  background-color: #5314a2;
 }
 
 .sections:nth-child(5) input:focus {
@@ -938,7 +938,7 @@
 
 .carefullyselectedItem h1 {
   text-align: left !important;
-  font-family: "narrow", "Times New Roman", serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   letter-spacing: 5px;
   font-weight: bold;
   margin: 0;
@@ -955,8 +955,8 @@
   padding-bottom: 30px;
   margin: 0;
   color: #4a4a4a;
-  font-family: "narrow", "Times New Roman", serif;
-  letter-spacing: 1.5px;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+  letter-spacing: 0px;
   display: inline-block;
 }
 
@@ -1004,7 +1004,7 @@
 
 .ourPartnersItem2 h2 {
   margin: 0;
-  font-family: "narrow", "Times New Roman", serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   letter-spacing: 2px;
 }
 
@@ -1012,8 +1012,8 @@
   margin: 0;
   padding: 30px 0;
   color: #4a4a4a;
-  font-family: "narrow", "Times New Roman", serif;
-  letter-spacing: 1.5px;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+  letter-spacing: 0px;
   white-space: nowrap;
 }
 
@@ -1023,7 +1023,7 @@
 }
 
 .WeVetSection h1 {
-  font-family: "narrow", "Times New Roman", serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   letter-spacing: 5px;
   font-weight: bold;
 }
@@ -1034,9 +1034,9 @@
   transition: all .2s ease;
   position: relative;
   left: 0px;
-  font-family: "narrow", "Times New Roman", serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   font-weight: bold;
-  letter-spacing: 1.5px;
+  letter-spacing: 0px;
   opacity: 0.7;
 }
 
@@ -1057,8 +1057,8 @@
 .discoverFlex span {
   width: 100%;
   color: #4a4a4a;
-  font-family: "narrow", "Times New Roman", serif;
-  letter-spacing: 1.5px;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+  letter-spacing: 0px;
   white-space: nowrap;
 }
 
@@ -1140,8 +1140,8 @@
 }
 
 .carefullyCopy li {
-  font-family: "narrow", "Times New Roman", serif;
-  letter-spacing: 1.5px;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+  letter-spacing: 0px;
   display: flex;
   align-items: center;
   padding-bottom: 15px;
@@ -1234,7 +1234,7 @@
 }
 
 .tContent {
-  font-family: "narrow", "Times New Roman", serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   letter-spacing: 1.3px;
   font-weight: 500;
   margin: 0;
@@ -1282,7 +1282,7 @@
 
 .testimonialAuthor span p:nth-child(1) {
   margin: 0;
-  font-family: "narrow", "Times New Roman", serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   letter-spacing: 1px;
   font-weight: 600;
   text-align: left;
@@ -1290,7 +1290,7 @@
 
 .tLoc {
   margin: 0;
-  font-family: "narrow", "Times New Roman", serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   letter-spacing: 1px;
   font-weight: 500;
 }

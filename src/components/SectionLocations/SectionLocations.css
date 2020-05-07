@@ -2,7 +2,7 @@
 
 .title {
   @apply --marketplaceH1FontStyles;
-  font-family: "narrow", "Times New Roman", serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   letter-spacing: 5px;
   font-weight: bold;
 
@@ -93,7 +93,7 @@
 }
 
 .linkText {
-  font-family: "narrow", "Times New Roman", serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   letter-spacing: 1px !important;
   font-weight: bold !important;
   @apply --marketplaceH2FontStyles;

@@ -28,7 +28,7 @@
 .whatwedoLeft h2,
 .whatwedoRight h2,
 .whatwedoRight p {
-  font-family: "narrow", "Times New Roman", serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
 }
 
 .whatwedoLeft p,
@@ -70,7 +70,7 @@
 
 .joinNow:hover {
   color: #fff;
-  background-color: #b7a77b;
+  background-color: #5314a2;
   text-decoration: none !important;
 }
 

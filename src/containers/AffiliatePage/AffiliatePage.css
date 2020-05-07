@@ -30,7 +30,7 @@
 .sectionContent p,
 .sectionContent ul li,
 .sectionContent span {
-  font-family: "narrow", "Times New Roman", serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
 }
 
 .sectionContent p,
@@ -95,7 +95,7 @@
   color: darkslategray;
 }
 .start {
-  font-family: "narrow", "Times New Roman", serif !important;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif !important;
   letter-spacing: 0.8px;
   background-color: rgb(65,166,223);
   color: #fff !important;

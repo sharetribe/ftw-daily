@@ -341,7 +341,7 @@
 .desktopPriceValue {
   /* Font */
   @apply --marketplaceH1FontStyles;
-  color: #b7a77b;
+  color: #5314a2;
 
   @media (--viewportMedium) {
     margin-top: 0;
@@ -854,7 +854,7 @@
 }
 
 .sendbtn:hover, .bookingPanel button:hover {
-  background: #b7a77b;
+  background: #5314a2;
   color: #fff;
   text-decoration: none !important;
 }

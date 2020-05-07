@@ -51,7 +51,7 @@
 }
 
 .carouselCaption h1 {
-  font-family: 'narrow', 'Times New Roman', serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   line-height: 48px;
   font-weight: 500;
   font-size: 63px;
@@ -87,7 +87,7 @@
 }
 
 .carouselCaption p {
-  font-family: 'narrow', 'Times New Roman', serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   font-weight: 300;
   margin: 43px 20px;
   padding: 0px;

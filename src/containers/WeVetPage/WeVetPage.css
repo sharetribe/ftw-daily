@@ -2,7 +2,7 @@
 
 .pageTitle {
   text-align: center;
-  font-family: "narrow", "Times New Roman", serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
 }
 
 .sectionContent ul {
@@ -12,7 +12,7 @@
 }
 
 .sectionContent h2 {
-  font-family: "narrow", "Times New Roman", serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   letter-spacing: 1.4px;
   margin: 0;
 }
@@ -26,7 +26,7 @@
 }
 
 .sectionContent ul li {
-  font-family: "narrow", "Times New Roman", serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   letter-spacing: 0.8px;
   padding-bottom: 10px;
 }
@@ -93,7 +93,7 @@
 }
 .affiliateSecond p {
   color: darkslategray;
-  font-family: "narrow", "Times New Roman", serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   letter-spacing: 0.7px;
 }
 .start {
@@ -192,7 +192,7 @@
 }
 
 .affiliateWrapper h1 {
-  font-family: "narrow", "Times New Roman", serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   margin: 0;
   line-height: 60px;
   white-space: nowrap;
@@ -212,12 +212,12 @@
 
 .crowdTitle p {
   margin: 10px 0 0;
-  font-family: "narrow", "Times New Roman", serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   letter-spacing: 1.8px;
 }
 
 .affiliateFirst p {
-  font-family: "narrow", "Times New Roman", serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   letter-spacing: 0.7px;
 }
 
@@ -423,7 +423,7 @@
 }
 
 .affiliateFirst h1 {
-  font-family: "narrow", "Times New Roman", serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   letter-spacing: 3px;
   font-weight: bold;
   text-align: center;
@@ -432,7 +432,7 @@
 }
 
 .affiliateSecond h1 {
-  font-family: "narrow", "Times New Roman", serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   letter-spacing: 3px;
   font-weight: bold;
   text-align: center;

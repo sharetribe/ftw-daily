@@ -19,7 +19,7 @@
   /* ================ Default font ================ */
 
   --marketplaceDefaultFontStyles: {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightMedium);
     font-size: 18px;
     line-height: 24px;
@@ -59,7 +59,7 @@
     font-weight: var(--fontWeightBold);
     font-size: 42px;
     line-height: 42px;
-    letter-spacing: -1px;
+    letter-spacing: -1px;font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     /* margin-top + n * line-height + margin-bottom => x * 6px */
     margin-top: 25px;
     margin-bottom: 20px;
@@ -88,7 +88,7 @@
     line-height: 36px;
     letter-spacing: -0.5px;
     margin: 0;
-    font-weight: var(--fontWeightBold);
+    font-weight: var(--fontWeightBold);font-family: 'sofiapro', Helvetica, Arial, sans-serif;
 
     @media (--viewportMedium) {
       font-weight: var(--fontWeightSemiBold);
@@ -107,7 +107,7 @@
     letter-spacing: -1px;
     /* margin-top + n * line-height + margin-bottom => x * 6px */
     margin-top: 18px;
-    margin-bottom: 18px;
+    margin-bottom: 18px;font-family: 'sofiapro', Helvetica, Arial, sans-serif;
 
     @media (--viewportMedium) {
       font-size: 48px;
@@ -116,14 +116,14 @@
       letter-spacing: -2px;
       /* margin-top + n * line-height + margin-bottom => x * 8px */
       margin-top: 24px;
-      margin-bottom: 24px;
+      margin-bottom: 24px;font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     }
   }
 
   --marketplaceH2FontStyles: {
     font-weight: var(--fontWeightSemiBold);
     font-size: 24px;
-    line-height: 30px;
+    line-height: 30px;font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     letter-spacing: -0.3px;
     /* margin-top + n * line-height + margin-bottom => x * 6px */
     margin-top: 21px;
@@ -139,7 +139,7 @@
 
   --marketplaceH3FontStyles: {
     font-weight: var(--fontWeightSemiBold);
-    font-size: 20px;
+    font-size: 20px;font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     line-height: 24px;
     letter-spacing: -0.2px;
     /* margin-top + n * line-height + margin-bottom => x * 6px */
@@ -156,7 +156,7 @@
   --marketplaceH4FontStyles: {
     font-weight: var(--fontWeightMedium);
     font-size: 16px;
-    line-height: 24px;
+    line-height: 24px;font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     letter-spacing: 0;
     /* margin-top + n * line-height + margin-bottom => x * 6px */
     margin-top: 12px;
@@ -173,7 +173,7 @@
   --marketplaceH5FontStyles: {
     font-weight: var(--fontWeightRegular);
     font-size: 14px;
-    line-height: 18px;
+    line-height: 18px;font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     letter-spacing: 0;
     /* margin-top + n * line-height + margin-bottom => x * 6px */
     margin-top: 10px;
@@ -190,8 +190,8 @@
   --marketplaceH6FontStyles: {
     font-weight: var(--fontWeightBold);
     font-size: 12px;
-    line-height: 18px;
-    letter-spacing: 1.5px;
+    line-height: 18px;font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    letter-spacing: 0px;
     text-transform: uppercase;
     /* margin-top + n * line-height + margin-bottom => x * 6px */
     margin-top: 10px;
@@ -208,7 +208,7 @@
   /* ================ Other fonts ================ */
 
   --marketplaceTinyFontStyles: {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+   font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightRegular);
     font-size: 13px;
     line-height: 18px;
@@ -226,14 +226,14 @@
   }
 
   --marketplaceMessageFontStyles {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightRegular);
     font-size: 16px;
     line-height: 24px;
   }
 
   --marketplaceMessageDateFontStyles {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightRegular);
     font-size: 13px;
     line-height: 18px;
@@ -247,7 +247,7 @@
   }
 
   --marketplaceTxTransitionFontStyles {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+ font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightMedium);
     font-size: 16px;
     line-height: 18px;
@@ -259,7 +259,7 @@
   }
 
   --marketplaceSearchFilterLabelFontStyles {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightSemiBold);
     font-size: 13px;
     line-height: 18px;

@@ -68,14 +68,14 @@
 }
 
 .sectionContent ul:nth-child(1) li {
-  font-family: 'narrow', 'Times New Roman', serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   letter-spacing: 0.8px;
 }
 
 .extend p {
   color: #fff;
   padding-top: 10px;
-  font-family: 'narrow', 'Times New Roman', serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   letter-spacing: 2.5px;
 }
 
@@ -104,7 +104,7 @@
 .whyTitle {
   text-align: center;
   font-size: 40px;
-  font-family: 'narrow', 'Times New Roman', serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   font-weight: bold;
   letter-spacing: 3px !important;
 }
@@ -135,7 +135,7 @@
   padding: 20px 20px 50px;
   border-radius: 4px;
   border-top: 6px solid;
-  border-top-color: #b7a77b;
+  border-top-color: #5314a2;
 }
 
 .activePaw {
@@ -220,7 +220,7 @@
 }
 
 .whyFlex > div > h3 {
-  font-family: 'narrow', 'Times New Roman', serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   letter-spacing: 0.8px;
   font-size: 22px;
 }
@@ -241,7 +241,7 @@
 }
 
 .getPlan a {
-  background: #b7a77b;
+  background: #5314a2;
   padding: 8px 15px 11px;
   color: #fff !important;
   border-radius: 5px;
@@ -303,14 +303,14 @@
   padding-bottom: 30px;
   text-align: center;
   font-size: 40px;
-  font-family: 'narrow', 'Times New Roman', serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   font-weight: bold;
   letter-spacing: 3px !important;
 }
 
 .basicP {
   text-align: center;
-  font-family: 'narrow', 'Times New Roman', serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   letter-spacing: 0.7px;
 }
 

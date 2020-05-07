@@ -10,7 +10,8 @@
 
   width: 100%;
   padding: 24px 24px 42px 24px;
-  background-color: #5314a2;
+
+   background-image: url("./footerbg.jpg") !important;    background-size: contain;
 
   @media (--viewportMedium) {
     padding: 0 24px 33px 24px;

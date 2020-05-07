@@ -26,7 +26,7 @@ div.divideo{width: 50%;float: left;}
 }
 
 .sectionContent p {
-  font-family: "narrow", "Times New Roman", serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
 }
 
 @media (max-width: 992px) {
@@ -161,7 +161,7 @@ img {
 .pressSub {
   text-align: center;
   margin-bottom: 50px;
-  font-family: "narrow", "Times New Roman", serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   letter-spacing: 0.7px;
 }
 .card_svg {
@@ -343,7 +343,7 @@ img {
 }
 
 h1 {
-  font-family: "narrow", "Times New Roman", serif;
+  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
   font-weight: bold;
   letter-spacing: 3px !important;
 }
