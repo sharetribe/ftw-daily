@@ -222,7 +222,7 @@ class SideHelp extends React.Component {
 
     return (
       <React.Fragment>
-        <span className={css.createListingLink} onClick={this.openNavClick}>
+        <span className={css.createListingLink} >{/*va dentro de ahi <---- onClick={this.openNavClick}*/ } 
           <span className={css.signup}>
             <img src={help} className={css.topbaricon} />{' '}
            Ayuda

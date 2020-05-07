@@ -122,9 +122,10 @@ const Footer = props => {
             <div className={css.infoLinks}>
               <ul className={css.list}>
                 <li className={css.listItem}>
-                  <NamedLink name="WeVetPage" className={css.link}>
-                    ¡Anuncia ya!
-                  </NamedLink>
+                 
+                  <a className={css.link} href="/ordertype/new">Anuncia</a>
+                 
+            
                 </li>
                {/* <li className={css.listItem}>
                   <a href="https://blog.trustmypetsitter.com" className={css.link}>
@@ -136,12 +137,12 @@ const Footer = props => {
                     Nosotros
                   </NamedLink>
                 </li>
-                <li className={css.listItem}>
+               {/* <li className={css.listItem}>
                   <NamedLink name="PrivacyPolicyPage" className={css.link}>
                     
 Términos y privacidad
                   </NamedLink>
-                </li>
+                </li>*/}
                 <li className={css.listItem}>
                   <NamedLink name="ContactPage" className={css.link}>
                     <FormattedMessage id="Footer.toContactPage" />
@@ -156,7 +157,7 @@ Términos y privacidad
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=London%2C%20Greater%20London%2C%20England%2C%20United%20Kingdom&bounds=51.669993%2C0.152641%2C51.384598%2C-0.35167',
+                        's?address=Lima%2C%20Perú&bounds=-11.94376642%2C-76.87075813%2C-12.21475882%2C-77.23209704',
                     }}
                     className={css.link}
                   >
@@ -164,32 +165,48 @@ Términos y privacidad
                   </NamedLink>
                 </li>
                 <li className={css.listItem}>
-                  <NamedLink
-                    name="MembershipPage"
+                 <NamedLink
+                    name="SearchPage"
+                    to={{
+                      search:
+                        's?address=Iquitos%2C%20Perú&bounds=-3.66839665%2C-73.17539101%2C-3.93973916%2C-73.52996721',
+                    }}
                     className={css.link}
                   >
                     Iquitos
                   </NamedLink>
                 </li>
                 <li className={css.listItem}>
-                  <NamedLink
-                    name="PawSquadPage"
+                   <NamedLink
+                    name="SearchPage"
+                    to={{
+                      search:
+                        's?address=Iquitos%2C%20Perú&bounds=-3.66839665%2C-73.17539101%2C-3.93973916%2C-73.52996721',
+                    }}
                     className={css.link}
                   >
-                   Ica
+                    Ica
                   </NamedLink>
                 </li>
                  <li className={css.listItem}>
                   <NamedLink
-                    name="AffiliatePage"
+                    name="SearchPage"
+                    to={{
+                      search:
+                        's?address=Ayacucho%2C%20Departamento%20de%20Ayacucho%2C%20Perú&bounds=-13.0678984%2C-74.1876289%2C-13.2033516%2C-74.3006895',
+                    }}
                     className={css.link}
                   >
                     Ayacucho
                   </NamedLink>
                 </li>
                 <li className={css.listItem}>
-                  <NamedLink
-                    name="YotiPage"
+                <NamedLink
+                    name="SearchPage"
+                    to={{
+                      search:
+                        's?address=Cusco%20Jungles%20-%20Hotel%2C%20Calle%20San%20Pedro%20Nro%20128%2C%20Hospital%2C%20Cusco%2C%20Peru%2C%20Cuzco%2C%20Departamento%20de%20Cuzco%2C%20Perú&bounds=-13.50264969445857%2C-71.96538758096318%2C-13.53858230554143%2C-72.00234441903683',
+                    }}
                     className={css.link}
                   >
                     Cusco
@@ -199,40 +216,29 @@ Términos y privacidad
             </div>
             <div className={css.searchesExtra}>
             <ul className={css.list}>
-              <li className={css.listItem}>
-                  <NamedLink
-                    name="SearchPage"
-                    to={{
-                      search:
-                        '?address=London%2C%20Greater%20London%2C%20England%2C%20United%20Kingdom&bounds=51.669993%2C0.152641%2C51.384598%2C-0.35167',
-                    }}
-                    className={css.link}
-                  >
-                    <FormattedMessage id="Footer.searchLondon" />
-                  </NamedLink>
-                </li>
+              
                 <li className={css.listItem}>
                   <NamedLink
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=Edinburgh%2C%20Scotland%2C%20United%20Kingdom&bounds=56.0126298325265%2C-3.07495122820668%2C55.8187943486294%2C-3.44953251894456',
+                        's?address=Huancayo%2C%20Departamento%20de%20Junín%2C%20Perú&bounds=-11.9014316%2C-74.9476699%2C-12.0870137%2C-75.2357637',
                     }}
                     className={css.link}
                   >
-                    <FormattedMessage id="Footer.searchEdinburgh" />
+                   Huancayo
                   </NamedLink>
                 </li>
                 <li className={css.listItem}>
-                  <NamedLink
+                      <NamedLink
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=New%20York%20City%2C%20New%20York%2C%20United%20States%20of%20America&bounds=40.917576401307%2C-73.7008392055224%2C40.477399%2C-74.2590879797556',
+                        's?address=Trujillo%2C%20Departamento%20de%20La%20Libertad%2C%20Perú&bounds=-8.0849102%2C-78.9831465%2C-8.1514473%2C-79.0634609',
                     }}
                     className={css.link}
                   >
-                    <FormattedMessage id="Footer.searchNewYork" />
+                   Trujillo
                   </NamedLink>
                 </li>
                  <li className={css.listItem}>
@@ -240,23 +246,23 @@ Términos y privacidad
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=Los%20Angeles%2C%20California%2C%20United%20States%20of%20America&bounds=34.161440999758%2C-118.121305008073%2C33.9018913203336%2C-118.521456965901',
+                        's?address=Chimbote%2C%20Departamento%20de%20Áncash%2C%20Perú&bounds=-8.6529473%2C-78.1821523%2C-9.1470332%2C-78.6381309',
                     }}
                     className={css.link}
                   >
-                    <FormattedMessage id="Footer.searchLosAngeles" />
+                   Chimbote
                   </NamedLink>
                 </li>
                 <li className={css.listItem}>
-                  <NamedLink
+                   <NamedLink
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=San%20Francisco%2C%20California%2C%20United%20States%20of%20America&bounds=37.8324430069081%2C-122.354995082683%2C37.6044780500533%2C-122.517910874663',
+                        's?address=Cajamarca%2C%20Departamento%20de%20Cajamarca%2C%20Perú&bounds=-6.8865117%2C-78.4563516%2C-7.2463457%2C-78.6632012',
                     }}
                     className={css.link}
                   >
-                    <FormattedMessage id="Footer.searchSanFrancisco" />
+                   Cajamarca
                   </NamedLink>
                 </li>
               </ul>

@@ -551,7 +551,7 @@ export class ListingPageComponent extends Component {
                 onManageDisableScrolling={onManageDisableScrolling}
               />
               <div className={css.contentContainer}>
-                <SectionAvatar user={currentAuthor} params={params} />
+             
                 <div className={css.mainContent}>
                   <SectionHeading
                     priceTitle={priceTitle}

@@ -34,7 +34,7 @@ const ContactPage = () => {
         </LayoutWrapperTopbar>
 
         <LayoutWrapperMain className={css.staticPageWrapper}>
-          <h1 className={css.pageTitle}>Get in Touch</h1>
+          <h1 className={css.pageTitle}>Contáctanos</h1>
 
           <div className={css.contentWrapper}>
 

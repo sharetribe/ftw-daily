@@ -45,23 +45,23 @@ class ContactForm extends React.Component {
       <form className={css.contactForm} onSubmit={this.handleForm}>
         <div class="success-message"></div>
         <div class="error-message"></div>
-        <label htmlFor="name">Name</label>
+        <label htmlFor="name">Nombre</label>
         <input
           required
           type="text"
           id="name"
-          placeholder="First name"
+          placeholder="Nombre"
           name="name"
           onChange={this.handleFields}
           value={this.state.name}
         />
-        <label htmlFor="surname">Surname</label>
+        <label htmlFor="surname">Apellido</label>
         <input
           required
           type="text"
           id="surname"
           name="surname"
-          placeholder="Last name"
+          placeholder="Apellido"
           onChange={this.handleFields}
           value={this.state.surname}
         />
@@ -71,21 +71,21 @@ class ContactForm extends React.Component {
           type="email"
           id="email"
           name="email"
-          placeholder="Email address"
+          placeholder="Correo electronico"
           onChange={this.handleFields}
           value={this.state.email}
         />
-        <label htmlFor="message">Message</label>
+        <label htmlFor="message">Mensaje</label>
         <textarea
           required
           name="message"
           id="message"
-          placeholder="Your message"
+          placeholder="Tu mensaje"
           onChange={this.handleFields}
           value={this.state.message}
         ></textarea>
         <button id="how-button" type="submit">
-          Send
+          Enviar
         </button>
       </form>
     );

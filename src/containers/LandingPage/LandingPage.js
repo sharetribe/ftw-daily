@@ -103,7 +103,7 @@ export const LandingPageComponent = props => {
                 <FeaturedIn />
               </div>
                  <div className={css.featuredWrapper}>
-                  <div className={css.featuredItem}>FEATURED IN</div>
+                  <div className={css.featuredItem}>Desarrollado por</div>
                   <a className={css.featuredItem}>
                     <img src={featured1} />
                   </a>
