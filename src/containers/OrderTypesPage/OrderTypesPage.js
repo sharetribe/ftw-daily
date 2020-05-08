@@ -49,10 +49,16 @@ const OrderTypesPage = props => {
 
             <div className={css.whatwedoTitle}>
 
+            <div className={css.tipoleft}>
+
              <div className={css.iconitos} ><img src={reniec} className={css.badgeImgs} /> <span className={css.badgeTextFirst}>Verificación Reciec</span></div>
               <div className={css.iconitos} ><img src={sunat} className={css.badgeImgs} /> <span className={css.badgeTextFirst}>Verificación de identidad</span></div>
+</div>
+
+    <div className={css.tiporight}>
               <div className={css.iconitos} > <img src={remype} className={css.badgeImgs} /> <span className={css.badgeTextFirst}>Verificación Empresarial</span></div>
             <div className={css.iconitos} >  <img src={secured} className={css.badgeImgs} /> <span className={css.badgeText}>Anuncios Verificados</span></div>
+            </div>
             </div>
           </div>
 
@@ -64,21 +70,21 @@ const OrderTypesPage = props => {
                 <div name="category">
                   <NamedLink className={css.choose} name="EditListingPage" params={{ slug: draftSlug, id: draftId, type: type, tab: 'description_owner' }}>  
                     <SecondaryButton className={cssButton.orderTypeButton_first}> 
-                       Productos 
+                       Productos y Servicios
                     </SecondaryButton>
                   </NamedLink>
                   
-                  <NamedLink className={css.choose} name="EditListingPage" params={{ slug: draftSlug, id: draftId, type: type, tab: 'description_service' }}>  
+                {/*  <NamedLink className={css.choose} name="EditListingPage" params={{ slug: draftSlug, id: draftId, type: type, tab: 'description_service' }}>  
                     <SecondaryButton className={cssButton.orderTypeButton_last}> 
                         Servicios
                     </SecondaryButton>
-                  </NamedLink>
+                  </NamedLink>*/}
 
-                  <NamedLink className={css.choose} name="EditListingPage" params={{ slug: draftSlug, id: draftId, type: type, tab: 'description_sitter' }}>  
+                {/*  <NamedLink className={css.choose} name="EditListingPage" params={{ slug: draftSlug, id: draftId, type: type, tab: 'description_sitter' }}>  
                     <SecondaryButton className={cssButton.orderTypeButton}> 
                        Otros
                     </SecondaryButton>
-                  </NamedLink>
+                  </NamedLink>*/}
                 </div>
               </div>
               

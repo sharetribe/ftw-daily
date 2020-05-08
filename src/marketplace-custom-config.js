@@ -11,15 +11,15 @@ export const capacityOptions = [
 export const amenities = [
   {
     key: 'artesanías',
-    label: 'Artesanías',
+    label: 'Otros',
     tip: 'breed',
     weight: [
       {
         key: 'accesorios',
-        label: 'Accesorios',
+        label: 'Otros',
         tip: 'Akitas, Bernese Mountain Dog, Bullmastiff etc...',
       },
-      {
+     {
         key: 'gourmet y bebidas',
         label: 'Gourmet y Bebidas',
         tip: 'German Shepherd, Retriever, Siberian Husky, Weimaraner etc...'
@@ -234,6 +234,7 @@ export const equipments = [
   { key: 'aircon', label: 'Air Con' },
   { key: 'suitable', label: 'Suitable for families' },
   { key: 'laundry', label: 'Laundry Facilities' },
+  { key: 'otros', label: 'Otros' },
 ];
 export const locations = [
   { key: 'sea', label: 'By the Sea' },
@@ -243,10 +244,11 @@ export const locations = [
   { key: 'rural', label: 'Rural Location' },
 ];
 export const info = [
-  { key: 'travel', label: 'Willing to travel	' },
+/*  { key: 'travel', label: 'Willing to travel	' },
   { key: 'admin', label: 'Can Administer Meds' },
   { key: 'children', label: 'Have children under 18' },
-  { key: 'car', label: 'Car Owner' },
+  { key: 'car', label: 'Car Owner' },*/
+  { key: 'otros', label: 'Otros' },
 ];
 
 export const service = [
@@ -261,6 +263,7 @@ export const service = [
    { key: 'photo', label: 'Artículos deportivos' },
     { key: 'photo', label: 'Servicios' },
      { key: 'photo', label: 'Otras Categorías' },
+     { key: 'otros', label: 'Otros' },
 ];
 
 export const size = [

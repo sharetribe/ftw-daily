@@ -10,6 +10,7 @@
 "ActivityFeed.ownTransitionRequest": "Has solicitado reservar { listingTitle }.",
 "ActivityFeed.showOlderMessages": "Mostrar anteriores",
 "ActivityFeed.today": "Hoy",
+"EditListingFeaturesPanel.title.service": "Editar categorias de {listingTitle}",
 "ActivityFeed.transitionAccept": "{ displayName } ha aceptado la solicitud de reserva.",
 "ActivityFeed.transitionCancel": "La reserva se ha cancelado.",
 "ActivityFeed.transitionComplete": "Se ha completado tu reserva. { reviewLink }",
@@ -34,7 +35,7 @@
 "AuthenticationPage.signupLinkText": "Regístrate",
 "AuthenticationPage.termsHeading": "Términos de servicio",
 "AuthenticationPage.verifyEmailClose": "MÁS TARDE",
-
+"ListingPage.sizeTitle": "Categorías",
 "AuthenticationPage.verifyEmailText": "¡Gracias por registrarte! Sólo te queda un paso más. Para poder contactarte, necesitamos que verifiques tu cuenta de correo electrónico. Por favor, haz clic en el link que te hemos enviado a {email}.",
 "AuthenticationPage.verifyEmailTitle": "{name}, revisa tu buzón para verificar tu correo electrónico",
 "Avatar.bannedUserDisplayName": "Usuario bloqueado",
@@ -1141,6 +1142,24 @@
 "EditListingDescriptionForm.category.service.homeTitle": "Por favor selecciona un tipo de servicio",
  "EditListingWizard.tabLabelDescription.owner": "Negocio",
   "EditListingWizard.tabLabelFeatures.owner": "Categoría",
+
+  "EditListingFeaturesPanel.title.owner": "Editar categoria {listingTitle}",
+
+  "EditListingFeaturesPanel.title.service": "Editar categoria {listingTitle}",
+
+  "EditListingPhotosPanel.title.owner": "Editar fotos de {listingTitle}",
+  "EditListingPhotosPanel.title.sitter": "Editar fotos de {listingTitle}",
+
+  "EditListingPhotosPanel.title.service": "Editar fotos de {listingTitle}",
+
+  "EditListingPricingPanel.title.sitter": "Editar tarifas de {listingTitle}",
+  "EditListingPricingPanel.title.service": "Editar tarifas de {listingTitle}",
+
+    "EditListingLocationPanel.title.owner": "Editar localización de {listingTitle}",
+  "EditListingLocationPanel.title.sitter": "Editar localización de {listingTitle}",
+  "EditListingLocationPanel.title.service": "Editar localización de {listingTitle}",
+
+
     "EditListingFeaturesPanel.createListingTitle.owner": "Selecciona una categoria",
       "EditListingHomePanel.createListingTitle.owner": "Más detalles de su negocio",
       "EditListingHomeForm.homeTitle.owner": "Por favor selecciona todo lo que aplique",
