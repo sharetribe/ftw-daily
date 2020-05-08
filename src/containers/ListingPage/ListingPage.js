@@ -8,6 +8,7 @@ import { withRouter } from 'react-router-dom';
 import { Player, BigPlayButton } from 'video-react';
 import video from './tmps.mp4';
 import video2 from './bake.m4v';
+import whatsapp from './whatsapp.webp'
 import video3 from './reactivate.m4v';
 import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
@@ -497,7 +498,7 @@ export class ListingPageComponent extends Component {
       </NamedLink>
     );
 
-    const user_name = user_type === 0 ? 'owner' : user_type === 1 ? 'sitter' : 'service';
+    const user_name = user_type === 0 ? 'owner' : user_type === 1 ? 'sitter' : 'Servicio';
     const category = user_name ? (
       <span>
         {user_name}
@@ -694,6 +695,9 @@ export class ListingPageComponent extends Component {
                         width="450px"
                         url="https://vimeo.com/414026696"
                       />
+
+
+                      <a href=" https://wa.me/997583233"> <img className={css.whatsapp} src={whatsapp} /></a>
 
                         
 
