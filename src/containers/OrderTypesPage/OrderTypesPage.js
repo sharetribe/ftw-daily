@@ -68,17 +68,17 @@ const OrderTypesPage = props => {
   
               <div>
                 <div name="category">
-                  <NamedLink className={css.choose} name="EditListingPage" params={{ slug: draftSlug, id: draftId, type: type, tab: 'description_owner' }}>  
+                 {/* <NamedLink className={css.choose} name="EditListingPage" params={{ slug: draftSlug, id: draftId, type: type, tab: 'description_owner' }}>  
                     <SecondaryButton className={cssButton.orderTypeButton_first}> 
-                       Productos y Servicios
-                    </SecondaryButton>
-                  </NamedLink>
-                  
-                {/*  <NamedLink className={css.choose} name="EditListingPage" params={{ slug: draftSlug, id: draftId, type: type, tab: 'description_service' }}>  
-                    <SecondaryButton className={cssButton.orderTypeButton_last}> 
-                        Servicios
+                       Productos 
                     </SecondaryButton>
                   </NamedLink>*/}
+                  
+                  <NamedLink className={css.choose} name="EditListingPage" params={{ slug: draftSlug, id: draftId, type: type, tab: 'description_service' }}>  
+                    <SecondaryButton className={cssButton.orderTypeButton_last}> 
+                   Productos y Servicios
+                    </SecondaryButton>
+                  </NamedLink>
 
                 {/*  <NamedLink className={css.choose} name="EditListingPage" params={{ slug: draftSlug, id: draftId, type: type, tab: 'description_sitter' }}>  
                     <SecondaryButton className={cssButton.orderTypeButton}> 
