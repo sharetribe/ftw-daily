@@ -16,6 +16,8 @@ way to update this template, but currently, we follow a pattern:
 
 - [fix] Allow white space on Japanese bank account info. Japan collects bank name and account owner
   name in addition to routing numbers. [#1287](https://github.com/sharetribe/ftw-daily/pull/1287)
+- [fix] wrongly named default props handleSubmit renamed to onSubmit
+  [#1288](https://github.com/sharetribe/ftw-daily/pull/1288)
 
 ## [v4.4.2] 2020-04-09
 
