@@ -14,10 +14,14 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+## [v4.4.3] 2020-05-13
+
 - [fix] Allow white space on Japanese bank account info. Japan collects bank name and account owner
   name in addition to routing numbers. [#1287](https://github.com/sharetribe/ftw-daily/pull/1287)
 - [fix] wrongly named default props handleSubmit renamed to onSubmit
   [#1288](https://github.com/sharetribe/ftw-daily/pull/1288)
+
+[v4.4.3]: https://github.com/sharetribe/flex-template-web/compare/v4.4.2...v4.4.3
 
 ## [v4.4.2] 2020-04-09
 
