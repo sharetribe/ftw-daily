@@ -231,11 +231,11 @@ export const mapInputsToStripeAccountKeys = (country, values) => {
 
     case 'JP':
       return {
-        bank_name: cleanedString(values[BANK_NAME]),
-        branch_name: cleanedString(values[BRANCH_NAME]),
+        bank_name: values[BANK_NAME],
+        branch_name: values[BRANCH_NAME],
         routing_number: cleanedString(values[BANK_CODE]).concat(values[BRANCH_CODE]),
         account_number: cleanedString(values[ACCOUNT_NUMBER]),
-        account_holder_name: cleanedString(values[ACCOUNT_OWNER_NAME]),
+        account_holder_name: values[ACCOUNT_OWNER_NAME],
       };
 
     case 'MX':
