@@ -59,7 +59,7 @@
   },
   "devDependencies": {
     "babel-jest": "24.9.0",
-    "bfj": "^7.0.1",
+    "bfj": "^7.0.2",
     "chalk": "^2.4.1",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.0",
