@@ -9,7 +9,7 @@
     "@sentry/browser": "5.7.1",
     "@sentry/node": "5.7.1",
     "array-includes": "^3.0.3",
-    "array.prototype.find": "^2.0.4",
+    "array.prototype.find": "^2.1.1",
     "autosize": "^4.0.0",
     "basic-auth": "^2.0.1",
     "body-parser": "^1.18.3",
