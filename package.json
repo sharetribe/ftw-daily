@@ -43,7 +43,7 @@
     "react-final-form": "^6.3.0",
     "react-final-form-arrays": "^3.1.1",
     "react-google-maps": "^9.4.5",
-    "react-helmet-async": "^1.0.2",
+    "react-helmet-async": "^1.0.6",
     "react-intl": "^3.1.13",
     "react-moment-proptypes": "^1.6.0",
     "react-redux": "^7.1.1",
