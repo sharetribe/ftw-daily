@@ -50,7 +50,7 @@
     "react-router-dom": "^5.0.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "seedrandom": "^3.0.3",
+    "seedrandom": "^3.0.5",
     "sharetribe-flex-sdk": "^1.9.1",
     "sharetribe-scripts": "3.1.1",
     "smoothscroll-polyfill": "^0.4.0",
