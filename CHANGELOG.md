@@ -16,6 +16,8 @@ way to update this template, but currently, we follow a pattern:
 
 - [fix] In some situations, ProfileMenu has began to overflow on TopbarDesktop.
   [#1290](https://github.com/sharetribe/ftw-daily/pull/1290)
+- [change] Update dependencies (patch updates only)
+  [#1291](https://github.com/sharetribe/ftw-daily/pull/1291)
 
 ## [v4.4.3] 2020-05-13
 
