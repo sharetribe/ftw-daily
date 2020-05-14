@@ -15,7 +15,7 @@
     "body-parser": "^1.18.3",
     "classnames": "^2.2.6",
     "compression": "^1.7.4",
-    "cookie-parser": "^1.4.4",
+    "cookie-parser": "^1.4.5",
     "core-js": "^3.1.4",
     "decimal.js": "10.2.0",
     "dotenv": "6.2.0",
