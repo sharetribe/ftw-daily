@@ -48,7 +48,7 @@
     "react-moment-proptypes": "^1.6.0",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.0.1",
-    "redux": "^4.0.1",
+    "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "seedrandom": "^3.0.3",
     "sharetribe-flex-sdk": "^1.9.1",
