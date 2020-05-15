@@ -19,8 +19,8 @@ const TermsOfService = props => {
         Pferdebesitzer teilen können. Wir bieten Pferdebesitzern die Möglichkeit, ihr Pferd für Reiter anzubieten 
         und dabei Kosten zu sparen. Bitte lesen Sie unsere untenstehende Dienstleistungsvereinbarung sorgfältig durch,
         bevor Sie unseren Online-Marktplatz und dessen Dienstleistungen nutzen, da diese Ihre Nutzung unserer Plattform
-        regeln.</br>
-        </br>
+        regeln.<br/>
+        <br/>
         Wichtig ist, dass diese Nutzungsvereinbarung einen Verzicht auf Sammelklagen und Gerichtsverfahren sowie eine Vereinbarung 
         zur Einreichung aller Ansprüche und Streitigkeiten bei einem verbindlichen Schiedsverfahren in Abschnitt 4 enthält. Wenn Sie
         nicht allen Bedingungen dieser Nutzungsvereinbarung zustimmen, einschliesslich jener, die Streitigkeiten in Abschnitt 4 regeln,
@@ -32,18 +32,18 @@ const TermsOfService = props => {
         Diese HorseDeal24-Dienstleistungsvereinbarung („Vereinbarung“) ist ein Vertrag zwischen der Horseplanet GmbH („HorseDeal24“ oder „wir“)
         und der/den Person(en), die bei HorseDeal24 registriert ist/sind („Benutzer“ oder „Sie“). Diese Vereinbarung beschreibt die Geschäftsbedingungen,
         die für Ihre Nutzung des HorseDeal24-Marktplatzes zum Buchen oder Auflisten von Pferden oder anderen Dienstleistungen über unsere Website oder Apps
-        gelten, und legt die Verpflichtungen fest, die zwischen Ihnen und HorseDeal24 sowie zwischen Ihnen und anderen Benutzern entstehen.</br>
-        </br>
+        gelten, und legt die Verpflichtungen fest, die zwischen Ihnen und HorseDeal24 sowie zwischen Ihnen und anderen Benutzern entstehen.<br/>
+        <br/>
         In dieser Vereinbarung bedeutet der Begriff „Dienstleistung“ die Dienstleistung, mit der Sie ein Pferd über einen bestimmten Zeitraum buchen oder
         Ihr Pferd und Ihre Dienstleistungen über unsere Website oder Apps (die „Plattform“) anderen anbieten können. Der Begriff Dienstleistung umfasst keine 
         Dienstleistungen, die von Dritten bereitgestellt werden. Die Begriffe „Reiter“ und „Pferd“ beziehen sich jeweils auf die Buchung bzw. Auflistung eines
-        Pferdes auf unserem Marktplatz.</br>
-        </br>
+        Pferdes auf unserem Marktplatz.<br/>
+        <br/>
         Ein „Pferd“ ist das physische Tier, das einem Reiter zur Nutzung zu bestimmten Zeiten zur Verfügung gestellt wird und bestimmten Gebühren und
         ortsspezifischen Bedingungen, Gesetzen oder Einschränkungen unterliegt. Ein Pferdebesitzer kann ein Pferd „auflisten“, indem es bestimmte Details
         zum Pferd bereitstellt, einschliesslich Verfügbarkeit, Preisgestaltung und Nutzungsbedingungen oder -beschränkungen; dieser Beitrag über ein Pferd
-        wird als „Listing“ bezeichnet.</br>
-        </br>
+        wird als „Listing“ bezeichnet.<br/>
+        <br/>
         Ein Reiter kann ein Pferd „buchen“, indem er eine Uhrzeit, ein Datum sowie zusätzliche Dienstleistungen anfordert und einen Pferdebesitzer direkt
         über unsere Messaging-Plattform kontaktiert. Eine „Buchung“ ist keine vertragliche Vereinbarung oder rechtliche Verpflichtung einer der zwei Parteien.
         Denken Sie daran, HorseDeal24 ist keine Partei dieser Vereinbarung oder jeglicher anderen, wir sind lediglich eine Plattform, die Reitern hilft, Pferde
