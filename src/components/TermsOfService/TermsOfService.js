@@ -201,7 +201,7 @@ const TermsOfService = props => {
       </p>
       <br/>
           
-      <h3>Abschnitt 2: Plattform und Dienstleistung</h3<br/>
+      <h3>Abschnitt 2: Plattform und Dienstleistung</h3><br/>
       <h4>2.1 Eigentum, Lizenz, Einschränkungen</h4>
       <p>
         HorseDeal24 besitzt alle Rechte, Titel und Interessen an der Plattform, den Dienstleistungen und dem gesamten darin verkörperten oder enthaltenen geistigen Eigentum
