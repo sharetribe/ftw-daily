@@ -65,7 +65,7 @@ const TermsOfService = props => {
         Dienstleistung gelistetes Pferd, und die Verpflichtungen der Reiter, einschliesslich der Buchung eines Pferdes, des erwarteten Verhaltens, der Verantwortung für das Sammeln
         von Gebührenzahlungen und der Buchung anderer Dienstleistungen.<br/>
         <br/>
-        •	Abschnitt 4: Kündigung, Streitigkeiten und verbindliche Schiedsverfahren beschreibt die Kündigung oder Aussetzung dieser Vereinbarung oder Ihres Kontos sowie den Prozess der<br/>
+        •	Abschnitt 4: Kündigung, Streitigkeiten und verbindliche Schiedsverfahren beschreibt die Kündigung oder Aussetzung dieser Vereinbarung oder Ihres Kontos sowie den Prozess der
         Beilegung von Streitigkeiten. Dieser Abschnitt enthält den Verzicht auf Sammelklagen und Gerichtsverfahren sowie eine Vereinbarung, alle Ansprüche und Streitigkeiten einem verbindlichen
         Schiedsverfahren zu unterziehen. Bitte lesen Sie diesen Abschnitt sorgfältig durch, bevor Sie diese Vereinbarung akzeptieren. Sie dürfen die Plattform oder die Dienstleistungen nicht nutzen,
         wenn Sie diesem Abschnitt nicht zustimmen.<br/>
@@ -99,7 +99,7 @@ const TermsOfService = props => {
       </p>
       <br/>
 
-      <h4>Ihr Konto</h4>
+      <h4>1.2 Ihr Konto</h4>
       <p>
         Bevor Sie die Funktionen unserer Plattform oder unserer Dienstleistungen nutzen können, müssen Sie ein Konto bei HorseDeal24 („Konto“) erstellen und uns Informationen über sich selbst,
         Ihr Pferd oder Ihr Unternehmen zur Verfügung stellen. Wir können Sie jederzeit bitten, Ihr Konto zu aktualisieren oder zusätzliche oder andere Informationen bereitzustellen. Dies beinhaltet
@@ -270,7 +270,7 @@ const TermsOfService = props => {
         Reitern kommunizieren. Sie sind dafür verantwortlich, das Pferd und die Dienstleistungen so zu warten, dass Reiter sie angemessen nutzen können, wie in der Beschreibung und Buchung angegeben.
         Die Pferdebesitzer müssen in gutem Zustand sein und den Reitern in einem sicheren, sauberen und benutzbaren Zustand wie beschrieben zur Verfügung gestellt werden.<br/>
         <br/>
-        (c) Verhalten und Gebühren. Als Pferdebesitzer sind Sie allein dafür verantwortlich, dass Ihr Pferd alle geltenden Gesetze einhält, einschliesslich aller lokalen Verordnungen
+        <strong>(c) Verhalten und Gebühren.</strong> Als Pferdebesitzer sind Sie allein dafür verantwortlich, dass Ihr Pferd alle geltenden Gesetze einhält, einschliesslich aller lokalen Verordnungen
         in Bezug auf die Bedingung, Lizenzen oder Registrierung. Die Pferdebesitzer sind auch für die Zahlung der Steuern für alle Buchungen verantwortlich, die von unserer Plattform stammen.
         Wir können Ihre fortgesetzte Nutzung der Plattform und der Dienstleistungen davon abhängig machen, dass Sie zu unserer angemessenen Zufriedenheit jederzeit nachweisen, dass Sie die Gesetze einhalten.
       </p>
@@ -335,17 +335,17 @@ const TermsOfService = props => {
         4.3 beschriebenen Prozess beigelegt werden) beigelegt werden. Dies beinhaltet den Verzicht auf ein Gerichtsverfahren und Ihre Fähigkeit, sich anderen Klägern im Rahmen einer Sammelklage anzuschliesen. 
         Bitte lesen Sie diesen Abschnitt sorgfältig durch, bevor Sie diese Vereinbarung akzeptieren—Sie dürfen die Plattform oder die Dienstleistungen nicht nutzen, wenn Sie diesem Abschnitt nicht zustimmen.<br/>
         <br/>
-        (a) Verfahren der Schiedsverfahren. Vorbehaltlich der in Abschnitt 4.2(b) angegebenen Ausschlüsse und des in Abschnitt 4.3 vorgesehenen Verfahrens werden alle Streitigkeiten, Ansprüche und Kontroversen, 
+        <strong>(a) Verfahren der Schiedsverfahren.</strong> Vorbehaltlich der in Abschnitt 4.2(b) angegebenen Ausschlüsse und des in Abschnitt 4.3 vorgesehenen Verfahrens werden alle Streitigkeiten, Ansprüche und Kontroversen, 
         die sich aus oder im Zusammenhang mit dieser Vereinbarung zwischen Ihnen und HorseDeal24 oder zwischen Ihnen und einem anderen Benutzer ergeben (sofern diese nicht gemäss Abschnitt 4.3 beigelegt wurden) 
         durch ein verbindliches Schiedsverfahren wie folgt gelöst:<br/>
         <br/>
-        o	(i) wenn der Betrag der Streitigkeit, des Anspruchs oder der Kontroverse vernünftigerweise weniger als 25.000 Schweizer Franken beträgt, wird die Lösung online von FairClaims (www.fairclaims.com) oder 
+        •	(i) wenn der Betrag der Streitigkeit, des Anspruchs oder der Kontroverse vernünftigerweise weniger als 25.000 Schweizer Franken beträgt, wird die Lösung online von FairClaims (www.fairclaims.com) oder 
         einem anderen Online-Schlichtungsanbieter unserer Wahl gemäss den geltenden Schiedsordnung und Verfahren verwaltet, die zum Zeitpunkt der Geltendmachung eines Anspruchs wirksam sind. Sie erklären sich 
         damit einverstanden, den elektronischen Prozessdienst per E-Mail zu erhalten, die Ihrem Konto zugeordnet ist. Wenn Sie die Beantwortung eines solchen Prozesses versäumen, sind Sie für alle mit dem 
         Vergehen verbundenen Anwalts-, Gerichts- oder sonstigen Gebühren verantwortlich. Die Partei, die den Nutzerstreitfall einreicht, ist für die Zahlung aller mit dieser Einreichung verbundenen Kosten 
         verantwortlich, einschliesslich der von HorseDeal24 getragenen Kosten. Im Rahmen des Nutzerstreitfalls können Sie auch versuchen, diese Kosten zu erstatten, wenn Sie sich durchsetzen.<br/>
         <br/>
-        o	(ii) wenn der Betrag der Streitigkeit, des Anspruchs oder der Kontroverse vernünftigerweise 25.000 Schweizer Franken oder mehr beträgt, muss die Lösung vor einem einzelnen Vermittler 
+        •	(ii) wenn der Betrag der Streitigkeit, des Anspruchs oder der Kontroverse vernünftigerweise 25.000 Schweizer Franken oder mehr beträgt, muss die Lösung vor einem einzelnen Vermittler 
         erfolgen. Dies umfasst, ist jedoch nicht beschränkt auf, gesetzliche oder gewohnheitsrechtliche Ansprüche in Bezug auf Verstösse, Durchsetzung oder Auslegung dieser Vereinbarung und 
         jeglicher Buchungsvereinbarung. Ein solches Schiedsverfahren findet in dem Landkreis statt, in der sich das gebuchte oder gelistete Pferd befindet, sofern Sie und HorseDeal24 nichts 
         anderes vereinbaren. Der Vermittler wendet das Schweizer Recht an. Um ein solches Schiedsverfahren einzuleiten, wird eine Partei eine schriftliche Aufforderung stellen, in der 
@@ -392,7 +392,7 @@ const TermsOfService = props => {
         werden. Bitte lesen Sie diesen Abschnitt sorgfältig durch, bevor Sie diese Vereinbarung akzeptieren—Sie dürfen die Plattform oder die Dienstleistungen 
         nicht nutzen, wenn Sie diesem Abschnitt nicht zustimmen.<br/>
         <br/>
-        (a) Anfängliche Beilegung von Streitigkeiten zwischen Benutzern. Sie erklären sich damit einverstanden, zunächst zu versuchen, Streitigkeiten, 
+        <strong>(a) Anfängliche Beilegung von Streitigkeiten zwischen Benutzern.</strong> Sie erklären sich damit einverstanden, zunächst zu versuchen, Streitigkeiten, 
         Unstimmigkeiten oder Ansprüche, die Sie mit anderen Benutzern haben („Nutzerstreitfall“), nach Treu und Glauben über die Plattform beizulegen. 
         Wenn Sie den Nutzerstreitfall nicht lösen können, senden Sie den Nutzerstreitfall an support@horsedeal24.com. Nach unserem alleinigen Ermessen 
         können wir (i) verlangen, dass Sie zusätzliche Details zu Nutzerstreitfällen einreichen. Wir werden die Zusammenfassung und die auf der Plattform 
