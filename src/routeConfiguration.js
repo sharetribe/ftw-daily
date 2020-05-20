@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   AboutPage,
-  FAQPage,
   HelpPage,
   ContactPage,
   CommunityPage,
@@ -69,11 +68,6 @@ const routeConfiguration = () => {
       path: '/help',
       name: 'HelpPage',
       component: () => <HelpPage title={"Hilfe"} />
-    },
-    {
-      path: '/faq',
-      name: 'FAQPage',
-      component: () => <FAQPage title={"FAQ"} />
     },
     {
       path: '/contact',
