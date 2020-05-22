@@ -17,6 +17,7 @@
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
     "core-js": "^3.1.4",
+    "cors": "^2.8.5",
     "decimal.js": "10.2.0",
     "dotenv": "6.2.0",
     "dotenv-expand": "4.2.0",

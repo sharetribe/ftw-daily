@@ -47,6 +47,7 @@ import { savePaymentMethod } from '../../ducks/paymentMethods.duck';
 
 import {
   initiateOrder,
+  initiatePrivileged,
   setInitialValues,
   speculateTransaction,
   stripeCustomer,
@@ -939,7 +940,8 @@ const mapDispatchToProps = dispatch => ({
   dispatch,
   fetchSpeculatedTransaction: params => dispatch(speculateTransaction(params)),
   fetchStripeCustomer: () => dispatch(stripeCustomer()),
-  onInitiateOrder: (params, transactionId) => dispatch(initiateOrder(params, transactionId)),
+  // onInitiateOrder: (params, transactionId) => dispatch(initiateOrder(params, transactionId)),
+  onInitiateOrder: (params, transactionId) => dispatch(initiatePrivileged(params, transactionId)),
   onRetrievePaymentIntent: params => dispatch(retrievePaymentIntent(params)),
   onHandleCardPayment: params => dispatch(handleCardPayment(params)),
   onConfirmPayment: params => dispatch(confirmPayment(params)),

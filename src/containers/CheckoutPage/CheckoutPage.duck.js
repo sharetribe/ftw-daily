@@ -200,6 +200,49 @@ export const initiateOrder = (orderParams, transactionId) => (dispatch, getState
     });
 };
 
+
+// fetch('http://localhost:3500/api/log', {credentials: 'include'}).then(r => r.json()).then(console.log)
+export const initiatePrivileged = (orderParams, transactionId) => (dispatch, getState, sdk) => {
+  dispatch(initiateOrderRequest());
+  const bodyParams = transactionId
+        ? {
+          id: transactionId,
+          transition: 'transition/request-payment-after-enquiry',
+          params: orderParams,
+        }
+        : {
+          processAlias: 'privileged-custom-pricing/release-1',
+          transition: 'transition/request-payment',
+          params: orderParams,
+        };
+  const queryParams = {
+    include: ['booking', 'provider'],
+    expand: true,
+  };
+  const options = {
+    method: 'POST',
+    credentials: 'include',
+    // mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      bodyParams,
+      queryParams,
+    }),
+  };
+  console.log('fetch options:', options);
+  return window.fetch('http://localhost:3500/api/transition-privileged', options)
+    .then(r => r.json())
+    .then(res => {
+      console.log('success, res:', res);
+    })
+    .catch(e => {
+      dispatch(initiateOrderError(storableError(e)));
+      console.error(e);
+    });
+};
+
 export const confirmPayment = orderParams => (dispatch, getState, sdk) => {
   dispatch(confirmPaymentRequest());
 
