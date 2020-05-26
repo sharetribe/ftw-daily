@@ -232,13 +232,14 @@ export const initiatePrivileged = (orderParams, transactionId) => (dispatch, get
     }),
   };
   console.log('fetch options:', options);
-  return window.fetch('http://localhost:3500/api/transition-privileged', options)
+  return window.fetch('http://localhost:3500/api/initiate-privileged', options)
     .then(r => r.json())
     .then(res => {
-      console.log('success, res:', res);
+      console.log('success');
+      console.log(res);
     })
     .catch(e => {
-      dispatch(initiateOrderError(storableError(e)));
+      console.error('error');
       console.error(e);
     });
 };

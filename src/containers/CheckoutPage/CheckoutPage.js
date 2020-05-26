@@ -9,6 +9,7 @@ import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
 import { pathByRouteName, findRouteByRouteName } from '../../util/routes';
 import { propTypes, LINE_ITEM_NIGHT, LINE_ITEM_DAY, DATE_TYPE_DATE } from '../../util/types';
+import { types as sdkTypes } from '../../util/sdkLoader';
 import {
   ensureListing,
   ensureCurrentUser,
@@ -58,6 +59,8 @@ import { storeData, storedData, clearData } from './CheckoutPageSessionHelpers';
 import css from './CheckoutPage.css';
 
 const STORAGE_KEY = 'CheckoutPage';
+
+const { Money } = sdkTypes;
 
 // Stripe PaymentIntent statuses, where user actions are already completed
 // https://stripe.com/docs/payments/payment-intents/status
@@ -369,12 +372,21 @@ export class CheckoutPageComponent extends Component {
         ? { paymentMethod: stripePaymentMethodId }
         : selectedPaymentFlow === PAY_AND_SAVE_FOR_LATER_USE
         ? { setupPaymentMethodForSaving: true }
-        : {};
+          : {};
+
+    const lineItems = [
+      {
+        code: 'line-item/test-fee',
+        unitPrice: new Money(1000, config.currency),
+        quantity: 1,
+      },
+    ];
 
     const orderParams = {
       listingId: pageData.listing.id,
       bookingStart: tx.booking.attributes.start,
       bookingEnd: tx.booking.attributes.end,
+      lineItems,
       ...optionalPaymentParams,
     };
 
