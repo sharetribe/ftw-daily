@@ -6,13 +6,17 @@ import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 import classNames from 'classnames';
 import moment from 'moment';
 import { required, bookingDatesRequired, composeValidators } from '../../util/validators';
-import { START_DATE, END_DATE } from '../../util/dates';
+import { START_DATE, END_DATE, nightsBetween } from '../../util/dates';
+import { validLineItem, calculateTotalFromLineItems } from '../../util/lineItems';
 import { propTypes } from '../../util/types';
+import { types as sdkTypes } from '../../util/sdkLoader';
 import config from '../../config';
 import { Form, PrimaryButton, FieldDateRangeInput } from '../../components';
 import EstimatedBreakdownMaybe from './EstimatedBreakdownMaybe';
 
 import css from './BookingDatesForm.css';
+
+const { Money } = sdkTypes;
 
 const identity = v => v;
 
@@ -95,8 +99,12 @@ export class BookingDatesFormComponent extends Component {
           const bookingStartLabel = intl.formatMessage({
             id: 'BookingDatesForm.bookingStartTitle',
           });
-          const bookingEndLabel = intl.formatMessage({ id: 'BookingDatesForm.bookingEndTitle' });
-          const requiredMessage = intl.formatMessage({ id: 'BookingDatesForm.requiredDate' });
+          const bookingEndLabel = intl.formatMessage({
+            id: 'BookingDatesForm.bookingEndTitle',
+          });
+          const requiredMessage = intl.formatMessage({
+            id: 'BookingDatesForm.requiredDate',
+          });
           const startDateErrorMessage = intl.formatMessage({
             id: 'FieldDateRangeInput.invalidStartDate',
           });
@@ -125,6 +133,56 @@ export class BookingDatesFormComponent extends Component {
                   quantity: 1,
                 }
               : null;
+
+          // Create lineItems based on booking data from the form
+          if (bookingData) {
+            const bookingLineItem = validLineItem({
+              code: 'line-item/nights',
+              unitPrice,
+              quantity: nightsBetween(startDate, endDate),
+              includeFor: ['customer', 'provider'],
+            });
+
+            const cleaningFee = validLineItem({
+              code: 'line-item/cleaning-fee',
+              unitPrice: new Money(7500, 'USD'),
+              quantity: 1,
+              includeFor: ['customer', 'provider'],
+            });
+
+            const providerCommission = validLineItem({
+              code: 'line-item/provider-commission',
+              unitPrice: calculateTotalFromLineItems([bookingLineItem, cleaningFee]),
+              percentage: -10,
+              includeFor: ['provider'],
+            });
+
+            const customerCommission = validLineItem({
+              code: 'line-item/customer-commission',
+              unitPrice: calculateTotalFromLineItems([bookingLineItem, cleaningFee]),
+              percentage: 10,
+              includeFor: ['customer'],
+            });
+
+            const providerCommissionDiscount = validLineItem({
+              code: 'line-item/provider-commission-discount',
+              unitPrice: new Money(2500, 'USD'),
+              quantity: 1,
+              includeFor: ['provider'],
+            });
+
+            const lineItems = [
+              bookingLineItem,
+              cleaningFee,
+              providerCommission,
+              customerCommission,
+              providerCommissionDiscount,
+            ];
+
+            console.log('LineItems', lineItems);
+            console.log('Total price: ', calculateTotalFromLineItems(lineItems));
+          }
+
           const bookingInfo = bookingData ? (
             <div className={css.priceBreakdownContainer}>
               <h3 className={css.priceBreakdownTitle}>
