@@ -200,21 +200,20 @@ export const initiateOrder = (orderParams, transactionId) => (dispatch, getState
     });
 };
 
-
 // fetch('http://localhost:3500/api/log', {credentials: 'include'}).then(r => r.json()).then(console.log)
 export const initiatePrivileged = (orderParams, transactionId) => (dispatch, getState, sdk) => {
   dispatch(initiateOrderRequest());
   const bodyParams = transactionId
-        ? {
-          id: transactionId,
-          transition: 'transition/request-payment-after-enquiry',
-          params: orderParams,
-        }
-        : {
-          processAlias: 'privileged-custom-pricing/release-1',
-          transition: 'transition/request-payment',
-          params: orderParams,
-        };
+    ? {
+        id: transactionId,
+        transition: 'transition/request-payment-after-enquiry',
+        params: orderParams,
+      }
+    : {
+        processAlias: 'privileged-custom-pricing/release-1',
+        transition: 'transition/request-payment',
+        params: orderParams,
+      };
   const queryParams = {
     include: ['booking', 'provider'],
     expand: true,
@@ -231,16 +230,28 @@ export const initiatePrivileged = (orderParams, transactionId) => (dispatch, get
       queryParams,
     }),
   };
-  console.log('fetch options:', options);
-  return window.fetch('http://localhost:3500/api/initiate-privileged', options)
+
+  return window
+    .fetch('http://localhost:3500/api/initiate-privileged', options)
     .then(r => r.json())
-    .then(res => {
-      console.log('success');
-      console.log(res);
+    .then(response => {
+      console.log('response', response);
+      const order = response.data;
+      dispatch(initiateOrderSuccess(order));
+      dispatch(fetchCurrentUserHasOrdersSuccess(true));
+      return order;
     })
     .catch(e => {
-      console.error('error');
-      console.error(e);
+      console.log('e', e);
+      dispatch(initiateOrderError(storableError(e)));
+      const transactionIdMaybe = transactionId ? { transactionId: transactionId.uuid } : {};
+      log.error(e, 'initiate-order-failed', {
+        ...transactionIdMaybe,
+        listingId: orderParams.listingId.uuid,
+        bookingStart: orderParams.bookingStart,
+        bookingEnd: orderParams.bookingEnd,
+      });
+      throw e;
     });
 };
 
@@ -313,6 +324,8 @@ export const speculateTransaction = params => (dispatch, getState, sdk) => {
       cardToken: 'CheckoutPage_speculative_card_token',
     },
   };
+
+  console.log('bodyParams', bodyParams);
   const queryParams = {
     include: ['booking', 'provider'],
     expand: true,

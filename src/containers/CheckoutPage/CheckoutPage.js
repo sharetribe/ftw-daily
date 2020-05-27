@@ -57,6 +57,7 @@ import {
 } from './CheckoutPage.duck';
 import { storeData, storedData, clearData } from './CheckoutPageSessionHelpers';
 import css from './CheckoutPage.css';
+import { constructLineItems } from '../../util/lineItems';
 
 const STORAGE_KEY = 'CheckoutPage';
 
@@ -186,6 +187,7 @@ export class CheckoutPageComponent extends Component {
     if (shouldFetchSpeculatedTransaction) {
       const listingId = pageData.listing.id;
       const { bookingStart, bookingEnd } = pageData.bookingDates;
+      const unitPrice = pageData.listing.attributes.price;
 
       // Convert picked date to date that will be converted on the API as
       // a noon of correct year-month-date combo in UTC
@@ -199,6 +201,7 @@ export class CheckoutPageComponent extends Component {
         listingId,
         bookingStart: bookingStartForAPI,
         bookingEnd: bookingEndForAPI,
+        lineItems: constructLineItems(bookingStartForAPI, bookingEndForAPI, unitPrice),
       });
     }
 
@@ -372,21 +375,17 @@ export class CheckoutPageComponent extends Component {
         ? { paymentMethod: stripePaymentMethodId }
         : selectedPaymentFlow === PAY_AND_SAVE_FOR_LATER_USE
         ? { setupPaymentMethodForSaving: true }
-          : {};
-
-    const lineItems = [
-      {
-        code: 'line-item/test-fee',
-        unitPrice: new Money(1000, config.currency),
-        quantity: 1,
-      },
-    ];
+        : {};
 
     const orderParams = {
       listingId: pageData.listing.id,
       bookingStart: tx.booking.attributes.start,
       bookingEnd: tx.booking.attributes.end,
-      lineItems,
+      lineItems: constructLineItems(
+        tx.booking.attributes.start,
+        tx.booking.attributes.end,
+        pageData.listing.attributes.price
+      ),
       ...optionalPaymentParams,
     };
 
