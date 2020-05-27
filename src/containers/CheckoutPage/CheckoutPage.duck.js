@@ -233,14 +233,27 @@ export const initiatePrivileged = (orderParams, transactionId) => (dispatch, get
   };
   console.log('fetch options:', options);
   return window.fetch('http://localhost:3500/api/initiate-privileged', options)
-    .then(r => r.json())
     .then(res => {
-      console.log('success');
-      console.log(res);
+      if (res.status >= 400) {
+        const e = new Error('Request failed');
+        e.response = res;
+        throw e;
+      }
+      return res;
+    })
+    .then(r => r.json())
+    .then(data => {
+      console.log('success data:');
+      console.log(data);
     })
     .catch(e => {
-      console.error('error');
-      console.error(e);
+      if (e.response) {
+        console.error('error response:');
+        console.error(e.response);
+      } else {
+        console.error('error:');
+        console.error(e);
+      }
     });
 };
 

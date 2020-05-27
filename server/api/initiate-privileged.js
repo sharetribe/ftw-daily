@@ -19,14 +19,35 @@ const baseUrl = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL;
 const httpAgent = new http.Agent({ keepAlive: true });
 const httpsAgent = new https.Agent({ keepAlive: true });
 
-const getTrustedSdk = req => {
-  // Get handle to tokenStore and initialize it from the cookies of the
-  // incoming HTTP request
+const log = (...args) => {
+  const formattedArgs = args.map(arg => {
+    if (typeof arg === 'object') {
+      return JSON.stringify(arg, null, '  ');
+    }
+    return arg;
+  });
+  console.log.apply(console, formattedArgs);
+};
+
+const memoryStore = token => {
+  const store = sharetribeSdk.tokenStore.memoryStore();
+  store.setToken(token);
+  return store;
+};
+
+// Read the user token from the request cookie
+const getUserToken = req => {
   const cookieTokenStore = sharetribeSdk.tokenStore.expressCookieStore({
     clientId,
     req,
     secure,
   });
+  return cookieTokenStore.getToken();
+};
+
+const getTrustedSdk = req => {
+  const userToken = getUserToken(req);
+  log('userToken:', userToken);
 
   // Initiate an SDK instance for token exchange
   const sdk = sharetribeSdk.createInstance({
@@ -35,28 +56,30 @@ const getTrustedSdk = req => {
     clientSecret,
     httpAgent,
     httpsAgent,
-    tokenStore: cookieTokenStore,
+    tokenStore: memoryStore(userToken),
     typeHandlers,
     baseUrl,
   });
 
   // Perform a token exchange
-  console.log('exchange token');
+  log('exchange token');
   return sdk.exchangeToken()
     .then(response => {
       // Setup a trusted sdk with the token we got from the exchange:
-      const token = response.data;
+      const trustedToken = response.data;
+      log('trustedToken:', trustedToken);
 
-      // Important! Do not use a cookieTokenStore here but a memoryStore
-      // instead so that we don't leak the token back to browser client.
-      const tokenStore = sharetribeSdk.tokenStore.memoryStore();
-      tokenStore.setToken(token);
-
-      console.log('create trusted SDK');
+      log('create trusted SDK');
       return sharetribeSdk.createInstance({
         transitVerbose,
-        clientId, // We don't need CLIENT_SECRET here anymore
-        tokenStore,
+
+        // We don't need CLIENT_SECRET here anymore
+        clientId,
+
+        // Important! Do not use a cookieTokenStore here but a memoryStore
+        // instead so that we don't leak the token back to browser client.
+        tokenStore: memoryStore(trustedToken),
+
         httpAgent,
         httpsAgent,
         typeHandlers,
@@ -67,28 +90,27 @@ const getTrustedSdk = req => {
 
 module.exports = (req, res) => {
   const { bodyParams, queryParams } = req.body;
-  console.log('================================================================');
-  console.log('transition privileged');
-  console.log(bodyParams);
-  console.log(queryParams);
+  log('================================================================');
+  log('transition privileged');
+  log('bodyParams:', bodyParams);
+  log('queryParams:', queryParams);
 
   getTrustedSdk(req)
     .then(trustedSdk => {
-      console.log('initiating tx with trusted SDK');
+      log('initiating tx with trusted SDK');
       return trustedSdk.transactions.initiate(bodyParams, queryParams);
     })
     .then(response => {
-      console.log('response from tx initiate:', response);
+      log('response from tx initiate:', response);
       res
         .status(response.status)
         .json(response.data)
         .end();
     })
     .catch(e => {
-      console.error('error in tx initiate');
-      console.error('status:', e.status, 'status text:', e.statusText);
-      console.error('error data:');
-      console.error(JSON.stringify(e.data, null, '  '));
-      res.status(e.status || 500).json({}).end();
+      log('error in tx initiate');
+      log('status:', e.status, 'status text:', e.statusText);
+      log('error data:', e.data);
+      res.status(500).json({ message: e.message }).end();
     });
 };

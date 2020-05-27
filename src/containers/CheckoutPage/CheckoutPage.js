@@ -380,6 +380,18 @@ export class CheckoutPageComponent extends Component {
         unitPrice: new Money(1000, config.currency),
         quantity: 1,
       },
+      {
+        code: 'line-item/customer-commission',
+        unitPrice: new Money(1000, config.currency),
+        percentage: 0.2,
+        includeFor: ['customer'],
+      },
+      {
+        code: 'line-item/provider-commission',
+        unitPrice: new Money(1000, config.currency),
+        percentage: 0.1,
+        includeFor: ['provider'],
+      },
     ];
 
     const orderParams = {
