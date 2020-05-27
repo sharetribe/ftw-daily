@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import moment from 'moment';
 import { required, bookingDatesRequired, composeValidators } from '../../util/validators';
 import { START_DATE, END_DATE, nightsBetween } from '../../util/dates';
-import { validLineItem, calculateTotalFromLineItems } from '../../util/lineItems';
+import { constructLineItems } from '../../util/lineItems';
 import { propTypes } from '../../util/types';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import config from '../../config';
@@ -131,57 +131,9 @@ export class BookingDatesFormComponent extends Component {
                   // NOTE: If unitType is `line-item/units`, a new picker
                   // for the quantity should be added to the form.
                   quantity: 1,
+                  lineItems: constructLineItems(startDate, endDate, unitPrice),
                 }
               : null;
-
-          // Create lineItems based on booking data from the form
-          if (bookingData) {
-            const bookingLineItem = validLineItem({
-              code: 'line-item/nights',
-              unitPrice,
-              quantity: nightsBetween(startDate, endDate),
-              includeFor: ['customer', 'provider'],
-            });
-
-            const cleaningFee = validLineItem({
-              code: 'line-item/cleaning-fee',
-              unitPrice: new Money(7500, 'USD'),
-              quantity: 1,
-              includeFor: ['customer', 'provider'],
-            });
-
-            const providerCommission = validLineItem({
-              code: 'line-item/provider-commission',
-              unitPrice: calculateTotalFromLineItems([bookingLineItem, cleaningFee]),
-              percentage: -10,
-              includeFor: ['provider'],
-            });
-
-            const customerCommission = validLineItem({
-              code: 'line-item/customer-commission',
-              unitPrice: calculateTotalFromLineItems([bookingLineItem, cleaningFee]),
-              percentage: 10,
-              includeFor: ['customer'],
-            });
-
-            const providerCommissionDiscount = validLineItem({
-              code: 'line-item/provider-commission-discount',
-              unitPrice: new Money(2500, 'USD'),
-              quantity: 1,
-              includeFor: ['provider'],
-            });
-
-            const lineItems = [
-              bookingLineItem,
-              cleaningFee,
-              providerCommission,
-              customerCommission,
-              providerCommissionDiscount,
-            ];
-
-            console.log('LineItems', lineItems);
-            console.log('Total price: ', calculateTotalFromLineItems(lineItems));
-          }
 
           const bookingInfo = bookingData ? (
             <div className={css.priceBreakdownContainer}>

@@ -10,6 +10,7 @@ import {
   LINE_ITEM_CUSTOMER_COMMISSION,
   LINE_ITEM_PROVIDER_COMMISSION,
 } from '../../util/types';
+import { calculateTotalForProvider, calculateTotalForCustomer } from '../../util/lineItems';
 
 import css from './BookingBreakdown.css';
 
@@ -76,8 +77,11 @@ const LineItemSubTotalMaybe = props => {
 
   // all non-reversal, non-commission line items
   const subTotalLineItems = nonCommissionNonReversalLineItems(transaction);
-  // line totals of those line items combined
-  const subTotal = lineItemsTotal(subTotalLineItems);
+
+  const subTotal =
+    userRole === 'provider'
+      ? calculateTotalForProvider(subTotalLineItems)
+      : calculateTotalForCustomer(subTotalLineItems);
 
   const formattedSubTotal = subTotalLineItems.length > 0 ? formatMoney(intl, subTotal) : null;
 

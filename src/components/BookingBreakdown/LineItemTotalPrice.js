@@ -4,6 +4,7 @@ import { FormattedMessage, intlShape } from '../../util/reactIntl';
 import { formatMoney } from '../../util/currency';
 import { txIsCanceled, txIsDelivered, txIsDeclined } from '../../util/transaction';
 import { propTypes } from '../../util/types';
+import { calculateTotalForProvider, calculateTotalForCustomer } from '../../util/lineItems';
 
 import css from './BookingBreakdown.css';
 
@@ -25,9 +26,11 @@ const LineItemUnitPrice = props => {
     <FormattedMessage id="BookingBreakdown.total" />
   );
 
+  console.log('transaction', transaction);
+
   const totalPrice = isProvider
-    ? transaction.attributes.payoutTotal
-    : transaction.attributes.payinTotal;
+    ? calculateTotalForProvider(transaction.attributes.lineItems)
+    : calculateTotalForCustomer(transaction.attributes.lineItems);
   const formattedTotalPrice = formatMoney(intl, totalPrice);
 
   return (

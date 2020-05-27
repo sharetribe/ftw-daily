@@ -18,12 +18,16 @@ import { LINE_ITEMS, propTypes } from '../../util/types';
 import css from './BookingBreakdown.css';
 
 const LineItemUnknownItemsMaybe = props => {
-  const { transaction, intl } = props;
+  const { transaction, isProvider, intl } = props;
 
   // resolve unknown non-reversal line items
-  const items = transaction.attributes.lineItems.filter(
+  const allItems = transaction.attributes.lineItems.filter(
     item => LINE_ITEMS.indexOf(item.code) === -1 && !item.reversal
   );
+
+  const items = isProvider
+    ? allItems.filter(item => item.includeFor.includes('provider'))
+    : allItems.filter(item => item.includeFor.includes('customer'));
 
   return items.length > 0 ? (
     <React.Fragment>

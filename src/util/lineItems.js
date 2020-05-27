@@ -122,3 +122,47 @@ export const calculateTotalForCustomer = lineItems => {
   return calculateTotalFromLineItems(providerLineItems);
 };
 
+export const constructLineItems = (startDate, endDate, unitPrice) => {
+  const bookingLineItem = validLineItem({
+    code: 'line-item/nights',
+    unitPrice,
+    quantity: nightsBetween(startDate, endDate),
+    includeFor: ['customer', 'provider'],
+  });
+
+  const cleaningFee = validLineItem({
+    code: 'line-item/cleaning-fee',
+    unitPrice: new Money(7500, 'USD'),
+    quantity: 1,
+    includeFor: ['customer', 'provider'],
+  });
+
+  const providerCommission = validLineItem({
+    code: 'line-item/provider-commission',
+    unitPrice: calculateTotalFromLineItems([bookingLineItem, cleaningFee]),
+    percentage: -15,
+    includeFor: ['provider'],
+  });
+
+  const customerCommission = validLineItem({
+    code: 'line-item/customer-commission',
+    unitPrice: calculateTotalFromLineItems([bookingLineItem, cleaningFee]),
+    percentage: 10,
+    includeFor: ['customer'],
+  });
+
+  const providerCommissionDiscount = validLineItem({
+    code: 'line-item/provider-commission-discount',
+    unitPrice: new Money(2500, 'USD'),
+    quantity: 1,
+    includeFor: ['provider'],
+  });
+
+  return [
+    bookingLineItem,
+    cleaningFee,
+    providerCommission,
+    customerCommission,
+    providerCommissionDiscount,
+  ];
+};
