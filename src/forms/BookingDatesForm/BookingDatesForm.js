@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import moment from 'moment';
 import { required, bookingDatesRequired, composeValidators } from '../../util/validators';
 import { START_DATE, END_DATE, nightsBetween } from '../../util/dates';
-import { constructLineItems } from '../../util/lineItems';
+import { transactionLineItems } from '../../util/lineItems';
 import { propTypes } from '../../util/types';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import config from '../../config';
@@ -131,16 +131,22 @@ export class BookingDatesFormComponent extends Component {
                   // NOTE: If unitType is `line-item/units`, a new picker
                   // for the quantity should be added to the form.
                   quantity: 1,
-                  lineItems: constructLineItems(startDate, endDate, unitPrice),
                 }
               : null;
 
-          const bookingInfo = bookingData ? (
+          const bookingDataWithLineItems = bookingData
+            ? {
+                ...bookingData,
+                lineItems: transactionLineItems(bookingData),
+              }
+            : bookingData;
+
+          const bookingInfo = bookingDataWithLineItems ? (
             <div className={css.priceBreakdownContainer}>
               <h3 className={css.priceBreakdownTitle}>
                 <FormattedMessage id="BookingDatesForm.priceBreakdownTitle" />
               </h3>
-              <EstimatedBreakdownMaybe bookingData={bookingData} />
+              <EstimatedBreakdownMaybe bookingData={bookingDataWithLineItems} />
             </div>
           ) : null;
 

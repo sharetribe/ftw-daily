@@ -4,7 +4,7 @@ import { FormattedMessage, intlShape } from '../../util/reactIntl';
 import { formatMoney } from '../../util/currency';
 import { txIsCanceled, txIsDelivered, txIsDeclined } from '../../util/transaction';
 import { propTypes } from '../../util/types';
-import { calculateTotalForProvider, calculateTotalForCustomer } from '../../util/lineItems';
+import { calculateTotalForProvider, calculateTotalForCustomer } from '../../util/lineItemHelpers';
 
 import css from './BookingBreakdown.css';
 

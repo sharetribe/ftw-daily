@@ -57,7 +57,7 @@ import {
 } from './CheckoutPage.duck';
 import { storeData, storedData, clearData } from './CheckoutPageSessionHelpers';
 import css from './CheckoutPage.css';
-import { constructLineItems } from '../../util/lineItems';
+import { transactionLineItems } from '../../util/lineItems';
 
 const STORAGE_KEY = 'CheckoutPage';
 
@@ -201,7 +201,6 @@ export class CheckoutPageComponent extends Component {
         listingId,
         bookingStart: bookingStartForAPI,
         bookingEnd: bookingEndForAPI,
-        lineItems: constructLineItems(bookingStartForAPI, bookingEndForAPI, unitPrice),
       });
     }
 
@@ -381,11 +380,13 @@ export class CheckoutPageComponent extends Component {
       listingId: pageData.listing.id,
       bookingStart: tx.booking.attributes.start,
       bookingEnd: tx.booking.attributes.end,
-      lineItems: constructLineItems(
-        tx.booking.attributes.start,
-        tx.booking.attributes.end,
-        pageData.listing.attributes.price
-      ),
+
+      // This is for testing. Actually, the lineItem should be created in the backend based on bookingData object
+      lineItems: transactionLineItems({
+        startDate: tx.booking.attributes.start,
+        endDate: tx.booking.attributes.end,
+        unitPrice: pageData.listing.attributes.price,
+      }),
       ...optionalPaymentParams,
     };
 

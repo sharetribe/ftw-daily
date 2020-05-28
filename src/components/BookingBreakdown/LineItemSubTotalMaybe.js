@@ -10,7 +10,7 @@ import {
   LINE_ITEM_CUSTOMER_COMMISSION,
   LINE_ITEM_PROVIDER_COMMISSION,
 } from '../../util/types';
-import { calculateTotalForProvider, calculateTotalForCustomer } from '../../util/lineItems';
+import { calculateTotalForProvider, calculateTotalForCustomer } from '../../util/lineItemHelpers';
 
 import css from './BookingBreakdown.css';
 
