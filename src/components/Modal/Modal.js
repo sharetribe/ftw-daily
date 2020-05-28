@@ -8,21 +8,21 @@
  *   </Modal>
  * </Parent>
  */
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
-import { Button, IconClose } from '../../components';
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl'
+import { Button, IconClose } from '../../components'
 
-import css from './Modal.css';
+import css from './Modal.css'
 
-const KEY_CODE_ESCAPE = 27;
+const KEY_CODE_ESCAPE = 27
 
 class Portal extends React.Component {
   constructor(props) {
-    super(props);
-    this.el = document.createElement('div');
+    super(props)
+    this.el = document.createElement('div')
   }
 
   componentDidMount() {
@@ -34,70 +34,70 @@ class Portal extends React.Component {
     // DOM node, or uses 'autoFocus' in a descendant, add
     // state to Modal and only render the children when Modal
     // is inserted in the DOM tree.
-    this.props.portalRoot.appendChild(this.el);
+    this.props.portalRoot.appendChild(this.el)
   }
 
   componentWillUnmount() {
-    this.props.portalRoot.removeChild(this.el);
+    this.props.portalRoot.removeChild(this.el)
   }
 
   render() {
-    return ReactDOM.createPortal(this.props.children, this.el);
+    return ReactDOM.createPortal(this.props.children, this.el)
   }
 }
 
 export class ModalComponent extends Component {
   constructor(props) {
-    super(props);
-    this.handleBodyKeyUp = this.handleBodyKeyUp.bind(this);
-    this.handleClose = this.handleClose.bind(this);
+    super(props)
+    this.handleBodyKeyUp = this.handleBodyKeyUp.bind(this)
+    this.handleClose = this.handleClose.bind(this)
 
-    this.refDiv = React.createRef();
+    this.refDiv = React.createRef()
 
     this.state = {
       portalRoot: null,
-    };
+    }
   }
 
   componentDidMount() {
-    const { id, isOpen, onManageDisableScrolling } = this.props;
-    onManageDisableScrolling(id, isOpen);
-    document.body.addEventListener('keyup', this.handleBodyKeyUp);
+    const { id, isOpen, onManageDisableScrolling } = this.props
+    onManageDisableScrolling(id, isOpen)
+    document.body.addEventListener('keyup', this.handleBodyKeyUp)
     this.setState({
       portalRoot: document.getElementById('portal-root'),
-    });
+    })
   }
 
   componentDidUpdate(prevProps) {
-    const { id, isOpen, onManageDisableScrolling } = prevProps;
+    const { id, isOpen, onManageDisableScrolling } = prevProps
     if (this.props.isOpen !== isOpen) {
-      onManageDisableScrolling(id, this.props.isOpen);
+      onManageDisableScrolling(id, this.props.isOpen)
 
       // Because we are using portal,
       // we need to set the focus inside Modal manually
       if (this.props.usePortal && this.props.isOpen) {
-        this.refDiv.current.focus();
+        this.refDiv.current.focus()
       }
     }
   }
 
   componentWillUnmount() {
-    const { id, onManageDisableScrolling } = this.props;
-    document.body.removeEventListener('keyup', this.handleBodyKeyUp);
-    onManageDisableScrolling(id, false);
+    const { id, onManageDisableScrolling } = this.props
+    document.body.removeEventListener('keyup', this.handleBodyKeyUp)
+    onManageDisableScrolling(id, false)
   }
 
   handleBodyKeyUp(event) {
-    const { isOpen } = this.props;
+    const { isOpen } = this.props
     if (event.keyCode === KEY_CODE_ESCAPE && isOpen) {
-      this.handleClose(event);
+      this.handleClose(event)
     }
   }
 
   handleClose(event) {
-    const { id, onClose, onManageDisableScrolling } = this.props;
-    onManageDisableScrolling(id, false);
-    onClose(event);
+    const { id, onClose, onManageDisableScrolling } = this.props
+    onManageDisableScrolling(id, false)
+    onClose(event)
   }
 
   render() {
@@ -113,12 +113,12 @@ export class ModalComponent extends Component {
       isClosedClassName,
       isOpen,
       usePortal,
-    } = this.props;
+    } = this.props
 
-    const closeModalMessage = intl.formatMessage({ id: 'Modal.closeModal' });
+    const closeModalMessage = intl.formatMessage({ id: 'Modal.closeModal' })
     const closeButtonClasses = classNames(css.close, {
       [css.closeLight]: lightCloseButton,
-    });
+    })
     const closeBtn = isOpen ? (
       <Button
         onClick={this.handleClose}
@@ -130,17 +130,17 @@ export class ModalComponent extends Component {
         </span>
         <IconClose rootClassName={css.closeIcon} />
       </Button>
-    ) : null;
+    ) : null
 
     // Modal uses given styles to wrap child components.
     // If props doesn't contain isClosedClassName, styles default to css.isClosed
     // This makes it possible to create ModalInMobile on top of Modal where style modes are:
     // visible, hidden, or none (ModalInMobile's children are always visible on desktop layout.)
-    const modalClass = isOpen ? css.isOpen : isClosedClassName;
-    const classes = classNames(modalClass, className);
-    const scrollLayerClasses = scrollLayerClassName || css.scrollLayer;
-    const containerClasses = containerClassName || css.container;
-    const portalRoot = this.state.portalRoot;
+    const modalClass = isOpen ? css.isOpen : isClosedClassName
+    const classes = classNames(modalClass, className)
+    const scrollLayerClasses = scrollLayerClassName || css.scrollLayer
+    const containerClasses = containerClassName || css.container
+    const portalRoot = this.state.portalRoot
 
     // If you want to use Portal https://reactjs.org/docs/portals.html
     // you need to use 'userPortal' flag.
@@ -172,7 +172,7 @@ export class ModalComponent extends Component {
           </div>
         </div>
       </Portal>
-    ) : null;
+    ) : null
   }
 }
 
@@ -188,9 +188,9 @@ ModalComponent.defaultProps = {
   isOpen: false,
   onClose: null,
   usePortal: false,
-};
+}
 
-const { bool, func, node, string } = PropTypes;
+const { bool, func, node, string } = PropTypes
 
 ModalComponent.propTypes = {
   children: node,
@@ -209,6 +209,6 @@ ModalComponent.propTypes = {
 
   // eslint-disable-next-line react/no-unused-prop-types
   onManageDisableScrolling: func.isRequired,
-};
+}
 
-export default injectIntl(ModalComponent);
+export default injectIntl(ModalComponent)

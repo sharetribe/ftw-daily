@@ -1,13 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
-import css from './IconReviewStar.css';
+import css from './IconReviewStar.css'
 
-const IconReviewStar = props => {
-  const { className, rootClassName, isFilled } = props;
-  const filledOrDefault = isFilled ? css.filled : css.root;
-  const classes = classNames(rootClassName || filledOrDefault, className);
+const IconReviewStar = (props) => {
+  const { className, rootClassName, isFilled } = props
+  const filledOrDefault = isFilled ? css.filled : css.root
+  const classes = classNames(rootClassName || filledOrDefault, className)
 
   return (
     <svg
@@ -22,17 +22,17 @@ const IconReviewStar = props => {
         fillRule="evenodd"
       />
     </svg>
-  );
-};
+  )
+}
 
-IconReviewStar.defaultProps = { className: null, rootClassName: null, isFilled: false };
+IconReviewStar.defaultProps = { className: null, rootClassName: null, isFilled: false }
 
-const { bool, string } = PropTypes;
+const { bool, string } = PropTypes
 
 IconReviewStar.propTypes = {
   className: string,
   rootClassName: string,
   isFilled: bool,
-};
+}
 
-export default IconReviewStar;
+export default IconReviewStar

@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
-import css from './IconEmailSent.css';
+import css from './IconEmailSent.css'
 
-const IconEmailSent = props => {
-  const { rootClassName, className } = props;
-  const classes = classNames(rootClassName || css.root, className);
+const IconEmailSent = (props) => {
+  const { rootClassName, className } = props
+  const classes = classNames(rootClassName || css.root, className)
   return (
     <svg
       className={classes}
@@ -26,19 +26,19 @@ const IconEmailSent = props => {
         <path d="M62 8L41.345 19 30 8M22 26l10-7M54 26l-4.5-5.5M17 5H2M6.528 25H2M11.513 15.5H2" />
       </g>
     </svg>
-  );
-};
+  )
+}
 
 IconEmailSent.defaultProps = {
   rootClassName: null,
   className: null,
-};
+}
 
-const { string } = PropTypes;
+const { string } = PropTypes
 
 IconEmailSent.propTypes = {
   rootClassName: string,
   className: string,
-};
+}
 
-export default IconEmailSent;
+export default IconEmailSent

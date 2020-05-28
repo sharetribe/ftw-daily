@@ -1,55 +1,55 @@
-import React from 'react';
-import { compose } from 'redux';
-import { object, string, bool, number, func, shape } from 'prop-types';
-import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
-import classNames from 'classnames';
-import { withRouter } from 'react-router-dom';
-import omit from 'lodash/omit';
+import React from 'react'
+import { compose } from 'redux'
+import { object, string, bool, number, func, shape } from 'prop-types'
+import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl'
+import classNames from 'classnames'
+import { withRouter } from 'react-router-dom'
+import omit from 'lodash/omit'
 
-import config from '../../config';
-import { BookingDateRangeFilter, PriceFilter, KeywordFilter, SortBy } from '../../components';
-import routeConfiguration from '../../routeConfiguration';
-import { parseDateFromISO8601, stringifyDateToISO8601 } from '../../util/dates';
-import { createResourceLocatorString } from '../../util/routes';
-import { propTypes } from '../../util/types';
-import css from './SearchFilters.css';
+import config from '../../config'
+import { BookingDateRangeFilter, PriceFilter, KeywordFilter, SortBy } from '../../components'
+import routeConfiguration from '../../routeConfiguration'
+import { parseDateFromISO8601, stringifyDateToISO8601 } from '../../util/dates'
+import { createResourceLocatorString } from '../../util/routes'
+import { propTypes } from '../../util/types'
+import css from './SearchFilters.css'
 
 // Dropdown container can have a positional offset (in pixels)
-const FILTER_DROPDOWN_OFFSET = -14;
-const RADIX = 10;
+const FILTER_DROPDOWN_OFFSET = -14
+const RADIX = 10
 
 // resolve initial value for a single value filter
 const initialValue = (queryParams, paramName) => {
-  return queryParams[paramName];
-};
+  return queryParams[paramName]
+}
 
 const initialPriceRangeValue = (queryParams, paramName) => {
-  const price = queryParams[paramName];
-  const valuesFromParams = !!price ? price.split(',').map(v => Number.parseInt(v, RADIX)) : [];
+  const price = queryParams[paramName]
+  const valuesFromParams = !!price ? price.split(',').map((v) => Number.parseInt(v, RADIX)) : []
 
   return !!price && valuesFromParams.length === 2
     ? {
         minPrice: valuesFromParams[0],
         maxPrice: valuesFromParams[1],
       }
-    : null;
-};
+    : null
+}
 
 const initialDateRangeValue = (queryParams, paramName) => {
-  const dates = queryParams[paramName];
-  const rawValuesFromParams = !!dates ? dates.split(',') : [];
-  const valuesFromParams = rawValuesFromParams.map(v => parseDateFromISO8601(v));
+  const dates = queryParams[paramName]
+  const rawValuesFromParams = !!dates ? dates.split(',') : []
+  const valuesFromParams = rawValuesFromParams.map((v) => parseDateFromISO8601(v))
   const initialValues =
     !!dates && valuesFromParams.length === 2
       ? {
           dates: { startDate: valuesFromParams[0], endDate: valuesFromParams[1] },
         }
-      : { dates: null };
+      : { dates: null }
 
-  return initialValues;
-};
+  return initialValues
+}
 
-const SearchFiltersComponent = props => {
+const SearchFiltersComponent = (props) => {
   const {
     rootClassName,
     className,
@@ -66,60 +66,60 @@ const SearchFiltersComponent = props => {
     searchFiltersPanelSelectedCount,
     history,
     intl,
-  } = props;
+  } = props
 
-  const hasNoResult = listingsAreLoaded && resultsCount === 0;
-  const classes = classNames(rootClassName || css.root, className);
+  const hasNoResult = listingsAreLoaded && resultsCount === 0
+  const classes = classNames(rootClassName || css.root, className)
 
   const keywordLabel = intl.formatMessage({
     id: 'SearchFilters.keywordLabel',
-  });
+  })
 
   const initialPriceRange = priceFilter
     ? initialPriceRangeValue(urlQueryParams, priceFilter.paramName)
-    : null;
+    : null
 
   const initialDateRange = dateRangeFilter
     ? initialDateRangeValue(urlQueryParams, dateRangeFilter.paramName)
-    : null;
+    : null
 
   const initialKeyword = keywordFilter
     ? initialValue(urlQueryParams, keywordFilter.paramName)
-    : null;
+    : null
 
-  const isKeywordFilterActive = !!initialKeyword;
+  const isKeywordFilterActive = !!initialKeyword
 
   const handlePrice = (urlParam, range) => {
-    const { minPrice, maxPrice } = range || {};
+    const { minPrice, maxPrice } = range || {}
     const queryParams =
       minPrice != null && maxPrice != null
         ? { ...urlQueryParams, [urlParam]: `${minPrice},${maxPrice}` }
-        : omit(urlQueryParams, urlParam);
+        : omit(urlQueryParams, urlParam)
 
-    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
-  };
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams))
+  }
 
   const handleDateRange = (urlParam, dateRange) => {
-    const hasDates = dateRange && dateRange.dates;
-    const { startDate, endDate } = hasDates ? dateRange.dates : {};
+    const hasDates = dateRange && dateRange.dates
+    const { startDate, endDate } = hasDates ? dateRange.dates : {}
 
-    const start = startDate ? stringifyDateToISO8601(startDate) : null;
-    const end = endDate ? stringifyDateToISO8601(endDate) : null;
+    const start = startDate ? stringifyDateToISO8601(startDate) : null
+    const end = endDate ? stringifyDateToISO8601(endDate) : null
 
     const queryParams =
       start != null && end != null
         ? { ...urlQueryParams, [urlParam]: `${start},${end}` }
-        : omit(urlQueryParams, urlParam);
-    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
-  };
+        : omit(urlQueryParams, urlParam)
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams))
+  }
 
   const handleKeyword = (urlParam, values) => {
     const queryParams = values
       ? { ...urlQueryParams, [urlParam]: values }
-      : omit(urlQueryParams, urlParam);
+      : omit(urlQueryParams, urlParam)
 
-    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
-  };
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams))
+  }
 
   const priceFilterElement = priceFilter ? (
     <PriceFilter
@@ -131,7 +131,7 @@ const SearchFiltersComponent = props => {
       initialValues={initialPriceRange}
       contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
     />
-  ) : null;
+  ) : null
 
   const dateRangeFilterElement =
     dateRangeFilter && dateRangeFilter.config.active ? (
@@ -143,7 +143,7 @@ const SearchFiltersComponent = props => {
         contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
         initialValues={initialDateRange}
       />
-    ) : null;
+    ) : null
 
   const keywordFilterElement =
     keywordFilter && keywordFilter.config.active ? (
@@ -157,17 +157,17 @@ const SearchFiltersComponent = props => {
         initialValues={initialKeyword}
         contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
       />
-    ) : null;
+    ) : null
 
   const toggleSearchFiltersPanelButtonClasses =
     isSearchFiltersPanelOpen || searchFiltersPanelSelectedCount > 0
       ? css.searchFiltersPanelOpen
-      : css.searchFiltersPanelClosed;
+      : css.searchFiltersPanelClosed
   const toggleSearchFiltersPanelButton = toggleSearchFiltersPanel ? (
     <button
       className={toggleSearchFiltersPanelButtonClasses}
       onClick={() => {
-        toggleSearchFiltersPanel(!isSearchFiltersPanelOpen);
+        toggleSearchFiltersPanel(!isSearchFiltersPanelOpen)
       }}
     >
       <FormattedMessage
@@ -175,15 +175,15 @@ const SearchFiltersComponent = props => {
         values={{ count: searchFiltersPanelSelectedCount }}
       />
     </button>
-  ) : null;
+  ) : null
 
   const handleSortBy = (urlParam, values) => {
     const queryParams = values
       ? { ...urlQueryParams, [urlParam]: values }
-      : omit(urlQueryParams, urlParam);
+      : omit(urlQueryParams, urlParam)
 
-    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
-  };
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams))
+  }
 
   const sortBy = config.custom.sortConfig.active ? (
     <SortBy
@@ -193,7 +193,7 @@ const SearchFiltersComponent = props => {
       onSelect={handleSortBy}
       contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
     />
-  ) : null;
+  ) : null
 
   return (
     <div className={classes}>
@@ -227,8 +227,8 @@ const SearchFiltersComponent = props => {
         </div>
       ) : null}
     </div>
-  );
-};
+  )
+}
 
 SearchFiltersComponent.defaultProps = {
   rootClassName: null,
@@ -240,7 +240,7 @@ SearchFiltersComponent.defaultProps = {
   isSearchFiltersPanelOpen: false,
   toggleSearchFiltersPanel: null,
   searchFiltersPanelSelectedCount: 0,
-};
+}
 
 SearchFiltersComponent.propTypes = {
   rootClassName: string,
@@ -263,11 +263,8 @@ SearchFiltersComponent.propTypes = {
 
   // from injectIntl
   intl: intlShape.isRequired,
-};
+}
 
-const SearchFilters = compose(
-  withRouter,
-  injectIntl
-)(SearchFiltersComponent);
+const SearchFilters = compose(withRouter, injectIntl)(SearchFiltersComponent)
 
-export default SearchFilters;
+export default SearchFilters

@@ -1,9 +1,9 @@
-import React from 'react';
-import { renderShallow } from '../../util/test-helpers';
-import { fakeIntl, createCurrentUser } from '../../util/test-data';
-import { PasswordChangePageComponent } from './PasswordChangePage';
+import React from 'react'
+import { renderShallow } from '../../util/test-helpers'
+import { fakeIntl, createCurrentUser } from '../../util/test-data'
+import { PasswordChangePageComponent } from './PasswordChangePage'
 
-const noop = () => null;
+const noop = () => null
 
 describe('PasswordChangePage', () => {
   it('matches snapshot', () => {
@@ -26,8 +26,8 @@ describe('PasswordChangePage', () => {
         changePasswordInProgress={false}
         passwordChanged={false}
         intl={fakeIntl}
-      />
-    );
-    expect(tree).toMatchSnapshot();
-  });
-});
+      />,
+    )
+    expect(tree).toMatchSnapshot()
+  })
+})

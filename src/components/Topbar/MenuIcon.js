@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
-import css from './Topbar.css';
+import css from './Topbar.css'
 
-const MenuIcon = props => {
-  const { className, rootClassName } = props;
-  const classes = classNames(rootClassName || css.rootMenuIcon, className);
+const MenuIcon = (props) => {
+  const { className, rootClassName } = props
+  const classes = classNames(rootClassName || css.rootMenuIcon, className)
 
   return (
     <svg
@@ -22,19 +22,19 @@ const MenuIcon = props => {
         <rect y="10" width="18" height="2" rx="1" />
       </g>
     </svg>
-  );
-};
+  )
+}
 
-const { string } = PropTypes;
+const { string } = PropTypes
 
 MenuIcon.defaultProps = {
   className: null,
   rootClassName: null,
-};
+}
 
 MenuIcon.propTypes = {
   className: string,
   rootClassName: string,
-};
+}
 
-export default MenuIcon;
+export default MenuIcon

@@ -1,15 +1,15 @@
-import React from 'react';
-import { renderDeep } from '../../util/test-helpers';
+import React from 'react'
+import { renderDeep } from '../../util/test-helpers'
 import {
   fakeIntl,
   createUser,
   createCurrentUser,
   createMessage,
   createTransaction,
-} from '../../util/test-data';
-import { ActivityFeedComponent } from './ActivityFeed';
+} from '../../util/test-data'
+import { ActivityFeedComponent } from './ActivityFeed'
 
-const noop = () => null;
+const noop = () => null
 
 describe('ActivityFeed', () => {
   it('matches snapshot', () => {
@@ -25,8 +25,8 @@ describe('ActivityFeed', () => {
       onShowOlderMessages: noop,
       fetchMessagesInProgress: false,
       intl: fakeIntl,
-    };
-    const tree = renderDeep(<ActivityFeedComponent {...props} />);
-    expect(tree).toMatchSnapshot();
-  });
-});
+    }
+    const tree = renderDeep(<ActivityFeedComponent {...props} />)
+    expect(tree).toMatchSnapshot()
+  })
+})

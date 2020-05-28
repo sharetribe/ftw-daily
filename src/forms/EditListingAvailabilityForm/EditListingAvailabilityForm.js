@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import { bool, func, object, string } from 'prop-types';
-import { compose } from 'redux';
-import { Form as FinalForm } from 'react-final-form';
-import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
-import classNames from 'classnames';
-import { propTypes } from '../../util/types';
-import { Form, Button } from '../../components';
+import React, { Component } from 'react'
+import { bool, func, object, string } from 'prop-types'
+import { compose } from 'redux'
+import { Form as FinalForm } from 'react-final-form'
+import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl'
+import classNames from 'classnames'
+import { propTypes } from '../../util/types'
+import { Form, Button } from '../../components'
 
-import ManageAvailabilityCalendar from './ManageAvailabilityCalendar';
-import css from './EditListingAvailabilityForm.css';
+import ManageAvailabilityCalendar from './ManageAvailabilityCalendar'
+import css from './EditListingAvailabilityForm.css'
 
 export class EditListingAvailabilityFormComponent extends Component {
   render() {
     return (
       <FinalForm
         {...this.props}
-        render={formRenderProps => {
+        render={(formRenderProps) => {
           const {
             className,
             rootClassName,
@@ -32,18 +32,18 @@ export class EditListingAvailabilityFormComponent extends Component {
             availability,
             availabilityPlan,
             listingId,
-          } = formRenderProps;
+          } = formRenderProps
 
           const errorMessage = updateError ? (
             <p className={css.error}>
               <FormattedMessage id="EditListingAvailabilityForm.updateFailed" />
             </p>
-          ) : null;
+          ) : null
 
-          const classes = classNames(rootClassName || css.root, className);
-          const submitReady = (updated && pristine) || ready;
-          const submitInProgress = updateInProgress;
-          const submitDisabled = invalid || disabled || submitInProgress;
+          const classes = classNames(rootClassName || css.root, className)
+          const submitReady = (updated && pristine) || ready
+          const submitInProgress = updateInProgress
+          const submitDisabled = invalid || disabled || submitInProgress
 
           return (
             <Form className={classes} onSubmit={handleSubmit}>
@@ -66,16 +66,16 @@ export class EditListingAvailabilityFormComponent extends Component {
                 {saveActionMsg}
               </Button>
             </Form>
-          );
+          )
         }}
       />
-    );
+    )
   }
 }
 
 EditListingAvailabilityFormComponent.defaultProps = {
   updateError: null,
-};
+}
 
 EditListingAvailabilityFormComponent.propTypes = {
   intl: intlShape.isRequired,
@@ -88,6 +88,6 @@ EditListingAvailabilityFormComponent.propTypes = {
   updateInProgress: bool.isRequired,
   availability: object.isRequired,
   availabilityPlan: propTypes.availabilityPlan.isRequired,
-};
+}
 
-export default compose(injectIntl)(EditListingAvailabilityFormComponent);
+export default compose(injectIntl)(EditListingAvailabilityFormComponent)

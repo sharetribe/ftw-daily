@@ -1,12 +1,12 @@
-import React from 'react';
-import { string } from 'prop-types';
-import classNames from 'classnames';
+import React from 'react'
+import { string } from 'prop-types'
+import classNames from 'classnames'
 
-import css from './IconSuccess.css';
+import css from './IconSuccess.css'
 
-const IconSuccess = props => {
-  const { rootClassName, className, fillColor } = props;
-  const classes = classNames(rootClassName || css.root, className);
+const IconSuccess = (props) => {
+  const { rootClassName, className, fillColor } = props
+  const classes = classNames(rootClassName || css.root, className)
   return (
     <svg className={classes} width="24" height="24" xmlns="http://www.w3.org/2000/svg">
       <g fill="none" fillRule="evenodd">
@@ -20,19 +20,19 @@ const IconSuccess = props => {
         />
       </g>
     </svg>
-  );
-};
+  )
+}
 
 IconSuccess.defaultProps = {
   rootClassName: null,
   className: null,
   fillColor: null,
-};
+}
 
 IconSuccess.propTypes = {
   rootClassName: string,
   className: string,
   fillColor: string,
-};
+}
 
-export default IconSuccess;
+export default IconSuccess

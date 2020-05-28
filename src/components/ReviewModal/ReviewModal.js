@@ -1,14 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
-import classNames from 'classnames';
-import { propTypes } from '../../util/types';
-import { IconReviewUser, Modal } from '../../components';
-import { ReviewForm } from '../../forms';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl'
+import classNames from 'classnames'
+import { propTypes } from '../../util/types'
+import { IconReviewUser, Modal } from '../../components'
+import { ReviewForm } from '../../forms'
 
-import css from './ReviewModal.css';
+import css from './ReviewModal.css'
 
-const ReviewModal = props => {
+const ReviewModal = (props) => {
   const {
     className,
     rootClassName,
@@ -22,11 +22,11 @@ const ReviewModal = props => {
     reviewSent,
     sendReviewInProgress,
     sendReviewError,
-  } = props;
+  } = props
 
-  const classes = classNames(rootClassName || css.root, className);
-  const closeButtonMessage = intl.formatMessage({ id: 'ReviewModal.later' });
-  const reviewee = <span className={css.reviewee}>{revieweeName}</span>;
+  const classes = classNames(rootClassName || css.root, className)
+  const closeButtonMessage = intl.formatMessage({ id: 'ReviewModal.later' })
+  const reviewee = <span className={css.reviewee}>{revieweeName}</span>
 
   return (
     <Modal
@@ -53,10 +53,10 @@ const ReviewModal = props => {
         sendReviewError={sendReviewError}
       />
     </Modal>
-  );
-};
+  )
+}
 
-const { bool, string } = PropTypes;
+const { bool, string } = PropTypes
 
 ReviewModal.defaultProps = {
   className: null,
@@ -64,7 +64,7 @@ ReviewModal.defaultProps = {
   reviewSent: false,
   sendReviewInProgress: false,
   sendReviewError: null,
-};
+}
 
 ReviewModal.propTypes = {
   className: string,
@@ -73,6 +73,6 @@ ReviewModal.propTypes = {
   reviewSent: bool,
   sendReviewInProgress: bool,
   sendReviewError: propTypes.error,
-};
+}
 
-export default injectIntl(ReviewModal);
+export default injectIntl(ReviewModal)

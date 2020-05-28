@@ -1,27 +1,24 @@
-import queryString from 'query-string';
-import { types as sdkTypes } from './sdkLoader';
+import queryString from 'query-string'
+import { types as sdkTypes } from './sdkLoader'
 
-const { LatLng, LatLngBounds } = sdkTypes;
+const { LatLng, LatLngBounds } = sdkTypes
 
-export const LISTING_PAGE_PENDING_APPROVAL_VARIANT = 'pending-approval';
-export const LISTING_PAGE_DRAFT_VARIANT = 'draft';
+export const LISTING_PAGE_PENDING_APPROVAL_VARIANT = 'pending-approval'
+export const LISTING_PAGE_DRAFT_VARIANT = 'draft'
 
-export const LISTING_PAGE_PARAM_TYPE_NEW = 'new';
-export const LISTING_PAGE_PARAM_TYPE_DRAFT = 'draft';
-export const LISTING_PAGE_PARAM_TYPE_EDIT = 'edit';
+export const LISTING_PAGE_PARAM_TYPE_NEW = 'new'
+export const LISTING_PAGE_PARAM_TYPE_DRAFT = 'draft'
+export const LISTING_PAGE_PARAM_TYPE_EDIT = 'edit'
 export const LISTING_PAGE_PARAM_TYPES = [
   LISTING_PAGE_PARAM_TYPE_NEW,
   LISTING_PAGE_PARAM_TYPE_DRAFT,
   LISTING_PAGE_PARAM_TYPE_EDIT,
-];
+]
 
 // Create slug from random texts
 // From Gist thread: https://gist.github.com/mathewbyrne/1280286
-export const createSlug = str => {
-  let text = str
-    .toString()
-    .toLowerCase()
-    .trim();
+export const createSlug = (str) => {
+  let text = str.toString().toLowerCase().trim()
 
   const sets = [
     { to: 'a', from: 'ÀÁÂÃÄÅÆĀĂĄẠẢẤẦẨẪẬẮẰẲẴẶ' },
@@ -49,11 +46,11 @@ export const createSlug = str => {
     { to: 'y', from: 'ÝŶŸỲỴỶỸ' },
     { to: 'z', from: 'ŹŻŽ' },
     { to: '-', from: "·/_,:;'" },
-  ];
+  ]
 
-  sets.forEach(set => {
-    text = text.replace(new RegExp(`[${set.from}]`, 'gi'), set.to);
-  });
+  sets.forEach((set) => {
+    text = text.replace(new RegExp(`[${set.from}]`, 'gi'), set.to)
+  })
 
   const slug = encodeURIComponent(
     text
@@ -61,11 +58,11 @@ export const createSlug = str => {
       .replace(/[^\w-]+/g, '') // Remove all non-word chars
       .replace(/--+/g, '-') // Replace multiple - with single -
       .replace(/^-+/, '') // Trim - from start of text
-      .replace(/-+$/, '') // Trim - from end of text
-  );
+      .replace(/-+$/, ''), // Trim - from end of text
+  )
 
-  return slug.length > 0 ? slug : 'no-slug';
-};
+  return slug.length > 0 ? slug : 'no-slug'
+}
 
 /**
  * Parse float from a string
@@ -74,16 +71,16 @@ export const createSlug = str => {
  *
  * @return {Number|null} number parsed from the string, null if not a number
  */
-export const parseFloatNum = str => {
-  const trimmed = str && typeof str.trim === 'function' ? str.trim() : null;
+export const parseFloatNum = (str) => {
+  const trimmed = str && typeof str.trim === 'function' ? str.trim() : null
   if (!trimmed) {
-    return null;
+    return null
   }
-  const num = parseFloat(trimmed);
-  const isNumber = !isNaN(num);
-  const isFullyParsedNum = isNumber && num.toString() === trimmed;
-  return isFullyParsedNum ? num : null;
-};
+  const num = parseFloat(trimmed)
+  const isNumber = !isNaN(num)
+  const isFullyParsedNum = isNumber && num.toString() === trimmed
+  return isFullyParsedNum ? num : null
+}
 
 /**
  * Encode a location to use in a URL
@@ -92,7 +89,7 @@ export const parseFloatNum = str => {
  *
  * @return {String} location coordinates separated by a comma
  */
-export const encodeLatLng = location => `${location.lat},${location.lng}`;
+export const encodeLatLng = (location) => `${location.lat},${location.lng}`
 
 /**
  * Decode a location from a string
@@ -101,18 +98,18 @@ export const encodeLatLng = location => `${location.lat},${location.lng}`;
  *
  * @return {LatLng|null} location instance, null if could not parse
  */
-export const decodeLatLng = str => {
-  const parts = str.split(',');
+export const decodeLatLng = (str) => {
+  const parts = str.split(',')
   if (parts.length !== 2) {
-    return null;
+    return null
   }
-  const lat = parseFloatNum(parts[0]);
-  const lng = parseFloatNum(parts[1]);
+  const lat = parseFloatNum(parts[0])
+  const lng = parseFloatNum(parts[1])
   if (lat === null || lng === null) {
-    return null;
+    return null
   }
-  return new LatLng(lat, lng);
-};
+  return new LatLng(lat, lng)
+}
 
 /**
  * Encode a location bounds to use in a URL
@@ -121,7 +118,8 @@ export const decodeLatLng = str => {
  *
  * @return {String} bounds coordinates separated by a comma
  */
-export const encodeLatLngBounds = bounds => `${encodeLatLng(bounds.ne)},${encodeLatLng(bounds.sw)}`;
+export const encodeLatLngBounds = (bounds) =>
+  `${encodeLatLng(bounds.ne)},${encodeLatLng(bounds.sw)}`
 
 /**
  * Decode a location bounds from a string
@@ -130,34 +128,34 @@ export const encodeLatLngBounds = bounds => `${encodeLatLng(bounds.ne)},${encode
  *
  * @return {LatLngBounds|null} location bounds instance, null if could not parse
  */
-export const decodeLatLngBounds = str => {
-  const parts = str.split(',');
+export const decodeLatLngBounds = (str) => {
+  const parts = str.split(',')
   if (parts.length !== 4) {
-    return null;
+    return null
   }
-  const ne = decodeLatLng(`${parts[0]},${parts[1]}`);
-  const sw = decodeLatLng(`${parts[2]},${parts[3]}`);
+  const ne = decodeLatLng(`${parts[0]},${parts[1]}`)
+  const sw = decodeLatLng(`${parts[2]},${parts[3]}`)
   if (ne === null || sw === null) {
-    return null;
+    return null
   }
-  return new LatLngBounds(ne, sw);
-};
+  return new LatLngBounds(ne, sw)
+}
 
 // Serialise SDK types in given object values into strings
-const serialiseSdkTypes = obj =>
+const serialiseSdkTypes = (obj) =>
   Object.keys(obj).reduce((result, key) => {
-    const val = obj[key];
+    const val = obj[key]
     /* eslint-disable no-param-reassign */
     if (val instanceof LatLngBounds) {
-      result[key] = encodeLatLngBounds(val);
+      result[key] = encodeLatLngBounds(val)
     } else if (val instanceof LatLng) {
-      result[key] = encodeLatLng(val);
+      result[key] = encodeLatLng(val)
     } else {
-      result[key] = val;
+      result[key] = val
     }
     /* eslint-enable no-param-reassign */
-    return result;
-  }, {});
+    return result
+  }, {})
 
 /**
  * Serialise given object into a string that can be used in a
@@ -170,19 +168,19 @@ const serialiseSdkTypes = obj =>
  * @return {String} query string with sorted keys and serialised
  * values, `undefined` and `null` values are removed
  */
-export const stringify = params => {
-  const serialised = serialiseSdkTypes(params);
+export const stringify = (params) => {
+  const serialised = serialiseSdkTypes(params)
   const cleaned = Object.keys(serialised).reduce((result, key) => {
-    const val = serialised[key];
+    const val = serialised[key]
     /* eslint-disable no-param-reassign */
     if (val !== null) {
-      result[key] = val;
+      result[key] = val
     }
     /* eslint-enable no-param-reassign */
-    return result;
-  }, {});
-  return queryString.stringify(cleaned);
-};
+    return result
+  }, {})
+  return queryString.stringify(cleaned)
+}
 
 /**
  * Parse a URL search query. Converts numeric values into numbers,
@@ -202,27 +200,27 @@ export const stringify = params => {
  * @return {Object} key/value pairs parsed from the given String
  */
 export const parse = (search, options = {}) => {
-  const { latlng = [], latlngBounds = [] } = options;
-  const params = queryString.parse(search);
+  const { latlng = [], latlngBounds = [] } = options
+  const params = queryString.parse(search)
   return Object.keys(params).reduce((result, key) => {
-    const val = params[key];
+    const val = params[key]
     /* eslint-disable no-param-reassign */
     if (latlng.includes(key)) {
-      result[key] = decodeLatLng(val);
+      result[key] = decodeLatLng(val)
     } else if (latlngBounds.includes(key)) {
-      result[key] = decodeLatLngBounds(val);
+      result[key] = decodeLatLngBounds(val)
     } else if (val === 'true') {
-      result[key] = true;
+      result[key] = true
     } else if (val === 'false') {
-      result[key] = false;
+      result[key] = false
     } else {
-      const num = parseFloatNum(val);
-      result[key] = num === null ? val : num;
+      const num = parseFloatNum(val)
+      result[key] = num === null ? val : num
     }
     /* eslint-enable no-param-reassign */
-    return result;
-  }, {});
-};
+    return result
+  }, {})
+}
 
 /**
  * Create Twitter page url from twitterHandle
@@ -231,11 +229,11 @@ export const parse = (search, options = {}) => {
  *
  * @return {String} twitterPageURL
  */
-export const twitterPageURL = twitterHandle => {
+export const twitterPageURL = (twitterHandle) => {
   if (twitterHandle && twitterHandle.charAt(0) === '@') {
-    return `https://twitter.com/${twitterHandle.substring(1)}`;
+    return `https://twitter.com/${twitterHandle.substring(1)}`
   } else if (twitterHandle) {
-    return `https://twitter.com/${twitterHandle}`;
+    return `https://twitter.com/${twitterHandle}`
   }
-  return null;
-};
+  return null
+}

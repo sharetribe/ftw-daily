@@ -1,18 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { FormattedMessage } from '../../util/reactIntl';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import { FormattedMessage } from '../../util/reactIntl'
 
-import { LISTING_STATE_DRAFT } from '../../util/types';
-import { ensureListing } from '../../util/data';
-import { EditListingFeaturesForm } from '../../forms';
-import { ListingLink } from '../../components';
+import { LISTING_STATE_DRAFT } from '../../util/types'
+import { ensureListing } from '../../util/data'
+import { EditListingFeaturesForm } from '../../forms'
+import { ListingLink } from '../../components'
 
-import css from './EditListingFeaturesPanel.css';
+import css from './EditListingFeaturesPanel.css'
 
-const FEATURES_NAME = 'amenities';
+const FEATURES_NAME = 'amenities'
 
-const EditListingFeaturesPanel = props => {
+const EditListingFeaturesPanel = (props) => {
   const {
     rootClassName,
     className,
@@ -25,13 +25,13 @@ const EditListingFeaturesPanel = props => {
     panelUpdated,
     updateInProgress,
     errors,
-  } = props;
+  } = props
 
-  const classes = classNames(rootClassName || css.root, className);
-  const currentListing = ensureListing(listing);
-  const { publicData } = currentListing.attributes;
+  const classes = classNames(rootClassName || css.root, className)
+  const currentListing = ensureListing(listing)
+  const { publicData } = currentListing.attributes
 
-  const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
+  const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT
   const panelTitle = isPublished ? (
     <FormattedMessage
       id="EditListingFeaturesPanel.title"
@@ -39,10 +39,10 @@ const EditListingFeaturesPanel = props => {
     />
   ) : (
     <FormattedMessage id="EditListingFeaturesPanel.createListingTitle" />
-  );
+  )
 
-  const amenities = publicData && publicData.amenities;
-  const initialValues = { amenities };
+  const amenities = publicData && publicData.amenities
+  const initialValues = { amenities }
 
   return (
     <div className={classes}>
@@ -51,13 +51,13 @@ const EditListingFeaturesPanel = props => {
         className={css.form}
         name={FEATURES_NAME}
         initialValues={initialValues}
-        onSubmit={values => {
-          const { amenities = [] } = values;
+        onSubmit={(values) => {
+          const { amenities = [] } = values
 
           const updatedValues = {
             publicData: { amenities },
-          };
-          onSubmit(updatedValues);
+          }
+          onSubmit(updatedValues)
         }}
         onChange={onChange}
         saveActionMsg={submitButtonText}
@@ -68,16 +68,16 @@ const EditListingFeaturesPanel = props => {
         fetchErrors={errors}
       />
     </div>
-  );
-};
+  )
+}
 
 EditListingFeaturesPanel.defaultProps = {
   rootClassName: null,
   className: null,
   listing: null,
-};
+}
 
-const { bool, func, object, string } = PropTypes;
+const { bool, func, object, string } = PropTypes
 
 EditListingFeaturesPanel.propTypes = {
   rootClassName: string,
@@ -94,6 +94,6 @@ EditListingFeaturesPanel.propTypes = {
   panelUpdated: bool.isRequired,
   updateInProgress: bool.isRequired,
   errors: object.isRequired,
-};
+}
 
-export default EditListingFeaturesPanel;
+export default EditListingFeaturesPanel

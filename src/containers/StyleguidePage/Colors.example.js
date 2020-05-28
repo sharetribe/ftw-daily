@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import css from './StyleguidePage.css';
+import React from 'react'
+import PropTypes from 'prop-types'
+import css from './StyleguidePage.css'
 
-const ColorCard = props => {
-  const { mpColor, name, usage } = props;
-  const colorClasses = mpColor || css.color;
+const ColorCard = (props) => {
+  const { mpColor, name, usage } = props
+  const colorClasses = mpColor || css.color
 
   return (
     <div className={css.colorCard}>
@@ -17,22 +17,22 @@ const ColorCard = props => {
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-const { string } = PropTypes;
+const { string } = PropTypes
 
 // Jest test strip off CSS classes (css is an empty object). Otherwise this could be required prop.
-const defaultProps = { mpColor: undefined };
+const defaultProps = { mpColor: undefined }
 // Create a real undefined value, not just injecting a hopefully undefined object.
-delete defaultProps.mpColor;
-ColorCard.defaultProps = defaultProps;
+delete defaultProps.mpColor
+ColorCard.defaultProps = defaultProps
 
 ColorCard.propTypes = {
   mpColor: string,
   name: string.isRequired,
   usage: string.isRequired,
-};
+}
 
 const MarketplaceColors = () => {
   return (
@@ -109,11 +109,11 @@ const MarketplaceColors = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 export const Colors = {
   component: MarketplaceColors,
   group: 'colors',
   props: {},
-};
+}

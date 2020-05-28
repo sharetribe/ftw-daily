@@ -1,5 +1,5 @@
-import Decimal from 'decimal.js';
-import { types as sdkTypes } from '../../util/sdkLoader';
+import Decimal from 'decimal.js'
+import { types as sdkTypes } from '../../util/sdkLoader'
 import {
   TRANSITION_ACCEPT,
   TRANSITION_CANCEL,
@@ -9,32 +9,32 @@ import {
   TRANSITION_REQUEST_PAYMENT,
   TRANSITION_CONFIRM_PAYMENT,
   TX_TRANSITION_ACTOR_CUSTOMER,
-} from '../../util/transaction';
+} from '../../util/transaction'
 import {
   LINE_ITEM_DAY,
   LINE_ITEM_NIGHT,
   LINE_ITEM_UNITS,
   DATE_TYPE_DATE,
   DATE_TYPE_DATETIME,
-} from '../../util/types';
-import config from '../../config';
-import BookingBreakdown from './BookingBreakdown';
+} from '../../util/types'
+import config from '../../config'
+import BookingBreakdown from './BookingBreakdown'
 
-const { UUID, Money } = sdkTypes;
+const { UUID, Money } = sdkTypes
 
-const CURRENCY = config.currency;
+const CURRENCY = config.currency
 
-const exampleBooking = attributes => {
+const exampleBooking = (attributes) => {
   return {
     id: new UUID('example-booking'),
     type: 'booking',
     attributes,
-  };
-};
+  }
+}
 
-const exampleTransaction = params => {
-  const created = new Date(Date.UTC(2017, 1, 1));
-  const confirmed = new Date(Date.UTC(2017, 1, 1, 0, 1));
+const exampleTransaction = (params) => {
+  const created = new Date(Date.UTC(2017, 1, 1))
+  const confirmed = new Date(Date.UTC(2017, 1, 1, 0, 1))
   return {
     id: new UUID('example-transaction'),
     type: 'transaction',
@@ -58,8 +58,8 @@ const exampleTransaction = params => {
       // payinTotal, payoutTotal, and lineItems required in params
       ...params,
     },
-  };
-};
+  }
+}
 
 export const Checkout = {
   component: BookingBreakdown,
@@ -86,7 +86,7 @@ export const Checkout = {
       end: new Date(Date.UTC(2017, 3, 16)),
     }),
   },
-};
+}
 
 export const CustomerOrder = {
   component: BookingBreakdown,
@@ -113,7 +113,7 @@ export const CustomerOrder = {
       end: new Date(Date.UTC(2017, 3, 16)),
     }),
   },
-};
+}
 
 export const ProviderSale = {
   component: BookingBreakdown,
@@ -147,7 +147,7 @@ export const ProviderSale = {
       end: new Date(Date.UTC(2017, 3, 16)),
     }),
   },
-};
+}
 
 export const ProviderSaleZeroCommission = {
   component: BookingBreakdown,
@@ -181,7 +181,7 @@ export const ProviderSaleZeroCommission = {
       end: new Date(Date.UTC(2017, 3, 16)),
     }),
   },
-};
+}
 
 export const ProviderSaleSingleNight = {
   component: BookingBreakdown,
@@ -215,7 +215,7 @@ export const ProviderSaleSingleNight = {
       end: new Date(Date.UTC(2017, 3, 15)),
     }),
   },
-};
+}
 
 export const ProviderSalePreauthorized = {
   component: BookingBreakdown,
@@ -250,7 +250,7 @@ export const ProviderSalePreauthorized = {
       end: new Date(Date.UTC(2017, 3, 15)),
     }),
   },
-};
+}
 
 export const ProviderSaleAccepted = {
   component: BookingBreakdown,
@@ -285,7 +285,7 @@ export const ProviderSaleAccepted = {
       end: new Date(Date.UTC(2017, 3, 15)),
     }),
   },
-};
+}
 
 export const ProviderSaleDeclined = {
   component: BookingBreakdown,
@@ -320,7 +320,7 @@ export const ProviderSaleDeclined = {
       end: new Date(Date.UTC(2017, 3, 15)),
     }),
   },
-};
+}
 
 export const ProviderSaleAutoDeclined = {
   component: BookingBreakdown,
@@ -355,7 +355,7 @@ export const ProviderSaleAutoDeclined = {
       end: new Date(Date.UTC(2017, 3, 15)),
     }),
   },
-};
+}
 
 export const ProviderSaleDelivered = {
   component: BookingBreakdown,
@@ -390,7 +390,7 @@ export const ProviderSaleDelivered = {
       end: new Date(Date.UTC(2017, 3, 15)),
     }),
   },
-};
+}
 
 export const ProviderSaleCanceled = {
   component: BookingBreakdown,
@@ -442,7 +442,7 @@ export const ProviderSaleCanceled = {
       end: new Date(Date.UTC(2017, 3, 15)),
     }),
   },
-};
+}
 
 export const SingleDay = {
   component: BookingBreakdown,
@@ -469,7 +469,7 @@ export const SingleDay = {
       end: new Date(Date.UTC(2017, 3, 15)),
     }),
   },
-};
+}
 
 export const MultipleDays = {
   component: BookingBreakdown,
@@ -496,7 +496,7 @@ export const MultipleDays = {
       end: new Date(Date.UTC(2017, 3, 16)),
     }),
   },
-};
+}
 
 export const UnitsType = {
   component: BookingBreakdown,
@@ -523,7 +523,7 @@ export const UnitsType = {
       end: new Date(Date.UTC(2017, 3, 18)),
     }),
   },
-};
+}
 
 export const CustomPricing = {
   component: BookingBreakdown,
@@ -574,7 +574,7 @@ export const CustomPricing = {
       end: new Date(Date.UTC(2017, 3, 16)),
     }),
   },
-};
+}
 
 export const CustomPricingWithRefund = {
   component: BookingBreakdown,
@@ -657,4 +657,4 @@ export const CustomPricingWithRefund = {
       end: new Date(Date.UTC(2017, 3, 16)),
     }),
   },
-};
+}

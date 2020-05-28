@@ -1,32 +1,32 @@
 /* eslint-disable no-console */
-import React from 'react';
-import { Form as FinalForm, FormSpy } from 'react-final-form';
-import moment from 'moment';
-import { Button } from '../../components';
-import { required, bookingDatesRequired, composeValidators } from '../../util/validators';
-import { LINE_ITEM_NIGHT, LINE_ITEM_DAY } from '../../util/types';
-import { createTimeSlots } from '../../util/test-data';
-import FieldDateRangeInput from './FieldDateRangeInput';
+import React from 'react'
+import { Form as FinalForm, FormSpy } from 'react-final-form'
+import moment from 'moment'
+import { Button } from '../../components'
+import { required, bookingDatesRequired, composeValidators } from '../../util/validators'
+import { LINE_ITEM_NIGHT, LINE_ITEM_DAY } from '../../util/types'
+import { createTimeSlots } from '../../util/test-data'
+import FieldDateRangeInput from './FieldDateRangeInput'
 
-const identity = v => v;
+const identity = (v) => v
 
 const createAvailableTimeSlots = (dayCount, availableDayCount) => {
-  const slots = createTimeSlots(new Date(), dayCount);
+  const slots = createTimeSlots(new Date(), dayCount)
 
-  const availableSlotIndices = [];
+  const availableSlotIndices = []
   while (availableSlotIndices.length < availableDayCount) {
-    const newIndex = Math.floor(Math.random() * dayCount);
-    if (availableSlotIndices.indexOf(newIndex) > -1) continue;
-    availableSlotIndices[availableSlotIndices.length] = newIndex;
+    const newIndex = Math.floor(Math.random() * dayCount)
+    if (availableSlotIndices.indexOf(newIndex) > -1) continue
+    availableSlotIndices[availableSlotIndices.length] = newIndex
   }
 
-  return availableSlotIndices.sort((a, b) => a - b).map(i => slots[i]);
-};
+  return availableSlotIndices.sort((a, b) => a - b).map((i) => slots[i])
+}
 
-const FormComponent = props => (
+const FormComponent = (props) => (
   <FinalForm
     {...props}
-    render={fieldRenderProps => {
+    render={(fieldRenderProps) => {
       const {
         style,
         form,
@@ -35,15 +35,15 @@ const FormComponent = props => (
         pristine,
         submitting,
         dateInputProps,
-      } = fieldRenderProps;
-      const submitDisabled = pristine || submitting;
+      } = fieldRenderProps
+      const submitDisabled = pristine || submitting
 
       return (
         <form
           style={style}
-          onSubmit={e => {
-            e.preventDefault();
-            handleSubmit(e);
+          onSubmit={(e) => {
+            e.preventDefault()
+            handleSubmit(e)
           }}
         >
           <FormSpy onChange={onChange} />
@@ -52,10 +52,10 @@ const FormComponent = props => (
             Select
           </Button>
         </form>
-      );
+      )
     }}
   />
-);
+)
 
 export const Empty = {
   component: FormComponent,
@@ -69,29 +69,27 @@ export const Empty = {
       startDatePlaceholderText: moment().format('ddd, MMMM D'),
       endDateId: 'EmptyDateRangeInputForm.bookingEndDate',
       endDateLabel: 'End date',
-      endDatePlaceholderText: moment()
-        .add(1, 'days')
-        .format('ddd, MMMM D'),
+      endDatePlaceholderText: moment().add(1, 'days').format('ddd, MMMM D'),
       format: identity,
       validate: composeValidators(
         required('Required'),
-        bookingDatesRequired('Start date is not valid', 'End date is not valid')
+        bookingDatesRequired('Start date is not valid', 'End date is not valid'),
       ),
       onBlur: () => console.log('onBlur called from DateRangeInput props.'),
       onFocus: () => console.log('onFocus called from DateRangeInput props.'),
     },
-    onChange: formState => {
-      const { startDate, endDate } = formState.values;
+    onChange: (formState) => {
+      const { startDate, endDate } = formState.values
       if (startDate || endDate) {
-        console.log('Changed to', moment(startDate).format('L'), moment(endDate).format('L'));
+        console.log('Changed to', moment(startDate).format('L'), moment(endDate).format('L'))
       }
     },
-    onSubmit: values => {
-      console.log('Submitting a form with values:', values);
+    onSubmit: (values) => {
+      console.log('Submitting a form with values:', values)
     },
   },
   group: 'custom inputs',
-};
+}
 
 export const WithAvailableTimeSlotsNighlyBooking = {
   component: FormComponent,
@@ -105,30 +103,28 @@ export const WithAvailableTimeSlotsNighlyBooking = {
       startDatePlaceholderText: moment().format('ddd, MMMM D'),
       endDateId: 'WithAvailableTimeSlotsDateRangeNightly.bookingEndDate',
       endDateLabel: 'End date',
-      endDatePlaceholderText: moment()
-        .add(1, 'days')
-        .format('ddd, MMMM D'),
+      endDatePlaceholderText: moment().add(1, 'days').format('ddd, MMMM D'),
       format: identity,
       timeSlots: createAvailableTimeSlots(90, 60),
       validate: composeValidators(
         required('Required'),
-        bookingDatesRequired('Start date is not valid', 'End date is not valid')
+        bookingDatesRequired('Start date is not valid', 'End date is not valid'),
       ),
       onBlur: () => console.log('onBlur called from DateRangeInput props.'),
       onFocus: () => console.log('onFocus called from DateRangeInput props.'),
     },
-    onChange: formState => {
-      const { startDate, endDate } = formState.values;
+    onChange: (formState) => {
+      const { startDate, endDate } = formState.values
       if (startDate || endDate) {
-        console.log('Changed to', moment(startDate).format('L'), moment(endDate).format('L'));
+        console.log('Changed to', moment(startDate).format('L'), moment(endDate).format('L'))
       }
     },
-    onSubmit: values => {
-      console.log('Submitting a form with values:', values);
+    onSubmit: (values) => {
+      console.log('Submitting a form with values:', values)
     },
   },
   group: 'custom inputs',
-};
+}
 
 export const WithAvailableTimeSlotsDailyBooking = {
   component: FormComponent,
@@ -141,27 +137,25 @@ export const WithAvailableTimeSlotsDailyBooking = {
       startDatePlaceholderText: moment().format('ddd, MMMM D'),
       endDateId: 'WithAvailableTimeSlotsDateRangeDaily.bookingEndDate',
       endDateLabel: 'End date',
-      endDatePlaceholderText: moment()
-        .add(1, 'days')
-        .format('ddd, MMMM D'),
+      endDatePlaceholderText: moment().add(1, 'days').format('ddd, MMMM D'),
       format: identity,
       timeSlots: createAvailableTimeSlots(90, 60),
       validate: composeValidators(
         required('Required'),
-        bookingDatesRequired('Start date is not valid', 'End date is not valid')
+        bookingDatesRequired('Start date is not valid', 'End date is not valid'),
       ),
       onBlur: () => console.log('onBlur called from DateRangeInput props.'),
       onFocus: () => console.log('onFocus called from DateRangeInput props.'),
     },
-    onChange: formState => {
-      const { startDate, endDate } = formState.values;
+    onChange: (formState) => {
+      const { startDate, endDate } = formState.values
       if (startDate || endDate) {
-        console.log('Changed to', moment(startDate).format('L'), moment(endDate).format('L'));
+        console.log('Changed to', moment(startDate).format('L'), moment(endDate).format('L'))
       }
     },
-    onSubmit: values => {
-      console.log('Submitting a form with values:', values);
+    onSubmit: (values) => {
+      console.log('Submitting a form with values:', values)
     },
   },
   group: 'custom inputs',
-};
+}

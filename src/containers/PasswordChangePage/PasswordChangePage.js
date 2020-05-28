@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
-import { propTypes } from '../../util/types';
-import { isScrollingDisabled } from '../../ducks/UI.duck';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl'
+import { propTypes } from '../../util/types'
+import { isScrollingDisabled } from '../../ducks/UI.duck'
 import {
   LayoutSideNavigation,
   LayoutWrapperMain,
@@ -14,14 +14,14 @@ import {
   Footer,
   Page,
   UserNav,
-} from '../../components';
-import { PasswordChangeForm } from '../../forms';
-import { TopbarContainer } from '../../containers';
+} from '../../components'
+import { PasswordChangeForm } from '../../forms'
+import { TopbarContainer } from '../../containers'
 
-import { changePassword, changePasswordClear } from './PasswordChangePage.duck';
-import css from './PasswordChangePage.css';
+import { changePassword, changePasswordClear } from './PasswordChangePage.duck'
+import css from './PasswordChangePage.css'
 
-export const PasswordChangePageComponent = props => {
+export const PasswordChangePageComponent = (props) => {
   const {
     changePasswordError,
     changePasswordInProgress,
@@ -31,7 +31,7 @@ export const PasswordChangePageComponent = props => {
     passwordChanged,
     scrollingDisabled,
     intl,
-  } = props;
+  } = props
 
   const changePasswordForm =
     currentUser && currentUser.id ? (
@@ -44,9 +44,9 @@ export const PasswordChangePageComponent = props => {
         inProgress={changePasswordInProgress}
         ready={passwordChanged}
       />
-    ) : null;
+    ) : null
 
-  const title = intl.formatMessage({ id: 'PasswordChangePage.title' });
+  const title = intl.formatMessage({ id: 'PasswordChangePage.title' })
 
   return (
     <Page title={title} scrollingDisabled={scrollingDisabled}>
@@ -73,15 +73,15 @@ export const PasswordChangePageComponent = props => {
         </LayoutWrapperFooter>
       </LayoutSideNavigation>
     </Page>
-  );
-};
+  )
+}
 
 PasswordChangePageComponent.defaultProps = {
   changePasswordError: null,
   currentUser: null,
-};
+}
 
-const { bool, func } = PropTypes;
+const { bool, func } = PropTypes
 
 PasswordChangePageComponent.propTypes = {
   changePasswordError: propTypes.error,
@@ -94,36 +94,33 @@ PasswordChangePageComponent.propTypes = {
 
   // from injectIntl
   intl: intlShape.isRequired,
-};
+}
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   // Topbar needs user info.
   const {
     changePasswordError,
     changePasswordInProgress,
     passwordChanged,
-  } = state.PasswordChangePage;
-  const { currentUser } = state.user;
+  } = state.PasswordChangePage
+  const { currentUser } = state.user
   return {
     changePasswordError,
     changePasswordInProgress,
     currentUser,
     passwordChanged,
     scrollingDisabled: isScrollingDisabled(state),
-  };
-};
+  }
+}
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onChange: () => dispatch(changePasswordClear()),
-  onSubmitChangePassword: values => dispatch(changePassword(values)),
-});
+  onSubmitChangePassword: (values) => dispatch(changePassword(values)),
+})
 
 const PasswordChangePage = compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  injectIntl
-)(PasswordChangePageComponent);
+  connect(mapStateToProps, mapDispatchToProps),
+  injectIntl,
+)(PasswordChangePageComponent)
 
-export default PasswordChangePage;
+export default PasswordChangePage

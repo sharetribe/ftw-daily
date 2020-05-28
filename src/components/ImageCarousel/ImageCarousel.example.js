@@ -1,13 +1,13 @@
-import React from 'react';
-import { types as sdkTypes } from '../../util/sdkLoader';
-import ImageCarousel from './ImageCarousel';
+import React from 'react'
+import { types as sdkTypes } from '../../util/sdkLoader'
+import ImageCarousel from './ImageCarousel'
 
-const { UUID } = sdkTypes;
+const { UUID } = sdkTypes
 
-const imageName = 'scaled-small';
-const imageName2x = 'scaled-medium';
-const imageName4x = 'scaled-large';
-const imageName6x = 'scaled-xlarge';
+const imageName = 'scaled-small'
+const imageName2x = 'scaled-medium'
+const imageName4x = 'scaled-large'
+const imageName6x = 'scaled-xlarge'
 
 const imageSquare = {
   id: new UUID('image-square'),
@@ -40,7 +40,7 @@ const imageSquare = {
       },
     },
   },
-};
+}
 
 const imagePortrait = {
   id: new UUID('image-portrait'),
@@ -73,7 +73,7 @@ const imagePortrait = {
       },
     },
   },
-};
+}
 const imageLandscape = {
   id: new UUID('image-landscape'),
   type: 'image',
@@ -105,33 +105,33 @@ const imageLandscape = {
       },
     },
   },
-};
+}
 
-const ImageCarouselWrapper = props => {
+const ImageCarouselWrapper = (props) => {
   const wrapperStyles = {
     backgroundColor: '#000',
-  };
+  }
   return (
     <div style={wrapperStyles}>
       <ImageCarousel {...props} />
     </div>
-  );
-};
+  )
+}
 
 export const NoImages = {
   component: ImageCarouselWrapper,
   props: { images: [] },
   rawOnly: true,
-};
+}
 
 export const SingleImage = {
   component: ImageCarouselWrapper,
   props: { images: [imageSquare] },
   rawOnly: true,
-};
+}
 
 export const MultipleImages = {
   component: ImageCarouselWrapper,
   props: { images: [imageLandscape, imagePortrait, imageSquare] },
   rawOnly: true,
-};
+}

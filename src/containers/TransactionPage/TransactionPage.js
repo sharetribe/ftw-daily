@@ -1,20 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import classNames from 'classnames';
-import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
-import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
-import routeConfiguration from '../../routeConfiguration';
-import { propTypes } from '../../util/types';
-import { ensureListing, ensureTransaction } from '../../util/data';
-import { dateFromAPIToLocalNoon } from '../../util/dates';
-import { createSlug } from '../../util/urlHelpers';
-import { txIsPaymentPending } from '../../util/transaction';
-import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
-import { isScrollingDisabled, manageDisableScrolling } from '../../ducks/UI.duck';
-import { initializeCardPaymentData } from '../../ducks/stripe.duck.js';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import classNames from 'classnames'
+import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl'
+import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes'
+import routeConfiguration from '../../routeConfiguration'
+import { propTypes } from '../../util/types'
+import { ensureListing, ensureTransaction } from '../../util/data'
+import { dateFromAPIToLocalNoon } from '../../util/dates'
+import { createSlug } from '../../util/urlHelpers'
+import { txIsPaymentPending } from '../../util/transaction'
+import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck'
+import { isScrollingDisabled, manageDisableScrolling } from '../../ducks/UI.duck'
+import { initializeCardPaymentData } from '../../ducks/stripe.duck.js'
 import {
   NamedRedirect,
   TransactionPanel,
@@ -24,8 +24,8 @@ import {
   LayoutWrapperMain,
   LayoutWrapperFooter,
   Footer,
-} from '../../components';
-import { TopbarContainer } from '../../containers';
+} from '../../components'
+import { TopbarContainer } from '../../containers'
 
 import {
   acceptSale,
@@ -35,14 +35,14 @@ import {
   sendMessage,
   sendReview,
   fetchMoreMessages,
-} from './TransactionPage.duck';
-import css from './TransactionPage.css';
+} from './TransactionPage.duck'
+import css from './TransactionPage.css'
 
-const PROVIDER = 'provider';
-const CUSTOMER = 'customer';
+const PROVIDER = 'provider'
+const CUSTOMER = 'customer'
 
 // TransactionPage handles data loading for Sale and Order views to transaction pages in Inbox.
-export const TransactionPageComponent = props => {
+export const TransactionPageComponent = (props) => {
   const {
     currentUser,
     initialMessageFailedToTransaction,
@@ -78,21 +78,21 @@ export const TransactionPageComponent = props => {
     processTransitions,
     callSetInitialValues,
     onInitializeCardPaymentData,
-  } = props;
+  } = props
 
-  const currentTransaction = ensureTransaction(transaction);
-  const currentListing = ensureListing(currentTransaction.listing);
-  const isProviderRole = transactionRole === PROVIDER;
-  const isCustomerRole = transactionRole === CUSTOMER;
+  const currentTransaction = ensureTransaction(transaction)
+  const currentListing = ensureListing(currentTransaction.listing)
+  const isProviderRole = transactionRole === PROVIDER
+  const isCustomerRole = transactionRole === CUSTOMER
 
   const redirectToCheckoutPageWithInitialValues = (initialValues, listing) => {
-    const routes = routeConfiguration();
+    const routes = routeConfiguration()
     // Customize checkout page state with current listing and selected bookingDates
-    const { setInitialValues } = findRouteByRouteName('CheckoutPage', routes);
-    callSetInitialValues(setInitialValues, initialValues);
+    const { setInitialValues } = findRouteByRouteName('CheckoutPage', routes)
+    callSetInitialValues(setInitialValues, initialValues)
 
     // Clear previous Stripe errors from store if there is any
-    onInitializeCardPaymentData();
+    onInitializeCardPaymentData()
 
     // Redirect to CheckoutPage
     history.push(
@@ -100,10 +100,10 @@ export const TransactionPageComponent = props => {
         'CheckoutPage',
         routes,
         { id: currentListing.id.uuid, slug: createSlug(currentListing.attributes.title) },
-        {}
-      )
-    );
-  };
+        {},
+      ),
+    )
+  }
 
   // If payment is pending, redirect to CheckoutPage
   if (
@@ -111,7 +111,7 @@ export const TransactionPageComponent = props => {
     isCustomerRole &&
     currentTransaction.attributes.lineItems
   ) {
-    const currentBooking = ensureListing(currentTransaction.booking);
+    const currentBooking = ensureListing(currentTransaction.booking)
 
     const initialValues = {
       listing: currentListing,
@@ -125,14 +125,14 @@ export const TransactionPageComponent = props => {
         bookingStart: dateFromAPIToLocalNoon(currentBooking.attributes.start),
         bookingEnd: dateFromAPIToLocalNoon(currentBooking.attributes.end),
       },
-    };
+    }
 
-    redirectToCheckoutPageWithInitialValues(initialValues, currentListing);
+    redirectToCheckoutPageWithInitialValues(initialValues, currentListing)
   }
 
   // Customer can create a booking, if the tx is in "enquiry" state.
-  const handleSubmitBookingRequest = values => {
-    const { bookingDates, ...bookingData } = values;
+  const handleSubmitBookingRequest = (values) => {
+    const { bookingDates, ...bookingData } = values
 
     const initialValues = {
       listing: currentListing,
@@ -144,17 +144,17 @@ export const TransactionPageComponent = props => {
         bookingEnd: bookingDates.endDate,
       },
       confirmPaymentError: null,
-    };
+    }
 
-    redirectToCheckoutPageWithInitialValues(initialValues, currentListing);
-  };
+    redirectToCheckoutPageWithInitialValues(initialValues, currentListing)
+  }
 
   const deletedListingTitle = intl.formatMessage({
     id: 'TransactionPage.deletedListing',
-  });
+  })
   const listingTitle = currentListing.attributes.deleted
     ? deletedListingTitle
-    : currentListing.attributes.title;
+    : currentListing.attributes.title
 
   // Redirect users with someone else's direct link to their own inbox/sales or inbox/orders page.
   const isDataAvailable =
@@ -164,35 +164,31 @@ export const TransactionPageComponent = props => {
     currentTransaction.attributes.lineItems &&
     currentTransaction.customer &&
     currentTransaction.provider &&
-    !fetchTransactionError;
+    !fetchTransactionError
 
   const isOwnSale =
-    isDataAvailable &&
-    isProviderRole &&
-    currentUser.id.uuid === currentTransaction.provider.id.uuid;
+    isDataAvailable && isProviderRole && currentUser.id.uuid === currentTransaction.provider.id.uuid
   const isOwnOrder =
-    isDataAvailable &&
-    isCustomerRole &&
-    currentUser.id.uuid === currentTransaction.customer.id.uuid;
+    isDataAvailable && isCustomerRole && currentUser.id.uuid === currentTransaction.customer.id.uuid
 
   if (isDataAvailable && isProviderRole && !isOwnSale) {
     // eslint-disable-next-line no-console
-    console.error('Tried to access a sale that was not owned by the current user');
-    return <NamedRedirect name="InboxPage" params={{ tab: 'sales' }} />;
+    console.error('Tried to access a sale that was not owned by the current user')
+    return <NamedRedirect name="InboxPage" params={{ tab: 'sales' }} />
   } else if (isDataAvailable && isCustomerRole && !isOwnOrder) {
     // eslint-disable-next-line no-console
-    console.error('Tried to access an order that was not owned by the current user');
-    return <NamedRedirect name="InboxPage" params={{ tab: 'orders' }} />;
+    console.error('Tried to access an order that was not owned by the current user')
+    return <NamedRedirect name="InboxPage" params={{ tab: 'orders' }} />
   }
 
-  const detailsClassName = classNames(css.tabContent, css.tabContentVisible);
+  const detailsClassName = classNames(css.tabContent, css.tabContentVisible)
 
   const fetchErrorMessage = isCustomerRole
     ? 'TransactionPage.fetchOrderFailed'
-    : 'TransactionPage.fetchSaleFailed';
+    : 'TransactionPage.fetchSaleFailed'
   const loadingMessage = isCustomerRole
     ? 'TransactionPage.loadingOrderData'
-    : 'TransactionPage.loadingSaleData';
+    : 'TransactionPage.loadingSaleData'
 
   const loadingOrFailedFetching = fetchTransactionError ? (
     <p className={css.error}>
@@ -202,13 +198,13 @@ export const TransactionPageComponent = props => {
     <p className={css.loading}>
       <FormattedMessage id={`${loadingMessage}`} />
     </p>
-  );
+  )
 
   const initialMessageFailed = !!(
     initialMessageFailedToTransaction &&
     currentTransaction.id &&
     initialMessageFailedToTransaction.uuid === currentTransaction.id.uuid
-  );
+  )
 
   // TransactionPanel is presentational component
   // that currently handles showing everything inside layout's main view area.
@@ -246,7 +242,7 @@ export const TransactionPageComponent = props => {
     />
   ) : (
     loadingOrFailedFetching
-  );
+  )
 
   return (
     <Page
@@ -265,8 +261,8 @@ export const TransactionPageComponent = props => {
         </LayoutWrapperFooter>
       </LayoutSingleColumn>
     </Page>
-  );
-};
+  )
+}
 
 TransactionPageComponent.defaultProps = {
   currentUser: null,
@@ -280,9 +276,9 @@ TransactionPageComponent.defaultProps = {
   sendMessageError: null,
   timeSlots: null,
   fetchTimeSlotsError: null,
-};
+}
 
-const { bool, func, oneOf, shape, string, arrayOf, number } = PropTypes;
+const { bool, func, oneOf, shape, string, arrayOf, number } = PropTypes
 
 TransactionPageComponent.propTypes = {
   params: shape({ id: string }).isRequired,
@@ -322,9 +318,9 @@ TransactionPageComponent.propTypes = {
 
   // from injectIntl
   intl: intlShape.isRequired,
-};
+}
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const {
     fetchTransactionError,
     acceptSaleError,
@@ -346,11 +342,11 @@ const mapStateToProps = state => {
     timeSlots,
     fetchTimeSlotsError,
     processTransitions,
-  } = state.TransactionPage;
-  const { currentUser } = state.user;
+  } = state.TransactionPage
+  const { currentUser } = state.user
 
-  const transactions = getMarketplaceEntities(state, transactionRef ? [transactionRef] : []);
-  const transaction = transactions.length > 0 ? transactions[0] : null;
+  const transactions = getMarketplaceEntities(state, transactionRef ? [transactionRef] : [])
+  const transaction = transactions.length > 0 ? transactions[0] : null
 
   return {
     currentUser,
@@ -375,14 +371,14 @@ const mapStateToProps = state => {
     timeSlots,
     fetchTimeSlotsError,
     processTransitions,
-  };
-};
+  }
+}
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onAcceptSale: transactionId => dispatch(acceptSale(transactionId)),
-    onDeclineSale: transactionId => dispatch(declineSale(transactionId)),
-    onShowMoreMessages: txId => dispatch(fetchMoreMessages(txId)),
+    onAcceptSale: (transactionId) => dispatch(acceptSale(transactionId)),
+    onDeclineSale: (transactionId) => dispatch(declineSale(transactionId)),
+    onShowMoreMessages: (txId) => dispatch(fetchMoreMessages(txId)),
     onSendMessage: (txId, message) => dispatch(sendMessage(txId, message)),
     onManageDisableScrolling: (componentId, disableScrolling) =>
       dispatch(manageDisableScrolling(componentId, disableScrolling)),
@@ -390,19 +386,16 @@ const mapDispatchToProps = dispatch => {
       dispatch(sendReview(role, tx, reviewRating, reviewContent)),
     callSetInitialValues: (setInitialValues, values) => dispatch(setInitialValues(values)),
     onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
-  };
-};
+  }
+}
 
 const TransactionPage = compose(
   withRouter,
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  injectIntl
-)(TransactionPageComponent);
+  connect(mapStateToProps, mapDispatchToProps),
+  injectIntl,
+)(TransactionPageComponent)
 
-TransactionPage.loadData = loadData;
-TransactionPage.setInitialValues = setInitialValues;
+TransactionPage.loadData = loadData
+TransactionPage.setInitialValues = setInitialValues
 
-export default TransactionPage;
+export default TransactionPage

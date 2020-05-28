@@ -1,24 +1,24 @@
 /* eslint-disable no-console */
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Form as FinalForm, FormSpy } from 'react-final-form';
-import { IntlProvider } from '../../util/reactIntl';
-import { currencyConfig } from '../../util/test-data';
-import * as validators from '../../util/validators';
-import FieldCurrencyInput, { CurrencyInput } from './FieldCurrencyInput';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Form as FinalForm, FormSpy } from 'react-final-form'
+import { IntlProvider } from '../../util/reactIntl'
+import { currencyConfig } from '../../util/test-data'
+import * as validators from '../../util/validators'
+import FieldCurrencyInput, { CurrencyInput } from './FieldCurrencyInput'
 
 const currencyConfigUSD = {
   ...currencyConfig,
   currency: 'USD',
-};
+}
 
 const currencyConfigEUR = {
   ...currencyConfig,
   currency: 'EUR',
-};
+}
 
 // eslint-disable-next-line no-console
-const onChange = price => console.log('CurrencyInput - value:', price);
+const onChange = (price) => console.log('CurrencyInput - value:', price)
 
 // Different locales need to be initialized before their currency formatting is in use
 const CurrencyInputWithIntl = ({ locale, ...rest }) => {
@@ -26,15 +26,15 @@ const CurrencyInputWithIntl = ({ locale, ...rest }) => {
     <IntlProvider locale={locale} textComponent="span">
       <CurrencyInput {...rest} input={{ onChange }} />
     </IntlProvider>
-  );
-};
+  )
+}
 
-const { object, string } = PropTypes;
+const { object, string } = PropTypes
 
 CurrencyInputWithIntl.propTypes = {
   currencyConfig: object.isRequired,
   locale: string.isRequired,
-};
+}
 
 export const EmptyWithEnUSD = {
   component: CurrencyInputWithIntl,
@@ -43,7 +43,7 @@ export const EmptyWithEnUSD = {
     locale: 'en',
   },
   group: 'custom inputs',
-};
+}
 
 export const defaultValueWithEnUSD = {
   component: CurrencyInputWithIntl,
@@ -53,7 +53,7 @@ export const defaultValueWithEnUSD = {
     defaultValue: 9999.99,
   },
   group: 'custom inputs',
-};
+}
 
 export const EmptyWithFiEUR = {
   component: CurrencyInputWithIntl,
@@ -62,7 +62,7 @@ export const EmptyWithFiEUR = {
     locale: 'fi',
   },
   group: 'custom inputs',
-};
+}
 
 export const defaultValueWithFiEUR = {
   component: CurrencyInputWithIntl,
@@ -72,20 +72,20 @@ export const defaultValueWithFiEUR = {
     defaultValue: 9999.99,
   },
   group: 'custom inputs',
-};
+}
 
-const FormComponent = props => (
+const FormComponent = (props) => (
   <FinalForm
     {...props}
-    render={fieldRenderProps => {
-      const { handleSubmit, onChange } = fieldRenderProps;
-      const required = validators.required('This field is required');
+    render={(fieldRenderProps) => {
+      const { handleSubmit, onChange } = fieldRenderProps
+      const required = validators.required('This field is required')
 
       return (
         <form
-          onSubmit={e => {
-            e.preventDefault();
-            handleSubmit(e);
+          onSubmit={(e) => {
+            e.preventDefault()
+            handleSubmit(e)
           }}
         >
           <FormSpy onChange={onChange} />
@@ -98,23 +98,23 @@ const FormComponent = props => (
             validate={required}
           />
         </form>
-      );
+      )
     }}
   />
-);
+)
 
 export const FieldInForm = {
   component: FormComponent,
   props: {
-    onChange: formState => {
+    onChange: (formState) => {
       if (formState.values && formState.values.price) {
-        console.log('form values changed to:', formState.values);
+        console.log('form values changed to:', formState.values)
       }
     },
-    onSubmit: values => {
-      console.log('FieldInForm submitted values:', values);
-      return false;
+    onSubmit: (values) => {
+      console.log('FieldInForm submitted values:', values)
+      return false
     },
   },
   group: 'custom inputs',
-};
+}

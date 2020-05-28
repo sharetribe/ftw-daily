@@ -1,9 +1,9 @@
-import React from 'react';
-import { renderDeep } from '../../util/test-helpers';
-import { fakeIntl } from '../../util/test-data';
-import EditListingPricingForm from './EditListingPricingForm';
+import React from 'react'
+import { renderDeep } from '../../util/test-helpers'
+import { fakeIntl } from '../../util/test-data'
+import EditListingPricingForm from './EditListingPricingForm'
 
-const noop = () => null;
+const noop = () => null
 
 describe('EditListingPricingForm', () => {
   it('matches snapshot', () => {
@@ -11,14 +11,14 @@ describe('EditListingPricingForm', () => {
       <EditListingPricingForm
         intl={fakeIntl}
         dispatch={noop}
-        onSubmit={v => v}
+        onSubmit={(v) => v}
         saveActionMsg="Save price"
         updated={false}
         updateInProgress={false}
         disabled={false}
         ready={false}
-      />
-    );
-    expect(tree).toMatchSnapshot();
-  });
-});
+      />,
+    )
+    expect(tree).toMatchSnapshot()
+  })
+})

@@ -1,16 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { FormattedMessage } from '../../util/reactIntl';
-import classNames from 'classnames';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { FormattedMessage } from '../../util/reactIntl'
+import classNames from 'classnames'
 
-import { NamedLink } from '../../components';
+import { NamedLink } from '../../components'
 
-import css from './SectionHowItWorks.css';
+import css from './SectionHowItWorks.css'
 
-const SectionHowItWorks = props => {
-  const { rootClassName, className } = props;
+const SectionHowItWorks = (props) => {
+  const { rootClassName, className } = props
 
-  const classes = classNames(rootClassName || css.root, className);
+  const classes = classNames(rootClassName || css.root, className)
   return (
     <div className={classes}>
       <div className={css.title}>
@@ -54,16 +54,16 @@ const SectionHowItWorks = props => {
         </NamedLink>
       </div>
     </div>
-  );
-};
+  )
+}
 
-SectionHowItWorks.defaultProps = { rootClassName: null, className: null };
+SectionHowItWorks.defaultProps = { rootClassName: null, className: null }
 
-const { string } = PropTypes;
+const { string } = PropTypes
 
 SectionHowItWorks.propTypes = {
   rootClassName: string,
   className: string,
-};
+}
 
-export default SectionHowItWorks;
+export default SectionHowItWorks

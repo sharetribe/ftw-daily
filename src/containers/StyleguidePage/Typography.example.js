@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import css from './StyleguidePage.css';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import css from './StyleguidePage.css'
 
-const Font = props => {
-  const { component: TextComponent, description, styling } = props;
+const Font = (props) => {
+  const { component: TextComponent, description, styling } = props
   return (
     <div className={css.fontCard}>
       <div className={css.element}>
@@ -15,16 +15,16 @@ const Font = props => {
         <pre className={css.tinyFont}>{styling}</pre>
       </div>
     </div>
-  );
-};
+  )
+}
 
-const { func, string } = PropTypes;
+const { func, string } = PropTypes
 
 Font.propTypes = {
   component: func.isRequired,
   description: string.isRequired,
   styling: string.isRequired,
-};
+}
 
 const Fonts = () => {
   const heroTitleFontStyling = `Mobile styles:
@@ -37,7 +37,7 @@ const Fonts = () => {
   font-size: 90px;
   line-height: 96px;
   margin-top: 25px;
-  margin-bottom: 31px;`;
+  margin-bottom: 31px;`
 
   const h1FontStyling = `Mobile styles:
   font-size: 30px;
@@ -49,7 +49,7 @@ const Fonts = () => {
   font-size: 48px;
   line-height: 56px;
   margin-top: 24px;
-  margin-bottom: 24px;`;
+  margin-bottom: 24px;`
 
   const h2FontStyling = `Mobile styles:
   font-size: 24px;
@@ -61,7 +61,7 @@ const Fonts = () => {
   font-size: 24px;
   line-height: 32px;
   margin-top: 21px;
-  margin-bottom: 19px;`;
+  margin-bottom: 19px;`
 
   const h3FontStyling = `Mobile styles:
   font-size: 20px;
@@ -73,7 +73,7 @@ const Fonts = () => {
   font-size: 20px;
   line-height: 24px;
   margin-top: 16px;
-  margin-bottom: 16px;`;
+  margin-bottom: 16px;`
 
   const h4FontStyling = `Mobile styles:
   font-size: 16px;
@@ -85,7 +85,7 @@ const Fonts = () => {
   font-size: 16px;
   line-height: 24px;
   margin-top: 17px;
-  margin-bottom: 15px;`;
+  margin-bottom: 15px;`
 
   const h5FontStyling = `Mobile styles:
   font-size: 14px;
@@ -97,7 +97,7 @@ const Fonts = () => {
   font-size: 14px;
   line-height: 16px;
   margin-top: 10px;
-  margin-bottom: 14px;`;
+  margin-bottom: 14px;`
 
   const h6FontStyling = `Mobile styles:
   font-size: 12px;
@@ -109,7 +109,7 @@ const Fonts = () => {
   font-size: 12px;
   line-height: 16px;
   margin-top: 10px;
-  margin-bottom: 6px;`;
+  margin-bottom: 6px;`
 
   const bodyFontStyling = `Mobile styles:
   font-size: 18px;
@@ -121,7 +121,7 @@ const Fonts = () => {
   font-size: 20px;
   line-height: 32px;
   margin-top: 16px;
-  margin-bottom: 16px;`;
+  margin-bottom: 16px;`
 
   const tinyFontStyling = `Mobile styles:
   font-size: 13px;
@@ -133,9 +133,9 @@ const Fonts = () => {
   font-size: 13px;
   line-height: 18px;
   margin-top: 10.5px;
-  margin-bottom: 13.5px;`;
+  margin-bottom: 13.5px;`
 
-  const fontsContainerClasses = classNames(css.fontsContainer, css.baselines);
+  const fontsContainerClasses = classNames(css.fontsContainer, css.baselines)
 
   return (
     <div className={css.typographyContent}>
@@ -205,11 +205,11 @@ const Fonts = () => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
 export const Typography = {
   component: Fonts,
   props: {},
   group: 'typography',
-};
+}

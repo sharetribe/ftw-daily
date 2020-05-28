@@ -33,25 +33,25 @@
  * sizes, see the API documentation.
  */
 
-import React from 'react';
-import { arrayOf, string } from 'prop-types';
-import classNames from 'classnames';
-import { FormattedMessage } from '../../util/reactIntl';
-import { propTypes } from '../../util/types';
+import React from 'react'
+import { arrayOf, string } from 'prop-types'
+import classNames from 'classnames'
+import { FormattedMessage } from '../../util/reactIntl'
+import { propTypes } from '../../util/types'
 
-import NoImageIcon from './NoImageIcon';
-import css from './ResponsiveImage.css';
+import NoImageIcon from './NoImageIcon'
+import css from './ResponsiveImage.css'
 
-const ResponsiveImage = props => {
-  const { className, rootClassName, alt, noImageMessage, image, variants, ...rest } = props;
-  const classes = classNames(rootClassName || css.root, className);
+const ResponsiveImage = (props) => {
+  const { className, rootClassName, alt, noImageMessage, image, variants, ...rest } = props
+  const classes = classNames(rootClassName || css.root, className)
 
   if (image == null || variants.length === 0) {
-    const noImageClasses = classNames(rootClassName || css.root, css.noImageContainer, className);
+    const noImageClasses = classNames(rootClassName || css.root, css.noImageContainer, className)
 
     // NoImageMessage is needed for listing images on top the map (those component lose context)
     // https://github.com/tomchentw/react-google-maps/issues/578
-    const noImageMessageText = noImageMessage || <FormattedMessage id="ResponsiveImage.noImage" />;
+    const noImageMessageText = noImageMessage || <FormattedMessage id="ResponsiveImage.noImage" />
     /* eslint-disable jsx-a11y/img-redundant-alt */
     return (
       <div className={noImageClasses}>
@@ -60,43 +60,43 @@ const ResponsiveImage = props => {
           <div className={css.noImageText}>{noImageMessageText}</div>
         </div>
       </div>
-    );
+    )
     /* eslint-enable jsx-a11y/img-redundant-alt */
   }
 
-  const imageVariants = image.attributes.variants;
+  const imageVariants = image.attributes.variants
 
   const srcSet = variants
-    .map(variantName => {
-      const variant = imageVariants[variantName];
+    .map((variantName) => {
+      const variant = imageVariants[variantName]
 
       if (!variant) {
         // Variant not available (most like just not loaded yet)
-        return null;
+        return null
       }
-      return `${variant.url} ${variant.width}w`;
+      return `${variant.url} ${variant.width}w`
     })
-    .filter(v => v != null)
-    .join(', ');
+    .filter((v) => v != null)
+    .join(', ')
 
   const imgProps = {
     className: classes,
     alt,
     srcSet,
     ...rest,
-  };
+  }
 
   // alt prop already defined above
   // eslint-disable-next-line jsx-a11y/alt-text
-  return <img {...imgProps} />;
-};
+  return <img {...imgProps} />
+}
 
 ResponsiveImage.defaultProps = {
   className: null,
   rootClassName: null,
   image: null,
   noImageMessage: null,
-};
+}
 
 ResponsiveImage.propTypes = {
   className: string,
@@ -105,6 +105,6 @@ ResponsiveImage.propTypes = {
   image: propTypes.image,
   variants: arrayOf(string).isRequired,
   noImageMessage: string,
-};
+}
 
-export default ResponsiveImage;
+export default ResponsiveImage

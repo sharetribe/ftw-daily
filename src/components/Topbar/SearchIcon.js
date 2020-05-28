@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
-import css from './Topbar.css';
+import css from './Topbar.css'
 
-const SearchIcon = props => {
-  const { className, rootClassName } = props;
-  const classes = classNames(rootClassName || css.rootSearchIcon, className);
+const SearchIcon = (props) => {
+  const { className, rootClassName } = props
+  const classes = classNames(rootClassName || css.rootSearchIcon, className)
 
   return (
     <svg
@@ -28,19 +28,19 @@ const SearchIcon = props => {
         <circle cx="6.4" cy="6.4" r="6.4" />
       </g>
     </svg>
-  );
-};
+  )
+}
 
-const { string } = PropTypes;
+const { string } = PropTypes
 
 SearchIcon.defaultProps = {
   className: null,
   rootClassName: null,
-};
+}
 
 SearchIcon.propTypes = {
   className: string,
   rootClassName: string,
-};
+}
 
-export default SearchIcon;
+export default SearchIcon

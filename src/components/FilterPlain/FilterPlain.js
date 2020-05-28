@@ -1,38 +1,38 @@
-import React, { Component } from 'react';
-import { bool, func, node, object, string } from 'prop-types';
-import classNames from 'classnames';
-import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
+import React, { Component } from 'react'
+import { bool, func, node, object, string } from 'prop-types'
+import classNames from 'classnames'
+import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl'
 
-import { FilterForm } from '../../forms';
-import css from './FilterPlain.css';
+import { FilterForm } from '../../forms'
+import css from './FilterPlain.css'
 
 class FilterPlainComponent extends Component {
   constructor(props) {
-    super(props);
-    this.state = { isOpen: true };
+    super(props)
+    this.state = { isOpen: true }
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleClear = this.handleClear.bind(this);
-    this.toggleIsOpen = this.toggleIsOpen.bind(this);
+    this.handleChange = this.handleChange.bind(this)
+    this.handleClear = this.handleClear.bind(this)
+    this.toggleIsOpen = this.toggleIsOpen.bind(this)
   }
 
   handleChange(values) {
-    const { onSubmit, urlParam } = this.props;
-    onSubmit(urlParam, values);
+    const { onSubmit, urlParam } = this.props
+    onSubmit(urlParam, values)
   }
 
   handleClear() {
-    const { onSubmit, onClear, urlParam } = this.props;
+    const { onSubmit, onClear, urlParam } = this.props
 
     if (onClear) {
-      onClear();
+      onClear()
     }
 
-    onSubmit(urlParam, null);
+    onSubmit(urlParam, null)
   }
 
   toggleIsOpen() {
-    this.setState(prevState => ({ isOpen: !prevState.isOpen }));
+    this.setState((prevState) => ({ isOpen: !prevState.isOpen }))
   }
 
   render() {
@@ -47,10 +47,10 @@ class FilterPlainComponent extends Component {
       initialValues,
       keepDirtyOnReinitialize,
       contentPlacementOffset,
-    } = this.props;
-    const classes = classNames(rootClassName || css.root, className);
+    } = this.props
+    const classes = classNames(rootClassName || css.root, className)
 
-    const labelClass = isSelected ? css.filterLabelSelected : css.filterLabel;
+    const labelClass = isSelected ? css.filterLabelSelected : css.filterLabel
 
     return (
       <div className={classes}>
@@ -65,8 +65,8 @@ class FilterPlainComponent extends Component {
         <div
           id={id}
           className={classNames(plainClassName, css.plain, { [css.isOpen]: this.state.isOpen })}
-          ref={node => {
-            this.filterContent = node;
+          ref={(node) => {
+            this.filterContent = node
           }}
         >
           <FilterForm
@@ -81,7 +81,7 @@ class FilterPlainComponent extends Component {
           </FilterForm>
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -91,7 +91,7 @@ FilterPlainComponent.defaultProps = {
   plainClassName: null,
   initialValues: null,
   keepDirtyOnReinitialize: false,
-};
+}
 
 FilterPlainComponent.propTypes = {
   rootClassName: string,
@@ -107,8 +107,8 @@ FilterPlainComponent.propTypes = {
 
   // form injectIntl
   intl: intlShape.isRequired,
-};
+}
 
-const FilterPlain = injectIntl(FilterPlainComponent);
+const FilterPlain = injectIntl(FilterPlainComponent)
 
-export default FilterPlain;
+export default FilterPlain

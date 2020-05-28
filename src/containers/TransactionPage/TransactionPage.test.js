@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   createBooking,
   createCurrentUser,
@@ -6,18 +6,18 @@ import {
   createTransaction,
   createUser,
   fakeIntl,
-} from '../../util/test-data';
-import { renderShallow } from '../../util/test-helpers';
-import { TRANSITION_CONFIRM_PAYMENT } from '../../util/transaction';
-import { TransactionPageComponent } from './TransactionPage';
+} from '../../util/test-data'
+import { renderShallow } from '../../util/test-helpers'
+import { TRANSITION_CONFIRM_PAYMENT } from '../../util/transaction'
+import { TransactionPageComponent } from './TransactionPage'
 
-const noop = () => null;
+const noop = () => null
 
 describe('TransactionPage - Sale', () => {
   it('matches snapshot', () => {
-    const txId = 'tx-sale-1';
-    const start = new Date(Date.UTC(2017, 5, 10));
-    const end = new Date(Date.UTC(2017, 5, 13));
+    const txId = 'tx-sale-1'
+    const start = new Date(Date.UTC(2017, 5, 10))
+    const end = new Date(Date.UTC(2017, 5, 13))
     const transaction = createTransaction({
       id: txId,
       lastTransition: TRANSITION_CONFIRM_PAYMENT,
@@ -30,7 +30,7 @@ describe('TransactionPage - Sale', () => {
       listing: createListing('listing1'),
       customer: createUser('customer1'),
       provider: createUser('provider1'),
-    });
+    })
 
     const props = {
       params: { id: txId },
@@ -63,18 +63,18 @@ describe('TransactionPage - Sale', () => {
       history: {
         push: () => console.log('HistoryPush called'),
       },
-    };
+    }
 
-    const tree = renderShallow(<TransactionPageComponent {...props} />);
-    expect(tree).toMatchSnapshot();
-  });
-});
+    const tree = renderShallow(<TransactionPageComponent {...props} />)
+    expect(tree).toMatchSnapshot()
+  })
+})
 
 describe('TransactionPage - Order', () => {
   it('matches snapshot', () => {
-    const txId = 'tx-order-1';
-    const start = new Date(Date.UTC(2017, 5, 10));
-    const end = new Date(Date.UTC(2017, 5, 13));
+    const txId = 'tx-order-1'
+    const start = new Date(Date.UTC(2017, 5, 10))
+    const end = new Date(Date.UTC(2017, 5, 13))
 
     const transaction = createTransaction({
       id: txId,
@@ -88,7 +88,7 @@ describe('TransactionPage - Order', () => {
       listing: createListing('listing1'),
       customer: createUser('customer1'),
       provider: createUser('provider1'),
-    });
+    })
 
     const props = {
       params: { id: txId },
@@ -123,9 +123,9 @@ describe('TransactionPage - Order', () => {
       history: {
         push: () => console.log('HistoryPush called'),
       },
-    };
+    }
 
-    const tree = renderShallow(<TransactionPageComponent {...props} />);
-    expect(tree).toMatchSnapshot();
-  });
-});
+    const tree = renderShallow(<TransactionPageComponent {...props} />)
+    expect(tree).toMatchSnapshot()
+  })
+})

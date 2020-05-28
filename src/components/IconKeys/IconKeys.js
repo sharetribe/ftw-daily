@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import css from './IconKeys.css';
+import css from './IconKeys.css'
 
-const IconKeys = props => {
-  const { className } = props;
+const IconKeys = (props) => {
+  const { className } = props
   return (
     <svg
       className={className}
@@ -46,15 +46,15 @@ const IconKeys = props => {
         </g>
       </g>
     </svg>
-  );
-};
+  )
+}
 
-IconKeys.defaultProps = { className: null };
+IconKeys.defaultProps = { className: null }
 
-const { string } = PropTypes;
+const { string } = PropTypes
 
 IconKeys.propTypes = {
   className: string,
-};
+}
 
-export default IconKeys;
+export default IconKeys

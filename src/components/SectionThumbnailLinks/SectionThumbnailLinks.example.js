@@ -1,6 +1,6 @@
-import SectionThumbnailLinks from './SectionThumbnailLinks';
+import SectionThumbnailLinks from './SectionThumbnailLinks'
 
-const imageAltText = 'styleguide alt text';
+const imageAltText = 'styleguide alt text'
 
 export const TwoNamedLinksWithHeadings = {
   component: SectionThumbnailLinks,
@@ -24,7 +24,7 @@ export const TwoNamedLinksWithHeadings = {
     subHeading: 'One column in mobile, two columns in desktop.',
   },
   group: 'sections',
-};
+}
 
 export const ThreeExternalLinksWithHeadings = {
   component: SectionThumbnailLinks,
@@ -54,7 +54,7 @@ export const ThreeExternalLinksWithHeadings = {
     subHeading: 'One column in mobile, three columns in desktop.',
   },
   group: 'sections',
-};
+}
 
 export const FourLinks = {
   component: SectionThumbnailLinks,
@@ -88,7 +88,7 @@ export const FourLinks = {
     ],
   },
   group: 'sections',
-};
+}
 
 export const SixLinks = {
   component: SectionThumbnailLinks,
@@ -135,4 +135,4 @@ export const SixLinks = {
     ],
   },
   group: 'sections',
-};
+}

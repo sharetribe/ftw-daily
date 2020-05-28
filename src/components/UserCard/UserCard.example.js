@@ -1,35 +1,35 @@
-import { createUser, createCurrentUser } from '../../util/test-data';
-import { types as sdkTypes } from '../../util/sdkLoader';
-import UserCard from './UserCard';
+import { createUser, createCurrentUser } from '../../util/test-data'
+import { types as sdkTypes } from '../../util/sdkLoader'
+import UserCard from './UserCard'
 
-const { UUID } = sdkTypes;
+const { UUID } = sdkTypes
 
 export const EmptyUser = {
   component: UserCard,
   props: {
-    onContactUser: user => console.log('concact user:', user),
+    onContactUser: (user) => console.log('concact user:', user),
   },
   group: 'users',
-};
+}
 
 export const WithoutBio = {
   component: UserCard,
   props: {
     user: createUser('test-card-user'),
-    onContactUser: user => console.log('concact user:', user),
+    onContactUser: (user) => console.log('concact user:', user),
   },
   group: 'users',
-};
+}
 
 export const WithoutBioCurrentUser = {
   component: UserCard,
   props: {
     user: createUser('test-card-user'),
     currentUser: createCurrentUser('test-card-user'),
-    onContactUser: user => console.log('concact user:', user),
+    onContactUser: (user) => console.log('concact user:', user),
   },
   group: 'users',
-};
+}
 
 export const WithProfileImageAndBioCurrentUser = {
   component: UserCard,
@@ -69,10 +69,10 @@ export const WithProfileImageAndBioCurrentUser = {
       },
     },
     currentUser: createCurrentUser('full-user'),
-    onContactUser: user => console.log('concact user:', user),
+    onContactUser: (user) => console.log('concact user:', user),
   },
   group: 'users',
-};
+}
 
 export const WithProfileImageAndBio = {
   component: UserCard,
@@ -112,17 +112,17 @@ export const WithProfileImageAndBio = {
       },
     },
     currentUser: createCurrentUser('test-card-current-user'),
-    onContactUser: user => console.log('concact user:', user),
+    onContactUser: (user) => console.log('concact user:', user),
   },
   group: 'users',
-};
+}
 
 export const WithCurrentUserAsUser = {
   component: UserCard,
   props: {
     user: createCurrentUser('test-card-user'),
     currentUser: createCurrentUser('test-card-user'),
-    onContactUser: user => console.log('concact user:', user),
+    onContactUser: (user) => console.log('concact user:', user),
   },
   group: 'users',
-};
+}

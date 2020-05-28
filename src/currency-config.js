@@ -17,13 +17,13 @@ export const subUnitDivisors = {
   SEK: 100,
   SGD: 100,
   USD: 100,
-};
+}
 
 // Currency formatting options.
 // See: https://github.com/yahoo/react-intl/wiki/API#formatnumber
-export const currencyConfiguration = currency => {
+export const currencyConfiguration = (currency) => {
   if (!subUnitDivisors[currency]) {
-    throw new Error(`Configuration missing for currency: ${currency}.`);
+    throw new Error(`Configuration missing for currency: ${currency}.`)
   }
 
   return subUnitDivisors[currency] === 1
@@ -43,5 +43,5 @@ export const currencyConfiguration = currency => {
         useGrouping: true,
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
-      };
-};
+      }
+}

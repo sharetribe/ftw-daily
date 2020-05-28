@@ -1,11 +1,11 @@
 /* eslint-disable no-console */
-import EditListingAvailabilityForm from './EditListingAvailabilityForm';
+import EditListingAvailabilityForm from './EditListingAvailabilityForm'
 
 export const Empty = {
   component: EditListingAvailabilityForm,
   props: {
-    onSubmit: values => {
-      console.log('Submit EditListingAvailabilityForm with (unformatted) values:', values);
+    onSubmit: (values) => {
+      console.log('Submit EditListingAvailabilityForm with (unformatted) values:', values)
     },
     saveActionMsg: 'Save rules',
     updated: false,
@@ -63,4 +63,4 @@ export const Empty = {
     },
   },
   group: 'forms',
-};
+}

@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
-import css from './ValidationError.css';
+import css from './ValidationError.css'
 
 /**
  * This component can be used to show validation errors next to form
@@ -10,16 +10,16 @@ import css from './ValidationError.css';
  * `meta` object as a prop and infers if an error message should be
  * shown.
  */
-const ValidationError = props => {
-  const { rootClassName, className, fieldMeta } = props;
-  const { touched, error } = fieldMeta;
-  const classes = classNames(rootClassName || css.root, className);
-  return touched && error ? <div className={classes}>{error}</div> : null;
-};
+const ValidationError = (props) => {
+  const { rootClassName, className, fieldMeta } = props
+  const { touched, error } = fieldMeta
+  const classes = classNames(rootClassName || css.root, className)
+  return touched && error ? <div className={classes}>{error}</div> : null
+}
 
-ValidationError.defaultProps = { rootClassName: null, className: null };
+ValidationError.defaultProps = { rootClassName: null, className: null }
 
-const { shape, bool, string } = PropTypes;
+const { shape, bool, string } = PropTypes
 
 ValidationError.propTypes = {
   rootClassName: string,
@@ -28,6 +28,6 @@ ValidationError.propTypes = {
     touched: bool.isRequired,
     error: string,
   }).isRequired,
-};
+}
 
-export default ValidationError;
+export default ValidationError

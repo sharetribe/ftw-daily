@@ -1,7 +1,7 @@
-import IconSocialMediaFacebook from './IconSocialMediaFacebook';
+import IconSocialMediaFacebook from './IconSocialMediaFacebook'
 
 export const Icon = {
   component: IconSocialMediaFacebook,
   props: {},
   group: 'icons',
-};
+}

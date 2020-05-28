@@ -1,21 +1,21 @@
-import React from 'react';
-import { Form as FinalForm, FormSpy } from 'react-final-form';
-import * as validators from '../../util/validators';
-import { Button } from '../../components';
-import FieldPhoneNumberInput from './FieldPhoneNumberInput';
+import React from 'react'
+import { Form as FinalForm, FormSpy } from 'react-final-form'
+import * as validators from '../../util/validators'
+import { Button } from '../../components'
+import FieldPhoneNumberInput from './FieldPhoneNumberInput'
 
-const FormComponent = props => (
+const FormComponent = (props) => (
   <FinalForm
     {...props}
-    render={fieldRenderProps => {
-      const { formId, handleSubmit, onChange, invalid, pristine, submitting } = fieldRenderProps;
-      const required = validators.required('This field is required');
-      const submitDisabled = invalid || pristine || submitting;
+    render={(fieldRenderProps) => {
+      const { formId, handleSubmit, onChange, invalid, pristine, submitting } = fieldRenderProps
+      const required = validators.required('This field is required')
+      const submitDisabled = invalid || pristine || submitting
       return (
         <form
-          onSubmit={e => {
-            e.preventDefault();
-            handleSubmit(e);
+          onSubmit={(e) => {
+            e.preventDefault()
+            handleSubmit(e)
           }}
         >
           <FormSpy onChange={onChange} />
@@ -30,23 +30,23 @@ const FormComponent = props => (
             Submit
           </Button>
         </form>
-      );
+      )
     }}
   />
-);
+)
 
 export const PhoneNumber = {
   component: FormComponent,
   props: {
     formId: 'Styleguide.FieldPhoneNumberInput.Form',
-    onChange: formState => {
+    onChange: (formState) => {
       if (formState.dirty) {
-        console.log('form values changed to:', formState.values);
+        console.log('form values changed to:', formState.values)
       }
     },
     onSubmit(values) {
-      console.log('onSubmit:', values);
+      console.log('onSubmit:', values)
     },
   },
   group: 'inputs',
-};
+}

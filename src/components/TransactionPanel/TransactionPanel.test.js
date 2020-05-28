@@ -1,6 +1,6 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import { types as sdkTypes } from '../../util/sdkLoader';
+import React from 'react'
+import { shallow } from 'enzyme'
+import { types as sdkTypes } from '../../util/sdkLoader'
 import {
   createTxTransition,
   createTransaction,
@@ -9,9 +9,9 @@ import {
   createUser,
   createCurrentUser,
   createMessage,
-} from '../../util/test-data';
-import { renderShallow } from '../../util/test-helpers';
-import { fakeIntl } from '../../util/test-data';
+} from '../../util/test-data'
+import { renderShallow } from '../../util/test-helpers'
+import { fakeIntl } from '../../util/test-data'
 import {
   TRANSITION_ACCEPT,
   TRANSITION_CANCELED,
@@ -21,19 +21,19 @@ import {
   TRANSITION_EXPIRE,
   TRANSITION_REQUEST_PAYMENT,
   TRANSITION_CONFIRM_PAYMENT,
-} from '../../util/transaction';
-import BreakdownMaybe from './BreakdownMaybe';
-import { TransactionPanelComponent } from './TransactionPanel';
+} from '../../util/transaction'
+import BreakdownMaybe from './BreakdownMaybe'
+import { TransactionPanelComponent } from './TransactionPanel'
 
-const noop = () => null;
+const noop = () => null
 
-const { Money } = sdkTypes;
+const { Money } = sdkTypes
 
 describe('TransactionPanel - Sale', () => {
-  const providerId = 'provider';
-  const customerId = 'customer';
-  const start = new Date(Date.UTC(2017, 5, 10));
-  const end = new Date(Date.UTC(2017, 5, 13));
+  const providerId = 'provider'
+  const customerId = 'customer'
+  const start = new Date(Date.UTC(2017, 5, 10))
+  const end = new Date(Date.UTC(2017, 5, 13))
 
   const baseTxAttrs = {
     total: new Money(16500, 'USD'),
@@ -48,43 +48,43 @@ describe('TransactionPanel - Sale', () => {
     customer: createUser(customerId),
     provider: createUser(providerId),
     lastTransitionedAt: new Date(Date.UTC(2017, 5, 10)),
-  };
+  }
 
   const txEnquired = createTransaction({
     id: 'sale-enquired',
     lastTransition: TRANSITION_ENQUIRE,
     ...baseTxAttrs,
-  });
+  })
 
   const txPreauthorized = createTransaction({
     id: 'sale-preauthorized',
     lastTransition: TRANSITION_REQUEST_PAYMENT,
     ...baseTxAttrs,
-  });
+  })
 
   const txAccepted = createTransaction({
     id: 'sale-accepted',
     lastTransition: TRANSITION_ACCEPT,
     ...baseTxAttrs,
-  });
+  })
 
   const txDeclined = createTransaction({
     id: 'sale-declined',
     lastTransition: TRANSITION_DECLINE,
     ...baseTxAttrs,
-  });
+  })
 
   const txAutoDeclined = createTransaction({
     id: 'sale-autodeclined',
     lastTransition: TRANSITION_EXPIRE,
     ...baseTxAttrs,
-  });
+  })
 
   const txCanceled = createTransaction({
     id: 'sale-canceled',
     lastTransition: TRANSITION_CANCELED,
     ...baseTxAttrs,
-  });
+  })
 
   const txDelivered = createTransaction({
     id: 'sale-delivered',
@@ -107,7 +107,7 @@ describe('TransactionPanel - Sale', () => {
       }),
     ],
     ...baseTxAttrs,
-  });
+  })
 
   const panelBaseProps = {
     onAcceptSale: noop,
@@ -134,67 +134,67 @@ describe('TransactionPanel - Sale', () => {
     onResetForm: noop,
     onSubmitBookingRequest: noop,
     intl: fakeIntl,
-  };
+  }
 
   it('enquired matches snapshot', () => {
     const props = {
       ...panelBaseProps,
       transaction: txEnquired,
-    };
-    const tree = renderShallow(<TransactionPanelComponent {...props} />);
-    expect(tree).toMatchSnapshot();
-  });
+    }
+    const tree = renderShallow(<TransactionPanelComponent {...props} />)
+    expect(tree).toMatchSnapshot()
+  })
   it('preauthorized matches snapshot', () => {
     const props = {
       ...panelBaseProps,
       transaction: txPreauthorized,
-    };
-    const tree = renderShallow(<TransactionPanelComponent {...props} />);
-    expect(tree).toMatchSnapshot();
-  });
+    }
+    const tree = renderShallow(<TransactionPanelComponent {...props} />)
+    expect(tree).toMatchSnapshot()
+  })
   it('accepted matches snapshot', () => {
     const props = {
       ...panelBaseProps,
       transaction: txAccepted,
-    };
-    const tree = renderShallow(<TransactionPanelComponent {...props} />);
-    expect(tree).toMatchSnapshot();
-  });
+    }
+    const tree = renderShallow(<TransactionPanelComponent {...props} />)
+    expect(tree).toMatchSnapshot()
+  })
   it('declined matches snapshot', () => {
     const props = {
       ...panelBaseProps,
       transaction: txDeclined,
-    };
-    const tree = renderShallow(<TransactionPanelComponent {...props} />);
-    expect(tree).toMatchSnapshot();
-  });
+    }
+    const tree = renderShallow(<TransactionPanelComponent {...props} />)
+    expect(tree).toMatchSnapshot()
+  })
   it('autodeclined matches snapshot', () => {
     const props = {
       ...panelBaseProps,
       transaction: txAutoDeclined,
-    };
-    const tree = renderShallow(<TransactionPanelComponent {...props} />);
-    expect(tree).toMatchSnapshot();
-  });
+    }
+    const tree = renderShallow(<TransactionPanelComponent {...props} />)
+    expect(tree).toMatchSnapshot()
+  })
   it('canceled matches snapshot', () => {
     const props = {
       ...panelBaseProps,
       transaction: txCanceled,
-    };
-    const tree = renderShallow(<TransactionPanelComponent {...props} />);
-    expect(tree).toMatchSnapshot();
-  });
+    }
+    const tree = renderShallow(<TransactionPanelComponent {...props} />)
+    expect(tree).toMatchSnapshot()
+  })
   it('delivered matches snapshot', () => {
     const props = {
       ...panelBaseProps,
       transaction: txDelivered,
-    };
-    const tree = renderShallow(<TransactionPanelComponent {...props} />);
-    expect(tree).toMatchSnapshot();
-  });
+    }
+    const tree = renderShallow(<TransactionPanelComponent {...props} />)
+    expect(tree).toMatchSnapshot()
+  })
   it('renders correct total price', () => {
-    const start = new Date(Date.UTC(2017, 5, 10));
-    const end = new Date(Date.UTC(2017, 5, 13));
+    const start = new Date(Date.UTC(2017, 5, 10))
+    const end = new Date(Date.UTC(2017, 5, 13))
 
     const transaction = createTransaction({
       id: 'sale-tx',
@@ -211,27 +211,24 @@ describe('TransactionPanel - Sale', () => {
       customer: createUser('customer1'),
       provider: createUser('provider1'),
       lastTransitionedAt: new Date(Date.UTC(2017, 5, 10)),
-    });
+    })
     const props = {
       ...panelBaseProps,
       transaction,
-    };
-    const panel = shallow(<TransactionPanelComponent {...props} />);
-    const breakdownProps = panel
-      .find(BreakdownMaybe)
-      .first()
-      .props();
+    }
+    const panel = shallow(<TransactionPanelComponent {...props} />)
+    const breakdownProps = panel.find(BreakdownMaybe).first().props()
 
     // Total price for the provider should be transaction total minus the commission.
-    expect(breakdownProps.transaction.attributes.payoutTotal).toEqual(new Money(15500, 'USD'));
-  });
-});
+    expect(breakdownProps.transaction.attributes.payoutTotal).toEqual(new Money(15500, 'USD'))
+  })
+})
 
 describe('TransactionPanel - Order', () => {
-  const providerId = 'provider';
-  const customerId = 'customer';
-  const start = new Date(Date.UTC(2017, 5, 10));
-  const end = new Date(Date.UTC(2017, 5, 13));
+  const providerId = 'provider'
+  const customerId = 'customer'
+  const start = new Date(Date.UTC(2017, 5, 10))
+  const end = new Date(Date.UTC(2017, 5, 13))
   const baseTxAttrs = {
     total: new Money(16500, 'USD'),
     booking: createBooking('booking1', {
@@ -243,43 +240,43 @@ describe('TransactionPanel - Order', () => {
     listing: createListing('listing1'),
     provider: createUser(providerId),
     customer: createUser(customerId),
-  };
+  }
 
   const txEnquired = createTransaction({
     id: 'order-enquired',
     lastTransition: TRANSITION_ENQUIRE,
     ...baseTxAttrs,
-  });
+  })
 
   const txPreauthorized = createTransaction({
     id: 'order-preauthorized',
     lastTransition: TRANSITION_CONFIRM_PAYMENT,
     ...baseTxAttrs,
-  });
+  })
 
   const txAccepted = createTransaction({
     id: 'order-accepted',
     lastTransition: TRANSITION_ACCEPT,
     ...baseTxAttrs,
-  });
+  })
 
   const txDeclined = createTransaction({
     id: 'order-declined',
     lastTransition: TRANSITION_DECLINE,
     ...baseTxAttrs,
-  });
+  })
 
   const txAutoDeclined = createTransaction({
     id: 'order-autodeclined',
     lastTransition: TRANSITION_EXPIRE,
     ...baseTxAttrs,
-  });
+  })
 
   const txCanceled = createTransaction({
     id: 'order-canceled',
     lastTransition: TRANSITION_CANCELED,
     ...baseTxAttrs,
-  });
+  })
 
   const txDelivered = createTransaction({
     id: 'order-delivered',
@@ -307,7 +304,7 @@ describe('TransactionPanel - Order', () => {
       }),
     ],
     ...baseTxAttrs,
-  });
+  })
 
   const panelBaseProps = {
     intl: fakeIntl,
@@ -334,69 +331,69 @@ describe('TransactionPanel - Order', () => {
     acceptInProgress: false,
     declineInProgress: false,
     onSubmitBookingRequest: noop,
-  };
+  }
 
   it('enquired matches snapshot', () => {
     const props = {
       ...panelBaseProps,
       transaction: txEnquired,
-    };
+    }
 
-    const tree = renderShallow(<TransactionPanelComponent {...props} />);
-    expect(tree).toMatchSnapshot();
-  });
+    const tree = renderShallow(<TransactionPanelComponent {...props} />)
+    expect(tree).toMatchSnapshot()
+  })
   it('preauthorized matches snapshot', () => {
     const props = {
       ...panelBaseProps,
       transaction: txPreauthorized,
-    };
+    }
 
-    const tree = renderShallow(<TransactionPanelComponent {...props} />);
-    expect(tree).toMatchSnapshot();
-  });
+    const tree = renderShallow(<TransactionPanelComponent {...props} />)
+    expect(tree).toMatchSnapshot()
+  })
   it('accepted matches snapshot', () => {
     const props = {
       ...panelBaseProps,
       transaction: txAccepted,
-    };
-    const tree = renderShallow(<TransactionPanelComponent {...props} />);
-    expect(tree).toMatchSnapshot();
-  });
+    }
+    const tree = renderShallow(<TransactionPanelComponent {...props} />)
+    expect(tree).toMatchSnapshot()
+  })
   it('declined matches snapshot', () => {
     const props = {
       ...panelBaseProps,
       transaction: txDeclined,
-    };
-    const tree = renderShallow(<TransactionPanelComponent {...props} />);
-    expect(tree).toMatchSnapshot();
-  });
+    }
+    const tree = renderShallow(<TransactionPanelComponent {...props} />)
+    expect(tree).toMatchSnapshot()
+  })
   it('autodeclined matches snapshot', () => {
     const props = {
       ...panelBaseProps,
       transaction: txAutoDeclined,
-    };
-    const tree = renderShallow(<TransactionPanelComponent {...props} />);
-    expect(tree).toMatchSnapshot();
-  });
+    }
+    const tree = renderShallow(<TransactionPanelComponent {...props} />)
+    expect(tree).toMatchSnapshot()
+  })
   it('canceled matches snapshot', () => {
     const props = {
       ...panelBaseProps,
       transaction: txCanceled,
-    };
-    const tree = renderShallow(<TransactionPanelComponent {...props} />);
-    expect(tree).toMatchSnapshot();
-  });
+    }
+    const tree = renderShallow(<TransactionPanelComponent {...props} />)
+    expect(tree).toMatchSnapshot()
+  })
   it('delivered matches snapshot', () => {
     const props = {
       ...panelBaseProps,
       transaction: txDelivered,
-    };
-    const tree = renderShallow(<TransactionPanelComponent {...props} />);
-    expect(tree).toMatchSnapshot();
-  });
+    }
+    const tree = renderShallow(<TransactionPanelComponent {...props} />)
+    expect(tree).toMatchSnapshot()
+  })
   it('renders correct total price', () => {
-    const start = new Date(Date.UTC(2017, 5, 10));
-    const end = new Date(Date.UTC(2017, 5, 13));
+    const start = new Date(Date.UTC(2017, 5, 10))
+    const end = new Date(Date.UTC(2017, 5, 13))
     const tx = createTransaction({
       id: 'order-tx',
       lastTransition: TRANSITION_REQUEST_PAYMENT,
@@ -410,16 +407,13 @@ describe('TransactionPanel - Order', () => {
       listing: createListing('listing1'),
       provider: createUser(providerId),
       customer: createUser(customerId),
-    });
+    })
     const props = {
       ...panelBaseProps,
       transaction: tx,
-    };
-    const panel = shallow(<TransactionPanelComponent {...props} />);
-    const breakdownProps = panel
-      .find(BreakdownMaybe)
-      .first()
-      .props();
-    expect(breakdownProps.transaction.attributes.payinTotal).toEqual(new Money(16500, 'USD'));
-  });
-});
+    }
+    const panel = shallow(<TransactionPanelComponent {...props} />)
+    const breakdownProps = panel.find(BreakdownMaybe).first().props()
+    expect(breakdownProps.transaction.attributes.payinTotal).toEqual(new Money(16500, 'USD'))
+  })
+})

@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
-import css from './PrivacyPolicy.css';
+import css from './PrivacyPolicy.css'
 
-const PrivacyPolicy = props => {
-  const { rootClassName, className } = props;
-  const classes = classNames(rootClassName || css.root, className);
+const PrivacyPolicy = (props) => {
+  const { rootClassName, className } = props
+  const classes = classNames(rootClassName || css.root, className)
 
   // prettier-ignore
   return (
@@ -58,18 +58,18 @@ const PrivacyPolicy = props => {
       </p>
     </div>
   );
-};
+}
 
 PrivacyPolicy.defaultProps = {
   rootClassName: null,
   className: null,
-};
+}
 
-const { string } = PropTypes;
+const { string } = PropTypes
 
 PrivacyPolicy.propTypes = {
   rootClassName: string,
   className: string,
-};
+}
 
-export default PrivacyPolicy;
+export default PrivacyPolicy

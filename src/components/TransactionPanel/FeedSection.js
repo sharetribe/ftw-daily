@@ -1,12 +1,12 @@
-import React from 'react';
-import { FormattedMessage } from '../../util/reactIntl';
-import classNames from 'classnames';
-import { ActivityFeed } from '../../components';
+import React from 'react'
+import { FormattedMessage } from '../../util/reactIntl'
+import classNames from 'classnames'
+import { ActivityFeed } from '../../components'
 
-import css from './TransactionPanel.css';
+import css from './TransactionPanel.css'
 
 // Functional component as a helper to build ActivityFeed section
-const FeedSection = props => {
+const FeedSection = (props) => {
   const {
     className,
     rootClassName,
@@ -20,17 +20,17 @@ const FeedSection = props => {
     onShowMoreMessages,
     onOpenReviewModal,
     totalMessagePages,
-  } = props;
+  } = props
 
   const txTransitions = currentTransaction.attributes.transitions
     ? currentTransaction.attributes.transitions
-    : [];
-  const hasOlderMessages = totalMessagePages > oldestMessagePageFetched;
+    : []
+  const hasOlderMessages = totalMessagePages > oldestMessagePageFetched
 
   const showFeed =
-    messages.length > 0 || txTransitions.length > 0 || initialMessageFailed || fetchMessagesError;
+    messages.length > 0 || txTransitions.length > 0 || initialMessageFailed || fetchMessagesError
 
-  const classes = classNames(rootClassName || css.feedContainer, className);
+  const classes = classNames(rootClassName || css.feedContainer, className)
 
   return showFeed ? (
     <div className={classes}>
@@ -58,7 +58,7 @@ const FeedSection = props => {
         fetchMessagesInProgress={fetchMessagesInProgress}
       />
     </div>
-  ) : null;
-};
+  ) : null
+}
 
-export default FeedSection;
+export default FeedSection

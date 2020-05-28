@@ -1,13 +1,13 @@
-import { fakeIntl } from '../../util/test-data';
-import SavedCardDetails from './SavedCardDetails';
+import { fakeIntl } from '../../util/test-data'
+import SavedCardDetails from './SavedCardDetails'
 
-const noop = () => null;
+const noop = () => null
 const defaultProps = {
   intl: fakeIntl,
   onDeleteCard: noop,
   onChange: noop,
   onManageDisableScrolling: noop,
-};
+}
 
 export const SavedCardDetailsExample = {
   component: SavedCardDetails,
@@ -21,7 +21,7 @@ export const SavedCardDetailsExample = {
     },
   },
   group: 'payment methods',
-};
+}
 
 export const SavedCardDetailsNoDelete = {
   component: SavedCardDetails,
@@ -36,7 +36,7 @@ export const SavedCardDetailsNoDelete = {
     onDeleteCard: null,
   },
   group: 'payment methods',
-};
+}
 
 export const SavedCardDetailsExpired = {
   component: SavedCardDetails,
@@ -50,4 +50,4 @@ export const SavedCardDetailsExpired = {
     },
   },
   group: 'payment methods',
-};
+}

@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-import css from './LocationAutocompleteInput.css';
+import css from './LocationAutocompleteInput.css'
 
 const IconHourGlass = () => (
   <svg
@@ -23,6 +23,6 @@ const IconHourGlass = () => (
       <circle cx="7.5" cy="7.5" r="7.5" />
     </g>
   </svg>
-);
+)
 
-export default IconHourGlass;
+export default IconHourGlass

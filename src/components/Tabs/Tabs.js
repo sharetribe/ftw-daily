@@ -15,20 +15,20 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { TabNav } from '../../components';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import { TabNav } from '../../components'
 
-import css from './Tabs.css';
+import css from './Tabs.css'
 
-const Tabs = props => {
-  const { children, className, rootClassName, navRootClassName, tabRootClassName } = props;
-  const rootClasses = rootClassName || css.root;
-  const classes = classNames(rootClasses, className);
+const Tabs = (props) => {
+  const { children, className, rootClassName, navRootClassName, tabRootClassName } = props
+  const rootClasses = rootClassName || css.root
+  const classes = classNames(rootClasses, className)
 
-  const tabNavTabs = React.Children.map(children, child => {
-    const { tabId, tabLabel, tabLinkProps } = child.props;
+  const tabNavTabs = React.Children.map(children, (child) => {
+    const { tabId, tabLabel, tabLinkProps } = child.props
 
     // Child components need to have TabNav props included
     if (!tabId || !tabLabel || !tabLinkProps) {
@@ -36,8 +36,8 @@ const Tabs = props => {
         `Tabs component: a child component is missing required props.
         tabId: (${tabId})
         tabLabel: (${tabLabel})
-        tabLinkProps: (${tabLinkProps})`
-      );
+        tabLinkProps: (${tabLinkProps})`,
+      )
     }
 
     return {
@@ -46,15 +46,15 @@ const Tabs = props => {
       linkProps: child.props.tabLinkProps,
       disabled: child.props.disabled,
       selected: child.props.selected,
-    };
-  });
+    }
+  })
 
-  const childArray = React.Children.toArray(children);
-  const selectedTabPanel = childArray.find(c => c.props.selected);
+  const childArray = React.Children.toArray(children)
+  const selectedTabPanel = childArray.find((c) => c.props.selected)
 
   // One of the children needs to be selected
   if (!selectedTabPanel) {
-    throw new Error(`Tabs component: one Child should have 'selected' prop.`);
+    throw new Error(`Tabs component: one Child should have 'selected' prop.`)
   }
 
   return (
@@ -66,17 +66,17 @@ const Tabs = props => {
       />
       {selectedTabPanel}
     </div>
-  );
-};
+  )
+}
 
-const { node, string } = PropTypes;
+const { node, string } = PropTypes
 
 Tabs.defaultProps = {
   className: null,
   rootClassName: null,
   navRootClassName: null,
   tabRootClassName: null,
-};
+}
 
 Tabs.propTypes = {
   children: node.isRequired,
@@ -84,6 +84,6 @@ Tabs.propTypes = {
   rootClassName: string,
   navRootClassName: string,
   tabRootClassName: string,
-};
+}
 
-export default Tabs;
+export default Tabs

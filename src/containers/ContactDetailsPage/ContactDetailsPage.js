@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
-import { propTypes } from '../../util/types';
-import { ensureCurrentUser } from '../../util/data';
-import { fetchCurrentUser, sendVerificationEmail } from '../../ducks/user.duck';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl'
+import { propTypes } from '../../util/types'
+import { ensureCurrentUser } from '../../util/data'
+import { fetchCurrentUser, sendVerificationEmail } from '../../ducks/user.duck'
 import {
   LayoutSideNavigation,
   LayoutWrapperMain,
@@ -15,15 +15,15 @@ import {
   Footer,
   Page,
   UserNav,
-} from '../../components';
-import { ContactDetailsForm } from '../../forms';
-import { TopbarContainer } from '../../containers';
+} from '../../components'
+import { ContactDetailsForm } from '../../forms'
+import { TopbarContainer } from '../../containers'
 
-import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { saveContactDetails, saveContactDetailsClear } from './ContactDetailsPage.duck';
-import css from './ContactDetailsPage.css';
+import { isScrollingDisabled } from '../../ducks/UI.duck'
+import { saveContactDetails, saveContactDetailsClear } from './ContactDetailsPage.duck'
+import css from './ContactDetailsPage.css'
 
-export const ContactDetailsPageComponent = props => {
+export const ContactDetailsPageComponent = (props) => {
   const {
     saveEmailError,
     savePhoneNumberError,
@@ -37,12 +37,12 @@ export const ContactDetailsPageComponent = props => {
     onResendVerificationEmail,
     onSubmitContactDetails,
     intl,
-  } = props;
+  } = props
 
-  const user = ensureCurrentUser(currentUser);
-  const currentEmail = user.attributes.email || '';
-  const protectedData = user.attributes.profile.protectedData || {};
-  const currentPhoneNumber = protectedData.phoneNumber || '';
+  const user = ensureCurrentUser(currentUser)
+  const currentEmail = user.attributes.email || ''
+  const protectedData = user.attributes.profile.protectedData || {}
+  const currentPhoneNumber = protectedData.phoneNumber || ''
   const contactInfoForm = user.id ? (
     <ContactDetailsForm
       className={css.form}
@@ -51,16 +51,16 @@ export const ContactDetailsPageComponent = props => {
       savePhoneNumberError={savePhoneNumberError}
       currentUser={currentUser}
       onResendVerificationEmail={onResendVerificationEmail}
-      onSubmit={values => onSubmitContactDetails({ ...values, currentEmail, currentPhoneNumber })}
+      onSubmit={(values) => onSubmitContactDetails({ ...values, currentEmail, currentPhoneNumber })}
       onChange={onChange}
       inProgress={saveContactDetailsInProgress}
       ready={contactDetailsChanged}
       sendVerificationEmailInProgress={sendVerificationEmailInProgress}
       sendVerificationEmailError={sendVerificationEmailError}
     />
-  ) : null;
+  ) : null
 
-  const title = intl.formatMessage({ id: 'ContactDetailsPage.title' });
+  const title = intl.formatMessage({ id: 'ContactDetailsPage.title' })
 
   return (
     <Page title={title} scrollingDisabled={scrollingDisabled}>
@@ -87,17 +87,17 @@ export const ContactDetailsPageComponent = props => {
         </LayoutWrapperFooter>
       </LayoutSideNavigation>
     </Page>
-  );
-};
+  )
+}
 
 ContactDetailsPageComponent.defaultProps = {
   saveEmailError: null,
   savePhoneNumberError: null,
   currentUser: null,
   sendVerificationEmailError: null,
-};
+}
 
-const { bool, func } = PropTypes;
+const { bool, func } = PropTypes
 
 ContactDetailsPageComponent.propTypes = {
   saveEmailError: propTypes.error,
@@ -114,17 +114,17 @@ ContactDetailsPageComponent.propTypes = {
 
   // from injectIntl
   intl: intlShape.isRequired,
-};
+}
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   // Topbar needs user info.
-  const { currentUser, sendVerificationEmailInProgress, sendVerificationEmailError } = state.user;
+  const { currentUser, sendVerificationEmailInProgress, sendVerificationEmailError } = state.user
   const {
     saveEmailError,
     savePhoneNumberError,
     saveContactDetailsInProgress,
     contactDetailsChanged,
-  } = state.ContactDetailsPage;
+  } = state.ContactDetailsPage
   return {
     saveEmailError,
     savePhoneNumberError,
@@ -134,26 +134,23 @@ const mapStateToProps = state => {
     scrollingDisabled: isScrollingDisabled(state),
     sendVerificationEmailInProgress,
     sendVerificationEmailError,
-  };
-};
+  }
+}
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onChange: () => dispatch(saveContactDetailsClear()),
   onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
-  onSubmitContactDetails: values => dispatch(saveContactDetails(values)),
-});
+  onSubmitContactDetails: (values) => dispatch(saveContactDetails(values)),
+})
 
 const ContactDetailsPage = compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  injectIntl
-)(ContactDetailsPageComponent);
+  connect(mapStateToProps, mapDispatchToProps),
+  injectIntl,
+)(ContactDetailsPageComponent)
 
 ContactDetailsPage.loadData = () => {
   // Since verify email happens in separate tab, current user's data might be updated
-  return fetchCurrentUser();
-};
+  return fetchCurrentUser()
+}
 
-export default ContactDetailsPage;
+export default ContactDetailsPage

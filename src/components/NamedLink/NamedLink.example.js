@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import NamedLink from './NamedLink';
+import NamedLink from './NamedLink'
 
 export const NamedLinkToSearchPage = {
   component: NamedLink,
@@ -8,4 +8,4 @@ export const NamedLinkToSearchPage = {
     children: 'SearchPage',
   },
   group: 'navigation',
-};
+}

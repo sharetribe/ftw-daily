@@ -1,35 +1,35 @@
-import config from '../../config';
+import config from '../../config'
 
 // Possible inputs Stripe might require for a country
 
 // Bank account number (used in countries where IBAN is not in use)
-export const ACCOUNT_NUMBER = 'accountNumber';
+export const ACCOUNT_NUMBER = 'accountNumber'
 // Required for Japan
-export const ACCOUNT_OWNER_NAME = 'accountOwnerName';
+export const ACCOUNT_OWNER_NAME = 'accountOwnerName'
 // Australian equivalent for routing number
-export const BSB = 'bsb';
+export const BSB = 'bsb'
 // Needed for creating full routing number in Canada
-export const INSTITUTION_NUMBER = 'institutionNumber';
+export const INSTITUTION_NUMBER = 'institutionNumber'
 // Needed for creating full routing number in Canada
-export const TRANSIT_NUMBER = 'transitNumber';
+export const TRANSIT_NUMBER = 'transitNumber'
 // Needed for creating full routing number in Hong Kong
-export const CLEARING_CODE = 'clearingCode';
+export const CLEARING_CODE = 'clearingCode'
 // Needed for creating full routing number in Hong Kong and Singapore
-export const BRANCH_CODE = 'branchCode';
+export const BRANCH_CODE = 'branchCode'
 // Required for Japan
-export const BRANCH_NAME = 'branchName';
+export const BRANCH_NAME = 'branchName'
 // Required for Japan
-export const BANK_NAME = 'bankName';
+export const BANK_NAME = 'bankName'
 // Needed for creating full routing number in e.g. Singapore
-export const BANK_CODE = 'bankCode';
+export const BANK_CODE = 'bankCode'
 // Clave Bancaria Estandarizada (standardized banking cipher) used in Mexico
-export const CLABE = 'clabe';
+export const CLABE = 'clabe'
 // International bank account number (e.g. EU countries use this)
-export const IBAN = 'iban';
+export const IBAN = 'iban'
 // Routing number to separate bank account in different areas
-export const ROUTING_NUMBER = 'routingNumber';
+export const ROUTING_NUMBER = 'routingNumber'
 // British equivalent for routing number
-export const SORT_CODE = 'sortCode';
+export const SORT_CODE = 'sortCode'
 
 // Currently supported bank account inputs
 // the order here matters: account number input is asked after routing number and its equivalents
@@ -48,9 +48,9 @@ export const BANK_ACCOUNT_INPUTS = [
   ACCOUNT_NUMBER,
   IBAN,
   CLABE,
-];
+]
 
-export const supportedCountries = config.stripe.supportedCountries.map(c => c.code);
+export const supportedCountries = config.stripe.supportedCountries.map((c) => c.code)
 
 /**
  * Country specific Stripe configurations
@@ -59,14 +59,14 @@ export const supportedCountries = config.stripe.supportedCountries.map(c => c.co
  *
  * @return {Object} configurations
  */
-export const stripeCountryConfigs = countryCode => {
-  const country = config.stripe.supportedCountries.find(c => c.code === countryCode);
+export const stripeCountryConfigs = (countryCode) => {
+  const country = config.stripe.supportedCountries.find((c) => c.code === countryCode)
 
   if (!country) {
-    throw new Error(`Country code not found in Stripe config ${countryCode}`);
+    throw new Error(`Country code not found in Stripe config ${countryCode}`)
   }
-  return country;
-};
+  return country
+}
 
 /**
  * Return all the inputs that are required in given country
@@ -76,10 +76,10 @@ export const stripeCountryConfigs = countryCode => {
  * @return {Array<String>} array containing different input 'types'
  * (e.g. ['routingNumber', 'accountNumber'])
  */
-export const requiredInputs = countryCode => {
-  const bankAccountInputs = stripeCountryConfigs(countryCode).accountConfig;
-  return BANK_ACCOUNT_INPUTS.filter(inputType => bankAccountInputs[inputType]);
-};
+export const requiredInputs = (countryCode) => {
+  const bankAccountInputs = stripeCountryConfigs(countryCode).accountConfig
+  return BANK_ACCOUNT_INPUTS.filter((inputType) => bankAccountInputs[inputType])
+}
 
 /**
  * Translate input type to human readable string
@@ -91,11 +91,11 @@ export const requiredInputs = countryCode => {
  */
 export const inputTypeToString = (inputType, intl) => {
   if (BANK_ACCOUNT_INPUTS.includes(inputType)) {
-    return intl.formatMessage({ id: `StripeBankAccountTokenInputField.${inputType}.inline` });
+    return intl.formatMessage({ id: `StripeBankAccountTokenInputField.${inputType}.inline` })
   } else {
-    throw new Error(`Unknown inputType (${inputType}) given to validator`);
+    throw new Error(`Unknown inputType (${inputType}) given to validator`)
   }
-};
+}
 
 /**
  * Translate Stripe error
@@ -108,39 +108,39 @@ export const inputTypeToString = (inputType, intl) => {
  * @return {String} formatted Stripe error
  */
 export const translateStripeError = (country, intl, stripeError) => {
-  console.error('Stripe error:', stripeError); // eslint-disable-line no-console
-  const inputs = requiredInputs(country);
-  const ibanRequired = inputs[IBAN];
+  console.error('Stripe error:', stripeError) // eslint-disable-line no-console
+  const inputs = requiredInputs(country)
+  const ibanRequired = inputs[IBAN]
   if (ibanRequired) {
     return intl.formatMessage(
       {
         id: 'StripeBankAccountTokenInputField.genericStripeErrorIban',
         defaultMessage: stripeError.message,
       },
-      { country }
-    );
+      { country },
+    )
   } else {
-    const inputsAsStrings = inputs.map(inputType => inputTypeToString(inputType, intl));
+    const inputsAsStrings = inputs.map((inputType) => inputTypeToString(inputType, intl))
 
     const andTranslated = intl.formatMessage({
       id: 'StripeBankAccountTokenInputField.andBeforeLastItemInAList',
-    });
+    })
     // Print required inputs (to be included to error message)
     // e.g. "bank code, branch code and account number"
     const inputsInString =
       inputsAsStrings.length > 1
         ? inputsAsStrings.join(', ').replace(/,([^,]*)$/, `${andTranslated} $1`)
-        : inputsAsStrings[0];
+        : inputsAsStrings[0]
 
     return intl.formatMessage(
       {
         id: 'StripeBankAccountTokenInputField.genericStripeError',
         defaultMessage: stripeError.message,
       },
-      { country, inputs: inputsInString }
-    );
+      { country, inputs: inputsInString },
+    )
   }
-};
+}
 
 /**
  * Map inputs to correct Stripe keys
@@ -185,49 +185,49 @@ export const mapInputsToStripeAccountKeys = (country, values) => {
     case 'SE':
     case 'CH':
     case 'NO':
-      return { account_number: cleanedString(values[IBAN]) };
+      return { account_number: cleanedString(values[IBAN]) }
     case 'NZ':
       // NZ account number is typically presented in the format xx-xxxx-xxxxxxx-xxx
       // '-' separators must be removed before sending value to Stripe API
-      return { account_number: cleanedString(values[ACCOUNT_NUMBER]).replace(/-/g, '') };
+      return { account_number: cleanedString(values[ACCOUNT_NUMBER]).replace(/-/g, '') }
     case 'AU':
       return {
         routing_number: cleanedString(values[BSB]),
         account_number: cleanedString(values[ACCOUNT_NUMBER]),
-      };
+      }
     case 'CA':
       return {
         routing_number: cleanedString(values[TRANSIT_NUMBER]).concat(
-          cleanedString(values[INSTITUTION_NUMBER])
+          cleanedString(values[INSTITUTION_NUMBER]),
         ),
         account_number: cleanedString(values[ACCOUNT_NUMBER]),
-      };
+      }
     case 'GB':
       return {
         routing_number: cleanedString(values[SORT_CODE]),
         account_number: cleanedString(values[ACCOUNT_NUMBER]),
-      };
+      }
     case 'US':
       return {
         routing_number: cleanedString(values[ROUTING_NUMBER]),
         account_number: cleanedString(values[ACCOUNT_NUMBER]),
-      };
+      }
     case 'SG':
       return {
         routing_number: cleanedString(values[BANK_CODE]).concat(
           '-',
-          cleanedString(values[BRANCH_CODE])
+          cleanedString(values[BRANCH_CODE]),
         ),
         account_number: cleanedString(values[ACCOUNT_NUMBER]),
-      };
+      }
     case 'HK':
       return {
         routing_number: cleanedString(values[CLEARING_CODE]).concat(
           '-',
-          cleanedString(values[BRANCH_CODE])
+          cleanedString(values[BRANCH_CODE]),
         ),
         account_number: cleanedString(values[ACCOUNT_NUMBER]),
-      };
+      }
 
     case 'JP':
       return {
@@ -236,16 +236,16 @@ export const mapInputsToStripeAccountKeys = (country, values) => {
         routing_number: cleanedString(values[BANK_CODE]).concat(values[BRANCH_CODE]),
         account_number: cleanedString(values[ACCOUNT_NUMBER]),
         account_holder_name: values[ACCOUNT_OWNER_NAME],
-      };
+      }
 
     case 'MX':
       return {
         account_number: cleanedString(values[CLABE]),
-      };
+      }
     default:
-      throw new Error(`Not supported country (${country}) given to validator`);
+      throw new Error(`Not supported country (${country}) given to validator`)
   }
-};
+}
 
 /**
  * Translate messages related to different input types.
@@ -262,13 +262,13 @@ export const mapInputsToStripeAccountKeys = (country, values) => {
  */
 export const formatFieldMessage = (intl, inputType, messageType) => {
   if (!BANK_ACCOUNT_INPUTS.includes(inputType)) {
-    throw new Error(`inputType (${inputType}) must be one of ${BANK_ACCOUNT_INPUTS}`);
+    throw new Error(`inputType (${inputType}) must be one of ${BANK_ACCOUNT_INPUTS}`)
   }
 
   return intl.formatMessage({
     id: `StripeBankAccountTokenInputField.${inputType}.${messageType}`,
-  });
-};
+  })
+}
 
 /**
  * Remove all whitespace from the given string.
@@ -277,6 +277,6 @@ export const formatFieldMessage = (intl, inputType, messageType) => {
  *
  * @return {String} cleaned string
  */
-export const cleanedString = str => {
-  return str ? str.replace(/\s/g, '') : '';
-};
+export const cleanedString = (str) => {
+  return str ? str.replace(/\s/g, '') : ''
+}

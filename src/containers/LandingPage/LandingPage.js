@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { injectIntl, intlShape } from '../../util/reactIntl';
-import { isScrollingDisabled } from '../../ducks/UI.duck';
-import config from '../../config';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import { injectIntl, intlShape } from '../../util/reactIntl'
+import { isScrollingDisabled } from '../../ducks/UI.duck'
+import config from '../../config'
 import {
   Page,
   SectionHero,
@@ -16,23 +16,23 @@ import {
   LayoutWrapperMain,
   LayoutWrapperFooter,
   Footer,
-} from '../../components';
-import { TopbarContainer } from '../../containers';
+} from '../../components'
+import { TopbarContainer } from '../../containers'
 
-import facebookImage from '../../assets/saunatimeFacebook-1200x630.jpg';
-import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg';
-import css from './LandingPage.css';
+import facebookImage from '../../assets/saunatimeFacebook-1200x630.jpg'
+import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg'
+import css from './LandingPage.css'
 
-export const LandingPageComponent = props => {
-  const { history, intl, location, scrollingDisabled } = props;
+export const LandingPageComponent = (props) => {
+  const { history, intl, location, scrollingDisabled } = props
 
   // Schema for search engines (helps them to understand what this page is about)
   // http://schema.org
   // We are using JSON-LD format
-  const siteTitle = config.siteTitle;
-  const schemaTitle = intl.formatMessage({ id: 'LandingPage.schemaTitle' }, { siteTitle });
-  const schemaDescription = intl.formatMessage({ id: 'LandingPage.schemaDescription' });
-  const schemaImage = `${config.canonicalRootURL}${facebookImage}`;
+  const siteTitle = config.siteTitle
+  const schemaTitle = intl.formatMessage({ id: 'LandingPage.schemaTitle' }, { siteTitle })
+  const schemaDescription = intl.formatMessage({ id: 'LandingPage.schemaDescription' })
+  const schemaImage = `${config.canonicalRootURL}${facebookImage}`
 
   return (
     <Page
@@ -79,10 +79,10 @@ export const LandingPageComponent = props => {
         </LayoutWrapperFooter>
       </LayoutSingleColumn>
     </Page>
-  );
-};
+  )
+}
 
-const { bool, object } = PropTypes;
+const { bool, object } = PropTypes
 
 LandingPageComponent.propTypes = {
   scrollingDisabled: bool.isRequired,
@@ -93,13 +93,13 @@ LandingPageComponent.propTypes = {
 
   // from injectIntl
   intl: intlShape.isRequired,
-};
+}
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     scrollingDisabled: isScrollingDisabled(state),
-  };
-};
+  }
+}
 
 // Note: it is important that the withRouter HOC is **outside** the
 // connect HOC, otherwise React Router won't rerender any Route
@@ -107,10 +107,6 @@ const mapStateToProps = state => {
 // lifecycle hook.
 //
 // See: https://github.com/ReactTraining/react-router/issues/4671
-const LandingPage = compose(
-  withRouter,
-  connect(mapStateToProps),
-  injectIntl
-)(LandingPageComponent);
+const LandingPage = compose(withRouter, connect(mapStateToProps), injectIntl)(LandingPageComponent)
 
-export default LandingPage;
+export default LandingPage

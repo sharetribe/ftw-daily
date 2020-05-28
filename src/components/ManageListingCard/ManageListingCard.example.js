@@ -1,20 +1,20 @@
 /* eslint-disable no-console */
-import React from 'react';
-import ManageListingCard from './ManageListingCard';
+import React from 'react'
+import ManageListingCard from './ManageListingCard'
 import {
   LISTING_STATE_CLOSED,
   LISTING_STATE_PENDING_APPROVAL,
   LISTING_STATE_DRAFT,
-} from '../../util/types';
-import { createOwnListing, fakeIntl } from '../../util/test-data';
+} from '../../util/types'
+import { createOwnListing, fakeIntl } from '../../util/test-data'
 
-const noop = () => null;
+const noop = () => null
 
-const ManageListingCardWrapper = props => (
+const ManageListingCardWrapper = (props) => (
   <div style={{ maxWidth: '400px' }}>
     <ManageListingCard {...props} />
   </div>
-);
+)
 
 export const Published = {
   component: ManageListingCardWrapper,
@@ -29,7 +29,7 @@ export const Published = {
     onToggleMenu: noop,
     history: { push: noop },
   },
-};
+}
 
 export const Closed = {
   component: ManageListingCardWrapper,
@@ -46,7 +46,7 @@ export const Closed = {
     onToggleMenu: noop,
     history: { push: noop },
   },
-};
+}
 
 export const PendingApproval = {
   component: ManageListingCardWrapper,
@@ -63,7 +63,7 @@ export const PendingApproval = {
     onToggleMenu: noop,
     history: { push: noop },
   },
-};
+}
 
 export const Draft = {
   component: ManageListingCardWrapper,
@@ -80,4 +80,4 @@ export const Draft = {
     onToggleMenu: noop,
     history: { push: noop },
   },
-};
+}

@@ -1,9 +1,9 @@
-import React from 'react';
-import { renderShallow } from '../../util/test-helpers';
-import { fakeIntl } from '../../util/test-data';
-import { AuthenticationPageComponent } from './AuthenticationPage';
+import React from 'react'
+import { renderShallow } from '../../util/test-helpers'
+import { fakeIntl } from '../../util/test-data'
+import { AuthenticationPageComponent } from './AuthenticationPage'
 
-const noop = () => null;
+const noop = () => null
 
 describe('AuthenticationPageComponent', () => {
   it('matches snapshot', () => {
@@ -22,8 +22,8 @@ describe('AuthenticationPageComponent', () => {
       intl: fakeIntl,
       sendVerificationEmailInProgress: false,
       onResendVerificationEmail: noop,
-    };
-    const tree = renderShallow(<AuthenticationPageComponent {...props} />);
-    expect(tree).toMatchSnapshot();
-  });
-});
+    }
+    const tree = renderShallow(<AuthenticationPageComponent {...props} />)
+    expect(tree).toMatchSnapshot()
+  })
+})

@@ -1,15 +1,15 @@
-import React from 'react';
-import { bool, func, object, shape, string } from 'prop-types';
-import classNames from 'classnames';
-import { FormattedMessage } from '../../util/reactIntl';
-import { ensureOwnListing } from '../../util/data';
-import { LISTING_STATE_DRAFT } from '../../util/types';
-import { ListingLink } from '../../components';
-import { EditListingAvailabilityForm } from '../../forms';
+import React from 'react'
+import { bool, func, object, shape, string } from 'prop-types'
+import classNames from 'classnames'
+import { FormattedMessage } from '../../util/reactIntl'
+import { ensureOwnListing } from '../../util/data'
+import { LISTING_STATE_DRAFT } from '../../util/types'
+import { ListingLink } from '../../components'
+import { EditListingAvailabilityForm } from '../../forms'
 
-import css from './EditListingAvailabilityPanel.css';
+import css from './EditListingAvailabilityPanel.css'
 
-const EditListingAvailabilityPanel = props => {
+const EditListingAvailabilityPanel = (props) => {
   const {
     className,
     rootClassName,
@@ -23,11 +23,11 @@ const EditListingAvailabilityPanel = props => {
     panelUpdated,
     updateInProgress,
     errors,
-  } = props;
+  } = props
 
-  const classes = classNames(rootClassName || css.root, className);
-  const currentListing = ensureOwnListing(listing);
-  const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
+  const classes = classNames(rootClassName || css.root, className)
+  const currentListing = ensureOwnListing(listing)
+  const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT
   const defaultAvailabilityPlan = {
     type: 'availability-plan/day',
     entries: [
@@ -39,8 +39,8 @@ const EditListingAvailabilityPanel = props => {
       { dayOfWeek: 'sat', seats: 1 },
       { dayOfWeek: 'sun', seats: 1 },
     ],
-  };
-  const availabilityPlan = currentListing.attributes.availabilityPlan || defaultAvailabilityPlan;
+  }
+  const availabilityPlan = currentListing.attributes.availabilityPlan || defaultAvailabilityPlan
 
   return (
     <div className={classes}>
@@ -65,7 +65,7 @@ const EditListingAvailabilityPanel = props => {
           // I.e. this listing is available every night.
           // Exceptions are handled with live edit through a calendar,
           // which is visible on this panel.
-          onSubmit({ availabilityPlan });
+          onSubmit({ availabilityPlan })
         }}
         onChange={onChange}
         saveActionMsg={submitButtonText}
@@ -76,14 +76,14 @@ const EditListingAvailabilityPanel = props => {
         updateInProgress={updateInProgress}
       />
     </div>
-  );
-};
+  )
+}
 
 EditListingAvailabilityPanel.defaultProps = {
   className: null,
   rootClassName: null,
   listing: null,
-};
+}
 
 EditListingAvailabilityPanel.propTypes = {
   className: string,
@@ -106,6 +106,6 @@ EditListingAvailabilityPanel.propTypes = {
   panelUpdated: bool.isRequired,
   updateInProgress: bool.isRequired,
   errors: object.isRequired,
-};
+}
 
-export default EditListingAvailabilityPanel;
+export default EditListingAvailabilityPanel

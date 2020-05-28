@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import { bool, func, number, object, string } from 'prop-types';
-import { injectIntl, intlShape } from '../../util/reactIntl';
+import React, { Component } from 'react'
+import { bool, func, number, object, string } from 'prop-types'
+import { injectIntl, intlShape } from '../../util/reactIntl'
 
-import { FieldDateRangeController, FilterPopup, FilterPlain } from '../../components';
-import css from './BookingDateRangeFilter.css';
+import { FieldDateRangeController, FilterPopup, FilterPlain } from '../../components'
+import css from './BookingDateRangeFilter.css'
 
 export class BookingDateRangeFilterComponent extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.popupControllerRef = null;
-    this.plainControllerRef = null;
+    this.popupControllerRef = null
+    this.plainControllerRef = null
   }
 
   render() {
@@ -25,54 +25,54 @@ export class BookingDateRangeFilterComponent extends Component {
       urlParam,
       intl,
       ...rest
-    } = this.props;
+    } = this.props
 
-    const isSelected = !!initialValuesRaw && !!initialValuesRaw.dates;
-    const initialValues = isSelected ? initialValuesRaw : { dates: null };
+    const isSelected = !!initialValuesRaw && !!initialValuesRaw.dates
+    const initialValues = isSelected ? initialValuesRaw : { dates: null }
 
-    const startDate = isSelected ? initialValues.dates.startDate : null;
-    const endDate = isSelected ? initialValues.dates.endDate : null;
+    const startDate = isSelected ? initialValues.dates.startDate : null
+    const endDate = isSelected ? initialValues.dates.endDate : null
 
     const format = {
       month: 'short',
       day: 'numeric',
-    };
+    }
 
-    const formattedStartDate = isSelected ? intl.formatDate(startDate, format) : null;
-    const formattedEndDate = isSelected ? intl.formatDate(endDate, format) : null;
+    const formattedStartDate = isSelected ? intl.formatDate(startDate, format) : null
+    const formattedEndDate = isSelected ? intl.formatDate(endDate, format) : null
 
     const labelForPlain = isSelected
       ? intl.formatMessage(
           { id: 'BookingDateRangeFilter.labelSelectedPlain' },
           {
             dates: `${formattedStartDate} - ${formattedEndDate}`,
-          }
+          },
         )
-      : intl.formatMessage({ id: 'BookingDateRangeFilter.labelPlain' });
+      : intl.formatMessage({ id: 'BookingDateRangeFilter.labelPlain' })
 
     const labelForPopup = isSelected
       ? intl.formatMessage(
           { id: 'BookingDateRangeFilter.labelSelectedPopup' },
           {
             dates: `${formattedStartDate} - ${formattedEndDate}`,
-          }
+          },
         )
-      : intl.formatMessage({ id: 'BookingDateRangeFilter.labelPopup' });
+      : intl.formatMessage({ id: 'BookingDateRangeFilter.labelPopup' })
 
     const onClearPopupMaybe =
       this.popupControllerRef && this.popupControllerRef.onReset
         ? { onClear: () => this.popupControllerRef.onReset(null, null) }
-        : {};
+        : {}
 
     const onCancelPopupMaybe =
       this.popupControllerRef && this.popupControllerRef.onReset
         ? { onCancel: () => this.popupControllerRef.onReset(startDate, endDate) }
-        : {};
+        : {}
 
     const onClearPlainMaybe =
       this.plainControllerRef && this.plainControllerRef.onReset
         ? { onClear: () => this.plainControllerRef.onReset(null, null) }
-        : {};
+        : {}
 
     return showAsPopup ? (
       <FilterPopup
@@ -93,8 +93,8 @@ export class BookingDateRangeFilterComponent extends Component {
       >
         <FieldDateRangeController
           name="dates"
-          controllerRef={node => {
-            this.popupControllerRef = node;
+          controllerRef={(node) => {
+            this.popupControllerRef = node
           }}
         />
       </FilterPopup>
@@ -115,12 +115,12 @@ export class BookingDateRangeFilterComponent extends Component {
       >
         <FieldDateRangeController
           name="dates"
-          controllerRef={node => {
-            this.plainControllerRef = node;
+          controllerRef={(node) => {
+            this.plainControllerRef = node
           }}
         />
       </FilterPlain>
-    );
+    )
   }
 }
 
@@ -131,7 +131,7 @@ BookingDateRangeFilterComponent.defaultProps = {
   liveEdit: false,
   initialValues: null,
   contentPlacementOffset: 0,
-};
+}
 
 BookingDateRangeFilterComponent.propTypes = {
   rootClassName: string,
@@ -146,8 +146,8 @@ BookingDateRangeFilterComponent.propTypes = {
 
   // form injectIntl
   intl: intlShape.isRequired,
-};
+}
 
-const BookingDateRangeFilter = injectIntl(BookingDateRangeFilterComponent);
+const BookingDateRangeFilter = injectIntl(BookingDateRangeFilterComponent)
 
-export default BookingDateRangeFilter;
+export default BookingDateRangeFilter

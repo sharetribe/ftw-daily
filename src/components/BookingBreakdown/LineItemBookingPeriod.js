@@ -1,13 +1,13 @@
-import React from 'react';
-import { FormattedMessage, FormattedDate } from '../../util/reactIntl';
-import moment from 'moment';
-import { LINE_ITEM_NIGHT, DATE_TYPE_DATE, propTypes } from '../../util/types';
-import { dateFromAPIToLocalNoon } from '../../util/dates';
+import React from 'react'
+import { FormattedMessage, FormattedDate } from '../../util/reactIntl'
+import moment from 'moment'
+import { LINE_ITEM_NIGHT, DATE_TYPE_DATE, propTypes } from '../../util/types'
+import { dateFromAPIToLocalNoon } from '../../util/dates'
 
-import css from './BookingBreakdown.css';
+import css from './BookingBreakdown.css'
 
-const BookingPeriod = props => {
-  const { startDate, endDate, dateType } = props;
+const BookingPeriod = (props) => {
+  const { startDate, endDate, dateType } = props
 
   const timeFormatOptions =
     dateType === DATE_TYPE_DATE
@@ -18,12 +18,12 @@ const BookingPeriod = props => {
           weekday: 'short',
           hour: 'numeric',
           minute: 'numeric',
-        };
+        }
 
   const dateFormatOptions = {
     month: 'short',
     day: 'numeric',
-  };
+  }
 
   return (
     <>
@@ -53,22 +53,22 @@ const BookingPeriod = props => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-const LineItemBookingPeriod = props => {
-  const { booking, unitType, dateType } = props;
+const LineItemBookingPeriod = (props) => {
+  const { booking, unitType, dateType } = props
 
   // Attributes: displayStart and displayEnd can be used to differentiate shown time range
   // from actual start and end times used for availability reservation. It can help in situations
   // where there are preparation time needed between bookings.
   // Read more: https://www.sharetribe.com/api-reference/marketplace.html#bookings
-  const { start, end, displayStart, displayEnd } = booking.attributes;
-  const localStartDate = dateFromAPIToLocalNoon(displayStart || start);
-  const localEndDateRaw = dateFromAPIToLocalNoon(displayEnd || end);
+  const { start, end, displayStart, displayEnd } = booking.attributes
+  const localStartDate = dateFromAPIToLocalNoon(displayStart || start)
+  const localEndDateRaw = dateFromAPIToLocalNoon(displayEnd || end)
 
-  const isNightly = unitType === LINE_ITEM_NIGHT;
-  const endDay = isNightly ? localEndDateRaw : moment(localEndDateRaw).subtract(1, 'days');
+  const isNightly = unitType === LINE_ITEM_NIGHT
+  const endDay = isNightly ? localEndDateRaw : moment(localEndDateRaw).subtract(1, 'days')
 
   return (
     <>
@@ -77,13 +77,13 @@ const LineItemBookingPeriod = props => {
       </div>
       <hr className={css.totalDivider} />
     </>
-  );
-};
-LineItemBookingPeriod.defaultProps = { dateType: null };
+  )
+}
+LineItemBookingPeriod.defaultProps = { dateType: null }
 
 LineItemBookingPeriod.propTypes = {
   booking: propTypes.booking.isRequired,
   dateType: propTypes.dateType,
-};
+}
 
-export default LineItemBookingPeriod;
+export default LineItemBookingPeriod

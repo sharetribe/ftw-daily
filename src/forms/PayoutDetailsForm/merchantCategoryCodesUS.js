@@ -289,4 +289,4 @@ const merchantCategoryCodes = [
   { "mcc": "5935", "label": "Wrecking and Salvage Yards", "category": "wrecking_and_salvage_yards" },
 ];
 
-export default merchantCategoryCodes;
+export default merchantCategoryCodes

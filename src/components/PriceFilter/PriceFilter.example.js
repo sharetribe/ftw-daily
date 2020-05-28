@@ -1,46 +1,46 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
-import { stringify, parse } from '../../util/urlHelpers';
+import React from 'react'
+import { withRouter } from 'react-router-dom'
+import { stringify, parse } from '../../util/urlHelpers'
 
-import PriceFilter from './PriceFilter';
+import PriceFilter from './PriceFilter'
 
-const URL_PARAM = 'pub_price';
-const RADIX = 10;
+const URL_PARAM = 'pub_price'
+const RADIX = 10
 
 // Helper for submitting example
 const handleSubmit = (urlParam, values, history) => {
-  const { minPrice, maxPrice } = values || {};
+  const { minPrice, maxPrice } = values || {}
   const queryParams =
     minPrice != null && maxPrice != null
       ? `?${stringify({ [urlParam]: [minPrice, maxPrice].join(',') })}`
-      : '';
-  history.push(`${window.location.pathname}${queryParams}`);
-};
+      : ''
+  history.push(`${window.location.pathname}${queryParams}`)
+}
 
-const PriceFilterWrapper = withRouter(props => {
-  const { history, location } = props;
+const PriceFilterWrapper = withRouter((props) => {
+  const { history, location } = props
 
-  const params = parse(location.search);
-  const price = params[URL_PARAM];
-  const valuesFromParams = !!price ? price.split(',').map(v => Number.parseInt(v, RADIX)) : [];
+  const params = parse(location.search)
+  const price = params[URL_PARAM]
+  const valuesFromParams = !!price ? price.split(',').map((v) => Number.parseInt(v, RADIX)) : []
   const initialValues = !!price
     ? {
         minPrice: valuesFromParams[0],
         maxPrice: valuesFromParams[1],
       }
-    : null;
+    : null
 
   return (
     <PriceFilter
       {...props}
       initialValues={initialValues}
       onSubmit={(urlParam, values) => {
-        console.log('Submit PriceFilterForm with (unformatted) values:', values);
-        handleSubmit(urlParam, values, history);
+        console.log('Submit PriceFilterForm with (unformatted) values:', values)
+        handleSubmit(urlParam, values, history)
       }}
     />
-  );
-});
+  )
+})
 
 export const PriceFilterPopup = {
   component: PriceFilterWrapper,
@@ -57,7 +57,7 @@ export const PriceFilterPopup = {
     // onSubmit: handled inside wrapper
   },
   group: 'misc',
-};
+}
 
 export const PriceFilterPlain = {
   component: PriceFilterWrapper,
@@ -74,4 +74,4 @@ export const PriceFilterPlain = {
     // onSubmit: handled inside wrapper
   },
   group: 'misc',
-};
+}

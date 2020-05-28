@@ -1,13 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
-import css from './ManageListingCard.css';
+import css from './ManageListingCard.css'
 
-const MenuIcon = props => {
-  const { className, isActive } = props;
-  const classes = classNames(css.menuIcon, className);
-  const filter = isActive ? '' : 'url(#a)';
+const MenuIcon = (props) => {
+  const { className, isActive } = props
+  const classes = classNames(css.menuIcon, className)
+  const filter = isActive ? '' : 'url(#a)'
   return (
     <svg
       className={classes}
@@ -30,19 +30,19 @@ const MenuIcon = props => {
         <path d="M348 24c-1.105 0-2-.895-2-2s.895-2 2-2 2 .895 2 2-.895 2-2 2zm7 0c-1.105 0-2-.895-2-2s.895-2 2-2 2 .895 2 2-.895 2-2 2zm7 0c-1.105 0-2-.895-2-2s.895-2 2-2 2 .895 2 2-.895 2-2 2z" />
       </g>
     </svg>
-  );
-};
+  )
+}
 
 MenuIcon.defaultProps = {
   className: null,
   isActive: false,
-};
+}
 
-const { bool, string } = PropTypes;
+const { bool, string } = PropTypes
 
 MenuIcon.propTypes = {
   className: string,
   isActive: bool,
-};
+}
 
-export default MenuIcon;
+export default MenuIcon

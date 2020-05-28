@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   createUser,
   createCurrentUser,
@@ -7,7 +7,7 @@ import {
   createListing,
   createTxTransition,
   createReview,
-} from '../../util/test-data';
+} from '../../util/test-data'
 import {
   TRANSITION_ACCEPT,
   TRANSITION_COMPLETE,
@@ -21,10 +21,10 @@ import {
   TRANSITION_REVIEW_2_BY_PROVIDER,
   TX_TRANSITION_ACTOR_CUSTOMER,
   TX_TRANSITION_ACTOR_PROVIDER,
-} from '../../util/transaction';
-import ActivityFeed from './ActivityFeed';
+} from '../../util/transaction'
+import ActivityFeed from './ActivityFeed'
 
-const noop = () => null;
+const noop = () => null
 
 export const Empty = {
   component: ActivityFeed,
@@ -36,7 +36,7 @@ export const Empty = {
     fetchMessagesInProgress: false,
   },
   group: 'messages',
-};
+}
 
 export const WithoutCurrentUser = {
   component: ActivityFeed,
@@ -51,7 +51,7 @@ export const WithoutCurrentUser = {
     fetchMessagesInProgress: false,
   },
   group: 'messages',
-};
+}
 
 export const WithCurrentUser = {
   component: ActivityFeed,
@@ -70,7 +70,7 @@ export const WithCurrentUser = {
     fetchMessagesInProgress: false,
   },
   group: 'messages',
-};
+}
 
 export const WithTransitions = {
   component: ActivityFeed,
@@ -112,7 +112,7 @@ export const WithTransitions = {
     fetchMessagesInProgress: false,
   },
   group: 'messages',
-};
+}
 
 export const WithMessagesTransitionsAndReviews = {
   component: ActivityFeed,
@@ -164,12 +164,12 @@ export const WithMessagesTransitionsAndReviews = {
         createReview(
           'review1',
           { createdAt: new Date(Date.UTC(2017, 10, 9, 11, 34)), rating: 3, type: 'ofCustomer' },
-          { author: createUser('user2'), subject: createUser('user1') }
+          { author: createUser('user2'), subject: createUser('user1') },
         ),
         createReview(
           'review2',
           { createdAt: new Date(Date.UTC(2017, 10, 9, 12, 34)), rating: 5, type: 'ofProvider' },
-          { author: createUser('user1'), subject: createUser('user2') }
+          { author: createUser('user1'), subject: createUser('user2') },
         ),
       ],
     }),
@@ -177,22 +177,22 @@ export const WithMessagesTransitionsAndReviews = {
       createMessage(
         'msg1',
         { createdAt: new Date(Date.UTC(2017, 10, 9, 8, 11)) },
-        { sender: createUser('user1') }
+        { sender: createUser('user1') },
       ),
       createMessage(
         'msg2',
         { createdAt: new Date(Date.UTC(2017, 10, 9, 8, 14)) },
-        { sender: createUser('user1') }
+        { sender: createUser('user1') },
       ),
       createMessage(
         'msg3',
         { createdAt: new Date(Date.UTC(2017, 10, 9, 8, 17)) },
-        { sender: createUser('user2') }
+        { sender: createUser('user2') },
       ),
       createMessage(
         'msg4',
         { createdAt: new Date(Date.UTC(2017, 10, 12, 13, 20)) },
-        { sender: createUser('user2') }
+        { sender: createUser('user2') },
       ),
     ],
     hasOlderMessages: false,
@@ -201,7 +201,7 @@ export const WithMessagesTransitionsAndReviews = {
     fetchMessagesInProgress: false,
   },
   group: 'messages',
-};
+}
 
 export const WithAReviewFromBothUsers = {
   component: ActivityFeed,
@@ -215,12 +215,12 @@ export const WithAReviewFromBothUsers = {
         createReview(
           'review1',
           { createdAt: new Date(Date.UTC(2017, 10, 9, 8, 10)), rating: 3, type: 'ofProvider' },
-          { author: createUser('user1'), subject: createUser('user2') }
+          { author: createUser('user1'), subject: createUser('user2') },
         ),
         createReview(
           'review2',
           { createdAt: new Date(Date.UTC(2017, 10, 10, 8, 10)), rating: 5, type: 'ofCustomer' },
-          { author: createUser('user2'), subject: createUser('user1') }
+          { author: createUser('user2'), subject: createUser('user1') },
         ),
       ],
       lastTransition: TRANSITION_REVIEW_2_BY_PROVIDER,
@@ -244,12 +244,12 @@ export const WithAReviewFromBothUsers = {
     fetchMessagesInProgress: false,
   },
   group: 'messages',
-};
+}
 
 class PagedFeed extends Component {
   constructor(props) {
-    super(props);
-    this.state = { showAllMessages: false };
+    super(props)
+    this.state = { showAllMessages: false }
   }
   render() {
     const dates = [
@@ -260,27 +260,27 @@ class PagedFeed extends Component {
       new Date(Date.UTC(2017, 10, 24, 12)),
       new Date(Date.UTC(2017, 10, 25, 12)),
       new Date(Date.UTC(2017, 10, 26, 12)),
-    ];
+    ]
 
-    const currentUser = createCurrentUser('customer');
-    const customer = createUser('customer');
-    const provider = createUser('provider');
+    const currentUser = createCurrentUser('customer')
+    const customer = createUser('customer')
+    const provider = createUser('provider')
 
     const trans1 = createTxTransition({
       createdAt: dates[0],
       by: TX_TRANSITION_ACTOR_CUSTOMER,
       transition: TRANSITION_REQUEST_PAYMENT,
-    });
+    })
     const trans2 = createTxTransition({
       createdAt: dates[0],
       by: TX_TRANSITION_ACTOR_CUSTOMER,
       transition: TRANSITION_CONFIRM_PAYMENT,
-    });
+    })
     const trans3 = createTxTransition({
       createdAt: dates[2],
       by: TX_TRANSITION_ACTOR_PROVIDER,
       transition: TRANSITION_ACCEPT,
-    });
+    })
 
     // Last transition timestamp is interleaved between the last two
     // messages.
@@ -288,15 +288,15 @@ class PagedFeed extends Component {
       createdAt: dates[5],
       by: TX_TRANSITION_ACTOR_CUSTOMER,
       transition: TRANSITION_COMPLETE,
-    });
+    })
 
     // First message timestamp is interleaved between the first two
     // transitions.
-    const msg1 = createMessage('msg1', { createdAt: dates[1] }, { sender: customer });
+    const msg1 = createMessage('msg1', { createdAt: dates[1] }, { sender: customer })
 
-    const msg2 = createMessage('msg2', { createdAt: dates[3] }, { sender: provider });
-    const msg3 = createMessage('msg3', { createdAt: dates[4] }, { sender: customer });
-    const msg4 = createMessage('msg4', { createdAt: dates[6] }, { sender: customer });
+    const msg2 = createMessage('msg2', { createdAt: dates[3] }, { sender: provider })
+    const msg3 = createMessage('msg3', { createdAt: dates[4] }, { sender: customer })
+    const msg4 = createMessage('msg4', { createdAt: dates[6] }, { sender: customer })
 
     const transaction = createTransaction({
       id: 'tx1',
@@ -306,13 +306,13 @@ class PagedFeed extends Component {
       listing: createListing('listing'),
       customer,
       provider,
-    });
-    const messages = this.state.showAllMessages ? [msg1, msg2, msg3, msg4] : [msg2, msg3, msg4];
+    })
+    const messages = this.state.showAllMessages ? [msg1, msg2, msg3, msg4] : [msg2, msg3, msg4]
 
     const handleShowOlder = () => {
-      console.log('show older messages');
-      this.setState({ showAllMessages: true });
-    };
+      console.log('show older messages')
+      this.setState({ showAllMessages: true })
+    }
 
     const feedProps = {
       currentUser,
@@ -322,8 +322,8 @@ class PagedFeed extends Component {
       onOpenReviewModal: noop,
       onShowOlderMessages: handleShowOlder,
       fetchMessagesInProgress: false,
-    };
-    return <ActivityFeed {...feedProps} />;
+    }
+    return <ActivityFeed {...feedProps} />
   }
 }
 
@@ -331,4 +331,4 @@ export const WithMessagePaging = {
   component: PagedFeed,
   props: {},
   group: 'messages',
-};
+}

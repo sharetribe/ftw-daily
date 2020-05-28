@@ -1,12 +1,12 @@
-import React from 'react';
-import { node, string } from 'prop-types';
-import classNames from 'classnames';
-import { Field } from 'react-final-form';
+import React from 'react'
+import { node, string } from 'prop-types'
+import classNames from 'classnames'
+import { Field } from 'react-final-form'
 
-import css from './FieldCheckbox.css';
+import css from './FieldCheckbox.css'
 
-const IconCheckbox = props => {
-  const { className, checkedClassName, boxClassName } = props;
+const IconCheckbox = (props) => {
+  const { className, checkedClassName, boxClassName } = props
   return (
     <svg className={className} width="14" height="14" xmlns="http://www.w3.org/2000/svg">
       <g fill="none" fillRule="evenodd">
@@ -27,14 +27,14 @@ const IconCheckbox = props => {
         />
       </g>
     </svg>
-  );
-};
+  )
+}
 
-IconCheckbox.defaultProps = { className: null, checkedClassName: null, boxClassName: null };
+IconCheckbox.defaultProps = { className: null, checkedClassName: null, boxClassName: null }
 
-IconCheckbox.propTypes = { className: string, checkedClassName: string, boxClassName: string };
+IconCheckbox.propTypes = { className: string, checkedClassName: string, boxClassName: string }
 
-const FieldCheckboxComponent = props => {
+const FieldCheckboxComponent = (props) => {
   const {
     rootClassName,
     className,
@@ -44,23 +44,23 @@ const FieldCheckboxComponent = props => {
     label,
     useSuccessColor,
     ...rest
-  } = props;
+  } = props
 
-  const classes = classNames(rootClassName || css.root, className);
+  const classes = classNames(rootClassName || css.root, className)
   const checkboxProps = {
     id,
     className: css.input,
     component: 'input',
     type: 'checkbox',
     ...rest,
-  };
+  }
 
   const successColorVariantMaybe = useSuccessColor
     ? {
         checkedClassName: css.checkedSuccess,
         boxClassName: css.boxSuccess,
       }
-    : {};
+    : {}
 
   return (
     <span className={classes}>
@@ -72,8 +72,8 @@ const FieldCheckboxComponent = props => {
         <span className={classNames(css.text, textClassName || css.textRoot)}>{label}</span>
       </label>
     </span>
-  );
-};
+  )
+}
 
 FieldCheckboxComponent.defaultProps = {
   className: null,
@@ -81,7 +81,7 @@ FieldCheckboxComponent.defaultProps = {
   svgClassName: null,
   textClassName: null,
   label: null,
-};
+}
 
 FieldCheckboxComponent.propTypes = {
   className: string,
@@ -98,6 +98,6 @@ FieldCheckboxComponent.propTypes = {
 
   // Checkbox needs a value that is passed forward when user checks the checkbox
   value: string.isRequired,
-};
+}
 
-export default FieldCheckboxComponent;
+export default FieldCheckboxComponent

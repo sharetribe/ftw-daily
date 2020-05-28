@@ -1,11 +1,11 @@
-import React from 'react';
-import { FormattedMessage } from '../../util/reactIntl';
-import { UserCard, Modal } from '../../components';
-import { EnquiryForm } from '../../forms';
+import React from 'react'
+import { FormattedMessage } from '../../util/reactIntl'
+import { UserCard, Modal } from '../../components'
+import { EnquiryForm } from '../../forms'
 
-import css from './ListingPage.css';
+import css from './ListingPage.css'
 
-const SectionHostMaybe = props => {
+const SectionHostMaybe = (props) => {
   const {
     title,
     listing,
@@ -18,10 +18,10 @@ const SectionHostMaybe = props => {
     onSubmitEnquiry,
     currentUser,
     onManageDisableScrolling,
-  } = props;
+  } = props
 
   if (!listing.author) {
-    return null;
+    return null
   }
 
   return (
@@ -49,7 +49,7 @@ const SectionHostMaybe = props => {
         />
       </Modal>
     </div>
-  );
-};
+  )
+}
 
-export default SectionHostMaybe;
+export default SectionHostMaybe

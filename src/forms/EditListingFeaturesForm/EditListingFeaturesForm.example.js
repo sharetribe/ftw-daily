@@ -1,15 +1,15 @@
-import EditListingFeaturesForm from './EditListingFeaturesForm';
+import EditListingFeaturesForm from './EditListingFeaturesForm'
 
-const NAME = 'amenities';
+const NAME = 'amenities'
 
-const initialValueArray = ['towels', 'jacuzzi', 'bathroom'];
-const initialValues = { [NAME]: initialValueArray };
+const initialValueArray = ['towels', 'jacuzzi', 'bathroom']
+const initialValues = { [NAME]: initialValueArray }
 
 export const Amenities = {
   component: EditListingFeaturesForm,
   props: {
     name: NAME,
-    onSubmit: values => console.log('EditListingFeaturesForm submit:', values),
+    onSubmit: (values) => console.log('EditListingFeaturesForm submit:', values),
     initialValues: initialValues,
     saveActionMsg: 'Save amenities',
     updated: false,
@@ -18,4 +18,4 @@ export const Amenities = {
     ready: false,
   },
   group: 'forms',
-};
+}

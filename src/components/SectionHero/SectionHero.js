@@ -1,15 +1,15 @@
-import React from 'react';
-import { string } from 'prop-types';
-import { FormattedMessage } from '../../util/reactIntl';
-import classNames from 'classnames';
-import { NamedLink } from '../../components';
+import React from 'react'
+import { string } from 'prop-types'
+import { FormattedMessage } from '../../util/reactIntl'
+import classNames from 'classnames'
+import { NamedLink } from '../../components'
 
-import css from './SectionHero.css';
+import css from './SectionHero.css'
 
-const SectionHero = props => {
-  const { rootClassName, className } = props;
+const SectionHero = (props) => {
+  const { rootClassName, className } = props
 
-  const classes = classNames(rootClassName || css.root, className);
+  const classes = classNames(rootClassName || css.root, className)
 
   return (
     <div className={classes}>
@@ -32,14 +32,14 @@ const SectionHero = props => {
         </NamedLink>
       </div>
     </div>
-  );
-};
+  )
+}
 
-SectionHero.defaultProps = { rootClassName: null, className: null };
+SectionHero.defaultProps = { rootClassName: null, className: null }
 
 SectionHero.propTypes = {
   rootClassName: string,
   className: string,
-};
+}
 
-export default SectionHero;
+export default SectionHero

@@ -1,17 +1,17 @@
-import Decimal from 'decimal.js';
-import moment from 'moment';
-import { types as sdkTypes } from './sdkLoader';
-import { nightsBetween } from '../util/dates';
+import Decimal from 'decimal.js'
+import moment from 'moment'
+import { types as sdkTypes } from './sdkLoader'
+import { nightsBetween } from '../util/dates'
 import {
   TRANSITION_ACCEPT,
   TRANSITION_CONFIRM_PAYMENT,
   TRANSITION_REQUEST_PAYMENT,
   TX_TRANSITION_ACTOR_CUSTOMER,
   TX_TRANSITION_ACTOR_PROVIDER,
-} from '../util/transaction';
-import { LISTING_STATE_PUBLISHED, TIME_SLOT_DAY } from '../util/types';
+} from '../util/transaction'
+import { LISTING_STATE_PUBLISHED, TIME_SLOT_DAY } from '../util/types'
 
-const { UUID, LatLng, Money } = sdkTypes;
+const { UUID, LatLng, Money } = sdkTypes
 
 // Create a booking that conforms to the util/types booking schema
 export const createBooking = (id, attributes = {}) => ({
@@ -24,7 +24,7 @@ export const createBooking = (id, attributes = {}) => ({
     displayEnd: new Date(Date.UTC(2017, 5, 10)),
     ...attributes,
   },
-});
+})
 
 // Create a stripeAccount that conforms to the util/types stripeAccount schema
 export const createStripeAccount = (id, attributes = {}) => ({
@@ -34,7 +34,7 @@ export const createStripeAccount = (id, attributes = {}) => ({
     stripeAccountId: 'acc_testiaccountid',
     ...attributes,
   },
-});
+})
 
 // Create a user that conforms to the util/types user schema
 export const createUser = (id, attributes = {}) => ({
@@ -49,7 +49,7 @@ export const createUser = (id, attributes = {}) => ({
     },
     ...attributes,
   },
-});
+})
 
 // Create a user that conforms to the util/types currentUser schema
 export const createCurrentUser = (id, attributes = {}, includes = {}) => ({
@@ -69,10 +69,10 @@ export const createCurrentUser = (id, attributes = {}, includes = {}) => ({
     ...attributes,
   },
   ...includes,
-});
+})
 
 // Create a user that conforms to the util/types user schema
-export const createImage = id => ({
+export const createImage = (id) => ({
   id: new UUID(id),
   type: 'image',
   attributes: {
@@ -92,7 +92,7 @@ export const createImage = id => ({
       },
     },
   },
-});
+})
 
 // Create a user that conforms to the util/types listing schema
 export const createListing = (id, attributes = {}, includes = {}) => ({
@@ -109,7 +109,7 @@ export const createListing = (id, attributes = {}, includes = {}) => ({
     ...attributes,
   },
   ...includes,
-});
+})
 
 // Create a user that conforms to the util/types ownListing schema
 export const createOwnListing = (id, attributes = {}, includes = {}) => ({
@@ -138,18 +138,18 @@ export const createOwnListing = (id, attributes = {}, includes = {}) => ({
     ...attributes,
   },
   ...includes,
-});
+})
 
-export const createTxTransition = options => {
+export const createTxTransition = (options) => {
   return {
     createdAt: new Date(Date.UTC(2017, 4, 1)),
     by: TX_TRANSITION_ACTOR_CUSTOMER,
     transition: TRANSITION_REQUEST_PAYMENT,
     ...options,
-  };
-};
+  }
+}
 
-export const createTransaction = options => {
+export const createTransaction = (options) => {
   const {
     id,
     lastTransition = TRANSITION_ACCEPT,
@@ -178,8 +178,8 @@ export const createTransaction = options => {
         transition: TRANSITION_ACCEPT,
       }),
     ],
-  } = options;
-  const nightCount = booking ? nightsBetween(booking.attributes.start, booking.attributes.end) : 1;
+  } = options
+  const nightCount = booking ? nightsBetween(booking.attributes.start, booking.attributes.end) : 1
   return {
     id: new UUID(id),
     type: 'transaction',
@@ -213,8 +213,8 @@ export const createTransaction = options => {
     customer,
     provider,
     reviews,
-  };
-};
+  }
+}
 
 export const createMessage = (id, attributes = {}, includes = {}) => {
   return {
@@ -226,8 +226,8 @@ export const createMessage = (id, attributes = {}, includes = {}) => {
       ...attributes,
     },
     ...includes,
-  };
-};
+  }
+}
 
 export const createReview = (id, attributes = {}, includes = {}) => {
   return {
@@ -242,8 +242,8 @@ export const createReview = (id, attributes = {}, includes = {}) => {
       ...attributes,
     },
     ...includes,
-  };
-};
+  }
+}
 
 /**
  * Creates an array of time slot objects.
@@ -254,24 +254,22 @@ export const createReview = (id, attributes = {}, includes = {}) => {
  * @return {Array} array of time slots
  */
 export const createTimeSlots = (startDate, numberOfDays) => {
-  const startTime = moment.utc(startDate).startOf('day');
+  const startTime = moment.utc(startDate).startOf('day')
 
-  return Array.from({ length: numberOfDays }, (v, i) => i).map(i => {
+  return Array.from({ length: numberOfDays }, (v, i) => i).map((i) => {
     return {
       id: new UUID(i),
       type: 'timeSlot',
       attributes: {
-        start: moment(startTime)
-          .add(i, 'days')
-          .toDate(),
+        start: moment(startTime).add(i, 'days').toDate(),
         end: moment(startTime)
           .add(i + 1, 'days')
           .toDate(),
         type: TIME_SLOT_DAY,
       },
-    };
-  });
-};
+    }
+  })
+}
 
 // Default config for currency formatting in tests and examples.
 export const currencyConfig = {
@@ -281,25 +279,25 @@ export const currencyConfig = {
   useGrouping: true,
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-};
+}
 
-const pad = num => {
-  return num >= 0 && num < 10 ? `0${num}` : `${num}`;
-};
+const pad = (num) => {
+  return num >= 0 && num < 10 ? `0${num}` : `${num}`
+}
 
 // Create fake Internalization object to help with shallow rendering.
 export const fakeIntl = {
-  formatDate: d => `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}`,
-  formatHTMLMessage: d => d,
-  formatMessage: msg => msg.id,
-  formatNumber: d => d,
-  formatPlural: d => d,
-  formatRelativeTime: d => d,
-  formatTime: d => `${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}`,
+  formatDate: (d) => `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}`,
+  formatHTMLMessage: (d) => d,
+  formatMessage: (msg) => msg.id,
+  formatNumber: (d) => d,
+  formatPlural: (d) => d,
+  formatRelativeTime: (d) => d,
+  formatTime: (d) => `${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}`,
   now: () => Date.UTC(2017, 10, 23, 12, 59),
-};
+}
 
-const noop = () => null;
+const noop = () => null
 
 export const fakeFormProps = {
   anyTouched: false,
@@ -330,10 +328,10 @@ export const fakeFormProps = {
   submitting: false,
   pure: true,
   initialized: true,
-};
+}
 
 // Create fake viewport to help with shallow rendering
 export const fakeViewport = {
   width: 2100,
   height: 1339,
-};
+}

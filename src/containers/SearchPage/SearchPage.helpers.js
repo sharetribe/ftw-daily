@@ -1,8 +1,8 @@
-import intersection from 'lodash/intersection';
-import config from '../../config';
-import { createResourceLocatorString } from '../../util/routes';
-import { createSlug } from '../../util/urlHelpers';
-import routeConfiguration from '../../routeConfiguration';
+import intersection from 'lodash/intersection'
+import config from '../../config'
+import { createResourceLocatorString } from '../../util/routes'
+import { createSlug } from '../../util/urlHelpers'
+import routeConfiguration from '../../routeConfiguration'
 
 /**
  * Validates a filter search param agains a filters configuration.
@@ -14,35 +14,35 @@ import routeConfiguration from '../../routeConfiguration';
  * @param {Object} filters Filters configuration
  */
 export const validURLParamForExtendedData = (paramName, paramValueRaw, filters) => {
-  const filtersArray = Object.values(filters);
+  const filtersArray = Object.values(filters)
   // resolve configuration for this filter
-  const filterConfig = filtersArray.find(f => f.paramName === paramName);
+  const filterConfig = filtersArray.find((f) => f.paramName === paramName)
 
-  const paramValue = paramValueRaw.toString();
-  const valueArray = paramValue ? paramValue.split(',') : [];
+  const paramValue = paramValueRaw.toString()
+  const valueArray = paramValue ? paramValue.split(',') : []
 
   if (filterConfig && valueArray.length > 0) {
-    const { min, max, active } = filterConfig.config || {};
+    const { min, max, active } = filterConfig.config || {}
 
     if (filterConfig.options) {
       // Single and multiselect filters
-      const allowedValues = filterConfig.options.map(o => o.key);
+      const allowedValues = filterConfig.options.map((o) => o.key)
 
-      const validValues = intersection(valueArray, allowedValues).join(',');
-      return validValues.length > 0 ? { [paramName]: validValues } : {};
+      const validValues = intersection(valueArray, allowedValues).join(',')
+      return validValues.length > 0 ? { [paramName]: validValues } : {}
     } else if (filterConfig.config && min != null && max != null) {
       // Price filter
-      const validValues = valueArray.map(v => {
-        return v < min ? min : v > max ? max : v;
-      });
-      return validValues.length === 2 ? { [paramName]: validValues.join(',') } : {};
+      const validValues = valueArray.map((v) => {
+        return v < min ? min : v > max ? max : v
+      })
+      return validValues.length === 2 ? { [paramName]: validValues.join(',') } : {}
     } else if (filterConfig.config && active) {
       // Generic filter
-      return paramValue.length > 0 ? { [paramName]: paramValue } : {};
+      return paramValue.length > 0 ? { [paramName]: paramValue } : {}
     }
   }
-  return {};
-};
+  return {}
+}
 
 /**
  * Checks filter param value validity.
@@ -53,21 +53,21 @@ export const validURLParamForExtendedData = (paramName, paramValueRaw, filters) 
  * @param {Object} filters Filters configuration
  */
 export const validFilterParams = (params, filters) => {
-  const filterParamNames = Object.values(filters).map(f => f.paramName);
-  const paramEntries = Object.entries(params);
+  const filterParamNames = Object.values(filters).map((f) => f.paramName)
+  const paramEntries = Object.entries(params)
 
   return paramEntries.reduce((validParams, entry) => {
-    const paramName = entry[0];
-    const paramValue = entry[1];
+    const paramName = entry[0]
+    const paramValue = entry[1]
 
     return filterParamNames.includes(paramName)
       ? {
           ...validParams,
           ...validURLParamForExtendedData(paramName, paramValue, filters),
         }
-      : { ...validParams };
-  }, {});
-};
+      : { ...validParams }
+  }, {})
+}
 
 /**
  * Checks filter param value validity.
@@ -78,69 +78,69 @@ export const validFilterParams = (params, filters) => {
  * @param {Object} filters Filters configuration
  */
 export const validURLParamsForExtendedData = (params, filters) => {
-  const filterParamNames = Object.values(filters).map(f => f.paramName);
-  const paramEntries = Object.entries(params);
+  const filterParamNames = Object.values(filters).map((f) => f.paramName)
+  const paramEntries = Object.entries(params)
 
   return paramEntries.reduce((validParams, entry) => {
-    const paramName = entry[0];
-    const paramValue = entry[1];
+    const paramName = entry[0]
+    const paramValue = entry[1]
 
     return filterParamNames.includes(paramName)
       ? {
           ...validParams,
           ...validURLParamForExtendedData(paramName, paramValue, filters),
         }
-      : { ...validParams, [paramName]: paramValue };
-  }, {});
-};
+      : { ...validParams, [paramName]: paramValue }
+  }, {})
+}
 
 // extract search parameters, including a custom URL params
 // which are validated by mapping the values to marketplace custom config.
 export const pickSearchParamsOnly = (params, filters) => {
-  const { address, origin, bounds, ...rest } = params || {};
-  const boundsMaybe = bounds ? { bounds } : {};
-  const originMaybe = config.sortSearchByDistance && origin ? { origin } : {};
-  const filterParams = validFilterParams(rest, filters);
+  const { address, origin, bounds, ...rest } = params || {}
+  const boundsMaybe = bounds ? { bounds } : {}
+  const originMaybe = config.sortSearchByDistance && origin ? { origin } : {}
+  const filterParams = validFilterParams(rest, filters)
 
   return {
     ...boundsMaybe,
     ...originMaybe,
     ...filterParams,
-  };
-};
+  }
+}
 
 export const createSearchResultSchema = (listings, address, intl) => {
   // Schema for search engines (helps them to understand what this page is about)
   // http://schema.org
   // We are using JSON-LD format
-  const siteTitle = config.siteTitle;
-  const searchAddress = address || intl.formatMessage({ id: 'SearchPage.schemaMapSearch' });
-  const schemaDescription = intl.formatMessage({ id: 'SearchPage.schemaDescription' });
+  const siteTitle = config.siteTitle
+  const searchAddress = address || intl.formatMessage({ id: 'SearchPage.schemaMapSearch' })
+  const schemaDescription = intl.formatMessage({ id: 'SearchPage.schemaDescription' })
   const schemaTitle = intl.formatMessage(
     { id: 'SearchPage.schemaTitle' },
-    { searchAddress, siteTitle }
-  );
+    { searchAddress, siteTitle },
+  )
 
   const schemaListings = listings.map((l, i) => {
-    const title = l.attributes.title;
+    const title = l.attributes.title
     const pathToItem = createResourceLocatorString('ListingPage', routeConfiguration(), {
       id: l.id.uuid,
       slug: createSlug(title),
-    });
+    })
     return {
       '@type': 'ListItem',
       position: i,
       url: `${config.canonicalRootURL}${pathToItem}`,
       name: title,
-    };
-  });
+    }
+  })
 
   const schemaMainEntity = JSON.stringify({
     '@type': 'ItemList',
     name: searchAddress,
     itemListOrder: 'http://schema.org/ItemListOrderAscending',
     itemListElement: schemaListings,
-  });
+  })
   return {
     title: schemaTitle,
     description: schemaDescription,
@@ -151,5 +151,5 @@ export const createSearchResultSchema = (listings, address, intl) => {
       name: schemaTitle,
       mainEntity: [schemaMainEntity],
     },
-  };
-};
+  }
+}

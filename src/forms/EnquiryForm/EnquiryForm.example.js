@@ -1,4 +1,4 @@
-import EnquiryForm from './EnquiryForm';
+import EnquiryForm from './EnquiryForm'
 
 export const Empty = {
   component: EnquiryForm,
@@ -7,8 +7,8 @@ export const Empty = {
     listingTitle: 'Sauna with a view',
     authorDisplayName: 'Janne',
     onSubmit(values) {
-      console.log('submit with values:', values);
+      console.log('submit with values:', values)
     },
   },
   group: 'forms',
-};
+}

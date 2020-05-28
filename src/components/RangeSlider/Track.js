@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { array, node, string } from 'prop-types';
-import classNames from 'classnames';
+import React, { Component } from 'react'
+import { array, node, string } from 'prop-types'
+import classNames from 'classnames'
 
-import css from './Track.css';
+import css from './Track.css'
 
 class Track extends Component {
   render() {
-    const { rootClassName, className, children, handles, valueToPosition } = this.props;
-    const positionFromIndex = index => valueToPosition(handles[index]);
+    const { rootClassName, className, children, handles, valueToPosition } = this.props
+    const positionFromIndex = (index) => valueToPosition(handles[index])
 
-    const classes = classNames(rootClassName || css.root, className);
+    const classes = classNames(rootClassName || css.root, className)
     return (
       <div className={classes}>
         <div className={css.track} />
@@ -27,12 +27,12 @@ class Track extends Component {
                   }}
                 />,
               ]
-            : ranges;
+            : ranges
         }, [])}
 
         {children}
       </div>
-    );
+    )
   }
 }
 
@@ -41,13 +41,13 @@ Track.defaultProps = {
   className: null,
   children: null,
   handles: [],
-};
+}
 
 Track.propTypes = {
   rootClassName: string,
   className: string,
   children: node,
   handles: array,
-};
+}
 
-export default Track;
+export default Track

@@ -1,4 +1,4 @@
-import PropertyGroup from './PropertyGroup';
+import PropertyGroup from './PropertyGroup'
 
 const exampleOptions = [
   {
@@ -33,7 +33,7 @@ const exampleOptions = [
     key: 'own_food_allowed',
     label: 'Own food allowed',
   },
-];
+]
 
 export const WithSomeSelected = {
   component: PropertyGroup,
@@ -44,4 +44,4 @@ export const WithSomeSelected = {
     twoColumns: true,
   },
   group: 'misc',
-};
+}

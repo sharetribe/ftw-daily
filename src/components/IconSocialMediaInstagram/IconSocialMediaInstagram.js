@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
-import css from './IconSocialMediaInstagram.css';
+import css from './IconSocialMediaInstagram.css'
 
-const IconSocialMediaInstagram = props => {
-  const { rootClassName, className } = props;
-  const classes = classNames(rootClassName || css.root, className);
+const IconSocialMediaInstagram = (props) => {
+  const { rootClassName, className } = props
+  const classes = classNames(rootClassName || css.root, className)
   return (
     <svg className={classes} width="16" height="17" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -14,13 +14,13 @@ const IconSocialMediaInstagram = props => {
         fillRule="evenodd"
       />
     </svg>
-  );
-};
+  )
+}
 
-IconSocialMediaInstagram.defaultProps = { rootClassName: null, className: null };
+IconSocialMediaInstagram.defaultProps = { rootClassName: null, className: null }
 
-const { string } = PropTypes;
+const { string } = PropTypes
 
-IconSocialMediaInstagram.propTypes = { rootClassName: string, className: string };
+IconSocialMediaInstagram.propTypes = { rootClassName: string, className: string }
 
-export default IconSocialMediaInstagram;
+export default IconSocialMediaInstagram

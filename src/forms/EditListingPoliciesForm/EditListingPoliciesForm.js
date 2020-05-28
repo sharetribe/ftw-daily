@@ -1,18 +1,18 @@
-import React from 'react';
-import { bool, func, shape, string } from 'prop-types';
-import { compose } from 'redux';
-import { Form as FinalForm } from 'react-final-form';
-import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
-import classNames from 'classnames';
-import { propTypes } from '../../util/types';
-import { Form, Button, FieldTextInput } from '../../components';
+import React from 'react'
+import { bool, func, shape, string } from 'prop-types'
+import { compose } from 'redux'
+import { Form as FinalForm } from 'react-final-form'
+import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl'
+import classNames from 'classnames'
+import { propTypes } from '../../util/types'
+import { Form, Button, FieldTextInput } from '../../components'
 
-import css from './EditListingPoliciesForm.css';
+import css from './EditListingPoliciesForm.css'
 
-export const EditListingPoliciesFormComponent = props => (
+export const EditListingPoliciesFormComponent = (props) => (
   <FinalForm
     {...props}
-    render={formRenderProps => {
+    render={(formRenderProps) => {
       const {
         className,
         disabled,
@@ -25,31 +25,31 @@ export const EditListingPoliciesFormComponent = props => (
         updated,
         updateInProgress,
         fetchErrors,
-      } = formRenderProps;
+      } = formRenderProps
 
       const rulesLabelMessage = intl.formatMessage({
         id: 'EditListingPoliciesForm.rulesLabel',
-      });
+      })
       const rulesPlaceholderMessage = intl.formatMessage({
         id: 'EditListingPoliciesForm.rulesPlaceholder',
-      });
+      })
 
-      const { updateListingError, showListingsError } = fetchErrors || {};
+      const { updateListingError, showListingsError } = fetchErrors || {}
       const errorMessage = updateListingError ? (
         <p className={css.error}>
           <FormattedMessage id="EditListingPoliciesForm.updateFailed" />
         </p>
-      ) : null;
+      ) : null
       const errorMessageShowListing = showListingsError ? (
         <p className={css.error}>
           <FormattedMessage id="EditListingPoliciesForm.showListingFailed" />
         </p>
-      ) : null;
+      ) : null
 
-      const classes = classNames(css.root, className);
-      const submitReady = (updated && pristine) || ready;
-      const submitInProgress = updateInProgress;
-      const submitDisabled = invalid || disabled || submitInProgress;
+      const classes = classNames(css.root, className)
+      const submitReady = (updated && pristine) || ready
+      const submitInProgress = updateInProgress
+      const submitDisabled = invalid || disabled || submitInProgress
 
       return (
         <Form className={classes} onSubmit={handleSubmit}>
@@ -75,15 +75,15 @@ export const EditListingPoliciesFormComponent = props => (
             {saveActionMsg}
           </Button>
         </Form>
-      );
+      )
     }}
   />
-);
+)
 
 EditListingPoliciesFormComponent.defaultProps = {
   selectedPlace: null,
   updateError: null,
-};
+}
 
 EditListingPoliciesFormComponent.propTypes = {
   intl: intlShape.isRequired,
@@ -98,6 +98,6 @@ EditListingPoliciesFormComponent.propTypes = {
     showListingsError: propTypes.error,
     updateListingError: propTypes.error,
   }),
-};
+}
 
-export default compose(injectIntl)(EditListingPoliciesFormComponent);
+export default compose(injectIntl)(EditListingPoliciesFormComponent)

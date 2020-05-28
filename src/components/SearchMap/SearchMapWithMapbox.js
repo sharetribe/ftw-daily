@@ -1,25 +1,25 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { arrayOf, func, node, number, shape, string } from 'prop-types';
-import differenceBy from 'lodash/differenceBy';
-import isEqual from 'lodash/isEqual';
-import classNames from 'classnames';
-import { types as sdkTypes } from '../../util/sdkLoader';
-import { parse } from '../../util/urlHelpers';
-import { propTypes } from '../../util/types';
-import { ensureListing } from '../../util/data';
-import { sdkBoundsToFixedCoordinates, hasSameSDKBounds } from '../../util/maps';
-import { SearchMapInfoCard, SearchMapPriceLabel, SearchMapGroupLabel } from '../../components';
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
+import { arrayOf, func, node, number, shape, string } from 'prop-types'
+import differenceBy from 'lodash/differenceBy'
+import isEqual from 'lodash/isEqual'
+import classNames from 'classnames'
+import { types as sdkTypes } from '../../util/sdkLoader'
+import { parse } from '../../util/urlHelpers'
+import { propTypes } from '../../util/types'
+import { ensureListing } from '../../util/data'
+import { sdkBoundsToFixedCoordinates, hasSameSDKBounds } from '../../util/maps'
+import { SearchMapInfoCard, SearchMapPriceLabel, SearchMapGroupLabel } from '../../components'
 
-import { groupedByCoordinates, reducedToArray } from './SearchMap.helpers.js';
-import css from './SearchMapWithMapbox.css';
+import { groupedByCoordinates, reducedToArray } from './SearchMap.helpers.js'
+import css from './SearchMapWithMapbox.css'
 
-export const LABEL_HANDLE = 'SearchMapLabel';
-export const INFO_CARD_HANDLE = 'SearchMapInfoCard';
-export const SOURCE_AUTOCOMPLETE = 'autocomplete';
-const BOUNDS_FIXED_PRECISION = 8;
+export const LABEL_HANDLE = 'SearchMapLabel'
+export const INFO_CARD_HANDLE = 'SearchMapInfoCard'
+export const SOURCE_AUTOCOMPLETE = 'autocomplete'
+const BOUNDS_FIXED_PRECISION = 8
 
-const { LatLng: SDKLatLng, LatLngBounds: SDKLatLngBounds } = sdkTypes;
+const { LatLng: SDKLatLng, LatLngBounds: SDKLatLngBounds } = sdkTypes
 
 /**
  * Fit part of map (descriped with bounds) to visible map-viewport
@@ -28,18 +28,18 @@ const { LatLng: SDKLatLng, LatLngBounds: SDKLatLngBounds } = sdkTypes;
  * @param {SDK.LatLngBounds} bounds - the area that needs to be visible when map loads.
  */
 export const fitMapToBounds = (map, bounds, options) => {
-  const { padding = 0, isAutocompleteSearch = false } = options;
+  const { padding = 0, isAutocompleteSearch = false } = options
 
   // map bounds as string literal for google.maps
-  const mapBounds = sdkBoundsToMapboxBounds(bounds);
-  const paddingOptionMaybe = padding == null ? { padding } : {};
-  const eventData = isAutocompleteSearch ? { searchSource: SOURCE_AUTOCOMPLETE } : {};
+  const mapBounds = sdkBoundsToMapboxBounds(bounds)
+  const paddingOptionMaybe = padding == null ? { padding } : {}
+  const eventData = isAutocompleteSearch ? { searchSource: SOURCE_AUTOCOMPLETE } : {}
 
   // If bounds are given, use it (defaults to center & zoom).
   if (map && mapBounds) {
-    map.fitBounds(mapBounds, { ...paddingOptionMaybe, linear: true, duration: 0 }, eventData);
+    map.fitBounds(mapBounds, { ...paddingOptionMaybe, linear: true, duration: 0 }, eventData)
   }
-};
+}
 
 /**
  * Convert Mapbox formatted LatLng object to Sharetribe SDK's LatLng coordinate format
@@ -50,16 +50,16 @@ export const fitMapToBounds = (map, bounds, options) => {
  *
  * @return {SDKLatLng} - Converted latLng coordinate
  */
-export const mapboxLngLatToSDKLatLng = lngLat => {
-  const mapboxLng = lngLat.lng;
+export const mapboxLngLatToSDKLatLng = (lngLat) => {
+  const mapboxLng = lngLat.lng
 
   // For bounding boxes that overlap the antimeridian Mapbox sometimes gives
   // longitude values outside -180 and 180 degrees.Those values are converted
   // so that longitude is always between -180 and 180.
-  const lng = mapboxLng > 180 ? mapboxLng - 360 : mapboxLng < -180 ? mapboxLng + 360 : mapboxLng;
+  const lng = mapboxLng > 180 ? mapboxLng - 360 : mapboxLng < -180 ? mapboxLng + 360 : mapboxLng
 
-  return new SDKLatLng(lngLat.lat, lng);
-};
+  return new SDKLatLng(lngLat.lat, lng)
+}
 
 /**
  * Convert Mapbox formatted bounds object to Sharetribe SDK's bounds format
@@ -68,15 +68,15 @@ export const mapboxLngLatToSDKLatLng = lngLat => {
  *
  * @return {SDKLatLngBounds} - Converted bounds
  */
-export const mapboxBoundsToSDKBounds = mapboxBounds => {
+export const mapboxBoundsToSDKBounds = (mapboxBounds) => {
   if (!mapboxBounds) {
-    return null;
+    return null
   }
 
-  const ne = mapboxBounds.getNorthEast();
-  const sw = mapboxBounds.getSouthWest();
-  return new SDKLatLngBounds(mapboxLngLatToSDKLatLng(ne), mapboxLngLatToSDKLatLng(sw));
-};
+  const ne = mapboxBounds.getNorthEast()
+  const sw = mapboxBounds.getSouthWest()
+  return new SDKLatLngBounds(mapboxLngLatToSDKLatLng(ne), mapboxLngLatToSDKLatLng(sw))
+}
 
 /**
  * Convert sdk bounds that overlap the antimeridian into values that can
@@ -87,19 +87,22 @@ export const mapboxBoundsToSDKBounds = mapboxBounds => {
  *
  * @return {LngLatBoundsLike} a bounding box that is compatible with Mapbox
  */
-const sdkBoundsToMapboxBounds = bounds => {
+const sdkBoundsToMapboxBounds = (bounds) => {
   if (!bounds) {
-    return null;
+    return null
   }
-  const { ne, sw } = bounds;
+  const { ne, sw } = bounds
 
   // if sw lng is > ne lng => the bounds overlap antimeridian
   // => flip the nw lng to the negative side so that the value
   // is less than -180
-  const swLng = sw.lng > ne.lng ? -360 + sw.lng : sw.lng;
+  const swLng = sw.lng > ne.lng ? -360 + sw.lng : sw.lng
 
-  return [[swLng, sw.lat], [ne.lng, ne.lat]];
-};
+  return [
+    [swLng, sw.lat],
+    [ne.lng, ne.lat],
+  ]
+}
 
 /**
  * Return map bounds as SDKBounds
@@ -108,7 +111,7 @@ const sdkBoundsToMapboxBounds = bounds => {
  *
  * @return {SDKLatLngBounds} - Converted bounds of given map
  */
-export const getMapBounds = map => mapboxBoundsToSDKBounds(map.getBounds());
+export const getMapBounds = (map) => mapboxBoundsToSDKBounds(map.getBounds())
 
 /**
  * Return map center as SDKLatLng
@@ -117,13 +120,13 @@ export const getMapBounds = map => mapboxBoundsToSDKBounds(map.getBounds());
  *
  * @return {SDKLatLng} - Converted center of given map
  */
-export const getMapCenter = map => mapboxLngLatToSDKLatLng(map.getCenter());
+export const getMapCenter = (map) => mapboxLngLatToSDKLatLng(map.getCenter())
 
 /**
  * Check if map library is loaded
  */
 export const isMapsLibLoaded = () =>
-  typeof window !== 'undefined' && window.mapboxgl && window.mapboxgl.accessToken;
+  typeof window !== 'undefined' && window.mapboxgl && window.mapboxgl.accessToken
 
 /**
  * Return price labels grouped by listing locations.
@@ -134,32 +137,32 @@ const priceLabelsInLocations = (
   activeListingId,
   infoCardOpen,
   onListingClicked,
-  mapComponentRefreshToken
+  mapComponentRefreshToken,
 ) => {
-  const listingArraysInLocations = reducedToArray(groupedByCoordinates(listings));
-  const priceLabels = listingArraysInLocations.reverse().map(listingArr => {
+  const listingArraysInLocations = reducedToArray(groupedByCoordinates(listings))
+  const priceLabels = listingArraysInLocations.reverse().map((listingArr) => {
     const isActive = activeListingId
-      ? !!listingArr.find(l => activeListingId.uuid === l.id.uuid)
-      : false;
+      ? !!listingArr.find((l) => activeListingId.uuid === l.id.uuid)
+      : false
 
     // If location contains only one listing, print price label
     if (listingArr.length === 1) {
-      const listing = listingArr[0];
+      const listing = listingArr[0]
       const infoCardOpenIds = Array.isArray(infoCardOpen)
-        ? infoCardOpen.map(l => l.id.uuid)
+        ? infoCardOpen.map((l) => l.id.uuid)
         : infoCardOpen
         ? [infoCardOpen.id.uuid]
-        : [];
+        : []
 
       // if the listing is open, don't print price label
       if (infoCardOpen != null && infoCardOpenIds.includes(listing.id.uuid)) {
-        return null;
+        return null
       }
 
       // Explicit type change to object literal for Google OverlayViews (geolocation is SDK type)
-      const { geolocation } = listing.attributes;
+      const { geolocation } = listing.attributes
 
-      const key = listing.id.uuid;
+      const key = listing.id.uuid
       return {
         markerId: `price_${key}`,
         location: geolocation,
@@ -172,14 +175,14 @@ const priceLabelsInLocations = (
           onListingClicked,
           mapComponentRefreshToken,
         },
-      };
+      }
     }
 
     // Explicit type change to object literal for Google OverlayViews (geolocation is SDK type)
-    const firstListing = ensureListing(listingArr[0]);
-    const geolocation = firstListing.attributes.geolocation;
+    const firstListing = ensureListing(listingArr[0])
+    const geolocation = firstListing.attributes.geolocation
 
-    const key = listingArr[0].id.uuid;
+    const key = listingArr[0].id.uuid
     return {
       markerId: `group_${key}`,
       location: geolocation,
@@ -192,10 +195,10 @@ const priceLabelsInLocations = (
         onListingClicked,
         mapComponentRefreshToken,
       },
-    };
-  });
-  return priceLabels;
-};
+    }
+  })
+  return priceLabels
+}
 
 /**
  * Return info card. This is a helper function for SearchMapWithMapbox component.
@@ -204,17 +207,17 @@ const infoCardComponent = (
   infoCardOpen,
   onListingInfoCardClicked,
   createURLToListing,
-  mapComponentRefreshToken
+  mapComponentRefreshToken,
 ) => {
-  const listingsArray = Array.isArray(infoCardOpen) ? infoCardOpen : [infoCardOpen];
+  const listingsArray = Array.isArray(infoCardOpen) ? infoCardOpen : [infoCardOpen]
 
   if (!infoCardOpen) {
-    return null;
+    return null
   }
 
-  const firstListing = ensureListing(listingsArray[0]);
-  const key = firstListing.id.uuid;
-  const geolocation = firstListing.attributes.geolocation;
+  const firstListing = ensureListing(listingsArray[0])
+  const key = firstListing.id.uuid
+  const geolocation = firstListing.attributes.geolocation
 
   return {
     markerId: `infoCard_${key}`,
@@ -227,26 +230,26 @@ const infoCardComponent = (
       onListingInfoCardClicked,
       createURLToListing,
     },
-  };
-};
+  }
+}
 
 /**
  * SearchMap component using Mapbox as map provider
  */
 class SearchMapWithMapbox extends Component {
   constructor(props) {
-    super(props);
-    this.map = typeof window !== 'undefined' && window.mapboxMap ? window.mapboxMap : null;
-    this.currentMarkers = [];
-    this.currentInfoCard = null;
-    this.state = { mapContainer: null, isMapReady: false };
-    this.viewportBounds = null;
+    super(props)
+    this.map = typeof window !== 'undefined' && window.mapboxMap ? window.mapboxMap : null
+    this.currentMarkers = []
+    this.currentInfoCard = null
+    this.state = { mapContainer: null, isMapReady: false }
+    this.viewportBounds = null
 
-    this.onMount = this.onMount.bind(this);
-    this.onMoveend = this.onMoveend.bind(this);
-    this.initializeMap = this.initializeMap.bind(this);
-    this.handleDoubleClickOnInfoCard = this.handleDoubleClickOnInfoCard.bind(this);
-    this.handleMobilePinchZoom = this.handleMobilePinchZoom.bind(this);
+    this.onMount = this.onMount.bind(this)
+    this.onMoveend = this.onMoveend.bind(this)
+    this.initializeMap = this.initializeMap.bind(this)
+    this.handleDoubleClickOnInfoCard = this.handleDoubleClickOnInfoCard.bind(this)
+    this.handleMobilePinchZoom = this.handleMobilePinchZoom.bind(this)
   }
 
   componentDidUpdate(prevProps) {
@@ -255,51 +258,51 @@ class SearchMapWithMapbox extends Component {
       const { mapSearch } = parse(this.props.location.search, {
         latlng: ['origin'],
         latlngBounds: ['bounds'],
-      });
+      })
       if (!mapSearch) {
-        this.viewportBounds = null;
+        this.viewportBounds = null
       }
     }
 
     if (this.map) {
-      const currentBounds = getMapBounds(this.map);
+      const currentBounds = getMapBounds(this.map)
 
       // Do not call fitMapToBounds if bounds are the same.
       // Our bounds are viewport bounds, and fitBounds will try to add margins around those bounds
       // that would result to zoom-loop (bound change -> fitmap -> bounds change -> ...)
       if (!isEqual(this.props.bounds, currentBounds) && !this.viewportBounds) {
-        fitMapToBounds(this.map, this.props.bounds, { padding: 0, isAutocompleteSearch: true });
+        fitMapToBounds(this.map, this.props.bounds, { padding: 0, isAutocompleteSearch: true })
       }
     }
 
     if (!this.map && this.state.mapContainer) {
-      this.initializeMap();
+      this.initializeMap()
 
       /* Notify parent component that Mapbox map is loaded */
-      this.props.onMapLoad(this.map);
+      this.props.onMapLoad(this.map)
     } else if (prevProps.mapComponentRefreshToken !== this.props.mapComponentRefreshToken) {
       /* Notify parent component that Mapbox map is loaded */
-      this.props.onMapLoad(this.map);
+      this.props.onMapLoad(this.map)
     }
   }
 
   componentWillUnmount() {
     this.currentInfoCard.markerContainer.removeEventListener(
       'dblclick',
-      this.handleDoubleClickOnInfoCard
-    );
-    document.removeEventListener('gesturestart', this.handleMobilePinchZoom, false);
-    document.removeEventListener('gesturechange', this.handleMobilePinchZoom, false);
-    document.removeEventListener('gestureend', this.handleMobilePinchZoom, false);
+      this.handleDoubleClickOnInfoCard,
+    )
+    document.removeEventListener('gesturestart', this.handleMobilePinchZoom, false)
+    document.removeEventListener('gesturechange', this.handleMobilePinchZoom, false)
+    document.removeEventListener('gestureend', this.handleMobilePinchZoom, false)
   }
 
   onMount(element) {
     // This prevents pinch zoom to affect whole page on mobile Safari.
-    document.addEventListener('gesturestart', this.handleMobilePinchZoom, false);
-    document.addEventListener('gesturechange', this.handleMobilePinchZoom, false);
-    document.addEventListener('gestureend', this.handleMobilePinchZoom, false);
+    document.addEventListener('gesturestart', this.handleMobilePinchZoom, false)
+    document.addEventListener('gesturechange', this.handleMobilePinchZoom, false)
+    document.addEventListener('gestureend', this.handleMobilePinchZoom, false)
 
-    this.setState({ mapContainer: element });
+    this.setState({ mapContainer: element })
   }
 
   onMoveend(e) {
@@ -309,59 +312,57 @@ class SearchMapWithMapbox extends Component {
       // This fixes mobile Chrome bug that sends map events to invisible map components.
       const isHiddenByReusableMap =
         this.props.reusableMapHiddenHandle &&
-        this.state.mapContainer.parentElement.classList.contains(
-          this.props.reusableMapHiddenHandle
-        );
+        this.state.mapContainer.parentElement.classList.contains(this.props.reusableMapHiddenHandle)
       if (!isHiddenByReusableMap) {
-        const viewportMapBounds = getMapBounds(this.map);
-        const viewportMapCenter = getMapCenter(this.map);
+        const viewportMapBounds = getMapBounds(this.map)
+        const viewportMapCenter = getMapCenter(this.map)
         const viewportBounds = sdkBoundsToFixedCoordinates(
           viewportMapBounds,
-          BOUNDS_FIXED_PRECISION
-        );
+          BOUNDS_FIXED_PRECISION,
+        )
 
         // ViewportBounds from (previous) rendering differ from viewportBounds currently set to map
         // I.e. user has changed the map somehow: moved, panned, zoomed, resized
         const viewportBoundsChanged =
-          this.viewportBounds && !hasSameSDKBounds(this.viewportBounds, viewportBounds);
+          this.viewportBounds && !hasSameSDKBounds(this.viewportBounds, viewportBounds)
 
-        this.props.onMapMoveEnd(viewportBoundsChanged, { viewportBounds, viewportMapCenter });
-        this.viewportBounds = viewportBounds;
+        this.props.onMapMoveEnd(viewportBoundsChanged, { viewportBounds, viewportMapCenter })
+        this.viewportBounds = viewportBounds
       }
     }
   }
 
   initializeMap() {
-    const { offsetHeight, offsetWidth } = this.state.mapContainer;
-    const hasDimensions = offsetHeight > 0 && offsetWidth > 0;
+    const { offsetHeight, offsetWidth } = this.state.mapContainer
+    const hasDimensions = offsetHeight > 0 && offsetWidth > 0
     if (hasDimensions) {
       this.map = new window.mapboxgl.Map({
         container: this.state.mapContainer,
         style: 'mapbox://styles/mapbox/streets-v10',
         scrollZoom: false,
-      });
-      window.mapboxMap = this.map;
+      })
+      window.mapboxMap = this.map
 
-      var nav = new window.mapboxgl.NavigationControl({ showCompass: false });
-      this.map.addControl(nav, 'top-left');
+      var nav = new window.mapboxgl.NavigationControl({ showCompass: false })
+      this.map.addControl(nav, 'top-left')
 
-      this.map.on('moveend', this.onMoveend);
+      this.map.on('moveend', this.onMoveend)
 
       // Introduce rerendering after map is ready (to include labels),
       // but keep the map out of state life cycle.
-      this.setState({ isMapReady: true });
+      this.setState({ isMapReady: true })
     }
   }
 
   handleMobilePinchZoom(e) {
-    e.preventDefault();
+    e.preventDefault()
     // A hack to prevent pinch zoom gesture in mobile Safari
     // Otherwise, pinch zoom would zoom both map and the document.
-    document.body.style.zoom = 0.99;
+    document.body.style.zoom = 0.99
   }
 
   handleDoubleClickOnInfoCard(e) {
-    e.stopPropagation();
+    e.stopPropagation()
   }
 
   render() {
@@ -374,7 +375,7 @@ class SearchMapWithMapbox extends Component {
       onListingInfoCardClicked,
       createURLToListing,
       mapComponentRefreshToken,
-    } = this.props;
+    } = this.props
 
     if (this.map) {
       // Create markers out of price labels and grouped labels
@@ -383,39 +384,39 @@ class SearchMapWithMapbox extends Component {
         activeListingId,
         infoCardOpen,
         onListingClicked,
-        mapComponentRefreshToken
-      );
+        mapComponentRefreshToken,
+      )
 
       // If map has moved or info card opened, unnecessary markers need to be removed
-      const removableMarkers = differenceBy(this.currentMarkers, labels, 'markerId');
-      removableMarkers.forEach(rm => rm.marker.remove());
+      const removableMarkers = differenceBy(this.currentMarkers, labels, 'markerId')
+      removableMarkers.forEach((rm) => rm.marker.remove())
 
       // Helper function to create markers to given container
       const createMarker = (data, markerContainer) =>
         new window.mapboxgl.Marker(markerContainer, { anchor: 'bottom' })
           .setLngLat([data.location.lng, data.location.lat])
-          .addTo(this.map);
+          .addTo(this.map)
 
       // SearchMapPriceLabel and SearchMapGroupLabel:
       // create a new marker or use existing one if markerId is among previously rendered markers
       this.currentMarkers = labels
-        .filter(v => v != null)
-        .map(m => {
+        .filter((v) => v != null)
+        .map((m) => {
           const existingMarkerId = this.currentMarkers.findIndex(
-            marker => m.markerId === marker.markerId && marker.marker
-          );
+            (marker) => m.markerId === marker.markerId && marker.marker,
+          )
 
           if (existingMarkerId >= 0) {
-            const { marker, markerContainer, ...rest } = this.currentMarkers[existingMarkerId];
-            return { ...rest, ...m, markerContainer, marker };
+            const { marker, markerContainer, ...rest } = this.currentMarkers[existingMarkerId]
+            return { ...rest, ...m, markerContainer, marker }
           } else {
-            const markerContainer = document.createElement('div');
-            markerContainer.setAttribute('id', m.markerId);
-            markerContainer.classList.add(css.labelContainer);
-            const marker = createMarker(m, markerContainer);
-            return { ...m, markerContainer, marker };
+            const markerContainer = document.createElement('div')
+            markerContainer.setAttribute('id', m.markerId)
+            markerContainer.classList.add(css.labelContainer)
+            const marker = createMarker(m, markerContainer)
+            return { ...m, markerContainer, marker }
           }
-        });
+        })
 
       /* Create marker for SearchMapInfoCard component */
       if (infoCardOpen) {
@@ -423,28 +424,28 @@ class SearchMapWithMapbox extends Component {
           infoCardOpen,
           onListingInfoCardClicked,
           createURLToListing,
-          mapComponentRefreshToken
-        );
+          mapComponentRefreshToken,
+        )
 
         // marker container and its styles
-        const infoCardContainer = document.createElement('div');
-        infoCardContainer.setAttribute('id', infoCard.markerId);
-        infoCardContainer.classList.add(css.infoCardContainer);
-        infoCardContainer.addEventListener('dblclick', this.handleDoubleClickOnInfoCard, false);
+        const infoCardContainer = document.createElement('div')
+        infoCardContainer.setAttribute('id', infoCard.markerId)
+        infoCardContainer.classList.add(css.infoCardContainer)
+        infoCardContainer.addEventListener('dblclick', this.handleDoubleClickOnInfoCard, false)
 
         this.currentInfoCard = {
           ...infoCard,
           markerContainer: infoCardContainer,
           marker: infoCard ? createMarker(infoCard, infoCardContainer) : null,
-        };
+        }
       } else {
         if (this.currentInfoCard) {
           this.currentInfoCard.markerContainer.removeEventListener(
             'dblclick',
-            this.handleDoubleClickOnInfoCard
-          );
+            this.handleDoubleClickOnInfoCard,
+          )
         }
-        this.currentInfoCard = null;
+        this.currentInfoCard = null
       }
     }
 
@@ -455,41 +456,41 @@ class SearchMapWithMapbox extends Component {
         className={classNames(className, css.fullArea)}
         onClick={this.props.onClick}
       >
-        {this.currentMarkers.map(m => {
+        {this.currentMarkers.map((m) => {
           // Remove existing activeLabel classes and add it only to the correct container
-          m.markerContainer.classList.remove(css.activeLabel);
+          m.markerContainer.classList.remove(css.activeLabel)
           if (activeListingId && activeListingId.uuid === m.componentProps.key) {
-            m.markerContainer.classList.add(css.activeLabel);
+            m.markerContainer.classList.add(css.activeLabel)
           }
 
-          const isMapReadyForMarkers = this.map && m.markerContainer;
+          const isMapReadyForMarkers = this.map && m.markerContainer
           // DOM node that should be used as portal's root
           const portalDOMContainer = isMapReadyForMarkers
             ? document.getElementById(m.markerContainer.id)
-            : null;
+            : null
 
           // Create component portals for correct marker containers
           if (isMapReadyForMarkers && m.type === 'price') {
             return ReactDOM.createPortal(
               <SearchMapPriceLabel {...m.componentProps} />,
-              portalDOMContainer
-            );
+              portalDOMContainer,
+            )
           } else if (isMapReadyForMarkers && m.type === 'group') {
             return ReactDOM.createPortal(
               <SearchMapGroupLabel {...m.componentProps} />,
-              portalDOMContainer
-            );
+              portalDOMContainer,
+            )
           }
-          return null;
+          return null
         })}
         {this.state.mapContainer && this.currentInfoCard
           ? ReactDOM.createPortal(
               <SearchMapInfoCard {...this.currentInfoCard.componentProps} />,
-              this.currentInfoCard.markerContainer
+              this.currentInfoCard.markerContainer,
             )
           : null}
       </div>
-    );
+    )
   }
 }
 
@@ -499,7 +500,7 @@ SearchMapWithMapbox.defaultProps = {
   infoCard: null,
   zoom: 11,
   reusableMapHiddenHandle: null,
-};
+}
 
 SearchMapWithMapbox.propTypes = {
   center: propTypes.latlng,
@@ -513,6 +514,6 @@ SearchMapWithMapbox.propTypes = {
   onMapLoad: func.isRequired,
   zoom: number,
   reusableMapHiddenHandle: string,
-};
+}
 
-export default SearchMapWithMapbox;
+export default SearchMapWithMapbox

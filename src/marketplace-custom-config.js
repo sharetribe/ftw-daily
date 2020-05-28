@@ -35,14 +35,14 @@ export const amenities = [
     key: 'own_food_allowed',
     label: 'Own food allowed',
   },
-];
+]
 
 export const categories = [
   { key: 'smoke', label: 'Smoke' },
   { key: 'electric', label: 'Electric' },
   { key: 'wood', label: 'Wood' },
   { key: 'other', label: 'Other' },
-];
+]
 
 // Price filter configuration
 // Note: unlike most prices this is not handled in subunits
@@ -50,12 +50,12 @@ export const priceFilterConfig = {
   min: 0,
   max: 1000,
   step: 5,
-};
+}
 
 // Activate booking dates filter on search page
 export const dateRangeFilterConfig = {
   active: true,
-};
+}
 
 // Activate keyword filter on search page
 
@@ -63,7 +63,7 @@ export const dateRangeFilterConfig = {
 // You can turn off ordering by distance in config.js file
 export const keywordFilterConfig = {
   active: true,
-};
+}
 
 export const sortConfig = {
   // Enable/disable the sorting control in the SearchPage
@@ -83,4 +83,4 @@ export const sortConfig = {
     // for handling the internal state of the sorting dropdown.
     { key: 'relevance', label: 'Relevance', longLabel: 'Relevance (Keyword search)' },
   ],
-};
+}

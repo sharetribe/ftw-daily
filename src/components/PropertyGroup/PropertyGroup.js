@@ -6,24 +6,24 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import includes from 'lodash/includes';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import includes from 'lodash/includes'
 
-import css from './PropertyGroup.css';
+import css from './PropertyGroup.css'
 
 const checkSelected = (options, selectedOptions) => {
-  return options.map(option => ({
+  return options.map((option) => ({
     key: option.key,
     label: option.label,
     isSelected: includes(selectedOptions, option.key),
-  }));
-};
+  }))
+}
 
-const IconCheck = props => {
-  const isVisible = props.isVisible;
-  const classes = isVisible ? css.checkIcon : classNames(css.checkIcon, css.hidden);
+const IconCheck = (props) => {
+  const isVisible = props.isVisible
+  const classes = isVisible ? css.checkIcon : classNames(css.checkIcon, css.hidden)
 
   return (
     <svg width="9" height="9" xmlns="http://www.w3.org/2000/svg" className={classes}>
@@ -33,12 +33,12 @@ const IconCheck = props => {
         fillRule="evenodd"
       />
     </svg>
-  );
-};
+  )
+}
 
-const Item = props => {
-  const { label, isSelected } = props;
-  const labelClass = isSelected ? css.selectedLabel : css.notSelectedLabel;
+const Item = (props) => {
+  const { label, isSelected } = props
+  const labelClass = isSelected ? css.selectedLabel : css.notSelectedLabel
   return (
     <li className={css.item}>
       <span className={css.iconWrapper}>
@@ -48,33 +48,33 @@ const Item = props => {
         <span className={labelClass}>{label}</span>
       </div>
     </li>
-  );
-};
+  )
+}
 
-const PropertyGroup = props => {
-  const { rootClassName, className, id, options, selectedOptions, twoColumns } = props;
-  const classes = classNames(rootClassName || css.root, className);
-  const listClasses = twoColumns ? classNames(classes, css.twoColumns) : classes;
+const PropertyGroup = (props) => {
+  const { rootClassName, className, id, options, selectedOptions, twoColumns } = props
+  const classes = classNames(rootClassName || css.root, className)
+  const listClasses = twoColumns ? classNames(classes, css.twoColumns) : classes
 
-  const checked = checkSelected(options, selectedOptions);
+  const checked = checkSelected(options, selectedOptions)
 
   return (
     <ul className={listClasses}>
-      {checked.map(option => (
+      {checked.map((option) => (
         <Item key={`${id}.${option.key}`} label={option.label} isSelected={option.isSelected} />
       ))}
     </ul>
-  );
-};
+  )
+}
 
 PropertyGroup.defaultProps = {
   rootClassName: null,
   className: null,
   selectedOptions: [],
   twoColumns: false,
-};
+}
 
-const { arrayOf, bool, node, shape, string } = PropTypes;
+const { arrayOf, bool, node, shape, string } = PropTypes
 
 PropertyGroup.propTypes = {
   rootClassName: string,
@@ -84,10 +84,10 @@ PropertyGroup.propTypes = {
     shape({
       key: string.isRequired,
       label: node.isRequired,
-    })
+    }),
   ),
   selectedOptions: arrayOf(string),
   twoColumns: bool,
-};
+}
 
-export default PropertyGroup;
+export default PropertyGroup

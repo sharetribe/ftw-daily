@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
-import css from './TermsOfService.css';
+import css from './TermsOfService.css'
 
-const TermsOfService = props => {
-  const { rootClassName, className } = props;
-  const classes = classNames(rootClassName || css.root, className);
+const TermsOfService = (props) => {
+  const { rootClassName, className } = props
+  const classes = classNames(rootClassName || css.root, className)
 
   // prettier-ignore
   return (
@@ -58,18 +58,18 @@ const TermsOfService = props => {
       </p>
     </div>
   );
-};
+}
 
 TermsOfService.defaultProps = {
   rootClassName: null,
   className: null,
-};
+}
 
-const { string } = PropTypes;
+const { string } = PropTypes
 
 TermsOfService.propTypes = {
   rootClassName: string,
   className: string,
-};
+}
 
-export default TermsOfService;
+export default TermsOfService

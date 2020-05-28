@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import css from './DoorIcon.css';
+import React from 'react'
+import PropTypes from 'prop-types'
+import css from './DoorIcon.css'
 
-const DoorIcon = props => {
-  const { className } = props;
+const DoorIcon = (props) => {
+  const { className } = props
   return (
     <svg
       className={className}
@@ -40,15 +40,15 @@ const DoorIcon = props => {
         />
       </g>
     </svg>
-  );
-};
+  )
+}
 
-DoorIcon.defaultProps = { className: null };
+DoorIcon.defaultProps = { className: null }
 
-const { string } = PropTypes;
+const { string } = PropTypes
 
 DoorIcon.propTypes = {
   className: string,
-};
+}
 
-export default DoorIcon;
+export default DoorIcon

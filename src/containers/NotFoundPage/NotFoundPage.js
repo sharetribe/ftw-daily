@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import routeConfiguration from '../../routeConfiguration';
-import { createResourceLocatorString } from '../../util/routes';
-import { isScrollingDisabled } from '../../ducks/UI.duck';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import routeConfiguration from '../../routeConfiguration'
+import { createResourceLocatorString } from '../../util/routes'
+import { isScrollingDisabled } from '../../ducks/UI.duck'
 import {
   Page,
   LayoutSingleColumn,
@@ -14,37 +14,37 @@ import {
   LayoutWrapperMain,
   LayoutWrapperFooter,
   Footer,
-} from '../../components';
-import { LocationSearchForm } from '../../forms';
-import { TopbarContainer } from '../../containers';
+} from '../../components'
+import { LocationSearchForm } from '../../forms'
+import { TopbarContainer } from '../../containers'
 
-import css from './NotFoundPage.css';
+import css from './NotFoundPage.css'
 
 export class NotFoundPageComponent extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     // The StaticRouter component used in server side rendering
     // provides the context object. We attach a `notfound` flag to
     // the context to tell the server to change the response status
     // code into a 404.
-    this.props.staticContext.notfound = true;
+    this.props.staticContext.notfound = true
   }
 
   render() {
-    const { history, intl, scrollingDisabled } = this.props;
+    const { history, intl, scrollingDisabled } = this.props
 
     const title = intl.formatMessage({
       id: 'NotFoundPage.title',
-    });
+    })
 
-    const handleSearchSubmit = values => {
-      const { search, selectedPlace } = values.location;
-      const { origin, bounds } = selectedPlace;
-      const searchParams = { address: search, origin, bounds };
+    const handleSearchSubmit = (values) => {
+      const { search, selectedPlace } = values.location
+      const { origin, bounds } = selectedPlace
+      const searchParams = { address: search, origin, bounds }
       history.push(
-        createResourceLocatorString('SearchPage', routeConfiguration(), {}, searchParams)
-      );
-    };
+        createResourceLocatorString('SearchPage', routeConfiguration(), {}, searchParams),
+      )
+    }
 
     return (
       <Page title={title} scrollingDisabled={scrollingDisabled}>
@@ -71,15 +71,15 @@ export class NotFoundPageComponent extends Component {
           </LayoutWrapperFooter>
         </LayoutSingleColumn>
       </Page>
-    );
+    )
   }
 }
 
 NotFoundPageComponent.defaultProps = {
   staticContext: {},
-};
+}
 
-const { bool, func, object, shape } = PropTypes;
+const { bool, func, object, shape } = PropTypes
 
 NotFoundPageComponent.propTypes = {
   scrollingDisabled: bool.isRequired,
@@ -94,13 +94,13 @@ NotFoundPageComponent.propTypes = {
   history: shape({
     push: func.isRequired,
   }).isRequired,
-};
+}
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     scrollingDisabled: isScrollingDisabled(state),
-  };
-};
+  }
+}
 
 // Note: it is important that the withRouter HOC is **outside** the
 // connect HOC, otherwise React Router won't rerender any Route
@@ -111,7 +111,7 @@ const mapStateToProps = state => {
 const NotFoundPage = compose(
   withRouter,
   connect(mapStateToProps),
-  injectIntl
-)(NotFoundPageComponent);
+  injectIntl,
+)(NotFoundPageComponent)
 
-export default NotFoundPage;
+export default NotFoundPage

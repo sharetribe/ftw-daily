@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import classNames from 'classnames';
-import { types as sdkTypes } from '../../util/sdkLoader';
-import { REVIEW_TYPE_OF_PROVIDER, REVIEW_TYPE_OF_CUSTOMER, propTypes } from '../../util/types';
-import { ensureCurrentUser, ensureUser } from '../../util/data';
-import { withViewport } from '../../util/contextHelpers';
-import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import classNames from 'classnames'
+import { types as sdkTypes } from '../../util/sdkLoader'
+import { REVIEW_TYPE_OF_PROVIDER, REVIEW_TYPE_OF_CUSTOMER, propTypes } from '../../util/types'
+import { ensureCurrentUser, ensureUser } from '../../util/data'
+import { withViewport } from '../../util/contextHelpers'
+import { isScrollingDisabled } from '../../ducks/UI.duck'
+import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck'
 import {
   Page,
   LayoutSideNavigation,
@@ -23,39 +23,39 @@ import {
   ListingCard,
   Reviews,
   ButtonTabNavHorizontal,
-} from '../../components';
-import { TopbarContainer, NotFoundPage } from '../../containers';
-import { loadData } from './ProfilePage.duck';
-import config from '../../config';
+} from '../../components'
+import { TopbarContainer, NotFoundPage } from '../../containers'
+import { loadData } from './ProfilePage.duck'
+import config from '../../config'
 
-import css from './ProfilePage.css';
+import css from './ProfilePage.css'
 
-const { UUID } = sdkTypes;
-const MAX_MOBILE_SCREEN_WIDTH = 768;
+const { UUID } = sdkTypes
+const MAX_MOBILE_SCREEN_WIDTH = 768
 
 export class ProfilePageComponent extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       // keep track of which reviews tab to show in desktop viewport
       showReviewsType: REVIEW_TYPE_OF_PROVIDER,
-    };
+    }
 
-    this.showOfProviderReviews = this.showOfProviderReviews.bind(this);
-    this.showOfCustomerReviews = this.showOfCustomerReviews.bind(this);
+    this.showOfProviderReviews = this.showOfProviderReviews.bind(this)
+    this.showOfCustomerReviews = this.showOfCustomerReviews.bind(this)
   }
 
   showOfProviderReviews() {
     this.setState({
       showReviewsType: REVIEW_TYPE_OF_PROVIDER,
-    });
+    })
   }
 
   showOfCustomerReviews() {
     this.setState({
       showReviewsType: REVIEW_TYPE_OF_CUSTOMER,
-    });
+    })
   }
 
   render() {
@@ -70,27 +70,27 @@ export class ProfilePageComponent extends Component {
       queryReviewsError,
       viewport,
       intl,
-    } = this.props;
-    const ensuredCurrentUser = ensureCurrentUser(currentUser);
-    const profileUser = ensureUser(user);
+    } = this.props
+    const ensuredCurrentUser = ensureCurrentUser(currentUser)
+    const profileUser = ensureUser(user)
     const isCurrentUser =
-      ensuredCurrentUser.id && profileUser.id && ensuredCurrentUser.id.uuid === profileUser.id.uuid;
-    const displayName = profileUser.attributes.profile.displayName;
-    const bio = profileUser.attributes.profile.bio;
-    const hasBio = !!bio;
-    const hasListings = listings.length > 0;
-    const isMobileLayout = viewport.width < MAX_MOBILE_SCREEN_WIDTH;
+      ensuredCurrentUser.id && profileUser.id && ensuredCurrentUser.id.uuid === profileUser.id.uuid
+    const displayName = profileUser.attributes.profile.displayName
+    const bio = profileUser.attributes.profile.bio
+    const hasBio = !!bio
+    const hasListings = listings.length > 0
+    const isMobileLayout = viewport.width < MAX_MOBILE_SCREEN_WIDTH
 
     const editLinkMobile = isCurrentUser ? (
       <NamedLink className={css.editLinkMobile} name="ProfileSettingsPage">
         <FormattedMessage id="ProfilePage.editProfileLinkMobile" />
       </NamedLink>
-    ) : null;
+    ) : null
     const editLinkDesktop = isCurrentUser ? (
       <NamedLink className={css.editLinkDesktop} name="ProfileSettingsPage">
         <FormattedMessage id="ProfilePage.editProfileLinkDesktop" />
       </NamedLink>
-    ) : null;
+    ) : null
 
     const asideContent = (
       <div className={css.asideContent}>
@@ -103,21 +103,21 @@ export class ProfilePageComponent extends Component {
         {editLinkMobile}
         {editLinkDesktop}
       </div>
-    );
+    )
 
     const listingsContainerClasses = classNames(css.listingsContainer, {
       [css.withBioMissingAbove]: !hasBio,
-    });
+    })
 
     const reviewsError = (
       <p className={css.error}>
         <FormattedMessage id="ProfilePage.loadingReviewsFailed" />
       </p>
-    );
+    )
 
-    const reviewsOfProvider = reviews.filter(r => r.attributes.type === REVIEW_TYPE_OF_PROVIDER);
+    const reviewsOfProvider = reviews.filter((r) => r.attributes.type === REVIEW_TYPE_OF_PROVIDER)
 
-    const reviewsOfCustomer = reviews.filter(r => r.attributes.type === REVIEW_TYPE_OF_CUSTOMER);
+    const reviewsOfCustomer = reviews.filter((r) => r.attributes.type === REVIEW_TYPE_OF_CUSTOMER)
 
     const mobileReviews = (
       <div className={css.mobileReviews}>
@@ -138,7 +138,7 @@ export class ProfilePageComponent extends Component {
         {queryReviewsError ? reviewsError : null}
         <Reviews reviews={reviewsOfCustomer} />
       </div>
-    );
+    )
 
     const desktopReviewTabs = [
       {
@@ -165,7 +165,7 @@ export class ProfilePageComponent extends Component {
         selected: this.state.showReviewsType === REVIEW_TYPE_OF_CUSTOMER,
         onClick: this.showOfCustomerReviews,
       },
-    ];
+    ]
 
     const desktopReviews = (
       <div className={css.desktopReviews}>
@@ -179,7 +179,7 @@ export class ProfilePageComponent extends Component {
           <Reviews reviews={reviewsOfCustomer} />
         )}
       </div>
-    );
+    )
 
     const mainContent = (
       <div>
@@ -196,7 +196,7 @@ export class ProfilePageComponent extends Component {
               />
             </h2>
             <ul className={css.listings}>
-              {listings.map(l => (
+              {listings.map((l) => (
                 <li className={css.listing} key={l.id.uuid}>
                   <ListingCard listing={l} />
                 </li>
@@ -206,20 +206,20 @@ export class ProfilePageComponent extends Component {
         ) : null}
         {isMobileLayout ? mobileReviews : desktopReviews}
       </div>
-    );
+    )
 
-    let content;
+    let content
 
     if (userShowError && userShowError.status === 404) {
-      return <NotFoundPage />;
+      return <NotFoundPage />
     } else if (userShowError || queryListingsError) {
       content = (
         <p className={css.error}>
           <FormattedMessage id="ProfilePage.loadingDataFailed" />
         </p>
-      );
+      )
     } else {
-      content = mainContent;
+      content = mainContent
     }
 
     const schemaTitle = intl.formatMessage(
@@ -229,8 +229,8 @@ export class ProfilePageComponent extends Component {
       {
         name: displayName,
         siteTitle: config.siteTitle,
-      }
-    );
+      },
+    )
 
     return (
       <Page
@@ -253,7 +253,7 @@ export class ProfilePageComponent extends Component {
           </LayoutWrapperFooter>
         </LayoutSideNavigation>
       </Page>
-    );
+    )
   }
 }
 
@@ -264,9 +264,9 @@ ProfilePageComponent.defaultProps = {
   queryListingsError: null,
   reviews: [],
   queryReviewsError: null,
-};
+}
 
-const { bool, arrayOf, number, shape } = PropTypes;
+const { bool, arrayOf, number, shape } = PropTypes
 
 ProfilePageComponent.propTypes = {
   scrollingDisabled: bool.isRequired,
@@ -286,10 +286,10 @@ ProfilePageComponent.propTypes = {
 
   // from injectIntl
   intl: intlShape.isRequired,
-};
+}
 
-const mapStateToProps = state => {
-  const { currentUser } = state.user;
+const mapStateToProps = (state) => {
+  const { currentUser } = state.user
   const {
     userId,
     userShowError,
@@ -297,10 +297,10 @@ const mapStateToProps = state => {
     userListingRefs,
     reviews,
     queryReviewsError,
-  } = state.ProfilePage;
-  const userMatches = getMarketplaceEntities(state, [{ type: 'user', id: userId }]);
-  const user = userMatches.length === 1 ? userMatches[0] : null;
-  const listings = getMarketplaceEntities(state, userListingRefs);
+  } = state.ProfilePage
+  const userMatches = getMarketplaceEntities(state, [{ type: 'user', id: userId }])
+  const user = userMatches.length === 1 ? userMatches[0] : null
+  const listings = getMarketplaceEntities(state, userListingRefs)
   return {
     scrollingDisabled: isScrollingDisabled(state),
     currentUser,
@@ -310,18 +310,18 @@ const mapStateToProps = state => {
     listings,
     reviews,
     queryReviewsError,
-  };
-};
+  }
+}
 
 const ProfilePage = compose(
   connect(mapStateToProps),
   withViewport,
-  injectIntl
-)(ProfilePageComponent);
+  injectIntl,
+)(ProfilePageComponent)
 
-ProfilePage.loadData = params => {
-  const id = new UUID(params.id);
-  return loadData(id);
-};
+ProfilePage.loadData = (params) => {
+  const id = new UUID(params.id)
+  return loadData(id)
+}
 
-export default ProfilePage;
+export default ProfilePage

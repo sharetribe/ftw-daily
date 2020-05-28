@@ -1,44 +1,44 @@
-import React from 'react';
-import { FormattedMessage } from '../../util/reactIntl';
-import classNames from 'classnames';
-import { createSlug, stringify } from '../../util/urlHelpers';
-import { NamedLink } from '../../components';
+import React from 'react'
+import { FormattedMessage } from '../../util/reactIntl'
+import classNames from 'classnames'
+import { createSlug, stringify } from '../../util/urlHelpers'
+import { NamedLink } from '../../components'
 
-import css from './TransactionPanel.css';
+import css from './TransactionPanel.css'
 
-export const HEADING_ENQUIRED = 'enquired';
-export const HEADING_PAYMENT_PENDING = 'pending-payment';
-export const HEADING_PAYMENT_EXPIRED = 'payment-expired';
-export const HEADING_REQUESTED = 'requested';
-export const HEADING_ACCEPTED = 'accepted';
-export const HEADING_DECLINED = 'declined';
-export const HEADING_CANCELED = 'canceled';
-export const HEADING_DELIVERED = 'deliveded';
+export const HEADING_ENQUIRED = 'enquired'
+export const HEADING_PAYMENT_PENDING = 'pending-payment'
+export const HEADING_PAYMENT_EXPIRED = 'payment-expired'
+export const HEADING_REQUESTED = 'requested'
+export const HEADING_ACCEPTED = 'accepted'
+export const HEADING_DECLINED = 'declined'
+export const HEADING_CANCELED = 'canceled'
+export const HEADING_DELIVERED = 'deliveded'
 
 const createListingLink = (listingId, label, listingDeleted, searchParams = {}, className = '') => {
   if (!listingDeleted) {
-    const params = { id: listingId, slug: createSlug(label) };
-    const to = { search: stringify(searchParams) };
+    const params = { id: listingId, slug: createSlug(label) }
+    const to = { search: stringify(searchParams) }
     return (
       <NamedLink className={className} name="ListingPage" params={params} to={to}>
         {label}
       </NamedLink>
-    );
+    )
   } else {
-    return <FormattedMessage id="TransactionPanel.deletedListingOrderTitle" />;
+    return <FormattedMessage id="TransactionPanel.deletedListingOrderTitle" />
   }
-};
+}
 
-const ListingDeletedInfoMaybe = props => {
+const ListingDeletedInfoMaybe = (props) => {
   return props.listingDeleted ? (
     <p className={css.transactionInfoMessage}>
       <FormattedMessage id="TransactionPanel.messageDeletedListing" />
     </p>
-  ) : null;
-};
+  ) : null
+}
 
-const HeadingCustomer = props => {
-  const { className, id, values, listingDeleted } = props;
+const HeadingCustomer = (props) => {
+  const { className, id, values, listingDeleted } = props
   return (
     <React.Fragment>
       <h1 className={className}>
@@ -48,11 +48,11 @@ const HeadingCustomer = props => {
       </h1>
       <ListingDeletedInfoMaybe listingDeleted={listingDeleted} />
     </React.Fragment>
-  );
-};
+  )
+}
 
-const HeadingCustomerWithSubtitle = props => {
-  const { className, id, values, subtitleId, subtitleValues, children, listingDeleted } = props;
+const HeadingCustomerWithSubtitle = (props) => {
+  const { className, id, values, subtitleId, subtitleValues, children, listingDeleted } = props
   return (
     <React.Fragment>
       <h1 className={className}>
@@ -64,19 +64,19 @@ const HeadingCustomerWithSubtitle = props => {
       {children}
       <ListingDeletedInfoMaybe listingDeleted={listingDeleted} />
     </React.Fragment>
-  );
-};
+  )
+}
 
-const CustomerBannedInfoMaybe = props => {
+const CustomerBannedInfoMaybe = (props) => {
   return props.isCustomerBanned ? (
     <p className={css.transactionInfoMessage}>
       <FormattedMessage id="TransactionPanel.customerBannedStatus" />
     </p>
-  ) : null;
-};
+  ) : null
+}
 
-const HeadingProvider = props => {
-  const { className, id, values, isCustomerBanned, children } = props;
+const HeadingProvider = (props) => {
+  const { className, id, values, isCustomerBanned, children } = props
   return (
     <React.Fragment>
       <h1 className={className}>
@@ -87,12 +87,12 @@ const HeadingProvider = props => {
       {children}
       <CustomerBannedInfoMaybe isCustomerBanned={isCustomerBanned} />
     </React.Fragment>
-  );
-};
+  )
+}
 
 // Functional component as a helper to choose and show Order or Sale heading info:
 // title, subtitle, and message
-const PanelHeading = props => {
+const PanelHeading = (props) => {
   const {
     className,
     rootClassName,
@@ -103,13 +103,13 @@ const PanelHeading = props => {
     listingTitle,
     listingDeleted,
     isCustomerBanned,
-  } = props;
+  } = props
 
-  const isCustomer = props.transactionRole === 'customer';
+  const isCustomer = props.transactionRole === 'customer'
 
-  const defaultRootClassName = isCustomer ? css.headingOrder : css.headingSale;
-  const titleClasses = classNames(rootClassName || defaultRootClassName, className);
-  const listingLink = createListingLink(listingId, listingTitle, listingDeleted);
+  const defaultRootClassName = isCustomer ? css.headingOrder : css.headingSale
+  const titleClasses = classNames(rootClassName || defaultRootClassName, className)
+  const listingLink = createListingLink(listingId, listingTitle, listingDeleted)
 
   switch (panelHeadingState) {
     case HEADING_ENQUIRED:
@@ -127,7 +127,7 @@ const PanelHeading = props => {
           values={{ customerName, listingLink }}
           isCustomerBanned={isCustomerBanned}
         />
-      );
+      )
     case HEADING_PAYMENT_PENDING:
       return isCustomer ? (
         <HeadingCustomer
@@ -150,7 +150,7 @@ const PanelHeading = props => {
             />
           </p>
         </HeadingProvider>
-      );
+      )
     case HEADING_PAYMENT_EXPIRED:
       return isCustomer ? (
         <HeadingCustomer
@@ -166,7 +166,7 @@ const PanelHeading = props => {
           values={{ customerName, listingLink }}
           isCustomerBanned={isCustomerBanned}
         />
-      );
+      )
     case HEADING_REQUESTED:
       return isCustomer ? (
         <HeadingCustomerWithSubtitle
@@ -197,7 +197,7 @@ const PanelHeading = props => {
             </p>
           ) : null}
         </HeadingProvider>
-      );
+      )
     case HEADING_ACCEPTED:
       return isCustomer ? (
         <HeadingCustomerWithSubtitle
@@ -213,7 +213,7 @@ const PanelHeading = props => {
           id="TransactionPanel.saleAcceptedTitle"
           values={{ customerName, listingLink }}
         />
-      );
+      )
     case HEADING_DECLINED:
       return isCustomer ? (
         <HeadingCustomer
@@ -228,7 +228,7 @@ const PanelHeading = props => {
           values={{ customerName, listingLink }}
           isCustomerBanned={isCustomerBanned}
         />
-      );
+      )
     case HEADING_CANCELED:
       return isCustomer ? (
         <HeadingCustomer
@@ -242,7 +242,7 @@ const PanelHeading = props => {
           id="TransactionPanel.saleCancelledTitle"
           values={{ customerName, listingLink }}
         />
-      );
+      )
     case HEADING_DELIVERED:
       return isCustomer ? (
         <HeadingCustomer
@@ -258,11 +258,11 @@ const PanelHeading = props => {
           values={{ customerName, listingLink }}
           isCustomerBanned={isCustomerBanned}
         />
-      );
+      )
     default:
-      console.warn('Unknown state given to panel heading.');
-      return null;
+      console.warn('Unknown state given to panel heading.')
+      return null
   }
-};
+}
 
-export default PanelHeading;
+export default PanelHeading

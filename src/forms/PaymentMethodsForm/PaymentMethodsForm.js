@@ -3,14 +3,14 @@
  * Card is not a Final Form field so it's not available trough Final Form.
  * It's also handled separately in handleSubmit function.
  */
-import React, { Component } from 'react';
-import { func, object, string } from 'prop-types';
-import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
-import { Form as FinalForm } from 'react-final-form';
-import classNames from 'classnames';
-import config from '../../config';
-import { Form, PrimaryButton, FieldTextInput, StripePaymentAddress } from '../../components';
-import css from './PaymentMethodsForm.css';
+import React, { Component } from 'react'
+import { func, object, string } from 'prop-types'
+import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl'
+import { Form as FinalForm } from 'react-final-form'
+import classNames from 'classnames'
+import config from '../../config'
+import { Form, PrimaryButton, FieldTextInput, StripePaymentAddress } from '../../components'
+import css from './PaymentMethodsForm.css'
 
 /**
  * Translate a Stripe API error object.
@@ -31,23 +31,23 @@ import css from './PaymentMethodsForm.css';
  *
  */
 const stripeErrorTranslation = (intl, stripeError) => {
-  const { message, code, type } = stripeError;
+  const { message, code, type } = stripeError
 
   if (!code || !type) {
     // Not a proper Stripe error object
-    return intl.formatMessage({ id: 'PaymentMethodsForm.genericError' });
+    return intl.formatMessage({ id: 'PaymentMethodsForm.genericError' })
   }
 
   const translationId =
     type === 'validation_error'
       ? `PaymentMethodsForm.stripe.validation_error.${code}`
-      : `PaymentMethodsForm.stripe.${type}`;
+      : `PaymentMethodsForm.stripe.${type}`
 
   return intl.formatMessage({
     id: translationId,
     defaultMessage: message,
-  });
-};
+  })
+}
 
 const stripeElementsOptions = {
   fonts: [
@@ -58,7 +58,7 @@ const stripeElementsOptions = {
         'local("sofiapro"), local("SofiaPro"), local("Sofia Pro"), url("https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-medium-webfont.woff2") format("woff2")',
     },
   ],
-};
+}
 
 const cardStyles = {
   base: {
@@ -72,12 +72,12 @@ const cardStyles = {
       color: '#B2B2B2',
     },
   },
-};
+}
 
 const initialState = {
   error: null,
   cardValueValid: false,
-};
+}
 
 /**
  * Payment methods form that asks for credit card info using Stripe Elements.
@@ -91,66 +91,66 @@ const initialState = {
  */
 class PaymentMethodsForm extends Component {
   constructor(props) {
-    super(props);
-    this.state = initialState;
-    this.handleCardValueChange = this.handleCardValueChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.paymentForm = this.paymentForm.bind(this);
-    this.finalFormAPI = null;
-    this.stripe = null;
+    super(props)
+    this.state = initialState
+    this.handleCardValueChange = this.handleCardValueChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.paymentForm = this.paymentForm.bind(this)
+    this.finalFormAPI = null
+    this.stripe = null
   }
 
   componentDidMount() {
     if (!window.Stripe) {
-      throw new Error('Stripe must be loaded for PaymentMethodsForm');
+      throw new Error('Stripe must be loaded for PaymentMethodsForm')
     }
 
     if (config.stripe.publishableKey) {
-      this.stripe = window.Stripe(config.stripe.publishableKey);
+      this.stripe = window.Stripe(config.stripe.publishableKey)
 
-      const elements = this.stripe.elements(stripeElementsOptions);
-      this.card = elements.create('card', { style: cardStyles });
-      this.card.mount(this.cardContainer);
-      this.card.addEventListener('change', this.handleCardValueChange);
+      const elements = this.stripe.elements(stripeElementsOptions)
+      this.card = elements.create('card', { style: cardStyles })
+      this.card.mount(this.cardContainer)
+      this.card.addEventListener('change', this.handleCardValueChange)
       // EventListener is the only way to simulate breakpoints with Stripe.
       window.addEventListener('resize', () => {
         if (window.innerWidth < 1024) {
-          this.card.update({ style: { base: { fontSize: '18px', lineHeight: '24px' } } });
+          this.card.update({ style: { base: { fontSize: '18px', lineHeight: '24px' } } })
         } else {
-          this.card.update({ style: { base: { fontSize: '20px', lineHeight: '32px' } } });
+          this.card.update({ style: { base: { fontSize: '20px', lineHeight: '32px' } } })
         }
-      });
+      })
     }
   }
   componentWillUnmount() {
     if (this.card) {
-      this.card.removeEventListener('change', this.handleCardValueChange);
-      this.card.unmount();
+      this.card.removeEventListener('change', this.handleCardValueChange)
+      this.card.unmount()
     }
   }
   handleCardValueChange(event) {
-    const { intl } = this.props;
-    const { error, complete } = event;
+    const { intl } = this.props
+    const { error, complete } = event
 
-    const postalCode = event.value.postalCode;
+    const postalCode = event.value.postalCode
     if (this.finalFormAPI) {
-      this.finalFormAPI.change('postal', postalCode);
+      this.finalFormAPI.change('postal', postalCode)
     }
 
-    this.setState(prevState => {
+    this.setState((prevState) => {
       return {
         error: error ? stripeErrorTranslation(intl, error) : null,
         cardValueValid: complete,
-      };
-    });
+      }
+    })
   }
   handleSubmit(values) {
-    const { onSubmit, inProgress, formId } = this.props;
-    const cardInputNeedsAttention = !this.state.cardValueValid;
+    const { onSubmit, inProgress, formId } = this.props
+    const cardInputNeedsAttention = !this.state.cardValueValid
 
     if (inProgress || cardInputNeedsAttention) {
       // Already submitting or card value incomplete/invalid
-      return;
+      return
     }
 
     const params = {
@@ -158,9 +158,9 @@ class PaymentMethodsForm extends Component {
       card: this.card,
       formId,
       formValues: values,
-    };
+    }
 
-    onSubmit(params);
+    onSubmit(params)
   }
 
   paymentForm(formRenderProps) {
@@ -177,45 +177,45 @@ class PaymentMethodsForm extends Component {
       createStripeCustomerError,
       handleCardSetupError,
       form,
-    } = formRenderProps;
+    } = formRenderProps
 
-    this.finalFormAPI = form;
-    const cardInputNeedsAttention = !this.state.cardValueValid;
-    const submitDisabled = invalid || cardInputNeedsAttention || submitInProgress;
-    const hasCardError = this.state.error && !submitInProgress;
-    const classes = classNames(rootClassName || css.root, className);
+    this.finalFormAPI = form
+    const cardInputNeedsAttention = !this.state.cardValueValid
+    const submitDisabled = invalid || cardInputNeedsAttention || submitInProgress
+    const hasCardError = this.state.error && !submitInProgress
+    const classes = classNames(rootClassName || css.root, className)
     const cardClasses = classNames(css.card, {
       [css.cardSuccess]: this.state.cardValueValid,
       [css.cardError]: hasCardError,
-    });
+    })
 
     const hasErrors =
       addPaymentMethodError ||
       deletePaymentMethodError ||
       createStripeCustomerError ||
-      handleCardSetupError;
+      handleCardSetupError
 
-    const errorMessage = intl.formatMessage({ id: 'PaymentMethodsForm.genericError' });
+    const errorMessage = intl.formatMessage({ id: 'PaymentMethodsForm.genericError' })
 
     const billingDetailsNameLabel = intl.formatMessage({
       id: 'PaymentMethodsForm.billingDetailsNameLabel',
-    });
+    })
 
     const billingDetailsNamePlaceholder = intl.formatMessage({
       id: 'PaymentMethodsForm.billingDetailsNamePlaceholder',
-    });
+    })
 
     const infoText = intl.formatMessage({
       id: 'PaymentMethodsForm.infoText',
-    });
+    })
 
     // Stripe recommends asking billing address.
     // In PaymentMethodsForm, we send name and email as billing details, but address only if it exists.
     const billingAddress = (
       <StripePaymentAddress intl={intl} form={form} fieldId={formId} card={this.card} />
-    );
+    )
 
-    const hasStripeKey = config.stripe.publishableKey;
+    const hasStripeKey = config.stripe.publishableKey
 
     return hasStripeKey ? (
       <Form className={classes} onSubmit={handleSubmit}>
@@ -226,8 +226,8 @@ class PaymentMethodsForm extends Component {
         <div
           className={cardClasses}
           id={`${formId}-card`}
-          ref={el => {
-            this.cardContainer = el;
+          ref={(el) => {
+            this.cardContainer = el
           }}
         />
         <div className={css.infoText}>{infoText}</div>
@@ -270,12 +270,12 @@ class PaymentMethodsForm extends Component {
       <div className={css.missingStripeKey}>
         <FormattedMessage id="PaymentMethodsForm.missingStripeKey" />
       </div>
-    );
+    )
   }
 
   render() {
-    const { onSubmit, ...rest } = this.props;
-    return <FinalForm onSubmit={this.handleSubmit} {...rest} render={this.paymentForm} />;
+    const { onSubmit, ...rest } = this.props
+    return <FinalForm onSubmit={this.handleSubmit} {...rest} render={this.paymentForm} />
   }
 }
 
@@ -289,7 +289,7 @@ PaymentMethodsForm.defaultProps = {
   createStripeCustomerError: null,
   handleCardSetupError: null,
   form: null,
-};
+}
 
 PaymentMethodsForm.propTypes = {
   formId: string,
@@ -300,6 +300,6 @@ PaymentMethodsForm.propTypes = {
   createStripeCustomerError: object,
   handleCardSetupError: object,
   form: object,
-};
+}
 
-export default injectIntl(PaymentMethodsForm);
+export default injectIntl(PaymentMethodsForm)

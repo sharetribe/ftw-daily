@@ -15,7 +15,7 @@ export const CA_PROVINCES = [
   { key: 'QC', label: 'Quebec' },
   { key: 'SK', label: 'Saskatchewan' },
   { key: 'YT', label: 'Yukon' },
-];
+]
 
 export const US_STATES = [
   { key: 'AL', label: 'Alabama' },
@@ -70,7 +70,7 @@ export const US_STATES = [
   { key: 'WV', label: 'West Virginia' },
   { key: 'WI', label: 'Wisconsin' },
   { key: 'WY', label: 'Wyoming' },
-];
+]
 
 export const AU_STATES = [
   { key: 'ACT', label: 'Australian Capital Territory' },
@@ -81,4 +81,4 @@ export const AU_STATES = [
   { key: 'TAS', label: 'Tasmania' },
   { key: 'VIC', label: 'Victoria' },
   { key: 'WA', label: 'Western Australia' },
-];
+]

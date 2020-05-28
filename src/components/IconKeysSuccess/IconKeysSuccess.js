@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
-import css from './IconKeysSuccess.css';
+import css from './IconKeysSuccess.css'
 
-const IconKeysSuccess = props => {
-  const { className } = props;
+const IconKeysSuccess = (props) => {
+  const { className } = props
   return (
     <svg className={className} width="52" height="60" xmlns="http://www.w3.org/2000/svg">
       <g transform="translate(2 2)" fill="none" fillRule="evenodd">
@@ -53,15 +53,15 @@ const IconKeysSuccess = props => {
         />
       </g>
     </svg>
-  );
-};
+  )
+}
 
-IconKeysSuccess.defaultProps = { className: null };
+IconKeysSuccess.defaultProps = { className: null }
 
-const { string } = PropTypes;
+const { string } = PropTypes
 
 IconKeysSuccess.propTypes = {
   className: string,
-};
+}
 
-export default IconKeysSuccess;
+export default IconKeysSuccess

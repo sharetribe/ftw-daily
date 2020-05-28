@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
-import css from './IconSocialMediaFacebook.css';
+import css from './IconSocialMediaFacebook.css'
 
-const IconSocialMediaFacebook = props => {
-  const { rootClassName, className } = props;
-  const classes = classNames(rootClassName || css.root, className);
+const IconSocialMediaFacebook = (props) => {
+  const { rootClassName, className } = props
+  const classes = classNames(rootClassName || css.root, className)
   return (
     <svg
       className={classes}
@@ -20,13 +20,13 @@ const IconSocialMediaFacebook = props => {
         fillRule="evenodd"
       />
     </svg>
-  );
-};
+  )
+}
 
-IconSocialMediaFacebook.defaultProps = { rootClassName: null, className: null };
+IconSocialMediaFacebook.defaultProps = { rootClassName: null, className: null }
 
-const { string } = PropTypes;
+const { string } = PropTypes
 
-IconSocialMediaFacebook.propTypes = { rootClassName: string, className: string };
+IconSocialMediaFacebook.propTypes = { rootClassName: string, className: string }
 
-export default IconSocialMediaFacebook;
+export default IconSocialMediaFacebook

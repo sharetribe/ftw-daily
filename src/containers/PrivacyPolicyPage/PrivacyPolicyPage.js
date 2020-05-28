@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
-import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { TopbarContainer } from '../../containers';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl'
+import { isScrollingDisabled } from '../../ducks/UI.duck'
+import { TopbarContainer } from '../../containers'
 import {
   Page,
   LayoutSideNavigation,
@@ -14,13 +14,13 @@ import {
   LayoutWrapperFooter,
   PrivacyPolicy,
   Footer,
-} from '../../components';
-import config from '../../config';
+} from '../../components'
+import config from '../../config'
 
-import css from './PrivacyPolicyPage.css';
+import css from './PrivacyPolicyPage.css'
 
-const PrivacyPolicyPageComponent = props => {
-  const { scrollingDisabled, intl } = props;
+const PrivacyPolicyPageComponent = (props) => {
+  const { scrollingDisabled, intl } = props
 
   const tabs = [
     {
@@ -37,14 +37,14 @@ const PrivacyPolicyPageComponent = props => {
         name: 'TermsOfServicePage',
       },
     },
-  ];
-  const siteTitle = config.siteTitle;
-  const schemaTitle = intl.formatMessage({ id: 'PrivacyPolicyPage.schemaTitle' }, { siteTitle });
+  ]
+  const siteTitle = config.siteTitle
+  const schemaTitle = intl.formatMessage({ id: 'PrivacyPolicyPage.schemaTitle' }, { siteTitle })
   const schema = {
     '@context': 'http://schema.org',
     '@type': 'WebPage',
     name: schemaTitle,
-  };
+  }
   return (
     <Page title={schemaTitle} scrollingDisabled={scrollingDisabled} schema={schema}>
       <LayoutSideNavigation>
@@ -65,27 +65,24 @@ const PrivacyPolicyPageComponent = props => {
         </LayoutWrapperFooter>
       </LayoutSideNavigation>
     </Page>
-  );
-};
+  )
+}
 
-const { bool } = PropTypes;
+const { bool } = PropTypes
 
 PrivacyPolicyPageComponent.propTypes = {
   scrollingDisabled: bool.isRequired,
 
   // from injectIntl
   intl: intlShape.isRequired,
-};
+}
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     scrollingDisabled: isScrollingDisabled(state),
-  };
-};
+  }
+}
 
-const PrivacyPolicyPage = compose(
-  connect(mapStateToProps),
-  injectIntl
-)(PrivacyPolicyPageComponent);
+const PrivacyPolicyPage = compose(connect(mapStateToProps), injectIntl)(PrivacyPolicyPageComponent)
 
-export default PrivacyPolicyPage;
+export default PrivacyPolicyPage

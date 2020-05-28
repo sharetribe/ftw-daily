@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import RangeSlider from './RangeSlider';
+import React, { Component } from 'react'
+import RangeSlider from './RangeSlider'
 
 class RangeSliderWrapper extends Component {
   constructor(props) {
-    super(props);
-    this.state = { handles: props.handles };
+    super(props)
+    this.state = { handles: props.handles }
   }
 
   render() {
@@ -12,11 +12,11 @@ class RangeSliderWrapper extends Component {
       <RangeSlider
         {...this.props}
         handles={this.state.handles}
-        onChange={v => {
-          this.setState({ handles: v });
+        onChange={(v) => {
+          this.setState({ handles: v })
         }}
       />
-    );
+    )
   }
 }
 
@@ -29,7 +29,7 @@ export const RangeSliderOneHandle = {
     handles: [500],
   },
   group: 'custom inputs',
-};
+}
 
 export const RangeSliderTwoHandles = {
   component: RangeSliderWrapper,
@@ -40,7 +40,7 @@ export const RangeSliderTwoHandles = {
     handles: [333, 666],
   },
   group: 'custom inputs',
-};
+}
 
 export const RangeSliderThreeHandles = {
   component: RangeSliderWrapper,
@@ -51,4 +51,4 @@ export const RangeSliderThreeHandles = {
     handles: [150, 490, 850],
   },
   group: 'custom inputs',
-};
+}

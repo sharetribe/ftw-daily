@@ -1,12 +1,12 @@
-import React from 'react';
-import { FormattedMessage } from '../../util/reactIntl';
-import { InlineTextButton } from '../../components';
-import { LINE_ITEM_NIGHT, LINE_ITEM_DAY } from '../../util/types';
-import config from '../../config';
+import React from 'react'
+import { FormattedMessage } from '../../util/reactIntl'
+import { InlineTextButton } from '../../components'
+import { LINE_ITEM_NIGHT, LINE_ITEM_DAY } from '../../util/types'
+import config from '../../config'
 
-import css from './ListingPage.css';
+import css from './ListingPage.css'
 
-const SectionHeading = props => {
+const SectionHeading = (props) => {
   const {
     priceTitle,
     formattedPrice,
@@ -15,17 +15,17 @@ const SectionHeading = props => {
     hostLink,
     showContactUser,
     onContactUser,
-  } = props;
+  } = props
 
-  const unitType = config.bookingUnitType;
-  const isNightly = unitType === LINE_ITEM_NIGHT;
-  const isDaily = unitType === LINE_ITEM_DAY;
+  const unitType = config.bookingUnitType
+  const isNightly = unitType === LINE_ITEM_NIGHT
+  const isDaily = unitType === LINE_ITEM_DAY
 
   const unitTranslationKey = isNightly
     ? 'ListingPage.perNight'
     : isDaily
     ? 'ListingPage.perDay'
-    : 'ListingPage.perUnit';
+    : 'ListingPage.perUnit'
 
   return (
     <div className={css.sectionHeading}>
@@ -53,7 +53,7 @@ const SectionHeading = props => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SectionHeading;
+export default SectionHeading

@@ -1,13 +1,13 @@
-import React from 'react';
-import { renderShallow } from '../../util/test-helpers';
-import { fakeIntl } from '../../util/test-data';
-import { EditListingPageComponent } from './EditListingPage';
+import React from 'react'
+import { renderShallow } from '../../util/test-helpers'
+import { fakeIntl } from '../../util/test-data'
+import { EditListingPageComponent } from './EditListingPage'
 
-const noop = () => null;
+const noop = () => null
 
 describe('EditListingPageComponent', () => {
   it('matches snapshot', () => {
-    const getOwnListing = () => null;
+    const getOwnListing = () => null
     const tree = renderShallow(
       <EditListingPageComponent
         params={{ id: 'id', slug: 'slug', type: 'new', tab: 'description' }}
@@ -45,8 +45,8 @@ describe('EditListingPageComponent', () => {
         type="new"
         sendVerificationEmailInProgress={false}
         onResendVerificationEmail={noop}
-      />
-    );
-    expect(tree).toMatchSnapshot();
-  });
-});
+      />,
+    )
+    expect(tree).toMatchSnapshot()
+  })
+})

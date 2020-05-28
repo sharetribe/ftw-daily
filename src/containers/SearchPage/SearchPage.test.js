@@ -1,8 +1,8 @@
-import React from 'react';
-import { renderShallow } from '../../util/test-helpers';
-import { fakeIntl } from '../../util/test-data';
-import { types as sdkTypes } from '../../util/sdkLoader';
-import { SearchPageComponent } from './SearchPage';
+import React from 'react'
+import { renderShallow } from '../../util/test-helpers'
+import { fakeIntl } from '../../util/test-data'
+import { types as sdkTypes } from '../../util/sdkLoader'
+import { SearchPageComponent } from './SearchPage'
 import reducer, {
   ADD_FILTER,
   LOAD_LISTINGS,
@@ -11,10 +11,10 @@ import reducer, {
   initialState,
   loadListings,
   watchLoadListings,
-} from './SearchPage.duck';
+} from './SearchPage.duck'
 
-const { LatLng } = sdkTypes;
-const noop = () => null;
+const { LatLng } = sdkTypes
+const noop = () => null
 
 describe('SearchPageComponent', () => {
   it('matches snapshot', () => {
@@ -42,10 +42,16 @@ describe('SearchPageComponent', () => {
       onSearchMapListings: noop,
       sendVerificationEmailInProgress: false,
       onResendVerificationEmail: noop,
-      categories: [{ key: 'cat1', label: 'Cat 1' }, { key: 'cat2', label: 'Cat 2' }],
-      amenities: [{ key: 'dog1', label: 'Dog 1' }, { key: 'dog2', label: 'Dog 2' }],
-    };
-    const tree = renderShallow(<SearchPageComponent {...props} />);
-    expect(tree).toMatchSnapshot();
-  });
-});
+      categories: [
+        { key: 'cat1', label: 'Cat 1' },
+        { key: 'cat2', label: 'Cat 2' },
+      ],
+      amenities: [
+        { key: 'dog1', label: 'Dog 1' },
+        { key: 'dog2', label: 'Dog 2' },
+      ],
+    }
+    const tree = renderShallow(<SearchPageComponent {...props} />)
+    expect(tree).toMatchSnapshot()
+  })
+})

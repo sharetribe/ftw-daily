@@ -1,39 +1,39 @@
-import React from 'react';
-import { bool, func, node, object } from 'prop-types';
-import classNames from 'classnames';
-import { Form as FinalForm, FormSpy } from 'react-final-form';
-import arrayMutators from 'final-form-arrays';
-import { injectIntl, intlShape } from '../../util/reactIntl';
+import React from 'react'
+import { bool, func, node, object } from 'prop-types'
+import classNames from 'classnames'
+import { Form as FinalForm, FormSpy } from 'react-final-form'
+import arrayMutators from 'final-form-arrays'
+import { injectIntl, intlShape } from '../../util/reactIntl'
 
-import { Form } from '../../components';
-import css from './FilterForm.css';
+import { Form } from '../../components'
+import css from './FilterForm.css'
 
-const FilterFormComponent = props => {
-  const { liveEdit, onChange, onSubmit, onCancel, onClear, ...rest } = props;
+const FilterFormComponent = (props) => {
+  const { liveEdit, onChange, onSubmit, onCancel, onClear, ...rest } = props
 
   if (liveEdit && !onChange) {
-    throw new Error('FilterForm: if liveEdit is true you need to provide onChange function');
+    throw new Error('FilterForm: if liveEdit is true you need to provide onChange function')
   }
 
   if (!liveEdit && !(onCancel && onClear && onSubmit)) {
     throw new Error(
-      'FilterForm: if liveEdit is false you need to provide onCancel, onClear, and onSubmit functions'
-    );
+      'FilterForm: if liveEdit is false you need to provide onCancel, onClear, and onSubmit functions',
+    )
   }
 
-  const handleChange = formState => {
+  const handleChange = (formState) => {
     if (formState.dirty) {
-      onChange(formState.values);
+      onChange(formState.values)
     }
-  };
+  }
 
-  const formCallbacks = liveEdit ? { onSubmit: () => null } : { onSubmit, onCancel, onClear };
+  const formCallbacks = liveEdit ? { onSubmit: () => null } : { onSubmit, onCancel, onClear }
   return (
     <FinalForm
       {...rest}
       {...formCallbacks}
       mutators={{ ...arrayMutators }}
-      render={formRenderProps => {
+      render={(formRenderProps) => {
         const {
           id,
           form,
@@ -44,19 +44,19 @@ const FilterFormComponent = props => {
           paddingClasses,
           intl,
           children,
-        } = formRenderProps;
+        } = formRenderProps
 
         const handleCancel = () => {
           // reset the final form to initialValues
-          form.reset();
-          onCancel();
-        };
+          form.reset()
+          onCancel()
+        }
 
-        const clear = intl.formatMessage({ id: 'FilterForm.clear' });
-        const cancel = intl.formatMessage({ id: 'FilterForm.cancel' });
-        const submit = intl.formatMessage({ id: 'FilterForm.submit' });
+        const clear = intl.formatMessage({ id: 'FilterForm.clear' })
+        const cancel = intl.formatMessage({ id: 'FilterForm.cancel' })
+        const submit = intl.formatMessage({ id: 'FilterForm.submit' })
 
-        const classes = classNames(css.root);
+        const classes = classNames(css.root)
 
         return (
           <Form
@@ -84,11 +84,11 @@ const FilterFormComponent = props => {
               </div>
             )}
           </Form>
-        );
+        )
       }}
     />
-  );
-};
+  )
+}
 
 FilterFormComponent.defaultProps = {
   liveEdit: false,
@@ -97,7 +97,7 @@ FilterFormComponent.defaultProps = {
   onChange: null,
   onClear: null,
   onSubmit: null,
-};
+}
 
 FilterFormComponent.propTypes = {
   liveEdit: bool,
@@ -110,8 +110,8 @@ FilterFormComponent.propTypes = {
 
   // form injectIntl
   intl: intlShape.isRequired,
-};
+}
 
-const FilterForm = injectIntl(FilterFormComponent);
+const FilterForm = injectIntl(FilterFormComponent)
 
-export default FilterForm;
+export default FilterForm

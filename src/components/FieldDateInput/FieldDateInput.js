@@ -4,17 +4,17 @@
  * NOTE: If you are using this component inside BookingDatesForm,
  * you should convert value.date to start date and end date before submitting it to API
  */
-import React, { Component } from 'react';
-import { bool, object, string, arrayOf } from 'prop-types';
-import { Field } from 'react-final-form';
-import classNames from 'classnames';
-import { ValidationError } from '../../components';
-import { propTypes } from '../../util/types';
+import React, { Component } from 'react'
+import { bool, object, string, arrayOf } from 'prop-types'
+import { Field } from 'react-final-form'
+import classNames from 'classnames'
+import { ValidationError } from '../../components'
+import { propTypes } from '../../util/types'
 
-import DateInput from './DateInput';
-import css from './FieldDateInput.css';
+import DateInput from './DateInput'
+import css from './FieldDateInput.css'
 
-const MAX_MOBILE_SCREEN_WIDTH = 768;
+const MAX_MOBILE_SCREEN_WIDTH = 768
 
 class FieldDateInputComponent extends Component {
   render() {
@@ -27,27 +27,27 @@ class FieldDateInputComponent extends Component {
       meta,
       useMobileMargins,
       ...rest
-    } = this.props;
+    } = this.props
 
     if (label && !id) {
-      throw new Error('id required when a label is given');
+      throw new Error('id required when a label is given')
     }
 
-    const { touched, invalid, error } = meta;
-    const value = input.value;
+    const { touched, invalid, error } = meta
+    const value = input.value
 
     // If startDate is valid label changes color and bottom border changes color too
-    const dateIsValid = value && value.date instanceof Date;
+    const dateIsValid = value && value.date instanceof Date
     // Error message and input error styles are only shown if the
     // field has been touched and the validation has failed.
-    const hasError = touched && invalid && error;
+    const hasError = touched && invalid && error
 
     const inputClasses = classNames({
       [css.pickerSuccess]: dateIsValid,
       [css.pickerError]: hasError,
-    });
+    })
 
-    const { onBlur, onFocus, type, ...restOfInput } = input;
+    const { onBlur, onFocus, type, ...restOfInput } = input
     const inputProps = {
       onBlur: input.onBlur,
       onFocus: input.onFocus,
@@ -56,9 +56,9 @@ class FieldDateInputComponent extends Component {
       readOnly: typeof window !== 'undefined' && window.innerWidth < MAX_MOBILE_SCREEN_WIDTH,
       ...restOfInput,
       ...rest,
-    };
-    const classes = classNames(rootClassName || css.fieldRoot, className);
-    const errorClasses = classNames({ [css.mobileMargins]: useMobileMargins });
+    }
+    const classes = classNames(rootClassName || css.fieldRoot, className)
+    const errorClasses = classNames({ [css.mobileMargins]: useMobileMargins })
 
     return (
       <div className={classes}>
@@ -70,7 +70,7 @@ class FieldDateInputComponent extends Component {
         <DateInput className={inputClasses} {...inputProps} />
         <ValidationError className={errorClasses} fieldMeta={meta} />
       </div>
-    );
+    )
   }
 }
 
@@ -82,7 +82,7 @@ FieldDateInputComponent.defaultProps = {
   label: null,
   placeholderText: null,
   timeSlots: null,
-};
+}
 
 FieldDateInputComponent.propTypes = {
   className: string,
@@ -94,11 +94,11 @@ FieldDateInputComponent.propTypes = {
   timeSlots: arrayOf(propTypes.timeSlot),
   input: object.isRequired,
   meta: object.isRequired,
-};
+}
 
-const FieldDateInput = props => {
-  return <Field component={FieldDateInputComponent} {...props} />;
-};
+const FieldDateInput = (props) => {
+  return <Field component={FieldDateInputComponent} {...props} />
+}
 
-export { DateInput };
-export default FieldDateInput;
+export { DateInput }
+export default FieldDateInput

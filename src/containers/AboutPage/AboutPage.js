@@ -1,7 +1,7 @@
-import React from 'react';
-import config from '../../config';
-import { twitterPageURL } from '../../util/urlHelpers';
-import { StaticPage, TopbarContainer } from '../../containers';
+import React from 'react'
+import config from '../../config'
+import { twitterPageURL } from '../../util/urlHelpers'
+import { StaticPage, TopbarContainer } from '../../containers'
 import {
   LayoutSingleColumn,
   LayoutWrapperTopbar,
@@ -9,14 +9,14 @@ import {
   LayoutWrapperFooter,
   Footer,
   ExternalLink,
-} from '../../components';
+} from '../../components'
 
-import css from './AboutPage.css';
-import image from './about-us-1056.jpg';
+import css from './AboutPage.css'
+import image from './about-us-1056.jpg'
 
 const AboutPage = () => {
-  const { siteTwitterHandle, siteFacebookPage } = config;
-  const siteTwitterPage = twitterPageURL(siteTwitterHandle);
+  const { siteTwitterHandle, siteFacebookPage } = config
+  const siteTwitterPage = twitterPageURL(siteTwitterHandle)
 
   // prettier-ignore
   return (
@@ -93,6 +93,6 @@ const AboutPage = () => {
       </LayoutSingleColumn>
     </StaticPage>
   );
-};
+}
 
-export default AboutPage;
+export default AboutPage

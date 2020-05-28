@@ -1,20 +1,20 @@
-import React from 'react';
-import { string } from 'prop-types';
-import classNames from 'classnames';
+import React from 'react'
+import { string } from 'prop-types'
+import classNames from 'classnames'
 
-import css from './IconCard.css';
+import css from './IconCard.css'
 
-const BRAND_AMEX = 'amex';
-const BRAND_DINERS = 'diners';
-const BRAND_DISCOVERY = 'discovery';
-const BRAND_JCB = 'jcb';
-const BRAND_MASTERCARD = 'mastercard';
-const BRAND_UNIONPAY = 'unionpay';
-const BRAND_VISA = 'visa';
+const BRAND_AMEX = 'amex'
+const BRAND_DINERS = 'diners'
+const BRAND_DISCOVERY = 'discovery'
+const BRAND_JCB = 'jcb'
+const BRAND_MASTERCARD = 'mastercard'
+const BRAND_UNIONPAY = 'unionpay'
+const BRAND_VISA = 'visa'
 
-const IconCard = props => {
-  const { className, rootClassName, brand } = props;
-  const classes = classNames(rootClassName || css.root, className);
+const IconCard = (props) => {
+  const { className, rootClassName, brand } = props
+  const classes = classNames(rootClassName || css.root, className)
 
   switch (brand) {
     case BRAND_AMEX:
@@ -50,7 +50,7 @@ const IconCard = props => {
             </g>
           </g>
         </svg>
-      );
+      )
     case BRAND_DINERS:
       return (
         <svg
@@ -78,7 +78,7 @@ const IconCard = props => {
             />
           </g>
         </svg>
-      );
+      )
     case BRAND_DISCOVERY:
       return (
         <svg
@@ -110,7 +110,7 @@ const IconCard = props => {
             />
           </g>
         </svg>
-      );
+      )
     case BRAND_JCB:
       return (
         <svg
@@ -147,7 +147,7 @@ const IconCard = props => {
             />
           </g>
         </svg>
-      );
+      )
     case BRAND_MASTERCARD:
       return (
         <svg
@@ -167,7 +167,7 @@ const IconCard = props => {
             />
           </g>
         </svg>
-      );
+      )
     case BRAND_UNIONPAY:
       return (
         <svg
@@ -196,7 +196,7 @@ const IconCard = props => {
             />
           </g>
         </svg>
-      );
+      )
     case BRAND_VISA:
       return (
         <svg
@@ -224,7 +224,7 @@ const IconCard = props => {
             />
           </g>
         </svg>
-      );
+      )
     default:
       return (
         <svg
@@ -245,20 +245,20 @@ const IconCard = props => {
             />
           </g>
         </svg>
-      );
+      )
   }
-};
+}
 
 IconCard.defaultProps = {
   className: null,
   rootClassName: null,
   brand: 'default',
-};
+}
 
 IconCard.propTypes = {
   className: string,
   rootClassName: string,
   brand: string,
-};
+}
 
-export default IconCard;
+export default IconCard

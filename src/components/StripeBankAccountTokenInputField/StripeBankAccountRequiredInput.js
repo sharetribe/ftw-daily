@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { FormattedMessage } from '../../util/reactIntl';
-import classNames from 'classnames';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { FormattedMessage } from '../../util/reactIntl'
+import classNames from 'classnames'
 
-import css from './StripeBankAccountTokenInputField.css';
+import css from './StripeBankAccountTokenInputField.css'
 
-const StripeBankAccountRequiredInput = props => {
+const StripeBankAccountRequiredInput = (props) => {
   const {
     className,
     rootClassName,
@@ -21,16 +21,16 @@ const StripeBankAccountRequiredInput = props => {
     inputError,
     disabled,
     showInColumns,
-  } = props;
+  } = props
 
-  const showInputError = isTouched && !!inputError;
+  const showInputError = isTouched && !!inputError
 
   const classes = classNames(rootClassName || css.input, className, {
     [css.inputSuccess]: !!value,
     [css.inputError]: showInputError || showStripeError,
-  });
+  })
 
-  const columnsClass = showInColumns ? css.longForm : null;
+  const columnsClass = showInColumns ? css.longForm : null
 
   const inputProps = {
     className: classes,
@@ -41,9 +41,9 @@ const StripeBankAccountRequiredInput = props => {
     onFocus,
     onBlur,
     disabled,
-  };
+  }
 
-  const errorMessage = <p className={css.error}>{inputError}</p>;
+  const errorMessage = <p className={css.error}>{inputError}</p>
 
   return (
     <div className={classNames(classes, columnsClass)}>
@@ -53,17 +53,17 @@ const StripeBankAccountRequiredInput = props => {
       <input {...inputProps} />
       {showInputError ? errorMessage : null}
     </div>
-  );
-};
+  )
+}
 
-const { bool, func, string } = PropTypes;
+const { bool, func, string } = PropTypes
 
 StripeBankAccountRequiredInput.defaultProps = {
   rootClassName: null,
   className: null,
   inputError: null,
   disabled: false,
-};
+}
 
 StripeBankAccountRequiredInput.propTypes = {
   rootClassName: string,
@@ -79,6 +79,6 @@ StripeBankAccountRequiredInput.propTypes = {
   showStripeError: bool.isRequired,
   inputError: string,
   disabled: bool,
-};
+}
 
-export default StripeBankAccountRequiredInput;
+export default StripeBankAccountRequiredInput

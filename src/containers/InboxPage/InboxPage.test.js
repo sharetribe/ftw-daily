@@ -1,46 +1,46 @@
-import React from 'react';
-import { RoutesProvider } from '../../components';
-import { renderShallow, renderDeep } from '../../util/test-helpers';
+import React from 'react'
+import { RoutesProvider } from '../../components'
+import { renderShallow, renderDeep } from '../../util/test-helpers'
 import {
   fakeIntl,
   createCurrentUser,
   createUser,
   createTransaction,
   createBooking,
-} from '../../util/test-data';
-import { InboxPageComponent, InboxItem, txState } from './InboxPage';
-import routeConfiguration from '../../routeConfiguration';
-import { TRANSITION_CONFIRM_PAYMENT } from '../../util/transaction';
-import { LINE_ITEM_NIGHT } from '../../util/types';
+} from '../../util/test-data'
+import { InboxPageComponent, InboxItem, txState } from './InboxPage'
+import routeConfiguration from '../../routeConfiguration'
+import { TRANSITION_CONFIRM_PAYMENT } from '../../util/transaction'
+import { LINE_ITEM_NIGHT } from '../../util/types'
 
-const noop = () => null;
+const noop = () => null
 
 describe('InboxPage', () => {
   it('matches snapshot', () => {
-    const provider = createUser('provider-user-id');
-    const customer = createUser('customer-user-id');
-    const currentUserProvider = createCurrentUser('provider-user-id');
-    const currentUserCustomer = createCurrentUser('customer-user-id');
+    const provider = createUser('provider-user-id')
+    const customer = createUser('customer-user-id')
+    const currentUserProvider = createCurrentUser('provider-user-id')
+    const currentUserCustomer = createCurrentUser('customer-user-id')
 
-    const startBooking1 = new Date(Date.UTC(2017, 1, 15));
-    const endBooking1 = new Date(Date.UTC(2017, 1, 16));
+    const startBooking1 = new Date(Date.UTC(2017, 1, 15))
+    const endBooking1 = new Date(Date.UTC(2017, 1, 16))
 
     const booking1 = createBooking('booking1', {
       start: startBooking1,
       end: endBooking1,
       displayStart: startBooking1,
       displayEnd: endBooking1,
-    });
+    })
 
-    const startBooking2 = new Date(Date.UTC(2017, 2, 15));
-    const endBooking2 = new Date(Date.UTC(2017, 2, 16));
+    const startBooking2 = new Date(Date.UTC(2017, 2, 15))
+    const endBooking2 = new Date(Date.UTC(2017, 2, 16))
 
     const booking2 = createBooking('booking2', {
       start: startBooking2,
       end: endBooking2,
       displayStart: startBooking2,
       displayEnd: endBooking2,
-    });
+    })
 
     const ordersProps = {
       unitType: LINE_ITEM_NIGHT,
@@ -80,12 +80,12 @@ describe('InboxPage', () => {
       scrollingDisabled: false,
       sendVerificationEmailInProgress: false,
       onResendVerificationEmail: noop,
-    };
+    }
 
-    const ordersTree = renderShallow(<InboxPageComponent {...ordersProps} />);
-    expect(ordersTree).toMatchSnapshot();
+    const ordersTree = renderShallow(<InboxPageComponent {...ordersProps} />)
+    expect(ordersTree).toMatchSnapshot()
 
-    const stateDataOrder = txState(fakeIntl, ordersProps.transactions[0], 'order');
+    const stateDataOrder = txState(fakeIntl, ordersProps.transactions[0], 'order')
 
     // Deeply render one InboxItem
     const orderItem = renderDeep(
@@ -95,9 +95,9 @@ describe('InboxPage', () => {
         tx={ordersProps.transactions[0]}
         intl={fakeIntl}
         stateData={stateDataOrder}
-      />
-    );
-    expect(orderItem).toMatchSnapshot();
+      />,
+    )
+    expect(orderItem).toMatchSnapshot()
 
     const salesProps = {
       unitType: LINE_ITEM_NIGHT,
@@ -137,12 +137,12 @@ describe('InboxPage', () => {
       scrollingDisabled: false,
       sendVerificationEmailInProgress: false,
       onResendVerificationEmail: noop,
-    };
+    }
 
-    const salesTree = renderShallow(<InboxPageComponent {...salesProps} />);
-    expect(salesTree).toMatchSnapshot();
+    const salesTree = renderShallow(<InboxPageComponent {...salesProps} />)
+    expect(salesTree).toMatchSnapshot()
 
-    const stateDataSale = txState(fakeIntl, salesProps.transactions[0], 'sale');
+    const stateDataSale = txState(fakeIntl, salesProps.transactions[0], 'sale')
 
     // Deeply render one InboxItem
     const saleItem = renderDeep(
@@ -152,8 +152,8 @@ describe('InboxPage', () => {
         tx={salesProps.transactions[0]}
         intl={fakeIntl}
         stateData={stateDataSale}
-      />
-    );
-    expect(saleItem).toMatchSnapshot();
-  });
-});
+      />,
+    )
+    expect(saleItem).toMatchSnapshot()
+  })
+})

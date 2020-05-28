@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { Form as FinalForm, Field } from 'react-final-form';
-import { propTypes } from '../../util/types';
-import { Button } from '../../components';
-import LocationAutocompleteInput from './LocationAutocompleteInput';
+import React, { Component } from 'react'
+import { Form as FinalForm, Field } from 'react-final-form'
+import { propTypes } from '../../util/types'
+import { Button } from '../../components'
+import LocationAutocompleteInput from './LocationAutocompleteInput'
 
-const identity = v => v;
+const identity = (v) => v
 
-const Form = props => {
+const Form = (props) => {
   return (
     <FinalForm
       {...props}
@@ -19,15 +19,15 @@ const Form = props => {
               Submit
             </Button>
           </form>
-        );
+        )
       }}
     />
-  );
-};
+  )
+}
 
-const PlaceInfo = props => {
-  const { place } = props;
-  const { address, origin, bounds } = place;
+const PlaceInfo = (props) => {
+  const { place } = props
+  const { address, origin, bounds } = place
   return (
     <div>
       <p>Submitted place:</p>
@@ -39,21 +39,21 @@ const PlaceInfo = props => {
         <li>Bounds?: {bounds ? 'yes' : 'no'}</li>
       </ul>
     </div>
-  );
-};
+  )
+}
 
-PlaceInfo.propTypes = { place: propTypes.place.isRequired };
+PlaceInfo.propTypes = { place: propTypes.place.isRequired }
 
 class FormContainer extends Component {
   constructor(props) {
-    super(props);
-    this.state = { location: {} };
+    super(props)
+    this.state = { location: {} }
   }
   render() {
-    const onSubmit = values => {
-      this.setState({ location: values.location });
-    };
-    const place = this.state.location.selectedPlace;
+    const onSubmit = (values) => {
+      this.setState({ location: values.location })
+    }
+    const place = this.state.location.selectedPlace
     return (
       <div>
         <p>
@@ -62,11 +62,11 @@ class FormContainer extends Component {
         <Form onSubmit={onSubmit} />
         {place ? <PlaceInfo place={place} /> : null}
       </div>
-    );
+    )
   }
 }
 
 export const Empty = {
   component: FormContainer,
   group: 'custom inputs',
-};
+}

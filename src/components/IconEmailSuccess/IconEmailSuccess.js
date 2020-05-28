@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
-import css from './IconEmailSuccess.css';
+import css from './IconEmailSuccess.css'
 
-const IconEmailSuccess = props => {
-  const { rootClassName, className } = props;
-  const classes = classNames(rootClassName || css.root, className);
+const IconEmailSuccess = (props) => {
+  const { rootClassName, className } = props
+  const classes = classNames(rootClassName || css.root, className)
   return (
     <svg
       className={classes}
@@ -40,13 +40,13 @@ const IconEmailSuccess = props => {
         />
       </g>
     </svg>
-  );
-};
+  )
+}
 
-IconEmailSuccess.defaultProps = { rootClassName: null, className: null };
+IconEmailSuccess.defaultProps = { rootClassName: null, className: null }
 
-const { string } = PropTypes;
+const { string } = PropTypes
 
-IconEmailSuccess.propTypes = { rootClassName: string, className: string };
+IconEmailSuccess.propTypes = { rootClassName: string, className: string }
 
-export default IconEmailSuccess;
+export default IconEmailSuccess

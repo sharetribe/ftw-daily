@@ -1,25 +1,25 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import ReactDOMServer from 'react-dom/server';
+import React from 'react'
+import PropTypes from 'prop-types'
+import ReactDOMServer from 'react-dom/server'
 
 // react-dates needs to be initialized before using any react-dates component
 // https://github.com/airbnb/react-dates#initialize
 // NOTE: Initializing it here will initialize it also for app.test.js
-import 'react-dates/initialize';
-import { HelmetProvider } from 'react-helmet-async';
-import { BrowserRouter, StaticRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import difference from 'lodash/difference';
-import mapValues from 'lodash/mapValues';
-import moment from 'moment';
-import { IntlProvider } from './util/reactIntl';
-import configureStore from './store';
-import routeConfiguration from './routeConfiguration';
-import Routes from './Routes';
-import config from './config';
+import 'react-dates/initialize'
+import { HelmetProvider } from 'react-helmet-async'
+import { BrowserRouter, StaticRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import difference from 'lodash/difference'
+import mapValues from 'lodash/mapValues'
+import moment from 'moment'
+import { IntlProvider } from './util/reactIntl'
+import configureStore from './store'
+import routeConfiguration from './routeConfiguration'
+import Routes from './Routes'
+import config from './config'
 
 // Flex template application uses English translations as default.
-import defaultMessages from './translations/en.json';
+import defaultMessages from './translations/en.json'
 
 // If you want to change the language, change the imports to match the wanted locale:
 //   1) Change the language in the config.js file!
@@ -38,53 +38,53 @@ import defaultMessages from './translations/en.json';
 
 // Step 3:
 // If you are using a non-english locale, point `messagesInLocale` to correct .json file
-import messagesInLocale from './translations/fr.json';
+import messagesInLocale from './translations/fr.json'
 
 // If translation key is missing from `messagesInLocale` (e.g. fr.json),
 // corresponding key will be added to messages from `defaultMessages` (en.json)
 // to prevent missing translation key errors.
 const addMissingTranslations = (sourceLangTranslations, targetLangTranslations) => {
-  const sourceKeys = Object.keys(sourceLangTranslations);
-  const targetKeys = Object.keys(targetLangTranslations);
-  const missingKeys = difference(sourceKeys, targetKeys);
+  const sourceKeys = Object.keys(sourceLangTranslations)
+  const targetKeys = Object.keys(targetLangTranslations)
+  const missingKeys = difference(sourceKeys, targetKeys)
 
   const addMissingTranslation = (translations, missingKey) => ({
     ...translations,
     [missingKey]: sourceLangTranslations[missingKey],
-  });
+  })
 
-  return missingKeys.reduce(addMissingTranslation, targetLangTranslations);
-};
+  return missingKeys.reduce(addMissingTranslation, targetLangTranslations)
+}
 
-const isDefaultLanguageInUse = config.locale === 'en';
+const isDefaultLanguageInUse = config.locale === 'en'
 
 const messages = isDefaultLanguageInUse
   ? defaultMessages
-  : addMissingTranslations(defaultMessages, messagesInLocale);
+  : addMissingTranslations(defaultMessages, messagesInLocale)
 
-const isTestEnv = process.env.NODE_ENV === 'test';
+const isTestEnv = process.env.NODE_ENV === 'test'
 
 // Locale should not affect the tests. We ensure this by providing
 // messages with the key as the value of each message.
-const testMessages = mapValues(messages, (val, key) => key);
-const localeMessages = isTestEnv ? testMessages : messages;
+const testMessages = mapValues(messages, (val, key) => key)
+const localeMessages = isTestEnv ? testMessages : messages
 
 const setupLocale = () => {
   if (isTestEnv) {
     // Use english as a default locale in tests
     // This affects app.test.js and app.node.test.js tests
-    config.locale = 'en';
-    return;
+    config.locale = 'en'
+    return
   }
 
   // Set the Moment locale globally
   // See: http://momentjs.com/docs/#/i18n/changing-locale/
-  moment.locale(config.locale);
-};
+  moment.locale(config.locale)
+}
 
-export const ClientApp = props => {
-  const { store } = props;
-  setupLocale();
+export const ClientApp = (props) => {
+  const { store } = props
+  setupLocale()
   return (
     <IntlProvider locale={config.locale} messages={localeMessages} textComponent="span">
       <Provider store={store}>
@@ -95,17 +95,17 @@ export const ClientApp = props => {
         </HelmetProvider>
       </Provider>
     </IntlProvider>
-  );
-};
+  )
+}
 
-const { any, string } = PropTypes;
+const { any, string } = PropTypes
 
-ClientApp.propTypes = { store: any.isRequired };
+ClientApp.propTypes = { store: any.isRequired }
 
-export const ServerApp = props => {
-  const { url, context, helmetContext, store } = props;
-  setupLocale();
-  HelmetProvider.canUseDOM = false;
+export const ServerApp = (props) => {
+  const { url, context, helmetContext, store } = props
+  setupLocale()
+  HelmetProvider.canUseDOM = false
   return (
     <IntlProvider locale={config.locale} messages={localeMessages} textComponent="span">
       <Provider store={store}>
@@ -116,10 +116,10 @@ export const ServerApp = props => {
         </HelmetProvider>
       </Provider>
     </IntlProvider>
-  );
-};
+  )
+}
 
-ServerApp.propTypes = { url: string.isRequired, context: any.isRequired, store: any.isRequired };
+ServerApp.propTypes = { url: string.isRequired, context: any.isRequired, store: any.isRequired }
 
 /**
  * Render the given route.
@@ -135,13 +135,13 @@ export const renderApp = (url, serverContext, preloadedState) => {
   // Don't pass an SDK instance since we're only rendering the
   // component tree with the preloaded store state and components
   // shouldn't do any SDK calls in the (server) rendering lifecycle.
-  const store = configureStore(preloadedState);
+  const store = configureStore(preloadedState)
 
-  const helmetContext = {};
+  const helmetContext = {}
 
   const body = ReactDOMServer.renderToString(
-    <ServerApp url={url} context={serverContext} helmetContext={helmetContext} store={store} />
-  );
-  const { helmet: head } = helmetContext;
-  return { head, body };
-};
+    <ServerApp url={url} context={serverContext} helmetContext={helmetContext} store={store} />,
+  )
+  const { helmet: head } = helmetContext
+  return { head, body }
+}

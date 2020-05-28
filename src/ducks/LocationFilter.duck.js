@@ -6,19 +6,19 @@
  */
 
 // Actions
-export const CHANGE_LOCATION = 'app/LocationFilter/CHANGE_LOCATION';
+export const CHANGE_LOCATION = 'app/LocationFilter/CHANGE_LOCATION'
 
 // Reducer
 export default function reducer(state = '', action = {}) {
-  const { type, payload } = action;
+  const { type, payload } = action
   switch (type) {
     case CHANGE_LOCATION: {
-      return payload;
+      return payload
     }
     default:
-      return state;
+      return state
   }
 }
 
 // Action types
-export const changeLocationFilter = location => ({ type: CHANGE_LOCATION, payload: location });
+export const changeLocationFilter = (location) => ({ type: CHANGE_LOCATION, payload: location })

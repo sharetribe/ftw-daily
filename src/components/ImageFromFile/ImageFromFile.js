@@ -1,43 +1,43 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { FormattedMessage } from '../../util/reactIntl';
-import classNames from 'classnames';
-import { Promised } from '../../components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { FormattedMessage } from '../../util/reactIntl'
+import classNames from 'classnames'
+import { Promised } from '../../components'
 
-import css from './ImageFromFile.css';
+import css from './ImageFromFile.css'
 
 // readImage returns a promise which is resolved
 // when FileReader has loaded given file as dataURL
-const readImage = file =>
+const readImage = (file) =>
   new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = e => resolve(e.target.result);
-    reader.onerror = e => {
+    const reader = new FileReader()
+    reader.onload = (e) => resolve(e.target.result)
+    reader.onerror = (e) => {
       // eslint-disable-next-line
-      console.error('Error (', e, `) happened while reading ${file.name}: ${e.target.result}`);
-      reject(new Error(`Error reading ${file.name}: ${e.target.result}`));
-    };
-    reader.readAsDataURL(file);
-  });
+      console.error('Error (', e, `) happened while reading ${file.name}: ${e.target.result}`)
+      reject(new Error(`Error reading ${file.name}: ${e.target.result}`))
+    }
+    reader.readAsDataURL(file)
+  })
 
 // Create elements out of given thumbnail file
 class ImageFromFile extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       promisedImage: readImage(this.props.file),
-    };
+    }
   }
 
   render() {
-    const { className, rootClassName, aspectRatioClassName, file, id, children } = this.props;
-    const classes = classNames(rootClassName || css.root, className);
-    const aspectRatioClasses = aspectRatioClassName || css.aspectWrapper;
+    const { className, rootClassName, aspectRatioClassName, file, id, children } = this.props
+    const classes = classNames(rootClassName || css.root, className)
+    const aspectRatioClasses = aspectRatioClassName || css.aspectWrapper
     return (
       <Promised
         key={id}
         promise={this.state.promisedImage}
-        renderFulfilled={dataURL => {
+        renderFulfilled={(dataURL) => {
           return (
             <div className={classes}>
               <div className={css.threeToTwoWrapper}>
@@ -47,7 +47,7 @@ class ImageFromFile extends Component {
               </div>
               {children}
             </div>
-          );
+          )
         }}
         renderRejected={() => (
           <div className={classes}>
@@ -55,7 +55,7 @@ class ImageFromFile extends Component {
           </div>
         )}
       />
-    );
+    )
   }
 }
 
@@ -64,9 +64,9 @@ ImageFromFile.defaultProps = {
   children: null,
   rootClassName: null,
   aspectRatioClassName: null,
-};
+}
 
-const { any, node, string } = PropTypes;
+const { any, node, string } = PropTypes
 
 ImageFromFile.propTypes = {
   className: string,
@@ -75,6 +75,6 @@ ImageFromFile.propTypes = {
   file: any.isRequired,
   id: string.isRequired,
   children: node,
-};
+}
 
-export default ImageFromFile;
+export default ImageFromFile

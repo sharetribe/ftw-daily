@@ -1,18 +1,18 @@
-import React from 'react';
-import { bool, func, oneOf, shape } from 'prop-types';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import routeConfiguration from '../../routeConfiguration';
-import config from '../../config';
-import { createResourceLocatorString } from '../../util/routes';
-import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
-import { ensureCurrentUser } from '../../util/data';
-import { propTypes } from '../../util/types';
-import { isScrollingDisabled } from '../../ducks/UI.duck';
+import React from 'react'
+import { bool, func, oneOf, shape } from 'prop-types'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import routeConfiguration from '../../routeConfiguration'
+import config from '../../config'
+import { createResourceLocatorString } from '../../util/routes'
+import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl'
+import { ensureCurrentUser } from '../../util/data'
+import { propTypes } from '../../util/types'
+import { isScrollingDisabled } from '../../ducks/UI.duck'
 import {
   stripeAccountClearError,
   getStripeConnectAccountLink,
-} from '../../ducks/stripeConnectAccount.duck';
+} from '../../ducks/stripeConnectAccount.duck'
 import {
   NamedRedirect,
   LayoutSideNavigation,
@@ -24,19 +24,19 @@ import {
   Page,
   StripeConnectAccountStatusBox,
   UserNav,
-} from '../../components';
-import { StripeConnectAccountForm } from '../../forms';
-import { TopbarContainer } from '..';
-import { savePayoutDetails, loadData } from './StripePayoutPage.duck';
+} from '../../components'
+import { StripeConnectAccountForm } from '../../forms'
+import { TopbarContainer } from '..'
+import { savePayoutDetails, loadData } from './StripePayoutPage.duck'
 
-import css from './StripePayoutPage.css';
+import css from './StripePayoutPage.css'
 
-const STRIPE_ONBOARDING_RETURN_URL_SUCCESS = 'success';
-const STRIPE_ONBOARDING_RETURN_URL_FAILURE = 'failure';
+const STRIPE_ONBOARDING_RETURN_URL_SUCCESS = 'success'
+const STRIPE_ONBOARDING_RETURN_URL_FAILURE = 'failure'
 const STRIPE_ONBOARDING_RETURN_URL_TYPES = [
   STRIPE_ONBOARDING_RETURN_URL_SUCCESS,
   STRIPE_ONBOARDING_RETURN_URL_FAILURE,
-];
+]
 
 // Create return URL for the Stripe onboarding form
 const createReturnURL = (returnURLType, rootURL, routes) => {
@@ -44,38 +44,38 @@ const createReturnURL = (returnURLType, rootURL, routes) => {
     'StripePayoutOnboardingPage',
     routes,
     { returnURLType },
-    {}
-  );
-  const root = rootURL.replace(/\/$/, '');
-  return `${root}${path}`;
-};
+    {},
+  )
+  const root = rootURL.replace(/\/$/, '')
+  return `${root}${path}`
+}
 
 // Get attribute: stripeAccountData
-const getStripeAccountData = stripeAccount => stripeAccount.attributes.stripeAccountData || null;
+const getStripeAccountData = (stripeAccount) => stripeAccount.attributes.stripeAccountData || null
 
 // Get last 4 digits of bank account returned in Stripe account
-const getBankAccountLast4Digits = stripeAccountData =>
+const getBankAccountLast4Digits = (stripeAccountData) =>
   stripeAccountData && stripeAccountData.external_accounts.data.length > 0
     ? stripeAccountData.external_accounts.data[0].last4
-    : null;
+    : null
 
 // Check if there's requirements on selected type: 'past_due', 'currently_due' etc.
 const hasRequirements = (stripeAccountData, requirementType) =>
   stripeAccountData != null &&
   stripeAccountData.requirements &&
   Array.isArray(stripeAccountData.requirements[requirementType]) &&
-  stripeAccountData.requirements[requirementType].length > 0;
+  stripeAccountData.requirements[requirementType].length > 0
 
 // Redirect user to Stripe's hosted Connect account onboarding form
-const handleGetStripeConnectAccountLinkFn = (getLinkFn, commonParams) => type => () => {
+const handleGetStripeConnectAccountLinkFn = (getLinkFn, commonParams) => (type) => () => {
   getLinkFn({ type, ...commonParams })
-    .then(url => {
-      window.location.href = url;
+    .then((url) => {
+      window.location.href = url
     })
-    .catch(err => console.error(err));
-};
+    .catch((err) => console.error(err))
+}
 
-export const StripePayoutPageComponent = props => {
+export const StripePayoutPageComponent = (props) => {
   const {
     currentUser,
     scrollingDisabled,
@@ -93,30 +93,30 @@ export const StripePayoutPageComponent = props => {
     payoutDetailsSaved,
     params,
     intl,
-  } = props;
+  } = props
 
-  const { returnURLType } = params;
-  const ensuredCurrentUser = ensureCurrentUser(currentUser);
-  const currentUserLoaded = !!ensuredCurrentUser.id;
-  const stripeConnected = currentUserLoaded && !!stripeAccount && !!stripeAccount.id;
+  const { returnURLType } = params
+  const ensuredCurrentUser = ensureCurrentUser(currentUser)
+  const currentUserLoaded = !!ensuredCurrentUser.id
+  const stripeConnected = currentUserLoaded && !!stripeAccount && !!stripeAccount.id
 
-  const title = intl.formatMessage({ id: 'StripePayoutPage.title' });
+  const title = intl.formatMessage({ id: 'StripePayoutPage.title' })
 
-  const formDisabled = getAccountLinkInProgress;
+  const formDisabled = getAccountLinkInProgress
 
-  const rootURL = config.canonicalRootURL;
-  const routes = routeConfiguration();
-  const successURL = createReturnURL(STRIPE_ONBOARDING_RETURN_URL_SUCCESS, rootURL, routes);
-  const failureURL = createReturnURL(STRIPE_ONBOARDING_RETURN_URL_FAILURE, rootURL, routes);
+  const rootURL = config.canonicalRootURL
+  const routes = routeConfiguration()
+  const successURL = createReturnURL(STRIPE_ONBOARDING_RETURN_URL_SUCCESS, rootURL, routes)
+  const failureURL = createReturnURL(STRIPE_ONBOARDING_RETURN_URL_FAILURE, rootURL, routes)
 
-  const accountId = stripeConnected ? stripeAccount.id : null;
-  const stripeAccountData = stripeConnected ? getStripeAccountData(stripeAccount) : null;
+  const accountId = stripeConnected ? stripeAccount.id : null
+  const stripeAccountData = stripeConnected ? getStripeAccountData(stripeAccount) : null
   const requirementsMissing =
     stripeAccount &&
     (hasRequirements(stripeAccountData, 'past_due') ||
-      hasRequirements(stripeAccountData, 'currently_due'));
+      hasRequirements(stripeAccountData, 'currently_due'))
 
-  const savedCountry = stripeAccountData ? stripeAccountData.country : null;
+  const savedCountry = stripeAccountData ? stripeAccountData.country : null
 
   const handleGetStripeConnectAccountLink = handleGetStripeConnectAccountLinkFn(
     onGetStripeConnectAccountLink,
@@ -124,22 +124,22 @@ export const StripePayoutPageComponent = props => {
       accountId,
       successURL,
       failureURL,
-    }
-  );
+    },
+  )
 
-  const returnedNormallyFromStripe = returnURLType === STRIPE_ONBOARDING_RETURN_URL_SUCCESS;
-  const returnedAbnormallyFromStripe = returnURLType === STRIPE_ONBOARDING_RETURN_URL_FAILURE;
-  const showVerificationNeeded = stripeConnected && requirementsMissing;
+  const returnedNormallyFromStripe = returnURLType === STRIPE_ONBOARDING_RETURN_URL_SUCCESS
+  const returnedAbnormallyFromStripe = returnURLType === STRIPE_ONBOARDING_RETURN_URL_FAILURE
+  const showVerificationNeeded = stripeConnected && requirementsMissing
 
   // Redirect from success URL to basic path for StripePayoutPage
   if (returnedNormallyFromStripe && stripeConnected && !requirementsMissing) {
-    return <NamedRedirect name="StripePayoutPage" />;
+    return <NamedRedirect name="StripePayoutPage" />
   }
 
   // Failure url should redirect back to Stripe since it's most likely due to page reload
   // Account link creation will fail if the account is the reason
   if (returnedAbnormallyFromStripe && !getAccountLinkError) {
-    handleGetStripeConnectAccountLink('custom_account_verification')();
+    handleGetStripeConnectAccountLink('custom_account_verification')()
   }
 
   return (
@@ -189,7 +189,7 @@ export const StripePayoutPageComponent = props => {
                     type="verificationNeeded"
                     inProgress={getAccountLinkInProgress}
                     onGetStripeConnectAccountLink={handleGetStripeConnectAccountLink(
-                      'custom_account_verification'
+                      'custom_account_verification',
                     )}
                   />
                 ) : stripeConnected && savedCountry && !returnedAbnormallyFromStripe ? (
@@ -198,7 +198,7 @@ export const StripePayoutPageComponent = props => {
                     inProgress={getAccountLinkInProgress}
                     disabled={payoutDetailsSaveInProgress}
                     onGetStripeConnectAccountLink={handleGetStripeConnectAccountLink(
-                      'custom_account_update'
+                      'custom_account_update',
                     )}
                   />
                 ) : null}
@@ -211,8 +211,8 @@ export const StripePayoutPageComponent = props => {
         </LayoutWrapperFooter>
       </LayoutSideNavigation>
     </Page>
-  );
-};
+  )
+}
 
 StripePayoutPageComponent.defaultProps = {
   currentUser: null,
@@ -224,7 +224,7 @@ StripePayoutPageComponent.defaultProps = {
   params: {
     returnURLType: null,
   },
-};
+}
 
 StripePayoutPageComponent.propTypes = {
   currentUser: propTypes.currentUser,
@@ -248,9 +248,9 @@ StripePayoutPageComponent.propTypes = {
 
   // from injectIntl
   intl: intlShape.isRequired,
-};
+}
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const {
     getAccountLinkInProgress,
     getAccountLinkError,
@@ -259,9 +259,9 @@ const mapStateToProps = state => {
     fetchStripeAccountError,
     stripeAccount,
     stripeAccountFetched,
-  } = state.stripeConnectAccount;
-  const { currentUser } = state.user;
-  const { payoutDetailsSaveInProgress, payoutDetailsSaved } = state.StripePayoutPage;
+  } = state.stripeConnectAccount
+  const { currentUser } = state.user
+  const { payoutDetailsSaveInProgress, payoutDetailsSaved } = state.StripePayoutPage
   return {
     currentUser,
     getAccountLinkInProgress,
@@ -274,24 +274,21 @@ const mapStateToProps = state => {
     payoutDetailsSaveInProgress,
     payoutDetailsSaved,
     scrollingDisabled: isScrollingDisabled(state),
-  };
-};
+  }
+}
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onPayoutDetailsFormChange: () => dispatch(stripeAccountClearError()),
   onPayoutDetailsFormSubmit: (values, isUpdateCall) =>
     dispatch(savePayoutDetails(values, isUpdateCall)),
-  onGetStripeConnectAccountLink: params => dispatch(getStripeConnectAccountLink(params)),
-});
+  onGetStripeConnectAccountLink: (params) => dispatch(getStripeConnectAccountLink(params)),
+})
 
 const StripePayoutPage = compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  injectIntl
-)(StripePayoutPageComponent);
+  connect(mapStateToProps, mapDispatchToProps),
+  injectIntl,
+)(StripePayoutPageComponent)
 
-StripePayoutPage.loadData = loadData;
+StripePayoutPage.loadData = loadData
 
-export default StripePayoutPage;
+export default StripePayoutPage

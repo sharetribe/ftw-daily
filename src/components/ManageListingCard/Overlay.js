@@ -1,20 +1,20 @@
-import React from 'react';
-import { node, string } from 'prop-types';
-import classNames from 'classnames';
+import React from 'react'
+import { node, string } from 'prop-types'
+import classNames from 'classnames'
 
-import css from './Overlay.css';
+import css from './Overlay.css'
 
-const Overlay = props => {
-  const { className, rootClassName, message, errorMessage, children } = props;
+const Overlay = (props) => {
+  const { className, rootClassName, message, errorMessage, children } = props
 
-  const classes = classNames(rootClassName || css.root, className);
+  const classes = classNames(rootClassName || css.root, className)
 
   return (
     <div
       className={classes}
-      onClick={event => {
-        event.preventDefault();
-        event.stopPropagation();
+      onClick={(event) => {
+        event.preventDefault()
+        event.stopPropagation()
       }}
     >
       <div className={css.overlay} />
@@ -24,8 +24,8 @@ const Overlay = props => {
         {children}
       </div>
     </div>
-  );
-};
+  )
+}
 
 Overlay.defaultProps = {
   className: null,
@@ -33,7 +33,7 @@ Overlay.defaultProps = {
   message: null,
   errorMessage: null,
   children: null,
-};
+}
 
 Overlay.propTypes = {
   className: string,
@@ -41,6 +41,6 @@ Overlay.propTypes = {
   message: string,
   errorMessage: string,
   children: node,
-};
+}
 
-export default Overlay;
+export default Overlay

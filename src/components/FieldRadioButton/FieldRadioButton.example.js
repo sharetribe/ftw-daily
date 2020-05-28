@@ -1,12 +1,12 @@
-import React from 'react';
-import { Form as FinalForm, FormSpy } from 'react-final-form';
-import { Button } from '..';
-import FieldRadioButton from './FieldRadioButton';
+import React from 'react'
+import { Form as FinalForm, FormSpy } from 'react-final-form'
+import { Button } from '..'
+import FieldRadioButton from './FieldRadioButton'
 
-const FormComponent = props => (
+const FormComponent = (props) => (
   <FinalForm
     {...props}
-    render={fieldRenderProps => {
+    render={(fieldRenderProps) => {
       const {
         handleSubmit,
         onChange,
@@ -15,17 +15,17 @@ const FormComponent = props => (
         submitting,
         required,
         id,
-      } = fieldRenderProps;
+      } = fieldRenderProps
 
-      const submitDisabled = invalid || pristine || submitting;
+      const submitDisabled = invalid || pristine || submitting
 
-      const showAsRequired = pristine && required;
+      const showAsRequired = pristine && required
 
       return (
         <form
-          onSubmit={e => {
-            e.preventDefault();
-            handleSubmit(e);
+          onSubmit={(e) => {
+            e.preventDefault()
+            handleSubmit(e)
           }}
         >
           <FormSpy onChange={onChange} />
@@ -55,41 +55,41 @@ const FormComponent = props => (
             Submit
           </Button>
         </form>
-      );
+      )
     }}
   />
-);
+)
 
 export const RadioButtonRequired = {
   component: FormComponent,
   props: {
-    onChange: formState => {
+    onChange: (formState) => {
       if (Object.keys(formState.values).length > 0) {
-        console.log('form values changed to:', formState.values);
+        console.log('form values changed to:', formState.values)
       }
     },
-    onSubmit: values => {
-      console.log('Submit values of FieldRadioButton: ', values);
+    onSubmit: (values) => {
+      console.log('Submit values of FieldRadioButton: ', values)
     },
     required: true,
     id: 'radiobutton',
   },
   group: 'inputs',
-};
+}
 
 export const RadioButtonNotRequired = {
   component: FormComponent,
   props: {
-    onChange: formState => {
+    onChange: (formState) => {
       if (Object.keys(formState.values).length > 0) {
-        console.log('form values changed to:', formState.values);
+        console.log('form values changed to:', formState.values)
       }
     },
-    onSubmit: values => {
-      console.log('Submit values of FieldRadioButton: ', values);
+    onSubmit: (values) => {
+      console.log('Submit values of FieldRadioButton: ', values)
     },
     required: false,
     id: 'radiobutton2',
   },
   group: 'inputs',
-};
+}

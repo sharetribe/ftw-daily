@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
-import css from './IconReviewUser.css';
+import css from './IconReviewUser.css'
 
-const IconReviewUser = props => {
-  const { className, rootClassName } = props;
-  const classes = classNames(rootClassName || css.root, className);
+const IconReviewUser = (props) => {
+  const { className, rootClassName } = props
+  const classes = classNames(rootClassName || css.root, className)
 
   return (
     <svg
@@ -29,16 +29,16 @@ const IconReviewUser = props => {
         />
       </g>
     </svg>
-  );
-};
+  )
+}
 
-IconReviewUser.defaultProps = { className: null, rootClassName: null };
+IconReviewUser.defaultProps = { className: null, rootClassName: null }
 
-const { string } = PropTypes;
+const { string } = PropTypes
 
 IconReviewUser.propTypes = {
   className: string,
   rootClassName: string,
-};
+}
 
-export default IconReviewUser;
+export default IconReviewUser

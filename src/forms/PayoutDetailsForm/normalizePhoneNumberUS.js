@@ -4,7 +4,7 @@
 /**
  * Format a phone number: this is just an override for default formatting.
  */
-export const format = value => (!value ? '' : value);
+export const format = (value) => (!value ? '' : value)
 
 /**
  * Parser that strips non-digit characters away from a phone number
@@ -12,21 +12,21 @@ export const format = value => (!value ? '' : value);
  *
  * Returns the given US phone number in format: 202-555-0102
  */
-export const parse = value => {
+export const parse = (value) => {
   if (!value) {
-    return value;
+    return value
   }
 
   const phoneNumber =
-    typeof value === 'string' && value.indexOf('+1') >= 0 ? value.substring(2) : value;
+    typeof value === 'string' && value.indexOf('+1') >= 0 ? value.substring(2) : value
 
-  const onlyNums = phoneNumber.replace(/[^\d]/g, '');
+  const onlyNums = phoneNumber.replace(/[^\d]/g, '')
 
   if (onlyNums.length <= 3) {
-    return onlyNums;
+    return onlyNums
   } else if (onlyNums.length <= 7) {
-    return `${onlyNums.slice(0, 3)}-${onlyNums.slice(3, 7)}`;
+    return `${onlyNums.slice(0, 3)}-${onlyNums.slice(3, 7)}`
   } else {
-    return `${onlyNums.slice(0, 3)}-${onlyNums.slice(3, 6)}-${onlyNums.slice(6, 10)}`;
+    return `${onlyNums.slice(0, 3)}-${onlyNums.slice(3, 6)}-${onlyNums.slice(6, 10)}`
   }
-};
+}

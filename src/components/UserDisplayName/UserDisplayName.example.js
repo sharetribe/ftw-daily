@@ -1,8 +1,8 @@
-import UserDisplayName from './UserDisplayName';
-import { types as sdkTypes } from '../../util/sdkLoader';
-import { fakeIntl } from '../../util/test-data';
+import UserDisplayName from './UserDisplayName'
+import { types as sdkTypes } from '../../util/sdkLoader'
+import { fakeIntl } from '../../util/test-data'
 
-const { UUID } = sdkTypes;
+const { UUID } = sdkTypes
 
 const bannedUser = {
   id: new UUID('banned-user'),
@@ -11,7 +11,7 @@ const bannedUser = {
     banned: true,
     deleted: false,
   },
-};
+}
 
 const deletedUser = {
   id: new UUID('deleted-user'),
@@ -20,7 +20,7 @@ const deletedUser = {
     banned: false,
     deleted: true,
   },
-};
+}
 
 const normalUser = {
   id: new UUID('normal-user'),
@@ -33,7 +33,7 @@ const normalUser = {
       abbreviatedName: 'NU',
     },
   },
-};
+}
 
 export const BannedUser = {
   component: UserDisplayName,
@@ -42,7 +42,7 @@ export const BannedUser = {
     intl: fakeIntl,
   },
   group: 'users',
-};
+}
 
 export const DeletedUser = {
   component: UserDisplayName,
@@ -51,7 +51,7 @@ export const DeletedUser = {
     intl: fakeIntl,
   },
   group: 'users',
-};
+}
 
 export const NormalUser = {
   component: UserDisplayName,
@@ -60,7 +60,7 @@ export const NormalUser = {
     intl: fakeIntl,
   },
   group: 'users',
-};
+}
 
 export const BannedUserWithCustomName = {
   component: UserDisplayName,
@@ -70,4 +70,4 @@ export const BannedUserWithCustomName = {
     intl: fakeIntl,
   },
   group: 'users',
-};
+}

@@ -1,10 +1,10 @@
-import React from 'react';
-import { NamedLink, AvatarLarge, AvatarMedium } from '../../components';
+import React from 'react'
+import { NamedLink, AvatarLarge, AvatarMedium } from '../../components'
 
-import css from './ListingPage.css';
+import css from './ListingPage.css'
 
-const SectionAvatar = props => {
-  const { user, params } = props;
+const SectionAvatar = (props) => {
+  const { user, params } = props
   return (
     <div className={css.sectionAvatar}>
       <NamedLink name="ListingPage" params={params} to={{ hash: '#host' }}>
@@ -14,7 +14,7 @@ const SectionAvatar = props => {
         <AvatarMedium user={user} className={css.avatarMobile} disableProfileLink />
       </NamedLink>
     </div>
-  );
-};
+  )
+}
 
-export default SectionAvatar;
+export default SectionAvatar

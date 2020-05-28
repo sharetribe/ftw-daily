@@ -1,26 +1,26 @@
-import React from 'react';
-import { oneOf, string } from 'prop-types';
-import classNames from 'classnames';
+import React from 'react'
+import { oneOf, string } from 'prop-types'
+import classNames from 'classnames'
 
-import css from './IconArrowHead.css';
+import css from './IconArrowHead.css'
 
-const DIRECTION_RIGHT = 'right';
-const DIRECTION_LEFT = 'left';
-const DIRECTION_DOWN = 'down';
-const DIRECTION_UP = 'up';
-const SIZE_BIG = 'big';
-const SIZE_SMALL = 'small';
+const DIRECTION_RIGHT = 'right'
+const DIRECTION_LEFT = 'left'
+const DIRECTION_DOWN = 'down'
+const DIRECTION_UP = 'up'
+const SIZE_BIG = 'big'
+const SIZE_SMALL = 'small'
 
-const IconArrowHead = props => {
-  const { className, rootClassName, direction, size } = props;
-  const classes = classNames(rootClassName || css.root, className);
+const IconArrowHead = (props) => {
+  const { className, rootClassName, direction, size } = props
+  const classes = classNames(rootClassName || css.root, className)
 
-  const isRight = direction === DIRECTION_RIGHT;
-  const isLeft = direction === DIRECTION_LEFT;
-  const isDown = direction === DIRECTION_DOWN;
-  const isUp = direction === DIRECTION_UP;
-  const isBig = size === SIZE_BIG;
-  const isSmall = size === SIZE_SMALL;
+  const isRight = direction === DIRECTION_RIGHT
+  const isLeft = direction === DIRECTION_LEFT
+  const isDown = direction === DIRECTION_DOWN
+  const isUp = direction === DIRECTION_UP
+  const isBig = size === SIZE_BIG
+  const isSmall = size === SIZE_SMALL
 
   if (isRight && isSmall) {
     return (
@@ -36,7 +36,7 @@ const IconArrowHead = props => {
           fillRule="evenodd"
         />
       </svg>
-    );
+    )
   } else if (isLeft && isSmall) {
     return (
       <svg
@@ -51,7 +51,7 @@ const IconArrowHead = props => {
           fillRule="evenodd"
         />
       </svg>
-    );
+    )
   } else if (isDown && isSmall) {
     return (
       <svg
@@ -66,7 +66,7 @@ const IconArrowHead = props => {
           fillRule="evenodd"
         />
       </svg>
-    );
+    )
   } else if (isUp && isSmall) {
     return (
       <svg
@@ -81,7 +81,7 @@ const IconArrowHead = props => {
           fillRule="evenodd"
         />
       </svg>
-    );
+    )
   } else if (isRight && isBig) {
     return (
       <svg
@@ -96,7 +96,7 @@ const IconArrowHead = props => {
           fillRule="evenodd"
         />
       </svg>
-    );
+    )
   } else if (isLeft && isBig) {
     return (
       <svg
@@ -111,7 +111,7 @@ const IconArrowHead = props => {
           fillRule="evenodd"
         />
       </svg>
-    );
+    )
   } else if (isDown && isBig) {
     return (
       <svg
@@ -126,7 +126,7 @@ const IconArrowHead = props => {
           fillRule="evenodd"
         />
       </svg>
-    );
+    )
   } else if (isUp && isBig) {
     return (
       <svg
@@ -141,21 +141,21 @@ const IconArrowHead = props => {
           fillRule="evenodd"
         />
       </svg>
-    );
+    )
   }
-};
+}
 
 IconArrowHead.defaultProps = {
   className: null,
   rootClassName: null,
   size: SIZE_SMALL,
-};
+}
 
 IconArrowHead.propTypes = {
   className: string,
   rootClassName: string,
   direction: oneOf([DIRECTION_RIGHT, DIRECTION_LEFT, DIRECTION_DOWN, DIRECTION_UP]).isRequired,
   size: oneOf([SIZE_BIG, SIZE_SMALL]),
-};
+}
 
-export default IconArrowHead;
+export default IconArrowHead

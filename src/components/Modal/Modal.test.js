@@ -1,6 +1,6 @@
-import React from 'react';
-import { renderDeep } from '../../util/test-helpers';
-import Modal from './Modal';
+import React from 'react'
+import { renderDeep } from '../../util/test-helpers'
+import Modal from './Modal'
 
 describe('Modal', () => {
   it('no extra classes when window is missing', () => {
@@ -8,11 +8,11 @@ describe('Modal', () => {
       id: 'TestModal',
       className: 'test-class-from-props',
       isOpen: false,
-      onClose: v => v,
-      onManageDisableScrolling: v => v,
-    };
+      onClose: (v) => v,
+      onManageDisableScrolling: (v) => v,
+    }
 
-    const tree = renderDeep(<Modal {...props}>Content</Modal>);
-    expect(tree).toMatchSnapshot();
-  });
-});
+    const tree = renderDeep(<Modal {...props}>Content</Modal>)
+    expect(tree).toMatchSnapshot()
+  })
+})

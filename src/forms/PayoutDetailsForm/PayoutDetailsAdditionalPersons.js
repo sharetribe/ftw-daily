@@ -1,15 +1,15 @@
-import React from 'react';
-import { bool, func, object, string } from 'prop-types';
-import { FormattedMessage, intlShape } from '../../util/reactIntl';
-import { FieldArray } from 'react-final-form-arrays';
-import { ExternalLink, IconAdd, IconClose, InlineTextButton } from '../../components';
+import React from 'react'
+import { bool, func, object, string } from 'prop-types'
+import { FormattedMessage, intlShape } from '../../util/reactIntl'
+import { FieldArray } from 'react-final-form-arrays'
+import { ExternalLink, IconAdd, IconClose, InlineTextButton } from '../../components'
 
-import PayoutDetailsAddress from './PayoutDetailsAddress';
-import PayoutDetailsPersonalDetails from './PayoutDetailsPersonalDetails';
+import PayoutDetailsAddress from './PayoutDetailsAddress'
+import PayoutDetailsPersonalDetails from './PayoutDetailsPersonalDetails'
 
-import css from './PayoutDetailsForm.css';
+import css from './PayoutDetailsForm.css'
 
-const PayoutDetailsAdditionalPersons = props => {
+const PayoutDetailsAdditionalPersons = (props) => {
   const {
     fieldId,
     country,
@@ -24,7 +24,7 @@ const PayoutDetailsAdditionalPersons = props => {
     showPersonalIdNumberField,
     showPhoneNumberField,
     values,
-  } = props;
+  } = props
 
   const additionalPersonInfoLink = (
     <ExternalLink
@@ -33,15 +33,15 @@ const PayoutDetailsAdditionalPersons = props => {
     >
       <FormattedMessage id="PayoutDetailsForm.additionalPersonInfoLink" />
     </ExternalLink>
-  );
+  )
 
-  const showOwnershipPercentageField = index =>
+  const showOwnershipPercentageField = (index) =>
     showOwnerField &&
     values &&
     values[fieldId] &&
     values[fieldId][index] &&
     values[fieldId][index].role &&
-    values[fieldId][index].role.find(r => r === 'owner');
+    values[fieldId][index].role.find((r) => r === 'owner')
 
   return (
     <div className={css.additionalPersonsWrapper}>
@@ -110,8 +110,8 @@ const PayoutDetailsAdditionalPersons = props => {
         </p>
       </React.Fragment>
     </div>
-  );
-};
+  )
+}
 
 PayoutDetailsAdditionalPersons.defaultProps = {
   disabled: false,
@@ -122,7 +122,7 @@ PayoutDetailsAdditionalPersons.defaultProps = {
   showPersonalIdNumberField: false,
   showPhoneNumberField: false,
   values: null,
-};
+}
 
 PayoutDetailsAdditionalPersons.propTypes = {
   country: string.isRequired,
@@ -140,6 +140,6 @@ PayoutDetailsAdditionalPersons.propTypes = {
 
   // from parent
   intl: intlShape.isRequired,
-};
+}
 
-export default PayoutDetailsAdditionalPersons;
+export default PayoutDetailsAdditionalPersons

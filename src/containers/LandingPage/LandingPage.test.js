@@ -1,11 +1,11 @@
-import React from 'react';
-import { fakeIntl } from '../../util/test-data';
-import { renderShallow } from '../../util/test-helpers';
-import { LandingPageComponent } from './LandingPage';
-import { RoutesProvider } from '../../components';
-import routeConfiguration from '../../routeConfiguration';
+import React from 'react'
+import { fakeIntl } from '../../util/test-data'
+import { renderShallow } from '../../util/test-helpers'
+import { LandingPageComponent } from './LandingPage'
+import { RoutesProvider } from '../../components'
+import routeConfiguration from '../../routeConfiguration'
 
-const noop = () => null;
+const noop = () => null
 
 describe('LandingPage', () => {
   it('matches snapshot', () => {
@@ -22,8 +22,8 @@ describe('LandingPage', () => {
         onManageDisableScrolling={noop}
         sendVerificationEmailInProgress={false}
         onResendVerificationEmail={noop}
-      />
-    );
-    expect(tree).toMatchSnapshot();
-  });
-});
+      />,
+    )
+    expect(tree).toMatchSnapshot()
+  })
+})

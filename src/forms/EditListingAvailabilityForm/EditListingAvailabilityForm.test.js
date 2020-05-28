@@ -1,10 +1,10 @@
 // NOTE: renderdeep doesn't work due to map integration
-import React from 'react';
-import { renderShallow } from '../../util/test-helpers';
-import { fakeIntl } from '../../util/test-data';
-import { EditListingAvailabilityFormComponent } from './EditListingAvailabilityForm';
+import React from 'react'
+import { renderShallow } from '../../util/test-helpers'
+import { fakeIntl } from '../../util/test-data'
+import { EditListingAvailabilityFormComponent } from './EditListingAvailabilityForm'
 
-const noop = () => null;
+const noop = () => null
 
 describe('EditListingAvailabilityForm', () => {
   it('matches snapshot', () => {
@@ -12,7 +12,7 @@ describe('EditListingAvailabilityForm', () => {
       <EditListingAvailabilityFormComponent
         intl={fakeIntl}
         dispatch={noop}
-        onSubmit={v => v}
+        onSubmit={(v) => v}
         saveActionMsg="Save rules"
         updated={false}
         updateInProgress={false}
@@ -67,8 +67,8 @@ describe('EditListingAvailabilityForm', () => {
             },
           ],
         }}
-      />
-    );
-    expect(tree).toMatchSnapshot();
-  });
-});
+      />,
+    )
+    expect(tree).toMatchSnapshot()
+  })
+})

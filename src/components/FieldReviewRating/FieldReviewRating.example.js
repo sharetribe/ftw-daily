@@ -1,26 +1,26 @@
 /* eslint-disable no-console */
-import React from 'react';
-import { Form as FinalForm, FormSpy } from 'react-final-form';
-import * as validators from '../../util/validators';
-import { Button } from '../../components';
-import FieldReviewRating from './FieldReviewRating';
+import React from 'react'
+import { Form as FinalForm, FormSpy } from 'react-final-form'
+import * as validators from '../../util/validators'
+import { Button } from '../../components'
+import FieldReviewRating from './FieldReviewRating'
 
-const formName = 'Styleguide.FieldReviewRating.Form';
+const formName = 'Styleguide.FieldReviewRating.Form'
 
-const FormComponent = props => (
+const FormComponent = (props) => (
   <FinalForm
     {...props}
     formId={formName}
-    render={fieldRenderProps => {
-      const { formId, handleSubmit, onChange, invalid, pristine, submitting } = fieldRenderProps;
-      const required = validators.required('This field is required');
-      const submitDisabled = invalid || pristine || submitting;
+    render={(fieldRenderProps) => {
+      const { formId, handleSubmit, onChange, invalid, pristine, submitting } = fieldRenderProps
+      const required = validators.required('This field is required')
+      const submitDisabled = invalid || pristine || submitting
 
       return (
         <form
-          onSubmit={e => {
-            e.preventDefault();
-            handleSubmit(e);
+          onSubmit={(e) => {
+            e.preventDefault()
+            handleSubmit(e)
           }}
         >
           <FormSpy onChange={onChange} />
@@ -34,22 +34,22 @@ const FormComponent = props => (
             Submit
           </Button>
         </form>
-      );
+      )
     }}
   />
-);
+)
 
 export const StarRating = {
   component: FormComponent,
   props: {
-    onChange: formState => {
+    onChange: (formState) => {
       if (formState.dirty) {
-        console.log('form values changed to:', formState.values);
+        console.log('form values changed to:', formState.values)
       }
     },
-    onSubmit: values => {
-      console.log('submit values:', values);
+    onSubmit: (values) => {
+      console.log('submit values:', values)
     },
   },
   group: 'inputs',
-};
+}

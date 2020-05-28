@@ -1,5 +1,5 @@
-import groupBy from 'lodash/groupBy';
-import reduce from 'lodash/reduce';
+import groupBy from 'lodash/groupBy'
+import reduce from 'lodash/reduce'
 
 /**
  * hasParentWithClassName searches class name from parent elements of given target
@@ -8,21 +8,21 @@ import reduce from 'lodash/reduce';
  */
 export const hasParentWithClassName = (target, className) => {
   return [...document.querySelectorAll(`.${className}`)].some(
-    el => el !== target && el.contains(target)
-  );
-};
+    (el) => el !== target && el.contains(target),
+  )
+}
 
 /**
  * Listings array grouped by geolocation
  * @param {Array} mapListings - listings to be grouped on map
  * @return {Object} - Object where coordinate pair is the key to different listings
  */
-export const groupedByCoordinates = mapListings => {
-  return groupBy(mapListings, l => {
-    const g = l.attributes.geolocation;
-    return `${g.lat}-${g.lng}`;
-  });
-};
+export const groupedByCoordinates = (mapListings) => {
+  return groupBy(mapListings, (l) => {
+    const g = l.attributes.geolocation
+    return `${g.lat}-${g.lng}`
+  })
+}
 
 /**
  * Listings (in location based object literal) is mapped to array
@@ -30,6 +30,6 @@ export const groupedByCoordinates = mapListings => {
  * @return {Array} - An array where items are arrays of listings
  *   (They are arrays containing all the listings in that location)
  */
-export const reducedToArray = mapListings => {
-  return reduce(mapListings, (acc, listing) => acc.concat([listing]), []);
-};
+export const reducedToArray = (mapListings) => {
+  return reduce(mapListings, (acc, listing) => acc.concat([listing]), [])
+}

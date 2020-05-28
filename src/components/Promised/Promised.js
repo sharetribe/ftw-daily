@@ -7,49 +7,49 @@
  */
 
 /* eslint-disable no-underscore-dangle */
-import { Component } from 'react';
-import PropTypes from 'prop-types';
+import { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class Promised extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     // success value is string to be more useful when rendering texts.
     this.state = {
       value: '',
       error: null,
-    };
-    this._isMounted = false;
+    }
+    this._isMounted = false
   }
 
   componentDidMount() {
-    this._isMounted = true;
+    this._isMounted = true
     this.props.promise
-      .then(value => {
+      .then((value) => {
         if (this._isMounted) {
-          this.setState({ value });
+          this.setState({ value })
         }
       })
-      .catch(error => {
+      .catch((error) => {
         if (this._isMounted) {
-          this.setState({ error });
+          this.setState({ error })
         }
-      });
+      })
   }
 
   componentWillUnmount() {
-    this._isMounted = false;
+    this._isMounted = false
   }
 
   render() {
-    const { renderFulfilled, renderRejected } = this.props;
-    return this.state.error ? renderRejected(this.state.error) : renderFulfilled(this.state.value);
+    const { renderFulfilled, renderRejected } = this.props
+    return this.state.error ? renderRejected(this.state.error) : renderFulfilled(this.state.value)
   }
 }
 
-Promised.defaultProps = { renderRejected: e => e };
+Promised.defaultProps = { renderRejected: (e) => e }
 
-const { func, shape } = PropTypes;
+const { func, shape } = PropTypes
 
 Promised.propTypes = {
   promise: shape({
@@ -57,6 +57,6 @@ Promised.propTypes = {
   }).isRequired,
   renderFulfilled: func.isRequired,
   renderRejected: func.isRequired,
-};
+}
 
-export default Promised;
+export default Promised

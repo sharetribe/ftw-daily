@@ -29,23 +29,23 @@ import {
   oneOfType,
   shape,
   string,
-} from 'prop-types';
-import Decimal from 'decimal.js';
-import { types as sdkTypes } from './sdkLoader';
-import { TRANSITIONS, TX_TRANSITION_ACTORS } from './transaction';
+} from 'prop-types'
+import Decimal from 'decimal.js'
+import { types as sdkTypes } from './sdkLoader'
+import { TRANSITIONS, TX_TRANSITION_ACTORS } from './transaction'
 
-const { UUID, LatLng, LatLngBounds, Money } = sdkTypes;
+const { UUID, LatLng, LatLngBounds, Money } = sdkTypes
 
-const propTypes = {};
+const propTypes = {}
 
 // Fixed value
-propTypes.value = val => oneOf([val]);
+propTypes.value = (val) => oneOf([val])
 
 // SDK type instances
-propTypes.uuid = instanceOf(UUID);
-propTypes.latlng = instanceOf(LatLng);
-propTypes.latlngBounds = instanceOf(LatLngBounds);
-propTypes.money = instanceOf(Money);
+propTypes.uuid = instanceOf(UUID)
+propTypes.latlng = instanceOf(LatLng)
+propTypes.latlngBounds = instanceOf(LatLngBounds)
+propTypes.money = instanceOf(Money)
 
 // Configuration for currency formatting
 propTypes.currencyConfig = shape({
@@ -55,7 +55,7 @@ propTypes.currencyConfig = shape({
   useGrouping: bool,
   minimumFractionDigits: number,
   maximumFractionDigits: number,
-});
+})
 
 // Configuration for a single route
 propTypes.route = shape({
@@ -65,14 +65,14 @@ propTypes.route = shape({
   strict: bool,
   component: func.isRequired,
   loadData: func,
-});
+})
 
 // Place object from LocationAutocompleteInput
 propTypes.place = shape({
   address: string.isRequired,
   origin: propTypes.latlng,
   bounds: propTypes.latlngBounds, // optional viewport bounds
-});
+})
 
 // Denormalised image object
 propTypes.image = shape({
@@ -84,10 +84,10 @@ propTypes.image = shape({
         width: number.isRequired,
         height: number.isRequired,
         url: string.isRequired,
-      })
+      }),
     ),
   }),
-});
+})
 
 // Denormalised user object
 propTypes.currentUser = shape({
@@ -107,7 +107,7 @@ propTypes.currentUser = shape({
     stripeConnected: bool,
   }),
   profileImage: propTypes.image,
-});
+})
 
 const userAttributes = shape({
   banned: propTypes.value(false).isRequired,
@@ -117,7 +117,7 @@ const userAttributes = shape({
     abbreviatedName: string.isRequired,
     bio: string,
   }),
-});
+})
 
 // Listing queries can include author.
 // Banned and deleted are not relevant then
@@ -128,15 +128,15 @@ const authorAttributes = shape({
     abbreviatedName: string.isRequired,
     bio: string,
   }),
-});
+})
 
 const deletedUserAttributes = shape({
   deleted: propTypes.value(true).isRequired,
-});
+})
 
 const bannedUserAttributes = shape({
   banned: propTypes.value(true).isRequired,
-});
+})
 
 // Denormalised user object
 propTypes.user = shape({
@@ -149,19 +149,19 @@ propTypes.user = shape({
     bannedUserAttributes,
   ]).isRequired,
   profileImage: propTypes.image,
-});
+})
 
-export const LISTING_STATE_DRAFT = 'draft';
-export const LISTING_STATE_PENDING_APPROVAL = 'pendingApproval';
-export const LISTING_STATE_PUBLISHED = 'published';
-export const LISTING_STATE_CLOSED = 'closed';
+export const LISTING_STATE_DRAFT = 'draft'
+export const LISTING_STATE_PENDING_APPROVAL = 'pendingApproval'
+export const LISTING_STATE_PUBLISHED = 'published'
+export const LISTING_STATE_CLOSED = 'closed'
 
 const LISTING_STATES = [
   LISTING_STATE_DRAFT,
   LISTING_STATE_PENDING_APPROVAL,
   LISTING_STATE_PUBLISHED,
   LISTING_STATE_CLOSED,
-];
+]
 
 const listingAttributes = shape({
   title: string.isRequired,
@@ -171,11 +171,11 @@ const listingAttributes = shape({
   state: oneOf(LISTING_STATES),
   price: propTypes.money,
   publicData: object,
-});
+})
 
-const AVAILABILITY_PLAN_DAY = 'availability-plan/day';
-const AVAILABILITY_PLAN_TIME = 'availability-plan/time';
-export const DAYS_OF_WEEK = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+const AVAILABILITY_PLAN_DAY = 'availability-plan/day'
+const AVAILABILITY_PLAN_TIME = 'availability-plan/time'
+export const DAYS_OF_WEEK = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
 
 const availabilityPlan = shape({
   type: oneOf([AVAILABILITY_PLAN_DAY, AVAILABILITY_PLAN_TIME]).isRequired,
@@ -186,11 +186,11 @@ const availabilityPlan = shape({
       seats: number.isRequired,
       start: string,
       end: string,
-    })
+    }),
   ),
-});
+})
 
-propTypes.availabilityPlan = availabilityPlan;
+propTypes.availabilityPlan = availabilityPlan
 
 const ownListingAttributes = shape({
   title: string.isRequired,
@@ -201,11 +201,11 @@ const ownListingAttributes = shape({
   price: propTypes.money,
   availabilityPlan: availabilityPlan,
   publicData: object.isRequired,
-});
+})
 
 const deletedListingAttributes = shape({
   deleted: propTypes.value(true).isRequired,
-});
+})
 
 // Denormalised listing object
 propTypes.listing = shape({
@@ -214,7 +214,7 @@ propTypes.listing = shape({
   attributes: oneOfType([listingAttributes, deletedListingAttributes]).isRequired,
   author: propTypes.user,
   images: arrayOf(propTypes.image),
-});
+})
 
 // Denormalised ownListing object
 propTypes.ownListing = shape({
@@ -223,18 +223,18 @@ propTypes.ownListing = shape({
   attributes: oneOfType([ownListingAttributes, deletedListingAttributes]).isRequired,
   author: propTypes.currentUser,
   images: arrayOf(propTypes.image),
-});
+})
 
-export const BOOKING_STATE_PENDING = 'pending';
-export const BOOKING_STATE_ACCEPTED = 'accepted';
-export const BOOKING_STATE_DECLINED = 'declined';
-export const BOOKING_STATE_CANCELLED = 'cancelled';
+export const BOOKING_STATE_PENDING = 'pending'
+export const BOOKING_STATE_ACCEPTED = 'accepted'
+export const BOOKING_STATE_DECLINED = 'declined'
+export const BOOKING_STATE_CANCELLED = 'cancelled'
 export const BOOKING_STATES = [
   BOOKING_STATE_PENDING,
   BOOKING_STATE_ACCEPTED,
   BOOKING_STATE_DECLINED,
   BOOKING_STATE_CANCELLED,
-];
+]
 
 // Denormalised booking object
 propTypes.booking = shape({
@@ -247,10 +247,10 @@ propTypes.booking = shape({
     displayEnd: instanceOf(Date),
     state: oneOf(BOOKING_STATES),
   }),
-});
+})
 
 // A time slot that covers one day, having a start and end date.
-export const TIME_SLOT_DAY = 'time-slot/day';
+export const TIME_SLOT_DAY = 'time-slot/day'
 
 // Denormalised time slot object
 propTypes.timeSlot = shape({
@@ -261,7 +261,7 @@ propTypes.timeSlot = shape({
     end: instanceOf(Date).isRequired,
     start: instanceOf(Date).isRequired,
   }),
-});
+})
 
 // Denormalised availability exception object
 propTypes.availabilityException = shape({
@@ -272,20 +272,20 @@ propTypes.availabilityException = shape({
     seats: number.isRequired,
     start: instanceOf(Date).isRequired,
   }),
-});
+})
 
 propTypes.transition = shape({
   createdAt: instanceOf(Date).isRequired,
   by: oneOf(TX_TRANSITION_ACTORS).isRequired,
   transition: oneOf(TRANSITIONS).isRequired,
-});
+})
 
 // Possible amount of stars in a review
-export const REVIEW_RATINGS = [1, 2, 3, 4, 5];
+export const REVIEW_RATINGS = [1, 2, 3, 4, 5]
 
 // Review types: review of a provider and of a customer
-export const REVIEW_TYPE_OF_PROVIDER = 'ofProvider';
-export const REVIEW_TYPE_OF_CUSTOMER = 'ofCustomer';
+export const REVIEW_TYPE_OF_PROVIDER = 'ofProvider'
+export const REVIEW_TYPE_OF_CUSTOMER = 'ofCustomer'
 
 // A review on a user
 propTypes.review = shape({
@@ -299,7 +299,7 @@ propTypes.review = shape({
   }).isRequired,
   author: propTypes.user,
   subject: propTypes.user,
-});
+})
 
 // A Stripe account entity
 propTypes.stripeAccount = shape({
@@ -309,7 +309,7 @@ propTypes.stripeAccount = shape({
     stripeAccountId: string.isRequired,
     stripeAccountData: object,
   }),
-});
+})
 
 propTypes.defaultPaymentMethod = shape({
   id: propTypes.uuid.isRequired,
@@ -324,13 +324,13 @@ propTypes.defaultPaymentMethod = shape({
       last4Digits: string.isRequired,
     }).isRequired,
   }),
-});
+})
 
-export const LINE_ITEM_NIGHT = 'line-item/night';
-export const LINE_ITEM_DAY = 'line-item/day';
-export const LINE_ITEM_UNITS = 'line-item/units';
-export const LINE_ITEM_CUSTOMER_COMMISSION = 'line-item/customer-commission';
-export const LINE_ITEM_PROVIDER_COMMISSION = 'line-item/provider-commission';
+export const LINE_ITEM_NIGHT = 'line-item/night'
+export const LINE_ITEM_DAY = 'line-item/day'
+export const LINE_ITEM_UNITS = 'line-item/units'
+export const LINE_ITEM_CUSTOMER_COMMISSION = 'line-item/customer-commission'
+export const LINE_ITEM_PROVIDER_COMMISSION = 'line-item/provider-commission'
 
 export const LINE_ITEMS = [
   LINE_ITEM_NIGHT,
@@ -338,20 +338,20 @@ export const LINE_ITEMS = [
   LINE_ITEM_UNITS,
   LINE_ITEM_CUSTOMER_COMMISSION,
   LINE_ITEM_PROVIDER_COMMISSION,
-];
+]
 
-propTypes.bookingUnitType = oneOf([LINE_ITEM_NIGHT, LINE_ITEM_DAY, LINE_ITEM_UNITS]);
+propTypes.bookingUnitType = oneOf([LINE_ITEM_NIGHT, LINE_ITEM_DAY, LINE_ITEM_UNITS])
 
 const requiredLineItemPropType = (props, propName, componentName) => {
-  const prop = props[propName];
+  const prop = props[propName]
 
   if (!prop || prop === '') {
-    return new Error(`Missing line item code prop from ${componentName}.`);
+    return new Error(`Missing line item code prop from ${componentName}.`)
   }
   if (!/^line-item\/.+/.test(prop)) {
-    return new Error(`Invalid line item code value ${prop} passed to ${componentName}.`);
+    return new Error(`Invalid line item code value ${prop} passed to ${componentName}.`)
   }
-};
+}
 
 // Denormalised transaction object
 propTypes.transaction = shape({
@@ -375,7 +375,7 @@ propTypes.transaction = shape({
         unitPrice: propTypes.money.isRequired,
         lineTotal: propTypes.money.isRequired,
         reversal: bool.isRequired,
-      })
+      }),
     ),
     transitions: arrayOf(propTypes.transition).isRequired,
   }),
@@ -384,7 +384,7 @@ propTypes.transaction = shape({
   customer: propTypes.user,
   provider: propTypes.user,
   reviews: arrayOf(propTypes.review),
-});
+})
 
 // Denormalised transaction message
 propTypes.message = shape({
@@ -395,7 +395,7 @@ propTypes.message = shape({
     content: string.isRequired,
   }).isRequired,
   sender: propTypes.user,
-});
+})
 
 // Pagination information in the response meta
 propTypes.pagination = shape({
@@ -403,7 +403,7 @@ propTypes.pagination = shape({
   perPage: number.isRequired,
   totalItems: number.isRequired,
   totalPages: number.isRequired,
-});
+})
 
 // Search filter definition
 const filterWithOptions = shape({
@@ -412,9 +412,9 @@ const filterWithOptions = shape({
     shape({
       key: oneOfType([string, bool, number]).isRequired,
       label: string.isRequired,
-    })
+    }),
   ).isRequired,
-});
+})
 const filterWithPriceConfig = shape({
   paramName: string.isRequired,
   config: shape({
@@ -422,41 +422,37 @@ const filterWithPriceConfig = shape({
     max: number.isRequired,
     step: number.isRequired,
   }).isRequired,
-});
+})
 
 const filterIsActiveConfig = shape({
   paramName: string.isRequired,
   config: shape({
     active: bool.isRequired,
   }).isRequired,
-});
+})
 
-propTypes.filterConfig = oneOfType([
-  filterWithOptions,
-  filterWithPriceConfig,
-  filterIsActiveConfig,
-]);
+propTypes.filterConfig = oneOfType([filterWithOptions, filterWithPriceConfig, filterIsActiveConfig])
 
-export const ERROR_CODE_TRANSACTION_LISTING_NOT_FOUND = 'transaction-listing-not-found';
-export const ERROR_CODE_TRANSACTION_INVALID_TRANSITION = 'transaction-invalid-transition';
+export const ERROR_CODE_TRANSACTION_LISTING_NOT_FOUND = 'transaction-listing-not-found'
+export const ERROR_CODE_TRANSACTION_INVALID_TRANSITION = 'transaction-invalid-transition'
 export const ERROR_CODE_TRANSACTION_ALREADY_REVIEWED_BY_CUSTOMER =
-  'transaction-already-reviewed-by-customer';
+  'transaction-already-reviewed-by-customer'
 export const ERROR_CODE_TRANSACTION_ALREADY_REVIEWED_BY_PROVIDER =
-  'transaction-already-reviewed-by-provider';
+  'transaction-already-reviewed-by-provider'
 export const ERROR_CODE_TRANSACTION_BOOKING_TIME_NOT_AVAILABLE =
-  'transaction-booking-time-not-available';
-export const ERROR_CODE_PAYMENT_FAILED = 'transaction-payment-failed';
-export const ERROR_CODE_CHARGE_ZERO_PAYIN = 'transaction-charge-zero-payin';
-export const ERROR_CODE_CHARGE_ZERO_PAYOUT = 'transaction-charge-zero-payout';
-export const ERROR_CODE_EMAIL_TAKEN = 'email-taken';
-export const ERROR_CODE_EMAIL_NOT_FOUND = 'email-not-found';
-export const ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS = 'email-too-many-verification-requests';
-export const ERROR_CODE_UPLOAD_OVER_LIMIT = 'request-upload-over-limit';
-export const ERROR_CODE_VALIDATION_INVALID_PARAMS = 'validation-invalid-params';
-export const ERROR_CODE_VALIDATION_INVALID_VALUE = 'validation-invalid-value';
-export const ERROR_CODE_NOT_FOUND = 'not-found';
-export const ERROR_CODE_FORBIDDEN = 'forbidden';
-export const ERROR_CODE_MISSING_STRIPE_ACCOUNT = 'transaction-missing-stripe-account';
+  'transaction-booking-time-not-available'
+export const ERROR_CODE_PAYMENT_FAILED = 'transaction-payment-failed'
+export const ERROR_CODE_CHARGE_ZERO_PAYIN = 'transaction-charge-zero-payin'
+export const ERROR_CODE_CHARGE_ZERO_PAYOUT = 'transaction-charge-zero-payout'
+export const ERROR_CODE_EMAIL_TAKEN = 'email-taken'
+export const ERROR_CODE_EMAIL_NOT_FOUND = 'email-not-found'
+export const ERROR_CODE_TOO_MANY_VERIFICATION_REQUESTS = 'email-too-many-verification-requests'
+export const ERROR_CODE_UPLOAD_OVER_LIMIT = 'request-upload-over-limit'
+export const ERROR_CODE_VALIDATION_INVALID_PARAMS = 'validation-invalid-params'
+export const ERROR_CODE_VALIDATION_INVALID_VALUE = 'validation-invalid-value'
+export const ERROR_CODE_NOT_FOUND = 'not-found'
+export const ERROR_CODE_FORBIDDEN = 'forbidden'
+export const ERROR_CODE_MISSING_STRIPE_ACCOUNT = 'transaction-missing-stripe-account'
 
 const ERROR_CODES = [
   ERROR_CODE_TRANSACTION_LISTING_NOT_FOUND,
@@ -475,7 +471,7 @@ const ERROR_CODES = [
   ERROR_CODE_NOT_FOUND,
   ERROR_CODE_FORBIDDEN,
   ERROR_CODE_MISSING_STRIPE_ACCOUNT,
-];
+]
 
 // API error
 // TODO this is likely to change soonish
@@ -485,7 +481,7 @@ propTypes.apiError = shape({
   code: oneOf(ERROR_CODES).isRequired,
   title: string.isRequired,
   meta: object,
-});
+})
 
 // Storable error prop type. (Error object should not be stored as it is.)
 propTypes.error = shape({
@@ -495,12 +491,12 @@ propTypes.error = shape({
   status: number,
   statusText: string,
   apiErrors: arrayOf(propTypes.apiError),
-});
+})
 
 // Options for showing just date or date and time on BookingTimeInfo and BookingBreakdown
-export const DATE_TYPE_DATE = 'date';
-export const DATE_TYPE_DATETIME = 'datetime';
+export const DATE_TYPE_DATE = 'date'
+export const DATE_TYPE_DATETIME = 'datetime'
 
-propTypes.dateType = oneOf([DATE_TYPE_DATE, DATE_TYPE_DATETIME]);
+propTypes.dateType = oneOf([DATE_TYPE_DATE, DATE_TYPE_DATETIME])
 
-export { propTypes };
+export { propTypes }

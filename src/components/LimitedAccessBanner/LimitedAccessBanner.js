@@ -1,17 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { FormattedMessage } from '../../util/reactIntl';
-import { propTypes } from '../../util/types';
-import { Button } from '../../components';
-import { ensureCurrentUser } from '../../util/data';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import { FormattedMessage } from '../../util/reactIntl'
+import { propTypes } from '../../util/types'
+import { Button } from '../../components'
+import { ensureCurrentUser } from '../../util/data'
 
-import css from './LimitedAccessBanner.css';
+import css from './LimitedAccessBanner.css'
 
 // Due to the layout structure, do not render the banner on the following pages
-const disabledPages = ['SearchPage'];
+const disabledPages = ['SearchPage']
 
-const LimitedAccessBanner = props => {
+const LimitedAccessBanner = (props) => {
   const {
     rootClassName,
     className,
@@ -20,9 +20,9 @@ const LimitedAccessBanner = props => {
     currentUser,
     onLogout,
     currentPage,
-  } = props;
-  const classes = classNames(rootClassName || css.root, className);
-  const user = ensureCurrentUser(currentUser);
+  } = props
+  const classes = classNames(rootClassName || css.root, className)
+  const user = ensureCurrentUser(currentUser)
 
   const showBanner =
     user.id &&
@@ -30,9 +30,9 @@ const LimitedAccessBanner = props => {
     authScopes &&
     authScopes.length === 1 &&
     authScopes[0] === 'user:limited' &&
-    !disabledPages.includes(currentPage);
+    !disabledPages.includes(currentPage)
 
-  const { firstName, lastName } = user.attributes.profile;
+  const { firstName, lastName } = user.attributes.profile
 
   return showBanner ? (
     <div className={classes}>
@@ -43,8 +43,8 @@ const LimitedAccessBanner = props => {
         <FormattedMessage id="LimitedAccessBanner.logout" />
       </Button>
     </div>
-  ) : null;
-};
+  ) : null
+}
 
 LimitedAccessBanner.defaultProps = {
   rootClassName: null,
@@ -52,9 +52,9 @@ LimitedAccessBanner.defaultProps = {
   currentUser: null,
   authScopes: [],
   currentPage: null,
-};
+}
 
-const { array, bool, func, string } = PropTypes;
+const { array, bool, func, string } = PropTypes
 
 LimitedAccessBanner.propTypes = {
   rootClassName: string,
@@ -64,6 +64,6 @@ LimitedAccessBanner.propTypes = {
   currentUser: propTypes.currentUser,
   onLogout: func.isRequired,
   currentPage: string,
-};
+}
 
-export default LimitedAccessBanner;
+export default LimitedAccessBanner

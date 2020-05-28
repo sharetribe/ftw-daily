@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-const NoImageIcon = props => {
-  const { className } = props;
+const NoImageIcon = (props) => {
+  const { className } = props
 
   return (
     <svg
@@ -25,17 +25,17 @@ const NoImageIcon = props => {
         <path d="M21.599 23.983a1.009 1.009 0 1 0 0 2.018 1.009 1.009 0 0 0 0-2.018M26.402 23.983a1.009 1.009 0 1 0 0 2.018 1.009 1.009 0 0 0 0-2.018" />
       </g>
     </svg>
-  );
-};
+  )
+}
 
-const { string } = PropTypes;
+const { string } = PropTypes
 
 NoImageIcon.defaultProps = {
   className: null,
-};
+}
 
 NoImageIcon.propTypes = {
   className: string,
-};
+}
 
-export default NoImageIcon;
+export default NoImageIcon

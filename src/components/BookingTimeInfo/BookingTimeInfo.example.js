@@ -1,12 +1,12 @@
-import BookingTimeInfo from './BookingTimeInfo';
+import BookingTimeInfo from './BookingTimeInfo'
 import {
   fakeIntl,
   createBooking,
   createTransaction,
   createUser,
   createListing,
-} from '../../util/test-data';
-import { LINE_ITEM_DAY, LINE_ITEM_NIGHT, LINE_ITEM_UNITS } from '../../util/types';
+} from '../../util/test-data'
+import { LINE_ITEM_DAY, LINE_ITEM_NIGHT, LINE_ITEM_UNITS } from '../../util/types'
 
 export const DateAndTimeSingleDay = {
   component: BookingTimeInfo,
@@ -28,7 +28,7 @@ export const DateAndTimeSingleDay = {
     dateType: 'datetime',
   },
   group: 'inbox',
-};
+}
 
 export const DateAndTimeMultipleDays = {
   component: BookingTimeInfo,
@@ -50,7 +50,7 @@ export const DateAndTimeMultipleDays = {
     dateType: 'datetime',
   },
   group: 'inbox',
-};
+}
 
 export const OnlyDateSingleDay = {
   component: BookingTimeInfo,
@@ -72,7 +72,7 @@ export const OnlyDateSingleDay = {
     dateType: 'date',
   },
   group: 'inbox',
-};
+}
 
 export const OnlyDateMultipleDays = {
   component: BookingTimeInfo,
@@ -94,7 +94,7 @@ export const OnlyDateMultipleDays = {
     dateType: 'date',
   },
   group: 'inbox',
-};
+}
 
 export const OnlyDateSingleNight = {
   component: BookingTimeInfo,
@@ -116,7 +116,7 @@ export const OnlyDateSingleNight = {
     dateType: 'date',
   },
   group: 'inbox',
-};
+}
 
 export const OnlyDateMultipleNights = {
   component: BookingTimeInfo,
@@ -138,4 +138,4 @@ export const OnlyDateMultipleNights = {
     dateType: 'date',
   },
   group: 'inbox',
-};
+}

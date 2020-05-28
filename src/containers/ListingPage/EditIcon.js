@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-const EditIcon = props => {
-  const { className } = props;
+const EditIcon = (props) => {
+  const { className } = props
   return (
     <svg
       className={className}
@@ -31,13 +31,13 @@ const EditIcon = props => {
         </g>
       </g>
     </svg>
-  );
-};
+  )
+}
 
-EditIcon.defaultProps = { className: null };
+EditIcon.defaultProps = { className: null }
 
-const { string } = PropTypes;
+const { string } = PropTypes
 
-EditIcon.propTypes = { className: string };
+EditIcon.propTypes = { className: string }
 
-export default EditIcon;
+export default EditIcon

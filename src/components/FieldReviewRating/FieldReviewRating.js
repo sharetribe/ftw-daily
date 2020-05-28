@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { intlShape, injectIntl } from '../../util/reactIntl';
-import { Field } from 'react-final-form';
-import classNames from 'classnames';
-import { IconReviewStar, ValidationError } from '../../components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { intlShape, injectIntl } from '../../util/reactIntl'
+import { Field } from 'react-final-form'
+import classNames from 'classnames'
+import { IconReviewStar, ValidationError } from '../../components'
 
-import css from './FieldReviewRating.css';
+import css from './FieldReviewRating.css'
 
 class FieldReviewRatingComponent extends Component {
   constructor(props) {
-    super(props);
-    this.handleChange = this.handleChange.bind(this);
+    super(props)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   handleChange(event) {
-    this.props.input.onChange(event.target.value);
+    this.props.input.onChange(event.target.value)
   }
 
   render() {
@@ -30,28 +30,28 @@ class FieldReviewRatingComponent extends Component {
       input,
       meta,
       ...rest
-    } = this.props;
+    } = this.props
     /* eslint-enable no-unused-vars */
 
-    const { touched, error } = meta;
-    const errorText = customErrorText || error;
-    const fieldMeta = { touched, error: errorText };
+    const { touched, error } = meta
+    const errorText = customErrorText || error
+    const fieldMeta = { touched, error: errorText }
 
-    const { value, ...restInputProps } = input;
-    const inputProps = { ...restInputProps, type: 'radio', name: 'rating', ...rest };
+    const { value, ...restInputProps } = input
+    const inputProps = { ...restInputProps, type: 'radio', name: 'rating', ...rest }
 
-    const classes = classNames(rootClassName || css.root, className);
+    const classes = classNames(rootClassName || css.root, className)
 
-    const createStarRating = starCount => {
-      let inputsAndLabels = [];
+    const createStarRating = (starCount) => {
+      let inputsAndLabels = []
 
       // Star inpu order: reverse order expected (5 -> 1) and also input before label
       // This is due to CSS selectors.
       // Sibling combinator (~) selects following siblings, but we want to select previous siblings
       for (let i = starCount; i > 0; i--) {
-        const inputValue = `${i}`;
-        const starId = `star${i}`;
-        const inputId = `${id}.${starId}`;
+        const inputValue = `${i}`
+        const starId = `star${i}`
+        const inputId = `${id}.${starId}`
 
         inputsAndLabels.push(
           <input
@@ -61,8 +61,8 @@ class FieldReviewRatingComponent extends Component {
             value={inputValue}
             checked={value === inputValue}
             {...inputProps}
-          />
-        );
+          />,
+        )
 
         inputsAndLabels.push(
           <label
@@ -72,18 +72,18 @@ class FieldReviewRatingComponent extends Component {
             title={intl.formatMessage({ id: `FieldReviewRating.${starId}` })}
           >
             <IconReviewStar rootClassName={css.star} />
-          </label>
-        );
+          </label>,
+        )
       }
-      return inputsAndLabels;
-    };
+      return inputsAndLabels
+    }
 
     return (
       <div className={classes}>
         <fieldset
           className={css.ratingFieldSet}
-          ref={c => {
-            this.ratingFieldSet = c;
+          ref={(c) => {
+            this.ratingFieldSet = c
           }}
         >
           {label ? <legend>{label}</legend> : null}
@@ -91,7 +91,7 @@ class FieldReviewRatingComponent extends Component {
         </fieldset>
         <ValidationError fieldMeta={fieldMeta} />
       </div>
-    );
+    )
   }
 }
 
@@ -100,9 +100,9 @@ FieldReviewRatingComponent.defaultProps = {
   className: null,
   customErrorText: null,
   label: null,
-};
+}
 
-const { string, shape, func, object } = PropTypes;
+const { string, shape, func, object } = PropTypes
 
 FieldReviewRatingComponent.propTypes = {
   rootClassName: string,
@@ -122,10 +122,10 @@ FieldReviewRatingComponent.propTypes = {
 
   // from injectIntl
   intl: intlShape.isRequired,
-};
+}
 
-const FieldReviewRating = props => {
-  return <Field component={FieldReviewRatingComponent} {...props} />;
-};
+const FieldReviewRating = (props) => {
+  return <Field component={FieldReviewRatingComponent} {...props} />
+}
 
-export default injectIntl(FieldReviewRating);
+export default injectIntl(FieldReviewRating)

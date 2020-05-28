@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import css from './IconBannedUser.css';
+import css from './IconBannedUser.css'
 
-const IconBannedUser = props => {
-  const { className } = props;
+const IconBannedUser = (props) => {
+  const { className } = props
   return (
     <svg
       className={className}
@@ -25,13 +25,13 @@ const IconBannedUser = props => {
         <path className={css.foregroundFill} d="M28.34 9.04l2.12 2.12-19.8 19.8-2.12-2.12z" />
       </g>
     </svg>
-  );
-};
+  )
+}
 
-IconBannedUser.defaultProps = { className: null };
+IconBannedUser.defaultProps = { className: null }
 
-const { string } = PropTypes;
+const { string } = PropTypes
 
-IconBannedUser.propTypes = { className: string };
+IconBannedUser.propTypes = { className: string }
 
-export default IconBannedUser;
+export default IconBannedUser

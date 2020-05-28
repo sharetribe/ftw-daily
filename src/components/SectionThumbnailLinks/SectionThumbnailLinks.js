@@ -1,11 +1,11 @@
-import React from 'react';
-import { string, arrayOf, shape, node, object, oneOf, oneOfType } from 'prop-types';
-import classNames from 'classnames';
-import { ExternalLink, NamedLink } from '../../components';
+import React from 'react'
+import { string, arrayOf, shape, node, object, oneOf, oneOfType } from 'prop-types'
+import classNames from 'classnames'
+import { ExternalLink, NamedLink } from '../../components'
 
-import css from './SectionThumbnailLinks.css';
+import css from './SectionThumbnailLinks.css'
 
-const ThumbnailLink = props => {
+const ThumbnailLink = (props) => {
   const {
     className,
     rootClassName,
@@ -15,16 +15,16 @@ const ThumbnailLink = props => {
     imageAltText,
     linkProps,
     text,
-  } = props;
-  const { type, name, params, to, href } = linkProps;
+  } = props
+  const { type, name, params, to, href } = linkProps
   const classes = classNames(rootClassName || css.link, className, {
     [css.link2Columns]: linksPerRow === 2,
     [css.link3Columns]: linksPerRow === 3,
-  });
-  const imageWrapperClasses = classNames(imageWrapperClassName || css.imageWrapper);
+  })
+  const imageWrapperClasses = classNames(imageWrapperClassName || css.imageWrapper)
 
-  const LinkComponentProps = type === 'NamedLink' ? { name, params, to } : { href };
-  const LinkComponent = type === 'NamedLink' ? NamedLink : ExternalLink;
+  const LinkComponentProps = type === 'NamedLink' ? { name, params, to } : { href }
+  const LinkComponent = type === 'NamedLink' ? NamedLink : ExternalLink
 
   return (
     <LinkComponent {...LinkComponentProps} className={classes}>
@@ -35,10 +35,10 @@ const ThumbnailLink = props => {
       </div>
       <div className={css.text}>{text}</div>
     </LinkComponent>
-  );
-};
+  )
+}
 
-const SectionThumbnailLinks = props => {
+const SectionThumbnailLinks = (props) => {
   const {
     rootClassName,
     className,
@@ -51,10 +51,10 @@ const SectionThumbnailLinks = props => {
     linkClassName,
     linkRootClassName,
     imageWrapperClassName,
-  } = props;
-  const classes = classNames(rootClassName || css.root, className);
-  const headingClasses = headingRootClassName || css.heading;
-  const subHeadingClasses = subHeadingRootClassName || css.subHeading;
+  } = props
+  const classes = classNames(rootClassName || css.root, className)
+  const headingClasses = headingRootClassName || css.heading
+  const subHeadingClasses = subHeadingRootClassName || css.subHeading
   return (
     <div className={classes}>
       {heading ? <h2 className={headingClasses}>{heading}</h2> : null}
@@ -72,8 +72,8 @@ const SectionThumbnailLinks = props => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
 SectionThumbnailLinks.defaultProps = {
   rootClassName: null,
@@ -83,7 +83,7 @@ SectionThumbnailLinks.defaultProps = {
   headingRootClassName: null,
   subHeadingRootClassName: null,
   imageWrapperClassName: null,
-};
+}
 
 const namedLinkShape = shape({
   type: oneOf(['NamedLink']).isRequired,
@@ -93,12 +93,12 @@ const namedLinkShape = shape({
     search: string,
     hash: string,
   }),
-});
+})
 
 const externalLinkShape = shape({
   type: oneOf(['ExternalLink']).isRequired,
   href: string.isRequired,
-});
+})
 
 SectionThumbnailLinks.propTypes = {
   rootClassName: string,
@@ -111,7 +111,7 @@ SectionThumbnailLinks.propTypes = {
       imageAltText: string.isRequired,
       linkProps: oneOfType([namedLinkShape, externalLinkShape]).isRequired,
       text: node.isRequired,
-    })
+    }),
   ).isRequired,
 
   // Styles are defined with the assumption that either both the
@@ -125,6 +125,6 @@ SectionThumbnailLinks.propTypes = {
   linkClassName: string,
   linkRootClassName: string,
   imageWrapperClassName: string,
-};
+}
 
-export default SectionThumbnailLinks;
+export default SectionThumbnailLinks

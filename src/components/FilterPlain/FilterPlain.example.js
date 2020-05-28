@@ -1,9 +1,9 @@
-import React from 'react';
-import { FieldTextInput } from '../../components';
-import FilterPlain from './FilterPlain';
+import React from 'react'
+import { FieldTextInput } from '../../components'
+import FilterPlain from './FilterPlain'
 
-const id = 'FilterPlainExample';
-const field = <FieldTextInput type="text" id={`${id}.input1`} name="input1" label="Input:" />;
+const id = 'FilterPlainExample'
+const field = <FieldTextInput type="text" id={`${id}.input1`} name="input1" label="Input:" />
 
 export const FilterPlainExample = {
   component: FilterPlain,
@@ -16,10 +16,10 @@ export const FilterPlainExample = {
     initialValues: {},
     contentPlacementOffset: -14,
     onSubmit: (urlParam, values) => {
-      console.log(`onSubmit with urlParam: ${urlParam} and values: ${JSON.stringify(values)}`);
+      console.log(`onSubmit with urlParam: ${urlParam} and values: ${JSON.stringify(values)}`)
     },
     label: 'Example label',
     children: field,
   },
   group: 'misc',
-};
+}

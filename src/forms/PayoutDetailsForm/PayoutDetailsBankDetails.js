@@ -1,24 +1,24 @@
-import React from 'react';
-import { bool, string } from 'prop-types';
-import { FormattedMessage } from '../../util/reactIntl';
-import * as validators from '../../util/validators';
-import { StripeBankAccountTokenInputField } from '../../components';
+import React from 'react'
+import { bool, string } from 'prop-types'
+import { FormattedMessage } from '../../util/reactIntl'
+import * as validators from '../../util/validators'
+import { StripeBankAccountTokenInputField } from '../../components'
 
-import { stripeCountryConfigs } from './PayoutDetailsForm';
-import css from './PayoutDetailsForm.css';
+import { stripeCountryConfigs } from './PayoutDetailsForm'
+import css from './PayoutDetailsForm.css'
 
-const countryCurrency = countryCode => {
-  const country = stripeCountryConfigs(countryCode);
-  return country.currency;
-};
+const countryCurrency = (countryCode) => {
+  const country = stripeCountryConfigs(countryCode)
+  return country.currency
+}
 
-const PayoutDetailsBankDetails = props => {
-  const { country, disabled, fieldId } = props;
+const PayoutDetailsBankDetails = (props) => {
+  const { country, disabled, fieldId } = props
 
   // StripeBankAccountTokenInputField handles the error messages
   // internally, we just have to make sure we require a valid token
   // out of the field. Therefore the empty validation message.
-  const bankAccountRequired = validators.required(' ');
+  const bankAccountRequired = validators.required(' ')
 
   return (
     <div className={css.sectionContainer}>
@@ -35,18 +35,18 @@ const PayoutDetailsBankDetails = props => {
         validate={bankAccountRequired}
       />
     </div>
-  );
-};
+  )
+}
 PayoutDetailsBankDetails.defaultProps = {
   country: null,
   disabled: false,
   fieldId: null,
-};
+}
 
 PayoutDetailsBankDetails.propTypes = {
   country: string,
   disabled: bool,
   fieldId: string,
-};
+}
 
-export default PayoutDetailsBankDetails;
+export default PayoutDetailsBankDetails

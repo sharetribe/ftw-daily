@@ -1,11 +1,11 @@
-import React from 'react';
-import classNames from 'classnames';
-import { AvatarMedium, ResponsiveImage } from '../../components';
+import React from 'react'
+import classNames from 'classnames'
+import { AvatarMedium, ResponsiveImage } from '../../components'
 
-import css from './TransactionPanel.css';
+import css from './TransactionPanel.css'
 
 // Functional component as a helper to build AddressLinkMaybe
-const DetailCardImage = props => {
+const DetailCardImage = (props) => {
   const {
     className,
     rootClassName,
@@ -14,8 +14,8 @@ const DetailCardImage = props => {
     image,
     provider,
     isCustomer,
-  } = props;
-  const classes = classNames(rootClassName || css.detailCardImageWrapper, className);
+  } = props
+  const classes = classNames(rootClassName || css.detailCardImageWrapper, className)
   return (
     <React.Fragment>
       <div className={classes}>
@@ -34,7 +34,7 @@ const DetailCardImage = props => {
         </div>
       ) : null}
     </React.Fragment>
-  );
-};
+  )
+}
 
-export default DetailCardImage;
+export default DetailCardImage

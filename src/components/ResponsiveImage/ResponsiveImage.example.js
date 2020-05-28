@@ -1,28 +1,28 @@
-import React from 'react';
-import ResponsiveImage from './ResponsiveImage';
-import { types as sdkTypes } from '../../util/sdkLoader';
+import React from 'react'
+import ResponsiveImage from './ResponsiveImage'
+import { types as sdkTypes } from '../../util/sdkLoader'
 
-import css from './ResponsiveImageExample.css';
+import css from './ResponsiveImageExample.css'
 
-const { UUID } = sdkTypes;
+const { UUID } = sdkTypes
 
-const ResponsiveImageWrapper = props => {
+const ResponsiveImageWrapper = (props) => {
   return (
     <div className={css.root}>
       <ResponsiveImage {...props} />
     </div>
-  );
-};
+  )
+}
 
-const ResponsiveImageWrapperWithAspectRatio = props => {
+const ResponsiveImageWrapperWithAspectRatio = (props) => {
   return (
     <div className={css.root}>
       <div className={css.aspectWrapper}>
         <ResponsiveImage {...props} rootClassName={css.rootForImageWithAspectRatio} />
       </div>
     </div>
-  );
-};
+  )
+}
 
 /* Image without aspect ratio wrapper */
 export const Image2X = {
@@ -51,7 +51,7 @@ export const Image2X = {
     },
     variants: ['crop', 'crop2x'],
   },
-};
+}
 
 /* Image with aspect ratio wrapper */
 export const Image2XAspect = {
@@ -80,7 +80,7 @@ export const Image2XAspect = {
     },
     variants: ['crop', 'crop2x'],
   },
-};
+}
 
 /* Image with aspect ratio wrapper and wrong aspect */
 export const Image2XWrongAspect = {
@@ -109,7 +109,7 @@ export const Image2XWrongAspect = {
     },
     variants: ['crop', 'crop2x'],
   },
-};
+}
 
 export const Image2XWrongAspectNoWrapper = {
   component: ResponsiveImage,
@@ -137,7 +137,7 @@ export const Image2XWrongAspectNoWrapper = {
     },
     variants: ['crop', 'crop2x'],
   },
-};
+}
 
 /* No image without aspect ratio wrapper */
 export const ImageEmpty = {
@@ -147,7 +147,7 @@ export const ImageEmpty = {
     image: null,
     variants: ['crop', 'crop2x'],
   },
-};
+}
 
 /* No image with aspect ratio wrapper */
 export const ImageEmptyWithAspect = {
@@ -157,16 +157,16 @@ export const ImageEmptyWithAspect = {
     image: null,
     variants: ['crop', 'crop2x'],
   },
-};
+}
 
 /* Image without aspect ratio wrapper usign sizes */
-const ResponsiveImageWrapperForSizes = props => (
+const ResponsiveImageWrapperForSizes = (props) => (
   <div className={css.rootForSizes}>
     <div className={css.aspectWrapper}>
       <ResponsiveImage {...props} />
     </div>
   </div>
-);
+)
 
 export const ImageWithSizes = {
   component: ResponsiveImageWrapperForSizes,
@@ -195,4 +195,4 @@ export const ImageWithSizes = {
     variants: ['crop', 'crop2x'],
     sizes: '(max-width: 600px) 200px, 400px',
   },
-};
+}

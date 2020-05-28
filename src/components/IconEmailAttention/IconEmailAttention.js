@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
-import css from './IconEmailAttention.css';
+import css from './IconEmailAttention.css'
 
-const IconEmailAttention = props => {
-  const { rootClassName, className } = props;
-  const classes = classNames(rootClassName || css.root, className);
+const IconEmailAttention = (props) => {
+  const { rootClassName, className } = props
+  const classes = classNames(rootClassName || css.root, className)
   return (
     <svg
       className={classes}
@@ -30,13 +30,13 @@ const IconEmailAttention = props => {
         <path className={css.marketplaceStroke} strokeWidth="2.75" d="M43 4.026L23.015 17 3 4" />
       </g>
     </svg>
-  );
-};
+  )
+}
 
-IconEmailAttention.defaultProps = { rootClassName: null, className: null };
+IconEmailAttention.defaultProps = { rootClassName: null, className: null }
 
-const { string } = PropTypes;
+const { string } = PropTypes
 
-IconEmailAttention.propTypes = { rootClassName: string, className: string };
+IconEmailAttention.propTypes = { rootClassName: string, className: string }
 
-export default IconEmailAttention;
+export default IconEmailAttention

@@ -1,4 +1,4 @@
-const auth = require('basic-auth');
+const auth = require('basic-auth')
 
 /**
  * Create a basic authentication middleware function that checks
@@ -6,19 +6,19 @@ const auth = require('basic-auth');
  */
 exports.basicAuth = (username, password) => {
   if (!username || !password) {
-    throw new Error('Missing required username and password for basic authentication.');
+    throw new Error('Missing required username and password for basic authentication.')
   }
 
   return (req, res, next) => {
-    const user = auth(req);
+    const user = auth(req)
 
     if (user && user.name === username && user.pass === password) {
-      next();
+      next()
     } else {
       res
         .set({ 'WWW-Authenticate': 'Basic realm="Authentication required"' })
         .status(401)
-        .end("I'm afraid I cannot let you do that.");
+        .end("I'm afraid I cannot let you do that.")
     }
-  };
-};
+  }
+}

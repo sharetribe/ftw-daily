@@ -1,25 +1,22 @@
-import { types as sdkTypes } from '../util/sdkLoader';
+import { types as sdkTypes } from '../util/sdkLoader'
 
-const { LatLng: SDKLatLng, LatLngBounds: SDKLatLngBounds } = sdkTypes;
+const { LatLng: SDKLatLng, LatLngBounds: SDKLatLngBounds } = sdkTypes
 
-const placeOrigin = place => {
+const placeOrigin = (place) => {
   if (place && place.geometry && place.geometry.location) {
-    return new SDKLatLng(place.geometry.location.lat(), place.geometry.location.lng());
+    return new SDKLatLng(place.geometry.location.lat(), place.geometry.location.lng())
   }
-  return null;
-};
+  return null
+}
 
-const placeBounds = place => {
+const placeBounds = (place) => {
   if (place && place.geometry && place.geometry.viewport) {
-    const ne = place.geometry.viewport.getNorthEast();
-    const sw = place.geometry.viewport.getSouthWest();
-    return new SDKLatLngBounds(
-      new SDKLatLng(ne.lat(), ne.lng()),
-      new SDKLatLng(sw.lat(), sw.lng())
-    );
+    const ne = place.geometry.viewport.getNorthEast()
+    const sw = place.geometry.viewport.getSouthWest()
+    return new SDKLatLngBounds(new SDKLatLng(ne.lat(), ne.lng()), new SDKLatLng(sw.lat(), sw.lng()))
   }
-  return null;
-};
+  return null
+}
 
 /**
  * Get a detailed place object
@@ -34,31 +31,33 @@ const placeBounds = place => {
  */
 export const getPlaceDetails = (placeId, sessionToken) =>
   new Promise((resolve, reject) => {
-    const serviceStatus = window.google.maps.places.PlacesServiceStatus;
-    const el = document.createElement('div');
-    const service = new window.google.maps.places.PlacesService(el);
-    const fields = ['address_component', 'formatted_address', 'geometry', 'place_id'];
-    const sessionTokenMaybe = sessionToken ? { sessionToken } : {};
+    const serviceStatus = window.google.maps.places.PlacesServiceStatus
+    const el = document.createElement('div')
+    const service = new window.google.maps.places.PlacesService(el)
+    const fields = ['address_component', 'formatted_address', 'geometry', 'place_id']
+    const sessionTokenMaybe = sessionToken ? { sessionToken } : {}
 
     service.getDetails({ placeId, fields, ...sessionTokenMaybe }, (place, status) => {
       if (status !== serviceStatus.OK) {
         reject(
-          new Error(`Could not get details for place id "${placeId}", error status was "${status}"`)
-        );
+          new Error(
+            `Could not get details for place id "${placeId}", error status was "${status}"`,
+          ),
+        )
       } else {
         resolve({
           address: place.formatted_address,
           origin: placeOrigin(place),
           bounds: placeBounds(place),
-        });
+        })
       }
-    });
-  });
+    })
+  })
 
-const predictionSuccessful = status => {
-  const { OK, ZERO_RESULTS } = window.google.maps.places.PlacesServiceStatus;
-  return status === OK || status === ZERO_RESULTS;
-};
+const predictionSuccessful = (status) => {
+  const { OK, ZERO_RESULTS } = window.google.maps.places.PlacesServiceStatus
+  return status === OK || status === ZERO_RESULTS
+}
 
 /**
  * Get place predictions for the given search
@@ -75,24 +74,24 @@ const predictionSuccessful = status => {
  */
 export const getPlacePredictions = (search, sessionToken, searchConfigurations) =>
   new Promise((resolve, reject) => {
-    const service = new window.google.maps.places.AutocompleteService();
-    const sessionTokenMaybe = sessionToken ? { sessionToken } : {};
+    const service = new window.google.maps.places.AutocompleteService()
+    const sessionTokenMaybe = sessionToken ? { sessionToken } : {}
 
     service.getPlacePredictions(
       { input: search, ...sessionTokenMaybe, ...searchConfigurations },
       (predictions, status) => {
         if (!predictionSuccessful(status)) {
-          reject(new Error(`Prediction service status not OK: ${status}`));
+          reject(new Error(`Prediction service status not OK: ${status}`))
         } else {
           const results = {
             search,
             predictions: predictions || [],
-          };
-          resolve(results);
+          }
+          resolve(results)
         }
-      }
-    );
-  });
+      },
+    )
+  })
 
 /**
  * Deprecation: use function from src/util/maps.js
@@ -105,12 +104,12 @@ export const getPlacePredictions = (search, sessionToken, searchConfigurations) 
  * @return {SDKLatLngBounds} - bounds cut to given fixed precision
  */
 export const sdkBoundsToFixedCoordinates = (sdkBounds, fixedPrecision) => {
-  const fixed = n => Number.parseFloat(n.toFixed(fixedPrecision));
-  const ne = new SDKLatLng(fixed(sdkBounds.ne.lat), fixed(sdkBounds.ne.lng));
-  const sw = new SDKLatLng(fixed(sdkBounds.sw.lat), fixed(sdkBounds.sw.lng));
+  const fixed = (n) => Number.parseFloat(n.toFixed(fixedPrecision))
+  const ne = new SDKLatLng(fixed(sdkBounds.ne.lat), fixed(sdkBounds.ne.lng))
+  const sw = new SDKLatLng(fixed(sdkBounds.sw.lat), fixed(sdkBounds.sw.lng))
 
-  return new SDKLatLngBounds(ne, sw);
-};
+  return new SDKLatLngBounds(ne, sw)
+}
 
 /**
  * Deprecation: use function from src/util/maps.js
@@ -123,15 +122,15 @@ export const sdkBoundsToFixedCoordinates = (sdkBounds, fixedPrecision) => {
  */
 export const hasSameSDKBounds = (sdkBounds1, sdkBounds2) => {
   if (!(sdkBounds1 instanceof SDKLatLngBounds) || !(sdkBounds2 instanceof SDKLatLngBounds)) {
-    return false;
+    return false
   }
   return (
     sdkBounds1.ne.lat === sdkBounds2.ne.lat &&
     sdkBounds1.ne.lng === sdkBounds2.ne.lng &&
     sdkBounds1.sw.lat === sdkBounds2.sw.lat &&
     sdkBounds1.sw.lng === sdkBounds2.sw.lng
-  );
-};
+  )
+}
 
 /**
  * Calculate a bounding box in the given location
@@ -147,10 +146,10 @@ export const locationBounds = (latlng, distance) => {
   const bounds = new window.google.maps.Circle({
     center: new window.google.maps.LatLng(latlng.lat, latlng.lng),
     radius: distance,
-  }).getBounds();
+  }).getBounds()
 
-  const ne = bounds.getNorthEast();
-  const sw = bounds.getSouthWest();
+  const ne = bounds.getNorthEast()
+  const sw = bounds.getSouthWest()
 
-  return new SDKLatLngBounds(new SDKLatLng(ne.lat(), ne.lng()), new SDKLatLng(sw.lat(), sw.lng()));
-};
+  return new SDKLatLngBounds(new SDKLatLng(ne.lat(), ne.lng()), new SDKLatLng(sw.lat(), sw.lng()))
+}

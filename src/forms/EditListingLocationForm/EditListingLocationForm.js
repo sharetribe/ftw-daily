@@ -1,25 +1,25 @@
-import React from 'react';
-import { bool, func, shape, string } from 'prop-types';
-import { compose } from 'redux';
-import { Form as FinalForm } from 'react-final-form';
-import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
-import classNames from 'classnames';
-import { propTypes } from '../../util/types';
+import React from 'react'
+import { bool, func, shape, string } from 'prop-types'
+import { compose } from 'redux'
+import { Form as FinalForm } from 'react-final-form'
+import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl'
+import classNames from 'classnames'
+import { propTypes } from '../../util/types'
 import {
   autocompleteSearchRequired,
   autocompletePlaceSelected,
   composeValidators,
-} from '../../util/validators';
-import { Form, LocationAutocompleteInputField, Button, FieldTextInput } from '../../components';
+} from '../../util/validators'
+import { Form, LocationAutocompleteInputField, Button, FieldTextInput } from '../../components'
 
-import css from './EditListingLocationForm.css';
+import css from './EditListingLocationForm.css'
 
-const identity = v => v;
+const identity = (v) => v
 
-export const EditListingLocationFormComponent = props => (
+export const EditListingLocationFormComponent = (props) => (
   <FinalForm
     {...props}
-    render={formRenderProps => {
+    render={(formRenderProps) => {
       const {
         className,
         disabled,
@@ -33,48 +33,48 @@ export const EditListingLocationFormComponent = props => (
         updateInProgress,
         fetchErrors,
         values,
-      } = formRenderProps;
+      } = formRenderProps
 
-      const titleRequiredMessage = intl.formatMessage({ id: 'EditListingLocationForm.address' });
+      const titleRequiredMessage = intl.formatMessage({ id: 'EditListingLocationForm.address' })
       const addressPlaceholderMessage = intl.formatMessage({
         id: 'EditListingLocationForm.addressPlaceholder',
-      });
+      })
       const addressRequiredMessage = intl.formatMessage({
         id: 'EditListingLocationForm.addressRequired',
-      });
+      })
       const addressNotRecognizedMessage = intl.formatMessage({
         id: 'EditListingLocationForm.addressNotRecognized',
-      });
+      })
 
       const optionalText = intl.formatMessage({
         id: 'EditListingLocationForm.optionalText',
-      });
+      })
 
       const buildingMessage = intl.formatMessage(
         { id: 'EditListingLocationForm.building' },
-        { optionalText: optionalText }
-      );
+        { optionalText: optionalText },
+      )
       const buildingPlaceholderMessage = intl.formatMessage({
         id: 'EditListingLocationForm.buildingPlaceholder',
-      });
+      })
 
-      const { updateListingError, showListingsError } = fetchErrors || {};
+      const { updateListingError, showListingsError } = fetchErrors || {}
       const errorMessage = updateListingError ? (
         <p className={css.error}>
           <FormattedMessage id="EditListingLocationForm.updateFailed" />
         </p>
-      ) : null;
+      ) : null
 
       const errorMessageShowListing = showListingsError ? (
         <p className={css.error}>
           <FormattedMessage id="EditListingLocationForm.showListingFailed" />
         </p>
-      ) : null;
+      ) : null
 
-      const classes = classNames(css.root, className);
-      const submitReady = (updated && pristine) || ready;
-      const submitInProgress = updateInProgress;
-      const submitDisabled = invalid || disabled || submitInProgress;
+      const classes = classNames(css.root, className)
+      const submitReady = (updated && pristine) || ready
+      const submitInProgress = updateInProgress
+      const submitDisabled = invalid || disabled || submitInProgress
 
       return (
         <Form className={classes} onSubmit={handleSubmit}>
@@ -95,7 +95,7 @@ export const EditListingLocationFormComponent = props => (
             valueFromForm={values.location}
             validate={composeValidators(
               autocompleteSearchRequired(addressRequiredMessage),
-              autocompletePlaceSelected(addressNotRecognizedMessage)
+              autocompletePlaceSelected(addressNotRecognizedMessage),
             )}
           />
 
@@ -118,15 +118,15 @@ export const EditListingLocationFormComponent = props => (
             {saveActionMsg}
           </Button>
         </Form>
-      );
+      )
     }}
   />
-);
+)
 
 EditListingLocationFormComponent.defaultProps = {
   selectedPlace: null,
   fetchErrors: null,
-};
+}
 
 EditListingLocationFormComponent.propTypes = {
   intl: intlShape.isRequired,
@@ -141,6 +141,6 @@ EditListingLocationFormComponent.propTypes = {
     showListingsError: propTypes.error,
     updateListingError: propTypes.error,
   }),
-};
+}
 
-export default compose(injectIntl)(EditListingLocationFormComponent);
+export default compose(injectIntl)(EditListingLocationFormComponent)

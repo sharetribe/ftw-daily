@@ -1,13 +1,13 @@
-import React from 'react';
-import { FormattedMessage } from '../../util/reactIntl';
-import classNames from 'classnames';
-import { PrimaryButton, SecondaryButton } from '../../components';
+import React from 'react'
+import { FormattedMessage } from '../../util/reactIntl'
+import classNames from 'classnames'
+import { PrimaryButton, SecondaryButton } from '../../components'
 
-import css from './TransactionPanel.css';
+import css from './TransactionPanel.css'
 
 // Functional component as a helper to build ActionButtons for
 // provider when state is preauthorized
-const SaleActionButtonsMaybe = props => {
+const SaleActionButtonsMaybe = (props) => {
   const {
     className,
     rootClassName,
@@ -18,22 +18,22 @@ const SaleActionButtonsMaybe = props => {
     declineSaleError,
     onAcceptSale,
     onDeclineSale,
-  } = props;
+  } = props
 
-  const buttonsDisabled = acceptInProgress || declineInProgress;
+  const buttonsDisabled = acceptInProgress || declineInProgress
 
   const acceptErrorMessage = acceptSaleError ? (
     <p className={css.actionError}>
       <FormattedMessage id="TransactionPanel.acceptSaleFailed" />
     </p>
-  ) : null;
+  ) : null
   const declineErrorMessage = declineSaleError ? (
     <p className={css.actionError}>
       <FormattedMessage id="TransactionPanel.declineSaleFailed" />
     </p>
-  ) : null;
+  ) : null
 
-  const classes = classNames(rootClassName || css.actionButtons, className);
+  const classes = classNames(rootClassName || css.actionButtons, className)
 
   return showButtons ? (
     <div className={classes}>
@@ -58,7 +58,7 @@ const SaleActionButtonsMaybe = props => {
         </PrimaryButton>
       </div>
     </div>
-  ) : null;
-};
+  ) : null
+}
 
-export default SaleActionButtonsMaybe;
+export default SaleActionButtonsMaybe

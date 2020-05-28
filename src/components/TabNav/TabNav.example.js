@@ -1,9 +1,9 @@
-import TabNav from './TabNav';
+import TabNav from './TabNav'
 
 const selfLinkProps = {
   name: 'StyleguideComponent',
   params: { component: 'TabNav' },
-};
+}
 
 export const Empty = {
   component: TabNav,
@@ -14,4 +14,4 @@ export const Empty = {
     ],
   },
   group: 'navigation',
-};
+}

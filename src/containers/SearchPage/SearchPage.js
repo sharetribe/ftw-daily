@@ -1,54 +1,54 @@
-import React, { Component } from 'react';
-import { array, bool, func, number, oneOf, object, shape, string } from 'prop-types';
-import { injectIntl, intlShape } from '../../util/reactIntl';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { withRouter } from 'react-router-dom';
-import debounce from 'lodash/debounce';
-import unionWith from 'lodash/unionWith';
-import classNames from 'classnames';
-import config from '../../config';
-import routeConfiguration from '../../routeConfiguration';
-import { createResourceLocatorString, pathByRouteName } from '../../util/routes';
-import { parse, stringify } from '../../util/urlHelpers';
-import { propTypes } from '../../util/types';
-import { getListingsById } from '../../ducks/marketplaceData.duck';
-import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
-import { SearchMap, ModalInMobile, Page } from '../../components';
-import { TopbarContainer } from '../../containers';
+import React, { Component } from 'react'
+import { array, bool, func, number, oneOf, object, shape, string } from 'prop-types'
+import { injectIntl, intlShape } from '../../util/reactIntl'
+import { connect } from 'react-redux'
+import { compose } from 'redux'
+import { withRouter } from 'react-router-dom'
+import debounce from 'lodash/debounce'
+import unionWith from 'lodash/unionWith'
+import classNames from 'classnames'
+import config from '../../config'
+import routeConfiguration from '../../routeConfiguration'
+import { createResourceLocatorString, pathByRouteName } from '../../util/routes'
+import { parse, stringify } from '../../util/urlHelpers'
+import { propTypes } from '../../util/types'
+import { getListingsById } from '../../ducks/marketplaceData.duck'
+import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck'
+import { SearchMap, ModalInMobile, Page } from '../../components'
+import { TopbarContainer } from '../../containers'
 
-import { searchListings, searchMapListings, setActiveListing } from './SearchPage.duck';
+import { searchListings, searchMapListings, setActiveListing } from './SearchPage.duck'
 import {
   pickSearchParamsOnly,
   validURLParamsForExtendedData,
   validFilterParams,
   createSearchResultSchema,
-} from './SearchPage.helpers';
-import MainPanel from './MainPanel';
-import css from './SearchPage.css';
+} from './SearchPage.helpers'
+import MainPanel from './MainPanel'
+import css from './SearchPage.css'
 
 // Pagination page size might need to be dynamic on responsive page layouts
 // Current design has max 3 columns 12 is divisible by 2 and 3
 // So, there's enough cards to fill all columns on full pagination pages
-const RESULT_PAGE_SIZE = 24;
-const MODAL_BREAKPOINT = 768; // Search is in modal on mobile layout
-const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is initiated.
+const RESULT_PAGE_SIZE = 24
+const MODAL_BREAKPOINT = 768 // Search is in modal on mobile layout
+const SEARCH_WITH_MAP_DEBOUNCE = 300 // Little bit of debounce before search is initiated.
 
 export class SearchPageComponent extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       isSearchMapOpenOnMobile: props.tab === 'map',
       isMobileModalOpen: false,
-    };
+    }
 
-    this.searchMapListingsInProgress = false;
+    this.searchMapListingsInProgress = false
 
-    this.filters = this.filters.bind(this);
-    this.onMapMoveEnd = debounce(this.onMapMoveEnd.bind(this), SEARCH_WITH_MAP_DEBOUNCE);
-    this.onOpenMobileModal = this.onOpenMobileModal.bind(this);
-    this.onCloseMobileModal = this.onCloseMobileModal.bind(this);
+    this.filters = this.filters.bind(this)
+    this.onMapMoveEnd = debounce(this.onMapMoveEnd.bind(this), SEARCH_WITH_MAP_DEBOUNCE)
+    this.onOpenMobileModal = this.onOpenMobileModal.bind(this)
+    this.onCloseMobileModal = this.onCloseMobileModal.bind(this)
   }
 
   filters() {
@@ -58,7 +58,7 @@ export class SearchPageComponent extends Component {
       priceFilterConfig,
       dateRangeFilterConfig,
       keywordFilterConfig,
-    } = this.props;
+    } = this.props
 
     // Note: "category" and "amenities" filters are not actually filtering anything by default.
     // Currently, if you want to use them, we need to manually configure them to be available
@@ -86,37 +86,36 @@ export class SearchPageComponent extends Component {
         paramName: 'keywords',
         config: keywordFilterConfig,
       },
-    };
+    }
   }
 
   // Callback to determine if new search is needed
   // when map is moved by user or viewport has changed
   onMapMoveEnd(viewportBoundsChanged, data) {
-    const { viewportBounds, viewportCenter } = data;
+    const { viewportBounds, viewportCenter } = data
 
-    const routes = routeConfiguration();
-    const searchPagePath = pathByRouteName('SearchPage', routes);
-    const currentPath =
-      typeof window !== 'undefined' && window.location && window.location.pathname;
+    const routes = routeConfiguration()
+    const searchPagePath = pathByRouteName('SearchPage', routes)
+    const currentPath = typeof window !== 'undefined' && window.location && window.location.pathname
 
     // When using the ReusableMapContainer onMapMoveEnd can fire from other pages than SearchPage too
-    const isSearchPage = currentPath === searchPagePath;
+    const isSearchPage = currentPath === searchPagePath
 
     // If mapSearch url param is given
     // or original location search is rendered once,
     // we start to react to "mapmoveend" events by generating new searches
     // (i.e. 'moveend' event in Mapbox and 'bounds_changed' in Google Maps)
     if (viewportBoundsChanged && isSearchPage) {
-      const { history, location } = this.props;
+      const { history, location } = this.props
 
       // parse query parameters, including a custom attribute named category
       const { address, bounds, mapSearch, ...rest } = parse(location.search, {
         latlng: ['origin'],
         latlngBounds: ['bounds'],
-      });
+      })
 
       //const viewportMapCenter = SearchMap.getMapCenter(map);
-      const originMaybe = config.sortSearchByDistance ? { origin: viewportCenter } : {};
+      const originMaybe = config.sortSearchByDistance ? { origin: viewportCenter } : {}
 
       const searchParams = {
         address,
@@ -124,22 +123,22 @@ export class SearchPageComponent extends Component {
         bounds: viewportBounds,
         mapSearch: true,
         ...validFilterParams(rest, this.filters()),
-      };
+      }
 
-      history.push(createResourceLocatorString('SearchPage', routes, {}, searchParams));
+      history.push(createResourceLocatorString('SearchPage', routes, {}, searchParams))
     }
   }
 
   // Invoked when a modal is opened from a child component,
   // for example when a filter modal is opened in mobile view
   onOpenMobileModal() {
-    this.setState({ isMobileModalOpen: true });
+    this.setState({ isMobileModalOpen: true })
   }
 
   // Invoked when a modal is closed from a child component,
   // for example when a filter modal is opened in mobile view
   onCloseMobileModal() {
-    this.setState({ isMobileModalOpen: false });
+    this.setState({ isMobileModalOpen: false })
   }
 
   render() {
@@ -156,44 +155,44 @@ export class SearchPageComponent extends Component {
       searchParams,
       activeListingId,
       onActivateListing,
-    } = this.props;
+    } = this.props
     // eslint-disable-next-line no-unused-vars
     const { mapSearch, page, sort, ...searchInURL } = parse(location.search, {
       latlng: ['origin'],
       latlngBounds: ['bounds'],
-    });
+    })
 
-    const filters = this.filters();
+    const filters = this.filters()
 
     // urlQueryParams doesn't contain page specific url params
     // like mapSearch, page or origin (origin depends on config.sortSearchByDistance)
-    const urlQueryParams = pickSearchParamsOnly(searchInURL, filters);
+    const urlQueryParams = pickSearchParamsOnly(searchInURL, filters)
 
     // Page transition might initially use values from previous search
-    const urlQueryString = stringify(urlQueryParams);
-    const paramsQueryString = stringify(pickSearchParamsOnly(searchParams, filters));
-    const searchParamsAreInSync = urlQueryString === paramsQueryString;
+    const urlQueryString = stringify(urlQueryParams)
+    const paramsQueryString = stringify(pickSearchParamsOnly(searchParams, filters))
+    const searchParamsAreInSync = urlQueryString === paramsQueryString
 
-    const validQueryParams = validURLParamsForExtendedData(searchInURL, filters);
+    const validQueryParams = validURLParamsForExtendedData(searchInURL, filters)
 
-    const isWindowDefined = typeof window !== 'undefined';
-    const isMobileLayout = isWindowDefined && window.innerWidth < MODAL_BREAKPOINT;
+    const isWindowDefined = typeof window !== 'undefined'
+    const isMobileLayout = isWindowDefined && window.innerWidth < MODAL_BREAKPOINT
     const shouldShowSearchMap =
-      !isMobileLayout || (isMobileLayout && this.state.isSearchMapOpenOnMobile);
+      !isMobileLayout || (isMobileLayout && this.state.isSearchMapOpenOnMobile)
 
     const onMapIconClick = () => {
-      this.useLocationSearchBounds = true;
-      this.setState({ isSearchMapOpenOnMobile: true });
-    };
+      this.useLocationSearchBounds = true
+      this.setState({ isSearchMapOpenOnMobile: true })
+    }
 
-    const { address, bounds, origin } = searchInURL || {};
-    const { title, description, schema } = createSearchResultSchema(listings, address, intl);
+    const { address, bounds, origin } = searchInURL || {}
+    const { title, description, schema } = createSearchResultSchema(listings, address, intl)
 
     // Set topbar class based on if a modal is open in
     // a child component
     const topbarClasses = this.state.isMobileModalOpen
       ? classNames(css.topbarBehindModal, css.topbar)
-      : css.topbar;
+      : css.topbar
 
     // N.B. openMobileMap button is sticky.
     // For some reason, stickyness doesn't work on Safari, if the element is <button>
@@ -256,7 +255,7 @@ export class SearchPageComponent extends Component {
                   listings={mapListings || []}
                   onMapMoveEnd={this.onMapMoveEnd}
                   onCloseAsModal={() => {
-                    onManageDisableScrolling('SearchPage.map', false);
+                    onManageDisableScrolling('SearchPage.map', false)
                   }}
                   messages={intl.messages}
                 />
@@ -265,7 +264,7 @@ export class SearchPageComponent extends Component {
           </ModalInMobile>
         </div>
       </Page>
-    );
+    )
     /* eslint-enable jsx-a11y/no-static-element-interactions */
   }
 }
@@ -283,7 +282,7 @@ SearchPageComponent.defaultProps = {
   dateRangeFilterConfig: config.custom.dateRangeFilterConfig,
   keywordFilterConfig: config.custom.keywordFilterConfig,
   activeListingId: null,
-};
+}
 
 SearchPageComponent.propTypes = {
   listings: array,
@@ -316,9 +315,9 @@ SearchPageComponent.propTypes = {
 
   // from injectIntl
   intl: intlShape.isRequired,
-};
+}
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const {
     currentPageResultIds,
     pagination,
@@ -327,12 +326,12 @@ const mapStateToProps = state => {
     searchParams,
     searchMapListingIds,
     activeListingId,
-  } = state.SearchPage;
-  const pageListings = getListingsById(state, currentPageResultIds);
+  } = state.SearchPage
+  const pageListings = getListingsById(state, currentPageResultIds)
   const mapListings = getListingsById(
     state,
-    unionWith(currentPageResultIds, searchMapListingIds, (id1, id2) => id1.uuid === id2.uuid)
-  );
+    unionWith(currentPageResultIds, searchMapListingIds, (id1, id2) => id1.uuid === id2.uuid),
+  )
 
   return {
     listings: pageListings,
@@ -343,15 +342,15 @@ const mapStateToProps = state => {
     searchListingsError,
     searchParams,
     activeListingId,
-  };
-};
+  }
+}
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
-  onSearchMapListings: searchParams => dispatch(searchMapListings(searchParams)),
-  onActivateListing: listingId => dispatch(setActiveListing(listingId)),
-});
+  onSearchMapListings: (searchParams) => dispatch(searchMapListings(searchParams)),
+  onActivateListing: (listingId) => dispatch(setActiveListing(listingId)),
+})
 
 // Note: it is important that the withRouter HOC is **outside** the
 // connect HOC, otherwise React Router won't rerender any Route
@@ -361,20 +360,17 @@ const mapDispatchToProps = dispatch => ({
 // See: https://github.com/ReactTraining/react-router/issues/4671
 const SearchPage = compose(
   withRouter,
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  injectIntl
-)(SearchPageComponent);
+  connect(mapStateToProps, mapDispatchToProps),
+  injectIntl,
+)(SearchPageComponent)
 
 SearchPage.loadData = (params, search) => {
   const queryParams = parse(search, {
     latlng: ['origin'],
     latlngBounds: ['bounds'],
-  });
-  const { page = 1, address, origin, ...rest } = queryParams;
-  const originMaybe = config.sortSearchByDistance && origin ? { origin } : {};
+  })
+  const { page = 1, address, origin, ...rest } = queryParams
+  const originMaybe = config.sortSearchByDistance && origin ? { origin } : {}
   return searchListings({
     ...rest,
     ...originMaybe,
@@ -385,7 +381,7 @@ SearchPage.loadData = (params, search) => {
     'fields.user': ['profile.displayName', 'profile.abbreviatedName'],
     'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
     'limit.images': 1,
-  });
-};
+  })
+}
 
-export default SearchPage;
+export default SearchPage

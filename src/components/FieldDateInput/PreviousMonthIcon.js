@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
-import css from './DateInput.css';
+import css from './DateInput.css'
 
-const PreviousMonthIcon = props => {
-  const { className, rootClassName } = props;
-  const classes = classNames(rootClassName || css.rootPreviousMonthIcon, className);
+const PreviousMonthIcon = (props) => {
+  const { className, rootClassName } = props
+  const classes = classNames(rootClassName || css.rootPreviousMonthIcon, className)
 
   return (
     <svg
@@ -21,19 +21,19 @@ const PreviousMonthIcon = props => {
         fillRule="evenodd"
       />
     </svg>
-  );
-};
+  )
+}
 
-const { string } = PropTypes;
+const { string } = PropTypes
 
 PreviousMonthIcon.defaultProps = {
   className: null,
   rootClassName: null,
-};
+}
 
 PreviousMonthIcon.propTypes = {
   className: string,
   rootClassName: string,
-};
+}
 
-export default PreviousMonthIcon;
+export default PreviousMonthIcon

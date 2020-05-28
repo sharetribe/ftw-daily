@@ -1,13 +1,13 @@
-import React from 'react';
-import Map from './Map';
-import { types as sdkTypes } from '../../util/sdkLoader';
-import { obfuscatedCoordinates } from '../../util/maps';
-import config from '../../config';
+import React from 'react'
+import Map from './Map'
+import { types as sdkTypes } from '../../util/sdkLoader'
+import { obfuscatedCoordinates } from '../../util/maps'
+import config from '../../config'
 
-const { LatLng } = sdkTypes;
+const { LatLng } = sdkTypes
 
 export const WithMarker = {
-  component: props => (
+  component: (props) => (
     <div style={{ height: 400 }}>
       <Map {...props} />
     </div>
@@ -18,10 +18,10 @@ export const WithMarker = {
     address: 'Sharetribe',
     zoom: 22,
   },
-};
+}
 
 export const WithObfuscatedLocation = {
-  component: props => (
+  component: (props) => (
     <div style={{ height: 400 }}>
       <Map {...props} />
     </div>
@@ -39,10 +39,10 @@ export const WithObfuscatedLocation = {
       },
     },
   },
-};
+}
 
 export const WithCircleLocation = {
-  component: props => (
+  component: (props) => (
     <div style={{ height: 400 }}>
       <Map {...props} />
     </div>
@@ -59,4 +59,4 @@ export const WithCircleLocation = {
       },
     },
   },
-};
+}

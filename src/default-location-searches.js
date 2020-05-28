@@ -1,6 +1,6 @@
-import { types as sdkTypes } from './util/sdkLoader';
+import { types as sdkTypes } from './util/sdkLoader'
 
-const { LatLng, LatLngBounds } = sdkTypes;
+const { LatLng, LatLngBounds } = sdkTypes
 
 // An array of locations to show in the LocationAutocompleteInput when
 // the input is in focus but the user hasn't typed in any search yet.
@@ -43,4 +43,4 @@ export default [
       bounds: new LatLngBounds(new LatLng(66.16997, 29.16773), new LatLng(66.16095, 29.13572)),
     },
   },
-];
+]

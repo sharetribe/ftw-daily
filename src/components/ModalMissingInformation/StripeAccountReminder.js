@@ -1,11 +1,11 @@
-import React from 'react';
-import { FormattedMessage } from '../../util/reactIntl';
-import { NamedLink } from '../../components';
+import React from 'react'
+import { FormattedMessage } from '../../util/reactIntl'
+import { NamedLink } from '../../components'
 
-import css from './ModalMissingInformation.css';
+import css from './ModalMissingInformation.css'
 
-const StripeAccountReminder = props => {
-  const { className } = props;
+const StripeAccountReminder = (props) => {
+  const { className } = props
 
   return (
     <div className={className}>
@@ -21,7 +21,7 @@ const StripeAccountReminder = props => {
         </NamedLink>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default StripeAccountReminder;
+export default StripeAccountReminder

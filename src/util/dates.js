@@ -1,10 +1,10 @@
-import moment from 'moment';
+import moment from 'moment'
 
 /**
  * Input names for the DateRangePicker from react-dates.
  */
-export const START_DATE = 'startDate';
-export const END_DATE = 'endDate';
+export const START_DATE = 'startDate'
+export const END_DATE = 'endDate'
 
 /**
  * Check that the given parameter is a Date object.
@@ -13,8 +13,8 @@ export const END_DATE = 'endDate';
  *
  * @returns {boolean} true if given parameter is a Date object.
  */
-export const isDate = d =>
-  d && Object.prototype.toString.call(d) === '[object Date]' && !Number.isNaN(d.getTime());
+export const isDate = (d) =>
+  d && Object.prototype.toString.call(d) === '[object Date]' && !Number.isNaN(d.getTime())
 
 /**
  * Check if the given parameters represent the same Date value (timestamps are compared)
@@ -24,7 +24,7 @@ export const isDate = d =>
  *
  * @returns {boolean} true if given parameters have the same timestamp.
  */
-export const isSameDate = (a, b) => a && isDate(a) && b && isDate(b) && a.getTime() === b.getTime();
+export const isSameDate = (a, b) => a && isDate(a) && b && isDate(b) && a.getTime() === b.getTime()
 
 /**
  * Convert date given by API to something meaningful noon on browser's timezone
@@ -44,16 +44,16 @@ export const isSameDate = (a, b) => a && isDate(a) && b && isDate(b) && a.getTim
  *
  * @returns {Date} date (given by API as UTC 00:00) converted back to local noon.
  */
-export const dateFromAPIToLocalNoon = date => {
-  const timezoneDiffInMinutes = moment(date).utcOffset();
+export const dateFromAPIToLocalNoon = (date) => {
+  const timezoneDiffInMinutes = moment(date).utcOffset()
   // Example timezone SST:
   // We get a Fri 00:00 UTC aka "Thu Mar 29 2018 13:00:00 GMT-1100 (SST)"
   // We need to subtract timezone difference (-11h), effectively adding 11h - to get to correct date
-  const momentInLocalTimezone = moment(date).subtract(timezoneDiffInMinutes, 'minutes');
+  const momentInLocalTimezone = moment(date).subtract(timezoneDiffInMinutes, 'minutes')
   // To be on the safe zone with leap seconds and stuff when using day / night picker
   // we'll add 12 h to get to the noon of day in local timezone.
-  return momentInLocalTimezone.add(12, 'hours').toDate();
-};
+  return momentInLocalTimezone.add(12, 'hours').toDate()
+}
 
 /**
  * Convert local date for API.
@@ -70,12 +70,12 @@ export const dateFromAPIToLocalNoon = date => {
  *
  * @returns {Date} date (given by API as UTC 00:00) converted back to local noon.
  */
-export const dateFromLocalToAPI = date => {
-  const timezoneDiffInMinutes = moment(date).utcOffset();
-  const momentInLocalTimezone = moment(date).add(timezoneDiffInMinutes, 'minutes');
+export const dateFromLocalToAPI = (date) => {
+  const timezoneDiffInMinutes = moment(date).utcOffset()
+  const momentInLocalTimezone = moment(date).add(timezoneDiffInMinutes, 'minutes')
 
-  return momentInLocalTimezone.toDate();
-};
+  return momentInLocalTimezone.toDate()
+}
 
 /**
  * Calculate the number of nights between the given dates
@@ -87,12 +87,12 @@ export const dateFromLocalToAPI = date => {
  * @returns {Number} number of nights between the given dates
  */
 export const nightsBetween = (startDate, endDate) => {
-  const nights = moment(endDate).diff(startDate, 'days');
+  const nights = moment(endDate).diff(startDate, 'days')
   if (nights < 0) {
-    throw new Error('End date cannot be before start date');
+    throw new Error('End date cannot be before start date')
   }
-  return nights;
-};
+  return nights
+}
 
 /**
  * Calculate the number of days between the given dates
@@ -107,12 +107,12 @@ export const nightsBetween = (startDate, endDate) => {
  * @returns {Number} number of days between the given dates
  */
 export const daysBetween = (startDate, endDate) => {
-  const days = moment(endDate).diff(startDate, 'days');
+  const days = moment(endDate).diff(startDate, 'days')
   if (days < 0) {
-    throw new Error('End date cannot be before start date');
+    throw new Error('End date cannot be before start date')
   }
-  return days;
-};
+  return days
+}
 
 /**
  * Calculate the number of minutes between the given dates
@@ -124,12 +124,12 @@ export const daysBetween = (startDate, endDate) => {
  * @returns {Number} number of minutes between the given Date objects
  */
 export const minutesBetween = (startDate, endDate) => {
-  const minutes = moment(endDate).diff(startDate, 'minutes');
+  const minutes = moment(endDate).diff(startDate, 'minutes')
   if (minutes < 0) {
-    throw new Error('End Date cannot be before start Date');
+    throw new Error('End Date cannot be before start Date')
   }
-  return minutes;
-};
+  return minutes
+}
 
 /**
  * Format the given date to month id/string
@@ -138,7 +138,7 @@ export const minutesBetween = (startDate, endDate) => {
  *
  * @returns {String} formatted month string
  */
-export const monthIdString = date => moment(date).format('YYYY-MM');
+export const monthIdString = (date) => moment(date).format('YYYY-MM')
 
 /**
  * Format the given date to UTC month id/string
@@ -147,10 +147,7 @@ export const monthIdString = date => moment(date).format('YYYY-MM');
  *
  * @returns {String} formatted month string
  */
-export const monthIdStringInUTC = date =>
-  moment(date)
-    .utc()
-    .format('YYYY-MM');
+export const monthIdStringInUTC = (date) => moment(date).utc().format('YYYY-MM')
 
 /**
  * Format the given date
@@ -162,45 +159,45 @@ export const monthIdStringInUTC = date =>
  * @returns {String} formatted date
  */
 export const formatDate = (intl, todayString, d) => {
-  const paramsValid = intl && d instanceof Date && typeof todayString === 'string';
+  const paramsValid = intl && d instanceof Date && typeof todayString === 'string'
   if (!paramsValid) {
-    throw new Error(`Invalid params for formatDate: (${intl}, ${todayString}, ${d})`);
+    throw new Error(`Invalid params for formatDate: (${intl}, ${todayString}, ${d})`)
   }
 
   // By default we can use moment() directly but in tests we need to use a specific dates.
   // fakeIntl used in tests contains now() function wich returns predefined date
-  const now = intl.now ? moment(intl.now()) : moment();
-  const formattedTime = intl.formatTime(d);
-  let formattedDate;
+  const now = intl.now ? moment(intl.now()) : moment()
+  const formattedTime = intl.formatTime(d)
+  let formattedDate
 
   if (now.isSame(d, 'day')) {
     // e.g. "Today, 9:10pm"
-    formattedDate = todayString;
+    formattedDate = todayString
   } else if (now.isSame(d, 'week')) {
     // e.g. "Wed, 8:00pm"
     formattedDate = intl.formatDate(d, {
       weekday: 'short',
-    });
+    })
   } else if (now.isSame(d, 'year')) {
     // e.g. "Aug 22, 7:40pm"
     formattedDate = intl.formatDate(d, {
       month: 'short',
       day: 'numeric',
-    });
+    })
   } else {
     // e.g. "Jul 17 2016, 6:02pm"
     const date = intl.formatDate(d, {
       month: 'short',
       day: 'numeric',
-    });
+    })
     const year = intl.formatDate(d, {
       year: 'numeric',
-    });
-    formattedDate = `${date} ${year}`;
+    })
+    formattedDate = `${date} ${year}`
   }
 
-  return `${formattedDate}, ${formattedTime}`;
-};
+  return `${formattedDate}, ${formattedTime}`
+}
 
 /**
  * Converts string given in ISO8601 format to date object.
@@ -210,9 +207,9 @@ export const formatDate = (intl, todayString, d) => {
  *
  * @returns {Date} parsed date object
  */
-export const parseDateFromISO8601 = dateString => {
-  return moment(dateString, 'YYYY-MM-DD').toDate();
-};
+export const parseDateFromISO8601 = (dateString) => {
+  return moment(dateString, 'YYYY-MM-DD').toDate()
+}
 
 /**
  * Converts date to string ISO8601 format ('YYYY-MM-DD').
@@ -223,9 +220,9 @@ export const parseDateFromISO8601 = dateString => {
  * @returns {String} string in 'YYYY-MM-DD'format
  */
 
-export const stringifyDateToISO8601 = date => {
-  return moment(date).format('YYYY-MM-DD');
-};
+export const stringifyDateToISO8601 = (date) => {
+  return moment(date).format('YYYY-MM-DD')
+}
 
 /**
  * Formats string ('YYYY-MM-DD') to UTC format ('0000-00-00T00:00:00.000Z').
@@ -236,9 +233,9 @@ export const stringifyDateToISO8601 = date => {
  * @returns {String} string in '0000-00-00T00:00:00.000Z' format
  */
 
-export const formatDateStringToUTC = dateString => {
-  return moment.utc(dateString).toDate();
-};
+export const formatDateStringToUTC = (dateString) => {
+  return moment.utc(dateString).toDate()
+}
 
 /**
  * Formats string ('YYYY-MM-DD') to UTC format ('0000-00-00T00:00:00.000Z') and adds one day.
@@ -250,13 +247,9 @@ export const formatDateStringToUTC = dateString => {
  * @returns {String} string in '0000-00-00T00:00:00.000Z' format
  */
 
-export const getExclusiveEndDate = dateString => {
-  return moment
-    .utc(dateString)
-    .add(1, 'days')
-    .startOf('day')
-    .toDate();
-};
+export const getExclusiveEndDate = (dateString) => {
+  return moment.utc(dateString).add(1, 'days').startOf('day').toDate()
+}
 
 export const formatDateToText = (intl, date) => {
   return {
@@ -272,5 +265,5 @@ export const formatDateToText = (intl, date) => {
       month: 'short',
       day: 'numeric',
     }),
-  };
-};
+  }
+}

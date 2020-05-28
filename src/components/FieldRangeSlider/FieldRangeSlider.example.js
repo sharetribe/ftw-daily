@@ -1,16 +1,16 @@
 /* eslint-disable no-console */
-import React from 'react';
-import { Form as FinalForm, FormSpy } from 'react-final-form';
-import { Button } from '../../components';
-import FieldRangeSlider from './FieldRangeSlider';
+import React from 'react'
+import { Form as FinalForm, FormSpy } from 'react-final-form'
+import { Button } from '../../components'
+import FieldRangeSlider from './FieldRangeSlider'
 
-const formName = 'Styleguide.FieldRangeSlider.Form';
+const formName = 'Styleguide.FieldRangeSlider.Form'
 
-const FormComponent = props => (
+const FormComponent = (props) => (
   <FinalForm
     {...props}
     formId={formName}
-    render={fieldRenderProps => {
+    render={(fieldRenderProps) => {
       const {
         formId,
         handleSubmit,
@@ -22,14 +22,14 @@ const FormComponent = props => (
         max,
         step,
         handles,
-      } = fieldRenderProps;
-      const submitDisabled = invalid || pristine || submitting;
+      } = fieldRenderProps
+      const submitDisabled = invalid || pristine || submitting
 
       return (
         <form
-          onSubmit={e => {
-            e.preventDefault();
-            handleSubmit(e);
+          onSubmit={(e) => {
+            e.preventDefault()
+            handleSubmit(e)
           }}
         >
           <FormSpy onChange={onChange} />
@@ -48,10 +48,10 @@ const FormComponent = props => (
             Submit
           </Button>
         </form>
-      );
+      )
     }}
   />
-);
+)
 
 export const FieldRangeSliderForm = {
   component: FormComponent,
@@ -60,14 +60,14 @@ export const FieldRangeSliderForm = {
     max: 1000,
     step: 5,
     handles: [333, 666],
-    onChange: formState => {
+    onChange: (formState) => {
       if (formState.dirty) {
-        console.log('form values changed to:', formState.values);
+        console.log('form values changed to:', formState.values)
       }
     },
-    onSubmit: values => {
-      console.log('submit values:', values);
+    onSubmit: (values) => {
+      console.log('submit values:', values)
     },
   },
   group: 'custom inputs',
-};
+}

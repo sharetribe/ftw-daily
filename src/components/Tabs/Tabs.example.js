@@ -1,21 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Tabs from './Tabs';
+import React from 'react'
+import PropTypes from 'prop-types'
+import Tabs from './Tabs'
 
-const TestPanel = props => {
-  return <div>{props.children}</div>;
-};
+const TestPanel = (props) => {
+  return <div>{props.children}</div>
+}
 
-const { node } = PropTypes;
+const { node } = PropTypes
 
 TestPanel.propTypes = {
   children: node.isRequired,
-};
+}
 
 const selfLinkProps = {
   name: 'StyleguideComponent',
   params: { component: 'Tabs' },
-};
+}
 
 const TabsWrapper = () => {
   return (
@@ -30,11 +30,11 @@ const TabsWrapper = () => {
         Price form stuff
       </TestPanel>
     </Tabs>
-  );
-};
+  )
+}
 
 export const Example = {
   component: TabsWrapper,
   props: {},
   group: 'navigation',
-};
+}

@@ -11,57 +11,57 @@
  *   </ModalInMobile>
  * </Parent>
  */
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { Modal } from '../../components';
-import { withViewport } from '../../util/contextHelpers';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import { Modal } from '../../components'
+import { withViewport } from '../../util/contextHelpers'
 
-import css from './ModalInMobile.css';
+import css from './ModalInMobile.css'
 
 class ModalInMobileComponent extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       isOpen: false,
-    };
-    this.handleClose = this.handleClose.bind(this);
-    this.changeOpenStatus = this.changeOpenStatus.bind(this);
+    }
+    this.handleClose = this.handleClose.bind(this)
+    this.changeOpenStatus = this.changeOpenStatus.bind(this)
   }
 
   componentDidMount() {
-    const { isModalOpenOnMobile, showAsModalMaxWidth, viewport } = this.props;
+    const { isModalOpenOnMobile, showAsModalMaxWidth, viewport } = this.props
 
     // After Mounting, component can adapt to responsive screen size
-    const isMobileLayout = viewport.width <= showAsModalMaxWidth;
+    const isMobileLayout = viewport.width <= showAsModalMaxWidth
 
     if (isMobileLayout && isModalOpenOnMobile) {
-      this.changeOpenStatus(isModalOpenOnMobile);
+      this.changeOpenStatus(isModalOpenOnMobile)
     }
   }
 
   componentDidUpdate() {
-    const { isModalOpenOnMobile, showAsModalMaxWidth, viewport } = this.props;
+    const { isModalOpenOnMobile, showAsModalMaxWidth, viewport } = this.props
 
-    const isChanging = isModalOpenOnMobile !== this.state.isOpen;
-    const isMobileLayout = viewport.width <= showAsModalMaxWidth;
-    const shouldBeClosedAsModal = !isMobileLayout && !isModalOpenOnMobile;
+    const isChanging = isModalOpenOnMobile !== this.state.isOpen
+    const isMobileLayout = viewport.width <= showAsModalMaxWidth
+    const shouldBeClosedAsModal = !isMobileLayout && !isModalOpenOnMobile
 
     // Handle change if status is changing on mobile layout or it is closing (on desktop layout)
     if (isChanging && (isMobileLayout || shouldBeClosedAsModal)) {
-      this.changeOpenStatus(isModalOpenOnMobile);
+      this.changeOpenStatus(isModalOpenOnMobile)
     }
   }
 
   changeOpenStatus(isOpen) {
-    this.setState({ isOpen });
+    this.setState({ isOpen })
   }
 
   handleClose(event) {
-    const { onClose } = this.props;
-    this.changeOpenStatus(false);
+    const { onClose } = this.props
+    this.changeOpenStatus(false)
     if (onClose) {
-      onClose(event);
+      onClose(event)
     }
   }
 
@@ -75,19 +75,19 @@ class ModalInMobileComponent extends Component {
       closeButtonMessage,
       onManageDisableScrolling,
       viewport,
-    } = this.props;
+    } = this.props
 
-    const isMobileLayout = viewport.width <= showAsModalMaxWidth;
-    const isOpenInMobile = this.state.isOpen;
-    const isClosedInMobile = isMobileLayout && !isOpenInMobile;
-    const isOpen = isOpenInMobile && isMobileLayout;
+    const isMobileLayout = viewport.width <= showAsModalMaxWidth
+    const isOpenInMobile = this.state.isOpen
+    const isClosedInMobile = isMobileLayout && !isOpenInMobile
+    const isOpen = isOpenInMobile && isMobileLayout
 
     // We have 3 view states:
     // - default desktop layout (just an extra wrapper)
     // - mobile layout: content visible inside modal popup
     // - mobile layout: content hidden
-    const closedClassName = isClosedInMobile ? css.modalHidden : null;
-    const classes = classNames({ [css.modalInMobile]: isOpenInMobile }, css.root, className);
+    const closedClassName = isClosedInMobile ? css.modalHidden : null
+    const classes = classNames({ [css.modalInMobile]: isOpenInMobile }, css.root, className)
 
     return (
       <Modal
@@ -103,7 +103,7 @@ class ModalInMobileComponent extends Component {
       >
         {children}
       </Modal>
-    );
+    )
   }
 }
 
@@ -114,9 +114,9 @@ ModalInMobileComponent.defaultProps = {
   onClose: null,
   showAsModalMaxWidth: 0,
   closeButtonMessage: null,
-};
+}
 
-const { bool, func, node, number, string, shape } = PropTypes;
+const { bool, func, node, number, string, shape } = PropTypes
 
 ModalInMobileComponent.propTypes = {
   children: node,
@@ -135,8 +135,8 @@ ModalInMobileComponent.propTypes = {
     width: number.isRequired,
     height: number.isRequired,
   }).isRequired,
-};
+}
 
-const ModalInMobile = withViewport(ModalInMobileComponent);
+const ModalInMobile = withViewport(ModalInMobileComponent)
 
-export default ModalInMobile;
+export default ModalInMobile

@@ -1,9 +1,9 @@
-import React from 'react';
-import { renderShallow } from '../../util/test-helpers';
-import { fakeIntl } from '../../util/test-data';
-import { ContactDetailsPageComponent } from './ContactDetailsPage';
+import React from 'react'
+import { renderShallow } from '../../util/test-helpers'
+import { fakeIntl } from '../../util/test-data'
+import { ContactDetailsPageComponent } from './ContactDetailsPage'
 
-const noop = () => null;
+const noop = () => null
 
 describe('ContactDetailsPage', () => {
   it('matches snapshot', () => {
@@ -25,8 +25,8 @@ describe('ContactDetailsPage', () => {
         saveContactDetailsInProgress={false}
         contactDetailsChanged={false}
         intl={fakeIntl}
-      />
-    );
-    expect(tree).toMatchSnapshot();
-  });
-});
+      />,
+    )
+    expect(tree).toMatchSnapshot()
+  })
+})

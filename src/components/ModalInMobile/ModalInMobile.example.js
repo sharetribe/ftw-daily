@@ -1,20 +1,20 @@
 /* eslint-disable no-console */
-import React, { useState } from 'react';
-import { Button } from '../../components';
-import ModalInMobile from './ModalInMobile';
-import css from './ModalInMobileExample.css';
+import React, { useState } from 'react'
+import { Button } from '../../components'
+import ModalInMobile from './ModalInMobile'
+import css from './ModalInMobileExample.css'
 
 const onManageDisableScrolling = (componentId, scrollingDisabled = true) => {
   // We are just checking the value for now
-  console.log('Toggling ModalInMobile - currently:', componentId, scrollingDisabled);
-};
+  console.log('Toggling ModalInMobile - currently:', componentId, scrollingDisabled)
+}
 
-const ModalInMobileWrapper = props => {
-  const [isOpen, setOpen] = useState(false);
+const ModalInMobileWrapper = (props) => {
+  const [isOpen, setOpen] = useState(false)
 
   const handleOpen = () => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   return (
     <div>
@@ -22,8 +22,8 @@ const ModalInMobileWrapper = props => {
       <ModalInMobile
         {...props}
         onClose={() => {
-          setOpen(false);
-          console.log('Closing modal');
+          setOpen(false)
+          console.log('Closing modal')
         }}
         isModalOpenOnMobile={isOpen}
         onManageDisableScrolling={onManageDisableScrolling}
@@ -36,8 +36,8 @@ const ModalInMobileWrapper = props => {
         </Button>
       </div>
     </div>
-  );
-};
+  )
+}
 
 export const Empty = {
   component: ModalInMobileWrapper,
@@ -47,4 +47,4 @@ export const Empty = {
     id: 'ExampleModalInMobile',
     showAsModalMaxWidth: 400,
   },
-};
+}

@@ -2,44 +2,44 @@
  * This is a wrapper component for different Layouts.
  * Navigational 'aside' content should be added to this wrapper.
  */
-import React from 'react';
-import { node, number, string, shape } from 'prop-types';
-import { compose } from 'redux';
-import { FormattedMessage } from '../../util/reactIntl';
-import { withViewport } from '../../util/contextHelpers';
-import { LayoutWrapperSideNav } from '../../components';
+import React from 'react'
+import { node, number, string, shape } from 'prop-types'
+import { compose } from 'redux'
+import { FormattedMessage } from '../../util/reactIntl'
+import { withViewport } from '../../util/contextHelpers'
+import { LayoutWrapperSideNav } from '../../components'
 
-const MAX_HORIZONTAL_NAV_SCREEN_WIDTH = 1023;
+const MAX_HORIZONTAL_NAV_SCREEN_WIDTH = 1023
 
-const scrollToTab = currentTab => {
-  const el = document.querySelector(`#${currentTab}Tab`);
+const scrollToTab = (currentTab) => {
+  const el = document.querySelector(`#${currentTab}Tab`)
 
   if (el) {
     el.scrollIntoView({
       block: 'end',
       inline: 'end',
       behavior: 'smooth',
-    });
+    })
   }
-};
+}
 
-const LayoutWrapperAccountSettingsSideNavComponent = props => {
-  const { currentTab, viewport } = props;
+const LayoutWrapperAccountSettingsSideNavComponent = (props) => {
+  const { currentTab, viewport } = props
 
-  let hasScrolledToTab = false;
+  let hasScrolledToTab = false
 
-  const { width } = viewport;
-  const hasViewport = width > 0;
-  const hasHorizontalTabLayout = hasViewport && width <= MAX_HORIZONTAL_NAV_SCREEN_WIDTH;
-  const hasVerticalTabLayout = hasViewport && width > MAX_HORIZONTAL_NAV_SCREEN_WIDTH;
-  const hasFontsLoaded = hasViewport && document.documentElement.classList.contains('fontsLoaded');
+  const { width } = viewport
+  const hasViewport = width > 0
+  const hasHorizontalTabLayout = hasViewport && width <= MAX_HORIZONTAL_NAV_SCREEN_WIDTH
+  const hasVerticalTabLayout = hasViewport && width > MAX_HORIZONTAL_NAV_SCREEN_WIDTH
+  const hasFontsLoaded = hasViewport && document.documentElement.classList.contains('fontsLoaded')
 
   // Check if scrollToTab call is needed (tab is not visible on mobile)
   if (hasVerticalTabLayout) {
-    hasScrolledToTab = true;
+    hasScrolledToTab = true
   } else if (hasHorizontalTabLayout && !hasScrolledToTab && hasFontsLoaded) {
-    scrollToTab(currentTab);
-    hasScrolledToTab = true;
+    scrollToTab(currentTab)
+    hasScrolledToTab = true
   }
 
   const tabs = [
@@ -75,17 +75,17 @@ const LayoutWrapperAccountSettingsSideNavComponent = props => {
         name: 'PaymentMethodsPage',
       },
     },
-  ];
+  ]
 
-  return <LayoutWrapperSideNav tabs={tabs} />;
-};
+  return <LayoutWrapperSideNav tabs={tabs} />
+}
 
 LayoutWrapperAccountSettingsSideNavComponent.defaultProps = {
   className: null,
   rootClassName: null,
   children: null,
   currentTab: null,
-};
+}
 
 LayoutWrapperAccountSettingsSideNavComponent.propTypes = {
   children: node,
@@ -98,10 +98,10 @@ LayoutWrapperAccountSettingsSideNavComponent.propTypes = {
     width: number.isRequired,
     height: number.isRequired,
   }).isRequired,
-};
+}
 
 const LayoutWrapperAccountSettingsSideNav = compose(withViewport)(
-  LayoutWrapperAccountSettingsSideNavComponent
-);
+  LayoutWrapperAccountSettingsSideNavComponent,
+)
 
-export default LayoutWrapperAccountSettingsSideNav;
+export default LayoutWrapperAccountSettingsSideNav

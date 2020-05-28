@@ -1,43 +1,43 @@
-import React, { Component } from 'react';
-import { IconCheckmark } from '../../components';
-import Button, { PrimaryButton, SecondaryButton, InlineTextButton } from './Button';
+import React, { Component } from 'react'
+import { IconCheckmark } from '../../components'
+import Button, { PrimaryButton, SecondaryButton, InlineTextButton } from './Button'
 
-import css from './ButtonExample.css';
+import css from './ButtonExample.css'
 
-const preventDefault = e => {
-  e.preventDefault();
-};
+const preventDefault = (e) => {
+  e.preventDefault()
+}
 
-const hashLink = '#';
+const hashLink = '#'
 class InteractiveButton extends Component {
   constructor(props) {
-    super(props);
-    this.inProgressTimeoutId = null;
-    this.readyTimeoutId = null;
-    this.state = { inProgress: false, disabled: false, ready: false };
+    super(props)
+    this.inProgressTimeoutId = null
+    this.readyTimeoutId = null
+    this.state = { inProgress: false, disabled: false, ready: false }
   }
   componentWillUnmount() {
-    window.clearTimeout(this.inProgressTimeoutId);
-    window.clearTimeout(this.readyTimeoutId);
+    window.clearTimeout(this.inProgressTimeoutId)
+    window.clearTimeout(this.readyTimeoutId)
   }
   render() {
     const handleClick = () => {
-      window.clearTimeout(this.inProgressTimeoutId);
-      window.clearTimeout(this.readyTimeoutId);
-      this.setState({ inProgress: true, disabled: true });
+      window.clearTimeout(this.inProgressTimeoutId)
+      window.clearTimeout(this.readyTimeoutId)
+      this.setState({ inProgress: true, disabled: true })
       this.inProgressTimeoutId = window.setTimeout(() => {
-        this.setState({ inProgress: false, disabled: false, ready: true });
+        this.setState({ inProgress: false, disabled: false, ready: true })
         this.readyTimeoutId = window.setTimeout(() => {
-          this.setState({ inProgress: false, disabled: false, ready: false });
-        }, 2000);
-      }, 2000);
-    };
+          this.setState({ inProgress: false, disabled: false, ready: false })
+        }, 2000)
+      }, 2000)
+    }
 
     return (
       <Button {...this.state} onClick={handleClick}>
         Click me
       </Button>
-    );
+    )
   }
 }
 
@@ -159,10 +159,10 @@ const ButtonsComponent = () => {
       <h3>Button with custom styles:</h3>
       <Button rootClassName={css.customButton}>Click me</Button>
     </div>
-  );
-};
+  )
+}
 
 export const Buttons = {
   component: ButtonsComponent,
   group: 'buttons',
-};
+}

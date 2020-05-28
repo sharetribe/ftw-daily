@@ -7,26 +7,26 @@
  *
  */
 
-import React from 'react';
-import { arrayOf, bool, node, shape, string } from 'prop-types';
-import classNames from 'classnames';
-import { FieldArray } from 'react-final-form-arrays';
-import { FieldCheckbox, ValidationError } from '../../components';
+import React from 'react'
+import { arrayOf, bool, node, shape, string } from 'prop-types'
+import classNames from 'classnames'
+import { FieldArray } from 'react-final-form-arrays'
+import { FieldCheckbox, ValidationError } from '../../components'
 
-import css from './FieldCheckboxGroup.css';
+import css from './FieldCheckboxGroup.css'
 
-const FieldCheckboxRenderer = props => {
-  const { className, rootClassName, label, twoColumns, id, fields, options, meta } = props;
+const FieldCheckboxRenderer = (props) => {
+  const { className, rootClassName, label, twoColumns, id, fields, options, meta } = props
 
-  const classes = classNames(rootClassName || css.root, className);
-  const listClasses = twoColumns ? classNames(css.list, css.twoColumns) : css.list;
+  const classes = classNames(rootClassName || css.root, className)
+  const listClasses = twoColumns ? classNames(css.list, css.twoColumns) : css.list
 
   return (
     <fieldset className={classes}>
       {label ? <legend>{label}</legend> : null}
       <ul className={listClasses}>
         {options.map((option, index) => {
-          const fieldId = `${id}.${option.key}`;
+          const fieldId = `${id}.${option.key}`
           return (
             <li key={fieldId} className={css.item}>
               <FieldCheckbox
@@ -36,20 +36,20 @@ const FieldCheckboxRenderer = props => {
                 value={option.key}
               />
             </li>
-          );
+          )
         })}
       </ul>
       <ValidationError fieldMeta={{ ...meta }} />
     </fieldset>
-  );
-};
+  )
+}
 
 FieldCheckboxRenderer.defaultProps = {
   rootClassName: null,
   className: null,
   label: null,
   twoColumns: false,
-};
+}
 
 FieldCheckboxRenderer.propTypes = {
   rootClassName: string,
@@ -60,17 +60,17 @@ FieldCheckboxRenderer.propTypes = {
     shape({
       key: string.isRequired,
       label: node.isRequired,
-    })
+    }),
   ).isRequired,
   twoColumns: bool,
-};
+}
 
-const FieldCheckboxGroup = props => <FieldArray component={FieldCheckboxRenderer} {...props} />;
+const FieldCheckboxGroup = (props) => <FieldArray component={FieldCheckboxRenderer} {...props} />
 
 // Name and component are required fields for FieldArray.
 // Component-prop we define in this file, name needs to be passed in
 FieldCheckboxGroup.propTypes = {
   name: string.isRequired,
-};
+}
 
-export default FieldCheckboxGroup;
+export default FieldCheckboxGroup

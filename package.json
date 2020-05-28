@@ -55,6 +55,7 @@
     "sharetribe-scripts": "3.1.1",
     "smoothscroll-polyfill": "^0.4.0",
     "source-map-support": "^0.5.9",
+    "typescript": "^3.9.3",
     "url": "^0.11.0"
   },
   "devDependencies": {
@@ -66,7 +67,7 @@
     "enzyme-to-json": "^3.4.4",
     "inquirer": "^7.0.0",
     "nodemon": "^1.17.2",
-    "prettier": "^1.18.2"
+    "prettier": "^2.0.5"
   },
   "resolutions": {
     "react-dates/lodash": "^4.17.14",
@@ -86,7 +87,7 @@
     "config": "node scripts/config.js",
     "dev": "node scripts/config.js --check && sharetribe-scripts start",
     "build": "sharetribe-scripts build",
-    "format": "prettier --write '**/*.{js,css}'",
+    "format": "prettier --write .",
     "format-ci": "prettier --list-different '**/*.{js,css}'",
     "format-docs": "prettier --write '**/*.md'",
     "test": "NODE_ICU_DATA=node_modules/full-icu sharetribe-scripts test",
@@ -110,8 +111,10 @@
     ]
   },
   "prettier": {
+    "arrowParens": "always",
+    "proseWrap": "always",
+    "semi": false,
     "singleQuote": true,
-    "trailingComma": "es5",
-    "proseWrap": "always"
+    "trailingComma": "all"
   }
 }

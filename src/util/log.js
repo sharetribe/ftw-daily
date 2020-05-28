@@ -6,9 +6,9 @@
  *
  */
 
-import * as Sentry from '@sentry/browser';
-import config from '../config';
-import { responseApiErrorInfo } from './errors';
+import * as Sentry from '@sentry/browser'
+import config from '../config'
+import { responseApiErrorInfo } from './errors'
 
 /**
  * Set up error handling. If a Sentry DSN is
@@ -21,9 +21,9 @@ export const setup = () => {
     Sentry.init({
       dsn: config.sentryDsn,
       environment: config.env,
-    });
+    })
   }
-};
+}
 
 /**
  * Set user ID for the logger so that it
@@ -31,28 +31,28 @@ export const setup = () => {
  *
  * @param {String} userId ID of current user
  */
-export const setUserId = userId => {
-  Sentry.configureScope(scope => {
-    scope.setUser({ id: userId });
-  });
-};
+export const setUserId = (userId) => {
+  Sentry.configureScope((scope) => {
+    scope.setUser({ id: userId })
+  })
+}
 
 /**
  * Clears the user ID.
  */
 
 export const clearUserId = () => {
-  Sentry.configureScope(scope => {
-    scope.setUser(null);
-  });
-};
+  Sentry.configureScope((scope) => {
+    scope.setUser(null)
+  })
+}
 
-const printAPIErrorsAsConsoleTable = apiErrors => {
+const printAPIErrorsAsConsoleTable = (apiErrors) => {
   if (apiErrors != null && apiErrors.length > 0 && typeof console.table === 'function') {
-    console.log('Errors returned by Marketplace API call:');
-    console.table(apiErrors.map(err => ({ status: err.status, code: err.code, ...err.meta })));
+    console.log('Errors returned by Marketplace API call:')
+    console.table(apiErrors.map((err) => ({ status: err.status, code: err.code, ...err.meta })))
   }
-};
+}
 
 /**
  * Logs an execption. If Sentry is configured
@@ -64,22 +64,22 @@ const printAPIErrorsAsConsoleTable = apiErrors => {
  * @param {Object} data Additional data to be sent to Sentry
  */
 export const error = (e, code, data) => {
-  const apiErrors = responseApiErrorInfo(e);
+  const apiErrors = responseApiErrorInfo(e)
   if (config.sentryDsn) {
-    const extra = { ...data, apiErrorData: apiErrors };
+    const extra = { ...data, apiErrorData: apiErrors }
 
-    Sentry.withScope(scope => {
-      scope.setTag('code', code);
-      Object.keys(extra).forEach(key => {
-        scope.setExtra(key, extra[key]);
-      });
-      Sentry.captureException(e);
-    });
+    Sentry.withScope((scope) => {
+      scope.setTag('code', code)
+      Object.keys(extra).forEach((key) => {
+        scope.setExtra(key, extra[key])
+      })
+      Sentry.captureException(e)
+    })
 
-    printAPIErrorsAsConsoleTable(apiErrors);
+    printAPIErrorsAsConsoleTable(apiErrors)
   } else {
-    console.error(e);
-    console.error('Error code:', code, 'data:', data);
-    printAPIErrorsAsConsoleTable(apiErrors);
+    console.error(e)
+    console.error('Error code:', code, 'data:', data)
+    printAPIErrorsAsConsoleTable(apiErrors)
   }
-};
+}

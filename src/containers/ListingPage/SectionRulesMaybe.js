@@ -1,13 +1,13 @@
-import React from 'react';
-import { shape, string } from 'prop-types';
-import { FormattedMessage } from '../../util/reactIntl';
-import classNames from 'classnames';
+import React from 'react'
+import { shape, string } from 'prop-types'
+import { FormattedMessage } from '../../util/reactIntl'
+import classNames from 'classnames'
 
-import css from './SectionRulesMaybe.css';
+import css from './SectionRulesMaybe.css'
 
-const SectionRulesMaybe = props => {
-  const { className, rootClassName, publicData } = props;
-  const classes = classNames(rootClassName || css.root, className);
+const SectionRulesMaybe = (props) => {
+  const { className, rootClassName, publicData } = props
+  const classes = classNames(rootClassName || css.root, className)
   return publicData && publicData.rules ? (
     <div className={classes}>
       <h2 className={css.title}>
@@ -15,10 +15,10 @@ const SectionRulesMaybe = props => {
       </h2>
       <p className={css.rules}>{publicData.rules}</p>
     </div>
-  ) : null;
-};
+  ) : null
+}
 
-SectionRulesMaybe.defaultProps = { className: null, rootClassName: null };
+SectionRulesMaybe.defaultProps = { className: null, rootClassName: null }
 
 SectionRulesMaybe.propTypes = {
   className: string,
@@ -26,6 +26,6 @@ SectionRulesMaybe.propTypes = {
   publicData: shape({
     rules: string,
   }),
-};
+}
 
-export default SectionRulesMaybe;
+export default SectionRulesMaybe

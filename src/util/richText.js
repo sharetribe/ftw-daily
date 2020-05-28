@@ -1,8 +1,8 @@
-import React from 'react';
-import flow from 'lodash/flow';
-import flatMap from 'lodash/flatMap';
-import map from 'lodash/map';
-import { ExternalLink } from '../components';
+import React from 'react'
+import flow from 'lodash/flow'
+import flatMap from 'lodash/flatMap'
+import map from 'lodash/map'
+import { ExternalLink } from '../components'
 
 /**
  * Add zero width space (zwsp) around given breakchars (default '/') to make word break possible.
@@ -14,19 +14,19 @@ import { ExternalLink } from '../components';
  */
 export const zwspAroundSpecialCharsSplit = (wordToBreak, breakChars = '/') => {
   if (typeof wordToBreak !== 'string') {
-    return wordToBreak;
+    return wordToBreak
   }
 
-  const bcArray = breakChars.split('');
+  const bcArray = breakChars.split('')
 
   // Escape special regular expression chars
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-  const escapedBCArray = bcArray.map(c => c.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
-  const reSplit = new RegExp('([' + escapedBCArray.join('') + '])');
+  const escapedBCArray = bcArray.map((c) => c.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+  const reSplit = new RegExp('([' + escapedBCArray.join('') + '])')
 
-  const zwsp = '​';
-  return wordToBreak.split(reSplit).map(w => (bcArray.includes(w) ? `${zwsp}${w}${zwsp}` : w));
-};
+  const zwsp = '​'
+  return wordToBreak.split(reSplit).map((w) => (bcArray.includes(w) ? `${zwsp}${w}${zwsp}` : w))
+}
 
 /**
  * Layouts are not fixed sizes - So, long words in text make flexboxed items to grow too big.
@@ -39,20 +39,20 @@ export const zwspAroundSpecialCharsSplit = (wordToBreak, breakChars = '/') => {
  * @return {node} returns a string or component
  */
 export const wrapLongWord = (word, key, options = {}) => {
-  const { longWordMinLength, longWordClass } = options;
+  const { longWordMinLength, longWordClass } = options
   if (typeof word !== 'string' || !(longWordMinLength && longWordClass)) {
-    return word;
+    return word
   }
 
-  const isShortWord = word.length <= longWordMinLength;
+  const isShortWord = word.length <= longWordMinLength
   return isShortWord ? (
     word
   ) : (
     <span key={key} className={longWordClass}>
       {word}
     </span>
-  );
-};
+  )
+}
 
 /**
  * Find links from words and surround them with <ExternalLink> component
@@ -64,9 +64,9 @@ export const wrapLongWord = (word, key, options = {}) => {
  */
 export const linkifyOrWrapLinkSplit = (word, key, options = {}) => {
   if (typeof word !== 'string') {
-    return word;
+    return word
   }
-  const { linkify, linkClass } = options;
+  const { linkify, linkClass } = options
 
   // TODO This can't handle links that contain parenthesis:
   // '(http://example.org/path_(etc))'
@@ -83,10 +83,10 @@ export const linkifyOrWrapLinkSplit = (word, key, options = {}) => {
   // https://stackoverflow.com/questions/1500260/detect-urls-in-text-with-javascript
 
   // eslint-disable-next-line no-useless-escape
-  const urlRegex = /(\bhttps?:\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+  const urlRegex = /(\bhttps?:\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi
   if (word.match(urlRegex)) {
     // Split strings like "(http://www.example.com)" to ["(","http://www.example.com",")"]
-    return word.split(urlRegex).map(w => {
+    return word.split(urlRegex).map((w) => {
       return !w.match(urlRegex) ? (
         w
       ) : linkify ? (
@@ -99,12 +99,12 @@ export const linkifyOrWrapLinkSplit = (word, key, options = {}) => {
         </span>
       ) : (
         w
-      );
-    });
+      )
+    })
   } else {
-    return word;
+    return word
   }
-};
+}
 
 /**
  * Scan text to fill in wrappers for long words and add links.
@@ -117,22 +117,24 @@ export const linkifyOrWrapLinkSplit = (word, key, options = {}) => {
  */
 export const richText = (text, options) => {
   if (typeof text !== 'string') {
-    return text;
+    return text
   }
 
   // longWordMinLength & longWordClass are needed for long words to be spanned
   // linkify = true is needed for links to be linkified (linkClass is optional)
-  const { longWordMinLength, longWordClass, linkify = false, linkClass } = options;
-  const linkOrLongWordClass = linkClass ? linkClass : longWordClass;
-  const nonWhiteSpaceSequence = /([^\s]+)/gi;
+  const { longWordMinLength, longWordClass, linkify = false, linkClass } = options
+  const linkOrLongWordClass = linkClass ? linkClass : longWordClass
+  const nonWhiteSpaceSequence = /([^\s]+)/gi
 
   return text.split(nonWhiteSpaceSequence).reduce((acc, nextChild, i) => {
     const parts = flow([
-      v =>
-        flatMap(v, w => linkifyOrWrapLinkSplit(w, i, { linkify, linkClass: linkOrLongWordClass })),
-      v => flatMap(v, w => zwspAroundSpecialCharsSplit(w, '/,')),
-      v => map(v, (w, j) => wrapLongWord(w, `${i}${j}`, { longWordMinLength, longWordClass })),
-    ])([nextChild]);
-    return acc.concat(parts);
-  }, []);
-};
+      (v) =>
+        flatMap(v, (w) =>
+          linkifyOrWrapLinkSplit(w, i, { linkify, linkClass: linkOrLongWordClass }),
+        ),
+      (v) => flatMap(v, (w) => zwspAroundSpecialCharsSplit(w, '/,')),
+      (v) => map(v, (w, j) => wrapLongWord(w, `${i}${j}`, { longWordMinLength, longWordClass })),
+    ])([nextChild])
+    return acc.concat(parts)
+  }, [])
+}

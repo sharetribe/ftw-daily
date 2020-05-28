@@ -1,10 +1,10 @@
-import React from 'react';
-import AddressLinkMaybe from './AddressLinkMaybe';
+import React from 'react'
+import AddressLinkMaybe from './AddressLinkMaybe'
 
-import css from './TransactionPanel.css';
+import css from './TransactionPanel.css'
 
 // Functional component as a helper to build detail card headings
-const DetailCardHeadingsMaybe = props => {
+const DetailCardHeadingsMaybe = (props) => {
   const {
     showDetailCardHeadings,
     listingTitle,
@@ -12,7 +12,7 @@ const DetailCardHeadingsMaybe = props => {
     location,
     geolocation,
     showAddress,
-  } = props;
+  } = props
 
   return showDetailCardHeadings ? (
     <div className={css.detailCardHeadings}>
@@ -20,7 +20,7 @@ const DetailCardHeadingsMaybe = props => {
       <p className={css.detailCardSubtitle}>{subTitle}</p>
       <AddressLinkMaybe location={location} geolocation={geolocation} showAddress={showAddress} />
     </div>
-  ) : null;
-};
+  ) : null
+}
 
-export default DetailCardHeadingsMaybe;
+export default DetailCardHeadingsMaybe

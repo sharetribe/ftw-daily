@@ -1,9 +1,9 @@
-import React from 'react';
-import classNames from 'classnames';
-import { oneOfType, string } from 'prop-types';
-import { propTypes } from '../../util/types';
+import React from 'react'
+import classNames from 'classnames'
+import { oneOfType, string } from 'prop-types'
+import { propTypes } from '../../util/types'
 
-const UserDisplayName = props => {
+const UserDisplayName = (props) => {
   const {
     rootClassName,
     className,
@@ -11,24 +11,24 @@ const UserDisplayName = props => {
     intl,
     deletedUserDisplayName,
     bannedUserDisplayName,
-  } = props;
-  const hasAttributes = user && user.attributes;
-  const userIsDeleted = hasAttributes && user.attributes.deleted;
-  const userIsBanned = hasAttributes && user.attributes.banned;
-  const userHasProfile = hasAttributes && user.attributes.profile;
-  const userDisplayName = userHasProfile && user.attributes.profile.displayName;
+  } = props
+  const hasAttributes = user && user.attributes
+  const userIsDeleted = hasAttributes && user.attributes.deleted
+  const userIsBanned = hasAttributes && user.attributes.banned
+  const userHasProfile = hasAttributes && user.attributes.profile
+  const userDisplayName = userHasProfile && user.attributes.profile.displayName
 
   const deletedUserDisplayNameInUse = deletedUserDisplayName
     ? deletedUserDisplayName
     : intl.formatMessage({
         id: 'UserDisplayName.deleted',
-      });
+      })
 
   const bannedUserDisplayNameInUse = bannedUserDisplayName
     ? bannedUserDisplayName
     : intl.formatMessage({
         id: 'UserDisplayName.banned',
-      });
+      })
 
   const displayName = userDisplayName
     ? userDisplayName
@@ -36,11 +36,11 @@ const UserDisplayName = props => {
     ? deletedUserDisplayNameInUse
     : userIsBanned
     ? bannedUserDisplayNameInUse
-    : null;
+    : null
 
-  const classes = classNames(rootClassName, className);
-  return <span className={classes}>{displayName}</span>;
-};
+  const classes = classNames(rootClassName, className)
+  return <span className={classes}>{displayName}</span>
+}
 
 UserDisplayName.defaultProps = {
   rootClassName: null,
@@ -49,7 +49,7 @@ UserDisplayName.defaultProps = {
   user: null,
   deletedUserDisplayName: null,
   bannedUserDisplayName: null,
-};
+}
 
 UserDisplayName.propTypes = {
   rootClassName: string,
@@ -58,6 +58,6 @@ UserDisplayName.propTypes = {
   user: oneOfType([propTypes.user, propTypes.currentUser]),
   deletedUserDisplayName: string,
   bannedUserDisplayName: string,
-};
+}
 
-export default UserDisplayName;
+export default UserDisplayName

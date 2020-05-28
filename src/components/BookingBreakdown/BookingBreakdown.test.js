@@ -1,21 +1,21 @@
-import React from 'react';
-import Decimal from 'decimal.js';
-import { fakeIntl, createBooking } from '../../util/test-data';
-import { renderDeep } from '../../util/test-helpers';
-import { types as sdkTypes } from '../../util/sdkLoader';
+import React from 'react'
+import Decimal from 'decimal.js'
+import { fakeIntl, createBooking } from '../../util/test-data'
+import { renderDeep } from '../../util/test-helpers'
+import { types as sdkTypes } from '../../util/sdkLoader'
 import {
   TRANSITION_CANCEL,
   TRANSITION_REQUEST_PAYMENT,
   TX_TRANSITION_ACTOR_CUSTOMER,
   DATE_TYPE_DATE,
-} from '../../util/transaction';
-import { LINE_ITEM_NIGHT } from '../../util/types';
-import { BookingBreakdownComponent } from './BookingBreakdown';
+} from '../../util/transaction'
+import { LINE_ITEM_NIGHT } from '../../util/types'
+import { BookingBreakdownComponent } from './BookingBreakdown'
 
-const { UUID, Money } = sdkTypes;
+const { UUID, Money } = sdkTypes
 
-const exampleTransaction = params => {
-  const created = new Date(Date.UTC(2017, 1, 1));
+const exampleTransaction = (params) => {
+  const created = new Date(Date.UTC(2017, 1, 1))
   return {
     id: new UUID('example-transaction'),
     type: 'transaction',
@@ -34,8 +34,8 @@ const exampleTransaction = params => {
       // payinTotal, payoutTotal, and lineItems required in params
       ...params,
     },
-  };
-};
+  }
+}
 
 describe('BookingBreakdown', () => {
   it('pretransaction data matches snapshot', () => {
@@ -63,10 +63,10 @@ describe('BookingBreakdown', () => {
           end: new Date(Date.UTC(2017, 3, 16)),
         })}
         intl={fakeIntl}
-      />
-    );
-    expect(tree).toMatchSnapshot();
-  });
+      />,
+    )
+    expect(tree).toMatchSnapshot()
+  })
 
   it('customer transaction data matches snapshot', () => {
     const tree = renderDeep(
@@ -93,10 +93,10 @@ describe('BookingBreakdown', () => {
           end: new Date(Date.UTC(2017, 3, 16)),
         })}
         intl={fakeIntl}
-      />
-    );
-    expect(tree).toMatchSnapshot();
-  });
+      />,
+    )
+    expect(tree).toMatchSnapshot()
+  })
 
   it('provider transaction data matches snapshot', () => {
     const tree = renderDeep(
@@ -130,10 +130,10 @@ describe('BookingBreakdown', () => {
           end: new Date(Date.UTC(2017, 3, 16)),
         })}
         intl={fakeIntl}
-      />
-    );
-    expect(tree).toMatchSnapshot();
-  });
+      />,
+    )
+    expect(tree).toMatchSnapshot()
+  })
   it('provider canceled transaction data matches snapshot', () => {
     const tree = renderDeep(
       <BookingBreakdownComponent
@@ -184,8 +184,8 @@ describe('BookingBreakdown', () => {
           end: new Date(Date.UTC(2017, 3, 16)),
         })}
         intl={fakeIntl}
-      />
-    );
-    expect(tree).toMatchSnapshot();
-  });
-});
+      />,
+    )
+    expect(tree).toMatchSnapshot()
+  })
+})

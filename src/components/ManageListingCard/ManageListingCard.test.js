@@ -1,9 +1,9 @@
-import React from 'react';
-import { renderShallow } from '../../util/test-helpers';
-import { createUser, createOwnListing, fakeIntl } from '../../util/test-data';
-import { ManageListingCardComponent } from './ManageListingCard';
+import React from 'react'
+import { renderShallow } from '../../util/test-helpers'
+import { createUser, createOwnListing, fakeIntl } from '../../util/test-data'
+import { ManageListingCardComponent } from './ManageListingCard'
 
-const noop = () => null;
+const noop = () => null
 
 describe('ManageListingCard', () => {
   it('matches snapshot', () => {
@@ -19,8 +19,8 @@ describe('ManageListingCard', () => {
         hasClosingError={false}
         hasOpeningError={false}
         availabilityEnabled={true}
-      />
-    );
-    expect(tree).toMatchSnapshot();
-  });
-});
+      />,
+    )
+    expect(tree).toMatchSnapshot()
+  })
+})

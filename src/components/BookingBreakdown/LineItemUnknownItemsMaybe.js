@@ -9,41 +9,41 @@
  * the `LINE_ITEMS` array in util/types.js and create a specific line item
  * component for them that can be used in the `BookingBreakdown` component.
  */
-import React from 'react';
-import { intlShape } from '../../util/reactIntl';
-import { formatMoney } from '../../util/currency';
-import { humanizeLineItemCode } from '../../util/data';
-import { LINE_ITEMS, propTypes } from '../../util/types';
+import React from 'react'
+import { intlShape } from '../../util/reactIntl'
+import { formatMoney } from '../../util/currency'
+import { humanizeLineItemCode } from '../../util/data'
+import { LINE_ITEMS, propTypes } from '../../util/types'
 
-import css from './BookingBreakdown.css';
+import css from './BookingBreakdown.css'
 
-const LineItemUnknownItemsMaybe = props => {
-  const { transaction, intl } = props;
+const LineItemUnknownItemsMaybe = (props) => {
+  const { transaction, intl } = props
 
   // resolve unknown non-reversal line items
   const items = transaction.attributes.lineItems.filter(
-    item => LINE_ITEMS.indexOf(item.code) === -1 && !item.reversal
-  );
+    (item) => LINE_ITEMS.indexOf(item.code) === -1 && !item.reversal,
+  )
 
   return items.length > 0 ? (
     <React.Fragment>
       {items.map((item, i) => {
-        const label = humanizeLineItemCode(item.code);
-        const formattedTotal = formatMoney(intl, item.lineTotal);
+        const label = humanizeLineItemCode(item.code)
+        const formattedTotal = formatMoney(intl, item.lineTotal)
         return (
           <div key={`${i}-item.code`} className={css.lineItem}>
             <span className={css.itemLabel}>{label}</span>
             <span className={css.itemValue}>{formattedTotal}</span>
           </div>
-        );
+        )
       })}
     </React.Fragment>
-  ) : null;
-};
+  ) : null
+}
 
 LineItemUnknownItemsMaybe.propTypes = {
   transaction: propTypes.transaction.isRequired,
   intl: intlShape.isRequired,
-};
+}
 
-export default LineItemUnknownItemsMaybe;
+export default LineItemUnknownItemsMaybe

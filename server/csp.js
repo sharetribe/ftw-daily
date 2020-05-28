@@ -1,13 +1,13 @@
-const helmet = require('helmet');
+const helmet = require('helmet')
 
-const dev = process.env.REACT_APP_ENV === 'development';
-const self = "'self'";
-const unsafeInline = "'unsafe-inline'";
-const unsafeEval = "'unsafe-eval'";
-const data = 'data:';
-const blob = 'blob:';
-const devImagesMaybe = dev ? ['*.localhost:8000'] : [];
-const baseUrl = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL || 'https://flex-api.sharetribe.com';
+const dev = process.env.REACT_APP_ENV === 'development'
+const self = "'self'"
+const unsafeInline = "'unsafe-inline'"
+const unsafeEval = "'unsafe-eval'"
+const data = 'data:'
+const blob = 'blob:'
+const devImagesMaybe = dev ? ['*.localhost:8000'] : []
+const baseUrl = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL || 'https://flex-api.sharetribe.com'
 
 // Default CSP whitelist.
 //
@@ -70,7 +70,7 @@ const defaultDirectives = {
     'js.stripe.com',
   ],
   styleSrc: [self, unsafeInline, 'fonts.googleapis.com', 'api.mapbox.com'],
-};
+}
 
 /**
  * Middleware for creating a Content Security Policy
@@ -98,7 +98,7 @@ module.exports = (reportUri, enforceSsl, reportOnly) => {
   const customDirectives = {
     // Example: Add custom directive override
     // imgSrc: exampleImgSrc,
-  };
+  }
 
   // ================ END CUSTOM CSP URLs ================ //
 
@@ -108,12 +108,12 @@ module.exports = (reportUri, enforceSsl, reportOnly) => {
       blockAllMixedContent: enforceSsl,
     },
     defaultDirectives,
-    customDirectives
-  );
+    customDirectives,
+  )
 
   // See: https://helmetjs.github.io/docs/csp/
   return helmet.contentSecurityPolicy({
     directives,
     reportOnly,
-  });
-};
+  })
+}

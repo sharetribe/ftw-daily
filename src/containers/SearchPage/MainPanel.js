@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
-import { array, bool, func, number, object, objectOf, string } from 'prop-types';
-import { FormattedMessage } from '../../util/reactIntl';
-import classNames from 'classnames';
-import merge from 'lodash/merge';
-import { propTypes } from '../../util/types';
+import React, { Component } from 'react'
+import { array, bool, func, number, object, objectOf, string } from 'prop-types'
+import { FormattedMessage } from '../../util/reactIntl'
+import classNames from 'classnames'
+import merge from 'lodash/merge'
+import { propTypes } from '../../util/types'
 import {
   SearchResultsPanel,
   SearchFilters,
   SearchFiltersMobile,
   SearchFiltersPanel,
-} from '../../components';
-import { validFilterParams } from './SearchPage.helpers';
+} from '../../components'
+import { validFilterParams } from './SearchPage.helpers'
 
-import css from './SearchPage.css';
+import css from './SearchPage.css'
 
 class MainPanel extends Component {
   constructor(props) {
-    super(props);
-    this.state = { isSearchFiltersPanelOpen: false };
+    super(props)
+    this.state = { isSearchFiltersPanelOpen: false }
   }
 
   render() {
@@ -40,39 +40,39 @@ class MainPanel extends Component {
       showAsModalMaxWidth,
       primaryFilters,
       secondaryFilters,
-    } = this.props;
+    } = this.props
 
-    const isSearchFiltersPanelOpen = !!secondaryFilters && this.state.isSearchFiltersPanelOpen;
+    const isSearchFiltersPanelOpen = !!secondaryFilters && this.state.isSearchFiltersPanelOpen
 
-    const filters = merge({}, primaryFilters, secondaryFilters);
-    const selectedFilters = validFilterParams(urlQueryParams, filters);
-    const selectedFiltersCount = Object.keys(selectedFilters).length;
+    const filters = merge({}, primaryFilters, secondaryFilters)
+    const selectedFilters = validFilterParams(urlQueryParams, filters)
+    const selectedFiltersCount = Object.keys(selectedFilters).length
 
     const selectedSecondaryFilters = secondaryFilters
       ? validFilterParams(urlQueryParams, secondaryFilters)
-      : {};
-    const searchFiltersPanelSelectedCount = Object.keys(selectedSecondaryFilters).length;
+      : {}
+    const searchFiltersPanelSelectedCount = Object.keys(selectedSecondaryFilters).length
 
     const searchFiltersPanelProps = !!secondaryFilters
       ? {
           isSearchFiltersPanelOpen: this.state.isSearchFiltersPanelOpen,
-          toggleSearchFiltersPanel: isOpen => {
-            this.setState({ isSearchFiltersPanelOpen: isOpen });
+          toggleSearchFiltersPanel: (isOpen) => {
+            this.setState({ isSearchFiltersPanelOpen: isOpen })
           },
           searchFiltersPanelSelectedCount,
         }
-      : {};
+      : {}
 
-    const hasPaginationInfo = !!pagination && pagination.totalItems != null;
-    const totalItems = searchParamsAreInSync && hasPaginationInfo ? pagination.totalItems : 0;
-    const listingsAreLoaded = !searchInProgress && searchParamsAreInSync && hasPaginationInfo;
+    const hasPaginationInfo = !!pagination && pagination.totalItems != null
+    const totalItems = searchParamsAreInSync && hasPaginationInfo ? pagination.totalItems : 0
+    const listingsAreLoaded = !searchInProgress && searchParamsAreInSync && hasPaginationInfo
 
-    const classes = classNames(rootClassName || css.searchResultContainer, className);
+    const classes = classNames(rootClassName || css.searchResultContainer, className)
 
-    const filterParamNames = Object.values(filters).map(f => f.paramName);
+    const filterParamNames = Object.values(filters).map((f) => f.paramName)
     const secondaryFilterParamNames = secondaryFilters
-      ? Object.values(secondaryFilters).map(f => f.paramName)
-      : [];
+      ? Object.values(secondaryFilters).map((f) => f.paramName)
+      : []
 
     return (
       <div className={classes}>
@@ -138,7 +138,7 @@ class MainPanel extends Component {
           </div>
         )}
       </div>
-    );
+    )
   }
 }
 
@@ -151,7 +151,7 @@ MainPanel.defaultProps = {
   searchParamsForPagination: {},
   primaryFilters: null,
   secondaryFilters: null,
-};
+}
 
 MainPanel.propTypes = {
   className: string,
@@ -172,6 +172,6 @@ MainPanel.propTypes = {
   showAsModalMaxWidth: number.isRequired,
   primaryFilters: objectOf(propTypes.filterConfig),
   secondaryFilters: objectOf(propTypes.filterConfig),
-};
+}
 
-export default MainPanel;
+export default MainPanel

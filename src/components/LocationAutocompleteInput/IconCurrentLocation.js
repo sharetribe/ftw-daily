@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-import css from './LocationAutocompleteInput.css';
+import css from './LocationAutocompleteInput.css'
 
 const IconCurrentLocation = () => (
   <svg
@@ -15,6 +15,6 @@ const IconCurrentLocation = () => (
       fillRule="evenodd"
     />
   </svg>
-);
+)
 
-export default IconCurrentLocation;
+export default IconCurrentLocation

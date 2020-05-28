@@ -1,8 +1,8 @@
-import Avatar, { AvatarMedium, AvatarLarge } from './Avatar';
-import { types as sdkTypes } from '../../util/sdkLoader';
-import { fakeIntl } from '../../util/test-data';
+import Avatar, { AvatarMedium, AvatarLarge } from './Avatar'
+import { types as sdkTypes } from '../../util/sdkLoader'
+import { fakeIntl } from '../../util/test-data'
 
-const { UUID } = sdkTypes;
+const { UUID } = sdkTypes
 
 const bannedUser = {
   id: new UUID('banned-user'),
@@ -11,7 +11,7 @@ const bannedUser = {
     banned: true,
     deleted: false,
   },
-};
+}
 
 const userWithoutProfileImage = {
   id: new UUID('user-without-profile-image'),
@@ -24,7 +24,7 @@ const userWithoutProfileImage = {
       abbreviatedName: 'NP',
     },
   },
-};
+}
 
 const userWithProfileImage = {
   id: new UUID('user-with-profile-image'),
@@ -57,7 +57,7 @@ const userWithProfileImage = {
       },
     },
   },
-};
+}
 
 // ================ Empty user ================ //
 
@@ -68,7 +68,7 @@ export const EmptyUser = {
     intl: fakeIntl,
   },
   group: 'users',
-};
+}
 
 export const EmptyUserMedium = {
   component: AvatarMedium,
@@ -77,7 +77,7 @@ export const EmptyUserMedium = {
     intl: fakeIntl,
   },
   group: 'users',
-};
+}
 
 export const EmptyUserLarge = {
   component: AvatarLarge,
@@ -86,7 +86,7 @@ export const EmptyUserLarge = {
     intl: fakeIntl,
   },
   group: 'users',
-};
+}
 
 // ================ Banned user ================ //
 
@@ -97,7 +97,7 @@ export const BannedUser = {
     intl: fakeIntl,
   },
   group: 'users',
-};
+}
 
 export const BannedUserMedium = {
   component: AvatarMedium,
@@ -106,7 +106,7 @@ export const BannedUserMedium = {
     intl: fakeIntl,
   },
   group: 'users',
-};
+}
 
 export const BannedUserLarge = {
   component: AvatarLarge,
@@ -115,7 +115,7 @@ export const BannedUserLarge = {
     intl: fakeIntl,
   },
   group: 'users',
-};
+}
 
 // ================ No profile image ================ //
 
@@ -126,7 +126,7 @@ export const WithoutProfileImageUser = {
     intl: fakeIntl,
   },
   group: 'users',
-};
+}
 
 export const WithoutProfileImageUserMedium = {
   component: AvatarMedium,
@@ -135,7 +135,7 @@ export const WithoutProfileImageUserMedium = {
     intl: fakeIntl,
   },
   group: 'users',
-};
+}
 
 export const WithoutProfileImageUserLarge = {
   component: AvatarLarge,
@@ -144,7 +144,7 @@ export const WithoutProfileImageUserLarge = {
     intl: fakeIntl,
   },
   group: 'users',
-};
+}
 
 // ================ Full user with profile image ================ //
 
@@ -155,7 +155,7 @@ export const WithProfileImageUser = {
     intl: fakeIntl,
   },
   group: 'users',
-};
+}
 
 export const WithProfileImageUserMedium = {
   component: AvatarMedium,
@@ -164,7 +164,7 @@ export const WithProfileImageUserMedium = {
     intl: fakeIntl,
   },
   group: 'users',
-};
+}
 
 export const WithProfileImageUserLarge = {
   component: AvatarLarge,
@@ -173,7 +173,7 @@ export const WithProfileImageUserLarge = {
     intl: fakeIntl,
   },
   group: 'users',
-};
+}
 
 export const WithoutProfileLink = {
   component: AvatarLarge,
@@ -183,4 +183,4 @@ export const WithoutProfileLink = {
     intl: fakeIntl,
   },
   group: 'users',
-};
+}

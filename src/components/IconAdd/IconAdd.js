@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
-import css from './IconAdd.css';
+import css from './IconAdd.css'
 
-const IconAdd = props => {
-  const { className, rootClassName } = props;
-  const classes = classNames(rootClassName || css.root, className);
+const IconAdd = (props) => {
+  const { className, rootClassName } = props
+  const classes = classNames(rootClassName || css.root, className)
 
   return (
     <svg className={classes} width="12" height="12" xmlns="http://www.w3.org/2000/svg">
@@ -15,19 +15,19 @@ const IconAdd = props => {
         fillRule="evenodd"
       />
     </svg>
-  );
-};
+  )
+}
 
-const { string } = PropTypes;
+const { string } = PropTypes
 
 IconAdd.defaultProps = {
   className: null,
   rootClassName: null,
-};
+}
 
 IconAdd.propTypes = {
   className: string,
   rootClassName: string,
-};
+}
 
-export default IconAdd;
+export default IconAdd

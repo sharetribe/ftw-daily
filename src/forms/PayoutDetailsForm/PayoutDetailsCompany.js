@@ -1,14 +1,14 @@
-import React from 'react';
-import { bool, string } from 'prop-types';
-import { FormattedMessage, intlShape } from '../../util/reactIntl';
-import * as validators from '../../util/validators';
-import { FieldPhoneNumberInput, FieldTextInput } from '../../components';
+import React from 'react'
+import { bool, string } from 'prop-types'
+import { FormattedMessage, intlShape } from '../../util/reactIntl'
+import * as validators from '../../util/validators'
+import { FieldPhoneNumberInput, FieldTextInput } from '../../components'
 
-import * as normalizePhoneNumberUS from './normalizePhoneNumberUS';
-import PayoutDetailsBusinessProfile from './PayoutDetailsBusinessProfile';
-import css from './PayoutDetailsForm.css';
+import * as normalizePhoneNumberUS from './normalizePhoneNumberUS'
+import PayoutDetailsBusinessProfile from './PayoutDetailsBusinessProfile'
+import css from './PayoutDetailsForm.css'
 
-const PayoutDetailsCompany = props => {
+const PayoutDetailsCompany = (props) => {
   const {
     fieldId,
     disabled,
@@ -17,29 +17,29 @@ const PayoutDetailsCompany = props => {
     showBusinessURLField,
     showMCCForUSField,
     showPhoneNumberField,
-  } = props;
+  } = props
 
-  const companyNameLabel = intl.formatMessage({ id: 'PayoutDetailsForm.companyNameLabel' });
+  const companyNameLabel = intl.formatMessage({ id: 'PayoutDetailsForm.companyNameLabel' })
   const companyNamePlaceholder = intl.formatMessage({
     id: 'PayoutDetailsForm.companyNamePlaceholder',
-  });
+  })
   const companyNameRequired = validators.required(
     intl.formatMessage({
       id: 'PayoutDetailsForm.companyNameRequired',
-    })
-  );
+    }),
+  )
 
   const companyTaxIdLabel = intl.formatMessage({
     id: `PayoutDetailsForm.companyTaxIdLabel.${country}`,
-  });
+  })
   const companyTaxIdPlaceholder = intl.formatMessage(
     {
       id: 'PayoutDetailsForm.companyTaxIdPlaceholder',
     },
     {
       idName: companyTaxIdLabel,
-    }
-  );
+    },
+  )
   const companyTaxIdRequired = validators.required(
     intl.formatMessage(
       {
@@ -47,17 +47,17 @@ const PayoutDetailsCompany = props => {
       },
       {
         idName: companyTaxIdLabel,
-      }
-    )
-  );
+      },
+    ),
+  )
 
-  const phoneLabel = intl.formatMessage({ id: 'PayoutDetailsForm.companyPhoneLabel' });
+  const phoneLabel = intl.formatMessage({ id: 'PayoutDetailsForm.companyPhoneLabel' })
   const phonePlaceholder = intl.formatMessage({
     id: 'PayoutDetailsForm.companyPhonePlaceholder',
-  });
+  })
   const phoneNumberForUSRequired = validators.required(
-    intl.formatMessage({ id: 'PayoutDetailsForm.companyPhoneRequired' })
-  );
+    intl.formatMessage({ id: 'PayoutDetailsForm.companyPhoneRequired' }),
+  )
 
   return (
     <div className={css.sectionContainer}>
@@ -111,8 +111,8 @@ const PayoutDetailsCompany = props => {
         />
       ) : null}
     </div>
-  );
-};
+  )
+}
 
 PayoutDetailsCompany.defaultProps = {
   fieldId: null,
@@ -120,7 +120,7 @@ PayoutDetailsCompany.defaultProps = {
   showBusinessURLField: false,
   showMCCForUSField: false,
   showPhoneNumberField: false,
-};
+}
 
 PayoutDetailsCompany.propTypes = {
   fieldId: string,
@@ -132,6 +132,6 @@ PayoutDetailsCompany.propTypes = {
 
   // from injectIntl
   intl: intlShape.isRequired,
-};
+}
 
-export default PayoutDetailsCompany;
+export default PayoutDetailsCompany

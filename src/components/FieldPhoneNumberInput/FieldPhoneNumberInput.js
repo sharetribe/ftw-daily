@@ -4,20 +4,20 @@
  * provide alternative implementations for the format and parse functions
  * that are passed to the input field.
  */
-import React from 'react';
+import React from 'react'
 
-import { FieldTextInput } from '../../components';
-import { format, parse } from './fiFormatter';
+import { FieldTextInput } from '../../components'
+import { format, parse } from './fiFormatter'
 
-const FieldPhoneNumberInput = props => {
+const FieldPhoneNumberInput = (props) => {
   const inputProps = {
     type: 'text',
     format: format,
     parse: parse,
     ...props,
-  };
+  }
 
-  return <FieldTextInput {...inputProps} />;
-};
+  return <FieldTextInput {...inputProps} />
+}
 
-export default FieldPhoneNumberInput;
+export default FieldPhoneNumberInput

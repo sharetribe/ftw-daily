@@ -1,7 +1,7 @@
-import IconEmailSuccess from './IconEmailSuccess';
+import IconEmailSuccess from './IconEmailSuccess'
 
 export const Icon = {
   component: IconEmailSuccess,
   props: {},
   group: 'icons',
-};
+}

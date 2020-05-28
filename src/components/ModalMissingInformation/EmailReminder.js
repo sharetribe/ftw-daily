@@ -1,43 +1,43 @@
-import React from 'react';
-import { FormattedMessage } from '../../util/reactIntl';
-import { isTooManyEmailVerificationRequestsError } from '../../util/errors';
-import { IconEmailAttention, InlineTextButton, NamedLink } from '../../components';
+import React from 'react'
+import { FormattedMessage } from '../../util/reactIntl'
+import { isTooManyEmailVerificationRequestsError } from '../../util/errors'
+import { IconEmailAttention, InlineTextButton, NamedLink } from '../../components'
 
-import css from './ModalMissingInformation.css';
+import css from './ModalMissingInformation.css'
 
-const EmailReminder = props => {
+const EmailReminder = (props) => {
   const {
     className,
     user,
     sendVerificationEmailInProgress,
     sendVerificationEmailError,
     onResendVerificationEmail,
-  } = props;
+  } = props
 
-  const email = user.id ? <span className={css.email}>{user.attributes.email}</span> : '';
+  const email = user.id ? <span className={css.email}>{user.attributes.email}</span> : ''
 
   const resendEmailLink = (
     <InlineTextButton rootClassName={css.helperLink} onClick={onResendVerificationEmail}>
       <FormattedMessage id="ModalMissingInformation.resendEmailLinkText" />
     </InlineTextButton>
-  );
+  )
 
   const fixEmailLink = (
     <NamedLink className={css.helperLink} name="ContactDetailsPage">
       <FormattedMessage id="ModalMissingInformation.fixEmailLinkText" />
     </NamedLink>
-  );
+  )
 
   const resendErrorTranslationId = isTooManyEmailVerificationRequestsError(
-    sendVerificationEmailError
+    sendVerificationEmailError,
   )
     ? 'ModalMissingInformation.resendFailedTooManyRequests'
-    : 'ModalMissingInformation.resendFailed';
+    : 'ModalMissingInformation.resendFailed'
   const resendErrorMessage = sendVerificationEmailError ? (
     <p className={css.error}>
       <FormattedMessage id={resendErrorTranslationId} />
     </p>
-  ) : null;
+  ) : null
 
   return (
     <div className={className}>
@@ -69,7 +69,7 @@ const EmailReminder = props => {
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default EmailReminder;
+export default EmailReminder

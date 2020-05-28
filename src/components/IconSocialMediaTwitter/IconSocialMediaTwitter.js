@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
-import css from './IconSocialMediaTwitter.css';
+import css from './IconSocialMediaTwitter.css'
 
-const IconSocialMediaTwitter = props => {
-  const { rootClassName, className } = props;
-  const classes = classNames(rootClassName || css.root, className);
+const IconSocialMediaTwitter = (props) => {
+  const { rootClassName, className } = props
+  const classes = classNames(rootClassName || css.root, className)
   return (
     <svg
       className={classes}
@@ -20,13 +20,13 @@ const IconSocialMediaTwitter = props => {
         fillRule="evenodd"
       />
     </svg>
-  );
-};
+  )
+}
 
-IconSocialMediaTwitter.defaultProps = { rootClassName: null, className: null };
+IconSocialMediaTwitter.defaultProps = { rootClassName: null, className: null }
 
-const { string } = PropTypes;
+const { string } = PropTypes
 
-IconSocialMediaTwitter.propTypes = { rootClassName: string, className: string };
+IconSocialMediaTwitter.propTypes = { rootClassName: string, className: string }
 
-export default IconSocialMediaTwitter;
+export default IconSocialMediaTwitter
