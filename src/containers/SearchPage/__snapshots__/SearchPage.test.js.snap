@@ -24,6 +24,124 @@ exports[`SearchPageComponent matches snapshot 1`] = `
   <div>
     <MainPanel
       className={null}
+      filterConfig={
+        Array [
+          Object {
+            "config": Object {},
+            "group": "primary",
+            "id": "dates",
+            "label": "Dates",
+            "queryParamNames": Array [
+              "dates",
+            ],
+            "type": "BookingDateRangeFilter",
+          },
+          Object {
+            "config": Object {
+              "max": 1000,
+              "min": 0,
+              "step": 5,
+            },
+            "group": "primary",
+            "id": "price",
+            "label": "Price",
+            "queryParamNames": Array [
+              "price",
+            ],
+            "type": "PriceFilter",
+          },
+          Object {
+            "config": Object {},
+            "group": "primary",
+            "id": "keyword",
+            "label": "Keyword",
+            "queryParamNames": Array [
+              "keywords",
+            ],
+            "type": "KeywordFilter",
+          },
+          Object {
+            "config": Object {
+              "options": Array [
+                Object {
+                  "key": "smoke",
+                  "label": "Smoke",
+                },
+                Object {
+                  "key": "electric",
+                  "label": "Electric",
+                },
+                Object {
+                  "key": "wood",
+                  "label": "Wood",
+                },
+                Object {
+                  "key": "other",
+                  "label": "Other",
+                },
+              ],
+            },
+            "group": "secondary",
+            "id": "category",
+            "label": "Category",
+            "queryParamNames": Array [
+              "pub_category",
+            ],
+            "type": "SelectSingleFilter",
+          },
+          Object {
+            "config": Object {
+              "options": Array [
+                Object {
+                  "key": "towels",
+                  "label": "Towels",
+                },
+                Object {
+                  "key": "bathroom",
+                  "label": "Bathroom",
+                },
+                Object {
+                  "key": "swimming_pool",
+                  "label": "Swimming pool",
+                },
+                Object {
+                  "key": "own_drinks",
+                  "label": "Own drinks allowed",
+                },
+                Object {
+                  "key": "jacuzzi",
+                  "label": "Jacuzzi",
+                },
+                Object {
+                  "key": "audiovisual_entertainment",
+                  "label": "Audiovisual entertainment",
+                },
+                Object {
+                  "key": "barbeque",
+                  "label": "Barbeque",
+                },
+                Object {
+                  "key": "own_food_allowed",
+                  "label": "Own food allowed",
+                },
+              ],
+              "searchMode": "has_all",
+            },
+            "group": "secondary",
+            "id": "amenities",
+            "label": "Amenities",
+            "queryParamNames": Array [
+              "pub_amenities",
+            ],
+            "type": "SelectMultipleFilter",
+          },
+        ]
+      }
+      history={
+        Object {
+          "push": [Function],
+        }
+      }
       listings={Array []}
       onActivateListing={[Function]}
       onCloseModal={[Function]}
@@ -38,67 +156,45 @@ exports[`SearchPageComponent matches snapshot 1`] = `
           "totalPages": 2,
         }
       }
-      primaryFilters={
-        Object {
-          "dateRangeFilter": Object {
-            "config": Object {
-              "active": true,
-            },
-            "paramName": "dates",
-          },
-          "keywordFilter": Object {
-            "config": Object {
-              "active": true,
-            },
-            "paramName": "keywords",
-          },
-          "priceFilter": Object {
-            "config": Object {
-              "max": 1000,
-              "min": 0,
-              "step": 5,
-            },
-            "paramName": "price",
-          },
-        }
-      }
       resultsCount={0}
       rootClassName={null}
       searchInProgress={false}
       searchListingsError={null}
       searchParamsAreInSync={true}
       searchParamsForPagination={Object {}}
-      secondaryFilters={
+      showAsModalMaxWidth={768}
+      sortConfig={
         Object {
-          "amenitiesFilter": Object {
-            "options": Array [
-              Object {
-                "key": "dog1",
-                "label": "Dog 1",
-              },
-              Object {
-                "key": "dog2",
-                "label": "Dog 2",
-              },
-            ],
-            "paramName": "pub_amenities",
-          },
-          "categoryFilter": Object {
-            "options": Array [
-              Object {
-                "key": "cat1",
-                "label": "Cat 1",
-              },
-              Object {
-                "key": "cat2",
-                "label": "Cat 2",
-              },
-            ],
-            "paramName": "pub_category",
-          },
+          "active": true,
+          "conflictingFilters": Array [
+            "keyword",
+          ],
+          "options": Array [
+            Object {
+              "key": "createdAt",
+              "label": "Newest",
+            },
+            Object {
+              "key": "-createdAt",
+              "label": "Oldest",
+            },
+            Object {
+              "key": "-price",
+              "label": "Lowest price",
+            },
+            Object {
+              "key": "price",
+              "label": "Highest price",
+            },
+            Object {
+              "key": "relevance",
+              "label": "Relevance",
+              "longLabel": "Relevance (Keyword search)",
+            },
+          ],
+          "relevanceKey": "relevance",
         }
       }
-      showAsModalMaxWidth={768}
       urlQueryParams={Object {}}
     />
     <withViewport(ModalInMobileComponent)
