@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { Form as FinalForm } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import { FormattedMessage } from '../../util/reactIntl';
-
+import { findOptionsForSelectFilter } from '../../util/search';
 import { propTypes } from '../../util/types';
 import config from '../../config';
 import { Button, FieldCheckboxGroup, Form } from '../../components';
@@ -28,6 +28,7 @@ const EditListingFeaturesFormComponent = props => (
         updated,
         updateInProgress,
         fetchErrors,
+        filterConfig,
       } = formRenderProps;
 
       const classes = classNames(rootClassName || css.root, className);
@@ -48,17 +49,13 @@ const EditListingFeaturesFormComponent = props => (
         </p>
       ) : null;
 
+      const options = findOptionsForSelectFilter('amenities', filterConfig);
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessage}
           {errorMessageShowListing}
 
-          <FieldCheckboxGroup
-            className={css.features}
-            id={name}
-            name={name}
-            options={config.custom.amenities}
-          />
+          <FieldCheckboxGroup className={css.features} id={name} name={name} options={options} />
 
           <Button
             className={css.submitButton}
@@ -79,6 +76,7 @@ EditListingFeaturesFormComponent.defaultProps = {
   rootClassName: null,
   className: null,
   fetchErrors: null,
+  filterConfig: config.custom.filters,
 };
 
 EditListingFeaturesFormComponent.propTypes = {
@@ -95,6 +93,7 @@ EditListingFeaturesFormComponent.propTypes = {
     showListingsError: propTypes.error,
     updateListingError: propTypes.error,
   }),
+  filterConfig: propTypes.filterConfig,
 };
 
 const EditListingFeaturesForm = EditListingFeaturesFormComponent;
