@@ -15,7 +15,6 @@ exports[`BookingDateRangeFilter matches plain snapshot 1`] = `
   liveEdit={true}
   onSubmit={[Function]}
   rootClassName={null}
-  urlParam="dates"
 >
   <FieldDateRangeController
     className={null}
@@ -42,7 +41,6 @@ exports[`BookingDateRangeFilter matches popup snapshot 1`] = `
   onSubmit={[Function]}
   rootClassName={null}
   showAsPopup={true}
-  urlParam="dates"
 >
   <FieldDateRangeController
     className={null}
