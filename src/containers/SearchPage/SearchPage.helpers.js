@@ -1,44 +1,52 @@
 import intersection from 'lodash/intersection';
 import config from '../../config';
 import { createResourceLocatorString } from '../../util/routes';
+import { parseSelectFilterOptions } from '../../util/search';
 import { createSlug } from '../../util/urlHelpers';
 import routeConfiguration from '../../routeConfiguration';
+
+const flatten = (acc, val) => acc.concat(val);
 
 /**
  * Validates a filter search param agains a filters configuration.
  *
  * All invalid param names and values are dropped
  *
- * @param {String} paramName Search parameter name
+ * @param {String} queryParamName Search parameter name
  * @param {Object} paramValue Search parameter value
  * @param {Object} filters Filters configuration
  */
-export const validURLParamForExtendedData = (paramName, paramValueRaw, filters) => {
-  const filtersArray = Object.values(filters);
-  // resolve configuration for this filter
-  const filterConfig = filtersArray.find(f => f.paramName === paramName);
+export const validURLParamForExtendedData = (queryParamName, paramValueRaw, filters) => {
+  // Resolve configuration for this filter
+  const filterConfig = filters.find(f => {
+    const isArray = Array.isArray(f.queryParamNames);
+    return isArray
+      ? f.queryParamNames.includes(queryParamName)
+      : f.queryParamNames === queryParamName;
+  });
 
   const paramValue = paramValueRaw.toString();
-  const valueArray = paramValue ? paramValue.split(',') : [];
 
-  if (filterConfig && valueArray.length > 0) {
-    const { min, max, active } = filterConfig.config || {};
+  if (filterConfig) {
+    const { min, max } = filterConfig.config || {};
 
-    if (filterConfig.options) {
-      // Single and multiselect filters
-      const allowedValues = filterConfig.options.map(o => o.key);
-
+    if (['SelectSingleFilter', 'SelectMultipleFilter'].includes(filterConfig.type)) {
+      // Pick valid select options only
+      const allowedValues = filterConfig.config.options.map(o => o.key);
+      const valueArray = parseSelectFilterOptions(paramValue);
       const validValues = intersection(valueArray, allowedValues).join(',');
-      return validValues.length > 0 ? { [paramName]: validValues } : {};
-    } else if (filterConfig.config && min != null && max != null) {
-      // Price filter
+
+      return validValues.length > 0 ? { [queryParamName]: validValues } : {};
+    } else if (filterConfig.type === 'PriceFilter') {
+      // Restrict price range to correct min & max
+      const valueArray = paramValue ? paramValue.split(',') : [];
       const validValues = valueArray.map(v => {
         return v < min ? min : v > max ? max : v;
       });
-      return validValues.length === 2 ? { [paramName]: validValues.join(',') } : {};
-    } else if (filterConfig.config && active) {
-      // Generic filter
-      return paramValue.length > 0 ? { [paramName]: paramValue } : {};
+      return validValues.length === 2 ? { [queryParamName]: validValues.join(',') } : {};
+    } else if (filterConfig) {
+      // Generic filter - remove empty params
+      return paramValue.length > 0 ? { [queryParamName]: paramValue } : {};
     }
   }
   return {};
@@ -53,12 +61,11 @@ export const validURLParamForExtendedData = (paramName, paramValueRaw, filters) 
  * @param {Object} filters Filters configuration
  */
 export const validFilterParams = (params, filters) => {
-  const filterParamNames = Object.values(filters).map(f => f.paramName);
+  const filterParamNames = filters.map(f => f.queryParamNames).reduce(flatten, []);
   const paramEntries = Object.entries(params);
 
   return paramEntries.reduce((validParams, entry) => {
-    const paramName = entry[0];
-    const paramValue = entry[1];
+    const [paramName, paramValue] = entry;
 
     return filterParamNames.includes(paramName)
       ? {
@@ -78,12 +85,11 @@ export const validFilterParams = (params, filters) => {
  * @param {Object} filters Filters configuration
  */
 export const validURLParamsForExtendedData = (params, filters) => {
-  const filterParamNames = Object.values(filters).map(f => f.paramName);
+  const filterParamNames = filters.map(f => f.queryParamNames).reduce(flatten, []);
   const paramEntries = Object.entries(params);
 
   return paramEntries.reduce((validParams, entry) => {
-    const paramName = entry[0];
-    const paramValue = entry[1];
+    const [paramName, paramValue] = entry;
 
     return filterParamNames.includes(paramName)
       ? {

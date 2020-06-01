@@ -10,16 +10,48 @@ const urlParams = {
   pub_amenities: 'towels,bathroom',
 };
 
-const filters = {
-  categoryFilter: {
-    paramName: 'pub_category',
-    options: [{ key: 'smoke' }, { key: 'wooden' }],
+const filters = [
+  {
+    id: 'category',
+    label: 'Category',
+    type: 'SelectSingleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_category'],
+    config: {
+      options: [{ key: 'smoke', label: 'Smoke' }, { key: 'wooden', label: 'Wood' }],
+    },
   },
-  amenitiesFilter: {
-    paramName: 'pub_amenities',
-    options: [{ key: 'towels' }, { key: 'bathroom' }],
+  {
+    id: 'test',
+    label: 'Test',
+    type: 'SelectSingleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_param1', 'pub_param1'],
+    config: {
+      options: [{ key: 'smoke', label: 'Smoke' }, { key: 'wooden', label: 'Wood' }],
+    },
   },
-};
+  {
+    id: 'amenities',
+    label: 'Amenities',
+    type: 'SelectMultipleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_amenities'],
+    config: {
+      mode: 'has_all',
+      options: [
+        {
+          key: 'towels',
+          label: 'Towels',
+        },
+        {
+          key: 'bathroom',
+          label: 'Bathroom',
+        },
+      ],
+    },
+  },
+];
 
 describe('SearchPage.helpers', () => {
   describe('validURLParamForExtendedData', () => {
