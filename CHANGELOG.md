@@ -20,6 +20,8 @@ way to update this template, but currently, we follow a pattern:
   [#1291](https://github.com/sharetribe/ftw-daily/pull/1291)
 - [change] Refactor server API routes into separate files.
   [#1294](https://github.com/sharetribe/ftw-daily/pull/1294)
+- [change] Start the backend API router in dev mode with a dev server.
+  [#1297](https://github.com/sharetribe/ftw-daily/pull/1297)
 
 ## [v4.4.3] 2020-05-13
 
