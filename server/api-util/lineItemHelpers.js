@@ -15,7 +15,7 @@ const LINE_ITEM_DAY = 'line-item/day';
  * The total will be `unitPrice * quantity`.
  *
  * @param {Money} unitPrice
- * @param {int} percentage
+ * @param {int} quantity
  *
  * @returns {Money} lineTotal
  */
@@ -113,10 +113,8 @@ exports.calculateLineTotal = lineItem => {
   } else if (seats && units) {
     return this.calculateTotalPriceFromSeats(unitPrice, units, seats);
   } else {
-    console.error(
-      "Can't calculate the lineTotal of lineItem: ",
-      code,
-      ' Make sure the lineItem has quantity, percentage or both seats and units'
+    throw new Error(
+      `Can't calculate the lineTotal of lineItem: ${code}. Make sure the lineItem has quantity, percentage or both seats and units`
     );
   }
 };
@@ -193,8 +191,5 @@ exports.constructValidLineItems = lineItems => {
       reversal: false,
     };
   });
-
-  //TODO do we want to validate payout and payin sums?
-
   return lineItemsWithTotals;
 };

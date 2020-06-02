@@ -49,6 +49,48 @@ exports.unitDivisor = currency => {
   return subUnitDivisors[currency];
 };
 
+////////// Currency manipulation in string format //////////
+
+/**
+ * Ensures that the given string uses only dots or commas
+ * e.g. ensureSeparator('9999999,99', false) // => '9999999.99'
+ *
+ * @param {String} str - string to be formatted
+ *
+ * @return {String} converted string
+ */
+const ensureSeparator = (str, useComma = false) => {
+  if (typeof str !== 'string') {
+    throw new TypeError('Parameter must be a string');
+  }
+  return useComma ? str.replace(/\./g, ',') : str.replace(/,/g, '.');
+};
+
+/**
+ * Ensures that the given string uses only dots
+ * (e.g. JavaScript floats use dots)
+ *
+ * @param {String} str - string to be formatted
+ *
+ * @return {String} converted string
+ */
+const ensureDotSeparator = str => {
+  return ensureSeparator(str, false);
+};
+
+/**
+ * Convert string to Decimal object (from Decimal.js math library)
+ * Handles both dots and commas as decimal separators
+ *
+ * @param {String} str - string to be converted
+ *
+ * @return {Decimal} numeral value
+ */
+const convertToDecimal = str => {
+  const dotFormattedStr = ensureDotSeparator(str);
+  return new Decimal(dotFormattedStr);
+};
+
 // Divisor can be positive value given as Decimal, Number, or String
 const convertDivisorToDecimal = divisor => {
   try {
