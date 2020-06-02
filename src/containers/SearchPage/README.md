@@ -36,20 +36,24 @@ possible for Topbar to take current filters into account.
 
 ## MainPanel
 
-MainPanel has two functions: showing searchResults and showing filters. There are two sets of
-filters that can be passed to it: `primaryFilters`, `secondaryFilters`.
+MainPanel has two functions: showing searchResults and showing filters. Filters are primarily added,
+removed, reordered and configured through _marketplace-custom-config.js_
 
-Primary filters are filters that are shown always on top of SearchResults as dropdown-selections. We
-recommend that only 1 - 3 primary filters are passed in since they start to take too much space on
-narrow screens.
+```shell
+└── src
+    └── marketplace-custom-config.js
+```
 
-Secondary filters create one more button to the space containing primary filters: _More filters_.
-This more-filters button opens up a SearchFiltersSecondary component that can be changed to show those
-extra filters passed to it. **Note:** Currently, it doesn't contain any filter components by
-default, even if you pass in some filter data. Creating those filter components is part of the
-customization process.
+There you can set some filters to be primary filters. They are shown always on top of SearchResults
+as dropdown-selections on Desktop layout. We recommend that only 1 - 3 primary filters are passed in
+since they start to take too much space on narrow screens.
 
-On the mobile layout, all the filters are shown in separate mobile filters panel.
+If there are secondary filters, they create one more button to the space containing primary filters:
+_More filters_. This more-filters button opens up a SearchFiltersSecondary component that can be
+changed to show those extra filters passed to it.
+
+On the mobile layout, all the filters are shown in separate mobile filters modal. The order of
+filters is following the order of filters config in _marketplace-custom-config.js_.
 
 ## SearchMap
 
@@ -60,7 +64,8 @@ if SearchMap's bounds have changed enough.
 
 ### Search filters
 
-See the [filters documentation](../../../docs/search-filters.md).
+See the
+[filters documentation](https://www.sharetribe.com/docs/cookbook-search/change-search-filters-in-ftw/).
 
 ### SeachPage schema / SEO
 
