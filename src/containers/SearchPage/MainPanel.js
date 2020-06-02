@@ -25,6 +25,20 @@ import css from './SearchPage.css';
 // With this offset we move the dropdown to the left a few pixels on desktop layout.
 const FILTER_DROPDOWN_OFFSET = -14;
 
+const cleanSearchFromConflictingParams = (searchParams, sortConfig, filterConfig) => {
+  // Single out filters that should disable SortBy when an active
+  // keyword search sorts the listings according to relevance.
+  // In those cases, sort parameter should be removed.
+  const sortingFiltersActive = isAnyFilterActive(
+    sortConfig.conflictingFilters,
+    searchParams,
+    filterConfig
+  );
+  return sortingFiltersActive
+    ? { ...searchParams, [sortConfig.queryParamName]: null }
+    : searchParams;
+};
+
 /**
  * MainPanel contains search results and filters.
  * There are 3 presentational container-components that show filters:
@@ -49,16 +63,11 @@ class MainPanel extends Component {
 
   // Apply the filters by redirecting to SearchPage with new filters.
   applyFilters() {
-    const { history, urlQueryParams } = this.props;
+    const { history, urlQueryParams, sortConfig, filterConfig } = this.props;
+    const searchParams = { ...urlQueryParams, ...this.state.currentQueryParams };
+    const search = cleanSearchFromConflictingParams(searchParams, sortConfig, filterConfig);
 
-    history.push(
-      createResourceLocatorString(
-        'SearchPage',
-        routeConfiguration(),
-        {},
-        { ...urlQueryParams, ...this.state.currentQueryParams }
-      )
-    );
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, search));
   }
 
   // Close the filters by clicking cancel, revert to the initial params
@@ -114,7 +123,8 @@ class MainPanel extends Component {
 
       const callback = () => {
         if (useHistoryPush) {
-          const search = this.state.currentQueryParams;
+          const searchParams = this.state.currentQueryParams;
+          const search = cleanSearchFromConflictingParams(searchParams, sortConfig, filterConfig);
           history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, search));
         }
       };
@@ -137,7 +147,6 @@ class MainPanel extends Component {
       className,
       rootClassName,
       urlQueryParams,
-      sort,
       listings,
       searchInProgress,
       searchListingsError,
@@ -200,7 +209,7 @@ class MainPanel extends Component {
       return sortConfig.active ? (
         <SortBy
           {...mobileClassesMaybe}
-          sort={sort}
+          sort={urlQueryParams[sortConfig.queryParamName]}
           isConflictingFilterActive={!!conflictingFilterActive}
           onSelect={this.handleSortBy}
           showAsPopup

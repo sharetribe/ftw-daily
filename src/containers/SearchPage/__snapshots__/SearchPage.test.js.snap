@@ -192,6 +192,7 @@ exports[`SearchPageComponent matches snapshot 1`] = `
               "longLabel": "Relevance (Keyword search)",
             },
           ],
+          "queryParamName": "sort",
           "relevanceKey": "relevance",
         }
       }

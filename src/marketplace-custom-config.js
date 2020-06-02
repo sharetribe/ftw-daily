@@ -149,6 +149,10 @@ export const sortConfig = {
   // Enable/disable the sorting control in the SearchPage
   active: true,
 
+  // Note: queryParamName 'sort' is fixed,
+  // you can't change it since Flex API expects it to be named as 'sort'
+  queryParamName: 'sort',
+
   // Internal key for the relevance option, see notes below.
   relevanceKey: 'relevance',
 

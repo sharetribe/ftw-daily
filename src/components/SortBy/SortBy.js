@@ -10,7 +10,7 @@ import SortByPopup from './SortByPopup';
 const SortBy = props => {
   const { sort, showAsPopup, isConflictingFilterActive, intl, ...rest } = props;
 
-  const { relevanceKey } = config.custom.sortConfig;
+  const { relevanceKey, queryParamName } = config.custom.sortConfig;
 
   const options = config.custom.sortConfig.options.map(option => {
     const isRelevance = option.key === relevanceKey;
@@ -22,7 +22,7 @@ const SortBy = props => {
   });
   const defaultValue = 'createdAt';
   const componentProps = {
-    urlParam: 'sort',
+    urlParam: queryParamName,
     label: intl.formatMessage({ id: 'SortBy.heading' }),
     options,
     initialValue: isConflictingFilterActive ? relevanceKey : sort || defaultValue,

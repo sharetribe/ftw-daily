@@ -420,6 +420,7 @@ propTypes.filterConfig = arrayOf(
 
 propTypes.sortConfig = shape({
   active: bool,
+  queryParamName: oneOf(['sort']).isRequired,
   relevanceKey: string.isRequired,
   conflictingFilters: arrayOf(string),
   options: arrayOf(
