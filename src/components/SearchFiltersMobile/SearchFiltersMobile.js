@@ -78,10 +78,10 @@ class SearchFiltersMobileComponent extends Component {
     const classes = classNames(rootClassName || css.root, className);
 
     const resultsFound = (
-      <FormattedMessage id="SearchFilters.foundResults" values={{ count: resultsCount }} />
+      <FormattedMessage id="SearchFiltersMobile.foundResults" values={{ count: resultsCount }} />
     );
-    const noResults = <FormattedMessage id="SearchFilters.noResultsMobile" />;
-    const loadingResults = <FormattedMessage id="SearchFilters.loadingResultsMobile" />;
+    const noResults = <FormattedMessage id="SearchFiltersMobile.noResults" />;
+    const loadingResults = <FormattedMessage id="SearchFiltersMobile.loadingResults" />;
     const filtersHeading = intl.formatMessage({ id: 'SearchFiltersMobile.heading' });
     const modalCloseButtonMessage = intl.formatMessage({ id: 'SearchFiltersMobile.cancel' });
 
@@ -102,11 +102,14 @@ class SearchFiltersMobileComponent extends Component {
         </div>
         <div className={css.buttons}>
           <Button rootClassName={filtersButtonClasses} onClick={this.openFilters}>
-            <FormattedMessage id="SearchFilters.filtersButtonLabel" className={css.mapIconText} />
+            <FormattedMessage
+              id="SearchFiltersMobile.filtersButtonLabel"
+              className={css.mapIconText}
+            />
           </Button>
           {sortByComponent}
           <div className={css.mapIcon} onClick={onMapIconClick}>
-            <FormattedMessage id="SearchFilters.openMapView" className={css.mapIconText} />
+            <FormattedMessage id="SearchFiltersMobile.openMapView" className={css.mapIconText} />
           </div>
         </div>
         <ModalInMobile
