@@ -14,28 +14,28 @@ const SearchFiltersComponent = props => {
     listingsAreLoaded,
     resultsCount,
     searchInProgress,
-    isSearchFiltersPanelOpen,
-    toggleSearchFiltersPanel,
-    searchFiltersPanelSelectedCount,
+    isSecondaryFiltersOpen,
+    toggleSecondaryFiltersOpen,
+    selectedSecondaryFiltersCount,
   } = props;
 
   const hasNoResult = listingsAreLoaded && resultsCount === 0;
   const classes = classNames(rootClassName || css.root, className);
 
-  const toggleSearchFiltersPanelButtonClasses =
-    isSearchFiltersPanelOpen || searchFiltersPanelSelectedCount > 0
+  const toggleSecondaryFiltersOpenButtonClasses =
+    isSecondaryFiltersOpen || selectedSecondaryFiltersCount > 0
       ? css.searchFiltersPanelOpen
       : css.searchFiltersPanelClosed;
-  const toggleSearchFiltersPanelButton = toggleSearchFiltersPanel ? (
+  const toggleSecondaryFiltersOpenButton = toggleSecondaryFiltersOpen ? (
     <button
-      className={toggleSearchFiltersPanelButtonClasses}
+      className={toggleSecondaryFiltersOpenButtonClasses}
       onClick={() => {
-        toggleSearchFiltersPanel(!isSearchFiltersPanelOpen);
+        toggleSecondaryFiltersOpen(!isSecondaryFiltersOpen);
       }}
     >
       <FormattedMessage
         id="SearchFilters.moreFiltersButton"
-        values={{ count: searchFiltersPanelSelectedCount }}
+        values={{ count: selectedSecondaryFiltersCount }}
       />
     </button>
   ) : null;
@@ -55,7 +55,7 @@ const SearchFiltersComponent = props => {
 
       <div className={css.filters}>
         {children}
-        {toggleSearchFiltersPanelButton}
+        {toggleSecondaryFiltersOpenButton}
       </div>
 
       {hasNoResult ? (
@@ -78,9 +78,9 @@ SearchFiltersComponent.defaultProps = {
   className: null,
   resultsCount: null,
   searchInProgress: false,
-  isSearchFiltersPanelOpen: false,
-  toggleSearchFiltersPanel: null,
-  searchFiltersPanelSelectedCount: 0,
+  isSecondaryFiltersOpen: false,
+  toggleSecondaryFiltersOpen: null,
+  selectedSecondaryFiltersCount: 0,
   sortByComponent: null,
 };
 
@@ -90,9 +90,9 @@ SearchFiltersComponent.propTypes = {
   listingsAreLoaded: bool.isRequired,
   resultsCount: number,
   searchInProgress: bool,
-  isSearchFiltersPanelOpen: bool,
-  toggleSearchFiltersPanel: func,
-  searchFiltersPanelSelectedCount: number,
+  isSecondaryFiltersOpen: bool,
+  toggleSecondaryFiltersOpen: func,
+  selectedSecondaryFiltersCount: number,
   sortByComponent: node,
 };
 

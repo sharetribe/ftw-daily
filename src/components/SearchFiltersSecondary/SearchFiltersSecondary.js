@@ -4,9 +4,9 @@ import classNames from 'classnames';
 import { FormattedMessage } from '../../util/reactIntl';
 
 import { InlineTextButton } from '../../components';
-import css from './SearchFiltersPanel.css';
+import css from './SearchFiltersSecondary.css';
 
-class SearchFiltersPanelComponent extends Component {
+class SearchFiltersSecondaryComponent extends Component {
   constructor(props) {
     super(props);
     this.state = { currentQueryParams: props.urlQueryParams };
@@ -65,13 +65,13 @@ class SearchFiltersPanelComponent extends Component {
         <div className={css.filtersWrapper}>{children}</div>
         <div className={css.footer}>
           <InlineTextButton rootClassName={css.resetAllButton} onClick={this.resetAll}>
-            <FormattedMessage id={'SearchFiltersPanel.resetAll'} />
+            <FormattedMessage id={'SearchFiltersSecondary.resetAll'} />
           </InlineTextButton>
           <InlineTextButton rootClassName={css.cancelButton} onClick={this.cancelFilters}>
-            <FormattedMessage id={'SearchFiltersPanel.cancel'} />
+            <FormattedMessage id={'SearchFiltersSecondary.cancel'} />
           </InlineTextButton>
           <InlineTextButton rootClassName={css.applyButton} onClick={this.applyFilters}>
-            <FormattedMessage id={'SearchFiltersPanel.apply'} />
+            <FormattedMessage id={'SearchFiltersSecondary.apply'} />
           </InlineTextButton>
         </div>
       </div>
@@ -79,12 +79,12 @@ class SearchFiltersPanelComponent extends Component {
   }
 }
 
-SearchFiltersPanelComponent.defaultProps = {
+SearchFiltersSecondaryComponent.defaultProps = {
   rootClassName: null,
   className: null,
 };
 
-SearchFiltersPanelComponent.propTypes = {
+SearchFiltersSecondaryComponent.propTypes = {
   rootClassName: string,
   className: string,
   urlQueryParams: object.isRequired,
@@ -93,6 +93,6 @@ SearchFiltersPanelComponent.propTypes = {
   onClosePanel: func.isRequired,
 };
 
-const SearchFiltersPanel = SearchFiltersPanelComponent;
+const SearchFiltersSecondary = SearchFiltersSecondaryComponent;
 
-export default SearchFiltersPanel;
+export default SearchFiltersSecondary;

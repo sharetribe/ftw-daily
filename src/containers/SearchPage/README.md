@@ -44,7 +44,7 @@ recommend that only 1 - 3 primary filters are passed in since they start to take
 narrow screens.
 
 Secondary filters create one more button to the space containing primary filters: _More filters_.
-This more-filters button opens up a SearchFiltersPanel component that can be changed to show those
+This more-filters button opens up a SearchFiltersSecondary component that can be changed to show those
 extra filters passed to it. **Note:** Currently, it doesn't contain any filter components by
 default, even if you pass in some filter data. Creating those filter components is part of the
 customization process.

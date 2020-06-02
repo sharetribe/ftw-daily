@@ -12,7 +12,7 @@ import {
   SearchResultsPanel,
   SearchFilters,
   SearchFiltersMobile,
-  SearchFiltersPanel,
+  SearchFiltersSecondary,
   SortBy,
 } from '../../components';
 
@@ -28,12 +28,12 @@ const FILTER_DROPDOWN_OFFSET = -14;
 /**
  * MainPanel contains search results and filters.
  * There are 3 presentational container-components that show filters:
- * Searchfilters, SearchfiltersMobile, and SearchFiltersPanel.
+ * Searchfilters, SearchfiltersMobile, and SearchFiltersSecondary.
  */
 class MainPanel extends Component {
   constructor(props) {
     super(props);
-    this.state = { isSearchFiltersPanelOpen: false, currentQueryParams: props.urlQueryParams };
+    this.state = { isSecondaryFiltersOpen: false, currentQueryParams: props.urlQueryParams };
 
     this.applyFilters = this.applyFilters.bind(this);
     this.cancelFilters = this.cancelFilters.bind(this);
@@ -165,16 +165,16 @@ class MainPanel extends Component {
     const selectedSecondaryFilters = hasSecondaryFilters
       ? validFilterParams(urlQueryParams, secondaryFilters)
       : {};
-    const searchFiltersPanelSelectedCount = Object.keys(selectedSecondaryFilters).length;
+    const selectedSecondaryFiltersCount = Object.keys(selectedSecondaryFilters).length;
 
-    const isSearchFiltersPanelOpen = !!hasSecondaryFilters && this.state.isSearchFiltersPanelOpen;
+    const isSecondaryFiltersOpen = !!hasSecondaryFilters && this.state.isSecondaryFiltersOpen;
     const propsForSecondaryFiltersToggle = hasSecondaryFilters
       ? {
-          isSearchFiltersPanelOpen: this.state.isSearchFiltersPanelOpen,
-          toggleSearchFiltersPanel: isOpen => {
-            this.setState({ isSearchFiltersPanelOpen: isOpen });
+          isSecondaryFiltersOpen: this.state.isSecondaryFiltersOpen,
+          toggleSecondaryFiltersOpen: isOpen => {
+            this.setState({ isSecondaryFiltersOpen: isOpen });
           },
-          searchFiltersPanelSelectedCount,
+          selectedSecondaryFiltersCount,
         }
       : {};
 
@@ -267,21 +267,21 @@ class MainPanel extends Component {
             );
           })}
         </SearchFiltersMobile>
-        {isSearchFiltersPanelOpen ? (
+        {isSecondaryFiltersOpen ? (
           <div className={classNames(css.searchFiltersPanel)}>
-            <SearchFiltersPanel
+            <SearchFiltersSecondary
               urlQueryParams={urlQueryParams}
               listingsAreLoaded={listingsAreLoaded}
               applyFilters={this.applyFilters}
               cancelFilters={this.cancelFilters}
               resetAll={this.resetAll}
-              onClosePanel={() => this.setState({ isSearchFiltersPanelOpen: false })}
+              onClosePanel={() => this.setState({ isSecondaryFiltersOpen: false })}
             >
               {secondaryFilters.map(config => {
                 return (
                   <FilterComponent
-                    key={`SearchFiltersMobile.${config.id}`}
-                    idPrefix="SearchFiltersPanel"
+                    key={`SearchFiltersSecondary.${config.id}`}
+                    idPrefix="SearchFiltersSecondary"
                     filterConfig={config}
                     urlQueryParams={urlQueryParams}
                     initialValues={this.initialValues}
@@ -290,7 +290,7 @@ class MainPanel extends Component {
                   />
                 );
               })}
-            </SearchFiltersPanel>
+            </SearchFiltersSecondary>
           </div>
         ) : (
           <div
