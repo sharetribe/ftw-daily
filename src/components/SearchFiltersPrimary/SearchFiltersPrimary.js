@@ -3,9 +3,9 @@ import { bool, func, node, number, string } from 'prop-types';
 import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 
-import css from './SearchFilters.css';
+import css from './SearchFiltersPrimary.css';
 
-const SearchFiltersComponent = props => {
+const SearchFiltersPrimaryComponent = props => {
   const {
     rootClassName,
     className,
@@ -34,7 +34,7 @@ const SearchFiltersComponent = props => {
       }}
     >
       <FormattedMessage
-        id="SearchFilters.moreFiltersButton"
+        id="SearchFiltersPrimary.moreFiltersButton"
         values={{ count: selectedSecondaryFiltersCount }}
       />
     </button>
@@ -46,7 +46,10 @@ const SearchFiltersComponent = props => {
         {listingsAreLoaded ? (
           <div className={css.searchResultSummary}>
             <span className={css.resultsFound}>
-              <FormattedMessage id="SearchFilters.foundResults" values={{ count: resultsCount }} />
+              <FormattedMessage
+                id="SearchFiltersPrimary.foundResults"
+                values={{ count: resultsCount }}
+              />
             </span>
           </div>
         ) : null}
@@ -60,20 +63,20 @@ const SearchFiltersComponent = props => {
 
       {hasNoResult ? (
         <div className={css.noSearchResults}>
-          <FormattedMessage id="SearchFilters.noResults" />
+          <FormattedMessage id="SearchFiltersPrimary.noResults" />
         </div>
       ) : null}
 
       {searchInProgress ? (
         <div className={css.loadingResults}>
-          <FormattedMessage id="SearchFilters.loadingResults" />
+          <FormattedMessage id="SearchFiltersPrimary.loadingResults" />
         </div>
       ) : null}
     </div>
   );
 };
 
-SearchFiltersComponent.defaultProps = {
+SearchFiltersPrimaryComponent.defaultProps = {
   rootClassName: null,
   className: null,
   resultsCount: null,
@@ -84,7 +87,7 @@ SearchFiltersComponent.defaultProps = {
   sortByComponent: null,
 };
 
-SearchFiltersComponent.propTypes = {
+SearchFiltersPrimaryComponent.propTypes = {
   rootClassName: string,
   className: string,
   listingsAreLoaded: bool.isRequired,
@@ -96,6 +99,6 @@ SearchFiltersComponent.propTypes = {
   sortByComponent: node,
 };
 
-const SearchFilters = SearchFiltersComponent;
+const SearchFiltersPrimary = SearchFiltersPrimaryComponent;
 
-export default SearchFilters;
+export default SearchFiltersPrimary;

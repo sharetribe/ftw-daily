@@ -10,8 +10,8 @@ import { isAnyFilterActive } from '../../util/search';
 import { propTypes } from '../../util/types';
 import {
   SearchResultsPanel,
-  SearchFilters,
   SearchFiltersMobile,
+  SearchFiltersPrimary,
   SearchFiltersSecondary,
   SortBy,
 } from '../../components';
@@ -28,7 +28,8 @@ const FILTER_DROPDOWN_OFFSET = -14;
 /**
  * MainPanel contains search results and filters.
  * There are 3 presentational container-components that show filters:
- * Searchfilters, SearchfiltersMobile, and SearchFiltersSecondary.
+ * SearchfiltersMobile, SearchFiltersPrimary, and SearchFiltersSecondary.
+ * The last 2 are for desktop layout.
  */
 class MainPanel extends Component {
   constructor(props) {
@@ -212,8 +213,8 @@ class MainPanel extends Component {
 
     return (
       <div className={classes}>
-        <SearchFilters
-          className={css.searchFilters}
+        <SearchFiltersPrimary
+          className={css.searchFiltersPrimary}
           sortByComponent={sortBy('desktop')}
           listingsAreLoaded={listingsAreLoaded}
           resultsCount={totalItems}
@@ -224,8 +225,8 @@ class MainPanel extends Component {
           {primaryFilters.map(config => {
             return (
               <FilterComponent
-                key={`SearchFilters.${config.id}`}
-                idPrefix="SearchFilters"
+                key={`SearchFiltersPrimary.${config.id}`}
+                idPrefix="SearchFiltersPrimary"
                 filterConfig={config}
                 urlQueryParams={urlQueryParams}
                 initialValues={this.initialValues}
@@ -235,7 +236,7 @@ class MainPanel extends Component {
               />
             );
           })}
-        </SearchFilters>
+        </SearchFiltersPrimary>
         <SearchFiltersMobile
           className={css.searchFiltersMobile}
           urlQueryParams={urlQueryParams}
