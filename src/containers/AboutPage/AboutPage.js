@@ -38,16 +38,12 @@ const AboutPage = () => {
               </h2>
 
               <p>
-                The freelance revolution is here. And it’s not going anywhere.
+                Around the world, we are seeing more and more professionals are looking for flexible working space
+                on their own terms and business owners who want to make sure they are getting the best use out of their space.  
               </p>
               <p>
-                Around the world, simply selling time for money is not something people are willing
-                to do anymore. More and more professionals are looking for flexible working space
-                on their own terms.
-              </p>
-              <p>
-                There’s a huge gap between those seeking this independence and the space
-                available to them. Something has to be done!
+                There’s currently a huge gap between those seeking this independence and those with the space
+                available. At HotPatch, we are working hard to fix that.
               </p>
 
               <h2>Make Space Work</h2>
@@ -56,7 +52,7 @@ const AboutPage = () => {
 
               <p>HotPatch brings Patch Users and Patch Hosts together. Our ambition is to remove
               the disconnect between those with space and those who need it, by offering a
-              trustworthy platform that’s easy to use, and transparent in its approach.</p>
+              trustworthy platform that’s easy to use and transparent.</p>
 
               <p>Maybe you’re a fitness professional or a hairdresser? Maybe you are a tattoo artist
               or beautician? Perhaps a business owner who wants to make the most of their
@@ -67,8 +63,6 @@ const AboutPage = () => {
               <p>Forget empty and underused workspaces for your business. Forget hours wasted
               on Craigslist and GumTree looking for the ideal Patch to work from. It’s time to
               Make Space Work!</p>
-
-              <p>Free enterprise is alive, and HotPatch is right at the centre of it.</p>
 
               <p>Have any questions about Making Space Work? Head over to our FAQ or reach out
               to the HotPatch team at <a href="mailto:hello@hotpatch.com.">hello@hotpatch.com.</a></p>
