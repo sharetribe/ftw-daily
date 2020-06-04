@@ -14,6 +14,26 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [change] Streamlining filter setup. Everyone who customizes FTW-templates, needs to update filters
+  and unfortunately the related code has been spread out in multiple UI containers.
+
+  Now, filters are more configurable through marketplace-custom-config.js. You can just add new
+  filter configs to `filters` array in there - and that should be enough for creating new filters
+  for extended data.
+
+  If your are creating a totally new filter component, you can take it into use in a single file:
+  src/containers/SearchPage/FilterComponent.js
+
+  In addition, we have renamed couple of container components:
+
+  - SearchFilters -> SearchFiltersPrimary
+  - SearchFiltersPanel -> SearchFiltersSecondary (SearchFiltersMobile has kept its name.)
+
+  SortBy filter's state is also tracked similarly as filters. From now on, the state is kept in
+  MainPanel and not in those 3 different UI containers.
+
+  [#1296](https://github.com/sharetribe/ftw-daily/pull/1296)
+
 ## [v4.5.0] 2020-06-01
 
 - [fix] In some situations, ProfileMenu has began to overflow on TopbarDesktop.
