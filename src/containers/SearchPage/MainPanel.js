@@ -1,23 +1,145 @@
 import React, { Component } from 'react';
-import { array, bool, func, number, object, objectOf, string } from 'prop-types';
-import { FormattedMessage } from '../../util/reactIntl';
+import { array, bool, func, number, object, shape, string } from 'prop-types';
 import classNames from 'classnames';
-import merge from 'lodash/merge';
+import omit from 'lodash/omit';
+import config from '../../config';
+import routeConfiguration from '../../routeConfiguration';
+import { FormattedMessage } from '../../util/reactIntl';
+import { createResourceLocatorString } from '../../util/routes';
+import { isAnyFilterActive } from '../../util/search';
 import { propTypes } from '../../util/types';
 import {
   SearchResultsPanel,
-  SearchFilters,
   SearchFiltersMobile,
-  SearchFiltersPanel,
+  SearchFiltersPrimary,
+  SearchFiltersSecondary,
+  SortBy,
 } from '../../components';
+
+import FilterComponent from './FilterComponent';
 import { validFilterParams } from './SearchPage.helpers';
 
 import css from './SearchPage.css';
 
+// Primary filters have their content in dropdown-popup.
+// With this offset we move the dropdown to the left a few pixels on desktop layout.
+const FILTER_DROPDOWN_OFFSET = -14;
+
+const cleanSearchFromConflictingParams = (searchParams, sortConfig, filterConfig) => {
+  // Single out filters that should disable SortBy when an active
+  // keyword search sorts the listings according to relevance.
+  // In those cases, sort parameter should be removed.
+  const sortingFiltersActive = isAnyFilterActive(
+    sortConfig.conflictingFilters,
+    searchParams,
+    filterConfig
+  );
+  return sortingFiltersActive
+    ? { ...searchParams, [sortConfig.queryParamName]: null }
+    : searchParams;
+};
+
+/**
+ * MainPanel contains search results and filters.
+ * There are 3 presentational container-components that show filters:
+ * SearchfiltersMobile, SearchFiltersPrimary, and SearchFiltersSecondary.
+ * The last 2 are for desktop layout.
+ */
 class MainPanel extends Component {
   constructor(props) {
     super(props);
-    this.state = { isSearchFiltersPanelOpen: false };
+    this.state = { isSecondaryFiltersOpen: false, currentQueryParams: props.urlQueryParams };
+
+    this.applyFilters = this.applyFilters.bind(this);
+    this.cancelFilters = this.cancelFilters.bind(this);
+    this.resetAll = this.resetAll.bind(this);
+
+    this.initialValues = this.initialValues.bind(this);
+    this.getHandleChangedValueFn = this.getHandleChangedValueFn.bind(this);
+
+    // SortBy
+    this.handleSortBy = this.handleSortBy.bind(this);
+  }
+
+  // Apply the filters by redirecting to SearchPage with new filters.
+  applyFilters() {
+    const { history, urlQueryParams, sortConfig, filterConfig } = this.props;
+    const searchParams = { ...urlQueryParams, ...this.state.currentQueryParams };
+    const search = cleanSearchFromConflictingParams(searchParams, sortConfig, filterConfig);
+
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, search));
+  }
+
+  // Close the filters by clicking cancel, revert to the initial params
+  cancelFilters() {
+    this.setState({ currentQueryParams: {} });
+  }
+
+  // Reset all filter query parameters
+  resetAll(e) {
+    const { urlQueryParams, history, filterConfig } = this.props;
+    const filterQueryParamNames = filterConfig.map(f => f.queryParamNames);
+
+    // Reset state
+    this.setState({ currentQueryParams: {} });
+
+    // Reset routing params
+    const queryParams = omit(urlQueryParams, filterQueryParamNames);
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+  }
+
+  initialValues(queryParamNames) {
+    // Query parameters that are visible in the URL
+    const urlQueryParams = this.props.urlQueryParams;
+    // Query parameters that are in state (user might have not yet clicked "Apply")
+    const currentQueryParams = this.state.currentQueryParams;
+
+    // Get initial value for a given parameter from state if its there.
+    const getInitialValue = paramName => {
+      const currentQueryParam = currentQueryParams[paramName];
+      const hasQueryParamInState = typeof currentQueryParam !== 'undefined';
+      return hasQueryParamInState ? currentQueryParam : urlQueryParams[paramName];
+    };
+
+    // Return all the initial values related to given queryParamNames
+    // InitialValues for "amenities" filter could be
+    // { amenities: "has_any:towel,jacuzzi" }
+    const isArray = Array.isArray(queryParamNames);
+    return isArray
+      ? queryParamNames.reduce((acc, paramName) => {
+          return { ...acc, [paramName]: getInitialValue(paramName) };
+        }, {})
+      : {};
+  }
+
+  getHandleChangedValueFn(useHistoryPush) {
+    const { urlQueryParams, history, sortConfig, filterConfig } = this.props;
+
+    return updatedURLParams => {
+      const updater = prevState => {
+        const mergedQueryParams = { ...urlQueryParams, ...prevState.currentQueryParams };
+        return { currentQueryParams: { ...mergedQueryParams, ...updatedURLParams } };
+      };
+
+      const callback = () => {
+        if (useHistoryPush) {
+          const searchParams = this.state.currentQueryParams;
+          const search = cleanSearchFromConflictingParams(searchParams, sortConfig, filterConfig);
+          history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, search));
+        }
+      };
+
+      this.setState(updater, callback);
+    };
+  }
+
+  handleSortBy(urlParam, values) {
+    const { history, urlQueryParams } = this.props;
+    const queryParams = values
+      ? { ...urlQueryParams, [urlParam]: values }
+      : omit(urlQueryParams, urlParam);
+
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   }
 
   render() {
@@ -25,7 +147,6 @@ class MainPanel extends Component {
       className,
       rootClassName,
       urlQueryParams,
-      sort,
       listings,
       searchInProgress,
       searchListingsError,
@@ -38,28 +159,32 @@ class MainPanel extends Component {
       pagination,
       searchParamsForPagination,
       showAsModalMaxWidth,
-      primaryFilters,
-      secondaryFilters,
+      filterConfig,
+      sortConfig,
     } = this.props;
 
-    const isSearchFiltersPanelOpen = !!secondaryFilters && this.state.isSearchFiltersPanelOpen;
+    const primaryFilters = filterConfig.filter(f => f.group === 'primary');
+    const secondaryFilters = filterConfig.filter(f => f.group !== 'primary');
+    const hasSecondaryFilters = !!(secondaryFilters && secondaryFilters.length > 0);
 
-    const filters = merge({}, primaryFilters, secondaryFilters);
-    const selectedFilters = validFilterParams(urlQueryParams, filters);
+    // Selected aka active filters
+    const selectedFilters = validFilterParams(urlQueryParams, filterConfig);
     const selectedFiltersCount = Object.keys(selectedFilters).length;
 
-    const selectedSecondaryFilters = secondaryFilters
+    // Selected aka active secondary filters
+    const selectedSecondaryFilters = hasSecondaryFilters
       ? validFilterParams(urlQueryParams, secondaryFilters)
       : {};
-    const searchFiltersPanelSelectedCount = Object.keys(selectedSecondaryFilters).length;
+    const selectedSecondaryFiltersCount = Object.keys(selectedSecondaryFilters).length;
 
-    const searchFiltersPanelProps = !!secondaryFilters
+    const isSecondaryFiltersOpen = !!hasSecondaryFilters && this.state.isSecondaryFiltersOpen;
+    const propsForSecondaryFiltersToggle = hasSecondaryFilters
       ? {
-          isSearchFiltersPanelOpen: this.state.isSearchFiltersPanelOpen,
-          toggleSearchFiltersPanel: isOpen => {
-            this.setState({ isSearchFiltersPanelOpen: isOpen });
+          isSecondaryFiltersOpen: this.state.isSecondaryFiltersOpen,
+          toggleSecondaryFiltersOpen: isOpen => {
+            this.setState({ isSecondaryFiltersOpen: isOpen });
           },
-          searchFiltersPanelSelectedCount,
+          selectedSecondaryFiltersCount,
         }
       : {};
 
@@ -67,31 +192,64 @@ class MainPanel extends Component {
     const totalItems = searchParamsAreInSync && hasPaginationInfo ? pagination.totalItems : 0;
     const listingsAreLoaded = !searchInProgress && searchParamsAreInSync && hasPaginationInfo;
 
-    const classes = classNames(rootClassName || css.searchResultContainer, className);
+    const sortBy = mode => {
+      const conflictingFilterActive = isAnyFilterActive(
+        sortConfig.conflictingFilters,
+        urlQueryParams,
+        filterConfig
+      );
 
-    const filterParamNames = Object.values(filters).map(f => f.paramName);
-    const secondaryFilterParamNames = secondaryFilters
-      ? Object.values(secondaryFilters).map(f => f.paramName)
-      : [];
+      const mobileClassesMaybe =
+        mode === 'mobile'
+          ? {
+              rootClassName: css.sortBy,
+              menuLabelRootClassName: css.sortByMenuLabel,
+            }
+          : {};
+      return sortConfig.active ? (
+        <SortBy
+          {...mobileClassesMaybe}
+          sort={urlQueryParams[sortConfig.queryParamName]}
+          isConflictingFilterActive={!!conflictingFilterActive}
+          onSelect={this.handleSortBy}
+          showAsPopup
+          contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+        />
+      ) : null;
+    };
+
+    const classes = classNames(rootClassName || css.searchResultContainer, className);
 
     return (
       <div className={classes}>
-        <SearchFilters
-          className={css.searchFilters}
-          urlQueryParams={urlQueryParams}
-          sort={sort}
+        <SearchFiltersPrimary
+          className={css.searchFiltersPrimary}
+          sortByComponent={sortBy('desktop')}
           listingsAreLoaded={listingsAreLoaded}
           resultsCount={totalItems}
           searchInProgress={searchInProgress}
           searchListingsError={searchListingsError}
-          onManageDisableScrolling={onManageDisableScrolling}
-          {...searchFiltersPanelProps}
-          {...primaryFilters}
-        />
+          {...propsForSecondaryFiltersToggle}
+        >
+          {primaryFilters.map(config => {
+            return (
+              <FilterComponent
+                key={`SearchFiltersPrimary.${config.id}`}
+                idPrefix="SearchFiltersPrimary"
+                filterConfig={config}
+                urlQueryParams={urlQueryParams}
+                initialValues={this.initialValues}
+                getHandleChangedValueFn={this.getHandleChangedValueFn}
+                showAsPopup
+                contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+              />
+            );
+          })}
+        </SearchFiltersPrimary>
         <SearchFiltersMobile
           className={css.searchFiltersMobile}
           urlQueryParams={urlQueryParams}
-          sort={sort}
+          sortByComponent={sortBy('mobile')}
           listingsAreLoaded={listingsAreLoaded}
           resultsCount={totalItems}
           searchInProgress={searchInProgress}
@@ -101,21 +259,48 @@ class MainPanel extends Component {
           onManageDisableScrolling={onManageDisableScrolling}
           onOpenModal={onOpenModal}
           onCloseModal={onCloseModal}
-          filterParamNames={filterParamNames}
+          resetAll={this.resetAll}
           selectedFiltersCount={selectedFiltersCount}
-          {...primaryFilters}
-          {...secondaryFilters}
-        />
-        {isSearchFiltersPanelOpen ? (
+        >
+          {filterConfig.map(config => {
+            return (
+              <FilterComponent
+                key={`SearchFiltersMobile.${config.id}`}
+                idPrefix="SearchFiltersMobile"
+                filterConfig={config}
+                urlQueryParams={urlQueryParams}
+                initialValues={this.initialValues}
+                getHandleChangedValueFn={this.getHandleChangedValueFn}
+                liveEdit
+                showAsPopup={false}
+              />
+            );
+          })}
+        </SearchFiltersMobile>
+        {isSecondaryFiltersOpen ? (
           <div className={classNames(css.searchFiltersPanel)}>
-            <SearchFiltersPanel
+            <SearchFiltersSecondary
               urlQueryParams={urlQueryParams}
-              sort={sort}
               listingsAreLoaded={listingsAreLoaded}
-              onClosePanel={() => this.setState({ isSearchFiltersPanelOpen: false })}
-              filterParamNames={secondaryFilterParamNames}
-              {...secondaryFilters}
-            />
+              applyFilters={this.applyFilters}
+              cancelFilters={this.cancelFilters}
+              resetAll={this.resetAll}
+              onClosePanel={() => this.setState({ isSecondaryFiltersOpen: false })}
+            >
+              {secondaryFilters.map(config => {
+                return (
+                  <FilterComponent
+                    key={`SearchFiltersSecondary.${config.id}`}
+                    idPrefix="SearchFiltersSecondary"
+                    filterConfig={config}
+                    urlQueryParams={urlQueryParams}
+                    initialValues={this.initialValues}
+                    getHandleChangedValueFn={this.getHandleChangedValueFn}
+                    showAsPopup={false}
+                  />
+                );
+              })}
+            </SearchFiltersSecondary>
           </div>
         ) : (
           <div
@@ -149,8 +334,8 @@ MainPanel.defaultProps = {
   resultsCount: 0,
   pagination: null,
   searchParamsForPagination: {},
-  primaryFilters: null,
-  secondaryFilters: null,
+  filterConfig: config.custom.filters,
+  sortConfig: config.custom.sortConfig,
 };
 
 MainPanel.propTypes = {
@@ -170,8 +355,12 @@ MainPanel.propTypes = {
   pagination: propTypes.pagination,
   searchParamsForPagination: object,
   showAsModalMaxWidth: number.isRequired,
-  primaryFilters: objectOf(propTypes.filterConfig),
-  secondaryFilters: objectOf(propTypes.filterConfig),
+  filterConfig: propTypes.filterConfig,
+  sortConfig: propTypes.sortConfig,
+
+  history: shape({
+    push: func.isRequired,
+  }).isRequired,
 };
 
 export default MainPanel;
