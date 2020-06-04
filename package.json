@@ -87,7 +87,7 @@
     "config": "node scripts/config.js",
     "config-check": "node scripts/config.js --check",
     "dev-frontend": "sharetribe-scripts start",
-    "dev-backend": "DEV_API_SERVER_PORT=3500 nodemon server/apiServer.js",
+    "dev-backend": "export NODE_ENV=development DEV_API_SERVER_PORT=3500&&nodemon server/apiServer.js",
     "dev": "yarn run config-check&&concurrently --kill-others \"yarn run dev-frontend\" \"yarn run dev-backend\"",
     "build": "sharetribe-scripts build",
     "format": "prettier --write '**/*.{js,css}'",
