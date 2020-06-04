@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [fix] `yarn run dev-backend` was expecting NODE_ENV.
+  [#1303](https://github.com/sharetribe/ftw-daily/pull/1303)
+
 ## [v5.0.0] 2020-06-04
 
 - [change] Streamlining filter setup. Everyone who customizes FTW-templates, needs to update filters
