@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+## [v5.0.0] 2020-06-04
+
 - [change] Streamlining filter setup. Everyone who customizes FTW-templates, needs to update filters
   and unfortunately the related code has been spread out in multiple UI containers.
 
@@ -33,6 +35,8 @@ way to update this template, but currently, we follow a pattern:
   MainPanel and not in those 3 different UI containers.
 
   [#1296](https://github.com/sharetribe/ftw-daily/pull/1296)
+
+[v5.0.0]: https://github.com/sharetribe/flex-template-web/compare/v4.5.0...v5.0.0
 
 ## [v4.5.0] 2020-06-01
 
