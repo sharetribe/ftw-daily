@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { func, number, string } from 'prop-types';
+import { arrayOf, func, number, shape, string } from 'prop-types';
 import classNames from 'classnames';
 import { injectIntl, intlShape } from '../../util/reactIntl';
 import debounce from 'lodash/debounce';
@@ -12,6 +12,14 @@ import css from './KeywordFilter.css';
 const DEBOUNCE_WAIT_TIME = 600;
 // Short search queries (e.g. 2 letters) have a longer timeout before search is made
 const TIMEOUT_FOR_SHORT_QUERIES = 2000;
+
+const getKeywordQueryParam = queryParamNames => {
+  return Array.isArray(queryParamNames)
+    ? queryParamNames[0]
+    : typeof queryParamNames === 'string'
+    ? queryParamNames
+    : 'keywords';
+};
 
 class KeywordFilter extends Component {
   constructor(props) {
@@ -62,7 +70,7 @@ class KeywordFilter extends Component {
       initialValues,
       contentPlacementOffset,
       onSubmit,
-      urlParam,
+      queryParamNames,
       intl,
       showAsPopup,
       ...rest
@@ -70,15 +78,20 @@ class KeywordFilter extends Component {
 
     const classes = classNames(rootClassName || css.root, className);
 
-    const hasInitialValues = !!initialValues && initialValues.length > 0;
+    const urlParam = getKeywordQueryParam(queryParamNames);
+    const hasInitialValues =
+      !!initialValues && !!initialValues[urlParam] && initialValues[urlParam].length > 0;
     const labelForPopup = hasInitialValues
-      ? intl.formatMessage({ id: 'KeywordFilter.labelSelected' }, { labelText: initialValues })
+      ? intl.formatMessage(
+          { id: 'KeywordFilter.labelSelected' },
+          { labelText: initialValues[urlParam] }
+        )
       : label;
 
     const labelForPlain = hasInitialValues
       ? intl.formatMessage(
           { id: 'KeywordFilterPlainForm.labelSelected' },
-          { labelText: initialValues }
+          { labelText: initialValues[urlParam] }
         )
       : label;
 
@@ -90,11 +103,11 @@ class KeywordFilter extends Component {
 
     // pass the initial values with the name key so that
     // they can be passed to the correct field
-    const namedInitialValues = { [name]: initialValues };
+    const namedInitialValues = { [name]: initialValues[urlParam] };
 
-    const handleSubmit = (urlParam, values) => {
+    const handleSubmit = values => {
       const usedValue = values ? values[name] : values;
-      onSubmit(urlParam, usedValue);
+      onSubmit({ [urlParam]: usedValue });
     };
 
     const debouncedSubmit = debounce(handleSubmit, DEBOUNCE_WAIT_TIME, {
@@ -102,22 +115,22 @@ class KeywordFilter extends Component {
       trailing: true,
     });
     // Use timeout for shart queries and debounce for queries with any length
-    const handleChangeWithDebounce = (urlParam, values) => {
-      // handleSubmit gets urlParam and values as params.
+    const handleChangeWithDebounce = values => {
+      // handleSubmit gets values as params.
       // If this field ("keyword") is short, create timeout
       const hasKeywordValue = values && values[name];
       const keywordValue = hasKeywordValue ? values && values[name] : '';
-      if (urlParam && (!hasKeywordValue || (hasKeywordValue && keywordValue.length >= 3))) {
+      if (!hasKeywordValue || (hasKeywordValue && keywordValue.length >= 3)) {
         if (this.shortKeywordTimeout) {
           window.clearTimeout(this.shortKeywordTimeout);
         }
-        return debouncedSubmit(urlParam, values);
+        return debouncedSubmit(values);
       } else {
         this.shortKeywordTimeout = window.setTimeout(() => {
           // if mobileInputRef exists, use the most up-to-date value from there
           return this.mobileInputRef && this.mobileInputRef.current
-            ? handleSubmit(urlParam, { ...values, [name]: this.mobileInputRef.current.value })
-            : handleSubmit(urlParam, values);
+            ? handleSubmit({ ...values, [name]: this.mobileInputRef.current.value })
+            : handleSubmit(values);
         }, TIMEOUT_FOR_SHORT_QUERIES);
       }
     };
@@ -143,7 +156,6 @@ class KeywordFilter extends Component {
         contentPlacementOffset={contentPlacementOffset}
         onSubmit={handleSubmit}
         initialValues={namedInitialValues}
-        urlParam={urlParam}
         keepDirtyOnReinitialize
         {...rest}
       >
@@ -169,7 +181,6 @@ class KeywordFilter extends Component {
         onSubmit={handleChangeWithDebounce}
         onClear={handleClear}
         initialValues={namedInitialValues}
-        urlParam={urlParam}
         {...rest}
       >
         <fieldset className={css.fieldPlain}>
@@ -201,10 +212,12 @@ KeywordFilter.propTypes = {
   className: string,
   id: string.isRequired,
   name: string.isRequired,
-  urlParam: string.isRequired,
+  queryParamNames: arrayOf(string).isRequired,
   label: string.isRequired,
   onSubmit: func.isRequired,
-  initialValues: string,
+  initialValues: shape({
+    keyword: string,
+  }),
   contentPlacementOffset: number,
 
   // form injectIntl

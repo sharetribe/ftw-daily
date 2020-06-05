@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { array, arrayOf, func, number, string } from 'prop-types';
+import { array, arrayOf, func, node, number, object, string } from 'prop-types';
 import classNames from 'classnames';
 import { injectIntl, intlShape } from '../../util/reactIntl';
+import { parseSelectFilterOptions } from '../../util/search';
 import { FieldCheckbox } from '../../components';
 
 import { FilterPopup, FilterPlain } from '../../components';
@@ -26,6 +27,18 @@ const GroupOfFieldCheckboxes = props => {
       </ul>
     </fieldset>
   );
+};
+
+const getQueryParamName = queryParamNames => {
+  return Array.isArray(queryParamNames) ? queryParamNames[0] : queryParamNames;
+};
+
+// Format URI component's query param: { pub_key: 'has_all:a,b,c' }
+const format = (selectedOptions, queryParamName, searchMode) => {
+  const hasOptionsSelected = selectedOptions && selectedOptions.length > 0;
+  const mode = searchMode ? `${searchMode}:` : '';
+  const value = hasOptionsSelected ? `${mode}${selectedOptions.join(',')}` : null;
+  return { [queryParamName]: value };
 };
 
 class SelectMultipleFilter extends Component {
@@ -72,7 +85,8 @@ class SelectMultipleFilter extends Component {
       initialValues,
       contentPlacementOffset,
       onSubmit,
-      urlParam,
+      queryParamNames,
+      searchMode,
       intl,
       showAsPopup,
       ...rest
@@ -80,18 +94,24 @@ class SelectMultipleFilter extends Component {
 
     const classes = classNames(rootClassName || css.root, className);
 
-    const hasInitialValues = initialValues.length > 0;
+    const queryParamName = getQueryParamName(queryParamNames);
+    const hasInitialValues = !!initialValues && !!initialValues[queryParamName];
+    // Parse options from param strings like "has_all:a,b,c" or "a,b,c"
+    const selectedOptions = hasInitialValues
+      ? parseSelectFilterOptions(initialValues[queryParamName])
+      : [];
+
     const labelForPopup = hasInitialValues
       ? intl.formatMessage(
           { id: 'SelectMultipleFilter.labelSelected' },
-          { labelText: label, count: initialValues.length }
+          { labelText: label, count: selectedOptions.length }
         )
       : label;
 
     const labelForPlain = hasInitialValues
       ? intl.formatMessage(
           { id: 'SelectMultipleFilterPlainForm.labelSelected' },
-          { labelText: label, count: initialValues.length }
+          { labelText: label, count: selectedOptions.length }
         )
       : label;
 
@@ -99,11 +119,11 @@ class SelectMultipleFilter extends Component {
 
     // pass the initial values with the name key so that
     // they can be passed to the correct field
-    const namedInitialValues = { [name]: initialValues };
+    const namedInitialValues = { [name]: selectedOptions };
 
-    const handleSubmit = (urlParam, values) => {
+    const handleSubmit = values => {
       const usedValue = values ? values[name] : values;
-      onSubmit(urlParam, usedValue);
+      onSubmit(format(usedValue, queryParamName, searchMode));
     };
 
     return showAsPopup ? (
@@ -119,7 +139,6 @@ class SelectMultipleFilter extends Component {
         contentPlacementOffset={contentPlacementOffset}
         onSubmit={handleSubmit}
         initialValues={namedInitialValues}
-        urlParam={urlParam}
         keepDirtyOnReinitialize
         {...rest}
       >
@@ -141,7 +160,6 @@ class SelectMultipleFilter extends Component {
         contentPlacementOffset={contentStyle}
         onSubmit={handleSubmit}
         initialValues={namedInitialValues}
-        urlParam={urlParam}
         {...rest}
       >
         <GroupOfFieldCheckboxes
@@ -158,7 +176,7 @@ class SelectMultipleFilter extends Component {
 SelectMultipleFilter.defaultProps = {
   rootClassName: null,
   className: null,
-  initialValues: [],
+  initialValues: null,
   contentPlacementOffset: 0,
 };
 
@@ -167,11 +185,11 @@ SelectMultipleFilter.propTypes = {
   className: string,
   id: string.isRequired,
   name: string.isRequired,
-  urlParam: string.isRequired,
-  label: string.isRequired,
+  queryParamNames: arrayOf(string).isRequired,
+  label: node.isRequired,
   onSubmit: func.isRequired,
   options: array.isRequired,
-  initialValues: arrayOf(string),
+  initialValues: object,
   contentPlacementOffset: number,
 
   // form injectIntl

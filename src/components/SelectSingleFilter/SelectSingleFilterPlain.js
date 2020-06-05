@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import { arrayOf, bool, func, shape, string } from 'prop-types';
+import { arrayOf, bool, func, node, object, shape, string } from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from '../../util/reactIntl';
 
 import css from './SelectSingleFilterPlain.css';
+
+const getQueryParamName = queryParamNames => {
+  return Array.isArray(queryParamNames) ? queryParamNames[0] : queryParamNames;
+};
 
 class SelectSingleFilterPlain extends Component {
   constructor(props) {
@@ -14,8 +18,9 @@ class SelectSingleFilterPlain extends Component {
   }
 
   selectOption(option, e) {
-    const { urlParam, onSelect } = this.props;
-    onSelect(urlParam, option);
+    const { queryParamNames, onSelect } = this.props;
+    const queryParamName = getQueryParamName(queryParamNames);
+    onSelect({ [queryParamName]: option });
 
     // blur event target if event is passed
     if (e && e.currentTarget) {
@@ -33,11 +38,15 @@ class SelectSingleFilterPlain extends Component {
       className,
       label,
       options,
-      initialValue,
+      queryParamNames,
+      initialValues,
       twoColumns,
       useBullets,
     } = this.props;
 
+    const queryParamName = getQueryParamName(queryParamNames);
+    const initialValue =
+      initialValues && initialValues[queryParamName] ? initialValues[queryParamName] : null;
     const labelClass = initialValue ? css.filterLabelSelected : css.filterLabel;
 
     const hasBullets = useBullets || twoColumns;
@@ -95,7 +104,7 @@ class SelectSingleFilterPlain extends Component {
 SelectSingleFilterPlain.defaultProps = {
   rootClassName: null,
   className: null,
-  initialValue: null,
+  initialValues: null,
   twoColumns: false,
   useBullets: false,
 };
@@ -103,8 +112,8 @@ SelectSingleFilterPlain.defaultProps = {
 SelectSingleFilterPlain.propTypes = {
   rootClassName: string,
   className: string,
-  urlParam: string.isRequired,
-  label: string.isRequired,
+  queryParamNames: arrayOf(string).isRequired,
+  label: node.isRequired,
   onSelect: func.isRequired,
 
   options: arrayOf(
@@ -113,7 +122,7 @@ SelectSingleFilterPlain.propTypes = {
       label: string.isRequired,
     })
   ).isRequired,
-  initialValue: string,
+  initialValues: object,
   twoColumns: bool,
   useBullets: bool,
 };
