@@ -1,5 +1,6 @@
 import pick from 'lodash/pick';
 import config from '../../config';
+import { initiatePrivileged, transitionPrivileged } from '../../util/api';
 import { denormalisedResponseEntities } from '../../util/data';
 import { storableError } from '../../util/errors';
 import {
@@ -161,6 +162,12 @@ export const stripeCustomerError = e => ({
 
 export const initiateOrder = (orderParams, transactionId) => (dispatch, getState, sdk) => {
   dispatch(initiateOrderRequest());
+
+  const bookingData = {
+    startDate: orderParams.bookingStart,
+    endDate: orderParams.bookingEnd,
+  };
+
   const bodyParams = transactionId
     ? {
         id: transactionId,
@@ -177,9 +184,34 @@ export const initiateOrder = (orderParams, transactionId) => (dispatch, getState
     expand: true,
   };
 
-  const createOrder = transactionId ? sdk.transactions.transition : sdk.transactions.initiate;
+  if (!transactionId) {
+    return initiatePrivileged({ isSpeculative: false, bookingData, bodyParams, queryParams })
+      .then(response => {
+        const entities = denormalisedResponseEntities(response);
+        const order = entities[0];
+        dispatch(initiateOrderSuccess(order));
+        dispatch(fetchCurrentUserHasOrdersSuccess(true));
+        return order;
+      })
+      .catch(e => {
+        dispatch(initiateOrderError(storableError(e)));
+        const transactionIdMaybe = transactionId ? { transactionId: transactionId.uuid } : {};
+        log.error(e, 'initiate-order-failed', {
+          ...transactionIdMaybe,
+          listingId: orderParams.listingId.uuid,
+          bookingStart: orderParams.bookingStart,
+          bookingEnd: orderParams.bookingEnd,
+        });
+        throw e;
+      });
+  }
 
-  return createOrder(bodyParams, queryParams)
+  return transitionPrivileged({
+    isSpeculative: false,
+    bookingData,
+    bodyParams,
+    queryParams,
+  })
     .then(response => {
       const entities = denormalisedResponseEntities(response);
       const order = entities[0];
@@ -261,6 +293,12 @@ export const sendMessage = params => (dispatch, getState, sdk) => {
  */
 export const speculateTransaction = params => (dispatch, getState, sdk) => {
   dispatch(speculateTransactionRequest());
+
+  const bookingData = {
+    startDate: params.bookingStart,
+    endDate: params.bookingEnd,
+  };
+
   const bodyParams = {
     transition: TRANSITION_REQUEST_PAYMENT,
     processAlias: config.bookingProcessAlias,
@@ -273,8 +311,8 @@ export const speculateTransaction = params => (dispatch, getState, sdk) => {
     include: ['booking', 'provider'],
     expand: true,
   };
-  return sdk.transactions
-    .initiateSpeculative(bodyParams, queryParams)
+
+  return initiatePrivileged({ isSpeculative: true, bookingData, bodyParams, queryParams })
     .then(response => {
       const entities = denormalisedResponseEntities(response);
       if (entities.length !== 1) {
