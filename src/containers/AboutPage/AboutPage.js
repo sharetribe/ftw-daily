@@ -38,7 +38,7 @@ const AboutPage = () => {
               </h2>
 
               <p>
-                Around the world, we are seeing more and more professionals are looking for flexible working space
+                Around the world, we are seeing more and more professionals looking for flexible working space
                 on their own terms and business owners who want to make sure they are getting the best use out of their space.  
               </p>
               <p>
