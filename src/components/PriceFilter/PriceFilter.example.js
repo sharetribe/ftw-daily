@@ -1,52 +1,41 @@
-import React from 'react'
-import { withRouter } from 'react-router-dom'
-import { stringify, parse } from '../../util/urlHelpers'
+import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { stringify, parse } from '../../util/urlHelpers';
 
-import PriceFilter from './PriceFilter'
+import PriceFilter from './PriceFilter';
 
-const URL_PARAM = 'pub_price'
-const RADIX = 10
+const URL_PARAM = 'pub_price';
 
 // Helper for submitting example
-const handleSubmit = (urlParam, values, history) => {
-  const { minPrice, maxPrice } = values || {}
-  const queryParams =
-    minPrice != null && maxPrice != null
-      ? `?${stringify({ [urlParam]: [minPrice, maxPrice].join(',') })}`
-      : ''
-  history.push(`${window.location.pathname}${queryParams}`)
-}
+const handleSubmit = (values, history) => {
+  const queryParams = values ? `?${stringify(values)}` : '';
+  history.push(`${window.location.pathname}${queryParams}`);
+};
 
-const PriceFilterWrapper = withRouter((props) => {
-  const { history, location } = props
+const PriceFilterWrapper = withRouter(props => {
+  const { history, location } = props;
 
-  const params = parse(location.search)
-  const price = params[URL_PARAM]
-  const valuesFromParams = !!price ? price.split(',').map((v) => Number.parseInt(v, RADIX)) : []
-  const initialValues = !!price
-    ? {
-        minPrice: valuesFromParams[0],
-        maxPrice: valuesFromParams[1],
-      }
-    : null
+  const params = parse(location.search);
+  const price = params[URL_PARAM];
+  const initialValues = { [URL_PARAM]: !!price ? price : null };
 
   return (
     <PriceFilter
       {...props}
       initialValues={initialValues}
-      onSubmit={(urlParam, values) => {
-        console.log('Submit PriceFilterForm with (unformatted) values:', values)
-        handleSubmit(urlParam, values, history)
+      onSubmit={values => {
+        console.log('Submit PriceFilterForm with (unformatted) values:', values);
+        handleSubmit(values, history);
       }}
     />
-  )
-})
+  );
+});
 
 export const PriceFilterPopup = {
   component: PriceFilterWrapper,
   props: {
     id: 'PriceFilterPopupExample',
-    urlParam: URL_PARAM,
+    queryParamNames: [URL_PARAM],
     min: 0,
     max: 1000,
     step: 5,
@@ -56,14 +45,14 @@ export const PriceFilterPopup = {
     // initialValues: handled inside wrapper
     // onSubmit: handled inside wrapper
   },
-  group: 'misc',
-}
+  group: 'filters',
+};
 
 export const PriceFilterPlain = {
   component: PriceFilterWrapper,
   props: {
     id: 'PriceFilterPlainExample',
-    urlParam: URL_PARAM,
+    queryParamNames: [URL_PARAM],
     min: 0,
     max: 1000,
     step: 5,
@@ -73,5 +62,5 @@ export const PriceFilterPlain = {
     // initialValues: handled inside wrapper
     // onSubmit: handled inside wrapper
   },
-  group: 'misc',
-}
+  group: 'filters',
+};

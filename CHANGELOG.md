@@ -14,10 +14,47 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [add] Add util functions for constructing line items in FTW backend
+  [#1299](https://github.com/sharetribe/ftw-daily/pull/1299)
+- [fix] `yarn run dev-backend` was expecting NODE_ENV.
+  [#1303](https://github.com/sharetribe/ftw-daily/pull/1303)
+
+## [v5.0.0] 2020-06-04
+
+- [change] Streamlining filter setup. Everyone who customizes FTW-templates, needs to update filters
+  and unfortunately the related code has been spread out in multiple UI containers.
+
+  Now, filters are more configurable through marketplace-custom-config.js. You can just add new
+  filter configs to `filters` array in there - and that should be enough for creating new filters
+  for extended data.
+
+  If your are creating a totally new filter component, you can take it into use in a single file:
+  src/containers/SearchPage/FilterComponent.js
+
+  In addition, we have renamed couple of container components:
+
+  - SearchFilters -> SearchFiltersPrimary
+  - SearchFiltersPanel -> SearchFiltersSecondary (SearchFiltersMobile has kept its name.)
+
+  SortBy filter's state is also tracked similarly as filters. From now on, the state is kept in
+  MainPanel and not in those 3 different UI containers.
+
+  [#1296](https://github.com/sharetribe/ftw-daily/pull/1296)
+
+[v5.0.0]: https://github.com/sharetribe/flex-template-web/compare/v4.5.0...v5.0.0
+
+## [v4.5.0] 2020-06-01
+
 - [fix] In some situations, ProfileMenu has began to overflow on TopbarDesktop.
   [#1290](https://github.com/sharetribe/ftw-daily/pull/1290)
 - [change] Update dependencies (patch updates only)
   [#1291](https://github.com/sharetribe/ftw-daily/pull/1291)
+- [change] Refactor server API routes into separate files.
+  [#1294](https://github.com/sharetribe/ftw-daily/pull/1294)
+- [change] Start the backend API router in dev mode with a dev server.
+  [#1297](https://github.com/sharetribe/ftw-daily/pull/1297)
+
+[v4.5.0]: https://github.com/sharetribe/flex-template-web/compare/v4.4.3...v4.5.0
 
 ## [v4.4.3] 2020-05-13
 

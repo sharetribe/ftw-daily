@@ -13,7 +13,7 @@ describe('BookingDateRangeFilter', () => {
     const tree = renderShallow(
       <BookingDateRangeFilterComponent
         id="BookingDateRangeFilter"
-        urlParam="dates"
+        queryParamNames={['dates']}
         liveEdit={false}
         showAsPopup={true}
         contentPlacementOffset={-14}
@@ -29,7 +29,7 @@ describe('BookingDateRangeFilter', () => {
     const tree = renderShallow(
       <BookingDateRangeFilterComponent
         id="BookingDateRangeFilter"
-        urlParam="dates"
+        queryParamNames={['dates']}
         liveEdit={true}
         showAsPopup={false}
         contentPlacementOffset={-14}
