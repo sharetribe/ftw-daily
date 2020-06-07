@@ -4,12 +4,12 @@
 /* ================ Fonts ================ */
 
 body {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: monospace;
   -webkit-font-smoothing: antialiased; /* http://szafranek.net/blog/2009/02/22/font-smoothing-explained/ */
   -moz-osx-font-smoothing: grayscale; /* http://szafranek.net/blog/2009/02/22/font-smoothing-explained/ */
   text-rendering: optimizeSpeed;
 
-  background-color: var(--matterColorBright);
+  background-color: var(--matterColorLight);
 }
 
 ::selection {
@@ -89,7 +89,7 @@ label {
 }
 
 button {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: monospace;
 }
 
 select {
@@ -118,9 +118,9 @@ textarea {
 
 :global(.fontsLoaded) {
   & body {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'Anonymous Pro', monospace;
   }
   & button {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'Anonymous Pro', monospace;
   }
 }

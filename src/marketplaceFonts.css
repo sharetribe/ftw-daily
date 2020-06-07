@@ -1,37 +1,7 @@
 /* Fonts */
 /* These are imported into marketplace.css */
 
-@font-face {
-  font-family: 'Anonymous Pro';
-  src: url('assets/fonts/anonymouspro-regular-webfont.woff2') format('woff2'),
-    url('assets/fonts/anonymouspro-regular-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Anonymous Pro';
-  src: url('assets/fonts/anonymouspro-italic-webfont.woff2') format('woff2'),
-    url('assets/fonts/anonymouspro-italic-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'Anonymous Pro';
-  src: url('assets/fonts/anonymouspro-bold-webfont.woff2') format('woff2'),
-    url('assets/fonts/anonymouspro-bold-webfont.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Anonymous Pro';
-  src: url('assets/fonts/anonymouspro-bolditalic-webfont.woff2') format('woff2'),
-    url('assets/fonts/anonymouspro-bolditalic-webfont.woff') format('woff');
-  font-weight: 700;
-  font-style: italic;
-}
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400&display=swap');
 
 :root {
   /*
@@ -51,7 +21,7 @@
   /* ================ Default font ================ */
 
   --marketplaceDefaultFontStyles: {
-    font-family: 'Anonymous Pro', Helvetica, Arial, sans-serif;
+    font-family: 'Anonymous Pro', monospace;
     font-weight: var(--fontWeightMedium);
     font-size: 16px;
     line-height: 1.6;
@@ -65,7 +35,7 @@
   }
 
   --marketplaceSmallFontStyles: {
-    font-family: 'Anonymous Pro', Helvetica, Arial, sans-serif;
+    font-family: 'Anonymous Pro', monospace;
     font-weight: var(--fontWeightMedium);
     font-size: 15px;
     line-height: 24px;
@@ -74,10 +44,9 @@
   /* ================ Body font ================ */
 
   --marketplaceBodyFontStyles: {
-    font-family: 'Anonymous Pro', Helvetica, Arial, sans-serif;
+    font-family: 'Anonymous Pro', monospace;
     font-weight: var(--fontWeightMedium);
-    font-size: 18px;
-    line-height: 24px;
+    font-size: 16px;
     letter-spacing: -0.1px;
     /* margin-top + n * line-height + margin-bottom => x * 6px */
     margin-top: 12px;
@@ -247,7 +216,7 @@
   /* ================ Other fonts ================ */
 
   --marketplaceTinyFontStyles: {
-    font-family: 'Anonymous Pro', Helvetica, Arial, sans-serif;
+    font-family: 'Anonymous Pro', monospace;
     font-weight: var(--fontWeightRegular);
     font-size: 13px;
     line-height: 18px;
@@ -265,14 +234,14 @@
   }
 
   --marketplaceMessageFontStyles {
-    font-family: 'Anonymous Pro', Helvetica, Arial, sans-serif;
+    font-family: 'Anonymous Pro', monospace;
     font-weight: var(--fontWeightRegular);
     font-size: 16px;
     line-height: 24px;
   }
 
   --marketplaceMessageDateFontStyles {
-    font-family: 'Anonymous Pro', Helvetica, Arial, sans-serif;
+    font-family: 'Anonymous Pro', monospace;
     font-weight: var(--fontWeightRegular);
     font-size: 13px;
     line-height: 18px;
@@ -286,7 +255,7 @@
   }
 
   --marketplaceTxTransitionFontStyles {
-    font-family: 'Anonymous Pro', Helvetica, Arial, sans-serif;
+    font-family: 'Anonymous Pro', monospace;
     font-weight: var(--fontWeightMedium);
     font-size: 16px;
     line-height: 18px;
@@ -298,7 +267,7 @@
   }
 
   --marketplaceSearchFilterLabelFontStyles {
-    font-family: 'Anonymous Pro', Helvetica, Arial, sans-serif;
+    font-family: 'Anonymous Pro', monospace;
     font-weight: var(--fontWeightSemiBold);
     font-size: 13px;
     line-height: 18px;
@@ -311,16 +280,16 @@
   }
 
   --marketplaceSearchFilterSublabelFontStyles {
-    font-family: 'Anonymous Pro', Helvetica, Arial, sans-serif;
+    font-family: 'Anonymous Pro', monospace;
     font-weight: var(--fontWeightMedium);
-    font-size: 18px;
+    font-size: 16px;
     line-height: 18px;
   }
 
   --marketplaceListingAttributeFontStyles {
-    font-family: 'Anonymous Pro', Helvetica, Arial, sans-serif;
+    font-family: 'Anonymous Pro', monospace;
     font-weight: var(--fontWeightMedium);
-    font-size: 18px;
+    font-size: 16px;
     line-height: 32px;
   }
 
