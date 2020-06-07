@@ -60,6 +60,7 @@
     "url": "^0.11.0"
   },
   "devDependencies": {
+    "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.0",
     "babel-jest": "24.9.0",
     "bfj": "^7.0.2",

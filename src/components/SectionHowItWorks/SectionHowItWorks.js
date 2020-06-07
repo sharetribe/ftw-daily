@@ -1,19 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { FormattedMessage } from '../../util/reactIntl'
 import classNames from 'classnames'
-import styled from 'styled-components'
+
+import { NamedLink } from '../../components'
 
 import css from './SectionHowItWorks.css'
-import nashvilleForHireText from '../../assets/images/nashvilleForHireText.png'
-
-const Image = styled.img`
-  max-width: 100%;
-`
-
-const Info = styled.p`
-  text-align: center;
-  margin-bottom: 3em;
-`
 
 const SectionHowItWorks = (props) => {
   const { rootClassName, className } = props
@@ -21,29 +13,45 @@ const SectionHowItWorks = (props) => {
   const classes = classNames(rootClassName || css.root, className)
   return (
     <div className={classes}>
-      <Image src={nashvilleForHireText} alt="Nashville For Hire" />
+      <div className={css.title}>
+        <FormattedMessage id="SectionHowItWorks.titleLineOne" />
+        <br />
+        <FormattedMessage id="SectionHowItWorks.titleLineTwo" />
+      </div>
 
-      <Info>
-        Make <strong>your next recording project&nbsp;your best yet</strong> by hiring Nashville's
-        top&nbsp;music professionals remotely.
-      </Info>
+      <div className={css.steps}>
+        <div className={css.step}>
+          <h2 className={css.stepTitle}>
+            <FormattedMessage id="SectionHowItWorks.part1Title" />
+          </h2>
+          <p>
+            <FormattedMessage id="SectionHowItWorks.part1Text" />
+          </p>
+        </div>
 
-      <div className={css.responsiveVideo}>
-        <iframe
-          src="https://player.vimeo.com/video/272277122"
-          width="640"
-          height="360"
-          frameBorder="0"
-          allow="autoplay; fullscreen"
-          allowFullScreen=""
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-          }}
-        />
+        <div className={css.step}>
+          <h2 className={css.stepTitle}>
+            <FormattedMessage id="SectionHowItWorks.part2Title" />
+          </h2>
+          <p>
+            <FormattedMessage id="SectionHowItWorks.part2Text" />
+          </p>
+        </div>
+
+        <div className={css.step}>
+          <h2 className={css.stepTitle}>
+            <FormattedMessage id="SectionHowItWorks.part3Title" />
+          </h2>
+          <p>
+            <FormattedMessage id="SectionHowItWorks.part3Text" />
+          </p>
+        </div>
+      </div>
+
+      <div className={css.createListingLink}>
+        <NamedLink name="NewListingPage">
+          <FormattedMessage id="SectionHowItWorks.createListingLink" />
+        </NamedLink>
       </div>
     </div>
   )

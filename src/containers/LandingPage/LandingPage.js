@@ -8,9 +8,6 @@ import { isScrollingDisabled } from '../../ducks/UI.duck'
 import config from '../../config'
 import {
   Page,
-  SectionHero,
-  SectionHowItWorks,
-  SectionLocations,
   LayoutSingleColumn,
   LayoutWrapperTopbar,
   LayoutWrapperMain,
@@ -22,9 +19,10 @@ import { TopbarContainer } from '../../containers'
 import facebookImage from '../../assets/images/saunatimeFacebook-1200x630.jpg'
 import twitterImage from '../../assets/images/saunatimeTwitter-600x314.jpg'
 import css from './LandingPage.css'
+import { Landing } from '../../components/NFHCustom'
 
 export const LandingPageComponent = (props) => {
-  const { history, intl, location, scrollingDisabled } = props
+  const { intl, scrollingDisabled } = props
 
   // Schema for search engines (helps them to understand what this page is about)
   // http://schema.org
@@ -57,14 +55,11 @@ export const LandingPageComponent = (props) => {
         <LayoutWrapperTopbar>
           <TopbarContainer />
         </LayoutWrapperTopbar>
+
         <LayoutWrapperMain>
-          <div className={css.heroContainer}>
-            <SectionHero className={css.hero} history={history} location={location} />
-          </div>
-          <div className={css.sectionContent}>
-            <SectionHowItWorks />
-          </div>
+          <Landing />
         </LayoutWrapperMain>
+
         <LayoutWrapperFooter>
           <Footer />
         </LayoutWrapperFooter>
