@@ -30,7 +30,7 @@ const filterConfig = [
       ],
     },
   },
-];
+]
 
 export const Amenities = {
   component: EditListingFeaturesForm,

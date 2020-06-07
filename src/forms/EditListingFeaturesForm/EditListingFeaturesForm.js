@@ -1,21 +1,21 @@
-import React from 'react';
-import { bool, func, shape, string } from 'prop-types';
-import classNames from 'classnames';
-import { Form as FinalForm } from 'react-final-form';
-import arrayMutators from 'final-form-arrays';
-import { FormattedMessage } from '../../util/reactIntl';
-import { findOptionsForSelectFilter } from '../../util/search';
-import { propTypes } from '../../util/types';
-import config from '../../config';
-import { Button, FieldCheckboxGroup, Form } from '../../components';
+import React from 'react'
+import { bool, func, shape, string } from 'prop-types'
+import classNames from 'classnames'
+import { Form as FinalForm } from 'react-final-form'
+import arrayMutators from 'final-form-arrays'
+import { FormattedMessage } from '../../util/reactIntl'
+import { findOptionsForSelectFilter } from '../../util/search'
+import { propTypes } from '../../util/types'
+import config from '../../config'
+import { Button, FieldCheckboxGroup, Form } from '../../components'
 
-import css from './EditListingFeaturesForm.css';
+import css from './EditListingFeaturesForm.css'
 
-const EditListingFeaturesFormComponent = props => (
+const EditListingFeaturesFormComponent = (props) => (
   <FinalForm
     {...props}
     mutators={{ ...arrayMutators }}
-    render={formRenderProps => {
+    render={(formRenderProps) => {
       const {
         disabled,
         ready,
@@ -29,27 +29,27 @@ const EditListingFeaturesFormComponent = props => (
         updateInProgress,
         fetchErrors,
         filterConfig,
-      } = formRenderProps;
+      } = formRenderProps
 
-      const classes = classNames(rootClassName || css.root, className);
-      const submitReady = (updated && pristine) || ready;
-      const submitInProgress = updateInProgress;
-      const submitDisabled = disabled || submitInProgress;
+      const classes = classNames(rootClassName || css.root, className)
+      const submitReady = (updated && pristine) || ready
+      const submitInProgress = updateInProgress
+      const submitDisabled = disabled || submitInProgress
 
-      const { updateListingError, showListingsError } = fetchErrors || {};
+      const { updateListingError, showListingsError } = fetchErrors || {}
       const errorMessage = updateListingError ? (
         <p className={css.error}>
           <FormattedMessage id="EditListingFeaturesForm.updateFailed" />
         </p>
-      ) : null;
+      ) : null
 
       const errorMessageShowListing = showListingsError ? (
         <p className={css.error}>
           <FormattedMessage id="EditListingFeaturesForm.showListingFailed" />
         </p>
-      ) : null;
+      ) : null
 
-      const options = findOptionsForSelectFilter('amenities', filterConfig);
+      const options = findOptionsForSelectFilter('amenities', filterConfig)
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessage}
@@ -67,17 +67,17 @@ const EditListingFeaturesFormComponent = props => (
             {saveActionMsg}
           </Button>
         </Form>
-      );
+      )
     }}
   />
-);
+)
 
 EditListingFeaturesFormComponent.defaultProps = {
   rootClassName: null,
   className: null,
   fetchErrors: null,
   filterConfig: config.custom.filters,
-};
+}
 
 EditListingFeaturesFormComponent.propTypes = {
   rootClassName: string,
@@ -94,8 +94,8 @@ EditListingFeaturesFormComponent.propTypes = {
     updateListingError: propTypes.error,
   }),
   filterConfig: propTypes.filterConfig,
-};
+}
 
-const EditListingFeaturesForm = EditListingFeaturesFormComponent;
+const EditListingFeaturesForm = EditListingFeaturesFormComponent
 
-export default EditListingFeaturesForm;
+export default EditListingFeaturesForm

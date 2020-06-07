@@ -6,14 +6,14 @@
  * endpoints are prefixed in the main server where this file is used.
  */
 
-const express = require('express');
+const express = require('express')
 
-const initiateLoginAs = require('./api/initiate-login-as');
-const loginAs = require('./api/login-as');
+const initiateLoginAs = require('./api/initiate-login-as')
+const loginAs = require('./api/login-as')
 
-const router = express.Router();
+const router = express.Router()
 
-router.get('/initiate-login-as', initiateLoginAs);
-router.get('/login-as', loginAs);
+router.get('/initiate-login-as', initiateLoginAs)
+router.get('/login-as', loginAs)
 
-module.exports = router;
+module.exports = router

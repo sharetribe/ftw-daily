@@ -1,17 +1,17 @@
-import React from 'react';
-import { bool, func, object, string } from 'prop-types';
-import classNames from 'classnames';
-import { FormattedMessage } from '../../util/reactIntl';
-import { ensureOwnListing } from '../../util/data';
-import { findOptionsForSelectFilter } from '../../util/search';
-import { LISTING_STATE_DRAFT } from '../../util/types';
-import { ListingLink } from '../../components';
-import { EditListingDescriptionForm } from '../../forms';
-import config from '../../config';
+import React from 'react'
+import { bool, func, object, string } from 'prop-types'
+import classNames from 'classnames'
+import { FormattedMessage } from '../../util/reactIntl'
+import { ensureOwnListing } from '../../util/data'
+import { findOptionsForSelectFilter } from '../../util/search'
+import { LISTING_STATE_DRAFT } from '../../util/types'
+import { ListingLink } from '../../components'
+import { EditListingDescriptionForm } from '../../forms'
+import config from '../../config'
 
-import css from './EditListingDescriptionPanel.css';
+import css from './EditListingDescriptionPanel.css'
 
-const EditListingDescriptionPanel = props => {
+const EditListingDescriptionPanel = (props) => {
   const {
     className,
     rootClassName,
@@ -24,13 +24,13 @@ const EditListingDescriptionPanel = props => {
     panelUpdated,
     updateInProgress,
     errors,
-  } = props;
+  } = props
 
-  const classes = classNames(rootClassName || css.root, className);
-  const currentListing = ensureOwnListing(listing);
-  const { description, title, publicData } = currentListing.attributes;
+  const classes = classNames(rootClassName || css.root, className)
+  const currentListing = ensureOwnListing(listing)
+  const { description, title, publicData } = currentListing.attributes
 
-  const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
+  const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT
   const panelTitle = isPublished ? (
     <FormattedMessage
       id="EditListingDescriptionPanel.title"
@@ -38,9 +38,9 @@ const EditListingDescriptionPanel = props => {
     />
   ) : (
     <FormattedMessage id="EditListingDescriptionPanel.createListingTitle" />
-  );
+  )
 
-  const categoryOptions = findOptionsForSelectFilter('category', config.custom.filters);
+  const categoryOptions = findOptionsForSelectFilter('category', config.custom.filters)
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
@@ -48,15 +48,15 @@ const EditListingDescriptionPanel = props => {
         className={css.form}
         initialValues={{ title, description, category: publicData.category }}
         saveActionMsg={submitButtonText}
-        onSubmit={values => {
-          const { title, description, category } = values;
+        onSubmit={(values) => {
+          const { title, description, category } = values
           const updateValues = {
             title: title.trim(),
             description,
             publicData: { category },
-          };
+          }
 
-          onSubmit(updateValues);
+          onSubmit(updateValues)
         }}
         onChange={onChange}
         disabled={disabled}
@@ -67,15 +67,15 @@ const EditListingDescriptionPanel = props => {
         categories={categoryOptions}
       />
     </div>
-  );
-};
+  )
+}
 
 EditListingDescriptionPanel.defaultProps = {
   className: null,
   rootClassName: null,
   errors: null,
   listing: null,
-};
+}
 
 EditListingDescriptionPanel.propTypes = {
   className: string,
@@ -92,6 +92,6 @@ EditListingDescriptionPanel.propTypes = {
   panelUpdated: bool.isRequired,
   updateInProgress: bool.isRequired,
   errors: object.isRequired,
-};
+}
 
-export default EditListingDescriptionPanel;
+export default EditListingDescriptionPanel

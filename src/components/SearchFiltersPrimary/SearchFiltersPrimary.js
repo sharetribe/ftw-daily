@@ -1,11 +1,11 @@
-import React from 'react';
-import { bool, func, node, number, string } from 'prop-types';
-import { FormattedMessage } from '../../util/reactIntl';
-import classNames from 'classnames';
+import React from 'react'
+import { bool, func, node, number, string } from 'prop-types'
+import { FormattedMessage } from '../../util/reactIntl'
+import classNames from 'classnames'
 
-import css from './SearchFiltersPrimary.css';
+import css from './SearchFiltersPrimary.css'
 
-const SearchFiltersPrimaryComponent = props => {
+const SearchFiltersPrimaryComponent = (props) => {
   const {
     rootClassName,
     className,
@@ -17,20 +17,20 @@ const SearchFiltersPrimaryComponent = props => {
     isSecondaryFiltersOpen,
     toggleSecondaryFiltersOpen,
     selectedSecondaryFiltersCount,
-  } = props;
+  } = props
 
-  const hasNoResult = listingsAreLoaded && resultsCount === 0;
-  const classes = classNames(rootClassName || css.root, className);
+  const hasNoResult = listingsAreLoaded && resultsCount === 0
+  const classes = classNames(rootClassName || css.root, className)
 
   const toggleSecondaryFiltersOpenButtonClasses =
     isSecondaryFiltersOpen || selectedSecondaryFiltersCount > 0
       ? css.searchFiltersPanelOpen
-      : css.searchFiltersPanelClosed;
+      : css.searchFiltersPanelClosed
   const toggleSecondaryFiltersOpenButton = toggleSecondaryFiltersOpen ? (
     <button
       className={toggleSecondaryFiltersOpenButtonClasses}
       onClick={() => {
-        toggleSecondaryFiltersOpen(!isSecondaryFiltersOpen);
+        toggleSecondaryFiltersOpen(!isSecondaryFiltersOpen)
       }}
     >
       <FormattedMessage
@@ -38,7 +38,7 @@ const SearchFiltersPrimaryComponent = props => {
         values={{ count: selectedSecondaryFiltersCount }}
       />
     </button>
-  ) : null;
+  ) : null
 
   return (
     <div className={classes}>
@@ -73,8 +73,8 @@ const SearchFiltersPrimaryComponent = props => {
         </div>
       ) : null}
     </div>
-  );
-};
+  )
+}
 
 SearchFiltersPrimaryComponent.defaultProps = {
   rootClassName: null,
@@ -85,7 +85,7 @@ SearchFiltersPrimaryComponent.defaultProps = {
   toggleSecondaryFiltersOpen: null,
   selectedSecondaryFiltersCount: 0,
   sortByComponent: null,
-};
+}
 
 SearchFiltersPrimaryComponent.propTypes = {
   rootClassName: string,
@@ -97,8 +97,8 @@ SearchFiltersPrimaryComponent.propTypes = {
   toggleSecondaryFiltersOpen: func,
   selectedSecondaryFiltersCount: number,
   sortByComponent: node,
-};
+}
 
-const SearchFiltersPrimary = SearchFiltersPrimaryComponent;
+const SearchFiltersPrimary = SearchFiltersPrimaryComponent
 
-export default SearchFiltersPrimary;
+export default SearchFiltersPrimary

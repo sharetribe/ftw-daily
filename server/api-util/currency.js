@@ -1,22 +1,22 @@
-const Decimal = require('decimal.js');
-const has = require('lodash/has');
-const { types } = require('sharetribe-flex-sdk');
-const { Money } = types;
+const Decimal = require('decimal.js')
+const has = require('lodash/has')
+const { types } = require('sharetribe-flex-sdk')
+const { Money } = types
 
 /** Helper functions for handling currency */
 
 // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER
 // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/MIN_SAFE_INTEGER
 // https://stackoverflow.com/questions/26380364/why-is-number-max-safe-integer-9-007-199-254-740-991-and-not-9-007-199-254-740-9
-const MIN_SAFE_INTEGER = Number.MIN_SAFE_INTEGER || -1 * (2 ** 53 - 1);
-const MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER || 2 ** 53 - 1;
+const MIN_SAFE_INTEGER = Number.MIN_SAFE_INTEGER || -1 * (2 ** 53 - 1)
+const MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER || 2 ** 53 - 1
 
-const isSafeNumber = decimalValue => {
+const isSafeNumber = (decimalValue) => {
   if (!(decimalValue instanceof Decimal)) {
-    throw new Error('Value must be a Decimal');
+    throw new Error('Value must be a Decimal')
   }
-  return decimalValue.gte(MIN_SAFE_INTEGER) && decimalValue.lte(MAX_SAFE_INTEGER);
-};
+  return decimalValue.gte(MIN_SAFE_INTEGER) && decimalValue.lte(MAX_SAFE_INTEGER)
+}
 
 // See: https://en.wikipedia.org/wiki/ISO_4217
 // See: https://stripe.com/docs/currencies
@@ -37,17 +37,17 @@ const subUnitDivisors = {
   SEK: 100,
   SGD: 100,
   USD: 100,
-};
+}
 
 // Get the minor unit divisor for the given currency
-exports.unitDivisor = currency => {
+exports.unitDivisor = (currency) => {
   if (!has(subUnitDivisors, currency)) {
     throw new Error(
-      `No minor unit divisor defined for currency: ${currency} in /server/api-util/currency.js`
-    );
+      `No minor unit divisor defined for currency: ${currency} in /server/api-util/currency.js`,
+    )
   }
-  return subUnitDivisors[currency];
-};
+  return subUnitDivisors[currency]
+}
 
 ////////// Currency manipulation in string format //////////
 
@@ -61,10 +61,10 @@ exports.unitDivisor = currency => {
  */
 const ensureSeparator = (str, useComma = false) => {
   if (typeof str !== 'string') {
-    throw new TypeError('Parameter must be a string');
+    throw new TypeError('Parameter must be a string')
   }
-  return useComma ? str.replace(/\./g, ',') : str.replace(/,/g, '.');
-};
+  return useComma ? str.replace(/\./g, ',') : str.replace(/,/g, '.')
+}
 
 /**
  * Ensures that the given string uses only dots
@@ -74,9 +74,9 @@ const ensureSeparator = (str, useComma = false) => {
  *
  * @return {String} converted string
  */
-const ensureDotSeparator = str => {
-  return ensureSeparator(str, false);
-};
+const ensureDotSeparator = (str) => {
+  return ensureSeparator(str, false)
+}
 
 /**
  * Convert string to Decimal object (from Decimal.js math library)
@@ -86,29 +86,29 @@ const ensureDotSeparator = str => {
  *
  * @return {Decimal} numeral value
  */
-const convertToDecimal = str => {
-  const dotFormattedStr = ensureDotSeparator(str);
-  return new Decimal(dotFormattedStr);
-};
+const convertToDecimal = (str) => {
+  const dotFormattedStr = ensureDotSeparator(str)
+  return new Decimal(dotFormattedStr)
+}
 
 // Divisor can be positive value given as Decimal, Number, or String
-const convertDivisorToDecimal = divisor => {
+const convertDivisorToDecimal = (divisor) => {
   try {
-    const divisorAsDecimal = new Decimal(divisor);
+    const divisorAsDecimal = new Decimal(divisor)
     if (divisorAsDecimal.isNegative()) {
-      throw new Error(`Parameter (${divisor}) must be a positive number.`);
+      throw new Error(`Parameter (${divisor}) must be a positive number.`)
     }
-    return divisorAsDecimal;
+    return divisorAsDecimal
   } catch (e) {
-    throw new Error(`Parameter (${divisor}) must present a number.`, e);
+    throw new Error(`Parameter (${divisor}) must present a number.`, e)
   }
-};
+}
 
 // Detect if the given value is a goog.math.Long object
 // See: https://google.github.io/closure-library/api/goog.math.Long.html
-const isGoogleMathLong = value => {
-  return typeof value === 'object' && isNumber(value.low_) && isNumber(value.high_);
-};
+const isGoogleMathLong = (value) => {
+  return typeof value === 'object' && isNumber(value.low_) && isNumber(value.high_)
+}
 
 /**
  * Converts given value to sub unit value and returns it as a number
@@ -124,25 +124,25 @@ const isGoogleMathLong = value => {
  * @return {number} converted value
  */
 exports.convertUnitToSubUnit = (value, subUnitDivisor, useComma = false) => {
-  const subUnitDivisorAsDecimal = convertDivisorToDecimal(subUnitDivisor);
+  const subUnitDivisorAsDecimal = convertDivisorToDecimal(subUnitDivisor)
 
   if (!(typeof value === 'number')) {
-    throw new TypeError('Value must be number');
+    throw new TypeError('Value must be number')
   }
 
-  const val = new Decimal(value);
-  const amount = val.times(subUnitDivisorAsDecimal);
+  const val = new Decimal(value)
+  const amount = val.times(subUnitDivisorAsDecimal)
 
   if (!isSafeNumber(amount)) {
     throw new Error(
-      `Cannot represent money minor unit value ${amount.toString()} safely as a number`
-    );
+      `Cannot represent money minor unit value ${amount.toString()} safely as a number`,
+    )
   } else if (amount.isInteger()) {
-    return amount.toNumber();
+    return amount.toNumber()
   } else {
-    throw new Error(`value must divisible by ${subUnitDivisor}`);
+    throw new Error(`value must divisible by ${subUnitDivisor}`)
   }
-};
+}
 
 /**
  * Convert Money to a number
@@ -151,12 +151,12 @@ exports.convertUnitToSubUnit = (value, subUnitDivisor, useComma = false) => {
  *
  * @return {Number} converted value
  */
-exports.convertMoneyToNumber = value => {
+exports.convertMoneyToNumber = (value) => {
   if (!(value instanceof Money)) {
-    throw new Error('Value must be a Money type');
+    throw new Error('Value must be a Money type')
   }
-  const subUnitDivisorAsDecimal = convertDivisorToDecimal(this.unitDivisor(value.currency));
-  let amount;
+  const subUnitDivisorAsDecimal = convertDivisorToDecimal(this.unitDivisor(value.currency))
+  let amount
 
   if (isGoogleMathLong(value.amount)) {
     // TODO: temporarily also handle goog.math.Long values created by
@@ -164,18 +164,18 @@ exports.convertMoneyToNumber = value => {
     // removed when the value.amount will be a proper Decimal type.
 
     // eslint-disable-next-line no-console
-    console.warn('goog.math.Long value in money amount:', value.amount, value.amount.toString());
+    console.warn('goog.math.Long value in money amount:', value.amount, value.amount.toString())
 
-    amount = new Decimal(value.amount.toString());
+    amount = new Decimal(value.amount.toString())
   } else {
-    amount = new Decimal(value.amount);
+    amount = new Decimal(value.amount)
   }
 
   if (!isSafeNumber(amount)) {
     throw new Error(
-      `Cannot represent money minor unit value ${amount.toString()} safely as a number`
-    );
+      `Cannot represent money minor unit value ${amount.toString()} safely as a number`,
+    )
   }
 
-  return amount.dividedBy(subUnitDivisorAsDecimal).toNumber();
-};
+  return amount.dividedBy(subUnitDivisorAsDecimal).toNumber()
+}

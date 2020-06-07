@@ -1,7 +1,7 @@
-const { calculateQuantityFromDates, calculateTotalFromLineItems } = require('./lineItemHelpers');
+const { calculateQuantityFromDates, calculateTotalFromLineItems } = require('./lineItemHelpers')
 
-const unitType = 'line-item/night';
-const PROVIDER_COMMISSION_PERCENTAGE = -10;
+const unitType = 'line-item/night'
+const PROVIDER_COMMISSION_PERCENTAGE = -10
 
 /** Returns collection of lineItems (max 50)
  *
@@ -24,24 +24,24 @@ const PROVIDER_COMMISSION_PERCENTAGE = -10;
  * @returns {Array} lineItems
  */
 exports.transactionLineItems = (listing, bookingData) => {
-  const unitPrice = listing.attributes.price;
-  const { startDate, endDate } = bookingData;
+  const unitPrice = listing.attributes.price
+  const { startDate, endDate } = bookingData
 
   const booking = {
     code: 'line-item/nights',
     unitPrice,
     quantity: calculateQuantityFromDates(startDate, endDate, unitType),
     includeFor: ['customer', 'provider'],
-  };
+  }
 
   const providerCommission = {
     code: 'line-item/provider-commission',
     unitPrice: calculateTotalFromLineItems([booking]),
     percentage: PROVIDER_COMMISSION_PERCENTAGE,
     includeFor: ['provider'],
-  };
+  }
 
-  const lineItems = [booking, providerCommission];
+  const lineItems = [booking, providerCommission]
 
-  return lineItems;
-};
+  return lineItems
+}

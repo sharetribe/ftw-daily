@@ -1,12 +1,12 @@
-const Decimal = require('decimal.js');
-const has = require('lodash/has');
-const { types } = require('sharetribe-flex-sdk');
-const { Money } = types;
+const Decimal = require('decimal.js')
+const has = require('lodash/has')
+const { types } = require('sharetribe-flex-sdk')
+const { Money } = types
 
-const { convertMoneyToNumber, unitDivisor, convertUnitToSubUnit } = require('./currency');
-const { nightsBetween, daysBetween } = require('./dates');
-const LINE_ITEM_NIGHT = 'line-item/night';
-const LINE_ITEM_DAY = 'line-item/day';
+const { convertMoneyToNumber, unitDivisor, convertUnitToSubUnit } = require('./currency')
+const { nightsBetween, daysBetween } = require('./dates')
+const LINE_ITEM_NIGHT = 'line-item/night'
+const LINE_ITEM_DAY = 'line-item/day'
 
 /** Helper functions for constructing line items*/
 
@@ -20,13 +20,13 @@ const LINE_ITEM_DAY = 'line-item/day';
  * @returns {Money} lineTotal
  */
 exports.calculateTotalPriceFromQuantity = (unitPrice, unitCount) => {
-  const numericPrice = convertMoneyToNumber(unitPrice);
-  const numericTotalPrice = new Decimal(numericPrice).times(unitCount).toNumber();
+  const numericPrice = convertMoneyToNumber(unitPrice)
+  const numericTotalPrice = new Decimal(numericPrice).times(unitCount).toNumber()
   return new Money(
     convertUnitToSubUnit(numericTotalPrice, unitDivisor(unitPrice.currency)),
-    unitPrice.currency
-  );
-};
+    unitPrice.currency,
+  )
+}
 
 /**
  * Calculates lineTotal for lineItem based on percentage.
@@ -38,16 +38,13 @@ exports.calculateTotalPriceFromQuantity = (unitPrice, unitCount) => {
  * @returns {Money} lineTotal
  */
 exports.calculateTotalPriceFromPercentage = (unitPrice, percentage) => {
-  const numericPrice = convertMoneyToNumber(unitPrice);
-  const numericTotalPrice = new Decimal(numericPrice)
-    .times(percentage)
-    .dividedBy(100)
-    .toNumber();
+  const numericPrice = convertMoneyToNumber(unitPrice)
+  const numericTotalPrice = new Decimal(numericPrice).times(percentage).dividedBy(100).toNumber()
   return new Money(
     convertUnitToSubUnit(numericTotalPrice, unitDivisor(unitPrice.currency)),
-    unitPrice.currency
-  );
-};
+    unitPrice.currency,
+  )
+}
 
 /**
  * Calculates lineTotal for lineItem based on seats and units.
@@ -61,18 +58,15 @@ exports.calculateTotalPriceFromPercentage = (unitPrice, percentage) => {
  */
 exports.calculateTotalPriceFromSeats = (unitPrice, unitCount, seats) => {
   if (seats < 0) {
-    throw new Error(`Value of seats can't be negative`);
+    throw new Error(`Value of seats can't be negative`)
   }
-  const numericPrice = convertMoneyToNumber(unitPrice);
-  const numericTotalPrice = new Decimal(numericPrice)
-    .times(unitCount)
-    .times(seats)
-    .toNumber();
+  const numericPrice = convertMoneyToNumber(unitPrice)
+  const numericTotalPrice = new Decimal(numericPrice).times(unitCount).times(seats).toNumber()
   return new Money(
     convertUnitToSubUnit(numericTotalPrice, unitDivisor(unitPrice.currency)),
-    unitPrice.currency
-  );
-};
+    unitPrice.currency,
+  )
+}
 
 /**
  * Calculates the quantity based on the booking start and end dates depending on booking type.
@@ -85,12 +79,12 @@ exports.calculateTotalPriceFromSeats = (unitPrice, unitCount, seats) => {
  */
 exports.calculateQuantityFromDates = (startDate, endDate, type) => {
   if (type === LINE_ITEM_NIGHT) {
-    return nightsBetween(startDate, endDate);
+    return nightsBetween(startDate, endDate)
   } else if (type === LINE_ITEM_DAY) {
-    return daysBetween(startDate, endDate);
+    return daysBetween(startDate, endDate)
   }
-  throw new Error(`Can't calculate quantity from dates to unit type: ${type}`);
-};
+  throw new Error(`Can't calculate quantity from dates to unit type: ${type}`)
+}
 
 /**
  *
@@ -103,21 +97,21 @@ exports.calculateQuantityFromDates = (startDate, endDate, type) => {
  * @return {Money} lineTotal
  *
  */
-exports.calculateLineTotal = lineItem => {
-  const { code, unitPrice, quantity, percentage, seats, units } = lineItem;
+exports.calculateLineTotal = (lineItem) => {
+  const { code, unitPrice, quantity, percentage, seats, units } = lineItem
 
   if (quantity) {
-    return this.calculateTotalPriceFromQuantity(unitPrice, quantity);
+    return this.calculateTotalPriceFromQuantity(unitPrice, quantity)
   } else if (percentage) {
-    return this.calculateTotalPriceFromPercentage(unitPrice, percentage);
+    return this.calculateTotalPriceFromPercentage(unitPrice, percentage)
   } else if (seats && units) {
-    return this.calculateTotalPriceFromSeats(unitPrice, units, seats);
+    return this.calculateTotalPriceFromSeats(unitPrice, units, seats)
   } else {
     throw new Error(
-      `Can't calculate the lineTotal of lineItem: ${code}. Make sure the lineItem has quantity, percentage or both seats and units`
-    );
+      `Can't calculate the lineTotal of lineItem: ${code}. Make sure the lineItem has quantity, percentage or both seats and units`,
+    )
   }
-};
+}
 
 /**
  * Calculates the total sum of lineTotals for given lineItems
@@ -125,40 +119,40 @@ exports.calculateLineTotal = lineItem => {
  * @param {Array} lineItems
  * @retuns {Money} total sum
  */
-exports.calculateTotalFromLineItems = lineItems => {
+exports.calculateTotalFromLineItems = (lineItems) => {
   const numericTotalPrice = lineItems.reduce((sum, lineItem) => {
-    const lineTotal = this.calculateLineTotal(lineItem);
-    const numericPrice = convertMoneyToNumber(lineTotal);
-    return new Decimal(numericPrice).add(sum);
-  }, 0);
+    const lineTotal = this.calculateLineTotal(lineItem)
+    const numericPrice = convertMoneyToNumber(lineTotal)
+    return new Decimal(numericPrice).add(sum)
+  }, 0)
 
-  const unitPrice = lineItems[0].unitPrice;
+  const unitPrice = lineItems[0].unitPrice
 
   return new Money(
     convertUnitToSubUnit(numericTotalPrice.toNumber(), unitDivisor(unitPrice.currency)),
-    unitPrice.currency
-  );
-};
+    unitPrice.currency,
+  )
+}
 
 /**
  * Calculates the total sum of lineTotals for given lineItems where `includeFor` includes `provider`
  * @param {*} lineItems
  * @returns {Money} total sum
  */
-exports.calculateTotalForProvider = lineItems => {
-  const providerLineItems = lineItems.filter(lineItem => lineItem.includeFor.includes('provider'));
-  return this.calculateTotalFromLineItems(providerLineItems);
-};
+exports.calculateTotalForProvider = (lineItems) => {
+  const providerLineItems = lineItems.filter((lineItem) => lineItem.includeFor.includes('provider'))
+  return this.calculateTotalFromLineItems(providerLineItems)
+}
 
 /**
  * Calculates the total sum of lineTotals for given lineItems where `includeFor` includes `customer`
  * @param {*} lineItems
  * @returns {Money} total sum
  */
-exports.calculateTotalForCustomer = lineItems => {
-  const providerLineItems = lineItems.filter(lineItem => lineItem.includeFor.includes('customer'));
-  return this.calculateTotalFromLineItems(providerLineItems);
-};
+exports.calculateTotalForCustomer = (lineItems) => {
+  const providerLineItems = lineItems.filter((lineItem) => lineItem.includeFor.includes('customer'))
+  return this.calculateTotalFromLineItems(providerLineItems)
+}
 
 /**
  * Constructs lineItems that can be used directly in FTW.
@@ -171,25 +165,25 @@ exports.calculateTotalForCustomer = lineItems => {
  * @returns {Array} lineItems with lineTotal and reversal info
  *
  */
-exports.constructValidLineItems = lineItems => {
-  const lineItemsWithTotals = lineItems.map(lineItem => {
-    const { code, quantity, percentage } = lineItem;
+exports.constructValidLineItems = (lineItems) => {
+  const lineItemsWithTotals = lineItems.map((lineItem) => {
+    const { code, quantity, percentage } = lineItem
 
     if (!/^line-item\/.+/.test(code)) {
-      throw new Error(`Invalid line item code: ${code}`);
+      throw new Error(`Invalid line item code: ${code}`)
     }
 
     // lineItems are expected to be in similar format as when they are returned from API
     // so that we can use them in e.g. BookingBreakdown component.
     // This means we need to convert quantity to Decimal and add attributes lineTotal and reversal to lineItems
-    const lineTotal = this.calculateLineTotal(lineItem);
+    const lineTotal = this.calculateLineTotal(lineItem)
     return {
       ...lineItem,
       lineTotal,
       quantity: quantity ? new Decimal(quantity) : null,
       percentage: percentage ? new Decimal(percentage) : null,
       reversal: false,
-    };
-  });
-  return lineItemsWithTotals;
-};
+    }
+  })
+  return lineItemsWithTotals
+}

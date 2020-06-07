@@ -143,7 +143,7 @@ export const filters = [
       ],
     },
   },
-];
+]
 
 export const sortConfig = {
   // Enable/disable the sorting control in the SearchPage
@@ -171,4 +171,4 @@ export const sortConfig = {
     // for handling the internal state of the sorting dropdown.
     { key: 'relevance', label: 'Relevance', longLabel: 'Relevance (Keyword search)' },
   ],
-};
+}

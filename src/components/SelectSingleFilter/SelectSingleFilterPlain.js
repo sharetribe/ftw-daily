@@ -1,35 +1,35 @@
-import React, { Component } from 'react';
-import { arrayOf, bool, func, node, object, shape, string } from 'prop-types';
-import classNames from 'classnames';
-import { FormattedMessage } from '../../util/reactIntl';
+import React, { Component } from 'react'
+import { arrayOf, bool, func, node, object, shape, string } from 'prop-types'
+import classNames from 'classnames'
+import { FormattedMessage } from '../../util/reactIntl'
 
-import css from './SelectSingleFilterPlain.css';
+import css from './SelectSingleFilterPlain.css'
 
-const getQueryParamName = queryParamNames => {
-  return Array.isArray(queryParamNames) ? queryParamNames[0] : queryParamNames;
-};
+const getQueryParamName = (queryParamNames) => {
+  return Array.isArray(queryParamNames) ? queryParamNames[0] : queryParamNames
+}
 
 class SelectSingleFilterPlain extends Component {
   constructor(props) {
-    super(props);
-    this.state = { isOpen: true };
-    this.selectOption = this.selectOption.bind(this);
-    this.toggleIsOpen = this.toggleIsOpen.bind(this);
+    super(props)
+    this.state = { isOpen: true }
+    this.selectOption = this.selectOption.bind(this)
+    this.toggleIsOpen = this.toggleIsOpen.bind(this)
   }
 
   selectOption(option, e) {
-    const { queryParamNames, onSelect } = this.props;
-    const queryParamName = getQueryParamName(queryParamNames);
-    onSelect({ [queryParamName]: option });
+    const { queryParamNames, onSelect } = this.props
+    const queryParamName = getQueryParamName(queryParamNames)
+    onSelect({ [queryParamName]: option })
 
     // blur event target if event is passed
     if (e && e.currentTarget) {
-      e.currentTarget.blur();
+      e.currentTarget.blur()
     }
   }
 
   toggleIsOpen() {
-    this.setState({ isOpen: !this.state.isOpen });
+    this.setState({ isOpen: !this.state.isOpen })
   }
 
   render() {
@@ -42,22 +42,22 @@ class SelectSingleFilterPlain extends Component {
       initialValues,
       twoColumns,
       useBullets,
-    } = this.props;
+    } = this.props
 
-    const queryParamName = getQueryParamName(queryParamNames);
+    const queryParamName = getQueryParamName(queryParamNames)
     const initialValue =
-      initialValues && initialValues[queryParamName] ? initialValues[queryParamName] : null;
-    const labelClass = initialValue ? css.filterLabelSelected : css.filterLabel;
+      initialValues && initialValues[queryParamName] ? initialValues[queryParamName] : null
+    const labelClass = initialValue ? css.filterLabelSelected : css.filterLabel
 
-    const hasBullets = useBullets || twoColumns;
+    const hasBullets = useBullets || twoColumns
     const optionsContainerClass = classNames({
       [css.optionsContainerOpen]: this.state.isOpen,
       [css.optionsContainerClosed]: !this.state.isOpen,
       [css.hasBullets]: hasBullets,
       [css.twoColumns]: twoColumns,
-    });
+    })
 
-    const classes = classNames(rootClassName || css.root, className);
+    const classes = classNames(rootClassName || css.root, className)
 
     return (
       <div className={classes}>
@@ -65,15 +65,15 @@ class SelectSingleFilterPlain extends Component {
           <button className={css.labelButton} onClick={this.toggleIsOpen}>
             <span className={labelClass}>{label}</span>
           </button>
-          <button className={css.clearButton} onClick={e => this.selectOption(null, e)}>
+          <button className={css.clearButton} onClick={(e) => this.selectOption(null, e)}>
             <FormattedMessage id={'SelectSingleFilter.plainClear'} />
           </button>
         </div>
         <div className={optionsContainerClass}>
-          {options.map(option => {
+          {options.map((option) => {
             // check if this option is selected
-            const selected = initialValue === option.key;
-            const optionClass = hasBullets && selected ? css.optionSelected : css.option;
+            const selected = initialValue === option.key
+            const optionClass = hasBullets && selected ? css.optionSelected : css.option
             // menu item selected bullet or border class
             const optionBorderClass = hasBullets
               ? classNames({
@@ -83,7 +83,7 @@ class SelectSingleFilterPlain extends Component {
               : classNames({
                   [css.optionBorderSelected]: selected,
                   [css.optionBorder]: !selected,
-                });
+                })
             return (
               <button
                 key={option.key}
@@ -93,11 +93,11 @@ class SelectSingleFilterPlain extends Component {
                 <span className={optionBorderClass} />
                 {option.label}
               </button>
-            );
+            )
           })}
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -107,7 +107,7 @@ SelectSingleFilterPlain.defaultProps = {
   initialValues: null,
   twoColumns: false,
   useBullets: false,
-};
+}
 
 SelectSingleFilterPlain.propTypes = {
   rootClassName: string,
@@ -120,11 +120,11 @@ SelectSingleFilterPlain.propTypes = {
     shape({
       key: string.isRequired,
       label: string.isRequired,
-    })
+    }),
   ).isRequired,
   initialValues: object,
   twoColumns: bool,
   useBullets: bool,
-};
+}
 
-export default SelectSingleFilterPlain;
+export default SelectSingleFilterPlain
