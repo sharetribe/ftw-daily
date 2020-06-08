@@ -80,7 +80,7 @@ const FaqPage = () => {
               <br></br>
               <h2 id="is-there-a-cost-to-list-my-space-on-hotpatch-">Is there a cost to list my space on HotPatch?</h2>
               <p>Not a penny! Listing a space is completely free.</p>
-              <p>HotPatch only charges a small transaction fee of 10% on all bookings to help us maintain all
+              <p>HotPatch only charges a small transaction fee of 5% on all bookings to help us maintain all
               the awesome tools you need to Make Space Work!</p>
               <br></br>
               <h2 id="how-much-should-i-charge-for-my-patch-">How much should I charge for my Patch?</h2>
