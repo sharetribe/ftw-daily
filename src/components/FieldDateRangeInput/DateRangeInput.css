@@ -255,6 +255,10 @@
   & :global(.CalendarMonth_caption) {
     text-transform: capitalize;
   }
+
+  & :global(.DateInput_input__disabled) {
+    font-style: normal;
+  }
 }
 
 /**

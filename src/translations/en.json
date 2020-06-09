@@ -63,6 +63,7 @@
   "BookingBreakdown.total": "Total price",
   "BookingDatesForm.bookingEndTitle": "End date",
   "BookingDatesForm.bookingStartTitle": "Start date",
+  "BookingDatesForm.fetchLineItemsError": "Oops, something went wrong. Please refresh the page and try again.",
   "BookingDatesForm.listingCurrencyInvalid": "Oops, the currency of the listing doesn't match the currency of the marketplace.",
   "BookingDatesForm.listingPriceMissing": "Oops, this listing has no price!",
   "BookingDatesForm.ownListing": "You won't be able to book your own listing.",
