@@ -5,6 +5,7 @@ import { types as sdkTypes } from '../../util/sdkLoader';
 import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { transactionLineItems } from '../../util/api';
+import * as log from '../../util/log';
 import { denormalisedResponseEntities } from '../../util/data';
 import { TRANSITION_ENQUIRE } from '../../util/transaction';
 import {
@@ -296,16 +297,18 @@ export const sendEnquiry = (listingId, message) => (dispatch, getState, sdk) => 
 };
 
 export const fetchTransactionLineItems = ({ bookingData, listingId, isOwnListing }) => dispatch => {
-  console.log('On fetch line items ');
   dispatch(fetchLineItemsRequest());
   transactionLineItems({ bookingData, listingId, isOwnListing })
     .then(response => {
-      console.log('Response: ', response);
-      dispatch(fetchLineItemsSuccess(response));
+      const lineItems = response.data;
+      dispatch(fetchLineItemsSuccess(lineItems));
     })
     .catch(e => {
       dispatch(fetchLineItemsError(storableError(e)));
-      console.log('e', e);
+      log.error(e, 'fetching-line-items-failed', {
+        listingId: listingId.uuid,
+        bookingData: bookingData,
+      });
     });
 };
 
