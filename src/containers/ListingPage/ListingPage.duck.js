@@ -4,6 +4,7 @@ import config from '../../config';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
+import { transactionLineItems } from '../../util/api';
 import { denormalisedResponseEntities } from '../../util/data';
 import { TRANSITION_ENQUIRE } from '../../util/transaction';
 import {
@@ -29,6 +30,10 @@ export const FETCH_TIME_SLOTS_REQUEST = 'app/ListingPage/FETCH_TIME_SLOTS_REQUES
 export const FETCH_TIME_SLOTS_SUCCESS = 'app/ListingPage/FETCH_TIME_SLOTS_SUCCESS';
 export const FETCH_TIME_SLOTS_ERROR = 'app/ListingPage/FETCH_TIME_SLOTS_ERROR';
 
+export const FETCH_LINE_ITEMS_REQUEST = 'app/ListingPage/FETCH_LINE_ITEMS_REQUEST';
+export const FETCH_LINE_ITEMS_SUCCESS = 'app/ListingPage/FETCH_LINE_ITEMS_SUCCESS';
+export const FETCH_LINE_ITEMS_ERROR = 'app/ListingPage/FETCH_LINE_ITEMS_ERROR';
+
 export const SEND_ENQUIRY_REQUEST = 'app/ListingPage/SEND_ENQUIRY_REQUEST';
 export const SEND_ENQUIRY_SUCCESS = 'app/ListingPage/SEND_ENQUIRY_SUCCESS';
 export const SEND_ENQUIRY_ERROR = 'app/ListingPage/SEND_ENQUIRY_ERROR';
@@ -42,6 +47,9 @@ const initialState = {
   fetchReviewsError: null,
   timeSlots: null,
   fetchTimeSlotsError: null,
+  lineItems: null,
+  fetchLineItemsInProgress: false,
+  fetchLineItemsError: null,
   sendEnquiryInProgress: false,
   sendEnquiryError: null,
   enquiryModalOpenForListingId: null,
@@ -71,6 +79,13 @@ const listingPageReducer = (state = initialState, action = {}) => {
       return { ...state, timeSlots: payload };
     case FETCH_TIME_SLOTS_ERROR:
       return { ...state, fetchTimeSlotsError: payload };
+
+    case FETCH_LINE_ITEMS_REQUEST:
+      return { ...state, fetchLineItemsInProgress: true, fetchLineItemsError: null };
+    case FETCH_LINE_ITEMS_SUCCESS:
+      return { ...state, fetchLineItemsInProgress: false, lineItems: payload };
+    case FETCH_LINE_ITEMS_ERROR:
+      return { ...state, fetchLineItemsInProgress: false, fetchLineItemsError: payload };
 
     case SEND_ENQUIRY_REQUEST:
       return { ...state, sendEnquiryInProgress: true, sendEnquiryError: null };
@@ -119,6 +134,17 @@ export const fetchTimeSlotsSuccess = timeSlots => ({
 });
 export const fetchTimeSlotsError = error => ({
   type: FETCH_TIME_SLOTS_ERROR,
+  error: true,
+  payload: error,
+});
+
+export const fetchLineItemsRequest = () => ({ type: FETCH_LINE_ITEMS_REQUEST });
+export const fetchLineItemsSuccess = lineItems => ({
+  type: FETCH_LINE_ITEMS_SUCCESS,
+  payload: lineItems,
+});
+export const fetchLineItemsError = error => ({
+  type: FETCH_LINE_ITEMS_ERROR,
   error: true,
   payload: error,
 });
@@ -266,6 +292,20 @@ export const sendEnquiry = (listingId, message) => (dispatch, getState, sdk) => 
     .catch(e => {
       dispatch(sendEnquiryError(storableError(e)));
       throw e;
+    });
+};
+
+export const fetchTransactionLineItems = ({ bookingData, listingId, isOwnListing }) => dispatch => {
+  console.log('On fetch line items ');
+  dispatch(fetchLineItemsRequest());
+  transactionLineItems({ bookingData, listingId, isOwnListing })
+    .then(response => {
+      console.log('Response: ', response);
+      dispatch(fetchLineItemsSuccess(response));
+    })
+    .catch(e => {
+      dispatch(fetchLineItemsError(storableError(e)));
+      console.log('e', e);
     });
 };
 
