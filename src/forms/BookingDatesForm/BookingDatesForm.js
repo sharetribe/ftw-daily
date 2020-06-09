@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { string, bool, arrayOf } from 'prop-types';
+import { string, bool, arrayOf, array, func } from 'prop-types';
 import { compose } from 'redux';
-import { Form as FinalForm } from 'react-final-form';
+import { Form as FinalForm, FormSpy } from 'react-final-form';
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 import classNames from 'classnames';
 import moment from 'moment';
@@ -9,7 +9,7 @@ import { required, bookingDatesRequired, composeValidators } from '../../util/va
 import { START_DATE, END_DATE } from '../../util/dates';
 import { propTypes } from '../../util/types';
 import config from '../../config';
-import { Form, PrimaryButton, FieldDateRangeInput } from '../../components';
+import { Form, IconSpinner, PrimaryButton, FieldDateRangeInput } from '../../components';
 import EstimatedBreakdownMaybe from './EstimatedBreakdownMaybe';
 
 import css from './BookingDatesForm.css';
@@ -22,6 +22,7 @@ export class BookingDatesFormComponent extends Component {
     this.state = { focusedInput: null };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.onFocusedInputChange = this.onFocusedInputChange.bind(this);
+    this.handleOnChange = this.handleOnChange.bind(this);
   }
 
   // Function that can be passed to nested components
@@ -44,6 +45,25 @@ export class BookingDatesFormComponent extends Component {
       this.setState({ focusedInput: END_DATE });
     } else {
       this.props.onSubmit(e);
+    }
+  }
+
+  // When the values of the form are updated we need to fetch
+  // lineItems from FTW backend for the EstimatedTransactionMaybe
+  // In case you add more fields to the form, make sure you add
+  // the values here to the bookingData object.
+  handleOnChange(formValues) {
+    const { startDate, endDate } =
+      formValues.values && formValues.values.bookingDates ? formValues.values.bookingDates : {};
+    const listingId = this.props.listingId;
+    const isOwnListing = this.props.isOwnListing;
+
+    if (startDate && endDate && !this.props.fetchLineItemsInProgress) {
+      this.props.onFetchTransactionLineItems({
+        bookingData: { startDate, endDate },
+        listingId,
+        isOwnListing,
+      });
     }
   }
 
@@ -84,19 +104,25 @@ export class BookingDatesFormComponent extends Component {
             intl,
             isOwnListing,
             submitButtonWrapperClassName,
-            unitPrice,
             unitType,
             values,
             timeSlots,
             fetchTimeSlotsError,
+            lineItems,
+            fetchLineItemsInProgress,
+            fetchLineItemsError,
           } = fieldRenderProps;
           const { startDate, endDate } = values && values.bookingDates ? values.bookingDates : {};
 
           const bookingStartLabel = intl.formatMessage({
             id: 'BookingDatesForm.bookingStartTitle',
           });
-          const bookingEndLabel = intl.formatMessage({ id: 'BookingDatesForm.bookingEndTitle' });
-          const requiredMessage = intl.formatMessage({ id: 'BookingDatesForm.requiredDate' });
+          const bookingEndLabel = intl.formatMessage({
+            id: 'BookingDatesForm.bookingEndTitle',
+          });
+          const requiredMessage = intl.formatMessage({
+            id: 'BookingDatesForm.requiredDate',
+          });
           const startDateErrorMessage = intl.formatMessage({
             id: 'FieldDateRangeInput.invalidStartDate',
           });
@@ -104,34 +130,45 @@ export class BookingDatesFormComponent extends Component {
             id: 'FieldDateRangeInput.invalidEndDate',
           });
           const timeSlotsError = fetchTimeSlotsError ? (
-            <p className={css.timeSlotsError}>
+            <p className={css.sideBarError}>
               <FormattedMessage id="BookingDatesForm.timeSlotsError" />
             </p>
           ) : null;
 
-          // This is the place to collect breakdown estimation data. See the
-          // EstimatedBreakdownMaybe component to change the calculations
-          // for customized payment processes.
+          // This is the place to collect breakdown estimation data.
+          // Note: lineItems are calculated and fetched from FTW backend
+          // so we need to pass only booking data that is needed otherwise
+          // If you have added new fields to the form that will affect to pricing,
+          // you need to add the values to handleOnChange function
           const bookingData =
             startDate && endDate
               ? {
                   unitType,
-                  unitPrice,
                   startDate,
                   endDate,
-
-                  // NOTE: If unitType is `line-item/units`, a new picker
-                  // for the quantity should be added to the form.
-                  quantity: 1,
                 }
               : null;
-          const bookingInfo = bookingData ? (
+
+          const showEstimatedBreakdown =
+            bookingData && lineItems && !fetchLineItemsInProgress && !fetchLineItemsError;
+
+          const bookingInfoMaybe = showEstimatedBreakdown ? (
             <div className={css.priceBreakdownContainer}>
               <h3 className={css.priceBreakdownTitle}>
                 <FormattedMessage id="BookingDatesForm.priceBreakdownTitle" />
               </h3>
-              <EstimatedBreakdownMaybe bookingData={bookingData} />
+              <EstimatedBreakdownMaybe bookingData={bookingData} lineItems={lineItems} />
             </div>
+          ) : null;
+
+          const loadingSpinnerMaybe = fetchLineItemsInProgress ? (
+            <IconSpinner className={css.spinner} />
+          ) : null;
+
+          const bookingInfoErrorMaybe = fetchLineItemsError ? (
+            <span className={css.sideBarError}>
+              <FormattedMessage id="BookingDatesForm.fetchLineItemsError" />
+            </span>
           ) : null;
 
           const dateFormatOptions = {
@@ -157,6 +194,12 @@ export class BookingDatesFormComponent extends Component {
           return (
             <Form onSubmit={handleSubmit} className={classes}>
               {timeSlotsError}
+              <FormSpy
+                subscription={{ values: true }}
+                onChange={values => {
+                  this.handleOnChange(values);
+                }}
+              />
               <FieldDateRangeInput
                 className={css.bookingDates}
                 name="bookingDates"
@@ -176,8 +219,13 @@ export class BookingDatesFormComponent extends Component {
                   required(requiredMessage),
                   bookingDatesRequired(startDateErrorMessage, endDateErrorMessage)
                 )}
+                disabled={fetchLineItemsInProgress}
               />
-              {bookingInfo}
+
+              {bookingInfoMaybe}
+              {loadingSpinnerMaybe}
+              {bookingInfoErrorMaybe}
+
               <p className={css.smallPrint}>
                 <FormattedMessage
                   id={
@@ -209,6 +257,8 @@ BookingDatesFormComponent.defaultProps = {
   startDatePlaceholder: null,
   endDatePlaceholder: null,
   timeSlots: null,
+  lineItems: null,
+  fetchLineItemsError: null,
 };
 
 BookingDatesFormComponent.propTypes = {
@@ -220,6 +270,11 @@ BookingDatesFormComponent.propTypes = {
   price: propTypes.money,
   isOwnListing: bool,
   timeSlots: arrayOf(propTypes.timeSlot),
+
+  onFetchTransactionLineItems: func.isRequired,
+  lineItems: array,
+  fetchLineItemsInProgress: bool.isRequired,
+  fetchLineItemsError: propTypes.error,
 
   // from injectIntl
   intl: intlShape.isRequired,
