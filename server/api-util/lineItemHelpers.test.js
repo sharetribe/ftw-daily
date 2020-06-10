@@ -131,7 +131,7 @@ describe('calculateTotalFromLineItems()', () => {
   it('should calculate total of given lineItems lineTotals', () => {
     const lineItems = [
       {
-        code: 'line-item/nights',
+        code: 'line-item/night',
         unitPrice: new Money(10000, 'USD'),
         quantity: 3,
         includeFor: ['customer', 'provider'],
@@ -152,7 +152,7 @@ describe('calculateTotalForProvider()', () => {
   it('should calculate total of lineItems where includeFor includes provider', () => {
     const lineItems = [
       {
-        code: 'line-item/nights',
+        code: 'line-item/night',
         unitPrice: new Money(5000, 'USD'),
         units: 3,
         seats: 2,
@@ -193,7 +193,7 @@ describe('calculateTotalForCustomer()', () => {
   it('should calculate total of lineItems where includeFor includes customer', () => {
     const lineItems = [
       {
-        code: 'line-item/nights',
+        code: 'line-item/night',
         unitPrice: new Money(5000, 'USD'),
         units: 3,
         seats: 2,
@@ -234,7 +234,7 @@ describe('constructValidLineItems()', () => {
   it('should add lineTotal and reversal attributes to the lineItem', () => {
     const lineItems = [
       {
-        code: 'line-item/nights',
+        code: 'line-item/night',
         unitPrice: new Money(5000, 'USD'),
         quantity: 2,
         includeFor: ['customer', 'provider'],
