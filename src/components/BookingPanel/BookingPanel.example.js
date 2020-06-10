@@ -14,6 +14,8 @@ export const Default = {
     subTitle: 'Hosted by Author N',
     authorDisplayName: 'Author Name',
     onManageDisableScrolling: () => null,
+    fetchLineItemsInProgress: false,
+    onFetchTransactionLineItems: () => null,
   },
 };
 
@@ -27,5 +29,7 @@ export const WithClosedListing = {
     subTitle: 'Hosted by Author N',
     authorDisplayName: 'Author Name',
     onManageDisableScrolling: () => null,
+    fetchLineItemsInProgress: false,
+    onFetchTransactionLineItems: () => null,
   },
 };
