@@ -25,6 +25,7 @@ import { ClientApp, renderApp } from './app';
 import configureStore from './store';
 import { matchPathname } from './util/routes';
 import * as sample from './util/sample';
+import * as apiUtils from './util/api';
 import config from './config';
 import { authInfo } from './ducks/Auth.duck';
 import { fetchCurrentUser } from './ducks/user.duck';
@@ -86,14 +87,7 @@ if (typeof window !== 'undefined') {
     transitVerbose: config.sdk.transitVerbose,
     clientId: config.sdk.clientId,
     secure: config.usingSSL,
-    typeHandlers: [
-      {
-        type: BigDecimal,
-        customType: Decimal,
-        writer: v => new BigDecimal(v.toString()),
-        reader: v => new Decimal(v.value),
-      },
-    ],
+    typeHandlers: apiUtils.typeHandlers,
     ...baseUrl,
   });
   const analyticsHandlers = setupAnalyticsHandlers();

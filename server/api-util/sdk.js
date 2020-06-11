@@ -8,7 +8,11 @@ const CLIENT_SECRET = process.env.SHARETRIBE_SDK_CLIENT_SECRET;
 const USING_SSL = process.env.REACT_APP_SHARETRIBE_USING_SSL === 'true';
 const TRANSIT_VERBOSE = process.env.REACT_APP_SHARETRIBE_SDK_TRANSIT_VERBOSE === 'true';
 
+// Application type handlers for JS SDK.
+//
+// NOTE: keep in sync with `typeHandlers` in `src/util/api.js`
 const typeHandlers = [
+  // Use Decimal type instead of SDK's BigDecimal.
   {
     type: sharetribeSdk.types.BigDecimal,
     customType: Decimal,
@@ -16,6 +20,8 @@ const typeHandlers = [
     reader: v => new Decimal(v.value),
   },
 ];
+exports.typeHandlers = typeHandlers;
+
 const baseUrlMaybe = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL
   ? { baseUrl: process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL }
   : null;

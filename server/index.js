@@ -39,6 +39,7 @@ const fs = require('fs');
 const log = require('./log');
 const { sitemapStructure } = require('./sitemap');
 const csp = require('./csp');
+const sdkUtils = require('./api-util/sdk');
 
 const buildPath = path.resolve(__dirname, '..', 'build');
 const env = process.env.REACT_APP_ENV;
@@ -179,14 +180,7 @@ app.get('*', (req, res) => {
     httpAgent: httpAgent,
     httpsAgent: httpsAgent,
     tokenStore,
-    typeHandlers: [
-      {
-        type: sharetribeSdk.types.BigDecimal,
-        customType: Decimal,
-        writer: v => new sharetribeSdk.types.BigDecimal(v.toString()),
-        reader: v => new Decimal(v.value),
-      },
-    ],
+    typeHandlers: sdkUtils.typeHandlers,
     ...baseUrl,
   });
 

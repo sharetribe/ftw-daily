@@ -14,7 +14,11 @@ const apiBaseUrl = () => {
   return '/';
 };
 
-const typeHandlers = [
+// Application type handlers for JS SDK.
+//
+// NOTE: keep in sync with `typeHandlers` in `server/api-util/sdk.js`
+export const typeHandlers = [
+  // Use Decimal type instead of SDK's BigDecimal.
   {
     type: sdkTypes.BigDecimal,
     customType: Decimal,
