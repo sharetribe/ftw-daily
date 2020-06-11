@@ -1,5 +1,4 @@
 import { types as sdkTypes, transit } from './sdkLoader';
-import moment from 'moment';
 import Decimal from 'decimal.js';
 
 const apiBaseUrl = () => {
