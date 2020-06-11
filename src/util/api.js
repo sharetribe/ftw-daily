@@ -67,10 +67,22 @@ const post = (path, body) => {
     });
 };
 
+// Fetch transaction line items from the local API endpoint.
+//
+// See `server/api/transaction-line-items.js` to see what data should
+// be sent in the body.
 export const transactionLineItems = body => {
   return post('/api/transaction-line-items', body);
 };
 
+// Initiate a privileged transaction.
+//
+// With privileged transitions, the transactions need to be created
+// from the backend. This endpoint enables sending the booking data to
+// the local backend, and passing that to the Marketplace API.
+//
+// See `server/api/initiate-privileged.js` to see what data should be
+// sent in the body.
 export const initiatePrivileged = body => {
   return post('/api/initiate-privileged', body);
 };
