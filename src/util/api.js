@@ -11,7 +11,7 @@ const apiBaseUrl = () => {
   }
 
   // Otherwise, use the same domain and port as the frontend
-  return '/';
+  return `${window.location.origin}`;
 };
 
 // Application type handlers for JS SDK.
