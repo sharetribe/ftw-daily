@@ -29,7 +29,6 @@ const bodyParser = require('body-parser');
 const enforceSsl = require('express-enforces-ssl');
 const path = require('path');
 const sharetribeSdk = require('sharetribe-flex-sdk');
-const Decimal = require('decimal.js');
 const sitemap = require('express-sitemap');
 const auth = require('./auth');
 const apiRouter = require('./apiRouter');

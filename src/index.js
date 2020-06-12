@@ -19,7 +19,6 @@ import 'raf/polyfill';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Decimal from 'decimal.js';
 import { createInstance, types as sdkTypes } from './util/sdkLoader';
 import { ClientApp, renderApp } from './app';
 import configureStore from './store';
@@ -34,8 +33,6 @@ import * as log from './util/log';
 import { LoggingAnalyticsHandler, GoogleAnalyticsHandler } from './analytics/handlers';
 
 import './marketplaceIndex.css';
-
-const { BigDecimal } = sdkTypes;
 
 const render = (store, shouldHydrate) => {
   // If the server already loaded the auth information, render the app
