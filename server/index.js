@@ -29,7 +29,6 @@ const bodyParser = require('body-parser');
 const enforceSsl = require('express-enforces-ssl');
 const path = require('path');
 const sharetribeSdk = require('sharetribe-flex-sdk');
-const Decimal = require('decimal.js');
 const sitemap = require('express-sitemap');
 const auth = require('./auth');
 const apiRouter = require('./apiRouter');
@@ -39,6 +38,7 @@ const fs = require('fs');
 const log = require('./log');
 const { sitemapStructure } = require('./sitemap');
 const csp = require('./csp');
+const sdkUtils = require('./api-util/sdk');
 
 const buildPath = path.resolve(__dirname, '..', 'build');
 const env = process.env.REACT_APP_ENV;
@@ -179,14 +179,7 @@ app.get('*', (req, res) => {
     httpAgent: httpAgent,
     httpsAgent: httpsAgent,
     tokenStore,
-    typeHandlers: [
-      {
-        type: sharetribeSdk.types.BigDecimal,
-        customType: Decimal,
-        writer: v => new sharetribeSdk.types.BigDecimal(v.toString()),
-        reader: v => new Decimal(v.value),
-      },
-    ],
+    typeHandlers: sdkUtils.typeHandlers,
     ...baseUrl,
   });
 

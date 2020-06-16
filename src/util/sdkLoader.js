@@ -12,6 +12,6 @@ if (isServer()) {
   exportSdk = importedSdk;
 }
 
-const { createInstance, types } = exportSdk;
+const { createInstance, types, transit } = exportSdk;
 
-export { createInstance, types };
+export { createInstance, types, transit };
