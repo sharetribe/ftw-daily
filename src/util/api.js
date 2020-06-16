@@ -1,4 +1,5 @@
 import { types as sdkTypes, transit } from './sdkLoader';
+import config from '../config';
 import Decimal from 'decimal.js';
 
 const apiBaseUrl = () => {
@@ -28,7 +29,7 @@ export const typeHandlers = [
 ];
 
 const serialize = data => {
-  return transit.write(data, { typeHandlers });
+  return transit.write(data, { typeHandlers, verbose: config.sdk.transitVerbose });
 };
 
 const deserialize = str => {
