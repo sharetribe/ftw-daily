@@ -38,8 +38,6 @@ router.use((req, res, next) => {
       res.status(400).send('Invalid Transit in request body.');
       return;
     }
-  } else {
-    console.log('request not Transit');
   }
   next();
 });
