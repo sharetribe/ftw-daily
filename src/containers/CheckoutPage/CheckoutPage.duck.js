@@ -291,32 +291,43 @@ export const sendMessage = params => (dispatch, getState, sdk) => {
  * pricing info for the booking breakdown to get a proper estimate for
  * the price with the chosen information.
  */
-export const speculateTransaction = params => (dispatch, getState, sdk) => {
+export const speculateTransaction = (orderParams, transactionId) => (dispatch, getState, sdk) => {
   dispatch(speculateTransactionRequest());
 
   const bookingData = {
-    startDate: params.bookingStart,
-    endDate: params.bookingEnd,
+    startDate: orderParams.bookingStart,
+    endDate: orderParams.bookingEnd,
   };
 
-  const bodyParams = {
-    transition: TRANSITION_REQUEST_PAYMENT,
-    processAlias: config.bookingProcessAlias,
-    params: {
-      ...params,
-      cardToken: 'CheckoutPage_speculative_card_token',
-    },
+  const params = {
+    ...orderParams,
+    cardToken: 'CheckoutPage_speculative_card_token',
   };
+
+  const bodyParams = transactionId
+    ? {
+        id: transactionId,
+        transition: TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY,
+        params,
+      }
+    : {
+        transition: TRANSITION_REQUEST_PAYMENT,
+        processAlias: config.bookingProcessAlias,
+        params,
+      };
+
   const queryParams = {
     include: ['booking', 'provider'],
     expand: true,
   };
 
-  return initiatePrivileged({ isSpeculative: true, bookingData, bodyParams, queryParams })
+  const speculate = transactionId ? transitionPrivileged : initiatePrivileged;
+
+  return speculate({ isSpeculative: true, bookingData, bodyParams, queryParams })
     .then(response => {
       const entities = denormalisedResponseEntities(response);
       if (entities.length !== 1) {
-        throw new Error('Expected a resource in the sdk.transactions.initiateSpeculative response');
+        throw new Error('Expected a resource in the speculate response');
       }
       const tx = entities[0];
       dispatch(speculateTransactionSuccess(tx));
