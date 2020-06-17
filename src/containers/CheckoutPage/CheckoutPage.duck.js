@@ -1,6 +1,6 @@
 import pick from 'lodash/pick';
 import config from '../../config';
-import { initiatePrivileged } from '../../util/api';
+import { initiatePrivileged, transitionPrivileged } from '../../util/api';
 import { denormalisedResponseEntities } from '../../util/data';
 import { storableError } from '../../util/errors';
 import {
@@ -206,10 +206,12 @@ export const initiateOrder = (orderParams, transactionId) => (dispatch, getState
       });
   }
 
-  // TODO transition transaction
-
-  return sdk.transactions
-    .transition(bodyParams, queryParams)
+  return transitionPrivileged({
+    isSpeculative: false,
+    bookingData,
+    bodyParams,
+    queryParams,
+  })
     .then(response => {
       const entities = denormalisedResponseEntities(response);
       const order = entities[0];
