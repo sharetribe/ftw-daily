@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [add] Add local API endpoints for flexible pricing and privileged transitions
+  [#1301](https://github.com/sharetribe/ftw-daily/pull/1301)
 - [fix] `yarn run dev-backend` was expecting NODE_ENV.
   [#1303](https://github.com/sharetribe/ftw-daily/pull/1303)
 

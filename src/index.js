@@ -19,12 +19,12 @@ import 'raf/polyfill';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Decimal from 'decimal.js';
 import { createInstance, types as sdkTypes } from './util/sdkLoader';
 import { ClientApp, renderApp } from './app';
 import configureStore from './store';
 import { matchPathname } from './util/routes';
 import * as sample from './util/sample';
+import * as apiUtils from './util/api';
 import config from './config';
 import { authInfo } from './ducks/Auth.duck';
 import { fetchCurrentUser } from './ducks/user.duck';
@@ -33,8 +33,6 @@ import * as log from './util/log';
 import { LoggingAnalyticsHandler, GoogleAnalyticsHandler } from './analytics/handlers';
 
 import './marketplaceIndex.css';
-
-const { BigDecimal } = sdkTypes;
 
 const render = (store, shouldHydrate) => {
   // If the server already loaded the auth information, render the app
@@ -86,14 +84,7 @@ if (typeof window !== 'undefined') {
     transitVerbose: config.sdk.transitVerbose,
     clientId: config.sdk.clientId,
     secure: config.usingSSL,
-    typeHandlers: [
-      {
-        type: BigDecimal,
-        customType: Decimal,
-        writer: v => new BigDecimal(v.toString()),
-        reader: v => new Decimal(v.value),
-      },
-    ],
+    typeHandlers: apiUtils.typeHandlers,
     ...baseUrl,
   });
   const analyticsHandlers = setupAnalyticsHandlers();
