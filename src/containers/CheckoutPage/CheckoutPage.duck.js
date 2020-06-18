@@ -7,6 +7,7 @@ import {
   TRANSITION_REQUEST_PAYMENT,
   TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY,
   TRANSITION_CONFIRM_PAYMENT,
+  isPrivileged,
 } from '../../util/transaction';
 import * as log from '../../util/log';
 import { fetchCurrentUserHasOrdersSuccess, fetchCurrentUser } from '../../ducks/user.duck';
@@ -163,20 +164,28 @@ export const stripeCustomerError = e => ({
 export const initiateOrder = (orderParams, transactionId) => (dispatch, getState, sdk) => {
   dispatch(initiateOrderRequest());
 
+  // If we already have a transaction ID, we should transition, not
+  // initiate.
+  const isTransition = !!transactionId;
+  const transition = isTransition
+    ? TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY
+    : TRANSITION_REQUEST_PAYMENT;
+  const isPrivilegedTransition = isPrivileged(transition);
+
   const bookingData = {
     startDate: orderParams.bookingStart,
     endDate: orderParams.bookingEnd,
   };
 
-  const bodyParams = transactionId
+  const bodyParams = isTransition
     ? {
         id: transactionId,
-        transition: TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY,
+        transition,
         params: orderParams,
       }
     : {
         processAlias: config.bookingProcessAlias,
-        transition: TRANSITION_REQUEST_PAYMENT,
+        transition,
         params: orderParams,
       };
   const queryParams = {
@@ -184,52 +193,49 @@ export const initiateOrder = (orderParams, transactionId) => (dispatch, getState
     expand: true,
   };
 
-  if (!transactionId) {
-    return initiatePrivileged({ isSpeculative: false, bookingData, bodyParams, queryParams })
-      .then(response => {
-        const entities = denormalisedResponseEntities(response);
-        const order = entities[0];
-        dispatch(initiateOrderSuccess(order));
-        dispatch(fetchCurrentUserHasOrdersSuccess(true));
-        return order;
-      })
-      .catch(e => {
-        dispatch(initiateOrderError(storableError(e)));
-        const transactionIdMaybe = transactionId ? { transactionId: transactionId.uuid } : {};
-        log.error(e, 'initiate-order-failed', {
-          ...transactionIdMaybe,
-          listingId: orderParams.listingId.uuid,
-          bookingStart: orderParams.bookingStart,
-          bookingEnd: orderParams.bookingEnd,
-        });
-        throw e;
-      });
-  }
+  const handleSucces = response => {
+    const entities = denormalisedResponseEntities(response);
+    const order = entities[0];
+    dispatch(initiateOrderSuccess(order));
+    dispatch(fetchCurrentUserHasOrdersSuccess(true));
+    return order;
+  };
 
-  return transitionPrivileged({
-    isSpeculative: false,
-    bookingData,
-    bodyParams,
-    queryParams,
-  })
-    .then(response => {
-      const entities = denormalisedResponseEntities(response);
-      const order = entities[0];
-      dispatch(initiateOrderSuccess(order));
-      dispatch(fetchCurrentUserHasOrdersSuccess(true));
-      return order;
-    })
-    .catch(e => {
-      dispatch(initiateOrderError(storableError(e)));
-      const transactionIdMaybe = transactionId ? { transactionId: transactionId.uuid } : {};
-      log.error(e, 'initiate-order-failed', {
-        ...transactionIdMaybe,
-        listingId: orderParams.listingId.uuid,
-        bookingStart: orderParams.bookingStart,
-        bookingEnd: orderParams.bookingEnd,
-      });
-      throw e;
+  const handleError = e => {
+    dispatch(initiateOrderError(storableError(e)));
+    const transactionIdMaybe = transactionId ? { transactionId: transactionId.uuid } : {};
+    log.error(e, 'initiate-order-failed', {
+      ...transactionIdMaybe,
+      listingId: orderParams.listingId.uuid,
+      bookingStart: orderParams.bookingStart,
+      bookingEnd: orderParams.bookingEnd,
     });
+    throw e;
+  };
+
+  if (isTransition && isPrivilegedTransition) {
+    // transition privileged
+    return transitionPrivileged({ isSpeculative: false, bookingData, bodyParams, queryParams })
+      .then(handleSucces)
+      .catch(handleError);
+  } else if (isTransition) {
+    // transition non-privileged
+    return sdk.transactions
+      .transition(bodyParams, queryParams)
+      .then(handleSucces)
+      .catch(handleError);
+  } else if (isPrivilegedTransition) {
+    // initiate privileged
+    return initiatePrivileged({ isSpeculative: false, bookingData, bodyParams, queryParams })
+      .then(handleSucces)
+      .catch(handleError);
+  } else {
+    // initiate non-privileged
+    return sdk.transactions
+      .initiate(bodyParams, queryParams)
+      .then(handleSucces)
+      .catch(handleError);
+  }
 };
 
 export const confirmPayment = orderParams => (dispatch, getState, sdk) => {
@@ -280,7 +286,8 @@ export const sendMessage = params => (dispatch, getState, sdk) => {
 };
 
 /**
- * Initiate the speculative transaction with the given booking details
+ * Initiate or transition the speculative transaction with the given
+ * booking details
  *
  * The API allows us to do speculative transaction initiation and
  * transitions. This way we can create a test transaction and get the
@@ -294,6 +301,14 @@ export const sendMessage = params => (dispatch, getState, sdk) => {
 export const speculateTransaction = (orderParams, transactionId) => (dispatch, getState, sdk) => {
   dispatch(speculateTransactionRequest());
 
+  // If we already have a transaction ID, we should transition, not
+  // initiate.
+  const isTransition = !!transactionId;
+  const transition = isTransition
+    ? TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY
+    : TRANSITION_REQUEST_PAYMENT;
+  const isPrivilegedTransition = isPrivileged(transition);
+
   const bookingData = {
     startDate: orderParams.bookingStart,
     endDate: orderParams.bookingEnd,
@@ -304,15 +319,15 @@ export const speculateTransaction = (orderParams, transactionId) => (dispatch, g
     cardToken: 'CheckoutPage_speculative_card_token',
   };
 
-  const bodyParams = transactionId
+  const bodyParams = isTransition
     ? {
         id: transactionId,
-        transition: TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY,
+        transition,
         params,
       }
     : {
-        transition: TRANSITION_REQUEST_PAYMENT,
         processAlias: config.bookingProcessAlias,
+        transition,
         params,
       };
 
@@ -321,26 +336,48 @@ export const speculateTransaction = (orderParams, transactionId) => (dispatch, g
     expand: true,
   };
 
-  const speculate = transactionId ? transitionPrivileged : initiatePrivileged;
+  const handleSuccess = response => {
+    const entities = denormalisedResponseEntities(response);
+    if (entities.length !== 1) {
+      throw new Error('Expected a resource in the speculate response');
+    }
+    const tx = entities[0];
+    dispatch(speculateTransactionSuccess(tx));
+  };
 
-  return speculate({ isSpeculative: true, bookingData, bodyParams, queryParams })
-    .then(response => {
-      const entities = denormalisedResponseEntities(response);
-      if (entities.length !== 1) {
-        throw new Error('Expected a resource in the speculate response');
-      }
-      const tx = entities[0];
-      dispatch(speculateTransactionSuccess(tx));
-    })
-    .catch(e => {
-      const { listingId, bookingStart, bookingEnd } = params;
-      log.error(e, 'speculate-transaction-failed', {
-        listingId: listingId.uuid,
-        bookingStart,
-        bookingEnd,
-      });
-      return dispatch(speculateTransactionError(storableError(e)));
+  const handleError = e => {
+    const { listingId, bookingStart, bookingEnd } = params;
+    log.error(e, 'speculate-transaction-failed', {
+      listingId: listingId.uuid,
+      bookingStart,
+      bookingEnd,
     });
+    return dispatch(speculateTransactionError(storableError(e)));
+  };
+
+  if (isTransition && isPrivilegedTransition) {
+    // transition privileged
+    return transitionPrivileged({ isSpeculative: true, bookingData, bodyParams, queryParams })
+      .then(handleSuccess)
+      .catch(handleError);
+  } else if (isTransition) {
+    // transition non-privileged
+    return sdk.transactions
+      .transitionSpeculative(bodyParams, queryParams)
+      .then(handleSuccess)
+      .catch(handleError);
+  } else if (isPrivilegedTransition) {
+    // initiate privileged
+    return initiatePrivileged({ isSpeculative: true, bookingData, bodyParams, queryParams })
+      .then(handleSuccess)
+      .catch(handleError);
+  } else {
+    // initiate non-privileged
+    return sdk.transactions
+      .initiateSpeculative(bodyParams, queryParams)
+      .then(handleSuccess)
+      .catch(handleError);
+  }
 };
 
 // StripeCustomer is a relantionship to currentUser
