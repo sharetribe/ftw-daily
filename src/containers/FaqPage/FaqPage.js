@@ -117,7 +117,7 @@ const FaqPage = () => {
               rates.</p>
               <p>Look out for potential discounts on extended renting periods.</p>
               <br></br>
-              <h2>What if I have questions for the Host about the Patch?</h2>
+              <h2 id="what-if-I-have-questions-for-the-Host-about-the-Patch?">What if I have questions for the Host about the Patch?</h2>
               <p>No problem!</p>
               <p>Users can contact hosts through HotPatch’s direct chat.</p>
               <br></br>
