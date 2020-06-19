@@ -14,6 +14,10 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [change] Add UI support for flexible pricing and privileged
+  transitions. Note that this requires updating the booking breakdown
+  estimation code that is now done in the backend.
+  [#1310](https://github.com/sharetribe/ftw-daily/pull/1310)
 - [add] Add local API endpoints for flexible pricing and privileged transitions
   [#1301](https://github.com/sharetribe/ftw-daily/pull/1301)
 - [fix] `yarn run dev-backend` was expecting NODE_ENV.
