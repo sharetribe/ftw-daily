@@ -116,7 +116,8 @@ const FaqPage = () => {
               <p>Rents vary depending on the type of space, location, dates, as well as hourly, daily, or weekly
               rates.</p>
               <p>Look out for potential discounts on extended renting periods.</p>
-              <p>What if I have questions for the host about the Patch?</p>
+              <br></br>
+              <h2>What if I have questions for the Host about the Patch?</h2>
               <p>No problem!</p>
               <p>Users can contact hosts through HotPatch’s direct chat.</p>
               <br></br>
