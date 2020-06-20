@@ -30,7 +30,7 @@ const CUSTOMER = 'customer';
 
 // ================ Action types ================ //
 
-export const SET_INITAL_VALUES = 'app/TransactionPage/SET_INITIAL_VALUES';
+export const SET_INITIAL_VALUES = 'app/TransactionPage/SET_INITIAL_VALUES';
 
 export const FETCH_TRANSACTION_REQUEST = 'app/TransactionPage/FETCH_TRANSACTION_REQUEST';
 export const FETCH_TRANSACTION_SUCCESS = 'app/TransactionPage/FETCH_TRANSACTION_SUCCESS';
@@ -112,7 +112,7 @@ const mergeEntityArrays = (a, b) => {
 export default function checkoutPageReducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
-    case SET_INITAL_VALUES:
+    case SET_INITIAL_VALUES:
       return { ...initialState, ...payload };
 
     case FETCH_TRANSACTION_REQUEST:
@@ -212,7 +212,7 @@ export const acceptOrDeclineInProgress = state => {
 
 // ================ Action creators ================ //
 export const setInitialValues = initialValues => ({
-  type: SET_INITAL_VALUES,
+  type: SET_INITIAL_VALUES,
   payload: pick(initialValues, Object.keys(initialState)),
 });
 

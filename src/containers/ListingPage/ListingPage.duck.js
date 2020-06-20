@@ -18,7 +18,7 @@ const { UUID } = sdkTypes;
 
 // ================ Action types ================ //
 
-export const SET_INITAL_VALUES = 'app/ListingPage/SET_INITIAL_VALUES';
+export const SET_INITIAL_VALUES = 'app/ListingPage/SET_INITIAL_VALUES';
 
 export const SHOW_LISTING_REQUEST = 'app/ListingPage/SHOW_LISTING_REQUEST';
 export const SHOW_LISTING_ERROR = 'app/ListingPage/SHOW_LISTING_ERROR';
@@ -59,7 +59,7 @@ const initialState = {
 const listingPageReducer = (state = initialState, action = {}) => {
   const { type, payload } = action;
   switch (type) {
-    case SET_INITAL_VALUES:
+    case SET_INITIAL_VALUES:
       return { ...initialState, ...payload };
 
     case SHOW_LISTING_REQUEST:
@@ -105,7 +105,7 @@ export default listingPageReducer;
 // ================ Action creators ================ //
 
 export const setInitialValues = initialValues => ({
-  type: SET_INITAL_VALUES,
+  type: SET_INITIAL_VALUES,
   payload: pick(initialValues, Object.keys(initialState)),
 });
 
