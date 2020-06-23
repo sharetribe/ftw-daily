@@ -163,6 +163,7 @@ export { default as UserCard } from './UserCard/UserCard';
 // Page sections and modal content wrappers //
 //////////////////////////////////////////////
 
+export { default as CalendarWrapper } from './CalendarWrapper/CalendarWrapper';
 export { default as ContactAuthorPanelMaybe } from './ContactAuthorPanelMaybe/ContactAuthorPanelMaybe';
 export { default as LayoutWrapperAccountSettingsSideNav } from './LayoutWrapperAccountSettingsSideNav/LayoutWrapperAccountSettingsSideNav';
 export { default as ModalMissingInformation } from './ModalMissingInformation/ModalMissingInformation';

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { 
@@ -11,9 +10,6 @@ import {
  } from './CalendarPage.duck.js';
 import { FormattedMessage, injectIntl } from '../../util/reactIntl';
 import { lazyLoadWithDimensions } from '../../util/contextHelpers';
-// import { propTypes } from '../../util/types';
-// import { ensureCurrentUser } from '../../util/data';
-// import { isScrollingDisabled } from '../../ducks/UI.duck';
 import {
   Page,
   UserNav,
@@ -23,16 +19,17 @@ import {
   LayoutWrapperFooter,
   Footer,
   ResponsiveImage,
+  CalendarWrapper,
 } from '../../components';
 import { TopbarContainer } from '..';
 
 import css from './CalendarPage.css';
 
-import FullCalendar from '@fullcalendar/react'
-import dayGridPlugin from '@fullcalendar/daygrid'
-import timeGridPlugin from '@fullcalendar/timegrid';
-import listPlugin from '@fullcalendar/list';
-import interactionPlugin from '@fullcalendar/interaction';
+// import FullCalendar from '@fullcalendar/react'
+// import dayGridPlugin from '@fullcalendar/daygrid'
+// import timeGridPlugin from '@fullcalendar/timegrid';
+// import listPlugin from '@fullcalendar/list';
+// import interactionPlugin from '@fullcalendar/interaction';
 
 const timeHelper = (d) => d.toLocaleString().split(", ").splice(1)
 
@@ -400,7 +397,7 @@ export class CalendarPageComponent extends Component {
     </div>
   )
 
-  const calendar = (
+  const calendar = typeof window !== 'undefined' ? (
     <div className={'main-calendar'}>
       <div className={css.calendarInfo}>
         <h5>Meine Kalender</h5>
@@ -413,7 +410,23 @@ export class CalendarPageComponent extends Component {
           <span>In Erwartung</span>
         </div>
       </div>
-      <FullCalendar 
+      <CalendarWrapper 
+        header={{
+          left: "prev,next today",
+          center: "",
+          right: "title",
+
+        }}
+        defaultView="timeGridWeek" 
+        editable={true} 
+        selectable={true}
+        events={scheduledRidings}
+        eventClick={isCurrentUserAcceptedTransactionCustomer ? this.callNotificationPopup : () => {}}
+        select={isCurrentUserAcceptedTransactionCustomer ? this.scheduleTime : () => {}}
+        eventDrop={this.changeScheduleTime}
+        eventResize={this.changeScheduleTime}
+        />
+      {/* <FullCalendar 
         defaultView="timeGridWeek" 
         header={{
           left: "prev,next today",
@@ -423,20 +436,16 @@ export class CalendarPageComponent extends Component {
         }}
         plugins={[dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin]}
         events={scheduledRidings}
-        eventClick={isCurrentUserAcceptedTransactionCustomer ? this.callNotificationPopup : () => {}}
         select={isCurrentUserAcceptedTransactionCustomer ? this.scheduleTime : () => {}}
         eventDrop={this.changeScheduleTime}
         eventResize={this.changeScheduleTime}
-        // eventDragStart={this.changeScheduleTime}
-        // dateClick={this.scheduleTime}
         selectable={true}
         selectOverlap={false}
         editable={true}
         eventOverlap={false}
-        />
-    </div>
-      
-  )
+        /> */}
+    </div>    
+  ) : null
 
   class ListingImage extends Component {
     render() {
@@ -475,9 +484,22 @@ export class CalendarPageComponent extends Component {
     catch(e) {}
   })
 
-  const noActiveTransactionsCalendar = (
+  const noActiveTransactionsCalendar = typeof window !== 'undefined' ? (
     <div className={css.emptyCalenderWrapper}>
-      <FullCalendar 
+      <CalendarWrapper header={{
+          left: "",
+          center: "",
+          right: "title"
+        }}
+        defaultView="timeGridWeek" 
+        selectable={false}
+        editable={false}
+        events={[]}
+        eventClick={() => {}}
+        select={() => {}}
+        eventResize={() => {}}
+        />
+      {/* <FullCalendar 
         defaultView="timeGridWeek" 
         header={{
           left: "",
@@ -487,12 +509,12 @@ export class CalendarPageComponent extends Component {
         plugins={[dayGridPlugin, timeGridPlugin, listPlugin]}
         selectable={false}
         editable={false}
-        />
+        /> */}
         <div className={css.emptyCalenderInfo}>
           <div className={css.ridingTitle}>You don't have active bookings yet.</div>
         </div> 
     </div>
-  )
+  ) : null
 
   if(activeTransactionsList && !activeTransactionsList.length) {
     activeTransactionsList.push(noActiveTransactionsCalendar)
