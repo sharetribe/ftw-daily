@@ -15,22 +15,19 @@ import listPlugin from '@fullcalendar/list';
 const FullCalendar = loadable(() => import('@fullcalendar/react'), { ssr: false });
 
 const CalendarWrapper = ({header, defaultView, selectable, editable, events, eventClick, select, eventDrop, eventResize}) => {
+    
     return typeof window !== 'undefined' && typeof Element !== 'undefined' && typeof document !== 'undefined' && (
     <FullCalendar 
-        // plugins={[DayGrid, TimeGrid, ListPlugin, Interactions]}
         plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin, listPlugin]}
         defaultView={defaultView} 
         header={header}
         selectable={selectable}
         editable={editable}
         events={events}
-
         eventClick={eventClick}
         select={select}
         eventDrop={eventDrop}
         eventResize={eventResize}
-        // eventDragStart={this.changeScheduleTime}
-        // dateClick={this.scheduleTime}
         selectOverlap={false}
         eventOverlap={false}
     />
