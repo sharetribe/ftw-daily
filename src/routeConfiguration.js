@@ -23,6 +23,7 @@ import {
   PrivacyPolicyPage,
   ProfilePage,
   ProfileSettingsPage,
+  CalendarPage,
   SearchPage,
   StyleguidePage,
   TermsOfServicePage,
@@ -183,6 +184,14 @@ const routeConfiguration = () => {
       auth: true,
       authPage: 'LoginPage',
       component: props => <ProfileSettingsPage {...props} />,
+    },
+    {
+      path: '/kalender',
+      name: 'CalendarPage',
+      auth: true,
+      authPage: 'LoginPage',
+      loadData: CalendarPage.loadData,
+      component: props => <CalendarPage {...props} />,
     },
     {
       path: '/login',

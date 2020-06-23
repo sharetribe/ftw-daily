@@ -54,12 +54,13 @@ export const PayoutPreferencesPageComponent = props => {
   } else if (currentUserLoaded && !stripeConnected) {
     message = <FormattedMessage id="PayoutPreferencesPage.stripeNotConnected" />;
   }
-
-  const showForm =
-    currentUserLoaded && (payoutDetailsSaveInProgress || payoutDetailsSaved || !stripeConnected);
+//here
+  const showForm = currentUserLoaded && (payoutDetailsSaveInProgress || payoutDetailsSaved || !stripeConnected);
+  //const showForm = true
   const form = showForm ? (
     <PayoutDetailsForm
       disabled={formDisabled}
+      //disabled={false}
       inProgress={payoutDetailsSaveInProgress}
       ready={payoutDetailsSaved}
       submitButtonText={intl.formatMessage({ id: 'PayoutPreferencesPage.submitButtonText' })}

@@ -15,6 +15,8 @@ import { ensureTransaction } from './data';
 // After this transition, the actual payment must be made on client-side directly to Stripe.
 export const TRANSITION_REQUEST_PAYMENT = 'transition/request-payment';
 
+export const TRANSITION_NOTIFY_ON_TIME_SCHEDULING = 'transition/customer-notifies-on-time-scheduling-1';
+export const TRANSITION_NOTIFY_ON_SCHEDULE_CANCELLING = 'transition/customer-notifies-on-time-cancelling';
 // A customer can also initiate a transaction with an enquiry, and
 // then transition that with a request.
 export const TRANSITION_ENQUIRE = 'transition/enquire';
@@ -94,6 +96,8 @@ const STATE_DELIVERED = 'delivered';
 const STATE_REVIEWED = 'reviewed';
 const STATE_REVIEWED_BY_CUSTOMER = 'reviewed-by-customer';
 const STATE_REVIEWED_BY_PROVIDER = 'reviewed-by-provider';
+const STATE_NOTIFIED_ON_TIME_SCHEDULING = 'notified-on-time-scheduling';
+const STATE_NOTIFIED_ON_SCHEDULE_CANCELLING = 'notified-on-schedule-cancelling';
 
 /**
  * Description of transaction process
@@ -117,10 +121,17 @@ const stateDescription = {
   states: {
     [STATE_INITIAL]: {
       on: {
+        [TRANSITION_NOTIFY_ON_TIME_SCHEDULING]: STATE_NOTIFIED_ON_TIME_SCHEDULING,
         [TRANSITION_ENQUIRE]: STATE_ENQUIRY,
         [TRANSITION_REQUEST_PAYMENT]: STATE_PENDING_PAYMENT,
       },
     },
+    [STATE_NOTIFIED_ON_TIME_SCHEDULING]: {
+      on: {
+        [TRANSITION_NOTIFY_ON_SCHEDULE_CANCELLING]: STATE_NOTIFIED_ON_SCHEDULE_CANCELLING,
+      },
+    },
+    [STATE_NOTIFIED_ON_SCHEDULE_CANCELLING]: {},
     [STATE_ENQUIRY]: {
       on: {
         [TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY]: STATE_PENDING_PAYMENT,

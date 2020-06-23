@@ -119,7 +119,14 @@ class TopbarMobileMenu extends React.Component {
           >
             <FormattedMessage id="TopbarMobileMenu.yourListingsLink" />
           </NamedLink>
-  
+
+          <NamedLink
+            className={classNames(css.navigationLink, currentPageClass('CalendarPage'))}
+            name="CalendarPage"
+          >
+            <FormattedMessage id="TopbarMobileMenu.calendar" />
+          </NamedLink>
+
           <NamedLink
             className={classNames(css.navigationLink, currentPageClass('ProfileSettingsPage'))}
             name="ProfileSettingsPage"
