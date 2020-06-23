@@ -44,6 +44,8 @@ const ContactAuthorPanel = ({
         <FormattedMessage id="ListingPage.contactAuthorButton" />
         <MessageIcon />
       </button>
+      {/* DO NOT FORGET ABOUT png/jpeg FORMAT */}
+      <img className={css.contactBanner} src='/static/horseDealListingBanner.png' alt='horse deal banner' />
     </div>
   );
 };

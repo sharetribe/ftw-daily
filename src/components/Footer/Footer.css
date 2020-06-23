@@ -446,3 +446,7 @@
   margin-left: 5px;
   font-size: 12px;
 }
+
+.appPlayStoreIcon {
+  max-width: 70%;
+}

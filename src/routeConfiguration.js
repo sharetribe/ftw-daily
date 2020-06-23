@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   AboutPage,
-  FAQPage,
   HelpPage,
   ContactPage,
   CommunityPage,
@@ -29,7 +28,8 @@ import {
   StyleguidePage,
   TermsOfServicePage,
   TransactionPage,
-  ImpressumPage
+  ImpressumPage,
+  MobilePage,
 } from './containers';
 
 // routeConfiguration needs to initialize containers first
@@ -69,11 +69,6 @@ const routeConfiguration = () => {
       path: '/help',
       name: 'HelpPage',
       component: () => <HelpPage title={"Hilfe"} />
-    },
-    {
-      path: '/faq',
-      name: 'FAQPage',
-      component: () => <FAQPage title={"FAQ"} />
     },
     {
       path: '/contact',
@@ -365,6 +360,11 @@ const routeConfiguration = () => {
       authPage: 'LoginPage',
       component: props => <EmailVerificationPage {...props} />,
       loadData: EmailVerificationPage.loadData,
+    },
+    {
+      path: '/mobile',
+      name: 'MobilePage',
+      component: MobilePage,
     },
   ];
 };

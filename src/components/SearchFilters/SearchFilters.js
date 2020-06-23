@@ -5,8 +5,9 @@ import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { withRouter } from 'react-router-dom';
 import omit from 'lodash/omit';
+import SortingIcon from './SortingIcon';
 
-import { SelectMultipleFilter, PriceFilter, RangeFilter } from '..';
+import { SelectMultipleFilter, PriceFilter, RangeFilter, SelectSingleFilter } from '..';
 import routeConfiguration from '../../routeConfiguration';
 import { parseDateFromISO8601, stringifyDateToISO8601 } from '../../util/dates';
 import { createResourceLocatorString } from '../../util/routes';
@@ -101,7 +102,6 @@ const SearchFiltersComponent = props => {
   const mainDisciplineLabel = intl.formatMessage({
     id: 'SearchFilters.mainDisciplineLabel',
   });
-
   const initialGender = genderFilter ? initialValues(urlQueryParams, genderFilter.paramName) : null;
 
   const initialAge = ageFilter ? initialRangeValues(urlQueryParams, ageFilter.paramName) : null;
@@ -148,7 +148,7 @@ const SearchFiltersComponent = props => {
       minPrice != null && maxPrice != null
         ? { ...urlQueryParams, [urlParam]: `${minPrice},${maxPrice}` }
         : omit(urlQueryParams, urlParam);
-
+      
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   };
 
@@ -177,13 +177,16 @@ const SearchFiltersComponent = props => {
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   };
 
-  const handleKeyword = (urlParam, values) => {
-    const queryParams = values
-      ? { ...urlQueryParams, [urlParam]: values }
-      : omit(urlQueryParams, urlParam);
+  // const handleKeyword = (urlParam, values) => {
+  //   const queryParams = values
+  //     ? { ...urlQueryParams, [urlParam]: values }
+  //     : omit(urlQueryParams, urlParam);
 
-    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
-  };
+  //   history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
+  // };
+
+  const handleSorting = (urlParam, option) => history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, { ...urlQueryParams, [urlParam]: option } ));
+  
 
   const filterElementProps = {
     onSubmit: handleSelectOptions,
@@ -286,6 +289,43 @@ const SearchFiltersComponent = props => {
     />
   ) : null;
 
+    const sortingParams = [
+        {
+          label: 'Neueste',
+          key: 'createdAt',
+        },
+        {
+          label: 'Älteste',
+          key: '-createdAt',
+        },
+        {
+          label: 'Geringster Preis',
+          key: '-price',
+        },
+        {
+          label: 'Höchster Preis',
+          key: 'price',
+        },
+    ];
+
+    const sortingPanelLabel = (urlQueryParams && urlQueryParams.sort)
+     ? sortingParams.filter(s => s.key === urlQueryParams.sort)[0].label
+      : intl.formatMessage({ id: 'SearchFilters.sortingPanelLabel', })
+
+    const sortingElement = (
+      <SelectSingleFilter
+        id='SearchFilters.sortingElement'
+        name='sortingPanel'
+        urlParam='sort'
+        label={sortingPanelLabel}
+        elementBeforeLabel={<SortingIcon />}
+        options={sortingParams}
+        initialValue={null}
+        showAsPopup={true}
+        onSelect={handleSorting}
+      />
+    );
+
   const toggleSearchFiltersPanelButtonClasses =
     isSearchFiltersPanelOpen || searchFiltersPanelSelectedCount > 0
       ? css.searchFiltersPanelOpen
@@ -305,6 +345,9 @@ const SearchFiltersComponent = props => {
   ) : null;
   return (
     <div className={classes}>
+      <div className={css.sortingPanel}>
+        {sortingElement}
+       </div>
       <div className={css.filters}>
         {mainDisciplineFilterElement}
         {breedFilterElement}

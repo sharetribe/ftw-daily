@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { string, func, arrayOf, shape, number } from 'prop-types';
+import { string, func, arrayOf, shape, number, object } from 'prop-types';
 import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 
@@ -38,8 +38,10 @@ class SelectSingleFilterPopup extends Component {
       options,
       initialValue,
       contentPlacementOffset,
+      elementBeforeLabel,
+      popupLabelCustomStyle,
     } = this.props;
-
+    
     // resolve menu label text and class
     const menuLabel = initialValue ? optionLabel(options, initialValue) : label;
     const menuLabelClass = initialValue ? css.menuLabelSelected : css.menuLabel;
@@ -54,7 +56,7 @@ class SelectSingleFilterPopup extends Component {
         onToggleActive={this.onToggleActive}
         isOpen={this.state.isOpen}
       >
-        <MenuLabel className={menuLabelClass}>{menuLabel}</MenuLabel>
+        <MenuLabel className={menuLabelClass} popupLabelCustomStyle={popupLabelCustomStyle}>{elementBeforeLabel} {menuLabel}</MenuLabel>
         <MenuContent className={css.menuContent}>
           {options.map(option => {
             // check if this option is selected
@@ -90,6 +92,8 @@ SelectSingleFilterPopup.defaultProps = {
   className: null,
   initialValue: null,
   contentPlacementOffset: 0,
+  elementBeforeLabel: null,
+  popupLabelCustomStyle: {},
 };
 
 SelectSingleFilterPopup.propTypes = {
@@ -106,6 +110,7 @@ SelectSingleFilterPopup.propTypes = {
   ).isRequired,
   initialValue: string,
   contentPlacementOffset: number,
+  popupLabelCustomStyle: object,
 };
 
 export default SelectSingleFilterPopup;

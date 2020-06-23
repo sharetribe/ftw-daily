@@ -1,5 +1,15 @@
 @import '../../marketplace.css';
 
+.contactBanner {
+  display: none;
+  max-width: 100%;
+  margin-top: 50px;
+  border-radius: 4px;
+  @media (--viewportLarge) {
+    display: block;
+  }
+}
+
 .contactButton {
   flex: 1;
   display: flex;
@@ -63,7 +73,10 @@
 }
 .priceValue {
   display: block;
-  @apply --marketplaceH2FontStyles;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 30px;
+  letter-spacing: -.3px;
   color: var(--matterColor);
 
   margin-top: 0;

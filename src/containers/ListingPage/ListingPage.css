@@ -320,7 +320,6 @@
   align-items: center;
   transform: translateZ(0);
   text-align: center;
-  background: none;
   
   @media (--viewportMedium) {
     padding: 18px 50px;
@@ -562,10 +561,10 @@
   color: var(--matterColorAnti);
 
   margin-top: 0;
-  margin-bottom: 20px;
+  margin-bottom: 35px;
   @media (--viewportMedium) {
-    margin-top: 0;
-    margin-bottom: 28px;
+    margin-top: 75px;
+    margin-bottom: 45px;
   }
 }
 
@@ -656,9 +655,10 @@
 
 .map {
   /* Dimensions: Map takes all available space from viewport (excludes action button and section title) */
-  height: calc(100vh - 193px);
+  height:50vh;
   width: 100%;
-
+  border-radius: 5px;
+  overflow: hidden;
   /* Static map: dimensions are 640px */
   max-width: 640px;
   max-height: 640px;

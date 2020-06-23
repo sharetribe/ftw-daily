@@ -3,7 +3,7 @@
  * Clicking it toggles visibility of MenuContent.
  */
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { object } from 'prop-types';
 import classNames from 'classnames';
 
 import css from './MenuLabel.css';
@@ -38,7 +38,7 @@ class MenuLabel extends Component {
   }
 
   render() {
-    const { children, className, rootClassName, isOpen, isOpenClassName } = this.props;
+    const { children, className, rootClassName, isOpen, isOpenClassName, popupLabelCustomStyle } = this.props;
 
     const rootClass = rootClassName || css.root;
     const isOpenClass = isOpenClassName || css.isOpen;
@@ -48,7 +48,7 @@ class MenuLabel extends Component {
     });
 
     return (
-      <button className={classes} onClick={this.onClick} onBlur={this.onBlur}>
+      <button className={classes} onClick={this.onClick} onBlur={this.onBlur} style={{...popupLabelCustomStyle}}>
         {children}
       </button>
     );
@@ -62,6 +62,7 @@ MenuLabel.defaultProps = {
   isOpen: false,
   onToggleActive: null,
   rootClassName: '',
+  popupLabelCustomStyle: {},
 };
 
 const { bool, func, node, string } = PropTypes;
@@ -73,6 +74,7 @@ MenuLabel.propTypes = {
   isOpen: bool,
   onToggleActive: func,
   rootClassName: string,
+  popupLabelCustomStyle: object,
 };
 
 export default MenuLabel;

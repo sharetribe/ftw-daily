@@ -123,7 +123,7 @@ const UserCard = props => {
         <div className={css.info}>
           <div className={css.headingRow}>
             <h3 className={css.heading}>
-              <FormattedMessage id="UserCard.heading" values={{ name: displayName }} />
+              <FormattedMessage id="UserCard.heading" values={{ name: displayName && displayName.split(" ").slice(0,1)[0] }} />
             </h3>
             {editProfileDesktop}
           </div>

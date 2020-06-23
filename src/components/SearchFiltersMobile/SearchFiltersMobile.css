@@ -10,10 +10,17 @@
   top: 0;
   z-index: 1;
 }
-
+.sortingPanel {
+  margin-right: 9px;
+  flex-shrink: 0;
+}
 .searchResultSummary {
-  @apply --marketplaceH3FontStyles;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -.3px;
   margin-top: 6px;
+  margin-bottom: 6px;
 
   display: flex;
   justify-content: space-between;
