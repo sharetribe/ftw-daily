@@ -397,7 +397,7 @@ export class CalendarPageComponent extends Component {
     </div>
   )
 
-  const calendar = typeof window !== 'undefined' && typeof Element !== 'undefined' && (
+  const calendar = typeof window !== 'undefined' && typeof Element !== 'undefined' && typeof document !== 'undefined' && (
     <div className={'main-calendar'}>
       <div className={css.calendarInfo}>
         <h5>Meine Kalender</h5>
@@ -484,7 +484,7 @@ export class CalendarPageComponent extends Component {
     catch(e) {}
   })
 
-  const noActiveTransactionsCalendar = typeof window !== 'undefined' && typeof Element !== 'undefined' && (
+  const noActiveTransactionsCalendar = typeof window !== 'undefined' && typeof Element !== 'undefined' && typeof document !== 'undefined' && (
     <div className={css.emptyCalenderWrapper}>
       <CalendarWrapper header={{
           left: "",
