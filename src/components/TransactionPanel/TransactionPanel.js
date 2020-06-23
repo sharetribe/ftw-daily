@@ -318,6 +318,17 @@ export class TransactionPanelComponent extends Component {
     const firstImage =
       currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
 
+    const providerData = {
+      //customer: currentUser.attributes.profile.displayName,
+      provider: currentListing.author.attributes.profile.displayName,
+      listingData: {
+        listingId: currentListing.id,
+        title:  currentListing.attributes.title,
+        price: currentListing.attributes.price.amount,
+        img: firstImage
+      }
+    }
+
     const saleButtons = (
       <SaleActionButtonsMaybe
         showButtons={stateData.showSaleButtons}
@@ -325,7 +336,7 @@ export class TransactionPanelComponent extends Component {
         declineInProgress={declineInProgress}
         acceptSaleError={acceptSaleError}
         declineSaleError={declineSaleError}
-        onAcceptSale={() => onAcceptSale(currentTransaction.id)}
+        onAcceptSale={() => onAcceptSale(currentTransaction.id, providerData)}
         onDeclineSale={() => onDeclineSale(currentTransaction.id)}
       />
     );
@@ -492,7 +503,21 @@ export class TransactionPanelComponent extends Component {
                   </PrimaryButton>
                 </a>
               </div>
-
+              {/*
+                <BookingPanel
+                  className={css.bookingPanel}
+                  titleClassName={css.bookingTitle}
+                  isOwnListing={false}
+                  listing={currentListing}
+                  title={listingTitle}
+                  subTitle={bookingSubTitle}
+                  authorDisplayName={authorDisplayName}
+                  onSubmit={onSubmitBookingRequest}
+                  onManageDisableScrolling={onManageDisableScrolling}
+                  timeSlots={timeSlots}
+                  fetchTimeSlotsError={fetchTimeSlotsError}
+                />
+          */}
               <BreakdownMaybe
                 className={css.breakdownContainer}
                 transaction={currentTransaction}

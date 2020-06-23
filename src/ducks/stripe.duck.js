@@ -402,16 +402,25 @@ const businessProfileParams = (accountData, accountConfig) => {
   const { mcc, url } =
     accountData && accountData.businessProfile ? accountData.businessProfile : {};
 
+//  const hasInformation = mcc && url;
+//   //       mcc: "4121",
+//   //       url: "https://rocketrides.io/"
+//  return true
+//    ? {
+//        businessProfileMCC: "4121",
+//        businessProfileURL: "https://rocketrides.io/"
+//      }
+//    : {};
+//};
   const hasInformation = mcc && url;
 
   return businessProfileRequired && hasInformation
     ? {
-        businessProfileMCC: mcc,
-        businessProfileURL: url,
-      }
+      businessProfileMCC: mcc,
+      businessProfileURL: url,
+    }
     : {};
 };
-
 // Util: rename accountToken params to match Stripe API specifications
 const accountTokenParamsForCompany = company => {
   const { address, name, phone, taxId } = company;
@@ -469,7 +478,7 @@ export const createStripeCompanyAccount = (payoutDetails, companyConfig, stripe)
         throw e;
       });
   }
-
+ 
   return stripe
     .createToken('account', accountTokenParamsForCompany(company))
     .then(response => {
@@ -515,9 +524,11 @@ const accountTokenParamsForIndividual = (individual, individualConfig) => {
     address,
     phone,
     email,
+    //phone = '8008675309',
+    //email = 'p8@horseplanet.ch',
     personalIdNumber,
   } = individual;
-
+ 
   const addressMaybe = address ? { address: formatAddress(address) } : {};
   const dobMaybe = birthDate ? { dob: birthDate } : {};
   const emailMaybe = email ? { email } : {};
@@ -532,7 +543,7 @@ const accountTokenParamsForIndividual = (individual, individualConfig) => {
     ? { id_number: personalIdNumber }
     : {};
 
-  return {
+  const individualTokenParams = {
     business_type: 'individual',
     individual: {
       first_name: firstName,
@@ -545,6 +556,8 @@ const accountTokenParamsForIndividual = (individual, individualConfig) => {
     },
     tos_shown_and_accepted: true,
   };
+ 
+  return individualTokenParams
 };
 
 export const createStripeIndividualAccount = (payoutDetails, individualConfig, stripe) => (
@@ -554,22 +567,31 @@ export const createStripeIndividualAccount = (payoutDetails, individualConfig, s
 ) => {
   const { country, individual } = payoutDetails;
   let stripeAccount;
-  dispatch(stripeAccountCreateRequest());
+  dispatch(stripeAccountCreateRequest());    
 
   return stripe
     .createToken('account', accountTokenParamsForIndividual(individual, individualConfig))
     .then(response => {
       const accountToken = response.token.id;
-      const bankAccountToken = bankAccountTokenParams(individual);
+      const bankAccountToken = bankAccountTokenParams(individual);     
       const stripeAccountParams = {
+        requestedCapabilities: ["transfers", "card_payments"],
         accountToken,
         bankAccountToken,
         country,
+          // business_profile: {
+          //       mcc: "4121",
+          //       url: "https://rocketrides.io/"
+          // }
+         //bankAccountToken, - delete
+        //country,- delete
         ...businessProfileParams(individual, individualConfig),
       };
       return sdk.stripeAccount.create(stripeAccountParams, { expand: true });
+      //return sdk.stripeAccount.update(stripeAccountParams, { expand: true });
     })
     .then(response => {
+      console.log(response.data.data)
       stripeAccount = response;
       dispatch(stripeAccountCreateSuccess(response.data.data));
       return stripeAccount;

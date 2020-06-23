@@ -158,7 +158,7 @@ class BirthdayInputComponent extends Component {
           >
             <option disabled value="">
               {datePlaceholder}
-            </option>
+            </option>            
             {days.map(d => (
               <option key={d} value={d}>
                 {pad(d)}
@@ -192,6 +192,10 @@ class BirthdayInputComponent extends Component {
         </div>
         <div className={css.selectWrapper}>
           {yearLabel}
+          {/*<br />
+          DE89370400440532013000
+          <br />
+          address_full_match*/}
           <select
             autoComplete="bday-year"
             disabled={disabled}
@@ -207,6 +211,9 @@ class BirthdayInputComponent extends Component {
             <option disabled value="">
               {yearPlaceholder}
             </option>
+            {/*<option  value={1901}>
+                1901
+              </option>*/}
             {years.map(y => (
               <option key={y} value={y}>
                 {y}

@@ -59,6 +59,7 @@ const HeadingCustomer = props => {
 };
 
 const HeadingCustomerWithSubtitle = props => {
+  
   const { className, id, values, subtitleId, subtitleValues, children, listingDeleted } = props;
   return (
     <React.Fragment>
@@ -221,7 +222,7 @@ const PanelHeading = props => {
         <HeadingProvider
           className={titleClasses}
           id="TransactionPanel.saleAcceptedTitle"
-          values={{ customerName, providerLink }}
+          values={{ customerName, listingLink }}
         />
       );
     case HEADING_DECLINED:

@@ -247,12 +247,24 @@ export const fetchTimeSlots = listingId => (dispatch, getState, sdk) => {
 };
 
 export const sendEnquiry = (listingId, message) => (dispatch, getState, sdk) => {
+  
   dispatch(sendEnquiryRequest());
+
+  const customerData = {
+    // id of currentUser
+    email: getState().user.currentUser.attributes.email,
+    name: getState().user.currentUser.attributes.profile.displayName
+  }
+
   const bodyParams = {
     transition: TRANSITION_ENQUIRE,
     processAlias: config.bookingProcessAlias,
-    params: { listingId },
+    params: { 
+      listingId,
+      protectedData: { customerData: JSON.stringify(customerData) }
+    }
   };
+
   return sdk.transactions
     .initiate(bodyParams)
     .then(response => {
