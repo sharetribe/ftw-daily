@@ -19,17 +19,15 @@ import {
   LayoutWrapperFooter,
   Footer,
   ResponsiveImage,
-  CalendarWrapper,
+  //CalendarWrapper,
 } from '../../components';
 import { TopbarContainer } from '..';
 
 import css from './CalendarPage.css';
 
-// import FullCalendar from '@fullcalendar/react'
-// import dayGridPlugin from '@fullcalendar/daygrid'
-// import timeGridPlugin from '@fullcalendar/timegrid';
-// import listPlugin from '@fullcalendar/list';
-// import interactionPlugin from '@fullcalendar/interaction';
+let CalendarWrapper = null 
+
+const ssrCheck = typeof window !== 'undefined' && typeof Element !== 'undefined' && typeof document !== 'undefined'
 
 const timeHelper = (d) => d.toLocaleString().split(", ").splice(1)
 
@@ -66,7 +64,10 @@ export class CalendarPageComponent extends Component {
     this.notificationPopup = React.createRef();
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    debugger
+    let result = await import('../../components/CalendarWrapper/CalendarWrapper.js')
+    CalendarWrapper = result.default
     // Re-render for isomorphic purposes
     requestAnimationFrame(() => {
       this.setState({ appIsMounted : true });
@@ -331,16 +332,6 @@ export class CalendarPageComponent extends Component {
   }
 
   render() {
-    const {
-      intl,
-      currentUserIdError,
-      acceptedAndActiveTransactions,
-      acceptedAndActiveTransactionsError,
-      scheduledRidingsForActiveTransactionsError,
-      newSchedulingDataTransactionError,
-      loadingStarted
-    } = this.props;
-    
     const { 
       appIsMounted,
       scheduledRidings,
@@ -353,10 +344,19 @@ export class CalendarPageComponent extends Component {
       // acceptedTransactionId,
       //idHandledByNotification,
     } = this.state
-    
-    
-    if(!appIsMounted) return null
-    
+      
+  if(!appIsMounted) return null
+
+  const {
+    intl,
+    currentUserIdError,
+    acceptedAndActiveTransactions,
+    acceptedAndActiveTransactionsError,
+    scheduledRidingsForActiveTransactionsError,
+    newSchedulingDataTransactionError,
+    loadingStarted
+  } = this.props;
+
   const title = intl.formatMessage({ id: 'Calendar.title' });
   
   const schedulingConfig = {
@@ -397,7 +397,7 @@ export class CalendarPageComponent extends Component {
     </div>
   )
 
-  const calendar = typeof window !== 'undefined' && typeof Element !== 'undefined' && typeof document !== 'undefined' && (
+  const calendar = ssrCheck && (
     <div className={'main-calendar'}>
       <div className={css.calendarInfo}>
         <h5>Meine Kalender</h5>
@@ -426,24 +426,6 @@ export class CalendarPageComponent extends Component {
         eventDrop={this.changeScheduleTime}
         eventResize={this.changeScheduleTime}
         />
-      {/* <FullCalendar 
-        defaultView="timeGridWeek" 
-        header={{
-          left: "prev,next today",
-          center: "",
-          right: "title",
-          // right: "dayGridMonth,timeGridWeek,timeGridDay"
-        }}
-        plugins={[dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin]}
-        events={scheduledRidings}
-        select={isCurrentUserAcceptedTransactionCustomer ? this.scheduleTime : () => {}}
-        eventDrop={this.changeScheduleTime}
-        eventResize={this.changeScheduleTime}
-        selectable={true}
-        selectOverlap={false}
-        editable={true}
-        eventOverlap={false}
-        /> */}
     </div>    
   ) 
 
@@ -484,9 +466,10 @@ export class CalendarPageComponent extends Component {
     catch(e) {}
   })
 
-  const noActiveTransactionsCalendar = typeof window !== 'undefined' && typeof Element !== 'undefined' && typeof document !== 'undefined' && (
+  const noActiveTransactionsCalendar = ssrCheck && (
     <div className={css.emptyCalenderWrapper}>
-      <CalendarWrapper header={{
+      <CalendarWrapper
+       header={{
           left: "",
           center: "",
           right: "title"
@@ -499,17 +482,6 @@ export class CalendarPageComponent extends Component {
         select={() => {}}
         eventResize={() => {}}
         />
-      {/* <FullCalendar 
-        defaultView="timeGridWeek" 
-        header={{
-          left: "",
-          center: "",
-          right: "title"
-        }}
-        plugins={[dayGridPlugin, timeGridPlugin, listPlugin]}
-        selectable={false}
-        editable={false}
-        /> */}
         <div className={css.emptyCalenderInfo}>
           <div className={css.ridingTitle}>You don't have active bookings yet.</div>
         </div> 
