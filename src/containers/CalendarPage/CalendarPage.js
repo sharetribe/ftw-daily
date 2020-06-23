@@ -397,7 +397,7 @@ export class CalendarPageComponent extends Component {
     </div>
   )
 
-  const calendar = typeof window !== 'undefined' ? (
+  const calendar = typeof window !== 'undefined' && typeof Element !== 'undefined' && (
     <div className={'main-calendar'}>
       <div className={css.calendarInfo}>
         <h5>Meine Kalender</h5>
@@ -445,7 +445,7 @@ export class CalendarPageComponent extends Component {
         eventOverlap={false}
         /> */}
     </div>    
-  ) : null
+  ) 
 
   class ListingImage extends Component {
     render() {
@@ -484,7 +484,7 @@ export class CalendarPageComponent extends Component {
     catch(e) {}
   })
 
-  const noActiveTransactionsCalendar = typeof window !== 'undefined' ? (
+  const noActiveTransactionsCalendar = typeof window !== 'undefined' && typeof Element !== 'undefined' && (
     <div className={css.emptyCalenderWrapper}>
       <CalendarWrapper header={{
           left: "",
@@ -514,7 +514,7 @@ export class CalendarPageComponent extends Component {
           <div className={css.ridingTitle}>You don't have active bookings yet.</div>
         </div> 
     </div>
-  ) : null
+  ) 
 
   if(activeTransactionsList && !activeTransactionsList.length) {
     activeTransactionsList.push(noActiveTransactionsCalendar)
