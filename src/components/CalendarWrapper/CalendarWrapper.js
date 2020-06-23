@@ -15,7 +15,7 @@ import listPlugin from '@fullcalendar/list';
 const FullCalendar = loadable(() => import('@fullcalendar/react'), { ssr: false });
 
 const CalendarWrapper = ({header, defaultView, selectable, editable, events, eventClick, select, eventDrop, eventResize}) => {
-    return typeof window !== 'undefined' && (
+    return typeof window !== 'undefined' && typeof Element !== 'undefined' && typeof document !== 'undefined' && (
     <FullCalendar 
         // plugins={[DayGrid, TimeGrid, ListPlugin, Interactions]}
         plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin, listPlugin]}
