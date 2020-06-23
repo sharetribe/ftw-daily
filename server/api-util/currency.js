@@ -49,48 +49,6 @@ exports.unitDivisor = currency => {
   return subUnitDivisors[currency];
 };
 
-////////// Currency manipulation in string format //////////
-
-/**
- * Ensures that the given string uses only dots or commas
- * e.g. ensureSeparator('9999999,99', false) // => '9999999.99'
- *
- * @param {String} str - string to be formatted
- *
- * @return {String} converted string
- */
-const ensureSeparator = (str, useComma = false) => {
-  if (typeof str !== 'string') {
-    throw new TypeError('Parameter must be a string');
-  }
-  return useComma ? str.replace(/\./g, ',') : str.replace(/,/g, '.');
-};
-
-/**
- * Ensures that the given string uses only dots
- * (e.g. JavaScript floats use dots)
- *
- * @param {String} str - string to be formatted
- *
- * @return {String} converted string
- */
-const ensureDotSeparator = str => {
-  return ensureSeparator(str, false);
-};
-
-/**
- * Convert string to Decimal object (from Decimal.js math library)
- * Handles both dots and commas as decimal separators
- *
- * @param {String} str - string to be converted
- *
- * @return {Decimal} numeral value
- */
-const convertToDecimal = str => {
-  const dotFormattedStr = ensureDotSeparator(str);
-  return new Decimal(dotFormattedStr);
-};
-
 // Divisor can be positive value given as Decimal, Number, or String
 const convertDivisorToDecimal = divisor => {
   try {
@@ -111,51 +69,16 @@ const isGoogleMathLong = value => {
 };
 
 /**
- * Converts given value to sub unit value and returns it as a number
- *
- * @param {Number|String} value
- *
- * @param {Decimal|Number|String} subUnitDivisor - should be something that can be converted to
- * Decimal. (This is a ratio between currency's main unit and sub units.)
- *
- * @param {boolean} useComma - optional.
- * Specify if return value should use comma as separator
- *
- * @return {number} converted value
- */
-exports.convertUnitToSubUnit = (value, subUnitDivisor, useComma = false) => {
-  const subUnitDivisorAsDecimal = convertDivisorToDecimal(subUnitDivisor);
-
-  if (!(typeof value === 'number')) {
-    throw new TypeError('Value must be number');
-  }
-
-  const val = new Decimal(value);
-  const amount = val.times(subUnitDivisorAsDecimal);
-
-  if (!isSafeNumber(amount)) {
-    throw new Error(
-      `Cannot represent money minor unit value ${amount.toString()} safely as a number`
-    );
-  } else if (amount.isInteger()) {
-    return amount.toNumber();
-  } else {
-    throw new Error(`value must divisible by ${subUnitDivisor}`);
-  }
-};
-
-/**
- * Convert Money to a number
+ * Gets subunit amount from Money object and returns it as Decimal.
  *
  * @param {Money} value
  *
  * @return {Number} converted value
  */
-exports.convertMoneyToNumber = value => {
+exports.getAmountAsDecimalJS = value => {
   if (!(value instanceof Money)) {
     throw new Error('Value must be a Money type');
   }
-  const subUnitDivisorAsDecimal = convertDivisorToDecimal(this.unitDivisor(value.currency));
   let amount;
 
   if (isGoogleMathLong(value.amount)) {
@@ -177,5 +100,24 @@ exports.convertMoneyToNumber = value => {
     );
   }
 
-  return amount.dividedBy(subUnitDivisorAsDecimal).toNumber();
+  return amount;
+};
+
+/**
+ * Converts value from DecimalJS to plain JS Number.
+ * This also checks that Decimal.js value (for Money/amount)
+ * is not too big or small for JavaScript to handle.
+ *
+ * @param {Decimal} value
+ *
+ * @return {Number} converted value
+ */
+exports.convertDecimalJSToNumber = decimalValue => {
+  if (!isSafeNumber(decimalValue)) {
+    throw new Error(
+      `Cannot represent Decimal.js value ${decimalValue.toString()} safely as a number`
+    );
+  }
+
+  return decimalValue.toNumber();
 };
