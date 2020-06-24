@@ -108,7 +108,7 @@ exports.render = function(requestUrl, context, preloadedState) {
       <script>window.__PRELOADED_STATE__ = ${JSON.stringify(serializedState)};</script>
   `;
 
-  // We want to precicely control where the analytics script is
+  // We want to precisely control where the analytics script is
   // injected in the HTML file so we can catch all events as early as
   // possible. This is why we inject the GA script separately from
   // react-helmet. This script also ensures that all the GA scripts
