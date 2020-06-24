@@ -17,17 +17,25 @@ class FullCalendarWrapper extends Component {
         };
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         if(ssrCheck) {
-            import ('@fullcalendar/react').then(calendar => FullCalendar = calendar.default)
-            import ('@fullcalendar/daygrid').then(daygrid => dayGridPlugin = daygrid.default)
-            import ('@fullcalendar/interaction').then(interaction => interactionPlugin = interaction.default)
-            import ('@fullcalendar/timegrid').then(timegrid => timeGridPlugin = timegrid.default)
-            import ('@fullcalendar/list').then(list => { 
-                listPlugin = list.default
-                // Re-render for isomorphic purposes
-                this.setState({ appIsMounted : true });
-             })
+            let calendar = await import('@fullcalendar/react')
+            FullCalendar = calendar.default
+
+            let daygrid = await import('@fullcalendar/daygrid')
+            dayGridPlugin = daygrid.default
+        
+            let interaction = await import('@fullcalendar/interaction')
+            interactionPlugin = interaction.default
+           
+            let timegrid = await import('@fullcalendar/timegrid')
+            timeGridPlugin = timegrid.default
+          
+            let list = await import('@fullcalendar/list')
+            listPlugin = list.default
+           
+            // Re-render for isomorphic purposes
+            this.setState({ appIsMounted : true });
         }    
       }
 
@@ -55,8 +63,6 @@ class FullCalendarWrapper extends Component {
                     eventOverlap={false}
                 />}
             </div>
-            
-            
         )
     }
   }
