@@ -19,15 +19,11 @@ import {
   LayoutWrapperFooter,
   Footer,
   ResponsiveImage,
-  //CalendarWrapper,
+  CalendarWrapper,
 } from '../../components';
 import { TopbarContainer } from '..';
 
 import css from './CalendarPage.css';
-
-let CalendarWrapper = null 
-
-const ssrCheck = typeof window !== 'undefined' && typeof Element !== 'undefined' && typeof document !== 'undefined'
 
 const timeHelper = (d) => d.toLocaleString().split(", ").splice(1)
 
@@ -36,8 +32,6 @@ export class CalendarPageComponent extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      appIsMounted: false,
-
       acceptedTransactionSelected: false,
       acceptedTransactionId: null,
 
@@ -62,16 +56,6 @@ export class CalendarPageComponent extends Component {
       notificationState: null,
     };
     this.notificationPopup = React.createRef();
-  }
-
-  async componentDidMount() {
-    debugger
-    let result = await import('../../components/CalendarWrapper/CalendarWrapper.js')
-    CalendarWrapper = result.default
-    // Re-render for isomorphic purposes
-    requestAnimationFrame(() => {
-      this.setState({ appIsMounted : true });
-    });
   }
 
   getStatusFromEventId = id => this.state.scheduledRidings.filter(_ => _.id === id)[0]
@@ -333,7 +317,6 @@ export class CalendarPageComponent extends Component {
 
   render() {
     const { 
-      appIsMounted,
       scheduledRidings,
       acceptedTransactionSelected,
       notificationPopupVisible,
@@ -344,9 +327,7 @@ export class CalendarPageComponent extends Component {
       // acceptedTransactionId,
       //idHandledByNotification,
     } = this.state
-      
-  if(!appIsMounted) return null
-
+    
   const {
     intl,
     currentUserIdError,
@@ -397,7 +378,7 @@ export class CalendarPageComponent extends Component {
     </div>
   )
 
-  const calendar = ssrCheck && (
+  const calendar = (
     <div className={'main-calendar'}>
       <div className={css.calendarInfo}>
         <h5>Meine Kalender</h5>
@@ -415,7 +396,6 @@ export class CalendarPageComponent extends Component {
           left: "prev,next today",
           center: "",
           right: "title",
-
         }}
         defaultView="timeGridWeek" 
         editable={true} 
@@ -466,24 +446,11 @@ export class CalendarPageComponent extends Component {
     catch(e) {}
   })
 
-  const noActiveTransactionsCalendar = ssrCheck && (
+  const noActiveTransactionsCalendar = (
     <div className={css.emptyCalenderWrapper}>
-      <CalendarWrapper
-       header={{
-          left: "",
-          center: "",
-          right: "title"
-        }}
-        defaultView="timeGridWeek" 
-        selectable={false}
-        editable={false}
-        events={[]}
-        eventClick={() => {}}
-        select={() => {}}
-        eventResize={() => {}}
-        />
+      {calendar}
         <div className={css.emptyCalenderInfo}>
-          <div className={css.ridingTitle}>You don't have active bookings yet.</div>
+          <div className={css.ridingTitle}>Sie haben noch keine aktiven Buchungen.</div>
         </div> 
     </div>
   ) 

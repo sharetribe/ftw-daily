@@ -1,37 +1,64 @@
-import React from 'react';
-import loadable from '@loadable/component';
+import React, {Component} from 'react';
 
-// const Interactions = loadable(() => import('@fullcalendar/interaction'));
-// const ListPlugin = loadable(() => import('@fullcalendar/list'));
-//const DayGrid = loadable(() => import('@fullcalendar/daygrid'));
-//const TimeGrid = loadable(() => import('@fullcalendar/timegrid'));
+const ssrCheck = typeof window !== 'undefined' && typeof Element !== 'undefined' && typeof document !== 'undefined'
 
-// import FullCalendar from '@fullcalendar/react'
-import dayGridPlugin from '@fullcalendar/daygrid'
-import interactionPlugin from '@fullcalendar/interaction';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import listPlugin from '@fullcalendar/list';
+let FullCalendar = null
+let dayGridPlugin = null
+let interactionPlugin = null
+let timeGridPlugin = null
+let listPlugin = null
 
-const FullCalendar = loadable(() => import('@fullcalendar/react'), { ssr: false });
+class FullCalendarWrapper extends Component {
 
-const CalendarWrapper = ({header, defaultView, selectable, editable, events, eventClick, select, eventDrop, eventResize}) => {
-    
-    return typeof window !== 'undefined' && typeof Element !== 'undefined' && typeof document !== 'undefined' && (
-    <FullCalendar 
-        plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin, listPlugin]}
-        defaultView={defaultView} 
-        header={header}
-        selectable={selectable}
-        editable={editable}
-        events={events}
-        eventClick={eventClick}
-        select={select}
-        eventDrop={eventDrop}
-        eventResize={eventResize}
-        selectOverlap={false}
-        eventOverlap={false}
-    />
-    );
-  };
+    constructor(props) {
+        super(props);
+        this.state = { 
+          appIsMounted: false,
+        };
+    }
+
+    componentDidMount() {
+        if(ssrCheck) {
+            import ('@fullcalendar/react').then(calendar => FullCalendar = calendar.default)
+            import ('@fullcalendar/daygrid').then(daygrid => dayGridPlugin = daygrid.default)
+            import ('@fullcalendar/interaction').then(interaction => interactionPlugin = interaction.default)
+            import ('@fullcalendar/timegrid').then(timegrid => timeGridPlugin = timegrid.default)
+            import ('@fullcalendar/list').then(list => { 
+                listPlugin = list.default
+                // Re-render for isomorphic purposes
+                this.setState({ appIsMounted : true });
+             })
+        }    
+      }
+
+      render() {
+        const {appIsMounted } = this.state
+        const {header, defaultView, selectable, editable, events, eventClick, select, eventDrop, eventResize} = this.props
+        const componentCheck = FullCalendar && dayGridPlugin && interactionPlugin && timeGridPlugin && listPlugin
+        
+        if(!appIsMounted) return null
+        
+        return (
+            <div>
+                {componentCheck && <FullCalendar 
+                    plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin, listPlugin]}
+                    defaultView={defaultView} 
+                    header={header}
+                    selectable={selectable}
+                    editable={editable}
+                    events={events}
+                    eventClick={eventClick}
+                    select={select}
+                    eventDrop={eventDrop}
+                    eventResize={eventResize}
+                    selectOverlap={false}
+                    eventOverlap={false}
+                />}
+            </div>
+            
+            
+        )
+    }
+  }
   
-  export default CalendarWrapper;
+  export default FullCalendarWrapper;

@@ -1,3 +1,0 @@
-{
-    "plugins": ["@loadable/babel-plugin"]
-  }
