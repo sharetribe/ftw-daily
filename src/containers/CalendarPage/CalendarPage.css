@@ -155,3 +155,17 @@
     margin-bottom: 20px;
     border: .5px solid rgba(0,0,0,.25);
   }
+
+  @media screen and (max-width: 680px) {
+    .pageTitleWrapper {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .calendarPageTitle {
+      margin-bottom: 25px;
+    }
+    .calendarInfo {
+      margin: 0;
+      margin-bottom: 25px;
+    }
+  }
