@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+## [v6.0.0] 2020-06-25
+
 - [change] Use privileged transitions for price calculation by default and
   update the process alias.
   [#1314](https://github.com/sharetribe/ftw-daily/pull/1314)
