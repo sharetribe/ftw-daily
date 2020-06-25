@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [add] Add client secret enquiry to 'yarn run config' script
+  [#1313](https://github.com/sharetribe/ftw-daily/pull/1313)
 - [change] Add UI support for flexible pricing and privileged
   transitions. Note that this requires updating the booking breakdown
   estimation code that is now done in the backend.
