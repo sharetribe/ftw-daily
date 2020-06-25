@@ -47,10 +47,12 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
           }
           declineInProgress={false}
           declineSaleError={null}
+          fetchLineItemsError={null}
           fetchMessagesError={null}
           fetchMessagesInProgress={false}
           fetchTimeSlotsError={null}
           initialMessageFailed={false}
+          lineItems={null}
           messages={Array []}
           oldestMessagePageFetched={0}
           onAcceptSale={[Function]}
@@ -271,9 +273,11 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
           }
           declineInProgress={false}
           declineSaleError={null}
+          fetchLineItemsError={null}
           fetchMessagesError={null}
           fetchTimeSlotsError={null}
           initialMessageFailed={false}
+          lineItems={null}
           messages={Array []}
           oldestMessagePageFetched={0}
           onAcceptSale={[Function]}

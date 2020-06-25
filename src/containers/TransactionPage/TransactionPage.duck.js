@@ -13,6 +13,7 @@ import {
   TRANSITION_ACCEPT,
   TRANSITION_DECLINE,
 } from '../../util/transaction';
+import { transactionLineItems } from '../../util/api';
 import * as log from '../../util/log';
 import {
   updatedEntities,
@@ -63,6 +64,10 @@ export const FETCH_TIME_SLOTS_REQUEST = 'app/TransactionPage/FETCH_TIME_SLOTS_RE
 export const FETCH_TIME_SLOTS_SUCCESS = 'app/TransactionPage/FETCH_TIME_SLOTS_SUCCESS';
 export const FETCH_TIME_SLOTS_ERROR = 'app/TransactionPage/FETCH_TIME_SLOTS_ERROR';
 
+export const FETCH_LINE_ITEMS_REQUEST = 'app/TransactionPage/FETCH_LINE_ITEMS_REQUEST';
+export const FETCH_LINE_ITEMS_SUCCESS = 'app/TransactionPage/FETCH_LINE_ITEMS_SUCCESS';
+export const FETCH_LINE_ITEMS_ERROR = 'app/TransactionPage/FETCH_LINE_ITEMS_ERROR';
+
 // ================ Reducer ================ //
 
 const initialState = {
@@ -90,6 +95,9 @@ const initialState = {
   fetchTransitionsInProgress: false,
   fetchTransitionsError: null,
   processTransitions: null,
+  lineItems: null,
+  fetchLineItemsInProgress: false,
+  fetchLineItemsError: null,
 };
 
 // Merge entity arrays using ids, so that conflicting items in newer array (b) overwrite old values (a).
@@ -184,6 +192,13 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
     case FETCH_TIME_SLOTS_ERROR:
       return { ...state, fetchTimeSlotsError: payload };
 
+    case FETCH_LINE_ITEMS_REQUEST:
+      return { ...state, fetchLineItemsInProgress: true, fetchLineItemsError: null };
+    case FETCH_LINE_ITEMS_SUCCESS:
+      return { ...state, fetchLineItemsInProgress: false, lineItems: payload };
+    case FETCH_LINE_ITEMS_ERROR:
+      return { ...state, fetchLineItemsInProgress: false, fetchLineItemsError: payload };
+
     default:
       return state;
   }
@@ -247,6 +262,17 @@ const fetchTimeSlotsError = e => ({
   type: FETCH_TIME_SLOTS_ERROR,
   error: true,
   payload: e,
+});
+
+export const fetchLineItemsRequest = () => ({ type: FETCH_LINE_ITEMS_REQUEST });
+export const fetchLineItemsSuccess = lineItems => ({
+  type: FETCH_LINE_ITEMS_SUCCESS,
+  payload: lineItems,
+});
+export const fetchLineItemsError = error => ({
+  type: FETCH_LINE_ITEMS_ERROR,
+  error: true,
+  payload: error,
 });
 
 // ================ Thunks ================ //
@@ -597,6 +623,22 @@ export const fetchNextTransitions = id => (dispatch, getState, sdk) => {
     })
     .catch(e => {
       dispatch(fetchTransitionsError(storableError(e)));
+    });
+};
+
+export const fetchTransactionLineItems = ({ bookingData, listingId, isOwnListing }) => dispatch => {
+  dispatch(fetchLineItemsRequest());
+  transactionLineItems({ bookingData, listingId, isOwnListing })
+    .then(response => {
+      const lineItems = response.data;
+      dispatch(fetchLineItemsSuccess(lineItems));
+    })
+    .catch(e => {
+      dispatch(fetchLineItemsError(storableError(e)));
+      log.error(e, 'fetching-line-items-failed', {
+        listingId: listingId.uuid,
+        bookingData: bookingData,
+      });
     });
 };
 

@@ -335,3 +335,15 @@ export const getUserTxRole = (currentUserId, transaction) => {
 
 export const txRoleIsProvider = userRole => userRole === TX_TRANSITION_ACTOR_PROVIDER;
 export const txRoleIsCustomer = userRole => userRole === TX_TRANSITION_ACTOR_CUSTOMER;
+
+// Check if the given transition is privileged.
+//
+// Privileged transitions need to be handled from a secure context,
+// i.e. the backend. This helper is used to check if the transition
+// should go through the local API endpoints, or if using JS SDK is
+// enough.
+export const isPrivileged = transition => {
+  return [
+    // list privileged transitions here
+  ].includes(transition);
+};

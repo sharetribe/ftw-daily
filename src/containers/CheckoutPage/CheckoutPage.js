@@ -181,6 +181,7 @@ export class CheckoutPageComponent extends Component {
 
     if (shouldFetchSpeculatedTransaction) {
       const listingId = pageData.listing.id;
+      const transactionId = tx ? tx.id : null;
       const { bookingStart, bookingEnd } = pageData.bookingDates;
 
       // Convert picked date to date that will be converted on the API as
@@ -191,11 +192,14 @@ export class CheckoutPageComponent extends Component {
       // Fetch speculated transaction for showing price in booking breakdown
       // NOTE: if unit type is line-item/units, quantity needs to be added.
       // The way to pass it to checkout page is through pageData.bookingData
-      fetchSpeculatedTransaction({
-        listingId,
-        bookingStart: bookingStartForAPI,
-        bookingEnd: bookingEndForAPI,
-      });
+      fetchSpeculatedTransaction(
+        {
+          listingId,
+          bookingStart: bookingStartForAPI,
+          bookingEnd: bookingEndForAPI,
+        },
+        transactionId
+      );
     }
 
     this.setState({ pageData: pageData || {}, dataLoaded: true });
@@ -937,7 +941,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   dispatch,
-  fetchSpeculatedTransaction: params => dispatch(speculateTransaction(params)),
+  fetchSpeculatedTransaction: (params, transactionId) =>
+    dispatch(speculateTransaction(params, transactionId)),
   fetchStripeCustomer: () => dispatch(stripeCustomer()),
   onInitiateOrder: (params, transactionId) => dispatch(initiateOrder(params, transactionId)),
   onRetrievePaymentIntent: params => dispatch(retrievePaymentIntent(params)),
