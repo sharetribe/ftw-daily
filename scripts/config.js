@@ -23,7 +23,7 @@ const run = () => {
       process.on('exit', code => {
         console.log(`
 
-${chalk.bold.red(`You don't have required .env file!`)} 
+${chalk.bold.red(`You don't have required .env file!`)}
 
 Some environment variables are required before starting Flex template for web. You can create the .env file and configure the variables by running ${chalk.cyan.bold(
           'yarn run config'
@@ -35,7 +35,7 @@ Some environment variables are required before starting Flex template for web. Y
     }
   } else if (hasEnvFile) {
     console.log(`
-${chalk.bold.green('.env file already exists!')} 
+${chalk.bold.green('.env file already exists!')}
 Remember to restart the application after editing the environment variables! You can also edit environment variables by editing the .env file directly in your text editor.
     `);
 
@@ -65,7 +65,7 @@ Remember to restart the application after editing the environment variables! You
           name: 'createEmptyEnv',
           message: `Do you want to configure required environment variables now?
 ${chalk.dim(
-  `If you don't set up variables now .env file is created based on .env-template file. The application will not work correctly without Flex client ID, Stripe publishable API key and MapBox acces token.
+  `If you don't set up variables now .env file is created based on .env-template file. The application will not work correctly without Flex client ID, Flex client secret, Stripe publishable API key and MapBox acces token.
 We recommend setting up the required variables before starting the application!`
 )}`,
           default: true,
@@ -102,6 +102,10 @@ const mandatoryVariables = settings => {
     settings.REACT_APP_SHARETRIBE_SDK_CLIENT_ID !== 'change-me'
       ? { default: settings.REACT_APP_SHARETRIBE_SDK_CLIENT_ID }
       : {};
+  const clientSecretDefaultMaybe =
+    settings && settings.SHARETRIBE_SDK_CLIENT_SECRET !== ''
+      ? { default: settings.SHARETRIBE_SDK_CLIENT_SECRET }
+      : {};
   const stripeDefaultMaybe =
     settings && settings.REACT_APP_STRIPE_PUBLISHABLE_KEY !== ''
       ? { default: settings.REACT_APP_STRIPE_PUBLISHABLE_KEY }
@@ -131,6 +135,17 @@ ${chalk.dim(
         return 'Please enter valid Flex Client ID. You can check it form Flex Console!';
       },
       ...clientIdDefaultMaybe,
+    },
+    {
+      type: 'input',
+      name: 'SHARETRIBE_SDK_CLIENT_SECRET',
+      message: `What is your Flex client secret?
+${chalk.dim(
+  `Client Secret is needed for privileged transitions with Flex API.
+Client secret is connected to client ID. You can find your client secret from Flex Console.`
+)}
+`,
+      ...clientSecretDefaultMaybe,
     },
     {
       type: 'input',
@@ -166,7 +181,7 @@ If you don't set the Mapbox key, the map components won't work in the applicatio
       message: `What is your marketplace currency?
 ${chalk.dim(
   'The currency used in the Marketplace must be in ISO 4217 currency code. For example USD, EUR, CAD, AUD, etc. The default value is USD.'
-)} 
+)}
 `,
       default: function() {
         return currencyDefault;
@@ -211,7 +226,7 @@ const advancedSettings = settings => {
     {
       type: 'input',
       name: 'REACT_APP_CANONICAL_ROOT_URL',
-      message: `What is your canonical root URL? 
+      message: `What is your canonical root URL?
 ${chalk.dim(
   'Canonical root URL of the marketplace is needed for social media sharing and SEO optimization. When developing the template application locally URL is usually http://localhost:3000'
 )}
@@ -242,7 +257,7 @@ ${chalk.dim(
       message: `Do you want to enable default search suggestions?
 ${chalk.dim(
   'This setting enables the Default Search Suggestions in location autocomplete search input. The default value for this setting is true.'
-)}    
+)}
 `,
       default: searchesDefault,
       when: function(answers) {
@@ -292,13 +307,13 @@ const askQuestions = settings => {
  */
 const showSuccessMessage = () => {
   console.log(`
-${chalk.green.bold('.env file saved succesfully!')} 
+${chalk.green.bold('.env file saved succesfully!')}
 
 Start the Flex template application by running ${chalk.bold.cyan('yarn run dev')}
 
 Note that the .env file is a hidden file so it might not be visible directly in directory listing. If you want to update the environment variables run ${chalk.cyan.bold(
     'yarn run config'
-  )} again or edit the .env file directly. Remember to restart the application after editing the environment variables! 
+  )} again or edit the .env file directly. Remember to restart the application after editing the environment variables!
 `);
 };
 
