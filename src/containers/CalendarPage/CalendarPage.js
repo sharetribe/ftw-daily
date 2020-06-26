@@ -388,7 +388,7 @@ export class CalendarPageComponent extends Component {
         </div>
         <div className={css.calendarInfoItem}>
           <span style={{'background': 'lightgrey'}}></span>
-          <span>In Erwartung</span>
+          <span>Provisorisch</span>
         </div>
       </div>
       <CalendarWrapper 
@@ -450,7 +450,7 @@ export class CalendarPageComponent extends Component {
     <div className={css.emptyCalenderWrapper}>
       {calendar}
         <div className={css.emptyCalenderInfo}>
-          <div className={css.ridingTitle}>Sie haben noch keine aktiven Buchungen.</div>
+          <div className={css.ridingTitle}>Du hast noch keine aktiven Verträge.</div>
         </div> 
     </div>
   ) 
@@ -489,7 +489,7 @@ export class CalendarPageComponent extends Component {
                 <div style={{'filter': loadingStarted ? 'blur(4px)' : 'initial'}}>
                   <div className={css.pageTitleWrapper}>
                     <h1 className={css.calendarPageTitle}>
-                      Zeitplan Ihrer Ridings
+                      Zeitplan Deiner Pferde
                     </h1>
                     {acceptedTransactionSelected && ( <button className={css.contactButton} onClick={this.resetAcceptedTransaction}>Zurück zu den Angeboten</button> )}
                   </div>
