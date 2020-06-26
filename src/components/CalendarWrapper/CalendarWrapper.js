@@ -61,6 +61,9 @@ class FullCalendarWrapper extends Component {
                     eventResize={eventResize}
                     selectOverlap={false}
                     eventOverlap={false}
+                    firstDay={1}
+                    locale={'de'}
+                    //dayNamesShort={['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So']}
                 />}
             </div>
         )

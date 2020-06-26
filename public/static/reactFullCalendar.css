@@ -67,6 +67,14 @@
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
 	background: rgba(0,0,0,.15);;
 }
+.main-calendar .fc-day-grid .fc-axis.fc-widget-content {
+	color: transparent;
+}
+.main-calendar .fc-day-grid .fc-axis.fc-widget-content:before{
+	content: 'Ganztags';
+	color:rgb(26, 43, 73) !important;
+	font-size: 10px;
+} 
 @media screen and (max-width: 680px) {
     .main-calendar {
       flex-direction: column;
