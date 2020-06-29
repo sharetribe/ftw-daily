@@ -14,6 +14,7 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [fix] small typo. [#1319](https://github.com/sharetribe/ftw-daily/pull/1319)
 - [fix] Fix typo (which is copy-pasted in 4 files).
   [#1318](https://github.com/sharetribe/ftw-daily/pull/1318)
 - [add] Update French translation file (Spanish and German translations have still missing keys).
