@@ -38,8 +38,12 @@ const bookingProcessAlias = 'flex-default-process/release-1';
 //
 // Possible values: ['line-item/night', 'line-item/day', 'line-item/units';]
 //
-// Note: translations will use different translation keys for night, day or unit
-// depending on the value chosen.
+// Note 1: This 'bookingUnitType' variable affects only web app.
+//         If you are using privileged transitions (which is used by the default process),
+//         you also need to configure unit type in API server: server/api-util/lineItems.js
+//
+// Note 2: Translations will use different translation keys for night, day or unit
+//         depending on the value chosen.
 const bookingUnitType = 'line-item/night';
 
 // Should the application fetch available time slots (currently defined as

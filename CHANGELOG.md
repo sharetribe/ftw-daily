@@ -14,16 +14,17 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [fix] Sync bookingUnitType variables and update comments. Client app's API (proxy) server needs to
+  know about unit type. [#1317](https://github.com/sharetribe/ftw-daily/pull/1317)
+
 ## [v6.0.0] 2020-06-25
 
-- [change] Use privileged transitions for price calculation by default and
-  update the process alias.
+- [change] Use privileged transitions for price calculation by default and update the process alias.
   [#1314](https://github.com/sharetribe/ftw-daily/pull/1314)
 - [add] Add client secret enquiry to 'yarn run config' script
   [#1313](https://github.com/sharetribe/ftw-daily/pull/1313)
-- [change] Add UI support for flexible pricing and privileged
-  transitions. Note that this requires updating the booking breakdown
-  estimation code that is now done in the backend.
+- [change] Add UI support for flexible pricing and privileged transitions. Note that this requires
+  updating the booking breakdown estimation code that is now done in the backend.
   [#1310](https://github.com/sharetribe/ftw-daily/pull/1310)
 - [add] Add local API endpoints for flexible pricing and privileged transitions
   [#1301](https://github.com/sharetribe/ftw-daily/pull/1301)
