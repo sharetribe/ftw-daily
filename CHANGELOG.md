@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [fix] Sync bookingUnitType variables and update comments. Client app's API (proxy) server needs to
+  know about unit type. [#1317](https://github.com/sharetribe/ftw-daily/pull/1317)
+
 ## [v6.0.0] 2020-06-25
 
 - [change] Use privileged transitions for price calculation by default and update the process alias.
