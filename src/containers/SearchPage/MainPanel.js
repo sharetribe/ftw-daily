@@ -117,8 +117,15 @@ class MainPanel extends Component {
 
     return updatedURLParams => {
       const updater = prevState => {
+        const { address, bounds } = urlQueryParams;
         const mergedQueryParams = { ...urlQueryParams, ...prevState.currentQueryParams };
-        return { currentQueryParams: { ...mergedQueryParams, ...updatedURLParams } };
+
+        // Address and bounds are handled outside of MainPanel.
+        // I.e. TopbarSearchForm && search by moving the map.
+        // We should always trust urlQueryParams with those.
+        return {
+          currentQueryParams: { ...mergedQueryParams, ...updatedURLParams, address, bounds },
+        };
       };
 
       const callback = () => {
