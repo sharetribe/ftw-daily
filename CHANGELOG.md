@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [fix] MainPanel: search filter bug. Address and bounds are handled outside of MainPanel, URL
+  params should be trusted instead of values stored to state.
+  [#1320](https://github.com/sharetribe/ftw-daily/pull/1320)
 - [fix] small typo. [#1319](https://github.com/sharetribe/ftw-daily/pull/1319)
 - [fix] Fix typo (which is copy-pasted in 4 files).
   [#1318](https://github.com/sharetribe/ftw-daily/pull/1318)
