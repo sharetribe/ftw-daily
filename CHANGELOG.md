@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+## [v6.1.0] 2020-07-01
+
 - [fix] MainPanel: search filter bug. Address and bounds are handled outside of MainPanel, URL
   params should be trusted instead of values stored to state.
   [#1320](https://github.com/sharetribe/ftw-daily/pull/1320)
@@ -24,6 +26,8 @@ way to update this template, but currently, we follow a pattern:
   [#1316](https://github.com/sharetribe/ftw-daily/pull/1316)
 - [fix] Sync bookingUnitType variables and update comments. Client app's API (proxy) server needs to
   know about unit type. [#1317](https://github.com/sharetribe/ftw-daily/pull/1317)
+
+[v6.1.0]: https://github.com/sharetribe/flex-template-web/compare/v6.0.0...v6.1.0
 
 ## [v6.0.0] 2020-06-25
 
@@ -38,6 +42,8 @@ way to update this template, but currently, we follow a pattern:
   [#1301](https://github.com/sharetribe/ftw-daily/pull/1301)
 - [fix] `yarn run dev-backend` was expecting NODE_ENV.
   [#1303](https://github.com/sharetribe/ftw-daily/pull/1303)
+
+[v6.0.0]: https://github.com/sharetribe/flex-template-web/compare/v5.0.0...v6.0.0
 
 ## [v5.0.0] 2020-06-04
 
