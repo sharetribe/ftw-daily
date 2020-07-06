@@ -12,10 +12,18 @@ const optionLabel = (options, key) => {
 
 const SortByIcon = () => {
   return (
-    <span className={css.icon}>
-      <span className={css.iconUp}>▲</span>
-      <span className={css.iconDown}>▼</span>
-    </span>
+    <svg className={css.icon} width="10" height="16" xmlns="http://www.w3.org/2000/svg">
+      <g
+        stroke="#4a4a4a"
+        strokeWidth="1.5"
+        fill="none"
+        fillRule="evenodd"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M3.25 7.125v7.438M5 12.813l-1.75 1.75-1.75-1.75M6.75 8.875V1.438M5 3.188l1.75-1.75 1.75 1.75" />
+      </g>
+    </svg>
   );
 };
 
@@ -41,6 +49,7 @@ class SortByPopup extends Component {
     const {
       rootClassName,
       className,
+      menuLabelRootClassName,
       urlParam,
       label,
       options,
@@ -52,6 +61,7 @@ class SortByPopup extends Component {
     const menuLabel = initialValue ? optionLabel(options, initialValue) : label;
 
     const classes = classNames(rootClassName || css.root, className);
+    const menuLabelClasses = classNames(menuLabelRootClassName || css.menuLabel);
 
     return (
       <Menu
@@ -61,7 +71,7 @@ class SortByPopup extends Component {
         onToggleActive={this.onToggleActive}
         isOpen={this.state.isOpen}
       >
-        <MenuLabel className={css.menuLabel}>
+        <MenuLabel className={menuLabelClasses}>
           <SortByIcon />
           {menuLabel}
         </MenuLabel>
@@ -97,6 +107,7 @@ class SortByPopup extends Component {
 SortByPopup.defaultProps = {
   rootClassName: null,
   className: null,
+  menuLabelRootClassName: null,
   initialValue: null,
   contentPlacementOffset: 0,
 };
@@ -104,6 +115,7 @@ SortByPopup.defaultProps = {
 SortByPopup.propTypes = {
   rootClassName: string,
   className: string,
+  menuLabelRootClassName: string,
   urlParam: string.isRequired,
   label: string.isRequired,
   onSelect: func.isRequired,
