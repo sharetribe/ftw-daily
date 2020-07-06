@@ -22,6 +22,7 @@ import EditListingWizardTab, {
   DESCRIPTION,
   FEATURES,
   CAPACITY,
+  SEATS,
   POLICY,
   LOCATION,
   PRICING,
@@ -40,6 +41,7 @@ export const TABS = [
   DESCRIPTION,
   FEATURES,
   CAPACITY,
+  SEATS,
   POLICY,
   LOCATION,
   ...availabilityMaybe,
@@ -58,6 +60,8 @@ const tabLabel = (intl, tab) => {
     key = 'EditListingWizard.tabLabelFeatures';
   } else if (tab === CAPACITY) {
     key = 'EditListingWizard.tabLabelCapacity';
+  } else if (tab === SEATS) {
+    key = 'EditListingWizard.tabLabelSeats';
   } else if (tab === POLICY) {
     key = 'EditListingWizard.tabLabelPolicy';
   } else if (tab === LOCATION) {
@@ -99,6 +103,8 @@ const tabCompleted = (tab, listing) => {
       return !!(publicData && publicData.amenities);
     case CAPACITY:
       return !!(publicData && publicData.capacity);
+    case SEATS:
+      return !!(publicData && publicData.seats);
     case POLICY:
       return !!(publicData && typeof publicData.rules !== 'undefined');
     case LOCATION:
