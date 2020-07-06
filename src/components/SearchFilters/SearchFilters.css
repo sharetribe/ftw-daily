@@ -2,8 +2,13 @@
 
 .root {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   background-color: var(--matterColorBright);
+}
+
+.filterWrapper {
+  display: flex;
+  justify-content: space-between;
   position: relative;
 }
 
@@ -24,6 +29,8 @@
   line-height: 20px;
   margin-top: 9px;
   margin-bottom: 11px;
+  margin-left: auto;
+  margin-right: 8px;
 
   /* parent uses flexbox: this defines minimum width for text "6 results" */
   flex-basis: 55px;
