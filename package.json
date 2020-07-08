@@ -104,7 +104,8 @@
     "dev-server": "export NODE_ENV=development PORT=4000 REACT_APP_CANONICAL_ROOT_URL=http://localhost:4000&&yarn run build&&nodemon --watch server server/index.js",
     "test-server": "jest ./server/**/*.test.js",
     "heroku-postbuild": "yarn run build",
-    "translate": "node scripts/translations.js"
+    "translate": "node scripts/translations.js",
+    "deploy-nonprod": "unset AWS_PROFILE && yarn build && aws s3 sync --acl public-read ./build s3://nfh-nonprod"
   },
   "browserslist": {
     "production": [
