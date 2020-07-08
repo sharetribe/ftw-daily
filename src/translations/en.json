@@ -229,6 +229,7 @@
   "EditListingWizard.tabLabelAvailability": "Availability",
   "EditListingWizard.tabLabelLocation": "Location",
   "EditListingWizard.tabLabelPhotos": "Photos",
+  "EditListingWizard.tabLabelInstrument": "Instrument",
   "EditListingWizard.tabLabelPolicy": "Sauna rules",
   "EditListingWizard.tabLabelPricing": "Pricing",
   "EmailVerificationForm.finishAccountSetup": "We will need to send you email notifications. To allow this, please verify your email address {email}.",
