@@ -50,40 +50,7 @@ exports[`LandingPage matches snapshot 1`] = `
       className={null}
       rootClassName={null}
     >
-      <div>
-        <SectionHero
-          className={null}
-          history={
-            Object {
-              "push": [Function],
-            }
-          }
-          location={
-            Object {
-              "search": "",
-            }
-          }
-          rootClassName={null}
-        />
-      </div>
-      <ul>
-        <li>
-          <div>
-            <SectionLocations
-              className={null}
-              rootClassName={null}
-            />
-          </div>
-        </li>
-        <li>
-          <div>
-            <SectionHowItWorks
-              className={null}
-              rootClassName={null}
-            />
-          </div>
-        </li>
-      </ul>
+      <Landing />
     </LayoutWrapperMain>
     <LayoutWrapperFooter
       className={null}

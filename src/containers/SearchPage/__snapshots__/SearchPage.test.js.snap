@@ -135,6 +135,32 @@ exports[`SearchPageComponent matches snapshot 1`] = `
             ],
             "type": "SelectMultipleFilter",
           },
+          Object {
+            "config": Object {
+              "options": Array [
+                Object {
+                  "key": "keyboard",
+                  "label": "Keyboard",
+                },
+                Object {
+                  "key": "guitar",
+                  "label": "Guitar",
+                },
+                Object {
+                  "key": "vocals",
+                  "label": "Vocals",
+                },
+              ],
+              "searchMode": "has_all",
+            },
+            "group": "secondary",
+            "id": "instruments",
+            "label": "Instruments",
+            "queryParamNames": Array [
+              "instruments",
+            ],
+            "type": "SelectMultipleFilter",
+          },
         ]
       }
       history={

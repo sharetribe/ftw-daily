@@ -25,19 +25,19 @@ export const AVAILABILITY = 'availability'
 export const DESCRIPTION = 'description'
 export const FEATURES = 'features'
 export const POLICY = 'policy'
-export const LOCATION = 'location'
 export const PRICING = 'pricing'
 export const PHOTOS = 'photos'
+export const INSTRUMENT = 'instrument'
 
 // EditListingWizardTab component supports these tabs
 export const SUPPORTED_TABS = [
   DESCRIPTION,
   FEATURES,
   POLICY,
-  LOCATION,
   PRICING,
   AVAILABILITY,
   PHOTOS,
+  INSTRUMENT,
 ]
 
 const pathParamsToNextTab = (params, tab, marketplaceTabs) => {
@@ -199,20 +199,6 @@ const EditListingWizardTab = (props) => {
         />
       )
     }
-    case LOCATION: {
-      const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditListingWizard.saveNewLocation'
-        : 'EditListingWizard.saveEditLocation'
-      return (
-        <EditListingLocationPanel
-          {...panelProps(LOCATION)}
-          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
-          onSubmit={(values) => {
-            onCompleteEditListingWizardTab(tab, values)
-          }}
-        />
-      )
-    }
     case PRICING: {
       const submitButtonTranslationKey = isNewListingFlow
         ? 'EditListingWizard.saveNewPricing'
@@ -260,6 +246,9 @@ const EditListingWizardTab = (props) => {
           onUpdateImageOrder={onUpdateImageOrder}
         />
       )
+    }
+    case INSTRUMENT: {
+      return <div>Instrument form</div>
     }
     default:
       return null

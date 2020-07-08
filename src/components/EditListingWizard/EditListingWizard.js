@@ -23,9 +23,9 @@ import EditListingWizardTab, {
   DESCRIPTION,
   FEATURES,
   POLICY,
-  LOCATION,
   PRICING,
   PHOTOS,
+  INSTRUMENT,
 } from './EditListingWizardTab'
 import css from './EditListingWizard.css'
 
@@ -36,7 +36,15 @@ const availabilityMaybe = config.enableAvailability ? [AVAILABILITY] : []
 // Note 1: You need to change save button translations for new listing flow
 // Note 2: Ensure that draft listing is created after the first panel
 // and listing publishing happens after last panel.
-export const TABS = [DESCRIPTION, FEATURES, POLICY, LOCATION, PRICING, ...availabilityMaybe, PHOTOS]
+export const TABS = [
+  DESCRIPTION,
+  FEATURES,
+  POLICY,
+  PRICING,
+  ...availabilityMaybe,
+  PHOTOS,
+  INSTRUMENT,
+]
 
 // Tabs are horizontal in small screens
 const MAX_HORIZONTAL_NAV_SCREEN_WIDTH = 1023
@@ -52,14 +60,14 @@ const tabLabel = (intl, tab) => {
     key = 'EditListingWizard.tabLabelFeatures'
   } else if (tab === POLICY) {
     key = 'EditListingWizard.tabLabelPolicy'
-  } else if (tab === LOCATION) {
-    key = 'EditListingWizard.tabLabelLocation'
   } else if (tab === PRICING) {
     key = 'EditListingWizard.tabLabelPricing'
   } else if (tab === AVAILABILITY) {
     key = 'EditListingWizard.tabLabelAvailability'
   } else if (tab === PHOTOS) {
     key = 'EditListingWizard.tabLabelPhotos'
+  } else if (tab === INSTRUMENT) {
+    key = 'EditListingWizard.tabLabelInstrument'
   }
 
   return intl.formatMessage({ id: key })
@@ -91,14 +99,14 @@ const tabCompleted = (tab, listing) => {
       return !!(publicData && publicData.amenities)
     case POLICY:
       return !!(publicData && typeof publicData.rules !== 'undefined')
-    case LOCATION:
-      return !!(geolocation && publicData && publicData.location && publicData.location.address)
     case PRICING:
       return !!price
     case AVAILABILITY:
       return !!availabilityPlan
     case PHOTOS:
       return images && images.length > 0
+    case INSTRUMENT:
+      return true // TODO
     default:
       return false
   }
