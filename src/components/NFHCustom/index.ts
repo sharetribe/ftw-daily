@@ -1,1 +1,5 @@
-export { default as Landing } from './Landing'
+export * from './atoms'
+export * from './layout'
+export * from './molecules'
+export * from './organisms'
+export * from './pages'

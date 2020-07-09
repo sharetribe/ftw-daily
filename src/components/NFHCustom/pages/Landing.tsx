@@ -1,14 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
-import nashvilleForHireText from '../../assets/images/nashvilleForHireText.png'
+import nashvilleForHireText from '../../../assets/images/nashvilleForHireText.png'
+import { LandingHero } from '../molecules'
 
 const Image = styled.img`
   max-width: 100%;
+  margin-top: 2rem;
 `
 
 const Info = styled.p`
   text-align: center;
-  margin-bottom: 3em;
+  margin-bottom: 3rem;
+  padding: 0 1rem;
 `
 
 const VideoWrapper = styled.div`
@@ -21,10 +24,12 @@ const VideoWrapper = styled.div`
   border-radius: 4px;
 `
 
-const Landing: React.FC = () => {
+export const Landing: React.FC = () => {
   return (
     <div>
       <div>
+        <LandingHero />
+
         <Image src={nashvilleForHireText} alt="Nashville For Hire" />
 
         <Info>
@@ -53,5 +58,3 @@ const Landing: React.FC = () => {
     </div>
   )
 }
-
-export default Landing
