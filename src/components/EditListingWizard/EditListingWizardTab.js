@@ -13,7 +13,6 @@ import {
   EditListingAvailabilityPanel,
   EditListingDescriptionPanel,
   EditListingFeaturesPanel,
-  EditListingLocationPanel,
   EditListingPhotosPanel,
   EditListingPoliciesPanel,
   EditListingPricingPanel,
@@ -134,7 +133,7 @@ const EditListingWizardTab = (props) => {
             handlePublishListing(currentListing.id)
           }
         })
-        .catch((e) => {
+        .catch(() => {
           // No need for extra actions
         })
     } else {

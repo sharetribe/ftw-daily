@@ -82,14 +82,7 @@ const tabLabel = (intl, tab) => {
  * @return true if tab / step is completed.
  */
 const tabCompleted = (tab, listing) => {
-  const {
-    availabilityPlan,
-    description,
-    geolocation,
-    price,
-    title,
-    publicData,
-  } = listing.attributes
+  const { availabilityPlan, description, price, title, publicData } = listing.attributes
   const images = listing.images
 
   switch (tab) {
@@ -242,7 +235,7 @@ class EditListingWizard extends Component {
   handlePayoutSubmit(values) {
     this.props
       .onPayoutDetailsSubmit(values)
-      .then((response) => {
+      .then(() => {
         this.props.onManageDisableScrolling('EditListingWizard.payoutModal', false)
       })
       .catch(() => {
