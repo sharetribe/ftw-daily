@@ -7,6 +7,16 @@ To make Stripe connection work, you also need to set Stripe's private key in the
 
 export const stripePublishableKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY;
 
+/**
+ * Default merchant category code (MCC)
+ * MCCs are used to classify businesses by the type of goods or services they provide.
+ *
+ * In FTW we use code 5734 Computer Software Stores as a default for all the connected accounts.
+ *
+ * See the whole list of MCC codes from https://stripe.com/docs/connect/setting-mcc#list
+ */
+export const defaultMCC = '5734';
+
 /*
 Stripe only supports payments in certain countries, see full list
 at https://stripe.com/global
@@ -281,13 +291,13 @@ export const stripeCountryDetails = [
 
 /*
 NOTE: This configuration will not be updated!
-We might remove this code in the later releases. 
+We might remove this code in the later releases.
 
 With Connect Onboarding Stripe will handle collecting most of the information about user. For new setup we only need the list of countries and accountConfig.
 If you want to handle the whole onboarding flow on your on application, you can use the old PayoutDetailsForm as a starting point. That form uses this configuration option.
 You should make sure that the list of countries is up-to-date and that the config contains all the required infomation you need to collect.
 
-Remember to change the import from config.js if you want to use this config! 
+Remember to change the import from config.js if you want to use this config!
 
 This setup is for API version '2019-02-19' and later.
 If you have an older API version in use, you need to update your Stripe API.

@@ -80,6 +80,7 @@ export const StripePayoutPageComponent = props => {
     currentUser,
     scrollingDisabled,
     getAccountLinkInProgress,
+    getAccountLinkError,
     createStripeAccountError,
     updateStripeAccountError,
     fetchStripeAccountError,
@@ -127,12 +128,18 @@ export const StripePayoutPageComponent = props => {
   );
 
   const returnedNormallyFromStripe = returnURLType === STRIPE_ONBOARDING_RETURN_URL_SUCCESS;
-  const showVerificationError = returnURLType === STRIPE_ONBOARDING_RETURN_URL_FAILURE;
+  const returnedAbnormallyFromStripe = returnURLType === STRIPE_ONBOARDING_RETURN_URL_FAILURE;
   const showVerificationNeeded = stripeConnected && requirementsMissing;
 
   // Redirect from success URL to basic path for StripePayoutPage
   if (returnedNormallyFromStripe && stripeConnected && !requirementsMissing) {
     return <NamedRedirect name="StripePayoutPage" />;
+  }
+
+  // Failure url should redirect back to Stripe since it's most likely due to page reload
+  // Account link creation will fail if the account is the reason
+  if (returnedAbnormallyFromStripe && !getAccountLinkError) {
+    handleGetStripeConnectAccountLink('custom_account_verification')();
   }
 
   return (
@@ -154,11 +161,14 @@ export const StripePayoutPageComponent = props => {
             </h1>
             {!currentUserLoaded ? (
               <FormattedMessage id="StripePayoutPage.loadingData" />
+            ) : returnedAbnormallyFromStripe && !getAccountLinkError ? (
+              <FormattedMessage id="StripePayoutPage.redirectingToStripe" />
             ) : (
               <StripeConnectAccountForm
                 disabled={formDisabled}
                 inProgress={payoutDetailsSaveInProgress}
                 ready={payoutDetailsSaved}
+                currentUser={ensuredCurrentUser}
                 stripeBankAccountLastDigits={getBankAccountLast4Digits(stripeAccountData)}
                 savedCountry={savedCountry}
                 submitButtonText={intl.formatMessage({
@@ -167,21 +177,22 @@ export const StripePayoutPageComponent = props => {
                 stripeAccountError={
                   createStripeAccountError || updateStripeAccountError || fetchStripeAccountError
                 }
+                stripeAccountLinkError={getAccountLinkError}
                 stripeAccountFetched={stripeAccountFetched}
                 onChange={onPayoutDetailsFormChange}
                 onSubmit={onPayoutDetailsFormSubmit}
                 onGetStripeConnectAccountLink={handleGetStripeConnectAccountLink}
                 stripeConnected={stripeConnected}
               >
-                {stripeConnected && (showVerificationError || showVerificationNeeded) ? (
+                {stripeConnected && !returnedAbnormallyFromStripe && showVerificationNeeded ? (
                   <StripeConnectAccountStatusBox
-                    type={showVerificationError ? 'verificationError' : 'verificationNeeded'}
+                    type="verificationNeeded"
                     inProgress={getAccountLinkInProgress}
                     onGetStripeConnectAccountLink={handleGetStripeConnectAccountLink(
                       'custom_account_verification'
                     )}
                   />
-                ) : stripeConnected && savedCountry ? (
+                ) : stripeConnected && savedCountry && !returnedAbnormallyFromStripe ? (
                   <StripeConnectAccountStatusBox
                     type="verificationSuccess"
                     inProgress={getAccountLinkInProgress}
@@ -208,6 +219,7 @@ StripePayoutPageComponent.defaultProps = {
   createStripeAccountError: null,
   updateStripeAccountError: null,
   fetchStripeAccountError: null,
+  getAccountLinkError: null,
   stripeAccount: null,
   params: {
     returnURLType: null,
@@ -220,9 +232,11 @@ StripePayoutPageComponent.propTypes = {
   getAccountLinkInProgress: bool.isRequired,
   payoutDetailsSaveInProgress: bool.isRequired,
   createStripeAccountError: propTypes.error,
+  getAccountLinkError: propTypes.error,
   updateStripeAccountError: propTypes.error,
   fetchStripeAccountError: propTypes.error,
   stripeAccount: propTypes.stripeAccount,
+  stripeAccountFetched: bool.isRequired,
   payoutDetailsSaved: bool.isRequired,
 
   onPayoutDetailsFormChange: func.isRequired,
@@ -239,6 +253,7 @@ StripePayoutPageComponent.propTypes = {
 const mapStateToProps = state => {
   const {
     getAccountLinkInProgress,
+    getAccountLinkError,
     createStripeAccountError,
     updateStripeAccountError,
     fetchStripeAccountError,
@@ -250,6 +265,7 @@ const mapStateToProps = state => {
   return {
     currentUser,
     getAccountLinkInProgress,
+    getAccountLinkError,
     createStripeAccountError,
     updateStripeAccountError,
     fetchStripeAccountError,

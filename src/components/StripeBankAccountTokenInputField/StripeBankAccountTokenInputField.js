@@ -9,7 +9,6 @@ import config from '../../config';
 
 import {
   BANK_ACCOUNT_INPUTS,
-  cleanedString,
   formatFieldMessage,
   requiredInputs,
   mapInputsToStripeAccountKeys,
@@ -150,19 +149,16 @@ class TokenInputFieldComponent extends Component {
         return result.token.id;
       })
       .then(token => {
+        // Check if value has changed during async call.
         const changedValues = inputsNeeded.filter(
-          inputType => values[inputType] !== cleanedString(this.state[inputType].value)
+          inputType => values[inputType] !== this.state[inputType].value
         );
         const valuesAreUnchanged = changedValues.length === 0;
 
         // Handle response only if the input values haven't changed
         if (this._isMounted && valuesAreUnchanged) {
           this.setState(prevState => {
-            const errorsClearedFromInputs = inputsNeeded.map(inputType => {
-              const input = prevState[inputType];
-              return { ...input, error: null };
-            });
-            return { ...errorsClearedFromInputs, stripeError: null };
+            return { stripeError: null };
           });
 
           onChange(token);
@@ -181,8 +177,8 @@ class TokenInputFieldComponent extends Component {
   }
 
   handleInputChange(e, inputType, country, intl) {
-    const rawValue = e.target.value;
-    const value = cleanedString(rawValue);
+    const value = e.target.value;
+
     let inputError = null;
 
     // Validate the changed routing number
@@ -194,7 +190,7 @@ class TokenInputFieldComponent extends Component {
 
     // Save changes to the state
     this.setState(prevState => {
-      const input = { ...prevState[inputType], value: rawValue, error: inputError };
+      const input = { ...prevState[inputType], value, error: inputError };
       return {
         [inputType]: input,
         stripeError: null,
