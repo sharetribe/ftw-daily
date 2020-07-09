@@ -17,6 +17,8 @@ import {
 import { TopbarSearchForm } from '../../forms'
 
 import css from './TopbarDesktop.css'
+import { Button } from '../NFHCustom/atoms'
+import { css as cssFunction } from 'styled-components/macro'
 
 const TopbarDesktop = (props) => {
   const {
@@ -147,6 +149,26 @@ const TopbarDesktop = (props) => {
           <FormattedMessage id="TopbarDesktop.createListing" />
         </span>
       </NamedLink>
+
+      {/* TODO: Not this */}
+      <div
+        css={cssFunction`
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 1rem;
+        `}
+      >
+        <Button
+          onClick={() => {
+            alert('Just call Rich Redmond')
+          }}
+        >
+          find your nashville pro
+        </Button>
+      </div>
+
       {inboxLink}
       {profileMenu}
       {signupLink}

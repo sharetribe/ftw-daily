@@ -4,8 +4,10 @@ import nashvilleForHireText from '../../../assets/images/nashvilleForHireText.pn
 import { LandingHero } from '../molecules'
 
 const Image = styled.img`
+  display: block;
+  width: 570px;
   max-width: 100%;
-  margin-top: 2rem;
+  margin: 2rem auto 0;
 `
 
 const Info = styled.p`
