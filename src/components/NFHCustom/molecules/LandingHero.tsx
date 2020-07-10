@@ -8,6 +8,7 @@ export const LandingHero: React.FC = () => {
   return (
     <div
       css={css`
+        position: relative;
         background-image: url(${guitarHero});
         background-position: center;
         background-repeat: no-repeat;

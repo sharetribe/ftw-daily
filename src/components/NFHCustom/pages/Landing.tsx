@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import nashvilleForHireText from '../../../assets/images/nashvilleForHireText.png'
-import { LandingHero } from '../molecules'
+import { FeatureCard, LandingHero } from '../molecules'
+import { Constrainer } from '../layout'
 
 const Image = styled.img`
   display: block;
@@ -11,12 +12,18 @@ const Image = styled.img`
 `
 
 const Info = styled.p`
+  max-width: 680px;
+  margin: 0 auto 3rem;
   text-align: center;
-  margin-bottom: 3rem;
   padding: 0 1rem;
 `
 
 const VideoWrapper = styled.div`
+  max-width: 680px;
+  margin: 0 auto 3rem;
+`
+
+const ResponsiveVideoContainer = styled.div`
   position: relative;
   padding-bottom: 56.25%;
   height: 0;
@@ -26,36 +33,63 @@ const VideoWrapper = styled.div`
   border-radius: 4px;
 `
 
+const FeatureCardContainer = styled.div`
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-bottom: 2rem;
+`
+
 export const Landing: React.FC = () => {
   return (
     <div>
       <div>
         <LandingHero />
 
-        <Image src={nashvilleForHireText} alt="Nashville For Hire" />
+        <Constrainer>
+          <Image src={nashvilleForHireText} alt="Nashville For Hire" />
 
-        <Info>
-          Make <strong>your next recording project&nbsp;your best yet</strong> by hiring Nashville's
-          top&nbsp;music professionals remotely.
-        </Info>
+          <Info>
+            Make <strong>your next recording project&nbsp;your best yet</strong> by hiring
+            Nashville's top&nbsp;music professionals remotely.
+          </Info>
 
-        <VideoWrapper>
-          <iframe
-            title="Nashville For Hire Video"
-            src="https://player.vimeo.com/video/272277122"
-            width="640"
-            height="360"
-            frameBorder="0"
-            allow="autoplay; fullscreen"
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-            }}
-          />
-        </VideoWrapper>
+          <VideoWrapper>
+            <ResponsiveVideoContainer>
+              <iframe
+                title="Nashville For Hire Video"
+                src="https://player.vimeo.com/video/272277122"
+                width="640"
+                height="360"
+                frameBorder="0"
+                allow="autoplay; fullscreen"
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                }}
+              />
+            </ResponsiveVideoContainer>
+          </VideoWrapper>
+
+          <FeatureCardContainer>
+            <FeatureCard title="find the perfect fit" number="one">
+              Search our <strong>curated roster</strong> of Nashville's best music pros to find your
+              match.
+            </FeatureCard>
+
+            <FeatureCard title="order" number="two">
+              Order and <strong>send all needed files and information</strong> via our streamlined
+              messenger so your Nashville pro can do their thing.
+            </FeatureCard>
+
+            <FeatureCard title="receive" number="three">
+              <strong>Receive amazing tracks</strong> that make you wanna do a little dance.
+            </FeatureCard>
+          </FeatureCardContainer>
+        </Constrainer>
       </div>
     </div>
   )
