@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import { ensureOwnListing } from '../../util/data';
 import { ListingLink } from '../../components';
-import { EditListingCapacityForm } from '../../forms';
+import { EditListingSeatsForm } from '../../forms';
 import config from '../../config.js';
 
 import css from './EditListingSeatsPanel.css';
@@ -24,7 +24,10 @@ const EditListingSeatsPanel = props => {
 
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
-  const { publicData } = currentListing.attributes;
+  const {
+    availabilityPlan: currentAvailabilityPlan,
+    publicData
+  } = currentListing.attributes;
 
   const panelTitle = currentListing.id ? (
     <FormattedMessage
@@ -39,14 +42,14 @@ const EditListingSeatsPanel = props => {
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
       <p>Do you have more than one of this Patch? For example if you want to list multiple chairs in a barbershop, this is the place to add the quantity!</p>
-      <EditListingCapacityForm
+      <EditListingSeatsForm
         className={css.form}
         initialValues={{ seats: publicData.seats }}
         onSubmit={values => {
           const { seats } = values;
           const updateValues = {
             publicData: {
-              seats,
+              seats: parseInt(seats, 10),   // NOTE seats expects an int, not string
             },
           };
           onSubmit(updateValues);
@@ -56,7 +59,6 @@ const EditListingSeatsPanel = props => {
         updated={panelUpdated}
         updateError={errors.updateListingError}
         updateInProgress={updateInProgress}
-        // capacityOptions={config.custom.capacityOptions}
         seatsOptions={config.custom.seatsOptions}
       />
     </div>
