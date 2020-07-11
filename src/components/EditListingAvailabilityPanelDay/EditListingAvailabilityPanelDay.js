@@ -33,19 +33,24 @@ const EditListingAvailabilityPanelDay = props => {
     publicData
   } = currentListing.attributes;
 
+  const numSeats = 'seats' in publicData ? publicData.seats : 1;
   const isPublished = currentListing.id && state !== LISTING_STATE_DRAFT;
   const defaultAvailabilityPlan = {
     type: 'availability-plan/day',
     entries: [
-      { dayOfWeek: 'mon', seats: 1 },
-      { dayOfWeek: 'tue', seats: 1 },
-      { dayOfWeek: 'wed', seats: 1 },
-      { dayOfWeek: 'thu', seats: 1 },
-      { dayOfWeek: 'fri', seats: 1 },
-      { dayOfWeek: 'sat', seats: 1 },
-      { dayOfWeek: 'sun', seats: 1 },
+      { dayOfWeek: 'mon', seats: numSeats },
+      { dayOfWeek: 'tue', seats: numSeats },
+      { dayOfWeek: 'wed', seats: numSeats },
+      { dayOfWeek: 'thu', seats: numSeats },
+      { dayOfWeek: 'fri', seats: numSeats },
+      { dayOfWeek: 'sat', seats: numSeats },
+      { dayOfWeek: 'sun', seats: numSeats },
     ],
   };
+
+  if (currentAvailabilityPlan) {
+    currentAvailabilityPlan.entries.map(e => e.seats = numSeats);
+  }
 
   const availabilityPlan = currentAvailabilityPlan || defaultAvailabilityPlan;
   const minimumLength = [publicData.minimumLength] || [1];

@@ -55,6 +55,7 @@ import SectionEquipmentMaybe from './SectionEquipmentMaybe';
 import SectionRulesMaybe from './SectionRulesMaybe';
 import SectionMapMaybe from './SectionMapMaybe';
 import SectionCapacity from './SectionCapacity';
+import SectionSeats from './SectionSeats';
 import css from './ListingPage.css';
 
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
@@ -461,6 +462,7 @@ export class ListingPageComponent extends Component {
                   />
 
                   <SectionCapacity publicData={publicData} />
+                  <SectionSeats publicData={publicData} />
                   <SectionDescriptionMaybe description={description} />
                   <SectionFeaturesMaybe options={amenitiesConfig} publicData={publicData} />
                   <SectionMiscMaybe publicData={publicData} />
