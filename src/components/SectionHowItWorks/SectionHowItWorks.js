@@ -19,14 +19,32 @@ const SectionHowItWorks = props => {
         <FormattedMessage id="SectionHowItWorks.titleLineTwo" />
       </div>
 
-      <div className={css.steps}>
+      <div>
+          <h2 className={css.stepTitle}>
+            <FormattedMessage id="SectionHowItWorks.part1Title" />
+          </h2>
+
+          <h2 className={css.stepTitle}>
+            <FormattedMessage id="SectionHowItWorks.part2Title" />
+          </h2>
+ 
+          <h2 className={css.stepTitle}>
+            <FormattedMessage id="SectionHowItWorks.part3Title" />
+          </h2>
+    
+          <h2 className={css.stepTitle}>
+            <FormattedMessage id="SectionHowItWorks.part4Title" />
+          </h2>
+      </div>
+
+      {/* <div className={css.steps}>
         <div className={css.step}>
           <h2 className={css.stepTitle}>
             <FormattedMessage id="SectionHowItWorks.part1Title" />
           </h2>
           <p>
             <FormattedMessage id="SectionHowItWorks.part1Text" />
-          </p>
+          </p> 
         </div>
 
         <div className={css.step}>
@@ -46,7 +64,16 @@ const SectionHowItWorks = props => {
             <FormattedMessage id="SectionHowItWorks.part3Text" />
           </p>
         </div>
-      </div>
+
+        <div className={css.step}>
+          <h2 className={css.stepTitle}>
+            <FormattedMessage id="SectionHowItWorks.part4Title" />
+          </h2>
+          <p>
+            <FormattedMessage id="SectionHowItWorks.part4Text" />
+          </p>
+        </div>
+      </div> */}
 
       <div className={css.createListingLink}>
         <NamedLink name="NewListingPage">
