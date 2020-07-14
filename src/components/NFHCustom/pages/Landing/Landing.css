@@ -1,0 +1,6 @@
+@import '../../../../marketplace.css';
+
+.ctaButton {
+  background-color: var(--matterColor);
+  color: var(--matterColorLight);
+}

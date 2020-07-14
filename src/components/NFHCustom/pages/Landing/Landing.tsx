@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import nashvilleForHireText from '../../../assets/images/nashvilleForHireText.png'
-import { FeatureCard, LandingHero } from '../molecules'
-import { Constrainer } from '../layout'
+import nashvilleForHireText from '../../../../assets/images/nashvilleForHireText.png'
+import { FeatureCard, InfoCard, LandingHero } from '../../molecules'
+import { Constrainer } from '../../layout'
+import css from './Landing.css'
 
 const Image = styled.img`
   display: block;
@@ -35,9 +36,29 @@ const ResponsiveVideoContainer = styled.div`
 
 const FeatureCardContainer = styled.div`
   display: grid;
-  grid-gap: 1rem;
+  grid-gap: 1.5rem;
   grid-template-columns: 1fr 1fr 1fr;
   margin-bottom: 2rem;
+`
+
+const CTAButton = styled.button`
+  display: block;
+  margin: 0 auto 3rem;
+  padding: 18px 40px;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  text-transform: uppercase;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 120%;
+`
+
+const InfoCardContainer = styled.div`
+  display: grid;
+  grid-gap: 1.5rem;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 3rem;
 `
 
 export const Landing: React.FC = () => {
@@ -89,6 +110,15 @@ export const Landing: React.FC = () => {
               <strong>Receive amazing tracks</strong> that make you wanna do a little dance.
             </FeatureCard>
           </FeatureCardContainer>
+
+          <CTAButton className={css.ctaButton}>find your nashville pro</CTAButton>
+
+          <InfoCardContainer>
+            <InfoCard title="no travel">Hire from anywhere.</InfoCard>
+            <InfoCard title="no studio fees">All work done remotely</InfoCard>
+            <InfoCard title="no hassle">All files transferred online.</InfoCard>
+            <InfoCard title="no risk">Money-Back-Guarantee on first order.</InfoCard>
+          </InfoCardContainer>
         </Constrainer>
       </div>
     </div>
