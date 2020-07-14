@@ -7,14 +7,18 @@ import {
     LayoutWrapperMain,
     LayoutWrapperFooter,
     Footer,
-    NamedLink,
-    ExternalLink,
+    // NamedLink,
+    // ExternalLink,
 } from '../../components';
 
+import products from './products';
+import Product from './Product';
 import css from './ProductPage.css';
 // import image from './path/to/image.png';
 
 const ProductPage = () => {
+    
+
   return (
     <StaticPage
       className={css.root}
@@ -31,14 +35,16 @@ const ProductPage = () => {
           <TopbarContainer />
         </LayoutWrapperTopbar>
         <LayoutWrapperMain>
-          <h1>Products</h1>
-          <img alt="My first ice cream." />
-          <div>
-            <NamedLink name="LandingPage">Go to home page</NamedLink> or
-            <ExternalLink href="https://google.com">
-              Go to Google
-            </ExternalLink>
-          </div>
+            <h1>Products</h1>
+            {products.map(item => {
+                return (
+                    <Product 
+                        productName={item.productName}
+                        productDescription={item.productDescription}
+                    />
+                );
+            })}
+          
         </LayoutWrapperMain>
         <LayoutWrapperFooter>
           <Footer />
