@@ -8,10 +8,10 @@ import {
   IconSocialMediaFacebook,
   IconSocialMediaInstagram,
   IconSocialMediaTwitter,
-  Logo,
   ExternalLink,
   NamedLink,
 } from '../../components'
+import nfhLogoWhite from '../../assets/images/nfhLogoWhite.png'
 
 import css from './Footer.css'
 
@@ -66,7 +66,7 @@ const Footer = (props) => {
           <div className={css.links}>
             <div className={css.organization} id="organization">
               <NamedLink name="LandingPage" className={css.logoLink}>
-                <Logo format="desktop" className={css.logo} />
+                <img width={80} src={nfhLogoWhite} alt="Nashville For Hire logo" />
               </NamedLink>
               <div className={css.organizationInfo}>
                 <p className={css.organizationDescription}>

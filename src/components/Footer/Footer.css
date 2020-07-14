@@ -7,7 +7,8 @@
 
   width: 100%;
   padding: 24px 24px 42px 24px;
-  background-color: var(--matterColorDark);
+  background-color: var(--matterColor);
+  color: var(--marketplaceColorLight);
 
   @media (--viewportMedium) {
     padding: 0 24px 33px 24px;
@@ -70,6 +71,10 @@
   height: 24px;
   margin-right: 12px;
   text-align: center;
+}
+
+.icon svg {
+  fill: var(--matterColorLight);
 }
 
 /* Footer links */
@@ -136,7 +141,7 @@
 }
 
 .copyrightLink {
-  color: var(--matterColor);
+  color: var(--matterColorLight);
   transition: var(--transitionStyleButton);
 
   &:hover {
@@ -176,7 +181,7 @@
   /* Font */
   @apply --marketplaceH4FontStyles;
   line-height: 20px;
-  color: var(--matterColor);
+  color: var(--matterColorLight);
   transition: var(--transitionStyleButton);
 
   margin-top: 0;
@@ -260,7 +265,7 @@
 .terms {
   /* Font */
   @apply --marketplaceTinyFontStyles;
-  color: var(--matterColorAnti);
+  color: var(--matterColorLight);
   transition: var(--transitionStyleButton);
 
   margin-top: 0;
