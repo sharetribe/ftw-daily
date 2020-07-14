@@ -1,10 +1,15 @@
 import React from 'react';
+import css from './ProductPage.css'
 
 function Product(props){
     return (
-        <div>
-            <h3>{props.productName}</h3>
-            <p>{props.productDescription}</p>
+        <div className={css.productContainer}>
+            <div className={css.productHeader}>
+                <h3>{props.productName}</h3>
+            </div>
+            <div className={css.productDescript}>
+                <p>{props.productDescription}</p>
+            </div>
         </div>
     );
 };

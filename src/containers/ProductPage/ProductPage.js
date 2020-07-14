@@ -35,16 +35,19 @@ const ProductPage = () => {
           <TopbarContainer />
         </LayoutWrapperTopbar>
         <LayoutWrapperMain>
-            <h1>Products</h1>
-            {products.map(item => {
-                return (
-                    <Product 
-                        productName={item.productName}
-                        productDescription={item.productDescription}
-                    />
-                );
-            })}
-          
+            <div className={css.PageTitle}>
+              <h1>Our Products</h1>
+            </div>
+            <div className={css.productWrapper}>
+              {products.map(item => {
+                  return (
+                      <Product 
+                          productName={item.productName}
+                          productDescription={item.productDescription}
+                      />
+                  );
+              })}
+            </div>
         </LayoutWrapperMain>
         <LayoutWrapperFooter>
           <Footer />
