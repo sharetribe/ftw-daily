@@ -108,7 +108,7 @@ const Footer = props => {
                 </li>
               </ul>
             </div>
-            <div className={css.searches}>
+            {/* <div className={css.searches}>
               <ul className={css.list}>
                 <li className={css.listItem}>
                   <NamedLink
@@ -252,7 +252,7 @@ const Footer = props => {
                   </li>
                 </ul>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className={css.copyrightAndTermsMobile}>
             <NamedLink name="LandingPage" className={css.organizationCopyrightMobile}>
