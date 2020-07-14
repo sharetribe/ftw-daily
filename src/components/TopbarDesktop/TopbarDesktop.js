@@ -116,6 +116,14 @@ const TopbarDesktop = props => {
     </Menu>
   ) : null;
 
+  const productLink = (
+    <NamedLink name="ProductPage" className={css.productLink}>
+      <span className={css.product}>
+        <FormattedMessage id="Products" />
+      </span>
+    </NamedLink>
+  );
+
   const signupLink = isAuthenticatedOrJustHydrated ? null : (
     <NamedLink name="SignupPage" className={css.signupLink}>
       <span className={css.signup}>
@@ -149,6 +157,7 @@ const TopbarDesktop = props => {
       </NamedLink>
       {inboxLink}
       {profileMenu}
+      {productLink}
       {signupLink}
       {loginLink}
     </nav>

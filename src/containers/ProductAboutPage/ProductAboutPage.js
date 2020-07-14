@@ -11,7 +11,7 @@ import {
     // ExternalLink,
 } from '../../components';
 
-import products from '../ProductPage/products';
+// import products from '../ProductPage/products';
 import css from './ProductAboutPage.css';
 // import image from './path/to/image.png';
 
