@@ -30,9 +30,34 @@
     justify-content: center;
 }
 
-.productWords {
+.productImageBanner {
+    display: flex;
+    width: 100%;
     height: 50%;
-    width: 80%;
+    align-content: center;
+    justify-content: center;
+}
+
+.productImage {
+    width: 100%;
+}
+
+.productImageContainer {
+    min-height: 50%;
+}
+
+.productContent {
+    min-height: 50%;
+    width: 95%;
+    display: flex;
+}
+
+.words {
+    width: 60%;
+}
+
+.feature {
+    width: 40%;
 }
 
 .productHeader {

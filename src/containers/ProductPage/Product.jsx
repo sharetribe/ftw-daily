@@ -5,16 +5,20 @@ function Product(props){
     const imgSrc = require("" + props.productImg + "");
     return (
         <div className={css.productContainer}>
-
-            <div className={css.productWords}>
-                <div className={css.productHeader}>
-                    <h3>{props.productName}</h3>
+            <div className={css.productImageContainer}>
+                
+            </div>
+            <div className={css.productContent}>
+                <div className={css.words}>
+                    <div className={css.productHeader}>
+                        <h3>{props.productName}</h3>
+                    </div>
+                    <div className={css.productDescript}>
+                        <p>{props.productDescription}</p>
+                    </div>
                 </div>
-                <div className={css.productDescript}>
-                    <p>{props.productDescription}</p>
-                </div>
-                <div>
-                    <img src={imgSrc} alt={props.productName}></img>
+                <div className={css.feature}>
+                    <img className={css.productImage} src={imgSrc} alt={props.productName}></img>
                 </div>
             </div>
         </div>
