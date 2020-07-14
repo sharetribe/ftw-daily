@@ -12,20 +12,27 @@
     align-content: center;
     margin-bottom: 3rem;
     margin-top: 3rem;
+    width: 100%;
 }
 
 .productWrapper {
     display: flex;
     flex-wrap: wrap;
-    width: 100vw;
+    width: 100%;
 }
 
 .productContainer {
     display: flex;
-    width: 50vw;
-    height: 30vh;
+    width: 50%;
+    height: 35vw;
     border: solid;
     flex-wrap: wrap;
+    justify-content: center;
+}
+
+.productWords {
+    height: 50%;
+    width: 80%;
 }
 
 .productHeader {
@@ -36,4 +43,6 @@
 .productDescript {
     display: flex;
     width: 100%;
+    align-content: center;
+    flex-wrap: wrap;
 }
