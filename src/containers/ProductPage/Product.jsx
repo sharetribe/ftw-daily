@@ -3,10 +3,11 @@ import css from './ProductPage.css'
 
 function Product(props){
     const imgSrc = require("" + props.productImg + "");
+    const bannerSrc = require("" + props.productBanner + "");
     return (
         <div className={css.productContainer}>
             <div className={css.productImageContainer}>
-                
+                <img src={bannerSrc} alt={props.productName}></img>
             </div>
             <div className={css.productContent}>
                 <div className={css.words}>
