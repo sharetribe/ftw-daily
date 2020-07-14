@@ -5,3 +5,35 @@
 
     background-color: #fcfcfc;
 }
+
+.PageTitle {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-bottom: 3rem;
+    margin-top: 3rem;
+}
+
+.productWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100vw;
+}
+
+.productContainer {
+    display: flex;
+    width: 50vw;
+    height: 30vh;
+    border: solid;
+    flex-wrap: wrap;
+}
+
+.productHeader {
+    display: flex;
+    width: 100%;
+}
+
+.productDescript {
+    display: flex;
+    width: 100%;
+}
