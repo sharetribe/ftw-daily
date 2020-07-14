@@ -41,6 +41,7 @@ const ProductPage = () => {
                     <Product 
                         productName={item.productName}
                         productDescription={item.productDescription}
+                        productImg={item.productImg}
                     />
                 );
             })}
