@@ -2,6 +2,7 @@ import React from 'react';
 import {
   AboutPage,
   ProductPage,
+  ProductAboutPage,
   AuthenticationPage,
   CheckoutPage,
   ContactDetailsPage,
@@ -68,6 +69,11 @@ const routeConfiguration = () => {
       path: '/product',
       name: 'ProductPage',
       component: ProductPage,
+    },
+    {
+      path: '/productabout',
+      name: 'ProductAboutPage',
+      component: ProductAboutPage,
     },
     {
       path: '/s',
