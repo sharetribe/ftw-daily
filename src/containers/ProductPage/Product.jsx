@@ -6,8 +6,8 @@ function Product(props){
     const bannerSrc = require("" + props.productBanner + "");
     return (
         <div className={css.productContainer}>
-            <div className={css.productImageContainer}>
-                <img src={bannerSrc} alt={props.productName}></img>
+            <div className={css.productImageBanner}>
+                <img className={css.banner} src={bannerSrc} alt={props.productName}></img>
             </div>
             <div className={css.productContent}>
                 <div className={css.words}>
