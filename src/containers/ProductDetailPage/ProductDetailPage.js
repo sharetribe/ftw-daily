@@ -12,21 +12,21 @@ import {
 } from '../../components';
 
 // import products from '../ProductPage/products';
-import css from './ProductAboutPage.css';
+import css from './ProductDetailPage.css';
 // import image from './path/to/image.png';
 
-const ProductAboutPage = () => {
+const ProductDetailPage = () => {
     
 
   return (
     <StaticPage
       className={css.root}
-      title = "ProductAbout"
+      title = "Product-Detail"
       schema={{
         '@context': 'http://schema.org',
-        '@type': 'ProductAboutPage',
-        description: 'About product',
-        name: 'Product About Page',
+        '@type': 'ProductDetailPage',
+        description: 'Product Detail Page',
+        name: 'Product Detail Page',
       }}
     >
       <LayoutSingleColumn>
@@ -46,4 +46,4 @@ const ProductAboutPage = () => {
   );
 };
 
-export default ProductAboutPage;
+export default ProductDetailPage;

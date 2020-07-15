@@ -2,7 +2,7 @@ import React from 'react';
 import {
   AboutPage,
   ProductPage,
-  ProductAboutPage,
+  ProductDetailPage,
   AuthenticationPage,
   CheckoutPage,
   ContactDetailsPage,
@@ -71,9 +71,9 @@ const routeConfiguration = () => {
       component: ProductPage,
     },
     {
-      path: '/productabout',
-      name: 'ProductAboutPage',
-      component: ProductAboutPage,
+      path: '/product-detail',
+      name: 'ProductDetailPage',
+      component: ProductDetailPage,
     },
     {
       path: '/s',
