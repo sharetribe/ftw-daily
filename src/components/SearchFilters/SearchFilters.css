@@ -2,9 +2,8 @@
 
 .root {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   background-color: var(--matterColorBright);
-  position: relative;
 }
 
 .longInfo {
@@ -19,15 +18,19 @@
   }
 }
 
+.searchOptions {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 24px;
+}
+
 .searchResultSummary {
   @apply --marketplaceH4FontStyles;
   line-height: 20px;
-  margin-top: 9px;
+  margin-top: 10px;
   margin-bottom: 11px;
-
-  /* parent uses flexbox: this defines minimum width for text "6 results" */
-  flex-basis: 55px;
-  flex-shrink: 0;
+  margin-left: 0px;
+  margin-right: 8px;
 }
 
 .noSearchResults {

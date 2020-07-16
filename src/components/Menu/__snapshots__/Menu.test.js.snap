@@ -16,7 +16,11 @@ exports[`Menu matches snapshot 1`] = `
   </button>
   <div
     className=""
-    style={Object {}}
+    style={
+      Object {
+        "left": "-10000px",
+      }
+    }
   >
     <ul
       className=""

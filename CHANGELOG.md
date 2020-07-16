@@ -14,9 +14,68 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+## [v4.5.0] 2020-06-01
+
+- [fix] In some situations, ProfileMenu has began to overflow on TopbarDesktop.
+  [#1290](https://github.com/sharetribe/ftw-daily/pull/1290)
+- [change] Update dependencies (patch updates only)
+  [#1291](https://github.com/sharetribe/ftw-daily/pull/1291)
+- [change] Refactor server API routes into separate files.
+  [#1294](https://github.com/sharetribe/ftw-daily/pull/1294)
+- [change] Start the backend API router in dev mode with a dev server.
+  [#1297](https://github.com/sharetribe/ftw-daily/pull/1297)
+
+[v4.5.0]: https://github.com/sharetribe/flex-template-web/compare/v4.4.3...v4.5.0
+
+## [v4.4.3] 2020-05-13
+
+- [fix] Allow white space on Japanese bank account info. Japan collects bank name and account owner
+  name in addition to routing numbers. [#1287](https://github.com/sharetribe/ftw-daily/pull/1287)
+- [fix] wrongly named default props handleSubmit renamed to onSubmit
+  [#1288](https://github.com/sharetribe/ftw-daily/pull/1288)
+
+[v4.4.3]: https://github.com/sharetribe/flex-template-web/compare/v4.4.2...v4.4.3
+
+## [v4.4.2] 2020-04-09
+
+- [fix] Handle deleted reviews in ActivityFeed
+  [#1283](https://github.com/sharetribe/ftw-daily/pull/1283)
+
+[v4.4.2]: https://github.com/sharetribe/flex-template-web/compare/v4.4.1...v4.4.2
+
+## [v4.4.1] 2020-03-30
+
+- [change] Improve the search page sorting and filters UI for different screen sizes
+  [#1280](https://github.com/sharetribe/ftw-daily/pull/1280)
+
+[v4.4.1]: https://github.com/sharetribe/flex-template-web/compare/v4.4.0...v4.4.1
+
+## [v4.4.0] 2020-03-25
+
+- [add] Search result sorting [#1277](https://github.com/sharetribe/ftw-daily/pull/1277)
+- [change] Move category and amenities search filters from primary filters to secondary filters.
+  [#1275](https://github.com/sharetribe/ftw-daily/pull/1275)
+
+[v4.4.0]: https://github.com/sharetribe/flex-template-web/compare/v4.3.0...v4.4.0
+
+## [v4.3.0] 2020-03-16
+
+- [change] Redirect user back to Stripe during Connect Onboarding Flow when user is returned to
+  failure URL provided that the Account Link generation is successful.
+  [#1269](https://github.com/sharetribe/ftw-daily/pull/1269)
+- [fix] Don't flash listing closed text on mobile view of `BookingPanel` when the listing data is
+  not loaded yet. Instead, check that text is shown only for closed listings.
+  [#1268](https://github.com/sharetribe/ftw-daily/pull/1268)
+- [change] Use some default values to improve Stripe Connect onboarding. When creating a new Stripe
+  the account we will pass the account type, business URL and MCC to Stripe in order to avoid a
+  couple of steps in Connect Onboarding. We will also pass `tos_shown_and_accepted` flag. This PR
+  will bring back the previously used `accountToken` which is now used for passing e.g. the account
+  type to Stripe. [#1267](https://github.com/sharetribe/ftw-daily/pull/1267)
 - [change] Update `Modal` component to have option to use `Portal` with `usePortal` flag. Keep also
   possibility to use modals without Portal because of `ModalInMobile` component.
   [#1258](https://github.com/sharetribe/ftw-daily/pull/1258)
+
+  [v4.3.0]: https://github.com/sharetribe/flex-template-web/compare/v4.2.0...v4.3.0
 
 ## [v4.2.0] 2020-02-18
 

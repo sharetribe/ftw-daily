@@ -134,16 +134,15 @@ const createInitialValues = availabilityPlan => {
 };
 
 // Create entries from submit values
-const createEntriesFromSubmitValues = values =>
+const createEntriesFromSubmitValues = (values, numSeats) =>
   WEEKDAYS.reduce((allEntries, dayOfWeek) => {
     const dayValues = values[dayOfWeek] || [];
     const dayEntries = dayValues.map(dayValue => {
       const { startTime, endTime } = dayValue;
-      // Note: This template doesn't support seats yet.
       return startTime && endTime
         ? {
             dayOfWeek,
-            seats: 1,
+            seats: numSeats,
             startTime,
             endTime: endTime === '24:00' ? '00:00' : endTime,
           }
@@ -154,11 +153,11 @@ const createEntriesFromSubmitValues = values =>
   }, []);
 
 // Create availabilityPlan from submit values
-const createAvailabilityPlan = values => ({
+const createAvailabilityPlan = (values, numSeats) => ({
   availabilityPlan: {
     type: 'availability-plan/time',
     timezone: values.timezone,
-    entries: createEntriesFromSubmitValues(values),
+    entries: createEntriesFromSubmitValues(values, numSeats),
   },
 });
 
@@ -226,8 +225,10 @@ const EditListingAvailabilityPanelHour = props => {
   const handleSubmit = values => {
     setValuesFromLastSubmit(values);
 
+    const {publicData} = currentListing.attributes;
+    const numSeats = 'seats' in publicData ? publicData.seats : 1;
     // Final Form can wait for Promises to return.
-    return onSubmit(createAvailabilityPlan(values))
+    return onSubmit(createAvailabilityPlan(values, numSeats))
       .then(() => {
         setIsEditPlanModalOpen(false);
       })
@@ -243,8 +244,9 @@ const EditListingAvailabilityPanelHour = props => {
   const saveException = values => {
     const { availability, exceptionStartTime, exceptionEndTime } = values;
 
-    // TODO: add proper seat handling
-    const seats = availability === 'available' ? 1 : 0;
+    const {publicData} = currentListing.attributes;
+    const numSeats = 'seats' in publicData ? publicData.seats : 1;
+    const seats = availability === 'available' ? numSeats : 0;
 
     return onCreateAvailabilityException({
       listingId: listing.id,
