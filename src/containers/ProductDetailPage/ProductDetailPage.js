@@ -18,8 +18,8 @@ import css from './ProductDetailPage.css';
 const ProductDetailPage = (props) => {
     
   const productID = props.params.id;
-  //const imgSrc = require("../ProductPage/" + products[productID - 1].productImg + "");
-  //const bannerSrc = require("../ProductPage/" + products[productID - 1].productBanner + "");
+  const imgSrc = require("../ProductPage/img/" + products[productID - 1].productImg + "");
+  const bannerSrc = require("../ProductPage/img/" + products[productID - 1].productBanner + "");
 
   return (
     <StaticPage
@@ -38,9 +38,9 @@ const ProductDetailPage = (props) => {
         </LayoutWrapperTopbar>
         <LayoutWrapperMain>
           <div className={css.productContainer}>
-            {/* <div className={css.productImageBanner}>
+            <div className={css.productImageBanner}>
                 <img className={css.banner} src={bannerSrc} alt={products[productID-1].productName}></img>
-            </div> */}
+            </div>
             <div className={css.productContent}>
                 <div className={css.words}>
                     <div className={css.productHeader}>
@@ -52,9 +52,9 @@ const ProductDetailPage = (props) => {
                         <p>{products[productID-1].productDescription}</p>
                     </div>
                 </div>
-                {/* <div className={css.feature}>
+                <div className={css.feature}>
                     <img className={css.productImage} src={imgSrc} alt={products[productID-1].productName}></img>
-                </div> */}
+                </div>
             </div>
         </div>
         </LayoutWrapperMain>

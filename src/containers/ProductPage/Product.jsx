@@ -3,8 +3,8 @@ import css from './ProductPage.css'
 import { Link } from 'react-router-dom';
 
 function Product(props){
-    const imgSrc = require("" + props.productImg + "");
-    const bannerSrc = require("" + props.productBanner + "");
+    const imgSrc = require("./img/" + props.productImg + "");
+    const bannerSrc = require("./img/" + props.productBanner + "");
     return (
         <div className={css.productContainer}>
             <div className={css.productImageBanner}>
