@@ -236,7 +236,7 @@ const PanelHeading = props => {
         <HeadingProvider
           className={titleClasses}
           id="TransactionPanel.saleDeclinedTitle"
-          values={{ customerName, providerLink }}
+          values={{ customerName, listingLink }}
           isCustomerBanned={isCustomerBanned}
         />
       );
