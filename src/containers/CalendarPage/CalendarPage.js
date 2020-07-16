@@ -345,16 +345,16 @@ export class CalendarPageComponent extends Component {
       (<div>
         <span className={css.closeNotification} onClick={() => this.closeNotificationPopup()}>+</span>
         <input placeholder="Kommentar..." id="addEventInput" type="text" maxLength={40} onChange={this.setNotificationTitle} className={css.addEventInput} />
-         <div className={css.dateNotification}>Möchten Sie den Eigentümer über Ihre Absicht informieren, eine Reise zu einem bestimmten Zeitpunkt zu planen?</div>
+         <div className={css.dateNotification}>Möchtest Du den Eigentümer darüber informieren, einen Ausritt mit dem Pferd zu machen?</div>
          <div className={css.dateNotification}>Von <strong>{notificationStartDate}</strong>  bis <strong>{notificationEndDate}</strong> Uhr</div>
          <div className={css.notificationActions}>
-           <button className={css.buttonColorful} onClick={this.appointNewSchedulingItem}>Zuordnen</button>
+           <button className={css.buttonColorful} onClick={this.appointNewSchedulingItem}>Zeit planen</button>
          </div>
       </div>),
     'appointed':
       (<div>
         <span className={css.closeNotification} onClick={() => this.closeNotificationPopup()}>+</span>
-         <div className={css.dateNotification}>Möchten Sie den Eigentümer über Ihre Absicht informieren, die festgelegte Zeit abzulehnen?</div>
+         <div className={css.dateNotification}>Möchtest Du den Eigentümer darüber informieren, die geplante Zeit zu löschen?</div>
          <div className={css.notificationActions}>
            <button className={css.buttonColorful} onClick={() => {
             //  this.deleteCalendarEvent(idHandledByNotification)
@@ -364,10 +364,10 @@ export class CalendarPageComponent extends Component {
       </div>),
     'pending':
       (<div>
-        <div className={css.dateNotification}>Möchten Sie die Zeit Ihrer Reise ändern und den Eigentümer darüber informieren?</div>
+        <div className={css.dateNotification}>Möchtest Du die Zeit ändern und den Eigentümer darüber informieren?</div>
         <div className={css.notificationActions}>
-          <button onClick={() => this.returnBackPreviouslyChangedTime(true)}>Change Time</button>
-          <button className={css.buttonColorful} onClick={() => this.returnBackPreviouslyChangedTime(false)}>Cancell</button>
+          <button onClick={() => this.returnBackPreviouslyChangedTime(true)}>Zeit ändern</button>
+          <button className={css.buttonColorful} onClick={() => this.returnBackPreviouslyChangedTime(false)}>Abbrechen</button>
         </div>
       </div>)
   } 
@@ -473,7 +473,7 @@ export class CalendarPageComponent extends Component {
   let showLoading = null
 
   if(loadingStarted) {
-    showLoading = (<h2 className={css.loading} style={{'margin':'auto'}}>Loading...</h2>)
+    showLoading = (<h2 className={css.loading} style={{'margin':'auto'}}>Lade...</h2>)
   }
     return (
       <Page className={css.root} title={title} scrollingDisabled={false}>
