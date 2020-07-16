@@ -42,6 +42,7 @@ const ProductPage = () => {
               {products.map(item => {
                   return (
                       <Product 
+                          productID={item.id}
                           productBanner={item.productBanner}
                           productName={item.productName}
                           productDescription={item.productDescription}

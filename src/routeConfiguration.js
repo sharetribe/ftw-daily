@@ -71,7 +71,7 @@ const routeConfiguration = () => {
       component: ProductPage,
     },
     {
-      path: '/product-detail',
+      path: '/product-detail/:id',
       name: 'ProductDetailPage',
       component: ProductDetailPage,
     },

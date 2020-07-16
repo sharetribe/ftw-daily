@@ -1,5 +1,6 @@
 import React from 'react';
 import css from './ProductPage.css'
+import { Link } from 'react-router-dom';
 
 function Product(props){
     const imgSrc = require("" + props.productImg + "");
@@ -12,7 +13,9 @@ function Product(props){
             <div className={css.productContent}>
                 <div className={css.words}>
                     <div className={css.productHeader}>
-                        <h3>{props.productName}</h3>
+                        <h3><Link to={'/product-detail/'+props.productID} className="nav-link">
+                            {props.productName}
+                        </Link></h3>
                     </div>
                     <div className={css.productDescript}>
                         <p>{props.productDescription}</p>

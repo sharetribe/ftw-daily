@@ -1,5 +1,6 @@
 import React from 'react';
 import { StaticPage, TopbarContainer } from '..';
+// import { Link, Route } from 'react-router-dom';
 
 import {
     LayoutSingleColumn,
@@ -11,12 +12,14 @@ import {
     // ExternalLink,
 } from '../../components';
 
-// import products from '../ProductPage/products';
+import products from '../ProductPage/products';
 import css from './ProductDetailPage.css';
-// import image from './path/to/image.png';
 
-const ProductDetailPage = () => {
+const ProductDetailPage = (props) => {
     
+  const productID = props.params.id;
+  //const imgSrc = require("../ProductPage/" + products[productID - 1].productImg + "");
+  //const bannerSrc = require("../ProductPage/" + products[productID - 1].productBanner + "");
 
   return (
     <StaticPage
@@ -34,9 +37,26 @@ const ProductDetailPage = () => {
           <TopbarContainer />
         </LayoutWrapperTopbar>
         <LayoutWrapperMain>
-            <div>
-              <h1>Test</h1>
+          <div className={css.productContainer}>
+            {/* <div className={css.productImageBanner}>
+                <img className={css.banner} src={bannerSrc} alt={products[productID-1].productName}></img>
+            </div> */}
+            <div className={css.productContent}>
+                <div className={css.words}>
+                    <div className={css.productHeader}>
+                        <h3>
+                            {products[productID-1].productName}
+                        </h3>
+                    </div>
+                    <div className={css.productDescript}>
+                        <p>{products[productID-1].productDescription}</p>
+                    </div>
+                </div>
+                {/* <div className={css.feature}>
+                    <img className={css.productImage} src={imgSrc} alt={products[productID-1].productName}></img>
+                </div> */}
             </div>
+        </div>
         </LayoutWrapperMain>
         <LayoutWrapperFooter>
           <Footer />
