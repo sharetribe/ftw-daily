@@ -158,6 +158,7 @@ const TopbarDesktop = (props) => {
           align-items: center;
           justify-content: center;
           margin: 0 1rem;
+          min-width: 300px;
         `}
       >
         <Button

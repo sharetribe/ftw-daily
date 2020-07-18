@@ -30,6 +30,15 @@ const InstrumentTilesContainer = styled.div`
     border-radius: 10px;
     margin: 24px 16px;
   }
+
+  @media (max-width: 600px) {
+    margin: 0 -8px 3rem;
+
+    img {
+      border-radius: 10px;
+      margin: 16px 8px;
+    }
+  }
 `
 
 const images = [
