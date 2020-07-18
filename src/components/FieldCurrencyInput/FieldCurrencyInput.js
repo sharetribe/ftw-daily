@@ -8,6 +8,7 @@ import PropTypes from 'prop-types'
 import { Field } from 'react-final-form'
 import classNames from 'classnames'
 import Decimal from 'decimal.js'
+import { priceData } from '../../util/pricing';
 import { intlShape, injectIntl } from '../../util/reactIntl'
 import { ValidationError } from '..'
 import { types as sdkTypes } from '../../util/sdkLoader'
@@ -57,22 +58,16 @@ class CurrencyInputComponent extends Component {
     const {
       currencyConfig, defaultValue, input, intl
     } = props
-    let initialValueIsMoney = input.value instanceof Money
+    const inputValueToMoney = getPrice(input.value.amount, currencyConfig)
+    const initialValueIsMoney = inputValueToMoney instanceof Money
 
-    // Convert object to Money
-    if (!initialValueIsMoney && input.value.amount && input.value.currency) {
-      console.log(input)
-      input.value = new Money(input.value.amount, input.value.currency)
-      initialValueIsMoney = true
-    }
-
-    if (initialValueIsMoney && input.value.currency !== currencyConfig.currency) {
+    if (initialValueIsMoney && inputValueToMoney.currency !== currencyConfig.currency) {
       const e = new Error('Value currency different from marketplace currency')
-      log.error(e, 'currency-input-invalid-currency', { currencyConfig, inputValue: input.value })
+      log.error(e, 'currency-input-invalid-currency', { currencyConfig, inputValue: inputValueToMoney })
       throw e
     }
 
-    const initialValue = initialValueIsMoney ? convertMoneyToNumber(input.value) : defaultValue
+    const initialValue = initialValueIsMoney ? convertMoneyToNumber(inputValueToMoney) : defaultValue
     const hasInitialValue = typeof initialValue === 'number' && !isNaN(initialValue)
 
     // We need to handle number format - some locales use dots and some commas as decimal separator
@@ -85,7 +80,7 @@ class CurrencyInputComponent extends Component {
       // Unformatted value is digits + localized sub unit separator ("9,99")
       const unformattedValue = hasInitialValue
         ? truncateToSubUnitPrecision(
-          ensureSeparator(initialValue.toString(), usesComma),
+          ensureSeparator((initialValue / 100).toString(), usesComma),
           unitDivisor(currencyConfig.currency),
           usesComma
         )
@@ -244,7 +239,7 @@ CurrencyInputComponent.propTypes = {
   defaultValue: number,
   intl: intlShape.isRequired,
   input: shape({
-    value: oneOfType([string, propTypes.money, object]),
+    value: oneOfType([string, propTypes.money]),
     onBlur: func,
     onChange: func.isRequired,
     onFocus: func,

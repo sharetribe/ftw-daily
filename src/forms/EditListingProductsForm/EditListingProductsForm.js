@@ -1,21 +1,23 @@
-import React from 'react';
-import { bool, func, shape, string } from 'prop-types';
-import { compose } from 'redux';
-import { Form as FinalForm } from 'react-final-form';
-import arrayMutators from 'final-form-arrays';
-import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
-import { propTypes } from '../../util/types';
-import { Button, Form } from '../../components';
+import React from 'react'
+import {
+  bool, func, shape, string
+} from 'prop-types'
+import { compose } from 'redux'
+import { Form as FinalForm } from 'react-final-form'
+import arrayMutators from 'final-form-arrays'
+import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl'
+import { propTypes } from '../../util/types'
+import { Button, Form } from '../../components'
 
-import css from './EditListingProductsForm.css';
+import css from './EditListingProductsForm.css'
 
-import EditListingProductsAdditionalProducts from './EditListingProductsAdditionalProducts';
+import EditListingProductsAdditionalProducts from './EditListingProductsAdditionalProducts'
 
-export const EditListingProductsFormComponent = props => (
+export const EditListingProductsFormComponent = (props) => (
   <FinalForm
     {...props}
     mutators={{ ...arrayMutators }}
-    render={fieldRenderProps => {
+    render={(fieldRenderProps) => {
       const {
         form,
         disabled,
@@ -28,13 +30,13 @@ export const EditListingProductsFormComponent = props => (
         updateInProgress,
         fetchErrors,
         values
-      } = fieldRenderProps;
+      } = fieldRenderProps
 
-      const { push } = form && form.mutators ? form.mutators : {};
-      const submitReady = updated && pristine;
-      const submitInProgress = updateInProgress;
-      const submitDisabled = invalid || disabled || submitInProgress;
-      const { updateListingError, showListingsError } = fetchErrors || {};
+      const { push } = form && form.mutators ? form.mutators : {}
+      const submitReady = updated && pristine
+      const submitInProgress = updateInProgress
+      const submitDisabled = invalid || disabled || submitInProgress
+      const { updateListingError, showListingsError } = fetchErrors || {}
 
       return (
         <Form onSubmit={handleSubmit}>
@@ -67,14 +69,14 @@ export const EditListingProductsFormComponent = props => (
             {saveActionMsg}
           </Button>
         </Form>
-      );
+      )
     }}
   />
-);
+)
 
 EditListingProductsFormComponent.defaultProps = {
   fetchErrors: null
-};
+}
 
 EditListingProductsFormComponent.propTypes = {
   intl: intlShape.isRequired,
@@ -86,6 +88,6 @@ EditListingProductsFormComponent.propTypes = {
     showListingsError: propTypes.error,
     updateListingError: propTypes.error,
   }),
-};
+}
 
-export default compose(injectIntl)(EditListingProductsFormComponent);
+export default compose(injectIntl)(EditListingProductsFormComponent)

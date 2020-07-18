@@ -1,48 +1,49 @@
-import React from 'react';
-import { bool, func, object, string } from 'prop-types';
-import { FormattedMessage, intlShape } from '../../util/reactIntl';
-import { FieldArray } from 'react-final-form-arrays';
-import { IconAdd, IconClose, InlineTextButton } from '../../components';
-import EditListingProductsProduct from './EditListingProductsProduct';
+import React from 'react'
+import {
+  bool, func, object, string
+} from 'prop-types'
+import { FieldArray } from 'react-final-form-arrays'
+import { FormattedMessage, intlShape } from '../../util/reactIntl'
+import { IconAdd, IconClose, InlineTextButton } from '../../components'
+import EditListingProductsProduct from './EditListingProductsProduct'
 
-import css from './EditListingProductsForm.css';
+import css from './EditListingProductsForm.css'
 
-const EditListingProductsAdditionalProducts = props => {
+const EditListingProductsAdditionalProducts = (props) => {
   const {
     fieldId,
     disabled,
     intl,
     push,
     values,
-  } = props;
+  } = props
 
   return (
     <div className={css.additionalProductsWrapper}>
       <FieldArray id={`${fieldId}`} name={`${fieldId}`}>
-        {({ fields }) =>
-          fields.map((name, index) => (
-            <div className={css.additionalProductsWrapper} key={name}>
-              <div
-                className={css.fieldArrayRemove}
-                onClick={() => fields.remove(index)}
-                style={{ cursor: 'pointer' }}
-              >
-                <span className={css.additionalProductLabel}>
-                  <IconClose rootClassName={css.closeIcon} size="small" />
-                  <FormattedMessage id="EditListingProductsForm.additionalProductRemove" />
-                </span>
-              </div>
-
-              <EditListingProductsProduct
-                intl={intl}
-                disabled={disabled}
-                values={values}
-                fieldId={`${fieldId}.${index}`}
-                sectionTitle={intl.formatMessage({ id: 'EditListingProductsForm.additionalProductTitle' })}
-              />
-
+        {({ fields }) => fields.map((name, index) => (
+          <div className={css.additionalProductsWrapper} key={name}>
+            <div
+              className={css.fieldArrayRemove}
+              onClick={() => fields.remove(index)}
+              style={{ cursor: 'pointer' }}
+            >
+              <span className={css.additionalProductLabel}>
+                <IconClose rootClassName={css.closeIcon} size="small" />
+                <FormattedMessage id="EditListingProductsForm.additionalProductRemove" />
+              </span>
             </div>
-          ))
+
+            <EditListingProductsProduct
+              intl={intl}
+              disabled={disabled}
+              values={values}
+              fieldId={`${fieldId}.${index}`}
+              sectionTitle={intl.formatMessage({ id: 'EditListingProductsForm.additionalProductTitle' })}
+            />
+
+          </div>
+        ))
         }
       </FieldArray>
 
@@ -59,13 +60,13 @@ const EditListingProductsAdditionalProducts = props => {
         </InlineTextButton>
       </React.Fragment>
     </div>
-  );
-};
+  )
+}
 
 EditListingProductsAdditionalProducts.defaultProps = {
   disabled: false,
   values: null,
-};
+}
 
 EditListingProductsAdditionalProducts.propTypes = {
   fieldId: string.isRequired,
@@ -75,6 +76,6 @@ EditListingProductsAdditionalProducts.propTypes = {
 
   // from parent
   intl: intlShape.isRequired,
-};
+}
 
-export default EditListingProductsAdditionalProducts;
+export default EditListingProductsAdditionalProducts
