@@ -1,0 +1,58 @@
+{
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "extends": [
+    "airbnb-base",
+    "react-app"
+  ],
+  "rules": {
+    "max-len": 0,
+    "arrow-body-style": 0,
+    "semi": ["error", "never"],
+    "no-underscore-dangle": "off",
+    "no-restricted-syntax": "off",
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    "import/prefer-default-export": "off",
+    "comma-dangle": "off",
+    "no-console": "off",
+    "no-alert": "off",
+    "class-methods-use-this": 0,
+    "operator-linebreak": [
+      "error",
+      "before",
+      {
+        "overrides": {
+          "||": "after",
+          "&&": "after"
+        }
+      }
+    ],
+    "indent": ["error", 2, {
+      "MemberExpression": 0,
+      "SwitchCase": 1,
+      "VariableDeclarator": 1,
+      "outerIIFEBody": 1,
+      "FunctionDeclaration": {
+        "parameters": 1,
+        "body": 1
+      },
+      "FunctionExpression": {
+        "parameters": 1,
+        "body": 1
+      }
+    }]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "moduleDirectory": [
+          "node_modules",
+          "."
+        ]
+      }
+    }
+  }
+}
