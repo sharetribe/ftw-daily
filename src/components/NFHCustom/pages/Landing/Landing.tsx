@@ -7,6 +7,7 @@ import css from './Landing.css'
 import musicNotes from '../../../../assets/images/musicNotes.png'
 import guitarOnBed from '../../../../assets/images/guitarOnBed.jpg'
 import { InstrumentTiles, Testimonials, TestimonialVideo } from '../../organisms'
+import ScrollAnimation from 'react-animate-on-scroll'
 
 const Image = styled.img`
   display: block;
@@ -51,6 +52,10 @@ const InfoCardContainer = styled.div`
   grid-gap: 1.5rem;
   grid-template-columns: 1fr 1fr;
   margin-bottom: 4rem;
+
+  @media (max-width: 800px) {
+    grid-template-columns: 1fr;
+  }
 `
 
 const MusicNotesContainer = styled.div`
@@ -111,19 +116,6 @@ const TestimonialsHero = styled.div`
   align-items: center;
   margin-bottom: 3rem;
 
-  div {
-    background-color: #ac7163;
-    width: auto;
-    max-width: 400px;
-    padding: 2rem 0;
-
-    img {
-      position: relative;
-      right: -3rem;
-      max-width: 400px;
-    }
-  }
-
   h2 {
     margin-left: 6rem;
     font-family: Source Sans Pro, sans-serif;
@@ -143,6 +135,19 @@ const TestimonialsHero = styled.div`
   }
 `
 
+const BackgroundColorDiv = styled.div`
+  background-color: #ac7163;
+  width: auto;
+  max-width: 400px;
+  padding: 2rem 0;
+
+  img {
+    position: relative;
+    right: -3rem;
+    max-width: 400px;
+  }
+`
+
 export const Landing: React.FC = () => {
   return (
     <div>
@@ -152,71 +157,98 @@ export const Landing: React.FC = () => {
         <Constrainer>
           <Image src={nashvilleForHireText} alt="Nashville For Hire" />
 
-          <Info>
-            Make <strong>your next recording project&nbsp;your best yet</strong> by hiring
-            Nashville's top&nbsp;music professionals remotely.
-          </Info>
+          <ScrollAnimation animateIn="fadeIn">
+            <Info>
+              Make <strong>your next recording project&nbsp;your best yet</strong> by hiring
+              Nashville's top&nbsp;music professionals remotely.
+            </Info>
+          </ScrollAnimation>
 
-          <ResponsiveVideo
-            title="Nashville For Hire Video"
-            src="https://player.vimeo.com/video/272277122"
-          />
+          <ScrollAnimation animateIn="fadeIn">
+            <ResponsiveVideo
+              title="Nashville For Hire Video"
+              src="https://player.vimeo.com/video/272277122"
+            />
+          </ScrollAnimation>
 
           <FeatureCardContainer>
-            <FeatureCard title="find the perfect fit" number="one">
-              Search our <strong>curated roster</strong> of Nashville's best music pros to find your
-              match.
-            </FeatureCard>
+            <ScrollAnimation animateIn="flipInY">
+              <FeatureCard title="find the perfect fit" number="one">
+                Search our <strong>curated roster</strong> of Nashville's best music pros to find
+                your match.
+              </FeatureCard>
+            </ScrollAnimation>
 
-            <FeatureCard title="order" number="two">
-              Order and <strong>send all needed files and information</strong> via our streamlined
-              messenger so your Nashville pro can do their thing.
-            </FeatureCard>
+            <ScrollAnimation animateIn="flipInY">
+              <FeatureCard title="order" number="two">
+                Order and <strong>send all needed files and information</strong> via our streamlined
+                messenger so your Nashville pro can do their thing.
+              </FeatureCard>
+            </ScrollAnimation>
 
-            <FeatureCard title="receive" number="three">
-              <strong>Receive amazing tracks</strong> that make you wanna do a little dance.
-            </FeatureCard>
+            <ScrollAnimation animateIn="flipInY">
+              <FeatureCard title="receive" number="three">
+                <strong>Receive amazing tracks</strong> that make you wanna do a little dance.
+              </FeatureCard>
+            </ScrollAnimation>
           </FeatureCardContainer>
 
           <CTAButton className={css.ctaButton}>find your nashville pro</CTAButton>
 
           <InfoCardContainer>
-            <InfoCard title="no travel">Hire from anywhere.</InfoCard>
-            <InfoCard title="no studio fees">All work done remotely</InfoCard>
-            <InfoCard title="no hassle">All files transferred online.</InfoCard>
-            <InfoCard title="no risk">Money-Back-Guarantee on first order.</InfoCard>
+            <ScrollAnimation animateIn="fadeInBottomLeft">
+              <InfoCard title="no travel">Hire from anywhere.</InfoCard>
+            </ScrollAnimation>
+            <ScrollAnimation animateIn="fadeInBottomRight">
+              <InfoCard title="no studio fees">All work done remotely</InfoCard>
+            </ScrollAnimation>
+            <ScrollAnimation animateIn="fadeInBottomLeft">
+              <InfoCard title="no hassle">All files transferred online.</InfoCard>
+            </ScrollAnimation>
+            <ScrollAnimation animateIn="fadeInBottomRight">
+              <InfoCard title="no risk">Money-Back-Guarantee on first order.</InfoCard>
+            </ScrollAnimation>
           </InfoCardContainer>
 
-          <MusicNotesContainer>
-            <div>
-              <h2>Making great music is fun.</h2>
-              <p>
-                <strong>
-                  <em>And</em> so is being able to brag to your friends and family
-                </strong>{' '}
-                that the musicians who worked on your project have{' '}
-                <strong>also worked with...</strong>
-              </p>
-            </div>
-            <img alt="Music notes" src={musicNotes} />
-          </MusicNotesContainer>
+          <ScrollAnimation animateIn="fadeIn">
+            <MusicNotesContainer>
+              <div>
+                <h2>Making great music is fun.</h2>
+                <p>
+                  <strong>
+                    <em>And</em> so is being able to brag to your friends and family
+                  </strong>{' '}
+                  that the musicians who worked on your project have{' '}
+                  <strong>also worked with...</strong>
+                </p>
+              </div>
+              <img alt="Music notes" src={musicNotes} />
+            </MusicNotesContainer>
+          </ScrollAnimation>
 
-          <Names>
-            Maren Morris, Miley Cyrus, Chris Stapleton, Ludacris, Kelly Clarkson, Sam Hunt, Sheryl
-            Crow, Eric Church, Alabama, 21 Pilots, Faith Hill, Amos Lee, Jason Aldean, Kelsea
-            Ballerini, Chris Cornell, Tim McGraw, Bog Seger, Keith Urban, Luke Bryan, Weezer, Jewel,
-            and mannnnnnny more.
-          </Names>
+          <ScrollAnimation animateIn="fadeIn">
+            <Names>
+              Maren Morris, Miley Cyrus, Chris Stapleton, Ludacris, Kelly Clarkson, Sam Hunt, Sheryl
+              Crow, Eric Church, Alabama, 21 Pilots, Faith Hill, Amos Lee, Jason Aldean, Kelsea
+              Ballerini, Chris Cornell, Tim McGraw, Bog Seger, Keith Urban, Luke Bryan, Weezer,
+              Jewel, and mannnnnnny more.
+            </Names>
+          </ScrollAnimation>
 
           <WhatDoesYourProjectNeed>What does your project need?</WhatDoesYourProjectNeed>
 
           <InstrumentTiles />
 
           <TestimonialsHero>
-            <div>
-              <img alt="A person playing guitar" src={guitarOnBed} />
-            </div>
-            <h2>What are our clients saying about us?</h2>
+            <ScrollAnimation animateIn="fadeInLeft">
+              <BackgroundColorDiv>
+                <img alt="A person playing guitar" src={guitarOnBed} />
+              </BackgroundColorDiv>
+            </ScrollAnimation>
+
+            <ScrollAnimation animateIn="fadeInDown">
+              <h2>What are our clients saying about us?</h2>
+            </ScrollAnimation>
           </TestimonialsHero>
 
           <Testimonials />

@@ -20,6 +20,11 @@ export const InfoCard: React.FC<{ title: string }> = ({ children, title }) => {
         p {
           margin: 0;
         }
+
+        @media (max-width: 800px) {
+          padding: 1rem;
+          font-size: 80%;
+        }
       `}
     >
       <h3>{title}</h3>
