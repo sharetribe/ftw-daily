@@ -199,6 +199,7 @@ export class ListingPageComponent extends Component {
       = isPendingApprovalVariant || isDraftVariant
         ? ensureOwnListing(getOwnListing(listingId))
         : ensureListing(getListing(listingId))
+    console.log(currentListing)
 
     const listingSlug = rawParams.slug || createSlug(currentListing.attributes.title || '')
     const params = { slug: listingSlug, ...rawParams }
@@ -234,8 +235,8 @@ export class ListingPageComponent extends Component {
       price = null,
       title = '',
       publicData = {},
+      metadata = {}
     } = currentListing.attributes
-
     const richTitle = (
       <span>
         {richText(title, {
@@ -449,7 +450,7 @@ export class ListingPageComponent extends Component {
                   <SectionFeaturesMaybe options={amenitiesConfig} publicData={publicData} />
                   <SectionCommunityMaybe publicData={publicData} />
                   <SectionVibeMaybe publicData={publicData} />
-                  <SectionSurfMaybe publicData={publicData} />
+                  <SectionSurfMaybe publicData={publicData} metadata={metadata} />
                   <SectionMapMaybe
                     geolocation={geolocation}
                     publicData={publicData}
