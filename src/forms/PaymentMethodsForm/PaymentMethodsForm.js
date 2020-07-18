@@ -52,17 +52,17 @@ const stripeErrorTranslation = (intl, stripeError) => {
 const stripeElementsOptions = {
   fonts: [
     {
-      family: 'sofiapro',
+      family: 'Montserrat',
       fontSmoothing: 'antialiased',
       src:
-        'local("sofiapro"), local("SofiaPro"), local("Sofia Pro"), url("https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-medium-webfont.woff2") format("woff2")',
+        'local("Montserrat"), local("Montserrat"), local("Montserrat"), url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap") format("woff2")',
     },
   ],
 };
 
 const cardStyles = {
   base: {
-    fontFamily: '"sofiapro", Helvetica, Arial, sans-serif',
+    fontFamily: '"Montserrat", Helvetica, Arial, sans-serif',
     fontSize: '18px',
     fontSmoothing: 'antialiased',
     lineHeight: '24px',
