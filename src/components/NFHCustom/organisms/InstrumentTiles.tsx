@@ -67,7 +67,7 @@ export const InstrumentTiles: React.FC = () => {
   return (
     <InstrumentTilesContainer>
       {images.map(({ alt, src }) => (
-        <img key={src} alt={alt} src={src} width={200} />
+        <img key={src} alt={alt} src={src} width={200} height={200} />
       ))}
     </InstrumentTilesContainer>
   )

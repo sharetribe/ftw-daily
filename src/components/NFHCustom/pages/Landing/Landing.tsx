@@ -73,7 +73,7 @@ const MusicNotesContainer = styled.div`
   img {
     flex: 0 0 auto;
     width: 185px;
-    height: auto;
+    height: 185px;
   }
 
   @media (max-width: 600px) {
@@ -222,7 +222,7 @@ export const Landing: React.FC = () => {
                   <strong>also worked with...</strong>
                 </p>
               </div>
-              <img alt="Music notes" src={musicNotes} />
+              <img alt="Music notes" src={musicNotes} height="auto" />
             </MusicNotesContainer>
           </ScrollAnimation>
 
