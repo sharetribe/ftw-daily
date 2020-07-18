@@ -1,9 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import nashvilleForHireText from '../../../../assets/images/nashvilleForHireText.png'
-import { FeatureCard, InfoCard, LandingHero } from '../../molecules'
+import { FeatureCard, InfoCard, LandingHero, ResponsiveVideo } from '../../molecules'
 import { Constrainer } from '../../layout'
 import css from './Landing.css'
+import musicNotes from '../../../../assets/images/musicNotes.png'
+import guitarOnBed from '../../../../assets/images/guitarOnBed.jpg'
+import { InstrumentTiles, Testimonials, TestimonialVideo } from '../../organisms'
 
 const Image = styled.img`
   display: block;
@@ -19,26 +22,11 @@ const Info = styled.p`
   padding: 0 1rem;
 `
 
-const VideoWrapper = styled.div`
-  max-width: 680px;
-  margin: 0 auto 3rem;
-`
-
-const ResponsiveVideoContainer = styled.div`
-  position: relative;
-  padding-bottom: 56.25%;
-  height: 0;
-  max-width: 100%;
-  margin: 0;
-  overflow: hidden;
-  border-radius: 4px;
-`
-
 const FeatureCardContainer = styled.div`
   display: grid;
   grid-gap: 1.5rem;
   grid-template-columns: 1fr 1fr 1fr;
-  margin-bottom: 2rem;
+  margin: 3rem 0 2rem;
 `
 
 const CTAButton = styled.button`
@@ -58,7 +46,74 @@ const InfoCardContainer = styled.div`
   display: grid;
   grid-gap: 1.5rem;
   grid-template-columns: 1fr 1fr;
+  margin-bottom: 4rem;
+`
+
+const MusicNotesContainer = styled.div`
+  display: flex;
+  width: 820px;
+  max-width: 100%;
+  margin: 0 auto 3em;
+
+  h2 {
+    flex: 1 1 auto;
+    font-family: Source Sans Pro, sans-serif;
+    font-size: 36px;
+  }
+
+  img {
+    flex: 0 0 auto;
+    width: 185px;
+    height: auto;
+  }
+`
+
+const Names = styled.p`
+  padding: 1rem 2rem;
+  border: 2px solid rgb(205, 133, 117);
+  border-radius: 16px;
+  font-family: Source Sans Pro, sans-serif;
+  font-size: 24px;
+  font-style: italic;
+  width: 1100px;
+  max-width: 100%;
+  margin: 0 auto 4em;
+  text-align: center;
+`
+
+const WhatDoesYourProjectNeed = styled.h2`
+  font-family: Source Sans Pro, sans-serif;
+  font-size: 36px;
+  text-align: right;
+  width: 1100px;
+  max-width: 100%;
+  margin: 0 auto 2rem;
+  padding: 0 2rem;
+`
+
+const TestimonialsHero = styled.div`
+  display: flex;
+  align-items: center;
   margin-bottom: 3rem;
+
+  div {
+    background-color: #ac7163;
+    width: auto;
+    max-width: 400px;
+    padding: 2rem 0;
+
+    img {
+      position: relative;
+      right: -3rem;
+      max-width: 400px;
+    }
+  }
+
+  h2 {
+    margin-left: 6rem;
+    font-family: Source Sans Pro, sans-serif;
+    font-size: 36px;
+  }
 `
 
 export const Landing: React.FC = () => {
@@ -75,25 +130,10 @@ export const Landing: React.FC = () => {
             Nashville's top&nbsp;music professionals remotely.
           </Info>
 
-          <VideoWrapper>
-            <ResponsiveVideoContainer>
-              <iframe
-                title="Nashville For Hire Video"
-                src="https://player.vimeo.com/video/272277122"
-                width="640"
-                height="360"
-                frameBorder="0"
-                allow="autoplay; fullscreen"
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
-                }}
-              />
-            </ResponsiveVideoContainer>
-          </VideoWrapper>
+          <ResponsiveVideo
+            title="Nashville For Hire Video"
+            src="https://player.vimeo.com/video/272277122"
+          />
 
           <FeatureCardContainer>
             <FeatureCard title="find the perfect fit" number="one">
@@ -119,6 +159,42 @@ export const Landing: React.FC = () => {
             <InfoCard title="no hassle">All files transferred online.</InfoCard>
             <InfoCard title="no risk">Money-Back-Guarantee on first order.</InfoCard>
           </InfoCardContainer>
+
+          <MusicNotesContainer>
+            <div>
+              <h2>Making great music is fun.</h2>
+              <p>
+                <strong>
+                  <em>And</em> so is being able to brag to your friends and family
+                </strong>{' '}
+                that the musicians who worked on your project have{' '}
+                <strong>also worked with...</strong>
+              </p>
+            </div>
+            <img alt="Music notes" src={musicNotes} />
+          </MusicNotesContainer>
+
+          <Names>
+            Maren Morris, Miley Cyrus, Chris Stapleton, Ludacris, Kelly Clarkson, Sam Hunt, Sheryl
+            Crow, Eric Church, Alabama, 21 Pilots, Faith Hill, Amos Lee, Jason Aldean, Kelsea
+            Ballerini, Chris Cornell, Tim McGraw, Bog Seger, Keith Urban, Luke Bryan, Weezer, Jewel,
+            and mannnnnnny more.
+          </Names>
+
+          <WhatDoesYourProjectNeed>What does your project need?</WhatDoesYourProjectNeed>
+
+          <InstrumentTiles />
+
+          <TestimonialsHero>
+            <div>
+              <img alt="A person playing guitar" src={guitarOnBed} />
+            </div>
+            <h2>What are our clients saying about us?</h2>
+          </TestimonialsHero>
+
+          <Testimonials />
+
+          <TestimonialVideo />
         </Constrainer>
       </div>
     </div>
