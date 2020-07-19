@@ -141,7 +141,7 @@ class DynamicMapboxMap extends Component {
     if (zoom !== prevProps.zoom) {
       this.map.setZoom(this.props.zoom)
     }
-    
+
     console.log(center)
 
     const centerChanged = lat !== prevProps.center.lat || lng !== prevProps.center.lng

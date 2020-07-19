@@ -1,5 +1,4 @@
 import React from 'react';
-import { ReactSVG } from 'react-svg';
 
 export const IconBucket = (props) => (
   <svg className={props.className} height='100px' width='100px' fill="#000000" viewBox="0 0 64 64" x="0px" y="0px">

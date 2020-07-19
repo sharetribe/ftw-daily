@@ -73,7 +73,9 @@
   "BookingDatesForm.youWontBeChargedInfo": "Coworksurf guarantee: No questions asked 48 hour refund.",
 
   "BookingDatesForm.productTitle": "Product type",
+  "BookingDatesForm.roomType": "Room type",
   "BookingDatesForm.productPlaceholder": "Choose a type…",
+  "BookingDatesForm.roomTypePlaceholder": "Choose a room…",
 
 
   "BookingDateRangeFilter.labelPlain": "Dates",

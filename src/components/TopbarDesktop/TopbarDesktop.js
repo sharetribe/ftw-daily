@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { FormattedMessage, intlShape } from '../../util/reactIntl';
-import classNames from 'classnames';
-import { ACCOUNT_SETTINGS_PAGES } from '../../routeConfiguration';
-import { propTypes } from '../../util/types';
+import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import { IconMessage } from '../../assets/IconMessage';
+import { FormattedMessage, intlShape } from '../../util/reactIntl'
+import { ACCOUNT_SETTINGS_PAGES } from '../../routeConfiguration'
+import { propTypes } from '../../util/types'
 import {
   Avatar,
   InlineTextButton,
@@ -13,12 +14,12 @@ import {
   MenuContent,
   MenuItem,
   NamedLink,
-} from '../../components';
-import { TopbarSearchForm } from '../../forms';
+} from '..'
+import { TopbarSearchForm } from '../../forms'
 
-import css from './TopbarDesktop.css';
+import css from './TopbarDesktop.css'
 
-const TopbarDesktop = props => {
+const TopbarDesktop = (props) => {
   const {
     className,
     currentUser,
@@ -31,17 +32,17 @@ const TopbarDesktop = props => {
     onLogout,
     onSearchSubmit,
     initialSearchFormValues,
-  } = props;
-  const [mounted, setMounted] = useState(false);
+  } = props
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    setMounted(true)
+  }, [])
 
-  const authenticatedOnClientSide = mounted && isAuthenticated;
-  const isAuthenticatedOrJustHydrated = isAuthenticated || !mounted;
+  const authenticatedOnClientSide = mounted && isAuthenticated
+  const isAuthenticatedOrJustHydrated = isAuthenticated || !mounted
 
-  const classes = classNames(rootClassName || css.root, className);
+  const classes = classNames(rootClassName || css.root, className)
 
   const search = (
     <TopbarSearchForm
@@ -50,9 +51,9 @@ const TopbarDesktop = props => {
       onSubmit={onSearchSubmit}
       initialValues={initialSearchFormValues}
     />
-  );
+  )
 
-  const notificationDot = notificationCount > 0 ? <div className={css.notificationDot} /> : null;
+  const notificationDot = notificationCount > 0 ? <div className={css.notificationDot} /> : null
 
   const inboxLink = authenticatedOnClientSide ? (
     <NamedLink
@@ -62,16 +63,17 @@ const TopbarDesktop = props => {
     >
       <span className={css.inbox}>
         <FormattedMessage id="TopbarDesktop.inbox" />
+        <IconMessage className={css.filterButtonIcon}/>
         {notificationDot}
       </span>
     </NamedLink>
-  ) : null;
+  ) : null
 
-  const currentPageClass = page => {
-    const isAccountSettingsPage =
-      page === 'AccountSettingsPage' && ACCOUNT_SETTINGS_PAGES.includes(currentPage);
-    return currentPage === page || isAccountSettingsPage ? css.currentPage : null;
-  };
+  const currentPageClass = (page) => {
+    const isAccountSettingsPage
+      = page === 'AccountSettingsPage' && ACCOUNT_SETTINGS_PAGES.includes(currentPage)
+    return currentPage === page || isAccountSettingsPage ? css.currentPage : null
+  }
 
   const profileMenu = authenticatedOnClientSide ? (
     <Menu>
@@ -114,7 +116,7 @@ const TopbarDesktop = props => {
         </MenuItem>
       </MenuContent>
     </Menu>
-  ) : null;
+  ) : null
 
   const signupLink = isAuthenticatedOrJustHydrated ? null : (
     <NamedLink name="SignupPage" className={css.signupLink}>
@@ -122,7 +124,7 @@ const TopbarDesktop = props => {
         <FormattedMessage id="TopbarDesktop.signup" />
       </span>
     </NamedLink>
-  );
+  )
 
   const loginLink = isAuthenticatedOrJustHydrated ? null : (
     <NamedLink name="LoginPage" className={css.loginLink}>
@@ -130,7 +132,7 @@ const TopbarDesktop = props => {
         <FormattedMessage id="TopbarDesktop.login" />
       </span>
     </NamedLink>
-  );
+  )
 
   return (
     <nav className={classes}>
@@ -152,10 +154,12 @@ const TopbarDesktop = props => {
       {signupLink}
       {loginLink}
     </nav>
-  );
-};
+  )
+}
 
-const { bool, func, object, number, string } = PropTypes;
+const {
+  bool, func, object, number, string
+} = PropTypes
 
 TopbarDesktop.defaultProps = {
   rootClassName: null,
@@ -164,7 +168,7 @@ TopbarDesktop.defaultProps = {
   currentPage: null,
   notificationCount: 0,
   initialSearchFormValues: {},
-};
+}
 
 TopbarDesktop.propTypes = {
   rootClassName: string,
@@ -178,6 +182,6 @@ TopbarDesktop.propTypes = {
   onSearchSubmit: func.isRequired,
   initialSearchFormValues: object,
   intl: intlShape.isRequired,
-};
+}
 
-export default TopbarDesktop;
+export default TopbarDesktop

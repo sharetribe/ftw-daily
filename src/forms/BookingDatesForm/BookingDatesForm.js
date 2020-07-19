@@ -151,10 +151,10 @@ export class BookingDatesFormComponent extends Component {
             id: 'BookingDatesForm.requiredDate',
           });
           const productPlaceholder = intl.formatMessage({
-            id: 'BookingDatesForm.productPlaceholder',
+            id: 'BookingDatesForm.roomTypePlaceholder',
           });
           const productTitle = intl.formatMessage({
-            id: 'BookingDatesForm.productTitle',
+            id: 'BookingDatesForm.roomType',
           });
 
           const products = listing.attributes.publicData && listing.attributes.publicData.products;
