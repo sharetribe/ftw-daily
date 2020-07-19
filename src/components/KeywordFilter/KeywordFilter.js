@@ -162,6 +162,7 @@ class KeywordFilter extends Component {
         className={className}
         rootClassName={rootClassName}
         label={labelForPlain}
+        icon={icon}
         isSelected={hasInitialValues}
         id={`${id}.plain`}
         liveEdit
@@ -174,7 +175,6 @@ class KeywordFilter extends Component {
       >
         <fieldset className={css.fieldPlain}>
           <label>{filterText}</label>
-          {icon}
           <FieldTextInput
             name={name}
             id={`${id}-input`}
@@ -210,7 +210,7 @@ KeywordFilter.propTypes = {
 
   // form injectIntl
   intl: intlShape.isRequired,
-  icon: node
+  icon: node.isRequired
 }
 
 export default injectIntl(KeywordFilter)

@@ -1,5 +1,4 @@
 @import '../../marketplace.css';
-
 .root {
   position: relative;
   padding-top: 24px;
@@ -10,10 +9,8 @@
 .filterLabel,
 .filterLabelSelected {
   @apply --marketplaceH3FontStyles;
-
   /* Baseline adjustment for label text */
-  margin-top: 0;
-  margin-bottom: 12px;
+  margin: 0;
   padding: 4px 0 2px 0;
 }
 
@@ -42,20 +39,24 @@
   @apply --marketplaceH5FontStyles;
   font-weight: var(--fontWeightMedium);
   color: var(--matterColorAnti);
-
   /* Layout */
   display: inline;
   float: right;
   margin-top: 6px;
   padding: 0;
-
   /* Override button styles */
   outline: none;
   text-align: left;
   border: none;
-
-  &:focus,
-  &:hover {
-    color: var(--matterColor);
-  }
 }
+.clearButton:focus, .clearButton:hover {
+  color: var(--matterColor);
+}
+
+.filterButtonIconContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*# sourceMappingURL=PriceFilterPlain.css.map */

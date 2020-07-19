@@ -142,6 +142,7 @@ export class BookingDateRangeFilterComponent extends Component {
         className={className}
         rootClassName={rootClassName}
         label={labelForPlain}
+        icon={icon}
         isSelected={isSelected}
         id={`${id}.plain`}
         liveEdit
@@ -176,7 +177,7 @@ BookingDateRangeFilterComponent.propTypes = {
   className: string,
   id: string.isRequired,
   label: node,
-  icon: node,
+  icon: node.isRequired,
   showAsPopup: bool,
   liveEdit: bool,
   queryParamNames: arrayOf(string).isRequired,

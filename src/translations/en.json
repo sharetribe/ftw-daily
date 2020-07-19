@@ -762,7 +762,7 @@
   "SearchFiltersMobile.heading": "Filter spaces",
   "SearchFiltersMobile.keywordLabel": "Keyword",
   "SearchFiltersMobile.resetAll": "Reset all",
-  "SearchFiltersMobile.showListings": "Show {count, number} {count, plural, one {sauna} other {saunas}}",
+  "SearchFiltersMobile.showListings": "Show {count, number} {count, plural, one {space} other {spaces}}",
   "SearchFiltersPanel.apply": "Apply",
   "SearchFiltersPanel.cancel": "Cancel",
   "SearchFiltersPanel.resetAll": "Reset all",

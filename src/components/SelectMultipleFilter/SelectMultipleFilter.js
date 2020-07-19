@@ -110,6 +110,8 @@ class SelectMultipleFilter extends Component {
       onSubmit(urlParam, usedValue)
     }
 
+    console.log(icon)
+
     return showAsPopup ? (
       <FilterPopup
         className={classes}
@@ -140,6 +142,7 @@ class SelectMultipleFilter extends Component {
         className={className}
         rootClassName={rootClassName}
         label={labelForPlain}
+        icon={icon}
         isSelected={hasInitialValues}
         id={`${id}.plain`}
         liveEdit
@@ -174,7 +177,7 @@ SelectMultipleFilter.propTypes = {
   name: string.isRequired,
   urlParam: string.isRequired,
   label: string.isRequired,
-  icon: node,
+  icon: node.isRequired,
   onSubmit: func.isRequired,
   options: array.isRequired,
   initialValues: arrayOf(string),
