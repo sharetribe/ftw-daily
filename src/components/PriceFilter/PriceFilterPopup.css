@@ -41,3 +41,9 @@
     border: 1px solid var(--marketplaceColorDark);
   }
 }
+
+.filterButtonIconContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

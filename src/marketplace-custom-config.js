@@ -146,7 +146,7 @@ export const priceFilterConfig = {
 
 // Activate booking dates filter on search page
 export const dateRangeFilterConfig = {
-  active: false,
+  active: true,
 }
 
 // Activate keyword filter on search page

@@ -1,5 +1,4 @@
 @import '../../marketplace.css';
-
 .root {
   padding-top: 24px;
   padding-bottom: 17px;
@@ -9,7 +8,6 @@
 .filterLabel,
 .filterLabelSelected {
   @apply --marketplaceH3FontStyles;
-
   /* Baseline adjustment for label text */
   margin-top: 0;
   margin-bottom: 12px;
@@ -47,8 +45,8 @@
   padding-left: 26px;
 }
 
-.twoColumns {
-  @media (--viewportMedium) {
+@media (--viewportMedium) {
+  .twoColumns {
     column-count: 2;
   }
 }
@@ -101,26 +99,21 @@
   font-weight: var(--fontWeightMedium);
   font-size: 18px;
   color: var(--matterColor);
-
   /* Layout */
   display: block;
   position: relative;
   margin: 0;
   padding: 4px 0 8px 20px;
-
   /* Override button styles */
   outline: none;
   border: none;
   cursor: pointer;
-
-  &:focus,
-  &:hover {
-    color: var(--matterColorDark);
-  }
-
-  &:hover .menuItemBorder {
-    width: 6px;
-  }
+}
+.option:focus, .option:hover {
+  color: var(--matterColorDark);
+}
+.option:hover .menuItemBorder {
+  width: 6px;
 }
 
 .optionSelected {
@@ -132,20 +125,24 @@
   @apply --marketplaceH5FontStyles;
   font-weight: var(--fontWeightMedium);
   color: var(--matterColorAnti);
-
   /* Layout */
   display: inline;
   float: right;
   margin-top: 6px;
   padding: 0;
-
   /* Override button styles */
   outline: none;
   text-align: left;
   border: none;
-
-  &:focus,
-  &:hover {
-    color: var(--matterColor);
-  }
 }
+.clearButton:focus, .clearButton:hover {
+  color: var(--matterColor);
+}
+
+.filterButtonIconContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*# sourceMappingURL=SelectSingleFilterPlain.css.map */
