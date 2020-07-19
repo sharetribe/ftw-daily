@@ -1,10 +1,12 @@
 @import '../../marketplace.css';
+
+.root {
+}
+
 .pageRoot {
   display: flex;
   padding-bottom: 90px;
-}
-@media (--viewportLarge) {
-  .pageRoot {
+  @media (--viewportLarge) {
     padding-bottom: 0;
   }
 }
@@ -25,38 +27,35 @@
   margin: 24px;
 }
 
+.sectionImages {
+}
+
 .threeToTwoWrapper {
   /* Layout */
   display: block;
   width: 100%;
   position: relative;
-}
-@media (--viewportMedium) {
-  .threeToTwoWrapper {
+
+  @media (--viewportMedium) {
     padding: 0;
   }
-}
-@media (--viewportLarge) {
-  .threeToTwoWrapper {
+
+  @media (--viewportLarge) {
     padding: 36px 36px 0 36px;
   }
 }
 
 /* Firefox doesn't support image aspect ratio inside flexbox */
 .aspectWrapper {
-  position: relative;
-  /* allow positioning own listing action bar */
-  padding-bottom: 66.6667%;
-  /* 3:2 Aspect Ratio */
-  background-color: var(--matterColorNegative);
-  /* Loading BG color */
+  position: relative; /* allow positioning own listing action bar */
+  padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
+  background-color: var(--matterColorNegative); /* Loading BG color */
+
   /* Image carousel can be opened from the image, therefore we should show a pointer */
   cursor: pointer;
-}
-@media (--viewportMedium) {
-  .aspectWrapper {
-    padding-bottom: 0;
-    /* No fixed aspect on desktop layouts */
+
+  @media (--viewportMedium) {
+    padding-bottom: 0; /* No fixed aspect on desktop layouts */
   }
 }
 
@@ -69,20 +68,20 @@
   width: calc(100% - 26px);
   color: var(--matterColorNegative);
   background-color: var(--matterColor);
-  z-index: 1;
-  /* bring on top of mobile image */
+  z-index: 1; /* bring on top of mobile image */
+
   /* Action bar prevents the image click events going to the parent and
    should not show a pointer */
   cursor: initial;
+
   border-radius: var(--borderRadius);
 }
 
 .ownListingText {
   @apply --marketplaceH4FontStyles;
   margin: 14px 12px 11px 24px;
-}
-@media (--viewportMedium) {
-  .ownListingText {
+
+  @media (--viewportMedium) {
     margin: 25px 12px 22px 24px;
   }
 }
@@ -96,9 +95,8 @@
   margin: 14px 12px 11px 24px;
   text-align: center;
   width: 100%;
-}
-@media (--viewportMedium) {
-  .closedListingText {
+
+  @media (--viewportMedium) {
     margin: 25px 12px 22px 24px;
   }
 }
@@ -109,14 +107,15 @@
   margin: 0;
   padding: 14px 24px 11px 12px;
   color: var(--matterColorNegative);
+
   transition: var(--transitionStyleButton);
-}
-.editListingLink:hover {
-  color: var(--matterColorLight);
-  text-decoration: none;
-}
-@media (--viewportMedium) {
-  .editListingLink {
+
+  &:hover {
+    color: var(--matterColorLight);
+    text-decoration: none;
+  }
+
+  @media (--viewportMedium) {
     margin: 0;
     padding: 25px 24px 22px 12px;
   }
@@ -134,10 +133,10 @@
   left: 0;
   right: 0;
   width: 100%;
+
   transition: var(--transitionStyleButton);
-}
-@media (--viewportMedium) {
-  .rootForImage {
+
+  @media (--viewportMedium) {
     position: static;
     top: auto;
     bottom: auto;
@@ -147,36 +146,41 @@
     max-height: 50vh;
     object-fit: cover;
     border-radius: var(--borderRadius);
-  }
-  .rootForImage:hover {
-    transform: scale(1.005);
-    box-shadow: var(--boxShadowListingCard);
+
+    &:hover {
+      transform: scale(1.005);
+      box-shadow: var(--boxShadowListingCard);
+    }
   }
 }
 
 .viewPhotos {
   @apply --marketplaceTinyFontStyles;
   font-weight: var(--fontWeightMedium);
+
   /* Position and dimensions */
   position: absolute;
   bottom: 19px;
   right: 24px;
   margin: 0;
   padding: 6px 13px 8px 13px;
+
   /* Colors */
   background-color: var(--matterColorLight);
+
   /* Borders */
   border: none;
   border-radius: var(--borderRadius);
+
   cursor: pointer;
   transition: var(--transitionStyleButton);
-}
-.viewPhotos:hover {
-  background-color: var(--marketplaceColor);
-  color: var(--matterColorLight);
-}
-@media (--viewportMedium) {
-  .viewPhotos {
+
+  &:hover {
+    background-color: var(--marketplaceColor);
+    color: var(--matterColorLight);
+  }
+
+  @media (--viewportMedium) {
     margin: 0;
   }
 }
@@ -192,24 +196,22 @@
   height: 100%;
 }
 
-@media (--viewportMedium) {
-  .contentContainer {
+.contentContainer {
+  @media (--viewportMedium) {
     max-width: 1056px;
     margin: 0 auto;
     padding: 0 24px;
     display: flex;
     position: relative;
   }
-}
-@media (--viewportLarge) {
-  .contentContainer {
+
+  @media (--viewportLarge) {
     max-width: 1128px;
     padding: 0 36px;
     margin: 0 auto 117px;
   }
-}
-@media (--viewportXLarge) {
-  .contentContainer {
+
+  @media (--viewportXLarge) {
     max-width: 1056px;
     padding: 0;
   }
@@ -218,16 +220,14 @@
 .mainContent {
   flex-basis: 100%;
   margin-bottom: 23px;
-}
-@media (--viewportMedium) {
-  .mainContent {
+
+  @media (--viewportMedium) {
     margin-top: 50px;
     margin-bottom: 51px;
     flex-shrink: 0;
   }
-}
-@media (--viewportLarge) {
-  .mainContent {
+
+  @media (--viewportLarge) {
     margin-top: 50px;
     margin-bottom: 0px;
     /* contentContainer's full width - (bookingColumn + two paddings + margin + border) */
@@ -238,8 +238,8 @@
   }
 }
 
-@media (--viewportLarge) {
-  .bookingPanel {
+.bookingPanel {
+  @media (--viewportLarge) {
     display: block;
     margin-top: 95px;
     margin-left: 60px;
@@ -248,13 +248,15 @@
     border-left-color: var(--matterColorNegative);
     padding-left: 60px;
     z-index: 1;
+
     /* The calendar needs 312px */
     flex-basis: 312px;
     flex-shrink: 0;
-  }
-  .bookingPanel > div {
-    position: sticky;
-    top: 95px;
+
+    & > div {
+      position: sticky;
+      top: 95px;
+    }
   }
 }
 
@@ -262,13 +264,14 @@
   /* Position (over the listing image)*/
   margin-left: 24px;
   margin-top: -31px;
+
   /* Rendering context to the same lavel as listing image */
   position: relative;
+
   /* Flex would give too much width by default. */
   width: 60px;
-}
-@media (--viewportMedium) {
-  .sectionAvatar {
+
+  @media (--viewportMedium) {
     position: absolute;
     top: -49px;
     margin-left: 0;
@@ -278,20 +281,16 @@
 
 .avatarMobile {
   display: flex;
-}
-@media (--viewportMedium) {
-  .avatarMobile {
-    display: none;
-    /* Hide the medium avatar from the bigger screens */
+
+  @media (--viewportMedium) {
+    display: none; /* Hide the medium avatar from the bigger screens */
   }
 }
 
 .avatarDesktop {
-  display: none;
-  /* Hide the large avatar from the smaller screens */
-}
-@media (--viewportMedium) {
-  .avatarDesktop {
+  display: none; /* Hide the large avatar from the smaller screens */
+
+  @media (--viewportMedium) {
     display: flex;
   }
 }
@@ -299,18 +298,16 @@
 .sectionHeading {
   margin-top: 22px;
   margin-bottom: 34px;
-}
-@media (--viewportMedium) {
-  .sectionHeading {
+
+  @media (--viewportMedium) {
     margin-bottom: 53px;
   }
 }
 
 .headingContainer {
   margin-bottom: 12px;
-}
-@media (--viewportMedium) {
-  .headingContainer {
+
+  @media (--viewportMedium) {
     display: flex;
     margin-bottom: 24px;
   }
@@ -320,16 +317,16 @@
   display: flex;
   margin-bottom: 33px;
   padding: 0 24px;
-}
-@media (--viewportMedium) {
-  .tags {
+
+  @media (--viewportMedium) {
     margin-bottom: 0;
     padding: 0;
   }
-}
-.tags > *:not(:last-child) {
-  margin-right: 8px;
-  margin-bottom: 8px;
+
+  & > *:not(:last-child) {
+    margin-right: 8px;
+    margin-bottom: 8px;
+  }
 }
 
 .tag {
@@ -344,16 +341,16 @@
   font-weight: 800;
   @apply --marketplaceH5FontStyles;
   color: var(--matterColor);
-}
-.tag svg {
-  margin-right: 6px;
+
+  & svg {
+    margin-right: 6px;
+  }
 }
 
 .desktopPriceContainer {
   display: none;
-}
-@media (--viewportLarge) {
-  .desktopPriceContainer {
+
+  @media (--viewportLarge) {
     /* Layout */
     display: flex;
     flex-direction: column;
@@ -368,9 +365,8 @@
   /* Font */
   @apply --marketplaceH1FontStyles;
   color: var(--marketplaceColor);
-}
-@media (--viewportMedium) {
-  .desktopPriceValue {
+
+  @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 6px;
   }
@@ -380,9 +376,8 @@
   /* Font */
   @apply --marketplaceH5FontStyles;
   color: var(--matterColor);
-}
-@media (--viewportMedium) {
-  .desktopPerUnit {
+
+  @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -391,9 +386,8 @@
 .heading {
   margin-bottom: 33px;
   padding: 0 24px;
-}
-@media (--viewportMedium) {
-  .heading {
+
+  @media (--viewportMedium) {
     margin-bottom: 0;
     padding: 0;
   }
@@ -403,13 +397,12 @@
   /* Font */
   @apply --marketplaceH1FontStyles;
   color: var(--matterColor);
+
   /* Layout */
   width: 100%;
   margin-top: 0;
   margin-bottom: 0;
-}
-@media (--viewportMedium) {
-  .title {
+  @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 5px;
   }
@@ -420,9 +413,8 @@
   @apply --marketplaceH4FontStyles;
   margin-top: 7px;
   margin-bottom: 0;
-}
-@media (--viewportMedium) {
-  .author {
+
+  @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 0;
     color: var(--matterColor);
@@ -435,9 +427,8 @@
 
 .contactWrapper {
   display: none;
-}
-@media (--viewportMedium) {
-  .contactWrapper {
+
+  @media (--viewportMedium) {
     display: inline;
   }
 }
@@ -455,9 +446,8 @@
 .sectionDescription {
   padding: 0 24px;
   margin-bottom: 35px;
-}
-@media (--viewportMedium) {
-  .sectionDescription {
+
+  @media (--viewportMedium) {
     padding: 0;
     margin-bottom: 52px;
   }
@@ -467,11 +457,10 @@
   /* Font */
   @apply --marketplaceH3FontStyles;
   color: var(--matterColorAnti);
+
   margin-top: 0;
   margin-bottom: 13px;
-}
-@media (--viewportMedium) {
-  .descriptionTitle {
+  @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 20px;
   }
@@ -480,9 +469,8 @@
 .sectionCommunity, .sectionVibe, .sectionSurf, .sectionRetreat, .sectionHost {
   padding: 0 24px;
   margin-bottom: 35px;
-}
-@media (--viewportMedium) {
-  .sectionCommunity, .sectionVibe, .sectionSurf, .sectionRetreat, .sectionHost {
+
+  @media (--viewportMedium) {
     padding: 0;
     margin-bottom: 52px;
   }
@@ -492,11 +480,10 @@
   /* Font */
   @apply --marketplaceH3FontStyles;
   color: var(--matterColorAnti);
+
   margin-top: 0;
   margin-bottom: 13px;
-}
-@media (--viewportMedium) {
-  .communityTitle, .vibeTitle, .surfTitle, .retreatTitle {
+  @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 20px;
   }
@@ -505,9 +492,8 @@
 .sectionFeatures {
   padding: 0 24px;
   margin-bottom: 32px;
-}
-@media (--viewportMedium) {
-  .sectionFeatures {
+
+  @media (--viewportMedium) {
     padding: 0;
     margin-bottom: 52px;
   }
@@ -517,11 +503,10 @@
   /* Font */
   @apply --marketplaceH3FontStyles;
   color: var(--matterColorAnti);
+
   margin-top: 0;
   margin-bottom: 16px;
-}
-@media (--viewportMedium) {
-  .featuresTitle {
+  @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 20px;
   }
@@ -530,11 +515,11 @@
 .description {
   margin-top: 0;
   margin-bottom: 0;
+
   /* Preserve newlines, but collapse other whitespace */
   white-space: pre-line;
-}
-@media (--viewportMedium) {
-  .description {
+
+  @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -543,9 +528,8 @@
 .sectionMap {
   padding: 0 24px;
   margin-bottom: 35px;
-}
-@media (--viewportMedium) {
-  .sectionMap {
+
+  @media (--viewportMedium) {
     padding: 0;
   }
 }
@@ -554,11 +538,10 @@
   /* Font */
   @apply --marketplaceH3FontStyles;
   color: var(--matterColorAnti);
+
   margin-top: 0;
   margin-bottom: 20px;
-}
-@media (--viewportMedium) {
-  .locationTitle {
+  @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 28px;
   }
@@ -567,14 +550,11 @@
 .sectionReviews {
   padding: 0 24px;
   margin-bottom: 5px;
-}
-@media (--viewportMedium) {
-  .sectionReviews {
+
+  @media (--viewportMedium) {
     padding: 0;
   }
-}
-@media (--viewportLarge) {
-  .sectionReviews {
+  @media (--viewportLarge) {
     margin-bottom: 3px;
   }
 }
@@ -582,15 +562,13 @@
 .reviewsHeading {
   @apply --marketplaceH3FontStyles;
   color: var(--matterColorAnti);
+
   margin: 52px 0 20px 0;
-}
-@media (--viewportMedium) {
-  .reviewsHeading {
+
+  @media (--viewportMedium) {
     margin: 53px 0 27px 0;
   }
-}
-@media (--viewportLarge) {
-  .reviewsHeading {
+  @media (--viewportLarge) {
     margin: 50px 0 26px 0;
   }
 }
@@ -607,18 +585,17 @@
     margin-bottom: 3px;
   }
 }*/
+
 .yourHostHeading {
   @apply --marketplaceH3FontStyles;
   color: var(--matterColorAnti);
+
   margin: 54px 0 23px 0;
-}
-@media (--viewportMedium) {
-  .yourHostHeading {
+
+  @media (--viewportMedium) {
     margin: 53px 0 27px 0;
   }
-}
-@media (--viewportLarge) {
-  .yourHostHeading {
+  @media (--viewportLarge) {
     margin: 53px 0 27px 0;
   }
 }
@@ -631,9 +608,8 @@
 .enquiryForm {
   flex-grow: 1;
   margin: 70px 0 100px 0;
-}
-@media (--viewportMedium) {
-  .enquiryForm {
+
+  @media (--viewportMedium) {
     display: flex;
     flex-direction: column;
     min-height: 400px;
@@ -648,9 +624,8 @@
   right: 0;
   padding: 24px;
   background-color: var(--matterColorLight);
-}
-@media (--viewportMedium) {
-  .enquirySubmitButtonWrapper {
+
+  @media (--viewportMedium) {
     position: static;
     padding: 0;
     margin-top: auto;
@@ -661,6 +636,7 @@
   /* Dimensions: Map takes all available space from viewport (excludes action button and section title) */
   height: calc(100vh - 193px);
   width: 100%;
+
   /* Static map: dimensions are 640px */
   max-width: 640px;
   max-height: 640px;
@@ -668,14 +644,12 @@
   padding: 0;
   border: 0;
   cursor: pointer;
-}
-@media (--viewportMedium) {
-  .map {
+
+  @media (--viewportMedium) {
     height: 75vh;
   }
-}
-@media (--viewportLarge) {
-  .map {
+
+  @media (--viewportLarge) {
     height: 417px;
   }
 }
@@ -716,7 +690,7 @@
   height: 10px;
   border-radius: 50%;
   margin-left: 4px;
-  background-color: var(--marketplaceColor);
+  background-color: var(--marketplaceColor)
 }
 
 .surfDifficultyIndicatorContainer {
@@ -735,9 +709,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-@media (--viewportMedium) {
-  .forecastIFrameContainer {
+
+  @media (--viewportMedium) {
     height: 900px;
     width: 800px;
   }
@@ -762,7 +735,5 @@
   color: var(--matterColorLight);
   font-size: 12px;
   margin: 0;
-  padding: 0;
+  padding: 0
 }
-
-/*# sourceMappingURL=ListingPage.css.map */
