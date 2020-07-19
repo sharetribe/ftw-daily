@@ -1,5 +1,4 @@
 @import '../../marketplace.css';
-
 .root {
   width: 100%;
   height: 100%;
@@ -9,4 +8,7 @@
 .mapRoot {
   width: 100%;
   height: 100%;
+  text-align: left;
 }
+
+/*# sourceMappingURL=Map.css.map */

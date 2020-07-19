@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import _ from 'lodash'
 import {
-  string, shape, number, object
+  string, shape, number, object, array, bool
 } from 'prop-types'
 // This MultiTouch lib is used for 2-finger panning.
 // which prevents user to experience map-scroll trap, while scrolling the page.
@@ -23,6 +24,30 @@ const mapMarker = (mapsConfig) => {
     return new window.mapboxgl.Marker({ element })
   }
   return new window.mapboxgl.Marker()
+}
+
+const surfSpotMapMarker = (surfSpot, map) => {
+  const element = document.createElement('div')
+  element.style.backgroundColor = 'black'
+  element.style.width = '20px'
+  element.style.height = '20px'
+  element.style.borderRadius = '50%'
+  element.style.display = 'flex'
+  element.style.alignItems = 'center'
+  element.style.justifyContent = 'center'
+  const num = document.createElement('span')
+  num.style.color = 'white'
+  num.style.fontFamily = 'Montserrat'
+  const text = document.createTextNode(surfSpot.order)
+  num.appendChild(text)
+  element.appendChild(num)
+  const mrkr = new window.mapboxgl.Marker({ element })
+  mrkr.setLngLat([surfSpot.lng, surfSpot.lat]).addTo(map)
+}
+
+const createSurfSpots = (metadata, map) => {
+  const surfSpots = _.get(metadata, 'surf.spots', [])
+  surfSpots.map((ss) => surfSpotMapMarker(ss, map))
 }
 
 const circleLayer = (center, mapsConfig, layerId) => {
@@ -64,9 +89,10 @@ class DynamicMapboxMap extends Component {
   }
 
   componentDidMount() {
-    const { center, zoom, mapsConfig } = this.props
+    const {
+      center, zoom, mapsConfig, createSurf, metadata
+    } = this.props
     const position = [center.lng, center.lat]
-    console.log('here')
 
     this.map = new window.mapboxgl.Map({
       container: this.mapContainer,
@@ -75,21 +101,22 @@ class DynamicMapboxMap extends Component {
       zoom,
       scrollZoom: false,
     })
+    console.log(position)
     this.map.addControl(new window.mapboxgl.NavigationControl({ showCompass: false }), 'top-left')
     this.map.addControl(new MultiTouch())
-
     if (mapsConfig.fuzzy.enabled) {
       this.map.on('load', () => {
-        console.log(center)
-        console.log('load')
         this.map.addLayer(circleLayer(center, mapsConfig, this.fuzzyLayerId))
         this.map.addLayer(circleLayer({ lat: 15.832356, lng: -97.045324 }, mapsConfig, this.fuzzyLayerId))
       })
     } else {
       this.centerMarker = mapMarker(mapsConfig)
-      const k = mapMarker(mapsConfig)
-      k.setLngLat([-97.045324, 15.832356]).addTo(this.map)
       this.centerMarker.setLngLat(position).addTo(this.map)
+      this.map.setCenter(position)
+    }
+
+    if (createSurf) {
+      createSurfSpots(metadata, this.map)
     }
   }
 
@@ -114,6 +141,8 @@ class DynamicMapboxMap extends Component {
     if (zoom !== prevProps.zoom) {
       this.map.setZoom(this.props.zoom)
     }
+    
+    console.log(center)
 
     const centerChanged = lat !== prevProps.center.lat || lng !== prevProps.center.lng
 
@@ -178,6 +207,8 @@ DynamicMapboxMap.propTypes = {
   }).isRequired,
   zoom: number,
   mapsConfig: object,
+  surfSpots: array,
+  createSurfSpots: bool
 }
 
 export default DynamicMapboxMap

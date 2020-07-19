@@ -454,6 +454,7 @@ export class ListingPageComponent extends Component {
                     geolocation={geolocation}
                     publicData={publicData}
                     listingId={currentListing.id}
+                    metadata={metadata}
                   />
                   { publicData.location && publicData.location.video
                     ? <>

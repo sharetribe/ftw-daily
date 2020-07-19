@@ -21,6 +21,8 @@ export class Map extends Component {
       zoom,
       mapsConfig,
       useStaticMap,
+      metadata,
+      createSurf
     } = this.props
     const classes = classNames(rootClassName || css.root, className)
     const mapClasses = mapRootClassName || css.mapRoot
@@ -50,6 +52,8 @@ export class Map extends Component {
         zoom={zoom}
         address={address}
         mapsConfig={mapsConfig}
+        metadata={metadata}
+        createSurf={createSurf}
       />
     )
   }
@@ -75,6 +79,8 @@ Map.propTypes = {
   zoom: number,
   mapsConfig: object,
   useStaticMap: bool,
+  metadata: object,
+  createSurf: bool
 }
 
 export default Map
