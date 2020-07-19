@@ -114,8 +114,9 @@ class DynamicMapboxMap extends Component {
       this.centerMarker.setLngLat(position).addTo(this.map)
       this.map.setCenter(position)
     }
-
+  console.log(createSurf)
     if (createSurf) {
+      console.log(metadata)
       createSurfSpots(metadata, this.map)
     }
   }
