@@ -32,6 +32,7 @@ export { default as IconReviewStar } from './IconReviewStar/IconReviewStar';
 export { default as IconReviewUser } from './IconReviewUser/IconReviewUser';
 export { default as IconSearch } from './IconSearch/IconSearch';
 export { default as IconSocialMediaFacebook } from './IconSocialMediaFacebook/IconSocialMediaFacebook';
+export { default as IconSocialMediaFacebookRegister } from './IconSocialMediaFacebookRegister/IconSocialMediaFacebookRegister';
 export { default as IconSocialMediaInstagram } from './IconSocialMediaInstagram/IconSocialMediaInstagram';
 export { default as IconSocialMediaTwitter } from './IconSocialMediaTwitter/IconSocialMediaTwitter';
 export { default as IconSocialMediaYoutube } from './IconSocialMediaYoutube';
@@ -86,6 +87,7 @@ export { default as LayoutWrapperSideNav } from './LayoutWrapperSideNav/LayoutWr
 export { default as LayoutWrapperTopbar } from './LayoutWrapperTopbar/LayoutWrapperTopbar';
 export { default as LayoutSideNavigation } from './LayoutSideNavigation/LayoutSideNavigation';
 export { default as LayoutSingleColumn } from './LayoutSingleColumn/LayoutSingleColumn';
+export { default as LoginFacebook } from './LoginFacebookButton/LoginFacebookButton';
 
 // Menu
 export { default as MenuItem } from './MenuItem/MenuItem';
@@ -115,6 +117,7 @@ export { default as FieldPhoneNumberInput } from './FieldPhoneNumberInput/FieldP
 // Fields and inputs using old naming pattern
 export { default as LocationAutocompleteInput, LocationAutocompleteInputField } from './LocationAutocompleteInput/LocationAutocompleteInput';
 export { default as StripeBankAccountTokenInputField } from './StripeBankAccountTokenInputField/StripeBankAccountTokenInputField';
+export { default as SignupFacebook } from './SignupFacebookButton/SignupFacebookButton';
 
 // Tab navigation
 export { default as TabNav } from './TabNav/TabNav';

@@ -5,9 +5,15 @@ import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import { Form as FinalForm } from 'react-final-form';
 import classNames from 'classnames';
 import * as validators from '../../util/validators';
-import { Form, PrimaryButton, FieldTextInput } from '../../components';
+import {
+  Form,
+  PrimaryButton,
+  FieldTextInput,
+  SignupFacebook,
+} from '../../components';
 
 import css from './SignupForm.css';
+import config from '../../config';
 
 const KEY_CODE_ENTER = 13;
 
@@ -187,6 +193,7 @@ const SignupFormComponent = props => (
             <PrimaryButton type="submit" inProgress={submitInProgress} disabled={submitDisabled}>
               <FormattedMessage id="SignupForm.signUp" />
             </PrimaryButton>
+              <SignupFacebook />
           </div>
         </Form>
       );

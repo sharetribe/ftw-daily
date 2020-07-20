@@ -97,6 +97,7 @@ const siteInstagramPage = 'https://www.instagram.com/horsedeal24/';
 const siteSnapchatPage = 'https://www.snapchat.com/add/horsedeal24';
 // Facebook page is used in SEO schema (http://schema.org/Organization)
 const siteFacebookPage = 'https://www.facebook.com/HorseDeal24/';
+//const FacebookPageRegister = 'https://horsedeal24.herokuapp.com/people/auth/facebook/callback';
 
 // Facebook counts shares with app or page associated by this id
 // Currently it is unset, but you can read more about fb:app_id from
@@ -213,6 +214,7 @@ const config = {
   },
   siteTitle,
   siteFacebookPage,
+//  FacebookPageRegister,
   siteInstagramPage,
   siteTwitterHandle,
   siteSnapchatPage,

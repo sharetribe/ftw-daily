@@ -59,7 +59,7 @@ export class AuthenticationPageComponent extends Component {
       sendVerificationEmailError,
       onResendVerificationEmail,
       onManageDisableScrolling,
-    } = this.props;
+      } = this.props;
     const isLogin = tab === 'login';
     const from = location.state && location.state.from ? location.state.from : null;
 
@@ -136,12 +136,14 @@ export class AuthenticationPageComponent extends Component {
       submitSignup(params);
     };
 
+
+
     const formContent = (
       <div className={css.content}>
         <LinkTabNavHorizontal className={css.tabs} tabs={tabs} />
         {loginOrSignupError}
         {isLogin ? (
-          <LoginForm className={css.form} onSubmit={submitLogin} inProgress={authInProgress} />
+          <LoginForm className={css.form} onSubmit={submitLogin} inProgress={authInProgress}  />
         ) : (
           <SignupForm
             className={css.form}

@@ -1,0 +1,22 @@
+.loginBtn__box {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.login__facebook {
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.login__facebook:hover {
+  transform: scale(1.04);
+}
+
+.login__facebook svg {
+  height: 40px;
+  width: 40px;
+
+
+}
