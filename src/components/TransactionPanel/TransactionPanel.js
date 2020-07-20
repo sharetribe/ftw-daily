@@ -321,6 +321,7 @@ export class TransactionPanelComponent extends Component {
     const providerData = {
       //customer: currentUser.attributes.profile.displayName,
       provider: currentListing.author.attributes.profile.displayName,
+      providerId: currentListing.author.id,
       listingData: {
         listingId: currentListing.id,
         title:  currentListing.attributes.title,
@@ -328,7 +329,7 @@ export class TransactionPanelComponent extends Component {
         img: firstImage
       }
     }
-
+    
     const saleButtons = (
       <SaleActionButtonsMaybe
         showButtons={stateData.showSaleButtons}
@@ -369,9 +370,9 @@ export class TransactionPanelComponent extends Component {
       <div className={classes}>
         <div className={css.container}>
           <div className={css.txInfo}>
-            {/* <button className={css.backBtn} onClick={this.goBack}>
+            <button className={css.backBtn} onClick={this.goBack}>
               <FormattedMessage id="TransactionPanel.backButtonLabel" />
-            </button> */}
+            </button>
             <DetailCardImage
               rootClassName={css.imageWrapperMobile}
               avatarWrapperClassName={css.avatarWrapperMobile}
@@ -503,8 +504,8 @@ export class TransactionPanelComponent extends Component {
                   </PrimaryButton>
                 </a>
               </div>
-              {/*
-                <BookingPanel
+              
+                {/* <BookingPanel
                   className={css.bookingPanel}
                   titleClassName={css.bookingTitle}
                   isOwnListing={false}
@@ -516,8 +517,8 @@ export class TransactionPanelComponent extends Component {
                   onManageDisableScrolling={onManageDisableScrolling}
                   timeSlots={timeSlots}
                   fetchTimeSlotsError={fetchTimeSlotsError}
-                />
-          */}
+                /> */}
+         
               <BreakdownMaybe
                 className={css.breakdownContainer}
                 transaction={currentTransaction}
