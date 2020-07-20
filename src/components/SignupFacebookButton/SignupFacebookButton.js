@@ -22,10 +22,10 @@ import css from '../LoginFacebookButton/LoginFacebookButton.css'
 
   render() {
     return (
-      <FacebookProvider appId="280275153413098">
+      <FacebookProvider appId="775202643249383">
         <div className={css.loginBtn__box}>
           <LoginButton
-            scope="naytilys685@gmail.com"
+            scope="office@horsedeal24.com"
             onCompleted={this.handleResponse}
             onError={this.handleError}
             className={css.login__facebook}
@@ -66,7 +66,3 @@ const SignupFacebook = compose(
 
 export default SignupFacebook
 
-//775202643249383
-//office@horsedeal24.com
-//280275153413098
-//naytilys685@gmail.com
