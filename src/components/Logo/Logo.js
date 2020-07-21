@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import config from '../../config';
+// TODO (SY): change this icon logo
 import IconLogo from './IconLogo';
-import LogoImage from './saunatime-logo.png';
+import LogoImage from './faherty-logo.png';
 import css from './Logo.css';
 
 const Logo = props => {
