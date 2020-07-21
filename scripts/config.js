@@ -321,9 +321,7 @@ Note that the .env file is a hidden file so it might not be visible directly in 
  * Create new .env file using .env-template
  */
 const createEnvFile = () => {
-  fs.copyFileSync('./.env-template', './.env', err => {
-    if (err) throw err;
-  });
+  fs.copyFileSync('./.env-template', './.env', fs.constants.COPYFILE_EXCL);
 };
 
 /**
