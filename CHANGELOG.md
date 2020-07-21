@@ -14,6 +14,13 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+## [v6.1.1] 2020-07-21
+
+- [fix] Fix config script for NodeJS v14.5.0
+  [#1327](https://github.com/sharetribe/ftw-daily/pull/1327)
+
+[v6.1.1]: https://github.com/sharetribe/flex-template-web/compare/v6.1.0...v6.1.1
+
 ## [v6.1.0] 2020-07-01
 
 - [fix] MainPanel: search filter bug. Address and bounds are handled outside of MainPanel, URL
