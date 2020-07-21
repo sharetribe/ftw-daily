@@ -134,46 +134,17 @@ export const authInfo = () => (dispatch, getState, sdk) => {
 
 export const loginFacebook = (data) => (dispatch, getState, sdk) => {
   if (authenticationInProgress(getState())) {
-    if (authenticationInProgress(getState())) {
       return Promise.reject(new Error('Login or logout already in progress'));
     } else {
-      window.FB.getLoginStatus(function(response) {
-        if (response.status === 'connected') {
-          let username = data.profile['email']
-          let password = data.profile['id']
+          let username = data['email']
+          let password = data['id']
           return sdk
             .login({ username, password })
             .then(() => dispatch(loginSuccess()))
             .then(() => dispatch(fetchCurrentUser()))
             .catch(e => dispatch(loginError(storableError(e))));
-        } else if (response.status === 'not_authorized') {
-
-          window.FB.login()
-          let username = data.profile['email']
-          let password = data.profile['id']
-          dispatch(loginRequest());
-          return sdk
-            .login({ username, password })
-            .then(() => dispatch(loginSuccess()))
-            .then(() => dispatch(fetchCurrentUser()))
-            .catch(e => dispatch(loginError(storableError(e))));
-        } else {
-          window.FB.login()
-          let username = data.profile['email']
-          let password = data.profile['id']
-          dispatch(loginRequest());
-          return sdk
-            .login({ username, password })
-            .then(() => dispatch(loginSuccess()))
-            .then(() => dispatch(fetchCurrentUser()))
-            .catch(e => dispatch(loginError(storableError(e))))
-        }
-      })
-    }
   }
 }
-
-
 
  export const login = (username, password) => (dispatch, getState, sdk) => {
   if (authenticationInProgress(getState())) {
@@ -244,28 +215,34 @@ export const singupFacebook = data => (dispatch, getState, sdk) => {
     return Promise.reject(new Error('Login or logout already in progress'));
   }
   dispatch(signupRequest())
-  const email = data.profile.email
-  const firstName= data.profile.first_name
-  const lastName= data.profile.last_name
-  const  password = data.profile.id
 
-  const createUserParams ={ 'email': email, 'password': password, 'firstName': firstName, 'lastName': lastName }
-  //const changeEmail = {'newEmail': email, 'currentPassword': password }
-  //const changePassword= {'newPassword': password, 'currentPassword': password }
-  // We must login the user if signup succeeds since the API doesn't
-  // do that automatically.
+    const email = data.email
+    const firstName = data.name.split(' ')[0]
+    const lastName = data.name.split(' ')[1]
+    const password = data.id
 
-  return sdk.currentUser
-    .create(createUserParams)
-    .then(() => dispatch(signupSuccess()))
-    .then(() => dispatch(login(email, password)))
-    .catch(e => {
-      dispatch(signupError(storableError(e)));
-      log.error(e, 'signup-failed', {
-        email: data.profile.email,
-        firstName: data.profile.firstName,
-        lastName: data.profile.lastName,
+    const createUserParams = {
+      'email': email,
+      'password': password,
+      'firstName': firstName,
+      'lastName': lastName
+    }
+    //const changeEmail = {'newEmail': email, 'currentPassword': password }
+    //const changePassword= {'newPassword': password, 'currentPassword': password }
+    // We must login the user if signup succeeds since the API doesn't
+    // do that automatically.
+
+    return sdk.currentUser
+      .create(createUserParams)
+      .then(() => dispatch(signupSuccess()))
+      .then(() => dispatch(login(email, password)))
+      .catch(e => {
+        dispatch(signupError(storableError(e)));
+        log.error(e, 'signup-failed', {
+          email: data.email,
+          firstName: data.firstName,
+          lastName: data.lastName,
+        });
       });
-    });
 };
 

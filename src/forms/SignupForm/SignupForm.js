@@ -193,7 +193,7 @@ const SignupFormComponent = props => (
             <PrimaryButton type="submit" inProgress={submitInProgress} disabled={submitDisabled}>
               <FormattedMessage id="SignupForm.signUp" />
             </PrimaryButton>
-              <SignupFacebook />
+            <SignupFacebook/>
           </div>
         </Form>
       );

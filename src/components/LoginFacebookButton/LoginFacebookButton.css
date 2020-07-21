@@ -1,22 +1,58 @@
-.loginBtn__box {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.login__facebook {
-  padding: 0;
-  border: none;
+.login_facebook {
+  position: relative;
+  width: 100%;
+  padding: 20px 40px 20px 60px;
+  background-color: #3b5998;
+  color: #ffffff;
   cursor: pointer;
+  line-height: 1;
+
+  border: none;
+  border-radius: 8px;
+  transition: all 200ms ease-in-out;
+}
+.login_facebook::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 60px;
+  display: block;
+  height: 100%;
+  width: 2px;
+  background-color: #304c8a;
 }
 
-.login__facebook:hover {
-  transform: scale(1.04);
+.login_facebook svg {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  width: 30px;
+  height: 30px;
+
+  transform: translateY(-50%);
 }
 
-.login__facebook svg {
-  height: 40px;
-  width: 40px;
+.login_facebook:hover {
+  box-shadow: 0 0 4px 3px rgba(59,89,152, 0.6);
+}
 
+.line_oder {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+  color: #b2b2b2;
+  font-size: 14px;
+}
 
+.line_oder p {
+  margin: 0 15px;
+}
+
+.line_oder::before, .line_oder::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px;
+
+  background-color: #b2b2b2;
 }
