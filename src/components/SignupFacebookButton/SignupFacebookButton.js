@@ -1,5 +1,4 @@
 import React, { Component} from 'react';
-import { FacebookProvider, LoginButton } from 'react-facebook';
 import { IconSocialMediaFacebookRegister }from  '../../components';
 import { singupFacebook } from '../../ducks/Auth.duck';
 import { connect } from 'react-redux';
@@ -9,34 +8,43 @@ import { compose } from 'redux';
 import { injectIntl } from 'react-intl';
 import { TopbarContainerComponent } from '../../containers/TopbarContainer/TopbarContainer';
 import css from '../LoginFacebookButton/LoginFacebookButton.css'
+import FacebookLogin from 'react-facebook-login';
 
  class SignupFacebookButton extends Component {
-  handleResponse = async (data) => {
-    await this.props.onSingupFacebook(data)
-  }
-  fb = () => window.FB.login();
-  handleError =async (error) => {
-    //this.fb()
-    this.setState({ error });
-  }
+   state={
+     isLoggedIn: false,
+     userId: '',
+     name: '' ,
+     email:'',
+   }
 
-  render() {
-    return (
-      <FacebookProvider appId="775202643249383">
-        <div className={css.loginBtn__box}>
-          <LoginButton
-            scope="office@horsedeal24.com"
-            onCompleted={this.handleResponse}
-            onError={this.handleError}
-            className={css.login__facebook}
-          >
-            <IconSocialMediaFacebookRegister />
-          </LoginButton>
-        </div>
-      </FacebookProvider>
-    )
-  }
-}
+   componentClicked = async () => {}
+
+   responseFacebook = async(res ) => {
+     if (res.status !== 'unknown') {
+     await this.props.onSingupFacebook(res)
+   }
+   }
+   render() {
+     return (
+       <>
+         <div className={css.line_oder}><p>oder</p></div>
+         <FacebookLogin
+           textButton="Login mit Facebook"
+           appId={process.env.FACEBOOK_ID_APP}
+           autoLoad={false}
+           fields="name,email,id"
+           onClick={this.componentClicked}
+           callback={this.responseFacebook}
+           cssClass={css.login_facebook}
+           icon={<IconSocialMediaFacebookRegister/>}
+         />
+       </>
+     )
+
+   }
+ }
+
 
 TopbarContainerComponent.defaultProps = {
 };
