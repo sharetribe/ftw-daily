@@ -7,7 +7,7 @@ import { FormattedMessage } from '../../util/reactIntl';
 import { findOptionsForSelectFilter } from '../../util/search';
 import { propTypes } from '../../util/types';
 import config from '../../config';
-import { Button, FieldCheckboxGroup, Form } from '../../components';
+import { Button, FieldCheckboxGroup, FieldSelect, Form } from '../../components';
 
 import css from './EditListingFeaturesForm.css';
 
@@ -49,14 +49,30 @@ const EditListingFeaturesFormComponent = props => (
         </p>
       ) : null;
 
+      const conditionKey = 'condition';
+      const amenitiesKey = 'amenities';
       const options = findOptionsForSelectFilter('amenities', filterConfig);
+      const conditionOptions = findOptionsForSelectFilter('condition', filterConfig);
+      console.log(filterConfig);
+      console.log(conditionOptions);
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessage}
           {errorMessageShowListing}
 
-          <FieldCheckboxGroup className={css.features} id={name} name={name} options={options} />
-
+          {/* <FieldCheckboxGroup className={css.features} id={name} name={name} options={options} label="Amenities"/> */}
+          <FieldSelect
+            className={css.features}
+            name={conditionKey}
+            id={conditionKey}
+            label={'Condition'}
+          >
+            {conditionOptions.map(o => (
+              <option key={o.key} value={o.key}>
+                {o.label}
+              </option>
+            ))}
+          </FieldSelect>
           <Button
             className={css.submitButton}
             type="submit"

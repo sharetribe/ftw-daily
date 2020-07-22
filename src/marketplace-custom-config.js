@@ -5,7 +5,7 @@
  * - id:     Unique id of the filter.
  * - label:  The default label of the filter.
  * - type:   String that represents one of the existing filter components:
- *           BookingDateRangeFilter, KeywordFilter, PriceFilter,
+ *           BookingDateRangeFilter, KeKeyworldywordFilter, PriceFilter,
  *           SelectSingleFilter, SelectMultipleFilter.
  * - group:  Is this 'primary' or 'secondary' filter?
  *           Primary filters are visible on desktop layout by default.
@@ -139,6 +139,25 @@ export const filters = [
         {
           key: 'own_food_allowed',
           label: 'Own food allowed',
+        },
+      ],
+    },
+  },
+  {
+    id: 'condition',
+    label: 'Condition',
+    type: 'SelectSingleFilter',
+    group: 'secondary',
+    queryParamNams: ['condition'],
+    config: {
+      options: [
+        {
+          key: 'like_new',
+          label: 'Like New',
+        },
+        {
+          key: 'used',
+          label: 'Used',
         },
       ],
     },
