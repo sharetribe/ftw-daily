@@ -3,12 +3,13 @@
   width: 100%;
   padding: 20px 40px 20px 60px;
   background-color: #3b5998;
+  font-size: 18px;
   color: #ffffff;
   cursor: pointer;
   line-height: 1;
 
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
   transition: all 200ms ease-in-out;
 }
 .login_facebook::before{
@@ -33,7 +34,7 @@
 }
 
 .login_facebook:hover {
-  box-shadow: 0 0 4px 3px rgba(59,89,152, 0.6);
+  box-shadow: 0 0 4px 3px rgba(63,100,175, 0.8);
 }
 
 .line_oder {

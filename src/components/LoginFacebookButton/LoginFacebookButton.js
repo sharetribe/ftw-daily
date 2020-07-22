@@ -29,7 +29,7 @@ class LoginFacebookButton extends Component {
         <div className={css.line_oder}><p>oder</p></div>
         <FacebookLogin
             textButton="Login mit Facebook"
-            appId={process.env.FACEBOOK_ID_APP}
+            appId={config.facebookAppId}
             autoLoad={false}
             fields="name,email,id"
             onClick={this.componentClicked}
