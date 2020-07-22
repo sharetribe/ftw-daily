@@ -103,7 +103,7 @@ const siteFacebookPage = 'https://www.facebook.com/HorseDeal24/';
 // Currently it is unset, but you can read more about fb:app_id from
 // https://developers.facebook.com/docs/sharing/webmasters#basic
 // You should create one to track social sharing in Facebook
-const facebookAppId = null;
+const facebookAppId = process.env.FACEBOOK_ID_APP;
 
 const maps = {
   mapboxAccessToken: process.env.REACT_APP_MAPBOX_ACCESS_TOKEN,
