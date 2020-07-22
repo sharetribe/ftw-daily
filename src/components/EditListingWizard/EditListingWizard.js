@@ -214,25 +214,28 @@ class EditListingWizard extends Component {
 
   handlePublishListing(id) {
     const { onPublishListingDraft, currentUser, stripeAccount } = this.props;
+    onPublishListingDraft(id);
+    
+    // SY: Removed all stripe requirements
+    
+    // const stripeConnected =
+    //   currentUser && currentUser.stripeAccount && !!currentUser.stripeAccount.id;
 
-    const stripeConnected =
-      currentUser && currentUser.stripeAccount && !!currentUser.stripeAccount.id;
+    // const stripeAccountData = stripeConnected ? getStripeAccountData(stripeAccount) : null;
 
-    const stripeAccountData = stripeConnected ? getStripeAccountData(stripeAccount) : null;
+    // const requirementsMissing =
+    //   stripeAccount &&
+    //   (hasRequirements(stripeAccountData, 'past_due') ||
+    //     hasRequirements(stripeAccountData, 'currently_due'));
 
-    const requirementsMissing =
-      stripeAccount &&
-      (hasRequirements(stripeAccountData, 'past_due') ||
-        hasRequirements(stripeAccountData, 'currently_due'));
-
-    if (stripeConnected && !requirementsMissing) {
-      onPublishListingDraft(id);
-    } else {
-      this.setState({
-        draftId: id,
-        showPayoutDetails: true,
-      });
-    }
+    // if (stripeConnected && !requirementsMissing) {
+    //   onPublishListingDraft(id);
+    // } else {
+    //   this.setState({
+    //     draftId: id,
+    //     showPayoutDetails: true,
+    //   });
+    // }
   }
 
   handlePayoutModalClose() {
