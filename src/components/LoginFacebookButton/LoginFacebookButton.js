@@ -7,6 +7,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 import { withRouter } from 'react-router-dom';
+import config from '../../config'
 
 import css from './LoginFacebookButton.css'
 class LoginFacebookButton extends Component {

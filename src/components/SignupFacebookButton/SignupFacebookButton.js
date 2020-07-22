@@ -9,6 +9,8 @@ import { injectIntl } from 'react-intl';
 import { TopbarContainerComponent } from '../../containers/TopbarContainer/TopbarContainer';
 import css from '../LoginFacebookButton/LoginFacebookButton.css'
 import FacebookLogin from 'react-facebook-login';
+import config  from '../../config'
+
 
  class SignupFacebookButton extends Component {
    state={
