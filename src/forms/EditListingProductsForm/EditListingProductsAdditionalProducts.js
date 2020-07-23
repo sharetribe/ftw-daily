@@ -16,6 +16,7 @@ const EditListingProductsAdditionalProducts = (props) => {
     intl,
     push,
     values,
+    listingId
   } = props
 
   return (
@@ -40,6 +41,7 @@ const EditListingProductsAdditionalProducts = (props) => {
               values={values}
               fieldId={`${fieldId}.${index}`}
               sectionTitle={intl.formatMessage({ id: 'EditListingProductsForm.additionalProductTitle' })}
+              listingId={listingId}
             />
 
           </div>

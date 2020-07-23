@@ -40,8 +40,8 @@ import {
   removeListingImage,
   loadData,
   clearUpdatedTab,
-  savePayoutDetails,
-} from './EditListingPage.duck'
+  savePayoutDetails, setCurrentListingId,
+} from './EditListingPage.duck';
 
 import css from './EditListingPage.css'
 

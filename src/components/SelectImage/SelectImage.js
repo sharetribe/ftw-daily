@@ -8,18 +8,20 @@ import { uploadImage } from '../../util/s3_storage'
 import css from './SelectImage.css'
 
 const SelectImage = (props) => {
-
-  const { rootKey } = props
+  const {
+    entityId,
+    userId
+  } = props
 
   const [files, setFiles] = useState([])
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
     onDrop: async (acceptedFiles) => {
-      setFiles(files.concat(acceptedFiles.map((file) => Object.assign(file, {
+      acceptedFiles.map(async (f, idx) => { await uploadImage(`${userId}/${entityId}/listings/products/${files.length + idx}`, f) })
+      setFiles(files.concat(acceptedFiles.map((file, idx) => Object.assign(file, {
         preview: URL.createObjectURL(file)
       }))))
-      acceptedFiles.map(async (f) => { await uploadImage(`${rootKey}/listings/`f) })
     }
   })
 
@@ -55,7 +57,7 @@ const SelectImage = (props) => {
 const mapStateToProps = (state) => {
   const { currentUser } = state.user
   return {
-    currentUser
+    userId: currentUser.id.uuid
   }
 }
 

@@ -16,7 +16,8 @@ const EditListingProductsProduct = (props) => {
     intl,
     disabled,
     fieldId,
-    sectionTitle
+    sectionTitle,
+    listingId
   } = props
 
   const productTitle = sectionTitle || intl.formatMessage({ id: 'EditListingProductsForm.additionalProductTitle' })
@@ -75,7 +76,9 @@ const EditListingProductsProduct = (props) => {
           validate={priceValidators}
         />
       </div>
-      <SelectImage />
+      <SelectImage
+        entityId={listingId}
+      />
     </div>
   )
 }

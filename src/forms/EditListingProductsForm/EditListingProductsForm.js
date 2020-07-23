@@ -29,8 +29,11 @@ export const EditListingProductsFormComponent = (props) => (
         updated,
         updateInProgress,
         fetchErrors,
-        values
+        values,
+        listingId
       } = fieldRenderProps
+
+      console.log(props)
 
       const { push } = form && form.mutators ? form.mutators : {}
       const submitReady = updated && pristine
@@ -46,6 +49,7 @@ export const EditListingProductsFormComponent = (props) => (
             intl={intl}
             push={push}
             values={values}
+            listingId={listingId}
           />
 
           {updateListingError ? (

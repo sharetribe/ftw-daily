@@ -83,6 +83,7 @@ const EditListingProductsPanel = (props) => {
         disabled={disabled}
         ready={ready}
         fetchErrors={errors}
+        listingId={listing.id.uuid}
       />
     </div>
   )

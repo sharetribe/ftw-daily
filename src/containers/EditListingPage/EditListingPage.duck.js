@@ -101,6 +101,7 @@ const errorAction = (actionType) => (error) => ({ type: actionType, payload: err
 
 // ================ Action types ================ //
 
+export const SET_CURRENT_LISTING_ID = 'app/EditListingPage/SET_CURRENT_LISTING_ID'
 export const MARK_TAB_UPDATED = 'app/EditListingPage/MARK_TAB_UPDATED'
 export const CLEAR_UPDATED_TAB = 'app/EditListingPage/CLEAR_UPDATED_TAB'
 
@@ -184,6 +185,8 @@ const initialState = {
 export default function reducer(state = initialState, action = {}) {
   const { type, payload } = action
   switch (type) {
+    case SET_CURRENT_LISTING_ID:
+      return { ...state, currentListingId: payload }
     case MARK_TAB_UPDATED:
       return { ...state, updatedTab: payload }
     case CLEAR_UPDATED_TAB:
@@ -405,6 +408,11 @@ export default function reducer(state = initialState, action = {}) {
 // ================ Selectors ================ //
 
 // ================ Action creators ================ //
+
+export const setCurrentListingId = (tab) => ({
+  type: SET_CURRENT_LISTING_ID,
+  payload: tab,
+})
 
 export const markTabUpdated = (tab) => ({
   type: MARK_TAB_UPDATED,
