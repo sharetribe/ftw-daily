@@ -102,7 +102,6 @@
   @apply --SectionHero_animation;
 
   animation-delay: 0.8s;
-
   @media (--viewportMedium) {
     display: block;
     width: 260px;

@@ -1,22 +1,19 @@
 {
-    "env": {
-        "browser": true,
-        "commonjs": true,
-        "es2020": true
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es2020": true
+  },
+  "extends": ["plugin:react/recommended", "airbnb"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": [
-        "plugin:react/recommended",
-        "airbnb"
-    ],
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 11
-    },
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-    }
+    "ecmaVersion": 11
+  },
+  "plugins": ["react"],
+  "rules": {
+    // added because sharetribe files all end in .js
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+  }
 }

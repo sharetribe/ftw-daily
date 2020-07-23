@@ -1,0 +1,11 @@
+@import '../../marketplace.css';
+
+.title {
+  @apply --marketplaceH1FontStyles;
+  margin-top: 0;
+  text-align: center;
+  font-weight: var(--fontWeightSemiBold);
+
+  /* TODO (SY): may need to adjust font size for medium view ports */
+  font-size: 32px;
+}
