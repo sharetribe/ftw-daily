@@ -170,7 +170,7 @@ const apiKey = SHOPIFY_API_KEY;
 const apiSecret = SHOPIFY_API_SECRET_KEY;
 
 // TODO (SY): change scopes
-const scopes = 'read_orders';
+const scopes = 'read_orders,read_products';
 const forwardingAddress = "https://b63a1cac1054.ngrok.io"; // Replace this with your HTTPS Forwarding address
 
 app.get('/shopify', (req, res) => {
@@ -288,6 +288,40 @@ app.get("/shop-info", (req, res) => {
            myshopifyDomain
          }
        }`
+    })
+  })
+    .then(result => {
+      return result.json();
+    })
+    .then(data => {
+      console.log("data returned:\n", data);
+      res.send(data);
+    });
+});
+
+app.get("/products", (req, res) => {
+
+  // let cookies = cookie.parse(document.cookie);
+  // shop should be stored in a variable somewhere 
+  fetch("https://sonias-clothing-store.myshopify.com/admin/api/graphql.json", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Shopify-Access-Token": SHOPIFY_FAHERTY_ACCESS_TOKEN
+    },
+    body: JSON.stringify({
+      query: `{
+        products(first: 10) {
+          edges {
+            node {
+              id
+              title
+              productType
+            }
+          }
+        }
+      }
+      `
     })
   })
     .then(result => {
