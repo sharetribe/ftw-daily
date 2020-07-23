@@ -101,7 +101,6 @@ class DynamicMapboxMap extends Component {
       zoom,
       scrollZoom: false,
     })
-    console.log(position)
     this.map.addControl(new window.mapboxgl.NavigationControl({ showCompass: false }), 'top-left')
     this.map.addControl(new MultiTouch())
     if (mapsConfig.fuzzy.enabled) {
@@ -114,9 +113,7 @@ class DynamicMapboxMap extends Component {
       this.centerMarker.setLngLat(position).addTo(this.map)
       this.map.setCenter(position)
     }
-  console.log(createSurf)
     if (createSurf) {
-      console.log(metadata)
       createSurfSpots(metadata, this.map)
     }
   }

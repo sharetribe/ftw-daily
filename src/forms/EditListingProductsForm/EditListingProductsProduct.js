@@ -2,7 +2,7 @@ import React from 'react'
 import { bool, node, string } from 'prop-types'
 import { intlShape } from '../../util/reactIntl'
 import { composeValidators, moneySubUnitAmountAtLeast, required } from '../../util/validators'
-import { FieldTextInput, FieldCurrencyInput } from '../../components'
+import { FieldTextInput, FieldCurrencyInput, SelectImage } from '../../components'
 import config from '../../config'
 import { formatMoney } from '../../util/currency'
 import { types as sdkTypes } from '../../util/sdkLoader'
@@ -75,6 +75,7 @@ const EditListingProductsProduct = (props) => {
           validate={priceValidators}
         />
       </div>
+      <SelectImage />
     </div>
   )
 }
