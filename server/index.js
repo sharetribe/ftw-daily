@@ -153,7 +153,9 @@ const httpsAgent = new https.Agent({ keepAlive: true });
 const { SHOPIFY_API_SECRET_KEY, SHOPIFY_API_KEY } = process.env;
 
 
-// shopify 
+// shopify - based on https://shopify.dev/tutorials/build-a-shopify-app-with-node-and-express and https://shopify.dev/tutorials/graphql-with-node-and-express
+
+
 const dotenv = require('dotenv').config();
 // const express = require('express');
 // const app = express();
@@ -162,6 +164,7 @@ const cookie = require('cookie');
 const nonce = require('nonce')();
 const querystring = require('querystring');
 const request = require('request-promise');
+const fetch = require('node-fetch');
 
 const apiKey = SHOPIFY_API_KEY;
 const apiSecret = SHOPIFY_API_SECRET_KEY;
@@ -233,6 +236,10 @@ app.get('/shopify/callback', (req, res) => {
       .then((accessTokenResponse) => {
         const accessToken = accessTokenResponse.access_token;
 
+        console.log('access_token');
+        console.log(accessToken);
+        // // TODO (SY): Store access token somewhere safer
+        // document.cookie=`accessToken=${accessToken}`;
         const shopRequestUrl = 'https://' + shop + '/admin/api/2020-07/shop.json';
         const shopRequestHeaders = {
           'X-Shopify-Access-Token': accessToken,
@@ -261,6 +268,78 @@ app.get('/shopify/callback', (req, res) => {
   }
 });
 
+
+app.get("/shop-info", (req, res) => {
+
+  // let cookies = cookie.parse(document.cookie);
+  // shop should be stored in a variable somewhere 
+  fetch("https://sonias-clothing-store.myshopify.com/admin/api/graphql.json", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Shopify-Access-Token": '<insert access token here>',
+    },
+    body: JSON.stringify({
+      query: `{
+         shop {
+           name
+           url
+           email
+           myshopifyDomain
+         }
+       }`
+    })
+  })
+    .then(result => {
+      return result.json();
+    })
+    .then(data => {
+      console.log("data returned:\n", data);
+      res.send(data);
+    });
+});
+
+
+// Shopify paste from https://github.com/Shopify/shopify-express
+// const shopifyExpress = require('@shopify/shopify-express');
+// const session = require('express-session');
+
+
+// // const {
+// //   SHOPIFY_API_KEY,
+// //   // SHOPIFY_APP_HOST,
+// //   SHOPIFY_API_SECRET_KEY,
+// //   // NODE_ENV,
+// // } = process.env;
+
+
+
+// // session is necessary for api proxy and auth verification
+// app.use(session({secret: SHOPIFY_API_SECRET_KEY}));
+
+// const {routes, withShop} = shopifyExpress({
+//   host: SHOPIFY_APP_HOST,
+//   apiKey: SHOPIFY_API_KEY,
+//   secret: SHOPIFY_API_SECRET_KEY,
+//   scope: ['write_orders, write_products'],
+//   accessMode: 'offline',
+//   afterAuth(request, response) {
+//     const { session: { accessToken, shop } } = request;
+//     // install webhooks or hook into your own app here
+//     return response.redirect('/');
+//   },
+// });
+
+
+
+
+// // mounts '/auth' and '/api' off of '/shopify'
+// app.use('/shopify', routes);
+
+// // shields myAppMiddleware from being accessed without session
+// app.use('/myApp', withShop({authBaseUrl: '/shopify'}), myAppMiddleware)
+
+// // Shopify paste end
 
 app.get('*', (req, res) => {
   if (req.url.startsWith('/static/')) {
@@ -379,4 +458,3 @@ app.listen(PORT, () => {
     console.log(`Open http://localhost:${PORT}/ and start hacking!`);
   }
 });
-
