@@ -7,6 +7,9 @@
   ],
   "repository": "https://github.com/sharetribe/flex-template-web/",
   "env": {
+    "REACT_APP_FACEBOOK_ID_APP": {
+      "description": "See: your id app facebook"
+    },
     "REACT_APP_MAPBOX_ACCESS_TOKEN": {
       "description": "See: Integrating to map providers documentation https://github.com/sharetribe/ftw-daily/blob/master/docs/map-providers.md"
     },

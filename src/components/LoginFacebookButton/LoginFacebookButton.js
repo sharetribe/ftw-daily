@@ -40,7 +40,6 @@ class LoginFacebookButton extends Component {
         />
       </>
   )
-
   }
 }
 const { func } = PropTypes;
