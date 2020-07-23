@@ -17,3 +17,34 @@
     border-color: var(--successColor)
   }
 }
+
+.thumbContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.thumb {
+  display: inline-flex;
+  border-radius: 4px;
+  border: 1px solid #eaeaea;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  width: 100px;
+  height: 100px;
+  padding: 4px;
+  box-sizing: border-box;
+}
+
+.thumbInner {
+  display: flex;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.thumbImage {
+  display: block;
+  width: auto;
+  height: 100%;
+}

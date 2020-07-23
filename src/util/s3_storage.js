@@ -16,11 +16,11 @@ const isAuth = async () => {
   }
 }
 
-export const uploadImage = async (file) => {
+export const uploadImage = async (key, file) => {
   try {
     const u = await isAuth()
     if (!u) return
-    const r = await Storage.put('/2342211/example.png', file, { contentType: 'image/png' })
+    const r = await Storage.put(key, file, { contentType: 'image/png' })
   } catch (e) {
     console.log(e)
   }

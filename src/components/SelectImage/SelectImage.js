@@ -1,60 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
+import { injectIntl } from 'react-intl'
+import { connect } from 'react-redux'
+import { compose } from 'redux'
 import { uploadImage } from '../../util/s3_storage'
 
 import css from './SelectImage.css'
 
-const thumbsContainer = {
-  display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'wrap',
-  marginTop: 16
-}
-
-const thumb = {
-  display: 'inline-flex',
-  borderRadius: 2,
-  border: '1px solid #eaeaea',
-  marginBottom: 8,
-  marginRight: 8,
-  width: 100,
-  height: 100,
-  padding: 4,
-  boxSizing: 'border-box'
-}
-
-const thumbInner = {
-  display: 'flex',
-  minWidth: 0,
-  overflow: 'hidden'
-}
-
-const img = {
-  display: 'block',
-  width: 'auto',
-  height: '100%'
-}
-
 const SelectImage = (props) => {
+
+  const { rootKey } = props
+
   const [files, setFiles] = useState([])
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
     onDrop: async (acceptedFiles) => {
-      console.log(acceptedFiles[0])
-      await uploadImage(acceptedFiles[0])
-      setFiles(acceptedFiles.map((file) => Object.assign(file, {
+      setFiles(files.concat(acceptedFiles.map((file) => Object.assign(file, {
         preview: URL.createObjectURL(file)
-      })))
+      }))))
+      acceptedFiles.map(async (f) => { await uploadImage(`${rootKey}/listings/`f) })
     }
   })
 
   const thumbs = files.map((file) => (
-    <div style={thumb} key={file.name}>
-      <div style={thumbInner}>
+    <div className={css.thumb} key={file.name}>
+      <div className={css.thumbInner}>
         <img
           src={file.preview}
-          style={img}
+          className={css.thumbImage}
         />
       </div>
     </div>
@@ -71,39 +45,26 @@ const SelectImage = (props) => {
         <input {...getInputProps()} />
         <p>Drag 'n' drop some files here, or click to select files</p>
       </div>
-      <aside style={thumbsContainer}>
+      <aside className={css.thumbContainer}>
         {thumbs}
       </aside>
     </section>
   )
 }
 
-// class SelectImage extends React.Component {
-//   constructor(props) {
-//     super(props)
-//     this.state = { pictures: [] }
-//     this.onDrop = this.onDrop.bind(this)
-//   }
-//
-//   async onDrop(pictureFiles, pictureDataURLs) {
-//     console.log(pictureFiles)
-//     this.setState({
-//       pictures: this.state.pictures.concat(pictureFiles)
-//     })
-//     // await uploadImage(pictureFiles[0])
-//   }
-//
-//   render() {
-//     return (
-//       <ImageUploader
-//         withIcon={true}
-//         buttonText="Choose images"
-//         onChange={this.onDrop}
-//         imgExtension={['.jpg', '.gif', '.png', '.gif']}
-//         maxFileSize={5242880}
-//       />
-//     )
-//   }
-// }
+const mapStateToProps = (state) => {
+  const { currentUser } = state.user
+  return {
+    currentUser
+  }
+}
 
-export default SelectImage
+const SelectImageComponent = compose(
+  connect(
+    mapStateToProps,
+    null
+  ),
+  injectIntl
+)(SelectImage)
+
+export default SelectImageComponent
