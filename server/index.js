@@ -150,7 +150,7 @@ const httpsAgent = new https.Agent({ keepAlive: true });
 
 
 
-const { SHOPIFY_API_SECRET_KEY, SHOPIFY_API_KEY } = process.env;
+const { SHOPIFY_API_SECRET_KEY, SHOPIFY_API_KEY, SHOPIFY_FAHERTY_ACCESS_TOKEN } = process.env;
 
 
 // shopify - based on https://shopify.dev/tutorials/build-a-shopify-app-with-node-and-express and https://shopify.dev/tutorials/graphql-with-node-and-express
@@ -277,7 +277,7 @@ app.get("/shop-info", (req, res) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "X-Shopify-Access-Token": '<insert access token here>',
+      "X-Shopify-Access-Token": SHOPIFY_FAHERTY_ACCESS_TOKEN
     },
     body: JSON.stringify({
       query: `{
