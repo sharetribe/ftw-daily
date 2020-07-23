@@ -496,7 +496,7 @@
   cursor: pointer;
 
   @media (--viewportLarge) {
-    margin: 80px 0 0;
+    margin: 0 0 80px;
   }
 }
 

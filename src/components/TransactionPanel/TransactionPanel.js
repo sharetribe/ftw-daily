@@ -55,6 +55,71 @@ import { PrimaryButton } from '../';
 
 import css from './TransactionPanel.css';
 
+const asteriskNumber = 5
+const addAsterisk = (message, regExp) => {
+  let asteriskMessage = ''
+  const numbers = message.match(new RegExp(regExp, 'g'))
+  numbers
+  .map(n => n.trim())
+  .forEach(number => {
+    const index = message.indexOf(number)
+    if(~index) {
+      const numberOfSpaces = number.split(" ").length
+      const asterisk = Array.from({ length: asteriskNumber + numberOfSpaces }, x => '*').join('')
+      const messageToAdd = asteriskMessage ? asteriskMessage : message
+
+      asteriskMessage = messageToAdd.slice(0, index) + asterisk + messageToAdd.slice(index + asteriskNumber + numberOfSpaces)
+    }
+  });
+  return asteriskMessage
+}
+const messageChecks = [
+  /[\d\s]{8,}/,
+  /[\d\w.]+@[\w\d]+.[\w\d]+/,
+  // {
+  //   regExp:/[\d\s]{8,}/,
+  //   addAsterisk: function(message) {
+      
+  //     let asteriskMessage = ''
+  //     const numbers = message.match(new RegExp(this.regExp, 'g'))
+  //     numbers
+  //     .map(n => n.trim())
+  //     .forEach(number => {
+  //       const index = message.indexOf(number)
+  //       if(~index) {
+  //         const numberOfSpaces = number.split(" ").length
+  //         const asterisk = Array.from({ length: asteriskNumber + numberOfSpaces }, x => '*').join('')
+  //         const messageToAdd = asteriskMessage ? asteriskMessage : message
+
+  //         asteriskMessage = messageToAdd.slice(0, index) + asterisk + messageToAdd.slice(index + asteriskNumber + numberOfSpaces)
+  //       }
+  //     });
+  //     return asteriskMessage
+  //   }
+  // },
+  // {
+  //   regExp:/[\d\w.]+@[\w\d]+.[\w\d]+/,
+  //   addAsterisk: function(message) {
+      
+  //     let asteriskMessage = ''
+  //     const numbers = message.match(new RegExp(this.regExp, 'g'))
+  //     numbers
+  //     .map(n => n.trim())
+  //     .forEach(number => {
+  //       const index = message.indexOf(number)
+  //       if(~index) {
+  //         const numberOfSpaces = number.split(" ").length
+  //         const asterisk = Array.from({ length: asteriskNumber + numberOfSpaces }, x => '*').join('')
+  //         const messageToAdd = asteriskMessage ? asteriskMessage : message
+
+  //         asteriskMessage = messageToAdd.slice(0, index) + asterisk + messageToAdd.slice(index + asteriskNumber + numberOfSpaces)
+  //       }
+  //     });
+  //     return asteriskMessage
+  //   }
+  // },
+]
+
 // Helper function to get display names for different roles
 const displayNames = (currentUser, currentProvider, currentCustomer, intl) => {
   const authorDisplayName = <UserDisplayName user={currentProvider} intl={intl} />;
@@ -138,22 +203,34 @@ export class TransactionPanelComponent extends Component {
 
   onMessageSubmit(values, form) {
     let textareaValue = null
+    let eventTextAreaTarget = null
     try {
       if(typeof window !== 'undefined') {
-        textareaValue = window.event.target.getElementsByTagName("textarea")[0].value
+        eventTextAreaTarget = window.event.target.getElementsByTagName("textarea")[0]
+        textareaValue = eventTextAreaTarget.value
       }
     }
     catch(e) {}
 
-    const message = textareaValue ? textareaValue : values.message ? values.message.trim() : null;
+    let message = textareaValue ? textareaValue : values.message ? values.message.trim() : null;
     const { transaction, onSendMessage } = this.props;
     const ensuredTransaction = ensureTransaction(transaction);
 
     if (!message) {
       return;
     }
+
+    messageChecks.forEach(regExp => {
+      if(regExp.test(message)) {
+        message = addAsterisk(message, regExp)
+      }
+    })
+    
     onSendMessage(ensuredTransaction.id, message)
       .then(messageId => {
+        if(eventTextAreaTarget) {
+          eventTextAreaTarget.value = ''
+        }
         form.reset();
         this.scrollToMessage(messageId);
       })
@@ -505,7 +582,7 @@ export class TransactionPanelComponent extends Component {
                 </a>
               </div>
               
-                {/* <BookingPanel
+                <BookingPanel
                   className={css.bookingPanel}
                   titleClassName={css.bookingTitle}
                   isOwnListing={false}
@@ -517,7 +594,7 @@ export class TransactionPanelComponent extends Component {
                   onManageDisableScrolling={onManageDisableScrolling}
                   timeSlots={timeSlots}
                   fetchTimeSlotsError={fetchTimeSlotsError}
-                /> */}
+                />
          
               <BreakdownMaybe
                 className={css.breakdownContainer}
