@@ -62,24 +62,26 @@ class TopbarSearchFormComponent extends Component {
 
                   const searchInput = { ...restInput, onChange: searchOnChange };
                   return (
-                    <LocationAutocompleteInput
-                      className={isMobile ? css.mobileInputRoot : desktopInputRootClass}
-                      iconClassName={isMobile ? css.mobileIcon : css.desktopIcon}
-                      inputClassName={isMobile ? css.mobileInput : css.desktopInput}
-                      predictionsClassName={
-                        isMobile ? css.mobilePredictions : css.desktopPredictions
-                      }
-                      predictionsAttributionClassName={
-                        isMobile ? css.mobilePredictionsAttribution : null
-                      }
-                      placeholder={intl.formatMessage({ id: 'TopbarSearchForm.placeholder' })}
-                      closeOnBlur={!isMobile}
-                      inputRef={node => {
-                        this.searchInput = node;
-                      }}
-                      input={searchInput}
-                      meta={meta}
-                    />
+                    <span />
+                    // TODO (SY): Commenting this out because we don't want location search right now. We can implement something that allows us to search for clothing itmes
+                    // <LocationAutocompleteInput
+                    //   className={isMobile ? css.mobileInputRoot : desktopInputRootClass}
+                    //   iconClassName={isMobile ? css.mobileIcon : css.desktopIcon}
+                    //   inputClassName={isMobile ? css.mobileInput : css.desktopInput}
+                    //   predictionsClassName={
+                    //     isMobile ? css.mobilePredictions : css.desktopPredictions
+                    //   }
+                    //   predictionsAttributionClassName={
+                    //     isMobile ? css.mobilePredictionsAttribution : null
+                    //   }
+                    //   placeholder={intl.formatMessage({ id: 'TopbarSearchForm.placeholder' })}
+                    //   closeOnBlur={!isMobile}
+                    //   inputRef={node => {
+                    //     this.searchInput = node;
+                    //   }}
+                    //   input={searchInput}
+                    //   meta={meta}
+                    // />
                   );
                 }}
               />

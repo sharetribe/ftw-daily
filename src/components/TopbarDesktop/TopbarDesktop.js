@@ -141,6 +141,7 @@ const TopbarDesktop = props => {
           alt={intl.formatMessage({ id: 'TopbarDesktop.logo' })}
         />
       </NamedLink>
+      {/* TODO (SY): Commenting out search bar. Can reimplement it with search for clothing instead */}
       {search}
       <NamedLink className={css.createListingLink} name="NewListingPage">
         <span className={css.createListing}>
