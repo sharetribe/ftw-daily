@@ -91,6 +91,7 @@ const EditListingWizardTab = props => {
     onUpdateImageOrder,
     onRemoveImage,
     onChange,
+    shopifyProducts,
     updatedTab,
     updateInProgress,
     intl,
@@ -164,6 +165,7 @@ const EditListingWizardTab = props => {
       return (
         <EditListingDescriptionPanel
           {...panelProps(DESCRIPTION)}
+          shopifyProducts={shopifyProducts}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={values => {
             onCompleteEditListingWizardTab(tab, values);

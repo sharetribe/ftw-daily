@@ -1,5 +1,5 @@
 import React from 'react';
-import { bool, func, object, shape, string, oneOf } from 'prop-types';
+import { bool, func, object, shape, string, oneOf, array } from 'prop-types';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { intlShape, injectIntl } from '../../util/reactIntl';
@@ -213,6 +213,7 @@ export const EditListingPageComponent = props => {
           updateInProgress={page.updateInProgress || page.createListingDraftInProgress}
           payoutDetailsSaveInProgress={page.payoutDetailsSaveInProgress}
           payoutDetailsSaved={page.payoutDetailsSaved}
+          shopifyProducts={page.shopifyProducts}
           stripeAccountFetched={stripeAccountFetched}
           stripeAccount={stripeAccount}
           stripeAccountError={
@@ -361,10 +362,7 @@ const mapDispatchToProps = dispatch => ({
 // See: https://github.com/ReactTraining/react-router/issues/4671
 const EditListingPage = compose(
   withRouter,
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
+  connect(mapStateToProps, mapDispatchToProps)
 )(injectIntl(EditListingPageComponent));
 
 EditListingPage.loadData = loadData;

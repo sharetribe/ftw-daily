@@ -5,7 +5,7 @@
  * - id:     Unique id of the filter.
  * - label:  The default label of the filter.
  * - type:   String that represents one of the existing filter components:
- *           BookingDateRangeFilter, KeKeyworldywordFilter, PriceFilter,
+ *           BookingDateRangeFilter, KeywordFilter, PriceFilter,
  *           SelectSingleFilter, SelectMultipleFilter.
  * - group:  Is this 'primary' or 'secondary' filter?
  *           Primary filters are visible on desktop layout by default.

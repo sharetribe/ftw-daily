@@ -53,8 +53,6 @@ const EditListingFeaturesFormComponent = props => (
       const amenitiesKey = 'amenities';
       const options = findOptionsForSelectFilter('amenities', filterConfig);
       const conditionOptions = findOptionsForSelectFilter('condition', filterConfig);
-      console.log(filterConfig);
-      console.log(conditionOptions);
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessage}

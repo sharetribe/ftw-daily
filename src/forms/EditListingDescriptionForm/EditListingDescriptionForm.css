@@ -53,6 +53,44 @@
   @apply --EditListingDescriptionForm_formMargins;
 }
 
+.radioGroup {
+  @apply --EditListingDescriptionForm_formMargins;
+}
+
+.radioOptions {
+  display: flex;
+}
+
+.radioOption {
+  margin: 0px 10px;
+}
+
+.productImagesContainer {
+  display: flex;
+}
+
+.productImage {
+  width: 150px;
+}
+
+.threeToTwoWrapper {
+  /* Layout */
+  display: block;
+  width: 100%;
+  position: relative;
+  transition: var(--transitionStyleButton);
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: var(--boxShadowListingCard);
+  }
+}
+
+/* Firefox doesn't support image aspect ratio inside flexbox */
+.aspectWrapper {
+  background: var(--matterColorNegative); /* Loading BG color */
+}
+
 .submitButton {
   margin-top: auto;
   margin-bottom: 24px;
