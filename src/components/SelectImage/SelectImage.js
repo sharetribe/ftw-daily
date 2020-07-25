@@ -1,24 +1,37 @@
 import React, { useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
+import _ from 'lodash'
 import { injectIntl } from 'react-intl'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-import { uploadImage } from '../../util/s3_storage'
+import { v4 as uuid } from 'uuid'
+import { updateListingAdHoc } from '../../containers/EditListingPage/EditListingPage.duck';
+import { buildKey, uploadImage } from '../../util/s3_storage'
 
 import css from './SelectImage.css'
 
 const SelectImage = (props) => {
   const {
-    entityId,
-    userId
+    userId,
+    rootKeySegments,
+    onUpload
   } = props
 
   const [files, setFiles] = useState([])
 
+  const onImageUploaded = async (file) => {
+    const pid = uuid()
+    console.log(pid)
+    await uploadImage(`${userId}/${buildKey(rootKeySegments)}/${pid}`, file)
+    onUpload(pid)
+  }
+
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
     onDrop: async (acceptedFiles) => {
-      acceptedFiles.map(async (f, idx) => { await uploadImage(`${userId}/${entityId}/listings/products/${files.length + idx}`, f) })
+      acceptedFiles.map(async (f, idx) => {
+        await onImageUploaded(f)
+      })
       setFiles(files.concat(acceptedFiles.map((file, idx) => Object.assign(file, {
         preview: URL.createObjectURL(file)
       }))))
@@ -57,7 +70,7 @@ const SelectImage = (props) => {
 const mapStateToProps = (state) => {
   const { currentUser } = state.user
   return {
-    userId: currentUser.id.uuid
+    userId: _.get(currentUser, 'id.uuid')
   }
 }
 

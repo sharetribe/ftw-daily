@@ -101,8 +101,6 @@ const EditListingWizardTab = (props) => {
     intl,
   } = props
 
-  console.log(props)
-
   const { type } = params
   const isNewURI = type === LISTING_PAGE_PARAM_TYPE_NEW
   const isDraftURI = type === LISTING_PAGE_PARAM_TYPE_DRAFT
@@ -228,6 +226,10 @@ const EditListingWizardTab = (props) => {
         <EditListingProductsPanel
           {...panelProps(PRODUCTS)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          images={images}
+          onImageUpload={onImageUpload}
+          onRemoveImage={onRemoveImage}
+          onUpdateImageOrder={onUpdateImageOrder}
           onSubmit={(values) => {
             onCompleteEditListingWizardTab(tab, values)
           }}
@@ -276,6 +278,7 @@ const EditListingWizardTab = (props) => {
           onImageUpload={onImageUpload}
           onRemoveImage={onRemoveImage}
           onSubmit={(values) => {
+            console.log(values)
             onCompleteEditListingWizardTab(tab, values)
           }}
           onUpdateImageOrder={onUpdateImageOrder}

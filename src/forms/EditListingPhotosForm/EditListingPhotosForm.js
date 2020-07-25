@@ -3,9 +3,12 @@ import {
   array, bool, func, shape, string
 } from 'prop-types'
 import { compose } from 'redux'
+import { useDropzone } from 'react-dropzone'
 import { Form as FinalForm, Field } from 'react-final-form'
 import isEqual from 'lodash/isEqual'
 import classNames from 'classnames'
+import IconSpinner from '../../components/IconSpinner/IconSpinner'
+import IconSuccess from '../../components/IconSuccess/IconSuccess'
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl'
 import { propTypes } from '../../util/types'
 import { nonEmptyArray, composeValidators } from '../../util/validators'
@@ -26,17 +29,16 @@ export class EditListingPhotosFormComponent extends Component {
     this.submittedImages = []
   }
 
-  onImageUploadHandler(file) {
+  async onImageUploadHandler(file) {
     if (file) {
       this.setState({ imageUploadRequested: true })
-      this.props
-      .onImageUpload({ id: `${file.name}_${Date.now()}`, file })
-      .then(() => {
+      try {
+        await this.props.onImageUpload({ id: `${file.name}_${Date.now()}`, file })
         this.setState({ imageUploadRequested: false })
-      })
-      .catch(() => {
+        return
+      } catch (e) {
         this.setState({ imageUploadRequested: false })
-      })
+      }
     }
   }
 
@@ -64,6 +66,7 @@ export class EditListingPhotosFormComponent extends Component {
             saveActionMsg,
             updated,
             updateInProgress,
+            imagesToDisplay
           } = formRenderProps
 
           const chooseImageText = (
@@ -128,12 +131,13 @@ export class EditListingPhotosFormComponent extends Component {
           const submitReady = (updated && pristineSinceLastSubmit) || ready
           const submitInProgress = updateInProgress
           const submitDisabled
-            = invalid || disabled || submitInProgress || imageUploadRequested || ready
+            = disabled || submitInProgress || imageUploadRequested || ready
 
           const classes = classNames(css.root, className)
 
           return (
             <Form
+              id={'photos-form'}
               className={classes}
               onSubmit={(e) => {
                 this.submittedImages = images
@@ -147,12 +151,19 @@ export class EditListingPhotosFormComponent extends Component {
               ) : null}
               <AddImages
                 className={css.imagesField}
-                images={images}
+                images={imagesToDisplay}
                 thumbnailClassName={css.thumbnail}
                 savedImageAltText={intl.formatMessage({
                   id: 'EditListingPhotosForm.savedImageAltText',
                 })}
-                onRemoveImage={onRemoveImage}
+                onRemoveImage={(e) => {
+                  onRemoveImage(e)
+                  setTimeout(() => {
+                    document
+                    .getElementById('photos-form')
+                    .dispatchEvent(new Event('submit', { cancelable: true }))
+                  }, 500)
+                }}
               >
                 <Field
                   id="addImage"
@@ -161,27 +172,45 @@ export class EditListingPhotosFormComponent extends Component {
                   form={null}
                   label={chooseImageText}
                   type="file"
-                  disabled={imageUploadRequested}
+                  disabled={submitDisabled}
                 >
                   {(fieldprops) => {
                     const {
                       accept, input, label, disabled: fieldDisabled
                     } = fieldprops
                     const { name, type } = input
-                    const onChange = (e) => {
+                    const { getRootProps, getInputProps } = useDropzone({
+                      accept: 'image/*',
+                      onDrop: async (acceptedFiles) => {
+                        acceptedFiles.map(async (f, idx) => {
+                          form.change('addImage', f)
+                          form.blur('addImage')
+                          await onImageUploadHandler(f)
+                          document
+                          .getElementById('photos-form')
+                          .dispatchEvent(new Event('submit', { cancelable: true }))
+                        })
+                      },
+                      disabled: submitDisabled
+                    })
+                    const onChange = async (e) => {
                       const file = e.target.files[0]
                       form.change('addImage', file)
                       form.blur('addImage')
-                      onImageUploadHandler(file)
+                      await onImageUploadHandler(file)
+                      document
+                      .getElementById('photos-form')
+                      .dispatchEvent(new Event('submit', { cancelable: true }))
                     }
+
                     const inputProps = {
-                      accept, id: name, name, onChange, type
+                      accept, id: name, name, onChange, type, ...getInputProps
                     }
                     return (
                       <div className={css.addImageWrapper}>
-                        <div className={css.aspectRatioWrapper}>
+                        <div {...getRootProps({ className: css.aspectRatioWrapper })}>
                           {fieldDisabled ? null : (
-                            <input {...inputProps} className={css.addImageInput} />
+                            <input {...inputProps} className={css.addImageInput}/>
                           )}
                           <label htmlFor={name} className={css.addImage}>
                             {label}
@@ -204,23 +233,19 @@ export class EditListingPhotosFormComponent extends Component {
                   }}
                   name="images"
                   type="hidden"
-                  validate={composeValidators(nonEmptyArray(imageRequiredMessage))}
+                  // validate={composeValidators(nonEmptyArray(imageRequiredMessage))}
                 />
               </AddImages>
               {uploadImageFailed}
 
               {publishListingFailed}
               {showListingFailed}
-
-              <Button
-                className={css.submitButton}
-                type="submit"
-                inProgress={submitInProgress}
-                disabled={submitDisabled}
-                ready={submitReady}
-              >
-                {saveActionMsg}
-              </Button>
+              {/* { */}
+              {/*  submitInProgress ? <IconSpinner /> : null */}
+              {/* } */}
+              {/* { */}
+              {/*  submitReady ? <IconSuccess /> : null */}
+              {/* } */}
             </Form>
           )
         }}

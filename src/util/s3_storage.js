@@ -16,11 +16,17 @@ const isAuth = async () => {
   }
 }
 
+export const buildKey = (segments) => {
+  return segments.join('/')
+}
+
 export const uploadImage = async (key, file) => {
   try {
     const u = await isAuth()
+    console.log(u)
     if (!u) return
     const r = await Storage.put(key, file, { contentType: 'image/png' })
+    console.log(r)
   } catch (e) {
     console.log(e)
   }
@@ -37,6 +43,13 @@ export const getObject = async (key, progressCallback) => {
   }
 }
 
-export const deleteImage = () => {
-
+export const deleteImage = async (key) => {
+  try {
+    const u = await isAuth()
+    if (!u) return
+    await Storage.delete(key)
+    return
+  } catch (e) {
+    console.log(e)
+  }
 }

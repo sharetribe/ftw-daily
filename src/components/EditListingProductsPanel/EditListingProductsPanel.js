@@ -29,6 +29,8 @@ const EditListingProductsPanel = (props) => {
     ready
   } = props
 
+  console.log(props)
+
   const classes = classNames(rootClassName || css.root, className)
   const currentListing = ensureOwnListing(listing)
   const { publicData } = currentListing.attributes
@@ -52,12 +54,11 @@ const EditListingProductsPanel = (props) => {
         className={css.form}
         initialValues={{ products }}
         onSubmit={(values) => {
-          console.log(values)
           onSubmit({
             publicData: {
               products: values.products.map((p) => {
                 return {
-                  id: p.id || uniqueId('prod_'),
+                  id: p.id || uniqueId('prod_'),
                   ...p,
                   price: {
                     amount: p.price.amount,
@@ -65,7 +66,18 @@ const EditListingProductsPanel = (props) => {
                   },
                 }
               })
-
+            }
+          })
+        }}
+        onImageSubmit={(values, prods) => {
+          console.log(values)
+          console.log(prods)
+          const { addImage, ...updateValues } = values
+          console.log(updateValues)
+          onSubmit({
+            ...updateValues,
+            publicData: {
+              products: prods
             }
           })
         }}
@@ -84,6 +96,7 @@ const EditListingProductsPanel = (props) => {
         ready={ready}
         fetchErrors={errors}
         listingId={listing.id.uuid}
+        products={products}
       />
     </div>
   )

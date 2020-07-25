@@ -56,9 +56,11 @@ class EditListingPhotosPanel extends Component {
           fetchErrors={errors}
           initialValues={{ images }}
           images={images}
+          imagesToDisplay={images}
           onImageUpload={onImageUpload}
           onSubmit={(values) => {
             const { addImage, ...updateValues } = values
+            console.log(updateValues)
             onSubmit(updateValues)
           }}
           onChange={onChange}

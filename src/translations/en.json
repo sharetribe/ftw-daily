@@ -214,7 +214,7 @@
   "EditListingPage.titleEditListing": "Edit listing",
   "EditListingPhotosForm.addImagesTip": "Tip: Choose the top 10-20 photos of your space. The listings we see get the most bookings, are the ones who use photos that show real people and community.",
   "EditListingPhotosForm.bankAccountNumberRequired": "You need to add a bank account number.",
-  "EditListingPhotosForm.chooseImage": "+ Choose an image…",
+  "EditListingPhotosForm.chooseImage": "Drag and drop files here or click to select them.",
   "EditListingPhotosForm.imageRequired": "You need to add at least one image.",
   "EditListingPhotosForm.imageTypes": ".JPG, .GIF or .PNG. Max. 10 MB",
   "EditListingPhotosForm.imageUploadFailed.uploadFailed": "Failed to upload image. Please check that the image wasn't too big and try again.",

@@ -30,11 +30,21 @@ export const EditListingProductsFormComponent = (props) => (
         updateInProgress,
         fetchErrors,
         values,
-        listingId
+        listingId,
+        ready,
+        errors,
+        images,
+        onChange,
+        onUpdateImageOrder,
+        onRemoveImage,
+        submitButtonText,
+        panelUpdated,
+        onImageUpload,
+        onImageSubmit,
+        products
       } = fieldRenderProps
 
-      console.log(props)
-
+      console.log(form)
       const { push } = form && form.mutators ? form.mutators : {}
       const submitReady = updated && pristine
       const submitInProgress = updateInProgress
@@ -50,6 +60,20 @@ export const EditListingProductsFormComponent = (props) => (
             push={push}
             values={values}
             listingId={listingId}
+            ready={ready}
+            fetchErrors={errors}
+            initialValues={{ images }}
+            images={images}
+            onImageUpload={onImageUpload}
+            onChange={onChange}
+            onUpdateImageOrder={onUpdateImageOrder}
+            onRemoveImage={onRemoveImage}
+            saveActionMsg={submitButtonText}
+            updated={panelUpdated}
+            updateInProgress={updateInProgress}
+            onImageSubmit={onImageSubmit}
+            form={form}
+            products={products}
           />
 
           {updateListingError ? (

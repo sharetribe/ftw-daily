@@ -19,6 +19,7 @@
     "comma-dangle": "off",
     "no-console": "off",
     "no-alert": "off",
+    "consistent-return": "off",
     "class-methods-use-this": 0,
     "operator-linebreak": [
       "error",

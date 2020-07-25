@@ -1,11 +1,17 @@
 import React from 'react'
 import { bool, node, string } from 'prop-types'
+import { connect } from 'react-redux'
+import _ from 'lodash'
+import { useForm } from 'react-final-form'
+import { updateListingAdHoc } from '../../containers/EditListingPage/EditListingPage.duck'
 import { intlShape } from '../../util/reactIntl'
+import { buildKey, uploadImage } from '../../util/s3_storage'
 import { composeValidators, moneySubUnitAmountAtLeast, required } from '../../util/validators'
 import { FieldTextInput, FieldCurrencyInput, SelectImage } from '../../components'
 import config from '../../config'
 import { formatMoney } from '../../util/currency'
 import { types as sdkTypes } from '../../util/sdkLoader'
+import EditListingPhotosForm from '../EditListingPhotosForm/EditListingPhotosForm'
 
 import css from './EditListingProductsForm.css'
 
@@ -17,8 +23,24 @@ const EditListingProductsProduct = (props) => {
     disabled,
     fieldId,
     sectionTitle,
-    listingId
+    listingId,
+    product,
+    updateProduct,
+    ready,
+    errors,
+    imagesForProduct,
+    onUpdateImageOrder,
+    onRemoveImage,
+    submitButtonText,
+    panelUpdated,
+    updateInProgress,
+    onChange,
+    images,
+    onImageUpload,
+    onImageSubmit
   } = props
+
+  console.log(props)
 
   const productTitle = sectionTitle || intl.formatMessage({ id: 'EditListingProductsForm.additionalProductTitle' })
 
@@ -38,6 +60,7 @@ const EditListingProductsProduct = (props) => {
   const priceValidators = config.listingMinimumPriceSubUnits
     ? composeValidators(priceRequired, minPriceRequired)
     : priceRequired
+  const productImages = images.filter((img) => _.includes(_.keys(product.photos), img.id.uuid))
 
   return (
     <div className={css.sectionContainer}>
@@ -76,8 +99,21 @@ const EditListingProductsProduct = (props) => {
           validate={priceValidators}
         />
       </div>
-      <SelectImage
-        entityId={listingId}
+      <EditListingPhotosForm
+        className={css.form}
+        disabled={disabled}
+        ready={ready}
+        fetchErrors={errors}
+        images={images}
+        imagesToDisplay={productImages}
+        onImageUpload={onImageUpload}
+        onChange={onChange}
+        onUpdateImageOrder={onUpdateImageOrder}
+        onRemoveImage={onRemoveImage}
+        saveActionMsg={submitButtonText}
+        updated={panelUpdated}
+        updateInProgress={updateInProgress}
+        onSubmit={(e) => onImageSubmit(e, product.id)}
       />
     </div>
   )
@@ -96,4 +132,21 @@ EditListingProductsProduct.propTypes = {
   sectionTitle: node
 }
 
-export default EditListingProductsProduct
+const mapStateToProps = (state, ownProps) => {
+  return {
+    currentListing: _.get(state, 'marketplaceData.entities.listing', {})[ownProps.listingId],
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateListing: (listingId, data) => dispatch(updateListingAdHoc({
+      id: listingId,
+      publicData: {
+        products: [data]
+      }
+    }))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditListingProductsProduct)

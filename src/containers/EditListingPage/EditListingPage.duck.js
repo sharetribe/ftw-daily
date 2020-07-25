@@ -494,7 +494,6 @@ export function requestShowListing(actionPayload) {
     return sdk.ownListings
     .show(actionPayload)
     .then((response) => {
-      console.log(response)
       // EditListingPage fetches new listing data, which also needs to be added to global data
       dispatch(addMarketplaceEntities(response))
       // In case of success, we'll clear state.EditListingPage (user will be redirected away)
@@ -667,14 +666,13 @@ export const requestDeleteAvailabilityException = (params) => (dispatch, getStat
 // display the state.
 export function requestUpdateListing(tab, data) {
   return (dispatch, getState, sdk) => {
-    console.log(data)
     dispatch(updateListing(data))
+    console.log(data)
     const { id } = data
     let updateResponse
     return sdk.ownListings
     .update(data)
     .then((response) => {
-      console.log('update request response', response)
       updateResponse = response
       const payload = {
         id,
@@ -685,6 +683,34 @@ export function requestUpdateListing(tab, data) {
     })
     .then(() => {
       dispatch(markTabUpdated(tab))
+      dispatch(updateListingSuccess(updateResponse))
+      return updateResponse
+    })
+    .catch((e) => {
+      log.error(e, 'update-listing-failed', { listingData: data })
+      return dispatch(updateListingError(storableError(e)))
+    })
+  }
+}
+
+export const updateListingAdHoc = (data) => {
+  return (dispatch, getState, sdk) => {
+    dispatch(updateListing(data))
+    console.log(data)
+    const { id } = data
+    let updateResponse
+    return sdk.ownListings
+    .update(data)
+    .then((response) => {
+      updateResponse = response
+      const payload = {
+        id,
+        include: ['author', 'images'],
+        'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
+      }
+      return dispatch(requestShowListing(payload))
+    })
+    .then(() => {
       dispatch(updateListingSuccess(updateResponse))
       return updateResponse
     })
