@@ -15,6 +15,8 @@ const loginAs = require('./api/login-as');
 const transactionLineItems = require('./api/transaction-line-items');
 const initiatePrivileged = require('./api/initiate-privileged');
 const transitionPrivileged = require('./api/transition-privileged');
+const fetch = require('node-fetch');
+
 
 const router = express.Router();
 
@@ -49,5 +51,75 @@ router.get('/login-as', loginAs);
 router.post('/transaction-line-items', transactionLineItems);
 router.post('/initiate-privileged', initiatePrivileged);
 router.post('/transition-privileged', transitionPrivileged);
+
+
+// ================ Shopify endpoints: ================ //
+const { SHOPIFY_FAHERTY_ACCESS_TOKEN } = process.env;
+router.get('/shop-info', (req, res) => {
+  // shop should be stored in a variable somewhere 
+  fetch('https://sonias-clothing-store.myshopify.com/admin/api/graphql.json', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Shopify-Access-Token': SHOPIFY_FAHERTY_ACCESS_TOKEN,
+    },
+    body: JSON.stringify({
+      query: `{
+         shop {
+           name
+           url
+           email
+           myshopifyDomain
+         }
+       }`
+    })
+  })
+    .then(result => {
+      return result.json();
+    })
+    .then(data => {
+      console.log('data returned:\n', data);
+      res.send(data);
+    });
+});
+
+router.get('/products', (req, res) => {
+
+  // shop should be stored in a variable somewhere 
+  fetch('https://sonias-clothing-store.myshopify.com/admin/api/graphql.json', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Shopify-Access-Token': SHOPIFY_FAHERTY_ACCESS_TOKEN
+    },
+    body: JSON.stringify({
+      query: `{
+        products(first: 50) {
+          edges {
+            node {
+              id
+              featuredImage {
+                id
+                originalSrc
+              }
+              tags
+            }
+          }
+        }
+      }
+      
+      `
+    })
+  })
+    .then(result => {
+      return result.json();
+    })
+    .then(data => {
+      console.log('data returned:\n', data);
+      res.send(data);
+    });
+});
+
+
 
 module.exports = router;

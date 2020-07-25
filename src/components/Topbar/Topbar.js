@@ -181,9 +181,9 @@ class TopbarComponent extends Component {
     const initialSearchFormValues = {
       location: locationFieldsPresent
         ? {
-          search: address,
-          selectedPlace: { address, origin, bounds },
-        }
+            search: address,
+            selectedPlace: { address, origin, bounds },
+          }
         : null,
     };
 
@@ -339,10 +339,7 @@ TopbarComponent.propTypes = {
   intl: intlShape.isRequired,
 };
 
-const Topbar = compose(
-  withViewport,
-  injectIntl
-)(TopbarComponent);
+const Topbar = compose(withViewport, injectIntl)(TopbarComponent);
 
 Topbar.displayName = 'Topbar';
 

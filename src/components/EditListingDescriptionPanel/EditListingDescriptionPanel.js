@@ -1,5 +1,5 @@
 import React from 'react';
-import { bool, func, object, string } from 'prop-types';
+import { bool, func, object, string, array } from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from '../../util/reactIntl';
 import { ensureOwnListing } from '../../util/data';
@@ -21,6 +21,7 @@ const EditListingDescriptionPanel = props => {
     onSubmit,
     onChange,
     submitButtonText,
+    shopifyProducts,
     panelUpdated,
     updateInProgress,
     errors,
@@ -46,14 +47,26 @@ const EditListingDescriptionPanel = props => {
       <h1 className={css.title}>{panelTitle}</h1>
       <EditListingDescriptionForm
         className={css.form}
-        initialValues={{ title, description, category: publicData.category }}
+        initialValues={{
+          title,
+          description,
+          category: publicData.category,
+          gender: publicData.gender,
+        }}
         saveActionMsg={submitButtonText}
         onSubmit={values => {
-          const { title, description, category } = values;
+          const {
+            // title,
+            // description,
+            gender,
+            category,
+          } = values;
           const updateValues = {
-            title: title.trim(),
-            description,
-            publicData: { category },
+            // title: title.trim(),
+            // description,
+            // TODO (SY): Make title not required? 
+            title: 'Replace title for actual product title',
+            publicData: { gender, category },
           };
 
           onSubmit(updateValues);
@@ -65,6 +78,7 @@ const EditListingDescriptionPanel = props => {
         updateInProgress={updateInProgress}
         fetchErrors={errors}
         categories={categoryOptions}
+        shopifyProducts={shopifyProducts}
       />
     </div>
   );
@@ -75,6 +89,7 @@ EditListingDescriptionPanel.defaultProps = {
   rootClassName: null,
   errors: null,
   listing: null,
+  shopifyProducts: [],
 };
 
 EditListingDescriptionPanel.propTypes = {
@@ -88,6 +103,7 @@ EditListingDescriptionPanel.propTypes = {
   ready: bool.isRequired,
   onSubmit: func.isRequired,
   onChange: func.isRequired,
+  shopifyProducts: array,
   submitButtonText: string.isRequired,
   panelUpdated: bool.isRequired,
   updateInProgress: bool.isRequired,
