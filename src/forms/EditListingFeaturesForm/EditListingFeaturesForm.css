@@ -25,6 +25,20 @@
   }
 }
 
+.qualityGuideButton {
+  width: 150px;
+  background: none;
+  color: var(--marketplaceColor);
+  border: 1px solid var(--marketplaceColor);
+  border-radius: 3px;
+  /* Need to override button quality */
+  min-height: 40px;
+  &:hover {
+    color: var(--matterColorLight);
+
+  }
+}
+
 .error {
   color: var(--failColor);
 }
