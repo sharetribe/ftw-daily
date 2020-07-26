@@ -152,12 +152,20 @@ export const filters = [
     config: {
       options: [
         {
-          key: 'like_new',
-          label: 'Like New',
+          key: 'new_with_tags',
+          label: 'New With Tags',
         },
         {
-          key: 'used',
-          label: 'Used',
+          key: 'new_without_tags',
+          label: 'New Without Tags',
+        },
+        {
+          key: 'excellent',
+          label: 'Excellent Condition',
+        },
+        {
+          key: 'good',
+          label: 'Good Condition',
         },
       ],
     },
