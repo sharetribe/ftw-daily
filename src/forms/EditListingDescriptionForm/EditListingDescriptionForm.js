@@ -8,6 +8,7 @@ import { propTypes } from '../../util/types';
 import { maxLength, required, composeValidators } from '../../util/validators';
 import { Form, Button, FieldTextInput, FieldRadioButton } from '../../components';
 import CustomCategorySelectFieldMaybe from './CustomCategorySelectFieldMaybe';
+import dressImage from './images/dress_icon.jpg';
 
 import css from './EditListingDescriptionForm.css';
 
@@ -16,18 +17,39 @@ const TITLE_MAX_LENGTH = 60;
 const EditListingDescriptionFormComponent = props => {
   const { shopifyProducts, ...formProps } = props;
 
-  function renderImages(onChange) {
+  function renderProducts(selectedProductId, onChange) {
     // TODO: implement form change when user clicks on photo
     if (shopifyProducts) {
-      return shopifyProducts.map(product => (
-        <div className={css.threeToTwoWrapper}>
-          <div className={css.aspectWrapper}>
-            {/* TODO(SY): look through all possble image wrappers */}
-            <img className={css.productImage} src={product.node.featuredImage.originalSrc} />
+      // append a other choice
+      const productChoices = [
+        ...shopifyProducts,
+        { node: { id: 'Other', title: 'Other', featuredImage: { originalSrc: dressImage } } },
+      ];
+      return productChoices.map(product => {
+        const productObj = product.node;
+        const isSelected = productObj.id === selectedProductId;
+        return (
+          <div
+            className={classNames(css.product, {
+              [css.selectedProductImage]: isSelected,
+            })}
+          >
+            <div className={css.threeToTwoWrapper}>
+              <div className={css.aspectWrapper}>
+                {/* TODO(SY): look through all possble image wrappers */}
+                <img
+                  className={css.productImage}
+                  src={productObj.featuredImage.originalSrc}
+                  onClick={() => onChange(productObj)}
+                />
+              </div>
+            </div>
+            <span>{productObj.title}</span>
           </div>
-        </div>
-      ));
+        );
+      });
     }
+    return null;
   }
 
   return (
@@ -35,9 +57,9 @@ const EditListingDescriptionFormComponent = props => {
       {...formProps}
       render={formRenderProps => {
         const {
-          categories,
           className,
           disabled,
+          form,
           fetchErrors,
           ready,
           handleSubmit,
@@ -47,6 +69,7 @@ const EditListingDescriptionFormComponent = props => {
           saveActionMsg,
           updated,
           updateInProgress,
+          values,
         } = formRenderProps;
 
         const titleMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.title' });
@@ -118,7 +141,10 @@ const EditListingDescriptionFormComponent = props => {
         const submitReady = (updated && pristine) || ready;
         const submitInProgress = updateInProgress;
         const submitDisabled = invalid || disabled || submitInProgress;
-
+        // gender and category need to be filled out before we can show products
+        // TODO (SY): Currently only have women/dress products in our Shopify test development store. Next step is to add tags to all of the products, then we can just filter by gender and category tag.
+        const requiredProductFieldsEntered =
+          values.gender === 'women' && values.category === 'dress';
         return (
           <Form className={classes} onSubmit={handleSubmit}>
             {errorMessageCreateListingDraft}
@@ -174,6 +200,7 @@ const EditListingDescriptionFormComponent = props => {
                   label="Top"
                   value="top"
                   className={css.radioOption}
+                  validate={composeValidators(required(categoryRequiredMessage))}
                   showAsRequired
                 />
                 <FieldRadioButton
@@ -218,41 +245,36 @@ const EditListingDescriptionFormComponent = props => {
             categories={categories}
             intl={intl}
           /> */}
-            <Field
-              id="productId"
-              name="productId"
-              // accept={ACCEPT_IMAGES}
-              form={null}
-              label={productMessage}
-              // type="file"
-              // disabled={imageUploadRequested}
-            >
-              {fieldprops => {
-                // const { accept, input, label, disabled: fieldDisabled } = fieldprops;
-                // const { name, type } = input;
-                const onChange = e => {
-                  // const file = e.target.files[0];
-                  // form.change(`addImage`, file);
-                  // form.blur(`addImage`);
-                  // onImageUploadHandler(file);
-                  console.log(e);
-                };
-                // const inputProps = { accept, id: name, name, onChange, type };
-                // return (
-                //   <div className={css.addImageWrapper}>
-                //     <div className={css.aspectRatioWrapper}>
-                //       {fieldDisabled ? null : (
-                //         <input {...inputProps} className={css.addImageInput} />
-                //       )}
-                //       <label htmlFor={name} className={css.addImage}>
-                //         {label}
-                //       </label>
-                //     </div>
-                //   </div>
-                // );
-                return <div className={css.productImagesContainer}>{renderImages(onChange)}</div>;
-              }}
-            </Field>
+            {requiredProductFieldsEntered && (
+              <>
+                <label htmlFor="product">{productMessage}</label>
+                <Field
+                  id="shopifyProductId"
+                  name="shopifyProductId"
+                  // accept={ACCEPT_IMAGES}
+                  form={null}
+                  label={productMessage}
+                  // type="file"
+                  // disabled={imageUploadRequested}
+                  validate={composeValidators(required(productRequiredMessage))}
+                  required
+
+                >
+                  {fieldProps => {
+                    const { input } = fieldProps;
+                    const onChange = product => {
+                      form.change('title', product.title);
+                      input.onChange(product.id);
+                    };
+                    return (
+                      <div className={css.productImagesContainer}>
+                        {renderProducts(input.value, onChange)}
+                      </div>
+                    );
+                  }}
+                </Field>
+              </>
+            )}
             <Button
               className={css.submitButton}
               type="submit"

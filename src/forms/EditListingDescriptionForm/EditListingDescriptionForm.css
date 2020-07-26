@@ -17,6 +17,10 @@
       margin-bottom: 32px;
     }
   }
+  --EditListingDescriptionForm_imageWidth: 150px;
+  --EditListingDescriptionForm_productMargin: 8px;
+  --EditListingDescriptionForm_selectedProductBorderWidth: 2px;
+
 }
 
 .root {
@@ -67,10 +71,26 @@
 
 .productImagesContainer {
   display: flex;
+  flex-wrap: wrap;
+}
+
+.product {
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--matterColor);
+  margin: var(--EditListingDescriptionForm_productMargin);
+  padding: 8px;
+  width: calc(
+    var(--EditListingDescriptionForm_imageWidth) +
+      (2 * var(--EditListingDescriptionForm_productMargin))
+  );
 }
 
 .productImage {
-  width: 150px;
+  width: var(--EditListingDescriptionForm_imageWidth);
+  cursor: pointer;
 }
 
 .threeToTwoWrapper {
@@ -89,6 +109,16 @@
 /* Firefox doesn't support image aspect ratio inside flexbox */
 .aspectWrapper {
   background: var(--matterColorNegative); /* Loading BG color */
+}
+
+.selectedProductImage {
+  border: var(--EditListingDescriptionForm_selectedProductBorderWidth) solid var(--marketplaceColor);
+  /* account for border */
+  width: calc(
+    var(--EditListingDescriptionForm_imageWidth) +
+      (2 * var(--EditListingDescriptionForm_productMargin)) + 
+      (2 * var( --EditListingDescriptionForm_selectedProductBorderWidth))
+  );
 }
 
 .submitButton {

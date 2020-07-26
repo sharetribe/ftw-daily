@@ -52,21 +52,22 @@ const EditListingDescriptionPanel = props => {
           description,
           category: publicData.category,
           gender: publicData.gender,
+          shopifyProductId: publicData.shopifyProductId,
         }}
         saveActionMsg={submitButtonText}
         onSubmit={values => {
           const {
-            // title,
+            title,
             // description,
             gender,
             category,
+            shopifyProductId,
           } = values;
           const updateValues = {
-            // title: title.trim(),
+            title: title.trim(),
             // description,
-            // TODO (SY): Make title not required? 
-            title: 'Replace title for actual product title',
-            publicData: { gender, category },
+            // TODO (SY): Make title not required?
+            publicData: { gender, category, shopifyProductId },
           };
 
           onSubmit(updateValues);

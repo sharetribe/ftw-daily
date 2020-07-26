@@ -17,7 +17,6 @@ const initiatePrivileged = require('./api/initiate-privileged');
 const transitionPrivileged = require('./api/transition-privileged');
 const fetch = require('node-fetch');
 
-
 const router = express.Router();
 
 // ================ API router middleware: ================ //
@@ -52,11 +51,10 @@ router.post('/transaction-line-items', transactionLineItems);
 router.post('/initiate-privileged', initiatePrivileged);
 router.post('/transition-privileged', transitionPrivileged);
 
-
 // ================ Shopify endpoints: ================ //
 const { SHOPIFY_FAHERTY_ACCESS_TOKEN } = process.env;
 router.get('/shop-info', (req, res) => {
-  // shop should be stored in a variable somewhere 
+  // shop should be stored in a variable somewhere
   fetch('https://sonias-clothing-store.myshopify.com/admin/api/graphql.json', {
     method: 'POST',
     headers: {
@@ -71,8 +69,8 @@ router.get('/shop-info', (req, res) => {
            email
            myshopifyDomain
          }
-       }`
-    })
+       }`,
+    }),
   })
     .then(result => {
       return result.json();
@@ -84,13 +82,12 @@ router.get('/shop-info', (req, res) => {
 });
 
 router.get('/products', (req, res) => {
-
-  // shop should be stored in a variable somewhere 
+  // shop should be stored in a variable somewhere
   fetch('https://sonias-clothing-store.myshopify.com/admin/api/graphql.json', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'X-Shopify-Access-Token': SHOPIFY_FAHERTY_ACCESS_TOKEN
+      'X-Shopify-Access-Token': SHOPIFY_FAHERTY_ACCESS_TOKEN,
     },
     body: JSON.stringify({
       query: `{
@@ -102,14 +99,15 @@ router.get('/products', (req, res) => {
                 id
                 originalSrc
               }
+              title
               tags
             }
           }
         }
       }
       
-      `
-    })
+      `,
+    }),
   })
     .then(result => {
       return result.json();
@@ -119,7 +117,5 @@ router.get('/products', (req, res) => {
       res.send(data);
     });
 });
-
-
 
 module.exports = router;
