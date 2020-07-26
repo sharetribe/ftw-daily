@@ -258,13 +258,16 @@ const EditListingDescriptionFormComponent = props => {
                   // disabled={imageUploadRequested}
                   validate={composeValidators(required(productRequiredMessage))}
                   required
-
                 >
                   {fieldProps => {
                     const { input } = fieldProps;
                     const onChange = product => {
                       form.change('title', product.title);
+                      form.change('shopifyProduct', product);
                       input.onChange(product.id);
+                      //  set the original price if it's not set
+                      console.log(values.originalPrice);
+                      form.change('originalPrice', product.priceRange.maxVariantPrice.amount / 100);
                     };
                     return (
                       <div className={css.productImagesContainer}>

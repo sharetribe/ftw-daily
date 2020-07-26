@@ -89,6 +89,7 @@ router.get('/products', (req, res) => {
       'Content-Type': 'application/json',
       'X-Shopify-Access-Token': SHOPIFY_FAHERTY_ACCESS_TOKEN,
     },
+    // TODO (SY): Use product variants instead of products
     body: JSON.stringify({
       query: `{
         products(first: 50) {
@@ -101,6 +102,14 @@ router.get('/products', (req, res) => {
               }
               title
               tags
+              priceRange {
+                maxVariantPrice {
+                  amount
+                }
+                minVariantPrice {
+                  amount
+                }
+              }
             }
           }
         }

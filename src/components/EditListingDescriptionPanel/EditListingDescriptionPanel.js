@@ -62,12 +62,14 @@ const EditListingDescriptionPanel = props => {
             gender,
             category,
             shopifyProductId,
+            shopifyProduct,
+            originalPrice,
           } = values;
           const updateValues = {
             title: title.trim(),
             // description,
             // TODO (SY): Make title not required?
-            publicData: { gender, category, shopifyProductId },
+            publicData: { gender, category, shopifyProductId, shopifyProduct, originalPrice },
           };
 
           onSubmit(updateValues);

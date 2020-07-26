@@ -1,4 +1,5 @@
 @import '../../marketplace.css';
+@import '../../listingForm.css';
 
 :root {
   /*
@@ -46,8 +47,7 @@
 }
 
 .quirksDescription {
-  font-weight: 100;
-  font-size: 16px;
+  @apply --ListingFormDescriptions;
 }
 
 .error {

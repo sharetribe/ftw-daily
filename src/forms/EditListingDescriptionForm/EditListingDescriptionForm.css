@@ -1,4 +1,5 @@
 @import '../../marketplace.css';
+@import '../../listingForm.css';
 
 :root {
   /*
@@ -20,7 +21,6 @@
   --EditListingDescriptionForm_imageWidth: 150px;
   --EditListingDescriptionForm_productMargin: 8px;
   --EditListingDescriptionForm_selectedProductBorderWidth: 2px;
-
 }
 
 .root {
@@ -116,8 +116,8 @@
   /* account for border */
   width: calc(
     var(--EditListingDescriptionForm_imageWidth) +
-      (2 * var(--EditListingDescriptionForm_productMargin)) + 
-      (2 * var( --EditListingDescriptionForm_selectedProductBorderWidth))
+      (2 * var(--EditListingDescriptionForm_productMargin)) +
+      (2 * var(--EditListingDescriptionForm_selectedProductBorderWidth))
   );
 }
 

@@ -1,4 +1,5 @@
 @import '../../marketplace.css';
+@import '../../listingForm.css';
 
 .root {
   /* Dimensions */
@@ -18,9 +19,22 @@
   color: var(--failColor);
 }
 
+.priceDescription {
+  @apply --ListingFormDescriptions;
+  margin: 4px 0px 16px 0px;
+}
+
+.boldPriceDescription {
+  font-weight: 800;
+}
+
+.originalPrice {
+  color: var(--marketplaceColorLight);
+}
+
 .priceInput {
   flex-shrink: 0;
-  width: 100%;
+  width: 256px;
 }
 
 .submitButton {

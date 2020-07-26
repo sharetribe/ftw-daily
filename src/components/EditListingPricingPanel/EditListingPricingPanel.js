@@ -30,8 +30,13 @@ const EditListingPricingPanel = props => {
 
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
-  const { price } = currentListing.attributes;
+  const {
+    price,
+    publicData: { originalPrice, shopifyProduct },
+  } = currentListing.attributes;
 
+  console.log('currentListing');
+  console.log(currentListing);
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
     <FormattedMessage
@@ -46,8 +51,18 @@ const EditListingPricingPanel = props => {
   const form = priceCurrencyValid ? (
     <EditListingPricingForm
       className={css.form}
-      initialValues={{ price }}
-      onSubmit={onSubmit}
+      initialValues={{ price, originalPrice, shopifyProduct }}
+      onSubmit={values => {
+        const { price, originalPrice } = values;
+        const updateValues = {
+          price: price,
+          // description,
+          // TODO (SY): Make title not required?
+          publicData: { originalPrice },
+        };
+        onSubmit(updateValues);
+      }}
+      // onSubmit={onSubmit}
       onChange={onChange}
       saveActionMsg={submitButtonText}
       disabled={disabled}
