@@ -1,4 +1,5 @@
 @import '../../marketplace.css';
+
 .root {
   position: relative;
 }
@@ -8,18 +9,28 @@
   opacity: 0;
   height: 0;
   width: 0;
+
   /* Display the "check" when checked */
+  &:checked + label .checked {
+    display: inline;
+  }
+
   /* Highlight the borders if the checkbox is hovered, focused or checked */
+  &:hover + label .notChecked,
+  &:hover + label .required,
+  &:focus + label .notChecked,
+  &:focus + label .required,
+  &:checked + label .notChecked,
+  &:checked + label .required {
+    stroke: var(--matterColorDark);
+  }
+
   /* Hightlight the text on checked, hover and focus */
-}
-.input:checked + label .checked {
-  display: inline;
-}
-.input:hover + label .notChecked, .input:hover + label .required, .input:focus + label .notChecked, .input:focus + label .required, .input:checked + label .notChecked, .input:checked + label .required {
-  stroke: var(--matterColorDark);
-}
-.input:focus + label .text, .input:hover + label .text, .input:checked + label .text {
-  color: var(--matterColorDark);
+  &:focus + label .text,
+  &:hover + label .text,
+  &:checked + label .text {
+    color: var(--matterColorDark);
+  }
 }
 
 .label {
@@ -34,6 +45,7 @@
   margin-top: -2px;
   margin-right: 12px;
   align-self: baseline;
+
   display: inline-flex;
   align-items: center;
   cursor: pointer;
@@ -47,16 +59,16 @@
 
 .notChecked {
   stroke: var(--matterColorAnti);
-}
-.notChecked:hover {
-  stroke: pink;
+  &:hover {
+    stroke: pink;
+  }
 }
 
 .required {
   stroke: var(--attentionColor);
-}
-.required:hover {
-  stroke: pink;
+  &:hover {
+    stroke: pink;
+  }
 }
 
 .text {
@@ -66,5 +78,3 @@
   margin-bottom: 1px;
   cursor: pointer;
 }
-
-/*# sourceMappingURL=FieldRadioButton.css.map */

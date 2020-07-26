@@ -3,11 +3,13 @@ import {
   string, object, bool, arrayOf
 } from 'prop-types'
 import { compose } from 'redux'
-import { Form as FinalForm, FormSpy } from 'react-final-form'
+import { Field, Form as FinalForm, FormSpy } from 'react-final-form'
 import classNames from 'classnames'
 import moment from 'moment'
-import BookingProductToggle from '../../components/BookingProductToggle/BookingProductToggle'
+import keys from 'lodash/keys'
 import get from 'lodash/get'
+import BookingProductRadioButton
+  from '../../components/BookingProductRadioButton/BookingProductRadioButton'
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl'
 import { required, bookingDatesRequired, composeValidators } from '../../util/validators'
 import { START_DATE, END_DATE } from '../../util/dates'
@@ -81,7 +83,7 @@ export class BookingDatesFormComponent extends Component {
 
           const { publicData = {} } = listing.attributes
 
-          const productId = get(values, 'bookingProduct[1]')
+          const productId = get(values, 'bookingProduct')
           const productPrice = values && productId
             ? publicData.products.find((p) => p.id === productId).price
             : undefined
@@ -167,6 +169,10 @@ export class BookingDatesFormComponent extends Component {
 
           const products = listing.attributes.publicData && listing.attributes.publicData.products
 
+          const buildThumbnail = (product) => {
+            return `${process.env.REACT_APP_IMGIX_URL}/${keys(product.photos)[0]}?fm=jpm&h=60&w=60&fit=crop`
+          }
+
           return (
             <Form onSubmit={handleSubmit} className={classes}>
               <FieldDateRangeInput
@@ -197,14 +203,13 @@ export class BookingDatesFormComponent extends Component {
                       {
                         products.map((prod) => {
                           return (
-                            <BookingProductToggle
-                              id="bookingProduct"
+                            <BookingProductRadioButton
+                              id={prod.id}
                               name="bookingProduct"
                               label={prod.type}
                               value={prod.id}
+                              showAsRequired={true}
                               product={prod}
-                              validate={required(productRequired)}
-                              useMobileMargins
                             />
                           )
                         })
@@ -213,27 +218,6 @@ export class BookingDatesFormComponent extends Component {
                     : null
                 }
               </fieldset>
-
-              { products && products.length
-                ? <FieldSelect
-                  className={css.bookingProduct}
-                  name="bookingProduct"
-                  id="bookingProduct"
-                  label={productTitle}
-                  useMobileMargins
-                  validate={required(productRequired)}
-                >
-                  <option disabled value="">
-                    {productPlaceholder}
-                  </option>
-                  {products.map((p, i) => (
-                    <option key={`${p.type}-${p.i}`} value={p.id}>
-                      {p.type}
-                    </option>
-                  ))}
-                </FieldSelect>
-                : null
-              }
               {timeSlotsError}
               {bookingInfo}
               <div className={submitButtonClasses}>

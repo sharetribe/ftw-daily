@@ -8,12 +8,16 @@
   opacity: 0;
   height: 0;
   width: 0;
+  font-family: "Nunito Sans", Helvetica, Arial, sans-serif;
   /* Display the "check" when checked */
   /* Highlight the borders if the checkbox is hovered, focused or checked */
   /* Hightlight the text on checked, hover and focus */
 }
 .input:checked + label .checked {
   display: inline;
+}
+.input:checked + label .radioButtonWrapper {
+  border-color: var(--marketplaceColorDark);
 }
 .input:hover + label .notChecked, .input:hover + label .required, .input:focus + label .notChecked, .input:focus + label .required, .input:checked + label .notChecked, .input:checked + label .required {
   stroke: var(--matterColorDark);
@@ -25,18 +29,15 @@
 .label {
   display: flex;
   align-items: center;
-  padding-top: 6px;
+  padding: 0;
 }
 
-.radioButtonWrapper {
-  /* This should follow line-height */
-  height: 32px;
-  margin-top: -2px;
-  margin-right: 12px;
-  align-self: baseline;
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
+.checkboxProductName {
+  margin-left: 15px;
+}
+
+.checkboxProductThumbnail {
+  border-radius: 4px;
 }
 
 .checked {
@@ -53,18 +54,33 @@
 }
 
 .required {
-  stroke: var(--attentionColor);
+  stroke: var(--matterColorAnti);
 }
 .required:hover {
   stroke: pink;
 }
 
-.text {
-  @apply --marketplaceListingAttributeFontStyles;
+.textRoot {
   color: var(--matterColor);
-  margin-top: -1px;
-  margin-bottom: 1px;
+  margin-left: 15px;
   cursor: pointer;
 }
 
-/*# sourceMappingURL=FieldRadioButton.css.map */
+.radioButtonWrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+  border: solid 0.5px lightgrey;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.radioIconWrapper {
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*# sourceMappingURL=BookingProductRadioButton.css.map */

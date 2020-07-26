@@ -2,7 +2,8 @@ import React from 'react'
 import { bool, node, string } from 'prop-types'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import { useForm } from 'react-final-form'
+import { Field, useForm } from 'react-final-form'
+import FieldReactSelect from '../../components/FieldReactSelect/FieldReactSelect'
 import { updateListingAdHoc } from '../../containers/EditListingPage/EditListingPage.duck'
 import { intlShape } from '../../util/reactIntl'
 import { buildKey, uploadImage } from '../../util/s3_storage'
@@ -17,12 +18,6 @@ import css from './EditListingProductsForm.css'
 const { Money } = sdkTypes
 
 const EditListingProductsProduct = (props) => {
-  // const [productId, setProductId] = React.useState(null)
-  // React.useEffect(() => {
-  //   if (productId === null && product.id !== null) {
-  //     setProductId(product.id)
-  //   }
-  // }, [product])
   const {
     intl,
     disabled,
@@ -35,6 +30,8 @@ const EditListingProductsProduct = (props) => {
   } = props
 
   const productTitle = sectionTitle || intl.formatMessage({ id: 'EditListingProductsForm.additionalProductTitle' })
+  const bedTypeTitle = intl.formatMessage({ id: 'EditListingProductsForm.additionalProductBedTypeSelection' })
+  const bathroomType = intl.formatMessage({ id: 'EditListingProductsForm.additionalProductBathroomTypeSelection' })
 
   const priceRequired = required(
     intl.formatMessage({
@@ -67,7 +64,66 @@ const EditListingProductsProduct = (props) => {
           validate={required(intl.formatMessage({ id: 'EditListingProductsForm.additionalProductTypeInvalid' }))}
         />
       </div>
-
+      <div className={css.sectionContainer}>
+        <h3 className={css.subTitle}>{bedTypeTitle}</h3>
+        <Field
+          id={`${fieldId}.beds`}
+          name={`${fieldId}.beds`}
+          component={FieldReactSelect}
+          disabled={disabled}
+          options={[
+            {
+              value: 'one-queen',
+              label: 'One Queen Bed'
+            },
+            {
+              value: 'two-queens',
+              label: 'Two Queen Beds'
+            },
+            {
+              value: 'single-twin',
+              label: 'Single Twin Bed'
+            },
+            {
+              value: 'double-twins',
+              label: 'Two Twin Beds'
+            },
+            {
+              value: 'dorm',
+              label: 'Dorm'
+            }
+          ]}
+        />
+      </div>
+      <div className={css.sectionContainer}>
+        <h3 className={css.subTitle}>{bathroomType}</h3>
+        <Field
+          id={`${fieldId}.bathroom`}
+          name={`${fieldId}.bathroom`}
+          component={FieldReactSelect}
+          disabled={disabled}
+          options={[
+            {
+              value: 'ensuite',
+              label: 'Ensuite Bathroom'
+            },
+            {
+              value: 'shared',
+              label: 'Shared Bathroom'
+            }
+          ]}
+        />
+      </div>
+      <div className={css.formRow}>
+        <FieldTextInput
+          id={`${fieldId}.description`}
+          name={`${fieldId}.description`}
+          disabled={disabled}
+          type="textarea"
+          label={intl.formatMessage({ id: 'EditListingProductsForm.additionalProductDescriptionTitle' })}
+          placeholder={intl.formatMessage({ id: 'EditListingProductsForm.additionalProductDescriptionPlaceholder' })}
+        />
+      </div>
       <div className={css.formRow}>
         <FieldTextInput
           id={`${fieldId}.description`}

@@ -67,7 +67,7 @@ const EditListingProductsAdditionalProducts = (props) => {
   }
 
   return (
-    <div className={css.additionalProductsWrapper}>
+    <div>
       <FieldArray id={`${fieldId}`} name={`${fieldId}`}>
         {({ fields }) => fields.map((name, index) => {
           const product = _.get(form.getState().values, `products[${index}]`, {})
