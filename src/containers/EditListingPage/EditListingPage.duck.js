@@ -1,9 +1,7 @@
 import omit from 'lodash/omit';
-import axios from 'axios';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { denormalisedResponseEntities, ensureAvailabilityException } from '../../util/data';
 import { isSameDate, monthIdStringInUTC } from '../../util/dates';
-import { apiBaseUrl } from '../../util/api';
 import { storableError } from '../../util/errors';
 import * as log from '../../util/log';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
@@ -13,6 +11,7 @@ import {
   fetchStripeAccount,
 } from '../../ducks/stripeConnectAccount.duck';
 import { fetchCurrentUser } from '../../ducks/user.duck';
+import { requestFetchShopifyProducts } from '../../ducks/shopify.duck';
 
 const { UUID } = sdkTypes;
 
@@ -149,8 +148,6 @@ export const REMOVE_LISTING_IMAGE = 'app/EditListingPage/REMOVE_LISTING_IMAGE';
 export const SAVE_PAYOUT_DETAILS_REQUEST = 'app/EditListingPage/SAVE_PAYOUT_DETAILS_REQUEST';
 export const SAVE_PAYOUT_DETAILS_SUCCESS = 'app/EditListingPage/SAVE_PAYOUT_DETAILS_SUCCESS';
 export const SAVE_PAYOUT_DETAILS_ERROR = 'app/EditListingPage/SAVE_PAYOUT_DETAILS_ERROR';
-
-export const FETCH_SHOPIFY_PRODUCTS = 'app/EditListingPage/FETCH_SHOPIFY_PRODUCTS_REQUEST';
 
 // ================ Reducer ================ //
 
@@ -396,9 +393,6 @@ export default function reducer(state = initialState, action = {}) {
       return { ...state, payoutDetailsSaveInProgress: false };
     case SAVE_PAYOUT_DETAILS_SUCCESS:
       return { ...state, payoutDetailsSaveInProgress: false, payoutDetailsSaved: true };
-    case FETCH_SHOPIFY_PRODUCTS:
-      // TODO (SY): Add validations; move shopify code to another duck file
-      return { ...state, shopifyProducts: payload.params.products.edges };
     default:
       return state;
   }
@@ -480,29 +474,7 @@ export const savePayoutDetailsRequest = requestAction(SAVE_PAYOUT_DETAILS_REQUES
 export const savePayoutDetailsSuccess = successAction(SAVE_PAYOUT_DETAILS_SUCCESS);
 export const savePayoutDetailsError = errorAction(SAVE_PAYOUT_DETAILS_ERROR);
 
-// Shopify
-export const fetchShopifyProductsRequest = requestAction(FETCH_SHOPIFY_PRODUCTS);
-
 // ================ Thunk ================ //
-
-export function requestFetchShopifyProducts(actionPayload) {
-  // TODO(SY): Maybe add another dispatch here for when it starts fetching
-  return (dispatch, getState, sdk) => {
-    return (
-      axios
-        .get(`${apiBaseUrl()}/api/products`)
-        .then(response => {
-          // TODO(SY): this isn't following the convention. shouldn't be fetch
-          dispatch(fetchShopifyProductsRequest(response.data.data));
-          return response;
-        })
-        // TODO(SY): Add a state for when there's an error here
-        .catch(e => {
-          log.error(e, 'request-fetch-shopify-products-failed');
-        })
-    );
-  };
-}
 
 export function requestShowListing(actionPayload) {
   return (dispatch, getState, sdk) => {
@@ -743,7 +715,11 @@ export const loadData = params => (dispatch, getState, sdk) => {
     'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
   };
 
-  return Promise.all([dispatch(requestShowListing(payload)), dispatch(fetchCurrentUser())])
+  return Promise.all([
+    dispatch(requestShowListing(payload)),
+    dispatch(fetchCurrentUser()),
+    dispatch(requestFetchShopifyProducts()),
+  ])
     .then(response => {
       const currentUser = getState().user.currentUser;
       if (currentUser && currentUser.stripeAccount) {

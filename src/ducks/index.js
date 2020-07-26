@@ -12,6 +12,7 @@ import Routing from './Routing.duck';
 import UI from './UI.duck';
 import marketplaceData from './marketplaceData.duck';
 import paymentMethods from './paymentMethods.duck';
+import shopify from './shopify.duck';
 import stripe from './stripe.duck';
 import stripeConnectAccount from './stripeConnectAccount.duck';
 import user from './user.duck';
@@ -25,6 +26,7 @@ export {
   UI,
   marketplaceData,
   paymentMethods,
+  shopify,
   stripe,
   stripeConnectAccount,
   user,

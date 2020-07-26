@@ -82,6 +82,7 @@ export const EditListingPageComponent = props => {
     page,
     params,
     scrollingDisabled,
+    shopifyProducts,
     stripeAccountFetched,
     stripeAccount,
     updateStripeAccountError,
@@ -213,7 +214,7 @@ export const EditListingPageComponent = props => {
           updateInProgress={page.updateInProgress || page.createListingDraftInProgress}
           payoutDetailsSaveInProgress={page.payoutDetailsSaveInProgress}
           payoutDetailsSaved={page.payoutDetailsSaved}
-          shopifyProducts={page.shopifyProducts}
+          shopifyProducts={shopifyProducts}
           stripeAccountFetched={stripeAccountFetched}
           stripeAccount={stripeAccount}
           stripeAccountError={
@@ -282,6 +283,7 @@ EditListingPageComponent.propTypes = {
     tab: string.isRequired,
     returnURLType: oneOf(STRIPE_ONBOARDING_RETURN_URL_TYPES),
   }).isRequired,
+  shopifyProducts: [],
   stripeAccountFetched: bool,
   stripeAccount: object,
   scrollingDisabled: bool.isRequired,
@@ -297,6 +299,7 @@ EditListingPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const page = state.EditListingPage;
+  const shopifyProducts = state.shopify.shopifyProducts;
   const {
     getAccountLinkInProgress,
     getAccountLinkError,
@@ -330,6 +333,7 @@ const mapStateToProps = state => {
     getOwnListing,
     page,
     scrollingDisabled: isScrollingDisabled(state),
+    shopifyProducts,
   };
 };
 
