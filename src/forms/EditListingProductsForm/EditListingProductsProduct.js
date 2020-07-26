@@ -11,36 +11,28 @@ import { FieldTextInput, FieldCurrencyInput, SelectImage } from '../../component
 import config from '../../config'
 import { formatMoney } from '../../util/currency'
 import { types as sdkTypes } from '../../util/sdkLoader'
-import EditListingPhotosForm from '../EditListingPhotosForm/EditListingPhotosForm'
 
 import css from './EditListingProductsForm.css'
 
 const { Money } = sdkTypes
 
 const EditListingProductsProduct = (props) => {
+  // const [productId, setProductId] = React.useState(null)
+  // React.useEffect(() => {
+  //   if (productId === null && product.id !== null) {
+  //     setProductId(product.id)
+  //   }
+  // }, [product])
   const {
     intl,
     disabled,
     fieldId,
     sectionTitle,
-    listingId,
+    form,
     product,
-    updateProduct,
-    ready,
-    errors,
-    imagesForProduct,
-    onUpdateImageOrder,
-    onRemoveImage,
-    submitButtonText,
-    panelUpdated,
-    updateInProgress,
-    onChange,
-    images,
-    onImageUpload,
-    onImageSubmit
+    onImageSubmit,
+    onImageDelete
   } = props
-
-  console.log(props)
 
   const productTitle = sectionTitle || intl.formatMessage({ id: 'EditListingProductsForm.additionalProductTitle' })
 
@@ -60,7 +52,6 @@ const EditListingProductsProduct = (props) => {
   const priceValidators = config.listingMinimumPriceSubUnits
     ? composeValidators(priceRequired, minPriceRequired)
     : priceRequired
-  const productImages = images.filter((img) => _.includes(_.keys(product.photos), img.id.uuid))
 
   return (
     <div className={css.sectionContainer}>
@@ -99,21 +90,15 @@ const EditListingProductsProduct = (props) => {
           validate={priceValidators}
         />
       </div>
-      <EditListingPhotosForm
-        className={css.form}
-        disabled={disabled}
-        ready={ready}
-        fetchErrors={errors}
-        images={images}
-        imagesToDisplay={productImages}
-        onImageUpload={onImageUpload}
-        onChange={onChange}
-        onUpdateImageOrder={onUpdateImageOrder}
-        onRemoveImage={onRemoveImage}
-        saveActionMsg={submitButtonText}
-        updated={panelUpdated}
-        updateInProgress={updateInProgress}
-        onSubmit={(e) => onImageSubmit(e, product.id)}
+      <SelectImage
+        onUpload={(photoId) => {
+          onImageSubmit(photoId, product.id)
+        }}
+        onDelete={(photoId) => {
+          onImageDelete(photoId, product.id)
+        }}
+        disabled={form.getState().invalid}
+        imagesToDisplay={_.keys(product.photos)}
       />
     </div>
   )
@@ -132,21 +117,10 @@ EditListingProductsProduct.propTypes = {
   sectionTitle: node
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    currentListing: _.get(state, 'marketplaceData.entities.listing', {})[ownProps.listingId],
-  }
-}
-
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateListing: (listingId, data) => dispatch(updateListingAdHoc({
-      id: listingId,
-      publicData: {
-        products: [data]
-      }
-    }))
+    updateListingAdHoc: (update) => dispatch(updateListingAdHoc(update))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditListingProductsProduct)
+export default connect(null, mapDispatchToProps)(EditListingProductsProduct)

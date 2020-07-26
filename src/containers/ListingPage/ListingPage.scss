@@ -364,6 +364,7 @@
 .desktopPriceValue {
   /* Font */
   @apply --marketplaceH1FontStyles;
+  font-family: "Fira Sans", Helvetica, Arial, sans-serif;
   color: var(--marketplaceColor);
 
   @media (--viewportMedium) {

@@ -5,49 +5,107 @@ import { injectIntl } from 'react-intl'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { v4 as uuid } from 'uuid'
-import { updateListingAdHoc } from '../../containers/EditListingPage/EditListingPage.duck';
-import { buildKey, uploadImage } from '../../util/s3_storage'
+import { updateListingAdHoc } from '../../containers/EditListingPage/EditListingPage.duck'
+import { buildKey, deleteImage, uploadImage } from '../../util/s3_storage'
+import RemoveImageButton from '../AddImages/RemoveImageButton'
+import IconSpinner from '../IconSpinner/IconSpinner'
 
 import css from './SelectImage.css'
 
 const SelectImage = (props) => {
   const {
     userId,
-    rootKeySegments,
-    onUpload
+    rootKeySegments = [],
+    onUpload,
+    onDelete,
+    disabled,
+    imagesToDisplay = []
   } = props
 
-  const [files, setFiles] = useState([])
+  const buildImagesToDisplay = () => {
+    return imagesToDisplay.map((img) => ({
+      name: img,
+      preview: `https://coworksurf.imgix.net/public/${userId}/${img}?fm=jpm&h=100&fit=clip`
+    }))
+  }
+
+  const [files, setFiles] = useState(buildImagesToDisplay())
+  const [workingFiles, setWorkingFiles] = useState([])
 
   const onImageUploaded = async (file) => {
-    const pid = uuid()
-    console.log(pid)
-    await uploadImage(`${userId}/${buildKey(rootKeySegments)}/${pid}`, file)
-    onUpload(pid)
+    let path
+    if (rootKeySegments.length > 0) {
+      path = `${userId}/${buildKey(rootKeySegments)}/${file.name}`
+    } else {
+      path = `${userId}/${file.name}`
+    }
+
+    await uploadImage(path, file.file)
+    onUpload(file.name)
+    setWorkingFiles(workingFiles.filter((f) => f !== file.name))
+  }
+
+  const onImageDelete = async (fileName) => {
+    let path
+    if (rootKeySegments.length > 0) {
+      path = `${userId}/${buildKey(rootKeySegments)}/${fileName}`
+    } else {
+      path = `${userId}/${fileName}`
+    }
+    setFiles(files.filter((f) => f.name !== fileName))
+    await deleteImage(path)
+    onDelete(fileName)
   }
 
   const { getRootProps, getInputProps } = useDropzone({
-    accept: 'image/*',
+    accept: 'image/jpeg, image/png, image/jpg',
     onDrop: async (acceptedFiles) => {
-      acceptedFiles.map(async (f, idx) => {
+      const keys = []
+      const a = acceptedFiles.map((f1) => {
+        const id = uuid()
+        keys.push(id)
+        return {
+          file: f1,
+          name: id
+        }
+      })
+      setWorkingFiles([...workingFiles, ...keys])
+      a.map(async (f, idx) => {
         await onImageUploaded(f)
       })
-      setFiles(files.concat(acceptedFiles.map((file, idx) => Object.assign(file, {
-        preview: URL.createObjectURL(file)
+      setFiles(files.concat(a.map((file, idx) => Object.assign(file, {
+        preview: URL.createObjectURL(file.file),
+        name: file.name
       }))))
-    }
+    },
+    disabled
   })
 
-  const thumbs = files.map((file) => (
-    <div className={css.thumb} key={file.name}>
-      <div className={css.thumbInner}>
-        <img
-          src={file.preview}
-          className={css.thumbImage}
-        />
+  console.log(workingFiles)
+
+  const thumbs = files.map((file) => {
+    console.log(workingFiles)
+    console.log(file.name)
+    console.log(_.includes(workingFiles, file.name))
+    return (
+      <div className={css.thumb} key={file.name}>
+        <div className={css.thumbInner}>
+          <img
+            src={file.preview}
+            className={css.thumbImage}
+          />
+          {
+            _.includes(workingFiles, file.name)
+              ? <div className={css.spinnerContainer}>
+                <IconSpinner />
+              </div>
+              : null
+          }
+        </div>
+        <RemoveImageButton onClick={() => onImageDelete(file.name)} />
       </div>
-    </div>
-  ))
+    )
+  })
 
   useEffect(() => () => {
     // Make sure to revoke the data uris to avoid memory leaks
@@ -58,7 +116,13 @@ const SelectImage = (props) => {
     <section className="container">
       <div {...getRootProps({ className: css.root })}>
         <input {...getInputProps()} />
-        <p>Drag 'n' drop some files here, or click to select files</p>
+        {
+          disabled ? <p>Enter in the above information before uploading photos</p>
+            : <div className={css.textContainer}>
+              <p>Drag 'n' drop some photos here, or click to select photos</p>
+              <small>JPEG or PNG</small>
+            </div>
+        }
       </div>
       <aside className={css.thumbContainer}>
         {thumbs}

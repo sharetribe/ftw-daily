@@ -63,17 +63,17 @@ const stripeErrorTranslation = (intl, stripeError) => {
 const stripeElementsOptions = {
   fonts: [
     {
-      family: 'Montserrat',
+      family: 'Fira Sans',
       fontSmoothing: 'antialiased',
       src:
-        'local("Montserrat"), local("Montserrat"), local("Montserrat"), url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap") format("woff2")',
+        'local("Fira Sans"), local("Fira Sans"), local("Fira Sans"), url("https://fonts.googleapis.com/css2?family=Fira Sans:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap") format("woff2")',
     },
   ],
 };
 
 const cardStyles = {
   base: {
-    fontFamily: '"Montserrat", Helvetica, Arial, sans-serif',
+    fontFamily: '"Fira Sans", Helvetica, Arial, sans-serif',
     fontSize: '18px',
     fontSmoothing: 'antialiased',
     lineHeight: '24px',

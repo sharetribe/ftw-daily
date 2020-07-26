@@ -118,9 +118,15 @@ textarea {
 
 :global(.fontsLoaded) {
   & body {
-    font-family: 'Montserrat', Helvetica, Arial, sans-serif;
+    font-family: 'Fira Sans', Helvetica, Arial, sans-serif;
   }
   & button {
-    font-family: 'Montserrat', Helvetica, Arial, sans-serif;
+    font-family: 'Fira Sans', Helvetica, Arial, sans-serif;
   }
+}
+
+small {
+  font-family: "Fira Sans", Helvetica, Arial, sans-serif;
+  font-size: 70%;
+  font-weight: 400;
 }

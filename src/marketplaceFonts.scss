@@ -19,7 +19,7 @@
   /* ================ Default font ================ */
 
   --marketplaceDefaultFontStyles: {
-    font-family: 'Quicksand', Helvetica, Arial, sans-serif;
+    font-family: 'Nunito Sans', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightMedium);
     font-size: 18px;
     line-height: 24px;
@@ -33,7 +33,7 @@
   }
 
   --marketplaceSmallFontStyles: {
-    font-family: 'Quicksand', Helvetica, Arial, sans-serif;
+    font-family: 'Nunito Sans', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightMedium);
     font-size: 15px;
     line-height: 24px;
@@ -42,7 +42,7 @@
   /* ================ Body font ================ */
 
   --marketplaceBodyFontStyles: {
-    font-family: 'Quicksand', Helvetica, Arial, sans-serif;
+    font-family: 'Nunito Sans', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightMedium);
     font-size: 18px;
     line-height: 24px;
@@ -109,6 +109,7 @@
 
   --marketplaceH1FontStyles: {
     font-weight: var(--fontWeightBold);
+    font-family: 'Nunito Sans';
     font-size: 30px;
     line-height: 36px;
     letter-spacing: -1px;
@@ -129,6 +130,7 @@
 
   --marketplaceH2FontStyles: {
     font-weight: var(--fontWeightSemiBold);
+    font-family: 'Nunito Sans';
     font-size: 24px;
     line-height: 30px;
     letter-spacing: -0.3px;
@@ -146,6 +148,7 @@
 
   --marketplaceH3FontStyles: {
     font-weight: var(--fontWeightSemiBold);
+    font-family: 'Nunito Sans';
     font-size: 20px;
     line-height: 24px;
     letter-spacing: -0.2px;
@@ -162,6 +165,7 @@
 
   --marketplaceH4FontStyles: {
     font-weight: var(--fontWeightMedium);
+    font-family: 'Nunito Sans';
     font-size: 16px;
     line-height: 24px;
     letter-spacing: 0;
@@ -179,6 +183,7 @@
 
   --marketplaceH5FontStyles: {
     font-weight: var(--fontWeightRegular);
+    font-family: 'Nunito Sans';
     font-size: 14px;
     line-height: 18px;
     letter-spacing: 0;
@@ -196,6 +201,7 @@
 
   --marketplaceH6FontStyles: {
     font-weight: var(--fontWeightBold);
+    font-family: 'Nunito Sans';
     font-size: 12px;
     line-height: 18px;
     letter-spacing: 1.5px;
@@ -215,7 +221,7 @@
   /* ================ Other fonts ================ */
 
   --marketplaceTinyFontStyles: {
-    font-family: 'Quicksand', Helvetica, Arial, sans-serif;
+    font-family: 'Nunito Sans', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightRegular);
     font-size: 13px;
     line-height: 18px;
@@ -233,14 +239,14 @@
   }
 
   --marketplaceMessageFontStyles {
-    font-family: 'Quicksand', Helvetica, Arial, sans-serif;
+    font-family: 'Nunito Sans', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightRegular);
     font-size: 16px;
     line-height: 24px;
   }
 
   --marketplaceMessageDateFontStyles {
-    font-family: 'Quicksand', Helvetica, Arial, sans-serif;
+    font-family: 'Nunito Sans', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightRegular);
     font-size: 13px;
     line-height: 18px;
@@ -254,7 +260,7 @@
   }
 
   --marketplaceTxTransitionFontStyles {
-    font-family: 'Quicksand', Helvetica, Arial, sans-serif;
+    font-family: 'Nunito Sans', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightMedium);
     font-size: 16px;
     line-height: 18px;
@@ -266,7 +272,7 @@
   }
 
   --marketplaceSearchFilterLabelFontStyles {
-    font-family: 'Montserrat', Helvetica, Arial, sans-serif;
+    font-family: 'Fira Sans', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightSemiBold);
     font-size: 13px;
     line-height: 18px;
@@ -279,14 +285,21 @@
   }
 
   --marketplaceSearchFilterSublabelFontStyles {
-    font-family: 'Montserrat', Helvetica, Arial, sans-serif;
+    font-family: 'Fira Sans', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightMedium);
     font-size: 18px;
     line-height: 18px;
   }
 
   --marketplaceListingAttributeFontStyles {
-    font-family: 'Montserrat', Helvetica, Arial, sans-serif;
+    font-family: 'Fira Sans', Helvetica, Arial, sans-serif;
+    font-weight: var(--fontWeightMedium);
+    font-size: 18px;
+    line-height: 32px;
+  }
+
+  --marketplaceNumberStyles {
+    font-family: 'Fira Sans', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightMedium);
     font-size: 18px;
     line-height: 32px;

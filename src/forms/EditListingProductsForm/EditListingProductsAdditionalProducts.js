@@ -18,31 +18,59 @@ const EditListingProductsAdditionalProducts = (props) => {
     disabled,
     intl,
     push,
-    values,
     listingId,
-    updateListing,
     ready,
     errors,
     images,
     onChange,
-    onUpdateImageOrder,
-    onRemoveImage,
     submitButtonText,
     panelUpdated,
     updateInProgress,
-    onImageUpload,
-    onImageSubmit,
     form,
-    products
   } = props
 
-  console.log(props)
+  const addImageToProductAndComposeUpdateObject = (photoId, productId, params = {}) => {
+    const t = _.get(form.getState(), 'values.products', [])
+    const b = _.remove(t, (p) => p.id === productId)[0]
+    if (b) {
+      b.photos = {
+        ...b.photos,
+        [photoId]: params
+      }
+    }
+    return [...t, b].map((p, idx) => ({
+      ...p,
+      price: {
+        amount: p.price.amount,
+        currency: p.price.currency
+      },
+      order: _.isInteger(p.order) ? p.order : idx
+    }))
+  }
+
+  const deleteImageFromProductAndComposeUpdateObject = (photoId, productId) => {
+    const t = _.get(form.getState(), 'values.products', [])
+    const b = _.remove(t, (p) => p.id === productId)[0]
+    if (b) {
+      delete b.photos[photoId]
+    }
+    return [...t, b]
+  }
+
+  const updateListingProducts = (products) => {
+    props.updateListingAdHoc({
+      id: listingId,
+      publicData: {
+        products
+      }
+    })
+  }
+
   return (
     <div className={css.additionalProductsWrapper}>
       <FieldArray id={`${fieldId}`} name={`${fieldId}`}>
         {({ fields }) => fields.map((name, index) => {
-          console.log(fields)
-          const product = _.get(fields, `value[${index}]`, {})
+          const product = _.get(form.getState().values, `products[${index}]`, {})
           return (
             <div className={css.additionalProductsWrapper} key={name}>
               <div
@@ -60,44 +88,25 @@ const EditListingProductsAdditionalProducts = (props) => {
                 intl={intl}
                 disabled={disabled}
                 form={form}
-                values={values}
                 sectionTitle={intl.formatMessage({ id: 'EditListingProductsForm.additionalProductTitle' })}
                 listingId={listingId}
-                product={product}
+                product={_.clone(product)}
+                order={product.order}
                 index={index}
                 disabled={disabled}
                 ready={ready}
                 fetchErrors={errors}
-                initialValues={{ images }}
                 images={images}
-                onImageUpload={onImageUpload}
                 onChange={onChange}
-                onUpdateImageOrder={onUpdateImageOrder}
-                onRemoveImage={onRemoveImage}
                 saveActionMsg={submitButtonText}
                 updated={panelUpdated}
                 updated={panelUpdated}
                 updateInProgress={updateInProgress}
-                onImageSubmit={(e, productId) => {
-                  console.log(values)
-                  console.log(e)
-                  console.log(productId)
-                  const p1 = _.find(products, (pd) => pd.id === productId)
-                  const p2 = _.defaults(product, p1)
-                  const f = products.filter((p) => p.id !== p2.id)
-                  const prod = {
-                    ...p2,
-                    photos: p2.photos || {}
-                  }
-                  _.forEach(e.images, (v) => {
-                    if (v.imageId) {
-                      prod.photos[v.imageId.uuid] = {
-                        thumb: false
-                      }
-                    }
-                  })
-
-                  onImageSubmit(e, [...f, prod])
+                onImageSubmit={(photoId, productId) => {
+                  updateListingProducts(addImageToProductAndComposeUpdateObject(photoId, productId))
+                }}
+                onImageDelete={(photoId, productId) => {
+                  updateListingProducts(deleteImageFromProductAndComposeUpdateObject(photoId, productId))
                 }}
               />
 
@@ -111,7 +120,7 @@ const EditListingProductsAdditionalProducts = (props) => {
           type="button"
           rootClassName={css.fieldArrayAdd}
           onClick={() => {
-            push(fieldId, undefined)
+            push(fieldId, { id: `prod-${_.random(100, 9999)}-${_.random(1, 100)}` })
           }}
         >
           <span className={css.additionalProductLabel}>
@@ -139,21 +148,10 @@ EditListingProductsAdditionalProducts.propTypes = {
   intl: intlShape.isRequired,
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    currentListing: _.get(state, 'marketplaceData.entities.listing', {})[ownProps.listingId],
-  }
-}
-
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateListing: (listingId, data) => dispatch(updateListingAdHoc({
-      id: listingId,
-      publicData: {
-        products: data
-      }
-    }))
+    updateListingAdHoc: (update) => dispatch(updateListingAdHoc(update))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditListingProductsAdditionalProducts)
+export default connect(null, mapDispatchToProps)(EditListingProductsAdditionalProducts)

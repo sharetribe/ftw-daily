@@ -30,7 +30,7 @@ import EditListingWizardTab, {
   // PRICING,
   PRODUCTS,
   PHOTOS,
-  COWORKING
+  // COWORKING
 } from './EditListingWizardTab'
 import css from './EditListingWizard.css'
 
@@ -50,7 +50,7 @@ export const TABS = [
   PRODUCTS,
   ...availabilityMaybe,
   PHOTOS,
-  COWORKING,
+  // COWORKING,
 ]
 
 // Tabs are horizontal in small screens
@@ -74,9 +74,10 @@ const tabLabel = (intl, tab) => {
     key = 'EditListingWizard.tabLabelAvailability'
   } else if (tab === PHOTOS) {
     key = 'EditListingWizard.tabLabelPhotos'
-  } else if (tab === COWORKING) {
-    key = 'EditListingWizard.tabLabelCoworking'
   }
+  // else if (tab === COWORKING) {
+  //   key = 'EditListingWizard.tabLabelCoworking'
+  // }
 
   return intl.formatMessage({ id: key })
 }
@@ -117,8 +118,8 @@ const tabCompleted = (tab, listing) => {
       return !!availabilityPlan
     case PHOTOS:
       return images && images.length > 0
-    case COWORKING:
-      return images && images.length > 0
+    // case COWORKING:
+    //   return images && images.length > 0
     default:
       return false
   }

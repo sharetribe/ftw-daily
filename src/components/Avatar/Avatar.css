@@ -13,7 +13,7 @@
   --Avatar_sizeLarge: 96px;
   /* Base for all avatars */
   --Avatar_base: {
-    font-family: "Quicksand", Helvetica, Arial, sans-serif;
+    font-family: "Nunito Sans", Helvetica, Arial, sans-serif;
     border-radius: 50%;
     /* Position possible initials to the center of the component */
     display: flex;

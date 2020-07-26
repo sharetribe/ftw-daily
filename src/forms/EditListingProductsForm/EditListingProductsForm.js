@@ -44,7 +44,6 @@ export const EditListingProductsFormComponent = (props) => (
         products
       } = fieldRenderProps
 
-      console.log(form)
       const { push } = form && form.mutators ? form.mutators : {}
       const submitReady = updated && pristine
       const submitInProgress = updateInProgress
@@ -54,6 +53,7 @@ export const EditListingProductsFormComponent = (props) => (
       return (
         <Form onSubmit={handleSubmit}>
           <EditListingProductsAdditionalProducts
+            otherSubmit={handleSubmit}
             disabled={disabled}
             fieldId="products"
             intl={intl}

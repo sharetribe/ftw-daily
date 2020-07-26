@@ -42,7 +42,7 @@ export const SUPPORTED_TABS = [
   PRODUCTS,
   AVAILABILITY,
   PHOTOS,
-  COWORKING
+  // COWORKING
 ]
 
 const pathParamsToNextTab = (params, tab, marketplaceTabs) => {
@@ -111,7 +111,7 @@ const EditListingWizardTab = (props) => {
     return images ? images.map((img) => img.imageId || img.id) : null
   }
 
-  const onCompleteEditListingWizardTab = (tab, updateValues) => {
+  const onCompleteEditListingWizardTab = (tab, updateValues, shouldRedirect) => {
     // Normalize images for API call
     const { images: updatedImages, ...otherValues } = updateValues
     const imageProperty
@@ -134,7 +134,9 @@ const EditListingWizardTab = (props) => {
           handleCreateFlowTabScrolling(false)
 
           // After successful saving of draft data, user should be redirected to next tab
-          redirectAfterDraftUpdate(r.data.data.id.uuid, params, tab, marketplaceTabs, history)
+          if (shouldRedirect) {
+            redirectAfterDraftUpdate(r.data.data.id.uuid, params, tab, marketplaceTabs, history)
+          }
         } else {
           handlePublishListing(currentListing.id)
         }
@@ -171,7 +173,7 @@ const EditListingWizardTab = (props) => {
           {...panelProps(DESCRIPTION)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={(values) => {
-            onCompleteEditListingWizardTab(tab, values)
+            onCompleteEditListingWizardTab(tab, values, true)
           }}
         />
       )
@@ -185,7 +187,7 @@ const EditListingWizardTab = (props) => {
           {...panelProps(FEATURES)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={(values) => {
-            onCompleteEditListingWizardTab(tab, values)
+            onCompleteEditListingWizardTab(tab, values, true)
           }}
         />
       )
@@ -213,7 +215,7 @@ const EditListingWizardTab = (props) => {
           {...panelProps(LOCATION)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={(values) => {
-            onCompleteEditListingWizardTab(tab, values)
+            onCompleteEditListingWizardTab(tab, values, true)
           }}
         />
       )
@@ -231,7 +233,7 @@ const EditListingWizardTab = (props) => {
           onRemoveImage={onRemoveImage}
           onUpdateImageOrder={onUpdateImageOrder}
           onSubmit={(values) => {
-            onCompleteEditListingWizardTab(tab, values)
+            onCompleteEditListingWizardTab(tab, values, false)
           }}
         />
       )
@@ -245,7 +247,7 @@ const EditListingWizardTab = (props) => {
           {...panelProps(PRICING)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={(values) => {
-            onCompleteEditListingWizardTab(tab, values)
+            onCompleteEditListingWizardTab(tab, values, true)
           }}
         />
       )
@@ -260,7 +262,7 @@ const EditListingWizardTab = (props) => {
           availability={availability}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={(values) => {
-            onCompleteEditListingWizardTab(tab, values)
+            onCompleteEditListingWizardTab(tab, values, true)
           }}
         />
       )
@@ -278,32 +280,31 @@ const EditListingWizardTab = (props) => {
           onImageUpload={onImageUpload}
           onRemoveImage={onRemoveImage}
           onSubmit={(values) => {
-            console.log(values)
             onCompleteEditListingWizardTab(tab, values)
           }}
           onUpdateImageOrder={onUpdateImageOrder}
         />
       )
     }
-    case COWORKING: {
-      const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditListingWizard.saveNewPhotos'
-        : 'EditListingWizard.saveEditPhotos'
-
-      return (
-        <EditListingPhotosPanel
-          {...panelProps(PHOTOS)}
-          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
-          images={images}
-          onImageUpload={onImageUpload}
-          onRemoveImage={onRemoveImage}
-          onSubmit={(values) => {
-            onCompleteEditListingWizardTab(tab, values)
-          }}
-          onUpdateImageOrder={onUpdateImageOrder}
-        />
-      )
-    }
+    // case COWORKING: {
+    //   const submitButtonTranslationKey = isNewListingFlow
+    //     ? 'EditListingWizard.saveNewPhotos'
+    //     : 'EditListingWizard.saveEditPhotos'
+    //
+    //   return (
+    //     <EditListingPhotosPanel
+    //       {...panelProps(PHOTOS)}
+    //       submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+    //       images={images}
+    //       onImageUpload={onImageUpload}
+    //       onRemoveImage={onRemoveImage}
+    //       onSubmit={(values) => {
+    //         onCompleteEditListingWizardTab(tab, values)
+    //       }}
+    //       onUpdateImageOrder={onUpdateImageOrder}
+    //     />
+    //   )
+    // }
     default:
       return null
   }

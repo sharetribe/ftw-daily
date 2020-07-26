@@ -6,9 +6,8 @@ import { compose } from 'redux'
 import { useDropzone } from 'react-dropzone'
 import { Form as FinalForm, Field } from 'react-final-form'
 import isEqual from 'lodash/isEqual'
+import random from 'lodash/random'
 import classNames from 'classnames'
-import IconSpinner from '../../components/IconSpinner/IconSpinner'
-import IconSuccess from '../../components/IconSuccess/IconSuccess'
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl'
 import { propTypes } from '../../util/types'
 import { nonEmptyArray, composeValidators } from '../../util/validators'
@@ -66,17 +65,26 @@ export class EditListingPhotosFormComponent extends Component {
             saveActionMsg,
             updated,
             updateInProgress,
-            imagesToDisplay
+            imagesToDisplay,
+            showSubmitButton,
+            readyForUpload
           } = formRenderProps
 
           const chooseImageText = (
             <span className={css.chooseImageText}>
               <span className={css.chooseImage}>
-                <FormattedMessage id="EditListingPhotosForm.chooseImage" />
+                {
+                  readyForUpload ? <FormattedMessage id="EditListingPhotosForm.chooseImage" />
+                    : <FormattedMessage id="EditListingPhotosForm.imageUploadDisabledUntilPreviousFieldsFilled" />
+                }
               </span>
-              <span className={css.imageTypes}>
-                <FormattedMessage id="EditListingPhotosForm.imageTypes" />
-              </span>
+              {
+                readyForUpload
+                  ? <span className={css.imageTypes}>
+                    <FormattedMessage id="EditListingPhotosForm.imageTypes" />
+                  </span>
+                  : null
+              }
             </span>
           )
 
@@ -131,10 +139,10 @@ export class EditListingPhotosFormComponent extends Component {
           const submitReady = (updated && pristineSinceLastSubmit) || ready
           const submitInProgress = updateInProgress
           const submitDisabled
-            = disabled || submitInProgress || imageUploadRequested || ready
+            = !readyForUpload || disabled || submitInProgress || imageUploadRequested || ready
 
           const classes = classNames(css.root, className)
-
+          const formId = `photos-form-${random(0, 99999)}`
           return (
             <Form
               id={'photos-form'}
@@ -240,12 +248,19 @@ export class EditListingPhotosFormComponent extends Component {
 
               {publishListingFailed}
               {showListingFailed}
-              {/* { */}
-              {/*  submitInProgress ? <IconSpinner /> : null */}
-              {/* } */}
-              {/* { */}
-              {/*  submitReady ? <IconSuccess /> : null */}
-              {/* } */}
+              {
+                showSubmitButton
+                  ? <Button
+                    className={css.submitButton}
+                    type="submit"
+                    inProgress={submitInProgress}
+                    disabled={submitDisabled}
+                    ready={submitReady}
+                  >
+                    {saveActionMsg}
+                  </Button>
+                  : null
+              }
             </Form>
           )
         }}

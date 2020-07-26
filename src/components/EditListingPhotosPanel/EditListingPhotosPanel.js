@@ -69,6 +69,8 @@ class EditListingPhotosPanel extends Component {
           saveActionMsg={submitButtonText}
           updated={panelUpdated}
           updateInProgress={updateInProgress}
+          showSubmitButton={true}
+          readyForUpload={true}
         />
       </div>
     )

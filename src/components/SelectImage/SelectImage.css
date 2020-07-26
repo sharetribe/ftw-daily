@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  justify-content: center;
   border-width: 2px;
   border-radius: 2px;
   border-color: #eeeeee;
@@ -25,6 +25,7 @@
 }
 
 .thumb {
+  position: relative;
   display: inline-flex;
   border-radius: 4px;
   border: 1px solid #eaeaea;
@@ -37,6 +38,7 @@
 }
 
 .thumbInner {
+  position: relative;
   display: flex;
   min-width: 0;
   overflow: hidden;
@@ -46,6 +48,27 @@
   display: block;
   width: auto;
   height: 100%;
+}
+
+.textContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  flex-direction: column;
+}
+.textContainer p {
+  margin: 0;
+}
+
+.spinnerContainer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 /*# sourceMappingURL=SelectImage.css.map */

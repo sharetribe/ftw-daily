@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import uniqueId from 'lodash/uniqueId'
+import _ from 'lodash'
 import { FormattedMessage } from '../../util/reactIntl'
 import { LISTING_STATE_DRAFT } from '../../util/types'
 import { ListingLink } from '..'
@@ -52,26 +52,24 @@ const EditListingProductsPanel = (props) => {
       <h1 className={css.title}>{panelTitle}</h1>
       <EditListingProductsForm
         className={css.form}
-        initialValues={{ products }}
+        initialValues={{ products: _.sortBy(products, 'order') }}
         onSubmit={(values) => {
           onSubmit({
             publicData: {
-              products: values.products.map((p) => {
+              products: values.products.map((p, idx) => {
                 return {
-                  id: p.id || uniqueId('prod_'),
                   ...p,
                   price: {
                     amount: p.price.amount,
                     currency: p.price.currency
                   },
+                  order: _.isInteger(p.order) ? p.order : idx
                 }
               })
             }
           })
         }}
         onImageSubmit={(values, prods) => {
-          console.log(values)
-          console.log(prods)
           const { addImage, ...updateValues } = values
           console.log(updateValues)
           onSubmit({
@@ -96,7 +94,7 @@ const EditListingProductsPanel = (props) => {
         ready={ready}
         fetchErrors={errors}
         listingId={listing.id.uuid}
-        products={products}
+        products={products || []}
       />
     </div>
   )

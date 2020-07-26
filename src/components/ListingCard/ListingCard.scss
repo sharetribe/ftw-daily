@@ -59,7 +59,7 @@
 
 .priceValue {
   /* Font */
-  @apply --marketplaceH3FontStyles;
+  @apply --marketplaceNumberStyles;
 
   /* Remove default margins from font */
   margin-top: 0;

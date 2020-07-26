@@ -37,7 +37,7 @@ const surfSpotMapMarker = (surfSpot, map) => {
   element.style.justifyContent = 'center'
   const num = document.createElement('span')
   num.style.color = 'white'
-  num.style.fontFamily = 'Montserrat'
+  num.style.fontFamily = 'Fira Sans'
   const text = document.createTextNode(surfSpot.order)
   num.appendChild(text)
   element.appendChild(num)

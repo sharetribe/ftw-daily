@@ -26,27 +26,27 @@
 
 .threeToTwoWrapper {
   position: relative;
+  background-color: white;
 }
 
 .removeImage {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: -5px;
+  right: -5px;
   width: 33px;
   height: 33px;
   padding: 0;
   background-color: rgba(0, 0, 0, 0.5);
   border: none;
-  border-radius: 0;
-  border-bottom-left-radius: 2px;
+  border-radius: 4px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   & svg {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
     fill: var(--matterColorAnti);
     stroke: var(--matterColorAnti);
   }

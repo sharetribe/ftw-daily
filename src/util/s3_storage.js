@@ -25,7 +25,7 @@ export const uploadImage = async (key, file) => {
     const u = await isAuth()
     console.log(u)
     if (!u) return
-    const r = await Storage.put(key, file, { contentType: 'image/png' })
+    const r = await Storage.put(key, file, { contentType: 'image/*' })
     console.log(r)
   } catch (e) {
     console.log(e)
