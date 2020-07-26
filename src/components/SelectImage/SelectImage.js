@@ -25,7 +25,7 @@ const SelectImage = (props) => {
   const buildImagesToDisplay = () => {
     return imagesToDisplay.map((img) => ({
       name: img,
-      preview: `https://coworksurf.imgix.net/public/${userId}/${img}?fm=jpm&h=100&fit=clip`
+      preview: `https://coworksurf.imgix.net/public/${img}?fm=jpm&h=100&fit=clip`
     }))
   }
 
@@ -35,9 +35,9 @@ const SelectImage = (props) => {
   const onImageUploaded = async (file) => {
     let path
     if (rootKeySegments.length > 0) {
-      path = `${userId}/${buildKey(rootKeySegments)}/${file.name}`
+      path = `${buildKey(rootKeySegments)}/${file.name}`
     } else {
-      path = `${userId}/${file.name}`
+      path = file.name
     }
 
     await uploadImage(path, file.file)
@@ -48,9 +48,9 @@ const SelectImage = (props) => {
   const onImageDelete = async (fileName) => {
     let path
     if (rootKeySegments.length > 0) {
-      path = `${userId}/${buildKey(rootKeySegments)}/${fileName}`
+      path = `${buildKey(rootKeySegments)}/${fileName}`
     } else {
-      path = `${userId}/${fileName}`
+      path = fileName
     }
     setFiles(files.filter((f) => f.name !== fileName))
     await deleteImage(path)
@@ -84,9 +84,6 @@ const SelectImage = (props) => {
   console.log(workingFiles)
 
   const thumbs = files.map((file) => {
-    console.log(workingFiles)
-    console.log(file.name)
-    console.log(_.includes(workingFiles, file.name))
     return (
       <div className={css.thumb} key={file.name}>
         <div className={css.thumbInner}>
