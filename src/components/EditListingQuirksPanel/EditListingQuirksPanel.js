@@ -4,12 +4,12 @@ import classNames from 'classnames';
 import { FormattedMessage } from '../../util/reactIntl';
 import { LISTING_STATE_DRAFT } from '../../util/types';
 import { ensureOwnListing } from '../../util/data';
-import { ListingLink } from '../../components';
-import { EditListingPoliciesForm } from '../../forms';
+import { ListingLink } from '..';
+import { EditListingQuirksForm } from '../../forms';
 
-import css from './EditListingPoliciesPanel.css';
+import css from './EditListingQuirksPanel.css';
 
-const EditListingPoliciesPanel = props => {
+const EditListingQuirksPanel = props => {
   const {
     className,
     rootClassName,
@@ -31,17 +31,17 @@ const EditListingPoliciesPanel = props => {
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
     <FormattedMessage
-      id="EditListingPoliciesPanel.title"
+      id="EditListingQuirksPanel.title"
       values={{ listingTitle: <ListingLink listing={listing} /> }}
     />
   ) : (
-    <FormattedMessage id="EditListingPoliciesPanel.createListingTitle" />
+    <FormattedMessage id="EditListingQuirksPanel.createListingTitle" />
   );
 
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
-      <EditListingPoliciesForm
+      <EditListingQuirksForm
         className={css.form}
         publicData={publicData}
         initialValues={{ rules: publicData.rules }}
@@ -68,13 +68,13 @@ const EditListingPoliciesPanel = props => {
 
 const { func, object, string, bool } = PropTypes;
 
-EditListingPoliciesPanel.defaultProps = {
+EditListingQuirksPanel.defaultProps = {
   className: null,
   rootClassName: null,
   listing: null,
 };
 
-EditListingPoliciesPanel.propTypes = {
+EditListingQuirksPanel.propTypes = {
   className: string,
   rootClassName: string,
 
@@ -91,4 +91,4 @@ EditListingPoliciesPanel.propTypes = {
   errors: object.isRequired,
 };
 
-export default EditListingPoliciesPanel;
+export default EditListingQuirksPanel;

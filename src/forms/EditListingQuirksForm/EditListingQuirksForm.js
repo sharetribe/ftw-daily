@@ -1,15 +1,15 @@
 import React from 'react';
 import { bool, func, shape, string } from 'prop-types';
 import { compose } from 'redux';
+import classNames from 'classnames';
 import { Form as FinalForm } from 'react-final-form';
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
-import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import { Form, Button, FieldTextInput } from '../../components';
 
-import css from './EditListingPoliciesForm.css';
+import css from './EditListingQuirksForm.css';
 
-export const EditListingPoliciesFormComponent = props => (
+export const EditListingQuirksFormComponent = props => (
   <FinalForm
     {...props}
     render={formRenderProps => {
@@ -27,22 +27,22 @@ export const EditListingPoliciesFormComponent = props => (
         fetchErrors,
       } = formRenderProps;
 
-      const rulesLabelMessage = intl.formatMessage({
-        id: 'EditListingPoliciesForm.rulesLabel',
+      const quirksLabelMessage = intl.formatMessage({
+        id: 'EditListingQuirksForm.quirksLabel',
       });
-      const rulesPlaceholderMessage = intl.formatMessage({
-        id: 'EditListingPoliciesForm.rulesPlaceholder',
+      const quirksPlaceholderMessage = intl.formatMessage({
+        id: 'EditListingQuirksForm.quirksPlaceholder',
       });
 
       const { updateListingError, showListingsError } = fetchErrors || {};
       const errorMessage = updateListingError ? (
         <p className={css.error}>
-          <FormattedMessage id="EditListingPoliciesForm.updateFailed" />
+          <FormattedMessage id="EditListingQuirksForm.updateFailed" />
         </p>
       ) : null;
       const errorMessageShowListing = showListingsError ? (
         <p className={css.error}>
-          <FormattedMessage id="EditListingPoliciesForm.showListingFailed" />
+          <FormattedMessage id="EditListingQuirksForm.showListingFailed" />
         </p>
       ) : null;
 
@@ -57,14 +57,19 @@ export const EditListingPoliciesFormComponent = props => (
           {errorMessageShowListing}
 
           <FieldTextInput
-            id="rules"
-            name="rules"
-            className={css.policy}
+            id="quirks"
+            name="quirks"
+            className={css.quirks}
             type="textarea"
-            label={rulesLabelMessage}
-            placeholder={rulesPlaceholderMessage}
+            label={quirksLabelMessage}
+            placeholder={quirksPlaceholderMessage}
           />
-
+          <span className={css.quirksDescription}>
+            A “quirk” is a small defect that the Buyer may notice upon receiving your item. It could
+            be a button that’s missing, a small stain, or perhaps a tear in the fabric. You’ll have
+            the opportunity to take photos of each quirk so there won’t be any surprises for your
+            Buyer.
+          </span>
           <Button
             className={css.submitButton}
             type="submit"
@@ -80,24 +85,23 @@ export const EditListingPoliciesFormComponent = props => (
   />
 );
 
-EditListingPoliciesFormComponent.defaultProps = {
-  selectedPlace: null,
+EditListingQuirksFormComponent.defaultProps = {
   updateError: null,
 };
 
-EditListingPoliciesFormComponent.propTypes = {
+EditListingQuirksFormComponent.propTypes = {
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
   saveActionMsg: string.isRequired,
-  selectedPlace: propTypes.place,
   disabled: bool.isRequired,
   ready: bool.isRequired,
   updated: bool.isRequired,
   updateInProgress: bool.isRequired,
+  updateError: propTypes.error,
   fetchErrors: shape({
     showListingsError: propTypes.error,
     updateListingError: propTypes.error,
   }),
 };
 
-export default compose(injectIntl)(EditListingPoliciesFormComponent);
+export default compose(injectIntl)(EditListingQuirksFormComponent);

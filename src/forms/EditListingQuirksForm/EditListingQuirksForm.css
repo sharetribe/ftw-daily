@@ -10,7 +10,7 @@
     since browsers support CSS Properties already.
  */
 
-  --EditListingPoliciesForm_formMargins: {
+  --EditListingQuirksForm_formMargins: {
     margin-bottom: 24px;
 
     @media (--viewportMedium) {
@@ -37,12 +37,17 @@
 }
 
 .title {
-  @apply --EditListingPoliciesForm_formMargins;
+  @apply --EditListingQuirksForm_formMargins;
 }
 
-.policy {
-  @apply --EditListingPoliciesForm_formMargins;
+.quirks {
+  @apply --EditListingQuirksForm_formMargins;
   flex-shrink: 0;
+}
+
+.quirksDescription {
+  font-weight: 100;
+  font-size: 16px;
 }
 
 .error {

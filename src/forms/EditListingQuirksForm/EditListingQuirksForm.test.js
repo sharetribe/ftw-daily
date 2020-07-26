@@ -2,14 +2,14 @@
 import React from 'react';
 import { renderShallow } from '../../util/test-helpers';
 import { fakeIntl } from '../../util/test-data';
-import { EditListingPoliciesFormComponent } from './EditListingPoliciesForm';
+import { EditListingQuirksFormComponent } from './EditListingQuirksForm';
 
 const noop = () => null;
 
-describe('EditListingPoliciesForm', () => {
+describe('EditListingQuirksForm', () => {
   it('matches snapshot', () => {
     const tree = renderShallow(
-      <EditListingPoliciesFormComponent
+      <EditListingQuirksFormComponent
         publicData={{}}
         intl={fakeIntl}
         dispatch={noop}
