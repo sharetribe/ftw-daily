@@ -58,6 +58,7 @@ const defaultDirectives = {
     'stats.g.doubleclick.net',
 
     '*.stripe.com',
+    '*.shopify.com',
   ],
   scriptSrc: [
     self,
