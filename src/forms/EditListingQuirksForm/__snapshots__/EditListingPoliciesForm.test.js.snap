@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`EditListingPoliciesForm matches snapshot 1`] = `
+exports[`EditListingQuirksForm matches snapshot 1`] = `
 <ReactFinalForm
   disabled={false}
   dispatch={[Function]}

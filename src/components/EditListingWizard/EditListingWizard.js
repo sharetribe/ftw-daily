@@ -22,7 +22,7 @@ import EditListingWizardTab, {
   AVAILABILITY,
   DESCRIPTION,
   FEATURES,
-  POLICY,
+  QUIRKS,
   LOCATION,
   PRICING,
   PHOTOS,
@@ -39,7 +39,7 @@ const availabilityMaybe = config.enableAvailability ? [AVAILABILITY] : [];
 export const TABS = [
   DESCRIPTION,
   FEATURES,
-  POLICY,
+  QUIRKS,
   // LOCATION,
   PRICING,
   // ...availabilityMaybe,
@@ -58,8 +58,8 @@ const tabLabel = (intl, tab) => {
     key = 'EditListingWizard.tabLabelDescription';
   } else if (tab === FEATURES) {
     key = 'EditListingWizard.tabLabelFeatures';
-  } else if (tab === POLICY) {
-    key = 'EditListingWizard.tabLabelPolicy';
+  } else if (tab === QUIRKS) {
+    key = 'EditListingWizard.tabLabelQuirks';
   } else if (tab === LOCATION) {
     key = 'EditListingWizard.tabLabelLocation';
   } else if (tab === PRICING) {
@@ -98,7 +98,7 @@ const tabCompleted = (tab, listing) => {
       return !!(publicData.gender && publicData.category);
     case FEATURES:
       return !!(publicData && publicData.amenities);
-    case POLICY:
+    case QUIRKS:
       return !!(publicData && typeof publicData.rules !== 'undefined');
     case LOCATION:
       return !!(geolocation && publicData && publicData.location && publicData.location.address);
