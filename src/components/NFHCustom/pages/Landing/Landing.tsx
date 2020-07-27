@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import nashvilleForHireText from '../../../../assets/images/nashvilleForHireText.png'
 import { FeatureCard, InfoCard, LandingHero, ResponsiveVideo } from '../../molecules'
 import { Constrainer } from '../../layout'
@@ -150,10 +150,10 @@ const BackgroundColorDiv = styled.div`
 
 export const Landing: React.FC = () => {
   return (
-    <div>
-      <div>
-        <LandingHero />
+    <>
+      <LandingHero />
 
+      <div style={{ backgroundColor: '#f9f4ee' }}>
         <Constrainer>
           <Image src={nashvilleForHireText} alt="Nashville For Hire" />
 
@@ -256,6 +256,6 @@ export const Landing: React.FC = () => {
           <TestimonialVideo />
         </Constrainer>
       </div>
-    </div>
+    </>
   )
 }
