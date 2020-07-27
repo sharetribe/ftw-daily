@@ -1,16 +1,16 @@
 import React from 'react'
 
-if (typeof window === 'undefined') {
-  return null
-}
-const { default: Select, components } = require('react-select') // eslint-disable-line global-require
-
 const ReactSelectAdapter = (props) => {
   const {
     input,
     searchable = false,
     ...rest
   } = props
+
+  if (typeof window === 'undefined') {
+    return null
+  }
+  const { default: Select } = require('react-select') // eslint-disable-line global-require
 
   const customStyles = {
     option: (provided, state) => ({
