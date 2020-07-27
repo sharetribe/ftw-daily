@@ -1,5 +1,9 @@
 import React from 'react'
-import Select from 'react-select'
+
+if (typeof window === 'undefined') {
+  return null
+}
+const { default: Select, components } = require('react-select') // eslint-disable-line global-require
 
 const ReactSelectAdapter = (props) => {
   const {
