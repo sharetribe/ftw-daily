@@ -1,9 +1,9 @@
 import React from 'react'
-import styled from 'styled-components/macro'
+import styled, { css } from 'styled-components/macro'
 import nashvilleForHireText from '../../../../assets/images/nashvilleForHireText.png'
 import { FeatureCard, InfoCard, LandingHero, ResponsiveVideo } from '../../molecules'
 import { Constrainer } from '../../layout'
-import css from './Landing.css'
+import landingCSS from './Landing.css'
 import musicNotes from '../../../../assets/images/musicNotes.png'
 import guitarOnBed from '../../../../assets/images/guitarOnBed.jpg'
 import { InstrumentTiles, Testimonials, TestimonialVideo } from '../../organisms'
@@ -153,7 +153,7 @@ export const Landing: React.FC = () => {
     <>
       <LandingHero />
 
-      <div style={{ backgroundColor: '#f9f4ee' }}>
+      <div css={{ backgroundColor: '#f9f4ee' }}>
         <Constrainer>
           <Image src={nashvilleForHireText} alt="Nashville For Hire" />
 
@@ -165,10 +165,17 @@ export const Landing: React.FC = () => {
           </ScrollAnimation>
 
           <ScrollAnimation animateIn="fadeIn">
-            <ResponsiveVideo
-              title="Nashville For Hire Video"
-              src="https://player.vimeo.com/video/272277122"
-            />
+            <div
+              css={css`
+                max-width: 680px;
+                margin: 0 auto;
+              `}
+            >
+              <ResponsiveVideo
+                title="Nashville For Hire Video"
+                src="https://player.vimeo.com/video/272277122"
+              />
+            </div>
           </ScrollAnimation>
 
           <FeatureCardContainer>
@@ -193,7 +200,7 @@ export const Landing: React.FC = () => {
             </ScrollAnimation>
           </FeatureCardContainer>
 
-          <CTAButton className={css.ctaButton}>find your nashville pro</CTAButton>
+          <CTAButton className={landingCSS.ctaButton}>find your nashville pro</CTAButton>
 
           <InfoCardContainer>
             <ScrollAnimation animateIn="fadeInBottomLeft">

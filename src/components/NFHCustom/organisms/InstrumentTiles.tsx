@@ -29,6 +29,8 @@ const InstrumentTilesContainer = styled.div`
   img {
     border-radius: 10px;
     margin: 24px 16px;
+    width: 200px;
+    height: 200px;
   }
 
   @media (max-width: 600px) {
@@ -37,6 +39,8 @@ const InstrumentTilesContainer = styled.div`
     img {
       border-radius: 10px;
       margin: 16px 8px;
+      width: 150px;
+      height: 150px;
     }
   }
 `
@@ -67,7 +71,7 @@ export const InstrumentTiles: React.FC = () => {
   return (
     <InstrumentTilesContainer>
       {images.map(({ alt, src }) => (
-        <img key={src} alt={alt} src={src} width={200} height={200} />
+        <img key={src} alt={alt} src={src} />
       ))}
     </InstrumentTilesContainer>
   )

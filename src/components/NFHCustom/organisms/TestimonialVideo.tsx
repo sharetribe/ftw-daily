@@ -27,10 +27,7 @@ export const TestimonialVideo: React.FC = () => {
         Recording Artist
       </div>
 
-      <ResponsiveVideo
-        title="Olivia Foy"
-        src="https://player.vimeo.com/f38af57d-3fac-44b3-b44c-a205d2b23945"
-      />
+      <ResponsiveVideo title="Olivia Foy" src="https://player.vimeo.com/video/263213815" />
     </div>
   )
 }
