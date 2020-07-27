@@ -14,6 +14,7 @@ build
 .env
 npm-debug.log
 yarn-error.log
+yarn.lock
 
 #amplify
 amplify/\#current-cloud-backend
