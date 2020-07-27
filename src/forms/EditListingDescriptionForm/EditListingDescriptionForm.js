@@ -1,22 +1,30 @@
-import React from 'react';
-import { arrayOf, bool, func, shape, string } from 'prop-types';
-import { compose } from 'redux';
-import { Form as FinalForm } from 'react-final-form';
-import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
-import classNames from 'classnames';
-import { propTypes } from '../../util/types';
-import { maxLength, required, isValidNumber, validYouTubeURL, composeValidators } from '../../util/validators';
-import { Form, Button, FieldTextInput, FieldBoolean } from '../../components';
-import CustomCategorySelectFieldMaybe from './CustomCategorySelectFieldMaybe';
+import React from 'react'
+import {
+  arrayOf, bool, func, shape, string
+} from 'prop-types'
+import _ from 'lodash'
+import { compose } from 'redux'
+import { Form as FinalForm } from 'react-final-form'
+import classNames from 'classnames'
+import SelectImage from '../../components/SelectImage/SelectImage'
+import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl'
+import { propTypes } from '../../util/types'
+import {
+  maxLength, required, isValidNumber, validYouTubeURL, composeValidators
+} from '../../util/validators'
+import {
+  Form, Button, FieldTextInput, FieldBoolean
+} from '../../components'
+import CustomCategorySelectFieldMaybe from './CustomCategorySelectFieldMaybe'
 
-import css from './EditListingDescriptionForm.css';
+import css from './EditListingDescriptionForm.css'
 
-const TITLE_MAX_LENGTH = 60;
+const TITLE_MAX_LENGTH = 60
 
-const EditListingDescriptionFormComponent = props => (
+const EditListingDescriptionFormComponent = (props) => (
   <FinalForm
     {...props}
-    render={formRenderProps => {
+    render={(formRenderProps) => {
       const {
         categories,
         className,
@@ -31,106 +39,105 @@ const EditListingDescriptionFormComponent = props => (
         updateInProgress,
         fetchErrors,
         values
-      } = formRenderProps;
+      } = formRenderProps
 
-      const titleMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.title' });
+      const titleMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.title' })
       const titlePlaceholderMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.titlePlaceholder',
-      });
+      })
       const titleRequiredMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.titleRequired',
-      });
+      })
       const maxLengthMessage = intl.formatMessage(
         { id: 'EditListingDescriptionForm.maxLength' },
         {
           maxLength: TITLE_MAX_LENGTH,
         }
-      );
+      )
       const surfMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.surf',
-      });
+      })
       const surfPlaceholderMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.surfPlaceholder',
-      });
+      })
       const vibeMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.vibe',
-      });
+      })
       const vibePlaceholderMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.vibePlaceholder',
-      });
+      })
       const communityMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.community',
-      });
+      })
       const communityPlaceholderMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.communityPlaceholder',
-      });
+      })
       const wifiMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.wifi',
-      });
+      })
       const wifiPlaceholderMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.wifiPlaceholder',
-      });
+      })
       const wifiValidMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.wifiInvalid',
-      });
+      })
       const retreatMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.retreat',
-      });
+      })
       const retreatCapacityMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.retreatCapacity',
-      });
+      })
       const retreatCapacityPlaceholderMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.retreatCapacityPlaceholder',
-      });
+      })
       const retreatCapacityValidMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.retreatCapacityInvalid',
-      });
+      })
       const retreatDescriptionMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.retreatDescription',
-      });
+      })
       const retreatDescriptionPlaceholderMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.retreatDescriptionPlaceholder',
-      });
+      })
       const videoMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.video',
-      });
+      })
       const videoPlaceholderMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.videoPlaceholder',
-      });
+      })
       const videoValidMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.videoInvalid',
-      });
+      })
       const descriptionMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.description',
-      });
+      })
       const descriptionPlaceholderMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.descriptionPlaceholder',
-      });
-      const maxLength60Message = maxLength(maxLengthMessage, TITLE_MAX_LENGTH);
+      })
+      const maxLength60Message = maxLength(maxLengthMessage, TITLE_MAX_LENGTH)
       const descriptionRequiredMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.descriptionRequired',
-      });
+      })
 
-
-      const { updateListingError, createListingDraftError, showListingsError } = fetchErrors || {};
+      const { updateListingError, createListingDraftError, showListingsError } = fetchErrors || {}
       const errorMessageUpdateListing = updateListingError ? (
         <p className={css.error}>
           <FormattedMessage id="EditListingDescriptionForm.updateFailed" />
         </p>
-      ) : null;
+      ) : null
 
       // This error happens only on first tab (of EditListingWizard)
       const errorMessageCreateListingDraft = createListingDraftError ? (
         <p className={css.error}>
           <FormattedMessage id="EditListingDescriptionForm.createListingDraftError" />
         </p>
-      ) : null;
+      ) : null
 
       const errorMessageShowListing = showListingsError ? (
         <p className={css.error}>
           <FormattedMessage id="EditListingDescriptionForm.showListingFailed" />
         </p>
-      ) : null;
+      ) : null
 
       const showRetreatForm = values.retreat && values.retreat.accepted
 
@@ -155,12 +162,12 @@ const EditListingDescriptionFormComponent = props => (
             placeholder={retreatDescriptionPlaceholderMessage}
           />
         </>
-      ) : null;
+      ) : null
 
-      const classes = classNames(css.root, className);
-      const submitReady = (updated && pristine) || ready;
-      const submitInProgress = updateInProgress;
-      const submitDisabled = invalid || disabled || submitInProgress;
+      const classes = classNames(css.root, className)
+      const submitReady = (updated && pristine) || ready
+      const submitInProgress = updateInProgress
+      const submitDisabled = invalid || disabled || submitInProgress
 
       return (
         <Form className={classes} onSubmit={handleSubmit}>
@@ -267,12 +274,12 @@ const EditListingDescriptionFormComponent = props => (
             {saveActionMsg}
           </Button>
         </Form>
-      );
+      )
     }}
   />
-);
+)
 
-EditListingDescriptionFormComponent.defaultProps = { className: null, fetchErrors: null };
+EditListingDescriptionFormComponent.defaultProps = { className: null, fetchErrors: null }
 
 EditListingDescriptionFormComponent.propTypes = {
   className: string,
@@ -294,6 +301,6 @@ EditListingDescriptionFormComponent.propTypes = {
       label: string.isRequired,
     })
   ),
-};
+}
 
-export default compose(injectIntl)(EditListingDescriptionFormComponent);
+export default compose(injectIntl)(EditListingDescriptionFormComponent)

@@ -39,11 +39,12 @@
   justify-content: flex-start;
   align-items: flex-start;
   margin-bottom: 20px;
-  border: solid 0.5px lightgrey;
+  border: solid 0.5px transparent;
   border-radius: 4px;
   padding: 10px;
   cursor: pointer;
   width: 100%;
+  box-shadow: var(--buttonShadowMedium);
 }
 
 .checkboxProductName {

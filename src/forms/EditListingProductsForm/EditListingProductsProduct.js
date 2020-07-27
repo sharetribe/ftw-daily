@@ -104,8 +104,8 @@ const EditListingProductsProduct = (props) => {
           disabled={disabled}
           options={[
             {
-              value: 'ensuite',
-              label: 'Ensuite Bathroom'
+              value: 'private',
+              label: 'Private Bathroom'
             },
             {
               value: 'shared',
