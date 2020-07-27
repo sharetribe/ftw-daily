@@ -3,29 +3,40 @@ import { node, string } from 'prop-types'
 import classNames from 'classnames'
 import { Field, FormSpy } from 'react-final-form'
 import keys from 'lodash/keys'
+import ValidationError from '../ValidationError/ValidationError';
 
 import css from './BookingProductRadioButton.css'
 
 const IconRadioButton = (props) => {
   return (
     <div className={css.radioIconWrapper}>
-      <svg className={props.className} width="14" height="14" xmlns="http://www.w3.org/2000/svg">
-        <circle
-          className={props.showAsRequired ? css.required : css.notChecked}
-          cx="5"
-          cy="19"
-          r="6"
-          transform="translate(2 -12)"
-          strokeWidth="2"
-          fill="none"
-          fillRule="evenodd"
-        />
-
-        <g className={css.checked} transform="translate(2 -12)" fill="none" fillRule="evenodd">
-          <circle strokeWidth="2" cx="5" cy="19" r="6" />
-          <circle fill="#FFF" fillRule="nonzero" cx="5" cy="19" r="3" />
+      <svg className={css.iconRadioButton} width="40px" height="100px" viewBox="0 0 100 100">
+        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g id="noun_unchecked-radio-button_3139889" fill="#000000" fill-rule="nonzero">
+            <path d="M50,3 C75.916,3 97,24.084 97,50 C97,75.916 75.916,97 50,97 C24.084,97 3,75.916 3,50 C3,24.084 24.084,3 50,3 M50,0 C22.386,0 0,22.386 0,50 C0,77.614 22.386,100 50,100 C77.614,100 100,77.614 100,50 C100,22.386 77.614,0 50,0 L50,0 Z" id="Shape"></path>
+            {
+              props.checked ? <circle className={css.checked} id="Oval" cx="50" cy="50" r="35.5"></circle> : null
+            }
+          </g>
         </g>
       </svg>
+      {/*<svg className={props.className} width="14" height="14" xmlns="http://www.w3.org/2000/svg">*/}
+      {/*  <circle*/}
+      {/*    className={props.showAsRequired ? css.required : css.notChecked}*/}
+      {/*    cx="5"*/}
+      {/*    cy="19"*/}
+      {/*    r="6"*/}
+      {/*    transform="translate(2 -12)"*/}
+      {/*    strokeWidth="2"*/}
+      {/*    fill="none"*/}
+      {/*    fillRule="evenodd"*/}
+      {/*  />*/}
+
+      {/*  <g className={css.checked} transform="translate(2 -12)" fill="none" fillRule="evenodd">*/}
+      {/*    <circle strokeWidth="2" cx="5" cy="19" r="6" />*/}
+      {/*    <circle fill="#FFF" fillRule="nonzero" cx="5" cy="19" r="3" />*/}
+      {/*  </g>*/}
+      {/*</svg>*/}
     </div>
   )
 }
@@ -38,13 +49,15 @@ const BookingProductRadioButtonComponent = (props) => {
   const {
     rootClassName,
     className,
-    svgClassName,
     id,
     label,
     product,
     showAsRequired,
+    fieldMeta,
     ...rest
   } = props
+
+  console.log(props)
 
   const classes = classNames(rootClassName || css.root, className)
   const radioButtonProps = {
@@ -58,18 +71,38 @@ const BookingProductRadioButtonComponent = (props) => {
   const buildThumbnail = () => {
     return `${process.env.REACT_APP_IMGIX_URL}/${keys(product.photos)[0]}?fm=jpm&h=60&w=60&fit=crop`
   }
-
+  const required = (value) => (value ? undefined : 'Select a room')
   return (
     <span className={classes}>
       <FormSpy onChange={(e) => console.log(e)}/>
-      <Field {...radioButtonProps} />
+      <Field
+        {...radioButtonProps}
+        validate={required}
+      />
       <label htmlFor={id} className={css.label}>
-        <div className={css.radioButtonWrapper}>
-          <img src={buildThumbnail()} alt="" className={css.checkboxProductThumbnail}/>
-          <span className={css.textRoot}>{label}</span>
-          <IconRadioButton className={svgClassName} showAsRequired={showAsRequired} />
+        <div className={css.buttonContainer}>
+          <div className={css.radioButtonWrapper}>
+            <img src={buildThumbnail()} alt="" className={css.checkboxProductThumbnail}/>
+            <span className={css.textRoot}>{label}</span>
+          </div>
+          <div className={css.roomDetailsListWrapper}>
+            <ul className={css.roomDetailsList}>
+              {
+                product.beds
+                  ? <li>&#9679; <span className={css.productDetailText}>{product.beds.label}</span></li> : null
+              }
+              {
+                product.bathroom
+                  ? <li>&#9679; <span className={css.productDetailText}>{product.bathroom.label}</span></li> : null
+              }
+            </ul>
+            <div>
+              <IconRadioButton checked={fieldMeta.values.bookingProduct === product.id}/>
+            </div>
+          </div>
         </div>
       </label>
+      <ValidationError fieldMeta={fieldMeta}/>
     </span>
   )
 }

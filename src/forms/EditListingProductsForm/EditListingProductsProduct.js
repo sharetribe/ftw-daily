@@ -74,19 +74,19 @@ const EditListingProductsProduct = (props) => {
           options={[
             {
               value: 'one-queen',
-              label: 'One Queen Bed'
+              label: '1 Queen Bed'
             },
             {
               value: 'two-queens',
-              label: 'Two Queen Beds'
+              label: '2 Queen Beds'
             },
             {
               value: 'single-twin',
-              label: 'Single Twin Bed'
+              label: '1 Twin Bed'
             },
             {
               value: 'double-twins',
-              label: 'Two Twin Beds'
+              label: '2 Twin Beds'
             },
             {
               value: 'dorm',

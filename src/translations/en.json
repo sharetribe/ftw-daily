@@ -75,7 +75,7 @@
   "BookingDatesForm.productTitle": "Product type",
   "BookingDatesForm.roomType": "Room type",
   "BookingDatesForm.productPlaceholder": "Choose a type…",
-  "BookingDatesForm.roomTypePlaceholder": "Choose a room…",
+  "BookingDatesForm.roomTypePlaceholder": "Choose a room",
 
 
   "BookingDateRangeFilter.labelPlain": "Dates",

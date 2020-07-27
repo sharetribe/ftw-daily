@@ -11,7 +11,9 @@ import get from 'lodash/get'
 import BookingProductRadioButton
   from '../../components/BookingProductRadioButton/BookingProductRadioButton'
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl'
-import { required, bookingDatesRequired, composeValidators } from '../../util/validators'
+import {
+  required, bookingDatesRequired, bookingProductRequired, composeValidators
+} from '../../util/validators'
 import { START_DATE, END_DATE } from '../../util/dates'
 import { propTypes } from '../../util/types'
 import {
@@ -80,6 +82,8 @@ export class BookingDatesFormComponent extends Component {
             fetchTimeSlotsError,
             onChange
           } = fieldRenderProps
+
+          console.log(fieldRenderProps)
 
           const { publicData = {} } = listing.attributes
 
@@ -160,18 +164,11 @@ export class BookingDatesFormComponent extends Component {
           const productRequired = intl.formatMessage({
             id: 'BookingDatesForm.requiredDate',
           })
-          const productPlaceholder = intl.formatMessage({
-            id: 'BookingDatesForm.roomTypePlaceholder',
-          })
           const productTitle = intl.formatMessage({
-            id: 'BookingDatesForm.roomType',
+            id: 'BookingDatesForm.roomTypePlaceholder',
           })
 
           const products = listing.attributes.publicData && listing.attributes.publicData.products
-
-          const buildThumbnail = (product) => {
-            return `${process.env.REACT_APP_IMGIX_URL}/${keys(product.photos)[0]}?fm=jpm&h=60&w=60&fit=crop`
-          }
 
           return (
             <Form onSubmit={handleSubmit} className={classes}>
@@ -195,29 +192,30 @@ export class BookingDatesFormComponent extends Component {
                   bookingDatesRequired(startDateErrorMessage, endDateErrorMessage)
                 )}
               />
-              <FormSpy onChange={(e) => console.log(e)} />
-              <fieldset className={css.bookingProductsFieldSet}>
-                {
-                  products && products.length
-                    ? <ul>
-                      {
-                        products.map((prod) => {
-                          return (
-                            <BookingProductRadioButton
-                              id={prod.id}
-                              name="bookingProduct"
-                              label={prod.type}
-                              value={prod.id}
-                              showAsRequired={true}
-                              product={prod}
-                            />
-                          )
-                        })
-                      }
-                    </ul>
-                    : null
-                }
-              </fieldset>
+              {
+                products && products.length
+                  ? <ul className={css.bookingProductListWrapper}>
+                    <h4 style={{ fontWeight: 600 }}>{productTitle}</h4>
+                    {
+                      products.map((prod) => {
+                        return (
+                          <BookingProductRadioButton
+                            id={prod.id}
+                            name="bookingProduct"
+                            label={prod.type}
+                            value={prod.id}
+                            showAsRequired={true}
+                            product={prod}
+                            useMobileMargins
+                            validate={required(productRequired)}
+                            fieldMeta={fieldRenderProps}
+                          />
+                        )
+                      })
+                    }
+                  </ul>
+                  : null
+              }
               {timeSlotsError}
               {bookingInfo}
               <div className={submitButtonClasses}>

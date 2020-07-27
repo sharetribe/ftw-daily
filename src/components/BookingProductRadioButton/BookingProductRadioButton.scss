@@ -2,6 +2,7 @@
 
 .root {
   position: relative;
+  width: 100%;
 }
 
 .input {
@@ -16,8 +17,8 @@
     display: inline;
   }
 
-  &:checked + label .radioButtonWrapper {
-    border-color: var(--marketplaceColorDark);
+  &:checked + label .buttonContainer {
+    border-color: var(--marketplaceColor);
   }
 
   /* Highlight the borders if the checkbox is hovered, focused or checked */
@@ -42,6 +43,19 @@
   display: flex;
   align-items: center;
   padding: 0;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  border: solid 0.5px lightgrey;
+  border-radius: 4px;
+  padding: 10px;
+  cursor: pointer;
+  width: 100%;
 }
 
 .checkboxProductName {
@@ -82,10 +96,6 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-bottom: 20px;
-  border: solid 0.5px lightgrey;
-  border-radius: 4px;
-  padding: 10px;
 }
 
 .radioIconWrapper {
@@ -93,4 +103,30 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.roomDetailsListWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.roomDetailsList {
+  list-style: none; /* Remove default bullets */
+
+  li {
+    font-size: 12px;
+    color: var(--marketplaceColor)
+  }
+}
+
+.productDetailText {
+  color: var(--matterColor)
+}
+
+.iconRadioButton {
+  height: 25px;
+  width: 25px
 }

@@ -96,4 +96,14 @@
   padding: 0;
 }
 
+.bookingProductListWrapper {
+  margin-top: 0;
+}
+
+@media screen and (max-width: 550px) {
+  .bookingProductListWrapper {
+    margin: 0 24px 0 24px;
+  }
+}
+
 /*# sourceMappingURL=BookingDatesForm.css.map */
