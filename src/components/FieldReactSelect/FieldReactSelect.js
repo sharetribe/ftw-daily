@@ -29,6 +29,14 @@ const ReactSelectAdapter = (props) => {
       {...rest}
       searchable={searchable}
       styles={customStyles}
+      theme={(theme) => ({
+        ...theme,
+        colors: {
+          ...theme.colors,
+          primary25: '#5cbce0',
+          primary: 'black',
+        },
+      })}
     />
   )
 }
