@@ -27,6 +27,7 @@ const mapMarker = (mapsConfig) => {
 }
 
 const surfSpotMapMarker = (surfSpot, map) => {
+  console.log('surf marker')
   const element = document.createElement('div')
   element.style.backgroundColor = 'black'
   element.style.width = '20px'
@@ -46,6 +47,7 @@ const surfSpotMapMarker = (surfSpot, map) => {
 }
 
 const createSurfSpots = (metadata, map) => {
+  console.log('surf metadata', metadata)
   const surfSpots = _.get(metadata, 'surf.spots', [])
   surfSpots.map((ss) => surfSpotMapMarker(ss, map))
 }
@@ -130,7 +132,9 @@ class DynamicMapboxMap extends Component {
     if (!this.map) {
       return
     }
-
+    if (this.props.createSurf) {
+      createSurfSpots(this.props.metadata, this.map)
+    }
     const { center, zoom, mapsConfig } = this.props
     const { lat, lng } = center
     const position = [lng, lat]
@@ -139,8 +143,6 @@ class DynamicMapboxMap extends Component {
     if (zoom !== prevProps.zoom) {
       this.map.setZoom(this.props.zoom)
     }
-
-    console.log(center)
 
     const centerChanged = lat !== prevProps.center.lat || lng !== prevProps.center.lng
 
