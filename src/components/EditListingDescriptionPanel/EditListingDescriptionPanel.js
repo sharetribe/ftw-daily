@@ -1,16 +1,18 @@
-import React from 'react';
-import { bool, func, object, string } from 'prop-types';
-import classNames from 'classnames';
-import { FormattedMessage } from '../../util/reactIntl';
-import { ensureOwnListing } from '../../util/data';
-import { ListingLink } from '../../components';
-import { LISTING_STATE_DRAFT } from '../../util/types';
-import { EditListingDescriptionForm } from '../../forms';
-import config from '../../config';
+import React from 'react'
+import {
+  bool, func, object, string
+} from 'prop-types'
+import classNames from 'classnames'
+import { FormattedMessage } from '../../util/reactIntl'
+import { ensureOwnListing } from '../../util/data'
+import { ListingLink } from '..'
+import { LISTING_STATE_DRAFT } from '../../util/types'
+import { EditListingDescriptionForm } from '../../forms'
+import config from '../../config'
 
-import css from './EditListingDescriptionPanel.css';
+import css from './EditListingDescriptionPanel.css'
 
-const EditListingDescriptionPanel = props => {
+const EditListingDescriptionPanel = (props) => {
   const {
     className,
     rootClassName,
@@ -23,13 +25,13 @@ const EditListingDescriptionPanel = props => {
     panelUpdated,
     updateInProgress,
     errors,
-  } = props;
+  } = props
 
-  const classes = classNames(rootClassName || css.root, className);
-  const currentListing = ensureOwnListing(listing);
-  const { description, title, publicData } = currentListing.attributes;
+  const classes = classNames(rootClassName || css.root, className)
+  const currentListing = ensureOwnListing(listing)
+  const { description, title, publicData } = currentListing.attributes
 
-  const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
+  const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT
   const panelTitle = isPublished ? (
     <FormattedMessage
       id="EditListingDescriptionPanel.title"
@@ -37,7 +39,7 @@ const EditListingDescriptionPanel = props => {
     />
   ) : (
     <FormattedMessage id="EditListingDescriptionPanel.createListingTitle" />
-  );
+  )
 
   return (
     <div className={classes}>
@@ -47,6 +49,7 @@ const EditListingDescriptionPanel = props => {
         initialValues={{
           title,
           description,
+          heroPhotoId: publicData.heroPhotoId,
           category: publicData.category,
           surf: publicData.surf,
           vibe: publicData.vibe,
@@ -56,8 +59,10 @@ const EditListingDescriptionPanel = props => {
           video: publicData.video
         }}
         saveActionMsg={submitButtonText}
-        onSubmit={values => {
-          const { title, description, category, surf, vibe, community, wifi, retreat, video } = values;
+        onSubmit={(values) => {
+          const {
+            title, description, category, surf, vibe, community, wifi, retreat, video
+          } = values
           const updateValues = {
             title: title.trim(),
             description,
@@ -70,9 +75,9 @@ const EditListingDescriptionPanel = props => {
               retreat,
               video
             },
-          };
+          }
 
-          onSubmit(updateValues);
+          onSubmit(updateValues)
         }}
         onChange={onChange}
         disabled={disabled}
@@ -81,17 +86,18 @@ const EditListingDescriptionPanel = props => {
         updateInProgress={updateInProgress}
         fetchErrors={errors}
         categories={config.custom.categories}
+        listing={currentListing}
       />
     </div>
-  );
-};
+  )
+}
 
 EditListingDescriptionPanel.defaultProps = {
   className: null,
   rootClassName: null,
   errors: null,
   listing: null,
-};
+}
 
 EditListingDescriptionPanel.propTypes = {
   className: string,
@@ -108,6 +114,6 @@ EditListingDescriptionPanel.propTypes = {
   panelUpdated: bool.isRequired,
   updateInProgress: bool.isRequired,
   errors: object.isRequired,
-};
+}
 
-export default EditListingDescriptionPanel;
+export default EditListingDescriptionPanel

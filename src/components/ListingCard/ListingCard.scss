@@ -28,6 +28,7 @@
 .aspectWrapper {
   padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
   background: var(--matterColorNegative); /* Loading BG color */
+  border-radius: 8px;
 }
 
 .rootForImage {

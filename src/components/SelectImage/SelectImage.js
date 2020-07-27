@@ -14,12 +14,13 @@ import css from './SelectImage.css'
 
 const SelectImage = (props) => {
   const {
-    userId,
     rootKeySegments = [],
     onUpload,
     onDelete,
     disabled,
-    imagesToDisplay = []
+    imagesToDisplay = [],
+    showThumbnails = true,
+    onProgressCallback
   } = props
 
   const buildImagesToDisplay = () => {
@@ -42,7 +43,9 @@ const SelectImage = (props) => {
 
     await uploadImage(path, file.file)
     onUpload(file.name)
-    setWorkingFiles(workingFiles.filter((f) => f !== file.name))
+    const wf = workingFiles.filter((f) => f !== file.name)
+    setWorkingFiles(wf)
+    onProgressCallback(wf)
   }
 
   const onImageDelete = async (fileName) => {
@@ -69,7 +72,9 @@ const SelectImage = (props) => {
           name: id
         }
       })
-      setWorkingFiles([...workingFiles, ...keys])
+      const wf = [...workingFiles, ...keys]
+      setWorkingFiles(wf)
+      onProgressCallback(wf)
       a.map(async (f, idx) => {
         await onImageUploaded(f)
       })
@@ -122,7 +127,7 @@ const SelectImage = (props) => {
         }
       </div>
       <aside className={css.thumbContainer}>
-        {thumbs}
+        { showThumbnails ? thumbs : null}
       </aside>
     </section>
   )

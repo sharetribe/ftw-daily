@@ -36,6 +36,7 @@ export { default as IconNetwork } from './IconNetwork/IconNetwork'
 export { default as IconPeople } from './IconPeople/IconPeople'
 export { default as IconSuccess } from './IconSuccess/IconSuccess'
 export { default as SelectImage } from './SelectImage/SelectImage'
+export { default as ListingEditWowHero } from './ListingEditWowHero/ListingEditWowHero'
 
 // Other independent components
 export { default as ExternalLink } from './ExternalLink/ExternalLink'

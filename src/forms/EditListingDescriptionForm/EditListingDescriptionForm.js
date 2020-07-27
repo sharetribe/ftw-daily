@@ -6,7 +6,7 @@ import _ from 'lodash'
 import { compose } from 'redux'
 import { Form as FinalForm } from 'react-final-form'
 import classNames from 'classnames'
-import SelectImage from '../../components/SelectImage/SelectImage'
+import ListingEditWowHero from '../../components/ListingEditWowHero/ListingEditWowHero';
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl'
 import { propTypes } from '../../util/types'
 import {
@@ -38,7 +38,8 @@ const EditListingDescriptionFormComponent = (props) => (
         updated,
         updateInProgress,
         fetchErrors,
-        values
+        values,
+        form,
       } = formRenderProps
 
       const titleMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.title' })
@@ -174,6 +175,11 @@ const EditListingDescriptionFormComponent = (props) => (
           {errorMessageCreateListingDraft}
           {errorMessageUpdateListing}
           {errorMessageShowListing}
+          <ListingEditWowHero
+            listing={_.get(props, 'listing', {})}
+            form={form}
+            values={values}
+          />
           <FieldTextInput
             id="title"
             name="title"
