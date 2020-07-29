@@ -96,15 +96,15 @@ const PayoutDetailsIndividualAccountComponent = props => {
       <p>In order to receive payments, you must specify your bank card details.</p> 
       <div className={css.radioButtonRow}>
               <FieldRadioButton
-                id="bankAccountTokenDisabled"
-                name="bankAccountToken"
+                id="bankAccountTokenStripeDisabled"
+                name={"bankAccountTokenStripeEnabled"}
                 label='Later'
                 value='Later'
                 onClick={() => setStripeFormVisibility(false)}
               />
               <FieldRadioButton
-                id="bankAccountTokenEnabled"
-                name="bankAccountToken"
+                id="bankAccountTokenStripeEnabled"
+                name={"bankAccountTokenStripeEnabled"}
                 label='Enable now'
                 value='Enable now'
                 onClick={() => setStripeFormVisibility(true)}
