@@ -32,7 +32,7 @@
     "lodash": "^4.17.19",
     "mapbox-gl-multitouch": "^1.0.3",
     "moment": "^2.22.2",
-    "object.entries": "^1.1.1",
+    "object.entries": "^1.1.2",
     "object.values": "^1.1.1",
     "path-to-regexp": "^3.0.0",
     "prop-types": "^15.7.2",
