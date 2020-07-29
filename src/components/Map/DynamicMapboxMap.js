@@ -27,7 +27,6 @@ const mapMarker = (mapsConfig) => {
 }
 
 const surfSpotMapMarker = (surfSpot, map) => {
-  console.log('surf marker')
   const element = document.createElement('div')
   element.style.backgroundColor = 'black'
   element.style.width = '20px'
@@ -47,7 +46,6 @@ const surfSpotMapMarker = (surfSpot, map) => {
 }
 
 const createSurfSpots = (metadata, map) => {
-  console.log('surf metadata', metadata)
   const surfSpots = _.get(metadata, 'surf.spots', [])
   surfSpots.map((ss) => surfSpotMapMarker(ss, map))
 }

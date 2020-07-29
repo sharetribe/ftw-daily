@@ -29,8 +29,6 @@ const EditListingProductsPanel = (props) => {
     ready
   } = props
 
-  console.log(props)
-
   const classes = classNames(rootClassName || css.root, className)
   const currentListing = ensureOwnListing(listing)
   const { publicData } = currentListing.attributes
@@ -71,7 +69,6 @@ const EditListingProductsPanel = (props) => {
         }}
         onImageSubmit={(values, prods) => {
           const { addImage, ...updateValues } = values
-          console.log(updateValues)
           onSubmit({
             ...updateValues,
             publicData: {

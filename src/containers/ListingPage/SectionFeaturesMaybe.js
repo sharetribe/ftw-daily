@@ -1,16 +1,16 @@
-import React from 'react';
-import { FormattedMessage } from '../../util/reactIntl';
-import { PropertyGroup } from '../../components';
+import React from 'react'
+import { FormattedMessage } from '../../util/reactIntl'
+import { PropertyGroup } from '../../components'
 
-import css from './ListingPage.css';
+import css from './ListingPage.css'
 
-const SectionFeaturesMaybe = props => {
-  const { options, publicData } = props;
+const SectionFeaturesMaybe = (props) => {
+  const { options, publicData } = props
   if (!publicData) {
-    return null;
+    return null
   }
 
-  const selectedOptions = publicData && publicData.amenities ? publicData.amenities : [];
+  const selectedOptions = publicData && publicData.amenities ? publicData.amenities : []
   return (
     <div className={css.sectionFeatures}>
       <h2 className={css.featuresTitle}>
@@ -23,7 +23,7 @@ const SectionFeaturesMaybe = props => {
         twoColumns={true}
       />
     </div>
-  );
-};
+  )
+}
 
-export default SectionFeaturesMaybe;
+export default SectionFeaturesMaybe

@@ -549,15 +549,40 @@ export const requestPublishListingDraft = (listingId) => (dispatch, getState, sd
   })
 }
 
+export const asyncRequestImageUpload = (actionPayload) => {
+  const { id } = actionPayload
+  return (dispatch, getState, sdk) => {
+    dispatch(uploadImage(actionPayload))
+    return sdk.images
+    .upload({ image: actionPayload.file })
+    .then((resp) => {
+      console.log(resp)
+      dispatch(uploadImageSuccess({ data: { id, imageId: resp.data.data.id } }))
+      return resp.data.data.id
+    })
+    .catch((e) => {
+      console.log(e)
+      dispatch(uploadImageError({ id, error: storableError(e) }))
+    })
+  }
+}
+
 // Images return imageId which we need to map with previously generated temporary id
 export function requestImageUpload(actionPayload) {
   return (dispatch, getState, sdk) => {
     const { id } = actionPayload
     dispatch(uploadImage(actionPayload))
+    console.log(actionPayload)
     return sdk.images
     .upload({ image: actionPayload.file })
-    .then((resp) => dispatch(uploadImageSuccess({ data: { id, imageId: resp.data.data.id } })))
-    .catch((e) => dispatch(uploadImageError({ id, error: storableError(e) })))
+    .then((resp) => {
+      console.log(resp)
+      dispatch(uploadImageSuccess({ data: { id, imageId: resp.data.data.id } }))
+    })
+    .catch((e) => {
+      console.log(e)
+      dispatch(uploadImageError({ id, error: storableError(e) }))
+    })
   }
 }
 

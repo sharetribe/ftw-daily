@@ -52,7 +52,7 @@ const BookingProductRadioButtonComponent = (props) => {
   }
 
   const buildThumbnail = () => {
-    return `${process.env.REACT_APP_IMGIX_URL}/${keys(product.photos)[0]}?fm=jpm&h=60&w=60&fit=crop`
+    return `${process.env.REACT_APP_IMGIX_URL}/${keys(product.photos)[0]}?fm=jpm&auto=format&h=60&w=60&fit=crop`
   }
   const required = (value) => (value ? undefined : 'Select a room')
   return (

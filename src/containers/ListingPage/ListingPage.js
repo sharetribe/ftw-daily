@@ -446,7 +446,6 @@ export class ListingPageComponent extends Component {
                   />
                   <SectionDescriptionMaybe description={description} />
                   <SectionVideoMaybe video={publicData.video} />
-                  <SectionFeaturesMaybe options={amenitiesConfig} publicData={publicData} />
                   <SectionCommunityMaybe publicData={publicData} />
                   <SectionVibeMaybe publicData={publicData} />
                   <SectionSurfMaybe publicData={publicData} metadata={metadata} />
@@ -463,6 +462,8 @@ export class ListingPageComponent extends Component {
                     </>
                     : null
                   }
+                  <SectionRetreatMaybe publicData={publicData} />
+                  <SectionFeaturesMaybe options={amenitiesConfig} publicData={publicData} />
                   <SectionHostMaybe
                     title={title}
                     listing={currentListing}
@@ -476,7 +477,6 @@ export class ListingPageComponent extends Component {
                     currentUser={currentUser}
                     onManageDisableScrolling={onManageDisableScrolling}
                   />
-                  <SectionRetreatMaybe publicData={publicData} />
                   <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
                 </div>
                 <BookingPanel

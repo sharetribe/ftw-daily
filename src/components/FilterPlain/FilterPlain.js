@@ -53,8 +53,6 @@ class FilterPlainComponent extends Component {
     } = this.props
     const classes = classNames(rootClassName || css.root, className)
 
-    console.log(icon)
-
     const labelClass = isSelected ? css.filterLabelSelected : css.filterLabel
 
     return (

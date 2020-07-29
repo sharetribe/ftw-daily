@@ -82,8 +82,6 @@ class PageComponent extends Component {
       updated,
     } = this.props
 
-    console.log(this.props)
-
     const classes = classNames(rootClassName || css.root, className, {
       [css.scrollingDisabled]: scrollingDisabled,
     })

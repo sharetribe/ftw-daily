@@ -1,15 +1,22 @@
 import _ from 'lodash'
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { updateListingAdHoc } from '../../containers/EditListingPage/EditListingPage.duck'
+import {
+  requestImageUpload,
+  updateListingAdHoc,
+} from '../../containers/EditListingPage/EditListingPage.duck'
 import IconSpinner from '../IconSpinner/IconSpinner'
+import ResponsiveImage from '../ResponsiveImage/ResponsiveImage'
 import SelectImage from '../SelectImage/SelectImage'
+import { types as sdkTypes } from '../../util/sdkLoader'
 
 import css from './ListingEditWowHero.css'
 
+const { UUID } = sdkTypes
+
 const ListingEditWowHero = (props) => {
   const [tempImageId, setTempImageId] = useState('5ee3b41b-72d7-4d66-b50d-71508891f5cb')
-  const [isUploading, setIsUploading] = useState([])
+  const [isUploading, setIsUploading] = useState(false)
 
   const {
     listing,
@@ -17,51 +24,47 @@ const ListingEditWowHero = (props) => {
     values
   } = props
 
-  const publicData = _.get(listing, 'attributes.publicData')
-
-  const addImageToProductAndComposeUpdateObject = (photoId, params = {}) => {
+  const addImageToProductAndComposeUpdateObject = async (photoId) => {
+    const images = (listing.images || []).map((img) => img.id)
+    images.unshift(new UUID(photoId))
     if (listing.id) {
-      props.updateListingAdHoc({
+      await props.updateListingAdHoc({
         id: listing.id.uuid,
         publicData: {
           heroImage: {
             id: photoId
           }
-        }
+        },
+        images
       })
     } else {
       setTempImageId(photoId)
     }
   }
 
-  const buildImageUrl = () => {
-    let width
-    let height
-    if (window) {
-      if (window.innerWidth <= 1024) {
-        width = window.innerWidth
-        height = 500
-      } else {
-        width = 836
-        height = Math.round((width / 16) * 9)
-      }
-    }
-    if (publicData.heroImage) {
-      return `${process.env.REACT_APP_IMGIX_URL}/${publicData.heroImage.id}?fm=jpm&h=${height}&w=${width}&fit=crop`
-    }
-    return `${process.env.REACT_APP_IMGIX_URL}/${tempImageId}?fm=jpm&h=${height}&w=${width}&fit=crop`
-  }
+  const firstImage
+    = listing.images && listing.images.length > 0 ? listing.images[0] : null
 
   return (
     <div>
       <div className={css.heroContainer}>
-        <img className={css.heroImage} src={buildImageUrl()} alt="Hero image for demonstration"/>
+        <ResponsiveImage
+          rootClassName={css.rootForImage}
+          alt={'The hero image that will be the first thing users see in searches and on the listing page'}
+          image={firstImage}
+          variants={[
+            'landscape-crop',
+            'landscape-crop2x',
+            'landscape-crop4x',
+            'landscape-crop6x',
+          ]}
+        />
         <div className={css.heroTextContainer}>
           <h1 className={css.heroTitle}>{values.title || 'Titles On Titles'}</h1>
           <h2 className={css.heroDescription}>{values.description || 'Set the scene with a reason why you love where you live'}</h2>
         </div>
         {
-          isUploading.length
+          isUploading
             ? <div className={css.spinnerContainer}>
               <IconSpinner />
             </div>
@@ -73,7 +76,10 @@ const ListingEditWowHero = (props) => {
           addImageToProductAndComposeUpdateObject(photoId)
         }}
         showThumbnails={false}
-        onProgressCallback={setIsUploading}
+        onProgressCallback={(wfs) => {
+          console.log(wfs)
+          setIsUploading(wfs.length)
+        }}
       />
     </div>
   )
@@ -81,7 +87,8 @@ const ListingEditWowHero = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateListingAdHoc: (update) => dispatch(updateListingAdHoc(update))
+    updateListingAdHoc: (update) => dispatch(updateListingAdHoc(update)),
+    uploadImage: (params) => dispatch(requestImageUpload(params))
   }
 }
 

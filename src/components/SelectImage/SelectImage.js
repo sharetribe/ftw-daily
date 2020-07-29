@@ -5,7 +5,11 @@ import { injectIntl } from 'react-intl'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { v4 as uuid } from 'uuid'
-import { updateListingAdHoc } from '../../containers/EditListingPage/EditListingPage.duck'
+import {
+  asyncRequestImageUpload,
+  requestImageUpload,
+  updateListingAdHoc,
+} from '../../containers/EditListingPage/EditListingPage.duck'
 import { buildKey, deleteImage, uploadImage } from '../../util/s3_storage'
 import RemoveImageButton from '../AddImages/RemoveImageButton'
 import IconSpinner from '../IconSpinner/IconSpinner'
@@ -20,13 +24,14 @@ const SelectImage = (props) => {
     disabled,
     imagesToDisplay = [],
     showThumbnails = true,
-    onProgressCallback
+    onProgressCallback,
+    uploadImageToST
   } = props
 
   const buildImagesToDisplay = () => {
     return imagesToDisplay.map((img) => ({
       name: img,
-      preview: `https://coworksurf.imgix.net/public/${img}?fm=jpm&h=100&fit=clip`
+      preview: `https://coworksurf.imgix.net/public/${img}?fm=jpm&auto=format&h=100&fit=clip`
     }))
   }
 
@@ -76,17 +81,22 @@ const SelectImage = (props) => {
       setWorkingFiles(wf)
       onProgressCallback(wf)
       a.map(async (f, idx) => {
-        await onImageUploaded(f)
+        const s = await uploadImageToST({ file: f.file, id: f.name })
+        await props.onUpload(s.uuid)
+        const n = _.without(workingFiles, f.name)
+        setWorkingFiles(n)
+        onProgressCallback(n)
       })
-      setFiles(files.concat(a.map((file, idx) => Object.assign(file, {
-        preview: URL.createObjectURL(file.file),
-        name: file.name
-      }))))
+      if (showThumbnails) {
+        setFiles(files.concat(a.map((file, idx) => Object.assign(file, {
+          preview: URL.createObjectURL(file.file),
+          name: file.name
+        }))))
+      }
     },
     disabled
   })
 
-  console.log(workingFiles)
 
   const thumbs = files.map((file) => {
     return (
@@ -140,10 +150,16 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    uploadImageToST: (params) => dispatch(asyncRequestImageUpload(params))
+  }
+}
+
 const SelectImageComponent = compose(
   connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
   ),
   injectIntl
 )(SelectImage)

@@ -1,54 +1,56 @@
-import React, { Component } from 'react';
-import { string, func } from 'prop-types';
-import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
-import classNames from 'classnames';
-import { lazyLoadWithDimensions } from '../../util/contextHelpers';
-import { LINE_ITEM_DAY, LINE_ITEM_NIGHT, propTypes } from '../../util/types';
-import { ensureListing, ensureUser } from '../../util/data';
-import { richText } from '../../util/richText';
-import { createSlug } from '../../util/urlHelpers';
-import config from '../../config';
-import { NamedLink, ResponsiveImage } from '../../components';
-import { priceRangeData, priceData } from '../../util/pricing';
+import React, { Component } from 'react'
+import { string, func } from 'prop-types'
+import classNames from 'classnames'
+import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl'
+import { lazyLoadWithDimensions } from '../../util/contextHelpers'
+import { LINE_ITEM_DAY, LINE_ITEM_NIGHT, propTypes } from '../../util/types'
+import { ensureListing, ensureUser } from '../../util/data'
+import { richText } from '../../util/richText'
+import { createSlug } from '../../util/urlHelpers'
+import config from '../../config'
+import { NamedLink, ResponsiveImage } from '..'
+import { priceRangeData, priceData } from '../../util/pricing'
 
-import css from './ListingCard.css';
+import css from './ListingCard.css'
 
-const MIN_LENGTH_FOR_LONG_WORDS = 10;
+const MIN_LENGTH_FOR_LONG_WORDS = 10
 
 class ListingImage extends Component {
   render() {
-    return <ResponsiveImage {...this.props} />;
+    return <ResponsiveImage {...this.props} />
   }
 }
-const LazyImage = lazyLoadWithDimensions(ListingImage, { loadAfterInitialRendering: 3000 });
+const LazyImage = lazyLoadWithDimensions(ListingImage, { loadAfterInitialRendering: 3000 })
 
-export const ListingCardComponent = props => {
-  const { className, rootClassName, intl, listing, renderSizes, setActiveListing } = props;
-  const classes = classNames(rootClassName || css.root, className);
-  const currentListing = ensureListing(listing);
-  const id = currentListing.id.uuid;
-  const { title = '', price, publicData = {} } = currentListing.attributes;
-  const slug = createSlug(title);
-  const author = ensureUser(listing.author);
-  const authorName = author.attributes.profile.displayName;
-  const firstImage =
-    currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
+export const ListingCardComponent = (props) => {
+  const {
+    className, rootClassName, intl, listing, renderSizes, setActiveListing
+  } = props
+  const classes = classNames(rootClassName || css.root, className)
+  const currentListing = ensureListing(listing)
+  const id = currentListing.id.uuid
+  const { title = '', price, publicData = {} } = currentListing.attributes
+  const slug = createSlug(title)
+  const author = ensureUser(listing.author)
+  const authorName = author.attributes.profile.displayName
+  const firstImage
+    = currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null
 
   // Use product prices if available and fallback to price
-  const { formattedPrice, priceTitle } =
-    publicData.products && publicData.products.length ?
-    priceRangeData(publicData.products, intl) :
-    priceData(price, intl);
+  const { formattedPrice, priceTitle }
+    = publicData.products && publicData.products.length
+      ? priceRangeData(publicData.products, intl)
+      : priceData(price, intl)
 
-  const unitType = config.bookingUnitType;
-  const isNightly = unitType === LINE_ITEM_NIGHT;
-  const isDaily = unitType === LINE_ITEM_DAY;
+  const unitType = config.bookingUnitType
+  const isNightly = unitType === LINE_ITEM_NIGHT
+  const isDaily = unitType === LINE_ITEM_DAY
 
   const unitTranslationKey = isNightly
     ? 'ListingCard.perNight'
     : isDaily
-    ? 'ListingCard.perDay'
-    : 'ListingCard.perUnit';
+      ? 'ListingCard.perDay'
+      : 'ListingCard.perUnit'
 
   return (
     <NamedLink className={classes} name="ListingPage" params={{ id, slug }}>
@@ -89,15 +91,15 @@ export const ListingCardComponent = props => {
         </div>
       </div>
     </NamedLink>
-  );
-};
+  )
+}
 
 ListingCardComponent.defaultProps = {
   className: null,
   rootClassName: null,
   renderSizes: null,
   setActiveListing: () => null,
-};
+}
 
 ListingCardComponent.propTypes = {
   className: string,
@@ -109,6 +111,6 @@ ListingCardComponent.propTypes = {
   renderSizes: string,
 
   setActiveListing: func,
-};
+}
 
-export default injectIntl(ListingCardComponent);
+export default injectIntl(ListingCardComponent)

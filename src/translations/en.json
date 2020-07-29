@@ -153,7 +153,7 @@
   "EditListingDescriptionForm.categoryPlaceholder": "Choose a type…",
   "EditListingDescriptionForm.categoryRequired": "You need to select a category for your space.",
   "EditListingDescriptionForm.createListingDraftError": "Failed to create a draft listing. Please try again.",
-  "EditListingDescriptionForm.description": "About the space",
+  "EditListingDescriptionForm.description": "Who we are",
   "EditListingDescriptionForm.descriptionPlaceholder": "What's life like at your space? Why should people care? Why can this be home for a month? Why does it exist?",
   "EditListingDescriptionForm.descriptionRequired": "A description is required.",
   "EditListingDescriptionForm.maxLength": "Must be {maxLength} characters or less",
