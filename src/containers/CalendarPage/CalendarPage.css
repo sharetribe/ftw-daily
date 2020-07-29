@@ -24,15 +24,15 @@
   }
   .ridingTitle {
     font-weight: 600;
-    font-size: 24px;
+    font-size: 18px;
     line-height: 30px;
     letter-spacing: -0.2px;
   }
   .ridingProvider {
-    color: #923395;
+    /* color: #923395; */
     font-weight: 400;
-    font-size: 13px;
-    line-height: 18px;
+    font-size: inherit;
+    line-height: inherit;
     letter-spacing: -0.1px;
   }
 

@@ -58,7 +58,7 @@ export const txState = (intl, tx, type) => {
   if (txIsEnquired(tx)) {
     return {
       nameClassName: isOrder ? css.nameNotEmphasized : css.nameEmphasized,
-      bookingClassName: css.bookingActionNeeded,
+      bookingClassName: css.bookingNoActionNeeded,
       lastTransitionedAtClassName: css.lastTransitionedAtEmphasized,
       stateClassName: css.stateActionNeeded,
       state: intl.formatMessage({
@@ -78,7 +78,7 @@ export const txState = (intl, tx, type) => {
         }
       : {
           nameClassName: css.nameEmphasized,
-          bookingClassName: css.bookingActionNeeded,
+          bookingClassName: css.bookingNoActionNeeded,
           lastTransitionedAtClassName: css.lastTransitionedAtEmphasized,
           stateClassName: css.stateActionNeeded,
           state: intl.formatMessage({
@@ -206,7 +206,6 @@ export const InboxItem = props => {
   const isSaleNotification = !isOrder && txIsRequested(tx);
   const rowNotificationDot = isSaleNotification ? <div className={css.notificationDot} /> : null;
   const lastTransitionedAt = formatDate(intl, tx.attributes.lastTransitionedAt);
-  
   const linkClasses = classNames(css.itemLink, {
     [css.bannedUserLink]: isOtherUserBanned,
   });

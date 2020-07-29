@@ -20,6 +20,7 @@ import {
   Footer,
   ResponsiveImage,
   CalendarWrapper,
+  NamedLink,
 } from '../../components';
 import { TopbarContainer } from '..';
 
@@ -422,9 +423,13 @@ export class CalendarPageComponent extends Component {
       const data = JSON.parse(trs.attributes.protectedData.providerData)
       const title = data.listingData.title
       const firstImage = data.listingData.img
-        
+      
       return (
-        <div className={css.ridingList} onClick={() => this.selectAcceptedTransaction(trs)} key={index}>
+        <React.Fragment>
+          <div className={css.ridingTitle}>
+            Deine Reisen mit <NamedLink name="ProfilePage" params={{ id: data.providerId.uuid }}>{data.provider.split(" ").splice(0,1).join("")}</NamedLink>
+           </div> 
+          <div className={css.ridingList} onClick={() => this.selectAcceptedTransaction(trs)} key={index}>
           <LazyImage
               rootClassName={null}
               alt={title}
@@ -432,15 +437,9 @@ export class CalendarPageComponent extends Component {
               variants={['landscape-crop', 'landscape-crop2x']}
               sizes={"(max-width: 767px) 100vw, (max-width: 1023px) 50vw, (max-width: 1920px) 31.25vw, 20.833333333333332vw"}
             />
-            <div>
-              <div className={css.ridingTitle}>
-                {title}
-              </div>
-              <div className={css.ridingProvider}>
-                Von {data.provider.split(" ").splice(0,1).join("")}
-              </div>
-            </div>
-        </div>
+
+          </div>
+        </React.Fragment>
       )
     }
     catch(e) {}
@@ -489,7 +488,7 @@ export class CalendarPageComponent extends Component {
                 <div style={{'filter': loadingStarted ? 'blur(4px)' : 'initial'}}>
                   <div className={css.pageTitleWrapper}>
                     <h1 className={css.calendarPageTitle}>
-                      Zeitplan Deiner Pferde
+                      Zeitplan Deiner Pferde  
                     </h1>
                     {acceptedTransactionSelected && ( <button className={css.contactButton} onClick={this.resetAcceptedTransaction}>Zurück zu den Angeboten</button> )}
                   </div>
