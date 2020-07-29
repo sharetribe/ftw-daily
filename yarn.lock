@@ -9367,10 +9367,10 @@ react-fast-compare@^3.0.1:
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-3.1.1.tgz#0becf31e3812fa70dc231e259f40d892d4767900"
   integrity sha512-SCsAORWK59BvauR2L1BTdjQbJcSGJJz03U0awektk2hshLKrITDDFTlgGCqIZpTDlPC/NFlZee6xTMzXPVLiHw==
 
-react-final-form-arrays@^3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/react-final-form-arrays/-/react-final-form-arrays-3.1.1.tgz#39d23e7ede966e418cad209e8fde46da1d603e99"
-  integrity sha512-e6S1x9597cvI4QPniOPmllXXandDAqCCuBo4AvXstZYgcV8whsqzk8aCrmQEy6eEfy2tEhvn6f4VI1GY+JBRsg==
+react-final-form-arrays@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/react-final-form-arrays/-/react-final-form-arrays-3.1.2.tgz#391ceee29d866f2128c807b510c6a17ff4dc72cc"
+  integrity sha512-ds1FUS8s3AnfbvfmBTPnjijS7veKBr6DrWOGQzDI7grE4OosVWOREwd2ZUkz3HPB3wXQcNWsqyDuQDBSMGUr2g==
   dependencies:
     "@babel/runtime" "^7.4.5"
 
