@@ -466,7 +466,7 @@ export class TransactionPanelComponent extends Component {
 
             <PanelHeading
               panelHeadingState={stateData.headingState}
-              transactionRole="provider"
+              transactionRole={transactionRole}
               providerName={authorDisplayName}
               customerName={customerDisplayName}
               isCustomerBanned={isCustomerBanned}

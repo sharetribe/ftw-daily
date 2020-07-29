@@ -568,16 +568,15 @@ export const createStripeIndividualAccount = (payoutDetails, individualConfig, s
   const { country, individual } = payoutDetails;
   let stripeAccount;
   dispatch(stripeAccountCreateRequest());    
-
   return stripe
     .createToken('account', accountTokenParamsForIndividual(individual, individualConfig))
     .then(response => {
       const accountToken = response.token.id;
-      const bankAccountToken = bankAccountTokenParams(individual);     
+      const bankAccountToken = bankAccountTokenParams(individual); 
       const stripeAccountParams = {
         requestedCapabilities: ["transfers", "card_payments"],
         accountToken,
-        bankAccountToken,
+        //bankAccountToken,
         country,
           // business_profile: {
           //       mcc: "4121",
@@ -587,6 +586,9 @@ export const createStripeIndividualAccount = (payoutDetails, individualConfig, s
         //country,- delete
         ...businessProfileParams(individual, individualConfig),
       };
+      if(bankAccountToken) {
+        stripeAccountParams.bankAccountToken = bankAccountToken
+      }
       return sdk.stripeAccount.create(stripeAccountParams, { expand: true });
       //return sdk.stripeAccount.update(stripeAccountParams, { expand: true });
     })
@@ -612,7 +614,7 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
   if (typeof window === 'undefined' || !window.Stripe) {
     throw new Error('Stripe must be loaded for submitting PayoutPreferences');
   }
-
+  console.log("payoutDetails ", payoutDetails)
   const stripe = window.Stripe(config.stripe.publishableKey);
 
   const country = payoutDetails.country;

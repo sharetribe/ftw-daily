@@ -333,6 +333,7 @@
 }
 
 .stateActionNeeded {
+  white-space: nowrap;
   font-weight: var(--fontWeightSemiBold);
   color: var(--attentionColor);
 }
@@ -359,7 +360,7 @@
 }
 
 .bookingActionNeeded {
-  color: var(--matterColor);
+  /* color: var(--matterColor); */
   margin-top: 4px;
 
   @media (--viewportMedium) {
