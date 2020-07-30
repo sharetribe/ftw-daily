@@ -31,6 +31,7 @@ const ListingHero = (props) => {
         variants={[
           'scaled-medium',
           'scaled-large',
+          'scaled-xlarge',
         ]}
       />
       <div className={css.heroTextContainer}>
