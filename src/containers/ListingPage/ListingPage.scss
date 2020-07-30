@@ -39,10 +39,6 @@
   @media (--viewportMedium) {
     padding: 0;
   }
-
-  @media (--viewportLarge) {
-    padding: 36px 36px 0 36px;
-  }
 }
 
 /* Firefox doesn't support image aspect ratio inside flexbox */
@@ -309,6 +305,7 @@
 
   @media (--viewportMedium) {
     display: flex;
+    flex-direction: column;
     margin-bottom: 24px;
   }
 }
@@ -369,7 +366,7 @@
 
   @media (--viewportMedium) {
     margin-top: 0;
-    margin-bottom: 6px;
+    margin-bottom: 0;
   }
 }
 
@@ -414,10 +411,13 @@
   @apply --marketplaceH4FontStyles;
   margin-top: 7px;
   margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
 
   @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 0;
+    display: inline;
     color: var(--matterColor);
   }
 }
@@ -740,4 +740,77 @@
   font-size: 12px;
   margin: 0;
   padding: 0
+}
+
+.heroContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 20px;
+  min-height: 300px;
+}
+
+.heroTextContainer {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+
+  @media (--viewportMedium) {
+    padding: 20px;
+  }
+}
+
+.heroTitle {
+  color: white;
+  z-index: 2;
+  font-weight: 700;
+  margin: 0;
+}
+
+.heroDescription {
+  color: white;
+  z-index: 2;
+  font-size: 20px;
+
+  @media (--viewportMedium) {
+    top: 20px;
+    font-size: 24px;
+  }
+}
+
+.heroImage {
+  /* Layout - image will take space defined by aspect ratio wrapper */
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 550px;
+  object-fit: cover;
+  transition: var(--transitionStyleButton);
+
+  @media (--viewportMedium) {
+    position: static;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    height: calc(0.41 * 100vw);
+    width: 100%;
+    max-height: 50vh;
+    object-fit: cover;
+
+    &:hover {
+      transform: scale(1.005);
+      box-shadow: var(--boxShadowListingCard);
+    }
+  }
 }

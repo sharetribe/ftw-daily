@@ -50,6 +50,7 @@ const ListingEditWowHero = (props) => {
       <div className={css.heroContainer}>
         <ResponsiveImage
           rootClassName={css.rootForImage}
+          className={css.heroImage}
           alt={'The hero image that will be the first thing users see in searches and on the listing page'}
           image={firstImage}
           variants={[

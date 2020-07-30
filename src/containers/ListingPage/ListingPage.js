@@ -46,6 +46,7 @@ import {
   IconPeople
 } from '../../components'
 import { TopbarContainer, NotFoundPage } from '..'
+import ListingHero from './ListingHero';
 
 import { sendEnquiry, loadData, setInitialValues } from './ListingPage.duck'
 import SectionImages from './SectionImages'
@@ -415,7 +416,7 @@ export class ListingPageComponent extends Component {
           <LayoutWrapperTopbar>{topbar}</LayoutWrapperTopbar>
           <LayoutWrapperMain>
             <div>
-              <SectionImages
+              <ListingHero
                 title={title}
                 listing={currentListing}
                 isOwnListing={isOwnListing}
@@ -425,10 +426,6 @@ export class ListingPageComponent extends Component {
                   type: listingType,
                   tab: listingTab,
                 }}
-                imageCarouselOpen={this.state.imageCarouselOpen}
-                onImageCarouselClose={() => this.setState({ imageCarouselOpen: false })}
-                handleViewPhotosClick={handleViewPhotosClick}
-                onManageDisableScrolling={onManageDisableScrolling}
               />
               <div className={css.contentContainer}>
                 <SectionAvatar user={currentAuthor} params={params} />
@@ -475,6 +472,21 @@ export class ListingPageComponent extends Component {
                     sendEnquiryInProgress={sendEnquiryInProgress}
                     onSubmitEnquiry={this.onSubmitEnquiry}
                     currentUser={currentUser}
+                    onManageDisableScrolling={onManageDisableScrolling}
+                  />
+                  <SectionImages
+                    title={title}
+                    listing={currentListing}
+                    isOwnListing={isOwnListing}
+                    editParams={{
+                      id: listingId.uuid,
+                      slug: listingSlug,
+                      type: listingType,
+                      tab: listingTab,
+                    }}
+                    imageCarouselOpen={this.state.imageCarouselOpen}
+                    onImageCarouselClose={() => this.setState({ imageCarouselOpen: false })}
+                    handleViewPhotosClick={handleViewPhotosClick}
                     onManageDisableScrolling={onManageDisableScrolling}
                   />
                   <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
