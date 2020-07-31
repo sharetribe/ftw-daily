@@ -17,15 +17,18 @@ export const LandingHero: React.FC = () => {
         align-items: center;
         justify-content: center;
 
+        div {
+          background-color: rgba(249, 244, 238, 0.12);
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+        }
+
         img {
           width: 345px;
           height: auto;
-          z-index: 2;
-        }
-
-        @media (min-width: 769px) {
-          background-image: none;
-          background-color: transparent;
         }
       `}
     >

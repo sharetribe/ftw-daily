@@ -15,10 +15,4 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-
-  background-image: url('../../assets/images/guitarHero.jpg');
-  background-position: top;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
 }
