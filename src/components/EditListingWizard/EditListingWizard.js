@@ -23,6 +23,7 @@ import EditListingWizardTab, {
   PHOTOS,
 } from './EditListingWizardTab';
 import css from './EditListingWizard.css';
+import { ApprovedBlock } from '../../components';
 
 // TODO: PHOTOS panel needs to be the last one since it currently contains PayoutDetailsForm modal
 // All the other panels can be reordered.
@@ -142,6 +143,7 @@ class EditListingWizard extends Component {
   }
 
   handlePublishListing(id) {
+    console.log(this.props)
     const { onPublishListingDraft, currentUser } = this.props;
     const stripeConnected =
       currentUser && currentUser.stripeAccount && !!currentUser.stripeAccount.id;
@@ -272,7 +274,7 @@ class EditListingWizard extends Component {
             <p className={css.modalMessage}>
               <FormattedMessage id="EditListingPhotosPanel.payoutModalInfo" />
             </p>
-            <PayoutDetailsForm
+            <ApprovedBlock
               className={css.payoutDetails}
               inProgress={fetchInProgress}
               createStripeAccountError={errors ? errors.createStripeAccountError : null}

@@ -59,8 +59,8 @@ export const PayoutPreferencesPageComponent = props => {
   //const showForm = true
   const form = showForm ? (
     <PayoutDetailsForm
-      disabled={formDisabled}
-      //disabled={false}
+      //disabled={formDisabled}
+      disabled={false}
       inProgress={payoutDetailsSaveInProgress}
       ready={payoutDetailsSaved}
       submitButtonText={intl.formatMessage({ id: 'PayoutPreferencesPage.submitButtonText' })}

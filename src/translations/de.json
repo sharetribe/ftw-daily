@@ -535,6 +535,7 @@
   "PayoutDetailsForm.stripeConnectedAccountTermsLink": "Zahlungsbedingungen",
   "PayoutDetailsForm.stripeToSText": "Mit dem klick auf den Button, akzeptierst Du die {stripeConnectedAccountTermsLink} von HorseDeal24.",
   "PayoutDetailsForm.submitButtonText": "Speichern & veröffentlichen",
+  "PayoutDetailsForm.laterButtonText": "Das mache ich später",
   "PayoutDetailsForm.title": "Moment kurz: Deine Auszalung",
   "PayoutPreferencesPage.contactDetailsTabTitle": "Kontaktangaben",
   "PayoutPreferencesPage.heading": "Zahlungseinstellungen",

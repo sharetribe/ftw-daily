@@ -118,6 +118,8 @@ export { default as FieldPhoneNumberInput } from './FieldPhoneNumberInput/FieldP
 export { default as LocationAutocompleteInput, LocationAutocompleteInputField } from './LocationAutocompleteInput/LocationAutocompleteInput';
 export { default as StripeBankAccountTokenInputField } from './StripeBankAccountTokenInputField/StripeBankAccountTokenInputField';
 export { default as SignupFacebook } from './SignupFacebookButton/SignupFacebookButton';
+export { default as SkippingBlock } from './SkippingBlock/SkippingBlock';
+export { default as ApprovedBlock } from './ApprovedBlock/ApprovedBlock';
 
 // Tab navigation
 export { default as TabNav } from './TabNav/TabNav';
