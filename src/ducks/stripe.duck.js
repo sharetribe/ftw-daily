@@ -531,7 +531,7 @@ export const createStripeCompanyAccount = (payoutDetails, companyConfig, stripe)
       throw e;
     });
 };
-//TODO sdfsfsdfsdfsdfsdfsdfsdfsf
+
 const accountTokenParamsForIndividual = (individual, individualConfig) => {
   const {
     fname: firstName,
@@ -584,7 +584,6 @@ export const createStripeIndividualAccount = (payoutDetails, individualConfig, s
   const { country, individual } = payoutDetails;
   let stripeAccount;
   dispatch(stripeAccountCreateRequest());
-
   return stripe
     .createToken('account', accountTokenParamsForIndividual(individual, individualConfig))
     .then(response => {
@@ -593,7 +592,7 @@ export const createStripeIndividualAccount = (payoutDetails, individualConfig, s
       const stripeAccountParams = {
         requestedCapabilities: ["transfers", "card_payments"],
         accountToken,
-        bankAccountToken,
+        bankAccountToken,     // merge master branch conflict
         country,
           // business_profile: {
           //       mcc: "4121",
@@ -603,6 +602,10 @@ export const createStripeIndividualAccount = (payoutDetails, individualConfig, s
         //country,- delete
         ...businessProfileParams(individual, individualConfig),
       };
+      // merge master branch conflict
+      /*if(bankAccountToken) {
+        stripeAccountParams.bankAccountToken = bankAccountToken
+      }*/
       return sdk.stripeAccount.create(stripeAccountParams, { expand: true });
       //return sdk.stripeAccount.update(stripeAccountParams, { expand: true });
     })
@@ -628,7 +631,7 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
   if (typeof window === 'undefined' || !window.Stripe) {
     throw new Error('Stripe must be loaded for submitting PayoutPreferences');
   }
-
+  console.log("payoutDetails ", payoutDetails)
   const stripe = window.Stripe(config.stripe.publishableKey);
 
   const country = payoutDetails.country;
@@ -770,7 +773,6 @@ export const handleCardSetup = params => dispatch => {
 };
 
 export const publicDraft = ()=> (dispatch, getState,sdk ) => {
-  console.log(getState().marketplaceData.entities)
 
   const uuid = Object.keys(getState().marketplaceData.entities.ownListing)[0]
     sdk.ownListings.publishDraft({
