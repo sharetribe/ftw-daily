@@ -75,3 +75,25 @@
   height: 18px;
   padding-top: 1px;
 }
+
+.mappingRow {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.numericInput {
+  padding: 20px;
+  border: solid 1px lightgrey;
+  border-radius: 8px;
+  width: 100px;
+}
+
+.addDiscountButton {
+  min-height: 35px;
+  width: 140px;
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}

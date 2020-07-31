@@ -1,0 +1,13 @@
+.rootIconButton {
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid 2px black;
+  cursor: pointer;
+  padding: 8px;
+}
+
+/*# sourceMappingURL=IconButton.css.map */
