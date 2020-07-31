@@ -80,6 +80,7 @@ class PageComponent extends Component {
       twitterHandle,
       twitterImages,
       updated,
+      adjustChatComponent
     } = this.props
 
     const classes = classNames(rootClassName || css.root, className, {
@@ -200,6 +201,22 @@ class PageComponent extends Component {
           <script type="application/ld+json">
             {schemaArrayJSONString.replace(/</g, '\\u003c')}
           </script>
+          {
+            adjustChatComponent
+              ? <style type="text/css">
+                {
+                  `@media only screen and (max-width: 500px) {
+                    #futy-widget-toggle-container {
+                      bottom: 100px !important;
+                    }
+                    #futy-width-toast-container {
+                      bottom: 100px !important;
+                    }
+                  }`
+                }
+              </style>
+              : null
+          }
         </Helmet>
         <CookieConsent />
         <div

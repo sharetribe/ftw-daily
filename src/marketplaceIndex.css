@@ -11,6 +11,10 @@ body {
   background-color: var(--matterColorBright);
 }
 
+#widget-container {
+  background-color: yellow;
+}
+
 ::selection {
   background: var(--marketplaceColor);
   /* WebKit/Blink Browsers */

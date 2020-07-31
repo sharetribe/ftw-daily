@@ -411,6 +411,7 @@ export class ListingPageComponent extends Component {
           name: schemaTitle,
           image: schemaImages,
         }}
+        adjustChatComponent={true}
       >
         <LayoutSingleColumn className={css.pageRoot}>
           <LayoutWrapperTopbar>{topbar}</LayoutWrapperTopbar>
