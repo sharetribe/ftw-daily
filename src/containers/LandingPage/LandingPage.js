@@ -22,16 +22,17 @@ import {
   LayoutWrapperMain,
   LayoutWrapperFooter,
   ListingCard,
-  Footer,
+  Footer, ModalStripeInformation,
 } from '../../components';
 import { TopbarContainer } from '../../containers';
 
 import facebookImage from '../../assets/saunatimeFacebook-1200x630.jpg';
 import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg';
 import css from './LandingPage.css';
+import SkippingBlock from '../../components/SkippingBlock/SkippingBlock';
 
 export const LandingPageComponent = props => {
-  const { history, intl, listings, location, scrollingDisabled } = props;
+  const { onManageDisableScrolling, history, intl, listings, location, scrollingDisabled } = props;
 
   // Schema for search engines (helps them to understand what this page is about)
   // http://schema.org
@@ -65,6 +66,7 @@ export const LandingPageComponent = props => {
           <TopbarContainer />
         </LayoutWrapperTopbar>
         <LayoutWrapperMain>
+          <SkippingBlock/>
           <div className={css.heroContainer}>
             <SectionHero className={css.hero} history={history} location={location} />
           </div>
