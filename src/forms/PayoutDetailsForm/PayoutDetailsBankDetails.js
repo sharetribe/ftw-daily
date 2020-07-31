@@ -13,13 +13,13 @@ const countryCurrency = countryCode => {
 };
 
 const PayoutDetailsBankDetails = props => {
-  const { country, disabled, fieldId } = props;
+  const { country, disabled, fieldId, stripeEnabled } = props;
 
   // StripeBankAccountTokenInputField handles the error messages
   // internally, we just have to make sure we require a valid token
   // out of the field. Therefore the empty validation message.
-  const bankAccountRequired = validators.required(' ');
-
+  const bankAccountRequired = stripeEnabled ? validators.required(' ') : () => undefined  
+  
   return (
     <div className={css.sectionContainer}>
       <h3 className={css.subTitle}>
