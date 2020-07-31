@@ -20,7 +20,6 @@ function  SkippingBlockComponent  (props)  {
   const [hasSeenMissingInformationReminder, setHasSeenMissingInformationReminder]= useState(true)
   const{ closeButtonMessage, containerClassName, onManageDisableScrolling, redirect, submitButtonText } = props
 
-
   return (
     <Modal
       id="MissingInformationReminder"
