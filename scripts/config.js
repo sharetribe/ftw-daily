@@ -217,7 +217,7 @@ ${chalk.dim(
 )}
 `,
       default: function() {
-        return rootUrlDefault ? rootUrlDefault : 'http://localhost:3000';
+        return rootUrlDefault ? rootUrlDefault : 'https://localhost:3000';
       },
       when: function(answers) {
         return answers.showAdvancedSettings;

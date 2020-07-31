@@ -9,11 +9,13 @@ import config from '../../config';
 import { propTypes } from '../../util/types';
 import { isStripeInvalidPostalCode, isStripeError } from '../../util/errors';
 import * as validators from '../../util/validators';
-import { Button, ExternalLink, FieldRadioButton, FieldSelect, Form } from '../../components';
+import { Button, ExternalLink, FieldSelect, Form } from '../../components';
 
-import PayoutDetailsCompanyAccount from './PayoutDetailsCompanyAccount';
-import PayoutDetailsIndividualAccount from './PayoutDetailsIndividualAccount';
-import css from './PayoutDetailsForm.css';
+import PayoutDetailsIndividualAccount from './../../forms/PayoutDetailsForm/PayoutDetailsIndividualAccount';
+import css from './../../forms/PayoutDetailsForm/PayoutDetailsForm.css';
+import { publicDraft, payloadFormViewState } from '../../ducks/stripe.duck';
+import { connect } from 'react-redux';
+import { Redirect, withRouter } from 'react-router-dom';
 
 const supportedCountries = config.stripe.supportedCountries.map(c => c.code);
 
@@ -26,7 +28,7 @@ export const stripeCountryConfigs = countryCode => {
   return country;
 };
 
-const PayoutDetailsFormComponent = props => (
+const ApprovedBlockComponent = props => (
   <FinalForm
     {...props}
     mutators={{
@@ -34,6 +36,9 @@ const PayoutDetailsFormComponent = props => (
     }}
     render={fieldRenderProps => {
       const {
+        redirect,
+        payloadFormView,
+        stripeAccountCreated,
         className,
         createStripeAccountError,
         disabled,
@@ -111,100 +116,94 @@ const PayoutDetailsFormComponent = props => (
         </ExternalLink>
       );
 
-      return config.stripe.publishableKey ? (
+      return  (
+        <div>
+          {payloadFormView ? (
         <Form className={classes} onSubmit={handleSubmit}>
-          <div className={css.sectionContainer}>
-            {/*<h3 className={css.subTitle}>
-              <FormattedMessage id="PayoutDetailsForm.accountTypeTitle" />
-            </h3>*/}
-            {/*<div className={css.radioButtonRow}>
-              {<FieldRadioButton
-                id="individual"
-                name="accountType"
-                label={individualAccountLabel}
-                value="individual"
-                showAsRequired={showAsRequired}
-              />}
-              {<FieldRadioButton
-                id="company"
-                name="accountType"
-                label={companyAccountLabel}
-                value="company"
-                showAsRequired={showAsRequired}
-              />}
-            </div>*/}
-          </div>
-
-
-            <React.Fragment>
-              <div className={css.sectionContainer}>
-                <h3 className={css.subTitle}>Country</h3>
-                <FieldSelect
-                  id="country"
-                  name="country"
-                  disabled={disabled}
-                  className={css.selectCountry}
-                  autoComplete="country"
-                  label={countryLabel}
-                  validate={countryRequired}
-                >
-                  <option disabled value="">
-                    {countryPlaceholder}
-                  </option>
-                  {supportedCountries.map(c => (
-                    <option key={c} value={c}>
-                      {intl.formatMessage({ id: `PayoutDetailsForm.countryNames.${c}` })}
-                    </option>
-                  ))}
-                </FieldSelect>
-              </div>
-
-              {showIndividual && (
-                <PayoutDetailsIndividualAccount
-                  fieldRenderProps={fieldRenderProps}
-                  country={country}
-                  currentUserId={currentUserId}
-                />
-              )/* : showCompany ? (
-                <PayoutDetailsCompanyAccount
-                  fieldRenderProps={fieldRenderProps}
-                  country={country}
-                />
-              ) : null}*/}
-
-              {error}
-
-              <p className={css.termsText}>
-                <FormattedMessage
-                  id="PayoutDetailsForm.stripeToSText"
-                  values={{ stripeConnectedAccountTermsLink }}
-                />
-              </p>
-              <Button
-                className={css.submitButton}
-                type="submit"
-                inProgress={submitInProgress}
-                disabled={submitDisabled}
-                ready={ready}
+          <React.Fragment>
+            <div className={css.sectionContainer}>
+              <h3 className={css.subTitle}>Country</h3>
+              <FieldSelect
+                id="country"
+                name="country"
+                disabled={disabled}
+                className={css.selectCountry}
+                autoComplete="country"
+                label={countryLabel}
+                validate={countryRequired}
               >
-                {submitButtonText ? (
-                  submitButtonText
-                ) : (
-                  <FormattedMessage id="PayoutDetailsForm.submitButtonText" />
-                )}
-              </Button>
-            </React.Fragment>
+                <option disabled value="">
+                  {countryPlaceholder}
+                </option>
+                {supportedCountries.map(c => (
+                  <option key={c} value={c}>
+                    {intl.formatMessage({ id: `PayoutDetailsForm.countryNames.${c}` })}
+                  </option>
+                ))}
+              </FieldSelect>
+            </div>
+
+            {showIndividual && (
+              <PayoutDetailsIndividualAccount
+                fieldRenderProps={fieldRenderProps}
+                country={country}
+                currentUserId={currentUserId}
+              />
+            )}
+            {error}
+            <p className={css.termsText}>
+              <FormattedMessage
+                id="PayoutDetailsForm.stripeToSText"
+                values={{ stripeConnectedAccountTermsLink }}
+              />
+            </p>
+            <Button
+              className={css.submitButton}
+              type="submit"
+              inProgress={submitInProgress}
+              disabled={submitDisabled}
+              ready={ready}
+            >
+              {submitButtonText ? (
+                submitButtonText
+              ) : (
+                <FormattedMessage id="PayoutDetailsForm.submitButtonText" />
+              )}
+            </Button>
+          </React.Fragment>
         </Form>
       ) : (
-        <div className={css.missingStripeKey}>
-          <FormattedMessage id="PayoutDetailsForm.missingStripeKey" />
-        </div>
+          <Button
+            type="submit"
+            inProgress={submitInProgress}
+            ready={ready}
+            onClick={()=>props.onPayloadFormViewState()}>
+            {submitButtonText ? (
+              submitButtonText
+            ) : (
+              <FormattedMessage id="PayoutDetailsForm.submitButtonText" />
+            )}
+          </Button>)}
+          {redirect ? <Redirect to='/' /> :
+            <Button
+              type="submit"
+              onClick={()=>props.onPublicDraft()}
+              inProgress={submitInProgress}
+              ready={ready}>
+              {submitButtonText ? (
+                submitButtonText
+              ) : (
+                <FormattedMessage
+                  id="PayoutDetailsForm.laterButtonText" />
+              )}
+            </Button>}
+          </div>
       );
     }}
   />
 );
 
-PayoutDetailsFormComponent.defaultProps = {
+ApprovedBlockComponent.defaultProps = {
   className: null,
   createStripeAccountError: null,
   disabled: false,
@@ -213,9 +212,11 @@ PayoutDetailsFormComponent.defaultProps = {
   submitButtonText: null,
   currentUserId: null,
   fieldRenderProps: null,
+  redirect:false,
+  stripeAccountCreated: false,
 };
 
-PayoutDetailsFormComponent.propTypes = {
+ApprovedBlockComponent.propTypes = {
   className: string,
   createStripeAccountError: object,
   disabled: bool,
@@ -232,8 +233,27 @@ PayoutDetailsFormComponent.propTypes = {
 
   // from injectIntl
   intl: intlShape.isRequired,
+  onRedirectState: func.isRequired,
+  onPublicDraft: func.isRequired,
+  onPayloadFormViewState: func.isRequired,
+
 };
 
-const PayoutDetailsForm = compose(injectIntl)(PayoutDetailsFormComponent);
+const mapStateToProps = state => {
+  return {
+    redirect: state.stripe.redirect,
+    payloadFormView: state.stripe.payloadFormView,
+    stripeAccountCreated: state.stripe.stripeAccountCreated
+  }
+}
+const mapDispatchToProps = dispatch => ({
+  onPublicDraft: () => dispatch(publicDraft()),
+  onPayloadFormViewState: () => dispatch(payloadFormViewState())
+});
 
-export default PayoutDetailsForm;
+const ApprovedBlock = compose(withRouter,connect(
+  mapStateToProps,
+  mapDispatchToProps
+),injectIntl)(ApprovedBlockComponent);
+
+export default ApprovedBlock

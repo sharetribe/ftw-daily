@@ -57,6 +57,10 @@
   width: 100%;
 }
 
+.greyButton {
+  margin-top: 10px;
+}
+
 .firstName {
   width: calc(50% - 9px);
 }

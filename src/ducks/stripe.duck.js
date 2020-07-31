@@ -33,6 +33,10 @@ export const CLEAR_HANDLE_CARD_PAYMENT = 'app/stripe/CLEAR_HANDLE_CARD_PAYMENT';
 export const RETRIEVE_PAYMENT_INTENT_REQUEST = 'app/stripe/RETRIEVE_PAYMENT_INTENT_REQUEST';
 export const RETRIEVE_PAYMENT_INTENT_SUCCESS = 'app/stripe/RETRIEVE_PAYMENT_INTENT_SUCCESS';
 export const RETRIEVE_PAYMENT_INTENT_ERROR = 'app/stripe/RETRIEVE_PAYMENT_INTENT_ERROR';
+export const REDIRECT = 'app/stripe/REDIRECT';
+export const PAYLOAD_FOMR_VIEW = 'app/stripe/PAYLOAD_FOMR_VIEW';
+export const STRIPE_ACCOUNT_CREATED = 'app/stripe/STRIPE_ACCOUNT_CREATED';
+
 
 // ================ Reducer ================ //
 
@@ -53,11 +57,20 @@ const initialState = {
   setupIntent: null,
   retrievePaymentIntentInProgress: false,
   retrievePaymentIntentError: null,
+  redirect: false,
+  payloadFormView: false,
+  stripeAccountCreated: false,
 };
 
 export default function reducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
+    case REDIRECT:
+      return { ...state, redirect: true};
+    case PAYLOAD_FOMR_VIEW:
+      return { ...state, payloadFormView: true};
+    case STRIPE_ACCOUNT_CREATED:
+      return { ...state, stripeAccountCreated: true};
     case STRIPE_ACCOUNT_CREATE_REQUEST:
       return { ...state, createStripeAccountError: null, createStripeAccountInProgress: true };
     case STRIPE_ACCOUNT_CREATE_SUCCESS:
@@ -174,6 +187,9 @@ export default function reducer(state = initialState, action = {}) {
 // ================ Action creators ================ //
 
 export const stripeAccountCreateRequest = () => ({ type: STRIPE_ACCOUNT_CREATE_REQUEST });
+export const redirectState = () => ({ type: REDIRECT });
+export const payloadFormViewState = () => ({ type: PAYLOAD_FOMR_VIEW });
+export const stripeAccountCreatedState = () => ({ type: STRIPE_ACCOUNT_CREATED });
 
 export const stripeAccountCreateSuccess = stripeAccount => ({
   type: STRIPE_ACCOUNT_CREATE_SUCCESS,
@@ -478,7 +494,7 @@ export const createStripeCompanyAccount = (payoutDetails, companyConfig, stripe)
         throw e;
       });
   }
- 
+
   return stripe
     .createToken('account', accountTokenParamsForCompany(company))
     .then(response => {
@@ -515,7 +531,7 @@ export const createStripeCompanyAccount = (payoutDetails, companyConfig, stripe)
       throw e;
     });
 };
-
+//TODO sdfsfsdfsdfsdfsdfsdfsdfsf
 const accountTokenParamsForIndividual = (individual, individualConfig) => {
   const {
     fname: firstName,
@@ -528,7 +544,7 @@ const accountTokenParamsForIndividual = (individual, individualConfig) => {
     //email = 'p8@horseplanet.ch',
     personalIdNumber,
   } = individual;
- 
+
   const addressMaybe = address ? { address: formatAddress(address) } : {};
   const dobMaybe = birthDate ? { dob: birthDate } : {};
   const emailMaybe = email ? { email } : {};
@@ -556,7 +572,7 @@ const accountTokenParamsForIndividual = (individual, individualConfig) => {
     },
     tos_shown_and_accepted: true,
   };
- 
+
   return individualTokenParams
 };
 
@@ -567,13 +583,13 @@ export const createStripeIndividualAccount = (payoutDetails, individualConfig, s
 ) => {
   const { country, individual } = payoutDetails;
   let stripeAccount;
-  dispatch(stripeAccountCreateRequest());    
+  dispatch(stripeAccountCreateRequest());
 
   return stripe
     .createToken('account', accountTokenParamsForIndividual(individual, individualConfig))
     .then(response => {
       const accountToken = response.token.id;
-      const bankAccountToken = bankAccountTokenParams(individual);     
+      const bankAccountToken = bankAccountTokenParams(individual);
       const stripeAccountParams = {
         requestedCapabilities: ["transfers", "card_payments"],
         accountToken,
@@ -620,11 +636,11 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
   const individualConfig = countryConfig.individualConfig;
   const companyConfig = countryConfig.companyConfig;
 
-  if (payoutDetails.accountType === 'individual') {
+  /*if (payoutDetails.accountType === 'individual') {*/
     return dispatch(createStripeIndividualAccount(payoutDetails, individualConfig, stripe));
-  } else {
+  /*} else {
     return dispatch(createStripeCompanyAccount(payoutDetails, companyConfig, stripe));
-  }
+  }*/
 };
 
 export const retrievePaymentIntent = params => dispatch => {
@@ -751,4 +767,18 @@ export const handleCardSetup = params => dispatch => {
       });
       throw e;
     });
+};
+
+export const publicDraft = ()=> (dispatch, getState,sdk ) => {
+  console.log(getState().marketplaceData.entities)
+
+  const uuid = Object.keys(getState().marketplaceData.entities.ownListing)[0]
+    sdk.ownListings.publishDraft({
+    id: `${uuid}`
+  }, {
+    expand: true
+  }).then(()=>
+      dispatch(redirectState())
+  );
+
 };
