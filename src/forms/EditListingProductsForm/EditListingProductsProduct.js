@@ -1,3 +1,5 @@
+import InputAdornment from '@material-ui/core/InputAdornment';
+import TextField from '@material-ui/core/TextField';
 import React from 'react'
 import { bool, node, string } from 'prop-types'
 import { FieldArray } from 'react-final-form-arrays'
@@ -151,6 +153,14 @@ const EditListingProductsProduct = (props) => {
               {fields.map((name, index) => (
                 <div key={name} className={css.mappingRow}>
                   <div className={css.lodSection}>
+                    <TextField
+                      label="With normal TextField"
+                      id="outlined-start-adornment"
+                      InputProps={{
+                        startAdornment: <InputAdornment position="start">Days</InputAdornment>,
+                      }}
+                      variant="outlined"
+                    />
                     <FieldTextInput
                       inputRootClass={css.numericInput}
                       id={`${name}.days`}

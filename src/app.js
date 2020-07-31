@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ReactDOMServer from 'react-dom/server'
+import { ServerStyleSheets, ThemeProvider } from '@material-ui/core/styles'
 
 // react-dates needs to be initialized before using any react-dates component
 // https://github.com/airbnb/react-dates#initialize
@@ -12,6 +13,7 @@ import { Provider } from 'react-redux'
 import difference from 'lodash/difference'
 import mapValues from 'lodash/mapValues'
 import moment from 'moment'
+import theme from './theme'
 import { IntlProvider } from './util/reactIntl'
 import configureStore from './store'
 import routeConfiguration from './routeConfiguration'
@@ -137,13 +139,17 @@ export const renderApp = (url, serverContext, preloadedState) => {
   // Don't pass an SDK instance since we're only rendering the
   // component tree with the preloaded store state and components
   // shouldn't do any SDK calls in the (server) rendering lifecycle.
+  const sheets = new ServerStyleSheets()
   const store = configureStore(preloadedState)
 
   const helmetContext = {}
 
   const body = ReactDOMServer.renderToString(
-    <ServerApp url={url} context={serverContext} helmetContext={helmetContext} store={store} />
+    sheets.collect(<ThemeProvider theme={theme}>
+      <ServerApp url={url} context={serverContext} helmetContext={helmetContext} store={store} />
+    </ThemeProvider>)
   )
+  const css = sheets.toString()
   const { helmet: head } = helmetContext
-  return { head, body }
+  return { head, body, css }
 }

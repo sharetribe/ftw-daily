@@ -20,6 +20,8 @@ import 'raf/polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Decimal from 'decimal.js'
+import { ThemeProvider } from '@material-ui/core/styles';
+import theme from './theme';
 import { createInstance, types as sdkTypes } from './util/sdkLoader'
 import { ClientApp, renderApp } from './app'
 import configureStore from './store'
@@ -40,15 +42,29 @@ const render = (store, shouldHydrate) => {
   // If the server already loaded the auth information, render the app
   // immediately. Otherwise wait for the flag to be loaded and render
   // when auth information is present.
+  const jssStyles = document.querySelector('#jss-server-side');
+  if (jssStyles) {
+    jssStyles.parentElement.removeChild(jssStyles);
+  }
   const { authInfoLoaded } = store.getState().Auth
   const info = authInfoLoaded ? Promise.resolve({}) : store.dispatch(authInfo())
   info
   .then(() => {
     store.dispatch(fetchCurrentUser())
     if (shouldHydrate) {
-      ReactDOM.hydrate(<ClientApp store={store} />, document.getElementById('root'))
+      ReactDOM.hydrate(
+        <ThemeProvider theme={theme}>
+          <ClientApp store={store} />
+        </ThemeProvider>,
+        document.getElementById('root')
+      )
     } else {
-      ReactDOM.render(<ClientApp store={store} />, document.getElementById('root'))
+      ReactDOM.render(
+        <ThemeProvider theme={theme}>
+          <ClientApp store={store} />
+        </ThemeProvider>,
+        document.getElementById('root')
+      )
     }
   })
   .catch((e) => {
