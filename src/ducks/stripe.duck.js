@@ -593,6 +593,7 @@ export const createStripeIndividualAccount = (payoutDetails, individualConfig, s
         requestedCapabilities: ["transfers", "card_payments"],
         accountToken,
         bankAccountToken,     // merge master branch conflict
+
         country,
           // business_profile: {
           //       mcc: "4121",
@@ -602,10 +603,12 @@ export const createStripeIndividualAccount = (payoutDetails, individualConfig, s
         //country,- delete
         ...businessProfileParams(individual, individualConfig),
       };
+
       // merge master branch conflict
       /*if(bankAccountToken) {
         stripeAccountParams.bankAccountToken = bankAccountToken
       }*/
+
       return sdk.stripeAccount.create(stripeAccountParams, { expand: true });
       //return sdk.stripeAccount.update(stripeAccountParams, { expand: true });
     })

@@ -171,12 +171,12 @@ class PaymentMethodsForm extends Component {
       formId,
       intl,
       invalid,
+      form,
       handleSubmit,
       addPaymentMethodError,
       deletePaymentMethodError,
       createStripeCustomerError,
       handleCardSetupError,
-      form,
     } = formRenderProps;
 
     this.finalFormAPI = form;
@@ -274,7 +274,17 @@ class PaymentMethodsForm extends Component {
   }
 
   render() {
-    const { onSubmit, ...rest } = this.props;
+    console.log(this.props.formId)
+    const { onSubmit } = this.props;
+    const rest = {
+      intl: this.props.intl,
+      className: this.props.className,
+      rootClassName: this.props.rootClassName,
+      inProgress: this.props.inProgress,
+      formId: this.props.formId,
+      //invalid: false,
+      form: this.props.form,
+    }
     return <FinalForm onSubmit={this.handleSubmit} {...rest} render={this.paymentForm} />;
   }
 }

@@ -190,7 +190,10 @@
 }
 
 .itemLink {
-  flex: 1;
+  /*  flex: 1; */
+  width: 90%;
+  max-width: 90%;
+  justify-content: flex-end;
 
   /* Layout */
   display: flex;
@@ -239,6 +242,7 @@
 }
 
 .itemInfo {
+  max-width: 100%;
   @apply --marketplaceH5FontStyles;
   font-weight: var(--fontWeightSemiBold);
 
@@ -329,6 +333,7 @@
 }
 
 .stateActionNeeded {
+  white-space: nowrap;
   font-weight: var(--fontWeightSemiBold);
   color: var(--attentionColor);
 }
@@ -355,7 +360,7 @@
 }
 
 .bookingActionNeeded {
-  color: var(--matterColor);
+  /* color: var(--matterColor); */
   margin-top: 4px;
 
   @media (--viewportMedium) {
@@ -364,7 +369,16 @@
 }
 
 .bookingNoActionNeeded {
+  /* width: 80%;
+  max-width: 300px; */
+  width: 45vw;
   color: var(--matterColorAnti);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  @media (--viewportMedium) {
+    width: 30vw;
+  }
 }
 
 .lastTransitionedAtEmphasized {

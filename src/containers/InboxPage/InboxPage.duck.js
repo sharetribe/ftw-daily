@@ -18,6 +18,9 @@ export const FETCH_ORDERS_OR_SALES_REQUEST = 'app/InboxPage/FETCH_ORDERS_OR_SALE
 export const FETCH_ORDERS_OR_SALES_SUCCESS = 'app/InboxPage/FETCH_ORDERS_OR_SALES_SUCCESS';
 export const FETCH_ORDERS_OR_SALES_ERROR = 'app/InboxPage/FETCH_ORDERS_OR_SALES_ERROR';
 
+export const ADD_ALL_USER_MESSAGES_SUCCESS = 'app/InboxPage/ADD_ALL_USER_MESSAGES_SUCCESS';
+export const ADD_ALL_USER_MESSAGES_FAILURE = 'app/InboxPage/ADD_ALL_USER_MESSAGES_FAILURE';
+
 // ================ Reducer ================ //
 
 const entityRefs = entities =>
@@ -31,6 +34,8 @@ const initialState = {
   fetchOrdersOrSalesError: null,
   pagination: null,
   transactionRefs: [],
+  allUserMessages: [],
+  allUserMessagesError: null,
 };
 
 export default function checkoutPageReducer(state = initialState, action = {}) {
@@ -48,9 +53,17 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
       };
     }
     case FETCH_ORDERS_OR_SALES_ERROR:
-      console.error(payload); // eslint-disable-line
       return { ...state, fetchInProgress: false, fetchOrdersOrSalesError: payload };
-
+    case ADD_ALL_USER_MESSAGES_SUCCESS:
+      return {
+        ...state,
+        allUserMessages: payload
+      };
+    case ADD_ALL_USER_MESSAGES_FAILURE:
+      return {
+        ...state,
+        allUserMessagesError: payload
+      };
     default:
       return state;
   }
@@ -69,6 +82,8 @@ const fetchOrdersOrSalesError = e => ({
   payload: e,
 });
 
+const addAllUserMessagesSuccess = (messages) => ({ type: ADD_ALL_USER_MESSAGES_SUCCESS, payload: messages })
+const addAllUserMessagesFailure = (error) => ({ type: ADD_ALL_USER_MESSAGES_FAILURE, payload: error })
 // ================ Thunks ================ //
 
 const INBOX_PAGE_SIZE = 10;
@@ -109,7 +124,16 @@ export const loadData = (params, search) => (dispatch, getState, sdk) => {
 
   return sdk.transactions
     .query(apiQueryParams)
-    .then(response => {
+    .then(async response => {
+      const ids = response.data.data.map(d => sdk.messages.query({ transactionId: d.id }) )
+      
+      await Promise.all(ids)
+      .then(messages => {
+        dispatch(addAllUserMessagesSuccess(messages));
+      })
+      .catch(e => {
+        dispatch(addAllUserMessagesFailure(e));
+      })
       dispatch(addMarketplaceEntities(response));
       dispatch(fetchOrdersOrSalesSuccess(response));
       return response;

@@ -58,7 +58,7 @@ export const txState = (intl, tx, type) => {
   if (txIsEnquired(tx)) {
     return {
       nameClassName: isOrder ? css.nameNotEmphasized : css.nameEmphasized,
-      bookingClassName: css.bookingActionNeeded,
+      bookingClassName: css.bookingNoActionNeeded,
       lastTransitionedAtClassName: css.lastTransitionedAtEmphasized,
       stateClassName: css.stateActionNeeded,
       state: intl.formatMessage({
@@ -78,7 +78,7 @@ export const txState = (intl, tx, type) => {
         }
       : {
           nameClassName: css.nameEmphasized,
-          bookingClassName: css.bookingActionNeeded,
+          bookingClassName: css.bookingNoActionNeeded,
           lastTransitionedAtClassName: css.lastTransitionedAtEmphasized,
           stateClassName: css.stateActionNeeded,
           state: intl.formatMessage({
@@ -194,22 +194,23 @@ BookingInfoMaybe.propTypes = {
 };
 
 export const InboxItem = props => {
-  const { unitType, type, tx, intl, stateData } = props;
+  const { unitType, type, tx, intl, stateData, lastMessage } = props;
   const { customer, provider } = tx;
   const isOrder = type === 'order';
 
   const otherUser = isOrder ? provider : customer;
+  otherUser.attributes.profile.displayName = otherUser.attributes.profile.displayName.split(' ').splice(0,1).join('')
   const otherUserDisplayName = <UserDisplayName user={otherUser} intl={intl} />;
   const isOtherUserBanned = otherUser.attributes.banned;
-
+  
   const isSaleNotification = !isOrder && txIsRequested(tx);
   const rowNotificationDot = isSaleNotification ? <div className={css.notificationDot} /> : null;
   const lastTransitionedAt = formatDate(intl, tx.attributes.lastTransitionedAt);
-
   const linkClasses = classNames(css.itemLink, {
     [css.bannedUserLink]: isOtherUserBanned,
   });
-
+  
+  
   return (
     <div className={css.item}>
       <div className={css.itemAvatar}>
@@ -225,13 +226,16 @@ export const InboxItem = props => {
           <div className={classNames(css.itemUsername, stateData.nameClassName)}>
             {otherUserDisplayName}
           </div>
-          <BookingInfoMaybe
+          <div className={stateData.bookingClassName}>
+            {lastMessage}
+            </div> 
+          {/* <BookingInfoMaybe
             bookingClassName={stateData.bookingClassName}
             intl={intl}
             isOrder={isOrder}
             tx={tx}
             unitType={unitType}
-          />
+          />  */}
         </div>
         <div className={css.itemState}>
           <div className={classNames(css.stateName, stateData.stateClassName)}>
@@ -268,7 +272,10 @@ export const InboxPageComponent = props => {
     providerNotificationCount,
     scrollingDisabled,
     transactions,
+    allUserMessages,
+    allUserMessagesError
   } = props;
+  console.log('allUserMessages ',allUserMessages)
   const { tab } = params;
   const ensuredCurrentUser = ensureCurrentUser(currentUser);
 
@@ -283,14 +290,15 @@ export const InboxPageComponent = props => {
   const salesTitle = intl.formatMessage({ id: 'InboxPage.salesTitle' });
   const title = isOrders ? ordersTitle : salesTitle;
 
-  const toTxItem = tx => {
+  const toTxItem = (tx, index) => {
     const type = isOrders ? 'order' : 'sale';
     const stateData = txState(intl, tx, type);
-
+    const lastMessage = allUserMessages[index].data.data.length ? allUserMessages[index].data.data[0].attributes.content : '...'
+  
     // Render InboxItem only if the latest transition of the transaction is handled in the `txState` function.
     return stateData ? (
       <li key={tx.id.uuid} className={css.listItem}>
-        <InboxItem unitType={unitType} type={type} tx={tx} intl={intl} stateData={stateData} />
+        <InboxItem unitType={unitType} type={type} tx={tx} intl={intl} stateData={stateData} lastMessage={lastMessage}/>
       </li>
     ) : null;
   };
@@ -424,16 +432,19 @@ InboxPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { fetchInProgress, fetchOrdersOrSalesError, pagination, transactionRefs } = state.InboxPage;
+  const { fetchInProgress, fetchOrdersOrSalesError, pagination, transactionRefs, allUserMessages, allUserMessagesError } = state.InboxPage;
   const { currentUser, currentUserNotificationCount: providerNotificationCount } = state.user;
+  
   return {
+    transactions: getMarketplaceEntities(state, transactionRefs),
     currentUser,
     fetchInProgress,
     fetchOrdersOrSalesError,
     pagination,
     providerNotificationCount,
     scrollingDisabled: isScrollingDisabled(state),
-    transactions: getMarketplaceEntities(state, transactionRefs),
+    allUserMessages,
+    allUserMessagesError
   };
 };
 
