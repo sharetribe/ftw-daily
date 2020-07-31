@@ -17,7 +17,8 @@
   min-height: 35px;
   width: 140px;
   font-size: 16px;
-  margin-top: 8px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .errorText {
