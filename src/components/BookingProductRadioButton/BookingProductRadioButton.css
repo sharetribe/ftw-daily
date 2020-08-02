@@ -18,7 +18,7 @@
   display: inline;
 }
 .input:checked + label .buttonContainer {
-  border-color: var(--marketplaceColor);
+  border-color: var(--successColor);
 }
 .input:hover + label .notChecked, .input:hover + label .required, .input:focus + label .notChecked, .input:focus + label .required, .input:checked + label .notChecked, .input:checked + label .required {
   stroke: var(--matterColorDark);
@@ -57,8 +57,8 @@
 
 .checked {
   display: none;
-  stroke: var(--marketplaceColor);
-  fill: var(--marketplaceColor);
+  stroke: var(--successColor);
+  fill: var(--successColor);
 }
 
 .notChecked {

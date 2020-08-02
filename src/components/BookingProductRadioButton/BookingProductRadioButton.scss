@@ -18,7 +18,7 @@
   }
 
   &:checked + label .buttonContainer {
-    border-color: var(--marketplaceColor);
+    border-color: var(--successColor);
   }
 
   /* Highlight the borders if the checkbox is hovered, focused or checked */
@@ -69,8 +69,8 @@
 
 .checked {
   display: none;
-  stroke: var(--marketplaceColor);
-  fill: var(--marketplaceColor);
+  stroke: var(--successColor);
+  fill: var(--successColor);
 }
 
 .notChecked {
