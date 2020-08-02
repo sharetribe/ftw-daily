@@ -583,7 +583,7 @@ export class TransactionPanelComponent extends Component {
               </div>
               
                 <BookingPanel
-                  className={css.bookingPanel}
+                  className={css.bookingPanel, css.bookingPanelChat}
                   titleClassName={css.bookingTitle}
                   isOwnListing={false}
                   listing={currentListing}
