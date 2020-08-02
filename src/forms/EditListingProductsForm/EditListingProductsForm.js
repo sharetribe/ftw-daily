@@ -30,17 +30,13 @@ export const EditListingProductsFormComponent = (props) => (
         updateInProgress,
         fetchErrors,
         values,
-        listingId,
+        listing,
         ready,
         errors,
         images,
         onChange,
-        onUpdateImageOrder,
-        onRemoveImage,
         submitButtonText,
         panelUpdated,
-        onImageUpload,
-        onImageSubmit,
         products
       } = fieldRenderProps
 
@@ -59,19 +55,15 @@ export const EditListingProductsFormComponent = (props) => (
             intl={intl}
             push={push}
             values={values}
-            listingId={listingId}
+            listing={listing}
             ready={ready}
             fetchErrors={errors}
             initialValues={{ images }}
             images={images}
-            onImageUpload={onImageUpload}
             onChange={onChange}
-            onUpdateImageOrder={onUpdateImageOrder}
-            onRemoveImage={onRemoveImage}
             saveActionMsg={submitButtonText}
             updated={panelUpdated}
             updateInProgress={updateInProgress}
-            onImageSubmit={onImageSubmit}
             form={form}
             products={products}
           />

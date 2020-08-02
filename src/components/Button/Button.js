@@ -32,6 +32,7 @@ class Button extends Component {
     const classes = classNames(rootClass, className, {
       [css.ready]: ready,
       [css.inProgress]: inProgress,
+      [css.disabled]: disabled
     })
 
     let content
@@ -86,19 +87,37 @@ Button.propTypes = {
 export default Button
 
 export const PrimaryButton = (props) => {
-  const classes = classNames(props.rootClassName || css.primaryButtonRoot, css.primaryButton)
+  const classes = classNames(
+    props.rootClassName || css.primaryButtonRoot,
+    css.primaryButton,
+    {
+      [css.disabled]: props.disabled
+    }
+  )
   return <Button {...props} rootClassName={classes} />
 }
 PrimaryButton.displayName = 'PrimaryButton'
 
 export const SecondaryButton = (props) => {
-  const classes = classNames(props.rootClassName || css.secondaryButtonRoot, css.secondaryButton)
+  const classes = classNames(
+    props.rootClassName || css.secondaryButtonRoot,
+    css.secondaryButton,
+    {
+      [css.disabled]: props.disabled
+    }
+  )
   return <Button {...props} rootClassName={classes} />
 }
 SecondaryButton.displayName = 'SecondaryButton'
 
 export const InlineTextButton = (props) => {
-  const classes = classNames(props.rootClassName || css.inlineTextButtonRoot, css.inlineTextButton)
+  const classes = classNames(
+    props.rootClassName || css.inlineTextButtonRoot,
+    css.inlineTextButton,
+    {
+      [css.disabled]: props.disabled
+    }
+  )
   return <Button {...props} rootClassName={classes} />
 }
 InlineTextButton.displayName = 'InlineTextButton'

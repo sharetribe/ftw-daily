@@ -511,7 +511,7 @@ export function requestCreateListingDraft(data) {
     const queryParams = {
       expand: true,
       include: ['author', 'images'],
-      'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
+      'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x', 'variants.scaled-small'],
     }
 
     return sdk.ownListings
@@ -552,12 +552,12 @@ export const requestPublishListingDraft = (listingId) => (dispatch, getState, sd
 export const asyncRequestImageUpload = (actionPayload) => {
   const { id } = actionPayload
   return (dispatch, getState, sdk) => {
-    dispatch(uploadImage(actionPayload))
+    // dispatch(uploadImage(actionPayload))
     return sdk.images
     .upload({ image: actionPayload.file })
     .then((resp) => {
       console.log(resp)
-      dispatch(uploadImageSuccess({ data: { id, imageId: resp.data.data.id } }))
+      // dispatch(uploadImageSuccess({ data: { id, imageId: resp.data.data.id } }))
       return resp.data.data.id
     })
     .catch((e) => {
@@ -702,7 +702,7 @@ export function requestUpdateListing(tab, data) {
       const payload = {
         id,
         include: ['author', 'images'],
-        'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
+        'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x', 'variants.scaled-small'],
       }
       return dispatch(requestShowListing(payload))
     })
@@ -731,7 +731,7 @@ export const updateListingAdHoc = (data) => {
       const payload = {
         id,
         include: ['author', 'images'],
-        'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
+        'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x', 'variants.scaled-small'],
       }
       return dispatch(requestShowListing(payload))
     })
@@ -782,7 +782,7 @@ export const loadData = (params) => (dispatch, getState, sdk) => {
   const payload = {
     id: new UUID(id),
     include: ['author', 'images'],
-    'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
+    'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x', 'variants.scaled-small'],
   }
 
   return Promise.all([dispatch(requestShowListing(payload)), dispatch(fetchCurrentUser())])

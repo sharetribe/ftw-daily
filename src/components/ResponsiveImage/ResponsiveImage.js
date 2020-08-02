@@ -71,7 +71,6 @@ const ResponsiveImage = (props) => {
   const srcSet = variants
   .map((variantName) => {
     const variant = imageVariants[variantName]
-
     if (!variant) {
       // Variant not available (most like just not loaded yet)
       return null

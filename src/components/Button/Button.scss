@@ -66,6 +66,11 @@
   background-color: var(--matterColorLight);
 }
 
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .spinner {
   width: 28px;
   height: 28px;

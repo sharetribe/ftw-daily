@@ -22,15 +22,16 @@ import {
 import { StripeConnectAccountForm } from '../../forms'
 
 import EditListingWizardTab, {
-  AVAILABILITY,
   DESCRIPTION,
+  LOCATION,
+  COLIVING,
+  COWORKING,
+  SURFING,
+  PRODUCTS,
+  AVAILABILITY,
   FEATURES,
   // POLICY,
-  LOCATION,
-  // PRICING,
-  PRODUCTS,
-  PHOTOS,
-  // COWORKING
+  PHOTOS
 } from './EditListingWizardTab'
 import css from './EditListingWizard.css'
 
@@ -43,14 +44,15 @@ const availabilityMaybe = config.enableAvailability ? [AVAILABILITY] : []
 // and listing publishing happens after last panel.
 export const TABS = [
   DESCRIPTION,
+  LOCATION,
+  COLIVING,
+  COWORKING,
+  SURFING,
+  PRODUCTS,
+  AVAILABILITY,
   FEATURES,
   // POLICY,
-  LOCATION,
-  // PRICING,
-  PRODUCTS,
-  ...availabilityMaybe,
-  PHOTOS,
-  // COWORKING,
+  PHOTOS
 ]
 
 // Tabs are horizontal in small screens
@@ -68,16 +70,17 @@ const tabLabel = (intl, tab) => {
     key = 'EditListingWizard.tabLabelLocation'
   } else if (tab === PRODUCTS) {
     key = 'EditListingWizard.tabLabelProducts'
-  // } else if (tab === PRICING) {
-  //   key = 'EditListingWizard.tabLabelPricing';
   } else if (tab === AVAILABILITY) {
     key = 'EditListingWizard.tabLabelAvailability'
   } else if (tab === PHOTOS) {
     key = 'EditListingWizard.tabLabelPhotos'
+  } else if (tab === COWORKING) {
+    key = 'EditListingWizard.tabLabelCoworking'
+  } else if (tab === COLIVING) {
+    key = 'EditListingWizard.tabLabelColiving'
+  } else if (tab === SURFING) {
+    key = 'EditListingWizard.tabLabelSurfing'
   }
-  // else if (tab === COWORKING) {
-  //   key = 'EditListingWizard.tabLabelCoworking'
-  // }
 
   return intl.formatMessage({ id: key })
 }
@@ -116,10 +119,10 @@ const tabCompleted = (tab, listing) => {
       return publicData.products && publicData.products.length
     case AVAILABILITY:
       return !!availabilityPlan
+    case COWORKING:
+      return images && images.length > 0
     case PHOTOS:
       return images && images.length > 0
-    // case COWORKING:
-    //   return images && images.length > 0
     default:
       return false
   }

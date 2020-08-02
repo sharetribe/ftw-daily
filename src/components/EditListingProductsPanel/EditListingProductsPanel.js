@@ -21,10 +21,7 @@ const EditListingProductsPanel = (props) => {
     panelUpdated,
     updateInProgress,
     errors,
-    onImageUpload,
     images,
-    onRemoveImage,
-    onUpdateImageOrder,
     disabled,
     ready
   } = props
@@ -82,15 +79,12 @@ const EditListingProductsPanel = (props) => {
         updateInProgress={updateInProgress}
         fetchErrors={errors}
         images={images}
-        onImageUpload={onImageUpload}
-        onRemoveImage={onRemoveImage}
-        onUpdateImageOrder={onUpdateImageOrder}
         panelUpdated={panelUpdated}
         updateInProgress={updateInProgress}
         disabled={disabled}
         ready={ready}
         fetchErrors={errors}
-        listingId={listing.id.uuid}
+        listing={listing}
         products={products || []}
       />
     </div>

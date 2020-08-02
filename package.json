@@ -7,6 +7,7 @@
     "@formatjs/intl-relativetimeformat": "^4.2.1",
     "@mapbox/polyline": "^1.0.0",
     "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
     "@sentry/browser": "5.7.1",
     "@sentry/node": "5.7.1",
     "array-includes": "^3.0.3",

@@ -19,22 +19,30 @@ import {
   EditListingPricingPanel,
   EditListingProductsPanel
 } from '..'
+import EditListingColivingPanel from '../EditListingColivingPanel/EditListingColivingPanel'
+import EditListingCoworkingPanel from '../EditListingCoworkingPanel/EditListingCoworkingPanel'
+import EditListingSurfingPanel from '../EditListingSurfingPanel/EditListingSurfingPanel'
 
 import css from './EditListingWizard.css'
 
-export const AVAILABILITY = 'availability'
 export const DESCRIPTION = 'description'
+export const COLIVING = 'coliving'
+export const COWORKING = 'coworking'
+export const SURFING = 'surfing'
+export const AVAILABILITY = 'availability'
 export const FEATURES = 'features'
 // export const POLICY = 'policy';
 export const LOCATION = 'location'
 export const PRICING = 'pricing'
 export const PRODUCTS = 'products'
 export const PHOTOS = 'photos'
-export const COWORKING = 'coworking_photos'
 
 // EditListingWizardTab component supports these tabs
 export const SUPPORTED_TABS = [
   DESCRIPTION,
+  COLIVING,
+  COWORKING,
+  SURFING,
   FEATURES,
   // POLICY,
   LOCATION,
@@ -42,7 +50,6 @@ export const SUPPORTED_TABS = [
   PRODUCTS,
   AVAILABILITY,
   PHOTOS,
-  // COWORKING
 ]
 
 const pathParamsToNextTab = (params, tab, marketplaceTabs) => {
@@ -171,6 +178,48 @@ const EditListingWizardTab = (props) => {
       return (
         <EditListingDescriptionPanel
           {...panelProps(DESCRIPTION)}
+          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          onSubmit={(values) => {
+            onCompleteEditListingWizardTab(tab, values, true)
+          }}
+        />
+      )
+    }
+    case COLIVING: {
+      const submitButtonTranslationKey = isNewListingFlow
+        ? 'EditListingWizard.saveNewDescription'
+        : 'EditListingWizard.saveEditDescription'
+      return (
+        <EditListingColivingPanel
+          {...panelProps(COLIVING)}
+          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          onSubmit={(values) => {
+            onCompleteEditListingWizardTab(tab, values, true)
+          }}
+        />
+      )
+    }
+    case COWORKING: {
+      const submitButtonTranslationKey = isNewListingFlow
+        ? 'EditListingWizard.saveNewDescription'
+        : 'EditListingWizard.saveEditDescription'
+      return (
+        <EditListingCoworkingPanel
+          {...panelProps(COWORKING)}
+          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          onSubmit={(values) => {
+            onCompleteEditListingWizardTab(tab, values, true)
+          }}
+        />
+      )
+    }
+    case SURFING: {
+      const submitButtonTranslationKey = isNewListingFlow
+        ? 'EditListingWizard.saveNewDescription'
+        : 'EditListingWizard.saveEditDescription'
+      return (
+        <EditListingSurfingPanel
+          {...panelProps(SURFING)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={(values) => {
             onCompleteEditListingWizardTab(tab, values, true)

@@ -30,7 +30,6 @@
 
 .additionalProductsWrapper {
   margin-bottom: 35px;
-  border-bottom: dashed 1px lightgrey;
 
   @media (--viewportMedium) {
     margin-bottom: 56px;
@@ -58,6 +57,8 @@
   color: var(--matterColorAnti);
   float: right;
   line-height: 20px;
+  margin-top: 20px;
+  margin-right: 20px;
 
   &:hover {
     color: var(--matterColor);

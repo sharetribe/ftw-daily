@@ -34,7 +34,10 @@ class FieldTextInputComponent extends Component {
     }
 
     const {
-      valid, invalid, touched, error
+      valid,
+      invalid,
+      touched,
+      error
     } = meta
     const isTextarea = input.type === 'textarea'
 

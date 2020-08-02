@@ -189,11 +189,13 @@
   "EditListingProductsForm.additionalProductTitle": "Room",
   "EditListingProductsForm.additionalProductBedTypeSelection": "What type of bed does this room have?",
   "EditListingProductsForm.additionalProductBathroomTypeSelection": "What type of bathroom does this room have?",
-  "EditListingProductsForm.additionalProductTypeTitle": "Type",
-  "EditListingProductsForm.additionalProductTypePlaceholder": "What type of room is it?",
-  "EditListingProductsForm.additionalProductTypeInvalid": "Please add a type",
+  "EditListingProductsForm.additionalProductTypeTitle": "Name",
+  "EditListingProductsForm.additionalProductTypePlaceholder": "What do you call this room?",
+  "EditListingProductsForm.additionalProductTypeInvalid": "Please add a name for the room",
   "EditListingProductsForm.additionalProductDescriptionTitle": "Description",
+  "EditListingProductsForm.additionalProductQuantity": "How many of these rooms are available?",
   "EditListingProductsForm.additionalProductDescriptionPlaceholder": "What do you want people to know about the room? Is there wifi? Desk? Cleaning? AC? Private bathroom?",
+  "EditListingProductsForm.additionalProductQuantityPlaceholder": "2",
   "EditListingProductsForm.additionalProductPriceSubTitle": "Price per night",
   "EditListingProductsForm.additionalProductPriceTitle": "Price",
   "EditListingProductsForm.additionalProductLengthOfStayDiscount": "Length of stay discount",
@@ -282,6 +284,8 @@
   "EditListingWizard.tabLabelLocation": "Location",
   "EditListingWizard.tabLabelPhotos": "Photos",
   "EditListingWizard.tabLabelCoworking": "Coworking",
+  "EditListingWizard.tabLabelColiving": "Coliving",
+  "EditListingWizard.tabLabelSurfing": "Surf",
   "EditListingWizard.tabLabelPolicy": "Space rules",
   "EditListingWizard.tabLabelPricing": "Pricing",
   "EditListingWizard.tabLabelProducts": "Rooms",
@@ -1071,5 +1075,7 @@
   "UserCard.showFullBioLink": "more",
   "UserCard.viewProfileLink": "View profile",
   "UserDisplayName.banned": "Banned user",
-  "UserDisplayName.deleted": "Deleted user"
+  "UserDisplayName.deleted": "Deleted user",
+
+  "GenericForm.required": "This field is required"
 }

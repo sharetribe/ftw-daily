@@ -73,15 +73,6 @@ const EditListingDescriptionFormComponent = (props) => (
       const communityPlaceholderMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.communityPlaceholder',
       })
-      const wifiMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.wifi',
-      })
-      const wifiPlaceholderMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.wifiPlaceholder',
-      })
-      const wifiValidMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.wifiInvalid',
-      })
       const retreatMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.retreat',
       })
@@ -246,16 +237,6 @@ const EditListingDescriptionFormComponent = (props) => (
             type="textarea"
             label={communityMessage}
             placeholder={communityPlaceholderMessage}
-          />
-
-          <FieldTextInput
-            id="wifi"
-            name="wifi"
-            className={css.wifi}
-            type="text"
-            label={wifiMessage}
-            placeholder={wifiPlaceholderMessage}
-            validate={composeValidators(isValidNumber(wifiValidMessage))}
           />
 
           <h3 className={css.sectionTitle}>Retreats</h3>

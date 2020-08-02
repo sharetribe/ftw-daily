@@ -1,3 +1,4 @@
+import Divider from '@material-ui/core/Divider';
 import React from 'react'
 import {
   bool, func, object, string
@@ -18,7 +19,7 @@ const EditListingProductsAdditionalProducts = (props) => {
     disabled,
     intl,
     push,
-    listingId,
+    listing,
     ready,
     errors,
     images,
@@ -29,16 +30,19 @@ const EditListingProductsAdditionalProducts = (props) => {
     form,
   } = props
 
-  const addImageToProductAndComposeUpdateObject = (photoId, productId, params = {}) => {
+  const addImageToProductAndComposeUpdateObject = (photoIds, productId, params = {}) => {
     const t = _.get(form.getState(), 'values.products', [])
     const b = _.remove(t, (p) => p.id === productId)[0]
     if (b) {
       b.photos = {
-        ...b.photos,
-        [photoId]: params
+        ...b.photos
       }
+      photoIds.forEach((v) => {
+        b.photos[v] = {}
+      })
     }
-    return [...t, b].map((p, idx) => ({
+    // because const = b might be undefined we use compact to filter out falsey vals
+    return _.compact([...t, b]).map((p, idx) => ({
       ...p,
       price: {
         amount: p.price.amount,
@@ -57,20 +61,22 @@ const EditListingProductsAdditionalProducts = (props) => {
     return [...t, b]
   }
 
-  const updateListingProducts = (products) => {
+  const updateListingProducts = (products, photoIds) => {
+    const imgs = (listing.images || []).map((img) => img.id.uuid)
     props.updateListingAdHoc({
-      id: listingId,
+      id: listing.id.uuid,
       publicData: {
         products
-      }
+      },
+      images: _.xor(imgs, photoIds)
     })
   }
-
+  const formState = form.getState()
   return (
     <div>
       <FieldArray id={`${fieldId}`} name={`${fieldId}`}>
         {({ fields }) => fields.map((name, index) => {
-          const product = _.get(form.getState().values, `products[${index}]`, {})
+          const product = _.get(formState.values, `products[${index}]`, {})
           return (
             <div className={css.additionalProductsWrapper} key={name}>
               <div
@@ -89,27 +95,27 @@ const EditListingProductsAdditionalProducts = (props) => {
                 disabled={disabled}
                 form={form}
                 sectionTitle={intl.formatMessage({ id: 'EditListingProductsForm.additionalProductTitle' })}
-                listingId={listingId}
-                product={_.clone(product)}
+                listingId={listing.id.uuid}
+                product={product}
                 order={product.order}
                 index={index}
                 disabled={disabled}
                 ready={ready}
                 fetchErrors={errors}
-                images={images}
+                images={_.filter(images, (img) => _.includes(_.keys(product.photos), img.id.uuid))}
                 onChange={onChange}
                 saveActionMsg={submitButtonText}
                 updated={panelUpdated}
                 updated={panelUpdated}
                 updateInProgress={updateInProgress}
-                onImageSubmit={(photoId, productId) => {
-                  updateListingProducts(addImageToProductAndComposeUpdateObject(photoId, productId))
+                onImageSubmit={(photoIds, productId) => {
+                  updateListingProducts(addImageToProductAndComposeUpdateObject(photoIds, productId), photoIds)
                 }}
                 onImageDelete={(photoId, productId) => {
-                  updateListingProducts(deleteImageFromProductAndComposeUpdateObject(photoId, productId))
+                  updateListingProducts(deleteImageFromProductAndComposeUpdateObject(photoId, productId), photoId)
                 }}
               />
-
+              <Divider />
             </div>
           )
         })}
@@ -119,6 +125,7 @@ const EditListingProductsAdditionalProducts = (props) => {
         <InlineTextButton
           type="button"
           rootClassName={css.fieldArrayAdd}
+          disabled={formState.invalid}
           onClick={() => {
             push(fieldId, { id: `prod-${_.random(100, 9999)}-${_.random(1, 100)}` })
           }}

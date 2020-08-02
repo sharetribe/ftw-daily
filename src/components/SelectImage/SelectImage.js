@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes, { bool, func, object, string } from 'prop-types'
 import { useDropzone } from 'react-dropzone'
 import _ from 'lodash'
 import { injectIntl } from 'react-intl'
@@ -7,10 +8,7 @@ import { compose } from 'redux'
 import { v4 as uuid } from 'uuid'
 import {
   asyncRequestImageUpload,
-  requestImageUpload,
-  updateListingAdHoc,
 } from '../../containers/EditListingPage/EditListingPage.duck'
-import { buildKey, deleteImage, uploadImage } from '../../util/s3_storage'
 import RemoveImageButton from '../AddImages/RemoveImageButton'
 import IconSpinner from '../IconSpinner/IconSpinner'
 
@@ -25,48 +23,39 @@ const SelectImage = (props) => {
     imagesToDisplay = [],
     showThumbnails = true,
     onProgressCallback,
-    uploadImageToST
+    uploadImageToST,
+    allImages,
+    multiple
+
   } = props
 
   const buildImagesToDisplay = () => {
-    return imagesToDisplay.map((img) => ({
-      name: img,
-      preview: `https://coworksurf.imgix.net/public/${img}?fm=jpm&auto=format&h=100&fit=clip`
-    }))
+    return imagesToDisplay.map((img) => {
+      const url = _.get(allImages, `[${img}].attributes.variants["scaled-small"].url`)
+      return {
+        name: img,
+        preview: url
+      }
+    })
+  }
+
+  const runOnProgressCallback = (workingFiles) => {
+    if (onProgressCallback) {
+      onProgressCallback(workingFiles)
+    }
   }
 
   const [files, setFiles] = useState(buildImagesToDisplay())
   const [workingFiles, setWorkingFiles] = useState([])
 
-  const onImageUploaded = async (file) => {
-    let path
-    if (rootKeySegments.length > 0) {
-      path = `${buildKey(rootKeySegments)}/${file.name}`
-    } else {
-      path = file.name
-    }
-
-    await uploadImage(path, file.file)
-    onUpload(file.name)
-    const wf = workingFiles.filter((f) => f !== file.name)
-    setWorkingFiles(wf)
-    onProgressCallback(wf)
-  }
-
   const onImageDelete = async (fileName) => {
-    let path
-    if (rootKeySegments.length > 0) {
-      path = `${buildKey(rootKeySegments)}/${fileName}`
-    } else {
-      path = fileName
-    }
     setFiles(files.filter((f) => f.name !== fileName))
-    await deleteImage(path)
     onDelete(fileName)
   }
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/jpeg, image/png, image/jpg',
+    multiple,
     onDrop: async (acceptedFiles) => {
       const keys = []
       const a = acceptedFiles.map((f1) => {
@@ -79,13 +68,20 @@ const SelectImage = (props) => {
       })
       const wf = [...workingFiles, ...keys]
       setWorkingFiles(wf)
-      onProgressCallback(wf)
-      a.map(async (f, idx) => {
-        const s = await uploadImageToST({ file: f.file, id: f.name })
-        await props.onUpload(s.uuid)
-        const n = _.without(workingFiles, f.name)
-        setWorkingFiles(n)
-        onProgressCallback(n)
+      runOnProgressCallback(wf)
+
+      // upload ALL images to the backend first
+      const b = a.map((f, idx) => {
+        return uploadImageToST({ file: f.file, id: f.name })
+      })
+      // once all the promises resolve then we save them to the listing
+      // and the product
+      Promise.all(b).then(async (r) => {
+        const ids = r.map((rsp) => rsp.uuid)
+        await onUpload(ids)
+        const newWorkingFiles = _.difference(workingFiles, ids)
+        setWorkingFiles(newWorkingFiles)
+        runOnProgressCallback(newWorkingFiles)
       })
       if (showThumbnails) {
         setFiles(files.concat(a.map((file, idx) => Object.assign(file, {
@@ -96,7 +92,6 @@ const SelectImage = (props) => {
     },
     disabled
   })
-
 
   const thumbs = files.map((file) => {
     return (
@@ -131,7 +126,7 @@ const SelectImage = (props) => {
         {
           disabled ? <p>Enter in the above information before uploading photos</p>
             : <div className={css.textContainer}>
-              <p>Drag 'n' drop some photos here, or click to select photos</p>
+              <p>Drag 'n drop photos here, or click to select with a file browser</p>
               <small>JPEG or PNG</small>
             </div>
         }
@@ -145,8 +140,10 @@ const SelectImage = (props) => {
 
 const mapStateToProps = (state) => {
   const { currentUser } = state.user
+
   return {
-    userId: _.get(currentUser, 'id.uuid')
+    userId: _.get(currentUser, 'id.uuid'),
+    allImages: _.get(state.marketplaceData, 'entities.image')
   }
 }
 

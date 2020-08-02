@@ -73,14 +73,15 @@ const ListingEditWowHero = (props) => {
         }
       </div>
       <SelectImage
-        onUpload={(photoId) => {
-          addImageToProductAndComposeUpdateObject(photoId)
+        onUpload={(photoIds) => {
+          addImageToProductAndComposeUpdateObject(photoIds[0])
         }}
         showThumbnails={false}
         onProgressCallback={(wfs) => {
           console.log(wfs)
           setIsUploading(wfs.length)
         }}
+        multiple={false}
       />
     </div>
   )
