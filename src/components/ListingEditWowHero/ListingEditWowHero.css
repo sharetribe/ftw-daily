@@ -13,7 +13,12 @@
   position: absolute;
   height: 100%;
   width: 100%;
-  padding: 25px;
+  padding: 0 15px;
+}
+@media (--viewportMedium) {
+  .heroTextContainer {
+    padding: 25px;
+  }
 }
 
 .heroTitle {

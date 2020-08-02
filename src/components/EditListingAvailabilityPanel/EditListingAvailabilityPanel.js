@@ -30,20 +30,28 @@ const EditListingAvailabilityPanel = (props) => {
   const classes = classNames(rootClassName || css.root, className)
   const currentListing = ensureOwnListing(listing)
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT
-  const defaultAvailabilityPlan = {
-    type: 'availability-plan/day',
-    entries: [
-      { dayOfWeek: 'mon', seats: 1 },
-      { dayOfWeek: 'tue', seats: 1 },
-      { dayOfWeek: 'wed', seats: 1 },
-      { dayOfWeek: 'thu', seats: 1 },
-      { dayOfWeek: 'fri', seats: 1 },
-      { dayOfWeek: 'sat', seats: 1 },
-      { dayOfWeek: 'sun', seats: 1 },
-    ],
+
+  const generateBasicAvailabilityPlan = () => {
+    const { products } = currentListing.attributes.publicData
+    let generalAvailability = 0
+    products.forEach((v) => {
+      generalAvailability += v.quantityAvailable.value
+    })
+    return {
+      type: 'availability-plan/day',
+      entries: [
+        { dayOfWeek: 'mon', seats: generalAvailability },
+        { dayOfWeek: 'tue', seats: generalAvailability },
+        { dayOfWeek: 'wed', seats: generalAvailability },
+        { dayOfWeek: 'thu', seats: generalAvailability },
+        { dayOfWeek: 'fri', seats: generalAvailability },
+        { dayOfWeek: 'sat', seats: generalAvailability },
+        { dayOfWeek: 'sun', seats: generalAvailability },
+      ],
+    }
   }
-  console.log(currentListing)
-  const availabilityPlan = currentListing.attributes.availabilityPlan || defaultAvailabilityPlan
+
+  const availabilityPlan = currentListing.attributes.availabilityPlan || generateBasicAvailabilityPlan()
 
   return (
     <div className={classes}>
