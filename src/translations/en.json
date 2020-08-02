@@ -184,6 +184,11 @@
   "EditListingDescriptionForm.video": "Embed a Youtube video",
   "EditListingDescriptionForm.videoPlaceholder": "A video is worth a thousand photos. Click Share > Embed > Use the /embed/.. link",
   "EditListingDescriptionForm.videoInvalid": "This is not a valid YouTube embed link. Make sure it contains the path '/embed'. E.g: https://www.youtube.com/embed/kfprl2r85LM",
+
+  "EditListingColivingPanel.title": "Coliving",
+  "EditListingColivingForm.description": "Description",
+  "EditListingColivingForm.descriptionPlaceholder": "What is it like to live in your space?",
+
   "EditListingProductsForm.additionalProductLink": "Add another room",
   "EditListingProductsForm.additionalProductRemove": "Remove room",
   "EditListingProductsForm.additionalProductTitle": "Room",

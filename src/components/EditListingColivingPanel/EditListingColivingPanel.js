@@ -2,6 +2,7 @@ import React from 'react'
 import {
   bool, func, object, string
 } from 'prop-types'
+import _ from 'lodash'
 import classNames from 'classnames'
 import EditListingColivingForm
   from '../../forms/EditListingColivingForm/EditListingColivingForm'
@@ -48,30 +49,23 @@ const EditListingColivingPanel = (props) => {
       <EditListingColivingForm
         className={css.form}
         initialValues={{
-          title,
-          description,
-          heroPhotoId: publicData.heroPhotoId,
-          category: publicData.category,
-          surf: publicData.surf,
-          vibe: publicData.vibe,
-          community: publicData.community,
-          wifi: publicData.wifi,
-          retreat: publicData.retreat,
-          video: publicData.video
+          coliving: publicData.coliving
         }}
         saveActionMsg={submitButtonText}
         onSubmit={(values) => {
-          const {
-            images
-          } = values
+          console.log(listing)
+          const existingImages = _.get(listing, 'images', []).map((li) => li.id.uuid)
+          console.log(existingImages)
+          console.log(_.concat(existingImages, _.keys(values.coliving.images)))
+          const t = _.concat(existingImages, _.keys(values.coliving.images))
           const updateValues = {
             publicData: {
               coliving: {
-                images
-              }
+                ...values.coliving
+              },
             },
+            images: t
           }
-
           onSubmit(updateValues)
         }}
         onChange={onChange}

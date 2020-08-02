@@ -114,12 +114,18 @@ const EditListingWizardTab = (props) => {
   const isNewListingFlow = isNewURI || isDraftURI
 
   const currentListing = ensureListing(listing)
-  const imageIds = (images) => {
-    return images ? images.map((img) => img.imageId || img.id) : null
+  const imageIds = (imgs) => {
+    return imgs ? imgs.map((img) => {
+      if (typeof img === 'string') {
+        return img
+      }
+      return img.imageId || img.id
+    }) : null
   }
 
   const onCompleteEditListingWizardTab = (tab, updateValues, shouldRedirect) => {
     // Normalize images for API call
+    console.log(updateValues)
     const { images: updatedImages, ...otherValues } = updateValues
     const imageProperty
       = typeof updatedImages !== 'undefined' ? { images: imageIds(updatedImages) } : {}

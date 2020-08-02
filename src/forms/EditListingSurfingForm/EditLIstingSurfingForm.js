@@ -1,10 +1,4 @@
-import Checkbox from '@material-ui/core/Checkbox'
-import FormControl from '@material-ui/core/FormControl'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import FormGroup from '@material-ui/core/FormGroup'
-import FormHelperText from '@material-ui/core/FormHelperText'
-import FormLabel from '@material-ui/core/FormLabel'
-import { Favorite, FavoriteBorder } from '@material-ui/icons'
+import Grid from '@material-ui/core/Grid';
 import React from 'react'
 import {
   arrayOf, bool, func, shape, string
@@ -13,13 +7,14 @@ import _ from 'lodash'
 import { compose } from 'redux'
 import { Form as FinalForm } from 'react-final-form'
 import classNames from 'classnames'
+import SelectImage from '../../components/SelectImage/SelectImage';
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl'
 import { propTypes } from '../../util/types'
 import {
-  maxLength, required, isValidNumber, validYouTubeURL, composeValidators
+  required
 } from '../../util/validators'
 import {
-  Form, Button, FieldTextInput, FieldBoolean
+  Form, Button, FieldTextInput
 } from '../../components'
 
 import css from './EditListingSurfingForm.css'
@@ -29,7 +24,6 @@ const EditListingSurfingFormComponent = (props) => (
     {...props}
     render={(formRenderProps) => {
       const {
-        categories,
         className,
         disabled,
         ready,
@@ -44,16 +38,6 @@ const EditListingSurfingFormComponent = (props) => (
         values,
         form,
       } = formRenderProps
-
-      const wifiMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.wifi',
-      })
-      const wifiPlaceholderMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.wifiPlaceholder',
-      })
-      const wifiValidMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.wifiInvalid',
-      })
 
       const { updateListingError, showListingsError } = fetchErrors || {}
       const errorMessageUpdateListing = updateListingError ? (
@@ -73,28 +57,56 @@ const EditListingSurfingFormComponent = (props) => (
       const submitInProgress = updateInProgress
       const submitDisabled = invalid || disabled || submitInProgress
 
-      const fieldId = 'surf'
+      const updatePhotos = (photoIds) => {
+        const images = _.get(values, 'surfing.images', {})
+        const ids = _.xor(_.keys(images), photoIds)
+        const newImages = {}
+        ids.forEach((v) => {
+          newImages[v] = {}
+        })
+        const update = _.defaults(images, newImages)
+        form.change('surfing.images', update)
+        form.submit()
+      }
+
       return (
-        <form onSubmit={handleSubmit} noValidate>
+        <Form className={classes} onSubmit={handleSubmit}>
           {errorMessageUpdateListing}
           {errorMessageShowListing}
-          <FormControl component="fieldset" className={classes.formControl}>
-            <FormLabel component="legend">Do you rent any of the following surf things?</FormLabel>
-            <FormGroup>
-              <FormControlLabel
-                control={<Checkbox checked={values.boards} name="surf.rentals.boards"/>}
-                label="Surfboards"
+          <Grid container className={classes.root} direction="column" spacing={5}>
+            <Grid item xs={12}>
+              <Grid container justify="center" spacing={2} direction="column">
+                <Grid item xs={12}>
+                  <FieldTextInput
+                    id="surfing.description"
+                    name="surfing.description"
+                    type="textarea"
+                    label={intl.formatMessage({
+                      id: 'EditListingColivingForm.description',
+                    })}
+                    placeholder={intl.formatMessage({
+                      id: 'EditListingColivingForm.descriptionPlaceholder',
+                    })}
+                    validate={required(intl.formatMessage({ id: 'GenericForm.required' }))}
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item xs={12}>
+              <h3 className={css.subTitle}>Coliving Photos</h3>
+              <SelectImage
+                onUpload={(photoIds) => {
+                  updatePhotos(photoIds)
+                }}
+                onDelete={(photoIds) => {
+                  updatePhotos(photoIds)
+                }}
+                disabled={form.getState().invalid}
+                imagesToDisplay={_.keys([])}
+                showThumbnails={true}
               />
-              <FormControlLabel
-                control={<Checkbox checked={values.wetsuits} name="surf.rentals.wetsuits"/>}
-                label="Wetsuits"
-              />
-              <FormControlLabel
-                control={<Checkbox checked={values.lessons} name="surf.rentals.lessons"/>}
-                label="Lessons"
-              />
-            </FormGroup>
-          </FormControl>
+            </Grid>
+          </Grid>
           <Button
             className={css.submitButton}
             type="submit"
@@ -104,7 +116,7 @@ const EditListingSurfingFormComponent = (props) => (
           >
             {saveActionMsg}
           </Button>
-        </form>
+        </Form>
       )
     }}
   />

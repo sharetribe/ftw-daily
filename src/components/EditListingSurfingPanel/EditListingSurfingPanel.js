@@ -48,22 +48,18 @@ const EditListingSurfingPanel = (props) => {
       <EditListingSurfingForm
         className={css.form}
         initialValues={{
-          title
+          surfing: publicData.surfing
         }}
         saveActionMsg={submitButtonText}
         onSubmit={(values) => {
-          const {
-            surf, images
-          } = values
-          console.log(values)
-          // const updateValues = {
-          //   publicData: {
-          //     surf,
-          //     images
-          //   },
-          // }
-
-          // onSubmit(updateValues)
+          const updateValues = {
+            publicData: {
+              surfing: {
+                ...values.surfing
+              }
+            },
+          }
+          onSubmit(updateValues)
         }}
         onChange={onChange}
         disabled={disabled}

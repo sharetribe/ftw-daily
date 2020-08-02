@@ -1,3 +1,4 @@
+import Grid from '@material-ui/core/Grid'
 import React from 'react'
 import {
   arrayOf, bool, func, shape, string
@@ -6,6 +7,7 @@ import _ from 'lodash'
 import { compose } from 'redux'
 import { Form as FinalForm } from 'react-final-form'
 import classNames from 'classnames'
+import SelectImage from '../../components/SelectImage/SelectImage'
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl'
 import { propTypes } from '../../util/types'
 import {
@@ -38,16 +40,6 @@ const EditListingColivingFormComponent = (props) => (
         form,
       } = formRenderProps
 
-      const wifiMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.wifi',
-      })
-      const wifiPlaceholderMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.wifiPlaceholder',
-      })
-      const wifiValidMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.wifiInvalid',
-      })
-
       const { updateListingError, showListingsError } = fetchErrors || {}
       const errorMessageUpdateListing = updateListingError ? (
         <p className={css.error}>
@@ -66,19 +58,64 @@ const EditListingColivingFormComponent = (props) => (
       const submitInProgress = updateInProgress
       const submitDisabled = invalid || disabled || submitInProgress
 
+      form.registerField(
+        'coliving.images',
+        (fieldState) => fieldState,
+        {}
+      )
+
+      const updatePhotos = (photoIds) => {
+        const formState = form.getState().values
+        const images = _.get(formState, 'coliving.images', {})
+        const ids = _.xor(_.keys(images), photoIds)
+        const newImages = {}
+        ids.forEach((v) => {
+          newImages[v] = {}
+        })
+        const update = _.defaults(images, newImages)
+        form.change('coliving.images', update)
+        form.submit()
+      }
+
+      console.log(values)
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessageUpdateListing}
           {errorMessageShowListing}
-          <FieldTextInput
-            id="wifi"
-            name="wifi"
-            className={css.wifi}
-            type="text"
-            label={wifiMessage}
-            placeholder={wifiPlaceholderMessage}
-            validate={composeValidators(isValidNumber(wifiValidMessage))}
-          />
+          <Grid container className={classes.root} direction="column" spacing={5}>
+            <Grid item xs={12}>
+              <Grid container justify="center" spacing={2} direction="column">
+                <Grid item xs={12}>
+                  <FieldTextInput
+                    id="coliving.description"
+                    name="coliving.description"
+                    type="textarea"
+                    label={intl.formatMessage({
+                      id: 'EditListingColivingForm.description',
+                    })}
+                    placeholder={intl.formatMessage({
+                      id: 'EditListingColivingForm.descriptionPlaceholder',
+                    })}
+                    validate={required(intl.formatMessage({ id: 'GenericForm.required' }))}
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item xs={12}>
+              <h3 className={css.subTitle}>Coliving Photos</h3>
+              <SelectImage
+                onUpload={(photoIds) => {
+                  updatePhotos(photoIds)
+                }}
+                onDelete={(photoIds) => {
+                  updatePhotos(photoIds)
+                }}
+                disabled={form.getState().invalid}
+                imagesToDisplay={_.keys(values.coliving.images)}
+                showThumbnails={true}
+              />
+            </Grid>
+          </Grid>
           <Button
             className={css.submitButton}
             type="submit"
