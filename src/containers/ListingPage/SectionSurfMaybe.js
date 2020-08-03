@@ -81,14 +81,8 @@ const SectionSurfMaybe = (props) => {
       </h2>
       <p className={css.community}>
         {
-          publicData.surfing ? richText(publicData.surfing.description, {
-            longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS_IN_SURF,
-            longWordClass: css.longWord,
-          })
-            : richText(publicData.surf, {
-              longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS_IN_SURF,
-              longWordClass: css.longWord,
-            })
+          publicData.surfing ? publicData.surfing.description
+            : publicData.surf
         }
       </p>
       <div className={css.waveIconDividerContainer}>

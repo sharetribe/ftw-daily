@@ -37,14 +37,8 @@ const SectionColivingMaybe = (props) => {
       </h2>
       <p className={css.community}>
         {
-          publicData.coliving ? richText(publicData.coliving.description, {
-            longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS_IN_COMMUNITY,
-            longWordClass: css.longWord,
-          })
-            : richText(publicData.vibe, {
-              longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS_IN_COMMUNITY,
-              longWordClass: css.longWord,
-            })
+          publicData.coliving ? publicData.coliving.description
+            : publicData.vibe
         }
       </p>
       {generateMobileImageGrid()}
