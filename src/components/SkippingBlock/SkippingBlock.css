@@ -1,0 +1,36 @@
+.greyButton {
+  margin-top: 10px;
+  background-color: transparent;
+  color: #1a2b49;
+}
+.greyButton:hover {
+  background-color: #fafafa;
+}
+.modalBody {
+  margin-bottom: 54px;
+}
+.informationModal{
+  flex-grow: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 24px 48px 24px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  border-bottom: none;
+}
+
+@media (min-width: 768px) {
+  .informationModal {
+    flex-basis: 480px;
+    flex-grow: 0;
+    padding: 55px 60px 55px 60px;
+    margin-top: 12.5vh;
+    margin-bottom: 12.5vh;
+    border-top: 8px solid #923395;
+  }
+}
+
+.informationModal {
+  padding-top: 70px;
+}

@@ -79,7 +79,7 @@ const messageChecks = [
   // {
   //   regExp:/[\d\s]{8,}/,
   //   addAsterisk: function(message) {
-      
+
   //     let asteriskMessage = ''
   //     const numbers = message.match(new RegExp(this.regExp, 'g'))
   //     numbers
@@ -100,7 +100,7 @@ const messageChecks = [
   // {
   //   regExp:/[\d\w.]+@[\w\d]+.[\w\d]+/,
   //   addAsterisk: function(message) {
-      
+
   //     let asteriskMessage = ''
   //     const numbers = message.match(new RegExp(this.regExp, 'g'))
   //     numbers
@@ -225,7 +225,7 @@ export class TransactionPanelComponent extends Component {
         message = addAsterisk(message, regExp)
       }
     })
-    
+
     onSendMessage(ensuredTransaction.id, message)
       .then(messageId => {
         if(eventTextAreaTarget) {
@@ -282,7 +282,7 @@ export class TransactionPanelComponent extends Component {
       fetchTimeSlotsError,
       nextTransitions,
     } = this.props;
-   
+
     const currentTransaction = ensureTransaction(transaction);
     const currentListing = ensureListing(currentTransaction.listing);
     const currentProvider = ensureUser(currentTransaction.provider);
@@ -406,7 +406,7 @@ export class TransactionPanelComponent extends Component {
         img: firstImage
       }
     }
-    
+
     const saleButtons = (
       <SaleActionButtonsMaybe
         showButtons={stateData.showSaleButtons}
@@ -421,12 +421,12 @@ export class TransactionPanelComponent extends Component {
 
     const showSendMessageForm =
       !isCustomerBanned && !isCustomerDeleted && !isProviderBanned && !isProviderDeleted;
-    
+
     const sendMessagePlaceholder = intl.formatMessage(
       { id: 'TransactionPanel.sendMessagePlaceholder' },
       { name: otherUserDisplayNameString.split(" ").slice(0,1)[0] }
     );
-    
+
     const sendingMessageNotAllowed = intl.formatMessage({
       id: 'TransactionPanel.sendingMessageNotAllowed',
     });
@@ -440,7 +440,7 @@ export class TransactionPanelComponent extends Component {
     const classes = classNames(rootClassName || css.root, className);
 
     const isMobile = (typeof window !== 'undefined' && window.innerWidth < 560);
-    
+
     const IsWrappedWithLink = ({ condition, wrapper, children }) => condition ? wrapper(children) : children;
 
     return (
@@ -542,7 +542,7 @@ export class TransactionPanelComponent extends Component {
                     isCustomer={isCustomer}
                   />
               </IsWrappedWithLink>
-         
+
               <DetailCardHeadingsMaybe
                 showDetailCardHeadings={stateData.showDetailCardHeadings}
                 listingTitle={listingTitle}
@@ -569,10 +569,10 @@ export class TransactionPanelComponent extends Component {
                 </div>
               </div>
             </div>
-            
+
             <div className={css.openBookingForm}>
               <div className={css.bookingHelp}>
-              <div className={css.priceValue}>{formatMoney(intl, price)}</div> 
+              <div className={css.priceValue}>{formatMoney(intl, price)}</div>
               {intl.formatMessage({ id: unitTranslationKey })}</div>
               <div className={css.bookingDatesSubmitButtonWrapper}>
                 <a href="https://calendly.com/horsedeal24" className target="_blank">
@@ -581,7 +581,7 @@ export class TransactionPanelComponent extends Component {
                   </PrimaryButton>
                 </a>
               </div>
-              
+
                 <BookingPanel
                   className={css.bookingPanel}
                   titleClassName={css.bookingTitle}
@@ -595,7 +595,7 @@ export class TransactionPanelComponent extends Component {
                   timeSlots={timeSlots}
                   fetchTimeSlotsError={fetchTimeSlotsError}
                 />
-         
+
               <BreakdownMaybe
                 className={css.breakdownContainer}
                 transaction={currentTransaction}

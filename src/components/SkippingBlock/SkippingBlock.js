@@ -1,199 +1,120 @@
-import React, { useState } from 'react';
-import { bool, func, object, shape, string } from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import {  func } from 'prop-types';
 import { compose } from 'redux';
-import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
-import { Form as FinalForm } from 'react-final-form';
-import arrayMutators from 'final-form-arrays';
-import classNames from 'classnames';
-import config from '../../config';
-import { propTypes } from '../../util/types';
-import { isStripeInvalidPostalCode, isStripeError } from '../../util/errors';
-import * as validators from '../../util/validators';
-import { Button, ExternalLink, Form } from '../../components';
+import { FormattedMessage } from '../../util/reactIntl';
 
-import css from './../../forms/PayoutDetailsForm/PayoutDetailsForm.css';
-import { Redirect, withRouter } from 'react-router-dom';
-import { loginFacebook } from '../../ducks/Auth.duck';
-import { redirectState, publicDraft } from '../../ducks/stripe.duck';
+import { Button,  Modal } from '../../components';
+import { manageDisableScrolling} from '../../ducks/UI.duck';
+import css from './SkippingBlock.css';
+
+import {withRouter } from 'react-router-dom';
+import {
+  redirectState,
+  requestStripeAccount,
+  stripeAccountCreatedState,
+  stripeAccountShowWindow,
+} from '../../ducks/stripe.duck';
 import { connect } from 'react-redux';
+import { pathByRouteName } from '../../util/routes';
+import routeConfiguration from '../../routeConfiguration';
 
-const supportedCountries = config.stripe.supportedCountries.map(c => c.code);
+const later = (history) =>{
+  const path = pathByRouteName('PayoutPreferencesPage', routeConfiguration())
+  history.push(path)
+}
 
-export const stripeCountryConfigs = countryCode => {
-  const country = config.stripe.supportedCountries.find(c => c.code === countryCode);
+function  SkippingBlockComponent  (props)  {
+  const{ closeButtonMessage, onManageDisableScrolling, onRedirectState, onRequestStripeAccount, redirect, stripeAccountCreated, stripeAccountCreatedShow, onStripeAccountShowWindow, submitButtonText, history } = props
+ const [hasSeenMissingInformationReminder, setHasSeenMissingInformationReminder]= useState(null)
 
-  if (!country) {
-    throw new Error(`Country code not found in Stripe config ${countryCode}`);
-  }
-  return country;
-};
-
-const SkippingBlokComponent = props => (
-
-    <FinalForm
-      {...props}
-      mutators={{
-        ...arrayMutators,
+  useEffect(   () => {
+    onRequestStripeAccount()
+    }, [])
+  console.log(stripeAccountCreated)
+  return (
+    <>
+      {redirect ? later(history) :(
+    <Modal
+      id="MissingInformationReminder"
+      containerClassName={css.informationModal}
+      isOpen={(!stripeAccountCreated && stripeAccountCreatedShow) }
+      onClose={() => {
+        onStripeAccountShowWindow(false)
+          setHasSeenMissingInformationReminder( !stripeAccountCreated)
       }}
-      render={fieldRenderProps => {
-        const {
-          state,
-          redirect,
-          className,
-          createStripeAccountError,
-          disabled,
-          handleSubmit,
-          inProgress,
-          intl,
-          invalid,
-          pristine,
-          ready,
-          submitButtonText,
-          currentUserId,
-          values,
-        } = fieldRenderProps;
+      onManageDisableScrolling={onManageDisableScrolling}
+      closeButtonMessage={closeButtonMessage}
+    >
+      <div className={css.modalBody}>
+        <h1 >
+          <FormattedMessage id="EditListingPhotosPanel.payoutModalTitleOneMoreThing" />
+          <br />
+          <FormattedMessage id="EditListingPhotosPanel.methodGettingMoney" />
+        </h1>
+        <p >
+          <FormattedMessage id="EditListingPhotosPanel.payoutModalInfo" />
+        </p>
+        <Button
+          type="submit"
+          onClick={()=>{
+            onRedirectState()
+          }}>
+          {submitButtonText ? (
+            submitButtonText
+          ) : (
+            <FormattedMessage id="PayoutDetailsForm.submitInformationButtonText" />
+          )}
+        </Button>
+        <Button
+          className={css.greyButton}
+          type="submit"
+          onClick={() => {
+            onStripeAccountShowWindow(false)
+            setHasSeenMissingInformationReminder( !stripeAccountCreated)
+          }}
+        >
+          {submitButtonText ? (
+            submitButtonText
+          ) : (
+            <FormattedMessage
+              id="PayoutDetailsForm.laterButtonText" />
+          )}
+        </Button>
+      </div>
+    </Modal>)}
+      </>
+  )
+}
 
-        const { country } = values;
-
-        const accountType = values.accountType;
-
-        const individualAccountLabel = intl.formatMessage({
-          id: 'PayoutDetailsForm.individualAccount',
-        });
-
-        const companyAccountLabel = intl.formatMessage({ id: 'PayoutDetailsForm.companyAccount' });
-
-        const countryLabel = intl.formatMessage({ id: 'PayoutDetailsForm.countryLabel' });
-        const countryPlaceholder = intl.formatMessage({
-          id: 'PayoutDetailsForm.countryPlaceholder',
-        });
-        const countryRequired = validators.required(
-          intl.formatMessage({
-            id: 'PayoutDetailsForm.countryRequired',
-          })
-        );
-
-        const classes = classNames(css.root, className, {
-          [css.disabled]: disabled,
-        });
-
-        const submitInProgress = inProgress;
-        const submitDisabled = pristine || invalid || disabled || submitInProgress;
-        const showAsRequired = pristine;
-
-        const showIndividual = country && accountType && accountType === 'individual';
-        const showCompany = country && accountType && accountType === 'company';
-
-        let error = null;
-
-        if (isStripeInvalidPostalCode(createStripeAccountError)) {
-          error = (
-            <div className={css.error}>
-              <FormattedMessage id="PayoutDetailsForm.createStripeAccountFailedInvalidPostalCode" />
-            </div>
-          );
-        } else if (isStripeError(createStripeAccountError)) {
-          const stripeMessage = createStripeAccountError.apiErrors[0].meta.stripeMessage;
-          error = (
-            <div className={css.error}>
-              <FormattedMessage
-                id="PayoutDetailsForm.createStripeAccountFailedWithStripeError"
-                values={{ stripeMessage }}
-              />
-            </div>
-          );
-        } else if (createStripeAccountError) {
-          error = (
-            <div className={css.error}>
-              <FormattedMessage id="PayoutDetailsForm.createStripeAccountFailed" />
-            </div>
-          );
-        }
-
-        const stripeConnectedAccountTermsLink = (
-          <ExternalLink href="https://stripe.com/connect-account/legal" className={css.termsLink}>
-            <FormattedMessage id="PayoutDetailsForm.stripeConnectedAccountTermsLink" />
-          </ExternalLink>
-        );
-        return config.stripe.publishableKey ? (
-          redirect ? <Redirect to='/account/payments'/> :
-            <div className={css.sectionContainer}>
-              <Button
-                type="submit"
-                inProgress={submitInProgress}
-                ready={ready}
-                onClick={()=>props.onRedirectState()}>
-                {submitButtonText ? (
-                  submitButtonText
-                ) : (
-                  <FormattedMessage id="PayoutDetailsForm.submitButtonText" />
-                )}
-              </Button>
-              <Button
-                className={css.greyButton}
-                type="submit"
-                onClick={()=>props.onPublicDraft()}
-                inProgress={submitInProgress}
-                ready={ready}>
-                {submitButtonText ? (
-                  submitButtonText
-                ) : (
-                  <FormattedMessage
-                    id="PayoutDetailsForm.laterButtonText" />
-                )}
-              </Button>
-            </div>
-        ) : (
-          <div className={css.missingStripeKey}>
-            <FormattedMessage id="PayoutDetailsForm.missingStripeKey" />
-          </div>
-        );
-      }}
-    />
-  );
-
-
-SkippingBlokComponent.defaultProps = {
-  className: null,
-  createStripeAccountError: null,
-  disabled: false,
-  inProgress: false,
-  ready: false,
+SkippingBlockComponent.defaultProps = {
   submitButtonText: null,
-  currentUserId: null,
-  fieldRenderProps: null,
-  redirect:false
+  redirect: false,
 };
 
-SkippingBlokComponent.propTypes = {
-  className: string,
-  createStripeAccountError: object,
-  disabled: bool,
-  inProgress: bool,
-  ready: bool,
-  submitButtonText: string,
-  currentUserId: propTypes.uuid,
-  fieldRenderProps: shape({
-    handleSubmit: func,
-    invalid: bool,
-    pristine: bool,
-    values: object,
-  }),
-
-  // from injectIntl
-  intl: intlShape.isRequired,
+SkippingBlockComponent.propTypes = {
   onRedirectState: func.isRequired,
+  onRequestStripeAccount: func.isRequired,
+  onStripeAccountCreatedState: func.isRequired,
+  onManageDisableScrolling: func.isRequired,
+  onStripeAccountShowWindow: func.isRequired,
 };
 const mapStateToProps = state => {
   return {
-    redirect: state.stripe.redirect}
-}
+    redirect: state.stripe.redirect,
+    stripeAccountCreatedShow: state.stripe.stripeAccountCreatedShow,
+    stripeAccountCreated: state.stripe.stripeAccountCreated,
+  };
+};
 const mapDispatchToProps = dispatch => ({
   onRedirectState: () => dispatch(redirectState()),
+  onStripeAccountShowWindow: (state) => dispatch(stripeAccountShowWindow(state)),
+  onStripeAccountCreatedState: (state) => dispatch(stripeAccountCreatedState(state)),
+  onRequestStripeAccount: () => dispatch(requestStripeAccount()),
+  onManageDisableScrolling: (id ) => dispatch(manageDisableScrolling(id ,true)),
 });
-const SkippingBlock = compose(withRouter,connect(
+const SkippingBlock = compose(withRouter, connect(
   mapStateToProps,
-  mapDispatchToProps
-),injectIntl)(SkippingBlokComponent);
+  mapDispatchToProps,
+))(SkippingBlockComponent);
 
 export default SkippingBlock;
