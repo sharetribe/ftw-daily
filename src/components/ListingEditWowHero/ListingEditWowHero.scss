@@ -4,9 +4,16 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  width: 100%;
+  width: 100vw;
+  margin-left: -45px;
   margin-bottom: 20px;
   min-height: 300px;
+
+  @media (--viewportMedium) {
+    padding: 25px;
+    width: 100%;
+    margin-left: 0;
+  }
 }
 
 .heroTextContainer {
@@ -34,7 +41,12 @@
 }
 
 .heroImage {
-  border-radius: 8px;
+  border-radius: 0;
+  min-height: 300px;
+  object-fit: cover;
+  @media (--viewportMedium) {
+    border-radius: 8px;
+  }
 }
 
 .heroDescription {
@@ -42,16 +54,6 @@
   z-index: 2;
   margin: 0;
   text-align: center;
-}
-
-@media screen and (max-width: 550px) {
-  .heroContainer {
-    width: 100vw;
-    margin-left: -24px;
-  }
-  .heroImage {
-    border-radius: 0;
-  }
 }
 
 .spinnerContainer {

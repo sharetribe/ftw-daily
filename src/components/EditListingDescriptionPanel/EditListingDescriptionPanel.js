@@ -49,6 +49,7 @@ const EditListingDescriptionPanel = (props) => {
         className={css.form}
         initialValues={{
           title: currentListing.attributes.title,
+          heroSubtitle: publicData.heroSubtitle,
           description: currentListing.attributes.description,
           category: publicData.category,
           surf: publicData.surf,
@@ -56,21 +57,30 @@ const EditListingDescriptionPanel = (props) => {
           community: publicData.community,
           retreat: publicData.retreat,
           video: publicData.video,
+          welcomeMessage: publicData.welcomeMessage,
+          welcomeMessageSigner: publicData.welcomeMessageSigner,
           heroImageId: _.get(publicData, 'heroImage.id', '')
         }}
         saveActionMsg={submitButtonText}
         onSubmit={(values, shouldRedirect) => {
           const {
             title,
+            heroSubtitle,
             description,
             category,
-            surf, vibe, community, wifi, retreat, video, heroImageId
+            surf,
+            vibe,
+            community, wifi, retreat, video,
+            welcomeMessage,
+            welcomeMessageSigner,
+            heroImageId
           } = values
           const images = (listing.images || []).map((img) => img.id.uuid)
           const updateValues = {
             title: title.trim(),
             description,
             publicData: {
+              heroSubtitle,
               category,
               surf,
               vibe,
@@ -78,6 +88,8 @@ const EditListingDescriptionPanel = (props) => {
               wifi,
               retreat,
               video,
+              welcomeMessage,
+              welcomeMessageSigner,
               heroImage: {
                 id: heroImageId
               }

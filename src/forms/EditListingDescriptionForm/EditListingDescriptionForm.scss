@@ -1,33 +1,37 @@
 @import '../../marketplace.css';
+
 :root {
   /*
-     These variables are available in global scope through ":root"
-     element (<html> tag). Variables with the same names are going to
-     overwrite each other if CSS Properties' (PostCSS plugin)
-     configuration "preserve: true" is used - meaning that variables
-     are left to CSS bundle. We are planning to enable it in the future
-     since browsers support CSS Properties already.
-  */
+    These variables are available in global scope through ":root"
+    element (<html> tag). Variables with the same names are going to
+    overwrite each other if CSS Properties' (PostCSS plugin)
+    configuration "preserve: true" is used - meaning that variables
+    are left to CSS bundle. We are planning to enable it in the future
+    since browsers support CSS Properties already.
+ */
+
   --EditListingDescriptionForm_formMargins: {
     margin-bottom: 24px;
+
     @media (--viewportMedium) {
       margin-bottom: 32px;
     }
-  } ;
+  }
 }
 
 .root {
   /* Dimensions */
   width: 100%;
   height: auto;
+
   /* Layout */
   display: flex;
   flex: 1;
   flex-direction: column;
+
   padding-top: 1px;
-}
-@media (--viewportMedium) {
-  .root {
+
+  @media (--viewportMedium) {
     padding-top: 2px;
   }
 }
@@ -36,7 +40,7 @@
   color: var(--failColor);
 }
 
-.title, .category, .wifi, .retreat, .video {
+.title, .category, .wifi, .retreat, .video  {
   @apply --EditListingDescriptionForm_formMargins;
 }
 
@@ -48,10 +52,9 @@
 .sectionTitle {
   @apply --marketplaceH3FontStyles;
   color: var(--matterColorAnti);
+
   margin-bottom: 5px;
-}
-@media (--viewportMedium) {
-  .sectionTitle {
+  @media (--viewportMedium) {
     margin: 0;
   }
 }
@@ -61,13 +64,13 @@
   margin: 0;
 }
 
+
 .submitButton {
   margin-top: auto;
   margin-bottom: 24px;
   flex-shrink: 0;
-}
-@media (--viewportLarge) {
-  .submitButton {
+
+  @media (--viewportLarge) {
     display: inline-block;
     width: 241px;
     margin-top: 100px;
@@ -87,9 +90,8 @@
   padding: 10px;
   text-align: center;
   margin: 0px;
-}
-@media (--viewportMedium) {
-  .quoteContainer {
+
+  @media (--viewportMedium) {
     margin: 30px;
   }
 }
@@ -102,7 +104,5 @@
 .welcomeMessageSigner {
   font-size: 12px;
   font-weight: 300;
-  color: var(--marketplaceColorDark);
+  color: var(--marketplaceColorDark)
 }
-
-/*# sourceMappingURL=EditListingDescriptionForm.css.map */

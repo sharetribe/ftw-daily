@@ -1,3 +1,5 @@
+import Grid from '@material-ui/core/Grid'
+import Paper from '@material-ui/core/Paper'
 import React from 'react'
 import {
   arrayOf, bool, func, shape, string
@@ -49,18 +51,18 @@ const EditListingDescriptionFormComponent = (props) => (
       const titleRequiredMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.titleRequired',
       })
+      const heroMessage = intl.formatMessage({
+        id: 'EditListingDescriptionForm.hero',
+      })
+      const heroMessagePlaceholder = intl.formatMessage({
+        id: 'EditListingDescriptionForm.heroPlaceholder',
+      })
       const maxLengthMessage = intl.formatMessage(
         { id: 'EditListingDescriptionForm.maxLength' },
         {
           maxLength: TITLE_MAX_LENGTH,
         }
       )
-      const surfMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.surf',
-      })
-      const surfPlaceholderMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.surfPlaceholder',
-      })
       const vibeMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.vibe',
       })
@@ -99,6 +101,18 @@ const EditListingDescriptionFormComponent = (props) => (
       })
       const videoValidMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.videoInvalid',
+      })
+      const welcomeMessage = intl.formatMessage({
+        id: 'EditListingDescriptionForm.welcomeMessage',
+      })
+      const welcomeMessagePlaceholder = intl.formatMessage({
+        id: 'EditListingDescriptionForm.welcomeMessage',
+      })
+      const welcomeMessageSigner = intl.formatMessage({
+        id: 'EditListingDescriptionForm.welcomeMessageSigner',
+      })
+      const welcomeMessageSignerPlaceholder = intl.formatMessage({
+        id: 'EditListingDescriptionForm.welcomeMessageSignerPlaceholder',
       })
       const descriptionMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.description',
@@ -166,73 +180,134 @@ const EditListingDescriptionFormComponent = (props) => (
           {errorMessageCreateListingDraft}
           {errorMessageUpdateListing}
           {errorMessageShowListing}
-          <ListingEditWowHero
-            listing={_.get(props, 'listing', {})}
-            form={form}
-            values={values}
-          />
-          <FieldTextInput
-            id="title"
-            name="title"
-            className={css.title}
-            type="text"
-            label={titleMessage}
-            placeholder={titlePlaceholderMessage}
-            maxLength={TITLE_MAX_LENGTH}
-            validate={composeValidators(required(titleRequiredMessage), maxLength60Message)}
-            autoFocus
-          />
+          <Paper className={css.paperSection}>
+            <Grid container className={classes.root} direction="column" spacing={5}>
+              <Grid item xs={12}>
+                <h3 className={css.sectionTitle}>The Big Hello</h3>
+                <p className={css.sectionSubtitle}>This image and text will be the first thing travelers will see</p>
+              </Grid>
+              <Grid item xs={12}>
+                <ListingEditWowHero
+                  listing={_.get(props, 'listing', {})}
+                  form={form}
+                  values={values}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FieldTextInput
+                  id="title"
+                  name="title"
+                  className={css.title}
+                  type="text"
+                  label={titleMessage}
+                  placeholder={titlePlaceholderMessage}
+                  maxLength={TITLE_MAX_LENGTH}
+                  validate={composeValidators(required(titleRequiredMessage), maxLength60Message)}
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FieldTextInput
+                  id="heroSubtitle"
+                  name="heroSubtitle"
+                  className={css.description}
+                  type="textarea"
+                  label={heroMessage}
+                  placeholder={heroMessagePlaceholder}
+                  validate={composeValidators(required(descriptionRequiredMessage))}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <CustomCategorySelectFieldMaybe
+                  id="category"
+                  name="category"
+                  categories={categories}
+                  intl={intl}
+                  validate={composeValidators(required(descriptionRequiredMessage))}
+                />
+              </Grid>
+            </Grid>
+          </Paper>
 
-          <CustomCategorySelectFieldMaybe
-            id="category"
-            name="category"
-            categories={categories}
-            intl={intl}
-          />
-
-          <h3 className={css.sectionTitle}>Description</h3>
-
-          <FieldTextInput
-            id="description"
-            name="description"
-            className={css.description}
-            type="textarea"
-            label={descriptionMessage}
-            placeholder={descriptionPlaceholderMessage}
-            validate={composeValidators(required(descriptionRequiredMessage))}
-          />
-
-          <FieldTextInput
-            id="video"
-            name="video"
-            className={css.video}
-            type="text"
-            label={videoMessage}
-            placeholder={videoPlaceholderMessage}
-            validate={composeValidators(validYouTubeURL(videoValidMessage))}
-          />
-
-          <FieldTextInput
-            id="community"
-            name="community"
-            className={css.community}
-            type="textarea"
-            label={communityMessage}
-            placeholder={communityPlaceholderMessage}
-          />
-
-          <h3 className={css.sectionTitle}>Retreats</h3>
-
-          <FieldBoolean
-            id="retreat.accepted"
-            name="retreat.accepted"
-            className={css.retreat}
-            label={retreatMessage}
-            placeholder="Choose yes/no"
-          />
-
-          {retreatShowFields}
-
+          <Paper className={css.paperSection}>
+            <Grid container className={classes.root} direction="column" spacing={5}>
+              <Grid item xs={12}>
+                <h3 className={css.sectionTitle}>Welcome</h3>
+                <p className={css.sectionSubtitle}>This welcome message will appear at the very top of your listing</p>
+              </Grid>
+              <Grid item xs={12}>
+                <div className={css.quoteContainer}>
+                  <h3 className={css.welcomeMessage}>{`"${values.welcomeMessage || 'We think something special happens when we combine community, work, surf, radical mountains and northern lights.'}"`}</h3>
+                  <p className={css.welcomeMessageSigner}>{`-${values.welcomeMessageSigner || 'Rolf & Stian - Founders of the Arctic Coworking Lodge'}`}</p>
+                </div>
+              </Grid>
+              <Grid item xs={12}>
+                <FieldTextInput
+                  id="welcomeMessage"
+                  name="welcomeMessage"
+                  className={css.video}
+                  type="text"
+                  label={welcomeMessage}
+                  placeholder={welcomeMessagePlaceholder}
+                  validate={composeValidators(required(descriptionRequiredMessage))}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FieldTextInput
+                  id="welcomeMessageSigner"
+                  name="welcomeMessageSigner"
+                  className={css.video}
+                  type="text"
+                  label={welcomeMessageSigner}
+                  placeholder={welcomeMessageSignerPlaceholder}
+                  validate={composeValidators(required(descriptionRequiredMessage))}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FieldTextInput
+                  id="description"
+                  name="description"
+                  className={css.community}
+                  type="textarea"
+                  label={descriptionMessage}
+                  placeholder={descriptionPlaceholderMessage}
+                  validate={composeValidators(required(descriptionRequiredMessage))}
+                />
+              </Grid>
+            </Grid>
+          </Paper>
+          <Paper className={css.paperSection}>
+            <Grid container className={classes.root} direction="column" spacing={5}>
+              <Grid item xs={12}>
+                <h3 className={css.sectionTitle}>Everything Else</h3>
+                <p className={css.sectionSubtitle}>Equally important, just harder to categorize</p>
+              </Grid>
+              <Grid item xs={12}>
+                <FieldTextInput
+                  id="video"
+                  name="video"
+                  className={css.video}
+                  type="text"
+                  label={videoMessage}
+                  placeholder={videoPlaceholderMessage}
+                  validate={composeValidators(validYouTubeURL(videoValidMessage))}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FieldBoolean
+                  id="retreat.accepted"
+                  name="retreat.accepted"
+                  className={css.retreat}
+                  label={retreatMessage}
+                  placeholder="Choose yes/no"
+                  validate={composeValidators(required(descriptionRequiredMessage))}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                {retreatShowFields}
+              </Grid>
+            </Grid>
+          </Paper>
           <Button
             className={css.submitButton}
             onClick={() => props.onSubmit(values, 'redirect')}
