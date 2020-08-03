@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {
   array, bool, func, number, object, oneOf, shape, string
 } from 'prop-types'
+import _ from 'lodash'
 import { compose } from 'redux'
 import classNames from 'classnames'
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl'
@@ -120,7 +121,11 @@ const tabCompleted = (tab, listing) => {
     case AVAILABILITY:
       return !!availabilityPlan
     case COWORKING:
-      return images && images.length > 0
+      return _.keys(_.get(publicData, 'coworking.images', {})).length > 0
+    case COLIVING:
+      return _.keys(_.get(publicData, 'coliving.images', {})).length > 0
+    case SURFING:
+      return _.keys(_.get(publicData, 'surfing.images', {})).length > 0
     case PHOTOS:
       return images && images.length > 0
     default:

@@ -4,10 +4,14 @@ import {
   arrayOf, bool, func, shape, string
 } from 'prop-types'
 import _ from 'lodash'
-import { compose } from 'redux'
+import { connect } from 'react-redux'
 import { Form as FinalForm } from 'react-final-form'
 import classNames from 'classnames'
+import { compose } from 'redux'
+import ListingImageSelectBlock
+  from '../../components/ListingImageSelectBlock/ListingImageSelectBlock';
 import SelectImage from '../../components/SelectImage/SelectImage'
+import { updateListingAdHoc } from '../../containers/EditListingPage/EditListingPage.duck'
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl'
 import { propTypes } from '../../util/types'
 import {
@@ -24,12 +28,11 @@ const EditListingColivingFormComponent = (props) => (
     {...props}
     render={(formRenderProps) => {
       const {
-        categories,
+        listing,
         className,
         disabled,
         ready,
         handleSubmit,
-        intl,
         invalid,
         pristine,
         saveActionMsg,
@@ -38,6 +41,7 @@ const EditListingColivingFormComponent = (props) => (
         fetchErrors,
         values,
         form,
+        intl
       } = formRenderProps
 
       const { updateListingError, showListingsError } = fetchErrors || {}
@@ -58,26 +62,6 @@ const EditListingColivingFormComponent = (props) => (
       const submitInProgress = updateInProgress
       const submitDisabled = invalid || disabled || submitInProgress
 
-      form.registerField(
-        'coliving.images',
-        (fieldState) => fieldState,
-        {}
-      )
-
-      const updatePhotos = (photoIds) => {
-        const formState = form.getState().values
-        const images = _.get(formState, 'coliving.images', {})
-        const ids = _.xor(_.keys(images), photoIds)
-        const newImages = {}
-        ids.forEach((v) => {
-          newImages[v] = {}
-        })
-        const update = _.defaults(images, newImages)
-        form.change('coliving.images', update)
-        form.submit()
-      }
-
-      console.log(values)
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessageUpdateListing}
@@ -103,22 +87,17 @@ const EditListingColivingFormComponent = (props) => (
             </Grid>
             <Grid item xs={12}>
               <h3 className={css.subTitle}>Coliving Photos</h3>
-              <SelectImage
-                onUpload={(photoIds) => {
-                  updatePhotos(photoIds)
-                }}
-                onDelete={(photoIds) => {
-                  updatePhotos(photoIds)
-                }}
+              <ListingImageSelectBlock
+                form={form}
+                values={values}
+                formValuesKey={'coliving'}
                 disabled={form.getState().invalid}
-                imagesToDisplay={_.keys(values.coliving.images)}
-                showThumbnails={true}
               />
             </Grid>
           </Grid>
           <Button
             className={css.submitButton}
-            type="submit"
+            onClick={() => props.onSubmit(values, 'redirect')}
             inProgress={submitInProgress}
             disabled={submitDisabled}
             ready={submitReady}
@@ -155,4 +134,10 @@ EditListingColivingFormComponent.propTypes = {
   ),
 }
 
-export default compose(injectIntl)(EditListingColivingFormComponent)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateListingAdHoc: (update) => dispatch(updateListingAdHoc(update))
+  }
+}
+
+export default compose(injectIntl)(connect(null, mapDispatchToProps)(EditListingColivingFormComponent))

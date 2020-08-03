@@ -125,7 +125,6 @@ const EditListingWizardTab = (props) => {
 
   const onCompleteEditListingWizardTab = (tab, updateValues, shouldRedirect) => {
     // Normalize images for API call
-    console.log(updateValues)
     const { images: updatedImages, ...otherValues } = updateValues
     const imageProperty
       = typeof updatedImages !== 'undefined' ? { images: imageIds(updatedImages) } : {}
@@ -185,50 +184,50 @@ const EditListingWizardTab = (props) => {
         <EditListingDescriptionPanel
           {...panelProps(DESCRIPTION)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
-          onSubmit={(values) => {
-            onCompleteEditListingWizardTab(tab, values, true)
+          onSubmit={(values, shouldRedirect) => {
+            onCompleteEditListingWizardTab(tab, values, shouldRedirect)
           }}
         />
       )
     }
     case COLIVING: {
       const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditListingWizard.saveNewDescription'
-        : 'EditListingWizard.saveEditDescription'
+        ? 'EditListingWizard.saveNewColiving'
+        : 'EditListingWizard.saveEditColiving'
       return (
         <EditListingColivingPanel
           {...panelProps(COLIVING)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
-          onSubmit={(values) => {
-            onCompleteEditListingWizardTab(tab, values, true)
+          onSubmit={(values, shouldRedirect) => {
+            onCompleteEditListingWizardTab(tab, values, shouldRedirect)
           }}
         />
       )
     }
     case COWORKING: {
       const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditListingWizard.saveNewDescription'
-        : 'EditListingWizard.saveEditDescription'
+        ? 'EditListingWizard.saveNewCoworking'
+        : 'EditListingWizard.saveEditCoworking'
       return (
         <EditListingCoworkingPanel
           {...panelProps(COWORKING)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
-          onSubmit={(values) => {
-            onCompleteEditListingWizardTab(tab, values, true)
+          onSubmit={(values, shouldRedirect) => {
+            onCompleteEditListingWizardTab(tab, values, shouldRedirect)
           }}
         />
       )
     }
     case SURFING: {
       const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditListingWizard.saveNewDescription'
-        : 'EditListingWizard.saveEditDescription'
+        ? 'EditListingWizard.saveNewSurfing'
+        : 'EditListingWizard.saveEditSurfing'
       return (
         <EditListingSurfingPanel
           {...panelProps(SURFING)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
-          onSubmit={(values) => {
-            onCompleteEditListingWizardTab(tab, values, true)
+          onSubmit={(values, shouldRedirect) => {
+            onCompleteEditListingWizardTab(tab, values, shouldRedirect)
           }}
         />
       )
@@ -241,7 +240,7 @@ const EditListingWizardTab = (props) => {
         <EditListingFeaturesPanel
           {...panelProps(FEATURES)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
-          onSubmit={(values) => {
+          onSubmit={(values, shouldRedirect) => {
             onCompleteEditListingWizardTab(tab, values, true)
           }}
         />
@@ -287,8 +286,8 @@ const EditListingWizardTab = (props) => {
           onImageUpload={onImageUpload}
           onRemoveImage={onRemoveImage}
           onUpdateImageOrder={onUpdateImageOrder}
-          onSubmit={(values) => {
-            onCompleteEditListingWizardTab(tab, values, false)
+          onSubmit={(values, shouldRedirect) => {
+            onCompleteEditListingWizardTab(tab, values, shouldRedirect)
           }}
         />
       )

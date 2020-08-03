@@ -1,13 +1,13 @@
-import Grid from '@material-ui/core/Grid';
+import Grid from '@material-ui/core/Grid'
 import React from 'react'
 import {
   arrayOf, bool, func, shape, string
 } from 'prop-types'
-import _ from 'lodash'
 import { compose } from 'redux'
 import { Form as FinalForm } from 'react-final-form'
 import classNames from 'classnames'
-import SelectImage from '../../components/SelectImage/SelectImage';
+import ListingImageSelectBlock
+  from '../../components/ListingImageSelectBlock/ListingImageSelectBlock'
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl'
 import { propTypes } from '../../util/types'
 import {
@@ -57,18 +57,6 @@ const EditListingSurfingFormComponent = (props) => (
       const submitInProgress = updateInProgress
       const submitDisabled = invalid || disabled || submitInProgress
 
-      const updatePhotos = (photoIds) => {
-        const images = _.get(values, 'surfing.images', {})
-        const ids = _.xor(_.keys(images), photoIds)
-        const newImages = {}
-        ids.forEach((v) => {
-          newImages[v] = {}
-        })
-        const update = _.defaults(images, newImages)
-        form.change('surfing.images', update)
-        form.submit()
-      }
-
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessageUpdateListing}
@@ -82,10 +70,10 @@ const EditListingSurfingFormComponent = (props) => (
                     name="surfing.description"
                     type="textarea"
                     label={intl.formatMessage({
-                      id: 'EditListingColivingForm.description',
+                      id: 'EditListingSurfingForm.description',
                     })}
                     placeholder={intl.formatMessage({
-                      id: 'EditListingColivingForm.descriptionPlaceholder',
+                      id: 'EditListingSurfingForm.descriptionPlaceholder',
                     })}
                     validate={required(intl.formatMessage({ id: 'GenericForm.required' }))}
                   />
@@ -93,23 +81,18 @@ const EditListingSurfingFormComponent = (props) => (
               </Grid>
             </Grid>
             <Grid item xs={12}>
-              <h3 className={css.subTitle}>Coliving Photos</h3>
-              <SelectImage
-                onUpload={(photoIds) => {
-                  updatePhotos(photoIds)
-                }}
-                onDelete={(photoIds) => {
-                  updatePhotos(photoIds)
-                }}
+              <h3 className={css.subTitle}>Surfing Photos</h3>
+              <ListingImageSelectBlock
+                form={form}
+                values={values}
+                formValuesKey={'surfing'}
                 disabled={form.getState().invalid}
-                imagesToDisplay={_.keys([])}
-                showThumbnails={true}
               />
             </Grid>
           </Grid>
           <Button
             className={css.submitButton}
-            type="submit"
+            onClick={() => props.onSubmit(values, 'redirect')}
             inProgress={submitInProgress}
             disabled={submitDisabled}
             ready={submitReady}

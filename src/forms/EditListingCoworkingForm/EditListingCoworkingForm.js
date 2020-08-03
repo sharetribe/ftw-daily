@@ -1,3 +1,4 @@
+import Grid from '@material-ui/core/Grid';
 import React from 'react'
 import {
   arrayOf, bool, func, shape, string
@@ -6,6 +7,8 @@ import _ from 'lodash'
 import { compose } from 'redux'
 import { Form as FinalForm } from 'react-final-form'
 import classNames from 'classnames'
+import ListingImageSelectBlock
+  from '../../components/ListingImageSelectBlock/ListingImageSelectBlock';
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl'
 import { propTypes } from '../../util/types'
 import {
@@ -22,7 +25,6 @@ const EditListingCoworkingFormComponent = (props) => (
     {...props}
     render={(formRenderProps) => {
       const {
-        categories,
         className,
         disabled,
         ready,
@@ -37,16 +39,6 @@ const EditListingCoworkingFormComponent = (props) => (
         values,
         form,
       } = formRenderProps
-
-      const wifiMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.wifi',
-      })
-      const wifiPlaceholderMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.wifiPlaceholder',
-      })
-      const wifiValidMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.wifiInvalid',
-      })
 
       const { updateListingError, showListingsError } = fetchErrors || {}
       const errorMessageUpdateListing = updateListingError ? (
@@ -70,18 +62,38 @@ const EditListingCoworkingFormComponent = (props) => (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessageUpdateListing}
           {errorMessageShowListing}
-          <FieldTextInput
-            id="wifi"
-            name="wifi"
-            className={css.wifi}
-            type="text"
-            label={wifiMessage}
-            placeholder={wifiPlaceholderMessage}
-            validate={composeValidators(isValidNumber(wifiValidMessage))}
-          />
+          <Grid container className={classes.root} direction="column" spacing={5}>
+            <Grid item xs={12}>
+              <Grid container justify="center" spacing={2} direction="column">
+                <Grid item xs={12}>
+                  <FieldTextInput
+                    id="coworking.description"
+                    name="coworking.description"
+                    type="textarea"
+                    label={intl.formatMessage({
+                      id: 'EditListingCoworkingForm.description',
+                    })}
+                    placeholder={intl.formatMessage({
+                      id: 'EditListingCoworkingForm.descriptionPlaceholder',
+                    })}
+                    validate={required(intl.formatMessage({ id: 'GenericForm.required' }))}
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item xs={12}>
+              <h3 className={css.subTitle}>Coworking Photos</h3>
+              <ListingImageSelectBlock
+                form={form}
+                values={values}
+                formValuesKey={'coworking'}
+                disabled={form.getState().invalid}
+              />
+            </Grid>
+          </Grid>
           <Button
             className={css.submitButton}
-            type="submit"
+            onClick={() => props.onSubmit(values, 'redirect')}
             inProgress={submitInProgress}
             disabled={submitDisabled}
             ready={submitReady}

@@ -81,7 +81,7 @@ export const EditListingProductsFormComponent = (props) => (
 
           <Button
             className={css.submitButton}
-            type="submit"
+            onClick={() => props.onSubmit(values, 'redirect')}
             inProgress={submitInProgress}
             disabled={submitDisabled}
             ready={submitReady}

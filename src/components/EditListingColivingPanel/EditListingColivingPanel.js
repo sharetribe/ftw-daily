@@ -26,37 +26,29 @@ const EditListingColivingPanel = (props) => {
     submitButtonText,
     panelUpdated,
     updateInProgress,
-    errors,
+    errors
   } = props
 
   const classes = classNames(rootClassName || css.root, className)
   const currentListing = ensureOwnListing(listing)
-  const { description, title, publicData } = currentListing.attributes
-
-  const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT
-  const panelTitle = isPublished ? (
-    <FormattedMessage
-      id="EditListingColivingPanel.title"
-      values={{ listingTitle: <ListingLink listing={listing} /> }}
-    />
-  ) : (
-    <FormattedMessage id="EditListingColivingPanel.createListingTitle" />
-  )
+  const { publicData } = currentListing.attributes
 
   return (
     <div className={classes}>
-      <h1 className={css.title}>{panelTitle}</h1>
+      <h1 className={css.title}>
+        <FormattedMessage
+          id="EditListingColivingPanel.title"
+          values={{ listingTitle: <ListingLink listing={listing} /> }}
+        />
+      </h1>
       <EditListingColivingForm
         className={css.form}
         initialValues={{
           coliving: publicData.coliving
         }}
         saveActionMsg={submitButtonText}
-        onSubmit={(values) => {
-          console.log(listing)
+        onSubmit={(values, shouldRedirect) => {
           const existingImages = _.get(listing, 'images', []).map((li) => li.id.uuid)
-          console.log(existingImages)
-          console.log(_.concat(existingImages, _.keys(values.coliving.images)))
           const t = _.concat(existingImages, _.keys(values.coliving.images))
           const updateValues = {
             publicData: {
@@ -64,9 +56,11 @@ const EditListingColivingPanel = (props) => {
                 ...values.coliving
               },
             },
-            images: t
+            images: _.uniq(t)
           }
-          onSubmit(updateValues)
+          console.log(values)
+          console.log(shouldRedirect)
+          onSubmit(updateValues, shouldRedirect === 'redirect')
         }}
         onChange={onChange}
         disabled={disabled}

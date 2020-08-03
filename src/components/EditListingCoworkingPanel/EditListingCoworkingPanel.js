@@ -2,6 +2,7 @@ import React from 'react'
 import {
   bool, func, object, string
 } from 'prop-types'
+import _ from 'lodash'
 import classNames from 'classnames'
 import EditListingCoworkingForm
   from '../../forms/EditListingCoworkingForm/EditListingCoworkingForm'
@@ -30,48 +31,34 @@ const EditListingCoworkingPanel = (props) => {
 
   const classes = classNames(rootClassName || css.root, className)
   const currentListing = ensureOwnListing(listing)
-  const { description, title, publicData } = currentListing.attributes
-
-  const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT
-  const panelTitle = isPublished ? (
-    <FormattedMessage
-      id="EditListingCoworkingPanel.title"
-      values={{ listingTitle: <ListingLink listing={listing} /> }}
-    />
-  ) : (
-    <FormattedMessage id="EditListingCoworkingPanel.createListingTitle" />
-  )
+  const { publicData } = currentListing.attributes
 
   return (
     <div className={classes}>
-      <h1 className={css.title}>{panelTitle}</h1>
+      <h1 className={css.title}>
+        <FormattedMessage
+          id="EditListingCoworkingPanel.title"
+          values={{ listingTitle: <ListingLink listing={listing} /> }}
+        />
+      </h1>
       <EditListingCoworkingForm
         className={css.form}
         initialValues={{
-          title,
-          description,
-          heroPhotoId: publicData.heroPhotoId,
-          category: publicData.category,
-          surf: publicData.surf,
-          vibe: publicData.vibe,
-          community: publicData.community,
-          wifi: publicData.wifi,
-          retreat: publicData.retreat,
-          video: publicData.video
+          coworking: publicData.coworking
         }}
         saveActionMsg={submitButtonText}
-        onSubmit={(values) => {
-          const {
-            wifi, images
-          } = values
+        onSubmit={(values, shouldRedirect) => {
+          const existingImages = _.get(listing, 'images', []).map((li) => li.id.uuid)
+          const t = _.concat(existingImages, _.keys(values.coworking.images))
           const updateValues = {
             publicData: {
-              wifi,
-              images
+              coworking: {
+                ...values.coworking
+              },
             },
+            images: _.uniq(t)
           }
-
-          onSubmit(updateValues)
+          onSubmit(updateValues, shouldRedirect === 'redirect')
         }}
         onChange={onChange}
         disabled={disabled}

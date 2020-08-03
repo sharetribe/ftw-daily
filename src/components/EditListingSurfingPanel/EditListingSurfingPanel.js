@@ -3,6 +3,7 @@ import {
   bool, func, object, string
 } from 'prop-types'
 import classNames from 'classnames'
+import _ from 'lodash'
 import EditListingSurfingForm
   from '../../forms/EditListingSurfingForm/EditLIstingSurfingForm'
 import { FormattedMessage } from '../../util/reactIntl'
@@ -30,36 +31,34 @@ const EditListingSurfingPanel = (props) => {
 
   const classes = classNames(rootClassName || css.root, className)
   const currentListing = ensureOwnListing(listing)
-  const { description, title, publicData } = currentListing.attributes
-
-  const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT
-  const panelTitle = isPublished ? (
-    <FormattedMessage
-      id="EditListingSurfingPanel.title"
-      values={{ listingTitle: <ListingLink listing={listing} /> }}
-    />
-  ) : (
-    <FormattedMessage id="EditListingSurfingPanel.createListingTitle" />
-  )
+  const { publicData } = currentListing.attributes
 
   return (
     <div className={classes}>
-      <h1 className={css.title}>{panelTitle}</h1>
+      <h1 className={css.title}>
+        <FormattedMessage
+          id="EditListingSurfingPanel.title"
+          values={{ listingTitle: <ListingLink listing={listing} /> }}
+        />
+      </h1>
       <EditListingSurfingForm
         className={css.form}
         initialValues={{
           surfing: publicData.surfing
         }}
         saveActionMsg={submitButtonText}
-        onSubmit={(values) => {
+        onSubmit={(values, shouldRedirect) => {
+          const existingImages = _.get(listing, 'images', []).map((li) => li.id.uuid)
+          const t = _.concat(existingImages, _.keys(values.surfing.images))
           const updateValues = {
             publicData: {
               surfing: {
                 ...values.surfing
-              }
+              },
             },
+            images: _.uniq(t)
           }
-          onSubmit(updateValues)
+          onSubmit(updateValues, shouldRedirect === 'redirect')
         }}
         onChange={onChange}
         disabled={disabled}

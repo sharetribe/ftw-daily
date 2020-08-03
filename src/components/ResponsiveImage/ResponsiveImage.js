@@ -44,11 +44,28 @@ import css from './ResponsiveImage.css'
 
 const ResponsiveImage = (props) => {
   const {
-    className, rootClassName, alt, noImageMessage, image, variants, ...rest
+    className,
+    rootClassName,
+    alt,
+    noImageMessage,
+    image,
+    variants,
+    defaultImage,
+    ...rest
   } = props
   const classes = classNames(rootClassName || css.root, className)
 
   if (image == null || variants.length === 0) {
+    if (defaultImage) {
+      const imgProps = {
+        className: classes,
+        alt,
+        ...rest,
+      }
+      imgProps.src = defaultImage
+      return <img {...imgProps} />
+    }
+
     const noImageClasses = classNames(rootClassName || css.root, css.noImageContainer, className)
 
     // NoImageMessage is needed for listing images on top the map (those component lose context)
@@ -89,6 +106,9 @@ const ResponsiveImage = (props) => {
 
   // alt prop already defined above
   // eslint-disable-next-line jsx-a11y/alt-text
+  if (!imgProps.srcSet || !imgProps.src) {
+    imgProps.src = defaultImage
+  }
   return <img {...imgProps} />
 }
 

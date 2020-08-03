@@ -2,6 +2,7 @@ import React from 'react'
 import {
   bool, func, object, string
 } from 'prop-types'
+import _ from 'lodash'
 import classNames from 'classnames'
 import { FormattedMessage } from '../../util/reactIntl'
 import { ensureOwnListing } from '../../util/data'
@@ -29,7 +30,7 @@ const EditListingDescriptionPanel = (props) => {
 
   const classes = classNames(rootClassName || css.root, className)
   const currentListing = ensureOwnListing(listing)
-  const { description, title, publicData } = currentListing.attributes
+  const { publicData } = currentListing.attributes
 
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT
   const panelTitle = isPublished ? (
@@ -47,22 +48,25 @@ const EditListingDescriptionPanel = (props) => {
       <EditListingDescriptionForm
         className={css.form}
         initialValues={{
-          title,
-          description,
-          heroPhotoId: publicData.heroPhotoId,
+          title: currentListing.attributes.title,
+          description: currentListing.attributes.description,
           category: publicData.category,
           surf: publicData.surf,
           vibe: publicData.vibe,
           community: publicData.community,
-          wifi: publicData.wifi,
           retreat: publicData.retreat,
-          video: publicData.video
+          video: publicData.video,
+          heroImageId: _.get(publicData, 'heroImage.id', '')
         }}
         saveActionMsg={submitButtonText}
-        onSubmit={(values) => {
+        onSubmit={(values, shouldRedirect) => {
           const {
-            title, description, category, surf, vibe, community, wifi, retreat, video
+            title,
+            description,
+            category,
+            surf, vibe, community, wifi, retreat, video, heroImageId
           } = values
+          const images = (listing.images || []).map((img) => img.id.uuid)
           const updateValues = {
             title: title.trim(),
             description,
@@ -73,11 +77,15 @@ const EditListingDescriptionPanel = (props) => {
               community,
               wifi,
               retreat,
-              video
+              video,
+              heroImage: {
+                id: heroImageId
+              }
             },
+            images: _.uniq([...images, heroImageId])
           }
 
-          onSubmit(updateValues)
+          onSubmit(updateValues, shouldRedirect === 'redirect')
         }}
         onChange={onChange}
         disabled={disabled}

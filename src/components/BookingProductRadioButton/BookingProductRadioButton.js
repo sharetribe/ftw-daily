@@ -40,8 +40,6 @@ const BookingProductRadioButtonComponent = (props) => {
     ...rest
   } = props
 
-  console.log(props)
-
   const classes = classNames(rootClassName || css.root, className)
   const radioButtonProps = {
     id,

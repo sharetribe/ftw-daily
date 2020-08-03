@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import PropTypes, { bool, func, object, string } from 'prop-types'
+import PropTypes, {
+  bool, func, object, string
+} from 'prop-types'
 import { useDropzone } from 'react-dropzone'
 import _ from 'lodash'
 import { injectIntl } from 'react-intl'
@@ -9,6 +11,7 @@ import { v4 as uuid } from 'uuid'
 import {
   asyncRequestImageUpload,
 } from '../../containers/EditListingPage/EditListingPage.duck'
+import { uploadImage } from '../../util/s3_storage'
 import RemoveImageButton from '../AddImages/RemoveImageButton'
 import IconSpinner from '../IconSpinner/IconSpinner'
 
@@ -25,9 +28,24 @@ const SelectImage = (props) => {
     onProgressCallback,
     uploadImageToST,
     allImages,
-    multiple
+    multiple,
+    uploadToS3
 
   } = props
+
+  const sleep = async () => {
+    const promise = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve()
+      }, 5000)
+    })
+    return promise
+  }
+
+  const s3Upload = async (id, file) => {
+    await uploadImage(id, file)
+    // await sleep()
+  }
 
   const buildImagesToDisplay = () => {
     return imagesToDisplay.map((img) => {
@@ -78,6 +96,13 @@ const SelectImage = (props) => {
       // and the product
       Promise.all(b).then(async (r) => {
         const ids = r.map((rsp) => rsp.uuid)
+        if (uploadToS3) {
+          try {
+            await s3Upload(ids[0], a[0].file)
+          } catch (e) {
+            console.log(`Unable to upload temp image: ${e}`)
+          }
+        }
         await onUpload(ids)
         const newWorkingFiles = _.difference(workingFiles, ids)
         setWorkingFiles(newWorkingFiles)
@@ -109,7 +134,11 @@ const SelectImage = (props) => {
               : null
           }
         </div>
-        <RemoveImageButton onClick={() => onImageDelete(file.name)} />
+        {
+          _.includes(workingFiles, file.name)
+            ? null
+            : <RemoveImageButton onClick={() => onImageDelete(file.name)} />
+        }
       </div>
     )
   })
@@ -124,9 +153,9 @@ const SelectImage = (props) => {
       <div {...getRootProps({ className: css.root })}>
         <input {...getInputProps()} />
         {
-          disabled ? <p>Enter in the above information before uploading photos</p>
+          disabled ? <p>Please enter in the above information before uploading photos</p>
             : <div className={css.textContainer}>
-              <p>Drag 'n drop photos here, or click to select with a file browser</p>
+              <p>Drag 'n drop photos here, or click to select files</p>
               <small>JPEG or PNG</small>
             </div>
         }

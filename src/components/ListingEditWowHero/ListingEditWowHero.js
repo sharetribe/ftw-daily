@@ -24,6 +24,8 @@ const ListingEditWowHero = (props) => {
     values
   } = props
 
+  const fieldId = 'heroImageId'
+
   const addImageToProductAndComposeUpdateObject = async (photoId) => {
     const images = (listing.images || []).map((img) => img.id)
     images.unshift(new UUID(photoId))
@@ -39,8 +41,15 @@ const ListingEditWowHero = (props) => {
       })
     } else {
       setTempImageId(photoId)
+      form.change(fieldId, photoId)
     }
   }
+
+  form.registerField(
+    fieldId,
+    (fieldState) => fieldState,
+    {}
+  )
 
   const firstImage
     = listing.images && listing.images.length > 0 ? listing.images[0] : null
@@ -53,6 +62,7 @@ const ListingEditWowHero = (props) => {
           className={css.heroImage}
           alt={'The hero image that will be the first thing users see in searches and on the listing page'}
           image={firstImage}
+          defaultImage={`https://coworksurf.imgix.net/public/${tempImageId}?auto=format&auto=compress`}
           variants={[
             'landscape-crop',
             'landscape-crop2x',
@@ -73,14 +83,14 @@ const ListingEditWowHero = (props) => {
         }
       </div>
       <SelectImage
-        onUpload={(photoIds) => {
-          addImageToProductAndComposeUpdateObject(photoIds[0])
+        onUpload={async (photoIds) => {
+          await addImageToProductAndComposeUpdateObject(photoIds[0])
         }}
         showThumbnails={false}
         onProgressCallback={(wfs) => {
-          console.log(wfs)
           setIsUploading(wfs.length)
         }}
+        uploadToS3={true}
         multiple={false}
       />
     </div>

@@ -6,7 +6,7 @@ import _ from 'lodash'
 import { compose } from 'redux'
 import { Form as FinalForm } from 'react-final-form'
 import classNames from 'classnames'
-import ListingEditWowHero from '../../components/ListingEditWowHero/ListingEditWowHero';
+import ListingEditWowHero from '../../components/ListingEditWowHero/ListingEditWowHero'
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl'
 import { propTypes } from '../../util/types'
 import {
@@ -213,24 +213,6 @@ const EditListingDescriptionFormComponent = (props) => (
           />
 
           <FieldTextInput
-            id="surf"
-            name="surf"
-            className={css.surf}
-            type="textarea"
-            label={surfMessage}
-            placeholder={surfPlaceholderMessage}
-          />
-
-          <FieldTextInput
-            id="vibe"
-            name="vibe"
-            className={css.vibe}
-            type="textarea"
-            label={vibeMessage}
-            placeholder={vibePlaceholderMessage}
-          />
-
-          <FieldTextInput
             id="community"
             name="community"
             className={css.community}
@@ -253,7 +235,7 @@ const EditListingDescriptionFormComponent = (props) => (
 
           <Button
             className={css.submitButton}
-            type="submit"
+            onClick={() => props.onSubmit(values, 'redirect')}
             inProgress={submitInProgress}
             disabled={submitDisabled}
             ready={submitReady}

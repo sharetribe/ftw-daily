@@ -48,7 +48,7 @@ const EditListingProductsPanel = (props) => {
       <EditListingProductsForm
         className={css.form}
         initialValues={{ products: _.sortBy(products, 'order') }}
-        onSubmit={(values) => {
+        onSubmit={(values, shouldRedirect) => {
           onSubmit({
             publicData: {
               products: values.products.map((p, idx) => {
@@ -62,7 +62,7 @@ const EditListingProductsPanel = (props) => {
                 }
               })
             }
-          })
+          }, shouldRedirect === 'redirect')
         }}
         onImageSubmit={(values, prods) => {
           const { addImage, ...updateValues } = values

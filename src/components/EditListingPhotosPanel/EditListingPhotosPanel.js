@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {
   array, bool, func, object, string
 } from 'prop-types'
+import _ from 'lodash'
 import classNames from 'classnames'
 import { FormattedMessage } from '../../util/reactIntl'
 import { LISTING_STATE_DRAFT } from '../../util/types'
@@ -34,6 +35,15 @@ class EditListingPhotosPanel extends Component {
     const rootClass = rootClassName || css.root
     const classes = classNames(rootClass, className)
     const currentListing = ensureOwnListing(listing)
+    const surfPhotos = _.get(currentListing.attributes.publicData, 'surfing.images', {})
+    const colivingPhotos = _.get(currentListing.attributes.publicData, 'coliving.images', {})
+    const coworkingPhotos = _.get(currentListing.attributes.publicData, 'coworking.images', {})
+    const heroPhoto = _.get(currentListing.attributes.publicData, 'heroImage.id', {})
+    let roomPhotos = {}
+    _.get(currentListing.attributes.publicData, 'products', []).forEach((v) => { roomPhotos = { ...roomPhotos, ...v.photos || {} } })
+    const allOtherPhotos = _.concat(_.keys(surfPhotos), _.keys(colivingPhotos), _.keys(coworkingPhotos), _.keys(roomPhotos), [heroPhoto])
+    const imagesToShow = {}
+    _.filter(images, (img) => !_.includes(allOtherPhotos, img.id.uuid)).forEach((v) => { imagesToShow[v.id.uuid] = {} })
 
     const isPublished
       = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT
@@ -54,14 +64,16 @@ class EditListingPhotosPanel extends Component {
           disabled={disabled}
           ready={ready}
           fetchErrors={errors}
-          initialValues={{ images }}
-          images={images}
-          imagesToDisplay={images}
+          initialValues={{ main: { images: imagesToShow } }}
+          imagesToDisplay={imagesToShow}
           onImageUpload={onImageUpload}
-          onSubmit={(values) => {
-            const { addImage, ...updateValues } = values
-            console.log(updateValues)
-            onSubmit(updateValues)
+          onSubmit={(values, shouldRedirect) => {
+            const existingImages = _.get(listing, 'images', []).map((li) => li.id.uuid)
+            const t = _.concat(existingImages, _.keys(values.main.images))
+            const updateValues = {
+              images: _.uniq(t)
+            }
+            onSubmit(updateValues, shouldRedirect === 'redirect')
           }}
           onChange={onChange}
           onUpdateImageOrder={onUpdateImageOrder}
