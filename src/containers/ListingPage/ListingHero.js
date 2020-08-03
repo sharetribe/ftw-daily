@@ -1,4 +1,5 @@
 import React from 'react'
+import get from 'lodash/get'
 import { ResponsiveImage } from '../../components'
 import ActionBarMaybe from './ActionBarMaybe'
 
@@ -29,14 +30,15 @@ const ListingHero = (props) => {
         alt={title}
         image={firstImage}
         variants={[
-          'scaled-medium',
-          'scaled-large',
-          'scaled-xlarge',
+          'landscape-crop',
+          'landscape-crop2x',
+          'landscape-crop4x',
+          'landscape-crop6x',
         ]}
       />
       <div className={css.heroTextContainer}>
         <h1 className={css.heroTitle}>{title}</h1>
-        <h2 className={css.heroDescription}>{listing.attributes.description}</h2>
+        <h2 className={css.heroDescription}>{get(listing, 'attributes.publicData.heroSubtitle')}</h2>
       </div>
     </div>
   )

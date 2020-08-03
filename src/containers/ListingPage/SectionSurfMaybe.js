@@ -1,7 +1,10 @@
 import React from 'react'
 import _ from 'lodash'
+import includes from 'lodash/includes'
+import keys from 'lodash/keys'
 import { WaveDivider } from '../../assets/WaveDivider'
 import Modal from '../../components/Modal/Modal'
+import SingleLineGridList from '../../components/SingleRowImageGridList/SingleRowImageGridList';
 import { FormattedMessage } from '../../util/reactIntl'
 import { richText } from '../../util/richText'
 
@@ -17,7 +20,21 @@ const onManageDisableScrolling = (componentId, scrollingDisabled = true) => {
 const SectionSurfMaybe = (props) => {
   const [forecast, toggleForecast] = React.useState(null)
   const [isForecastLoading, toggleForecastIsLoading] = React.useState(false)
-  const { publicData, metadata } = props
+  const { publicData, metadata, images } = props
+
+  const generateMobileImageGrid = () => {
+    if (publicData.surfing) {
+      const surfingImageKeys = keys(publicData.surfing.images)
+      const imagesToShow = (images || [])
+      .filter((img) => includes(surfingImageKeys, img.id.uuid))
+      .map((nimg) => ({ img: nimg.attributes.variants['landscape-crop2x'].url, title: 'Surfing Image' }))
+      return (
+        <SingleLineGridList
+          images={imagesToShow}
+        />
+      )
+    }
+  }
 
   const loadForecast = (url) => {
     toggleForecast(url)
@@ -50,25 +67,34 @@ const SectionSurfMaybe = (props) => {
     })
     return (
       <div>
-        <div className={css.waveIconDividerContainer}>
-          <WaveDivider />
-        </div>
         {btns}
       </div>
     )
   }
 
-  return publicData && publicData.surf ? (
+  return publicData && (publicData.surf || publicData.surfing) ? (
     <div className={css.sectionSurf}>
-      <h2 className={css.surfTitle}>
-        <FormattedMessage id="ListingPage.surfTitle" />
+      <h2>
+        <span className={css.coSectionTitle}>
+          <FormattedMessage id="ListingPage.surfTitle" />
+        </span>
       </h2>
-      <p className={css.surf}>
-        {richText(publicData.surf, {
-          longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS_IN_SURF,
-          longWordClass: css.longWord,
-        })}
+      <p className={css.community}>
+        {
+          publicData.surfing ? richText(publicData.surfing.description, {
+            longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS_IN_SURF,
+            longWordClass: css.longWord,
+          })
+            : richText(publicData.surf, {
+              longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS_IN_SURF,
+              longWordClass: css.longWord,
+            })
+        }
       </p>
+      <div className={css.waveIconDividerContainer}>
+        <WaveDivider />
+      </div>
+      { generateMobileImageGrid() }
       { returnMSWButtons() }
       <Modal
         isOpen={forecast !== null}

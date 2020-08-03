@@ -249,7 +249,6 @@ const EditListingDescriptionFormComponent = (props) => (
                   type="text"
                   label={welcomeMessage}
                   placeholder={welcomeMessagePlaceholder}
-                  validate={composeValidators(required(descriptionRequiredMessage))}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -260,7 +259,6 @@ const EditListingDescriptionFormComponent = (props) => (
                   type="text"
                   label={welcomeMessageSigner}
                   placeholder={welcomeMessageSignerPlaceholder}
-                  validate={composeValidators(required(descriptionRequiredMessage))}
                 />
               </Grid>
               <Grid item xs={12}>

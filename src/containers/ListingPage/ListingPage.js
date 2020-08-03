@@ -4,6 +4,7 @@ import {
   array, arrayOf, bool, func, shape, string, oneOf
 } from 'prop-types'
 import { compose } from 'redux'
+import get from 'lodash/get'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl'
@@ -46,9 +47,11 @@ import {
   IconPeople
 } from '../../components'
 import { TopbarContainer, NotFoundPage } from '..'
-import ListingHero from './ListingHero';
+import ListingHero from './ListingHero'
 
 import { sendEnquiry, loadData, setInitialValues } from './ListingPage.duck'
+import SectionColivingMaybe from './SectionColivingMaybe';
+import SectionCoworkingMaybe from './SectionCoworkingMaybe';
 import SectionImages from './SectionImages'
 import SectionAvatar from './SectionAvatar'
 import SectionHeading from './SectionHeading'
@@ -64,6 +67,7 @@ import SectionMapMaybe from './SectionMapMaybe'
 import SectionRetreatMaybe from './SectionRetreatMaybe'
 
 import css from './ListingPage.css'
+import SectionWelcomeMaybe from './SectionWelcomeMaybe';
 
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16
 
@@ -390,9 +394,10 @@ export class ListingPageComponent extends Component {
         </>
       ) : null
 
+
     const wifi
-      = publicData && publicData.wifi ? (
-        <span className={css.tag}><IconNetwork />{`${publicData.wifi} Mbit`}</span>
+      = publicData && (publicData.wifi || get(publicData, 'coworking.wifi')) ? (
+        <span className={css.tag}><IconNetwork />{`${publicData.wifi || get(publicData, 'coworking.wifi')} Mbit`}</span>
       ) : null
 
     return (
@@ -442,11 +447,25 @@ export class ListingPageComponent extends Component {
                     retreat={retreat}
                     wifi={wifi}
                   />
+                  <SectionWelcomeMaybe
+                    publicData={publicData}
+                  />
                   <SectionDescriptionMaybe description={description} />
+                  <SectionColivingMaybe
+                    publicData={publicData}
+                    images={currentListing.images}
+                  />
+                  <SectionCoworkingMaybe
+                    publicData={publicData}
+                    images={currentListing.images}
+                  />
+                  <SectionSurfMaybe
+                    publicData={publicData}
+                    images={currentListing.images}
+                    metadata={metadata}
+                  />
+                  {/*<SectionCommunityMaybe publicData={publicData} />*/}
                   <SectionVideoMaybe video={publicData.video} />
-                  <SectionCommunityMaybe publicData={publicData} />
-                  <SectionVibeMaybe publicData={publicData} />
-                  <SectionSurfMaybe publicData={publicData} metadata={metadata} />
                   <SectionMapMaybe
                     geolocation={geolocation}
                     publicData={publicData}

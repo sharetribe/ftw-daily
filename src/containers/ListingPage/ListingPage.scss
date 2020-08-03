@@ -478,11 +478,14 @@
   }
 }
 
-.communityTitle, .vibeTitle, .surfTitle, .retreatTitle {
+.coSectionTitle {
   /* Font */
   @apply --marketplaceH3FontStyles;
-  color: var(--matterColorAnti);
-
+  color: var(--matterColorLight);
+  background-color: var(--matterColorDark);
+  padding: 8px;
+  border-radius: 4px;
+  font-weight: 800;
   margin-top: 0;
   margin-bottom: 13px;
   @media (--viewportMedium) {
@@ -684,7 +687,6 @@
   align-items: center;
   height: 50px;
   width: 100%;
-  margin-bottom: -20px;
 }
 
 .surfDifficultyIndicator {
@@ -815,4 +817,35 @@
       box-shadow: var(--boxShadowListingCard);
     }
   }
+}
+
+.welcomeMessageContainer {
+  padding: 0 20px 20px 20px;
+  margin-top: 20px;
+  margin-bottom: 60px;
+}
+
+.welcomeMessage {
+  font-weight: 400;
+  font-style: italic;
+  text-align: center;
+  line-height: 30px;
+
+  @media (--viewportMedium) {
+    font-size: 30px;
+    line-height: 40px;
+  }
+}
+
+.messageSignerContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.welcomeMessageSigner {
+  font-size: 14px;
+  font-weight: 300;
+  text-align: right;
+  color: var(--marketplaceColorDark)
 }

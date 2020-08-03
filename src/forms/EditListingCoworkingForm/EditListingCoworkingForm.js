@@ -40,6 +40,16 @@ const EditListingCoworkingFormComponent = (props) => (
         form,
       } = formRenderProps
 
+      const wifiMessage = intl.formatMessage({
+        id: 'EditListingDescriptionForm.wifi',
+      });
+      const wifiPlaceholderMessage = intl.formatMessage({
+        id: 'EditListingDescriptionForm.wifiPlaceholder',
+      });
+      const wifiValidMessage = intl.formatMessage({
+        id: 'EditListingDescriptionForm.wifiInvalid',
+      });
+
       const { updateListingError, showListingsError } = fetchErrors || {}
       const errorMessageUpdateListing = updateListingError ? (
         <p className={css.error}>
@@ -65,6 +75,17 @@ const EditListingCoworkingFormComponent = (props) => (
           <Grid container className={classes.root} direction="column" spacing={5}>
             <Grid item xs={12}>
               <Grid container justify="center" spacing={2} direction="column">
+                <Grid item xs={12}>
+                  <FieldTextInput
+                    id="coworking.wifi"
+                    name="coworking.wifi"
+                    className={css.wifi}
+                    type="text"
+                    label={wifiMessage}
+                    placeholder={wifiPlaceholderMessage}
+                    validate={composeValidators(isValidNumber(wifiValidMessage), required(intl.formatMessage({ id: 'GenericForm.required' })))}
+                  />
+                </Grid>
                 <Grid item xs={12}>
                   <FieldTextInput
                     id="coworking.description"
