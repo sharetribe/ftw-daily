@@ -21,6 +21,7 @@ const SectionColivingMaybe = (props) => {
       console.log(imagesToShow)
       return (
         <SingleLineGridList
+          className={css.coImageGridList}
           images={imagesToShow}
         />
       )

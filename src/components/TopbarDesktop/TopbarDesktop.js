@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { IconMessage } from '../../assets/IconMessage';
+import { IconMessage } from '../../assets/IconMessage'
 import { FormattedMessage, intlShape } from '../../util/reactIntl'
 import { ACCOUNT_SETTINGS_PAGES } from '../../routeConfiguration'
 import { propTypes } from '../../util/types'
@@ -136,7 +136,11 @@ const TopbarDesktop = (props) => {
 
   return (
     <nav className={classes}>
-      <NamedLink className={css.logoLink} name="LandingPage">
+      <NamedLink
+        className={css.logoLink}
+        name="LandingPage"
+        nakedUrl={'https://coworksurf.com'}
+      >
         <Logo
           format="desktop"
           className={css.logo}

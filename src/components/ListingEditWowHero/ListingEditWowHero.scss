@@ -19,6 +19,7 @@
 .heroTextContainer {
   position: absolute;
   display: flex;
+  left: 0;
   flex-direction: column;
   height: 100%;
   width: 100%;
@@ -27,7 +28,7 @@
   align-items: center;
 
   @media (--viewportMedium) {
-   padding: 25px;
+   padding: 100px;
   }
 }
 

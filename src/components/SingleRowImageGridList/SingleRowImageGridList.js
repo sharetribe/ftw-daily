@@ -12,10 +12,14 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     marginLeft: -20,
     marginRight: -20,
-    borderTop: 'solid 1px black',
-    borderBottom: 'solid 1px black',
+    borderTop: 'solid 0.5px black',
+    borderBottom: 'solid 0.5px black',
     paddingTop: 5,
-    paddingBottom: 5
+    paddingBottom: 5,
+    [theme.breakpoints.up('lg')]: {
+      marginLeft: 0,
+      marginRight: 0,
+    },
   },
   gridList: {
     flexWrap: 'nowrap',
@@ -50,10 +54,9 @@ const useStyles = makeStyles((theme) => ({
  */
 const SingleLineGridList = (props) => {
   const classes = useStyles()
-  console.log(props)
   return (
     <div className={classes.root}>
-      <GridList className={classes.gridList} cols={3}>
+      <GridList className={classes.gridList} cols={3} spacing={10}>
         {props.images.map((tile) => (
           <GridListTile key={tile.img} imgFullWidth={true } cols={2}>
             <img src={tile.img} alt={tile.title} />
