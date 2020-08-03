@@ -453,7 +453,7 @@
   "ListingPage.reviewsHeading": "Reviews ({count})",
   "ListingPage.rulesTitle": "Space rules",
   "ListingPage.schemaTitle": "{title} - {price} | {siteTitle}",
-  "ListingPage.viewImagesButton": "View photos ({count})",
+  "ListingPage.viewImagesButton": "View all photos ({count})",
   "ListingPage.yourHostHeading": "Your host",
   "LocationAutocompleteInput.currentLocation": "Current location",
   "LocationSearchForm.placeholder": "Where do you want to surf?",
