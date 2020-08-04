@@ -27,10 +27,9 @@ function  SkippingBlockComponent  (props)  {
   const{ closeButtonMessage, onManageDisableScrolling, onRedirectState, onRequestStripeAccount, redirect, stripeAccountCreated, stripeAccountCreatedShow, onStripeAccountShowWindow, submitButtonText, history } = props
  const [hasSeenMissingInformationReminder, setHasSeenMissingInformationReminder]= useState(null)
 
-  useEffect(   () => {
+  useEffect( () => {
     onRequestStripeAccount()
     }, [])
-  console.log(stripeAccountCreated)
   return (
     <>
       {redirect ? later(history) :(

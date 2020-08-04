@@ -60,7 +60,7 @@ const initialState = {
   retrievePaymentIntentError: null,
   redirect: false,
   payloadFormView: false,
-  stripeAccountCreated: null,
+  stripeAccountCreated: true,
   stripeAccountCreatedShow: true,
 };
 
