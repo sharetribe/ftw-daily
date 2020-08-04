@@ -208,6 +208,7 @@
 
   "EditListingProductsForm.additionalProductLink": "Add another room",
   "EditListingProductsForm.additionalProductRemove": "Remove room",
+  "EditListingProductsForm.additionalProductRemoveDiscount": "Remove",
   "EditListingProductsForm.additionalProductTitle": "Room",
   "EditListingProductsForm.additionalProductBedTypeSelection": "What type of bed does this room have?",
   "EditListingProductsForm.additionalProductBathroomTypeSelection": "What type of bathroom does this room have?",

@@ -12,8 +12,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     marginLeft: -20,
     marginRight: -20,
-    borderTop: 'solid 0.5px black',
-    borderBottom: 'solid 0.5px black',
     paddingTop: 5,
     paddingBottom: 5,
     [theme.breakpoints.up('lg')]: {

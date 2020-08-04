@@ -5,6 +5,7 @@ const ReactSelectAdapter = (props) => {
   const {
     input,
     searchable = false,
+    value,
     ...rest
   } = props
 
@@ -48,13 +49,13 @@ const ReactSelectAdapter = (props) => {
       height: 50,
       borderColor: determineBorderColor()
     })
-
   }
   return (
     <Select
       {...input}
       {...rest}
       searchable={searchable}
+      value={props.options.find((o) => o.value === input.value)}
       styles={customStyles}
       theme={(theme) => ({
         ...theme,

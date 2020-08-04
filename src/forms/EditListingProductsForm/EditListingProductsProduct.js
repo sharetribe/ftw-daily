@@ -1,14 +1,24 @@
+import Divider from '@material-ui/core/Divider'
 import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper';
+import IconButton from '@material-ui/core/IconButton'
+import Paper from '@material-ui/core/Paper'
 import makeStyles from '@material-ui/core/styles/makeStyles'
+import Tooltip from '@material-ui/core/Tooltip';
+import Typography from '@material-ui/core/Typography';
 import React from 'react'
 import { bool, node, string } from 'prop-types'
+import { FieldArray } from 'react-final-form-arrays'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import { Field } from 'react-final-form'
+import AddIcon from '@material-ui/icons/Add'
+import DeleteIcon from '@material-ui/icons/Delete'
+import { FormattedMessage, intlShape } from '../../util/reactIntl'
 import FieldReactSelect from '../../components/FieldReactSelect/FieldReactSelect'
+import MField from '../../components/MField/MField'
+import MButton from '../../components/MButton/MButton'
 import { updateListingAdHoc } from '../../containers/EditListingPage/EditListingPage.duck'
-import { intlShape } from '../../util/reactIntl'
+
 import { composeValidators, moneySubUnitAmountAtLeast, required } from '../../util/validators'
 import { FieldTextInput, FieldCurrencyInput, SelectImage } from '../../components'
 import config from '../../config'
@@ -29,7 +39,7 @@ const EditListingProductsProduct = (props) => {
     product,
     onImageSubmit,
     onImageDelete,
-    images
+    index
   } = props
 
   const productTitle = sectionTitle || intl.formatMessage({ id: 'EditListingProductsForm.additionalProductTitle' })
@@ -72,7 +82,7 @@ const EditListingProductsProduct = (props) => {
   const classes = useStyles()
 
   return (
-    <Paper style={{padding: 20 }}>
+    <Paper style={{ padding: 20 }}>
       <Grid container className={classes.root} direction="column" spacing={5}>
         <Grid item xs={12}>
           <Grid container justify="center" spacing={2} direction="column">
@@ -99,6 +109,9 @@ const EditListingProductsProduct = (props) => {
               />
             </Grid>
           </Grid>
+        </Grid>
+        <Grid item xs={12}>
+          <Divider />
         </Grid>
         <Grid item xs={12}>
           <Grid container justify="center" spacing={2} direction="column">
@@ -221,6 +234,9 @@ const EditListingProductsProduct = (props) => {
           </Grid>
         </Grid>
         <Grid item xs={12}>
+          <Divider />
+        </Grid>
+        <Grid item xs={12}>
           <Grid container justify="center" spacing={2} direction="column">
             <Grid item xs={12}>
               <FieldCurrencyInput
@@ -233,7 +249,65 @@ const EditListingProductsProduct = (props) => {
                 validate={priceValidators}
               />
             </Grid>
+            <Grid item xs={12}>
+              <Grid container justify="center" spacing={2} direction="column">
+                <Grid item xs={12}>
+                  <h3 className={css.subTitle}>Length of stay discount</h3>
+                  <small style={{marginTop: -10}}>Select 'Add Discount' to enter discounts for bookings of a certain length or greater. These discounts are only applied to this room.</small>
+                </Grid>
+                <Grid item xs={12}>
+                  <FieldArray id={`${fieldId}.losDiscount`} name={`${fieldId}.losDiscount`}>
+                    {({ fields }) => fields.map((name, index) => {
+                      return (
+                        <div key={name}>
+                          <Grid container justify={'space-between'} alignItems={'center'} direction="row" spacing={1}>
+                            <Grid item xs={4}>
+                              <MField
+                                label={'Days'}
+                                name={`${fieldId}.losDiscount.${index}.days`}
+                                form={form}
+                              />
+                            </Grid>
+                            <Grid item xs={4}>
+                              <MField
+                                label={'Discount'}
+                                name={`${fieldId}.losDiscount.${index}.percent`}
+                                form={form}
+                                adornmentEnd={'%'}
+                              />
+                            </Grid>
+                            <Grid item xs={2}>
+                              <Tooltip title="Delete" aria-label="delete">
+                                <IconButton
+                                  aria-label="delete"
+                                  onClick={() => fields.remove(index)}
+                                >
+                                  <DeleteIcon fontSize="small" />
+                                </IconButton>
+                              </Tooltip>
+                            </Grid>
+                          </Grid>
+                        </div>
+                      )
+                    })}
+                  </FieldArray>
+                </Grid>
+                <Grid item xs={12}>
+                  <MButton
+                    label={'Add Discount'}
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                    startIcon={<AddIcon />}
+                    onClick={() => form.mutators.push(`${fieldId}.losDiscount`)}
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
           </Grid>
+        </Grid>
+        <Grid item xs={12}>
+          <Divider />
         </Grid>
         <Grid item xs={12}>
           <Grid container justify="center" spacing={2} direction="column">
