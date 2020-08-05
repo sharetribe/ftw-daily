@@ -199,6 +199,7 @@ const ApprovedBlockComponent = props => (
             <Button
               type="submit"
               onClick={()=>props.onPublicDraft()}
+              className={css.approvedBlock__greyButton}
               inProgress={submitInProgress}
               ready={ready}>
               {submitButtonText ? (
