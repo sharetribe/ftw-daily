@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import GridList from '@material-ui/core/GridList'
 import GridListTile from '@material-ui/core/GridListTile'
 
+import css from './SingleRowImageGridList.css'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -23,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'nowrap',
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: 'translateZ(0)',
+  },
+  tile: {
+    border: 'solid 5px yellow'
   },
   title: {
     color: theme.palette.primary.light,
@@ -54,10 +59,25 @@ const SingleLineGridList = (props) => {
   const classes = useStyles()
   return (
     <div className={classes.root}>
-      <GridList className={classes.gridList} cols={3} spacing={10}>
+      <GridList
+        className={classes.gridList}
+        cols={3}
+        spacing={10}
+        cellHeight={300}
+      >
         {props.images.map((tile) => (
-          <GridListTile key={tile.img} imgFullWidth={true } cols={2}>
-            <img src={tile.img} alt={tile.title} />
+          <GridListTile
+            key={tile.img}
+            imgFullWidth={true}
+            cols={2}
+            classes={classes.tile}
+          >
+            <div
+              className={css.gridImageContainer}
+              onClick={() => console.log('click')}
+            >
+              <img className={css.gridImage} src={tile.img} alt={tile.title} />
+            </div>
           </GridListTile>
         ))}
       </GridList>

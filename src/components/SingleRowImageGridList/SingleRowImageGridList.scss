@@ -1,23 +1,14 @@
-.root {
-  margin-left: -20px;
-  margin-right: -20px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  overflow: hidden;
-  margin-left: -20;
-  margin-right: -20;
-  border-top: solid 1px black;
-  border-bottom: solid 1px black;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  @media (--viewportLarge) {
-    margin: 0;
-  }
+.gridImageContainer {
+  height: 100%;
+  box-shadow: var(--buttonShadowMedium);
+}
+.gridImage {
+  width: 100%;
+  max-height: 100%;
+  min-height: 300px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 8px;
 }
 
-.gridList {
-  flex-wrap: nowrap;
-  // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-  transform: translateZ(0);
-}
+
