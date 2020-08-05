@@ -582,7 +582,7 @@ export class TransactionPanelComponent extends Component {
                 </a>
               </div>
 
-                <BookingPanel
+                {/* <BookingPanel
                   className={css.bookingPanel}
                   titleClassName={css.bookingTitle}
                   isOwnListing={false}
@@ -594,7 +594,7 @@ export class TransactionPanelComponent extends Component {
                   onManageDisableScrolling={onManageDisableScrolling}
                   timeSlots={timeSlots}
                   fetchTimeSlotsError={fetchTimeSlotsError}
-                />
+                /> */}
 
               <BreakdownMaybe
                 className={css.breakdownContainer}
