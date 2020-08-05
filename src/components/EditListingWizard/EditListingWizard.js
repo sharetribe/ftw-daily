@@ -260,6 +260,7 @@ class EditListingWizard extends Component {
           })}
         </Tabs>
         <Modal
+          cssClass={css.approvedBlock__informationModal}
           id="EditListingWizard.payoutModal"
           isOpen={this.state.showPayoutDetails}
           onClose={this.handlePayoutModalClose}

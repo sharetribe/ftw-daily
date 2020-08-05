@@ -69,6 +69,7 @@ export class ModalComponent extends Component {
       intl,
       isClosedClassName,
       isOpen,
+      cssClass,
     } = this.props;
 
     const closeModalMessage = intl.formatMessage({ id: 'Modal.closeModal' });
@@ -95,7 +96,7 @@ export class ModalComponent extends Component {
     const modalClass = isOpen ? css.isOpen : isClosedClassName;
     const classes = classNames(modalClass, className);
     const scrollLayerClasses = scrollLayerClassName || css.scrollLayer;
-    const containerClasses = containerClassName || css.container;
+    const containerClasses = cssClass ||containerClassName || css.container;
     return (
       <div className={classes}>
         <div className={scrollLayerClasses}>

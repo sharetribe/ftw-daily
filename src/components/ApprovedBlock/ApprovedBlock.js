@@ -15,7 +15,7 @@ import PayoutDetailsIndividualAccount from './../../forms/PayoutDetailsForm/Payo
 import css from './../../forms/PayoutDetailsForm/PayoutDetailsForm.css';
 import { publicDraft, payloadFormViewState } from '../../ducks/stripe.duck';
 import { connect } from 'react-redux';
-import { Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { pathByRouteName } from '../../util/routes';
 import routeConfiguration from '../../routeConfiguration';
 
@@ -199,6 +199,7 @@ const ApprovedBlockComponent = props => (
             <Button
               type="submit"
               onClick={()=>props.onPublicDraft()}
+              className={css.approvedBlock__greyButton}
               inProgress={submitInProgress}
               ready={ready}>
               {submitButtonText ? (
