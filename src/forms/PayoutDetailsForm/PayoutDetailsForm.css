@@ -230,3 +230,17 @@
     padding-bottom: 2px;
   }
 }
+
+.approvedBlock__greyButton {
+  margin-top: 10px;
+  background-color: transparent;
+  color: #1a2b49;
+}
+
+.approvedBlock__greyButton:hover {
+  background-color: #fafafa;
+}
+
+.approvedBlock__modalBody p {
+  margin-bottom: 95px;
+}
