@@ -15,9 +15,19 @@ import PayoutDetailsIndividualAccount from './../../forms/PayoutDetailsForm/Payo
 import css from './../../forms/PayoutDetailsForm/PayoutDetailsForm.css';
 import { publicDraft, payloadFormViewState } from '../../ducks/stripe.duck';
 import { connect } from 'react-redux';
-import { Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { pathByRouteName } from '../../util/routes';
+import routeConfiguration from '../../routeConfiguration';
 
 const supportedCountries = config.stripe.supportedCountries.map(c => c.code);
+
+
+  const later = (props) =>{
+    const { history } = props
+    const path = pathByRouteName('LandingPage', routeConfiguration())
+    history.push(path)
+  }
+
 
 export const stripeCountryConfigs = countryCode => {
   const country = config.stripe.supportedCountries.find(c => c.code === countryCode);
@@ -116,6 +126,7 @@ const ApprovedBlockComponent = props => (
         </ExternalLink>
       );
 
+
       return  (
         <div>
           {payloadFormView ? (
@@ -184,10 +195,11 @@ const ApprovedBlockComponent = props => (
               <FormattedMessage id="PayoutDetailsForm.submitButtonText" />
             )}
           </Button>)}
-          {redirect ? <Redirect to='/' /> :
+          {redirect ? later(props) :
             <Button
               type="submit"
               onClick={()=>props.onPublicDraft()}
+              className={css.approvedBlock__greyButton}
               inProgress={submitInProgress}
               ready={ready}>
               {submitButtonText ? (

@@ -36,6 +36,7 @@ export const RETRIEVE_PAYMENT_INTENT_ERROR = 'app/stripe/RETRIEVE_PAYMENT_INTENT
 export const REDIRECT = 'app/stripe/REDIRECT';
 export const PAYLOAD_FOMR_VIEW = 'app/stripe/PAYLOAD_FOMR_VIEW';
 export const STRIPE_ACCOUNT_CREATED = 'app/stripe/STRIPE_ACCOUNT_CREATED';
+export const STRIPE_ACCOUNT_CREATED_SHOW = 'app/stripe/STRIPE_ACCOUNT_CREATED_SHOW';
 
 
 // ================ Reducer ================ //
@@ -59,18 +60,21 @@ const initialState = {
   retrievePaymentIntentError: null,
   redirect: false,
   payloadFormView: false,
-  stripeAccountCreated: false,
+  stripeAccountCreated: true,
+  stripeAccountCreatedShow: true,
 };
 
 export default function reducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
     case REDIRECT:
-      return { ...state, redirect: true};
+      return { ...state, redirect: true };
     case PAYLOAD_FOMR_VIEW:
-      return { ...state, payloadFormView: true};
+      return { ...state, payloadFormView: true };
     case STRIPE_ACCOUNT_CREATED:
-      return { ...state, stripeAccountCreated: true};
+      return { ...state, stripeAccountCreated: payload };
+    case STRIPE_ACCOUNT_CREATED_SHOW:
+      return { ...state, stripeAccountCreatedShow: payload };
     case STRIPE_ACCOUNT_CREATE_REQUEST:
       return { ...state, createStripeAccountError: null, createStripeAccountInProgress: true };
     case STRIPE_ACCOUNT_CREATE_SUCCESS:
@@ -189,7 +193,14 @@ export default function reducer(state = initialState, action = {}) {
 export const stripeAccountCreateRequest = () => ({ type: STRIPE_ACCOUNT_CREATE_REQUEST });
 export const redirectState = () => ({ type: REDIRECT });
 export const payloadFormViewState = () => ({ type: PAYLOAD_FOMR_VIEW });
-export const stripeAccountCreatedState = () => ({ type: STRIPE_ACCOUNT_CREATED });
+export const stripeAccountCreatedState = (state) => ({
+  type: STRIPE_ACCOUNT_CREATED,
+  payload: state,
+});
+export const stripeAccountShowWindow = (state) => ({
+  type: STRIPE_ACCOUNT_CREATED_SHOW,
+  payload: state,
+});
 
 export const stripeAccountCreateSuccess = stripeAccount => ({
   type: STRIPE_ACCOUNT_CREATE_SUCCESS,
@@ -331,8 +342,8 @@ const personTokenParams = (personData, companyConfig) => {
   const idNumberMaybe = ssnLast4Required
     ? { ssn_last_4: personalIdNumber }
     : personalIdNumberRequired
-    ? { id_number: personalIdNumber }
-    : {};
+      ? { id_number: personalIdNumber }
+      : {};
 
   const accountOpenerMaybe = isAccountOpener ? { account_opener: true } : {};
   const jobTitleMaybe = title ? { title } : {};
@@ -344,13 +355,13 @@ const personTokenParams = (personData, companyConfig) => {
   const relationshipMaybe =
     isAccountOpener || title || role
       ? {
-          relationship: {
-            ...accountOpenerMaybe,
-            ...jobTitleMaybe,
-            ...ownerMaybe,
-            ...ownershipPercentageMaybe,
-          },
-        }
+        relationship: {
+          ...accountOpenerMaybe,
+          ...jobTitleMaybe,
+          ...ownerMaybe,
+          ...ownershipPercentageMaybe,
+        },
+      }
       : {};
 
   return {
@@ -457,7 +468,7 @@ const accountTokenParamsForCompany = company => {
 export const createStripeCompanyAccount = (payoutDetails, companyConfig, stripe) => (
   dispatch,
   getState,
-  sdk
+  sdk,
 ) => {
   const { company, country, accountOpener, persons = [] } = payoutDetails;
   const state = getState();
@@ -469,7 +480,7 @@ export const createStripeCompanyAccount = (payoutDetails, companyConfig, stripe)
   const createPersons = () => {
     return Promise.all([
       dispatch(
-        createStripePerson({ ...accountOpener, isAccountOpener: true }, companyConfig, stripe)
+        createStripePerson({ ...accountOpener, isAccountOpener: true }, companyConfig, stripe),
       ),
       ...persons.map(p => dispatch(createStripePerson(p, companyConfig, stripe))),
     ]);
@@ -556,8 +567,8 @@ const accountTokenParamsForIndividual = (individual, individualConfig) => {
   const idNumberMaybe = ssnLast4Required
     ? { ssn_last_4: personalIdNumber }
     : personalIdNumberRequired
-    ? { id_number: personalIdNumber }
-    : {};
+      ? { id_number: personalIdNumber }
+      : {};
 
   const individualTokenParams = {
     business_type: 'individual',
@@ -573,13 +584,13 @@ const accountTokenParamsForIndividual = (individual, individualConfig) => {
     tos_shown_and_accepted: true,
   };
 
-  return individualTokenParams
+  return individualTokenParams;
 };
 
 export const createStripeIndividualAccount = (payoutDetails, individualConfig, stripe) => (
   dispatch,
   getState,
-  sdk
+  sdk,
 ) => {
   const { country, individual } = payoutDetails;
   let stripeAccount;
@@ -590,16 +601,16 @@ export const createStripeIndividualAccount = (payoutDetails, individualConfig, s
       const accountToken = response.token.id;
       const bankAccountToken = bankAccountTokenParams(individual);
       const stripeAccountParams = {
-        requestedCapabilities: ["transfers", "card_payments"],
+        requestedCapabilities: ['transfers', 'card_payments'],
         accountToken,
         bankAccountToken,     // merge master branch conflict
 
         country,
-          // business_profile: {
-          //       mcc: "4121",
-          //       url: "https://rocketrides.io/"
-          // }
-         //bankAccountToken, - delete
+        // business_profile: {
+        //       mcc: "4121",
+        //       url: "https://rocketrides.io/"
+        // }
+        //bankAccountToken, - delete
         //country,- delete
         ...businessProfileParams(individual, individualConfig),
       };
@@ -613,7 +624,7 @@ export const createStripeIndividualAccount = (payoutDetails, individualConfig, s
       //return sdk.stripeAccount.update(stripeAccountParams, { expand: true });
     })
     .then(response => {
-      console.log(response.data.data)
+      console.log(response.data.data);
       stripeAccount = response;
       dispatch(stripeAccountCreateSuccess(response.data.data));
       return stripeAccount;
@@ -634,7 +645,7 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
   if (typeof window === 'undefined' || !window.Stripe) {
     throw new Error('Stripe must be loaded for submitting PayoutPreferences');
   }
-  console.log("payoutDetails ", payoutDetails)
+  console.log('payoutDetails ', payoutDetails);
   const stripe = window.Stripe(config.stripe.publishableKey);
 
   const country = payoutDetails.country;
@@ -643,7 +654,7 @@ export const createStripeAccount = payoutDetails => (dispatch, getState, sdk) =>
   const companyConfig = countryConfig.companyConfig;
 
   /*if (payoutDetails.accountType === 'individual') {*/
-    return dispatch(createStripeIndividualAccount(payoutDetails, individualConfig, stripe));
+  return dispatch(createStripeIndividualAccount(payoutDetails, individualConfig, stripe));
   /*} else {
     return dispatch(createStripeCompanyAccount(payoutDetails, companyConfig, stripe));
   }*/
@@ -672,13 +683,13 @@ export const retrievePaymentIntent = params => dispatch => {
       const { code, doc_url, message, payment_intent } = err.error || {};
       const loggableError = err.error
         ? {
-            code,
-            message,
-            doc_url,
-            paymentIntentStatus: payment_intent
-              ? payment_intent.status
-              : 'no payment_intent included',
-          }
+          code,
+          message,
+          doc_url,
+          paymentIntentStatus: payment_intent
+            ? payment_intent.status
+            : 'no payment_intent included',
+        }
         : e;
       log.error(loggableError, 'stripe-retrieve-payment-intent-failed', {
         stripeMessage: loggableError.message,
@@ -722,11 +733,11 @@ export const handleCardPayment = params => dispatch => {
       const { code, doc_url, message, payment_intent } = containsPaymentIntent ? err.error : {};
       const loggableError = containsPaymentIntent
         ? {
-            code,
-            message,
-            doc_url,
-            paymentIntentStatus: payment_intent.status,
-          }
+          code,
+          message,
+          doc_url,
+          paymentIntentStatus: payment_intent.status,
+        }
         : e;
       log.error(loggableError, 'stripe-handle-card-payment-failed', {
         stripeMessage: loggableError.message,
@@ -762,11 +773,11 @@ export const handleCardSetup = params => dispatch => {
       const { code, doc_url, message, setup_intent } = containsSetupIntent ? err.error : {};
       const loggableError = containsSetupIntent
         ? {
-            code,
-            message,
-            doc_url,
-            paymentIntentStatus: setup_intent.status,
-          }
+          code,
+          message,
+          doc_url,
+          paymentIntentStatus: setup_intent.status,
+        }
         : e;
       log.error(loggableError, 'stripe-handle-card-setup-failed', {
         stripeMessage: loggableError.message,
@@ -775,15 +786,35 @@ export const handleCardSetup = params => dispatch => {
     });
 };
 
-export const publicDraft = ()=> (dispatch, getState,sdk ) => {
+export const publicDraft = () => (dispatch, getState, sdk) => {
 
-  const uuid = Object.keys(getState().marketplaceData.entities.ownListing)[0]
-    sdk.ownListings.publishDraft({
-    id: `${uuid}`
+  const uuid = Object.keys(getState().marketplaceData.entities.ownListing)[0];
+  sdk.ownListings.publishDraft({
+    id: `${uuid}`,
   }, {
-    expand: true
-  }).then(()=>
-      dispatch(redirectState())
+    expand: true,
+  }).then(() =>
+    dispatch(redirectState()),
   );
-
 };
+
+
+export const requestStripeAccount = () => async (dispatch, getState, sdk) => {
+
+  try {
+    let res = await sdk.stripeAccount.fetch();
+    console.log(res);
+    if (res.status === 200) {
+      if (res.data.data.attributes.stripeAccountId) {
+        dispatch(stripeAccountCreatedState(true));
+      }
+    }
+  } catch(res) {
+    console.log(res);
+    window.res=res
+    if (res.status >= 400) {
+      dispatch(stripeAccountCreatedState(false));
+    }
+  }
+};
+

@@ -450,3 +450,11 @@
 .appPlayStoreIcon {
   max-width: 70%;
 }
+
+
+@media (max-width: 480px)  {
+  .appPlayStoreIcon {
+    max-width: 50%;
+  }
+}
+
