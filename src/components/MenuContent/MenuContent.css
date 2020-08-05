@@ -3,7 +3,7 @@
 .root {
   position: absolute;
   z-index: var(--zIndexPopup);
-
+  right: 0;
   background-color: var(--matterColorLight);
   border-top: 1px solid var(--matterColorNegative);
   box-shadow: var(--boxShadowPopup);
