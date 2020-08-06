@@ -12,6 +12,10 @@ import EmailReminder from './EmailReminder';
 import StripeAccountReminder from './StripeAccountReminder';
 import css from './ModalMissingInformation.css';
 
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+
 const MISSING_INFORMATION_MODAL_WHITELIST = [
   'LoginPage',
   'SignupPage',
@@ -100,6 +104,7 @@ class ModalMissingInformation extends Component {
       sendVerificationEmailError,
       onManageDisableScrolling,
       onResendVerificationEmail,
+      stripeAccountCreatedShow,
     } = this.props;
 
     const user = ensureCurrentUser(currentUser);
@@ -127,8 +132,7 @@ class ModalMissingInformation extends Component {
     const closeButtonMessage = (
       <FormattedMessage id="ModalMissingInformation.closeVerifyEmailReminder" />
     );
-
-    return (
+    return (stripeAccountCreatedShow ? null :
       <Modal
         id="MissingInformationReminder"
         containerClassName={containerClassName}
@@ -167,5 +171,15 @@ ModalMissingInformation.propTypes = {
 };
 
 ModalMissingInformation.displayName = 'ModalMissingInformation';
+
+const mapStateToProps = state => {
+  return {
+     stripeAccountCreatedShow: state.stripe.stripeAccountCreatedShow,
+  };
+}
+
+ModalMissingInformation = compose(withRouter, connect(
+  mapStateToProps,
+))(ModalMissingInformation);
 
 export default ModalMissingInformation;

@@ -98,7 +98,7 @@ export class ModalComponent extends Component {
     const classes = classNames(modalClass, className);
     const scrollLayerClasses = scrollLayerClassName || css.scrollLayer;
     const containerClasses = cssClass || containerClassName || css.container;
-    const customScrollLayerClasses = `${cssClassBackground} ${scrollLayerClasses} `
+    const customScrollLayerClasses = `${cssClassBackground} ${scrollLayerClasses}`
     return (
       <div className={classes}>
         <div className={customScrollLayerClasses} >

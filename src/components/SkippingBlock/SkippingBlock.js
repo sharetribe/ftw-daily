@@ -24,17 +24,15 @@ const later = (history) =>{
 }
 
 function  SkippingBlockComponent  (props)  {
-  const{ closeButtonMessage, onManageDisableScrolling, onRedirectState, onRequestStripeAccount, redirect, stripeAccountCreated, stripeAccountCreatedShow, onStripeAccountShowWindow, submitButtonText, history } = props
- const [hasSeenMissingInformationReminder, setHasSeenMissingInformationReminder]= useState(null)
-
+  const{ closeButtonMessage, onManageDisableScrolling, onRedirectState, onRequestStripeAccount, redirect, stripeAccountCreated, stripeAccountCreatedShow, onStripeAccountShowWindow, submitButtonText, history, } = props
+  const [hasSeenMissingInformationReminder, setHasSeenMissingInformationReminder]= useState(null)
   useEffect( () => {
     onRequestStripeAccount()
     }, [])
   return (
     <>
-      {redirect ? later(history) :(
+      {redirect ? later(history) :
     <Modal
-      cssClassBackground={css.SkippingBlock_background }
       id="MissingInformationReminder"
       containerClassName={css.informationModal}
       isOpen={(!stripeAccountCreated && stripeAccountCreatedShow) }
@@ -81,7 +79,7 @@ function  SkippingBlockComponent  (props)  {
           )}
         </Button>
       </div>
-    </Modal>)}
+    </Modal>}
       </>
   )
 }
@@ -89,7 +87,7 @@ function  SkippingBlockComponent  (props)  {
 SkippingBlockComponent.defaultProps = {
   submitButtonText: null,
   redirect: false,
-};
+}
 
 SkippingBlockComponent.propTypes = {
   onRedirectState: func.isRequired,
@@ -97,14 +95,15 @@ SkippingBlockComponent.propTypes = {
   onStripeAccountCreatedState: func.isRequired,
   onManageDisableScrolling: func.isRequired,
   onStripeAccountShowWindow: func.isRequired,
-};
+}
 const mapStateToProps = state => {
   return {
+    emailVerified: state.EmailVerification.isVerified,
     redirect: state.stripe.redirect,
     stripeAccountCreatedShow: state.stripe.stripeAccountCreatedShow,
     stripeAccountCreated: state.stripe.stripeAccountCreated,
   };
-};
+}
 const mapDispatchToProps = dispatch => ({
   onRedirectState: () => dispatch(redirectState()),
   onStripeAccountShowWindow: (state) => dispatch(stripeAccountShowWindow(state)),
