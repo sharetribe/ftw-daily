@@ -547,3 +547,40 @@
   @custom-media --viewportLarge (min-width: 1024px);
   @custom-media --viewportLargeWithPaddings (min-width: 1128px);
   @custom-media --viewportXLarge (min-width: 1921px);
+
+  /* Customize CSS Code */
+
+  .submitButton::before {
+    transform: rotate(-45deg);
+    content: "";
+    display: block;
+    position: absolute;
+    width: 3px;
+    height: 10px;
+    background-color: #fff;
+    right: 20px;
+    top: calc(50% - 7px);
+  }
+  .submitButton::after {
+    transform: rotate(45deg);
+    content: "";
+    display: block;
+    position: absolute;
+    width: 3px;
+    height: 10px;
+    background-color: #fff;
+    right: 20px;
+    top: calc(50%);
+  }
+  .submitButton {
+    position: relative;
+  }
+  /* .arrowSpan::after {
+    content: "";
+    transform: rotate(-45deg) translateY(27px) translateX(30px);
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+  } */
+  
