@@ -542,7 +542,8 @@
   }
 }
   /* ================ Custom media queries ================ */
-  @custom-media --viewportSmall (min-width: 480px);
+  @custom-media --viewportMiniSmall (min-width: 320px);
+  @custom-media --viewportSmall (min-width: 425px);
   @custom-media --viewportMedium (min-width: 768px);
   @custom-media --viewportLarge (min-width: 1024px);
   @custom-media --viewportLargeWithPaddings (min-width: 1128px);
@@ -574,9 +575,14 @@
       margin: 0;
     }
   }
+  @media (--viewportMiniSmall) {
+    .submitButton::before, .submitButton::after {
+      right: 40px;
+    }
+  }
   @media (--viewportSmall) {
     .submitButton::before, .submitButton::after {
-      right: 35px;
+      right: 50px;
     }
   }
   @media (--viewportMedium) {
