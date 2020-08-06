@@ -1,3 +1,7 @@
+div[class^="Modal_isOpen"] .SkippingBlock_background{
+  background-color: transparent;
+}
+
 .greyButton {
   margin-top: 10px;
   background-color: transparent;

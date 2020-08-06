@@ -34,6 +34,7 @@ function  SkippingBlockComponent  (props)  {
     <>
       {redirect ? later(history) :(
     <Modal
+      cssClassBackground={css.SkippingBlock_background }
       id="MissingInformationReminder"
       containerClassName={css.informationModal}
       isOpen={(!stripeAccountCreated && stripeAccountCreatedShow) }
