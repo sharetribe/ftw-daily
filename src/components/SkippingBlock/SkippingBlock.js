@@ -2,11 +2,8 @@ import React, { useEffect, useState } from 'react';
 import {  func } from 'prop-types';
 import { compose } from 'redux';
 import { FormattedMessage } from '../../util/reactIntl';
-
-import { Button,  Modal } from '../../components';
-import { manageDisableScrolling} from '../../ducks/UI.duck';
+import { Button, Modal } from '../../components';
 import css from './SkippingBlock.css';
-
 import {withRouter } from 'react-router-dom';
 import {
   redirectState,
@@ -17,24 +14,34 @@ import {
 import { connect } from 'react-redux';
 import { pathByRouteName } from '../../util/routes';
 import routeConfiguration from '../../routeConfiguration';
+import { manageDisableScrolling } from '../../ducks/UI.duck';
 
 const later = (history) =>{
   const path = pathByRouteName('PayoutPreferencesPage', routeConfiguration())
   history.push(path)
 }
 
-function  SkippingBlockComponent  (props)  {
-  const{ closeButtonMessage, onManageDisableScrolling, onRedirectState, onRequestStripeAccount, redirect, stripeAccountCreated, stripeAccountCreatedShow, onStripeAccountShowWindow, submitButtonText, history } = props
- const [hasSeenMissingInformationReminder, setHasSeenMissingInformationReminder]= useState(null)
-
+function  SkippingBlock  (props)  {
+  const{ closeButtonMessage,
+    onManageDisableScrolling,
+    onRedirectState,
+    onRequestStripeAccount,
+    redirect,
+    stripeAccountCreated,
+    stripeAccountCreatedShow,
+    onStripeAccountShowWindow,
+    submitButtonText,
+    history,
+  } = props
+  const [hasSeenMissingInformationReminder, setHasSeenMissingInformationReminder]= useState(null)
   useEffect( () => {
     onRequestStripeAccount()
     }, [])
   return (
     <>
-      {redirect ? later(history) :(
+      {redirect ? later(history) :
     <Modal
-      id="MissingInformationReminder"
+      id="MissingInformationStripeReminder"
       containerClassName={css.informationModal}
       isOpen={(!stripeAccountCreated && stripeAccountCreatedShow) }
       onClose={() => {
@@ -80,40 +87,42 @@ function  SkippingBlockComponent  (props)  {
           )}
         </Button>
       </div>
-    </Modal>)}
+    </Modal>}
       </>
   )
 }
 
-SkippingBlockComponent.defaultProps = {
+SkippingBlock.defaultProps = {
   submitButtonText: null,
   redirect: false,
-};
+}
 
-SkippingBlockComponent.propTypes = {
+SkippingBlock.propTypes = {
   onRedirectState: func.isRequired,
   onRequestStripeAccount: func.isRequired,
   onStripeAccountCreatedState: func.isRequired,
-  onManageDisableScrolling: func.isRequired,
   onStripeAccountShowWindow: func.isRequired,
-};
+  onManageDisableScrolling: func.isRequired,
+}
 const mapStateToProps = state => {
   return {
+    emailVerified: state.EmailVerification.isVerified,
     redirect: state.stripe.redirect,
     stripeAccountCreatedShow: state.stripe.stripeAccountCreatedShow,
     stripeAccountCreated: state.stripe.stripeAccountCreated,
   };
-};
+}
 const mapDispatchToProps = dispatch => ({
   onRedirectState: () => dispatch(redirectState()),
   onStripeAccountShowWindow: (state) => dispatch(stripeAccountShowWindow(state)),
   onStripeAccountCreatedState: (state) => dispatch(stripeAccountCreatedState(state)),
   onRequestStripeAccount: () => dispatch(requestStripeAccount()),
-  onManageDisableScrolling: (id ) => dispatch(manageDisableScrolling(id ,true)),
+  onManageDisableScrolling: (componentId, disableScrolling) =>
+    dispatch(manageDisableScrolling(componentId, disableScrolling)),
 });
-const SkippingBlock = compose(withRouter, connect(
+SkippingBlock = compose(withRouter, connect(
   mapStateToProps,
   mapDispatchToProps,
-))(SkippingBlockComponent);
+))(SkippingBlock);
 
 export default SkippingBlock;

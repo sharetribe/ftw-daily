@@ -17,6 +17,3 @@
   width: 100%;
 }
 
-div[class^="LayoutSingleColumn_layoutWrapperMain__"] div[class^="Modal_isOpen"] div[class^='Modal_scrollLayer']{
-  background-color: transparent;
-}
