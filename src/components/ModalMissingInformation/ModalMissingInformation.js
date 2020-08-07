@@ -46,7 +46,7 @@ class ModalMissingInformation extends Component {
       user,
       currentUserHasListings,
       currentUserHasOrders,
-      location
+      location,
     );
   }
 
@@ -54,11 +54,11 @@ class ModalMissingInformation extends Component {
     currentUser,
     currentUserHasListings,
     currentUserHasOrders,
-    newLocation
+    newLocation,
   ) {
     const routes = routeConfiguration();
     const whitelistedPaths = MISSING_INFORMATION_MODAL_WHITELIST.map(page =>
-      pathByRouteName(page, routes)
+      pathByRouteName(page, routes),
     );
 
     // Is the current page whitelisted?
@@ -88,9 +88,9 @@ class ModalMissingInformation extends Component {
       // Show reminder
       if (emailVerificationNeeded) {
         this.setState({ showMissingInformationReminder: EMAIL_VERIFICATION });
-      } else if (stripeAccountNeeded) {
+      } /*else if (stripeAccountNeeded) {
         this.setState({ showMissingInformationReminder: STRIPE_ACCOUNT });
-      }
+      }*/
     }
   }
 
@@ -125,30 +125,30 @@ class ModalMissingInformation extends Component {
             sendVerificationEmailError={sendVerificationEmailError}
           />
         );
-      } else if (this.state.showMissingInformationReminder === STRIPE_ACCOUNT) {
+      } /*else if (this.state.showMissingInformationReminder === STRIPE_ACCOUNT) {
         content = <StripeAccountReminder className={classes} />;
-      }
+      }*/
     }
 
     const closeButtonMessage = (
-      <FormattedMessage id="ModalMissingInformation.closeVerifyEmailReminder" />
+      <FormattedMessage id="ModalMissingInformation.closeVerifyEmailReminder"/>
     );
-    return (((stripeAccountCreated || stripeAccountCreatedShow) && (!stripeAccountCreated && stripeAccountCreatedShow) )? null :
-      <Modal
-        id="MissingInformationReminder"
-        containerClassName={containerClassName}
-        isOpen={!!this.state.showMissingInformationReminder}
-        onClose={() => {
-          this.setState({
-            showMissingInformationReminder: null,
-            hasSeenMissingInformationReminder: true,
-          });
-        }}
-        onManageDisableScrolling={onManageDisableScrolling}
-        closeButtonMessage={closeButtonMessage}
-      >
-        {content}
-      </Modal>
+    return (((stripeAccountCreated || stripeAccountCreatedShow) && (!stripeAccountCreated && stripeAccountCreatedShow)) ? null :
+        <Modal
+          id="MissingInformationReminder"
+          containerClassName={containerClassName}
+          isOpen={!!this.state.showMissingInformationReminder}
+          onClose={() => {
+            this.setState({
+              showMissingInformationReminder: null,
+              hasSeenMissingInformationReminder: true,
+            });
+          }}
+          onManageDisableScrolling={onManageDisableScrolling}
+          closeButtonMessage={closeButtonMessage}
+        >
+          {content}
+        </Modal>
     );
   }
 }
@@ -177,7 +177,7 @@ const mapStateToProps = state => {
     stripeAccountCreatedShow: state.stripe.stripeAccountCreatedShow,
     stripeAccountCreated: state.stripe.stripeAccountCreated,
   };
-}
+};
 
 ModalMissingInformation = compose(withRouter, connect(
   mapStateToProps,
