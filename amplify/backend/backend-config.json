@@ -1,0 +1,15 @@
+{
+	"auth": {
+		"coworksurf": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
+	},
+	"storage": {
+		"coworksurf": {
+			"service": "S3",
+			"providerPlugin": "awscloudformation"
+		}
+	}
+}

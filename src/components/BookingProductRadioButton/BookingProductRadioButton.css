@@ -1,0 +1,123 @@
+@import '../../marketplace.css';
+.root {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  position: absolute;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  font-family: "Nunito Sans", Helvetica, Arial, sans-serif;
+  /* Display the "check" when checked */
+  /* Highlight the borders if the checkbox is hovered, focused or checked */
+  /* Hightlight the text on checked, hover and focus */
+}
+.input:checked + label .checked {
+  display: inline;
+}
+.input:checked + label .buttonContainer {
+  border-color: var(--successColor);
+}
+.input:hover + label .notChecked, .input:hover + label .required, .input:focus + label .notChecked, .input:focus + label .required, .input:checked + label .notChecked, .input:checked + label .required {
+  stroke: var(--matterColorDark);
+}
+.input:focus + label .text, .input:hover + label .text, .input:checked + label .text {
+  color: var(--matterColorDark);
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  border: solid 0.5px transparent;
+  border-radius: 4px;
+  padding: 10px;
+  cursor: pointer;
+  width: 100%;
+  box-shadow: var(--buttonShadowMedium);
+}
+
+.checkboxProductName {
+  margin-left: 15px;
+}
+
+.checkboxProductThumbnail {
+  border-radius: 4px;
+}
+
+.checked {
+  display: none;
+  stroke: var(--successColor);
+  fill: var(--successColor);
+}
+
+.notChecked {
+  stroke: var(--matterColorAnti);
+}
+.notChecked:hover {
+  stroke: pink;
+}
+
+.required {
+  stroke: var(--matterColorAnti);
+}
+.required:hover {
+  stroke: pink;
+}
+
+.textRoot {
+  color: var(--matterColor);
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+.radioButtonWrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.radioIconWrapper {
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.roomDetailsListWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.roomDetailsList {
+  list-style: none;
+  /* Remove default bullets */
+}
+.roomDetailsList li {
+  font-size: 12px;
+  color: var(--marketplaceColor);
+}
+
+.productDetailText {
+  color: var(--matterColor);
+}
+
+.iconRadioButton {
+  height: 25px;
+  width: 25px;
+}
+
+/*# sourceMappingURL=BookingProductRadioButton.css.map */

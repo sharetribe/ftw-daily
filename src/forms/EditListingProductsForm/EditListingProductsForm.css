@@ -1,5 +1,4 @@
 @import '../../marketplace.css';
-
 .root {
   margin-top: 48px;
 }
@@ -16,8 +15,9 @@
 .submitButton {
   margin-top: auto;
   margin-bottom: 24px;
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .submitButton {
     display: inline-block;
     width: 241px;
     margin-top: 100px;
@@ -30,20 +30,20 @@
 
 .additionalProductsWrapper {
   margin-bottom: 35px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .additionalProductsWrapper {
     margin-bottom: 56px;
   }
 }
 
 .additionalProductsWrapper .sectionContainer {
-  margin-bottom: 24px;
+  margin-bottom: 35px;
 }
 
 .additionalProductLabel {
   display: inline-block;
 }
-
 
 .fieldArrayAdd {
   @apply --marketplaceLinkStyles;
@@ -57,10 +57,11 @@
   color: var(--matterColorAnti);
   float: right;
   line-height: 20px;
-
-  &:hover {
-    color: var(--matterColor);
-  }
+  margin-top: 20px;
+  margin-right: 20px;
+}
+.fieldArrayRemove:hover {
+  color: var(--matterColor);
 }
 
 .closeIcon {
@@ -74,3 +75,27 @@
   height: 18px;
   padding-top: 1px;
 }
+
+.mappingRow {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.numericInput {
+  padding: 20px;
+  border: solid 1px lightgrey;
+  border-radius: 8px;
+  width: 100px;
+}
+
+.addDiscountButton {
+  min-height: 35px;
+  width: 140px;
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/*# sourceMappingURL=EditListingProductsForm.css.map */

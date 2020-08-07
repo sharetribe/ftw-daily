@@ -1,14 +1,12 @@
 @import '../../marketplace.css';
-
 .root {
   /* Layout */
   display: flex;
   flex-direction: column;
-
   /* Remove link's hover effect */
-  &:hover {
-    text-decoration: none;
-  }
+}
+.root:hover {
+  text-decoration: none;
 }
 
 .threeToTwoWrapper {
@@ -17,17 +15,19 @@
   width: 100%;
   position: relative;
   transition: var(--transitionStyleButton);
-
-  &:hover {
-    transform: scale(1.02);
-    box-shadow: var(--boxShadowListingCard);
-  }
+}
+.threeToTwoWrapper:hover {
+  transform: scale(1.02);
+  box-shadow: var(--boxShadowListingCard);
 }
 
 /* Firefox doesn't support image aspect ratio inside flexbox */
 .aspectWrapper {
-  padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
-  background: var(--matterColorNegative); /* Loading BG color */
+  padding-bottom: 66.6667%;
+  /* 3:2 Aspect Ratio */
+  background: var(--matterColorNegative);
+  /* Loading BG color */
+  border-radius: 8px;
 }
 
 .rootForImage {
@@ -59,13 +59,13 @@
 
 .priceValue {
   /* Font */
-  @apply --marketplaceH3FontStyles;
-
+  @apply --marketplaceNumberStyles;
   /* Remove default margins from font */
   margin-top: 0;
   margin-bottom: 0;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .priceValue {
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -75,12 +75,12 @@
   /* Font */
   @apply --marketplaceTinyFontStyles;
   color: var(--matterColor);
-
   /* Remove default margins from font */
   margin-top: 0;
   margin-bottom: 0;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .perUnit {
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -95,12 +95,12 @@
   /* Font */
   @apply --marketplaceH3FontStyles;
   color: var(--matterColor);
-
   /* Remove default margins from font */
   margin-top: 0;
   margin-bottom: 0;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .title {
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -110,12 +110,12 @@
   /* Font */
   @apply --marketplaceTinyFontStyles;
   color: var(--matterColor);
-
   /* Remove default margins from font */
   margin-top: 0;
   margin-bottom: 0;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .authorInfo {
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -128,3 +128,5 @@
   word-break: break-word;
   hyphens: auto;
 }
+
+/*# sourceMappingURL=ListingCard.css.map */

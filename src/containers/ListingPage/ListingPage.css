@@ -1,12 +1,10 @@
 @import '../../marketplace.css';
-
-.root {
-}
-
 .pageRoot {
   display: flex;
   padding-bottom: 90px;
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .pageRoot {
     padding-bottom: 0;
   }
 }
@@ -19,7 +17,8 @@
   min-height: 35px;
   width: 140px;
   font-size: 16px;
-  margin-top: 8px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .errorText {
@@ -27,35 +26,33 @@
   margin: 24px;
 }
 
-.sectionImages {
-}
-
 .threeToTwoWrapper {
   /* Layout */
   display: block;
   width: 100%;
   position: relative;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .threeToTwoWrapper {
     padding: 0;
-  }
-
-  @media (--viewportLarge) {
-    padding: 36px 36px 0 36px;
   }
 }
 
 /* Firefox doesn't support image aspect ratio inside flexbox */
 .aspectWrapper {
-  position: relative; /* allow positioning own listing action bar */
-  padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
-  background-color: var(--matterColorNegative); /* Loading BG color */
-
+  position: relative;
+  /* allow positioning own listing action bar */
+  padding-bottom: 66.6667%;
+  /* 3:2 Aspect Ratio */
+  background-color: var(--matterColorNegative);
+  /* Loading BG color */
   /* Image carousel can be opened from the image, therefore we should show a pointer */
   cursor: pointer;
-
-  @media (--viewportMedium) {
-    padding-bottom: 0; /* No fixed aspect on desktop layouts */
+}
+@media (--viewportMedium) {
+  .aspectWrapper {
+    padding-bottom: 0;
+    /* No fixed aspect on desktop layouts */
   }
 }
 
@@ -68,20 +65,20 @@
   width: calc(100% - 26px);
   color: var(--matterColorNegative);
   background-color: var(--matterColor);
-  z-index: 1; /* bring on top of mobile image */
-
+  z-index: 1;
+  /* bring on top of mobile image */
   /* Action bar prevents the image click events going to the parent and
    should not show a pointer */
   cursor: initial;
-
   border-radius: var(--borderRadius);
 }
 
 .ownListingText {
   @apply --marketplaceH4FontStyles;
   margin: 14px 12px 11px 24px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .ownListingText {
     margin: 25px 12px 22px 24px;
   }
 }
@@ -95,8 +92,9 @@
   margin: 14px 12px 11px 24px;
   text-align: center;
   width: 100%;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .closedListingText {
     margin: 25px 12px 22px 24px;
   }
 }
@@ -107,15 +105,14 @@
   margin: 0;
   padding: 14px 24px 11px 12px;
   color: var(--matterColorNegative);
-
   transition: var(--transitionStyleButton);
-
-  &:hover {
-    color: var(--matterColorLight);
-    text-decoration: none;
-  }
-
-  @media (--viewportMedium) {
+}
+.editListingLink:hover {
+  color: var(--matterColorLight);
+  text-decoration: none;
+}
+@media (--viewportMedium) {
+  .editListingLink {
     margin: 0;
     padding: 25px 24px 22px 12px;
   }
@@ -133,10 +130,10 @@
   left: 0;
   right: 0;
   width: 100%;
-
   transition: var(--transitionStyleButton);
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .rootForImage {
     position: static;
     top: auto;
     bottom: auto;
@@ -146,41 +143,36 @@
     max-height: 50vh;
     object-fit: cover;
     border-radius: var(--borderRadius);
-
-    &:hover {
-      transform: scale(1.005);
-      box-shadow: var(--boxShadowListingCard);
-    }
+  }
+  .rootForImage:hover {
+    transform: scale(1.005);
+    box-shadow: var(--boxShadowListingCard);
   }
 }
 
 .viewPhotos {
   @apply --marketplaceTinyFontStyles;
   font-weight: var(--fontWeightMedium);
-
   /* Position and dimensions */
   position: absolute;
   bottom: 19px;
   right: 24px;
   margin: 0;
   padding: 6px 13px 8px 13px;
-
   /* Colors */
   background-color: var(--matterColorLight);
-
   /* Borders */
   border: none;
   border-radius: var(--borderRadius);
-
   cursor: pointer;
   transition: var(--transitionStyleButton);
-
-  &:hover {
-    background-color: var(--marketplaceColor);
-    color: var(--matterColorLight);
-  }
-
-  @media (--viewportMedium) {
+}
+.viewPhotos:hover {
+  background-color: var(--marketplaceColor);
+  color: var(--matterColorLight);
+}
+@media (--viewportMedium) {
+  .viewPhotos {
     margin: 0;
   }
 }
@@ -196,22 +188,24 @@
   height: 100%;
 }
 
-.contentContainer {
-  @media (--viewportMedium) {
+@media (--viewportMedium) {
+  .contentContainer {
     max-width: 1056px;
     margin: 0 auto;
     padding: 0 24px;
     display: flex;
     position: relative;
   }
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .contentContainer {
     max-width: 1128px;
     padding: 0 36px;
     margin: 0 auto 117px;
   }
-
-  @media (--viewportXLarge) {
+}
+@media (--viewportXLarge) {
+  .contentContainer {
     max-width: 1056px;
     padding: 0;
   }
@@ -220,14 +214,16 @@
 .mainContent {
   flex-basis: 100%;
   margin-bottom: 23px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .mainContent {
     margin-top: 50px;
     margin-bottom: 51px;
     flex-shrink: 0;
   }
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .mainContent {
     margin-top: 50px;
     margin-bottom: 0px;
     /* contentContainer's full width - (bookingColumn + two paddings + margin + border) */
@@ -238,8 +234,8 @@
   }
 }
 
-.bookingPanel {
-  @media (--viewportLarge) {
+@media (--viewportLarge) {
+  .bookingPanel {
     display: block;
     margin-top: 95px;
     margin-left: 60px;
@@ -248,15 +244,13 @@
     border-left-color: var(--matterColorNegative);
     padding-left: 60px;
     z-index: 1;
-
     /* The calendar needs 312px */
     flex-basis: 312px;
     flex-shrink: 0;
-
-    & > div {
-      position: sticky;
-      top: 95px;
-    }
+  }
+  .bookingPanel > div {
+    position: sticky;
+    top: 95px;
   }
 }
 
@@ -264,14 +258,13 @@
   /* Position (over the listing image)*/
   margin-left: 24px;
   margin-top: -31px;
-
   /* Rendering context to the same lavel as listing image */
   position: relative;
-
   /* Flex would give too much width by default. */
   width: 60px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .sectionAvatar {
     position: absolute;
     top: -49px;
     margin-left: 0;
@@ -281,16 +274,20 @@
 
 .avatarMobile {
   display: flex;
-
-  @media (--viewportMedium) {
-    display: none; /* Hide the medium avatar from the bigger screens */
+}
+@media (--viewportMedium) {
+  .avatarMobile {
+    display: none;
+    /* Hide the medium avatar from the bigger screens */
   }
 }
 
 .avatarDesktop {
-  display: none; /* Hide the large avatar from the smaller screens */
-
-  @media (--viewportMedium) {
+  display: none;
+  /* Hide the large avatar from the smaller screens */
+}
+@media (--viewportMedium) {
+  .avatarDesktop {
     display: flex;
   }
 }
@@ -298,17 +295,20 @@
 .sectionHeading {
   margin-top: 22px;
   margin-bottom: 34px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .sectionHeading {
     margin-bottom: 53px;
   }
 }
 
 .headingContainer {
   margin-bottom: 12px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .headingContainer {
     display: flex;
+    flex-direction: column;
     margin-bottom: 24px;
   }
 }
@@ -317,16 +317,16 @@
   display: flex;
   margin-bottom: 33px;
   padding: 0 24px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .tags {
     margin-bottom: 0;
     padding: 0;
   }
-
-  & > *:not(:last-child) {
-    margin-right: 8px;
-    margin-bottom: 8px;
-  }
+}
+.tags > *:not(:last-child) {
+  margin-right: 8px;
+  margin-bottom: 8px;
 }
 
 .tag {
@@ -341,16 +341,16 @@
   font-weight: 800;
   @apply --marketplaceH5FontStyles;
   color: var(--matterColor);
-
-  & svg {
-    margin-right: 6px;
-  }
+}
+.tag svg {
+  margin-right: 6px;
 }
 
 .desktopPriceContainer {
   display: none;
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .desktopPriceContainer {
     /* Layout */
     display: flex;
     flex-direction: column;
@@ -364,11 +364,13 @@
 .desktopPriceValue {
   /* Font */
   @apply --marketplaceH1FontStyles;
+  font-family: "Fira Sans", Helvetica, Arial, sans-serif;
   color: var(--marketplaceColor);
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .desktopPriceValue {
     margin-top: 0;
-    margin-bottom: 6px;
+    margin-bottom: 0;
   }
 }
 
@@ -376,8 +378,9 @@
   /* Font */
   @apply --marketplaceH5FontStyles;
   color: var(--matterColor);
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .desktopPerUnit {
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -386,8 +389,9 @@
 .heading {
   margin-bottom: 33px;
   padding: 0 24px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .heading {
     margin-bottom: 0;
     padding: 0;
   }
@@ -397,12 +401,13 @@
   /* Font */
   @apply --marketplaceH1FontStyles;
   color: var(--matterColor);
-
   /* Layout */
   width: 100%;
   margin-top: 0;
   margin-bottom: 0;
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .title {
     margin-top: 0;
     margin-bottom: 5px;
   }
@@ -413,10 +418,14 @@
   @apply --marketplaceH4FontStyles;
   margin-top: 7px;
   margin-bottom: 0;
-
-  @media (--viewportMedium) {
+  display: flex;
+  flex-direction: column;
+}
+@media (--viewportMedium) {
+  .author {
     margin-top: 0;
     margin-bottom: 0;
+    display: inline;
     color: var(--matterColor);
   }
 }
@@ -427,8 +436,9 @@
 
 .contactWrapper {
   display: none;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .contactWrapper {
     display: inline;
   }
 }
@@ -446,8 +456,9 @@
 .sectionDescription {
   padding: 0 24px;
   margin-bottom: 35px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .sectionDescription {
     padding: 0;
     margin-bottom: 52px;
   }
@@ -457,10 +468,11 @@
   /* Font */
   @apply --marketplaceH3FontStyles;
   color: var(--matterColorAnti);
-
   margin-top: 0;
   margin-bottom: 13px;
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .descriptionTitle {
     margin-top: 0;
     margin-bottom: 20px;
   }
@@ -469,21 +481,27 @@
 .sectionCommunity, .sectionVibe, .sectionSurf, .sectionRetreat, .sectionHost {
   padding: 0 24px;
   margin-bottom: 35px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .sectionCommunity, .sectionVibe, .sectionSurf, .sectionRetreat, .sectionHost {
     padding: 0;
     margin-bottom: 52px;
   }
 }
 
-.communityTitle, .vibeTitle, .surfTitle, .retreatTitle {
+.coSectionTitle {
   /* Font */
   @apply --marketplaceH3FontStyles;
-  color: var(--matterColorAnti);
-
+  color: var(--matterColorLight);
+  background-color: var(--matterColorDark);
+  padding: 8px;
+  border-radius: 4px;
+  font-weight: 800;
   margin-top: 0;
   margin-bottom: 13px;
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .coSectionTitle {
     margin-top: 0;
     margin-bottom: 20px;
   }
@@ -492,8 +510,9 @@
 .sectionFeatures {
   padding: 0 24px;
   margin-bottom: 32px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .sectionFeatures {
     padding: 0;
     margin-bottom: 52px;
   }
@@ -503,10 +522,11 @@
   /* Font */
   @apply --marketplaceH3FontStyles;
   color: var(--matterColorAnti);
-
   margin-top: 0;
   margin-bottom: 16px;
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .featuresTitle {
     margin-top: 0;
     margin-bottom: 20px;
   }
@@ -515,11 +535,11 @@
 .description {
   margin-top: 0;
   margin-bottom: 0;
-
   /* Preserve newlines, but collapse other whitespace */
   white-space: pre-line;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .description {
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -528,8 +548,9 @@
 .sectionMap {
   padding: 0 24px;
   margin-bottom: 35px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .sectionMap {
     padding: 0;
   }
 }
@@ -538,10 +559,11 @@
   /* Font */
   @apply --marketplaceH3FontStyles;
   color: var(--matterColorAnti);
-
   margin-top: 0;
   margin-bottom: 20px;
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .locationTitle {
     margin-top: 0;
     margin-bottom: 28px;
   }
@@ -550,11 +572,14 @@
 .sectionReviews {
   padding: 0 24px;
   margin-bottom: 5px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .sectionReviews {
     padding: 0;
   }
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .sectionReviews {
     margin-bottom: 3px;
   }
 }
@@ -562,13 +587,15 @@
 .reviewsHeading {
   @apply --marketplaceH3FontStyles;
   color: var(--matterColorAnti);
-
   margin: 52px 0 20px 0;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .reviewsHeading {
     margin: 53px 0 27px 0;
   }
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .reviewsHeading {
     margin: 50px 0 26px 0;
   }
 }
@@ -585,17 +612,18 @@
     margin-bottom: 3px;
   }
 }*/
-
 .yourHostHeading {
   @apply --marketplaceH3FontStyles;
   color: var(--matterColorAnti);
-
   margin: 54px 0 23px 0;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .yourHostHeading {
     margin: 53px 0 27px 0;
   }
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .yourHostHeading {
     margin: 53px 0 27px 0;
   }
 }
@@ -608,8 +636,9 @@
 .enquiryForm {
   flex-grow: 1;
   margin: 70px 0 100px 0;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .enquiryForm {
     display: flex;
     flex-direction: column;
     min-height: 400px;
@@ -624,8 +653,9 @@
   right: 0;
   padding: 24px;
   background-color: var(--matterColorLight);
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .enquirySubmitButtonWrapper {
     position: static;
     padding: 0;
     margin-top: auto;
@@ -636,7 +666,6 @@
   /* Dimensions: Map takes all available space from viewport (excludes action button and section title) */
   height: calc(100vh - 193px);
   width: 100%;
-
   /* Static map: dimensions are 640px */
   max-width: 640px;
   max-height: 640px;
@@ -644,12 +673,14 @@
   padding: 0;
   border: 0;
   cursor: pointer;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .map {
     height: 75vh;
   }
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .map {
     height: 417px;
   }
 }
@@ -661,3 +692,193 @@
   word-break: break-word;
   hyphens: auto;
 }
+
+.waveBtnContainer {
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  height: 70px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--buttonShadowMedium);
+}
+
+.waveIconDividerContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+}
+
+.surfDifficultyIndicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-left: 4px;
+  background-color: var(--marketplaceColor);
+}
+
+.surfDifficultyIndicatorContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 5px;
+  height: 10px;
+  width: 100%;
+}
+
+.forecastIFrameContainer {
+  position: relative;
+  height: 600px;
+  width: 320px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-overflow-scrolling: auto;
+}
+@media (--viewportMedium) {
+  .forecastIFrameContainer {
+    height: 900px;
+    width: 800px;
+  }
+}
+
+.forecastIFrame {
+  width: 100%;
+  height: 100%;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: auto;
+}
+
+.orderIconContainer {
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background-color: var(--matterColorDark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.orderIconNumber {
+  color: var(--matterColorLight);
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+.heroContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 20px;
+  min-height: 300px;
+}
+
+.heroTextContainer {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+}
+@media (--viewportMedium) {
+  .heroTextContainer {
+    padding: 20px;
+    max-width: 1056px;
+  }
+}
+
+.heroTitle {
+  color: white;
+  z-index: 2;
+  font-weight: 700;
+  margin: 0;
+}
+
+.heroDescription {
+  color: white;
+  z-index: 2;
+  font-size: 20px;
+  text-align: center;
+}
+@media (--viewportMedium) {
+  .heroDescription {
+    top: 20px;
+    font-size: 24px;
+  }
+}
+
+.heroImage {
+  /* Layout - image will take space defined by aspect ratio wrapper */
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 550px;
+  object-fit: cover;
+  transition: var(--transitionStyleButton);
+}
+@media (--viewportMedium) {
+  .heroImage {
+    position: static;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    height: calc(0.41 * 100vw);
+    width: 100%;
+    max-height: 50vh;
+    object-fit: cover;
+  }
+  .heroImage:hover {
+    transform: scale(1.005);
+    box-shadow: var(--boxShadowListingCard);
+  }
+}
+
+.welcomeMessageContainer {
+  padding: 0 20px 20px 20px;
+  margin-top: 20px;
+  margin-bottom: 60px;
+}
+
+.welcomeMessage {
+  font-weight: 400;
+  font-style: italic;
+  text-align: center;
+  line-height: 30px;
+}
+@media (--viewportMedium) {
+  .welcomeMessage {
+    font-size: 30px;
+    line-height: 40px;
+  }
+}
+
+.messageSignerContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.welcomeMessageSigner {
+  font-size: 14px;
+  font-weight: 300;
+  text-align: right;
+  color: var(--marketplaceColorDark);
+}
+
+/*# sourceMappingURL=ListingPage.css.map */

@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import css from './AddImages.css';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import css from './AddImages.css'
 
-const RemoveImageButton = props => {
-  const { className, rootClassName, onClick } = props;
-  const classes = classNames(rootClassName || css.removeImage, className);
+const RemoveImageButton = (props) => {
+  const { className, rootClassName, onClick } = props
+  const classes = classNames(rootClassName || css.removeImage, className)
   return (
     <button className={classes} onClick={onClick}>
       <svg
@@ -27,17 +27,17 @@ const RemoveImageButton = props => {
         </g>
       </svg>
     </button>
-  );
-};
+  )
+}
 
-RemoveImageButton.defaultProps = { className: null, rootClassName: null };
+RemoveImageButton.defaultProps = { className: null, rootClassName: null }
 
-const { func, string } = PropTypes;
+const { func, string } = PropTypes
 
 RemoveImageButton.propTypes = {
   className: string,
   rootClassName: string,
   onClick: func.isRequired,
-};
+}
 
-export default RemoveImageButton;
+export default RemoveImageButton

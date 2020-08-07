@@ -1,5 +1,4 @@
 @import '../../marketplace.css';
-
 .root {
   display: flex;
   flex-direction: column;
@@ -8,7 +7,6 @@
 .bookingDates, .bookingProduct {
   flex-shrink: 0;
   margin-bottom: 24px;
-
   /* Ensure that calendar dropdown gets some stacking context relative to other form items below */
   z-index: 1;
 }
@@ -16,8 +14,9 @@
 .priceBreakdownContainer {
   padding: 0 24px;
   margin-bottom: 40px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .priceBreakdownContainer {
     padding: 0;
     margin-bottom: 0;
     margin-top: 1px;
@@ -27,10 +26,11 @@
 .priceBreakdownTitle {
   /* Font */
   color: var(--matterColorAnti);
-
   margin-top: 5px;
   margin-bottom: 14px;
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .priceBreakdownTitle {
     margin-top: 5px;
     margin-bottom: 26px;
   }
@@ -51,8 +51,9 @@
   @apply --marketplaceH4FontStyles;
   color: var(--failColor);
   margin: 0 24px 12px 24px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .timeSlotsError {
     margin: 0 0 12px 0;
   }
 }
@@ -63,13 +64,15 @@
   text-align: center;
   margin: auto 24px 20px 24px;
   flex-shrink: 0;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .smallPrint {
     margin-top: auto;
     margin-bottom: 20px;
   }
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .smallPrint {
     margin-top: 21px;
     margin-bottom: 21px;
   }
@@ -79,9 +82,28 @@
   flex-shrink: 0;
   padding: 0 24px 24px 24px;
   width: 100%;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .submitButtonWrapper {
     padding: 0;
     width: 100%;
   }
 }
+
+.bookingProductsFieldSet {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.bookingProductListWrapper {
+  margin-top: 0;
+}
+
+@media screen and (max-width: 550px) {
+  .bookingProductListWrapper {
+    margin: 0 24px 0 24px;
+  }
+}
+
+/*# sourceMappingURL=BookingDatesForm.css.map */

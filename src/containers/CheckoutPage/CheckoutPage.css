@@ -1,38 +1,33 @@
 @import '../../marketplace.css';
-
 :root {
   /*
-    These variables are available in global scope through ":root"
-    element (<html> tag). Variables with the same names are going to
-    overwrite each other if CSS Properties' (PostCSS plugin)
-    configuration "preserve: true" is used - meaning that variables
-    are left to CSS bundle. We are planning to enable it in the future
-    since browsers support CSS Properties already.
- */
-
+     These variables are available in global scope through ":root"
+     element (<html> tag). Variables with the same names are going to
+     overwrite each other if CSS Properties' (PostCSS plugin)
+     configuration "preserve: true" is used - meaning that variables
+     are left to CSS bundle. We are planning to enable it in the future
+     since browsers support CSS Properties already.
+  */
   --CheckoutPage_logoHeight: 25px;
   --CheckoutPage_logoHeightDesktop: 27px;
 }
 
 /* Dummy Topbar */
-
 .topbar {
   /* Size */
   width: 100%;
   height: var(--topbarHeight);
-
   /* Layout for child components */
   display: flex;
   align-items: center;
   justify-content: center;
-
   /* fill */
   background-color: var(--matterColorLight);
-
   /* shadows */
   box-shadow: var(--boxShadow);
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .topbar {
     height: var(--topbarHeightDesktop);
     justify-content: center;
   }
@@ -41,20 +36,21 @@
 .home {
   display: flex;
   padding: calc((var(--topbarHeight) - var(--CheckoutPage_logoHeight)) / 2) 24px;
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .home {
     padding: calc((var(--topbarHeightDesktop) - var(--CheckoutPage_logoHeightDesktop)) / 2) 36px;
   }
 }
 
 .logoMobile {
   display: block;
-
-  & path {
-    fill: var(--marketplaceColor);
-  }
-
-  @media (--viewportLarge) {
+}
+.logoMobile path {
+  fill: var(--marketplaceColor);
+}
+@media (--viewportLarge) {
+  .logoMobile {
     display: none;
   }
 }
@@ -63,14 +59,14 @@
   display: none;
   width: auto;
   height: 27px;
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .logoDesktop {
     display: block;
   }
 }
 
 /* /Dummy Topbar */
-
 /**
  * Content: mobile flow vs desktop 2 columns
  * desktop has reduced version of bookListingContainer (incl. title and Stripe paymentForm).
@@ -80,8 +76,9 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .contentContainer {
     flex-direction: row;
     justify-content: center;
     align-items: flex-start;
@@ -93,8 +90,9 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .bookListingContainer {
     flex-grow: 0;
     flex-basis: 519px;
     margin-top: 121px;
@@ -104,10 +102,13 @@
 
 .aspectWrapper {
   position: relative;
-  padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
-  background-color: var(--matterColorNegative); /* Loading BG color */
-
-  @media (--viewportLarge) {
+  padding-bottom: 66.6667%;
+  /* 3:2 Aspect Ratio */
+  background-color: var(--matterColorNegative);
+  /* Loading BG color */
+}
+@media (--viewportLarge) {
+  .aspectWrapper {
     display: none;
   }
 }
@@ -120,8 +121,9 @@
   left: 0;
   right: 0;
   width: 100%;
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .rootForImage {
     border-radius: 2px 2px 0 0;
   }
 }
@@ -130,20 +132,19 @@
   /* Position (over the listing image)*/
   margin-left: 24px;
   margin-top: -31px;
-
   /* Rendering context to the same lavel as listing image */
   position: relative;
-
   /* Layout */
   display: block;
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .avatarWrapper {
     margin-left: 48px;
   }
 }
 
-.avatarMobile {
-  @media (--viewportLarge) {
+@media (--viewportLarge) {
+  .avatarMobile {
     display: none;
   }
 }
@@ -152,13 +153,15 @@
   margin-top: 29px;
   margin-bottom: 34px;
   padding: 0 24px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .heading {
     margin-top: 27px;
     margin-bottom: 30px;
   }
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .heading {
     margin-top: 0px;
     margin-bottom: 54px;
     padding: 0;
@@ -169,13 +172,13 @@
   /* Font */
   @apply --marketplaceH1FontStyles;
   color: var(--matterColor);
-
   /* Layout */
   width: 100%;
   margin-top: 0;
   margin-bottom: 7px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .title {
     margin-top: 0;
     margin-bottom: 5px;
   }
@@ -184,12 +187,12 @@
 .author {
   width: 100%;
   @apply --marketplaceH4FontStyles;
-
   /* Reset margins from font styles */
   margin-top: 0;
   margin-bottom: 0;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .author {
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -198,11 +201,14 @@
 .priceBreakdownContainer {
   padding: 0 24px;
   margin-bottom: 37px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .priceBreakdownContainer {
     margin-bottom: 38px;
   }
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .priceBreakdownContainer {
     /* we don't show price breakdown since it will be visible within 2nd column (detailsContainerDesktop) */
     display: none;
   }
@@ -211,15 +217,17 @@
 .priceBreakdownTitle {
   /* Font */
   color: var(--matterColorAnti);
-
   margin-top: 0;
   margin-bottom: 14px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .priceBreakdownTitle {
     margin-top: 0;
     margin-bottom: 18px;
   }
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .priceBreakdownTitle {
     margin-top: 0;
     margin-bottom: 14px;
   }
@@ -231,12 +239,14 @@
   flex-direction: column;
   padding: 0 24px;
   margin-bottom: 35px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .paymentContainer {
     margin-top: 2px;
   }
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .paymentContainer {
     margin-top: 4px;
     padding: 0;
   }
@@ -245,14 +255,18 @@
 .orderError,
 .notFoundError {
   margin: 11px 0 12px 0;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .orderError,
+.notFoundError {
     margin: 10px 0 12px 0;
   }
 }
+
 .orderError {
   color: var(--failColor);
 }
+
 .notFoundError {
   color: var(--attentionColor);
 }
@@ -260,8 +274,9 @@
 .speculateError {
   color: var(--failColor);
   margin: 19px 0 1px 0;
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .speculateError {
     margin: 28px 48px 0 48px;
   }
 }
@@ -273,17 +288,16 @@
 /* Details column is visible only on desktop */
 .detailsContainerDesktop {
   display: none;
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .detailsContainerDesktop {
     flex-shrink: 0;
     display: block;
     /* Dimensions */
     width: 409px;
     padding-bottom: 55px;
-
     /* Position */
     margin: 120px 0 24px 0;
-
     /* Coloring */
     background-color: var(--matterColorLight);
     border: 1px solid var(--matterColorNegative);
@@ -293,14 +307,17 @@
 
 .detailsAspectWrapper {
   position: relative;
-  padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
-  background-color: var(--matterColorNegative); /* Loading BG color */
+  padding-bottom: 66.6667%;
+  /* 3:2 Aspect Ratio */
+  background-color: var(--matterColorNegative);
+  /* Loading BG color */
 }
 
 .detailsHeadings {
   display: none;
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .detailsHeadings {
     display: block;
     margin: 0 48px;
   }
@@ -308,8 +325,9 @@
 
 .detailsTitle {
   margin-bottom: 10px;
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .detailsTitle {
     margin-top: 17px;
     margin-bottom: 9px;
   }
@@ -317,12 +335,12 @@
 
 .detailsSubtitle {
   @apply --marketplaceH5FontStyles;
-
   /* Reset margins from font styles */
   margin-top: 0;
   margin-bottom: 0;
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .detailsSubtitle {
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -331,17 +349,19 @@
 .bookingBreakdownTitle {
   /* Font */
   color: var(--matterColorAnti);
-
   /* Layout spacing */
   margin: 5px 24px 25px 24px;
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .bookingBreakdownTitle {
     margin: 37px 48px 26px 48px;
   }
 }
 
-.bookingBreakdown {
-  @media (--viewportLarge) {
+@media (--viewportLarge) {
+  .bookingBreakdown {
     margin: 0 48px;
   }
 }
+
+/*# sourceMappingURL=CheckoutPage.css.map */

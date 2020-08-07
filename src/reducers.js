@@ -1,7 +1,7 @@
-import { combineReducers } from 'redux';
-import { USER_LOGOUT } from './ducks/Auth.duck';
-import * as globalReducers from './ducks';
-import * as pageReducers from './containers/reducers';
+import { combineReducers } from 'redux'
+import { USER_LOGOUT } from './ducks/Auth.duck'
+import * as globalReducers from './ducks'
+import * as pageReducers from './containers/reducers'
 
 /**
  * Function _createReducer_ combines global reducers (reducers that are used in
@@ -10,19 +10,19 @@ import * as pageReducers from './containers/reducers';
  * which is page specific.
  * Future: this structure could take in asyncReducers, which are changed when you navigate pages.
  */
-const appReducer = combineReducers({ ...globalReducers, ...pageReducers });
+const appReducer = combineReducers({ ...globalReducers, ...pageReducers })
 
 const createReducer = () => {
   return (state, action) => {
-    const appState = action.type === USER_LOGOUT ? undefined : state;
+    const appState = action.type === USER_LOGOUT ? undefined : state
 
     // Clear sessionStorage when logging out.
     if (action.type === USER_LOGOUT && typeof window !== 'undefined' && !!window.sessionStorage) {
-      window.sessionStorage.clear();
+      window.sessionStorage.clear()
     }
 
-    return appReducer(appState, action);
-  };
-};
+    return appReducer(appState, action)
+  }
+}
 
-export default createReducer;
+export default createReducer

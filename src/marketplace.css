@@ -32,7 +32,7 @@
     }
   }
   /* ================ Colors ================ */
-  --marketplaceColor: #5cbce0;
+  --marketplaceColor: #000000;
   --marketplaceColorLight: #d9f9ff;
   --marketplaceColorDark: #408e9d;
   /* Used with inline CSS SVGs */
@@ -52,7 +52,9 @@
   --matterColorNegative: #e7e7e7;
   --matterColorBright: #fcfcfc;
   --matterColorLight: #ffffff;
+  --matterColorLightGrey: #fafafa;
   --matterColorLightTransparent: rgba(255, 255, 255, 0.65);
+  --matterColorDarkTransparent: rgba(0, 0, 0, 0.6);
   /* ================ Spacing unites ================ */
   /* Multiples of mobile and desktop spacing units should be used with margins and paddings. */
   --spacingUnit: 6px;
@@ -70,6 +72,7 @@
   --boxShadowSectionLocationHover: 0 10px 30px 0 rgba(0, 0, 0, 0.1);
   --boxShadowBottomForm: 0 -2px 4px 0 rgba(0, 0, 0, 0.05);
   --boxShadowFilterButton: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
+  --buttonShadowMedium: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   /* ================ Z-index base levels ================ */
   /* topbar is positioned slightly above content */
   --zIndexTopbar: 10;
@@ -114,7 +117,7 @@
   }
   /* ================ Buttons ================ */
   --marketplaceButtonFontStyles: {
-    font-family: "Montserrat", Helvetica, Arial, sans-serif;
+    font-family: "Fira Sans", Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightSemiBold);
     font-size: 18px;
     line-height: 24px;

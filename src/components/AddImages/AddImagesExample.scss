@@ -1,0 +1,31 @@
+.addImageWrapper {
+  float: left;
+  position: relative;
+  width: 100%;
+  margin: 5px 0;
+  overflow: hidden;
+}
+/* Firefox doesn't support image aspect ratio inside flexbox */
+.aspectRatioWrapper {
+  padding-bottom: 60%; /* 5:3 Aspect Ratio = 100% / (w / h) */
+}
+
+.addImage {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: lightgrey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 0;
+}
+
+.addImageInput {
+  display: none;
+}

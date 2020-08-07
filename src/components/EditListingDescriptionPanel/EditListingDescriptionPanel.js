@@ -1,16 +1,19 @@
-import React from 'react';
-import { bool, func, object, string } from 'prop-types';
-import classNames from 'classnames';
-import { FormattedMessage } from '../../util/reactIntl';
-import { ensureOwnListing } from '../../util/data';
-import { ListingLink } from '../../components';
-import { LISTING_STATE_DRAFT } from '../../util/types';
-import { EditListingDescriptionForm } from '../../forms';
-import config from '../../config';
+import React from 'react'
+import {
+  bool, func, object, string
+} from 'prop-types'
+import _ from 'lodash'
+import classNames from 'classnames'
+import { FormattedMessage } from '../../util/reactIntl'
+import { ensureOwnListing } from '../../util/data'
+import { ListingLink } from '..'
+import { LISTING_STATE_DRAFT } from '../../util/types'
+import { EditListingDescriptionForm } from '../../forms'
+import config from '../../config'
 
-import css from './EditListingDescriptionPanel.css';
+import css from './EditListingDescriptionPanel.css'
 
-const EditListingDescriptionPanel = props => {
+const EditListingDescriptionPanel = (props) => {
   const {
     className,
     rootClassName,
@@ -23,13 +26,13 @@ const EditListingDescriptionPanel = props => {
     panelUpdated,
     updateInProgress,
     errors,
-  } = props;
+  } = props
 
-  const classes = classNames(rootClassName || css.root, className);
-  const currentListing = ensureOwnListing(listing);
-  const { description, title, publicData } = currentListing.attributes;
+  const classes = classNames(rootClassName || css.root, className)
+  const currentListing = ensureOwnListing(listing)
+  const { publicData } = currentListing.attributes
 
-  const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
+  const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT
   const panelTitle = isPublished ? (
     <FormattedMessage
       id="EditListingDescriptionPanel.title"
@@ -37,7 +40,7 @@ const EditListingDescriptionPanel = props => {
     />
   ) : (
     <FormattedMessage id="EditListingDescriptionPanel.createListingTitle" />
-  );
+  )
 
   return (
     <div className={classes}>
@@ -45,34 +48,56 @@ const EditListingDescriptionPanel = props => {
       <EditListingDescriptionForm
         className={css.form}
         initialValues={{
-          title,
-          description,
+          title: currentListing.attributes.title,
+          heroSubtitle: publicData.heroSubtitle,
+          description: currentListing.attributes.description,
           category: publicData.category,
           surf: publicData.surf,
           vibe: publicData.vibe,
           community: publicData.community,
-          wifi: publicData.wifi,
           retreat: publicData.retreat,
-          video: publicData.video
+          video: publicData.video,
+          welcomeMessage: publicData.welcomeMessage,
+          welcomeMessageSigner: publicData.welcomeMessageSigner,
+          heroImageId: _.get(publicData, 'heroImage.id', '')
         }}
         saveActionMsg={submitButtonText}
-        onSubmit={values => {
-          const { title, description, category, surf, vibe, community, wifi, retreat, video } = values;
+        onSubmit={(values, shouldRedirect) => {
+          const {
+            title,
+            heroSubtitle,
+            description,
+            category,
+            surf,
+            vibe,
+            community, wifi, retreat, video,
+            welcomeMessage,
+            welcomeMessageSigner,
+            heroImageId
+          } = values
+          const images = (listing.images || []).map((img) => img.id.uuid)
           const updateValues = {
             title: title.trim(),
             description,
             publicData: {
+              heroSubtitle,
               category,
               surf,
               vibe,
               community,
               wifi,
               retreat,
-              video
+              video,
+              welcomeMessage,
+              welcomeMessageSigner,
+              heroImage: {
+                id: heroImageId
+              }
             },
-          };
+            images: _.uniq([...images, heroImageId])
+          }
 
-          onSubmit(updateValues);
+          onSubmit(updateValues, shouldRedirect === 'redirect')
         }}
         onChange={onChange}
         disabled={disabled}
@@ -81,17 +106,18 @@ const EditListingDescriptionPanel = props => {
         updateInProgress={updateInProgress}
         fetchErrors={errors}
         categories={config.custom.categories}
+        listing={currentListing}
       />
     </div>
-  );
-};
+  )
+}
 
 EditListingDescriptionPanel.defaultProps = {
   className: null,
   rootClassName: null,
   errors: null,
   listing: null,
-};
+}
 
 EditListingDescriptionPanel.propTypes = {
   className: string,
@@ -108,6 +134,6 @@ EditListingDescriptionPanel.propTypes = {
   panelUpdated: bool.isRequired,
   updateInProgress: bool.isRequired,
   errors: object.isRequired,
-};
+}
 
-export default EditListingDescriptionPanel;
+export default EditListingDescriptionPanel

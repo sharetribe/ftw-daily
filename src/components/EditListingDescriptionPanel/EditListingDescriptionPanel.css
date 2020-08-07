@@ -1,5 +1,4 @@
 @import '../../marketplace.css';
-
 .root {
   flex-grow: 1;
   width: 100%;
@@ -15,9 +14,12 @@
 
 .title {
   margin-bottom: 19px;
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .title {
     margin-bottom: 38px;
     padding: 1px 0 7px 0;
   }
 }
+
+/*# sourceMappingURL=EditListingDescriptionPanel.css.map */

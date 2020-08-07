@@ -1,21 +1,23 @@
-import React from 'react';
-import { bool, func, shape, string } from 'prop-types';
-import { compose } from 'redux';
-import { Form as FinalForm } from 'react-final-form';
-import arrayMutators from 'final-form-arrays';
-import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
-import { propTypes } from '../../util/types';
-import { Button, Form } from '../../components';
+import React from 'react'
+import {
+  bool, func, shape, string
+} from 'prop-types'
+import { compose } from 'redux'
+import { Form as FinalForm } from 'react-final-form'
+import arrayMutators from 'final-form-arrays'
+import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl'
+import { propTypes } from '../../util/types'
+import { Button, Form } from '../../components'
 
-import css from './EditListingProductsForm.css';
+import css from './EditListingProductsForm.css'
 
-import EditListingProductsAdditionalProducts from './EditListingProductsAdditionalProducts';
+import EditListingProductsAdditionalProducts from './EditListingProductsAdditionalProducts'
 
-export const EditListingProductsFormComponent = props => (
+export const EditListingProductsFormComponent = (props) => (
   <FinalForm
     {...props}
     mutators={{ ...arrayMutators }}
-    render={fieldRenderProps => {
+    render={(fieldRenderProps) => {
       const {
         form,
         disabled,
@@ -27,23 +29,43 @@ export const EditListingProductsFormComponent = props => (
         updated,
         updateInProgress,
         fetchErrors,
-        values
-      } = fieldRenderProps;
+        values,
+        listing,
+        ready,
+        errors,
+        images,
+        onChange,
+        submitButtonText,
+        panelUpdated,
+        products
+      } = fieldRenderProps
 
-      const { push } = form && form.mutators ? form.mutators : {};
-      const submitReady = updated && pristine;
-      const submitInProgress = updateInProgress;
-      const submitDisabled = invalid || disabled || submitInProgress;
-      const { updateListingError, showListingsError } = fetchErrors || {};
+      const { push } = form && form.mutators ? form.mutators : {}
+      const submitReady = updated && pristine
+      const submitInProgress = updateInProgress
+      const submitDisabled = invalid || disabled || submitInProgress
+      const { updateListingError, showListingsError } = fetchErrors || {}
 
       return (
         <Form onSubmit={handleSubmit}>
           <EditListingProductsAdditionalProducts
+            otherSubmit={handleSubmit}
             disabled={disabled}
             fieldId="products"
             intl={intl}
             push={push}
             values={values}
+            listing={listing}
+            ready={ready}
+            fetchErrors={errors}
+            initialValues={{ images }}
+            images={images}
+            onChange={onChange}
+            saveActionMsg={submitButtonText}
+            updated={panelUpdated}
+            updateInProgress={updateInProgress}
+            form={form}
+            products={products}
           />
 
           {updateListingError ? (
@@ -59,7 +81,7 @@ export const EditListingProductsFormComponent = props => (
 
           <Button
             className={css.submitButton}
-            type="submit"
+            onClick={() => props.onSubmit(values, 'redirect')}
             inProgress={submitInProgress}
             disabled={submitDisabled}
             ready={submitReady}
@@ -67,14 +89,14 @@ export const EditListingProductsFormComponent = props => (
             {saveActionMsg}
           </Button>
         </Form>
-      );
+      )
     }}
   />
-);
+)
 
 EditListingProductsFormComponent.defaultProps = {
   fetchErrors: null
-};
+}
 
 EditListingProductsFormComponent.propTypes = {
   intl: intlShape.isRequired,
@@ -86,6 +108,6 @@ EditListingProductsFormComponent.propTypes = {
     showListingsError: propTypes.error,
     updateListingError: propTypes.error,
   }),
-};
+}
 
-export default compose(injectIntl)(EditListingProductsFormComponent);
+export default compose(injectIntl)(EditListingProductsFormComponent)

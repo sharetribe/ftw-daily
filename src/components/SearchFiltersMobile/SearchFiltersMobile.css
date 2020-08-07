@@ -1,10 +1,8 @@
 @import '../../marketplace.css';
-
 .root {
   display: flex;
   justify-content: space-between;
   background-color: var(--matterColorBright);
-
   /* sticky result summary in mobile */
   position: sticky;
   top: 0;
@@ -14,13 +12,12 @@
 .searchResultSummary {
   @apply --marketplaceH3FontStyles;
   margin-top: 6px;
-
   display: flex;
   justify-content: space-between;
-
   background-color: var(--matterColorBright);
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .searchResultSummary {
     margin-top: 8px;
   }
 }
@@ -33,7 +30,6 @@
   @apply --marketplaceButtonStylesSecondary;
   @apply --marketplaceTinyFontStyles;
   font-weight: var(--fontWeightBold);
-
   height: 35px;
   min-height: 35px;
   padding: 0 18px;
@@ -45,7 +41,6 @@
   @apply --marketplaceButtonStyles;
   @apply --marketplaceTinyFontStyles;
   font-weight: var(--fontWeightBold);
-
   height: 35px;
   min-height: 35px;
   padding: 0 18px;
@@ -57,11 +52,9 @@
   /* Font */
   @apply --marketplaceTinyFontStyles;
   font-weight: var(--fontWeightBold);
-
   /* background map image */
   background-image: url(./images/map_icon216x105.png);
   background-size: cover;
-
   border-radius: 3px;
   width: 72px;
   height: 35px;
@@ -89,22 +82,18 @@
   @apply --marketplaceH5FontStyles;
   font-weight: var(--fontWeightMedium);
   color: var(--matterColorAnti);
-
   /* Layout */
   display: inline;
   float: right;
   margin: 17px 0 0 0;
   padding: 0;
-
   /* Override button styles */
   outline: none;
   text-align: left;
   border: none;
-
-  &:focus,
-  &:hover {
-    color: var(--matterColor);
-  }
+}
+.resetAllButton:focus, .resetAllButton:hover {
+  color: var(--matterColor);
 }
 
 .filtersWrapper {
@@ -118,10 +107,8 @@
   position: fixed;
   bottom: 0;
   left: 0;
-
   width: 100vw;
   padding: 18px 24px;
-
   background: var(--matterColorLight);
   box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.1);
   z-index: 11;
@@ -132,3 +119,11 @@
   display: inline-block;
   border-radius: 3px;
 }
+
+.filterButtonIcon {
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+}
+
+/*# sourceMappingURL=SearchFiltersMobile.css.map */

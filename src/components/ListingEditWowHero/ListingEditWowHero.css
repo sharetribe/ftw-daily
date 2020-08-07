@@ -1,0 +1,75 @@
+.heroContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100vw;
+  margin-left: -45px;
+  margin-bottom: 20px;
+  min-height: 300px;
+}
+@media (--viewportMedium) {
+  .heroContainer {
+    padding: 25px;
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+.heroTextContainer {
+  position: absolute;
+  display: flex;
+  left: 0;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  padding: 15px;
+  justify-content: center;
+  align-items: center;
+}
+@media (--viewportMedium) {
+  .heroTextContainer {
+    padding: 100px;
+  }
+}
+
+.heroTitle {
+  color: white;
+  z-index: 2;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.heroImage {
+  border-radius: 0;
+  min-height: 300px;
+  object-fit: cover;
+}
+@media (--viewportMedium) {
+  .heroImage {
+    border-radius: 8px;
+  }
+}
+
+.heroDescription {
+  color: white;
+  z-index: 2;
+  margin: 0;
+  text-align: center;
+}
+
+.spinnerContainer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 8px;
+}
+
+/*# sourceMappingURL=ListingEditWowHero.css.map */

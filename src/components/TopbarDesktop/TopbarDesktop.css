@@ -1,15 +1,13 @@
 @import '../../marketplace.css';
-
 :root {
   /*
-    These variables are available in global scope through ":root"
-    element (<html> tag). Variables with the same names are going to
-    overwrite each other if CSS Properties' (PostCSS plugin)
-    configuration "preserve: true" is used - meaning that variables
-    are left to CSS bundle. We are planning to enable it in the future
-    since browsers support CSS Properties already.
- */
-
+     These variables are available in global scope through ":root"
+     element (<html> tag). Variables with the same names are going to
+     overwrite each other if CSS Properties' (PostCSS plugin)
+     configuration "preserve: true" is used - meaning that variables
+     are left to CSS bundle. We are planning to enable it in the future
+     since browsers support CSS Properties already.
+  */
   /* Compose text label items on top of this */
   /* This stretches inline element (link) to take available vertical space (big hover area),
    * and align baselines
@@ -18,22 +16,19 @@
     display: inline-block;
     margin: 24px 0;
     text-decoration: inherit;
-
     @media (--viewportMedium) {
       margin: 24px 0;
     }
   }
-
   --TopbarDesktop_linkHover: {
     border-bottom: 0px solid;
     transition: var(--transitionStyleButton);
-
     &:hover {
       border-bottom: 4px solid var(--marketplaceColor);
       border-radius: 0;
       text-decoration: none;
     }
-  }
+  } ;
 }
 
 /* Desktop */
@@ -41,21 +36,19 @@
   /* Size */
   width: 100%;
   height: var(--topbarHeightDesktop);
-
   /* Layout for child components */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
   padding: 0 12px 0 0;
-
   /* fill */
   background-color: var(--matterColorLight);
-
   /* shadows */
   box-shadow: var(--boxShadowLight);
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .root {
     padding: 0 24px 0 0;
   }
 }
@@ -66,8 +59,9 @@
   flex-shrink: 0;
   padding: 21px 24px 21px 24px;
   height: 100%;
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .logoLink {
     padding: 21px 36px 21px 36px;
   }
 }
@@ -75,7 +69,6 @@
 .logo {
   /* If height is increased, change link paddings accordingly */
   height: 27px;
-
   /* Good aspect ratio should be less than 160/27 (width/height) */
   /* NOTE: extremely wide logos, need special handling. */
   width: auto;
@@ -92,8 +85,9 @@
   border-left-style: solid;
   border-left-width: 1px;
   border-left-color: var(--matterColorNegative);
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .searchLink {
     padding-left: 0;
   }
 }
@@ -107,8 +101,9 @@
 .topbarSearchWithLeftPadding {
   padding-left: 24px;
   height: var(--topbarHeightDesktop);
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .topbarSearchWithLeftPadding {
     padding-left: 34px;
   }
 }
@@ -117,19 +112,18 @@
 .createListingLink {
   @apply --TopbarDesktop_linkHover;
   @apply --marketplaceH4FontStyles;
-
   flex-shrink: 0;
   height: 100%;
   padding: 0 12px 0 12px;
   color: var(--marketplaceColor);
   margin-top: 0;
   margin-bottom: 0;
-
-  &:hover {
-    color: var(--marketplaceColorDark);
-  }
-
-  @media (--viewportMedium) {
+}
+.createListingLink:hover {
+  color: var(--marketplaceColorDark);
+}
+@media (--viewportMedium) {
+  .createListingLink {
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -148,12 +142,12 @@
   margin-top: 0;
   margin-bottom: 0;
   color: var(--matterColor);
-
-  &:hover {
-    color: var(--matterColorDark);
-  }
-
-  @media (--viewportMedium) {
+}
+.inboxLink:hover {
+  color: var(--matterColorDark);
+}
+@media (--viewportMedium) {
+  .inboxLink {
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -166,23 +160,19 @@
 
 .notificationDot {
   /* Dimensions */
-  width: 7px;
-  height: 7px;
+  width: 14px;
+  height: 10px;
   border-radius: 50%;
-
   /* Position */
   position: absolute;
-  top: 3px;
-  right: -9px;
-
+  top: 4px;
+  right: 3px;
   /* Style: red dot */
   background-color: var(--failColor);
-
   animation-name: notificationPop;
   animation-duration: 0.1s;
   animation-delay: 0.1s;
   animation-fill-mode: forwards;
-
   animation-timing-function: ease-in;
   opacity: 0;
   transform: scale(0);
@@ -198,7 +188,6 @@
     opacity: 1;
   }
 }
-
 /* Profile menu */
 .profileMenuLabel {
   @apply --TopbarDesktop_linkHover;
@@ -208,16 +197,13 @@
   height: 100%;
   margin: 0;
   padding: 0 12px 0 12px;
-
-  &:active {
-    border-bottom: 0;
-  }
+}
+.profileMenuLabel:active {
+  border-bottom: 0;
 }
 
-.profileMenuIsOpen {
-  &:hover {
-    border-bottom: 0;
-  }
+.profileMenuIsOpen:hover {
+  border-bottom: 0;
 }
 
 .avatar {
@@ -235,12 +221,10 @@
   flex-shrink: 0;
   height: 100%;
   padding: 0 12px 0 12px;
-
   color: var(--matterColor);
-
-  &:hover {
-    color: var(--matterColorDark);
-  }
+}
+.signupLink:hover {
+  color: var(--matterColorDark);
 }
 
 .loginLink {
@@ -248,12 +232,10 @@
   flex-shrink: 0;
   height: 100%;
   padding: 0 12px 0 12px;
-
   color: var(--matterColor);
-
-  &:hover {
-    color: var(--matterColorDark);
-  }
+}
+.loginLink:hover {
+  color: var(--matterColorDark);
 }
 
 .signup,
@@ -277,28 +259,28 @@
   @apply --marketplaceH4FontStyles;
   position: relative;
   display: block;
-
   /* Dimensions */
   width: 100%;
   margin: 0;
   padding: 4px 24px;
-
   /* Layout details */
   color: var(--matterColor);
   text-align: left;
   transition: var(--transitionStyleButton);
-
-  &:hover {
-    color: var(--matterColorDark);
-    text-decoration: none;
-
-    & .menuItemBorder {
-      width: 6px;
-      background-color: var(--marketplaceColor);
-    }
-  }
-
-  @media (--viewportMedium) {
+}
+.profileSettingsLink:hover,
+.yourListingsLink:hover {
+  color: var(--matterColorDark);
+  text-decoration: none;
+}
+.profileSettingsLink:hover .menuItemBorder,
+.yourListingsLink:hover .menuItemBorder {
+  width: 6px;
+  background-color: var(--marketplaceColor);
+}
+@media (--viewportMedium) {
+  .profileSettingsLink,
+.yourListingsLink {
     margin: 0;
   }
 }
@@ -308,14 +290,12 @@
   /* Font is specific to this component */
   @apply --marketplaceH4FontStyles;
   font-size: 14px;
-
   /* Dimensions */
   position: relative;
   width: 100%;
   min-width: 276px;
   margin: 0;
   padding: 20px 24px;
-
   /* Layout details */
   color: var(--matterColorAnti);
   text-align: left;
@@ -324,20 +304,19 @@
   border-top-width: 1px;
   border-top-style: solid;
   border-top-color: var(--matterColorNegative);
-
-  &:hover {
-    color: var(--matterColorDark);
-    text-decoration: none;
-
-    & .menuItemBorder {
-      height: 100%;
-      width: 6px;
-      top: 0;
-      background-color: var(--marketplaceColor);
-    }
-  }
-
-  @media (--viewportMedium) {
+}
+.logoutButton:hover {
+  color: var(--matterColorDark);
+  text-decoration: none;
+}
+.logoutButton:hover .menuItemBorder {
+  height: 100%;
+  width: 6px;
+  top: 0;
+  background-color: var(--marketplaceColor);
+}
+@media (--viewportMedium) {
+  .logoutButton {
     margin-top: 20px;
     margin-bottom: 0;
   }
@@ -346,15 +325,20 @@
 .currentPage {
   color: var(--matterColorDark);
   position: relative;
-
-  & .menuItemBorder {
-    width: 6px;
-    background-color: var(--matterColorDark);
-  }
-
-  &:hover {
-    & .menuItemBorder {
-      background-color: var(--matterColorDark);
-    }
-  }
 }
+.currentPage .menuItemBorder {
+  width: 6px;
+  background-color: var(--matterColorDark);
+}
+.currentPage:hover .menuItemBorder {
+  background-color: var(--matterColorDark);
+}
+
+.filterButtonIcon {
+  height: 20px;
+  width: 20px;
+  margin-left: 5px;
+  margin-bottom: 10px;
+}
+
+/*# sourceMappingURL=TopbarDesktop.css.map */

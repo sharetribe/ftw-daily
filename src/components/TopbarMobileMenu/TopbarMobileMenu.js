@@ -4,6 +4,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { IconMessage } from '../../assets/IconMessage';
 import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { ACCOUNT_SETTINGS_PAGES } from '../../routeConfiguration';
@@ -89,6 +90,7 @@ const TopbarMobileMenu = props => {
           name="InboxPage"
           params={{ tab: currentUserHasListings ? 'sales' : 'orders' }}
         >
+          <IconMessage className={css.filterButtonIcon}/>
           <FormattedMessage id="TopbarMobileMenu.inboxLink" />
           {notificationCountBadge}
         </NamedLink>

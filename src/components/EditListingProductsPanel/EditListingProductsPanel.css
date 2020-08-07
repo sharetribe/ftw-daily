@@ -1,5 +1,4 @@
 @import '../../marketplace.css';
-
 .root {
   flex-grow: 1;
   width: 100%;
@@ -15,8 +14,9 @@
 
 .title {
   margin-bottom: 19px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .title {
     margin-bottom: 38px;
     padding: 1px 0 7px 0;
   }
@@ -25,3 +25,5 @@
 .priceCurrencyInvalid {
   color: var(--failColor);
 }
+
+/*# sourceMappingURL=EditListingProductsPanel.css.map */

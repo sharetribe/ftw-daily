@@ -1,16 +1,45 @@
-import React, { Component } from 'react';
-import { bool, func, number, object, string } from 'prop-types';
-import { injectIntl, intlShape } from '../../util/reactIntl';
+import React, { Component } from 'react'
+import {
+  arrayOf, bool, func, node, number, object, string
+} from 'prop-types'
+import { injectIntl, intlShape } from '../../util/reactIntl'
+import { parseDateFromISO8601, stringifyDateToISO8601 } from '../../util/dates'
 
-import { FieldDateRangeController, FilterPopup, FilterPlain } from '../../components';
-import css from './BookingDateRangeFilter.css';
+import { FieldDateRangeController, FilterPopup, FilterPlain } from '..'
+import css from './BookingDateRangeFilter.css'
+
+const getDatesQueryParamName = (queryParamNames) => {
+  // eslint-disable-next-line no-nested-ternary
+  return Array.isArray(queryParamNames)
+    ? queryParamNames[0]
+    : typeof queryParamNames === 'string'
+      ? queryParamNames
+      : 'dates'
+}
+
+// Parse query parameter, which should look like "2020-05-28,2020-05-31"
+const parseValue = (value) => {
+  const rawValuesFromParams = value ? value.split(',') : []
+  const [startDate, endDate] = rawValuesFromParams.map((v) => parseDateFromISO8601(v))
+  return value && startDate && endDate ? { dates: { startDate, endDate } } : { dates: null }
+}
+// Format dateRange value for the query. It's given by FieldDateRangeInput:
+// { dates: { startDate, endDate } }
+const formatValue = (dateRange, queryParamName) => {
+  const hasDates = dateRange && dateRange.dates
+  const { startDate, endDate } = hasDates ? dateRange.dates : {}
+  const start = startDate ? stringifyDateToISO8601(startDate) : null
+  const end = endDate ? stringifyDateToISO8601(endDate) : null
+  const value = start && end ? `${start},${end}` : null
+  return { [queryParamName]: value }
+}
 
 export class BookingDateRangeFilterComponent extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.popupControllerRef = null;
-    this.plainControllerRef = null;
+    this.popupControllerRef = null
+    this.plainControllerRef = null
   }
 
   render() {
@@ -18,61 +47,71 @@ export class BookingDateRangeFilterComponent extends Component {
       className,
       rootClassName,
       showAsPopup,
-      initialValues: initialValuesRaw,
+      initialValues,
       id,
       contentPlacementOffset,
       onSubmit,
-      urlParam,
+      queryParamNames,
+      label,
+      icon,
       intl,
       ...rest
-    } = this.props;
+    } = this.props
 
-    const isSelected = !!initialValuesRaw && !!initialValuesRaw.dates;
-    const initialValues = isSelected ? initialValuesRaw : { dates: null };
+    const datesQueryParamName = getDatesQueryParamName(queryParamNames)
+    const initialDates
+      = initialValues && initialValues[datesQueryParamName]
+        ? parseValue(initialValues[datesQueryParamName])
+        : { dates: null }
 
-    const startDate = isSelected ? initialValues.dates.startDate : null;
-    const endDate = isSelected ? initialValues.dates.endDate : null;
+    const isSelected = !!initialDates.dates
+    const startDate = isSelected ? initialDates.dates.startDate : null
+    const endDate = isSelected ? initialDates.dates.endDate : null
 
     const format = {
       month: 'short',
       day: 'numeric',
-    };
+    }
 
-    const formattedStartDate = isSelected ? intl.formatDate(startDate, format) : null;
-    const formattedEndDate = isSelected ? intl.formatDate(endDate, format) : null;
+    const formattedStartDate = isSelected ? intl.formatDate(startDate, format) : null
+    const formattedEndDate = isSelected ? intl.formatDate(endDate, format) : null
 
     const labelForPlain = isSelected
       ? intl.formatMessage(
-          { id: 'BookingDateRangeFilter.labelSelectedPlain' },
-          {
-            dates: `${formattedStartDate} - ${formattedEndDate}`,
-          }
-        )
-      : intl.formatMessage({ id: 'BookingDateRangeFilter.labelPlain' });
+        { id: 'BookingDateRangeFilter.labelSelectedPlain' },
+        {
+          dates: `${formattedStartDate} - ${formattedEndDate}`,
+        }
+      )
+      : label || intl.formatMessage({ id: 'BookingDateRangeFilter.labelPlain' })
 
     const labelForPopup = isSelected
       ? intl.formatMessage(
-          { id: 'BookingDateRangeFilter.labelSelectedPopup' },
-          {
-            dates: `${formattedStartDate} - ${formattedEndDate}`,
-          }
-        )
-      : intl.formatMessage({ id: 'BookingDateRangeFilter.labelPopup' });
+        { id: 'BookingDateRangeFilter.labelSelectedPopup' },
+        {
+          dates: `${formattedStartDate} - ${formattedEndDate}`,
+        }
+      )
+      : label || intl.formatMessage({ id: 'BookingDateRangeFilter.labelPopup' })
 
-    const onClearPopupMaybe =
-      this.popupControllerRef && this.popupControllerRef.onReset
+    const handleSubmit = (values) => {
+      onSubmit(formatValue(values, datesQueryParamName))
+    }
+
+    const onClearPopupMaybe
+      = this.popupControllerRef && this.popupControllerRef.onReset
         ? { onClear: () => this.popupControllerRef.onReset(null, null) }
-        : {};
+        : {}
 
-    const onCancelPopupMaybe =
-      this.popupControllerRef && this.popupControllerRef.onReset
+    const onCancelPopupMaybe
+      = this.popupControllerRef && this.popupControllerRef.onReset
         ? { onCancel: () => this.popupControllerRef.onReset(startDate, endDate) }
-        : {};
+        : {}
 
-    const onClearPlainMaybe =
-      this.plainControllerRef && this.plainControllerRef.onReset
+    const onClearPlainMaybe
+      = this.plainControllerRef && this.plainControllerRef.onReset
         ? { onClear: () => this.plainControllerRef.onReset(null, null) }
-        : {};
+        : {}
 
     return showAsPopup ? (
       <FilterPopup
@@ -80,21 +119,21 @@ export class BookingDateRangeFilterComponent extends Component {
         rootClassName={rootClassName}
         popupClassName={css.popupSize}
         label={labelForPopup}
+        icon={icon}
         isSelected={isSelected}
         id={`${id}.popup`}
         showAsPopup
         contentPlacementOffset={contentPlacementOffset}
-        onSubmit={onSubmit}
+        onSubmit={handleSubmit}
         {...onClearPopupMaybe}
         {...onCancelPopupMaybe}
-        initialValues={initialValues}
-        urlParam={urlParam}
+        initialValues={initialDates}
         {...rest}
       >
         <FieldDateRangeController
           name="dates"
-          controllerRef={node => {
-            this.popupControllerRef = node;
+          controllerRef={(node) => {
+            this.popupControllerRef = node
           }}
         />
       </FilterPopup>
@@ -103,24 +142,24 @@ export class BookingDateRangeFilterComponent extends Component {
         className={className}
         rootClassName={rootClassName}
         label={labelForPlain}
+        icon={icon}
         isSelected={isSelected}
         id={`${id}.plain`}
         liveEdit
         contentPlacementOffset={contentPlacementOffset}
-        onSubmit={onSubmit}
+        onSubmit={handleSubmit}
         {...onClearPlainMaybe}
-        initialValues={initialValues}
-        urlParam={urlParam}
+        initialValues={initialDates}
         {...rest}
       >
         <FieldDateRangeController
           name="dates"
-          controllerRef={node => {
-            this.plainControllerRef = node;
+          controllerRef={(node) => {
+            this.plainControllerRef = node
           }}
         />
       </FilterPlain>
-    );
+    )
   }
 }
 
@@ -131,23 +170,25 @@ BookingDateRangeFilterComponent.defaultProps = {
   liveEdit: false,
   initialValues: null,
   contentPlacementOffset: 0,
-};
+}
 
 BookingDateRangeFilterComponent.propTypes = {
   rootClassName: string,
   className: string,
   id: string.isRequired,
+  label: node,
+  icon: node.isRequired,
   showAsPopup: bool,
   liveEdit: bool,
-  urlParam: string.isRequired,
+  queryParamNames: arrayOf(string).isRequired,
   onSubmit: func.isRequired,
   initialValues: object,
   contentPlacementOffset: number,
 
   // form injectIntl
   intl: intlShape.isRequired,
-};
+}
 
-const BookingDateRangeFilter = injectIntl(BookingDateRangeFilterComponent);
+const BookingDateRangeFilter = injectIntl(BookingDateRangeFilterComponent)
 
-export default BookingDateRangeFilter;
+export default BookingDateRangeFilter

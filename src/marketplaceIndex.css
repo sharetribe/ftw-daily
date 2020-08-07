@@ -11,6 +11,10 @@ body {
   background-color: var(--matterColorBright);
 }
 
+#widget-container {
+  background-color: yellow;
+}
+
 ::selection {
   background: var(--marketplaceColor);
   /* WebKit/Blink Browsers */
@@ -123,10 +127,16 @@ textarea::placeholder {
 }
 
 :global(.fontsLoaded) body {
-  font-family: "Montserrat", Helvetica, Arial, sans-serif;
+  font-family: "Fira Sans", Helvetica, Arial, sans-serif;
 }
 :global(.fontsLoaded) button {
-  font-family: "Montserrat", Helvetica, Arial, sans-serif;
+  font-family: "Fira Sans", Helvetica, Arial, sans-serif;
+}
+
+small {
+  font-family: "Fira Sans", Helvetica, Arial, sans-serif;
+  font-size: 70%;
+  font-weight: 400;
 }
 
 /*# sourceMappingURL=marketplaceIndex.css.map */
