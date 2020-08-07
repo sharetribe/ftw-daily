@@ -105,6 +105,7 @@ class ModalMissingInformation extends Component {
       onManageDisableScrolling,
       onResendVerificationEmail,
       stripeAccountCreatedShow,
+      stripeAccountCreated,
     } = this.props;
 
     const user = ensureCurrentUser(currentUser);
@@ -132,7 +133,7 @@ class ModalMissingInformation extends Component {
     const closeButtonMessage = (
       <FormattedMessage id="ModalMissingInformation.closeVerifyEmailReminder" />
     );
-    return (stripeAccountCreatedShow ? null :
+    return (((stripeAccountCreated || stripeAccountCreatedShow) && (!stripeAccountCreated && stripeAccountCreatedShow) )? null :
       <Modal
         id="MissingInformationReminder"
         containerClassName={containerClassName}
@@ -163,7 +164,6 @@ ModalMissingInformation.propTypes = {
   className: string,
   rootClassName: string,
   containerClassName: string,
-
   currentUser: propTypes.currentUser,
   onManageDisableScrolling: func.isRequired,
   sendVerificationEmailError: propTypes.error,
@@ -174,7 +174,8 @@ ModalMissingInformation.displayName = 'ModalMissingInformation';
 
 const mapStateToProps = state => {
   return {
-     stripeAccountCreatedShow: state.stripe.stripeAccountCreatedShow,
+    stripeAccountCreatedShow: state.stripe.stripeAccountCreatedShow,
+    stripeAccountCreated: state.stripe.stripeAccountCreated,
   };
 }
 
