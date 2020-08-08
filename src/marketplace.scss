@@ -44,7 +44,7 @@
 
   --marketplaceColor: #000000;
   --marketplaceColorLight: #d9f9ff;
-  --marketplaceColorDark: #408e9d;
+  --marketplaceColorDark: #5cbce0;
 
   /* Used with inline CSS SVGs */
   --marketplaceColorEncoded: %23c0392b;
@@ -189,7 +189,7 @@
 
     /* Borders */
     border: none;
-    border-radius: var(--borderRadius);
+    border-radius: 3rem;
 
     /* Colors */
     background-color: var(--marketplaceColor);

@@ -59,10 +59,10 @@ const EditListingProductsPanel = (props) => {
                     amount: p.price.amount,
                     currency: p.price.currency
                   },
-                  occupancyType: p.occupancyType.value,
-                  bathroom: p.bathroom.value,
-                  beds: p.beds.value,
-                  quantityAvailable: p.quantityAvailable.value,
+                  occupancyType: p.occupancyType.value ? p.occupancyType.value : p.occupancyType,
+                  bathroom: p.bathroom.value ? p.bathroom.value : p.bathroom,
+                  beds: p.beds.value ? p.beds.value : p.beds,
+                  quantityAvailable: p.quantityAvailable.value ? p.quantityAvailable.value : p.quantityAvailable,
                   order: _.isInteger(p.order) ? p.order : idx
                 }
               })

@@ -251,7 +251,6 @@
     flex-shrink: 0;
 
     & > div {
-      position: sticky;
       top: 95px;
     }
   }
@@ -428,7 +427,6 @@
 }
 
 .contactWrapper {
-  display: none;
 
   @media (--viewportMedium) {
     display: inline;
@@ -481,9 +479,6 @@
 .coSectionTitle {
   /* Font */
   @apply --marketplaceH3FontStyles;
-  color: var(--matterColorLight);
-  background-color: var(--matterColorDark);
-  padding: 8px;
   border-radius: 4px;
   font-weight: 800;
   margin-top: 0;
@@ -673,7 +668,6 @@
   padding: 15px;
   display: flex;
   height: 70px;
-  margin-top: 20px;
   margin-bottom: 20px;
   width: 100%;
   align-items: center;
@@ -686,6 +680,7 @@
   justify-content: flex-end;
   align-items: center;
   height: 50px;
+  margin-top: 20px;
   width: 100%;
 }
 
@@ -694,7 +689,7 @@
   height: 10px;
   border-radius: 50%;
   margin-left: 4px;
-  background-color: var(--marketplaceColor)
+  background-color: var(--marketplaceColorDark)
 }
 
 .surfDifficultyIndicatorContainer {
@@ -728,6 +723,23 @@
   -webkit-overflow-scrolling: auto;
 }
 
+.endButtonDetailsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.poweredByMSWContainer {
+  font-size: 8px;
+}
+
+.mswIcon {
+  height: 15px;
+  margin-left: 5px;
+}
+
 .orderIconContainer {
   height: 24px;
   width: 24px;
@@ -757,38 +769,51 @@
 
 .heroTextContainer {
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 100px 20px 20px 20px;
   top: 0;
   height: 100%;
   width: 100%;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: left;
 
   @media (--viewportMedium) {
     padding: 20px;
     max-width: 1056px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
   }
 }
+
 
 .heroTitle {
   color: white;
   z-index: 2;
   font-weight: 700;
+  font-size: 45px;
+  line-height: 50px;
   margin: 0;
+
+  @media (--viewportMedium) {
+    font-weight: 400;
+    font-size: 85px;
+    line-height:85px
+  }
 }
 
 .heroDescription {
   color: white;
   z-index: 2;
   font-size: 20px;
-  text-align: center;
+  font-weight: 300;
 
   @media (--viewportMedium) {
     top: 20px;
     font-size: 24px;
+    text-align: center;
   }
 }
 
@@ -818,6 +843,13 @@
       box-shadow: var(--boxShadowListingCard);
     }
   }
+}
+
+.heroDarkener {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .welcomeMessageContainer {

@@ -4,9 +4,10 @@ import includes from 'lodash/includes'
 import keys from 'lodash/keys'
 import { WaveDivider } from '../../assets/WaveDivider'
 import Modal from '../../components/Modal/Modal'
-import SingleLineGridList from '../../components/SingleRowImageGridList/SingleRowImageGridList';
+import SingleLineGridList from '../../components/SingleRowImageGridList/SingleRowImageGridList'
 import { FormattedMessage } from '../../util/reactIntl'
 import { richText } from '../../util/richText'
+import mswIcon from '../../assets/msw_icon.png'
 
 import css from './ListingPage.css'
 
@@ -59,8 +60,14 @@ const SectionSurfMaybe = (props) => {
               }
             </div>
           </div>
-          <div className={css.orderIconContainer}>
-            <span className={css.orderIconNumber}>{ss.order}</span>
+          <div className={css.endButtonDetailsContainer}>
+            <div className={css.orderIconContainer}>
+              <span className={css.orderIconNumber}>{ss.order}</span>
+            </div>
+            <span className={css.poweredByMSWContainer}>
+              <span>powered by</span>
+              <img className={css.mswIcon} src={mswIcon} alt=""/>
+            </span>
           </div>
         </div>
       )
@@ -85,10 +92,10 @@ const SectionSurfMaybe = (props) => {
             : publicData.surf
         }
       </p>
+      { generateMobileImageGrid() }
       <div className={css.waveIconDividerContainer}>
         <WaveDivider />
       </div>
-      { generateMobileImageGrid() }
       { returnMSWButtons() }
       <Modal
         isOpen={forecast !== null}

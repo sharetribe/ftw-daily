@@ -1,12 +1,12 @@
 @import '../../marketplace.css';
+
 /* Booking form inside modalContainer needs special handling */
 /* since "inMobile" breakpoint is actually --viewportLarge */
 .modalContainer {
   @apply --marketplaceModalInMobileBaseStyles;
   height: 100vh;
-}
-@media (--viewportMedium) {
-  .modalContainer {
+
+  @media (--viewportMedium) {
     flex-basis: 576px;
     height: 100%;
     padding: var(--modalPaddingMedium);
@@ -14,9 +14,8 @@
     margin-top: 12.5vh;
     margin-bottom: 12.5vh;
   }
-}
-@media (--viewportLarge) {
-  .modalContainer {
+
+  @media (--viewportLarge) {
     padding: 0;
     background-color: transparent;
     margin-top: 0;
@@ -28,14 +27,12 @@
   margin-top: 89px;
   margin-bottom: 36px;
   padding: 0 24px;
-}
-@media (--viewportMedium) {
-  .modalHeading {
+
+  @media (--viewportMedium) {
     padding: 0;
   }
-}
-@media (--viewportLarge) {
-  .modalHeading {
+
+  @media (--viewportLarge) {
     display: none;
   }
 }
@@ -44,13 +41,12 @@
   /* Font */
   @apply --marketplaceH1FontStyles;
   color: var(--matterColor);
+
   /* Layout */
   width: 100%;
   margin-top: 0;
   margin-bottom: 0;
-}
-@media (--viewportMedium) {
-  .title {
+  @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 5px;
   }
@@ -61,9 +57,8 @@
   @apply --marketplaceH4FontStyles;
   margin-top: 7px;
   margin-bottom: 0;
-}
-@media (--viewportMedium) {
-  .author {
+
+  @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 0;
     color: var(--matterColor);
@@ -72,9 +67,8 @@
 
 .bookingHeading {
   display: none;
-}
-@media (--viewportLarge) {
-  .bookingHeading {
+
+  @media (--viewportLarge) {
     display: block;
     margin-top: -2px;
     margin-bottom: 33px;
@@ -84,6 +78,7 @@
 .bookingTitle {
   /* Font */
   color: var(--matterColor);
+
   margin-top: 0;
   margin-bottom: 9px;
 }
@@ -91,9 +86,8 @@
 .bookingHelp {
   display: none;
   @apply --marketplaceH5FontStyles;
-}
-@media (--viewportMedium) {
-  .bookingHelp {
+
+  @media (--viewportMedium) {
     color: var(--matterColor);
     display: block;
     margin-top: 0;
@@ -105,15 +99,13 @@
   display: flex;
   flex-direction: column;
   margin: 0 0 84px 0;
-}
-@media (--viewportMedium) {
-  .bookingForm {
+
+  @media (--viewportMedium) {
     margin: 0;
     min-height: 400px;
   }
-}
-@media (--viewportLarge) {
-  .bookingForm {
+
+  @media (--viewportLarge) {
     min-width: 312px;
     min-height: auto;
   }
@@ -126,9 +118,8 @@
   position: fixed;
   bottom: 0;
   background-color: var(--matterColorLight);
-}
-@media (--viewportMedium) {
-  .bookingDatesSubmitButtonWrapper {
+
+  @media (--viewportMedium) {
     padding: 0;
     width: 100%;
     position: static;
@@ -148,17 +139,16 @@
   background-color: var(--matterColorLight);
   box-shadow: var(--boxShadowTop);
   display: flex;
+
   /* Contain repainting to this component only */
   /* 3D painting container helps scrolling */
   transform: translate3d(0, 0, 0);
-}
-@media (--viewportMedium) {
-  .openBookingForm {
+
+  @media (--viewportMedium) {
     padding: 18px 60px 18px 60px;
   }
-}
-@media (--viewportLarge) {
-  .openBookingForm {
+
+  @media (--viewportLarge) {
     display: none;
   }
 }
@@ -177,11 +167,10 @@
   /* Font */
   @apply --marketplaceH2FontStyles;
   color: var(--matterColor);
+
   margin-top: 0;
   margin-bottom: 0px;
-}
-@media (--viewportMedium) {
-  .priceValue {
+  @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -191,11 +180,10 @@
   /* Font */
   @apply --marketplaceTinyFontStyles;
   color: var(--matterColor);
+
   margin-top: 0;
   margin-bottom: 0px;
-}
-@media (--viewportMedium) {
-  .perUnit {
+  @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -203,6 +191,7 @@
 
 .bookButton {
   @apply --marketplaceButtonStylesPrimary;
+
   /* Clear padding that is set for link elements looking like buttons */
   padding: 0;
 }
@@ -213,5 +202,3 @@
   padding: 15px 24px 15px 24px;
   text-align: center;
 }
-
-/*# sourceMappingURL=BookingPanel.css.map */

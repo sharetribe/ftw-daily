@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react';
 import { Colors } from '../../colors'
 
 const ReactSelectAdapter = (props) => {
@@ -33,13 +33,12 @@ const ReactSelectAdapter = (props) => {
     }
   }
 
-
   const customStyles = {
-    option: (provided, state) => ({
+    option: (provided) => ({
       ...provided,
       fontFamily: 'Nunito Sans'
     }),
-    singleValue: (provided, state) => ({
+    singleValue: (provided) => ({
       ...provided,
       fontFamily: 'Nunito Sans'
     }),

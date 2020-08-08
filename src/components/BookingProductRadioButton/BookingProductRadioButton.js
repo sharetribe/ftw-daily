@@ -2,10 +2,17 @@ import React from 'react'
 import { node, string } from 'prop-types'
 import classNames from 'classnames'
 import { Field, FormSpy } from 'react-final-form'
-import keys from 'lodash/keys'
-import ValidationError from '../ValidationError/ValidationError';
+import get from 'lodash/get'
+import find from 'lodash/find'
+import {
+  formatMoney, convertMoneyToNumber, convertUnitToSubUnit, unitDivisor
+} from '../../util/currency'
+import ValidationError from '../ValidationError/ValidationError'
+import { types as sdkTypes } from '../../util/sdkLoader'
 
 import css from './BookingProductRadioButton.css'
+
+const { Money } = sdkTypes
 
 const IconRadioButton = (props) => {
   return (
@@ -34,9 +41,12 @@ const BookingProductRadioButtonComponent = (props) => {
     className,
     id,
     label,
+    intl,
     product,
     showAsRequired,
     fieldMeta,
+    images,
+    price,
     ...rest
   } = props
 
@@ -50,12 +60,64 @@ const BookingProductRadioButtonComponent = (props) => {
   }
 
   const buildThumbnail = () => {
-    return `${process.env.REACT_APP_IMGIX_URL}/${keys(product.photos)[0]}?fm=jpm&auto=format&h=60&w=60&fit=crop`
+    if (images.length) {
+      return get(images, '[0].attributes.variants.["square-small"].url')
+    }
   }
+
+  const beds = [
+    {
+      value: 'one-queen',
+      label: '1 Queen Bed'
+    },
+    {
+      value: 'two-queens',
+      label: '2 Queen Beds'
+    },
+    {
+      value: 'single-twin',
+      label: '1 Twin Bed'
+    },
+    {
+      value: 'double-twins',
+      label: '2 Twin Beds'
+    },
+    {
+      value: 'dorm',
+      label: 'Dorm'
+    }
+  ]
+
+  const bath = [
+    {
+      value: 'private',
+      label: 'Private Bathroom'
+    },
+    {
+      value: 'shared',
+      label: 'Shared Bathroom'
+    }
+  ]
+
+  const occupancyType = [
+    {
+      value: 'private',
+      label: 'Private Room'
+    },
+    {
+      value: 'shared',
+      label: 'Shared Room'
+    }
+  ]
+
+  const getDisplayValue = (collection, value) => {
+    return get(find(collection, (c) => c.value === value), 'label')
+  }
+
   const required = (value) => (value ? undefined : 'Select a room')
+
   return (
     <span className={classes}>
-      <FormSpy onChange={(e) => console.log(e)}/>
       <Field
         {...radioButtonProps}
         validate={required}
@@ -63,21 +125,30 @@ const BookingProductRadioButtonComponent = (props) => {
       <label htmlFor={id} className={css.label}>
         <div className={css.buttonContainer}>
           <div className={css.radioButtonWrapper}>
-            <img src={buildThumbnail()} alt="" className={css.checkboxProductThumbnail}/>
-            <span className={css.textRoot}>{label}</span>
-          </div>
-          <div className={css.roomDetailsListWrapper}>
-            <ul className={css.roomDetailsList}>
+            <div className={css.bookingSelectionTopRow}>
               {
-                product.beds
-                  ? <li>&#9679; <span className={css.productDetailText}>{product.beds.label}</span></li> : null
+                buildThumbnail() ? <img src={buildThumbnail()} alt="" className={css.checkboxProductThumbnail}/> : null
               }
-              {
-                product.bathroom
-                  ? <li>&#9679; <span className={css.productDetailText}>{product.bathroom.label}</span></li> : null
-              }
-            </ul>
-            <div>
+              <div className={css.roomDetailsListWrapper}>
+                <span className={css.textRoot}>{label}</span>
+                <ul className={css.roomDetailsList}>
+                  {
+                    product.occupancyType
+                      ? <li>&#9679; <span className={css.productDetailText}>{getDisplayValue(occupancyType, product.occupancyType)}</span></li> : null
+                  }
+                  {
+                    product.bathroom
+                      ? <li>&#9679; <span className={css.productDetailText}>{getDisplayValue(bath, product.bathroom)}</span></li> : null
+                  }
+                  {
+                    product.beds
+                      ? <li>&#9679; <span className={css.productDetailText}>{getDisplayValue(beds, product.beds)}</span></li> : null
+                  }
+                </ul>
+              </div>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'flex-end', paddingTop: 10 }}>
+              <div className={css.totalPrice}>{formatMoney(intl, new Money(price, product.price.currency))}</div>
               <IconRadioButton checked={fieldMeta.values.bookingProduct === product.id}/>
             </div>
           </div>

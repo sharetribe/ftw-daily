@@ -1,4 +1,5 @@
 @import '../../marketplace.css';
+
 .root {
   display: flex;
   flex-direction: column;
@@ -6,19 +7,18 @@
 
 .card {
   @apply --marketplaceInputStyles;
+
   /* Layout */
   padding: 8px 0 6px 0;
   height: 36px;
+
   /* Border */
   border-bottom-color: var(--attentionColor);
-}
-@media (--viewportMedium) {
-  .card {
+
+  @media (--viewportMedium) {
     height: 38px;
   }
-}
-@media (--viewportLarge) {
-  .card {
+  @media (--viewportLarge) {
     height: 38px;
     padding: 6px 0 14px 0;
   }
@@ -44,11 +44,11 @@
 .paymentHeading {
   margin: 0 0 12px 0;
   color: var(--matterColorAnti);
+
   padding-top: 4px;
   padding-bottom: 2px;
-}
-@media (--viewportMedium) {
-  .paymentHeading {
+
+  @media (--viewportMedium) {
     margin: 0 0 16px 0;
     padding-top: 4px;
     padding-bottom: 4px;
@@ -57,9 +57,8 @@
 
 .paymentMethodSelector {
   margin-bottom: 36px;
-}
-@media (--viewportMedium) {
-  .paymentMethodSelector {
+
+  @media (--viewportMedium) {
     margin-bottom: 40px;
   }
 }
@@ -67,9 +66,8 @@
 .saveForLaterUse {
   padding-top: 6px;
   margin-bottom: 36px;
-}
-@media (--viewportMedium) {
-  .saveForLaterUse {
+
+  @media (--viewportMedium) {
     padding-top: 8px;
     margin-top: 0px;
     margin-bottom: 48px;
@@ -79,9 +77,8 @@
 .saveForLaterUseCheckbox {
   display: inline-block;
   padding: 2px 0 3px 0;
-}
-@media (--viewportMedium) {
-  .saveForLaterUseCheckbox {
+
+  @media (--viewportMedium) {
     padding: 1px 0 0px 0;
   }
 }
@@ -101,9 +98,8 @@
   padding: 0px 0 0px 26px;
   margin-top: -2px;
   margin-bottom: 2px;
-}
-@media (--viewportMedium) {
-  .saveForLaterUseLegalInfo {
+
+  @media (--viewportMedium) {
     margin-top: -1px;
     margin-bottom: 1px;
   }
@@ -112,11 +108,11 @@
 .billingHeading {
   margin: 0 0 12px 0;
   color: var(--matterColorAnti);
+
   padding-top: 4px;
   padding-bottom: 2px;
-}
-@media (--viewportMedium) {
-  .billingHeading {
+
+  @media (--viewportMedium) {
     margin: 0 0 24px 0;
     padding-top: 4px;
     padding-bottom: 4px;
@@ -125,9 +121,8 @@
 
 .paymentLabel {
   margin: 0;
-}
-@media (--viewportMedium) {
-  .paymentLabel {
+
+  @media (--viewportMedium) {
     margin-top: 0px;
     margin-bottom: 2px;
   }
@@ -136,11 +131,11 @@
 .messageHeading {
   color: var(--matterColorAnti);
   margin: 36px 0 12px 0;
+
   padding-top: 4px;
   padding-bottom: 2px;
-}
-@media (--viewportMedium) {
-  .messageHeading {
+
+  @media (--viewportMedium) {
     margin: 24px 0 24px 0;
     padding-top: 4px;
     padding-bottom: 4px;
@@ -149,9 +144,8 @@
 
 .messageLabel {
   margin: 0 0 5px 0;
-}
-@media (--viewportMedium) {
-  .messageLabel {
+
+  @media (--viewportMedium) {
     margin: 0 0 6px 0;
   }
 }
@@ -166,9 +160,8 @@
 
 .submitContainer {
   margin-top: auto;
-}
-@media (--viewportLarge) {
-  .submitContainer {
+
+  @media (--viewportLarge) {
     margin-top: 72px;
   }
 }
@@ -179,9 +172,8 @@
   text-align: center;
   padding: 0 42px;
   margin: 28px 0 0 0;
-}
-@media (--viewportLarge) {
-  .paymentInfo {
+
+  @media (--viewportLarge) {
     /* TODO this is ugly overwrite to fix unconsistent font styles */
     font-size: 14px;
     padding: 0;
@@ -190,14 +182,11 @@
 
 .submitButton {
   margin-top: 22px;
-}
-@media (--viewportMedium) {
-  .submitButton {
+
+  @media (--viewportMedium) {
     margin-top: 26px;
   }
-}
-@media (--viewportLarge) {
-  .submitButton {
+  @media (--viewportLarge) {
     margin-top: 17px;
   }
 }
@@ -222,5 +211,3 @@
   width: 30px;
   margin-left: 5px;
 }
-
-/*# sourceMappingURL=StripePaymentForm.css.map */

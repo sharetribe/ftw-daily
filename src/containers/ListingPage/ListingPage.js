@@ -50,8 +50,8 @@ import { TopbarContainer, NotFoundPage } from '..'
 import ListingHero from './ListingHero'
 
 import { sendEnquiry, loadData, setInitialValues } from './ListingPage.duck'
-import SectionColivingMaybe from './SectionColivingMaybe';
-import SectionCoworkingMaybe from './SectionCoworkingMaybe';
+import SectionColivingMaybe from './SectionColivingMaybe'
+import SectionCoworkingMaybe from './SectionCoworkingMaybe'
 import SectionImages from './SectionImages'
 import SectionAvatar from './SectionAvatar'
 import SectionHeading from './SectionHeading'
@@ -67,7 +67,7 @@ import SectionMapMaybe from './SectionMapMaybe'
 import SectionRetreatMaybe from './SectionRetreatMaybe'
 
 import css from './ListingPage.css'
-import SectionWelcomeMaybe from './SectionWelcomeMaybe';
+import SectionWelcomeMaybe from './SectionWelcomeMaybe'
 
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16
 
@@ -362,7 +362,9 @@ export class ListingPageComponent extends Component {
     const twitterImages = listingImages(currentListing, 'twitter')
     const schemaImages = JSON.stringify(facebookImages.map((img) => img.url))
     const { siteTitle } = config
-    const schemaTitle = intl.formatMessage(
+    const schemaTitle = `${title} - Coliving Coworking Spaces for Remote Working Digital Nomads near Surf`
+
+    intl.formatMessage(
       { id: 'ListingPage.schemaTitle' },
       { title, price: formattedPrice, siteTitle }
     )
@@ -393,7 +395,6 @@ export class ListingPageComponent extends Component {
           <span className={css.tag}><IconCrosshair />{`Capacity: ${publicData.retreat.capacity}`}</span>
         </>
       ) : null
-
 
     const wifi
       = publicData && (publicData.wifi || get(publicData, 'coworking.wifi')) ? (
@@ -464,7 +465,7 @@ export class ListingPageComponent extends Component {
                     images={currentListing.images}
                     metadata={metadata}
                   />
-                  {/*<SectionCommunityMaybe publicData={publicData} />*/}
+                  {/* <SectionCommunityMaybe publicData={publicData} /> */}
                   <SectionVideoMaybe video={publicData.video} />
                   <SectionMapMaybe
                     geolocation={geolocation}

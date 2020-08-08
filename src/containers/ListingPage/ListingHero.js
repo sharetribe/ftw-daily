@@ -36,6 +36,7 @@ const ListingHero = (props) => {
           'landscape-crop6x',
         ]}
       />
+      <div className={css.heroDarkener}/>
       <div className={css.heroTextContainer}>
         <h1 className={css.heroTitle}>{title}</h1>
         <h2 className={css.heroDescription}>{get(listing, 'attributes.publicData.heroSubtitle')}</h2>
