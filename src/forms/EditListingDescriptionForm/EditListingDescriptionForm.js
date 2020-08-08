@@ -214,7 +214,7 @@ const EditListingDescriptionFormComponent = (props) => (
                   type="textarea"
                   label={heroMessage}
                   placeholder={heroMessagePlaceholder}
-                  validate={composeValidators(required(descriptionRequiredMessage))}
+                  validate={required(intl.formatMessage({ id: 'GenericForm.required' }))}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -223,7 +223,7 @@ const EditListingDescriptionFormComponent = (props) => (
                   name="category"
                   categories={categories}
                   intl={intl}
-                  validate={composeValidators(required(descriptionRequiredMessage))}
+                  validate={required(intl.formatMessage({ id: 'GenericForm.required' }))}
                 />
               </Grid>
             </Grid>
@@ -298,7 +298,7 @@ const EditListingDescriptionFormComponent = (props) => (
                   className={css.retreat}
                   label={retreatMessage}
                   placeholder="Choose yes/no"
-                  validate={composeValidators(required(descriptionRequiredMessage))}
+                  validate={required(intl.formatMessage({ id: 'GenericForm.required' }))}
                 />
               </Grid>
               <Grid item xs={12}>

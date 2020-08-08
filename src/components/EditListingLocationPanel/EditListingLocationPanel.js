@@ -1,47 +1,48 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { FormattedMessage } from '../../util/reactIntl';
-import { LISTING_STATE_DRAFT } from '../../util/types';
-import { ensureOwnListing } from '../../util/data';
-import { ListingLink } from '../../components';
-import { EditListingLocationForm } from '../../forms';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import { FormattedMessage } from '../../util/reactIntl'
+import { LISTING_STATE_DRAFT } from '../../util/types'
+import { ensureOwnListing } from '../../util/data'
+import { ListingLink } from '..'
+import { EditListingLocationForm } from '../../forms'
 
-import css from './EditListingLocationPanel.css';
+import css from './EditListingLocationPanel.css'
 
 class EditListingLocationPanel extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.getInitialValues = this.getInitialValues.bind(this);
+    this.getInitialValues = this.getInitialValues.bind(this)
 
     this.state = {
       initialValues: this.getInitialValues(),
-    };
+    }
   }
 
   getInitialValues() {
-    const { listing } = this.props;
-    const currentListing = ensureOwnListing(listing);
-    const { geolocation, publicData } = currentListing.attributes;
+    const { listing } = this.props
+    const currentListing = ensureOwnListing(listing)
+    const { geolocation, publicData } = currentListing.attributes
 
     // Only render current search if full place object is available in the URL params
     // TODO bounds are missing - those need to be queried directly from Google Places
-    const locationFieldsPresent =
-      publicData && publicData.location && publicData.location.address && geolocation;
-    const location = publicData && publicData.location ? publicData.location : {};
-    const { address, building, video } = location;
+    const locationFieldsPresent
+      = publicData && publicData.location && publicData.location.address && geolocation
+    const location = publicData && publicData.location ? publicData.location : {}
+    const { address, building, city, country } = location
 
     return {
       building,
       location: locationFieldsPresent
         ? {
-            search: address,
-            selectedPlace: { address, origin: geolocation },
-          }
+          search: address,
+          selectedPlace: { address, origin: geolocation },
+        }
         : null,
-      video
-    };
+      city,
+      country
+    }
   }
 
   render() {
@@ -57,13 +58,13 @@ class EditListingLocationPanel extends Component {
       panelUpdated,
       updateInProgress,
       errors,
-    } = this.props;
+    } = this.props
 
-    const classes = classNames(rootClassName || css.root, className);
-    const currentListing = ensureOwnListing(listing);
+    const classes = classNames(rootClassName || css.root, className)
+    const currentListing = ensureOwnListing(listing)
 
-    const isPublished =
-      currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
+    const isPublished
+      = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT
     const panelTitle = isPublished ? (
       <FormattedMessage
         id="EditListingLocationPanel.title"
@@ -71,7 +72,7 @@ class EditListingLocationPanel extends Component {
       />
     ) : (
       <FormattedMessage id="EditListingLocationPanel.createListingTitle" />
-    );
+    )
 
     return (
       <div className={classes}>
@@ -79,27 +80,36 @@ class EditListingLocationPanel extends Component {
         <EditListingLocationForm
           className={css.form}
           initialValues={this.state.initialValues}
-          onSubmit={values => {
-            const { building = '', location, video } = values;
+          onSubmit={(values) => {
+            console.log(values)
+            const {
+              building = '', location, city, country
+            } = values
             const {
               selectedPlace: { address, origin },
-            } = location;
+            } = location
 
             const updateValues = {
               geolocation: origin,
               publicData: {
-                location: { address, building, video },
-              },
-            };
+                location: {
+                  address,
+                  building,
+                  city,
+                  country
+                },
+              }
+            }
             this.setState({
               initialValues: {
                 building,
                 location: { search: address, selectedPlace: { address, origin } },
-                video
+                city,
+                country
               },
-            });
+            })
 
-            onSubmit(updateValues);
+            onSubmit(updateValues)
           }}
           onChange={onChange}
           saveActionMsg={submitButtonText}
@@ -110,17 +120,19 @@ class EditListingLocationPanel extends Component {
           fetchErrors={errors}
         />
       </div>
-    );
+    )
   }
 }
 
-const { func, object, string, bool } = PropTypes;
+const {
+  func, object, string, bool
+} = PropTypes
 
 EditListingLocationPanel.defaultProps = {
   className: null,
   rootClassName: null,
   listing: null,
-};
+}
 
 EditListingLocationPanel.propTypes = {
   className: string,
@@ -137,6 +149,6 @@ EditListingLocationPanel.propTypes = {
   panelUpdated: bool.isRequired,
   updateInProgress: bool.isRequired,
   errors: object.isRequired,
-};
+}
 
-export default EditListingLocationPanel;
+export default EditListingLocationPanel
