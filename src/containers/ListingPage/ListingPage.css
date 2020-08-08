@@ -695,7 +695,6 @@
   padding: 15px;
   display: flex;
   height: 70px;
-  margin-top: 20px;
   margin-bottom: 20px;
   width: 100%;
   align-items: center;
@@ -708,6 +707,7 @@
   justify-content: flex-end;
   align-items: center;
   height: 50px;
+  margin-top: 20px;
   width: 100%;
 }
 
@@ -716,7 +716,7 @@
   height: 10px;
   border-radius: 50%;
   margin-left: 4px;
-  background-color: var(--marketplaceColor);
+  background-color: var(--marketplaceColorDark);
 }
 
 .surfDifficultyIndicatorContainer {
@@ -749,6 +749,23 @@
   height: 100%;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: auto;
+}
+
+.endButtonDetailsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.poweredByMSWContainer {
+  font-size: 8px;
+}
+
+.mswIcon {
+  height: 15px;
+  margin-left: 5px;
 }
 
 .orderIconContainer {

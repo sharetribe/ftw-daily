@@ -10,14 +10,15 @@ import keys from 'lodash/keys'
 import get from 'lodash/get'
 import includes from 'lodash/includes'
 import find from 'lodash/find'
+import { IconGuaranteeBadge } from '../../assets/IconGuaranteeBadge'
 import BookingProductRadioButton
   from '../../components/BookingProductRadioButton/BookingProductRadioButton'
-import { getPrice } from '../../util/price';
+import { getPrice } from '../../util/price'
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl'
 import {
   required, bookingDatesRequired, composeValidators
 } from '../../util/validators'
-import { START_DATE, END_DATE, nightsBetween } from '../../util/dates';
+import { START_DATE, END_DATE, nightsBetween } from '../../util/dates'
 import { propTypes } from '../../util/types'
 import {
   Form, PrimaryButton, FieldDateRangeInput, FieldSelect
@@ -228,15 +229,20 @@ export class BookingDatesFormComponent extends Component {
                   <FormattedMessage id="BookingDatesForm.requestToBook" />
                 </PrimaryButton>
               </div>
-              <p className={css.smallPrint}>
-                <FormattedMessage
-                  id={
-                    isOwnListing
-                      ? 'BookingDatesForm.ownListing'
-                      : 'BookingDatesForm.youWontBeChargedInfo'
-                  }
-                />
-              </p>
+              <div className={css.guaranteeContainer}>
+                <span>
+                  <IconGuaranteeBadge className={css.guaranteeIconBadge}/>
+                </span>
+                <span className={css.smallPrint}>
+                  <FormattedMessage
+                    id={
+                      isOwnListing
+                        ? 'BookingDatesForm.ownListing'
+                        : 'BookingDatesForm.youWontBeChargedInfo'
+                    }
+                  />
+                </span>
+              </div>
             </Form>
           )
         }}

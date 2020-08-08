@@ -60,9 +60,10 @@
 .smallPrint {
   @apply --marketplaceTinyFontStyles;
   color: var(--matterColorAnti);
-  text-align: center;
-  margin: auto 24px 20px 24px;
+  text-align: left;
+  margin: auto 24px auto 24px;
   flex-shrink: 0;
+  width: 60%;
 
   @media (--viewportMedium) {
     margin-top: auto;
@@ -100,4 +101,17 @@
   .bookingProductListWrapper {
     margin: 0 24px 0 24px;
   }
+}
+
+.guaranteeContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.guaranteeIconBadge {
+  height: 25px;
+  width: 25px;
+  opacity: 0.6;
 }
