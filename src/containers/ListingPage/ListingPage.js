@@ -362,7 +362,9 @@ export class ListingPageComponent extends Component {
     const twitterImages = listingImages(currentListing, 'twitter')
     const schemaImages = JSON.stringify(facebookImages.map((img) => img.url))
     const { siteTitle } = config
-    const schemaTitle = intl.formatMessage(
+    const schemaTitle = `${title} - Coliving Coworking Spaces for Remote Working Digital Nomads near Surf`
+
+    intl.formatMessage(
       { id: 'ListingPage.schemaTitle' },
       { title, price: formattedPrice, siteTitle }
     )

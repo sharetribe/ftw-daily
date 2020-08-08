@@ -433,9 +433,6 @@
   color: var(--matterColor);
 }
 
-.contactWrapper {
-  display: none;
-}
 @media (--viewportMedium) {
   .contactWrapper {
     display: inline;
@@ -801,7 +798,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  padding: 50px 20px 20px 20px;
+  padding: 100px 20px 20px 20px;
   top: 0;
   height: 100%;
   width: 100%;

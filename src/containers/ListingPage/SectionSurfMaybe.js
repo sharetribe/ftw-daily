@@ -65,7 +65,7 @@ const SectionSurfMaybe = (props) => {
               <span className={css.orderIconNumber}>{ss.order}</span>
             </div>
             <span className={css.poweredByMSWContainer}>
-              powered by
+              <span>powered by</span>
               <img className={css.mswIcon} src={mswIcon} alt=""/>
             </span>
           </div>
