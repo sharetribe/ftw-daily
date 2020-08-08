@@ -126,7 +126,9 @@ const BookingProductRadioButtonComponent = (props) => {
         <div className={css.buttonContainer}>
           <div className={css.radioButtonWrapper}>
             <div className={css.bookingSelectionTopRow}>
-              <img src={buildThumbnail()} alt="" className={css.checkboxProductThumbnail}/>
+              {
+                buildThumbnail() ? <img src={buildThumbnail()} alt="" className={css.checkboxProductThumbnail}/> : null
+              }
               <div className={css.roomDetailsListWrapper}>
                 <span className={css.textRoot}>{label}</span>
                 <ul className={css.roomDetailsList}>
