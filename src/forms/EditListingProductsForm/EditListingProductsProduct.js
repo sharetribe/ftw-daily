@@ -126,11 +126,11 @@ const EditListingProductsProduct = (props) => {
                 options={[
                   {
                     value: 'private',
-                    label: 'Private'
+                    label: 'Private Room'
                   },
                   {
                     value: 'shared',
-                    label: 'Shared'
+                    label: 'Shared Room'
                   }
                 ]}
               />

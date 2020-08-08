@@ -3,18 +3,21 @@ import {
   string, object, bool, arrayOf
 } from 'prop-types'
 import { compose } from 'redux'
-import { Field, Form as FinalForm, FormSpy } from 'react-final-form'
+import { Form as FinalForm } from 'react-final-form'
 import classNames from 'classnames'
 import moment from 'moment'
 import keys from 'lodash/keys'
 import get from 'lodash/get'
+import includes from 'lodash/includes'
+import find from 'lodash/find'
 import BookingProductRadioButton
   from '../../components/BookingProductRadioButton/BookingProductRadioButton'
+import { getPrice } from '../../util/price';
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl'
 import {
-  required, bookingDatesRequired, bookingProductRequired, composeValidators
+  required, bookingDatesRequired, composeValidators
 } from '../../util/validators'
-import { START_DATE, END_DATE } from '../../util/dates'
+import { START_DATE, END_DATE, nightsBetween } from '../../util/dates';
 import { propTypes } from '../../util/types'
 import {
   Form, PrimaryButton, FieldDateRangeInput, FieldSelect
@@ -80,10 +83,7 @@ export class BookingDatesFormComponent extends Component {
             values,
             timeSlots,
             fetchTimeSlotsError,
-            onChange
           } = fieldRenderProps
-
-          console.log(fieldRenderProps)
 
           const { publicData = {} } = listing.attributes
 
@@ -97,6 +97,7 @@ export class BookingDatesFormComponent extends Component {
             : listing.attributes.price
 
           const { startDate, endDate } = values && values.bookingDates ? values.bookingDates : {}
+          const numberOfDaysSelected = nightsBetween(startDate, endDate) || 1
 
           // This is the place to collect breakdown estimation data. See the
           // EstimatedBreakdownMaybe component to change the calculations
@@ -112,6 +113,7 @@ export class BookingDatesFormComponent extends Component {
                 // NOTE: If unitType is `line-item/units`, a new picker
                 // for the quantity should be added to the form.
                 quantity: 1,
+                discount: get(getPrice(publicData.products.find((p) => p.id === productId), numberOfDaysSelected), 'discount', null)
               }
               : null
 
@@ -202,10 +204,13 @@ export class BookingDatesFormComponent extends Component {
                           <BookingProductRadioButton
                             id={prod.id}
                             name="bookingProduct"
+                            intl={intl}
                             label={prod.type}
                             value={prod.id}
                             showAsRequired={true}
                             product={prod}
+                            images={listing.images.filter((img) => includes(keys(prod.photos), img.id.uuid))}
+                            price={getPrice(prod, numberOfDaysSelected).price}
                             useMobileMargins
                             validate={required(productRequired)}
                             fieldMeta={fieldRenderProps}
