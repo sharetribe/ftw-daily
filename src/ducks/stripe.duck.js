@@ -243,20 +243,20 @@ export const retrievePaymentIntent = params => dispatch => {
 export const handleCardPayment = params => dispatch => {
   // It's required to use the same instance of Stripe as where the card has been created
   // so that's why Stripe needs to be passed here and we can't create a new instance.
-  const { stripe, card, paymentParams, stripePaymentIntentClientSecret } = params;
+  const { stripe, paymentParams, stripePaymentIntentClientSecret } = params;
   const transactionId = params.orderId;
 
   dispatch(handleCardPaymentRequest());
 
-  // When using default payment method, card (aka Stripe Element) is not needed.
-  // We also set paymentParams.payment_method already in Flex API side,
-  // when request-payment transition is made - so there's no need for paymentParams
-  const args = card
-    ? [stripePaymentIntentClientSecret, card, paymentParams]
+  // When using default payment method paymentParams.payment_method is
+  // already set Flex API side, when request-payment transition is made
+  // so there's no need for paymentParams
+  const args = paymentParams
+    ? [stripePaymentIntentClientSecret, paymentParams]
     : [stripePaymentIntentClientSecret];
 
   return stripe
-    .handleCardPayment(...args)
+    .confirmCardPayment(...args)
     .then(response => {
       if (response.error) {
         return Promise.reject(response);

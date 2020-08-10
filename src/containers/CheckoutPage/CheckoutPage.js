@@ -288,8 +288,9 @@ export class CheckoutPageComponent extends Component {
       const paymentParams =
         selectedPaymentFlow !== USE_SAVED_CARD
           ? {
-              payment_method_data: {
+              payment_method: {
                 billing_details: billingDetails,
+                card: card,
               },
             }
           : {};
@@ -366,7 +367,7 @@ export class CheckoutPageComponent extends Component {
 
     // Note: optionalPaymentParams contains Stripe paymentMethod,
     // but that can also be passed on Step 2
-    // stripe.handleCardPayment(stripe, { payment_method: stripePaymentMethodId })
+    // stripe.confirmCardPayment(stripe, { payment_method: stripePaymentMethodId })
     const optionalPaymentParams =
       selectedPaymentFlow === USE_SAVED_CARD && hasDefaultPaymentMethod
         ? { paymentMethod: stripePaymentMethodId }
