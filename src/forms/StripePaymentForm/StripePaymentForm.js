@@ -424,7 +424,7 @@ class StripePaymentForm extends Component {
                     <FormattedMessage id="StripePaymentForm.paymentHeading" />
                   </h3>
                   <span className={css.poweredByStripeContainer}>
-                    <span>powered by</span>
+                    <span>secured by</span>
                     <IconStripe className={css.stripeIcon}/>
                   </span>
                 </div>
