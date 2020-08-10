@@ -38,9 +38,9 @@
     "prop-types": "^15.7.2",
     "query-string": "^6.13.1",
     "raf": "^3.4.0",
-    "react": "^16.9.0",
+    "react": "^16.13.1",
     "react-dates": "^21.3.1",
-    "react-dom": "^16.9.0",
+    "react-dom": "^16.13.1",
     "react-final-form": "^6.5.1",
     "react-final-form-arrays": "^3.1.2",
     "react-google-maps": "^9.4.5",
@@ -73,7 +73,7 @@
   "resolutions": {
     "react-dates/lodash": "^4.17.19",
     "react-google-maps/lodash": "^4.17.19",
-    "react-test-renderer": "^16.9.0",
+    "react-test-renderer": "^16.13.1",
     "handlebars": "^4.5.3",
     "serialize-javascript": "^2.1.1"
   },
