@@ -8,6 +8,7 @@ import { withRouter } from 'react-router-dom'
 import debounce from 'lodash/debounce'
 import unionWith from 'lodash/unionWith'
 import classNames from 'classnames'
+import Footer from '../../components/Footer/Footer';
 import { injectIntl, intlShape } from '../../util/reactIntl'
 import config from '../../config'
 import routeConfiguration from '../../routeConfiguration'

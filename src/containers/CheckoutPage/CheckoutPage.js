@@ -6,6 +6,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import classNames from 'classnames'
+import { IconOnePercent } from '../../assets/IconOnePercent'
 import { getPrice } from '../../util/price'
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl'
 import config from '../../config'
@@ -879,25 +880,29 @@ export class CheckoutPageComponent extends Component {
               ) : null}
             </section>
           </div>
-
-          <div className={css.detailsContainerDesktop}>
-            <div className={css.detailsAspectWrapper}>
-              <ResponsiveImage
-                rootClassName={css.rootForImage}
-                alt={listingTitle}
-                image={firstImage}
-                variants={['landscape-crop', 'landscape-crop2x']}
-              />
+          <div>
+            <div className={css.detailsContainerDesktop}>
+              <div className={css.detailsAspectWrapper}>
+                <ResponsiveImage
+                  rootClassName={css.rootForImage}
+                  alt={listingTitle}
+                  image={firstImage}
+                  variants={['landscape-crop', 'landscape-crop2x']}
+                />
+              </div>
+              <div className={css.avatarWrapper}>
+                <AvatarMedium user={currentAuthor} disableProfileLink />
+              </div>
+              <div className={css.detailsHeadings}>
+                <h2 className={css.detailsTitle}>{listingTitle}</h2>
+                <p className={css.detailsSubtitle}>{detailsSubTitle}</p>
+              </div>
+              {speculateTransactionErrorMessage}
+              {breakdown}
             </div>
-            <div className={css.avatarWrapper}>
-              <AvatarMedium user={currentAuthor} disableProfileLink />
+            <div className={css.onePercentLogoContainer}>
+              <IconOnePercent className={css.onePercentLogo}/>
             </div>
-            <div className={css.detailsHeadings}>
-              <h2 className={css.detailsTitle}>{listingTitle}</h2>
-              <p className={css.detailsSubtitle}>{detailsSubTitle}</p>
-            </div>
-            {speculateTransactionErrorMessage}
-            {breakdown}
           </div>
         </div>
       </Page>

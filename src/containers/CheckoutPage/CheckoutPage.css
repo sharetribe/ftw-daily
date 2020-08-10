@@ -364,4 +364,22 @@
   }
 }
 
+.onePercentLogoContainer {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.onePercentLogo {
+  width: 75px;
+  height: 50px;
+}
+@media (--viewportMedium) {
+  .onePercentLogo {
+    width: 100px;
+  }
+}
+
 /*# sourceMappingURL=CheckoutPage.css.map */

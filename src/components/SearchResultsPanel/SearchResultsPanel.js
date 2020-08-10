@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { propTypes } from '../../util/types'
 import { ListingCard, PaginationLinks } from '..'
+import Footer from '../Footer/Footer';
 import css from './SearchResultsPanel.css'
 
 const SearchResultsPanel = (props) => {
@@ -46,6 +47,7 @@ const SearchResultsPanel = (props) => {
         {props.children}
       </div>
       {paginationLinks}
+      <Footer />
     </div>
   )
 }
