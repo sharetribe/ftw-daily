@@ -93,6 +93,7 @@
   "CheckoutPage.initiateOrderError": "Payment request failed. Please go back to {listingLink} and try again. If the error persists, try refreshing the page or contacting the marketplace administrator.",
   "CheckoutPage.initiateOrderStripeError": "The payment processor gave the following errors: {stripeErrors}",
   "CheckoutPage.listingNotFoundError": "Unfortunately, the listing is no longer available.",
+  "CheckoutPage.loadingData": "Loading data…",
   "CheckoutPage.paymentExpiredMessage": "Payment was not completed in 15 minutes. Please go back to {listingLink} and try again.",
   "CheckoutPage.paymentInfo": "You'll only be charged if your request is accepted by the provider.",
   "CheckoutPage.perDay": "per day",
