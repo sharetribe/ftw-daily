@@ -6,7 +6,7 @@
 
 .main-calendar {
 	max-width: 1224px;
-	min-width: 490px;
+	min-width: 375px;
 	margin: auto;
 	display: flex;
 }
