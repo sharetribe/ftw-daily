@@ -14,6 +14,7 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [change] Some dependency updates [#1337](https://github.com/sharetribe/ftw-daily/pull/1337)
 - [fix] Use Stripe's `confirmCardPayment` function instead of deprecated `handleCardPayment` to
   confirm PaymentIntent. In addition to the rename, the arguments passed to `handleCardPayment` are
   sligthly different. Otherwise, these changes should not affect the behavior of the function.
