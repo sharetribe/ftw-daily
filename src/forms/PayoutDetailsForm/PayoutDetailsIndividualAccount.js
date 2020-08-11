@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { bool, object, shape } from 'prop-types';
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
@@ -13,11 +13,9 @@ import PayoutDetailsBankDetails from './PayoutDetailsBankDetails';
 import PayoutDetailsPersonalDetails from './PayoutDetailsPersonalDetails';
 import PayoutDetailsBusinessProfile from './PayoutDetailsBusinessProfile';
 import css from './PayoutDetailsForm.css';
-import { FieldRadioButton } from '../../components';
 
 const PayoutDetailsIndividualAccountComponent = props => {
   const { fieldRenderProps, currentUserId, intl, appConfig } = props;
-  const [stripeEnabled, setStripeFormVisibility] = useState(false)
   const { disabled, form, values } = fieldRenderProps;
   const { country } = values;
 
@@ -93,24 +91,7 @@ const PayoutDetailsIndividualAccountComponent = props => {
           />
         </div>
       ) : null}
-      <p>In order to receive payments, you must specify your bank card details.</p> 
-      <div className={css.radioButtonRow}>
-              <FieldRadioButton
-                id="bankAccountTokenStripeDisabled"
-                name={"bankAccountTokenStripeEnabled"}
-                label='Later'
-                value='Later'
-                onClick={() => setStripeFormVisibility(false)}
-              />
-              <FieldRadioButton
-                id="bankAccountTokenStripeEnabled"
-                name={"bankAccountTokenStripeEnabled"}
-                label='Enable now'
-                value='Enable now'
-                onClick={() => setStripeFormVisibility(true)}
-              />
-        </div>
-        {stripeEnabled && <PayoutDetailsBankDetails country={country} stripeEnabled={stripeEnabled} disabled={disabled} fieldId="individual" />}
+      <PayoutDetailsBankDetails country={country} disabled={disabled} fieldId="individual" />
     </React.Fragment>
   );
 };
