@@ -36,6 +36,7 @@ function  SkippingBlock  (props)  {
   const [hasSeenMissingInformationReminder, setHasSeenMissingInformationReminder]= useState(null)
   useEffect( () => {
     onRequestStripeAccount()
+    onStripeAccountShowWindow(true)
     }, [])
   return (
     <>
@@ -52,7 +53,7 @@ function  SkippingBlock  (props)  {
       closeButtonMessage={closeButtonMessage}
     >
       <div className={css.modalBody}>
-        <h1 >
+        <h1 className={css.modalHeader}>
           <FormattedMessage id="EditListingPhotosPanel.payoutModalTitleOneMoreThing" />
           <br />
           <FormattedMessage id="EditListingPhotosPanel.methodGettingMoney" />
