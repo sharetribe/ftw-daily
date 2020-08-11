@@ -177,7 +177,7 @@ const initialState = {
  * Payment form that asks for credit card info using Stripe Elements.
  *
  * When the card is valid and the user submits the form, a request is
- * sent to the Stripe API to handle payment. `stripe.handleCardPayment`
+ * sent to the Stripe API to handle payment. `stripe.confirmCardPayment`
  * may ask more details from cardholder if 3D security steps are needed.
  *
  * See: https://stripe.com/docs/payments/payment-intents
@@ -321,7 +321,7 @@ class StripePaymentForm extends Component {
       showInitialMessageInput,
       intl,
       initiateOrderError,
-      handleCardPaymentError,
+      confirmCardPaymentError,
       confirmPaymentError,
       invalid,
       handleSubmit,
@@ -338,22 +338,22 @@ class StripePaymentForm extends Component {
     const onetimePaymentNeedsAttention = !billingDetailsKnown && !this.state.cardValueValid;
     const submitDisabled = invalid || onetimePaymentNeedsAttention || submitInProgress;
     const hasCardError = this.state.error && !submitInProgress;
-    const hasPaymentErrors = handleCardPaymentError || confirmPaymentError;
+    const hasPaymentErrors = confirmCardPaymentError || confirmPaymentError;
     const classes = classNames(rootClassName || css.root, className);
     const cardClasses = classNames(css.card, {
       [css.cardSuccess]: this.state.cardValueValid,
       [css.cardError]: hasCardError,
     });
 
-    // TODO: handleCardPayment can create all kinds of errors.
+    // TODO: confirmCardPayment can create all kinds of errors.
     // Currently, we provide translation support for one:
     // https://stripe.com/docs/error-codes
     const piAuthenticationFailure = 'payment_intent_authentication_failure';
     const paymentErrorMessage =
-      handleCardPaymentError && handleCardPaymentError.code === piAuthenticationFailure
-        ? intl.formatMessage({ id: 'StripePaymentForm.handleCardPaymentError' })
-        : handleCardPaymentError
-        ? handleCardPaymentError.message
+      confirmCardPaymentError && confirmCardPaymentError.code === piAuthenticationFailure
+        ? intl.formatMessage({ id: 'StripePaymentForm.confirmCardPaymentError' })
+        : confirmCardPaymentError
+        ? confirmCardPaymentError.message
         : confirmPaymentError
         ? intl.formatMessage({ id: 'StripePaymentForm.confirmPaymentError' })
         : intl.formatMessage({ id: 'StripePaymentForm.genericError' });
@@ -513,7 +513,7 @@ StripePaymentForm.defaultProps = {
   hasHandledCardPayment: false,
   defaultPaymentMethod: null,
   initiateOrderError: null,
-  handleCardPaymentError: null,
+  confirmCardPaymentError: null,
   confirmPaymentError: null,
 };
 
@@ -523,7 +523,7 @@ StripePaymentForm.propTypes = {
   inProgress: bool,
   loadingData: bool,
   initiateOrderError: object,
-  handleCardPaymentError: object,
+  confirmCardPaymentError: object,
   confirmPaymentError: object,
   formId: string.isRequired,
   intl: intlShape.isRequired,
