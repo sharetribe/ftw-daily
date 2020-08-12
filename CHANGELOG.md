@@ -15,6 +15,7 @@ way to update this template, but currently, we follow a pattern:
 ## Upcoming version 2020-XX-XX
 
 - [fix] remove typo [#1343](https://github.com/sharetribe/ftw-daily/pull/1343)
+- [change] Request custom image variants for avatar [#1342](https://github.com/sharetribe/ftw-daily/pull/1342)
 - [change] Some dependency updates [#1337](https://github.com/sharetribe/ftw-daily/pull/1337)
 - [fix] Use Stripe's `confirmCardPayment` function instead of deprecated `handleCardPayment` to
   confirm PaymentIntent. In addition to the rename, the arguments passed to `handleCardPayment` are
