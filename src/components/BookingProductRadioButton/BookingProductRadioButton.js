@@ -151,15 +151,18 @@ const BookingProductRadioButtonComponent = (props) => {
             </div>
             <div className={css.bookingPanelPricingRow}>
               <div className={css.totalPrice}>
-                <span>
-                  {formatMoney(intl, new Money(price, product.price.currency))}
-                </span>
+                {
+                  price
+                    ? <span>
+                      {formatMoney(intl, new Money(price, product.price.currency))}
+                    </span> : null
+                }
               </div>
               <IconRadioButton checked={fieldMeta.values.bookingProduct === product.id}/>
             </div>
-            {/*<div className={css.discountChipContainer}>*/}
-            {/*  <Chip size="small" label={'10% Weekly Discount'} />*/}
-            {/*</div>*/}
+            {/* <div className={css.discountChipContainer}> */}
+            {/*  <Chip size="small" label={'10% Weekly Discount'} /> */}
+            {/* </div> */}
           </div>
         </div>
       </label>

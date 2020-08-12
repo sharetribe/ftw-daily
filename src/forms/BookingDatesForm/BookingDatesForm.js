@@ -211,7 +211,7 @@ export class BookingDatesFormComponent extends Component {
                             showAsRequired={true}
                             product={prod}
                             images={listing.images.filter((img) => includes(keys(prod.photos), img.id.uuid))}
-                            price={getPrice(prod, numberOfDaysSelected).price}
+                            price={startDate && endDate ? getPrice(prod, numberOfDaysSelected).price : null}
                             useMobileMargins
                             validate={required(productRequired)}
                             fieldMeta={fieldRenderProps}
