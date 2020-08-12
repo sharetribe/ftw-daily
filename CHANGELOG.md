@@ -14,7 +14,10 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
-## [v6.1.2] 2020-08-12
+## [v6.2.0] 2020-08-12
+
+This change set was originally released as a patch update 6.1.2 but after
+reconsideration it's released as a minor update 6.2.0.
 
 - [fix] remove typo [#1343](https://github.com/sharetribe/ftw-daily/pull/1343)
 - [change] Request custom image variants for avatar [#1342](https://github.com/sharetribe/ftw-daily/pull/1342)
@@ -24,7 +27,7 @@ way to update this template, but currently, we follow a pattern:
   sligthly different. Otherwise, these changes should not affect the behavior of the function.
   [#1339](https://github.com/sharetribe/ftw-daily/pull/1339)
 
-[v6.1.2]: https://github.com/sharetribe/flex-template-web/compare/v6.1.1...v6.1.2
+[v6.2.0]: https://github.com/sharetribe/flex-template-web/compare/v6.1.1...v6.2.0
 
 ## [v6.1.1] 2020-07-21
 
