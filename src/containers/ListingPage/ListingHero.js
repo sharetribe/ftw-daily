@@ -1,5 +1,6 @@
 import React from 'react'
 import get from 'lodash/get'
+import { FormattedMessage } from '../../util/reactIntl'
 import { ResponsiveImage } from '../../components'
 import ActionBarMaybe from './ActionBarMaybe'
 
@@ -10,7 +11,8 @@ const ListingHero = (props) => {
     title,
     listing,
     isOwnListing,
-    editParams
+    editParams,
+    handleViewPhotosClick
   } = props
 
   const hasImages = listing.images && listing.images.length > 0
@@ -20,6 +22,15 @@ const ListingHero = (props) => {
     <div onClick={(e) => e.stopPropagation()}>
       <ActionBarMaybe isOwnListing={isOwnListing} listing={listing} editParams={editParams} />
     </div>
+  ) : null
+
+  const viewPhotosButton = hasImages ? (
+    <button className={css.viewPhotos} onClick={handleViewPhotosClick}>
+      <FormattedMessage
+        id="ListingPage.viewImagesButton"
+        values={{ count: listing.images.length }}
+      />
+    </button>
   ) : null
 
   return (
@@ -41,6 +52,7 @@ const ListingHero = (props) => {
         <h1 className={css.heroTitle}>{title}</h1>
         <h2 className={css.heroDescription}>{get(listing, 'attributes.publicData.heroSubtitle')}</h2>
       </div>
+      {viewPhotosButton}
     </div>
   )
 }

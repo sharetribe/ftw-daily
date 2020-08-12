@@ -114,7 +114,7 @@ export class BookingDatesFormComponent extends Component {
                 // NOTE: If unitType is `line-item/units`, a new picker
                 // for the quantity should be added to the form.
                 quantity: 1,
-                discount: get(getPrice(publicData.products.find((p) => p.id === productId), numberOfDaysSelected), 'discount', null)
+                discount: get(getPrice((publicData.products || []).find((p) => p.id === productId), numberOfDaysSelected), 'discount', null)
               }
               : null
 
