@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+## [v6.1.2] 2020-08-12
+
 - [fix] remove typo [#1343](https://github.com/sharetribe/ftw-daily/pull/1343)
 - [change] Request custom image variants for avatar [#1342](https://github.com/sharetribe/ftw-daily/pull/1342)
 - [change] Some dependency updates [#1337](https://github.com/sharetribe/ftw-daily/pull/1337)
@@ -21,6 +23,8 @@ way to update this template, but currently, we follow a pattern:
   confirm PaymentIntent. In addition to the rename, the arguments passed to `handleCardPayment` are
   sligthly different. Otherwise, these changes should not affect the behavior of the function.
   [#1339](https://github.com/sharetribe/ftw-daily/pull/1339)
+
+[v6.1.2]: https://github.com/sharetribe/flex-template-web/compare/v6.1.1...v6.1.2
 
 ## [v6.1.1] 2020-07-21
 
