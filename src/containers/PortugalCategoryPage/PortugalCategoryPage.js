@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { StaticPage, TopbarContainer } from '../../containers';
-import { getListingsById } from '../../ducks/marketplaceData.duck';
-import { categoryListings } from './PortugalCategoryPage.duck';
+import React, { Component } from 'react'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import startCase from 'lodash/startCase'
+import { StaticPage, TopbarContainer } from '..'
+import { getListingsById } from '../../ducks/marketplaceData.duck'
+import { categoryListings } from './PortugalCategoryPage.duck'
 
 import {
   LayoutSingleColumn,
@@ -12,13 +13,13 @@ import {
   LayoutWrapperFooter,
   Footer,
   ListingCard
-} from '../../components';
+} from '../../components'
 
-import css from './PortugalCategoryPage.css';
-import image from './hero-img.jpg';
-import json from './PortugalCategoryPage.json';
+import css from './PortugalCategoryPage.css'
+import image from './hero-img.jpg'
+import json from './PortugalCategoryPage.json'
 
-const PORTUGAL_BOUNDS = [40.10246427,-6.189352,32.36728955,-31.367492];
+const PORTUGAL_BOUNDS = [40.10246427, -6.189352, 32.36728955, -31.367492]
 
 class PortugalCategoryPageComponent extends Component {
   render() {
@@ -28,11 +29,14 @@ class PortugalCategoryPageComponent extends Component {
       ingress,
       content,
       sidecontent,
-    } = json;
+    } = json
 
     const {
-      listings
-    } = this.props;
+      listings,
+      slug
+    } = this.props
+
+    const titledSlug = startCase(((slug || '').split('-')))
 
     return (
       <StaticPage
@@ -40,8 +44,8 @@ class PortugalCategoryPageComponent extends Component {
         schema={{
           '@context': 'http://schema.org',
           '@type': 'Portugal',
-          description: {description},
-          name: {title},
+          description: { description },
+          name: { title: titledSlug },
         }}
       >
         <LayoutSingleColumn>
@@ -50,7 +54,7 @@ class PortugalCategoryPageComponent extends Component {
           </LayoutWrapperTopbar>
 
           <LayoutWrapperMain className={css.staticPageWrapper}>
-            <h1 className={css.pageTitle}>{title}</h1>
+            <h1 className={css.pageTitle}>{titledSlug}</h1>
             <img className={css.coverImage} src={image} alt="{altText}" />
 
             <div className={css.contentWrapper}>
@@ -67,7 +71,7 @@ class PortugalCategoryPageComponent extends Component {
                   <div className={css.listingsContainer}>
                     <h2>Listings</h2>
                     <ul className={css.listings}>
-                      {listings.map(l => (
+                      {listings.map((l) => (
                         <li className={css.listing} key={l.id.uuid}>
                           <ListingCard listing={l} />
                         </li>
@@ -84,34 +88,33 @@ class PortugalCategoryPageComponent extends Component {
           </LayoutWrapperFooter>
         </LayoutSingleColumn>
       </StaticPage>
-    );
+    )
   }
-};
+}
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const {
     currentPageResultIds,
     pagination,
     categoryListingsError,
-  } = state.PortugalCategoryPage;
+  } = state.PortugalCategoryPage
 
-  const listings = getListingsById(state, currentPageResultIds);
+  const listings = getListingsById(state, currentPageResultIds)
 
   return {
     listings,
     pagination,
     categoryListingsError
-  };
+  }
 }
 
 const PortugalCategoryPage = compose(
   connect(
     mapStateToProps
   )
-)(PortugalCategoryPageComponent);
+)(PortugalCategoryPageComponent)
 
 PortugalCategoryPage.loadData = () => {
-
   return categoryListings({
     bounds: PORTUGAL_BOUNDS,
     page: 1,
@@ -120,7 +123,7 @@ PortugalCategoryPage.loadData = () => {
     'fields.listing': ['title', 'geolocation', 'price'],
     'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
     'limit.images': 1,
-  });
-};
+  })
+}
 
-export default PortugalCategoryPage;
+export default PortugalCategoryPage
