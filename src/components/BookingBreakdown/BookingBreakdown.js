@@ -14,6 +14,7 @@ import {
 
 import LineItemBookingPeriod from './LineItemBookingPeriod'
 import LineItemBasePriceMaybe from './LineItemBasePriceMaybe'
+import LineItemDiscountMaybe from './LineItemDiscountMaybe';
 import LineItemUnitsMaybe from './LineItemUnitsMaybe'
 import LineItemSubTotalMaybe from './LineItemSubTotalMaybe'
 import LineItemCustomerCommissionMaybe from './LineItemCustomerCommissionMaybe'
@@ -36,6 +37,8 @@ export const BookingBreakdownComponent = (props) => {
     booking,
     intl,
     dateType,
+    discount,
+    prediscountTx
   } = props
 
   const isCustomer = userRole === 'customer'
@@ -90,8 +93,15 @@ export const BookingBreakdownComponent = (props) => {
     <div className={classes}>
       <LineItemBookingPeriod booking={booking} unitType={unitType} dateType={dateType} />
       <LineItemUnitsMaybe transaction={transaction} unitType={unitType} />
-
-      <LineItemBasePriceMaybe transaction={transaction} unitType={unitType} intl={intl} />
+      {
+        prediscountTx ? <LineItemBasePriceMaybe transaction={prediscountTx} unitType={unitType} intl={intl} discount={discount}/> : null
+      }
+      {
+        prediscountTx ? <LineItemDiscountMaybe transaction={prediscountTx} unitType={unitType} intl={intl} discount={discount}/> : null
+      }
+      {
+        prediscountTx ? null : <LineItemBasePriceMaybe transaction={transaction} unitType={unitType} intl={intl}/>
+      }
       <LineItemUnknownItemsMaybe transaction={transaction} intl={intl} />
 
       <LineItemSubTotalMaybe

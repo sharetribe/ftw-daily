@@ -84,6 +84,7 @@
 }
 
 .radioButtonWrapper {
+  position: relative;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -129,6 +130,27 @@
 .iconRadioButton {
   height: 25px;
   width: 25px;
+}
+
+.totalPrice {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 24px;
+}
+
+.discountChipContainer {
+  margin-bottom: -25px;
+  font-weight: 300 !important;
+}
+
+.bookingPanelPricingRow {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: flex-end;
+  padding: 10px;
 }
 
 /*# sourceMappingURL=BookingProductRadioButton.css.map */

@@ -1,7 +1,9 @@
+import Chip from '@material-ui/core/Chip'
 import React from 'react'
 import { node, string } from 'prop-types'
 import classNames from 'classnames'
-import { Field, FormSpy } from 'react-final-form'
+import { Field } from 'react-final-form'
+import FaceIcon from '@material-ui/icons/Face'
 import get from 'lodash/get'
 import find from 'lodash/find'
 import {
@@ -147,10 +149,20 @@ const BookingProductRadioButtonComponent = (props) => {
                 </ul>
               </div>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'flex-end', paddingTop: 10 }}>
-              <div className={css.totalPrice}>{formatMoney(intl, new Money(price, product.price.currency))}</div>
+            <div className={css.bookingPanelPricingRow}>
+              <div className={css.totalPrice}>
+                {
+                  price
+                    ? <span>
+                      {formatMoney(intl, new Money(price, product.price.currency))}
+                    </span> : null
+                }
+              </div>
               <IconRadioButton checked={fieldMeta.values.bookingProduct === product.id}/>
             </div>
+            {/* <div className={css.discountChipContainer}> */}
+            {/*  <Chip size="small" label={'10% Weekly Discount'} /> */}
+            {/* </div> */}
           </div>
         </div>
       </label>

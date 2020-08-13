@@ -30,7 +30,7 @@ class SectionMapMaybe extends Component {
 
     const mapProps = config.maps.fuzzy.enabled
       ? { obfuscatedCenter: obfuscatedCoordinates(geolocation, cacheKey) }
-      : { address, center: geolocation }
+      : { address, center: geolocation, zoom: 2 }
     const map = <Map
       {...mapProps}
       useStaticMap={false}

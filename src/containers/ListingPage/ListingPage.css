@@ -153,23 +153,20 @@
 .viewPhotos {
   @apply --marketplaceTinyFontStyles;
   font-weight: var(--fontWeightMedium);
-  /* Position and dimensions */
   position: absolute;
   bottom: 19px;
   right: 24px;
   margin: 0;
-  padding: 6px 13px 8px 13px;
-  /* Colors */
-  background-color: var(--matterColorLight);
-  /* Borders */
-  border: none;
-  border-radius: var(--borderRadius);
+  padding: 8px 12px;
+  color: white;
+  border: solid 4px white;
+  border-radius: 4rem;
   cursor: pointer;
   transition: var(--transitionStyleButton);
 }
 .viewPhotos:hover {
-  background-color: var(--marketplaceColor);
-  color: var(--matterColorLight);
+  border-color: var(--marketplaceColorDark);
+  color: var(--marketplaceColorDark);
 }
 @media (--viewportMedium) {
   .viewPhotos {
@@ -791,6 +788,15 @@
   margin-bottom: 20px;
   min-height: 300px;
 }
+.heroContainer .viewPhotos {
+  display: none;
+}
+@media (--viewportMedium) {
+  .heroContainer .viewPhotos {
+    display: block;
+    bottom: 50px;
+  }
+}
 
 .heroTextContainer {
   position: absolute;
@@ -824,10 +830,17 @@
 }
 @media (--viewportMedium) {
   .heroTitle {
-    font-weight: 400;
-    font-size: 85px;
+    font-weight: 700;
+    font-size: 100px;
     line-height: 85px;
+    margin-bottom: 20px;
   }
+  .heroTitle > button {
+    left: 24px !important;
+  }
+}
+.heroTitle > button {
+  display: none !important;
 }
 
 .heroDescription {
@@ -839,7 +852,7 @@
 @media (--viewportMedium) {
   .heroDescription {
     top: 20px;
-    font-size: 24px;
+    font-size: 32px;
     text-align: center;
   }
 }
@@ -863,12 +876,23 @@
     right: auto;
     height: calc(0.41 * 100vw);
     width: 100%;
-    max-height: 50vh;
+    height: 89vh;
     object-fit: cover;
   }
   .heroImage:hover {
     transform: scale(1.005);
     box-shadow: var(--boxShadowListingCard);
+  }
+}
+
+.heroImageAllPicturesButton {
+  display: none;
+}
+@media (--viewportMedium) {
+  .heroImageAllPicturesButton {
+    top: 20px;
+    font-size: 32px;
+    text-align: center;
   }
 }
 
@@ -881,15 +905,16 @@
 
 .welcomeMessageContainer {
   padding: 0 20px 20px 20px;
-  margin-top: 20px;
+  margin-top: 60px;
   margin-bottom: 60px;
 }
 
 .welcomeMessage {
-  font-weight: 400;
+  font-weight: 600;
   font-style: italic;
-  text-align: center;
-  line-height: 30px;
+  text-align: left;
+  font-size: 28px;
+  line-height: 35px;
 }
 @media (--viewportMedium) {
   .welcomeMessage {
@@ -905,10 +930,9 @@
 }
 
 .welcomeMessageSigner {
-  font-size: 14px;
-  font-weight: 300;
-  text-align: right;
-  color: var(--marketplaceColorDark);
+  font-size: 18px;
+  font-weight: 400;
+  text-align: left;
 }
 
 /*# sourceMappingURL=ListingPage.css.map */

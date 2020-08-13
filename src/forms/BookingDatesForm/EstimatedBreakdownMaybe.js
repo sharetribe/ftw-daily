@@ -157,6 +157,8 @@ const EstimatedBreakdownMaybe = (props) => {
       userRole="customer"
       unitType={unitType}
       transaction={tx}
+      discount={discount && discount < 1 ? discount : null}
+      prediscountTx={discount && discount < 1 ? estimatedTransaction(unitType, startDate, endDate, unitPrice, quantity) : null}
       booking={tx.booking}
       dateType={DATE_TYPE_DATE}
     />

@@ -114,7 +114,7 @@ export class BookingDatesFormComponent extends Component {
                 // NOTE: If unitType is `line-item/units`, a new picker
                 // for the quantity should be added to the form.
                 quantity: 1,
-                discount: get(getPrice(publicData.products.find((p) => p.id === productId), numberOfDaysSelected), 'discount', null)
+                discount: get(getPrice((publicData.products || []).find((p) => p.id === productId), numberOfDaysSelected), 'discount', null)
               }
               : null
 
@@ -211,7 +211,7 @@ export class BookingDatesFormComponent extends Component {
                             showAsRequired={true}
                             product={prod}
                             images={listing.images.filter((img) => includes(keys(prod.photos), img.id.uuid))}
-                            price={getPrice(prod, numberOfDaysSelected).price}
+                            price={startDate && endDate ? getPrice(prod, numberOfDaysSelected).price : null}
                             useMobileMargins
                             validate={required(productRequired)}
                             fieldMeta={fieldRenderProps}

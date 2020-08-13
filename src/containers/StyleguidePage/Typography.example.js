@@ -176,7 +176,7 @@ const Fonts = () => {
         />
         <Font
           component={() => (
-            <h5>You will only be charged if your request is accepted by the provider.</h5>
+            <h5>You will only be charged if your request is accepted by the host.</h5>
           )}
           description="H5 / --marketplaceH5FontStyles: Can be used as a fine print text."
           styling={h5FontStyling}
