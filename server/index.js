@@ -69,7 +69,14 @@ app.use(log.requestHandler());
 
 // The helmet middleware sets various HTTP headers to improve security.
 // See: https://www.npmjs.com/package/helmet
-app.use(helmet());
+// Helmet 4 doesn't disable CSP by default so we need to do that explicitly.
+// If csp is enabled we will add that separately.
+
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 
 if (cspEnabled) {
   // When a CSP directive is violated, the browser posts a JSON body
@@ -84,8 +91,13 @@ if (cspEnabled) {
   // browser checks the policy and calls the report URL when the
   // policy is violated, but doesn't block any requests. In block
   // mode, the browser also blocks the requests.
+
+  // In Helmet 4,supplying functions as directive values is not supported.
+  // That's why we need to create own middleware function that calls the Helmet's middleware function
   const reportOnly = CSP === 'report';
-  app.use(csp(cspReportUrl, USING_SSL, reportOnly));
+  app.use((req, res, next) => {
+    csp(cspReportUrl, USING_SSL, reportOnly)(req, res, next);
+  });
 }
 
 // Redirect HTTP to HTTPS if USING_SSL is `true`.
