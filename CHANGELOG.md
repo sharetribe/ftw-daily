@@ -14,16 +14,20 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [change] Update Helmet to v4.0.0. Show warning if environment variable REACT_APP_CSP is not set or
+  if it's set to 'report' mode in production environmet. Set REACT_APP_CSP to 'report' mode by
+  default in `.env-template` file. [#1347](https://github.com/sharetribe/ftw-daily/pull/1347)
 - [change] In `StripeConnectAccountForm` show error message from Stripe if there is one when
   fetching account link. [#1346](https://github.com/sharetribe/ftw-daily/pull/1346)
 
 ## [v6.2.0] 2020-08-12
 
-This change set was originally released as a patch update 6.1.2 but after
-reconsideration it's released as a minor update 6.2.0.
+This change set was originally released as a patch update 6.1.2 but after reconsideration it's
+released as a minor update 6.2.0.
 
 - [fix] remove typo [#1343](https://github.com/sharetribe/ftw-daily/pull/1343)
-- [change] Request custom image variants for avatar [#1342](https://github.com/sharetribe/ftw-daily/pull/1342)
+- [change] Request custom image variants for avatar
+  [#1342](https://github.com/sharetribe/ftw-daily/pull/1342)
 - [change] Some dependency updates [#1337](https://github.com/sharetribe/ftw-daily/pull/1337)
 - [fix] Use Stripe's `confirmCardPayment` function instead of deprecated `handleCardPayment` to
   confirm PaymentIntent. In addition to the rename, the arguments passed to `handleCardPayment` are
