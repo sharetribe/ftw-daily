@@ -402,6 +402,7 @@ export class TransactionPanelComponent extends Component {
                 messagePlaceholder={sendMessagePlaceholder}
                 inProgress={sendMessageInProgress}
                 sendMessageError={sendMessageError}
+                isProvider={isProvider}
                 onFocus={this.onSendMessageFormFocus}
                 onBlur={this.onSendMessageFormBlur}
                 onSubmit={this.onMessageSubmit}

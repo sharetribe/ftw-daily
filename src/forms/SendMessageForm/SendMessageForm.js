@@ -64,6 +64,7 @@ class SendMessageFormComponent extends Component {
             handleSubmit,
             inProgress,
             sendMessageError,
+            isProvider,
             invalid,
             form,
             formId,
@@ -102,11 +103,15 @@ class SendMessageFormComponent extends Component {
                   <FormattedMessage id="SendMessageForm.sendMessage" />
                 </SecondaryButton>
               </div>
-              <div className={css.messageThroughSiteNoticeContainer}>
-                <small className={css.messageThroughSiteNoticeText}>
-                  Please conduct all bookings through the platform. If you need help or something isn't quite working with your listing that would allow guests to effectively book with you let us know so we can help give you a seamless and safe experience.
-                </small>
-              </div>
+              {
+                isProvider ?
+                  <div className={css.messageThroughSiteNoticeContainer}>
+                    <small>
+                      Please conduct all bookings through the platform. If you need help or something isn't quite working with your listing that would allow guests to effectively book with you let us know so we can help give you a seamless and safe experience.
+                    </small>
+                  </div>
+                  : null
+              }
             </Form>
           );
         }}
