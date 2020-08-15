@@ -21,6 +21,7 @@ import {
   Modal, NamedRedirect, Tabs, StripeConnectAccountStatusBox
 } from '..'
 import { StripeConnectAccountForm } from '../../forms'
+import { AlertDialog } from '../MModalDialog/MModalDialog'
 
 import EditListingWizardTab, {
   DESCRIPTION,
@@ -207,6 +208,7 @@ class EditListingWizard extends Component {
     this.state = {
       draftId: null,
       showPayoutDetails: false,
+      showWelcomeDialog: false,
     }
     this.handleCreateFlowTabScrolling = this.handleCreateFlowTabScrolling.bind(this)
     this.handlePublishListing = this.handlePublishListing.bind(this)
@@ -220,6 +222,12 @@ class EditListingWizard extends Component {
     if (stripeOnboardingReturnURL != null) {
       this.setState({ showPayoutDetails: true })
     }
+
+    setTimeout(() => {
+      if (this.isNewListingFlow()) {
+        this.setState({ showWelcomeDialog: true })
+      }
+    }, 2000)
   }
 
   handleCreateFlowTabScrolling(shouldScroll) {
@@ -264,6 +272,12 @@ class EditListingWizard extends Component {
     })
   }
 
+  isNewListingFlow = () => {
+    return [LISTING_PAGE_PARAM_TYPE_NEW, LISTING_PAGE_PARAM_TYPE_DRAFT].includes(
+      this.props.params.type
+    )
+  }
+
   render() {
     const {
       id,
@@ -290,9 +304,7 @@ class EditListingWizard extends Component {
       ...rest
     } = this.props
     const selectedTab = params.tab
-    const isNewListingFlow = [LISTING_PAGE_PARAM_TYPE_NEW, LISTING_PAGE_PARAM_TYPE_DRAFT].includes(
-      params.type
-    )
+    const isNewListingFlow = this.isNewListingFlow()
     const rootClasses = rootClassName || css.root
     const classes = classNames(rootClasses, className)
     const currentListing = ensureListing(listing)
@@ -369,6 +381,14 @@ class EditListingWizard extends Component {
 
     return (
       <div className={classes}>
+        <AlertDialog
+          title={'Hey there!'}
+          message={'This first section will take around 5 minutes to complete. Your listing will always be saved if you want to come back another time to finish. '
+          + '\n'
+          + 'If you need help or something isn\'t quite working with your listing that would allow guests to effectively book with you, let us know by sending a message through the chat button in the bottom right.'}
+          isOpen={this.state.showWelcomeDialog}
+          onClose={() => this.setState({ showWelcomeDialog: false })}
+        />
         <Tabs
           rootClassName={css.tabsContainer}
           navRootClassName={css.nav}
