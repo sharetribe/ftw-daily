@@ -2,6 +2,7 @@ import React from 'react';
 import { string, arrayOf, bool, func, number } from 'prop-types';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import dropWhile from 'lodash/dropWhile';
+import _ from 'lodash'
 import classNames from 'classnames';
 import { Avatar, InlineTextButton, ReviewRating, UserDisplayName } from '../../components';
 import { formatDate } from '../../util/dates';
@@ -33,6 +34,25 @@ import * as log from '../../util/log';
 
 import css from './ActivityFeed.css';
 
+const removeContactInfoFromMessageStrings = (message) => {
+  const emailRegex = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi;
+  const urlRegex = new RegExp('^(https?:\\/\\/)?'+ // protocol
+    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+    '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+    '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+    '(\\#[-a-z\\d_]*)?$','i')
+
+  const phoneNumberRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
+  const hiddenMessage = '[HIDDEN]'
+  return _.chain(message || '')
+    .replace(emailRegex, hiddenMessage)
+    .replace(urlRegex, hiddenMessage)
+    .replace(phoneNumberRegex, hiddenMessage)
+    .value()
+}
+
+
 const Message = props => {
   const { message, intl } = props;
   const todayString = intl.formatMessage({ id: 'ActivityFeed.today' });
@@ -40,7 +60,7 @@ const Message = props => {
     <div className={css.message}>
       <Avatar className={css.avatar} user={message.sender} />
       <div>
-        <p className={css.messageContent}>{message.attributes.content}</p>
+        <p className={css.messageContent}>{removeContactInfoFromMessageStrings(message.attributes.content)}</p>
         <p className={css.messageDate}>
           {formatDate(intl, todayString, message.attributes.createdAt)}
         </p>
@@ -60,7 +80,7 @@ const OwnMessage = props => {
   return (
     <div className={css.ownMessage}>
       <div className={css.ownMessageContentWrapper}>
-        <p className={css.ownMessageContent}>{message.attributes.content}</p>
+        <p className={css.ownMessageContent}>{removeContactInfoFromMessageStrings(message.attributes.content)}</p>
       </div>
       <p className={css.ownMessageDate}>
         {formatDate(intl, todayString, message.attributes.createdAt)}
