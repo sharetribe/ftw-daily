@@ -35,7 +35,7 @@ const EditListingAvailabilityPanel = (props) => {
     const { products } = currentListing.attributes.publicData
     let generalAvailability = 0
     products.forEach((v) => {
-      generalAvailability += v.quantityAvailable.value
+      generalAvailability += v.quantityAvailable
     })
     return {
       type: 'availability-plan/day',
