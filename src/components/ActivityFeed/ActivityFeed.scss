@@ -11,7 +11,9 @@
   margin-bottom: 20px;
 
   /* Clearfix */
-  @apply --clearfix;
+  content: '';
+  display: table;
+  clear: both;
 
   @media (--viewportMedium) {
     margin-bottom: 17px;
@@ -27,6 +29,10 @@
   /* Preserve newlines, but collapse other whitespace */
   white-space: pre-line;
   max-width: 433px;
+}
+
+.ownMessageItem {
+  float: right;
 }
 
 .message {
@@ -48,7 +54,9 @@
 }
 
 .ownMessageContentWrapper {
-  @apply --clearfix;
+  content: '';
+  display: table;
+  clear: both;
 }
 
 .messageContent,
