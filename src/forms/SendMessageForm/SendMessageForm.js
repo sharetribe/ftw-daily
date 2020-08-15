@@ -107,7 +107,7 @@ class SendMessageFormComponent extends Component {
                 isProvider ?
                   <div className={css.messageThroughSiteNoticeContainer}>
                     <small>
-                      Please conduct all bookings through the platform. If you need help or something isn't quite working with your listing that would allow guests to effectively book with you let us know so we can help give you a seamless and safe experience.
+                      Please conduct all bookings through the platform. If you need help or something isn't quite working with your listing that would allow guests to effectively book with you, let us know so we can help give you a seamless and safe experience.
                     </small>
                   </div>
                   : null

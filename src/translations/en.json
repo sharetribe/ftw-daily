@@ -434,6 +434,7 @@
   "ListingPage.productsTitle": "Rooms",
   "ListingPage.retreatTitle": "Team retreat options",
   "ListingPage.editListing": "Edit listing",
+  "ListingPage.checkoutOtherListings": "View open listings",
   "ListingPage.editProfileLink": "Edit profile",
   "ListingPage.errorLoadingListingMessage": "Could not load listing. Please try again.",
   "ListingPage.errorLoadingListingTitle": "Error in loading listing",
