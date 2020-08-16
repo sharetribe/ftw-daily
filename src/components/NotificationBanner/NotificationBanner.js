@@ -1,11 +1,11 @@
-import React from 'react';
-import { IconLightBulb } from '../../assets/IconLightBulb';
+import React from 'react'
+import { IconLightBulb } from '../../assets/IconLightBulb'
 
 import css from './NotificationBanner.css'
 
 export const NotificationBanner = (props) => {
   return (
-    <div className={css.notificationBannerContainer}>
+    <div className={css.notificationBannerContainer} style={{ backgroundColor: '#d9f9ff', alignItems: 'center' }}>
       <div className={css.iconContainer}>
         <IconLightBulb className={css.icon}/>
       </div>
@@ -15,6 +15,5 @@ export const NotificationBanner = (props) => {
         </small>
       </div>
     </div>
-
-)
+  )
 }
