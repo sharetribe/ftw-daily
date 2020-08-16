@@ -12,10 +12,10 @@ import ListingEditWowHero from '../../components/ListingEditWowHero/ListingEditW
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl'
 import { propTypes } from '../../util/types'
 import {
-  maxLength, required, isValidNumber, validYouTubeURL, composeValidators
+  maxLength, required, composeValidators
 } from '../../util/validators'
 import {
-  Form, Button, FieldTextInput, FieldBoolean
+  Form, Button, FieldTextInput,
 } from '../../components'
 import CustomCategorySelectFieldMaybe from './CustomCategorySelectFieldMaybe'
 
@@ -63,45 +63,6 @@ const EditListingDescriptionFormComponent = (props) => (
           maxLength: TITLE_MAX_LENGTH,
         }
       )
-      const vibeMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.vibe',
-      })
-      const vibePlaceholderMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.vibePlaceholder',
-      })
-      const communityMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.community',
-      })
-      const communityPlaceholderMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.communityPlaceholder',
-      })
-      const retreatMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.retreat',
-      })
-      const retreatCapacityMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.retreatCapacity',
-      })
-      const retreatCapacityPlaceholderMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.retreatCapacityPlaceholder',
-      })
-      const retreatCapacityValidMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.retreatCapacityInvalid',
-      })
-      const retreatDescriptionMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.retreatDescription',
-      })
-      const retreatDescriptionPlaceholderMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.retreatDescriptionPlaceholder',
-      })
-      const videoMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.video',
-      })
-      const videoPlaceholderMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.videoPlaceholder',
-      })
-      const videoValidMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.videoInvalid',
-      })
       const welcomeMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.welcomeMessage',
       })
@@ -143,31 +104,6 @@ const EditListingDescriptionFormComponent = (props) => (
         <p className={css.error}>
           <FormattedMessage id="EditListingDescriptionForm.showListingFailed" />
         </p>
-      ) : null
-
-      const showRetreatForm = values.retreat && values.retreat.accepted
-
-      const retreatShowFields = showRetreatForm ? (
-        <>
-          <FieldTextInput
-            id="retreat.capacity"
-            name="retreat.capacity"
-            className={css.description}
-            type="text"
-            label={retreatCapacityMessage}
-            placeholder={retreatCapacityPlaceholderMessage}
-            validate={composeValidators(isValidNumber(retreatCapacityValidMessage))}
-          />
-
-          <FieldTextInput
-            id="retreat.description"
-            name="retreat.description"
-            className={css.description}
-            type="textarea"
-            label={retreatDescriptionMessage}
-            placeholder={retreatDescriptionPlaceholderMessage}
-          />
-        </>
       ) : null
 
       const classes = classNames(css.root, className)
@@ -271,38 +207,6 @@ const EditListingDescriptionFormComponent = (props) => (
                   placeholder={descriptionPlaceholderMessage}
                   validate={composeValidators(required(descriptionRequiredMessage))}
                 />
-              </Grid>
-            </Grid>
-          </Paper>
-          <Paper className={css.paperSection}>
-            <Grid container className={classes.root} direction="column" spacing={5}>
-              <Grid item xs={12}>
-                <h3 className={css.sectionTitle}>Everything Else</h3>
-                <p className={css.sectionSubtitle}>Equally important, just harder to categorize</p>
-              </Grid>
-              <Grid item xs={12}>
-                <FieldTextInput
-                  id="video"
-                  name="video"
-                  className={css.video}
-                  type="text"
-                  label={videoMessage}
-                  placeholder={videoPlaceholderMessage}
-                  validate={composeValidators(validYouTubeURL(videoValidMessage))}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FieldBoolean
-                  id="retreat.accepted"
-                  name="retreat.accepted"
-                  className={css.retreat}
-                  label={retreatMessage}
-                  placeholder="Choose yes/no"
-                  validate={required(intl.formatMessage({ id: 'GenericForm.required' }))}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                {retreatShowFields}
               </Grid>
             </Grid>
           </Paper>

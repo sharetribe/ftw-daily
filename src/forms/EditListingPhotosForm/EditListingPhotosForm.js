@@ -1,3 +1,5 @@
+import Grid from '@material-ui/core/Grid'
+import Paper from '@material-ui/core/Paper'
 import React, { Component } from 'react'
 import {
   array, bool, func, shape, string
@@ -10,12 +12,15 @@ import random from 'lodash/random'
 import classNames from 'classnames'
 import ListingImageSelectBlock
   from '../../components/ListingImageSelectBlock/ListingImageSelectBlock'
+import { NotificationBanner } from '../../components/NotificationBanner/NotificationBanner'
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl'
 import { propTypes } from '../../util/types'
-import { nonEmptyArray, composeValidators } from '../../util/validators'
+import {
+  nonEmptyArray, composeValidators, validYouTubeURL, required
+} from '../../util/validators'
 import { isUploadImageOverLimitError } from '../../util/errors'
 import {
-  AddImages, Button, Form, ValidationError
+  AddImages, Button, FieldBoolean, FieldTextInput, Form, ValidationError,
 } from '../../components'
 
 import css from './EditListingPhotosForm.css'
@@ -68,28 +73,6 @@ export class EditListingPhotosFormComponent extends Component {
             values
           } = formRenderProps
 
-          const chooseImageText = (
-            <span className={css.chooseImageText}>
-              <span className={css.chooseImage}>
-                {
-                  readyForUpload ? <FormattedMessage id="EditListingPhotosForm.chooseImage" />
-                    : <FormattedMessage id="EditListingPhotosForm.imageUploadDisabledUntilPreviousFieldsFilled" />
-                }
-              </span>
-              {
-                readyForUpload
-                  ? <span className={css.imageTypes}>
-                    <FormattedMessage id="EditListingPhotosForm.imageTypes" />
-                  </span>
-                  : null
-              }
-            </span>
-          )
-
-          const imageRequiredMessage = intl.formatMessage({
-            id: 'EditListingPhotosForm.imageRequired',
-          })
-
           const {
             publishListingError, showListingsError, updateListingError, uploadImageError
           }
@@ -140,8 +123,16 @@ export class EditListingPhotosFormComponent extends Component {
             = !readyForUpload || disabled || submitInProgress || imageUploadRequested || ready
 
           const classes = classNames(css.root, className)
-          const formId = `photos-form-${random(0, 99999)}`
-          console.log(values)
+
+          const videoMessage = intl.formatMessage({
+            id: 'EditListingDescriptionForm.video',
+          })
+          const videoPlaceholderMessage = intl.formatMessage({
+            id: 'EditListingDescriptionForm.videoPlaceholder',
+          })
+          const videoValidMessage = intl.formatMessage({
+            id: 'EditListingDescriptionForm.videoInvalid',
+          })
           return (
             <Form
               id={'photos-form'}
@@ -151,19 +142,34 @@ export class EditListingPhotosFormComponent extends Component {
                 handleSubmit(e)
               }}
             >
-              {updateListingError ? (
-                <p className={css.error}>
-                  <FormattedMessage id="EditListingPhotosForm.updateFailed" />
-                </p>
-              ) : null}
-              <ListingImageSelectBlock
-                form={form}
-                values={values}
-                formValuesKey={'main'}
-                disabled={form.getState().invalid}
-              />
+              <Grid container spacing={10}>
+                <Grid item xs={12}>
+                  {updateListingError ? (
+                    <p className={css.error}>
+                      <FormattedMessage id="EditListingPhotosForm.updateFailed" />
+                    </p>
+                  ) : null}
+                  <ListingImageSelectBlock
+                    form={form}
+                    values={values}
+                    formValuesKey={'main'}
+                    disabled={form.getState().invalid}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <FieldTextInput
+                    id="video"
+                    name="video"
+                    className={css.video}
+                    type="text"
+                    label={videoMessage}
+                    placeholder={videoPlaceholderMessage}
+                    validate={composeValidators(validYouTubeURL(videoValidMessage))}
+                  />
+                  <NotificationBanner />
+                </Grid>
+              </Grid>
               {uploadImageFailed}
-
               {publishListingFailed}
               {showListingFailed}
               {
