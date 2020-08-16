@@ -1,11 +1,12 @@
 @import '../../marketplace.css';
+
 .root {
   position: relative;
   box-shadow: var(--boxShadowBottomForm);
-}
-@media (--viewportLarge) {
-  .root {
+
+  @media (--viewportLarge) {
     box-shadow: none;
+
     /* Clearfix */
     width: 100%;
     overflow: hidden;
@@ -15,23 +16,24 @@
 .textarea {
   @apply --marketplaceH4FontStyles;
   border-bottom-width: 0;
+
   /* Avoid text going behind the submit button */
   padding: 22px 52px 25px 0;
+
   margin: 0;
+
   /* We need to remove horizontal paddings,
    since textarea uses content-box (autosize library fix). */
   width: calc(100% - 52px);
+
   border-bottom-width: 2px;
   border-bottom-color: var(--attentionColor);
   background-color: transparent;
-}
-@media (--viewportMedium) {
-  .textarea {
+
+  @media (--viewportMedium) {
     margin: 0;
   }
-}
-@media (--viewportLarge) {
-  .textarea {
+  @media (--viewportLarge) {
     padding: 0 0 5px 0;
     margin: 0;
     width: 100%;
@@ -76,11 +78,13 @@
   @apply --marketplaceButtonStylesSecondary;
   @apply --marketplaceH5FontStyles;
   font-weight: var(--fontWeightMedium);
+
   float: right;
   padding: 0 16px;
   min-height: auto;
   min-width: 150px;
   height: 41px;
+
   display: inline-block;
   margin: 17px 0 0 0;
   width: auto;
@@ -91,10 +95,9 @@
 }
 
 .messageThroughSiteNoticeContainer {
-  background-color: var(--matterColorNegative);
+  background-color:  var(--matterColorNegative);
   border-radius: 8px;
   padding: 15px;
   margin-top: 20px;
 }
 
-/*# sourceMappingURL=SendMessageForm.css.map */

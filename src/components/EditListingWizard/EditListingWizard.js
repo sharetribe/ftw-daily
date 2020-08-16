@@ -1,3 +1,11 @@
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography'
+import ThumbUpOutlinedIcon from '@material-ui/icons/ThumbUpOutlined'
 import React, { Component } from 'react'
 import {
   array, bool, func, number, object, oneOf, shape, string
@@ -5,6 +13,7 @@ import {
 import _ from 'lodash'
 import { compose } from 'redux'
 import classNames from 'classnames'
+import { IconClock } from '../../assets/IconClock'
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl'
 import config from '../../config'
 import routeConfiguration from '../../routeConfiguration'
@@ -21,6 +30,8 @@ import {
   Modal, NamedRedirect, Tabs, StripeConnectAccountStatusBox
 } from '..'
 import { StripeConnectAccountForm } from '../../forms'
+import MButton from '../MButton/MButton'
+import { AlertDialog } from '../MModalDialog/MModalDialog'
 
 import EditListingWizardTab, {
   DESCRIPTION,
@@ -197,7 +208,9 @@ const handleGetStripeConnectAccountLinkFn = (getLinkFn, commonParams) => (type) 
 }
 
 // Create a new or edit listing through EditListingWizard
+
 class EditListingWizard extends Component {
+
   constructor(props) {
     super(props)
 
@@ -207,6 +220,7 @@ class EditListingWizard extends Component {
     this.state = {
       draftId: null,
       showPayoutDetails: false,
+      showWelcomeDialog: false,
     }
     this.handleCreateFlowTabScrolling = this.handleCreateFlowTabScrolling.bind(this)
     this.handlePublishListing = this.handlePublishListing.bind(this)
@@ -220,6 +234,12 @@ class EditListingWizard extends Component {
     if (stripeOnboardingReturnURL != null) {
       this.setState({ showPayoutDetails: true })
     }
+
+    setTimeout(() => {
+      if (this.isNewListingFlow()) {
+        this.setState({ showWelcomeDialog: true })
+      }
+    }, 2000)
   }
 
   handleCreateFlowTabScrolling(shouldScroll) {
@@ -264,6 +284,67 @@ class EditListingWizard extends Component {
     })
   }
 
+  isNewListingFlow = () => {
+    return [LISTING_PAGE_PARAM_TYPE_NEW, LISTING_PAGE_PARAM_TYPE_DRAFT].includes(
+      this.props.params.type
+    )
+  }
+
+  welcomeDialog = () => {
+    return (
+      <div>
+        <Dialog
+          open={this.state.showWelcomeDialog}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle
+            id="alert-dialog-title"
+            style={{ fontFamily: 'Nunito Sans' }}
+          >
+            Let's get you listed!
+          </DialogTitle>
+          <DialogContent>
+            <Typography
+              style={{ fontFamily: 'Nunito Sans', marginBottom: 20 }}
+            >
+              This first section will take around 5 minutes to complete. Once you complete this first section your listing will always be saved in case you want to come back another time to finish.
+            </Typography>
+            <Typography
+              style={{ fontFamily: 'Nunito Sans', marginBottom: 20 }}
+            >
+              The whole listing will take about 25 minutes to complete.
+            </Typography>
+            <Grid container direction="column" spacing={2} justify={'center'} alignItems={'center'}>
+              <Grid item xs={12}>
+                <Typography>
+                  Total Time To Complete
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <IconClock />
+              </Grid>
+            </Grid>
+            <Typography
+              style={{ fontFamily: 'Nunito Sans', marginTop: 20 }}
+            >
+              If you need help or something isn't quite working with your listing that would allow guests to effectively book with you, let us know by sending a message through the chat button in the bottom right.
+            </Typography>
+          </DialogContent>
+          <DialogActions>
+            <MButton
+              onClick={() => this.setState({ showWelcomeDialog: false })}
+              autoFocus
+              endIcon={<ThumbUpOutlinedIcon />}
+              label={'Got it'}
+              color={'primary'}
+            />
+          </DialogActions>
+        </Dialog>
+      </div>
+    )
+  }
+
   render() {
     const {
       id,
@@ -290,9 +371,7 @@ class EditListingWizard extends Component {
       ...rest
     } = this.props
     const selectedTab = params.tab
-    const isNewListingFlow = [LISTING_PAGE_PARAM_TYPE_NEW, LISTING_PAGE_PARAM_TYPE_DRAFT].includes(
-      params.type
-    )
+    const isNewListingFlow = this.isNewListingFlow()
     const rootClasses = rootClassName || css.root
     const classes = classNames(rootClasses, className)
     const currentListing = ensureListing(listing)
@@ -369,6 +448,7 @@ class EditListingWizard extends Component {
 
     return (
       <div className={classes}>
+        {this.welcomeDialog()}
         <Tabs
           rootClassName={css.tabsContainer}
           navRootClassName={css.nav}

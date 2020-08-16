@@ -50,8 +50,7 @@
 }
 
 .sectionTitle {
-  @apply --marketplaceH3FontStyles;
-  color: var(--matterColorAnti);
+  @apply --marketplaceH2FontStyles;
 
   margin-bottom: 5px;
   @media (--viewportMedium) {
