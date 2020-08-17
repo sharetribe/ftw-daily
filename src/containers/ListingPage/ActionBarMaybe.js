@@ -54,6 +54,10 @@ export const ActionBarMaybe = props => {
         <p className={css.closedListingText}>
           <FormattedMessage id="ListingPage.closedListing" />
         </p>
+        <NamedLink className={css.editListingLink} name="LandingPage">
+          <EditIcon className={css.editIcon} />
+          <FormattedMessage id={'ListingPage.checkoutOtherListings'} />
+        </NamedLink>
       </div>
     );
   }

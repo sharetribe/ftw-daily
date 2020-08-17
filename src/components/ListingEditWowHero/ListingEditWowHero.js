@@ -71,7 +71,7 @@ const ListingEditWowHero = (props) => {
           ]}
         />
         <div className={css.heroTextContainer}>
-          <h1 className={css.heroTitle}>{values.title || 'Lofoten, Norway'}</h1>
+          <h1 className={css.heroTitle}>{values.title || 'Casa Flow'}</h1>
           <h2 className={css.heroDescription}>{values.heroSubtitle || 'The ultimate space for anyone seeking community, nature and surf!'}</h2>
         </div>
         {

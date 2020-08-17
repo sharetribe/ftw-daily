@@ -1,24 +1,27 @@
 @import '../../marketplace.css';
+
 .root {
   margin: 0;
+
   /* Clearfix */
   @apply --clearfix;
 }
 
 .messageItem {
   margin-bottom: 20px;
+
   /* Clearfix */
-  content: "";
+  content: '';
   display: table;
   clear: both;
-}
-@media (--viewportMedium) {
-  .messageItem {
+
+  @media (--viewportMedium) {
     margin-bottom: 17px;
   }
-}
-.messageItem:last-of-type {
-  margin-bottom: 0;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 }
 
 .message,
@@ -44,15 +47,14 @@
 .avatar {
   flex-shrink: 0;
   margin: 0px 12px 0 0;
-}
-@media (--viewportMedium) {
-  .avatar {
+
+  @media (--viewportMedium) {
     margin: 0px 12px 0 0;
   }
 }
 
 .ownMessageContentWrapper {
-  content: "";
+  content: '';
   display: table;
   clear: both;
 }
@@ -60,15 +62,14 @@
 .messageContent,
 .ownMessageContent {
   @apply --marketplaceMessageFontStyles;
+
   display: inline-block;
   margin: 0;
   padding: 8.5px 14px 8.5px 14px;
   border-radius: 8px;
   box-shadow: var(--boxShadow);
-}
-@media (--viewportMedium) {
-  .messageContent,
-.ownMessageContent {
+
+  @media (--viewportMedium) {
     padding: 8.5px 14px 8.5px 14px;
     margin: 0;
   }
@@ -87,12 +88,11 @@
 .messageDate,
 .ownMessageDate {
   @apply --marketplaceMessageDateFontStyles;
+
   margin: 11px 0 0 0;
   color: var(--matterColorAnti);
-}
-@media (--viewportMedium) {
-  .messageDate,
-.ownMessageDate {
+
+  @media (--viewportMedium) {
     margin: 6px 0 0 0;
   }
 }
@@ -103,25 +103,25 @@
 
 .transitionItem {
   margin-bottom: 18px;
+
   /* Clearfix */
   @apply --clearfix;
-}
-@media (--viewportMedium) {
-  .transitionItem {
+
+  @media (--viewportMedium) {
     margin-bottom: 16px;
   }
-}
-.transitionItem:last-of-type {
-  margin-bottom: 0;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 }
 
 .transition {
   display: flex;
   flex-direction: row;
   padding: 3px 0 2px 0;
-}
-@media (--viewportMedium) {
-  .transition {
+
+  @media (--viewportMedium) {
     padding: 0;
   }
 }
@@ -135,9 +135,8 @@
   @apply --marketplaceMessageDateFontStyles;
   color: var(--matterColorAnti);
   margin: 7px 0 0 0;
-}
-@media (--viewportMedium) {
-  .transitionDate {
+
+  @media (--viewportMedium) {
     margin: -1px 0 1px 0;
   }
 }
@@ -151,9 +150,8 @@
   font-style: italic;
   white-space: pre-line;
   margin: 8px 0 0 0;
-}
-@media (--viewportMedium) {
-  .reviewContent {
+
+  @media (--viewportMedium) {
     max-width: 500px;
     margin: 7px 0 0 0;
   }
@@ -162,9 +160,8 @@
 .reviewStars {
   display: block;
   margin-top: 4px;
-}
-@media (--viewportMedium) {
-  .reviewStars {
+
+  @media (--viewportMedium) {
     margin: 5px 0;
   }
 }
@@ -179,11 +176,11 @@
 .showOlderWrapper {
   text-align: center;
   margin-bottom: 1px;
-}
-@media (--viewportMedium) {
-  .showOlderWrapper {
+
+  @media (--viewportMedium) {
     margin-bottom: 0;
   }
 }
 
-/*# sourceMappingURL=ActivityFeed.css.map */
+.showOlderButton {
+}
