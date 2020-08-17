@@ -603,7 +603,7 @@ export const createStripeIndividualAccount = (payoutDetails, individualConfig, s
       const stripeAccountParams = {
         requestedCapabilities: ['transfers', 'card_payments'],
         accountToken,
-        bankAccountToken,     // merge master branch conflict
+        bankAccountToken,
 
         country,
         // business_profile: {
@@ -614,11 +614,6 @@ export const createStripeIndividualAccount = (payoutDetails, individualConfig, s
         //country,- delete
         ...businessProfileParams(individual, individualConfig),
       };
-
-      // merge master branch conflict
-      /*if(bankAccountToken) {
-        stripeAccountParams.bankAccountToken = bankAccountToken
-      }*/
 
       return sdk.stripeAccount.create(stripeAccountParams, { expand: true });
       //return sdk.stripeAccount.update(stripeAccountParams, { expand: true });

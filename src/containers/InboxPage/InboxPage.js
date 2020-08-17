@@ -42,12 +42,23 @@ import { loadData } from './InboxPage.duck';
 import css from './InboxPage.css';
 
 const formatDate = (intl, date) => {
+  const options = {
+    weekday: "short", 
+    day: "numeric" 
+  };
+  // return date.toLocaleDateString('de-DE', options)
+  // console.log(date.toLocaleDateString('de-DE', options))
   return {
-    short: intl.formatDate(date, {
-      month: 'short',
-      day: 'numeric',
+    short: date.toLocaleDateString('de-DE', {
+      weekday: "short", 
+      day: "numeric" 
     }),
-    long: `${intl.formatDate(date)} ${intl.formatTime(date)}`,
+    long: date.toLocaleDateString('de-DE', {
+      weekday: "short", 
+      year: "numeric", 
+      month: "long", 
+      day: "numeric" 
+  }),
   };
 };
 
