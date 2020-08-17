@@ -68,7 +68,6 @@ export class ProfilePageComponent extends Component {
       listings,
       reviews,
       queryReviewsError,
-      firstName,
       viewport,
       intl,
     } = this.props;
@@ -77,6 +76,7 @@ export class ProfilePageComponent extends Component {
     const isCurrentUser =
       ensuredCurrentUser.id && profileUser.id && ensuredCurrentUser.id.uuid === profileUser.id.uuid;
     const displayName = profileUser.attributes.profile.displayName;
+    const firstName = displayName? displayName.split(" ").slice(0,1)[0]: "";
     const bio = profileUser.attributes.profile.bio;
     const hasBio = !!bio;
     const hasListings = listings.length > 0;
@@ -97,7 +97,7 @@ export class ProfilePageComponent extends Component {
       <div className={css.asideContent}>
         <AvatarLarge className={css.avatar} user={user} disableProfileLink />
         <h1 className={css.mobileHeading}>
-          {displayName ? (
+          {firstName ? (
             <FormattedMessage id="ProfilePage.mobileHeading" values={{ name: firstName }} />
           ) : null}
         </h1>
@@ -300,7 +300,6 @@ const mapStateToProps = state => {
     queryReviewsError,
   } = state.ProfilePage;
   const userMatches = getMarketplaceEntities(state, [{ type: 'user', id: userId }]);
-  const firstName = getFirstName(state);
   const user = userMatches.length === 1 ? userMatches[0] : null;
   const listings = getMarketplaceEntities(state, userListingRefs);
   return {
@@ -312,7 +311,6 @@ const mapStateToProps = state => {
     listings,
     reviews,
     queryReviewsError,
-    firstName,
   };
 };
 
