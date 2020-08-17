@@ -25,7 +25,8 @@ const SectionHero = props => {
           to={{
             search:
               // 'address=&bounds=61.91109664%2C133.04500644%2C-61.91109664%2C-157.8640886',  // world map
-                          // 'address=&bounds=60.9093537990869%2C1.86276379960989%2C49.802416901086%2C-8.74974065661991', // entire UK map
+              'address=&bounds=55.52938345%2C2.04204408%2C50.3415474%2C-4.9481556', // slightly zoomed in UK map
+              // 'address=&bounds=60.9093537990869%2C1.86276379960989%2C49.802416901086%2C-8.74974065661991', // entire UK map
             }}
           className={css.heroButton}
         >
