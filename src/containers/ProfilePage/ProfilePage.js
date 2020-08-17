@@ -9,7 +9,7 @@ import { REVIEW_TYPE_OF_PROVIDER, REVIEW_TYPE_OF_CUSTOMER, propTypes } from '../
 import { ensureCurrentUser, ensureUser } from '../../util/data';
 import { withViewport } from '../../util/contextHelpers';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
+import { getMarketplaceEntities, getFirstName } from '../../ducks/marketplaceData.duck';
 import {
   Page,
   LayoutSideNavigation,
@@ -68,6 +68,7 @@ export class ProfilePageComponent extends Component {
       listings,
       reviews,
       queryReviewsError,
+      firstName,
       viewport,
       intl,
     } = this.props;
@@ -97,7 +98,7 @@ export class ProfilePageComponent extends Component {
         <AvatarLarge className={css.avatar} user={user} disableProfileLink />
         <h1 className={css.mobileHeading}>
           {displayName ? (
-            <FormattedMessage id="ProfilePage.mobileHeading" values={{ name: displayName }} />
+            <FormattedMessage id="ProfilePage.mobileHeading" values={{ name: firstName }} />
           ) : null}
         </h1>
         {editLinkMobile}
@@ -184,7 +185,7 @@ export class ProfilePageComponent extends Component {
     const mainContent = (
       <div>
         <h1 className={css.desktopHeading}>
-          <FormattedMessage id="ProfilePage.desktopHeading" values={{ name: displayName }} />
+          <FormattedMessage id="ProfilePage.desktopHeading" values={{ name: firstName }} />
         </h1>
         {hasBio ? <p className={css.bio}>{bio}</p> : null}
         {hasListings ? (
@@ -299,6 +300,7 @@ const mapStateToProps = state => {
     queryReviewsError,
   } = state.ProfilePage;
   const userMatches = getMarketplaceEntities(state, [{ type: 'user', id: userId }]);
+  const firstName = getFirstName(state);
   const user = userMatches.length === 1 ? userMatches[0] : null;
   const listings = getMarketplaceEntities(state, userListingRefs);
   return {
@@ -310,6 +312,7 @@ const mapStateToProps = state => {
     listings,
     reviews,
     queryReviewsError,
+    firstName,
   };
 };
 

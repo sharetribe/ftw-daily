@@ -66,6 +66,12 @@ export const getMarketplaceEntities = (state, entityRefs) => {
   return denormalisedEntities(entities, entityRefs, throwIfNotFound);
 };
 
+export const getFirstName = (state) => {
+  if (state.user.currentUser)
+    return state.user.currentUser.attributes.profile.firstName;
+  return "";
+};
+
 // ================ Action creators ================ //
 
 export const addMarketplaceEntities = sdkResponse => ({
