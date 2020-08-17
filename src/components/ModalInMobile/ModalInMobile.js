@@ -75,6 +75,7 @@ class ModalInMobileComponent extends Component {
       closeButtonMessage,
       onManageDisableScrolling,
       viewport,
+      hideBackground
     } = this.props
 
     const isMobileLayout = viewport.width <= showAsModalMaxWidth
@@ -88,12 +89,13 @@ class ModalInMobileComponent extends Component {
     // - mobile layout: content hidden
     const closedClassName = isClosedInMobile ? css.modalHidden : null
     const classes = classNames({ [css.modalInMobile]: isOpenInMobile }, css.root, className)
-
+    const scrollLayerClasses = classNames({ [css.scrollLayerClass]: hideBackground })
     return (
       <Modal
         className={classes}
         containerClassName={containerClassName || css.modalContainer}
         contentClassName={css.modalContent}
+        scrollLayerClassName={scrollLayerClasses}
         id={id}
         isOpen={isOpen}
         isClosedClassName={closedClassName}

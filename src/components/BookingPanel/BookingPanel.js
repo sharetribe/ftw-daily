@@ -20,7 +20,7 @@ import { BookingDatesForm } from '../../forms'
 import css from './BookingPanel.css'
 
 // This defines when ModalInMobile shows content as Modal
-const MODAL_BREAKPOINT = 1023
+const MODAL_BREAKPOINT = 5000
 
 const openBookModal = (isOwnListing, isClosed, history, location) => {
   if (isOwnListing || isClosed) {
@@ -94,6 +94,7 @@ const BookingPanel = (props) => {
         containerClassName={css.modalContainer}
         id="BookingDatesFormInModal"
         isModalOpenOnMobile={isBook}
+        hideBackground={true}
         onClose={() => closeBookModal(history, location)}
         showAsModalMaxWidth={MODAL_BREAKPOINT}
         onManageDisableScrolling={onManageDisableScrolling}

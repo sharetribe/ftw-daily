@@ -17,9 +17,9 @@
 }
 @media (--viewportLarge) {
   .modalContainer {
-    padding: 0;
+    padding: 20px;
     background-color: transparent;
-    margin-top: 0;
+    margin-top: 100px;
     margin-bottom: 0;
   }
 }
@@ -32,11 +32,6 @@
 @media (--viewportMedium) {
   .modalHeading {
     padding: 0;
-  }
-}
-@media (--viewportLarge) {
-  .modalHeading {
-    display: none;
   }
 }
 
@@ -86,6 +81,7 @@
   color: var(--matterColor);
   margin-top: 0;
   margin-bottom: 9px;
+  display: none;
 }
 
 .bookingHelp {
@@ -98,6 +94,18 @@
     display: block;
     margin-top: 0;
   }
+}
+@media (--viewportLarge) {
+  .bookingHelp {
+    color: var(--matterColor);
+    display: block;
+    margin-top: 0;
+    font-size: 24px;
+  }
+}
+
+.modalRoot {
+  background-color: white;
 }
 
 .bookingForm {
@@ -159,7 +167,7 @@
 }
 @media (--viewportLarge) {
   .openBookingForm {
-    display: none;
+    height: 100px;
   }
 }
 

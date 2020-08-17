@@ -221,13 +221,13 @@
   }
 
   @media (--viewportLarge) {
-    margin-top: 50px;
-    margin-bottom: 0px;
+    //margin-top: 50px;
+    //margin-bottom: 0px;
     /* contentContainer's full width - (bookingColumn + two paddings + margin + border) */
-    max-width: calc(100% - 433px);
-    flex-basis: calc(100% - 433px);
-    flex-shrink: 0;
-    flex-grow: 1;
+    //max-width: calc(100% - 433px);
+    //flex-basis: calc(100% - 433px);
+    //flex-shrink: 0;
+    //flex-grow: 1;
   }
 }
 
@@ -236,19 +236,15 @@
     display: block;
     margin-top: 95px;
     margin-left: 60px;
-    border-left-style: solid;
-    border-left-width: 1px;
-    border-left-color: var(--matterColorNegative);
+    //border-left-style: solid;
+    //border-left-width: 1px;
+    //border-left-color: var(--matterColorNegative);
     padding-left: 60px;
-    z-index: 1;
+    //z-index: 1;
 
     /* The calendar needs 312px */
-    flex-basis: 312px;
-    flex-shrink: 0;
-
-    & > div {
-      top: 95px;
-    }
+    //flex-basis: 312px;
+    //flex-shrink: 0;
   }
 }
 
