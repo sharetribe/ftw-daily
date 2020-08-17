@@ -15,7 +15,7 @@ import {
   txIsRequested,
   txHasBeenDelivered,
 } from '../../util/transaction';
-import { LINE_ITEM_NIGHT, LINE_ITEM_DAY, propTypes } from '../../util/types';
+import { LINE_ITEM_NIGHT, LINE_ITEM_DAY, propTypes, LISTING_STATE_CLOSED } from '../../util/types';
 import {
   ensureListing,
   ensureTransaction,
@@ -31,7 +31,7 @@ import {
   ReviewModal,
   UserDisplayName,
 } from '../../components';
-import { SendMessageForm } from '../../forms';
+import { BookingDatesForm, SendMessageForm } from '../../forms';
 import config from '../../config';
 
 // These are internal components that make this file more readable.
@@ -418,7 +418,10 @@ export class TransactionPanelComponent extends Component {
         onDeclineSale={() => onDeclineSale(currentTransaction.id)}
       />
     );
-
+    const listing= currentListing
+    const hasListingState = !!listing.attributes.state;
+    const isClosed = hasListingState && listing.attributes.state === LISTING_STATE_CLOSED;
+    const showBookingDatesForm = hasListingState && !isClosed;
     const showSendMessageForm =
       !isCustomerBanned && !isCustomerDeleted && !isProviderBanned && !isProviderDeleted;
 
@@ -557,9 +560,23 @@ export class TransactionPanelComponent extends Component {
                   <h2 className={css.bookingTitle}>{listingTitle}</h2>
                   <div className={css.bookingHelp}>{bookingSubTitle}</div>
                 </div>
-                <p className={css.smallPrint}>
+                {showBookingDatesForm ? (
+                  <BookingDatesForm
+                    className={css.bookingForm}
+                    formId="BookingPanel"
+                    submitButtonWrapperClassName={css.bookingDatesSubmitButtonWrapper}
+                    unitType={unitType}
+                    onSubmit={onSubmitBookingRequest}
+                    price={price}
+                    isOwnListing={false}
+                    timeSlots={timeSlots}
+                    fetchTimeSlotsError={fetchTimeSlotsError}
+                  />
+                ) : null}
+
+                {/*<p className={css.smallPrint}>
                   <FormattedMessage id={'BookingDatesForm.youWontBeChargedInfo'} />
-                </p>
+                </p>*/}
                 <div className={css.bookingDatesSubmitButtonWrapper}>
                   <a href="https://calendly.com/horsedeal24" target="_blank">
                     <PrimaryButton type="submit">
@@ -581,8 +598,7 @@ export class TransactionPanelComponent extends Component {
                   </PrimaryButton>
                 </a>
               </div>
-
-                {/* <BookingPanel
+                 {/*<BookingPanel
                   className={css.bookingPanel}
                   titleClassName={css.bookingTitle}
                   isOwnListing={false}
@@ -594,8 +610,7 @@ export class TransactionPanelComponent extends Component {
                   onManageDisableScrolling={onManageDisableScrolling}
                   timeSlots={timeSlots}
                   fetchTimeSlotsError={fetchTimeSlotsError}
-                /> */}
-
+                />*/}
               <BreakdownMaybe
                 className={css.breakdownContainer}
                 transaction={currentTransaction}
