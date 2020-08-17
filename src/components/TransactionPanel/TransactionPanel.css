@@ -400,6 +400,7 @@
   box-shadow: var(--boxShadowTop);
   background-color: white;
 
+
   @media (--viewportLarge) {
     z-index: unset;
     position: static;
@@ -484,7 +485,7 @@
 .bookingTitle {
   /* Font */
   color: var(--matterColor);
-  
+
   margin-top: 0;
   margin-bottom: 1px;
 }
@@ -592,6 +593,7 @@
   position: fixed ;
   bottom: 0;
   background-color: var(--matterColorLight);
+  margin: 0 0 10px 0;
 
   @media (max-width: 768px) {
     padding: 0;
@@ -609,7 +611,7 @@
     background-color: transparent;
   }
 }
- 
+
 .bookingDatesSubmitButtonWrapper a:hover {
   text-decoration: none;
 }
@@ -622,4 +624,3 @@
   }
 }
 
- 
