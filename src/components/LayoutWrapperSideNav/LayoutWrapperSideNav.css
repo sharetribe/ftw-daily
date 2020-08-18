@@ -14,7 +14,7 @@
   box-shadow: var(--boxShadow);
 
   @media (--viewportLarge) {
-    padding: 112px 0 82px 36px;
+    padding: 109px 0 82px 36px;
     flex-direction: column;
     justify-content: flex-start;
     border: none;
@@ -23,7 +23,7 @@
   }
 
   @media (--viewportLargeWithPaddings) {
-    padding: 112px 0 82px calc((100% - 1056px) / 2);
+    padding: 109px 0 82px calc((100% - 1056px) / 2);
   }
 }
 
