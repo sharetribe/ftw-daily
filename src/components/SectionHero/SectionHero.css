@@ -83,7 +83,7 @@
 }
 
 .heroSubTitle {
-  @apply --marketplaceBodyFontStyles;
+  @apply --marketplaceH4FontStyles;
 
   color: var(--matterColorLight);
   margin: 0 0 32px 0;
@@ -93,7 +93,7 @@
 
   @media (--viewportMedium) {
     max-width: var(--SectionHero_desktopTitleMaxWidth);
-    margin: 0 0 63px 0;
+    margin: 0 0 47px 0;
   }
 }
 
