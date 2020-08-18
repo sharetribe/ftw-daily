@@ -40,4 +40,5 @@ div[class^="Modal_isOpen"] .SkippingBlock_background{
 }
 .modalHeader {
   font-size: 30px;
+  line-height: 35px;
 }
