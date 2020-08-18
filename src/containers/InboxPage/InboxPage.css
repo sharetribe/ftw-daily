@@ -257,6 +257,7 @@
   @media (--viewportMedium) {
     margin-top: 3px;
     margin-bottom: 0;
+    width: 25vw;
   }
 
   color: var(--matterColor);
