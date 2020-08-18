@@ -112,7 +112,7 @@
 }
 
 .totalLabel {
-  font-weight: var(--fontWeightNormal);
+  @apply --marketplaceSmallFontStyles;
 }
 
 .totalPrice {
