@@ -126,12 +126,12 @@
 .organizationInfo {
 }
 
-.organizationDescription {
+.organizationDescription,
+.organizationCopyright {
   @apply --marketplaceTinyFontStyles;
 }
 
 .organizationCopyright {
-  @apply --marketplaceTinyFontStyles;
   margin-top: 32px;
 }
 
@@ -174,7 +174,7 @@
 
 .link {
   /* Font */
-  @apply --marketplaceH4FontStyles;
+  @apply --marketplaceH5FontStyles;
   line-height: 20px;
   color: var(--matterColor);
   transition: var(--transitionStyleButton);
@@ -247,7 +247,6 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  margin-bottom: 12px;
 }
 
 .tosAndPrivacy {
