@@ -333,7 +333,8 @@
 }
 
 .stateActionNeeded {
-  white-space: nowrap;
+
+  text-align: right;
   font-weight: var(--fontWeightSemiBold);
   color: var(--attentionColor);
 }

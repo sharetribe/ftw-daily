@@ -478,6 +478,10 @@
   margin: 16px 48px 48px 48px;
 }
 
+.bookingPanelChat {
+  display: none;
+}
+
 .bookingTitle {
   /* Font */
   color: var(--matterColor);

@@ -38,3 +38,6 @@ div[class^="Modal_isOpen"] .SkippingBlock_background{
 .informationModal {
   padding-top: 70px;
 }
+.modalHeader {
+  font-size: 30px;
+}

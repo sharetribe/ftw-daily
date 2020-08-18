@@ -9,7 +9,7 @@ import { REVIEW_TYPE_OF_PROVIDER, REVIEW_TYPE_OF_CUSTOMER, propTypes } from '../
 import { ensureCurrentUser, ensureUser } from '../../util/data';
 import { withViewport } from '../../util/contextHelpers';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
+import { getMarketplaceEntities, getFirstName } from '../../ducks/marketplaceData.duck';
 import {
   Page,
   LayoutSideNavigation,
@@ -76,6 +76,7 @@ export class ProfilePageComponent extends Component {
     const isCurrentUser =
       ensuredCurrentUser.id && profileUser.id && ensuredCurrentUser.id.uuid === profileUser.id.uuid;
     const displayName = profileUser.attributes.profile.displayName;
+    const firstName = displayName? displayName.split(" ").slice(0,1)[0]: "";
     const bio = profileUser.attributes.profile.bio;
     const hasBio = !!bio;
     const hasListings = listings.length > 0;
@@ -96,8 +97,8 @@ export class ProfilePageComponent extends Component {
       <div className={css.asideContent}>
         <AvatarLarge className={css.avatar} user={user} disableProfileLink />
         <h1 className={css.mobileHeading}>
-          {displayName ? (
-            <FormattedMessage id="ProfilePage.mobileHeading" values={{ name: displayName }} />
+          {firstName ? (
+            <FormattedMessage id="ProfilePage.mobileHeading" values={{ name: firstName }} />
           ) : null}
         </h1>
         {editLinkMobile}
@@ -184,7 +185,7 @@ export class ProfilePageComponent extends Component {
     const mainContent = (
       <div>
         <h1 className={css.desktopHeading}>
-          <FormattedMessage id="ProfilePage.desktopHeading" values={{ name: displayName }} />
+          <FormattedMessage id="ProfilePage.desktopHeading" values={{ name: firstName }} />
         </h1>
         {hasBio ? <p className={css.bio}>{bio}</p> : null}
         {hasListings ? (

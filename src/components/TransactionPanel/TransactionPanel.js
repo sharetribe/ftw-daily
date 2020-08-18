@@ -598,8 +598,8 @@ export class TransactionPanelComponent extends Component {
                   </PrimaryButton>
                 </a>
               </div>
-                 {/*<BookingPanel
-                  className={css.bookingPanel}
+                {/* <BookingPanel
+                  className={css.bookingPanel, css.bookingPanelChat}
                   titleClassName={css.bookingTitle}
                   isOwnListing={false}
                   listing={currentListing}
