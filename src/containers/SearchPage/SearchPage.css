@@ -146,7 +146,7 @@
 .sortByMenuLabel {
   @apply --marketplaceButtonStylesSecondary;
   @apply --marketplaceTinyFontStyles;
-  font-weight: var(--fontWeightBold);
+  font-weight: var(--fontWeightMedium);
 
   height: 35px;
   min-height: 35px;
