@@ -179,8 +179,8 @@
   }
 
   @media (--viewportLarge) {
-    margin-bottom: 24px;
-    padding-bottom: 15px;
+    margin-bottom: 16px;
+    padding-bottom: 7px;
   }
 }
 
@@ -211,7 +211,6 @@
   margin-right: 8px;
 
   @media (--viewportLarge) {
-    margin-top: 2px;
     margin-right: 15px;
   }
 }
@@ -251,7 +250,7 @@
   margin-bottom: 0;
 
   @media (--viewportMedium) {
-    margin-top: 3px;
+    margin-top: 0;
     margin-bottom: 0;
   }
 
@@ -274,18 +273,18 @@
 }
 
 .bookingInfoWrapper {
+  @apply --marketplaceTinyFontStyles;
+
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-
-  font-size: 14px;
   line-height: 14px;
   margin-top: 2px;
   padding-top: 2px;
 
   @media (--viewportMedium) {
     padding-top: 0px;
-    margin-top: 8px;
+    margin-top: 2px;
     line-height: 16px;
   }
 }
@@ -314,6 +313,9 @@
 }
 
 .lastTransitionedAt {
+  @apply --marketplaceTinyFontStyles;
+
+  margin-top: 4px;
   text-align: right;
   color: var(--matterColor);
 }
