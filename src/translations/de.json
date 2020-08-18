@@ -835,7 +835,7 @@
   "TransactionPanel.saleCancelledTitle": "Der Vertrag mit {customerName} wegen {listingLink} wurde zurückgezogen.",
   "TransactionPanel.saleDeclinedTitle": "Die Anfrage von {customerName} wegen {listingLink} wurde abgelehnt.",
   "TransactionPanel.saleDeliveredTitle": "Der Vertrag mit {customerName} wegen {providerLink} wurde fertiggestellt.",
-  "TransactionPanel.saleEnquiredTitle": "Deine Unterhaltung mit {providerLink}",
+  "TransactionPanel.saleEnquiredTitle": "Deine Unterhaltung mit {customerLink}",
   "TransactionPanel.saleRequestedInfo": "{customerName} wartet auf Deine Antwort.",
   "TransactionPanel.saleRequestedTitle": "{customerName} hat eine Anfrage zu {listingLink} gestellt.",
   "TransactionPanel.sendMessagePlaceholder": "Sende {name} eine Nachricht…",
