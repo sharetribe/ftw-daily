@@ -79,7 +79,7 @@
   @apply --marketplaceSearchFilterLabelFontStyles;
 
   display: inline-block;
-  padding: 9px 16px 10px 16px;
+  padding: var(--marketplaceButtonSmallDesktopPadding);
   width: auto;
   height: auto;
   min-height: 0;
@@ -100,7 +100,7 @@
   font-weight: var(--fontWeightSemiBold);
 
   display: inline-block;
-  padding: 9px 16px 10px 16px;
+  padding: 9px 16px 9px 16px;
   width: auto;
   height: auto;
   min-height: 0;

@@ -262,6 +262,8 @@
     }
   }
 
+  --marketplaceButtonSmallDesktopPadding: 9px 16px 9px 16px;
+
   /* ================ Inputs ================ */
 
   --marketplaceInputStyles: {
