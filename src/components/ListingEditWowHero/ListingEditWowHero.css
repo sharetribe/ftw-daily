@@ -36,7 +36,6 @@
 
 .heroTitle {
   color: white;
-  z-index: 2;
   font-weight: 700;
   margin-top: 0;
   margin-bottom: 10px;
@@ -56,7 +55,6 @@
 
 .heroDescription {
   color: white;
-  z-index: 2;
   margin: 0;
   text-align: center;
 }

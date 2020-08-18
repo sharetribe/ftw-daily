@@ -59,11 +59,11 @@
 }
 
 /* Mobile only social media links */
-.someLiksMobile {
+.someLinksMobile {
   margin-bottom: 24px;
 }
 @media (--viewportMedium) {
-  .someLiksMobile {
+  .someLinksMobile {
     display: none;
   }
 }
@@ -83,7 +83,6 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   width: 100%;
-  margin-bottom: 18px;
 }
 @media (--viewportMedium) {
   .links {
@@ -293,18 +292,13 @@
 
 /* Mobile: copyright mark and legal links for mobile */
 .copyrightAndTermsMobile {
-  /* Positioning */
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
   /* Dimensions */
   height: 60px;
-  padding: 0 24px 18px 24px;
+  padding: 10px;
   /* Layout */
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   background-color: var(--matterColorLight);
 }
 @media (--viewportMedium) {

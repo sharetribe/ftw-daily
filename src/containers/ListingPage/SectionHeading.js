@@ -45,14 +45,14 @@ const SectionHeading = (props) => {
             </span>
           ) : null}
         </div>
-        <div className={css.desktopPriceContainer}>
-          <div className={css.desktopPriceValue} title={priceTitle}>
-            {formattedPrice}
-          </div>
-          <div className={css.desktopPerUnit}>
-            <FormattedMessage id={unitTranslationKey} />
-          </div>
-        </div>
+        {/*<div className={css.desktopPriceContainer}>*/}
+        {/*  <div className={css.desktopPriceValue} title={priceTitle}>*/}
+        {/*    {formattedPrice}*/}
+        {/*  </div>*/}
+        {/*  <div className={css.desktopPerUnit}>*/}
+        {/*    <FormattedMessage id={unitTranslationKey} />*/}
+        {/*  </div>*/}
+        {/*</div>*/}
       </div>
       <div className={css.tags}>
         {wifi}

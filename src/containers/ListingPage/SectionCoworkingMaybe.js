@@ -1,9 +1,11 @@
 import React from 'react'
 import includes from 'lodash/includes'
 import keys from 'lodash/keys'
+import { useTheme } from '@material-ui/core/styles'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
+import MultiRowGridList from '../../components/MultiRowGridList/MultiRowGridList'
 import SingleLineGridList from '../../components/SingleRowImageGridList/SingleRowImageGridList'
 import { FormattedMessage } from '../../util/reactIntl'
-import { richText } from '../../util/richText'
 
 import css from './ListingPage.css'
 
@@ -12,17 +14,21 @@ const MIN_LENGTH_FOR_LONG_WORDS_IN_COMMUNITY = 20
 const SectionCoworkingMaybe = (props) => {
   const { publicData, images } = props
 
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+
   const generateMobileImageGrid = () => {
     if (publicData.coworking) {
       const coworkingImageKeys = keys(publicData.coworking.images)
       const imagesToShow = (images || [])
       .filter((img) => includes(coworkingImageKeys, img.id.uuid))
       .map((nimg) => ({ img: nimg.attributes.variants['landscape-crop2x'].url, title: 'Coworking Image' }))
-      console.log(imagesToShow)
       return (
-        <SingleLineGridList
-          images={imagesToShow}
-        />
+        isMobile
+          ? <SingleLineGridList
+            images={imagesToShow}
+          />
+          : <MultiRowGridList images={imagesToShow}/>
       )
     }
   }
