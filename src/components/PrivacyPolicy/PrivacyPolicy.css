@@ -6,10 +6,10 @@
   }
   & h2 {
     /* Adjust heading margins to work with the reduced body font size */
-    margin: 23px 0 19px 0;
+    margin: 29px 0 13px 0;
 
     @media (--viewportMedium) {
-      margin: 24px 0 24px 0;
+      margin: 32px 0 0 0;
     }
   }
 
