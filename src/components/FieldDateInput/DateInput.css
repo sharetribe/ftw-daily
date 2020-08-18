@@ -79,7 +79,7 @@
 
   & :global(.DayPickerNavigation_button__horizontal) {
     padding: 6px 9px;
-    top: 19px;
+    top: 16px;
     position: absolute;
     cursor: pointer;
     display: inline;
