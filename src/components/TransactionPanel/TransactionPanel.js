@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { array, arrayOf, bool, func, number, string } from 'prop-types';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import classNames from 'classnames';
+import { createSlug } from '../../util/urlHelpers';
 import {
   TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY,
   txIsAccepted,
@@ -282,7 +283,7 @@ export class TransactionPanelComponent extends Component {
       fetchTimeSlotsError,
       nextTransitions,
     } = this.props;
-
+    
     const currentTransaction = ensureTransaction(transaction);
     const currentListing = ensureListing(currentTransaction.listing);
     const currentProvider = ensureUser(currentTransaction.provider);
@@ -291,6 +292,7 @@ export class TransactionPanelComponent extends Component {
     const isProvider = transactionRole === 'provider';
 
     const transactionProviderID = currentProvider ? currentProvider.id.uuid : null;
+    const transactionCustomerID = transaction.customer ? transaction.customer.id.uuid : null;
 
     const listingLoaded = !!currentListing.id;
     const listingDeleted = listingLoaded && currentListing.attributes.deleted;
@@ -472,6 +474,7 @@ export class TransactionPanelComponent extends Component {
               transactionRole={transactionRole}
               providerName={authorDisplayName}
               customerName={customerDisplayName}
+              customerID={transactionCustomerID}
               isCustomerBanned={isCustomerBanned}
               listingId={currentListing.id && currentListing.id.uuid}
               listingTitle={listingTitle}
@@ -534,8 +537,8 @@ export class TransactionPanelComponent extends Component {
           <div className={css.asideDesktop}>
             <div className={css.detailCard}>
               <IsWrappedWithLink
-                condition={!isMobile}
-                wrapper={children => <NamedLink isNotRouterLink name="SearchListingsPage">{children}</NamedLink>}
+                condition={!isMobile && currentListing.id}
+                wrapper={children => <NamedLink isNotRouterLink name="ListingPage" params={{ id:currentListing.id.uuid, slug: createSlug(listingTitle) }}>{children}</NamedLink>}
               >
                  <DetailCardImage
                     avatarWrapperClassName={css.avatarWrapperDesktop}
