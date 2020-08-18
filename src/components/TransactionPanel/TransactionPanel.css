@@ -147,7 +147,7 @@
 
 /* PanelHeadings subcomponent */
 .headingOrder {
-  margin: 29px 24px 0 24px;
+  margin: 0px 24px 0 24px;
 
   @media (--viewportMedium) {
     max-width: 80%;
@@ -501,7 +501,9 @@
   cursor: pointer;
 
   @media (--viewportLarge) {
-    margin: 0 0 80px;
+    margin: -60px 0 20px 0;
+    /* margin-bottom: 20px;
+    margin-top: -60px; */
   }
 }
 
