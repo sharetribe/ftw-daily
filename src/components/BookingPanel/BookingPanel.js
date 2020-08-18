@@ -1,4 +1,5 @@
-import React from 'react'
+import Fade from '@material-ui/core/Fade';
+import React, { useState } from 'react'
 import { compose } from 'redux'
 import { withRouter } from 'react-router-dom'
 import {
@@ -6,6 +7,7 @@ import {
 } from 'prop-types'
 import classNames from 'classnames'
 import omit from 'lodash/omit'
+import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl'
 import {
   propTypes, LISTING_STATE_CLOSED, LINE_ITEM_NIGHT, LINE_ITEM_DAY
@@ -58,6 +60,23 @@ const BookingPanel = (props) => {
     location,
     intl,
   } = props
+
+  const [showBookingBar, setShowBookingBar] = useState(false)
+
+  useScrollPosition(
+    ({ prevPos, currPos }) => {
+      const isVisible = currPos.y < -1000
+      if (isVisible && !showBookingBar) {
+        setShowBookingBar(true)
+        // document.getElementById('widget-container')
+        // document.style.display = 'none'
+      }
+      if (currPos.y >= -100) {
+        setShowBookingBar(false)
+      }
+    },
+    [showBookingBar]
+  )
 
   const { price, publicData = {} } = listing.attributes
 
@@ -124,29 +143,32 @@ const BookingPanel = (props) => {
           />
         ) : null}
       </ModalInMobile>
-      <div className={css.openBookingForm}>
-        <div className={css.priceContainer}>
-          <div className={css.priceValue} title={priceTitle}>
-            {formattedPrice}
-          </div>
-          <div className={css.perUnit}>
-            <FormattedMessage id={unitTranslationKey} />
+      <Fade in={showBookingBar}>
+        <div className={css.openBookingForm}>
+          <div className={css.openBookingFormDataDisplay}>
+            <div className={css.priceContainer}>
+              <div className={css.priceValue} title={priceTitle}>
+                {formattedPrice}
+              </div>
+              <div className={css.perUnit}>
+                <FormattedMessage id={unitTranslationKey} />
+              </div>
+            </div>
+            {showBookingDatesForm ? (
+              <Button
+                rootClassName={css.bookButton}
+                onClick={() => openBookModal(isOwnListing, isClosed, history, location)}
+              >
+                <FormattedMessage id="BookingPanel.ctaButtonMessage" />
+              </Button>
+            ) : (
+              <div className={css.closedListingButton}>
+                <FormattedMessage id="BookingPanel.closedListingButtonText" />
+              </div>
+            )}
           </div>
         </div>
-
-        {showBookingDatesForm ? (
-          <Button
-            rootClassName={css.bookButton}
-            onClick={() => openBookModal(isOwnListing, isClosed, history, location)}
-          >
-            <FormattedMessage id="BookingPanel.ctaButtonMessage" />
-          </Button>
-        ) : (
-          <div className={css.closedListingButton}>
-            <FormattedMessage id="BookingPanel.closedListingButtonText" />
-          </div>
-        )}
-      </div>
+      </Fade>
     </div>
   )
 }

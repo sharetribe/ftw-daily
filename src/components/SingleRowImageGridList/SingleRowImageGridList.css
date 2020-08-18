@@ -12,4 +12,8 @@
   border-radius: 8px;
 }
 
+.MuiGridList-root::-webkit-scrollbar {
+  display: none !important;
+}
+
 /*# sourceMappingURL=SingleRowImageGridList.css.map */

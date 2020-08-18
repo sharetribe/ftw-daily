@@ -2,11 +2,13 @@ import React from 'react'
 import _ from 'lodash'
 import includes from 'lodash/includes'
 import keys from 'lodash/keys'
+import { useTheme } from '@material-ui/core/styles'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { WaveDivider } from '../../assets/WaveDivider'
 import Modal from '../../components/Modal/Modal'
+import MultiRowGridList from '../../components/MultiRowGridList/MultiRowGridList'
 import SingleLineGridList from '../../components/SingleRowImageGridList/SingleRowImageGridList'
 import { FormattedMessage } from '../../util/reactIntl'
-import { richText } from '../../util/richText'
 import mswIcon from '../../assets/msw_icon.png'
 
 import css from './ListingPage.css'
@@ -23,6 +25,9 @@ const SectionSurfMaybe = (props) => {
   const [isForecastLoading, toggleForecastIsLoading] = React.useState(false)
   const { publicData, metadata, images } = props
 
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+
   const generateMobileImageGrid = () => {
     if (publicData.surfing) {
       const surfingImageKeys = keys(publicData.surfing.images)
@@ -30,9 +35,11 @@ const SectionSurfMaybe = (props) => {
       .filter((img) => includes(surfingImageKeys, img.id.uuid))
       .map((nimg) => ({ img: nimg.attributes.variants['landscape-crop2x'].url, title: 'Surfing Image' }))
       return (
-        <SingleLineGridList
-          images={imagesToShow}
-        />
+        isMobile
+          ? <SingleLineGridList
+            images={imagesToShow}
+          />
+          : <MultiRowGridList images={imagesToShow}/>
       )
     }
   }

@@ -19,7 +19,7 @@
   .modalContainer {
     padding: 20px;
     background-color: transparent;
-    margin-top: 100px;
+    margin-top: 20px;
     margin-bottom: 0;
   }
 }
@@ -156,6 +156,8 @@
   background-color: var(--matterColorLight);
   box-shadow: var(--boxShadowTop);
   display: flex;
+  align-items: center;
+  justify-content: center;
   /* Contain repainting to this component only */
   /* 3D painting container helps scrolling */
   transform: translate3d(0, 0, 0);
@@ -169,6 +171,14 @@
   .openBookingForm {
     height: 100px;
   }
+}
+
+.openBookingFormDataDisplay {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1128px;
+  width: 100%;
 }
 
 .priceContainer {
@@ -213,6 +223,7 @@
   @apply --marketplaceButtonStylesPrimary;
   /* Clear padding that is set for link elements looking like buttons */
   padding: 0;
+  max-width: 200px;
 }
 
 .closedListingButton {

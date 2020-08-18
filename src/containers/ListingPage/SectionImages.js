@@ -1,7 +1,6 @@
 import React from 'react'
 import { FormattedMessage } from '../../util/reactIntl'
 import { ResponsiveImage, Modal, ImageCarousel } from '../../components'
-import ActionBarMaybe from './ActionBarMaybe'
 
 import css from './ListingPage.css'
 

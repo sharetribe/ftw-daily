@@ -474,6 +474,7 @@
   font-weight: 800;
   margin-top: 0;
   margin-bottom: 13px;
+  text-transform: uppercase;
 }
 @media (--viewportMedium) {
   .coSectionTitle {
@@ -652,6 +653,7 @@
 @media (--viewportMedium) {
   .map {
     height: 75vh;
+    max-width: 100%;
   }
 }
 @media (--viewportLarge) {

@@ -475,6 +475,7 @@
   font-weight: 800;
   margin-top: 0;
   margin-bottom: 13px;
+  text-transform: uppercase;
   @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 20px;
@@ -639,6 +640,7 @@
 
   @media (--viewportMedium) {
     height: 75vh;
+    max-width: 100%;
   }
 
   @media (--viewportLarge) {
