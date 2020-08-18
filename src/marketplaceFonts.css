@@ -11,6 +11,8 @@
     since browsers support CSS Properties already.
  */
 
+  --fontFamily: 'poppins', Helvetica, Arial, sans-serif;
+
   --fontWeightRegular: 400;
   --fontWeightMedium: 500;
   --fontWeightSemiBold: 600;
@@ -19,32 +21,32 @@
   /* ================ Default font ================ */
 
   --marketplaceDefaultFontStyles: {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: var(--fontFamily);
     font-weight: var(--fontWeightMedium);
-    font-size: 18px;
+    font-size: 14px;
     line-height: 24px;
     letter-spacing: -0.1px;
     /* No margins for default font */
 
     @media (--viewportMedium) {
-      font-size: 20px;
-      line-height: 24px;
+      font-size: 16px;
+      line-height: 32px;
     }
   }
 
   --marketplaceSmallFontStyles: {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: var(--fontFamily);
     font-weight: var(--fontWeightMedium);
-    font-size: 15px;
+    font-size: 14px;
     line-height: 24px;
   }
 
   /* ================ Body font ================ */
 
   --marketplaceBodyFontStyles: {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: var(--fontFamily);
     font-weight: var(--fontWeightMedium);
-    font-size: 18px;
+    font-size: 14px;
     line-height: 24px;
     letter-spacing: -0.1px;
     /* margin-top + n * line-height + margin-bottom => x * 6px */
@@ -52,7 +54,7 @@
     margin-bottom: 12px;
 
     @media (--viewportMedium) {
-      font-size: 20px;
+      font-size: 16px;
       line-height: 32px;
       /* margin-top + n * line-height + margin-bottom => x * 8px */
       margin-top: 16px;
@@ -64,26 +66,20 @@
 
   --marketplaceHeroTitleFontStyles: {
     font-weight: var(--fontWeightBold);
-    font-size: 42px;
-    line-height: 42px;
-    letter-spacing: -1px;
+    font-size: 36px;
+    line-height: 36px;
+    letter-spacing: -0.7px;
     /* margin-top + n * line-height + margin-bottom => x * 6px */
     margin-top: 25px;
-    margin-bottom: 20px;
+    margin-bottom: 14px;
 
     @media (--viewportMedium) {
-      font-size: 72px;
-      line-height: 72px;
+      font-size: 64px;
+      line-height: 64px;
       letter-spacing: -1.5px;
       /* margin-top + n * line-height + margin-bottom => x * 8px */
       margin-top: 25px;
-      margin-bottom: 31px;
-    }
-
-    @media (min-width: 1681px) {
-      font-size: 90px;
-      line-height: 96px;
-      letter-spacing: -2px;
+      margin-bottom: 23px;
     }
   }
 
@@ -95,12 +91,10 @@
     line-height: 36px;
     letter-spacing: -0.5px;
     margin: 0;
-    font-weight: var(--fontWeightBold);
 
     @media (--viewportMedium) {
       font-weight: var(--fontWeightSemiBold);
       line-height: 40px;
-      letter-spacing: -0.9px;
       margin: 0;
     }
   }
@@ -108,19 +102,19 @@
   /* ================ H1, H2, H3, H4, H5 & H6 ================ */
 
   --marketplaceH1FontStyles: {
-    font-weight: var(--fontWeightBold);
-    font-size: 30px;
-    line-height: 36px;
-    letter-spacing: -1px;
+    font-weight: var(--fontWeightSemiBold);
+    font-size: 24px;
+    line-height: 30px;
+    letter-spacing: -0.5px;
     /* margin-top + n * line-height + margin-bottom => x * 6px */
     margin-top: 18px;
     margin-bottom: 18px;
 
     @media (--viewportMedium) {
-      font-size: 48px;
+      font-size: 40px;
       font-weight: var(--fontWeightSemiBold);
-      line-height: 56px;
-      letter-spacing: -2px;
+      line-height: 48px;
+      letter-spacing: -1px;
       /* margin-top + n * line-height + margin-bottom => x * 8px */
       margin-top: 24px;
       margin-bottom: 24px;
@@ -129,9 +123,8 @@
 
   --marketplaceH2FontStyles: {
     font-weight: var(--fontWeightSemiBold);
-    font-size: 24px;
-    line-height: 30px;
-    letter-spacing: -0.3px;
+    font-size: 21px;
+    line-height: 24px;
     /* margin-top + n * line-height + margin-bottom => x * 6px */
     margin-top: 21px;
     margin-bottom: 17px;
@@ -146,9 +139,8 @@
 
   --marketplaceH3FontStyles: {
     font-weight: var(--fontWeightSemiBold);
-    font-size: 20px;
+    font-size: 18px;
     line-height: 24px;
-    letter-spacing: -0.2px;
     /* margin-top + n * line-height + margin-bottom => x * 6px */
     margin-top: 16px;
     margin-bottom: 14px;
@@ -162,7 +154,7 @@
 
   --marketplaceH4FontStyles: {
     font-weight: var(--fontWeightMedium);
-    font-size: 16px;
+    font-size: 15px;
     line-height: 24px;
     letter-spacing: 0;
     /* margin-top + n * line-height + margin-bottom => x * 6px */
@@ -178,7 +170,7 @@
   }
 
   --marketplaceH5FontStyles: {
-    font-weight: var(--fontWeightRegular);
+    font-weight: var(--fontWeightMedium);
     font-size: 14px;
     line-height: 18px;
     letter-spacing: 0;
@@ -187,7 +179,7 @@
     margin-bottom: 8px;
 
     @media (--viewportMedium) {
-      line-height: 24px;
+      line-height: 16px;
       /* margin-top + n * line-height + margin-bottom => x * 8px */
       margin-top: 10px;
       margin-bottom: 14px;
@@ -215,14 +207,14 @@
   /* ================ Other fonts ================ */
 
   --marketplaceTinyFontStyles: {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: var(--fontFamily);
     font-weight: var(--fontWeightRegular);
     font-size: 13px;
     line-height: 18px;
-    letter-spacing: -0.1px;
     /* margin-top + n * line-height + margin-bottom => x * 6px */
     margin-top: 9.5px;
     margin-bottom: 8.5px;
+    -webkit-font-smoothing: subpixel-antialiased;
 
     @media (--viewportMedium) {
       line-height: 16px;
@@ -233,63 +225,62 @@
   }
 
   --marketplaceMessageFontStyles {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: var(--fontFamily);
     font-weight: var(--fontWeightRegular);
     font-size: 16px;
     line-height: 24px;
   }
 
   --marketplaceMessageDateFontStyles {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: var(--fontFamily);
     font-weight: var(--fontWeightRegular);
-    font-size: 13px;
+    font-size: 12px;
     line-height: 18px;
-    letter-spacing: -0.1px;
 
     @media (--viewportMedium) {
       font-weight: var(--fontWeightMedium);
-      font-size: 13px;
+      font-size: 12px;
       line-height: 24px;
     }
   }
 
   --marketplaceTxTransitionFontStyles {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: var(--fontFamily);
     font-weight: var(--fontWeightMedium);
     font-size: 16px;
     line-height: 18px;
 
     @media (--viewportMedium) {
-      font-size: 20px;
-      line-height: 32px;
+      font-size: 16px;
+      line-height: 24px;
     }
   }
 
   --marketplaceSearchFilterLabelFontStyles {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: var(--fontFamily);
     font-weight: var(--fontWeightSemiBold);
     font-size: 13px;
     line-height: 18px;
 
     @media (--viewportMedium) {
       font-weight: var(--fontWeightMedium);
-      font-size: 16px;
+      font-size: 13px;
       line-height: 20px;
     }
   }
 
   --marketplaceSearchFilterSublabelFontStyles {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: var(--fontFamily);
     font-weight: var(--fontWeightMedium);
     font-size: 18px;
     line-height: 18px;
   }
 
   --marketplaceListingAttributeFontStyles {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: var(--fontFamily);
     font-weight: var(--fontWeightMedium);
-    font-size: 18px;
-    line-height: 32px;
+    font-size: 16px;
+    line-height: 24px;
   }
 
   /* ================ Tabbed navigation font styles ================ */
@@ -302,14 +293,14 @@
 
     @media (--viewportLarge) {
       font-weight: var(--fontWeightSemiBold);
-      font-size: 24px;
-      line-height: 32px;
+      font-size: 20px;
+      line-height: 24px;
     }
   }
 
   --marketplaceTabNavHorizontalFontStyles {
     font-weight: var(--fontWeightMedium);
-    font-size: 16px;
+    font-size: 14px;
     line-height: 24px;
     letter-spacing: 0;
   }
