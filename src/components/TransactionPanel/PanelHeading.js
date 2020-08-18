@@ -19,6 +19,7 @@ const createListingLink = (listingId, label, listingDeleted, searchParams = {}, 
   if (!listingDeleted) {
     const params = { id: listingId, slug: createSlug(label) };
     const to = { search: stringify(searchParams) };
+    
     return (
       <NamedLink className={className} name="ListingPage" params={params} to={to}>
         {substitutionalLinkText ? substitutionalLinkText : label}
@@ -112,16 +113,18 @@ const PanelHeading = props => {
     listingDeleted,
     isCustomerBanned,
     substitutionalLinkText,
-    providerID
+    providerID,
+    customerID
   } = props;
-
+  
   const isCustomer = props.transactionRole === 'customer';
 
   const defaultRootClassName = isCustomer ? css.headingOrder : css.headingSale;
   const titleClasses = classNames(rootClassName || defaultRootClassName, className);
   const listingLink = createListingLink(listingId, listingTitle, listingDeleted, {}, "", substitutionalLinkText);
   const providerLink = providerID ? createProfileLink(providerID, listingTitle, null, substitutionalLinkText) : null
-  
+  const customerLink = customerID ? createProfileLink(customerID, listingTitle, null, customerName) : null
+
   switch (panelHeadingState) {
     case HEADING_ENQUIRED:
       return isCustomer ? (
@@ -135,7 +138,7 @@ const PanelHeading = props => {
         <HeadingProvider
           className={titleClasses}
           id="TransactionPanel.saleEnquiredTitle"
-          values={{ providerLink }}
+          values={{ customerLink }}
           isCustomerBanned={isCustomerBanned}
         />
       );

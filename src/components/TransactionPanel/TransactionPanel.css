@@ -136,7 +136,7 @@
 
   @media (--viewportLarge) {
     display: block;
-    margin-top: 42px;
+    margin-top: 0;
   }
 }
 .avatarDesktop {
@@ -501,7 +501,7 @@
   cursor: pointer;
 
   @media (--viewportLarge) {
-    margin: -60px 0 20px 0;
+    margin: -64px 0 20px 0;
     /* margin-bottom: 20px;
     margin-top: -60px; */
   }
