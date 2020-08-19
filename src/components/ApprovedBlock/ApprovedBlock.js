@@ -175,11 +175,17 @@ const ApprovedBlockComponent = props => (
               disabled={submitDisabled}
               ready={ready}
             >
-              {submitButtonText ? (
-                submitButtonText
-              ) : (
-                <FormattedMessage id="PayoutDetailsForm.submitButtonText" />
-              )}
+              {payloadFormView ? submitButtonText ? (
+                  submitButtonText
+                ) : (
+                  <FormattedMessage id="PayoutPreferencesPage.submitButtonText" />
+                ) :
+                submitButtonText ? (
+                  submitButtonText
+                ) : (
+                  <FormattedMessage id="PayoutDetailsForm.submitButtonText" />
+                )
+              }
             </Button>
           </React.Fragment>
         </Form>
