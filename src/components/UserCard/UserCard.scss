@@ -1,4 +1,8 @@
 @import '../../marketplace.css';
+
+.root {
+}
+
 .content {
   display: flex;
   flex-direction: row;
@@ -16,9 +20,8 @@
 .heading {
   @apply --marketplaceH2FontStyles;
   margin: 20px 0 0 0;
-}
-@media (--viewportMedium) {
-  .heading {
+
+  @media (--viewportMedium) {
     margin: 15px 0 0 0;
   }
 }
@@ -34,25 +37,22 @@
   margin: 18px 0 0 0;
   transition: all 1s ease-in;
   @apply --marketplaceH4FontStyles;
-}
-@media (--viewportMedium) {
-  .mobileBio,
-.desktopBio {
+
+  @media (--viewportMedium) {
     margin: 18px 0 0 0;
   }
 }
 
-@media (--viewportMedium) {
-  .mobileBio {
+.mobileBio {
+  @media (--viewportMedium) {
     display: none;
   }
 }
 
 .desktopBio {
   display: none;
-}
-@media (--viewportMedium) {
-  .desktopBio {
+
+  @media (--viewportMedium) {
     margin-top: 16px;
     display: block;
   }
@@ -67,15 +67,14 @@
 .links {
   @apply --marketplaceH4FontStyles;
   margin-top: 13px;
-}
-@media (--viewportMedium) {
-  .links {
+
+  @media (--viewportMedium) {
     margin: 16px 0 0 0;
   }
 }
 
-@media (--viewportMedium) {
-  .withBioMissingAbove {
+.withBioMissingAbove {
+  @media (--viewportMedium) {
     /* Fix baseline alignment if bio is missing from above */
     margin-top: 16px;
   }
@@ -89,9 +88,8 @@
 .headingRow {
   display: flex;
   flex-direction: column;
-}
-@media (--viewportMedium) {
-  .headingRow {
+
+  @media (--viewportMedium) {
     flex-direction: row;
     justify-content: space-between;
     align-items: baseline;
@@ -103,9 +101,8 @@
   display: none;
   margin-bottom: 0;
   white-space: nowrap;
-}
-@media (--viewportMedium) {
-  .editProfileDesktop {
+
+  @media (--viewportMedium) {
     display: inline;
   }
 }
@@ -113,9 +110,8 @@
 .editProfileMobile {
   @apply --marketplaceH4FontStyles;
   display: inline;
-}
-@media (--viewportMedium) {
-  .editProfileMobile {
+
+  @media (--viewportMedium) {
     display: none;
   }
 }
@@ -123,5 +119,3 @@
 .contact {
   @apply --marketplaceButtonStylesSmallBlack;
 }
-
-/*# sourceMappingURL=UserCard.css.map */
