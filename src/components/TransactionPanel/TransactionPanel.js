@@ -77,48 +77,6 @@ const addAsterisk = (message, regExp) => {
 const messageChecks = [
   /[\d\s]{8,}/,
   /[\d\w.]+@[\w\d]+.[\w\d]+/,
-  // {
-  //   regExp:/[\d\s]{8,}/,
-  //   addAsterisk: function(message) {
-
-  //     let asteriskMessage = ''
-  //     const numbers = message.match(new RegExp(this.regExp, 'g'))
-  //     numbers
-  //     .map(n => n.trim())
-  //     .forEach(number => {
-  //       const index = message.indexOf(number)
-  //       if(~index) {
-  //         const numberOfSpaces = number.split(" ").length
-  //         const asterisk = Array.from({ length: asteriskNumber + numberOfSpaces }, x => '*').join('')
-  //         const messageToAdd = asteriskMessage ? asteriskMessage : message
-
-  //         asteriskMessage = messageToAdd.slice(0, index) + asterisk + messageToAdd.slice(index + asteriskNumber + numberOfSpaces)
-  //       }
-  //     });
-  //     return asteriskMessage
-  //   }
-  // },
-  // {
-  //   regExp:/[\d\w.]+@[\w\d]+.[\w\d]+/,
-  //   addAsterisk: function(message) {
-
-  //     let asteriskMessage = ''
-  //     const numbers = message.match(new RegExp(this.regExp, 'g'))
-  //     numbers
-  //     .map(n => n.trim())
-  //     .forEach(number => {
-  //       const index = message.indexOf(number)
-  //       if(~index) {
-  //         const numberOfSpaces = number.split(" ").length
-  //         const asterisk = Array.from({ length: asteriskNumber + numberOfSpaces }, x => '*').join('')
-  //         const messageToAdd = asteriskMessage ? asteriskMessage : message
-
-  //         asteriskMessage = messageToAdd.slice(0, index) + asterisk + messageToAdd.slice(index + asteriskNumber + numberOfSpaces)
-  //       }
-  //     });
-  //     return asteriskMessage
-  //   }
-  // },
 ]
 
 // Helper function to get display names for different roles
