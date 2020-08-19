@@ -11,10 +11,10 @@
  */
 
   --PropertyGroup_lineHeight: 24px;
-  --PropertyGroup_lineThroughTop: calc(var(--PropertyGroup_lineHeight) - 7px);
-  --PropertyGroup_lineThroughBottom: calc(var(--PropertyGroup_lineHeight) - 6px);
-  --PropertyGroup_lineThroughTopMobile: calc(var(--PropertyGroup_lineHeight) - 9px);
-  --PropertyGroup_lineThroughBottomMobile: calc(var(--PropertyGroup_lineHeight) - 8px);
+  --PropertyGroup_lineThroughTop: 12px;
+  --PropertyGroup_lineThroughBottom: 13px;
+  --PropertyGroup_lineThroughTopMobile: 10px;
+  --PropertyGroup_lineThroughBottomMobile: 11px;
 }
 
 .root {
