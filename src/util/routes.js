@@ -1,6 +1,6 @@
 import find from 'lodash/find';
 import { matchPath } from 'react-router-dom';
-import pathToRegexp from 'path-to-regexp';
+import { compile } from 'path-to-regexp';
 import { stringify } from './urlHelpers';
 
 const findRouteByName = (nameToFind, routes) => find(routes, route => route.name === nameToFind);
@@ -14,7 +14,7 @@ const toPathByRouteName = (nameToFind, routes) => {
   if (!route) {
     throw new Error(`Path "${nameToFind}" was not found.`);
   }
-  return pathToRegexp.compile(route.path);
+  return compile(route.path);
 };
 
 /**
