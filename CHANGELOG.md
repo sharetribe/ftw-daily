@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [change] Update path-to-regexp to v6.1.0
+  [#1348](https://github.com/sharetribe/ftw-daily/pull/1348)
 - [change] Update Helmet to v4.0.0. Show warning if environment variable REACT_APP_CSP is not set or
   if it's set to 'report' mode in production environmet. Set REACT_APP_CSP to 'report' mode by
   default in `.env-template` file. [#1347](https://github.com/sharetribe/ftw-daily/pull/1347)
