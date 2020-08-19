@@ -1,6 +1,6 @@
 {
   "name": "app",
-  "version": "6.2.0",
+  "version": "6.3.0",
   "private": true,
   "license": "Apache-2.0",
   "dependencies": {
