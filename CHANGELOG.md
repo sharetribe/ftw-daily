@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [change] We decided to change the default font to Poppins.
+  [#1349](https://github.com/sharetribe/ftw-daily/pull/1349)
 - [change] Update path-to-regexp to v6.1.0
   [#1348](https://github.com/sharetribe/ftw-daily/pull/1348)
 - [change] Update Helmet to v4.0.0. Show warning if environment variable REACT_APP_CSP is not set or
