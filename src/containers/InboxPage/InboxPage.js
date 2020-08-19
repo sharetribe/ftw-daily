@@ -44,14 +44,16 @@ import css from './InboxPage.css';
 const formatDate = (intl, date) => {
   const options = {
     weekday: "short", 
-    day: "numeric" 
+    day: "numeric",
   };
   // return date.toLocaleDateString('de-DE', options)
   // console.log(date.toLocaleDateString('de-DE', options))
   return {
     short: date.toLocaleDateString('de-DE', {
       weekday: "short", 
-      day: "numeric" 
+      day: "numeric" ,
+      year: "numeric", 
+      month: "numeric", 
     }),
     long: date.toLocaleDateString('de-DE', {
       weekday: "short", 
@@ -220,7 +222,7 @@ export const InboxItem = props => {
   const linkClasses = classNames(css.itemLink, {
     [css.bannedUserLink]: isOtherUserBanned,
   });
-  
+  const getFormattedDate = date => date.replace(/,/, '').replace(/\.\d\./g, m => m.slice(0,1) + 0 + m.slice(1)).replace(/ \d\./g, m => ' 0' + m.slice(1))
   
   return (
     <div className={css.item}>
@@ -256,7 +258,7 @@ export const InboxItem = props => {
             className={classNames(css.lastTransitionedAt, stateData.lastTransitionedAtClassName)}
             title={lastTransitionedAt.long}
           >
-            {lastTransitionedAt.short}
+            {getFormattedDate(lastTransitionedAt.short)}
           </div>
         </div>
       </NamedLink>
