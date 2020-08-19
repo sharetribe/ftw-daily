@@ -10,7 +10,9 @@
   /* Content of EditListingWizard should have smaller z-index than Topbar */
   z-index: 0;
 }
-
+.rootZindex {
+  z-index: 1;
+}
 .tabsContainer {
   flex-grow: 1;
   /* Layout */
@@ -113,6 +115,18 @@
   }
 }
 
+
+@media (max-width: 767px) {
+  .modalMessage {
+    margin-bottom: 95px;
+  }
+  .modalTitle {
+    margin-top: 18px;
+    margin-bottom: 18px;
+  }
+}
+
+
 .approvedBlock__informationModal{
   flex-grow: 1;
   position: relative;
@@ -122,6 +136,7 @@
   background-color: #ffffff;
   border-radius: 5px;
   border-bottom: none;
+  padding-top: 70px;
 
 }
 
@@ -134,4 +149,5 @@
     margin-bottom: 12.5vh;
     border-top: 8px solid #923395;
   }
+
 }
