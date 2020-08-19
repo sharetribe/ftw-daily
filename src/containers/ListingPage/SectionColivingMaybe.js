@@ -5,6 +5,7 @@ import { useTheme } from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import MultiRowGridList from '../../components/MultiRowGridList/MultiRowGridList'
 import SingleLineGridList from '../../components/SingleRowImageGridList/SingleRowImageGridList'
+import { lazyLoadWithDimensions } from '../../util/contextHelpers';
 import { FormattedMessage } from '../../util/reactIntl'
 
 import css from './ListingPage.css'
@@ -12,7 +13,7 @@ import css from './ListingPage.css'
 const MIN_LENGTH_FOR_LONG_WORDS_IN_COMMUNITY = 20
 
 const SectionColivingMaybe = (props) => {
-  const { publicData, images } = props
+  const { publicData, images, retreat } = props
 
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
@@ -40,6 +41,9 @@ const SectionColivingMaybe = (props) => {
           <FormattedMessage id="ListingPage.colivingTitle" />
         </span>
       </h2>
+      <div className={css.tags}>
+        {retreat}
+      </div>
       <p className={css.community}>
         {
           publicData.coliving ? publicData.coliving.description

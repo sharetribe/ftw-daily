@@ -2,6 +2,7 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import GridList from '@material-ui/core/GridList'
 import GridListTile from '@material-ui/core/GridListTile'
+import { lazyLoadWithDimensions } from '../../util/contextHelpers'
 
 import css from './SingleRowImageGridList.css'
 
@@ -55,6 +56,17 @@ const useStyles = makeStyles((theme) => ({
  *   },
  * ];
  */
+
+class GridImage extends React.Component {
+  render() {
+    return (
+      <img className={css.gridImage} src={this.props.tile.img} alt={this.props.tile.title} />
+    )
+  }
+}
+
+const LazyGridImage = lazyLoadWithDimensions(GridImage)
+
 const SingleLineGridList = (props) => {
   const classes = useStyles()
   return (
@@ -76,7 +88,7 @@ const SingleLineGridList = (props) => {
               className={css.gridImageContainer}
               onClick={() => console.log('click')}
             >
-              <img className={css.gridImage} src={tile.img} alt={tile.title} />
+              <LazyGridImage tile={tile} />
             </div>
           </GridListTile>
         ))}

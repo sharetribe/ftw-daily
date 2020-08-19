@@ -199,6 +199,43 @@
       border-color: var(--matterColorNegative);
     }
   }
+  --marketplaceButtonStylesSmallWhite {
+    @apply --marketplaceTinyFontStyles;
+    font-weight: var(--fontWeightMedium);
+    margin: 0;
+    padding: 8px 12px;
+    color: white;
+    border: solid 4px white;
+    border-radius: 4rem;
+    cursor: pointer;
+    transition: var(--transitionStyleButton);
+    &:hover {
+      border-color: var(--marketplaceColorDark);
+      color: var(--marketplaceColorDark);
+    }
+    @media (--viewportMedium) {
+      margin: 0;
+    }
+  }
+  --marketplaceButtonStylesSmallBlack {
+    @apply --marketplaceTinyFontStyles;
+    font-weight: var(--fontWeightBold);
+    margin: 0;
+    padding: 8px 12px;
+    color: white;
+    background-color: black;
+    border-radius: 4rem;
+    border: none;
+    cursor: pointer;
+    transition: var(--transitionStyleButton);
+    &:hover {
+      border-color: var(--marketplaceColorDark);
+      color: var(--marketplaceColorDark);
+    }
+    @media (--viewportMedium) {
+      margin: 0;
+    }
+  }
   /* ================ Inputs ================ */
   --marketplaceInputStyles: {
     /* Dimensions */

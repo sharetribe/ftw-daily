@@ -552,6 +552,11 @@
   }
 }
 
+.badgeContainer {
+  display: flex;
+  align-items: center;
+}
+
 .reviewsHeading {
   @apply --marketplaceH3FontStyles;
   color: var(--matterColorAnti);
@@ -757,6 +762,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+  height: 100%;
   margin-bottom: 20px;
   min-height: 300px;
 
@@ -767,7 +773,8 @@
   @media (--viewportMedium) {
     .viewPhotos {
       display: block;
-      bottom: 50px;
+      bottom: 100px;
+      left: 40px;
     }
   }
 }
@@ -880,7 +887,7 @@
     right: auto;
     height: calc(0.41 * 100vw);
     width: 100%;
-    height: 89vh;
+    height: 100vh;
     object-fit: cover;
 
     &:hover {
@@ -915,7 +922,7 @@
 .welcomeMessage {
   font-weight: 600;
   font-style: italic;
-  text-align: left;
+  text-align: center;
   font-size: 28px;
   line-height: 35px;
 
