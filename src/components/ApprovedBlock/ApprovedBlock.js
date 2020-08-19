@@ -198,7 +198,7 @@ const ApprovedBlockComponent = props => (
             {submitButtonText ? (
               submitButtonText
             ) : (
-              <FormattedMessage id="PayoutDetailsForm.submitButtonText" />
+              <FormattedMessage id="PayoutDetailsForm.submitInformationButtonText" />
             )}
           </Button>)}
           {redirect ? later(props) :
