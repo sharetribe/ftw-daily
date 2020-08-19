@@ -1,0 +1,27 @@
+.sectionVideo {
+  padding: 0 24px;
+  margin-bottom: 32px;
+  width: 90vw;
+  min-width: 320px;
+
+  @media (--viewportMedium) {
+    padding: 0;
+    width: 50vw;
+    margin-bottom: 52px;
+  }
+}
+
+.iframeContainer {
+  position: relative;
+  overflow: hidden;
+  padding-top: 56.25%;
+}
+
+.iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}

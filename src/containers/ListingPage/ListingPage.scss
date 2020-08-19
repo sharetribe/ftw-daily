@@ -822,11 +822,42 @@
   z-index: 2;
   font-size: 20px;
   font-weight: 300;
+  margin-bottom: 40px;
 
   @media (--viewportMedium) {
     top: 20px;
     font-size: 32px;
     text-align: center;
+  }
+}
+
+.viewVideoButton {
+  @apply --marketplaceTinyFontStyles;
+  font-weight: var(--fontWeightMedium);
+  padding: 8px 30px;
+  padding-right: 34px;
+  color: black;
+  background-color: white;
+  border-radius: 4rem;
+  border: none;
+  cursor: pointer;
+  transition: var(--transitionStyleButton);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background-color: var(--marketplaceColorDark);
+    color: white;
+  }
+
+  & > span {
+    font-size: 15px;
+    margin-left: 5px;
+  }
+
+  @media (--viewportMedium) {
+    margin: 0;
   }
 }
 
@@ -903,4 +934,14 @@
   font-size: 18px;
   font-weight: 400;
   text-align: left;
+}
+
+.viewVideoButtonContainer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  @media (--viewportMedium) {
+    justify-content: center;
+  }
 }

@@ -44,6 +44,7 @@ class EditListingPhotosPanel extends Component {
     const allOtherPhotos = _.concat(_.keys(surfPhotos), _.keys(colivingPhotos), _.keys(coworkingPhotos), _.keys(roomPhotos), [heroPhoto])
     const imagesToShow = {}
     _.filter(images, (img) => !_.includes(allOtherPhotos, img.id.uuid)).forEach((v) => { imagesToShow[v.id.uuid] = {} })
+    const video = _.get(currentListing.attributes.publicData, 'video', '')
 
     const isPublished
       = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT
@@ -64,14 +65,17 @@ class EditListingPhotosPanel extends Component {
           disabled={disabled}
           ready={ready}
           fetchErrors={errors}
-          initialValues={{ main: { images: imagesToShow } }}
+          initialValues={{ main: { images: imagesToShow }, video }}
           imagesToDisplay={imagesToShow}
           onImageUpload={onImageUpload}
           onSubmit={(values, shouldRedirect) => {
             const existingImages = _.get(listing, 'images', []).map((li) => li.id.uuid)
             const t = _.concat(existingImages, _.keys(values.main.images))
             const updateValues = {
-              images: _.uniq(t)
+              images: _.uniq(t),
+              publicData: {
+                video: values.video
+              }
             }
             onSubmit(updateValues, shouldRedirect === 'redirect')
           }}

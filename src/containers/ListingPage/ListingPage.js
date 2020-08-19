@@ -467,7 +467,6 @@ export class ListingPageComponent extends Component {
                     metadata={metadata}
                   />
                   {/* <SectionCommunityMaybe publicData={publicData} /> */}
-                  <SectionVideoMaybe video={publicData.video} />
                   <SectionMapMaybe
                     geolocation={geolocation}
                     publicData={publicData}
