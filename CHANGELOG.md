@@ -26,7 +26,7 @@ way to update this template, but currently, we follow a pattern:
 - [change] In `StripeConnectAccountForm` show error message from Stripe if there is one when
   fetching account link. [#1346](https://github.com/sharetribe/ftw-daily/pull/1346)
 
-[v6.2.0]: https://github.com/sharetribe/ftw-daily/compare/v6.2.0...v6.3.0
+[v6.3.0]: https://github.com/sharetribe/ftw-daily/compare/v6.2.0...v6.3.0
 
 ## [v6.2.0] 2020-08-12
 
