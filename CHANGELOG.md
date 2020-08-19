@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+## [v6.3.0] 2020-08-19
+
 - [change] We decided to change the default font to Poppins.
   [#1349](https://github.com/sharetribe/ftw-daily/pull/1349)
 - [change] Update path-to-regexp to v6.1.0
@@ -23,6 +25,8 @@ way to update this template, but currently, we follow a pattern:
   default in `.env-template` file. [#1347](https://github.com/sharetribe/ftw-daily/pull/1347)
 - [change] In `StripeConnectAccountForm` show error message from Stripe if there is one when
   fetching account link. [#1346](https://github.com/sharetribe/ftw-daily/pull/1346)
+
+[v6.2.0]: https://github.com/sharetribe/ftw-daily/compare/v6.2.0...v6.3.0
 
 ## [v6.2.0] 2020-08-12
 
