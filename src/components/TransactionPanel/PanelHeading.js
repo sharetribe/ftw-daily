@@ -106,7 +106,7 @@ const PanelHeading = props => {
     className,
     rootClassName,
     panelHeadingState,
-    customerName,
+    customerName: customerNameObj,
     providerName,
     listingId,
     listingTitle,
@@ -116,14 +116,16 @@ const PanelHeading = props => {
     providerID,
     customerID
   } = props;
-  
+
   const isCustomer = props.transactionRole === 'customer';
+  const customerName = customerNameObj.props.user.attributes.profile.displayName.split(" ").slice(0,1)[0]
 
   const defaultRootClassName = isCustomer ? css.headingOrder : css.headingSale;
   const titleClasses = classNames(rootClassName || defaultRootClassName, className);
-  const listingLink = createListingLink(listingId, listingTitle, listingDeleted, {}, "", substitutionalLinkText);
+  const listingLink = createListingLink(listingId, listingTitle, listingDeleted, {}, "");
   const providerLink = providerID ? createProfileLink(providerID, listingTitle, null, substitutionalLinkText) : null
   const customerLink = customerID ? createProfileLink(customerID, listingTitle, null, customerName) : null
+
 
   switch (panelHeadingState) {
     case HEADING_ENQUIRED:
@@ -194,7 +196,7 @@ const PanelHeading = props => {
             <p className={css.transactionInfoMessage}>
               <FormattedMessage
                 id="TransactionPanel.orderPreauthorizedInfo"
-                values={{ providerName }}
+                values={{ providerName: providerName.props.user.attributes.profile.displayName.split(" ").slice(0,1)[0] }}
               />
             </p>
           ) : null}
@@ -269,7 +271,7 @@ const PanelHeading = props => {
         <HeadingProvider
           className={titleClasses}
           id="TransactionPanel.saleDeliveredTitle"
-          values={{ customerName, providerLink }}
+          values={{ customerLink, listingLink }}
           isCustomerBanned={isCustomerBanned}
         />
       );
