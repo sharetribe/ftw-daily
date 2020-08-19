@@ -50,6 +50,7 @@ textarea,
 select,
 li {
   @apply --marketplaceDefaultFontStyles;
+  line-height: 24px;
 }
 
 p,
@@ -73,7 +74,7 @@ ul {
 
 legend,
 label {
-  @apply --marketplaceH4FontStyles;
+  @apply --marketplaceH5FontStyles;
   font-weight: var(--fontWeightSemiBold);
   display: block;
   margin-top: 0;
@@ -118,9 +119,9 @@ textarea {
 
 :global(.fontsLoaded) {
   & body {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'poppins', Helvetica, Arial, sans-serif;
   }
   & button {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'poppins', Helvetica, Arial, sans-serif;
   }
 }

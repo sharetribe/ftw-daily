@@ -172,7 +172,7 @@
   /* Dimensions */
   width: 105px;
   height: 41px;
-  padding: 10px 10px 11px 35px;
+  padding: 11px 10px 7px 35px;
 
   /* Look and feel (buttonish) */
   background-color: var(--matterColorLight);
@@ -192,7 +192,7 @@
     margin-top: 0;
     margin-bottom: 0;
     transition: var(--transitionStyleButton);
-    padding: 7px 10px 11px 35px;
+    padding: 11px 10px 7px 35px;
   }
 
   &:hover {

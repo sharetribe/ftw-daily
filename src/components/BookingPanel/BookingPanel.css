@@ -71,8 +71,7 @@
 
   @media (--viewportLarge) {
     display: block;
-    margin-top: -2px;
-    margin-bottom: 33px;
+    margin-bottom: 30px;
   }
 }
 
@@ -81,7 +80,7 @@
   color: var(--matterColor);
 
   margin-top: 0;
-  margin-bottom: 9px;
+  margin-bottom: 2px;
 }
 
 .bookingHelp {

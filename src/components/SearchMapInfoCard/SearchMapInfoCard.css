@@ -58,7 +58,7 @@
 
 /* Overwrite Mapbox's specific font rules */
 .root .card {
-  font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+  font-family: 'poppins', Helvetica, Arial, sans-serif;
   font-weight: var(--fontWeightSemiBold);
 }
 
@@ -87,7 +87,7 @@
 
 .info {
   display: flex;
-  padding: 8px 16px;
+  padding: 11px 13px;
 }
 
 .price {

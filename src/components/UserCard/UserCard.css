@@ -39,7 +39,7 @@
   @apply --marketplaceH4FontStyles;
 
   @media (--viewportMedium) {
-    margin: 18px 0 0 0;
+    margin: 0;
   }
 }
 
@@ -53,7 +53,6 @@
   display: none;
 
   @media (--viewportMedium) {
-    margin-top: 16px;
     display: block;
   }
 }

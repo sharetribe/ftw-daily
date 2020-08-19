@@ -16,11 +16,11 @@
    */
   --TopbarDesktop_label: {
     display: inline-block;
-    margin: 24px 0;
+    margin: 28px 0;
     text-decoration: inherit;
 
     @media (--viewportMedium) {
-      margin: 24px 0;
+      margin: 28px 0;
     }
   }
 
@@ -116,7 +116,7 @@
 /* Create listing (CTA for providers) */
 .createListingLink {
   @apply --TopbarDesktop_linkHover;
-  @apply --marketplaceH4FontStyles;
+  @apply --marketplaceH5FontStyles;
 
   flex-shrink: 0;
   height: 100%;
@@ -142,7 +142,7 @@
 /* Inbox */
 .inboxLink {
   @apply --TopbarDesktop_linkHover;
-  @apply --marketplaceH4FontStyles;
+  @apply --marketplaceH5FontStyles;
   height: 100%;
   padding: 0 12px 0 12px;
   margin-top: 0;
@@ -258,7 +258,7 @@
 
 .signup,
 .login {
-  @apply --marketplaceH4FontStyles;
+  @apply --marketplaceH5FontStyles;
   @apply --TopbarDesktop_label;
 }
 
@@ -306,7 +306,7 @@
 .logoutButton {
   @apply --marketplaceLinkStyles;
   /* Font is specific to this component */
-  @apply --marketplaceH4FontStyles;
+  @apply --marketplaceH5FontStyles;
   font-size: 14px;
 
   /* Dimensions */

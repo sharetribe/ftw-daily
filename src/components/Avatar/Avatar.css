@@ -16,7 +16,7 @@
 
   /* Base for all avatars */
   --Avatar_base: {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'poppins', Helvetica, Arial, sans-serif;
     border-radius: 50%;
 
     /* Position possible initials to the center of the component */
@@ -54,7 +54,6 @@
 .initials {
   font-size: 14px;
   font-weight: var(--fontWeightBold);
-  padding-bottom: 4px;
 }
 
 .avatarImage {
@@ -76,7 +75,6 @@
 .mediumAvatar .initials {
   font-size: 20px;
   font-weight: var(--fontWeightSemiBold);
-  padding-bottom: 5px;
 }
 
 /* Large Avatar */
@@ -92,7 +90,6 @@
 .largeAvatar .initials {
   font-size: 30px;
   font-weight: var(--fontWeightSemiBold);
-  padding-bottom: 6px;
 }
 
 .bannedUserIcon {

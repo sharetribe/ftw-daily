@@ -99,7 +99,7 @@
 .option {
   @apply --marketplaceH4FontStyles;
   font-weight: var(--fontWeightMedium);
-  font-size: 18px;
+  font-size: 16px;
   color: var(--matterColor);
 
   /* Layout */

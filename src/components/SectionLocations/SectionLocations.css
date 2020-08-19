@@ -4,21 +4,17 @@
   @apply --marketplaceH1FontStyles;
 
   margin-top: 0;
-  max-width: 735px;
-
-  @media (--viewportMedium) {
-    margin-bottom: 23px;
-  }
+  margin-bottom: 0;
 }
 
 .locations {
   display: flex;
   flex-direction: column;
-  margin-top: 32px;
+  margin-top: 0px;
 
   @media (--viewportMedium) {
     flex-direction: row;
-    margin-top: 57px;
+    margin-top: 33px;
   }
 }
 

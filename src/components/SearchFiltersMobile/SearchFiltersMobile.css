@@ -33,7 +33,7 @@
 .filtersButton {
   @apply --marketplaceButtonStylesSecondary;
   @apply --marketplaceTinyFontStyles;
-  font-weight: var(--fontWeightBold);
+  font-weight: var(--fontWeightMedium);
 
   /* Avoid stretching button width. */
   flex-basis: 0;
@@ -48,7 +48,7 @@
 .filtersButtonSelected {
   @apply --marketplaceButtonStyles;
   @apply --marketplaceTinyFontStyles;
-  font-weight: var(--fontWeightBold);
+  font-weight: var(--fontWeightMedium);
 
   /* Avoid stretching button width. */
   flex-basis: 0;
@@ -63,7 +63,7 @@
 .mapIcon {
   /* Font */
   @apply --marketplaceTinyFontStyles;
-  font-weight: var(--fontWeightBold);
+  font-weight: var(--fontWeightMedium);
 
   /* background map image */
   background-image: url(./images/map_icon216x105.png);

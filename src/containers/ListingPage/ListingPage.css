@@ -156,7 +156,7 @@
   bottom: 19px;
   right: 24px;
   margin: 0;
-  padding: 6px 13px 8px 13px;
+  padding: 8px 13px 6px 13px;
 
   /* Colors */
   background-color: var(--matterColorLight);
@@ -234,7 +234,7 @@
 .bookingPanel {
   @media (--viewportLarge) {
     display: block;
-    margin-top: 95px;
+    margin-top: 79px;
     margin-left: 60px;
     border-left-style: solid;
     border-left-width: 1px;
@@ -289,7 +289,7 @@
 
   @media (--viewportMedium) {
     display: flex;
-    margin-bottom: 53px;
+    margin-bottom: 31px;
   }
 }
 .desktopPriceContainer {
@@ -308,12 +308,12 @@
 
 .desktopPriceValue {
   /* Font */
-  @apply --marketplaceH1FontStyles;
+  @apply --marketplaceModalTitleStyles;
   color: var(--marketplaceColor);
 
   @media (--viewportMedium) {
     margin-top: 0;
-    margin-bottom: 6px;
+    margin-bottom: 1px;
   }
 }
 
@@ -340,7 +340,7 @@
 
 .title {
   /* Font */
-  @apply --marketplaceH1FontStyles;
+  @apply --marketplaceModalTitleStyles;
   color: var(--matterColor);
 
   /* Layout */
@@ -349,13 +349,13 @@
   margin-bottom: 0;
   @media (--viewportMedium) {
     margin-top: 0;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
   }
 }
 
 .author {
   width: 100%;
-  @apply --marketplaceH4FontStyles;
+  @apply --marketplaceH5FontStyles;
   margin-top: 7px;
   margin-bottom: 0;
 
@@ -384,7 +384,7 @@
 
 .contactLink {
   @apply --marketplaceLinkStyles;
-  @apply --marketplaceH4FontStyles;
+  @apply --marketplaceH5FontStyles;
   margin: 0;
 }
 
@@ -394,7 +394,7 @@
 
   @media (--viewportMedium) {
     padding: 0;
-    margin-bottom: 52px;
+    margin-bottom: 36px;
   }
 }
 
@@ -407,7 +407,7 @@
   margin-bottom: 13px;
   @media (--viewportMedium) {
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
   }
 }
 
@@ -430,7 +430,7 @@
   margin-bottom: 16px;
   @media (--viewportMedium) {
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
   }
 }
 

@@ -59,6 +59,10 @@
     &:last-of-type {
       right: 24px;
     }
+
+    @media (--viewportMedium) {
+      top: 18px;
+    }
   }
   & :global(.DayPickerNavigation_button) {
     color: var(--matterColor);
