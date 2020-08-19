@@ -342,6 +342,7 @@
 
 .stateNoActionNeeded {
   color: var(--matterColorAnti);
+  text-align: right;
 }
 
 .stateSucces {
@@ -373,13 +374,13 @@
 .bookingNoActionNeeded {
   /* width: 80%;
   max-width: 300px; */
-  width: 45vw;
+  width: 35vw;
   color: var(--matterColorAnti);
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
   @media (--viewportMedium) {
-    width: 30vw;
+    width: 25vw;
   }
 }
 
