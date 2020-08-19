@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [fix] Fix popup-button in SelectSingleFilterPopup.css and adjust Footer with correct baselines.
+  [#1353](https://github.com/sharetribe/ftw-daily/pull/1353)
+
 ## [v6.3.0] 2020-08-19
 
 - [change] We decided to change the default font to Poppins.
