@@ -134,8 +134,6 @@ const PayoutDetailsFormComponent = props => (
               />}
             </div>*/}
           </div>
-
-
             <React.Fragment>
               <div className={css.sectionContainer}>
                 <h3 className={css.subTitle}>Country</h3>

@@ -143,7 +143,6 @@ class EditListingWizard extends Component {
   }
 
   handlePublishListing(id) {
-    console.log(this.props)
     const { onPublishListingDraft, currentUser } = this.props;
     const stripeConnected =
       currentUser && currentUser.stripeAccount && !!currentUser.stripeAccount.id;
@@ -228,9 +227,8 @@ class EditListingWizard extends Component {
     const tabLink = tab => {
       return { name: 'EditListingPage', params: { ...params, tab } };
     };
-
     return (
-      <div className={classes}>
+      <div className={this.state.showPayoutDetails ? `${classes} ${css.rootZindex}` : `${classes}`}>
         <Tabs
           rootClassName={css.tabsContainer}
           navRootClassName={css.nav}
