@@ -68,7 +68,7 @@ export default function reducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
     case REDIRECT:
-      return { ...state, redirect: true };
+      return { ...state, redirect: payload };
     case PAYLOAD_FOMR_VIEW:
       return { ...state, payloadFormView: true };
     case STRIPE_ACCOUNT_CREATED:
@@ -191,7 +191,9 @@ export default function reducer(state = initialState, action = {}) {
 // ================ Action creators ================ //
 
 export const stripeAccountCreateRequest = () => ({ type: STRIPE_ACCOUNT_CREATE_REQUEST });
-export const redirectState = () => ({ type: REDIRECT });
+export const redirectState = (state) => ({ type: REDIRECT,
+  payload: state,
+});
 export const payloadFormViewState = () => ({ type: PAYLOAD_FOMR_VIEW });
 export const stripeAccountCreatedState = (state) => ({
   type: STRIPE_ACCOUNT_CREATED,
@@ -781,7 +783,7 @@ export const handleCardSetup = params => dispatch => {
     });
 };
 
-export const publicDraft = () => (dispatch, getState, sdk) => {
+export const publicDraft = (state) => (dispatch, getState, sdk) => {
 
   const uuid = Object.keys(getState().marketplaceData.entities.ownListing)[0];
   sdk.ownListings.publishDraft({
@@ -789,7 +791,7 @@ export const publicDraft = () => (dispatch, getState, sdk) => {
   }, {
     expand: true,
   }).then(() =>
-    dispatch(redirectState()),
+    dispatch(redirectState(state)),
   );
 };
 

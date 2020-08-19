@@ -26,6 +26,8 @@ const supportedCountries = config.stripe.supportedCountries.map(c => c.code);
     const { history } = props
     const path = pathByRouteName('LandingPage', routeConfiguration())
     history.push(path)
+    props.onPublicDraft(false)
+
   }
 
 
@@ -204,7 +206,7 @@ const ApprovedBlockComponent = props => (
           {redirect ? later(props) :
             <Button
               type="submit"
-              onClick={()=>props.onPublicDraft()}
+              onClick={()=>props.onPublicDraft(true)}
               className={css.approvedBlock__greyButton}
               inProgress={submitInProgress}
               ready={ready}>
@@ -265,7 +267,7 @@ const mapStateToProps = state => {
   }
 }
 const mapDispatchToProps = dispatch => ({
-  onPublicDraft: () => dispatch(publicDraft()),
+  onPublicDraft: (state) => dispatch(publicDraft(state)),
   onPayloadFormViewState: () => dispatch(payloadFormViewState())
 });
 
