@@ -16,18 +16,9 @@ import css from './../../forms/PayoutDetailsForm/PayoutDetailsForm.css';
 import { publicDraft, payloadFormViewState } from '../../ducks/stripe.duck';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { pathByRouteName } from '../../util/routes';
-import routeConfiguration from '../../routeConfiguration';
+import { requestPublishListingDraft } from '../../containers/EditListingPage/EditListingPage.duck';
 
 const supportedCountries = config.stripe.supportedCountries.map(c => c.code);
-
-
-  const later = (props) =>{
-    const { history } = props
-    const path = pathByRouteName('LandingPage', routeConfiguration())
-    history.push(path)
-  }
-
 
 export const stripeCountryConfigs = countryCode => {
   const country = config.stripe.supportedCountries.find(c => c.code === countryCode);
@@ -125,8 +116,6 @@ const ApprovedBlockComponent = props => (
           <FormattedMessage id="PayoutDetailsForm.stripeConnectedAccountTermsLink" />
         </ExternalLink>
       );
-
-
       return  (
         <div>
           {payloadFormView ? (
@@ -198,13 +187,13 @@ const ApprovedBlockComponent = props => (
             {submitButtonText ? (
               submitButtonText
             ) : (
-              <FormattedMessage id="PayoutDetailsForm.submitButtonText" />
+              <FormattedMessage id="PayoutDetailsForm.submitInformationButtonText" />
             )}
           </Button>)}
-          {redirect ? later(props) :
+          {redirect ? props.onPublicDraft(false) :
             <Button
               type="submit"
-              onClick={()=>props.onPublicDraft()}
+              onClick={()=>props.onPublishListingDraft()}
               className={css.approvedBlock__greyButton}
               inProgress={submitInProgress}
               ready={ready}>
@@ -254,6 +243,7 @@ ApprovedBlockComponent.propTypes = {
   onRedirectState: func.isRequired,
   onPublicDraft: func.isRequired,
   onPayloadFormViewState: func.isRequired,
+  onPublishListingDraft: func.isRequired,
 
 };
 
@@ -265,8 +255,10 @@ const mapStateToProps = state => {
   }
 }
 const mapDispatchToProps = dispatch => ({
-  onPublicDraft: () => dispatch(publicDraft()),
-  onPayloadFormViewState: () => dispatch(payloadFormViewState())
+  onPublicDraft: (state) => dispatch(publicDraft(state)),
+  onPayloadFormViewState: () => dispatch(payloadFormViewState()),
+  onPublishListingDraft: () => dispatch(requestPublishListingDraft()),
+
 });
 
 const ApprovedBlock = compose(withRouter,connect(

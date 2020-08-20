@@ -3,7 +3,10 @@ import { types as sdkTypes } from '../../util/sdkLoader';
 import { denormalisedResponseEntities, ensureAvailabilityException } from '../../util/data';
 import { isSameDate, monthIdStringInUTC } from '../../util/dates';
 import { storableError } from '../../util/errors';
-import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
+import {
+  addMarketplaceEntities,
+  deleteMarketplaceEntities,
+} from '../../ducks/marketplaceData.duck';
 import * as log from '../../util/log';
 
 const { UUID } = sdkTypes;
@@ -501,7 +504,9 @@ export function requestCreateListingDraft(data) {
 }
 
 export const requestPublishListingDraft = listingId => (dispatch, getState, sdk) => {
-  dispatch(publishListing(listingId));
+  if(listingId){
+    dispatch(publishListing(listingId));
+
 
   return sdk.ownListings
     .publishDraft({ id: listingId }, { expand: true })
@@ -513,7 +518,27 @@ export const requestPublishListingDraft = listingId => (dispatch, getState, sdk)
     })
     .catch(e => {
       dispatch(publishListingError(storableError(e)));
-    });
+    });}
+  else {
+    const listingId = Object.keys(getState().marketplaceData.entities.ownListing)[0];
+    console.log(Object.keys(getState().marketplaceData.entities.ownListing))
+
+      dispatch(publishListing(listingId));
+      console.log(listingId)
+      console.log(getState())
+    return sdk.ownListings
+      .publishDraft({ id: listingId }, { expand: true })
+      .then(response => {
+        // Add the created listing to the marketplace data
+        dispatch(addMarketplaceEntities(response));
+        dispatch(publishListingSuccess(response));
+        dispatch(deleteMarketplaceEntities())
+        return response;
+      })
+      .catch(e => {
+        dispatch(publishListingError(storableError(e)));
+      });
+  }
 };
 
 // Images return imageId which we need to map with previously generated temporary id

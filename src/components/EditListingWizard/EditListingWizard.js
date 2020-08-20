@@ -274,6 +274,8 @@ class EditListingWizard extends Component {
               <FormattedMessage id="EditListingPhotosPanel.payoutModalInfo" />
             </p>
             <ApprovedBlock
+              id={this.state.draftId}
+              onRedirectPage={this.props.onPublishListingDraft}
               className={css.payoutDetails}
               inProgress={fetchInProgress}
               createStripeAccountError={errors ? errors.createStripeAccountError : null}
