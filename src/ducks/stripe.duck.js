@@ -2,6 +2,7 @@ import config from '../config';
 import { storableError } from '../util/errors';
 import * as log from '../util/log';
 
+
 // ================ Action types ================ //
 
 export const STRIPE_ACCOUNT_CREATE_REQUEST = 'app/stripe/STRIPE_ACCOUNT_CREATE_REQUEST';
@@ -783,16 +784,9 @@ export const handleCardSetup = params => dispatch => {
     });
 };
 
-export const publicDraft = (state) => (dispatch, getState, sdk) => {
+export const publicDraft = (state) => (dispatch) => {
 
-  const uuid = Object.keys(getState().marketplaceData.entities.ownListing)[0];
-  sdk.ownListings.publishDraft({
-    id: `${uuid}`,
-  }, {
-    expand: true,
-  }).then(() =>
-    dispatch(redirectState(state)),
-  );
+    dispatch(redirectState(state))
 };
 
 
