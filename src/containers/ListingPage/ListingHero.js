@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import get from 'lodash/get'
+import PlayArrowIcon from '@material-ui/icons/PlayArrow'
+import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer'
 import { FormattedMessage } from '../../util/reactIntl'
 import { ResponsiveImage } from '../../components'
 import ActionBarMaybe from './ActionBarMaybe'
@@ -15,7 +17,10 @@ const ListingHero = (props) => {
     handleViewPhotosClick
   } = props
 
+  const [shouldPlayVideo, setShouldPlayVideo] = useState(false)
+
   const hasImages = listing.images && listing.images.length > 0
+  const { publicData } = listing.attributes
   const firstImage = hasImages ? listing.images[0] : null
 
   const actionBar = listing.id ? (
@@ -32,6 +37,25 @@ const ListingHero = (props) => {
       />
     </button>
   ) : null
+
+  const maybeVideo = () => {
+    if (!publicData.video) return null
+    return (
+      <div className={css.viewVideoButtonContainer}>
+        <button className={css.viewVideoButton} onClick={() => setShouldPlayVideo(true)}>
+          <PlayArrowIcon />
+          <FormattedMessage
+            id="ListingPage.viewVideoButton"
+          />
+        </button>
+        <VideoPlayer
+          isOpen={shouldPlayVideo}
+          toggleShow={() => setShouldPlayVideo(false)}
+          videoUrl={publicData.video}
+        />
+      </div>
+    )
+  }
 
   return (
     <div className={css.heroContainer}>
@@ -51,6 +75,7 @@ const ListingHero = (props) => {
       <div className={css.heroTextContainer}>
         <h1 className={css.heroTitle}>{title}</h1>
         <h2 className={css.heroDescription}>{get(listing, 'attributes.publicData.heroSubtitle')}</h2>
+        {maybeVideo()}
       </div>
       {viewPhotosButton}
     </div>

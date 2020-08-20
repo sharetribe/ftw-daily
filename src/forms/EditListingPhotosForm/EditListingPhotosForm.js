@@ -73,6 +73,8 @@ export class EditListingPhotosFormComponent extends Component {
             values
           } = formRenderProps
 
+          console.log(values)
+
           const {
             publishListingError, showListingsError, updateListingError, uploadImageError
           }

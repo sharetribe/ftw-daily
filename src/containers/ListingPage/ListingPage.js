@@ -436,19 +436,19 @@ export class ListingPageComponent extends Component {
                 handleViewPhotosClick={handleViewPhotosClick}
               />
               <div className={css.contentContainer}>
-                <SectionAvatar user={currentAuthor} params={params} />
+                {/*<SectionAvatar user={currentAuthor} params={params} />*/}
                 <div className={css.mainContent}>
-                  <SectionHeading
-                    priceTitle={priceTitle}
-                    formattedPrice={formattedPrice}
-                    richTitle={richTitle}
-                    category={category}
-                    hostLink={hostLink}
-                    showContactUser={showContactUser}
-                    onContactUser={this.onContactUser}
-                    retreat={retreat}
-                    wifi={wifi}
-                  />
+                  {/*<SectionHeading*/}
+                  {/*  priceTitle={priceTitle}*/}
+                  {/*  formattedPrice={formattedPrice}*/}
+                  {/*  richTitle={richTitle}*/}
+                  {/*  category={category}*/}
+                  {/*  hostLink={hostLink}*/}
+                  {/*  showContactUser={showContactUser}*/}
+                  {/*  onContactUser={this.onContactUser}*/}
+                  {/*  retreat={retreat}*/}
+                  {/*  wifi={wifi}*/}
+                  {/*/>*/}
                   <SectionWelcomeMaybe
                     publicData={publicData}
                   />
@@ -456,10 +456,12 @@ export class ListingPageComponent extends Component {
                   <SectionColivingMaybe
                     publicData={publicData}
                     images={currentListing.images}
+                    retreat={retreat}
                   />
                   <SectionCoworkingMaybe
                     publicData={publicData}
                     images={currentListing.images}
+                    wifi={wifi}
                   />
                   <SectionSurfMaybe
                     publicData={publicData}
@@ -467,7 +469,6 @@ export class ListingPageComponent extends Component {
                     metadata={metadata}
                   />
                   {/* <SectionCommunityMaybe publicData={publicData} /> */}
-                  <SectionVideoMaybe video={publicData.video} />
                   <SectionMapMaybe
                     geolocation={geolocation}
                     publicData={publicData}

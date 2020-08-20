@@ -11,7 +11,7 @@ export const NotificationBanner = (props) => {
       </div>
       <div className={css.textContainer}>
         <small className={css.text}>
-          A simple walkthrough video from your phone can create more trust and increase bookings by up to 317%! You can easily record it right from the Youtube app.
+          A simple walkthrough video from your phone can create more trust and increase bookings by up to 317%! You can easily record it right from the YouTube app.
         </small>
       </div>
     </div>

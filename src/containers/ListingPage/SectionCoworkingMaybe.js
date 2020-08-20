@@ -12,7 +12,7 @@ import css from './ListingPage.css'
 const MIN_LENGTH_FOR_LONG_WORDS_IN_COMMUNITY = 20
 
 const SectionCoworkingMaybe = (props) => {
-  const { publicData, images } = props
+  const { publicData, images, wifi } = props
 
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
@@ -40,6 +40,9 @@ const SectionCoworkingMaybe = (props) => {
           <FormattedMessage id="ListingPage.coworkingTitle" />
         </span>
       </h2>
+      <div className={css.tags}>
+        {wifi}
+      </div>
       <p className={css.community}>
         {
           publicData.coworking ? publicData.coworking.description
