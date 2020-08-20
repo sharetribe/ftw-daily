@@ -144,7 +144,7 @@ export const renderApp = (url, serverContext, preloadedState) => {
 
   const helmetContext = {}
 
-  const body = ReactDOMServer.renderToNodeStream(
+  const body = ReactDOMServer.renderToString(
     sheets.collect(<ThemeProvider theme={theme}>
       <ServerApp url={url} context={serverContext} helmetContext={helmetContext} store={store} />
     </ThemeProvider>)
