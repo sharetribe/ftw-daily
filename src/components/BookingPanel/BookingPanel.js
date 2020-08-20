@@ -1,4 +1,4 @@
-import Fade from '@material-ui/core/Fade';
+import Fade from '@material-ui/core/Fade'
 import React, { useState } from 'react'
 import { compose } from 'redux'
 import { withRouter } from 'react-router-dom'
@@ -108,67 +108,70 @@ const BookingPanel = (props) => {
   const titleClasses = classNames(titleClassName || css.bookingTitle)
 
   return (
-    <div className={classes}>
-      <ModalInMobile
-        containerClassName={css.modalContainer}
-        id="BookingDatesFormInModal"
-        isModalOpenOnMobile={isBook}
-        hideBackground={true}
-        onClose={() => closeBookModal(history, location)}
-        showAsModalMaxWidth={MODAL_BREAKPOINT}
-        onManageDisableScrolling={onManageDisableScrolling}
-      >
-        <div className={css.modalHeading}>
-          <h1 className={css.title}>{title}</h1>
-          <div className={css.author}>
-            <FormattedMessage id="BookingPanel.hostedBy" values={{ name: authorDisplayName }} />
-          </div>
-        </div>
-
-        <div className={css.bookingHeading}>
-          <h2 className={titleClasses}>{title}</h2>
-          {subTitleText ? <div className={css.bookingHelp}>{subTitleText}</div> : null}
-        </div>
-        {showBookingDatesForm ? (
-          <BookingDatesForm
-            className={css.bookingForm}
-            formId="BookingPanel"
-            submitButtonWrapperClassName={css.bookingDatesSubmitButtonWrapper}
-            unitType={unitType}
-            onSubmit={onSubmit}
-            listing={listing}
-            isOwnListing={isOwnListing}
-            timeSlots={timeSlots}
-            fetchTimeSlotsError={fetchTimeSlotsError}
-          />
-        ) : null}
-      </ModalInMobile>
-      <Fade in={showBookingBar}>
-        <div className={css.openBookingForm}>
-          <div className={css.openBookingFormDataDisplay}>
-            <div className={css.priceContainer}>
-              <div className={css.priceValue} title={priceTitle}>
-                {formattedPrice}
-              </div>
-              <div className={css.perUnit}>
-                <FormattedMessage id={unitTranslationKey} />
-              </div>
+    <div className={classes}>{
+      isBook
+        ? <ModalInMobile
+          containerClassName={css.modalContainer}
+          id="BookingDatesFormInModal"
+          isModalOpenOnMobile={isBook}
+          hideBackground={true}
+          onClose={() => closeBookModal(history, location)}
+          showAsModalMaxWidth={MODAL_BREAKPOINT}
+          onManageDisableScrolling={onManageDisableScrolling}
+        >
+          <div className={css.modalHeading}>
+            <h1 className={css.title}>{title}</h1>
+            <div className={css.author}>
+              <FormattedMessage id="BookingPanel.hostedBy" values={{ name: authorDisplayName }} />
             </div>
-            {showBookingDatesForm ? (
-              <Button
-                rootClassName={css.bookButton}
-                onClick={() => openBookModal(isOwnListing, isClosed, history, location)}
-              >
-                <FormattedMessage id="BookingPanel.ctaButtonMessage" />
-              </Button>
-            ) : (
-              <div className={css.closedListingButton}>
-                <FormattedMessage id="BookingPanel.closedListingButtonText" />
-              </div>
-            )}
           </div>
+
+          <div className={css.bookingHeading}>
+            <h2 className={titleClasses}>{title}</h2>
+            {subTitleText ? <div className={css.bookingHelp}>{subTitleText}</div> : null}
+          </div>
+          {showBookingDatesForm ? (
+            <BookingDatesForm
+              className={css.bookingForm}
+              formId="BookingPanel"
+              submitButtonWrapperClassName={css.bookingDatesSubmitButtonWrapper}
+              unitType={unitType}
+              onSubmit={onSubmit}
+              listing={listing}
+              isOwnListing={isOwnListing}
+              timeSlots={timeSlots}
+              fetchTimeSlotsError={fetchTimeSlotsError}
+            />
+          ) : null}
+        </ModalInMobile>
+        : null
+    }
+    <Fade in={showBookingBar}>
+      <div className={css.openBookingForm}>
+        <div className={css.openBookingFormDataDisplay}>
+          <div className={css.priceContainer}>
+            <div className={css.priceValue} title={priceTitle}>
+              {formattedPrice}
+            </div>
+            <div className={css.perUnit}>
+              <FormattedMessage id={unitTranslationKey} />
+            </div>
+          </div>
+          {showBookingDatesForm ? (
+            <Button
+              rootClassName={css.bookButton}
+              onClick={() => openBookModal(isOwnListing, isClosed, history, location)}
+            >
+              <FormattedMessage id="BookingPanel.ctaButtonMessage" />
+            </Button>
+          ) : (
+            <div className={css.closedListingButton}>
+              <FormattedMessage id="BookingPanel.closedListingButtonText" />
+            </div>
+          )}
         </div>
-      </Fade>
+      </div>
+    </Fade>
     </div>
   )
 }

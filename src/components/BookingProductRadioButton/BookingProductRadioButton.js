@@ -6,6 +6,7 @@ import { Field } from 'react-final-form'
 import FaceIcon from '@material-ui/icons/Face'
 import get from 'lodash/get'
 import find from 'lodash/find'
+import { lazyLoadWithDimensions } from '../../util/contextHelpers';
 import {
   formatMoney, convertMoneyToNumber, convertUnitToSubUnit, unitDivisor
 } from '../../util/currency'
@@ -36,6 +37,16 @@ const IconRadioButton = (props) => {
 IconRadioButton.defaultProps = { className: null }
 
 IconRadioButton.propTypes = { className: string }
+
+class RoomImage extends React.Component {
+  render() {
+    return (
+      <img src={this.props.thumbnail} alt="" className={css.checkboxProductThumbnail}/>
+    )
+  }
+}
+
+const LazyRoomImage = lazyLoadWithDimensions(RoomImage)
 
 const BookingProductRadioButtonComponent = (props) => {
   const {
@@ -129,7 +140,7 @@ const BookingProductRadioButtonComponent = (props) => {
           <div className={css.radioButtonWrapper}>
             <div className={css.bookingSelectionTopRow}>
               {
-                buildThumbnail() ? <img src={buildThumbnail()} alt="" className={css.checkboxProductThumbnail}/> : null
+                buildThumbnail() ? <LazyRoomImage thumbnail={buildThumbnail()}/> : null
               }
               <div className={css.roomDetailsListWrapper}>
                 <span className={css.textRoot}>{label}</span>
