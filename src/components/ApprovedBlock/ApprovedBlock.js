@@ -63,6 +63,8 @@ const ApprovedBlockComponent = props => (
         submitButtonText,
         currentUserId,
         values,
+        onRedirectPage,
+        id,
       } = fieldRenderProps;
 
       const { country } = values;
@@ -127,7 +129,6 @@ const ApprovedBlockComponent = props => (
           <FormattedMessage id="PayoutDetailsForm.stripeConnectedAccountTermsLink" />
         </ExternalLink>
       );
-
 
       return  (
         <div>
@@ -206,7 +207,10 @@ const ApprovedBlockComponent = props => (
           {redirect ? later(props) :
             <Button
               type="submit"
-              onClick={()=>props.onPublicDraft(true)}
+              onClick={()=>{
+                props.onPublicDraft(true)
+                onRedirectPage(id)}
+              }
               className={css.approvedBlock__greyButton}
               inProgress={submitInProgress}
               ready={ready}>
