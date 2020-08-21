@@ -38,16 +38,6 @@ IconRadioButton.defaultProps = { className: null }
 
 IconRadioButton.propTypes = { className: string }
 
-class RoomImage extends React.Component {
-  render() {
-    return (
-      <img src={this.props.thumbnail} alt="" className={css.checkboxProductThumbnail}/>
-    )
-  }
-}
-
-const LazyRoomImage = lazyLoadWithDimensions(RoomImage)
-
 const BookingProductRadioButtonComponent = (props) => {
   const {
     rootClassName,
@@ -127,6 +117,11 @@ const BookingProductRadioButtonComponent = (props) => {
     return get(find(collection, (c) => c.value === value), 'label')
   }
 
+  // we don't want to alter the actual transaction amount as its handled on the backend
+  // but we do want to give the user the actual total price, not surprise them on the checkout page
+  // with a service fee
+  const adjustTotalDisplayPrice = () => price + (price * 0.11)
+
   const required = (value) => (value ? undefined : 'Select a room')
 
   return (
@@ -140,7 +135,7 @@ const BookingProductRadioButtonComponent = (props) => {
           <div className={css.radioButtonWrapper}>
             <div className={css.bookingSelectionTopRow}>
               {
-                buildThumbnail() ? <LazyRoomImage thumbnail={buildThumbnail()}/> : null
+                buildThumbnail() ? <img src={buildThumbnail()} alt="" className={css.checkboxProductThumbnail}/> : null
               }
               <div className={css.roomDetailsListWrapper}>
                 <span className={css.textRoot}>{label}</span>
@@ -165,7 +160,7 @@ const BookingProductRadioButtonComponent = (props) => {
                 {
                   price
                     ? <span>
-                      {formatMoney(intl, new Money(price, product.price.currency))}
+                      {formatMoney(intl, new Money(adjustTotalDisplayPrice(), product.price.currency))}
                     </span> : null
                 }
               </div>
