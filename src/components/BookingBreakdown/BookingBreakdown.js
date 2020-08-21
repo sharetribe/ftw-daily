@@ -88,6 +88,13 @@ export const BookingBreakdownComponent = (props) => {
    * LineItemTotalPrice: prints total price of the transaction
    *
    */
+  console.log(transaction)
+
+  // const custCommish = () => ({
+  //   code: 'line-item/customer-commission',
+  //   includeFor: ['customer'],
+  //   lineTotal: {amount: }
+  // })
 
   return (
     <div className={classes}>
