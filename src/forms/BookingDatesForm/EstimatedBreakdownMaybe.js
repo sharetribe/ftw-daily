@@ -32,7 +32,7 @@ import { types as sdkTypes } from '../../util/sdkLoader'
 import { dateFromLocalToAPI, nightsBetween, daysBetween } from '../../util/dates'
 import { TRANSITION_REQUEST_PAYMENT, TX_TRANSITION_ACTOR_CUSTOMER } from '../../util/transaction'
 import {
-  LINE_ITEM_DAY, LINE_ITEM_NIGHT, LINE_ITEM_UNITS, DATE_TYPE_DATE
+  LINE_ITEM_DAY, LINE_ITEM_NIGHT, LINE_ITEM_UNITS, DATE_TYPE_DATE, LINE_ITEM_CUSTOMER_COMMISSION,
 } from '../../util/types'
 import { unitDivisor, convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency'
 import { BookingBreakdown } from '../../components'
@@ -70,13 +70,15 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, qua
       ? daysBetween(bookingStart, bookingEnd)
       : quantity
 
-  const totalPrice = estimatedTotalPrice(unitPrice, unitCount, discount)
   const unitPriceAfterAdjustments = () => {
     if (discount) {
       return new Money(unitPrice.amount * discount, unitPrice.currency)
     }
     return new Money(unitPrice.amount, unitPrice.currency)
   }
+
+  const userCommissionAfterAdjustments = () => new Money(totalPrice.amount * 0.11, unitPrice.currency)
+  const totalPrice = estimatedTotalPrice(unitPrice, unitCount, discount)
 
   // bookingStart: "Fri Mar 30 2018 12:00:00 GMT-1100 (SST)" aka "Fri Mar 30 2018 23:00:00 GMT+0000 (UTC)"
   // Server normalizes night/day bookings to start from 00:00 UTC aka "Thu Mar 29 2018 13:00:00 GMT-1100 (SST)"
@@ -96,6 +98,11 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, qua
 
   const nightsUntilStartDate = nightsBetween(now, serverDayStart)
   const isSplitPayment = nightsUntilStartDate >= config.splitPaymentCapDays
+  const payInTotal = () => {
+    const t = new Decimal(totalPrice.amount)
+    const withCustomerCommish = t.add(t.times(0.11)).toNumber().toFixed(2)
+    return new Money(withCustomerCommish, unitPrice.currency)
+  }
 
   return {
     id: new UUID('estimated-transaction'),
@@ -104,7 +111,7 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, qua
       createdAt: now,
       lastTransitionedAt: now,
       lastTransition: TRANSITION_REQUEST_PAYMENT,
-      payinTotal: totalPrice,
+      payinTotal: payInTotal(),
       payoutTotal: totalPrice,
       lineItems: [
         {
@@ -115,6 +122,13 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, qua
           lineTotal: totalPrice,
           reversal: false,
         },
+        {
+          code: LINE_ITEM_CUSTOMER_COMMISSION,
+          includeFor: ['customer'],
+          lineTotal: userCommissionAfterAdjustments(),
+          unitPrice: unitPriceAfterAdjustments(),
+          reversal: false,
+        }
       ],
       transitions: [
         {

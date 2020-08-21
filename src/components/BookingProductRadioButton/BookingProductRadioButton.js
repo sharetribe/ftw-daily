@@ -6,6 +6,7 @@ import { Field } from 'react-final-form'
 import FaceIcon from '@material-ui/icons/Face'
 import get from 'lodash/get'
 import find from 'lodash/find'
+import { lazyLoadWithDimensions } from '../../util/contextHelpers';
 import {
   formatMoney, convertMoneyToNumber, convertUnitToSubUnit, unitDivisor
 } from '../../util/currency'
@@ -116,6 +117,11 @@ const BookingProductRadioButtonComponent = (props) => {
     return get(find(collection, (c) => c.value === value), 'label')
   }
 
+  // we don't want to alter the actual transaction amount as its handled on the backend
+  // but we do want to give the user the actual total price, not surprise them on the checkout page
+  // with a service fee
+  const adjustTotalDisplayPrice = () => price + (price * 0.11)
+
   const required = (value) => (value ? undefined : 'Select a room')
 
   return (
@@ -154,7 +160,7 @@ const BookingProductRadioButtonComponent = (props) => {
                 {
                   price
                     ? <span>
-                      {formatMoney(intl, new Money(price, product.price.currency))}
+                      {formatMoney(intl, new Money(adjustTotalDisplayPrice(), product.price.currency))}
                     </span> : null
                 }
               </div>
