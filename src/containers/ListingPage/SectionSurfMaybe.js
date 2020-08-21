@@ -8,7 +8,6 @@ import { WaveDivider } from '../../assets/WaveDivider'
 import Modal from '../../components/Modal/Modal'
 import MultiRowGridList from '../../components/MultiRowGridList/MultiRowGridList'
 import SingleLineGridList from '../../components/SingleRowImageGridList/SingleRowImageGridList'
-import { lazyLoadWithDimensions } from '../../util/contextHelpers';
 import { FormattedMessage } from '../../util/reactIntl'
 import mswIcon from '../../assets/msw_icon.png'
 
@@ -20,16 +19,6 @@ const onManageDisableScrolling = (componentId, scrollingDisabled = true) => {
   // We are just checking the value for now
   console.log('Toggling Modal - scrollingDisabled currently:', componentId, scrollingDisabled)
 }
-
-class MSWImage extends React.Component {
-  render() {
-    return (
-      <img className={css.mswIcon} src={mswIcon} alt=""/>
-    )
-  }
-}
-
-const LazyMSWImage = lazyLoadWithDimensions(MSWImage)
 
 const SectionSurfMaybe = (props) => {
   const [forecast, toggleForecast] = React.useState(null)
@@ -84,7 +73,7 @@ const SectionSurfMaybe = (props) => {
             </div>
             <span className={css.poweredByMSWContainer}>
               <span>powered by</span>
-              <LazyMSWImage />
+              <img className={css.mswIcon} src={mswIcon} alt=""/>
             </span>
           </div>
         </div>
