@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [fix] Remove duplicate page schema from body.
+  [#1355](https://github.com/sharetribe/ftw-daily/pull/1355)
+
 ## [v6.3.1] 2020-08-19
 
 - [fix] Fix popup-button in SelectSingleFilterPopup.css and adjust Footer with correct baselines.
