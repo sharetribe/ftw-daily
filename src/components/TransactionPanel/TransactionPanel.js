@@ -241,14 +241,18 @@ export class TransactionPanelComponent extends Component {
       fetchTimeSlotsError,
       nextTransitions,
     } = this.props;
-    
+
     const currentTransaction = ensureTransaction(transaction);
     const currentListing = ensureListing(currentTransaction.listing);
     const currentProvider = ensureUser(currentTransaction.provider);
     const currentCustomer = ensureUser(currentTransaction.customer);
+    
+    if(currentListing.attributes.deleted || currentProvider.attributes.deleted || currentCustomer.attributes.deleted) {
+      return <div className={css.genericError}>Either provider or customer has been deleted</div>
+    }
+    
     const isCustomer = transactionRole === 'customer';
     const isProvider = transactionRole === 'provider';
-
     const transactionProviderID = currentProvider ? currentProvider.id.uuid : null;
     const transactionCustomerID = transaction.customer ? transaction.customer.id.uuid : null;
 
@@ -365,7 +369,7 @@ export class TransactionPanelComponent extends Component {
         price: currentListing.attributes.price.amount,
         img: firstImage
       }
-    }
+    } 
 
     const saleButtons = (
       <SaleActionButtonsMaybe
@@ -559,19 +563,6 @@ export class TransactionPanelComponent extends Component {
                   </PrimaryButton>
                 </a>
               </div>
-                {/* <BookingPanel
-                  className={css.bookingPanel, css.bookingPanelChat}
-                  titleClassName={css.bookingTitle}
-                  isOwnListing={false}
-                  listing={currentListing}
-                  title={listingTitle}
-                  subTitle={bookingSubTitle}
-                  authorDisplayName={authorDisplayName}
-                  onSubmit={onSubmitBookingRequest}
-                  onManageDisableScrolling={onManageDisableScrolling}
-                  timeSlots={timeSlots}
-                  fetchTimeSlotsError={fetchTimeSlotsError}
-                />*/}
               <BreakdownMaybe
                 className={css.breakdownContainer}
                 transaction={currentTransaction}
