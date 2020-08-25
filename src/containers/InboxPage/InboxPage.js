@@ -230,13 +230,18 @@ BookingInfoMaybe.propTypes = {
   unitType: propTypes.bookingUnitType.isRequired,
 };
 
+const checkIfOneSideIsDeleted = side => {
+  const { abbreviatedName, bio, displayName } = side.attributes.profile
+  return !abbreviatedName && !displayName && !bio
+}
+
 export const InboxItem = props => {
   const { unitType, type, tx, intl, stateData, lastMessage } = props;
   const { customer, provider } = tx;
   const isOrder = type === 'order';
 
   const otherUser = isOrder ? provider : customer;
-  otherUser.attributes.profile.displayName = otherUser.attributes.profile.displayName.split(' ').splice(0,1).join('')
+  otherUser.attributes.profile.displayName = otherUser.attributes.profile.displayName && otherUser.attributes.profile.displayName.split(' ').splice(0,1).join('')
   const otherUserDisplayName = <UserDisplayName user={otherUser} intl={intl} />;
   const isOtherUserBanned = otherUser.attributes.banned;
   
@@ -330,10 +335,11 @@ export const InboxPageComponent = props => {
   const toTxItem = (tx, index) => {
     const type = isOrders ? 'order' : 'sale';
     const stateData = txState(intl, tx, type);
-    const lastMessage = allUserMessages[index].data.data.length ? allUserMessages[index].data.data[0].attributes.content : '...'
-  
+    const lastMessage = allUserMessages[index] && allUserMessages[index].data.data.length ? allUserMessages[index].data.data[0].attributes.content : '...'
+    const oneSideOfTransactionHasBeenDeleted = checkIfOneSideIsDeleted(tx.customer) || checkIfOneSideIsDeleted(tx.provider)
+
     // Render InboxItem only if the latest transition of the transaction is handled in the `txState` function.
-    return stateData ? (
+    return stateData && !oneSideOfTransactionHasBeenDeleted  ? (
       <li key={tx.id.uuid} className={css.listItem}>
         <InboxItem unitType={unitType} type={type} tx={tx} intl={intl} stateData={stateData} lastMessage={lastMessage}/>
       </li>
