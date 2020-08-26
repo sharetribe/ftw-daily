@@ -150,7 +150,7 @@ const countryCodes = [
   { code: 'MC', en: 'Monaco', fr: 'Monaco', es: 'Mónaco', de: 'Monaco' },
   { code: 'MN', en: 'Mongolia', fr: 'Mongolie', es: 'Mongolia', de: 'Mongolei' },
   { code: 'ME', en: 'Montenegro', fr: 'Monténégro', es: 'Montenegro', de: 'Montenegro' },
-  { code: 'MS', en: 'Montserrat', fr: 'Montserrat', es: 'Montserrat', de: 'Montserrat' },
+  { code: 'MS', en: 'Fira Sans', fr: 'Fira Sans', es: 'Fira Sans', de: 'Fira Sans' },
   { code: 'MA', en: 'Morocco', fr: 'Maroc', es: 'Marruecos', de: 'Marokko' },
   { code: 'MZ', en: 'Mozambique', fr: 'Mozambique', es: 'Mozambique', de: 'Mosambik' },
   { code: 'MM', en: 'Myanmar', fr: 'Myanmar', es: 'Myanmar', de: 'Myanmar' },

@@ -36,7 +36,7 @@ const splitPaymentCapDays = 14;
 // this particular web application is able to handle.
 
 const bookingProcessAliases = [
-  'sca-preauth-nightly-booking-due-now/release-4',
+  'sca-preauth-nightly-booking-due-now/release-1',
   'sca-preauth-nightly-booking-due-later/release-8'
 ];
 

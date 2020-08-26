@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { array, arrayOf, bool, func, number, string } from 'prop-types';
+import { cleanMessageText } from '../../util/cleanMessageText';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import classNames from 'classnames';
 import {
@@ -139,7 +140,8 @@ export class TransactionPanelComponent extends Component {
     if (!message) {
       return;
     }
-    onSendMessage(ensuredTransaction.id, message)
+    const cleanMessage = cleanMessageText(message)
+    onSendMessage(ensuredTransaction.id, cleanMessage)
       .then(messageId => {
         form.reset();
         this.scrollToMessage(messageId);
@@ -400,6 +402,7 @@ export class TransactionPanelComponent extends Component {
                 messagePlaceholder={sendMessagePlaceholder}
                 inProgress={sendMessageInProgress}
                 sendMessageError={sendMessageError}
+                isProvider={isProvider}
                 onFocus={this.onSendMessageFormFocus}
                 onBlur={this.onSendMessageFormBlur}
                 onSubmit={this.onMessageSubmit}

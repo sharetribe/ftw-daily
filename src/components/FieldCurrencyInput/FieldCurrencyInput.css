@@ -1,7 +1,7 @@
 @import '../../marketplace.css';
 
 .input {
-  border-bottom-color: var(--attentionColor);
+  border-bottom-color: var(--matterColorAnti);
 }
 
 .inputSuccess {

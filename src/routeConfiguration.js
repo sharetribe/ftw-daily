@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   // AboutPage,
   AuthenticationPage,
@@ -24,25 +24,26 @@ import {
   TermsOfServicePage,
   TransactionPage,
   PortugalCategoryPage,
-} from './containers';
+} from './containers'
 
 // routeConfiguration needs to initialize containers first
 // Otherwise, components will import form container eventually and
 // at that point css bundling / imports will happen in wrong order.
-import { NamedRedirect } from './components';
+import { NamedRedirect } from './components'
+import { generateSEORoutes } from './util/generateSEORoutes';
 
 export const ACCOUNT_SETTINGS_PAGES = [
   'ContactDetailsPage',
   'PasswordChangePage',
   'StripePayoutPage',
   'PaymentMethodsPage',
-];
+]
 
 // https://en.wikipedia.org/wiki/Universally_unique_identifier#Nil_UUID
-const draftId = '00000000-0000-0000-0000-000000000000';
-const draftSlug = 'draft';
+const draftId = '00000000-0000-0000-0000-000000000000'
+const draftSlug = 'draft'
 
-const RedirectToLandingPage = () => <NamedRedirect name="LandingPage" />;
+const RedirectToLandingPage = () => <NamedRedirect name="LandingPage" />
 
 // NOTE: Most server-side endpoints are prefixed with /api. Requests to those
 // endpoints are indended to be handled in the server instead of the browser and
@@ -52,12 +53,17 @@ const RedirectToLandingPage = () => <NamedRedirect name="LandingPage" />;
 
 // Our routes are exact by default.
 // See behaviour from Routes.js where Route is created.
+
+const generatePortugalPages = () => {
+
+}
+
 const routeConfiguration = () => {
   return [
     {
       path: '/',
       name: 'LandingPage',
-      component: props => <LandingPage {...props} />,
+      component: (props) => <LandingPage {...props} />,
     },
     // {
     //   path: '/about',
@@ -67,25 +73,25 @@ const routeConfiguration = () => {
     {
       path: '/s',
       name: 'SearchPage',
-      component: props => <SearchPage {...props} />,
+      component: (props) => <SearchPage {...props} />,
       loadData: SearchPage.loadData,
     },
     {
       path: '/s/filters',
       name: 'SearchFiltersPage',
-      component: props => <SearchPage {...props} tab="filters" />,
+      component: (props) => <SearchPage {...props} tab="filters" />,
       loadData: SearchPage.loadData,
     },
     {
       path: '/s/listings',
       name: 'SearchListingsPage',
-      component: props => <SearchPage {...props} tab="listings" />,
+      component: (props) => <SearchPage {...props} tab="listings" />,
       loadData: SearchPage.loadData,
     },
     {
       path: '/s/map',
       name: 'SearchMapPage',
-      component: props => <SearchPage {...props} tab="map" />,
+      component: (props) => <SearchPage {...props} tab="map" />,
       loadData: SearchPage.loadData,
     },
     {
@@ -96,14 +102,14 @@ const routeConfiguration = () => {
     {
       path: '/l/:slug/:id',
       name: 'ListingPage',
-      component: props => <ListingPage {...props} />,
+      component: (props) => <ListingPage {...props} />,
       loadData: ListingPage.loadData,
     },
     {
       path: '/l/:slug/:id/checkout',
       name: 'CheckoutPage',
       auth: true,
-      component: props => <CheckoutPage {...props} />,
+      component: (props) => <CheckoutPage {...props} />,
       setInitialValues: CheckoutPage.setInitialValues,
     },
     {
@@ -111,7 +117,7 @@ const routeConfiguration = () => {
       name: 'ListingPageVariant',
       auth: true,
       authPage: 'LoginPage',
-      component: props => <ListingPage {...props} />,
+      component: (props) => <ListingPage {...props} />,
       loadData: ListingPage.loadData,
     },
     {
@@ -121,7 +127,9 @@ const routeConfiguration = () => {
       component: () => (
         <NamedRedirect
           name="EditListingPage"
-          params={{ slug: draftSlug, id: draftId, type: 'new', tab: 'description' }}
+          params={{
+            slug: draftSlug, id: draftId, type: 'new', tab: 'description'
+          }}
         />
       ),
     },
@@ -129,14 +137,14 @@ const routeConfiguration = () => {
       path: '/l/:slug/:id/:type/:tab',
       name: 'EditListingPage',
       auth: true,
-      component: props => <EditListingPage {...props} />,
+      component: (props) => <EditListingPage {...props} />,
       loadData: EditListingPage.loadData,
     },
     {
       path: '/l/:slug/:id/:type/:tab/:returnURLType',
       name: 'EditListingStripeOnboardingPage',
       auth: true,
-      component: props => <EditListingPage {...props} />,
+      component: (props) => <EditListingPage {...props} />,
       loadData: EditListingPage.loadData,
     },
 
@@ -145,7 +153,7 @@ const routeConfiguration = () => {
     {
       path: '/l/:id',
       name: 'ListingPageCanonical',
-      component: props => <ListingPage {...props} />,
+      component: (props) => <ListingPage {...props} />,
       loadData: ListingPage.loadData,
     },
     {
@@ -156,7 +164,7 @@ const routeConfiguration = () => {
     {
       path: '/u/:id',
       name: 'ProfilePage',
-      component: props => <ProfilePage {...props} />,
+      component: (props) => <ProfilePage {...props} />,
       loadData: ProfilePage.loadData,
     },
     {
@@ -164,22 +172,22 @@ const routeConfiguration = () => {
       name: 'ProfileSettingsPage',
       auth: true,
       authPage: 'LoginPage',
-      component: props => <ProfileSettingsPage {...props} />,
+      component: (props) => <ProfileSettingsPage {...props} />,
     },
     {
       path: '/login',
       name: 'LoginPage',
-      component: props => <AuthenticationPage {...props} tab="login" />,
+      component: (props) => <AuthenticationPage {...props} tab="login" />,
     },
     {
       path: '/signup',
       name: 'SignupPage',
-      component: props => <AuthenticationPage {...props} tab="signup" />,
+      component: (props) => <AuthenticationPage {...props} tab="signup" />,
     },
     {
       path: '/recover-password',
       name: 'PasswordRecoveryPage',
-      component: props => <PasswordRecoveryPage {...props} />,
+      component: (props) => <PasswordRecoveryPage {...props} />,
     },
     {
       path: '/inbox',
@@ -193,7 +201,7 @@ const routeConfiguration = () => {
       name: 'InboxPage',
       auth: true,
       authPage: 'LoginPage',
-      component: props => <InboxPage {...props} />,
+      component: (props) => <InboxPage {...props} />,
       loadData: InboxPage.loadData,
     },
     {
@@ -201,15 +209,15 @@ const routeConfiguration = () => {
       name: 'OrderPage',
       auth: true,
       authPage: 'LoginPage',
-      component: props => <NamedRedirect name="OrderDetailsPage" params={{ ...props.params }} />,
+      component: (props) => <NamedRedirect name="OrderDetailsPage" params={{ ...props.params }} />,
     },
     {
       path: '/order/:id/details',
       name: 'OrderDetailsPage',
       auth: true,
       authPage: 'LoginPage',
-      component: props => <TransactionPage {...props} transactionRole="customer" />,
-      loadData: params => TransactionPage.loadData({ ...params, transactionRole: 'customer' }),
+      component: (props) => <TransactionPage {...props} transactionRole="customer" />,
+      loadData: (params) => TransactionPage.loadData({ ...params, transactionRole: 'customer' }),
       setInitialValues: TransactionPage.setInitialValues,
     },
     {
@@ -217,22 +225,22 @@ const routeConfiguration = () => {
       name: 'SalePage',
       auth: true,
       authPage: 'LoginPage',
-      component: props => <NamedRedirect name="SaleDetailsPage" params={{ ...props.params }} />,
+      component: (props) => <NamedRedirect name="SaleDetailsPage" params={{ ...props.params }} />,
     },
     {
       path: '/sale/:id/details',
       name: 'SaleDetailsPage',
       auth: true,
       authPage: 'LoginPage',
-      component: props => <TransactionPage {...props} transactionRole="provider" />,
-      loadData: params => TransactionPage.loadData({ ...params, transactionRole: 'provider' }),
+      component: (props) => <TransactionPage {...props} transactionRole="provider" />,
+      loadData: (params) => TransactionPage.loadData({ ...params, transactionRole: 'provider' }),
     },
     {
       path: '/listings',
       name: 'ManageListingsPage',
       auth: true,
       authPage: 'LoginPage',
-      component: props => <ManageListingsPage {...props} />,
+      component: (props) => <ManageListingsPage {...props} />,
       loadData: ManageListingsPage.loadData,
     },
     {
@@ -247,7 +255,7 @@ const routeConfiguration = () => {
       name: 'ContactDetailsPage',
       auth: true,
       authPage: 'LoginPage',
-      component: props => <ContactDetailsPage {...props} />,
+      component: (props) => <ContactDetailsPage {...props} />,
       loadData: ContactDetailsPage.loadData,
     },
     {
@@ -255,14 +263,14 @@ const routeConfiguration = () => {
       name: 'PasswordChangePage',
       auth: true,
       authPage: 'LoginPage',
-      component: props => <PasswordChangePage {...props} />,
+      component: (props) => <PasswordChangePage {...props} />,
     },
     {
       path: '/account/payments',
       name: 'StripePayoutPage',
       auth: true,
       authPage: 'LoginPage',
-      component: props => <StripePayoutPage {...props} />,
+      component: (props) => <StripePayoutPage {...props} />,
       loadData: StripePayoutPage.loadData,
     },
     {
@@ -270,7 +278,7 @@ const routeConfiguration = () => {
       name: 'StripePayoutOnboardingPage',
       auth: true,
       authPage: 'LoginPage',
-      component: props => <StripePayoutPage {...props} />,
+      component: (props) => <StripePayoutPage {...props} />,
       loadData: StripePayoutPage.loadData,
     },
     {
@@ -278,48 +286,48 @@ const routeConfiguration = () => {
       name: 'PaymentMethodsPage',
       auth: true,
       authPage: 'LoginPage',
-      component: props => <PaymentMethodsPage {...props} />,
+      component: (props) => <PaymentMethodsPage {...props} />,
       loadData: PaymentMethodsPage.loadData,
     },
     {
       path: '/terms-of-service',
       name: 'TermsOfServicePage',
-      component: props => <TermsOfServicePage {...props} />,
+      component: (props) => <TermsOfServicePage {...props} />,
     },
     {
       path: '/privacy-policy',
       name: 'PrivacyPolicyPage',
-      component: props => <PrivacyPolicyPage {...props} />,
+      component: (props) => <PrivacyPolicyPage {...props} />,
     },
     {
       path: '/styleguide',
       name: 'Styleguide',
-      component: props => <StyleguidePage {...props} />,
+      component: (props) => <StyleguidePage {...props} />,
     },
     {
       path: '/styleguide/g/:group',
       name: 'StyleguideGroup',
-      component: props => <StyleguidePage {...props} />,
+      component: (props) => <StyleguidePage {...props} />,
     },
     {
       path: '/styleguide/c/:component',
       name: 'StyleguideComponent',
-      component: props => <StyleguidePage {...props} />,
+      component: (props) => <StyleguidePage {...props} />,
     },
     {
       path: '/styleguide/c/:component/:example',
       name: 'StyleguideComponentExample',
-      component: props => <StyleguidePage {...props} />,
+      component: (props) => <StyleguidePage {...props} />,
     },
     {
       path: '/styleguide/c/:component/:example/raw',
       name: 'StyleguideComponentExampleRaw',
-      component: props => <StyleguidePage raw {...props} />,
+      component: (props) => <StyleguidePage raw {...props} />,
     },
     {
       path: '/notfound',
       name: 'NotFoundPage',
-      component: props => <NotFoundPage {...props} />,
+      component: (props) => <NotFoundPage {...props} />,
     },
 
     // Do not change this path!
@@ -328,7 +336,7 @@ const routeConfiguration = () => {
     {
       path: '/reset-password',
       name: 'PasswordResetPage',
-      component: props => <PasswordResetPage {...props} />,
+      component: (props) => <PasswordResetPage {...props} />,
     },
 
     // Do not change this path!
@@ -339,17 +347,18 @@ const routeConfiguration = () => {
       name: 'EmailVerificationPage',
       auth: true,
       authPage: 'LoginPage',
-      component: props => <EmailVerificationPage {...props} />,
+      component: (props) => <EmailVerificationPage {...props} />,
       loadData: EmailVerificationPage.loadData,
     },
+    ...generateSEORoutes('portugal').map((p) => (
+      {
+        path: `/${p}`,
+        name: 'PortugalCategoryPage',
+        component: (props) => <PortugalCategoryPage {...props} slug={p}/>,
+        loadData: PortugalCategoryPage.loadData,
+      }
+    )),
+  ]
+}
 
-    {
-      path: '/category/portugal',
-      name: 'PortugalCategoryPage',
-      component: props => <PortugalCategoryPage {...props} />,
-      loadData: PortugalCategoryPage.loadData,
-    },
-  ];
-};
-
-export default routeConfiguration;
+export default routeConfiguration

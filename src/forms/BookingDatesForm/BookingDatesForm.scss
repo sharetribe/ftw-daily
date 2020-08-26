@@ -1,0 +1,117 @@
+@import '../../marketplace.css';
+
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.bookingDates, .bookingProduct {
+  flex-shrink: 0;
+  margin-bottom: 24px;
+
+  /* Ensure that calendar dropdown gets some stacking context relative to other form items below */
+  z-index: 1;
+}
+
+.priceBreakdownContainer {
+  padding: 0 24px;
+  margin-bottom: 40px;
+
+  @media (--viewportMedium) {
+    padding: 0;
+    margin-bottom: 0;
+    margin-top: 1px;
+  }
+}
+
+.priceBreakdownTitle {
+  /* Font */
+  color: var(--matterColorAnti);
+
+  margin-top: 5px;
+  margin-bottom: 14px;
+  @media (--viewportMedium) {
+    margin-top: 5px;
+    margin-bottom: 26px;
+  }
+}
+
+.receipt {
+  flex-shrink: 0;
+  margin: 0 0 24px 0;
+}
+
+.error {
+  color: var(--failColor);
+  margin: 0 24px;
+  display: inline-block;
+}
+
+.timeSlotsError {
+  @apply --marketplaceH4FontStyles;
+  color: var(--failColor);
+  margin: 0 24px 12px 24px;
+
+  @media (--viewportMedium) {
+    margin: 0 0 12px 0;
+  }
+}
+
+.smallPrint {
+  @apply --marketplaceTinyFontStyles;
+  color: var(--matterColorAnti);
+  text-align: left;
+  margin: auto 24px auto 24px;
+  flex-shrink: 0;
+  width: 60%;
+
+  @media (--viewportMedium) {
+    margin-top: auto;
+    margin-bottom: 20px;
+  }
+
+  @media (--viewportLarge) {
+    margin-top: 21px;
+    margin-bottom: 21px;
+  }
+}
+
+.submitButtonWrapper {
+  flex-shrink: 0;
+  padding: 0 24px 24px 24px;
+  width: 100%;
+
+  @media (--viewportMedium) {
+    padding: 0;
+    width: 100%;
+  }
+}
+
+.bookingProductsFieldSet {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.bookingProductListWrapper {
+  margin-top: 0;
+}
+
+@media screen and (max-width: 550px) {
+  .bookingProductListWrapper {
+    margin: 0 24px 0 24px;
+  }
+}
+
+.guaranteeContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.guaranteeIconBadge {
+  height: 25px;
+  width: 25px;
+  opacity: 0.6;
+}

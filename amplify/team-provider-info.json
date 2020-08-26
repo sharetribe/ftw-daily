@@ -1,0 +1,20 @@
+{
+    "prod": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-coworksurf-prod-194106-authRole",
+            "UnauthRoleArn": "arn:aws:iam::768699580614:role/amplify-coworksurf-prod-194106-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::768699580614:role/amplify-coworksurf-prod-194106-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-coworksurf-prod-194106-deployment",
+            "UnauthRoleName": "amplify-coworksurf-prod-194106-unauthRole",
+            "StackName": "amplify-coworksurf-prod-194106",
+            "StackId": "arn:aws:cloudformation:us-east-1:768699580614:stack/amplify-coworksurf-prod-194106/d12ecf80-cc74-11ea-8676-0a637f9cba95",
+            "AmplifyAppId": "df44bw5ujwybq"
+        },
+        "categories": {
+            "auth": {
+                "coworksurf": {}
+            }
+        }
+    }
+}

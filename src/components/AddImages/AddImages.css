@@ -1,17 +1,15 @@
 @import '../../marketplace.css';
-
 .root {
   width: 100%;
   min-height: 120px;
   padding-left: 0;
-
-  &::after {
-    content: '.';
-    visibility: hidden;
-    display: block;
-    height: 0;
-    clear: both;
-  }
+}
+.root::after {
+  content: ".";
+  visibility: hidden;
+  display: block;
+  height: 0;
+  clear: both;
 }
 
 .thumbnail {
@@ -21,40 +19,39 @@
   width: 100%;
   margin: 0;
   overflow: hidden;
-  background-color: var(--matterColorNegative); /* Loading BG color */
+  background-color: var(--matterColorNegative);
+  /* Loading BG color */
 }
 
 .threeToTwoWrapper {
   position: relative;
+  background-color: white;
 }
 
 .removeImage {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: -5px;
+  right: -5px;
   width: 33px;
   height: 33px;
   padding: 0;
   background-color: rgba(0, 0, 0, 0.5);
   border: none;
-  border-radius: 0;
-  border-bottom-left-radius: 2px;
+  border-radius: 4px;
   cursor: pointer;
-
-  & svg {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    width: 10px;
-    height: 10px;
-    fill: var(--matterColorAnti);
-    stroke: var(--matterColorAnti);
-  }
-
-  &:hover svg {
-    fill: var(--matterColorLight);
-    stroke: var(--matterColorLight);
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.removeImage svg {
+  width: 15px;
+  height: 15px;
+  fill: var(--matterColorAnti);
+  stroke: var(--matterColorAnti);
+}
+.removeImage:hover svg {
+  fill: var(--matterColorLight);
+  stroke: var(--matterColorLight);
 }
 
 .aspectWrapper {
@@ -85,3 +82,5 @@
   justify-content: center;
   align-items: center;
 }
+
+/*# sourceMappingURL=AddImages.css.map */

@@ -1,17 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import uniqueId from 'lodash/uniqueId';
-import { FormattedMessage } from '../../util/reactIntl';
-import { LISTING_STATE_DRAFT } from '../../util/types';
-import { ListingLink } from '../../components';
-import { EditListingProductsForm } from '../../forms';
-import { ensureOwnListing } from '../../util/data';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import _ from 'lodash'
+import { FormattedMessage } from '../../util/reactIntl'
+import { LISTING_STATE_DRAFT } from '../../util/types'
+import { ListingLink } from '..'
+import { EditListingProductsForm } from '../../forms'
+import { ensureOwnListing } from '../../util/data'
 
-import css from './EditListingProductsPanel.css';
+import css from './EditListingProductsPanel.css'
 
-
-const EditListingProductsPanel = props => {
+const EditListingProductsPanel = (props) => {
   const {
     className,
     rootClassName,
@@ -22,13 +21,16 @@ const EditListingProductsPanel = props => {
     panelUpdated,
     updateInProgress,
     errors,
-  } = props;
+    images,
+    disabled,
+    ready
+  } = props
 
-  const classes = classNames(rootClassName || css.root, className);
-  const currentListing = ensureOwnListing(listing);
-  const { publicData } = currentListing.attributes;
+  const classes = classNames(rootClassName || css.root, className)
+  const currentListing = ensureOwnListing(listing)
+  const { publicData } = currentListing.attributes
 
-  const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
+  const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT
   const panelTitle = isPublished ? (
     <FormattedMessage
       id="EditListingProductsPanel.title"
@@ -36,51 +38,73 @@ const EditListingProductsPanel = props => {
     />
   ) : (
     <FormattedMessage id="EditListingProductsPanel.createListingTitle" />
-  );
+  )
 
-  const products = publicData && publicData.products;
+  const products = publicData && publicData.products
 
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
       <EditListingProductsForm
         className={css.form}
-        initialValues={{ products }}
-        onSubmit={values => {
+        initialValues={{ products: _.sortBy(products, 'order') }}
+        onSubmit={(values, shouldRedirect) => {
+          console.log(values)
           onSubmit({
             publicData: {
-              products: values.products.map(p => {
+              products: values.products.map((p, idx) => {
                 return {
-                  id: p.id || uniqueId('prod_'),
                   ...p,
                   price: {
                     amount: p.price.amount,
                     currency: p.price.currency
                   },
+                  occupancyType: p.occupancyType.value ? p.occupancyType.value : p.occupancyType,
+                  bathroom: p.bathroom.value ? p.bathroom.value : p.bathroom,
+                  beds: p.beds.value ? p.beds.value : p.beds,
+                  quantityAvailable: p.quantityAvailable.value ? p.quantityAvailable.value : p.quantityAvailable,
+                  order: _.isInteger(p.order) ? p.order : idx
                 }
-
               })
-
             }
-          });
+          }, shouldRedirect === 'redirect')
+        }}
+        onImageSubmit={(values, prods) => {
+          const { addImage, ...updateValues } = values
+          onSubmit({
+            ...updateValues,
+            publicData: {
+              products: prods
+            }
+          })
         }}
         onChange={onChange}
         saveActionMsg={submitButtonText}
         updated={panelUpdated}
         updateInProgress={updateInProgress}
         fetchErrors={errors}
+        images={images}
+        panelUpdated={panelUpdated}
+        updateInProgress={updateInProgress}
+        disabled={disabled}
+        ready={ready}
+        fetchErrors={errors}
+        listing={listing}
+        products={products || []}
       />
     </div>
-  );
-};
+  )
+}
 
-const { func, object, string, bool } = PropTypes;
+const {
+  func, object, string, bool
+} = PropTypes
 
 EditListingProductsPanel.defaultProps = {
   className: null,
   rootClassName: null,
   listing: null,
-};
+}
 
 EditListingProductsPanel.propTypes = {
   className: string,
@@ -95,6 +119,6 @@ EditListingProductsPanel.propTypes = {
   panelUpdated: bool.isRequired,
   updateInProgress: bool.isRequired,
   errors: object.isRequired,
-};
+}
 
-export default EditListingProductsPanel;
+export default EditListingProductsPanel

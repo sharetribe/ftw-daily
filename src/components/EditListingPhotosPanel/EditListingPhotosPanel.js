@@ -1,13 +1,16 @@
-import React, { Component } from 'react';
-import { array, bool, func, object, string } from 'prop-types';
-import { FormattedMessage } from '../../util/reactIntl';
-import classNames from 'classnames';
-import { LISTING_STATE_DRAFT } from '../../util/types';
-import { EditListingPhotosForm } from '../../forms';
-import { ensureOwnListing } from '../../util/data';
-import { ListingLink } from '../../components';
+import React, { Component } from 'react'
+import {
+  array, bool, func, object, string
+} from 'prop-types'
+import _ from 'lodash'
+import classNames from 'classnames'
+import { FormattedMessage } from '../../util/reactIntl'
+import { LISTING_STATE_DRAFT } from '../../util/types'
+import { EditListingPhotosForm } from '../../forms'
+import { ensureOwnListing } from '../../util/data'
+import { ListingLink } from '..'
 
-import css from './EditListingPhotosPanel.css';
+import css from './EditListingPhotosPanel.css'
 
 class EditListingPhotosPanel extends Component {
   render() {
@@ -27,14 +30,24 @@ class EditListingPhotosPanel extends Component {
       onChange,
       onSubmit,
       onRemoveImage,
-    } = this.props;
+    } = this.props
 
-    const rootClass = rootClassName || css.root;
-    const classes = classNames(rootClass, className);
-    const currentListing = ensureOwnListing(listing);
+    const rootClass = rootClassName || css.root
+    const classes = classNames(rootClass, className)
+    const currentListing = ensureOwnListing(listing)
+    const surfPhotos = _.get(currentListing.attributes.publicData, 'surfing.images', {})
+    const colivingPhotos = _.get(currentListing.attributes.publicData, 'coliving.images', {})
+    const coworkingPhotos = _.get(currentListing.attributes.publicData, 'coworking.images', {})
+    const heroPhoto = _.get(currentListing.attributes.publicData, 'heroImage.id', {})
+    let roomPhotos = {}
+    _.get(currentListing.attributes.publicData, 'products', []).forEach((v) => { roomPhotos = { ...roomPhotos, ...v.photos || {} } })
+    const allOtherPhotos = _.concat(_.keys(surfPhotos), _.keys(colivingPhotos), _.keys(coworkingPhotos), _.keys(roomPhotos), [heroPhoto])
+    const imagesToShow = {}
+    _.filter(images, (img) => !_.includes(allOtherPhotos, img.id.uuid)).forEach((v) => { imagesToShow[v.id.uuid] = {} })
+    const video = _.get(currentListing.attributes.publicData, 'video', '')
 
-    const isPublished =
-      currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
+    const isPublished
+      = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT
     const panelTitle = isPublished ? (
       <FormattedMessage
         id="EditListingPhotosPanel.title"
@@ -42,7 +55,7 @@ class EditListingPhotosPanel extends Component {
       />
     ) : (
       <FormattedMessage id="EditListingPhotosPanel.createListingTitle" />
-    );
+    )
 
     return (
       <div className={classes}>
@@ -52,12 +65,19 @@ class EditListingPhotosPanel extends Component {
           disabled={disabled}
           ready={ready}
           fetchErrors={errors}
-          initialValues={{ images }}
-          images={images}
+          initialValues={{ main: { images: imagesToShow }, video }}
+          imagesToDisplay={imagesToShow}
           onImageUpload={onImageUpload}
-          onSubmit={values => {
-            const { addImage, ...updateValues } = values;
-            onSubmit(updateValues);
+          onSubmit={(values, shouldRedirect) => {
+            const existingImages = _.get(listing, 'images', []).map((li) => li.id.uuid)
+            const t = _.concat(existingImages, _.keys(values.main.images))
+            const updateValues = {
+              images: _.uniq(t),
+              publicData: {
+                video: values.video
+              }
+            }
+            onSubmit(updateValues, shouldRedirect === 'redirect')
           }}
           onChange={onChange}
           onUpdateImageOrder={onUpdateImageOrder}
@@ -65,9 +85,11 @@ class EditListingPhotosPanel extends Component {
           saveActionMsg={submitButtonText}
           updated={panelUpdated}
           updateInProgress={updateInProgress}
+          showSubmitButton={true}
+          readyForUpload={true}
         />
       </div>
-    );
+    )
   }
 }
 
@@ -77,7 +99,7 @@ EditListingPhotosPanel.defaultProps = {
   errors: null,
   images: [],
   listing: null,
-};
+}
 
 EditListingPhotosPanel.propTypes = {
   className: string,
@@ -98,6 +120,6 @@ EditListingPhotosPanel.propTypes = {
   panelUpdated: bool.isRequired,
   updateInProgress: bool.isRequired,
   onRemoveImage: func.isRequired,
-};
+}
 
-export default EditListingPhotosPanel;
+export default EditListingPhotosPanel

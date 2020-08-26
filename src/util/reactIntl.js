@@ -1,11 +1,11 @@
-import { func, shape } from 'prop-types';
+import { func, shape } from 'prop-types'
 import {
   IntlProvider,
   FormattedMessage,
   FormattedDate,
   FormattedHTMLMessage,
   injectIntl,
-} from 'react-intl';
+} from 'react-intl'
 
 const intlShape = shape({
   formatDate: func.isRequired,
@@ -15,7 +15,7 @@ const intlShape = shape({
   formatPlural: func.isRequired,
   formatRelativeTime: func.isRequired,
   formatTime: func.isRequired,
-});
+})
 export {
   IntlProvider,
   FormattedMessage,
@@ -23,4 +23,4 @@ export {
   FormattedHTMLMessage,
   injectIntl,
   intlShape,
-};
+}

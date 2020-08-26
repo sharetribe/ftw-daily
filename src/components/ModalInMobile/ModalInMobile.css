@@ -1,5 +1,4 @@
 @import '../../marketplace.css';
-
 /* ModalInMobile is visible by default */
 .root {
   width: 100%;
@@ -12,19 +11,26 @@
 
 .modalContainer {
   @apply --marketplaceModalInMobileBaseStyles;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .modalContainer {
     flex-basis: 576px;
   }
 }
 
 .modalContent {
   width: 100%;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .modalContent {
     height: 100%;
-
     /* ModalInMobile content should work with box-shadows etc. */
     overflow: visible;
   }
 }
+
+.scrollLayerClass {
+  background-color: white !important;
+}
+
+/*# sourceMappingURL=ModalInMobile.css.map */

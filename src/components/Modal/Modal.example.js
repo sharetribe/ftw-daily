@@ -1,22 +1,22 @@
 /* eslint-disable no-console */
-import React, { Component } from 'react';
-import { Button } from '../../components';
-import Modal from './Modal';
+import React, { Component } from 'react'
+import { Button } from '..'
+import Modal from './Modal'
 
 const onManageDisableScrolling = (componentId, scrollingDisabled = true) => {
   // We are just checking the value for now
-  console.log('Toggling Modal - scrollingDisabled currently:', componentId, scrollingDisabled);
-};
+  console.log('Toggling Modal - scrollingDisabled currently:', componentId, scrollingDisabled)
+}
 
 class ModalWrapper extends Component {
   constructor(props) {
-    super(props);
-    this.state = { isOpen: false };
-    this.handleOpen = this.handleOpen.bind(this);
+    super(props)
+    this.state = { isOpen: false }
+    this.handleOpen = this.handleOpen.bind(this)
   }
 
   handleOpen() {
-    this.setState({ isOpen: true });
+    this.setState({ isOpen: true })
   }
 
   render() {
@@ -27,8 +27,8 @@ class ModalWrapper extends Component {
           {...this.props}
           isOpen={this.state.isOpen}
           onClose={() => {
-            this.setState({ isOpen: false });
-            console.log('Closing modal');
+            this.setState({ isOpen: false })
+            console.log('Closing modal')
           }}
           onManageDisableScrolling={onManageDisableScrolling}
         >
@@ -38,7 +38,7 @@ class ModalWrapper extends Component {
           <Button onClick={this.handleOpen}>Open</Button>
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -48,4 +48,4 @@ export const Empty = {
   props: {
     id: 'ExampleModal',
   },
-};
+}

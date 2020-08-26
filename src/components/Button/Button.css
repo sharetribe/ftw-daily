@@ -1,22 +1,18 @@
 @import '../../marketplace.css';
-
 .root {
   @apply --marketplaceButtonStyles;
-
   /* Clear padding that is set for link elements looking like buttons */
   padding: 0;
 }
 
 .primaryButtonRoot {
   @apply --marketplaceButtonStylesPrimary;
-
   /* Clear padding that is set for link elements looking like buttons */
   padding: 0;
 }
 
 .secondaryButtonRoot {
   @apply --marketplaceButtonStylesSecondary;
-
   /* We must lift up the text from the center since it looks better with
    the button border. Also clears the top padding set for link
    elements looking like buttons */
@@ -30,16 +26,16 @@
 .primaryButton {
   /* Class handle for primary button state styles */
 }
+
 .secondaryButton {
   /* Class handle for secondary button state styles */
 }
 
 .inProgress {
   padding: 0;
-
-  &:disabled {
-    background-color: var(--marketplaceColor);
-  }
+}
+.inProgress:disabled {
+  background-color: var(--marketplaceColor);
 }
 
 .primaryButton.inProgress:disabled {
@@ -52,10 +48,9 @@
 
 .ready {
   padding: 0;
-
-  &:disabled {
-    background-color: var(--marketplaceColor);
-  }
+}
+.ready:disabled {
+  background-color: var(--marketplaceColor);
 }
 
 .primaryButton.ready:disabled {
@@ -64,6 +59,11 @@
 
 .secondaryButton.ready:disabled {
   background-color: var(--matterColorLight);
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .spinner {
@@ -77,7 +77,6 @@
   width: 24px;
   height: 24px;
   stroke: var(--matterColorLight);
-
   /* Animation */
   animation-name: checkmarkAnimation;
   animation-duration: 0.5s;
@@ -98,7 +97,6 @@
     transform: scale(1);
   }
 }
-
 .secondaryButton .spinner {
   stroke: var(--matterColorAnti);
 }
@@ -106,3 +104,5 @@
 .secondaryButton .checkmark {
   stroke: var(--matterColorAnti);
 }
+
+/*# sourceMappingURL=Button.css.map */

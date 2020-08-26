@@ -1,10 +1,17 @@
-import React from 'react';
-import { compose } from 'redux';
-import { object, string, bool, number, func, shape } from 'prop-types';
-import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
-import classNames from 'classnames';
-import { withRouter } from 'react-router-dom';
-import omit from 'lodash/omit';
+import React from 'react'
+import { compose } from 'redux'
+import {
+  object, string, bool, number, func, shape
+} from 'prop-types'
+import classNames from 'classnames'
+import { withRouter } from 'react-router-dom'
+import omit from 'lodash/omit'
+import { IconBucket } from '../../assets/IconBucket';
+import { IconCalendar } from '../../assets/IconCalendar';
+import { IconPrice } from '../../assets/IconPrice';
+import { IconSurfboard } from '../../assets/IconSurfboard';
+import { IconText } from '../../assets/IconText';
+import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl'
 
 import {
   BookingDateRangeFilter,
@@ -12,54 +19,54 @@ import {
   SelectMultipleFilter,
   PriceFilter,
   KeywordFilter,
-} from '../../components';
-import routeConfiguration from '../../routeConfiguration';
-import { parseDateFromISO8601, stringifyDateToISO8601 } from '../../util/dates';
-import { createResourceLocatorString } from '../../util/routes';
-import { propTypes } from '../../util/types';
-import css from './SearchFilters.css';
+} from '..'
+import routeConfiguration from '../../routeConfiguration'
+import { parseDateFromISO8601, stringifyDateToISO8601 } from '../../util/dates'
+import { createResourceLocatorString } from '../../util/routes'
+import { propTypes } from '../../util/types'
+import css from './SearchFilters.css'
 
 // Dropdown container can have a positional offset (in pixels)
-const FILTER_DROPDOWN_OFFSET = -14;
-const RADIX = 10;
+const FILTER_DROPDOWN_OFFSET = -14
+const RADIX = 10
 
 // resolve initial value for a single value filter
 const initialValue = (queryParams, paramName) => {
-  return queryParams[paramName];
-};
+  return queryParams[paramName]
+}
 
 // resolve initial values for a multi value filter
 const initialValues = (queryParams, paramName) => {
-  return !!queryParams[paramName] ? queryParams[paramName].split(',') : [];
-};
+  return queryParams[paramName] ? queryParams[paramName].split(',') : []
+}
 
 const initialPriceRangeValue = (queryParams, paramName) => {
-  const price = queryParams[paramName];
-  const valuesFromParams = !!price ? price.split(',').map(v => Number.parseInt(v, RADIX)) : [];
+  const price = queryParams[paramName]
+  const valuesFromParams = price ? price.split(',').map((v) => Number.parseInt(v, RADIX)) : []
 
   return !!price && valuesFromParams.length === 2
     ? {
-        minPrice: valuesFromParams[0],
-        maxPrice: valuesFromParams[1],
-      }
-    : null;
-};
+      minPrice: valuesFromParams[0],
+      maxPrice: valuesFromParams[1],
+    }
+    : null
+}
 
 const initialDateRangeValue = (queryParams, paramName) => {
-  const dates = queryParams[paramName];
-  const rawValuesFromParams = !!dates ? dates.split(',') : [];
-  const valuesFromParams = rawValuesFromParams.map(v => parseDateFromISO8601(v));
-  const initialValues =
-    !!dates && valuesFromParams.length === 2
+  const dates = queryParams[paramName]
+  const rawValuesFromParams = dates ? dates.split(',') : []
+  const valuesFromParams = rawValuesFromParams.map((v) => parseDateFromISO8601(v))
+  const initialValues
+    = !!dates && valuesFromParams.length === 2
       ? {
-          dates: { startDate: valuesFromParams[0], endDate: valuesFromParams[1] },
-        }
-      : { dates: null };
+        dates: { startDate: valuesFromParams[0], endDate: valuesFromParams[1] },
+      }
+      : { dates: null }
 
-  return initialValues;
-};
+  return initialValues
+}
 
-const SearchFiltersComponent = props => {
+const SearchFiltersComponent = (props) => {
   const {
     rootClassName,
     className,
@@ -77,105 +84,106 @@ const SearchFiltersComponent = props => {
     searchFiltersPanelSelectedCount,
     history,
     intl,
-  } = props;
+  } = props
 
-  const hasNoResult = listingsAreLoaded && resultsCount === 0;
-  const classes = classNames(rootClassName || css.root, { [css.longInfo]: hasNoResult }, className);
+  const hasNoResult = listingsAreLoaded && resultsCount === 0
+  const classes = classNames(rootClassName || css.root, { [css.longInfo]: hasNoResult }, className)
 
   const categoryLabel = intl.formatMessage({
     id: 'SearchFilters.categoryLabel',
-  });
+  })
 
   const amenitiesLabel = intl.formatMessage({
     id: 'SearchFilters.amenitiesLabel',
-  });
+  })
 
   const keywordLabel = intl.formatMessage({
     id: 'SearchFilters.keywordLabel',
-  });
+  })
 
   const initialAmenities = amenitiesFilter
     ? initialValues(urlQueryParams, amenitiesFilter.paramName)
-    : null;
+    : null
 
   const initialCategory = categoryFilter
     ? initialValue(urlQueryParams, categoryFilter.paramName)
-    : null;
+    : null
 
   const initialPriceRange = priceFilter
     ? initialPriceRangeValue(urlQueryParams, priceFilter.paramName)
-    : null;
+    : null
 
   const initialDateRange = dateRangeFilter
     ? initialDateRangeValue(urlQueryParams, dateRangeFilter.paramName)
-    : null;
+    : null
 
   const initialKeyword = keywordFilter
     ? initialValue(urlQueryParams, keywordFilter.paramName)
-    : null;
+    : null
 
   const handleSelectOptions = (urlParam, options) => {
-    const queryParams =
-      options && options.length > 0
+    const queryParams
+      = options && options.length > 0
         ? { ...urlQueryParams, [urlParam]: options.join(',') }
-        : omit(urlQueryParams, urlParam);
+        : omit(urlQueryParams, urlParam)
 
-    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
-  };
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams))
+  }
 
   const handleSelectOption = (urlParam, option) => {
     // query parameters after selecting the option
     // if no option is passed, clear the selection for the filter
     const queryParams = option
       ? { ...urlQueryParams, [urlParam]: option }
-      : omit(urlQueryParams, urlParam);
+      : omit(urlQueryParams, urlParam)
 
-    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
-  };
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams))
+  }
 
   const handlePrice = (urlParam, range) => {
-    const { minPrice, maxPrice } = range || {};
-    const queryParams =
-      minPrice != null && maxPrice != null
+    const { minPrice, maxPrice } = range || {}
+    const queryParams
+      = minPrice != null && maxPrice != null
         ? { ...urlQueryParams, [urlParam]: `${minPrice},${maxPrice}` }
-        : omit(urlQueryParams, urlParam);
+        : omit(urlQueryParams, urlParam)
 
-    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
-  };
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams))
+  }
 
   const handleDateRange = (urlParam, dateRange) => {
-    const hasDates = dateRange && dateRange.dates;
-    const { startDate, endDate } = hasDates ? dateRange.dates : {};
+    const hasDates = dateRange && dateRange.dates
+    const { startDate, endDate } = hasDates ? dateRange.dates : {}
 
-    const start = startDate ? stringifyDateToISO8601(startDate) : null;
-    const end = endDate ? stringifyDateToISO8601(endDate) : null;
+    const start = startDate ? stringifyDateToISO8601(startDate) : null
+    const end = endDate ? stringifyDateToISO8601(endDate) : null
 
-    const queryParams =
-      start != null && end != null
+    const queryParams
+      = start != null && end != null
         ? { ...urlQueryParams, [urlParam]: `${start},${end}` }
-        : omit(urlQueryParams, urlParam);
-    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
-  };
+        : omit(urlQueryParams, urlParam)
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams))
+  }
 
   const handleKeyword = (urlParam, values) => {
     const queryParams = values
       ? { ...urlQueryParams, [urlParam]: values }
-      : omit(urlQueryParams, urlParam);
+      : omit(urlQueryParams, urlParam)
 
-    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
-  };
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams))
+  }
 
   const categoryFilterElement = categoryFilter ? (
     <SelectSingleFilter
       urlParam={categoryFilter.paramName}
       label={categoryLabel}
+      icon={<IconBucket className={css.filterButtonIcon}/>}
       onSelect={handleSelectOption}
       showAsPopup
       options={categoryFilter.options}
       initialValue={initialCategory}
       contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
     />
-  ) : null;
+  ) : null
 
   const amenitiesFilterElement = amenitiesFilter ? (
     <SelectMultipleFilter
@@ -183,40 +191,43 @@ const SearchFiltersComponent = props => {
       name="amenities"
       urlParam={amenitiesFilter.paramName}
       label={amenitiesLabel}
+      icon={<IconSurfboard className={css.filterButtonIcon}/>}
       onSubmit={handleSelectOptions}
       showAsPopup
       options={amenitiesFilter.options}
       initialValues={initialAmenities}
       contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
     />
-  ) : null;
+  ) : null
 
   const priceFilterElement = priceFilter ? (
     <PriceFilter
       id="SearchFilters.priceFilter"
       urlParam={priceFilter.paramName}
       onSubmit={handlePrice}
+      icon={<IconPrice className={css.filterButtonIcon}/>}
       showAsPopup
       {...priceFilter.config}
       initialValues={initialPriceRange}
       contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
     />
-  ) : null;
+  ) : null
 
-  const dateRangeFilterElement =
-    dateRangeFilter && dateRangeFilter.config.active ? (
+  const dateRangeFilterElement
+    = dateRangeFilter && dateRangeFilter.config.active ? (
       <BookingDateRangeFilter
         id="SearchFilters.dateRangeFilter"
         urlParam={dateRangeFilter.paramName}
         onSubmit={handleDateRange}
         showAsPopup
+        icon={<IconCalendar className={css.filterButtonIcon}/>}
         contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
         initialValues={initialDateRange}
       />
-    ) : null;
+    ) : null
 
-  const keywordFilterElement =
-    keywordFilter && keywordFilter.config.active ? (
+  const keywordFilterElement
+    = keywordFilter && keywordFilter.config.active ? (
       <KeywordFilter
         id={'SearchFilters.keywordFilter'}
         name="keyword"
@@ -226,18 +237,19 @@ const SearchFiltersComponent = props => {
         showAsPopup
         initialValues={initialKeyword}
         contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+        icon={<IconText className={css.filterButtonIcon}/>}
       />
-    ) : null;
+    ) : null
 
-  const toggleSearchFiltersPanelButtonClasses =
-    isSearchFiltersPanelOpen || searchFiltersPanelSelectedCount > 0
+  const toggleSearchFiltersPanelButtonClasses
+    = isSearchFiltersPanelOpen || searchFiltersPanelSelectedCount > 0
       ? css.searchFiltersPanelOpen
-      : css.searchFiltersPanelClosed;
+      : css.searchFiltersPanelClosed
   const toggleSearchFiltersPanelButton = toggleSearchFiltersPanel ? (
     <button
       className={toggleSearchFiltersPanelButtonClasses}
       onClick={() => {
-        toggleSearchFiltersPanel(!isSearchFiltersPanelOpen);
+        toggleSearchFiltersPanel(!isSearchFiltersPanelOpen)
       }}
     >
       <FormattedMessage
@@ -245,7 +257,7 @@ const SearchFiltersComponent = props => {
         values={{ count: searchFiltersPanelSelectedCount }}
       />
     </button>
-  ) : null;
+  ) : null
   return (
     <div className={classes}>
       <div className={css.filters}>
@@ -277,8 +289,8 @@ const SearchFiltersComponent = props => {
         </div>
       ) : null}
     </div>
-  );
-};
+  )
+}
 
 SearchFiltersComponent.defaultProps = {
   rootClassName: null,
@@ -292,7 +304,7 @@ SearchFiltersComponent.defaultProps = {
   isSearchFiltersPanelOpen: false,
   toggleSearchFiltersPanel: null,
   searchFiltersPanelSelectedCount: 0,
-};
+}
 
 SearchFiltersComponent.propTypes = {
   rootClassName: string,
@@ -317,11 +329,11 @@ SearchFiltersComponent.propTypes = {
 
   // from injectIntl
   intl: intlShape.isRequired,
-};
+}
 
 const SearchFilters = compose(
   withRouter,
   injectIntl
-)(SearchFiltersComponent);
+)(SearchFiltersComponent)
 
-export default SearchFilters;
+export default SearchFilters

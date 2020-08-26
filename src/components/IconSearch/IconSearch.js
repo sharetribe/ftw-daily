@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
-import css from './IconSearch.css';
+import css from './IconSearch.css'
 
-const IconSearch = props => {
-  const { rootClassName, className } = props;
-  const classes = classNames(rootClassName || css.root, className);
+const IconSearch = (props) => {
+  const { rootClassName, className } = props
+  const classes = classNames(rootClassName || css.root, className)
   return (
     <svg
       className={classes}
@@ -27,19 +27,19 @@ const IconSearch = props => {
         <circle cx="7.5" cy="7.5" r="7.5" />
       </g>
     </svg>
-  );
-};
+  )
+}
 
 IconSearch.defaultProps = {
   rootClassName: null,
   className: null,
-};
+}
 
-const { string } = PropTypes;
+const { string } = PropTypes
 
 IconSearch.propTypes = {
   rootClassName: string,
   className: string,
-};
+}
 
-export default IconSearch;
+export default IconSearch

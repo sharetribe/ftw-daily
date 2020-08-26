@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-const Form = props => {
-  const { children, contentRef, ...restProps } = props;
+const Form = (props) => {
+  const { children, contentRef, ...restProps } = props
 
   const formProps = {
     // These are mainly default values for the server
@@ -16,20 +16,20 @@ const Form = props => {
     ref: contentRef,
 
     ...restProps,
-  };
-  return <form {...formProps}>{children}</form>;
-};
+  }
+  return <form {...formProps}>{children}</form>
+}
 
 Form.defaultProps = {
   children: null,
   contentRef: null,
-};
+}
 
-const { func, node } = PropTypes;
+const { func, node } = PropTypes
 
 Form.propTypes = {
   children: node,
   contentRef: func,
-};
+}
 
-export default Form;
+export default Form

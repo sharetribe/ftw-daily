@@ -1,31 +1,26 @@
 @import '../../marketplace.css';
-
 :root {
   /*
-    These variables are available in global scope through ":root"
-    element (<html> tag). Variables with the same names are going to
-    overwrite each other if CSS Properties' (PostCSS plugin)
-    configuration "preserve: true" is used - meaning that variables
-    are left to CSS bundle. We are planning to enable it in the future
-    since browsers support CSS Properties already.
- */
-
+     These variables are available in global scope through ":root"
+     element (<html> tag). Variables with the same names are going to
+     overwrite each other if CSS Properties' (PostCSS plugin)
+     configuration "preserve: true" is used - meaning that variables
+     are left to CSS bundle. We are planning to enable it in the future
+     since browsers support CSS Properties already.
+  */
   --SectionHero_desktopTitleMaxWidth: 625px;
-
   --SectionHero_animation: {
     animation-name: animationTitle;
     animation-duration: 0.5s;
     animation-timing-function: ease-out;
     -webkit-animation-fill-mode: forwards;
-
     visibility: hidden;
     opacity: 1;
     position: relative;
-  }
+  } ;
 }
 
 /* Animation for the hero elements */
-
 @keyframes animationTitle {
   0% {
     visibility: hidden;
@@ -38,31 +33,31 @@
     top: 0;
   }
 }
-
 .root {
   @apply --backgroundImage;
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
-
   /* Text positioning is done with paddings */
 }
 
 .heroContent {
   margin: 0 24px 0 24px;
-
-  @media (--viewportMedium) {
+  /* Special viewport for adjusting the heroContent's placement */
+}
+@media (--viewportMedium) {
+  .heroContent {
     margin: 0 7.5vw 0 7.5vw;
   }
-
-  /* Special viewport for adjusting the heroContent's placement */
-
-  @media only screen and (min-width: 1025px) and (max-width: 1366px) {
+}
+@media only screen and (min-width: 1025px) and (max-width: 1366px) {
+  .heroContent {
     padding: 0 36px 0 36px;
   }
-
-  @media only screen and (min-width: 1367px) {
+}
+@media only screen and (min-width: 1367px) {
+  .heroContent {
     margin: 0 auto;
     max-width: calc(1052px + 36px + 36px);
     width: 100%;
@@ -73,25 +68,25 @@
 .heroMainTitle {
   @apply --marketplaceHeroTitleFontStyles;
   color: var(--matterColorLight);
-
   @apply --SectionHero_animation;
   animation-delay: 0.5s;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .heroMainTitle {
     max-width: var(--SectionHero_desktopTitleMaxWidth);
+    font-size: 72px;
   }
 }
 
 .heroSubTitle {
   @apply --marketplaceBodyFontStyles;
-
   color: var(--matterColorLight);
   margin: 0 0 32px 0;
-
   @apply --SectionHero_animation;
   animation-delay: 0.65s;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .heroSubTitle {
     max-width: var(--SectionHero_desktopTitleMaxWidth);
     margin: 0 0 63px 0;
   }
@@ -100,11 +95,18 @@
 .heroButton {
   @apply --marketplaceButtonStyles;
   @apply --SectionHero_animation;
-
+  color: black;
+  background-color: white;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   animation-delay: 0.8s;
-
-  @media (--viewportMedium) {
-    display: block;
+}
+@media (--viewportMedium) {
+  .heroButton {
     width: 260px;
   }
 }
+
+/*# sourceMappingURL=SectionHero.css.map */

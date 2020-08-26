@@ -1,57 +1,73 @@
-import React, { Component } from 'react';
-import { bool, number, object, string } from 'prop-types';
-import classNames from 'classnames';
-import { propTypes } from '../../util/types';
-import config from '../../config';
-import { StaticMap, DynamicMap, isMapsLibLoaded } from './MapboxMap';
-// import { StaticMap, DynamicMap, isMapsLibLoaded } from './GoogleMap';
+import { useScrollPosition } from '@n8tb1t/use-scroll-position'
+import React, { Component, useState } from 'react'
+import {
+  bool, number, object, string
+} from 'prop-types'
+import classNames from 'classnames'
+import { propTypes } from '../../util/types'
+import config from '../../config'
+import { StaticMap, DynamicMap, isMapsLibLoaded } from './MapboxMap'
 
-import css from './Map.css';
+import css from './Map.css'
 
-export class Map extends Component {
-  render() {
-    const {
-      className,
-      rootClassName,
-      mapRootClassName,
-      address,
-      center,
-      obfuscatedCenter,
-      zoom,
-      mapsConfig,
-      useStaticMap,
-    } = this.props;
-    const classes = classNames(rootClassName || css.root, className);
-    const mapClasses = mapRootClassName || css.mapRoot;
+const Map = (props) => {
+  const {
+    className,
+    rootClassName,
+    mapRootClassName,
+    address,
+    center,
+    obfuscatedCenter,
+    zoom,
+    mapsConfig,
+    useStaticMap,
+    metadata,
+    createSurf
+  } = props
+  const classes = classNames(rootClassName || css.root, className)
+  const mapClasses = mapRootClassName || css.mapRoot
 
-    if (mapsConfig.fuzzy.enabled && !obfuscatedCenter) {
-      throw new Error(
-        'Map: obfuscatedCenter prop is required when config.maps.fuzzy.enabled === true'
-      );
-    }
-    if (!mapsConfig.fuzzy.enabled && !center) {
-      throw new Error('Map: center prop is required when config.maps.fuzzy.enabled === false');
-    }
+  const [staticMap, setStaticMap] = useState(useStaticMap)
 
-    const location = mapsConfig.fuzzy.enabled ? obfuscatedCenter : center;
+  useScrollPosition(
+    ({ prevPos, currPos }) => {
+      const isVisible = currPos.y < -1000
+      if (isVisible && staticMap) {
+        setStaticMap(false)
+      }
+    },
+    [staticMap]
+  )
 
-    return !isMapsLibLoaded() ? (
-      <div className={classes} />
-    ) : useStaticMap ? (
-      <StaticMap center={location} zoom={zoom} address={address} mapsConfig={mapsConfig} />
-    ) : (
-      <DynamicMap
-        containerElement={<div className={classes} />}
-        mapElement={<div className={mapClasses} />}
-        containerClassName={classes}
-        mapClassName={mapClasses}
-        center={location}
-        zoom={zoom}
-        address={address}
-        mapsConfig={mapsConfig}
-      />
-    );
+  if (mapsConfig.fuzzy.enabled && !obfuscatedCenter) {
+    throw new Error(
+      'Map: obfuscatedCenter prop is required when config.maps.fuzzy.enabled === true'
+    )
   }
+  if (!mapsConfig.fuzzy.enabled && !center) {
+    throw new Error('Map: center prop is required when config.maps.fuzzy.enabled === false')
+  }
+
+  const location = mapsConfig.fuzzy.enabled ? obfuscatedCenter : center
+  console.log(staticMap)
+  return !isMapsLibLoaded() ? (
+    <div className={classes} />
+  ) : staticMap ? (
+    <StaticMap center={location} zoom={zoom} address={address} mapsConfig={mapsConfig} />
+  ) : (
+    <DynamicMap
+      containerElement={<div className={classes} />}
+      mapElement={<div className={mapClasses} />}
+      containerClassName={classes}
+      mapClassName={mapClasses}
+      center={location}
+      zoom={zoom}
+      address={address}
+      mapsConfig={mapsConfig}
+      metadata={metadata}
+      createSurf={createSurf}
+    />
+  )
 }
 
 Map.defaultProps = {
@@ -62,7 +78,7 @@ Map.defaultProps = {
   zoom: config.maps.fuzzy.enabled ? config.maps.fuzzy.defaultZoomLevel : 11,
   mapsConfig: config.maps,
   useStaticMap: false,
-};
+}
 
 Map.propTypes = {
   className: string,
@@ -74,6 +90,8 @@ Map.propTypes = {
   zoom: number,
   mapsConfig: object,
   useStaticMap: bool,
-};
+  metadata: object,
+  createSurf: bool
+}
 
-export default Map;
+export default Map

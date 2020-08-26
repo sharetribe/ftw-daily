@@ -1,0 +1,100 @@
+@import '../../marketplace.css';
+
+.root {
+  margin-top: 48px;
+}
+
+.error {
+  color: var(--failColor);
+}
+
+.priceInput {
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.submitButton {
+  margin-top: auto;
+  margin-bottom: 24px;
+
+  @media (--viewportLarge) {
+    display: inline-block;
+    width: 241px;
+    margin-top: 100px;
+  }
+}
+
+.formRow {
+  margin-bottom: 24px;
+}
+
+.additionalProductsWrapper {
+  margin-bottom: 35px;
+
+  @media (--viewportMedium) {
+    margin-bottom: 56px;
+  }
+}
+
+.additionalProductsWrapper .sectionContainer {
+  margin-bottom: 35px;
+}
+
+.additionalProductLabel {
+  display: inline-block;
+}
+
+
+.fieldArrayAdd {
+  @apply --marketplaceLinkStyles;
+  @apply --marketplaceSearchFilterSublabelFontStyles;
+  font-weight: var(--fontWeightMedium);
+  margin-bottom: 2px;
+}
+
+.fieldArrayRemove {
+  @apply --marketplaceH5FontStyles;
+  color: var(--matterColorAnti);
+  float: right;
+  line-height: 20px;
+  margin-top: 20px;
+  margin-right: 20px;
+
+  &:hover {
+    color: var(--matterColor);
+  }
+}
+
+.closeIcon {
+  @apply --marketplaceModalCloseIcon;
+  margin-right: 5px;
+}
+
+.addIcon {
+  margin-right: 7px;
+  display: inline-block;
+  height: 18px;
+  padding-top: 1px;
+}
+
+.mappingRow {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.numericInput {
+  padding: 20px;
+  border: solid 1px lightgrey;
+  border-radius: 8px;
+  width: 100px;
+}
+
+.addDiscountButton {
+  min-height: 35px;
+  width: 140px;
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}

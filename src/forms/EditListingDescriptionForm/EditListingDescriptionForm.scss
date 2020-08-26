@@ -1,0 +1,107 @@
+@import '../../marketplace.css';
+
+:root {
+  /*
+    These variables are available in global scope through ":root"
+    element (<html> tag). Variables with the same names are going to
+    overwrite each other if CSS Properties' (PostCSS plugin)
+    configuration "preserve: true" is used - meaning that variables
+    are left to CSS bundle. We are planning to enable it in the future
+    since browsers support CSS Properties already.
+ */
+
+  --EditListingDescriptionForm_formMargins: {
+    margin-bottom: 24px;
+
+    @media (--viewportMedium) {
+      margin-bottom: 32px;
+    }
+  }
+}
+
+.root {
+  /* Dimensions */
+  width: 100%;
+  height: auto;
+
+  /* Layout */
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  padding-top: 1px;
+
+  @media (--viewportMedium) {
+    padding-top: 2px;
+  }
+}
+
+.error {
+  color: var(--failColor);
+}
+
+.title, .category, .wifi, .retreat, .video  {
+  @apply --EditListingDescriptionForm_formMargins;
+}
+
+.description, .surf, .vibe, .community {
+  @apply --EditListingDescriptionForm_formMargins;
+  flex-shrink: 0;
+}
+
+.sectionTitle {
+  @apply --marketplaceH2FontStyles;
+
+  margin-bottom: 5px;
+  @media (--viewportMedium) {
+    margin: 0;
+  }
+}
+
+.sectionSubtitle {
+  font-size: 14px;
+  margin: 0;
+}
+
+
+.submitButton {
+  margin-top: auto;
+  margin-bottom: 24px;
+  flex-shrink: 0;
+
+  @media (--viewportLarge) {
+    display: inline-block;
+    width: 241px;
+    margin-top: 100px;
+  }
+}
+
+.paperSection {
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.quoteContainer {
+  background-color: var(--matterColorLightGrey);
+  border: solid 1px var(--matterColorNegative);
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  margin: 0px;
+
+  @media (--viewportMedium) {
+    margin: 30px;
+  }
+}
+
+.welcomeMessage {
+  font-weight: 400;
+  font-style: italic;
+}
+
+.welcomeMessageSigner {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--marketplaceColorDark)
+}

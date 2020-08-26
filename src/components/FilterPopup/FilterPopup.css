@@ -80,3 +80,9 @@
   opacity: 1;
   pointer-events: auto;
 }
+
+.filterButtonIconContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

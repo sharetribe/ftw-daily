@@ -1,19 +1,19 @@
 @import '../../marketplace.css';
-
 .root {
   border-top-style: solid;
   border-top-width: 1px;
   border-top-color: var(--matterColorNegative);
-
   width: 100%;
   padding: 24px 24px 42px 24px;
   background-color: var(--matterColorBright);
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .root {
     padding: 0 24px 33px 24px;
   }
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .root {
     padding: 0 0 81px 0;
     border-top: none;
   }
@@ -21,14 +21,14 @@
 
 /* Wrapper to limit the top border in desktop
  * view from the outermost paddings*/
-.topBorderWrapper {
-  @media (--viewportMedium) {
+@media (--viewportMedium) {
+  .topBorderWrapper {
     padding-top: 41px;
   }
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .topBorderWrapper {
     padding-top: 73px;
-
     border-top-style: solid;
     border-top-width: 1px;
     border-top-color: var(--matterColorNegative);
@@ -39,27 +39,31 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .content {
     margin: 0 auto;
   }
-
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .content {
     max-width: 1128px;
     padding: 0 36px;
   }
-
-  @media (--viewportXLarge) {
+}
+@media (--viewportXLarge) {
+  .content {
     max-width: 1056px;
     padding: 0;
   }
 }
 
 /* Mobile only social media links */
-.someLiksMobile {
+.someLinksMobile {
   margin-bottom: 24px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .someLinksMobile {
     display: none;
   }
 }
@@ -79,9 +83,9 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   width: 100%;
-  margin-bottom: 18px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .links {
     flex-wrap: nowrap;
     justify-content: space-between;
     margin-bottom: 0;
@@ -95,17 +99,22 @@
   display: none;
   margin-right: 24px;
   margin-bottom: 24px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .organization {
     display: block;
     order: 1;
     margin-right: 12px;
   }
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .organization {
     flex-basis: 240px;
     margin-right: 57px;
   }
-  @media (--viewportLargeWithPaddings) {
+}
+@media (--viewportLargeWithPaddings) {
+  .organization {
     flex-basis: 250px;
     margin-right: 12px;
   }
@@ -123,9 +132,6 @@
   height: 27px;
 }
 
-.organizationInfo {
-}
-
 .organizationDescription {
   @apply --marketplaceTinyFontStyles;
 }
@@ -138,11 +144,10 @@
 .copyrightLink {
   color: var(--matterColor);
   transition: var(--transitionStyleButton);
-
-  &:hover {
-    color: var(--marketplaceColor);
-    text-decoration: none;
-  }
+}
+.copyrightLink:hover {
+  color: var(--marketplaceColor);
+  text-decoration: none;
 }
 
 /* Desktop and Mobile: links to more information */
@@ -151,8 +156,9 @@
   flex-basis: 165px;
   margin-right: 24px;
   margin-bottom: 24px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .infoLinks {
     padding-top: 2px;
     margin-right: 12px;
   }
@@ -166,8 +172,9 @@
 .listItem {
   min-height: 24px;
   margin-bottom: 6px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .listItem {
     margin-bottom: 0;
   }
 }
@@ -178,16 +185,15 @@
   line-height: 20px;
   color: var(--matterColor);
   transition: var(--transitionStyleButton);
-
   margin-top: 0;
   margin-bottom: 12px;
-
-  &:hover {
-    color: var(--marketplaceColor);
-    text-decoration: none;
-  }
-
-  @media (--viewportMedium) {
+}
+.link:hover {
+  color: var(--marketplaceColor);
+  text-decoration: none;
+}
+@media (--viewportMedium) {
+  .link {
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -199,8 +205,9 @@
   flex-basis: 165px;
   margin-right: 24px;
   margin-bottom: 24px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .searches {
     padding-top: 2px;
     margin-right: 12px;
   }
@@ -213,8 +220,9 @@
   flex-basis: 165px;
   margin-right: 24px;
   margin-bottom: 24px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .searchesExtra {
     padding-top: 2px;
     margin-right: 12px;
   }
@@ -228,13 +236,16 @@
   flex-basis: 109px;
   margin-right: 24px;
   margin-bottom: 24px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .extraLinks {
     display: flex;
     flex-direction: column;
     margin-right: 12px;
   }
-  @media (--viewportLarge) {
+}
+@media (--viewportLarge) {
+  .extraLinks {
     margin-right: 0;
   }
 }
@@ -242,7 +253,6 @@
 .legalMatters {
   /* Get extra space from parent element (which is using flexbox) */
   flex-grow: 1;
-
   /* Layout */
   display: flex;
   flex-direction: column;
@@ -262,16 +272,19 @@
   @apply --marketplaceTinyFontStyles;
   color: var(--matterColorAnti);
   transition: var(--transitionStyleButton);
-
   margin-top: 0;
   margin-bottom: 0;
-
-  &:hover {
-    color: var(--marketplaceColor);
-    text-decoration: none;
-  }
-
-  @media (--viewportMedium) {
+}
+.legalLink:hover,
+.privacy:hover,
+.terms:hover {
+  color: var(--marketplaceColor);
+  text-decoration: none;
+}
+@media (--viewportMedium) {
+  .legalLink,
+.privacy,
+.terms {
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -279,24 +292,17 @@
 
 /* Mobile: copyright mark and legal links for mobile */
 .copyrightAndTermsMobile {
-  /* Positioning */
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-
   /* Dimensions */
   height: 60px;
-  padding: 0 24px 18px 24px;
-
+  padding: 10px;
   /* Layout */
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-
+  align-items: center;
   background-color: var(--matterColorLight);
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .copyrightAndTermsMobile {
     display: none;
   }
 }
@@ -306,17 +312,14 @@
   @apply --marketplaceTinyFontStyles;
   color: var(--matterColorAnti);
   transition: var(--transitionStyleButton);
-
   /* Tell parent component how much space this one prefers */
   flex-basis: 172px;
-
   margin-top: 0;
   margin-bottom: 0;
-
-  &:hover {
-    color: var(--marketplaceColor);
-    text-decoration: none;
-  }
+}
+.organizationCopyrightMobile:hover {
+  color: var(--marketplaceColor);
+  text-decoration: none;
 }
 
 .tosAndPrivacyMobile {
@@ -326,3 +329,22 @@
 .privacy {
   margin-right: 24px;
 }
+
+.onePercentLogoMobile {
+  height: 50px;
+  width: 100px;
+  margin-top: 10px;
+}
+@media (--viewportMedium) {
+  .onePercentLogoMobile {
+    display: none;
+  }
+}
+
+.onePercentLogo {
+  margin-top: 20px;
+  height: 50px;
+  width: 100px;
+}
+
+/*# sourceMappingURL=Footer.css.map */

@@ -1,8 +1,4 @@
 @import '../../marketplace.css';
-
-.root {
-}
-
 .content {
   display: flex;
   flex-direction: row;
@@ -20,8 +16,9 @@
 .heading {
   @apply --marketplaceH2FontStyles;
   margin: 20px 0 0 0;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .heading {
     margin: 15px 0 0 0;
   }
 }
@@ -37,22 +34,25 @@
   margin: 18px 0 0 0;
   transition: all 1s ease-in;
   @apply --marketplaceH4FontStyles;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .mobileBio,
+.desktopBio {
     margin: 18px 0 0 0;
   }
 }
 
-.mobileBio {
-  @media (--viewportMedium) {
+@media (--viewportMedium) {
+  .mobileBio {
     display: none;
   }
 }
 
 .desktopBio {
   display: none;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .desktopBio {
     margin-top: 16px;
     display: block;
   }
@@ -67,14 +67,15 @@
 .links {
   @apply --marketplaceH4FontStyles;
   margin-top: 13px;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .links {
     margin: 16px 0 0 0;
   }
 }
 
-.withBioMissingAbove {
-  @media (--viewportMedium) {
+@media (--viewportMedium) {
+  .withBioMissingAbove {
     /* Fix baseline alignment if bio is missing from above */
     margin-top: 16px;
   }
@@ -88,8 +89,9 @@
 .headingRow {
   display: flex;
   flex-direction: column;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .headingRow {
     flex-direction: row;
     justify-content: space-between;
     align-items: baseline;
@@ -101,8 +103,9 @@
   display: none;
   margin-bottom: 0;
   white-space: nowrap;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .editProfileDesktop {
     display: inline;
   }
 }
@@ -110,14 +113,15 @@
 .editProfileMobile {
   @apply --marketplaceH4FontStyles;
   display: inline;
-
-  @media (--viewportMedium) {
+}
+@media (--viewportMedium) {
+  .editProfileMobile {
     display: none;
   }
 }
 
 .contact {
-  @apply --marketplaceLinkStyles;
-  @apply --marketplaceH4FontStyles;
-  margin: 0;
+  @apply --marketplaceButtonStylesSmallBlack;
 }
+
+/*# sourceMappingURL=UserCard.css.map */
