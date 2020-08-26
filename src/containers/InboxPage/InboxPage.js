@@ -41,26 +41,50 @@ import config from '../../config';
 import { loadData } from './InboxPage.duck';
 import css from './InboxPage.css';
 
+const getDateDescription = date => {
+  const now = new Date()
+  
+  const minutes = ((now - date) / (1000 * 60)).toFixed()
+  const hours = Math.floor(minutes / 60)
+  const days = (hours / 24).toFixed()
+  const months = (days / 30).toFixed()
+
+  if(minutes < 59) {
+    return <FormattedMessage id="InboxPage.someMinutesAgo" />
+  }
+  if(minutes > 59 && minutes < 119) {
+    return <FormattedMessage id="InboxPage.hourAgo" values={{ hours }} />
+  }
+  if(minutes > 119 && hours < 24) {
+    return <FormattedMessage id="InboxPage.hoursAgo" values={{ hours }} />
+  }
+  if(hours > 23 && hours < 48) {
+    return <FormattedMessage id="InboxPage.dayAgo" values={{ days }} />
+  }
+  if(hours > 47 && days < 30) {
+    return <FormattedMessage id="InboxPage.daysAgo" values={{ days }} />
+  }
+  if(days >= 30 && days < 90) {
+    return <FormattedMessage id="InboxPage.monthAgo" values={{ months }} />
+  }
+  if(days >= 90) {
+    return <FormattedMessage id="InboxPage.monthsAgo" values={{ months }} />
+  }
+ }
+
 const formatDate = (intl, date) => {
   const options = {
     weekday: "short", 
     day: "numeric",
   };
-  // return date.toLocaleDateString('de-DE', options)
-  // console.log(date.toLocaleDateString('de-DE', options))
   return {
+    long: getDateDescription(date),
     short: date.toLocaleDateString('de-DE', {
       weekday: "short", 
       day: "numeric" ,
       year: "numeric", 
       month: "numeric", 
     }),
-    long: date.toLocaleDateString('de-DE', {
-      weekday: "short", 
-      year: "numeric", 
-      month: "long", 
-      day: "numeric" 
-  }),
   };
 };
 
@@ -206,13 +230,18 @@ BookingInfoMaybe.propTypes = {
   unitType: propTypes.bookingUnitType.isRequired,
 };
 
+const checkIfOneSideIsDeleted = side => {
+  const { abbreviatedName, bio, displayName } = side.attributes.profile
+  return !abbreviatedName && !displayName && !bio
+}
+
 export const InboxItem = props => {
   const { unitType, type, tx, intl, stateData, lastMessage } = props;
   const { customer, provider } = tx;
   const isOrder = type === 'order';
 
   const otherUser = isOrder ? provider : customer;
-  otherUser.attributes.profile.displayName = otherUser.attributes.profile.displayName.split(' ').splice(0,1).join('')
+  otherUser.attributes.profile.displayName = otherUser.attributes.profile.displayName && otherUser.attributes.profile.displayName.split(' ').splice(0,1).join('')
   const otherUserDisplayName = <UserDisplayName user={otherUser} intl={intl} />;
   const isOtherUserBanned = otherUser.attributes.banned;
   
@@ -256,9 +285,9 @@ export const InboxItem = props => {
           </div>
           <div
             className={classNames(css.lastTransitionedAt, stateData.lastTransitionedAtClassName)}
-            title={lastTransitionedAt.long}
+            title={getFormattedDate(lastTransitionedAt.short)}
           >
-            {getFormattedDate(lastTransitionedAt.short)}
+            {lastTransitionedAt.long}
           </div>
         </div>
       </NamedLink>
@@ -288,7 +317,7 @@ export const InboxPageComponent = props => {
     allUserMessages,
     allUserMessagesError
   } = props;
-  console.log('allUserMessages ',allUserMessages)
+ 
   const { tab } = params;
   const ensuredCurrentUser = ensureCurrentUser(currentUser);
 
@@ -306,10 +335,11 @@ export const InboxPageComponent = props => {
   const toTxItem = (tx, index) => {
     const type = isOrders ? 'order' : 'sale';
     const stateData = txState(intl, tx, type);
-    const lastMessage = allUserMessages[index].data.data.length ? allUserMessages[index].data.data[0].attributes.content : '...'
-  
+    const lastMessage = allUserMessages[index] && allUserMessages[index].data.data.length ? allUserMessages[index].data.data[0].attributes.content : '...'
+    const oneSideOfTransactionHasBeenDeleted = checkIfOneSideIsDeleted(tx.customer) || checkIfOneSideIsDeleted(tx.provider)
+
     // Render InboxItem only if the latest transition of the transaction is handled in the `txState` function.
-    return stateData ? (
+    return stateData && !oneSideOfTransactionHasBeenDeleted  ? (
       <li key={tx.id.uuid} className={css.listItem}>
         <InboxItem unitType={unitType} type={type} tx={tx} intl={intl} stateData={stateData} lastMessage={lastMessage}/>
       </li>
