@@ -6,6 +6,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery'
 import MultiRowGridList from '../../components/MultiRowGridList/MultiRowGridList'
 import SingleLineGridList from '../../components/SingleRowImageGridList/SingleRowImageGridList'
 import { FormattedMessage } from '../../util/reactIntl'
+import { richText } from '../../util/richText';
 
 import css from './ListingPage.css'
 
@@ -43,11 +44,11 @@ const SectionCoworkingMaybe = (props) => {
       <div className={css.tags}>
         {wifi}
       </div>
-      <p className={css.community}>
-        {
-          publicData.coworking ? publicData.coworking.description
-            : publicData.vibe
-        }
+      <p className={css.description}>
+        {richText(publicData.coworking ? publicData.coworking.description : publicData.vibe, {
+          longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS_IN_COMMUNITY,
+          longWordClass: css.longWord,
+        })}
       </p>
       {generateMobileImageGrid()}
     </div>

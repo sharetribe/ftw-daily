@@ -510,15 +510,9 @@
 
 .description {
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: 20px;
   /* Preserve newlines, but collapse other whitespace */
   white-space: pre-line;
-}
-@media (--viewportMedium) {
-  .description {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
 }
 
 .sectionMap {
