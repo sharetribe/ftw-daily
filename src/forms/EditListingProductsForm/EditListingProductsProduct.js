@@ -3,8 +3,7 @@ import Grid from '@material-ui/core/Grid'
 import IconButton from '@material-ui/core/IconButton'
 import Paper from '@material-ui/core/Paper'
 import makeStyles from '@material-ui/core/styles/makeStyles'
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
+import Tooltip from '@material-ui/core/Tooltip'
 import React from 'react'
 import { bool, node, string } from 'prop-types'
 import { FieldArray } from 'react-final-form-arrays'
@@ -13,6 +12,7 @@ import _ from 'lodash'
 import { Field } from 'react-final-form'
 import AddIcon from '@material-ui/icons/Add'
 import DeleteIcon from '@material-ui/icons/Delete'
+import { MRadioGroup } from '../../components/MRadioGroup/MRadioGroup'
 import { FormattedMessage, intlShape } from '../../util/reactIntl'
 import FieldReactSelect from '../../components/FieldReactSelect/FieldReactSelect'
 import MField from '../../components/MField/MField'
@@ -26,6 +26,7 @@ import { formatMoney } from '../../util/currency'
 import { types as sdkTypes } from '../../util/sdkLoader'
 
 import css from './EditListingProductsForm.css'
+import { SeasonalPricing } from './SeasonalPricing'
 
 const { Money } = sdkTypes
 
@@ -42,12 +43,9 @@ const EditListingProductsProduct = (props) => {
     index
   } = props
 
-  const productTitle = sectionTitle || intl.formatMessage({ id: 'EditListingProductsForm.additionalProductTitle' })
   const bedTypeTitle = intl.formatMessage({ id: 'EditListingProductsForm.additionalProductBedTypeSelection' })
   const bathroomType = intl.formatMessage({ id: 'EditListingProductsForm.additionalProductBathroomTypeSelection' })
-  const losDiscountTitle = intl.formatMessage({ id: 'EditListingProductsForm.additionalProductLengthOfStayDiscount' })
   const roomPhotos = intl.formatMessage({ id: 'EditListingProductsForm.additionalProductPhotosOfTheRoom' })
-  const priceTitle = intl.formatMessage({ id: 'EditListingProductsForm.additionalProductPriceTitle' })
 
   const priceRequired = required(
     intl.formatMessage({
@@ -62,6 +60,28 @@ const EditListingProductsProduct = (props) => {
     ),
     config.listingMinimumPriceSubUnits
   )
+
+  const priceType = () => _.get(form.getState(), `values.${fieldId}.pricing_type`, 'standard')
+
+  const generatePricingStrategy = () => {
+    return (
+      priceType() === 'standard'
+        ? <FieldCurrencyInput
+          id={`${fieldId}.price`}
+          name={`${fieldId}.price`}
+          disabled={disabled}
+          label={intl.formatMessage({ id: 'EditListingProductsForm.additionalProductPriceSubTitle' })}
+          placeholder={intl.formatMessage({ id: 'EditListingProductsForm.additionalProductPricePlaceholder' })}
+          currencyConfig={config.currencyConfig}
+          validate={priceValidators}
+        />
+        : <SeasonalPricing
+          form={form}
+          fieldId={fieldId}
+        />
+    )
+  }
+
   const priceValidators = config.listingMinimumPriceSubUnits
     ? composeValidators(priceRequired, minPriceRequired)
     : priceRequired
@@ -239,28 +259,38 @@ const EditListingProductsProduct = (props) => {
         <Grid item xs={12}>
           <Grid container justify="center" spacing={2} direction="column">
             <Grid item xs={12}>
-              <FieldCurrencyInput
-                id={`${fieldId}.price`}
-                name={`${fieldId}.price`}
-                disabled={disabled}
-                label={intl.formatMessage({ id: 'EditListingProductsForm.additionalProductPriceSubTitle' })}
-                placeholder={intl.formatMessage({ id: 'EditListingProductsForm.additionalProductPricePlaceholder' })}
-                currencyConfig={config.currencyConfig}
-                validate={priceValidators}
+              <MRadioGroup
+                options={[
+                  {
+                    value: 'standard',
+                    label: 'Standard'
+                  },
+                  {
+                    value: 'seasonal',
+                    label: 'Seasonal'
+                  }
+                ]}
+                label={'Pricing'}
+                form={form}
+                defaultValue={priceType()}
+                name={`${fieldId}.pricing_type`}
               />
+            </Grid>
+            <Grid item xs={12}>
+              {generatePricingStrategy()}
             </Grid>
             <Grid item xs={12}>
               <Grid container justify="center" spacing={2} direction="column">
                 <Grid item xs={12}>
                   <h3 className={css.subTitle}>Length of stay discount</h3>
-                  <small style={{marginTop: -10}}>Select 'Add Discount' to enter discounts for bookings of a certain length or greater. These discounts are only applied to this room.</small>
+                  <small style={{ marginTop: -10 }}>Select 'Add Discount' to enter discounts for bookings of a certain length or greater. These discounts are only applied to this room.</small>
                 </Grid>
                 <Grid item xs={12}>
                   <FieldArray id={`${fieldId}.losDiscount`} name={`${fieldId}.losDiscount`}>
                     {({ fields }) => fields.map((name, index) => {
                       return (
                         <div key={name}>
-                          <Grid container justify={'space-between'} alignItems={'center'} direction="row" spacing={1}>
+                          <Grid container justify={'space-between'} alignItems={'center'} direction="row" spacing={3}>
                             <Grid item xs={4}>
                               <MField
                                 label={'Days'}

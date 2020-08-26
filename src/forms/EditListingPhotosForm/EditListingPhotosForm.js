@@ -168,7 +168,9 @@ export class EditListingPhotosFormComponent extends Component {
                     placeholder={videoPlaceholderMessage}
                     validate={composeValidators(validYouTubeURL(videoValidMessage))}
                   />
-                  <NotificationBanner />
+                  <NotificationBanner
+                    text={'A simple walkthrough video from your phone can create more trust and increase bookings by up to 317%! You can easily record it right from the YouTube app.'}
+                  />
                 </Grid>
               </Grid>
               {uploadImageFailed}

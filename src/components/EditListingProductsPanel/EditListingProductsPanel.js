@@ -49,7 +49,6 @@ const EditListingProductsPanel = (props) => {
         className={css.form}
         initialValues={{ products: _.sortBy(products, 'order') }}
         onSubmit={(values, shouldRedirect) => {
-          console.log(values)
           onSubmit({
             publicData: {
               products: values.products.map((p, idx) => {
@@ -63,7 +62,7 @@ const EditListingProductsPanel = (props) => {
                   bathroom: p.bathroom.value ? p.bathroom.value : p.bathroom,
                   beds: p.beds.value ? p.beds.value : p.beds,
                   quantityAvailable: p.quantityAvailable.value ? p.quantityAvailable.value : p.quantityAvailable,
-                  order: _.isInteger(p.order) ? p.order : idx
+                  order: _.isInteger(p.order) ? p.order : idx,
                 }
               })
             }

@@ -14,9 +14,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexWrap: 'wrap',
   },
-  margin: {
-    margin: theme.spacing(3),
-  },
   withoutLabel: {
     marginTop: theme.spacing(3),
   },
@@ -37,7 +34,8 @@ const MField = (props) => {
     adornmentStart,
     error,
     disabled,
-    required
+    required,
+    fullWidth = true
   } = props
   const classes = useStyles()
 
@@ -71,7 +69,7 @@ const MField = (props) => {
 
   return (
     <FormControl
-      fullWidth
+      fullWidth={fullWidth}
       className={classes.margin}
       variant="outlined"
       disabled={disabled}
