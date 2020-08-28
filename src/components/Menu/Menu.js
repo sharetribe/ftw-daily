@@ -107,14 +107,16 @@ class Menu extends Component {
       const distanceToRight = window.innerWidth - this.menu.getBoundingClientRect().right;
       const menuWidth = this.menu.offsetWidth;
       const contentWidthBiggerThanLabel = this.menuContent.offsetWidth - menuWidth;
+      
       const usePositionLeftFromLabel = contentPosition === CONTENT_TO_LEFT;
       const contentPlacementOffset = this.props.contentPlacementOffset;
       // Render menu content to the left according to the contentPosition
       // prop or if the content does not fit to the right. Otherwise render to
       // the right.
-      return usePositionLeftFromLabel || distanceToRight < contentWidthBiggerThanLabel
-        ? { right: contentPlacementOffset, minWidth: menuWidth }
-        : { left: contentPlacementOffset, minWidth: menuWidth };
+      return { right: contentPlacementOffset, minWidth: menuWidth }
+      // return usePositionLeftFromLabel || distanceToRight < contentWidthBiggerThanLabel
+      //   ? { right: contentPlacementOffset, minWidth: menuWidth }
+      //   : { left: contentPlacementOffset, minWidth: menuWidth };
     }
     return {};
   }

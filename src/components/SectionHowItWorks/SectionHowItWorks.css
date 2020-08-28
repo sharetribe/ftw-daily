@@ -36,7 +36,7 @@
 .steps {
   display: flex;
   flex-direction: column;
-
+  overflow: hidden;
   @media (--viewportMedium) {
     flex-direction: row;
   }
