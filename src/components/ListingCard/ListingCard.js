@@ -61,8 +61,10 @@ export const ListingCardComponent = props => {
 
   const currentListing = ensureListing(listing);
   const id = currentListing.id.uuid;
-  const { title = '', price, publicData } = currentListing.attributes;
+  const { price, publicData } = currentListing.attributes;
   const { breed, gender, age } = publicData;
+
+  const title = currentListing.attributes.title ? ( currentListing.attributes.title.length > 10 ? [currentListing.attributes.title.slice(0, 10), '...'].join('') : currentListing.attributes.title) : ''
 
   const slug = createSlug(title);
   const author = ensureUser(listing.author);
@@ -103,7 +105,7 @@ export const ListingCardComponent = props => {
   );
   
   const cardTitles = [title, cardBreed, cardGender].filter(i => typeof i === 'string').join(', ');
-
+  
   const paragraphEl = useRef(null); 
 
   if (maxParagraphHeight && paragraphEl.current && paragraphEl.current.offsetHeight > maxParagraphHeight) {
