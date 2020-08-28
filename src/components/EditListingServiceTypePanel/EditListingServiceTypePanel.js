@@ -6,12 +6,12 @@ import { ensureOwnListing } from '../../util/data'
 import { findOptionsForSelectFilter } from '../../util/search'
 import { LISTING_STATE_DRAFT } from '../../util/types'
 import { ListingLink } from '../../components'
-import { EditListingDescriptionForm } from '../../forms'
+import { EditListingServiceTypeForm } from '../../forms'
 import config from '../../config'
 
-import css from './EditListingDescriptionPanel.css'
+import css from './EditListingServiceTypePanel.css'
 
-const EditListingDescriptionPanel = (props) => {
+const EditListingServiceTypePanel = (props) => {
   const {
     className,
     rootClassName,
@@ -33,18 +33,22 @@ const EditListingDescriptionPanel = (props) => {
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT
   const panelTitle = isPublished ? (
     <FormattedMessage
-      id="EditListingDescriptionPanel.title"
+      id="EditListingServiceTypePanel.title"
       values={{ listingTitle: <ListingLink listing={listing} /> }}
     />
   ) : (
-    <FormattedMessage id="EditListingDescriptionPanel.createListingTitle" />
+    <FormattedMessage id="EditListingServiceTypePanel.createListingTitle" />
   )
+
+  // TODO: Extract this similar to <FormattedMessage />
+  const panelInformation = (<p style={{fontSize: 14}}><em>Please choose only one Service Type for this listing. If you have been approved to list multiple services on the site, you can complete a separate listing for the other services.</em></p>)
 
   const categoryOptions = findOptionsForSelectFilter('category', config.custom.filters)
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
-      <EditListingDescriptionForm
+      {panelInformation}
+      <EditListingServiceTypeForm
         className={css.form}
         initialValues={{ title, description, category: publicData.category }}
         saveActionMsg={submitButtonText}
@@ -70,14 +74,14 @@ const EditListingDescriptionPanel = (props) => {
   )
 }
 
-EditListingDescriptionPanel.defaultProps = {
+EditListingServiceTypePanel.defaultProps = {
   className: null,
   rootClassName: null,
   errors: null,
   listing: null,
 }
 
-EditListingDescriptionPanel.propTypes = {
+EditListingServiceTypePanel.propTypes = {
   className: string,
   rootClassName: string,
 
@@ -94,4 +98,4 @@ EditListingDescriptionPanel.propTypes = {
   errors: object.isRequired,
 }
 
-export default EditListingDescriptionPanel
+export default EditListingServiceTypePanel

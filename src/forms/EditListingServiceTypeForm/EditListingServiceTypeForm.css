@@ -10,7 +10,7 @@
     since browsers support CSS Properties already.
  */
 
-  --EditListingDescriptionForm_formMargins: {
+  --EditListingServiceTypeForm_formMargins: {
     margin-bottom: 24px;
 
     @media (--viewportMedium) {
@@ -41,16 +41,16 @@
 }
 
 .title {
-  @apply --EditListingDescriptionForm_formMargins;
+  @apply --EditListingServiceTypeForm_formMargins;
 }
 
 .description {
-  @apply --EditListingDescriptionForm_formMargins;
+  @apply --EditListingServiceTypeForm_formMargins;
   flex-shrink: 0;
 }
 
 .category {
-  @apply --EditListingDescriptionForm_formMargins;
+  @apply --EditListingServiceTypeForm_formMargins;
 }
 
 .submitButton {

@@ -20,7 +20,7 @@ import { StripeConnectAccountForm } from '../../forms'
 
 import EditListingWizardTab, {
   AVAILABILITY,
-  DESCRIPTION,
+  SERVICETYPE,
   FEATURES,
   POLICY,
   PRICING,
@@ -37,7 +37,7 @@ const availabilityMaybe = config.enableAvailability ? [AVAILABILITY] : []
 // Note 2: Ensure that draft listing is created after the first panel
 // and listing publishing happens after last panel.
 export const TABS = [
-  DESCRIPTION,
+  SERVICETYPE,
   FEATURES,
   POLICY,
   PRICING,
@@ -54,8 +54,8 @@ const STRIPE_ONBOARDING_RETURN_URL_FAILURE = 'failure'
 
 const tabLabel = (intl, tab) => {
   let key = null
-  if (tab === DESCRIPTION) {
-    key = 'EditListingWizard.tabLabelDescription'
+  if (tab === SERVICETYPE) {
+    key = 'EditListingWizard.tabLabelServiceType'
   } else if (tab === FEATURES) {
     key = 'EditListingWizard.tabLabelFeatures'
   } else if (tab === POLICY) {
@@ -86,7 +86,7 @@ const tabCompleted = (tab, listing) => {
   const images = listing.images
 
   switch (tab) {
-    case DESCRIPTION:
+    case SERVICETYPE:
       return !!(description && title)
     case FEATURES:
       return !!(publicData && publicData.amenities)

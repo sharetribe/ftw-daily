@@ -11,7 +11,7 @@ import { ensureListing } from '../../util/data'
 import { createResourceLocatorString } from '../../util/routes'
 import {
   EditListingAvailabilityPanel,
-  EditListingDescriptionPanel,
+  EditListingServiceTypePanel,
   EditListingFeaturesPanel,
   EditListingPhotosPanel,
   EditListingPoliciesPanel,
@@ -21,7 +21,7 @@ import {
 import css from './EditListingWizard.css'
 
 export const AVAILABILITY = 'availability'
-export const DESCRIPTION = 'description'
+export const SERVICETYPE = 'serviceType'
 export const FEATURES = 'features'
 export const POLICY = 'policy'
 export const PRICING = 'pricing'
@@ -30,7 +30,7 @@ export const INSTRUMENT = 'instrument'
 
 // EditListingWizardTab component supports these tabs
 export const SUPPORTED_TABS = [
-  DESCRIPTION,
+  SERVICETYPE,
   FEATURES,
   POLICY,
   PRICING,
@@ -156,13 +156,13 @@ const EditListingWizardTab = (props) => {
   }
 
   switch (tab) {
-    case DESCRIPTION: {
+    case SERVICETYPE: {
       const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditListingWizard.saveNewDescription'
-        : 'EditListingWizard.saveEditDescription'
+        ? 'EditListingWizard.saveNewServiceType'
+        : 'EditListingWizard.saveEditServiceType'
       return (
-        <EditListingDescriptionPanel
-          {...panelProps(DESCRIPTION)}
+        <EditListingServiceTypePanel
+          {...panelProps(SERVICETYPE)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={(values) => {
             onCompleteEditListingWizardTab(tab, values)

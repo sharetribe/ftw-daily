@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`EditListingDescriptionForm matches snapshot 1`] = `
+exports[`EditListingServiceTypeForm matches snapshot 1`] = `
 <form
   action="/"
   className=""
@@ -13,7 +13,7 @@ exports[`EditListingDescriptionForm matches snapshot 1`] = `
     <label
       htmlFor="title"
     >
-      EditListingDescriptionForm.title
+      EditListingServiceTypeForm.title
     </label>
     <input
       autoFocus={true}
@@ -24,29 +24,8 @@ exports[`EditListingDescriptionForm matches snapshot 1`] = `
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}
-      placeholder="EditListingDescriptionForm.titlePlaceholder"
+      placeholder="EditListingServiceTypeForm.titlePlaceholder"
       type="text"
-      value=""
-    />
-  </div>
-  <div
-    className=""
-  >
-    <label
-      htmlFor="description"
-    >
-      EditListingDescriptionForm.description
-    </label>
-    <textarea
-      className="undefined"
-      id="description"
-      maxLength={5000}
-      name="description"
-      onBlur={[Function]}
-      onChange={[Function]}
-      onFocus={[Function]}
-      placeholder="EditListingDescriptionForm.descriptionPlaceholder"
-      rows={1}
       value=""
     />
   </div>
@@ -56,7 +35,7 @@ exports[`EditListingDescriptionForm matches snapshot 1`] = `
     <label
       htmlFor="category"
     >
-      EditListingDescriptionForm.categoryLabel
+      EditListingServiceTypeForm.categoryLabel
     </label>
     <select
       className=""
@@ -71,7 +50,7 @@ exports[`EditListingDescriptionForm matches snapshot 1`] = `
         disabled={true}
         value=""
       >
-        EditListingDescriptionForm.categoryPlaceholder
+        EditListingServiceTypeForm.categoryPlaceholder
       </option>
       <option
         key="cat1"

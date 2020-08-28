@@ -9,11 +9,11 @@ import { maxLength, required, composeValidators } from '../../util/validators'
 import { Form, Button, FieldTextInput } from '../../components'
 import CustomCategorySelectFieldMaybe from './CustomCategorySelectFieldMaybe'
 
-import css from './EditListingDescriptionForm.css'
+import css from './EditListingServiceTypeForm.css'
 
 const TITLE_MAX_LENGTH = 60
 
-const EditListingDescriptionFormComponent = (props) => (
+const EditListingServiceTypeFormComponent = (props) => (
   <FinalForm
     {...props}
     render={(formRenderProps) => {
@@ -32,48 +32,39 @@ const EditListingDescriptionFormComponent = (props) => (
         fetchErrors,
       } = formRenderProps
 
-      const titleMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.title' })
+      const titleMessage = intl.formatMessage({ id: 'EditListingServiceTypeForm.title' })
       const titlePlaceholderMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.titlePlaceholder',
+        id: 'EditListingServiceTypeForm.titlePlaceholder',
       })
       const titleRequiredMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.titleRequired',
+        id: 'EditListingServiceTypeForm.titleRequired',
       })
       const maxLengthMessage = intl.formatMessage(
-        { id: 'EditListingDescriptionForm.maxLength' },
+        { id: 'EditListingServiceTypeForm.maxLength' },
         {
           maxLength: TITLE_MAX_LENGTH,
         },
       )
 
-      const descriptionMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.description',
-      })
-      const descriptionPlaceholderMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.descriptionPlaceholder',
-      })
       const maxLength60Message = maxLength(maxLengthMessage, TITLE_MAX_LENGTH)
-      const descriptionRequiredMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.descriptionRequired',
-      })
 
       const { updateListingError, createListingDraftError, showListingsError } = fetchErrors || {}
       const errorMessageUpdateListing = updateListingError ? (
         <p className={css.error}>
-          <FormattedMessage id="EditListingDescriptionForm.updateFailed" />
+          <FormattedMessage id="EditListingServiceTypeForm.updateFailed" />
         </p>
       ) : null
 
       // This error happens only on first tab (of EditListingWizard)
       const errorMessageCreateListingDraft = createListingDraftError ? (
         <p className={css.error}>
-          <FormattedMessage id="EditListingDescriptionForm.createListingDraftError" />
+          <FormattedMessage id="EditListingServiceTypeForm.createListingDraftError" />
         </p>
       ) : null
 
       const errorMessageShowListing = showListingsError ? (
         <p className={css.error}>
-          <FormattedMessage id="EditListingDescriptionForm.showListingFailed" />
+          <FormattedMessage id="EditListingServiceTypeForm.showListingFailed" />
         </p>
       ) : null
 
@@ -99,16 +90,6 @@ const EditListingDescriptionFormComponent = (props) => (
             autoFocus
           />
 
-          <FieldTextInput
-            id="description"
-            name="description"
-            className={css.description}
-            type="textarea"
-            label={descriptionMessage}
-            placeholder={descriptionPlaceholderMessage}
-            validate={composeValidators(required(descriptionRequiredMessage))}
-          />
-
           <CustomCategorySelectFieldMaybe
             id="category"
             name="category"
@@ -131,9 +112,9 @@ const EditListingDescriptionFormComponent = (props) => (
   />
 )
 
-EditListingDescriptionFormComponent.defaultProps = { className: null, fetchErrors: null }
+EditListingServiceTypeFormComponent.defaultProps = { className: null, fetchErrors: null }
 
-EditListingDescriptionFormComponent.propTypes = {
+EditListingServiceTypeFormComponent.propTypes = {
   className: string,
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
@@ -155,4 +136,4 @@ EditListingDescriptionFormComponent.propTypes = {
   ),
 }
 
-export default compose(injectIntl)(EditListingDescriptionFormComponent)
+export default compose(injectIntl)(EditListingServiceTypeFormComponent)
