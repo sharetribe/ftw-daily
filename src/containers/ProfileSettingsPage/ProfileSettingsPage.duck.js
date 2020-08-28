@@ -133,21 +133,41 @@ export function uploadImage(actionPayload) {
   };
 }
 
-export const updateProfile = actionPayload => {
+export const updateProfile = (actionPayload, publicData) => {
+  const {
+    location,
+    age,
+    licence,
+    auto,
+    experience,
+    language,
+    drivingLicense,
+  } = publicData
   return (dispatch, getState, sdk) => {
     dispatch(updateProfileRequest());
-
+    
     const queryParams = {
       expand: true,
       include: ['profileImage'],
       'fields.image': ['variants.square-small', 'variants.square-small2x'],
     };
-
+    
     return sdk.currentUser
-      .updateProfile(actionPayload, queryParams)
+    .updateProfile({
+        ...actionPayload,
+        publicData: {
+          location,
+          age,
+          licence,
+          experience,
+          language,
+          drivingLicense: !!drivingLicense,
+          auto: !!auto
+        }
+      }, queryParams)
       .then(response => {
         dispatch(updateProfileSuccess(response));
-
+        
         const entities = denormalisedResponseEntities(response);
         if (entities.length !== 1) {
           throw new Error('Expected a resource in the sdk.currentUser.updateProfile response');

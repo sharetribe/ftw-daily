@@ -9,7 +9,7 @@ import { ensureCurrentUser } from '../../util/data';
 import { propTypes } from '../../util/types';
 import * as validators from '../../util/validators';
 import { isUploadImageOverLimitError } from '../../util/errors';
-import { Form, Avatar, Button, ImageFromFile, IconSpinner, FieldTextInput } from '../../components';
+import { Form, Avatar, Button, ImageFromFile, IconSpinner, FieldTextInput, LocationAutocompleteInputField, FieldCheckbox } from '../../components';
 
 import css from './ProfileSettingsForm.css';
 
@@ -62,7 +62,7 @@ class ProfileSettingsFormComponent extends Component {
             form,
             values,
           } = fieldRenderProps;
-
+          
           const user = ensureCurrentUser(currentUser);
 
           // First name
@@ -96,6 +96,24 @@ class ProfileSettingsFormComponent extends Component {
           const bioPlaceholder = intl.formatMessage({
             id: 'ProfileSettingsForm.bioPlaceholder',
           });
+          // location
+          const titleRequiredMessage = intl.formatMessage({ id: 'EditListingLocationForm.address' });
+          const addressPlaceholderMessage = intl.formatMessage({
+            id: 'EditListingLocationForm.addressPlaceholder',
+          });
+          const addressRequiredMessage = intl.formatMessage({
+            id: 'EditListingLocationForm.addressRequired',
+          });
+          const addressNotRecognizedMessage = intl.formatMessage({
+            id: 'EditListingLocationForm.addressNotRecognized',
+          });
+          const identity = v => v;
+
+          // other info
+          const fieldRequiredMessage = intl.formatMessage({
+            id: 'ProfileSettingsForm.fieldRequiredMessage',
+          });
+          const fieldRequired = validators.required(fieldRequiredMessage);
 
           const uploadingOverlay =
             uploadInProgress || this.state.uploadDelay ? (
@@ -274,6 +292,81 @@ class ProfileSettingsFormComponent extends Component {
                     label={lastNameLabel}
                     placeholder={lastNamePlaceholder}
                     validate={lastNameRequired}
+                  />
+                </div>
+              </div>
+              <div className={css.sectionContainer}>
+              <h3 className={css.sectionTitle}>
+                  <FormattedMessage id="ProfileSettingsForm.locationHeading" />
+                </h3>
+                <LocationAutocompleteInputField
+                  inputClassName={css.location}
+                  iconClassName={css.locationAutocompleteInputIcon}
+                  name="location"
+                  label={titleRequiredMessage}
+                  placeholder={addressPlaceholderMessage}
+                  useDefaultPredictions={true}
+                  format={identity}
+                  validate={validators.composeValidators(
+                    validators.autocompleteSearchRequired(addressRequiredMessage),
+                    validators.autocompletePlaceSelected(addressNotRecognizedMessage)
+                  )}
+                />
+              </div>
+              <div className={css.sectionContainer}>
+                <h3 className={css.sectionTitle}>
+                  <FormattedMessage id="ProfileSettingsForm.otherInfo" />
+                </h3>
+                <div className={css.otherInfoContainer}>
+                  <FieldTextInput
+                    className={css.otherInfo}
+                    type="text"
+                    id="age"
+                    name="age"
+                    label={"Alter"}
+                    placeholder={"19 Jahre"}
+                    validate={fieldRequired}
+                  />
+                  <FieldTextInput
+                    className={css.otherInfo}
+                    type="text"
+                    id="licence"
+                    name="licence"
+                    label={"Lizenz"}
+                    placeholder={"Brevet"}
+                    validate={fieldRequired}
+                  />
+                  <FieldTextInput
+                    className={css.otherInfo}
+                    type="text"
+                    id="experience"
+                    name="experience"
+                    label={"Erfahrung"}
+                    placeholder={"5 Jahre"}
+                    validate={fieldRequired}
+                  />
+                    <FieldTextInput
+                      className={css.otherInfo}
+                      type="text"
+                      id="language"
+                      name="language"
+                      label={"Sprache"}
+                      placeholder={"Deutsch"}
+                      validate={fieldRequired}
+                    />
+                  <FieldCheckbox
+                    className={css.otherInfo}
+                    type="checkbox"
+                    id="drivingLicense"
+                    name="drivingLicense"
+                    label="Führerschein"
+                  />
+                  <FieldCheckbox
+                    className={css.otherInfo}
+                    type="checkbox"
+                    id="auto"
+                    name="auto"
+                    label="Auto"
                   />
                 </div>
               </div>

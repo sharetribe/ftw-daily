@@ -43,13 +43,31 @@ export class ProfileSettingsPageComponent extends Component {
       uploadInProgress,
       intl,
     } = this.props;
-
+    
     const handleSubmit = values => {
-      const { firstName, lastName, bio: rawBio } = values;
-
+      const { firstName, lastName, bio: rawBio, location, age, licence, experience, language, drivingLicense, auto } = values;
+      if(location) {
+        if(location.predictions) {
+          delete location.predictions
+        }
+        for(let key in location) {
+          if(!location[key]) {
+            delete location[key]
+          }
+        }
+      }
+      const publicData = {
+        location,
+        age,
+        licence,
+        experience,
+        language,
+        drivingLicense,
+        auto
+      }
       // Ensure that the optional bio is a string
       const bio = rawBio || '';
-
+      
       const profile = {
         firstName: firstName.trim(),
         lastName: lastName.trim(),
@@ -62,20 +80,21 @@ export class ProfileSettingsPageComponent extends Component {
         uploadedImage && uploadedImage.imageId && uploadedImage.file
           ? { ...profile, profileImageId: uploadedImage.imageId }
           : profile;
-
-      onUpdateProfile(updatedValues);
+      
+      onUpdateProfile(updatedValues, publicData);
     };
 
     const user = ensureCurrentUser(currentUser);
     const { firstName, lastName, bio } = user.attributes.profile;
+    const { age, licence, experience, language, drivingLicense, auto, location } = user.attributes.profile.publicData;
     const profileImageId = user.profileImage ? user.profileImage.id : null;
     const profileImage = image || { imageId: profileImageId };
-
+    
     const profileSettingsForm = user.id ? (
       <ProfileSettingsForm
         className={css.form}
         currentUser={currentUser}
-        initialValues={{ firstName, lastName, bio, profileImage: user.profileImage }}
+        initialValues={{ firstName, lastName, bio, profileImage: user.profileImage, age, licence, experience, language, drivingLicense, auto, location }}
         profileImage={profileImage}
         onImageUpload={e => onImageUploadHandler(e, onImageUpload)}
         uploadInProgress={uploadInProgress}
@@ -174,7 +193,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   onImageUpload: data => dispatch(uploadImage(data)),
-  onUpdateProfile: data => dispatch(updateProfile(data)),
+  onUpdateProfile: (data, publicData) => dispatch(updateProfile(data, publicData)),
 });
 
 const ProfileSettingsPage = compose(
