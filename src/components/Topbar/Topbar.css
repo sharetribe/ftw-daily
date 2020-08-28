@@ -45,7 +45,7 @@
 
 .home {
   display: flex;
-  padding: calc((var(--topbarHeight) - var(--Topbar_logoHeight)) / 2) 24px;
+  padding: calc((var(--topbarHeight) - var(--Topbar_logoHeight)) / 2) 11px;
 }
 
 .logoutButton {
@@ -82,11 +82,11 @@
 }
 
 .menu {
-  padding: 15px 24px;
+  padding: 15px 22px;
   position: relative;
 }
 .searchMenu {
-  padding: 12px 24px;
+  padding: 12px 22px;
   /* padding: 0px; */
 }
 .menuIcon {
