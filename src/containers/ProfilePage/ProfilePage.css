@@ -18,38 +18,51 @@
 .aside {
   box-shadow: none;
 }
+.contactButton {
+  @apply --marketplaceModalBtnMainStyle;
+  &:hover, &:focus {
+    cursor: pointer;
+  }
+  text-decoration: none !important;
+  min-height: 64px;
+  width: 312px;
+}
 
 .asideContent {
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   border-bottom: 1px solid var(--matterColorNegative);
-
+  margin: 0;
+  padding-bottom: 34px;
   @media (--viewportLarge) {
-    flex-direction: column;
     border-bottom: none;
+    margin: 0 61px 44px 0;
+    padding-bottom: 0;
   }
 }
-
+.contantsContainer {
+  width: 312px;
+}
 .avatar {
-  margin: 30px 26px 29px 0;
   flex-shrink: 0;
-
-  @media (--viewportLarge) {
-    margin: 0 96px 44px 0;
-  }
+  margin: 26px auto;
+  height: 122px;
+    width: 122px;
 }
 
 .mobileHeading {
   flex-shrink: 0;
   margin: 47px 0 0 0;
-
+  display: none;
   @media (--viewportMedium) {
     margin: 49px 0 0 0;
   }
-  @media (--viewportLarge) {
+  /* @media (--viewportLarge) {
     display: none;
-  }
+  } */
 }
 
 .editLinkMobile {
@@ -75,7 +88,7 @@
 }
 
 .desktopHeading {
-  display: none;
+  /* display: none; */
 
   @media (--viewportLarge) {
     display: block;
@@ -86,15 +99,7 @@
 .bio {
   /* Preserve newlines, but collapse other whitespace */
   white-space: pre-line;
-  margin: 5px 0 24px 0;
-
-  @media (--viewportMedium) {
-    margin: 4px 0 51px 0;
-  }
-  @media (--viewportLarge) {
-    margin: 0 0 56px 0;
-    max-width: 600px;
-  }
+  margin: 0;
 }
 
 .listingsContainer {
@@ -199,4 +204,90 @@
 
 .desktopReviewsTabNav {
   margin-bottom: 32px;
+}
+.infoSection {
+  @media (--viewportLarge) {
+    max-width: 600px;
+  }
+}
+.otherInfoContainer {
+  max-width: 500px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.otherInfoItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 111px;
+  margin-bottom: 15px;
+  margin-right: 15px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  padding: 21px 19px;
+
+  & > div {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 14px;
+  }
+  & > div:nth-of-type(1) {
+    color: #923395;
+  }
+
+}
+.noTransactionsAvailavleBtn {
+  background-color: #B2B2B2;
+
+  &:hover, &:focus {
+    background-color: #B2B2B2;
+  }
+  text-decoration: none !important;
+  margin-top: 10px;
+}
+.fieldItem {
+  display: flex;
+  align-items: center;
+  color: #B2B2B2;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0;
+  & > svg {
+    margin-right: 10px;
+  }
+}
+.fieldVerified {
+  color: limegreen;
+}
+.secondaryHeader {
+  color: #B2B2B2;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 16px
+}
+.primaryHeader {
+  font-size: 24px;
+}
+.infoWrapper {
+  border-top: 1px solid var(--matterColorNegative);
+  padding: 32px 0;
+  margin-top: 44px
+}
+.userRatingContainer {
+  margin-bottom: 26px;
+  & > svg {
+    margin-right: 5px;
+  }
+  & > svg:last-child {
+    margin-right: 0;
+  }
+}
+.filled {
+  fill: gold;
+}
+.empty {
+  fill: #B2B2B2;
 }
