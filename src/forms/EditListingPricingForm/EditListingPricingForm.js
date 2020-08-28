@@ -19,6 +19,7 @@ export const EditListingPricingFormComponent = (props) => (
     {...props}
     render={(formRenderProps) => {
       const {
+        serviceType,
         className,
         disabled,
         ready,
@@ -118,6 +119,7 @@ export const EditListingPricingFormComponent = (props) => (
 EditListingPricingFormComponent.defaultProps = { fetchErrors: null }
 
 EditListingPricingFormComponent.propTypes = {
+  serviceType: string.isRequired,
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
   saveActionMsg: string.isRequired,

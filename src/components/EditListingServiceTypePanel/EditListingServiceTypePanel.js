@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { bool, func, object, string } from 'prop-types'
 import classNames from 'classnames'
 import { FormattedMessage } from '../../util/reactIntl'
@@ -8,6 +8,7 @@ import { LISTING_STATE_DRAFT } from '../../util/types'
 import { ListingLink } from '../../components'
 import { EditListingServiceTypeForm } from '../../forms'
 import config from '../../config'
+import { ServiceTypeContext } from '../../context/ServiceTypeProvider'
 
 import css from './EditListingServiceTypePanel.css'
 
@@ -25,6 +26,9 @@ const EditListingServiceTypePanel = (props) => {
     updateInProgress,
     errors,
   } = props
+
+  // eslint-disable-next-line
+  const [serviceType, setServiceType] = useContext(ServiceTypeContext)
 
   const classes = classNames(rootClassName || css.root, className)
   const currentListing = ensureOwnListing(listing)
@@ -53,12 +57,13 @@ const EditListingServiceTypePanel = (props) => {
         initialValues={{ title, description, category: publicData.category }}
         saveActionMsg={submitButtonText}
         onSubmit={(values) => {
-          const { title, description, category } = values
+          const { title, category } = values
           const updateValues = {
             title: title.trim(),
-            description,
             publicData: { category },
           }
+
+          setServiceType(category)
 
           onSubmit(updateValues)
         }}

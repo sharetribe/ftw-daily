@@ -38,7 +38,8 @@ import defaultMessages from './translations/en.json'
 
 // Step 3:
 // If you are using a non-english locale, point `messagesInLocale` to correct .json file
-import messagesInLocale from './translations/en.json' // TODO
+import messagesInLocale from './translations/en.json'
+import { ServiceTypeProvider } from './context/ServiceTypeProvider' // TODO
 
 // If translation key is missing from `messagesInLocale` (e.g. fr.json),
 // corresponding key will be added to messages from `defaultMessages` (en.json)
@@ -88,11 +89,13 @@ export const ClientApp = (props) => {
   return (
     <IntlProvider locale={config.locale} messages={localeMessages} textComponent="span">
       <Provider store={store}>
-        <HelmetProvider>
-          <BrowserRouter>
-            <Routes routes={routeConfiguration()} />
-          </BrowserRouter>
-        </HelmetProvider>
+        <ServiceTypeProvider>
+          <HelmetProvider>
+            <BrowserRouter>
+              <Routes routes={routeConfiguration()} />
+            </BrowserRouter>
+          </HelmetProvider>
+        </ServiceTypeProvider>
       </Provider>
     </IntlProvider>
   )

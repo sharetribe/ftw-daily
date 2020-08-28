@@ -38,9 +38,9 @@ const availabilityMaybe = config.enableAvailability ? [AVAILABILITY] : []
 // and listing publishing happens after last panel.
 export const TABS = [
   SERVICETYPE,
+  PRICING,
   FEATURES,
   POLICY,
-  PRICING,
   ...availabilityMaybe,
   PHOTOS,
   INSTRUMENT,
@@ -82,18 +82,18 @@ const tabLabel = (intl, tab) => {
  * @return true if tab / step is completed.
  */
 const tabCompleted = (tab, listing) => {
-  const { availabilityPlan, description, price, title, publicData } = listing.attributes
+  const { availabilityPlan, price, title, publicData } = listing.attributes
   const images = listing.images
 
   switch (tab) {
     case SERVICETYPE:
-      return !!(description && title)
+      return !!(title)
+    case PRICING:
+      return !!price
     case FEATURES:
       return !!(publicData && publicData.amenities)
     case POLICY:
       return !!(publicData && typeof publicData.rules !== 'undefined')
-    case PRICING:
-      return !!price
     case AVAILABILITY:
       return !!availabilityPlan
     case PHOTOS:

@@ -31,9 +31,9 @@ export const INSTRUMENT = 'instrument'
 // EditListingWizardTab component supports these tabs
 export const SUPPORTED_TABS = [
   SERVICETYPE,
+  PRICING,
   FEATURES,
   POLICY,
-  PRICING,
   AVAILABILITY,
   PHOTOS,
   INSTRUMENT,
@@ -106,6 +106,7 @@ const EditListingWizardTab = (props) => {
   }
 
   const onCompleteEditListingWizardTab = (tab, updateValues) => {
+    console.log({tab, updateValues})
     // Normalize images for API call
     const { images: updatedImages, ...otherValues } = updateValues
     const imageProperty =
