@@ -267,20 +267,15 @@ export class CalendarPageComponent extends Component {
           pendingRidingIds: [...this.state.pendingRidingIds, id]
         })
       }
-      console.log('pendingData ', this.state.pendingRidings)
     }
   }
 
-  selectAcceptedTransaction = (acceptedTransaction) => {
-    console.log('acceptedTransaction ', acceptedTransaction)
-    
+  selectAcceptedTransaction = (acceptedTransaction) => {    
     this.setState(() => ({
        acceptedTransactionId: acceptedTransaction.id.uuid
       }), () => this.props.onAcceptedTransactionSelect(acceptedTransaction)
       .then(({ ridings, currentUserIsTransactionCustomer, transcationStartDate, transcationEndDate }) => {
         const scheduledRidings = ridings ? ridings : []
-        console.log('scheduledRidings ', scheduledRidings)
-        console.log('currentUserIsTransactionCustomer ', currentUserIsTransactionCustomer)
         this.setState({ 
           acceptedTransactionSelected: true,
           scheduledRidings: [...scheduledRidings],
@@ -311,7 +306,6 @@ export class CalendarPageComponent extends Component {
       scheduledRidings: this.state.scheduledRidings.filter(e => e.id !== id)
     })
     if(setCancelledStatus) {
-      console.log('onDeletingSchedulingDataTransaction', id)
       return this.props.onDeletingSchedulingDataTransaction(id).then(response => response)
     }
   }
