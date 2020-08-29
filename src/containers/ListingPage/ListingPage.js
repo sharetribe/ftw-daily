@@ -363,7 +363,7 @@ export class ListingPageComponent extends Component {
     const schemaImages = JSON.stringify(facebookImages.map((img) => img.url))
     const { siteTitle } = config
     const schemaTitle = () => {
-      if (publicData.location.city && publicData.location.country) {
+      if (get(publicData, 'location.city') && get(publicData, 'location.country')) {
         return `Coliving and Coworking in ${publicData.location.city}, ${publicData.location.country}`
       }
       return `${title} - Coliving & Coworking Spaces for Remote Working Digital Nomads near Surf`

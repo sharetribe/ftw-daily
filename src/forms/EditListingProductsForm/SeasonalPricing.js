@@ -12,7 +12,8 @@ export const SeasonalPricing = (props) => {
   const {
     fieldId,
     onChange,
-    form
+    form,
+    priceType
   } = props
 
   const labels = {
@@ -31,7 +32,7 @@ export const SeasonalPricing = (props) => {
   }
 
   const { push, removeBatch } = form && form.mutators ? form.mutators : {}
-
+  const [incompleteMonths, setIncompleteMonths] = useState([])
   useEffect(() => {
     if (form) {
       _.keys(labels).forEach((v) => push(`${fieldId}.seasonalPricing`, { month: v.toString() }))
@@ -40,17 +41,19 @@ export const SeasonalPricing = (props) => {
     return () => {
       removeBatch(`${fieldId}.seasonalPricing`, _.keys(labels))
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
     <Grid container justify={'space-between'} alignItems={'center'} direction="row" spacing={3}>
-      <Grid item xs={12}>
-        <NotificationBanner
-          text={'If a stay spans multiple seasons pricing will be pro-rated. For example if a guest books January 20 - February 10 the price will be 10 nights at the January price and 10 nights at the February price.'}
-          type={'help'}
-        />
-      </Grid>
-      <FieldArray id={`${fieldId}.seasonalPricing`} name={`${fieldId}.seasonalPricing`}>
+      <FieldArray
+        id={`${fieldId}.seasonalPricing`}
+        name={`${fieldId}.seasonalPricing`}
+        validate={(value) => {
+          setIncompleteMonths(_.compact((value || []).map((v) => { return !v.price ? v.month : undefined })))
+          return !_.isEmpty((value || []).filter((v) => v.month && !v.price))
+        }}
+      >
         {({ fields }) => fields.map((name, index) => {
           return (
             <Grid item xs={12} sm={6}>
@@ -59,8 +62,7 @@ export const SeasonalPricing = (props) => {
                 name={`${fieldId}.seasonalPricing.${index}.price`}
                 form={form}
                 adornmentStart={'€'}
-                adornmentEnd={'Per night'}
-                required={true}
+                complete={!_.includes(incompleteMonths, index.toString())}
               />
             </Grid>
           )

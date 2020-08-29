@@ -4,6 +4,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Paper from '@material-ui/core/Paper'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import Tooltip from '@material-ui/core/Tooltip'
+import Typography from '@material-ui/core/Typography'
 import React from 'react'
 import { bool, node, string } from 'prop-types'
 import { FieldArray } from 'react-final-form-arrays'
@@ -12,6 +13,7 @@ import _ from 'lodash'
 import { Field } from 'react-final-form'
 import AddIcon from '@material-ui/icons/Add'
 import DeleteIcon from '@material-ui/icons/Delete'
+import MPopover from '../../components/MPopover/MPopover'
 import { MRadioGroup } from '../../components/MRadioGroup/MRadioGroup'
 import { FormattedMessage, intlShape } from '../../util/reactIntl'
 import FieldReactSelect from '../../components/FieldReactSelect/FieldReactSelect'
@@ -61,11 +63,11 @@ const EditListingProductsProduct = (props) => {
     config.listingMinimumPriceSubUnits
   )
 
-  const priceType = () => _.get(form.getState(), `values.${fieldId}.pricing_type`, 'standard')
+  const priceType = _.get(form.getState(), `values.${fieldId}.pricing_type`, 'standard')
 
   const generatePricingStrategy = () => {
     return (
-      priceType() === 'standard'
+      priceType === 'standard'
         ? <FieldCurrencyInput
           id={`${fieldId}.price`}
           name={`${fieldId}.price`}
@@ -78,9 +80,21 @@ const EditListingProductsProduct = (props) => {
         : <SeasonalPricing
           form={form}
           fieldId={fieldId}
+          priceType={priceType}
         />
     )
   }
+
+  const pricingHelpContent = () => (
+    <div>
+      <Typography variant="h6">Standard</Typography>
+      <Typography paragraph style={{ fontFamily: 'Nunito Sans' }}>One price is set for all seasons.</Typography>
+      <Typography variant="h6">Seasonal</Typography>
+      <Typography paragraph style={{ fontFamily: 'Nunito Sans' }}>A price is chosen for each month of the year.</Typography>
+      <Typography paragraph style={{ fontFamily: 'Nunito Sans' }}>If you choose seasonal pricing and a booking spans multiple months that have different pricing, the total price will account for the different per night prices. For example, if a guest books a stay from January 20 to February 10 the price will be 10 nights at the January price and 10 nights at the February price.</Typography>
+      <Typography style={{ fontFamily: 'Nunito Sans' }}><strong>*All prices are per night</strong></Typography>
+    </div>
+  )
 
   const priceValidators = config.listingMinimumPriceSubUnits
     ? composeValidators(priceRequired, minPriceRequired)
@@ -173,6 +187,10 @@ const EditListingProductsProduct = (props) => {
                     label: '2 Queen Beds'
                   },
                   {
+                    value: 'king',
+                    label: '1 King Bed'
+                  },
+                  {
                     value: 'single-twin',
                     label: '1 Twin Bed'
                   },
@@ -259,6 +277,14 @@ const EditListingProductsProduct = (props) => {
         <Grid item xs={12}>
           <Grid container justify="center" spacing={2} direction="column">
             <Grid item xs={12}>
+              <Grid container alignItems="center" justify="flex-start">
+                <Grid item>
+                  <Typography>Pricing</Typography>
+                </Grid>
+                <Grid item>
+                  <MPopover content={pricingHelpContent()}/>
+                </Grid>
+              </Grid>
               <MRadioGroup
                 options={[
                   {
@@ -272,7 +298,7 @@ const EditListingProductsProduct = (props) => {
                 ]}
                 label={'Pricing'}
                 form={form}
-                defaultValue={priceType()}
+                defaultValue={priceType}
                 name={`${fieldId}.pricing_type`}
               />
             </Grid>

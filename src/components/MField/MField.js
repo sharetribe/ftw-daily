@@ -5,23 +5,22 @@ import React, { useEffect, useState } from 'react'
 import get from 'lodash/get'
 import { makeStyles } from '@material-ui/core/styles'
 import InputAdornment from '@material-ui/core/InputAdornment'
-import TextField from '@material-ui/core/TextField'
 
 import './MField.css'
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  withoutLabel: {
-    marginTop: theme.spacing(3),
-  },
-  textField: {
-    width: '25vw'
-  },
   label: {
     backgroundColor: 'white'
+  },
+  adornmentComplete: {
+    '& p': {
+      color: '#5ce073'
+    }
+  },
+  adornmentRegular: {
+    '& p': {
+      color: 'rgba(0, 0, 0, 0.54)'
+    }
   }
 }))
 
@@ -35,6 +34,7 @@ const MField = (props) => {
     error,
     disabled,
     required,
+    complete,
     fullWidth = true
   } = props
   const classes = useStyles()
@@ -49,7 +49,7 @@ const MField = (props) => {
         [name]: true
       }
     )
-  }, [])
+  }, [form, name])
 
   const handleChange = (event) => {
     form.change(name, event.target.value)
@@ -57,9 +57,18 @@ const MField = (props) => {
   }
 
   const adornments = () => {
+    console.log(complete)
     const adorns = {}
     if (adornmentStart) {
-      adorns.startAdornment = <InputAdornment position="start">{adornmentStart}</InputAdornment>
+      adorns.startAdornment
+        = <InputAdornment
+          position="start"
+          classes={{
+            root: complete ? classes.adornmentComplete : classes.adornmentRegular
+          }}
+        >
+          {adornmentStart}
+        </InputAdornment>
     }
     if (adornmentEnd) {
       adorns.endAdornment = <InputAdornment position="end">{adornmentEnd}</InputAdornment>
@@ -70,7 +79,6 @@ const MField = (props) => {
   return (
     <FormControl
       fullWidth={fullWidth}
-      className={classes.margin}
       variant="outlined"
       disabled={disabled}
       error={error}

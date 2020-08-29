@@ -1,3 +1,4 @@
+import { makeStyles } from '@material-ui/core/styles'
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import Radio from '@material-ui/core/Radio'
@@ -6,6 +7,12 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormControl from '@material-ui/core/FormControl'
 import FormLabel from '@material-ui/core/FormLabel'
 import get from 'lodash/get'
+
+const useStyles = makeStyles((theme) => ({
+  radioChecked: {
+    color: '#5ce073',
+  }
+}))
 
 export const MRadioGroup = (props) => {
   const {
@@ -17,7 +24,7 @@ export const MRadioGroup = (props) => {
     value,
     defaultValue
   } = props
-
+  const classes = useStyles()
   const [getFormValue, setFormValue] = useState('')
 
   useEffect(() => {
@@ -32,6 +39,7 @@ export const MRadioGroup = (props) => {
       setFormValue(get(form.getState(), `values.${name}`))
     }
     setFormValue(defaultValue)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleChange = (event) => {
@@ -44,13 +52,10 @@ export const MRadioGroup = (props) => {
     setFormValue(event.target.value)
   }
 
-  console.log(getFormValue)
-
-  const createFields = () => options.map((opt) => (<FormControlLabel value={opt.value} control={<Radio />} label={opt.label} />))
+  const createFields = () => options.map((opt) => (<FormControlLabel value={opt.value} control={<Radio color="primary"/>} label={opt.label} />))
 
   return (
     <FormControl component="fieldset">
-      <FormLabel component="legend">{label}</FormLabel>
       <RadioGroup aria-label={label} name={name} value={form ? getFormValue : value} onChange={handleChange}>
         {createFields()}
       </RadioGroup>
