@@ -7,10 +7,11 @@ import MultiRowGridList from '../../components/MultiRowGridList/MultiRowGridList
 import SingleLineGridList from '../../components/SingleRowImageGridList/SingleRowImageGridList'
 import { lazyLoadWithDimensions } from '../../util/contextHelpers';
 import { FormattedMessage } from '../../util/reactIntl'
+import { richText } from '../../util/richText';
 
 import css from './ListingPage.css'
 
-const MIN_LENGTH_FOR_LONG_WORDS_IN_COMMUNITY = 20
+const MIN_LENGTH_FOR_LONG_WORDS_IN_DESCRIPTION = 20
 
 const SectionColivingMaybe = (props) => {
   const { publicData, images, retreat } = props
@@ -44,11 +45,11 @@ const SectionColivingMaybe = (props) => {
       <div className={css.tags}>
         {retreat}
       </div>
-      <p className={css.community}>
-        {
-          publicData.coliving ? publicData.coliving.description
-            : publicData.vibe
-        }
+      <p className={css.description}>
+        {richText(publicData.coliving ? publicData.coliving.description : publicData.vibe, {
+          longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS_IN_DESCRIPTION,
+          longWordClass: css.longWord,
+        })}
       </p>
       {generateMobileImageGrid()}
     </div>

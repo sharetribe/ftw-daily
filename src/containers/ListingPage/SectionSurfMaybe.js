@@ -10,6 +10,7 @@ import MultiRowGridList from '../../components/MultiRowGridList/MultiRowGridList
 import SingleLineGridList from '../../components/SingleRowImageGridList/SingleRowImageGridList'
 import { FormattedMessage } from '../../util/reactIntl'
 import mswIcon from '../../assets/msw_icon.png'
+import { richText } from '../../util/richText';
 
 import css from './ListingPage.css'
 
@@ -93,11 +94,11 @@ const SectionSurfMaybe = (props) => {
           <FormattedMessage id="ListingPage.surfTitle" />
         </span>
       </h2>
-      <p className={css.community}>
-        {
-          publicData.surfing ? publicData.surfing.description
-            : publicData.surf
-        }
+      <p className={css.description}>
+        {richText(publicData.surfing ? publicData.surfing.description : publicData.surf, {
+          longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS_IN_SURF,
+          longWordClass: css.longWord,
+        })}
       </p>
       { generateMobileImageGrid() }
       <div className={css.waveIconDividerContainer}>
