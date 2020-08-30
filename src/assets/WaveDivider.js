@@ -1,8 +1,8 @@
 import React from 'react'
 import { ReactSVG } from 'react-svg'
 
-export const WaveDivider = () => (
-  <svg width="95px" height="32px" viewBox="0 0 95 32">
+export const WaveDivider = (props) => (
+  <svg className={props.className} style={props.style} width="95px" height="32px" viewBox="0 0 95 32">
     <g id="Page-1" stroke="none" fill="none" >
       <g id="noun_wave_981687-2" fill="#000000">
         <g id="noun_wave_981687" transform="translate(47.500000, 16.000000) scale(-1, 1) translate(-47.500000, -16.000000) ">
