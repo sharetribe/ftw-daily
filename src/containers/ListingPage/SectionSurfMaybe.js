@@ -10,7 +10,7 @@ import MultiRowGridList from '../../components/MultiRowGridList/MultiRowGridList
 import SingleLineGridList from '../../components/SingleRowImageGridList/SingleRowImageGridList'
 import { FormattedMessage } from '../../util/reactIntl'
 import mswIcon from '../../assets/msw_icon.png'
-import { richText } from '../../util/richText';
+import { richText } from '../../util/richText'
 
 import css from './ListingPage.css'
 
@@ -49,9 +49,8 @@ const SectionSurfMaybe = (props) => {
     toggleForecast(url)
     toggleForecastIsLoading(true)
   }
-
+  const surfSpots = _.get(metadata, 'surf.spots', [])
   const returnMSWButtons = () => {
-    const surfSpots = _.get(metadata, 'surf.spots', [])
     const btns = surfSpots.map((ss) => {
       return (
         <div className={css.waveBtnContainer} onClick={() => loadForecast(ss.msw_embed_url)}>
@@ -102,7 +101,14 @@ const SectionSurfMaybe = (props) => {
       </p>
       { generateMobileImageGrid() }
       <div className={css.waveIconDividerContainer}>
-        <WaveDivider />
+        <WaveDivider style={{ marginBottom: 10 }}/>
+        {
+          surfSpots.length > 0
+            ? <p className={css.description}>
+              Check out the nearby surf spots! Find them on the map by zooming in and looking for the number. View the surf report for each by clicking on them.
+            </p>
+            : null
+        }
       </div>
       { returnMSWButtons() }
       <Modal
