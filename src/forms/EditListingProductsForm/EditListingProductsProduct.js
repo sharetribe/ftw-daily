@@ -80,7 +80,7 @@ const EditListingProductsProduct = (props) => {
         : <SeasonalPricing
           form={form}
           fieldId={fieldId}
-          priceType={priceType}
+          intl={intl}
         />
     )
   }
@@ -88,11 +88,18 @@ const EditListingProductsProduct = (props) => {
   const pricingHelpContent = () => (
     <div>
       <Typography variant="h6">Standard</Typography>
-      <Typography paragraph style={{ fontFamily: 'Nunito Sans' }}>One price is set for all seasons.</Typography>
+      <Typography paragraph style={{ fontFamily: 'Nunito Sans' }}>One nightly price is set for all seasons.</Typography>
       <Typography variant="h6">Seasonal</Typography>
-      <Typography paragraph style={{ fontFamily: 'Nunito Sans' }}>A price is chosen for each month of the year.</Typography>
+      <Typography paragraph style={{ fontFamily: 'Nunito Sans' }}>A nightly price is chosen for each month of the year.</Typography>
       <Typography paragraph style={{ fontFamily: 'Nunito Sans' }}>If you choose seasonal pricing and a booking spans multiple months that have different pricing, the total price will account for the different per night prices. For example, if a guest books a stay from January 20 to February 10 the price will be 10 nights at the January price and 10 nights at the February price.</Typography>
-      <Typography style={{ fontFamily: 'Nunito Sans' }}><strong>*All prices are per night</strong></Typography>
+    </div>
+  )
+
+  const losDiscountHelpContent = () => (
+    <div>
+      <Typography variant="h6">Length of Stay Discounts</Typography>
+      <Typography paragraph style={{ fontFamily: 'Nunito Sans' }}>Click 'Add Discount' to enter discounts for bookings of a certain length or greater.</Typography>
+      <Typography paragraph style={{ fontFamily: 'Nunito Sans' }}>The discounts you select here are only applied to this room.</Typography>
     </div>
   )
 
@@ -279,7 +286,7 @@ const EditListingProductsProduct = (props) => {
             <Grid item xs={12}>
               <Grid container alignItems="center" justify="flex-start">
                 <Grid item>
-                  <Typography>Pricing</Typography>
+                  <h3 className={css.subTitle}>Price</h3>
                 </Grid>
                 <Grid item>
                   <MPopover content={pricingHelpContent()}/>
@@ -296,7 +303,7 @@ const EditListingProductsProduct = (props) => {
                     label: 'Seasonal'
                   }
                 ]}
-                label={'Pricing'}
+                label={'Price'}
                 form={form}
                 defaultValue={priceType}
                 name={`${fieldId}.pricing_type`}
@@ -308,8 +315,14 @@ const EditListingProductsProduct = (props) => {
             <Grid item xs={12}>
               <Grid container justify="center" spacing={2} direction="column">
                 <Grid item xs={12}>
-                  <h3 className={css.subTitle}>Length of stay discount</h3>
-                  <small style={{ marginTop: -10 }}>Select 'Add Discount' to enter discounts for bookings of a certain length or greater. These discounts are only applied to this room.</small>
+                  <Grid container alignItems="center" justify="flex-start">
+                    <Grid item>
+                      <h3 className={css.subTitle}>Length of stay discount</h3>
+                    </Grid>
+                    <Grid item>
+                      <MPopover content={losDiscountHelpContent()}/>
+                    </Grid>
+                  </Grid>
                 </Grid>
                 <Grid item xs={12}>
                   <FieldArray id={`${fieldId}.losDiscount`} name={`${fieldId}.losDiscount`}>

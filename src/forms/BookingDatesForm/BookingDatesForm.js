@@ -13,7 +13,7 @@ import find from 'lodash/find'
 import { IconGuaranteeBadge } from '../../assets/IconGuaranteeBadge'
 import BookingProductRadioButton
   from '../../components/BookingProductRadioButton/BookingProductRadioButton'
-import { getPrice } from '../../util/price'
+import { getPriceAfterDiscounts } from '../../util/price'
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl'
 import {
   required, bookingDatesRequired, composeValidators
@@ -114,7 +114,7 @@ export class BookingDatesFormComponent extends Component {
                 // NOTE: If unitType is `line-item/units`, a new picker
                 // for the quantity should be added to the form.
                 quantity: 1,
-                discount: get(getPrice((publicData.products || []).find((p) => p.id === productId), numberOfDaysSelected), 'discount', null)
+                discount: get(getPriceAfterDiscounts((publicData.products || []).find((p) => p.id === productId), numberOfDaysSelected), 'discount', null)
               }
               : null
 
@@ -211,7 +211,7 @@ export class BookingDatesFormComponent extends Component {
                             showAsRequired={true}
                             product={prod}
                             images={listing.images.filter((img) => includes(keys(prod.photos), img.id.uuid))}
-                            price={startDate && endDate ? getPrice(prod, numberOfDaysSelected).price : null}
+                            price={startDate && endDate ? getPriceAfterDiscounts(prod, numberOfDaysSelected).price : null}
                             useMobileMargins
                             validate={required(productRequired)}
                             fieldMeta={fieldRenderProps}

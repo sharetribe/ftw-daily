@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     padding: 20,
     maxWidth: 600,
     fontFamily: 'Nunito Sans',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('xs')]: {
       maxWidth: 320
     }
   }

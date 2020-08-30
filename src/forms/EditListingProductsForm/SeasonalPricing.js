@@ -11,9 +11,8 @@ import { NotificationBanner } from '../../components/NotificationBanner/Notifica
 export const SeasonalPricing = (props) => {
   const {
     fieldId,
-    onChange,
     form,
-    priceType
+    intl
   } = props
 
   const labels = {
@@ -35,7 +34,7 @@ export const SeasonalPricing = (props) => {
   const [incompleteMonths, setIncompleteMonths] = useState([])
   useEffect(() => {
     if (form) {
-      _.keys(labels).forEach((v) => push(`${fieldId}.seasonalPricing`, { month: v.toString() }))
+      _.keys(labels).forEach((v) => push(`${fieldId}.seasonalPricing`, { month: v.toString(), price: { amount: null, currency: 'EUR' } }))
     }
 
     return () => {
@@ -50,8 +49,8 @@ export const SeasonalPricing = (props) => {
         id={`${fieldId}.seasonalPricing`}
         name={`${fieldId}.seasonalPricing`}
         validate={(value) => {
-          setIncompleteMonths(_.compact((value || []).map((v) => { return !v.price ? v.month : undefined })))
-          return !_.isEmpty((value || []).filter((v) => v.month && !v.price))
+          setIncompleteMonths(_.compact((value || []).map((v) => { return !v.price.amount ? v.month : undefined })))
+          return !_.isEmpty((value || []).filter((v) => v.month && !v.price.amount))
         }}
       >
         {({ fields }) => fields.map((name, index) => {
@@ -59,10 +58,12 @@ export const SeasonalPricing = (props) => {
             <Grid item xs={12} sm={6}>
               <MField
                 label={labels[index]}
-                name={`${fieldId}.seasonalPricing.${index}.price`}
+                name={`${fieldId}.seasonalPricing.${index}.price.amount`}
                 form={form}
                 adornmentStart={'€'}
                 complete={!_.includes(incompleteMonths, index.toString())}
+                intl={intl}
+                isCurrency
               />
             </Grid>
           )

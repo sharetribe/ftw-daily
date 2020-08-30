@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import classNames from 'classnames'
 import { IconOnePercent } from '../../assets/IconOnePercent'
-import { getPrice } from '../../util/price'
+import { getPriceAfterDiscounts } from '../../util/price'
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl'
 import config from '../../config'
 import routeConfiguration from '../../routeConfiguration'
@@ -525,7 +525,7 @@ export class CheckoutPageComponent extends Component {
       ? product.price
       : undefined
 
-    const pricingAdjustments = getPrice(product, quantity)
+    const pricingAdjustments = getPriceAfterDiscounts(product, quantity)
 
     const unitPrice = productPrice
       ? new Money(productPrice.amount * pricingAdjustments.discount, productPrice.currency)

@@ -3,10 +3,12 @@ import InputLabel from '@material-ui/core/InputLabel'
 import OutlinedInput from '@material-ui/core/OutlinedInput'
 import React, { useEffect, useState } from 'react'
 import get from 'lodash/get'
+import isEmpty from 'lodash/isEmpty'
 import { makeStyles } from '@material-ui/core/styles'
 import InputAdornment from '@material-ui/core/InputAdornment'
 
 import './MField.css'
+import { getDisplayValueFromMoney, getMoneyFromValue } from '../../util/price'
 
 const useStyles = makeStyles((theme) => ({
   label: {
@@ -26,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 const MField = (props) => {
   const {
+    intl,
     label,
     name,
     form,
@@ -35,6 +38,7 @@ const MField = (props) => {
     disabled,
     required,
     complete,
+    isCurrency,
     fullWidth = true
   } = props
   const classes = useStyles()
@@ -44,20 +48,40 @@ const MField = (props) => {
   useEffect(() => {
     form.registerField(
       name,
-      (fieldState) => setValue(fieldState.value),
+      (fieldState) => null,
       {
         [name]: true
       }
     )
-  }, [form, name])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const handleCurrency = (value) => {
+    try {
+      const p = parseInt(value, 10)
+      if (isNaN(p) || (!getValue && p === 0)) return
+      form.change(name, isCurrency ? p * 100 : p)
+      setValue(isCurrency ? p * 100 : p)
+    } catch (e) {
+      return
+    }
+  }
 
   const handleChange = (event) => {
-    form.change(name, event.target.value)
-    setValue(event.target.value)
+    try {
+      const { value } = event.target
+      if (isCurrency && !isEmpty(value)) {
+        handleCurrency(value)
+      } else {
+        form.change(name, value)
+        setValue(value)
+      }
+    } catch (e) {
+      console.log('')
+    }
   }
 
   const adornments = () => {
-    console.log(complete)
     const adorns = {}
     if (adornmentStart) {
       adorns.startAdornment
@@ -74,6 +98,13 @@ const MField = (props) => {
       adorns.endAdornment = <InputAdornment position="end">{adornmentEnd}</InputAdornment>
     }
     return adorns
+  }
+
+  const displayValue = () => {
+    if (isCurrency && getValue) {
+      return getDisplayValueFromMoney(getValue, intl)
+    }
+    return getValue
   }
 
   return (
@@ -93,7 +124,7 @@ const MField = (props) => {
       </InputLabel>
       <OutlinedInput
         id={name}
-        value={getValue}
+        value={displayValue()}
         onChange={handleChange}
         startAdornment={adornments().startAdornment}
         endAdornment={adornments().endAdornment}

@@ -36,6 +36,7 @@ export const MRadioGroup = (props) => {
           [name]: true
         }
       )
+      form.change(name, defaultValue)
       setFormValue(get(form.getState(), `values.${name}`))
     }
     setFormValue(defaultValue)
@@ -56,7 +57,12 @@ export const MRadioGroup = (props) => {
 
   return (
     <FormControl component="fieldset">
-      <RadioGroup aria-label={label} name={name} value={form ? getFormValue : value} onChange={handleChange}>
+      <RadioGroup
+        aria-label={label}
+        name={name}
+        value={form ? getFormValue : value}
+        defaultValue={defaultValue}
+        onChange={handleChange}>
         {createFields()}
       </RadioGroup>
     </FormControl>
