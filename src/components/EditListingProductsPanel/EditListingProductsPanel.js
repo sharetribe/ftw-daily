@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import _ from 'lodash'
+import { getMoneyFromValue, setProductPricing } from '../../util/price'
 import { FormattedMessage } from '../../util/reactIntl'
 import { LISTING_STATE_DRAFT } from '../../util/types'
 import { ListingLink } from '..'
@@ -42,6 +43,18 @@ const EditListingProductsPanel = (props) => {
 
   const products = publicData && publicData.products
 
+  const mapProduct = (p, idx) => {
+    return {
+      ...p,
+      ...setProductPricing(p),
+      occupancyType: p.occupancyType.value ? p.occupancyType.value : p.occupancyType,
+      bathroom: p.bathroom.value ? p.bathroom.value : p.bathroom,
+      beds: p.beds.value ? p.beds.value : p.beds,
+      quantityAvailable: p.quantityAvailable.value ? p.quantityAvailable.value : p.quantityAvailable,
+      order: _.isInteger(p.order) ? p.order : idx,
+    }
+  }
+
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
@@ -49,23 +62,9 @@ const EditListingProductsPanel = (props) => {
         className={css.form}
         initialValues={{ products: _.sortBy(products, 'order') }}
         onSubmit={(values, shouldRedirect) => {
-          console.log(values)
           onSubmit({
             publicData: {
-              products: values.products.map((p, idx) => {
-                return {
-                  ...p,
-                  price: {
-                    amount: p.price.amount,
-                    currency: p.price.currency
-                  },
-                  occupancyType: p.occupancyType.value ? p.occupancyType.value : p.occupancyType,
-                  bathroom: p.bathroom.value ? p.bathroom.value : p.bathroom,
-                  beds: p.beds.value ? p.beds.value : p.beds,
-                  quantityAvailable: p.quantityAvailable.value ? p.quantityAvailable.value : p.quantityAvailable,
-                  order: _.isInteger(p.order) ? p.order : idx
-                }
-              })
+              products: values.products.map(mapProduct)
             }
           }, shouldRedirect === 'redirect')
         }}

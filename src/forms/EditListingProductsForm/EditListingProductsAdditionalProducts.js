@@ -7,6 +7,7 @@ import _ from 'lodash'
 import { FieldArray } from 'react-final-form-arrays'
 import { connect } from 'react-redux'
 import { updateListingAdHoc } from '../../containers/EditListingPage/EditListingPage.duck'
+import { setProductPricing } from '../../util/price';
 import { FormattedMessage, intlShape } from '../../util/reactIntl'
 import { IconAdd, IconClose, InlineTextButton } from '../../components'
 import EditListingProductsProduct from './EditListingProductsProduct'
@@ -44,10 +45,7 @@ const EditListingProductsAdditionalProducts = (props) => {
     // because const = b might be undefined we use compact to filter out falsey vals
     return _.compact([...t, b]).map((p, idx) => ({
       ...p,
-      price: {
-        amount: p.price.amount,
-        currency: p.price.currency
-      },
+      ...setProductPricing(p),
       order: _.isInteger(p.order) ? p.order : idx,
       occupancyType: p.occupancyType.value ? p.occupancyType.value : p.occupancyType,
       bathroom: p.bathroom.value ? p.bathroom.value : p.bathroom,

@@ -216,7 +216,7 @@
   "EditListingProductsForm.additionalProductTypePlaceholder": "What do you call this room?",
   "EditListingProductsForm.additionalProductTypeInvalid": "Please add a name for the room",
   "EditListingProductsForm.additionalProductDescriptionTitle": "Description",
-  "EditListingProductsForm.additionalProductQuantity": "How many of these rooms are available?",
+  "EditListingProductsForm.additionalProductQuantity": "How many are available?",
   "EditListingProductsForm.additionalProductDescriptionPlaceholder": "What do you want people to know about the room? Is there wifi? Desk? Cleaning? AC? Private bathroom?",
   "EditListingProductsForm.additionalProductQuantityPlaceholder": "2",
   "EditListingProductsForm.additionalProductPriceSubTitle": "Price per night",

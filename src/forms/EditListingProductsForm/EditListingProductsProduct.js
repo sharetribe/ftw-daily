@@ -3,8 +3,8 @@ import Grid from '@material-ui/core/Grid'
 import IconButton from '@material-ui/core/IconButton'
 import Paper from '@material-ui/core/Paper'
 import makeStyles from '@material-ui/core/styles/makeStyles'
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
+import Tooltip from '@material-ui/core/Tooltip'
+import Typography from '@material-ui/core/Typography'
 import React from 'react'
 import { bool, node, string } from 'prop-types'
 import { FieldArray } from 'react-final-form-arrays'
@@ -13,6 +13,8 @@ import _ from 'lodash'
 import { Field } from 'react-final-form'
 import AddIcon from '@material-ui/icons/Add'
 import DeleteIcon from '@material-ui/icons/Delete'
+import MPopover from '../../components/MPopover/MPopover'
+import { MRadioGroup } from '../../components/MRadioGroup/MRadioGroup'
 import { FormattedMessage, intlShape } from '../../util/reactIntl'
 import FieldReactSelect from '../../components/FieldReactSelect/FieldReactSelect'
 import MField from '../../components/MField/MField'
@@ -26,6 +28,7 @@ import { formatMoney } from '../../util/currency'
 import { types as sdkTypes } from '../../util/sdkLoader'
 
 import css from './EditListingProductsForm.css'
+import { SeasonalPricing } from './SeasonalPricing'
 
 const { Money } = sdkTypes
 
@@ -42,12 +45,9 @@ const EditListingProductsProduct = (props) => {
     index
   } = props
 
-  const productTitle = sectionTitle || intl.formatMessage({ id: 'EditListingProductsForm.additionalProductTitle' })
   const bedTypeTitle = intl.formatMessage({ id: 'EditListingProductsForm.additionalProductBedTypeSelection' })
   const bathroomType = intl.formatMessage({ id: 'EditListingProductsForm.additionalProductBathroomTypeSelection' })
-  const losDiscountTitle = intl.formatMessage({ id: 'EditListingProductsForm.additionalProductLengthOfStayDiscount' })
   const roomPhotos = intl.formatMessage({ id: 'EditListingProductsForm.additionalProductPhotosOfTheRoom' })
-  const priceTitle = intl.formatMessage({ id: 'EditListingProductsForm.additionalProductPriceTitle' })
 
   const priceRequired = required(
     intl.formatMessage({
@@ -62,6 +62,47 @@ const EditListingProductsProduct = (props) => {
     ),
     config.listingMinimumPriceSubUnits
   )
+
+  const priceType = _.get(form.getState(), `values.${fieldId}.pricing_type`, 'standard')
+
+  const generatePricingStrategy = () => {
+    return (
+      priceType === 'standard'
+        ? <FieldCurrencyInput
+          id={`${fieldId}.price`}
+          name={`${fieldId}.price`}
+          disabled={disabled}
+          label={intl.formatMessage({ id: 'EditListingProductsForm.additionalProductPriceSubTitle' })}
+          placeholder={intl.formatMessage({ id: 'EditListingProductsForm.additionalProductPricePlaceholder' })}
+          currencyConfig={config.currencyConfig}
+          validate={priceValidators}
+        />
+        : <SeasonalPricing
+          form={form}
+          fieldId={fieldId}
+          intl={intl}
+        />
+    )
+  }
+
+  const pricingHelpContent = () => (
+    <div>
+      <Typography variant="h6">Standard</Typography>
+      <Typography paragraph style={{ fontFamily: 'Nunito Sans' }}>One nightly price is set for all seasons.</Typography>
+      <Typography variant="h6">Seasonal</Typography>
+      <Typography paragraph style={{ fontFamily: 'Nunito Sans' }}>A nightly price is chosen for each month of the year.</Typography>
+      <Typography paragraph style={{ fontFamily: 'Nunito Sans' }}>If you choose seasonal pricing and a booking spans multiple months that have different pricing, the total price will account for the different per night prices. For example, if a guest books a stay from January 20 to February 10 the price will be 10 nights at the January price and 10 nights at the February price.</Typography>
+    </div>
+  )
+
+  const losDiscountHelpContent = () => (
+    <div>
+      <Typography variant="h6">Length of Stay Discounts</Typography>
+      <Typography paragraph style={{ fontFamily: 'Nunito Sans' }}>Click 'Add Discount' to enter discounts for bookings of a certain length or greater.</Typography>
+      <Typography paragraph style={{ fontFamily: 'Nunito Sans' }}>The discounts you select here are only applied to this room.</Typography>
+    </div>
+  )
+
   const priceValidators = config.listingMinimumPriceSubUnits
     ? composeValidators(priceRequired, minPriceRequired)
     : priceRequired
@@ -153,6 +194,10 @@ const EditListingProductsProduct = (props) => {
                     label: '2 Queen Beds'
                   },
                   {
+                    value: 'king',
+                    label: '1 King Bed'
+                  },
+                  {
                     value: 'single-twin',
                     label: '1 Twin Bed'
                   },
@@ -239,28 +284,52 @@ const EditListingProductsProduct = (props) => {
         <Grid item xs={12}>
           <Grid container justify="center" spacing={2} direction="column">
             <Grid item xs={12}>
-              <FieldCurrencyInput
-                id={`${fieldId}.price`}
-                name={`${fieldId}.price`}
-                disabled={disabled}
-                label={intl.formatMessage({ id: 'EditListingProductsForm.additionalProductPriceSubTitle' })}
-                placeholder={intl.formatMessage({ id: 'EditListingProductsForm.additionalProductPricePlaceholder' })}
-                currencyConfig={config.currencyConfig}
-                validate={priceValidators}
+              <Grid container alignItems="center" justify="flex-start">
+                <Grid item>
+                  <h3 className={css.subTitle}>Price</h3>
+                </Grid>
+                <Grid item>
+                  <MPopover content={pricingHelpContent()}/>
+                </Grid>
+              </Grid>
+              <MRadioGroup
+                options={[
+                  {
+                    value: 'standard',
+                    label: 'Standard'
+                  },
+                  {
+                    value: 'seasonal',
+                    label: 'Seasonal'
+                  }
+                ]}
+                label={'Price'}
+                form={form}
+                defaultValue={priceType}
+                name={`${fieldId}.pricing_type`}
               />
+            </Grid>
+            <Grid item xs={12}>
+              {generatePricingStrategy()}
             </Grid>
             <Grid item xs={12}>
               <Grid container justify="center" spacing={2} direction="column">
                 <Grid item xs={12}>
-                  <h3 className={css.subTitle}>Length of stay discount</h3>
-                  <small style={{marginTop: -10}}>Select 'Add Discount' to enter discounts for bookings of a certain length or greater. These discounts are only applied to this room.</small>
+                  <Grid container alignItems="center" justify="flex-start">
+                    <Grid item>
+                      <h3 className={css.subTitle}>Length of stay discount</h3>
+                    </Grid>
+                    <Grid item>
+                      <MPopover content={losDiscountHelpContent()}/>
+                    </Grid>
+                  </Grid>
                 </Grid>
                 <Grid item xs={12}>
                   <FieldArray id={`${fieldId}.losDiscount`} name={`${fieldId}.losDiscount`}>
                     {({ fields }) => fields.map((name, index) => {
                       return (
                         <div key={name}>
-                          <Grid container justify={'space-between'} alignItems={'center'} direction="row" spacing={1}>
+                          <Grid container justify={'space-between'} alignItems={'center'} direction="row" spacing={3}>
                             <Grid item xs={4}>
                               <MField
                                 label={'Days'}

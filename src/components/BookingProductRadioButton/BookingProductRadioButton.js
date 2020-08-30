@@ -78,6 +78,10 @@ const BookingProductRadioButtonComponent = (props) => {
       label: '2 Queen Beds'
     },
     {
+      value: 'king',
+      label: '1 King Bed'
+    },
+    {
       value: 'single-twin',
       label: '1 Twin Bed'
     },

@@ -3,33 +3,32 @@ import InputLabel from '@material-ui/core/InputLabel'
 import OutlinedInput from '@material-ui/core/OutlinedInput'
 import React, { useEffect, useState } from 'react'
 import get from 'lodash/get'
+import isEmpty from 'lodash/isEmpty'
 import { makeStyles } from '@material-ui/core/styles'
 import InputAdornment from '@material-ui/core/InputAdornment'
-import TextField from '@material-ui/core/TextField'
 
 import './MField.css'
+import { getDisplayValueFromMoney, getMoneyFromValue } from '../../util/price'
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  margin: {
-    margin: theme.spacing(3),
-  },
-  withoutLabel: {
-    marginTop: theme.spacing(3),
-  },
-  textField: {
-    width: '25vw'
-  },
   label: {
     backgroundColor: 'white'
+  },
+  adornmentComplete: {
+    '& p': {
+      color: '#5ce073'
+    }
+  },
+  adornmentRegular: {
+    '& p': {
+      color: 'rgba(0, 0, 0, 0.54)'
+    }
   }
 }))
 
 const MField = (props) => {
   const {
+    intl,
     label,
     name,
     form,
@@ -37,7 +36,10 @@ const MField = (props) => {
     adornmentStart,
     error,
     disabled,
-    required
+    required,
+    complete,
+    isCurrency,
+    fullWidth = true
   } = props
   const classes = useStyles()
 
@@ -46,22 +48,51 @@ const MField = (props) => {
   useEffect(() => {
     form.registerField(
       name,
-      (fieldState) => setValue(fieldState.value),
+      (fieldState) => null,
       {
         [name]: true
       }
     )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const handleCurrency = (value) => {
+    try {
+      const p = parseInt(value, 10)
+      if (isNaN(p) || (!getValue && p === 0)) return
+      form.change(name, isCurrency ? p * 100 : p)
+      setValue(isCurrency ? p * 100 : p)
+    } catch (e) {
+      return
+    }
+  }
+
   const handleChange = (event) => {
-    form.change(name, event.target.value)
-    setValue(event.target.value)
+    try {
+      const { value } = event.target
+      if (isCurrency && !isEmpty(value)) {
+        handleCurrency(value)
+      } else {
+        form.change(name, value)
+        setValue(value)
+      }
+    } catch (e) {
+      console.log('')
+    }
   }
 
   const adornments = () => {
     const adorns = {}
     if (adornmentStart) {
-      adorns.startAdornment = <InputAdornment position="start">{adornmentStart}</InputAdornment>
+      adorns.startAdornment
+        = <InputAdornment
+          position="start"
+          classes={{
+            root: complete ? classes.adornmentComplete : classes.adornmentRegular
+          }}
+        >
+          {adornmentStart}
+        </InputAdornment>
     }
     if (adornmentEnd) {
       adorns.endAdornment = <InputAdornment position="end">{adornmentEnd}</InputAdornment>
@@ -69,10 +100,16 @@ const MField = (props) => {
     return adorns
   }
 
+  const displayValue = () => {
+    if (isCurrency && getValue) {
+      return getDisplayValueFromMoney(getValue, intl)
+    }
+    return getValue
+  }
+
   return (
     <FormControl
-      fullWidth
-      className={classes.margin}
+      fullWidth={fullWidth}
       variant="outlined"
       disabled={disabled}
       error={error}
@@ -87,7 +124,7 @@ const MField = (props) => {
       </InputLabel>
       <OutlinedInput
         id={name}
-        value={getValue}
+        value={displayValue()}
         onChange={handleChange}
         startAdornment={adornments().startAdornment}
         endAdornment={adornments().endAdornment}

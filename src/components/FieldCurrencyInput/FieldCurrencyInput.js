@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 import { Field } from 'react-final-form'
 import classNames from 'classnames'
 import Decimal from 'decimal.js'
-import { priceData } from '../../util/pricing';
+import { priceData } from '../../util/pricing'
 import { intlShape, injectIntl } from '../../util/reactIntl'
 import { ValidationError } from '..'
 import { types as sdkTypes } from '../../util/sdkLoader'

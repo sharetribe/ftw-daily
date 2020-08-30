@@ -362,7 +362,12 @@ export class ListingPageComponent extends Component {
     const twitterImages = listingImages(currentListing, 'twitter')
     const schemaImages = JSON.stringify(facebookImages.map((img) => img.url))
     const { siteTitle } = config
-    const schemaTitle = `${title} - Coliving Coworking Spaces for Remote Working Digital Nomads near Surf`
+    const schemaTitle = () => {
+      if (get(publicData, 'location.city') && get(publicData, 'location.country')) {
+        return `Coliving and Coworking in ${publicData.location.city}, ${publicData.location.country}`
+      }
+      return `${title} - Coliving & Coworking Spaces for Remote Working Digital Nomads near Surf`
+    }
 
     intl.formatMessage(
       { id: 'ListingPage.schemaTitle' },
@@ -403,7 +408,7 @@ export class ListingPageComponent extends Component {
 
     return (
       <Page
-        title={schemaTitle}
+        title={schemaTitle()}
         scrollingDisabled={scrollingDisabled}
         author={authorDisplayName}
         contentType="website"
@@ -414,7 +419,7 @@ export class ListingPageComponent extends Component {
           '@context': 'http://schema.org',
           '@type': 'ItemPage',
           description,
-          name: schemaTitle,
+          name: schemaTitle(),
           image: schemaImages,
         }}
         adjustChatComponent={true}

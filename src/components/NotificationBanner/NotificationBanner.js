@@ -1,17 +1,49 @@
 import React from 'react'
+import classNames from 'classnames'
+import { IconHelp } from '../../assets/IconHelp'
 import { IconLightBulb } from '../../assets/IconLightBulb'
 
 import css from './NotificationBanner.css'
 
 export const NotificationBanner = (props) => {
+  const { text, type } = props
+
+  const determineIcon = () => {
+    switch (type) {
+      case 'idea':
+        return <IconLightBulb className={css.icon}/>
+        break
+      case 'help':
+        return <IconHelp className={classNames(css.icon, css.iconHelp)}/>
+      default:
+        return null
+    }
+  }
+
+  const determineCSS = () => {
+    switch (type) {
+      case 'idea':
+        return classNames(css.notificationBannerContainer, css.notificationBannerContainerIdea)
+        break
+      case 'help':
+        return classNames(css.notificationBannerContainer, css.notificationBannerContainerHelp)
+      default:
+        return null
+    }
+  }
+
   return (
-    <div className={css.notificationBannerContainer} style={{ backgroundColor: '#d9f9ff', alignItems: 'center' }}>
-      <div className={css.iconContainer}>
-        <IconLightBulb className={css.icon}/>
-      </div>
+    <div className={determineCSS()}>
+      {
+        type
+          ? <div className={css.iconContainer}>
+            {determineIcon()}
+          </div>
+          : null
+      }
       <div className={css.textContainer}>
         <small className={css.text}>
-          A simple walkthrough video from your phone can create more trust and increase bookings by up to 317%! You can easily record it right from the YouTube app.
+          {text}
         </small>
       </div>
     </div>

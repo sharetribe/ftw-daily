@@ -33,7 +33,7 @@ class SectionMapMaybe extends Component {
       : { address, center: geolocation, zoom: 2 }
     const map = <Map
       {...mapProps}
-      useStaticMap={true}
+      useStaticMap={this.state.isStatic}
       createSurf={true}
       metadata={metadata}
     />
