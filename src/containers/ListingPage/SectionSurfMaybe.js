@@ -1,3 +1,4 @@
+import CircularProgress from '@material-ui/core/CircularProgress'
 import React from 'react'
 import _ from 'lodash'
 import includes from 'lodash/includes'
@@ -5,6 +6,7 @@ import keys from 'lodash/keys'
 import { useTheme } from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { WaveDivider } from '../../assets/WaveDivider'
+import { ActivityIndicator } from '../../components/ActivityIndicator/ActivityIndicator';
 import Modal from '../../components/Modal/Modal'
 import MultiRowGridList from '../../components/MultiRowGridList/MultiRowGridList'
 import SingleLineGridList from '../../components/SingleRowImageGridList/SingleRowImageGridList'
@@ -119,6 +121,9 @@ const SectionSurfMaybe = (props) => {
         {
           forecast
             ? <div className={css.forecastIFrameContainer}>
+              {
+                isForecastLoading ? <ActivityIndicator /> : null
+              }
               <iframe
                 src={forecast}
                 className={css.forecastIFrame}
