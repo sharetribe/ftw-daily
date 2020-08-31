@@ -35,10 +35,9 @@ export { default as IconSocialMediaFacebook } from './IconSocialMediaFacebook/Ic
 export { default as IconSocialMediaFacebookRegister } from './IconSocialMediaFacebookRegister/IconSocialMediaFacebookRegister';
 export { default as IconSocialMediaInstagram } from './IconSocialMediaInstagram/IconSocialMediaInstagram';
 export { default as IconSocialMediaTwitter } from './IconSocialMediaTwitter/IconSocialMediaTwitter';
-export { default as IconSocialMediaYoutube } from './IconSocialMediaYoutube';   
+export { default as IconSocialMediaYoutube } from './IconSocialMediaYoutube';
 export { default as IconSocialMediaSnapchat } from './IconSocialMediaSnapchat';
 export { default as IconSpinner } from './IconSpinner/IconSpinner';
-export { default as IconMessage } from './IconMessage/IconMessage';
 
 // Other independent components
 export { default as ExternalLink } from './ExternalLink/ExternalLink';
@@ -55,7 +54,6 @@ export { default as RangeSlider } from './RangeSlider/RangeSlider';
 export { default as ResponsiveImage } from './ResponsiveImage/ResponsiveImage';
 export { default as UserDisplayName } from './UserDisplayName/UserDisplayName';
 export { default as ValidationError } from './ValidationError/ValidationError';
-export { default as ToggleText } from './ToggleText/ToggleText';
 
 // GalleryCarousel
 export {default as GalleryCarouselSlider} from './GalleryCarouselSlider/GalleryCarouselSlider';

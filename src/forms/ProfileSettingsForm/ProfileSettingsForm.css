@@ -21,9 +21,7 @@
     margin-top: 32px;
   }
 }
-.locationAutocompleteInputIcon {
-  display: none;
-}
+
 .sectionContainer {
   padding: 0;
   margin-bottom: 36px;
@@ -300,13 +298,11 @@
 .firstName {
   width: calc(34% - 9px);
 }
+
 .lastName {
   width: calc(66% - 9px);
 }
-.location {
-  padding: 4px 0 10px 0;
-  border-bottom-color: #2ecc71;
-}
+
 .bioInfo {
   color: var(--matterColorAnti);
   margin-top: 11px;
@@ -315,15 +311,7 @@
     margin-top: 16px;
   }
 }
-.otherInfo {
-  width: 48%;
-  margin-bottom: 25px;
-}
+
 .submitButton {
   margin-top: 24px;
-}
-.otherInfoContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
 }

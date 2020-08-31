@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { lazyLoadWithDimensions } from '../../util/contextHelpers';
 import { LINE_ITEM_DAY, LINE_ITEM_NIGHT, propTypes } from '../../util/types';
 import { formatMoney } from '../../util/currency';
-import { ensureListing, ensureUser, reduceParagraphHeight, trimLongText } from '../../util/data';
+import { ensureListing, ensureUser } from '../../util/data';
 import { richText } from '../../util/richText';
 import { createSlug } from '../../util/urlHelpers';
 import config from '../../config';
@@ -16,6 +16,35 @@ import css from './ListingCard.css';
 
 const MIN_LENGTH_FOR_LONG_WORDS = 10;
 const MODAL_BREAKPOINT = 768;
+
+const reduceParagraphTitle = (element, maxHeight) => {
+  
+  if(element.offsetHeight < maxHeight) return 
+
+  let resultText = element.innerText
+
+  let stringLength = element.innerText.length
+  
+  for(let i = stringLength, j = 1; i >= 0 ; i--, j++) {
+      resultText = resultText
+      .split("")
+      .splice(0, resultText.length - j)
+      .join("")
+
+      element.innerText = resultText
+
+      if(element.offsetHeight < maxHeight) {
+          resultText = resultText
+              .split("")
+              .splice(0, resultText.length - 3)
+              .join("")
+          
+          element.innerText = resultText + "..."
+          
+          return element.innerText
+       }
+   }
+}
 
 const priceData = (price, intl) => {
   if (price && price.currency === config.currency) {
@@ -61,10 +90,8 @@ export const ListingCardComponent = props => {
 
   const currentListing = ensureListing(listing);
   const id = currentListing.id.uuid;
-  const { price, publicData } = currentListing.attributes;
+  const { title = '', price, publicData } = currentListing.attributes;
   const { breed, gender, age } = publicData;
-
-  const title = currentListing.attributes.title ? (currentListing.attributes.title.length > 10 ? trimLongText(currentListing.attributes.title, 10) : currentListing.attributes.title) : ''
 
   const slug = createSlug(title);
   const author = ensureUser(listing.author);
@@ -105,11 +132,11 @@ export const ListingCardComponent = props => {
   );
   
   const cardTitles = [title, cardBreed, cardGender].filter(i => typeof i === 'string').join(', ');
-  
+
   const paragraphEl = useRef(null); 
 
   if (maxParagraphHeight && paragraphEl.current && paragraphEl.current.offsetHeight > maxParagraphHeight) {
-    reduceParagraphHeight(paragraphEl.current, maxParagraphHeight)
+    reduceParagraphTitle(paragraphEl.current, maxParagraphHeight)
   }
 
   return (

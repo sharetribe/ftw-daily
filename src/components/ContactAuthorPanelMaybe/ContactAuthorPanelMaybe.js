@@ -4,7 +4,7 @@ import { ensureUser, ensureCurrentUser } from '../../util/data';
 import { LINE_ITEM_NIGHT, LINE_ITEM_DAY } from '../../util/types';
 
 import css from './ContactAuthorPanelMaybe.css';
-import { IconMessage } from '../../components';
+import MessageIcon from './MessageIcon.js';
 
 const ContactAuthorPanel = ({
   author,
@@ -42,7 +42,7 @@ const ContactAuthorPanel = ({
       </div>
       <button className={css.contactButton} onClick={onContactUser}>
         <FormattedMessage id="ListingPage.contactAuthorButton" />
-        <IconMessage />
+        <MessageIcon />
       </button>
       {/* DO NOT FORGET ABOUT png/jpeg FORMAT */}
       <img className={css.contactBanner} src='/static/horseDealListingBanner.png' alt='horse deal banner' />

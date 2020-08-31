@@ -19,9 +19,6 @@ export const QUERY_REVIEWS_REQUEST = 'app/ProfilePage/QUERY_REVIEWS_REQUEST';
 export const QUERY_REVIEWS_SUCCESS = 'app/ProfilePage/QUERY_REVIEWS_SUCCESS';
 export const QUERY_REVIEWS_ERROR = 'app/ProfilePage/QUERY_REVIEWS_ERROR';
 
-export const GET_USER_REVIEWS_SUCCESS = 'app/ProfilePage/GET_USER_REVIEWS_SUCCESS';
-export const GET_USER_REVIEWS_FAILURE = 'app/ProfilePage/GET_USER_REVIEWS_FAILURE';
-
 // ================ Reducer ================ //
 
 const initialState = {
@@ -31,7 +28,6 @@ const initialState = {
   queryListingsError: null,
   reviews: [],
   queryReviewsError: null,
-  userRating: null,
 };
 
 export default function profilePageReducer(state = initialState, action = {}) {
@@ -65,10 +61,7 @@ export default function profilePageReducer(state = initialState, action = {}) {
       return { ...state, reviews: payload };
     case QUERY_REVIEWS_ERROR:
       return { ...state, reviews: [], queryReviewsError: payload };
-    case GET_USER_REVIEWS_SUCCESS:
-      return {...state, userRating: payload }
-    case GET_USER_REVIEWS_FAILURE:
-      return {...state, userRating: 0 }
+
     default:
       return state;
   }
@@ -126,15 +119,6 @@ export const queryReviewsError = e => ({
   payload: e,
 });
 
-export const getUserReviewSuccess = e => ({
-  type: GET_USER_REVIEWS_SUCCESS,
-  payload: e
-})
-
-export const getUserReviewFailure = e => ({
-  type: GET_USER_REVIEWS_FAILURE,
-})
-
 // ================ Thunks ================ //
 
 export const queryUserListings = userId => (dispatch, getState, sdk) => {
@@ -186,31 +170,12 @@ export const showUser = userId => (dispatch, getState, sdk) => {
     .catch(e => dispatch(showUserError(storableError(e))));
 };
 
-export const getUserReview = userId => (dispatch, getState, sdk) => {
-  return sdk.reviews.query({
-    subjectId: userId
-  }).then(response => {
-    const getRating = (data) => {
-        let total = data.length
-        let sum = 0
-        data.forEach(r => sum += r.attributes.rating ? r.attributes.rating : 0)
-        return !sum ? 0 : sum / total 
-    }
-    const rating = (response.data.data && response.data.data.length) ? getRating(response.data.data) : 0
-    dispatch(getUserReviewSuccess(rating))
-  })
-  .catch(_ => {
-    dispatch(getUserReviewFailure())
-  })
-}
-
 export const loadData = userId => (dispatch, getState, sdk) => {
   // Clear state so that previously loaded data is not visible
   // in case this page load fails.
   dispatch(setInitialState());
 
   return Promise.all([
-    dispatch(getUserReview(userId)),
     dispatch(fetchCurrentUser()),
     dispatch(showUser(userId)),
     dispatch(queryUserListings(userId)),
