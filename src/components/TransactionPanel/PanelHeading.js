@@ -2,6 +2,7 @@ import React from 'react';
 import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { createSlug, stringify } from '../../util/urlHelpers';
+import { trimLongText } from '../../util/data';
 import { NamedLink } from '../../components';
 
 import css from './TransactionPanel.css';
@@ -109,13 +110,13 @@ const PanelHeading = props => {
     customerName: customerNameObj,
     providerName,
     listingId,
-    listingTitle,
     listingDeleted,
     isCustomerBanned,
     substitutionalLinkText,
     providerID,
     customerID
   } = props;
+  const listingTitle = (props.listingTitle && props.listingTitle.length > 10) ? trimLongText(props.listingTitle,10) : props.listingTitle
 
   const isCustomer = props.transactionRole === 'customer';
   const customerName = customerNameObj.props.user.attributes.profile.displayName.split(" ").slice(0,1)[0]

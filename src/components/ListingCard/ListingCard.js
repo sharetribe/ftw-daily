@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { lazyLoadWithDimensions } from '../../util/contextHelpers';
 import { LINE_ITEM_DAY, LINE_ITEM_NIGHT, propTypes } from '../../util/types';
 import { formatMoney } from '../../util/currency';
-import { ensureListing, ensureUser, reduceParagraphHeight } from '../../util/data';
+import { ensureListing, ensureUser, reduceParagraphHeight, trimLongText } from '../../util/data';
 import { richText } from '../../util/richText';
 import { createSlug } from '../../util/urlHelpers';
 import config from '../../config';
@@ -64,7 +64,7 @@ export const ListingCardComponent = props => {
   const { price, publicData } = currentListing.attributes;
   const { breed, gender, age } = publicData;
 
-  const title = currentListing.attributes.title ? ( currentListing.attributes.title.length > 10 ? [currentListing.attributes.title.slice(0, 10), '...'].join('') : currentListing.attributes.title) : ''
+  const title = currentListing.attributes.title ? (currentListing.attributes.title.length > 10 ? trimLongText(currentListing.attributes.title, 10) : currentListing.attributes.title) : ''
 
   const slug = createSlug(title);
   const author = ensureUser(listing.author);

@@ -488,6 +488,8 @@
 
   margin-top: 0;
   margin-bottom: 1px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .backBtn {

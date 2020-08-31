@@ -106,17 +106,18 @@ class Menu extends Component {
       // Calculate wether we should show the menu to the left of the component or right
       const distanceToRight = window.innerWidth - this.menu.getBoundingClientRect().right;
       const menuWidth = this.menu.offsetWidth;
-      const contentWidthBiggerThanLabel = this.menuContent.offsetWidth - menuWidth;
       
+      const contentWidthBiggerThanLabel = this.menuContent.offsetWidth - menuWidth;
+      const { forceRight } = this.props;
       const usePositionLeftFromLabel = contentPosition === CONTENT_TO_LEFT;
       const contentPlacementOffset = this.props.contentPlacementOffset;
       // Render menu content to the left according to the contentPosition
       // prop or if the content does not fit to the right. Otherwise render to
       // the right.
-      return { right: contentPlacementOffset, minWidth: menuWidth }
-      // return usePositionLeftFromLabel || distanceToRight < contentWidthBiggerThanLabel
-      //   ? { right: contentPlacementOffset, minWidth: menuWidth }
-      //   : { left: contentPlacementOffset, minWidth: menuWidth };
+     
+      return forceRight || usePositionLeftFromLabel || distanceToRight < contentWidthBiggerThanLabel
+        ? { right: contentPlacementOffset, minWidth: menuWidth }
+        : { left: contentPlacementOffset, minWidth: menuWidth };
     }
     return {};
   }
@@ -201,6 +202,7 @@ Menu.defaultProps = {
   isOpen: null,
   onToggleActive: null,
   useArrow: true,
+  forceRight: false,
 };
 
 const { bool, func, node, number, string } = PropTypes;
@@ -214,6 +216,7 @@ Menu.propTypes = {
   useArrow: bool,
   isOpen: bool,
   onToggleActive: func,
+  forceRight: bool,
 };
 
 export default Menu;
