@@ -52,9 +52,16 @@ const CSP = process.env.REACT_APP_CSP;
 const cspReportUrl = '/csp-report';
 const cspEnabled = CSP === 'block' || CSP === 'report';
 const app = express();
+
+/** Mongodb */
 app.use(express.json());
 require('./mongodb');
 require('./routes')(app);
+const swagger = require('./swagger.js');
+
+if(dev) {
+  swagger(app);
+}
 
 const errorPage = fs.readFileSync(path.join(buildPath, '500.html'), 'utf-8');
 
