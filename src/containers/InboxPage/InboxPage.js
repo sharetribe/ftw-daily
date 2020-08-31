@@ -48,10 +48,7 @@ const getDateDescription = date => {
   const hours = Math.floor(minutes / 60)
   const days = (hours / 24).toFixed()
   const months = (days / 30).toFixed()
-  console.log('minutes ', minutes)
-  console.log('hours ', hours)
-  console.log('days ', days)
-  console.log('months ', months)
+  
   if(minutes < 59) {
     return <FormattedMessage id="InboxPage.someMinutesAgo" />
   }
@@ -61,10 +58,10 @@ const getDateDescription = date => {
   if(minutes > 119 && hours < 24) {
     return <FormattedMessage id="InboxPage.hoursAgo" values={{ hours }} />
   }
-  if(hours > 23 && hours < 48) {
+  if(hours > 23 && days < 2) {
     return <FormattedMessage id="InboxPage.dayAgo" values={{ days }} />
   }
-  if(hours > 47 && days < 29) {
+  if(days > 1 && days < 29) {
     return <FormattedMessage id="InboxPage.daysAgo" values={{ days }} />
   }
   if(months == 1) {
