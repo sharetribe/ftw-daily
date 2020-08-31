@@ -56,7 +56,6 @@ const estimatedTransaction = (
   totalPrice,
   discount
 ) => {
-  console.log(discount)
   const now = new Date()
   const isNightly = unitType === LINE_ITEM_NIGHT
   const isDaily = unitType === LINE_ITEM_DAY
@@ -188,8 +187,6 @@ const EstimatedBreakdownMaybe = (props) => {
   if (!canEstimatePrice) {
     return null
   }
-
-  console.log(chargeBreakdown)
 
   const tx = estimatedTransaction(
     unitType,
