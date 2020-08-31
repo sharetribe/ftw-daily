@@ -62,7 +62,7 @@ class ProfileSettingsFormComponent extends Component {
             form,
             values,
           } = fieldRenderProps;
-          
+
           const user = ensureCurrentUser(currentUser);
 
           // First name
@@ -306,6 +306,7 @@ class ProfileSettingsFormComponent extends Component {
                   label={titleRequiredMessage}
                   placeholder={addressPlaceholderMessage}
                   useDefaultPredictions={true}
+                  valueFromForm={values.location}
                   format={identity}
                   validate={validators.composeValidators(
                     validators.autocompleteSearchRequired(addressRequiredMessage),
