@@ -1,22 +1,47 @@
 import mean from 'lodash/mean'
 import round from 'lodash/round'
+import reduce from 'lodash/reduce'
+import sumBy from 'lodash/sumBy'
 import {
   convertUnitToSubUnit,
   ensureSeparator,
   truncateToSubUnitPrecision,
   unitDivisor,
 } from './currency'
+import { enumerateDaysBetweenDates, nightsBetween } from './dates';
 import { types as sdkTypes } from './sdkLoader'
 import config from '../config'
 
 const { Money } = sdkTypes
 
-export const getPriceAfterDiscounts = (product, numberOfDaysSelected) => {
+export const getPriceFromSeasonalStrategy = (startDate, endDate, seasonalPricing) => {
+  const allDates = enumerateDaysBetweenDates(startDate, endDate)
+  // eslint-disable-next-line no-param-reassign
+  const obj = reduce(seasonalPricing, (o, item) => { o[item.month] = item.price.amount; return o }, {})
+  const individualPrices = allDates.map((v) => {
+    return { month: v.month, price: obj[v.month] }
+  })
+  return {
+    total: sumBy(individualPrices, 'price'),
+    breakdown: individualPrices
+  }
+}
+
+export const getPriceAfterDiscounts = (product, startDate, endDate) => {
   if (!product) return
+  const numberOfDaysSelected = nightsBetween(startDate, endDate)
   const losDiscount = (product.losDiscount || []).map((los) => parseInt(los.days, 10))
   let losDiscountMatch
   let discount = 1
   let price = product.price.amount * numberOfDaysSelected
+  // breakdown is only used when seasonal pricing is invoked
+  // this is so we can show a per night breakdown on the transaction to operators/users
+  let breakdown = {}
+  if (product.pricing_type === 'seasonal') {
+    const seasonal = getPriceFromSeasonalStrategy(startDate, endDate, product.seasonalPricing)
+    price = seasonal.total
+    breakdown = seasonal.breakdown
+  }
   losDiscount.sort((a, b) => a - b).forEach((v) => {
     if (numberOfDaysSelected >= v) {
       losDiscountMatch = v
@@ -25,11 +50,15 @@ export const getPriceAfterDiscounts = (product, numberOfDaysSelected) => {
   if (losDiscountMatch) {
     const pd = product.losDiscount.find((losd) => losd.days === losDiscountMatch.toString())
     discount = (1 - parseInt(pd.percent, 10) / 100)
-    price = product.price.amount * discount * numberOfDaysSelected
   }
+  console.log(price)
   return {
-    price,
-    discount
+    preDiscountPrice: price,
+    preDiscountMoneyPrice: new Money(price, config.currencyConfig.currency),
+    price: price * discount,
+    moneyPrice: new Money(price * discount, config.currencyConfig.currency),
+    discount,
+    breakdown
   }
 }
 

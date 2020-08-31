@@ -525,7 +525,7 @@ export class CheckoutPageComponent extends Component {
       ? product.price
       : undefined
 
-    const pricingAdjustments = getPriceAfterDiscounts(product, quantity)
+    const pricingAdjustments = getPriceAfterDiscounts(product, bookingStart, bookingEnd)
 
     const unitPrice = productPrice
       ? new Money(productPrice.amount * pricingAdjustments.discount, productPrice.currency)

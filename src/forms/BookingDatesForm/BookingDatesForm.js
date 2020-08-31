@@ -92,17 +92,18 @@ export class BookingDatesFormComponent extends Component {
           const productPrice = values && productId
             ? publicData.products.find((p) => p.id === productId).price
             : undefined
-
+          const product = (publicData.products || []).find((p) => p.id === productId)
           const unitPrice = productPrice
             ? new Money(productPrice.amount, productPrice.currency)
             : listing.attributes.price
 
           const { startDate, endDate } = values && values.bookingDates ? values.bookingDates : {}
-          const numberOfDaysSelected = nightsBetween(startDate, endDate) || 1
 
           // This is the place to collect breakdown estimation data. See the
           // EstimatedBreakdownMaybe component to change the calculations
           // for customized payment processes.
+          const chargeBreakdown = getPriceAfterDiscounts(product, startDate, endDate)
+          console.log(product)
           const bookingData
             = startDate && endDate
               ? {
@@ -114,7 +115,8 @@ export class BookingDatesFormComponent extends Component {
                 // NOTE: If unitType is `line-item/units`, a new picker
                 // for the quantity should be added to the form.
                 quantity: 1,
-                discount: get(getPriceAfterDiscounts((publicData.products || []).find((p) => p.id === productId), numberOfDaysSelected), 'discount', null)
+                chargeBreakdown,
+                product
               }
               : null
 
@@ -211,7 +213,7 @@ export class BookingDatesFormComponent extends Component {
                             showAsRequired={true}
                             product={prod}
                             images={listing.images.filter((img) => includes(keys(prod.photos), img.id.uuid))}
-                            price={startDate && endDate ? getPriceAfterDiscounts(prod, numberOfDaysSelected).price : null}
+                            price={startDate && endDate ? getPriceAfterDiscounts(prod, startDate, endDate).price : null}
                             useMobileMargins
                             validate={required(productRequired)}
                             fieldMeta={fieldRenderProps}

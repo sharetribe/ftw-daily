@@ -272,3 +272,29 @@ export const formatDateToText = (intl, date) => {
     }),
   }
 }
+
+/**
+ [ { date: 30, month: 7, year: 2020 },
+ { date: 31, month: 7, year: 2020 },
+ { date: 1, month: 8, year: 2020 },
+ { date: 2, month: 8, year: 2020 },
+ { date: 3, month: 8, year: 2020 },
+ { date: 4, month: 8, year: 2020 } ]
+ *
+ * @param {string} start
+ * @param {string} end
+ */
+export const enumerateDaysBetweenDates = (startDate, endDate) => {
+  const now = moment(startDate)
+  const dates = []
+
+  while (now.isSameOrBefore(endDate)) {
+    dates.push({
+      date: now.date(),
+      month: now.month(),
+      year: now.year()
+    })
+    now.add(1, 'days')
+  }
+  return dates
+}

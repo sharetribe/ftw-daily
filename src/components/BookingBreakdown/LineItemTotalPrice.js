@@ -14,7 +14,7 @@ import css from './BookingBreakdown.css'
 
 const { Money } = sdkTypes
 
-const LineItemUnitPrice = (props) => {
+const LineItemTotalPrice = (props) => {
   const { transaction, isProvider, intl } = props
 
   let providerTotalMessageId = 'BookingBreakdown.providerTotalDefault'
@@ -72,10 +72,10 @@ const LineItemUnitPrice = (props) => {
   )
 }
 
-LineItemUnitPrice.propTypes = {
+LineItemTotalPrice.propTypes = {
   transaction: propTypes.transaction.isRequired,
   isProvider: bool.isRequired,
   intl: intlShape.isRequired,
 }
 
-export default LineItemUnitPrice
+export default LineItemTotalPrice

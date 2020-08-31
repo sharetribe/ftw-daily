@@ -180,7 +180,7 @@ export const convertUnitToSubUnit = (value, subUnitDivisor, useComma = false) =>
   } else if (amount.isInteger()) {
     return amount.toNumber();
   } else {
-    throw new Error(`value must divisible by ${subUnitDivisor}`);
+    throw new Error(`value (${value}) must divisible by ${subUnitDivisor}`);
   }
 };
 
