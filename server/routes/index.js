@@ -26,6 +26,8 @@ module.exports = (app) => {
     try {
       const userId = req.params.userId;
       let query = {
+        "start": {$gte: req.query.from, $lte:req.query.to},
+        "end": {$gte: req.query.from, $lte:req.query.to},
         $or: [
           {"ownerId":userId},
           {"acceptedTransactionId":userId},
@@ -44,6 +46,8 @@ module.exports = (app) => {
 
   app.get('/api/events/:eventId', async (req, res) => {
     try {
+
+      //TODO check if owner eventId
 
       if(await Event.count({_id:req.params.eventId})) {
         return res.send(await Event.findById(req.params.eventId));
