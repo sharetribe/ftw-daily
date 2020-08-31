@@ -200,7 +200,7 @@ export const ensureOwnListing = listing => {
  * @param {Object} user entity object, which is to be ensured against null values
  */
 export const ensureUser = user => {
-  const empty = { id: null, type: 'user', attributes: { profile: {} } };
+  const empty = { id: null, type: 'user', attributes: { profile: { publicData: {} } } };
   return { ...empty, ...user };
 };
 

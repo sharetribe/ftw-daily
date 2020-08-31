@@ -142,7 +142,10 @@ export const updateProfile = (actionPayload, publicData) => {
     experience,
     language,
     drivingLicense,
+    emailVerified,
+    phoneNumber,
   } = publicData
+  
   return (dispatch, getState, sdk) => {
     dispatch(updateProfileRequest());
     
@@ -162,7 +165,9 @@ export const updateProfile = (actionPayload, publicData) => {
           experience,
           language,
           drivingLicense: !!drivingLicense,
-          auto: !!auto
+          auto: !!auto,
+          emailVerified,
+          phoneNumber,
         }
       }, queryParams)
       .then(response => {
