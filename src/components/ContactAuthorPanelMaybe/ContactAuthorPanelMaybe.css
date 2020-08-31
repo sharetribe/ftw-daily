@@ -11,7 +11,35 @@
 }
 
 .contactButton {
-  @apply --marketplaceModalBtnMainStyle
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  width: 100%;
+  height: 64px;
+  padding: 0;
+  border: none;
+  color: white;
+  background-color: var(--marketplaceColor);
+  transition: all .1s ease-in-out;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+  &:hover, &:focus {
+    background-color: var(--marketplaceColorDark);
+    box-shadow: var(--boxShadowButton);
+  }
+  @media (--viewportLarge) {
+    margin-top: 32px;
+    min-width: 312px;
+  }
+  & > svg {
+    fill: none;
+    margin-right: -25px;
+    margin-left: 20px;
+  }
 }
 
 .textContainer {

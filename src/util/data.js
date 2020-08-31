@@ -200,7 +200,7 @@ export const ensureOwnListing = listing => {
  * @param {Object} user entity object, which is to be ensured against null values
  */
 export const ensureUser = user => {
-  const empty = { id: null, type: 'user', attributes: { profile: { publicData: {} } } };
+  const empty = { id: null, type: 'user', attributes: { profile: {} } };
   return { ...empty, ...user };
 };
 
@@ -210,7 +210,7 @@ export const ensureUser = user => {
  * @param {Object} current user entity object, which is to be ensured against null values
  */
 export const ensureCurrentUser = user => {
-  const empty = { id: null, type: 'currentUser', attributes: { profile: { publicData: {} } }, profileImage: {} };
+  const empty = { id: null, type: 'currentUser', attributes: { profile: {} }, profileImage: {} };
   return { ...empty, ...user };
 };
 
@@ -375,7 +375,6 @@ export const overrideArrays = (objValue, srcValue, key, object, source, stack) =
  *
  * @return {string} returns the line item code humanized
  */
-
 export const humanizeLineItemCode = code => {
   if (!/^line-item\/.+/.test(code)) {
     throw new Error(`Invalid line item code: ${code}`);
@@ -384,34 +383,3 @@ export const humanizeLineItemCode = code => {
 
   return lowercase.charAt(0).toUpperCase() + lowercase.slice(1);
 };
-
-export const reduceParagraphHeight = (elementRef, maxHeight) => {
-  
-  if(!elementRef) return 
-
-  let resultText = elementRef.innerText
-
-  let stringLength = elementRef.innerText.length
-  
-  for(let i = stringLength, j = 1; i >= 0 ; i--, j++) {
-      resultText = resultText
-      .split("")
-      .splice(0, resultText.length - j)
-      .join("")
-
-      elementRef.innerText = resultText
-
-      if(elementRef.offsetHeight < maxHeight) {
-          resultText = resultText
-              .split("")
-              .splice(0, resultText.length - 3)
-              .join("")
-          
-              elementRef.innerText = resultText + "..."
-          
-          return elementRef.innerText
-       }
-   }
-}
-
-export const trimLongText = (text, num) => [text.slice(0, num), '...'].join('')
