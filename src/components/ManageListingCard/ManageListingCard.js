@@ -203,7 +203,7 @@ export const ManageListingCardComponent = props => {
             <Menu
               className={classNames(css.menu, { [css.cardIsOpen]: !isClosed })}
               contentPlacementOffset={MENU_CONTENT_OFFSET}
-              contentPosition="right"
+              contentPosition="left"
               useArrow={false}
               onToggleActive={isOpen => {
                 const listingOpen = isOpen ? currentListing : null;
