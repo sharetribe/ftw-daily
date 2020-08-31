@@ -74,7 +74,7 @@ const TopbarDesktop = props => {
   };
 
   const profileMenu = authenticatedOnClientSide ? (
-    <Menu>
+    <Menu forceRight>
       <MenuLabel className={css.profileMenuLabel} isOpenClassName={css.profileMenuIsOpen}>
         <Avatar className={css.avatar} user={currentUser} disableProfileLink />
       </MenuLabel>

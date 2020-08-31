@@ -80,7 +80,10 @@ const requestSavePhoneNumber = params => (dispatch, getState, sdk) => {
 
   return sdk.currentUser
     .updateProfile(
-      { protectedData: { phoneNumber } },
+      { 
+        protectedData: { phoneNumber },
+        publicData: { phoneNumber }
+     },
       {
         expand: true,
         include: ['profileImage'],
@@ -120,6 +123,9 @@ const requestSaveEmail = params => (dispatch, getState, sdk) => {
       }
     )
     .then(response => {
+      sdk.currentUser.updateProfile({
+        publicData: { emailVerified: response.data.data.attributes.emailVerified }
+      })
       const entities = denormalisedResponseEntities(response);
       if (entities.length !== 1) {
         throw new Error('Expected a resource in the sdk.currentUser.changeEmail response');

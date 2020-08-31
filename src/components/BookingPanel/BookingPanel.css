@@ -82,6 +82,8 @@
 
   margin-top: 0;
   margin-bottom: 9px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .bookingHelp {

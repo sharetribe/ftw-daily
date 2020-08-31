@@ -6,6 +6,8 @@ import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import { propTypes } from '../../util/types';
 import { ensureCurrentUser } from '../../util/data';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
+import { types as sdkTypes } from '../../util/sdkLoader';
+
 import {
   Page,
   UserNav,
@@ -21,6 +23,8 @@ import { TopbarContainer } from '../../containers';
 
 import { updateProfile, uploadImage } from './ProfileSettingsPage.duck';
 import css from './ProfileSettingsPage.css';
+
+const { LatLng } = sdkTypes;
 
 const onImageUploadHandler = (values, fn) => {
   const { id, imageId, file } = values;
@@ -43,13 +47,24 @@ export class ProfileSettingsPageComponent extends Component {
       uploadInProgress,
       intl,
     } = this.props;
-
+    
     const handleSubmit = values => {
-      const { firstName, lastName, bio: rawBio } = values;
-
+      const { firstName, lastName, bio: rawBio, location, age, licence, experience, language, drivingLicense, auto } = values;
+      
+      const publicData = {
+        location,
+        age,
+        licence,
+        experience,
+        language,
+        drivingLicense,
+        auto,
+        emailVerified: currentUser.attributes.emailVerified,
+        phoneNumber: (currentUser.attributes.profile.protectedData && currentUser.attributes.profile.protectedData.phoneNumber) || null
+      }
       // Ensure that the optional bio is a string
       const bio = rawBio || '';
-
+      
       const profile = {
         firstName: firstName.trim(),
         lastName: lastName.trim(),
@@ -62,20 +77,24 @@ export class ProfileSettingsPageComponent extends Component {
         uploadedImage && uploadedImage.imageId && uploadedImage.file
           ? { ...profile, profileImageId: uploadedImage.imageId }
           : profile;
-
-      onUpdateProfile(updatedValues);
+      
+      onUpdateProfile(updatedValues, publicData);
     };
 
     const user = ensureCurrentUser(currentUser);
     const { firstName, lastName, bio } = user.attributes.profile;
+    const { age, licence, experience, language, drivingLicense, auto, location } = user.attributes.profile.publicData;
     const profileImageId = user.profileImage ? user.profileImage.id : null;
     const profileImage = image || { imageId: profileImageId };
-
+    const geolocation = location && location.selectedPlace.origin
+    const geoLatLng = geolocation && new LatLng(geolocation.lat, geolocation.lng)
+    geolocation && geoLatLng && (location.selectedPlace.origin = geoLatLng )
+    
     const profileSettingsForm = user.id ? (
       <ProfileSettingsForm
         className={css.form}
         currentUser={currentUser}
-        initialValues={{ firstName, lastName, bio, profileImage: user.profileImage }}
+        initialValues={{ firstName, lastName, bio, profileImage: user.profileImage, age, licence, experience, language, drivingLicense, auto, location }}
         profileImage={profileImage}
         onImageUpload={e => onImageUploadHandler(e, onImageUpload)}
         uploadInProgress={uploadInProgress}
@@ -174,7 +193,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   onImageUpload: data => dispatch(uploadImage(data)),
-  onUpdateProfile: data => dispatch(updateProfile(data)),
+  onUpdateProfile: (data, publicData) => dispatch(updateProfile(data, publicData)),
 });
 
 const ProfileSettingsPage = compose(

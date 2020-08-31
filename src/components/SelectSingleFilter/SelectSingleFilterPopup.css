@@ -48,7 +48,7 @@
 .menuContent {
   margin-top: 7px;
   padding-top: 13px;
-  min-width: 300px;
+  min-width: 300px !important;
   border-radius: 4px;
 }
 

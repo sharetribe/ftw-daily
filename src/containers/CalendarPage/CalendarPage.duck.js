@@ -273,8 +273,6 @@ export const getCurrentUserIdError = e => ({
         protectedData: { schedulingData: JSON.stringify(schedulingObj) }
       }
     };
-    
-    console.log('createNewSchedulingDataTransaction ', schedulingObj)
 
     dispatch(notifyOnLoadingStart())
      
