@@ -58,7 +58,9 @@ export class ProfileSettingsPageComponent extends Component {
         experience,
         language,
         drivingLicense,
-        auto
+        auto,
+        emailVerified: currentUser.attributes.emailVerified,
+        phoneNumber: (currentUser.attributes.profile.protectedData && currentUser.attributes.profile.protectedData.phoneNumber) || null
       }
       // Ensure that the optional bio is a string
       const bio = rawBio || '';

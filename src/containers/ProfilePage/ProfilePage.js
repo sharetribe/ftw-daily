@@ -96,9 +96,10 @@ export class ProfilePageComponent extends Component {
     const hasBio = !!bio;
     const hasLocation = (publicData && publicData.location && publicData.location.search) ? publicData.location.search : null;
     const hasOtherInfo = typeof publicData === 'object' && Object.keys(publicData).length && Object.keys(publicData).filter(v => v !== 'location')//.map(v => ({ [v]: publicData[v] }))
-    
-    const emailVerified = ensuredCurrentUser.attributes.emailVerified
-    const phoneVerified = ensuredCurrentUser.attributes.profile.protectedData && ensuredCurrentUser.attributes.profile.protectedData.phoneNumber
+   
+    const publicDataPresent = profileUser.attributes.profile.publicData
+    const emailVerified =  publicDataPresent && profileUser.attributes.profile.publicData.emailVerified
+    const phoneVerified = publicDataPresent && profileUser.attributes.profile.publicData.phoneNumber
     
     const activeAndAcceptedTransactionsPresent = acceptedAndActiveTransactions && acceptedAndActiveTransactions.length
 
