@@ -6,6 +6,8 @@ import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import { propTypes } from '../../util/types';
 import { ensureCurrentUser } from '../../util/data';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
+import { types as sdkTypes } from '../../util/sdkLoader';
+
 import {
   Page,
   UserNav,
@@ -21,6 +23,8 @@ import { TopbarContainer } from '../../containers';
 
 import { updateProfile, uploadImage } from './ProfileSettingsPage.duck';
 import css from './ProfileSettingsPage.css';
+
+const { LatLng } = sdkTypes;
 
 const onImageUploadHandler = (values, fn) => {
   const { id, imageId, file } = values;
@@ -46,16 +50,7 @@ export class ProfileSettingsPageComponent extends Component {
     
     const handleSubmit = values => {
       const { firstName, lastName, bio: rawBio, location, age, licence, experience, language, drivingLicense, auto } = values;
-      if(location) {
-        if(location.predictions) {
-          delete location.predictions
-        }
-        for(let key in location) {
-          if(!location[key]) {
-            delete location[key]
-          }
-        }
-      }
+      
       const publicData = {
         location,
         age,
@@ -89,6 +84,9 @@ export class ProfileSettingsPageComponent extends Component {
     const { age, licence, experience, language, drivingLicense, auto, location } = user.attributes.profile.publicData;
     const profileImageId = user.profileImage ? user.profileImage.id : null;
     const profileImage = image || { imageId: profileImageId };
+    const geolocation = location && location.selectedPlace.origin
+    const geoLatLng = geolocation && new LatLng(geolocation.lat, geolocation.lng)
+    geolocation && geoLatLng && (location.selectedPlace.origin = geoLatLng )
     
     const profileSettingsForm = user.id ? (
       <ProfileSettingsForm
