@@ -13,7 +13,7 @@ import config from '../../config'
 import routeConfiguration from '../../routeConfiguration'
 import { pathByRouteName, findRouteByRouteName } from '../../util/routes'
 import {
-  propTypes, LINE_ITEM_NIGHT, LINE_ITEM_DAY, DATE_TYPE_DATE
+  propTypes, LINE_ITEM_NIGHT, LINE_ITEM_DAY, DATE_TYPE_DATE, LINE_ITEM_CUSTOMER_COMMISSION,
 } from '../../util/types'
 import {
   ensureListing,
@@ -526,9 +526,8 @@ export class CheckoutPageComponent extends Component {
       : undefined
 
     const pricingAdjustments = getPriceAfterDiscounts(product, bookingStart, bookingEnd)
-
     const unitPrice = productPrice
-      ? new Money(productPrice.amount * pricingAdjustments.discount, productPrice.currency)
+      ? new Money(pricingAdjustments.preDiscountUnitPrice, productPrice.currency)
       : price
 
     return {
@@ -540,7 +539,7 @@ export class CheckoutPageComponent extends Component {
           code: unitType,
           unitPrice,
           quantity,
-        },
+        }
       ],
       ...rest,
     }
@@ -641,6 +640,7 @@ export class CheckoutPageComponent extends Component {
           userRole="customer"
           unitType={config.bookingUnitType}
           transaction={tx}
+          // prediscountTx={chargeBreakdown.discount < 1 ? prediscountTx : null}
           booking={txBooking}
           dateType={DATE_TYPE_DATE}
         />

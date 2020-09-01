@@ -51,14 +51,23 @@ export const getPriceAfterDiscounts = (product, startDate, endDate) => {
     const pd = product.losDiscount.find((losd) => losd.days === losDiscountMatch.toString())
     discount = (1 - parseInt(pd.percent, 10) / 100)
   }
-  console.log(price)
+  const discountedPrice = price * discount
+  const preDiscountUnitPrice = () => {
+    return price / numberOfDaysSelected
+  }
+  const unitPrice = () => {
+    return discountedPrice / numberOfDaysSelected
+  }
   return {
     preDiscountPrice: price,
     preDiscountMoneyPrice: new Money(price, config.currencyConfig.currency),
-    price: price * discount,
-    moneyPrice: new Money(price * discount, config.currencyConfig.currency),
+    price: discountedPrice,
+    moneyPrice: new Money(discountedPrice, config.currencyConfig.currency),
     discount,
-    breakdown
+    breakdown,
+    preDiscountUnitPrice: preDiscountUnitPrice(),
+    unitPrice: unitPrice(),
+    userCommission: new Money(discountedPrice * 0.11, config.currencyConfig.currency)
   }
 }
 

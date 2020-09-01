@@ -54,6 +54,7 @@ const estimatedTransaction = (
   quantity,
   product,
   totalPrice,
+  chargeBreakdown,
   discount
 ) => {
   const now = new Date()
@@ -68,18 +69,12 @@ const estimatedTransaction = (
       ? daysBetween(bookingStart, bookingEnd)
       : quantity
 
-  const unitPriceAfterAdjustments = (up) => {
-    if (discount) {
-      return new Money(up.amount * discount, up.currency)
-    }
-    return new Money(up.amount, up.currency)
-  }
   const userCommissionAfterAdjustments = () => new Money(totalPrice.amount * 0.11, unitPrice.currency)
 
   const createStandardLineItem = () => ([{
     code: unitType,
     includeFor: ['customer', 'provider'],
-    unitPrice: unitPriceAfterAdjustments(unitPrice),
+    unitPrice: new Money(chargeBreakdown.preDiscountUnitPrice, unitPrice.currency),
     quantity: new Decimal(unitCount),
     lineTotal: totalPrice,
     reversal: false,
@@ -144,7 +139,7 @@ const estimatedTransaction = (
           code: LINE_ITEM_CUSTOMER_COMMISSION,
           includeFor: ['customer'],
           lineTotal: userCommissionAfterAdjustments(),
-          unitPrice: unitPriceAfterAdjustments(unitPrice),
+          unitPrice: chargeBreakdown.unitPrice,
           reversal: false,
         }
       ],
@@ -196,6 +191,7 @@ const EstimatedBreakdownMaybe = (props) => {
     quantity,
     product,
     chargeBreakdown.moneyPrice,
+    chargeBreakdown,
     discount
   )
 
@@ -206,7 +202,8 @@ const EstimatedBreakdownMaybe = (props) => {
     unitPrice,
     quantity,
     product,
-    chargeBreakdown.preDiscountMoneyPrice
+    chargeBreakdown.preDiscountMoneyPrice,
+    chargeBreakdown
   )
 
   return (
