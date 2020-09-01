@@ -93,7 +93,7 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-
+  overflow: hidden;
   @media (--viewportLarge) {
     flex-grow: 0;
     flex-basis: 519px;
@@ -167,6 +167,7 @@
 
 .title {
   /* Font */
+  @apply --marketPlaceTextOverflow;
   @apply --marketplaceH1FontStyles;
   color: var(--matterColor);
 
@@ -308,7 +309,8 @@
 
 .detailsTitle {
   margin-bottom: 10px;
-
+  @apply --marketPlaceTextOverflow;
+  
   @media (--viewportLarge) {
     margin-top: 17px;
     margin-bottom: 9px;

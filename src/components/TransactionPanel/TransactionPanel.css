@@ -245,7 +245,8 @@
 
 .detailCardTitle {
   margin-bottom: 10px;
-
+  @apply --marketPlaceTextOverflow;
+  
   @media (--viewportLarge) {
     margin-top: 14px;
     margin-bottom: 0;
