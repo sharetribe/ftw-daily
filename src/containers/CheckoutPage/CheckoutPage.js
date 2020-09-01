@@ -13,7 +13,12 @@ import config from '../../config'
 import routeConfiguration from '../../routeConfiguration'
 import { pathByRouteName, findRouteByRouteName } from '../../util/routes'
 import {
-  propTypes, LINE_ITEM_NIGHT, LINE_ITEM_DAY, DATE_TYPE_DATE, LINE_ITEM_CUSTOMER_COMMISSION,
+  propTypes,
+  LINE_ITEM_NIGHT,
+  LINE_ITEM_DAY,
+  DATE_TYPE_DATE,
+  LINE_ITEM_CUSTOMER_COMMISSION,
+  LINE_ITEM_EXTENDED_STAY_DISCOUNT,
 } from '../../util/types'
 import {
   ensureListing,
@@ -530,17 +535,27 @@ export class CheckoutPageComponent extends Component {
       ? new Money(pricingAdjustments.preDiscountUnitPrice, productPrice.currency)
       : price
 
+    const lineItems = [
+      {
+        code: unitType,
+        unitPrice,
+        quantity,
+      }
+    ]
+    if (pricingAdjustments.discount < 1) {
+      lineItems.push(
+        {
+          code: LINE_ITEM_EXTENDED_STAY_DISCOUNT,
+          unitPrice: pricingAdjustments.preDiscountMoneyPrice,
+          percentage: pricingAdjustments.discountPrint()
+        }
+      )
+    }
     return {
       listingId: pageData.listing.id,
       bookingStart,
       bookingEnd,
-      lineItems: [
-        {
-          code: unitType,
-          unitPrice,
-          quantity,
-        }
-      ],
+      lineItems,
       ...rest,
     }
   }

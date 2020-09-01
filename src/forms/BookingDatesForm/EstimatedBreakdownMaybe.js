@@ -34,8 +34,13 @@ import { types as sdkTypes } from '../../util/sdkLoader'
 import { dateFromLocalToAPI, nightsBetween, daysBetween } from '../../util/dates'
 import { TRANSITION_REQUEST_PAYMENT, TX_TRANSITION_ACTOR_CUSTOMER } from '../../util/transaction'
 import {
-  LINE_ITEM_DAY, LINE_ITEM_NIGHT, LINE_ITEM_UNITS, DATE_TYPE_DATE, LINE_ITEM_CUSTOMER_COMMISSION,
-} from '../../util/types'
+  LINE_ITEM_DAY,
+  LINE_ITEM_NIGHT,
+  LINE_ITEM_UNITS,
+  DATE_TYPE_DATE,
+  LINE_ITEM_CUSTOMER_COMMISSION,
+  LINE_ITEM_EXTENDED_STAY_DISCOUNT,
+} from '../../util/types';
 import { BookingBreakdown } from '../../components'
 import config from '../../config'
 
@@ -119,7 +124,7 @@ const estimatedTransaction = (
   const isSplitPayment = nightsUntilStartDate >= config.splitPaymentCapDays
   const payInTotal = () => {
     const t = new Decimal(totalPrice.amount)
-    const withCustomerCommish = t.add(t.times(0.11)).toNumber().toFixed(0)
+    const withCustomerCommish = t.add(t.times(0.11)).toNumber().toFixed(2)
     const total = new Decimal(withCustomerCommish)
     return new Money(total.toNumber(), unitPrice.currency)
   }
