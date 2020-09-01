@@ -56,7 +56,7 @@ const app = express();
 /** Mongodb */
 app.use(express.json());
 require('./mongodb');
-require('./routes')(app);
+
 const swagger = require('./swagger.js');
 
 if(dev) {
@@ -126,6 +126,9 @@ app.use('/static', express.static(path.join(buildPath, 'static')));
 // server robots.txt from the root
 app.use('/robots.txt', express.static(path.join(buildPath, 'robots.txt')));
 app.use(cookieParser());
+
+require('./routes')(app);
+
 
 // Use basic authentication when not in dev mode. This is
 // intentionally after the static middleware to skip basic auth for

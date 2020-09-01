@@ -1,4 +1,5 @@
 const Event = require('../models/event');
+const sharetribeUser = require('../middlewares/sharetribeUser');
 
 module.exports = (app) => {
 
@@ -18,7 +19,7 @@ module.exports = (app) => {
    * @property {string} ownerId
    * @property {string} acceptedTransactionId
    */
-  app.post('/api/events', async (req, res) => {
+  app.post('/api/events', sharetribeUser.isAuthorized(), async (req, res) => {
 
     try {
 
@@ -48,9 +49,10 @@ module.exports = (app) => {
    * @returns {string}  500 - Internal Server Error
    * @returns {void}  200 - Success
    */
-  app.get('/api/user/:userId/events', async (req, res) => {
+  app.get('/api/user/:userId/events', sharetribeUser.isAuthorized(),  async (req, res) => {
 
     try {
+
       const userId = req.params.userId;
       let query = {
         'start': { $gte: req.query.from, $lte: req.query.to },
@@ -79,7 +81,7 @@ module.exports = (app) => {
    * @returns {string}  404 - Not found
    * @returns {void}  200 - Success
    */
-  app.put('/api/events/:eventId', async (req, res) => {
+  app.put('/api/events/:eventId', sharetribeUser.isAuthorized(), async (req, res) => {
 
     try {
 
@@ -114,7 +116,7 @@ module.exports = (app) => {
    * @returns {string}  404 - Not found
    * @returns {void}  200 - Success
    */
-  app.get('/api/events/:eventId', async (req, res) => {
+  app.get('/api/events/:eventId', sharetribeUser.isAuthorized(), async (req, res) => {
     try {
 
       //TODO check if owner eventId
