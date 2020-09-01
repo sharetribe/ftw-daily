@@ -102,6 +102,8 @@
   /* ================ LocationAutocompleteInput bottom attribution padding ================ */
   /* Google Maps needs 72px bottom padding to accommodate logo, Mapbox doesn't have one */
   --locationAutocompleteBottomPadding: 72px;
+
+  --transactionItemMaxWidth: 550px;
   /* ================ Clearfix solution ================ */
   --clearfix {
     &::after {
@@ -109,6 +111,10 @@
       display: table;
       clear: both;
     }
+  }
+  --marketPlaceTextOverflow {
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
   /* ================ Links ================ */
   --marketplaceLinkStyles: {

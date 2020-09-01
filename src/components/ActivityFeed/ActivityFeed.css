@@ -95,6 +95,8 @@
 
 .transitionItem {
   margin-bottom: 18px;
+  max-width: var(--transactionItemMaxWidth);
+  overflow: hidden;
 
   /* Clearfix */
   @apply --clearfix;
@@ -119,6 +121,8 @@
 }
 
 .transitionContent {
+  max-width: var(--transactionItemMaxWidth);
+  @apply --marketPlaceTextOverflow;
   @apply --marketplaceTxTransitionFontStyles;
   margin: 0;
 }

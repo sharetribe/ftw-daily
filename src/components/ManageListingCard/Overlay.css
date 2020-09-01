@@ -62,6 +62,7 @@
 .message {
   max-width: 220px;
   text-align: center;
+  @apply --marketPlaceTextOverflow;
 }
 
 .errorMessage {
