@@ -63,7 +63,11 @@ export const verify = verificationToken => (dispatch, getState, sdk) => {
   // just dispatches the login error action.
   return sdk.currentUser
     .verifyEmail({ verificationToken })
-    .then(() => dispatch(verificationSuccess()))
+    .then(() => { 
+      return sdk.currentUser.updateProfile({
+        publicData: { emailVerified: true }
+      }).then(() => dispatch(verificationSuccess()))
+     })
     .then(() => dispatch(fetchCurrentUser()))
     .catch(e => dispatch(verificationError(storableError(e))));
 };
