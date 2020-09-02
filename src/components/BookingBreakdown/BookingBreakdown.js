@@ -11,7 +11,7 @@ import {
   LINE_ITEM_CUSTOMER_COMMISSION,
   LINE_ITEM_PROVIDER_COMMISSION,
 } from '../../util/types'
-import EstimatedLineItemDiscountMaybe from './EstimatedLineItemDiscountMaybe';
+import EstimatedLineItemDiscountMaybe from './EstimatedLineItemDiscountMaybe'
 
 import LineItemBookingPeriod from './LineItemBookingPeriod'
 import LineItemBasePriceMaybe from './LineItemBasePriceMaybe'
@@ -39,7 +39,9 @@ export const BookingBreakdownComponent = (props) => {
     intl,
     dateType,
     discount,
-    prediscountTx
+    prediscountTx,
+    pricingData,
+    shouldHackForCheckoutPage
   } = props
 
   const isCustomer = userRole === 'customer'
@@ -101,7 +103,14 @@ export const BookingBreakdownComponent = (props) => {
         prediscountTx ? <EstimatedLineItemDiscountMaybe transaction={prediscountTx} unitType={unitType} intl={intl} discount={discount}/> : null
       }
       {
-        prediscountTx ? null : <LineItemBasePriceMaybe transaction={transaction} unitType={unitType} intl={intl}/>
+        prediscountTx ? null
+          : <LineItemBasePriceMaybe
+            transaction={transaction}
+            unitType={unitType}
+            intl={intl}
+            pricingData={pricingData}
+            shouldHackForCheckoutPage={shouldHackForCheckoutPage}
+          />
       }
       <LineItemDiscountMaybe transaction={transaction} unitType={unitType} intl={intl} />
       <LineItemUnknownItemsMaybe transaction={transaction} intl={intl} />

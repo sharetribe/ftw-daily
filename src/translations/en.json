@@ -43,7 +43,7 @@
   "BookingBreakdown.bookingEnd": "Booking end",
   "BookingBreakdown.bookingStart": "Booking start",
   "BookingBreakdown.commission": "Service fee*",
-  "BookingBreakdown.commissionFeeNote": "* The fee helps us run the platform and provide the best possible service to you!",
+  "BookingBreakdown.commissionFeeNote": "*The service fee keeps the platform running so we can provide a safe and awesome experience for you and the community!",
   "BookingBreakdown.dayCount": "{count, number} {count, plural, one {day} other {days}}",
   "BookingBreakdown.nightCount": "{count, number} {count, plural, one {night} other {nights}}",
   "BookingBreakdown.pricePerDay": "Price per day",

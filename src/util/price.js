@@ -73,7 +73,8 @@ export const getPriceAfterDiscounts = (product, startDate, endDate) => {
     breakdown,
     preDiscountUnitPrice: preDiscountUnitPrice(),
     unitPrice: unitPrice(),
-    userCommission: new Money(discountedPrice * 0.11, config.currencyConfig.currency)
+    userCommission: new Money(discountedPrice * 0.11, config.currencyConfig.currency),
+    unitCount: numberOfDaysSelected
   }
 }
 

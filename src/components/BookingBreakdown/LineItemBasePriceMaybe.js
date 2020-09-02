@@ -10,7 +10,7 @@ const { Money } = sdkTypes
 
 const LineItemBasePriceMaybe = (props) => {
   const {
-    transaction, unitType, intl, discount
+    transaction, unitType, intl, pricingData, shouldHackForCheckoutPage
   } = props
   const isNightly = unitType === LINE_ITEM_NIGHT
   const isDaily = unitType === LINE_ITEM_DAY
@@ -31,7 +31,7 @@ const LineItemBasePriceMaybe = (props) => {
   const isEstimate = transaction.id.uuid === 'estimated-transaction'
   const isSplitPayment = !!attributes.protectedData && attributes.protectedData.linkedProcessId
 
-  const unitPrice = unitPurchase
+  let unitPrice = unitPurchase
     ? isSplitPayment && !isEstimate
       ? formatMoney(intl, new Money(unitPurchase.unitPrice.amount * 2, unitPurchase.unitPrice.currency))
       : formatMoney(intl, unitPurchase.unitPrice)
@@ -43,8 +43,13 @@ const LineItemBasePriceMaybe = (props) => {
       : formatMoney(intl, unitPurchase.lineTotal)
     : null
 
-  const quantity = unitPurchase ? unitPurchase.quantity.toString() : null
+  let quantity = unitPurchase ? unitPurchase.quantity.toString() : null
 
+  // THIS IS A HACK. WE NEED TO TAKE THIS OUT WHEN WE BRING IN THE NEW PAYMENT API
+  if (shouldHackForCheckoutPage && pricingData) {
+    quantity = pricingData.unitCount
+    unitPrice = formatMoney(intl, new Money(pricingData.preDiscountUnitPrice, unitPurchase.unitPrice.currency))
+  }
   return quantity && total ? (
     <div className={css.lineItem}>
       <span className={css.itemLabel}>

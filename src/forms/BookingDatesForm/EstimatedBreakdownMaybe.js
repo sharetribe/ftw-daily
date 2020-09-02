@@ -81,7 +81,7 @@ const estimatedTransaction = (
     includeFor: ['customer', 'provider'],
     unitPrice: new Money(chargeBreakdown.preDiscountUnitPrice, unitPrice.currency),
     quantity: new Decimal(unitCount),
-    lineTotal: totalPrice,
+    lineTotal: new Money(((chargeBreakdown.preDiscountPrice / unitCount) * unitCount), unitPrice.currency),
     reversal: false,
   }])
 
