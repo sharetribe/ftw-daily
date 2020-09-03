@@ -53,6 +53,16 @@ const cspReportUrl = '/csp-report';
 const cspEnabled = CSP === 'block' || CSP === 'report';
 const app = express();
 
+/** Mongodb */
+app.use(express.json());
+require('./mongodb');
+
+const swagger = require('./swagger.js');
+
+if(dev) {
+  swagger(app);
+}
+
 const errorPage = fs.readFileSync(path.join(buildPath, '500.html'), 'utf-8');
 
 // load sitemap and robots file structure
@@ -116,6 +126,9 @@ app.use('/static', express.static(path.join(buildPath, 'static')));
 // server robots.txt from the root
 app.use('/robots.txt', express.static(path.join(buildPath, 'robots.txt')));
 app.use(cookieParser());
+
+require('./routes')(app);
+
 
 // Use basic authentication when not in dev mode. This is
 // intentionally after the static middleware to skip basic auth for
