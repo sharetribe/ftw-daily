@@ -24,22 +24,22 @@ import css from './BookingPanel.css'
 // This defines when ModalInMobile shows content as Modal
 const MODAL_BREAKPOINT = 5000
 
-const openBookModal = (isOwnListing, isClosed, history, location) => {
-  if (isOwnListing || isClosed) {
-    window.scrollTo(0, 0)
-  } else {
-    const { pathname, search, state } = location
-    const searchString = `?${stringify({ ...parse(search), book: true })}`
-    history.push(`${pathname}${searchString}`, state)
-  }
-}
-
-const closeBookModal = (history, location) => {
-  const { pathname, search, state } = location
-  const searchParams = omit(parse(search), 'book')
-  const searchString = `?${stringify(searchParams)}`
-  history.push(`${pathname}${searchString}`, state)
-}
+// const openBookModal = (isOwnListing, isClosed, history, location) => {
+//   if (isOwnListing || isClosed) {
+//     window.scrollTo(0, 0)
+//   } else {
+//     const { pathname, search, state } = location
+//     const searchString = `?${stringify({ ...parse(search), book: true })}`
+//     history.push(`${pathname}${searchString}`, state)
+//   }
+// }
+//
+// const closeBookModal = (history, location) => {
+//   const { pathname, search, state } = location
+//   const searchParams = omit(parse(search), 'book')
+//   const searchString = `?${stringify(searchParams)}`
+//   history.push(`${pathname}${searchString}`, state)
+// }
 
 const BookingPanel = (props) => {
   const {
@@ -59,6 +59,8 @@ const BookingPanel = (props) => {
     history,
     location,
     intl,
+    openBookModal,
+    closeBookModal
   } = props
 
   const [showBookingBar, setShowBookingBar] = useState(false)
@@ -115,7 +117,7 @@ const BookingPanel = (props) => {
           id="BookingDatesFormInModal"
           isModalOpenOnMobile={isBook}
           hideBackground={true}
-          onClose={() => closeBookModal(history, location)}
+          onClose={() => closeBookModal()}
           showAsModalMaxWidth={MODAL_BREAKPOINT}
           onManageDisableScrolling={onManageDisableScrolling}
         >
@@ -160,7 +162,7 @@ const BookingPanel = (props) => {
           {showBookingDatesForm ? (
             <Button
               rootClassName={css.bookButton}
-              onClick={() => openBookModal(isOwnListing, isClosed, history, location)}
+              onClick={() => openBookModal('Pressed Request to Book')}
             >
               <FormattedMessage id="BookingPanel.ctaButtonMessage" />
             </Button>

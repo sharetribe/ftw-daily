@@ -442,6 +442,7 @@
   "ListingPage.finishListing": "Finish listing",
   "ListingPage.hostedBy": "Hosted by {name}",
   "ListingPage.loadingListingMessage": "Loading listing…",
+  "ListingPage.checkAvailability": "Check availability",
   "ListingPage.loadingListingTitle": "Loading listing…",
   "ListingPage.locationTitle": "Where you'll be",
   "ListingPage.ownClosedListing": "Your listing has been closed and can't be booked.",

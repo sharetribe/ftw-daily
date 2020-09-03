@@ -134,3 +134,44 @@
     padding-bottom: 21px;
   }
 }
+
+.ecologiContainer {
+  margin-top: 30px;
+}
+
+.dataContainer {
+  padding: 5px;
+  border-radius: 3rem;
+  border: solid 1px var(--matterColorNegative);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ecologiTree {
+  width: 50px;
+  height: 50px;
+}
+
+.ecologiCounter {
+  font-size: 28px;
+  font-weight: 400;
+  margin-left: 20px;
+  margin-right: 10px;
+}
+
+.learnMoreContainer {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.learnMoreText {
+  font-size: 12px;
+  line-height: 20px;
+  font-family: "Nunito Sans", Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+
+

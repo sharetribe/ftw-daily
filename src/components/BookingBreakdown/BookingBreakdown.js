@@ -11,6 +11,7 @@ import {
   LINE_ITEM_CUSTOMER_COMMISSION,
   LINE_ITEM_PROVIDER_COMMISSION,
 } from '../../util/types'
+import EcologiBreakdown from './EcologiBreakdownMaybe'
 import EstimatedLineItemDiscountMaybe from './EstimatedLineItemDiscountMaybe'
 
 import LineItemBookingPeriod from './LineItemBookingPeriod'
@@ -43,6 +44,8 @@ export const BookingBreakdownComponent = (props) => {
     pricingData,
     shouldHackForCheckoutPage
   } = props
+
+  console.log(props)
 
   const isCustomer = userRole === 'customer'
   const isProvider = userRole === 'provider'
@@ -91,6 +94,9 @@ export const BookingBreakdownComponent = (props) => {
    * LineItemTotalPrice: prints total price of the transaction
    *
    */
+
+  console.log(pricingData)
+  console.log(transaction)
 
   return (
     <div className={classes}>
@@ -146,12 +152,17 @@ export const BookingBreakdownComponent = (props) => {
       />
 
       <LineItemTotalPrice transaction={transaction} isProvider={isProvider} intl={intl} />
+      <EcologiBreakdown
+        transaction={transaction}
+        isProvider={isProvider}
+      />
 
       {hasCommissionLineItem ? (
         <span className={css.feeInfo}>
           <FormattedMessage id="BookingBreakdown.commissionFeeNote" />
         </span>
       ) : null}
+
     </div>
   )
 }

@@ -636,6 +636,8 @@ export class CheckoutPageComponent extends Component {
       currentAuthor.id &&
       currentAuthor.id.uuid === currentUser.id.uuid
 
+    console.log(isOwnListing)
+
     const hasListingAndAuthor = !!(currentListing.id && currentAuthor.id)
     const hasBookingDates = !!(
       bookingDates &&

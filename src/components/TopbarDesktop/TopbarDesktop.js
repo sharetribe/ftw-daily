@@ -139,7 +139,7 @@ const TopbarDesktop = (props) => {
       <NamedLink
         className={css.logoLink}
         name="LandingPage"
-        nakedUrl={'https://coworksurf.com'}
+        nakedUrl={'https://coliving.coworksurf.com/s?address=All%20spaces&bounds=73.46208358%2C164.8013874%2C-71.51673116%2C-126.10770763'}
       >
         <Logo
           format="desktop"

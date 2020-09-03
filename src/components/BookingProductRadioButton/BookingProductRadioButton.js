@@ -6,6 +6,7 @@ import { Field } from 'react-final-form'
 import FaceIcon from '@material-ui/icons/Face'
 import get from 'lodash/get'
 import find from 'lodash/find'
+import { trackEvent } from '../../util/analytics';
 import { lazyLoadWithDimensions } from '../../util/contextHelpers';
 import {
   formatMoney, convertMoneyToNumber, convertUnitToSubUnit, unitDivisor
@@ -129,7 +130,7 @@ const BookingProductRadioButtonComponent = (props) => {
   const required = (value) => (value ? undefined : 'Select a room')
 
   return (
-    <span className={classes}>
+    <span className={classes} onClick={() => trackEvent('Booking Panel', 'Clicked Product Button')}>
       <Field
         {...radioButtonProps}
         validate={required}

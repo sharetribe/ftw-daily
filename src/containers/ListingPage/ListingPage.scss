@@ -955,3 +955,18 @@
     justify-content: center;
   }
 }
+
+.bookButtonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 100px 0;
+}
+
+.bookButton {
+  @apply --marketplaceButtonStylesPrimary;
+
+  /* Clear padding that is set for link elements looking like buttons */
+  padding: 0;
+  max-width: 200px;
+}

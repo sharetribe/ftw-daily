@@ -49,7 +49,6 @@ const Map = (props) => {
   }
 
   const location = mapsConfig.fuzzy.enabled ? obfuscatedCenter : center
-  console.log(staticMap)
   return !isMapsLibLoaded() ? (
     <div className={classes} />
   ) : staticMap ? (

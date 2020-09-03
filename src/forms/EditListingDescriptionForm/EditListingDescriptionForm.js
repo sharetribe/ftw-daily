@@ -119,7 +119,7 @@ const EditListingDescriptionFormComponent = (props) => (
           <Paper className={css.paperSection}>
             <Grid container className={classes.root} direction="column" spacing={5}>
               <Grid item xs={12}>
-                <h3 className={css.sectionTitle}>The Big Hello</h3>
+                <h3 className={css.sectionTitle}>Header Image and Welcome Message</h3>
                 <p className={css.sectionSubtitle}>This image and text will be the first thing travelers will see</p>
               </Grid>
               <Grid item xs={12}>

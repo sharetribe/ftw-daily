@@ -7,20 +7,25 @@ import { compose } from 'redux'
 import get from 'lodash/get'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import omit from 'lodash/omit'
+import Button from '../../components/Button/Button'
+import { initAnalytics, trackEvent } from '../../util/analytics';
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl'
 import config from '../../config'
 import routeConfiguration from '../../routeConfiguration'
 import { LISTING_STATE_PENDING_APPROVAL, LISTING_STATE_CLOSED, propTypes } from '../../util/types'
 import { priceRangeData, priceData } from '../../util/pricing'
-
-import { types as sdkTypes } from '../../util/sdkLoader'
 import {
+  parse, stringify,
   LISTING_PAGE_DRAFT_VARIANT,
   LISTING_PAGE_PENDING_APPROVAL_VARIANT,
   LISTING_PAGE_PARAM_TYPE_DRAFT,
   LISTING_PAGE_PARAM_TYPE_EDIT,
   createSlug,
 } from '../../util/urlHelpers'
+
+import { types as sdkTypes } from '../../util/sdkLoader'
+
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes'
 import {
   ensureListing,
@@ -93,6 +98,12 @@ export class ListingPageComponent extends Component {
     this.onSubmitEnquiry = this.onSubmitEnquiry.bind(this)
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (!prevProps.currentUser && this.props.currentUser) {
+      initAnalytics(this.props.currentUser.id.uuid)
+    }
+  }
+
   handleSubmit(values) {
     const {
       history,
@@ -150,6 +161,7 @@ export class ListingPageComponent extends Component {
       // signup and return back to listingPage.
       history.push(createResourceLocatorString('SignupPage', routeConfiguration(), {}, {}), state)
     } else {
+      trackEvent('ListingPage', 'Pressed Contact User')
       this.setState({ enquiryModalOpen: true })
     }
   }
@@ -194,6 +206,7 @@ export class ListingPageComponent extends Component {
       timeSlots,
       fetchTimeSlotsError,
       categoriesConfig,
+      history,
       amenitiesConfig,
     } = this.props
 
@@ -374,25 +387,6 @@ export class ListingPageComponent extends Component {
       { title, price: formattedPrice, siteTitle }
     )
 
-    const hostLink = (
-      <NamedLink
-        className={css.authorNameLink}
-        name="ListingPage"
-        params={params}
-        to={{ hash: '#host' }}
-      >
-        {authorDisplayName}
-      </NamedLink>
-    )
-
-    const category
-      = publicData && publicData.category ? (
-        <span>
-          {categoryLabel(categoriesConfig, publicData.category)}
-          <span className={css.separator}>•</span>
-        </span>
-      ) : null
-
     const retreat
       = publicData && publicData.retreat && publicData.retreat.accepted ? (
         <>
@@ -405,6 +399,25 @@ export class ListingPageComponent extends Component {
       = publicData && (publicData.wifi || get(publicData, 'coworking.wifi')) ? (
         <span className={css.tag}><IconNetwork />{`${publicData.wifi || get(publicData, 'coworking.wifi')} Mbit`}</span>
       ) : null
+
+    const openBookModal = (eventName) => {
+      if (isOwnListing) {
+        window.scrollTo(0, 0)
+      } else {
+        const { pathname, search, state } = location
+        const searchString = `?${stringify({ ...parse(search), book: true })}`
+        history.push(`${pathname}${searchString}`, state)
+      }
+      trackEvent('ListingPage', eventName)
+    }
+
+    const closeBookModal = () => {
+      const { pathname, search, state } = location
+      const searchParams = omit(parse(search), 'book')
+      const searchString = `?${stringify(searchParams)}`
+      history.push(`${pathname}${searchString}`, state)
+      trackEvent('ListingPage', 'Closed Booking Modal')
+    }
 
     return (
       <Page
@@ -441,19 +454,19 @@ export class ListingPageComponent extends Component {
                 handleViewPhotosClick={handleViewPhotosClick}
               />
               <div className={css.contentContainer}>
-                {/*<SectionAvatar user={currentAuthor} params={params} />*/}
+                {/* <SectionAvatar user={currentAuthor} params={params} /> */}
                 <div className={css.mainContent}>
-                  {/*<SectionHeading*/}
-                  {/*  priceTitle={priceTitle}*/}
-                  {/*  formattedPrice={formattedPrice}*/}
-                  {/*  richTitle={richTitle}*/}
-                  {/*  category={category}*/}
-                  {/*  hostLink={hostLink}*/}
-                  {/*  showContactUser={showContactUser}*/}
-                  {/*  onContactUser={this.onContactUser}*/}
-                  {/*  retreat={retreat}*/}
-                  {/*  wifi={wifi}*/}
-                  {/*/>*/}
+                  {/* <SectionHeading */}
+                  {/*  priceTitle={priceTitle} */}
+                  {/*  formattedPrice={formattedPrice} */}
+                  {/*  richTitle={richTitle} */}
+                  {/*  category={category} */}
+                  {/*  hostLink={hostLink} */}
+                  {/*  showContactUser={showContactUser} */}
+                  {/*  onContactUser={this.onContactUser} */}
+                  {/*  retreat={retreat} */}
+                  {/*  wifi={wifi} */}
+                  {/* /> */}
                   <SectionWelcomeMaybe
                     publicData={publicData}
                   />
@@ -473,6 +486,14 @@ export class ListingPageComponent extends Component {
                     images={currentListing.images}
                     metadata={metadata}
                   />
+                  <div className={css.bookButtonContainer}>
+                    <Button
+                      rootClassName={css.bookButton}
+                      onClick={() => openBookModal('Pressed Check Availability')}
+                    >
+                      <FormattedMessage id="ListingPage.checkAvailability" />
+                    </Button>
+                  </div>
                   {/* <SectionCommunityMaybe publicData={publicData} /> */}
                   <SectionMapMaybe
                     geolocation={geolocation}
@@ -480,7 +501,7 @@ export class ListingPageComponent extends Component {
                     listingId={currentListing.id}
                     metadata={metadata}
                   />
-                  { publicData.location && publicData.location.video
+                  {publicData.location && publicData.location.video
                     ? <>
                       <h2 className={css.descriptionTitle}>About the location</h2>
                       <SectionVideoMaybe video={publicData.location.video} />
@@ -530,6 +551,8 @@ export class ListingPageComponent extends Component {
                   authorDisplayName={authorDisplayName}
                   onManageDisableScrolling={onManageDisableScrolling}
                   timeSlots={timeSlots}
+                  openBookModal={openBookModal}
+                  closeBookModal={closeBookModal}
                   fetchTimeSlotsError={fetchTimeSlotsError}
                 />
               </div>
