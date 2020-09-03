@@ -348,6 +348,7 @@
 .stateSucces {
   font-weight: var(--fontWeightSemiBold);
   color: var(--successColor);
+  text-align: right;
 }
 
 .nameEmphasized {

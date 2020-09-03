@@ -5,7 +5,11 @@ import { types as sdkTypes } from '../../util/sdkLoader';
 import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { denormalisedResponseEntities } from '../../util/data';
-import { TRANSITION_ENQUIRE } from '../../util/transaction';
+import { 
+  TRANSITION_ENQUIRE,
+  TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY,
+  TRANSITION_CONFIRM_PAYMENT
+} from '../../util/transaction';
 import {
   LISTING_PAGE_DRAFT_VARIANT,
   LISTING_PAGE_PENDING_APPROVAL_VARIANT,
@@ -246,14 +250,38 @@ export const fetchTimeSlots = listingId => (dispatch, getState, sdk) => {
     });
 };
 
-export const sendEnquiry = (listingId, message) => (dispatch, getState, sdk) => {
+export const sendEnquiry = (listingId, message) => async (dispatch, getState, sdk) => {
   
   dispatch(sendEnquiryRequest());
 
   const customerData = {
-    // id of currentUser
-    email: getState().user.currentUser.attributes.email,
+    userUUID: getState().user.currentUser.id.uuid,
     name: getState().user.currentUser.attributes.profile.displayName
+  }
+  
+  const { uuid } = listingId
+  const enquiriedDataFieldExists = !!getState().user.currentUser.attributes.profile.protectedData.enquiriedData
+  const enquiriedData = enquiriedDataFieldExists ? getState().user.currentUser.attributes.profile.protectedData.enquiriedData : {}
+  const listingUUIDExists = enquiriedDataFieldExists && enquiriedData[uuid]
+  const transactionUUIDExists = listingUUIDExists && listingUUIDExists.transactionId
+  const transactionId = transactionUUIDExists && new UUID(transactionUUIDExists)
+
+  if(transactionId) {
+    const lastTransitionExists = await sdk.transactions.show({ id: transactionId })
+    const lastTransition = lastTransitionExists.data.data.attributes.lastTransition
+    
+    const lastTransitionInitialStage = lastTransition &&
+      (lastTransition === TRANSITION_ENQUIRE ||
+        lastTransition === TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY ||
+        lastTransition === TRANSITION_CONFIRM_PAYMENT)
+  
+    if(lastTransitionInitialStage) { 
+      return sdk.messages.send({ transactionId, content: message }).then(() => {
+        dispatch(sendEnquirySuccess());
+        dispatch(fetchCurrentUserHasOrdersSuccess(true));
+        return transactionId;
+      });
+    }
   }
 
   const bodyParams = {
@@ -266,21 +294,32 @@ export const sendEnquiry = (listingId, message) => (dispatch, getState, sdk) => 
   };
 
   return sdk.transactions
-    .initiate(bodyParams)
-    .then(response => {
-      const transactionId = response.data.data.id;
+  .initiate(bodyParams)
+  .then( async response => {
+    const transactionId = response.data.data.id;
 
-      // Send the message to the created transaction
-      return sdk.messages.send({ transactionId, content: message }).then(() => {
-        dispatch(sendEnquirySuccess());
-        dispatch(fetchCurrentUserHasOrdersSuccess(true));
-        return transactionId;
-      });
+    const requestedListings = { 
+      ...enquiriedData,
+      [uuid]: { transactionId: transactionId.uuid }
+    }
+    
+    await sdk.currentUser.updateProfile({
+      protectedData: {
+        enquiriedData: requestedListings
+      }
     })
-    .catch(e => {
-      dispatch(sendEnquiryError(storableError(e)));
-      throw e;
-    });
+
+    await sdk.messages.send({ transactionId, content: message })
+
+    dispatch(sendEnquirySuccess());
+    dispatch(fetchCurrentUserHasOrdersSuccess(true));
+    return transactionId
+  })
+  .catch(e => {
+    dispatch(sendEnquiryError(storableError(e)));
+    throw e;
+  });
+ 
 };
 
 export const loadData = (params, search) => dispatch => {

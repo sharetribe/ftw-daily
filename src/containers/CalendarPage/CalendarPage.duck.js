@@ -9,8 +9,6 @@ import { types as sdkTypes } from '../../util/sdkLoader';
 const { UUID } = sdkTypes;
 
 
-export const GET_CURRENT_USER_EMAIL = 'app/CalendarPage/GET_CURRENT_USER_EMAIL';
-
 export const GET_CURRENT_USER_ID = 'app/CalendarPage/GET_CURRENT_USER_ID';
 export const GET_CURRENT_USER_ID_ERROR = 'app/CalendarPage/GET_CURRENT_USER_ID_ERROR';
 
@@ -29,8 +27,6 @@ export const NOTIFY_ON_LOADING_START = 'app/CalendarPage/NOTIFY_ON_LOADING_START
 export const NOTIFY_ON_LOADING_END = 'app/CalendarPage/NOTIFY_ON_LOADING_END';
 
 const initialState = {
-    currentUserEmail: null,
-
     currentUserId: null,
     currentUserIdError: null,
 
@@ -49,11 +45,6 @@ const CalendarPageReducer = (state = initialState, action = {}) => {
   const { type, payload } = action;
 
   switch (type) {
-    case GET_CURRENT_USER_EMAIL:
-      return {
-          ...state,
-          currentUserEmail: payload,
-      };
       case GET_CURRENT_USER_ID:
         return {
             ...state,
@@ -123,11 +114,6 @@ export const getCurrentUserId = data => ({
   payload: data
 });
 
-export const getCurrentUserEmail = data => ({
-  type: GET_CURRENT_USER_EMAIL,
-  payload: data
-});
-
 export const getCurrentUserIdError = e => ({
   type: GET_CURRENT_USER_ID_ERROR,
   payload: e
@@ -173,20 +159,16 @@ export const getCurrentUserIdError = e => ({
   export const notifyOnLoadingEnd = () => ({
     type: NOTIFY_ON_LOADING_END
   })
+  
 // ================ Thunks ================ //
-
- //"transition/accept","transition/complete", "transition/expire-review-period", "transition/customer-notifies-on-time-scheduling-1"
-
 
   export const getAcceptedAndActiveTransactionsData = _ => (dispatch, getState, sdk) => {
     return sdk.currentUser.show()
     .then(response => {
       const currentUserId = response.data.data.id.uuid 
-      const currentUserEmail = response.data.data.attributes.email // unnecessary should be handled by user id
 
       if(currentUserId) {
         dispatch(getCurrentUserId(currentUserId))
-        dispatch(getCurrentUserEmail(currentUserEmail))
 
         return sdk.transactions.query({lastTransitions: ["transition/accept"]})
         .then(response => { 
@@ -208,11 +190,13 @@ export const getCurrentUserIdError = e => ({
 
   export const getAcceptedTransactionSchedulingData = acceptedTransaction => (dispatch, getState, sdk) => {
     const id = acceptedTransaction.id.uuid
-    const customerData = JSON.parse(acceptedTransaction.attributes.protectedData.customerData)
-    const providerData = JSON.parse(acceptedTransaction.attributes.protectedData.providerData)
+    const protectedDataField = acceptedTransaction.attributes.protectedData
+    
+    const customerData = typeof protectedDataField.customerData === 'string' ? JSON.parse(protectedDataField.customerData) : protectedDataField.customerData
+    const providerData = typeof protectedDataField.providerData === 'string' ? JSON.parse(protectedDataField.providerData) : protectedDataField.providerData
     // only customer of the transaction should be able to change and appoint time
-    const currentUserEmail = customerData.email // has to be change to id
-    const currentUserIsTransactionCustomer =  currentUserEmail === getState().CalendarPage.currentUserEmail // has to be change to id
+    const currentUserUUID = customerData.userUUID 
+    const currentUserIsTransactionCustomer =  currentUserUUID === getState().CalendarPage.currentUserId // has to be change to id 
     
     const price = providerData.listingData.price
     const numberOfDays = Math.round(acceptedTransaction.attributes.payinTotal.amount / price)
