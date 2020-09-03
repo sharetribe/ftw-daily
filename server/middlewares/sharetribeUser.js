@@ -5,7 +5,7 @@ let isAuthorized = () => {
   return async (req, res, next) => {
 
     // TODO: Uncomment later
-    return next();
+    // return next();
 
     try {
       let authInfo = await sdk.getSdk(req, res).authInfo();

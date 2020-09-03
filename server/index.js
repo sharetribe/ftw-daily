@@ -16,6 +16,8 @@
 // This enables nice stacktraces from the minified production bundle
 require('source-map-support').install();
 
+require('dotenv').config()
+
 // Configure process.env with .env.* files
 require('./env').configureEnv();
 
