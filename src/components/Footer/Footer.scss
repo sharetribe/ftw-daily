@@ -58,6 +58,7 @@
 /* Mobile only social media links */
 .someLinksMobile {
   margin-bottom: 24px;
+  text-align: center;
 
   @media (--viewportMedium) {
     display: none;
@@ -160,6 +161,7 @@
 .list {
   margin-top: 0;
   margin-bottom: 0;
+  text-align: center;
 }
 
 .listItem {
@@ -336,3 +338,40 @@
   height: 50px;
   width: 100px;
 }
+
+.ecologiContainer {
+  margin-top: 30px;
+  width: 85vw;
+  @media (--viewportMedium) {
+    width: 100%;
+  }
+}
+
+.dataContainer {
+  padding: 5px;
+  border-radius: 3rem;
+  border: solid 1px var(--matterColorNegative);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ecologiTree {
+  width: 50px;
+  height: 50px;
+}
+
+.ecologiCounter {
+  font-size: 28px;
+  font-weight: 400;
+  margin-left: 20px;
+  margin-right: 10px;
+}
+
+.learnMoreText {
+  font-size: 12px;
+  line-height: 20px;
+  font-family: "Nunito Sans", Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+

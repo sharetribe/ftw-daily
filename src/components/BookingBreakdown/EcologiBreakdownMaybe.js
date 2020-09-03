@@ -31,7 +31,7 @@ const EcologiBreakdown = ({ transaction, isProvider }) => {
                 `${isProvider ? 'This' : 'Your'} booking will plant ${defaultTo(trees, 1).toFixed(0)} trees`
               }
               <br/>
-              <a href="" style={{ textDecoration: 'underline' }}>Learn more</a> about our partnership with Ecologi.
+              <a href="https://ecologi.com/coworksurf" target="_blank" style={{ textDecoration: 'underline' }}>Learn more</a> about our partnership with Ecologi.
             </p>
           </Grid>
         </Grid>

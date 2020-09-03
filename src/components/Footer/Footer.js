@@ -14,6 +14,7 @@ import {
 } from '..'
 
 import { IconOnePercent } from '../../assets/IconOnePercent';
+import EcologiFooter from './EcologiFooter';
 
 
 import css from './Footer.css'
@@ -110,16 +111,18 @@ const Footer = (props) => {
                 {/*  </NamedLink> */}
                 {/* </li> */}
               </ul>
-              <a href="https://www.onepercentfortheplanet.org/">
-                <IconOnePercent className={css.onePercentLogoMobile}/>
-              </a>
+              <EcologiFooter />
+              {/*<a href="https://www.onepercentfortheplanet.org/">*/}
+              {/*  <IconOnePercent className={css.onePercentLogoMobile}/>*/}
+              {/*</a>*/}
             </div>
 
             <div className={css.extraLinks}>
               <div className={css.someLinks}>{socialMediaLinks}</div>
-              <a href="https://www.onepercentfortheplanet.org/">
-                <IconOnePercent className={css.onePercentLogo}/>
-              </a>
+              {/*<EcologiFooter />*/}
+              {/*<a href="https://www.onepercentfortheplanet.org/">*/}
+              {/*  <IconOnePercent className={css.onePercentLogo}/>*/}
+              {/*</a>*/}
               <div className={css.legalMatters}>
                 <ul className={css.tosAndPrivacy}>
                   <li>
