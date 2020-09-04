@@ -41,7 +41,7 @@ class FullCalendarWrapper extends Component {
 
       render() {
         const {appIsMounted } = this.state
-        const {header, defaultView, selectable, editable, events, eventClick, select, eventDrop, eventResize} = this.props
+        const {header, defaultView, selectable, editable, events, eventClick, select, eventDrop, eventResize, datesRender } = this.props
         const componentCheck = FullCalendar && dayGridPlugin && interactionPlugin && timeGridPlugin && listPlugin
         
         if(!appIsMounted) return null
@@ -59,11 +59,11 @@ class FullCalendarWrapper extends Component {
                     select={select}
                     eventDrop={eventDrop}
                     eventResize={eventResize}
+                    datesRender={obj => datesRender(obj) }
                     selectOverlap={false}
                     eventOverlap={false}
                     firstDay={1}
                     locale={'de'}
-                    //dayNamesShort={['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So']}
                 />}
             </div>
         )
