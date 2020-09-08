@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditListingPhotosForm matches snapshot 1`] = `
+<ReactFinalForm
+  disabled={false}
+  dispatch={[Function]}
+  fetchErrors={null}
+  imageUploadRequested={false}
+  images={Array []}
+  initialValues={
+    Object {
+      "images": Array [],
+    }
+  }
+  intl={
+    Object {
+      "formatDate": [Function],
+      "formatHTMLMessage": [Function],
+      "formatMessage": [Function],
+      "formatNumber": [Function],
+      "formatPlural": [Function],
+      "formatRelativeTime": [Function],
+      "formatTime": [Function],
+      "now": [Function],
+    }
+  }
+  onImageUpload={[Function]}
+  onImageUploadHandler={[Function]}
+  onRemoveImage={[Function]}
+  onSubmit={[Function]}
+  onUpdateImageOrder={[Function]}
+  ready={false}
+  render={[Function]}
+  saveActionMsg="Save photos"
+  stripeConnected={false}
+  updateInProgress={false}
+  updated={false}
+/>
+`;

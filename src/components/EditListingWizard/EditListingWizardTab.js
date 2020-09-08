@@ -10,10 +10,15 @@ import {
 import { ensureListing } from '../../util/data'
 import { createResourceLocatorString } from '../../util/routes'
 import {
+  EditListingAudioPanel,
+  EditListingPaymentPanel,
+  EditListingAboutThisServicePanel,
+  EditListingAboutYouPanel,
   EditListingAvailabilityPanel,
   EditListingServiceTypePanel,
   EditListingFeaturesPanel,
   EditListingPhotosPanel,
+  EditListingTermsOfUsePanel,
   EditListingPoliciesPanel,
   EditListingPricingPanel,
 } from '../../components'
@@ -21,22 +26,32 @@ import {
 import css from './EditListingWizard.css'
 
 export const AVAILABILITY = 'availability'
+export const PAYMENT = 'payment'
 export const SERVICETYPE = 'serviceType'
 export const FEATURES = 'features'
 export const POLICY = 'policy'
 export const PRICING = 'pricing'
 export const PHOTOS = 'photos'
 export const INSTRUMENT = 'instrument'
+export const AUDIO = 'audio'
+export const ABOUTYOU = 'aboutYou'
+export const ABOUTTHISSERVICE = 'aboutThisService'
+export const TERMSOFUSE = 'termsOfUse'
 
 // EditListingWizardTab component supports these tabs
 export const SUPPORTED_TABS = [
   SERVICETYPE,
   PRICING,
+  ABOUTYOU,
+  ABOUTTHISSERVICE,
+  AUDIO,
+  PHOTOS,
+  PAYMENT,
   FEATURES,
   POLICY,
   AVAILABILITY,
-  PHOTOS,
   INSTRUMENT,
+  TERMSOFUSE,
 ]
 
 const pathParamsToNextTab = (params, tab, marketplaceTabs) => {
@@ -157,6 +172,36 @@ const EditListingWizardTab = (props) => {
   }
 
   switch (tab) {
+    case PAYMENT: {
+      const submitButtonTranslationKey = isNewListingFlow
+        ? 'EditListingWizard.saveNewPayment'
+        : 'EditListingWizard.saveEditPayment'
+      return (
+        <EditListingPaymentPanel
+          {...panelProps(PAYMENT)}
+          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          onSubmit={(values) => {
+            console.log(values)
+            onCompleteEditListingWizardTab(tab, values)
+          }}
+        />
+      )
+    }
+    case ABOUTTHISSERVICE: {
+      const submitButtonTranslationKey = isNewListingFlow
+        ? 'EditListingWizard.saveNewAboutThisService'
+        : 'EditListingWizard.saveEditAboutThisService'
+      return (
+        <EditListingAboutThisServicePanel
+          {...panelProps(ABOUTTHISSERVICE)}
+          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          onSubmit={(values) => {
+            console.log(values)
+            onCompleteEditListingWizardTab(tab, values)
+          }}
+        />
+      )
+    }
     case SERVICETYPE: {
       const submitButtonTranslationKey = isNewListingFlow
         ? 'EditListingWizard.saveNewServiceType'
@@ -166,6 +211,22 @@ const EditListingWizardTab = (props) => {
           {...panelProps(SERVICETYPE)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={(values) => {
+            console.log(values)
+            onCompleteEditListingWizardTab(tab, values)
+          }}
+        />
+      )
+    }
+    case ABOUTYOU: {
+      const submitButtonTranslationKey = isNewListingFlow
+        ? 'EditListingWizard.saveNewAboutYou'
+        : 'EditListingWizard.saveEditAboutYou'
+      return (
+        <EditListingAboutYouPanel
+          {...panelProps(ABOUTYOU)}
+          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          onSubmit={(values) => {
+            console.log(values)
             onCompleteEditListingWizardTab(tab, values)
           }}
         />
@@ -199,6 +260,20 @@ const EditListingWizardTab = (props) => {
         />
       )
     }
+    case TERMSOFUSE: {
+      const submitButtonTranslationKey = isNewListingFlow
+        ? 'EditListingWizard.saveNewTermsOfUse'
+        : 'EditListingWizard.saveEditTermsOfUse'
+      return (
+        <EditListingTermsOfUsePanel
+          {...panelProps(TERMSOFUSE)}
+          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          onSubmit={(values) => {
+            onCompleteEditListingWizardTab(tab, values)
+          }}
+        />
+      )
+    }
     case PRICING: {
       const submitButtonTranslationKey = isNewListingFlow
         ? 'EditListingWizard.saveNewPricing'
@@ -208,6 +283,7 @@ const EditListingWizardTab = (props) => {
           {...panelProps(PRICING)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={(values) => {
+            console.log(values)
             onCompleteEditListingWizardTab(tab, values)
           }}
         />
@@ -236,6 +312,25 @@ const EditListingWizardTab = (props) => {
       return (
         <EditListingPhotosPanel
           {...panelProps(PHOTOS)}
+          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          images={images}
+          onImageUpload={onImageUpload}
+          onRemoveImage={onRemoveImage}
+          onSubmit={(values) => {
+            onCompleteEditListingWizardTab(tab, values)
+          }}
+          onUpdateImageOrder={onUpdateImageOrder}
+        />
+      )
+    }
+    case AUDIO: {
+      const submitButtonTranslationKey = isNewListingFlow
+        ? 'EditListingWizard.saveNewAudio'
+        : 'EditListingWizard.saveEditAudio'
+
+      return (
+        <EditListingAudioPanel
+          {...panelProps(AUDIO)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           images={images}
           onImageUpload={onImageUpload}

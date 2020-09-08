@@ -19,13 +19,18 @@ import { Modal, NamedRedirect, Tabs, StripeConnectAccountStatusBox } from '../..
 import { StripeConnectAccountForm } from '../../forms'
 
 import EditListingWizardTab, {
+  AUDIO,
   AVAILABILITY,
   SERVICETYPE,
+  ABOUTYOU,
   FEATURES,
   POLICY,
   PRICING,
   PHOTOS,
+  ABOUTTHISSERVICE,
   INSTRUMENT,
+  PAYMENT,
+  TERMSOFUSE,
 } from './EditListingWizardTab'
 import css from './EditListingWizard.css'
 
@@ -39,11 +44,12 @@ const availabilityMaybe = config.enableAvailability ? [AVAILABILITY] : []
 export const TABS = [
   SERVICETYPE,
   PRICING,
-  FEATURES,
-  POLICY,
-  ...availabilityMaybe,
+  ABOUTYOU,
+  ABOUTTHISSERVICE,
   PHOTOS,
-  INSTRUMENT,
+  AUDIO,
+  PAYMENT,
+  TERMSOFUSE,
 ]
 
 // Tabs are horizontal in small screens
@@ -56,18 +62,22 @@ const tabLabel = (intl, tab) => {
   let key = null
   if (tab === SERVICETYPE) {
     key = 'EditListingWizard.tabLabelServiceType'
-  } else if (tab === FEATURES) {
-    key = 'EditListingWizard.tabLabelFeatures'
+  } else if (tab === ABOUTYOU) {
+    key = 'EditListingWizard.tabLabelAboutYou'
+  } else if (tab === ABOUTTHISSERVICE) {
+    key = 'EditListingWizard.tabLabelAboutThisService'
+  } else if (tab === AUDIO) {
+    key = 'EditListingWizard.tabLabelAudio'
   } else if (tab === POLICY) {
     key = 'EditListingWizard.tabLabelPolicy'
   } else if (tab === PRICING) {
     key = 'EditListingWizard.tabLabelPricing'
-  } else if (tab === AVAILABILITY) {
-    key = 'EditListingWizard.tabLabelAvailability'
+  } else if (tab === PAYMENT) {
+    key = 'EditListingWizard.tabLabelPayment'
   } else if (tab === PHOTOS) {
     key = 'EditListingWizard.tabLabelPhotos'
-  } else if (tab === INSTRUMENT) {
-    key = 'EditListingWizard.tabLabelInstrument'
+  } else if (tab === TERMSOFUSE) {
+    key = 'EditListingWizard.tabLabelTermsOfUse'
   }
 
   return intl.formatMessage({ id: key })
@@ -90,6 +100,26 @@ const tabCompleted = (tab, listing) => {
       return !!(title)
     case PRICING:
       return !!price
+    // TODO: Write validation
+    case AUDIO:
+      return true
+      // return !!price
+    // TODO: Write validation
+    case ABOUTYOU:
+      return true
+      // return !!price
+    // TODO: Write validation
+    case ABOUTTHISSERVICE:
+      return true
+      // return !!price
+    // TODO: Write validation
+    case PAYMENT:
+      return true
+      // return !!price
+    // TODO: Write validation
+    case TERMSOFUSE:
+      return true
+      // return !!price
     case FEATURES:
       return !!(publicData && publicData.amenities)
     case POLICY:

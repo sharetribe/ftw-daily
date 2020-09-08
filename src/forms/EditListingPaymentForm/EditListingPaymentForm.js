@@ -9,13 +9,13 @@ import { LINE_ITEM_NIGHT, LINE_ITEM_DAY, propTypes } from '../../util/types'
 import * as validators from '../../util/validators'
 import { formatMoney } from '../../util/currency'
 import { types as sdkTypes } from '../../util/sdkLoader'
-import { Button, Form, FieldCurrencyInput } from '../../components'
-import css from './EditListingPricingForm.css'
-import pricingOptions from '../../util/pricingOptions'
+import { Button, Form, FieldCurrencyInput, FieldTextInput } from '../../components'
+import css from './EditListingPaymentForm.css'
+import { composeValidators, required } from '../../util/validators'
 
 const { Money } = sdkTypes
 
-export const EditListingPricingFormComponent = (props) => {
+export const EditListingPaymentFormComponent = (props) => {
   return (< FinalForm
       {...
         props
@@ -41,29 +41,29 @@ export const EditListingPricingFormComponent = (props) => {
         const isDaily = unitType === LINE_ITEM_DAY
 
         const translationKey = isNightly
-          ? 'EditListingPricingForm.pricePerNight'
+          ? 'EditListingPaymentForm.pricePerNight'
           : isDaily
-            ? 'EditListingPricingForm.pricePerDay'
-            : 'EditListingPricingForm.pricePerUnit'
+            ? 'EditListingPaymentForm.pricePerDay'
+            : 'EditListingPaymentForm.pricePerUnit'
 
         const pricePerUnitMessage = intl.formatMessage({
           id: translationKey,
         })
 
         const pricePlaceholderMessage = intl.formatMessage({
-          id: 'EditListingPricingForm.priceInputPlaceholder',
+          id: 'EditListingPaymentForm.priceInputPlaceholder',
         })
 
         const priceRequired = validators.required(
           intl.formatMessage({
-            id: 'EditListingPricingForm.priceRequired',
+            id: 'EditListingPaymentForm.priceRequired',
           }),
         )
         const minPrice = new Money(config.listingMinimumPriceSubUnits, config.currency)
         const minPriceRequired = validators.moneySubUnitAmountAtLeast(
           intl.formatMessage(
             {
-              id: 'EditListingPricingForm.priceTooLow',
+              id: 'EditListingPaymentForm.priceTooLow',
             },
             {
               minPrice: formatMoney(intl, minPrice),
@@ -81,33 +81,48 @@ export const EditListingPricingFormComponent = (props) => {
         const submitDisabled = invalid || disabled || submitInProgress
         const { updateListingError, showListingsError } = fetchErrors || {}
 
-        const priceOptionFields = pricingOptions[serviceType]
+        const questionATitle = intl.formatMessage({ id: 'EditListingPaymentForm.questionATitle' })
+        const questionATitlePlaceholderMessage = intl.formatMessage({
+          id: 'EditListingPaymentForm.questionATitlePlaceholder',
+        })
+        const questionBTitle = intl.formatMessage({ id: 'EditListingPaymentForm.questionBTitle' })
+        const questionBTitlePlaceholderMessage = intl.formatMessage({
+          id: 'EditListingPaymentForm.questionBTitlePlaceholder',
+        })
 
         return (
           <Form onSubmit={handleSubmit} className={classes}>
             {updateListingError ? (
               <p className={css.error}>
-                <FormattedMessage id="EditListingPricingForm.updateFailed"/>
+                <FormattedMessage id="EditListingPaymentForm.updateFailed"/>
               </p>
             ) : null}
             {showListingsError ? (
               <p className={css.error}>
-                <FormattedMessage id="EditListingPricingForm.showListingFailed"/>
+                <FormattedMessage id="EditListingPaymentForm.showListingFailed"/>
               </p>
             ) : null}
-            {priceOptionFields && priceOptionFields.map(({label, placeholder}) => {
-              return <FieldCurrencyInput
-                key={label}
-                id="price"
-                name="price"
-                className={css.priceInput}
-                autoFocus
-                label={label}
-                placeholder={placeholder}
-                currencyConfig={config.currencyConfig}
-                validate={priceValidators}
-              />
-            })}
+            <FieldTextInput
+              id="question_a"
+              name="question_a"
+              className={css.title}
+              type="text"
+              label={questionATitle}
+              placeholder={questionATitlePlaceholderMessage}
+              // validate={composeValidators(required(titleRequiredMessage), maxLength60Message)}
+              autoFocus
+            />
+
+            <FieldTextInput
+              id="question_b"
+              name="question_b"
+              className={css.title}
+              type="text"
+              label={questionBTitle}
+              placeholder={questionBTitlePlaceholderMessage}
+              // validate={composeValidators(required(titleRequiredMessage), maxLength60Message)}
+              autoFocus
+            />
             <Button
               className={css.submitButton}
               type="submit"
@@ -124,9 +139,9 @@ export const EditListingPricingFormComponent = (props) => {
     />
   )
 }
-EditListingPricingFormComponent.defaultProps = { fetchErrors: null }
+EditListingPaymentFormComponent.defaultProps = { fetchErrors: null }
 
-EditListingPricingFormComponent.propTypes = {
+EditListingPaymentFormComponent.propTypes = {
   serviceType: string.isRequired,
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
@@ -141,4 +156,4 @@ EditListingPricingFormComponent.propTypes = {
   }),
 }
 
-export default compose(injectIntl)(EditListingPricingFormComponent)
+export default compose(injectIntl)(EditListingPaymentFormComponent)

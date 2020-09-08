@@ -98,12 +98,45 @@ export const filters = [
         { key: 'synth', label: 'Synth' },
         { key: 'organ', label: 'Organ' },
         { key: 'beatProgramming', label: 'Beat Programming' },
-        { key: 'strings', label: 'Strings' },
-        { key: 'utility', label: 'Utility' },
-        { key: 'brass', label: 'Brass' },
+        { key: 'cello', label: 'Cello' },
+        { key: 'violin', label: 'Violin' },
+        { key: 'fiddle', label: 'Fiddle' },
+        { key: 'fullStringArrangement', label: 'Full String Arrangement' },
+        { key: 'pedalSteel', label: 'Pedal Steel' },
+        { key: 'bango', label: 'Banjo' },
+        { key: 'dobro', label: 'Dobro' },
+        { key: 'lapSteel', label: 'Lap Steel' },
+        { key: 'harmonica', label: 'Harmonica' },
+        { key: 'trumpet', label: 'Trumpet' },
+        { key: 'trombone', label: 'Trombone' },
+        { key: 'saxophone', label: 'Saxophone' },
+        { key: 'hornSection', label: 'Horn Section' },
         { key: 'mixing', label: 'Mixing' },
         { key: 'mastering', label: 'Mastering' },
         { key: 'produce', label: 'Produce Your Entire Song' }
+      ],
+    },
+  },
+  {
+    id: "termsOfUse",
+    label: "Terms Of Use",
+    type: "SelectSingleFilter",
+    group: "secondary",
+    queryParamNames: ['pub_termsOfUse'],
+    config: {
+      // Optional modes: 'has_all', 'has_any'
+      // https://www.sharetribe.com/api-reference/marketplace.html#extended-data-filtering
+      searchMode: 'has_all',
+
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for this web app's UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: [
+        {
+          key: 'agree',
+          label: 'I agree to Terms of Use',
+        }
       ],
     },
   },
