@@ -108,14 +108,14 @@ class Menu extends Component {
       const menuWidth = this.menu.offsetWidth;
       
       const contentWidthBiggerThanLabel = this.menuContent.offsetWidth - menuWidth;
-      const { forceRight } = this.props;
+      const { forceRight, forceLeft } = this.props;
       const usePositionLeftFromLabel = contentPosition === CONTENT_TO_LEFT;
       const contentPlacementOffset = this.props.contentPlacementOffset;
       // Render menu content to the left according to the contentPosition
       // prop or if the content does not fit to the right. Otherwise render to
       // the right.
      
-      return forceRight || usePositionLeftFromLabel || distanceToRight < contentWidthBiggerThanLabel
+      return !forceLeft && (forceRight || usePositionLeftFromLabel || distanceToRight < contentWidthBiggerThanLabel)
         ? { right: contentPlacementOffset, minWidth: menuWidth }
         : { left: contentPlacementOffset, minWidth: menuWidth };
     }
@@ -203,6 +203,7 @@ Menu.defaultProps = {
   onToggleActive: null,
   useArrow: true,
   forceRight: false,
+  forceLeft: false,
 };
 
 const { bool, func, node, number, string } = PropTypes;

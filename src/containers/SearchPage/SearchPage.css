@@ -40,6 +40,9 @@
     padding-top: var(--topbarHeightDesktop);
     min-height: var(--SearchPage_containerHeight);
   }
+  @media (--viewportMiniSmallMax) {
+    overflow-x: hidden;
+  }
 }
 
 .searchResultContainer {
