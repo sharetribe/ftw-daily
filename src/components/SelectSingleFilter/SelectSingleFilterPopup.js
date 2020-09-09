@@ -55,6 +55,7 @@ class SelectSingleFilterPopup extends Component {
         contentPlacementOffset={contentPlacementOffset}
         onToggleActive={this.onToggleActive}
         isOpen={this.state.isOpen}
+        forceLeft
       >
         <MenuLabel className={menuLabelClass} popupLabelCustomStyle={popupLabelCustomStyle}>{elementBeforeLabel} {menuLabel}</MenuLabel>
         <MenuContent className={css.menuContent}>

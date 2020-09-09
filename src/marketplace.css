@@ -586,5 +586,7 @@
   @custom-media --viewportLargeWithPaddings (min-width: 1128px);
   @custom-media --viewportXLarge (min-width: 1921px);
 
+  @custom-media --viewportMiniSmallMax (max-width: 420px);
+
   /* Customize CSS Code */
 
