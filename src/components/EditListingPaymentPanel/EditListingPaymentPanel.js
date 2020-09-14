@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React  from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { FormattedMessage } from '../../util/reactIntl'
@@ -8,7 +8,6 @@ import { EditListingPaymentForm } from '../../forms'
 import { ensureOwnListing } from '../../util/data'
 import { types as sdkTypes } from '../../util/sdkLoader'
 import config from '../../config'
-import { ServiceTypeContext } from '../../context/ServiceTypeProvider'
 
 import css from './EditListingPaymentPanel.css'
 
@@ -29,9 +28,6 @@ const EditListingPaymentPanel = (props) => {
     errors,
   } = props
 
-  // eslint-disable-next-line
-  const [serviceType, setServiceType] = useContext(ServiceTypeContext)
-
   const classes = classNames(rootClassName || css.root, className)
   const currentListing = ensureOwnListing(listing)
   const { price } = currentListing.attributes
@@ -49,7 +45,6 @@ const EditListingPaymentPanel = (props) => {
   const priceCurrencyValid = price instanceof Money ? price.currency === config.currency : true
   const form = priceCurrencyValid ? (
     <EditListingPaymentForm
-      serviceType={serviceType}
       className={css.form}
       initialValues={{ price }}
       onSubmit={onSubmit}

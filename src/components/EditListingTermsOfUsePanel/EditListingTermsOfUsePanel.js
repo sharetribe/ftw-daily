@@ -1,5 +1,5 @@
 import React from 'react'
-import { bool, func, object, shape, string } from 'prop-types'
+import { bool, func, object, string } from 'prop-types'
 import classNames from 'classnames'
 import { FormattedMessage } from '../../util/reactIntl'
 import { ensureOwnListing } from '../../util/data'
@@ -69,7 +69,7 @@ const EditListingTermsOfUsePanel = (props) => {
             label: 'I agree to Terms of Use',
           }
         ]}
-        name={'termsOfUse'}
+        name={'agree'}
         onSubmit={onSubmit}
         onChange={onChange}
         saveActionMsg={submitButtonText}

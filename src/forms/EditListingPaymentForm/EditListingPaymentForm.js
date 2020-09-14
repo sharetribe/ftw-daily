@@ -4,16 +4,9 @@ import { compose } from 'redux'
 import { Form as FinalForm } from 'react-final-form'
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl'
 import classNames from 'classnames'
-import config from '../../config'
-import { LINE_ITEM_NIGHT, LINE_ITEM_DAY, propTypes } from '../../util/types'
-import * as validators from '../../util/validators'
-import { formatMoney } from '../../util/currency'
-import { types as sdkTypes } from '../../util/sdkLoader'
-import { Button, Form, FieldCurrencyInput, FieldTextInput } from '../../components'
+import { propTypes } from '../../util/types'
+import { Button, Form, FieldTextInput } from '../../components'
 import css from './EditListingPaymentForm.css'
-import { composeValidators, required } from '../../util/validators'
-
-const { Money } = sdkTypes
 
 export const EditListingPaymentFormComponent = (props) => {
   return (< FinalForm
@@ -22,7 +15,6 @@ export const EditListingPaymentFormComponent = (props) => {
       }
       render={(formRenderProps) => {
         const {
-          serviceType,
           className,
           disabled,
           ready,
@@ -35,45 +27,6 @@ export const EditListingPaymentFormComponent = (props) => {
           updateInProgress,
           fetchErrors,
         } = formRenderProps
-
-        const unitType = config.bookingUnitType
-        const isNightly = unitType === LINE_ITEM_NIGHT
-        const isDaily = unitType === LINE_ITEM_DAY
-
-        const translationKey = isNightly
-          ? 'EditListingPaymentForm.pricePerNight'
-          : isDaily
-            ? 'EditListingPaymentForm.pricePerDay'
-            : 'EditListingPaymentForm.pricePerUnit'
-
-        const pricePerUnitMessage = intl.formatMessage({
-          id: translationKey,
-        })
-
-        const pricePlaceholderMessage = intl.formatMessage({
-          id: 'EditListingPaymentForm.priceInputPlaceholder',
-        })
-
-        const priceRequired = validators.required(
-          intl.formatMessage({
-            id: 'EditListingPaymentForm.priceRequired',
-          }),
-        )
-        const minPrice = new Money(config.listingMinimumPriceSubUnits, config.currency)
-        const minPriceRequired = validators.moneySubUnitAmountAtLeast(
-          intl.formatMessage(
-            {
-              id: 'EditListingPaymentForm.priceTooLow',
-            },
-            {
-              minPrice: formatMoney(intl, minPrice),
-            },
-          ),
-          config.listingMinimumPriceSubUnits,
-        )
-        const priceValidators = config.listingMinimumPriceSubUnits
-          ? validators.composeValidators(priceRequired, minPriceRequired)
-          : priceRequired
 
         const classes = classNames(css.root, className)
         const submitReady = (updated && pristine) || ready
@@ -102,25 +55,24 @@ export const EditListingPaymentFormComponent = (props) => {
                 <FormattedMessage id="EditListingPaymentForm.showListingFailed"/>
               </p>
             ) : null}
+
             <FieldTextInput
-              id="question_a"
-              name="question_a"
+              id="paypalEMail"
+              name="paypalEMail"
               className={css.title}
               type="text"
               label={questionATitle}
               placeholder={questionATitlePlaceholderMessage}
-              // validate={composeValidators(required(titleRequiredMessage), maxLength60Message)}
               autoFocus
             />
 
             <FieldTextInput
-              id="question_b"
-              name="question_b"
+              id="phoneNumber"
+              name="phoneNumber"
               className={css.title}
               type="text"
               label={questionBTitle}
               placeholder={questionBTitlePlaceholderMessage}
-              // validate={composeValidators(required(titleRequiredMessage), maxLength60Message)}
               autoFocus
             />
             <Button
@@ -142,7 +94,6 @@ export const EditListingPaymentFormComponent = (props) => {
 EditListingPaymentFormComponent.defaultProps = { fetchErrors: null }
 
 EditListingPaymentFormComponent.propTypes = {
-  serviceType: string.isRequired,
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
   saveActionMsg: string.isRequired,

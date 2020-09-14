@@ -1,5 +1,5 @@
 import React from 'react'
-import { arrayOf, bool, func, shape, string } from 'prop-types'
+import { bool, func, shape, string } from 'prop-types'
 import { compose } from 'redux'
 import { Form as FinalForm } from 'react-final-form'
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl'
@@ -81,8 +81,8 @@ const EditListingAboutThisServiceFormComponent = (props) => (
           {errorMessageUpdateListing}
           {errorMessageShowListing}
           <FieldTextInput
-            id="question_a"
-            name="question_a"
+            id="averageTurnAroundTime"
+            name="averageTurnAroundTime"
             className={css.title}
             type="text"
             label={questionATitle}
@@ -93,8 +93,8 @@ const EditListingAboutThisServiceFormComponent = (props) => (
           />
 
           <FieldTextInput
-            id="question_b"
-            name="question_b"
+            id="explainMore"
+            name="explainMore"
             className={css.title}
             type="text"
             label={questionBTitle}
@@ -135,12 +135,6 @@ EditListingAboutThisServiceFormComponent.propTypes = {
     showListingsError: propTypes.error,
     updateListingError: propTypes.error,
   }),
-  categories: arrayOf(
-    shape({
-      key: string.isRequired,
-      label: string.isRequired,
-    }),
-  ),
 }
 
 export default compose(injectIntl)(EditListingAboutThisServiceFormComponent)

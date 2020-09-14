@@ -121,7 +121,6 @@ const EditListingWizardTab = (props) => {
   }
 
   const onCompleteEditListingWizardTab = (tab, updateValues) => {
-    console.log({tab, updateValues})
     // Normalize images for API call
     const { images: updatedImages, ...otherValues } = updateValues
     const imageProperty =
@@ -181,7 +180,6 @@ const EditListingWizardTab = (props) => {
           {...panelProps(PAYMENT)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={(values) => {
-            console.log(values)
             onCompleteEditListingWizardTab(tab, values)
           }}
         />
@@ -196,7 +194,6 @@ const EditListingWizardTab = (props) => {
           {...panelProps(ABOUTTHISSERVICE)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={(values) => {
-            console.log(values)
             onCompleteEditListingWizardTab(tab, values)
           }}
         />
@@ -211,7 +208,6 @@ const EditListingWizardTab = (props) => {
           {...panelProps(SERVICETYPE)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={(values) => {
-            console.log(values)
             onCompleteEditListingWizardTab(tab, values)
           }}
         />
@@ -226,7 +222,6 @@ const EditListingWizardTab = (props) => {
           {...panelProps(ABOUTYOU)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={(values) => {
-            console.log(values)
             onCompleteEditListingWizardTab(tab, values)
           }}
         />
@@ -269,7 +264,8 @@ const EditListingWizardTab = (props) => {
           {...panelProps(TERMSOFUSE)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={(values) => {
-            onCompleteEditListingWizardTab(tab, values)
+            console.log(values)
+            // onCompleteEditListingWizardTab(tab, values)
           }}
         />
       )
@@ -390,6 +386,7 @@ EditListingWizardTab.propTypes = {
       title: string,
     }),
     images: array,
+    audio: array,
   }),
 
   handleCreateFlowTabScrolling: func.isRequired,

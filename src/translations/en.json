@@ -429,6 +429,7 @@
   "ListingPage.schemaTitle": "{title} - {price} | {siteTitle}",
   "ListingPage.viewImagesButton": "View photos ({count})",
   "ListingPage.yourHostHeading": "Your host",
+  "ListingPage.serviceTypeTitle": "Service Type",
   "LocationAutocompleteInput.currentLocation": "Current location",
   "LocationSearchForm.placeholder": "Search saunas…",
   "LoginForm.emailInvalid": "A valid email address is required",

@@ -120,7 +120,7 @@ export const filters = [
   {
     id: "termsOfUse",
     label: "Terms Of Use",
-    type: "SelectSingleFilter",
+    type: "SelectMultipleFilter",
     group: "secondary",
     queryParamNames: ['pub_termsOfUse'],
     config: {

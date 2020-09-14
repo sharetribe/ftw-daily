@@ -54,13 +54,13 @@ const EditListingServiceTypePanel = (props) => {
       {panelInformation}
       <EditListingServiceTypeForm
         className={css.form}
-        initialValues={{ title, description, category: publicData.category }}
+        initialValues={{ title, description, ...publicData }}
         saveActionMsg={submitButtonText}
         onSubmit={(values) => {
           const { title, category } = values
           const updateValues = {
             title: title.trim(),
-            publicData: { category },
+            publicData: { ...values },
           }
 
           setServiceType(category)

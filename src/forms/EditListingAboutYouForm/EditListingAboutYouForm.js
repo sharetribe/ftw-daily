@@ -85,8 +85,8 @@ const EditListingAboutYouFormComponent = (props) => (
           {errorMessageUpdateListing}
           {errorMessageShowListing}
           <FieldTextInput
-            id="question_a"
-            name="question_a"
+            id="whyAreYouTheRightFit"
+            name="whyAreYouTheRightFit"
             className={css.title}
             type="text"
             label={questionATitle}
@@ -97,8 +97,8 @@ const EditListingAboutYouFormComponent = (props) => (
           />
 
           <FieldTextInput
-            id="question_b"
-            name="question_b"
+            id="primaryGenres"
+            name="primaryGenres"
             className={css.title}
             type="text"
             label={questionBTitle}
@@ -109,8 +109,8 @@ const EditListingAboutYouFormComponent = (props) => (
           />
 
           <FieldTextInput
-            id="question_c"
-            name="question_c"
+            id="experience"
+            name="experience"
             className={css.title}
             type="text"
             label={questionCTitle}

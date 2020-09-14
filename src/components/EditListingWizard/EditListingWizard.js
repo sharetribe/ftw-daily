@@ -34,9 +34,6 @@ import EditListingWizardTab, {
 } from './EditListingWizardTab'
 import css from './EditListingWizard.css'
 
-// Show availability calendar only if environment variable availabilityEnabled is true
-const availabilityMaybe = config.enableAvailability ? [AVAILABILITY] : []
-
 // You can reorder these panels.
 // Note 1: You need to change save button translations for new listing flow
 // Note 2: Ensure that draft listing is created after the first panel
@@ -92,7 +89,7 @@ const tabLabel = (intl, tab) => {
  * @return true if tab / step is completed.
  */
 const tabCompleted = (tab, listing) => {
-  const { availabilityPlan, price, title, publicData } = listing.attributes
+  const { availabilityPlan, price, title, publicData } = listing.attributes // where does this come from?
   const images = listing.images
 
   switch (tab) {
@@ -100,26 +97,21 @@ const tabCompleted = (tab, listing) => {
       return !!(title)
     case PRICING:
       return !!price
-    // TODO: Write validation
     case AUDIO:
-      return true
-      // return !!price
     // TODO: Write validation
+      return true
     case ABOUTYOU:
-      return true
-      // return !!price
-    // TODO: Write validation
+      const { whyAreYouTheRightFit, primaryGenres, experience } = publicData
+      return !!whyAreYouTheRightFit && !!primaryGenres && !!experience
     case ABOUTTHISSERVICE:
-      return true
-      // return !!price
-    // TODO: Write validation
+      const { averageTurnAroundTime, explainMore } = publicData
+      return !!averageTurnAroundTime && !!explainMore
     case PAYMENT:
-      return true
-      // return !!price
-    // TODO: Write validation
+      const { payPalEmail, phoneNumber } = publicData
+      return !!payPalEmail && !!phoneNumber
     case TERMSOFUSE:
+    // TODO: Write validation
       return true
-      // return !!price
     case FEATURES:
       return !!(publicData && publicData.amenities)
     case POLICY:
