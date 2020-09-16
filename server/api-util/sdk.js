@@ -55,13 +55,16 @@ exports.deserialize = str => {
 exports.handleError = (res, error) => {
   console.error(error);
   if (error.status && error.statusText && error.data) {
+    const { status, statusText, data } = error;
+
     // JS SDK error
     res
       .status(error.status)
       .json({
-        status: error.status,
-        statusText: error.statusText,
-        data: error.data,
+        name: 'Local API request failed',
+        status,
+        statusText,
+        data,
       })
       .end();
   } else {

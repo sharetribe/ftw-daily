@@ -49,14 +49,6 @@ const post = (path, body) => {
   return window
     .fetch(url, options)
     .then(res => {
-      if (res.status >= 400) {
-        const e = new Error('Local API request failed');
-        e.apiResponse = res;
-        throw e;
-      }
-      return res;
-    })
-    .then(res => {
       const contentTypeHeader = res.headers.get('Content-Type');
       const contentType = contentTypeHeader ? contentTypeHeader.split(';')[0] : null;
       if (contentType === 'application/transit+json') {
@@ -65,6 +57,13 @@ const post = (path, body) => {
         return res.json();
       }
       return res.text();
+    })
+    .then(res => {
+      if (res.status >= 400) {
+        const e = res;
+        throw e;
+      }
+      return res;
     });
 };
 
