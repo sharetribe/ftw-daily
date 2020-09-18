@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [fix] Improve error handling by passing error details forward instead of creating a new error that
+  hides the details when making API call to FTW server.
+  [#1361](https://github.com/sharetribe/ftw-daily/pull/1361)
 - [fix] Remove duplicate page schema from body.
   [#1355](https://github.com/sharetribe/ftw-daily/pull/1355)
 
