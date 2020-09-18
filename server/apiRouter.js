@@ -17,6 +17,7 @@ const initiatePrivileged = require('./api/initiate-privileged');
 const transitionPrivileged = require('./api/transition-privileged');
 
 const createWithIdp = require('./api/auth/createWithIdp');
+const { authenticateFacebook, authenticateFacebookCallback } = require('./api/auth/facebook');
 const router = express.Router();
 
 // ================ API router middleware: ================ //
@@ -52,5 +53,8 @@ router.post('/initiate-privileged', initiatePrivileged);
 router.post('/transition-privileged', transitionPrivileged);
 
 router.post('/auth/create-with-idp', createWithIdp);
+
+router.get('/auth/facebook', authenticateFacebook);
+router.get('/auth/facebook/callback', authenticateFacebookCallback);
 
 module.exports = router;
