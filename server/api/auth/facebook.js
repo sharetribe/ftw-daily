@@ -19,7 +19,6 @@ const strategyOptions = {
 };
 
 const verifyCallback = (accessToken, refreshToken, profile, done) => {
-  console.log('Profile:', profile);
   const { email, first_name, last_name } = profile._json;
   const userData = {
     email,

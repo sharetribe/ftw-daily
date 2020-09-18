@@ -5,17 +5,22 @@ const authWithIdp = require('./authWithIdp');
 const radix = 10;
 const PORT = parseInt(process.env.REACT_APP_DEV_API_SERVER_PORT, radix);
 const callbackURL = `http://localhost:${PORT}/api/auth/google/callback`;
+const clientID = process.env.GOOGLE_CLIENT_ID;
 
 const strategyOptions = {
-  clientID: process.env.GOOGLE_CLIENT_ID,
+  clientID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   callbackURL,
 };
 
 const verifyCallback = (accessToken, refreshToken, profile, done) => {
-  console.log('Google profile:', profile);
+  console.log('GoogleProfile', profile);
+
+  const { email, given_name, family_name } = profile._json;
   const userData = {
-    //email
+    email,
+    firstName: given_name,
+    lastName: family_name,
     accessToken,
     refreshToken,
   };
@@ -34,7 +39,7 @@ exports.authenticateGoogle = passport.authenticate('google', {
 });
 
 exports.authenticateGoogleCallback = (req, res, next) => {
-  passport.authenticate('google', function(err, user, info) {
-    authWithIdp(err, user, info, req, res, process.env.GOOGLE_CLIENT_ID);
+  passport.authenticate('google', function(err, user) {
+    authWithIdp(err, user, req, res, clientID, 'Google');
   })(req, res, next);
 };

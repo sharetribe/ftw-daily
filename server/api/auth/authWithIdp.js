@@ -76,8 +76,8 @@ module.exports = (err, user, req, res, clientID, source) => {
         'authinfo',
         {
           email: user.email,
-          firstName: user.first_name,
-          lastName: user.last_name,
+          firstName: user.firstName,
+          lastName: user.lastName,
           idpClientId: `${clientID}`,
           idpToken: `${user.accessToken}`,
           source,

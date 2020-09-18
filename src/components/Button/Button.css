@@ -106,3 +106,34 @@
 .secondaryButton .checkmark {
   stroke: var(--matterColorAnti);
 }
+
+/* Social logins && SSO buttons */
+
+.facebookButtonRoot {
+  @apply --marketplaceButtonStyles;
+
+  background-color: var(--matterColorLight);
+  color: var(--matterColorDark);
+  font-weight: var(--fontWeightRegular);
+
+  border: 2px solid var(--matterColorNegative);
+  border-radius: 6px;
+  margin: 0 auto;
+  margin-bottom: 8px;
+  width: 100%;
+
+  @media (--viewportMedium) {
+    padding: 0;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: var(--matterColorLight);
+  }
+  &:disabled {
+    background-color: var(--matterColorNegative);
+  }
+}
+
+.facebookButton {
+}
