@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
+import { apiBaseUrl } from '../../util/api';
 import classNames from 'classnames';
 import config from '../../config';
 import { propTypes } from '../../util/types';
@@ -28,9 +30,9 @@ import {
   Modal,
   TermsOfService,
 } from '../../components';
-import { LoginForm, SignupForm } from '../../forms';
+import { LoginForm, SignupForm, ConfirmForm } from '../../forms';
 import { TopbarContainer } from '../../containers';
-import { login, authenticationInProgress, signup } from '../../ducks/Auth.duck';
+import { login, authenticationInProgress, signup, signupWithIdp } from '../../ducks/Auth.duck';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { manageDisableScrolling } from '../../ducks/UI.duck';
@@ -40,7 +42,19 @@ import css from './AuthenticationPage.css';
 export class AuthenticationPageComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { tosModalOpen: false };
+    this.state = {
+      tosModalOpen: false,
+      authError: Cookies.get('autherror')
+        ? JSON.parse(Cookies.get('autherror').replace('j:', ''))
+        : null,
+      authInfo: Cookies.get('authinfo')
+        ? JSON.parse(Cookies.get('authinfo').replace('j:', ''))
+        : null,
+    };
+  }
+
+  componentDidMount() {
+    Cookies.remove('autherror');
   }
   render() {
     const {
@@ -59,7 +73,11 @@ export class AuthenticationPageComponent extends Component {
       sendVerificationEmailError,
       onResendVerificationEmail,
       onManageDisableScrolling,
+      confirmError,
+      onCreateWithIdp,
     } = this.props;
+
+    const isConfirm = tab === 'confirm';
     const isLogin = tab === 'login';
     const from = location.state && location.state.from ? location.state.from : null;
 
@@ -95,11 +113,24 @@ export class AuthenticationPageComponent extends Component {
       </div>
     );
 
+    const confirmErrorMessage = (
+      <div className={css.error}>
+        {isSignupEmailTakenError(confirmError) ? (
+          <FormattedMessage id="AuthenticationPage.signupFailedEmailAlreadyTaken" />
+        ) : (
+          <FormattedMessage id="AuthenticationPage.signupFailed" />
+        )}
+      </div>
+    );
+
     // eslint-disable-next-line no-confusing-arrow
     const errorMessage = (error, message) => (error ? message : null);
+
     const loginOrSignupError = isLogin
       ? errorMessage(loginError, loginErrorMessage)
       : errorMessage(signupError, signupErrorMessage);
+
+    const confirmErrorMsg = errorMessage(confirmError, confirmErrorMessage);
 
     const fromState = { state: from ? { from } : null };
 
@@ -136,19 +167,58 @@ export class AuthenticationPageComponent extends Component {
       submitSignup(params);
     };
 
+    const handleSubmitConfirm = values => {
+      const { idpToken, idpClientId, email, firstName, lastName } = this.state.authInfo;
+      const { email: newEmail, firstName: newFirstName, lastName: newLastName } = values;
+
+      // Pass email, fistName or lastName to Flex API only if user has edited them
+      // sand they can't be fetched directly from idp provider (e.g. Facebook)
+
+      const authParams = {
+        ...(newEmail !== email && { email: newEmail }),
+        ...(newFirstName !== firstName && { firstName: newFirstName }),
+        ...(newLastName !== lastName && { lastName: newLastName }),
+      };
+
+      onCreateWithIdp({
+        idpToken: idpToken,
+        idpClientId: idpClientId,
+        ...authParams,
+      });
+    };
+
     const formContent = (
       <div className={css.content}>
-        <LinkTabNavHorizontal className={css.tabs} tabs={tabs} />
-        {loginOrSignupError}
-        {isLogin ? (
-          <LoginForm className={css.form} onSubmit={submitLogin} inProgress={authInProgress} />
+        {isConfirm ? (
+          <>
+            <h1 className={css.signupWithIdpTitle}>Sign up with {this.state.authInfo.source}</h1>
+
+            <p className={css.confirmInfoText}>Please check that your information is correct.</p>
+            {confirmErrorMsg}
+            <ConfirmForm
+              className={css.form}
+              onSubmit={handleSubmitConfirm}
+              inProgress={authInProgress}
+              onOpenTermsOfService={() => this.setState({ tosModalOpen: true })}
+              authInfo={this.state.authInfo}
+            />
+          </>
         ) : (
-          <SignupForm
-            className={css.form}
-            onSubmit={handleSubmitSignup}
-            inProgress={authInProgress}
-            onOpenTermsOfService={() => this.setState({ tosModalOpen: true })}
-          />
+          <>
+            <LinkTabNavHorizontal className={css.tabs} tabs={tabs} />
+            {loginOrSignupError}
+
+            {isLogin ? (
+              <LoginForm className={css.form} onSubmit={submitLogin} inProgress={authInProgress} />
+            ) : (
+              <SignupForm
+                className={css.form}
+                onSubmit={handleSubmitSignup}
+                inProgress={authInProgress}
+                onOpenTermsOfService={() => this.setState({ tosModalOpen: true })}
+              />
+            )}
+          </>
         )}
       </div>
     );
@@ -265,6 +335,7 @@ AuthenticationPageComponent.defaultProps = {
   currentUser: null,
   loginError: null,
   signupError: null,
+  confirmError: null,
   tab: 'signup',
   sendVerificationEmailError: null,
 };
@@ -278,9 +349,10 @@ AuthenticationPageComponent.propTypes = {
   loginError: propTypes.error,
   scrollingDisabled: bool.isRequired,
   signupError: propTypes.error,
+  confirmError: object,
   submitLogin: func.isRequired,
   submitSignup: func.isRequired,
-  tab: oneOf(['login', 'signup']),
+  tab: oneOf(['login', 'signup', 'confirm']),
 
   sendVerificationEmailInProgress: bool.isRequired,
   sendVerificationEmailError: propTypes.error,
@@ -295,7 +367,7 @@ AuthenticationPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { isAuthenticated, loginError, signupError } = state.Auth;
+  const { isAuthenticated, loginError, signupError, confirmError } = state.Auth;
   const { currentUser, sendVerificationEmailInProgress, sendVerificationEmailError } = state.user;
   return {
     authInProgress: authenticationInProgress(state),
@@ -306,12 +378,14 @@ const mapStateToProps = state => {
     signupError,
     sendVerificationEmailInProgress,
     sendVerificationEmailError,
+    confirmError,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   submitLogin: ({ email, password }) => dispatch(login(email, password)),
   submitSignup: params => dispatch(signup(params)),
+  onCreateWithIdp: params => dispatch(signupWithIdp(params)),
   onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),

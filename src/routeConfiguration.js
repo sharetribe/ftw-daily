@@ -176,6 +176,11 @@ const routeConfiguration = () => {
       component: props => <AuthenticationPage {...props} tab="signup" />,
     },
     {
+      path: '/confirm',
+      name: 'ConfirmPage',
+      component: props => <AuthenticationPage {...props} tab="confirm" />,
+    },
+    {
       path: '/recover-password',
       name: 'PasswordRecoveryPage',
       component: props => <PasswordRecoveryPage {...props} />,
