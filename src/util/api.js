@@ -2,7 +2,7 @@ import { types as sdkTypes, transit } from './sdkLoader';
 import config from '../config';
 import Decimal from 'decimal.js';
 
-const apiBaseUrl = () => {
+export const apiBaseUrl = () => {
   const port = process.env.REACT_APP_DEV_API_SERVER_PORT;
   const useDevApiServer = process.env.NODE_ENV === 'development' && !!port;
 
@@ -97,4 +97,10 @@ export const initiatePrivileged = body => {
 // be sent in the body.
 export const transitionPrivileged = body => {
   return post('/api/transition-privileged', body);
+};
+
+// Create user with idp
+// TODO
+export const createWithIdp = body => {
+  return post('/api/auth/create-with-idp', body);
 };

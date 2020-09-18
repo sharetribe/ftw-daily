@@ -2,6 +2,7 @@ import isEmpty from 'lodash/isEmpty';
 import { clearCurrentUser, fetchCurrentUser } from './user.duck';
 import { storableError } from '../util/errors';
 import * as log from '../util/log';
+import { createWithIdp } from '../util/api';
 
 const authenticated = authInfo => authInfo && authInfo.isAnonymous === false;
 
@@ -21,6 +22,10 @@ export const LOGOUT_ERROR = 'app/Auth/LOGOUT_ERROR';
 export const SIGNUP_REQUEST = 'app/Auth/SIGNUP_REQUEST';
 export const SIGNUP_SUCCESS = 'app/Auth/SIGNUP_SUCCESS';
 export const SIGNUP_ERROR = 'app/Auth/SIGNUP_ERROR';
+
+export const CONFIRM_REQUEST = 'app/Auth/CONFIRM_REQUEST';
+export const CONFIRM_SUCCESS = 'app/Auth/CONFIRM_SUCCESS';
+export const CONFIRM_ERROR = 'app/Auth/CONFIRM_ERROR';
 
 // Generic user_logout action that can be handled elsewhere
 // E.g. src/reducers.js clears store as a consequence
@@ -48,6 +53,10 @@ const initialState = {
   // signup
   signupError: null,
   signupInProgress: false,
+
+  // confirm (create use with idp)
+  confirmErro: null,
+  confirmInProgress: false,
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -90,6 +99,13 @@ export default function reducer(state = initialState, action = {}) {
     case SIGNUP_ERROR:
       return { ...state, signupInProgress: false, signupError: payload };
 
+    case CONFIRM_REQUEST:
+      return { ...state, confirmInProgress: true, loginError: null, confirmError: null };
+    case CONFIRM_SUCCESS:
+      return { ...state, confirmInProgress: false, isAuthenticated: true };
+    case CONFIRM_ERROR:
+      return { ...state, confirmInProgress: false, confirmError: payload };
+
     default:
       return state;
   }
@@ -118,6 +134,10 @@ export const logoutError = error => ({ type: LOGOUT_ERROR, payload: error, error
 export const signupRequest = () => ({ type: SIGNUP_REQUEST });
 export const signupSuccess = () => ({ type: SIGNUP_SUCCESS });
 export const signupError = error => ({ type: SIGNUP_ERROR, payload: error, error: true });
+
+export const confirmRequest = () => ({ type: CONFIRM_REQUEST });
+export const confirmSuccess = () => ({ type: CONFIRM_SUCCESS });
+export const confirmError = error => ({ type: CONFIRM_ERROR, payload: error, error: true });
 
 export const userLogout = () => ({ type: USER_LOGOUT });
 
@@ -198,5 +218,20 @@ export const signup = params => (dispatch, getState, sdk) => {
         firstName: params.firstName,
         lastName: params.lastName,
       });
+    });
+};
+
+export const signupWithIdp = params => (dispatch, getState, sdk) => {
+  dispatch(confirmRequest());
+  console.log('Signup with idp');
+  return createWithIdp(params)
+    .then(res => {
+      console.log('Res', res);
+      return dispatch(confirmSuccess());
+    })
+    .then(() => dispatch(fetchCurrentUser()))
+    .catch(e => {
+      log.error(e, 'create-with-idp-failed', { params });
+      return dispatch(confirmError(storableError(e)));
     });
 };
