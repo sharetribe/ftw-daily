@@ -1,12 +1,12 @@
 // These helpers are calling FTW's own server-side routes
-// and nor directly calling Marketplace API or Integration API
+// so, they are not directly calling Marketplace API or Integration API.
 // You can find these api endpoints from 'server/api/...' directory
 
 import { types as sdkTypes, transit } from './sdkLoader';
 import config from '../config';
 import Decimal from 'decimal.js';
 
-const apiBaseUrl = () => {
+export const apiBaseUrl = () => {
   const port = process.env.REACT_APP_DEV_API_SERVER_PORT;
   const useDevApiServer = process.env.NODE_ENV === 'development' && !!port;
 
@@ -108,7 +108,7 @@ export const transitionPrivileged = body => {
 // If loginWithIdp api call fails and user can't authenticate to Flex with idp
 // we will show option to create a new user with idp.
 // For that user needs to confirm data fetched from the idp.
-// After the confrimation, this endpoint is called to create a new user with confirmed data.
+// After the confirmation, this endpoint is called to create a new user with confirmed data.
 //
 // See `server/api/auth/createUserWithIdp.js` to see what data should
 // be sent in the body.
