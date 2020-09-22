@@ -31,7 +31,7 @@ module.exports = (err, user, req, res, clientID, source) => {
           message: err.message,
         },
         {
-          maxAge: 60 * 60 * 1000, // 1 hour
+          maxAge: 15 * 60 * 1000, // 15 minutes
         }
       )
       .redirect(`${rootUrl}/login#`);
@@ -78,12 +78,11 @@ module.exports = (err, user, req, res, clientID, source) => {
           email: user.email,
           firstName: user.firstName,
           lastName: user.lastName,
-          idpClientId: `${clientID}`,
           idpToken: `${user.accessToken}`,
           source,
         },
         {
-          maxAge: 60 * 60 * 1000, // 1 hour
+          maxAge: 15 * 60 * 1000, // 15 minutes
         }
       );
 

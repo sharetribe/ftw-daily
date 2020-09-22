@@ -8,6 +8,8 @@ const CLIENT_SECRET = process.env.SHARETRIBE_SDK_CLIENT_SECRET;
 const TRANSIT_VERBOSE = process.env.REACT_APP_SHARETRIBE_SDK_TRANSIT_VERBOSE === 'true';
 const USING_SSL = process.env.REACT_APP_SHARETRIBE_USING_SSL === 'true';
 const BASE_URL = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL;
+const FACBOOK_APP_ID = process.env.REACT_APP_FACEBOOK_APP_ID;
+const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 // Instantiate HTTP(S) Agents with keepAlive set to true.
 // This will reduce the request time for consecutive requests by
@@ -37,7 +39,10 @@ module.exports = (req, res) => {
     ...baseUrl,
   });
 
-  const { idpClientId, idpToken, ...rest } = req.body;
+  const { idpToken, source, ...rest } = req.body;
+
+  const idpClientId =
+    source === 'Facebook' ? FACBOOK_APP_ID : source === 'Google' ? GOOGLE_CLIENT_ID : null;
 
   sdk.currentUser
     .createWithIdp({

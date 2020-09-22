@@ -109,18 +109,19 @@
 
 /* Social logins && SSO buttons */
 
-.facebookButtonRoot {
+.socialButtonRoot {
   @apply --marketplaceButtonStyles;
-
+  min-height: 44px;
   background-color: var(--matterColorLight);
   color: var(--matterColorDark);
   font-weight: var(--fontWeightRegular);
 
-  border: 2px solid var(--matterColorNegative);
+  border: 1px solid var(--matterColorNegative);
   border-radius: 6px;
   margin: 0 auto;
   margin-bottom: 8px;
   width: 100%;
+  text-align: left;
 
   @media (--viewportMedium) {
     padding: 0;
@@ -135,5 +136,5 @@
   }
 }
 
-.facebookButton {
+.socialButton {
 }

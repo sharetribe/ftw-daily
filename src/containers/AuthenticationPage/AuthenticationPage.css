@@ -165,3 +165,12 @@
 .confirmInfoText {
   @apply --marketplaceH4FontStyles;
 }
+
+.buttonIcon {
+  margin-left: 10px;
+  margin-right: 22px;
+}
+
+.idpButtons {
+  margin-top: 40px;
+}

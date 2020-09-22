@@ -4,7 +4,7 @@ const authWithIdp = require('./authWithIdp');
 
 const radix = 10;
 const PORT = parseInt(process.env.REACT_APP_DEV_API_SERVER_PORT, radix);
-const clientID = process.env.FACEBOOK_APP_ID;
+const clientID = process.env.REACT_APP_FACEBOOK_APP_ID;
 const clientSecret = process.env.FACEBOOK_APP_SECRET;
 
 const FacebookStrategy = passportFacebook.Strategy;
@@ -20,10 +20,11 @@ const strategyOptions = {
 
 const verifyCallback = (accessToken, refreshToken, profile, done) => {
   const { email, first_name, last_name } = profile._json;
+
   const userData = {
     email,
-    first_name,
-    last_name,
+    firstName: first_name,
+    lastName: last_name,
     accessToken,
     refreshToken,
   };

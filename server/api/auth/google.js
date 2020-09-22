@@ -5,7 +5,7 @@ const authWithIdp = require('./authWithIdp');
 const radix = 10;
 const PORT = parseInt(process.env.REACT_APP_DEV_API_SERVER_PORT, radix);
 const callbackURL = `http://localhost:${PORT}/api/auth/google/callback`;
-const clientID = process.env.GOOGLE_CLIENT_ID;
+const clientID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 const strategyOptions = {
   clientID,
@@ -14,8 +14,6 @@ const strategyOptions = {
 };
 
 const verifyCallback = (accessToken, refreshToken, profile, done) => {
-  console.log('GoogleProfile', profile);
-
   const { email, given_name, family_name } = profile._json;
   const userData = {
     email,

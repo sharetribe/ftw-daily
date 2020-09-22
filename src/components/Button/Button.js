@@ -100,9 +100,8 @@ export const InlineTextButton = props => {
   return <Button {...props} rootClassName={classes} />;
 };
 
-export const FacebookButton = props => {
-  const classes = classNames(props.rootClassName || css.facebookButtonRoot, css.facebookButton);
+export const SocialButton = props => {
+  const classes = classNames(props.rootClassName || css.socialButtonRoot, css.socialButton);
   return <Button {...props} rootClassName={classes} />;
 };
-
 InlineTextButton.displayName = 'InlineTextButton';
