@@ -147,3 +147,30 @@
 .error {
   @apply --marketplaceModalErrorStyles;
 }
+
+/* ================ Social logins & SSO ================ */
+
+.signupWithIdpTitle {
+  @apply --marketplaceModalTitleStyles;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 16px;
+  color: var(--matterColorDark);
+
+  @media (--viewportMedium) {
+    margin-top: 6px;
+  }
+}
+
+.confirmInfoText {
+  @apply --marketplaceH4FontStyles;
+}
+
+.buttonIcon {
+  margin-left: 10px;
+  margin-right: 22px;
+}
+
+.idpButtons {
+  margin-top: 40px;
+}
