@@ -16,6 +16,8 @@ const transactionLineItems = require('./api/transaction-line-items');
 const initiatePrivileged = require('./api/initiate-privileged');
 const transitionPrivileged = require('./api/transition-privileged');
 
+const createUserWithIdp = require('./api/auth/createUserWithIdp');
+
 const router = express.Router();
 
 // ================ API router middleware: ================ //
@@ -49,5 +51,7 @@ router.get('/login-as', loginAs);
 router.post('/transaction-line-items', transactionLineItems);
 router.post('/initiate-privileged', initiatePrivileged);
 router.post('/transition-privileged', transitionPrivileged);
+
+router.post('/auth/create-user-with-idp', createUserWithIdp);
 
 module.exports = router;
