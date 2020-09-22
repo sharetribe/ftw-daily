@@ -1,3 +1,7 @@
+// These helpers are calling FTW's own server-side routes
+// and nor directly calling Marketplace API or Integration API
+// You can find these api endpoints from 'server/api/...' directory
+
 import { types as sdkTypes, transit } from './sdkLoader';
 import config from '../config';
 import Decimal from 'decimal.js';
@@ -97,4 +101,17 @@ export const initiatePrivileged = body => {
 // be sent in the body.
 export const transitionPrivileged = body => {
   return post('/api/transition-privileged', body);
+};
+
+// Create user with identity provider (e.g. Facebook or Google)
+//
+// If loginWithIdp api call fails and user can't authenticate to Flex with idp
+// we will show option to create a new user with idp.
+// For that user needs to confirm data fetched from the idp.
+// After the confrimation, this endpoint is called to create a new user with confirmed data.
+//
+// See `server/api/auth/createUserWithIdp.js` to see what data should
+// be sent in the body.
+export const createUserWithIdp = body => {
+  return post('/api/auth/create-user-with-idp', body);
 };
