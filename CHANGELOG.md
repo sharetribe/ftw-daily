@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [fix] Fix missing proptype warnings in `TransactionPage` and `TransactionPanel` tests.
+  [#1363](https://github.com/sharetribe/ftw-daily/pull/1363)
 - [fix] Improve error handling by passing error details forward instead of creating a new error that
   hides the details when making API call to FTW server.
   [#1361](https://github.com/sharetribe/ftw-daily/pull/1361)
