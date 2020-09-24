@@ -1,0 +1,160 @@
+@import '../../marketplace.css';
+
+
+.root {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1;
+          flex: 1 1;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 100%;
+
+  -webkit-box-pack: start;
+
+      -ms-flex-pack: start;
+
+          justify-content: flex-start;
+}
+
+@media (min-width: 768px) {
+  .root {
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+}
+.bottomWrapper {
+  text-align: center;
+  margin-top: 60px;
+  -ms-flex-item-align: stretch;
+      align-self: stretch;
+}
+@media (min-width: 768px) {
+  .bottomWrapper {
+    margin-top: 96px;
+  }
+}
+.bottomWrapper {
+  margin-top: 60px;
+}
+.bottomWrapperVerified {
+  text-align: center;
+  margin-top: 60px;
+  -ms-flex-item-align: stretch;
+      align-self: stretch;
+}
+@media (min-width: 768px) {
+  .bottomWrapperVerified {
+    margin-top: 96px;
+  }
+}
+.bottomWrapperVerified {
+  margin-top: 87px;
+}
+
+/* ================ Typography ================ */
+/* Title of the modal */
+.modalTitle {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 36px;
+  letter-spacing: -0.5px;
+  margin: 0;
+  font-weight: 700;
+}
+@media (min-width: 768px) {
+  .modalTitle {
+    font-weight: 600;
+    line-height: 40px;
+    letter-spacing: -0.9px;
+    margin: 0;
+  }
+}
+/* Paragraph for the Modal */
+.modalMessage {
+  margin: 18px 0 0 0;
+}
+@media (min-width: 768px) {
+  .modalMessage {
+    margin: 24px 0 0 0;
+  }
+}
+.modalMessage {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.helpText {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #b2b2b2;
+  margin-top: 10px;
+  font-size: 14px;
+}
+.error {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+    /* margin-top + n * line-height + margin-bottom => x * 6px */
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+@media (min-width: 768px) {
+  .error {
+    font-weight: 500;/* margin-top + n * line-height + margin-bottom => x * 8px */
+    margin-top: 17px;
+    margin-bottom: 15px;
+  }
+}
+.error {
+  margin-top: 15px;
+  color: #ff0000;
+}
+
+.modalIcon {
+  height: 48px;
+  margin-bottom: 12px;
+}
+@media (min-width: 768px) {
+  .modalIcon {
+    height: 64px;
+    margin-bottom: 23px;
+  }
+}
+.resendOptions {
+  font-size: 14px;
+}
+.resendOptions a {
+  color: #4a4a4a;
+}
+.verificationProcess {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 36px;
+  letter-spacing: -0.5px;
+  margin: 0;
+  font-weight: 700;
+}
+@media (min-width: 768px) {
+  .verificationProcess {
+    font-weight: 600;
+    line-height: 40px;
+    letter-spacing: -0.9px;
+    margin: 0;
+  }
+}
+.verificationProcess {
+  color: #b2b2b2;
+  font-size: 12px;
+  letter-spacing: 2px;
+}

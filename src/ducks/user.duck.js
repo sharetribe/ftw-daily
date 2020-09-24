@@ -6,6 +6,8 @@ import * as log from '../util/log';
 import { authInfo } from './Auth.duck';
 import { stripeAccountCreateSuccess } from './stripe.duck.js';
 
+const origin = typeof window !== 'undefined' && window.location.origin
+
 // ================ Action types ================ //
 
 export const CURRENT_USER_SHOW_REQUEST = 'app/user/CURRENT_USER_SHOW_REQUEST';
@@ -38,6 +40,11 @@ export const SEND_VERIFICATION_EMAIL_REQUEST = 'app/user/SEND_VERIFICATION_EMAIL
 export const SEND_VERIFICATION_EMAIL_SUCCESS = 'app/user/SEND_VERIFICATION_EMAIL_SUCCESS';
 export const SEND_VERIFICATION_EMAIL_ERROR = 'app/user/SEND_VERIFICATION_EMAIL_ERROR';
 
+export const SEND_VERIFICATION_OTP_REQUEST = 'app/user/SEND_VERIFICATION_OTP_REQUEST';
+export const SEND_VERIFICATION_OTP_SUCCESS = 'app/user/SEND_VERIFICATION_OTP_SUCCESS';
+export const SEND_VERIFICATION_OTP_ERROR = 'app/user/SEND_VERIFICATION_OTP_ERROR';
+export const CLOSE_VERIFICATION_POPUP = 'app/user/CLOSE_VERIFICATION_POPUP';
+
 // ================ Reducer ================ //
 
 const mergeCurrentUser = (oldCurrentUser, newCurrentUser) => {
@@ -65,6 +72,10 @@ const initialState = {
   currentUserHasOrdersError: null,
   sendVerificationEmailInProgress: false,
   sendVerificationEmailError: null,
+  sendVerificationOtpInProgress: false,
+  verificationCode: null,
+  sendVerificationOtpError: null,
+  showVerificationModal: false,
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -131,6 +142,30 @@ export default function reducer(state = initialState, action = {}) {
         sendVerificationEmailInProgress: false,
         sendVerificationEmailError: payload,
       };
+    case SEND_VERIFICATION_OTP_REQUEST:
+      return {
+        ...state,
+        sendVerificationOtpInProgress: true,
+        sendVerificationOtpError: null,
+      };
+    case SEND_VERIFICATION_OTP_SUCCESS:
+      return {
+        ...state,
+        sendVerificationOtpInProgress: false,
+        verificationCode: payload.code,
+        showVerificationModal: true,
+      };
+    case SEND_VERIFICATION_OTP_ERROR:
+      return {
+        ...state,
+        sendVerificationOtpInProgress: false,
+        sendVerificationOtpError: payload.error,
+      };
+    case CLOSE_VERIFICATION_POPUP:
+      return {
+        ...state,
+        showVerificationModal: false,
+      }
 
     default:
       return state;
@@ -151,6 +186,10 @@ export const hasCurrentUserErrors = state => {
 
 export const verificationSendingInProgress = state => {
   return state.user.sendVerificationEmailInProgress;
+};
+
+export const verificationOtpSendingInProgress = state => {
+  return state.user.sendVerificationOtpInProgress;
 };
 
 // ================ Action creators ================ //
@@ -227,6 +266,25 @@ export const sendVerificationEmailError = e => ({
   type: SEND_VERIFICATION_EMAIL_ERROR,
   error: true,
   payload: e,
+});
+
+export const sendVerificationOtpRequest = () => ({
+  type: SEND_VERIFICATION_OTP_REQUEST,
+});
+
+export const sendVerificationOtpSuccess = (code) => ({
+  type: SEND_VERIFICATION_OTP_SUCCESS,
+  payload: { code }
+});
+
+export const closeVerificationModalSuccess = () => ({
+  type: CLOSE_VERIFICATION_POPUP,
+})
+
+export const sendVerificationOtpError = error => ({
+  type: SEND_VERIFICATION_OTP_ERROR,
+  error: true,
+  payload: { error },
 });
 
 // ================ Thunks ================ //
@@ -367,3 +425,36 @@ export const sendVerificationEmail = () => (dispatch, getState, sdk) => {
     .then(() => dispatch(sendVerificationEmailSuccess()))
     .catch(e => dispatch(sendVerificationEmailError(storableError(e))));
 };
+
+export const sendVerificationOtp = (phoneNumber) => (dispatch, getState, sdk) => {
+  if (verificationOtpSendingInProgress(getState())) {
+    return Promise.reject(new Error('Verification otp sending already in progress'));
+  }
+  let otp = Math.floor(100000 + Math.random() * 900000);
+
+  dispatch(sendVerificationOtpRequest());
+  const body = {to: phoneNumber, message: `Your Horsedeal verification code is: ${otp}`}
+  return fetch(`${origin}/api/messages`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log('data', data)
+    if (data.success) {
+      dispatch(sendVerificationOtpSuccess(otp))
+    } else {
+      dispatch(sendVerificationOtpError(data.error))
+    }
+  })
+  .catch(e => {
+    dispatch(sendVerificationOtpError(e))
+  });
+};
+
+export const closeVerificationModal = () => (dispatch, getState, sdk) => {
+  dispatch(closeVerificationModalSuccess());
+}

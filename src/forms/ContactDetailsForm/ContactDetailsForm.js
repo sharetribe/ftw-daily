@@ -22,9 +22,10 @@ const SHOW_EMAIL_SENT_TIMEOUT = 2000;
 class ContactDetailsFormComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { showVerificationEmailSentMessage: false };
+    this.state = { showVerificationEmailSentMessage: false, showVerificationOtpSent: false, };
     this.emailSentTimeoutId = null;
     this.handleResendVerificationEmail = this.handleResendVerificationEmail.bind(this);
+    this.handleSendOtp   = this.handleSendOtp.bind(this);
     this.submittedValues = {};
   }
 
@@ -41,6 +42,10 @@ class ContactDetailsFormComponent extends Component {
         this.setState({ showVerificationEmailSentMessage: false });
       }, SHOW_EMAIL_SENT_TIMEOUT);
     });
+  }
+
+  handleSendOtp(phoneNumber) {
+    this.props.onResendVerificationOtp(phoneNumber);
   }
 
   render() {
@@ -62,6 +67,8 @@ class ContactDetailsFormComponent extends Component {
             sendVerificationEmailError,
             sendVerificationEmailInProgress,
             values,
+            sendVerificationOtpError,
+            sendVerificationOtpInProgress,
           } = fieldRenderProps;
           const { email, phoneNumber } = values;
 
@@ -72,6 +79,8 @@ class ContactDetailsFormComponent extends Component {
           }
 
           const { email: currentEmail, emailVerified, pendingEmail, profile } = user.attributes;
+          const { phoneVerified } = profile.publicData || {};
+          console.log('phoneVerified', phoneVerified);
 
           // email
 
@@ -255,6 +264,14 @@ class ContactDetailsFormComponent extends Component {
               </span>
             );
           }
+          let otpError = null;
+          if (sendVerificationOtpError) {
+            otpError = (
+              <span className={css.error}>
+                We couldn't send the verification code to this number, please change the number and try again.
+              </span>
+            );
+          }
 
           const classes = classNames(rootClassName || css.root, className);
           const submittedOnce = Object.keys(this.submittedValues).length > 0;
@@ -291,6 +308,24 @@ class ContactDetailsFormComponent extends Component {
                   label={phoneLabel}
                   placeholder={phonePlaceholder}
                 />
+                {sendVerificationOtpInProgress && <span className={css.emailVerified}>Bestätigungscode senden</span>}
+                {!sendVerificationOtpInProgress && !phoneNumberChanged && (
+                  !phoneVerified ? (<span className={css.pendingEmailUnverified}>
+                    Sie haben Ihre Handynummer noch nicht überprüft.
+                    <span
+                      className={css.helperLink}
+                      onClick={()=> this.handleSendOtp(currentPhoneNumber)}
+                      role="button"
+                    >
+                      Jetzt überprüfen
+                    </span>
+                  </span>) :
+                  (<span className={css.emailVerified}>
+                    Ihre Telefonnummer wird überprüft
+                  </span>
+                  )
+                )}
+                {otpError}
               </div>
 
               <div className={confirmClasses}>
@@ -356,6 +391,7 @@ ContactDetailsFormComponent.propTypes = {
   inProgress: bool,
   intl: intlShape.isRequired,
   onResendVerificationEmail: func.isRequired,
+  onResendVerificationOtp: func.isRequired,
   ready: bool.isRequired,
   sendVerificationEmailError: propTypes.error,
   sendVerificationEmailInProgress: bool,

@@ -24,3 +24,8 @@
     margin-bottom: 48px;
   }
 }
+
+.error {
+  margin-top: 15px;
+  color: #ff0000;
+}

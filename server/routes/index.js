@@ -1,5 +1,13 @@
 const Event = require('../models/event');
 const sharetribeUser = require('../middlewares/sharetribeUser');
+require('dotenv').config()
+
+// Configure process.env with .env.* files
+require('../env').configureEnv();
+const client = require('twilio')(
+  process.env.TWILIO_SID,
+  process.env.TWILIO_SECRET_TOKEN
+);
 
 module.exports = (app) => {
 
@@ -21,9 +29,7 @@ module.exports = (app) => {
    * @property {string} acceptedTransactionId
    */
   app.post('/api/events'/*, sharetribeUser.isAuthorized()*/, async (req, res) => {
-
     try {
-
       return res.send(await Event.create({
         'title': req.body.title,
         'start': req.body.start,
@@ -40,6 +46,22 @@ module.exports = (app) => {
     }
   });
 
+  app.post('/api/messages', async (req, res) => {
+    res.header('Content-Type', 'application/json');
+    client.messages
+      .create({
+        from: process.env.TWILIO_FROM_PHONE,
+        to: req.body.to,
+        body: req.body.message
+      })
+      .then(() => {
+        return res.send(JSON.stringify({ success: true }));
+      })
+      .catch(err => {
+        console.error(err)
+        return res.send(JSON.stringify({ success: false, error: err }));
+      });
+  });
 
   /**
    * @param {string} transactionId.path.required
@@ -183,5 +205,6 @@ module.exports = (app) => {
         'isAuthorized': sharetribeUser.isAuthorized(),
       });
   });
+
 };
 
