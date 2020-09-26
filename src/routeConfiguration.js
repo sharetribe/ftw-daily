@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   AboutPage,
-  CommunityPage,
   SubscriptionPage,
   AuthenticationPage,
   CheckoutPage,
@@ -62,11 +61,6 @@ const routeConfiguration = () => {
       path: '/about',
       name: 'AboutPage',
       component: AboutPage,
-    },
-    {
-      path: '/community',
-      name: 'CommunityPage',
-      component: () => <CommunityPage title={"Community"} />
     },
     {
       path: '/legal',
