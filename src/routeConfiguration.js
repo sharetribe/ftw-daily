@@ -1,8 +1,6 @@
 import React from 'react';
 import {
   AboutPage,
-  HelpPage,
-  ContactPage,
   CommunityPage,
   SubscriptionPage,
   AuthenticationPage,
