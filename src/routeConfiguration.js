@@ -64,16 +64,6 @@ const routeConfiguration = () => {
       component: AboutPage,
     },
     {
-      path: '/help',
-      name: 'HelpPage',
-      component: () => <HelpPage title={"Hilfe"} />
-    },
-    {
-      path: '/contact',
-      name: 'KontaktPage',
-      component: () => <ContactPage title={"Kontakt"} />
-    },
-    {
       path: '/community',
       name: 'CommunityPage',
       component: () => <CommunityPage title={"Community"} />
