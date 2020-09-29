@@ -5,7 +5,7 @@ import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import { Form as FinalForm } from 'react-final-form';
 import classNames from 'classnames';
 import * as validators from '../../util/validators';
-import { Form, PrimaryButton, FieldTextInput, NamedRedirect } from '../../components';
+import { Form, PrimaryButton, FieldTextInput } from '../../components';
 
 import css from './ConfirmSignupForm.css';
 
@@ -26,11 +26,6 @@ const ConfirmSignupFormComponent = props => (
         onOpenTermsOfService,
         authInfo,
       } = fieldRenderProps;
-
-      // If we don't have authentication information from idp provider, redirect user back to normal signup page
-      if (!authInfo) {
-        return <NamedRedirect name="SignupPage" />;
-      }
 
       // email
       const emailLabel = intl.formatMessage({
@@ -93,6 +88,11 @@ const ConfirmSignupFormComponent = props => (
           <FormattedMessage id="ConfirmSignupForm.termsAndConditionsLinkText" />
         </span>
       );
+
+      // If authInfo is not available we should not show the ConfirmForm
+      if (!authInfo) {
+        return;
+      }
 
       // Initial values from idp provider
       const { email, firstName, lastName, idpId } = authInfo;
