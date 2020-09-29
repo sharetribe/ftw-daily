@@ -24,9 +24,10 @@ const strategyOptions = {
   clientSecret,
   callbackURL,
   profileFields: ['id', 'name', 'emails'],
+  passReqToCallback: true,
 };
 
-const verifyCallback = (accessToken, refreshToken, profile, done) => {
+const verifyCallback = (req, accessToken, refreshToken, profile, done) => {
   const { email, first_name, last_name } = profile._json;
 
   const userData = {
@@ -35,6 +36,7 @@ const verifyCallback = (accessToken, refreshToken, profile, done) => {
     lastName: last_name,
     accessToken,
     refreshToken,
+    returnUrl: req.query.state ? req.query.state : null,
   };
 
   done(null, userData);
@@ -45,7 +47,10 @@ if (clientID) {
   passport.use(new FacebookStrategy(strategyOptions, verifyCallback));
 }
 
-exports.authenticateFacebook = passport.authenticate('facebook', { scope: ['email'] });
+exports.authenticateFacebook = (req, res, next) => {
+  const from = req && req.query ? req.query.from : null;
+  passport.authenticate('facebook', { scope: ['email'], state: from })(req, res, next);
+};
 
 // Use custom callback for calling loginWithIdp enpoint
 // to log in the user to Flex with the data from Facebook

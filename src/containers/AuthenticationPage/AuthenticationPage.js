@@ -193,7 +193,12 @@ export class AuthenticationPageComponent extends Component {
 
     const authWithFacebook = () => {
       const baseUrl = apiBaseUrl();
-      window.location.href = `${baseUrl}/api/auth/facebook`;
+
+      if (from) {
+        window.location.href = `${baseUrl}/api/auth/facebook?from=${from}`;
+      } else {
+        window.location.href = `${baseUrl}/api/auth/facebook`;
+      }
     };
 
     const idp = this.state.authInfo ? this.state.authInfo.idpId : null;
