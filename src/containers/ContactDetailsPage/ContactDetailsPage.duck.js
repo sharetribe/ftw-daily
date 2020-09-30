@@ -84,7 +84,7 @@ const requestSavePhoneNumber = params => (dispatch, getState, sdk) => {
       { 
         protectedData: { phoneNumber, phoneVerified },
         publicData: { phoneNumber, phoneVerified }
-      },
+     },
       {
         expand: true,
         include: ['profileImage'],

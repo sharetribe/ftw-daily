@@ -1,6 +1,7 @@
 const Event = require('../models/event');
 const sharetribeUser = require('../middlewares/sharetribeUser');
 const Event = require('../models/event');
+
 require('dotenv').config()
 
 // Configure process.env with .env.* files
@@ -30,9 +31,7 @@ module.exports = (app) => {
    * @property {string} acceptedTransactionId
    */
   app.post('/api/events'/*, sharetribeUser.isAuthorized()*/, async (req, res) => {
-
     try {
-
       return res.send(await Event.create({
         'title': req.body.title,
         'start': req.body.start,
@@ -65,7 +64,7 @@ module.exports = (app) => {
         return res.send(JSON.stringify({ success: false, error: err }));
       });
   });
-  
+
   /**
    * @param {string} transactionId.path.required
    * @param {string} from.query
@@ -208,5 +207,6 @@ module.exports = (app) => {
         'isAuthorized': sharetribeUser.isAuthorized(),
       });
   });
+
 };
 

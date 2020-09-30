@@ -7,6 +7,7 @@ import { authInfo } from './Auth.duck';
 import { stripeAccountCreateSuccess } from './stripe.duck.js';
 
 const origin = typeof window !== 'undefined' && window.location.origin
+
 // ================ Action types ================ //
 
 export const CURRENT_USER_SHOW_REQUEST = 'app/user/CURRENT_USER_SHOW_REQUEST';
@@ -141,7 +142,7 @@ export default function reducer(state = initialState, action = {}) {
         sendVerificationEmailInProgress: false,
         sendVerificationEmailError: payload,
       };
-	    case SEND_VERIFICATION_OTP_REQUEST:
+	  case SEND_VERIFICATION_OTP_REQUEST:
       return {
         ...state,
         sendVerificationOtpInProgress: true,
@@ -189,6 +190,7 @@ export const verificationSendingInProgress = state => {
 export const verificationOtpSendingInProgress = state => {
   return state.user.sendVerificationOtpInProgress;
 };
+
 // ================ Action creators ================ //
 
 export const currentUserShowRequest = () => ({ type: CURRENT_USER_SHOW_REQUEST });

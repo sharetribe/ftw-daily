@@ -8,8 +8,9 @@ import { types as sdkTypes } from '../../util/sdkLoader';
 
 const { UUID } = sdkTypes;
 
+const origin = typeof window !== 'undefined' && window.location.origin
 
-export const GET_CURRENT_USER_EMAIL = 'app/CalendarPage/GET_CURRENT_USER_EMAIL';
+const oneDayMilliseconds = 1000 * 60 * 60 * 24
 
 export const GET_CURRENT_USER_ID = 'app/CalendarPage/GET_CURRENT_USER_ID';
 export const GET_CURRENT_USER_ID_ERROR = 'app/CalendarPage/GET_CURRENT_USER_ID_ERROR';
@@ -29,8 +30,6 @@ export const NOTIFY_ON_LOADING_START = 'app/CalendarPage/NOTIFY_ON_LOADING_START
 export const NOTIFY_ON_LOADING_END = 'app/CalendarPage/NOTIFY_ON_LOADING_END';
 
 const initialState = {
-    currentUserEmail: null,
-
     currentUserId: null,
     currentUserIdError: null,
 
@@ -49,11 +48,6 @@ const CalendarPageReducer = (state = initialState, action = {}) => {
   const { type, payload } = action;
 
   switch (type) {
-    case GET_CURRENT_USER_EMAIL:
-      return {
-          ...state,
-          currentUserEmail: payload,
-      };
       case GET_CURRENT_USER_ID:
         return {
             ...state,
@@ -123,11 +117,6 @@ export const getCurrentUserId = data => ({
   payload: data
 });
 
-export const getCurrentUserEmail = data => ({
-  type: GET_CURRENT_USER_EMAIL,
-  payload: data
-});
-
 export const getCurrentUserIdError = e => ({
   type: GET_CURRENT_USER_ID_ERROR,
   payload: e
@@ -173,20 +162,16 @@ export const getCurrentUserIdError = e => ({
   export const notifyOnLoadingEnd = () => ({
     type: NOTIFY_ON_LOADING_END
   })
+  
 // ================ Thunks ================ //
-
- //"transition/accept","transition/complete", "transition/expire-review-period", "transition/customer-notifies-on-time-scheduling-1"
-
 
   export const getAcceptedAndActiveTransactionsData = _ => (dispatch, getState, sdk) => {
     return sdk.currentUser.show()
     .then(response => {
       const currentUserId = response.data.data.id.uuid 
-      const currentUserEmail = response.data.data.attributes.email // unnecessary should be handled by user id
 
       if(currentUserId) {
         dispatch(getCurrentUserId(currentUserId))
-        dispatch(getCurrentUserEmail(currentUserEmail))
 
         return sdk.transactions.query({lastTransitions: ["transition/accept"]})
         .then(response => { 
@@ -208,49 +193,54 @@ export const getCurrentUserIdError = e => ({
 
   export const getAcceptedTransactionSchedulingData = acceptedTransaction => (dispatch, getState, sdk) => {
     const id = acceptedTransaction.id.uuid
-    const customerData = JSON.parse(acceptedTransaction.attributes.protectedData.customerData)
-    const providerData = JSON.parse(acceptedTransaction.attributes.protectedData.providerData)
-    // only customer of the transaction should be able to change and appoint time
-    const currentUserEmail = customerData.email // has to be change to id
-    const currentUserIsTransactionCustomer =  currentUserEmail === getState().CalendarPage.currentUserEmail // has to be change to id
+    const protectedDataField = acceptedTransaction.attributes.protectedData
     
-    const price = providerData.listingData.price
-    const numberOfDays = Math.round(acceptedTransaction.attributes.payinTotal.amount / price)
+    const customerData = typeof protectedDataField.customerData === 'string' ? JSON.parse(protectedDataField.customerData) : protectedDataField.customerData
+    const providerData = typeof protectedDataField.providerData === 'string' ? JSON.parse(protectedDataField.providerData) : protectedDataField.providerData
+    // only customer of the transaction should be able to change and appoint time
+    const currentUserUUID = customerData.userUUID 
+    const currentUserIsTransactionCustomer =  currentUserUUID === getState().CalendarPage.currentUserId 
+    const currentUserIsTransactionProvider = providerData && providerData.providerId.uuid === getState().CalendarPage.currentUserId 
+    
     const transcationStartDate = acceptedTransaction.attributes.createdAt
-    const transcationEndDate = new Date(transcationStartDate)
-    transcationEndDate.setDate(transcationEndDate.getDate() + numberOfDays)
+    const currentDay = new Date()
+    const startOfCurrentWeek = (currentDay.getDay() === 1) ? currentDay : new Date(currentDay - ((currentDay.getDay() - 1) * oneDayMilliseconds)) 
+    const __CW = new Date(startOfCurrentWeek)
+    const endOfCurrentWeek = new Date(__CW.setDate(__CW.getDate() + 6))
 
-    return sdk.transactions
-    .query({lastTransitions: ["transition/customer-notifies-on-time-scheduling-1"]})
-      .then(response => { 
-        const ridings = response.data.data.reduce((acc,c) => {
-          const protectedDataField = c.attributes.protectedData
-          if(Object.keys(protectedDataField).length) {
-            const scheduling = JSON.parse(protectedDataField.schedulingData) 
-            const {title, acceptedTransactionId, end, start, ownerId} = scheduling
-            if(acceptedTransactionId === id) {
-              acc.push({ 
-                title,
-                start, 
-                end,
-                ownerId,
-                id: c.id.uuid,
-                status: 'appointed',
-                backgroundColor: "#923395",
-                acceptedTransactionId,
-               })
-            }
+    const startDate = transcationStartDate > startOfCurrentWeek ? transcationStartDate : startOfCurrentWeek
+
+    console.log('startDate ', startDate)
+    console.log('startOfCurrentWeek ', startOfCurrentWeek)
+    console.log('endOfCurrentWeek ', endOfCurrentWeek)
+    console.log('id ', id)
+
+    return fetch(`${origin}/api/transactions/${id}/events?from=${startDate}&to=${endOfCurrentWeek}`)
+    .then(res => res.json())
+    .then(response => {
+      const ridings = response.reduce((acc,eventItem) => {
+          const {title, transactionId, end, start, ownerId, _id} = eventItem
+          if(transactionId === id) {
+            acc.push({ 
+              title,
+              start, 
+              end,
+              ownerId,
+              id: _id,
+              status: 'appointed',
+              backgroundColor: ownerId === providerData.providerId.uuid ? '#278825' : '#923395',
+              transactionId,
+             })
           }
-          return acc
-        }, []) 
-        
-        dispatch(getScheduledRidingsForActiveTransactions(ridings)) 
-        return { ridings, currentUserIsTransactionCustomer, transcationStartDate, transcationEndDate }
-      })
-      .catch(e=> {
-          dispatch(getScheduledRidingsForActiveTransactionsError(storableError(e)));
-          throw e;
-      })
+        return acc
+      }, []) 
+      dispatch(getScheduledRidingsForActiveTransactions(ridings)) 
+      return { ridings, currentUserIsTransactionCustomer, currentUserIsTransactionProvider, transcationStartDate }
+    })
+    .catch(e=> {
+      dispatch(getScheduledRidingsForActiveTransactionsError(storableError(e)));
+      throw e;
+    })
   };
 
   export const resetAcceptedAndActiveTransactionsData = _ => (dispatch, getState, sdk) => {
@@ -277,8 +267,14 @@ export const getCurrentUserIdError = e => ({
     console.log('createNewSchedulingDataTransaction ', schedulingObj)
 
     dispatch(notifyOnLoadingStart())
-     
-    return sdk.transactions.initiate(bodyParams)
+     return fetch(`${origin}/api/events`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(schedulingObj)
+     })
+    .then(res => res.json())
     .then(response => {
       dispatch(notifyOnLoadingEnd())
       // Send the message to the created transaction
@@ -288,21 +284,19 @@ export const getCurrentUserIdError = e => ({
       dispatch(notifyOnLoadingEnd())
       dispatch(createNewSchedulingDataTransactionError(storableError(e)));
       throw e;
-    });
-    return 
+    }); 
   }
 
-  export const deleteSchedulingDataTransaction = id => (dispatch, getState, sdk) => {
+  export const deleteSchedulingDataTransaction = id => dispatch => {
     dispatch(notifyOnLoadingStart())
 
-    return sdk.transactions.transition({
-      id: new UUID(id),
-      transition: TRANSITION_NOTIFY_ON_SCHEDULE_CANCELLING,
-      params: {}
-    }).then(response => {
+    return fetch(`${origin}/api/events/${id}`, { method: 'DELETE' })
+    .then(response => {
+      console.log('DELETE response', response)
       dispatch(notifyOnLoadingEnd())
       return response
-    }).catch(e => {
+    })
+    .catch(e => {
       dispatch(notifyOnLoadingEnd())
       dispatch(createNewSchedulingDataTransactionError(storableError(e)));
       throw e;

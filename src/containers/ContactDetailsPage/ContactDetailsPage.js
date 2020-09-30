@@ -15,7 +15,7 @@ import {
   Footer,
   Page,
   UserNav,
-  Modal
+  Modal,
 } from '../../components';
 import { ContactDetailsForm, SMSVerificationForm } from '../../forms';
 import { TopbarContainer } from '../../containers';
@@ -135,9 +135,9 @@ ContactDetailsPageComponent.propTypes = {
 const mapStateToProps = state => {
   // Topbar needs user info.
   const { currentUser, sendVerificationEmailInProgress,
-    sendVerificationEmailError, sendVerificationOtpInProgress,
-    sendVerificationOtpError, verificationCode, showVerificationModal
-  } = state.user;
+          sendVerificationEmailError, sendVerificationOtpInProgress,
+          sendVerificationOtpError, verificationCode, showVerificationModal
+        } = state.user;
   const {
     saveEmailError,
     savePhoneNumberError,

@@ -41,6 +41,9 @@
   @media (--viewportMedium) {
     display: none;
   }
+  @media (--viewportMiniSmallMax) {
+    overflow-x: hidden;
+  }
 }
 
 .home {

@@ -26,6 +26,10 @@ import { TopbarContainer } from '..';
 
 import css from './CalendarPage.css';
 
+const STATUS_TEMPORARY = 'temporary'
+const STATUS_APPOINTED = 'appointed'
+const STATUS_PENDING = 'pending'
+
 const timeHelper = (d) => d.toLocaleString().split(", ").splice(1)
 
 export class CalendarPageComponent extends Component {
@@ -33,13 +37,13 @@ export class CalendarPageComponent extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      acceptedTransactionSelected: false,
-      acceptedTransactionId: null,
+      transactionSelected: false,
+      //transactionId: null,
+      transaction: null,
 
       isCurrentUserAcceptedTransactionCustomer: false,
-
+      isCurrentUserAcceptedTransactionProvider: false,
       transcationStartDate: null,
-      transcationEndDate: null,
 
       scheduledRidings: [],
       pendingRidings: [],
@@ -67,8 +71,7 @@ export class CalendarPageComponent extends Component {
     const startDate = new Date(start)
     const endDate = new Date(end)
     const transcationStartDate = new Date(this.state.transcationStartDate)
-    const transcationEndDate = new Date(this.state.transcationEndDate)
-    return startDate < transcationStartDate || endDate < transcationStartDate || startDate > transcationEndDate || endDate > transcationEndDate 
+    return startDate < transcationStartDate || endDate < transcationStartDate 
   } 
 
   scheduleTime = (calendarEvent) => {
@@ -76,6 +79,7 @@ export class CalendarPageComponent extends Component {
     
     if(isDateAlreadySelected) return
     if(!calendarEvent.startStr || !calendarEvent.endStr) return 
+
     const checkDate = new Date(calendarEvent.startStr)
     checkDate.setHours(checkDate.getHours() + 1)
     
@@ -96,13 +100,12 @@ export class CalendarPageComponent extends Component {
       title: "Horse Deal 24",
       start: startDate, 
       end: endDate,
-      backgroundColor: "lightgrey",//"#923395",
+      backgroundColor: "lightgrey",
       id: this.state.temporaryId,
       status: 'temporary'
     }
 
-    this.setState(() => ({
-    }), this.addCalendarEvent(newEvent, calendarEvent))
+    this.addCalendarEvent(newEvent, calendarEvent)
   }
 
   callNotificationPopup = (ev) => {
@@ -112,11 +115,20 @@ export class CalendarPageComponent extends Component {
     const { end, start, id: eventId, status } = event
     const { x, y } = target.getBoundingClientRect()
     const eventIdStatus = status ? status : this.getStatusFromEventId(eventId)
+
+    const isNotTemporaryId = eventId !== this.state.temporaryId
+    const ownerData = this.getStatusFromEventId(eventId) || { ownerId: null }  
+
     if(!status && !eventIdStatus) {
       console.log('Expected status got: ', status)
       return
     }
-    
+
+    if(isNotTemporaryId && ownerData.ownerId !== this.props.currentUserId) {
+      console.log('only the owner of scheduled ridings has right to change time ')
+      return
+    }
+
     this.setState({
       notificationStartDate: timeHelper(start),
       notificationEndDate: timeHelper(end),
@@ -158,40 +170,43 @@ export class CalendarPageComponent extends Component {
   }
 
   appointNewSchedulingItem = () => {
-    const {acceptedTransactionId, scheduledRidings, temporaryId, notificationTitle} = this.state
-    if(!acceptedTransactionId) {
-      throw new Error('Expected acceptedTransactionId, received ', acceptedTransactionId)
+    const { /*transactionId, */ transaction, scheduledRidings, temporaryId, notificationTitle, isCurrentUserAcceptedTransactionProvider} = this.state
+    const transactionId = transaction.id.uuid
+
+    if(!transactionId) {
+      throw new Error('Expected transactionId, received ', transactionId)
     }
     const appointedData = {}
+
     scheduledRidings.forEach(riding => {
       if (riding.id === temporaryId) {
         const { start, end } = riding
-        appointedData.title = notificationTitle
+        appointedData.title = !!notificationTitle ? notificationTitle : 'HorseDeal24'
         appointedData.start = start
         appointedData.end = end
         appointedData.ownerId = this.props.currentUserId
-        appointedData.acceptedTransactionId = acceptedTransactionId
+        appointedData.transactionId = transactionId
       }
     })
+
    if(Object.keys(appointedData).length)  {
      this.closeNotificationPopup()
      this.props.onCreatingNewSchedulingDataTransaction(appointedData)
      .then(response => {
-      appointedData.id = response.data.data.id.uuid
+      appointedData.id = response._id
       appointedData.status = 'appointed'
-      appointedData.backgroundColor = '#923395'
-      this.setState(() => ({
+      appointedData.backgroundColor = isCurrentUserAcceptedTransactionProvider ? '#278825' : '#923395'
+      this.setState({
         scheduledRidings: [...scheduledRidings.filter(e => e.id !== temporaryId), appointedData ]
-      }), ()=> console.log(this.state))
+      })
      })
    }
   }
   
   returnBackPreviouslyChangedTime = (newAppointment = false) => {
-    const {idHandledByNotification: eventId, /*notificationEndDate, notificationStartDate,*/ pendingRidings, scheduledRidings} = this.state
+    const { idHandledByNotification: eventId, pendingRidings, scheduledRidings, isCurrentUserAcceptedTransactionProvider } = this.state
     const data = newAppointment ? scheduledRidings : pendingRidings
     const riding =  Object.assign({}, data.find(i => i.id === eventId))
-    //const newId = 'appointed' + Math.random()
   
     if(!riding) {
       throw new Error('returnBackPreviouslyChangedTime: Expected riding data object, got ', riding)
@@ -209,15 +224,15 @@ export class CalendarPageComponent extends Component {
       })
     }
     else {       
-      this.deleteCalendarEvent(eventId, true).then(response => {
+      this.deleteCalendarEvent(eventId, true).then(() => {
         this.props.onCreatingNewSchedulingDataTransaction(riding)
         .then(response => {
-          riding.id = response.data.data.id.uuid
-          riding.backgroundColor = '#923395'
+          riding.id = response._id
+          riding.backgroundColor = isCurrentUserAcceptedTransactionProvider ? '#278825' : '#923395'
           riding.status = 'appointed'
-          this.setState(() => ({
+          this.setState({
             scheduledRidings: [...scheduledRidings.filter(e => e.id !== eventId), riding]
-          }), ()=> console.log(this.state))
+          })
         })
       })
     }
@@ -227,7 +242,7 @@ export class CalendarPageComponent extends Component {
     const { end, start, id } = ev.event
     const isNotTemporaryId = this.state.idHandledByNotification !== this.state.temporaryId
     const ownerData = this.getStatusFromEventId(id) || { ownerId: null }  
-    
+
     if(isNotTemporaryId && this.checkOwner(ownerData)) {
       console.log('only the owner of scheduled ridings has right to change time ')
       ev.revert()
@@ -270,27 +285,38 @@ export class CalendarPageComponent extends Component {
     }
   }
 
-  selectAcceptedTransaction = (acceptedTransaction) => {    
-    this.setState(() => ({
-       acceptedTransactionId: acceptedTransaction.id.uuid
-      }), () => this.props.onAcceptedTransactionSelect(acceptedTransaction)
-      .then(({ ridings, currentUserIsTransactionCustomer, transcationStartDate, transcationEndDate }) => {
-        const scheduledRidings = ridings ? ridings : []
-        this.setState({ 
-          acceptedTransactionSelected: true,
-          scheduledRidings: [...scheduledRidings],
-          isCurrentUserAcceptedTransactionCustomer: currentUserIsTransactionCustomer,
-          transcationStartDate,
-          transcationEndDate,
-        })
-      })) 
+  handleDatesRenderChange = dateObj => {
+    const { transaction } = this.state
+
+    console.log('dateObj ', dateObj)
+    
+    this.props.onAcceptedTransactionSelect(transaction)
+    .then(({ ridings, currentUserIsTransactionCustomer, currentUserIsTransactionProvider, transcationStartDate }) => { 
+      const scheduledRidings = ridings ? ridings : []
+      this.setState({ 
+        transactionSelected: true,
+        scheduledRidings: [...scheduledRidings],
+        isCurrentUserAcceptedTransactionCustomer: currentUserIsTransactionCustomer,
+        isCurrentUserAcceptedTransactionProvider: currentUserIsTransactionProvider,
+        transcationStartDate,
+      })
+    }) 
   }
 
+  selectAcceptedTransaction = transaction => {    
+    this.setState({
+      transaction,
+      //transactionId: transaction.id.uuid,
+      transactionSelected: true,
+    })
+  }
+  
   resetAcceptedTransaction = () => {
     this.props.onAcceptedTransactionReset()
     this.setState({
-      acceptedTransactionId: null,
-      acceptedTransactionSelected: false, 
+      //transactionId: null,
+      transaction: null,
+      transactionSelected: false, 
     }) 
   }
 
@@ -313,14 +339,11 @@ export class CalendarPageComponent extends Component {
   render() {
     const { 
       scheduledRidings,
-      acceptedTransactionSelected,
+      transactionSelected,
       notificationPopupVisible,
       notificationStartDate,
       notificationEndDate,
       notificationState,
-      isCurrentUserAcceptedTransactionCustomer,
-      // acceptedTransactionId,
-      //idHandledByNotification,
     } = this.state
     
   const {
@@ -330,39 +353,52 @@ export class CalendarPageComponent extends Component {
     acceptedAndActiveTransactionsError,
     scheduledRidingsForActiveTransactionsError,
     newSchedulingDataTransactionError,
-    loadingStarted
+    loadingStarted,
   } = this.props;
 
   const title = intl.formatMessage({ id: 'Calendar.title' });
   
   const schedulingConfig = {
-    'temporary': 
+    [STATUS_TEMPORARY]: 
       (<div>
         <span className={css.closeNotification} onClick={() => this.closeNotificationPopup()}>+</span>
         <input placeholder="Kommentar..." id="addEventInput" type="text" maxLength={40} onChange={this.setNotificationTitle} className={css.addEventInput} />
-         <div className={css.dateNotification}>Möchtest Du den Eigentümer darüber informieren, einen Ausritt mit dem Pferd zu machen?</div>
-         <div className={css.dateNotification}>Von <strong>{notificationStartDate}</strong>  bis <strong>{notificationEndDate}</strong> Uhr</div>
+         <div className={css.dateNotification}>
+            <FormattedMessage id={'Calendar.appointNewTimeNotification'} />
+          </div>
+         <div className={css.dateNotification}>
+           Von <strong>{notificationStartDate}</strong>  bis <strong>{notificationEndDate}</strong> Uhr
+          </div>
          <div className={css.notificationActions}>
-           <button className={css.buttonColorful} onClick={this.appointNewSchedulingItem}>Zeit planen</button>
+           <button className={css.buttonColorful} onClick={this.appointNewSchedulingItem}>
+             <FormattedMessage id={'Calendar.approveAppointment'} />
+            </button>
          </div>
       </div>),
-    'appointed':
+    [STATUS_APPOINTED]:
       (<div>
         <span className={css.closeNotification} onClick={() => this.closeNotificationPopup()}>+</span>
-         <div className={css.dateNotification}>Möchtest Du den Eigentümer darüber informieren, die geplante Zeit zu löschen?</div>
+          <div className={css.dateNotification}>
+            <FormattedMessage id={'Calendar.cancelAppointedTimeNotification'} />
+          </div>
          <div className={css.notificationActions}>
-           <button className={css.buttonColorful} onClick={() => {
-            //  this.deleteCalendarEvent(idHandledByNotification)
-             this.closeNotificationPopup(true, true)
-           }}>Zeit löschen</button>
+           <button className={css.buttonColorful} onClick={ () => { this.closeNotificationPopup(true, true) }}>
+            <FormattedMessage id={'Calendar.cancelAppointment'} />
+          </button>
          </div>
       </div>),
-    'pending':
+    [STATUS_PENDING]:
       (<div>
-        <div className={css.dateNotification}>Möchtest Du die Zeit ändern und den Eigentümer darüber informieren?</div>
+        <div className={css.dateNotification}>
+          <FormattedMessage id={'Calendar.changeAppointedTimeNotification'} />
+        </div>
         <div className={css.notificationActions}>
-          <button onClick={() => this.returnBackPreviouslyChangedTime(true)}>Zeit ändern</button>
-          <button className={css.buttonColorful} onClick={() => this.returnBackPreviouslyChangedTime(false)}>Abbrechen</button>
+          <button onClick={() => this.returnBackPreviouslyChangedTime(true)}>
+            <FormattedMessage id={'Calendar.changeTimeApproved'} />
+          </button>
+          <button className={css.buttonColorful} onClick={() => this.returnBackPreviouslyChangedTime(false)}>
+            <FormattedMessage id={'Calendar.changeTimeCancelled'} />
+          </button>
         </div>
       </div>)
   } 
@@ -396,10 +432,11 @@ export class CalendarPageComponent extends Component {
         editable={true} 
         selectable={true}
         events={scheduledRidings}
-        eventClick={isCurrentUserAcceptedTransactionCustomer ? this.callNotificationPopup : () => {}}
-        select={isCurrentUserAcceptedTransactionCustomer ? this.scheduleTime : () => {}}
+        eventClick={this.callNotificationPopup }
+        select={this.scheduleTime}
         eventDrop={this.changeScheduleTime}
         eventResize={this.changeScheduleTime}
+        datesRender={this.handleDatesRenderChange}
         />
     </div>    
   ) 
@@ -484,9 +521,9 @@ export class CalendarPageComponent extends Component {
                     <h1 className={css.calendarPageTitle}>
                       Zeitplan Deiner Pferde  
                     </h1>
-                    {acceptedTransactionSelected && ( <button className={css.contactButton} onClick={this.resetAcceptedTransaction}>Zurück zu den Angeboten</button> )}
+                    {transactionSelected && ( <button className={css.contactButton} onClick={this.resetAcceptedTransaction}>Zurück zu den Angeboten</button> )}
                   </div>
-                  {acceptedTransactionSelected ? calendar : activeTransactionsList}
+                  {transactionSelected ? calendar : activeTransactionsList}
                 </div> 
               </div> 
               )
