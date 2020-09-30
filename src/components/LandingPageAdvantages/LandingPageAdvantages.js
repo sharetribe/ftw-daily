@@ -23,7 +23,7 @@ const icon = [
 
 const Advantage = ({ title, messageId, index }) => (
   <div className={css.advantage}>
-    {icon[index]}
+    {icon[0]}
     <div>
       <h3 className={css.advantageTitle}><FormattedMessage id={title} /></h3>
       <p className={css.advantageText}><FormattedMessage id={messageId} /></p>
