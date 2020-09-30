@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import { propTypes } from '../../util/types';
 import { ensureCurrentUser } from '../../util/data';
-import { fetchCurrentUser, sendVerificationEmail } from '../../ducks/user.duck';
+import { fetchCurrentUser, sendVerificationEmail, sendVerificationOtp, closeVerificationModal } from '../../ducks/user.duck';
 import {
   LayoutSideNavigation,
   LayoutWrapperMain,
@@ -15,12 +15,13 @@ import {
   Footer,
   Page,
   UserNav,
+  Modal
 } from '../../components';
-import { ContactDetailsForm } from '../../forms';
+import { ContactDetailsForm, SMSVerificationForm } from '../../forms';
 import { TopbarContainer } from '../../containers';
 
 import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { saveContactDetails, saveContactDetailsClear } from './ContactDetailsPage.duck';
+import { saveContactDetails, saveContactDetailsClear, verifyPhoneNumber } from './ContactDetailsPage.duck';
 import css from './ContactDetailsPage.css';
 
 export const ContactDetailsPageComponent = props => {
@@ -35,8 +36,16 @@ export const ContactDetailsPageComponent = props => {
     sendVerificationEmailInProgress,
     sendVerificationEmailError,
     onResendVerificationEmail,
+    onResendVerificationOtp,
     onSubmitContactDetails,
+    sendVerificationOtpInProgress,
+    sendVerificationOtpError,
+    verificationCode,
+    showVerificationModal,
     intl,
+    onManageDisableScrolling,
+    onCloseVerificationModal,
+    onVerifyPhoneNumber,
   } = props;
 
   const user = ensureCurrentUser(currentUser);
@@ -51,12 +60,15 @@ export const ContactDetailsPageComponent = props => {
       savePhoneNumberError={savePhoneNumberError}
       currentUser={currentUser}
       onResendVerificationEmail={onResendVerificationEmail}
+      onResendVerificationOtp={onResendVerificationOtp}
       onSubmit={values => onSubmitContactDetails({ ...values, currentEmail, currentPhoneNumber })}
       onChange={onChange}
       inProgress={saveContactDetailsInProgress}
       ready={contactDetailsChanged}
       sendVerificationEmailInProgress={sendVerificationEmailInProgress}
       sendVerificationEmailError={sendVerificationEmailError}
+      sendVerificationOtpError={sendVerificationOtpError}
+      sendVerificationOtpInProgress={sendVerificationOtpInProgress}
     />
   ) : null;
 
@@ -81,6 +93,9 @@ export const ContactDetailsPageComponent = props => {
             </h1>
             {contactInfoForm}
           </div>
+          {!sendVerificationOtpError &&
+            <SMSVerificationForm {...props} currentPhoneNumber={currentPhoneNumber}/>
+          }
         </LayoutWrapperMain>
         <LayoutWrapperFooter>
           <Footer />
@@ -111,6 +126,7 @@ ContactDetailsPageComponent.propTypes = {
   sendVerificationEmailInProgress: bool.isRequired,
   sendVerificationEmailError: propTypes.error,
   onResendVerificationEmail: func.isRequired,
+  onResendVerificationOtp: func.isRequired,
 
   // from injectIntl
   intl: intlShape.isRequired,
@@ -118,7 +134,10 @@ ContactDetailsPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   // Topbar needs user info.
-  const { currentUser, sendVerificationEmailInProgress, sendVerificationEmailError } = state.user;
+  const { currentUser, sendVerificationEmailInProgress,
+    sendVerificationEmailError, sendVerificationOtpInProgress,
+    sendVerificationOtpError, verificationCode, showVerificationModal
+  } = state.user;
   const {
     saveEmailError,
     savePhoneNumberError,
@@ -134,6 +153,10 @@ const mapStateToProps = state => {
     scrollingDisabled: isScrollingDisabled(state),
     sendVerificationEmailInProgress,
     sendVerificationEmailError,
+    sendVerificationOtpInProgress,
+    sendVerificationOtpError,
+    verificationCode,
+    showVerificationModal
   };
 };
 
@@ -141,6 +164,10 @@ const mapDispatchToProps = dispatch => ({
   onChange: () => dispatch(saveContactDetailsClear()),
   onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
   onSubmitContactDetails: values => dispatch(saveContactDetails(values)),
+  onResendVerificationOtp: phoneNumber => dispatch(sendVerificationOtp(phoneNumber)),
+  onManageDisableScrolling: () => null,
+  onCloseVerificationModal: () => dispatch(closeVerificationModal()),
+  onVerifyPhoneNumber: values => dispatch(verifyPhoneNumber(values)),
 });
 
 const ContactDetailsPage = compose(

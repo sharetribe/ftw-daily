@@ -77,10 +77,14 @@ export const saveContactDetailsClear = () => ({ type: SAVE_CONTACT_DETAILS_CLEAR
  */
 const requestSavePhoneNumber = params => (dispatch, getState, sdk) => {
   const phoneNumber = params.phoneNumber;
+  const phoneVerified = params.phoneVerified;
 
   return sdk.currentUser
     .updateProfile(
-      { protectedData: { phoneNumber } },
+      { 
+        protectedData: { phoneNumber, phoneVerified },
+        publicData: { phoneNumber, phoneVerified }
+      },
       {
         expand: true,
         include: ['profileImage'],
@@ -214,6 +218,14 @@ export const saveContactDetails = params => (dispatch, getState, sdk) => {
   } else if (emailChanged) {
     return dispatch(saveEmail({ email, currentPassword }));
   } else if (phoneNumberChanged) {
-    return dispatch(savePhoneNumber({ phoneNumber }));
+    return dispatch(savePhoneNumber({ phoneNumber, phoneVerified: false }));
   }
+};
+
+export const verifyPhoneNumber = params => (dispatch, getState, sdk) => {
+  dispatch(saveContactDetailsRequest());
+
+  const { phoneNumber, phoneVerified } = params;
+
+  return dispatch(savePhoneNumber({ phoneNumber, phoneVerified }));
 };
