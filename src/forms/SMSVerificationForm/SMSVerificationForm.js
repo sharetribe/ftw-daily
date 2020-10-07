@@ -29,8 +29,13 @@ class SMSVerificationFormComponent extends Component {
     }
   }
 
+  handleReSendOtp = (phoneNumber) => {
+    this.props.onResendVerificationOtp(phoneNumber);
+  }
+
   render() {
-    const {showVerificationModal, onCloseVerificationModal, onManageDisableScrolling, currentPhoneNumber, sendVerificationOtpError} = this.props;
+    const {showVerificationModal, onCloseVerificationModal, onManageDisableScrolling, currentPhoneNumber, sendVerificationOtpError, sendVerificationOtpInProgress} = this.props;
+    console.log('sendVerificationOtpInProgress', sendVerificationOtpInProgress);
     const { code, error } = this.state;
     const disabled = code.length < 6 || error !== '';
     return (
@@ -50,13 +55,24 @@ class SMSVerificationFormComponent extends Component {
           className={css.SMSVerificationForm}
         >
           <div className={css.contactDetailsSection}>
+            <label>6-digit verification code</label>
             <input type="text" maxLength="10" name="otp" placeholder="e.g. 123456" value={code} onChange={(e)=> this.handleChange(e)}/>
           </div>
           <p className={css.error}>{error}</p>
+          <div className={css.helpText}>
+            <span>
+              Didn't get the code?
+              <span className={css.resendOptions}>
+                <a onClick={()=> this.handleReSendOtp(currentPhoneNumber)}> Resend to {currentPhoneNumber}</a> or
+                <a onClick={onCloseVerificationModal}> change the number</a>.
+              </span>
+            </span>
+          </div>
           <div className={css.bottomWrapper}>
             <PrimaryButton
               type="button"
               onClick={()=> this.handleSubmit()}
+              inProgress={sendVerificationOtpInProgress}
               disabled={disabled}
             >
               Überprüfen Sie die Handynummer
