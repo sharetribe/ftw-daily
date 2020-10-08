@@ -39,6 +39,7 @@ import { sendVerificationEmail } from '../../ducks/user.duck';
 import { manageDisableScrolling } from '../../ducks/UI.duck';
 
 import css from './AuthenticationPage.css';
+import { FacebookLogo } from './socialLoginLogos';
 
 export class AuthenticationPageComponent extends Component {
   constructor(props) {
@@ -201,31 +202,13 @@ export class AuthenticationPageComponent extends Component {
       }
     };
 
-    const idp = this.state.authInfo ? this.state.authInfo.idpId : null;
+    const idp = this.state.authInfo
+      ? this.state.authInfo.idpId.replace(/^./, str => str.toUpperCase())
+      : null;
 
-    const showSocialLogins = !!process.env.REACT_APP_FACEBOOK_APP_ID;
-
-    const socialLoginButtonsMaybe = showSocialLogins ? (
-      <div className={css.idpButtons}>
-        <SocialLoginButton onClick={() => authWithFacebook()}>
-          <span className={css.buttonIcon}>
-            <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M7.89.214C4.055 1.047 1.005 4.13.205 7.947c-.734 3.45.533 7.283 3.166 9.6.967.85 3.2 2.033 4.15 2.183l.617.1v-6.883H5.806v-3h2.283l.083-1.633c.134-2.417.717-3.534 2.3-4.25.617-.284 1.034-.35 2.3-.334.85.017 1.617.084 1.7.134.1.05.167.7.167 1.433v1.317h-.983c-1.484 0-1.75.283-1.817 1.983l-.067 1.35h1.45c1.284 0 1.434.033 1.35.283-.05.167-.133.667-.2 1.134-.216 1.55-.25 1.583-1.483 1.583h-1.083V19.914l.866-.234c1.684-.433 2.984-1.216 4.4-2.633 2.067-2.067 2.9-4.1 2.9-7.017 0-3.166-1.2-5.75-3.616-7.766C14.106.38 10.772-.42 7.889.214z"
-                fill="#1877F2"
-                fillRule="nonzero"
-              />
-            </svg>
-          </span>
-          <FormattedMessage id="AuthenticationPage.loginWithFacebook" />
-        </SocialLoginButton>
-        <center>
-          <FormattedMessage id="AuthenticationPage.or" />
-        </center>
-      </div>
-    ) : null;
-
-    const formContent = isConfirm ? (
+    // Form for confirming information frm IdP (e.g. Facebook)
+    // before new user is created to Flex
+    const confirmForm = (
       <div className={css.content}>
         <h1 className={css.signupWithIdpTitle}>
           <FormattedMessage id="AuthenticationPage.confirmSignupWithIdpTitle" values={{ idp }} />
@@ -243,11 +226,36 @@ export class AuthenticationPageComponent extends Component {
           authInfo={this.state.authInfo}
         />
       </div>
+    );
+
+    // Social login buttons
+    const showSocialLogins = !!process.env.REACT_APP_FACEBOOK_APP_ID;
+    const facebookButtonText = isLogin ? (
+      <FormattedMessage id="AuthenticationPage.loginWithFacebook" />
     ) : (
+      <FormattedMessage id="AuthenticationPage.signupWithFacebook" />
+    );
+
+    const socialLoginButtonsMaybe = showSocialLogins ? (
+      <div className={css.idpButtons}>
+        <div className={css.socialButtonsOr}>
+          <span className={css.socialButtonsOrText}>
+            <FormattedMessage id="AuthenticationPage.or" />
+          </span>
+        </div>
+
+        <SocialLoginButton onClick={() => authWithFacebook()}>
+          <span className={css.buttonIcon}>{FacebookLogo}</span>
+          {facebookButtonText}
+        </SocialLoginButton>
+      </div>
+    ) : null;
+
+    // Tabs for SignupForm and LoginForm
+    const authenticationForms = (
       <div className={css.content}>
         <LinkTabNavHorizontal className={css.tabs} tabs={tabs} />
         {loginOrSignupError}
-        {socialLoginButtonsMaybe}
 
         {isLogin ? (
           <LoginForm className={css.form} onSubmit={submitLogin} inProgress={authInProgress} />
@@ -259,8 +267,12 @@ export class AuthenticationPageComponent extends Component {
             onOpenTermsOfService={() => this.setState({ tosModalOpen: true })}
           />
         )}
+
+        {socialLoginButtonsMaybe}
       </div>
     );
+
+    const formContent = isConfirm ? confirmForm : authenticationForms;
 
     const name = user.attributes.profile.firstName;
     const email = <span className={css.email}>{user.attributes.email}</span>;
