@@ -29,6 +29,10 @@ const strategyOptions = {
 
 const verifyCallback = (req, accessToken, refreshToken, profile, done) => {
   const { email, first_name, last_name } = profile._json;
+  const state = req.query.state;
+  const queryParams = JSON.parse(state);
+
+  const { from, defaultReturn, defaultConfirm } = queryParams;
 
   const userData = {
     email,
@@ -36,7 +40,9 @@ const verifyCallback = (req, accessToken, refreshToken, profile, done) => {
     lastName: last_name,
     accessToken,
     refreshToken,
-    returnUrl: req.query.state ? req.query.state : null,
+    from,
+    defaultReturn,
+    defaultConfirm,
   };
 
   done(null, userData);
@@ -48,8 +54,19 @@ if (clientID) {
 }
 
 exports.authenticateFacebook = (req, res, next) => {
-  const from = req && req.query ? req.query.from : null;
-  passport.authenticate('facebook', { scope: ['email'], state: from })(req, res, next);
+  const from = req.query.from ? req.query.from : null;
+  const defaultReturn = req.query.defaultReturn ? req.query.defaultReturn : null;
+  const defaultConfirm = req.query.defaultConfirm ? req.query.defaultConfirm : null;
+
+  const params = {
+    ...(!!from && { from }),
+    ...(!!defaultReturn && { defaultReturn }),
+    ...(!!defaultConfirm && { defaultConfirm }),
+  };
+
+  const paramsAsString = JSON.stringify(params);
+
+  passport.authenticate('facebook', { scope: ['email'], state: paramsAsString })(req, res, next);
 };
 
 // Use custom callback for calling loginWithIdp enpoint
