@@ -4,6 +4,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import routeConfiguration from '../../routeConfiguration';
+import { pathByRouteName } from '../../util/routes';
 import { apiBaseUrl } from '../../util/api';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import classNames from 'classnames';
@@ -193,13 +195,22 @@ export class AuthenticationPageComponent extends Component {
     };
 
     const authWithFacebook = () => {
+      const routes = routeConfiguration();
       const baseUrl = apiBaseUrl();
 
-      if (from) {
-        window.location.href = `${baseUrl}/api/auth/facebook?from=${from}`;
-      } else {
-        window.location.href = `${baseUrl}/api/auth/facebook`;
-      }
+      // Route where the user should be returned after authentication
+      // This is used e.g. with EditListingPage and ListingPage
+      const fromParam = from ? `from=${from}` : '';
+
+      // Default route where user is returned after successfull authentication
+      const defaultReturn = pathByRouteName('LandingPage', routes);
+      const defaultReturnParam = defaultReturn ? `&defaultReturn=${defaultReturn}` : '';
+
+      // Route for confirming user data before creating a new user
+      const defaultConfirm = pathByRouteName('ConfirmPage', routes);
+      const defaultConfirmParam = defaultConfirm ? `&defaultConfirm=${defaultConfirm}` : '';
+
+      window.location.href = `${baseUrl}/api/auth/facebook?${fromParam}${defaultReturnParam}${defaultConfirmParam}`;
     };
 
     const idp = this.state.authInfo

@@ -25,7 +25,7 @@ module.exports = (err, user, req, res, clientID, idpId) => {
 
     // Save error details to cookie so that we can show
     // relevant information in the frontend
-    res
+    return res
       .cookie(
         'st-autherror',
         {
@@ -45,7 +45,7 @@ module.exports = (err, user, req, res, clientID, idpId) => {
 
     // Save error details to cookie so that we can show
     // relevant information in the frontend
-    res
+    return res
       .cookie(
         'st-autherror',
         {
@@ -59,6 +59,8 @@ module.exports = (err, user, req, res, clientID, idpId) => {
       )
       .redirect(`${rootUrl}/login#`);
   }
+
+  const { from, defaultReturn, defaultConfirm } = user;
 
   const tokenStore = sharetribeSdk.tokenStore.expressCookieStore({
     clientId: CLIENT_ID,
@@ -78,7 +80,7 @@ module.exports = (err, user, req, res, clientID, idpId) => {
     ...baseUrl,
   });
 
-  sdk
+  return sdk
     .loginWithIdp({
       idpId: 'facebook',
       idpClientId: clientID,
@@ -90,10 +92,10 @@ module.exports = (err, user, req, res, clientID, idpId) => {
         // We need to add # to the end of the URL because otherwise Facebook
         // login will add their defaul #_#_ which breaks the routing in frontend.
 
-        if (user.returnUrl) {
-          res.redirect(`${rootUrl}${user.returnUrl}#`);
+        if (from) {
+          res.redirect(`${rootUrl}${from}#`);
         } else {
-          res.redirect(`${rootUrl}/#`);
+          res.redirect(`${rootUrl}${defaultReturn}#`);
         }
       }
     })
@@ -112,13 +114,13 @@ module.exports = (err, user, req, res, clientID, idpId) => {
           lastName: user.lastName,
           idpToken: `${user.accessToken}`,
           idpId,
-          from: user.returnUrl,
+          from,
         },
         {
           maxAge: 15 * 60 * 1000, // 15 minutes
         }
       );
 
-      res.redirect(`${rootUrl}/confirm#`);
+      res.redirect(`${rootUrl}${defaultConfirm}#`);
     });
 };
