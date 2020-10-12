@@ -8,12 +8,18 @@ export const CHANGE_PASSWORD_ERROR = 'app/PasswordChangePage/CHANGE_PASSWORD_ERR
 
 export const CHANGE_PASSWORD_CLEAR = 'app/PasswordChangePage/CHANGE_PASSWORD_CLEAR';
 
+export const RESET_PASSWORD_REQUEST = 'app/PasswordChangePage/RESET_PASSWORD_REQUEST';
+export const RESET_PASSWORD_SUCCESS = 'app/PasswordChangePage/RESET_PASSWORD_SUCCESS';
+export const RESET_PASSWORD_ERROR = 'app/PasswordChangePage/RESET_PASSWORD_ERROR';
+
 // ================ Reducer ================ //
 
 const initialState = {
   changePasswordError: null,
   changePasswordInProgress: false,
   passwordChanged: false,
+  resetPasswordInProgress: false,
+  resetPasswordError: null,
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -34,6 +40,14 @@ export default function reducer(state = initialState, action = {}) {
     case CHANGE_PASSWORD_CLEAR:
       return { ...initialState };
 
+    case RESET_PASSWORD_REQUEST:
+      return { ...state, resetPasswordInProgress: true, resetPasswordError: null };
+    case RESET_PASSWORD_SUCCESS:
+      return { ...state, resetPasswordInProgress: false };
+    case RESET_PASSWORD_ERROR:
+      console.error(payload); // eslint-disable-line no-console
+      return { ...state, resetPasswordInProgress: false, resetPasswordError: payload };
+
     default:
       return state;
   }
@@ -51,6 +65,16 @@ export const changePasswordError = error => ({
 
 export const changePasswordClear = () => ({ type: CHANGE_PASSWORD_CLEAR });
 
+export const resetPasswordRequest = () => ({ type: RESET_PASSWORD_REQUEST });
+
+export const resetPasswordSuccess = () => ({ type: RESET_PASSWORD_SUCCESS });
+
+export const resetPasswordError = e => ({
+  type: RESET_PASSWORD_ERROR,
+  error: true,
+  payload: e,
+});
+
 // ================ Thunks ================ //
 
 export const changePassword = params => (dispatch, getState, sdk) => {
@@ -66,4 +90,12 @@ export const changePassword = params => (dispatch, getState, sdk) => {
       // after a timeout on changePassword submit handler
       throw e;
     });
+};
+
+export const resetPassword = email => (dispatch, getState, sdk) => {
+  dispatch(resetPasswordRequest());
+  return sdk.passwordReset
+    .request({ email })
+    .then(() => dispatch(resetPasswordSuccess()))
+    .catch(e => dispatch(resetPasswordError(storableError(e))));
 };
