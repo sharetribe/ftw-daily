@@ -22,9 +22,10 @@ const SHOW_EMAIL_SENT_TIMEOUT = 2000;
 class ContactDetailsFormComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { showVerificationEmailSentMessage: false };
+    this.state = { showVerificationEmailSentMessage: false, showResetPasswordMessage: false };
     this.emailSentTimeoutId = null;
     this.handleResendVerificationEmail = this.handleResendVerificationEmail.bind(this);
+    this.handleResetPassword = this.handleResetPassword.bind(this);
     this.submittedValues = {};
   }
 
@@ -41,6 +42,12 @@ class ContactDetailsFormComponent extends Component {
         this.setState({ showVerificationEmailSentMessage: false });
       }, SHOW_EMAIL_SENT_TIMEOUT);
     });
+  }
+
+  handleResetPassword() {
+    this.setState({ showResetPasswordMessage: true });
+    const email = this.props.currentUser.attributes.email;
+    this.props.onResetPassword(email);
   }
 
   render() {
@@ -61,6 +68,7 @@ class ContactDetailsFormComponent extends Component {
             invalid,
             sendVerificationEmailError,
             sendVerificationEmailInProgress,
+            resetPasswordInProgress,
             values,
           } = fieldRenderProps;
           const { email, phoneNumber } = values;
@@ -256,6 +264,33 @@ class ContactDetailsFormComponent extends Component {
             );
           }
 
+          const sendPasswordLink = (
+            <span className={css.helperLink} onClick={this.handleResetPassword} role="button">
+              <FormattedMessage id="ContactDetailsForm.resetPasswordLinkText" />
+            </span>
+          );
+
+          const resendPasswordLink = (
+            <span className={css.helperLink} onClick={this.handleResetPassword} role="button">
+              <FormattedMessage id="ContactDetailsForm.resendPasswordLinkText" />
+            </span>
+          );
+
+          const resetPasswordLink =
+            this.state.showResetPasswordMessage || resetPasswordInProgress ? (
+              <>
+                <FormattedMessage
+                  id="ContactDetailsForm.resetPasswordLinkSent"
+                  values={{
+                    email: <span className={css.emailStyle}>{currentUser.attributes.email}</span>,
+                  }}
+                />{' '}
+                {resendPasswordLink}
+              </>
+            ) : (
+              sendPasswordLink
+            );
+
           const classes = classNames(rootClassName || css.root, className);
           const submittedOnce = Object.keys(this.submittedValues).length > 0;
           const pristineSinceLastSubmit = submittedOnce && isEqual(values, this.submittedValues);
@@ -299,6 +334,11 @@ class ContactDetailsFormComponent extends Component {
                 </h3>
                 <p className={css.confirmChangesInfo}>
                   <FormattedMessage id="ContactDetailsForm.confirmChangesInfo" />
+                  <br />
+                  <FormattedMessage
+                    id="ContactDetailsForm.resetPasswordInfo"
+                    values={{ resetPasswordLink }}
+                  />
                 </p>
 
                 <FieldTextInput
@@ -343,6 +383,8 @@ ContactDetailsFormComponent.defaultProps = {
   sendVerificationEmailInProgress: false,
   email: null,
   phoneNumber: null,
+  resetPasswordInProgress: false,
+  resetPasswordError: null,
 };
 
 const { bool, func, string } = PropTypes;
@@ -359,6 +401,8 @@ ContactDetailsFormComponent.propTypes = {
   ready: bool.isRequired,
   sendVerificationEmailError: propTypes.error,
   sendVerificationEmailInProgress: bool,
+  resetPasswordInProgress: bool,
+  resetPasswordError: propTypes.error,
 };
 
 const ContactDetailsForm = compose(injectIntl)(ContactDetailsFormComponent);

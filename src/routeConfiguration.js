@@ -165,6 +165,10 @@ const routeConfiguration = () => {
       authPage: 'LoginPage',
       component: props => <ProfileSettingsPage {...props} />,
     },
+
+    // Note: authenticating with IdP (e.g. Facebook) expects that /login path exists
+    // so that in the error case users can be redirected back to the LoginPage
+    // In case you change this, remember to update the route in server/api/auth/loginWithIdp.js
     {
       path: '/login',
       name: 'LoginPage',
@@ -174,6 +178,11 @@ const routeConfiguration = () => {
       path: '/signup',
       name: 'SignupPage',
       component: props => <AuthenticationPage {...props} tab="signup" />,
+    },
+    {
+      path: '/confirm',
+      name: 'ConfirmPage',
+      component: props => <AuthenticationPage {...props} tab="confirm" />,
     },
     {
       path: '/recover-password',

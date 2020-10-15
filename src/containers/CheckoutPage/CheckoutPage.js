@@ -963,7 +963,14 @@ const CheckoutPage = compose(
   injectIntl
 )(CheckoutPageComponent);
 
-CheckoutPage.setInitialValues = initialValues => setInitialValues(initialValues);
+CheckoutPage.setInitialValues = (initialValues, saveToSessionStorage = false) => {
+  if (saveToSessionStorage) {
+    const { listing, bookingData, bookingDates } = initialValues;
+    storeData(bookingData, bookingDates, listing, null, STORAGE_KEY);
+  }
+
+  return setInitialValues(initialValues);
+};
 
 CheckoutPage.displayName = 'CheckoutPage';
 

@@ -101,11 +101,14 @@ const siteInstagramPage = null;
 // Facebook page is used in SEO schema (http://schema.org/Organization)
 const siteFacebookPage = 'https://www.facebook.com/Sharetribe/';
 
+// Social logins & SSO
+
+// Note: Facebook app id is also used for tracking:
 // Facebook counts shares with app or page associated by this id
 // Currently it is unset, but you can read more about fb:app_id from
 // https://developers.facebook.com/docs/sharing/webmasters#basic
 // You should create one to track social sharing in Facebook
-const facebookAppId = null;
+const facebookAppId = process.env.REACT_APP_FACEBOOK_APP_ID;
 
 const maps = {
   mapboxAccessToken: process.env.REACT_APP_MAPBOX_ACCESS_TOKEN,

@@ -119,10 +119,13 @@ export class ListingPageComponent extends Component {
       confirmPaymentError: null,
     };
 
+    const saveToSessionStorage = !this.props.currentUser;
+
     const routes = routeConfiguration();
     // Customize checkout page state with current listing and selected bookingDates
     const { setInitialValues } = findRouteByRouteName('CheckoutPage', routes);
-    callSetInitialValues(setInitialValues, initialValues);
+
+    callSetInitialValues(setInitialValues, initialValues, saveToSessionStorage);
 
     // Clear previous Stripe errors from store if there is any
     onInitializeCardPaymentData();
@@ -599,7 +602,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
-  callSetInitialValues: (setInitialValues, values) => dispatch(setInitialValues(values)),
+  callSetInitialValues: (setInitialValues, values, saveToSessionStorage) =>
+    dispatch(setInitialValues(values, saveToSessionStorage)),
   onFetchTransactionLineItems: (bookingData, listingId, isOwnListing) =>
     dispatch(fetchTransactionLineItems(bookingData, listingId, isOwnListing)),
   onSendEnquiry: (listingId, message) => dispatch(sendEnquiry(listingId, message)),

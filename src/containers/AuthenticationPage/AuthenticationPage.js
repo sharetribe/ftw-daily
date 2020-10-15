@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import routeConfiguration from '../../routeConfiguration';
+import { pathByRouteName } from '../../util/routes';
+import { apiBaseUrl } from '../../util/api';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import classNames from 'classnames';
 import config from '../../config';
@@ -19,6 +23,7 @@ import {
   LinkTabNavHorizontal,
   IconEmailSent,
   InlineTextButton,
+  SocialLoginButton,
   IconClose,
   LayoutSingleColumn,
   LayoutWrapperTopbar,
@@ -28,20 +33,36 @@ import {
   Modal,
   TermsOfService,
 } from '../../components';
-import { LoginForm, SignupForm } from '../../forms';
+import { ConfirmSignupForm, LoginForm, SignupForm } from '../../forms';
 import { TopbarContainer } from '../../containers';
-import { login, authenticationInProgress, signup } from '../../ducks/Auth.duck';
+import { login, authenticationInProgress, signup, signupWithIdp } from '../../ducks/Auth.duck';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { manageDisableScrolling } from '../../ducks/UI.duck';
 
 import css from './AuthenticationPage.css';
+import { FacebookLogo } from './socialLoginLogos';
 
 export class AuthenticationPageComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { tosModalOpen: false };
+    this.state = {
+      tosModalOpen: false,
+      authError: Cookies.get('st-autherror')
+        ? JSON.parse(Cookies.get('st-autherror').replace('j:', ''))
+        : null,
+      authInfo: Cookies.get('st-authinfo')
+        ? JSON.parse(Cookies.get('st-authinfo').replace('j:', ''))
+        : null,
+    };
   }
+
+  componentDidMount() {
+    // Remove the autherror cookie once the content is saved to state
+    // because we don't want to show the error message e.g. after page refresh
+    Cookies.remove('st-autherror');
+  }
+
   render() {
     const {
       authInProgress,
@@ -54,14 +75,21 @@ export class AuthenticationPageComponent extends Component {
       signupError,
       submitLogin,
       submitSignup,
+      confirmError,
+      submitSinguoWithIdp,
       tab,
       sendVerificationEmailInProgress,
       sendVerificationEmailError,
       onResendVerificationEmail,
       onManageDisableScrolling,
     } = this.props;
+
+    const isConfirm = tab === 'confirm';
     const isLogin = tab === 'login';
-    const from = location.state && location.state.from ? location.state.from : null;
+    const locationFrom = location.state && location.state.from ? location.state.from : null;
+    const authinfoFrom =
+      this.state.authInfo && this.state.authInfo.from ? this.state.authInfo.from : null;
+    const from = locationFrom ? locationFrom : authinfoFrom ? authinfoFrom : null;
 
     const user = ensureCurrentUser(currentUser);
     const currentUserLoaded = !!user.id;
@@ -94,6 +122,16 @@ export class AuthenticationPageComponent extends Component {
         )}
       </div>
     );
+
+    const confirmErrorMessage = confirmError ? (
+      <div className={css.error}>
+        {isSignupEmailTakenError(confirmError) ? (
+          <FormattedMessage id="AuthenticationPage.signupFailedEmailAlreadyTaken" />
+        ) : (
+          <FormattedMessage id="AuthenticationPage.signupFailed" />
+        )}
+      </div>
+    ) : null;
 
     // eslint-disable-next-line no-confusing-arrow
     const errorMessage = (error, message) => (error ? message : null);
@@ -136,10 +174,100 @@ export class AuthenticationPageComponent extends Component {
       submitSignup(params);
     };
 
-    const formContent = (
+    const handleSubmitConfirm = values => {
+      const { idpToken, email, firstName, lastName, idpId } = this.state.authInfo;
+      const { email: newEmail, firstName: newFirstName, lastName: newLastName } = values;
+
+      // Pass email, fistName or lastName to Flex API only if user has edited them
+      // sand they can't be fetched directly from idp provider (e.g. Facebook)
+
+      const authParams = {
+        ...(newEmail !== email && { email: newEmail }),
+        ...(newFirstName !== firstName && { firstName: newFirstName }),
+        ...(newLastName !== lastName && { lastName: newLastName }),
+      };
+
+      submitSinguoWithIdp({
+        idpToken,
+        idpId,
+        ...authParams,
+      });
+    };
+
+    const authWithFacebook = () => {
+      const routes = routeConfiguration();
+      const baseUrl = apiBaseUrl();
+
+      // Route where the user should be returned after authentication
+      // This is used e.g. with EditListingPage and ListingPage
+      const fromParam = from ? `from=${from}` : '';
+
+      // Default route where user is returned after successfull authentication
+      const defaultReturn = pathByRouteName('LandingPage', routes);
+      const defaultReturnParam = defaultReturn ? `&defaultReturn=${defaultReturn}` : '';
+
+      // Route for confirming user data before creating a new user
+      const defaultConfirm = pathByRouteName('ConfirmPage', routes);
+      const defaultConfirmParam = defaultConfirm ? `&defaultConfirm=${defaultConfirm}` : '';
+
+      window.location.href = `${baseUrl}/api/auth/facebook?${fromParam}${defaultReturnParam}${defaultConfirmParam}`;
+    };
+
+    const idp = this.state.authInfo
+      ? this.state.authInfo.idpId.replace(/^./, str => str.toUpperCase())
+      : null;
+
+    // Form for confirming information frm IdP (e.g. Facebook)
+    // before new user is created to Flex
+    const confirmForm = (
+      <div className={css.content}>
+        <h1 className={css.signupWithIdpTitle}>
+          <FormattedMessage id="AuthenticationPage.confirmSignupWithIdpTitle" values={{ idp }} />
+        </h1>
+
+        <p className={css.confirmInfoText}>
+          <FormattedMessage id="AuthenticationPage.confirmSignupInfoText" />
+        </p>
+        {confirmErrorMessage}
+        <ConfirmSignupForm
+          className={css.form}
+          onSubmit={handleSubmitConfirm}
+          inProgress={authInProgress}
+          onOpenTermsOfService={() => this.setState({ tosModalOpen: true })}
+          authInfo={this.state.authInfo}
+        />
+      </div>
+    );
+
+    // Social login buttons
+    const showSocialLogins = !!process.env.REACT_APP_FACEBOOK_APP_ID;
+    const facebookButtonText = isLogin ? (
+      <FormattedMessage id="AuthenticationPage.loginWithFacebook" />
+    ) : (
+      <FormattedMessage id="AuthenticationPage.signupWithFacebook" />
+    );
+
+    const socialLoginButtonsMaybe = showSocialLogins ? (
+      <div className={css.idpButtons}>
+        <div className={css.socialButtonsOr}>
+          <span className={css.socialButtonsOrText}>
+            <FormattedMessage id="AuthenticationPage.or" />
+          </span>
+        </div>
+
+        <SocialLoginButton onClick={() => authWithFacebook()}>
+          <span className={css.buttonIcon}>{FacebookLogo}</span>
+          {facebookButtonText}
+        </SocialLoginButton>
+      </div>
+    ) : null;
+
+    // Tabs for SignupForm and LoginForm
+    const authenticationForms = (
       <div className={css.content}>
         <LinkTabNavHorizontal className={css.tabs} tabs={tabs} />
         {loginOrSignupError}
+
         {isLogin ? (
           <LoginForm className={css.form} onSubmit={submitLogin} inProgress={authInProgress} />
         ) : (
@@ -150,8 +278,12 @@ export class AuthenticationPageComponent extends Component {
             onOpenTermsOfService={() => this.setState({ tosModalOpen: true })}
           />
         )}
+
+        {socialLoginButtonsMaybe}
       </div>
     );
+
+    const formContent = isConfirm ? confirmForm : authenticationForms;
 
     const name = user.attributes.profile.firstName;
     const email = <span className={css.email}>{user.attributes.email}</span>;
@@ -265,8 +397,10 @@ AuthenticationPageComponent.defaultProps = {
   currentUser: null,
   loginError: null,
   signupError: null,
+  confirmError: null,
   tab: 'signup',
   sendVerificationEmailError: null,
+  showSocialLoginsForTests: false,
 };
 
 const { bool, func, object, oneOf, shape } = PropTypes;
@@ -278,9 +412,11 @@ AuthenticationPageComponent.propTypes = {
   loginError: propTypes.error,
   scrollingDisabled: bool.isRequired,
   signupError: propTypes.error,
+  confirmError: propTypes.error,
+
   submitLogin: func.isRequired,
   submitSignup: func.isRequired,
-  tab: oneOf(['login', 'signup']),
+  tab: oneOf(['login', 'signup', 'confirm']),
 
   sendVerificationEmailInProgress: bool.isRequired,
   sendVerificationEmailError: propTypes.error,
@@ -295,7 +431,7 @@ AuthenticationPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { isAuthenticated, loginError, signupError } = state.Auth;
+  const { isAuthenticated, loginError, signupError, confirmError } = state.Auth;
   const { currentUser, sendVerificationEmailInProgress, sendVerificationEmailError } = state.user;
   return {
     authInProgress: authenticationInProgress(state),
@@ -304,6 +440,7 @@ const mapStateToProps = state => {
     loginError,
     scrollingDisabled: isScrollingDisabled(state),
     signupError,
+    confirmError,
     sendVerificationEmailInProgress,
     sendVerificationEmailError,
   };
@@ -312,6 +449,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   submitLogin: ({ email, password }) => dispatch(login(email, password)),
   submitSignup: params => dispatch(signup(params)),
+  submitSinguoWithIdp: params => dispatch(signupWithIdp(params)),
   onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),

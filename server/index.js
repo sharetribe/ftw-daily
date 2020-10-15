@@ -30,6 +30,7 @@ const enforceSsl = require('express-enforces-ssl');
 const path = require('path');
 const sharetribeSdk = require('sharetribe-flex-sdk');
 const sitemap = require('express-sitemap');
+const passport = require('passport');
 const auth = require('./auth');
 const apiRouter = require('./apiRouter');
 const renderer = require('./renderer');
@@ -144,6 +145,12 @@ if (!dev) {
     app.use(auth.basicAuth(USERNAME, PASSWORD));
   }
 }
+
+// Initialize Passport.js  (http://www.passportjs.org/)
+// Passport is authentication middleware for Node.js
+// We use passport to enable authenticating with
+// a 3rd party identity provider (e.g. Facebook or Google)
+app.use(passport.initialize());
 
 // Server-side routes that do not render the application
 app.use('/api', apiRouter);
