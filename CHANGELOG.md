@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [fix] Pass additional values from `ConfirmSignupForm` forward as user's protected data.
+  [#1368](https://github.com/sharetribe/ftw-daily/pull/1368)
+
 ## [v6.4.0] 2020-10-14
 
 - [add] Add Facebook login as a first step towards supporting social logins and SSO in FTW. This PR
