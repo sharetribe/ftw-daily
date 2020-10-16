@@ -195,7 +195,7 @@ export class AuthenticationPageComponent extends Component {
         idpToken,
         idpId,
         ...authParams,
-        protectedData,
+        ...(!!protectedData && { protectedData }),
       });
     };
 
