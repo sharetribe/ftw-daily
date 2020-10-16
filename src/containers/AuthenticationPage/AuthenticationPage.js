@@ -42,6 +42,7 @@ import { manageDisableScrolling } from '../../ducks/UI.duck';
 
 import css from './AuthenticationPage.css';
 import { FacebookLogo } from './socialLoginLogos';
+import { isEmpty } from 'lodash';
 
 export class AuthenticationPageComponent extends Component {
   constructor(props) {
@@ -76,7 +77,7 @@ export class AuthenticationPageComponent extends Component {
       submitLogin,
       submitSignup,
       confirmError,
-      submitSinguoWithIdp,
+      submitSingupWithIdp,
       tab,
       sendVerificationEmailInProgress,
       sendVerificationEmailError,
@@ -176,7 +177,7 @@ export class AuthenticationPageComponent extends Component {
 
     const handleSubmitConfirm = values => {
       const { idpToken, email, firstName, lastName, idpId } = this.state.authInfo;
-      const { email: newEmail, firstName: newFirstName, lastName: newLastName } = values;
+      const { email: newEmail, firstName: newFirstName, lastName: newLastName, ...rest } = values;
 
       // Pass email, fistName or lastName to Flex API only if user has edited them
       // sand they can't be fetched directly from idp provider (e.g. Facebook)
@@ -187,10 +188,14 @@ export class AuthenticationPageComponent extends Component {
         ...(newLastName !== lastName && { lastName: newLastName }),
       };
 
-      submitSinguoWithIdp({
+      // If the confirm form has any additional values, pass them forward as user's protected data
+      const protectedData = !isEmpty(rest) ? { ...rest } : null;
+
+      submitSingupWithIdp({
         idpToken,
         idpId,
         ...authParams,
+        protectedData,
       });
     };
 
@@ -449,7 +454,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   submitLogin: ({ email, password }) => dispatch(login(email, password)),
   submitSignup: params => dispatch(signup(params)),
-  submitSinguoWithIdp: params => dispatch(signupWithIdp(params)),
+  submitSingupWithIdp: params => dispatch(signupWithIdp(params)),
   onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
