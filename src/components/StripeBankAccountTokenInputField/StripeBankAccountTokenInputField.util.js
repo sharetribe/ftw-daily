@@ -165,6 +165,9 @@ export const mapInputsToStripeAccountKeys = (country, values) => {
   switch (country) {
     case 'AT':
     case 'BE':
+    case 'BG':
+    case 'CY':
+    case 'CZ':
     case 'DK':
     case 'EE':
     case 'FI':
@@ -176,9 +179,11 @@ export const mapInputsToStripeAccountKeys = (country, values) => {
     case 'LV':
     case 'LT':
     case 'LU':
+    case 'MT':
     case 'NL':
     case 'PL':
     case 'PT':
+    case 'RO':
     case 'SK':
     case 'SI':
     case 'ES':

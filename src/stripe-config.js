@@ -21,7 +21,7 @@ export const defaultMCC = '5734';
 Stripe only supports payments in certain countries, see full list
 at https://stripe.com/global
 
-You can find the bank account formats from https://stripe.com/docs/connect/payouts#formats
+You can find the bank account formats from https://stripe.com/docs/connect/payouts-bank-accounts
 */
 
 export const stripeCountryDetails = [
@@ -51,6 +51,14 @@ export const stripeCountryDetails = [
     },
   },
   {
+    //Bulgraia
+    code: 'BG',
+    currency: 'BGN',
+    accountConfig: {
+      iban: true,
+    },
+  },
+  {
     // Canada
     code: 'CA',
     currency: 'CAD',
@@ -58,6 +66,22 @@ export const stripeCountryDetails = [
       transitNumber: true,
       institutionNumber: true,
       accountNumber: true,
+    },
+  },
+  {
+    //Cyprus
+    code: 'CY',
+    currency: 'EUR',
+    accountConfig: {
+      iban: true,
+    },
+  },
+  {
+    //	Czech Republic
+    code: 'CZ',
+    currency: 'CZK',
+    accountConfig: {
+      iban: true,
     },
   },
   {
@@ -172,6 +196,14 @@ export const stripeCountryDetails = [
     },
   },
   {
+    // Malta
+    code: 'MT',
+    currency: 'EUR',
+    accountConfig: {
+      iban: true,
+    },
+  },
+  {
     // Mexico
     code: 'MX',
     currency: 'MXN',
@@ -215,6 +247,14 @@ export const stripeCountryDetails = [
     // Portugal
     code: 'PT',
     currency: 'EUR',
+    accountConfig: {
+      iban: true,
+    },
+  },
+  {
+    // Romania
+    code: 'RO',
+    currency: 'RON',
     accountConfig: {
       iban: true,
     },
