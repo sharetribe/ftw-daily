@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [add] Update French translation file (Spanish and German translations have still missing keys).
+  [#1369](https://github.com/sharetribe/ftw-daily/pull/1369)
 - [fix] Pass additional values from `ConfirmSignupForm` forward as user's protected data.
   [#1368](https://github.com/sharetribe/ftw-daily/pull/1368)
 
