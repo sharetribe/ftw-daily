@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [fix] Don't pass protected data key through `ConfirmSignupForm` if protected data is empty.
+  [#1370](https://github.com/sharetribe/ftw-daily/pull/1370)
 - [add] Update French translation file (Spanish and German translations have still missing keys).
   [#1369](https://github.com/sharetribe/ftw-daily/pull/1369)
 - [fix] Pass additional values from `ConfirmSignupForm` forward as user's protected data.
