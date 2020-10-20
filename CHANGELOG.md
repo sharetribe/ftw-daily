@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [add] Add new Stripe countires Bulgaria, Cyprus, Czech Republic, Malta and Romania to the
+  `StripeConnectAccountForm`. Also reorder BANK_CODE & BRANCH_CODE in UI to more logical order.
+  [#1371](https://github.com/sharetribe/ftw-daily/pull/1371)
 - [fix] Don't pass protected data key through `ConfirmSignupForm` if protected data is empty.
   [#1370](https://github.com/sharetribe/ftw-daily/pull/1370)
 - [add] Update French translation file (Spanish and German translations have still missing keys).
