@@ -11932,10 +11932,10 @@ sharetribe-flex-sdk@1.13.0:
     lodash "^4.17.10"
     transit-js "^0.8.861"
 
-sharetribe-scripts@next:
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/sharetribe-scripts/-/sharetribe-scripts-3.4.1.tgz#d100d9d943c75837deb61f69245ff96ce3b02dd2"
-  integrity sha512-dcAC0myBaspxawhqKgn5gHTaorznO8oxAucuYTRrbLGWwUwZVrcorhPunV1Wyhv52edBJgJ76i9QLVOVjNk0Ug==
+sharetribe-scripts@3.4.1-rc:
+  version "3.4.1-rc"
+  resolved "https://registry.yarnpkg.com/sharetribe-scripts/-/sharetribe-scripts-3.4.1-rc.tgz#2b18aa9c471ef27fff9c82d430f97fab42259698"
+  integrity sha512-oQ227U1p7n/BF9H9ePDAh6ncsaMuGqnNIzHnCzXMhIladcaQd+Rv6V1Sw+9gw9Yai0i25uauEWYIgfOU0v+XWg==
   dependencies:
     "@babel/core" "7.9.0"
     "@svgr/webpack" "4.3.3"
