@@ -22,10 +22,14 @@
 .searchOptions {
   display: flex;
   flex-direction: row;
-  margin-bottom: 24px;
+  /* margin-bottom: 24px; */
 }
 
-.searchResultSummary {
+.searchOptions > div {
+  margin-right: 8px;
+}
+
+.searchResultSummary, .catTxtDiv{
   @apply --marketplaceH4FontStyles;
   line-height: 20px;
   margin-top: 10px;
@@ -70,7 +74,7 @@
   }
 }
 
-.resultsFound {
+.resultsFound, .catTxtSpan{
   white-space: nowrap;
 }
 

@@ -40,6 +40,16 @@ const SearchFiltersPrimaryComponent = props => {
     </button>
   ) : null;
 
+  const nonCategoryChildren = children.filter(c => !c.props.isCategory);
+  const categoryChildren = children.filter(c => c.props.isCategory);
+  const categoriesText = (
+    <div className={css.catTxtDiv}>
+      <span className={css.catTxtSpan}>
+        <FormattedMessage id="SearchFiltersPrimary.categories" />
+      </span>
+    </div>
+  );
+
   return (
     <div className={classes}>
       <div className={css.searchOptions}>
@@ -54,11 +64,13 @@ const SearchFiltersPrimaryComponent = props => {
           </div>
         ) : null}
         {sortByComponent}
+        {nonCategoryChildren}
+        {toggleSecondaryFiltersOpenButton}
       </div>
 
       <div className={css.filters}>
-        {children}
-        {toggleSecondaryFiltersOpenButton}
+        {categoriesText}
+        {categoryChildren}
       </div>
 
       {hasNoResult ? (

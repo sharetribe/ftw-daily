@@ -258,7 +258,7 @@ export const filters = [
     // Note: BookingDateRangeFilter is fixed filter,
     // you can't change "queryParamNames: ['dates'],"
     queryParamNames: ['dates'],
-    config: {},
+    config: {isCategory: false},
   },
   {
     id: 'price',
@@ -274,38 +274,137 @@ export const filters = [
       min: 0,
       max: 1000,
       step: 5,
+      isCategory: false,
     },
   },
   {
     id: 'keyword',
     label: 'Keyword',
     type: 'KeywordFilter',
-    group: 'primary',
+    group: 'secondary',
     // Note: KeywordFilter is fixed filter,
     // you can't change "queryParamNames: ['keywords'],"
     queryParamNames: ['keywords'],
     // NOTE: If you are ordering search results by distance
     // the keyword search can't be used at the same time.
     // You can turn on/off ordering by distance from config.js file.
-    config: {},
+    config: {isCategory: false},
   },
   {
-    id: 'category',
-    label: 'Category',
-    type: 'SelectSingleFilter',
-    group: 'secondary',
-    queryParamNames: ['pub_category'],
+    id: 'hair_and_beauty',
+    label: 'Hair & Beauty',
+    type: 'SelectMultipleFilter',
+    group: 'primary',
+    queryParamNames: ['pub_hair_and_beauty'],
     config: {
       // "key" is the option you see in Flex Console.
       // "label" is set here for the UI only.
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
       options: [
-        { key: 'smoke', label: 'Smoke' },
-        { key: 'electric', label: 'Electric' },
-        { key: 'wood', label: 'Wood' },
-        { key: 'other', label: 'Other' },
+        { key: 'hair-stylist', label: 'Hair Stylist' },
+        { key: 'barber', label: 'Barber' },
+        { key: 'beauty-space', label: 'Beauty Space' },
+        { key: 'nail-station', label: 'Nail Station' },
+        { key: 'beauty-room', label: 'Beauty Room' },
+        { key: 'beauty-treatment-room', label: 'Treatment Room' }
       ],
+      isCategory: true,
+    },
+  },
+  {
+    id: 'fitness_and_wellness',
+    label: 'Fitness & Wellness',
+    type: 'SelectMultipleFilter',
+    group: 'primary',
+    queryParamNames: ['pub_fitness_and_wellness'],
+    config: {
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for the UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: [
+        { key: 'fitness-studio', label: 'Fitness Studio' },
+        { key: 'therapy-room', label: 'Therapy Room' },
+        { key: 'wellness-treatment-room', label: 'Treatment Room' },
+      ],
+      isCategory: true,
+    },
+  },
+  {
+    id: 'creative_studios',
+    label: 'Creative Studios',
+    type: 'SelectMultipleFilter',
+    group: 'primary',
+    queryParamNames: ['pub_creative_studios'],
+    config: {
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for the UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: [
+        { key: 'photography-studio', label: 'Photography Studio' },
+        { key: 'art-studio', label: 'Art Studio' },
+        { key: 'music-studio', label: 'Music Studio' },
+      ],
+      isCategory: true,
+    },
+  },
+  {
+    id: 'coworking',
+    label: 'Coworking',
+    type: 'SelectMultipleFilter',
+    group: 'primary',
+    queryParamNames: ['pub_coworking'],
+    config: {
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for the UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: [
+        { key: 'coworking-space', label: 'Coworking Space' },
+        { key: 'private-office-space', label: 'Private Office Space' },
+        { key: 'meeting-room-space', label: 'Meeting Room Space' },
+      ],
+      isCategory: true,
+    },
+  },
+  {
+    id: 'events_and_kitchen',
+    label: 'Events & Kitchen',
+    type: 'SelectMultipleFilter',
+    group: 'primary',
+    queryParamNames: ['pub_events_and_kitchen'],
+    config: {
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for the UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: [
+        { key: 'event-space', label: 'Event Space' },
+        { key: 'outdoor-site', label: 'Outdoor Site' },
+        { key: 'shoot-location', label: 'Shoot Location' },
+        { key: 'kitchen-space', label: 'Kitchen Space' },
+      ],
+      isCategory: true,
+    },
+  },
+  {
+    id: 'tattoo_and_piercing',
+    label: 'Tattoo & Piercing',
+    type: 'SelectMultipleFilter',
+    group: 'primary',
+    queryParamNames: ['pub_tattoo_and_piercing'],
+    config: {
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for the UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: [
+        { key: 'tattoo', label: 'Tattoo' },
+        { key: 'piercing', label: 'Piercing' },
+      ],
+      isCategory: true,
     },
   },
   {
@@ -325,38 +424,83 @@ export const filters = [
       // to make filter customizations a bit easier.
       options: [
         {
-          key: 'towels',
-          label: 'Towels',
+          key: "free-parking",
+          label: "Free parking",
         },
         {
-          key: 'bathroom',
-          label: 'Bathroom',
+          key: "key/electronic-access-card",
+          label: "Key/electronic access card",
         },
         {
-          key: 'swimming_pool',
-          label: 'Swimming pool',
+          key: "wheelchair-access",
+          label: "Wheelchair access",
         },
         {
-          key: 'own_drinks',
-          label: 'Own drinks allowed',
+          key: "wifi",
+          label: "WiFi",
         },
         {
-          key: 'jacuzzi',
-          label: 'Jacuzzi',
+          key: "receptionist",
+          label: "Receptionist",
         },
         {
-          key: 'audiovisual_entertainment',
-          label: 'Audiovisual entertainment',
+          key: "kitchen",
+          label: "Kitchen",
         },
         {
-          key: 'barbeque',
-          label: 'Barbeque',
+          key: "fridge/freezer",
+          label: "Fridge/freezer",
         },
         {
-          key: 'own_food_allowed',
-          label: 'Own food allowed',
+          key: "tea/coffee-making-facilities",
+          label: "Tea/coffee making facilities",
         },
+        {
+          key: "refreshments",
+          label: "Refreshments",
+        },
+        {
+          key: "toilet",
+          label: "Toilet",
+        },
+        {
+          key: "air-conditioning",
+          label: "Air conditioning",
+        },
+        {
+          key: "heating",
+          label: "Heating",
+        },
+        {
+          key: "accepts-card-payments",
+          label: "Accepts card payments",
+        },
+        {
+          key: "accepts-mail-and-packages",
+          label: "Accepts mail and packages",
+        },
+        {
+          key: "cleaner",
+          label: "Cleaner",
+        },
+        {
+          key: "waiting-area",
+          label: "Waiting area",
+        },
+        {
+          key: "changing-areas-with-showers",
+          label: "Changing areas with showers",
+        },
+        {
+          key: "cctv-monitoring",
+          label: "CCTV monitoring",
+        },
+        {
+          key: "secure-locker",
+          label: "Secure locker",
+        }
       ],
+      isCategory: false,
     },
   }
 ];

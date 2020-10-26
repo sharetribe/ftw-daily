@@ -242,6 +242,7 @@ class MainPanel extends Component {
                 getHandleChangedValueFn={this.getHandleChangedValueFn}
                 showAsPopup
                 contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+                isCategory={!!config.config.isCategory}
               />
             );
           })}
