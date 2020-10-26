@@ -1,62 +1,68 @@
 import React, { Component } from 'react';
-import { string, func, array, number } from 'prop-types';
+import { arrayOf, func, node, number, object, shape, string } from 'prop-types';
 import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 
 import { Menu, MenuContent, MenuItem, MenuLabel } from '..';
 import css from './SelectSingleFilterPopup.css';
 
-const flattenOptions = options => {
-  return options.reduce((acc, o) => {
-    o.children && o.children.length
-      ? o.children.map(c => acc.push(c))
-      : acc.push(o)
-
-    return acc
-  }, [])
-};
+//NOTE v2s1 filterupdate -- customizations removed in v5 update
+// const flattenOptions = options => {
+//   return options.reduce((acc, o) => {
+//     o.children && o.children.length
+//       ? o.children.map(c => acc.push(c))
+//       : acc.push(o)
+//
+//     return acc
+//   }, [])
+// };
 
 const optionLabel = (options, key) => {
-  const flattened = flattenOptions(options);
-  const option = flattened.find(o => o.key === key);
+  //NOTE v2s1 filterupdate -- customizations removed in v5 update
+  // const flattened = flattenOptions(options);
+  // const option = flattened.find(o => o.key === key);
+  const option = options.find(o => o.key === key);
   return option ? option.label : key;
 };
 
-const CategoryItems = (urlParam, initialValue, selectOption, options) => {
-  const item = option => {
-    // check if this option is selected
-    const selected = initialValue === option.key;
-
-    // menu item border class
-    const menuItemBorderClass = selected ? css.menuItemBorderSelected : css.menuItemBorder;
-
-    return (
-      <MenuItem key={option.key}>
-        <button
-          className={css.menuItem}
-          onClick={() => selectOption(urlParam, option.key)}
-        >
-          <span className={menuItemBorderClass} />
-          {option.label}
-        </button>
-      </MenuItem>
-    )
-  }
-
-  return options.map((option, index) => {
-    if (option.children && option.children.length) return (
-      <ul className={css.menuContent} key={`${index}.${option.label}`}>
-        <li className={css.menuItem}><h3>{option.label}</h3></li>
-        {option.children.map((c, i) => (item(c)))}
-      </ul>
-    );
-
-    if (option.key) return item(option)
-    return null
-  })
+const getQueryParamName = queryParamNames => {
+  return Array.isArray(queryParamNames) ? queryParamNames[0] : queryParamNames;
 };
 
-
+// NOTE v2s1 filterupdate -- call to it commented out below, prev custom nested filters, added this
+// const CategoryItems = (urlParam, initialValue, selectOption, options) => {
+//   const item = option => {
+//     // check if this option is selected
+//     const selected = initialValue === option.key;
+//
+//     // menu item border class
+//     const menuItemBorderClass = selected ? css.menuItemBorderSelected : css.menuItemBorder;
+//
+//     return (
+//       <MenuItem key={option.key}>
+//         <button
+//           className={css.menuItem}
+//           onClick={() => selectOption(urlParam, option.key)}
+//         >
+//           <span className={menuItemBorderClass} />
+//           {option.label}
+//         </button>
+//       </MenuItem>
+//     )
+//   }
+//
+//   return options.map((option, index) => {
+//     if (option.children && option.children.length) return (
+//       <ul className={css.menuContent} key={`${index}.${option.label}`}>
+//         <li className={css.menuItem}><h3>{option.label}</h3></li>
+//         {option.children.map((c, i) => (item(c)))}
+//       </ul>
+//     );
+//
+//     if (option.key) return item(option)
+//     return null
+//   })
+// };
 
 class SelectSingleFilterPopup extends Component {
   constructor(props) {
@@ -71,21 +77,25 @@ class SelectSingleFilterPopup extends Component {
     this.setState({ isOpen: isOpen });
   }
 
-  selectOption(urlParam, option) {
+  selectOption(queryParamName, option) {
     this.setState({ isOpen: false });
-    this.props.onSelect(urlParam, option);
+    this.props.onSelect({ [queryParamName]: option });
   }
 
   render() {
     const {
       rootClassName,
       className,
-      urlParam,
       label,
       options,
-      initialValue,
+      queryParamNames,
+      initialValues,
       contentPlacementOffset,
     } = this.props;
+
+    const queryParamName = getQueryParamName(queryParamNames);
+    const initialValue =
+      initialValues && initialValues[queryParamNames] ? initialValues[queryParamNames] : null;
 
     // resolve menu label text and class
     const menuLabel = initialValue ? optionLabel(options, initialValue) : label;
@@ -104,11 +114,32 @@ class SelectSingleFilterPopup extends Component {
         <MenuLabel className={menuLabelClass}>{menuLabel}</MenuLabel>
         <MenuContent className={css.menuContent}>
 
+          {/* NOTE v2s1 filterupdate -- prev custom nested filters, added this */}
+          {/* { CategoryItems(urlParam, initialValue, this.selectOption, options)  } */}
 
-          { CategoryItems(urlParam, initialValue, this.selectOption, options)  }
+          {options.map(option => {
+            // check if this option is selected
+            const selected = initialValue === option.key;
+            // menu item border class
+            const menuItemBorderClass = selected ? css.menuItemBorderSelected : css.menuItemBorder;
 
+            return (
+              <MenuItem key={option.key}>
+                <button
+                  className={css.menuItem}
+                  onClick={() => this.selectOption(queryParamName, option.key)}
+                >
+                  <span className={menuItemBorderClass} />
+                  {option.label}
+                </button>
+              </MenuItem>
+            );
+          })}
           <MenuItem key={'clearLink'}>
-            <button className={css.clearMenuItem} onClick={() => this.selectOption(urlParam, null)}>
+            <button
+              className={css.clearMenuItem}
+              onClick={() => this.selectOption(queryParamName, null)}
+            >
               <FormattedMessage id={'SelectSingleFilter.popupClear'} />
             </button>
           </MenuItem>
@@ -121,18 +152,25 @@ class SelectSingleFilterPopup extends Component {
 SelectSingleFilterPopup.defaultProps = {
   rootClassName: null,
   className: null,
-  initialValue: null,
+  initialValues: null,
   contentPlacementOffset: 0,
 };
 
 SelectSingleFilterPopup.propTypes = {
   rootClassName: string,
   className: string,
-  urlParam: string.isRequired,
-  label: string.isRequired,
+  queryParamNames: arrayOf(string).isRequired,
+  label: node.isRequired,
   onSelect: func.isRequired,
-  options: array.isRequired,
-  initialValue: string,
+  // NOTE v2s1 filterupdate -- with custom nested filters, used to be this
+  // options: array.isRequired,
+  options: arrayOf(
+    shape({
+      key: string.isRequired,
+      label: string.isRequired,
+    })
+  ).isRequired,
+  initialValues: object,
   contentPlacementOffset: number,
 };
 

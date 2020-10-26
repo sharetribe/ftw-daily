@@ -22,6 +22,7 @@ import {
   bool,
   func,
   instanceOf,
+  node,
   number,
   object,
   objectOf,
@@ -409,6 +410,7 @@ propTypes.pagination = shape({
 });
 
 // Search filter definition
+//NOTE v2s1 filterupdate -- delete/update me?
 const filterWithGroupedOptions = shape({
   paramName: string.isRequired,
   options: arrayOf(
@@ -419,16 +421,18 @@ const filterWithGroupedOptions = shape({
   ).isRequired,
 });
 
+//NOTE v2s1 filterupdate -- delete/update me?
 const filterWithOptions = shape({
   paramName: string.isRequired,
   options: arrayOf(
-    shape({
-      key: oneOfType([string, bool, number]).isRequired,
-      label: string.isRequired,
-    })
-  ).isRequired,
-});
+      shape({
+        key: oneOfType([string, bool, number]).isRequired,
+        label: string.isRequired,
+      })
+    ).isRequired,
+  });
 
+//NOTE v2s1 filterupdate -- delete/update me?
 const filterWithPriceConfig = shape({
   paramName: string.isRequired,
   config: shape({
@@ -438,6 +442,7 @@ const filterWithPriceConfig = shape({
   }).isRequired,
 });
 
+//NOTE v2s1 filterupdate -- delete/update me?
 const filterIsActiveConfig = shape({
   paramName: string.isRequired,
   config: shape({
@@ -445,12 +450,41 @@ const filterIsActiveConfig = shape({
   }).isRequired,
 });
 
-propTypes.filterConfig = oneOfType([
-  filterWithGroupedOptions,
-  filterWithOptions,
-  filterWithPriceConfig,
-  filterIsActiveConfig,
-]);
+//NOTE v2s1 filterupdate -- delete/update me?
+// propTypes.filterConfig = oneOfType([
+//   filterWithGroupedOptions,
+//   filterWithOptions,
+//   filterWithPriceConfig,
+//   filterIsActiveConfig,
+// ]);
+
+// Search filter definition
+//NOTE v2s1 filterupdate -- new for v5
+propTypes.filterConfig = arrayOf(
+  shape({
+    id: string.isRequired,
+    label: node,
+    type: string.isRequired,
+    group: oneOf(['primary', 'secondary']).isRequired,
+    queryParamNames: arrayOf(string).isRequired,
+    config: object,
+  }).isRequired
+);
+
+//NOTE v2s1 filterupdate -- new for v5
+propTypes.sortConfig = shape({
+  active: bool,
+  queryParamName: oneOf(['sort']).isRequired,
+  relevanceKey: string.isRequired,
+  conflictingFilters: arrayOf(string),
+  options: arrayOf(
+    shape({
+      key: oneOf(['createdAt', '-createdAt', 'price', '-price', 'relevance']).isRequired,
+      label: string.isRequired,
+      longLabel: string,
+    })
+  ),
+});
 
 export const ERROR_CODE_TRANSACTION_LISTING_NOT_FOUND = 'transaction-listing-not-found';
 export const ERROR_CODE_TRANSACTION_INVALID_TRANSITION = 'transaction-invalid-transition';

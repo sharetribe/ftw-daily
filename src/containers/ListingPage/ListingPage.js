@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
+import { findOptionsForSelectFilter } from '../../util/search';
 import { LISTING_STATE_PENDING_APPROVAL, LISTING_STATE_CLOSED, propTypes } from '../../util/types';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import {
@@ -210,8 +211,7 @@ export class ListingPageComponent extends Component {
       timeSlots,
       monthlyTimeSlots,
       fetchTimeSlotsError,
-      categoriesConfig,
-      amenitiesConfig,
+      filterConfig,
     } = this.props;
 
     const listingId = new UUID(rawParams.id);
@@ -403,10 +403,12 @@ export class ListingPageComponent extends Component {
       </NamedLink>
     );
 
+    const amenityOptions = findOptionsForSelectFilter('amenities', filterConfig);
+    const categoryOptions = findOptionsForSelectFilter('category', filterConfig);
     const category =
       publicData && publicData.category ? (
         <span>
-          {categoryLabel(categoriesConfig, publicData.category)}
+          {categoryLabel(categoryOptions, publicData.category)}
           <span className={css.separator}>•</span>
         </span>
       ) : null;
@@ -464,9 +466,11 @@ export class ListingPageComponent extends Component {
                   <SectionCapacity publicData={publicData} />
                   <SectionSeats publicData={publicData} />
                   <SectionDescriptionMaybe description={description} />
-                  <SectionFeaturesMaybe options={amenitiesConfig} publicData={publicData} />
+
+                  {/* //NOTE DELETEME v2s1 filterupdate -- <SectionFeaturesMaybe options={amenitiesConfig} publicData={publicData} /> */}
                   <SectionMiscMaybe publicData={publicData} />
                   <SectionEquipmentMaybe publicData={publicData} />
+                  <SectionFeaturesMaybe options={amenityOptions} publicData={publicData} />
                   <SectionRulesMaybe publicData={publicData} />
                   <SectionMapMaybe
                     geolocation={geolocation}
@@ -529,8 +533,7 @@ ListingPageComponent.defaultProps = {
   monthlyTimeSlots: null,
   fetchTimeSlotsError: null,
   sendEnquiryError: null,
-  categoriesConfig: config.custom.categories,
-  amenitiesConfig: config.custom.amenities,
+  filterConfig: config.custom.filters,
 };
 
 ListingPageComponent.propTypes = {
@@ -570,9 +573,7 @@ ListingPageComponent.propTypes = {
   sendEnquiryError: propTypes.error,
   onSendEnquiry: func.isRequired,
   onInitializeCardPaymentData: func.isRequired,
-
-  categoriesConfig: array,
-  amenitiesConfig: array,
+  filterConfig: array,
 };
 
 const mapStateToProps = state => {

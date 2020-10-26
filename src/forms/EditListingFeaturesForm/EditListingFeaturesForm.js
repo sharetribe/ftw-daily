@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { Form as FinalForm } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
-
+import { findOptionsForSelectFilter } from '../../util/search';
 import { propTypes } from '../../util/types';
 import config from '../../config';
 import { Button, FieldCheckboxGroup, Form, FieldTextInput } from '../../components';
@@ -29,6 +29,7 @@ const EditListingFeaturesFormComponent = props => (
         updated,
         updateInProgress,
         fetchErrors,
+        filterConfig,
       } = formRenderProps;
 
 
@@ -66,29 +67,34 @@ const EditListingFeaturesFormComponent = props => (
         </p>
       ) : null;
 
-      const amenities = config.custom.amenities || []
-      const amenitiesCheckboxGroups = amenities.map((o, i) => {
-        return o.children && o.children.length
-          ? (
-            <span key={`${i}.${name}`}>
-              <h3>{o.label}</h3>
-              <FieldCheckboxGroup
-                className={css.features}
-                id={name}
-                name={name}
-                options={o.children}
-              />
-            </span>
-          )
-          : null
-      });
+      //NOTE TODO v2s1 filterupdate -- update me! to play nice with below options
+      // const amenities = config.custom.amenities || []
+      // const amenitiesCheckboxGroups = amenities.map((o, i) => {
+      //   return o.children && o.children.length
+      //     ? (
+      //       <span key={`${i}.${name}`}>
+      //         <h3>{o.label}</h3>
+      //         <FieldCheckboxGroup
+      //           className={css.features}
+      //           id={name}
+      //           name={name}
+      //           options={o.children}
+      //         />
+      //       </span>
+      //     )
+      //     : null
+      // });
+
+      const options = findOptionsForSelectFilter('amenities', filterConfig);
 
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessage}
           {errorMessageShowListing}
 
-          { amenitiesCheckboxGroups }
+          {/* NOTE TODO v2s1 filterupdate -- update me! this was added to replace FieldCheckboxGroup*/}
+          {/* { amenitiesCheckboxGroups } */}
+          <FieldCheckboxGroup className={css.features} id={name} name={name} options={options} />
 
           <FieldTextInput
             id="miscAmenities"
@@ -128,6 +134,7 @@ EditListingFeaturesFormComponent.defaultProps = {
   rootClassName: null,
   className: null,
   fetchErrors: null,
+  filterConfig: config.custom.filters,
 };
 
 EditListingFeaturesFormComponent.propTypes = {
@@ -145,6 +152,7 @@ EditListingFeaturesFormComponent.propTypes = {
     showListingsError: propTypes.error,
     updateListingError: propTypes.error,
   }),
+  filterConfig: propTypes.filterConfig,
 };
 
 const EditListingFeaturesForm = EditListingFeaturesFormComponent;

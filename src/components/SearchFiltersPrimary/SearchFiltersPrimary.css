@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   background-color: var(--matterColorBright);
+  position: relative;
 }
 
 .longInfo {
@@ -63,6 +64,10 @@
   padding: 9px 24px 0 24px;
   margin: 0;
   background-color: var(--matterColorBright);
+
+  @media (--viewportLarge) {
+    padding: 9px 36px 0 36px;
+  }
 }
 
 .resultsFound {

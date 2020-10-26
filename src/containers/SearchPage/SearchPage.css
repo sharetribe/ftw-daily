@@ -65,6 +65,8 @@
 
 .error {
   color: var(--failColor);
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 .searchString {
@@ -72,7 +74,7 @@
   white-space: nowrap;
 }
 
-.searchFilters {
+.searchFiltersPrimary {
   display: none;
 
   @media (--viewportMedium) {
@@ -135,6 +137,23 @@
   @media (--viewportLarge) {
     flex-basis: 37.5%;
   }
+}
+
+.sortBy {
+  margin-right: 9px;
+}
+
+.sortByMenuLabel {
+  @apply --marketplaceButtonStylesSecondary;
+  @apply --marketplaceTinyFontStyles;
+  font-weight: var(--fontWeightBold);
+
+  height: 35px;
+  min-height: 35px;
+  padding: 0 18px;
+  margin: 0;
+  border-radius: 4px;
+  white-space: nowrap;
 }
 
 .mapWrapper {

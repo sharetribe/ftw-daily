@@ -1,9 +1,35 @@
 import React, { Component } from 'react';
-import { bool, func, number, object, string } from 'prop-types';
+import { arrayOf, bool, func, node, number, object, string } from 'prop-types';
 import { injectIntl, intlShape } from '../../util/reactIntl';
+import { parseDateFromISO8601, stringifyDateToISO8601 } from '../../util/dates';
 
 import { FieldDateRangeController, FilterPopup, FilterPlain } from '../../components';
 import css from './BookingDateRangeFilter.css';
+
+const getDatesQueryParamName = queryParamNames => {
+  return Array.isArray(queryParamNames)
+    ? queryParamNames[0]
+    : typeof queryParamNames === 'string'
+    ? queryParamNames
+    : 'dates';
+};
+
+// Parse query parameter, which should look like "2020-05-28,2020-05-31"
+const parseValue = value => {
+  const rawValuesFromParams = value ? value.split(',') : [];
+  const [startDate, endDate] = rawValuesFromParams.map(v => parseDateFromISO8601(v));
+  return value && startDate && endDate ? { dates: { startDate, endDate } } : { dates: null };
+};
+// Format dateRange value for the query. It's given by FieldDateRangeInput:
+// { dates: { startDate, endDate } }
+const formatValue = (dateRange, queryParamName) => {
+  const hasDates = dateRange && dateRange.dates;
+  const { startDate, endDate } = hasDates ? dateRange.dates : {};
+  const start = startDate ? stringifyDateToISO8601(startDate) : null;
+  const end = endDate ? stringifyDateToISO8601(endDate) : null;
+  const value = start && end ? `${start},${end}` : null;
+  return { [queryParamName]: value };
+};
 
 export class BookingDateRangeFilterComponent extends Component {
   constructor(props) {
@@ -18,20 +44,25 @@ export class BookingDateRangeFilterComponent extends Component {
       className,
       rootClassName,
       showAsPopup,
-      initialValues: initialValuesRaw,
+      initialValues,
       id,
       contentPlacementOffset,
       onSubmit,
-      urlParam,
+      queryParamNames,
+      label,
       intl,
       ...rest
     } = this.props;
 
-    const isSelected = !!initialValuesRaw && !!initialValuesRaw.dates;
-    const initialValues = isSelected ? initialValuesRaw : { dates: null };
+    const datesQueryParamName = getDatesQueryParamName(queryParamNames);
+    const initialDates =
+      initialValues && initialValues[datesQueryParamName]
+        ? parseValue(initialValues[datesQueryParamName])
+        : { dates: null };
 
-    const startDate = isSelected ? initialValues.dates.startDate : null;
-    const endDate = isSelected ? initialValues.dates.endDate : null;
+    const isSelected = !!initialDates.dates;
+    const startDate = isSelected ? initialDates.dates.startDate : null;
+    const endDate = isSelected ? initialDates.dates.endDate : null;
 
     const format = {
       month: 'short',
@@ -48,6 +79,8 @@ export class BookingDateRangeFilterComponent extends Component {
             dates: `${formattedStartDate} - ${formattedEndDate}`,
           }
         )
+      : label
+      ? label
       : intl.formatMessage({ id: 'BookingDateRangeFilter.labelPlain' });
 
     const labelForPopup = isSelected
@@ -57,7 +90,13 @@ export class BookingDateRangeFilterComponent extends Component {
             dates: `${formattedStartDate} - ${formattedEndDate}`,
           }
         )
+      : label
+      ? label
       : intl.formatMessage({ id: 'BookingDateRangeFilter.labelPopup' });
+
+    const handleSubmit = values => {
+      onSubmit(formatValue(values, datesQueryParamName));
+    };
 
     const onClearPopupMaybe =
       this.popupControllerRef && this.popupControllerRef.onReset
@@ -84,11 +123,10 @@ export class BookingDateRangeFilterComponent extends Component {
         id={`${id}.popup`}
         showAsPopup
         contentPlacementOffset={contentPlacementOffset}
-        onSubmit={onSubmit}
+        onSubmit={handleSubmit}
         {...onClearPopupMaybe}
         {...onCancelPopupMaybe}
-        initialValues={initialValues}
-        urlParam={urlParam}
+        initialValues={initialDates}
         {...rest}
       >
         <FieldDateRangeController
@@ -107,10 +145,9 @@ export class BookingDateRangeFilterComponent extends Component {
         id={`${id}.plain`}
         liveEdit
         contentPlacementOffset={contentPlacementOffset}
-        onSubmit={onSubmit}
+        onSubmit={handleSubmit}
         {...onClearPlainMaybe}
-        initialValues={initialValues}
-        urlParam={urlParam}
+        initialValues={initialDates}
         {...rest}
       >
         <FieldDateRangeController
@@ -137,9 +174,10 @@ BookingDateRangeFilterComponent.propTypes = {
   rootClassName: string,
   className: string,
   id: string.isRequired,
+  label: node,
   showAsPopup: bool,
   liveEdit: bool,
-  urlParam: string.isRequired,
+  queryParamNames: arrayOf(string).isRequired,
   onSubmit: func.isRequired,
   initialValues: object,
   contentPlacementOffset: number,

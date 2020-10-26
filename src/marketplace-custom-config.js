@@ -1,5 +1,36 @@
 /*
  * Marketplace specific configuration.
+ *
+ * Every filter needs to have following keys:
+ * - id:     Unique id of the filter.
+ * - label:  The default label of the filter.
+ * - type:   String that represents one of the existing filter components:
+ *           BookingDateRangeFilter, KeywordFilter, PriceFilter,
+ *           SelectSingleFilter, SelectMultipleFilter.
+ * - group:  Is this 'primary' or 'secondary' filter?
+ *           Primary filters are visible on desktop layout by default.
+ *           Secondary filters are behind "More filters" button.
+ *           Read more from src/containers/SearchPage/README.md
+ * - queryParamNames: Describes parameters to be used with queries
+ *                    (e.g. 'price' or 'pub_amenities'). Most of these are
+ *                    the same between webapp URLs and API query params.
+ *                    You can't change 'dates', 'price', or 'keywords'
+ *                    since those filters are fixed to a specific attribute.
+ * - config: Extra configuration that the filter component needs.
+ *
+ * Note 1: Labels could be tied to translation file
+ *         by importing FormattedMessage:
+ *         <FormattedMessage id="some.translation.key.here" />
+ *
+ * Note 2: If you need to add new custom filter components,
+ *         you need to take those into use in:
+ *         src/containers/SearchPage/FilterComponent.js
+ *
+ * Note 3: If you just want to create more enum filters
+ *         (i.e. SelectSingleFilter, SelectMultipleFilter),
+ *         you can just add more configurations with those filter types
+ *         and tie them with correct extended data key
+ *         (i.e. pub_<key> or meta_<key>).
  */
 
 export const amenities = [
@@ -10,68 +41,46 @@ export const amenities = [
         key: "free-parking",
         label: "Free parking",
       },
-
-
       {
         key: "key/electronic-access-card",
         label: "Key/electronic access card",
       },
-
-
       {
         key: "wheelchair-access",
         label: "Wheelchair access",
       },
-
-
       {
         key: "wifi",
         label: "WiFi",
       },
-
-
       {
         key: "receptionist",
         label: "Receptionist",
       },
-
-
       {
         key: "kitchen",
         label: "Kitchen",
       },
-
-
       {
         key: "fridge/freezer",
         label: "Fridge/freezer",
       },
-
-
       {
         key: "tea/coffee-making-facilities",
         label: "Tea/coffee making facilities",
       },
-
-
       {
         key: "refreshments",
         label: "Refreshments",
       },
-
-
       {
         key: "toilet",
         label: "Toilet",
       },
-
-
       {
         key: "air-conditioning",
         label: "Air conditioning",
       },
-
-
       {
         key: "heating",
         label: "Heating",
@@ -80,38 +89,26 @@ export const amenities = [
         key: "accepts-card-payments",
         label: "Accepts card payments",
       },
-
-
       {
         key: "accepts-mail-and-packages",
         label: "Accepts mail and packages",
       },
-
-
       {
         key: "cleaner",
         label: "Cleaner",
       },
-
-
       {
         key: "waiting-area",
         label: "Waiting area",
       },
-
-
       {
         key: "changing-areas-with-showers",
         label: "Changing areas with showers",
       },
-
-
       {
         key: "cctv-monitoring",
         label: "CCTV monitoring",
       },
-
-
       {
         key: "secure-locker",
         label: "Secure locker",
@@ -125,62 +122,42 @@ export const amenities = [
         key: "chair",
         label: "Chair",
       },
-
-
       {
         key: "mirror",
         label: "Mirror",
       },
-
-
       {
         key: "gowns",
         label: "Gowns",
       },
-
-
       {
         key: "towels",
         label: "Towels",
       },
-
-
       {
         key: "washing-point",
         label: "Washing point",
       },
-
-
       {
         key: "trolley",
         label: "Trolley",
       },
-
-
       {
         key: "locked-cupboards",
         label: "Locked cupboards",
       },
-
-
       {
         key: "massage-chair",
         label: "Massage chair",
       },
-
-
       {
         key: "led-magnifying-light",
         label: "LED magnifying light",
       },
-
-
       {
         key: "dim-lighting",
         label: "Dim lighting",
       },
-
-
       {
         key: "wax-equipment",
         label: "Wax equipment",
@@ -194,74 +171,50 @@ export const amenities = [
         key: "treadmill",
         label: "Treadmill",
       },
-
-
       {
         key: "bike",
         label: "Bike",
       },
-
-
       {
         key: "resistance-bands",
         label: "Resistance bands",
       },
-
-
       {
         key: "stepper",
         label: "Stepper",
       },
-
-
       {
         key: "kettlebells",
         label: "Kettlebells",
       },
-
-
       {
         key: "free-weights",
         label: "Free weights",
       },
-
-
       {
         key: "machine-weights",
         label: "Machine weights",
       },
-
-
       {
         key: "yoga-mats",
         label: "Yoga mats",
       },
-
-
       {
         key: "yoga-props",
         label: "Yoga props",
       },
-
-
       {
         key: "pilates-balls",
         label: "Pilates balls",
       },
-
-
       {
         key: "treatment-table",
         label: "Treatment table",
       },
-
-
       {
         key: "water-point",
         label: "Water point",
       },
-
-
       {
         key: "secure-lockers-(for-user-clients)",
         label: "Secure lockers (for User clients)",
@@ -275,26 +228,18 @@ export const amenities = [
         key: "lockable-drawers-/-file-cabinet",
         label: "Lockable drawers / file cabinet",
       },
-
-
       {
         key: "laser-printer-and-scanner",
         label: "Laser printer and scanner",
       },
-
-
       {
         key: "ethernet-connection",
         label: "Ethernet connection",
       },
-
-
       {
         key: "power-bank",
         label: "Power bank",
       },
-
-
       {
         key: "meeting-/-breakout-room-access",
         label: "Meeting / breakout room access",
@@ -304,7 +249,117 @@ export const amenities = [
 ];
 
 
+export const filters = [
+  {
+    id: 'dates',
+    label: 'Dates',
+    type: 'BookingDateRangeFilter',
+    group: 'primary',
+    // Note: BookingDateRangeFilter is fixed filter,
+    // you can't change "queryParamNames: ['dates'],"
+    queryParamNames: ['dates'],
+    config: {},
+  },
+  {
+    id: 'price',
+    label: 'Price',
+    type: 'PriceFilter',
+    group: 'primary',
+    // Note: PriceFilter is fixed filter,
+    // you can't change "queryParamNames: ['price'],"
+    queryParamNames: ['price'],
+    // Price filter configuration
+    // Note: unlike most prices this is not handled in subunits
+    config: {
+      min: 0,
+      max: 1000,
+      step: 5,
+    },
+  },
+  {
+    id: 'keyword',
+    label: 'Keyword',
+    type: 'KeywordFilter',
+    group: 'primary',
+    // Note: KeywordFilter is fixed filter,
+    // you can't change "queryParamNames: ['keywords'],"
+    queryParamNames: ['keywords'],
+    // NOTE: If you are ordering search results by distance
+    // the keyword search can't be used at the same time.
+    // You can turn on/off ordering by distance from config.js file.
+    config: {},
+  },
+  {
+    id: 'category',
+    label: 'Category',
+    type: 'SelectSingleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_category'],
+    config: {
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for the UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: [
+        { key: 'smoke', label: 'Smoke' },
+        { key: 'electric', label: 'Electric' },
+        { key: 'wood', label: 'Wood' },
+        { key: 'other', label: 'Other' },
+      ],
+    },
+  },
+  {
+    id: 'amenities',
+    label: 'Amenities',
+    type: 'SelectMultipleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_amenities'],
+    config: {
+      // Optional modes: 'has_all', 'has_any'
+      // https://www.sharetribe.com/api-reference/marketplace.html#extended-data-filtering
+      searchMode: 'has_all',
 
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for this web app's UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: [
+        {
+          key: 'towels',
+          label: 'Towels',
+        },
+        {
+          key: 'bathroom',
+          label: 'Bathroom',
+        },
+        {
+          key: 'swimming_pool',
+          label: 'Swimming pool',
+        },
+        {
+          key: 'own_drinks',
+          label: 'Own drinks allowed',
+        },
+        {
+          key: 'jacuzzi',
+          label: 'Jacuzzi',
+        },
+        {
+          key: 'audiovisual_entertainment',
+          label: 'Audiovisual entertainment',
+        },
+        {
+          key: 'barbeque',
+          label: 'Barbeque',
+        },
+        {
+          key: 'own_food_allowed',
+          label: 'Own food allowed',
+        },
+      ],
+    },
+  }
+];
 
 
 export const categories = [
@@ -313,10 +368,10 @@ export const categories = [
     children: [
       { key: 'hair-stylist', label: 'Hair Stylist' },
       { key: 'barber', label: 'Barber' },
-      { key: 'makeup-artist', label: 'Makeup Artist' },
-      { key: 'nail-technician', label: 'Nail Technician' },
-      { key: 'cosmetics', label: 'Cosmetics' },
-      { key: 'tattoo-artist', label: 'Tattoo Artist' },
+      { key: 'beauty-space', label: 'Beauty Space' },
+      { key: 'nail-station', label: 'Nail Station' },
+      { key: 'beauty-room', label: 'Beauty Room' },
+      { key: 'treatment-room', label: 'Treatment Room' },
     ]
   },
   {
@@ -356,37 +411,20 @@ export const categories = [
 ];
 
 
-
-
-
-
-// Price filter configuration
-// Note: unlike most prices this is not handled in subunits
-export const priceFilterConfig = {
-  min: 0,
-  max: 1000,
-  step: 5,
-};
-
-// Activate booking dates filter on search page
-export const dateRangeFilterConfig = {
-  active: true,
-};
-
-// Activate keyword filter on search page
-
-// NOTE: If you are ordering search results by distance the keyword search can't be used at the same time.
-// You can turn off ordering by distance in config.js file
-export const keywordFilterConfig = {
-  active: true,
-};
-
 export const sortConfig = {
   // Enable/disable the sorting control in the SearchPage
   active: true,
 
+  // Note: queryParamName 'sort' is fixed,
+  // you can't change it since Flex API expects it to be named as 'sort'
+  queryParamName: 'sort',
+
   // Internal key for the relevance option, see notes below.
   relevanceKey: 'relevance',
+
+  // Keyword filter is sorting the results already by relevance.
+  // If keyword filter is active, we need to disable sorting.
+  conflictingFilters: ['keyword'],
 
   options: [
     { key: 'createdAt', label: 'Newest' },
