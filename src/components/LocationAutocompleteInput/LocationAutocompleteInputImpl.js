@@ -57,7 +57,6 @@ const LocationPredictionsList = props => {
     return null;
   }
 
-  /* eslint-disable jsx-a11y/no-static-element-interactions */
   const item = (prediction, index) => {
     const isHighlighted = index === highlightedIndex;
     const predictionId = geocoder.getPredictionId(prediction);
@@ -98,7 +97,6 @@ const LocationPredictionsList = props => {
       </li>
     );
   };
-  /* eslint-enable jsx-a11y/no-static-element-interactions */
 
   const classes = classNames(rootClassName || css.predictionsRoot, className);
 

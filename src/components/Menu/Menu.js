@@ -33,8 +33,6 @@ const isControlledMenu = (isOpenProp, onToggleActiveProp) => {
   return isOpenProp !== null && onToggleActiveProp !== null;
 };
 
-// This should work, but it doesn't <div className="foo" onClick={() => {}} role="button" />
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 class Menu extends Component {
   constructor(props) {
     super(props);
@@ -206,7 +204,6 @@ class Menu extends Component {
     );
   }
 }
-/* eslint-enable jsx-a11y/no-static-element-interactions */
 
 Menu.defaultProps = {
   className: null,

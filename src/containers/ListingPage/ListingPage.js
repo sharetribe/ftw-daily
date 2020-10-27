@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
 import { array, arrayOf, bool, func, shape, string, oneOf } from 'prop-types';
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
