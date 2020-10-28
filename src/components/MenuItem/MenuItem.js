@@ -10,7 +10,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import css from './MenuItem.css';
+import css from './MenuItem.module.css';
 
 const MenuItem = props => {
   const { children, className, rootClassName } = props;

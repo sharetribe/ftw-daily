@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import css from './IconAdd.css';
+import css from './IconAdd.module.css';
 
 const IconAdd = props => {
   const { className, rootClassName } = props;

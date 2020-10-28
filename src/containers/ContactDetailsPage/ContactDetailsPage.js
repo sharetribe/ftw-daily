@@ -25,7 +25,7 @@ import {
   saveContactDetailsClear,
   resetPassword,
 } from './ContactDetailsPage.duck';
-import css from './ContactDetailsPage.css';
+import css from './ContactDetailsPage.module.css';
 
 export const ContactDetailsPageComponent = props => {
   const {

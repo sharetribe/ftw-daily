@@ -19,7 +19,7 @@ import { PasswordChangeForm } from '../../forms';
 import { TopbarContainer } from '../../containers';
 
 import { changePassword, changePasswordClear, resetPassword } from './PasswordChangePage.duck';
-import css from './PasswordChangePage.css';
+import css from './PasswordChangePage.module.css';
 
 export const PasswordChangePageComponent = props => {
   const {

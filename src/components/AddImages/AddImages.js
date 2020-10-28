@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { ImageFromFile, ResponsiveImage, IconSpinner } from '../../components';
 
-import css from './AddImages.css';
+import css from './AddImages.module.css';
 import RemoveImageButton from './RemoveImageButton';
 
 const ThumbnailWrapper = props => {

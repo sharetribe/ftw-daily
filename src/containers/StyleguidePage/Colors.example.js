@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import css from './StyleguidePage.css';
+import css from './StyleguidePage.module.css';
 
 const ColorCard = props => {
   const { mpColor, name, usage } = props;

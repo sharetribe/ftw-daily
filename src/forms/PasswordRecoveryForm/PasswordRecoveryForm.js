@@ -10,7 +10,7 @@ import * as validators from '../../util/validators';
 import { isPasswordRecoveryEmailNotFoundError } from '../../util/errors';
 import { Form, PrimaryButton, FieldTextInput, NamedLink } from '../../components';
 
-import css from './PasswordRecoveryForm.css';
+import css from './PasswordRecoveryForm.module.css';
 
 class PasswordRecoveryFormComponent extends Component {
   constructor(props) {

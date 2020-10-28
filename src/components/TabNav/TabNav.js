@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { NamedLink } from '../../components';
 
-import css from './TabNav.css';
+import css from './TabNav.module.css';
 
 const Tab = props => {
   const { className, id, disabled, text, selected, linkProps } = props;

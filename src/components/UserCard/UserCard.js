@@ -7,7 +7,7 @@ import { AvatarLarge, NamedLink, InlineTextButton } from '../../components';
 import { ensureUser, ensureCurrentUser } from '../../util/data';
 import { propTypes } from '../../util/types';
 
-import css from './UserCard.css';
+import css from './UserCard.module.css';
 
 // Approximated collapsed size so that there are ~three lines of text
 // in the desktop layout in the host section of the ListingPage.

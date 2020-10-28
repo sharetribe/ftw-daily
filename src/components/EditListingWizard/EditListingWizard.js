@@ -27,7 +27,7 @@ import EditListingWizardTab, {
   PRICING,
   PHOTOS,
 } from './EditListingWizardTab';
-import css from './EditListingWizard.css';
+import css from './EditListingWizard.module.css';
 
 // Show availability calendar only if environment variable availabilityEnabled is true
 const availabilityMaybe = config.enableAvailability ? [AVAILABILITY] : [];

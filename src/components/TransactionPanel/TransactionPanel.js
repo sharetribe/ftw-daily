@@ -50,7 +50,7 @@ import PanelHeading, {
   HEADING_DELIVERED,
 } from './PanelHeading';
 
-import css from './TransactionPanel.css';
+import css from './TransactionPanel.module.css';
 
 // Helper function to get display names for different roles
 const displayNames = (currentUser, currentProvider, currentCustomer, intl) => {

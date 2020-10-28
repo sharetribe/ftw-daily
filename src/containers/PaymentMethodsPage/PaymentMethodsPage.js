@@ -23,7 +23,7 @@ import { TopbarContainer } from '../../containers';
 import { PaymentMethodsForm } from '../../forms';
 import { createStripeSetupIntent, stripeCustomer, loadData } from './PaymentMethodsPage.duck.js';
 
-import css from './PaymentMethodsPage.css';
+import css from './PaymentMethodsPage.module.css';
 
 const PaymentMethodsPageComponent = props => {
   const [isSubmitting, setIsSubmitting] = useState(false);

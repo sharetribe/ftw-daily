@@ -16,7 +16,7 @@ import {
   translateStripeError,
 } from './StripeBankAccountTokenInputField.util';
 import StripeBankAccountRequiredInput from './StripeBankAccountRequiredInput';
-import css from './StripeBankAccountTokenInputField.css';
+import css from './StripeBankAccountTokenInputField.module.css';
 
 // Since final-form tracks the onBlur event for marking the field as
 // touched (which triggers possible error validation rendering), only

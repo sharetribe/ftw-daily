@@ -1,19 +1,5 @@
 @import '../../marketplace.css';
 
-:root {
-  /*
-    These variables are available in global scope through ":root"
-    element (<html> tag). Variables with the same names are going to
-    overwrite each other if CSS Properties' (PostCSS plugin)
-    configuration "preserve: true" is used - meaning that variables
-    are left to CSS bundle. We are planning to enable it in the future
-    since browsers support CSS Properties already.
- */
-
-  --TabNav_linkWidth: 240px;
-  --TabNav_linkBorderWidth: 4px;
-}
-
 .root {
   display: flex;
   flex-direction: row;
@@ -52,7 +38,7 @@
 
   transition: var(--transitionStyleButton);
   background-image: url("data:image/svg+xml;utf8,<svg width='4' height='32' viewBox='0 0 4 32' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h4v32H0z' fill='var(--marketplaceColorEncoded)' fill-rule='evenodd'/></svg>");
-  background-position: calc(var(--TabNav_linkWidth) + var(--TabNav_linkBorderWidth)) center; /* SelectedLink's width (200px) + border thickness (4px) = 204px */
+  background-position: calc(var(--TabNav_linkWidth) + 4px) center; /* SelectedLink's width (200px) + border thickness (4px) = 204px */
 
   &:hover {
     text-decoration: none;

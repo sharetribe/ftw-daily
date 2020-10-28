@@ -28,7 +28,7 @@ import { TopbarContainer, NotFoundPage } from '../../containers';
 import { loadData } from './ProfilePage.duck';
 import config from '../../config';
 
-import css from './ProfilePage.css';
+import css from './ProfilePage.module.css';
 
 const { UUID } = sdkTypes;
 const MAX_MOBILE_SCREEN_WIDTH = 768;

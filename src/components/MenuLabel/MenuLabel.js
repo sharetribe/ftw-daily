@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import css from './MenuLabel.css';
+import css from './MenuLabel.module.css';
 
 class MenuLabel extends Component {
   constructor(props) {

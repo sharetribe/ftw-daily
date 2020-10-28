@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { ResponsiveImage, IconSpinner } from '../../components';
 import { propTypes } from '../../util/types';
 
-import css from './ImageCarousel.css';
+import css from './ImageCarousel.module.css';
 
 const KEY_CODE_LEFT_ARROW = 37;
 const KEY_CODE_RIGHT_ARROW = 39;

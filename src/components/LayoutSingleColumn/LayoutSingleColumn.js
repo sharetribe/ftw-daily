@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { LayoutWrapperTopbar, LayoutWrapperMain, LayoutWrapperFooter } from '../../components';
 
-import css from './LayoutSingleColumn.css';
+import css from './LayoutSingleColumn.module.css';
 
 const prepareChildren = children => {
   const childrenCount = React.Children.count(children);

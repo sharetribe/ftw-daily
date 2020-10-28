@@ -21,7 +21,7 @@ import {
 import { EmailVerificationForm } from '../../forms';
 import { TopbarContainer } from '../../containers';
 
-import css from './EmailVerificationPage.css';
+import css from './EmailVerificationPage.module.css';
 
 /**
   Parse verification token from URL

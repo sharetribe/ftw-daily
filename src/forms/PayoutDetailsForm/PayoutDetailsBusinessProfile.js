@@ -5,7 +5,7 @@ import * as validators from '../../util/validators';
 import { FieldSelect, FieldTextInput } from '../../components';
 
 import merchantCategoryCodesUS from './merchantCategoryCodesUS';
-import css from './PayoutDetailsForm.css';
+import css from './PayoutDetailsForm.module.css';
 
 const PayoutDetailsBusinessProfile = props => {
   const { fieldId, disabled, intl, showBusinessURLField, showMCCForUSField } = props;

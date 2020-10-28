@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import * as validators from '../../util/validators';
 import { Form, PrimaryButton, FieldTextInput } from '../../components';
 
-import css from './SignupForm.css';
+import css from './SignupForm.module.css';
 
 const KEY_CODE_ENTER = 13;
 

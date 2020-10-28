@@ -25,7 +25,7 @@ import {
   getOwnListingsById,
   queryOwnListings,
 } from './ManageListingsPage.duck';
-import css from './ManageListingsPage.css';
+import css from './ManageListingsPage.module.css';
 
 // Pagination page size might need to be dynamic on responsive page layouts
 // Current design has max 3 columns 42 is divisible by 2 and 3

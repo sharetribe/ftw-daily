@@ -1,18 +1,5 @@
 @import '../../marketplace.css';
 
-:root {
-  /*
-    These variables are available in global scope through ":root"
-    element (<html> tag). Variables with the same names are going to
-    overwrite each other if CSS Properties' (PostCSS plugin)
-    configuration "preserve: true" is used - meaning that variables
-    are left to CSS bundle. We are planning to enable it in the future
-    since browsers support CSS Properties already.
- */
-
-  --SearchPage_containerHeight: calc(100vh - var(--topbarHeightDesktop));
-}
-
 /* Can be given to Topbar when a modal is opened
  * so that the Topbar is not rendered on top of it.*/
 .topbarBehindModal {
@@ -38,7 +25,7 @@
   @media (--viewportMedium) {
     position: relative;
     padding-top: var(--topbarHeightDesktop);
-    min-height: var(--SearchPage_containerHeight);
+    min-height: calc(100vh - var(--topbarHeightDesktop));
   }
 }
 
@@ -173,7 +160,7 @@
 
     /* Fixed content needs width relative to viewport */
     width: 50vw;
-    height: var(--SearchPage_containerHeight);
+    height: calc(100vh - var(--topbarHeightDesktop));
   }
 
   @media (--viewportLarge) {

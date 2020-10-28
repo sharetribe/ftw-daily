@@ -12,7 +12,7 @@ import { sdkBoundsToFixedCoordinates, hasSameSDKBounds } from '../../util/maps';
 import { SearchMapInfoCard, SearchMapPriceLabel, SearchMapGroupLabel } from '../../components';
 
 import { groupedByCoordinates, reducedToArray } from './SearchMap.helpers.js';
-import css from './SearchMapWithMapbox.css';
+import css from './SearchMapWithMapbox.module.css';
 
 export const LABEL_HANDLE = 'SearchMapLabel';
 export const INFO_CARD_HANDLE = 'SearchMapInfoCard';

@@ -1,18 +1,5 @@
 @import '../../marketplace.css';
 
-:root {
-  /*
-    These variables are available in global scope through ":root"
-    element (<html> tag). Variables with the same names are going to
-    overwrite each other if CSS Properties' (PostCSS plugin)
-    configuration "preserve: true" is used - meaning that variables
-    are left to CSS bundle. We are planning to enable it in the future
-    since browsers support CSS Properties already.
- */
-
-  --EditListingPhotosForm_imageWidthDesktop: calc(50% - 12px);
-}
-
 .root {
   width: 100%;
   height: auto;
@@ -31,7 +18,7 @@
   margin: 24px 0 0 0;
 
   @media (--viewportLarge) {
-    width: var(--EditListingPhotosForm_imageWidthDesktop);
+    width: calc(50% - 12px);
     margin: 0 24px 24px 0;
 
     &:nth-child(even) {
@@ -56,7 +43,7 @@
   }
 
   @media (--viewportLarge) {
-    width: var(--EditListingPhotosForm_imageWidthDesktop);
+    width: calc(50% - 12px);
     margin: 0 0 24px 0;
   }
 }

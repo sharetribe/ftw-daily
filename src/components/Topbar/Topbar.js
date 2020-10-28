@@ -24,7 +24,7 @@ import { TopbarSearchForm } from '../../forms';
 
 import MenuIcon from './MenuIcon';
 import SearchIcon from './SearchIcon';
-import css from './Topbar.css';
+import css from './Topbar.module.css';
 
 const MAX_MOBILE_SCREEN_WIDTH = 768;
 

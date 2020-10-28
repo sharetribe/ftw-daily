@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { func, node, string } from 'prop-types';
 import classNames from 'classnames';
 
-import css from './OutsideClickHandler.css';
+import css from './OutsideClickHandler.module.css';
 
 export default class OutsideClickHandler extends Component {
   constructor(props) {

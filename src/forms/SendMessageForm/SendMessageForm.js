@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import { Form, FieldTextInput, SecondaryButton } from '../../components';
 import { propTypes } from '../../util/types';
 
-import css from './SendMessageForm.css';
+import css from './SendMessageForm.module.css';
 
 const BLUR_TIMEOUT_MS = 100;
 

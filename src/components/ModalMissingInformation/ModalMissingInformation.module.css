@@ -16,7 +16,7 @@
 
 /* Make the email pop */
 .email {
-  @apply --marketplaceModalHighlightEmail;
+  font-weight: var(--fontWeightHighlightEmail);
 }
 
 .helperLink {

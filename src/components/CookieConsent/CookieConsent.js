@@ -4,7 +4,7 @@ import { FormattedMessage } from '../../util/reactIntl';
 import { ExternalLink } from '../../components';
 import classNames from 'classnames';
 
-import css from './CookieConsent.css';
+import css from './CookieConsent.module.css';
 
 class CookieConsent extends Component {
   constructor(props) {

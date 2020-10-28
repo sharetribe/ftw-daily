@@ -2,7 +2,7 @@ import React from 'react';
 import { string } from 'prop-types';
 import classNames from 'classnames';
 
-import css from './IconEnquiry.css';
+import css from './IconEnquiry.module.css';
 
 const IconEnquiry = props => {
   const { rootClassName, className } = props;

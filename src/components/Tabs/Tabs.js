@@ -20,7 +20,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { TabNav } from '../../components';
 
-import css from './Tabs.css';
+import css from './Tabs.module.css';
 
 const Tabs = props => {
   const { children, className, rootClassName, navRootClassName, tabRootClassName } = props;

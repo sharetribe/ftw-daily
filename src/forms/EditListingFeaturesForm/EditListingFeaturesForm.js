@@ -9,7 +9,7 @@ import { propTypes } from '../../util/types';
 import config from '../../config';
 import { Button, FieldCheckboxGroup, Form } from '../../components';
 
-import css from './EditListingFeaturesForm.css';
+import css from './EditListingFeaturesForm.module.css';
 
 const EditListingFeaturesFormComponent = props => (
   <FinalForm

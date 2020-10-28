@@ -20,7 +20,7 @@ import { ProfileSettingsForm } from '../../forms';
 import { TopbarContainer } from '../../containers';
 
 import { updateProfile, uploadImage } from './ProfileSettingsPage.duck';
-import css from './ProfileSettingsPage.css';
+import css from './ProfileSettingsPage.module.css';
 
 const onImageUploadHandler = (values, fn) => {
   const { id, imageId, file } = values;

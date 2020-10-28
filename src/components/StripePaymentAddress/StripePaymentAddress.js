@@ -6,7 +6,7 @@ import * as validators from '../../util/validators';
 import getCountryCodes from '../../translations/countryCodes';
 import { FieldTextInput, FieldSelect } from '../../components';
 
-import css from './StripePaymentAddress.css';
+import css from './StripePaymentAddress.module.css';
 
 const StripePaymentAddress = props => {
   const { className, intl, disabled, form, fieldId, card } = props;

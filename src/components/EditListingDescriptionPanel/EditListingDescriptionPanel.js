@@ -9,7 +9,7 @@ import { ListingLink } from '../../components';
 import { EditListingDescriptionForm } from '../../forms';
 import config from '../../config';
 
-import css from './EditListingDescriptionPanel.css';
+import css from './EditListingDescriptionPanel.module.css';
 
 const EditListingDescriptionPanel = props => {
   const {

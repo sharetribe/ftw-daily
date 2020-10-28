@@ -1,0 +1,77 @@
+@import '../../marketplace.css';
+
+.root {
+  margin: 0;
+}
+
+.twoColumns {
+  @media (--viewportMedium) {
+    column-count: 2;
+  }
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 3px 0;
+
+  @media (--viewportMedium) {
+    padding: 4px 0;
+  }
+}
+
+.checkIcon {
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.marketplaceFill {
+  fill: var(--marketplaceColor);
+}
+
+.iconWrapper {
+  align-self: baseline;
+  margin-right: 8px;
+
+  /* This follows line-height */
+  height: 24px;
+}
+
+.labelWrapper {
+  display: inline-block;
+}
+
+.selectedLabel,
+.notSelectedLabel {
+  @apply --marketplaceBodyFontStyles;
+  line-height: 24px;
+  margin: 0;
+}
+
+.selectedLabel {
+  font-weight: var(--fontWeightSemiBold);
+}
+
+.notSelectedLabel {
+  color: var(--matterColorNegative);
+  position: relative;
+
+  /* line-through */
+  background-image: linear-gradient(
+    transparent 10px,
+    var(--matterColorNegative) 10px,
+    var(--matterColorNegative) 11px,
+    transparent 11px
+  );
+
+  @media (--viewportMedium) {
+    background-image: linear-gradient(
+      transparent 12px,
+      var(--matterColorNegative) 12px,
+      var(--matterColorNegative) 13px,
+      transparent 13px
+    );
+  }
+}

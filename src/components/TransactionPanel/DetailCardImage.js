@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { AvatarMedium, ResponsiveImage } from '../../components';
 
-import css from './TransactionPanel.css';
+import css from './TransactionPanel.module.css';
 
 // Functional component as a helper to build AddressLinkMaybe
 const DetailCardImage = props => {

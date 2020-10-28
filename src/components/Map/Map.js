@@ -6,7 +6,7 @@ import config from '../../config';
 import { StaticMap, DynamicMap, isMapsLibLoaded } from './MapboxMap';
 // import { StaticMap, DynamicMap, isMapsLibLoaded } from './GoogleMap';
 
-import css from './Map.css';
+import css from './Map.module.css';
 
 export class Map extends Component {
   render() {
