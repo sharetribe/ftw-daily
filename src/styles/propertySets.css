@@ -1,6 +1,5 @@
 :root {
-
-/**
+  /**
  * This file contains only Custom Sets of Properties (@apply-rule).
  * This was originally part of cssnext package and was an interesting
  * concept, because property sets would not suffer from specificity
@@ -18,7 +17,7 @@
  * component that @imports this file.
  */
 
-/* ================ CSS Custom Property Sets ================ */
+  /* ================ CSS Custom Property Sets ================ */
 
   /* Full screen Background image located in root-folder/src/assets */
   --backgroundImage: {
