@@ -1,5 +1,3 @@
-@import '../../marketplace.css';
-
 .root {
   fill: var(--matterColor);
   transition: var(--transitionStyleButton);
