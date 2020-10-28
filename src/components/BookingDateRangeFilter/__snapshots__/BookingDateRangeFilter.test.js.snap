@@ -39,6 +39,7 @@ exports[`BookingDateRangeFilter matches popup snapshot 1`] = `
   label="BookingDateRangeFilter.labelPopup"
   liveEdit={false}
   onSubmit={[Function]}
+  popupClassName="popupSize"
   rootClassName={null}
   showAsPopup={true}
 >

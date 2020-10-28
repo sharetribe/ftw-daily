@@ -25,13 +25,17 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
       />
     </LayoutWrapperTopbar>
     <LayoutWrapperMain
-      className={null}
+      className="layoutWrapperMain"
       rootClassName={null}
     >
-      <div>
-        <div>
+      <div
+        className="root"
+      >
+        <div
+          className="content"
+        >
           <LinkTabNavHorizontal
-            className={null}
+            className="tabs"
             rootClassName={null}
             skin="light"
             tabClassName={null}
@@ -48,7 +52,9 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
                     },
                   },
                   "selected": false,
-                  "text": <h1>
+                  "text": <h1
+                    className="tab"
+                  >
                     <FormattedMessage
                       id="AuthenticationPage.signupLinkText"
                       values={Object {}}
@@ -65,7 +71,9 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
                     },
                   },
                   "selected": true,
-                  "text": <h1>
+                  "text": <h1
+                    className="tab"
+                  >
                     <FormattedMessage
                       id="AuthenticationPage.loginLinkText"
                       values={Object {}}
@@ -76,6 +84,7 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
             }
           />
           <LoginForm
+            className="loginForm"
             inProgress={false}
             onSubmit={[Function]}
           />
@@ -88,8 +97,12 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
         onManageDisableScrolling={[Function]}
         usePortal={true}
       >
-        <div>
-          <h2>
+        <div
+          className="termsWrapper"
+        >
+          <h2
+            className="termsHeading"
+          >
             <FormattedMessage
               id="AuthenticationPage.termsHeading"
               values={Object {}}
@@ -137,13 +150,17 @@ exports[`AuthenticationPageComponent with Facebook login matches snapshot 1`] = 
       />
     </LayoutWrapperTopbar>
     <LayoutWrapperMain
-      className={null}
+      className="layoutWrapperMain"
       rootClassName={null}
     >
-      <div>
-        <div>
+      <div
+        className="root"
+      >
+        <div
+          className="content"
+        >
           <LinkTabNavHorizontal
-            className={null}
+            className="tabs"
             rootClassName={null}
             skin="light"
             tabClassName={null}
@@ -160,7 +177,9 @@ exports[`AuthenticationPageComponent with Facebook login matches snapshot 1`] = 
                     },
                   },
                   "selected": false,
-                  "text": <h1>
+                  "text": <h1
+                    className="tab"
+                  >
                     <FormattedMessage
                       id="AuthenticationPage.signupLinkText"
                       values={Object {}}
@@ -177,7 +196,9 @@ exports[`AuthenticationPageComponent with Facebook login matches snapshot 1`] = 
                     },
                   },
                   "selected": true,
-                  "text": <h1>
+                  "text": <h1
+                    className="tab"
+                  >
                     <FormattedMessage
                       id="AuthenticationPage.loginLinkText"
                       values={Object {}}
@@ -188,23 +209,34 @@ exports[`AuthenticationPageComponent with Facebook login matches snapshot 1`] = 
             }
           />
           <LoginForm
+            className="loginForm"
             inProgress={false}
             onSubmit={[Function]}
           />
-          <div>
-            <div>
-              <span>
+          <div
+            className="idpButtons"
+          >
+            <div
+              className="socialButtonsOr"
+            >
+              <span
+                className="socialButtonsOrText"
+              >
                 <FormattedMessage
                   id="AuthenticationPage.or"
                   values={Object {}}
                 />
               </span>
             </div>
-            <div>
+            <div
+              className="socialButtonWrapper"
+            >
               <SocialLoginButton
                 onClick={[Function]}
               >
-                <span>
+                <span
+                  className="buttonIcon"
+                >
                   <svg
                     height="20"
                     width="20"
@@ -233,8 +265,12 @@ exports[`AuthenticationPageComponent with Facebook login matches snapshot 1`] = 
         onManageDisableScrolling={[Function]}
         usePortal={true}
       >
-        <div>
-          <h2>
+        <div
+          className="termsWrapper"
+        >
+          <h2
+            className="termsHeading"
+          >
             <FormattedMessage
               id="AuthenticationPage.termsHeading"
               values={Object {}}
@@ -282,13 +318,17 @@ exports[`AuthenticationPageComponent with Google and Facebook login matches snap
       />
     </LayoutWrapperTopbar>
     <LayoutWrapperMain
-      className={null}
+      className="layoutWrapperMain"
       rootClassName={null}
     >
-      <div>
-        <div>
+      <div
+        className="root"
+      >
+        <div
+          className="content"
+        >
           <LinkTabNavHorizontal
-            className={null}
+            className="tabs"
             rootClassName={null}
             skin="light"
             tabClassName={null}
@@ -305,7 +345,9 @@ exports[`AuthenticationPageComponent with Google and Facebook login matches snap
                     },
                   },
                   "selected": false,
-                  "text": <h1>
+                  "text": <h1
+                    className="tab"
+                  >
                     <FormattedMessage
                       id="AuthenticationPage.signupLinkText"
                       values={Object {}}
@@ -322,7 +364,9 @@ exports[`AuthenticationPageComponent with Google and Facebook login matches snap
                     },
                   },
                   "selected": true,
-                  "text": <h1>
+                  "text": <h1
+                    className="tab"
+                  >
                     <FormattedMessage
                       id="AuthenticationPage.loginLinkText"
                       values={Object {}}
@@ -333,23 +377,34 @@ exports[`AuthenticationPageComponent with Google and Facebook login matches snap
             }
           />
           <LoginForm
+            className="loginForm"
             inProgress={false}
             onSubmit={[Function]}
           />
-          <div>
-            <div>
-              <span>
+          <div
+            className="idpButtons"
+          >
+            <div
+              className="socialButtonsOr"
+            >
+              <span
+                className="socialButtonsOrText"
+              >
                 <FormattedMessage
                   id="AuthenticationPage.or"
                   values={Object {}}
                 />
               </span>
             </div>
-            <div>
+            <div
+              className="socialButtonWrapper"
+            >
               <SocialLoginButton
                 onClick={[Function]}
               >
-                <span>
+                <span
+                  className="buttonIcon"
+                >
                   <svg
                     height="20"
                     width="20"
@@ -368,11 +423,15 @@ exports[`AuthenticationPageComponent with Google and Facebook login matches snap
                 />
               </SocialLoginButton>
             </div>
-            <div>
+            <div
+              className="socialButtonWrapper"
+            >
               <SocialLoginButton
                 onClick={[Function]}
               >
-                <span>
+                <span
+                  className="buttonIcon"
+                >
                   <svg
                     height="20"
                     width="20"
@@ -420,8 +479,12 @@ exports[`AuthenticationPageComponent with Google and Facebook login matches snap
         onManageDisableScrolling={[Function]}
         usePortal={true}
       >
-        <div>
-          <h2>
+        <div
+          className="termsWrapper"
+        >
+          <h2
+            className="termsHeading"
+          >
             <FormattedMessage
               id="AuthenticationPage.termsHeading"
               values={Object {}}
@@ -469,13 +532,17 @@ exports[`AuthenticationPageComponent with Google login matches snapshot 1`] = `
       />
     </LayoutWrapperTopbar>
     <LayoutWrapperMain
-      className={null}
+      className="layoutWrapperMain"
       rootClassName={null}
     >
-      <div>
-        <div>
+      <div
+        className="root"
+      >
+        <div
+          className="content"
+        >
           <LinkTabNavHorizontal
-            className={null}
+            className="tabs"
             rootClassName={null}
             skin="light"
             tabClassName={null}
@@ -492,7 +559,9 @@ exports[`AuthenticationPageComponent with Google login matches snapshot 1`] = `
                     },
                   },
                   "selected": false,
-                  "text": <h1>
+                  "text": <h1
+                    className="tab"
+                  >
                     <FormattedMessage
                       id="AuthenticationPage.signupLinkText"
                       values={Object {}}
@@ -509,7 +578,9 @@ exports[`AuthenticationPageComponent with Google login matches snapshot 1`] = `
                     },
                   },
                   "selected": true,
-                  "text": <h1>
+                  "text": <h1
+                    className="tab"
+                  >
                     <FormattedMessage
                       id="AuthenticationPage.loginLinkText"
                       values={Object {}}
@@ -520,23 +591,34 @@ exports[`AuthenticationPageComponent with Google login matches snapshot 1`] = `
             }
           />
           <LoginForm
+            className="loginForm"
             inProgress={false}
             onSubmit={[Function]}
           />
-          <div>
-            <div>
-              <span>
+          <div
+            className="idpButtons"
+          >
+            <div
+              className="socialButtonsOr"
+            >
+              <span
+                className="socialButtonsOrText"
+              >
                 <FormattedMessage
                   id="AuthenticationPage.or"
                   values={Object {}}
                 />
               </span>
             </div>
-            <div>
+            <div
+              className="socialButtonWrapper"
+            >
               <SocialLoginButton
                 onClick={[Function]}
               >
-                <span>
+                <span
+                  className="buttonIcon"
+                >
                   <svg
                     height="20"
                     width="20"
@@ -584,8 +666,12 @@ exports[`AuthenticationPageComponent with Google login matches snapshot 1`] = `
         onManageDisableScrolling={[Function]}
         usePortal={true}
       >
-        <div>
-          <h2>
+        <div
+          className="termsWrapper"
+        >
+          <h2
+            className="termsHeading"
+          >
             <FormattedMessage
               id="AuthenticationPage.termsHeading"
               values={Object {}}
