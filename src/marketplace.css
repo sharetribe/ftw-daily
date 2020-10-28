@@ -1,23 +1,24 @@
-@import './marketplaceFonts.css';
-
-/* ================ Custom properties aka variables ================ */
-
 :root {
-  /*
-    These variables are available in global scope through ":root"
-    element (<html> tag). Variables with the same names are going to
-    overwrite each other if CSS Properties' (PostCSS plugin)
-    configuration "preserve: true" is used - meaning that variables
-    are left to CSS bundle. We are planning to enable it in the future
-    since browsers support CSS Properties already.
+
+/**
+ * This file contains only Custom Sets of Properties (@apply-rule).
+ * This was originally part of cssnext package and was an interesting
+ * concept, because property sets would not suffer from specificity
+ * problems that arise from creating a single CSS file on build step.
+ *
+ * However, W3C has abandoned this concept before it became an
+ * official standard. It would be a good idea to reduce the usage.
+ * http://tabatkins.github.io/specs/css-apply-rule/
+ *
+ * Property sets defined in this file are imported and injected to
+ * correct places during PostCSS build step.
+ *
+ * Note: if you add plain CSS styles to this file,
+ * you'll end up seeing it repeated in development mode on every
+ * component that @imports this file.
  */
 
-  /**
-   * Font variables are separated to different file so that the amount of font styling rules
-   * doesn't overflow this one.
-   * see ./marketplaceFonts.css
-   * Usage example: .root { @apply --marketplaceH1FontStyles; }
-   */
+/* ================ CSS Custom Property Sets ================ */
 
   /* Full screen Background image located in root-folder/src/assets */
   --backgroundImage: {
@@ -40,89 +41,320 @@
     }
   }
 
-  /* ================ Colors ================ */
+  /**
+   * Usage example: .root { @apply --marketplaceDefaultFontStyles; }
+   */
+  --marketplaceDefaultFontStyles: {
+    font-family: var(--fontFamily);
+    font-weight: var(--fontWeightMedium);
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: -0.1px;
+    /* No margins for default font */
 
-  --marketplaceColor: #c0392b;
-  --marketplaceColorLight: #ff4c38;
-  --marketplaceColorDark: #8c291e;
+    @media (--viewportMedium) {
+      font-size: 16px;
+      line-height: 32px;
+    }
+  }
 
-  /* Used with inline CSS SVGs */
-  --marketplaceColorEncoded: %23c0392b;
+  --marketplaceSmallFontStyles: {
+    font-family: var(--fontFamily);
+    font-weight: var(--fontWeightMedium);
+    font-size: 14px;
+    line-height: 24px;
+  }
 
-  --successColor: #2ecc71;
-  --successColorDark: #239954;
-  --successColorLight: #f0fff6;
-  --failColor: #ff0000;
-  --failColorLight: #fff0f0;
-  --attentionColor: #ffaa00;
-  --attentionColorLight: #fff7f0;
-  --bannedColorLight: var(--marketplaceColorLight);
-  --bannedColorDark: var(--marketplaceColor);
+  /* ================ Body font ================ */
 
-  --matterColorDark: #000000;
-  --matterColor: #4a4a4a;
-  --matterColorAnti: #b2b2b2;
-  --matterColorNegative: #e7e7e7;
-  --matterColorBright: #fcfcfc;
-  --matterColorLight: #ffffff;
+  --marketplaceBodyFontStyles: {
+    font-family: var(--fontFamily);
+    font-weight: var(--fontWeightMedium);
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: -0.1px;
+    /* margin-top + n * line-height + margin-bottom => x * 6px */
+    margin-top: 12px;
+    margin-bottom: 12px;
 
-  --matterColorLightTransparent: rgba(255, 255, 255, 0.65);
+    @media (--viewportMedium) {
+      font-size: 16px;
+      line-height: 32px;
+      /* margin-top + n * line-height + margin-bottom => x * 8px */
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+  }
 
-  /* ================ Spacing unites ================ */
+  /* ================ Hero title ================ */
 
-  /* Multiples of mobile and desktop spacing units should be used with margins and paddings. */
-  --spacingUnit: 6px;
-  --spacingUnitDesktop: 8px;
+  --marketplaceHeroTitleFontStyles: {
+    font-weight: var(--fontWeightBold);
+    font-size: 36px;
+    line-height: 36px;
+    letter-spacing: -0.7px;
+    /* margin-top + n * line-height + margin-bottom => x * 6px */
+    margin-top: 25px;
+    margin-bottom: 14px;
 
-  /* Shadows */
-  --boxShadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-  --boxShadowTop: 0 -2px 4px 0 rgba(0, 0, 0, 0.1);
-  --boxShadowLight: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
-  --boxShadowPopup: 0 8px 16px 0 rgba(0, 0, 0, 0.3);
-  --boxShadowPopupLight: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
-  --boxShadowBreakdown: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
-  --boxShadowButton: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-  --boxShadowListingCard: 0 0 50px 0 rgba(0, 0, 0, 0.1);
-  --boxShadowNotFoundPageSearch: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
-  --boxShadowSectionLocationHover: 0 10px 30px 0 rgba(0, 0, 0, 0.1);
-  --boxShadowBottomForm: 0 -2px 4px 0 rgba(0, 0, 0, 0.05);
-  --boxShadowFilterButton: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
+    @media (--viewportMedium) {
+      font-size: 64px;
+      line-height: 64px;
+      letter-spacing: -1.5px;
+      /* margin-top + n * line-height + margin-bottom => x * 8px */
+      margin-top: 25px;
+      margin-bottom: 23px;
+    }
+  }
 
-  /* ================ Z-index base levels ================ */
+  /* ================ Topbar ================ */
 
-  /* topbar is positioned slightly above content */
-  --zIndexTopbar: 10;
-  /* small popups on UI should use z-indexes above 50 */
-  --zIndexPopup: 50;
-  /* modals and UI overlays should use z-indexes above 100 */
-  --zIndexModal: 100;
-  /* generic error message should overlay even modals */
-  --zIndexGenericError: 200;
+  /* Compose text label items on top of this */
+  /* This stretches inline element (link) to take available vertical space (big hover area),
+   * and align baselines
+   */
+  --TopbarDesktop_label: {
+    display: inline-block;
+    margin: 28px 0;
+    text-decoration: inherit;
 
-  /* ================ Border radius ================ */
+    @media (--viewportMedium) {
+      margin: 28px 0;
+    }
+  }
 
-  --borderRadius: 2px;
-  --borderRadiusMobileSearch: 3px;
+  --TopbarDesktop_linkHover: {
+    border-bottom: 0px solid;
+    transition: var(--transitionStyleButton);
 
-  /* ================ Transition styles ================ */
+    &:hover {
+      border-bottom: 4px solid var(--marketplaceColor);
+      border-radius: 0;
+      text-decoration: none;
+    }
+  }
 
-  --transitionStyle: ease-in 0.2s;
-  --transitionStyleButton: ease-in-out 0.1s;
+  /* ================ Modal title ================ */
 
-  /* ================ Topbar heights ================ */
+  --marketplaceModalTitleStyles {
+    font-weight: var(--fontWeightSemiBold);
+    font-size: 30px;
+    line-height: 36px;
+    letter-spacing: -0.5px;
+    margin: 0;
 
-  --topbarHeight: 60px;
-  --topbarHeightDesktop: 72px;
+    @media (--viewportMedium) {
+      font-weight: var(--fontWeightSemiBold);
+      line-height: 40px;
+      margin: 0;
+    }
+  }
 
-  /* ================ Modal default padding ================ */
+  /* ================ H1, H2, H3, H4, H5 & H6 ================ */
 
-  --modalPadding: 24px 24px 48px 24px;
-  --modalPaddingMedium: 55px 60px 55px 60px;
+  --marketplaceH1FontStyles: {
+    font-weight: var(--fontWeightSemiBold);
+    font-size: 24px;
+    line-height: 30px;
+    letter-spacing: -0.5px;
+    /* margin-top + n * line-height + margin-bottom => x * 6px */
+    margin-top: 18px;
+    margin-bottom: 18px;
 
-  /* ================ LocationAutocompleteInput bottom attribution padding ================ */
+    @media (--viewportMedium) {
+      font-size: 40px;
+      font-weight: var(--fontWeightSemiBold);
+      line-height: 48px;
+      letter-spacing: -1px;
+      /* margin-top + n * line-height + margin-bottom => x * 8px */
+      margin-top: 24px;
+      margin-bottom: 24px;
+    }
+  }
 
-  /* Google Maps needs 72px bottom padding to accommodate logo, Mapbox doesn't have one */
-  --locationAutocompleteBottomPadding: 8px;
+  --marketplaceH2FontStyles: {
+    font-weight: var(--fontWeightSemiBold);
+    font-size: 21px;
+    line-height: 24px;
+    /* margin-top + n * line-height + margin-bottom => x * 6px */
+    margin-top: 21px;
+    margin-bottom: 17px;
+
+    @media (--viewportMedium) {
+      line-height: 32px;
+      /* margin-top + n * line-height + margin-bottom => x * 8px */
+      margin-top: 21px;
+      margin-bottom: 19px;
+    }
+  }
+
+  --marketplaceH3FontStyles: {
+    font-weight: var(--fontWeightSemiBold);
+    font-size: 18px;
+    line-height: 24px;
+    /* margin-top + n * line-height + margin-bottom => x * 6px */
+    margin-top: 16px;
+    margin-bottom: 14px;
+
+    @media (--viewportMedium) {
+      /* margin-top + n * line-height + margin-bottom => x * 8px */
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+  }
+
+  --marketplaceH4FontStyles: {
+    font-weight: var(--fontWeightMedium);
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: 0;
+    /* margin-top + n * line-height + margin-bottom => x * 6px */
+    margin-top: 12px;
+    margin-bottom: 12px;
+
+    @media (--viewportMedium) {
+      font-weight: var(--fontWeightMedium);
+      /* margin-top + n * line-height + margin-bottom => x * 8px */
+      margin-top: 17px;
+      margin-bottom: 15px;
+    }
+  }
+
+  --marketplaceH5FontStyles: {
+    font-weight: var(--fontWeightMedium);
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0;
+    /* margin-top + n * line-height + margin-bottom => x * 6px */
+    margin-top: 10px;
+    margin-bottom: 8px;
+
+    @media (--viewportMedium) {
+      line-height: 16px;
+      /* margin-top + n * line-height + margin-bottom => x * 8px */
+      margin-top: 10px;
+      margin-bottom: 14px;
+    }
+  }
+
+  --marketplaceH6FontStyles: {
+    font-weight: var(--fontWeightBold);
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    /* margin-top + n * line-height + margin-bottom => x * 6px */
+    margin-top: 10px;
+    margin-bottom: 8px;
+
+    @media (--viewportMedium) {
+      line-height: 16px;
+      /* margin-top + n * line-height + margin-bottom => x * 8px */
+      margin-top: 10px;
+      margin-bottom: 6px;
+    }
+  }
+
+  /* ================ Other fonts ================ */
+
+  --marketplaceTinyFontStyles: {
+    font-family: var(--fontFamily);
+    font-weight: var(--fontWeightRegular);
+    font-size: 13px;
+    line-height: 18px;
+    /* margin-top + n * line-height + margin-bottom => x * 6px */
+    margin-top: 9.5px;
+    margin-bottom: 8.5px;
+    -webkit-font-smoothing: subpixel-antialiased;
+
+    @media (--viewportMedium) {
+      line-height: 16px;
+      /* margin-top + n * line-height + margin-bottom => x * 8px */
+      margin-top: 10.5px;
+      margin-bottom: 13.5px;
+    }
+  }
+
+  --marketplaceMessageFontStyles {
+    font-family: var(--fontFamily);
+    font-weight: var(--fontWeightRegular);
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  --marketplaceMessageDateFontStyles {
+    font-family: var(--fontFamily);
+    font-weight: var(--fontWeightRegular);
+    font-size: 12px;
+    line-height: 18px;
+
+    @media (--viewportMedium) {
+      font-weight: var(--fontWeightMedium);
+      font-size: 12px;
+      line-height: 24px;
+    }
+  }
+
+  --marketplaceTxTransitionFontStyles {
+    font-family: var(--fontFamily);
+    font-weight: var(--fontWeightMedium);
+    font-size: 16px;
+    line-height: 18px;
+
+    @media (--viewportMedium) {
+      font-size: 16px;
+      line-height: 24px;
+    }
+  }
+
+  --marketplaceSearchFilterLabelFontStyles {
+    font-family: var(--fontFamily);
+    font-weight: var(--fontWeightSemiBold);
+    font-size: 13px;
+    line-height: 18px;
+
+    @media (--viewportMedium) {
+      font-weight: var(--fontWeightMedium);
+      font-size: 13px;
+      line-height: 20px;
+    }
+  }
+
+  --marketplaceSearchFilterSublabelFontStyles {
+    font-family: var(--fontFamily);
+    font-weight: var(--fontWeightMedium);
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  --marketplaceListingAttributeFontStyles {
+    font-family: var(--fontFamily);
+    font-weight: var(--fontWeightMedium);
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  /* ================ Tabbed navigation font styles ================ */
+
+  --marketplaceTabNavFontStyles {
+    font-weight: var(--fontWeightMedium);
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0;
+
+    @media (--viewportLarge) {
+      font-weight: var(--fontWeightSemiBold);
+      font-size: 20px;
+      line-height: 24px;
+    }
+  }
+
+  --marketplaceTabNavHorizontalFontStyles {
+    font-weight: var(--fontWeightMedium);
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0;
+  }
 
   /* ================ Clearfix solution ================ */
 
@@ -261,8 +493,6 @@
       border-color: var(--matterColorNegative);
     }
   }
-
-  --marketplaceButtonSmallDesktopPadding: 9px 16px 9px 16px;
 
   /* ================ Inputs ================ */
 
@@ -561,10 +791,6 @@
     color: var(--failColor);
   }
 
-  --marketplaceModalHighlightEmail {
-    font-weight: var(--fontWeightBold);
-  }
-
   --marketplaceModalPasswordMargins {
     /* Leave space between the input and the button below when the
     viewport height is small */
@@ -575,11 +801,3 @@
     }
   }
 }
-
-/* ================ Custom media queries ================ */
-
-@custom-media --viewportSmall (min-width: 550px);
-@custom-media --viewportMedium (min-width: 768px);
-@custom-media --viewportLarge (min-width: 1024px);
-@custom-media --viewportLargeWithPaddings (min-width: 1128px);
-@custom-media --viewportXLarge (min-width: 1921px);
