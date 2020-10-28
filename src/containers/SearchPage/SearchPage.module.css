@@ -1,4 +1,4 @@
-@import '../../marketplace.css';
+@import '../../styles/propertySets.css';
 
 /* Can be given to Topbar when a modal is opened
  * so that the Topbar is not rendered on top of it.*/

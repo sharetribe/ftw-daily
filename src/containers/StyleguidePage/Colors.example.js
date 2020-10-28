@@ -43,7 +43,7 @@ const MarketplaceColors = () => {
       </p>
       <p className={css.spacing2x}>
         N.B. you should import marketplace.css where ever you are going to use marketplace variables
-        (e.g. <i>@import '../../marketplace.css';</i>).
+        (e.g. <i>@import '../../styles/propertySets.css';</i>).
       </p>
       <div className={css.colorsContainer}>
         <div className={css.colorsGroup}>

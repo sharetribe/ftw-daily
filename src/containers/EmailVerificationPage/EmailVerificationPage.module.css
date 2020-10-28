@@ -1,4 +1,4 @@
-@import '../../marketplace.css';
+@import '../../styles/propertySets.css';
 
 .layoutWrapperMain {
   min-height: calc(100vh - var(--topbarHeight));
