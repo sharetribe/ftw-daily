@@ -1,5 +1,3 @@
-@import '../../marketplace.css';
-
 .root {
   /* While the viewbox of the icon is 30x30, the icon size is scaled to
    28x28 by default, which results in scaling the whole image and the
