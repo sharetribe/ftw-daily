@@ -2,79 +2,119 @@
 
 exports[`ActivityFeed matches snapshot 1`] = `
 <ul
-  className=""
+  className="root"
 >
   <li
+    className="transitionItem"
     key="transition/confirm-payment"
   >
-    <div>
-      <div>
-        <p>
+    <div
+      className="transition"
+    >
+      <div
+        className="bullet"
+      >
+        <p
+          className="transitionContent"
+        >
           •
         </p>
       </div>
       <div>
-        <p />
-        <p />
+        <p
+          className="transitionContent"
+        />
+        <p
+          className="transitionDate"
+        />
       </div>
     </div>
   </li>
   <li
+    className="transitionItem"
     key="transition/accept"
   >
-    <div>
-      <div>
-        <p>
+    <div
+      className="transition"
+    >
+      <div
+        className="bullet"
+      >
+        <p
+          className="transitionContent"
+        >
           •
         </p>
       </div>
       <div>
-        <p />
-        <p />
+        <p
+          className="transitionContent"
+        />
+        <p
+          className="transitionDate"
+        />
       </div>
     </div>
   </li>
   <li
+    className="messageItem"
     id="msg-msg1"
     key="msg1"
   >
-    <div>
+    <div
+      className="message"
+    >
       <a
-        className=""
+        className="root avatar"
         href="/u/user1"
         onClick={[Function]}
         style={Object {}}
         title="user1 display name"
       >
-        <span>
+        <span
+          className="initials"
+        >
           TT
         </span>
       </a>
       <div>
-        <p>
+        <p
+          className="messageContent"
+        >
           Message msg1
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
-        <p>
+        <p
+          className="messageDate"
+        >
           2017-11-09, 08:12
         </p>
       </div>
     </div>
   </li>
   <li
+    className="messageItem"
     id="msg-msg2"
     key="msg2"
   >
-    <div>
-      <div>
-        <p>
+    <div
+      className="ownMessage"
+    >
+      <div
+        className="ownMessageContentWrapper"
+      >
+        <p
+          className="ownMessageContent"
+        >
           Message msg2
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
       </div>
-      <p>
+      <p
+        className="ownMessageDate"
+      >
         2017-11-09, 08:12
       </p>
     </div>

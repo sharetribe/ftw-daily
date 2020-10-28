@@ -2,7 +2,7 @@
 
 exports[`ListingCard matches snapshot 1`] = `
 <NamedLink
-  className=""
+  className="root"
   name="ListingPage"
   params={
     Object {
@@ -12,13 +12,17 @@ exports[`ListingCard matches snapshot 1`] = `
   }
 >
   <div
+    className="threeToTwoWrapper"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
-    <div>
+    <div
+      className="aspectWrapper"
+    >
       <lazyLoadWithDimensions(ListingImage)
         alt="listing1 title"
         image={null}
+        rootClassName="rootForImage"
         sizes={null}
         variants={
           Array [
@@ -29,27 +33,40 @@ exports[`ListingCard matches snapshot 1`] = `
       />
     </div>
   </div>
-  <div>
-    <div>
+  <div
+    className="info"
+  >
+    <div
+      className="price"
+    >
       <div
+        className="priceValue"
         title={55}
       >
         55
       </div>
-      <div>
+      <div
+        className="perUnit"
+      >
         <FormattedMessage
           id="ListingCard.perNight"
           values={Object {}}
         />
       </div>
     </div>
-    <div>
-      <div>
+    <div
+      className="mainInfo"
+    >
+      <div
+        className="title"
+      >
         listing1
          
         title
       </div>
-      <div>
+      <div
+        className="authorInfo"
+      >
         <FormattedMessage
           id="ListingCard.hostedBy"
           values={

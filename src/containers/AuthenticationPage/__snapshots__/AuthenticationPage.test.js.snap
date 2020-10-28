@@ -25,13 +25,17 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
       />
     </LayoutWrapperTopbar>
     <LayoutWrapperMain
-      className={null}
+      className="layoutWrapperMain"
       rootClassName={null}
     >
-      <div>
-        <div>
+      <div
+        className="root"
+      >
+        <div
+          className="content"
+        >
           <LinkTabNavHorizontal
-            className={null}
+            className="tabs"
             rootClassName={null}
             skin="light"
             tabClassName={null}
@@ -48,7 +52,9 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
                     },
                   },
                   "selected": false,
-                  "text": <h1>
+                  "text": <h1
+                    className="tab"
+                  >
                     <FormattedMessage
                       id="AuthenticationPage.signupLinkText"
                       values={Object {}}
@@ -65,7 +71,9 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
                     },
                   },
                   "selected": true,
-                  "text": <h1>
+                  "text": <h1
+                    className="tab"
+                  >
                     <FormattedMessage
                       id="AuthenticationPage.loginLinkText"
                       values={Object {}}
@@ -76,6 +84,7 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
             }
           />
           <LoginForm
+            className="loginForm"
             inProgress={false}
             onSubmit={[Function]}
           />
@@ -88,8 +97,12 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
         onManageDisableScrolling={[Function]}
         usePortal={true}
       >
-        <div>
-          <h2>
+        <div
+          className="termsWrapper"
+        >
+          <h2
+            className="termsHeading"
+          >
             <FormattedMessage
               id="AuthenticationPage.termsHeading"
               values={Object {}}
