@@ -58,6 +58,7 @@
     "url": "^0.11.0"
   },
   "devDependencies": {
+    "@babel/helper-compilation-targets": "^7.12.1",
     "babel-jest": "24.9.0",
     "bfj": "^7.0.2",
     "chalk": "^2.4.1",
