@@ -107,15 +107,15 @@
 }
 
 /* A bar on top of light sections */
-.section:nth-of-type(2n) .sectionContent::before {
+/* .section:nth-of-type(2n) .sectionContent::before {
   background: var(--marketplaceColor);
   content: '';
   display: block;
   width: 109px;
-  height: 6px;
+  height: 6px; */
 
   /* Place the bar on top of .sectionContent top margin */
-  position: relative;
+  /* position: relative;
   top: calc(-1 * var(--LandingPage_sectionMarginTop));
 
   @media (--viewportMedium) {
@@ -127,4 +127,4 @@
   @media (--viewportLarge) {
     top: calc(-1 * var(--LandingPage_sectionMarginTopLarge));
   }
-}
+} */

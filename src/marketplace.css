@@ -22,7 +22,7 @@
   /* Full screen Background image located in root-folder/src/assets */
   --backgroundImage: {
     /* Gradient direction and overlaying the black color on top of the image for better readability */
-    background: 
+    background:
       url('../../assets/background-1440.png');
 
     /* Add loading color for the div */
@@ -42,16 +42,24 @@
 
   /* ================ Colors ================ */
 
-  --marketplaceColor: #DE7AAE;
-  --marketplaceColorLight: #ffabd7;
-  --marketplaceColorDark: #BE5A8E;
+  /* pink */
+  --marketplaceColor: #ffabd7; ;
+   /* yellow */
+  --marketplaceColorLight: #fff5a6;
+  /* green */
+  /* --marketplaceColorLight: #8eff8c; */
+  /* blue */
+  --marketplaceColorDark: #5cbfcc;
 
   /* Used with inline CSS SVGs */
   --marketplaceColorEncoded: %23c0392b;
 
-  --successColor: #6BDE98;
-  --successColorDark: #59BA7F;
-  --successColorLight: #96E7B6;
+  /* --successColor: #6BDE98; */
+  /* --successColorDark: #59BA7F; */
+  /* --successColorLight: #96E7B6; */
+  --successColor: #8eff8c;
+  --successColorDark: #6ac269;
+  --successColorLight: #aaf7a8;
   --failColor: #EF7171;
   --failColorLight: #F39A9A;
   --attentionColor: #EDC56E;
