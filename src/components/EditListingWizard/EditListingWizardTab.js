@@ -19,7 +19,7 @@ import {
   EditListingPricingPanel,
 } from '../../components';
 
-import css from './EditListingWizard.css';
+import css from './EditListingWizard.module.css';
 
 export const AVAILABILITY = 'availability';
 export const DESCRIPTION = 'description';

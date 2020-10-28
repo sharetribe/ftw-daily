@@ -8,7 +8,7 @@ import { Form, PrimaryButton, FieldTextInput, IconEnquiry } from '../../componen
 import * as validators from '../../util/validators';
 import { propTypes } from '../../util/types';
 
-import css from './EnquiryForm.css';
+import css from './EnquiryForm.module.css';
 
 const EnquiryFormComponent = props => (
   <FinalForm

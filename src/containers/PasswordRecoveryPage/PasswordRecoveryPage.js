@@ -24,7 +24,7 @@ import {
   retypePasswordRecoveryEmail,
   clearPasswordRecoveryError,
 } from './PasswordRecoveryPage.duck';
-import css from './PasswordRecoveryPage.css';
+import css from './PasswordRecoveryPage.module.css';
 
 export const PasswordRecoveryPageComponent = props => {
   const {

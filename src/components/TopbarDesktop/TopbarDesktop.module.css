@@ -1,41 +1,5 @@
 @import '../../marketplace.css';
 
-:root {
-  /*
-    These variables are available in global scope through ":root"
-    element (<html> tag). Variables with the same names are going to
-    overwrite each other if CSS Properties' (PostCSS plugin)
-    configuration "preserve: true" is used - meaning that variables
-    are left to CSS bundle. We are planning to enable it in the future
-    since browsers support CSS Properties already.
- */
-
-  /* Compose text label items on top of this */
-  /* This stretches inline element (link) to take available vertical space (big hover area),
-   * and align baselines
-   */
-  --TopbarDesktop_label: {
-    display: inline-block;
-    margin: 28px 0;
-    text-decoration: inherit;
-
-    @media (--viewportMedium) {
-      margin: 28px 0;
-    }
-  }
-
-  --TopbarDesktop_linkHover: {
-    border-bottom: 0px solid;
-    transition: var(--transitionStyleButton);
-
-    &:hover {
-      border-bottom: 4px solid var(--marketplaceColor);
-      border-radius: 0;
-      text-decoration: none;
-    }
-  }
-}
-
 /* Desktop */
 .root {
   /* Size */

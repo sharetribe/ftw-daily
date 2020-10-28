@@ -5,7 +5,7 @@ import { FormattedMessage, intlShape } from '../../util/reactIntl';
 import PayoutDetailsAddress from './PayoutDetailsAddress';
 import PayoutDetailsPersonalDetails from './PayoutDetailsPersonalDetails';
 
-import css from './PayoutDetailsForm.css';
+import css from './PayoutDetailsForm.module.css';
 
 const PayoutDetailsAccountOpener = props => {
   const {

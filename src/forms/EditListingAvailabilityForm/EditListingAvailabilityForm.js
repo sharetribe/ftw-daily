@@ -8,7 +8,7 @@ import { propTypes } from '../../util/types';
 import { Form, Button } from '../../components';
 
 import ManageAvailabilityCalendar from './ManageAvailabilityCalendar';
-import css from './EditListingAvailabilityForm.css';
+import css from './EditListingAvailabilityForm.module.css';
 
 export class EditListingAvailabilityFormComponent extends Component {
   render() {

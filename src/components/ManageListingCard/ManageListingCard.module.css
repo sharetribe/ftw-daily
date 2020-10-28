@@ -1,22 +1,11 @@
 @import '../../marketplace.css';
 
-:root {
-  /*
-    These variables are available in global scope through ":root"
-    element (<html> tag). Variables with the same names are going to
-    overwrite each other if CSS Properties' (PostCSS plugin)
-    configuration "preserve: true" is used - meaning that variables
-    are left to CSS bundle. We are planning to enable it in the future
-    since browsers support CSS Properties already.
- */
-
-  --ManageListingCard_coverEverything: {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
+.coverEverything {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
 .root {
@@ -33,12 +22,12 @@
 
 .menuOverlayWrapper {
   /* Positioning */
-  @apply --ManageListingCard_coverEverything;
+  composes: coverEverything;
 }
 
 .menuOverlay {
   /* Positioning */
-  @apply --ManageListingCard_coverEverything;
+  composes: coverEverything;
 
   /* Overlay */
   background-color: var(--matterColorAnti);
@@ -49,7 +38,7 @@
 
 .menuOverlayContent {
   /* Positioning */
-  @apply --ManageListingCard_coverEverything;
+  composes: coverEverything;
   /* Fonts */
   @apply --marketplaceH4FontStyles;
   font-weight: var(--fontWeightSemiBold);
@@ -93,7 +82,7 @@
 
 .rootForImage {
   /* Layout - image will take space defined by aspect ratio wrapper */
-  @apply --ManageListingCard_coverEverything;
+  composes: coverEverything;
   width: 100%;
   border-radius: 2px;
 }

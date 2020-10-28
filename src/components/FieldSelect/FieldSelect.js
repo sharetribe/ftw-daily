@@ -4,7 +4,7 @@ import { Field } from 'react-final-form';
 import classNames from 'classnames';
 import { ValidationError } from '../../components';
 
-import css from './FieldSelect.css';
+import css from './FieldSelect.module.css';
 
 const FieldSelectComponent = props => {
   const { rootClassName, className, id, label, input, meta, children, ...rest } = props;

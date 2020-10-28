@@ -17,7 +17,7 @@ import {
 } from '../../util/urlHelpers';
 import { NamedLink } from '../../components';
 
-import css from './ListingLink.css';
+import css from './ListingLink.module.css';
 
 const MIN_LENGTH_FOR_LONG_WORDS = 16;
 

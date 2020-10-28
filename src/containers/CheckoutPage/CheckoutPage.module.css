@@ -1,19 +1,5 @@
 @import '../../marketplace.css';
 
-:root {
-  /*
-    These variables are available in global scope through ":root"
-    element (<html> tag). Variables with the same names are going to
-    overwrite each other if CSS Properties' (PostCSS plugin)
-    configuration "preserve: true" is used - meaning that variables
-    are left to CSS bundle. We are planning to enable it in the future
-    since browsers support CSS Properties already.
- */
-
-  --CheckoutPage_logoHeight: 25px;
-  --CheckoutPage_logoHeightDesktop: 27px;
-}
-
 /* Dummy Topbar */
 
 .topbar {

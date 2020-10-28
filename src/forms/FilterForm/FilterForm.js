@@ -6,7 +6,7 @@ import arrayMutators from 'final-form-arrays';
 import { injectIntl, intlShape } from '../../util/reactIntl';
 
 import { Form } from '../../components';
-import css from './FilterForm.css';
+import css from './FilterForm.module.css';
 
 const FilterFormComponent = props => {
   const { liveEdit, onChange, onSubmit, onCancel, onClear, ...rest } = props;

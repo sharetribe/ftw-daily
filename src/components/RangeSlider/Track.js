@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { array, node, string } from 'prop-types';
 import classNames from 'classnames';
 
-import css from './Track.css';
+import css from './Track.module.css';
 
 class Track extends Component {
   render() {

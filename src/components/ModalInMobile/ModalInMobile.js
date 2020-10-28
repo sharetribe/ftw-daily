@@ -17,7 +17,7 @@ import classNames from 'classnames';
 import { Modal } from '../../components';
 import { withViewport } from '../../util/contextHelpers';
 
-import css from './ModalInMobile.css';
+import css from './ModalInMobile.module.css';
 
 class ModalInMobileComponent extends Component {
   constructor(props) {

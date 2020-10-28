@@ -1,29 +1,5 @@
 @import '../../marketplace.css';
 
-:root {
-  /*
-    These variables are available in global scope through ":root"
-    element (<html> tag). Variables with the same names are going to
-    overwrite each other if CSS Properties' (PostCSS plugin)
-    configuration "preserve: true" is used - meaning that variables
-    are left to CSS bundle. We are planning to enable it in the future
-    since browsers support CSS Properties already.
- */
-
-  --SectionHero_desktopTitleMaxWidth: 625px;
-
-  --SectionHero_animation: {
-    animation-name: animationTitle;
-    animation-duration: 0.5s;
-    animation-timing-function: ease-out;
-    -webkit-animation-fill-mode: forwards;
-
-    visibility: hidden;
-    opacity: 1;
-    position: relative;
-  }
-}
-
 /* Animation for the hero elements */
 
 @keyframes animationTitle {
@@ -37,6 +13,18 @@
     opacity: 1;
     top: 0;
   }
+}
+
+/* Shared animation rules */
+.animation {
+  animation-name: animationTitle;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  -webkit-animation-fill-mode: forwards;
+
+  visibility: hidden;
+  opacity: 1;
+  position: relative;
 }
 
 .root {
@@ -74,7 +62,7 @@
   @apply --marketplaceHeroTitleFontStyles;
   color: var(--matterColorLight);
 
-  @apply --SectionHero_animation;
+  composes: animation;
   animation-delay: 0.5s;
 
   @media (--viewportMedium) {
@@ -88,7 +76,7 @@
   color: var(--matterColorLight);
   margin: 0 0 32px 0;
 
-  @apply --SectionHero_animation;
+  composes: animation;
   animation-delay: 0.65s;
 
   @media (--viewportMedium) {
@@ -99,7 +87,7 @@
 
 .heroButton {
   @apply --marketplaceButtonStyles;
-  @apply --SectionHero_animation;
+  composes: animation;
 
   animation-delay: 0.8s;
 

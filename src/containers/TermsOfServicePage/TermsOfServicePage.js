@@ -17,7 +17,7 @@ import {
 } from '../../components';
 import config from '../../config';
 
-import css from './TermsOfServicePage.css';
+import css from './TermsOfServicePage.module.css';
 
 const TermsOfServicePageComponent = props => {
   const { scrollingDisabled, intl } = props;

@@ -1,16 +1,5 @@
 @import '../../marketplace.css';
 
-:root {
-  --ManageAvailabilityCalendar_gridColor: #e0e0e0;
-  --ManageAvailabilityCalendar_availableColor: #ffffff;
-  --ManageAvailabilityCalendar_availableColorHover: #fafafa;
-  --ManageAvailabilityCalendar_blockedColor: #ebebeb;
-  --ManageAvailabilityCalendar_blockedColorHover: #e6e6e6;
-  --ManageAvailabilityCalendar_reservedColor: #e6fff0;
-  --ManageAvailabilityCalendar_reservedColorHover: #e1faeb;
-  --ManageAvailabilityCalendar_failedColor: #fff2f2;
-}
-
 .root {
   @apply --marketplaceH5FontStyles;
   margin-top: 0;

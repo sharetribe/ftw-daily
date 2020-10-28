@@ -14,7 +14,7 @@ import {
   propTypes,
 } from '../../util/types';
 
-import css from './BookingTimeInfo.css';
+import css from './BookingTimeInfo.module.css';
 
 const bookingData = (unitType, tx, isOrder, intl) => {
   // Attributes: displayStart and displayEnd can be used to differentiate shown time range

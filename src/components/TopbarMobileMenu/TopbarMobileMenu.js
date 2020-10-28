@@ -11,7 +11,7 @@ import { propTypes } from '../../util/types';
 import { ensureCurrentUser } from '../../util/data';
 import { AvatarLarge, InlineTextButton, NamedLink, NotificationBadge } from '../../components';
 
-import css from './TopbarMobileMenu.css';
+import css from './TopbarMobileMenu.module.css';
 
 const TopbarMobileMenu = props => {
   const {

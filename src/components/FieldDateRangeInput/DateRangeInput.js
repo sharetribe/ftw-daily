@@ -22,7 +22,7 @@ import {
 } from './DateRangeInput.helpers';
 
 import { IconArrowHead } from '../../components';
-import css from './DateRangeInput.css';
+import css from './DateRangeInput.module.css';
 
 export const HORIZONTAL_ORIENTATION = 'horizontal';
 export const ANCHOR_LEFT = 'left';

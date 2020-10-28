@@ -4,7 +4,7 @@ import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 
 import { Menu, MenuContent, MenuItem, MenuLabel } from '..';
-import css from './SelectSingleFilterPopup.css';
+import css from './SelectSingleFilterPopup.module.css';
 
 const optionLabel = (options, key) => {
   const option = options.find(o => o.key === key);

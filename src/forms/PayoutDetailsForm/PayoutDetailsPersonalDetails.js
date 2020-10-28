@@ -5,7 +5,7 @@ import * as validators from '../../util/validators';
 import { FieldBirthdayInput, FieldCheckbox, FieldTextInput } from '../../components';
 
 import * as normalizePhoneNumberUS from './normalizePhoneNumberUS';
-import css from './PayoutDetailsForm.css';
+import css from './PayoutDetailsForm.module.css';
 
 const MIN_STRIPE_ACCOUNT_AGE = 18;
 
