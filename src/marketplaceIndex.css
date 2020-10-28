@@ -1,7 +1,179 @@
 @import './assets/sanitize.css';
 @import './marketplace.css';
 
-/* ================ Fonts ================ */
+/* ================ Custom Properties aka CSS variables ================ */
+
+/**
+ * These variables are available in global scope through ":root"
+ * element (<html> tag). You can use Custom Properties to achieve
+ * more dynamic theming by changing the value on the fly with JS:
+ * document.documentElement.style.setProperty("--marketplaceColor", '#55AA55');
+ *
+ * Read more about how to use CSS Custom Properties
+ * https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties
+ */
+
+:root {
+
+  /* ================ Colors ================ */
+
+  --marketplaceColor: #c0392b;
+  --marketplaceColorLight: #ff4c38;
+  --marketplaceColorDark: #8c291e;
+
+  /* Used with inline CSS SVGs */
+  --marketplaceColorEncoded: %23c0392b;
+
+  --successColor: #2ecc71;
+  --successColorDark: #239954;
+  --successColorLight: #f0fff6;
+  --failColor: #ff0000;
+  --failColorLight: #fff0f0;
+  --attentionColor: #ffaa00;
+  --attentionColorLight: #fff7f0;
+  --bannedColorLight: var(--marketplaceColorLight);
+  --bannedColorDark: var(--marketplaceColor);
+
+  --matterColorDark: #000000;
+  --matterColor: #4a4a4a;
+  --matterColorAnti: #b2b2b2;
+  --matterColorNegative: #e7e7e7;
+  --matterColorBright: #fcfcfc;
+  --matterColorLight: #ffffff;
+
+  --matterColorLightTransparent: rgba(255, 255, 255, 0.65);
+
+
+  /* ================ Font ================ */
+  --fontFamily: 'poppins', Helvetica, Arial, sans-serif;
+
+  --fontWeightRegular: 400;
+  --fontWeightMedium: 500;
+  --fontWeightSemiBold: 600;
+  --fontWeightBold: 700;
+
+  --fontWeightHighlightEmail: var(--fontWeightBold);
+
+  /* ================ Spacing unites ================ */
+
+  /* Multiples of mobile and desktop spacing units should be used with margins and paddings. */
+  --spacingUnit: 6px;
+  --spacingUnitDesktop: 8px;
+
+  /* Shadows */
+  --boxShadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  --boxShadowTop: 0 -2px 4px 0 rgba(0, 0, 0, 0.1);
+  --boxShadowLight: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+  --boxShadowPopup: 0 8px 16px 0 rgba(0, 0, 0, 0.3);
+  --boxShadowPopupLight: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+  --boxShadowBreakdown: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+  --boxShadowButton: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  --boxShadowListingCard: 0 0 50px 0 rgba(0, 0, 0, 0.1);
+  --boxShadowNotFoundPageSearch: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  --boxShadowSectionLocationHover: 0 10px 30px 0 rgba(0, 0, 0, 0.1);
+  --boxShadowBottomForm: 0 -2px 4px 0 rgba(0, 0, 0, 0.05);
+  --boxShadowFilterButton: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
+
+  /* ================ Z-index base levels ================ */
+
+  /* topbar is positioned slightly above content */
+  --zIndexTopbar: 10;
+  /* small popups on UI should use z-indexes above 50 */
+  --zIndexPopup: 50;
+  /* modals and UI overlays should use z-indexes above 100 */
+  --zIndexModal: 100;
+  /* generic error message should overlay even modals */
+  --zIndexGenericError: 200;
+
+  /* ================ Border radius ================ */
+
+  --borderRadius: 2px;
+  --borderRadiusMobileSearch: 3px;
+
+  /* ================ Transition styles ================ */
+
+  --transitionStyle: ease-in 0.2s;
+  --transitionStyleButton: ease-in-out 0.1s;
+
+  /* ================ Topbar related ================ */
+
+  --topbarHeight: 60px;
+  --topbarHeightDesktop: 72px;
+
+  --TopbarMobileMenu_topMargin: 96px;
+
+  --Topbar_logoHeight: 25px;
+  --CheckoutPage_logoHeight: 25px;
+  --CheckoutPage_logoHeightDesktop: 27px;
+
+  --TopbarSearchForm_inputHeight: 53px;
+  --TopbarSearchForm_topbarMargin: 94px;
+  --TopbarSearchForm_bottomBorder: 3px;
+
+  /* ================ Modal default padding ================ */
+
+  --modalPadding: 24px 24px 48px 24px;
+  --modalPaddingMedium: 55px 60px 55px 60px;
+
+  /* ================ LocationAutocompleteInput bottom attribution padding ================ */
+
+  /* Google Maps needs 72px bottom padding to accommodate logo, Mapbox doesn't have one */
+  --locationAutocompleteBottomPadding: 8px;
+
+  --LocationAutocompleteInput_inputHeight: 50px;
+  --LocationAutocompleteInput_sidePaddingDesktop: 36px;
+
+  /* ================ Filters ================ */
+  --marketplaceButtonSmallDesktopPadding: 9px 16px 9px 16px;
+
+
+  /* ================ DateInput, DateRangeInput, DateRangeController ================ */
+  --ReactDates_selectionHeight: 36px;
+  --ReactDates_hoveredOverlayColor: rgba(255, 255, 255, 0.2);
+
+  --DateInput_selectionHeight: var(--ReactDates_selectionHeight);
+  --DateInput_hoveredOverlayColor: var(--ReactDates_hoveredOverlayColor);
+  --DateRangeInput_selectionHeight: var(--ReactDates_selectionHeight);
+  --DateRangeInput_hoveredOverlayColor: var(--ReactDates_hoveredOverlayColor);
+  --DateRangeController_selectionHeight: var(--ReactDates_selectionHeight);
+
+  /* ================ SectionHero ================ */
+
+  --SectionHero_desktopTitleMaxWidth: 625px;
+
+  /* ================ TabNav ================ */
+  --TabNav_linkWidth: 240px;
+
+  /* ================ LandingPage ================ */
+  --LandingPage_sectionMarginTop: 40px;
+  --LandingPage_sectionMarginTopMedium: 60px;
+  --LandingPage_sectionMarginTopLarge: 94px;
+
+  /* ================ EditListingAvailabilityForm, ManageAvailabilityCalendar ================ */
+  --ManageAvailabilityCalendar_gridColor: #e0e0e0;
+  --ManageAvailabilityCalendar_availableColor: #ffffff;
+  --ManageAvailabilityCalendar_availableColorHover: #fafafa;
+  --ManageAvailabilityCalendar_blockedColor: #ebebeb;
+  --ManageAvailabilityCalendar_blockedColorHover: #e6e6e6;
+  --ManageAvailabilityCalendar_reservedColor: #e6fff0;
+  --ManageAvailabilityCalendar_reservedColorHover: #e1faeb;
+  --ManageAvailabilityCalendar_failedColor: #fff2f2;
+
+  /* ================ ProfileSettingsForm ================ */
+  --ProfileSettingsForm_avatarSize: 96px;
+  --ProfileSettingsForm_avatarSizeDesktop: 240px;
+
+}
+
+/* ================ Custom media queries ================ */
+
+@custom-media --viewportSmall (min-width: 550px);
+@custom-media --viewportMedium (min-width: 768px);
+@custom-media --viewportLarge (min-width: 1024px);
+@custom-media --viewportLargeWithPaddings (min-width: 1128px);
+@custom-media --viewportXLarge (min-width: 1921px);
+
+/* ================ Global element styles ================ */
 
 body {
   font-family: Helvetica, Arial, sans-serif;
