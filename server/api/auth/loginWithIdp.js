@@ -82,9 +82,9 @@ module.exports = (err, user, req, res, clientID, idpId) => {
 
   return sdk
     .loginWithIdp({
-      idpId: 'facebook',
+      idpId,
       idpClientId: clientID,
-      idpToken: user ? user.accessToken : null,
+      idpToken: user.idpToken,
     })
     .then(response => {
       if (response.status === 200) {
@@ -99,7 +99,9 @@ module.exports = (err, user, req, res, clientID, idpId) => {
         }
       }
     })
-    .catch(() => {
+    .catch(err => {
+      console.error(err);
+
       // If authentication fails, we want to create a new user with idp
       // For this we will need to pass some information to frontend so
       // that we can use that information in createUserWithIdp api call.
@@ -112,7 +114,7 @@ module.exports = (err, user, req, res, clientID, idpId) => {
           email: user.email,
           firstName: user.firstName,
           lastName: user.lastName,
-          idpToken: `${user.accessToken}`,
+          idpToken: user.idpToken,
           idpId,
           from,
         },
