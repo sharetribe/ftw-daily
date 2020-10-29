@@ -50,7 +50,7 @@ module.exports = (req, res) => {
     idpId === FACEBOOK_IDP_ID ? FACBOOK_APP_ID : idpId === GOOGLE_IDP_ID ? GOOGLE_CLIENT_ID : null;
 
   sdk.currentUser
-    .createWithIdp({ idpId: FACEBOOK_IDP_ID, idpClientId, idpToken, ...rest })
+    .createWithIdp({ idpId, idpClientId, idpToken, ...rest })
     .then(() =>
       // After the user is created, we need to call loginWithIdp endpoint
       // so that the user will be logged in.
