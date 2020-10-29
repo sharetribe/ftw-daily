@@ -41,7 +41,7 @@ import { sendVerificationEmail } from '../../ducks/user.duck';
 import { manageDisableScrolling } from '../../ducks/UI.duck';
 
 import css from './AuthenticationPage.css';
-import { FacebookLogo } from './socialLoginLogos';
+import { FacebookLogo, GoogleLogo } from './socialLoginLogos';
 import { isEmpty } from 'lodash';
 
 export class AuthenticationPageComponent extends Component {
@@ -199,7 +199,7 @@ export class AuthenticationPageComponent extends Component {
       });
     };
 
-    const authWithFacebook = () => {
+    const getDefaultRoutes = () => {
       const routes = routeConfiguration();
       const baseUrl = apiBaseUrl();
 
@@ -215,7 +215,18 @@ export class AuthenticationPageComponent extends Component {
       const defaultConfirm = pathByRouteName('ConfirmPage', routes);
       const defaultConfirmParam = defaultConfirm ? `&defaultConfirm=${defaultConfirm}` : '';
 
+      return { baseUrl, fromParam, defaultReturnParam, defaultConfirmParam };
+    };
+    const authWithFacebook = () => {
+      const defaultRoutes = getDefaultRoutes();
+      const { baseUrl, fromParam, defaultReturnParam, defaultConfirmParam } = defaultRoutes;
       window.location.href = `${baseUrl}/api/auth/facebook?${fromParam}${defaultReturnParam}${defaultConfirmParam}`;
+    };
+
+    const authWithGoogle = () => {
+      const defaultRoutes = getDefaultRoutes();
+      const { baseUrl, fromParam, defaultReturnParam, defaultConfirmParam } = defaultRoutes;
+      window.location.href = `${baseUrl}/api/auth/google?${fromParam}${defaultReturnParam}${defaultConfirmParam}`;
     };
 
     const idp = this.state.authInfo
@@ -240,18 +251,27 @@ export class AuthenticationPageComponent extends Component {
           inProgress={authInProgress}
           onOpenTermsOfService={() => this.setState({ tosModalOpen: true })}
           authInfo={this.state.authInfo}
+          idp={idp}
         />
       </div>
     );
 
     // Social login buttons
-    const showSocialLogins = !!process.env.REACT_APP_FACEBOOK_APP_ID;
+    const showFacebookLogin = !!process.env.REACT_APP_FACEBOOK_APP_ID;
+    const showGoogleLogin = !!process.env.REACT_APP_GOOGLE_CLIENT_ID;
+    const showSocialLogins = showFacebookLogin || showGoogleLogin;
+
     const facebookButtonText = isLogin ? (
       <FormattedMessage id="AuthenticationPage.loginWithFacebook" />
     ) : (
       <FormattedMessage id="AuthenticationPage.signupWithFacebook" />
     );
 
+    const googleButtonText = isLogin ? (
+      <FormattedMessage id="AuthenticationPage.loginWithGoogle" />
+    ) : (
+      <FormattedMessage id="AuthenticationPage.signupWithGoogle" />
+    );
     const socialLoginButtonsMaybe = showSocialLogins ? (
       <div className={css.idpButtons}>
         <div className={css.socialButtonsOr}>
@@ -260,10 +280,23 @@ export class AuthenticationPageComponent extends Component {
           </span>
         </div>
 
-        <SocialLoginButton onClick={() => authWithFacebook()}>
-          <span className={css.buttonIcon}>{FacebookLogo}</span>
-          {facebookButtonText}
-        </SocialLoginButton>
+        {showFacebookLogin ? (
+          <div className={css.socialButtonWrapper}>
+            <SocialLoginButton onClick={() => authWithFacebook()}>
+              <span className={css.buttonIcon}>{FacebookLogo}</span>
+              {facebookButtonText}
+            </SocialLoginButton>
+          </div>
+        ) : null}
+
+        {showGoogleLogin ? (
+          <div className={css.socialButtonWrapper}>
+            <SocialLoginButton onClick={() => authWithGoogle()}>
+              <span className={css.buttonIcon}>{GoogleLogo}</span>
+              {googleButtonText}
+            </SocialLoginButton>
+          </div>
+        ) : null}
       </div>
     ) : null;
 
