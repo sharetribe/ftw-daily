@@ -39,15 +39,37 @@
   }
 }
 
-.form {
+.loginForm {
   margin-top: 24px;
 
   /* We don't want the form to take the whole space so that on mobile view
   the social login buttons will be after the sign up button
-  and not in the bottom of the page */
+  and not in the bottom of the page.
+  We also need to add flex-basis value so that Safari will show the
+  whole form correctly.  */
   flex-grow: 0;
+  flex-basis: 260px;
 
   @media (--viewportMedium) {
+    flex-basis: 330px;
+    margin-top: 30px;
+    padding-top: 2px;
+  }
+}
+
+.signupForm {
+  margin-top: 24px;
+
+  /* We don't want the form to take the whole space so that on mobile view
+  the social login buttons will be after the sign up button
+  and not in the bottom of the page.
+  We also need to add flex-basis value so that Safari will show the
+  whole form correctly.  */
+  flex-grow: 0;
+  flex-basis: 340px;
+
+  @media (--viewportMedium) {
+    flex-basis: 410px;
     margin-top: 30px;
     padding-top: 2px;
   }
