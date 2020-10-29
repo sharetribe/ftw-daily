@@ -274,10 +274,10 @@ export class AuthenticationPageComponent extends Component {
         {loginOrSignupError}
 
         {isLogin ? (
-          <LoginForm className={css.form} onSubmit={submitLogin} inProgress={authInProgress} />
+          <LoginForm className={css.loginForm} onSubmit={submitLogin} inProgress={authInProgress} />
         ) : (
           <SignupForm
-            className={css.form}
+            className={css.signupForm}
             onSubmit={handleSubmitSignup}
             inProgress={authInProgress}
             onOpenTermsOfService={() => this.setState({ tosModalOpen: true })}
