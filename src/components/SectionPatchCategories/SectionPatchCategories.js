@@ -8,11 +8,11 @@ import { NamedLink } from '../../components';
 
 import css from './SectionPatchCategories.css';
 
-import hairBeautyImage from './images/hair_beauty.jpg';
-import fitnessWellnessImage from './images/fitness_wellness.jpg';
-import studioSpaceImage from './images/studio_space.jpg';
-import eventSpaceImage from './images/event_space.jpg';
-import coworkingImage from './images/coworking.jpg';
+import hairBeautyImage from './images/hair_beauty.png';
+import fitnessWellnessImage from './images/fitness_wellness.png';
+import studioSpaceImage from './images/studio_space.png';
+import eventSpaceImage from './images/event_space.png';
+import coworkingImage from './images/coworking.png';
 
 const hairBeautyUrlParams = '?pub_hair_and_beauty=hair-stylist%2Cbarber%2Cbeauty-space%2Cnail-station%2Cbeauty-room%2Cbeauty-treatment-room';
 const fitnessWellnessUrlParams = '?pub_fitness_and_wellness=fitness-studio%2Ctherapy-room%2Cwellness-treatment-room';
