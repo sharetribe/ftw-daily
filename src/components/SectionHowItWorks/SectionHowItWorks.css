@@ -20,7 +20,7 @@
   }
 }
 
-.toggleHeaderGreen {
+.toggleHeaderPink {
   color: var(--marketplaceColor);
   font-size: 30px;
 
@@ -60,7 +60,6 @@
 .layer {
     width: 100%;
     background-color: #ebf7fc;
-    /* background-color: var(--marketplaceColorGreen); */
     transition: 0.3s ease all;
     z-index: 1;
 }
@@ -72,7 +71,6 @@
 .tglButton .knobs:before {
     content: "I need space";
     position: absolute;
-    /* top: -40px; */
     top: 8px;
     left: 12px;
     width: 130px;
@@ -101,15 +99,12 @@
 
 .tglButton .checkbox:checked + .knobs:before{
     content: 'I have space';
-    /* background-color: #FF685B; */
     background-color: var(--marketplaceColor);
     transform: rotateZ(180deg);
 }
 
 .tglButton .checkbox:checked ~ .layer{
     background-color: #ffedf6;
-    /* background-color: #fae8f1; */
-    /* background-color: var(--marketplaceColorLight); */
     transform: rotateZ(180deg);
 }
 
@@ -126,11 +121,6 @@
   top: 2px;
   right: 40px;
   z-index: 999;
-
-  /* @media (--viewportSmall) {
-    top: 2px;
-    right: 40px;
-  } */
 
   @media (--viewportMedium) {
     top: -5px;
@@ -152,11 +142,6 @@
   left: 35px;
   z-index: 999;
 
-  /* @media (--viewportSmall) {
-    top: -5px;
-    left: 35px;
-  }
-   */
   @media (--viewportMedium) {
     top: -5px;
     left: 35px;
@@ -201,11 +186,16 @@
   justify-content: center;
 }
 
-.svgBlue g {
+.svg {
+  width: 75px;
+  height: 85px;
+}
+
+.blue g {
   fill: var(--marketplaceColorDark);
 }
 
-.svgPink g {
+.pink g {
   fill: var(--marketplaceColor);
 }
 
