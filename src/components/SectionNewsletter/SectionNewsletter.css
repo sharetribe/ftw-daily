@@ -1,0 +1,45 @@
+@import '../../marketplace.css';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.formDiv {
+  background-color: #ffffff;
+  margin-top: 24px;
+}
+
+.form {
+  height: 45px;
+  padding-left: 20px;
+  /*
+  @media (--viewportMedium) {
+    margin-top: 30px;
+    padding-top: 2px;
+  } */
+}
+
+.title {
+  @apply --marketplaceH1FontStyles;
+  margin-top: 0;
+  color: #ffffff;
+  text-align: center;
+}
+
+.txtDiv {
+  width: 75%;
+  padding-right: 50px;
+  padding-left: 50px;
+}
+
+.txtDiv p {
+  color: #ffffff;
+  @media (--viewportMedium) {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}

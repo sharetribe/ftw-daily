@@ -15,6 +15,7 @@ export { default as EnquiryForm } from './EnquiryForm/EnquiryForm';
 export { default as FilterForm } from './FilterForm/FilterForm';
 export { default as LocationSearchForm } from './LocationSearchForm/LocationSearchForm';
 export { default as LoginForm } from './LoginForm/LoginForm';
+export { default as NewsletterForm } from './NewsletterForm/NewsletterForm';
 export { default as PasswordChangeForm } from './PasswordChangeForm/PasswordChangeForm';
 export { default as PasswordRecoveryForm } from './PasswordRecoveryForm/PasswordRecoveryForm';
 export { default as PasswordResetForm } from './PasswordResetForm/PasswordResetForm';

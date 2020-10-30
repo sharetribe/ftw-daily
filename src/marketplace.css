@@ -54,12 +54,12 @@
   /* Used with inline CSS SVGs */
   --marketplaceColorEncoded: %23c0392b;
 
-  /* --successColor: #6BDE98; */
-  /* --successColorDark: #59BA7F; */
-  /* --successColorLight: #96E7B6; */
-  --successColor: #8eff8c;
+  --successColor: #6BDE98;
+  --successColorDark: #59BA7F;
+  --successColorLight: #96E7B6;
+  /* --successColor: #8eff8c;
   --successColorDark: #6ac269;
-  --successColorLight: #aaf7a8;
+  --successColorLight: #aaf7a8; */
   --failColor: #EF7171;
   --failColorLight: #F39A9A;
   --attentionColor: #EDC56E;

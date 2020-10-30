@@ -106,6 +106,10 @@
   margin-top: 3vh;
 }
 
+.blueBg {
+  background-color: var(--marketplaceColorDark) !important;
+}
+
 /* A bar on top of light sections */
 /* .section:nth-of-type(2n) .sectionContent::before {
   background: var(--marketplaceColor);

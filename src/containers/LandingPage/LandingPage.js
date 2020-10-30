@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import classNames from 'classnames';
 import { injectIntl, intlShape } from '../../util/reactIntl';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import config from '../../config';
@@ -12,6 +13,7 @@ import {
   SectionPatchCategories,
   SectionHowItWorks,
   SectionWhatIsHotpatch,
+  SectionNewsletter,
   LayoutSingleColumn,
   LayoutWrapperTopbar,
   LayoutWrapperMain,
@@ -76,6 +78,11 @@ export const LandingPageComponent = props => {
             <li className={css.section}>
               <div className={css.sectionContent}>
                 <SectionWhatIsHotpatch />
+              </div>
+            </li>
+            <li className={classNames(css.section, css.blueBg)}>
+              <div className={css.sectionContent}>
+                <SectionNewsletter />
               </div>
             </li>
           </ul>
