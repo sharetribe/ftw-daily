@@ -14,8 +14,12 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+## [v6.4.2] 2020-10-30
+
 - [fix] Fix the issue with form on AuthenticationPage not showing on smaller screens when using
   Safari as browser. [#1377](https://github.com/sharetribe/ftw-daily/pull/1377)
+
+  [v6.4.2]: https://github.com/sharetribe/ftw-daily/compare/v6.4.1...v6.4.2
 
 ## [v6.4.1] 2020-10-20
 
