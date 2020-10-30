@@ -11,7 +11,7 @@ import {
   SectionHero,
   SectionPatchCategories,
   SectionHowItWorks,
-  SectionWhat,
+  SectionWhatIsHotpatch,
   LayoutSingleColumn,
   LayoutWrapperTopbar,
   LayoutWrapperMain,
@@ -75,7 +75,7 @@ export const LandingPageComponent = props => {
             </li>
             <li className={css.section}>
               <div className={css.sectionContent}>
-                <SectionWhat />
+                <SectionWhatIsHotpatch />
               </div>
             </li>
           </ul>

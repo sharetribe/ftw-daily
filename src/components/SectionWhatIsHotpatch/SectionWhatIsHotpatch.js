@@ -6,7 +6,7 @@ import { lazyLoadWithDimensions } from '../../util/contextHelpers';
 
 import friendsWorking from './images/coworking.jpg';
 
-import css from './SectionWhat.css';
+import css from './SectionWhatIsHotpatch.css';
 
 class CategoryImage extends Component {
   render() {
@@ -16,32 +16,32 @@ class CategoryImage extends Component {
 }
 const LazyImage = lazyLoadWithDimensions(CategoryImage);
 
-const SectionWhat = props => {
+const SectionWhatIsHotpatch = props => {
   const { rootClassName, className } = props;
   const classes = classNames(rootClassName || css.root, className);
 
   return (
     <div className={classes}>
       <div className={css.title}>
-        <FormattedMessage id="SectionWhat.title" />
+        <FormattedMessage id="SectionWhatIsHotpatch.title" />
       </div>
 
       <div className={css.container}>
         <div className={css.descriptionDiv} >
           <p>
-            <FormattedMessage id="SectionWhat.text1"/>
+            <FormattedMessage id="SectionWhatIsHotpatch.text1"/>
           </p>
           <p>
-            <FormattedMessage id="SectionWhat.text2"/>
-            <FormattedMessage id="SectionWhat.text3"/>
-            <FormattedMessage id="SectionWhat.text4"/>
+            <FormattedMessage id="SectionWhatIsHotpatch.text2"/>
+            <FormattedMessage id="SectionWhatIsHotpatch.text3"/>
+            <FormattedMessage id="SectionWhatIsHotpatch.text4"/>
           </p>
           <p>
-            <FormattedMessage id="SectionWhat.text5"/>
+            <FormattedMessage id="SectionWhatIsHotpatch.text5"/>
           </p>
           <p>
-            <FormattedMessage id="SectionWhat.text6"/>
-            <FormattedMessage id="SectionWhat.text7"/>
+            <FormattedMessage id="SectionWhatIsHotpatch.text6"/>
+            <FormattedMessage id="SectionWhatIsHotpatch.text7"/>
           </p>
         </div>
         <div className={css.imageContainer}>
@@ -56,13 +56,13 @@ const SectionWhat = props => {
   );
 };
 
-SectionWhat.defaultProps = { rootClassName: null, className: null };
+SectionWhatIsHotpatch.defaultProps = { rootClassName: null, className: null };
 
 const { string } = PropTypes;
 
-SectionWhat.propTypes = {
+SectionWhatIsHotpatch.propTypes = {
   rootClassName: string,
   className: string,
 };
 
-export default SectionWhat;
+export default SectionWhatIsHotpatch;
