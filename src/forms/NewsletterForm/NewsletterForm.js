@@ -9,7 +9,7 @@ import * as validators from '../../util/validators';
 
 import css from './NewsletterForm.css';
 
-const LoginFormComponent = props => (
+const NewsletterFormComponent = props => (
   <FinalForm
     {...props}
     render={fieldRenderProps => {
@@ -63,7 +63,7 @@ const LoginFormComponent = props => (
   />
 );
 
-LoginFormComponent.defaultProps = {
+NewsletterFormComponent.defaultProps = {
   rootClassName: null,
   className: null,
   form: null,
@@ -72,7 +72,7 @@ LoginFormComponent.defaultProps = {
 
 const { string, bool } = PropTypes;
 
-LoginFormComponent.propTypes = {
+NewsletterFormComponent.propTypes = {
   rootClassName: string,
   className: string,
   form: string,
@@ -80,7 +80,7 @@ LoginFormComponent.propTypes = {
   intl: intlShape.isRequired,
 };
 
-const LoginForm = compose(injectIntl)(LoginFormComponent);
-LoginForm.displayName = 'LoginForm';
+const NewsletterForm = compose(injectIntl)(NewsletterFormComponent);
+NewsletterForm.displayName = 'LoginForm';
 
-export default LoginForm;
+export default NewsletterForm;
