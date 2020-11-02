@@ -14,7 +14,10 @@ import css from './SectionNewsletter.css';
 export class SectionNewsletterComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { signedupModalOpen: false };
+    this.state = {
+      signedupModalOpen: false,
+      fakeIsLoading: false,
+    };
   }
 
   render () {
@@ -29,9 +32,29 @@ export class SectionNewsletterComponent extends Component {
     } = this.props;
     const classes = classNames(rootClassName || css.root, className);
 
+    // NOTE manually reseting the border bottom, stops it from being controlled by the validation
+    const resetInputValidation = () => {
+      const inputField = document.getElementById('email');
+      inputField.style.borderBottomColor = '#EDC56E';
+      const formEl = document.getElementById('nl-form')
+      const inputElements = formEl.children[0].children[0].children;
+      if (inputElements.length === 2) {
+        inputElements[1].innerText = '';
+      }
+    }
+
+    // TODO need to fix this, this is a temporary hacked workaround
+    // mailchimp doesn't accept cors requests, and its a pain...
+    // right now faking the loading, pretending it worked without checking response,
+    // bc bug in reqwests library... NEED to find a better solution
     const handleNewsletterSignup = values => {
-      const { newsletterEmail } = values;
-      submitSignup({email: newsletterEmail.trim()});
+      this.setState({fakeIsLoading: true});
+      const timer_id = setTimeout(() => {
+        this.setState({fakeIsLoading: false});
+        resetInputValidation()
+      }, 1250);
+
+      submitSignup({email: values.newsletterEmail.trim()});
     };
 
     return (
@@ -49,7 +72,7 @@ export class SectionNewsletterComponent extends Component {
             <NewsletterForm
               className={css.form}
               onSubmit={handleNewsletterSignup}
-              inProgress={inProgress}
+              inProgress={this.state.fakeIsLoading}
               // onOpenTermsOfService={() => this.setState({ tosModalOpen: true })}
             />
           </div>

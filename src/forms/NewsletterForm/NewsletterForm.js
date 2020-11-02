@@ -18,6 +18,7 @@ const NewsletterFormComponent = props => (
         className,
         formId,
         handleSubmit,
+        form,
         inProgress,
         intl,
         invalid,
@@ -41,7 +42,14 @@ const NewsletterFormComponent = props => (
       const submitDisabled = invalid || submitInProgress;
 
       return (
-        <Form className={classes} onSubmit={handleSubmit}>
+        <Form
+          id="nl-form"
+          className={classes}
+          onSubmit={async event => {
+            await handleSubmit(event)
+            form.reset()
+          }}
+        >
           <div className={css.emailField}>
             <FieldTextInput
               type="email"
