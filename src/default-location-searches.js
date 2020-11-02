@@ -15,4 +15,32 @@ export default [
       bounds: new LatLngBounds(new LatLng(51.67789511, 0.29732496), new LatLng(51.3925498, -0.57645)),
     },
   },
+  {
+    id: 'default-birmingham',
+    predictionPlace: {
+      address: 'Birmingham, United Kingdom',
+      bounds: new LatLngBounds(new LatLng(52.57779203, -1.72540735), new LatLng(52.32126288, -2.03104471)),
+    },
+  },
+  {
+    id: 'default-manchester',
+    predictionPlace: {
+      address: 'Manchester, United Kingdom',
+      bounds: new LatLngBounds(new LatLng(53.59821106, -2.08320402), new LatLng(53.3476832, -2.38884138)),
+    },
+  },
+  {
+    id: 'default-liverpool',
+    predictionPlace: {
+      address: 'Liverpool, United Kingdom',
+      bounds: new LatLngBounds(new LatLng(53.5729014, -2.77243704), new LatLng(53.31894244, -3.08142752)),
+    },
+  },
+  {
+    id: 'default-sheffield',
+    predictionPlace: {
+      address: 'Sheffield, United Kingdom',
+      bounds: new LatLngBounds(new LatLng(53.40297225, -1.43730778), new LatLng(53.34019056, -1.51371712)),
+    },
+  },
 ];
