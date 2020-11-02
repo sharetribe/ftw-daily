@@ -32,12 +32,16 @@
 
 .txtDiv {
   width: 75%;
-  padding-right: 50px;
-  padding-left: 50px;
+  @media (--viewportMedium) {
+    padding-right: 50px;
+    padding-left: 50px;
+  }
 }
 
 .txtDiv p {
   color: #ffffff;
+  font-size: 14px;
+  line-height: 18px;
   @media (--viewportMedium) {
     font-size: 18px;
     line-height: 24px;

@@ -23,21 +23,28 @@
   --backgroundImage: {
     /* Gradient direction and overlaying the black color on top of the image for better readability */
     background:
-      url('../../assets/background-1440.png');
+      /* NOTE  old pink bg commented out */
+      /* url('../../assets/background-1440.png'); */
+      url('../../assets/Hero-Image-Desktop.png');
 
     /* Add loading color for the div */
-    background-color: var(--matterColor);
+    background-color: var(--matterColorLight);
 
     /* Cover the whole screen with the background image */
     background-size: cover;
 
     /* Align the image within the container */
     background-position: center center;
+  }
 
-    @media (--viewportLarge) {
-      border-radius: 40px;
-      border: solid 36px var(--matterColorBright);
-    }
+  /* Full screen Background image located in root-folder/src/assets */
+  --backgroundImageMobile: {
+    /* Gradient direction and overlaying the black color on top of the image for better readability */
+    background:
+      url('../../assets/white-bg.png');
+    background-color: var(--matterColorLight);
+    background-size: cover;
+    background-position: center center;
   }
 
   /* ================ Colors ================ */

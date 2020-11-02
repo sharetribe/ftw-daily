@@ -12,7 +12,10 @@
 }
 
 .emailField {
-  width: 305px;
+  max-width: 305px;
+  @media (--viewportMedium) {
+    width: 305px;
+  }
 }
 
 .formBtn {

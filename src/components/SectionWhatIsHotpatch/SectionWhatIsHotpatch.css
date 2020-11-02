@@ -16,11 +16,16 @@
 
 .descriptionDiv {
   flex: 3;
-  padding-right: 50px;
-  padding-left: 50px;
+  @media (--viewportMedium) {
+    padding-right: 50px;
+    padding-left: 50px;
+  }
+
 }
 
 .descriptionDiv p {
+  font-size: 14px;
+  line-height: 18px;
   @media (--viewportMedium) {
     font-size: 18px;
     line-height: 24px;
@@ -60,6 +65,5 @@
   right: 0;
   width: 100%;
   height: 100%;
-  border-radius: 4px;
   object-fit: cover;
 }
