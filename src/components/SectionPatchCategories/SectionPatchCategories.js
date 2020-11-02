@@ -14,6 +14,7 @@ import studioSpaceImage from './images/studio_space.png';
 import eventSpaceImage from './images/event_space.png';
 import coworkingImage from './images/coworking.png';
 
+const locationParams = '&address=&bounds=59.49417013%2C4.15978193%2C49.54972301%2C-10.51994741';
 const hairBeautyUrlParams = '?pub_hair_and_beauty=hair-stylist%2Cbarber%2Cbeauty-space%2Cnail-station%2Cbeauty-room%2Cbeauty-treatment-room';
 const fitnessWellnessUrlParams = '?pub_fitness_and_wellness=fitness-studio%2Ctherapy-room%2Cwellness-treatment-room';
 const studioSpaceUrlParams = '?pub_creative_studios=photography-studio%2Cart-studio%2Cmusic-studio';
@@ -31,7 +32,7 @@ const LazyImage = lazyLoadWithDimensions(CategoryImage);
 const categoryLink = (name, image, searchQuery) => {
   const nameText = <span className={css.categoryName}>{name}</span>;
   return (
-    <NamedLink name="SearchPage" to={{ search: searchQuery }} className={css.category}>
+    <NamedLink name="SearchPage" to={{ search: searchQuery + locationParams }} className={css.category}>
       <div className={css.imageWrapper}>
         <div className={css.aspectWrapper}>
           <LazyImage src={image} alt={name} className={css.categoryImage} />
