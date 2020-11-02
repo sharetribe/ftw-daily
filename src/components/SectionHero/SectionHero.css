@@ -51,7 +51,7 @@
   /* Text positioning is done with paddings */
 
   @media (--viewportMedium) {
-    @apply --backgroundImage;
+    @apply --backgroundImageHero;
   }
 }
 

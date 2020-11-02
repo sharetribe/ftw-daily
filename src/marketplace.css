@@ -23,9 +23,7 @@
   --backgroundImage: {
     /* Gradient direction and overlaying the black color on top of the image for better readability */
     background:
-      /* NOTE  old pink bg commented out */
-      /* url('../../assets/background-1440.png'); */
-      url('../../assets/Hero-Image-Desktop.png');
+      url('../../assets/background-1440.png');
 
     /* Add loading color for the div */
     background-color: var(--matterColorLight);
@@ -33,6 +31,19 @@
     /* Cover the whole screen with the background image */
     background-size: cover;
 
+    /* Align the image within the container */
+    background-position: center center;
+  }
+
+  /* Full screen Background image located in root-folder/src/assets */
+  --backgroundImageHero: {
+    /* Gradient direction and overlaying the black color on top of the image for better readability */
+    background:
+      url('../../assets/Hero-Image-Desktop.png');
+    /* Add loading color for the div */
+    background-color: var(--matterColorLight);
+    /* Cover the whole screen with the background image */
+    background-size: cover;
     /* Align the image within the container */
     background-position: center center;
   }
