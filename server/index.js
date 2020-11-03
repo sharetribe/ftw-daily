@@ -224,18 +224,17 @@ app.get('*', (req, res) => {
         // Routes component injects the context.unauthorized when the
         // user isn't logged in to view the page that requires
         // authentication.
-
-        const token = tokenStore.getToken();
-        const scopes = !!token && token.scopes;
-        const isAnonymous = !!scopes && scopes.length === 1 && scopes[0] === 'public-read';
-        if (isAnonymous) {
-          res.status(401).send(html);
-        } else {
-          // If the token is associated with other than public-read scopes, we
-          // assume that client can handle the situation
-          // TODO: improve by checking if the token is valid (needs an API call)
-          res.status(200).send(html);
-        }
+        sdk.authInfo().then(authInfo => {
+          if (authInfo && authInfo.isAnonymous === false) {
+            // It looks like the user is logged in.
+            // Full verification would require actual call to API
+            // to refresh the access token
+            res.status(200).send(html);
+          } else {
+            // Current token is anonymous.
+            res.status(401).send(html);
+          }
+        });
       } else if (context.forbidden) {
         res.status(403).send(html);
       } else if (context.url) {

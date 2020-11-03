@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [fix] 401 return code when rendering on SSR.
+  [#1379](https://github.com/sharetribe/ftw-daily/pull/1379)
+
 ## [v6.4.2] 2020-10-30
 
 - [fix] Fix the issue with form on AuthenticationPage not showing on smaller screens when using
