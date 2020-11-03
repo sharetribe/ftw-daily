@@ -1,4 +1,5 @@
 import React from 'react';
+import sortBy from 'lodash/sortBy';
 import { FormattedMessage } from '../../util/reactIntl';
 import { PropertyGroup } from '../../components';
 
@@ -11,6 +12,8 @@ const SectionFeaturesMaybe = props => {
   }
 
   const selectedOptions = publicData && publicData.amenities ? publicData.amenities : [];
+  const selectedOptionsFull = options.filter(opt => selectedOptions.includes(opt.key));
+
   return (
     <div className={css.sectionFeatures}>
       <h2 className={css.featuresTitle}>
@@ -18,7 +21,7 @@ const SectionFeaturesMaybe = props => {
       </h2>
       <PropertyGroup
         id="ListingPage.amenities"
-        options={options}
+        options={sortBy(selectedOptionsFull, 'key')}
         selectedOptions={selectedOptions}
         twoColumns={true}
       />
