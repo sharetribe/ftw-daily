@@ -117,8 +117,23 @@ class MainPanel extends Component {
 
     return updatedURLParams => {
       const updater = prevState => {
+        // Address and bounds are handled outside of MainPanel.
+        // I.e. TopbarSearchForm && search by moving the map.
+        // We should always trust urlQueryParams with those.
+        const { address, bounds } = urlQueryParams;
         const mergedQueryParams = { ...urlQueryParams, ...prevState.currentQueryParams };
-        return { currentQueryParams: { ...mergedQueryParams, ...updatedURLParams } };
+
+        // Since we have multiple filters with the same query param, 'pub_category'
+        // we dont want to lose the prev ones, we want all of them
+        const pc = 'pub_category';
+        if (pc in updatedURLParams && pc in mergedQueryParams) {
+          const up_pc = updatedURLParams[pc].split(',');
+          const mp_pc = mergedQueryParams[pc].split(',');
+          updatedURLParams[pc] = [...new Set([...mp_pc, ...up_pc])].join(',');
+        }
+        return {
+          currentQueryParams: { ...mergedQueryParams, ...updatedURLParams, address, bounds },
+        };
       };
 
       const callback = () => {

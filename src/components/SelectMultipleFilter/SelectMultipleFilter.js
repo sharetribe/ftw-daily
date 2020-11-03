@@ -104,6 +104,8 @@ class SelectMultipleFilter extends Component {
       name,
       label,
       options,
+      isCategory,
+      catKeys,
       initialValues,
       contentPlacementOffset,
       onSubmit,
@@ -119,11 +121,20 @@ class SelectMultipleFilter extends Component {
     //NOTE v2s1 filterupdate -- updated in v5
     // const hasInitialValues = initialValues.length > 0;
     const queryParamName = getQueryParamName(queryParamNames);
-    const hasInitialValues = !!initialValues && !!initialValues[queryParamName];
+    let hasInitialValues = !!initialValues && !!initialValues[queryParamName];
+
     // Parse options from param strings like "has_all:a,b,c" or "a,b,c"
-    const selectedOptions = hasInitialValues
+    let selectedOptions = hasInitialValues
       ? parseSelectFilterOptions(initialValues[queryParamName])
       : [];
+
+    if (!!isCategory && selectedOptions.length > 0) {
+      const subCategories = catKeys ? catKeys.split(',') : [];
+      selectedOptions = selectedOptions.filter(cat=> subCategories.includes(cat));
+      if (selectedOptions.length === 0) {
+        hasInitialValues = false;
+      }
+    }
 
     const labelForPopup = hasInitialValues
       ? intl.formatMessage(
