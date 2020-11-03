@@ -4,11 +4,13 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import classNames from 'classnames';
+import { isEmpty } from 'lodash';
+
 import routeConfiguration from '../../routeConfiguration';
 import { pathByRouteName } from '../../util/routes';
 import { apiBaseUrl } from '../../util/api';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
-import classNames from 'classnames';
 import config from '../../config';
 import { propTypes } from '../../util/types';
 import { ensureCurrentUser } from '../../util/data';
@@ -42,7 +44,6 @@ import { manageDisableScrolling } from '../../ducks/UI.duck';
 
 import css from './AuthenticationPage.module.css';
 import { FacebookLogo, GoogleLogo } from './socialLoginLogos';
-import { isEmpty } from 'lodash';
 
 export class AuthenticationPageComponent extends Component {
   constructor(props) {
