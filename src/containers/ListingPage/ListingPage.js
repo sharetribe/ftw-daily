@@ -464,7 +464,7 @@ export class ListingPageComponent extends Component {
                   />
 
                   <SectionCapacity publicData={publicData} />
-                  <SectionSeats publicData={publicData} />
+                  {/* <SectionSeats publicData={publicData} /> */}
                   <SectionDescriptionMaybe description={description} />
 
                   {/* //NOTE DELETEME v2s1 filterupdate -- <SectionFeaturesMaybe options={amenitiesConfig} publicData={publicData} /> */}

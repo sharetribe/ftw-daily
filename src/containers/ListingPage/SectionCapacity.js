@@ -7,8 +7,9 @@ import css from './ListingPage.css';
 const SectionCapacity = props => {
   const { publicData } = props;
   const capacity = publicData.capacity;
+  const shouldRender = !!(capacity && capacity > 1);
 
-  return capacity ? (
+  return shouldRender ? (
     <div className={css.sectionCapacity}>
       <h2 className={css.capacityTitle}>
         <FormattedMessage id="ListingPage.capacityTitle" />
