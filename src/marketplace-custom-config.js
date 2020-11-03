@@ -258,7 +258,7 @@ export const filters = [
     // Note: BookingDateRangeFilter is fixed filter,
     // you can't change "queryParamNames: ['dates'],"
     queryParamNames: ['dates'],
-    config: {isCategory: false},
+    config: {isCategory: false, catKeys: ''},
   },
   {
     id: 'price',
@@ -275,6 +275,7 @@ export const filters = [
       max: 1000,
       step: 5,
       isCategory: false,
+      catKeys: '',
     },
   },
   {
@@ -288,14 +289,14 @@ export const filters = [
     // NOTE: If you are ordering search results by distance
     // the keyword search can't be used at the same time.
     // You can turn on/off ordering by distance from config.js file.
-    config: {isCategory: false},
+    config: {isCategory: false, catKeys: ''},
   },
   {
     id: 'hair_and_beauty',
     label: 'Hair & Beauty',
     type: 'SelectMultipleFilter',
     group: 'primary',
-    queryParamNames: ['pub_hair_and_beauty'],
+    queryParamNames: ['pub_category'],
     config: {
       // "key" is the option you see in Flex Console.
       // "label" is set here for the UI only.
@@ -304,12 +305,19 @@ export const filters = [
       options: [
         { key: 'hair-stylist', label: 'Hair Stylist' },
         { key: 'barber', label: 'Barber' },
-        { key: 'beauty-space', label: 'Beauty Space' },
-        { key: 'nail-station', label: 'Nail Station' },
-        { key: 'beauty-room', label: 'Beauty Room' },
+        { key: 'makeup-artist', label: 'Beauty Space' },
+        { key: 'nail-technician', label: 'Nail Station' },
+        { key: 'cosmetics', label: 'Beauty Room' },
         { key: 'beauty-treatment-room', label: 'Treatment Room' }
       ],
+      // NOTE Old categories migrated, i think??
+      // { key: 'hair-stylist', label: 'Hair Stylist' },
+      // { key: 'barber', label: 'Barber' },
+      // { key: 'makeup-artist', label: 'Makeup Artist' },
+      // { key: 'nail-technician', label: 'Nail Technician' },
+      // { key: 'cosmetics', label: 'Cosmetics' },
       isCategory: true,
+      catKeys: 'hair-stylist,barber,makeup-artist,nail-technician,cosmetics,beauty-treatment-room',
     },
   },
   {
@@ -317,18 +325,28 @@ export const filters = [
     label: 'Fitness & Wellness',
     type: 'SelectMultipleFilter',
     group: 'primary',
-    queryParamNames: ['pub_fitness_and_wellness'],
+    queryParamNames: ['pub_category'],
     config: {
       // "key" is the option you see in Flex Console.
       // "label" is set here for the UI only.
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
       options: [
-        { key: 'fitness-studio', label: 'Fitness Studio' },
+        { key: 'fitness', label: 'Fitness Studio' },
         { key: 'therapy-room', label: 'Therapy Room' },
         { key: 'wellness-treatment-room', label: 'Treatment Room' },
       ],
+        // NOTE Old categories, need to migrate!
+        // { key: 'fitness', label: 'Fitness' },
+        // { key: 'yoga', label: 'Yoga' },
+        // { key: 'dance', label: 'Dance' },
+        // { key: 'martial-arts', label: 'Martial Arts' },
+        // { key: 'massage', label: 'Massage' },
+        // { key: 'reiki', label: 'Reiki' },
+        // { key: 'acupuncture', label: 'Acupuncture' },
+        // { key: 'chiropractor', label: 'Chiropractor' },
       isCategory: true,
+      catKeys: 'fitness,therapy-room,wellness-treatment-room',
     },
   },
   {
@@ -336,18 +354,19 @@ export const filters = [
     label: 'Creative Studios',
     type: 'SelectMultipleFilter',
     group: 'primary',
-    queryParamNames: ['pub_creative_studios'],
+    queryParamNames: ['pub_category'],
     config: {
       // "key" is the option you see in Flex Console.
       // "label" is set here for the UI only.
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
       options: [
-        { key: 'photography-studio', label: 'Photography Studio' },
-        { key: 'art-studio', label: 'Art Studio' },
-        { key: 'music-studio', label: 'Music Studio' },
+        { key: 'photography', label: 'Photography Studio' },
+        { key: 'art', label: 'Art Studio' },
+        { key: 'music', label: 'Music Studio' },
       ],
       isCategory: true,
+      catKeys: 'photography,art,music',
     },
   },
   {
@@ -355,18 +374,19 @@ export const filters = [
     label: 'Coworking',
     type: 'SelectMultipleFilter',
     group: 'primary',
-    queryParamNames: ['pub_coworking'],
+    queryParamNames: ['pub_category'],
     config: {
       // "key" is the option you see in Flex Console.
       // "label" is set here for the UI only.
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
       options: [
-        { key: 'coworking-space', label: 'Coworking Space' },
-        { key: 'private-office-space', label: 'Private Office Space' },
+        { key: 'desk-space', label: 'Coworking Space' },
+        { key: 'office-space', label: 'Private Office Space' },
         { key: 'meeting-room-space', label: 'Meeting Room Space' },
       ],
       isCategory: true,
+      catKeys: 'desk-space,office-space,meeting-room-space',
     },
   },
   {
@@ -374,7 +394,7 @@ export const filters = [
     label: 'Events & Kitchen',
     type: 'SelectMultipleFilter',
     group: 'primary',
-    queryParamNames: ['pub_events_and_kitchen'],
+    queryParamNames: ['pub_category'],
     config: {
       // "key" is the option you see in Flex Console.
       // "label" is set here for the UI only.
@@ -387,6 +407,7 @@ export const filters = [
         { key: 'kitchen-space', label: 'Kitchen Space' },
       ],
       isCategory: true,
+      catKeys: 'event-space,outdoor-site,shoot-location,kitchen-space',
     },
   },
   {
@@ -394,17 +415,18 @@ export const filters = [
     label: 'Tattoo & Piercing',
     type: 'SelectMultipleFilter',
     group: 'primary',
-    queryParamNames: ['pub_tattoo_and_piercing'],
+    queryParamNames: ['pub_category'],
     config: {
       // "key" is the option you see in Flex Console.
       // "label" is set here for the UI only.
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
       options: [
-        { key: 'tattoo', label: 'Tattoo' },
-        { key: 'piercing', label: 'Piercing' },
+        { key: 'tattoo-artist', label: 'Tattoo' },
+        { key: 'piercing-artist', label: 'Piercing' },
       ],
       isCategory: true,
+      catKeys: 'tattoo-artist,piercing-artist',
     },
   },
   {
@@ -501,6 +523,7 @@ export const filters = [
         }
       ],
       isCategory: false,
+      catKeys: '',
     },
   }
 ];
@@ -512,10 +535,10 @@ export const categories = [
     children: [
       { key: 'hair-stylist', label: 'Hair Stylist' },
       { key: 'barber', label: 'Barber' },
-      { key: 'beauty-space', label: 'Beauty Space' },
-      { key: 'nail-station', label: 'Nail Station' },
-      { key: 'beauty-room', label: 'Beauty Room' },
-      { key: 'treatment-room', label: 'Treatment Room' },
+      { key: 'makeup-artist', label: 'Makeup Artist' },
+      { key: 'nail-technician', label: 'Nail Technician' },
+      { key: 'cosmetics', label: 'Cosmetics' },
+      { key: 'tattoo-artist', label: 'Tattoo Artist' },
     ]
   },
   {
