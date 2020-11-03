@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [fix] Routes component got double rendered due to Redux container HOC. Because navigation could
+  happen twice, loadData was also called twice.
+  [#1380](https://github.com/sharetribe/ftw-daily/pull/1380)
 - [fix] 401 return code when rendering on SSR.
   [#1379](https://github.com/sharetribe/ftw-daily/pull/1379)
 
