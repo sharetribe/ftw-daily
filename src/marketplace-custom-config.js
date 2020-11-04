@@ -308,7 +308,7 @@ export const filters = [
         { key: 'makeup-artist', label: 'Beauty Space' },
         { key: 'nail-technician', label: 'Nail Station' },
         { key: 'cosmetics', label: 'Beauty Room' },
-        { key: 'beauty-treatment-room', label: 'Treatment Room' }
+        { key: 'beauty-treatment-room', label: 'Beauty Treatment Room' }
       ],
       // NOTE Old categories migrated, i think??
       // { key: 'hair-stylist', label: 'Hair Stylist' },
@@ -334,7 +334,7 @@ export const filters = [
       options: [
         { key: 'fitness', label: 'Fitness Studio' },
         { key: 'therapy-room', label: 'Therapy Room' },
-        { key: 'wellness-treatment-room', label: 'Treatment Room' },
+        { key: 'wellness-treatment-room', label: 'Wellness Treatment Room' },
       ],
         // NOTE Old categories, need to migrate!
         // { key: 'fitness', label: 'Fitness' },
@@ -528,54 +528,9 @@ export const filters = [
   }
 ];
 
-
-export const categories = [
-  {
-    label: 'Beauty',
-    children: [
-      { key: 'hair-stylist', label: 'Hair Stylist' },
-      { key: 'barber', label: 'Barber' },
-      { key: 'makeup-artist', label: 'Makeup Artist' },
-      { key: 'nail-technician', label: 'Nail Technician' },
-      { key: 'cosmetics', label: 'Cosmetics' },
-      { key: 'tattoo-artist', label: 'Tattoo Artist' },
-    ]
-  },
-  {
-    label: 'Fitness & Wellbeing',
-    children: [
-      { key: 'fitness', label: 'Fitness' },
-      { key: 'yoga', label: 'Yoga' },
-      { key: 'dance', label: 'Dance' },
-      { key: 'martial-arts', label: 'Martial Arts' },
-      { key: 'massage', label: 'Massage' },
-      { key: 'reiki', label: 'Reiki' },
-      { key: 'acupuncture', label: 'Acupuncture' },
-      { key: 'chiropractor', label: 'Chiropractor' },
-    ]
-  },
-  {
-    label: 'Arts',
-    children: [
-      { key: 'art', label: 'Art' },
-      { key: 'photography', label: 'Photography' },
-      { key: 'music', label: 'Music' },
-    ]
-  },
-  {
-    label: 'Office',
-    children: [
-      { key: 'desk-space', label: 'Desk space' },
-      { key: 'office-space', label: 'Office space' },
-    ]
-  },
-  {
-    label: 'Events',
-    children: [
-      { key: 'event-space', label: 'Event space' },
-    ]
-  }
-];
+// This can be used to populate all of the combined categories
+// for example, on the new listing page, to select a category
+export const categories = filters.filter(f => f.config.isCategory);
 
 
 export const sortConfig = {

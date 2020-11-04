@@ -37,7 +37,15 @@ export const isAnyFilterActive = (filterIds, urlQueryParams, filterConfigs) => {
 /**
  * Check if the filter is currently active.
  */
-export const findOptionsForSelectFilter = (filterId, filters) => {
-  const filter = filters.find(f => f.id === filterId);
-  return filter && filter.config && filter.config.options ? filter.config.options : [];
+export const findOptionsForSelectFilter = (filterIds, filters) => {
+  if (typeof filterIds === 'string') {
+    const filter = filters.find(f => f.id === filterIds);
+    return filter && filter.config && filter.config.options ? filter.config.options : [];
+  } else {
+    // NOTE assume if not a string, will be an array of strings
+    const mult_filters = filterIds.map(fid => filters.find(f=> f.id === fid));
+    const mult_filters_options = mult_filters.map(filt => filt && filt.config && filt.config.options ? filt.config.options : []);
+    // return the flattened array of arrays (of objects)
+    return [].concat.apply([], mult_filters_options);
+  }
 };

@@ -40,6 +40,7 @@ const availabilityMaybe = config.enableAvailability ? [AVAILABILITY] : [];
 // and listing publishing happens after last panel.
 export const TABS = [
   DESCRIPTION,
+  PHOTOS,
   FEATURES,
   CAPACITY,
   SEATS,
@@ -47,7 +48,6 @@ export const TABS = [
   LOCATION,
   ...availabilityMaybe,
   PRICING,
-  PHOTOS,
 ];
 
 // Tabs are horizontal in small screens
