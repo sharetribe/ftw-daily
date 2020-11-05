@@ -33,221 +33,6 @@
  *         (i.e. pub_<key> or meta_<key>).
  */
 
-export const amenities = [
-  {
-    label: "General",
-    children: [
-      {
-        key: "free-parking",
-        label: "Free parking",
-      },
-      {
-        key: "key/electronic-access-card",
-        label: "Key/electronic access card",
-      },
-      {
-        key: "wheelchair-access",
-        label: "Wheelchair access",
-      },
-      {
-        key: "wifi",
-        label: "WiFi",
-      },
-      {
-        key: "receptionist",
-        label: "Receptionist",
-      },
-      {
-        key: "kitchen",
-        label: "Kitchen",
-      },
-      {
-        key: "fridge/freezer",
-        label: "Fridge/freezer",
-      },
-      {
-        key: "tea/coffee-making-facilities",
-        label: "Tea/coffee making facilities",
-      },
-      {
-        key: "refreshments",
-        label: "Refreshments",
-      },
-      {
-        key: "toilet",
-        label: "Toilet",
-      },
-      {
-        key: "air-conditioning",
-        label: "Air conditioning",
-      },
-      {
-        key: "heating",
-        label: "Heating",
-      },
-      {
-        key: "accepts-card-payments",
-        label: "Accepts card payments",
-      },
-      {
-        key: "accepts-mail-and-packages",
-        label: "Accepts mail and packages",
-      },
-      {
-        key: "cleaner",
-        label: "Cleaner",
-      },
-      {
-        key: "waiting-area",
-        label: "Waiting area",
-      },
-      {
-        key: "changing-areas-with-showers",
-        label: "Changing areas with showers",
-      },
-      {
-        key: "cctv-monitoring",
-        label: "CCTV monitoring",
-      },
-      {
-        key: "secure-locker",
-        label: "Secure locker",
-      }
-    ]
-  },
-  {
-    label: 'Beauty',
-    children: [
-      {
-        key: "chair",
-        label: "Chair",
-      },
-      {
-        key: "mirror",
-        label: "Mirror",
-      },
-      {
-        key: "gowns",
-        label: "Gowns",
-      },
-      {
-        key: "towels",
-        label: "Towels",
-      },
-      {
-        key: "washing-point",
-        label: "Washing point",
-      },
-      {
-        key: "trolley",
-        label: "Trolley",
-      },
-      {
-        key: "locked-cupboards",
-        label: "Locked cupboards",
-      },
-      {
-        key: "massage-chair",
-        label: "Massage chair",
-      },
-      {
-        key: "led-magnifying-light",
-        label: "LED magnifying light",
-      },
-      {
-        key: "dim-lighting",
-        label: "Dim lighting",
-      },
-      {
-        key: "wax-equipment",
-        label: "Wax equipment",
-      },
-    ]
-  },
-  {
-    label: "Fitness & Wellbeing",
-    children: [
-      {
-        key: "treadmill",
-        label: "Treadmill",
-      },
-      {
-        key: "bike",
-        label: "Bike",
-      },
-      {
-        key: "resistance-bands",
-        label: "Resistance bands",
-      },
-      {
-        key: "stepper",
-        label: "Stepper",
-      },
-      {
-        key: "kettlebells",
-        label: "Kettlebells",
-      },
-      {
-        key: "free-weights",
-        label: "Free weights",
-      },
-      {
-        key: "machine-weights",
-        label: "Machine weights",
-      },
-      {
-        key: "yoga-mats",
-        label: "Yoga mats",
-      },
-      {
-        key: "yoga-props",
-        label: "Yoga props",
-      },
-      {
-        key: "pilates-balls",
-        label: "Pilates balls",
-      },
-      {
-        key: "treatment-table",
-        label: "Treatment table",
-      },
-      {
-        key: "water-point",
-        label: "Water point",
-      },
-      {
-        key: "secure-lockers-(for-user-clients)",
-        label: "Secure lockers (for User clients)",
-      },
-    ]
-  },
-  {
-    label: "Office",
-    children: [
-      {
-        key: "lockable-drawers-/-file-cabinet",
-        label: "Lockable drawers / file cabinet",
-      },
-      {
-        key: "laser-printer-and-scanner",
-        label: "Laser printer and scanner",
-      },
-      {
-        key: "ethernet-connection",
-        label: "Ethernet connection",
-      },
-      {
-        key: "power-bank",
-        label: "Power bank",
-      },
-      {
-        key: "meeting-/-breakout-room-access",
-        label: "Meeting / breakout room access",
-      },
-    ]
-  },
-];
-
 
 export const filters = [
   {
@@ -430,8 +215,8 @@ export const filters = [
     },
   },
   {
-    id: 'amenities',
-    label: 'Amenities',
+    id: 'general_amenities',
+    label: 'General Amenities',
     type: 'SelectMultipleFilter',
     group: 'secondary',
     queryParamNames: ['pub_amenities'],
@@ -445,93 +230,280 @@ export const filters = [
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
       options: [
-        {
-          key: "free-parking",
-          label: "Free parking",
-        },
-        {
-          key: "key/electronic-access-card",
-          label: "Key/electronic access card",
-        },
-        {
-          key: "wheelchair-access",
-          label: "Wheelchair access",
-        },
-        {
-          key: "wifi",
-          label: "WiFi",
-        },
-        {
-          key: "receptionist",
-          label: "Receptionist",
-        },
-        {
-          key: "kitchen",
-          label: "Kitchen",
-        },
-        {
-          key: "fridge/freezer",
-          label: "Fridge/freezer",
-        },
-        {
-          key: "tea/coffee-making-facilities",
-          label: "Tea/coffee making facilities",
-        },
-        {
-          key: "refreshments",
-          label: "Refreshments",
-        },
-        {
-          key: "toilet",
-          label: "Toilet",
-        },
-        {
-          key: "air-conditioning",
-          label: "Air conditioning",
-        },
-        {
-          key: "heating",
-          label: "Heating",
-        },
-        {
-          key: "accepts-card-payments",
-          label: "Accepts card payments",
-        },
-        {
-          key: "accepts-mail-and-packages",
-          label: "Accepts mail and packages",
-        },
-        {
-          key: "cleaner",
-          label: "Cleaner",
-        },
-        {
-          key: "waiting-area",
-          label: "Waiting area",
-        },
-        {
-          key: "changing-areas-with-showers",
-          label: "Changing areas with showers",
-        },
-        {
-          key: "cctv-monitoring",
-          label: "CCTV monitoring",
-        },
-        {
-          key: "secure-locker",
-          label: "Secure locker",
-        }
+        {key: "air-conditioning",label: "Air conditioning"},
+        {key: "cctv-monitoring",label: "CCTV monitoring"},
+        {key: "cleaner",label: "Cleaner"},
+        {key: "client-refreshments",label: "Client Refreshments"},
+        {key: "wheelchair-access",label: "Disabled access"},
+        {key: "free-parking",label: "Free parking"},
+        {key: "heating",label: "Heating"},
+        {key: "kitchen",label: "Kitchen Facilities"},
+        {key: "key/electronic-access-card",label: "Own Key / Electronic access card"},
+        {key: 'parking', label: 'Parking'},
+        {key: "pets-allowed",label: "Pets Allowed"},
+        {key: "receptionist",label: "Reception"},
+        {key: "secure-locker",label: "Secure locker"},
+        {key: "storage", label: "Storage"},
+        {key: "toilet",label: "Toilet / Washroom"},
+        {key: "waiting-area",label: "Waiting Area"},
+        {key: "wifi",label: "WiFi"},
       ],
       isCategory: false,
-      catKeys: '',
+      catKeys: 'all',
     },
-  }
+  },
+  {
+    id: 'hair_beauty_amenities',
+    label: 'Hair & Beauty Amenities',
+    type: 'SelectMultipleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_amenities'],
+    config: {
+      // Optional modes: 'has_all', 'has_any'
+      // https://www.sharetribe.com/api-reference/marketplace.html#extended-data-filtering
+      searchMode: 'has_all',
+
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for this web app's UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: [
+        {key: "backwash-chair", label: "Backwash Chair"},
+        {key: "barber-accessories", label: "Barber Accessories"},
+        {key: "barber-chair", label: "Barber Chair"},
+        {key: "barber-unit", label: "Barber Unit"},
+        {key: "capes-gowns-collars", label: "Capes / Gowns Collars"},
+        {key: "hb-cleaning-supplies", label: "Cleaning Supplies"},
+        {key: "hair-products", label: "Hair Products"},
+        {key: "hairdryer", label: "Hairdryer"},
+        {key: "locked-cupboards", label: "Locked cupboards"},
+        {key: "hb-massage-chair", label: "Massage chair"},
+        {key: "mirror-styling-unit", label: "Mirror / Styling Unit"},
+        {key: "pedicure-chair", label: "Pedicure Chair"},
+        {key: "hb-sterilising-equipment", label: "Sterilising Equipment"},
+        {key: "styling-accessories", label: "Styling Accessories"},
+        {key: "styling-chair", label: "Styling Chair"},
+        {key: "hb-treatment-table", label: "Treatment Table"},
+        {key: "hb-trolley", label: "Trolley"},
+        {key: "led-magnifying-light", label: "UV / LED magnifying light"},
+        {key: "washing-point", label: "Washing point / Basin"},
+      ],
+      isCategory: false,
+      catKeys: 'hair-stylist,barber,makeup-artist,nail-technician,cosmetics,beauty-treatment-room',
+    },
+  },
+  {
+    id: 'fitness_wellness_amenities',
+    label: 'Fitness & Wellness Amenities',
+    type: 'SelectMultipleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_amenities'],
+    config: {
+      // Optional modes: 'has_all', 'has_any'
+      // https://www.sharetribe.com/api-reference/marketplace.html#extended-data-filtering
+      searchMode: 'has_all',
+
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for this web app's UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: [
+        {key: "fw-adjustable-lighting", label: "Adjustable Lighting"},
+        {key: "fw-changing-area", label: "Changing Area"},
+        {key: "fw-cleaning-supplies", label: "Cleaning Supplies"},
+        {key: "couch-armchairs", label: "Couch / Armchairs"},
+        {key: "exercise-mats", label: "Exercise Mats"},
+        {key: "fitness-equipment", label: "Fitness Equipment"},
+        {key: "free-weights", label: "Free weights"},
+        {key: "gym-equipment", label: "Gym Equipment"},
+        {key: "fw-massage-chair", label: "Massage Chair"},
+        {key: "massage-table", label: "Massage Table"},
+        {key: "mirrored-wall", label: "Mirrored Wall"},
+        {key: "secure-lockers-(for-user-clients)", label: "Secure lockers (for User clients)"},
+        {key: "fw-speakers-music", label: "Speakers / Music"},
+        {key: "towels", label: "Towels"},
+        {key: "yoga-mats", label: "Yoga mats"},
+        {key: "yoga-props", label: "Yoga props"},
+        {key: "water-point", label: "Water Point"},
+      ],
+      isCategory: false,
+      catKeys: 'hair-stylist,barber,makeup-artist,nail-technician,cosmetics,beauty-treatment-room',
+    },
+  },
+  {
+    id: 'creative_studios_amenities',
+    label: 'Creative Studios Amenities',
+    type: 'SelectMultipleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_amenities'],
+    config: {
+      // Optional modes: 'has_all', 'has_any'
+      // https://www.sharetribe.com/api-reference/marketplace.html#extended-data-filtering
+      searchMode: 'has_all',
+
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for this web app's UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: [
+        {key: 'cs-adjustable-lighting', label: 'Adjustable Lighting'},
+        {key: 'backdrops', label: 'Backdrops (White, Black, Green)'},
+        {key: 'background-reflectors', label: 'Background Reflectors'},
+        {key: 'blackout-option', label: 'Blackout Option'},
+        {key: 'clothes-rail', label: 'Clothes rail'},
+        {key: 'dj_equipment', label: 'DJ Equipment'},
+        {key: 'easels', label: 'Easels'},
+        {key: 'flipchart', label: 'Flipchart'},
+        {key: 'green-screen', label: 'Green Screen'},
+        {key: 'high-ceilings', label: 'High Ceilings'},
+        {key: 'lighting-equipment', label: 'Lighting Equipment'},
+        {key: 'microphones', label: 'Microphones'},
+        {key: 'mirror-and-makeup-desk', label: 'Mirror and Makeup Desk'},
+        {key: 'mixer', label: 'Mixer'},
+        {key: 'cs-speakers-music', label: 'Speakers / Music'},
+        {key: 'natural-light', label: 'Natural Light'},
+        {key: 'pa-speakers', label: 'PA Speakers'},
+        {key: 'polyboards-and-stands', label: 'Polyboards and Stands'},
+        {key: 'projector', label: 'Projector'},
+        {key: 'seating-area', label: 'Seating area'},
+        {key: 'separate-changing-area', label: 'Seperate changing area'},
+        {key: 'cs-sound-engineer', label: 'Sound Engineer'},
+        {key: 'tables-and-chairs', label: 'Tables and Chairs'},
+        {key: 'white-boards', label: 'Whiteboards'},
+      ],
+      isCategory: false,
+      catKeys: 'photography,art,music',
+    },
+  },
+  {
+    id: 'coworking_amenities',
+    label: 'Coworking Amenities',
+    type: 'SelectMultipleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_amenities'],
+    config: {
+      // Optional modes: 'has_all', 'has_any'
+      // https://www.sharetribe.com/api-reference/marketplace.html#extended-data-filtering
+      searchMode: 'has_all',
+
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for this web app's UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: [
+        {key: 'bike-storage', label: 'Bike Storage'},
+        {key: 'breakout-space', label: 'Breakout Space'},
+        {key: 'childcare', label: 'Childcare'},
+        {key: 'cleaning', label: 'Cleaning'},
+        {key: "ethernet-connection", label: "Ethernet connection"},
+        {key: 'lockers', label: 'Lockers'},
+        {key: 'mailing-address', label: 'Mailing Address'},
+        {key: "meeting-room-access", label: "Meeting Rooms"},
+        {key: "laser-printer-and-scanner", label: "Printing"},
+        {key: 'private-phone-booths', label: 'Private phone booths'},
+        {key: 'showers', label: 'Showers'},
+      ],
+      isCategory: false,
+      catKeys: 'desk-space,office-space,meeting-room-space',
+    },
+  },
+  {
+    id: 'events_and_kitchen_amenities',
+    label: 'Events & Kitchen Amenities',
+    type: 'SelectMultipleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_amenities'],
+    config: {
+      // Optional modes: 'has_all', 'has_any'
+      // https://www.sharetribe.com/api-reference/marketplace.html#extended-data-filtering
+      searchMode: 'has_all',
+
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for this web app's UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: [
+        {key: 'bar-hire', label: 'Bar Hire'},
+        {key: 'catering-available', label: 'Catering Available'},
+        {key: 'cloakroom', label: 'Cloakroom'},
+        {key: 'seating', label: 'Seating'},
+        {key: 'tables', label: 'Tables'},
+        {key: 'licensed', label: 'Licensed'},
+        {key: 'ek-dj-equipment', label: 'DJ Booth / Equipment'},
+        {key: 'av-equipment', label: 'A/V Equipment'},
+        {key: 'ek-sound-engineer', label: 'Sound Engineer'},
+        {key: 'staff', label: 'Staff'},
+        {key: 'stage', label: 'Stage'},
+        {key: 'ceremony location', label: 'Ceremony location'},
+        {key: 'ek-props', label: 'Props'},
+        {key: 'sound system', label: 'Sound system'},
+        {key: 'screen-projector', label: 'Screen/projector'},
+        {key: '3-phase-power', label: '3 Phase Power'},
+        {key: 'blender', label: 'Blender'},
+        {key: 'chest-freezer', label: 'Chest Freezer'},
+        {key: 'chopping-board', label: 'Chopping Board'},
+        {key: 'combi-oven', label: 'Combi Oven'},
+        {key: 'commercial-oven', label: 'Commercial oven'},
+        {key: 'counter-space', label: 'Counter Space'},
+        {key: 'dishwasher', label: 'Dishwasher'},
+        {key: 'dry-storage', label: 'Dry Storage'},
+        {key: 'extractor-fan', label: 'Extractor Fan'},
+        {key: 'food-processor', label: 'Food Processor'},
+        {key: 'freezer', label: 'Freezer'},
+        {key: 'fridge', label: 'Fridge'},
+        {key: 'gas-hob', label: 'Gas Hob'},
+        {key: 'grill', label: 'Grill'},
+        {key: 'induction-hob', label: 'Induction Hob'},
+        {key: 'microwave', label: 'Microwave'},
+        {key: 'pots-pans', label: 'Pots and Pans'},
+        {key: 'sink', label: 'Sink'},
+        {key: 'stand-mixer', label: 'Stand Mixer'},
+        {key: 'walkin-fridge', label: 'Walk-in Fridge'},
+      ],
+      isCategory: false,
+      catKeys: 'event-space,outdoor-site,shoot-location,kitchen-space',
+    },
+  },
+  {
+    id: 'tattoo_and_piercing_amenities',
+    label: 'Tattoo & Piercing Amenities',
+    type: 'SelectMultipleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_amenities'],
+    config: {
+      // Optional modes: 'has_all', 'has_any'
+      // https://www.sharetribe.com/api-reference/marketplace.html#extended-data-filtering
+      searchMode: 'has_all',
+
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for this web app's UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: [
+        {key: 'bench', label: 'Bench'},
+        {key: 'clinical-waste-removal', label: 'Clinical Waste Removal'},
+        {key: 'tp-mirror', label: 'Mirror'},
+        {key: 'piercing-equipment', label: 'Piercing Equipment'},
+        {key: 'sharps-collection', label: 'Sharps Collection'},
+        {key: 'tp-sterilising-equipment', label: 'Sterilising Equipment'},
+        {key: 'stool', label: 'Stool'},
+        {key: 'tattoo-equipment', label: 'Tattoo Equipment'},
+        {key: 'tp-trolley', label: 'Trolley'},
+      ],
+      isCategory: false,
+      catKeys: 'tattoo-artist,piercing-artist',
+    },
+  },
+
 ];
 
 // This can be used to populate all of the combined categories
 // for example, on the new listing page, to select a category
 export const categories = filters.filter(f => f.config.isCategory);
 
+// This can be used to populate all of the combined categories
+// for example, on the new listing page, to select a category
+export const amenities = filters.filter(f => f.queryParamNames[0] === 'pub_amenities');
 
 export const sortConfig = {
   // Enable/disable the sorting control in the SearchPage
