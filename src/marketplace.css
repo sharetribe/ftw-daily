@@ -62,8 +62,11 @@
 
   /* pink */
   --marketplaceColor: #ffabd7; ;
-   /* yellow */
-  --marketplaceColorLight: #fff5a6;
+  /* yellow */
+  /* --marketplaceColorLight: #fff5a6; */
+  /* slghtly lighter pink */
+  /* --marketplaceColorLight: #ffc9e6; */
+  --marketplaceColorLight: #ffabd7;
   /* green */
   --marketplaceColorGreen: #8eff8c;
   /* blue */

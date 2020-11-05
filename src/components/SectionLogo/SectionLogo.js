@@ -21,15 +21,6 @@ const SectionLogo = props => {
         <div className={css.title}>
           {titleText}
         </div>
-        {/* <div className={css.descriptionDiv} >
-        </div> */}
-        {/* <div className={css.imageContainer}>
-          <div className={css.imageWrapper}>
-            <div className={css.aspectWrapper}>
-              <LazyImage src={friendsWorking} alt={"What is Hotpatch"} className={css.mainImage} />
-            </div>
-          </div>
-        </div> */}
       </div>
     </div>
   );

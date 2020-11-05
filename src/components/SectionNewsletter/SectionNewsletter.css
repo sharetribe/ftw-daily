@@ -28,6 +28,9 @@
   margin-top: 0;
   color: #ffffff;
   text-align: center;
+  @media (--viewportMedium) {
+    font-size: 36px;
+  }
 }
 
 .txtDiv {
