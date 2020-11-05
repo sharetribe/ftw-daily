@@ -1,6 +1,7 @@
 const http = require('http');
 const https = require('https');
 const sharetribeSdk = require('sharetribe-flex-sdk');
+const log = require('../../log.js');
 const sdkUtils = require('../../api-util/sdk');
 
 const CLIENT_ID = process.env.REACT_APP_SHARETRIBE_SDK_CLIENT_ID;
@@ -21,7 +22,7 @@ const baseUrl = BASE_URL ? { baseUrl: BASE_URL } : {};
 
 module.exports = (err, user, req, res, clientID, idpId) => {
   if (err) {
-    console.error(err);
+    log.error(err, 'fetching-user-data-from-idp-failed');
 
     // Save error details to cookie so that we can show
     // relevant information in the frontend
@@ -41,7 +42,10 @@ module.exports = (err, user, req, res, clientID, idpId) => {
   }
 
   if (!user) {
-    console.error('Failed to fetch user details from identity provider!');
+    log.error(
+      new Error('Failed to fetch user details from identity provider'),
+      'fetching-user-data-from-idp-failed'
+    );
 
     // Save error details to cookie so that we can show
     // relevant information in the frontend
@@ -99,8 +103,10 @@ module.exports = (err, user, req, res, clientID, idpId) => {
         }
       }
     })
-    .catch(err => {
-      console.error(err);
+    .catch(() => {
+      console.log(
+        'Authenticating with idp failed. User needs to confirm creating sign up in frontend.'
+      );
 
       // If authentication fails, we want to create a new user with idp
       // For this we will need to pass some information to frontend so
