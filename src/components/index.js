@@ -176,6 +176,7 @@ export { default as Footer } from './Footer/Footer';
 export { default as SectionHero } from './SectionHero/SectionHero';
 export { default as SectionHowItWorks } from './SectionHowItWorks/SectionHowItWorks';
 export { default as SectionLocations } from './SectionLocations/SectionLocations';
+export { default as SectionLogo } from './SectionLogo/SectionLogo';
 export { default as SectionNewsletter } from './SectionNewsletter/SectionNewsletter';
 export { default as SectionPatchCategories } from './SectionPatchCategories/SectionPatchCategories';
 export { default as SectionWhatIsHotpatch } from './SectionWhatIsHotpatch/SectionWhatIsHotpatch';

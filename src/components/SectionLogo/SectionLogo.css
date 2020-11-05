@@ -1,0 +1,25 @@
+@import '../../marketplace.css';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  @apply --marketplaceH1FontStyles;
+  margin-top: 0;
+  font-weight: 700;
+}
+
+
+.imageContainer {
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+}
+
+.mainImage {
+  width: 100%;
+}

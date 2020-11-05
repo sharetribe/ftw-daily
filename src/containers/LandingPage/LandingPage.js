@@ -13,6 +13,7 @@ import {
   SectionPatchCategories,
   SectionHowItWorks,
   SectionWhatIsHotpatch,
+  SectionLogo,
   SectionNewsletter,
   LayoutSingleColumn,
   LayoutWrapperTopbar,
@@ -78,6 +79,11 @@ export const LandingPageComponent = props => {
             <li className={css.section}>
               <div className={css.sectionContent}>
                 <SectionWhatIsHotpatch />
+              </div>
+            </li>
+            <li className={css.section}>
+              <div className={css.sectionContent}>
+                <SectionLogo />
               </div>
             </li>
             <li className={classNames(css.section, css.blueBg)}>
