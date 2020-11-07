@@ -21,7 +21,7 @@ const SectionFeaturesMaybe = props => {
       </h2>
       <PropertyGroup
         id="ListingPage.amenities"
-        options={sortBy(selectedOptionsFull, 'key')}
+        options={sortBy(selectedOptionsFull, 'label')}
         selectedOptions={selectedOptions}
         twoColumns={true}
       />

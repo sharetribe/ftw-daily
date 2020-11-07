@@ -35,6 +35,7 @@
 
 .txtDiv {
   width: 75%;
+  text-align: center;
   @media (--viewportMedium) {
     padding-right: 50px;
     padding-left: 50px;

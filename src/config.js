@@ -92,7 +92,7 @@ const canonicalRootURL = process.env.REACT_APP_CANONICAL_ROOT_URL;
 const siteTitle = 'Hotpatch';
 
 // Twitter handle is needed in meta tags (twitter:site). Start it with '@' character
-const siteTwitterHandle = '@hotpatch_';
+const siteTwitterHandle = '';
 
 // Instagram page is used in SEO schema (http://schema.org/Organization)
 const siteInstagramPage = 'https://www.instagram.com/hotpatch_/';
@@ -148,7 +148,7 @@ const maps = {
     // the original coordinates. The actual value is random, but the
     // obfuscated coordinates are withing a circle that has the same
     // radius as the offset.
-    offset: 500,
+    offset: 750,
 
     // Default zoom level when showing a single circle on a Map. Should
     // be small enough so the whole circle fits in.

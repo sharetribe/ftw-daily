@@ -167,6 +167,7 @@
 }
 
 .step {
+  text-align: center;
   @media (--viewportMedium) {
     width: 250px;
     margin-right: 20px;

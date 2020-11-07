@@ -34,7 +34,7 @@ const SectionWhatIsHotpatch = props => {
           <p>
             <FormattedMessage id="SectionWhatIsHotpatch.text2"/>
             <FormattedMessage id="SectionWhatIsHotpatch.text3"/>
-            <FormattedMessage id="SectionWhatIsHotpatch.text4"/>
+            {/* <FormattedMessage id="SectionWhatIsHotpatch.text4"/> */}
           </p>
           <p>
             <FormattedMessage id="SectionWhatIsHotpatch.text5"/>

@@ -84,6 +84,7 @@
 
   display: inline-block;
   padding: 9px 16px 10px 16px;
+  margin-right: 8px;
   width: auto;
   height: auto;
   min-height: 0;
@@ -105,6 +106,7 @@
 
   display: inline-block;
   padding: 9px 16px 10px 16px;
+  margin-right: 8px;
   width: auto;
   height: auto;
   min-height: 0;

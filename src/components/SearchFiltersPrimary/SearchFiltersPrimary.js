@@ -63,9 +63,9 @@ const SearchFiltersPrimaryComponent = props => {
             </span>
           </div>
         ) : null}
-        {sortByComponent}
         {nonCategoryChildren}
         {toggleSecondaryFiltersOpenButton}
+        {sortByComponent}
       </div>
 
       <div className={css.filters}>
