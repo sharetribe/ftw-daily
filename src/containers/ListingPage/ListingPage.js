@@ -403,8 +403,13 @@ export class ListingPageComponent extends Component {
       </NamedLink>
     );
 
-    const amenityOptions = findOptionsForSelectFilter('amenities', filterConfig);
-    const categoryOptions = findOptionsForSelectFilter('category', filterConfig);
+    // const amenityOptions = findOptionsForSelectFilter('amenities', filterConfig);
+    // const categoryOptions = findOptionsForSelectFilter('category', filterConfig);
+    const amenityIds = config.custom.amenities.map(a => a.id);
+    const amenityOptions = findOptionsForSelectFilter(amenityIds, filterConfig);
+    const catIds = config.custom.categories.map(c => c.id);
+    const categoryOptions = findOptionsForSelectFilter(catIds, filterConfig);
+
     const category =
       publicData && publicData.category ? (
         <span>
@@ -467,7 +472,6 @@ export class ListingPageComponent extends Component {
                   {/* <SectionSeats publicData={publicData} /> */}
                   <SectionDescriptionMaybe description={description} />
 
-                  {/* //NOTE DELETEME v2s1 filterupdate -- <SectionFeaturesMaybe options={amenitiesConfig} publicData={publicData} /> */}
                   <SectionMiscMaybe publicData={publicData} />
                   <SectionEquipmentMaybe publicData={publicData} />
                   <SectionFeaturesMaybe options={amenityOptions} publicData={publicData} />
