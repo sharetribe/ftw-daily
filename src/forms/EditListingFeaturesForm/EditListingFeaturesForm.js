@@ -30,6 +30,7 @@ const EditListingFeaturesFormComponent = props => (
         updateInProgress,
         fetchErrors,
         filterConfig,
+        category,
       } = formRenderProps;
 
 
@@ -67,34 +68,32 @@ const EditListingFeaturesFormComponent = props => (
         </p>
       ) : null;
 
-      //NOTE TODO v2s1 filterupdate -- update me! to play nice with below options
-      // const amenities = config.custom.amenities || []
-      // const amenitiesCheckboxGroups = amenities.map((o, i) => {
-      //   return o.children && o.children.length
-      //     ? (
-      //       <span key={`${i}.${name}`}>
-      //         <h3>{o.label}</h3>
-      //         <FieldCheckboxGroup
-      //           className={css.features}
-      //           id={name}
-      //           name={name}
-      //           options={o.children}
-      //         />
-      //       </span>
-      //     )
-      //     : null
-      // });
+      const amenities = config.custom.amenities || [];
+      const amenitiesCheckboxGroups = amenities.map((amen, i) => {
+        const catGroupForThisAmen = amen.config.catKeys.split(',');
+        const shouldDisplayTheseAmenties = catGroupForThisAmen.includes(category) || amen.config.catKeys === 'all';
 
-      const options = findOptionsForSelectFilter('amenities', filterConfig);
+        return shouldDisplayTheseAmenties
+          ? (
+            <span key={`${i}.${name}`}>
+              <h3>{amen.label}</h3>
+              <FieldCheckboxGroup
+                className={css.features}
+                id={name}
+                name={name}
+                options={amen.config.options}
+              />
+            </span>
+          )
+          : null
+      });
 
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessage}
           {errorMessageShowListing}
 
-          {/* NOTE TODO v2s1 filterupdate -- update me! this was added to replace FieldCheckboxGroup*/}
-          {/* { amenitiesCheckboxGroups } */}
-          <FieldCheckboxGroup className={css.features} id={name} name={name} options={options} />
+          { amenitiesCheckboxGroups }
 
           <FieldTextInput
             id="miscAmenities"

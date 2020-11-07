@@ -41,6 +41,7 @@ const EditListingFeaturesPanel = props => {
     <FormattedMessage id="EditListingFeaturesPanel.createListingTitle" />
   );
 
+  const category = publicData && publicData.category;
   const amenities = publicData && publicData.amenities;
   const miscAmenities = publicData && publicData.miscAmenities;
   const equipmentProvided = publicData && publicData.equipmentProvided;
@@ -56,8 +57,8 @@ const EditListingFeaturesPanel = props => {
         onSubmit={values => {
           const { amenities = [], miscAmenities = '', equipmentProvided = '' } = values;
           const updatedValues = {
-            publicData: { 
-              amenities, 
+            publicData: {
+              amenities,
               miscAmenities,
               equipmentProvided },
           };
@@ -70,6 +71,7 @@ const EditListingFeaturesPanel = props => {
         updated={panelUpdated}
         updateInProgress={updateInProgress}
         fetchErrors={errors}
+        category={category}
       />
     </div>
   );

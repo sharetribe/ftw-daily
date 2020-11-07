@@ -239,7 +239,7 @@ export const filters = [
         {key: "heating",label: "Heating"},
         {key: "kitchen",label: "Kitchen Facilities"},
         {key: "key/electronic-access-card",label: "Own Key / Electronic access card"},
-        {key: 'parking', label: 'Parking'},
+        {key: 'parking', label: 'Paid Parking'},
         {key: "pets-allowed",label: "Pets Allowed"},
         {key: "receptionist",label: "Reception"},
         {key: "secure-locker",label: "Secure locker"},
@@ -327,7 +327,7 @@ export const filters = [
         {key: "water-point", label: "Water Point"},
       ],
       isCategory: false,
-      catKeys: 'hair-stylist,barber,makeup-artist,nail-technician,cosmetics,beauty-treatment-room',
+      catKeys: 'fitness,therapy-room,wellness-treatment-room',
     },
   },
   {
@@ -408,8 +408,8 @@ export const filters = [
     },
   },
   {
-    id: 'events_and_kitchen_amenities',
-    label: 'Events & Kitchen Amenities',
+    id: 'events_amenities',
+    label: 'Events Amenities',
     type: 'SelectMultipleFilter',
     group: 'secondary',
     queryParamNames: ['pub_amenities'],
@@ -429,15 +429,36 @@ export const filters = [
         {key: 'seating', label: 'Seating'},
         {key: 'tables', label: 'Tables'},
         {key: 'licensed', label: 'Licensed'},
-        {key: 'ek-dj-equipment', label: 'DJ Booth / Equipment'},
+        {key: 'e-dj-equipment', label: 'DJ Booth / Equipment'},
         {key: 'av-equipment', label: 'A/V Equipment'},
-        {key: 'ek-sound-engineer', label: 'Sound Engineer'},
+        {key: 'e-sound-engineer', label: 'Sound Engineer'},
         {key: 'staff', label: 'Staff'},
         {key: 'stage', label: 'Stage'},
         {key: 'ceremony location', label: 'Ceremony location'},
         {key: 'ek-props', label: 'Props'},
         {key: 'sound system', label: 'Sound system'},
         {key: 'screen-projector', label: 'Screen/projector'},
+      ],
+      isCategory: false,
+      catKeys: 'event-space,outdoor-site,shoot-location',
+    },
+  },
+  {
+    id: 'kitchen_amenities',
+    label: 'Kitchen Amenities',
+    type: 'SelectMultipleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_amenities'],
+    config: {
+      // Optional modes: 'has_all', 'has_any'
+      // https://www.sharetribe.com/api-reference/marketplace.html#extended-data-filtering
+      searchMode: 'has_all',
+
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for this web app's UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: [
         {key: '3-phase-power', label: '3 Phase Power'},
         {key: 'blender', label: 'Blender'},
         {key: 'chest-freezer', label: 'Chest Freezer'},
@@ -461,7 +482,7 @@ export const filters = [
         {key: 'walkin-fridge', label: 'Walk-in Fridge'},
       ],
       isCategory: false,
-      catKeys: 'event-space,outdoor-site,shoot-location,kitchen-space',
+      catKeys: 'kitchen-space',
     },
   },
   {
