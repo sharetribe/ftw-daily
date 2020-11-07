@@ -75,6 +75,7 @@ class MainPanel extends Component {
     this.setState({ currentQueryParams: {} });
   }
 
+  // NOTE TODO right now, clicking resets everything. which is not intuitive...
   // Reset all filter query parameters
   resetAll(e) {
     const { urlQueryParams, history, filterConfig } = this.props;
@@ -127,9 +128,11 @@ class MainPanel extends Component {
         // we dont want to lose the prev ones, we want all of them
         const pc = 'pub_category';
         if (pc in updatedURLParams && pc in mergedQueryParams) {
-          const up_pc = updatedURLParams[pc].split(',');
-          const mp_pc = mergedQueryParams[pc].split(',');
-          updatedURLParams[pc] = [...new Set([...mp_pc, ...up_pc])].join(',');
+          const up_pc = updatedURLParams[pc] ? updatedURLParams[pc].split(',') : [];
+          const mp_pc = mergedQueryParams[pc] ? mergedQueryParams[pc].split(',') : [];
+          if (!!up_pc.length) {
+            updatedURLParams[pc] = [...new Set([...mp_pc, ...up_pc])].join(',');
+          }
         }
         return {
           currentQueryParams: { ...mergedQueryParams, ...updatedURLParams, address, bounds },
