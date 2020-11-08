@@ -13,6 +13,7 @@ import {
   SectionPatchCategories,
   SectionHowItWorks,
   SectionWhatIsHotpatch,
+  SectionTestimonials,
   SectionLogo,
   SectionNewsletter,
   LayoutSingleColumn,
@@ -79,6 +80,11 @@ export const LandingPageComponent = props => {
             <li className={css.section}>
               <div className={css.sectionContent}>
                 <SectionWhatIsHotpatch />
+              </div>
+            </li>
+            <li className={css.section}>
+              <div className={css.sectionContent}>
+                <SectionTestimonials />
               </div>
             </li>
             <li className={css.section}>

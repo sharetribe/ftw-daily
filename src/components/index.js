@@ -180,6 +180,7 @@ export { default as SectionLogo } from './SectionLogo/SectionLogo';
 export { default as SectionNewsletter } from './SectionNewsletter/SectionNewsletter';
 export { default as SectionPatchCategories } from './SectionPatchCategories/SectionPatchCategories';
 export { default as SectionWhatIsHotpatch } from './SectionWhatIsHotpatch/SectionWhatIsHotpatch';
+export { default as SectionTestimonials } from './SectionTestimonials/SectionTestimonials';
 export { default as SectionThumbnailLinks } from './SectionThumbnailLinks/SectionThumbnailLinks';
 export { default as Topbar } from './Topbar/Topbar';
 export { default as TopbarDesktop } from './TopbarDesktop/TopbarDesktop';
