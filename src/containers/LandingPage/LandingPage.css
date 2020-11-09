@@ -110,6 +110,13 @@
   background-color: var(--marketplaceColorDark) !important;
 }
 
+.hideOnMobile {
+  display: none;
+  @media (--viewportMedium) {
+    display: list-item;
+  }
+}
+
 /* A bar on top of light sections */
 /* .section:nth-of-type(2n) .sectionContent::before {
   background: var(--marketplaceColor);

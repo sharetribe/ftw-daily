@@ -98,7 +98,7 @@
   flex:1;
 
   @media (--viewportMedium) {
-    /* margin: 0 7.5vw 0 7.5vw; */
+    margin: 0 7.5vw 0 7.5vw;
   }
 
   /* Special viewport for adjusting the heroContent's placement */
@@ -112,6 +112,7 @@
     max-width: calc(1052px + 36px + 36px);
     width: 100%;
     padding: 0 36px 0 36px;
+    margin: 0 7.5vw 0 7.5vw;
   }
 }
 

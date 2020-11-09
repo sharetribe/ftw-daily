@@ -8,6 +8,10 @@
 .testimonialsSection {
   padding: 0 1.25rem;
   margin: 0 auto;
+  display: none;
+  @media (--viewportMedium) {
+    display: block;
+  }
 }
 
 .testimonialsSection .testimonials {
@@ -75,7 +79,8 @@
   padding-bottom: 5px;
 }
 
-@media (max-width: 991px) {
+/* @media (max-width: 991px) { */
+@media (max-width: 767px) {
   .testimonials {
     display: none !important;
   }
@@ -87,13 +92,15 @@
   }
 }
 
-@media (min-width: 992px) {
+/* @media (min-width: 992px) { */
+@media (min-width: 768px) {
   .mobileTestimonials {
     display: none;
   }
 }
 
-@media (max-width: 630px) {
+/* @media (max-width: 630px) { */
+@media (max-width: 768px) {
   .mobileTestimonials .testimonial {
     padding: 0 10px;
   }
