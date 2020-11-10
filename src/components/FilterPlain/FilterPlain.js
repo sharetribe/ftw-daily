@@ -9,7 +9,7 @@ import css from './FilterPlain.css';
 class FilterPlainComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { isOpen: true };
+    this.state = { isOpen: false };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClear = this.handleClear.bind(this);
@@ -47,16 +47,18 @@ class FilterPlainComponent extends Component {
       initialValues,
       keepDirtyOnReinitialize,
       contentPlacementOffset,
+      isCategory,
     } = this.props;
     const classes = classNames(rootClassName || css.root, className);
 
     const labelClass = isSelected ? css.filterLabelSelected : css.filterLabel;
+    const newLabel = isCategory ? label + ' Categories' : label;
 
     return (
       <div className={classes}>
         <div className={labelClass}>
           <button type="button" className={css.labelButton} onClick={this.toggleIsOpen}>
-            <span className={labelClass}>{label}</span>
+            <span className={labelClass}>{newLabel}</span>
           </button>
           <button type="button" className={css.clearButton} onClick={this.handleClear}>
             <FormattedMessage id={'FilterPlain.clear'} />

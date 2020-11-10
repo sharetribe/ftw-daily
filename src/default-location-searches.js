@@ -37,6 +37,13 @@ export default [
     },
   },
   {
+    id: 'default-edinburgh',
+    predictionPlace: {
+      address: 'Edinburgh, United Kingdom',
+      bounds: new LatLngBounds(new LatLng(56.21396061, -2.98871222), new LatLng(55.74296152, -3.58918372)),
+    },
+  },
+  {
     id: 'default-sheffield',
     predictionPlace: {
       address: 'Sheffield, United Kingdom',

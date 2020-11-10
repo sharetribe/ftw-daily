@@ -29,16 +29,19 @@ const renderSocialMediaLinks = intl => {
     </ExternalLink>
   ) : null;
 
-  const twitterLink = siteTwitterPage ? (
-    <ExternalLink
-      key="linkToTwitter"
-      href={siteTwitterPage}
-      className={css.icon}
-      title={goToTwitter}
-    >
-      <IconSocialMediaTwitter />
-    </ExternalLink>
-  ) : null;
+  // const twitterLink = siteTwitterPage ? (
+  //   <ExternalLink
+  //     key="linkToTwitter"
+  //     href={siteTwitterPage}
+  //     className={css.icon}
+  //     title={goToTwitter}
+  //   >
+  //     <IconSocialMediaTwitter />
+  //   </ExternalLink>
+  // ) : null;
+
+  // want to keep seo benefits of twitter meta tags, but do not want icon w/link (for now at least)
+  const twitterLink = null;
 
   const instragramLink = siteInstagramPage ? (
     <ExternalLink
@@ -57,6 +60,7 @@ const Footer = props => {
   const { rootClassName, className, intl } = props;
   const socialMediaLinks = renderSocialMediaLinks(intl);
   const classes = classNames(rootClassName || css.root, className);
+  const base_url = '?address=CITY%2C%20United%20Kingdom';
 
   return (
     <div className={classes}>
@@ -103,6 +107,83 @@ const Footer = props => {
                 </li>
               </ul>
             </div>
+
+            <div className={css.searches}>
+             <ul className={css.list}>
+               <li className={css.listItem}>
+                 <NamedLink
+                   name="SearchPage"
+                   to={{
+                     search: base_url.replace('CITY', 'London') + `&bounds=${51.67789511}%2C${0.29732496}%2C${51.3925498}%2C${-0.57645}`,
+                   }}
+                   className={css.link}
+                 >
+                   <FormattedMessage id="Footer.searchLondon" />
+                 </NamedLink>
+               </li>
+               <li className={css.listItem}>
+                 <NamedLink
+                   name="SearchPage"
+                   to={{
+                     search: base_url.replace('CITY', 'Birmingham') + `&bounds=${52.57779203}%2C${-1.72540735}%2C${52.32126288}%2C${-2.03104471}`,
+                   }}
+                   className={css.link}
+                 >
+                   <FormattedMessage id="Footer.searchBirmingham" />
+                 </NamedLink>
+               </li>
+               <li className={css.listItem}>
+                 <NamedLink
+                   name="SearchPage"
+                   to={{
+                     search: base_url.replace('CITY', 'Manchester') + `&bounds=${53.59821106}%2C${-2.08320402}%2C${53.3476832}%2C${-2.38884138}`,
+                   }}
+                   className={css.link}
+                 >
+                   <FormattedMessage id="Footer.searchManchester" />
+                 </NamedLink>
+               </li>
+
+             </ul>
+           </div>
+
+           <div className={css.searchesExtra}>
+             <ul className={css.list}>
+               <li className={css.listItem}>
+                 <NamedLink
+                   name="SearchPage"
+                   to={{
+                     search: base_url.replace('CITY', 'Edinburgh') + `&bounds=${56.21396061}%2C${-2.98871222}%2C${55.74296152}%2C${-3.58918372}`,
+                   }}
+                   className={css.link}
+                 >
+                   <FormattedMessage id="Footer.searchEdinburgh" />
+                 </NamedLink>
+               </li>
+               <li className={css.listItem}>
+                 <NamedLink
+                   name="SearchPage"
+                   to={{
+                     search: base_url.replace('CITY', 'Liverpool') + `&bounds=${53.5729014}%2C${-2.77243704}%2C${53.31894244}%2C${-3.08142752}`,
+                   }}
+                   className={css.link}
+                 >
+                   <FormattedMessage id="Footer.searchLiverpool" />
+                 </NamedLink>
+               </li>
+               <li className={css.listItem}>
+                 <NamedLink
+                   name="SearchPage"
+                   to={{
+                     search: base_url.replace('CITY', 'Sheffield') + `&bounds=${53.40297225}%2C${-1.43730778}%2C${53.34019056}%2C${-1.51371712}`,
+                   }}
+                   className={css.link}
+                 >
+                   <FormattedMessage id="Footer.searchSheffield" />
+                 </NamedLink>
+               </li>
+             </ul>
+           </div>
 
             <div className={css.extraLinks}>
               <div className={css.someLinks}>{socialMediaLinks}</div>
