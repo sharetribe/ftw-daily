@@ -17,10 +17,10 @@ const MobileTestimonials = () => {
   };
   const handleOnDragStart = e => e.preventDefault();
   const items = [
-    testimonialSection(quote1, author1, authorJob1, authorLoc1, false),
-    testimonialSection(quote2, author2, authorJob2, authorLoc2, true),
-    testimonialSection(quote3, author3, authorJob3, authorLoc3, false),
-    testimonialSection(quote4, author4, authorJob4, authorLoc4, true),
+    testimonialSection(quote1, author1, authorJob1, authorLoc1),
+    testimonialSection(quote2, author2, authorJob2, authorLoc2),
+    testimonialSection(quote3, author3, authorJob3, authorLoc3),
+    testimonialSection(quote4, author4, authorJob4, authorLoc4),
   ];
 
   return (

@@ -32,7 +32,7 @@
   padding: 15px 23px 17px 23px;
   border-radius: 5px;
   position: relative;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   width: 100%;
   background: #ffd9ed;
 }
@@ -66,7 +66,9 @@
 
 .testimonialAuthorDiv {
   display: flex;
+  justify-content: flex-end;
   align-items: center;
+  margin-right: 5px;
 }
 
 .testimonialAuthorDiv span p {
@@ -75,7 +77,7 @@
   line-height: 1.33;
   font-size: 14px;
   font-weight: 600;
-  text-align: left;
+  text-align: right;
   padding-bottom: 5px;
 }
 

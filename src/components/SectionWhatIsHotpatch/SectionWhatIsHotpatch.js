@@ -19,6 +19,9 @@ const LazyImage = lazyLoadWithDimensions(CategoryImage);
 const SectionWhatIsHotpatch = props => {
   const { rootClassName, className } = props;
   const classes = classNames(rootClassName || css.root, className);
+  const text3Bold = <span className={css.bold}>
+    <FormattedMessage id="SectionWhatIsHotpatch.text3Bold"/>
+  </span>;
 
   return (
     <div className={classes}>
@@ -33,15 +36,12 @@ const SectionWhatIsHotpatch = props => {
           </p>
           <p>
             <FormattedMessage id="SectionWhatIsHotpatch.text2"/>
-            <FormattedMessage id="SectionWhatIsHotpatch.text3"/>
-            {/* <FormattedMessage id="SectionWhatIsHotpatch.text4"/> */}
           </p>
           <p>
-            <FormattedMessage id="SectionWhatIsHotpatch.text5"/>
-          </p>
-          <p>
-            <FormattedMessage id="SectionWhatIsHotpatch.text6"/>
-            <FormattedMessage id="SectionWhatIsHotpatch.text7"/>
+            <FormattedMessage
+              id="SectionWhatIsHotpatch.text3"
+              values={{ subText: text3Bold }}
+          />
           </p>
         </div>
         <div className={css.imageContainer}>

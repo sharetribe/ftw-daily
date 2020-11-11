@@ -2,18 +2,11 @@ import React from "react";
 import { FormattedMessage } from '../../util/reactIntl';
 import css from './SectionTestimonials.css';
 
-import {ReactComponent as BoyIcon} from './svgs/boy.svg';
-import {ReactComponent as GirlIcon} from './svgs/girl.svg';
-
-export const testimonialSection = (content, author, job, location, isMale) => {
-  const Avatar = isMale ? BoyIcon : GirlIcon;
+export const testimonialSection = (content, author, job, location) => {
   return (
     <div className={css.testimonial}>
       <p className={css.quote}>{content}</p>
        <div className={css.testimonialAuthorDiv}>
-         <div className={css.svgDiv}>
-           <Avatar className={css.svg} />
-         </div>
         <span>
           <p>{author}</p>
           <p>{job}</p>
