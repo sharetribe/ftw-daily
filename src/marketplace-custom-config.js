@@ -526,6 +526,29 @@ export const categories = filters.filter(f => f.config.isCategory);
 // for example, on the new listing page, to select a category
 export const amenities = filters.filter(f => f.queryParamNames[0] === 'pub_amenities');
 
+const genCatOptions = categories.map(cat => {
+  const genCat = {key: cat.config.catKeys, label: cat.label};
+  return genCat;
+});
+
+export const generalCategories =
+  {
+    id: 'general_categories',
+    label: 'Categories',
+    type: 'SelectSingleFilter',
+    group: 'primary',
+    queryParamNames: ['pub_category'],
+    config: {
+      // Optional modes: 'has_all', 'has_any'
+      // https://www.sharetribe.com/api-reference/marketplace.html#extended-data-filtering
+      searchMode: 'has_all',
+      options: genCatOptions,
+      isCategory: false,
+      catKeys: '',
+    },
+  };
+
+
 export const sortConfig = {
   // Enable/disable the sorting control in the SearchPage
   active: true,

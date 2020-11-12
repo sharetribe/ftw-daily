@@ -30,6 +30,12 @@ class TopbarSearchFormComponent extends Component {
     }
   }
 
+  renderCategoryDropDown() {
+    if (this.props.dropdown) {
+      return this.props.dropdown;
+    }
+  }
+
   render() {
     return (
       <FinalForm
@@ -83,6 +89,7 @@ class TopbarSearchFormComponent extends Component {
                   );
                 }}
               />
+              {this.renderCategoryDropDown()}
             </Form>
           );
         }}

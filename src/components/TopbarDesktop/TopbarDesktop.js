@@ -4,6 +4,9 @@ import { FormattedMessage, intlShape } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { ACCOUNT_SETTINGS_PAGES } from '../../routeConfiguration';
 import { propTypes } from '../../util/types';
+import config from '../../config';
+import TopbarDropDown from './TopbarDropDown';
+
 import {
   Avatar,
   InlineTextButton,
@@ -33,24 +36,46 @@ const TopbarDesktop = props => {
     initialSearchFormValues,
   } = props;
   const [mounted, setMounted] = useState(false);
-
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  const [, updateState] = React.useState();
+  const forceUpdate = React.useCallback(() => updateState({}), []);
+
+  const [category, setCategory] = useState('');
+  const [genCats, setGenCats] = useState(config.custom.generalCategories);
+  let search;
+
+  function createSearchBar() {
+    return (
+        <TopbarSearchForm
+          className={css.searchLink}
+          desktopInputRoot={css.topbarSearchWithLeftPadding}
+          onSubmit={onSearchSubmit}
+          initialValues={initialSearchFormValues}
+          dropdown={topbarDropDown}
+        />
+    );
+  }
+
+  const onDropDownClick  = selectedText => {
+    const newCategory = selectedText === 'Clear' ? 'Categories' : selectedText;
+    setCategory(newCategory);
+    const newGenCats = Object.assign(genCats, {label: newCategory});
+    setGenCats(newGenCats);
+    search = createSearchBar();
+    forceUpdate();
+  }
+
+  const topbarDropDown = <TopbarDropDown onClick={onDropDownClick} generalCategories={genCats}/>;
 
   const authenticatedOnClientSide = mounted && isAuthenticated;
   const isAuthenticatedOrJustHydrated = isAuthenticated || !mounted;
 
   const classes = classNames(rootClassName || css.root, className);
 
-  const search = (
-    <TopbarSearchForm
-      className={css.searchLink}
-      desktopInputRoot={css.topbarSearchWithLeftPadding}
-      onSubmit={onSearchSubmit}
-      initialValues={initialSearchFormValues}
-    />
-  );
+  search = createSearchBar();
 
   const notificationDot = notificationCount > 0 ? <div className={css.notificationDot} /> : null;
 

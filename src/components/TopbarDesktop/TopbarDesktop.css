@@ -98,6 +98,11 @@
   }
 }
 
+.dropdown {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .search {
   @apply --marketplaceH4FontStyles;
   @apply --TopbarDesktop_label;
