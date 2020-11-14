@@ -82,7 +82,7 @@ export const LandingPageComponent = props => {
                 <SectionWhatIsHotpatch />
               </div>
             </li>
-            <li className={classNames(css.section, css.hideOnMobile)}>
+            <li className={css.section}>
               <div className={css.sectionContent}>
                 <SectionTestimonials />
               </div>

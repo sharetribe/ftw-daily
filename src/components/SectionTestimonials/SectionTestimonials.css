@@ -8,10 +8,6 @@
 .testimonialsSection {
   padding: 0 1.25rem;
   margin: 0 auto;
-  display: none;
-  @media (--viewportMedium) {
-    display: block;
-  }
 }
 
 .testimonialsSection .testimonials {
@@ -19,6 +15,17 @@
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 1.25rem;
   padding-top: 40px;
+}
+
+.testimonialsSection .mobileTestimonials {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1.25rem;
+  padding-top: 40px;
+
+  @media (max-width: 630px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 
 .quote {
@@ -46,22 +53,6 @@
   position: absolute;
   bottom: -18px;
   left: 0;
-}
-
-.svgDiv {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 15px;
-}
-
-.svg {
-  width: 70px;
-  height: 70px;
-}
-
-.svg g {
-  fill: var(--marketplaceColorDark);
 }
 
 .testimonialAuthorDiv {
@@ -97,7 +88,7 @@
 /* @media (min-width: 992px) { */
 @media (min-width: 768px) {
   .mobileTestimonials {
-    display: none;
+    display: none !important;
   }
 }
 

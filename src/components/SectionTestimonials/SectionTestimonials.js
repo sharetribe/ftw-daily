@@ -24,7 +24,9 @@ const SectionTestimonials = props => {
           <FormattedMessage id="SectionTestimonials.title" />
         </div>
         <div className={css.mobileTestimonials} id="mT">
-          <MobileTestimonials />
+          {/* <MobileTestimonials /> */}
+          {testimonialSection(quote2, author2, authorJob2, authorLoc2)}
+          {testimonialSection(quote4, author4, authorJob4, authorLoc4)}
         </div>
         <div className={css.testimonials}>
           {testimonialSection(quote1, author1, authorJob1, authorLoc1)}
