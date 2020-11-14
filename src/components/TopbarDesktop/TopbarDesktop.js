@@ -34,7 +34,10 @@ const TopbarDesktop = props => {
     onLogout,
     onSearchSubmit,
     initialSearchFormValues,
+    currentSearchParams,
   } = props;
+  const {generalCategories, categories} = config.custom;
+
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     setMounted(true);
@@ -43,11 +46,14 @@ const TopbarDesktop = props => {
   const [, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []);
 
-  const [category, setCategory] = useState('');
-  const [genCats, setGenCats] = useState(config.custom.generalCategories);
-  let search;
+  const [category, setCategory] = useState('Categories');
+  const [genCats, setGenCats] = useState(generalCategories);
 
   function createSearchBar() {
+    const catKeys = category && category !== 'Categories' ?
+      categories.find(cat => cat.label === category).config.catKeys :
+      '';
+
     return (
         <TopbarSearchForm
           className={css.searchLink}
@@ -55,10 +61,12 @@ const TopbarDesktop = props => {
           onSubmit={onSearchSubmit}
           initialValues={initialSearchFormValues}
           dropdown={topbarDropDown}
+          selectedCategories={catKeys}
         />
     );
   }
 
+  let search;
   const onDropDownClick  = selectedText => {
     const newCategory = selectedText === 'Clear' ? 'Categories' : selectedText;
     setCategory(newCategory);
@@ -68,7 +76,13 @@ const TopbarDesktop = props => {
     forceUpdate();
   }
 
-  const topbarDropDown = <TopbarDropDown onClick={onDropDownClick} generalCategories={genCats}/>;
+  const topbarDropDown =
+    <TopbarDropDown
+      onClick={onDropDownClick}
+      generalCategories={genCats}
+      currentSearchParams={currentSearchParams}
+      initialValues={initialSearchFormValues}
+    />;
 
   const authenticatedOnClientSide = mounted && isAuthenticated;
   const isAuthenticatedOrJustHydrated = isAuthenticated || !mounted;

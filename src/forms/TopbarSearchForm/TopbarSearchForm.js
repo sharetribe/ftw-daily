@@ -22,7 +22,7 @@ class TopbarSearchFormComponent extends Component {
       // `handleSubmit` prop for submitting. We want to autosubmit
       // when a place is selected, and don't require any extra
       // validations for the form.
-      this.props.onSubmit({ location });
+      this.props.onSubmit({ location, categories: this.props.selectedCategories });
       // blur search input to hide software keyboard
       if (this.searchInput) {
         this.searchInput.blur();

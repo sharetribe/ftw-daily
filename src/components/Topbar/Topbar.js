@@ -98,15 +98,19 @@ class TopbarComponent extends Component {
   handleSubmit(values) {
     const { currentSearchParams } = this.props;
     const { search, selectedPlace } = values.location;
+    const { categories } = values;
     const { history } = this.props;
     const { origin, bounds } = selectedPlace;
     const originMaybe = config.sortSearchByDistance ? { origin } : {};
-    const searchParams = {
+    let searchParams = {
       ...currentSearchParams,
       ...originMaybe,
       address: search,
       bounds,
     };
+    if (categories) {
+      searchParams['pub_category'] = categories;
+    }
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, searchParams));
   }
 
@@ -234,6 +238,7 @@ class TopbarComponent extends Component {
             notificationCount={notificationCount}
             onLogout={this.handleLogout}
             onSearchSubmit={this.handleSubmit}
+            currentSearchParams={this.props.currentSearchParams}
           />
         </div>
         <Modal

@@ -8,10 +8,19 @@ import css from './TopbarDesktop.css';
 const FILTER_DROPDOWN_OFFSET = -14;
 
 class TopbarDropDown extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {currentPath: ''}
+    // this.getHandleChangedValueFn = this.getHandleChangedValueFn.bind(this);
+  }
+
   componentDidUpdate() {
     const dropdown_cont = document.getElementById('cat-drop-down');
+    this.checkNewPageLoad();
 
-    if (dropdown_cont) {
+    if (window.location.pathname === '/s') {
+      dropdown_cont.style.display = 'none';   // hide on search page.
+    } else if (dropdown_cont) {
       let dropdown = dropdown_cont.firstChild;
       const options = [...dropdown.getElementsByTagName("li")];
 
@@ -23,7 +32,15 @@ class TopbarDropDown extends Component {
           thisBtn.onclick = () => this.props.onClick(thisBtn.textContent);
         });
         dropdown.style.top = "-55px";
+        dropdown_cont.style.display = 'flex';
       }
+    }
+  }
+
+  checkNewPageLoad() {
+    if (window.location.pathname !== this.state.currentPath) {
+      this.setState({currentPath: window.location.pathname});
+      this.props.onClick('Clear');    //reset the dropdown
     }
   }
 
@@ -40,6 +57,8 @@ class TopbarDropDown extends Component {
             key={`SearchFiltersPrimary.${generalCategories.id}`}
             idPrefix="SearchFiltersPrimary"
             filterConfig={generalCategories}
+            // urlQueryParams={this.props.currentSearchParams}
+            // initialValues={this.props.initialValues}
             urlQueryParams={this.emptyFunction}
             initialValues={this.emptyFunction}
             getHandleChangedValueFn={this.emptyFunction}

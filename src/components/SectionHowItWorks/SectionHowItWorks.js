@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 
-import {ReactComponent as CalendarIcon} from './svgs/bold-calendar.svg';
+import {ReactComponent as CalendarIcon} from './svgs/new-calendar.svg';
 import {ReactComponent as HandShakeIcon} from './svgs/hand_shake.svg';
 import {ReactComponent as SearchIcon} from './svgs/search.svg';
 import {ReactComponent as MoneyIcon} from './svgs/money.svg';
