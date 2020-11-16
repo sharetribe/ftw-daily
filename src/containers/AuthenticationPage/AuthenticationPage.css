@@ -208,6 +208,13 @@
   margin-left: 20px;
 }
 
+.socialButtonWrapper {
+  margin-bottom: 6px;
+  @media (--viewportMedium) {
+    margin-top: 8px;
+  }
+}
+
 .socialButtonsOr {
   width: 100%;
   height: 32px;

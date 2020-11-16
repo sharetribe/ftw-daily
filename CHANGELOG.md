@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [add] Add support for Google login. This works in the same way as Facebook flow so you can check
+  the [Facebook PR](https://github.com/sharetribe/ftw-daily/pull/1364) for the more details.
+  [#1376](https://github.com/sharetribe/ftw-daily/pull/1376)
 - [fix] Routes component got double rendered due to Redux container HOC. Because navigation could
   happen twice, loadData was also called twice.
   [#1380](https://github.com/sharetribe/ftw-daily/pull/1380)

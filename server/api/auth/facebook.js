@@ -38,7 +38,7 @@ const verifyCallback = (req, accessToken, refreshToken, profile, done) => {
     email,
     firstName: first_name,
     lastName: last_name,
-    accessToken,
+    idpToken: accessToken,
     refreshToken,
     from,
     defaultReturn,

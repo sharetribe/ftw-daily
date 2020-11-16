@@ -1,6 +1,7 @@
 const http = require('http');
 const https = require('https');
 const Decimal = require('decimal.js');
+const log = require('../log');
 const sharetribeSdk = require('sharetribe-flex-sdk');
 
 const CLIENT_ID = process.env.REACT_APP_SHARETRIBE_SDK_CLIENT_ID;
@@ -53,7 +54,8 @@ exports.deserialize = str => {
 };
 
 exports.handleError = (res, error) => {
-  console.error(error);
+  log.error(error, 'local-api-request-failed', error.data);
+
   if (error.status && error.statusText && error.data) {
     const { status, statusText, data } = error;
 
