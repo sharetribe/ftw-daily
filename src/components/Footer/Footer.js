@@ -143,12 +143,6 @@ const Footer = props => {
                    <FormattedMessage id="Footer.searchManchester" />
                  </NamedLink>
                </li>
-
-             </ul>
-           </div>
-
-           <div className={css.searchesExtra}>
-             <ul className={css.list}>
                <li className={css.listItem}>
                  <NamedLink
                    name="SearchPage"
@@ -184,6 +178,22 @@ const Footer = props => {
                </li>
              </ul>
            </div>
+
+           {/* <div className={css.searchesExtra}>
+             <ul className={css.list}>
+               <li className={css.listItem}>
+                 <NamedLink
+                   name="SearchPage"
+                   to={{
+                     search: base_url.replace('CITY', 'Sheffield') + `&bounds=${53.40297225}%2C${-1.43730778}%2C${53.34019056}%2C${-1.51371712}`,
+                   }}
+                   className={css.link}
+                 >
+                   <FormattedMessage id="Footer.searchSheffield" />
+                 </NamedLink>
+               </li>
+             </ul>
+           </div> */}
 
             <div className={css.extraLinks}>
               <div className={css.someLinks}>{socialMediaLinks}</div>

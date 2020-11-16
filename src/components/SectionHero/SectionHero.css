@@ -95,10 +95,12 @@
 
 .heroTextContent {
   margin-left: 24px;
+  margin-right: 24px;
   flex:1;
 
   @media (--viewportMedium) {
     margin-left: 7.5vw;
+    margin-right: 0;
   }
 
   /* Special viewport for adjusting the heroContent's placement */
