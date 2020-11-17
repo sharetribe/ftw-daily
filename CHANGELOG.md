@@ -14,6 +14,12 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+## [v7.0.0] 2020-11-17
+
+This major release renames all the CSS files. If you have made custom components or customized
+existing ones, you should read the related [PR](https://github.com/sharetribe/ftw-daily/pull/1374)
+for more information.
+
 - [change] Update sharetribe-scripts (our fork of create-react-app) to v4.0.0. In addition to
   changes that CRA@v4 brought along,
 
@@ -21,6 +27,8 @@ way to update this template, but currently, we follow a pattern:
   - We also turned on live CSS Custom Properties (CSS Variables).
 
   Read the PR for more info: [#1374](https://github.com/sharetribe/ftw-daily/pull/1374)
+
+  [v7.0.0]: https://github.com/sharetribe/ftw-daily/compare/v6.5.0...v7.0.0
 
 ## [v6.5.0] 2020-11-16
 
