@@ -14,6 +14,14 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [change] Update sharetribe-scripts (our fork of create-react-app) to v4.0.0. In addition to
+  changes that CRA@v4 brought along,
+
+  - We started to use`*.module.css` naming pattern for styles that use CSS Modules preprocessor.
+  - We also turned on live CSS Custom Properties (CSS Variables).
+
+  Read the PR for more info: [#1374](https://github.com/sharetribe/ftw-daily/pull/1374)
+
 ## [v6.5.0] 2020-11-16
 
 - [add] Add support for Google login. This works in the same way as Facebook flow so you can check
