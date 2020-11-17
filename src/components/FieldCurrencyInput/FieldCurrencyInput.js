@@ -23,7 +23,7 @@ import {
 import { propTypes } from '../../util/types';
 import * as log from '../../util/log';
 
-import css from './FieldCurrencyInput.css';
+import css from './FieldCurrencyInput.module.css';
 
 const { Money } = sdkTypes;
 

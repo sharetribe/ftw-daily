@@ -7,7 +7,7 @@ import { ExternalLink, IconAdd, IconClose, InlineTextButton } from '../../compon
 import PayoutDetailsAddress from './PayoutDetailsAddress';
 import PayoutDetailsPersonalDetails from './PayoutDetailsPersonalDetails';
 
-import css from './PayoutDetailsForm.css';
+import css from './PayoutDetailsForm.module.css';
 
 const PayoutDetailsAdditionalPersons = props => {
   const {

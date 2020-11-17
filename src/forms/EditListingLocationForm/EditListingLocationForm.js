@@ -12,7 +12,7 @@ import {
 } from '../../util/validators';
 import { Form, LocationAutocompleteInputField, Button, FieldTextInput } from '../../components';
 
-import css from './EditListingLocationForm.css';
+import css from './EditListingLocationForm.module.css';
 
 const identity = v => v;
 

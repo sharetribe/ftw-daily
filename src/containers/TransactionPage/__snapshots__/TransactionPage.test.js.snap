@@ -19,11 +19,13 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
       className={null}
       rootClassName={null}
     >
-      <div>
+      <div
+        className="root"
+      >
         <injectIntl(TransactionPanelComponent)
           acceptInProgress={false}
           acceptSaleError={null}
-          className=""
+          className="tabContent tabContentVisible"
           currentUser={
             Object {
               "attributes": Object {
@@ -219,7 +221,7 @@ exports[`TransactionPage - Order matches snapshot 1`] = `
       </div>
     </LayoutWrapperMain>
     <LayoutWrapperFooter
-      className={null}
+      className="footer"
       rootClassName={null}
     >
       <injectIntl(Footer) />
@@ -247,11 +249,13 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
       className={null}
       rootClassName={null}
     >
-      <div>
+      <div
+        className="root"
+      >
         <injectIntl(TransactionPanelComponent)
           acceptInProgress={false}
           acceptSaleError={null}
-          className=""
+          className="tabContent tabContentVisible"
           currentUser={
             Object {
               "attributes": Object {
@@ -446,7 +450,7 @@ exports[`TransactionPage - Sale matches snapshot 1`] = `
       </div>
     </LayoutWrapperMain>
     <LayoutWrapperFooter
-      className={null}
+      className="footer"
       rootClassName={null}
     >
       <injectIntl(Footer) />

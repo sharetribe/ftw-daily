@@ -1,0 +1,82 @@
+@import '../../styles/propertySets.css';
+
+.root {
+  outline: none;
+}
+
+.contentWrapper {
+  margin-bottom: 24px;
+}
+
+.buttonsWrapper {
+  display: flex;
+  padding: 0 30px 16px 30px;
+}
+
+.clearButton {
+  @apply --marketplaceH4FontStyles;
+  font-weight: var(--fontWeightMedium);
+  color: var(--matterColorAnti);
+
+  /* Layout */
+  margin: 0 auto 0 0;
+  padding: 0;
+
+  /* Override button styles */
+  outline: none;
+  border: none;
+  cursor: pointer;
+
+  &:focus,
+  &:hover {
+    color: var(--matterColor);
+    transition: width var(--transitionStyleButton);
+  }
+}
+
+.cancelButton {
+  @apply --marketplaceH4FontStyles;
+  font-weight: var(--fontWeightMedium);
+  color: var(--matterColorAnti);
+
+  /* Layout */
+  margin: 0;
+  padding: 0;
+
+  /* Override button styles */
+  outline: none;
+  border: none;
+  cursor: pointer;
+
+  /* clearButton will add all available space between cancelButton,
+   * but some hard coded margin is still needed
+   */
+  margin-left: 48px;
+
+  &:focus,
+  &:hover {
+    color: var(--matterColor);
+    transition: width var(--transitionStyleButton);
+  }
+}
+
+.submitButton {
+  @apply --marketplaceH4FontStyles;
+  font-weight: var(--fontWeightMedium);
+  color: var(--marketplaceColor);
+
+  /* Layout */
+  margin: 0 0 0 19px;
+  padding: 0;
+
+  /* Override button styles */
+  outline: none;
+  border: none;
+  cursor: pointer;
+
+  &:focus,
+  &:hover {
+    color: var(--marketplaceColorDark);
+    transition: width var(--transitionStyleButton);
+  }
+}

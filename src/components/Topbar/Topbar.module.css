@@ -1,0 +1,259 @@
+@import '../../styles/propertySets.css';
+
+.root {
+  width: 100%;
+
+  /* Top Bar's drop shadow should always be visible */
+  z-index: var(--zIndexTopbar);
+  position: relative;
+}
+
+.container {
+  /* Size */
+  width: 100%;
+  height: var(--topbarHeight);
+
+  /* Layout for child components */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  /* fill */
+  background-color: var(--matterColorLight);
+
+  /* shadows */
+  box-shadow: var(--boxShadow);
+
+  @media (--viewportMedium) {
+    display: none;
+  }
+}
+
+.home {
+  display: flex;
+  padding: calc((var(--topbarHeight) - var(--Topbar_logoHeight)) / 2) 24px;
+}
+
+.logoutButton {
+  margin: 0;
+}
+
+/* Child component's size (and positioning) should be given here */
+.menu,
+.searchMenu {
+  /* Font */
+  @apply --marketplaceH5FontStyles;
+  color: var(--matterColor);
+
+  /* Layout */
+  display: flex;
+  width: 66px;
+  margin: 0;
+  border-width: 0px;
+  background-color: transparent;
+
+  /* Hovers */
+  &:enabled {
+    cursor: pointer;
+  }
+  &:enabled:hover,
+  &:enabled:active {
+    background-color: transparent;
+    box-shadow: none;
+  }
+  &:disabled {
+    background-color: transparent;
+    cursor: auto;
+  }
+}
+
+.menu {
+  padding: 15px 24px;
+  position: relative;
+}
+.searchMenu {
+  padding: 12px 24px;
+}
+
+.menuIcon,
+.searchMenuIcon {
+  margin: 9px 0;
+}
+
+.notificationDot {
+  /* Dimensions */
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+
+  /* Position */
+  position: absolute;
+  top: 17px;
+  right: 17px;
+
+  /* Style: red dot with white border */
+  background-color: var(--failColor);
+  border: 2px solid var(--matterColorLight);
+
+  animation-name: notificationPop;
+  animation-duration: 0.1s;
+  animation-delay: 0.1s;
+  animation-fill-mode: forwards;
+
+  animation-timing-function: ease-in;
+  opacity: 0;
+  transform: scale(0);
+}
+
+@keyframes notificationPop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.desktop {
+  display: none;
+
+  @media (--viewportMedium) {
+    display: block;
+  }
+}
+
+/* Icon component styles */
+.rootMenuIcon {
+  fill: var(--matterColor);
+}
+.rootSearchIcon {
+  stroke: var(--matterColor);
+}
+
+.searchContainer {
+  position: relative;
+  height: 100%;
+  margin-top: 94px;
+}
+
+.mobileHelp {
+  color: var(--matterColorAnti);
+  margin: 0 24px;
+
+  /* Absolute position to avoid affecting the layout of the autocomplete
+   predictions list */
+  position: absolute;
+  top: 73px;
+}
+
+/* ================ Modal ================ */
+
+.modalContainer {
+  @apply --marketplaceModalInMobileBaseStyles;
+  padding: 0;
+
+  @media (--viewportMedium) {
+    flex-basis: 576px;
+  }
+}
+
+.missingInformationModal {
+  @apply --marketplaceModalBaseStyles;
+  padding-top: 70px;
+}
+
+/* Title of the modal */
+.modalTitle {
+  @apply --marketplaceModalTitleStyles;
+}
+
+/* Paragraph for the Modal */
+.modalMessage {
+  @apply --marketplaceModalParagraphStyles;
+}
+
+/* Make the email pop */
+.email {
+  font-weight: var(--fontWeightHighlightEmail);
+}
+
+.helperLink {
+  @apply --marketplaceModalHelperLink;
+}
+
+.helperText {
+  @apply --marketplaceModalHelperText;
+}
+
+.error {
+  @apply --marketplaceModalErrorStyles;
+}
+
+.bottomWrapper {
+  @apply --marketplaceModalBottomWrapper;
+
+  /* Align the helper links to the left since there isn't a Primary Button anymore */
+  text-align: left;
+}
+
+.modalIcon {
+  @apply --marketplaceModalIconStyles;
+}
+
+.reminderModalLinkButton {
+  @apply --marketplaceButtonStylesPrimary;
+}
+
+.genericError {
+  position: fixed;
+  top: calc(var(--topbarHeight) + 15px);
+
+  /* Place enough to the right to hide the error */
+  right: -355px;
+  opacity: 0;
+
+  max-width: 340px;
+  margin: 0 15px;
+
+  /* Animate error from the right */
+  transition: all ease-out 0.2s;
+  transition-delay: 1s;
+
+  /* Bleed the bg color from the bottom */
+  padding-bottom: 4px;
+  background-color: var(--marketplaceColor);
+  border-radius: 4px;
+
+  /* Place on top of everything */
+  z-index: var(--zIndexGenericError);
+
+  @media (--viewportMedium) {
+    top: calc(var(--topbarHeightDesktop) + 15px);
+  }
+}
+
+.genericErrorVisible {
+  right: 0;
+  opacity: 1;
+}
+
+.genericErrorContent {
+  padding: 16px 22px;
+  border-radius: 4px;
+  background-color: var(--marketplaceColorLight);
+  border-radius: 4px;
+}
+
+.genericErrorText {
+  @apply --marketplaceH5FontStyles;
+  font-weight: var(--fontWeightSemiBold);
+  margin: 0;
+  color: var(--matterColorLight);
+
+  @media (--viewportMedium) {
+    margin: 0;
+  }
+}

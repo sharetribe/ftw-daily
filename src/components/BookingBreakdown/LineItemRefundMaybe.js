@@ -10,7 +10,7 @@ import {
   LINE_ITEM_PROVIDER_COMMISSION,
 } from '../../util/types';
 
-import css from './BookingBreakdown.css';
+import css from './BookingBreakdown.module.css';
 
 const { Money } = sdkTypes;
 

@@ -1,0 +1,113 @@
+.root {
+}
+
+/* heroContainer gives the height for SectionHero */
+/* Safari has a bug with vw padding inside flexbox. Therefore we need an extra div (container) */
+/* If you've lot of content for the hero, multiple lines of text, make sure to adjust min-heights for each media breakpoint accordingly */
+.heroContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+  height: 67.5vh;
+  max-height: 600px;
+  padding: 0;
+
+  @media (--viewportMedium) {
+    min-height: 500px;
+    height: 70vh;
+    max-height: none;
+  }
+
+  @media (--viewportLarge) {
+    max-height: 800px;
+    min-height: 600px;
+    height: calc(70vh - var(--topbarHeightDesktop));
+  }
+}
+
+.hero {
+  flex-grow: 1;
+  justify-content: flex-end;
+  padding-bottom: 32px;
+
+  @media (--viewportMedium) {
+    padding-bottom: 83px;
+  }
+
+  @media (--viewportLarge) {
+    justify-content: center;
+    padding-top: 60px;
+  }
+}
+
+.sections {
+  margin: 0;
+  padding-top: 1px;
+}
+
+.section {
+  overflow: auto;
+}
+
+/* Square corners for the last section if it's even */
+.section:nth-of-type(2n):last-of-type {
+  @media (--viewportMedium) {
+    border-radius: 4px 4px 0 0;
+  }
+}
+
+/* Every other section has a light background */
+.section:nth-of-type(2n) {
+  background-color: var(--matterColorLight);
+  @media (--viewportMedium) {
+    border-radius: 4px;
+  }
+}
+
+.sectionContent {
+  margin: var(--LandingPage_sectionMarginTop) 24px 51px 24px;
+
+  @media (--viewportMedium) {
+    max-width: 100%;
+    margin: var(--LandingPage_sectionMarginTopMedium) 24px 60px 24px;
+  }
+
+  @media (--viewportLarge) {
+    max-width: 1128px;
+    padding: 0 36px 0 36px;
+    margin: var(--LandingPage_sectionMarginTopLarge) auto 93px auto;
+  }
+
+  @media (--viewportXLarge) {
+    max-width: 1056px;
+    padding: 0;
+  }
+}
+
+.sectionContentFirstChild {
+  composes: sectionContent;
+  margin-top: 3vh;
+}
+
+/* A bar on top of light sections */
+.section:nth-of-type(2n) .sectionContent::before {
+  background: var(--marketplaceColor);
+  content: '';
+  display: block;
+  width: 109px;
+  height: 6px;
+
+  /* Place the bar on top of .sectionContent top margin */
+  position: relative;
+  top: calc(-1 * var(--LandingPage_sectionMarginTop));
+
+  @media (--viewportMedium) {
+    width: 192px;
+    height: 8px;
+    top: calc(-1 * var(--LandingPage_sectionMarginTopMedium));
+  }
+
+  @media (--viewportLarge) {
+    top: calc(-1 * var(--LandingPage_sectionMarginTopLarge));
+  }
+}

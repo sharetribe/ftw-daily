@@ -1,0 +1,77 @@
+.avatarBase {
+  font-family: 'poppins', Helvetica, Arial, sans-serif;
+  border-radius: 50%;
+
+  /* Position possible initials to the center of the component */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Colors */
+  background-image: linear-gradient(
+    -180deg,
+    var(--marketplaceColorLight) 0%,
+    var(--marketplaceColor) 100%
+  );
+  color: var(--matterColorLight);
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+/* Small Avatar */
+
+.root {
+  composes: avatarBase;
+
+  /* Layout */
+  width: 40px;
+  height: 40px;
+}
+
+.initials {
+  font-size: 14px;
+  font-weight: var(--fontWeightBold);
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+
+/* Medium Avatar */
+
+.mediumAvatar {
+  composes: avatarBase;
+
+  /* Fixed dimensions */
+  width: 60px;
+  height: 60px;
+}
+
+.mediumAvatar .initials {
+  font-size: 20px;
+  font-weight: var(--fontWeightSemiBold);
+}
+
+/* Large Avatar */
+
+.largeAvatar {
+  composes: avatarBase;
+
+  /* Fixed dimensions */
+  width: 96px;
+  height: 96px;
+}
+
+.largeAvatar .initials {
+  font-size: 30px;
+  font-weight: var(--fontWeightSemiBold);
+}
+
+.bannedUserIcon {
+  width: 100%;
+  height: 100%;
+}

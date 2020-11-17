@@ -1,0 +1,25 @@
+@import '../../styles/propertySets.css';
+
+.layoutWrapperMain {
+  min-height: calc(100vh - var(--topbarHeight));
+
+  @media (--viewportMedium) {
+    min-height: calc(100vh - var(--topbarHeightDesktop));
+  }
+}
+
+.root {
+  @apply --marketplaceModalRootStyles;
+
+  @media (--viewportMedium) {
+    @apply --backgroundImage;
+  }
+}
+
+.content {
+  @apply --marketplaceModalBaseStyles;
+}
+
+.error {
+  @apply --marketplaceModalErrorStyles;
+}

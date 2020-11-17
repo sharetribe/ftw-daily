@@ -1,0 +1,37 @@
+@import '../../styles/propertySets.css';
+
+.root {
+  padding: 0 24px;
+  margin-bottom: 35px;
+
+  @media (--viewportMedium) {
+    padding: 0;
+    margin-bottom: 52px;
+  }
+}
+
+.title {
+  /* Font */
+  @apply --marketplaceH3FontStyles;
+  color: var(--matterColorAnti);
+
+  margin-top: 0;
+  margin-bottom: 13px;
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 12px;
+  }
+}
+
+.rules {
+  margin-top: 0;
+  margin-bottom: 0;
+
+  /* Preserve newlines, but collapse other whitespace */
+  white-space: pre-line;
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}

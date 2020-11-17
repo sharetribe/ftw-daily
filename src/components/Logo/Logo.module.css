@@ -1,0 +1,5 @@
+.logoMobile {
+  & path {
+    fill: var(--marketplaceColor);
+  }
+}

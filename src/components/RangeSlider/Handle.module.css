@@ -1,0 +1,38 @@
+.rootTouchBuffer {
+  /* Position */
+  position: absolute;
+  top: 50%;
+  margin-top: -22px;
+  margin-left: -22px;
+
+  /* Layout */
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+}
+
+.visibleHandle {
+  /* Position */
+  position: absolute;
+  top: 12px;
+  margin-left: 12px;
+
+  /* Layout */
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--marketplaceColor);
+  border-radius: 50%;
+  background-color: var(--matterColorLight);
+  cursor: pointer;
+
+  &:hover  {
+    transform: scale(1.1);
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.3);
+  }
+}
+
+.dragged {
+  transform: scale(1.1);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.3);
+}

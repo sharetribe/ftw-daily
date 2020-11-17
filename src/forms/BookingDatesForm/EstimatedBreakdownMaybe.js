@@ -36,7 +36,7 @@ import { unitDivisor, convertMoneyToNumber, convertUnitToSubUnit } from '../../u
 import config from '../../config';
 import { BookingBreakdown } from '../../components';
 
-import css from './BookingDatesForm.css';
+import css from './BookingDatesForm.module.css';
 
 const { Money, UUID } = sdkTypes;
 

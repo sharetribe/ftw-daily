@@ -1,0 +1,482 @@
+@import '../../styles/propertySets.css';
+
+.root {
+  position: relative;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @media (--viewportLarge) {
+    flex-direction: row;
+    max-width: 1128px;
+    margin: 0 auto 57px auto;
+    padding: 0 36px;
+  }
+
+  @media (--viewportXLarge) {
+    max-width: 1056px;
+    padding: 0;
+  }
+}
+
+.txInfo {
+  margin-bottom: 210px;
+
+  @media (--viewportLarge) {
+    flex-basis: 538px;
+    flex-grow: 0;
+    flex-shrink: 1;
+    margin-right: 56px;
+    margin-bottom: 0;
+  }
+}
+
+.genericError {
+  color: var(--failColor);
+  margin: 24px 24px 0 24px;
+
+  @media (--viewportMedium) {
+    margin: 32px 24px 0 24px;
+  }
+  @media (--viewportLarge) {
+    margin: 32px 0 0 0;
+  }
+}
+
+/* DetailCardImage subcomponent */
+.detailCardImageWrapper {
+  /* Layout */
+  display: none;
+  width: 100%;
+  position: relative;
+
+  @media (--viewportLarge) {
+    display: block;
+    max-height: 268px;
+    overflow-y: hidden;
+  }
+}
+
+/* Firefox doesn't support image aspect ratio inside flexbox */
+.aspectWrapper {
+  padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
+  background-color: var(--matterColorNegative); /* Loading BG color */
+}
+
+.rootForImage {
+  /* Layout - image will take space defined by aspect ratio wrapper */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+
+  @media (--viewportLarge) {
+    border-radius: 2px 2px 0 0;
+  }
+}
+
+.avatarWrapper {
+  /* Position (over the listing image)*/
+  margin-left: 24px;
+  margin-top: -30px;
+
+  /* Rendering context to the same lavel as listing image */
+  position: relative;
+  /* Flex would give too much width by default. */
+  width: 60px;
+
+  @media (--viewportMedium) {
+    margin-top: -32px;
+    padding: 2px 0;
+  }
+  @media (--viewportLarge) {
+    margin-left: 48px;
+    width: unset;
+    padding: 2px 0;
+  }
+}
+
+/* Passed-in props for DetailCardImage subcomponent */
+.imageWrapperMobile {
+  position: relative;
+
+  @media (--viewportLarge) {
+    display: none;
+  }
+}
+
+.avatarWrapperMobile {
+  composes: avatarWrapper;
+
+  @media (--viewportLarge) {
+    display: none;
+  }
+}
+
+.avatarWrapperDesktop {
+  composes: avatarWrapper;
+  display: none;
+
+  @media (--viewportLarge) {
+    display: block;
+  }
+}
+
+.avatarWrapperProviderDesktop {
+  display: none;
+
+  @media (--viewportLarge) {
+    display: block;
+    margin-top: 119px;
+  }
+}
+.avatarDesktop {
+  @media (--viewportLarge) {
+    display: flex;
+  }
+}
+
+/* PanelHeadings subcomponent */
+.headingOrder {
+  margin: 29px 24px 0 24px;
+
+  @media (--viewportMedium) {
+    max-width: 80%;
+    margin: 24px 24px 0 24px;
+    padding: 1px 0 7px 0;
+  }
+
+  @media (--viewportLarge) {
+    max-width: 100%;
+    margin: 152px 0 0 0;
+    padding: 0;
+  }
+}
+
+.headingSale {
+  margin: 18px 24px 0 24px;
+  padding: 5px 0 1px 0;
+
+  @media (--viewportMedium) {
+    max-width: 80%;
+    margin: 24px 24px 0 24px;
+    padding: 1px 0 7px 0;
+  }
+
+  @media (--viewportLarge) {
+    max-width: 100%;
+    margin: 42px 0 0 0;
+    padding: 0;
+  }
+}
+
+.mainTitle {
+  display: block;
+}
+
+.transactionInfoMessage {
+  margin: 18px 24px 0 24px;
+
+  @media (--viewportMedium) {
+    margin: 23px 24px 0 24px;
+  }
+  @media (--viewportLarge) {
+    margin: 23px 0 0 0;
+  }
+}
+
+/* Container for booking details in mobile layout */
+.bookingDetailsMobile {
+  margin-top: 47px;
+
+  @media (--viewportMedium) {
+    margin-top: 40px;
+    padding: 4px 0 0px 0;
+  }
+  @media (--viewportLarge) {
+    display: none;
+  }
+}
+
+/* "aside" section in desktop layout */
+.asideDesktop {
+  margin: 1px 0 0 0;
+
+  /**
+   * Aside is visible on mobile layout too, since it includes BookingPanel component.
+   * It might get rendered as a Modal in mobile layout.
+   */
+
+  @media (--viewportLarge) {
+    margin: 123px 0 0 0;
+  }
+}
+
+.detailCard {
+  @media (--viewportLarge) {
+    position: sticky;
+    top: -200px; /* This is a hack to showcase how the component would look when the image isn't sticky */
+    width: 409px;
+    background-color: var(--matterColorLight);
+    border: 1px solid var(--matterColorNegative);
+    border-radius: 2px;
+    z-index: 1;
+  }
+}
+
+/* DetailCardHeadingsMaybe subcomponent */
+.detailCardHeadings {
+  display: none;
+
+  @media (--viewportLarge) {
+    display: block;
+    margin: 0 48px 33px 48px;
+  }
+}
+
+.detailCardTitle {
+  margin-bottom: 10px;
+
+  @media (--viewportLarge) {
+    margin-top: 14px;
+    margin-bottom: 0;
+  }
+}
+
+.detailCardSubtitle {
+  @apply --marketplaceH5FontStyles;
+
+  margin-top: 0;
+  margin-bottom: 0;
+
+  @media (--viewportLarge) {
+    margin-top: 9px;
+    margin-bottom: 0;
+  }
+}
+
+/* AddressLinkMaybe subcomponent */
+.address {
+  @apply --marketplaceH5FontStyles;
+  color: var(--matterColorAnti);
+  margin: 0;
+}
+
+/* Passed-in props for AddressLinkMaybe subcomponent */
+.addressMobile {
+  @apply --marketplaceH5FontStyles;
+  color: var(--matterColorAnti);
+  margin: 0 24px 24px 24px;
+}
+
+/* BreakdownMaybe subcomponent */
+.breakdownMaybe {
+  /* default "root" class for breakdown container */
+}
+
+.bookingBreakdownTitle {
+  /* Font */
+  color: var(--matterColorAnti);
+
+  margin: 0 24px 0 24px;
+
+  @media (--viewportLarge) {
+    margin: 37px 48px 26px 48px;
+    margin: 32px 48px 24px 48px;
+    padding: 4px 0 4px 0;
+  }
+}
+
+.breakdown {
+  margin: 14px 24px 0 24px;
+
+  @media (--viewportMedium) {
+    margin: 18px 24px 0 24px;
+  }
+  @media (--viewportLarge) {
+    margin: 24px 48px 47px 48px;
+    padding: 6px 0 2px 0;
+  }
+}
+
+.breakdownContainer {
+  display: none;
+
+  @media (--viewportLarge) {
+    display: block;
+  }
+}
+
+/* FeedSection subcomponent */
+.feedHeading {
+  color: var(--matterColorAnti);
+  margin: 0;
+
+  @media (--viewportMedium) {
+    margin: 0;
+  }
+}
+
+.feed {
+  margin-top: 20px;
+}
+
+.messageError {
+  color: var(--failColor);
+  margin: 13px 0 22px 0;
+
+  @media (--viewportMedium) {
+    margin: 13px 0 23px 0;
+  }
+
+  @media (--viewportLarge) {
+    margin: 12px 0 23px 0;
+  }
+}
+
+/* Passed-in props for FeedSection subcomponent */
+.feedContainer {
+  margin: 46px 24px 0 24px;
+
+  @media (--viewportMedium) {
+    margin: 40px 24px 0 24px;
+  }
+  @media (--viewportLarge) {
+    margin: 43px 0 0 0;
+  }
+}
+
+/* Prop to be passed to SendMessageForm component */
+.sendMessageForm {
+  position: relative;
+  margin: 46px 24px 0 24px;
+
+  @media (--viewportMedium) {
+    margin: 49px 24px 0 24px;
+    border-top: 0;
+  }
+  @media (--viewportLarge) {
+    margin: 47px 0 0 0;
+  }
+}
+
+.sendingMessageNotAllowed {
+  color: var(--matterColorAnti);
+
+  position: relative;
+  margin: 46px 24px 0 24px;
+
+  @media (--viewportMedium) {
+    margin: 49px 24px 0 24px;
+    border-top: 0;
+  }
+  @media (--viewportLarge) {
+    margin: 47px 0 0 0;
+  }
+}
+
+/* SaleActionButtonsMaybe subcomponent */
+.actionButtons {
+  /* Position action button row above the footer */
+  z-index: 9;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 18px 24px 18px 24px;
+
+  /* Contain repainting to this component only */
+  /* 3D painting container helps scrolling */
+  transform: translate3d(0, 0, 0);
+
+  box-shadow: var(--boxShadowTop);
+  background-color: white;
+
+  @media (--viewportLarge) {
+    z-index: unset;
+    position: static;
+    box-shadow: none;
+    width: auto;
+    margin: 0 48px 0 48px;
+    padding: 0;
+  }
+}
+
+.actionButtonWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+
+  @media (--viewportLarge) {
+    flex-direction: column;
+  }
+
+  & button:first-child {
+    margin: 0 12px 0 0;
+
+    @media (--viewportLarge) {
+      margin: 8px 0 0 0;
+
+      /* Switch order in desktop layout with accept button being on the top */
+      order: 1;
+    }
+  }
+}
+
+.actionError {
+  @apply --marketplaceH5FontStyles;
+  color: var(--failColor);
+  margin: 0 0 11px 0;
+
+  @media (--viewportMedium) {
+    margin: 0 0 10px 0;
+  }
+  @media (--viewportLarge) {
+    margin: 0;
+  }
+}
+
+.actionErrors {
+  width: 100%;
+  text-align: center;
+
+  @media (--viewportLarge) {
+    position: absolute;
+    top: 151px;
+  }
+}
+
+/* Container for SaleActionButtonsMaybe subcomponent */
+.mobileActionButtons {
+  display: block;
+
+  @media (--viewportLarge) {
+    display: none;
+  }
+}
+
+.desktopActionButtons {
+  display: none;
+
+  @media (--viewportLarge) {
+    display: block;
+    margin-bottom: 48px;
+  }
+}
+
+/* BookingPanel subcompnent */
+.bookingPanel {
+  margin: 16px 48px 48px 48px;
+}
+
+.bookingTitle {
+  /* Font */
+  color: var(--matterColor);
+
+  margin-top: 0;
+  margin-bottom: 1px;
+}

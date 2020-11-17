@@ -1,0 +1,211 @@
+@import '../../styles/propertySets.css';
+
+.root {
+  display: block;
+  position: relative;
+  height: auto;
+  border: 0;
+  padding: 0;
+
+  /* Borders */
+  border-radius: 4px;
+  box-shadow: var(--boxShadowPopupLight);
+
+  transition: var(--transitionStyleButton);
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: var(--boxShadowPopup);
+  }
+}
+
+.anchor {
+  display: block;
+  overflow: hidden;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.card {
+  /**
+   * Since caret is absolutely positioned,
+   * label must have relative to be included to the same rendering layer
+   */
+  position: relative;
+
+  width: 250px;
+  min-height: 207px;
+
+  /* Font */
+  @apply --marketplaceH5FontStyles;
+  color: var(--matterColor);
+
+  background-color: var(--matterColorLight);
+
+  /* Dimensions */
+  margin-top: 0;
+  margin-bottom: 0;
+  transition: var(--transitionStyleButton);
+
+  /* Overwrite dimensions from font styles */
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+/* Overwrite Mapbox's specific font rules */
+.root .card {
+  font-family: 'poppins', Helvetica, Arial, sans-serif;
+  font-weight: var(--fontWeightSemiBold);
+}
+
+.threeToTwoWrapper {
+  /* Layout */
+  display: block;
+  width: 100%;
+  position: relative;
+}
+
+/* Firefox doesn't support image aspect ratio inside flexbox */
+.aspectWrapper {
+  padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
+  background: var(--matterColorNegative); /* Loading BG color */
+}
+
+.rootForImage {
+  /* Layout - image will take space defined by aspect ratio wrapper */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+
+.info {
+  display: flex;
+  padding: 11px 13px;
+}
+
+.price {
+  flex-shrink: 0;
+  font-weight: var(--fontWeightSemiBold);
+  color: var(--marketplaceColor);
+
+  margin-right: 10px;
+}
+
+.name {
+  flex-grow: 1;
+}
+
+.paginationInfo {
+  background-color: var(--marketplaceColor);
+  color: var(--matterColorLight);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: default;
+}
+
+.paginationPage {
+  /* Font */
+  @apply --marketplaceH4FontStyles;
+  font-weight: var(--fontWeightSemiBold);
+  margin-top: 0;
+  margin-bottom: 0;
+
+  /* Overwrite dimensions from font styles */
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.paginationPrev {
+  display: inline-block;
+  width: 36px;
+  height: 40px;
+  border: 0;
+  background-image: url('data:image/svg+xml;utf8,<svg width="7" height="10" viewBox="0 0 7 10" xmlns="http://www.w3.org/2000/svg"><path d="M5.667 1c.094 0 .188.04.254.118.12.14.102.35-.038.47L1.85 5l4.032 3.412c.14.12.158.33.04.47-.12.14-.33.158-.47.04L1.117 5.254C1.043 5.19 1 5.098 1 5s.043-.19.118-.255L5.45 1.08c.064-.054.14-.08.217-.08" stroke="%23FFF" fill="%23FFF" fill-rule="evenodd"/></svg>');
+  background-position: center;
+  border-bottom-left-radius: inherit;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: var(--transitionStyleButton);
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.paginationNext {
+  display: inline-block;
+  width: 36px;
+  height: 40px;
+  border: 0;
+  background-image: url('data:image/svg+xml;utf8,<svg width="7" height="10" viewBox="0 0 7 10" xmlns="http://www.w3.org/2000/svg"><path d="M1.333 9c-.094 0-.188-.04-.254-.118-.12-.14-.102-.35.038-.47L5.15 5 1.118 1.588c-.14-.12-.158-.33-.04-.47.12-.14.33-.158.47-.04l4.334 3.667C5.957 4.81 6 4.902 6 5s-.043.19-.118.255L1.55 8.92c-.064.054-.14.08-.217.08" stroke="%23FFF" fill="%23FFF" fill-rule="evenodd"/></svg>');
+  background-position: center;
+  border-bottom-right-radius: inherit;
+  cursor: pointer;
+
+  opacity: 0.5;
+  transition: var(--transitionStyleButton);
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.caretShadow {
+  /* Caret / arrow dimensions and position */
+  width: 6px;
+  height: 6px;
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  margin-left: -3px;
+  transform: rotate(45deg);
+
+  /* Caret should have same box-shadow as label */
+  box-shadow: var(--boxShadowPopupLight);
+}
+
+.caret {
+  /* Caret / arrow dimensions and position */
+  width: 6px;
+  height: 6px;
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  margin-left: -3px;
+  transform: rotate(45deg);
+
+  /* Caret should have same bg-color and border as label */
+  background-color: var(--matterColorLight);
+  border-right-style: solid;
+  border-right-color: var(--matterColorNegative);
+  border-right-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: var(--matterColorNegative);
+  border-bottom-width: 1px;
+}
+
+.caretWithCarousel {
+  background-color: var(--marketplaceColor);
+  border-right-color: var(--marketplaceColor);
+  border-bottom-color: var(--marketplaceColor);
+}
+
+.borderRadiusInheritTop {
+  border-top-right-radius: inherit;
+  border-top-left-radius: inherit;
+}
+
+.borderRadiusInheritBottom {
+  border-bottom-right-radius: inherit;
+  border-bottom-left-radius: inherit;
+}

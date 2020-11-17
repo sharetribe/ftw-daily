@@ -1,0 +1,136 @@
+@import '../../styles/propertySets.css';
+
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.lineItem {
+  @apply --marketplaceH4FontStyles;
+  margin: 0;
+
+  @media (--viewportMedium) {
+    padding-top: 6px;
+    padding-bottom: 2px;
+  }
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.bookingPeriod {
+  flex: 1 1;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-bottom: 6px;
+
+  @media (--viewportMedium) {
+    padding-bottom: 8px;
+  }
+}
+
+.bookingPeriodSectionRigth {
+  text-align: right;
+}
+
+.dayLabel {
+  @apply --marketplaceH5FontStyles;
+  margin: 0;
+  color: var(--matterColorAnti);
+  line-height: 24px;
+  padding-top: 2px;
+  padding-bottom: 4px;
+
+  @media (--viewportMedium) {
+    padding-top: 1px;
+    padding-bottom: 7px;
+  }
+}
+
+.dayInfo {
+  @apply --marketplaceButtonFontStyles;
+}
+
+.subTotalLineItem {
+  @apply --marketplaceH4FontStyles;
+  font-weight: var(--fontWeightBold);
+  margin: 0;
+  padding: 5px 0 1px 0;
+
+  @media (--viewportMedium) {
+    padding: 6px 0 2px 0;
+  }
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.lineItemTotal {
+  @apply --marketplaceH4FontStyles;
+  margin: 0;
+  padding-top: 6px;
+  padding-bottom: 6px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  @media (--viewportMedium) {
+    padding-bottom: 2px;
+  }
+}
+.itemLabel {
+  @apply --marketplaceSmallFontStyles;
+  flex: 1;
+}
+
+.itemValue {
+  @apply --marketplaceSmallFontStyles;
+  margin: 0 0 0 10px;
+}
+
+.totalDivider {
+  /* dimensions */
+  width: 100%;
+  height: 1px;
+  margin: 12px 0 5px 0;
+
+  border: none;
+  background-color: var(--matterColorNegative);
+
+  @media (--viewportMedium) {
+    margin: 7px 0 0px 0;
+  }
+}
+
+.totalLabel {
+  @apply --marketplaceSmallFontStyles;
+}
+
+.totalPrice {
+  @apply --marketplaceButtonFontStyles;
+  margin: 0 0 0 10px;
+  padding-top: 0px;
+}
+
+.feeInfo {
+  @apply --marketplaceTinyFontStyles;
+  flex-shrink: 0;
+  margin: 0;
+  color: var(--matterColorAnti);
+  padding-top: 4px;
+  padding-bottom: 14px;
+
+  @media (--viewportMedium) {
+    padding-top: 11px;
+    padding-bottom: 21px;
+  }
+}

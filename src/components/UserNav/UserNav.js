@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { ACCOUNT_SETTINGS_PAGES } from '../../routeConfiguration';
 import { LinkTabNavHorizontal } from '../../components';
 
-import css from './UserNav.css';
+import css from './UserNav.module.css';
 
 const UserNav = props => {
   const { className, rootClassName, selectedPageName } = props;

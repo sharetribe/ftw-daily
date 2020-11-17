@@ -4,7 +4,7 @@ import { injectIntl, intlShape } from '../../util/reactIntl';
 import { parseDateFromISO8601, stringifyDateToISO8601 } from '../../util/dates';
 
 import { FieldDateRangeController, FilterPopup, FilterPlain } from '../../components';
-import css from './BookingDateRangeFilter.css';
+import css from './BookingDateRangeFilter.module.css';
 
 const getDatesQueryParamName = queryParamNames => {
   return Array.isArray(queryParamNames)

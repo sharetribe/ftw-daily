@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import css from './StyleguidePage.css';
+import css from './StyleguidePage.module.css';
 
 const Font = props => {
   const { component: TextComponent, description, styling } = props;

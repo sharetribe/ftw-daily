@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '../../components';
 
-import css from './Discussion.css';
+import css from './Discussion.module.css';
 
 const Message = props => {
   const { date, author, text } = props;

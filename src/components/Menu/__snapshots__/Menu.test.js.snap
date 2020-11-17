@@ -2,20 +2,20 @@
 
 exports[`Menu matches snapshot 1`] = `
 <div
-  className=""
+  className="root"
   onBlur={[Function]}
   onKeyDown={[Function]}
   tabIndex={0}
 >
   <button
-    className=""
+    className="root"
     onBlur={[Function]}
     onClick={[Function]}
   >
     Label
   </button>
   <div
-    className=""
+    className="root isClosed"
     style={
       Object {
         "left": "-10000px",
@@ -23,16 +23,16 @@ exports[`Menu matches snapshot 1`] = `
     }
   >
     <ul
-      className=""
+      className="content"
     >
       <li
-        className=""
+        className="root"
         role="menuitem"
       >
         Menu item 1
       </li>
       <li
-        className=""
+        className="root"
         role="menuitem"
       >
         Menu item 2

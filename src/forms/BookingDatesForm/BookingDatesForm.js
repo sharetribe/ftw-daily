@@ -12,7 +12,7 @@ import config from '../../config';
 import { Form, IconSpinner, PrimaryButton, FieldDateRangeInput } from '../../components';
 import EstimatedBreakdownMaybe from './EstimatedBreakdownMaybe';
 
-import css from './BookingDatesForm.css';
+import css from './BookingDatesForm.module.css';
 
 const identity = v => v;
 

@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import { Form, PrimaryButton, FieldTextInput, NamedLink } from '../../components';
 import * as validators from '../../util/validators';
 
-import css from './LoginForm.css';
+import css from './LoginForm.module.css';
 
 const LoginFormComponent = props => (
   <FinalForm

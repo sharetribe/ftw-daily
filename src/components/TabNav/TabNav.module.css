@@ -1,0 +1,84 @@
+@import '../../styles/propertySets.css';
+
+.root {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+}
+
+.tab {
+  margin-left: 16px;
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  @media (--viewportLarge) {
+    margin-left: 24px;
+  }
+}
+
+.link {
+  display: inline-block;
+  white-space: nowrap;
+
+  /* Font */
+  @apply --marketplaceTabNavFontStyles;
+
+  color: var(--matterColor);
+  padding-bottom: 10px;
+  padding-top: 10px;
+
+  /* push tabs against bottom of tab bar */
+  margin-top: auto;
+
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-bottom-color: transparent;
+
+  transition: var(--transitionStyleButton);
+  background-image: url("data:image/svg+xml;utf8,<svg width='4' height='32' viewBox='0 0 4 32' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h4v32H0z' fill='var(--marketplaceColorEncoded)' fill-rule='evenodd'/></svg>");
+  background-position: calc(var(--TabNav_linkWidth) + 4px) center; /* SelectedLink's width (200px) + border thickness (4px) = 204px */
+
+  &:hover {
+    text-decoration: none;
+    color: var(--matterColorDark);
+  }
+
+  @media (--viewportLarge) {
+    width: var(--TabNav_linkWidth);
+    border-bottom-width: 0px;
+    margin-top: 0;
+    margin-bottom: 16px;
+
+    padding-top: 6px; /* Drop the text to adjust it to correct baseline */
+    padding-bottom: 2px;
+
+    &:hover {
+      background-image: url("data:image/svg+xml;utf8,<svg width='4' height='32' viewBox='0 0 4 32' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h4v32H0z' fill='var(--marketplaceColorEncoded)' fill-rule='evenodd'/></svg>");
+      background-position: right center;
+    }
+  }
+}
+
+.selectedLink {
+  border-bottom-color: var(--matterColorDark);
+  color: var(--matterColorDark);
+
+  @media (--viewportLarge) {
+    width: var(--TabNav_linkWidth);
+    background-image: url("data:image/svg+xml;utf8,<svg width='4' height='32' viewBox='0 0 4 32' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h4v32H0z' fill='%23000' fill-rule='evenodd'/></svg>");
+    background-position: right center;
+
+    &:hover {
+      background-image: url("data:image/svg+xml;utf8,<svg width='4' height='32' viewBox='0 0 4 32' xmlns='http://www.w3.org/2000/svg'><path d='M0 0h4v32H0z' fill='%23000' fill-rule='evenodd'/></svg>");
+      background-position: right center;
+    }
+  }
+}
+
+.disabled {
+  pointer-events: none;
+  color: var(--matterColorAnti);
+  text-decoration: none;
+}

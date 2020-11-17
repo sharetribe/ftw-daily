@@ -1,0 +1,40 @@
+.fieldRoot {
+}
+
+.inputRoot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.selectWrapper {
+  flex-basis: calc(33% - 12px);
+}
+
+.select {
+  display: inline-block;
+
+  /* Border */
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-bottom-color: var(--attentionColor);
+
+  &:hover,
+  &:focus {
+    border-bottom-color: var(--matterColorDark);
+    outline: none;
+  }
+}
+
+.notSet {
+  color: var(--matterColorAnti);
+}
+
+.selectSuccess {
+  color: var(--matterColor);
+  border-bottom-color: var(--successColor);
+}
+
+.selectError {
+  border-bottom-color: var(--failColor);
+}

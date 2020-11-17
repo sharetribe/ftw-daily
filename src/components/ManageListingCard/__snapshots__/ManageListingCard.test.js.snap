@@ -2,19 +2,22 @@
 
 exports[`ManageListingCard matches snapshot 1`] = `
 <div
-  className=""
+  className="root"
 >
   <div
+    className="threeToTwoWrapper"
     onClick={[Function]}
     tabIndex={0}
   >
-    <div>
+    <div
+      className="aspectWrapper"
+    >
       <ResponsiveImage
         alt="listing1 title"
         className={null}
         image={null}
         noImageMessage={null}
-        rootClassName={null}
+        rootClassName="rootForImage"
         sizes={null}
         variants={
           Array [
@@ -25,23 +28,31 @@ exports[`ManageListingCard matches snapshot 1`] = `
       />
     </div>
     <div
-      className=""
+      className="menuOverlayWrapper"
     >
       <div
-        className=""
+        className="menuOverlay"
       />
-      <div>
+      <div
+        className="menuOverlayContent"
+      >
         <FormattedMessage
           id="ManageListingCard.viewListing"
           values={Object {}}
         />
       </div>
     </div>
-    <div>
-      <div />
-      <div>
+    <div
+      className="menubarWrapper"
+    >
+      <div
+        className="menubarGradient"
+      />
+      <div
+        className="menubar"
+      >
         <Menu
-          className="undefined"
+          className="menu cardIsOpen"
           contentPlacementOffset={-12}
           contentPosition="left"
           isOpen={false}
@@ -50,15 +61,17 @@ exports[`ManageListingCard matches snapshot 1`] = `
           useArrow={false}
         >
           <MenuLabel
-            className={null}
+            className="menuLabel"
             isOpen={false}
-            isOpenClassName={null}
+            isOpenClassName="listingMenuIsOpen"
             onToggleActive={null}
             rootClassName=""
           >
-            <div>
+            <div
+              className="iconWrapper"
+            >
               <MenuIcon
-                className={null}
+                className="menuIcon"
                 isActive={false}
               />
             </div>
@@ -69,7 +82,7 @@ exports[`ManageListingCard matches snapshot 1`] = `
             contentClassName={null}
             contentRef={null}
             isOpen={false}
-            rootClassName=""
+            rootClassName="menuContent"
             style={null}
           >
             <MenuItem
@@ -79,7 +92,7 @@ exports[`ManageListingCard matches snapshot 1`] = `
             >
               <InlineTextButton
                 onClick={[Function]}
-                rootClassName=""
+                rootClassName="menuItem"
               >
                 <FormattedMessage
                   id="ManageListingCard.closeListing"
@@ -92,25 +105,36 @@ exports[`ManageListingCard matches snapshot 1`] = `
       </div>
     </div>
   </div>
-  <div>
-    <div>
+  <div
+    className="info"
+  >
+    <div
+      className="price"
+    >
       <div
+        className="priceValue"
         title={55}
       >
         55
       </div>
-      <div>
+      <div
+        className="perUnit"
+      >
         <FormattedMessage
           id="ManageListingCard.perNight"
           values={Object {}}
         />
       </div>
     </div>
-    <div>
-      <div>
+    <div
+      className="mainInfo"
+    >
+      <div
+        className="titleWrapper"
+      >
         <InlineTextButton
           onClick={[Function]}
-          rootClassName=""
+          rootClassName="title"
         >
           <span
             key="1"
@@ -127,8 +151,11 @@ exports[`ManageListingCard matches snapshot 1`] = `
         </InlineTextButton>
       </div>
     </div>
-    <div>
+    <div
+      className="manageLinks"
+    >
       <NamedLink
+        className="manageLink"
         name="EditListingPage"
         params={
           Object {
@@ -144,10 +171,13 @@ exports[`ManageListingCard matches snapshot 1`] = `
           values={Object {}}
         />
       </NamedLink>
-      <span>
+      <span
+        className="manageLinksSeparator"
+      >
          • 
       </span>
       <NamedLink
+        className="manageLink"
         name="EditListingPage"
         params={
           Object {

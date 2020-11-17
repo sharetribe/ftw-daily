@@ -1,0 +1,7 @@
+.root {
+  fill: var(--matterColor);
+  transition: var(--transitionStyleButton);
+  &:hover {
+    fill: var(--marketplaceColor);
+  }
+}

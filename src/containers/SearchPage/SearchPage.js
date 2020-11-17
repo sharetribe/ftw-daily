@@ -25,7 +25,7 @@ import {
   createSearchResultSchema,
 } from './SearchPage.helpers';
 import MainPanel from './MainPanel';
-import css from './SearchPage.css';
+import css from './SearchPage.module.css';
 
 // Pagination page size might need to be dynamic on responsive page layouts
 // Current design has max 3 columns 12 is divisible by 2 and 3
@@ -161,7 +161,6 @@ export class SearchPageComponent extends Component {
 
     // N.B. openMobileMap button is sticky.
     // For some reason, stickyness doesn't work on Safari, if the element is <button>
-    /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <Page
         scrollingDisabled={scrollingDisabled}
@@ -221,7 +220,6 @@ export class SearchPageComponent extends Component {
         </div>
       </Page>
     );
-    /* eslint-enable jsx-a11y/no-static-element-interactions */
   }
 }
 

@@ -12,7 +12,7 @@ import { CookieConsent } from '../../components';
 
 import facebookImage from '../../assets/saunatimeFacebook-1200x630.jpg';
 import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg';
-import css from './Page.css';
+import css from './Page.module.css';
 
 const preventDefault = e => {
   e.preventDefault();

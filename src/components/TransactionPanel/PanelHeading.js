@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { createSlug, stringify } from '../../util/urlHelpers';
 import { NamedLink } from '../../components';
 
-import css from './TransactionPanel.css';
+import css from './TransactionPanel.module.css';
 
 export const HEADING_ENQUIRED = 'enquired';
 export const HEADING_PAYMENT_PENDING = 'pending-payment';

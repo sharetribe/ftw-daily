@@ -3,7 +3,7 @@ import { arrayOf, bool, func, node, object, shape, string } from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from '../../util/reactIntl';
 
-import css from './SelectSingleFilterPlain.css';
+import css from './SelectSingleFilterPlain.module.css';
 
 const getQueryParamName = queryParamNames => {
   return Array.isArray(queryParamNames) ? queryParamNames[0] : queryParamNames;

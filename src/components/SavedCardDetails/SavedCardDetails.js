@@ -15,7 +15,7 @@ import {
   MenuContent,
   Modal,
 } from '../../components';
-import css from './SavedCardDetails.css';
+import css from './SavedCardDetails.module.css';
 
 const DEFAULT_CARD = 'defaultCard';
 const REPLACE_CARD = 'replaceCard';

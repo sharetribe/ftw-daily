@@ -22,7 +22,7 @@ import { ensureTimeSlot } from '../../util/data';
 
 import NextMonthIcon from './NextMonthIcon';
 import PreviousMonthIcon from './PreviousMonthIcon';
-import css from './DateInput.css';
+import css from './DateInput.module.css';
 
 export const HORIZONTAL_ORIENTATION = 'horizontal';
 export const ANCHOR_LEFT = 'left';

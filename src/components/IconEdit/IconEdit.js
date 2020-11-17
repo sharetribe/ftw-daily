@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import css from './IconEdit.css';
+import css from './IconEdit.module.css';
 
 const IconEdit = props => {
   const { rootClassName, className, pencilClassName } = props;

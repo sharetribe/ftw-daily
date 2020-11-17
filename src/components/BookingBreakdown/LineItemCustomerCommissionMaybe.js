@@ -5,7 +5,7 @@ import { formatMoney } from '../../util/currency';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { LINE_ITEM_CUSTOMER_COMMISSION, propTypes } from '../../util/types';
 
-import css from './BookingBreakdown.css';
+import css from './BookingBreakdown.module.css';
 
 const { Money } = sdkTypes;
 

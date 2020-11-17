@@ -24,7 +24,7 @@ import LineItemRefundMaybe from './LineItemRefundMaybe';
 import LineItemTotalPrice from './LineItemTotalPrice';
 import LineItemUnknownItemsMaybe from './LineItemUnknownItemsMaybe';
 
-import css from './BookingBreakdown.css';
+import css from './BookingBreakdown.module.css';
 
 export const BookingBreakdownComponent = props => {
   const {

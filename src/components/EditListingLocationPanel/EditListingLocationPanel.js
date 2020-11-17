@@ -7,7 +7,7 @@ import { ensureOwnListing } from '../../util/data';
 import { ListingLink } from '../../components';
 import { EditListingLocationForm } from '../../forms';
 
-import css from './EditListingLocationPanel.css';
+import css from './EditListingLocationPanel.module.css';
 
 class EditListingLocationPanel extends Component {
   constructor(props) {

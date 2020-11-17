@@ -21,7 +21,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import { MenuContent, MenuLabel } from '../../components';
-import css from './Menu.css';
+import css from './Menu.module.css';
 
 const KEY_CODE_ESCAPE = 27;
 const CONTENT_PLACEMENT_OFFSET = 0;
@@ -33,8 +33,6 @@ const isControlledMenu = (isOpenProp, onToggleActiveProp) => {
   return isOpenProp !== null && onToggleActiveProp !== null;
 };
 
-// This should work, but it doesn't <div className="foo" onClick={() => {}} role="button" />
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 class Menu extends Component {
   constructor(props) {
     super(props);
@@ -206,7 +204,6 @@ class Menu extends Component {
     );
   }
 }
-/* eslint-enable jsx-a11y/no-static-element-interactions */
 
 Menu.defaultProps = {
   className: null,

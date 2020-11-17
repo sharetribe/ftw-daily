@@ -1,0 +1,39 @@
+@import '../../styles/propertySets.css';
+
+.root {
+  @apply --marketplaceModalFormRootStyles;
+
+  justify-content: flex-start;
+
+  @media (--viewportMedium) {
+    justify-content: space-between;
+  }
+}
+
+.bottomWrapper {
+  @apply --marketplaceModalBottomWrapper;
+}
+
+/* ================ Typography ================ */
+
+/* Title of the modal */
+.modalTitle {
+  @apply --marketplaceModalTitleStyles;
+}
+
+/* Paragraph for the Modal */
+.modalMessage {
+  @apply --marketplaceModalParagraphStyles;
+}
+
+.error {
+  @apply --marketplaceModalErrorStyles;
+}
+
+.submitButton {
+  @apply --marketplaceButtonStylesPrimary;
+}
+
+.modalIcon {
+  @apply --marketplaceModalIconStyles;
+}

@@ -12,7 +12,7 @@ import { ValidationError } from '../../components';
 import { propTypes } from '../../util/types';
 
 import DateInput from './DateInput';
-import css from './FieldDateInput.css';
+import css from './FieldDateInput.module.css';
 
 const MAX_MOBILE_SCREEN_WIDTH = 768;
 

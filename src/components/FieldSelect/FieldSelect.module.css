@@ -1,0 +1,24 @@
+.root {
+}
+
+.select {
+  color: var(--matterColorAnti);
+  border-bottom-color: var(--attentionColor);
+  padding-right: 20px;
+
+  & > option {
+    color: var(--matterColor);
+  }
+  & > option:disabled {
+    color: var(--matterColorAnti);
+  }
+}
+
+.selectSuccess {
+  color: var(--matterColor);
+  border-bottom-color: var(--successColor);
+}
+
+.selectError {
+  border-bottom-color: var(--failColor);
+}

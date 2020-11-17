@@ -1,0 +1,59 @@
+@import '../../styles/propertySets.css';
+
+.ratingFieldSet {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* fieldset can't use flexbox hence this wrapper exists */
+.rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.rateInput {
+  display: none;
+}
+
+.label {
+  width: 27px;
+  cursor: pointer;
+}
+
+.star {
+  fill: var(--matterColorNegative);
+  transition: var(--transitionStyleButton);
+}
+
+legend {
+  @apply --marketplaceH3FontStyles;
+  color: var(--matterColorAnti);
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+/* Star order: reverse expected (5 -> 1) and also input before label */
+
+/* show actived star when checked */
+/* and actived star when hovering over a star */
+/* and show previous stars also as activated */
+.rating > .rateInput:checked ~ .label > .star,
+.rating > .label:hover > .star,
+.rating > .label:hover ~ .label > .star {
+  fill: var(--marketplaceColor);
+  transition: var(--transitionStyleButton);
+}
+
+/* Darken hovered star when changing rating i.e it already is active */
+/* and darken hovered star too when changing rating (hovering inside current selection) */
+/* and darken current selection inside hovered selection */
+/* and darken hovered selection inside current selection */
+.rating > .rateInput:checked + .label:hover > .star,
+.rating > .rateInput:checked ~ .label:hover > .star,
+.rating > .label:hover ~ .rateInput:checked ~ .label > .star,
+.rating > .rateInput:checked ~ .label:hover ~ .label > .star {
+  fill: var(--marketplaceColorDark);
+}

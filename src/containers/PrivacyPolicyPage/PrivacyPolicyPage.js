@@ -17,7 +17,7 @@ import {
 } from '../../components';
 import config from '../../config';
 
-import css from './PrivacyPolicyPage.css';
+import css from './PrivacyPolicyPage.module.css';
 
 const PrivacyPolicyPageComponent = props => {
   const { scrollingDisabled, intl } = props;

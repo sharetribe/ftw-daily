@@ -2,10 +2,10 @@
 
 exports[`TopbarDesktop data matches snapshot 1`] = `
 <nav
-  className=""
+  className="root"
 >
   <a
-    className="NamedLink_active"
+    className="logoLink NamedLink_active"
     href="/"
     onClick={[Function]}
     style={Object {}}
@@ -13,29 +13,31 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
   >
     <img
       alt="TopbarDesktop.logo"
-      className={null}
+      className="logo"
       src="saunatime-logo.png"
     />
   </a>
   <form
     action="/"
-    className=""
+    className="searchLink"
     method="post"
     onSubmit={[Function]}
   >
     <div
-      className=""
+      className="root topbarSearchWithLeftPadding"
     >
       <div
-        className=""
+        className="desktopIcon"
       >
         <svg
+          className="iconSvg"
           height="22"
           viewBox="0 0 21 22"
           width="21"
           xmlns="http://www.w3.org/2000/svg"
         >
           <g
+            className="iconSvgGroup"
             fill="none"
             fillRule="evenodd"
             strokeLinecap="round"
@@ -57,7 +59,7 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
       <input
         autoComplete="off"
         autoFocus={false}
-        className=""
+        className="desktopInput"
         disabled={false}
         name="location"
         onBlur={[Function]}
@@ -71,51 +73,57 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
     </div>
   </form>
   <a
-    className=""
+    className="createListingLink"
     href="/l/new"
     onClick={[Function]}
     style={Object {}}
     title={null}
   >
-    <span>
+    <span
+      className="createListing"
+    >
       <span>
         TopbarDesktop.createListing
       </span>
     </span>
   </a>
   <a
-    className=""
+    className="inboxLink"
     href="/inbox/sales"
     onClick={[Function]}
     style={Object {}}
     title={null}
   >
-    <span>
+    <span
+      className="inbox"
+    >
       <span>
         TopbarDesktop.inbox
       </span>
     </span>
   </a>
   <div
-    className=""
+    className="root"
     onBlur={[Function]}
     onKeyDown={[Function]}
     tabIndex={0}
   >
     <button
-      className=""
+      className="root profileMenuLabel"
       onBlur={[Function]}
       onClick={[Function]}
     >
       <div
-        className=""
+        className="root avatar"
         title=""
       >
-        <span />
+        <span
+          className="initials"
+        />
       </div>
     </button>
     <div
-      className=""
+      className="root profileMenuContent isClosed"
       style={
         Object {
           "left": "-10000px",
@@ -123,69 +131,77 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
       }
     >
       <ul
-        className=""
+        className="content"
       >
         <li
-          className=""
+          className="root"
           role="menuitem"
         >
           <a
-            className=""
+            className="yourListingsLink"
             href="/listings"
             onClick={[Function]}
             style={Object {}}
             title={null}
           >
-            <span />
+            <span
+              className="menuItemBorder"
+            />
             <span>
               TopbarDesktop.yourListingsLink
             </span>
           </a>
         </li>
         <li
-          className=""
+          className="root"
           role="menuitem"
         >
           <a
-            className=""
+            className="profileSettingsLink"
             href="/profile-settings"
             onClick={[Function]}
             style={Object {}}
             title={null}
           >
-            <span />
+            <span
+              className="menuItemBorder"
+            />
             <span>
               TopbarDesktop.profileSettingsLink
             </span>
           </a>
         </li>
         <li
-          className=""
+          className="root"
           role="menuitem"
         >
           <a
-            className=""
+            className="yourListingsLink"
             href="/account"
             onClick={[Function]}
             style={Object {}}
             title={null}
           >
-            <span />
+            <span
+              className="menuItemBorder"
+            />
             <span>
               TopbarDesktop.accountSettingsLink
             </span>
           </a>
         </li>
         <li
-          className=""
+          className="root"
           role="menuitem"
         >
           <button
-            className=""
+            className="logoutButton inlineTextButton"
             disabled={false}
             onClick={[Function]}
           >
-            <span />
+            <span
+              className="menuItemBorder"
+            />
             <span>
               TopbarDesktop.logout
             </span>

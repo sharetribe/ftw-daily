@@ -1,0 +1,122 @@
+@import '../../styles/propertySets.css';
+
+.root {
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+}
+
+.avatar {
+  flex-shrink: 0;
+  margin-right: 36px;
+}
+
+.info {
+  flex: 1;
+}
+
+.heading {
+  @apply --marketplaceH2FontStyles;
+  margin: 20px 0 0 0;
+
+  @media (--viewportMedium) {
+    margin: 15px 0 0 0;
+  }
+}
+
+.link {
+  white-space: nowrap;
+}
+
+.mobileBio,
+.desktopBio {
+  /* Preserve newlines, but collapse other whitespace */
+  white-space: pre-line;
+  margin: 18px 0 0 0;
+  transition: all 1s ease-in;
+  @apply --marketplaceH4FontStyles;
+
+  @media (--viewportMedium) {
+    margin: 0;
+  }
+}
+
+.mobileBio {
+  @media (--viewportMedium) {
+    display: none;
+  }
+}
+
+.desktopBio {
+  display: none;
+
+  @media (--viewportMedium) {
+    display: block;
+  }
+}
+
+.showMore {
+  @apply --marketplaceLinkStyles;
+  @apply --marketplaceH4FontStyles;
+  margin: 0 0 0 5px;
+}
+
+.links {
+  @apply --marketplaceH4FontStyles;
+  margin-top: 13px;
+
+  @media (--viewportMedium) {
+    margin: 16px 0 0 0;
+  }
+}
+
+.withBioMissingAbove {
+  @media (--viewportMedium) {
+    /* Fix baseline alignment if bio is missing from above */
+    margin-top: 16px;
+  }
+}
+
+.linkSeparator {
+  margin: 0 10px;
+  color: var(--marketplaceColor);
+}
+
+.headingRow {
+  display: flex;
+  flex-direction: column;
+
+  @media (--viewportMedium) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+}
+
+.editProfileDesktop {
+  @apply --marketplaceH4FontStyles;
+  display: none;
+  margin-bottom: 0;
+  white-space: nowrap;
+
+  @media (--viewportMedium) {
+    display: inline;
+  }
+}
+
+.editProfileMobile {
+  @apply --marketplaceH4FontStyles;
+  display: inline;
+
+  @media (--viewportMedium) {
+    display: none;
+  }
+}
+
+.contact {
+  @apply --marketplaceLinkStyles;
+  @apply --marketplaceH4FontStyles;
+  margin: 0;
+}

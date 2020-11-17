@@ -9,7 +9,7 @@ import { maxLength, required, composeValidators } from '../../util/validators';
 import { Form, Button, FieldTextInput } from '../../components';
 import CustomCategorySelectFieldMaybe from './CustomCategorySelectFieldMaybe';
 
-import css from './EditListingDescriptionForm.css';
+import css from './EditListingDescriptionForm.module.css';
 
 const TITLE_MAX_LENGTH = 60;
 
