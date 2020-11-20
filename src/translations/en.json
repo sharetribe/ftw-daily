@@ -409,7 +409,7 @@
   "KeywordFilterPlainForm.labelSelected": "Keyword",
   "KeywordFilterPlainForm.placeholder": "Enter a keyword…",
   "LandingPage.schemaDescription": "The workspace marketplace. Looking for a new workspace? Have one to rent out? Make Space Work.",
-  "LandingPage.schemaTitle": "Make Space Work | {siteTitle}",
+  "LandingPage.schemaTitle": "{siteTitle}",
   "LayoutWrapperAccountSettingsSideNav.contactDetailsTabTitle": "Contact details",
   "LayoutWrapperAccountSettingsSideNav.passwordTabTitle": "Password",
   "LayoutWrapperAccountSettingsSideNav.paymentsTabTitle": "Payout details",
