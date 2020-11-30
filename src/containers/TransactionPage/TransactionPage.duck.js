@@ -1,7 +1,7 @@
 import pick from 'lodash/pick';
 import pickBy from 'lodash/pickBy';
 import isEmpty from 'lodash/isEmpty';
-// import moment from 'moment';
+import moment from 'moment';
 import config from '../../config';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { isTransactionsTransitionInvalidTransition, storableError } from '../../util/errors';
@@ -13,6 +13,7 @@ import {
   TRANSITION_ACCEPT,
   TRANSITION_DECLINE,
 } from '../../util/transaction';
+import { LINE_ITEM_UNITS, LINE_ITEM_DAY } from '../../util/types';
 import * as log from '../../util/log';
 import {
   updatedEntities,
@@ -20,8 +21,8 @@ import {
   denormalisedResponseEntities,
 } from '../../util/data';
 import {
-  // findNextBoundary,
-  // nextMonthFn,
+  findNextBoundary,
+  nextMonthFn,
   monthIdStringInTimeZone
 } from '../../util/dates';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
@@ -300,8 +301,22 @@ export const fetchTransaction = (id, txRole) => (dispatch, getState, sdk) => {
         transaction &&
         txIsEnquired(transaction);
 
+      const { unitType } = listing.attributes.publicData || {};
       if (canFetchTimeslots) {
-        dispatch(fetchTimeSlots(listingId));
+        // bugfix Nov 30, 2020 -- fetchTimeSlots expects more than 1 argument!
+        // dispatch(fetchTimeSlots(listingId));
+
+        // NOTE this is a quickfix so users can read inbox messages...
+        // showing warnings that need to be further investigated
+        if (unitType === LINE_ITEM_UNITS) {
+          // Fetch timeSlots.
+          // This can happen parallel to loadData.
+          // We are not interested to return them from loadData call.
+          fetchMonthlyTimeSlots(dispatch, listing);
+        }
+        if (unitType === LINE_ITEM_DAY) {
+          dispatch(fetchTimeSlotsDay(listingId));
+        }
       }
 
       const canFetchListing = listing && listing.attributes && !listing.attributes.deleted;
@@ -542,55 +557,55 @@ const timeSlotsRequest = params => (dispatch, getState, sdk) => {
   });
 };
 
-// const fetchTimeSlots = listingId => (dispatch, getState, sdk) => {
-//   dispatch(fetchTimeSlotsRequest);
+const fetchTimeSlotsDay = listingId => (dispatch, getState, sdk) => {
+  dispatch(fetchTimeSlotsRequest);
 
-//   // Time slots can be fetched for 90 days at a time,
-//   // for at most 180 days from now. If max number of bookable
-//   // day exceeds 90, a second request is made.
+  // Time slots can be fetched for 90 days at a time,
+  // for at most 180 days from now. If max number of bookable
+  // day exceeds 90, a second request is made.
 
-//   const maxTimeSlots = 90;
-//   // booking range: today + bookable days -1
-//   const bookingRange = config.dayCountAvailableForBooking - 1;
-//   const timeSlotsRange = Math.min(bookingRange, maxTimeSlots);
+  const maxTimeSlots = 90;
+  // booking range: today + bookable days -1
+  const bookingRange = config.dayCountAvailableForBooking - 1;
+  const timeSlotsRange = Math.min(bookingRange, maxTimeSlots);
 
-//   const start = moment
-//     .utc()
-//     .startOf('day')
-//     .toDate();
-//   const end = moment()
-//     .utc()
-//     .startOf('day')
-//     .add(timeSlotsRange, 'days')
-//     .toDate();
-//   const params = { listingId, start, end };
+  const start = moment
+    .utc()
+    .startOf('day')
+    .toDate();
+  const end = moment()
+    .utc()
+    .startOf('day')
+    .add(timeSlotsRange, 'days')
+    .toDate();
+  const params = { listingId, start, end };
 
-//   return dispatch(timeSlotsRequest(params))
-//     .then(timeSlots => {
-//       const secondRequest = bookingRange > maxTimeSlots;
+  return dispatch(timeSlotsRequest(params))
+    .then(timeSlots => {
+      const secondRequest = bookingRange > maxTimeSlots;
 
-//       if (secondRequest) {
-//         const secondRange = Math.min(maxTimeSlots, bookingRange - maxTimeSlots);
-//         const secondParams = {
-//           listingId,
-//           start: end,
-//           end: moment(end)
-//             .add(secondRange, 'days')
-//             .toDate(),
-//         };
+      if (secondRequest) {
+        const secondRange = Math.min(maxTimeSlots, bookingRange - maxTimeSlots);
+        const secondParams = {
+          listingId,
+          start: end,
+          end: moment(end)
+            .add(secondRange, 'days')
+            .toDate(),
+        };
 
-//         return dispatch(timeSlotsRequest(secondParams)).then(secondBatch => {
-//           const combined = timeSlots.concat(secondBatch);
-//           dispatch(fetchTimeSlotsSuccess(combined));
-//         });
-//       } else {
-//         dispatch(fetchTimeSlotsSuccess(timeSlots));
-//       }
-//     })
-//     .catch(e => {
-//       dispatch(fetchTimeSlotsError(storableError(e)));
-//     });
-// };
+        return dispatch(timeSlotsRequest(secondParams)).then(secondBatch => {
+          const combined = timeSlots.concat(secondBatch);
+          dispatch(fetchTimeSlotsSuccess(combined));
+        });
+      } else {
+        dispatch(fetchTimeSlotsSuccess(timeSlots));
+      }
+    })
+    .catch(e => {
+      dispatch(fetchTimeSlotsError(storableError(e)));
+    });
+};
 
 
 export const fetchTimeSlots = (listingId, start, end, timeZone) => (dispatch, getState, sdk) => {
@@ -613,32 +628,31 @@ export const fetchTimeSlots = (listingId, start, end, timeZone) => (dispatch, ge
     });
 };
 
-
 // Helper function for fetchTransaction call.
-// const fetchMonthlyTimeSlots = (dispatch, listing) => {
-//   const hasWindow = typeof window !== 'undefined';
-//   const attributes = listing.attributes;
-//   // Listing could be ownListing entity too, so we just check if attributes key exists
-//   const hasTimeZone =
-//     attributes && attributes.availabilityPlan && attributes.availabilityPlan.timezone;
+const fetchMonthlyTimeSlots = (dispatch, listing) => {
+  const hasWindow = typeof window !== 'undefined';
+  const attributes = listing.attributes;
+  // Listing could be ownListing entity too, so we just check if attributes key exists
+  const hasTimeZone =
+    attributes && attributes.availabilityPlan && attributes.availabilityPlan.timezone;
 
-//   // Fetch time-zones on client side only.
-//   if (hasWindow && listing.id && hasTimeZone) {
-//     const tz = listing.attributes.availabilityPlan.timezone;
-//     const nextBoundary = findNextBoundary(tz, new Date());
+  // Fetch time-zones on client side only.
+  if (hasWindow && listing.id && hasTimeZone) {
+    const tz = listing.attributes.availabilityPlan.timezone;
+    const nextBoundary = findNextBoundary(tz, new Date());
 
-//     const nextMonth = nextMonthFn(nextBoundary, tz);
-//     const nextAfterNextMonth = nextMonthFn(nextMonth, tz);
+    const nextMonth = nextMonthFn(nextBoundary, tz);
+    const nextAfterNextMonth = nextMonthFn(nextMonth, tz);
 
-//     return Promise.all([
-//       dispatch(fetchTimeSlots(listing.id, nextBoundary, nextMonth, tz)),
-//       dispatch(fetchTimeSlots(listing.id, nextMonth, nextAfterNextMonth, tz)),
-//     ]);
-//   }
+    return Promise.all([
+      dispatch(fetchTimeSlots(listing.id, nextBoundary, nextMonth, tz)),
+      dispatch(fetchTimeSlots(listing.id, nextMonth, nextAfterNextMonth, tz)),
+    ]);
+  }
 
-//   // By default return an empty array
-//   return Promise.all([]);
-// };
+  // By default return an empty array
+  return Promise.all([]);
+};
 
 export const fetchNextTransitions = id => (dispatch, getState, sdk) => {
   dispatch(fetchTransitionsRequest());
