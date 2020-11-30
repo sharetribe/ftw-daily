@@ -1050,5 +1050,14 @@
   "UserCard.showFullBioLink": "more",
   "UserCard.viewProfileLink": "View profile",
   "UserDisplayName.banned": "Banned user",
-  "UserDisplayName.deleted": "Deleted user"
+  "UserDisplayName.deleted": "Deleted user",
+
+  "EditListingWizard.tabLabelSize": "Velicina",
+  "EditListingSizeForm.size": "Koja je velicina krpice?",
+  "EditListingSizePanel.title": "Velicina krpice?",
+  "EditListingSizeForm.sizePlaceholder": "Koja je velicina krpice?",
+  "EditListingWizard.saveEditSize": "Sacuvaj velicinu",
+  "EditListingSizeForm.sizeRequired": "Velicina je obavezna.",
+  "ListingPage.sizeTitle": "Velicina"
+
 }

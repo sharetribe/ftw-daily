@@ -143,6 +143,25 @@ export const filters = [
       ],
     },
   },
+  {
+    id: 'size',
+    label: 'Size',
+    type: 'SelectSingleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_size'],
+    config: {
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for the UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: [
+        { key: 's', label: 'Small (S)' },
+        { key: 'm', label: 'Medium (M)' },
+        { key: 'l', label: 'Large (L)' },
+        { key: 'xl', label: 'Extra Large (XL)' },
+      ],
+    },
+  },
 ];
 
 export const sortConfig = {

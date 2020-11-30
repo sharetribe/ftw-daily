@@ -26,6 +26,7 @@ import EditListingWizardTab, {
   LOCATION,
   PRICING,
   PHOTOS,
+  SIZE,
 } from './EditListingWizardTab';
 import css from './EditListingWizard.css';
 
@@ -44,6 +45,7 @@ export const TABS = [
   PRICING,
   ...availabilityMaybe,
   PHOTOS,
+  SIZE,
 ];
 
 // Tabs are horizontal in small screens
@@ -68,6 +70,8 @@ const tabLabel = (intl, tab) => {
     key = 'EditListingWizard.tabLabelAvailability';
   } else if (tab === PHOTOS) {
     key = 'EditListingWizard.tabLabelPhotos';
+  } else if (tab === SIZE) {
+    key = 'EditListingWizard.tabLabelSize';
   }
 
   return intl.formatMessage({ id: key });
@@ -107,6 +111,8 @@ const tabCompleted = (tab, listing) => {
       return !!availabilityPlan;
     case PHOTOS:
       return images && images.length > 0;
+    case SIZE:
+      return !!(publicData && publicData.size);
     default:
       return false;
   }

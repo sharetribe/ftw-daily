@@ -17,6 +17,7 @@ import {
   EditListingPhotosPanel,
   EditListingPoliciesPanel,
   EditListingPricingPanel,
+  EditListingSizePanel,
 } from '../../components';
 
 import css from './EditListingWizard.css';
@@ -28,6 +29,7 @@ export const POLICY = 'policy';
 export const LOCATION = 'location';
 export const PRICING = 'pricing';
 export const PHOTOS = 'photos';
+export const SIZE = 'size';
 
 // EditListingWizardTab component supports these tabs
 export const SUPPORTED_TABS = [
@@ -38,6 +40,7 @@ export const SUPPORTED_TABS = [
   PRICING,
   AVAILABILITY,
   PHOTOS,
+  SIZE,
 ];
 
 const pathParamsToNextTab = (params, tab, marketplaceTabs) => {
@@ -235,6 +238,20 @@ const EditListingWizardTab = props => {
         <EditListingAvailabilityPanel
           {...panelProps(AVAILABILITY)}
           availability={availability}
+          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          onSubmit={values => {
+            onCompleteEditListingWizardTab(tab, values);
+          }}
+        />
+      );
+    }
+    case SIZE: {
+      const submitButtonTranslationKey = isNewListingFlow
+        ? 'EditListingWizard.saveNewSize'
+        : 'EditListingWizard.saveEditSize';
+      return (
+        <EditListingSizePanel
+          {...panelProps(SIZE)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={values => {
             onCompleteEditListingWizardTab(tab, values);
