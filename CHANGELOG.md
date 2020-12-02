@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [fix] Fix FieldCheckbox validation on blur event on Firefox.
+  [#1384](https://github.com/sharetribe/ftw-daily/pull/1384)
+
 ## [v7.0.0] 2020-11-17
 
 This major release renames all the CSS files. If you have made custom components or customized
