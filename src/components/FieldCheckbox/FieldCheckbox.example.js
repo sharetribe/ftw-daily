@@ -21,7 +21,7 @@ const FormComponent = props => (
             handleSubmit(e);
           }}
         >
-          <FormSpy onChange={onChange} />
+          <FormSpy onChange={onChange} subscription={{ values: true, dirty: true }} />
           <FieldCheckbox id="checkbox-id1" name="checkbox-group" label="option 1" value="option1" />
           <FieldCheckbox id="checkbox-id2" name="checkbox-group" label="option 2" value="option2" />
 

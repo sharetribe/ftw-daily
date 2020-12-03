@@ -47,12 +47,13 @@ const FieldCheckboxComponent = props => {
   } = props;
 
   const classes = classNames(rootClassName || css.root, className);
-  const checkboxProps = {
-    id,
-    className: css.input,
-    component: 'input',
-    type: 'checkbox',
-    ...rest,
+
+  // This is a workaround for a bug in Firefox & React Final Form.
+  // https://github.com/final-form/react-final-form/issues/134
+  const handleOnChange = (input, event) => {
+    const { onBlur, onChange } = input;
+    onChange(event);
+    onBlur(event);
   };
 
   const successColorVariantMaybe = useSuccessColor
@@ -64,7 +65,19 @@ const FieldCheckboxComponent = props => {
 
   return (
     <span className={classes}>
-      <Field {...checkboxProps} />
+      <Field type="checkbox" {...rest}>
+        {props => {
+          const input = props.input;
+          return (
+            <input
+              id={id}
+              className={css.input}
+              {...input}
+              onChange={event => handleOnChange(input, event)}
+            />
+          );
+        }}
+      </Field>
       <label htmlFor={id} className={css.label}>
         <span className={css.checkboxWrapper}>
           <IconCheckbox className={svgClassName} {...successColorVariantMaybe} />
