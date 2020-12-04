@@ -20,7 +20,7 @@ const httpsAgent = new https.Agent({ keepAlive: true });
 
 const baseUrl = BASE_URL ? { baseUrl: BASE_URL } : {};
 
-module.exports = (err, user, req, res, clientID, idpId) => {
+module.exports = (err, user, req, res, idpClientId, idpId) => {
   if (err) {
     log.error(err, 'fetching-user-data-from-idp-failed');
 
@@ -87,7 +87,7 @@ module.exports = (err, user, req, res, clientID, idpId) => {
   return sdk
     .loginWithIdp({
       idpId,
-      idpClientId: clientID,
+      idpClientId,
       idpToken: user.idpToken,
     })
     .then(response => {
