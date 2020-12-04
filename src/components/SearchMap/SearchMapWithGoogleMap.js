@@ -466,8 +466,18 @@ class SearchMapWithGoogleMap extends Component {
   }
 
   render() {
-    const { onMapLoad, onMapMoveEnd, ...rest } = this.props;
-    return <MapWithGoogleMap onMapLoad={this.onMapLoad} onIdle={this.onIdle} {...rest} />;
+    const { onMapLoad, onMapMoveEnd, center, bounds, zoom, ...rest } = this.props;
+    const zoomAndCenter =
+      !bounds && !center ? { zoom: 1, center: { lat: 0, lng: 0 } } : { zoom, center };
+    return (
+      <MapWithGoogleMap
+        onMapLoad={this.onMapLoad}
+        onIdle={this.onIdle}
+        bounds={bounds}
+        {...zoomAndCenter}
+        {...rest}
+      />
+    );
   }
 }
 
