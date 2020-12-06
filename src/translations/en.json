@@ -1052,12 +1052,13 @@
   "UserDisplayName.banned": "Banned user",
   "UserDisplayName.deleted": "Deleted user",
 
-  "EditListingWizard.tabLabelSize": "Velicina",
-  "EditListingSizeForm.size": "Koja je velicina krpice?",
-  "EditListingSizePanel.title": "Velicina krpice?",
-  "EditListingSizeForm.sizePlaceholder": "Koja je velicina krpice?",
-  "EditListingWizard.saveEditSize": "Sacuvaj velicinu",
-  "EditListingSizeForm.sizeRequired": "Velicina je obavezna.",
-  "ListingPage.sizeTitle": "Velicina"
+  "EditListingWizard.tabLabelSize": "Size",
+  "EditListingSizeForm.size": "What's the size?",
+  "EditListingSizePanel.title": "Size",
+  "EditListingSizeForm.sizePlaceholder": "What's the size?",
+  "EditListingWizard.saveNewSize": "Save size",
+  "EditListingWizard.saveEditSize": "Save size",
+  "EditListingSizeForm.sizeRequired": "Size is required",
+  "ListingPage.sizeTitle": "Size"
 
 }

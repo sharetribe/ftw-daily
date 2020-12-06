@@ -41,11 +41,11 @@ export const TABS = [
   DESCRIPTION,
   FEATURES,
   POLICY,
+  SIZE,
   LOCATION,
   PRICING,
   ...availabilityMaybe,
   PHOTOS,
-  SIZE,
 ];
 
 // Tabs are horizontal in small screens
@@ -62,6 +62,8 @@ const tabLabel = (intl, tab) => {
     key = 'EditListingWizard.tabLabelFeatures';
   } else if (tab === POLICY) {
     key = 'EditListingWizard.tabLabelPolicy';
+  } else if (tab === SIZE) {
+    key = 'EditListingWizard.tabLabelSize';
   } else if (tab === LOCATION) {
     key = 'EditListingWizard.tabLabelLocation';
   } else if (tab === PRICING) {
@@ -70,9 +72,7 @@ const tabLabel = (intl, tab) => {
     key = 'EditListingWizard.tabLabelAvailability';
   } else if (tab === PHOTOS) {
     key = 'EditListingWizard.tabLabelPhotos';
-  } else if (tab === SIZE) {
-    key = 'EditListingWizard.tabLabelSize';
-  }
+  } 
 
   return intl.formatMessage({ id: key });
 };
