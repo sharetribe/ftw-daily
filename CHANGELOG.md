@@ -16,6 +16,8 @@ way to update this template, but currently, we follow a pattern:
 
 - [fix] Fix Google Maps default centering if no bounds or center is given.
   [#1386](https://github.com/sharetribe/ftw-daily/pull/1386)
+- [add] Add timeout and other options for getCurrentLocation call.
+  [#1385](https://github.com/sharetribe/ftw-daily/pull/1385)
 - [fix] Fix FieldCheckbox validation on blur event on Firefox.
   [#1384](https://github.com/sharetribe/ftw-daily/pull/1384)
 
