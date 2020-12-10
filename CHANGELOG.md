@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [add] Add helper functions for setting up your own OIDC authentication and using FTW server as
+  proxy when needed. [#1383](https://github.com/sharetribe/ftw-daily/pull/1383)
+
 ## [v7.1.0] 2020-12-15
 
 - [change] Handle entity update with sparse attributes.
