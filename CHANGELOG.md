@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [change] Remove react-google-maps dependency. It has not been maintained for 3 years. From now on,
+  we use Google Maps API directly. However, the default map provider is still Mapbox.
+  [#1389](https://github.com/sharetribe/ftw-daily/pull/1389)
 - [fix] Pass metadata through sanitizeUser function.
   [#1391](https://github.com/sharetribe/ftw-daily/pull/1391)
 - [fix] Call for the same page caused unnecessary rendering
