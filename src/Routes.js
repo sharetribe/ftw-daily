@@ -86,12 +86,16 @@ class RouteComponentRenderer extends Component {
     handleLocationChanged(this.props.dispatch, this.props.location);
   }
 
-  componentDidUpdate() {
-    // Calling loadData after initial rendering (on client side).
-    // This makes it possible to use loadData as default client side data loading technique.
-    // However it is better to fetch data before location change to avoid "Loading data" state.
-    callLoadData(this.props);
-    handleLocationChanged(this.props.dispatch, this.props.location);
+  componentDidUpdate(prevProps) {
+    // Call for handleLocationChanged affects store/state
+    // and it generates an unnecessary update.
+    if (prevProps.location !== this.props.location) {
+      // Calling loadData after initial rendering (on client side).
+      // This makes it possible to use loadData as default client side data loading technique.
+      // However it is better to fetch data before location change to avoid "Loading data" state.
+      callLoadData(this.props);
+      handleLocationChanged(this.props.dispatch, this.props.location);
+    }
   }
 
   render() {
