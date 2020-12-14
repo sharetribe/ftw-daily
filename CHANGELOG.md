@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [fix] Pass metadata through sanitizeUser function.
+  [#1391](https://github.com/sharetribe/ftw-daily/pull/1391)
 - [fix] Call for the same page caused unnecessary rendering
   [#1388](https://github.com/sharetribe/ftw-daily/pull/1388)
 - [fix] Fix Google Maps default centering if no bounds or center is given.
