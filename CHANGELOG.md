@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+## [v7.1.0] 2020-12-15
+
 - [change] Handle entity update with sparse attributes.
   [#1392](https://github.com/sharetribe/ftw-daily/pull/1392)
 - [change] Remove react-google-maps dependency. It has not been maintained for 3 years. From now on,
@@ -29,6 +31,8 @@ way to update this template, but currently, we follow a pattern:
   [#1385](https://github.com/sharetribe/ftw-daily/pull/1385)
 - [fix] Fix FieldCheckbox validation on blur event on Firefox.
   [#1384](https://github.com/sharetribe/ftw-daily/pull/1384)
+
+  [v7.1.0]: https://github.com/sharetribe/ftw-daily/compare/v7.0.0...v7.1.0
 
 ## [v7.0.0] 2020-11-17
 
