@@ -6,6 +6,8 @@
   "dependencies": {
     "@babel/runtime": "^7.11.2",
     "@formatjs/intl-relativetimeformat": "^4.2.1",
+    "@loadable/component": "^5.14.1",
+    "@loadable/server": "^5.14.0",
     "@mapbox/polyline": "^1.1.1",
     "@sentry/browser": "5.20.1",
     "@sentry/node": "5.20.1",
@@ -57,7 +59,7 @@
     "redux-thunk": "^2.3.0",
     "seedrandom": "^3.0.5",
     "sharetribe-flex-sdk": "1.13.0",
-    "sharetribe-scripts": "4.0.0",
+    "sharetribe-scripts": "4.0.0-alpha21",
     "smoothscroll-polyfill": "^0.4.0",
     "source-map-support": "^0.5.9",
     "url": "^0.11.0"

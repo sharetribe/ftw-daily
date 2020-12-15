@@ -2,7 +2,8 @@ const path = require('path');
 const fs = require('fs');
 const _ = require('lodash');
 const { types } = require('sharetribe-flex-sdk');
-const { renderApp } = require('./importer');
+const { ChunkExtractor } = require('@loadable/server');
+const { renderApp, nodeStats, webStats } = require('./importer');
 
 const buildPath = path.resolve(__dirname, '..', 'build');
 
@@ -92,7 +93,37 @@ const replacer = (key = null, value) => {
 };
 
 exports.render = function(requestUrl, context, preloadedState) {
-  const { head, body } = renderApp(requestUrl, context, preloadedState);
+  const nodeExtractor = new ChunkExtractor({ statsFile: nodeStats });
+  console.log('nodeStats:', nodeStats);
+
+  const nodeEntrypoint = nodeExtractor.requireEntrypoint();
+  console.log('nodeEntrypoint:', nodeEntrypoint);
+
+  const {
+    default: renderApp,
+    matchPathname,
+    configureStore,
+    routeConfiguration,
+  } = nodeEntrypoint;
+  console.log('nodeEntrypoint spread:', renderApp, matchPathname, configureStore, routeConfiguration);
+  console.log();
+  // console.log(JSON.stringify(nodeEntrypoint));
+
+  const webExtractor = new ChunkExtractor({ statsFile: webStats });
+  // const webEntrypoint = webExtractor.requireEntrypoint();
+  // console.log('webEntrypoint:', webEntrypoint);
+
+  const { head, body } = renderApp(requestUrl, context, preloadedState, webExtractor.collectChunks);
+  // const jsx = webExtractor.collectChunks(<App />);
+  // const body = ReactDOMServer.renderToString(jsx);
+
+  console.log('typeof body:', typeof body, '\nstart-of-body\n', body, '\nend-of-body');
+  console.log('head.title.toString()', head.title.toString());
+
+  console.log('webExtractor.getStyleTags():\n', webExtractor.getStyleTags());
+  console.log('webExtractor.getLinkTags():\n', webExtractor.getLinkTags());
+  console.log('webExtractor.getScriptTags():\n', webExtractor.getScriptTags());
+
 
   // Preloaded state needs to be passed for client side too.
   // For security reasons we ensure that preloaded state is considered as a string
@@ -133,6 +164,9 @@ exports.render = function(requestUrl, context, preloadedState) {
     script: head.script.toString(),
     preloadedStateScript,
     googleAnalyticsScript,
+    ssrStyles: webExtractor.getStyleTags(),
+    ssrLinks: webExtractor.getLinkTags(),
+    ssrScripts: webExtractor.getScriptTags(),
     body,
   });
 };

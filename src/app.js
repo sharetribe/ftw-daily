@@ -131,7 +131,7 @@ ServerApp.propTypes = { url: string.isRequired, context: any.isRequired, store: 
  *  - {String} body: Rendered application body of the given route
  *  - {Object} head: Application head metadata from react-helmet
  */
-export const renderApp = (url, serverContext, preloadedState) => {
+export const renderApp = (url, serverContext, preloadedState, collectChunks) => {
   // Don't pass an SDK instance since we're only rendering the
   // component tree with the preloaded store state and components
   // shouldn't do any SDK calls in the (server) rendering lifecycle.
@@ -139,9 +139,11 @@ export const renderApp = (url, serverContext, preloadedState) => {
 
   const helmetContext = {};
 
-  const body = ReactDOMServer.renderToString(
-    <ServerApp url={url} context={serverContext} helmetContext={helmetContext} store={store} />
+  const WithChunks = collectChunks(
+      <ServerApp url={url} context={serverContext} helmetContext={helmetContext} store={store} />
   );
+  console.log('WithChunks', WithChunks);
+  const body = ReactDOMServer.renderToString(WithChunks);
   const { helmet: head } = helmetContext;
   return { head, body };
 };

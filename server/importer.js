@@ -12,9 +12,15 @@ const manifest = require(manifestPath);
 const mainJsPath = path.join(buildPath, manifest['files']['main.js']);
 const mainJs = require(mainJsPath);
 
+console.log('mainJs', mainJs);
+const nodeStats = path.join(buildPath,'node/loadable-stats.json');
+const webStats = path.join(buildPath,'loadable-stats.json');
+
 module.exports = {
   renderApp: mainJs.default,
   matchPathname: mainJs.matchPathname,
   configureStore: mainJs.configureStore,
   routeConfiguration: mainJs.routeConfiguration,
+  nodeStats,
+  webStats,
 };

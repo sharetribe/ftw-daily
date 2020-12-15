@@ -1,4 +1,5 @@
 import React from 'react';
+import loadable from '@loadable/component'
 import {
   AboutPage,
   AuthenticationPage,
@@ -7,7 +8,7 @@ import {
   EditListingPage,
   EmailVerificationPage,
   InboxPage,
-  LandingPage,
+  //LandingPage,
   ListingPage,
   ManageListingsPage,
   NotFoundPage,
@@ -20,10 +21,12 @@ import {
   ProfilePage,
   ProfileSettingsPage,
   SearchPage,
-  StyleguidePage,
   TermsOfServicePage,
   TransactionPage,
 } from './containers';
+
+const LandingPage = loadable(() => import(/* webpackChunkName: "LandingPage" */ './containers/LandingPage/LandingPage'));
+const StyleguidePage = loadable(() => import(/* webpackChunkName: "StyleguidePage" */ './containers/StyleguidePage/StyleguidePage'));
 
 // routeConfiguration needs to initialize containers first
 // Otherwise, components will import form container eventually and
