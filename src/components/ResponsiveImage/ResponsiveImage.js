@@ -49,8 +49,6 @@ const ResponsiveImage = props => {
   if (image == null || variants.length === 0) {
     const noImageClasses = classNames(rootClassName || css.root, css.noImageContainer, className);
 
-    // NoImageMessage is needed for listing images on top the map (those component lose context)
-    // https://github.com/tomchentw/react-google-maps/issues/578
     const noImageMessageText = noImageMessage || <FormattedMessage id="ResponsiveImage.noImage" />;
     return (
       <div className={noImageClasses}>

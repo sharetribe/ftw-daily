@@ -3,20 +3,32 @@ import ReactDOM from 'react-dom';
 import invariant from 'invariant';
 import { arrayOf, func, node, number, oneOfType, shape, string } from 'prop-types';
 import isEqual from 'lodash/isEqual';
-import { withGoogleMap, GoogleMap, OverlayView } from 'react-google-maps';
-import { OVERLAY_VIEW } from 'react-google-maps/lib/constants';
+import classNames from 'classnames';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { parse } from '../../util/urlHelpers';
 import { propTypes } from '../../util/types';
 import { ensureListing } from '../../util/data';
 import { sdkBoundsToFixedCoordinates, hasSameSDKBounds } from '../../util/maps';
+import { getOffsetOverride, getLayoutStyles } from '../../util/googleMaps';
 import { SearchMapInfoCard, SearchMapPriceLabel, SearchMapGroupLabel } from '../../components';
 
 import { groupedByCoordinates, reducedToArray } from './SearchMap.helpers.js';
+import css from './SearchMapWithGoogleMaps.module.css';
 
 export const LABEL_HANDLE = 'SearchMapLabel';
 export const INFO_CARD_HANDLE = 'SearchMapInfoCard';
 const BOUNDS_FIXED_PRECISION = 8;
+
+// Panes on Google Maps specify the stacking order for different layers on the map.
+// https://developers.google.com/maps/documentation/javascript/customoverlays#intitialize
+//
+// Google Maps uses 5 different panes:
+// 'mapPane', 'overlayLayer', 'markerLayer', 'overlayMouseTarget', 'floatPane'
+// We only need the last 2:
+// - 'overlayMouseTarget': for the SearchMapPriceLabelWithOverlay & SearchMapGroupLabelWithOverlay.
+// - 'floatPane': to render InfoCardComponent on top of price and group labels.
+const OVERLAY_MOUSE_TARGET = 'overlayMouseTarget'; // Stacking order: 4
+const FLOAT_PANE = 'floatPane'; // Stacking order: 5
 
 const { LatLng: SDKLatLng, LatLngBounds: SDKLatLngBounds } = sdkTypes;
 
@@ -83,11 +95,26 @@ export const isMapsLibLoaded = () =>
   typeof window !== 'undefined' && window.google && window.google.maps;
 
 /**
- * FIX "TypeError: Cannot read property 'overlayMouseTarget' of null"
- * Override draw function to catch errors with map panes being undefined to prevent console errors
- * https://github.com/tomchentw/react-google-maps/issues/482
+ * To render HTML on top of Google Maps, we need use OverlayView.
+ * Note: we don't extend the OverlayView directly, because then
+ * the class should be defined inside initializeMap function.
  */
-class CustomOverlayView extends OverlayView {
+class CustomOverlayView extends Component {
+  constructor(props, context) {
+    super(props, context);
+    const overlayView = new window.google.maps.OverlayView();
+
+    overlayView.onAdd = this.onAdd.bind(this);
+    overlayView.draw = this.draw.bind(this);
+    overlayView.onRemove = this.onRemove.bind(this);
+    this.onPositionElement = this.onPositionElement.bind(this);
+
+    // You must call setMap() with a valid Map object to trigger the call to
+    // the onAdd() method and setMap(null) in order to trigger the onRemove() method.
+    overlayView.setMap(props.map);
+    this.state = { overlayView };
+  }
+
   onRemove() {
     this.containerElement.parentNode.removeChild(this.containerElement);
     //Remove `unmountComponentAtNode` for react version 16
@@ -109,10 +136,32 @@ class CustomOverlayView extends OverlayView {
       mapPaneName
     );
 
-    const mapPanes = this.state[OVERLAY_VIEW].getPanes();
+    const mapPanes = this.state.overlayView.getPanes();
     mapPanes[mapPaneName].appendChild(this.containerElement);
     this.onPositionElement();
     this.forceUpdate();
+  }
+
+  onPositionElement() {
+    // https://developers.google.com/maps/documentation/javascript/3.exp/reference#MapCanvasProjection
+    const mapCanvasProjection = this.state.overlayView.getProjection();
+
+    const offset = {
+      x: 0,
+      y: 0,
+      ...getOffsetOverride(this.containerElement, this.props),
+    };
+    const layoutStyles = getLayoutStyles(mapCanvasProjection, offset, this.props);
+    _.assign(this.containerElement.style, layoutStyles);
+  }
+
+  draw() {
+    // https://developers.google.com/maps/documentation/javascript/3.exp/reference#MapPanes
+    const mapPanes = this.state.overlayView.getPanes();
+    // Add conditional to ensure panes and container exist before drawing
+    if (mapPanes && this.containerElement) {
+      this.onPositionElement();
+    }
   }
 
   render() {
@@ -120,15 +169,6 @@ class CustomOverlayView extends OverlayView {
       return ReactDOM.createPortal(React.Children.only(this.props.children), this.containerElement);
     }
     return false;
-  }
-
-  draw() {
-    // https://developers.google.com/maps/documentation/javascript/3.exp/reference#MapPanes
-    const mapPanes = this.state[OVERLAY_VIEW].getPanes();
-    // Add conditional to ensure panes and container exist before drawing
-    if (mapPanes && this.containerElement) {
-      this.onPositionElement();
-    }
   }
 }
 
@@ -160,6 +200,7 @@ class SearchMapPriceLabelWithOverlay extends Component {
   render() {
     const {
       position,
+      map,
       mapPaneName,
       isActive,
       className,
@@ -171,6 +212,7 @@ class SearchMapPriceLabelWithOverlay extends Component {
     return (
       <CustomOverlayView
         position={position}
+        map={map}
         mapPaneName={mapPaneName}
         getPixelPositionOffset={getPixelPositionOffset}
       >
@@ -203,6 +245,7 @@ class SearchMapGroupLabelWithOverlay extends Component {
   render() {
     const {
       position,
+      map,
       mapPaneName,
       isActive,
       className,
@@ -213,6 +256,7 @@ class SearchMapGroupLabelWithOverlay extends Component {
     return (
       <CustomOverlayView
         position={position}
+        map={map}
         mapPaneName={mapPaneName}
         getPixelPositionOffset={getPixelPositionOffset}
       >
@@ -228,18 +272,24 @@ class SearchMapGroupLabelWithOverlay extends Component {
   }
 }
 
-const priceLabelsInLocations = (
-  listings,
-  activeListingId,
-  infoCardOpen,
-  onListingClicked,
-  mapComponentRefreshToken
-) => {
+/**
+ * Render price labels or group "markers" based on listings array.
+ */
+const PriceLabelsAndGroups = props => {
+  const {
+    map,
+    listings,
+    activeListingId,
+    infoCardOpen,
+    onListingClicked,
+    mapComponentRefreshToken,
+  } = props;
   const listingArraysInLocations = reducedToArray(groupedByCoordinates(listings));
   const priceLabels = listingArraysInLocations.reverse().map(listingArr => {
     const isActive = activeListingId
       ? !!listingArr.find(l => activeListingId.uuid === l.id.uuid)
       : false;
+    const classes = classNames(css.labelContainer, LABEL_HANDLE, { [css.activeLabel]: isActive });
 
     // If location contains only one listing, print price label
     if (listingArr.length === 1) {
@@ -259,9 +309,10 @@ const priceLabelsInLocations = (
         <SearchMapPriceLabelWithOverlay
           key={listing.id.uuid}
           position={latLngLiteral}
-          mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+          map={map}
+          mapPaneName={OVERLAY_MOUSE_TARGET}
           isActive={isActive}
-          className={LABEL_HANDLE}
+          className={classes}
           listing={listing}
           onListingClicked={onListingClicked}
           mapComponentRefreshToken={mapComponentRefreshToken}
@@ -278,9 +329,10 @@ const priceLabelsInLocations = (
       <SearchMapGroupLabelWithOverlay
         key={listingArr[0].id.uuid}
         position={latLngLiteral}
-        mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+        map={map}
+        mapPaneName={OVERLAY_MOUSE_TARGET}
         isActive={isActive}
-        className={LABEL_HANDLE}
+        className={classes}
         listings={listingArr}
         onListingClicked={onListingClicked}
         mapComponentRefreshToken={mapComponentRefreshToken}
@@ -290,12 +342,17 @@ const priceLabelsInLocations = (
   return priceLabels;
 };
 
-const infoCardComponent = (
-  infoCardOpen,
-  onListingInfoCardClicked,
-  createURLToListing,
-  mapComponentRefreshToken
-) => {
+/**
+ * Render info-card overlay if the card is open.
+ */
+const InfoCardComponent = props => {
+  const {
+    map,
+    infoCardOpen,
+    onListingInfoCardClicked,
+    createURLToListing,
+    mapComponentRefreshToken,
+  } = props;
   const listingsArray = Array.isArray(infoCardOpen) ? infoCardOpen : [infoCardOpen];
 
   if (!infoCardOpen) {
@@ -310,7 +367,8 @@ const infoCardComponent = (
     <CustomOverlayView
       key={listingsArray[0].id.uuid}
       position={latLngLiteral}
-      mapPaneName={OverlayView.FLOAT_PANE}
+      map={map}
+      mapPaneName={FLOAT_PANE}
       getPixelPositionOffset={getPixelPositionOffset}
       styles={{ zIndex: 1 }}
     >
@@ -326,78 +384,18 @@ const infoCardComponent = (
 };
 
 /**
- * MapWithGoogleMap uses withGoogleMap HOC.
- * It handles some of the google map initialization states.
+ * Render GoogleMaps and add price labels, group "markers" and infocard using OverlayView.
  */
-const MapWithGoogleMap = withGoogleMap(props => {
-  const {
-    center,
-    infoCardOpen,
-    listings,
-    activeListingId,
-    createURLToListing,
-    onListingClicked,
-    onListingInfoCardClicked,
-    onIdle,
-    onMapLoad,
-    zoom,
-    mapComponentRefreshToken,
-  } = props;
-
-  const controlPosition =
-    typeof window !== 'undefined' && typeof window.google !== 'undefined'
-      ? window.google.maps.ControlPosition.LEFT_TOP
-      : 5;
-
-  const priceLabels = priceLabelsInLocations(
-    listings,
-    activeListingId,
-    infoCardOpen,
-    onListingClicked,
-    mapComponentRefreshToken
-  );
-  const infoCard = infoCardComponent(
-    infoCardOpen,
-    onListingInfoCardClicked,
-    createURLToListing,
-    mapComponentRefreshToken
-  );
-
-  return (
-    <GoogleMap
-      defaultZoom={zoom}
-      defaultCenter={center}
-      options={{
-        // Disable all controls except zoom
-        mapTypeControl: false,
-        scrollwheel: false,
-        fullscreenControl: false,
-        clickableIcons: false,
-        streetViewControl: false,
-
-        // When infoCard is open, we can't differentiate double click on top of card vs map.
-        disableDoubleClickZoom: !!infoCardOpen,
-
-        zoomControlOptions: {
-          position: controlPosition,
-        },
-      }}
-      ref={onMapLoad}
-      onIdle={onIdle}
-    >
-      {priceLabels}
-      {infoCard}
-    </GoogleMap>
-  );
-});
-
-class SearchMapWithGoogleMap extends Component {
+class SearchMapWithGoogleMaps extends Component {
   constructor(props) {
     super(props);
     this.map = null;
     this.viewportBounds = null;
+    this.idleListener = null;
+    this.state = { mapContainer: null, isMapReady: false };
 
-    this.onMapLoad = this.onMapLoad.bind(this);
+    this.initializeMap = this.initializeMap.bind(this);
+    this.onMount = this.onMount.bind(this);
     this.onIdle = this.onIdle.bind(this);
   }
 
@@ -422,29 +420,77 @@ class SearchMapWithGoogleMap extends Component {
       if (!isEqual(this.props.bounds, currentBounds) && !this.viewportBounds) {
         fitMapToBounds(this.map, this.props.bounds, { padding: 0 });
       }
+
+      if (prevProps.infoCardOpen !== this.props.infoCardOpen) {
+        this.map.setOptions({ disableDoubleClickZoom: !!this.props.infoCardOpen });
+      }
+    }
+
+    if (!this.map && this.state.mapContainer) {
+      this.initializeMap();
+
+      /* Notify parent component that the map is loaded */
+      this.props.onMapLoad(this.map);
+    } else if (prevProps.mapComponentRefreshToken !== this.props.mapComponentRefreshToken) {
+      /* Notify parent component that the map is loaded */
+      this.props.onMapLoad(this.map);
     }
   }
 
-  onMapLoad(map) {
-    this.map = map;
-    this.props.onMapLoad(map);
+  componentWillUnmount() {
+    this.idleListener.remove();
+  }
+
+  initializeMap() {
+    const { offsetHeight, offsetWidth } = this.state.mapContainer;
+    const hasDimensions = offsetHeight > 0 && offsetWidth > 0;
+
+    if (hasDimensions) {
+      const { bounds, center, zoom } = this.props;
+      const maps = window.google.maps;
+      const controlPosition = maps.ControlPosition.LEFT_TOP;
+      const zoomOutToShowEarth = { zoom: 1, center: { lat: 0, lng: 0 } };
+      const zoomAndCenter = !bounds && !center ? zoomOutToShowEarth : { zoom, center };
+
+      const mapConfig = {
+        // Disable all controls except zoom
+        // https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions
+        mapTypeControl: false,
+        scrollwheel: false,
+        fullscreenControl: false,
+        clickableIcons: false,
+        streetViewControl: false,
+
+        zoomControlOptions: {
+          position: controlPosition,
+        },
+
+        // Add default viewport (the whole world)
+        ...zoomAndCenter,
+      };
+
+      this.map = new maps.Map(this.state.mapContainer, mapConfig);
+      this.idleListener = maps.event.addListener(this.map, 'idle', this.onIdle);
+      this.setState({
+        isMapReady: true,
+      });
+    }
+  }
+
+  onMount(element) {
+    this.setState({ mapContainer: element });
   }
 
   onIdle(e) {
     if (this.map) {
-      // Let's try to find the map container element
-      const mapContainer = this.props.containerElement.props.id
-        ? document.getElementById(this.props.containerElement.props.id)
-        : null;
-
       // If reusableMapHiddenHandle is given and parent element has that class,
       // we don't listen moveend events.
       // This fixes mobile Chrome bug that sends map events to invisible map components.
       const isHiddenByReusableMap =
         this.props.reusableMapHiddenHandle &&
-        mapContainer &&
-        mapContainer.parentElement.classList.contains(this.props.reusableMapHiddenHandle);
-
+        this.state.mapContainer.parentElement.classList.contains(
+          this.props.reusableMapHiddenHandle
+        );
       if (!isHiddenByReusableMap) {
         const viewportMapBounds = getMapBounds(this.map);
         const viewportMapCenter = getMapCenter(this.map);
@@ -466,22 +512,56 @@ class SearchMapWithGoogleMap extends Component {
   }
 
   render() {
-    const { onMapLoad, onMapMoveEnd, center, bounds, zoom, ...rest } = this.props;
-    const zoomAndCenter =
-      !bounds && !center ? { zoom: 1, center: { lat: 0, lng: 0 } } : { zoom, center };
+    const {
+      id,
+      className,
+      onMapLoad,
+      onMapMoveEnd,
+      center,
+      bounds,
+      zoom,
+      listings,
+      activeListingId,
+      infoCardOpen,
+      onListingClicked,
+      mapComponentRefreshToken,
+      onListingInfoCardClicked,
+      createURLToListing,
+      ...rest
+    } = this.props;
     return (
-      <MapWithGoogleMap
-        onMapLoad={this.onMapLoad}
-        onIdle={this.onIdle}
-        bounds={bounds}
-        {...zoomAndCenter}
-        {...rest}
-      />
+      <div
+        id={id}
+        ref={this.onMount}
+        className={classNames(className, css.fullArea)}
+        onClick={this.props.onClick}
+      >
+        {this.map ? (
+          <PriceLabelsAndGroups
+            map={this.map}
+            listings={listings}
+            activeListingId={activeListingId}
+            infoCardOpen={infoCardOpen}
+            onListingClicked={onListingClicked}
+            mapComponentRefreshToken={mapComponentRefreshToken}
+          />
+        ) : null}
+        {this.map ? (
+          <InfoCardComponent
+            map={this.map}
+            infoCardOpen={infoCardOpen}
+            onListingInfoCardClicked={onListingInfoCardClicked}
+            createURLToListing={createURLToListing}
+            mapComponentRefreshToken={mapComponentRefreshToken}
+          />
+        ) : null}
+      </div>
     );
   }
 }
 
-SearchMapWithGoogleMap.defaultProps = {
+SearchMapWithGoogleMaps.defaultProps = {
+  id: 'map',
   center: new sdkTypes.LatLng(0, 0),
   infoCardOpen: null,
   listings: [],
@@ -490,8 +570,8 @@ SearchMapWithGoogleMap.defaultProps = {
   reusableMapHiddenHandle: null,
 };
 
-SearchMapWithGoogleMap.propTypes = {
-  containerElement: node.isRequired,
+SearchMapWithGoogleMaps.propTypes = {
+  id: string,
   center: propTypes.latlng,
   location: shape({
     search: string.isRequired,
@@ -506,4 +586,4 @@ SearchMapWithGoogleMap.propTypes = {
   reusableMapHiddenHandle: string,
 };
 
-export default SearchMapWithGoogleMap;
+export default SearchMapWithGoogleMaps;
