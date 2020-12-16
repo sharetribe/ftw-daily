@@ -14,8 +14,12 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+## [v7.2.0] 2020-12-16
+
 - [add] Add helper functions for setting up your own OIDC authentication and using FTW server as
   proxy when needed. [#1383](https://github.com/sharetribe/ftw-daily/pull/1383)
+
+  [v7.2.0]: https://github.com/sharetribe/ftw-daily/compare/v7.1.0...v7.2.0
 
 ## [v7.1.0] 2020-12-15
 
