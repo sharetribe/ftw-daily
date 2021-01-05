@@ -14,6 +14,10 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [fix] Make sure that the verify email API endpoint has been called successfully before redirecting
+  the user away from EmailVerificationPage.
+  [#1397](https://github.com/sharetribe/ftw-daily/pull/1397)
+
 ## [v7.2.0] 2020-12-16
 
 - [add] Add helper functions for setting up your own OIDC authentication and using FTW server as
