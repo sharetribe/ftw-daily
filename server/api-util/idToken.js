@@ -7,7 +7,7 @@ const PORT = parseInt(process.env.REACT_APP_DEV_API_SERVER_PORT, radix);
 const rootUrl = process.env.REACT_APP_CANONICAL_ROOT_URL;
 const useDevApiServer = process.env.NODE_ENV === 'development' && !!PORT;
 
-const issuerUrl = useDevApiServer ? `http://localhost:${PORT}/api` : `${rootUrl}/api`;
+const issuerUrl = useDevApiServer ? `http://localhost:${PORT}` : `${rootUrl}`;
 
 /**
  * Gets user information and creates the signed jwt for id token.
