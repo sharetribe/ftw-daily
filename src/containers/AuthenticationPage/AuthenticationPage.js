@@ -230,6 +230,17 @@ export class AuthenticationPageComponent extends Component {
       window.location.href = `${baseUrl}/api/auth/google?${fromParam}${defaultReturnParam}${defaultConfirmParam}`;
     };
 
+    const authWithLinkedin = () => {
+      const defaultRoutes = getDefaultRoutes();
+      const {
+        baseUrl,
+        fromParam,
+        defaultReturnParam,
+        defaultConfirmParam,
+      } = defaultRoutes;
+      window.location.href = `${baseUrl}/api/auth/linkedin?${fromParam}${defaultReturnParam}${defaultConfirmParam}`;
+    };
+
     const idp = this.state.authInfo
       ? this.state.authInfo.idpId.replace(/^./, str => str.toUpperCase())
       : null;
@@ -273,6 +284,13 @@ export class AuthenticationPageComponent extends Component {
     ) : (
       <FormattedMessage id="AuthenticationPage.signupWithGoogle" />
     );
+
+    const linkedinButtonText = isLogin ? (
+      "Log in with LinkedIn"
+    ) : (
+      "Sign in with LinkedIn"
+    );
+
     const socialLoginButtonsMaybe = showSocialLogins ? (
       <div className={css.idpButtons}>
         <div className={css.socialButtonsOr}>
@@ -298,6 +316,12 @@ export class AuthenticationPageComponent extends Component {
             </SocialLoginButton>
           </div>
         ) : null}
+
+        <div className={css.socialButtonWrapper}>
+          <SocialLoginButton onClick={() => authWithLinkedin()}>
+            {linkedinButtonText}
+          </SocialLoginButton>
+        </div>
       </div>
     ) : null;
 
