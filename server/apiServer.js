@@ -9,6 +9,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const apiRouter = require('./apiRouter');
+const wellKnownRouter = require('./wellKnownRouter');
 
 const radix = 10;
 const PORT = parseInt(process.env.REACT_APP_DEV_API_SERVER_PORT, radix);
@@ -23,6 +24,7 @@ app.use(
   })
 );
 app.use(cookieParser());
+app.use('/.well-known', wellKnownRouter);
 app.use('/api', apiRouter);
 
 app.listen(PORT, () => {
