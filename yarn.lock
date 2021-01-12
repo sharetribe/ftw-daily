@@ -9355,6 +9355,13 @@ passport-google-oauth@^2.0.0:
     passport-google-oauth1 "1.x.x"
     passport-google-oauth20 "2.x.x"
 
+passport-linkedin-oauth2@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/passport-linkedin-oauth2/-/passport-linkedin-oauth2-2.0.0.tgz#c320374baa44c1412a9b023590d1d0c1c77cfe73"
+  integrity sha512-PnSeq2HzFQ/y1/p2RTF/kG2zhJ7kwGVg4xO3E+JNxz2aI0pFJGAqC503FVpUksYbhQdNhL6QYlK9qrEXD7ZYCg==
+  dependencies:
+    passport-oauth2 "1.x.x"
+
 passport-oauth1@1.x.x:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/passport-oauth1/-/passport-oauth1-1.1.0.tgz#a7de988a211f9cf4687377130ea74df32730c918"
