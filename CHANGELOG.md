@@ -14,6 +14,11 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [fix] Move well-known/\* endpoints related to OIDC proxy setup from `apiRouter` to new
+  `wellKnownRouter`so that they can be enabled outside the basic auth setup. It also makes it
+  simpler to set the identity provider url, because we can drop the `/api` part of the path. Also,
+  rename the `RSA_SECRET_KEY`to `RSA_PRIVATE_KEY` for consistency.
+  [#1399](https://github.com/sharetribe/ftw-daily/pull/1399)
 - [fix] Make sure that the verify email API endpoint has been called successfully before redirecting
   the user away from EmailVerificationPage.
   [#1397](https://github.com/sharetribe/ftw-daily/pull/1397)

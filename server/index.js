@@ -33,6 +33,7 @@ const sitemap = require('express-sitemap');
 const passport = require('passport');
 const auth = require('./auth');
 const apiRouter = require('./apiRouter');
+const wellKnownRouter = require('./wellKnownRouter');
 const renderer = require('./renderer');
 const dataLoader = require('./dataLoader');
 const fs = require('fs');
@@ -131,9 +132,15 @@ app.use('/static', express.static(path.join(buildPath, 'static')));
 app.use('/robots.txt', express.static(path.join(buildPath, 'robots.txt')));
 app.use(cookieParser());
 
+// These .well-known/* endpoints will be enabled if you are using FTW as OIDC proxy
+// https://www.sharetribe.com/docs/cookbook-social-logins-and-sso/setup-open-id-connect-proxy/
+// We need to handle these endpoints separately so that they are accessible by Flex
+// even if you have enabled basic authentication e.g. in staging environment.
+app.use('/.well-known', wellKnownRouter);
+
 // Use basic authentication when not in dev mode. This is
-// intentionally after the static middleware to skip basic auth for
-// static resources.
+// intentionally after the static middleware and /.well-known
+// endpoints as those will bypass basic auth.
 if (!dev) {
   const USERNAME = process.env.BASIC_AUTH_USERNAME;
   const PASSWORD = process.env.BASIC_AUTH_PASSWORD;
