@@ -15,8 +15,8 @@ const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 const FACEBOOK_IDP_ID = 'facebook';
 const GOOGLE_IDP_ID = 'google';
 
-const OIDC_PROXY_CLIENT_ID = process.env.OIDC_PROXY_CLIENT_ID;
-const OIDC_PROXY_IDP_ID = process.env.OIDC_PROXY_IDP_ID;
+const LINKEDIN_PROXY_CLIENT_ID = process.env.LINKEDIN_PROXY_CLIENT_ID;
+const LINKEDIN_PROXY_IDP_ID = process.env.LINKEDIN_PROXY_IDP_ID;
 
 // Instantiate HTTP(S) Agents with keepAlive set to true.
 // This will reduce the request time for consecutive requests by
@@ -54,9 +54,10 @@ module.exports = (req, res) => {
         ? FACBOOK_APP_ID
         : idpId === GOOGLE_IDP_ID
         ? GOOGLE_CLIENT_ID
-        : idpId === OIDC_PROXY_IDP_ID
-        ? OIDC_PROXY_CLIENT_ID
+        : idpId === LINKEDIN_PROXY_IDP_ID
+        ? LINKEDIN_PROXY_CLIENT_ID
         : null;
+
   sdk.currentUser
     .createWithIdp({ idpId, idpClientId, idpToken, ...rest })
     .then(() =>

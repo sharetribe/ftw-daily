@@ -9,10 +9,10 @@ const rootUrl = process.env.REACT_APP_CANONICAL_ROOT_URL;
 const clientID = process.env.REACT_APP_LINKEDIN_CLIENT_ID;
 const clientSecret = process.env.LINKEDIN_CLIENT_SECRET;
 
-// Identity provider and identity provider client information. There should
-// match to an identity provider client "Client ID" and "IdP ID".
-const idpClientId = process.env.OIDC_PROXY_CLIENT_ID;
-const idpId = process.env.OIDC_PROXY_IDP_ID;
+// Identity provider and identity provider client information. They should
+// match to an identity provider client "Client ID" and "IdP ID" in Console.
+const idpClientId = process.env.LINKEDIN_PROXY_CLIENT_ID;
+const idpId = process.env.LINKEDIN_PROXY_IDP_ID;
 
 let callbackURL = null;
 
