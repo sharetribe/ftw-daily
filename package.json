@@ -3,6 +3,9 @@
   "version": "7.3.0",
   "private": true,
   "license": "Apache-2.0",
+  "engines": {
+    "node": "15.x"
+  },
   "dependencies": {
     "@babel/runtime": "^7.11.2",
     "@formatjs/intl-relativetimeformat": "^4.2.1",
