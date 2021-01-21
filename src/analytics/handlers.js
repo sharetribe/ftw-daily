@@ -17,3 +17,17 @@ export class GoogleAnalyticsHandler {
     this.ga('send', 'pageview');
   }
 }
+
+export class FacebookPixelHandler {
+  constructor(fbq) {
+    if (typeof fbq !== 'function') {
+      throw new Error('Variable `fbq` missing for Facebook Pixel');
+    }
+    this.fbq = fbq;
+  }
+  trackPageView(url) {
+    const time = new Date();
+    this.fbq('track', "PageView");
+    this.fbq('trackCustom', 'CustomPageView', {url, time});
+  }
+}

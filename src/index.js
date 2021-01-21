@@ -30,7 +30,7 @@ import { authInfo } from './ducks/Auth.duck';
 import { fetchCurrentUser } from './ducks/user.duck';
 import routeConfiguration from './routeConfiguration';
 import * as log from './util/log';
-import { LoggingAnalyticsHandler, GoogleAnalyticsHandler } from './analytics/handlers';
+import { LoggingAnalyticsHandler, GoogleAnalyticsHandler, FacebookPixelHandler } from './analytics/handlers';
 
 import './marketplaceIndex.css';
 
@@ -67,6 +67,11 @@ const setupAnalyticsHandlers = () => {
   // Add Google Analytics handler if tracker ID is found
   if (process.env.REACT_APP_GOOGLE_ANALYTICS_ID) {
     handlers.push(new GoogleAnalyticsHandler(window.ga));
+  }
+
+  // Add FB Pixel handler if tracker ID is found
+  if (process.env.REACT_APP_FACEBOOK_PIXEL_ID) {
+    handlers.push(new FacebookPixelHandler(window.fbq));
   }
 
   return handlers;

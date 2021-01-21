@@ -95,9 +95,32 @@ module.exports = (reportUri, enforceSsl, reportOnly) => {
   // const { imgSrc = [self] } = defaultDirectives;
   // const exampleImgSrc = imgSrc.concat('my-custom-domain.example.com');
 
+  const {
+    scriptSrc = [self],
+    imgSrc = [self],
+    mediaSrc = [self],
+    frameSrc = [self],
+  } = defaultDirectives;
+
+  const gtm = 'www.googletagmanager.com';
+  const fb = 'www.facebook.com';
+  const fb_conn = 'connect.facebook.net';
+  const tidio_code = 'code.tidio.co';
+  const tidio_widg = 'widget-v4.tidiochat.com';
+  const src_urls = [gtm, fb_conn, tidio_code, tidio_widg];
+
+  const newScripts = scriptSrc.concat(src_urls);
+  const newImgs = imgSrc.concat(fb);
+  const newMedia = mediaSrc.concat(tidio_widg);
+  const newFrames = mediaSrc.concat(fb);
+
   const customDirectives = {
     // Example: Add custom directive override
     // imgSrc: exampleImgSrc,
+    scriptSrc: newScripts,
+    imgSrc: newImgs,
+    mediaSrc: newMedia,
+    frameSrc: newFrames
   };
 
   // ================ END CUSTOM CSP URLs ================ //
