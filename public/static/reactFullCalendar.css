@@ -1,0 +1,105 @@
+@import './calendar_core.min.css';
+@import './calendar_daygrid.min.css';
+@import './calendar_list.min.css';
+@import './calendar_timegrid.min.css';
+
+
+.main-calendar {
+	max-width: 1224px;
+	min-width: 375px;
+	margin: auto;
+	display: flex;
+}
+.main-calendar table {
+	border-style: hidden;
+}
+
+.main-calendar .fc-right {
+	font-size: 18px;
+}
+.main-calendar .fc-content{
+	overflow-y: scroll;
+}
+.main-calendar thead th span {
+	width: 40px;
+    display: block;
+    margin: auto;
+    text-align: center;
+    line-height: 30px;
+	padding-bottom: 25px;
+	font-size: 16px;
+    color: rgba(0,0,0,.75);
+}
+.main-calendar  .fc-day-header.fc-widget-header.fc-mon.fc-today span {
+	background: #923395;
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    padding: 0;
+    color: white;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-calendar tbody td span {
+	font-size: 12px;
+}
+.main-calendar 	.fc-today-button{
+	display: none;
+}
+.main-calendar 	.fc-button.fc-button-primary span{
+	display: flex;
+}
+.main-calendar .fc-content::-webkit-scrollbar-track,
+.main-calendar .fc-scroller.fc-time-grid-container::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	border-radius: 20px;
+	background-color: #f5f5f5;
+}
+.main-calendar .fc-content::-webkit-scrollbar,
+.main-calendar .fc-scroller.fc-time-grid-container::-webkit-scrollbar {
+	width: 8px;
+	height: 30px;
+	background-color: #f5f5f5;
+}
+.main-calendar .fc-content::-webkit-scrollbar {
+	width: 4px;
+	height: 14px;
+}
+.main-calendar .fc-content::-webkit-scrollbar-thumb,
+.main-calendar .fc-scroller.fc-time-grid-container::-webkit-scrollbar-thumb {
+	border-radius: 20px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background: rgba(0,0,0,.15);;
+}
+.main-calendar .fc-day-grid .fc-axis.fc-widget-content {
+	color: transparent;
+}
+.main-calendar .fc-day-grid .fc-axis.fc-widget-content:before{
+	content: 'Ganztags';
+	color:rgb(26, 43, 73) !important;
+	font-size: 10px;
+} 
+@media screen and (max-width: 680px) {
+    .main-calendar {
+      flex-direction: column;
+      align-items: flex-start;
+	}
+	.main-calendar  .fc.fc-ltr.fc-unthemed {
+		margin-left: -25px;
+	}
+	.main-calendar  .fc-toolbar.fc-header-toolbar {
+		margin: 25px 20px;
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.main-calendar  .fc-toolbar.fc-header-toolbar .fc-right h2{
+		margin-top: 25px;
+		font-size: 18px;
+	}
+	.main-calendar .fc-title {
+		font-size: 13px;
+	}
+  }

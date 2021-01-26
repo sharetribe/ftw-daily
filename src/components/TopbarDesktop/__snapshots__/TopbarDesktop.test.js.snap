@@ -1,0 +1,194 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TopbarDesktop data matches snapshot 1`] = `
+<nav
+  className=""
+>
+  <a
+    className="NamedLink_active"
+    href="/"
+    onClick={[Function]}
+    style={Object {}}
+    title={null}
+  >
+    <img
+      alt="TopbarDesktop.logo"
+      className={null}
+      src="horse-deal-logo.png"
+    />
+  </a>
+  <form
+    action="/"
+    className=""
+    method="post"
+    onSubmit={[Function]}
+  >
+    <div
+      className=""
+    >
+      <div
+        className=""
+      >
+        <svg
+          height="22"
+          viewBox="0 0 21 22"
+          width="21"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g
+            fill="none"
+            fillRule="evenodd"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            transform="matrix(-1 0 0 1 20 1)"
+          >
+            <path
+              d="M13 14l5.241 5.241"
+            />
+            <circle
+              cx="7.5"
+              cy="7.5"
+              r="7.5"
+            />
+          </g>
+        </svg>
+      </div>
+      <input
+        autoComplete="off"
+        autoFocus={false}
+        className=""
+        disabled={false}
+        name="location"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        placeholder="TopbarSearchForm.placeholder"
+        type="search"
+        value=""
+      />
+    </div>
+  </form>
+  <a
+    className=""
+    href="/l/new"
+    onClick={[Function]}
+    style={Object {}}
+    title={null}
+  >
+    <span>
+      <span>
+        TopbarDesktop.createListing
+      </span>
+    </span>
+  </a>
+  <a
+    className=""
+    href="/inbox/sales"
+    onClick={[Function]}
+    style={Object {}}
+    title={null}
+  >
+    <span>
+      <span>
+        TopbarDesktop.inbox
+      </span>
+    </span>
+  </a>
+  <div
+    className=""
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    tabIndex={0}
+  >
+    <button
+      className=""
+      onBlur={[Function]}
+      onClick={[Function]}
+    >
+      <div
+        className=""
+        title=""
+      >
+        <span />
+      </div>
+    </button>
+    <div
+      className=""
+      style={Object {}}
+    >
+      <ul
+        className=""
+      >
+        <li
+          className=""
+          role="menuitem"
+        >
+          <a
+            className=""
+            href="/listings"
+            onClick={[Function]}
+            style={Object {}}
+            title={null}
+          >
+            <span />
+            <span>
+              TopbarDesktop.yourListingsLink
+            </span>
+          </a>
+        </li>
+        <li
+          className=""
+          role="menuitem"
+        >
+          <a
+            className=""
+            href="/profile-settings"
+            onClick={[Function]}
+            style={Object {}}
+            title={null}
+          >
+            <span />
+            <span>
+              TopbarDesktop.profileSettingsLink
+            </span>
+          </a>
+        </li>
+        <li
+          className=""
+          role="menuitem"
+        >
+          <a
+            className=""
+            href="/account"
+            onClick={[Function]}
+            style={Object {}}
+            title={null}
+          >
+            <span />
+            <span>
+              TopbarDesktop.accountSettingsLink
+            </span>
+          </a>
+        </li>
+        <li
+          className=""
+          role="menuitem"
+        >
+          <button
+            className=""
+            disabled={false}
+            onClick={[Function]}
+          >
+            <span />
+            <span>
+              TopbarDesktop.logout
+            </span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+`;

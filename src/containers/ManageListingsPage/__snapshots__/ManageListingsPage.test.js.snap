@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContactDetailsPage matches snapshot 1`] = `
+<Page
+  scrollingDisabled={false}
+  title="ManageListingsPage.title"
+>
+  <LayoutSingleColumn
+    className={null}
+    rootClassName={null}
+  >
+    <LayoutWrapperTopbar
+      className={null}
+      rootClassName={null}
+    >
+      <withRouter(Connect(TopbarContainerComponent))
+        currentPage="ManageListingsPage"
+      />
+      <UserNav
+        className={null}
+        rootClassName={null}
+        selectedPageName="ManageListingsPage"
+      />
+    </LayoutWrapperTopbar>
+    <LayoutWrapperMain
+      className={null}
+      rootClassName={null}
+    >
+      <div>
+        <div />
+      </div>
+    </LayoutWrapperMain>
+    <LayoutWrapperFooter
+      className={null}
+      rootClassName={null}
+    >
+      <injectIntl(Footer) />
+    </LayoutWrapperFooter>
+  </LayoutSingleColumn>
+</Page>
+`;

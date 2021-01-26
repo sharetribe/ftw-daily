@@ -1,0 +1,42 @@
+/* .emojiWrapper {
+    position: absolute;
+    top: 90px;
+    left: 5px;
+    z-index: 100;
+    @media (--viewportLarge) {
+        top: 50px;
+      }
+}
+.emojiToggler {
+    display: inline-block;
+}
+.emojiTogglerClicked {
+    animation-name: madeVisible;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-out;
+}
+.emojiToggler:hover {
+    cursor: pointer;
+}
+.emojiBar {
+    position: absolute;
+    top: 35px;
+    left: 0px;
+}
+.emojiBarHidden {
+    display: none;
+}
+@keyframes madeVisible {
+    0% {
+        opacity: 0;
+        transform: scale(0.75);
+      }
+      50% {
+        transform: scale(1.15);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+} */

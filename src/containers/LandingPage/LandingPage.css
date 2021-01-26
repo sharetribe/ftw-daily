@@ -1,0 +1,199 @@
+@import '../../marketplace.css';
+
+:root {
+  /*
+    These variables are available in global scope through ":root"
+    element (<html> tag). Variables with the same names are going to
+    overwrite each other if CSS Properties' (PostCSS plugin)
+    configuration "preserve: true" is used - meaning that variables
+    are left to CSS bundle. We are planning to enable it in the future
+    since browsers support CSS Properties already.
+ */
+
+  --LandingPage_sectionMarginTop: 40px;
+  --LandingPage_sectionMarginTopMedium: 40px;
+  --LandingPage_sectionMarginTopLarge: 60px;
+}
+
+.root {
+}
+
+.listingCards {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: var(--LandingPage_sectionMarginTop);
+
+  @media (--viewportMedium) {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: var(--LandingPage_sectionMarginTop);
+  }
+}
+
+/* heroContainer gives the height for SectionHero */
+/* Safari has a bug with vw padding inside flexbox. Therefore we need an extra div (container) */
+/* If you've lot of content for the hero, multiple lines of text, make sure to adjust min-heights for each media breakpoint accordingly */
+.heroContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+  height: 67.5vh;
+  max-height: 600px;
+  padding: 0;
+
+  @media (--viewportMedium) {
+    min-height: 500px;
+    height: 100vh;
+    max-height: none;
+  }
+
+  @media (--viewportLarge) {
+    min-height: 600px;
+    height: calc(100vh - var(--topbarHeightDesktop));
+  }
+}
+
+.hero {
+  flex-grow: 1;
+  justify-content: flex-end;
+  padding-bottom: 32px;
+  /*max-width: 1500px;*/
+  margin: auto;
+  border: 0;
+  border-radius: 0;
+
+  @media (--viewportMedium) {
+    padding-bottom: 90px;
+    justify-content: center;
+  }
+
+  @media (--viewportLarge) {
+    justify-content: center;
+    padding-top: var(--LandingPage_sectionMarginTopMedium);
+  }
+}
+
+/* Square corners for the last section if it's even */
+.section:nth-of-type(2n):last-of-type {
+  @media (--viewportMedium) {
+    border-radius: 4px 4px 0 0;
+  }
+}
+.section {
+  padding-top: 40px;
+  padding-bottom: 60px;
+
+  @media (--viewportMedium) {
+    padding-top: 70px;
+    padding-bottom: 90px;
+  }
+  max-width: 100%;
+}
+
+/* Every other section has a light background */
+.section:nth-of-type(odd) {
+  background-color: #f6f6f6;
+  background: url('/static/patterns/ps-pattern.png');
+  @media (--viewportMedium) {
+    border-radius: 4px;
+  }
+}
+
+.section:last-of-type(odd) {
+  border-top: 1px solid #f5f5f5;
+}
+
+.section.landingPageAdvantages {
+  display: none;
+  padding: 33px 0;
+  border-bottom: 1px solid #e7e7e7;
+
+  @media (--viewportMedium) {
+    display: block;
+  }
+}
+
+.section.sectionPartners {
+  padding: 26px 0;
+}
+.section.sectionHowItWorks {
+  padding-bottom: 90px;
+}
+.sectionContent {
+  margin: var(--LandingPage_sectionMarginTop) 24px 51px 24px;
+
+  @media (--viewportMedium) {
+    max-width: 100%;
+    margin: var(--LandingPage_sectionMarginTopMedium) 24px 60px 24px;
+  }
+
+  @media (--viewportLarge) {
+    max-width: 1228px;
+    padding: 0 36px 0 36px;
+    margin: var(--LandingPage_sectionMarginTopLarge) auto 93px auto;
+  }
+
+  @media (--viewportXLarge) {
+    max-width: 1056px;
+    padding: 0;
+  }
+}
+
+.sectionContentLowVerticalMargin {
+  margin: 0px 24px;
+  overflow: hidden;
+  @media (--viewportMedium) {
+    max-width: 100%;
+    margin: 0px 24px;
+
+  }
+
+  @media (--viewportLarge) {
+    max-width: 1228px;
+    padding: 0 36px 0 36px;
+    margin: 0px auto 0px auto;
+  }
+
+  @media (--viewportXLarge) {
+    max-width: 1056px;
+    padding: 0;
+  }
+}
+
+.sectionContentFirstChild {
+  composes: sectionContent;
+  margin-top: 3vh;
+}
+
+/* A bar on top of light sections */
+.section:nth-of-type(2n) .sectionContent::before {
+  content: '';
+  display: block;
+  width: 109px;
+  height: 6px;
+
+  /* Place the bar on top of .sectionContent top margin */
+  position: relative;
+  top: calc(-1 * var(--LandingPage_sectionMarginTop));
+
+  @media (--viewportMedium) {
+    width: 192px;
+    height: 8px;
+    top: calc(-1 * var(--LandingPage_sectionMarginTopMedium));
+  }
+
+  @media (--viewportLarge) {
+    top: calc(-1 * var(--LandingPage_sectionMarginTopLarge));
+  }
+}
+
+.moto {
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 44px;
+  margin-bottom: 20px;
+}
+
+.moto b {
+  color: purple;
+  font-weight: 800;
+}

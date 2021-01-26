@@ -1,0 +1,8 @@
+@import '../../marketplace.css';
+
+.root {
+  height: 17px;
+
+  fill: var(--matterColor);
+  transition: var(--transitionStyleButton);
+}

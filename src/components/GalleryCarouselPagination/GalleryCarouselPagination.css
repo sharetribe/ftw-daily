@@ -1,0 +1,41 @@
+@import '../../marketplace.css';
+
+.paginationWrapper {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  right: 8px;
+  left: 8px;
+  bottom: 8px;
+}
+.dotButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: none;
+  outline: none;
+}
+.dotIcon {
+  border-radius: 50%;
+  background-color: var(--matterColorLight);
+  display: block;
+  opacity: 0.6;
+  width: 6px;
+  height: 6px;
+}
+.dotIconActive {
+  width: 8px;
+  height: 8px;
+  opacity: 1;
+}
+.dotIconMoreState {
+  width: 4px;
+  height: 4px;
+}
+.slideContainer {
+  width: 18px;
+  height: 18px;
+}

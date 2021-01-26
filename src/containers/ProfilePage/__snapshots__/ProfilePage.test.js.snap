@@ -1,0 +1,135 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProfilePage matches snapshot 1`] = `
+<Page
+  schema={
+    Object {
+      "@context": "http://schema.org",
+      "@type": "ProfilePage",
+      "name": "ProfilePage.schemaTitle",
+    }
+  }
+  scrollingDisabled={false}
+  title="ProfilePage.schemaTitle"
+>
+  <LayoutSideNavigation
+    className={null}
+    containerClassName={null}
+    rootClassName={null}
+  >
+    <LayoutWrapperTopbar
+      className={null}
+      rootClassName={null}
+    >
+      <withRouter(Connect(TopbarContainerComponent))
+        currentPage="ProfilePage"
+      />
+    </LayoutWrapperTopbar>
+    <LayoutWrapperSideNav
+      className={null}
+      rootClassName={null}
+      tabs={null}
+    >
+      <div>
+        <AvatarLarge
+          disableProfileLink={true}
+          user={
+            Object {
+              "attributes": Object {
+                "banned": false,
+                "deleted": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "test-user display name",
+                },
+              },
+              "id": UUID {
+                "_sdkType": "UUID",
+                "uuid": "test-user",
+              },
+              "type": "user",
+            }
+          }
+        />
+        <h1>
+          <FormattedMessage
+            id="ProfilePage.mobileHeading"
+            values={
+              Object {
+                "name": "test-user display name",
+              }
+            }
+          />
+        </h1>
+      </div>
+    </LayoutWrapperSideNav>
+    <LayoutWrapperMain
+      className={null}
+      rootClassName={null}
+    >
+      <div>
+        <h1>
+          <FormattedMessage
+            id="ProfilePage.desktopHeading"
+            values={
+              Object {
+                "name": "test-user display name",
+              }
+            }
+          />
+        </h1>
+        <div>
+          <ButtonTabNavHorizontal
+            className={null}
+            rootClassName={null}
+            skin="light"
+            tabClassName={null}
+            tabRootClassName={null}
+            tabs={
+              Array [
+                Object {
+                  "onClick": [Function],
+                  "selected": true,
+                  "text": <h3>
+                    <FormattedMessage
+                      id="ProfilePage.reviewsOfProviderTitle"
+                      values={
+                        Object {
+                          "count": 0,
+                        }
+                      }
+                    />
+                  </h3>,
+                },
+                Object {
+                  "onClick": [Function],
+                  "selected": false,
+                  "text": <h3>
+                    <FormattedMessage
+                      id="ProfilePage.reviewsOfCustomerTitle"
+                      values={
+                        Object {
+                          "count": 0,
+                        }
+                      }
+                    />
+                  </h3>,
+                },
+              ]
+            }
+          />
+          <injectIntl(ReviewsComponent)
+            reviews={Array []}
+          />
+        </div>
+      </div>
+    </LayoutWrapperMain>
+    <LayoutWrapperFooter
+      className={null}
+      rootClassName={null}
+    >
+      <injectIntl(Footer) />
+    </LayoutWrapperFooter>
+  </LayoutSideNavigation>
+</Page>
+`;

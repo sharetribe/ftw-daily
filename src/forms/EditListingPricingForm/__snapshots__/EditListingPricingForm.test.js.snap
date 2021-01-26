@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditListingPricingForm matches snapshot 1`] = `
+<form
+  action="/"
+  className=""
+  method="post"
+  onSubmit={[Function]}
+>
+  <div
+    className=""
+  >
+    <label
+      htmlFor="price"
+    >
+      EditListingPricingForm.pricePerNight
+    </label>
+    <input
+      autoFocus={true}
+      className=""
+      id="price"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      placeholder="EditListingPricingForm.priceInputPlaceholder"
+      type="text"
+      value=""
+    />
+  </div>
+  <button
+    className=""
+    disabled={true}
+    type="submit"
+  >
+    Save price
+  </button>
+</form>
+`;

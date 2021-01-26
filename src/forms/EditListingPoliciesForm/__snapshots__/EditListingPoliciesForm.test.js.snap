@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditListingPoliciesForm matches snapshot 1`] = `
+<ReactFinalForm
+  dispatch={[Function]}
+  intl={
+    Object {
+      "formatDate": [Function],
+      "formatHTMLMessage": [Function],
+      "formatMessage": [Function],
+      "formatNumber": [Function],
+      "formatPlural": [Function],
+      "formatRelativeTime": [Function],
+      "formatTime": [Function],
+      "now": [Function],
+    }
+  }
+  onSubmit={[Function]}
+  publicData={Object {}}
+  render={[Function]}
+  saveActionMsg="Save rules"
+  selectedPlace={null}
+  updateError={null}
+  updateInProgress={false}
+  updated={false}
+/>
+`;

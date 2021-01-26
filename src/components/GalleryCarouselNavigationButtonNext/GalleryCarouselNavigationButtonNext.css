@@ -1,0 +1,27 @@
+@import '../../marketplace.css';
+
+.arrow {
+  width: 36px;
+  height: 36px;
+}
+
+.small {
+  width: 24px;
+  height: 24px;
+}
+
+.buttonNext {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 20%;
+  top: 0;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  right: 0;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
+  border-radius: 4px;
+}

@@ -1,0 +1,27 @@
+@import '../../marketplace.css';
+
+.content {
+  @media (--viewportMedium) {
+    margin: 32px auto 0 auto;
+    max-width: 564px;
+  }
+
+  @media (--viewportLarge) {
+    margin: 0;
+  }
+}
+
+.desktopTopbar,
+.mobileTopbar {
+  box-shadow: none;
+}
+
+.title {
+  hyphens: auto;
+  margin-top: 8px;
+  margin-bottom: 19px;
+
+  @media (--viewportMedium) {
+    margin-bottom: 47px;
+  }
+}

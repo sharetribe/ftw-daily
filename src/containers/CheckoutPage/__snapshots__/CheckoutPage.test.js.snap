@@ -1,0 +1,153 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CheckoutPage matches snapshot 1`] = `
+<Page
+  scrollingDisabled={false}
+  title="CheckoutPage.title"
+>
+  <div>
+    <NamedLink
+      name="LandingPage"
+    >
+      <Logo
+        className={null}
+        format="mobile"
+        title="CheckoutPage.goToLandingPage"
+      />
+      <Logo
+        alt="CheckoutPage.goToLandingPage"
+        className={null}
+        format="desktop"
+      />
+    </NamedLink>
+  </div>
+  <div>
+    <div>
+      <ResponsiveImage
+        alt="listing1 title"
+        className={null}
+        image={null}
+        noImageMessage={null}
+        rootClassName={null}
+        variants={
+          Array [
+            "landscape-crop",
+            "landscape-crop2x",
+          ]
+        }
+      />
+    </div>
+    <div
+      className=""
+    >
+      <AvatarMedium
+        disableProfileLink={true}
+        user={
+          Object {
+            "attributes": Object {
+              "banned": false,
+              "deleted": false,
+              "profile": Object {
+                "abbreviatedName": "TT",
+                "displayName": "author display name",
+              },
+            },
+            "id": UUID {
+              "_sdkType": "UUID",
+              "uuid": "author",
+            },
+            "type": "user",
+          }
+        }
+      />
+    </div>
+    <div>
+      <div>
+        <h1>
+          CheckoutPage.title
+        </h1>
+        <div>
+          <FormattedMessage
+            id="CheckoutPage.hostedBy"
+            values={
+              Object {
+                "name": "author display name",
+              }
+            }
+          />
+        </div>
+      </div>
+      <div />
+      <section>
+        <injectIntl(StripePaymentForm)
+          authorDisplayName="author display name"
+          confirmPaymentError={null}
+          defaultPaymentMethod={null}
+          formId="CheckoutPagePaymentForm"
+          hasHandledCardPayment={null}
+          inProgress={false}
+          initialValues={
+            Object {
+              "name": "currentUser first name currentUser last name",
+            }
+          }
+          initiateOrderError={null}
+          loadingData={true}
+          onStripeInitialized={[Function]}
+          onSubmit={[Function]}
+          paymentInfo="CheckoutPage.paymentInfo"
+          paymentIntent={null}
+          showInitialMessageInput={true}
+        />
+      </section>
+    </div>
+    <div>
+      <div>
+        <ResponsiveImage
+          alt="listing1 title"
+          className={null}
+          image={null}
+          noImageMessage={null}
+          rootClassName={null}
+          variants={
+            Array [
+              "landscape-crop",
+              "landscape-crop2x",
+            ]
+          }
+        />
+      </div>
+      <div>
+        <AvatarMedium
+          disableProfileLink={true}
+          user={
+            Object {
+              "attributes": Object {
+                "banned": false,
+                "deleted": false,
+                "profile": Object {
+                  "abbreviatedName": "TT",
+                  "displayName": "author display name",
+                },
+              },
+              "id": UUID {
+                "_sdkType": "UUID",
+                "uuid": "author",
+              },
+              "type": "user",
+            }
+          }
+        />
+      </div>
+      <div>
+        <h2>
+          listing1 title
+        </h2>
+        <p>
+          55 CheckoutPage.perNight
+        </p>
+      </div>
+    </div>
+  </div>
+</Page>
+`;

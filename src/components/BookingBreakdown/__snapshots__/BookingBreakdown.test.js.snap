@@ -1,0 +1,361 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BookingBreakdown customer transaction data matches snapshot 1`] = `
+<div
+  className=""
+>
+  Array [
+    <div>
+      <div>
+        <div>
+          <div>
+            <span>
+              BookingBreakdown.bookingStart
+            </span>
+          </div>
+          <div>
+            <span>
+              Sat 12:00 PM
+            </span>
+          </div>
+          <div>
+            <span>
+              Jun 10
+            </span>
+          </div>
+        </div>
+        <div>
+          <div>
+            <span>
+              BookingBreakdown.bookingEnd
+            </span>
+          </div>
+          <div>
+            <span>
+              Sat 12:00 PM
+            </span>
+          </div>
+          <div>
+            <span>
+              Jun 10
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>,
+    <hr />,
+  ]
+  <div>
+    <span>
+      <span>
+        BookingBreakdown.baseUnitNight
+      </span>
+    </span>
+    <span>
+      20
+    </span>
+  </div>
+  Array [
+    <hr />,
+    <div>
+      <div>
+        <span>
+          BookingBreakdown.total
+        </span>
+      </div>
+      <div>
+        20
+      </div>
+    </div>,
+  ]
+</div>
+`;
+
+exports[`BookingBreakdown pretransaction data matches snapshot 1`] = `
+<div
+  className=""
+>
+  Array [
+    <div>
+      <div>
+        <div>
+          <div>
+            <span>
+              BookingBreakdown.bookingStart
+            </span>
+          </div>
+          <div>
+            <span>
+              Sat 12:00 PM
+            </span>
+          </div>
+          <div>
+            <span>
+              Jun 10
+            </span>
+          </div>
+        </div>
+        <div>
+          <div>
+            <span>
+              BookingBreakdown.bookingEnd
+            </span>
+          </div>
+          <div>
+            <span>
+              Sat 12:00 PM
+            </span>
+          </div>
+          <div>
+            <span>
+              Jun 10
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>,
+    <hr />,
+  ]
+  <div>
+    <span>
+      <span>
+        BookingBreakdown.baseUnitNight
+      </span>
+    </span>
+    <span>
+      20
+    </span>
+  </div>
+  Array [
+    <hr />,
+    <div>
+      <div>
+        <span>
+          BookingBreakdown.total
+        </span>
+      </div>
+      <div>
+        20
+      </div>
+    </div>,
+  ]
+</div>
+`;
+
+exports[`BookingBreakdown provider canceled transaction data matches snapshot 1`] = `
+<div
+  className=""
+>
+  Array [
+    <div>
+      <div>
+        <div>
+          <div>
+            <span>
+              BookingBreakdown.bookingStart
+            </span>
+          </div>
+          <div>
+            <span>
+              Sat 12:00 PM
+            </span>
+          </div>
+          <div>
+            <span>
+              Jun 10
+            </span>
+          </div>
+        </div>
+        <div>
+          <div>
+            <span>
+              BookingBreakdown.bookingEnd
+            </span>
+          </div>
+          <div>
+            <span>
+              Sat 12:00 PM
+            </span>
+          </div>
+          <div>
+            <span>
+              Jun 10
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>,
+    <hr />,
+  ]
+  <div>
+    <span>
+      <span>
+        BookingBreakdown.baseUnitNight
+      </span>
+    </span>
+    <span>
+      20
+    </span>
+  </div>
+  Array [
+    <hr />,
+    <div>
+      <span>
+        <span>
+          BookingBreakdown.subTotal
+        </span>
+      </span>
+      <span>
+        20
+      </span>
+    </div>,
+  ]
+  <div>
+    <span>
+      <span>
+        BookingBreakdown.refund
+      </span>
+    </span>
+    <span>
+      -20
+    </span>
+  </div>
+  <div>
+    <span>
+      <span>
+        BookingBreakdown.commission
+      </span>
+    </span>
+    <span>
+      -2
+    </span>
+  </div>
+  <div>
+    <span>
+      <span>
+        BookingBreakdown.refundProviderFee
+      </span>
+    </span>
+    <span>
+      2
+    </span>
+  </div>
+  Array [
+    <hr />,
+    <div>
+      <div>
+        <span>
+          BookingBreakdown.providerTotalCanceled
+        </span>
+      </div>
+      <div>
+        0
+      </div>
+    </div>,
+  ]
+  <span>
+    <span>
+      BookingBreakdown.commissionFeeNote
+    </span>
+  </span>
+</div>
+`;
+
+exports[`BookingBreakdown provider transaction data matches snapshot 1`] = `
+<div
+  className=""
+>
+  Array [
+    <div>
+      <div>
+        <div>
+          <div>
+            <span>
+              BookingBreakdown.bookingStart
+            </span>
+          </div>
+          <div>
+            <span>
+              Sat 12:00 PM
+            </span>
+          </div>
+          <div>
+            <span>
+              Jun 10
+            </span>
+          </div>
+        </div>
+        <div>
+          <div>
+            <span>
+              BookingBreakdown.bookingEnd
+            </span>
+          </div>
+          <div>
+            <span>
+              Sat 12:00 PM
+            </span>
+          </div>
+          <div>
+            <span>
+              Jun 10
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>,
+    <hr />,
+  ]
+  <div>
+    <span>
+      <span>
+        BookingBreakdown.baseUnitNight
+      </span>
+    </span>
+    <span>
+      20
+    </span>
+  </div>
+  Array [
+    <hr />,
+    <div>
+      <span>
+        <span>
+          BookingBreakdown.subTotal
+        </span>
+      </span>
+      <span>
+        20
+      </span>
+    </div>,
+  ]
+  <div>
+    <span>
+      <span>
+        BookingBreakdown.commission
+      </span>
+    </span>
+    <span>
+      -2
+    </span>
+  </div>
+  Array [
+    <hr />,
+    <div>
+      <div>
+        <span>
+          BookingBreakdown.providerTotalDefault
+        </span>
+      </div>
+      <div>
+        18
+      </div>
+    </div>,
+  ]
+  <span>
+    <span>
+      BookingBreakdown.commissionFeeNote
+    </span>
+  </span>
+</div>
+`;

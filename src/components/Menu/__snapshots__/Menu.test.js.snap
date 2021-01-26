@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Menu matches snapshot 1`] = `
+<div
+  className=""
+  onBlur={[Function]}
+  onKeyDown={[Function]}
+  tabIndex={0}
+>
+  <button
+    className=""
+    onBlur={[Function]}
+    onClick={[Function]}
+  >
+    Label
+  </button>
+  <div
+    className=""
+    style={Object {}}
+  >
+    <ul
+      className=""
+    >
+      <li
+        className=""
+        role="menuitem"
+      >
+        Menu item 1
+      </li>
+      <li
+        className=""
+        role="menuitem"
+      >
+        Menu item 2
+      </li>
+    </ul>
+  </div>
+</div>
+`;

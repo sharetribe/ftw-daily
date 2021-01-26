@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthenticationPageComponent matches snapshot 1`] = `
+<Page
+  schema={
+    Object {
+      "@context": "http://schema.org",
+      "@type": "WebPage",
+      "name": "AuthenticationPage.schemaTitleLogin",
+    }
+  }
+  scrollingDisabled={false}
+  title="AuthenticationPage.schemaTitleLogin"
+>
+  <LayoutSingleColumn
+    className={null}
+    rootClassName={null}
+  >
+    <LayoutWrapperTopbar
+      className={null}
+      rootClassName={null}
+    >
+      <withRouter(Connect(TopbarContainerComponent))
+        className=""
+      />
+    </LayoutWrapperTopbar>
+    <LayoutWrapperMain
+      className={null}
+      rootClassName={null}
+    >
+      <div>
+        <div>
+          <LinkTabNavHorizontal
+            className={null}
+            rootClassName={null}
+            skin="light"
+            tabClassName={null}
+            tabRootClassName={null}
+            tabs={
+              Array [
+                Object {
+                  "linkProps": Object {
+                    "name": "SignupPage",
+                    "to": Object {
+                      "state": Object {
+                        "from": "/protected",
+                      },
+                    },
+                  },
+                  "selected": false,
+                  "text": <h1>
+                    <FormattedMessage
+                      id="AuthenticationPage.signupLinkText"
+                      values={Object {}}
+                    />
+                  </h1>,
+                },
+                Object {
+                  "linkProps": Object {
+                    "name": "LoginPage",
+                    "to": Object {
+                      "state": Object {
+                        "from": "/protected",
+                      },
+                    },
+                  },
+                  "selected": true,
+                  "text": <h1>
+                    <FormattedMessage
+                      id="AuthenticationPage.loginLinkText"
+                      values={Object {}}
+                    />
+                  </h1>,
+                },
+              ]
+            }
+          />
+          <LoginForm
+            inProgress={false}
+            onSubmit={[Function]}
+          />
+        </div>
+      </div>
+      <injectIntl(ModalComponent)
+        id="AuthenticationPage.tos"
+        isOpen={false}
+        onClose={[Function]}
+        onManageDisableScrolling={[Function]}
+      >
+        <div>
+          <h2>
+            <FormattedMessage
+              id="AuthenticationPage.termsHeading"
+              values={Object {}}
+            />
+          </h2>
+          <TermsOfService
+            className={null}
+            rootClassName={null}
+          />
+        </div>
+      </injectIntl(ModalComponent)>
+    </LayoutWrapperMain>
+    <LayoutWrapperFooter
+      className={null}
+      rootClassName={null}
+    >
+      <injectIntl(Footer) />
+    </LayoutWrapperFooter>
+  </LayoutSingleColumn>
+</Page>
+`;

@@ -1,0 +1,54 @@
+@import '../../marketplace.css';
+
+.togglePropertiesWrapper {
+  position: relative;
+}
+
+.togglePropertiesInner[data-expanded='false'] {
+  height: 102px;
+  overflow: hidden;
+}
+
+.toggleButton {
+  @apply --marketplaceButtonStylesSecondary;
+  @apply --marketplaceSearchFilterLabelFontStyles;
+  @apply --withArrowIcon;
+
+  border: 1px solid #E0E0E0;
+
+  &:after, &:before {
+    right: 27px;
+    top: 44%;
+    background-color: var(--matterColor);
+  }
+
+  @apply --withArrowIconDown;
+
+    margin: 10px auto;
+    display: block;
+    padding: 10px 0;
+    width: 180px;
+    height: auto;
+    min-height: 0;
+    border-radius: 4px;
+
+  &:focus{
+    outline: none;
+    background-color: var(--matterColorLight);
+    text-decoration: none;
+    box-shadow: none;
+  }
+}
+.toggleButtonExpanded {
+  @apply --withArrowIconUp;
+}
+.blurredLine {
+  height: 50px;
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  right: 0;
+  background-color: white;
+  opacity: 0.55;
+  filter: blur(3px);
+}

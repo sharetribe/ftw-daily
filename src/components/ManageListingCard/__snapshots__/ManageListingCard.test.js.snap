@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ManageListingCard matches snapshot 1`] = `
+<div
+  className=""
+>
+  <div
+    onClick={[Function]}
+    tabIndex={0}
+  >
+    <div>
+      <ResponsiveImage
+        alt="listing1 title"
+        className={null}
+        image={null}
+        noImageMessage={null}
+        rootClassName={null}
+        sizes={null}
+        variants={
+          Array [
+            "landscape-crop",
+            "landscape-crop2x",
+          ]
+        }
+      />
+    </div>
+    <div
+      className=""
+    >
+      <div
+        className=""
+      />
+      <div>
+        <FormattedMessage
+          id="ManageListingCard.viewListing"
+          values={Object {}}
+        />
+      </div>
+    </div>
+    <div>
+      <div />
+      <div>
+        <Menu
+          className="undefined"
+          contentPlacementOffset={-12}
+          contentPosition="left"
+          isOpen={false}
+          onToggleActive={[Function]}
+          rootClassName=""
+          useArrow={false}
+        >
+          <MenuLabel
+            className={null}
+            isOpen={false}
+            isOpenClassName={null}
+            onToggleActive={null}
+            rootClassName=""
+          >
+            <div>
+              <MenuIcon
+                className={null}
+                isActive={false}
+              />
+            </div>
+          </MenuLabel>
+          <MenuContent
+            arrowPosition={null}
+            className={null}
+            contentClassName={null}
+            contentRef={null}
+            isOpen={false}
+            rootClassName=""
+            style={null}
+          >
+            <MenuItem
+              className={null}
+              key="close-listing"
+              rootClassName=""
+            >
+              <InlineTextButton
+                onClick={[Function]}
+                rootClassName=""
+              >
+                <FormattedMessage
+                  id="ManageListingCard.closeListing"
+                  values={Object {}}
+                />
+              </InlineTextButton>
+            </MenuItem>
+          </MenuContent>
+        </Menu>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div
+        title={55}
+      >
+        55
+      </div>
+      <div>
+        <FormattedMessage
+          id="ManageListingCard.perNight"
+          values={Object {}}
+        />
+      </div>
+    </div>
+    <div>
+      <div>
+        <InlineTextButton
+          onClick={[Function]}
+          rootClassName=""
+        >
+          <span
+            key="1"
+            style={
+              Object {
+                "wordBreak": "break-all",
+              }
+            }
+          >
+            listing1
+          </span>
+           
+          title
+        </InlineTextButton>
+      </div>
+    </div>
+    <div>
+      <NamedLink
+        name="EditListingPage"
+        params={
+          Object {
+            "id": "listing1",
+            "slug": "listing1-title",
+            "tab": "description",
+            "type": "edit",
+          }
+        }
+      >
+        <FormattedMessage
+          id="ManageListingCard.editListing"
+          values={Object {}}
+        />
+      </NamedLink>
+      <span>
+         • 
+      </span>
+      <NamedLink
+        name="EditListingPage"
+        params={
+          Object {
+            "id": "listing1",
+            "slug": "listing1-title",
+            "tab": "availability",
+            "type": "edit",
+          }
+        }
+      >
+        <FormattedMessage
+          id="ManageListingCard.manageAvailability"
+          values={Object {}}
+        />
+      </NamedLink>
+    </div>
+  </div>
+</div>
+`;

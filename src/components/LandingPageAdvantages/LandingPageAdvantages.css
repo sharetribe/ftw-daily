@@ -1,0 +1,37 @@
+@import '../../marketplace.css';
+
+.advantage {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  grid-column-gap: 24px;
+}
+
+.advantageIcon {
+  fill: none;
+}
+
+.advantageTitle {
+  margin: 0;
+  margin-bottom: 12px;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.advantageText {
+  margin: 0;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 160%;
+}
+
+ .advantages {
+    display: grid;
+    grid-column-gap: 40px;
+    grid-row-gap: 10px;
+    grid-template-columns: 1fr;
+
+    @media (--viewportMedium) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+ }

@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContactDetailsPage matches snapshot 1`] = `
+<Page
+  scrollingDisabled={false}
+  title="ProfileSettingsPage.title"
+>
+  <LayoutSingleColumn
+    className={null}
+    rootClassName={null}
+  >
+    <LayoutWrapperTopbar
+      className={null}
+      rootClassName={null}
+    >
+      <withRouter(Connect(TopbarContainerComponent))
+        currentPage="ProfileSettingsPage"
+      />
+      <UserNav
+        className={null}
+        rootClassName={null}
+        selectedPageName="ProfileSettingsPage"
+      />
+    </LayoutWrapperTopbar>
+    <LayoutWrapperMain
+      className={null}
+      rootClassName={null}
+    >
+      <div>
+        <div>
+          <h1>
+            <FormattedMessage
+              id="ProfileSettingsPage.heading"
+              values={Object {}}
+            />
+          </h1>
+        </div>
+      </div>
+    </LayoutWrapperMain>
+    <LayoutWrapperFooter
+      className={null}
+      rootClassName={null}
+    >
+      <injectIntl(Footer) />
+    </LayoutWrapperFooter>
+  </LayoutSingleColumn>
+</Page>
+`;

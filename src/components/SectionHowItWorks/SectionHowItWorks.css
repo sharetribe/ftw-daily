@@ -1,0 +1,125 @@
+@import '../../marketplace.css';
+
+.titleWrapper {
+  text-align: center;
+  @media (--viewportMedium) {
+    text-align: auto;
+  }
+}
+.title {
+  @apply --marketplaceH1FontStyles;
+  margin-top: 0;
+  text-align: center;
+  display: inline;
+  &:nth-of-type(1) {
+    margin: 0;
+  }
+  @media (--viewportMedium) {
+    display: block;
+   }
+}
+.subTitle {
+  @apply --marketplaceH3FontStyles;
+  margin-top: 0;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--marketPlaceColorSubTitleLandingPage);
+  
+  @media (--viewportMedium) {
+    margin-bottom: 50px;
+    margin-top: 0;
+  }
+}
+.steps {
+  display: flex;
+  flex-direction: column;
+
+  @media (--viewportMedium) {
+    flex-direction: row;
+  }
+}
+
+.step:nth-of-type(1) {
+  margin-top: 0;
+}
+
+.step {
+  position: relative;
+  margin-top: 60px;
+
+  @media (--viewportMedium) {
+    width: 330px;
+    margin-right: 105px;
+    margin-top: 0;
+  }
+}
+
+.step::after {
+  @media (--viewportMedium) {
+    content: '';
+    position: absolute;
+    background-image: url('/static/icons/big-right-arrow.webp');
+    width: 20px;
+    height: 40px;
+    top: 10px;
+    background-size: contain;
+    right: -50px;
+  }
+}
+
+.step:last-of-type {
+  @media (--viewportMedium) {
+    margin-right: 0;
+  }
+}
+
+.step:last-of-type::after {
+  content: none;
+}
+
+.stepCount {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
+  font-weight: 600;
+  font-size: 20px;
+  text-align: center;
+  line-height: 35px;
+  background-color: var(--marketplaceColor);
+  color: white;
+  border-radius: 50%;
+  flex-shrink: 0;
+
+  @media (--viewportMedium) {
+    margin-top: 6px;
+  }
+}
+
+.stepParagraph {
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 150%;
+  letter-spacing: -.25px;
+}
+.stepTitle {
+  margin-top: 0;
+  margin-bottom: 18px;
+  display: flex;
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 18px;
+  }
+}
+
+.createListingLink {
+  margin-top: 6px;
+
+  @media (--viewportMedium) {
+    margin-top: 12px;
+  }
+}

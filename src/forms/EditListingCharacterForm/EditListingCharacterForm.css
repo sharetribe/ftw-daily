@@ -1,0 +1,98 @@
+@import '../../marketplace.css';
+
+:root {
+  --EditListingCharacterForm_formMargins: {
+    margin-bottom: 24px;
+
+    @media (--viewportMedium) {
+      margin-bottom: 32px;
+    }
+  }
+}
+.root {
+  /* Expand to available space */
+  flex-grow: 1;
+
+  /* Dimensions */
+  width: 100%;
+  height: auto;
+
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+
+  @media (--viewportMedium) {
+    padding-top: 1px;
+  }
+}
+.error {
+  color: var(--failColor);
+}
+
+.checkboxGroup {
+  @apply --EditListingCharacterForm_formMargins;
+}
+
+.submitButton {
+  margin-top: auto;
+  margin-bottom: 24px;
+  flex-shrink: 0;
+
+  @media (--viewportLarge) {
+    display: inline-block;
+    width: 280px;
+    margin-top: 100px;
+  }
+}
+
+.submitButton::before {
+  transform: rotate(-45deg);
+  content: "";
+  display: block;
+  position: absolute;
+  width: 2px;
+  height: 10px;
+  background-color: #fff;
+  right: 25px;
+  top: calc(50% - 6px);
+}
+.submitButton::after {
+  transform: rotate(45deg);
+  content: "";
+  display: block;
+  position: absolute;
+  width: 2px;
+  height: 10px;
+  background-color: #fff;
+  right: 25px;
+  top: calc(50%);
+  @media (--viewportMedium) {
+    margin: 0;
+  }
+}
+
+@media (--viewportMiniSmall) {
+  .submitButton::before, .submitButton::after {
+    right: 40px;
+  }
+}
+@media (--viewportSmall) {
+  .submitButton::before, .submitButton::after {
+    right: 50px;
+  }
+}
+@media (--viewportMedium) {
+  .submitButton::before, .submitButton::after {
+    right: 200px;
+  }
+}
+@media (--viewportLarge) {
+  .submitButton::before, .submitButton::after {
+    right: 35px;
+  }
+}
+
+.submitButton {
+  position: relative;
+}
+

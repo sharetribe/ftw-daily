@@ -1,0 +1,20 @@
+{
+  "name": "HorseDeal24",
+  "short_name": "HorseDeal24",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#8f2593",
+  "background_color": "#FFFFFF",
+  "icons": [
+    {
+      "src": "/static/icons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

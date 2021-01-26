@@ -1,0 +1,16 @@
+@import '../../marketplace.css';
+
+.root {
+}
+
+.marketplaceStroke {
+  stroke: var(--marketplaceColor);
+}
+
+.successFill {
+  fill: var(--successColor);
+}
+
+.checkStroke {
+  stroke: var(--matterColorLight);
+}

@@ -1,0 +1,101 @@
+version: 2
+jobs:
+  format:
+    docker:
+      - image: circleci/node:10.14
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ .Branch }}
+            - yarn-packages-master
+            - yarn-packages-
+      - run:
+          name: Install Dependencies
+          command: yarn install
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules/
+      - run:
+          name: Check code formatting
+          command: yarn run format-ci
+  test:
+    docker:
+      - image: circleci/node:10.14
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ .Branch }}
+            - yarn-packages-master
+            - yarn-packages-
+      - run:
+          name: Install Dependencies
+          command: yarn install
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules/
+      - run:
+          name: Run test suite
+          command: yarn run test-ci
+  build:
+    docker:
+      - image: circleci/node:10.14
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ .Branch }}
+            - yarn-packages-master
+            - yarn-packages-
+      - run:
+          name: Install Dependencies
+          command: yarn install
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules/
+      - run:
+          name: Build client application
+          command: yarn run build
+  audit:
+    docker:
+      - image: circleci/node:10.14
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ .Branch }}
+            - yarn-packages-master
+            - yarn-packages-
+      - run:
+          name: Install Dependencies
+          command: yarn install
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules/
+      - run:
+          name: Audit dependencies
+          command: yarn run audit
+workflows:
+  version: 2
+  format_test_build_audit:
+    jobs:
+      - format
+      - test
+      - build

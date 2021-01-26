@@ -1,0 +1,78 @@
+@import '../../marketplace.css';
+
+.titleWrapper {
+  text-align: center;
+  @media (--viewportMedium) {
+    text-align: auto;
+  }
+}
+
+.title {
+  @apply --marketplaceH1FontStyles;
+  text-align: center;
+  margin-top: 0;
+  font-weight: 600;
+  display: inline;
+  &:nth-of-type(1) {
+    margin: 0;
+  }
+  @media (--viewportMedium) {
+    display: block;
+   }
+}
+
+.subTitle {
+  @apply --marketplaceH3FontStyles;
+  margin-top: 0;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-weight: 600;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--marketPlaceColorSubTitleLandingPage);
+
+  @media (--viewportMedium) {
+    margin-bottom: 50px;
+    margin-top: 0;
+  }
+}
+.reviewsCards {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 30px;
+
+  @media (--viewportMedium) {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 30px;
+  }
+}
+
+.reviewCard {
+  display: grid;
+  grid-template-rows: max-content max-content;
+  grid-row-gap: 16px;
+  background: #fff;
+  border-radius: 4px;
+  padding: 20px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.userInfo {
+  display: inline-grid;
+  grid-template-columns: min-content 1fr;
+  grid-column-gap: 10px;
+  align-items: center;
+}
+
+.userAvatar {
+  width: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.userLocation {
+  font-size: 15px;
+}

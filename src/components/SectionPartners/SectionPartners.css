@@ -1,0 +1,43 @@
+@import '../../marketplace.css';
+
+.title {
+  @apply --marketplaceH1FontStyles;
+
+  font-size:44px;
+  margin-top: 0;
+  max-width: 735px;
+
+  @media (--viewportMedium) {
+    margin-bottom: 23px;
+  }
+}
+
+.partnersList {
+  display: grid;
+  grid-template-columns: auto;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  justify-items: center;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 10px;
+
+  @media (min-width: 600px) {
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 20px;
+  }
+
+  @media (--viewportLarge) {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 20px;
+  }
+}
+
+.partnerIcon {
+  height: 35px;
+
+  @media (min-width: 600px) {
+    height: 65px;
+  }
+}

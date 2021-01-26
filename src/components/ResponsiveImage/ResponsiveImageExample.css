@@ -1,0 +1,31 @@
+.root {
+  display: block;
+  position: relative;
+  width: 200px;
+  margin-bottom: 70px;
+}
+
+/* Firefox doesn't support image aspect ratio inside flexbox */
+.aspectWrapper {
+  padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
+}
+
+.rootForImageWithAspectRatio {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+
+.rootForSizes {
+  display: block;
+  position: relative;
+  width: 200px;
+  margin-bottom: 70px;
+
+  @media (min-width: 601px) {
+    width: 400px;
+  }
+}

@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditListingPageComponent matches snapshot 1`] = `
+<Page
+  scrollingDisabled={false}
+  title="EditListingPage.titleCreateListing"
+>
+  <withRouter(Connect(TopbarContainerComponent)) />
+  <withViewport(injectIntl(EditListingWizard))
+    availability={
+      Object {
+        "calendar": undefined,
+        "onCreateAvailabilityException": [Function],
+        "onDeleteAvailabilityException": [Function],
+        "onFetchAvailabilityExceptions": [Function],
+        "onFetchBookings": [Function],
+      }
+    }
+    currentUser={null}
+    errors={
+      Object {
+        "createListingDraftError": null,
+        "createStripeAccountError": null,
+        "publishListingError": null,
+        "showListingsError": null,
+        "updateListingError": null,
+        "uploadImageError": null,
+      }
+    }
+    fetchInProgress={false}
+    history={
+      Object {
+        "push": [Function],
+      }
+    }
+    id="EditListingWizard"
+    images={Array []}
+    listing={
+      Object {
+        "attributes": Object {
+          "publicData": Object {},
+        },
+        "id": null,
+        "images": Array [],
+        "type": "ownListing",
+      }
+    }
+    newListingPublished={false}
+    onChange={[Function]}
+    onCreateListingDraft={[Function]}
+    onImageUpload={[Function]}
+    onManageDisableScrolling={[Function]}
+    onPayoutDetailsFormChange={[Function]}
+    onPayoutDetailsSubmit={[Function]}
+    onPublishListingDraft={[Function]}
+    onRemoveImage={[Function]}
+    onUpdateImageOrder={[Function]}
+    onUpdateListing={[Function]}
+    params={
+      Object {
+        "id": "id",
+        "slug": "slug",
+        "tab": "description",
+        "type": "new",
+      }
+    }
+  />
+</Page>
+`;

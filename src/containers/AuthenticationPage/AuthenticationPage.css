@@ -1,0 +1,149 @@
+@import '../../marketplace.css';
+
+.layoutWrapperMain {
+  min-height: calc(100vh - var(--topbarHeight));
+
+  @media (--viewportMedium) {
+    min-height: calc(100vh - var(--topbarHeightDesktop));
+  }
+}
+
+.root {
+  @apply --marketplaceModalRootStyles;
+
+  @media (--viewportMedium) {
+    @apply --backgroundImage;
+  }
+}
+
+.content {
+  @apply --marketplaceModalBaseStyles;
+  padding-top: 29px;
+}
+
+/* ================ Tabs & Form ================ */
+
+.tabs {
+  @media (--viewportMedium) {
+    margin-top: 6px;
+  }
+}
+
+.tab {
+  @apply --marketplaceModalTitleStyles;
+  margin-top: 0;
+  margin-bottom: 0;
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+  }
+}
+
+.form {
+  margin-top: 24px;
+
+  @media (--viewportMedium) {
+    margin-top: 30px;
+    padding-top: 2px;
+  }
+}
+
+.bottomWrapper {
+  @apply --marketplaceModalBottomWrapper;
+
+  /* Align the helper links to the left since there isn't a Primary Button anymore */
+  text-align: left;
+}
+
+/* Terms of Service modal*/
+
+.termsWrapper {
+  width: 100%;
+  padding-top: 40px;
+
+  @media (--viewportMedium) {
+    width: 604px;
+    padding-top: 11px;
+  }
+}
+
+.termsHeading {
+  @apply --marketplaceH1FontStyles;
+  margin: 0 0 19px 0;
+
+  @media (--viewportMedium) {
+    margin: 0 0 19px 0;
+  }
+}
+
+/* ================ Hide Top bar in screens smaller than 768px  ================ */
+
+.hideOnMobile {
+  display: none;
+
+  @media (--viewportMedium) {
+    display: block;
+  }
+}
+
+/* ================ Close icon ================ */
+
+.verifyClose {
+  @apply --marketplaceModalCloseStyles;
+
+  /* This is not a real modal, z-index should not be modal's z-index */
+  z-index: 1;
+}
+
+.closeText {
+  @apply --marketplaceModalCloseText;
+}
+
+.closeIcon {
+  @apply --marketplaceModalCloseIcon;
+}
+
+/* ================ Typography ================ */
+
+/* Title of the modal */
+.modalTitle {
+  @apply --marketplaceModalTitleStyles;
+}
+
+/* Paragraph for the Modal */
+.modalMessage {
+  @apply --marketplaceModalParagraphStyles;
+}
+
+/* Make the email pop */
+.email {
+  @apply --marketplaceModalHighlightEmail;
+}
+
+/* Helper links */
+.modalHelperLink {
+  @apply --marketplaceLinkStyles;
+  @apply --marketplaceModalHelperLink;
+}
+
+/* Helper texts for the links, not the actual links */
+.modalHelperText {
+  @apply --marketplaceModalHelperText;
+}
+
+.modalIcon {
+  @apply --marketplaceModalIconStyles;
+
+  /* Align the icon and rest of the content in the modal. Sign & Login doesn't use an icon, maybe we should add one? */
+  margin-top: 47px;
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+  }
+}
+
+/* ================ Errors ================ */
+
+.error {
+  @apply --marketplaceModalErrorStyles;
+}

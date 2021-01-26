@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ActivityFeed matches snapshot 1`] = `
+<ul
+  className=""
+>
+  <li
+    key="transition/confirm-payment"
+  >
+    <div>
+      <div>
+        <p>
+          •
+        </p>
+      </div>
+      <div>
+        <p />
+        <p />
+      </div>
+    </div>
+  </li>
+  <li
+    key="transition/accept"
+  >
+    <div>
+      <div>
+        <p>
+          •
+        </p>
+      </div>
+      <div>
+        <p />
+        <p />
+      </div>
+    </div>
+  </li>
+  <li
+    id="msg-msg1"
+    key="msg1"
+  >
+    <div>
+      <a
+        className=""
+        href="/u/user1"
+        onClick={[Function]}
+        style={Object {}}
+        title="user1 display name"
+      >
+        <span>
+          TT
+        </span>
+      </a>
+      <div>
+        <p>
+          Message msg1
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+        <p>
+          2017-11-09, 08:12
+        </p>
+      </div>
+    </div>
+  </li>
+  <li
+    id="msg-msg2"
+    key="msg2"
+  >
+    <div>
+      <div>
+        <p>
+          Message msg2
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+      </div>
+      <p>
+        2017-11-09, 08:12
+      </p>
+    </div>
+  </li>
+</ul>
+`;

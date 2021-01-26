@@ -1,0 +1,98 @@
+@import '../../marketplace.css';
+
+.contactBanner {
+  display: none;
+  max-width: 100%;
+  margin-top: 50px;
+  border-radius: 4px;
+  @media (--viewportLarge) {
+    display: block;
+  }
+}
+
+.contactButton {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  width: 100%;
+  height: 64px;
+  padding: 0;
+  border: none;
+  color: white;
+  background-color: var(--marketplaceColor);
+  transition: all .1s ease-in-out;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+  &:hover, &:focus {
+    background-color: var(--marketplaceColorDark);
+    box-shadow: var(--boxShadowButton);
+  }
+  @media (--viewportLarge) {
+    margin-top: 32px;
+    min-width: 312px;
+  }
+  & > svg {
+    fill: none;
+    margin-right: -25px;
+    margin-left: 20px;
+  }
+}
+
+.textContainer {
+  margin-right: 16px;
+
+  @media (--viewportMedium) {
+    margin-right: 0px;
+  }
+}
+
+.contactAuthorText {
+  display: none;
+  margin-top: 10px;
+  margin-bottom: 8px;
+  line-height: 24px;
+  @media (--viewportLarge) {
+    margin-top: 10px;
+    margin-bottom: 14px;
+    color: #1a2b49;
+    display: block;
+    margin-top: 0;
+    font-size: 16px;
+  }
+}
+.contactAuthorTitle {
+  display: none;
+  @media (--viewportLarge){
+    display: block;
+    font-size: 30px;
+  }
+}
+.priceValue {
+  display: block;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 30px;
+  letter-spacing: -.3px;
+  color: var(--matterColor);
+
+  margin-top: 0;
+  margin-bottom: 0px;
+  @media (--viewportLarge){
+    display: none;
+  }
+}
+.perUnit {
+  display: block;
+  @apply --marketplaceTinyFontStyles;
+  color: var(--matterColor);
+
+  margin-top: 0;
+  margin-bottom: 0px;
+  @media (--viewportLarge){
+    display: none;
+  }
+}

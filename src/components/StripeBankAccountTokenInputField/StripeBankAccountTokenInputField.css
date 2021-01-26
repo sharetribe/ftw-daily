@@ -1,0 +1,29 @@
+@import '../../marketplace.css';
+
+.unsupportedCountryError {
+  color: var(--failColor);
+}
+
+.root {
+}
+
+.input {
+  border-bottom-color: var(--attentionColor);
+  margin-bottom: 24px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.inputSuccess {
+  border-bottom-color: var(--successColor);
+}
+
+.inputError {
+  border-bottom-color: var(--failColor);
+}
+
+.error {
+  color: var(--failColor);
+}

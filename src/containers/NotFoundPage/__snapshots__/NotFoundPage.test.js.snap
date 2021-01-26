@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotFoundPageComponent matches snapshot 1`] = `
+<Page
+  scrollingDisabled={false}
+  title="NotFoundPage.title"
+>
+  <LayoutSingleColumn
+    className={null}
+    rootClassName={null}
+  >
+    <LayoutWrapperTopbar
+      className={null}
+      rootClassName={null}
+    >
+      <withRouter(Connect(TopbarContainerComponent)) />
+    </LayoutWrapperTopbar>
+    <LayoutWrapperMain
+      className={null}
+      rootClassName={null}
+    >
+      <div>
+        <div>
+          <div>
+            404
+          </div>
+          <h1>
+            <FormattedMessage
+              id="NotFoundPage.heading"
+              values={Object {}}
+            />
+          </h1>
+          <p>
+            <FormattedMessage
+              id="NotFoundPage.description"
+              values={Object {}}
+            />
+          </p>
+          <injectIntl(LocationSearchFormComponent)
+            onSubmit={[Function]}
+          />
+        </div>
+      </div>
+    </LayoutWrapperMain>
+    <LayoutWrapperFooter
+      className={null}
+      rootClassName={null}
+    >
+      <injectIntl(Footer) />
+    </LayoutWrapperFooter>
+  </LayoutSingleColumn>
+</Page>
+`;

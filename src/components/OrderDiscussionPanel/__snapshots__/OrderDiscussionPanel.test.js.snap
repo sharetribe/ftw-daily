@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OrderDiscussionPanel matches snapshot 1`] = `
+<div
+  className={null}
+>
+  <ul>
+    <li>
+      <span>
+        2017-02-26T00:00:00.000Z
+      </span>
+      <div>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac tellus ornare, tempor lacus quis, imperdiet lectus. Morbi suscipit semper nisl at lacinia. Vestibulum malesuada mattis nisl, et venenatis enim volutpat sit amet. Nulla laoreet feugiat gravida. Fusce ultricies nisl quis aliquet ullamcorper. Nulla congue risus metus.
+      </div>
+      <span>
+        John
+      </span>
+    </li>
+  </ul>
+  <form
+    onSubmit={[Function]}
+  >
+    <input
+      autoFocus={true}
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+    <button
+      className=""
+      disabled={false}
+      type="submit"
+    >
+      Send
+    </button>
+  </form>
+</div>
+`;

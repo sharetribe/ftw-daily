@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LandingPage matches snapshot 1`] = `
+<Page
+  contentType="website"
+  description="LandingPage.schemaDescription"
+  facebookImages={
+    Array [
+      Object {
+        "height": 630,
+        "url": "saunatimeFacebook-1200x630.jpg",
+        "width": 1200,
+      },
+    ]
+  }
+  schema={
+    Object {
+      "@context": "http://schema.org",
+      "@type": "WebPage",
+      "description": "LandingPage.schemaDescription",
+      "image": Array [
+        "http://localhost:3000saunatimeFacebook-1200x630.jpg",
+      ],
+      "name": "LandingPage.schemaTitle",
+    }
+  }
+  scrollingDisabled={false}
+  title="LandingPage.schemaTitle"
+  twitterImages={
+    Array [
+      Object {
+        "height": 314,
+        "url": "http://localhost:3000saunatimeTwitter-600x314.jpg",
+        "width": 600,
+      },
+    ]
+  }
+>
+  <LayoutSingleColumn
+    className={null}
+    rootClassName={null}
+  >
+    <LayoutWrapperTopbar
+      className={null}
+      rootClassName={null}
+    >
+      <withRouter(Connect(TopbarContainerComponent)) />
+    </LayoutWrapperTopbar>
+    <LayoutWrapperMain
+      className={null}
+      rootClassName={null}
+    >
+      <div>
+        <SectionHero
+          className={null}
+          history={
+            Object {
+              "push": [Function],
+            }
+          }
+          location={
+            Object {
+              "search": "",
+            }
+          }
+          rootClassName={null}
+        />
+      </div>
+      <ul>
+        <li>
+          <div>
+            <SectionLocations
+              className={null}
+              rootClassName={null}
+            />
+          </div>
+        </li>
+        <li>
+          <div>
+            <SectionHowItWorks
+              className={null}
+              rootClassName={null}
+            />
+          </div>
+        </li>
+      </ul>
+    </LayoutWrapperMain>
+    <LayoutWrapperFooter
+      className={null}
+      rootClassName={null}
+    >
+      <injectIntl(Footer) />
+    </LayoutWrapperFooter>
+  </LayoutSingleColumn>
+</Page>
+`;

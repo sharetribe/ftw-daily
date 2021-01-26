@@ -1,0 +1,359 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListingPage matches snapshot 1`] = `
+<Page
+  author="user-1 display name"
+  contentType="website"
+  description="listing1 description"
+  facebookImages={Array []}
+  schema={
+    Object {
+      "@context": "http://schema.org",
+      "@type": "ItemPage",
+      "description": "listing1 description",
+      "image": "[]",
+      "name": "ListingPage.schemaTitle",
+    }
+  }
+  scrollingDisabled={false}
+  title="ListingPage.schemaTitle"
+  twitterImages={Array []}
+>
+  <LayoutSingleColumn
+    className={null}
+    rootClassName={null}
+  >
+    <LayoutWrapperTopbar
+      className={null}
+      rootClassName={null}
+    >
+      <withRouter(Connect(TopbarContainerComponent)) />
+    </LayoutWrapperTopbar>
+    <LayoutWrapperMain
+      className={null}
+      rootClassName={null}
+    >
+      <div>
+        <SectionImages
+          editParams={
+            Object {
+              "id": "listing1",
+              "slug": "listing1-title",
+              "tab": "description",
+              "type": "edit",
+            }
+          }
+          handleViewPhotosClick={[Function]}
+          imageCarouselOpen={false}
+          isOwnListing={false}
+          listing={
+            Object {
+              "attributes": Object {
+                "deleted": false,
+                "description": "listing1 description",
+                "geolocation": LatLng {
+                  "_sdkType": "LatLng",
+                  "lat": 40,
+                  "lng": 60,
+                },
+                "price": Money {
+                  "_sdkType": "Money",
+                  "amount": 5500,
+                  "currency": "USD",
+                },
+                "publicData": Object {},
+                "state": "published",
+                "title": "listing1 title",
+              },
+              "author": Object {
+                "attributes": Object {
+                  "banned": false,
+                  "deleted": false,
+                  "profile": Object {
+                    "abbreviatedName": "TT",
+                    "displayName": "user-1 display name",
+                  },
+                },
+                "id": UUID {
+                  "_sdkType": "UUID",
+                  "uuid": "user-1",
+                },
+                "type": "user",
+              },
+              "id": UUID {
+                "_sdkType": "UUID",
+                "uuid": "listing1",
+              },
+              "images": Array [],
+              "type": "listing",
+            }
+          }
+          onImageCarouselClose={[Function]}
+          onManageDisableScrolling={[Function]}
+          title="listing1 title"
+        />
+        <div>
+          <SectionAvatar
+            params={
+              Object {
+                "id": "listing1",
+                "slug": "listing1-title",
+              }
+            }
+            user={
+              Object {
+                "attributes": Object {
+                  "banned": false,
+                  "deleted": false,
+                  "profile": Object {
+                    "abbreviatedName": "TT",
+                    "displayName": "user-1 display name",
+                  },
+                },
+                "id": UUID {
+                  "_sdkType": "UUID",
+                  "uuid": "user-1",
+                },
+                "type": "user",
+              }
+            }
+          />
+          <div>
+            <SectionHeading
+              category={null}
+              formattedPrice={55}
+              hostLink={
+                <NamedLink
+                  name="ListingPage"
+                  params={
+                    Object {
+                      "id": "listing1",
+                      "slug": "listing1-title",
+                    }
+                  }
+                  to={
+                    Object {
+                      "hash": "#host",
+                    }
+                  }
+                >
+                  user-1 display name
+                </NamedLink>
+              }
+              onContactUser={[Function]}
+              priceTitle={55}
+              richTitle={
+                <span>
+                  
+                  listing1
+                   
+                  title
+                  
+                </span>
+              }
+              showContactUser={true}
+            />
+            <SectionDescriptionMaybe
+              description="listing1 description"
+            />
+            <SectionFeaturesMaybe
+              options={
+                Array [
+                  Object {
+                    "key": "feat1",
+                    "label": "Feat 1",
+                  },
+                  Object {
+                    "key": "feat2",
+                    "label": "Feat 2",
+                  },
+                  Object {
+                    "key": "feat3",
+                    "label": "Feat 3",
+                  },
+                ]
+              }
+              publicData={Object {}}
+            />
+            <SectionRulesMaybe
+              className={null}
+              publicData={Object {}}
+              rootClassName={null}
+            />
+            <SectionMapMaybe
+              className={null}
+              geolocation={
+                LatLng {
+                  "_sdkType": "LatLng",
+                  "lat": 40,
+                  "lng": 60,
+                }
+              }
+              listingId={
+                UUID {
+                  "_sdkType": "UUID",
+                  "uuid": "listing1",
+                }
+              }
+              publicData={Object {}}
+              rootClassName={null}
+            />
+            <SectionReviews
+              fetchReviewsError={null}
+              reviews={Array []}
+            />
+            <SectionHostMaybe
+              authorDisplayName="user-1 display name"
+              currentUser={
+                Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "deleted": false,
+                    "email": "user-2@example.com",
+                    "emailVerified": true,
+                    "profile": Object {
+                      "abbreviatedName": "user-2 abbreviated name",
+                      "displayName": "user-2 display name",
+                      "firstName": "user-2 first name",
+                      "lastName": "user-2 last name",
+                    },
+                  },
+                  "id": UUID {
+                    "_sdkType": "UUID",
+                    "uuid": "user-2",
+                  },
+                  "type": "currentUser",
+                }
+              }
+              isEnquiryModalOpen={false}
+              listing={
+                Object {
+                  "attributes": Object {
+                    "deleted": false,
+                    "description": "listing1 description",
+                    "geolocation": LatLng {
+                      "_sdkType": "LatLng",
+                      "lat": 40,
+                      "lng": 60,
+                    },
+                    "price": Money {
+                      "_sdkType": "Money",
+                      "amount": 5500,
+                      "currency": "USD",
+                    },
+                    "publicData": Object {},
+                    "state": "published",
+                    "title": "listing1 title",
+                  },
+                  "author": Object {
+                    "attributes": Object {
+                      "banned": false,
+                      "deleted": false,
+                      "profile": Object {
+                        "abbreviatedName": "TT",
+                        "displayName": "user-1 display name",
+                      },
+                    },
+                    "id": UUID {
+                      "_sdkType": "UUID",
+                      "uuid": "user-1",
+                    },
+                    "type": "user",
+                  },
+                  "id": UUID {
+                    "_sdkType": "UUID",
+                    "uuid": "listing1",
+                  },
+                  "images": Array [],
+                  "type": "listing",
+                }
+              }
+              onCloseEnquiryModal={[Function]}
+              onContactUser={[Function]}
+              onManageDisableScrolling={[Function]}
+              onSubmitEnquiry={[Function]}
+              sendEnquiryError={null}
+              sendEnquiryInProgress={false}
+              title="listing1 title"
+            />
+          </div>
+          <withRouter(injectIntl(BookingPanel))
+            authorDisplayName="user-1 display name"
+            fetchTimeSlotsError={null}
+            isOwnListing={false}
+            listing={
+              Object {
+                "attributes": Object {
+                  "deleted": false,
+                  "description": "listing1 description",
+                  "geolocation": LatLng {
+                    "_sdkType": "LatLng",
+                    "lat": 40,
+                    "lng": 60,
+                  },
+                  "price": Money {
+                    "_sdkType": "Money",
+                    "amount": 5500,
+                    "currency": "USD",
+                  },
+                  "publicData": Object {},
+                  "state": "published",
+                  "title": "listing1 title",
+                },
+                "author": Object {
+                  "attributes": Object {
+                    "banned": false,
+                    "deleted": false,
+                    "profile": Object {
+                      "abbreviatedName": "TT",
+                      "displayName": "user-1 display name",
+                    },
+                  },
+                  "id": UUID {
+                    "_sdkType": "UUID",
+                    "uuid": "user-1",
+                  },
+                  "type": "user",
+                },
+                "id": UUID {
+                  "_sdkType": "UUID",
+                  "uuid": "listing1",
+                },
+                "images": Array [],
+                "type": "listing",
+              }
+            }
+            onManageDisableScrolling={[Function]}
+            onSubmit={[Function]}
+            subTitle="ListingPage.bookingSubTitle"
+            timeSlots={null}
+            title={
+              <FormattedMessage
+                id="ListingPage.bookingTitle"
+                values={
+                  Object {
+                    "title": <span>
+                      
+                      listing1
+                       
+                      title
+                      
+                    </span>,
+                  }
+                }
+              />
+            }
+            unitType="line-item/night"
+          />
+        </div>
+      </div>
+    </LayoutWrapperMain>
+    <LayoutWrapperFooter
+      className={null}
+      rootClassName={null}
+    >
+      <injectIntl(Footer) />
+    </LayoutWrapperFooter>
+  </LayoutSingleColumn>
+</Page>
+`;

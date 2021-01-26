@@ -1,0 +1,22 @@
+.root {
+  height: 100%;
+  width: 100%;
+  border: 0;
+  cursor: pointer;
+  background-color: transparent;
+
+  &:hover {
+    background-color: transparent;
+    box-shadow: none;
+  }
+}
+
+.clickedWithMouse {
+  &:focus {
+    outline: none;
+  }
+}
+
+/* Default isOpen class - no styles yet */
+.isOpen {
+}

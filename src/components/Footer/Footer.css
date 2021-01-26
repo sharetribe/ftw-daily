@@ -1,0 +1,460 @@
+@import '../../marketplace.css';
+
+.root {
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: var(--matterColorNegative);
+
+  width: 100%;
+  padding: 24px;
+  background-color: var(--matterColorBright);
+
+  @media (--viewportMedium) {
+    padding: 0 30px 33px 30px;
+  }
+
+  @media (--viewportLarge) {
+    padding: 0 0 80px 0;
+    border-top: none;
+  }
+}
+
+/* Wrapper to limit the top border in desktop
+ * view from the outermost paddings*/
+.topBorderWrapper {
+  @media (--viewportMedium) {
+    padding-top: 40px;
+  }
+
+  @media (--viewportLarge) {
+    padding-top: 60px;
+
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top-color: var(--matterColorNegative);
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  @media (--viewportMedium) {
+    max-width: 1056px;
+    margin: 0 auto;
+  }
+
+  @media (--viewportLarge) {
+    padding: 0 24px;
+  }
+}
+
+/* Mobile only social media links */
+.someLiksMobile {
+  margin-bottom: 24px;
+
+  @media (--viewportMedium) {
+    display: none;
+  }
+}
+
+.icon {
+  display: inline-block;
+  width: 20px;
+  height: 24px;
+  margin-right: 12px;
+  text-align: center;
+}
+  .icon > svg:hover {
+    fill: #88298B;
+  }
+  /* Footer links */
+  .links {
+    /* Layout */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 100%;
+    margin-bottom: 18px;
+    flex-direction: column;
+
+    @media (--viewportMedium) {
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      margin-bottom: 0;
+    }
+  }
+
+/* Desktop: logo and organization stuff */
+.organization {
+  flex-shrink: 0;
+  flex-basis: 220px;
+  display: none;
+  margin-right: 24px;
+  margin-bottom: 24px;
+
+  @media (--viewportMedium) {
+    display: block;
+    order: 1;
+    margin-right: 12px;
+  }
+}
+
+.logoLink {
+  display: block;
+  margin-bottom: 14px;
+}
+
+.logo {
+  object-fit: contain;
+  object-position: left center;
+  width: 100%;
+  height: 40px;
+}
+
+.organizationInfo {
+}
+
+.organizationDescription {
+  @apply --marketplaceTinyFontStyles;
+}
+
+.organizationCopyright {
+  @apply --marketplaceTinyFontStyles;
+  margin-top: 32px;
+}
+
+.copyrightLink {
+  color: var(--matterColor);
+  transition: var(--transitionStyleButton);
+
+  &:hover {
+    color: var(--marketplaceColor);
+    text-decoration: none;
+  }
+}
+
+/* Desktop and Mobile: links to more information */
+.infoLinks {
+  order: 2;
+  flex-basis: 165px;
+  margin-right: 24px;
+  margin-bottom: 24px;
+
+  @media (--viewportMedium) {
+    padding-top: 2px;
+    margin-right: 12px;
+  }
+}
+
+.list {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.listItem {
+  min-height: 24px;
+
+  @media (--viewportMedium) {
+    margin-bottom: 0;
+  }
+}
+
+.link {
+  display: inline;
+  /* Font */
+  @apply --marketplaceH4FontStyles;
+  line-height: 20px;
+  color: var(--matterColor);
+  transition: var(--transitionStyleButton);
+
+  margin-top: 0;
+  margin-bottom: 12px;
+
+  &:hover {
+    color: var(--marketplaceColor);
+    text-decoration: none;
+  }
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 12px;
+    line-height: 20px;
+  }
+}
+
+/* Desktop and Mobile: searches - first column */
+.searches {
+  order: 3;
+  flex-basis: 165px;
+  margin-right: 24px;
+  margin-bottom: 24px;
+
+  @media (--viewportMedium) {
+    padding-top: 2px;
+    margin-right: 12px;
+  }
+}
+
+/* Desktop and Mobile: searches - second column */
+/* This is not always visible */
+.searchesExtra {
+  order: 4;
+  flex-basis: 165px;
+  margin-right: 24px;
+  margin-bottom: 24px;
+
+  @media (--viewportMedium) {
+    padding-top: 2px;
+    margin-right: 12px;
+  }
+}
+
+/* Desktop: extra links (social media links and legal links) */
+.extraLinks {
+  flex-shrink: 0;
+  order: 5;
+  display: none;
+  flex-basis: 109px;
+  margin-right: 24px;
+  margin-bottom: 24px;
+
+  @media (--viewportMedium) {
+    display: flex;
+    flex-direction: column;
+    margin-right: 12px;
+  }
+}
+
+.legalMatters {
+  /* Get extra space from parent element (which is using flexbox) */
+  flex-grow: 1;
+
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+.tosAndPrivacy {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.legalLink,
+.privacy,
+.terms {
+  /* Font */
+  @apply --marketplaceTinyFontStyles;
+  color: var(--matterColorAnti);
+  transition: var(--transitionStyleButton);
+
+  margin-top: 0;
+  margin-bottom: 0;
+
+  &:hover {
+    color: var(--marketplaceColor);
+    text-decoration: none;
+  }
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+/* Mobile: copyright mark and legal links for mobile */
+.copyrightAndTermsMobile {
+  /* Positioning */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  /* Dimensions */
+  height: 60px;
+  padding: 0 24px 18px 24px;
+
+  /* Layout */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  background-color: var(--matterColorLight);
+
+  @media (--viewportMedium) {
+    display: none;
+  }
+}
+
+.organizationCopyrightMobile {
+  /* Font */
+  @apply --marketplaceTinyFontStyles;
+  color: var(--matterColorAnti);
+  transition: var(--transitionStyleButton);
+
+  /* Tell parent component how much space this one prefers */
+  flex-basis: 172px;
+
+  margin-top: 0;
+  margin-bottom: 0;
+
+  &:hover {
+    color: var(--marketplaceColor);
+    text-decoration: none;
+  }
+}
+
+.tosAndPrivacyMobile {
+  flex-basis: 172px;
+}
+
+.privacy {
+  margin-right: 24px;
+}
+
+.footerContainerHorizontal {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  @media (--viewportLarge) {
+    flex-wrap: nowrap;
+  }
+}
+
+.footerContainerHorizontal > div {
+  @media (min-width: 480px) and (max-width: 767px) {
+    &:nth-child(1) {
+      order: 1;
+    }
+    &:nth-child(2) {
+      order: 3;
+    }
+    &:nth-child(3) {
+      order: 4;
+    }
+    &:nth-child(4) {
+      order: 2;
+    }
+  }
+}
+
+.footerContainerVertical23 {
+  padding-right: 15px;
+  width: 100%;
+
+  @media (--viewportSmall) {
+    width: 50%;
+  }
+
+  @media (--viewportMedium) {
+    width: 33.33%;
+  }
+
+  @media (--viewportLarge) {
+    width: 23%;
+  }
+}
+
+.footerContainerVertical31 {
+  padding-right: 15px;
+  width: 100%;
+  margin-bottom: 20px;
+
+  @media (--viewportSmall) {
+    width: 50%;
+  }
+
+  @media (--viewportMedium) {
+    width: 33.33%;
+    margin-bottom: 0;
+  }
+
+  @media (--viewportLarge) {
+    width: 31%;
+  }
+}
+
+.bottomLine {
+  display: flex;
+  margin-top: 60px;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+
+  @media (--viewportMedium) {
+    justify-content: flex-start;
+    text-align: left;
+  }
+}
+
+.bottomLineItem {
+  margin-right: 25px;
+
+  &:first-child {
+    flex: 1 1 100%;
+    order: 1;
+    margin-top: 5px;
+
+    @media (--viewportMedium) {
+      flex: none;
+      order: 0;
+      margin-top: 0;
+    }
+  }
+}
+
+.verticalContainerHeader {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: var(--marketplaceColor);
+}
+
+.verticalContainerContent {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.verticalContainerContent a {
+  line-height: 24px;
+  margin-top: 2px;
+}
+
+.topCitiesContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.topCitiesColumn {
+  padding-right: 20px;
+  width: 50%;
+}
+
+.topCityItem {
+}
+
+.greenLabel {
+  border: 1px solid #006a6f;
+  background-color: #006a6f;
+  color: white;
+  border-radius: 5px;
+  padding: 2px 5px;
+  margin-left: 5px;
+  font-size: 12px;
+}
+
+.appPlayStoreIcon {
+  max-width: 70%;
+}
+
+
+@media (max-width: 480px)  {
+  .appPlayStoreIcon {
+    max-width: 50%;
+  }
+}
+

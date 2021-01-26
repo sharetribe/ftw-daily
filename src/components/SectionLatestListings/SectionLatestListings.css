@@ -1,0 +1,93 @@
+@import '../../marketplace.css';
+
+.titleWrapper {
+  text-align: center;
+  @media (--viewportSmall) {
+    text-align: auto;
+  }
+}
+
+.title {
+  @apply --marketplaceH1FontStyles;
+  margin-top: 0;
+  text-align: center;
+  display: inline;
+  &:nth-of-type(1) {
+    margin: 0;
+  }
+  @media (--viewportSmall) {
+    display: block;
+   }
+  /* margin-bottom: 30px; */
+
+  /* @media (--viewportMedium) {
+    margin-bottom: 50px;
+  } */
+}
+
+.subTitle {
+  @apply --marketplaceH3FontStyles;
+  margin-top: 0;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--marketPlaceColorSubTitleLandingPage);
+
+  @media (--viewportMedium) {
+    margin-bottom: 50px;
+    margin-top: 0;
+  }
+}
+
+
+.listingCards {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 40px;
+
+  @media (--viewportMedium) {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 40px;
+  }
+}
+
+.bigButton {
+  @apply --marketplaceButtonStyles;
+
+  animation-delay: 0.8s;
+  margin: 40px auto 0 auto;
+  border-radius: 4px;
+
+  @media (--viewportMedium) {
+    width: 260px;
+    margin: 60px auto 0 auto;
+  }
+
+  & > div {
+    display: inline-block;
+    @apply --withArrowIcon; 
+  
+    &:before,
+    &:after {
+      right: -10%;
+      transition: .5s;
+      opacity: 0;
+    }
+  }
+
+  &:hover {
+
+    & > div {
+      &:before,
+      &:after {
+      right: -18%;
+      transition: .5s;
+      opacity: 1;
+    }
+    }
+
+  }
+  
+}
