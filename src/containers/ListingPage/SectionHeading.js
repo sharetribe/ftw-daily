@@ -29,14 +29,6 @@ const SectionHeading = props => {
 
   return (
     <div className={css.sectionHeading}>
-      <div className={css.desktopPriceContainer}>
-        <div className={css.desktopPriceValue} title={priceTitle}>
-          {formattedPrice}
-        </div>
-        <div className={css.desktopPerUnit}>
-          <FormattedMessage id={unitTranslationKey} />
-        </div>
-      </div>
       <div className={css.heading}>
         <h1 className={css.title}>{richTitle}</h1>
         <div className={css.author}>
@@ -51,6 +43,14 @@ const SectionHeading = props => {
             </span>
           ) : null}
         </div>
+      </div>
+      <div className={css.desktopPriceContainer}>
+        <div className={css.desktopPriceValue} title={priceTitle}>
+          {formattedPrice}
+        </div>
+        {/* <div className={css.desktopPerUnit}>
+          <FormattedMessage id={unitTranslationKey} />
+        </div> */}
       </div>
     </div>
   );

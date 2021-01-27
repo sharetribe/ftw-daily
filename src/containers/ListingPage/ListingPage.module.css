@@ -19,8 +19,48 @@
   color: var(--failColor);
   margin: 24px;
 }
-
+.imageContent {
+  @media (--viewportSmall) {
+    flex: 0 0 100%;
+  }
+  @media (--viewportMedium) {
+    flex: 0 0 40%;
+    margin-right: 2rem;
+  }
+  @media (--viewportLarge) {
+    flex: 0 0 25%;
+    margin-right: 2rem;
+  }
+}
 .sectionImages {
+  border: 1px solid var(--matterColorNegative);
+  border-bottom: none;
+}
+.sectionListImages {
+  padding: 1rem 0;
+  border: 1px solid var(--matterColorNegative);
+}
+.imageWrapper {
+  padding: 0 0 1rem 1rem;
+  display: flex;
+  overflow: hidden;
+  overflow-x: auto;
+  z-index: 1;
+  margin-bottom: -1rem;
+}
+.listImageContent {
+  display: flex;
+  flex-basis: 6rem;
+  flex-grow: 0;
+  flex-shrink: 0;
+  transition: opacity .1s;
+  cursor: pointer;
+}
+.listImageContent .rootForImage {
+  margin: 0 .5rem;
+  opacity: .99;
+  -webkit-transition: opacity .5s;
+  transition: opacity .5s;
 }
 
 .threeToTwoWrapper {
@@ -34,7 +74,7 @@
   }
 
   @media (--viewportLarge) {
-    padding: 36px 36px 0 36px;
+    padding: 0;
   }
 }
 
@@ -135,15 +175,14 @@
     bottom: auto;
     left: auto;
     right: auto;
-    height: calc(0.41 * 100vw);
     max-height: 50vh;
     object-fit: cover;
     border-radius: var(--borderRadius);
-
+/* 
     &:hover {
       transform: scale(1.005);
       box-shadow: var(--boxShadowListingCard);
-    }
+    } */
   }
 }
 
@@ -188,63 +227,72 @@
   width: 100%;
   height: 100%;
 }
+.wrapper {
+  padding: 2rem;
+  max-width: unset;
+  border: 1px solid var(--matterColorNegative);
+}
+.wrapperContent {
+  @media (--viewportSmall) {
+    flex-wrap: wrap;
+    display: flex;
+    width: 100%;
+  }
+  @media (--viewportMedium) {
+    display: flex;
+    width: 100%;
+    flex-wrap: nowrap;
+  }
+}
+
+.container {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0%;
+}
 
 .contentContainer {
   @media (--viewportMedium) {
-    max-width: 1056px;
-    margin: 0 auto;
-    padding: 0 24px;
     display: flex;
-    position: relative;
+    flex: 1 0 auto;
   }
 
   @media (--viewportLarge) {
-    max-width: 1128px;
-    padding: 0 36px;
-    margin: 0 auto 117px;
+    display: flex;
+    flex: 1 0 auto;
   }
 
   @media (--viewportXLarge) {
-    max-width: 1056px;
-    padding: 0;
+    display: flex;
+    flex: 1 0 auto;
   }
 }
 
 .mainContent {
-  flex-basis: 100%;
-  margin-bottom: 23px;
 
   @media (--viewportMedium) {
-    margin-top: 50px;
-    margin-bottom: 51px;
-    flex-shrink: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0%;
+    margin-right: 3rem;
   }
 
   @media (--viewportLarge) {
-    margin-top: 50px;
-    margin-bottom: 0px;
-    /* contentContainer's full width - (bookingColumn + two paddings + margin + border) */
-    max-width: calc(100% - 433px);
-    flex-basis: calc(100% - 433px);
-    flex-shrink: 0;
     flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0%;
+    margin-right: 3rem;
   }
 }
 
 .bookingPanel {
+  @media (--viewportMedium) {
+    flex: 1 0 20rem;
+  }
   @media (--viewportLarge) {
-    display: block;
-    margin-top: 79px;
-    margin-left: 60px;
-    border-left-style: solid;
-    border-left-width: 1px;
-    border-left-color: var(--matterColorNegative);
-
-    padding-left: 60px;
-
-    /* The calendar needs 312px */
-    flex-basis: 312px;
+    flex-grow: 0;
     flex-shrink: 0;
+    flex-basis: 30rem;
   }
 }
 
@@ -284,11 +332,11 @@
 }
 
 .sectionHeading {
-  margin-top: 22px;
   margin-bottom: 34px;
 
   @media (--viewportMedium) {
     display: flex;
+    flex-direction: column;
     margin-bottom: 31px;
   }
 }
@@ -301,7 +349,6 @@
     flex-direction: column;
     align-items: flex-start;
     flex-shrink: 0;
-    margin: 0 48px 0 0;
     padding: 0;
   }
 }
@@ -333,8 +380,9 @@
   padding: 0 24px;
 
   @media (--viewportMedium) {
-    margin-bottom: 0;
-    padding: 0;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--matterColorNegative);
+    padding: 0 0 20px 0;
   }
 }
 

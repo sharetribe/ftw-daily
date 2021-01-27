@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from '../../util/reactIntl';
 import { ResponsiveImage, Modal, ImageCarousel } from '../../components';
 import ActionBarMaybe from './ActionBarMaybe';
@@ -8,6 +8,7 @@ import css from './ListingPage.module.css';
 const SectionImages = props => {
   const {
     title,
+    indexImages,
     listing,
     isOwnListing,
     editParams,
@@ -17,8 +18,12 @@ const SectionImages = props => {
     onManageDisableScrolling,
   } = props;
 
+  const [indexImageRefresh, setIndex] = useState(indexImages);
+  useEffect(() => {
+    setIndex(indexImages)
+  },[indexImages])
   const hasImages = listing.images && listing.images.length > 0;
-  const firstImage = hasImages ? listing.images[0] : null;
+  const image = hasImages ? listing.images[indexImageRefresh] : null;
 
   // Action bar is wrapped with a div that prevents the click events
   // to the parent that would otherwise open the image carousel
@@ -28,6 +33,10 @@ const SectionImages = props => {
     </div>
   ) : null;
 
+  const handler = (index) => {
+    setIndex(index)
+  }
+
   const viewPhotosButton = hasImages ? (
     <button className={css.viewPhotos} onClick={handleViewPhotosClick}>
       <FormattedMessage
@@ -36,7 +45,6 @@ const SectionImages = props => {
       />
     </button>
   ) : null;
-
   return (
     <div className={css.sectionImages}>
       <div className={css.threeToTwoWrapper}>
@@ -45,7 +53,7 @@ const SectionImages = props => {
           <ResponsiveImage
             rootClassName={css.rootForImage}
             alt={title}
-            image={firstImage}
+            image={image}
             variants={[
               'landscape-crop',
               'landscape-crop2x',
@@ -53,7 +61,7 @@ const SectionImages = props => {
               'landscape-crop6x',
             ]}
           />
-          {viewPhotosButton}
+          {/* {viewPhotosButton} */}
         </div>
       </div>
       <Modal
@@ -66,7 +74,7 @@ const SectionImages = props => {
         usePortal
         onManageDisableScrolling={onManageDisableScrolling}
       >
-        <ImageCarousel images={listing.images} />
+        <ImageCarousel handler={handler} indexImages={indexImageRefresh} images={listing.images} />
       </Modal>
     </div>
   );
