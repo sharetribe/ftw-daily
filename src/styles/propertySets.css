@@ -16,15 +16,13 @@
  * you'll end up seeing it repeated in development mode on every
  * component that @imports this file.
  */
-
   /* ================ CSS Custom Property Sets ================ */
-
   /* Full screen Background image located in root-folder/src/assets */
   --backgroundImage: {
     /* Gradient direction and overlaying the black color on top of the image for better readability */
     background: linear-gradient(-45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)),
-      url('../../assets/background-1440.jpg');
-
+      /*url('../../assets/background-1440.jpg');*/
+    url('../../assets/seasaw.jpg');
     /* Add loading color for the div */
     background-color: var(--matterColor);
 
@@ -39,7 +37,6 @@
       border: solid 36px var(--matterColorBright);
     }
   }
-
   /**
    * Usage example: .root { @apply --marketplaceDefaultFontStyles; }
    */
@@ -55,17 +52,13 @@
       font-size: 16px;
       line-height: 32px;
     }
-  }
-
-  --marketplaceSmallFontStyles: {
+  } --marketplaceSmallFontStyles: {
     font-family: var(--fontFamily);
     font-weight: var(--fontWeightMedium);
     font-size: 14px;
     line-height: 24px;
   }
-
   /* ================ Body font ================ */
-
   --marketplaceBodyFontStyles: {
     font-family: var(--fontFamily);
     font-weight: var(--fontWeightMedium);
@@ -84,9 +77,7 @@
       margin-bottom: 16px;
     }
   }
-
   /* ================ Hero title ================ */
-
   --marketplaceHeroTitleFontStyles: {
     font-weight: var(--fontWeightBold);
     font-size: 36px;
@@ -105,9 +96,7 @@
       margin-bottom: 23px;
     }
   }
-
   /* ================ Topbar ================ */
-
   /* Compose text label items on top of this */
   /* This stretches inline element (link) to take available vertical space (big hover area),
    * and align baselines
@@ -120,9 +109,7 @@
     @media (--viewportMedium) {
       margin: 28px 0;
     }
-  }
-
-  --TopbarDesktop_linkHover: {
+  } --TopbarDesktop_linkHover: {
     border-bottom: 0px solid;
     transition: var(--transitionStyleButton);
 
@@ -132,9 +119,7 @@
       text-decoration: none;
     }
   }
-
   /* ================ Modal title ================ */
-
   --marketplaceModalTitleStyles {
     font-weight: var(--fontWeightSemiBold);
     font-size: 30px;
@@ -148,9 +133,7 @@
       margin: 0;
     }
   }
-
   /* ================ H1, H2, H3, H4, H5 & H6 ================ */
-
   --marketplaceH1FontStyles: {
     font-weight: var(--fontWeightSemiBold);
     font-size: 24px;
@@ -169,9 +152,7 @@
       margin-top: 24px;
       margin-bottom: 24px;
     }
-  }
-
-  --marketplaceH2FontStyles: {
+  } --marketplaceH2FontStyles: {
     font-weight: var(--fontWeightSemiBold);
     font-size: 21px;
     line-height: 24px;
@@ -185,9 +166,7 @@
       margin-top: 21px;
       margin-bottom: 19px;
     }
-  }
-
-  --marketplaceH3FontStyles: {
+  } --marketplaceH3FontStyles: {
     font-weight: var(--fontWeightSemiBold);
     font-size: 18px;
     line-height: 24px;
@@ -200,9 +179,7 @@
       margin-top: 16px;
       margin-bottom: 16px;
     }
-  }
-
-  --marketplaceH4FontStyles: {
+  } --marketplaceH4FontStyles: {
     font-weight: var(--fontWeightMedium);
     font-size: 15px;
     line-height: 24px;
@@ -217,9 +194,7 @@
       margin-top: 17px;
       margin-bottom: 15px;
     }
-  }
-
-  --marketplaceH5FontStyles: {
+  } --marketplaceH5FontStyles: {
     font-weight: var(--fontWeightMedium);
     font-size: 14px;
     line-height: 18px;
@@ -234,9 +209,7 @@
       margin-top: 10px;
       margin-bottom: 14px;
     }
-  }
-
-  --marketplaceH6FontStyles: {
+  } --marketplaceH6FontStyles: {
     font-weight: var(--fontWeightBold);
     font-size: 12px;
     line-height: 18px;
@@ -253,9 +226,7 @@
       margin-bottom: 6px;
     }
   }
-
   /* ================ Other fonts ================ */
-
   --marketplaceTinyFontStyles: {
     font-family: var(--fontFamily);
     font-weight: var(--fontWeightRegular);
@@ -272,16 +243,12 @@
       margin-top: 10.5px;
       margin-bottom: 13.5px;
     }
-  }
-
-  --marketplaceMessageFontStyles {
+  } --marketplaceMessageFontStyles {
     font-family: var(--fontFamily);
     font-weight: var(--fontWeightRegular);
     font-size: 16px;
     line-height: 24px;
-  }
-
-  --marketplaceMessageDateFontStyles {
+  } --marketplaceMessageDateFontStyles {
     font-family: var(--fontFamily);
     font-weight: var(--fontWeightRegular);
     font-size: 12px;
@@ -292,9 +259,7 @@
       font-size: 12px;
       line-height: 24px;
     }
-  }
-
-  --marketplaceTxTransitionFontStyles {
+  } --marketplaceTxTransitionFontStyles {
     font-family: var(--fontFamily);
     font-weight: var(--fontWeightMedium);
     font-size: 16px;
@@ -304,9 +269,7 @@
       font-size: 16px;
       line-height: 24px;
     }
-  }
-
-  --marketplaceSearchFilterLabelFontStyles {
+  } --marketplaceSearchFilterLabelFontStyles {
     font-family: var(--fontFamily);
     font-weight: var(--fontWeightSemiBold);
     font-size: 13px;
@@ -317,24 +280,18 @@
       font-size: 13px;
       line-height: 20px;
     }
-  }
-
-  --marketplaceSearchFilterSublabelFontStyles {
+  } --marketplaceSearchFilterSublabelFontStyles {
     font-family: var(--fontFamily);
     font-weight: var(--fontWeightMedium);
     font-size: 18px;
     line-height: 18px;
-  }
-
-  --marketplaceListingAttributeFontStyles {
+  } --marketplaceListingAttributeFontStyles {
     font-family: var(--fontFamily);
     font-weight: var(--fontWeightMedium);
     font-size: 16px;
     line-height: 24px;
   }
-
   /* ================ Tabbed navigation font styles ================ */
-
   --marketplaceTabNavFontStyles {
     font-weight: var(--fontWeightMedium);
     font-size: 16px;
@@ -346,17 +303,13 @@
       font-size: 20px;
       line-height: 24px;
     }
-  }
-
-  --marketplaceTabNavHorizontalFontStyles {
+  } --marketplaceTabNavHorizontalFontStyles {
     font-weight: var(--fontWeightMedium);
     font-size: 14px;
     line-height: 24px;
     letter-spacing: 0;
   }
-
   /* ================ Clearfix solution ================ */
-
   --clearfix {
     &::after {
       content: '';
@@ -364,9 +317,7 @@
       clear: both;
     }
   }
-
   /* ================ Links ================ */
-
   --marketplaceLinkStyles: {
     /* Position and dimensions */
     display: inline;
@@ -387,9 +338,7 @@
       cursor: pointer;
     }
   }
-
   /* ================ Buttons ================ */
-
   --marketplaceButtonFontStyles: {
     font-family: 'poppins', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightSemiBold);
@@ -400,8 +349,7 @@
     @media (--viewportMedium) {
       /* TODO: Make sure button text aligns with the baseline */
     }
-  }
-  --marketplaceButtonStyles {
+  } --marketplaceButtonStyles {
     @apply --marketplaceButtonFontStyles;
 
     /* Dimensions */
@@ -451,8 +399,7 @@
     @media (--viewportMedium) {
       min-height: 65px;
     }
-  }
-  --marketplaceButtonStylesPrimary {
+  } --marketplaceButtonStylesPrimary {
     @apply --marketplaceButtonStyles;
 
     background-color: var(--successColor);
@@ -466,8 +413,7 @@
       background-color: var(--matterColorNegative);
       color: var(--matterColorLight);
     }
-  }
-  --marketplaceButtonStylesSecondary {
+  } --marketplaceButtonStylesSecondary {
     @apply --marketplaceButtonStyles;
 
     background-color: var(--matterColorLight);
@@ -492,9 +438,7 @@
       border-color: var(--matterColorNegative);
     }
   }
-
   /* ================ Inputs ================ */
-
   --marketplaceInputStyles: {
     /* Dimensions */
     display: block;
@@ -526,9 +470,7 @@
     @media (--viewportMedium) {
       padding: 4px 0 2px 0;
     }
-  }
-
-  --marketplaceSelectStyles: {
+  } --marketplaceSelectStyles: {
     /* Dimensions */
     display: block;
     width: 100%;
@@ -565,9 +507,7 @@
       padding: 4px 0 2px 0;
     }
   }
-
   /* ================ Modals ================ */
-
   --marketplaceModalRootStyles {
     /* Page is using flex: AuthenticationPage's .root takes all available space */
     flex-grow: 1;
@@ -579,17 +519,13 @@
       justify-content: center;
       align-items: flex-start;
     }
-  }
-
-  --marketplaceModalFormRootStyles {
+  } --marketplaceModalFormRootStyles {
     display: flex;
     flex-direction: column;
     flex: 1;
     justify-content: space-between;
     height: 100%;
-  }
-
-  --marketplaceModalBaseStyles {
+  } --marketplaceModalBaseStyles {
     flex-grow: 1;
 
     /* Create context so the close button can be positioned within it */
@@ -613,9 +549,7 @@
       margin-bottom: 12.5vh;
       border-bottom: 8px solid var(--marketplaceColor);
     }
-  }
-
-  --marketplaceModalInMobileBaseStyles {
+  } --marketplaceModalInMobileBaseStyles {
     flex-grow: 1;
 
     /* Create context so the close button can be positioned within it */
@@ -639,9 +573,7 @@
       border-radius: 0;
     }
   }
-
   /* Modal title */
-
   --marketplaceModalTitleStyles {
     font-weight: var(--fontWeightSemiBold);
     font-size: 30px;
@@ -657,9 +589,7 @@
       margin: 0;
     }
   }
-
   /* Modal message */
-
   --marketplaceModalParagraphStyles {
     margin: 18px 0 0 0;
 
@@ -667,9 +597,7 @@
       margin: 24px 0 0 0;
     }
   }
-
   /* Bottom wrapper for the modal */
-
   --marketplaceModalBottomWrapper {
     text-align: center;
     margin-top: 60px;
@@ -679,7 +607,6 @@
       margin-top: 96px;
     }
   }
-
   /* Adjust the bottomWrapper's margin to match modals without the helper text */
   --marketplaceModalBottomWrapperText {
     margin-top: -24px;
@@ -688,9 +615,7 @@
     @media (--viewportMedium) {
       padding-bottom: 0;
     }
-  }
-
-  --marketplaceModalHelperText {
+  } --marketplaceModalHelperText {
     @apply --marketplaceTinyFontStyles;
     color: var(--matterColorAnti);
     margin: 0;
@@ -698,9 +623,7 @@
     @media (--viewportMedium) {
       margin: 0;
     }
-  }
-
-  --marketplaceModalHelperLink {
+  } --marketplaceModalHelperLink {
     @apply --marketplaceTinyFontStyles;
     color: var(--matterColor);
     margin: 0;
@@ -709,9 +632,7 @@
       margin: 0;
     }
   }
-
   /* Modal Close icon */
-
   --marketplaceModalCloseStyles {
     /* Position inside modal */
     position: fixed;
@@ -755,9 +676,7 @@
     &:disabled {
       background-color: transparent;
     }
-  }
-
-  --marketplaceModalIconStyles {
+  } --marketplaceModalIconStyles {
     height: 48px;
     margin-bottom: 12px;
 
@@ -765,9 +684,7 @@
       height: 64px;
       margin-bottom: 23px;
     }
-  }
-
-  --marketplaceModalCloseText {
+  } --marketplaceModalCloseText {
     /* Font */
     @apply --marketplaceH6FontStyles;
     margin: -2.5px 0 0 0;
@@ -775,22 +692,16 @@
     @media (--viewportMedium) {
       margin-top: -1px;
     }
-  }
-
-  --marketplaceModalCloseIcon {
+  } --marketplaceModalCloseIcon {
     display: inline-block;
     margin-left: 8px;
     padding: 2px 0 4px;
     box-sizing: content-box;
-  }
-
-  --marketplaceModalErrorStyles {
+  } --marketplaceModalErrorStyles {
     @apply --marketplaceH4FontStyles;
     margin-top: 24px;
     color: var(--failColor);
-  }
-
-  --marketplaceModalPasswordMargins {
+  } --marketplaceModalPasswordMargins {
     /* Leave space between the input and the button below when the
     viewport height is small */
     margin-top: 24px;
