@@ -9,31 +9,31 @@ const { LatLng, LatLngBounds } = sdkTypes;
 // `predictionPlace` (util.types.place) properties.
 export default [
   {
-    id: 'default-helsinki',
+    id: 'default-telaviv',
     predictionPlace: {
-      address: 'Helsinki, Finland',
-      bounds: new LatLngBounds(new LatLng(60.29783, 25.25448), new LatLng(59.92248, 24.78287)),
+      address: 'Tel-Aviv, Israel',
+      bounds: new LatLngBounds(new LatLng(32.13647, 34.82832), new LatLng(32.03245, 34.72308)),
     },
   },
   {
-    id: 'default-turku',
+    id: 'default-beersheva',
     predictionPlace: {
-      address: 'Turku, Finland',
-      bounds: new LatLngBounds(new LatLng(60.53045, 22.38197), new LatLng(60.33361, 22.06644)),
+      address: 'Beer-Sheva, Israel',
+      bounds: new LatLngBounds(new LatLng(31.32343, 34.85481), new LatLng(31.19262, 34.73398)),
     },
   },
   {
-    id: 'default-tampere',
+    id: 'default-jerusalem',
     predictionPlace: {
-      address: 'Tampere, Finland',
-      bounds: new LatLngBounds(new LatLng(61.83657, 24.11838), new LatLng(61.42728, 23.5422)),
+      address: 'Jerusalem, Israel',
+      bounds: new LatLngBounds(new LatLng(31.88756, 35.33691), new LatLng(31.6518, 35.11432)),
     },
   },
   {
-    id: 'default-oulu',
+    id: 'default-newyork',
     predictionPlace: {
-      address: 'Oulu, Finland',
-      bounds: new LatLngBounds(new LatLng(65.56434, 26.77069), new LatLng(64.8443, 24.11494)),
+      address: 'New York, US',
+      bounds: new LatLngBounds(new LatLng(40.77578, -73.96200), new LatLng(40.739853, -73.96200)),
     },
   },
   {
