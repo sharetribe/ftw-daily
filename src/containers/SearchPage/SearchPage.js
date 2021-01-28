@@ -198,7 +198,7 @@ export class SearchPageComponent extends Component {
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             onManageDisableScrolling={onManageDisableScrolling}
           >
-            <div className={css.mapWrapper}>
+            {/* <div className={css.mapWrapper}>
               {shouldShowSearchMap ? (
                 <SearchMap
                   reusableContainerClassName={css.map}
@@ -215,7 +215,7 @@ export class SearchPageComponent extends Component {
                   messages={intl.messages}
                 />
               ) : null}
-            </div>
+            </div> */}
           </ModalInMobile>
         </div>
       </Page>

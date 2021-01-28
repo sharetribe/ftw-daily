@@ -44,8 +44,12 @@
     flex-basis: 50%;
   }
 
-  @media (--viewportLarge) {
+  /* @media (--viewportLarge) {
     flex-basis: 62.5%;
+    padding: 23px 0 0 0;
+  } */
+  @media (--viewportLarge) {
+    flex-basis: 100%;
     padding: 23px 0 0 0;
   }
 }
@@ -121,8 +125,11 @@
     height: 100%;
   }
 
-  @media (--viewportLarge) {
+  /* @media (--viewportLarge) {
     flex-basis: 37.5%;
+  } */
+  @media (--viewportLarge) {
+    flex-basis: 0;
   }
 }
 

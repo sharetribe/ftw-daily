@@ -6,6 +6,11 @@
 
 .desktopInputRoot {
   height: var(--topbarHeightDesktop);
+  border-bottom-color: transparent;
+}
+
+.desktopInputRoot:hover {
+  border-bottom-color: transparent;
 }
 
 .mobileIcon {

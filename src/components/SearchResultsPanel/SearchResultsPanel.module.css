@@ -36,8 +36,9 @@
 
     * flex-basis: calc((100%/columnCount) - (guttersBetweenColumns / columnCount))
     */
-    flex-basis: calc(50% - 12px);
-    margin-right: 24px;
+    flex-basis: calc(25% - 12px);
+    margin-right: 16px;
+
   }
 
   @media (--viewportXLarge) {
@@ -67,7 +68,7 @@
  * Here we take margin-right away, but we don't want it affect the next column breakpoint.
  */
 
-.listingCard:nth-of-type(2n) {
+.listingCard:nth-of-type(4n) {
   @media screen and (min-width: 1024px) and (max-width: 1920px) {
     margin-right: 0;
   }
