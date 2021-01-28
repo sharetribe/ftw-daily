@@ -116,7 +116,7 @@ const BookingPanel = props => {
 
         <div className={css.bookingHeading}>
           <h2 className={titleClasses}>{title}</h2>
-          {subTitleText ? <div className={css.bookingHelp}>{subTitleText}</div> : null}
+          {/* {subTitleText ? <div className={css.bookingHelp}>{subTitleText}</div> : null} */}
         </div>
         {showBookingDatesForm ? (
           <BookingDatesForm
