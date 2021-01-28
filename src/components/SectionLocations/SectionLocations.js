@@ -53,7 +53,7 @@ const SectionLocations = props => {
         {locationLink(
           'Helsinki',
           helsinkiImage,
-          '?address=Helsinki%2C%20Finland&bounds=60.2978389%2C25.254484899999966%2C59.9224887%2C24.782875800000056&origin=60.16985569999999%2C24.93837910000002'
+          's?address=Australia&bounds=-9.04366970633253%2C159.208731278622%2C-54.835465496212%2C112.821294400027'
         )}
         {locationLink(
           'Rovaniemi',
