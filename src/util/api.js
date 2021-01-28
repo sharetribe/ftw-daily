@@ -7,8 +7,7 @@ import config from '../config';
 import Decimal from 'decimal.js';
 
 export const apiBaseUrl = () => {
-  const defaultPort = 3500;
-  const port = process.env.REACT_APP_DEV_API_SERVER_PORT || defaultPort;
+  const port = process.env.REACT_APP_DEV_API_SERVER_PORT;
   const useDevApiServer = process.env.NODE_ENV === 'development' && !!port;
 
   // In development, the dev API server is running in a different port
