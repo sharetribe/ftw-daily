@@ -13,10 +13,15 @@ const KEY_CODE_RIGHT_ARROW = 39;
 class ImageCarousel extends Component {
   constructor(props) {
     super(props);
-    this.state = { selectedImageIndex: 0, selectedImageLoaded: false };
+    this.state = { selectedImageIndex: props.indexImages, selectedImageLoaded: false };
     this.onKeyUp = this.onKeyUp.bind(this);
     this.prev = this.prev.bind(this);
     this.next = this.next.bind(this);
+  }
+  componentDidUpdate(preProps) {
+    if (this.props.indexImages !== preProps.indexImages) {
+      this.setState({...this.state, selectedImageIndex: this.props.indexImages})
+    }
   }
   componentDidMount() {
     window.addEventListener('keyup', this.onKeyUp);
@@ -38,6 +43,7 @@ class ImageCarousel extends Component {
     }
     this.setState(prevState => {
       const newIndex = count > 0 ? (count + prevState.selectedImageIndex - 1) % count : 0;
+      this.props.handler(newIndex);
       return { selectedImageIndex: newIndex, selectedImageLoaded: false };
     });
   }
@@ -48,6 +54,7 @@ class ImageCarousel extends Component {
     }
     this.setState(prevState => {
       const newIndex = count > 0 ? (count + prevState.selectedImageIndex + 1) % count : 0;
+      this.props.handler(newIndex);
       return { selectedImageIndex: newIndex, selectedImageLoaded: false };
     });
   }
@@ -96,7 +103,6 @@ class ImageCarousel extends Component {
     const imageClasses = classNames(css.image, {
       [css.imageLoading]: !currentImageIsLoaded,
     });
-
     return (
       <div className={classes}>
         <div className={css.imageWrapper}>
