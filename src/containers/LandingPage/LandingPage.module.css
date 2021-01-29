@@ -14,13 +14,12 @@
 
   @media (--viewportMedium) {
     min-height: 500px;
-    height: 70vh;
+    height: 40vh;
     max-height: none;
   }
 
   @media (--viewportLarge) {
     max-height: 800px;
-    min-height: 600px;
     height: calc(70vh - var(--topbarHeightDesktop));
   }
 }
@@ -73,13 +72,13 @@
   }
 
   @media (--viewportLarge) {
-    max-width: 100%;
+    max-width: 1428px;
     padding: 0 36px 0 36px;
     margin: var(--LandingPage_sectionMarginTopLarge) auto 93px auto;
   }
 
   @media (--viewportXLarge) {
-    max-width: 1056px;
+    max-width: 1256px;
     padding: 0;
   }
 }

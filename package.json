@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.11.2",
+    "@brainhubeu/react-carousel": "^1.19.26",
     "@formatjs/intl-relativetimeformat": "^4.2.1",
     "@mapbox/polyline": "^1.1.1",
     "@sentry/browser": "5.20.1",
@@ -49,6 +50,7 @@
     "react": "^16.13.1",
     "react-dates": "^21.3.1",
     "react-dom": "^16.13.1",
+    "react-fa": "^5.0.0",
     "react-final-form": "^6.5.1",
     "react-final-form-arrays": "^3.1.2",
     "react-helmet-async": "^1.0.6",
