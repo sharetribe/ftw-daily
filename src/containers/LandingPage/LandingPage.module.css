@@ -73,7 +73,7 @@
   }
 
   @media (--viewportLarge) {
-    max-width: 1128px;
+    max-width: 100%;
     padding: 0 36px 0 36px;
     margin: var(--LandingPage_sectionMarginTopLarge) auto 93px auto;
   }

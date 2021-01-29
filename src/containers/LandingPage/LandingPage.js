@@ -11,6 +11,7 @@ import {
   SectionHero,
   SectionHowItWorks,
   SectionLocations,
+  SectionProduct,
   LayoutSingleColumn,
   LayoutWrapperTopbar,
   LayoutWrapperMain,
@@ -64,7 +65,8 @@ export const LandingPageComponent = props => {
           <ul className={css.sections}>
             <li className={css.section}>
               <div className={css.sectionContentFirstChild}>
-                <SectionLocations />
+                {/* <SectionLocations /> */}
+                <SectionProduct />
               </div>
             </li>
             <li className={css.section}>
