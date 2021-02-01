@@ -199,7 +199,7 @@ const Fonts = () => {
           styling={bodyFontStyling}
         />
         <Font
-          component={() => <p className={css.tinyFont}>Hosted by user</p>}
+          component={() => <p className={css.tinyFont}>user</p>}
           description="--marketplaceTinyFontStyles: Very small print."
           styling={tinyFontStyling}
         />

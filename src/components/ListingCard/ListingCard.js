@@ -87,9 +87,9 @@ export const ListingCardComponent = props => {
           <div className={css.priceValue} title={priceTitle}>
             {formattedPrice}
           </div>
-          <div className={css.perUnit}>
+          {/* <div className={css.perUnit}>
             <FormattedMessage id={unitTranslationKey} />
-          </div>
+          </div> */}
         </div>
         <div className={css.mainInfo}>
           <div className={css.title}>

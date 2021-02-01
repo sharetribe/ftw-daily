@@ -838,7 +838,7 @@ export class CheckoutPageComponent extends Component {
             </div>
             <div className={css.detailsHeadings}>
               <h2 className={css.detailsTitle}>{listingTitle}</h2>
-              <p className={css.detailsSubtitle}>{detailsSubTitle}</p>
+              {/* <p className={css.detailsSubtitle}>{detailsSubTitle}</p> */}
             </div>
             {speculateTransactionErrorMessage}
             {breakdown}
