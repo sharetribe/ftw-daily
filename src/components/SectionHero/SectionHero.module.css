@@ -71,7 +71,7 @@
 }
 
 .heroSubTitle {
-  @apply --marketplaceH4FontStyles;
+  @apply --marketplaceHeroSubTitleFontStyles;
 
   color: var(--matterColorLight);
   margin: 0 0 32px 0;
