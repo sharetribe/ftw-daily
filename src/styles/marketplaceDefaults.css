@@ -91,7 +91,7 @@
   --modalPaddingMedium: 55px 60px 55px 60px;
   /* ================ LocationAutocompleteInput bottom attribution padding ================ */
   /* Google Maps needs 72px bottom padding to accommodate logo, Mapbox doesn't have one */
-  --locationAutocompleteBottomPadding: 8px;
+  --locationAutocompleteBottomPadding: 72px;
   --LocationAutocompleteInput_inputHeight: 50px;
   --LocationAutocompleteInput_sidePaddingDesktop: 36px;
   /* ================ Filters ================ */
