@@ -9,6 +9,7 @@ import routeConfiguration from '../../routeConfiguration';
 import { findOptionsForSelectFilter } from '../../util/search';
 import { LISTING_STATE_PENDING_APPROVAL, LISTING_STATE_CLOSED, propTypes } from '../../util/types';
 import { types as sdkTypes } from '../../util/sdkLoader';
+import SectionTypeMaybe from './SectionTypeMaybe';
 import {
   LISTING_PAGE_DRAFT_VARIANT,
   LISTING_PAGE_PENDING_APPROVAL_VARIANT,
@@ -381,6 +382,7 @@ export class ListingPageComponent extends Component {
       </NamedLink>
     );
 
+    const typeOptions = findOptionsForSelectFilter('type', filterConfig);
     const amenityOptions = findOptionsForSelectFilter('amenities', filterConfig);
     const categoryOptions = findOptionsForSelectFilter('category', filterConfig);
     const category =
@@ -448,6 +450,7 @@ export class ListingPageComponent extends Component {
                     listingId={currentListing.id}
                   />
                   <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
+                  <SectionTypeMaybe options={typeOptions} publicData={publicData} />
                   <SectionHostMaybe
                     title={title}
                     listing={currentListing}

@@ -10,7 +10,7 @@ import { ListingLink } from '../../components';
 
 import css from './EditListingFeaturesPanel.module.css';
 
-const FEATURES_NAME = 'amenities';
+const FEATURES_NAME = 'features';
 
 const EditListingFeaturesPanel = props => {
   const {
