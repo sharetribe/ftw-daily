@@ -8,6 +8,9 @@ import { propTypes } from '../../util/types';
 import { maxLength, required, composeValidators } from '../../util/validators';
 import { Form, Button, FieldTextInput } from '../../components';
 import CustomCategorySelectFieldMaybe from './CustomCategorySelectFieldMaybe';
+import CustomPrivacySelectFieldMaybe from './CustomPrivacySelectFieldMaybe';
+import CustomAccommodatesSelectFieldMaybe from './CustomAccommodatesSelectFieldMaybe';
+import CustomWorkstationsSelectFieldMaybe from './CustomWorkstationsSelectFieldMaybe';
 
 import css from './EditListingDescriptionForm.module.css';
 
@@ -19,6 +22,10 @@ const EditListingDescriptionFormComponent = props => (
     render={formRenderProps => {
       const {
         categories,
+        privacyTypes,
+        accommodatesNumbers,
+        workstationsNumbers,
+        permissions,
         className,
         disabled,
         ready,
@@ -87,6 +94,30 @@ const EditListingDescriptionFormComponent = props => (
           {errorMessageCreateListingDraft}
           {errorMessageUpdateListing}
           {errorMessageShowListing}
+          <CustomCategorySelectFieldMaybe
+            id="category"
+            name="category"
+            categories={categories}
+            intl={intl}
+          />
+          <CustomPrivacySelectFieldMaybe
+            id="privacyType"
+            name="privacyType"
+            privacyTypes={privacyTypes}
+            intl={intl}
+          />
+          <CustomAccommodatesSelectFieldMaybe
+            id="accommodatesNumber"
+            name="accommodatesNumber"
+            accommodatesNumber={accommodatesNumbers}
+            intl={intl}
+          />
+          <CustomWorkstationsSelectFieldMaybe
+            id="workstationsNumber"
+            name="workstationsNumber"
+            workstationsNumber={workstationsNumbers}
+            intl={intl}
+          />
           <FieldTextInput
             id="title"
             name="title"
@@ -98,7 +129,6 @@ const EditListingDescriptionFormComponent = props => (
             validate={composeValidators(required(titleRequiredMessage), maxLength60Message)}
             autoFocus
           />
-
           <FieldTextInput
             id="description"
             name="description"
@@ -107,13 +137,6 @@ const EditListingDescriptionFormComponent = props => (
             label={descriptionMessage}
             placeholder={descriptionPlaceholderMessage}
             validate={composeValidators(required(descriptionRequiredMessage))}
-          />
-
-          <CustomCategorySelectFieldMaybe
-            id="category"
-            name="category"
-            categories={categories}
-            intl={intl}
           />
 
           <Button

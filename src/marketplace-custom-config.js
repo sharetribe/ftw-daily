@@ -35,6 +35,28 @@
 
 export const filters = [
   {
+    id: 'category',
+    label: 'Type',
+    type: 'SelectSingleFilter',
+    group: 'primary',
+    queryParamNames: ['pub_category'],
+    config: {
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for the UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: [
+        { key: 'office', label: 'Office' },
+        { key: 'cubicle', label: 'Cubicle' },
+        { key: 'meetingroom', label: 'Meeting Room' },
+        { key: 'conferenceroom', label: 'Conference Room' },
+        { key: 'photostudio', label: 'Photo Studio' },
+        { key: 'broadcaststudio', label: 'Broadcast Studio' },
+        { key: 'podcaststudio', label: 'Podcast Studio' },
+      ],
+    },
+  },
+  {
     id: 'dates',
     label: 'Dates',
     type: 'BookingDateRangeFilter',
@@ -61,42 +83,10 @@ export const filters = [
     },
   },
   {
-    id: 'keyword',
-    label: 'Keyword',
-    type: 'KeywordFilter',
-    group: 'primary',
-    // Note: KeywordFilter is fixed filter,
-    // you can't change "queryParamNames: ['keywords'],"
-    queryParamNames: ['keywords'],
-    // NOTE: If you are ordering search results by distance
-    // the keyword search can't be used at the same time.
-    // You can turn on/off ordering by distance from config.js file.
-    config: {},
-  },
-  {
-    id: 'category',
-    label: 'Category',
-    type: 'SelectSingleFilter',
-    group: 'secondary',
-    queryParamNames: ['pub_category'],
-    config: {
-      // "key" is the option you see in Flex Console.
-      // "label" is set here for the UI only.
-      // Note: label is not added through the translation files
-      // to make filter customizations a bit easier.
-      options: [
-        { key: 'smoke', label: 'Smoke' },
-        { key: 'electric', label: 'Electric' },
-        { key: 'wood', label: 'Wood' },
-        { key: 'other', label: 'Other' },
-      ],
-    },
-  },
-  {
     id: 'amenities',
     label: 'Amenities',
     type: 'SelectMultipleFilter',
-    group: 'secondary',
+    group: 'primary',
     queryParamNames: ['pub_amenities'],
     config: {
       // Optional modes: 'has_all', 'has_any'
@@ -109,39 +99,104 @@ export const filters = [
       // to make filter customizations a bit easier.
       options: [
         {
-          key: 'towels',
-          label: 'Towels',
+          key: 'wifi',
+          label: 'Wifi',
         },
         {
-          key: 'bathroom',
-          label: 'Bathroom',
+          key: 'desk',
+          label: 'Desk',
         },
         {
-          key: 'swimming_pool',
-          label: 'Swimming pool',
+          key: 'printer',
+          label: 'Printer',
         },
         {
-          key: 'own_drinks',
-          label: 'Own drinks allowed',
+          key: 'scanner',
+          label: 'Scanner',
         },
         {
-          key: 'jacuzzi',
-          label: 'Jacuzzi',
+          key: 'tv',
+          label: 'TV',
         },
         {
-          key: 'audiovisual_entertainment',
-          label: 'Audiovisual entertainment',
+          key: 'photographyEquipment',
+          label: 'Photography Equipment',
         },
         {
-          key: 'barbeque',
-          label: 'Barbeque',
+          key: 'videoEquipment',
+          label: 'Video Equipment',
         },
         {
-          key: 'own_food_allowed',
-          label: 'Own food allowed',
+          key: 'audioEquipment',
+          label: 'Audio Equipment',
+        },
+        {
+          key: 'coffee',
+          label: 'Coffee',
         },
       ],
     },
+  },
+  {
+    id: 'privacyType',
+    label: 'Privacy Type',
+    type: 'SelectSingleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_privacyType'],
+    config: {
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for the UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: [
+        { key: 'entireSpace', label: 'Entire Space' },
+        { key: 'privateSpace', label: 'Private Space' },
+        { key: 'sharedSpace', label: 'Shared Space' },
+      ],
+    },
+  },
+  {
+    id: 'accommodatesNumber',
+    label: 'Accommodates',
+    type: 'PriceFilter',
+    group: 'secondary',
+    // Note: AccommodatesFilter is fixed filter,
+    // you can't change "queryParamNames: ['accommodatesNumber'],"
+    queryParamNames: ['accommodatesNumber'],
+    // Accommodates filter configuration
+    config: {
+      min: 1,
+      max: 500,
+      step: 1,
+    },
+  },
+  {
+    id: 'workstationsNumber',
+    label: 'Workstations',
+    type: 'PriceFilter',
+    group: 'secondary',
+    // Note: WorkstationsFilter is fixed filter,
+    // you can't change "queryParamNames: ['workstationsNumber'],"
+    queryParamNames: ['workstationsNumber'],
+    // Accommodates filter configuration
+    config: {
+      min: 1,
+      max: 500,
+      step: 1,
+    },
+  },
+  {
+    id: 'keyword',
+    label: 'Keyword',
+    type: 'KeywordFilter',
+    group: 'secondary',
+    // Note: KeywordFilter is fixed filter,
+    // you can't change "queryParamNames: ['keywords'],"
+    queryParamNames: ['keywords'],
+    // NOTE: If you are ordering search results by distance
+    // the keyword search can't be used at the same time.
+    // You can turn on/off ordering by distance from config.js file.
+    config: {},
   },
 ];
 
