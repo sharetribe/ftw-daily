@@ -1052,6 +1052,5 @@
   "UserCard.showFullBioLink": "more",
   "UserCard.viewProfileLink": "View profile",
   "UserDisplayName.banned": "Banned user",
-  "UserDisplayName.deleted": "Deleted user",
-  "ListingPage.type": "{type}"
+  "UserDisplayName.deleted": "Deleted user"
 }

@@ -143,23 +143,6 @@ export const filters = [
       ],
     },
   },
-  {
-    id: 'type',
-    label: 'Type',
-    type: 'SelectSingleFilter',
-    group: 'secondary',
-    queryParamNames: ['pub_type'],
-    config: {
-      options: [
-        { key: 'office', label: 'Office' },
-        { key: 'cubicle', label: 'Cubicle' },
-        { key: 'meetingroom', label: 'Meeting Room' },
-        { key: 'conferenceroom', label: 'Conference Room' },
-        { key: 'photostudio', label: 'Photo Studio' },
-        { key: 'broadcaststudio', label: 'Broadcast Studio' },
-      ],
-    },
-  },
 ];
 
 export const sortConfig = {
