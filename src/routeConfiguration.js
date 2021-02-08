@@ -115,15 +115,15 @@ const routeConfiguration = () => {
       path: '/l/:slug/:id/:type/:tab',
       name: 'EditListingPage',
       auth: true,
-      component: props => <EditListingPage {...props} />,
-      loadData: EditListingPage.loadData,
+      component: EditListingPage,
+      loadData: pageDataLoadingAPI.EditListingPage.loadData,
     },
     {
       path: '/l/:slug/:id/:type/:tab/:returnURLType',
       name: 'EditListingStripeOnboardingPage',
       auth: true,
-      component: props => <EditListingPage {...props} />,
-      loadData: EditListingPage.loadData,
+      component: EditListingPage,
+      loadData: pageDataLoadingAPI.EditListingPage.loadData,
     },
 
     // Canonical path should be after the `/l/new` path since they
