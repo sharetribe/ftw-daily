@@ -280,8 +280,8 @@ const routeConfiguration = () => {
       name: 'PaymentMethodsPage',
       auth: true,
       authPage: 'LoginPage',
-      component: props => <PaymentMethodsPage {...props} />,
-      loadData: PaymentMethodsPage.loadData,
+      component: PaymentMethodsPage,
+      loadData: pageDataLoadingAPI.PaymentMethodsPage.loadData,
     },
     {
       path: '/terms-of-service',
