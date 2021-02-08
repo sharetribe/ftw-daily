@@ -89,8 +89,8 @@ const routeConfiguration = () => {
       path: '/l/:slug/:id/checkout',
       name: 'CheckoutPage',
       auth: true,
-      component: props => <CheckoutPage {...props} />,
-      setInitialValues: CheckoutPage.setInitialValues,
+      component: CheckoutPage,
+      setInitialValues: pageDataLoadingAPI.CheckoutPage.setInitialValues,
     },
     {
       path: '/l/:slug/:id/:variant',
