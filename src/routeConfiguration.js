@@ -342,8 +342,8 @@ const routeConfiguration = () => {
       name: 'EmailVerificationPage',
       auth: true,
       authPage: 'LoginPage',
-      component: props => <EmailVerificationPage {...props} />,
-      loadData: EmailVerificationPage.loadData,
+      component: EmailVerificationPage,
+      loadData: pageDataLoadingAPI.EmailVerificationPage.loadData,
     },
   ];
 };
