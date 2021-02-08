@@ -4,7 +4,6 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import { propTypes } from '../../util/types';
-import { parse } from '../../util/urlHelpers';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import {
   ManageListingCard,
@@ -19,18 +18,8 @@ import {
 } from '../../components';
 import { TopbarContainer } from '../../containers';
 
-import {
-  closeListing,
-  openListing,
-  getOwnListingsById,
-  queryOwnListings,
-} from './ManageListingsPage.duck';
+import { closeListing, openListing, getOwnListingsById } from './ManageListingsPage.duck';
 import css from './ManageListingsPage.module.css';
-
-// Pagination page size might need to be dynamic on responsive page layouts
-// Current design has max 3 columns 42 is divisible by 2 and 3
-// So, there's enough cards to fill all columns on full pagination pages
-const RESULT_PAGE_SIZE = 42;
 
 export class ManageListingsPageComponent extends Component {
   constructor(props) {
@@ -238,18 +227,5 @@ const ManageListingsPage = compose(
   ),
   injectIntl
 )(ManageListingsPageComponent);
-
-ManageListingsPage.loadData = (params, search) => {
-  const queryParams = parse(search);
-  const page = queryParams.page || 1;
-  return queryOwnListings({
-    ...queryParams,
-    page,
-    perPage: RESULT_PAGE_SIZE,
-    include: ['images'],
-    'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
-    'limit.images': 1,
-  });
-};
 
 export default ManageListingsPage;
