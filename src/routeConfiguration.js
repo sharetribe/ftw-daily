@@ -206,9 +206,11 @@ const routeConfiguration = () => {
       name: 'OrderDetailsPage',
       auth: true,
       authPage: 'LoginPage',
-      component: props => <TransactionPage {...props} transactionRole="customer" />,
-      loadData: params => TransactionPage.loadData({ ...params, transactionRole: 'customer' }),
-      setInitialValues: TransactionPage.setInitialValues,
+      component: TransactionPage,
+      extraProps: { transactionRole: 'customer' },
+      loadData: params =>
+        pageDataLoadingAPI.TransactionPage.loadData({ ...params, transactionRole: 'customer' }),
+      setInitialValues: pageDataLoadingAPI.TransactionPage.setInitialValues,
     },
     {
       path: '/sale/:id',
@@ -222,8 +224,10 @@ const routeConfiguration = () => {
       name: 'SaleDetailsPage',
       auth: true,
       authPage: 'LoginPage',
-      component: props => <TransactionPage {...props} transactionRole="provider" />,
-      loadData: params => TransactionPage.loadData({ ...params, transactionRole: 'provider' }),
+      component: TransactionPage,
+      extraProps: { transactionRole: 'provider' },
+      loadData: params =>
+        pageDataLoadingAPI.TransactionPage.loadData({ ...params, transactionRole: 'provider' }),
     },
     {
       path: '/listings',
