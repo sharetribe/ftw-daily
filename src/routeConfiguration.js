@@ -296,27 +296,28 @@ const routeConfiguration = () => {
     {
       path: '/styleguide',
       name: 'Styleguide',
-      component: props => <StyleguidePage {...props} />,
+      component: StyleguidePage,
     },
     {
       path: '/styleguide/g/:group',
       name: 'StyleguideGroup',
-      component: props => <StyleguidePage {...props} />,
+      component: StyleguidePage,
     },
     {
       path: '/styleguide/c/:component',
       name: 'StyleguideComponent',
-      component: props => <StyleguidePage {...props} />,
+      component: StyleguidePage,
     },
     {
       path: '/styleguide/c/:component/:example',
       name: 'StyleguideComponentExample',
-      component: props => <StyleguidePage {...props} />,
+      component: StyleguidePage,
     },
     {
       path: '/styleguide/c/:component/:example/raw',
       name: 'StyleguideComponentExampleRaw',
-      component: props => <StyleguidePage raw {...props} />,
+      component: StyleguidePage,
+      extraProps: { raw: true },
     },
     {
       path: '/notfound',
