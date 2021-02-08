@@ -249,8 +249,8 @@ const routeConfiguration = () => {
       name: 'ContactDetailsPage',
       auth: true,
       authPage: 'LoginPage',
-      component: props => <ContactDetailsPage {...props} />,
-      loadData: ContactDetailsPage.loadData,
+      component: ContactDetailsPage,
+      loadData: pageDataLoadingAPI.ContactDetailsPage.loadData,
     },
     {
       path: '/account/change-password',
