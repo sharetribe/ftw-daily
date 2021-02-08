@@ -150,7 +150,7 @@ const routeConfiguration = () => {
       name: 'ProfileSettingsPage',
       auth: true,
       authPage: 'LoginPage',
-      component: props => <ProfileSettingsPage {...props} />,
+      component: ProfileSettingsPage,
     },
 
     // Note: authenticating with IdP (e.g. Facebook) expects that /login path exists
