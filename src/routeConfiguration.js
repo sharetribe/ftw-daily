@@ -82,8 +82,8 @@ const routeConfiguration = () => {
     {
       path: '/l/:slug/:id',
       name: 'ListingPage',
-      component: props => <ListingPage {...props} />,
-      loadData: ListingPage.loadData,
+      component: ListingPage,
+      loadData: pageDataLoadingAPI.ListingPage.loadData,
     },
     {
       path: '/l/:slug/:id/checkout',
@@ -97,8 +97,8 @@ const routeConfiguration = () => {
       name: 'ListingPageVariant',
       auth: true,
       authPage: 'LoginPage',
-      component: props => <ListingPage {...props} />,
-      loadData: ListingPage.loadData,
+      component: ListingPage,
+      loadData: pageDataLoadingAPI.ListingPage.loadData,
     },
     {
       path: '/l/new',
@@ -131,8 +131,8 @@ const routeConfiguration = () => {
     {
       path: '/l/:id',
       name: 'ListingPageCanonical',
-      component: props => <ListingPage {...props} />,
-      loadData: ListingPage.loadData,
+      component: ListingPage,
+      loadData: pageDataLoadingAPI.ListingPage.loadData,
     },
     {
       path: '/u',
