@@ -71,26 +71,8 @@ const routeConfiguration = () => {
     {
       path: '/s',
       name: 'SearchPage',
-      component: props => <SearchPage {...props} />,
-      loadData: SearchPage.loadData,
-    },
-    {
-      path: '/s/filters',
-      name: 'SearchFiltersPage',
-      component: props => <SearchPage {...props} tab="filters" />,
-      loadData: SearchPage.loadData,
-    },
-    {
-      path: '/s/listings',
-      name: 'SearchListingsPage',
-      component: props => <SearchPage {...props} tab="listings" />,
-      loadData: SearchPage.loadData,
-    },
-    {
-      path: '/s/map',
-      name: 'SearchMapPage',
-      component: props => <SearchPage {...props} tab="map" />,
-      loadData: SearchPage.loadData,
+      component: SearchPage,
+      loadData: pageDataLoadingAPI.SearchPage.loadData,
     },
     {
       path: '/l',
