@@ -3,6 +3,7 @@
  */
 import { setInitialValues as CheckoutPageInitialValues } from './CheckoutPage/CheckoutPage.duck';
 import { loadData as EditListingPageLoader } from './EditListingPage/EditListingPage.duck';
+import { loadData as InboxPageLoader } from './InboxPage/InboxPage.duck';
 import { loadData as ListingPageLoader } from './ListingPage/ListingPage.duck';
 import { loadData as ProfilePageLoader } from './ProfilePage/ProfilePage.duck';
 import { loadData as SearchPageLoader } from './SearchPage/SearchPage.duck';
@@ -14,6 +15,9 @@ const getPageDataLoadingAPI = () => {
     },
     EditListingPage: {
       loadData: EditListingPageLoader,
+    },
+    InboxPage: {
+      loadData: InboxPageLoader,
     },
     ListingPage: {
       loadData: ListingPageLoader,
