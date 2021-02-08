@@ -331,7 +331,7 @@ const routeConfiguration = () => {
     {
       path: '/reset-password',
       name: 'PasswordResetPage',
-      component: props => <PasswordResetPage {...props} />,
+      component: PasswordResetPage ,
     },
 
     // Do not change this path!
