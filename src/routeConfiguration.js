@@ -177,7 +177,7 @@ const routeConfiguration = () => {
     {
       path: '/recover-password',
       name: 'PasswordRecoveryPage',
-      component: props => <PasswordRecoveryPage {...props} />,
+      component: PasswordRecoveryPage,
     },
     {
       path: '/inbox',
