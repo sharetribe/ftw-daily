@@ -142,8 +142,8 @@ const routeConfiguration = () => {
     {
       path: '/u/:id',
       name: 'ProfilePage',
-      component: props => <ProfilePage {...props} />,
-      loadData: ProfilePage.loadData,
+      component: ProfilePage,
+      loadData: pageDataLoadingAPI.ProfilePage.loadData,
     },
     {
       path: '/profile-settings',
