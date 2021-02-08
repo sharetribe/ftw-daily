@@ -291,7 +291,7 @@ const routeConfiguration = () => {
     {
       path: '/privacy-policy',
       name: 'PrivacyPolicyPage',
-      component: props => <PrivacyPolicyPage {...props} />,
+      component: PrivacyPolicyPage,
     },
     {
       path: '/styleguide',
