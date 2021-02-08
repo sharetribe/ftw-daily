@@ -159,17 +159,20 @@ const routeConfiguration = () => {
     {
       path: '/login',
       name: 'LoginPage',
-      component: props => <AuthenticationPage {...props} tab="login" />,
+      component: AuthenticationPage,
+      extraProps: { tab: 'login' },
     },
     {
       path: '/signup',
       name: 'SignupPage',
-      component: props => <AuthenticationPage {...props} tab="signup" />,
+      component: AuthenticationPage,
+      extraProps: { tab: 'signup' },
     },
     {
       path: '/confirm',
       name: 'ConfirmPage',
-      component: props => <AuthenticationPage {...props} tab="confirm" />,
+      component: AuthenticationPage,
+      extraProps: { tab: 'confirm' },
     },
     {
       path: '/recover-password',
