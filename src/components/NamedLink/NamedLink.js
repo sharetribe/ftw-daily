@@ -22,14 +22,23 @@ import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 import routeConfiguration from '../../routeConfiguration';
-import { pathByRouteName } from '../../util/routes';
+import { pathByRouteName, findRouteByRouteName } from '../../util/routes';
 
 export const NamedLinkComponent = props => {
   const { name, params, title } = props;
+  const routes = routeConfiguration();
+
+  const onOver = () => {
+    const { component: Page } = findRouteByRouteName(name, routes);
+    // Loadable Component has a "preload" function.
+    if (Page.preload) {
+      Page.preload();
+    }
+  };
 
   // Link props
   const { to, children } = props;
-  const pathname = pathByRouteName(name, routeConfiguration(), params);
+  const pathname = pathByRouteName(name, routes, params);
   const { match } = props;
   const active = match.url && match.url === pathname;
 
@@ -42,7 +51,7 @@ export const NamedLinkComponent = props => {
   };
 
   return (
-    <Link to={{ pathname, ...to }} {...aElemProps}>
+    <Link onMouseOver={onOver} onTouchStart={onOver} to={{ pathname, ...to }} {...aElemProps}>
       {children}
     </Link>
   );
