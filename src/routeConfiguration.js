@@ -257,7 +257,7 @@ const routeConfiguration = () => {
       name: 'PasswordChangePage',
       auth: true,
       authPage: 'LoginPage',
-      component: props => <PasswordChangePage {...props} />,
+      component: PasswordChangePage,
     },
     {
       path: '/account/payments',
