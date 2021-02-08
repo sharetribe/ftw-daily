@@ -6,6 +6,8 @@
   "dependencies": {
     "@babel/runtime": "^7.11.2",
     "@formatjs/intl-relativetimeformat": "^4.2.1",
+    "@loadable/component": "^5.14.1",
+    "@loadable/server": "^5.14.2",
     "@mapbox/polyline": "^1.1.1",
     "@sentry/browser": "5.20.1",
     "@sentry/node": "5.20.1",

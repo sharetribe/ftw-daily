@@ -2202,6 +2202,13 @@
     hoist-non-react-statics "^3.3.1"
     react-is "^16.12.0"
 
+"@loadable/server@^5.14.2":
+  version "5.14.2"
+  resolved "https://registry.yarnpkg.com/@loadable/server/-/server-5.14.2.tgz#8e1467655633184cc7f9418b76741f48d24c4d29"
+  integrity sha512-2CkcmHx5PUEBn8evIvHPyOncMtWMNTu68ON1rnyAJnd+2MCq+eWMPKIR8DAdJYf56iVArBOBI0nyo3N+6laCPw==
+  dependencies:
+    lodash "^4.17.15"
+
 "@loadable/webpack-plugin@^5.14.2":
   version "5.14.2"
   resolved "https://registry.yarnpkg.com/@loadable/webpack-plugin/-/webpack-plugin-5.14.2.tgz#8948f6955e410fdde04bda04b6e149af4a73d734"
