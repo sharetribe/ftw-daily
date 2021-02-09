@@ -413,6 +413,8 @@ exports[`InboxPage matches snapshot 2`] = `
       className="root"
       href="/u/provider-user-id"
       onClick={[Function]}
+      onMouseOver={[Function]}
+      onTouchStart={[Function]}
       style={Object {}}
       title="provider-user-id display name"
     >
@@ -427,6 +429,8 @@ exports[`InboxPage matches snapshot 2`] = `
     className="itemLink"
     href="/order/order-1/details"
     onClick={[Function]}
+    onMouseOver={[Function]}
+    onTouchStart={[Function]}
     style={Object {}}
     title={null}
   >
@@ -896,6 +900,8 @@ exports[`InboxPage matches snapshot 4`] = `
       className="root"
       href="/u/customer-user-id"
       onClick={[Function]}
+      onMouseOver={[Function]}
+      onTouchStart={[Function]}
       style={Object {}}
       title="customer-user-id display name"
     >
@@ -910,6 +916,8 @@ exports[`InboxPage matches snapshot 4`] = `
     className="itemLink"
     href="/sale/sale-1/details"
     onClick={[Function]}
+    onMouseOver={[Function]}
+    onTouchStart={[Function]}
     style={Object {}}
     title={null}
   >

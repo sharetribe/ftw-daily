@@ -8,6 +8,8 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
     className="logoLink NamedLink_active"
     href="/"
     onClick={[Function]}
+    onMouseOver={[Function]}
+    onTouchStart={[Function]}
     style={Object {}}
     title={null}
   >
@@ -21,7 +23,9 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
     action="/"
     className="searchLink"
     method="post"
+    onMouseOver={[Function]}
     onSubmit={[Function]}
+    onTouchStart={[Function]}
   >
     <div
       className="root topbarSearchWithLeftPadding"
@@ -76,6 +80,8 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
     className="createListingLink"
     href="/l/new"
     onClick={[Function]}
+    onMouseOver={[Function]}
+    onTouchStart={[Function]}
     style={Object {}}
     title={null}
   >
@@ -91,6 +97,8 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
     className="inboxLink"
     href="/inbox/sales"
     onClick={[Function]}
+    onMouseOver={[Function]}
+    onTouchStart={[Function]}
     style={Object {}}
     title={null}
   >
@@ -141,6 +149,8 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
             className="yourListingsLink"
             href="/listings"
             onClick={[Function]}
+            onMouseOver={[Function]}
+            onTouchStart={[Function]}
             style={Object {}}
             title={null}
           >
@@ -160,6 +170,8 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
             className="profileSettingsLink"
             href="/profile-settings"
             onClick={[Function]}
+            onMouseOver={[Function]}
+            onTouchStart={[Function]}
             style={Object {}}
             title={null}
           >
@@ -179,6 +191,8 @@ exports[`TopbarDesktop data matches snapshot 1`] = `
             className="yourListingsLink"
             href="/account"
             onClick={[Function]}
+            onMouseOver={[Function]}
+            onTouchStart={[Function]}
             style={Object {}}
             title={null}
           >

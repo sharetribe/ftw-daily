@@ -68,6 +68,8 @@ exports[`ActivityFeed matches snapshot 1`] = `
         className="root avatar"
         href="/u/user1"
         onClick={[Function]}
+        onMouseOver={[Function]}
+        onTouchStart={[Function]}
         style={Object {}}
         title="user1 display name"
       >
