@@ -32,30 +32,6 @@ describe('Application - node environment', () => {
     render('/styleguide', {});
   });
 
-  it('server renders pages that do not require authentication', () => {
-    const urlTitles = {
-      '/': 'LandingPage.schemaTitle',
-      '/s': 'SearchPage.schemaTitle',
-      '/l/listing-title-slug/1234': 'ListingPage.loadingListingTitle',
-      '/l/1234': 'ListingPage.loadingListingTitle',
-      '/u/1234': 'ProfilePage.schemaTitle',
-      '/login': 'AuthenticationPage.schemaTitleLogin',
-      '/signup': 'AuthenticationPage.schemaTitleSignup',
-      '/recover-password': 'PasswordRecoveryPage.title',
-      '/this-url-should-not-be-found': 'NotFoundPage.title',
-      '/reset-password?t=token&e=email': 'PasswordResetPage.title',
-    };
-    forEach(urlTitles, (title, url) => {
-      const context = {};
-      const { head, body } = render(url, context);
-
-      expect(head.title.toString()).toContain(title);
-
-      // context.url will contain the URL to redirect to if a <Redirect> was used
-      expect(context.url).not.toBeDefined();
-    });
-  });
-
   it('server renders redirects for pages that require authentication', () => {
     const loginPath = '/login';
     const signupPath = '/signup';
