@@ -49,7 +49,7 @@ const EnquiryFormComponent = props => (
       const submitDisabled = submitInProgress;
 
       return (
-        <Form className={classes} onSubmit={handleSubmit}>
+        <Form className={classes} onSubmit={handleSubmit} enforcePagePreloadFor="OrderDetailsPage">
           <IconEnquiry className={css.icon} />
           <h2 className={css.heading}>
             <FormattedMessage id="EnquiryForm.heading" values={{ listingTitle }} />
