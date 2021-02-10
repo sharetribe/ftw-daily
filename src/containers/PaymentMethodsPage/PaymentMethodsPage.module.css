@@ -1,3 +1,5 @@
+@import '../../styles/customMediaQueries.css';
+
 .content {
   @media (--viewportMedium) {
     margin: 32px auto 0 auto;
