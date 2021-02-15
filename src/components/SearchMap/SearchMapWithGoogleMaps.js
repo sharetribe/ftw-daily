@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import invariant from 'invariant';
-import { arrayOf, func, node, number, oneOfType, shape, string } from 'prop-types';
+import { arrayOf, func, number, oneOfType, shape, string } from 'prop-types';
 import isEqual from 'lodash/isEqual';
 import classNames from 'classnames';
 import { types as sdkTypes } from '../../util/sdkLoader';
@@ -152,7 +152,7 @@ class CustomOverlayView extends Component {
       ...getOffsetOverride(this.containerElement, this.props),
     };
     const layoutStyles = getLayoutStyles(mapCanvasProjection, offset, this.props);
-    _.assign(this.containerElement.style, layoutStyles);
+    Object.assign(this.containerElement.style, layoutStyles);
   }
 
   draw() {
@@ -515,11 +515,6 @@ class SearchMapWithGoogleMaps extends Component {
     const {
       id,
       className,
-      onMapLoad,
-      onMapMoveEnd,
-      center,
-      bounds,
-      zoom,
       listings,
       activeListingId,
       infoCardOpen,
@@ -527,7 +522,6 @@ class SearchMapWithGoogleMaps extends Component {
       mapComponentRefreshToken,
       onListingInfoCardClicked,
       createURLToListing,
-      ...rest
     } = this.props;
     return (
       <div
