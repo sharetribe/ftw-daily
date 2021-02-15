@@ -36,7 +36,6 @@ import {
   requestImageUpload,
   updateImageOrder,
   removeListingImage,
-  loadData,
   clearUpdatedTab,
   savePayoutDetails,
 } from './EditListingPage.duck';
