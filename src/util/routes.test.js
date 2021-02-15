@@ -1,8 +1,4 @@
-import React from 'react';
-import { arrayOf } from 'prop-types';
-import { RoutesProvider } from '../components';
 import routeConfiguration from '../routeConfiguration';
-import { renderDeep, renderShallow } from './test-helpers';
 import { createResourceLocatorString, findRouteByRouteName, canonicalRoutePath } from './routes';
 
 describe('util/routes.js', () => {
