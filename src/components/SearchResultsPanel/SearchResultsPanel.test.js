@@ -1,5 +1,4 @@
 import React from 'react';
-import { currencyConfig } from '../../util/test-data';
 import { fakeIntl } from '../../util/test-data';
 import { renderShallow } from '../../util/test-helpers';
 import SearchResultsPanel from './SearchResultsPanel';
