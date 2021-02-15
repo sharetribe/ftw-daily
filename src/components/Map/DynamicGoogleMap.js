@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { number, object, shape, string } from 'prop-types';
-import classNames from 'classnames';
 import { circlePolyline } from '../../util/maps';
 import config from '../../config';
 
@@ -91,7 +90,7 @@ class DynamicGoogleMap extends Component {
             }
           : {};
 
-        const marker = new window.google.maps.Marker({
+        new window.google.maps.Marker({
           position: center,
           map: this.map,
           title: address,
