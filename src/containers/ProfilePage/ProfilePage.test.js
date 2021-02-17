@@ -3,8 +3,6 @@ import { renderShallow } from '../../util/test-helpers';
 import { createUser, fakeIntl, fakeViewport } from '../../util/test-data';
 import { ProfilePageComponent } from './ProfilePage';
 
-const noop = () => null;
-
 describe('ProfilePage', () => {
   it('matches snapshot', () => {
     const tree = renderShallow(

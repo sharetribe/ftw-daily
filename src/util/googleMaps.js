@@ -259,10 +259,10 @@ export const getLayoutStyles = (mapCanvasProjection, offset, props) => {
   };
 
   if (props.bounds) {
-    const bounds = ensureOfType(props.bounds, google.maps.LatLngBounds, createLatLngBounds);
+    const bounds = ensureOfType(props.bounds, window.google.maps.LatLngBounds, createLatLngBounds);
     return getLayoutStylesByBounds(mapCanvasProjection, offset, bounds);
   } else {
-    const position = ensureOfType(props.position, google.maps.LatLng, createLatLng);
+    const position = ensureOfType(props.position, window.google.maps.LatLng, createLatLng);
     return getLayoutStylesByPosition(mapCanvasProjection, offset, position);
   }
 };

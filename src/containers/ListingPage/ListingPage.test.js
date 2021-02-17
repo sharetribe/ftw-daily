@@ -20,10 +20,6 @@ import {
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { showListingRequest, showListingError, showListing } from './ListingPage.duck';
 
-// routeConfiguration needs to be imported before tests for ListingPageComponent can be made.
-// Otherwise, ListingPage itself is not initialized correctly when routeConfiguration is imported
-// (loadData call fails).
-import routeConfiguration from '../../routeConfiguration';
 import { ListingPageComponent } from './ListingPage';
 import ActionBarMaybe from './ActionBarMaybe';
 

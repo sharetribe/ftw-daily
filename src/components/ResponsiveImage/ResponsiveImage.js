@@ -77,12 +77,11 @@ const ResponsiveImage = props => {
 
   const imgProps = {
     className: classes,
-    alt,
     srcSet,
     ...rest,
   };
 
-  return <img {...imgProps} />;
+  return <img alt={alt} {...imgProps} />;
 };
 
 ResponsiveImage.defaultProps = {
