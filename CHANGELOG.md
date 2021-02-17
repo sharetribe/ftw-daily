@@ -14,6 +14,10 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [add] Route-based code splitting. This is done against sharetribe-scripts v5.0.0 using Loadable
+  components. Read more from the pull request.
+  [#1411](https://github.com/sharetribe/ftw-daily/pull/1411)
+
 ## [v7.3.0] 2021-01-13
 
 - [fix] Move well-known/\* endpoints related to OIDC proxy setup from `apiRouter` to new

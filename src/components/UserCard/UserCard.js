@@ -86,7 +86,11 @@ const UserCard = props => {
   const separator = isCurrentUser ? null : <span className={css.linkSeparator}>•</span>;
 
   const contact = (
-    <InlineTextButton rootClassName={css.contact} onClick={handleContactUserClick}>
+    <InlineTextButton
+      rootClassName={css.contact}
+      onClick={handleContactUserClick}
+      enforcePagePreloadFor="SignupPage"
+    >
       <FormattedMessage id="UserCard.contactUser" />
     </InlineTextButton>
   );

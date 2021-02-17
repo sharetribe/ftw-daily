@@ -7,6 +7,8 @@ exports[`ManageListingCard matches snapshot 1`] = `
   <div
     className="threeToTwoWrapper"
     onClick={[Function]}
+    onMouseOver={[Function]}
+    onTouchStart={[Function]}
     tabIndex={0}
   >
     <div

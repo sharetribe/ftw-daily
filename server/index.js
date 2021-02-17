@@ -34,6 +34,7 @@ const passport = require('passport');
 const auth = require('./auth');
 const apiRouter = require('./apiRouter');
 const wellKnownRouter = require('./wellKnownRouter');
+const { getExtractors } = require('./importer');
 const renderer = require('./renderer');
 const dataLoader = require('./dataLoader');
 const fs = require('fs');
@@ -214,10 +215,18 @@ app.get('*', (req, res) => {
   // data, let's disable response caching altogether.
   res.set(noCacheHeaders);
 
+  // Get chunk extractors from node and web builds
+  // https://loadable-components.com/docs/api-loadable-server/#chunkextractor
+  const { nodeExtractor, webExtractor } = getExtractors();
+
+  // Server-side entrypoint provides us the functions for server-side data loading and rendering
+  const nodeEntrypoint = nodeExtractor.requireEntrypoint();
+  const { default: renderApp, matchPathname, configureStore, routeConfiguration } = nodeEntrypoint;
+
   dataLoader
-    .loadData(req.url, sdk)
+    .loadData(req.url, sdk, matchPathname, configureStore, routeConfiguration)
     .then(preloadedState => {
-      const html = renderer.render(req.url, context, preloadedState);
+      const html = renderer.render(req.url, context, preloadedState, renderApp, webExtractor);
 
       if (dev) {
         const debugData = {

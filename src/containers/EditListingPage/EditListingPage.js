@@ -367,6 +367,4 @@ const EditListingPage = compose(
   )
 )(injectIntl(EditListingPageComponent));
 
-EditListingPage.loadData = loadData;
-
 export default EditListingPage;

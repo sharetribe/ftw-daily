@@ -1,3 +1,4 @@
+@import '../../styles/customMediaQueries.css';
 @import '../../styles/propertySets.css';
 
 /* Can be given to Topbar when a modal is opened

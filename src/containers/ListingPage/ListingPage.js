@@ -41,12 +41,7 @@ import {
 } from '../../components';
 import { TopbarContainer, NotFoundPage } from '../../containers';
 
-import {
-  sendEnquiry,
-  loadData,
-  setInitialValues,
-  fetchTransactionLineItems,
-} from './ListingPage.duck';
+import { sendEnquiry, fetchTransactionLineItems, setInitialValues } from './ListingPage.duck';
 import SectionImages from './SectionImages';
 import SectionAvatar from './SectionAvatar';
 import SectionHeading from './SectionHeading';
@@ -623,8 +618,5 @@ const ListingPage = compose(
   ),
   injectIntl
 )(ListingPageComponent);
-
-ListingPage.setInitialValues = initialValues => setInitialValues(initialValues);
-ListingPage.loadData = loadData;
 
 export default ListingPage;

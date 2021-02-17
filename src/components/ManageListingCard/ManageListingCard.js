@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
-import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 import classNames from 'classnames';
+import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 import routeConfiguration from '../../routeConfiguration';
 import {
   LINE_ITEM_NIGHT,
@@ -22,7 +22,7 @@ import {
   LISTING_PAGE_PARAM_TYPE_EDIT,
   createSlug,
 } from '../../util/urlHelpers';
-import { createResourceLocatorString } from '../../util/routes';
+import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
 import config from '../../config';
 import {
   InlineTextButton,
@@ -146,6 +146,15 @@ export const ManageListingCardComponent = props => {
   const thisListingInProgress =
     actionsInProgressListingId && actionsInProgressListingId.uuid === id;
 
+  const onOverListingLink = () => {
+    // Enforce preloading of ListingPage (loadable component)
+    const { component: Page } = findRouteByRouteName('ListingPage', routeConfiguration());
+    // Loadable Component has a "preload" function.
+    if (Page.preload) {
+      Page.preload();
+    }
+  };
+
   const titleClasses = classNames(css.title, {
     [css.titlePending]: isPendingApproval,
     [css.titleDraft]: isDraft,
@@ -181,6 +190,8 @@ export const ManageListingCardComponent = props => {
           // (So, that they have no parent-child relationship - like '<a>bla<a>blaa</a></a>')
           history.push(createListingURL(routeConfiguration(), listing));
         }}
+        onMouseOver={onOverListingLink}
+        onTouchStart={onOverListingLink}
       >
         <div className={css.aspectWrapper}>
           <ResponsiveImage
