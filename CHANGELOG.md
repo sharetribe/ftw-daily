@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [fix] Remove unintended Lodash usage, unspecified window-scope calls and unused vars
+  [#1413](https://github.com/sharetribe/ftw-daily/pull/1413)
 - [add] Route-based code splitting. This is done against sharetribe-scripts v5.0.0 using Loadable
   components. Read more from the pull request.
   [#1411](https://github.com/sharetribe/ftw-daily/pull/1411)
