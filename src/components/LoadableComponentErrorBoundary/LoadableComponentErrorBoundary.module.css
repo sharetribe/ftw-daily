@@ -1,0 +1,96 @@
+@import '../../styles/propertySets.css';
+
+.root {
+  /* Expand to the available space */
+  flex-grow: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.topbar {
+  /* Size */
+  width: 100%;
+  height: var(--topbarHeight);
+
+  /* Layout for child components */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* fill */
+  background-color: var(--matterColorLight);
+
+  /* shadows */
+  box-shadow: var(--boxShadow);
+
+  @media (--viewportLarge) {
+    height: var(--topbarHeightDesktop);
+    justify-content: center;
+  }
+}
+
+.logoMobile {
+  display: block;
+
+  & path {
+    fill: var(--marketplaceColor);
+  }
+
+  @media (--viewportLarge) {
+    display: none;
+  }
+}
+
+.logoDesktop {
+  display: none;
+  width: auto;
+  height: 27px;
+
+  @media (--viewportLarge) {
+    display: block;
+  }
+}
+
+.content {
+  max-width: 587px;
+  width: 80%;
+  margin-top: 60px;
+  margin-bottom: 60px;
+
+  @media (--viewportMedium) {
+    margin-top: 10vh;
+  }
+}
+
+.number {
+  @apply --marketplaceHeroTitleFontStyles;
+  text-align: center;
+  color: var(--marketplaceColor);
+  margin: 1px 0 0 0;
+
+  @media (--viewportMedium) {
+    margin: 0;
+  }
+}
+
+.heading {
+  @apply --marketplaceModalTitleStyles;
+  text-align: center;
+  margin-top: 16px;
+
+  @media (--viewportMedium) {
+    margin-top: 22px;
+  }
+}
+
+.description {
+  text-align: center;
+  margin-bottom: 0;
+
+  @media (--viewportMedium) {
+    margin-top: 24px;
+    margin-bottom: 0;
+  }
+}
