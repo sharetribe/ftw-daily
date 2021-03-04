@@ -1,6 +1,6 @@
 /**
- * LayoutSingleColumn needs to have 3-4 children:
- * LayoutWrapperTopbar, LayoutWrapperSideNav, LayoutWrapperMain, and possibly LayoutWrapperFooter.
+ * LayoutSingleColumn needs to have 2-3 children:
+ * LayoutWrapperTopbar, LayoutWrapperMain, and possibly LayoutWrapperFooter.
  */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -11,9 +11,9 @@ import css from './LayoutSingleColumn.module.css';
 
 const prepareChildren = children => {
   const childrenCount = React.Children.count(children);
-  if (!(childrenCount === 3 || childrenCount === 4)) {
+  if (!(childrenCount === 2 || childrenCount === 3)) {
     throw new Error(
-      `Menu needs to have 2 - 3 children:
+      `LayoutSingleColumn needs to have 2 - 3 children:
       LayoutWrapperTopbar, and LayoutWrapperMain,
       and optionally LayoutWrapperFooter.`
     );
