@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [add] Add `LoadableComponentErrorBoundary` for handling ChunkLoadErrors with error boundary.
+  [#1416](https://github.com/sharetribe/ftw-daily/pull/1416)
+
 ## [v8.0.0] 2021-02-17
 
 This major release adds support for code-splitting using
