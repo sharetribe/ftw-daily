@@ -143,6 +143,14 @@ export const stripeCountryDetails = [
     },
   },
   {
+    // Hungary
+    code: 'HU',
+    currency: 'HUF',
+    accountConfig: {
+      iban: true,
+    },
+  },
+  {
     // Ireland
     code: 'IE',
     currency: 'EUR',
