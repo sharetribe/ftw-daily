@@ -14,6 +14,10 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [change] Specify required Node.js versions in package.json and update the node version used in
+  CircleCI. Currently, the required Node.js version comes from
+  [jose](https://github.com/panva/jose#runtime-support-matrix) package which is used with social
+  logins. [#1418](https://github.com/sharetribe/ftw-daily/pull/1418)
 - [fix] enforce upper case for currency and improve error message for it.
   [#1417](https://github.com/sharetribe/ftw-daily/pull/1417)
 - [add] Add `LoadableComponentErrorBoundary` for handling ChunkLoadErrors with error boundary.
