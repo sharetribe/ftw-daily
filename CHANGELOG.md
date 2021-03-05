@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [add] Add Hungary to supported Stripe countries.
+  [#1419](https://github.com/sharetribe/ftw-daily/pull/1419)
 - [change] Specify required Node.js versions in package.json and update the node version used in
   CircleCI. Currently, the required Node.js version comes from
   [jose](https://github.com/panva/jose#runtime-support-matrix) package which is used with social
