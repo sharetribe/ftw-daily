@@ -174,7 +174,6 @@ export const mapInputsToStripeAccountKeys = (country, values) => {
     case 'FR':
     case 'DE':
     case 'GR':
-    case 'HU':
     case 'IE':
     case 'IT':
     case 'LV':
