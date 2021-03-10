@@ -93,8 +93,8 @@ export const filters = [
     },
   },
   {
-    id: 'amenities',
-    label: 'Amenities',
+    id: 'tastyfishies',
+    label: 'Fish actions',
     type: 'SelectMultipleFilter',
     group: 'secondary',
     queryParamNames: ['pub_amenities'],
@@ -109,36 +109,36 @@ export const filters = [
       // to make filter customizations a bit easier.
       options: [
         {
-          key: 'towels',
-          label: 'Towels',
+          key: 'eat',
+          label: 'Eat',
         },
         {
-          key: 'bathroom',
-          label: 'Bathroom',
+          key: 'fry',
+          label: 'Fry',
         },
         {
-          key: 'swimming_pool',
-          label: 'Swimming pool',
+          key: 'steam',
+          label: 'Steam',
         },
         {
-          key: 'own_drinks',
-          label: 'Own drinks allowed',
+          key: 'smoke',
+          label: 'Smoke',
         },
         {
-          key: 'jacuzzi',
-          label: 'Jacuzzi',
+          key: 'fish',
+          label: 'Fish',
         },
         {
-          key: 'audiovisual_entertainment',
-          label: 'Audiovisual entertainment',
+          key: 'sashimi',
+          label: 'Sashimi',
         },
         {
-          key: 'barbeque',
-          label: 'Barbeque',
+          key: 'grill',
+          label: 'Grill',
         },
         {
-          key: 'own_food_allowed',
-          label: 'Own food allowed',
+          key: 'burn',
+          label: 'Burn',
         },
       ],
     },

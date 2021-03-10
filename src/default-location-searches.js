@@ -9,38 +9,38 @@ const { LatLng, LatLngBounds } = sdkTypes;
 // `predictionPlace` (util.types.place) properties.
 const defaultLocations = [
   {
-    id: 'default-helsinki',
+    id: 'default-warsaw',
     predictionPlace: {
-      address: 'Helsinki, Finland',
-      bounds: new LatLngBounds(new LatLng(60.29783, 25.25448), new LatLng(59.92248, 24.78287)),
+      address: 'Warsaw, Polska',
+      bounds: new LatLngBounds(new LatLng(52.368154,21.2711509792236), new LatLng(52.0978501372646,20.851689)),
     },
   },
   {
-    id: 'default-turku',
+    id: 'default-krakow',
     predictionPlace: {
-      address: 'Turku, Finland',
-      bounds: new LatLngBounds(new LatLng(60.53045, 22.38197), new LatLng(60.33361, 22.06644)),
+      address: 'Kraków, Polska',
+      bounds: new LatLngBounds(new LatLng(50.1261318559248,20.217345650311), new LatLng(49.9677090000579,19.7922382548761)),
     },
   },
   {
     id: 'default-tampere',
     predictionPlace: {
-      address: 'Tampere, Finland',
-      bounds: new LatLngBounds(new LatLng(61.83657, 24.11838), new LatLng(61.42728, 23.5422)),
+      address: 'Wrocław, Polska',
+      bounds: new LatLngBounds(new LatLng(51.210053,17.1762191755815), new LatLng(51.0426754481203,16.8073838462134)),
     },
   },
   {
     id: 'default-oulu',
     predictionPlace: {
-      address: 'Oulu, Finland',
-      bounds: new LatLngBounds(new LatLng(65.56434, 26.77069), new LatLng(64.8443, 24.11494)),
+      address: 'Gdańsk, Polska',
+      bounds: new LatLngBounds(new LatLng(54.44722,18.950379), new LatLng(54.274974,18.4372692800502)),
     },
   },
   {
     id: 'default-ruka',
     predictionPlace: {
-      address: 'Ruka, Finland',
-      bounds: new LatLngBounds(new LatLng(66.16997, 29.16773), new LatLng(66.16095, 29.13572)),
+      address: 'Poznań, Polska',
+      bounds: new LatLngBounds(new LatLng(52.5093278711914,17.0717063971184), new LatLng(52.2919254489772,16.731594)),
     },
   },
 ];
