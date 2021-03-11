@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+## [v8.1.0] 2021-03-11
+
 - [change] Specify required Node.js versions in package.json and update the node version used in
   CircleCI. Currently, the required Node.js version comes from
   [jose](https://github.com/panva/jose#runtime-support-matrix) package which is used with social
@@ -22,6 +24,8 @@ way to update this template, but currently, we follow a pattern:
   [#1417](https://github.com/sharetribe/ftw-daily/pull/1417)
 - [add] Add `LoadableComponentErrorBoundary` for handling ChunkLoadErrors with error boundary.
   [#1416](https://github.com/sharetribe/ftw-daily/pull/1416)
+
+  [v8.1.0]: https://github.com/sharetribe/ftw-daily/compare/v8.0.0...v8.1.0
 
 ## [v8.0.0] 2021-02-17
 
