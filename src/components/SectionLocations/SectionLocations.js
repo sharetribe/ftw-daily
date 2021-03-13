@@ -8,9 +8,9 @@ import { NamedLink } from '../../components';
 
 import css from './SectionLocations.module.css';
 
-import helsinkiImage from './images/warszawa.jpg';
-import rovaniemiImage from './images/gdansk.jpg';
-import rukaImage from './images/krakow.jpg';
+import location1Image from './images/pup1.jpg';
+import location2Image from './images/pup4.jpg';
+import location3Image from './images/pup2.jpg';
 
 class LocationImage extends Component {
   render() {
@@ -51,18 +51,18 @@ const SectionLocations = props => {
       </div>
       <div className={css.locations}>
         {locationLink(
-          'Warszawa',
-          helsinkiImage,
+          'Warszawie',
+          location1Image,
           '?address=Helsinki%2C%20Finland&bounds=60.2978389%2C25.254484899999966%2C59.9224887%2C24.782875800000056&origin=60.16985569999999%2C24.93837910000002'
         )}
         {locationLink(
-          'Gdańsk',
-          rovaniemiImage,
+          'Gdańsku',
+          location2Image,
           '?address=Gdańsk%2C%20Pomeranian%20Voivodeship%2C%20Poland&bounds=54.44722%2C18.950379%2C54.274974%2C18.4372692800502'
         )}
         {locationLink(
-          'Kraków',
-          rukaImage,
+          'Krakowie',
+          location3Image,
           '?address=Kraków%2C%20Lesser%20Poland%20Voivodeship%2C%20Poland&bounds=50.1261318559248%2C20.217345650311%2C49.9677090000579%2C19.7922382548761'
         )}
       </div>

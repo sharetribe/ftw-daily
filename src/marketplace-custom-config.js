@@ -35,32 +35,6 @@
 
 export const filters = [
   {
-    id: 'dates',
-    label: 'Dates',
-    type: 'BookingDateRangeFilter',
-    group: 'primary',
-    // Note: BookingDateRangeFilter is fixed filter,
-    // you can't change "queryParamNames: ['dates'],"
-    queryParamNames: ['dates'],
-    config: {},
-  },
-  {
-    id: 'price',
-    label: 'Price',
-    type: 'PriceFilter',
-    group: 'primary',
-    // Note: PriceFilter is fixed filter,
-    // you can't change "queryParamNames: ['price'],"
-    queryParamNames: ['price'],
-    // Price filter configuration
-    // Note: unlike most prices this is not handled in subunits
-    config: {
-      min: 0,
-      max: 1000,
-      step: 5,
-    },
-  },
-  {
     id: 'keyword',
     label: 'Keyword',
     type: 'KeywordFilter',
@@ -74,8 +48,8 @@ export const filters = [
     config: {},
   },
   {
-    id: 'category',
-    label: 'Category',
+    id: 'categories',
+    label: 'Wszytstkie kategorie',
     type: 'SelectSingleFilter',
     group: 'secondary',
     queryParamNames: ['pub_category'],
@@ -85,16 +59,14 @@ export const filters = [
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
       options: [
-        { key: 'smoke', label: 'Smoke' },
-        { key: 'electric', label: 'Electric' },
-        { key: 'wood', label: 'Wood' },
-        { key: 'other', label: 'Other' },
+        { key: 'dog', label: 'Psy' },
+        //{ key: 'cat', label: 'Koty' },
       ],
     },
   },
   {
-    id: 'tastyfishies',
-    label: 'Fish actions',
+    id: 'gender',
+    label: 'Płeć',
     type: 'SelectMultipleFilter',
     group: 'secondary',
     queryParamNames: ['pub_amenities'],
@@ -109,36 +81,86 @@ export const filters = [
       // to make filter customizations a bit easier.
       options: [
         {
-          key: 'eat',
-          label: 'Eat',
+          key: 'male',
+          label: 'Samiec',
         },
         {
-          key: 'fry',
-          label: 'Fry',
+          key: 'female',
+          label: 'Samica',
+        },
+      ],
+    },
+  },
+  {
+    id: 'weight',
+    label: 'Waga',
+    type: 'SelectMultipleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_amenities'],
+    config: {
+      // Optional modes: 'has_all', 'has_any'
+      // https://www.sharetribe.com/api-reference/marketplace.html#extended-data-filtering
+      searchMode: 'has_all',
+
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for this web app's UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: [
+        {
+          key: 'really-small',
+          label: 'Do 5 kg',
         },
         {
-          key: 'steam',
-          label: 'Steam',
+          key: 'small',
+          label: '5 - 15 kg',
         },
         {
-          key: 'smoke',
-          label: 'Smoke',
+          key: 'bigger',
+          label: '15 - 24 kg',
         },
         {
-          key: 'fish',
-          label: 'Fish',
+          key: 'quite-big',
+          label: '25 - 44 kg',
         },
         {
-          key: 'sashimi',
-          label: 'Sashimi',
+          key: 'big',
+          label: '45 kg i więcej',
+        },
+      ],
+    },
+  },
+  {
+    id: 'age',
+    label: 'Wiek',
+    type: 'SelectMultipleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_amenities'],
+    config: {
+      // Optional modes: 'has_all', 'has_any'
+      // https://www.sharetribe.com/api-reference/marketplace.html#extended-data-filtering
+      searchMode: 'has_all',
+
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for this web app's UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: [
+        {
+          key: 'puppies',
+          label: 'Szczeniaki / do 1 roku',
         },
         {
-          key: 'grill',
-          label: 'Grill',
+          key: 'young',
+          label: '1 - 4 lat',
         },
         {
-          key: 'burn',
-          label: 'Burn',
+          key: 'mid-age',
+          label: '5 - 9 lat',
+        },
+        {
+          key: 'old',
+          label: '10 lat i więcej',
         },
       ],
     },
@@ -161,10 +183,8 @@ export const sortConfig = {
   conflictingFilters: ['keyword'],
 
   options: [
-    { key: 'createdAt', label: 'Newest' },
-    { key: '-createdAt', label: 'Oldest' },
-    { key: '-price', label: 'Lowest price' },
-    { key: 'price', label: 'Highest price' },
+    { key: 'createdAt', label: 'Najnowsze ogłoszenia' },
+    { key: '-createdAt', label: 'Najstarsze ogłoszenia' },
 
     // The relevance is only used for keyword search, but the
     // parameter isn't sent to the Marketplace API. The key is purely
