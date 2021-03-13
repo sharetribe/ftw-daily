@@ -23,7 +23,12 @@ export const subUnitDivisors = {
 // See: https://github.com/yahoo/react-intl/wiki/API#formatnumber
 export const currencyConfiguration = currency => {
   if (!subUnitDivisors[currency]) {
-    throw new Error(`Configuration missing for currency: ${currency}.`);
+    const currencies = Object.keys(subUnitDivisors);
+    throw new Error(
+      `Configuration missing for currency: ${currency}. Supported currencies: ${currencies.join(
+        ', '
+      )}.`
+    );
   }
 
   return subUnitDivisors[currency] === 1
