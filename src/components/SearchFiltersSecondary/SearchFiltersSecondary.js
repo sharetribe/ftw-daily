@@ -57,23 +57,25 @@ class SearchFiltersSecondaryComponent extends Component {
   }
 
   render() {
-    const { rootClassName, className, children } = this.props;
+    const { rootClassName, className, hideFooter, children } = this.props;
     const classes = classNames(rootClassName || css.root, className);
 
     return (
       <div className={classes}>
         <div className={css.filtersWrapper}>{children}</div>
-        <div className={css.footer}>
-          <InlineTextButton rootClassName={css.resetAllButton} onClick={this.resetAll}>
-            <FormattedMessage id={'SearchFiltersSecondary.resetAll'} />
-          </InlineTextButton>
-          <InlineTextButton rootClassName={css.cancelButton} onClick={this.cancelFilters}>
-            <FormattedMessage id={'SearchFiltersSecondary.cancel'} />
-          </InlineTextButton>
-          <InlineTextButton rootClassName={css.applyButton} onClick={this.applyFilters}>
-            <FormattedMessage id={'SearchFiltersSecondary.apply'} />
-          </InlineTextButton>
-        </div>
+        { hideFooter ? null : (
+          <div className={css.footer}>
+            <InlineTextButton rootClassName={css.resetAllButton} onClick={this.resetAll}>
+              <FormattedMessage id={'SearchFiltersSecondary.resetAll'} />
+            </InlineTextButton>
+            <InlineTextButton rootClassName={css.cancelButton} onClick={this.cancelFilters}>
+              <FormattedMessage id={'SearchFiltersSecondary.cancel'} />
+            </InlineTextButton>
+            <InlineTextButton rootClassName={css.applyButton} onClick={this.applyFilters}>
+              <FormattedMessage id={'SearchFiltersSecondary.apply'} />
+            </InlineTextButton>
+          </div>
+        )}
       </div>
     );
   }

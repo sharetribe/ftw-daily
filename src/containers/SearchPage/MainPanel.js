@@ -293,6 +293,7 @@ class MainPanel extends Component {
               cancelFilters={this.cancelFilters}
               resetAll={this.resetAll}
               onClosePanel={() => this.setState({ isSecondaryFiltersOpen: false })}
+              hideFooter
             >
               {secondaryFilters.map(config => {
                 return (
