@@ -303,6 +303,7 @@ class MainPanel extends Component {
                     urlQueryParams={urlQueryParams}
                     initialValues={this.initialValues}
                     getHandleChangedValueFn={this.getHandleChangedValueFn}
+                    liveEdit
                     showAsPopup={false}
                   />
                 );
