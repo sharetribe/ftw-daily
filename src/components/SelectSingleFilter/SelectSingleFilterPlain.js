@@ -12,7 +12,7 @@ const getQueryParamName = queryParamNames => {
 class SelectSingleFilterPlain extends Component {
   constructor(props) {
     super(props);
-    this.state = { isOpen: true };
+    this.state = { isOpen: false };
     this.selectOption = this.selectOption.bind(this);
     this.toggleIsOpen = this.toggleIsOpen.bind(this);
   }

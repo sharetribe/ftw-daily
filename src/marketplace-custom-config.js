@@ -38,7 +38,7 @@ export const filters = [
     id: 'dates',
     label: 'Dates',
     type: 'BookingDateRangeFilter',
-    group: 'primary',
+    group: 'secondary',
     // Note: BookingDateRangeFilter is fixed filter,
     // you can't change "queryParamNames: ['dates'],"
     queryParamNames: ['dates'],
@@ -48,7 +48,7 @@ export const filters = [
     id: 'price',
     label: 'Price',
     type: 'PriceFilter',
-    group: 'primary',
+    group: 'secondary',
     // Note: PriceFilter is fixed filter,
     // you can't change "queryParamNames: ['price'],"
     queryParamNames: ['price'],
@@ -64,7 +64,7 @@ export const filters = [
     id: 'keyword',
     label: 'Keyword',
     type: 'KeywordFilter',
-    group: 'primary',
+    group: 'secondary',
     // Note: KeywordFilter is fixed filter,
     // you can't change "queryParamNames: ['keywords'],"
     queryParamNames: ['keywords'],
