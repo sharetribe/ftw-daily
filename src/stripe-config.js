@@ -238,7 +238,7 @@ export const stripeCountryDetails = [
   {
     // Poland
     code: 'PL',
-    currency: 'EUR',
+    currency: 'PLN',
     accountConfig: {
       iban: true,
     },
