@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [fix] currency for Poland (PLN) [#1427](https://github.com/sharetribe/ftw-daily/pull/1427)
+
 ## [v8.1.0] 2021-03-11
 
 - [change] Specify required Node.js versions in package.json and update the node version used in
