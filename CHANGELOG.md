@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [fix] currency conversion should not expect that env-variable is set.
+  [#1425](https://github.com/sharetribe/ftw-daily/pull/1425)
 - [fix] LoadableComponentErrorBoundary should be used in prod, not in dev-mode with
   hot-loading.[#1429](https://github.com/sharetribe/ftw-daily/pull/1429)
 - [fix] currency for Poland (PLN) [#1427](https://github.com/sharetribe/ftw-daily/pull/1427)
