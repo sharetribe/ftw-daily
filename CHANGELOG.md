@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+## [v8.1.1] 2021-04-20
+
 - [change] Update jose to v3.11.4 [#1433](https://github.com/sharetribe/ftw-daily/pull/1433)
 - [add] Update fr.json, es.json and partially de.json
   [#1431](https://github.com/sharetribe/ftw-daily/pull/1431)
@@ -22,6 +24,8 @@ way to update this template, but currently, we follow a pattern:
 - [fix] LoadableComponentErrorBoundary should be used in prod, not in dev-mode with
   hot-loading.[#1429](https://github.com/sharetribe/ftw-daily/pull/1429)
 - [fix] currency for Poland (PLN) [#1427](https://github.com/sharetribe/ftw-daily/pull/1427)
+
+  [v8.1.1]: https://github.com/sharetribe/ftw-daily/compare/v8.1.0...v8.1.1
 
 ## [v8.1.0] 2021-03-11
 
