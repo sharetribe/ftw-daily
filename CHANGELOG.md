@@ -14,6 +14,7 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [change] Update jose to v3.11.4 [#1433](https://github.com/sharetribe/ftw-daily/pull/1433)
 - [add] Update fr.json, es.json and partially de.json
   [#1431](https://github.com/sharetribe/ftw-daily/pull/1431)
 - [fix] currency conversion should not expect that env-variable is set.
