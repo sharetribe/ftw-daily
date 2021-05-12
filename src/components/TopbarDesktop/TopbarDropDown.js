@@ -31,8 +31,6 @@ class TopbarDropDown extends Component {
           let thisBtn = li.firstElementChild;
           thisBtn.onclick = () => this.props.onClick(thisBtn.textContent);
         });
-        dropdown.style.top = "-55px";
-        dropdown_cont.style.display = 'flex';
       }
     }
   }
@@ -52,13 +50,12 @@ class TopbarDropDown extends Component {
     const {generalCategories = false} = this.props;
     if (generalCategories) {
       return (
-        <div id="cat-drop-down" className={css.dropdown}>
+        <div id="cat-drop-down" className={css.dropdownContainer}>
           <FilterComponent
+            rootClassName={css.categoriesDropdown}
             key={`SearchFiltersPrimary.${generalCategories.id}`}
             idPrefix="SearchFiltersPrimary"
             filterConfig={generalCategories}
-            // urlQueryParams={this.props.currentSearchParams}
-            // initialValues={this.props.initialValues}
             urlQueryParams={this.emptyFunction}
             initialValues={this.emptyFunction}
             getHandleChangedValueFn={this.emptyFunction}

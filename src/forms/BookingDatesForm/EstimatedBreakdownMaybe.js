@@ -52,9 +52,9 @@ const estimatedNumericTotalDiscount = (discount, unitPrice, unitCount) => {
     amount: discountAmount,
     breakpoint: discountBreakpoint,
     unitType: discountUnitType
-  } = discount || {};
+  } = discount || {};
 
-  if (!discountAmount || !discountBreakpoint || !discountUnitType) return null;
+  if (!discountAmount || !discountBreakpoint || !discountUnitType) return null;
 
   const breakpointCount = parseInt(discountBreakpoint);
 
@@ -66,7 +66,7 @@ const estimatedNumericTotalDiscount = (discount, unitPrice, unitCount) => {
   const discountPercentage = new Decimal(discountAmount).times(0.01).toNumber();
   const numericTotalDiscount = new Decimal(numericTotalPrice).times(discountPercentage).toNumber();
 
-  return numericTotalDiscount || 0;
+  return numericTotalDiscount || 0;
 };
 
 
@@ -175,6 +175,9 @@ const EstimatedBreakdownMaybe = props => {
 
   const tx = estimatedTransaction(unitType, startDate, endDate, unitPrice, quantity, discount);
   const dateType = unitType === LINE_ITEM_DAY ? DATE_TYPE_DATE : DATE_TYPE_DATETIME;
+
+  console.log('tx')
+  console.log(tx)
 
   return (
     <BookingBreakdown

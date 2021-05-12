@@ -16,7 +16,7 @@ const LineItemDiscountMaybe = props => {
     item => item.code === LINE_ITEM_DISCOUNT
   );
 
-  const { discountReason } = protectedData || {};
+  const { discountReason } = protectedData || {};
   const reason = discountReason ? `(${ discountReason })` : '';
 
   return discount ? (

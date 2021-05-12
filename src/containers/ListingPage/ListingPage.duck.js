@@ -395,7 +395,7 @@ export const loadData = (params, search) => dispatch => {
       if (responses[0] && responses[0].data && responses[0].data.data) {
         const listing = responses[0].data.data;
 
-        const { unitType } = listing.attributes.publicData || {};
+        const { unitType } = listing.attributes.publicData || {};
 
         if (unitType === LINE_ITEM_UNITS) {
           // Fetch timeSlots.

@@ -301,7 +301,7 @@ export const fetchTransaction = (id, txRole) => (dispatch, getState, sdk) => {
         transaction &&
         txIsEnquired(transaction);
 
-      const { unitType } = listing.attributes.publicData || {};
+      const { unitType } = listing.attributes.publicData || {};
       if (canFetchTimeslots) {
         // bugfix Nov 30, 2020 -- fetchTimeSlots expects more than 1 argument!
         // dispatch(fetchTimeSlots(listingId));

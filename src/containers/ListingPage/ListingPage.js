@@ -123,7 +123,7 @@ export class ListingPageComponent extends Component {
       initialValues.bookingDates.bookingStart = bookingDates.startDate;
       initialValues.bookingDates.bookingEnd = bookingDates.endDate;
       initialValues.bookingData = bookingData;
-    } else {
+    } else {
       initialValues.bookingDates.bookingStart = timestampToDate(bookingStartTime);
       initialValues.bookingDates.bookingEnd = timestampToDate(bookingEndTime);
       initialValues.bookingData = {
@@ -390,7 +390,7 @@ export class ListingPageComponent extends Component {
       { title, price: formattedPrice, siteTitle }
     );
 
-    const unitType = (publicData && publicData.unitType) || config.fallbackUnitType;
+    const unitType = (publicData && publicData.unitType) || config.fallbackUnitType;
 
     const hostLink = (
       <NamedLink
@@ -492,7 +492,7 @@ export class ListingPageComponent extends Component {
                     sendEnquiryError={sendEnquiryError}
                     sendEnquiryInProgress={sendEnquiryInProgress}
                     onSubmitEnquiry={params => {
-                      const { unitType = config.fallbackUnitType } = currentListing.attributes.publicData || {};
+                      const { unitType = config.fallbackUnitType } = currentListing.attributes.publicData || {};
                       this.onSubmitEnquiry(params, unitType)
                     }}
                     currentUser={currentUser}

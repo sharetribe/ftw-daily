@@ -1,6 +1,6 @@
 import React from 'react';
 import { string } from 'prop-types';
-import { getTimeZoneNames } from '../../util/dates';
+import { getTimeZoneNames, getDefaultTimeZoneOnBrowser } from '../../util/dates';
 import { FieldSelect } from '../../components';
 
 const FieldTimeZoneSelect = props => {
@@ -9,16 +9,11 @@ const FieldTimeZoneSelect = props => {
     '^(Africa|America|Antarctica|Asia|Atlantic|Australia|Europe|Indian|Pacific)'
   );
 
+  const browsersTZ = getDefaultTimeZoneOnBrowser();
+
   return (
     <FieldSelect {...props}>
-      <option disabled value="">
-        Pick something...
-      </option>
-      {getTimeZoneNames(relevantZonesPattern).map(tz => (
-        <option key={tz} value={tz}>
-          {tz}
-        </option>
-      ))}
+      <option value={browsersTZ} key={browsersTZ}>{browsersTZ}</option>
     </FieldSelect>
   );
 };

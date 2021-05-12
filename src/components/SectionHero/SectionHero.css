@@ -164,6 +164,7 @@
   opacity: 0.5;
   margin-right: 5px;
   max-width: 200px;
+  min-width: 200px;
 
   &:hover {
     background-color: #ffc9e5;
@@ -189,6 +190,7 @@
   opacity: 0.5;
   margin-left: 5px;
   max-width: 200px;
+  min-width: 200px;
 
   &:hover {
     background-color: #fff7fb;

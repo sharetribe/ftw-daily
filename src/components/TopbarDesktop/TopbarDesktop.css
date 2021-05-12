@@ -92,15 +92,23 @@
   border-left-style: solid;
   border-left-width: 1px;
   border-left-color: var(--matterColorNegative);
+  display: flex;LocationAutocompleteInput
 
   @media (--viewportLarge) {
     padding-left: 0;
   }
 }
 
-.dropdown {
+.dropdownContainer {
+  flex: 0 0 50%;
+  max-width: 50%;
   display: flex;
+  align-items: center;
   justify-content: flex-end;
+}
+
+.categoriesDropdown {
+  height: 40px;
 }
 
 .search {
