@@ -199,8 +199,8 @@ export class CheckoutPageComponent extends Component {
 
       // Convert picked date to date that will be converted on the API as
       // a noon of correct year-month-date combo in UTC
-      const bookingStartForAPI = dateFromLocalToAPI(bookingStart);
-      const bookingEndForAPI = dateFromLocalToAPI(bookingEnd);
+      const bookingStartForAPI = bookingStart;
+      const bookingEndForAPI = bookingEnd;
 
       // Fetch speculated transaction for showing price in booking breakdown
       // NOTE: if unit type is line-item/units, quantity needs to be added.

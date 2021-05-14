@@ -176,9 +176,6 @@ const EstimatedBreakdownMaybe = props => {
   const tx = estimatedTransaction(unitType, startDate, endDate, unitPrice, quantity, discount);
   const dateType = unitType === LINE_ITEM_DAY ? DATE_TYPE_DATE : DATE_TYPE_DATETIME;
 
-  console.log('tx')
-  console.log(tx)
-
   return (
     <BookingBreakdown
       className={css.receipt}
