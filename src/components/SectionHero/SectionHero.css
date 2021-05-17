@@ -57,17 +57,37 @@
 
 .flexContainer {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   width: 100%;
   height: 100%;
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     flex-direction: row;
   }
 }
 
 .heroImgContent {
   flex: 1;
-  margin: 50px;
+  margin: 24px;
+
+  @media (--viewportLarge) {
+    margin: 50px;
+  }
+
+  @media (--viewportLargeWithPaddings) {
+    margin: -58px 50px 50px;
+  }
+}
+
+.imgContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 15px;
+  grid-row-gap: 15px;
+}
+
+.image {
+  width: 100%;
+  max-width: 100%;
 }
 
 .emptyMobileDiv {
@@ -98,7 +118,7 @@
   margin-right: 24px;
   flex:1;
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     margin-left: 7.5vw;
     margin-right: 0;
   }
@@ -149,8 +169,12 @@
 
 .heroButtonsContatiner {
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+
+  @media (--viewportMedium) {
+    flex-direction: row;
+    align-items: center;
+  }
 }
 
 .heroButtonPink {
@@ -162,7 +186,8 @@
   border-radius: 4px;
   text-align: center;
   opacity: 0.5;
-  margin-right: 5px;
+  margin-bottom: 5px;
+
   max-width: 200px;
   min-width: 200px;
 
@@ -173,8 +198,10 @@
 
   animation-delay: 0.8s;
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     display: block;
+    margin-right: 10px;
+    margin-bottom: 0;
   }
 }
 
@@ -188,7 +215,6 @@
   border: 1px solid var(--marketplaceColor);
   text-align: center;
   opacity: 0.5;
-  margin-left: 5px;
   max-width: 200px;
   min-width: 200px;
 

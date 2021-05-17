@@ -24,14 +24,12 @@
 .heroContainer {
   display: flex;
   flex-direction: column;
-  min-height: 300px;
-  height: 87.5vh;
+  min-height: 87.5vh;
   max-height: 800px;
   padding: 0;
 
   @media (--viewportMedium) {
-    min-height: 500px;
-    height: 70vh;
+    min-height: 70vh;
     max-height: none;
   }
 

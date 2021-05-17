@@ -9,12 +9,11 @@
 }
 
 .formDiv {
-  background-color: #ffffff;
   margin-top: 24px;
 }
 
 .form {
-  height: 45px;
+  height:SectionHero 45px;
   padding-left: 20px;
   /*
   @media (--viewportMedium) {

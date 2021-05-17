@@ -6,7 +6,12 @@ import { NamedLink } from '../../components';
 
 import css from './SectionHero.css';
 
-import mobileImage from './images/heroMobile.png';
+import yogaImage from './images/yoga.png';
+import ptImage from './images/pt.png';
+import coWorkImage from './images/cowork.png';
+import nailsImage from './images/nails.png';
+import tattoImage from './images/tatto.png';
+import hairImage from './images/hair.png';
 
 const SectionHero = props => {
   const { rootClassName, className } = props;
@@ -45,8 +50,13 @@ const SectionHero = props => {
         </div>
         <div className={css.heroImgContent}>
           {/* <div className={css.emptyMobileDiv} /> */}
-          <div className={css.mobileImgContainer}>
-            <img src={mobileImage} alt='hotpatch make space work' className={css.mobileImage}/>
+          <div className={css.imgContainer}>
+            <img src={nailsImage} alt='hotpatch make space work' className={css.image}/>
+            <img src={yogaImage} alt='hotpatch make space work' className={css.image}/>
+            <img src={ptImage} alt='hotpatch make space work' className={css.image}/>
+            <img src={hairImage} alt='hotpatch make space work' className={css.image}/>
+            <img src={coWorkImage} alt='hotpatch make space work' className={css.image}/>
+            <img src={tattoImage} alt='hotpatch make space work' className={css.image}/>
           </div>
         </div>
       </div>

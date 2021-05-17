@@ -1,6 +1,6 @@
 import React from 'react';
 import { string } from 'prop-types';
-import { getTimeZoneNames, getDefaultTimeZoneOnBrowser } from '../../util/dates';
+import { getTimeZoneNames, getDefaultTimeZoneOnBrowser, getTimeZoneNamesAndGTM } from '../../util/dates';
 import { FieldSelect } from '../../components';
 
 const FieldTimeZoneSelect = props => {
@@ -14,6 +14,11 @@ const FieldTimeZoneSelect = props => {
   return (
     <FieldSelect {...props}>
       <option value={browsersTZ} key={browsersTZ}>{browsersTZ}</option>
+      {getTimeZoneNames(relevantZonesPattern).map(tz => (
+        <option key={tz} value={tz}>
+          {tz}
+        </option>
+      ))}
     </FieldSelect>
   );
 };

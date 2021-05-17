@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 import { injectIntl, intlShape } from '../../util/reactIntl';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
+
 import config from '../../config';
 import {
   Page,
