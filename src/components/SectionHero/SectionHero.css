@@ -190,6 +190,7 @@
 
   max-width: 200px;
   min-width: 200px;
+  border: 1px solid #ffabd7;
 
   &:hover {
     background-color: #ffc9e5;
