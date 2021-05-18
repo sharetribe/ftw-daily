@@ -22,8 +22,8 @@ const bookingData = (unitType, tx, isOrder, intl) => {
   // where there are preparation time needed between bookings.
   // Read more: https://www.sharetribe.com/api-reference/marketplace.html#bookings
   const { start, end, displayStart, displayEnd } = tx.booking.attributes;
-  const startDate = dateFromAPIToLocalNoon(displayStart || start);
-  const endDateRaw = dateFromAPIToLocalNoon(displayEnd || end);
+  const startDate = displayStart || start;
+  const endDateRaw = displayEnd || end;
   const isDaily = unitType === LINE_ITEM_DAY;
   const isNightly = unitType === LINE_ITEM_NIGHT;
   const isUnits = unitType === LINE_ITEM_UNITS;

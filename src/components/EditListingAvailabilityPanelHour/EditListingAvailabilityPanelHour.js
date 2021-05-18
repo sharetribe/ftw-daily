@@ -126,7 +126,7 @@ const createEntryDayGroups = (entries = {}) =>
 // Create initial values
 const createInitialValues = availabilityPlan => {
   const { timezone, entries } = availabilityPlan || {};
-  const tz = timezone || defaultTimeZone();
+  const tz = defaultTimeZone() || timezone;
   return {
     timezone: tz,
     ...createEntryDayGroups(entries),
