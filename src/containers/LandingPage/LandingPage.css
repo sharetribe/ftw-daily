@@ -38,6 +38,10 @@
     min-height: 600px;
     height: calc(70vh - var(--topbarHeightDesktop));
   }
+
+  @media (--viewportLargeWithPaddings) {
+    height: 100vh;
+  }
 }
 
 .hero {
