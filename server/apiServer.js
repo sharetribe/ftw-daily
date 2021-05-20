@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 const apiRouter = require('./apiRouter');
 
 const radix = 10;
-const PORT = parseInt(process.env.DEV_API_SERVER_PORT, radix);
+const PORT = parseInt(process.env.REACT_APP_DEV_API_SERVER_PORT, radix);
 const app = express();
 app.use(cookieParser());
 

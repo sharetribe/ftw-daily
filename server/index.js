@@ -29,16 +29,18 @@ const bodyParser = require('body-parser');
 const enforceSsl = require('express-enforces-ssl');
 const path = require('path');
 const sharetribeSdk = require('sharetribe-flex-sdk');
-const Decimal = require('decimal.js');
 const sitemap = require('express-sitemap');
+const passport = require('passport');
 const auth = require('./auth');
 const apiRouter = require('./apiRouter');
+const wellKnownRouter = require('./wellKnownRouter');
 const renderer = require('./renderer');
 const dataLoader = require('./dataLoader');
 const fs = require('fs');
 const log = require('./log');
 const { sitemapStructure } = require('./sitemap');
 const csp = require('./csp');
+const sdkUtils = require('./api-util/sdk');
 
 const buildPath = path.resolve(__dirname, '..', 'build');
 const env = process.env.REACT_APP_ENV;
@@ -69,7 +71,14 @@ app.use(log.requestHandler());
 
 // The helmet middleware sets various HTTP headers to improve security.
 // See: https://www.npmjs.com/package/helmet
-app.use(helmet());
+// Helmet 4 doesn't disable CSP by default so we need to do that explicitly.
+// If csp is enabled we will add that separately.
+
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 
 if (cspEnabled) {
   // When a CSP directive is violated, the browser posts a JSON body
@@ -84,8 +93,13 @@ if (cspEnabled) {
   // browser checks the policy and calls the report URL when the
   // policy is violated, but doesn't block any requests. In block
   // mode, the browser also blocks the requests.
+
+  // In Helmet 4,supplying functions as directive values is not supported.
+  // That's why we need to create own middleware function that calls the Helmet's middleware function
   const reportOnly = CSP === 'report';
-  app.use(csp(cspReportUrl, USING_SSL, reportOnly));
+  app.use((req, res, next) => {
+    csp(cspReportUrl, USING_SSL, reportOnly)(req, res, next);
+  });
 }
 
 // Redirect HTTP to HTTPS if USING_SSL is `true`.
@@ -118,9 +132,15 @@ app.use('/static', express.static(path.join(buildPath, 'static')));
 app.use('/robots.txt', express.static(path.join(buildPath, 'robots.txt')));
 app.use(cookieParser());
 
+// These .well-known/* endpoints will be enabled if you are using FTW as OIDC proxy
+// https://www.sharetribe.com/docs/cookbook-social-logins-and-sso/setup-open-id-connect-proxy/
+// We need to handle these endpoints separately so that they are accessible by Flex
+// even if you have enabled basic authentication e.g. in staging environment.
+app.use('/.well-known', wellKnownRouter);
+
 // Use basic authentication when not in dev mode. This is
-// intentionally after the static middleware to skip basic auth for
-// static resources.
+// intentionally after the static middleware and /.well-known
+// endpoints as those will bypass basic auth.
 if (!dev) {
   const USERNAME = process.env.BASIC_AUTH_USERNAME;
   const PASSWORD = process.env.BASIC_AUTH_PASSWORD;
@@ -132,6 +152,12 @@ if (!dev) {
     app.use(auth.basicAuth(USERNAME, PASSWORD));
   }
 }
+
+// Initialize Passport.js  (http://www.passportjs.org/)
+// Passport is authentication middleware for Node.js
+// We use passport to enable authenticating with
+// a 3rd party identity provider (e.g. Facebook or Google)
+app.use(passport.initialize());
 
 // Server-side routes that do not render the application
 app.use('/api', apiRouter);
@@ -179,14 +205,7 @@ app.get('*', (req, res) => {
     httpAgent: httpAgent,
     httpsAgent: httpsAgent,
     tokenStore,
-    typeHandlers: [
-      {
-        type: sharetribeSdk.types.BigDecimal,
-        customType: Decimal,
-        writer: v => new sharetribeSdk.types.BigDecimal(v.toString()),
-        reader: v => new Decimal(v.value),
-      },
-    ],
+    typeHandlers: sdkUtils.typeHandlers,
     ...baseUrl,
   });
 
@@ -212,18 +231,17 @@ app.get('*', (req, res) => {
         // Routes component injects the context.unauthorized when the
         // user isn't logged in to view the page that requires
         // authentication.
-
-        const token = tokenStore.getToken();
-        const scopes = !!token && token.scopes;
-        const isAnonymous = !!scopes && scopes.length === 1 && scopes[0] === 'public-read';
-        if (isAnonymous) {
-          res.status(401).send(html);
-        } else {
-          // If the token is associated with other than public-read scopes, we
-          // assume that client can handle the situation
-          // TODO: improve by checking if the token is valid (needs an API call)
-          res.status(200).send(html);
-        }
+        sdk.authInfo().then(authInfo => {
+          if (authInfo && authInfo.isAnonymous === false) {
+            // It looks like the user is logged in.
+            // Full verification would require actual call to API
+            // to refresh the access token
+            res.status(200).send(html);
+          } else {
+            // Current token is anonymous.
+            res.status(401).send(html);
+          }
+        });
       } else if (context.forbidden) {
         res.status(403).send(html);
       } else if (context.url) {

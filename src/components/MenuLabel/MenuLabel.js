@@ -54,7 +54,6 @@ class MenuLabel extends Component {
     );
   }
 }
-/* eslint-enable jsx-a11y/no-static-element-interactions */
 
 MenuLabel.defaultProps = {
   className: null,

@@ -119,7 +119,6 @@ class ContactDetailsFormComponent extends Component {
               </span>
             );
           } else {
-            /* eslint-disable jsx-a11y/no-static-element-interactions */
             resendEmailMessage = (
               <span
                 className={css.helperLink}
@@ -129,7 +128,6 @@ class ContactDetailsFormComponent extends Component {
                 <FormattedMessage id="ContactDetailsForm.resendEmailVerificationText" />
               </span>
             );
-            /* eslint-enable jsx-a11y/no-static-element-interactions */
           }
 
           // Email status info: unverified, verified and pending email (aka changed unverified email)
