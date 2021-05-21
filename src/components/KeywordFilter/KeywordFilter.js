@@ -6,7 +6,7 @@ import debounce from 'lodash/debounce';
 import { FieldTextInput } from '../../components';
 
 import { FilterPopup, FilterPlain } from '../../components';
-import css from './KeywordFilter.css';
+import css from './KeywordFilter.module.css';
 
 // When user types, we wait for new keystrokes a while before searching new content
 const DEBOUNCE_WAIT_TIME = 600;

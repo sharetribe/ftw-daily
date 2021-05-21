@@ -1,6 +1,6 @@
 /**
  * DateRangeInput wraps DateRangePicker from React-dates and gives a list of all default props we use.
- * Styles for DateRangePicker can be found from 'public/reactDates.css'.
+ * Styles for DateRangePicker can be found from 'public/reactDates.module.css'.
  *
  * N.B. *isOutsideRange* in defaultProps is defining what dates are available to booking.
  */
@@ -23,7 +23,7 @@ import {
 } from './DateRangeInput.helpers';
 
 import { IconArrowHead } from '../../components';
-import css from './DateRangeInput.css';
+import css from './DateRangeInput.module.css';
 
 export const HORIZONTAL_ORIENTATION = 'horizontal';
 export const ANCHOR_LEFT = 'left';

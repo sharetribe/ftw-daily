@@ -19,7 +19,7 @@ import { DAYS_OF_WEEK, propTypes } from '../../util/types';
 import { monthIdString, monthIdStringInUTC } from '../../util/dates';
 import { IconArrowHead, IconSpinner } from '../../components';
 
-import css from './ManageAvailabilityCalendar.css';
+import css from './ManageAvailabilityCalendar.module.css';
 
 // Constants
 

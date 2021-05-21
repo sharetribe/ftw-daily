@@ -174,6 +174,7 @@ const httpAgent = new http.Agent({ keepAlive: true });
 const httpsAgent = new https.Agent({ keepAlive: true });
 
 app.get('*', (req, res) => {
+  console.log(123)
   if (req.url.startsWith('/static/')) {
     // The express.static middleware only handles static resources
     // that it finds, otherwise passes them through. However, we don't
@@ -284,8 +285,10 @@ if (cspEnabled) {
 
 app.listen(PORT, () => {
   const mode = dev ? 'development' : 'production';
+  console.log(!23123123)
   console.log(`Listening to port ${PORT} in ${mode} mode`);
   if (dev) {
     console.log(`Open http://localhost:${PORT}/ and start hacking!`);
   }
 });
+

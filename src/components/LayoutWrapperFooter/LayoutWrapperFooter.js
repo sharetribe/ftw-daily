@@ -5,7 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import css from './LayoutWrapperFooter.css';
+import css from './LayoutWrapperFooter.module.css';
 
 const LayoutWrapperFooter = props => {
   const { className, rootClassName, children } = props;

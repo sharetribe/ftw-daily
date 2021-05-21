@@ -2,7 +2,7 @@ import React from 'react';
 import { string } from 'prop-types';
 import classNames from 'classnames';
 
-import css from './IconSuccess.css';
+import css from './IconSuccess.module.css';
 
 const IconSuccess = props => {
   const { rootClassName, className, fillColor } = props;

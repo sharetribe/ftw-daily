@@ -40,7 +40,7 @@ import { FormattedMessage } from '../../util/reactIntl';
 import { propTypes } from '../../util/types';
 
 import NoImageIcon from './NoImageIcon';
-import css from './ResponsiveImage.css';
+import css from './ResponsiveImage.module.css';
 
 const ResponsiveImage = props => {
   const { className, rootClassName, alt, noImageMessage, image, variants, ...rest } = props;

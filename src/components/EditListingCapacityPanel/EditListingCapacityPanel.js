@@ -7,7 +7,7 @@ import { ListingLink } from '../../components';
 import { EditListingCapacityForm } from '../../forms';
 import config from '../../config.js';
 
-import css from './EditListingCapacityPanel.css';
+import css from './EditListingCapacityPanel.module.css';
 
 const EditListingCapacityPanel = props => {
   const {

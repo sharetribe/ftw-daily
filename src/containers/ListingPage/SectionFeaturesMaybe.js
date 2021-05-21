@@ -3,7 +3,7 @@ import sortBy from 'lodash/sortBy';
 import { FormattedMessage } from '../../util/reactIntl';
 import { PropertyGroup } from '../../components';
 
-import css from './ListingPage.css';
+import css from './ListingPage.module.css';
 
 const SectionFeaturesMaybe = props => {
   const { options, publicData } = props;

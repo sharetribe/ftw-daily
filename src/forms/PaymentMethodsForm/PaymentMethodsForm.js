@@ -10,7 +10,7 @@ import { Form as FinalForm } from 'react-final-form';
 import classNames from 'classnames';
 import config from '../../config';
 import { Form, PrimaryButton, FieldTextInput, StripePaymentAddress } from '../../components';
-import css from './PaymentMethodsForm.css';
+import css from './PaymentMethodsForm.module.css';
 
 /**
  * Translate a Stripe API error object.

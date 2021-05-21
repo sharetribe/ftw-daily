@@ -15,7 +15,7 @@ import {
   FieldTimeZoneSelect,
 } from '../../components';
 
-import css from './EditListingAvailabilityPlanForm.css';
+import css from './EditListingAvailabilityPlanForm.module.css';
 
 const printHourStrings = h => (h > 9 ? `${h}:00` : `0${h}:00`);
 

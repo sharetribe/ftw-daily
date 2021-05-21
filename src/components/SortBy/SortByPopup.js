@@ -3,7 +3,7 @@ import { string, func, arrayOf, shape, number } from 'prop-types';
 import classNames from 'classnames';
 
 import { Menu, MenuContent, MenuItem, MenuLabel } from '../../components';
-import css from './SortByPopup.css';
+import css from './SortByPopup.module.css';
 
 const optionLabel = (options, key) => {
   const option = options.find(o => o.key === key);

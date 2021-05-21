@@ -9,7 +9,7 @@ import {
   NamedLink,
 } from '../../components';
 
-import css from './AboutPage.css';
+import css from './AboutPage.module.css';
 
 const AboutPage = () => {
   // prettier-ignore

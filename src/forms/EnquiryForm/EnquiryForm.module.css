@@ -1,0 +1,34 @@
+@import '../../styles/propertySets.css';
+
+.root {
+}
+
+.icon {
+  display: none;
+
+  @media (--viewportMedium) {
+    display: block;
+    margin-bottom: 36px;
+  }
+}
+
+.heading {
+  @apply --marketplaceModalTitleStyles;
+}
+
+.field {
+  margin: 25px 0 24px 0;
+
+  @media (--viewportMedium) {
+    margin: 22px 0 24px 0;
+  }
+}
+
+.error {
+  color: var(--failColor);
+  margin-top: 0;
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+  }
+}

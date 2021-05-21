@@ -11,7 +11,7 @@ import * as validators from '../../util/validators';
 import { isUploadImageOverLimitError } from '../../util/errors';
 import { Form, Avatar, Button, ImageFromFile, IconSpinner, FieldTextInput } from '../../components';
 
-import css from './ProfileSettingsForm.css';
+import css from './ProfileSettingsForm.module.css';
 
 const ACCEPT_IMAGES = 'image/*';
 const UPLOAD_CHANGE_DELAY = 2000; // Show spinner so that browser has time to load img srcset

@@ -33,7 +33,7 @@ import { LINE_ITEM_UNITS } from '../../util/types';
 import { unitDivisor, convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
 import { BookingBreakdown } from '../../components';
 
-import css from './BookingTimeForm.css';
+import css from './BookingTimeForm.module.css';
 
 const { Money, UUID } = sdkTypes;
 

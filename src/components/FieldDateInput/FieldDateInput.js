@@ -11,7 +11,7 @@ import classNames from 'classnames';
 import { ValidationError } from '../../components';
 
 import DateInput from './DateInput';
-import css from './FieldDateInput.css';
+import css from './FieldDateInput.module.css';
 
 const MAX_MOBILE_SCREEN_WIDTH = 768;
 

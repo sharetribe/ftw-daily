@@ -11,7 +11,7 @@ import { ensureCurrentUser } from '../../util/data';
 import { isChangePasswordWrongPassword } from '../../util/errors';
 import { Form, PrimaryButton, FieldTextInput } from '../../components';
 
-import css from './PasswordChangeForm.css';
+import css from './PasswordChangeForm.module.css';
 
 const RESET_TIMEOUT = 800;
 

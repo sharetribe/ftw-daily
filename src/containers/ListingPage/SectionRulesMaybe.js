@@ -3,7 +3,7 @@ import { shape, string } from 'prop-types';
 import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 
-import css from './SectionRulesMaybe.css';
+import css from './SectionRulesMaybe.module.css';
 
 const SectionRulesMaybe = props => {
   const { className, rootClassName, publicData } = props;

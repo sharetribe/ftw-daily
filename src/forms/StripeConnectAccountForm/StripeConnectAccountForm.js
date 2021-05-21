@@ -21,7 +21,7 @@ import {
   StripeBankAccountTokenInputField,
 } from '../../components';
 
-import css from './StripeConnectAccountForm.css';
+import css from './StripeConnectAccountForm.module.css';
 
 const supportedCountries = config.stripe.supportedCountries.map(c => c.code);
 

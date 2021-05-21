@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import css from './IconKeys.css';
+import css from './IconKeys.module.css';
 
 const IconKeys = props => {
   const { className } = props;

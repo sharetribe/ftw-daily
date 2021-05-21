@@ -12,7 +12,7 @@ import config from '../../config';
 import { ModalInMobile, Button } from '../../components';
 import { BookingDatesForm, BookingTimeForm } from '../../forms';
 
-import css from './BookingPanel.css';
+import css from './BookingPanel.module.css';
 
 
 // This defines when ModalInMobile shows content as Modal

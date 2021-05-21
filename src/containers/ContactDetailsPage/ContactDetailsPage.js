@@ -21,7 +21,7 @@ import { TopbarContainer } from '../../containers';
 
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import { saveContactDetails, saveContactDetailsClear } from './ContactDetailsPage.duck';
-import css from './ContactDetailsPage.css';
+import css from './ContactDetailsPage.module.css';
 
 export const ContactDetailsPageComponent = props => {
   const {

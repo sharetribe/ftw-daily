@@ -3,7 +3,7 @@ import { FormattedMessage, intlShape } from '../../util/reactIntl';
 import { formatMoney } from '../../util/currency';
 import { propTypes, LINE_ITEM_PROVIDER_COMMISSION } from '../../util/types';
 
-import css from './BookingBreakdown.css';
+import css from './BookingBreakdown.module.css';
 
 const LineItemProviderCommissionRefundMaybe = props => {
   const { transaction, isProvider, intl } = props;

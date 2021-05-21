@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import css from './ManageListingCard.css';
+import css from './ManageListingCard.module.css';
 
 const MenuIcon = props => {
   const { className, isActive } = props;

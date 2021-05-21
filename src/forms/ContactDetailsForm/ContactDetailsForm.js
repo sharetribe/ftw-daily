@@ -15,7 +15,7 @@ import {
 } from '../../util/errors';
 import { FieldPhoneNumberInput, Form, PrimaryButton, FieldTextInput } from '../../components';
 
-import css from './ContactDetailsForm.css';
+import css from './ContactDetailsForm.module.css';
 
 const SHOW_EMAIL_SENT_TIMEOUT = 2000;
 

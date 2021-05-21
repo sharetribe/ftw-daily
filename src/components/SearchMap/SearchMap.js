@@ -21,7 +21,7 @@ import SearchMapWithGoogleMap, {
 // } from './SearchMapWithMapbox';
 } from './SearchMapWithGoogleMap';
 import ReusableMapContainer from './ReusableMapContainer';
-import css from './SearchMap.css';
+import css from './SearchMap.module.css';
 
 const REUSABLE_MAP_HIDDEN_HANDLE = 'reusableMapHidden';
 

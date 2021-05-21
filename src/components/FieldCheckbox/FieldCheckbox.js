@@ -3,7 +3,7 @@ import { node, string } from 'prop-types';
 import classNames from 'classnames';
 import { Field } from 'react-final-form';
 
-import css from './FieldCheckbox.css';
+import css from './FieldCheckbox.module.css';
 
 const IconCheckbox = props => {
   const { className, checkedClassName, boxClassName } = props;

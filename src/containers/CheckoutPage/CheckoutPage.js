@@ -66,7 +66,7 @@ import {
   sendMessage,
 } from './CheckoutPage.duck';
 import { storeData, storedData, clearData } from './CheckoutPageSessionHelpers';
-import css from './CheckoutPage.css';
+import css from './CheckoutPage.module.css';
 import { types as sdkTypes } from '../../util/sdkLoader';
 
 const { Money } = sdkTypes;

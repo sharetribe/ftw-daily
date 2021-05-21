@@ -9,7 +9,7 @@ import { propTypes } from '../../util/types';
 import { required } from '../../util/validators';
 import { FieldReviewRating, Form, PrimaryButton, FieldTextInput } from '../../components';
 
-import css from './ReviewForm.css';
+import css from './ReviewForm.module.css';
 
 const ReviewFormComponent = props => (
   <FinalForm

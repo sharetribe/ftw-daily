@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import { Form, Button, FieldTextInput } from '../../components';
 
-import css from './EditListingPoliciesForm.css';
+import css from './EditListingPoliciesForm.module.css';
 
 export const EditListingPoliciesFormComponent = props => (
   <FinalForm

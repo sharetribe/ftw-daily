@@ -4,7 +4,7 @@ import { Field } from 'react-final-form';
 import classNames from 'classnames';
 import { ValidationError, ExpandingTextarea } from '../../components';
 
-import css from './FieldTextInput.css';
+import css from './FieldTextInput.module.css';
 
 const CONTENT_MAX_LENGTH = 5000;
 

@@ -19,12 +19,12 @@ import 'raf/polyfill';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Decimal from 'decimal.js';
 import { createInstance, types as sdkTypes } from './util/sdkLoader';
 import { ClientApp, renderApp } from './app';
 import configureStore from './store';
 import { matchPathname } from './util/routes';
 import * as sample from './util/sample';
+import * as apiUtils from './util/api';
 import config from './config';
 import { authInfo } from './ducks/Auth.duck';
 import { fetchCurrentUser } from './ducks/user.duck';
@@ -32,9 +32,7 @@ import routeConfiguration from './routeConfiguration';
 import * as log from './util/log';
 import { LoggingAnalyticsHandler, GoogleAnalyticsHandler, FacebookPixelHandler } from './analytics/handlers';
 
-import './marketplaceIndex.css';
-
-const { BigDecimal } = sdkTypes;
+import './styles/marketplaceDefaults.css';
 
 const render = (store, shouldHydrate) => {
   // If the server already loaded the auth information, render the app
@@ -64,15 +62,15 @@ const setupAnalyticsHandlers = () => {
     handlers.push(new LoggingAnalyticsHandler());
   }
 
-  // Add Google Analytics handler if tracker ID is found
-  if (process.env.REACT_APP_GOOGLE_ANALYTICS_ID) {
-    handlers.push(new GoogleAnalyticsHandler(window.ga));
-  }
+  // // Add Google Analytics handler if tracker ID is found
+  // if (process.env.REACT_APP_GOOGLE_ANALYTICS_ID) {
+  //   handlers.push(new GoogleAnalyticsHandler(window.ga));
+  // }
 
-  // Add FB Pixel handler if tracker ID is found
-  if (process.env.REACT_APP_FACEBOOK_PIXEL_ID) {
-    handlers.push(new FacebookPixelHandler(window.fbq));
-  }
+  // // Add FB Pixel handler if tracker ID is found
+  // if (process.env.REACT_APP_FACEBOOK_PIXEL_ID) {
+  //   handlers.push(new FacebookPixelHandler(window.fbq));
+  // }
 
   return handlers;
 };
@@ -86,19 +84,13 @@ if (typeof window !== 'undefined') {
 
   // eslint-disable-next-line no-underscore-dangle
   const preloadedState = window.__PRELOADED_STATE__ || '{}';
+
   const initialState = JSON.parse(preloadedState, sdkTypes.reviver);
   const sdk = createInstance({
     transitVerbose: config.sdk.transitVerbose,
     clientId: config.sdk.clientId,
     secure: config.usingSSL,
-    typeHandlers: [
-      {
-        type: BigDecimal,
-        customType: Decimal,
-        writer: v => new BigDecimal(v.toString()),
-        reader: v => new Decimal(v.value),
-      },
-    ],
+    typeHandlers: apiUtils.typeHandlers,
     ...baseUrl,
   });
   const analyticsHandlers = setupAnalyticsHandlers();

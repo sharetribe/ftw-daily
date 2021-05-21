@@ -6,7 +6,7 @@ import { lazyLoadWithDimensions } from '../../util/contextHelpers';
 
 import friendsWorking from './images/what-is-hotpatch.png';
 
-import css from './SectionWhatIsHotpatch.css';
+import css from './SectionWhatIsHotpatch.module.css';
 
 class CategoryImage extends Component {
   render() {

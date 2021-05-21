@@ -5,7 +5,7 @@ import { intlShape, injectIntl } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { Form, LocationAutocompleteInput } from '../../components';
 
-import css from './LocationSearchForm.css';
+import css from './LocationSearchForm.module.css';
 
 const identity = v => v;
 

@@ -1,6 +1,6 @@
 /**
  * DateInput wraps SingleDatePicker from React-dates and gives a list of all default props we use.
- * Styles for SingleDatePicker can be found from 'public/reactDates.css'.
+ * Styles for SingleDatePicker can be found from 'public/reactDates.module.css'.
  *
  * N.B. *isOutsideRange* in defaultProps is defining what dates are available to booking.
  */
@@ -26,7 +26,7 @@ import {
 
 import NextMonthIcon from './NextMonthIcon';
 import PreviousMonthIcon from './PreviousMonthIcon';
-import css from './DateInput.css';
+import css from './DateInput.module.css';
 
 export const HORIZONTAL_ORIENTATION = 'horizontal';
 export const ANCHOR_LEFT = 'left';

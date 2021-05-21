@@ -25,7 +25,7 @@ import LineItemTotalPrice from './LineItemTotalPrice';
 import LineItemUnknownItemsMaybe from './LineItemUnknownItemsMaybe';
 import LineItemDiscountMaybe from './LineItemDiscountMaybe';
 
-import css from './BookingBreakdown.css';
+import css from './BookingBreakdown.module.css';
 
 export const BookingBreakdownComponent = props => {
   const {

@@ -6,7 +6,7 @@ import { Field, Form as FinalForm, FormSpy } from 'react-final-form';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 
 import { Form, RangeSlider } from '../../components';
-import css from './PriceFilterForm.css';
+import css from './PriceFilterForm.module.css';
 
 const DEBOUNCE_WAIT_TIME = 400;
 

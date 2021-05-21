@@ -56,7 +56,7 @@ import SectionRulesMaybe from './SectionRulesMaybe';
 import SectionMapMaybe from './SectionMapMaybe';
 import SectionCapacity from './SectionCapacity';
 import SectionSeats from './SectionSeats';
-import css from './ListingPage.css';
+import css from './ListingPage.module.css';
 
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
 

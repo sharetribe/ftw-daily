@@ -27,7 +27,7 @@ import { TopbarContainer } from '../../containers';
 
 import facebookImage from '../../assets/HotpatchLogo-500x500.png';
 import twitterImage from '../../assets/HotpatchLogo-500x500.png';
-import css from './LandingPage.css';
+import css from './LandingPage.module.css';
 
 export const LandingPageComponent = props => {
   const { history, intl, location, scrollingDisabled } = props;

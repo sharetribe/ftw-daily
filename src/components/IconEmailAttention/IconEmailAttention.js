@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import css from './IconEmailAttention.css';
+import css from './IconEmailAttention.module.css';
 
 const IconEmailAttention = props => {
   const { rootClassName, className } = props;

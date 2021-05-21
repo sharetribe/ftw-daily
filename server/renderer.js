@@ -167,18 +167,18 @@ exports.render = function(requestUrl, context, preloadedState) {
         </noscript>
         `
     : '';
-
+          sadasdasd
   return template({
     htmlAttributes: head.htmlAttributes.toString(),
     title: head.title.toString(),
     link: head.link.toString(),
     meta: head.meta.toString(),
     script: head.script.toString(),
-    facebookPixelScript,
-    googleTagManagerHeadScript,
-    googleAnalyticsScript,
     preloadedStateScript,
+    googleAnalyticsScript,
+    facebookPixelScript,
+    // googleTagManagerHeadScript,
     body,
-    googleTagManagerAfterBodyScript
+    // googleTagManagerAfterBodyScript
   });
 };

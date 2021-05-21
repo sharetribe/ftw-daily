@@ -21,7 +21,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import { MenuContent, MenuLabel } from '../../components';
-import css from './Menu.css';
+import css from './Menu.module.css';
 
 const KEY_CODE_ESCAPE = 27;
 const CONTENT_PLACEMENT_OFFSET = 0;

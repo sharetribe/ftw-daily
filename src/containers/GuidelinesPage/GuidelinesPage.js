@@ -8,7 +8,7 @@ import {
   Footer
 } from '../../components';
 
-import css from './GuidelinesPage.css';
+import css from './GuidelinesPage.module.css';
 
 const GuidelinesPage = () => {
   return (

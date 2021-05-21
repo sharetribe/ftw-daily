@@ -21,7 +21,7 @@ import {
   SavedCardDetails,
   StripePaymentAddress,
 } from '../../components';
-import css from './StripePaymentForm.css';
+import css from './StripePaymentForm.module.css';
 
 /**
  * Translate a Stripe API error object.

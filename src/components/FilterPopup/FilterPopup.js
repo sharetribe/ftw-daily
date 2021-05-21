@@ -5,7 +5,7 @@ import { injectIntl, intlShape } from '../../util/reactIntl';
 
 import { OutsideClickHandler } from '../../components';
 import { FilterForm } from '../../forms';
-import css from './FilterPopup.css';
+import css from './FilterPopup.module.css';
 
 const KEY_CODE_ESCAPE = 27;
 

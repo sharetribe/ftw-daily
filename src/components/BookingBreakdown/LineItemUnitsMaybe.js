@@ -2,7 +2,7 @@ import React from 'react';
 import { FormattedMessage } from '../../util/reactIntl';
 import { LINE_ITEM_UNITS, propTypes } from '../../util/types';
 
-import css from './BookingBreakdown.css';
+import css from './BookingBreakdown.module.css';
 
 const LineItemUnitsMaybe = props => {
   const { transaction, unitType } = props;

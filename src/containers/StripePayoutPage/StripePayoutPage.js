@@ -29,7 +29,7 @@ import { StripeConnectAccountForm } from '../../forms';
 import { TopbarContainer } from '..';
 import { savePayoutDetails, loadData } from './StripePayoutPage.duck';
 
-import css from './StripePayoutPage.css';
+import css from './StripePayoutPage.module.css';
 
 const STRIPE_ONBOARDING_RETURN_URL_SUCCESS = 'success';
 const STRIPE_ONBOARDING_RETURN_URL_FAILURE = 'failure';

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Button } from '../../components';
 import ModalInMobile from './ModalInMobile';
-import css from './ModalInMobileExample.css';
+import css from './ModalInMobileExample.module.css';
 
 const onManageDisableScrolling = (componentId, scrollingDisabled = true) => {
   // We are just checking the value for now

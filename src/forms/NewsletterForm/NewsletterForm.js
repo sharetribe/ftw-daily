@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import { Form, PrimaryButton, FieldTextInput, NamedLink } from '../../components';
 import * as validators from '../../util/validators';
 
-import css from './NewsletterForm.css';
+import css from './NewsletterForm.module.css';
 
 const NewsletterFormComponent = props => (
   <FinalForm

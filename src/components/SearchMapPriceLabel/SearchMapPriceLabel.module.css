@@ -1,0 +1,107 @@
+@import '../../styles/propertySets.css';
+
+.root {
+  position: relative;
+  width: auto;
+  height: auto;
+  border: 0;
+  padding: 0;
+
+  &:hover {
+    & .priceLabel,
+    & .caret {
+      cursor: pointer;
+
+      /* Same as active */
+      background-color: var(--marketplaceColor);
+      border-color: var(--marketplaceColor);
+      color: var(--matterColorLight);
+      box-shadow: var(--boxShadowPopup);
+    }
+  }
+}
+
+.priceLabel {
+  /**
+   * Since caret is absolutely positioned,
+   * label must have relative to be included to the same rendering layer
+   */
+  position: relative;
+
+  /* Font */
+  @apply --marketplaceH5FontStyles;
+  font-weight: var(--fontWeightSemiBold);
+  color: var(--matterColor);
+  letter-spacing: 0.1px;
+
+  background-color: var(--matterColorLight);
+
+  /* Borders */
+  border-style: solid;
+  border-color: var(--matterColorNegative);
+  border-width: 1px;
+  border-radius: 4px;
+  box-shadow: var(--boxShadowPopupLight);
+
+  /* Dimensions */
+  padding: 6px 10px;
+  margin-top: 0;
+  margin-bottom: 0;
+  transition: var(--transitionStyleButton);
+
+  /* Overwrite dimensions from font styles */
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.priceLabelActive {
+  /* Same as hover */
+  background-color: var(--marketplaceColor);
+  border-color: var(--marketplaceColor);
+  color: var(--matterColorLight);
+  box-shadow: var(--boxShadowPopup);
+}
+
+.caretShadow {
+  /* Caret / arrow dimensions and position */
+  width: 6px;
+  height: 6px;
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  margin-left: -3px;
+  transform: rotate(45deg);
+
+  /* Caret should have same box-shadow as label */
+  box-shadow: var(--boxShadowPopupLight);
+}
+
+.caret {
+  /* Caret / arrow dimensions and position */
+  width: 6px;
+  height: 6px;
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  margin-left: -3px;
+  transform: rotate(45deg);
+
+  transition: var(--transitionStyleButton);
+
+  /* Caret should have same bg-color and border as label */
+  background-color: var(--matterColorLight);
+  border-right-style: solid;
+  border-right-color: var(--matterColorNegative);
+  border-right-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: var(--matterColorNegative);
+  border-bottom-width: 1px;
+}
+
+.caretActive {
+  /* Same as hover */
+  background-color: var(--marketplaceColor);
+  border-color: var(--marketplaceColor);
+}

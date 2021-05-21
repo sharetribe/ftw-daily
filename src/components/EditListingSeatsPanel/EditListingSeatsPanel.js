@@ -7,7 +7,7 @@ import { ListingLink } from '../../components';
 import { EditListingSeatsForm } from '../../forms';
 import config from '../../config.js';
 
-import css from './EditListingSeatsPanel.css';
+import css from './EditListingSeatsPanel.module.css';
 
 const EditListingSeatsPanel = props => {
   const {

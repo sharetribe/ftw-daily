@@ -8,7 +8,7 @@ import {
   Footer
 } from '../../components';
 
-import css from './FaqPage.css';
+import css from './FaqPage.module.css';
 
 const FaqPage = () => {
   return (

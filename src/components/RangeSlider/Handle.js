@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { func, number, string } from 'prop-types';
 import classNames from 'classnames';
 
-import css from './Handle.css';
+import css from './Handle.module.css';
 
 class Handle extends Component {
   constructor(props) {

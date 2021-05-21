@@ -7,7 +7,7 @@ import { ensureOwnListing } from '../../util/data';
 import { ListingLink } from '../../components';
 import { EditListingPoliciesForm } from '../../forms';
 
-import css from './EditListingPoliciesPanel.css';
+import css from './EditListingPoliciesPanel.module.css';
 
 const EditListingPoliciesPanel = props => {
   const {

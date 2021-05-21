@@ -12,7 +12,7 @@ import {
 } from '../../components';
 import { propTypes } from '../../util/types';
 
-import css from './EmailVerificationForm.css';
+import css from './EmailVerificationForm.module.css';
 
 const EmailVerificationFormComponent = props => (
   <FinalForm

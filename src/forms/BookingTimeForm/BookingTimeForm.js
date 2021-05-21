@@ -11,7 +11,7 @@ import { Form, PrimaryButton } from '../../components';
 import EstimatedBreakdownMaybe from './EstimatedBreakdownMaybe';
 import FieldDateAndTimeInput from './FieldDateAndTimeInput';
 
-import css from './BookingTimeForm.css';
+import css from './BookingTimeForm.module.css';
 
 export class BookingTimeFormComponent extends Component {
   constructor(props) {

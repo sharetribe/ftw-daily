@@ -35,7 +35,7 @@ import { isScrollingDisabled } from '../../ducks/UI.duck';
 import { sendVerificationEmail } from '../../ducks/user.duck';
 import { manageDisableScrolling } from '../../ducks/UI.duck';
 
-import css from './AuthenticationPage.css';
+import css from './AuthenticationPage.module.css';
 
 export class AuthenticationPageComponent extends Component {
   constructor(props) {

@@ -37,7 +37,7 @@ import {
 
 import MenuIcon from './MenuIcon';
 import Overlay from './Overlay';
-import css from './ManageListingCard.css';
+import css from './ManageListingCard.module.css';
 
 // Menu content needs the same padding
 const MENU_CONTENT_OFFSET = -12;
