@@ -47,7 +47,11 @@
   display: inline-block;
 }
 
-.timeSlotsError {
+.spinner {
+  margin: auto;
+}
+
+.sideBarError {
   @apply --marketplaceH4FontStyles;
   color: var(--failColor);
   margin: 0 24px 12px 24px;

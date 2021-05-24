@@ -63,7 +63,10 @@ const sdkClientId = process.env.REACT_APP_SHARETRIBE_SDK_CLIENT_ID;
 const sdkBaseUrl = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL;
 const sdkTransitVerbose = process.env.REACT_APP_SHARETRIBE_SDK_TRANSIT_VERBOSE === 'true';
 
-const currency = process.env.REACT_APP_SHARETRIBE_MARKETPLACE_CURRENCY;
+// Marketplace currency.
+// It should match one of the currencies listed in currency-config.js
+const currencyConf = process.env.REACT_APP_SHARETRIBE_MARKETPLACE_CURRENCY;
+const currency = currencyConf ? currencyConf.toUpperCase() : currencyConf;
 
 // Currency formatting options.
 // See: https://github.com/yahoo/react-intl/wiki/API#formatnumber
@@ -100,11 +103,14 @@ const siteInstagramPage = 'https://www.instagram.com/hotpatch_/';
 // Facebook page is used in SEO schema (http://schema.org/Organization)
 const siteFacebookPage = 'https://www.facebook.com/hotpatchmakespacework';
 
+// Social logins & SSO
+
+// Note: Facebook app id is also used for tracking:
 // Facebook counts shares with app or page associated by this id
 // Currently it is unset, but you can read more about fb:app_id from
 // https://developers.facebook.com/docs/sharing/webmasters#basic
 // You should create one to track social sharing in Facebook
-const facebookAppId = null;
+const facebookAppId = process.env.REACT_APP_FACEBOOK_APP_ID;
 
 const maps = {
   mapboxAccessToken: process.env.REACT_APP_MAPBOX_ACCESS_TOKEN,

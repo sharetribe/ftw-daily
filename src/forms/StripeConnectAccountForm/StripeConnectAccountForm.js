@@ -189,22 +189,24 @@ const UpdateStripeAccountFields = props => {
 
 const ErrorsMaybe = props => {
   const { stripeAccountError, stripeAccountLinkError } = props;
-  return isStripeError(stripeAccountError) ? (
-    <div className={css.error}>
-      <FormattedMessage
-        id="StripeConnectAccountForm.createStripeAccountFailedWithStripeError"
-        values={{ stripeMessage: stripeAccountError.apiErrors[0].meta.stripeMessage }}
-      />
-    </div>
+
+  const errorMessage = isStripeError(stripeAccountError) ? (
+    <FormattedMessage
+      id="StripeConnectAccountForm.createStripeAccountFailedWithStripeError"
+      values={{ stripeMessage: stripeAccountError.apiErrors[0].meta.stripeMessage }}
+    />
   ) : stripeAccountError ? (
-    <div className={css.error}>
-      <FormattedMessage id="StripeConnectAccountForm.createStripeAccountFailed" />
-    </div>
+    <FormattedMessage id="StripeConnectAccountForm.createStripeAccountFailed" />
+  ) : isStripeError(stripeAccountLinkError) ? (
+    <FormattedMessage
+      id="StripeConnectAccountForm.createStripeAccountLinkFailedWithStripeError"
+      values={{ stripeMessage: stripeAccountLinkError.apiErrors[0].meta.stripeMessage }}
+    />
   ) : stripeAccountLinkError ? (
-    <div className={css.error}>
-      <FormattedMessage id="StripeConnectAccountForm.createStripeAccountLinkFailed" />
-    </div>
+    <FormattedMessage id="StripeConnectAccountForm.createStripeAccountLinkFailed" />
   ) : null;
+
+  return errorMessage ? <div className={css.error}>{errorMessage}</div> : null;
 };
 
 const StripeConnectAccountFormComponent = props => {

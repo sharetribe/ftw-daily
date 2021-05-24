@@ -32,7 +32,7 @@ export const openGraphMetaProps = data => {
     /* eslint-disable no-console */
     if (console && console.warn) {
       console.warn(
-        `Can't create Openg Graph meta tags:
+        `Can't create Open Graph meta tags:
         title, description, contentType, url, facebookImages, and canonicalRootURL are needed.`
       );
     }

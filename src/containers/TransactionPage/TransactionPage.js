@@ -34,12 +34,11 @@ import { TopbarContainer } from '../../containers';
 import {
   acceptSale,
   declineSale,
-  loadData,
-  setInitialValues,
   sendMessage,
   sendReview,
   fetchMoreMessages,
-  fetchTimeSlots
+  fetchTimeSlots,
+  fetchTransactionLineItems,
 } from './TransactionPage.duck';
 import css from './TransactionPage.module.css';
 
@@ -85,6 +84,10 @@ export const TransactionPageComponent = props => {
     processTransitions,
     callSetInitialValues,
     onInitializeCardPaymentData,
+    onFetchTransactionLineItems,
+    lineItems,
+    fetchLineItemsInProgress,
+    fetchLineItemsError,
   } = props;
 
   const currentTransaction = ensureTransaction(transaction);
@@ -280,6 +283,10 @@ export const TransactionPageComponent = props => {
       timeSlots={timeSlots}
       fetchTimeSlotsError={fetchTimeSlotsError}
       monthlyTimeSlots={monthlyTimeSlots}
+      onFetchTransactionLineItems={onFetchTransactionLineItems}
+      lineItems={lineItems}
+      fetchLineItemsInProgress={fetchLineItemsInProgress}
+      fetchLineItemsError={fetchLineItemsError}
     />
   ) : (
     loadingOrFailedFetching
@@ -318,9 +325,11 @@ TransactionPageComponent.defaultProps = {
   timeSlots: null,
   monthlyTimeSlots: null,
   fetchTimeSlotsError: null,
+  lineItems: null,
+  fetchLineItemsError: null,
 };
 
-const { bool, func, object, oneOf, shape, string, arrayOf, number } = PropTypes;
+const { bool, func, object, oneOf, shape, array, string, arrayOf, number } = PropTypes;
 
 TransactionPageComponent.propTypes = {
   params: shape({ id: string }).isRequired,
@@ -351,6 +360,12 @@ TransactionPageComponent.propTypes = {
   fetchTimeSlotsError: propTypes.error,
   callSetInitialValues: func.isRequired,
   onInitializeCardPaymentData: func.isRequired,
+  onFetchTransactionLineItems: func.isRequired,
+
+  // line items
+  lineItems: array,
+  fetchLineItemsInProgress: bool.isRequired,
+  fetchLineItemsError: propTypes.error,
 
   // from withRouter
   history: shape({
@@ -387,6 +402,9 @@ const mapStateToProps = state => {
     monthlyTimeSlots,
     fetchTimeSlotsError,
     processTransitions,
+    lineItems,
+    fetchLineItemsInProgress,
+    fetchLineItemsError,
   } = state.TransactionPage;
   const { currentUser } = state.user;
 
@@ -417,6 +435,9 @@ const mapStateToProps = state => {
     monthlyTimeSlots,
     fetchTimeSlotsError,
     processTransitions,
+    lineItems,
+    fetchLineItemsInProgress,
+    fetchLineItemsError,
   };
 };
 
@@ -434,6 +455,8 @@ const mapDispatchToProps = dispatch => {
     onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
     onFetchTimeSlots: (listingId, start, end, timeZone) =>
       dispatch(fetchTimeSlots(listingId, start, end, timeZone)),
+    onFetchTransactionLineItems: (bookingData, listingId, isOwnListing) =>
+      dispatch(fetchTransactionLineItems(bookingData, listingId, isOwnListing)),
   };
 };
 
@@ -445,8 +468,5 @@ const TransactionPage = compose(
   ),
   injectIntl
 )(TransactionPageComponent);
-
-TransactionPage.loadData = loadData;
-TransactionPage.setInitialValues = setInitialValues;
 
 export default TransactionPage;

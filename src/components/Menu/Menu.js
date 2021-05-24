@@ -33,7 +33,6 @@ const isControlledMenu = (isOpenProp, onToggleActiveProp) => {
   return isOpenProp !== null && onToggleActiveProp !== null;
 };
 
-// This should work, but it doesn't <div className="foo" onClick={() => {}} role="button" />
 class Menu extends Component {
   constructor(props) {
     super(props);

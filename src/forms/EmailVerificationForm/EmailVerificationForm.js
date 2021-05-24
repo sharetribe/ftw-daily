@@ -88,7 +88,7 @@ const EmailVerificationFormComponent = props => (
         </div>
       );
 
-      return emailVerified && !pendingEmail ? alreadyVerified : verifyEmail;
+      return emailVerified && !pendingEmail && !verificationError ? alreadyVerified : verifyEmail;
     }}
   />
 );

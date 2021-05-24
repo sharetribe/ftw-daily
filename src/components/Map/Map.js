@@ -41,8 +41,6 @@ export class Map extends Component {
       <StaticMap center={location} zoom={zoom} address={address} mapsConfig={mapsConfig} />
     ) : (
       <DynamicMap
-        containerElement={<div className={classes} />}
-        mapElement={<div className={mapClasses} />}
         containerClassName={classes}
         mapClassName={mapClasses}
         center={location}

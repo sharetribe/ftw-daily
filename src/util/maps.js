@@ -104,12 +104,22 @@ export const userLocation = () =>
       return;
     }
 
+    // Some defaults for user's current geolocation call
+    // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition
+    // Note: without high accuracy, the given location might differ quite much.
+    //       We decided that true would be better default for a template app.
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0,
+    };
+
     const onSuccess = position =>
       resolve(new LatLng(position.coords.latitude, position.coords.longitude));
 
     const onError = error => reject(error);
 
-    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+    navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
   });
 
 /**

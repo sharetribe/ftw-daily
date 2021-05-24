@@ -6,7 +6,6 @@
 
 import Auth from './Auth.duck';
 import EmailVerification from './EmailVerification.duck';
-import FlashNotification from './FlashNotification.duck';
 import LocationFilter from './LocationFilter.duck';
 import Newsletter from './Newsletter.duck';
 import Routing from './Routing.duck';
@@ -20,7 +19,6 @@ import user from './user.duck';
 export {
   Auth,
   EmailVerification,
-  FlashNotification,
   LocationFilter,
   Newsletter,
   Routing,

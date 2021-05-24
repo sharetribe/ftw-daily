@@ -9,22 +9,20 @@
    :actions
    [{:name :action/create-booking,
      :config {:observe-availability? true}}
-    {:name :action/calculate-tx-nightly-total-price}
-    {:name :action/calculate-tx-provider-commission,
-     :config {:commission 0.1M}}
+    {:name :action/privileged-set-line-items}
     {:name :action/stripe-create-payment-intent}],
-   :to :state/pending-payment}
+   :to :state/pending-payment
+   :privileged? true}
   {:name :transition/request-payment-after-enquiry,
    :actor :actor.role/customer,
    :actions
    [{:name :action/create-booking,
      :config {:observe-availability? true}}
-    {:name :action/calculate-tx-nightly-total-price}
-    {:name :action/calculate-tx-provider-commission,
-     :config {:commission 0.1M}}
+    {:name :action/privileged-set-line-items}
     {:name :action/stripe-create-payment-intent}],
    :from :state/enquiry,
-   :to :state/pending-payment}
+   :to :state/pending-payment
+   :privileged? true}
   {:name :transition/expire-payment,
    :at
    {:fn/plus

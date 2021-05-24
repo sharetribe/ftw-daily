@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { arrayOf, bool, object, func, shape, string } from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { NotFoundPage } from './containers';
-import { NamedRedirect } from './components';
+import { NamedRedirect, LoadableComponentErrorBoundary } from './components';
 import { locationChanged } from './ducks/Routing.duck';
 import { propTypes } from './util/types';
 import * as log from './util/log';
 import { canonicalRoutePath } from './util/routes';
 import routeConfiguration from './routeConfiguration';
-
-const { arrayOf, bool, object, func, shape, string } = PropTypes;
 
 const canShowComponent = props => {
   const { isAuthenticated, route } = props;
@@ -100,13 +98,15 @@ class RouteComponentRenderer extends Component {
 
   render() {
     const { route, match, location, staticContext } = this.props;
-    const { component: RouteComponent, authPage = 'SignupPage' } = route;
+    const { component: RouteComponent, authPage = 'SignupPage', extraProps } = route;
     const canShow = canShowComponent(this.props);
     if (!canShow) {
       staticContext.unauthorized = true;
     }
     return canShow ? (
-      <RouteComponent params={match.params} location={location} />
+      <LoadableComponentErrorBoundary>
+        <RouteComponent params={match.params} location={location} {...extraProps} />
+      </LoadableComponentErrorBoundary>
     ) : (
       <NamedRedirect
         name={authPage}

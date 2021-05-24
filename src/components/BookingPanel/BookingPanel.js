@@ -2,7 +2,7 @@ import React from 'react';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
-import { arrayOf, bool, func, object, node, oneOfType, shape, string } from 'prop-types';
+import { arrayOf, array, bool, func, object, node, oneOfType, shape, string } from 'prop-types';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
 import { propTypes, LISTING_STATE_CLOSED, LINE_ITEM_UNITS, LINE_ITEM_DAY } from '../../util/types';
@@ -13,7 +13,6 @@ import { ModalInMobile, Button } from '../../components';
 import { BookingDatesForm, BookingTimeForm } from '../../forms';
 
 import css from './BookingPanel.module.css';
-
 
 // This defines when ModalInMobile shows content as Modal
 const MODAL_BREAKPOINT = 1023;
@@ -70,6 +69,10 @@ const BookingPanel = props => {
     history,
     location,
     intl,
+    onFetchTransactionLineItems,
+    lineItems,
+    fetchLineItemsInProgress,
+    fetchLineItemsError,
   } = props;
 
   const {
@@ -150,9 +153,14 @@ const BookingPanel = props => {
             onSubmit={onSubmit}
             price={price}
             discount={discount}
+            listingId={listing.id}
             isOwnListing={isOwnListing}
             timeSlots={timeSlots}
             fetchTimeSlotsError={fetchTimeSlotsError}
+            onFetchTransactionLineItems={onFetchTransactionLineItems}
+            lineItems={lineItems}
+            fetchLineItemsInProgress={fetchLineItemsInProgress}
+            fetchLineItemsError={fetchLineItemsError}
           />
         ) : null}
 
@@ -210,6 +218,8 @@ BookingPanel.defaultProps = {
   subTitle: null,
   timeSlots: null,
   fetchTimeSlotsError: null,
+  lineItems: null,
+  fetchLineItemsError: null,
 };
 
 BookingPanel.propTypes = {
@@ -230,6 +240,10 @@ BookingPanel.propTypes = {
 
   timeSlots: arrayOf(propTypes.timeSlot),
   fetchTimeSlotsError: propTypes.error,
+  onFetchTransactionLineItems: func.isRequired,
+  lineItems: array,
+  fetchLineItemsInProgress: bool.isRequired,
+  fetchLineItemsError: propTypes.error,
 
   // from withRouter
   history: shape({

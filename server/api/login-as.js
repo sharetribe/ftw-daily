@@ -2,6 +2,7 @@ const http = require('http');
 const https = require('https');
 const sharetribeSdk = require('sharetribe-flex-sdk');
 const Decimal = require('decimal.js');
+const sdkUtils = require('../api-util/sdk');
 
 const CLIENT_ID = process.env.REACT_APP_SHARETRIBE_SDK_CLIENT_ID;
 const ROOT_URL = process.env.REACT_APP_CANONICAL_ROOT_URL;
@@ -71,14 +72,7 @@ module.exports = (req, res) => {
     httpAgent: httpAgent,
     httpsAgent: httpsAgent,
     tokenStore,
-    typeHandlers: [
-      {
-        type: sharetribeSdk.types.BigDecimal,
-        customType: Decimal,
-        writer: v => new sharetribeSdk.types.BigDecimal(v.toString()),
-        reader: v => new Decimal(v.value),
-      },
-    ],
+    typeHandlers: sdkUtils.typeHandlers,
     ...baseUrl,
   });
 

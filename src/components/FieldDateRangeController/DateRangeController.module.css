@@ -14,7 +14,7 @@
 }
 
 .inputRoot {
-  /* 
+  /*
     Calendar component using react-dates has automatically padding so
     negative margin to left and right is needed for element to fit on smaller screens.
   */
@@ -58,6 +58,10 @@
     }
     &:last-of-type {
       right: 24px;
+    }
+
+    @media (--viewportMedium) {
+      top: 18px;
     }
   }
   & :global(.DayPickerNavigation_button) {

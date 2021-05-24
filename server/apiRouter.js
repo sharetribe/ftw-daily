@@ -10,12 +10,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { deserialize } = require('./api-util/sdk');
 
+const initiateLoginAs = require('./api/initiate-login-as');
+const loginAs = require('./api/login-as');
 const transactionLineItems = require('./api/transaction-line-items');
 const initiatePrivileged = require('./api/initiate-privileged');
 const transitionPrivileged = require('./api/transition-privileged');
 
-const initiateLoginAs = require('./api/initiate-login-as');
-const loginAs = require('./api/login-as');
+const createUserWithIdp = require('./api/auth/createUserWithIdp');
+
+const { authenticateFacebook, authenticateFacebookCallback } = require('./api/auth/facebook');
+const { authenticateGoogle, authenticateGoogleCallback } = require('./api/auth/google');
 
 const router = express.Router();
 
@@ -43,8 +47,38 @@ router.use((req, res, next) => {
   next();
 });
 
+// ================ API router endpoints: ================ //
+
 router.get('/initiate-login-as', initiateLoginAs);
 router.get('/login-as', loginAs);
+router.post('/transaction-line-items', transactionLineItems);
+router.post('/initiate-privileged', initiatePrivileged);
+router.post('/transition-privileged', transitionPrivileged);
+
+// Create user with identity provider (e.g. Facebook or Google)
+// This endpoint is called to create a new user after user has confirmed
+// they want to continue with the data fetched from IdP (e.g. name and email)
+router.post('/auth/create-user-with-idp', createUserWithIdp);
+
+// Facebook authentication endpoints
+
+// This endpoint is called when user wants to initiate authenticaiton with Facebook
+router.get('/auth/facebook', authenticateFacebook);
+
+// This is the route for callback URL the user is redirected after authenticating
+// with Facebook. In this route a Passport.js custom callback is used for calling
+// loginWithIdp endpoint in Flex API to authenticate user to Flex
+router.get('/auth/facebook/callback', authenticateFacebookCallback);
+
+// Google authentication endpoints
+
+// This endpoint is called when user wants to initiate authenticaiton with Google
+router.get('/auth/google', authenticateGoogle);
+
+// This is the route for callback URL the user is redirected after authenticating
+// with Google. In this route a Passport.js custom callback is used for calling
+// loginWithIdp endpoint in Flex API to authenticate user to Flex
+router.get('/auth/google/callback', authenticateGoogleCallback);
 
 router.post('/transaction-line-items', transactionLineItems);
 router.post('/initiate-privileged', initiatePrivileged);

@@ -248,6 +248,7 @@
 .monthElement {
   display: flex;
   position: relative;
+  top: 3px;
 }
 
 .monthString {

@@ -29,10 +29,11 @@ import React from 'react';
 import moment from 'moment';
 import Decimal from 'decimal.js';
 import { types as sdkTypes } from '../../util/sdkLoader';
-import { dateFromLocalToAPI, nightsBetween, daysBetween } from '../../util/dates';
+import { dateFromLocalToAPI } from '../../util/dates';
 import { TRANSITION_REQUEST_PAYMENT, TX_TRANSITION_ACTOR_CUSTOMER } from '../../util/transaction';
 import { LINE_ITEM_DAY, LINE_ITEM_NIGHT, LINE_ITEM_UNITS, LINE_ITEM_DISCOUNT, DATE_TYPE_DATE, DATE_TYPE_DATETIME } from '../../util/types';
 import { unitDivisor, convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
+import config from '../../config';
 import { BookingBreakdown } from '../../components';
 
 import css from './BookingDatesForm.module.css';
@@ -67,24 +68,31 @@ const estimatedNumericTotalDiscount = (discount, unitPrice, unitCount) => {
   const numericTotalDiscount = new Decimal(numericTotalPrice).times(discountPercentage).toNumber();
 
   return numericTotalDiscount || 0;
+}
+
+const estimatedTotalPrice = lineItems => {
+  const numericTotalPrice = lineItems.reduce((sum, lineItem) => {
+    const numericPrice = convertMoneyToNumber(lineItem.lineTotal);
+    return new Decimal(numericPrice).add(sum);
+  }, 0);
+
+  // All the lineItems should have same currency so we can use the first one to check that
+  // In case there are no lineItems we use currency from config.js as default
+  const currency =
+    lineItems[0] && lineItems[0].unitPrice ? lineItems[0].unitPrice.currency : config.currency;
+
+  return new Money(
+    convertUnitToSubUnit(numericTotalPrice.toNumber(), unitDivisor(currency)),
+    currency
+  );
 };
 
 
 // When we cannot speculatively initiate a transaction (i.e. logged
-// out), we must estimate the booking breakdown. This function creates
+// out), we must estimate the transaction for booking breakdown. This function creates
 // an estimated transaction object for that use case.
 const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, quantity, discount) => {
   const now = new Date();
-  const isNightly = unitType === LINE_ITEM_NIGHT;
-  const isDaily = unitType === LINE_ITEM_DAY;
-
-  const unitCount = isNightly
-    ? nightsBetween(bookingStart, bookingEnd)
-    : isDaily
-    ? daysBetween(bookingStart, bookingEnd)
-    : quantity;
-
-
   const numericLineItemPrice = estimatedNumericLineItemPrice(unitPrice, unitCount);
   const numericTotalDiscount = estimatedNumericTotalDiscount(discount, unitPrice, unitCount);
   const numericTotalPrice = numericLineItemPrice - numericTotalDiscount;
@@ -93,9 +101,6 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, qua
     convertUnitToSubUnit(numericTotalPrice, unitDivisor(unitPrice.currency)),
     unitPrice.currency
   );
-
-
-
 
   // bookingStart: "Fri Mar 30 2018 12:00:00 GMT-1100 (SST)" aka "Fri Mar 30 2018 23:00:00 GMT+0000 (UTC)"
   // Server normalizes night/day bookings to start from 00:00 UTC aka "Thu Mar 29 2018 13:00:00 GMT-1100 (SST)"
@@ -176,16 +181,21 @@ const EstimatedBreakdownMaybe = props => {
   const tx = estimatedTransaction(unitType, startDate, endDate, unitPrice, quantity, discount);
   const dateType = unitType === LINE_ITEM_DAY ? DATE_TYPE_DATE : DATE_TYPE_DATETIME;
 
-  return (
+  const tx =
+    startDate && endDate && lineItems
+      ? estimatedTransaction(startDate, endDate, lineItems, userRole)
+      : null;
+
+  return tx ? (
     <BookingBreakdown
       className={css.receipt}
-      userRole="customer"
+      userRole={userRole}
       unitType={unitType}
       transaction={tx}
       booking={tx.booking}
       dateType={dateType}
     />
-  );
+  ) : null;
 };
 
 export default EstimatedBreakdownMaybe;

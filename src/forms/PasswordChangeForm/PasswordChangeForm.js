@@ -18,12 +18,22 @@ const RESET_TIMEOUT = 800;
 class PasswordChangeFormComponent extends Component {
   constructor(props) {
     super(props);
+    this.state = { showResetPasswordMessage: false };
     this.resetTimeoutId = null;
     this.submittedValues = {};
+    this.handleResetPassword = this.handleResetPassword.bind(this);
   }
   componentWillUnmount() {
     window.clearTimeout(this.resetTimeoutId);
   }
+
+  handleResetPassword() {
+    this.setState({ showResetPasswordMessage: true });
+    const email = this.props.currentUser.attributes.email;
+
+    this.props.onResetPassword(email);
+  }
+
   render() {
     return (
       <FinalForm
@@ -37,6 +47,7 @@ class PasswordChangeFormComponent extends Component {
             currentUser,
             handleSubmit,
             inProgress,
+            resetPasswordInProgress,
             intl,
             invalid,
             pristine,
@@ -126,6 +137,33 @@ class PasswordChangeFormComponent extends Component {
           const classes = classNames(rootClassName || css.root, className);
           const submitDisabled = invalid || pristineSinceLastSubmit || inProgress;
 
+          const sendPasswordLink = (
+            <span className={css.helperLink} onClick={this.handleResetPassword} role="button">
+              <FormattedMessage id="PasswordChangeForm.resetPasswordLinkText" />
+            </span>
+          );
+
+          const resendPasswordLink = (
+            <span className={css.helperLink} onClick={this.handleResetPassword} role="button">
+              <FormattedMessage id="PasswordChangeForm.resendPasswordLinkText" />
+            </span>
+          );
+
+          const resetPasswordLink =
+            this.state.showResetPasswordMessage || resetPasswordInProgress ? (
+              <>
+                <FormattedMessage
+                  id="PasswordChangeForm.resetPasswordLinkSent"
+                  values={{
+                    email: <span className={css.emailStyle}>{currentUser.attributes.email}</span>,
+                  }}
+                />{' '}
+                {resendPasswordLink}
+              </>
+            ) : (
+              sendPasswordLink
+            );
+
           return (
             <Form
               className={classes}
@@ -162,6 +200,11 @@ class PasswordChangeFormComponent extends Component {
                 </h3>
                 <p className={css.confirmChangesInfo}>
                   <FormattedMessage id="PasswordChangeForm.confirmChangesInfo" />
+                  <br />
+                  <FormattedMessage
+                    id="PasswordChangeForm.resetPasswordInfo"
+                    values={{ resetPasswordLink }}
+                  />
                 </p>
 
                 <FieldTextInput
@@ -205,6 +248,8 @@ PasswordChangeFormComponent.defaultProps = {
   changePasswordError: null,
   inProgress: false,
   formId: null,
+  resetPasswordInProgress: false,
+  resetPasswordError: null,
 };
 
 const { bool, string } = PropTypes;
@@ -217,6 +262,8 @@ PasswordChangeFormComponent.propTypes = {
   intl: intlShape.isRequired,
   ready: bool.isRequired,
   formId: string,
+  resetPasswordInProgress: bool,
+  resetPasswordError: propTypes.error,
 };
 
 const PasswordChangeForm = compose(injectIntl)(PasswordChangeFormComponent);

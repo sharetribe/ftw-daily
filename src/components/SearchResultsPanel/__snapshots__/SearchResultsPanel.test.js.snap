@@ -2,8 +2,10 @@
 
 exports[`SearchResultsPanel matches snapshot 1`] = `
 <div
-  className=""
+  className="root"
 >
-  <div />
+  <div
+    className="listingCards"
+  />
 </div>
 `;

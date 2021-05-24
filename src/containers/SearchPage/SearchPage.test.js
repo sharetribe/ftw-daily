@@ -1,19 +1,8 @@
 import React from 'react';
 import { renderShallow } from '../../util/test-helpers';
 import { fakeIntl } from '../../util/test-data';
-import { types as sdkTypes } from '../../util/sdkLoader';
 import { SearchPageComponent } from './SearchPage';
-import reducer, {
-  ADD_FILTER,
-  LOAD_LISTINGS,
-  addFilter,
-  callFetchListings,
-  initialState,
-  loadListings,
-  watchLoadListings,
-} from './SearchPage.duck';
 
-const { LatLng } = sdkTypes;
 const noop = () => null;
 
 describe('SearchPageComponent', () => {

@@ -5,6 +5,8 @@ import { types as sdkTypes } from '../../util/sdkLoader';
 import { storableError } from '../../util/errors';
 import { findNextBoundary, nextMonthFn, monthIdStringInTimeZone } from '../../util/dates';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
+import { transactionLineItems } from '../../util/api';
+import * as log from '../../util/log';
 import { denormalisedResponseEntities } from '../../util/data';
 import { LINE_ITEM_UNITS, LINE_ITEM_DAY } from '../../util/types';
 import { TRANSITION_ENQUIRE } from '../../util/transaction';
@@ -18,7 +20,7 @@ const { UUID } = sdkTypes;
 
 // ================ Action types ================ //
 
-export const SET_INITAL_VALUES = 'app/ListingPage/SET_INITIAL_VALUES';
+export const SET_INITIAL_VALUES = 'app/ListingPage/SET_INITIAL_VALUES';
 
 export const SHOW_LISTING_REQUEST = 'app/ListingPage/SHOW_LISTING_REQUEST';
 export const SHOW_LISTING_ERROR = 'app/ListingPage/SHOW_LISTING_ERROR';
@@ -35,6 +37,10 @@ export const FETCH_TIME_SLOTS_REQUEST_TIME = 'app/ListingPage/FETCH_TIME_SLOTS_R
 export const FETCH_TIME_SLOTS_SUCCESS_TIME = 'app/ListingPage/FETCH_TIME_SLOTS_SUCCESS_TIME';
 export const FETCH_TIME_SLOTS_ERROR_TIME = 'app/ListingPage/FETCH_TIME_SLOTS_ERROR_TIME';
 
+export const FETCH_LINE_ITEMS_REQUEST = 'app/ListingPage/FETCH_LINE_ITEMS_REQUEST';
+export const FETCH_LINE_ITEMS_SUCCESS = 'app/ListingPage/FETCH_LINE_ITEMS_SUCCESS';
+export const FETCH_LINE_ITEMS_ERROR = 'app/ListingPage/FETCH_LINE_ITEMS_ERROR';
+
 export const SEND_ENQUIRY_REQUEST = 'app/ListingPage/SEND_ENQUIRY_REQUEST';
 export const SEND_ENQUIRY_SUCCESS = 'app/ListingPage/SEND_ENQUIRY_SUCCESS';
 export const SEND_ENQUIRY_ERROR = 'app/ListingPage/SEND_ENQUIRY_ERROR';
@@ -49,6 +55,9 @@ const initialState = {
   timeSlots: null,
   monthlyTimeSlots: {},
   fetchTimeSlotsError: null,
+  lineItems: null,
+  fetchLineItemsInProgress: false,
+  fetchLineItemsError: null,
   sendEnquiryInProgress: false,
   sendEnquiryError: null,
   enquiryModalOpenForListingId: null,
@@ -57,7 +66,7 @@ const initialState = {
 const listingPageReducer = (state = initialState, action = {}) => {
   const { type, payload } = action;
   switch (type) {
-    case SET_INITAL_VALUES:
+    case SET_INITIAL_VALUES:
       return { ...initialState, ...payload };
 
     case SHOW_LISTING_REQUEST:
@@ -114,6 +123,12 @@ const listingPageReducer = (state = initialState, action = {}) => {
       };
       return { ...state, monthlyTimeSlots };
     }
+    case FETCH_LINE_ITEMS_REQUEST:
+      return { ...state, fetchLineItemsInProgress: true, fetchLineItemsError: null };
+    case FETCH_LINE_ITEMS_SUCCESS:
+      return { ...state, fetchLineItemsInProgress: false, lineItems: payload };
+    case FETCH_LINE_ITEMS_ERROR:
+      return { ...state, fetchLineItemsInProgress: false, fetchLineItemsError: payload };
 
     case SEND_ENQUIRY_REQUEST:
       return { ...state, sendEnquiryInProgress: true, sendEnquiryError: null };
@@ -132,7 +147,7 @@ export default listingPageReducer;
 // ================ Action creators ================ //
 
 export const setInitialValues = initialValues => ({
-  type: SET_INITAL_VALUES,
+  type: SET_INITIAL_VALUES,
   payload: pick(initialValues, Object.keys(initialState)),
 });
 
@@ -178,6 +193,17 @@ export const fetchTimeSlotsErrorTime = (monthId, error) => ({
   type: FETCH_TIME_SLOTS_ERROR_TIME,
   error: true,
   payload: { monthId, error },
+});
+
+export const fetchLineItemsRequest = () => ({ type: FETCH_LINE_ITEMS_REQUEST });
+export const fetchLineItemsSuccess = lineItems => ({
+  type: FETCH_LINE_ITEMS_SUCCESS,
+  payload: lineItems,
+});
+export const fetchLineItemsError = error => ({
+  type: FETCH_LINE_ITEMS_ERROR,
+  error: true,
+  payload: error,
 });
 
 export const sendEnquiryRequest = () => ({ type: SEND_ENQUIRY_REQUEST });
@@ -378,6 +404,21 @@ export const sendEnquiry = (listingId, message, unitType) => (dispatch, getState
     });
 };
 
+export const fetchTransactionLineItems = ({ bookingData, listingId, isOwnListing }) => dispatch => {
+  dispatch(fetchLineItemsRequest());
+  transactionLineItems({ bookingData, listingId, isOwnListing })
+    .then(response => {
+      const lineItems = response.data;
+      dispatch(fetchLineItemsSuccess(lineItems));
+    })
+    .catch(e => {
+      dispatch(fetchLineItemsError(storableError(e)));
+      log.error(e, 'fetching-line-items-failed', {
+        listingId: listingId.uuid,
+        bookingData: bookingData,
+      });
+    });
+};
 
 export const loadData = (params, search) => dispatch => {
   const listingId = new UUID(params.id);

@@ -1,4 +1,5 @@
 @import '../assets/sanitize.css';
+@import './customMediaQueries.css';
 @import './propertySets.css';
 
 :root {
@@ -39,6 +40,16 @@
   --matterColorLight: #ffffff;
 
   --matterColorLightTransparent: rgba(255, 255, 255, 0.65);
+
+  /* ================ Font ================ */
+  --fontFamily: 'poppins', Helvetica, Arial, sans-serif;
+
+  --fontWeightRegular: 400;
+  --fontWeightMedium: 500;
+  --fontWeightSemiBold: 600;
+  --fontWeightBold: 700;
+
+  --fontWeightHighlightEmail: var(--fontWeightBold);
 
   /* ================ Spacing unites ================ */
 
@@ -86,6 +97,16 @@
   --topbarHeight: 60px;
   --topbarHeightDesktop: 72px;
 
+  --TopbarMobileMenu_topMargin: 96px;
+
+  --Topbar_logoHeight: 25px;
+  --CheckoutPage_logoHeight: 25px;
+  --CheckoutPage_logoHeightDesktop: 27px;
+
+  --TopbarSearchForm_inputHeight: 53px;
+  --TopbarSearchForm_topbarMargin: 94px;
+  --TopbarSearchForm_bottomBorder: 3px;
+
   /* ================ Modal default padding ================ */
 
   --modalPadding: 24px 24px 48px 24px;
@@ -94,22 +115,52 @@
   /* ================ LocationAutocompleteInput bottom attribution padding ================ */
 
   /* Google Maps needs 72px bottom padding to accommodate logo, Mapbox doesn't have one */
-  /* --locationAutocompleteBottomPadding: 8px; */
   --locationAutocompleteBottomPadding: 72px;
 
-  --fontWeightRegular: 400;
-  --fontWeightMedium: 500;
-  --fontWeightSemiBold: 600;
-  --fontWeightBold: 700;
+  --LocationAutocompleteInput_inputHeight: 50px;
+  --LocationAutocompleteInput_sidePaddingDesktop: 36px;
+
+  /* ================ Filters ================ */
+  --marketplaceButtonSmallDesktopPadding: 9px 16px 9px 16px;
+
+  /* ================ DateInput, DateRangeInput, DateRangeController ================ */
+  --ReactDates_selectionHeight: 36px;
+  --ReactDates_hoveredOverlayColor: rgba(255, 255, 255, 0.2);
+
+  --DateInput_selectionHeight: var(--ReactDates_selectionHeight);
+  --DateInput_hoveredOverlayColor: var(--ReactDates_hoveredOverlayColor);
+  --DateRangeInput_selectionHeight: var(--ReactDates_selectionHeight);
+  --DateRangeInput_hoveredOverlayColor: var(--ReactDates_hoveredOverlayColor);
+  --DateRangeController_selectionHeight: var(--ReactDates_selectionHeight);
+
+  /* ================ SectionHero ================ */
+
+  --SectionHero_desktopTitleMaxWidth: 625px;
+
+  /* ================ TabNav ================ */
+  --TabNav_linkWidth: 240px;
+
+  /* ================ LandingPage ================ */
+  --LandingPage_sectionMarginTop: 40px;
+  --LandingPage_sectionMarginTopMedium: 60px;
+  --LandingPage_sectionMarginTopLarge: 94px;
+
+  /* ================ EditListingAvailabilityForm, ManageAvailabilityCalendar ================ */
+  --ManageAvailabilityCalendar_gridColor: #e0e0e0;
+  --ManageAvailabilityCalendar_availableColor: #ffffff;
+  --ManageAvailabilityCalendar_availableColorHover: #fafafa;
+  --ManageAvailabilityCalendar_blockedColor: #ebebeb;
+  --ManageAvailabilityCalendar_blockedColorHover: #e6e6e6;
+  --ManageAvailabilityCalendar_reservedColor: #e6fff0;
+  --ManageAvailabilityCalendar_reservedColorHover: #e1faeb;
+  --ManageAvailabilityCalendar_failedColor: #fff2f2;
+
+  /* ================ ProfileSettingsForm ================ */
+  --ProfileSettingsForm_avatarSize: 96px;
+  --ProfileSettingsForm_avatarSizeDesktop: 240px;
 }
 
-@custom-media --viewportSmall (min-width: 550px);
-@custom-media --viewportMedium (min-width: 768px);
-@custom-media --viewportLarge (min-width: 1024px);
-@custom-media --viewportLargeWithPaddings (min-width: 1128px);
-@custom-media --viewportXLarge (min-width: 1921px);
-
-/* ================ Fonts ================ */
+/* ================ Global element styles ================ */
 
 body {
   font-family: Helvetica, Arial, sans-serif;
@@ -224,11 +275,11 @@ textarea {
   }
 }
 
-:global(.fontsLoaded) {
+.fontsLoaded {
   & body {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'poppins', Helvetica, Arial, sans-serif;
   }
   & button {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'poppins', Helvetica, Arial, sans-serif;
   }
 }

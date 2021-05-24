@@ -1,4 +1,5 @@
 @import '../../styles/propertySets.css';
+@import '../../styles/customMediaQueries.css';
 
 :root {
   /*
@@ -38,7 +39,7 @@
   @media (--viewportMedium) {
     position: relative;
     padding-top: var(--topbarHeightDesktop);
-    min-height: var(--SearchPage_containerHeight);
+    min-height: calc(100vh - var(--topbarHeightDesktop));
   }
 }
 
@@ -146,7 +147,7 @@
 .sortByMenuLabel {
   @apply --marketplaceButtonStylesSecondary;
   @apply --marketplaceTinyFontStyles;
-  font-weight: var(--fontWeightBold);
+  font-weight: var(--fontWeightMedium);
 
   height: 35px;
   min-height: 35px;
@@ -173,7 +174,7 @@
 
     /* Fixed content needs width relative to viewport */
     width: 50vw;
-    height: var(--SearchPage_containerHeight);
+    height: calc(100vh - var(--topbarHeightDesktop));
   }
 
   @media (--viewportLarge) {

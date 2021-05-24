@@ -28,7 +28,7 @@
     /* Similar problem as in issue: https://github.com/airbnb/react-dates/issues/947 */
     top: 36px !important;
     width: 100%;
-    min-height: calc(100vh - var(--DateInput_top));
+    min-height: calc(100vh - 252px);
     background-color: var(--marketplaceColor);
 
     @media (--viewportMedium) {
@@ -81,7 +81,7 @@
 
   & :global(.DayPickerNavigation_button__horizontal) {
     padding: 6px 9px;
-    top: 19px;
+    top: 16px;
     position: absolute;
     cursor: pointer;
     display: inline;
@@ -296,7 +296,7 @@
     /* Similar problem as in issue: https://github.com/airbnb/react-dates/issues/947 */
     top: 34px !important;
     border-top: 2px solid var(--matterColorDark);
-    min-height: calc(100vh - var(--DateInput_top) + 2px);
+    min-height: calc(100vh - 252px + 2px);
 
     @media (--viewportMedium) {
       /* !important is added to top because react-dates uses inline style for height */

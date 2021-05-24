@@ -108,7 +108,7 @@ const stateDescription = {
   // id is defined only to support Xstate format.
   // However if you have multiple transaction processes defined,
   // it is best to keep them in sync with transaction process aliases.
-  id: 'preauth-with-nightly-booking/release-1',
+  id: 'flex-default-process/release-1',
 
   // This 'initial' state is a starting point for new transaction
   initial: STATE_INITIAL,
@@ -335,3 +335,15 @@ export const getUserTxRole = (currentUserId, transaction) => {
 
 export const txRoleIsProvider = userRole => userRole === TX_TRANSITION_ACTOR_PROVIDER;
 export const txRoleIsCustomer = userRole => userRole === TX_TRANSITION_ACTOR_CUSTOMER;
+
+// Check if the given transition is privileged.
+//
+// Privileged transitions need to be handled from a secure context,
+// i.e. the backend. This helper is used to check if the transition
+// should go through the local API endpoints, or if using JS SDK is
+// enough.
+export const isPrivileged = transition => {
+  return [TRANSITION_REQUEST_PAYMENT, TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY].includes(
+    transition
+  );
+};

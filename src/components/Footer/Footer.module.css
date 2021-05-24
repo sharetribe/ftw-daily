@@ -126,13 +126,13 @@
 .organizationInfo {
 }
 
-.organizationDescription {
+.organizationDescription,
+.organizationCopyright {
   @apply --marketplaceTinyFontStyles;
 }
 
 .organizationCopyright {
-  @apply --marketplaceTinyFontStyles;
-  margin-top: 32px;
+  margin-top: 24px;
 }
 
 .copyrightLink {
@@ -174,7 +174,7 @@
 
 .link {
   /* Font */
-  @apply --marketplaceH4FontStyles;
+  @apply --marketplaceH5FontStyles;
   line-height: 20px;
   color: var(--matterColor);
   transition: var(--transitionStyleButton);
@@ -247,12 +247,15 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  margin-bottom: 12px;
 }
 
 .tosAndPrivacy {
   margin-top: 0;
   margin-bottom: 0;
+
+  @media (--viewportMedium) {
+    margin-bottom: 10px;
+  }
 }
 
 .legalLink,

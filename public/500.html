@@ -9,34 +9,31 @@
     <style>
 
      /**
-      * The fonts included are copyrighted by the vendor listed below.
+      * Poppins font is downloaded from Google Fonts
+      * but served from sharetribe.com assets.
       *
-      * Vendor:      Mostardesign
-      * License URL: https://www.fontspring.com/licenses/mostardesign/webfont
-      *
+      * https://fonts.google.com/specimen/Poppins
       */
+
       @font-face {
-          font-family: 'sofiapro';
-          src: url('https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-medium-webfont.woff2') format('woff2'),
-               url('https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-medium-webfont.woff') format('woff');
-          font-weight: 500; /* Medium */
-          font-style: normal;
+        font-family: 'poppins';
+        src: url('https://assets-sharetribecom.sharetribe.com/webfonts/poppins/Poppins-Medium.ttf') format('truetype');
+        font-weight: 500; /* Medium */
+        font-style: normal;
       }
 
       @font-face {
-          font-family: 'sofiapro';
-          src: url('https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-semibold-webfont.woff2') format('woff2'),
-               url('https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-semibold-webfont.woff') format('woff');
-          font-weight: 600; /* SemiBold */
-          font-style: normal;
+        font-family: 'poppins';
+        src: url('https://assets-sharetribecom.sharetribe.com/webfonts/poppins/Poppins-SemiBold.ttf') format('truetype');
+        font-weight: 600; /* SemiBold */
+        font-style: normal;
       }
 
       @font-face {
-          font-family: 'sofiapro';
-          src: url('https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-bold-webfont.woff2') format('woff2'),
-               url('https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-bold-webfont.woff') format('woff');
-          font-weight: 700; /* Bold */
-          font-style: normal;
+        font-family: 'poppins';
+        src: url('https://assets-sharetribecom.sharetribe.com/webfonts/poppins/Poppins-Bold.ttf') format('truetype');
+        font-weight: 700; /* Bold */
+        font-style: normal;
       }
 
       body {
@@ -125,7 +122,7 @@
       }
 
       .fontsLoaded body {
-        font-family: sofiapro, Helvetica, Arial, sans-serif;
+        font-family: poppins, Helvetica, Arial, sans-serif;
         opacity: 1;
       }
 
@@ -198,11 +195,11 @@
             return;
           }
 
-          var sofiaproMedium = new FontFace('sofiapro', 'url("https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-medium-webfont.woff2") format("woff2"), url("https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-medium-webfont.woff") format("woff")', { style: 'normal', weight: '500' });
-          var sofiaproSemibold = new FontFace('sofiapro', 'url("https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-semibold-webfont.woff2") format("woff2"), url("https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-semibold-webfont.woff") format("woff")', { style: 'normal', weight: '600' });
-          var sofiaproBold = new FontFace('sofiapro', 'url("https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-bold-webfont.woff2") format("woff2"), url("https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-bold-webfont.woff") format("woff")', { style: 'normal', weight: '700' });
+          var poppinsMedium = new FontFace('poppins', 'url("https://assets-sharetribecom.sharetribe.com/webfonts/poppins/Poppins-Medium.ttf") format("truetype")', { style: 'normal', weight: '500' });
+          var poppinsSemibold = new FontFace('poppins', 'url("https://assets-sharetribecom.sharetribe.com/webfonts/poppins/Poppins-SemiBold.ttf") format("truetype")', { style: 'normal', weight: '600' });
+          var poppinsBold = new FontFace('poppins', 'url("https://assets-sharetribecom.sharetribe.com/webfonts/poppins/Poppins-Bold.ttf") format("truetype")', { style: 'normal', weight: '700' });
 
-          Promise.all([sofiaproMedium.load(), sofiaproSemibold.load(), sofiaproBold.load()])
+          Promise.all([poppinsMedium.load(), poppinsSemibold.load(), poppinsBold.load()])
             .then(function(values) {
               values.forEach(function(f) {
                 document.fonts.add(f);

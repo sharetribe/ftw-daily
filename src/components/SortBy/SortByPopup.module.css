@@ -17,7 +17,7 @@
   @apply --marketplaceButtonStylesSecondary;
   @apply --marketplaceSearchFilterLabelFontStyles;
 
-  padding: 9px 16px 10px 16px;
+  padding: var(--marketplaceButtonSmallDesktopPadding);
   width: auto;
   height: auto;
   min-height: 0;

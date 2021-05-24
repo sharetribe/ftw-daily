@@ -5,30 +5,37 @@ exports[`CheckoutPage matches snapshot 1`] = `
   scrollingDisabled={false}
   title="CheckoutPage.title"
 >
-  <div>
+  <div
+    className="topbar"
+  >
     <NamedLink
+      className="home"
       name="LandingPage"
     >
       <Logo
-        className={null}
+        className="logoMobile"
         format="mobile"
         title="CheckoutPage.goToLandingPage"
       />
       <Logo
         alt="CheckoutPage.goToLandingPage"
-        className={null}
+        className="logoDesktop"
         format="desktop"
       />
     </NamedLink>
   </div>
-  <div>
-    <div>
+  <div
+    className="contentContainer"
+  >
+    <div
+      className="aspectWrapper"
+    >
       <ResponsiveImage
         alt="listing1 title"
         className={null}
         image={null}
         noImageMessage={null}
-        rootClassName={null}
+        rootClassName="rootForImage"
         variants={
           Array [
             "landscape-crop",
@@ -38,7 +45,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
       />
     </div>
     <div
-      className=""
+      className="avatarWrapper avatarMobile"
     >
       <AvatarMedium
         disableProfileLink={true}
@@ -61,12 +68,20 @@ exports[`CheckoutPage matches snapshot 1`] = `
         }
       />
     </div>
-    <div>
-      <div>
-        <h1>
+    <div
+      className="bookListingContainer"
+    >
+      <div
+        className="heading"
+      >
+        <h1
+          className="title"
+        >
           CheckoutPage.title
         </h1>
-        <div>
+        <div
+          className="author"
+        >
           <FormattedMessage
             id="CheckoutPage.hostedBy"
             values={
@@ -77,10 +92,15 @@ exports[`CheckoutPage matches snapshot 1`] = `
           />
         </div>
       </div>
-      <div />
-      <section>
+      <div
+        className="priceBreakdownContainer"
+      />
+      <section
+        className="paymentContainer"
+      >
         <injectIntl(StripePaymentForm)
           authorDisplayName="author display name"
+          className="paymentForm"
           confirmPaymentError={null}
           defaultPaymentMethod={null}
           formId="CheckoutPagePaymentForm"
@@ -101,14 +121,18 @@ exports[`CheckoutPage matches snapshot 1`] = `
         />
       </section>
     </div>
-    <div>
-      <div>
+    <div
+      className="detailsContainerDesktop"
+    >
+      <div
+        className="detailsAspectWrapper"
+      >
         <ResponsiveImage
           alt="listing1 title"
           className={null}
           image={null}
           noImageMessage={null}
-          rootClassName={null}
+          rootClassName="rootForImage"
           variants={
             Array [
               "landscape-crop",
@@ -117,7 +141,9 @@ exports[`CheckoutPage matches snapshot 1`] = `
           }
         />
       </div>
-      <div>
+      <div
+        className="avatarWrapper"
+      >
         <AvatarMedium
           disableProfileLink={true}
           user={
@@ -139,11 +165,17 @@ exports[`CheckoutPage matches snapshot 1`] = `
           }
         />
       </div>
-      <div>
-        <h2>
+      <div
+        className="detailsHeadings"
+      >
+        <h2
+          className="detailsTitle"
+        >
           listing1 title
         </h2>
-        <p>
+        <p
+          className="detailsSubtitle"
+        >
           55 CheckoutPage.perNight
         </p>
       </div>

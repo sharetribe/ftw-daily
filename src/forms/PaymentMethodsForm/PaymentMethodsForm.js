@@ -52,17 +52,17 @@ const stripeErrorTranslation = (intl, stripeError) => {
 const stripeElementsOptions = {
   fonts: [
     {
-      family: 'sofiapro',
+      family: 'poppins',
       fontSmoothing: 'antialiased',
       src:
-        'local("sofiapro"), local("SofiaPro"), local("Sofia Pro"), url("https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-medium-webfont.woff2") format("woff2")',
+        'local("poppins"), local("Poppins"), url("https://assets-sharetribecom.sharetribe.com/webfonts/poppins/Poppins-Medium.ttf") format("truetype")',
     },
   ],
 };
 
 const cardStyles = {
   base: {
-    fontFamily: '"sofiapro", Helvetica, Arial, sans-serif',
+    fontFamily: '"poppins", Helvetica, Arial, sans-serif',
     fontSize: '18px',
     fontSmoothing: 'antialiased',
     lineHeight: '24px',

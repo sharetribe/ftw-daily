@@ -1,20 +1,23 @@
-
 :root {
-  /*
-    These variables are available in global scope through ":root"
-    element (<html> tag). Variables with the same names are going to
-    overwrite each other if CSS Properties' (PostCSS plugin)
-    configuration "preserve: true" is used - meaning that variables
-    are left to CSS bundle. We are planning to enable it in the future
-    since browsers support CSS Properties already.
+  /**
+ * This file contains only Custom Sets of Properties (@apply-rule).
+ * This was originally part of cssnext package and was an interesting
+ * concept, because property sets would not suffer from specificity
+ * problems that arise from creating a single CSS file on build step.
+ *
+ * However, W3C has abandoned this concept before it became an
+ * official standard. It would be a good idea to reduce the usage.
+ * http://tabatkins.github.io/specs/css-apply-rule/
+ *
+ * Property sets defined in this file are imported and injected to
+ * correct places during PostCSS build step.
+ *
+ * Note: if you add plain CSS styles to this file,
+ * you'll end up seeing it repeated in development mode on every
+ * component that @imports this file.
  */
 
-  /**
-   * Font variables are separated to different file so that the amount of font styling rules
-   * doesn't overflow this one.
-   * see ./marketplaceFonts.css
-   * Usage example: .root { @apply --marketplaceH1FontStyles; }
-   */
+  /* ================ CSS Custom Property Sets ================ */
 
 
   --marketplaceDefaultFontStyles: {
@@ -385,11 +388,11 @@
   /* ================ Buttons ================ */
 
   --marketplaceButtonFontStyles: {
-    font-family: 'sofiapro', Helvetica, Arial, sans-serif;
+    font-family: 'poppins', Helvetica, Arial, sans-serif;
     font-weight: var(--fontWeightSemiBold);
-    font-size: 18px;
+    font-size: 16px;
     line-height: 24px;
-    letter-spacing: -0.3px;
+    letter-spacing: 0.2px;
 
     @media (--viewportMedium) {
       /* TODO: Make sure button text aligns with the baseline */
@@ -406,7 +409,11 @@
 
     /* Padding is only for <a> elements where button styles are applied,
 		buttons elements should have zero padding */
-    padding: 20px 0 0 0;
+    padding: 17px 0 17px 0;
+
+    @media (--viewportMedium) {
+      padding: 20px 0 20px 0;
+    }
 
     /* Borders */
     border: none;
@@ -514,7 +521,7 @@
     }
 
     @media (--viewportMedium) {
-      padding: 4px 0 10px 0;
+      padding: 4px 0 2px 0;
     }
   }
 
@@ -552,7 +559,7 @@
     }
 
     @media (--viewportMedium) {
-      padding: 4px 0 10px 0;
+      padding: 4px 0 2px 0;
     }
   }
 
@@ -681,7 +688,7 @@
   }
 
   --marketplaceModalHelperText {
-    @apply --marketplaceH5FontStyles;
+    @apply --marketplaceTinyFontStyles;
     color: var(--matterColorAnti);
     margin: 0;
 
@@ -691,7 +698,7 @@
   }
 
   --marketplaceModalHelperLink {
-    @apply --marketplaceH5FontStyles;
+    @apply --marketplaceTinyFontStyles;
     color: var(--matterColor);
     margin: 0;
 
@@ -778,10 +785,6 @@
     @apply --marketplaceH4FontStyles;
     margin-top: 24px;
     color: var(--failColor);
-  }
-
-  --marketplaceModalHighlightEmail {
-    font-weight: var(--fontWeightBold);
   }
 
   --marketplaceModalPasswordMargins {

@@ -21,7 +21,7 @@ import {
 } from '../../components';
 import { TopbarContainer } from '../../containers';
 import { PaymentMethodsForm } from '../../forms';
-import { createStripeSetupIntent, stripeCustomer, loadData } from './PaymentMethodsPage.duck.js';
+import { createStripeSetupIntent, stripeCustomer } from './PaymentMethodsPage.duck.js';
 
 import css from './PaymentMethodsPage.module.css';
 
@@ -267,7 +267,5 @@ const PaymentMethodsPage = compose(
   ),
   injectIntl
 )(PaymentMethodsPageComponent);
-
-PaymentMethodsPage.loadData = loadData;
 
 export default PaymentMethodsPage;

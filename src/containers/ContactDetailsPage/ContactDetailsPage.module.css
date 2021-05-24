@@ -1,4 +1,5 @@
 @import '../../styles/propertySets.css';
+@import '../../styles/customMediaQueries.css';
 
 .content {
   @media (--viewportMedium) {
@@ -21,6 +22,6 @@
   margin-bottom: 19px;
 
   @media (--viewportMedium) {
-    margin-bottom: 48px;
+    margin-bottom: 36px;
   }
 }

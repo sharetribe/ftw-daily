@@ -110,7 +110,7 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: nowrap;
-  padding: 12px 24px 18px 16px;
+  padding: 12px 24px 10px 16px;
 }
 
 .menuLabelWrapperExpired {

@@ -4,7 +4,6 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import { propTypes } from '../../util/types';
-import { parse } from '../../util/urlHelpers';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
 import {
   ManageListingCard,
@@ -238,18 +237,5 @@ const ManageListingsPage = compose(
   ),
   injectIntl
 )(ManageListingsPageComponent);
-
-ManageListingsPage.loadData = (params, search) => {
-  const queryParams = parse(search);
-  const page = queryParams.page || 1;
-  return queryOwnListings({
-    ...queryParams,
-    page,
-    perPage: RESULT_PAGE_SIZE,
-    include: ['images'],
-    'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
-    'limit.images': 1,
-  });
-};
 
 export default ManageListingsPage;

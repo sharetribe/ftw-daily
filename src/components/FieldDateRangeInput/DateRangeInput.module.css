@@ -31,7 +31,7 @@
     /* Similar problem as in issue: https://github.com/airbnb/react-dates/issues/947 */
     top: 36px !important;
     width: 100%;
-    min-height: calc(100vh - var(--DateRangeInput_top));
+    min-height: calc(100vh - 252px);
     background-color: var(--marketplaceColor);
 
     @media (--viewportMedium) {
@@ -45,7 +45,9 @@
   }
 
   & :global(.DateInput_input) {
+    @apply --marketplaceH4FontStyles;
     padding: 0;
+    margin: 0;
     border: 0;
     background: none;
   }
@@ -69,7 +71,7 @@
 
   & :global(.DayPickerNavigation_button__horizontal) {
     padding: 6px 9px;
-    top: 19px;
+    top: 16px;
     position: absolute;
     cursor: pointer;
     display: inline;
@@ -254,6 +256,10 @@
   }
   & :global(.CalendarMonth_caption) {
     text-transform: capitalize;
+  }
+
+  & :global(.DateInput_input__disabled) {
+    font-style: normal;
   }
 }
 

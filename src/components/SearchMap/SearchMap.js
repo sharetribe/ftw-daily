@@ -116,6 +116,7 @@ export class SearchMapComponent extends Component {
 
   render() {
     const {
+      id,
       className,
       rootClassName,
       reusableContainerClassName,
@@ -158,11 +159,13 @@ export class SearchMapComponent extends Component {
     //   activeListingId={activeListingId}
     //   mapComponentRefreshToken={this.state.mapReattachmentCount}
     //   createURLToListing={this.createURLToListing}
+    //   onClick={this.onMapClicked}
     //   onListingClicked={this.onListingClicked}
     //   onListingInfoCardClicked={this.onListingInfoCardClicked}
     //   onMapLoad={this.onMapLoadHandler}
     //   onClick={this.onMapClicked}
     //   onMapMoveEnd={onMapMoveEnd}
+    //   reusableMapHiddenHandle={REUSABLE_MAP_HIDDEN_HANDLE}
     //   zoom={zoom}
     //   reusableMapHiddenHandle={REUSABLE_MAP_HIDDEN_HANDLE}
     // />
@@ -201,6 +204,7 @@ export class SearchMapComponent extends Component {
 }
 
 SearchMapComponent.defaultProps = {
+  id: 'searchMap',
   className: null,
   rootClassName: null,
   mapRootClassName: null,
@@ -215,6 +219,7 @@ SearchMapComponent.defaultProps = {
 };
 
 SearchMapComponent.propTypes = {
+  id: string,
   className: string,
   rootClassName: string,
   mapRootClassName: string,
