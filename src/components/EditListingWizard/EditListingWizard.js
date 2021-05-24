@@ -46,8 +46,8 @@ export const TABS = [
   SEATS,
   POLICY,
   LOCATION,
-  ...availabilityMaybe,
   PRICING,
+  ...availabilityMaybe,
 ];
 
 // Tabs are horizontal in small screens
@@ -60,6 +60,8 @@ const tabLabel = (intl, tab) => {
   let key = null;
   if (tab === DESCRIPTION) {
     key = 'EditListingWizard.tabLabelDescription';
+  } else if (tab === PHOTOS) {
+    key = 'EditListingWizard.tabLabelPhotos';
   } else if (tab === FEATURES) {
     key = 'EditListingWizard.tabLabelFeatures';
   } else if (tab === CAPACITY) {
@@ -74,8 +76,6 @@ const tabLabel = (intl, tab) => {
     key = 'EditListingWizard.tabLabelPricing';
   } else if (tab === AVAILABILITY) {
     key = 'EditListingWizard.tabLabelAvailability';
-  } else if (tab === PHOTOS) {
-    key = 'EditListingWizard.tabLabelPhotos';
   }
 
   return intl.formatMessage({ id: key });
@@ -103,6 +103,8 @@ const tabCompleted = (tab, listing) => {
   switch (tab) {
     case DESCRIPTION:
       return !!(description && title);
+    case PHOTOS:
+      return images && images.length > 0;
     case FEATURES:
       return !!(publicData && publicData.amenities);
     case CAPACITY:
@@ -113,6 +115,8 @@ const tabCompleted = (tab, listing) => {
       return !!(publicData && typeof publicData.rules !== 'undefined');
     case LOCATION:
       return !!(geolocation && publicData && publicData.location && publicData.location.address);
+    case PRICING:
+      return !!price;
     case AVAILABILITY:
       // Since we are setting parts of availabilityPlan in description Panel we need to make sure
       // it is not marked as completed in description.
@@ -121,10 +125,6 @@ const tabCompleted = (tab, listing) => {
         !!(typeof publicData.rules !== 'undefined') &&
         publicData.capacity &&
         publicData.amenities;
-    case PRICING:
-      return !!price;
-    case PHOTOS:
-      return images && images.length > 0;
     default:
       return false;
   }

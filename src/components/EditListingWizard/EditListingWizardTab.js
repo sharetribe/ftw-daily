@@ -38,14 +38,14 @@ export const PHOTOS = 'photos';
 // EditListingWizardTab component supports these tabs
 export const SUPPORTED_TABS = [
   DESCRIPTION,
+  PHOTOS,
   FEATURES,
   CAPACITY,
   SEATS,
   POLICY,
   LOCATION,
   PRICING,
-  AVAILABILITY,
-  PHOTOS,
+  AVAILABILITY
 ];
 
 const pathParamsToNextTab = (params, tab, marketplaceTabs) => {
