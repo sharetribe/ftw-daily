@@ -305,31 +305,22 @@ export const sendMessage = params => (dispatch, getState, sdk) => {
  * pricing info for the booking breakdown to get a proper estimate for
  * the price with the chosen information.
  */
-export const speculateTransaction = (params, unitType) => (dispatch, getState, sdk) => {
+export const speculateTransaction = (orderParams, unitType) => (dispatch, getState, sdk) => {
   dispatch(speculateTransactionRequest());
 
-  // const isTransition = !!transactionId;
-  // const transition = isTransition
-  //   ? TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY
-  //   : TRANSITION_REQUEST_PAYMENT;
-  // const isPrivilegedTransition = isPrivileged(transition);
+  const isTransition = !!transactionId;
+  const transition = isTransition
+    ? TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY
+    : TRANSITION_REQUEST_PAYMENT;
+  const isPrivilegedTransition = isPrivileged(transition);
 
-  // const bookingData = {
-  //   startDate: orderParams.bookingStart,
-  //   endDate: orderParams.bookingEnd,
-
+  const bookingData = {
+    startDate: orderParams.bookingStart,
+    endDate: orderParams.bookingEnd,
+  };
 
   const aliasIndex = unitType === LINE_ITEM_UNITS ? 1 : 0;
   const processAlias = config.bookingProcessAliases[aliasIndex];
-
-  const bodyParams = {
-    transition: TRANSITION_REQUEST_PAYMENT,
-    processAlias,
-    params: {
-      ...params,
-      cardToken: 'CheckoutPage_speculative_card_token',
-    },
-  };
 
   const params = {
     ...orderParams,
@@ -338,15 +329,15 @@ export const speculateTransaction = (params, unitType) => (dispatch, getState, s
 
   const bodyParams = isTransition
     ? {
-        id: transactionId,
-        transition,
-        params,
-      }
-    : {
-        processAlias: config.bookingProcessAlias,
-        transition,
-        params,
-      };
+      id: transactionId,
+      transition,
+      params,
+      processAlias,
+    } : {
+      processAlias,
+      transition,
+      params,
+    };
 
   const queryParams = {
     include: ['booking', 'provider'],

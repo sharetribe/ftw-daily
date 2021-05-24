@@ -91,16 +91,94 @@ const estimatedTotalPrice = lineItems => {
 // When we cannot speculatively initiate a transaction (i.e. logged
 // out), we must estimate the transaction for booking breakdown. This function creates
 // an estimated transaction object for that use case.
-const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, quantity, discount) => {
-  const now = new Date();
-  const numericLineItemPrice = estimatedNumericLineItemPrice(unitPrice, unitCount);
-  const numericTotalDiscount = estimatedNumericTotalDiscount(discount, unitPrice, unitCount);
-  const numericTotalPrice = numericLineItemPrice - numericTotalDiscount;
+// const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, quantity, discount) => {
+//   const now = new Date();
+//   const numericLineItemPrice = estimatedNumericLineItemPrice(unitPrice, unitCount);
+//   const numericTotalDiscount = estimatedNumericTotalDiscount(discount, unitPrice, unitCount);
+//   const numericTotalPrice = numericLineItemPrice - numericTotalDiscount;
 
-  const totalPrice = new Money(
-    convertUnitToSubUnit(numericTotalPrice, unitDivisor(unitPrice.currency)),
-    unitPrice.currency
-  );
+//   const totalPrice = new Money(
+//     convertUnitToSubUnit(numericTotalPrice, unitDivisor(unitPrice.currency)),
+//     unitPrice.currency
+//   );
+
+//   // bookingStart: "Fri Mar 30 2018 12:00:00 GMT-1100 (SST)" aka "Fri Mar 30 2018 23:00:00 GMT+0000 (UTC)"
+//   // Server normalizes night/day bookings to start from 00:00 UTC aka "Thu Mar 29 2018 13:00:00 GMT-1100 (SST)"
+//   // The result is: local timestamp.subtract(12h).add(timezoneoffset) (in eg. -23 h)
+
+//   // local noon -> startOf('day') => 00:00 local => remove timezoneoffset => 00:00 API (UTC)
+//   const serverDayStart = dateFromLocalToAPI(
+//     moment(bookingStart)
+//       .startOf('day')
+//       .toDate()
+//   );
+//   const serverDayEnd = dateFromLocalToAPI(
+//     moment(bookingEnd)
+//       .startOf('day')
+//       .toDate()
+//   );
+
+//   let tx = {
+//     id: new UUID('estimated-transaction'),
+//     type: 'transaction',
+//     attributes: {
+//       createdAt: now,
+//       lastTransitionedAt: now,
+//       lastTransition: TRANSITION_REQUEST_PAYMENT,
+//       payinTotal: totalPrice,
+//       payoutTotal: totalPrice,
+//       lineItems: [
+//         {
+//           code: unitType,
+//           includeFor: ['customer', 'provider'],
+//           unitPrice: unitPrice,
+//           quantity: new Decimal(unitCount),
+//           lineTotal: new Money(
+//             convertUnitToSubUnit(numericLineItemPrice, unitDivisor(unitPrice.currency)),
+//             unitPrice.currency
+//           ),
+//           reversal: false,
+//         },
+//       ],
+//       transitions: [
+//         {
+//           createdAt: now,
+//           by: TX_TRANSITION_ACTOR_CUSTOMER,
+//           transition: TRANSITION_REQUEST_PAYMENT,
+//         },
+//       ],
+//     },
+//     booking: {
+//       id: new UUID('estimated-booking'),
+//       type: 'booking',
+//       attributes: {
+//         start: serverDayStart,
+//         end: serverDayEnd,
+//       },
+//     },
+//   };
+
+//   if (numericTotalDiscount) tx.attributes.lineItems.push({
+//     code: LINE_ITEM_DISCOUNT,
+//     lineTotal: new Money(
+//       convertUnitToSubUnit(numericTotalDiscount * -1, unitDivisor(unitPrice.currency)),
+//       unitPrice.currency
+//     ),
+//   });
+
+//   return tx;
+// };
+
+const estimatedTransaction = (bookingStart, bookingEnd, lineItems, userRole) => {
+  const now = new Date();
+
+  const isCustomer = userRole === 'customer';
+
+  const customerLineItems = lineItems.filter(item => item.includeFor.includes('customer'));
+  const providerLineItems = lineItems.filter(item => item.includeFor.includes('provider'));
+
+  const payinTotal = estimatedTotalPrice(customerLineItems);
+  const payoutTotal = estimatedTotalPrice(providerLineItems);
 
   // bookingStart: "Fri Mar 30 2018 12:00:00 GMT-1100 (SST)" aka "Fri Mar 30 2018 23:00:00 GMT+0000 (UTC)"
   // Server normalizes night/day bookings to start from 00:00 UTC aka "Thu Mar 29 2018 13:00:00 GMT-1100 (SST)"
@@ -118,28 +196,16 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, qua
       .toDate()
   );
 
-  let tx = {
+  return {
     id: new UUID('estimated-transaction'),
     type: 'transaction',
     attributes: {
       createdAt: now,
       lastTransitionedAt: now,
       lastTransition: TRANSITION_REQUEST_PAYMENT,
-      payinTotal: totalPrice,
-      payoutTotal: totalPrice,
-      lineItems: [
-        {
-          code: unitType,
-          includeFor: ['customer', 'provider'],
-          unitPrice: unitPrice,
-          quantity: new Decimal(unitCount),
-          lineTotal: new Money(
-            convertUnitToSubUnit(numericLineItemPrice, unitDivisor(unitPrice.currency)),
-            unitPrice.currency
-          ),
-          reversal: false,
-        },
-      ],
+      payinTotal,
+      payoutTotal,
+      lineItems: isCustomer ? customerLineItems : providerLineItems,
       transitions: [
         {
           createdAt: now,
@@ -157,16 +223,6 @@ const estimatedTransaction = (unitType, bookingStart, bookingEnd, unitPrice, qua
       },
     },
   };
-
-  if (numericTotalDiscount) tx.attributes.lineItems.push({
-    code: LINE_ITEM_DISCOUNT,
-    lineTotal: new Money(
-      convertUnitToSubUnit(numericTotalDiscount * -1, unitDivisor(unitPrice.currency)),
-      unitPrice.currency
-    ),
-  });
-
-  return tx;
 };
 
 const EstimatedBreakdownMaybe = props => {
@@ -178,7 +234,7 @@ const EstimatedBreakdownMaybe = props => {
     return null;
   }
 
-  const tx = estimatedTransaction(unitType, startDate, endDate, unitPrice, quantity, discount);
+  // const tx = estimatedTransaction(unitType, startDate, endDate, unitPrice, quantity, discount);
   const dateType = unitType === LINE_ITEM_DAY ? DATE_TYPE_DATE : DATE_TYPE_DATETIME;
 
   const tx =

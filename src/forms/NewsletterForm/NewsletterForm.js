@@ -51,14 +51,14 @@ const NewsletterFormComponent = props => (
           }}
         >
           <div className={css.emailField}>
-            <FieldTextInput
+            {/* <FieldTextInput
               type="email"
               id={formId ? `${formId}.email` : 'email'}
               name="newsletterEmail"
               autoComplete="email"
               placeholder={emailPlaceholder}
               validate={validators.composeValidators(emailRequired, emailValid)}
-            />
+            /> */}
           </div>
           <div className={css.formBtn}>
             <PrimaryButton type="submit" inProgress={submitInProgress} disabled={submitDisabled}>

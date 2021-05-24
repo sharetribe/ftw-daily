@@ -81,12 +81,6 @@
       margin-top: 25px;
       margin-bottom: 31px;
     }
-
-    @media (min-width: 1681px) {
-      font-size: 90px;
-      line-height: 96px;
-      letter-spacing: -2px;
-    }
   }
 
   /* ================ Modal title ================ */

@@ -11,7 +11,7 @@ import config from '../../config';
 
 import { hasParentWithClassName } from './SearchMap.helpers.js';
 // import SearchMapWithMapbox, {
-import SearchMapWithGoogleMap, {
+import SearchMapWithGoogleMaps, {
   LABEL_HANDLE,
   INFO_CARD_HANDLE,
   getMapBounds,
@@ -19,7 +19,7 @@ import SearchMapWithGoogleMap, {
   fitMapToBounds,
   isMapsLibLoaded,
 // } from './SearchMapWithMapbox';
-} from './SearchMapWithGoogleMap';
+} from './SearchMapWithGoogleMaps';
 import ReusableMapContainer from './ReusableMapContainer';
 import css from './SearchMap.module.css';
 
@@ -177,7 +177,7 @@ export class SearchMapComponent extends Component {
         onReattach={forceUpdateHandler}
         messages={messages}
       >
-      <SearchMapWithGoogleMap
+      <SearchMapWithGoogleMaps
         containerElement={
           <div id="search-map-container" className={classes} onClick={this.onMapClicked} />
         }
