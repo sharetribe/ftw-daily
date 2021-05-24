@@ -24,23 +24,11 @@
 .heroContainer {
   display: flex;
   flex-direction: column;
-  min-height: 87.5vh;
-  max-height: 800px;
-  padding: 0;
-
-  @media (--viewportMedium) {
-    min-height: 70vh;
-    max-height: none;
-  }
+  min-height: auto;
+  height: auto;
 
   @media (--viewportLarge) {
-    max-height: 800px;
-    min-height: 600px;
-    height: calc(70vh - var(--topbarHeightDesktop));
-  }
-
-  @media (--viewportLargeWithPaddings) {
-    height: 100vh;
+    min-height: calc(100vh - var(--topbarHeightDesktop));
   }
 }
 
