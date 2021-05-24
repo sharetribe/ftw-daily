@@ -32,8 +32,11 @@ import { fetchCurrentUser } from './ducks/user.duck';
 import routeConfiguration from './routeConfiguration';
 import * as log from './util/log';
 import { LoggingAnalyticsHandler, GoogleAnalyticsHandler, FacebookPixelHandler } from './analytics/handlers';
+import TagManager from 'react-gtm-module';
 
 import './styles/marketplaceDefaults.css';
+
+const GTM_ID = process.env.REACT_APP_GOOGLE_TAG_MANAGER_ID;
 
 const render = (store, shouldHydrate) => {
   // If the server already loaded the auth information, render the app
@@ -58,6 +61,14 @@ const render = (store, shouldHydrate) => {
     });
 };
 
+if (!!GTM_ID && typeof document !== 'undefined'){
+  const tagManagerArgs = {
+    gtmId: GTM_ID,
+  };
+  
+  TagManager.initialize(tagManagerArgs);
+}
+
 const setupAnalyticsHandlers = () => {
   let handlers = [];
 
@@ -66,15 +77,15 @@ const setupAnalyticsHandlers = () => {
     handlers.push(new LoggingAnalyticsHandler());
   }
 
-  // // Add Google Analytics handler if tracker ID is found
-  // if (process.env.REACT_APP_GOOGLE_ANALYTICS_ID) {
-  //   handlers.push(new GoogleAnalyticsHandler(window.ga));
-  // }
+  // Add Google Analytics handler if tracker ID is found
+  if (process.env.REACT_APP_GOOGLE_ANALYTICS_ID) {
+    handlers.push(new GoogleAnalyticsHandler(window.ga));
+  }
 
-  // // Add FB Pixel handler if tracker ID is found
-  // if (process.env.REACT_APP_FACEBOOK_PIXEL_ID) {
-  //   handlers.push(new FacebookPixelHandler(window.fbq));
-  // }
+  // Add FB Pixel handler if tracker ID is found
+  if (process.env.REACT_APP_FACEBOOK_PIXEL_ID) {
+    handlers.push(new FacebookPixelHandler(window.fbq));
+  }
 
   return handlers;
 };

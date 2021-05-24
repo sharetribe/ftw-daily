@@ -50,6 +50,7 @@ export { default as TimeRange } from './TimeRange/TimeRange';
 export { default as ResponsiveImage } from './ResponsiveImage/ResponsiveImage';
 export { default as UserDisplayName } from './UserDisplayName/UserDisplayName';
 export { default as ValidationError } from './ValidationError/ValidationError';
+export { default as GTMWrapper } from './GTMWrapper/GTMWrapper';
 
 /**
  * Composite components

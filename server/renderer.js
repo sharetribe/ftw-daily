@@ -169,7 +169,7 @@ exports.render = function(requestUrl, context, preloadedState, renderApp, webExt
         </noscript>
         `
     : '';
-          sadasdasd
+          
   return template({
     htmlAttributes: head.htmlAttributes.toString(),
     title: head.title.toString(),
@@ -178,12 +178,12 @@ exports.render = function(requestUrl, context, preloadedState, renderApp, webExt
     script: head.script.toString(),
     preloadedStateScript,
     googleAnalyticsScript,
-    facebookPixelScript,
     // googleTagManagerHeadScript,
     ssrStyles: webExtractor.getStyleTags(),
     ssrLinks: webExtractor.getLinkTags(),
     ssrScripts: webExtractor.getScriptTags(),
     body,
+    facebookPixelScript,
     // googleTagManagerAfterBodyScript
   });
 };

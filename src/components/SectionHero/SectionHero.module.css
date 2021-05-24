@@ -173,7 +173,7 @@
 
   animation-delay: 0.8s;
 
-  @media (--viewportLarge) {
+  @media (--viewportMedium) {
     display: block;
     margin-right: 10px;
     margin-bottom: 0;

@@ -1,6 +1,5 @@
 import React from "react";
 import AliceCarousel from "react-alice-carousel";
-import "react-alice-carousel/lib/alice-carousel.css";
 import css from './SectionTestimonials.module.css';
 import {
   testimonialSection,
