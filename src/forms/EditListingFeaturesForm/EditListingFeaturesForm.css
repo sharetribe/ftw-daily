@@ -40,3 +40,8 @@
     margin-top: 100px;
   }
 }
+
+.note {
+  margin-top: 0;
+  margin-bottom: 32px;
+}
