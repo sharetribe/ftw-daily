@@ -2,7 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from '../../util/reactIntl';
-import { LISTING_STATE_DRAFT } from '../../util/types';
+import {
+  DAILY_PRICE,
+  WEEKLY_PRICE,
+  MONTHLY_PRICE,
+  LINE_ITEM_DAY,
+  LINE_ITEM_UNITS,
+  HOURLY_DISCOUNT,
+  DAILY_DISCOUNT,
+  LISTING_STATE_DRAFT
+} from '../../util/types';
 import { ListingLink } from '../../components';
 import { EditListingPricingForm } from '../../forms';
 import { ensureOwnListing } from '../../util/data';
@@ -42,19 +51,67 @@ const EditListingPricingPanel = props => {
     <FormattedMessage id="EditListingPricingPanel.createListingTitle" />
   );
 
+  const initialPrices = listing => {
+    const {publicData} = listing && listing.attributes || {};
+
+    if (!publicData){
+      return null;
+    }
+
+    return [DAILY_PRICE, WEEKLY_PRICE, MONTHLY_PRICE].reduce((acc, p) => {
+      if (!publicData[p]){
+        return acc;
+      }
+
+      const {amount, currency} = publicData[p];
+
+      return {
+        ...acc,
+        [p]: new Money(amount, currency)
+      }
+    }, {})
+  }
+
+  const initialDiscounts = listing => {
+    const {publicData = {}} = listing && listing.attributes || {};
+    const {discount = {}} = publicData;
+
+    return {
+      type: publicData[LINE_ITEM_DAY] ? HOURLY_DISCOUNT : DAILY_DISCOUNT,
+      ...discount
+    }
+  }
+
+  const managePrices = values => {
+    return [DAILY_PRICE, WEEKLY_PRICE, MONTHLY_PRICE].reduce((acc, p) => {
+      const {amount, currency} = values[p] || {};
+
+      return {
+        ...acc,
+        [p]: amount ? {amount, currency} : null
+      }
+    }, {});
+  }
+
   const priceCurrencyValid = price instanceof Money ? price.currency === config.currency : true;
   const form = priceCurrencyValid ? (
     <EditListingPricingForm
       className={css.form}
       initialValues={{
         price,
-        discount: publicData.discount
+        ...initialDiscounts(listing),
+        ...initialPrices(listing)
       }}
       unitType={publicData.unitType}
-      onSubmit={({ price, discount }) => {
+      onSubmit={values => {
+        const { price, discount } = values;
+
         onSubmit({
           publicData: {
-            discount
+            [LINE_ITEM_DAY]: null,
+            [LINE_ITEM_UNITS]: null,
+            discount,
+            ...managePrices(values)
           },
           price
         });

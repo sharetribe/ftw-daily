@@ -348,7 +348,6 @@ export const isPrivileged = transition => {
   );
 };
 
-
 export const TRANSACTION_HOURLY = 'transaction-hourly';
 export const TRANSACTION_DAILY = 'transaction-daily';
 export const TRANSACTION_WEEKLY = 'transaction-weekly';

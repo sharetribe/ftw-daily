@@ -553,3 +553,13 @@ export const DATE_TYPE_DATETIME = 'datetime';
 propTypes.dateType = oneOf([DATE_TYPE_DATE, DATE_TYPE_DATETIME]);
 
 export { propTypes };
+
+export const HOURLY_PRICE = 'price';
+export const DAILY_PRICE = 'pricePerDay';
+export const WEEKLY_PRICE = 'pricePerWeek';
+export const MONTHLY_PRICE = 'pricePerMonth';
+
+export const HOURLY_DISCOUNT = 'hourlyDiscount';
+export const DAILY_DISCOUNT = 'dailyDiscount';
+export const WEEKLY_DISCOUNT = 'weeklyDiscount';
+export const MONTHLY_DISCOUNT = 'monthlyDiscount';

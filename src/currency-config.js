@@ -50,3 +50,4 @@ export const currencyConfiguration = currency => {
         maximumFractionDigits: 2,
       };
 };
+
