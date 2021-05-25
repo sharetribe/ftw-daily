@@ -120,7 +120,7 @@
   position: absolute;
   top: 2px;
   right: 40px;
-  z-index: 999;
+  z-index: 3;
 
   @media (--viewportMedium) {
     top: -5px;
@@ -140,7 +140,7 @@
   position: absolute;
   top: 2px;
   left: 35px;
-  z-index: 999;
+  z-index: 3;
 
   @media (--viewportMedium) {
     top: -5px;

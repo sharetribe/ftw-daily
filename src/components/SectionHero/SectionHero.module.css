@@ -42,13 +42,13 @@
 .heroImgContent {
   flex: 1;
   margin: 24px;
+  display: flex;
+  align-items: center;
+  order: 1;
 
   @media (--viewportLarge) {
     margin: 50px;
-  }
-
-  @media (--viewportLargeWithPaddings) {
-    margin: -58px 50px 50px;
+    order: 2;
   }
 }
 
@@ -91,10 +91,12 @@
   margin-left: 24px;
   margin-right: 24px;
   flex:1;
+  order: 2;
 
   @media (--viewportLarge) {
     margin-left: 7.5vw;
     margin-right: 0;
+    order: 1;
   }
 
   /* Special viewport for adjusting the heroContent's placement */
@@ -143,12 +145,7 @@
 
 .heroButtonsContatiner {
   display: flex;
-  flex-direction: column;
-
-  @media (--viewportMedium) {
-    flex-direction: row;
-    align-items: center;
-  }
+  align-items: center;
 }
 
 .heroButtonPink {
@@ -156,14 +153,17 @@
 
   background-color: var(--marketplaceColor);
   color: var(--matterColorLight);
-  padding: 1em 1em;
+  padding: 1em 0.25em;
   border-radius: 4px;
   text-align: center;
   opacity: 0.5;
   margin-bottom: 5px;
-
+  display: block;
+  margin-right: 10px;
+  margin-bottom: 0;
   max-width: 200px;
-  min-width: 200px;
+  width: 100%;
+
   border: 1px solid #ffabd7;
 
   &:hover {
@@ -172,26 +172,20 @@
   }
 
   animation-delay: 0.8s;
-
-  @media (--viewportMedium) {
-    display: block;
-    margin-right: 10px;
-    margin-bottom: 0;
-  }
 }
 
 .heroButton {
   @apply --SectionHero_animation;
-
+  display: block;
   background-color: var(--matterColorLight);
   color: var(--marketplaceColor);
-  padding: 1em 1em;
+  padding: 1em 0.25em;
   border-radius: 4px;
   border: 1px solid var(--marketplaceColor);
   text-align: center;
   opacity: 0.5;
   max-width: 200px;
-  min-width: 200px;
+  width: 100%;
 
   &:hover {
     background-color: #fff7fb;
@@ -199,10 +193,6 @@
   }
 
   animation-delay: 0.8s;
-
-  @media (--viewportMedium) {
-    display: block;
-  }
 }
 
 .heroButtonPink span, .heroButton span {

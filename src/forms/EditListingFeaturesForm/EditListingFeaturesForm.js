@@ -95,6 +95,10 @@ const EditListingFeaturesFormComponent = props => (
 
           { amenitiesCheckboxGroups }
 
+          <p className={css.note}>
+            <FormattedMessage id ="EditListingFeaturesForm.equipmentProvidedNote"/>
+          </p>
+
           <FieldTextInput
             id="miscAmenities"
             name="miscAmenities"
@@ -103,7 +107,7 @@ const EditListingFeaturesFormComponent = props => (
             label={miscLabel}
             placeholder={miscPlaceholder}
           />
-
+          
           <FieldTextInput
             id="equipmentProvided"
             name="equipmentProvided"
@@ -112,7 +116,6 @@ const EditListingFeaturesFormComponent = props => (
             label={equipmentProvidedLabel}
             placeholder={equipmentProvidedPlaceholder}
           />
-
 
           <Button
             className={css.submitButton}
