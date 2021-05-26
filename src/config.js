@@ -104,7 +104,7 @@ const siteLinkedinPage = 'https://www.linkedin.com/company/hotpatchmakespacework
 
 const siteYoutubePage = 'https://www.youtube.com/channel/UCdPfIbMQFk3vbWZet3uX3XA';
 
-const siteTikTokPage = 'https://www.tiktok.com';
+const siteTikTokPage = 'https://www.tiktok.com/@hotpatch_';
 
 // Facebook counts shares with app or page associated by this id
 // Currently it is unset, but you can read more about fb:app_id from
