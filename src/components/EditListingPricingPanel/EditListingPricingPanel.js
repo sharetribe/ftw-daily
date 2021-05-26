@@ -76,10 +76,10 @@ const EditListingPricingPanel = props => {
     const {publicData = {}} = listing && listing.attributes || {};
     const {discount = {}} = publicData;
 
-    return {
-      type: publicData[LINE_ITEM_DAY] ? HOURLY_DISCOUNT : DAILY_DISCOUNT,
+    return {discount: {
+      type: publicData[LINE_ITEM_DAY] ? DAILY_DISCOUNT : HOURLY_DISCOUNT,
       ...discount
-    }
+    }}
   }
 
   const managePrices = values => {

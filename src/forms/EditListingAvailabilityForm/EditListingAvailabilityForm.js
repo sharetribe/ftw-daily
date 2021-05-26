@@ -60,7 +60,7 @@ export class EditListingAvailabilityFormComponent extends Component {
                 />
               </div>
 
-              <FieldRangeSlider
+              {/* <FieldRangeSlider
                 id="minimumLength"
                 name="minimumLength"
                 label={`Minimum booking length: ${minLengthString}`}
@@ -68,7 +68,7 @@ export class EditListingAvailabilityFormComponent extends Component {
                 max={100}
                 step={1}
                 handles={[1]}
-              />
+              /> */}
 
               <Button
                 className={css.submitButton}
