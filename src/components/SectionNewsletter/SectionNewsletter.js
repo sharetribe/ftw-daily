@@ -10,6 +10,7 @@ import {NewsletterForm } from '../../forms';
 import { signupInProgress, signup } from '../../ducks/Newsletter.duck';
 
 import css from './SectionNewsletter.css';
+import HubspotForm from "react-hubspot-form";
 
 export class SectionNewsletterComponent extends Component {
   constructor(props) {
@@ -69,12 +70,19 @@ export class SectionNewsletterComponent extends Component {
             </p>
           </div>
           <div className={css.formDiv}>
-            <NewsletterForm
-              className={css.form}
-              onSubmit={handleNewsletterSignup}
-              inProgress={this.state.fakeIsLoading}
-              // onOpenTermsOfService={() => this.setState({ tosModalOpen: true })}
+            <HubspotForm
+              portalId={8743306}
+              formId={'bf888011-6e5e-4728-a0ca-6f2cae2a2373'}
+              onSubmit={() => console.log('Submit!')}
+              onReady={(form) => console.log('Form ready!')}
+              loading={<div>Loading...</div>}
             />
+            {/*<NewsletterForm*/}
+            {/*  className={css.form}*/}
+            {/*  onSubmit={handleNewsletterSignup}*/}
+            {/*  inProgress={this.state.fakeIsLoading}*/}
+            {/*  // onOpenTermsOfService={() => this.setState({ tosModalOpen: true })}*/}
+            {/*/>*/}
           </div>
         </div>
       </div>

@@ -200,8 +200,8 @@ export const InboxItem = props => {
   const { customer, provider, listing } = tx;
   const isOrder = type === 'order';
 
-  const { publicData } = listing.attributes || {};
-  const unitType = (publicData && publicData.unitType) || config.fallbackUnitType;
+  const { publicData } = listing.attributes || {};
+  const unitType = (publicData && publicData.unitType) || config.fallbackUnitType;
 
   const otherUser = isOrder ? provider : customer;
   const otherUserDisplayName = <UserDisplayName user={otherUser} intl={intl} />;

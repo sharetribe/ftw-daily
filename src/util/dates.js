@@ -1,5 +1,6 @@
 import jstz from 'jstimezonedetect';
 import moment from 'moment-timezone/builds/moment-timezone-with-data-10-year-range.min';
+import { getTimeZones, rawTimeZones, timeZonesNames } from "@vvo/tzdb";
 
 /**
  * Input names for the DateRangePicker from react-dates.
@@ -97,6 +98,26 @@ export const isValidTimeZone = timeZone => {
 export const getTimeZoneNames = relevantZonesRegExp => {
   const allTimeZones = moment.tz.names();
   return relevantZonesRegExp ? allTimeZones.filter(z => relevantZonesRegExp.test(z)) : allTimeZones;
+};
+
+export const getTimeZoneNamesAndGTM = relevantZonesRegExp => {
+  const allTimeZones = getTimeZones();
+
+  const timeZonesObject = allTimeZones.map(z => {
+    const name = z.name;
+    const offset = z.currentTimeOffsetInMinutes;
+    let offsetString;
+    if(offset < 0) {
+      offsetString = "GTM" + ((z.currentTimeOffsetInMinutes/60).toFixed()).toString();
+    }else {
+      offsetString = "GTM+" + ((z.currentTimeOffsetInMinutes/60).toFixed()).toString();
+    }
+
+    return { name, offsetString }
+  })
+
+  const filteredTimeZoneObject = relevantZonesRegExp ? timeZonesObject.filter(z => relevantZonesRegExp.test(z.name)) : timeZonesObject;
+  return relevantZonesRegExp ? filteredTimeZoneObject.map(z =>  "(" + z.offsetString + ")" + ' ' + z.name) : allTimeZones;
 };
 
 

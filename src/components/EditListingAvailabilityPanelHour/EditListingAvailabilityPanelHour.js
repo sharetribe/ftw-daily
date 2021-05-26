@@ -126,7 +126,7 @@ const createEntryDayGroups = (entries = {}) =>
 // Create initial values
 const createInitialValues = availabilityPlan => {
   const { timezone, entries } = availabilityPlan || {};
-  const tz = timezone || defaultTimeZone();
+  const tz = defaultTimeZone() || timezone;
   return {
     timezone: tz,
     ...createEntryDayGroups(entries),
@@ -429,7 +429,7 @@ const EditListingAvailabilityPanelHour = props => {
             <EditListingAvailabilityExceptionForm
               formId="EditListingAvailabilityExceptionForm"
               onSubmit={saveException}
-              timeZone={availabilityPlan.timezone || 'UTC'}
+              timeZone={availabilityPlan.timezone || 'UTC'}
               availabilityExceptions={sortedAvailabilityExceptions}
               updateInProgress={updateInProgress}
               fetchErrors={errors}

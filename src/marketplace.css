@@ -38,9 +38,7 @@
   /* Full screen Background image located in root-folder/src/assets */
   --backgroundImageHero: {
     /* Gradient direction and overlaying the black color on top of the image for better readability */
-    background:
-      url('../../assets/Hero-Image-Desktop.png');
-    /* Add loading color for the div */
+        /* Add loading color for the div */
     background-color: var(--matterColorLight);
     /* Cover the whole screen with the background image */
     background-size: cover;
@@ -51,8 +49,7 @@
   /* Full screen Background image located in root-folder/src/assets */
   --backgroundImageMobile: {
     /* Gradient direction and overlaying the black color on top of the image for better readability */
-    background:
-      url('../../assets/white-bg.png');
+
     background-color: var(--matterColorLight);
     background-size: cover;
     background-position: center center;

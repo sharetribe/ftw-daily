@@ -199,13 +199,13 @@ export class CheckoutPageComponent extends Component {
 
       // Convert picked date to date that will be converted on the API as
       // a noon of correct year-month-date combo in UTC
-      const bookingStartForAPI = dateFromLocalToAPI(bookingStart);
-      const bookingEndForAPI = dateFromLocalToAPI(bookingEnd);
+      const bookingStartForAPI = bookingStart;
+      const bookingEndForAPI = bookingEnd;
 
       // Fetch speculated transaction for showing price in booking breakdown
       // NOTE: if unit type is line-item/units, quantity needs to be added.
       // The way to pass it to checkout page is through pageData.bookingData
-      const { unitType = config.fallbackUnitType } = listing.attributes.publicData || {};
+      const { unitType = config.fallbackUnitType } = listing.attributes.publicData || {};
 
       fetchSpeculatedTransaction(
         this.customPricingParams({
@@ -516,7 +516,7 @@ export class CheckoutPageComponent extends Component {
   customPricingParams(params) {
     const { bookingStart, bookingEnd, listing, ...rest } = params;
     const { amount: priceAmount, currency } = listing.attributes.price;
-    const { discount, unitType = config.fallbackUnitType } = listing.attributes.publicData || {};
+    const { discount, unitType = config.fallbackUnitType } = listing.attributes.publicData || {};
 
     const isHourly = unitType === LINE_ITEM_UNITS;
     const quantity = isHourly
@@ -537,7 +537,7 @@ export class CheckoutPageComponent extends Component {
       ...rest,
     };
 
-    const { amount: discountPercentage, breakpoint: discountBreakpoint } = discount || {};
+    const { amount: discountPercentage, breakpoint: discountBreakpoint } = discount || {};
     const breakpoint = parseInt(discountBreakpoint);
     const discountBase = (quantity - breakpoint) * priceAmount;
     const hasDiscount = discount && quantity > breakpoint;
@@ -642,7 +642,7 @@ export class CheckoutPageComponent extends Component {
       });
       return <NamedRedirect name="ListingPage" params={params} />;
     }
-    const publicData = currentListing.attributes.publicData || {};
+    const publicData = currentListing.attributes.publicData || {};
     const unitType = publicData.unitType || config.fallbackUnitType;
 
     // Show breakdown only when speculated transaction and booking are loaded

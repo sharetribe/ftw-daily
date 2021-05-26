@@ -57,17 +57,37 @@
 
 .flexContainer {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   width: 100%;
   height: 100%;
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     flex-direction: row;
   }
 }
 
 .heroImgContent {
   flex: 1;
-  margin: 50px;
+  margin: 24px;
+  display: flex;
+  align-items: center;
+  order: 1;
+
+  @media (--viewportLarge) {
+    margin: 50px;
+    order: 2;
+  }
+}
+
+.imgContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 15px;
+  grid-row-gap: 15px;
+}
+
+.image {
+  width: 100%;
+  max-width: 100%;
 }
 
 .emptyMobileDiv {
@@ -97,10 +117,12 @@
   margin-left: 24px;
   margin-right: 24px;
   flex:1;
+  order: 2;
 
-  @media (--viewportMedium) {
+  @media (--viewportLarge) {
     margin-left: 7.5vw;
     margin-right: 0;
+    order: 1;
   }
 
   /* Special viewport for adjusting the heroContent's placement */
@@ -149,7 +171,6 @@
 
 .heroButtonsContatiner {
   display: flex;
-  flex-direction: row;
   align-items: center;
 }
 
@@ -158,12 +179,18 @@
 
   background-color: var(--marketplaceColor);
   color: var(--matterColorLight);
-  padding: 1em 1em;
+  padding: 1em 0.25em;
   border-radius: 4px;
   text-align: center;
   opacity: 0.5;
-  margin-right: 5px;
+  margin-bottom: 5px;
+  display: block;
+  margin-right: 10px;
+  margin-bottom: 0;
   max-width: 200px;
+  width: 100%;
+
+  border: 1px solid #ffabd7;
 
   &:hover {
     background-color: #ffc9e5;
@@ -171,24 +198,20 @@
   }
 
   animation-delay: 0.8s;
-
-  @media (--viewportMedium) {
-    display: block;
-  }
 }
 
 .heroButton {
   @apply --SectionHero_animation;
-
+  display: block;
   background-color: var(--matterColorLight);
   color: var(--marketplaceColor);
-  padding: 1em 1em;
+  padding: 1em 0.25em;
   border-radius: 4px;
   border: 1px solid var(--marketplaceColor);
   text-align: center;
   opacity: 0.5;
-  margin-left: 5px;
   max-width: 200px;
+  width: 100%;
 
   &:hover {
     background-color: #fff7fb;
@@ -196,10 +219,6 @@
   }
 
   animation-delay: 0.8s;
-
-  @media (--viewportMedium) {
-    display: block;
-  }
 }
 
 .heroButtonPink span, .heroButton span {

@@ -33,8 +33,8 @@ const sortSearchByDistance = false;
 // In a way, 'processAlias' defines which transaction process (or processes)
 // this particular web application is able to handle.
 const bookingProcessAliases = [
-  'preauth-custom-pricing-day/release-2',
-  'preauth-custom-pricing-time/release-2',
+  'preauth-custom-pricing-day/release-1',
+  'preauth-custom-pricing-time/release-1',
 ]
 
 // Fallback of the transaction line item code for the main unit type in bookings.
@@ -89,7 +89,7 @@ const streetAddress = '';
 const canonicalRootURL = process.env.REACT_APP_CANONICAL_ROOT_URL;
 
 // Site title is needed in meta tags (bots and social media sharing reads those)
-const siteTitle = 'Hotpatch';
+const siteTitle = 'HotPatch';
 
 // Twitter handle is needed in meta tags (twitter:site). Start it with '@' character
 const siteTwitterHandle = '@hotpatch_';

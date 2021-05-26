@@ -12,7 +12,7 @@ const timeSlotEqualsDay = (timeSlot, day) => {
     // Time slots describe available dates by providing a start and
     // an end date which is the following day. In the single date picker
     // the start date is used to represent available dates.
-    const localStartDate = dateFromAPIToLocalNoon(timeSlot.attributes.start);
+    const localStartDate = timeSlot.attributes.start;
 
     return isSameDay(day, moment(localStartDate));
   } else {
