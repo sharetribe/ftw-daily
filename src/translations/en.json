@@ -221,7 +221,7 @@
   "EditListingFeaturesForm.showListingFailed": "Fetching listing data failed",
   "EditListingFeaturesForm.updateFailed": "Failed to update listing. Please try again.",
   "EditListingFeaturesForm.miscLabel": "Other amenities",
-  "EditListingFeaturesForm.miscPlaceholder": "Anything we have missed? You can write it down here.",
+  "EditListingFeaturesForm.miscPlaceholder": "Enter additional amenities",
   "EditListingFeaturesForm.equipmentProvidedLabel": "Equipment provided",
   "EditListingFeaturesForm.equipmentProvidedPlaceholder": "Enter additional equipment",
   "EditListingFeaturesForm.equipmentProvidedNote": "If there are any other amenities or more equipment you want to let your guest know about, you can write them down here",

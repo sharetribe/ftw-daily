@@ -8,6 +8,9 @@ import {
   IconSocialMediaFacebook,
   IconSocialMediaInstagram,
   IconSocialMediaTwitter,
+  IconSocialMediaYoutube,
+  IconSocialMediaLinkedin,
+  IconSocialMediaTikTok,
   Logo,
   ExternalLink,
   NamedLink,
@@ -21,7 +24,8 @@ const renderSocialMediaLinks = intl => {
     siteInstagramPage,
     siteTwitterHandle,
     siteLinkedinPage,
-    siteYoutubePage
+    siteYoutubePage,
+    siteTikTokPage
    } = config;
 
   const siteTwitterPage = twitterPageURL(siteTwitterHandle);
@@ -31,7 +35,8 @@ const renderSocialMediaLinks = intl => {
   const goToTwitter = intl.formatMessage({ id: 'Footer.goToTwitter' });
   const goToLinkedin = intl.formatMessage({ id: 'Footer.goToLinkedin' });
   const goToYoutube = intl.formatMessage({ id: 'Footer.goToYoutube' });
-
+  const goToTikTok = intl.formatMessage({ id: 'Footer.goToTikTok' });
+  
   const fbLink = siteFacebookPage ? (
     <ExternalLink key="linkToFacebook" href={siteFacebookPage} className={css.icon} title={goToFb}>
       <IconSocialMediaFacebook />
@@ -67,10 +72,10 @@ const renderSocialMediaLinks = intl => {
       className={css.icon}
       title={goToLinkedin}
     >
-      <IconSocialMediaTwitter />
+      <IconSocialMediaLinkedin />
     </ExternalLink>
   ) : null;
-
+  
   const youtubeLink = siteYoutubePage ? (
     <ExternalLink
       key="linkToYoutube"
@@ -78,11 +83,22 @@ const renderSocialMediaLinks = intl => {
       className={css.icon}
       title={goToYoutube}
     >
-      <IconSocialMediaTwitter />
+      <IconSocialMediaYoutube />
     </ExternalLink>
   ) : null;
 
-  return [fbLink, instragramLink, twitterLink, linkedinLink, youtubeLink].filter(v => v != null);
+  const tikTokLink = siteTikTokPage ? (
+    <ExternalLink
+      key="linkToTikTok"
+      href={siteTikTokPage}
+      className={css.icon}
+      title={goToTikTok}
+    >
+      <IconSocialMediaTikTok />
+    </ExternalLink>
+  ) : null;
+
+  return [fbLink, instragramLink, twitterLink, linkedinLink, youtubeLink, tikTokLink].filter(v => v != null);
 };
 
 const Footer = props => {
