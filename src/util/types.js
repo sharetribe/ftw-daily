@@ -174,8 +174,8 @@ const listingAttributes = shape({
   publicData: object,
 });
 
-const AVAILABILITY_PLAN_DAY = 'availability-plan/day';
-const AVAILABILITY_PLAN_TIME = 'availability-plan/time';
+export const AVAILABILITY_PLAN_DAY = 'availability-plan/day';
+export const AVAILABILITY_PLAN_TIME = 'availability-plan/time';
 export const DAYS_OF_WEEK = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 
 const availabilityPlan = shape({

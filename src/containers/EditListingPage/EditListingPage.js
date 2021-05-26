@@ -28,7 +28,7 @@ import { TopbarContainer } from '../../containers';
 import {
   requestFetchBookings,
   requestFetchAvailabilityExceptions,
-  requestCreateAvailabilityException,
+  requestAddAvailabilityException,
   requestDeleteAvailabilityException,
   requestCreateListingDraft,
   requestPublishListingDraft,
@@ -337,9 +337,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   onUpdateListing: (tab, values) => dispatch(requestUpdateListing(tab, values)),
   onFetchBookings: params => dispatch(requestFetchBookings(params)),
-  onFetchAvailabilityExceptions: (params, availabilityPlan) => dispatch(requestFetchAvailabilityExceptions(params, availabilityPlan)),
-  onCreateAvailabilityException: (params, availabilityPlan) => dispatch(requestCreateAvailabilityException(params, availabilityPlan)),
-  onDeleteAvailabilityException: (params, availabilityPlan) => dispatch(requestDeleteAvailabilityException(params, availabilityPlan)),
+  onFetchAvailabilityExceptions: params => dispatch(requestFetchAvailabilityExceptions(params)),
+  onCreateAvailabilityException: params => dispatch(requestAddAvailabilityException(params)),
+  onDeleteAvailabilityException: params => dispatch(requestDeleteAvailabilityException(params)),
   onCreateListingDraft: values => dispatch(requestCreateListingDraft(values)),
   onPublishListingDraft: listingId => dispatch(requestPublishListingDraft(listingId)),
   onImageUpload: data => dispatch(requestImageUpload(data)),
