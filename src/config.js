@@ -92,13 +92,19 @@ const canonicalRootURL = process.env.REACT_APP_CANONICAL_ROOT_URL;
 const siteTitle = 'HotPatch';
 
 // Twitter handle is needed in meta tags (twitter:site). Start it with '@' character
-const siteTwitterHandle = '@hotpatch_';
+const siteTwitterHandle = '@HotPatch_';
 
 // Instagram page is used in SEO schema (http://schema.org/Organization)
 const siteInstagramPage = 'https://www.instagram.com/hotpatch_/';
 
 // Facebook page is used in SEO schema (http://schema.org/Organization)
 const siteFacebookPage = 'https://www.facebook.com/hotpatchmakespacework';
+
+const siteLinkedinPage = 'https://www.linkedin.com/company/hotpatchmakespacework/';
+
+const siteYoutubePage = 'https://www.youtube.com/channel/UCdPfIbMQFk3vbWZet3uX3XA';
+
+const siteTikTokPage = 'https://www.tiktok.com';
 
 // Facebook counts shares with app or page associated by this id
 // Currently it is unset, but you can read more about fb:app_id from
@@ -218,6 +224,9 @@ const config = {
   siteFacebookPage,
   siteInstagramPage,
   siteTwitterHandle,
+  siteLinkedinPage,
+  siteYoutubePage,
+  siteTikTokPage,
   facebookAppId,
   sentryDsn,
   usingSSL,

@@ -5,9 +5,14 @@
 
   margin-top: 0;
   max-width: 735px;
+  text-align: center;
 
   @media (--viewportMedium) {
     margin-bottom: 23px;
+  }
+
+  @media(--viewportLarge){
+    text-align: left;
   }
 }
 

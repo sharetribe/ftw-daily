@@ -66,10 +66,25 @@
 
 .icon {
   display: inline-block;
-  width: 20px;
+  width: 24px;
   height: 24px;
   margin-right: 12px;
   text-align: center;
+
+  & > svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  @media (--viewportMedium) {
+    margin-right: 6px;
+    width: 16px;
+
+    & > svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
 }
 
 /* Footer links */
