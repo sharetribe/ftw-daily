@@ -36,14 +36,16 @@ const planValid = (plan, seats) => {
   return plan &&
         type === AVAILABILITY_PLAN_TIME &&
         entries && entries.every(({startTime, endTime, seats: entrieSeats}) => (
-          startTime === START_TIME && endTime === END_TIME && entrieSeats === seats));
+          startTime === START_TIME && endTime === START_TIME && entrieSeats === seats));
 }
 
-const preparePlan = plan => {
+const preparePlan = (plan, days) => {
   const { entries, ...rest } = plan;
   return {
     ...rest,
-    entries: entries.map(({endTime, ...rest}) => ({...rest, endTime: START_TIME}))
+    entries: entries
+              .filter(({dayOfWeek}) => days.includes(dayOfWeek))
+              .map(({endTime, ...rest}) => ({...rest, endTime: START_TIME}))
   }
 }
 
@@ -77,6 +79,10 @@ const EditListingAvailabilityPanel = props => {
   const availabilityPlan = planValid(currentAvailabilityPlan, numSeats) ? currentAvailabilityPlan : createDefaultPlan(numSeats);
   // const minimumLength = [publicData.minimumLength] || [1];
 
+  const getDaysAvailability = availabilityPlan => {
+    return availabilityPlan.entries.map(({dayOfWeek}) => dayOfWeek)
+  }
+
   return (
     <div className={classes}>
       <h1 className={css.title}>
@@ -94,18 +100,20 @@ const EditListingAvailabilityPanel = props => {
         listingId={currentListing.id}
         initialValues={{
           availabilityPlan,
-          // minimumLength
+          daysAvailability: getDaysAvailability(availabilityPlan)
         }}
         availability={availability}
         availabilityPlan={availabilityPlan}
         onSubmit={values => {
+          const {daysAvailability} = values;
           // We save the default availability plan
           // I.e. this listing is available every night.
           // Exceptions are handled with live edit through a calendar,
           // which is visible on this panel.
           // const minimumLength = values.minimumLength[0]
+
           onSubmit({
-            availabilityPlan: preparePlan(availabilityPlan), 
+            availabilityPlan: preparePlan(availabilityPlan, daysAvailability), 
             // publicData: { minimumLength } 
           });
         }}

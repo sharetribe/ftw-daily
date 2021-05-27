@@ -5,8 +5,11 @@ import { Form as FinalForm } from 'react-final-form';
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
-import { Form, Button, FieldRangeSlider } from '../../components';
-
+import arrayMutators from 'final-form-arrays';
+import { Form, Button, FieldRangeSlider, FieldCheckboxGroup } from '../../components';
+import {
+  DAYS_OF_WEEK
+} from '../../util/types';
 import ManageAvailabilityCalendar from './ManageAvailabilityCalendar';
 import css from './EditListingAvailabilityForm.module.css';
 
@@ -15,6 +18,7 @@ export class EditListingAvailabilityFormComponent extends Component {
     return (
       <FinalForm
         {...this.props}
+        mutators={{ ...arrayMutators }}
         render={formRenderProps => {
           const {
             className,
@@ -49,9 +53,23 @@ export class EditListingAvailabilityFormComponent extends Component {
           const minLength = Array.isArray(values.minimumLength) ? values.minimumLength[0] : 1;
           const minLengthString = minLength > 1 ? `${minLength} days` : '1 day';
 
+          const daysOptions = DAYS_OF_WEEK.map(key => ({key, label: key.slice(0, 1).toUpperCase() + key.slice(1)}))
+
           return (
             <Form className={classes} onSubmit={handleSubmit}>
               {errorMessage}
+
+              <div className={css.weekdaysWrapper}>
+                <FieldCheckboxGroup
+                  label={'Daily availability'}
+                  id="daysAvailability"
+                  name="daysAvailability"
+                  className={css.daysSelectorRoot}
+                  options={daysOptions}
+                />
+              </div>
+
+
               <div className={css.calendarWrapper}>
                 <ManageAvailabilityCalendar
                   availability={availability}

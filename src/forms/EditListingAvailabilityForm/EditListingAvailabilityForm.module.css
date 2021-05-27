@@ -55,3 +55,17 @@
     margin-top: 86px;
   }
 }
+
+.weekdaysWrapper {
+  margin-bottom: 32px;
+}
+
+.daysSelectorRoot {
+  & > ul {
+    display: flex;
+  }
+
+  & li {
+    padding-right: 20px;
+  }
+}
