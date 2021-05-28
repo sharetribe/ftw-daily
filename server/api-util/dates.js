@@ -40,3 +40,5 @@ exports.daysBetween = (startDate, endDate) => {
   }
   return days;
 };
+
+exports.hoursBeetwen = (startDate, endDate) => moment(endDate).diff(moment(startDate), 'hours', true)

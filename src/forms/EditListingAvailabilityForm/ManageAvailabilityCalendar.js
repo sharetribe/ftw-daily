@@ -268,9 +268,11 @@ class ManageAvailabilityCalendar extends Component {
     const { start, end } = dateStartAndEndInUTC(date);
 
     const planEntries = ensureDayAvailabilityPlan(availabilityPlan).entries;
-    const seatsFromPlan = planEntries.find(
+
+    const availableDay = planEntries.find(
       weekDayEntry => weekDayEntry.dayOfWeek === DAYS_OF_WEEK[date.isoWeekday() - 1]
-    ).seats;
+    );
+    const seatsFromPlan = availableDay && availableDay.seats || 0;
 
     const currentException = findException(exceptions, date);
     const draftException = makeDraftException(exceptions, start, end, seatsFromPlan);
@@ -313,7 +315,7 @@ class ManageAvailabilityCalendar extends Component {
   onDateChange(date) {
     this.setState({ date });
 
-    const { availabilityPlan, availability } = this.props;
+    const { availabilityPlan, availability, seats } = this.props;
     const calendar = availability.calendar;
     // This component is for day/night based processes. If time-based process is used,
     // you might want to deal with local dates using monthIdString instead of monthIdStringInUTC.

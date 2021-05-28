@@ -9,7 +9,7 @@ import { propTypes, LISTING_STATE_CLOSED, LINE_ITEM_UNITS, LINE_ITEM_DAY } from 
 import { formatMoney } from '../../util/currency';
 import { parse, stringify } from '../../util/urlHelpers';
 import config from '../../config';
-import { ModalInMobile, Button } from '../../components';
+import { ModalInMobile, Button, BookingTypes } from '../../components';
 import { BookingDatesForm, BookingTimeForm } from '../../forms';
 
 import css from './BookingPanel.module.css';
@@ -73,6 +73,7 @@ const BookingPanel = props => {
     lineItems,
     fetchLineItemsInProgress,
     fetchLineItemsError,
+    toggleBookingType
   } = props;
 
   const {
@@ -143,6 +144,12 @@ const BookingPanel = props => {
           {subTitleText ? <div className={css.bookingHelp}>{subTitleText}</div> : null}
         </div>
 
+        <BookingTypes
+          intl={intl}
+          listing={listing}
+          onChange={toggleBookingType}
+        />
+
         {showBookingDatesForm ? (
           <BookingDatesForm
             className={css.bookingForm}
@@ -179,6 +186,10 @@ const BookingPanel = props => {
             startDatePlaceholder={intl.formatDate(TODAY, dateFormattingOptions)}
             endDatePlaceholder={intl.formatDate(TODAY, dateFormattingOptions)}
             timeZone={timeZone}
+            onFetchTransactionLineItems={onFetchTransactionLineItems}
+            lineItems={lineItems}
+            fetchLineItemsInProgress={fetchLineItemsInProgress}
+            fetchLineItemsError={fetchLineItemsError}
           />
         ) : null}
 

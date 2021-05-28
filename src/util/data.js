@@ -1,6 +1,15 @@
 import isArray from 'lodash/isArray';
 import reduce from 'lodash/reduce';
 import { sanitizeEntity } from './sanitize';
+import { getDefaultTimeZoneOnBrowser } from './dates';
+import { 
+  AVAILABILITY_PLAN_TIME,
+  DAYS_OF_WEEK,
+  HOURLY_PRICE,
+  DAILY_PRICE,
+  WEEKLY_PRICE,
+  MONTHLY_PRICE,
+} from './types';
 
 /**
  * Combine the given relationships objects
@@ -386,3 +395,36 @@ export const humanizeLineItemCode = code => {
 
   return lowercase.charAt(0).toUpperCase() + lowercase.slice(1);
 };
+
+export const AVAILABILITY_DEFAULT_START = '00:00';
+export const AVAILABILITY_DEFAULT_END = '24:00';
+
+const defaultTimeZone = () =>
+  typeof window !== 'undefined' ? getDefaultTimeZoneOnBrowser() : 'Etc/UTC';
+
+export const createDefaultPlan = (seats = 1) => {
+  return {
+    type: AVAILABILITY_PLAN_TIME,
+    timezone: defaultTimeZone(),
+    entries: DAYS_OF_WEEK.map(dayOfWeek => ({
+      dayOfWeek, startTime: AVAILABILITY_DEFAULT_START, endTime: AVAILABILITY_DEFAULT_END, seats
+    }))
+  }
+}
+
+export const getAvailablePrices = listing => {
+  const additionalPrices = [
+    DAILY_PRICE,
+    WEEKLY_PRICE,
+    MONTHLY_PRICE,
+  ];
+
+  const {publicData = {}, price} = listing && listing.attributes || {};
+
+  return [
+    {key: HOURLY_PRICE, value: price},
+    ...additionalPrices
+      .filter(key => !publicData[key])
+      .map(key => ({key, value: publicData[key]}))
+  ];
+}

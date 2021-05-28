@@ -207,25 +207,25 @@ export class CheckoutPageComponent extends Component {
       // Fetch speculated transaction for showing price in booking breakdown
       // NOTE: if unit type is line-item/units, quantity needs to be added.
       // The way to pass it to checkout page is through pageData.bookingData
-      const { unitType = config.fallbackUnitType } = listing.attributes.publicData || {};
 
-      fetchSpeculatedTransaction(
-        this.customPricingParams({
-          listing,
-          bookingStart: bookingStartForAPI,
-          bookingEnd: bookingEndForAPI,
-        }),
-        unitType
-      );
-      
       // fetchSpeculatedTransaction(
-      //   {
-      //     listingId,
+      //   this.customPricingParams({
+      //     listing,
       //     bookingStart: bookingStartForAPI,
       //     bookingEnd: bookingEndForAPI,
-      //   },
-      //   transactionId
+      //   }),
+      //   unitType
       // );
+      
+      fetchSpeculatedTransaction(
+        {
+          listingId,
+          bookingStart: bookingStartForAPI,
+          bookingEnd: bookingEndForAPI,
+          type: pageData.bookingData.bookingType
+        },
+        transactionId
+      );
     }
 
     this.setState({ pageData: pageData || {}, dataLoaded: true });
@@ -404,12 +404,21 @@ export class CheckoutPageComponent extends Component {
         ? { setupPaymentMethodForSaving: true }
         : {};
 
-    const orderParams = this.customPricingParams({
-      listing: pageData.listing,
+    // const orderParams = this.customPricingParams({
+    //   listing: pageData.listing,
+    //   bookingStart: tx.booking.attributes.start,
+    //   bookingEnd: tx.booking.attributes.end,
+    //   ...optionalPaymentParams,
+    // });
+
+    const orderParams = {
+      listingId: pageData.listing.id,
       bookingStart: tx.booking.attributes.start,
       bookingEnd: tx.booking.attributes.end,
+      quantity: pageData.bookingData ? pageData.bookingData.quantity : null,
+      type: pageData.bookingData.bookingType,
       ...optionalPaymentParams,
-    });
+    };
 
     return handlePaymentIntentCreation(orderParams);
   }

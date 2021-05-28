@@ -15,9 +15,11 @@ import css from './EditListingAvailabilityForm.module.css';
 
 export class EditListingAvailabilityFormComponent extends Component {
   render() {
+    const { seats, ...rest } = this.props;
+
     return (
       <FinalForm
-        {...this.props}
+        {...rest}
         mutators={{ ...arrayMutators }}
         render={formRenderProps => {
           const {
@@ -75,6 +77,7 @@ export class EditListingAvailabilityFormComponent extends Component {
                   availability={availability}
                   availabilityPlan={availabilityPlan}
                   listingId={listingId}
+                  seats={seats}
                 />
               </div>
 

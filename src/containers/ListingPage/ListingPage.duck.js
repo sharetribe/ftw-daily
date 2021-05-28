@@ -375,11 +375,21 @@ const fetchMonthlyTimeSlots = (dispatch, listing) => {
   return Promise.all([]);
 };
 
+export const fetchTimeslots = (listing, isHourly = true) => (dispatch, getState, sdk) => {
+  if (isHourly) {
+    fetchMonthlyTimeSlots(dispatch, listing);
+    return;
+  }
+  
+  const listingId = listing && listing.id || null;
+
+  dispatch(fetchTimeSlotsDay(listingId))
+}
+
 export const sendEnquiry = (listingId, message, unitType) => (dispatch, getState, sdk) => {
   dispatch(sendEnquiryRequest());
 
-  const aliasIndex = unitType === LINE_ITEM_UNITS ? 1 : 0;
-  const processAlias = config.bookingProcessAliases[aliasIndex];
+  const processAlias = config.bookingProcessAlias;
 
   const bodyParams = {
     transition: TRANSITION_ENQUIRE,
@@ -436,17 +446,7 @@ export const loadData = (params, search) => dispatch => {
       if (responses[0] && responses[0].data && responses[0].data.data) {
         const listing = responses[0].data.data;
 
-        const { unitType } = listing.attributes.publicData || {};
-
-        if (unitType === LINE_ITEM_UNITS) {
-          // Fetch timeSlots.
-          // This can happen parallel to loadData.
-          // We are not interested to return them from loadData call.
-          fetchMonthlyTimeSlots(dispatch, listing);
-        }
-        if (unitType === LINE_ITEM_DAY) {
-          dispatch(fetchTimeSlotsDay(listingId))
-        }
+        dispatch(fetchTimeslots(listing));
       }
       return responses;
     }

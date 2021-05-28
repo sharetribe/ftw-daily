@@ -32,10 +32,8 @@ const sortSearchByDistance = false;
 //
 // In a way, 'processAlias' defines which transaction process (or processes)
 // this particular web application is able to handle.
-const bookingProcessAliases = [
-  'preauth-custom-pricing-day/release-1',
-  'preauth-custom-pricing-time/release-1',
-]
+const bookingProcessAlias = "preauth-hourly-process/release-1";
+
 
 // Fallback of the transaction line item code for the main unit type in bookings.
 //
@@ -43,7 +41,7 @@ const bookingProcessAliases = [
 //
 // Note: translations will use different translation keys for night, day or unit
 // depending on the value chosen.
-const fallbackUnitType = 'line-item/day';
+const fallbackUnitType = 'line-item/units';
 
 // Should the application fetch available time slots (currently defined as
 // start and end dates) to be shown on listing page.
@@ -194,7 +192,7 @@ const config = {
   env,
   dev,
   locale,
-  bookingProcessAliases,
+  bookingProcessAlias,
   fallbackUnitType,
   enableAvailability,
   dayCountAvailableForBooking,

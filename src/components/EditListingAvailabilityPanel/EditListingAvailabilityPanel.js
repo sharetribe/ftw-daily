@@ -2,33 +2,19 @@ import React from 'react';
 import { bool, func, object, shape, string } from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from '../../util/reactIntl';
-import { ensureOwnListing } from '../../util/data';
+import { 
+  ensureOwnListing,
+  AVAILABILITY_DEFAULT_START,
+  createDefaultPlan
+} from '../../util/data';
 import { 
   LISTING_STATE_DRAFT,
   AVAILABILITY_PLAN_TIME,
-  DAYS_OF_WEEK
 } from '../../util/types';
 import { ListingLink } from '..';
 import { EditListingAvailabilityForm } from '../../forms';
-import { getDefaultTimeZoneOnBrowser } from '../../util/dates';
 
 import css from './EditListingAvailabilityPanel.module.css';
-
-const START_TIME = '00:00';
-const END_TIME = '24:00';
-
-const defaultTimeZone = () =>
-  typeof window !== 'undefined' ? getDefaultTimeZoneOnBrowser() : 'Etc/UTC';
-
-const createDefaultPlan = (seats = 1) => {
-  return {
-    type: AVAILABILITY_PLAN_TIME,
-    timezone: defaultTimeZone(),
-    entries: DAYS_OF_WEEK.map(dayOfWeek => ({
-      dayOfWeek, startTime: START_TIME, endTime: END_TIME, seats
-    }))
-  }
-}
 
 const planValid = (plan, seats) => {
   const {type, entries} = plan || {}
@@ -36,7 +22,7 @@ const planValid = (plan, seats) => {
   return plan &&
         type === AVAILABILITY_PLAN_TIME &&
         entries && entries.every(({startTime, endTime, seats: entrieSeats}) => (
-          startTime === START_TIME && endTime === START_TIME && entrieSeats === seats));
+          startTime === AVAILABILITY_DEFAULT_START && endTime === AVAILABILITY_DEFAULT_START && entrieSeats === seats));
 }
 
 const preparePlan = (plan, days) => {
@@ -45,7 +31,7 @@ const preparePlan = (plan, days) => {
     ...rest,
     entries: entries
               .filter(({dayOfWeek}) => days.includes(dayOfWeek))
-              .map(({endTime, ...rest}) => ({...rest, endTime: START_TIME}))
+              .map(({endTime, ...rest}) => ({...rest, endTime: AVAILABILITY_DEFAULT_START}))
   }
 }
 
@@ -111,9 +97,8 @@ const EditListingAvailabilityPanel = props => {
           // Exceptions are handled with live edit through a calendar,
           // which is visible on this panel.
           // const minimumLength = values.minimumLength[0]
-
           onSubmit({
-            availabilityPlan: preparePlan(availabilityPlan, daysAvailability), 
+            availabilityPlan: preparePlan(createDefaultPlan(numSeats), daysAvailability), 
             // publicData: { minimumLength } 
           });
         }}
@@ -124,6 +109,7 @@ const EditListingAvailabilityPanel = props => {
         updated={panelUpdated}
         updateError={errors.updateListingError}
         updateInProgress={updateInProgress}
+        seats={numSeats}
       />
     </div>
   );

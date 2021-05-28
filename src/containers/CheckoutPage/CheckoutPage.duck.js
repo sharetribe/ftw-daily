@@ -162,24 +162,21 @@ export const stripeCustomerError = e => ({
 
 /* ================ Thunks ================ */
 
-export const initiateOrder = (orderParams, transactionId, unitType) => (dispatch, getState, sdk) => {
+export const initiateOrder = (orderParams, transactionId) => (dispatch, getState, sdk) => {
   dispatch(initiateOrderRequest());
 
-  const aliasIndex = unitType === LINE_ITEM_UNITS ? 1 : 0;
-  const processAlias = config.bookingProcessAliases[aliasIndex];
+  const processAlias = config.bookingProcessAlias;
 
-  // const bodyParams = transactionId
-  // If we already have a transaction ID, we should transition, not
-  // initiate.
-  // const isTransition = !!transactionId;
-  // const transition = isTransition
-  //   ? TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY
-  //   : TRANSITION_REQUEST_PAYMENT;
-  // const isPrivilegedTransition = isPrivileged(transition);
+  const isTransition = !!transactionId;
+  const transition = isTransition
+    ? TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY
+    : TRANSITION_REQUEST_PAYMENT;
+  const isPrivilegedTransition = isPrivileged(transition);
 
   const bookingData = {
     startDate: orderParams.bookingStart,
     endDate: orderParams.bookingEnd,
+    type: orderParams.type
   };
 
   const bodyParams = isTransition
@@ -305,7 +302,7 @@ export const sendMessage = params => (dispatch, getState, sdk) => {
  * pricing info for the booking breakdown to get a proper estimate for
  * the price with the chosen information.
  */
-export const speculateTransaction = (orderParams, unitType) => (dispatch, getState, sdk) => {
+export const speculateTransaction = (orderParams, transactionId) => (dispatch, getState, sdk) => {
   dispatch(speculateTransactionRequest());
 
   const isTransition = !!transactionId;
@@ -317,10 +314,10 @@ export const speculateTransaction = (orderParams, unitType) => (dispatch, getSta
   const bookingData = {
     startDate: orderParams.bookingStart,
     endDate: orderParams.bookingEnd,
+    type: orderParams.type
   };
 
-  const aliasIndex = unitType === LINE_ITEM_UNITS ? 1 : 0;
-  const processAlias = config.bookingProcessAliases[aliasIndex];
+  const processAlias = config.bookingProcessAlias;
 
   const params = {
     ...orderParams,

@@ -1,11 +1,16 @@
-const { calculateQuantityFromDates, calculateTotalFromLineItems } = require('./lineItemHelpers');
+const {
+  calculateQuantityFromDates,
+  calculateQuantityFromHours,
+  calculateTotalFromLineItems
+} = require('./lineItemHelpers');
 const { types } = require('sharetribe-flex-sdk');
 const { Money } = types;
 
 // This bookingUnitType needs to be one of the following:
 // line-item/night, line-item/day or line-item/units
-const bookingUnitType = 'line-item/night';
-const PROVIDER_COMMISSION_PERCENTAGE = -10;
+const bookingUnitType = 'line-item/units';
+const CUSTOMER_COMMISSION_PERCENTAGE = 5;
+const PROVIDER_COMMISSION_PERCENTAGE = -5;
 
 /** Returns collection of lineItems (max 50)
  *
@@ -28,9 +33,26 @@ const PROVIDER_COMMISSION_PERCENTAGE = -10;
  * @returns {Array} lineItems
  */
 exports.transactionLineItems = (listing, bookingData) => {
-  const unitPrice = listing.attributes.price;
-  const { startDate, endDate } = bookingData;
+  let unitPrice;
+  let quantity;
+  
+  const { startDate, endDate, type } = bookingData;
 
+  if (type === 'price'){
+    unitPrice = listing.attributes.price;
+    quantity = calculateQuantityFromHours(startDate, endDate);
+  } else {
+    const {amount, currency} = listing &&
+                               listing.attributes &&
+                               listing.attributes.publicData &&
+                               listing.attributes.publicData[type] || {};
+    if (!amount) {
+      throw new Error(type + " price isn't provided")
+    }
+    unitPrice = new Money(amount, currency);
+    quantity = calculateQuantityFromDates(startDate, endDate, bookingUnitType);
+  }
+  
   /**
    * If you want to use pre-defined component and translations for printing the lineItems base price for booking,
    * you should use one of the codes:
@@ -44,7 +66,7 @@ exports.transactionLineItems = (listing, bookingData) => {
   const booking = {
     code: bookingUnitType,
     unitPrice,
-    quantity: calculateQuantityFromDates(startDate, endDate, bookingUnitType),
+    quantity,
     includeFor: ['customer', 'provider'],
   };
 
@@ -55,7 +77,22 @@ exports.transactionLineItems = (listing, bookingData) => {
     includeFor: ['provider'],
   };
 
-  const lineItems = [booking, providerCommission];
+  const customerCommission = {
+    code: 'line-item/customer-commission',
+    unitPrice: calculateTotalFromLineItems([booking]),
+    percentage: CUSTOMER_COMMISSION_PERCENTAGE,
+    includeFor: ['customer'],
+  };
+
+  // const discount = {
+  //   code: 'line-item/discount',
+  //   unitPrice: calculateTotalFromLineItems([booking]),
+  //   percentage: calcedPerc,
+  //   includeFor: ['customer', 'provider'],
+  // }
+
+
+  const lineItems = [booking, providerCommission, customerCommission];
 
   return lineItems;
 };
