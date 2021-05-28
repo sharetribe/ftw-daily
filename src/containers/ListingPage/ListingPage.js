@@ -94,11 +94,17 @@ export class ListingPageComponent extends Component {
       pageClassNames: [],
       imageCarouselOpen: false,
       enquiryModalOpen: enquiryModalOpenForListingId === params.id,
+      bookingType: null
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onContactUser = this.onContactUser.bind(this);
     this.onSubmitEnquiry = this.onSubmitEnquiry.bind(this);
+    this.toggleBookingType = this.toggleBookingType.bind(this);
+  }
+
+  toggleBookingType(bookingType){
+    this.setState({bookingType});
   }
 
   handleSubmit(values) {
@@ -109,36 +115,30 @@ export class ListingPageComponent extends Component {
       callSetInitialValues,
       onInitializeCardPaymentData,
     } = this.props;
+    const {bookingType} = this.state;
     const listingId = new UUID(params.id);
     const listing = getListing(listingId);
 
-    let initialValues = {
+    const { bookingStartTime, bookingEndTime, ...restOfValues } = values;
+    const bookingStart = timestampToDate(bookingStartTime);
+    const bookingEnd = timestampToDate(bookingEndTime);
+
+    const bookingData = {
+      quantity: calculateQuantityFromHours(bookingStart, bookingEnd),
+      bookingType,
+      ...restOfValues,
+    };
+
+    const initialValues = {
       listing,
-      bookingData: null,
+      bookingData,
       bookingDates: {
-        bookingStart: null,
-        bookingEnd: null
+        bookingStart,
+        bookingEnd,
       },
       confirmPaymentError: null,
     };
 
-    const { bookingDates, bookingStartTime, bookingEndTime, ...bookingData } = values;
-
-    if (bookingDates) {
-      initialValues.bookingDates.bookingStart = bookingDates.startDate;
-      initialValues.bookingDates.bookingEnd = bookingDates.endDate;
-      initialValues.bookingData = bookingData;
-    } else {
-      initialValues.bookingDates.bookingStart = timestampToDate(bookingStartTime);
-      initialValues.bookingDates.bookingEnd = timestampToDate(bookingEndTime);
-      initialValues.bookingData = {
-        quantity: calculateQuantityFromHours(
-          timestampToDate(bookingStartTime),
-          timestampToDate(bookingEndTime)
-        ),
-        ...bookingData,
-      };
-    }
     const saveToSessionStorage = !this.props.currentUser;
 
     const routes = routeConfiguration();
@@ -528,6 +528,7 @@ export class ListingPageComponent extends Component {
                   lineItems={lineItems}
                   fetchLineItemsInProgress={fetchLineItemsInProgress}
                   fetchLineItemsError={fetchLineItemsError}
+                  toggleBookingType={this.toggleBookingType}
                 />
               </div>
             </div>
