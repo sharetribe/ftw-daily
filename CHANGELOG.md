@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [fix] searchMode (has_all/has_any) disappeared, when search-by-moving-the-map was used.
+  [#1443](https://github.com/sharetribe/ftw-daily/pull/1443)
+
 ## [v8.1.1] 2021-04-20
 
 - [change] Update jose to v3.11.4 [#1433](https://github.com/sharetribe/ftw-daily/pull/1433)
