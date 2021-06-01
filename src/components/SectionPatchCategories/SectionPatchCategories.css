@@ -2,9 +2,7 @@
 
 .title {
   @apply --marketplaceH1FontStyles;
-
   margin-top: 0;
-  max-width: 735px;
   text-align: center;
 
   @media (--viewportMedium) {
@@ -13,6 +11,7 @@
 
   @media(--viewportLarge){
     text-align: left;
+    max-width: 735px;
   }
 }
 
