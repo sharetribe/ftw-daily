@@ -146,7 +146,7 @@ export const EditListingPricingFormComponent = props => (
             <FieldTextInput
               id="discount.amount"
               name="discount.amount"
-              className={css.priceInput}
+              className={classNames(css.priceInput, css.inputNumber)}
               label={intl.formatMessage({ id: 'EditListingPricingForm.discountAmountMessage' })}
               placeholder={intl.formatMessage({ id: 'EditListingPricingForm.discountAmountPlaceholder' })}
               type='number'
@@ -159,7 +159,7 @@ export const EditListingPricingFormComponent = props => (
             <FieldTextInput
               id="discount.breakpoint"
               name="discount.breakpoint"
-              className={css.priceInput}
+              className={classNames(css.priceInput, css.inputNumber)}
               label={intl.formatMessage({ id: 'EditListingPricingForm.discountBreakpointMessage' }, { unitType: intl.formatMessage({ id: translationKeyUnitType }) })}
               placeholder={intl.formatMessage({ id: 'EditListingPricingForm.discountBreakpointPlaceholder' })}
               type='number'
