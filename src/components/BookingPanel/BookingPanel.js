@@ -5,7 +5,16 @@ import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
 import { arrayOf, array, bool, func, object, node, oneOfType, shape, string } from 'prop-types';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
-import { propTypes, LISTING_STATE_CLOSED, LINE_ITEM_UNITS, LINE_ITEM_DAY } from '../../util/types';
+import {
+  propTypes,
+  LISTING_STATE_CLOSED,
+  LINE_ITEM_UNITS,
+  LINE_ITEM_DAY,
+  HOURLY_PRICE,
+  DAILY_PRICE,
+  WEEKLY_PRICE,
+  MONTHLY_PRICE,
+} from '../../util/types';
 import { formatMoney } from '../../util/currency';
 import { parse, stringify } from '../../util/urlHelpers';
 import config from '../../config';
@@ -52,6 +61,7 @@ const dateFormattingOptions = { month: 'short', day: 'numeric', weekday: 'short'
 
 const BookingPanel = props => {
   const {
+    unitType,
     rootClassName,
     className,
     titleClassName,
@@ -73,6 +83,7 @@ const BookingPanel = props => {
     lineItems,
     fetchLineItemsInProgress,
     fetchLineItemsError,
+    bookingType,
     toggleBookingType
   } = props;
 
@@ -92,8 +103,9 @@ const BookingPanel = props => {
   const isBook = !!parse(location.search).book;
 
   const showBookingForm = !!state && !isClosed;
-  const showBookingDatesForm = showBookingForm && availabilityPlan && availabilityPlan.type === 'availability-plan/day';
-  const showBookingTimeForm = showBookingForm && availabilityPlan && availabilityPlan.type === 'availability-plan/time';
+  const showBookingTimeForm = showBookingForm && availabilityPlan && bookingType === HOURLY_PRICE;
+  const showBookingDatesForm = showBookingForm && availabilityPlan && !showBookingTimeForm;
+
 
   const subTitleMinLengthText = (
     showBookingDatesForm &&
@@ -107,16 +119,19 @@ const BookingPanel = props => {
     ? intl.formatMessage({ id: 'BookingPanel.subTitleClosedListing' })
     : null;
 
+  let unitTranslationKey = 'BookingPanel.perHour';
 
-  const unitType = (publicData && publicData.unitType) || config.fallbackUnitType;
-  const isHourly = unitType === LINE_ITEM_UNITS;
-  const isDaily = unitType === LINE_ITEM_DAY;
-
-  const unitTranslationKey = isHourly
-    ? 'BookingPanel.perHour'
-    : isDaily
-    ? 'BookingPanel.perDay'
-    : 'BookingPanel.perUnit';
+  switch(bookingType){
+    case DAILY_PRICE:
+      unitTranslationKey = 'BookingPanel.perDay';
+      break;
+    case WEEKLY_PRICE:
+      unitTranslationKey = 'BookingPanel.perWeek';
+      break;
+    case MONTHLY_PRICE:
+      unitTranslationKey = 'BookingPanel.perMonth';
+      break;
+  }
 
   const classes = classNames(rootClassName || css.root, className);
   const titleClasses = classNames(titleClassName || css.bookingTitle);
@@ -168,6 +183,7 @@ const BookingPanel = props => {
             lineItems={lineItems}
             fetchLineItemsInProgress={fetchLineItemsInProgress}
             fetchLineItemsError={fetchLineItemsError}
+            bookingType={bookingType}
           />
         ) : null}
 

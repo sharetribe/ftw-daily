@@ -34,24 +34,42 @@ const BookingPeriod = props => {
           <div className={css.dayLabel}>
             <FormattedMessage id="BookingBreakdown.bookingStart" />
           </div>
-          <div className={css.dayInfo}>
-            <FormattedDate value={startDate} {...timeFormatOptions} {...timeZoneMaybe} />
-          </div>
-          <div className={css.itemLabel}>
-            <FormattedDate value={startDate} {...dateFormatOptions} {...timeZoneMaybe} />
-          </div>
+          {dateType !== DATE_TYPE_DATE ? (
+            <>
+              <div className={css.dayInfo}>
+                <FormattedDate value={startDate} {...timeFormatOptions} {...timeZoneMaybe} />
+              </div>
+              <div className={css.itemLabel}>
+                <FormattedDate value={startDate} {...dateFormatOptions} {...timeZoneMaybe} />
+              </div>
+            </>
+            ) : (
+              <div className={css.dayInfo}>
+                <FormattedDate value={startDate} {...dateFormatOptions} {...timeZoneMaybe} />
+              </div>
+            )
+          }
         </div>
 
         <div className={css.bookingPeriodSectionRigth}>
           <div className={css.dayLabel}>
             <FormattedMessage id="BookingBreakdown.bookingEnd" />
           </div>
-          <div className={css.dayInfo}>
-            <FormattedDate value={endDate} {...timeFormatOptions} {...timeZoneMaybe} />
-          </div>
-          <div className={css.itemLabel}>
-            <FormattedDate value={endDate} {...dateFormatOptions} {...timeZoneMaybe} />
-          </div>
+          {dateType !== DATE_TYPE_DATE ? (
+            <>
+              <div className={css.dayInfo}>
+                <FormattedDate value={endDate} {...timeFormatOptions} {...timeZoneMaybe} />
+              </div>
+              <div className={css.itemLabel}>
+                <FormattedDate value={endDate} {...dateFormatOptions} {...timeZoneMaybe} />
+              </div>
+            </>
+            ) : (
+              <div className={css.dayInfo}>
+                <FormattedDate value={endDate} {...dateFormatOptions} {...timeZoneMaybe} />
+              </div>
+            )
+          }
         </div>
       </div>
     </>

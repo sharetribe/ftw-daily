@@ -18,8 +18,8 @@ import {
   isDayBlockedFn,
   isOutsideRangeFn,
   isBlockedBetween,
-  apiEndDateToPickerDate,
-  pickerEndDateToApiDate,
+  apiEndDateToPickerDateForDaily,
+  pickerEndDateToApiDateForDaily,
 } from './DateRangeInput.helpers';
 
 import { IconArrowHead } from '../../components';
@@ -172,7 +172,7 @@ class DateRangeInputComponent extends Component {
       : false;
 
     const startDateAsDate = startDate instanceof moment ? startDate.toDate() : null;
-    const endDateAsDate = clearEndDate ? null : pickerEndDateToApiDate(unitType, endDate);
+    const endDateAsDate = clearEndDate ? null : pickerEndDateToApiDateForDaily(endDate);
 
     this.setState(() => ({
       currentStartDate: startDateAsDate,
@@ -227,7 +227,7 @@ class DateRangeInputComponent extends Component {
     const startDate =
       value && value.startDate instanceof Date ? moment(value.startDate) : initialStartMoment;
     const endDate =
-      apiEndDateToPickerDate(unitType, value ? value.endDate : null) || initialEndMoment;
+      apiEndDateToPickerDateForDaily(value ? value.endDate : null) || initialEndMoment;
 
     let isDayBlocked = isDayBlockedFn(
       timeSlots,

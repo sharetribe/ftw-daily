@@ -57,7 +57,7 @@ const estimatedTotalPrice = lineItems => {
 // When we cannot speculatively initiate a transaction (i.e. logged
 // out), we must estimate the booking breakdown. This function creates
 // an estimated transaction object for that use case.
-const estimatedTransaction = (bookingStart, bookingEnd, lineItems, userRole) => {
+const estimatedTransaction = (bookingStart, bookingEnd, lineItems, userRole, bookingType) => {
   const now = new Date();
 
   const isCustomer = userRole === 'customer';
@@ -85,6 +85,9 @@ const estimatedTransaction = (bookingStart, bookingEnd, lineItems, userRole) => 
           transition: TRANSITION_REQUEST_PAYMENT,
         },
       ],
+      protectedData: {
+        bookingType
+      }
     },
     booking: {
       id: new UUID('estimated-booking'),
@@ -99,6 +102,7 @@ const estimatedTransaction = (bookingStart, bookingEnd, lineItems, userRole) => 
 
 const EstimatedBreakdownMaybe = props => {
   const { unitType, startDate, endDate, timeZone } = props.bookingData;
+  const { bookingType } = props;
   const lineItems = props.lineItems;
 
   // Currently the estimated breakdown is used only on ListingPage where we want to
@@ -107,7 +111,7 @@ const EstimatedBreakdownMaybe = props => {
 
   const tx =
     startDate && endDate && lineItems
-      ? estimatedTransaction(startDate, endDate, lineItems, userRole)
+      ? estimatedTransaction(startDate, endDate, lineItems, userRole, bookingType)
       : null;
 
   return tx ? (

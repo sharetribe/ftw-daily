@@ -424,7 +424,7 @@ export const getAvailablePrices = listing => {
   return [
     {key: HOURLY_PRICE, value: price},
     ...additionalPrices
-      .filter(key => !publicData[key])
+      .filter(key => publicData[key])
       .map(key => ({key, value: publicData[key]}))
   ];
 }

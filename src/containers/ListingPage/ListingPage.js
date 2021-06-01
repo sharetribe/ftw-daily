@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
 import { findOptionsForSelectFilter } from '../../util/search';
-import { LISTING_STATE_PENDING_APPROVAL, LISTING_STATE_CLOSED, propTypes } from '../../util/types';
+import { LISTING_STATE_PENDING_APPROVAL, LISTING_STATE_CLOSED, propTypes, HOURLY_PRICE } from '../../util/types';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import {
   LISTING_PAGE_DRAFT_VARIANT,
@@ -118,10 +118,10 @@ export class ListingPageComponent extends Component {
     const {bookingType} = this.state;
     const listingId = new UUID(params.id);
     const listing = getListing(listingId);
-
-    const { bookingStartTime, bookingEndTime, ...restOfValues } = values;
-    const bookingStart = timestampToDate(bookingStartTime);
-    const bookingEnd = timestampToDate(bookingEndTime);
+    console.log(values)
+    const { bookingStartTime, bookingEndTime, bookingDates, ...restOfValues } = values;
+    const bookingStart = bookingType === HOURLY_PRICE ? timestampToDate(bookingStartTime) : bookingDates.startDate;
+    const bookingEnd = bookingType === HOURLY_PRICE ? timestampToDate(bookingEndTime) : bookingDates.endDate;
 
     const bookingData = {
       quantity: calculateQuantityFromHours(bookingStart, bookingEnd),
@@ -200,6 +200,7 @@ export class ListingPageComponent extends Component {
 
   render() {
     const {
+      unitType,
       isAuthenticated,
       currentUser,
       getListing,
@@ -401,8 +402,6 @@ export class ListingPageComponent extends Component {
       { title, price: formattedPrice, siteTitle }
     );
 
-    const unitType = (publicData && publicData.unitType) || config.fallbackUnitType;
-
     const hostLink = (
       <NamedLink
         className={css.authorNameLink}
@@ -528,6 +527,7 @@ export class ListingPageComponent extends Component {
                   lineItems={lineItems}
                   fetchLineItemsInProgress={fetchLineItemsInProgress}
                   fetchLineItemsError={fetchLineItemsError}
+                  bookingType={this.state.bookingType}
                   toggleBookingType={this.toggleBookingType}
                 />
               </div>
@@ -543,6 +543,7 @@ export class ListingPageComponent extends Component {
 }
 
 ListingPageComponent.defaultProps = {
+  unitType: config.bookingUnitType,
   currentUser: null,
   enquiryModalOpenForListingId: null,
   showListingError: null,

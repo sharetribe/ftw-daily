@@ -31,7 +31,7 @@ import Decimal from 'decimal.js';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { dateFromLocalToAPI } from '../../util/dates';
 import { TRANSITION_REQUEST_PAYMENT, TX_TRANSITION_ACTOR_CUSTOMER } from '../../util/transaction';
-import { LINE_ITEM_DAY, LINE_ITEM_NIGHT, LINE_ITEM_UNITS, LINE_ITEM_DISCOUNT, DATE_TYPE_DATE, DATE_TYPE_DATETIME } from '../../util/types';
+import { LINE_ITEM_DAY, LINE_ITEM_NIGHT, LINE_ITEM_UNITS, LINE_ITEM_DISCOUNT, DATE_TYPE_DATE, DATE_TYPE_DATETIME, HOURLY_PRICE } from '../../util/types';
 import { unitDivisor, convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
 import config from '../../config';
 import { BookingBreakdown } from '../../components';
@@ -169,7 +169,7 @@ const estimatedTotalPrice = lineItems => {
 //   return tx;
 // };
 
-const estimatedTransaction = (bookingStart, bookingEnd, lineItems, userRole) => {
+const estimatedTransaction = (bookingStart, bookingEnd, lineItems, userRole, bookingType) => {
   const now = new Date();
 
   const isCustomer = userRole === 'customer';
@@ -213,6 +213,9 @@ const estimatedTransaction = (bookingStart, bookingEnd, lineItems, userRole) => 
           transition: TRANSITION_REQUEST_PAYMENT,
         },
       ],
+      protectedData: {
+        bookingType
+      }
     },
     booking: {
       id: new UUID('estimated-booking'),
@@ -227,19 +230,21 @@ const estimatedTransaction = (bookingStart, bookingEnd, lineItems, userRole) => 
 
 const EstimatedBreakdownMaybe = props => {
   const { unitType, unitPrice, startDate, endDate, quantity, discount } = props.bookingData;
+  const { lineItems, bookingType } = props;
   const isUnits = unitType === LINE_ITEM_UNITS;
   const quantityIfUsingUnits = !isUnits || Number.isInteger(quantity);
-  const canEstimatePrice = startDate && endDate && unitPrice && quantityIfUsingUnits;
+  const canEstimatePrice = startDate && endDate && quantityIfUsingUnits;
   if (!canEstimatePrice) {
     return null;
   }
 
   // const tx = estimatedTransaction(unitType, startDate, endDate, unitPrice, quantity, discount);
-  const dateType = unitType === LINE_ITEM_DAY ? DATE_TYPE_DATE : DATE_TYPE_DATETIME;
+  const userRole = 'customer';
+  const dateType = bookingType === HOURLY_PRICE ? DATE_TYPE_DATETIME : DATE_TYPE_DATE;
 
   const tx =
     startDate && endDate && lineItems
-      ? estimatedTransaction(startDate, endDate, lineItems, userRole)
+      ? estimatedTransaction(startDate, endDate, lineItems, userRole, bookingType)
       : null;
 
   return tx ? (

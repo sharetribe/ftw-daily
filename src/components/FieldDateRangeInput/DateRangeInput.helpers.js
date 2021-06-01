@@ -97,6 +97,16 @@ export const apiEndDateToPickerDate = (unitType, endDate) => {
   }
 };
 
+export const apiEndDateToPickerDateForDaily = endDate => {
+  const isValid = endDate instanceof Date;
+
+  if (!isValid) {
+    return null;
+  }
+
+  return moment(endDate).subtract(1, 'days');
+};
+
 export const pickerEndDateToApiDate = (unitType, endDate) => {
   const isValid = endDate instanceof moment;
   const isDaily = unitType === LINE_ITEM_DAY;
@@ -110,6 +120,16 @@ export const pickerEndDateToApiDate = (unitType, endDate) => {
   } else {
     return endDate.toDate();
   }
+};
+
+export const pickerEndDateToApiDateForDaily = endDate => {
+  const isValid = endDate instanceof moment;
+
+  if (!isValid) {
+    return null;
+  }
+
+  return endDate.add(1, 'days').toDate();
 };
 
 /**

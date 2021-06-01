@@ -103,6 +103,8 @@
   "BookingPanel.perNight": "per night",
   "BookingPanel.perUnit": "per unit",
   "BookingPanel.perHour": "per hour",
+  "BookingPanel.perWeek": "per week",
+  "BookingPanel.perMonth": "per month",
   "BookingPanel.subTitleClosedListing": "Sorry, this listing has been closed.",
   "BookingTypes.priceLabel": "Hourly price",
   "BookingTypes.pricePerDayLabel": "Daily price",
