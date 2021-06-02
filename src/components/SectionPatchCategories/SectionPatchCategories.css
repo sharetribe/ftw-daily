@@ -8,11 +8,6 @@
   @media (--viewportMedium) {
     margin-bottom: 23px;
   }
-
-  @media(--viewportLarge){
-    text-align: left;
-    max-width: 735px;
-  }
 }
 
 .categories {
