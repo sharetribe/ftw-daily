@@ -4,10 +4,6 @@
   @apply --marketplaceH1FontStyles;
   margin-top: 0;
   text-align: center;
-  
-  @media (--viewportLarge) {
-    text-align: left;
-  }
 }
 
 .container {
@@ -23,7 +19,6 @@
   flex: 3;
   @media (--viewportMedium) {
     padding-right: 50px;
-    padding-left: 50px;
   }
 
 }
@@ -34,6 +29,12 @@
   @media (--viewportMedium) {
     font-size: 18px;
     line-height: 24px;
+  }
+}
+
+.descriptionDiv p:first-child {
+  @media (--viewportMedium) {
+    margin-top: 0;
   }
 }
 

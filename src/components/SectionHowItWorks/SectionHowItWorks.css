@@ -4,10 +4,6 @@
   @apply --marketplaceH1FontStyles;
   margin-top: 0;
   text-align: center;
-  
-  @media (--viewportLarge) {
-    text-align: left;
-  }
 }
 
 .toggleSection {
