@@ -15,7 +15,7 @@ import css from './EditListingAvailabilityForm.module.css';
 
 export class EditListingAvailabilityFormComponent extends Component {
   render() {
-    const { seats, ...rest } = this.props;
+    const { seats, daysAvailabilityDisabled, ...rest } = this.props;
 
     return (
       <FinalForm
@@ -28,7 +28,7 @@ export class EditListingAvailabilityFormComponent extends Component {
             disabled,
             ready,
             handleSubmit,
-            //intl,
+            intl,
             invalid,
             pristine,
             saveActionMsg,
@@ -57,18 +57,28 @@ export class EditListingAvailabilityFormComponent extends Component {
 
           const daysOptions = DAYS_OF_WEEK.map(key => ({key, label: key.slice(0, 1).toUpperCase() + key.slice(1)}))
 
+          const weekdaysLabel = "EditListingAvailabilityForm.weekdaysLabel";
+
           return (
             <Form className={classes} onSubmit={handleSubmit}>
               {errorMessage}
 
               <div className={css.weekdaysWrapper}>
-                <FieldCheckboxGroup
-                  label={'Daily availability'}
-                  id="daysAvailability"
-                  name="daysAvailability"
-                  className={css.daysSelectorRoot}
-                  options={daysOptions}
-                />
+                {!daysAvailabilityDisabled ? (
+                    <FieldCheckboxGroup
+                      label={'Daily availability'}
+                      id="daysAvailability"
+                      name="daysAvailability"
+                      className={css.daysSelectorRoot}
+                      options={daysOptions}
+                      disabled={daysAvailabilityDisabled}
+                    />
+                  ) : (
+                    <p className={css.weekdaysHint}>
+                      <FormattedMessage id="EditListingAvailabilityForm.weekdaysHint"/>
+                    </p>
+                  )
+                }
               </div>
 
 

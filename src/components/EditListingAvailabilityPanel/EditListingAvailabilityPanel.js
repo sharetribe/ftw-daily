@@ -10,6 +10,8 @@ import {
 import { 
   LISTING_STATE_DRAFT,
   AVAILABILITY_PLAN_TIME,
+  WEEKLY_PRICE,
+  MONTHLY_PRICE,
 } from '../../util/types';
 import { ListingLink } from '..';
 import { EditListingAvailabilityForm } from '../../forms';
@@ -69,6 +71,8 @@ const EditListingAvailabilityPanel = props => {
     return availabilityPlan.entries.map(({dayOfWeek}) => dayOfWeek)
   }
 
+  const daysAvailabilityDisabled = !!(publicData[WEEKLY_PRICE] || publicData[MONTHLY_PRICE]);
+
   return (
     <div className={classes}>
       <h1 className={css.title}>
@@ -110,6 +114,7 @@ const EditListingAvailabilityPanel = props => {
         updateError={errors.updateListingError}
         updateInProgress={updateInProgress}
         seats={numSeats}
+        daysAvailabilityDisabled={daysAvailabilityDisabled}
       />
     </div>
   );

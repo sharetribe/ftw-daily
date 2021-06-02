@@ -187,8 +187,8 @@
   "EditListingAvailabilityForm.blockedDay": "Not available",
   "EditListingAvailabilityForm.bookedDay": "Booked",
   "EditListingAvailabilityForm.updateFailed": "Failed to update listing. Please try again.",
-
-
+  "EditListingAvailabilityForm.weekdaysLabel": "Daily availability",
+  "EditListingAvailabilityForm.weekdaysHint": "Editing the weekly schedule is available only if the prices for the week and month are not specified",
   "EditListingAvailabilityExceptionForm.available": "Available",
   "EditListingAvailabilityExceptionForm.addException": "Save exception",
   "EditListingAvailabilityExceptionForm.exceptionEndDateLabel": "Ends",

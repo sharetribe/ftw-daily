@@ -124,7 +124,7 @@ export class ListingPageComponent extends Component {
     const bookingEnd = bookingType === HOURLY_PRICE ? timestampToDate(bookingEndTime) : bookingDates.endDate;
 
     const bookingData = {
-      quantity: calculateQuantityFromHours(bookingStart, bookingEnd),
+      // quantity: calculateQuantityFromHours(bookingStart, bookingEnd),
       bookingType,
       ...restOfValues,
     };
@@ -270,7 +270,7 @@ export class ListingPageComponent extends Component {
       availabilityPlan = null,
       publicData,
     } = currentListing.attributes;
-
+    
     const richTitle = (
       <span>
         {richText(title, {

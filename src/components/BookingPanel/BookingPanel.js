@@ -15,6 +15,9 @@ import {
   WEEKLY_PRICE,
   MONTHLY_PRICE,
 } from '../../util/types';
+import {
+  getTypeDuration
+} from '../../util/data';
 import { formatMoney } from '../../util/currency';
 import { parse, stringify } from '../../util/urlHelpers';
 import config from '../../config';
@@ -107,14 +110,15 @@ const BookingPanel = props => {
   const showBookingDatesForm = showBookingForm && availabilityPlan && !showBookingTimeForm;
 
 
-  const subTitleMinLengthText = (
-    showBookingDatesForm &&
-    minimumLength &&
-    minimumLength > 1
-  ) ? ` Minimum booking length is ${minimumLength} days.` : '';
+  // const subTitleMinLengthText = (
+  //   showBookingDatesForm &&
+  //   minimumLength &&
+  //   minimumLength > 1
+  // ) ? ` Minimum booking length is ${minimumLength} days.` : '';
 
   const subTitleText = !!subTitle
-    ? subTitle + subTitleMinLengthText
+    // ? subTitle + subTitleMinLengthText
+    ? subTitle
     : showClosedListingHelpText
     ? intl.formatMessage({ id: 'BookingPanel.subTitleClosedListing' })
     : null;
@@ -136,6 +140,19 @@ const BookingPanel = props => {
   const classes = classNames(rootClassName || css.root, className);
   const titleClasses = classNames(titleClassName || css.bookingTitle);
 
+  const getMinLength = bookingType => {
+    switch(bookingType){
+      case WEEKLY_PRICE:
+        return 7;
+      case MONTHLY_PRICE:
+        return 30;
+      default:
+        return null;
+    }
+  }
+
+  const seats = listing && listing.attributes && listing.attributes.publicData && listing.attributes.publicData.seats || 1;
+  const filtTimeSlots = timeSlots => timeSlots && timeSlots.filter(slot => slot.attributes.seats >= seats) || [];
 
   return (
     <div className={classes}>
@@ -171,13 +188,13 @@ const BookingPanel = props => {
             formId="BookingPanel"
             submitButtonWrapperClassName={css.bookingDatesSubmitButtonWrapper}
             unitType={unitType}
-            minimumLength={minimumLength}
+            minimumLength={getTypeDuration(bookingType)}
             onSubmit={onSubmit}
             price={price}
             discount={discount}
             listingId={listing.id}
             isOwnListing={isOwnListing}
-            timeSlots={timeSlots}
+            timeSlots={filtTimeSlots(timeSlots)}
             fetchTimeSlotsError={fetchTimeSlotsError}
             onFetchTransactionLineItems={onFetchTransactionLineItems}
             lineItems={lineItems}

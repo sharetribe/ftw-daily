@@ -69,3 +69,7 @@
     padding-right: 20px;
   }
 }
+
+.weekdaysHint {
+  font-weight: 600;
+}

@@ -2,22 +2,23 @@ import moment from 'moment';
 import { isSameDay, isInclusivelyAfterDay, isInclusivelyBeforeDay } from 'react-dates';
 
 import { ensureTimeSlot } from '../../util/data';
-import { START_DATE, END_DATE, dateFromAPIToLocalNoon } from '../../util/dates';
+import { START_DATE, END_DATE, dateFromAPIToLocalNoon, isInRange } from '../../util/dates';
 import { LINE_ITEM_DAY, LINE_ITEM_NIGHT, TIME_SLOT_DAY } from '../../util/types';
 import config from '../../config';
 
 // Checks if time slot (propTypes.timeSlot) start time equals a day (moment)
 const timeSlotEqualsDay = (timeSlot, day) => {
-  if (ensureTimeSlot(timeSlot).attributes.type === TIME_SLOT_DAY) {
-    // Time slots describe available dates by providing a start and
-    // an end date which is the following day. In the single date picker
-    // the start date is used to represent available dates.
-    const localStartDate = timeSlot.attributes.start;
+  // if (ensureTimeSlot(timeSlot).attributes.type === TIME_SLOT_DAY) {
+  //   // Time slots describe available dates by providing a start and
+  //   // an end date which is the following day. In the single date picker
+  //   // the start date is used to represent available dates.
+  const localStartDate = timeSlot.attributes.start;
+  const localEndDate = timeSlot.attributes.end;
 
-    return isSameDay(day, moment(localStartDate));
-  } else {
-    return false;
-  }
+  return isInRange(day, localStartDate, localEndDate)
+  // } else {
+  //   return false;
+  // }
 };
 
 /**
@@ -191,7 +192,9 @@ export const isOutsideRangeFn = (timeSlots, startDate, endDate, focusedInput, un
     // nightly booking: the day the next booking starts
     // daily booking: the day before the next booking starts
     return day => {
-      const lastDayToEndBooking = apiEndDateToPickerDate(unitType, nextBookingStarts.toDate());
+      const lastDayToEndBooking = apiEndDateToPickerDateForDaily(nextBookingStarts.toDate());
+
+      console.log(lastDayToEndBooking)
 
       return (
         !isInclusivelyAfterDay(day, startDate) || !isInclusivelyBeforeDay(day, lastDayToEndBooking)

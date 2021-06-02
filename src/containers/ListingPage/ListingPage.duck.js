@@ -279,7 +279,7 @@ const timeSlotsRequest = params => (dispatch, getState, sdk) => {
 
 // Helper function for loadData call.
 const fetchTimeSlotsDay = listingId => (dispatch, getState, sdk) => {
-  dispatch(fetchTimeSlotsRequestDay);
+  dispatch(fetchTimeSlotsRequestDay());
 
   // Time slots can be fetched for 90 days at a time,
   // for at most 180 days from now. If max number of bookable
@@ -375,14 +375,9 @@ const fetchMonthlyTimeSlots = (dispatch, listing) => {
   return Promise.all([]);
 };
 
-export const fetchTimeslots = (listing, isHourly = true) => (dispatch, getState, sdk) => {
-  if (isHourly) {
-    fetchMonthlyTimeSlots(dispatch, listing);
-    return;
-  }
-  
+export const fetchTimeslots = (listing) => (dispatch, getState, sdk) => {
   const listingId = listing && listing.id || null;
-
+  fetchMonthlyTimeSlots(dispatch, listing);
   dispatch(fetchTimeSlotsDay(listingId))
 }
 

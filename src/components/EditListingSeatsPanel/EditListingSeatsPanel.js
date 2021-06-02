@@ -38,6 +38,15 @@ const EditListingSeatsPanel = props => {
     <FormattedMessage id="EditListingSeatsPanel.createListingTitle" />
   );
 
+  const { availabilityPlan } = listing && listing.attributes;
+
+  const updateAvailabilityPlan = (availabilityPlan, seats) => {
+    return {
+      ...availabilityPlan,
+      entries: availabilityPlan.entries.map(entry => ({...entry, seats}))
+    }
+  }
+
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
@@ -47,7 +56,11 @@ const EditListingSeatsPanel = props => {
         initialValues={{ seats: publicData.seats }}
         onSubmit={values => {
           const { seats } = values;
+
+          const availabilityUpdate = publicData.seats !== seats && !!availabilityPlan;
+
           const updateValues = {
+            ...(availabilityUpdate ? {availabilityPlan: updateAvailabilityPlan(availabilityPlan, seats) } : {}),
             publicData: {
               seats: parseInt(seats, 10),   // NOTE seats expects an int, not string
             },

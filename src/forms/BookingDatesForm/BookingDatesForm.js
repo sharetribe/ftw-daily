@@ -11,6 +11,13 @@ import { START_DATE, END_DATE } from '../../util/dates';
 import { propTypes } from '../../util/types';
 import { Form, IconSpinner, PrimaryButton, FieldDateRangeInput } from '../../components';
 import EstimatedBreakdownMaybe from './EstimatedBreakdownMaybe';
+import {
+  WEEKLY_PRICE,
+  MONTHLY_PRICE,
+} from '../../util/types';
+import {
+  getTypeDuration
+} from '../../util/data';
 
 import css from './BookingDatesForm.module.css';
 
@@ -214,6 +221,7 @@ export class BookingDatesFormComponent extends Component {
                 name="bookingDates"
                 unitType={unitType}
                 minimumLength={minimumLength}
+                offsetLength={minimumLength}
                 startDateId={`${formId}.bookingStartDate`}
                 startDateLabel={bookingStartLabel}
                 startDatePlaceholderText={startDatePlaceholderText}

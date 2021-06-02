@@ -412,12 +412,18 @@ export class CheckoutPageComponent extends Component {
     //   ...optionalPaymentParams,
     // });
 
+    const { bookingType } = pageData.bookingData;
+    const seats = pageData.listing.attributes && 
+                  pageData.listing.attributes.publicData &&
+                  pageData.listing.attributes.publicData.seats || 1;
+
     const orderParams = {
       listingId: pageData.listing.id,
       bookingStart: tx.booking.attributes.start,
       bookingEnd: tx.booking.attributes.end,
       quantity: pageData.bookingData ? pageData.bookingData.quantity : null,
-      type: pageData.bookingData.bookingType,
+      type: bookingType,
+      seats: bookingType === HOURLY_PRICE ? 1 : seats,
       ...optionalPaymentParams,
     };
 

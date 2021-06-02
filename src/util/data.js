@@ -402,12 +402,15 @@ export const AVAILABILITY_DEFAULT_END = '24:00';
 const defaultTimeZone = () =>
   typeof window !== 'undefined' ? getDefaultTimeZoneOnBrowser() : 'Etc/UTC';
 
-export const createDefaultPlan = (seats = 1) => {
+export const createDefaultPlan = (seats = 1, output = false) => {
   return {
     type: AVAILABILITY_PLAN_TIME,
     timezone: defaultTimeZone(),
     entries: DAYS_OF_WEEK.map(dayOfWeek => ({
-      dayOfWeek, startTime: AVAILABILITY_DEFAULT_START, endTime: AVAILABILITY_DEFAULT_END, seats
+      dayOfWeek,
+      startTime: AVAILABILITY_DEFAULT_START,
+      endTime: output ? AVAILABILITY_DEFAULT_START : AVAILABILITY_DEFAULT_END,
+      seats
     }))
   }
 }
@@ -427,4 +430,15 @@ export const getAvailablePrices = listing => {
       .filter(key => publicData[key])
       .map(key => ({key, value: publicData[key]}))
   ];
+}
+
+export const getTypeDuration = bookingType => {
+  switch(bookingType){
+    case WEEKLY_PRICE:
+      return 7;
+    case MONTHLY_PRICE:
+      return 30;
+    default:
+      return null;
+  }
 }

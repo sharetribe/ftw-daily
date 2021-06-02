@@ -17,6 +17,9 @@ import { EditListingPricingForm } from '../../forms';
 import { ensureOwnListing } from '../../util/data';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import config from '../../config';
+import { 
+  createDefaultPlan
+} from '../../util/data';
 
 import css from './EditListingPricingPanel.module.css';
 
@@ -82,6 +85,12 @@ const EditListingPricingPanel = props => {
     }}
   }
 
+  const initialValues = {
+    price,
+    ...initialDiscounts(listing),
+    ...initialPrices(listing)
+  };
+
   const managePrices = values => {
     return [DAILY_PRICE, WEEKLY_PRICE, MONTHLY_PRICE].reduce((acc, p) => {
       const {amount, currency} = values[p] || {};
@@ -93,15 +102,17 @@ const EditListingPricingPanel = props => {
     }, {});
   }
 
+  const updateAvailabilityMaybe = values => {
+    return (values[WEEKLY_PRICE] && !initialValues[WEEKLY_PRICE]) || 
+           (values[MONTHLY_PRICE] && !initialValues[MONTHLY_PRICE])
+  }
+  
   const priceCurrencyValid = price instanceof Money ? price.currency === config.currency : true;
+
   const form = priceCurrencyValid ? (
     <EditListingPricingForm
       className={css.form}
-      initialValues={{
-        price,
-        ...initialDiscounts(listing),
-        ...initialPrices(listing)
-      }}
+      initialValues={initialValues}
       unitType={publicData.unitType}
       onSubmit={values => {
         const { price, discount } = values;
@@ -113,6 +124,7 @@ const EditListingPricingPanel = props => {
             discount,
             ...managePrices(values)
           },
+          ...(updateAvailabilityMaybe(values) ? {availabilityPlan: createDefaultPlan(publicData.seats || 1, true)} : {}),
           price
         });
       }}
