@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
 import routeConfiguration from '../../routeConfiguration';
-import { propTypes } from '../../util/types';
+import { propTypes, HOURLY_PRICE } from '../../util/types';
 import { ensureListing, ensureTransaction } from '../../util/data';
 import {
   // dateFromAPIToLocalNoon,
@@ -30,16 +30,16 @@ import {
   Footer,
 } from '../../components';
 import { TopbarContainer } from '../../containers';
-
 import {
   acceptSale,
   declineSale,
   sendMessage,
   sendReview,
   fetchMoreMessages,
-  fetchTimeSlots,
+  fetchTimeSlotsTime,
   fetchTransactionLineItems,
 } from './TransactionPage.duck';
+import moment from 'moment';
 import css from './TransactionPage.module.css';
 
 const PROVIDER = 'provider';
@@ -47,6 +47,8 @@ const CUSTOMER = 'customer';
 
 // TransactionPage handles data loading for Sale and Order views to transaction pages in Inbox.
 export const TransactionPageComponent = props => {
+  const [bookingType, setBookingType] = React.useState(null);
+
   const {
     currentUser,
     initialMessageFailedToTransaction,
@@ -87,7 +89,7 @@ export const TransactionPageComponent = props => {
     onFetchTransactionLineItems,
     lineItems,
     fetchLineItemsInProgress,
-    fetchLineItemsError,
+    fetchLineItemsError
   } = props;
 
   const currentTransaction = ensureTransaction(transaction);
@@ -163,12 +165,14 @@ export const TransactionPageComponent = props => {
 
   // Customer can create a booking, if the tx is in "enquiry" state.
   const handleSubmitBookingRequest = values => {
-    const { bookingStartTime, bookingEndTime, ...restOfValues } = values;
-    const bookingStart = timestampToDate(bookingStartTime);
-    const bookingEnd = timestampToDate(bookingEndTime);
+    
+    const { bookingStartTime, bookingEndTime, bookingDates, ...restOfValues } = values;
+    const bookingStart = bookingType === HOURLY_PRICE ? timestampToDate(bookingStartTime) : moment(bookingDates.startDate).tz('UTC').startOf('day').toDate();
+    const bookingEnd = bookingType === HOURLY_PRICE ? timestampToDate(bookingEndTime) : moment(bookingDates.endDate).tz('UTC').startOf('day').toDate();
 
     const bookingData = {
-      quantity: calculateQuantityFromHours(bookingStart, bookingEnd),
+      // quantity: calculateQuantityFromHours(bookingStart, bookingEnd),
+      bookingType,
       ...restOfValues,
     };
 
@@ -287,6 +291,8 @@ export const TransactionPageComponent = props => {
       lineItems={lineItems}
       fetchLineItemsInProgress={fetchLineItemsInProgress}
       fetchLineItemsError={fetchLineItemsError}
+      bookingTypeOnPanel={bookingType}
+      toggleBookingTypeOnPanel={setBookingType}
     />
   ) : (
     loadingOrFailedFetching
@@ -454,7 +460,7 @@ const mapDispatchToProps = dispatch => {
     callSetInitialValues: (setInitialValues, values) => dispatch(setInitialValues(values)),
     onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
     onFetchTimeSlots: (listingId, start, end, timeZone) =>
-      dispatch(fetchTimeSlots(listingId, start, end, timeZone)),
+      dispatch(fetchTimeSlotsTime(listingId, start, end, timeZone)),
     onFetchTransactionLineItems: (bookingData, listingId, isOwnListing) =>
       dispatch(fetchTransactionLineItems(bookingData, listingId, isOwnListing)),
   };

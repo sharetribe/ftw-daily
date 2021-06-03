@@ -66,9 +66,13 @@ export const SEND_REVIEW_REQUEST = 'app/TransactionPage/SEND_REVIEW_REQUEST';
 export const SEND_REVIEW_SUCCESS = 'app/TransactionPage/SEND_REVIEW_SUCCESS';
 export const SEND_REVIEW_ERROR = 'app/TransactionPage/SEND_REVIEW_ERROR';
 
-export const FETCH_TIME_SLOTS_REQUEST = 'app/TransactionPage/FETCH_TIME_SLOTS_REQUEST';
-export const FETCH_TIME_SLOTS_SUCCESS = 'app/TransactionPage/FETCH_TIME_SLOTS_SUCCESS';
-export const FETCH_TIME_SLOTS_ERROR = 'app/TransactionPage/FETCH_TIME_SLOTS_ERROR';
+export const FETCH_TIME_SLOTS_REQUEST_DAY = 'app/TransactionPage/FETCH_TIME_SLOTS_REQUEST_DAY';
+export const FETCH_TIME_SLOTS_SUCCESS_DAY = 'app/TransactionPage/FETCH_TIME_SLOTS_SUCCESS_DAY';
+export const FETCH_TIME_SLOTS_ERROR_DAY = 'app/TransactionPage/FETCH_TIME_SLOTS_ERROR_DAY';
+
+export const FETCH_TIME_SLOTS_REQUEST_TIME = 'app/TransactionPage/FETCH_TIME_SLOTS_REQUEST_TIME';
+export const FETCH_TIME_SLOTS_SUCCESS_TIME = 'app/TransactionPage/FETCH_TIME_SLOTS_SUCCESS_TIME';
+export const FETCH_TIME_SLOTS_ERROR_TIME = 'app/TransactionPage/FETCH_TIME_SLOTS_ERROR_TIME';
 
 export const FETCH_LINE_ITEMS_REQUEST = 'app/TransactionPage/FETCH_LINE_ITEMS_REQUEST';
 export const FETCH_LINE_ITEMS_SUCCESS = 'app/TransactionPage/FETCH_LINE_ITEMS_SUCCESS';
@@ -97,6 +101,7 @@ const initialState = {
   sendReviewInProgress: false,
   sendReviewError: null,
   timeSlots: null,
+  monthlyTimeSlots: {},
   fetchTimeSlotsError: null,
   fetchTransitionsInProgress: false,
   fetchTransitionsError: null,
@@ -191,13 +196,49 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
     case SEND_REVIEW_ERROR:
       return { ...state, sendReviewInProgress: false, sendReviewError: payload };
 
-    case FETCH_TIME_SLOTS_REQUEST:
+    case FETCH_TIME_SLOTS_REQUEST_DAY:
       return { ...state, fetchTimeSlotsError: null };
-    case FETCH_TIME_SLOTS_SUCCESS:
+    case FETCH_TIME_SLOTS_SUCCESS_DAY:
       return { ...state, timeSlots: payload };
-    case FETCH_TIME_SLOTS_ERROR:
+    case FETCH_TIME_SLOTS_ERROR_DAY:
       return { ...state, fetchTimeSlotsError: payload };
 
+    case FETCH_TIME_SLOTS_REQUEST_TIME: {
+      const monthlyTimeSlots = {
+        ...state.monthlyTimeSlots,
+        [payload]: {
+          ...state.monthlyTimeSlots[payload],
+          fetchTimeSlotsError: null,
+          fetchTimeSlotsInProgress: true,
+        },
+      };
+      return { ...state, monthlyTimeSlots };
+    }
+    
+    case FETCH_TIME_SLOTS_SUCCESS_TIME: {
+      const monthId = payload.monthId;
+      const monthlyTimeSlots = {
+        ...state.monthlyTimeSlots,
+        [monthId]: {
+          ...state.monthlyTimeSlots[monthId],
+          fetchTimeSlotsInProgress: false,
+          timeSlots: payload.timeSlots,
+        },
+      };
+      return { ...state, monthlyTimeSlots };
+    }
+    case FETCH_TIME_SLOTS_ERROR_TIME: {
+      const monthId = payload.monthId;
+      const monthlyTimeSlots = {
+        ...state.monthlyTimeSlots,
+        [monthId]: {
+          ...state.monthlyTimeSlots[monthId],
+          fetchTimeSlotsInProgress: false,
+          fetchTimeSlotsError: payload.error,
+        },
+      };
+      return { ...state, monthlyTimeSlots };
+    }
     case FETCH_LINE_ITEMS_REQUEST:
       return { ...state, fetchLineItemsInProgress: true, fetchLineItemsError: null };
     case FETCH_LINE_ITEMS_SUCCESS:
@@ -259,15 +300,29 @@ const sendReviewRequest = () => ({ type: SEND_REVIEW_REQUEST });
 const sendReviewSuccess = () => ({ type: SEND_REVIEW_SUCCESS });
 const sendReviewError = e => ({ type: SEND_REVIEW_ERROR, error: true, payload: e });
 
-const fetchTimeSlotsRequest = () => ({ type: FETCH_TIME_SLOTS_REQUEST });
-const fetchTimeSlotsSuccess = timeSlots => ({
-  type: FETCH_TIME_SLOTS_SUCCESS,
+export const fetchTimeSlotsRequestDay = () => ({ type: FETCH_TIME_SLOTS_REQUEST_DAY });
+export const fetchTimeSlotsSuccessDay = timeSlots => ({
+  type: FETCH_TIME_SLOTS_SUCCESS_DAY,
   payload: timeSlots,
 });
-const fetchTimeSlotsError = e => ({
-  type: FETCH_TIME_SLOTS_ERROR,
+export const fetchTimeSlotsErrorDay = error => ({
+  type: FETCH_TIME_SLOTS_ERROR_DAY,
   error: true,
-  payload: e,
+  payload: error,
+});
+
+export const fetchTimeSlotsRequestTime = monthId => ({
+  type: FETCH_TIME_SLOTS_REQUEST_TIME,
+  payload: monthId,
+});
+export const fetchTimeSlotsSuccessTime = (monthId, timeSlots) => ({
+  type: FETCH_TIME_SLOTS_SUCCESS_TIME,
+  payload: { timeSlots, monthId },
+});
+export const fetchTimeSlotsErrorTime = (monthId, error) => ({
+  type: FETCH_TIME_SLOTS_ERROR_TIME,
+  error: true,
+  payload: { monthId, error },
 });
 
 export const fetchLineItemsRequest = () => ({ type: FETCH_LINE_ITEMS_REQUEST });
@@ -327,23 +382,8 @@ export const fetchTransaction = (id, txRole) => (dispatch, getState, sdk) => {
         transaction &&
         txIsEnquired(transaction);
 
-      const { unitType } = listing.attributes.publicData || {};
-      if (canFetchTimeslots) {
-        // bugfix Nov 30, 2020 -- fetchTimeSlots expects more than 1 argument!
-        // dispatch(fetchTimeSlots(listingId));
 
-        // NOTE this is a quickfix so users can read inbox messages...
-        // showing warnings that need to be further investigated
-        if (unitType === LINE_ITEM_UNITS) {
-          // Fetch timeSlots.
-          // This can happen parallel to loadData.
-          // We are not interested to return them from loadData call.
-          fetchMonthlyTimeSlots(dispatch, listing);
-        }
-        if (unitType === LINE_ITEM_DAY) {
-          dispatch(fetchTimeSlotsDay(listingId));
-        }
-      }
+      dispatch(fetchTimeslots(listing));
 
       const canFetchListing = listing && listing.attributes && !listing.attributes.deleted;
       if (canFetchListing) {
@@ -583,8 +623,9 @@ const timeSlotsRequest = params => (dispatch, getState, sdk) => {
   });
 };
 
+// Helper function for loadData call.
 const fetchTimeSlotsDay = listingId => (dispatch, getState, sdk) => {
-  dispatch(fetchTimeSlotsRequest);
+  dispatch(fetchTimeSlotsRequestDay());
 
   // Time slots can be fetched for 90 days at a time,
   // for at most 180 days from now. If max number of bookable
@@ -622,22 +663,22 @@ const fetchTimeSlotsDay = listingId => (dispatch, getState, sdk) => {
 
         return dispatch(timeSlotsRequest(secondParams)).then(secondBatch => {
           const combined = timeSlots.concat(secondBatch);
-          dispatch(fetchTimeSlotsSuccess(combined));
+          dispatch(fetchTimeSlotsSuccessDay(combined));
         });
       } else {
-        dispatch(fetchTimeSlotsSuccess(timeSlots));
+        dispatch(fetchTimeSlotsSuccessDay(timeSlots));
       }
     })
     .catch(e => {
-      dispatch(fetchTimeSlotsError(storableError(e)));
+      dispatch(fetchTimeSlotsErrorDay(storableError(e)));
     });
 };
 
 
-export const fetchTimeSlots = (listingId, start, end, timeZone) => (dispatch, getState, sdk) => {
+export const fetchTimeSlotsTime = (listingId, start, end, timeZone) => (dispatch, getState, sdk) => {
   const monthId = monthIdStringInTimeZone(start, timeZone);
 
-  dispatch(fetchTimeSlotsRequest(monthId));
+  dispatch(fetchTimeSlotsRequestTime(monthId));
 
   // The maximum pagination page size for timeSlots is 500
   const extraParams = {
@@ -647,14 +688,14 @@ export const fetchTimeSlots = (listingId, start, end, timeZone) => (dispatch, ge
 
   return dispatch(timeSlotsRequest({ listingId, start, end, ...extraParams }))
     .then(timeSlots => {
-      dispatch(fetchTimeSlotsSuccess(monthId, timeSlots));
+      dispatch(fetchTimeSlotsSuccessTime(monthId, timeSlots));
     })
     .catch(e => {
-      dispatch(fetchTimeSlotsError(monthId, storableError(e)));
+      dispatch(fetchTimeSlotsErrorTime(monthId, storableError(e)));
     });
 };
 
-// Helper function for fetchTransaction call.
+// Helper function for loadData call.
 const fetchMonthlyTimeSlots = (dispatch, listing) => {
   const hasWindow = typeof window !== 'undefined';
   const attributes = listing.attributes;
@@ -671,14 +712,20 @@ const fetchMonthlyTimeSlots = (dispatch, listing) => {
     const nextAfterNextMonth = nextMonthFn(nextMonth, tz);
 
     return Promise.all([
-      dispatch(fetchTimeSlots(listing.id, nextBoundary, nextMonth, tz)),
-      dispatch(fetchTimeSlots(listing.id, nextMonth, nextAfterNextMonth, tz)),
+      dispatch(fetchTimeSlotsTime(listing.id, nextBoundary, nextMonth, tz)),
+      dispatch(fetchTimeSlotsTime(listing.id, nextMonth, nextAfterNextMonth, tz)),
     ]);
   }
 
   // By default return an empty array
   return Promise.all([]);
 };
+
+export const fetchTimeslots = (listing) => (dispatch, getState, sdk) => {
+  const listingId = listing && listing.id || null;
+  fetchMonthlyTimeSlots(dispatch, listing);
+  dispatch(fetchTimeSlotsDay(listingId))
+}
 
 export const fetchNextTransitions = id => (dispatch, getState, sdk) => {
   dispatch(fetchTransitionsRequest());

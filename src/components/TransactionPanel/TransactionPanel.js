@@ -208,6 +208,8 @@ export class TransactionPanelComponent extends Component {
       lineItems,
       fetchLineItemsInProgress,
       fetchLineItemsError,
+      bookingTypeOnPanel,
+      toggleBookingTypeOnPanel,
     } = this.props;
 
     const currentTransaction = ensureTransaction(transaction);
@@ -491,6 +493,9 @@ export class TransactionPanelComponent extends Component {
                   lineItems={lineItems}
                   fetchLineItemsInProgress={fetchLineItemsInProgress}
                   fetchLineItemsError={fetchLineItemsError}
+                  bookingType={bookingTypeOnPanel}
+                  toggleBookingType={toggleBookingTypeOnPanel}
+                  unitType={unitType}
                 />
               ) : null}
               <BreakdownMaybe

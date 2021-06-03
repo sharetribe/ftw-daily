@@ -824,7 +824,7 @@ export class CheckoutPageComponent extends Component {
     // const isDaily = unitType === LINE_ITEM_DAY;
 
     const price = currentListing.attributes.price;
-    const {amount, currency} = bookingType !== HOURLY_PRICE ? publicData[bookingType] : price;
+    const {amount, currency} = bookingType !== HOURLY_PRICE && publicData[bookingType] ? publicData[bookingType] : price;
     let key = 'perHour';
     switch(bookingType){
       case DAILY_PRICE:

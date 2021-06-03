@@ -9,7 +9,7 @@ import {
   TRANSITION_CONFIRM_PAYMENT,
   isPrivileged,
 } from '../../util/transaction';
-import { LINE_ITEM_UNITS } from '../../util/types';
+import { HOURLY_PRICE, LINE_ITEM_UNITS } from '../../util/types';
 import * as log from '../../util/log';
 import { fetchCurrentUserHasOrdersSuccess, fetchCurrentUser } from '../../ducks/user.duck';
 
@@ -187,7 +187,8 @@ export const initiateOrder = (orderParams, transactionId) => (dispatch, getState
           ...orderParams,
           protectedData: {
             ...(orderParams.protectedData ? orderParams.protectedData : {}),
-            type: orderParams.type
+            type: orderParams.type,
+            ...(orderParams.type === HOURLY_PRICE ? {isHourly: true} : {})
           }
         },
       }
@@ -200,7 +201,8 @@ export const initiateOrder = (orderParams, transactionId) => (dispatch, getState
           ...orderParams,
           protectedData: {
             ...(orderParams.protectedData ? orderParams.protectedData : {}),
-            type: orderParams.type
+            type: orderParams.type,
+            ...(orderParams.type === HOURLY_PRICE ? {isHourly: true} : {})
           }
         },
       };
@@ -335,7 +337,8 @@ export const speculateTransaction = (orderParams, transactionId) => (dispatch, g
     ...orderParams,
     protectedData: {
       ...(orderParams.protectedData ? orderParams.protectedData : {}),
-      type: orderParams.type
+      type: orderParams.type,
+      ...(orderParams.type === HOURLY_PRICE ? {isHourly: true} : {})
     },
     cardToken: 'CheckoutPage_speculative_card_token',
   };
@@ -345,7 +348,6 @@ export const speculateTransaction = (orderParams, transactionId) => (dispatch, g
       id: transactionId,
       transition,
       params,
-      processAlias,
     } : {
       processAlias,
       transition,
