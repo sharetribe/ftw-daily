@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Form as FinalForm, FormSpy } from 'react-final-form';
+import { formatMoney } from '../../util/currency';
+import { types as sdkTypes } from '../../util/sdkLoader';
 import { Form, FieldRadioButton } from '../../components';
 import { getAvailablePrices } from '../../util/data';
 import { 
@@ -8,6 +10,7 @@ import {
 
 import css from './BookingTypes.module.css';
 
+const { Money } = sdkTypes;
 export default class BookingTypes extends Component {
   handleOnChange(values){
     this.props.onChange(values.bookingType)
@@ -18,7 +21,7 @@ export default class BookingTypes extends Component {
 
     const prices = getAvailablePrices(listing);
 
-    return (
+    return (  
       <div>
         <FinalForm
         // {...rest}
@@ -40,12 +43,14 @@ export default class BookingTypes extends Component {
 
               <div className={css.types}>
                 {prices.map(({key, value}) => {
+                  const {currency, amount} = value;
+                  const price = formatMoney(intl, new Money(amount, currency));
                   return (
                     <div className={css.sessionCheckboxItem}>
                       <FieldRadioButton
                         id={`bookingType${key}`}
                         name="bookingType"
-                        label={intl.formatMessage({id: `BookingTypes.${key}Label`})}
+                        label={intl.formatMessage({id: `BookingTypes.${key}Label`}, {price})}
                         value={key}
                         // labelClassName={labelClassName}
                       />

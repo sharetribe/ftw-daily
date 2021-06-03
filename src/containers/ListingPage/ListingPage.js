@@ -40,6 +40,7 @@ import {
   Footer,
   BookingPanel,
 } from '../../components';
+import moment from 'moment';
 import { TopbarContainer, NotFoundPage } from '../../containers';
 
 import { 
@@ -118,10 +119,10 @@ export class ListingPageComponent extends Component {
     const {bookingType} = this.state;
     const listingId = new UUID(params.id);
     const listing = getListing(listingId);
-    console.log(values)
+
     const { bookingStartTime, bookingEndTime, bookingDates, ...restOfValues } = values;
-    const bookingStart = bookingType === HOURLY_PRICE ? timestampToDate(bookingStartTime) : bookingDates.startDate;
-    const bookingEnd = bookingType === HOURLY_PRICE ? timestampToDate(bookingEndTime) : bookingDates.endDate;
+    const bookingStart = bookingType === HOURLY_PRICE ? timestampToDate(bookingStartTime) : moment(bookingDates.startDate).tz('UTC').startOf('day').toDate();
+    const bookingEnd = bookingType === HOURLY_PRICE ? timestampToDate(bookingEndTime) : moment(bookingDates.endDate).tz('UTC').startOf('day').toDate();
 
     const bookingData = {
       // quantity: calculateQuantityFromHours(bookingStart, bookingEnd),

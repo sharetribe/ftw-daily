@@ -183,14 +183,26 @@ export const initiateOrder = (orderParams, transactionId) => (dispatch, getState
     ? {
         id: transactionId,
         transition,
-        params: orderParams,
+        params: {
+          ...orderParams,
+          protectedData: {
+            ...(orderParams.protectedData ? orderParams.protectedData : {}),
+            type: orderParams.type
+          }
+        },
       }
     : {
         processAlias,
         transition: TRANSITION_REQUEST_PAYMENT,
         // processAlias: config.bookingProcessAlias,
         // transition,
-        params: orderParams,
+        params: {
+          ...orderParams,
+          protectedData: {
+            ...(orderParams.protectedData ? orderParams.protectedData : {}),
+            type: orderParams.type
+          }
+        },
       };
   const queryParams = {
     include: ['booking', 'provider'],
@@ -321,6 +333,10 @@ export const speculateTransaction = (orderParams, transactionId) => (dispatch, g
 
   const params = {
     ...orderParams,
+    protectedData: {
+      ...(orderParams.protectedData ? orderParams.protectedData : {}),
+      type: orderParams.type
+    },
     cardToken: 'CheckoutPage_speculative_card_token',
   };
 

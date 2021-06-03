@@ -194,8 +194,6 @@ export const isOutsideRangeFn = (timeSlots, startDate, endDate, focusedInput, un
     return day => {
       const lastDayToEndBooking = apiEndDateToPickerDateForDaily(nextBookingStarts.toDate());
 
-      console.log(lastDayToEndBooking)
-
       return (
         !isInclusivelyAfterDay(day, startDate) || !isInclusivelyBeforeDay(day, lastDayToEndBooking)
       );

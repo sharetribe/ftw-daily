@@ -15,7 +15,10 @@ import {
   LINE_ITEM_DISCOUNT,
   DATE_TYPE_DATE,
   DATE_TYPE_DATETIME,
-  HOURLY_PRICE
+  HOURLY_PRICE,
+  DAILY_PRICE,
+  WEEKLY_PRICE,
+  MONTHLY_PRICE,
 } from '../../util/types';
 import {
   ensureListing,
@@ -605,6 +608,8 @@ export class CheckoutPageComponent extends Component {
       stripeCustomerFetched,
     } = this.props;
 
+    const { pageData } = this.state;
+    const bookingType = pageData && pageData.bookingData && pageData.bookingData.bookingType;
     // Since the listing data is already given from the ListingPage
     // and stored to handle refreshes, it might not have the possible
     // deleted or closed information in it. If the transaction
@@ -681,10 +686,7 @@ export class CheckoutPageComponent extends Component {
     const timeZone = currentListing.attributes.availabilityPlan
       ? currentListing.attributes.availabilityPlan.timezone
       : 'Etc/UTC';
-    const dateType = tx &&
-                     tx.attributes &&
-                     tx.attributes.protectedData &&
-                     tx.attributes.protectedData.bookingType === HOURLY_PRICE ? DATE_TYPE_DATETIME : DATE_TYPE_DATE;
+    const dateType = bookingType === HOURLY_PRICE ? DATE_TYPE_DATETIME : DATE_TYPE_DATE;
 
     const breakdown =
       tx.id && txBooking.id ? (
@@ -818,18 +820,24 @@ export class CheckoutPageComponent extends Component {
       );
     }
 
-    const isHourly = unitType === LINE_ITEM_UNITS;
-    const isDaily = unitType === LINE_ITEM_DAY;
-
-    const unitTranslationKey = isHourly
-      ? 'CheckoutPage.perHour'
-      : isDaily
-      ? 'CheckoutPage.perDay'
-      : 'CheckoutPage.perUnit';
+    // const isHourly = unitType === LINE_ITEM_UNITS;
+    // const isDaily = unitType === LINE_ITEM_DAY;
 
     const price = currentListing.attributes.price;
-    const formattedPrice = formatMoney(intl, price);
-    const detailsSubTitle = `${formattedPrice} ${intl.formatMessage({ id: unitTranslationKey })}`;
+    const {amount, currency} = bookingType !== HOURLY_PRICE ? publicData[bookingType] : price;
+    let key = 'perHour';
+    switch(bookingType){
+      case DAILY_PRICE:
+        key = 'perDay';
+        break;
+      case WEEKLY_PRICE:
+        key = 'perWeek';
+        break;
+      case MONTHLY_PRICE:
+        key = 'perMonth';
+        break;
+    }
+    const detailsSubTitle = `${formatMoney(intl, new Money(amount, currency))} ${intl.formatMessage({ id: `CheckoutPage.${key}` })}`;
 
     const showInitialMessageInput = !(
       existingTransaction && existingTransaction.attributes.lastTransition === TRANSITION_ENQUIRE

@@ -184,6 +184,7 @@ const BookingPanel = props => {
 
         {showBookingDatesForm ? (
           <BookingDatesForm
+            key={bookingType}
             className={css.bookingForm}
             formId="BookingPanel"
             submitButtonWrapperClassName={css.bookingDatesSubmitButtonWrapper}
@@ -206,6 +207,7 @@ const BookingPanel = props => {
 
         {showBookingTimeForm ? (
           <BookingTimeForm
+            key={bookingType}
             className={css.bookingForm}
             formId="BookingPanel"
             submitButtonWrapperClassName={css.submitButtonWrapper}

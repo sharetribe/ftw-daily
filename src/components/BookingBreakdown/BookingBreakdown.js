@@ -5,6 +5,7 @@
 import React from 'react';
 import { oneOf, string } from 'prop-types';
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
+import { DATE_TYPE_DATE } from '../../util/types';
 import classNames from 'classnames';
 import {
   propTypes,
@@ -39,6 +40,8 @@ export const BookingBreakdownComponent = props => {
     dateType,
     timeZone
   } = props;
+
+  const isDaily = dateType === DATE_TYPE_DATE;
 
   const isCustomer = userRole === 'customer';
   const isProvider = userRole === 'provider';
@@ -95,10 +98,11 @@ export const BookingBreakdownComponent = props => {
         unitType={unitType}
         dateType={dateType}
         timeZone={timeZone}
+        isDaily={isDaily}
       />
-      <LineItemUnitsMaybe transaction={transaction} unitType={unitType} />
+      <LineItemUnitsMaybe transaction={transaction} unitType={unitType} isDaily={isDaily}/>
 
-      <LineItemBasePriceMaybe transaction={transaction} unitType={unitType} intl={intl} />
+      <LineItemBasePriceMaybe transaction={transaction} unitType={unitType} intl={intl} isDaily={isDaily}/>
       <LineItemUnknownItemsMaybe transaction={transaction} isProvider={isProvider} intl={intl} />
 
       <LineItemSubTotalMaybe

@@ -55,24 +55,35 @@ const EditListingPricingPanel = props => {
   );
 
   const initialPrices = listing => {
-    const {publicData} = listing && listing.attributes || {};
+    const {publicData, price} = listing && listing.attributes || {};
 
     if (!publicData){
       return null;
     }
 
-    return [DAILY_PRICE, WEEKLY_PRICE, MONTHLY_PRICE].reduce((acc, p) => {
-      if (!publicData[p]){
-        return acc;
-      }
-
-      const {amount, currency} = publicData[p];
-
+    //for support old listings types
+    if (publicData.unitType && publicData.unitType === LINE_ITEM_DAY){
       return {
-        ...acc,
-        [p]: new Money(amount, currency)
+        price: new Money(price.amount / 24, price.currency),
+        [DAILY_PRICE]: price
       }
-    }, {})
+    }
+
+    return {
+      price,
+      ...([DAILY_PRICE, WEEKLY_PRICE, MONTHLY_PRICE].reduce((acc, p) => {
+        if (!publicData[p]){
+          return acc;
+        }
+
+        const {amount, currency} = publicData[p];
+
+        return {
+          ...acc,
+          [p]: new Money(amount, currency)
+        }
+      }, {}))
+    }
   }
 
   const initialDiscounts = listing => {

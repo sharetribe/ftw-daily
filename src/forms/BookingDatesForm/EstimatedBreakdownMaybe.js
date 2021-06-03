@@ -214,7 +214,7 @@ const estimatedTransaction = (bookingStart, bookingEnd, lineItems, userRole, boo
         },
       ],
       protectedData: {
-        bookingType
+        type: bookingType
       }
     },
     booking: {

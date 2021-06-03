@@ -186,6 +186,8 @@ const maps = {
   },
 };
 
+const bookingUnitType = 'line-item/units';
+
 // NOTE: only expose configuration that should be visible in the
 // client side, don't add any server secrets in this file.
 const config = {
@@ -197,6 +199,7 @@ const config = {
   enableAvailability,
   dayCountAvailableForBooking,
   i18n,
+  bookingUnitType,
   sdk: {
     clientId: sdkClientId,
     baseUrl: sdkBaseUrl,
