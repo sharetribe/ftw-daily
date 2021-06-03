@@ -25,6 +25,18 @@
   margin-bottom: 32px;
 }
 
+.inputNumber input[type="number"] {
+  appearance: textfield;
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
 .submitButton {
   margin-top: auto;
   margin-bottom: 24px;

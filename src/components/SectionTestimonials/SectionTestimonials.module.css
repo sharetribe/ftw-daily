@@ -3,10 +3,11 @@
 .title {
   @apply --marketplaceH1FontStyles;
   margin-top: 0;
+  text-align: center;
 }
 
 .testimonialsSection {
-  padding: 0 1.25rem;
+  padding: 0;
   margin: 0 auto;
 }
 

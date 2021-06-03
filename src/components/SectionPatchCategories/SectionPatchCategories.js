@@ -8,11 +8,11 @@ import { NamedLink } from '../../components';
 
 import css from './SectionPatchCategories.module.css';
 
-import hairBeautyImage from       './images/hair_beauty.png';
-import fitnessWellnessImage from  './images/fitness_wellness.png';
-import studioSpaceImage from      './images/studio_space.png';
-import eventSpaceImage from       './images/event_space.png';
-import coworkingImage from        './images/coworking.png';
+import hairBeautyImage from       './images/hair_beauty.jpg';
+import fitnessWellnessImage from  './images/fitness_wellness.jpg';
+import studioSpaceImage from      './images/studio_space.jpg';
+import eventSpaceImage from       './images/event_space.jpg';
+import coworkingImage from        './images/coworking.jpg';
 
 const locationParams =            '?address=&bounds=59.49417013%2C4.15978193%2C49.54972301%2C-10.51994741';
 const hairBeautyUrlParams =       '&pub_category=hair-stylist%2Cbarber%2Cmakeup-artist%2Cnail-technician%2Ccosmetics%2Cbeauty-treatment-room';

@@ -8,6 +8,9 @@ import {
   IconSocialMediaFacebook,
   IconSocialMediaInstagram,
   IconSocialMediaTwitter,
+  IconSocialMediaYoutube,
+  IconSocialMediaLinkedin,
+  IconSocialMediaTikTok,
   Logo,
   ExternalLink,
   NamedLink,
@@ -16,32 +19,40 @@ import {
 import css from './Footer.module.css';
 
 const renderSocialMediaLinks = intl => {
-  const { siteFacebookPage, siteInstagramPage, siteTwitterHandle } = config;
+  const {
+    siteFacebookPage,
+    siteInstagramPage,
+    siteTwitterHandle,
+    siteLinkedinPage,
+    siteYoutubePage,
+    siteTikTokPage
+   } = config;
+
   const siteTwitterPage = twitterPageURL(siteTwitterHandle);
 
   const goToFb = intl.formatMessage({ id: 'Footer.goToFacebook' });
   const goToInsta = intl.formatMessage({ id: 'Footer.goToInstagram' });
   const goToTwitter = intl.formatMessage({ id: 'Footer.goToTwitter' });
-
+  const goToLinkedin = intl.formatMessage({ id: 'Footer.goToLinkedin' });
+  const goToYoutube = intl.formatMessage({ id: 'Footer.goToYoutube' });
+  const goToTikTok = intl.formatMessage({ id: 'Footer.goToTikTok' });
+  
   const fbLink = siteFacebookPage ? (
     <ExternalLink key="linkToFacebook" href={siteFacebookPage} className={css.icon} title={goToFb}>
       <IconSocialMediaFacebook />
     </ExternalLink>
   ) : null;
 
-  // const twitterLink = siteTwitterPage ? (
-  //   <ExternalLink
-  //     key="linkToTwitter"
-  //     href={siteTwitterPage}
-  //     className={css.icon}
-  //     title={goToTwitter}
-  //   >
-  //     <IconSocialMediaTwitter />
-  //   </ExternalLink>
-  // ) : null;
-
-  // want to keep seo benefits of twitter meta tags, but do not want icon w/link (for now at least)
-  const twitterLink = null;
+  const twitterLink = siteTwitterPage ? (
+    <ExternalLink
+      key="linkToTwitter"
+      href={siteTwitterPage}
+      className={css.icon}
+      title={goToTwitter}
+    >
+      <IconSocialMediaTwitter />
+    </ExternalLink>
+  ) : null;
 
   const instragramLink = siteInstagramPage ? (
     <ExternalLink
@@ -53,7 +64,41 @@ const renderSocialMediaLinks = intl => {
       <IconSocialMediaInstagram />
     </ExternalLink>
   ) : null;
-  return [fbLink, twitterLink, instragramLink].filter(v => v != null);
+
+  const linkedinLink = siteLinkedinPage ? (
+    <ExternalLink
+      key="linkToLinkedin"
+      href={siteLinkedinPage}
+      className={css.icon}
+      title={goToLinkedin}
+    >
+      <IconSocialMediaLinkedin />
+    </ExternalLink>
+  ) : null;
+  
+  const youtubeLink = siteYoutubePage ? (
+    <ExternalLink
+      key="linkToYoutube"
+      href={siteYoutubePage}
+      className={css.icon}
+      title={goToYoutube}
+    >
+      <IconSocialMediaYoutube />
+    </ExternalLink>
+  ) : null;
+
+  const tikTokLink = siteTikTokPage ? (
+    <ExternalLink
+      key="linkToTikTok"
+      href={siteTikTokPage}
+      className={css.icon}
+      title={goToTikTok}
+    >
+      <IconSocialMediaTikTok />
+    </ExternalLink>
+  ) : null;
+
+  return [fbLink, instragramLink, twitterLink, linkedinLink, youtubeLink, tikTokLink].filter(v => v != null);
 };
 
 const Footer = props => {
