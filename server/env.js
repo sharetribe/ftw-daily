@@ -15,11 +15,11 @@ if (!NODE_ENV) {
 // https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use
 var dotenvFiles = [
   `.env.${NODE_ENV}.local`,
-  `.env.${NODE_ENV}`,
   // Don't include `.env.local` for `test` environment
   // since normally you expect tests to produce the same
   // results for everyone
-  NODE_ENV !== 'test' && `env.local`,
+  NODE_ENV !== 'test' && `.env.local`,
+  `.env.${NODE_ENV}`,
   '.env',
 ].filter(Boolean);
 

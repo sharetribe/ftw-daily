@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import css from './IconSocialMediaYoutube.css';
+import css from './IconSocialMediaYoutube.module.css';
 
 const IconSocialMediaYoutube = props => {
   const { rootClassName, className } = props;

@@ -1,7 +1,10 @@
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { fetchCurrentUser } from '../../ducks/user.duck';
+import { types as sdkTypes } from '../../util/sdkLoader';
 import { denormalisedResponseEntities } from '../../util/data';
 import { storableError } from '../../util/errors';
+
+const { UUID } = sdkTypes;
 
 // ================ Action types ================ //
 
@@ -170,7 +173,9 @@ export const showUser = userId => (dispatch, getState, sdk) => {
     .catch(e => dispatch(showUserError(storableError(e))));
 };
 
-export const loadData = userId => (dispatch, getState, sdk) => {
+export const loadData = params => (dispatch, getState, sdk) => {
+  const userId = new UUID(params.id);
+
   // Clear state so that previously loaded data is not visible
   // in case this page load fails.
   dispatch(setInitialState());

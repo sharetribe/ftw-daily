@@ -11,7 +11,7 @@ import { START_DATE } from '../../util/dates';
 import config from '../../config';
 
 import { IconArrowHead } from '../../components';
-import css from './DateRangeController.css';
+import css from './DateRangeController.module.css';
 
 export const HORIZONTAL_ORIENTATION = 'horizontal';
 export const ANCHOR_LEFT = 'left';

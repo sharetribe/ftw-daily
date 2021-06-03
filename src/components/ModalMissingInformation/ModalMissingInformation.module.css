@@ -1,0 +1,48 @@
+@import '../../styles/propertySets.css';
+
+.root {
+  /* Adding empty .root class to enforce className overwrite */
+}
+
+/* Title of the modal */
+.modalTitle {
+  @apply --marketplaceModalTitleStyles;
+}
+
+/* Paragraph for the Modal */
+.modalMessage {
+  @apply --marketplaceModalParagraphStyles;
+}
+
+/* Make the email pop */
+.email {
+  font-weight: var(--fontWeightHighlightEmail);
+}
+
+.helperLink {
+  @apply --marketplaceLinkStyles;
+  @apply --marketplaceModalHelperLink;
+}
+
+.helperText {
+  @apply --marketplaceModalHelperText;
+}
+
+.error {
+  @apply --marketplaceModalErrorStyles;
+}
+
+.bottomWrapper {
+  @apply --marketplaceModalBottomWrapper;
+
+  /* Align the helper links to the left since there isn't a Primary Button anymore */
+  text-align: left;
+}
+
+.modalIcon {
+  @apply --marketplaceModalIconStyles;
+}
+
+.reminderModalLinkButton {
+  @apply --marketplaceButtonStylesPrimary;
+}

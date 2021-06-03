@@ -4,7 +4,7 @@ import { getPlacePredictions, getPlaceDetails, locationBounds } from '../../util
 import { userLocation } from '../../util/maps';
 import config from '../../config';
 
-import css from './LocationAutocompleteInput.css';
+import css from './LocationAutocompleteInput.module.css';
 
 export const CURRENT_LOCATION_ID = 'current-location';
 

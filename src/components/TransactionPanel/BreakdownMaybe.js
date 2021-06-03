@@ -1,10 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
-import { DATE_TYPE_DATE, DATE_TYPE_DATETIME, LINE_ITEM_DAY } from '../../util/types';
+import { DATE_TYPE_DATE, DATE_TYPE_DATETIME, LINE_ITEM_DAY, HOURLY_PRICE } from '../../util/types';
 import { ensureListing } from '../../util/data';
 import { BookingBreakdown } from '../../components';
 
-import css from './TransactionPanel.css';
+import css from './TransactionPanel.module.css';
 
 // Functional component as a helper to build BookingBreakdown
 const BreakdownMaybe = props => {
@@ -15,8 +15,12 @@ const BreakdownMaybe = props => {
     loaded && listingAttributes.availabilityPlan
       ? listingAttributes.availabilityPlan.timezone
       : 'Etc/UTC';
-  const dateType = unitType === LINE_ITEM_DAY ? DATE_TYPE_DATE : DATE_TYPE_DATETIME;
-
+  const bookingType = transaction &&
+                  transaction.attributes &&
+                  transaction.attributes.protectedData &&
+                  transaction.attributes.protectedData.type || HOURLY_PRICE;
+  const dateType = bookingType === HOURLY_PRICE ? DATE_TYPE_DATETIME : DATE_TYPE_DATE;
+  
   const classes = classNames(rootClassName || css.breakdownMaybe, className);
   const breakdownClasses = classNames(breakdownClassName || css.breakdown);
 

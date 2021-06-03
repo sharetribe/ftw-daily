@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 
-import css from './StripeBankAccountTokenInputField.css';
+import css from './StripeBankAccountTokenInputField.module.css';
 
 const StripeBankAccountRequiredInput = props => {
   const {

@@ -12,7 +12,7 @@ import {
 } from '../../components';
 import { propTypes } from '../../util/types';
 
-import css from './EmailVerificationForm.css';
+import css from './EmailVerificationForm.module.css';
 
 const EmailVerificationFormComponent = props => (
   <FinalForm
@@ -88,7 +88,7 @@ const EmailVerificationFormComponent = props => (
         </div>
       );
 
-      return emailVerified && !pendingEmail ? alreadyVerified : verifyEmail;
+      return emailVerified && !pendingEmail && !verificationError ? alreadyVerified : verifyEmail;
     }}
   />
 );

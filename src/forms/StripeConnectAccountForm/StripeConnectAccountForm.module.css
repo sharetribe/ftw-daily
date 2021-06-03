@@ -1,0 +1,127 @@
+@import '../../styles/propertySets.css';
+
+.root {
+  margin-top: 24px;
+}
+
+@media (--viewportMedium) {
+  .root {
+    margin-top: 48px;
+  }
+}
+
+.disabled {
+  opacity: 0.5;
+}
+
+.sectionContainer {
+  margin-bottom: 35px;
+
+  @media (--viewportMedium) {
+    margin-bottom: 56px;
+  }
+}
+
+.formRow {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.radioButtonRow {
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 24px;
+  white-space: nowrap;
+}
+
+.radioButtonRow > :first-child {
+  margin-right: 36px;
+}
+
+.selectCountry {
+  margin-bottom: 24px;
+}
+
+.error {
+  @apply --marketplaceModalErrorStyles;
+}
+
+.termsText {
+  @apply --marketplaceModalHelperText;
+  margin-bottom: 12px;
+  text-align: center;
+
+  @media (--viewportMedium) {
+    margin-bottom: 16px;
+  }
+}
+
+.termsLink {
+  @apply --marketplaceModalHelperLink;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+.bankDetailsStripeField p {
+  @apply --marketplaceH4FontStyles;
+}
+
+.missingStripeKey {
+  color: var(--failColor);
+}
+
+.accountInformationTitle {
+  @apply --marketplaceH3FontStyles;
+  margin: 0;
+  padding-top: 5px;
+  padding-bottom: 1px;
+}
+
+@media (--viewportMedium) {
+  .accountInformationTitle {
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+}
+
+.savedCountry {
+  padding-top: 6px;
+  padding-bottom: 0px;
+}
+@media (--viewportMedium) {
+  .savedCountry {
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+}
+
+.savedInformation {
+  margin-bottom: 24px;
+}
+
+.savedBankAccount {
+  width: 100%;
+  border-bottom: 2px solid var(--successColor);
+  margin-bottom: 24px;
+  padding: 4px 0 10px 0;
+  color: var(--matterColor);
+  text-align: left;
+
+  &:hover {
+    cursor: text;
+    text-decoration: none;
+    border-color: var(--matterColor);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--matterColor);
+  }
+}

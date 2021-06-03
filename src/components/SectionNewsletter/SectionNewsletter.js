@@ -9,7 +9,7 @@ import {NewsletterForm } from '../../forms';
 
 import { signupInProgress, signup } from '../../ducks/Newsletter.duck';
 
-import css from './SectionNewsletter.css';
+import css from './SectionNewsletter.module.css';
 import HubspotForm from "react-hubspot-form";
 
 export class SectionNewsletterComponent extends Component {

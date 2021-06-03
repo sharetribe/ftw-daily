@@ -11,7 +11,7 @@ import config from '../../config';
 
 import { hasParentWithClassName } from './SearchMap.helpers.js';
 // import SearchMapWithMapbox, {
-import SearchMapWithGoogleMap, {
+import SearchMapWithGoogleMaps, {
   LABEL_HANDLE,
   INFO_CARD_HANDLE,
   getMapBounds,
@@ -19,9 +19,9 @@ import SearchMapWithGoogleMap, {
   fitMapToBounds,
   isMapsLibLoaded,
 // } from './SearchMapWithMapbox';
-} from './SearchMapWithGoogleMap';
+} from './SearchMapWithGoogleMaps';
 import ReusableMapContainer from './ReusableMapContainer';
-import css from './SearchMap.css';
+import css from './SearchMap.module.css';
 
 const REUSABLE_MAP_HIDDEN_HANDLE = 'reusableMapHidden';
 
@@ -116,6 +116,7 @@ export class SearchMapComponent extends Component {
 
   render() {
     const {
+      id,
       className,
       rootClassName,
       reusableContainerClassName,
@@ -158,11 +159,13 @@ export class SearchMapComponent extends Component {
     //   activeListingId={activeListingId}
     //   mapComponentRefreshToken={this.state.mapReattachmentCount}
     //   createURLToListing={this.createURLToListing}
+    //   onClick={this.onMapClicked}
     //   onListingClicked={this.onListingClicked}
     //   onListingInfoCardClicked={this.onListingInfoCardClicked}
     //   onMapLoad={this.onMapLoadHandler}
     //   onClick={this.onMapClicked}
     //   onMapMoveEnd={onMapMoveEnd}
+    //   reusableMapHiddenHandle={REUSABLE_MAP_HIDDEN_HANDLE}
     //   zoom={zoom}
     //   reusableMapHiddenHandle={REUSABLE_MAP_HIDDEN_HANDLE}
     // />
@@ -174,7 +177,7 @@ export class SearchMapComponent extends Component {
         onReattach={forceUpdateHandler}
         messages={messages}
       >
-      <SearchMapWithGoogleMap
+      <SearchMapWithGoogleMaps
         containerElement={
           <div id="search-map-container" className={classes} onClick={this.onMapClicked} />
         }
@@ -201,6 +204,7 @@ export class SearchMapComponent extends Component {
 }
 
 SearchMapComponent.defaultProps = {
+  id: 'searchMap',
   className: null,
   rootClassName: null,
   mapRootClassName: null,
@@ -215,6 +219,7 @@ SearchMapComponent.defaultProps = {
 };
 
 SearchMapComponent.propTypes = {
+  id: string,
   className: string,
   rootClassName: string,
   mapRootClassName: string,

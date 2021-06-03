@@ -3,11 +3,9 @@
  */
 
 import React from 'react';
-import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server';
-import { Helmet } from 'react-helmet-async';
 import forEach from 'lodash/forEach';
-import { ClientApp, ServerApp } from './app';
+import { ServerApp } from './app';
 import configureStore from './store';
 
 const render = (url, context) => {
@@ -30,30 +28,6 @@ describe('Application - node environment', () => {
 
   it('renders the styleguide without crashing', () => {
     render('/styleguide', {});
-  });
-
-  it('server renders pages that do not require authentication', () => {
-    const urlTitles = {
-      '/': 'LandingPage.schemaTitle',
-      '/s': 'SearchPage.schemaTitle',
-      '/l/listing-title-slug/1234': 'ListingPage.loadingListingTitle',
-      '/l/1234': 'ListingPage.loadingListingTitle',
-      '/u/1234': 'ProfilePage.schemaTitle',
-      '/login': 'AuthenticationPage.schemaTitleLogin',
-      '/signup': 'AuthenticationPage.schemaTitleSignup',
-      '/recover-password': 'PasswordRecoveryPage.title',
-      '/this-url-should-not-be-found': 'NotFoundPage.title',
-      '/reset-password?t=token&e=email': 'PasswordResetPage.title',
-    };
-    forEach(urlTitles, (title, url) => {
-      const context = {};
-      const { head, body } = render(url, context);
-
-      expect(head.title.toString()).toContain(title);
-
-      // context.url will contain the URL to redirect to if a <Redirect> was used
-      expect(context.url).not.toBeDefined();
-    });
   });
 
   it('server renders redirects for pages that require authentication', () => {
@@ -80,7 +54,7 @@ describe('Application - node environment', () => {
     };
     forEach(urlRedirects, (redirectPath, url) => {
       const context = {};
-      const { body } = render(url, context);
+      render(url, context);
       expect(context.url).toEqual(redirectPath);
     });
   });
@@ -89,7 +63,7 @@ describe('Application - node environment', () => {
     const urlRedirects = { '/l': '/', '/u': '/' };
     forEach(urlRedirects, (redirectPath, url) => {
       const context = {};
-      const { body } = render(url, context);
+      render(url, context);
       expect(context.url).toEqual(redirectPath);
     });
   });

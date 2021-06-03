@@ -6,7 +6,7 @@ import { FieldPhoneNumberInput, FieldTextInput } from '../../components';
 
 import * as normalizePhoneNumberUS from './normalizePhoneNumberUS';
 import PayoutDetailsBusinessProfile from './PayoutDetailsBusinessProfile';
-import css from './PayoutDetailsForm.css';
+import css from './PayoutDetailsForm.module.css';
 
 const PayoutDetailsCompany = props => {
   const {

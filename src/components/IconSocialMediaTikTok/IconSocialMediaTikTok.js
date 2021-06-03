@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import css from './IconSocialMediaTikTok.css';
+import css from './IconSocialMediaTikTok.module.css';
 
 const IconSocialMediaTikTok = props => {
   const { rootClassName, className } = props;

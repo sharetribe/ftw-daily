@@ -1,27 +1,49 @@
 import React, { Component } from 'react';
 import { bool, func, object, string } from 'prop-types';
 import { compose } from 'redux';
-import { Form as FinalForm } from 'react-final-form';
+import { Form as FinalForm, FormSpy } from 'react-final-form';
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 import classNames from 'classnames';
-import { calculateQuantityFromHours, timestampToDate } from '../../util/dates';
-import { propTypes } from '../../util/types';
+import { timestampToDate } from '../../util/dates';
+import { propTypes, HOURLY_PRICE } from '../../util/types';
 import config from '../../config';
-import { Form, PrimaryButton } from '../../components';
+import { Form, PrimaryButton, IconSpinner } from '../../components';
 import EstimatedBreakdownMaybe from './EstimatedBreakdownMaybe';
 import FieldDateAndTimeInput from './FieldDateAndTimeInput';
 
-import css from './BookingTimeForm.css';
+import css from './BookingTimeForm.module.css';
 
 export class BookingTimeFormComponent extends Component {
   constructor(props) {
     super(props);
 
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleOnChange = this.handleOnChange.bind(this);
   }
 
   handleFormSubmit(e) {
     this.props.onSubmit(e);
+  }
+
+  // When the values of the form are updated we need to fetch
+  // lineItems from FTW backend for the EstimatedTransactionMaybe
+  // In case you add more fields to the form, make sure you add
+  // the values here to the bookingData object.
+  handleOnChange(formValues) {
+    const { bookingStartTime, bookingEndTime } = formValues.values;
+    const startDate = bookingStartTime ? timestampToDate(bookingStartTime) : null;
+    const endDate = bookingEndTime ? timestampToDate(bookingEndTime) : null;
+
+    const listingId = this.props.listingId;
+    const isOwnListing = this.props.isOwnListing;
+
+    if (bookingStartTime && bookingEndTime && !this.props.fetchLineItemsInProgress) {
+      this.props.onFetchTransactionLineItems({
+        bookingData: { startDate, endDate, type: HOURLY_PRICE },
+        listingId,
+        isOwnListing,
+      });
+    }
   }
 
   render() {
@@ -69,6 +91,9 @@ export class BookingTimeFormComponent extends Component {
             monthlyTimeSlots,
             onFetchTimeSlots,
             timeZone,
+            lineItems,
+            fetchLineItemsInProgress,
+            fetchLineItemsError,
           } = fieldRenderProps;
 
           const startTime = values && values.bookingStartTime ? values.bookingStartTime : null;
@@ -89,22 +114,32 @@ export class BookingTimeFormComponent extends Component {
             startDate && endDate
               ? {
                   unitType,
-                  unitPrice,
                   startDate,
                   endDate,
-
-                  // Calculate the quantity as hours between the booking start and booking end
-                  quantity: calculateQuantityFromHours(startDate, endDate),
                   timeZone,
                 }
               : null;
-          const bookingInfo = bookingData ? (
+          
+          const showEstimatedBreakdown =
+            bookingData && lineItems && !fetchLineItemsInProgress && !fetchLineItemsError;
+
+          const bookingInfoMaybe = showEstimatedBreakdown ? (
             <div className={css.priceBreakdownContainer}>
               <h3 className={css.priceBreakdownTitle}>
                 <FormattedMessage id="BookingTimeForm.priceBreakdownTitle" />
               </h3>
-              <EstimatedBreakdownMaybe bookingData={bookingData} />
+              <EstimatedBreakdownMaybe bookingData={bookingData} lineItems={lineItems} />
             </div>
+          ) : null;
+
+          const loadingSpinnerMaybe = fetchLineItemsInProgress ? (
+            <IconSpinner className={css.spinner} />
+          ) : null;
+
+          const bookingInfoErrorMaybe = fetchLineItemsError ? (
+            <span className={css.sideBarError}>
+              <FormattedMessage id="BookingDatesForm.fetchLineItemsError" />
+            </span>
           ) : null;
 
           const submitButtonClasses = classNames(
@@ -127,6 +162,12 @@ export class BookingTimeFormComponent extends Component {
 
           return (
             <Form onSubmit={handleSubmit} className={classes}>
+              <FormSpy
+                subscription={{ values: true }}
+                onChange={values => {
+                  this.handleOnChange(values);
+                }}
+              />
               {monthlyTimeSlots && timeZone ? (
                 <FieldDateAndTimeInput
                   {...dateInputProps}
@@ -142,7 +183,11 @@ export class BookingTimeFormComponent extends Component {
                   timeZone={timeZone}
                 />
               ) : null}
-              {bookingInfo}
+
+              {bookingInfoMaybe}
+              {loadingSpinnerMaybe}
+              {bookingInfoErrorMaybe}
+
               <p className={css.smallPrint}>
                 <FormattedMessage
                   id={

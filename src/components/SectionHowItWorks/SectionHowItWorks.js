@@ -9,7 +9,7 @@ import {ReactComponent as SearchIcon} from './svgs/search.svg';
 import {ReactComponent as MoneyIcon} from './svgs/money.svg';
 import {ReactComponent as UploadIcon} from './svgs/upload.svg';
 
-import css from './SectionHowItWorks.css';
+import css from './SectionHowItWorks.module.css';
 
 const onGreyTxtClick = () => {
   const toggleDiv = document.getElementById("toggle");
@@ -29,7 +29,7 @@ const SectionHowItWorks = props => {
 
   // NOTE to change tglGreyedOutText, must not only change the en.json,
   // it also must be changed inside of the css file...
-  // SectionHowItWorks.css -> line 101 & line 72 inside of
+  // SectionHowItWorks.module.css -> line 101 & line 72 inside of
   // '.tglButton .checkbox:checked + .knobs:before' AND '.tglButton .knobs:before'
   const tglGreyedOutText = isUser ? "SectionHowItWorks.toggleGreyTextUser" : "SectionHowItWorks.toggleGreyTextHost";
   const tglGreyCss = isUser ? css.rightSideGreyToggle : css.leftSideGreyToggle;

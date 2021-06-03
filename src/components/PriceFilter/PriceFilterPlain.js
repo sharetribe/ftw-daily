@@ -8,7 +8,7 @@ import config from '../../config';
 
 import { PriceFilterForm } from '../../forms';
 
-import css from './PriceFilterPlain.css';
+import css from './PriceFilterPlain.module.css';
 
 const RADIX = 10;
 

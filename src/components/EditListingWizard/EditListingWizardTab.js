@@ -11,8 +11,9 @@ import {
 import { ensureListing } from '../../util/data';
 import { createResourceLocatorString } from '../../util/routes';
 import {
-  EditListingAvailabilityPanelDay,
-  EditListingAvailabilityPanelHour,
+  // EditListingAvailabilityPanelDay,
+  // EditListingAvailabilityPanelHour,
+  EditListingAvailabilityPanel,
   EditListingDescriptionPanel,
   EditListingFeaturesPanel,
   EditListingLocationPanel,
@@ -23,7 +24,7 @@ import {
   EditListingSeatsPanel
 } from '../../components';
 
-import css from './EditListingWizard.css';
+import css from './EditListingWizard.module.css';
 
 export const AVAILABILITY = 'availability';
 export const DESCRIPTION = 'description';
@@ -38,14 +39,14 @@ export const PHOTOS = 'photos';
 // EditListingWizardTab component supports these tabs
 export const SUPPORTED_TABS = [
   DESCRIPTION,
+  PHOTOS,
   FEATURES,
   CAPACITY,
   SEATS,
   POLICY,
   LOCATION,
   PRICING,
-  AVAILABILITY,
-  PHOTOS,
+  AVAILABILITY
 ];
 
 const pathParamsToNextTab = (params, tab, marketplaceTabs) => {
@@ -277,30 +278,41 @@ const EditListingWizardTab = props => {
         ? 'EditListingWizard.saveNewAvailability'
         : 'EditListingWizard.saveEditAvailability';
 
-      const { availabilityPlan } = listing.attributes
-      if (availabilityPlan && availabilityPlan.type === 'availability-plan/time') {
-        return (
-          <EditListingAvailabilityPanelHour
-            {...panelProps(AVAILABILITY)}
-            fetchExceptionsInProgress={fetchExceptionsInProgress}
-            availabilityExceptions={availabilityExceptions}
-            submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
-            onCreateAvailabilityException={availability.onCreateAvailabilityException}
-            onDeleteAvailabilityException={availability.onDeleteAvailabilityException}
-            onSubmit={values => {
-              // We want to return the Promise to the form,
-              // so that it doesn't close its modal if an error is thrown.
-              return onCompleteEditListingWizardTab(tab, values, true);
-            }}
-            onNextTab={() =>
-              redirectAfterDraftUpdate(listing.id.uuid, params, tab, marketplaceTabs, history)
-            }
-          />
-        );
-      }
+      // const { availabilityPlan } = listing.attributes
+      // if (availabilityPlan && availabilityPlan.type === 'availability-plan/time') {
+      //   return (
+      //     <EditListingAvailabilityPanelHour
+      //       {...panelProps(AVAILABILITY)}
+      //       fetchExceptionsInProgress={fetchExceptionsInProgress}
+      //       availabilityExceptions={availabilityExceptions}
+      //       submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+      //       onCreateAvailabilityException={availability.onCreateAvailabilityException}
+      //       onDeleteAvailabilityException={availability.onDeleteAvailabilityException}
+      //       onSubmit={values => {
+      //         // We want to return the Promise to the form,
+      //         // so that it doesn't close its modal if an error is thrown.
+      //         return onCompleteEditListingWizardTab(tab, values, true);
+      //       }}
+      //       onNextTab={() =>
+      //         redirectAfterDraftUpdate(listing.id.uuid, params, tab, marketplaceTabs, history)
+      //       }
+      //     />
+      //   );
+      // }
+
+      // return (
+      //   <EditListingAvailabilityPanelDay
+      //     {...panelProps(AVAILABILITY)}
+      //     availability={availability}
+      //     submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+      //     onSubmit={values => {
+      //       onCompleteEditListingWizardTab(tab, values);
+      //     }}
+      //   />
+      // );
 
       return (
-        <EditListingAvailabilityPanelDay
+        <EditListingAvailabilityPanel
           {...panelProps(AVAILABILITY)}
           availability={availability}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}

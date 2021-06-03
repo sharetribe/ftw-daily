@@ -5,7 +5,7 @@ import { withDimensions } from '../../util/contextHelpers';
 
 import Handle from './Handle';
 import Track from './Track';
-import css from './RangeSlider.css';
+import css from './RangeSlider.module.css';
 
 class RangeSliderComponent extends Component {
   constructor(props) {

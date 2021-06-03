@@ -1,6 +1,15 @@
 import isArray from 'lodash/isArray';
 import reduce from 'lodash/reduce';
 import { sanitizeEntity } from './sanitize';
+import { getDefaultTimeZoneOnBrowser } from './dates';
+import { 
+  AVAILABILITY_PLAN_TIME,
+  DAYS_OF_WEEK,
+  HOURLY_PRICE,
+  DAILY_PRICE,
+  WEEKLY_PRICE,
+  MONTHLY_PRICE,
+} from './types';
 
 /**
  * Combine the given relationships objects
@@ -27,7 +36,10 @@ export const combinedResourceObjects = (oldRes, newRes) => {
     throw new Error('Cannot merge resource objects with different ids or types');
   }
   const attributes = newRes.attributes || oldRes.attributes;
-  const attrs = attributes ? { attributes: { ...attributes } } : null;
+  const attributesOld = oldRes.attributes || {};
+  const attributesNew = newRes.attributes || {};
+  // Allow (potentially) sparse attributes to update only relevant fields
+  const attrs = attributes ? { attributes: { ...attributesOld, ...attributesNew } } : null;
   const relationships = combinedRelationships(oldRes.relationships, newRes.relationships);
   const rels = relationships ? { relationships } : null;
   return { id, type, ...attrs, ...rels };
@@ -383,3 +395,50 @@ export const humanizeLineItemCode = code => {
 
   return lowercase.charAt(0).toUpperCase() + lowercase.slice(1);
 };
+
+export const AVAILABILITY_DEFAULT_START = '00:00';
+export const AVAILABILITY_DEFAULT_END = '24:00';
+
+const defaultTimeZone = () =>
+  typeof window !== 'undefined' ? getDefaultTimeZoneOnBrowser() : 'Etc/UTC';
+
+export const createDefaultPlan = (seats = 1, output = false) => {
+  return {
+    type: AVAILABILITY_PLAN_TIME,
+    timezone: defaultTimeZone(),
+    entries: DAYS_OF_WEEK.map(dayOfWeek => ({
+      dayOfWeek,
+      startTime: AVAILABILITY_DEFAULT_START,
+      endTime: output ? AVAILABILITY_DEFAULT_START : AVAILABILITY_DEFAULT_END,
+      seats
+    }))
+  }
+}
+
+export const getAvailablePrices = listing => {
+  const additionalPrices = [
+    DAILY_PRICE,
+    WEEKLY_PRICE,
+    MONTHLY_PRICE,
+  ];
+
+  const {publicData = {}, price} = listing && listing.attributes || {};
+
+  return [
+    {key: HOURLY_PRICE, value: price},
+    ...additionalPrices
+      .filter(key => publicData[key])
+      .map(key => ({key, value: publicData[key]}))
+  ];
+}
+
+export const getTypeDuration = bookingType => {
+  switch(bookingType){
+    case WEEKLY_PRICE:
+      return 7;
+    case MONTHLY_PRICE:
+      return 30;
+    default:
+      return null;
+  }
+}

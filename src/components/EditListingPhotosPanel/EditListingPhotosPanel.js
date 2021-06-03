@@ -7,7 +7,7 @@ import { EditListingPhotosForm } from '../../forms';
 import { ensureOwnListing } from '../../util/data';
 import { ListingLink } from '../../components';
 
-import css from './EditListingPhotosPanel.css';
+import css from './EditListingPhotosPanel.module.css';
 
 class EditListingPhotosPanel extends Component {
   render() {

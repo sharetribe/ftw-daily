@@ -5,6 +5,7 @@ import { LISTING_STATE_DRAFT } from '../util/types';
 import * as log from '../util/log';
 import { authInfo } from './Auth.duck';
 import { stripeAccountCreateSuccess } from './stripeConnectAccount.duck';
+import { util as sdkUtil } from '../util/sdkLoader';
 
 // ================ Action types ================ //
 
@@ -317,7 +318,22 @@ export const fetchCurrentUser = (params = null) => (dispatch, getState, sdk) => 
 
   const parameters = params || {
     include: ['profileImage', 'stripeAccount'],
-    'fields.image': ['variants.square-small', 'variants.square-small2x'],
+    'fields.image': [
+      'variants.square-small',
+      'variants.square-small2x',
+      'variants.square-xsmall',
+      'variants.square-xsmall2x',
+    ],
+    'imageVariant.square-xsmall': sdkUtil.objectQueryString({
+      w: 40,
+      h: 40,
+      fit: 'crop',
+    }),
+    'imageVariant.square-xsmall2x': sdkUtil.objectQueryString({
+      w: 80,
+      h: 80,
+      fit: 'crop',
+    }),
   };
 
   return sdk.currentUser

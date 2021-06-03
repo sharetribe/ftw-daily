@@ -6,7 +6,7 @@ import { propTypes } from '../../util/types';
 import { Button } from '../../components';
 import { ensureCurrentUser } from '../../util/data';
 
-import css from './LimitedAccessBanner.css';
+import css from './LimitedAccessBanner.module.css';
 
 // Due to the layout structure, do not render the banner on the following pages
 const disabledPages = ['SearchPage'];

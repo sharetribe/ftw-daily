@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { FormattedMessage } from '../../util/reactIntl';
 
 import { InlineTextButton } from '../../components';
-import css from './SearchFiltersSecondary.css';
+import css from './SearchFiltersSecondary.module.css';
 
 class SearchFiltersSecondaryComponent extends Component {
   constructor(props) {

@@ -1,0 +1,141 @@
+@import '../../styles/propertySets.css';
+
+.root {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--matterColorBright);
+
+  /* sticky result summary in mobile */
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.searchResultSummary {
+  @apply --marketplaceH3FontStyles;
+  margin-top: 6px;
+
+  display: flex;
+  justify-content: space-between;
+
+  background-color: var(--matterColorBright);
+
+  @media (--viewportMedium) {
+    margin-top: 8px;
+  }
+}
+
+.buttons {
+  display: flex;
+}
+
+.filtersButton {
+  @apply --marketplaceButtonStylesSecondary;
+  @apply --marketplaceTinyFontStyles;
+  font-weight: var(--fontWeightMedium);
+
+  /* Avoid stretching button width. */
+  flex-basis: 0;
+
+  height: 35px;
+  min-height: 35px;
+  padding: 0 18px;
+  margin: 0 9px 0 0;
+  border-radius: 4px;
+}
+
+.filtersButtonSelected {
+  @apply --marketplaceButtonStyles;
+  @apply --marketplaceTinyFontStyles;
+  font-weight: var(--fontWeightMedium);
+
+  /* Avoid stretching button width. */
+  flex-basis: 0;
+
+  height: 35px;
+  min-height: 35px;
+  padding: 0 18px;
+  margin: 0 9px 0 0;
+  border-radius: 4px;
+}
+
+.mapIcon {
+  /* Font */
+  @apply --marketplaceTinyFontStyles;
+  font-weight: var(--fontWeightMedium);
+
+  /* background map image */
+  background-image: url(./images/map_icon216x105.png);
+  background-size: cover;
+
+  border-radius: 3px;
+  width: 72px;
+  height: 35px;
+  padding: 9px 22px;
+  margin: 0;
+}
+
+.modalContainer {
+  width: 100%;
+  padding: 94px 0;
+  margin: 0 24px;
+}
+
+.modalHeadingWrapper {
+  padding-bottom: 31px;
+  border-bottom: 1px solid var(--matterColorNegative);
+}
+
+.modalHeading {
+  @apply --marketplaceH1FontStyles;
+  margin-top: 0;
+}
+
+.resetAllButton {
+  @apply --marketplaceH5FontStyles;
+  font-weight: var(--fontWeightMedium);
+  color: var(--matterColorAnti);
+
+  /* Layout */
+  display: inline;
+  float: right;
+  margin: 17px 0 0 0;
+  padding: 0;
+
+  /* Override button styles */
+  outline: none;
+  text-align: left;
+  border: none;
+
+  &:focus,
+  &:hover {
+    color: var(--matterColor);
+  }
+}
+
+.filtersWrapper {
+  /* add bottom margin so that the last filter won't be hidden
+   * under the mobile safari bottom bar or the "Show results"
+   * button bar */
+  padding-bottom: 180px;
+}
+
+.showListingsContainer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+  width: 100vw;
+  padding: 18px 24px;
+
+  background: var(--matterColorLight);
+  box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.1);
+  z-index: 11;
+}
+
+.showListingsButton {
+  background-color: var(--marketplaceColor);
+  display: inline-block;
+  border-radius: 3px;
+}

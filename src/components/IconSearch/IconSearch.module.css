@@ -1,0 +1,5 @@
+@import '../../styles/propertySets.css';
+
+.root {
+  stroke: var(--marketplaceColor);
+}

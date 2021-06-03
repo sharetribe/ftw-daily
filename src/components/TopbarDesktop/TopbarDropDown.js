@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import FilterComponent from '../../containers/SearchPage/FilterComponent';
 
-import css from './TopbarDesktop.css';
+import css from './TopbarDesktop.module.css';
 
 // Primary filters have their content in dropdown-popup.
 // With this offset we move the dropdown to the left a few pixels on desktop layout.

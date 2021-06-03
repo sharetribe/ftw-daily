@@ -4,7 +4,7 @@ import { node, string, object } from 'prop-types';
 import { IntlProvider } from '../../util/reactIntl';
 import config from '../../config';
 
-import css from './SearchMap.css';
+import css from './SearchMap.module.css';
 
 /**
  * ReusableMapContainer makes Google Map usage more effective. This improves:

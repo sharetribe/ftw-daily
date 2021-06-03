@@ -10,7 +10,7 @@ import { Modal } from '../../components';
 
 import EmailReminder from './EmailReminder';
 import StripeAccountReminder from './StripeAccountReminder';
-import css from './ModalMissingInformation.css';
+import css from './ModalMissingInformation.module.css';
 
 const MISSING_INFORMATION_MODAL_WHITELIST = [
   'LoginPage',

@@ -5,7 +5,12 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
   scrollingDisabled={false}
   title="EditListingPage.titleCreateListing"
 >
-  <withRouter(Connect(TopbarContainerComponent)) />
+  <withRouter(Connect(TopbarContainerComponent))
+    className="topbar"
+    desktopClassName="desktopTopbar"
+    mobileClassName="mobileTopbar"
+    mobileRootClassName="mobileTopbar"
+  />
   <withViewport(injectIntl(EditListingWizard))
     availability={
       Object {
@@ -16,6 +21,7 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
         "onFetchBookings": [Function],
       }
     }
+    className="wizard"
     currentUser={null}
     errors={
       Object {

@@ -1,0 +1,82 @@
+@import '../../styles/propertySets.css';
+
+.root {
+  position: relative;
+  display: inline-block;
+}
+
+.label {
+  @apply --marketplaceButtonStylesSecondary;
+  @apply --marketplaceSearchFilterLabelFontStyles;
+
+  padding: var(--marketplaceButtonSmallDesktopPadding);
+  width: auto;
+  height: auto;
+  min-height: 0;
+  border-radius: 4px;
+
+  &:focus {
+    outline: none;
+    background-color: var(--matterColorLight);
+    border-color: transparent;
+    text-decoration: none;
+    box-shadow: var(--boxShadowFilterButton);
+  }
+}
+
+.labelSelected {
+  @apply --marketplaceButtonStyles;
+  @apply --marketplaceSearchFilterLabelFontStyles;
+  font-weight: var(--fontWeightSemiBold);
+
+  padding: var(--marketplaceButtonSmallDesktopPadding);
+  width: auto;
+  height: auto;
+  min-height: 0;
+  border-radius: 4px;
+  border: 1px solid var(--marketplaceColor);
+
+  &:hover,
+  &:focus {
+    border: 1px solid var(--marketplaceColorDark);
+  }
+}
+.labelEllipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.popup {
+  /* By default hide the content */
+  display: block;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+
+  /* Position */
+  position: absolute;
+  z-index: var(--zIndexPopup);
+
+  /* Layout */
+  min-width: 300px;
+  margin-top: 7px;
+  background-color: var(--matterColorLight);
+
+  /* Borders */
+  border-top: 1px solid var(--matterColorNegative);
+  box-shadow: var(--boxShadowPopup);
+  border-radius: 4px;
+  transition: var(--transitionStyleButton);
+}
+
+.popupSize {
+  padding: 15px 30px 17px 30px;
+}
+
+.isOpen {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import css from './IconSocialMediaLinkedin.css';
+import css from './IconSocialMediaLinkedin.module.css';
 
 const IconSocialMediaLinkedin = props => {
   const { rootClassName, className } = props;

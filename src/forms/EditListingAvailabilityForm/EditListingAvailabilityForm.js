@@ -5,16 +5,22 @@ import { Form as FinalForm } from 'react-final-form';
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
-import { Form, Button, FieldRangeSlider } from '../../components';
-
+import arrayMutators from 'final-form-arrays';
+import { Form, Button, FieldRangeSlider, FieldCheckboxGroup } from '../../components';
+import {
+  DAYS_OF_WEEK
+} from '../../util/types';
 import ManageAvailabilityCalendar from './ManageAvailabilityCalendar';
-import css from './EditListingAvailabilityForm.css';
+import css from './EditListingAvailabilityForm.module.css';
 
 export class EditListingAvailabilityFormComponent extends Component {
   render() {
+    const { seats, daysAvailabilityDisabled, ...rest } = this.props;
+
     return (
       <FinalForm
-        {...this.props}
+        {...rest}
+        mutators={{ ...arrayMutators }}
         render={formRenderProps => {
           const {
             className,
@@ -22,7 +28,7 @@ export class EditListingAvailabilityFormComponent extends Component {
             disabled,
             ready,
             handleSubmit,
-            //intl,
+            intl,
             invalid,
             pristine,
             saveActionMsg,
@@ -49,18 +55,43 @@ export class EditListingAvailabilityFormComponent extends Component {
           const minLength = Array.isArray(values.minimumLength) ? values.minimumLength[0] : 1;
           const minLengthString = minLength > 1 ? `${minLength} days` : '1 day';
 
+          const daysOptions = DAYS_OF_WEEK.map(key => ({key, label: key.slice(0, 1).toUpperCase() + key.slice(1)}))
+
+          const weekdaysLabel = "EditListingAvailabilityForm.weekdaysLabel";
+
           return (
             <Form className={classes} onSubmit={handleSubmit}>
               {errorMessage}
+
+              <div className={css.weekdaysWrapper}>
+                {!daysAvailabilityDisabled ? (
+                    <FieldCheckboxGroup
+                      label={'Daily availability'}
+                      id="daysAvailability"
+                      name="daysAvailability"
+                      className={css.daysSelectorRoot}
+                      options={daysOptions}
+                      disabled={daysAvailabilityDisabled}
+                    />
+                  ) : (
+                    <p className={css.weekdaysHint}>
+                      <FormattedMessage id="EditListingAvailabilityForm.weekdaysHint"/>
+                    </p>
+                  )
+                }
+              </div>
+
+
               <div className={css.calendarWrapper}>
                 <ManageAvailabilityCalendar
                   availability={availability}
                   availabilityPlan={availabilityPlan}
                   listingId={listingId}
+                  seats={seats}
                 />
               </div>
 
-              <FieldRangeSlider
+              {/* <FieldRangeSlider
                 id="minimumLength"
                 name="minimumLength"
                 label={`Minimum booking length: ${minLengthString}`}
@@ -68,7 +99,7 @@ export class EditListingAvailabilityFormComponent extends Component {
                 max={100}
                 step={1}
                 handles={[1]}
-              />
+              /> */}
 
               <Button
                 className={css.submitButton}

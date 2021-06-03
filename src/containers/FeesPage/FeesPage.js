@@ -8,7 +8,7 @@ import {
   Footer,
 } from '../../components';
 
-import css from './FeesPage.css';
+import css from './FeesPage.module.css';
 
 const FeesPage = () => {
   return (

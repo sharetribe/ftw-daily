@@ -2,7 +2,7 @@ import React from 'react';
 import { required } from '../../util/validators';
 import { FieldSelect } from '../../components';
 
-import css from './EditListingDescriptionForm.css';
+import css from './EditListingDescriptionForm.module.css';
 
 const CustomCategorySelectFieldMaybe = props => {
   const { name, id, categories, intl } = props;

@@ -9,7 +9,7 @@ import { ListingLink } from '../../components';
 import { EditListingDescriptionForm } from '../../forms';
 import config from '../../config';
 
-import css from './EditListingDescriptionPanel.css';
+import css from './EditListingDescriptionPanel.module.css';
 
 const EditListingDescriptionPanel = props => {
   const {
@@ -28,7 +28,12 @@ const EditListingDescriptionPanel = props => {
 
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
-  const { description, title, publicData, availabilityPlan } = currentListing.attributes;
+  const {
+    description,
+    title,
+    publicData,
+    // availabilityPlan
+  } = currentListing.attributes;
 
   const isPublished = !!currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
@@ -49,40 +54,50 @@ const EditListingDescriptionPanel = props => {
       <EditListingDescriptionForm
         className={css.form}
         isPublished={isPublished}
-        initialValues={{ title, description, category: publicData.category, availabilityPlan }}
+        initialValues={{
+          title,
+          description,
+          category: publicData.category,
+          // availabilityPlan
+        }}
         saveActionMsg={submitButtonText}
         onSubmit={values => {
-          const { title, description, category, availabilityPlan: { type } } = values;
+          const {
+            title,
+            description,
+            category,
+            // availabilityPlan: { type }
+          } = values;
           let updateValues = {
             title: title.trim(),
             description,
             publicData: {
               category
             },
-            availabilityPlan: {
-              type,
-              entries: [],
-              ...availabilityPlan
-            }
-          };
+            // availabilityPlan: {
+            //   type,
+            //   entries: [],
+            //   ...availabilityPlan
+            // }
+          }; 
 
-          if (type === 'availability-plan/time') {
-            updateValues.publicData.unitType = 'line-item/units'
-            updateValues.availabilityPlan.timezone = 'Etc/UTC';
-          }
+          // if (type === 'availability-plan/time') {
+          //   updateValues.publicData.unitType = 'line-item/units'
+          //   updateValues.availabilityPlan.timezone = 'Etc/UTC';
+          // }
 
-          if (type === 'availability-plan/day') {
-            updateValues.publicData.unitType = 'line-item/day'
-            updateValues.availabilityPlan.entries = [
-              { dayOfWeek: 'mon', seats: 1 },
-              { dayOfWeek: 'tue', seats: 1 },
-              { dayOfWeek: 'wed', seats: 1 },
-              { dayOfWeek: 'thu', seats: 1 },
-              { dayOfWeek: 'fri', seats: 1 },
-              { dayOfWeek: 'sat', seats: 1 },
-              { dayOfWeek: 'sun', seats: 1 },
-            ];
-          }
+          // if (type === 'availability-plan/day') {
+          //   updateValues.publicData.unitType = 'line-item/day'
+          //   updateValues.availabilityPlan.entries = [
+          //     { dayOfWeek: 'mon', seats: 1 },
+          //     { dayOfWeek: 'tue', seats: 1 },
+          //     { dayOfWeek: 'wed', seats: 1 },
+          //     { dayOfWeek: 'thu', seats: 1 },
+          //     { dayOfWeek: 'fri', seats: 1 },
+          //     { dayOfWeek: 'sat', seats: 1 },
+          //     { dayOfWeek: 'sun', seats: 1 },
+          //   ];
+          // }
 
           onSubmit(updateValues);
         }}

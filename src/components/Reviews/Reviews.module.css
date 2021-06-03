@@ -1,0 +1,101 @@
+@import '../../styles/propertySets.css';
+
+.root {
+  margin: 0;
+}
+
+.reviewItem {
+  margin-bottom: 32px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  @media (--viewportMedium) {
+    margin-bottom: 39px;
+  }
+}
+
+.review {
+  display: flex;
+  flex-direction: row;
+  flex-basis: 564px;
+  flex-shrink: 1;
+  flex-grow: 0;
+}
+
+.avatar {
+  flex-shrink: 0;
+  margin-right: 22px;
+}
+
+.reviewContent {
+  @apply --marketplaceH4FontStyles;
+  font-style: italic;
+  margin: 0;
+  white-space: pre-line;
+}
+
+.reviewInfo {
+  @apply --marketplaceH5FontStyles;
+  margin-top: 10px;
+  margin-bottom: 0px;
+  color: var(--matterColorAnti);
+
+  @media (--viewportMedium) {
+    margin-top: 9px;
+  }
+}
+
+.separator {
+  margin: 0 7px;
+}
+
+.desktopSeparator {
+  margin: 0 7px;
+  display: none;
+
+  @media (--viewportMedium) {
+    display: inline;
+  }
+}
+
+.mobileReviewRating {
+  display: block;
+  margin-top: 3px;
+  margin-bottom: 9px;
+
+  @media (--viewportMedium) {
+    display: none;
+  }
+}
+
+.desktopReviewRatingWrapper {
+  /* For aligning rating starts in the middle
+   * of a paragraph line */
+  position: relative;
+  display: none;
+
+  @media (--viewportMedium) {
+    display: inline;
+  }
+}
+
+.desktopReviewRating {
+  /* For aligning rating starts in the middle
+   * of a paragraph line */
+  display: inline-flex;
+  position: absolute;
+  top: 4px;
+  white-space: nowrap;
+}
+
+.reviewRatingStar {
+  height: 12px;
+  width: 12px;
+  margin-right: 2px;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import css from './PrivacyPolicy.css';
+import css from './PrivacyPolicy.module.css';
 
 const PrivacyPolicy = props => {
   const { rootClassName, className } = props;

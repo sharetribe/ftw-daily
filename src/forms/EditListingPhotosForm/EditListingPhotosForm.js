@@ -10,7 +10,7 @@ import { nonEmptyArray, composeValidators } from '../../util/validators';
 import { isUploadImageOverLimitError } from '../../util/errors';
 import { AddImages, Button, Form, ValidationError } from '../../components';
 
-import css from './EditListingPhotosForm.css';
+import css from './EditListingPhotosForm.module.css';
 
 const ACCEPT_IMAGES = 'image/*';
 

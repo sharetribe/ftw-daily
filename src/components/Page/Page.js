@@ -8,11 +8,11 @@ import routeConfiguration from '../../routeConfiguration';
 import config from '../../config';
 import { metaTagProps } from '../../util/seo';
 import { canonicalRoutePath } from '../../util/routes';
-import { CookieConsent } from '../../components';
+import { CookieConsent, GTMWrapper } from '../../components';
 
 import facebookImage from '../../assets/HotpatchLogo-500x500.png';
 import twitterImage from '../../assets/HotpatchLogo-500x500.png';
-import css from './Page.css';
+import css from './Page.module.css';
 
 const preventDefault = e => {
   e.preventDefault();
@@ -43,6 +43,14 @@ class PageComponent extends Component {
     // handling both dragover and drop events.
     document.addEventListener('dragover', preventDefault);
     document.addEventListener('drop', preventDefault);
+
+    // Remove duplicated server-side rendered page schema.
+    // It's in <body> to improve initial rendering performance,
+    // but after web app is initialized, react-helmet-async operates with <head>
+    const pageSchema = document.getElementById('page-schema');
+    if (pageSchema) {
+      pageSchema.remove();
+    }
   }
 
   componentWillUnmount() {
@@ -185,33 +193,38 @@ class PageComponent extends Component {
     }
 
     return (
-      <div className={classes}>
-        <Helmet
-          htmlAttributes={{
-            lang: intl.locale,
-          }}
-        >
-          <title>{title}</title>
-          {referrerMeta}
-          <link rel="canonical" href={canonicalUrl} />
-          <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
-          <meta httpEquiv="Content-Language" content={intl.locale} />
-          {metaTags}
-          <script type="application/ld+json">
-            {schemaArrayJSONString.replace(/</g, '\\u003c')}
-          </script>
-        </Helmet>
-        <CookieConsent />
-        <div
-          className={css.content}
-          style={scrollPositionStyles}
-          ref={c => {
-            this.contentDiv = c;
-          }}
-        >
-          {children}
+      <GTMWrapper
+        title={title}
+        pathname={this.props.match.path}
+      >
+        <div className={classes}>
+          <Helmet
+            htmlAttributes={{
+              lang: intl.locale,
+            }}
+          >
+            <title>{title}</title>
+            {referrerMeta}
+            <link rel="canonical" href={canonicalUrl} />
+            <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta httpEquiv="Content-Language" content={intl.locale} />
+            {metaTags}
+            <script id="page-schema" type="application/ld+json">
+              {schemaArrayJSONString.replace(/</g, '\\u003c')}
+            </script>
+          </Helmet>
+          <CookieConsent />
+          <div
+            className={css.content}
+            style={scrollPositionStyles}
+            ref={c => {
+              this.contentDiv = c;
+            }}
+          >
+            {children}
+          </div>
         </div>
-      </div>
+      </GTMWrapper>
     );
   }
 }

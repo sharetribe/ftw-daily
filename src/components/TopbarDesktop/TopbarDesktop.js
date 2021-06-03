@@ -19,7 +19,7 @@ import {
 } from '../../components';
 import { TopbarSearchForm } from '../../forms';
 
-import css from './TopbarDesktop.css';
+import css from './TopbarDesktop.module.css';
 
 const TopbarDesktop = props => {
   const {

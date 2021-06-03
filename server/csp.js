@@ -31,9 +31,41 @@ const defaultDirectives = {
 
     'sentry.io',
     '*.stripe.com',
+    '*.googletagmanager.com',
+    'googletagmanager.com',
+    '*.facebook.com',
+    'facebook.com',
+    '*.tidio.co',
+    'tidio.co',
+    '*.tidiochat.com',
+    'tidiochat.com'
   ],
-  fontSrc: [self, data, 'assets-sharetribecom.sharetribe.com', 'fonts.gstatic.com'],
-  frameSrc: [self, '*.stripe.com'],
+  fontSrc: [
+    self,
+    data,
+    'assets-sharetribecom.sharetribe.com',
+    'fonts.gstatic.com',
+    '*.googletagmanager.com',
+    'googletagmanager.com',
+    '*.facebook.com',
+    'facebook.com',
+    '*.tidio.co',
+    'tidio.co',
+    '*.tidiochat.com',
+    'tidiochat.com'
+  ],
+  frameSrc: [
+    self,
+    '*.stripe.com',
+    '*.googletagmanager.com',
+    'googletagmanager.com',
+    '*.facebook.com',
+    'facebook.com',
+    '*.tidio.co',
+    'tidio.co',
+    '*.tidiochat.com',
+    'tidiochat.com'
+  ],
   imgSrc: [
     self,
     data,
@@ -58,6 +90,15 @@ const defaultDirectives = {
     'stats.g.doubleclick.net',
 
     '*.stripe.com',
+
+    '*.googletagmanager.com',
+    'googletagmanager.com',
+    '*.facebook.com',
+    'facebook.com',
+    '*.tidio.co',
+    'tidio.co',
+    '*.tidiochat.com',
+    'tidiochat.com'
   ],
   scriptSrc: [
     self,
@@ -68,8 +109,29 @@ const defaultDirectives = {
     'api.mapbox.com',
     '*.google-analytics.com',
     'js.stripe.com',
+    '*.googletagmanager.com',
+    'googletagmanager.com',
+    '*.facebook.com',
+    'facebook.com',
+    '*.tidio.co',
+    'tidio.co',
+    '*.tidiochat.com',
+    'tidiochat.com'
   ],
-  styleSrc: [self, unsafeInline, 'fonts.googleapis.com', 'api.mapbox.com'],
+  styleSrc: [
+    self,
+    unsafeInline,
+    'fonts.googleapis.com',
+    'api.mapbox.com',
+    '*.googletagmanager.com',
+    'googletagmanager.com',
+    '*.facebook.com',
+    'facebook.com',
+    '*.tidio.co',
+    'tidio.co',
+    '*.tidiochat.com',
+    'tidiochat.com'
+  ],
 };
 
 /**
@@ -95,44 +157,22 @@ module.exports = (reportUri, enforceSsl, reportOnly) => {
   // const { imgSrc = [self] } = defaultDirectives;
   // const exampleImgSrc = imgSrc.concat('my-custom-domain.example.com');
 
-  const {
-    scriptSrc = [self],
-    imgSrc = [self],
-    mediaSrc = [self],
-    frameSrc = [self],
-  } = defaultDirectives;
-
-  const gtm = 'www.googletagmanager.com';
-  const fb = 'www.facebook.com';
-  const fb_conn = 'connect.facebook.net';
-  const tidio_code = 'code.tidio.co';
-  const tidio_widg = 'widget-v4.tidiochat.com';
-  const src_urls = [gtm, fb_conn, tidio_code, tidio_widg];
-
-  const newScripts = scriptSrc.concat(src_urls);
-  const newImgs = imgSrc.concat(fb);
-  const newMedia = mediaSrc.concat(tidio_widg);
-  const newFrames = mediaSrc.concat(fb);
-
   const customDirectives = {
     // Example: Add custom directive override
     // imgSrc: exampleImgSrc,
-    scriptSrc: newScripts,
-    imgSrc: newImgs,
-    mediaSrc: newMedia,
-    frameSrc: newFrames
   };
 
   // ================ END CUSTOM CSP URLs ================ //
 
-  const directives = Object.assign(
-    {
-      reportUri,
-      blockAllMixedContent: enforceSsl,
-    },
-    defaultDirectives,
-    customDirectives
-  );
+  // Helmet v4 expects every value to be iterable so strings or booleans are not supported directly
+  // If we want to add block-all-mixed-content directive we need to add empty array to directives
+  // See Helmet's default directives:
+  // https://github.com/helmetjs/helmet/blob/bdb09348c17c78698b0c94f0f6cc6b3968cd43f9/middlewares/content-security-policy/index.ts#L51
+
+  const directives = Object.assign({ reportUri: [reportUri] }, defaultDirectives, customDirectives);
+  if (enforceSsl) {
+    directives.blockAllMixedContent = [];
+  }
 
   // See: https://helmetjs.github.io/docs/csp/
   return helmet.contentSecurityPolicy({

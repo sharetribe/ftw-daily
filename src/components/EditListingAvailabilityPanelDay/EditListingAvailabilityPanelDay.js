@@ -7,7 +7,7 @@ import { LISTING_STATE_DRAFT } from '../../util/types';
 import { ListingLink } from '../../components';
 import { EditListingAvailabilityForm } from '../../forms';
 
-import css from './EditListingAvailabilityPanelDay.css';
+import css from './EditListingAvailabilityPanelDay.module.css';
 
 const EditListingAvailabilityPanelDay = props => {
   const {

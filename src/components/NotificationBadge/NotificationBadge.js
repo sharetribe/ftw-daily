@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import css from './NotificationBadge.css';
+import css from './NotificationBadge.module.css';
 
 const NotificationBadge = props => {
   const { className, rootClassName, count } = props;

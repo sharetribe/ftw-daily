@@ -1,6 +1,6 @@
 import React from "react";
 import { FormattedMessage } from '../../util/reactIntl';
-import css from './SectionTestimonials.css';
+import css from './SectionTestimonials.module.css';
 
 export const testimonialSection = (content, author, job, location) => {
   return (

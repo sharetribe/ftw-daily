@@ -133,6 +133,8 @@ describe('TransactionPanel - Sale', () => {
     onSendReview: noop,
     onResetForm: noop,
     onSubmitBookingRequest: noop,
+    onFetchTransactionLineItems: noop,
+    fetchLineItemsInProgress: false,
     intl: fakeIntl,
   };
 
@@ -334,6 +336,8 @@ describe('TransactionPanel - Order', () => {
     acceptInProgress: false,
     declineInProgress: false,
     onSubmitBookingRequest: noop,
+    onFetchTransactionLineItems: noop,
+    fetchLineItemsInProgress: false,
   };
 
   it('enquired matches snapshot', () => {

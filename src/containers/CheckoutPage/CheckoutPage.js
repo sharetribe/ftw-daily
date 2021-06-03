@@ -14,7 +14,11 @@ import {
   LINE_ITEM_DAY,
   LINE_ITEM_DISCOUNT,
   DATE_TYPE_DATE,
-  DATE_TYPE_DATETIME
+  DATE_TYPE_DATETIME,
+  HOURLY_PRICE,
+  DAILY_PRICE,
+  WEEKLY_PRICE,
+  MONTHLY_PRICE,
 } from '../../util/types';
 import {
   ensureListing,
@@ -54,7 +58,7 @@ import {
 } from '../../components';
 import { StripePaymentForm } from '../../forms';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { handleCardPayment, retrievePaymentIntent } from '../../ducks/stripe.duck';
+import { confirmCardPayment, retrievePaymentIntent } from '../../ducks/stripe.duck';
 import { savePaymentMethod } from '../../ducks/paymentMethods.duck';
 
 import {
@@ -66,7 +70,7 @@ import {
   sendMessage,
 } from './CheckoutPage.duck';
 import { storeData, storedData, clearData } from './CheckoutPageSessionHelpers';
-import css from './CheckoutPage.css';
+import css from './CheckoutPage.module.css';
 import { types as sdkTypes } from '../../util/sdkLoader';
 
 const { Money } = sdkTypes;
@@ -195,6 +199,8 @@ export class CheckoutPageComponent extends Component {
 
     if (shouldFetchSpeculatedTransaction) {
       const listing = pageData.listing;
+      const listingId = pageData.listing.id;
+      const transactionId = tx ? tx.id : null;
       const { bookingStart, bookingEnd } = pageData.bookingDates;
 
       // Convert picked date to date that will be converted on the API as
@@ -205,14 +211,24 @@ export class CheckoutPageComponent extends Component {
       // Fetch speculated transaction for showing price in booking breakdown
       // NOTE: if unit type is line-item/units, quantity needs to be added.
       // The way to pass it to checkout page is through pageData.bookingData
-      const { unitType = config.fallbackUnitType } = listing.attributes.publicData || {};
 
+      // fetchSpeculatedTransaction(
+      //   this.customPricingParams({
+      //     listing,
+      //     bookingStart: bookingStartForAPI,
+      //     bookingEnd: bookingEndForAPI,
+      //   }),
+      //   unitType
+      // );
+      
       fetchSpeculatedTransaction(
-        this.customPricingParams({
-          listing,
+        {
+          listingId,
           bookingStart: bookingStartForAPI,
           bookingEnd: bookingEndForAPI,
-        }), unitType
+          type: pageData.bookingData.bookingType
+        },
+        transactionId
       );
     }
 
@@ -224,7 +240,7 @@ export class CheckoutPageComponent extends Component {
       currentUser,
       stripeCustomerFetched,
       onInitiateOrder,
-      onHandleCardPayment,
+      onConfirmCardPayment,
       onConfirmPayment,
       onSendMessage,
       onSavePaymentMethod,
@@ -272,7 +288,7 @@ export class CheckoutPageComponent extends Component {
     };
 
     // Step 2: pay using Stripe SDK
-    const fnHandleCardPayment = fnParams => {
+    const fnConfirmCardPayment = fnParams => {
       // fnParams should be returned transaction entity
 
       const order = ensureTransaction(fnParams);
@@ -305,8 +321,9 @@ export class CheckoutPageComponent extends Component {
       const paymentParams =
         selectedPaymentFlow !== USE_SAVED_CARD
           ? {
-              payment_method_data: {
+              payment_method: {
                 billing_details: billingDetails,
+                card: card,
               },
             }
           : {};
@@ -320,12 +337,12 @@ export class CheckoutPageComponent extends Component {
       };
 
       // If paymentIntent status is not waiting user action,
-      // handleCardPayment has been called previously.
+      // confirmCardPayment has been called previously.
       const hasPaymentIntentUserActionsDone =
         paymentIntent && STRIPE_PI_USER_ACTIONS_DONE_STATUSES.includes(paymentIntent.status);
       return hasPaymentIntentUserActionsDone
         ? Promise.resolve({ transactionId: order.id, paymentIntent })
-        : onHandleCardPayment(params);
+        : onConfirmCardPayment(params);
     };
 
     // Step 3: complete order by confirming payment to Marketplace API
@@ -364,13 +381,13 @@ export class CheckoutPageComponent extends Component {
     // Here we create promise calls in sequence
     // This is pretty much the same as:
     // fnRequestPayment({...initialParams})
-    //   .then(result => fnHandleCardPayment({...result}))
+    //   .then(result => fnConfirmCardPayment({...result}))
     //   .then(result => fnConfirmPayment({...result}))
     const applyAsync = (acc, val) => acc.then(val);
     const composeAsync = (...funcs) => x => funcs.reduce(applyAsync, Promise.resolve(x));
     const handlePaymentIntentCreation = composeAsync(
       fnRequestPayment,
-      fnHandleCardPayment,
+      fnConfirmCardPayment,
       fnConfirmPayment,
       fnSendMessage,
       fnSavePaymentMethod
@@ -383,7 +400,7 @@ export class CheckoutPageComponent extends Component {
 
     // Note: optionalPaymentParams contains Stripe paymentMethod,
     // but that can also be passed on Step 2
-    // stripe.handleCardPayment(stripe, { payment_method: stripePaymentMethodId })
+    // stripe.confirmCardPayment(stripe, { payment_method: stripePaymentMethodId })
     const optionalPaymentParams =
       selectedPaymentFlow === USE_SAVED_CARD && hasDefaultPaymentMethod
         ? { paymentMethod: stripePaymentMethodId }
@@ -391,12 +408,27 @@ export class CheckoutPageComponent extends Component {
         ? { setupPaymentMethodForSaving: true }
         : {};
 
-    const orderParams = this.customPricingParams({
-      listing: pageData.listing,
+    // const orderParams = this.customPricingParams({
+    //   listing: pageData.listing,
+    //   bookingStart: tx.booking.attributes.start,
+    //   bookingEnd: tx.booking.attributes.end,
+    //   ...optionalPaymentParams,
+    // });
+
+    const { bookingType } = pageData.bookingData;
+    const seats = pageData.listing.attributes && 
+                  pageData.listing.attributes.publicData &&
+                  pageData.listing.attributes.publicData.seats || 1;
+
+    const orderParams = {
+      listingId: pageData.listing.id,
       bookingStart: tx.booking.attributes.start,
       bookingEnd: tx.booking.attributes.end,
+      quantity: pageData.bookingData ? pageData.bookingData.quantity : null,
+      type: bookingType,
+      seats: bookingType === HOURLY_PRICE ? 1 : seats,
       ...optionalPaymentParams,
-    });
+    };
 
     return handlePaymentIntentCreation(orderParams);
   }
@@ -570,12 +602,14 @@ export class CheckoutPageComponent extends Component {
       intl,
       params,
       currentUser,
-      handleCardPaymentError,
+      confirmCardPaymentError,
       paymentIntent,
       retrievePaymentIntentError,
       stripeCustomerFetched,
     } = this.props;
 
+    const { pageData } = this.state;
+    const bookingType = pageData && pageData.bookingData && pageData.bookingData.bookingType;
     // Since the listing data is already given from the ListingPage
     // and stored to handle refreshes, it might not have the possible
     // deleted or closed information in it. If the transaction
@@ -652,7 +686,7 @@ export class CheckoutPageComponent extends Component {
     const timeZone = currentListing.attributes.availabilityPlan
       ? currentListing.attributes.availabilityPlan.timezone
       : 'Etc/UTC';
-    const dateType = unitType === LINE_ITEM_DAY ? DATE_TYPE_DATE : DATE_TYPE_DATETIME;
+    const dateType = bookingType === HOURLY_PRICE ? DATE_TYPE_DATETIME : DATE_TYPE_DATE;
 
     const breakdown =
       tx.id && txBooking.id ? (
@@ -786,18 +820,24 @@ export class CheckoutPageComponent extends Component {
       );
     }
 
-    const isHourly = unitType === LINE_ITEM_UNITS;
-    const isDaily = unitType === LINE_ITEM_DAY;
-
-    const unitTranslationKey = isHourly
-      ? 'CheckoutPage.perHour'
-      : isDaily
-      ? 'CheckoutPage.perDay'
-      : 'CheckoutPage.perUnit';
+    // const isHourly = unitType === LINE_ITEM_UNITS;
+    // const isDaily = unitType === LINE_ITEM_DAY;
 
     const price = currentListing.attributes.price;
-    const formattedPrice = formatMoney(intl, price);
-    const detailsSubTitle = `${formattedPrice} ${intl.formatMessage({ id: unitTranslationKey })}`;
+    const {amount, currency} = bookingType !== HOURLY_PRICE && publicData[bookingType] ? publicData[bookingType] : price;
+    let key = 'perHour';
+    switch(bookingType){
+      case DAILY_PRICE:
+        key = 'perDay';
+        break;
+      case WEEKLY_PRICE:
+        key = 'perWeek';
+        break;
+      case MONTHLY_PRICE:
+        key = 'perMonth';
+        break;
+    }
+    const detailsSubTitle = `${formatMoney(intl, new Money(amount, currency))} ${intl.formatMessage({ id: `CheckoutPage.${key}` })}`;
 
     const showInitialMessageInput = !(
       existingTransaction && existingTransaction.attributes.lastTransition === TRANSITION_ENQUIRE
@@ -810,7 +850,7 @@ export class CheckoutPageComponent extends Component {
         : null;
 
     // If paymentIntent status is not waiting user action,
-    // handleCardPayment has been called previously.
+    // confirmCardPayment has been called previously.
     const hasPaymentIntentUserActionsDone =
       paymentIntent && STRIPE_PI_USER_ACTIONS_DONE_STATUSES.includes(paymentIntent.status);
 
@@ -873,7 +913,7 @@ export class CheckoutPageComponent extends Component {
                   showInitialMessageInput={showInitialMessageInput}
                   initialValues={initalValuesForStripePayment}
                   initiateOrderError={initiateOrderError}
-                  handleCardPaymentError={handleCardPaymentError}
+                  confirmCardPaymentError={confirmCardPaymentError}
                   confirmPaymentError={confirmPaymentError}
                   hasHandledCardPayment={hasPaymentIntentUserActionsDone}
                   loadingData={!stripeCustomerFetched}
@@ -955,14 +995,14 @@ CheckoutPageComponent.propTypes = {
   }).isRequired,
   onConfirmPayment: func.isRequired,
   onInitiateOrder: func.isRequired,
-  onHandleCardPayment: func.isRequired,
+  onConfirmCardPayment: func.isRequired,
   onRetrievePaymentIntent: func.isRequired,
   onSavePaymentMethod: func.isRequired,
   onSendMessage: func.isRequired,
   initiateOrderError: propTypes.error,
   confirmPaymentError: propTypes.error,
-  // handleCardPaymentError comes from Stripe so that's why we can't expect it to be in a specific form
-  handleCardPaymentError: oneOfType([propTypes.error, object]),
+  // confirmCardPaymentError comes from Stripe so that's why we can't expect it to be in a specific form
+  confirmCardPaymentError: oneOfType([propTypes.error, object]),
   paymentIntent: object,
 
   // from connect
@@ -991,7 +1031,7 @@ const mapStateToProps = state => {
     confirmPaymentError,
   } = state.CheckoutPage;
   const { currentUser } = state.user;
-  const { handleCardPaymentError, paymentIntent, retrievePaymentIntentError } = state.stripe;
+  const { confirmCardPaymentError, paymentIntent, retrievePaymentIntentError } = state.stripe;
   return {
     scrollingDisabled: isScrollingDisabled(state),
     currentUser,
@@ -1004,7 +1044,7 @@ const mapStateToProps = state => {
     transaction,
     listing,
     initiateOrderError,
-    handleCardPaymentError,
+    confirmCardPaymentError,
     confirmPaymentError,
     paymentIntent,
     retrievePaymentIntentError,
@@ -1014,10 +1054,12 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   dispatch,
   fetchSpeculatedTransaction: (params, unitType) => dispatch(speculateTransaction(params, unitType)),
+  // fetchSpeculatedTransaction: (params, transactionId) =>
+  //   dispatch(speculateTransaction(params, transactionId)),
   fetchStripeCustomer: () => dispatch(stripeCustomer()),
   onInitiateOrder: (params, transactionId, unitType) => dispatch(initiateOrder(params, transactionId, unitType)),
   onRetrievePaymentIntent: params => dispatch(retrievePaymentIntent(params)),
-  onHandleCardPayment: params => dispatch(handleCardPayment(params)),
+  onConfirmCardPayment: params => dispatch(confirmCardPayment(params)),
   onConfirmPayment: params => dispatch(confirmPayment(params)),
   onSendMessage: params => dispatch(sendMessage(params)),
   onSavePaymentMethod: (stripeCustomer, stripePaymentMethodId) =>
@@ -1033,7 +1075,14 @@ const CheckoutPage = compose(
   injectIntl
 )(CheckoutPageComponent);
 
-CheckoutPage.setInitialValues = initialValues => setInitialValues(initialValues);
+CheckoutPage.setInitialValues = (initialValues, saveToSessionStorage = false) => {
+  if (saveToSessionStorage) {
+    const { listing, bookingData, bookingDates } = initialValues;
+    storeData(bookingData, bookingDates, listing, null, STORAGE_KEY);
+  }
+
+  return setInitialValues(initialValues);
+};
 
 CheckoutPage.displayName = 'CheckoutPage';
 

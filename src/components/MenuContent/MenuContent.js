@@ -6,7 +6,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import css from './MenuContent.css';
+import css from './MenuContent.module.css';
 
 const MenuContent = props => {
   const {

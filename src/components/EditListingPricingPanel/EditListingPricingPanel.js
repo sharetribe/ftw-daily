@@ -2,14 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from '../../util/reactIntl';
-import { LISTING_STATE_DRAFT } from '../../util/types';
+import {
+  DAILY_PRICE,
+  WEEKLY_PRICE,
+  MONTHLY_PRICE,
+  LINE_ITEM_DAY,
+  LINE_ITEM_UNITS,
+  HOURLY_DISCOUNT,
+  DAILY_DISCOUNT,
+  LISTING_STATE_DRAFT
+} from '../../util/types';
 import { ListingLink } from '../../components';
 import { EditListingPricingForm } from '../../forms';
 import { ensureOwnListing } from '../../util/data';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import config from '../../config';
+import { 
+  createDefaultPlan
+} from '../../util/data';
 
-import css from './EditListingPricingPanel.css';
+import css from './EditListingPricingPanel.module.css';
 
 const { Money } = sdkTypes;
 
@@ -42,20 +54,88 @@ const EditListingPricingPanel = props => {
     <FormattedMessage id="EditListingPricingPanel.createListingTitle" />
   );
 
+  const initialPrices = listing => {
+    const {publicData, price} = listing && listing.attributes || {};
+
+    if (!publicData){
+      return null;
+    }
+
+    //for support old listings types
+    if (publicData.unitType && publicData.unitType === LINE_ITEM_DAY){
+      return {
+        price: new Money(price.amount / 24, price.currency),
+        [DAILY_PRICE]: price
+      }
+    }
+
+    return {
+      price,
+      ...([DAILY_PRICE, WEEKLY_PRICE, MONTHLY_PRICE].reduce((acc, p) => {
+        if (!publicData[p]){
+          return acc;
+        }
+
+        const {amount, currency} = publicData[p];
+
+        return {
+          ...acc,
+          [p]: new Money(amount, currency)
+        }
+      }, {}))
+    }
+  }
+
+  const initialDiscounts = listing => {
+    const {publicData = {}} = listing && listing.attributes || {};
+    const {discount = {}} = publicData;
+
+    return {discount: {
+      type: publicData[LINE_ITEM_DAY] ? DAILY_DISCOUNT : HOURLY_DISCOUNT,
+      ...discount
+    }}
+  }
+
+  const initialValues = {
+    price,
+    ...initialDiscounts(listing),
+    ...initialPrices(listing)
+  };
+
+  const managePrices = values => {
+    return [DAILY_PRICE, WEEKLY_PRICE, MONTHLY_PRICE].reduce((acc, p) => {
+      const {amount, currency} = values[p] || {};
+
+      return {
+        ...acc,
+        [p]: amount ? {amount, currency} : null
+      }
+    }, {});
+  }
+
+  const updateAvailabilityMaybe = values => {
+    return (values[WEEKLY_PRICE] && !initialValues[WEEKLY_PRICE]) || 
+           (values[MONTHLY_PRICE] && !initialValues[MONTHLY_PRICE])
+  }
+  
   const priceCurrencyValid = price instanceof Money ? price.currency === config.currency : true;
+
   const form = priceCurrencyValid ? (
     <EditListingPricingForm
       className={css.form}
-      initialValues={{
-        price,
-        discount: publicData.discount
-      }}
+      initialValues={initialValues}
       unitType={publicData.unitType}
-      onSubmit={({ price, discount }) => {
+      onSubmit={values => {
+        const { price, discount } = values;
+
         onSubmit({
           publicData: {
-            discount
+            [LINE_ITEM_DAY]: null,
+            [LINE_ITEM_UNITS]: null,
+            discount,
+            ...managePrices(values)
           },
+          ...(updateAvailabilityMaybe(values) ? {availabilityPlan: createDefaultPlan(publicData.seats || 1, true)} : {}),
           price
         });
       }}

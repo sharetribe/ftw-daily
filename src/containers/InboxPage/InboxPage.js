@@ -14,7 +14,7 @@ import {
   txIsPaymentExpired,
   txIsPaymentPending,
 } from '../../util/transaction';
-import { propTypes, DATE_TYPE_DATE, DATE_TYPE_DATETIME, LINE_ITEM_DAY } from '../../util/types';
+import { propTypes, DATE_TYPE_DATE, DATE_TYPE_DATETIME, LINE_ITEM_DAY, HOURLY_PRICE } from '../../util/types';
 import { ensureCurrentUser } from '../../util/data';
 import { getMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { isScrollingDisabled } from '../../ducks/UI.duck';
@@ -38,8 +38,7 @@ import {
 import { TopbarContainer, NotFoundPage } from '../../containers';
 import config from '../../config';
 
-import { loadData } from './InboxPage.duck';
-import css from './InboxPage.css';
+import css from './InboxPage.module.css';
 
 const formatDate = (intl, date) => {
   return {
@@ -172,7 +171,9 @@ const BookingInfoMaybe = props => {
   // Remember to also add formatMoney function from 'util/currency.js' and add this after BookingTimeInfo:
   // <div className={css.itemPrice}>{price}</div>
 
-  const dateType = unitType === LINE_ITEM_DAY ? DATE_TYPE_DATE : DATE_TYPE_DATETIME;
+  console.log(tx)
+  const { type } = tx && tx.attributes && tx.attributes.protectedData || {};
+  const dateType = type !== HOURLY_PRICE ? DATE_TYPE_DATE : DATE_TYPE_DATETIME;
 
   return (
     <div className={classNames(css.bookingInfoWrapper, bookingClassName)}>
@@ -442,7 +443,5 @@ const InboxPage = compose(
   connect(mapStateToProps),
   injectIntl
 )(InboxPageComponent);
-
-InboxPage.loadData = loadData;
 
 export default InboxPage;

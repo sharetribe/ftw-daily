@@ -4,7 +4,7 @@ import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { NamedLink } from '../../components';
 
-import css from './SectionHero.css';
+import css from './SectionHero.module.css';
 
 import yogaImage from './images/yoga.png';
 import ptImage from './images/pt.png';

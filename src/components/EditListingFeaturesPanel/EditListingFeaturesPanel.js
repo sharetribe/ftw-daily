@@ -8,7 +8,7 @@ import { ensureListing } from '../../util/data';
 import { EditListingFeaturesForm } from '../../forms';
 import { ListingLink } from '../../components';
 
-import css from './EditListingFeaturesPanel.css';
+import css from './EditListingFeaturesPanel.module.css';
 
 const FEATURES_NAME = 'amenities';
 

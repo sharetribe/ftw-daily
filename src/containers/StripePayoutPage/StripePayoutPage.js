@@ -27,9 +27,9 @@ import {
 } from '../../components';
 import { StripeConnectAccountForm } from '../../forms';
 import { TopbarContainer } from '..';
-import { savePayoutDetails, loadData } from './StripePayoutPage.duck';
+import { savePayoutDetails } from './StripePayoutPage.duck';
 
-import css from './StripePayoutPage.css';
+import css from './StripePayoutPage.module.css';
 
 const STRIPE_ONBOARDING_RETURN_URL_SUCCESS = 'success';
 const STRIPE_ONBOARDING_RETURN_URL_FAILURE = 'failure';
@@ -291,7 +291,5 @@ const StripePayoutPage = compose(
   ),
   injectIntl
 )(StripePayoutPageComponent);
-
-StripePayoutPage.loadData = loadData;
 
 export default StripePayoutPage;

@@ -40,7 +40,7 @@ import { FormattedMessage } from '../../util/reactIntl';
 import { propTypes } from '../../util/types';
 
 import NoImageIcon from './NoImageIcon';
-import css from './ResponsiveImage.css';
+import css from './ResponsiveImage.module.css';
 
 const ResponsiveImage = props => {
   const { className, rootClassName, alt, noImageMessage, image, variants, ...rest } = props;
@@ -49,10 +49,7 @@ const ResponsiveImage = props => {
   if (image == null || variants.length === 0) {
     const noImageClasses = classNames(rootClassName || css.root, css.noImageContainer, className);
 
-    // NoImageMessage is needed for listing images on top the map (those component lose context)
-    // https://github.com/tomchentw/react-google-maps/issues/578
     const noImageMessageText = noImageMessage || <FormattedMessage id="ResponsiveImage.noImage" />;
-    /* eslint-disable jsx-a11y/img-redundant-alt */
     return (
       <div className={noImageClasses}>
         <div className={css.noImageWrapper}>
@@ -61,7 +58,6 @@ const ResponsiveImage = props => {
         </div>
       </div>
     );
-    /* eslint-enable jsx-a11y/img-redundant-alt */
   }
 
   const imageVariants = image.attributes.variants;
@@ -81,14 +77,11 @@ const ResponsiveImage = props => {
 
   const imgProps = {
     className: classes,
-    alt,
     srcSet,
     ...rest,
   };
 
-  // alt prop already defined above
-  // eslint-disable-next-line jsx-a11y/alt-text
-  return <img {...imgProps} />;
+  return <img alt={alt} {...imgProps} />;
 };
 
 ResponsiveImage.defaultProps = {

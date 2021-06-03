@@ -1,0 +1,52 @@
+@import '../../styles/propertySets.css';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.formDiv {
+  margin-top: 24px;
+}
+
+.form {
+  height:SectionHero 45px;
+  padding-left: 20px;
+  /*
+  @media (--viewportMedium) {
+    margin-top: 30px;
+    padding-top: 2px;
+  } */
+}
+
+.title {
+  @apply --marketplaceH1FontStyles;
+  margin-top: 0;
+  color: #ffffff;
+  text-align: center;
+  @media (--viewportMedium) {
+    font-size: 36px;
+  }
+}
+
+.txtDiv {
+  width: 75%;
+  text-align: center;
+  @media (--viewportMedium) {
+    padding-right: 50px;
+    padding-left: 50px;
+  }
+}
+
+.txtDiv p {
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 18px;
+  @media (--viewportMedium) {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}

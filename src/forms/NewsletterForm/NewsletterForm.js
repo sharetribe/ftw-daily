@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import { Form, PrimaryButton, FieldTextInput, NamedLink } from '../../components';
 import * as validators from '../../util/validators';
 
-import css from './NewsletterForm.css';
+import css from './NewsletterForm.module.css';
 
 const NewsletterFormComponent = props => (
   <FinalForm
@@ -51,14 +51,14 @@ const NewsletterFormComponent = props => (
           }}
         >
           <div className={css.emailField}>
-            <FieldTextInput
+            {/* <FieldTextInput
               type="email"
               id={formId ? `${formId}.email` : 'email'}
               name="newsletterEmail"
               autoComplete="email"
               placeholder={emailPlaceholder}
               validate={validators.composeValidators(emailRequired, emailValid)}
-            />
+            /> */}
           </div>
           <div className={css.formBtn}>
             <PrimaryButton type="submit" inProgress={submitInProgress} disabled={submitDisabled}>

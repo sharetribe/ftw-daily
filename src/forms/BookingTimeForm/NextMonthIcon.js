@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import css from './FieldDateAndTimeInput.css';
+import css from './FieldDateAndTimeInput.module.css';
 
 const NextMonthIcon = props => {
   const { className, rootClassName } = props;

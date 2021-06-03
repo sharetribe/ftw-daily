@@ -1,6 +1,6 @@
 import React from 'react';
 
-import css from './LocationAutocompleteInput.css';
+import css from './LocationAutocompleteInput.module.css';
 
 const IconCurrentLocation = () => (
   <svg

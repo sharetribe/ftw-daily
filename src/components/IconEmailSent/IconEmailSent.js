@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import css from './IconEmailSent.css';
+import css from './IconEmailSent.module.css';
 
 const IconEmailSent = props => {
   const { rootClassName, className } = props;

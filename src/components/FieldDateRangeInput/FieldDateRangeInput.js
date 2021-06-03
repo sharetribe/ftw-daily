@@ -12,9 +12,9 @@ import classNames from 'classnames';
 import { START_DATE, END_DATE } from '../../util/dates';
 import { propTypes } from '../../util/types';
 import { ValidationError } from '../../components';
-
+import moment from 'moment';
 import DateRangeInput from './DateRangeInput';
-import css from './FieldDateRangeInput.css';
+import css from './FieldDateRangeInput.module.css';
 
 const MAX_MOBILE_SCREEN_WIDTH = 768;
 
@@ -50,6 +50,22 @@ class FieldDateRangeInputComponent extends Component {
     this.props.input.onFocus(focusedInput);
   }
 
+
+  getPreparedDates(values){
+    const { offsetLength } = this.props;
+
+    if (!offsetLength || !values.startDate || !values.endDate){
+      return values;
+    }
+
+    const {startDate, endDate} = values;
+    
+    return {
+      startDate,
+      endDate: moment(endDate).subtract(moment(endDate).diff(moment(startDate), 'days')%offsetLength, 'days').toDate()
+    }
+  }
+
   render() {
     /* eslint-disable no-unused-vars */
     const {
@@ -57,6 +73,7 @@ class FieldDateRangeInputComponent extends Component {
       rootClassName,
       unitType,
       minimumLength,
+      offsetLength,
       startDateId,
       startDateLabel,
       endDateId,
@@ -118,7 +135,10 @@ class FieldDateRangeInputComponent extends Component {
       ) : null;
 
     // eslint-disable-next-line no-unused-vars
-    const { onBlur, onFocus, type, ...restOfInput } = input;
+    const { onBlur, onFocus, type, checked, onChange,...restOfInput } = input;
+
+    const handleChange = e => onChange(this.getPreparedDates(e));
+
     const inputProps = {
       unitType,
       minimumLength,
@@ -126,6 +146,7 @@ class FieldDateRangeInputComponent extends Component {
       onFocus: this.handleFocus,
       useMobileMargins,
       readOnly: typeof window !== 'undefined' && window.innerWidth < MAX_MOBILE_SCREEN_WIDTH,
+      onChange: handleChange,
       ...restOfInput,
       ...rest,
       focusedInput: this.state.focusedInput,

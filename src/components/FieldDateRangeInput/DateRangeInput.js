@@ -1,6 +1,6 @@
 /**
  * DateRangeInput wraps DateRangePicker from React-dates and gives a list of all default props we use.
- * Styles for DateRangePicker can be found from 'public/reactDates.css'.
+ * Styles for DateRangePicker can be found from 'public/reactDates.module.css'.
  *
  * N.B. *isOutsideRange* in defaultProps is defining what dates are available to booking.
  */
@@ -18,12 +18,12 @@ import {
   isDayBlockedFn,
   isOutsideRangeFn,
   isBlockedBetween,
-  apiEndDateToPickerDate,
-  pickerEndDateToApiDate,
+  apiEndDateToPickerDateForDaily,
+  pickerEndDateToApiDateForDaily,
 } from './DateRangeInput.helpers';
 
 import { IconArrowHead } from '../../components';
-import css from './DateRangeInput.css';
+import css from './DateRangeInput.module.css';
 
 export const HORIZONTAL_ORIENTATION = 'horizontal';
 export const ANCHOR_LEFT = 'left';
@@ -172,7 +172,7 @@ class DateRangeInputComponent extends Component {
       : false;
 
     const startDateAsDate = startDate instanceof moment ? startDate.toDate() : null;
-    const endDateAsDate = clearEndDate ? null : pickerEndDateToApiDate(unitType, endDate);
+    const endDateAsDate = clearEndDate ? null : pickerEndDateToApiDateForDaily(endDate);
 
     this.setState(() => ({
       currentStartDate: startDateAsDate,
@@ -227,7 +227,7 @@ class DateRangeInputComponent extends Component {
     const startDate =
       value && value.startDate instanceof Date ? moment(value.startDate) : initialStartMoment;
     const endDate =
-      apiEndDateToPickerDate(unitType, value ? value.endDate : null) || initialEndMoment;
+      apiEndDateToPickerDateForDaily(value ? value.endDate : null) || initialEndMoment;
 
     let isDayBlocked = isDayBlockedFn(
       timeSlots,

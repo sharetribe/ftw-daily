@@ -15,7 +15,7 @@ import {
   LayoutWrapperFooter,
 } from '../../components';
 
-import css from './LayoutSideNavigation.css';
+import css from './LayoutSideNavigation.module.css';
 
 const prepareChildren = children => {
   const childrenCount = React.Children.count(children);

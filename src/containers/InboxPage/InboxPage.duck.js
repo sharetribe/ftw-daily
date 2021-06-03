@@ -100,6 +100,7 @@ export const loadData = (params, search) => (dispatch, getState, sdk) => {
       'transitions',
       'payinTotal',
       'payoutTotal',
+      'protectedData'
     ],
     'fields.user': ['profile.displayName', 'profile.abbreviatedName'],
     'fields.image': ['variants.square-small', 'variants.square-small2x'],

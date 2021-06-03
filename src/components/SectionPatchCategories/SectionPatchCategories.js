@@ -6,7 +6,7 @@ import { lazyLoadWithDimensions } from '../../util/contextHelpers';
 
 import { NamedLink } from '../../components';
 
-import css from './SectionPatchCategories.css';
+import css from './SectionPatchCategories.module.css';
 
 import hairBeautyImage from       './images/hair_beauty.jpg';
 import fitnessWellnessImage from  './images/fitness_wellness.jpg';

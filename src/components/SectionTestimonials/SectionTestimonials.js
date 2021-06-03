@@ -11,7 +11,7 @@ import {
 } from './helpers';
 import MobileTestimonials from './MobileTestimonials';
 
-import css from './SectionTestimonials.css';
+import css from './SectionTestimonials.module.css';
 
 const SectionTestimonials = props => {
   const { rootClassName, className } = props;

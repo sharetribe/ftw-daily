@@ -12,7 +12,7 @@ import { sdkBoundsToFixedCoordinates, hasSameSDKBounds } from '../../util/maps';
 import { SearchMapInfoCard, SearchMapPriceLabel, SearchMapGroupLabel } from '../../components';
 
 import { groupedByCoordinates, reducedToArray } from './SearchMap.helpers.js';
-import css from './SearchMapWithMapbox.css';
+import css from './SearchMapWithMapbox.module.css';
 
 export const LABEL_HANDLE = 'SearchMapLabel';
 export const INFO_CARD_HANDLE = 'SearchMapInfoCard';
@@ -366,6 +366,7 @@ class SearchMapWithMapbox extends Component {
 
   render() {
     const {
+      id,
       className,
       listings,
       activeListingId,
@@ -450,7 +451,7 @@ class SearchMapWithMapbox extends Component {
 
     return (
       <div
-        id="map"
+        id={id}
         ref={this.onMount}
         className={classNames(className, css.fullArea)}
         onClick={this.props.onClick}
@@ -494,6 +495,7 @@ class SearchMapWithMapbox extends Component {
 }
 
 SearchMapWithMapbox.defaultProps = {
+  id: 'map',
   center: null,
   priceLabels: [],
   infoCard: null,
@@ -502,6 +504,7 @@ SearchMapWithMapbox.defaultProps = {
 };
 
 SearchMapWithMapbox.propTypes = {
+  id: string,
   center: propTypes.latlng,
   location: shape({
     search: string.isRequired,

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 
 import { FilterForm } from '../../forms';
-import css from './FilterPlain.css';
+import css from './FilterPlain.module.css';
 
 class FilterPlainComponent extends Component {
   constructor(props) {

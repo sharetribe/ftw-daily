@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import css from './IconSearch.css';
+import css from './IconSearch.module.css';
 
 const IconSearch = props => {
   const { rootClassName, className } = props;
