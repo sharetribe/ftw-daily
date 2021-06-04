@@ -36,6 +36,7 @@ export const EditListingPricingFormComponent = props => (
         updated,
         updateInProgress,
         fetchErrors,
+        fetchListingProgress,
         values: {
           discount
         },
@@ -103,7 +104,8 @@ export const EditListingPricingFormComponent = props => (
       const classes = classNames(css.root, className);
       const submitReady = (updated && pristine) || ready;
       const submitInProgress = updateInProgress;
-      const submitDisabled = invalid || disabled || submitInProgress;
+      const submitDisabled = invalid || disabled || submitInProgress || fetchListingProgress;
+      const inputsDisabled = fetchListingProgress;
       const { updateListingError, showListingsError } = fetchErrors || {};
 
       const parsePercentage = value => {
@@ -142,10 +144,10 @@ export const EditListingPricingFormComponent = props => (
             id={HOURLY_PRICE}
             name={HOURLY_PRICE}
             className={css.priceInput}
-            autoFocus
             label={pricePerHourLabel}
             placeholder={pricePlaceholder}
             currencyConfig={config.currencyConfig}
+            disabled={inputsDisabled}
             validate={priceValidators}
           />
 
@@ -155,6 +157,7 @@ export const EditListingPricingFormComponent = props => (
             className={css.priceInput}
             label={pricePerDayLabel}
             placeholder={pricePlaceholder}
+            disabled={inputsDisabled}
             currencyConfig={config.currencyConfig}
           />
 
@@ -164,6 +167,7 @@ export const EditListingPricingFormComponent = props => (
             className={css.priceInput}
             label={pricePerWeekLabel}
             placeholder={pricePlaceholder}
+            disabled={inputsDisabled}
             currencyConfig={config.currencyConfig}
           />
 
@@ -173,6 +177,7 @@ export const EditListingPricingFormComponent = props => (
             className={css.priceInput}
             label={pricePerMonthLabel}
             placeholder={pricePlaceholder}
+            disabled={inputsDisabled}
             currencyConfig={config.currencyConfig}
           />
 

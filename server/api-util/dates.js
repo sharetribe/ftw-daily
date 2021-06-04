@@ -42,4 +42,22 @@ exports.daysBetween = (startDate, endDate) => {
   return days;
 };
 
+exports.weeksBetween = (startDate, endDate) => {
+  const weeks = moment(endDate).diff(startDate, 'weeks');
+  if (weeks < 1) {
+    throw new Error('Duration is less than a week');
+  }
+
+  return weeks;
+};
+
+exports.monthsBetween = (startDate, endDate) => {
+  const months = moment(endDate).diff(startDate, 'days') / 30;
+  if (months < 1) {
+    throw new Error('Duration is less than a month');
+  }
+
+  return Math.floor(months);
+};
+
 exports.hoursBeetwen = (startDate, endDate) => moment(endDate).diff(moment(startDate), 'hours', true)

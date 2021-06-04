@@ -9,7 +9,13 @@ import {
   TRANSITION_CONFIRM_PAYMENT,
   isPrivileged,
 } from '../../util/transaction';
-import { HOURLY_PRICE, LINE_ITEM_UNITS } from '../../util/types';
+import {
+  HOURLY_PRICE,
+  DAILY_PRICE,
+  WEEKLY_PRICE,
+  MONTHLY_PRICE,
+  LINE_ITEM_UNITS
+} from '../../util/types';
 import * as log from '../../util/log';
 import { fetchCurrentUserHasOrdersSuccess, fetchCurrentUser } from '../../ducks/user.duck';
 
@@ -47,6 +53,15 @@ const initialState = {
   confirmPaymentError: null,
   stripeCustomerFetched: false,
 };
+
+const getTransactionType = type => {
+  return {
+    [HOURLY_PRICE]: 'isHourly',
+    [DAILY_PRICE]: 'isDaily',
+    [WEEKLY_PRICE]: 'isWeekly',
+    [MONTHLY_PRICE]: 'isMonthly'
+  }[type];
+}
 
 export default function checkoutPageReducer(state = initialState, action = {}) {
   const { type, payload } = action;
@@ -188,7 +203,7 @@ export const initiateOrder = (orderParams, transactionId) => (dispatch, getState
           protectedData: {
             ...(orderParams.protectedData ? orderParams.protectedData : {}),
             type: orderParams.type,
-            ...(orderParams.type === HOURLY_PRICE ? {isHourly: true} : {})
+            [getTransactionType(orderParams.type)]: true
           }
         },
       }
@@ -202,7 +217,7 @@ export const initiateOrder = (orderParams, transactionId) => (dispatch, getState
           protectedData: {
             ...(orderParams.protectedData ? orderParams.protectedData : {}),
             type: orderParams.type,
-            ...(orderParams.type === HOURLY_PRICE ? {isHourly: true} : {})
+            [getTransactionType(orderParams.type)]: true
           }
         },
       };
@@ -338,7 +353,7 @@ export const speculateTransaction = (orderParams, transactionId) => (dispatch, g
     protectedData: {
       ...(orderParams.protectedData ? orderParams.protectedData : {}),
       type: orderParams.type,
-      ...(orderParams.type === HOURLY_PRICE ? {isHourly: true} : {})
+      [getTransactionType(orderParams.type)]: true
     },
     cardToken: 'CheckoutPage_speculative_card_token',
   };

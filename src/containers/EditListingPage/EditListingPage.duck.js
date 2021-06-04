@@ -152,6 +152,7 @@ export const SAVE_PAYOUT_DETAILS_ERROR = 'app/EditListingPage/SAVE_PAYOUT_DETAIL
 
 const initialState = {
   // Error instance placeholders for each endpoint
+  fetchListingProgress: false,
   createListingDraftError: null,
   publishingListing: null,
   publishListingError: null,
@@ -253,14 +254,14 @@ export default function reducer(state = initialState, action = {}) {
       return { ...state, updateInProgress: false, updateListingError: payload };
 
     case SHOW_LISTINGS_REQUEST:
-      return { ...state, showListingsError: null };
+      return { ...state, fetchListingProgress: true, showListingsError: null };
     case SHOW_LISTINGS_SUCCESS:
-      return { ...initialState, availabilityCalendar: { ...state.availabilityCalendar } };
+      return { ...initialState, fetchListingProgress: false, availabilityCalendar: { ...state.availabilityCalendar } };
 
     case SHOW_LISTINGS_ERROR:
       // eslint-disable-next-line no-console
       console.error(payload);
-      return { ...state, showListingsError: payload, redirectToListing: false };
+      return { ...state, fetchListingProgress: false, showListingsError: payload, redirectToListing: false };
 
     case FETCH_BOOKINGS_REQUEST:
       return updateCalendarMonth(state, payload.params.monthId, {
@@ -733,7 +734,7 @@ export const loadData = params => (dispatch, getState, sdk) => {
         const listing = response[0].data.data;
         const availabilityPlan = listing.attributes.availabilityPlan;
 
-        if (availabilityPlan.type === 'availability-plan/time') {
+        if (availabilityPlan && availabilityPlan.type === 'availability-plan/time') {
           const today = new Date();
           const tz = availabilityPlan.timezone;
           const start = resetToStartOfDay(today, tz, 0);
