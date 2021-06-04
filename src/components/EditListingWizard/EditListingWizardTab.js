@@ -107,6 +107,7 @@ const EditListingWizardTab = props => {
     intl,
     fetchExceptionsInProgress,
     availabilityExceptions,
+    fetchListingProgress
   } = props;
 
   const { type } = params;
@@ -171,6 +172,7 @@ const EditListingWizardTab = props => {
       // newListingPublished and fetchInProgress are flags for the last wizard tab
       ready: newListingPublished,
       disabled: fetchInProgress,
+      fetchListingProgress: fetchListingProgress
     };
   };
 

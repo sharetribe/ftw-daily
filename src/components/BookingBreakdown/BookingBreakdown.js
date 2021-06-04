@@ -42,7 +42,10 @@ export const BookingBreakdownComponent = props => {
   } = props;
 
   const isDaily = dateType === DATE_TYPE_DATE;
-
+  const transactionType = transaction &&
+                          transaction.attributes &&
+                          transaction.attributes.protectedData && 
+                          transaction.attributes.protectedData.type;
   const isCustomer = userRole === 'customer';
   const isProvider = userRole === 'provider';
 
@@ -100,9 +103,9 @@ export const BookingBreakdownComponent = props => {
         timeZone={timeZone}
         isDaily={isDaily}
       />
-      <LineItemUnitsMaybe transaction={transaction} unitType={unitType} isDaily={isDaily}/>
+      <LineItemUnitsMaybe transaction={transaction} unitType={unitType} isDaily={isDaily} transactionType={transactionType}/>
 
-      <LineItemBasePriceMaybe transaction={transaction} unitType={unitType} intl={intl} isDaily={isDaily}/>
+      <LineItemBasePriceMaybe transaction={transaction} unitType={unitType} intl={intl} isDaily={isDaily} transactionType={transactionType}/>
       <LineItemUnknownItemsMaybe transaction={transaction} isProvider={isProvider} intl={intl} />
 
       <LineItemSubTotalMaybe

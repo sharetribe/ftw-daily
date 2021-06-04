@@ -84,6 +84,7 @@ export const EditListingPageComponent = props => {
     stripeAccountFetched,
     stripeAccount,
     updateStripeAccountError,
+    fetchListingProgress
   } = props;
 
   const { id, type, returnURLType } = params;
@@ -221,6 +222,7 @@ export const EditListingPageComponent = props => {
             createStripeAccountError || updateStripeAccountError || fetchStripeAccountError
           }
           stripeAccountLinkError={getAccountLinkError}
+          fetchListingProgress={fetchListingProgress}
         />
       </Page>
     );
@@ -331,6 +333,7 @@ const mapStateToProps = state => {
     getOwnListing,
     page,
     scrollingDisabled: isScrollingDisabled(state),
+    fetchListingProgress: page.fetchListingProgress
   };
 };
 

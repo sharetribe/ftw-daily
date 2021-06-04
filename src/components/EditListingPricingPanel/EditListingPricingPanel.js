@@ -38,6 +38,7 @@ const EditListingPricingPanel = props => {
     panelUpdated,
     updateInProgress,
     errors,
+    fetchListingProgress
   } = props;
 
   const classes = classNames(rootClassName || css.root, className);
@@ -96,11 +97,11 @@ const EditListingPricingPanel = props => {
     }}
   }
 
-  const initialValues = {
+  const initialValues = !!price ? {
     price,
     ...initialDiscounts(listing),
     ...initialPrices(listing)
-  };
+  } : {};
 
   const managePrices = values => {
     return [DAILY_PRICE, WEEKLY_PRICE, MONTHLY_PRICE].reduce((acc, p) => {
@@ -124,11 +125,13 @@ const EditListingPricingPanel = props => {
     <EditListingPricingForm
       className={css.form}
       initialValues={initialValues}
-      unitType={publicData.unitType}
+      // unitType={publicData.unitType}
+      fetchListingProgress={fetchListingProgress}
       onSubmit={values => {
         const { price, discount } = values;
 
         onSubmit({
+          price,
           publicData: {
             [LINE_ITEM_DAY]: null,
             [LINE_ITEM_UNITS]: null,
@@ -136,7 +139,6 @@ const EditListingPricingPanel = props => {
             ...managePrices(values)
           },
           ...(updateAvailabilityMaybe(values) ? {availabilityPlan: createDefaultPlan(publicData.seats || 1, true)} : {}),
-          price
         });
       }}
       onChange={onChange}

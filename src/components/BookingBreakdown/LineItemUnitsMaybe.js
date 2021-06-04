@@ -1,11 +1,17 @@
 import React from 'react';
 import { FormattedMessage } from '../../util/reactIntl';
-import { LINE_ITEM_UNITS, propTypes } from '../../util/types';
+import {
+  LINE_ITEM_UNITS,
+  DAILY_PRICE,
+  WEEKLY_PRICE,
+  MONTHLY_PRICE,
+  propTypes
+} from '../../util/types';
 
 import css from './BookingBreakdown.module.css';
 
 const LineItemUnitsMaybe = props => {
-  const { transaction, unitType, isDaily } = props;
+  const { transaction, unitType, isDaily, transactionType } = props;
   const isHourly = unitType === LINE_ITEM_UNITS;
 
   if (!isHourly) return null;
@@ -20,8 +26,26 @@ const LineItemUnitsMaybe = props => {
 
   const quantity = unitPurchase.quantity;
 
-  const key1 = isDaily ? 'quantityUnitDays' : 'quantityUnit';
-  const key2 = isDaily ? 'quantityDays' : 'quantity';
+  let key1 = 'quantityUnit';
+  let key2 = 'quantity';
+
+  switch(transactionType){
+    case DAILY_PRICE: {
+      key1 = 'quantityUnitDays';
+      key2 = 'quantityDays';
+    };
+    break;
+    case WEEKLY_PRICE: {
+      key1 = 'quantityUnitWeeks';
+      key2 = 'quantityWeeks';
+    };
+    break;
+    case MONTHLY_PRICE: {
+      key1 = 'quantityUnitMonths';
+      key2 = 'quantityMonths';
+    };
+    break;
+  }
 
   return (
     <div className={css.lineItem}>

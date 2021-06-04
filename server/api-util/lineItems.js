@@ -50,7 +50,7 @@ exports.transactionLineItems = (listing, bookingData) => {
       throw new Error(type + " price isn't provided")
     }
     unitPrice = new Money(amount, currency);
-    quantity = calculateQuantityFromDates(startDate, endDate);
+    quantity = calculateQuantityFromDates(startDate, endDate, type);
   }
   
   /**
