@@ -5,16 +5,20 @@
   "repository": "https://github.com/sharetribe/ftw-daily/",
   "env": {
     "REACT_APP_MAPBOX_ACCESS_TOKEN": {
-      "description": "See: Integrating to map providers documentation https://github.com/sharetribe/ftw-daily/blob/master/docs/map-providers.md"
+      "description": "See: Integrating to map providers documentation https://github.com/sharetribe/ftw-daily/blob/master/docs/map-providers.md",
+      "value": "pk.eyJ1IjoiZG9yaXNzc3NzcyIsImEiOiJja3Bvamk4YXcwMHluMm5tbGxsdjR4aGtvIn0.Mz8HrF3c2zfVOXCr5rQ-Yw"
     },
     "REACT_APP_SHARETRIBE_SDK_CLIENT_ID": {
-      "description": "Client ID (API key). You will find this from the Flex Console."
+      "description": "",
+      "value": "98b6eb07-1611-420a-9a56-07e011f0fed3"
     },
     "SHARETRIBE_SDK_CLIENT_SECRET": {
-      "description": "Client Secret (API secret token). You will find this from the Flex Console."
+      "description": "",
+      "value": "0285249673fe379a9c76eb0bc9f4020314f4d172"
     },
     "REACT_APP_STRIPE_PUBLISHABLE_KEY": {
-      "description": "Stripe publishable API key for generating tokens with Stripe API. Use test key (prefix pktest) for development."
+      "description": "Stripe publishable API key for generating tokens with Stripe API. Use test key (prefix pktest) for development.",
+      "value": "pk_test_51J0BW0GYQuohXowsBV3vyxMPPQhjiTswPtSSY6cLVbpblm5RjAf2EFbQw9Xr3zVs844PjfA2uzoIRDX6Qj5rIXAU00pPJ2HUTR"
     },
     "REACT_APP_SHARETRIBE_MARKETPLACE_CURRENCY": {
       "description": "The currency used in the Marketplace as ISO 4217 currency code. For example: USD, EUR, CAD, AUD, etc.",
