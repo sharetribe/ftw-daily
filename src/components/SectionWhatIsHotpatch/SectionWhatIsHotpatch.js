@@ -4,7 +4,7 @@ import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { lazyLoadWithDimensions } from '../../util/contextHelpers';
 
-import friendsWorking from './images/what-is-hotpatch.png';
+import friendsWorking from './images/what-is-hotpatch.jpg';
 
 import css from './SectionWhatIsHotpatch.module.css';
 
