@@ -41,8 +41,11 @@
 
   --matterColorLightTransparent: rgba(255, 255, 255, 0.65);
 
+  --customBlue: #aeecf4;
+
   /* ================ Font ================ */
   --fontFamily: 'poppins', Helvetica, Arial, sans-serif;
+  --fontFamilySofiapro: 'sofiapro', Helvetica, Arial, sans-serif;
 
   --fontWeightRegular: 400;
   --fontWeightMedium: 500;
@@ -163,7 +166,7 @@
 /* ================ Global element styles ================ */
 
 body {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: var(--fontFamily);
   -webkit-font-smoothing: antialiased; /* http://szafranek.net/blog/2009/02/22/font-smoothing-explained/ */
   -moz-osx-font-smoothing: grayscale; /* http://szafranek.net/blog/2009/02/22/font-smoothing-explained/ */
   text-rendering: optimizeSpeed;
@@ -277,9 +280,9 @@ textarea {
 
 .fontsLoaded {
   & body {
-    font-family: 'poppins', Helvetica, Arial, sans-serif;
+    font-family: var(--fontFamily);
   }
   & button {
-    font-family: 'poppins', Helvetica, Arial, sans-serif;
+    font-family: var(--fontFamily);
   }
 }

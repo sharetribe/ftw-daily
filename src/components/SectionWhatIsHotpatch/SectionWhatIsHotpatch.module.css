@@ -12,6 +12,7 @@
 
   @media (--viewportMedium) {
     flex-direction: row;
+    align-items: center;
   }
 }
 
@@ -38,8 +39,14 @@
   }
 }
 
+.descriptionDiv p:last-child {
+  @media (--viewportMedium) {
+    margin-bottom: 0;
+  }
+}
+
 .bold {
-  font-weight: 700;
+  font-weight: var(--fontWeightSemiBold);
 }
 
 .imageContainer {
@@ -47,7 +54,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 50px;
+  padding: 25px;
+  
+  @media (--viewportSmall) {
+    padding: 50px;
+  }
 
   @media (--viewportMedium) {
     padding: 0px;

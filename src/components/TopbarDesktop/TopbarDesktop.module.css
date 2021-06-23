@@ -130,7 +130,7 @@
 .createListingLink {
   @apply --TopbarDesktop_linkHover;
   @apply --marketplaceH5FontStyles;
-
+  font-family: var(--fontFamily);
   flex-shrink: 0;
   height: 100%;
   padding: 0 12px 0 12px;
@@ -156,6 +156,7 @@
 .inboxLink {
   @apply --TopbarDesktop_linkHover;
   @apply --marketplaceH5FontStyles;
+  font-family: var(--fontFamily);
   height: 100%;
   padding: 0 12px 0 12px;
   margin-top: 0;
@@ -273,6 +274,7 @@
 .login {
   @apply --marketplaceH5FontStyles;
   @apply --TopbarDesktop_label;
+  font-family: var(--fontFamily);
 }
 
 /* left animated "border" like hover element */
@@ -321,6 +323,7 @@
   /* Font is specific to this component */
   @apply --marketplaceH5FontStyles;
   font-size: 14px;
+  font-family: var(--fontFamily);
 
   /* Dimensions */
   position: relative;

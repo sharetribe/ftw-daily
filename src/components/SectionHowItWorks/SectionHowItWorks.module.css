@@ -76,12 +76,12 @@
     left: 12px;
     width: 130px;
     height: 40px;
+    line-height: 40px;
     color: #fff;
     font-size: 16px;
-    font-weight: 700;
+    font-weight: var(--fontWeightSemiBold);
     text-align: center;
-    line-height: 1;
-    padding: 9px 4px;
+    padding: 0 4px;
     background-color: var(--marketplaceColorDark);
     border-radius: 3px;
     @media (--viewportSmall) {
