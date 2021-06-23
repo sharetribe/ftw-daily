@@ -14,7 +14,7 @@
   padding: 4px 12px;
   margin-right: 8px;
   font: inherit;
-  font-weight: 700;
+  font-weight: 600;
   line-height: normal;
   overflow: visible;
   -moz-box-sizing: border-box;
@@ -239,7 +239,7 @@
 }
 .DayPickerKeyboardShortcuts_title {
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
   margin: 0
 }
 .DayPickerKeyboardShortcuts_list {

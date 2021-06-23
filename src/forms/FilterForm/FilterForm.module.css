@@ -76,7 +76,7 @@
 
   &:focus,
   &:hover {
-    color: var(--marketplaceColorDark);
+    color: var(--marketplaceColor);
     transition: width var(--transitionStyleButton);
   }
 }

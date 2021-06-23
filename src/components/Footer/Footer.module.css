@@ -190,6 +190,7 @@
 .link {
   /* Font */
   @apply --marketplaceH5FontStyles;
+  font-family: var(--fontFamily);
   line-height: 20px;
   color: var(--matterColor);
   transition: var(--transitionStyleButton);

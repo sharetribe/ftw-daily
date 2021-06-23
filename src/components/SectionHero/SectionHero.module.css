@@ -50,7 +50,7 @@
   order: 1;
 
   @media (--viewportLarge) {
-    margin: 50px;
+    margin: 0 30px;
     order: 2;
   }
 }
@@ -113,9 +113,9 @@
 
   @media only screen and (min-width: 1367px) {
     margin: 0 auto;
-    max-width: calc(1052px + 36px + 36px);
+    max-width: calc(1052px + 30px + 30px);
     width: 100%;
-    padding: 0 36px 0 36px;
+    padding: 0 30px 0 30px;
     margin: 0 7.5vw 0 7.5vw;
   }
 }
@@ -147,7 +147,7 @@
 }
 
 .bold {
-  font-weight: 700;
+  font-weight: var(--fontWeightSemiBold);
 }
 
 .heroButtonsContatiner {
@@ -158,12 +158,12 @@
 .heroButtonPink {
   @apply --SectionHero_animation;
 
-  background-color: var(--marketplaceColor);
+  background-color: var(--marketplaceColorDark);
   color: var(--matterColorLight);
   padding: 1em 0.25em;
   border-radius: 4px;
   text-align: center;
-  opacity: 0.5;
+  opacity: 1;
   margin-bottom: 5px;
   display: block;
   margin-right: 10px;
@@ -171,10 +171,11 @@
   max-width: 200px;
   width: 100%;
 
-  border: 1px solid #ffabd7;
+  border: 1px solid var(--marketplaceColorDark);
 
   &:hover {
-    background-color: #ffc9e5;
+    background-color: var(--customBlue);
+    border-color: var(--customBlue);
     text-decoration: none;
   }
 
@@ -185,18 +186,20 @@
   @apply --SectionHero_animation;
   display: block;
   background-color: var(--matterColorLight);
-  color: var(--marketplaceColor);
+  color: var(--marketplaceColorDark);
   padding: 1em 0.25em;
   border-radius: 4px;
-  border: 1px solid var(--marketplaceColor);
+  border: 1px solid var(--marketplaceColorDark);
   text-align: center;
-  opacity: 0.5;
+  opacity: 1;
   max-width: 200px;
   width: 100%;
 
   &:hover {
-    background-color: #fff7fb;
+    background-color: var(--customBlue);
     text-decoration: none;
+    border-color: var(--customBlue);
+    color: var(--matterColorLight);
   }
 
   animation-delay: 0.8s;

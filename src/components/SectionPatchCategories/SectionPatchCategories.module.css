@@ -16,10 +16,15 @@
   margin-top: 16px;
   justify-content: center;
   align-items: center;
-
+  
   @media (--viewportMedium) {
     flex-direction: row;
     margin-top: 32px;
+    align-items: flex-start;
+  }
+  
+  @media (--viewportLarge) {
+    align-items: center;
   }
 }
 

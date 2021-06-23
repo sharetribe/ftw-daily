@@ -85,7 +85,7 @@
   @apply --marketplaceSearchFilterSublabelFontStyles;
   width: 48px;
   text-align: center;
-  border-bottom-color: var(--attentionColor);
+  border-bottom-color: var(--marketplaceColor);
   border-bottom-width: 3px;
 
   -moz-appearance: textfield;
@@ -103,7 +103,7 @@
   @apply --marketplaceSearchFilterSublabelFontStyles;
   width: 48px;
   text-align: center;
-  border-bottom-color: var(--attentionColor);
+  border-bottom-color: var(--marketplaceColor);
   border-bottom-width: 3px;
 
   -moz-appearance: textfield;
@@ -205,7 +205,7 @@
 
   &:focus,
   &:hover {
-    color: var(--marketplaceColorDark);
+    color: var(--marketplaceColor);
     transition: width var(--transitionStyleButton);
   }
 }

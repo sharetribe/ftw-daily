@@ -29,7 +29,7 @@
   height: auto;
 
   @media (--viewportLarge) {
-    min-height: calc(100vh - var(--topbarHeightDesktop));
+    /* min-height: calc(100vh - var(--topbarHeightDesktop)); */
   }
 }
 
@@ -43,8 +43,8 @@
   }
 
   @media (--viewportLarge) {
-    justify-content: center;
-    padding-top: 60px;
+    justify-content: flex-start;
+    padding-top: 20px;
   }
 }
 
