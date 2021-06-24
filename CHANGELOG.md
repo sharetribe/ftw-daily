@@ -14,6 +14,7 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [fix] TransactionPanel: fix typo [#1451](https://github.com/sharetribe/ftw-daily/pull/1451)
 - [fix] searchMode (has_all/has_any) disappeared, when search-by-moving-the-map was used.
   [#1443](https://github.com/sharetribe/ftw-daily/pull/1443)
 
