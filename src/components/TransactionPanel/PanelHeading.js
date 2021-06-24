@@ -13,7 +13,7 @@ export const HEADING_REQUESTED = 'requested';
 export const HEADING_ACCEPTED = 'accepted';
 export const HEADING_DECLINED = 'declined';
 export const HEADING_CANCELED = 'canceled';
-export const HEADING_DELIVERED = 'deliveded';
+export const HEADING_DELIVERED = 'delivered';
 
 const createListingLink = (listingId, label, listingDeleted, searchParams = {}, className = '') => {
   if (!listingDeleted) {
