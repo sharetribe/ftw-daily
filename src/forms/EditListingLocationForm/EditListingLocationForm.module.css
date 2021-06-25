@@ -78,6 +78,15 @@
   }
 }
 
+.locationAddress {
+  max-width: 100%;
+
+  @media (--viewportMedium) {
+    max-width: 50%;
+  }
+}
+
+
 .submitButton {
   margin-top: auto;
   margin-bottom: 24px;
