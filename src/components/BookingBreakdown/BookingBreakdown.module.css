@@ -118,7 +118,6 @@
 .totalLabel {
   @apply --marketplaceButtonFontStyles;
   font-size: 18px;
-  margin: 0 0 0 10px;
   padding-top: 0px;
 }
 
