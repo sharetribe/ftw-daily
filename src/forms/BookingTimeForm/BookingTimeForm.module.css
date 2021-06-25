@@ -26,13 +26,13 @@
 
 .priceBreakdownTitle {
   /* Font */
-  color: var(--matterColorAnti);
+  /* color: var(--matterColorAnti); */
 
   margin-top: 5px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   @media (--viewportMedium) {
     margin-top: 5px;
-    margin-bottom: 26px;
+    /* margin-bottom: 26px; */
   }
 }
 
