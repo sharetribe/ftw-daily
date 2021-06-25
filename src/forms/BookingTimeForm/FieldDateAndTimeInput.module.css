@@ -152,7 +152,13 @@ Remember to do required code changes also in FieldDateAndTimeInput.js!
 .lineBetween,
 .lineBetweenDisabled {
   margin-top: 36px;
+  display: none;
+
+  @media (--viewportMedium) {
+    display: block;
+  }
 }
+
 .lineBetweenDisabled {
   color: var(--matterColorNegative);
 }
