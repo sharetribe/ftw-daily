@@ -1,4 +1,4 @@
-# Sharetribe Flex Template for Web this is test change 
+# Sharetribe Flex Template for Web
 
 [![CircleCI](https://circleci.com/gh/sharetribe/ftw-daily.svg?style=svg)](https://circleci.com/gh/sharetribe/ftw-daily)
 
