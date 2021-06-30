@@ -1,0 +1,26 @@
+@import '../../styles/propertySets.css';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  @apply --marketplaceH1FontStyles;
+  margin-top: 0;
+  font-weight: var(--fontWeightSemiBold);
+}
+
+
+.imageContainer {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.mainImage {
+  width: 100%;
+}

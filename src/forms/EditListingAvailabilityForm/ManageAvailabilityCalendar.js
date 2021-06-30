@@ -19,7 +19,7 @@ import { DAYS_OF_WEEK, propTypes } from '../../util/types';
 import { monthIdString, monthIdStringInUTC } from '../../util/dates';
 import { IconArrowHead, IconSpinner } from '../../components';
 
-import css from './ManageAvailabilityCalendar.css';
+import css from './ManageAvailabilityCalendar.module.css';
 
 // Constants
 
@@ -268,9 +268,11 @@ class ManageAvailabilityCalendar extends Component {
     const { start, end } = dateStartAndEndInUTC(date);
 
     const planEntries = ensureDayAvailabilityPlan(availabilityPlan).entries;
-    const seatsFromPlan = planEntries.find(
+
+    const availableDay = planEntries.find(
       weekDayEntry => weekDayEntry.dayOfWeek === DAYS_OF_WEEK[date.isoWeekday() - 1]
-    ).seats;
+    );
+    const seatsFromPlan = availableDay && availableDay.seats || 0;
 
     const currentException = findException(exceptions, date);
     const draftException = makeDraftException(exceptions, start, end, seatsFromPlan);
@@ -282,6 +284,7 @@ class ManageAvailabilityCalendar extends Component {
       const isResetToPlanSeats = seatsFromPlan === seats;
 
       if (isResetToPlanSeats) {
+        console.log(1)
         // Delete the exception, if the exception is redundant
         // (it has the same content as what user has in the plan).
         this.props.availability.onDeleteAvailabilityException({
@@ -290,6 +293,7 @@ class ManageAvailabilityCalendar extends Component {
           seats: seatsFromPlan,
         }, availabilityPlan);
       } else {
+        console.log(2)
         // If availability exception exists, delete it first and then create a new one.
         // NOTE: currently, API does not support update (only deleting and creating)
         this.props.availability
@@ -304,6 +308,7 @@ class ManageAvailabilityCalendar extends Component {
           });
       }
     } else {
+      console.log(3)
       // If there is no existing AvailabilityExceptions, just create a new one
       const params = { listingId, start, end, seats, currentException: exception };
       this.props.availability.onCreateAvailabilityException(params, availabilityPlan);
@@ -313,7 +318,7 @@ class ManageAvailabilityCalendar extends Component {
   onDateChange(date) {
     this.setState({ date });
 
-    const { availabilityPlan, availability } = this.props;
+    const { availabilityPlan, availability, seats } = this.props;
     const calendar = availability.calendar;
     // This component is for day/night based processes. If time-based process is used,
     // you might want to deal with local dates using monthIdString instead of monthIdStringInUTC.
@@ -330,7 +335,7 @@ class ManageAvailabilityCalendar extends Component {
       return;
     } else if (isBlocked) {
       // Unblock the date (seats = 1)
-      this.onDayAvailabilityChange(date, 1, exceptions);
+      this.onDayAvailabilityChange(date, seats, exceptions);
     } else {
       // Block the date (seats = 0)
       this.onDayAvailabilityChange(date, 0, exceptions);

@@ -1,0 +1,10 @@
+@import '../../styles/customMediaQueries.css';
+@import '../../styles/propertySets.css';
+
+.types {
+  margin: 0 24px;
+
+  @media (--viewportMedium) {
+    margin: 0;
+  }
+}

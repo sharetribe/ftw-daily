@@ -1,0 +1,38 @@
+@import '../../styles/propertySets.css';
+
+.root {
+  @apply --marketplaceModalFormRootStyles;
+
+  justify-content: flex-start;
+  flex-direction: row;
+
+  @media (--viewportMedium) {
+    justify-content: space-between;
+  }
+}
+
+.emailField {
+  max-width: 305px;
+  @media (--viewportMedium) {
+    width: 305px;
+  }
+}
+
+.formBtn {
+  height: 45px;
+  padding-left: 20px;
+  margin-right: -1px;
+}
+
+.formBtn > button {
+  height: 45px;
+  width: 125px;
+  min-height: 40px;
+  &:disabled {
+    background-color: var(--marketplaceColor);
+  }
+}
+
+.hubspotcss {
+  display: none;
+}

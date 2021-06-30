@@ -8,7 +8,10 @@
       "description": "See: Integrating to map providers documentation https://github.com/sharetribe/ftw-daily/blob/master/docs/map-providers.md"
     },
     "REACT_APP_SHARETRIBE_SDK_CLIENT_ID": {
-      "description": "Client ID (API key). You will get this from the Sharetribe team."
+      "description": "Client ID (API key). You will find this from the Flex Console."
+    },
+    "SHARETRIBE_SDK_CLIENT_SECRET": {
+      "description": "Client Secret (API secret token). You will find this from the Flex Console."
     },
     "REACT_APP_STRIPE_PUBLISHABLE_KEY": {
       "description": "Stripe publishable API key for generating tokens with Stripe API. Use test key (prefix pktest) for development."

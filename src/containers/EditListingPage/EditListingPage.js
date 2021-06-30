@@ -28,7 +28,7 @@ import { TopbarContainer } from '../../containers';
 import {
   requestFetchBookings,
   requestFetchAvailabilityExceptions,
-  requestCreateAvailabilityException,
+  requestAddAvailabilityException,
   requestDeleteAvailabilityException,
   requestCreateListingDraft,
   requestPublishListingDraft,
@@ -36,12 +36,11 @@ import {
   requestImageUpload,
   updateImageOrder,
   removeListingImage,
-  loadData,
   clearUpdatedTab,
   savePayoutDetails,
 } from './EditListingPage.duck';
 
-import css from './EditListingPage.css';
+import css from './EditListingPage.module.css';
 
 const STRIPE_ONBOARDING_RETURN_URL_SUCCESS = 'success';
 const STRIPE_ONBOARDING_RETURN_URL_FAILURE = 'failure';
@@ -85,6 +84,7 @@ export const EditListingPageComponent = props => {
     stripeAccountFetched,
     stripeAccount,
     updateStripeAccountError,
+    fetchListingProgress
   } = props;
 
   const { id, type, returnURLType } = params;
@@ -222,6 +222,7 @@ export const EditListingPageComponent = props => {
             createStripeAccountError || updateStripeAccountError || fetchStripeAccountError
           }
           stripeAccountLinkError={getAccountLinkError}
+          fetchListingProgress={fetchListingProgress}
         />
       </Page>
     );
@@ -332,15 +333,16 @@ const mapStateToProps = state => {
     getOwnListing,
     page,
     scrollingDisabled: isScrollingDisabled(state),
+    fetchListingProgress: page.fetchListingProgress
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   onUpdateListing: (tab, values) => dispatch(requestUpdateListing(tab, values)),
   onFetchBookings: params => dispatch(requestFetchBookings(params)),
-  onFetchAvailabilityExceptions: (params, availabilityPlan) => dispatch(requestFetchAvailabilityExceptions(params, availabilityPlan)),
-  onCreateAvailabilityException: (params, availabilityPlan) => dispatch(requestCreateAvailabilityException(params, availabilityPlan)),
-  onDeleteAvailabilityException: (params, availabilityPlan) => dispatch(requestDeleteAvailabilityException(params, availabilityPlan)),
+  onFetchAvailabilityExceptions: params => dispatch(requestFetchAvailabilityExceptions(params)),
+  onCreateAvailabilityException: params => dispatch(requestAddAvailabilityException(params)),
+  onDeleteAvailabilityException: params => dispatch(requestDeleteAvailabilityException(params)),
   onCreateListingDraft: values => dispatch(requestCreateListingDraft(values)),
   onPublishListingDraft: listingId => dispatch(requestPublishListingDraft(listingId)),
   onImageUpload: data => dispatch(requestImageUpload(data)),
@@ -369,7 +371,5 @@ const EditListingPage = compose(
     mapDispatchToProps
   )
 )(injectIntl(EditListingPageComponent));
-
-EditListingPage.loadData = loadData;
 
 export default EditListingPage;

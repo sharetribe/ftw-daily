@@ -23,7 +23,7 @@ import {
 import { propTypes } from '../../util/types';
 import * as log from '../../util/log';
 
-import css from './FieldCurrencyInput.css';
+import css from './FieldCurrencyInput.module.css';
 
 const { Money } = sdkTypes;
 
@@ -109,6 +109,7 @@ class CurrencyInputComponent extends Component {
     // Notify parent component about current price change
     const price = getPrice(ensureDotSeparator(unformattedValue), this.props.currencyConfig);
     this.props.input.onChange(price);
+    console.log(price)
   }
 
   onInputBlur(event) {

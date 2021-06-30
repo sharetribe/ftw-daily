@@ -19,7 +19,7 @@ import {
 import FilterComponent from './FilterComponent';
 import { validFilterParams } from './SearchPage.helpers';
 
-import css from './SearchPage.css';
+import css from './SearchPage.module.css';
 
 // Primary filters have their content in dropdown-popup.
 // With this offset we move the dropdown to the left a few pixels on desktop layout.

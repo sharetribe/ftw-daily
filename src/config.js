@@ -32,10 +32,8 @@ const sortSearchByDistance = false;
 //
 // In a way, 'processAlias' defines which transaction process (or processes)
 // this particular web application is able to handle.
-const bookingProcessAliases = [
-  'preauth-custom-pricing-day/release-1',
-  'preauth-custom-pricing-time/release-1',
-]
+const bookingProcessAlias = "preauth-hourly-process/release-1";
+
 
 // Fallback of the transaction line item code for the main unit type in bookings.
 //
@@ -43,7 +41,7 @@ const bookingProcessAliases = [
 //
 // Note: translations will use different translation keys for night, day or unit
 // depending on the value chosen.
-const fallbackUnitType = 'line-item/day';
+const fallbackUnitType = 'line-item/units';
 
 // Should the application fetch available time slots (currently defined as
 // start and end dates) to be shown on listing page.
@@ -63,7 +61,10 @@ const sdkClientId = process.env.REACT_APP_SHARETRIBE_SDK_CLIENT_ID;
 const sdkBaseUrl = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL;
 const sdkTransitVerbose = process.env.REACT_APP_SHARETRIBE_SDK_TRANSIT_VERBOSE === 'true';
 
-const currency = process.env.REACT_APP_SHARETRIBE_MARKETPLACE_CURRENCY;
+// Marketplace currency.
+// It should match one of the currencies listed in currency-config.js
+const currencyConf = process.env.REACT_APP_SHARETRIBE_MARKETPLACE_CURRENCY;
+const currency = currencyConf ? currencyConf.toUpperCase() : currencyConf;
 
 // Currency formatting options.
 // See: https://github.com/yahoo/react-intl/wiki/API#formatnumber
@@ -92,7 +93,7 @@ const canonicalRootURL = process.env.REACT_APP_CANONICAL_ROOT_URL;
 const siteTitle = 'HotPatch';
 
 // Twitter handle is needed in meta tags (twitter:site). Start it with '@' character
-const siteTwitterHandle = '@hotpatch_';
+const siteTwitterHandle = '@HotPatch_';
 
 // Instagram page is used in SEO schema (http://schema.org/Organization)
 const siteInstagramPage = 'https://www.instagram.com/hotpatch_/';
@@ -100,11 +101,20 @@ const siteInstagramPage = 'https://www.instagram.com/hotpatch_/';
 // Facebook page is used in SEO schema (http://schema.org/Organization)
 const siteFacebookPage = 'https://www.facebook.com/hotpatchmakespacework';
 
+// Social logins & SSO
+
+// Note: Facebook app id is also used for tracking:
+const siteLinkedinPage = 'https://www.linkedin.com/company/hotpatchmakespacework/';
+
+const siteYoutubePage = 'https://www.youtube.com/channel/UCdPfIbMQFk3vbWZet3uX3XA';
+
+const siteTikTokPage = 'https://www.tiktok.com/@hotpatch_';
+
 // Facebook counts shares with app or page associated by this id
 // Currently it is unset, but you can read more about fb:app_id from
 // https://developers.facebook.com/docs/sharing/webmasters#basic
 // You should create one to track social sharing in Facebook
-const facebookAppId = null;
+const facebookAppId = process.env.REACT_APP_FACEBOOK_APP_ID;
 
 const maps = {
   mapboxAccessToken: process.env.REACT_APP_MAPBOX_ACCESS_TOKEN,
@@ -182,17 +192,20 @@ const maps = {
   },
 };
 
+const bookingUnitType = 'line-item/units';
+
 // NOTE: only expose configuration that should be visible in the
 // client side, don't add any server secrets in this file.
 const config = {
   env,
   dev,
   locale,
-  bookingProcessAliases,
+  bookingProcessAlias,
   fallbackUnitType,
   enableAvailability,
   dayCountAvailableForBooking,
   i18n,
+  bookingUnitType,
   sdk: {
     clientId: sdkClientId,
     baseUrl: sdkBaseUrl,
@@ -218,6 +231,9 @@ const config = {
   siteFacebookPage,
   siteInstagramPage,
   siteTwitterHandle,
+  siteLinkedinPage,
+  siteYoutubePage,
+  siteTikTokPage,
   facebookAppId,
   sentryDsn,
   usingSSL,

@@ -1,19 +1,27 @@
 import pick from 'lodash/pick';
 import config from '../../config';
+import { initiatePrivileged, transitionPrivileged } from '../../util/api';
 import { denormalisedResponseEntities } from '../../util/data';
 import { storableError } from '../../util/errors';
 import {
   TRANSITION_REQUEST_PAYMENT,
   TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY,
   TRANSITION_CONFIRM_PAYMENT,
+  isPrivileged,
 } from '../../util/transaction';
-import { LINE_ITEM_UNITS } from '../../util/types';
+import {
+  HOURLY_PRICE,
+  DAILY_PRICE,
+  WEEKLY_PRICE,
+  MONTHLY_PRICE,
+  LINE_ITEM_UNITS
+} from '../../util/types';
 import * as log from '../../util/log';
 import { fetchCurrentUserHasOrdersSuccess, fetchCurrentUser } from '../../ducks/user.duck';
 
 // ================ Action types ================ //
 
-export const SET_INITAL_VALUES = 'app/CheckoutPage/SET_INITIAL_VALUES';
+export const SET_INITIAL_VALUES = 'app/CheckoutPage/SET_INITIAL_VALUES';
 
 export const INITIATE_ORDER_REQUEST = 'app/CheckoutPage/INITIATE_ORDER_REQUEST';
 export const INITIATE_ORDER_SUCCESS = 'app/CheckoutPage/INITIATE_ORDER_SUCCESS';
@@ -46,10 +54,19 @@ const initialState = {
   stripeCustomerFetched: false,
 };
 
+const getTransactionType = type => {
+  return {
+    [HOURLY_PRICE]: 'isHourly',
+    [DAILY_PRICE]: 'isDaily',
+    [WEEKLY_PRICE]: 'isWeekly',
+    [MONTHLY_PRICE]: 'isMonthly'
+  }[type];
+}
+
 export default function checkoutPageReducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
-    case SET_INITAL_VALUES:
+    case SET_INITIAL_VALUES:
       return { ...initialState, ...payload };
 
     case SPECULATE_TRANSACTION_REQUEST:
@@ -107,7 +124,7 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
 // ================ Action creators ================ //
 
 export const setInitialValues = initialValues => ({
-  type: SET_INITAL_VALUES,
+  type: SET_INITIAL_VALUES,
   payload: pick(initialValues, Object.keys(initialState)),
 });
 
@@ -160,49 +177,98 @@ export const stripeCustomerError = e => ({
 
 /* ================ Thunks ================ */
 
-export const initiateOrder = (orderParams, transactionId, unitType) => (dispatch, getState, sdk) => {
+export const initiateOrder = (orderParams, transactionId) => (dispatch, getState, sdk) => {
   dispatch(initiateOrderRequest());
 
-  const aliasIndex = unitType === LINE_ITEM_UNITS ? 1 : 0;
-  const processAlias = config.bookingProcessAliases[aliasIndex];
+  const processAlias = config.bookingProcessAlias;
 
-  const bodyParams = transactionId
+  const isTransition = !!transactionId;
+  const transition = isTransition
+    ? TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY
+    : TRANSITION_REQUEST_PAYMENT;
+  const isPrivilegedTransition = isPrivileged(transition);
+
+  const bookingData = {
+    startDate: orderParams.bookingStart,
+    endDate: orderParams.bookingEnd,
+    type: orderParams.type
+  };
+
+  const bodyParams = isTransition
     ? {
         id: transactionId,
-        transition: TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY,
-        params: orderParams,
+        transition,
+        params: {
+          ...orderParams,
+          protectedData: {
+            ...(orderParams.protectedData ? orderParams.protectedData : {}),
+            type: orderParams.type,
+            [getTransactionType(orderParams.type)]: true
+          }
+        },
       }
     : {
         processAlias,
         transition: TRANSITION_REQUEST_PAYMENT,
-        params: orderParams,
+        // processAlias: config.bookingProcessAlias,
+        // transition,
+        params: {
+          ...orderParams,
+          protectedData: {
+            ...(orderParams.protectedData ? orderParams.protectedData : {}),
+            type: orderParams.type,
+            [getTransactionType(orderParams.type)]: true
+          }
+        },
       };
   const queryParams = {
     include: ['booking', 'provider'],
     expand: true,
   };
 
-  const createOrder = transactionId ? sdk.transactions.transition : sdk.transactions.initiate;
+  const handleSucces = response => {
+    const entities = denormalisedResponseEntities(response);
+    const order = entities[0];
+    dispatch(initiateOrderSuccess(order));
+    dispatch(fetchCurrentUserHasOrdersSuccess(true));
+    return order;
+  };
 
-  return createOrder(bodyParams, queryParams)
-    .then(response => {
-      const entities = denormalisedResponseEntities(response);
-      const order = entities[0];
-      dispatch(initiateOrderSuccess(order));
-      dispatch(fetchCurrentUserHasOrdersSuccess(true));
-      return order;
-    })
-    .catch(e => {
-      dispatch(initiateOrderError(storableError(e)));
-      const transactionIdMaybe = transactionId ? { transactionId: transactionId.uuid } : {};
-      log.error(e, 'initiate-order-failed', {
-        ...transactionIdMaybe,
-        listingId: orderParams.listingId.uuid,
-        bookingStart: orderParams.bookingStart,
-        bookingEnd: orderParams.bookingEnd,
-      });
-      throw e;
+  const handleError = e => {
+    dispatch(initiateOrderError(storableError(e)));
+    const transactionIdMaybe = transactionId ? { transactionId: transactionId.uuid } : {};
+    log.error(e, 'initiate-order-failed', {
+      ...transactionIdMaybe,
+      listingId: orderParams.listingId.uuid,
+      bookingStart: orderParams.bookingStart,
+      bookingEnd: orderParams.bookingEnd,
     });
+    throw e;
+  };
+
+  if (isTransition && isPrivilegedTransition) {
+    // transition privileged
+    return transitionPrivileged({ isSpeculative: false, bookingData, bodyParams, queryParams })
+      .then(handleSucces)
+      .catch(handleError);
+  } else if (isTransition) {
+    // transition non-privileged
+    return sdk.transactions
+      .transition(bodyParams, queryParams)
+      .then(handleSucces)
+      .catch(handleError);
+  } else if (isPrivilegedTransition) {
+    // initiate privileged
+    return initiatePrivileged({ isSpeculative: false, bookingData, bodyParams, queryParams })
+      .then(handleSucces)
+      .catch(handleError);
+  } else {
+    // initiate non-privileged
+    return sdk.transactions
+      .initiate(bodyParams, queryParams)
+      .then(handleSucces)
+      .catch(handleError);
+  }
 };
 
 export const confirmPayment = orderParams => (dispatch, getState, sdk) => {
@@ -253,7 +319,8 @@ export const sendMessage = params => (dispatch, getState, sdk) => {
 };
 
 /**
- * Initiate the speculative transaction with the given booking details
+ * Initiate or transition the speculative transaction with the given
+ * booking details
  *
  * The API allows us to do speculative transaction initiation and
  * transitions. This way we can create a test transaction and get the
@@ -264,43 +331,91 @@ export const sendMessage = params => (dispatch, getState, sdk) => {
  * pricing info for the booking breakdown to get a proper estimate for
  * the price with the chosen information.
  */
-export const speculateTransaction = (params, unitType) => (dispatch, getState, sdk) => {
+export const speculateTransaction = (orderParams, transactionId) => (dispatch, getState, sdk) => {
   dispatch(speculateTransactionRequest());
 
-  const aliasIndex = unitType === LINE_ITEM_UNITS ? 1 : 0;
-  const processAlias = config.bookingProcessAliases[aliasIndex];
+  const isTransition = !!transactionId;
+  const transition = isTransition
+    ? TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY
+    : TRANSITION_REQUEST_PAYMENT;
+  const isPrivilegedTransition = isPrivileged(transition);
 
-  const bodyParams = {
-    transition: TRANSITION_REQUEST_PAYMENT,
-    processAlias,
-    params: {
-      ...params,
-      cardToken: 'CheckoutPage_speculative_card_token',
-    },
+  const bookingData = {
+    startDate: orderParams.bookingStart,
+    endDate: orderParams.bookingEnd,
+    type: orderParams.type
   };
+
+  const processAlias = config.bookingProcessAlias;
+
+  const params = {
+    ...orderParams,
+    protectedData: {
+      ...(orderParams.protectedData ? orderParams.protectedData : {}),
+      type: orderParams.type,
+      [getTransactionType(orderParams.type)]: true
+    },
+    cardToken: 'CheckoutPage_speculative_card_token',
+  };
+
+  const bodyParams = isTransition
+    ? {
+      id: transactionId,
+      transition,
+      params,
+    } : {
+      processAlias,
+      transition,
+      params,
+    };
+
   const queryParams = {
     include: ['booking', 'provider'],
     expand: true,
   };
-  return sdk.transactions
-    .initiateSpeculative(bodyParams, queryParams)
-    .then(response => {
-      const entities = denormalisedResponseEntities(response);
-      if (entities.length !== 1) {
-        throw new Error('Expected a resource in the sdk.transactions.initiateSpeculative response');
-      }
-      const tx = entities[0];
-      dispatch(speculateTransactionSuccess(tx));
-    })
-    .catch(e => {
-      const { listingId, bookingStart, bookingEnd } = params;
-      log.error(e, 'speculate-transaction-failed', {
-        listingId: listingId.uuid,
-        bookingStart,
-        bookingEnd,
-      });
-      return dispatch(speculateTransactionError(storableError(e)));
+
+  const handleSuccess = response => {
+    const entities = denormalisedResponseEntities(response);
+    if (entities.length !== 1) {
+      throw new Error('Expected a resource in the speculate response');
+    }
+    const tx = entities[0];
+    dispatch(speculateTransactionSuccess(tx));
+  };
+
+  const handleError = e => {
+    const { listingId, bookingStart, bookingEnd } = params;
+    log.error(e, 'speculate-transaction-failed', {
+      listingId: listingId.uuid,
+      bookingStart,
+      bookingEnd,
     });
+    return dispatch(speculateTransactionError(storableError(e)));
+  };
+
+  if (isTransition && isPrivilegedTransition) {
+    // transition privileged
+    return transitionPrivileged({ isSpeculative: true, bookingData, bodyParams, queryParams })
+      .then(handleSuccess)
+      .catch(handleError);
+  } else if (isTransition) {
+    // transition non-privileged
+    return sdk.transactions
+      .transitionSpeculative(bodyParams, queryParams)
+      .then(handleSuccess)
+      .catch(handleError);
+  } else if (isPrivilegedTransition) {
+    // initiate privileged
+    return initiatePrivileged({ isSpeculative: true, bookingData, bodyParams, queryParams })
+      .then(handleSuccess)
+      .catch(handleError);
+  } else {
+    // initiate non-privileged
+    return sdk.transactions
+      .initiateSpeculative(bodyParams, queryParams)
+      .then(handleSuccess)
+      .catch(handleError);
+  }
 };
 
 // StripeCustomer is a relantionship to currentUser

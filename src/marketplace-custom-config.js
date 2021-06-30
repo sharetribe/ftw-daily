@@ -1,3 +1,10 @@
+import {
+  HOURLY_DISCOUNT,
+  DAILY_DISCOUNT,
+  WEEKLY_DISCOUNT,
+  MONTHLY_DISCOUNT
+} from './util/types';
+
 /*
  * Marketplace specific configuration.
  *
@@ -33,6 +40,12 @@
  *         (i.e. pub_<key> or meta_<key>).
  */
 
+export const discountTypes = [
+  {key: HOURLY_DISCOUNT, label: 'Hours'},
+  {key: DAILY_DISCOUNT, label: 'Days'},
+  {key: WEEKLY_DISCOUNT, label: 'Weeks'},
+  {key: MONTHLY_DISCOUNT, label: 'Months'}
+];
 
 export const filters = [
   {

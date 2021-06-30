@@ -4,7 +4,7 @@ import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 
 import { Menu, MenuContent, MenuItem, MenuLabel } from '..';
-import css from './SelectSingleFilterPopup.css';
+import css from './SelectSingleFilterPopup.module.css';
 
 //NOTE v2s1 filterupdate -- customizations removed in v5 update
 // const flattenOptions = options => {

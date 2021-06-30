@@ -1,19 +1,42 @@
 import React from 'react';
 import { FormattedMessage, intlShape } from '../../util/reactIntl';
 import { formatMoney } from '../../util/currency';
-import { LINE_ITEM_NIGHT, LINE_ITEM_DAY, propTypes } from '../../util/types';
+import {
+  LINE_ITEM_NIGHT,
+  LINE_ITEM_DAY,
+  DAILY_PRICE,
+  WEEKLY_PRICE,
+  MONTHLY_PRICE,
+  propTypes
+} from '../../util/types';
 
-import css from './BookingBreakdown.css';
+import css from './BookingBreakdown.module.css';
 
 const LineItemBasePriceMaybe = props => {
-  const { transaction, unitType, intl } = props;
-  const isNightly = unitType === LINE_ITEM_NIGHT;
-  const isDaily = unitType === LINE_ITEM_DAY;
-  const translationKey = isNightly
-    ? 'BookingBreakdown.baseUnitNight'
-    : isDaily
-    ? 'BookingBreakdown.baseUnitDay'
-    : 'BookingBreakdown.baseUnitQuantity';
+  const { transaction, unitType, intl, isDaily, transactionType } = props;
+  // const isNightly = unitType === LINE_ITEM_NIGHT;
+  // const isDaily = unitType === LINE_ITEM_DAY;
+  // const translationKey = isNightly
+  //   ? 'BookingBreakdown.baseUnitNight'
+  //   : isDaily
+  //   ? 'BookingBreakdown.baseUnitDay'
+  //   : 'BookingBreakdown.baseUnitQuantity';
+  let translationKey = 'BookingBreakdown.baseUnitQuantity';
+
+  switch(transactionType){
+    case DAILY_PRICE: {
+      translationKey = 'BookingBreakdown.baseUnitDay';
+    };
+    break;
+    case WEEKLY_PRICE: {
+      translationKey = 'BookingBreakdown.baseUnitWeek';
+    };
+    break;
+    case MONTHLY_PRICE: {
+      translationKey = 'BookingBreakdown.baseUnitMonth';
+    };
+    break;
+  }
 
   // Find correct line-item for given unitType prop.
   // It should be one of the following: 'line-item/night, 'line-item/day', 'line-item/units', or 'line-item/time'

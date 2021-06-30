@@ -1,0 +1,33 @@
+@import '../../styles/propertySets.css';
+
+.root {
+  @apply --marketplaceModalBaseStyles;
+  padding-top: 70px;
+
+  @media (--viewportMedium) {
+    flex-basis: 567px;
+  }
+}
+
+.modalContent {
+  flex-grow: 1;
+}
+
+/* Icon of the modal */
+.modalIcon {
+  @apply --marketplaceModalIconStyles;
+}
+
+/* Title of the modal */
+.modalTitle {
+  @apply --marketplaceModalTitleStyles;
+}
+
+.reviewee {
+  white-space: nowrap;
+}
+
+/* Paragraph for the Modal */
+.modalMessage {
+  @apply --marketplaceModalParagraphStyles;
+}

@@ -9,7 +9,7 @@ import {NewsletterForm } from '../../forms';
 
 import { signupInProgress, signup } from '../../ducks/Newsletter.duck';
 
-import css from './SectionNewsletter.css';
+import css from './SectionNewsletter.module.css';
 import HubspotForm from "react-hubspot-form";
 
 export class SectionNewsletterComponent extends Component {
@@ -76,6 +76,15 @@ export class SectionNewsletterComponent extends Component {
               onSubmit={() => console.log('Submit!')}
               onReady={(form) => console.log('Form ready!')}
               loading={<div>Loading...</div>}
+              cssRequired='
+                input.hs-input {width: 100%}
+                .inputs-list label.hs-error-msg {margin-top: 10px;font-size: 16px;}
+
+                .no-list.hs-error-msgs .hs-main-font-element {display: none;}
+
+                .hs_email.hs-email {margin-bottom: 0;}
+              '
+              // errorMessageClass='small'
             />
             {/*<NewsletterForm*/}
             {/*  className={css.form}*/}

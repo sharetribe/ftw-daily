@@ -1,0 +1,65 @@
+@import '../../styles/propertySets.css';
+
+.root {
+  position: relative;
+  display: inline-block;
+}
+
+.label {
+  @apply --marketplaceButtonStylesSecondary;
+  @apply --marketplaceSearchFilterLabelFontStyles;
+
+  padding: var(--marketplaceButtonSmallDesktopPadding);
+  width: auto;
+  height: auto;
+  min-height: 0;
+  border-radius: 4px;
+
+  &:focus {
+    outline: none;
+    background-color: var(--matterColorLight);
+    border-color: transparent;
+    text-decoration: none;
+    box-shadow: var(--boxShadowFilterButton);
+  }
+}
+
+.labelSelected {
+  @apply --marketplaceButtonStyles;
+  @apply --marketplaceSearchFilterLabelFontStyles;
+  font-weight: var(--fontWeightSemiBold);
+
+  padding: var(--marketplaceButtonSmallDesktopPadding);
+  width: auto;
+  height: auto;
+  min-height: 0;
+  border-radius: 4px;
+  border: 1px solid var(--marketplaceColor);
+
+  &:hover,
+  &:focus {
+    border: 1px solid var(--marketplaceColorDark);
+  }
+}
+
+.labelText {
+  display: inline-block;
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.field {
+  @apply --marketplaceH4FontStyles;
+  margin: 0;
+  padding: 1px 0 13px 0;
+  border: none;
+}
+
+.fieldPlain {
+  @apply --marketplaceH4FontStyles;
+  margin: 0;
+  padding: 16px 0 30px 20px;
+  border: none;
+}

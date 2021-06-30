@@ -5,3 +5,4 @@ public/
 src/components/index.js
 src/containers/index.js
 src/forms/index.js
+src/routeConfiguration.js

@@ -1,0 +1,59 @@
+@import '../../styles/propertySets.css';
+
+.coverEverything {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.root {
+  /* Positioning */
+  composes: coverEverything;
+}
+
+.overlay {
+  /* Positioning */
+  composes: coverEverything;
+
+  /* Overlay background style */
+  background-color: var(--matterColorLight);
+  opacity: 0.9;
+}
+
+.overlayContent {
+  @apply --marketplaceH4FontStyles;
+  color: var(--matterColor);
+
+  /* Positioning */
+  composes: coverEverything;
+
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+
+  /* Remove default margins from font */
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@media (--viewportMedium) {
+  .overlayContent {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.message {
+  max-width: 220px;
+  text-align: center;
+}
+
+.errorMessage {
+  composes: message;
+  color: var(--failColor);
+}

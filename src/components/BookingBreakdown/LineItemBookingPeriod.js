@@ -4,10 +4,10 @@ import moment from 'moment';
 import { LINE_ITEM_DAY, LINE_ITEM_UNITS, DATE_TYPE_DATE, propTypes } from '../../util/types';
 import { dateFromAPIToLocalNoon } from '../../util/dates';
 
-import css from './BookingBreakdown.css';
+import css from './BookingBreakdown.module.css';
 
 const BookingPeriod = props => {
-  const { startDate, endDate, dateType, timeZone } = props;
+  const { startDate, endDate, dateType, timeZone, isDaily } = props;
 
   const timeFormatOptions =
     dateType === DATE_TYPE_DATE
@@ -34,24 +34,42 @@ const BookingPeriod = props => {
           <div className={css.dayLabel}>
             <FormattedMessage id="BookingBreakdown.bookingStart" />
           </div>
-          <div className={css.dayInfo}>
-            <FormattedDate value={startDate} {...timeFormatOptions} {...timeZoneMaybe} />
-          </div>
-          <div className={css.itemLabel}>
-            <FormattedDate value={startDate} {...dateFormatOptions} {...timeZoneMaybe} />
-          </div>
+          {!isDaily ? (
+            <>
+              <div className={css.dayInfo}>
+                <FormattedDate value={startDate} {...timeFormatOptions} {...timeZoneMaybe} />
+              </div>
+              <div className={css.itemLabel}>
+                <FormattedDate value={startDate} {...dateFormatOptions} {...timeZoneMaybe} />
+              </div>
+            </>
+            ) : (
+              <div className={css.dayInfo}>
+                <FormattedDate value={startDate} {...dateFormatOptions} {...timeZoneMaybe} />
+              </div>
+            )
+          }
         </div>
 
         <div className={css.bookingPeriodSectionRigth}>
           <div className={css.dayLabel}>
             <FormattedMessage id="BookingBreakdown.bookingEnd" />
           </div>
-          <div className={css.dayInfo}>
-            <FormattedDate value={endDate} {...timeFormatOptions} {...timeZoneMaybe} />
-          </div>
-          <div className={css.itemLabel}>
-            <FormattedDate value={endDate} {...dateFormatOptions} {...timeZoneMaybe} />
-          </div>
+          {!isDaily ? (
+            <>
+              <div className={css.dayInfo}>
+                <FormattedDate value={endDate} {...timeFormatOptions} {...timeZoneMaybe} />
+              </div>
+              <div className={css.itemLabel}>
+                <FormattedDate value={endDate} {...dateFormatOptions} {...timeZoneMaybe} />
+              </div>
+            </>
+            ) : (
+              <div className={css.dayInfo}>
+                <FormattedDate value={endDate} {...dateFormatOptions} {...timeZoneMaybe} />
+              </div>
+            )
+          }
         </div>
       </div>
     </>
@@ -59,7 +77,7 @@ const BookingPeriod = props => {
 };
 
 const LineItemBookingPeriod = props => {
-  const { booking, unitType, dateType, timeZone } = props;
+  const { booking, unitType, dateType, timeZone, isDaily } = props;
 
   // Attributes: displayStart and displayEnd can be used to differentiate shown time range
   // from actual start and end times used for availability reservation. It can help in situations
@@ -67,12 +85,11 @@ const LineItemBookingPeriod = props => {
   // Read more: https://www.sharetribe.com/api-reference/marketplace.html#bookings
   const { start, end, displayStart, displayEnd } = booking.attributes;
   const localStartDate = displayStart || start;
-  const localEndDateRaw = displayEnd || end;
+  const localEndDateRaw = displayEnd || end;;
 
-  const isDaily = unitType === LINE_ITEM_DAY;
-  const isUnit = unitType === LINE_ITEM_UNITS;
-  const endDay =
-    isUnit || isDaily ? localEndDateRaw : moment(localEndDateRaw).subtract(1, 'days');
+  // const isDaily = unitType === LINE_ITEM_DAY;
+  // const isUnit = unitType === LINE_ITEM_UNITS;
+  const endDay = isDaily ? localEndDateRaw : moment(localEndDateRaw).subtract(1, 'days');
 
   return (
     <>
@@ -82,6 +99,7 @@ const LineItemBookingPeriod = props => {
           endDate={endDay}
           dateType={dateType}
           timeZone={timeZone}
+          isDaily={isDaily}
         />
       </div>
       <hr className={css.totalDivider} />

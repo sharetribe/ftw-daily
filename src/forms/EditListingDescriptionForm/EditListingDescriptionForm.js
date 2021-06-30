@@ -9,7 +9,7 @@ import { maxLength, required, composeValidators } from '../../util/validators';
 import { Form, Button, FieldTextInput, FieldSelect } from '../../components';
 import CustomCategorySelectFieldMaybe from './CustomCategorySelectFieldMaybe';
 
-import css from './EditListingDescriptionForm.css';
+import css from './EditListingDescriptionForm.module.css';
 
 const TITLE_MAX_LENGTH = 60;
 
@@ -30,9 +30,9 @@ const EditListingDescriptionFormComponent = props => (
         updated,
         updateInProgress,
         fetchErrors,
-        initialValues: {
-          availabilityPlan
-        }
+        // initialValues: {
+        //   availabilityPlan
+        // }
 
       } = formRenderProps;
 
@@ -61,9 +61,9 @@ const EditListingDescriptionFormComponent = props => (
         id: 'EditListingDescriptionForm.descriptionRequired',
       });
 
-      const availabilityPlanRequiredMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.availabilityPlanRequired',
-      });
+      // const availabilityPlanRequiredMessage = intl.formatMessage({
+      //   id: 'EditListingDescriptionForm.availabilityPlanRequired',
+      // });
 
       const { updateListingError, createListingDraftError, showListingsError } = fetchErrors || {};
       const errorMessageUpdateListing = updateListingError ? (
@@ -124,7 +124,7 @@ const EditListingDescriptionFormComponent = props => (
             intl={intl}
           />
 
-          <h3>{intl.formatMessage({ id: 'EditListingDescriptionForm.availabilityPlanHeader' })}</h3>
+          {/* <h3>{intl.formatMessage({ id: 'EditListingDescriptionForm.availabilityPlanHeader' })}</h3>
           <p className={css.availabilityPlanDescription}>{intl.formatMessage({ id: 'EditListingDescriptionForm.availabilityPlanSubHeader' })}</p>
 
           <FieldSelect
@@ -137,7 +137,7 @@ const EditListingDescriptionFormComponent = props => (
             <option value="" disabled hidden>Pick an option...</option>
             <option value="availability-plan/day">Day</option>
             <option value="availability-plan/time">Hour</option>
-          </FieldSelect>
+          </FieldSelect> */}
 
           <Button
             className={css.submitButton}

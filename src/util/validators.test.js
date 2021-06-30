@@ -208,10 +208,6 @@ describe('validators', () => {
       expect(requiredWithMinLength('')).toEqual('required');
     });
     it('should fail on composed minLength (4) and required: empty string. Error: minLength', () => {
-      const requiredWithMinLength = composeValidators(
-        minLength('minLength', 4),
-        required('required')
-      );
       expect(validateLength('')).toEqual('minLength');
     });
   });

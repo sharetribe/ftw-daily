@@ -8,7 +8,7 @@ import {
   Footer,
 } from '../../components';
 
-import css from './CancellationPage.css';
+import css from './CancellationPage.module.css';
 
 const CancellationPage = () => {
   return (

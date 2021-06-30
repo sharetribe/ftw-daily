@@ -4,7 +4,7 @@ import { Field } from 'react-final-form';
 import classNames from 'classnames';
 import { ValidationError } from '../../components';
 
-import css from './FieldSelect.css';
+import css from './FieldSelect.module.css';
 
 const handleChange = (propsOnChange, inputOnChange) => event => {
   // If "onChange" callback is passed through the props,

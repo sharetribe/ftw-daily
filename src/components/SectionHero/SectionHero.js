@@ -4,14 +4,14 @@ import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { NamedLink } from '../../components';
 
-import css from './SectionHero.css';
+import css from './SectionHero.module.css';
 
-import yogaImage from './images/yoga.png';
-import ptImage from './images/pt.png';
-import coWorkImage from './images/cowork.png';
-import nailsImage from './images/nails.png';
-import tattoImage from './images/tatto.png';
-import hairImage from './images/hair.png';
+import yogaImage from './images/yoga.jpg';
+import ptImage from './images/pt.jpg';
+import coWorkImage from './images/cowork.jpg';
+import nailsImage from './images/nails.jpg';
+import tattoImage from './images/tatto.jpg';
+import hairImage from './images/hair.jpg';
 
 const SectionHero = props => {
   const { rootClassName, className } = props;

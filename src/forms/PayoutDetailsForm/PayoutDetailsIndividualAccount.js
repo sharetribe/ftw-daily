@@ -12,7 +12,7 @@ import PayoutDetailsAddress from './PayoutDetailsAddress';
 import PayoutDetailsBankDetails from './PayoutDetailsBankDetails';
 import PayoutDetailsPersonalDetails from './PayoutDetailsPersonalDetails';
 import PayoutDetailsBusinessProfile from './PayoutDetailsBusinessProfile';
-import css from './PayoutDetailsForm.css';
+import css from './PayoutDetailsForm.module.css';
 
 const PayoutDetailsIndividualAccountComponent = props => {
   const { fieldRenderProps, currentUserId, intl, appConfig } = props;

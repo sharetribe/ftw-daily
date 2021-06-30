@@ -13,6 +13,16 @@ import EstimatedBreakdownMaybe from './EstimatedBreakdownMaybe';
 const { Money } = sdkTypes;
 
 const noop = () => null;
+const lineItems = [
+  {
+    code: 'line-item/night',
+    unitPrice: new Money(1099, 'USD'),
+    units: new Decimal(2),
+    includeFor: ['customer', 'provider'],
+    lineTotal: new Money(2198, 'USD'),
+    reversal: false,
+  },
+];
 
 describe('BookingDatesForm', () => {
   it('matches snapshot without selected dates', () => {
@@ -26,6 +36,9 @@ describe('BookingDatesForm', () => {
         bookingDates={{}}
         startDatePlaceholder="today"
         endDatePlaceholder="tomorrow"
+        fetchLineItemsInProgress={false}
+        onFetchTransactionLineItems={noop}
+        lineItems={lineItems}
       />
     );
     expect(tree).toMatchSnapshot();
@@ -38,7 +51,9 @@ describe('EstimatedBreakdownMaybe', () => {
       unitType: LINE_ITEM_NIGHT,
       unitPrice: new Money(1234, 'USD'),
     };
-    expect(renderDeep(<EstimatedBreakdownMaybe bookingData={data} />)).toBeFalsy();
+    expect(
+      renderDeep(<EstimatedBreakdownMaybe bookingData={data} lineItems={lineItems} />)
+    ).toBeFalsy();
   });
   it('renders nothing if missing end date', () => {
     const data = {
@@ -46,7 +61,9 @@ describe('EstimatedBreakdownMaybe', () => {
       unitPrice: new Money(1234, 'USD'),
       startDate: new Date(),
     };
-    expect(renderDeep(<EstimatedBreakdownMaybe bookingData={data} />)).toBeFalsy();
+    expect(
+      renderDeep(<EstimatedBreakdownMaybe bookingData={data} lineItems={lineItems} />)
+    ).toBeFalsy();
   });
   it('renders breakdown with correct transaction data', () => {
     const unitPrice = new Money(1099, 'USD');
@@ -58,7 +75,8 @@ describe('EstimatedBreakdownMaybe', () => {
       startDate,
       endDate,
     };
-    const tree = shallow(<EstimatedBreakdownMaybe bookingData={data} />);
+
+    const tree = shallow(<EstimatedBreakdownMaybe bookingData={data} lineItems={lineItems} />);
     const breakdown = tree.find(BookingBreakdown);
     const { userRole, unitType, transaction, booking } = breakdown.props();
 
@@ -75,9 +93,9 @@ describe('EstimatedBreakdownMaybe', () => {
     expect(transaction.attributes.lineItems).toEqual([
       {
         code: 'line-item/night',
-        includeFor: ['customer', 'provider'],
         unitPrice,
-        quantity: new Decimal(2),
+        units: new Decimal(2),
+        includeFor: ['customer', 'provider'],
         lineTotal: new Money(2198, 'USD'),
         reversal: false,
       },

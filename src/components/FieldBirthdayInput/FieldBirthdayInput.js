@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import range from 'lodash/range';
 import { ValidationError } from '../../components';
 
-import css from './FieldBirthdayInput.css';
+import css from './FieldBirthdayInput.module.css';
 
 // Since final-form tracks the onBlur event for marking the field as
 // touched (which triggers possible error validation rendering), only

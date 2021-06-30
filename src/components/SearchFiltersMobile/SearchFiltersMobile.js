@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import routeConfiguration from '../../routeConfiguration';
 import { createResourceLocatorString } from '../../util/routes';
 import { ModalInMobile, Button } from '../../components';
-import css from './SearchFiltersMobile.css';
+import css from './SearchFiltersMobile.module.css';
 
 class SearchFiltersMobileComponent extends Component {
   constructor(props) {

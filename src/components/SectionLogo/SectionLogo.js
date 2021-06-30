@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import logo from './images/hotpatch-logo.png';
 
-import css from './SectionLogo.css';
+import css from './SectionLogo.module.css';
 
 const SectionLogo = props => {
   const { rootClassName, className } = props;

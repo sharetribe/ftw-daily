@@ -5,7 +5,7 @@ import * as validators from '../../util/validators';
 import { StripeBankAccountTokenInputField } from '../../components';
 
 import { stripeCountryConfigs } from './PayoutDetailsForm';
-import css from './PayoutDetailsForm.css';
+import css from './PayoutDetailsForm.module.css';
 
 const countryCurrency = countryCode => {
   const country = stripeCountryConfigs(countryCode);

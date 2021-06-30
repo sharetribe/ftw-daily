@@ -19,22 +19,24 @@ import 'raf/polyfill';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Decimal from 'decimal.js';
+import { loadableReady } from '@loadable/component';
 import { createInstance, types as sdkTypes } from './util/sdkLoader';
 import { ClientApp, renderApp } from './app';
 import configureStore from './store';
 import { matchPathname } from './util/routes';
 import * as sample from './util/sample';
+import * as apiUtils from './util/api';
 import config from './config';
 import { authInfo } from './ducks/Auth.duck';
 import { fetchCurrentUser } from './ducks/user.duck';
 import routeConfiguration from './routeConfiguration';
 import * as log from './util/log';
 import { LoggingAnalyticsHandler, GoogleAnalyticsHandler, FacebookPixelHandler } from './analytics/handlers';
+import TagManager from 'react-gtm-module';
 
-import './marketplaceIndex.css';
+import './styles/marketplaceDefaults.css';
 
-const { BigDecimal } = sdkTypes;
+const GTM_ID = process.env.REACT_APP_GOOGLE_TAG_MANAGER_ID;
 
 const render = (store, shouldHydrate) => {
   // If the server already loaded the auth information, render the app
@@ -45,6 +47,9 @@ const render = (store, shouldHydrate) => {
   info
     .then(() => {
       store.dispatch(fetchCurrentUser());
+      return loadableReady();
+    })
+    .then(() => {
       if (shouldHydrate) {
         ReactDOM.hydrate(<ClientApp store={store} />, document.getElementById('root'));
       } else {
@@ -55,6 +60,14 @@ const render = (store, shouldHydrate) => {
       log.error(e, 'browser-side-render-failed');
     });
 };
+
+if (!!GTM_ID && typeof document !== 'undefined'){
+  const tagManagerArgs = {
+    gtmId: GTM_ID,
+  };
+  
+  TagManager.initialize(tagManagerArgs);
+}
 
 const setupAnalyticsHandlers = () => {
   let handlers = [];
@@ -86,19 +99,13 @@ if (typeof window !== 'undefined') {
 
   // eslint-disable-next-line no-underscore-dangle
   const preloadedState = window.__PRELOADED_STATE__ || '{}';
+
   const initialState = JSON.parse(preloadedState, sdkTypes.reviver);
   const sdk = createInstance({
     transitVerbose: config.sdk.transitVerbose,
     clientId: config.sdk.clientId,
     secure: config.usingSSL,
-    typeHandlers: [
-      {
-        type: BigDecimal,
-        customType: Decimal,
-        writer: v => new BigDecimal(v.toString()),
-        reader: v => new Decimal(v.value),
-      },
-    ],
+    typeHandlers: apiUtils.typeHandlers,
     ...baseUrl,
   });
   const analyticsHandlers = setupAnalyticsHandlers();
@@ -118,6 +125,20 @@ if (typeof window !== 'undefined') {
       routeConfiguration: routeConfiguration(),
     };
   }
+}
+
+// Show warning if CSP is not enabled
+const CSP = process.env.REACT_APP_CSP;
+const cspEnabled = CSP === 'block' || CSP === 'report';
+
+if (CSP === 'report' && process.env.REACT_APP_ENV === 'production') {
+  console.warn(
+    'Your production environment should use CSP with "block" mode. Read more from: https://www.sharetribe.com/docs/ftw-security/how-to-set-up-csp-for-ftw/'
+  );
+} else if (!cspEnabled) {
+  console.warn(
+    "CSP is currently not enabled! You should add an environment variable REACT_APP_CSP with the value 'report' or 'block'. Read more from: https://www.sharetribe.com/docs/ftw-security/how-to-set-up-csp-for-ftw/"
+  );
 }
 
 // Export the function for server side rendering.

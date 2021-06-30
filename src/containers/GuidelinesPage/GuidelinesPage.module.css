@@ -1,0 +1,84 @@
+@import '../../styles/propertySets.css';
+
+.pageTitle {
+  text-align: center;
+}
+
+.staticPageWrapper {
+  width: calc(100% - 48px);
+  max-width: 1056px;
+  margin: 24px auto;
+
+  @media (--viewportMedium) {
+    width: calc(100% - 72px);
+    margin: 72px auto;
+  }
+}
+
+.coverImage {
+  width: 100%;
+  height: 528px;
+  border-radius: 4px;
+  object-fit: cover;
+  margin: 32px 0 40px;
+}
+
+.contentWrapper {
+  display: flex;
+  justify-content: center;
+
+  @media (--viewportMedium) {
+    flex-wrap: nowrap;
+  }
+}
+
+.contentSide {
+  font-style: italic;
+
+  @media (--viewportMedium) {
+    width: 193px;
+    margin-right: 103px;
+    margin-top: 8px;
+  }
+}
+
+.contentMain {
+  width: 90%;
+
+  @media (--viewportMedium) {
+    max-width: 650px;
+  }
+
+  & ul {
+    display: block;
+    list-style-type: disc;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 40px;
+  }
+
+  & li {
+    margin-bottom: 0.7em;
+  }
+}
+
+.subtitle {
+  @apply --marketplaceH3FontStyles;
+  margin-top: 48px;
+  margin-bottom: 24px;
+}
+
+.heroButton {
+  @apply --marketplaceButtonStyles;
+
+  animation-delay: 0.8s;
+
+  @media (--viewportMedium) {
+    display: block;
+  }
+}
+
+
+

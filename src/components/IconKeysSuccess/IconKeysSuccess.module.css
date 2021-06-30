@@ -1,0 +1,13 @@
+@import '../../styles/propertySets.css';
+
+.strokeMarketplaceColor {
+  stroke: var(--marketplaceColor);
+}
+
+.fillSuccessColor {
+  fill: var(--successColor);
+}
+
+.strokeLightColor {
+  stroke: var(--matterColorLight);
+}

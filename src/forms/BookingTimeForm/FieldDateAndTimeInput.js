@@ -26,7 +26,7 @@ import { FieldDateInput, FieldSelect } from '../../components';
 
 import NextMonthIcon from './NextMonthIcon';
 import PreviousMonthIcon from './PreviousMonthIcon';
-import css from './FieldDateAndTimeInput.css';
+import css from './FieldDateAndTimeInput.module.css';
 
 const MAX_TIME_SLOTS_RANGE = 180;
 const TODAY = new Date();
@@ -434,7 +434,7 @@ class FieldDateAndTimeInput extends Component {
      * If you want to enable longer booking periods, showing the end date in the form requires some code changes:
      * 1. Move the bookingStartTime field to the same formRow with the bookingStartDate field
      * 2. Remove the div containing the line between dates
-     * 3. Remove the css related to hiding the booking end date from the bottom of the FieldDateAndTimeInput.css field
+     * 3. Remove the css related to hiding the booking end date from the bottom of the FieldDateAndTimeInput.module.css field
      */
 
     return (

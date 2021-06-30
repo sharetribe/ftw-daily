@@ -13,7 +13,7 @@ import classNames from 'classnames';
 import { FieldArray } from 'react-final-form-arrays';
 import { FieldCheckbox, ValidationError } from '../../components';
 
-import css from './FieldCheckboxGroup.css';
+import css from './FieldCheckboxGroup.module.css';
 
 const FieldCheckboxRenderer = props => {
   const { className, rootClassName, label, twoColumns, id, fields, options, meta } = props;

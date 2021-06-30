@@ -22,7 +22,7 @@ import { PasswordResetForm } from '../../forms';
 import { TopbarContainer } from '../../containers';
 
 import { resetPassword } from './PasswordResetPage.duck';
-import css from './PasswordResetPage.css';
+import css from './PasswordResetPage.module.css';
 
 const parseUrlParams = location => {
   const params = parse(location.search);

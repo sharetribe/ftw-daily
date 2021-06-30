@@ -1,4 +1,4 @@
-import reqwest from 'reqwest';
+// import reqwest from 'reqwest';
 import { storableError } from '../util/errors';
 import * as log from '../util/log';
 
@@ -83,17 +83,17 @@ export const signup = email => (dispatch, getState, sdk) => {
 
   // NOTE TODO FIXME this "works" but reqwest has an uncaught error...
   // so promise is never resolved. :( super hacky, need to fix
-  reqwest(req_data)
-    .then(
-      function (resp) {
-        console.log('it worked???', resp);
-    })
-    .fail(function (err, msg) {
-      console.log('nope it didnt', err);
-    })
-    .always(function (resp) {
-      console.log('always this..', resp)
-    })
+  // reqwest(req_data)
+  //   .then(
+  //     function (resp) {
+  //       console.log('it worked???', resp);
+  //   })
+  //   .fail(function (err, msg) {
+  //     console.log('nope it didnt', err);
+  //   })
+  //   .always(function (resp) {
+  //     console.log('always this..', resp)
+  //   })
     // function c (data) {
     //   console.log('c data? ', data)
     // }

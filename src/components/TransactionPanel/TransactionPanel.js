@@ -13,7 +13,15 @@ import {
   txIsRequested,
   txHasBeenDelivered,
 } from '../../util/transaction';
-import { LINE_ITEM_UNITS, LINE_ITEM_DAY, propTypes } from '../../util/types';
+import {
+  LINE_ITEM_UNITS,
+  LINE_ITEM_DAY,
+  propTypes,
+  HOURLY_PRICE,
+  DAILY_PRICE,
+  WEEKLY_PRICE,
+  MONTHLY_PRICE,
+} from '../../util/types';
 import {
   ensureListing,
   ensureTransaction,
@@ -49,8 +57,11 @@ import PanelHeading, {
   HEADING_CANCELED,
   HEADING_DELIVERED,
 } from './PanelHeading';
+import { types as sdkTypes } from '../../util/sdkLoader';
 
-import css from './TransactionPanel.css';
+import css from './TransactionPanel.module.css';
+
+const { Money } = sdkTypes;
 
 // Helper function to get display names for different roles
 const displayNames = (currentUser, currentProvider, currentCustomer, intl) => {
@@ -193,6 +204,12 @@ export class TransactionPanelComponent extends Component {
       timeSlots,
       fetchTimeSlotsError,
       nextTransitions,
+      onFetchTransactionLineItems,
+      lineItems,
+      fetchLineItemsInProgress,
+      fetchLineItemsError,
+      bookingTypeOnPanel,
+      toggleBookingTypeOnPanel,
     } = this.props;
 
     const currentTransaction = ensureTransaction(transaction);
@@ -285,19 +302,40 @@ export class TransactionPanelComponent extends Component {
       ? deletedListingTitle
       : currentListing.attributes.title;
 
-    const unitType = (publicData && publicData.unitType) || config.fallbackUnitType;
-    const isHourly = unitType === LINE_ITEM_UNITS;
-    const isDaily = unitType === LINE_ITEM_DAY;
+    const unitType = config.bookingUnitType;
+    // const unitType = (publicData && publicData.unitType) || config.fallbackUnitType;
+    // const isHourly = unitType === LINE_ITEM_UNITS;
+    // const isDaily = unitType === LINE_ITEM_DAY;
 
-    const unitTranslationKey = isHourly
-      ? 'TransactionPanel.perHour'
-      : isDaily
-      ? 'TransactionPanel.perDay'
-      : 'TransactionPanel.perUnit';
+    // const unitTranslationKey = isHourly
+    //   ? 'TransactionPanel.perHour'
+    //   : isDaily
+    //   ? 'TransactionPanel.perDay'
+    //   : 'TransactionPanel.perUnit';
 
-    const bookingSubTitle = price
-      ? `${formatMoney(intl, price)} ${intl.formatMessage({ id: unitTranslationKey })}`
-      : '';
+    // const bookingSubTitle = price
+    //   ? `${formatMoney(intl, price)} ${intl.formatMessage({ id: unitTranslationKey })}`
+    //   : '';
+
+    const bookingType = currentTransaction &&
+                        currentTransaction.attributes &&
+                        currentTransaction.attributes.protectedData &&
+                        currentTransaction.attributes.protectedData.type;
+
+    const {amount, currency} = bookingType !== HOURLY_PRICE && publicData[bookingType] ? publicData[bookingType] : price;
+    let key = 'perHour';
+    switch(bookingType){
+      case DAILY_PRICE:
+        key = 'perDay';
+        break;
+      case WEEKLY_PRICE:
+        key = 'perWeek';
+        break;
+      case MONTHLY_PRICE:
+        key = 'perMonth';
+        break;
+    }
+    const bookingSubTitle = `${formatMoney(intl, new Money(amount, currency))} ${intl.formatMessage({ id: `TransactionPanel.${key}` })}`;
 
     const firstImage =
       currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
@@ -451,6 +489,13 @@ export class TransactionPanelComponent extends Component {
                   fetchTimeSlotsError={fetchTimeSlotsError}
                   monthlyTimeSlots={monthlyTimeSlots}
                   onFetchTimeSlots={onFetchTimeSlots}
+                  onFetchTransactionLineItems={onFetchTransactionLineItems}
+                  lineItems={lineItems}
+                  fetchLineItemsInProgress={fetchLineItemsInProgress}
+                  fetchLineItemsError={fetchLineItemsError}
+                  bookingType={bookingTypeOnPanel}
+                  toggleBookingType={toggleBookingTypeOnPanel}
+                  unitType={unitType}
                 />
               ) : null}
               <BreakdownMaybe
@@ -497,6 +542,8 @@ TransactionPanelComponent.defaultProps = {
   monthlyTimeSlots: null,
   fetchTimeSlotsError: null,
   nextTransitions: null,
+  lineItems: null,
+  fetchLineItemsError: null,
 };
 
 TransactionPanelComponent.propTypes = {
@@ -534,6 +581,12 @@ TransactionPanelComponent.propTypes = {
   declineInProgress: bool.isRequired,
   acceptSaleError: propTypes.error,
   declineSaleError: propTypes.error,
+
+  // line items
+  onFetchTransactionLineItems: func.isRequired,
+  lineItems: array,
+  fetchLineItemsInProgress: bool.isRequired,
+  fetchLineItemsError: propTypes.error,
 
   // from injectIntl
   intl: intlShape,

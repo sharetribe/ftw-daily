@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
 import { array, arrayOf, bool, object, func, shape, string, oneOf } from 'prop-types';
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
@@ -8,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import config from '../../config';
 import routeConfiguration from '../../routeConfiguration';
 import { findOptionsForSelectFilter } from '../../util/search';
-import { LISTING_STATE_PENDING_APPROVAL, LISTING_STATE_CLOSED, propTypes } from '../../util/types';
+import { LISTING_STATE_PENDING_APPROVAL, LISTING_STATE_CLOSED, propTypes, HOURLY_PRICE } from '../../util/types';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import {
   LISTING_PAGE_DRAFT_VARIANT,
@@ -41,9 +40,16 @@ import {
   Footer,
   BookingPanel,
 } from '../../components';
+import moment from 'moment';
 import { TopbarContainer, NotFoundPage } from '../../containers';
 
-import { sendEnquiry, loadData, setInitialValues, fetchTimeSlotsTime } from './ListingPage.duck';
+import { 
+  sendEnquiry,
+  loadData,
+  setInitialValues,
+  fetchTimeSlotsTime,
+  fetchTransactionLineItems
+} from './ListingPage.duck';
 import SectionImages from './SectionImages';
 import SectionAvatar from './SectionAvatar';
 import SectionHeading from './SectionHeading';
@@ -57,7 +63,7 @@ import SectionRulesMaybe from './SectionRulesMaybe';
 import SectionMapMaybe from './SectionMapMaybe';
 import SectionCapacity from './SectionCapacity';
 import SectionSeats from './SectionSeats';
-import css from './ListingPage.css';
+import css from './ListingPage.module.css';
 
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
 
@@ -89,11 +95,17 @@ export class ListingPageComponent extends Component {
       pageClassNames: [],
       imageCarouselOpen: false,
       enquiryModalOpen: enquiryModalOpenForListingId === params.id,
+      bookingType: null
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onContactUser = this.onContactUser.bind(this);
     this.onSubmitEnquiry = this.onSubmitEnquiry.bind(this);
+    this.toggleBookingType = this.toggleBookingType.bind(this);
+  }
+
+  toggleBookingType(bookingType){
+    this.setState({bookingType});
   }
 
   handleSubmit(values) {
@@ -104,41 +116,37 @@ export class ListingPageComponent extends Component {
       callSetInitialValues,
       onInitializeCardPaymentData,
     } = this.props;
+    const {bookingType} = this.state;
     const listingId = new UUID(params.id);
     const listing = getListing(listingId);
 
-    let initialValues = {
+    const { bookingStartTime, bookingEndTime, bookingDates, ...restOfValues } = values;
+    const bookingStart = bookingType === HOURLY_PRICE ? timestampToDate(bookingStartTime) : moment(bookingDates.startDate).tz('UTC').startOf('day').toDate();
+    const bookingEnd = bookingType === HOURLY_PRICE ? timestampToDate(bookingEndTime) : moment(bookingDates.endDate).tz('UTC').startOf('day').toDate();
+
+    const bookingData = {
+      // quantity: calculateQuantityFromHours(bookingStart, bookingEnd),
+      bookingType,
+      ...restOfValues,
+    };
+
+    const initialValues = {
       listing,
-      bookingData: null,
+      bookingData,
       bookingDates: {
-        bookingStart: null,
-        bookingEnd: null
+        bookingStart,
+        bookingEnd,
       },
       confirmPaymentError: null,
     };
 
-    const { bookingDates, bookingStartTime, bookingEndTime, ...bookingData } = values;
-
-    if (bookingDates) {
-      initialValues.bookingDates.bookingStart = bookingDates.startDate;
-      initialValues.bookingDates.bookingEnd = bookingDates.endDate;
-      initialValues.bookingData = bookingData;
-    } else {
-      initialValues.bookingDates.bookingStart = timestampToDate(bookingStartTime);
-      initialValues.bookingDates.bookingEnd = timestampToDate(bookingEndTime);
-      initialValues.bookingData = {
-        quantity: calculateQuantityFromHours(
-          timestampToDate(bookingStartTime),
-          timestampToDate(bookingEndTime)
-        ),
-        ...bookingData,
-      };
-    }
+    const saveToSessionStorage = !this.props.currentUser;
 
     const routes = routeConfiguration();
     // Customize checkout page state with current listing and selected bookingDates
     const { setInitialValues } = findRouteByRouteName('CheckoutPage', routes);
-    callSetInitialValues(setInitialValues, initialValues);
+
+    callSetInitialValues(setInitialValues, initialValues, saveToSessionStorage);
 
     // Clear previous Stripe errors from store if there is any
     onInitializeCardPaymentData();
@@ -193,6 +201,7 @@ export class ListingPageComponent extends Component {
 
   render() {
     const {
+      unitType,
       isAuthenticated,
       currentUser,
       getListing,
@@ -212,6 +221,10 @@ export class ListingPageComponent extends Component {
       monthlyTimeSlots,
       fetchTimeSlotsError,
       filterConfig,
+      onFetchTransactionLineItems,
+      lineItems,
+      fetchLineItemsInProgress,
+      fetchLineItemsError,
     } = this.props;
 
     const listingId = new UUID(rawParams.id);
@@ -258,7 +271,7 @@ export class ListingPageComponent extends Component {
       availabilityPlan = null,
       publicData,
     } = currentListing.attributes;
-
+    
     const richTitle = (
       <span>
         {richText(title, {
@@ -390,8 +403,6 @@ export class ListingPageComponent extends Component {
       { title, price: formattedPrice, siteTitle }
     );
 
-    const unitType = (publicData && publicData.unitType) || config.fallbackUnitType;
-
     const hostLink = (
       <NamedLink
         className={css.authorNameLink}
@@ -511,9 +522,14 @@ export class ListingPageComponent extends Component {
                   onManageDisableScrolling={onManageDisableScrolling}
                   timeSlots={timeSlots}
                   fetchTimeSlotsError={fetchTimeSlotsError}
-
                   monthlyTimeSlots={monthlyTimeSlots}
                   onFetchTimeSlots={onFetchTimeSlots}
+                  onFetchTransactionLineItems={onFetchTransactionLineItems}
+                  lineItems={lineItems}
+                  fetchLineItemsInProgress={fetchLineItemsInProgress}
+                  fetchLineItemsError={fetchLineItemsError}
+                  bookingType={this.state.bookingType}
+                  toggleBookingType={this.toggleBookingType}
                 />
               </div>
             </div>
@@ -528,6 +544,7 @@ export class ListingPageComponent extends Component {
 }
 
 ListingPageComponent.defaultProps = {
+  unitType: config.bookingUnitType,
   currentUser: null,
   enquiryModalOpenForListingId: null,
   showListingError: null,
@@ -538,6 +555,8 @@ ListingPageComponent.defaultProps = {
   fetchTimeSlotsError: null,
   sendEnquiryError: null,
   filterConfig: config.custom.filters,
+  lineItems: null,
+  fetchLineItemsError: null,
 };
 
 ListingPageComponent.propTypes = {
@@ -578,6 +597,10 @@ ListingPageComponent.propTypes = {
   onSendEnquiry: func.isRequired,
   onInitializeCardPaymentData: func.isRequired,
   filterConfig: array,
+  onFetchTransactionLineItems: func.isRequired,
+  lineItems: array,
+  fetchLineItemsInProgress: bool.isRequired,
+  fetchLineItemsError: propTypes.error,
 };
 
 const mapStateToProps = state => {
@@ -591,6 +614,9 @@ const mapStateToProps = state => {
     fetchTimeSlotsError,
     sendEnquiryInProgress,
     sendEnquiryError,
+    lineItems,
+    fetchLineItemsInProgress,
+    fetchLineItemsError,
     enquiryModalOpenForListingId,
   } = state.ListingPage;
   const { currentUser } = state.user;
@@ -620,6 +646,9 @@ const mapStateToProps = state => {
     monthlyTimeSlots,
     timeSlots,
     fetchTimeSlotsError,
+    lineItems,
+    fetchLineItemsInProgress,
+    fetchLineItemsError,
     sendEnquiryInProgress,
     sendEnquiryError,
   };
@@ -630,6 +659,11 @@ const mapDispatchToProps = dispatch => ({
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
   callSetInitialValues: (setInitialValues, values) => dispatch(setInitialValues(values)),
   onSendEnquiry: (listingId, message, unitType) => dispatch(sendEnquiry(listingId, message, unitType)),
+  callSetInitialValues: (setInitialValues, values, saveToSessionStorage) =>
+    dispatch(setInitialValues(values, saveToSessionStorage)),
+  onFetchTransactionLineItems: (bookingData, listingId, isOwnListing) =>
+    dispatch(fetchTransactionLineItems(bookingData, listingId, isOwnListing)),
+  onSendEnquiry: (listingId, message) => dispatch(sendEnquiry(listingId, message)),
   onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
   onFetchTimeSlots: (listingId, start, end, timeZone) =>
     dispatch(fetchTimeSlotsTime(listingId, start, end, timeZone)),
@@ -649,8 +683,5 @@ const ListingPage = compose(
   ),
   injectIntl
 )(ListingPageComponent);
-
-ListingPage.setInitialValues = initialValues => setInitialValues(initialValues);
-ListingPage.loadData = loadData;
 
 export default ListingPage;

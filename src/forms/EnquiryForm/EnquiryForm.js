@@ -8,7 +8,7 @@ import { Form, PrimaryButton, FieldTextInput, IconEnquiry } from '../../componen
 import * as validators from '../../util/validators';
 import { propTypes } from '../../util/types';
 
-import css from './EnquiryForm.css';
+import css from './EnquiryForm.module.css';
 
 const EnquiryFormComponent = props => (
   <FinalForm
@@ -49,7 +49,7 @@ const EnquiryFormComponent = props => (
       const submitDisabled = submitInProgress;
 
       return (
-        <Form className={classes} onSubmit={handleSubmit}>
+        <Form className={classes} onSubmit={handleSubmit} enforcePagePreloadFor="OrderDetailsPage">
           <IconEnquiry className={css.icon} />
           <h2 className={css.heading}>
             <FormattedMessage id="EnquiryForm.heading" values={{ listingTitle }} />

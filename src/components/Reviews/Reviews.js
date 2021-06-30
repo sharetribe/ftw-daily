@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { Avatar, ReviewRating, UserDisplayName } from '../../components';
 import { propTypes } from '../../util/types';
 
-import css from './Reviews.css';
+import css from './Reviews.module.css';
 
 const Review = props => {
   const { review, intl } = props;

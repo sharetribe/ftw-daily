@@ -27,7 +27,7 @@ import { Button, ExternalLink, FieldRadioButton, FieldSelect, Form } from '../..
 
 import PayoutDetailsCompanyAccount from './PayoutDetailsCompanyAccount';
 import PayoutDetailsIndividualAccount from './PayoutDetailsIndividualAccount';
-import css from './PayoutDetailsForm.css';
+import css from './PayoutDetailsForm.module.css';
 
 const supportedCountries = config.stripe.supportedCountries.map(c => c.code);
 

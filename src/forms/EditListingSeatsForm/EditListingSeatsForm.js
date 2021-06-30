@@ -8,7 +8,7 @@ import { propTypes } from '../../util/types';
 import { Form, Button, FieldTextInput } from '../../components';
 import { required } from '../../util/validators';
 
-import css from './EditListingSeatsForm.css';
+import css from './EditListingSeatsForm.module.css';
 
 export const EditListingSeatsFormComponent = props => (
   <FinalForm

@@ -1,0 +1,117 @@
+@import '../../styles/propertySets.css';
+
+.title {
+  @apply --marketplaceH1FontStyles;
+  margin-top: 0;
+  text-align: center;
+}
+
+.testimonialsSection {
+  padding: 0;
+  margin: 0 auto;
+}
+
+.testimonialsSection .testimonials {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1.25rem;
+  padding-top: 40px;
+}
+
+.testimonialsSection .testimonials .testimonial:nth-child(1) {
+  order: 1;
+}
+
+.testimonialsSection .testimonials .testimonial:nth-child(2) {
+  order: 3;
+}
+
+.testimonialsSection .testimonials .testimonial:nth-child(3) {
+  order: 4;
+}
+
+.testimonialsSection .testimonials .testimonial:nth-child(4) {
+  order: 2;
+}
+
+.testimonialsSection .mobileTestimonials {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1.25rem;
+  padding-top: 40px;
+
+  @media (max-width: 630px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.quote {
+  /* letter-spacing: 1.3px; */
+  font-weight: 500;
+  font-size: 16px;
+  margin: 0;
+  text-align: center;
+  line-height: 1.33;
+  text-align: left;
+  padding: 15px 23px 17px 23px;
+  border-radius: 5px;
+  position: relative;
+  margin-bottom: 10px;
+  width: 100%;
+  background: #ffd9ed;
+}
+
+.quote:after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-right: 35px solid transparent;
+  border-top: 30px solid #ffd9ed;
+  position: absolute;
+  bottom: -18px;
+  left: 0;
+}
+
+.testimonialAuthorDiv {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 5px;
+}
+
+.testimonialAuthorDiv span p {
+  margin: 0;
+  letter-spacing: 1px;
+  line-height: 1.33;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: right;
+  padding-bottom: 5px;
+}
+
+/* @media (max-width: 991px) { */
+@media (max-width: 767px) {
+  .testimonials {
+    display: none !important;
+  }
+  .mobileTestimonials {
+    padding-top: 40px;
+  }
+  .mobileTestimonials .testimonial {
+    padding: 0 10px;
+  }
+}
+
+/* @media (min-width: 992px) { */
+@media (min-width: 768px) {
+  .mobileTestimonials {
+    display: none !important;
+  }
+}
+
+/* @media (max-width: 630px) { */
+@media (max-width: 768px) {
+  .mobileTestimonials .testimonial {
+    padding: 0 10px;
+  }
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import { createListing } from '../../util/test-data';
 import { LISTING_STATE_CLOSED } from '../../util/types';
 import BookingPanel from './BookingPanel';
-import css from './BookingPanelExample.css';
+import css from './BookingPanelExample.module.css';
 
 export const Default = {
   component: BookingPanel,
@@ -14,6 +14,8 @@ export const Default = {
     subTitle: 'Hosted by Author N',
     authorDisplayName: 'Author Name',
     onManageDisableScrolling: () => null,
+    fetchLineItemsInProgress: false,
+    onFetchTransactionLineItems: () => null,
   },
 };
 
@@ -27,5 +29,7 @@ export const WithClosedListing = {
     subTitle: 'Hosted by Author N',
     authorDisplayName: 'Author Name',
     onManageDisableScrolling: () => null,
+    fetchLineItemsInProgress: false,
+    onFetchTransactionLineItems: () => null,
   },
 };

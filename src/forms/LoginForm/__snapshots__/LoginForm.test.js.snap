@@ -3,13 +3,13 @@
 exports[`LoginForm matches snapshot 1`] = `
 <form
   action="/"
-  className=""
+  className="root"
   method="post"
   onSubmit={[Function]}
 >
   <div>
     <div
-      className=""
+      className="root"
     >
       <label
         htmlFor="email"
@@ -18,7 +18,7 @@ exports[`LoginForm matches snapshot 1`] = `
       </label>
       <input
         autoComplete="email"
-        className=""
+        className="input"
         id="email"
         name="email"
         onBlur={[Function]}
@@ -30,7 +30,7 @@ exports[`LoginForm matches snapshot 1`] = `
       />
     </div>
     <div
-      className=""
+      className="root password"
     >
       <label
         htmlFor="password"
@@ -39,7 +39,7 @@ exports[`LoginForm matches snapshot 1`] = `
       </label>
       <input
         autoComplete="current-password"
-        className=""
+        className="input"
         id="password"
         name="password"
         onBlur={[Function]}
@@ -51,16 +51,22 @@ exports[`LoginForm matches snapshot 1`] = `
       />
     </div>
   </div>
-  <div>
-    <p>
-      <span>
+  <div
+    className="bottomWrapper"
+  >
+    <p
+      className="bottomWrapperText"
+    >
+      <span
+        className="recoveryLinkInfo"
+      >
         <span>
           LoginForm.forgotPasswordInfo
         </span>
       </span>
     </p>
     <button
-      className=""
+      className="primaryButtonRoot primaryButton"
       disabled={true}
       type="submit"
     >

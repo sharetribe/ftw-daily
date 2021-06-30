@@ -2,21 +2,23 @@
 
 exports[`PaginationLinks should match snapshot with both links disabled 1`] = `
 <nav
-  className=""
+  className="root"
 >
-  <div>
+  <div
+    className="prev"
+  >
     <IconArrowHead
       className={null}
       direction="left"
-      rootClassName=""
+      rootClassName="arrowIcon disabled"
       size="big"
     />
   </div>
   <div
-    className=""
+    className="pageNumberList pageNumberList1Items"
   >
     <NamedLink
-      className="undefined"
+      className="toPageLink currentPage"
       key="1"
       name="SomePage"
       params={
@@ -34,11 +36,13 @@ exports[`PaginationLinks should match snapshot with both links disabled 1`] = `
       1
     </NamedLink>
   </div>
-  <div>
+  <div
+    className="next"
+  >
     <IconArrowHead
       className={null}
       direction="right"
-      rootClassName=""
+      rootClassName="arrowIcon disabled"
       size="big"
     />
   </div>
@@ -47,9 +51,10 @@ exports[`PaginationLinks should match snapshot with both links disabled 1`] = `
 
 exports[`PaginationLinks should match snapshot with both links enabled 1`] = `
 <nav
-  className=""
+  className="root"
 >
   <NamedLink
+    className="prev"
     name="SomePage"
     params={
       Object {
@@ -66,15 +71,15 @@ exports[`PaginationLinks should match snapshot with both links enabled 1`] = `
     <IconArrowHead
       className={null}
       direction="left"
-      rootClassName={null}
+      rootClassName="arrowIcon"
       size="big"
     />
   </NamedLink>
   <div
-    className=""
+    className="pageNumberList pageNumberList3Items"
   >
     <NamedLink
-      className=""
+      className="toPageLink"
       key="1"
       name="SomePage"
       params={
@@ -92,7 +97,7 @@ exports[`PaginationLinks should match snapshot with both links enabled 1`] = `
       1
     </NamedLink>
     <NamedLink
-      className="undefined"
+      className="toPageLink currentPage"
       key="2"
       name="SomePage"
       params={
@@ -110,7 +115,7 @@ exports[`PaginationLinks should match snapshot with both links enabled 1`] = `
       2
     </NamedLink>
     <NamedLink
-      className=""
+      className="toPageLink"
       key="3"
       name="SomePage"
       params={
@@ -129,6 +134,7 @@ exports[`PaginationLinks should match snapshot with both links enabled 1`] = `
     </NamedLink>
   </div>
   <NamedLink
+    className="next"
     name="SomePage"
     params={
       Object {
@@ -145,7 +151,7 @@ exports[`PaginationLinks should match snapshot with both links enabled 1`] = `
     <IconArrowHead
       className={null}
       direction="right"
-      rootClassName={null}
+      rootClassName="arrowIcon"
       size="big"
     />
   </NamedLink>
@@ -154,21 +160,23 @@ exports[`PaginationLinks should match snapshot with both links enabled 1`] = `
 
 exports[`PaginationLinks should match snapshot with prev disabled and next enabled 1`] = `
 <nav
-  className=""
+  className="root"
 >
-  <div>
+  <div
+    className="prev"
+  >
     <IconArrowHead
       className={null}
       direction="left"
-      rootClassName=""
+      rootClassName="arrowIcon disabled"
       size="big"
     />
   </div>
   <div
-    className=""
+    className="pageNumberList pageNumberList3Items"
   >
     <NamedLink
-      className="undefined"
+      className="toPageLink currentPage"
       key="1"
       name="SomePage"
       params={
@@ -186,7 +194,7 @@ exports[`PaginationLinks should match snapshot with prev disabled and next enabl
       1
     </NamedLink>
     <NamedLink
-      className=""
+      className="toPageLink"
       key="2"
       name="SomePage"
       params={
@@ -204,7 +212,7 @@ exports[`PaginationLinks should match snapshot with prev disabled and next enabl
       2
     </NamedLink>
     <NamedLink
-      className=""
+      className="toPageLink"
       key="3"
       name="SomePage"
       params={
@@ -223,6 +231,7 @@ exports[`PaginationLinks should match snapshot with prev disabled and next enabl
     </NamedLink>
   </div>
   <NamedLink
+    className="next"
     name="SomePage"
     params={
       Object {
@@ -239,7 +248,7 @@ exports[`PaginationLinks should match snapshot with prev disabled and next enabl
     <IconArrowHead
       className={null}
       direction="right"
-      rootClassName={null}
+      rootClassName="arrowIcon"
       size="big"
     />
   </NamedLink>
@@ -248,9 +257,10 @@ exports[`PaginationLinks should match snapshot with prev disabled and next enabl
 
 exports[`PaginationLinks should match snapshot with prev enabled and next disabled 1`] = `
 <nav
-  className=""
+  className="root"
 >
   <NamedLink
+    className="prev"
     name="SomePage"
     params={
       Object {
@@ -267,15 +277,15 @@ exports[`PaginationLinks should match snapshot with prev enabled and next disabl
     <IconArrowHead
       className={null}
       direction="left"
-      rootClassName={null}
+      rootClassName="arrowIcon"
       size="big"
     />
   </NamedLink>
   <div
-    className=""
+    className="pageNumberList pageNumberList3Items"
   >
     <NamedLink
-      className=""
+      className="toPageLink"
       key="1"
       name="SomePage"
       params={
@@ -293,7 +303,7 @@ exports[`PaginationLinks should match snapshot with prev enabled and next disabl
       1
     </NamedLink>
     <NamedLink
-      className=""
+      className="toPageLink"
       key="2"
       name="SomePage"
       params={
@@ -311,7 +321,7 @@ exports[`PaginationLinks should match snapshot with prev enabled and next disabl
       2
     </NamedLink>
     <NamedLink
-      className="undefined"
+      className="toPageLink currentPage"
       key="3"
       name="SomePage"
       params={
@@ -329,11 +339,13 @@ exports[`PaginationLinks should match snapshot with prev enabled and next disabl
       3
     </NamedLink>
   </div>
-  <div>
+  <div
+    className="next"
+  >
     <IconArrowHead
       className={null}
       direction="right"
-      rootClassName=""
+      rootClassName="arrowIcon disabled"
       size="big"
     />
   </div>

@@ -6,7 +6,7 @@ import { FieldSelect, FieldTextInput } from '../../components';
 
 import { stripeCountryConfigs } from './PayoutDetailsForm';
 import { CA_PROVINCES, US_STATES, AU_STATES } from './statesAndProvinces';
-import css from './PayoutDetailsForm.css';
+import css from './PayoutDetailsForm.module.css';
 
 const PayoutDetailsAddress = props => {
   const { className, country, intl, disabled, form, fieldId } = props;

@@ -3,7 +3,7 @@ import { node, string } from 'prop-types';
 import classNames from 'classnames';
 import { Field } from 'react-final-form';
 
-import css from './FieldRadioButton.css';
+import css from './FieldRadioButton.module.css';
 
 const IconRadioButton = props => {
   const { checkedClassName } = props;

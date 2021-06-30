@@ -31,7 +31,7 @@ import {
 import { propTypes } from '../../util/types';
 import * as log from '../../util/log';
 
-import css from './ActivityFeed.css';
+import css from './ActivityFeed.module.css';
 
 const Message = props => {
   const { message, intl } = props;

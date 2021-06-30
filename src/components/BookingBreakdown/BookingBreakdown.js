@@ -5,6 +5,7 @@
 import React from 'react';
 import { oneOf, string } from 'prop-types';
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
+import { DATE_TYPE_DATE } from '../../util/types';
 import classNames from 'classnames';
 import {
   propTypes,
@@ -25,7 +26,7 @@ import LineItemTotalPrice from './LineItemTotalPrice';
 import LineItemUnknownItemsMaybe from './LineItemUnknownItemsMaybe';
 import LineItemDiscountMaybe from './LineItemDiscountMaybe';
 
-import css from './BookingBreakdown.css';
+import css from './BookingBreakdown.module.css';
 
 export const BookingBreakdownComponent = props => {
   const {
@@ -40,6 +41,11 @@ export const BookingBreakdownComponent = props => {
     timeZone
   } = props;
 
+  const isDaily = dateType === DATE_TYPE_DATE;
+  const transactionType = transaction &&
+                          transaction.attributes &&
+                          transaction.attributes.protectedData && 
+                          transaction.attributes.protectedData.type;
   const isCustomer = userRole === 'customer';
   const isProvider = userRole === 'provider';
 
@@ -95,11 +101,12 @@ export const BookingBreakdownComponent = props => {
         unitType={unitType}
         dateType={dateType}
         timeZone={timeZone}
+        isDaily={isDaily}
       />
-      <LineItemUnitsMaybe transaction={transaction} unitType={unitType} />
+      <LineItemUnitsMaybe transaction={transaction} unitType={unitType} isDaily={isDaily} transactionType={transactionType}/>
 
-      <LineItemBasePriceMaybe transaction={transaction} unitType={unitType} intl={intl} />
-      <LineItemUnknownItemsMaybe transaction={transaction} intl={intl} />
+      <LineItemBasePriceMaybe transaction={transaction} unitType={unitType} intl={intl} isDaily={isDaily} transactionType={transactionType}/>
+      <LineItemUnknownItemsMaybe transaction={transaction} isProvider={isProvider} intl={intl} />
 
       <LineItemSubTotalMaybe
         transaction={transaction}

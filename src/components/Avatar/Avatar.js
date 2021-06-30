@@ -11,7 +11,7 @@ import {
 } from '../../util/data';
 import { ResponsiveImage, IconBannedUser, NamedLink } from '../../components/';
 
-import css from './Avatar.css';
+import css from './Avatar.module.css';
 
 // Responsive image sizes hint
 const AVATAR_SIZES = '40px';
@@ -19,6 +19,12 @@ const AVATAR_SIZES_MEDIUM = '60px';
 const AVATAR_SIZES_LARGE = '96px';
 
 const AVATAR_IMAGE_VARIANTS = [
+  // 40x40
+  'square-xsmall',
+
+  // 80x80
+  'square-xsmall2x',
+
   // 240x240
   'square-small',
 

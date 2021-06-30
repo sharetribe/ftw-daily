@@ -1,0 +1,213 @@
+@import '../../styles/propertySets.css';
+
+/* Animation for the hero elements */
+
+@keyframes animationTitle {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+    top: -20px;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+    top: 0;
+  }
+}
+.root {
+  @apply --backgroundImageMobile;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  border: 0px;
+  border-radius: 0px;
+  /* Text positioning is done with paddings */
+
+  @media (--viewportMedium) {
+    @apply --backgroundImageHero;
+  }
+}
+
+.flexContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 40px;
+
+  @media (--viewportLarge) {
+    flex-direction: row;
+    padding-bottom: 0;
+  }
+}
+
+.heroImgContent {
+  flex: 1;
+  margin: 24px;
+  display: flex;
+  align-items: center;
+  order: 1;
+
+  @media (--viewportLarge) {
+    margin: 0 30px;
+    order: 2;
+  }
+}
+
+.imgContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 15px;
+  grid-row-gap: 15px;
+}
+
+.image {
+  width: 100%;
+  max-width: 100%;
+}
+
+.emptyMobileDiv {
+  height: 300px;
+  width: 100%;
+  box-sizing: content-box;
+  @media (--viewportMedium) {
+    display: none;
+  }
+}
+
+.mobileImgContainer {
+  overflow: hidden;
+  @media (--viewportMedium) {
+    display: none;
+  }
+}
+
+.mobileImage {
+  width: 100%;
+  @media (--viewportMedium) {
+    display: none;
+  }
+}
+
+.heroTextContent {
+  margin-left: 24px;
+  margin-right: 24px;
+  flex:1;
+  order: 2;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  @media (--viewportLarge) {
+    margin-left: 7.5vw;
+    margin-right: 0;
+    order: 1;
+  }
+
+  /* Special viewport for adjusting the heroContent's placement */
+
+  @media only screen and (min-width: 1025px) and (max-width: 1366px) {
+    padding: 0 36px 0 36px;
+  }
+
+  @media only screen and (min-width: 1367px) {
+    margin: 0 auto;
+    max-width: calc(1052px + 30px + 30px);
+    width: 100%;
+    padding: 0 20px;
+    margin: 0 6vw;
+  }
+}
+
+.heroMainTitle {
+  @apply --marketplaceHeroTitleFontStyles;
+  margin-top: 0;
+
+  @apply --SectionHero_animation;
+  animation-delay: 0.5s;
+
+  @media (--viewportMedium) {
+    max-width: var(--SectionHero_desktopTitleMaxWidth);
+  }
+}
+
+.heroSubTitle {
+  @apply --marketplaceBodyFontStyles;
+
+  margin: 0 0 25px 0;
+
+  @apply --SectionHero_animation;
+  animation-delay: 0.65s;
+
+  @media (--viewportMedium) {
+    max-width: var(--SectionHero_desktopSubtitleMaxWidth);
+    margin: 0 0 31px 0;
+  }
+}
+
+.bold {
+  font-weight: var(--fontWeightSemiBold);
+}
+
+.heroButtonsContatiner {
+  display: flex;
+  align-items: center;
+}
+
+.heroButtonPink {
+  @apply --SectionHero_animation;
+
+  background-color: var(--marketplaceColorDark);
+  color: var(--matterColorLight);
+  padding: 1em 0.25em;
+  border-radius: 4px;
+  text-align: center;
+  opacity: 1;
+  margin-bottom: 5px;
+  display: block;
+  margin-right: 10px;
+  margin-bottom: 0;
+  max-width: 200px;
+  width: 100%;
+
+  border: 1px solid var(--marketplaceColorDark);
+
+  &:hover {
+    background-color: var(--customBlue);
+    border-color: var(--customBlue);
+    text-decoration: none;
+  }
+
+  animation-delay: 0.8s;
+}
+
+.heroButton {
+  @apply --SectionHero_animation;
+  display: block;
+  background-color: var(--matterColorLight);
+  color: var(--marketplaceColorDark);
+  padding: 1em 0.25em;
+  border-radius: 4px;
+  border: 1px solid var(--marketplaceColorDark);
+  text-align: center;
+  opacity: 1;
+  max-width: 200px;
+  width: 100%;
+
+  &:hover {
+    background-color: var(--customBlue);
+    text-decoration: none;
+    border-color: var(--customBlue);
+    color: var(--matterColorLight);
+  }
+
+  animation-delay: 0.8s;
+}
+
+.heroButtonPink span, .heroButton span {
+  font-size: 14px;
+  @media (--viewportMedium) {
+    font-size: 20px;
+  }
+}

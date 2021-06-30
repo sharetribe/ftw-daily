@@ -5,6 +5,8 @@ exports[`BookingDatesForm matches snapshot without selected dates 1`] = `
   bookingDates={Object {}}
   dispatch={[Function]}
   endDatePlaceholder="tomorrow"
+  fetchLineItemsError={null}
+  fetchLineItemsInProgress={false}
   intl={
     Object {
       "formatDate": [Function],
@@ -18,6 +20,30 @@ exports[`BookingDatesForm matches snapshot without selected dates 1`] = `
     }
   }
   isOwnListing={false}
+  lineItems={
+    Array [
+      Object {
+        "code": "line-item/night",
+        "includeFor": Array [
+          "customer",
+          "provider",
+        ],
+        "lineTotal": Money {
+          "_sdkType": "Money",
+          "amount": 2198,
+          "currency": "USD",
+        },
+        "reversal": false,
+        "unitPrice": Money {
+          "_sdkType": "Money",
+          "amount": 1099,
+          "currency": "USD",
+        },
+        "units": "2",
+      },
+    ]
+  }
+  onFetchTransactionLineItems={[Function]}
   onSubmit={[Function]}
   render={[Function]}
   startDatePlaceholder="today"

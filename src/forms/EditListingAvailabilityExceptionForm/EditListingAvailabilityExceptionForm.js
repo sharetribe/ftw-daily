@@ -36,7 +36,7 @@ import {
   PrimaryButton,
 } from '../../components';
 
-import css from './EditListingAvailabilityExceptionForm.css';
+import css from './EditListingAvailabilityExceptionForm.module.css';
 
 const TODAY = new Date();
 const MAX_AVAILABILITY_EXCEPTIONS_RANGE = 365;

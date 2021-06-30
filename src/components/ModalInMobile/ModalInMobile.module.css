@@ -1,0 +1,30 @@
+@import '../../styles/propertySets.css';
+
+/* ModalInMobile is visible by default */
+.root {
+  width: 100%;
+}
+
+/* Content is hidden in Mobile layout */
+.modalHidden {
+  display: none;
+}
+
+.modalContainer {
+  @apply --marketplaceModalInMobileBaseStyles;
+
+  @media (--viewportMedium) {
+    flex-basis: 576px;
+  }
+}
+
+.modalContent {
+  width: 100%;
+
+  @media (--viewportMedium) {
+    height: 100%;
+
+    /* ModalInMobile content should work with box-shadows etc. */
+    overflow: visible;
+  }
+}

@@ -1,0 +1,118 @@
+@import '../../styles/propertySets.css';
+
+.root {
+  /* Layout */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  /* Content of EditListingWizard should have smaller z-index than Topbar */
+  z-index: 0;
+}
+
+.tabsContainer {
+  flex-grow: 1;
+  /* Layout */
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  @media (--viewportLarge) {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.nav {
+  /* Layout */
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  flex-shrink: 0;
+  background-color: var(--matterColorLight);
+  box-shadow: var(--boxShadowLight);
+  border-top: 1px solid var(--matterColorNegative);
+  overflow-x: scroll;
+
+  @media (--viewportLarge) {
+    padding: 128px 0 82px 36px;
+    flex-direction: column;
+    overflow-x: auto;
+    background-color: var(--matterColorBright);
+    box-shadow: none;
+    border-top: none;
+  }
+
+  @media (--viewportLargeWithPaddings) {
+    padding: 128px 0 82px calc((100% - 1056px) / 2);
+  }
+}
+
+.tab {
+  margin-left: 16px;
+  white-space: nowrap;
+
+  &:first-child {
+    margin-left: 0;
+
+    /* Padding added to tab so that it will be visible after call to scrollToTab */
+    padding-left: 24px;
+  }
+
+  &:last-child {
+    /* Padding added to tab so that it will be visible after call to scrollToTab */
+    padding-right: 24px;
+  }
+
+  @media (--viewportLarge) {
+    margin-left: 0;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+}
+
+.panel {
+  flex-grow: 1;
+
+  @media (--viewportLarge) {
+    padding: 88px 36px 82px 59px;
+    border-left: 1px solid var(--matterColorNegative);
+    background-color: var(--matterColorLight);
+  }
+
+  @media (--viewportLargeWithPaddings) {
+    padding: 88px calc((100% - 1056px) / 2) 82px 59px;
+  }
+}
+
+.payoutDetails {
+  margin-bottom: 100px;
+
+  @media (--viewportMedium) {
+    margin-bottom: 0;
+  }
+}
+
+.modalTitle {
+  @apply --marketplaceModalTitleStyles;
+}
+
+.modalPayoutDetailsWrapper {
+  @media (--viewportMedium) {
+    width: 604px;
+    padding-top: 11px;
+  }
+}
+
+.modalMessage {
+  @apply --marketplaceModalParagraphStyles;
+}

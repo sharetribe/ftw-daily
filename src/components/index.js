@@ -30,6 +30,9 @@ export { default as IconSearch } from './IconSearch/IconSearch';
 export { default as IconSocialMediaFacebook } from './IconSocialMediaFacebook/IconSocialMediaFacebook';
 export { default as IconSocialMediaInstagram } from './IconSocialMediaInstagram/IconSocialMediaInstagram';
 export { default as IconSocialMediaTwitter } from './IconSocialMediaTwitter/IconSocialMediaTwitter';
+export { default as IconSocialMediaLinkedin } from './IconSocialMediaLinkedin/IconSocialMediaLinkedin';
+export { default as IconSocialMediaYoutube } from './IconSocialMediaYoutube/IconSocialMediaYoutube';
+export { default as IconSocialMediaTikTok } from './IconSocialMediaTikTok/IconSocialMediaTikTok';
 export { default as IconSpinner } from './IconSpinner/IconSpinner';
 export { default as IconSuccess } from './IconSuccess/IconSuccess';
 
@@ -50,6 +53,8 @@ export { default as TimeRange } from './TimeRange/TimeRange';
 export { default as ResponsiveImage } from './ResponsiveImage/ResponsiveImage';
 export { default as UserDisplayName } from './UserDisplayName/UserDisplayName';
 export { default as ValidationError } from './ValidationError/ValidationError';
+export { default as GTMWrapper } from './GTMWrapper/GTMWrapper';
+export { default as BookingTypes } from './BookingTypes/BookingTypes';
 
 /**
  * Composite components
@@ -60,7 +65,7 @@ export { default as ValidationError } from './ValidationError/ValidationError';
 // First components that include only atomic components //
 //////////////////////////////////////////////////////////
 
-export { default as Button, PrimaryButton, SecondaryButton, InlineTextButton } from './Button/Button';
+export { default as Button, PrimaryButton, SecondaryButton, InlineTextButton, SocialLoginButton } from './Button/Button';
 export { default as CookieConsent } from './CookieConsent/CookieConsent';
 export { default as ImageCarousel } from './ImageCarousel/ImageCarousel';
 export { default as ImageFromFile } from './ImageFromFile/ImageFromFile';
@@ -157,12 +162,14 @@ export { default as UserCard } from './UserCard/UserCard';
 //////////////////////////////////////////////
 
 export { default as LayoutWrapperAccountSettingsSideNav } from './LayoutWrapperAccountSettingsSideNav/LayoutWrapperAccountSettingsSideNav';
+export {default as LoadableComponentErrorBoundary } from './LoadableComponentErrorBoundary/LoadableComponentErrorBoundary'
 export { default as ModalMissingInformation } from './ModalMissingInformation/ModalMissingInformation';
 export { default as ReviewModal } from './ReviewModal/ReviewModal';
 export { default as PrivacyPolicy } from './PrivacyPolicy/PrivacyPolicy';
 export { default as TermsOfService } from './TermsOfService/TermsOfService';
 export { default as EditListingAvailabilityPanelHour } from './EditListingAvailabilityPanelHour/EditListingAvailabilityPanelHour';
 export { default as EditListingAvailabilityPanelDay } from './EditListingAvailabilityPanelDay/EditListingAvailabilityPanelDay';
+export { default as EditListingAvailabilityPanel } from './EditListingAvailabilityPanel/EditListingAvailabilityPanel';
 export { default as EditListingDescriptionPanel } from './EditListingDescriptionPanel/EditListingDescriptionPanel';
 export { default as EditListingFeaturesPanel } from './EditListingFeaturesPanel/EditListingFeaturesPanel';
 export { default as EditListingLocationPanel } from './EditListingLocationPanel/EditListingLocationPanel';

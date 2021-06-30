@@ -3,7 +3,7 @@ import { string, arrayOf, shape, node, object, oneOf, oneOfType } from 'prop-typ
 import classNames from 'classnames';
 import { ExternalLink, NamedLink } from '../../components';
 
-import css from './SectionThumbnailLinks.css';
+import css from './SectionThumbnailLinks.module.css';
 
 const ThumbnailLink = props => {
   const {

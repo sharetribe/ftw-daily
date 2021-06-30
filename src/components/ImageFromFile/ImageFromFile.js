@@ -4,7 +4,7 @@ import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { Promised } from '../../components';
 
-import css from './ImageFromFile.css';
+import css from './ImageFromFile.module.css';
 
 // readImage returns a promise which is resolved
 // when FileReader has loaded given file as dataURL

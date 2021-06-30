@@ -2,7 +2,7 @@ import React from 'react';
 import { FormattedMessage } from '../../util/reactIntl';
 import { NamedLink } from '../../components';
 
-import css from './ModalMissingInformation.css';
+import css from './ModalMissingInformation.module.css';
 
 const StripeAccountReminder = props => {
   const { className } = props;

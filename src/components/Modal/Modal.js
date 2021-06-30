@@ -15,7 +15,7 @@ import classNames from 'classnames';
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 import { Button, IconClose } from '../../components';
 
-import css from './Modal.css';
+import css from './Modal.module.css';
 
 const KEY_CODE_ESCAPE = 27;
 

@@ -64,7 +64,7 @@ propTypes.route = shape({
   path: string.isRequired,
   exact: bool,
   strict: bool,
-  component: func.isRequired,
+  component: oneOfType([object, func]).isRequired,
   loadData: func,
 });
 
@@ -174,8 +174,8 @@ const listingAttributes = shape({
   publicData: object,
 });
 
-const AVAILABILITY_PLAN_DAY = 'availability-plan/day';
-const AVAILABILITY_PLAN_TIME = 'availability-plan/time';
+export const AVAILABILITY_PLAN_DAY = 'availability-plan/day';
+export const AVAILABILITY_PLAN_TIME = 'availability-plan/time';
 export const DAYS_OF_WEEK = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 
 const availabilityPlan = shape({
@@ -553,3 +553,13 @@ export const DATE_TYPE_DATETIME = 'datetime';
 propTypes.dateType = oneOf([DATE_TYPE_DATE, DATE_TYPE_DATETIME]);
 
 export { propTypes };
+
+export const HOURLY_PRICE = 'price';
+export const DAILY_PRICE = 'pricePerDay';
+export const WEEKLY_PRICE = 'pricePerWeek';
+export const MONTHLY_PRICE = 'pricePerMonth';
+
+export const HOURLY_DISCOUNT = 'hourlyDiscount';
+export const DAILY_DISCOUNT = 'dailyDiscount';
+export const WEEKLY_DISCOUNT = 'weeklyDiscount';
+export const MONTHLY_DISCOUNT = 'monthlyDiscount';

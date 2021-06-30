@@ -5,7 +5,7 @@ import { Field } from 'react-final-form';
 import classNames from 'classnames';
 import { IconReviewStar, ValidationError } from '../../components';
 
-import css from './FieldReviewRating.css';
+import css from './FieldReviewRating.module.css';
 
 class FieldReviewRatingComponent extends Component {
   constructor(props) {
