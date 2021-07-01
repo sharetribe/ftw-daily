@@ -13,7 +13,7 @@ import {
   LISTING_PAGE_PARAM_TYPE_NEW,
   LISTING_PAGE_PARAM_TYPES,
 } from '../../util/urlHelpers';
-import { ensureCurrentUser, ensureListing } from '../../util/data';
+import { ensureCurrentUser, ensureListing, getAvailablePrices } from '../../util/data';
 
 import { Modal, NamedRedirect, Tabs, StripeConnectAccountStatusBox } from '../../components';
 import { StripeConnectAccountForm } from '../../forms';
@@ -29,6 +29,7 @@ import EditListingWizardTab, {
   PRICING,
   PHOTOS,
 } from './EditListingWizardTab';
+
 import css from './EditListingWizard.module.css';
 
 // Show availability calendar only if environment variable availabilityEnabled is true
@@ -116,7 +117,7 @@ const tabCompleted = (tab, listing) => {
     case LOCATION:
       return !!(geolocation && publicData && publicData.location && publicData.location.address);
     case PRICING:
-      return !!price;
+      return !!(getAvailablePrices(listing).find(({value}) => !!value));
     case AVAILABILITY:
       // Since we are setting parts of availabilityPlan in description Panel we need to make sure
       // it is not marked as completed in description.
