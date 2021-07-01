@@ -64,10 +64,11 @@ import SectionMapMaybe from './SectionMapMaybe';
 import SectionCapacity from './SectionCapacity';
 import SectionSeats from './SectionSeats';
 import css from './ListingPage.module.css';
+import {getLowestPrice} from '../../util/data';
 
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
 
-const { UUID } = sdkTypes;
+const { UUID, Money } = sdkTypes;
 
 const priceData = (price, intl) => {
   if (price && price.currency === config.currency) {
@@ -368,7 +369,9 @@ export class ListingPageComponent extends Component {
     // banned or deleted display names for the function
     const authorDisplayName = userDisplayNameAsString(ensuredAuthor, '');
 
-    const { formattedPrice, priceTitle } = priceData(price, intl);
+    const {key: priceType, value: {amount, currency}} = getLowestPrice(currentListing);
+
+    const { formattedPrice, priceTitle } = priceData(amount && currency ? new Money(amount, currency) : null, intl);
 
     const handleBookingSubmit = values => {
       const isCurrentlyClosed = currentListing.attributes.state === LISTING_STATE_CLOSED;
@@ -477,6 +480,7 @@ export class ListingPageComponent extends Component {
                     hostLink={hostLink}
                     showContactUser={showContactUser}
                     onContactUser={this.onContactUser}
+                    priceType={priceType}
                   />
 
                   <SectionCapacity publicData={publicData} />
