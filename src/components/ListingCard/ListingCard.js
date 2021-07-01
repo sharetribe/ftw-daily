@@ -5,14 +5,16 @@ import classNames from 'classnames';
 import { lazyLoadWithDimensions } from '../../util/contextHelpers';
 import { LINE_ITEM_DAY, LINE_ITEM_UNITS, propTypes } from '../../util/types';
 import { formatMoney } from '../../util/currency';
-import { ensureListing, ensureUser } from '../../util/data';
+import { ensureListing, ensureUser, getLowestPrice } from '../../util/data';
 import { richText } from '../../util/richText';
 import { createSlug } from '../../util/urlHelpers';
 import config from '../../config';
 import { NamedLink, ResponsiveImage } from '../../components';
 
 import css from './ListingCard.module.css';
+import { types as sdkTypes } from '../../util/sdkLoader';
 
+const { Money } = sdkTypes;
 const MIN_LENGTH_FOR_LONG_WORDS = 10;
 
 const priceData = (price, intl) => {
@@ -53,18 +55,21 @@ export const ListingCardComponent = props => {
   const firstImage =
     currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
 
-  const { formattedPrice, priceTitle } = priceData(price, intl);
+  const {key: priceType, value: {amount, currency}} = getLowestPrice(listing);
 
-  const unitType = publicData.unitType || config.fallbackUnitType;
+  const { formattedPrice, priceTitle } = priceData(amount && currency ? new Money(amount, currency) : null, intl);
 
-  const isHourly = unitType === LINE_ITEM_UNITS;
-  const isDaily = unitType === LINE_ITEM_DAY;
+  // const unitType = publicData.unitType || config.fallbackUnitType;
 
-  const unitTranslationKey = isHourly
-    ? 'ListingCard.perHour'
-    : isDaily
-    ? 'ListingCard.perDay'
-    : 'ListingCard.perUnit';
+  // const isHourly = unitType === LINE_ITEM_UNITS;
+  // const isDaily = unitType === LINE_ITEM_DAY;
+
+  const unitTranslationKey = `ListingCard.${priceType}`;
+  // isHourly
+  //   ? 'ListingCard.perHour'
+  //   : isDaily
+  //   ? 'ListingCard.perDay'
+  //   : 'ListingCard.perUnit';
 
   return (
     <NamedLink className={classes} name="ListingPage" params={{ id, slug }}>

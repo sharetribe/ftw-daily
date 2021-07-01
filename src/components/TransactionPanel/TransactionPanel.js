@@ -322,7 +322,7 @@ export class TransactionPanelComponent extends Component {
                         currentTransaction.attributes.protectedData &&
                         currentTransaction.attributes.protectedData.type;
 
-    const {amount, currency} = bookingType !== HOURLY_PRICE && publicData[bookingType] ? publicData[bookingType] : price;
+    const {amount, currency} = (bookingType !== HOURLY_PRICE ? publicData[bookingType] : price) || {};
     let key = 'perHour';
     switch(bookingType){
       case DAILY_PRICE:
@@ -335,7 +335,7 @@ export class TransactionPanelComponent extends Component {
         key = 'perMonth';
         break;
     }
-    const bookingSubTitle = `${formatMoney(intl, new Money(amount, currency))} ${intl.formatMessage({ id: `TransactionPanel.${key}` })}`;
+    const bookingSubTitle = amount && currency ? `${formatMoney(intl, new Money(amount, currency))} ${intl.formatMessage({ id: `TransactionPanel.${key}` })}` : '';
 
     const firstImage =
       currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;

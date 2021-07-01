@@ -6,18 +6,28 @@ import classNames from 'classnames';
 import config from '../../config';
 import { propTypes } from '../../util/types';
 import { formatMoney } from '../../util/currency';
-import { ensureListing } from '../../util/data';
+import { ensureListing, getLowestPrice } from '../../util/data';
 import { ResponsiveImage } from '../../components';
 
 import css from './SearchMapInfoCard.module.css';
+import { types as sdkTypes } from '../../util/sdkLoader';
+
+const { Money } = sdkTypes;
 
 // ListingCard is the listing info without overlayview or carousel controls
 const ListingCard = props => {
   const { className, clickHandler, intl, isInCarousel, listing, urlToListing } = props;
 
-  const { title, price } = listing.attributes;
-  const formattedPrice =
-    price && price.currency === config.currency ? formatMoney(intl, price) : price.currency;
+  const { title } = listing.attributes;
+  // const formattedPrice =
+  //   price && price.currency === config.currency ? formatMoney(intl, price) : price.currency;
+
+  const {key: priceType, value: {amount, currency}} = getLowestPrice(listing);
+
+  const formattedPrice = amount && currency && currency === config.currency ? formatMoney(intl, new Money(amount, currency)) : config.currency;
+
+  const unitTranslation = amount && currency ? ` / ${intl.formatMessage({id: `SearchMapInfoCard.${priceType}`})}` : '';
+
   const firstImage = listing.images && listing.images.length > 0 ? listing.images[0] : null;
 
   // listing card anchor needs sometimes inherited border radius.
@@ -57,7 +67,7 @@ const ListingCard = props => {
           </div>
         </div>
         <div className={classNames(css.info, { [css.borderRadiusInheritBottom]: !isInCarousel })}>
-          <div className={css.price}>{formattedPrice}</div>
+          <div className={css.price}>{formattedPrice}{unitTranslation}</div>
           <div className={css.name}>{title}</div>
         </div>
       </div>
