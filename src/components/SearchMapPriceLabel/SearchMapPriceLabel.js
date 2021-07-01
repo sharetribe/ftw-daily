@@ -4,10 +4,13 @@ import { injectIntl, intlShape } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import { formatMoney } from '../../util/currency';
-import { ensureListing } from '../../util/data';
+import { ensureListing, getLowestPrice } from '../../util/data';
 import config from '../../config';
 
 import css from './SearchMapPriceLabel.module.css';
+import { types as sdkTypes } from '../../util/sdkLoader';
+
+const { Money } = sdkTypes;
 
 class SearchMapPriceLabel extends Component {
   shouldComponentUpdate(nextProps) {
@@ -25,20 +28,28 @@ class SearchMapPriceLabel extends Component {
   render() {
     const { className, rootClassName, intl, listing, onListingClicked, isActive } = this.props;
     const currentListing = ensureListing(listing);
-    const { price } = currentListing.attributes;
+    // const { price } = currentListing.attributes;
 
     // Create formatted price if currency is known or alternatively show just the unknown currency.
-    const formattedPrice =
-      price && price.currency === config.currency ? formatMoney(intl, price) : price.currency;
+    // const formattedPrice =
+    //   price && price.currency === config.currency ? formatMoney(intl, price) : price.currency;
+
+    const {key: priceType, value: {amount, currency}} = getLowestPrice(listing);
+
+    const formattedPrice = amount && currency && currency === config.currency ? formatMoney(intl, new Money(amount, currency)) : config.currency;
+  
+    const unitTranslation = amount && currency ? ` / ${intl.formatMessage({id: `SearchMapPriceLabel.${priceType}`})}` : '';
 
     const classes = classNames(rootClassName || css.root, className);
     const priceLabelClasses = classNames(css.priceLabel, { [css.priceLabelActive]: isActive });
     const caretClasses = classNames(css.caret, { [css.caretActive]: isActive });
 
+
+
     return (
       <button className={classes} onClick={() => onListingClicked(currentListing)}>
         <div className={css.caretShadow} />
-        <div className={priceLabelClasses}>{formattedPrice}</div>
+        <div className={priceLabelClasses}>{formattedPrice}{unitTranslation}</div>
         <div className={caretClasses} />
       </button>
     );

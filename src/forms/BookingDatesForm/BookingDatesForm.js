@@ -81,16 +81,16 @@ export class BookingDatesFormComponent extends Component {
     const { rootClassName, className, price: unitPrice, discount, ...rest } = this.props;
     const classes = classNames(rootClassName || css.root, className);
 
-    if (!unitPrice) {
-      return (
-        <div className={classes}>
-          <p className={css.error}>
-            <FormattedMessage id="BookingDatesForm.listingPriceMissing" />
-          </p>
-        </div>
-      );
-    }
-    if (unitPrice.currency !== config.currency) {
+    // if (!unitPrice) {
+    //   return (
+    //     <div className={classes}>
+    //       <p className={css.error}>
+    //         <FormattedMessage id="BookingDatesForm.listingPriceMissing" />
+    //       </p>
+    //     </div>
+    //   );
+    // }
+    if (unitPrice && unitPrice.currency !== config.currency) {
       return (
         <div className={classes}>
           <p className={css.error}>

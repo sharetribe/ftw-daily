@@ -425,7 +425,7 @@ export const getAvailablePrices = listing => {
   const {publicData = {}, price} = listing && listing.attributes || {};
 
   return [
-    {key: HOURLY_PRICE, value: price},
+    ...(price ? [{key: HOURLY_PRICE, value: price}] : []),
     ...additionalPrices
       .filter(key => publicData[key])
       .map(key => ({key, value: publicData[key]}))
@@ -441,4 +441,9 @@ export const getTypeDuration = bookingType => {
     default:
       return null;
   }
+}
+
+export const getLowestPrice = listing => {
+  const result = getAvailablePrices(listing).find(({value}) => !!value);
+  return result || {value: {}}
 }

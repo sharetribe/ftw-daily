@@ -3,10 +3,10 @@ import { Form as FinalForm, FormSpy } from 'react-final-form';
 import { formatMoney } from '../../util/currency';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { Form, FieldRadioButton } from '../../components';
-import { getAvailablePrices } from '../../util/data';
-import { 
-  HOURLY_PRICE,
-} from '../../util/types';
+import { getAvailablePrices, getLowestPrice } from '../../util/data';
+// import { 
+//   HOURLY_PRICE,
+// } from '../../util/types';
 
 import css from './BookingTypes.module.css';
 
@@ -21,12 +21,15 @@ export default class BookingTypes extends Component {
 
     const prices = getAvailablePrices(listing);
 
+    const { key } = getLowestPrice(listing);
+    const initialValues = {bookingType: key || null};
+
     return (  
       <div>
         <FinalForm
         // {...rest}
         onSubmit={() => {}}
-        initialValues={{bookingType: HOURLY_PRICE}}
+        initialValues={initialValues}
         render={fieldRenderProps => {
           const {
             handleSubmit,

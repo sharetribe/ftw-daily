@@ -14,7 +14,7 @@ import {
   propTypes,
 } from '../../util/types';
 import { formatMoney } from '../../util/currency';
-import { ensureOwnListing } from '../../util/data';
+import { ensureOwnListing, getLowestPrice } from '../../util/data';
 import {
   LISTING_PAGE_PENDING_APPROVAL_VARIANT,
   LISTING_PAGE_DRAFT_VARIANT,
@@ -38,6 +38,9 @@ import {
 import MenuIcon from './MenuIcon';
 import Overlay from './Overlay';
 import css from './ManageListingCard.module.css';
+import { types as sdkTypes } from '../../util/sdkLoader';
+
+const { Money } = sdkTypes;
 
 // Menu content needs the same padding
 const MENU_CONTENT_OFFSET = -12;
@@ -140,7 +143,7 @@ export const ManageListingCardComponent = props => {
     [css.menuItemDisabled]: !!actionsInProgressListingId,
   });
 
-  const { formattedPrice, priceTitle } = priceData(price, intl);
+  // const { formattedPrice, priceTitle } = priceData(price, intl);
 
   const hasError = hasOpeningError || hasClosingError;
   const thisListingInProgress =
@@ -164,15 +167,21 @@ export const ManageListingCardComponent = props => {
     ? LISTING_PAGE_PARAM_TYPE_DRAFT
     : LISTING_PAGE_PARAM_TYPE_EDIT;
 
-  const unitType = publicData.unitType || config.fallbackUnitType;
-  const isHourly = unitType === LINE_ITEM_UNITS;
-  const isDaily = unitType === LINE_ITEM_DAY;
+  const {key: priceType, value: {amount, currency}} = getLowestPrice(listing);
 
-  const unitTranslationKey = isHourly
-    ? 'ManageListingCard.perHour'
-    : isDaily
-    ? 'ManageListingCard.perDay'
-    : 'ManageListingCard.perUnit';
+  const { formattedPrice, priceTitle } = priceData(amount && currency ? new Money(amount, currency) : null, intl);
+
+  const unitTranslationKey = `ManageListingCard.${priceType}`;
+
+  // const unitType = publicData.unitType || config.fallbackUnitType;
+  // const isHourly = unitType === LINE_ITEM_UNITS;
+  // const isDaily = unitType === LINE_ITEM_DAY;
+
+  // const unitTranslationKey = isHourly
+  //   ? 'ManageListingCard.perHour'
+  //   : isDaily
+  //   ? 'ManageListingCard.perDay'
+  //   : 'ManageListingCard.perUnit';
 
   return (
     <div className={classes}>

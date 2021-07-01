@@ -20,6 +20,15 @@ import css from './EditListingPricingForm.module.css';
 
 const { Money } = sdkTypes;
 
+const hasSelectedPrice = values => {
+  return [
+    HOURLY_PRICE,
+    DAILY_PRICE,
+    WEEKLY_PRICE,
+    MONTHLY_PRICE
+  ].some(key => !!values[key]);
+}
+
 export const EditListingPricingFormComponent = props => (
   <FinalForm
     {...props}
@@ -37,6 +46,7 @@ export const EditListingPricingFormComponent = props => (
         updateInProgress,
         fetchErrors,
         fetchListingProgress,
+        values,
         values: {
           discount
         },
@@ -104,7 +114,7 @@ export const EditListingPricingFormComponent = props => (
       const classes = classNames(css.root, className);
       const submitReady = (updated && pristine) || ready;
       const submitInProgress = updateInProgress;
-      const submitDisabled = invalid || disabled || submitInProgress || fetchListingProgress;
+      const submitDisabled = !hasSelectedPrice(values) || invalid || disabled || submitInProgress || fetchListingProgress;
       const inputsDisabled = fetchListingProgress;
       const { updateListingError, showListingsError } = fetchErrors || {};
 
@@ -148,7 +158,6 @@ export const EditListingPricingFormComponent = props => (
             placeholder={pricePlaceholder}
             currencyConfig={config.currencyConfig}
             disabled={inputsDisabled}
-            validate={priceValidators}
           />
 
           <FieldCurrencyInput
@@ -181,10 +190,10 @@ export const EditListingPricingFormComponent = props => (
             currencyConfig={config.currencyConfig}
           />
 
-          <h3>{intl.formatMessage({ id: 'EditListingPricingForm.discountHeader' })}</h3>
-          <p className={css.discountDescription}>{intl.formatMessage({ id: 'EditListingPricingForm.discountSubHeader' })}</p>
+          {/* <h3>{intl.formatMessage({ id: 'EditListingPricingForm.discountHeader' })}</h3>
+          <p className={css.discountDescription}>{intl.formatMessage({ id: 'EditListingPricingForm.discountSubHeader' })}</p> */}
 
-          <div className={css.discountContainer}>
+          {/* <div className={css.discountContainer}>
             <FieldTextInput
               id="discount.amount"
               name="discount.amount"
@@ -220,7 +229,7 @@ export const EditListingPricingFormComponent = props => (
                 <option value={key}>{label}</option>
               ))}
             </FieldSelect>
-          </div>
+          </div> */}
 
           <Button
             className={css.submitButton}
