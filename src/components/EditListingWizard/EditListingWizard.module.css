@@ -47,7 +47,7 @@
   }
 
   @media (--viewportLargeWithPaddings) {
-    padding: 128px 0 82px calc((100% - 1056px) / 2);
+    padding: 128px 0 82px calc((100% - 1066px) / 2);
   }
 }
 
@@ -90,7 +90,7 @@
   }
 
   @media (--viewportLargeWithPaddings) {
-    padding: 88px 0 82px 59px;
+    padding: 88px calc((100% - 1056px) / 2) 82px 59px;
   }
 }
 
