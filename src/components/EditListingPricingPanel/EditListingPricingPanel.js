@@ -17,7 +17,7 @@ import { EditListingPricingForm } from '../../forms';
 import { ensureOwnListing } from '../../util/data';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import config from '../../config';
-import { 
+import {
   createDefaultPlan
 } from '../../util/data';
 
@@ -115,10 +115,10 @@ const EditListingPricingPanel = props => {
   }
 
   const updateAvailabilityMaybe = values => {
-    return (values[WEEKLY_PRICE] && !initialValues[WEEKLY_PRICE]) || 
+    return (values[WEEKLY_PRICE] && !initialValues[WEEKLY_PRICE]) ||
            (values[MONTHLY_PRICE] && !initialValues[MONTHLY_PRICE])
   }
-  
+
   const priceCurrencyValid = price instanceof Money ? price.currency === config.currency : true;
 
   const form = priceCurrencyValid ? (
@@ -133,8 +133,7 @@ const EditListingPricingPanel = props => {
         onSubmit({
           price,
           publicData: {
-            [LINE_ITEM_DAY]: null,
-            [LINE_ITEM_UNITS]: null,
+            unitType: null, //remove unittype field from previous realisation
             discount,
             ...managePrices(values)
           },

@@ -55,7 +55,6 @@ export const ListingCardComponent = props => {
 
   const { formattedPrice, priceTitle } = priceData(price, intl);
 
-
   const unitType = publicData.unitType || config.fallbackUnitType;
 
   const isHourly = unitType === LINE_ITEM_UNITS;
