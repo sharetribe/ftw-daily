@@ -23,6 +23,7 @@ import {
   ensureOwnListing,
   ensureUser,
   userDisplayNameAsString,
+  getLowestPrice
 } from '../../util/data';
 import { timestampToDate, calculateQuantityFromHours } from '../../util/dates';
 import { richText } from '../../util/richText';
@@ -43,7 +44,7 @@ import {
 import moment from 'moment';
 import { TopbarContainer, NotFoundPage } from '../../containers';
 
-import { 
+import {
   sendEnquiry,
   loadData,
   setInitialValues,
@@ -64,7 +65,6 @@ import SectionMapMaybe from './SectionMapMaybe';
 import SectionCapacity from './SectionCapacity';
 import SectionSeats from './SectionSeats';
 import css from './ListingPage.module.css';
-import {getLowestPrice} from '../../util/data';
 
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
 
@@ -272,7 +272,7 @@ export class ListingPageComponent extends Component {
       availabilityPlan = null,
       publicData,
     } = currentListing.attributes;
-    
+
     const richTitle = (
       <span>
         {richText(title, {
@@ -372,6 +372,7 @@ export class ListingPageComponent extends Component {
     const {key: priceType, value: {amount, currency}} = getLowestPrice(currentListing);
 
     const { formattedPrice, priceTitle } = priceData(amount && currency ? new Money(amount, currency) : null, intl);
+
 
     const handleBookingSubmit = values => {
       const isCurrentlyClosed = currentListing.attributes.state === LISTING_STATE_CLOSED;
