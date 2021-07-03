@@ -16,19 +16,23 @@ import {
   MONTHLY_PRICE,
 } from '../../util/types';
 import {
-  getTypeDuration
+  getTypeDuration,
+  getLowestPrice
 } from '../../util/data';
 import { formatMoney } from '../../util/currency';
 import { parse, stringify } from '../../util/urlHelpers';
 import config from '../../config';
 import { ModalInMobile, Button, BookingTypes } from '../../components';
 import { BookingDatesForm, BookingTimeForm } from '../../forms';
+import { types as sdkTypes } from '../../util/sdkLoader';
+
 
 import css from './BookingPanel.module.css';
 
 // This defines when ModalInMobile shows content as Modal
 const MODAL_BREAKPOINT = 1023;
 const TODAY = new Date();
+const { Money } = sdkTypes;
 
 const priceData = (price, intl) => {
   if (price && price.currency === config.currency) {
@@ -102,7 +106,12 @@ const BookingPanel = props => {
   const timeZone = availabilityPlan && availabilityPlan.timezone;
   const isClosed = state && state === LISTING_STATE_CLOSED;
   const showClosedListingHelpText = listing.id && isClosed;
-  const { formattedPrice, priceTitle } = priceData(price, intl);
+  // const { formattedPrice, priceTitle } = priceData(price, intl);
+
+ const {key: priceType, value: {amount, currency}} = getLowestPrice(listing);
+
+  const { formattedPrice, priceTitle } = priceData(amount && currency ? new Money(amount, currency) : null, intl);
+  const unitTranslationKey = `BookingPanel.${priceType}`;
   const isBook = !!parse(location.search).book;
 
   const showBookingForm = !!state && !isClosed;
@@ -123,19 +132,19 @@ const BookingPanel = props => {
     ? intl.formatMessage({ id: 'BookingPanel.subTitleClosedListing' })
     : null;
 
-  let unitTranslationKey = 'BookingPanel.perHour';
+  // let unitTranslationKey = 'BookingPanel.perHour';
 
-  switch(bookingType){
-    case DAILY_PRICE:
-      unitTranslationKey = 'BookingPanel.perDay';
-      break;
-    case WEEKLY_PRICE:
-      unitTranslationKey = 'BookingPanel.perWeek';
-      break;
-    case MONTHLY_PRICE:
-      unitTranslationKey = 'BookingPanel.perMonth';
-      break;
-  }
+  // switch(bookingType){
+  //   case DAILY_PRICE:
+  //     unitTranslationKey = 'BookingPanel.perDay';
+  //     break;
+  //   case WEEKLY_PRICE:
+  //     unitTranslationKey = 'BookingPanel.perWeek';
+  //     break;
+  //   case MONTHLY_PRICE:
+  //     unitTranslationKey = 'BookingPanel.perMonth';
+  //     break;
+  // }
 
   const classes = classNames(rootClassName || css.root, className);
   const titleClasses = classNames(titleClassName || css.bookingTitle);
