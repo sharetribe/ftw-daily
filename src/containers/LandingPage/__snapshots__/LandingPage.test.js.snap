@@ -9,7 +9,7 @@ exports[`LandingPage matches snapshot 1`] = `
     Array [
       Object {
         "height": 630,
-        "url": "saunatimeFacebook-1200x630.jpg",
+        "url": "CottageDaysFacebook-1200x630.jpg",
         "width": 1200,
       },
     ]
@@ -20,7 +20,7 @@ exports[`LandingPage matches snapshot 1`] = `
       "@type": "WebPage",
       "description": "LandingPage.schemaDescription",
       "image": Array [
-        "http://localhost:3000saunatimeFacebook-1200x630.jpg",
+        "http://localhost:3000CottageDaysFacebook-1200x630.jpg",
       ],
       "name": "LandingPage.schemaTitle",
     }
@@ -31,7 +31,7 @@ exports[`LandingPage matches snapshot 1`] = `
     Array [
       Object {
         "height": 314,
-        "url": "http://localhost:3000saunatimeTwitter-600x314.jpg",
+        "url": "http://localhost:3000CottageDaysTwitter-600x314.jpg",
         "width": 600,
       },
     ]

@@ -1,6 +1,6 @@
 {
-  "name": "Saunatime",
-  "short_name": "Saunatime",
+  "name": "CottageDays",
+  "short_name": "CottageDays",
   "start_url": "/",
   "display": "standalone",
   "theme_color": "#C0392B",

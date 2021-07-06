@@ -109,8 +109,8 @@ export const filters = [
       // to make filter customizations a bit easier.
       options: [
         {
-          key: 'towels',
-          label: 'Towels',
+          key: 'terrace',
+          label: 'terrace',
         },
         {
           key: 'bathroom',
@@ -121,24 +121,24 @@ export const filters = [
           label: 'Swimming pool',
         },
         {
-          key: 'own_drinks',
-          label: 'Own drinks allowed',
-        },
-        {
           key: 'jacuzzi',
-          label: 'Jacuzzi',
+          label: 'jacuzzi',
         },
         {
-          key: 'audiovisual_entertainment',
-          label: 'Audiovisual entertainment',
+          key: 'lake_view',
+          label: 'lake_view',
+        },
+        {
+          key: 'sea_view',
+          label: 'sea_view',
         },
         {
           key: 'barbeque',
           label: 'Barbeque',
         },
         {
-          key: 'own_food_allowed',
-          label: 'Own food allowed',
+          key: 'fireplace',
+          label: 'fireplace',
         },
       ],
     },
