@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { bool, func, object, shape, string } from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from '../../util/reactIntl';
@@ -73,6 +73,19 @@ const EditListingAvailabilityPanel = props => {
 
   const daysAvailabilityDisabled = !!(publicData[WEEKLY_PRICE] || publicData[MONTHLY_PRICE]);
 
+  const [initialValues, setInitialValues] = useState(null)
+
+  useEffect(() => {
+    if(currentListing && currentListing.id && currentListing.id.uuid && !initialValues) {
+      setInitialValues({
+        availabilityPlan,
+        daysAvailability: getDaysAvailability(availabilityPlan)
+      })
+    }
+
+  }, [currentListing])
+  
+
   return (
     <div className={classes}>
       <h1 className={css.title}>
@@ -88,10 +101,7 @@ const EditListingAvailabilityPanel = props => {
       <EditListingAvailabilityForm
         className={css.form}
         listingId={currentListing.id}
-        initialValues={{
-          availabilityPlan,
-          daysAvailability: getDaysAvailability(availabilityPlan)
-        }}
+        initialValues={initialValues || {}}
         availability={availability}
         availabilityPlan={availabilityPlan}
         onSubmit={values => {

@@ -5,7 +5,7 @@ import debounce from 'lodash/debounce';
 import { Field, Form as FinalForm, FormSpy } from 'react-final-form';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 
-import { Form, RangeSlider } from '../../components';
+import { Form, RangeSlider, FieldRadioButton } from '../../components';
 import css from './PriceFilterForm.module.css';
 
 const DEBOUNCE_WAIT_TIME = 400;
@@ -106,6 +106,11 @@ const PriceFilterFormComponent = props => {
         const cancel = intl.formatMessage({ id: 'PriceFilterForm.cancel' });
         const submit = intl.formatMessage({ id: 'PriceFilterForm.submit' });
 
+        const pricePerHourLabel = intl.formatMessage({ id: 'PriceFilterForm.pricePerHourLabel' });
+        const pricePerDayLabel = intl.formatMessage({ id: 'PriceFilterForm.pricePerDayLabel' });
+        const pricePerWeekLabel = intl.formatMessage({ id: 'PriceFilterForm.pricePerWeekLabel' });
+        const pricePerMonthLabel = intl.formatMessage({ id: 'PriceFilterForm.pricePerMonthLabel' });
+
         const classes = classNames(css.root, {
           [css.popup]: showAsPopup,
           [css.isOpenAsPopup]: showAsPopup && isOpen,
@@ -113,14 +118,64 @@ const PriceFilterFormComponent = props => {
           [css.isOpen]: !showAsPopup && isOpen,
         });
 
+        const onChangeRadio = (name, value) => {
+
+          if (!liveEdit){
+            return {};
+          }
+          const { minPrice, maxPrice, ...restValues } = values;
+          return {onClick: () => onChange({
+            minPrice: minPrice === '' ? rest.min : minPrice,
+            maxPrice: maxPrice === '' ? rest.max : maxPrice,
+            ...restValues,
+            [name]: value
+          })};
+        };
+
+
         return (
           <Form
             className={classes}
             onSubmit={handleSubmit}
             tabIndex="0"
             contentRef={contentRef}
-            style={{ minWidth: '300px', ...style }}
+            style={{ minWidth: '200px', ...style }}
           >
+            <div className={css.switherWrapper}>
+              <FieldRadioButton
+                className={css.switherItem}
+                id="pricePerHour"
+                name="priceType"
+                label={pricePerHourLabel}
+                value="price"
+                labelClassName={css.labelClassName}
+              />
+              <FieldRadioButton
+                className={css.switherItem}
+                id="pricePerDay"
+                name="priceType"
+                label={pricePerDayLabel}
+                value="pricePerDay"
+                labelClassName={css.labelClassName}
+              />
+              <FieldRadioButton
+                className={css.switherItem}
+                id="pricePerWeek"
+                name="priceType"
+                label={pricePerWeekLabel}
+                value="pricePerWeek"
+                labelClassName={css.labelClassName}
+              />
+              <FieldRadioButton
+                className={css.switherItem}
+                id="pricePerMonth"
+                name="priceType"
+                label={pricePerMonthLabel}
+                value="pricePerMonth"
+                labelClassName={css.labelClassName}
+              />
+            </div>
+
             <div className={css.contentWrapper}>
               <span className={css.label}>
                 <FormattedMessage id="PriceFilterForm.label" />
@@ -153,6 +208,7 @@ const PriceFilterFormComponent = props => {
                 />
               </div>
             </div>
+
 
             <div className={css.sliderWrapper}>
               <RangeSlider
