@@ -209,3 +209,20 @@
     transition: width var(--transitionStyleButton);
   }
 }
+
+.switherWrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.switherItem {
+  width: 100%;
+  
+  @media (--viewportSmall) {
+    width: 50%;
+  }
+
+  @media (--viewportLarge) {
+    width: 100%;
+  }
+}

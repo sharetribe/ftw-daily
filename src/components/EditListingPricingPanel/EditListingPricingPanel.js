@@ -109,7 +109,8 @@ const EditListingPricingPanel = props => {
 
       return {
         ...acc,
-        [p]: amount ? {amount, currency} : null
+        [p]: amount ? {amount, currency} : null,
+        [`${p}Filter`]: amount ? amount/100 : null
       }
     }, {});
   }
