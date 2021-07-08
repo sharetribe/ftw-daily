@@ -123,27 +123,29 @@ class MainPanel extends Component {
         // We should always trust urlQueryParams with those.
         const { address, bounds } = urlQueryParams;
         const mergedQueryParams = { ...urlQueryParams, ...prevState.currentQueryParams };
-        const { price } = updatedURLParams || {};
 
-        let selectedPrice;
+        // Feature #51455
+        // const { price } = updatedURLParams || {};
 
-        if (price){
-          selectedPrice = typeof price === 'string' ? 
-                          {price} :
-                          Object.keys(price).reduce((o, key) => ({...o, [`pub_${key}`]: price[key]}), {});
-        } else if (price === null) {
-          selectedPrice = null;
-        }
+        // let selectedPrice;
 
-        const emptyPrices = {
-          price: null,
-          pub_pricePerDay: null,
-          pub_pricePerWeek: null,
-          pub_pricePerMonth: null
-        };
-        const priceMaybe = selectedPrice || selectedPrice === null ?
-                           {...emptyPrices, ...(selectedPrice || {})} :
-                           {};
+        // if (price){
+        //   selectedPrice = typeof price === 'string' ? 
+        //                   {price} :
+        //                   Object.keys(price).reduce((o, key) => ({...o, [`pub_${key}`]: price[key]}), {});
+        // } else if (price === null) {
+        //   selectedPrice = null;
+        // }
+
+        // const emptyPrices = {
+        //   price: null,
+        //   pub_pricePerDay: null,
+        //   pub_pricePerWeek: null,
+        //   pub_pricePerMonth: null
+        // };
+        // const priceMaybe = selectedPrice || selectedPrice === null ?
+        //                    {...emptyPrices, ...(selectedPrice || {})} :
+        //                    {};
 
 
         // Since we have multiple filters with the same query param, 'pub_category'
@@ -157,7 +159,9 @@ class MainPanel extends Component {
           }
         }
         return {
-          currentQueryParams: {...mergedQueryParams, ...updatedURLParams, ...priceMaybe, address, bounds },
+          currentQueryParams: { ...mergedQueryParams, ...updatedURLParams, address, bounds },
+          // Feature #51455
+          // currentQueryParams: {...mergedQueryParams, ...updatedURLParams, ...priceMaybe, address, bounds },
         };
       };
 
