@@ -32,9 +32,15 @@ const parse = priceRange => {
 // Format value, which should look like { minPrice, maxPrice }
 const format = (range, queryParamName) => {
   const { minPrice, maxPrice } = range || {};
+
+  // Feature #51455
+  // const { minPrice, maxPrice, priceType } = range || {};
+
   // Note: we compare to null, because 0 as minPrice is falsy in comparisons.
   const value = minPrice != null && maxPrice != null ? `${minPrice},${maxPrice}` : null;
   return { [queryParamName]: value };
+  // Feature #51455
+  // return { [queryParamName]: !priceType || priceType === 'price' ? value : {[priceType]: value} };
 };
 
 class PriceFilterPlainComponent extends Component {
@@ -83,6 +89,10 @@ class PriceFilterPlainComponent extends Component {
     const initialPrice = initialValues ? parse(initialValues[priceQueryParam]) : {};
     const { minPrice, maxPrice } = initialPrice || {};
 
+    // Feature #51455
+    // const initialPrice = initialValues ? parse(initialValues[priceQueryParam]) : {};
+    // const { minPrice, maxPrice } = initialValues || {};
+
     const hasValue = value => value != null;
     const hasInitialValues = initialValues && hasValue(minPrice) && hasValue(maxPrice);
 
@@ -113,6 +123,10 @@ class PriceFilterPlainComponent extends Component {
           <PriceFilterForm
             id={id}
             initialValues={hasInitialValues ? initialPrice : { minPrice: min, maxPrice: max }}
+
+            // Feature #51455
+            // initialValues={hasInitialValues ? initialValues : { minPrice: min, maxPrice: max }}
+
             onChange={this.handleChange}
             intl={intl}
             contentRef={node => {

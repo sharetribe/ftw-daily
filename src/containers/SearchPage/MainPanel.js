@@ -124,6 +124,30 @@ class MainPanel extends Component {
         const { address, bounds } = urlQueryParams;
         const mergedQueryParams = { ...urlQueryParams, ...prevState.currentQueryParams };
 
+        // Feature #51455
+        // const { price } = updatedURLParams || {};
+
+        // let selectedPrice;
+
+        // if (price){
+        //   selectedPrice = typeof price === 'string' ? 
+        //                   {price} :
+        //                   Object.keys(price).reduce((o, key) => ({...o, [`pub_${key}`]: price[key]}), {});
+        // } else if (price === null) {
+        //   selectedPrice = null;
+        // }
+
+        // const emptyPrices = {
+        //   price: null,
+        //   pub_pricePerDay: null,
+        //   pub_pricePerWeek: null,
+        //   pub_pricePerMonth: null
+        // };
+        // const priceMaybe = selectedPrice || selectedPrice === null ?
+        //                    {...emptyPrices, ...(selectedPrice || {})} :
+        //                    {};
+
+
         // Since we have multiple filters with the same query param, 'pub_category'
         // we dont want to lose the prev ones, we want all of them
         const pc = 'pub_category';
@@ -136,6 +160,8 @@ class MainPanel extends Component {
         }
         return {
           currentQueryParams: { ...mergedQueryParams, ...updatedURLParams, address, bounds },
+          // Feature #51455
+          // currentQueryParams: {...mergedQueryParams, ...updatedURLParams, ...priceMaybe, address, bounds },
         };
       };
 
@@ -240,31 +266,6 @@ class MainPanel extends Component {
 
     return (
       <div className={classes}>
-        <SearchFiltersPrimary
-          className={css.searchFiltersPrimary}
-          sortByComponent={sortBy('desktop')}
-          listingsAreLoaded={listingsAreLoaded}
-          resultsCount={totalItems}
-          searchInProgress={searchInProgress}
-          searchListingsError={searchListingsError}
-          {...propsForSecondaryFiltersToggle}
-        >
-          {primaryFilters.map(config => {
-            return (
-              <FilterComponent
-                key={`SearchFiltersPrimary.${config.id}`}
-                idPrefix="SearchFiltersPrimary"
-                filterConfig={config}
-                urlQueryParams={urlQueryParams}
-                initialValues={this.initialValues}
-                getHandleChangedValueFn={this.getHandleChangedValueFn}
-                showAsPopup
-                contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
-                isCategory={!!config.config.isCategory}
-              />
-            );
-          })}
-        </SearchFiltersPrimary>
         <SearchFiltersMobile
           className={css.searchFiltersMobile}
           urlQueryParams={urlQueryParams}
@@ -296,6 +297,31 @@ class MainPanel extends Component {
             );
           })}
         </SearchFiltersMobile>
+        <SearchFiltersPrimary
+          className={css.searchFiltersPrimary}
+          sortByComponent={sortBy('desktop')}
+          listingsAreLoaded={listingsAreLoaded}
+          resultsCount={totalItems}
+          searchInProgress={searchInProgress}
+          searchListingsError={searchListingsError}
+          {...propsForSecondaryFiltersToggle}
+        >
+          {primaryFilters.map(config => {
+            return (
+              <FilterComponent
+                key={`SearchFiltersPrimary.${config.id}`}
+                idPrefix="SearchFiltersPrimary"
+                filterConfig={config}
+                urlQueryParams={urlQueryParams}
+                initialValues={this.initialValues}
+                getHandleChangedValueFn={this.getHandleChangedValueFn}
+                showAsPopup
+                contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
+                isCategory={!!config.config.isCategory}
+              />
+            );
+          })}
+        </SearchFiltersPrimary>
         {isSecondaryFiltersOpen ? (
           <div className={classNames(css.searchFiltersPanel)}>
             <SearchFiltersSecondary
