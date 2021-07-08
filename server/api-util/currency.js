@@ -62,6 +62,11 @@ const convertDivisorToDecimal = divisor => {
   }
 };
 
+// Check if the value is a number
+const isNumber = value => {
+  return typeof value === 'number' && !isNaN(value);
+};
+
 // Detect if the given value is a goog.math.Long object
 // See: https://google.github.io/closure-library/api/goog.math.Long.html
 const isGoogleMathLong = value => {
