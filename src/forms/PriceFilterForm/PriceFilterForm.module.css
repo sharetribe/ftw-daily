@@ -48,7 +48,7 @@
 .contentWrapper {
   display: flex;
   flex-wrap: wrap;
-  max-width: 300px;
+  /* max-width: 300px; */
   padding-top: 5px;
   padding-bottom: 5px;
   margin-top: 0px;
@@ -75,6 +75,8 @@
 
 .inputsWrapper {
   display: flex;
+  justify-content: space-between;
+  width: 100%;
 
   @media (--viewportMedium) {
     padding-bottom: 5px;
@@ -83,7 +85,7 @@
 
 .minPrice {
   @apply --marketplaceSearchFilterSublabelFontStyles;
-  width: 48px;
+  width: 66px;
   text-align: center;
   border-bottom-color: var(--marketplaceColor);
   border-bottom-width: 3px;
@@ -101,7 +103,7 @@
 }
 .maxPrice {
   @apply --marketplaceSearchFilterSublabelFontStyles;
-  width: 48px;
+  width: 66px;
   text-align: center;
   border-bottom-color: var(--marketplaceColor);
   border-bottom-width: 3px;
@@ -120,6 +122,7 @@
 
 .priceSeparator {
   margin: 4px 8px 0 8px;
+  display: none;
 }
 
 @media (--viewportMedium) {
@@ -130,11 +133,11 @@
 
 .sliderWrapper {
   display: flex;
-  padding: 17px 0 25px 0;
+  padding: 10px 0 25px 0;
 }
 @media (--viewportMedium) {
   .sliderWrapper {
-    padding: 16px 0 24px 0;
+    padding: 6px 0 24px 0;
   }
 }
 
@@ -217,12 +220,4 @@
 
 .switherItem {
   width: 100%;
-  
-  @media (--viewportSmall) {
-    width: 50%;
-  }
-
-  @media (--viewportLarge) {
-    width: 100%;
-  }
 }
