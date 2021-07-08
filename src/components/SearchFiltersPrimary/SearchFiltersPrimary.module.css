@@ -22,11 +22,26 @@
 .searchOptions {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   /* margin-bottom: 24px; */
+
+  & > button {
+    width: 100%;
+    max-width: 125px;
+    max-height: 40px;
+    padding: 0;
+
+    margin-right: 8px;
+  }
+
+  & > :last-child {
+    max-height: 40px;
+  }
 }
 
 .searchOptions > div {
   margin-right: 8px;
+  margin-bottom: 8px;
 }
 
 .searchResultSummary, .catTxtDiv{
@@ -84,7 +99,7 @@
 
   display: inline-block;
   padding: 9px 16px 10px 16px;
-  margin-right: 8px;
+  /* margin-right: 8px; */
   width: auto;
   height: auto;
   min-height: 0;
