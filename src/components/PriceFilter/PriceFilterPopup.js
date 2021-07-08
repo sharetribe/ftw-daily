@@ -142,7 +142,6 @@ class PriceFilterPopup extends Component {
     const { minPrice, maxPrice } = initialValues || {};
     const hasValue = value => value != null;
     const hasInitialValues = initialValues && hasValue(minPrice) && hasValue(maxPrice);
-    console.log(initialValues)
     const currentLabel = hasInitialValues
       ? intl.formatMessage(
           { id: 'PriceFilter.labelSelectedButton' },
