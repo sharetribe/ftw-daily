@@ -73,18 +73,17 @@ const EditListingAvailabilityPanel = props => {
 
   const daysAvailabilityDisabled = !!(publicData[WEEKLY_PRICE] || publicData[MONTHLY_PRICE]);
 
-  // Feature #51455
-  // const [initialValues, setInitialValues] = useState(null)
+  const [initialValues, setInitialValues] = useState(null)
 
-  // useEffect(() => {
-  //   if(currentListing && currentListing.id && currentListing.id.uuid && !initialValues) {
-  //     setInitialValues({
-  //       availabilityPlan,
-  //       daysAvailability: getDaysAvailability(availabilityPlan)
-  //     })
-  //   }
+  useEffect(() => {
+    if(currentListing && currentListing.id && currentListing.id.uuid && !initialValues) {
+      setInitialValues({
+        availabilityPlan,
+        daysAvailability: getDaysAvailability(availabilityPlan)
+      })
+    }
 
-  // }, [currentListing])
+  }, [currentListing])
   
 
   return (
@@ -102,12 +101,7 @@ const EditListingAvailabilityPanel = props => {
       <EditListingAvailabilityForm
         className={css.form}
         listingId={currentListing.id}
-        initialValues={{
-          availabilityPlan,
-          daysAvailability: getDaysAvailability(availabilityPlan)
-        }}
-        // Feature #51455
-        // initialValues={initialValues || {}}
+        initialValues={initialValues || {}}
         availability={availability}
         availabilityPlan={availabilityPlan}
         onSubmit={values => {
