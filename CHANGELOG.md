@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [fix] Add missing helper: isNumber. Used when Number.MAX_SAFE_INTEGER is reached.
+  [#1453](https://github.com/sharetribe/ftw-daily/pull/1453)
 - [fix] minutesBetween: remove thrown an error on negative diff.
   [#1444](https://github.com/sharetribe/ftw-daily/pull/1444)
 - [fix] TransactionPanel: fix typo [#1451](https://github.com/sharetribe/ftw-daily/pull/1451)
