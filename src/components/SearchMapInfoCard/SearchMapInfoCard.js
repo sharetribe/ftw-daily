@@ -16,13 +16,13 @@ const { Money } = sdkTypes;
 
 // ListingCard is the listing info without overlayview or carousel controls
 const ListingCard = props => {
-  const { className, clickHandler, intl, isInCarousel, listing, urlToListing } = props;
+  const { className, clickHandler, intl, isInCarousel, listing, urlToListing, activePrice } = props;
 
   const { title } = listing.attributes;
   // const formattedPrice =
   //   price && price.currency === config.currency ? formatMoney(intl, price) : price.currency;
 
-  const {key: priceType, value: {amount, currency}} = getLowestPrice(listing);
+  const {key: priceType, value: {amount, currency}} = getLowestPrice(listing, activePrice);
 
   const formattedPrice = amount && currency && currency === config.currency ? formatMoney(intl, new Money(amount, currency)) : config.currency;
 
@@ -102,6 +102,7 @@ class SearchMapInfoCard extends Component {
       listings,
       createURLToListing,
       onListingInfoCardClicked,
+      activePrice
     } = this.props;
     const currentListing = ensureListing(listings[this.state.currentListingIndex]);
     const hasCarousel = listings.length > 1;
@@ -147,6 +148,7 @@ class SearchMapInfoCard extends Component {
           listing={currentListing}
           intl={intl}
           isInCarousel={hasCarousel}
+          activePrice={activePrice}
         />
         {pagination}
         <div className={caretClass} />

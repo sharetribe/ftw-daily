@@ -26,7 +26,7 @@ class SearchMapPriceLabel extends Component {
   }
 
   render() {
-    const { className, rootClassName, intl, listing, onListingClicked, isActive } = this.props;
+    const { className, rootClassName, intl, listing, onListingClicked, isActive, activePrice } = this.props;
     const currentListing = ensureListing(listing);
     // const { price } = currentListing.attributes;
 
@@ -34,7 +34,7 @@ class SearchMapPriceLabel extends Component {
     // const formattedPrice =
     //   price && price.currency === config.currency ? formatMoney(intl, price) : price.currency;
 
-    const {key: priceType, value: {amount, currency}} = getLowestPrice(listing);
+    const {key: priceType, value: {amount, currency}} = getLowestPrice(listing, activePrice);
 
     const formattedPrice = amount && currency && currency === config.currency ? formatMoney(intl, new Money(amount, currency)) : config.currency;
   
