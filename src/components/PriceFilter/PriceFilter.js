@@ -10,16 +10,16 @@ const getInitialValues = (params) => {
 
   const priceTypes = [
     'price',
-    'pub_pricePerDay',
-    'pub_pricePerWeek',
-    'pub_pricePerMonth',
+    'pub_pricePerDayFilter',
+    'pub_pricePerWeekFilter',
+    'pub_pricePerMonthFilter',
   ];
 
   const priceTypesEquals = {
     price: 'price',
-    pub_pricePerDay: 'pricePerDay',
-    pub_pricePerWeek: 'pricePerWeek',
-    pub_pricePerMonth: 'pricePerMonth',
+    pub_pricePerDayFilter: 'pricePerDayFilter',
+    pub_pricePerWeekFilter: 'pricePerWeekFilter',
+    pub_pricePerMonthFilter: 'pricePerMonthFilter',
   };
 
   const selectedPrice = priceTypes.find(p => !!params[p]);

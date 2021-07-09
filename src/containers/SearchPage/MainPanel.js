@@ -137,9 +137,9 @@ class MainPanel extends Component {
 
         const emptyPrices = {
           price: null,
-          pub_pricePerDay: null,
-          pub_pricePerWeek: null,
-          pub_pricePerMonth: null
+          pub_pricePerDayFilter: null,
+          pub_pricePerWeekFilter: null,
+          pub_pricePerMonthFilter: null
         };
         const priceMaybe = selectedPrice || selectedPrice === null ?
                            {...emptyPrices, ...(selectedPrice || {})} :

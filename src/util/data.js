@@ -443,7 +443,26 @@ export const getTypeDuration = bookingType => {
   }
 }
 
-export const getLowestPrice = listing => {
-  const result = getAvailablePrices(listing).find(({value}) => !!value);
+export const getLowestPrice = (listing, predifinedPrice) => {
+  const result = getAvailablePrices(listing).find(({value, key}) => !!predifinedPrice ? key === predifinedPrice : !!value);
   return result || {value: {}}
+}
+
+export const currentSearchFilter = search => {
+  return [
+    'pub_pricePerDayFilter',
+    'pub_pricePerWeekFilter',
+    'pub_pricePerMonthFilter',
+  ].find(key => !!search[key]) || null;
+}
+
+export const currentSearchPrice = search => {
+  const equalFilterPrice = {
+    pub_pricePerDayFilter: 'pricePerDay',
+    pub_pricePerWeekFilter: 'pricePerWeek',
+    pub_pricePerMonthFilter: 'pricePerMonth'
+  }
+  const currentFilter = currentSearchFilter(search);
+
+  return currentFilter && equalFilterPrice[currentFilter];
 }

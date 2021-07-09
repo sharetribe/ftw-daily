@@ -130,6 +130,7 @@ export class SearchMapComponent extends Component {
       activeListingId,
       messages,
       mapRootClassName,
+      searchParams
     } = this.props;
     const classes = classNames(rootClassName || css.root, className);
 
@@ -195,6 +196,7 @@ export class SearchMapComponent extends Component {
         onMapLoad={this.onMapLoadHandler}
         onMapMoveEnd={onMapMoveEnd}
         zoom={zoom}
+        searchParams={searchParams}
       />
       </ReusableMapContainer>
     ) : (

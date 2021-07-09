@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { parse } from '../../util/urlHelpers';
 import { propTypes } from '../../util/types';
-import { ensureListing } from '../../util/data';
+import { ensureListing, currentSearchPrice } from '../../util/data';
 import { sdkBoundsToFixedCoordinates, hasSameSDKBounds } from '../../util/maps';
 import { getOffsetOverride, getLayoutStyles } from '../../util/googleMaps';
 import { SearchMapInfoCard, SearchMapPriceLabel, SearchMapGroupLabel } from '../../components';
@@ -207,6 +207,7 @@ class SearchMapPriceLabelWithOverlay extends Component {
       listing,
       onListingClicked,
       mapComponentRefreshToken,
+      activePrice
     } = this.props;
 
     return (
@@ -222,6 +223,7 @@ class SearchMapPriceLabelWithOverlay extends Component {
           listing={listing}
           onListingClicked={onListingClicked}
           mapComponentRefreshToken={mapComponentRefreshToken}
+          activePrice={activePrice}
         />
       </CustomOverlayView>
     );
@@ -283,6 +285,7 @@ const PriceLabelsAndGroups = props => {
     infoCardOpen,
     onListingClicked,
     mapComponentRefreshToken,
+    activePrice
   } = props;
   const listingArraysInLocations = reducedToArray(groupedByCoordinates(listings));
   const priceLabels = listingArraysInLocations.reverse().map(listingArr => {
@@ -316,6 +319,7 @@ const PriceLabelsAndGroups = props => {
           listing={listing}
           onListingClicked={onListingClicked}
           mapComponentRefreshToken={mapComponentRefreshToken}
+          activePrice={activePrice}
         />
       );
     }
@@ -336,6 +340,7 @@ const PriceLabelsAndGroups = props => {
         listings={listingArr}
         onListingClicked={onListingClicked}
         mapComponentRefreshToken={mapComponentRefreshToken}
+        activePrice={activePrice}
       />
     );
   });
@@ -352,6 +357,7 @@ const InfoCardComponent = props => {
     onListingInfoCardClicked,
     createURLToListing,
     mapComponentRefreshToken,
+    activePrice
   } = props;
   const listingsArray = Array.isArray(infoCardOpen) ? infoCardOpen : [infoCardOpen];
 
@@ -378,6 +384,7 @@ const InfoCardComponent = props => {
         listings={listingsArray}
         onListingInfoCardClicked={onListingInfoCardClicked}
         createURLToListing={createURLToListing}
+        activePrice={activePrice}
       />
     </CustomOverlayView>
   );
@@ -522,7 +529,11 @@ class SearchMapWithGoogleMaps extends Component {
       mapComponentRefreshToken,
       onListingInfoCardClicked,
       createURLToListing,
+      searchParams
     } = this.props;
+
+    const activePrice = currentSearchPrice(searchParams);
+
     return (
       <div
         id={id}
@@ -538,6 +549,7 @@ class SearchMapWithGoogleMaps extends Component {
             infoCardOpen={infoCardOpen}
             onListingClicked={onListingClicked}
             mapComponentRefreshToken={mapComponentRefreshToken}
+            activePrice={activePrice}
           />
         ) : null}
         {this.map ? (
@@ -547,6 +559,7 @@ class SearchMapWithGoogleMaps extends Component {
             onListingInfoCardClicked={onListingInfoCardClicked}
             createURLToListing={createURLToListing}
             mapComponentRefreshToken={mapComponentRefreshToken}
+            activePrice={activePrice}
           />
         ) : null}
       </div>
