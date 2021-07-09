@@ -75,9 +75,8 @@ const FilterComponent = props => {
           id={componentId}
           label={label}
           queryParamNames={queryParamNames}
-          initialValues={initialValues(queryParamNames)}
-          // Feature #51455
-          // urlQueryParams={urlQueryParams}
+          // initialValues={initialValues(queryParamNames)}
+          urlQueryParams={urlQueryParams}
           onSubmit={getHandleChangedValueFn(useHistoryPush)}
           {...config}
           {...rest}

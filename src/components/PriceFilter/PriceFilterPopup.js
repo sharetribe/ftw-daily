@@ -31,16 +31,10 @@ const parse = priceRange => {
 
 // Format value, which should look like { minPrice, maxPrice }
 const format = (range, queryParamName) => {
-
-  const { minPrice, maxPrice } = range || {};
-  // Feature #51455
-  // const { minPrice, maxPrice, priceType } = range || {};
-
+  const { minPrice, maxPrice, priceType } = range || {};
   // Note: we compare to null, because 0 as minPrice is falsy in comparisons.
   const value = minPrice != null && maxPrice != null ? `${minPrice},${maxPrice}` : null;
-  return { [queryParamName]: value };
-  // Feature #51455
-  // return { [queryParamName]: !priceType || priceType === 'price' ? value : {[priceType]: value} };
+  return { [queryParamName]: !priceType || priceType === 'price' ? value : {[priceType]: value} };
 };
 
 class PriceFilterPopup extends Component {
@@ -143,11 +137,9 @@ class PriceFilterPopup extends Component {
     const classes = classNames(rootClassName || css.root, className);
 
     const priceQueryParam = getPriceQueryParamName(queryParamNames);
-    const initialPrice =
-    initialValues && initialValues[priceQueryParam] ? parse(initialValues[priceQueryParam]) : {};
-    const { minPrice, maxPrice } = initialPrice || {};
-    // Feature #51455
-    // const { minPrice, maxPrice } = initialValues || {};
+    // const initialPrice =
+    //   initialValues && initialValues[priceQueryParam] ? parse(initialValues[priceQueryParam]) : {};
+    const { minPrice, maxPrice } = initialValues || {};
     const hasValue = value => value != null;
     const hasInitialValues = initialValues && hasValue(minPrice) && hasValue(maxPrice);
     const currentLabel = hasInitialValues
@@ -179,9 +171,7 @@ class PriceFilterPopup extends Component {
         </button>
         <PriceFilterForm
           id={id}
-          initialValues={hasInitialValues ? initialPrice : { minPrice: min, maxPrice: max }}
-          // Feature #51455
-          // initialValues={hasInitialValues ? initialValues : { minPrice: min, maxPrice: max }}
+          initialValues={hasInitialValues ? initialValues : { minPrice: min, maxPrice: max }}
           onClear={this.handleClear}
           onCancel={this.handleCancel}
           onSubmit={this.handleSubmit}

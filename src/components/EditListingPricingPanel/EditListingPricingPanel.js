@@ -109,9 +109,8 @@ const EditListingPricingPanel = props => {
 
       return {
         ...acc,
-        [p]: amount ? {amount, currency} : null
-        // Feature #51455
-        // [`${p}Filter`]: amount ? amount/100 : null
+        [p]: amount ? {amount, currency} : null,
+        [`${p}Filter`]: amount ? amount/100 : null
       }
     }, {});
   }

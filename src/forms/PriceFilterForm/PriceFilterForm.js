@@ -106,11 +106,10 @@ const PriceFilterFormComponent = props => {
         const cancel = intl.formatMessage({ id: 'PriceFilterForm.cancel' });
         const submit = intl.formatMessage({ id: 'PriceFilterForm.submit' });
 
-        // Feature #51455
-        // const pricePerHourLabel = intl.formatMessage({ id: 'PriceFilterForm.pricePerHourLabel' });
-        // const pricePerDayLabel = intl.formatMessage({ id: 'PriceFilterForm.pricePerDayLabel' });
-        // const pricePerWeekLabel = intl.formatMessage({ id: 'PriceFilterForm.pricePerWeekLabel' });
-        // const pricePerMonthLabel = intl.formatMessage({ id: 'PriceFilterForm.pricePerMonthLabel' });
+        const pricePerHourLabel = intl.formatMessage({ id: 'PriceFilterForm.pricePerHourLabel' });
+        const pricePerDayLabel = intl.formatMessage({ id: 'PriceFilterForm.pricePerDayLabel' });
+        const pricePerWeekLabel = intl.formatMessage({ id: 'PriceFilterForm.pricePerWeekLabel' });
+        const pricePerMonthLabel = intl.formatMessage({ id: 'PriceFilterForm.pricePerMonthLabel' });
 
         const classes = classNames(css.root, {
           [css.popup]: showAsPopup,
@@ -119,20 +118,19 @@ const PriceFilterFormComponent = props => {
           [css.isOpen]: !showAsPopup && isOpen,
         });
 
-        // Feature #51455
-        // const onChangeRadio = (name, value) => {
+        const onChangeRadio = (name, value) => {
 
-        //   if (!liveEdit){
-        //     return {};
-        //   }
-        //   const { minPrice, maxPrice, ...restValues } = values;
-        //   return {onClick: () => onChange({
-        //     minPrice: minPrice === '' ? rest.min : minPrice,
-        //     maxPrice: maxPrice === '' ? rest.max : maxPrice,
-        //     ...restValues,
-        //     [name]: value
-        //   })};
-        // };
+          if (!liveEdit){
+            return {};
+          }
+          const { minPrice, maxPrice, ...restValues } = values;
+          return {onClick: () => onChange({
+            minPrice: minPrice === '' ? rest.min : minPrice,
+            maxPrice: maxPrice === '' ? rest.max : maxPrice,
+            ...restValues,
+            [name]: value
+          })};
+        };
 
 
         return (
@@ -143,10 +141,7 @@ const PriceFilterFormComponent = props => {
             contentRef={contentRef}
             style={{ minWidth: '200px', ...style }}
           >
-            
-            {
-              // Feature #51455
-            /* <div className={css.switherWrapper}>
+            <div className={css.switherWrapper}>
               <FieldRadioButton
                 className={css.switherItem}
                 id="pricePerHour"
@@ -179,7 +174,7 @@ const PriceFilterFormComponent = props => {
                 value="pricePerMonth"
                 labelClassName={css.labelClassName}
               />
-            </div> */}
+            </div>
 
             <div className={css.contentWrapper}>
               <span className={css.label}>
