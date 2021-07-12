@@ -1,4 +1,4 @@
-/*
+/* 
  * Marketplace specific configuration.
  *
  * Every filter needs to have following keys:
@@ -33,7 +33,26 @@
  *         (i.e. pub_<key> or meta_<key>).
  */
 
+
+
 export const filters = [
+  {
+    id: 'view',
+    label: 'View',
+    type: 'SelectSingleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_view'],
+    config: {
+      options: [
+        { key: 'sea', label: 'Sea view' },
+        { key: 'lake', label: 'Lake view' },
+        { key: 'forest', label: 'Forest view' },
+        { key: 'garden', label: 'Garden view' },
+      ],
+    },
+  },
+  
+
   {
     id: 'dates',
     label: 'Dates',
@@ -45,6 +64,7 @@ export const filters = [
     config: {},
   },
   {
+    
     id: 'price',
     label: 'Price',
     type: 'PriceFilter',
@@ -107,6 +127,7 @@ export const filters = [
       // "label" is set here for this web app's UI only.
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
+      
       options: [
         {
           key: 'terrace',
@@ -123,14 +144,6 @@ export const filters = [
         {
           key: 'jacuzzi',
           label: 'jacuzzi',
-        },
-        {
-          key: 'lake_view',
-          label: 'lake_view',
-        },
-        {
-          key: 'sea_view',
-          label: 'sea_view',
         },
         {
           key: 'barbeque',

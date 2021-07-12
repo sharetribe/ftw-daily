@@ -57,9 +57,11 @@ class EditListingLocationPanel extends Component {
       updateInProgress,
       errors,
     } = this.props;
+    
 
     const classes = classNames(rootClassName || css.root, className);
     const currentListing = ensureOwnListing(listing);
+    
 
     const isPublished =
       currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
@@ -79,6 +81,14 @@ class EditListingLocationPanel extends Component {
           className={css.form}
           initialValues={this.state.initialValues}
           onSubmit={values => {
+            const { amenities = [], view = '' } = values;
+        
+            const updatedValues = {
+              publicData: { amenities, view },
+            };
+            onSubmit(updatedValues);
+          }}
+          onSubmit={values => {
             const { building = '', location } = values;
             const {
               selectedPlace: { address, origin },
@@ -95,6 +105,7 @@ class EditListingLocationPanel extends Component {
                 location: { search: address, selectedPlace: { address, origin } },
               },
             });
+            
             onSubmit(updateValues);
           }}
           onChange={onChange}

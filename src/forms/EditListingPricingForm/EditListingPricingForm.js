@@ -12,6 +12,7 @@ import { types as sdkTypes } from '../../util/sdkLoader';
 import { Button, Form, FieldCurrencyInput } from '../../components';
 import css from './EditListingPricingForm.module.css';
 
+
 const { Money } = sdkTypes;
 
 export const EditListingPricingFormComponent = props => (
@@ -89,7 +90,7 @@ export const EditListingPricingFormComponent = props => (
               <FormattedMessage id="EditListingPricingForm.showListingFailed" />
             </p>
           ) : null}
-          <FieldCurrencyInput
+          <FieldCurrencyInput                                                 
             id="price"
             name="price"
             className={css.priceInput}
@@ -100,6 +101,16 @@ export const EditListingPricingFormComponent = props => (
             validate={priceValidators}
           />
 
+
+          <FieldCurrencyInput
+          id="cleaningFee"
+          name="cleaningFee"
+          className={css.cleaningFeeInput}
+          autoFocus
+          label={cleaningFeeMessage}
+          placeholder={cleaningFeePlaceholderMessage}
+          currencyConfig={config.currencyConfig}
+         />
           <Button
             className={css.submitButton}
             type="submit"

@@ -6,9 +6,8 @@ import arrayMutators from 'final-form-arrays';
 import { FormattedMessage } from '../../util/reactIntl';
 import { findOptionsForSelectFilter } from '../../util/search';
 import { propTypes } from '../../util/types';
-import config from '../../config';
-import { Button, FieldCheckboxGroup, Form } from '../../components';
-
+import config from '../../config'
+import {Button,FieldCheckboxGroup,FieldSelect,Form,} from '../../components';
 import css from './EditListingFeaturesForm.module.css';
 
 const EditListingFeaturesFormComponent = props => (
@@ -50,19 +49,35 @@ const EditListingFeaturesFormComponent = props => (
       ) : null;
 
       const options = findOptionsForSelectFilter('amenities', filterConfig);
+      // Props for "view" select field
+      const viewKey = 'view';
+      const viewOptions = findOptionsForSelectFilter(viewKey, filterConfig);
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessage}
           {errorMessageShowListing}
 
-          <FieldCheckboxGroup className={css.features} id={name} name={name} options={options} />
+          <FieldCheckboxGroup className={css.features} id={name} name={name} options={options} label="Amenities" />
+
+          <FieldSelect
+        className={css.features}
+        name={viewKey}
+        id={viewKey}
+        label={'Location type'}
+      >
+        {viewOptions.map(o => (
+          <option key={o.key} value={o.key}>
+            {o.label}
+          </option>
+        ))}
+      </FieldSelect>
 
           <Button
             className={css.submitButton}
             type="submit"
             inProgress={submitInProgress}
             disabled={submitDisabled}
-            ready={submitReady}
+            ready={submitReady} 
           >
             {saveActionMsg}
           </Button>
