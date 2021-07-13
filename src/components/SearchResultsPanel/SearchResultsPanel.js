@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
+import { currentSearchPrice } from '../../util/data';
 import { ListingCard, PaginationLinks } from '../../components';
 import css from './SearchResultsPanel.module.css';
 
@@ -39,6 +40,7 @@ const SearchResultsPanel = props => {
             listing={l}
             renderSizes={cardRenderSizes}
             setActiveListing={setActiveListing}
+            activePrice={currentSearchPrice(search)}
           />
         ))}
         {props.children}

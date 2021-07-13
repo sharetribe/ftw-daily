@@ -12,6 +12,7 @@ import routeConfiguration from '../../routeConfiguration';
 import { createResourceLocatorString, pathByRouteName } from '../../util/routes';
 import { parse, stringify } from '../../util/urlHelpers';
 import { propTypes } from '../../util/types';
+import { currentSearchFilter } from '../../util/data';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { SearchMap, ModalInMobile, Page } from '../../components';
@@ -51,6 +52,12 @@ export class SearchPageComponent extends Component {
   onMapMoveEnd(viewportBoundsChanged, data) {
     const { viewportBounds, viewportCenter } = data;
 
+    const priceFilterMaybe = search => {
+      const activePriceFilter = currentSearchFilter(search);
+      console.log(activePriceFilter)
+      return activePriceFilter ? {[activePriceFilter]: search[activePriceFilter]} : {};
+    }
+
     const routes = routeConfiguration();
     const searchPagePath = pathByRouteName('SearchPage', routes);
     const currentPath =
@@ -80,6 +87,7 @@ export class SearchPageComponent extends Component {
         ...originMaybe,
         bounds: viewportBounds,
         mapSearch: true,
+        ...priceFilterMaybe(rest),
         ...validFilterParams(rest, filterConfig),
       };
 
@@ -126,7 +134,6 @@ export class SearchPageComponent extends Component {
     // urlQueryParams doesn't contain page specific url params
     // like mapSearch, page or origin (origin depends on config.sortSearchByDistance)
     const urlQueryParams = pickSearchParamsOnly(searchInURL, filterConfig, sortConfig);
-
     // Page transition might initially use values from previous search
     const urlQueryString = stringify(urlQueryParams);
     const paramsQueryString = stringify(
@@ -209,6 +216,7 @@ export class SearchPageComponent extends Component {
                     onManageDisableScrolling('SearchPage.map', false);
                   }}
                   messages={intl.messages}
+                  searchParams={searchInURL}
                 />
               ) : null}
             </div>

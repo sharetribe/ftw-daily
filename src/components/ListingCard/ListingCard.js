@@ -44,7 +44,7 @@ class ListingImage extends Component {
 const LazyImage = lazyLoadWithDimensions(ListingImage, { loadAfterInitialRendering: 3000 });
 
 export const ListingCardComponent = props => {
-  const { className, rootClassName, intl, listing, renderSizes, setActiveListing } = props;
+  const { className, rootClassName, intl, listing, renderSizes, setActiveListing, activePrice = null } = props;
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureListing(listing);
   const id = currentListing.id.uuid;
@@ -55,7 +55,7 @@ export const ListingCardComponent = props => {
   const firstImage =
     currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
 
-  const {key: priceType, value: {amount, currency}} = getLowestPrice(listing);
+  const {key: priceType, value: {amount, currency}} = getLowestPrice(listing, activePrice);
 
   const { formattedPrice, priceTitle } = priceData(amount && currency ? new Money(amount, currency) : null, intl);
 

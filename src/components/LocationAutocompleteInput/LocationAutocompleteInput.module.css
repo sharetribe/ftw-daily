@@ -18,8 +18,13 @@
 .root {
   position: relative;
   display: flex;
-  flex: 0 0 50%;
-  max-width: 50%;
+  flex: 0 0 60%;
+  max-width: 60%;
+  
+  @media (--viewportLarge) {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
 }
 
 .icon {
@@ -100,6 +105,10 @@ bottom of the container.
   background-position: center;
 
   @media (--viewportMedium) {
+    background-position: center center;
+  }
+
+  @media (--viewportLarge) {
     background-position: center left var(--LocationAutocompleteInput_sidePaddingDesktop);
   }
 }
@@ -122,8 +131,14 @@ bottom of the container.
 
     @media (--viewportMedium) {
       color: var(--matterColorLightTransparent);
-      padding: 10px var(--LocationAutocompleteInput_sidePaddingDesktop);
+      padding: 10px 20px;
       margin: 0;
+      font-size: 14px;
+    }
+    
+    @media (--viewportLarge) {
+      padding: 10px var(--LocationAutocompleteInput_sidePaddingDesktop);
+      font-size: 16px;
     }
 
     &:hover,

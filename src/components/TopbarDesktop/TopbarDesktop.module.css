@@ -74,37 +74,48 @@
 
 .logo {
   /* If height is increased, change link paddings accordingly */
-  height: 27px;
-
+  height: 20px;
+  
   /* Good aspect ratio should be less than 160/27 (width/height) */
   /* NOTE: extremely wide logos, need special handling. */
   width: auto;
   max-width: 220px;
   object-fit: contain;
   object-position: left center;
+  
+  @media (--viewportLarge) {
+    /* If height is increased, change link paddings accordingly */
+    height: 27px;
+  }
 }
 
 /* Search */
 .searchLink {
   flex-grow: 1;
   height: 100%;
-  margin-right: 24px;
+  margin-right: 4px;
   border-left-style: solid;
   border-left-width: 1px;
   border-left-color: var(--matterColorNegative);
-  display: flex;LocationAutocompleteInput
-
+  display: flex;
+  
   @media (--viewportLarge) {
+    margin-right: 24px;
     padding-left: 0;
   }
 }
 
 .dropdownContainer {
-  flex: 0 0 50%;
-  max-width: 50%;
+  flex: 0 0 40%;
+  max-width: 40%;
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  
+  @media (--viewportLarge) {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
 }
 
 .categoriesDropdown {
@@ -133,7 +144,7 @@
   font-family: var(--fontFamily);
   flex-shrink: 0;
   height: 100%;
-  padding: 0 12px 0 12px;
+  padding: 0 10px 0 10px;
   color: var(--matterColor);
   margin-top: 0;
   margin-bottom: 0;
@@ -158,7 +169,7 @@
   @apply --marketplaceH5FontStyles;
   font-family: var(--fontFamily);
   height: 100%;
-  padding: 0 12px 0 12px;
+  padding: 0 10px 0 10px;
   margin-top: 0;
   margin-bottom: 0;
   color: var(--matterColor);
@@ -221,7 +232,7 @@
   align-items: center;
   height: 100%;
   margin: 0;
-  padding: 0 12px 0 12px;
+  padding: 0 10px 0 10px;
 
   &:active {
     border-bottom: 0;
@@ -248,7 +259,7 @@
   @apply --TopbarDesktop_linkHover;
   flex-shrink: 0;
   height: 100%;
-  padding: 0 12px 0 12px;
+  padding: 0 10px 0 10px;
 
   color: var(--matterColor);
 
@@ -261,7 +272,7 @@
   @apply --TopbarDesktop_linkHover;
   flex-shrink: 0;
   height: 100%;
-  padding: 0 12px 0 12px;
+  padding: 0 10px 0 10px;
 
   color: var(--matterColor);
 
