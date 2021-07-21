@@ -28,7 +28,7 @@
   flex-direction: column;
   align-items: flex-start;
   /* 113 for footer and an extra 67 to get scrolling work in mobile safari */
-  margin-bottom: 180px;
+  margin-bottom: 280px;
 }
 
 .footer {
@@ -72,7 +72,7 @@
   color: var(--marketplaceColor);
   position: relative;
 
-  margin-top: auto;
+  margin-top: 150px;
   margin-bottom: 13px;
 }
 
