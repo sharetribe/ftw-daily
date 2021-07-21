@@ -158,6 +158,9 @@ const EditListingPricingPanel = props => {
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
+      <p className={css.subTitle}>
+        <FormattedMessage id="EditListingPricingPanel.createListingSubTitle" />
+      </p>
       {form}
     </div>
   );
