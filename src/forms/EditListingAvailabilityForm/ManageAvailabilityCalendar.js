@@ -503,7 +503,7 @@ ManageAvailabilityCalendar.defaultProps = {
   withPortal: false,
   initialVisibleMonth: null,
   numberOfMonths: 2,
-  onOutsideClick() { },
+  onOutsideClick() {},
   keepOpenOnDateSelect: false,
   renderCalendarInfo: null,
   isRTL: false,
@@ -511,8 +511,8 @@ ManageAvailabilityCalendar.defaultProps = {
   // navigation related props
   navPrev: null,
   navNext: null,
-  onPrevMonthClick() { },
-  onNextMonthClick() { },
+  onPrevMonthClick() {},
+  onNextMonthClick() {},
 
   // internationalization
   monthFormat: 'MMMM YYYY',
