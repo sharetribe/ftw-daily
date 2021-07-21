@@ -284,7 +284,6 @@ class ManageAvailabilityCalendar extends Component {
       const isResetToPlanSeats = seatsFromPlan === seats;
 
       if (isResetToPlanSeats) {
-        console.log(1)
         // Delete the exception, if the exception is redundant
         // (it has the same content as what user has in the plan).
         this.props.availability.onDeleteAvailabilityException({
@@ -293,7 +292,6 @@ class ManageAvailabilityCalendar extends Component {
           seats: seatsFromPlan,
         }, availabilityPlan);
       } else {
-        console.log(2)
         // If availability exception exists, delete it first and then create a new one.
         // NOTE: currently, API does not support update (only deleting and creating)
         this.props.availability
@@ -308,7 +306,6 @@ class ManageAvailabilityCalendar extends Component {
           });
       }
     } else {
-      console.log(3)
       // If there is no existing AvailabilityExceptions, just create a new one
       const params = { listingId, start, end, seats, currentException: exception };
       this.props.availability.onCreateAvailabilityException(params, availabilityPlan);
@@ -318,8 +315,19 @@ class ManageAvailabilityCalendar extends Component {
   onDateChange(date) {
     this.setState({ date });
 
-    const { availabilityPlan, availability, seats } = this.props;
+    const { defaultAvailabilityPlan, availabilityPlan, availability, seats } = this.props;
     const calendar = availability.calendar;
+
+    const curretDayOfWeek = (moment(date).format('ddd')).toLowerCase();
+
+    const diffs = [
+      ...defaultAvailabilityPlan.entries,
+      ...availabilityPlan.entries
+    ].map(({dayOfWeek}) => dayOfWeek).filter((day, i, arr) => !arr.some((day1, i1) => day1 === day && i !== i1));
+
+    const isDayBlocked = diffs.includes(curretDayOfWeek);
+
+
     // This component is for day/night based processes. If time-based process is used,
     // you might want to deal with local dates using monthIdString instead of monthIdStringInUTC.
     const { exceptions = [], bookings = [] } = calendar[monthIdStringInUTC(date)] || {};
@@ -330,7 +338,7 @@ class ManageAvailabilityCalendar extends Component {
       date
     );
 
-    if (isBooked || isPast || isInProgress) {
+    if (isDayBlocked || isBooked || isPast || isInProgress) {
       // Cannot allow or block a reserved or a past date or inProgress
       return;
     } else if (isBlocked) {
@@ -382,6 +390,7 @@ class ManageAvailabilityCalendar extends Component {
       availabilityPlan,
       onMonthChanged,
       monthFormat,
+      defaultAvailabilityPlan,
       ...rest
     } = this.props;
     const { focused, date, currentMonth } = this.state;
@@ -494,7 +503,7 @@ ManageAvailabilityCalendar.defaultProps = {
   withPortal: false,
   initialVisibleMonth: null,
   numberOfMonths: 2,
-  onOutsideClick() {},
+  onOutsideClick() { },
   keepOpenOnDateSelect: false,
   renderCalendarInfo: null,
   isRTL: false,
@@ -502,8 +511,8 @@ ManageAvailabilityCalendar.defaultProps = {
   // navigation related props
   navPrev: null,
   navNext: null,
-  onPrevMonthClick() {},
-  onNextMonthClick() {},
+  onPrevMonthClick() { },
+  onNextMonthClick() { },
 
   // internationalization
   monthFormat: 'MMMM YYYY',

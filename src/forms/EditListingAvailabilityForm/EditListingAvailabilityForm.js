@@ -5,6 +5,7 @@ import { Form as FinalForm } from 'react-final-form';
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
+import { createDefaultPlan } from '../../util/data';
 import arrayMutators from 'final-form-arrays';
 import { Form, Button, FieldRangeSlider, FieldCheckboxGroup } from '../../components';
 import {
@@ -57,7 +58,15 @@ export class EditListingAvailabilityFormComponent extends Component {
 
           const daysOptions = DAYS_OF_WEEK.map(key => ({key, label: key.slice(0, 1).toUpperCase() + key.slice(1)}))
 
-          const weekdaysLabel = "EditListingAvailabilityForm.weekdaysLabel";
+          const {entries, ...rest} = createDefaultPlan(seats, true);
+
+          const currentAvailabilityPlan = {
+            ...rest,
+            ...(values && values.daysAvailability ? {
+              entries: entries.filter(({dayOfWeek}) => values.daysAvailability.includes(dayOfWeek))
+              } : {}
+            )
+          };
 
           return (
             <Form className={classes} onSubmit={handleSubmit}>
@@ -85,7 +94,8 @@ export class EditListingAvailabilityFormComponent extends Component {
               <div className={css.calendarWrapper}>
                 <ManageAvailabilityCalendar
                   availability={availability}
-                  availabilityPlan={availabilityPlan}
+                  defaultAvailabilityPlan={availabilityPlan}
+                  availabilityPlan={currentAvailabilityPlan}
                   listingId={listingId}
                   seats={seats}
                 />
