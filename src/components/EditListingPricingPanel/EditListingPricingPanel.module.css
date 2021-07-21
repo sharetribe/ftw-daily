@@ -14,11 +14,18 @@
 }
 
 .title {
-  margin-bottom: 19px;
+  margin-bottom: 18px;
 
   @media (--viewportMedium) {
-    margin-bottom: 38px;
-    padding: 1px 0 7px 0;
+    margin-bottom: 24px;
+  }
+}
+
+.subTitle {
+  margin: 12px 0;
+  
+  @media (--viewportMedium) {
+    margin: 16px 0;
   }
 }
 
