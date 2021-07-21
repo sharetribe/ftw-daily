@@ -111,12 +111,14 @@
 
 .socialButtonRoot {
   @apply --marketplaceButtonStyles;
-  min-height: 48px;
+  @apply --marketplaceButtonStylesPrimary;
+  
+  min-height: 59px;
   background-color: var(--matterColorLight);
 
-  color: var(--matterColorDark);
-  font-weight: var(--fontWeightMedium);
-  font-size: 14px;
+  color: var(--matterColor);
+  /* font-weight: var(--fontWeightMedium);
+  font-size: 14px; */
 
   border: 1px solid #d2d2d2;
   border-radius: 4px;
@@ -124,8 +126,12 @@
   /* We need to add this to position the icon inside button */
   position: relative;
 
+
+  letter-spacing: 0.2px;
+
   @media (--viewportMedium) {
     padding: 0;
+    min-height: 65px;
   }
 
   &:hover,
