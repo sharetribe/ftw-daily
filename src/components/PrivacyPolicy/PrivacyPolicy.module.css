@@ -1,4 +1,4 @@
-@import '../../styles/propertySets.css';
+@import "../../styles/propertySets.css";
 
 .root {
   & p {
@@ -22,5 +22,22 @@
       margin-top: 0;
       margin-bottom: 54px;
     }
+  }
+
+  & ul {
+    display: block;
+    /* list-style-type: decimal; */
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 40px;
+  }
+
+  & li {
+    font-size: 16px;
+    display: list-item;
+    margin-bottom: 0.5em;
+    font-family: var(--fontFamilySofiapro);
   }
 }
