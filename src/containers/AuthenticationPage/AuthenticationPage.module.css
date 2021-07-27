@@ -204,9 +204,10 @@
 }
 
 .buttonIcon {
-  position: absolute;
+  /* position: absolute;
   left: 0;
-  margin-left: 20px;
+  margin-left: 20px; */
+  margin-right: 10px;
 }
 
 .socialButtonWrapper {

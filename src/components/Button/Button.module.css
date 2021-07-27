@@ -112,6 +112,10 @@
 .socialButtonRoot {
   @apply --marketplaceButtonStyles;
   @apply --marketplaceButtonStylesPrimary;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
   
   min-height: 59px;
   background-color: var(--matterColorLight);
