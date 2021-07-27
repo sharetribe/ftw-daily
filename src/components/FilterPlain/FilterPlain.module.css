@@ -59,6 +59,10 @@
 .plain {
   width: 100%;
   display: none;
+
+  & :global(.DayPicker_transitionContainer__horizontal) {
+    min-height: 311px;
+  }
 }
 
 .isOpen {
