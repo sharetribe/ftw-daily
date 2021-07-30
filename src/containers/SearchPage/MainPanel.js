@@ -148,8 +148,12 @@ class MainPanel extends Component {
 
         // Since we have multiple filters with the same query param, 'pub_category'
         // we dont want to lose the prev ones, we want all of them
+
+        const isWindowDefined = typeof window !== 'undefined';
+        const isMobileLayout = isWindowDefined && window.innerWidth < 768;
+
         const pc = 'pub_category';
-        if (pc in updatedURLParams && pc in mergedQueryParams) {
+        if (pc in updatedURLParams && pc in mergedQueryParams && !isMobileLayout) {
           const up_pc = updatedURLParams[pc] ? updatedURLParams[pc].split(',') : [];
           const mp_pc = mergedQueryParams[pc] ? mergedQueryParams[pc].split(',') : [];
           if (!!up_pc.length) {
