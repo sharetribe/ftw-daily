@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { arrayOf, func, node, number, shape, string } from 'prop-types';
 import classNames from 'classnames';
+
+import config from '../../config';
 import { injectIntl, intlShape } from '../../util/reactIntl';
 import { propTypes } from '../../util/types';
 import { formatCurrencyMajorUnit } from '../../util/currency';
-import config from '../../config';
 
+import { OutsideClickHandler } from '../../components';
 import { PriceFilterForm } from '../../forms';
 import css from './PriceFilterPopup.module.css';
 
@@ -74,12 +76,8 @@ class PriceFilterPopup extends Component {
     onSubmit(initialValues);
   }
 
-  handleBlur(event) {
-    // FocusEvent is fired faster than the link elements native click handler
-    // gets its own event. Therefore, we need to check the origin of this FocusEvent.
-    if (!this.filter.contains(event.relatedTarget)) {
-      this.setState({ isOpen: false });
-    }
+  handleBlur() {
+    this.setState({ isOpen: false });
   }
 
   handleKeyDown(e) {
@@ -160,35 +158,36 @@ class PriceFilterPopup extends Component {
     const contentStyle = this.positionStyleForContent();
 
     return (
-      <div
-        className={classes}
-        onBlur={this.handleBlur}
-        onKeyDown={this.handleKeyDown}
-        ref={node => {
-          this.filter = node;
-        }}
-      >
-        <button className={labelStyles} onClick={() => this.toggleOpen()}>
-          {currentLabel}
-        </button>
-        <PriceFilterForm
-          id={id}
-          initialValues={hasInitialValues ? initialPrice : { minPrice: min, maxPrice: max }}
-          onClear={this.handleClear}
-          onCancel={this.handleCancel}
-          onSubmit={this.handleSubmit}
-          intl={intl}
-          contentRef={node => {
-            this.filterContent = node;
+      <OutsideClickHandler onOutsideClick={this.handleBlur}>
+        <div
+          className={classes}
+          onKeyDown={this.handleKeyDown}
+          ref={node => {
+            this.filter = node;
           }}
-          style={contentStyle}
-          min={min}
-          max={max}
-          step={step}
-          showAsPopup
-          isOpen={this.state.isOpen}
-        />
-      </div>
+        >
+          <button className={labelStyles} onClick={() => this.toggleOpen()}>
+            {currentLabel}
+          </button>
+          <PriceFilterForm
+            id={id}
+            initialValues={hasInitialValues ? initialPrice : { minPrice: min, maxPrice: max }}
+            onClear={this.handleClear}
+            onCancel={this.handleCancel}
+            onSubmit={this.handleSubmit}
+            intl={intl}
+            contentRef={node => {
+              this.filterContent = node;
+            }}
+            style={contentStyle}
+            min={min}
+            max={max}
+            step={step}
+            showAsPopup
+            isOpen={this.state.isOpen}
+          />
+        </div>
+      </OutsideClickHandler>
     );
   }
 }
