@@ -13,7 +13,25 @@ import css from './FAQPage.module.css';
 const FAQPage = () => {
   // prettier-ignore
   return (
-    <StaticPage>
+    <StaticPage
+        title="Frequently Asked Questions"
+        schema={{
+        "@context": "http://schema.org",
+        "@type": "FAQPage",
+        "description": "Frequently asked questions in CottageDays marketplace.",
+        "name": "Frequently Asked Questions",
+        "mainEntity": [
+            {
+            "@type": "Question",
+            "name": "Question 1?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Answer: Lorem ipsum"
+            }
+            }
+        ]
+        }}
+    >
       <LayoutSingleColumn>
         <LayoutWrapperTopbar>
           <TopbarContainer />

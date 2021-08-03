@@ -115,7 +115,7 @@ const Footer = props => {
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=NewYork%2C%20NewYork&bounds=41.2391317%2C-73.446683%2C40.2391317%2C-74.446683&origin=40.7391317%2C-74.946683',
+                        '?address=New%20York%2C%20New%20York&bounds=41.2391317%2C-73.446683%2C40.2391317%2C-74.446683&origin=40.7391317%2C-74.946683',
                     }}
                     className={css.link}
                   >
@@ -127,7 +127,7 @@ const Footer = props => {
                     name="SearchPage"
                     to={{
                       search:
-                        '?address=SanFrancisco%2C%20California&bounds=38.257815%2C-122.0076403%2C37.257815%2C-123.0076403&origin=37.757815%2C-123.5076403',
+                        '?address=San%20Francisco%2C%20California&bounds=38.257815%2C-122.0076403%2C37.257815%2C-123.0076403&origin=37.757815%2C-123.5076403',
                     }}
                     className={css.link}
                   >

@@ -90,6 +90,7 @@ export const filters = [
         { key: 'bar', label: 'Bar' },
         { key: 'cafe', label: 'Cafe' },
         { key: 'personal_property', label: 'Personal Property' },
+        { key: 'service', label: 'Service' },
         { key: 'other', label: 'Other' },
       ],
     },
