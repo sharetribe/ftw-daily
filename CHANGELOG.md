@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2020-XX-XX
 
+- [fix] Remove unused dep-resolution: handlebars.
+  [#1456](https://github.com/sharetribe/ftw-daily/pull/1456)  
 - [fix] PriceFilterPopup: filter popup is not closing when clicking outside on Safari.
   [#1455](https://github.com/sharetribe/ftw-daily/pull/1455)
 - [fix] Add missing helper: isNumber. Used when Number.MAX_SAFE_INTEGER is reached.
