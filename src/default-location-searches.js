@@ -18,29 +18,15 @@ const defaultLocations = [
   {
     id: 'default-turku',
     predictionPlace: {
-      address: 'Turku, Finland',
-      bounds: new LatLngBounds(new LatLng(60.53045, 22.38197), new LatLng(60.33361, 22.06644)),
+      address: 'New York',
+      bounds: new LatLngBounds(new LatLng(41.2391317,-73.446683), new LatLng(40.2391317,-74.446683)),
     },
   },
   {
     id: 'default-tampere',
     predictionPlace: {
-      address: 'Tampere, Finland',
-      bounds: new LatLngBounds(new LatLng(61.83657, 24.11838), new LatLng(61.42728, 23.5422)),
-    },
-  },
-  {
-    id: 'default-oulu',
-    predictionPlace: {
-      address: 'Oulu, Finland',
-      bounds: new LatLngBounds(new LatLng(65.56434, 26.77069), new LatLng(64.8443, 24.11494)),
-    },
-  },
-  {
-    id: 'default-ruka',
-    predictionPlace: {
-      address: 'Ruka, Finland',
-      bounds: new LatLngBounds(new LatLng(66.16997, 29.16773), new LatLng(66.16095, 29.13572)),
+      address: 'San Francisco, California',
+      bounds: new LatLngBounds(new LatLng(38.257815,-122.0076403), new LatLng(37.257815,-123.0076403)),
     },
   },
 ];

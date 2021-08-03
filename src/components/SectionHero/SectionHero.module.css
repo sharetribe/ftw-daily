@@ -82,6 +82,7 @@
   @media (--viewportMedium) {
     max-width: var(--SectionHero_desktopTitleMaxWidth);
     margin: 0 0 47px 0;
+    line-height: 72px;
   }
 }
 
