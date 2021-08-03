@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { arrayOf, func, node, number, shape, string } from 'prop-types';
 import classNames from 'classnames';
+
+import config from '../../config';
 import { injectIntl, intlShape } from '../../util/reactIntl';
 import { propTypes } from '../../util/types';
 import { formatCurrencyMajorUnit } from '../../util/currency';
-import config from '../../config';
 
 import { OutsideClickHandler } from '../../components';
 import { PriceFilterForm } from '../../forms';
@@ -76,8 +77,6 @@ class PriceFilterPopup extends Component {
   }
 
   handleBlur() {
-    // FocusEvent is fired faster than the link elements native click handler
-    // gets its own event. Therefore, we need to check the origin of this FocusEvent.
     this.setState({ isOpen: false });
   }
 
