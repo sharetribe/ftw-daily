@@ -79,7 +79,6 @@
   "resolutions": {
     "react-dates/lodash": "^4.17.19",
     "react-test-renderer": "^16.13.1",
-    "handlebars": "^4.5.3",
     "serialize-javascript": "^2.1.1"
   },
   "nodemonConfig": {
