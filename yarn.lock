@@ -12375,10 +12375,10 @@ sharetribe-flex-sdk@1.13.0:
     lodash "^4.17.10"
     transit-js "^0.8.861"
 
-sharetribe-scripts@5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/sharetribe-scripts/-/sharetribe-scripts-5.0.0.tgz#954f1eab7ed9209dc09ac9c44e39958c8e284a81"
-  integrity sha512-5/qe4jb5n0ilV+AL82wP/l+JD/wFXRTRYoKlpBIrXY++RQCBtx8psPPFR5+ZM133bzjonv2v+sYQUbX82lpykQ==
+sharetribe-scripts@5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/sharetribe-scripts/-/sharetribe-scripts-5.0.1.tgz#16e0f6b3d63d1d183b9efece722f24753cebe8ee"
+  integrity sha512-iSRHUwhEacweN/Sfdp768GvBbgvQX03kslv5W3EaFTosCVNQORB/oHbB0svn051wYM+ZqaF/yGXraUNc+JwUrQ==
   dependencies:
     "@babel/core" "7.12.3"
     "@babel/plugin-transform-runtime" "7.12.1"
