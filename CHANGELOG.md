@@ -12,7 +12,7 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 
-## Upcoming version 2020-XX-XX
+## Upcoming version 2021-XX-XX
 
 - [fix] Remove unused dep-resolution: handlebars.
   [#1456](https://github.com/sharetribe/ftw-daily/pull/1456)  
@@ -25,6 +25,9 @@ way to update this template, but currently, we follow a pattern:
 - [fix] TransactionPanel: fix typo [#1451](https://github.com/sharetribe/ftw-daily/pull/1451)
 - [fix] searchMode (has_all/has_any) disappeared, when search-by-moving-the-map was used.
   [#1443](https://github.com/sharetribe/ftw-daily/pull/1443)
+- [change] Update sharetribe-scripts to version 5.0.1 which improves the
+  instructions that are shown after running yarn build command.
+  [#1458](https://github.com/sharetribe/ftw-daily/pull/1458)
 
 ## [v8.1.1] 2021-04-20
 
