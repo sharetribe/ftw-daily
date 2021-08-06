@@ -23,15 +23,15 @@ const SectionHero = props => {
     <div className={classes}>
       <div className={css.flexContainer}>
         <div className={css.heroTextContent}>
-          <h1 className={css.heroMainTitle}>
+          <h2 className={css.heroMainTitle}>
             <FormattedMessage id="SectionHero.title" />
-          </h1>
-          <h2 className={css.heroSubTitle}>
+          </h2>
+          <h3 className={css.heroSubTitle}>
             <FormattedMessage
               id="SectionHero.subTitle"
               values={{ subText: makeSpaceWork }}
             />
-          </h2>
+          </h3>
           <div className={css.heroButtonsContatiner}>
             <NamedLink
               name="SearchPage"
