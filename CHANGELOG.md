@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2021-XX-XX
 
+## [v8.2.0] 2021-08-06
+
 - [change] Update lodash version number in package.json resolutions section.
   [#1459](https://github.com/sharetribe/ftw-daily/pull/1459)
 - [change] Dependabot update: url-parse (v1.5.1)
@@ -40,6 +42,8 @@ way to update this template, but currently, we follow a pattern:
 - [fix] TransactionPanel: fix typo [#1451](https://github.com/sharetribe/ftw-daily/pull/1451)
 - [fix] searchMode (has_all/has_any) disappeared, when search-by-moving-the-map was used.
   [#1443](https://github.com/sharetribe/ftw-daily/pull/1443)
+
+  [v8.2.0]: https://github.com/sharetribe/ftw-daily/compare/v8.1.1...v8.2.0
 
 ## [v8.1.1] 2021-04-20
 
