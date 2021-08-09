@@ -52,6 +52,9 @@ export class SearchPageComponent extends Component {
   onMapMoveEnd(viewportBoundsChanged, data) {
     const { viewportBounds, viewportCenter } = data;
 
+    const boundsValid = viewportBounds.ne.lat !== viewportBounds.sw.lat && 
+                        viewportBounds.ne.lng !== viewportBounds.sw.lng;
+
     const priceFilterMaybe = search => {
       const activePriceFilter = currentSearchFilter(search);
       console.log(activePriceFilter)
@@ -70,7 +73,7 @@ export class SearchPageComponent extends Component {
     // or original location search is rendered once,
     // we start to react to "mapmoveend" events by generating new searches
     // (i.e. 'moveend' event in Mapbox and 'bounds_changed' in Google Maps)
-    if (viewportBoundsChanged && isSearchPage) {
+    if (boundsValid && viewportBoundsChanged && isSearchPage) {
       const { history, location, filterConfig } = this.props;
 
       // parse query parameters, including a custom attribute named category
