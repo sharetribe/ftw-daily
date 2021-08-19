@@ -15,7 +15,7 @@ const timeSlotEqualsDay = (timeSlot, day) => {
   const localStartDate = timeSlot.attributes.start;
   const localEndDate = timeSlot.attributes.end;
 
-  return isInRange(day, localStartDate, localEndDate)
+  return isInRange(day, localStartDate, localEndDate, 'day')
   // } else {
   //   return false;
   // }
