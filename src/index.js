@@ -68,7 +68,14 @@ const setupAnalyticsHandlers = () => {
 
   // Add Google Analytics handler if tracker ID is found
   if (process.env.REACT_APP_GOOGLE_ANALYTICS_ID) {
-    handlers.push(new GoogleAnalyticsHandler(window.ga));
+    if (window?.ga) {
+      handlers.push(new GoogleAnalyticsHandler(window.ga));
+    } else {
+      // Some adblockers (e.g. Ghostery) might block the Google Analytics integration.
+      console.warn(
+        'Google Analytics (window.ga) is not available. It might be that your adblocker is blocking it.'
+      );
+    }
   }
 
   return handlers;
