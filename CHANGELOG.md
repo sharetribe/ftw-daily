@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2021-XX-XX
 
+- [fix] Adblockers might block Google analytics (window.ga) and cause an error.
+  [#1462](https://github.com/sharetribe/ftw-daily/pull/1462)
+
 ## [v8.2.0] 2021-08-06
 
 - [change] Update lodash version number in package.json resolutions section.
