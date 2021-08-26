@@ -90,7 +90,6 @@ export const filters = [
         { key: 'bar', label: 'Bar' },
         { key: 'cafe', label: 'Cafe' },
         { key: 'personal_property', label: 'Personal Property' },
-        { key: 'service', label: 'Service' },
         { key: 'other', label: 'Other' },
       ],
     },
@@ -114,7 +113,7 @@ export const filters = [
         {
           key: 'garden',
           label: 'Garden',
-        },        
+        },
         {
           key: 'swimming_pool',
           label: 'Swimming pool',
@@ -135,6 +134,39 @@ export const filters = [
           key: 'own_food_allowed',
           label: 'Own food allowed',
         },
+      ],
+    },
+  },
+  // {
+  //   id: 'view',
+  //   label: 'View',
+  //   type: 'SelectSingleFilter',
+  //   group: 'secondary',
+  //   queryParamNames: ['pub_view'],
+  //   config: {
+  //     options: [
+  //       { key: 'no', label: 'No view' },
+  //       { key: 'sea', label: 'Sea view' },
+  //       { key: 'lake', label: 'Lake view' },
+  //       { key: 'forest', label: 'Forest view' },
+  //       { key: 'garden', label: 'Garden view' },
+  //     ],
+  //   },
+  // },
+  {
+    id: 'capacity',
+    label: 'Capacity',
+    type: 'SelectSingleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_capacity'],
+    config: {
+      options: [
+        { key: '1to8', label: '1 to 8' },
+        { key: '9to15', label: '9 to 15' },
+        { key: '16to25', label: '16 to 25' },
+        { key: '26to50', label: '26 to 50' },
+        { key: '50to100', label: '50 to 100' },
+        { key: '100plus', label: '100 plus' },
       ],
     },
   },

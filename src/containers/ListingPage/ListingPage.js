@@ -47,9 +47,11 @@ import SectionAvatar from './SectionAvatar';
 import SectionHeading from './SectionHeading';
 import SectionDescriptionMaybe from './SectionDescriptionMaybe';
 import SectionFeaturesMaybe from './SectionFeaturesMaybe';
+import SectionViewMaybe from './SectionViewMaybe';
 import SectionReviews from './SectionReviews';
 import SectionHostMaybe from './SectionHostMaybe';
 import SectionRulesMaybe from './SectionRulesMaybe';
+import SectionCapacity from './SectionCapacity';
 import SectionMapMaybe from './SectionMapMaybe';
 import css from './ListingPage.module.css';
 
@@ -377,7 +379,9 @@ export class ListingPageComponent extends Component {
     );
 
     const amenityOptions = findOptionsForSelectFilter('amenities', filterConfig);
+    const viewOptions = findOptionsForSelectFilter('view', filterConfig);
     const categoryOptions = findOptionsForSelectFilter('category', filterConfig);
+    const capacityOptions = findOptionsForSelectFilter('capacity', filterConfig);
     const category =
       publicData && publicData.category ? (
         <span>
@@ -435,7 +439,9 @@ export class ListingPageComponent extends Component {
                     onContactUser={this.onContactUser}
                   />
                   <SectionDescriptionMaybe description={description} />
+                  <SectionCapacity publicData={publicData} options={capacityOptions} />
                   <SectionFeaturesMaybe options={amenityOptions} publicData={publicData} />
+                  <SectionViewMaybe options={viewOptions} publicData={publicData} />
                   <SectionRulesMaybe publicData={publicData} />
                   <SectionMapMaybe
                     geolocation={geolocation}

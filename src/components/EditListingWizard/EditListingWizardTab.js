@@ -11,6 +11,7 @@ import { ensureListing } from '../../util/data';
 import { createResourceLocatorString } from '../../util/routes';
 import {
   EditListingAvailabilityPanel,
+  EditListingCapacityPanel,
   EditListingDescriptionPanel,
   EditListingFeaturesPanel,
   EditListingLocationPanel,
@@ -28,10 +29,12 @@ export const POLICY = 'policy';
 export const LOCATION = 'location';
 export const PRICING = 'pricing';
 export const PHOTOS = 'photos';
+export const CAPACITY = 'capacity';
 
 // EditListingWizardTab component supports these tabs
 export const SUPPORTED_TABS = [
   DESCRIPTION,
+  CAPACITY,
   FEATURES,
   POLICY,
   LOCATION,
@@ -41,7 +44,7 @@ export const SUPPORTED_TABS = [
 ];
 
 const pathParamsToNextTab = (params, tab, marketplaceTabs) => {
-  const nextTabIndex = marketplaceTabs.findIndex(s => s === tab) + 1;
+  const nextTabIndex = markeEditListingWizard.jstplaceTabs.findIndex(s => s === tab) + 1;
   const nextTab =
     nextTabIndex < marketplaceTabs.length
       ? marketplaceTabs[nextTabIndex]
@@ -126,7 +129,7 @@ const EditListingWizardTab = props => {
         .then(r => {
           if (tab !== marketplaceTabs[marketplaceTabs.length - 1]) {
             // Create listing flow: smooth scrolling polyfill to scroll to correct tab
-            handleCreateFlowTabScrolling(false);
+            handleCreateFlowTabScrolling(true);
 
             // After successful saving of draft data, user should be redirected to next tab
             redirectAfterDraftUpdate(r.data.data.id.uuid, params, tab, marketplaceTabs, history);
@@ -178,6 +181,20 @@ const EditListingWizardTab = props => {
       return (
         <EditListingFeaturesPanel
           {...panelProps(FEATURES)}
+          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          onSubmit={values => {
+            onCompleteEditListingWizardTab(tab, values);
+          }}
+        />
+      );
+    }
+    case CAPACITY: {
+      const submitButtonTranslationKey = isNewListingFlow
+        ? 'EditListingWizard.saveNewCapacity'
+        : 'EditListingWizard.saveEditCapacity';
+      return (
+        <EditListingCapacityPanel
+          {...panelProps(CAPACITY)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={values => {
             onCompleteEditListingWizardTab(tab, values);
