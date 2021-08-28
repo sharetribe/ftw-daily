@@ -77,7 +77,7 @@ export const filters = [
     id: 'category',
     label: 'Category',
     type: 'SelectSingleFilter',
-    group: 'secondary',
+    group: 'primary',
     queryParamNames: ['pub_category'],
     config: {
       // "key" is the option you see in Flex Console.
@@ -89,6 +89,7 @@ export const filters = [
         { key: 'gallery', label: 'Gallery' },
         { key: 'bar', label: 'Bar' },
         { key: 'cafe', label: 'Cafe' },
+        { key: 'yacht', label: 'Yacht' },
         { key: 'personal_property', label: 'Personal Property' },
         { key: 'other', label: 'Other' },
       ],
@@ -137,27 +138,28 @@ export const filters = [
       ],
     },
   },
-  // {
-  //   id: 'view',
-  //   label: 'View',
-  //   type: 'SelectSingleFilter',
-  //   group: 'secondary',
-  //   queryParamNames: ['pub_view'],
-  //   config: {
-  //     options: [
-  //       { key: 'no', label: 'No view' },
-  //       { key: 'sea', label: 'Sea view' },
-  //       { key: 'lake', label: 'Lake view' },
-  //       { key: 'forest', label: 'Forest view' },
-  //       { key: 'garden', label: 'Garden view' },
-  //     ],
-  //   },
-  // },
+  {
+    id: 'view',
+    label: 'View',
+    type: 'SelectSingleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_view'],
+    config: {
+      options: [
+        { key: 'no', label: 'No view' },
+        { key: 'sea', label: 'Sea view' },
+        { key: 'lake', label: 'Lake view' },
+        { key: 'forest', label: 'Forest view' },
+        { key: 'garden', label: 'Garden view' },
+        { key: 'city', label: 'City view' },
+      ],
+    },
+  },
   {
     id: 'capacity',
     label: 'Capacity',
     type: 'SelectSingleFilter',
-    group: 'secondary',
+    group: 'primary',
     queryParamNames: ['pub_capacity'],
     config: {
       options: [

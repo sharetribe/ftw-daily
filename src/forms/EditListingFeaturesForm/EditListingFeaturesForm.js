@@ -66,18 +66,18 @@ const EditListingFeaturesFormComponent = props => (
             label={'Amenities'}
           />
 
-          {/*<FieldSelect*/}
-          {/*  className={css.features}*/}
-          {/*  name={viewKey}*/}
-          {/*  id={viewKey}*/}
-          {/*  label={'View type'}*/}
-          {/*>*/}
-          {/*  {viewOptions.map(o => (*/}
-          {/*    <option key={o.key} value={o.key}>*/}
-          {/*      {o.label}*/}
-          {/*    </option>*/}
-          {/*  ))}*/}
-          {/*</FieldSelect>*/}
+          <FieldSelect
+            className={css.features}
+            name={viewKey}
+            id={viewKey}
+            label={'View type'}
+          >
+            {viewOptions.map(o => (
+              <option key={o.key} value={o.key}>
+                {o.label}
+              </option>
+            ))}
+          </FieldSelect>
 
           <Button
             className={css.submitButton}
