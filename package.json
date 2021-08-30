@@ -36,7 +36,7 @@
     "lodash": "^4.17.21",
     "mapbox-gl-multitouch": "^1.0.3",
     "moment": "^2.22.2",
-    "object.entries": "^1.1.2",
+    "object.entries": "^1.1.4",
     "object.values": "^1.1.1",
     "passport": "^0.4.1",
     "passport-facebook": "^3.0.0",
