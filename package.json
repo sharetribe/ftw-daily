@@ -78,8 +78,7 @@
   },
   "resolutions": {
     "react-dates/lodash": "^4.17.21",
-    "react-test-renderer": "^16.13.1",
-    "serialize-javascript": "^2.1.1"
+    "react-test-renderer": "^16.13.1"
   },
   "nodemonConfig": {
     "execMap": {
