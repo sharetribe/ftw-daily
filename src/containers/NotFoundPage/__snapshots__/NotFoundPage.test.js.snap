@@ -33,17 +33,15 @@ exports[`NotFoundPageComponent matches snapshot 1`] = `
           <h1
             className="heading"
           >
-            <FormattedMessage
+            <MemoizedFormattedMessage
               id="NotFoundPage.heading"
-              values={Object {}}
             />
           </h1>
           <p
             className="description"
           >
-            <FormattedMessage
+            <MemoizedFormattedMessage
               id="NotFoundPage.description"
-              values={Object {}}
             />
           </p>
           <injectIntl(LocationSearchFormComponent)

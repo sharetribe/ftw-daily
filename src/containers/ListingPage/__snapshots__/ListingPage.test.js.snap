@@ -338,7 +338,7 @@ exports[`ListingPage matches snapshot 1`] = `
             subTitle="ListingPage.bookingSubTitle"
             timeSlots={null}
             title={
-              <FormattedMessage
+              <Memo(MemoizedFormattedMessage)
                 id="ListingPage.bookingTitle"
                 values={
                   Object {
