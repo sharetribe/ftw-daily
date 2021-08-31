@@ -48,9 +48,8 @@ exports[`ListingCard matches snapshot 1`] = `
       <div
         className="perUnit"
       >
-        <FormattedMessage
+        <MemoizedFormattedMessage
           id="ListingCard.perNight"
-          values={Object {}}
         />
       </div>
     </div>
@@ -67,7 +66,7 @@ exports[`ListingCard matches snapshot 1`] = `
       <div
         className="authorInfo"
       >
-        <FormattedMessage
+        <MemoizedFormattedMessage
           id="ListingCard.hostedBy"
           values={
             Object {

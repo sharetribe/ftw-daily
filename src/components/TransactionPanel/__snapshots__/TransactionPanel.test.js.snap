@@ -43,7 +43,6 @@ exports[`TransactionPanel - Order accepted matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -85,7 +84,6 @@ exports[`TransactionPanel - Order accepted matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -740,7 +738,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         intl={
           Object {
             "formatDate": [Function],
-            "formatHTMLMessage": [Function],
             "formatMessage": [Function],
             "formatNumber": [Function],
             "formatPlural": [Function],
@@ -818,7 +815,6 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -860,7 +856,6 @@ exports[`TransactionPanel - Order autodeclined matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -1513,7 +1508,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         intl={
           Object {
             "formatDate": [Function],
-            "formatHTMLMessage": [Function],
             "formatMessage": [Function],
             "formatNumber": [Function],
             "formatPlural": [Function],
@@ -1591,7 +1585,6 @@ exports[`TransactionPanel - Order canceled matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -1633,7 +1626,6 @@ exports[`TransactionPanel - Order canceled matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -2288,7 +2280,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         intl={
           Object {
             "formatDate": [Function],
-            "formatHTMLMessage": [Function],
             "formatMessage": [Function],
             "formatNumber": [Function],
             "formatPlural": [Function],
@@ -2366,7 +2357,6 @@ exports[`TransactionPanel - Order declined matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -2408,7 +2398,6 @@ exports[`TransactionPanel - Order declined matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -3061,7 +3050,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         intl={
           Object {
             "formatDate": [Function],
-            "formatHTMLMessage": [Function],
             "formatMessage": [Function],
             "formatNumber": [Function],
             "formatPlural": [Function],
@@ -3139,7 +3127,6 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -3181,7 +3168,6 @@ exports[`TransactionPanel - Order delivered matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -3851,7 +3837,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         intl={
           Object {
             "formatDate": [Function],
-            "formatHTMLMessage": [Function],
             "formatMessage": [Function],
             "formatNumber": [Function],
             "formatPlural": [Function],
@@ -3929,7 +3914,6 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -3971,7 +3955,6 @@ exports[`TransactionPanel - Order enquired matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -4623,7 +4606,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         intl={
           Object {
             "formatDate": [Function],
-            "formatHTMLMessage": [Function],
             "formatMessage": [Function],
             "formatNumber": [Function],
             "formatPlural": [Function],
@@ -4701,7 +4683,6 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -4743,7 +4724,6 @@ exports[`TransactionPanel - Order preauthorized matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -5396,7 +5376,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         intl={
           Object {
             "formatDate": [Function],
-            "formatHTMLMessage": [Function],
             "formatMessage": [Function],
             "formatNumber": [Function],
             "formatPlural": [Function],
@@ -5474,7 +5453,6 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -5516,7 +5494,6 @@ exports[`TransactionPanel - Sale accepted matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -6171,7 +6148,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         intl={
           Object {
             "formatDate": [Function],
-            "formatHTMLMessage": [Function],
             "formatMessage": [Function],
             "formatNumber": [Function],
             "formatPlural": [Function],
@@ -6249,7 +6225,6 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -6291,7 +6266,6 @@ exports[`TransactionPanel - Sale autodeclined matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -6944,7 +6918,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         intl={
           Object {
             "formatDate": [Function],
-            "formatHTMLMessage": [Function],
             "formatMessage": [Function],
             "formatNumber": [Function],
             "formatPlural": [Function],
@@ -7022,7 +6995,6 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -7064,7 +7036,6 @@ exports[`TransactionPanel - Sale canceled matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -7719,7 +7690,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         intl={
           Object {
             "formatDate": [Function],
-            "formatHTMLMessage": [Function],
             "formatMessage": [Function],
             "formatNumber": [Function],
             "formatPlural": [Function],
@@ -7797,7 +7767,6 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -7839,7 +7808,6 @@ exports[`TransactionPanel - Sale declined matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -8492,7 +8460,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         intl={
           Object {
             "formatDate": [Function],
-            "formatHTMLMessage": [Function],
             "formatMessage": [Function],
             "formatNumber": [Function],
             "formatPlural": [Function],
@@ -8570,7 +8537,6 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -8612,7 +8578,6 @@ exports[`TransactionPanel - Sale delivered matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -9267,7 +9232,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         intl={
           Object {
             "formatDate": [Function],
-            "formatHTMLMessage": [Function],
             "formatMessage": [Function],
             "formatNumber": [Function],
             "formatPlural": [Function],
@@ -9345,7 +9309,6 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -9387,7 +9350,6 @@ exports[`TransactionPanel - Sale enquired matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -10039,7 +10001,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         intl={
           Object {
             "formatDate": [Function],
-            "formatHTMLMessage": [Function],
             "formatMessage": [Function],
             "formatNumber": [Function],
             "formatPlural": [Function],
@@ -10117,7 +10078,6 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -10159,7 +10119,6 @@ exports[`TransactionPanel - Sale preauthorized matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -10812,7 +10771,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         intl={
           Object {
             "formatDate": [Function],
-            "formatHTMLMessage": [Function],
             "formatMessage": [Function],
             "formatNumber": [Function],
             "formatPlural": [Function],

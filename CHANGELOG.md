@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2021-XX-XX
 
+- [change] Updates to some of the libraries. React Intl had a breaking change v3 -> v5.
+  [#464](https://github.com/sharetribe/ftw-daily/pull/1464)
 - [fix] Adblockers might block Google analytics (window.ga) and cause an error.
   [#1462](https://github.com/sharetribe/ftw-daily/pull/1462)
 

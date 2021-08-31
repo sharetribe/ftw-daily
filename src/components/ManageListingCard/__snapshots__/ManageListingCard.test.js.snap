@@ -38,9 +38,8 @@ exports[`ManageListingCard matches snapshot 1`] = `
       <div
         className="menuOverlayContent"
       >
-        <FormattedMessage
+        <MemoizedFormattedMessage
           id="ManageListingCard.viewListing"
-          values={Object {}}
         />
       </div>
     </div>
@@ -96,9 +95,8 @@ exports[`ManageListingCard matches snapshot 1`] = `
                 onClick={[Function]}
                 rootClassName="menuItem"
               >
-                <FormattedMessage
+                <MemoizedFormattedMessage
                   id="ManageListingCard.closeListing"
-                  values={Object {}}
                 />
               </InlineTextButton>
             </MenuItem>
@@ -122,9 +120,8 @@ exports[`ManageListingCard matches snapshot 1`] = `
       <div
         className="perUnit"
       >
-        <FormattedMessage
+        <MemoizedFormattedMessage
           id="ManageListingCard.perNight"
-          values={Object {}}
         />
       </div>
     </div>
@@ -168,9 +165,8 @@ exports[`ManageListingCard matches snapshot 1`] = `
           }
         }
       >
-        <FormattedMessage
+        <MemoizedFormattedMessage
           id="ManageListingCard.editListing"
-          values={Object {}}
         />
       </NamedLink>
       <span
@@ -190,9 +186,8 @@ exports[`ManageListingCard matches snapshot 1`] = `
           }
         }
       >
-        <FormattedMessage
+        <MemoizedFormattedMessage
           id="ManageListingCard.manageAvailability"
-          values={Object {}}
         />
       </NamedLink>
     </div>

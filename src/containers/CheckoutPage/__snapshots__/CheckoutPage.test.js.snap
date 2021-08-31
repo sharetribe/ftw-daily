@@ -82,7 +82,7 @@ exports[`CheckoutPage matches snapshot 1`] = `
         <div
           className="author"
         >
-          <FormattedMessage
+          <MemoizedFormattedMessage
             id="CheckoutPage.hostedBy"
             values={
               Object {

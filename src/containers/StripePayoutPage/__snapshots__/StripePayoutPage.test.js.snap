@@ -38,9 +38,8 @@ exports[`StripePayoutPage matches snapshot with Stripe connected 1`] = `
         <h1
           className="title"
         >
-          <FormattedMessage
+          <MemoizedFormattedMessage
             id="StripePayoutPage.heading"
-            values={Object {}}
           />
         </h1>
         <injectIntl(StripeConnectAccountFormComponent)
@@ -140,9 +139,8 @@ exports[`StripePayoutPage matches snapshot with Stripe not connected 1`] = `
         <h1
           className="title"
         >
-          <FormattedMessage
+          <MemoizedFormattedMessage
             id="StripePayoutPage.heading"
-            values={Object {}}
           />
         </h1>
         <injectIntl(StripeConnectAccountFormComponent)
@@ -232,9 +230,8 @@ exports[`StripePayoutPage matches snapshot with details submitted 1`] = `
         <h1
           className="title"
         >
-          <FormattedMessage
+          <MemoizedFormattedMessage
             id="StripePayoutPage.heading"
-            values={Object {}}
           />
         </h1>
         <injectIntl(StripeConnectAccountFormComponent)

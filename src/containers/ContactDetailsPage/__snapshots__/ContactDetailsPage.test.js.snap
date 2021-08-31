@@ -38,9 +38,8 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
         <h1
           className="title"
         >
-          <FormattedMessage
+          <MemoizedFormattedMessage
             id="ContactDetailsPage.heading"
-            values={Object {}}
           />
         </h1>
       </div>

@@ -15,7 +15,6 @@ exports[`EditListingPhotosForm matches snapshot 1`] = `
   intl={
     Object {
       "formatDate": [Function],
-      "formatHTMLMessage": [Function],
       "formatMessage": [Function],
       "formatNumber": [Function],
       "formatPlural": [Function],

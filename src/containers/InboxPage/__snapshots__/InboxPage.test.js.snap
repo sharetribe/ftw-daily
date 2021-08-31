@@ -29,9 +29,8 @@ exports[`InboxPage matches snapshot 1`] = `
       <h1
         className="title"
       >
-        <FormattedMessage
+        <MemoizedFormattedMessage
           id="InboxPage.title"
-          values={Object {}}
         />
       </h1>
       <TabNav
@@ -50,9 +49,8 @@ exports[`InboxPage matches snapshot 1`] = `
               },
               "selected": true,
               "text": <span>
-                <FormattedMessage
+                <Memo(MemoizedFormattedMessage)
                   id="InboxPage.ordersTabTitle"
-                  values={Object {}}
                 />
               </span>,
             },
@@ -65,9 +63,8 @@ exports[`InboxPage matches snapshot 1`] = `
               },
               "selected": false,
               "text": <span>
-                <FormattedMessage
+                <Memo(MemoizedFormattedMessage)
                   id="InboxPage.salesTabTitle"
-                  values={Object {}}
                 />
               </span>,
             },
@@ -90,7 +87,6 @@ exports[`InboxPage matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -244,7 +240,6 @@ exports[`InboxPage matches snapshot 1`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -516,9 +511,8 @@ exports[`InboxPage matches snapshot 3`] = `
       <h1
         className="title"
       >
-        <FormattedMessage
+        <MemoizedFormattedMessage
           id="InboxPage.title"
-          values={Object {}}
         />
       </h1>
       <TabNav
@@ -537,9 +531,8 @@ exports[`InboxPage matches snapshot 3`] = `
               },
               "selected": false,
               "text": <span>
-                <FormattedMessage
+                <Memo(MemoizedFormattedMessage)
                   id="InboxPage.ordersTabTitle"
-                  values={Object {}}
                 />
               </span>,
             },
@@ -552,9 +545,8 @@ exports[`InboxPage matches snapshot 3`] = `
               },
               "selected": true,
               "text": <span>
-                <FormattedMessage
+                <Memo(MemoizedFormattedMessage)
                   id="InboxPage.salesTabTitle"
-                  values={Object {}}
                 />
               </span>,
             },
@@ -577,7 +569,6 @@ exports[`InboxPage matches snapshot 3`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
@@ -731,7 +722,6 @@ exports[`InboxPage matches snapshot 3`] = `
             intl={
               Object {
                 "formatDate": [Function],
-                "formatHTMLMessage": [Function],
                 "formatMessage": [Function],
                 "formatNumber": [Function],
                 "formatPlural": [Function],
