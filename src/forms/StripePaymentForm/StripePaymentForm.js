@@ -71,10 +71,14 @@ const stripeElementsOptions = {
   ],
 };
 
+// card (being a Stripe Elements component), can have own styling passed to it.
+// However, its internal width-calculation seems to break if font-size is too big
+// compared to component's own width.
+const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 const cardStyles = {
   base: {
     fontFamily: '"poppins", Helvetica, Arial, sans-serif',
-    fontSize: '18px',
+    fontSize: isMobile ? '14px' : '18px',
     fontSmoothing: 'antialiased',
     lineHeight: '24px',
     letterSpacing: '-0.1px',
@@ -236,10 +240,10 @@ class StripePaymentForm extends Component {
       // EventListener is the only way to simulate breakpoints with Stripe.
       window.addEventListener('resize', () => {
         if (this.card) {
-          if (window.innerWidth < 1024) {
-            this.card.update({ style: { base: { fontSize: '18px', lineHeight: '24px' } } });
+          if (window.innerWidth < 768) {
+            this.card.update({ style: { base: { fontSize: '14px', lineHeight: '24px' } } });
           } else {
-            this.card.update({ style: { base: { fontSize: '20px', lineHeight: '32px' } } });
+            this.card.update({ style: { base: { fontSize: '18px', lineHeight: '24px' } } });
           }
         }
       });
