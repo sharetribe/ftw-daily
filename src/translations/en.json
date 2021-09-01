@@ -767,7 +767,7 @@
   "SectionHowItWorks.part3Title": "3. Review the host",
   "SectionHowItWorks.titleLineOne": "The sauna ritual",
   "SectionHowItWorks.titleLineTwo": "(or how Saunatime works).",
-  "SectionLocations.listingsInLocation": "Saunas in {location}",
+  "SectionLocations.listingsInLocation": "bygg i {location}",
   "SectionLocations.title": "Explore exotic locations in Finland",
   "SelectMultipleFilter.labelSelected": "{labelText} • {count}",
   "SelectMultipleFilterPlainForm.labelSelected": "{labelText} • {count}",
