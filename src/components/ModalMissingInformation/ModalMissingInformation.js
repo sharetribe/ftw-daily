@@ -9,7 +9,7 @@ import { pathByRouteName } from '../../util/routes';
 import { Modal } from '../../components';
 
 import EmailReminder from './EmailReminder';
-import StripeAccountReminder from './StripeAccountReminder';
+
 import css from './ModalMissingInformation.module.css';
 
 const MISSING_INFORMATION_MODAL_WHITELIST = [
@@ -18,11 +18,9 @@ const MISSING_INFORMATION_MODAL_WHITELIST = [
   'ContactDetailsPage',
   'EmailVerificationPage',
   'PasswordResetPage',
-  'StripePayoutPage',
 ];
 
 const EMAIL_VERIFICATION = 'EMAIL_VERIFICATION';
-const STRIPE_ACCOUNT = 'STRIPE_ACCOUNT';
 
 class ModalMissingInformation extends Component {
   constructor(props) {
@@ -78,14 +76,9 @@ class ModalMissingInformation extends Component {
       const emailUnverified = !!currentUser.id && !currentUser.attributes.emailVerified;
       const emailVerificationNeeded = hasListingsOrOrders && emailUnverified;
 
-      const stripeAccountMissing = !!currentUser.id && !currentUser.attributes.stripeConnected;
-      const stripeAccountNeeded = currentUserHasListings && stripeAccountMissing;
-
       // Show reminder
       if (emailVerificationNeeded) {
         this.setState({ showMissingInformationReminder: EMAIL_VERIFICATION });
-      } else if (stripeAccountNeeded) {
-        this.setState({ showMissingInformationReminder: STRIPE_ACCOUNT });
       }
     }
   }
@@ -119,8 +112,6 @@ class ModalMissingInformation extends Component {
             sendVerificationEmailError={sendVerificationEmailError}
           />
         );
-      } else if (this.state.showMissingInformationReminder === STRIPE_ACCOUNT) {
-        content = <StripeAccountReminder className={classes} />;
       }
     }
 
