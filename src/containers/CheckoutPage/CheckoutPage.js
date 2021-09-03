@@ -9,12 +9,7 @@ import classNames from 'classnames';
 import routeConfiguration from '../../routeConfiguration';
 import { pathByRouteName, findRouteByRouteName } from '../../util/routes';
 import { propTypes, LINE_ITEM_NIGHT, LINE_ITEM_DAY } from '../../util/types';
-import {
-  ensureListing,
-  ensureUser,
-  ensureTransaction,
-  ensureBooking,
-} from '../../util/data';
+import { ensureListing, ensureUser, ensureTransaction, ensureBooking } from '../../util/data';
 import { dateFromLocalToAPI } from '../../util/dates';
 import { createSlug } from '../../util/urlHelpers';
 import {
@@ -104,20 +99,12 @@ export class CheckoutPageComponent extends Component {
     // Action is 'POP' on both history.back() and page refresh cases.
     // Action is 'PUSH' when user has directed through a link
     // Action is 'REPLACE' when user has directed through login/signup process
-    const hasNavigatedThroughLink =
-      history.action === 'PUSH' || history.action === 'REPLACE';
+    const hasNavigatedThroughLink = history.action === 'PUSH' || history.action === 'REPLACE';
 
-    const hasDataInProps =
-      !!(bookingData && bookingDates && listing) && hasNavigatedThroughLink;
+    const hasDataInProps = !!(bookingData && bookingDates && listing) && hasNavigatedThroughLink;
     if (hasDataInProps) {
       // Store data only if data is passed through props and user has navigated through a link.
-      storeData(
-        bookingData,
-        bookingDates,
-        listing,
-        enquiredTransaction,
-        STORAGE_KEY
-      );
+      storeData(bookingData, bookingDates, listing, enquiredTransaction, STORAGE_KEY);
     }
 
     // NOTE: stored data can be empty if user has already successfully completed transaction.
@@ -157,8 +144,6 @@ export class CheckoutPageComponent extends Component {
   }
 
   handleSubmit(values) {
-    console.log('Handle submit', values);
-
     if (this.state.submitting) {
       return;
     }
@@ -166,13 +151,7 @@ export class CheckoutPageComponent extends Component {
     this.setState({ submitting: true });
 
     const initialMessage = values.initialMessage;
-    const {
-      history,
-      speculatedTransaction,
-      dispatch,
-      onInitiateOrder,
-      onSendMessage,
-    } = this.props;
+    const { history, speculatedTransaction, dispatch, onInitiateOrder, onSendMessage } = this.props;
 
     // Create order aka transaction
     // NOTE: if unit type is line-item/units, quantity needs to be added.
@@ -184,15 +163,11 @@ export class CheckoutPageComponent extends Component {
     };
 
     const enquiredTransaction = this.state.pageData.enquiredTransaction;
-    const transactionIdMaybe = enquiredTransaction
-      ? enquiredTransaction.id
-      : null;
+    const transactionIdMaybe = enquiredTransaction ? enquiredTransaction.id : null;
 
     onInitiateOrder(requestParams, transactionIdMaybe).then(params => {
-      console.log('Params', params);
       onSendMessage({ ...params, message: initialMessage })
         .then(values => {
-          console.log('values', values);
           const { orderId, messageSuccess } = values;
           this.setState({ submitting: false });
           const routes = routeConfiguration();
@@ -202,9 +177,7 @@ export class CheckoutPageComponent extends Component {
           // sending failed, we tell it to the OrderDetailsPage.
           dispatch(
             OrderPage.setInitialValues({
-              initialMessageFailedToTransaction: messageSuccess
-                ? null
-                : orderId,
+              initialMessageFailedToTransaction: messageSuccess ? null : orderId,
             })
           );
           const orderDetailsPath = pathByRouteName('OrderDetailsPage', routes, {
@@ -244,11 +217,7 @@ export class CheckoutPageComponent extends Component {
     const isLoading = !this.state.dataLoaded || speculateTransactionInProgress;
 
     const { listing, bookingDates, enquiredTransaction } = this.state.pageData;
-    const currentTransaction = ensureTransaction(
-      speculatedTransaction,
-      {},
-      null
-    );
+    const currentTransaction = ensureTransaction(speculatedTransaction, {}, null);
     const currentBooking = ensureBooking(currentTransaction.booking);
     const currentListing = ensureListing(listing);
     const currentAuthor = ensureUser(currentListing.author);
@@ -274,27 +243,19 @@ export class CheckoutPageComponent extends Component {
     // Redirection must happen before any data format error is thrown (e.g. wrong currency)
     if (shouldRedirect) {
       // eslint-disable-next-line no-console
-      console.error(
-        'Missing or invalid data for checkout, redirecting back to listing page.',
-        {
-          transaction: currentTransaction,
-          bookingDates,
-          listing,
-        }
-      );
+      console.error('Missing or invalid data for checkout, redirecting back to listing page.', {
+        transaction: currentTransaction,
+        bookingDates,
+        listing,
+      });
       return <NamedRedirect name="ListingPage" params={params} />;
     }
 
     const listingTitle = currentListing.attributes.title;
-    const title = intl.formatMessage(
-      { id: 'CheckoutPage.title' },
-      { listingTitle }
-    );
+    const title = intl.formatMessage({ id: 'CheckoutPage.title' }, { listingTitle });
 
     const firstImage =
-      currentListing.images && currentListing.images.length > 0
-        ? currentListing.images[0]
-        : null;
+      currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
 
     const listingNotFoundErrorMessage = listingNotFound ? (
       <p className={css.notFoundError}>
@@ -313,12 +274,8 @@ export class CheckoutPageComponent extends Component {
       </NamedLink>
     );
 
-    const isAmountTooLowError = isTransactionInitiateAmountTooLowError(
-      initiateOrderError
-    );
-    const isChargeDisabledError = isTransactionChargeDisabledError(
-      initiateOrderError
-    );
+    const isAmountTooLowError = isTransactionInitiateAmountTooLowError(initiateOrderError);
+    const isChargeDisabledError = isTransactionChargeDisabledError(initiateOrderError);
     const isBookingTimeNotAvailableError = isTransactionInitiateBookingTimeNotAvailableError(
       initiateOrderError
     );
@@ -346,10 +303,7 @@ export class CheckoutPageComponent extends Component {
     } else if (!listingNotFound && initiateOrderError) {
       initiateOrderErrorMessage = (
         <p className={css.orderError}>
-          <FormattedMessage
-            id="CheckoutPage.initiateOrderError"
-            values={{ listingLink }}
-          />
+          <FormattedMessage id="CheckoutPage.initiateOrderError" values={{ listingLink }} />
         </p>
       );
     }
@@ -361,19 +315,7 @@ export class CheckoutPageComponent extends Component {
     ) : null;
     let speculateErrorMessage = null;
 
-    if (
-      isTransactionInitiateMissingStripeAccountError(speculateTransactionError)
-    ) {
-      speculateErrorMessage = (
-        <p className={css.orderError}>
-          <FormattedMessage id="CheckoutPage.providerStripeAccountMissingError" />
-        </p>
-      );
-    } else if (
-      isTransactionInitiateBookingTimeNotAvailableError(
-        speculateTransactionError
-      )
-    ) {
+    if (isTransactionInitiateBookingTimeNotAvailableError(speculateTransactionError)) {
       speculateErrorMessage = (
         <p className={css.orderError}>
           <FormattedMessage id="CheckoutPage.bookingTimeNotAvailableMessage" />
@@ -517,10 +459,7 @@ export class CheckoutPageComponent extends Component {
             <div className={css.heading}>
               <h1 className={css.title}>{title}</h1>
               <div className={css.author}>
-                <FormattedMessage
-                  id="CheckoutPage.hostedBy"
-                  values={{ name: authorDisplayName }}
-                />
+                <FormattedMessage id="CheckoutPage.hostedBy" values={{ name: authorDisplayName }} />
               </div>
             </div>
 
@@ -587,7 +526,6 @@ CheckoutPageComponent.propTypes = {
     slug: string,
   }).isRequired,
   sendOrderRequest: func.isRequired,
-  onCreateStripePaymentToken: func.isRequired,
 
   // from connect
   dispatch: func.isRequired,
@@ -630,20 +568,21 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   dispatch,
-  onInitiateOrder: (params, transactionId) =>
-    dispatch(initiateOrder(params, transactionId)),
+  onInitiateOrder: (params, transactionId) => dispatch(initiateOrder(params, transactionId)),
   onSendMessage: params => dispatch(sendMessage(params)),
   fetchSpeculatedTransaction: params => dispatch(speculateTransaction(params)),
 });
 
 const CheckoutPage = compose(
   withRouter,
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   injectIntl
 )(CheckoutPageComponent);
 
-CheckoutPage.setInitialValues = initialValues =>
-  setInitialValues(initialValues);
+CheckoutPage.setInitialValues = initialValues => setInitialValues(initialValues);
 
 CheckoutPage.displayName = 'CheckoutPage';
 
