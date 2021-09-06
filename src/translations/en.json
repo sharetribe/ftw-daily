@@ -93,7 +93,7 @@
   "BookingPanel.subTitleClosedListing": "Sorry, this listing has been closed.",
   "CheckoutPage.bookingTimeNotAvailableMessage": "Unfortunately, the requested time is already booked.",
   "CheckoutPage.chargeDisabledMessage": "This provider's payout information is incomplete so this listing cannot be booked. Please contact the marketplace administrators.",
-  "CheckoutPage.errorlistingLinkText": "the sauna page",
+  "CheckoutPage.errorlistingLinkText": "the sauna!! page",
   "CheckoutPage.goToLandingPage": "Go to homepage",
   "CheckoutPage.hostedBy": "Hosted by {name}",
   "CheckoutPage.initiateOrderAmountTooLow": "We are unable to process this payment since the payment amount is too low. Please contact the marketplace administrator.",
