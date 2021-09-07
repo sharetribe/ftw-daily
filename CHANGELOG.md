@@ -13,7 +13,8 @@ way to update this template, but currently, we follow a pattern:
 ---
 
 ## Upcoming version 2021-XX-XX
-
+- [fix] Remove unnecessary language import: fr.json
+  [#1469](https://github.com/sharetribe/ftw-daily/pull/1469)
 - [fix] Font-size for Poppins font was too big for Stripe Elements on small screens.
   [#1465](https://github.com/sharetribe/ftw-daily/pull/1465)
 - [change] Updates to some of the libraries. React Intl had a breaking change v3 -> v5.
