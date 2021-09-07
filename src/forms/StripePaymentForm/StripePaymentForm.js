@@ -78,7 +78,7 @@ const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 const cardStyles = {
   base: {
     fontFamily: '"poppins", Helvetica, Arial, sans-serif',
-    fontSize: isMobile ? '14px' : '18px',
+    fontSize: isMobile ? '13px' : '18px',
     fontSmoothing: 'antialiased',
     lineHeight: '24px',
     letterSpacing: '-0.1px',
@@ -241,7 +241,7 @@ class StripePaymentForm extends Component {
       window.addEventListener('resize', () => {
         if (this.card) {
           if (window.innerWidth < 768) {
-            this.card.update({ style: { base: { fontSize: '14px', lineHeight: '24px' } } });
+            this.card.update({ style: { base: { fontSize: '13px', lineHeight: '24px' } } });
           } else {
             this.card.update({ style: { base: { fontSize: '18px', lineHeight: '24px' } } });
           }
