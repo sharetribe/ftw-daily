@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2021-XX-XX
 
+- [change] Update browserlist data to match modern browsers.
+  [#1468](https://github.com/sharetribe/ftw-daily/pull/1468)
 - [fix] Font-size was too big for Stripe Elements on small screens on PaymentMethodsForm.
   [#1471](https://github.com/sharetribe/ftw-daily/pull/1471)
 - [fix] Remove unnecessary language import: fr.json
