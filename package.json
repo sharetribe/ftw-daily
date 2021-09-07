@@ -120,11 +120,9 @@
       "last 1 safari version"
     ]
   },
-
-   "engines": {
+  "engines": {
     "node": "^12.19.0 || >= 14.15.0"
   },
-
   "prettier": {
     "singleQuote": true,
     "trailingComma": "es5",
