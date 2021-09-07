@@ -37,8 +37,10 @@ import defaultMessages from './translations/en.json';
 // e.g. for French: import 'moment/locale/fr';
 
 // Step 3:
-// If you are using a non-english locale, point `messagesInLocale` to correct .json file
-import messagesInLocale from './translations/fr.json';
+// If you are using a non-english locale, point `messagesInLocale` to correct .json file.
+// Remove "const messagesInLocale" and add import for the correct locale:
+// import messagesInLocale from './translations/fr.json';
+const messagesInLocale = {};
 
 // If translation key is missing from `messagesInLocale` (e.g. fr.json),
 // corresponding key will be added to messages from `defaultMessages` (en.json)
