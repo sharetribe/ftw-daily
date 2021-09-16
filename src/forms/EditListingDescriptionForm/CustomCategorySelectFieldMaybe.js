@@ -18,6 +18,16 @@ const CustomCategorySelectFieldMaybe = props => {
     })
   );
 
+
+  const newArray = categories.map((item) => {
+    if ('key' in item) {
+      const mem = item['key'];
+      delete item['key'];
+      item['value'] = mem;
+    }
+    return item
+  });
+
   const categoryOptions = categories.map(cat => {
     return cat.children && cat.children.length
       ? (
@@ -44,7 +54,7 @@ const CustomCategorySelectFieldMaybe = props => {
     placeholder={categoryPlaceholder}
     label={categoryLabel}
     validate={categoryRequired}
-    options={categories}
+    options={newArray}
     />
  : null;
 };
