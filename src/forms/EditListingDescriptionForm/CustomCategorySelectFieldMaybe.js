@@ -1,6 +1,6 @@
 import React from 'react';
 import { required } from '../../util/validators';
-import { FieldSelect } from '../../components';
+import { FieldMultiSelect } from '../../components';
 
 import css from './EditListingDescriptionForm.module.css';
 
@@ -36,21 +36,17 @@ const CustomCategorySelectFieldMaybe = props => {
       )
   });
 
-  return categories ? (
-    <FieldSelect
-      className={css.category}
-      name={name}
-      id={id}
-      label={categoryLabel}
-      validate={categoryRequired}
-    >
-      <option disabled value="">
-        {categoryPlaceholder}
-      </option>
-
-      { categoryOptions }
-    </FieldSelect>
-  ) : null;
+  return categories ? 
+  <FieldMultiSelect
+    className={css.category}
+    name={name}
+    id={id}
+    placeholder={categoryPlaceholder}
+    label={categoryLabel}
+    validate={categoryRequired}
+    options={categories}
+    />
+ : null;
 };
 
 export default CustomCategorySelectFieldMaybe;
