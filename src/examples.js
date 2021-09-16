@@ -21,6 +21,7 @@ import * as FieldRadioButton from './components/FieldRadioButton/FieldRadioButto
 import * as FieldRangeSlider from './components/FieldRangeSlider/FieldRangeSlider.example';
 import * as FieldReviewRating from './components/FieldReviewRating/FieldReviewRating.example';
 import * as FieldSelect from './components/FieldSelect/FieldSelect.example';
+import * as FieldMultiSelect from './components/FieldMultiSelect/FieldMultiSelect.example';
 import * as FieldTextInput from './components/FieldTextInput/FieldTextInput.example';
 import * as FilterPlain from './components/FilterPlain/FilterPlain.example';
 import * as FilterPopup from './components/FilterPopup/FilterPopup.example';

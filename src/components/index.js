@@ -101,6 +101,7 @@ export { default as FieldDateRangeInput } from './FieldDateRangeInput/FieldDateR
 export { default as FieldRadioButton } from './FieldRadioButton/FieldRadioButton';
 export { default as FieldReviewRating } from './FieldReviewRating/FieldReviewRating';
 export { default as FieldSelect } from './FieldSelect/FieldSelect';
+export { default as FieldMultiSelect } from './FieldMultiSelect/FieldMultiSelect';
 export { default as FieldTextInput } from './FieldTextInput/FieldTextInput';
 export { default as FieldTimeZoneSelect } from './FieldTimeZoneSelect/FieldTimeZoneSelect';
 export { default as FieldRangeSlider } from './FieldRangeSlider/FieldRangeSlider';
