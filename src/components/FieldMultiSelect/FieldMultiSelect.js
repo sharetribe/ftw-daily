@@ -50,7 +50,7 @@ const FieldMultiSelectComponent = props => {
       return({
       ...provided,
       widht: '100%',
-      height: 50,
+      minHeight: 50,
       boxShadow: 'none',
       borderTop: 'none',
       borderLeft: 'none',
@@ -60,7 +60,7 @@ const FieldMultiSelectComponent = props => {
       borderBottomColor: disabled ? 'grey' : hasError ? 'red' : input.value ? '#6BDE98' : 'orange',
       "&:hover": {
         ...provided,
-        height: 50,
+        minHeight: 50,
         backgroundColor: 'none',
         boxShadow: 'none',
         borderTop: 'none',
