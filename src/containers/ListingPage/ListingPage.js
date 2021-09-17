@@ -84,7 +84,7 @@ const priceData = (price, intl) => {
 };
 
 const categoryLabel = (categories, key) => {
-  const cat = categories.find(c => c.key === key);
+  const cat = categories.find(c => c.key || c.value === key);
   return cat ? cat.label : key;
 };
 
