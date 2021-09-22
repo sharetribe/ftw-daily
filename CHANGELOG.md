@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2021-XX-XX
 
+## [v8.3.0] 2021-09-22
+
 - [change] Increase input font size on mobile to avoid Mobile Safari zooming in when focusing on
   inputs. [#1473](https://github.com/sharetribe/ftw-daily/pull/1473)
 - [change] Update browserlist data to match modern browsers.
@@ -28,6 +30,8 @@ way to update this template, but currently, we follow a pattern:
   [#464](https://github.com/sharetribe/ftw-daily/pull/1464)
 - [fix] Adblockers might block Google analytics (window.ga) and cause an error.
   [#1462](https://github.com/sharetribe/ftw-daily/pull/1462)
+
+  [v8.3.0]: https://github.com/sharetribe/ftw-daily/compare/v8.2.0...v8.3.0
 
 ## [v8.2.0] 2021-08-06
 
