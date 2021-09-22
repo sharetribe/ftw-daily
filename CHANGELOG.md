@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2021-XX-XX
 
+- [change] Increase input font size on mobile to avoid Mobile Safari zooming in when focusing on
+  inputs. [#1473](https://github.com/sharetribe/ftw-daily/pull/1473)
 - [change] Update browserlist data to match modern browsers.
   [#1468](https://github.com/sharetribe/ftw-daily/pull/1468)
 - [fix] Font-size was too big for Stripe Elements on small screens on PaymentMethodsForm.
