@@ -66,6 +66,7 @@ module.exports = (req, res) => {
     secure: USING_SSL,
   });
 
+
   const sdk = sharetribeSdk.createInstance({
     transitVerbose: TRANSIT_VERBOSE,
     clientId: CLIENT_ID,
