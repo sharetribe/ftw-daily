@@ -84,8 +84,9 @@ const priceData = (price, intl) => {
 };
 
 const categoryLabel = (categories, key) => {
-  const cat = categories.find(c => c.key || c.value === key);
-  return cat ? cat.label : key;
+  const cat = [...new Set(key.map(item => item.label))];
+  // const cat = categories.find(c => c.key || c.value === key);
+  return cat.join(' | ');
 };
 
 export class ListingPageComponent extends Component {
@@ -424,10 +425,10 @@ export class ListingPageComponent extends Component {
     const amenityOptions = findOptionsForSelectFilter(amenityIds, filterConfig);
     const catIds = config.custom.categories.map(c => c.id);
     const categoryOptions = findOptionsForSelectFilter(catIds, filterConfig);
-
     const category =
       publicData && publicData.category ? (
         <span>
+          
           {categoryLabel(categoryOptions, publicData.category)}
           <span className={css.separator}>•</span>
         </span>
