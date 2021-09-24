@@ -205,9 +205,9 @@ const isGoogleMathLong = value => {
  * @return {Number} converted value
  */
 export const convertMoneyToNumber = value => {
-  // if (!(value instanceof Money)) {
-  //   throw new Error('Value must be a Money type');
-  // }
+  if (!(value instanceof Money)) {
+    throw new Error('Value must be a Money type');
+  }
   const subUnitDivisorAsDecimal = convertDivisorToDecimal(unitDivisor(value.currency));
   let amount;
 
@@ -242,9 +242,9 @@ export const convertMoneyToNumber = value => {
  * @return {String} formatted money value
  */
 export const formatMoney = (intl, value) => {
-  // if (!(value instanceof Money)) {
-  //   throw new Error('Value must be a Money type');
-  // }
+  if (!(value instanceof Money)) {
+    throw new Error('Value must be a Money type');
+  }
   const valueAsNumber = convertMoneyToNumber(value);
 
   // See: https://github.com/yahoo/react-intl/wiki/API#formatnumber

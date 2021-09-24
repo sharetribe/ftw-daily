@@ -30,17 +30,26 @@ import moment from 'moment';
 import Decimal from 'decimal.js';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { dateFromLocalToAPI } from '../../util/dates';
+import { injectIntl } from '../../util/reactIntl';
+
 import { TRANSITION_REQUEST_PAYMENT, TX_TRANSITION_ACTOR_CUSTOMER } from '../../util/transaction';
-import { LINE_ITEM_DAY, LINE_ITEM_NIGHT, LINE_ITEM_UNITS, LINE_ITEM_DISCOUNT, DATE_TYPE_DATE, DATE_TYPE_DATETIME, HOURLY_PRICE } from '../../util/types';
+import {
+  LINE_ITEM_DAY,
+  LINE_ITEM_NIGHT,
+  LINE_ITEM_UNITS,
+  LINE_ITEM_DISCOUNT,
+  DATE_TYPE_DATE,
+  DATE_TYPE_DATETIME,
+  HOURLY_PRICE,
+} from '../../util/types';
 import { unitDivisor, convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
 import config from '../../config';
 import { BookingBreakdown } from '../../components';
+import FieldDiscount from '../BookingTimeForm/FiledDiscount';
 
 import css from './BookingDatesForm.module.css';
 
 const { Money, UUID } = sdkTypes;
-
-
 
 const estimatedNumericLineItemPrice = (unitPrice, unitCount) => {
   const numericPrice = convertMoneyToNumber(unitPrice);
@@ -49,11 +58,8 @@ const estimatedNumericLineItemPrice = (unitPrice, unitCount) => {
 };
 
 const estimatedNumericTotalDiscount = (discount, unitPrice, unitCount) => {
-  const {
-    amount: discountAmount,
-    breakpoint: discountBreakpoint,
-    unitType: discountUnitType
-  } = discount || {};
+  const { amount: discountAmount, breakpoint: discountBreakpoint, unitType: discountUnitType } =
+    discount || {};
 
   if (!discountAmount || !discountBreakpoint || !discountUnitType) return null;
 
@@ -68,7 +74,7 @@ const estimatedNumericTotalDiscount = (discount, unitPrice, unitCount) => {
   const numericTotalDiscount = new Decimal(numericTotalPrice).times(discountPercentage).toNumber();
 
   return numericTotalDiscount || 0;
-}
+};
 
 const estimatedTotalPrice = lineItems => {
   const numericTotalPrice = lineItems.reduce((sum, lineItem) => {
@@ -86,7 +92,6 @@ const estimatedTotalPrice = lineItems => {
     currency
   );
 };
-
 
 // When we cannot speculatively initiate a transaction (i.e. logged
 // out), we must estimate the transaction for booking breakdown. This function creates
@@ -228,12 +233,17 @@ const estimatedTransaction = (bookingStart, bookingEnd, lineItems, userRole, boo
   };
 };
 
-const EstimatedBreakdownMaybe = props => {
-  const { unitType, unitPrice, startDate, endDate, quantity, discount } = props.bookingData;
+const EstimatedBreakdownMaybeComponent = props => {
+  const { unitType, unitPrice, startDate, endDate, quantity, intl, discount } = props.bookingData;
   const { lineItems, bookingType } = props;
   const isUnits = unitType === LINE_ITEM_UNITS;
   const quantityIfUsingUnits = !isUnits || Number.isInteger(quantity);
   const canEstimatePrice = startDate && endDate && quantityIfUsingUnits;
+  const [result, setResult] = React.useState({
+    _sdkType: 'Money',
+    amount: 0,
+    currency: 'GBP',
+  });
   if (!canEstimatePrice) {
     return null;
   }
@@ -246,8 +256,20 @@ const EstimatedBreakdownMaybe = props => {
     startDate && endDate && lineItems
       ? estimatedTransaction(startDate, endDate, lineItems, userRole, bookingType)
       : null;
+  const isCustomer = userRole === 'customer';
+  const isProvider = userRole === 'provider';
+  const total = isProvider
+    ? tx.attributes.payoutTotal
+    : tx.attributes.payinTotal;
 
-  return tx ? (
+  React.useEffect(() => {
+    total && setResult(total);
+  }, []);
+
+  const updateResult = data => {
+    setResult(data);
+  };
+  return tx ? (<div>
     <BookingBreakdown
       className={css.receipt}
       userRole={userRole}
@@ -256,7 +278,18 @@ const EstimatedBreakdownMaybe = props => {
       booking={tx.booking}
       dateType={dateType}
     />
+    <FieldDiscount
+      updateResult={updateResult}
+      result={result}
+      transaction={tx}
+      intl={intl}
+      isProvider={isProvider}
+    />
+  </div>
   ) : null;
 };
+const EstimatedBreakdownMaybe = injectIntl(EstimatedBreakdownMaybeComponent);
+
+EstimatedBreakdownMaybe.displayName = 'EstimatedBreakdownMaybe';
 
 export default EstimatedBreakdownMaybe;
