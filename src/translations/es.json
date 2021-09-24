@@ -68,6 +68,8 @@
   "BookingBreakdown.refundProviderFee": "Devuelve la comisión de Saunatime",
   "BookingBreakdown.subTotal": "Subtotal",
   "BookingBreakdown.total": "Precio total",
+  "BookingBreakdown.totalWithDiscount": "Precio total con descuento",
+  "BookingBreakdown.setPromocode": "Agrega tu código promocional",
   "BookingDatesForm.bookingEndTitle": "Fecha final",
   "BookingDatesForm.bookingStartTitle": "Fecha de inicio",
   "BookingDatesForm.fetchLineItemsError": "Ups, algo ha salido mal. Por favor, actualiza la página y vuelve a intentarlo.",

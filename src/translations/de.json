@@ -55,6 +55,8 @@
   "BookingBreakdown.refundProviderFee": "Saunatime Gebühr Erstattung",
   "BookingBreakdown.subTotal": "Zwischensumme",
   "BookingBreakdown.total": "Gesamtpreis",
+  "BookingBreakdown.totalWithDiscount": "Ermäßigter Gesamtpreis",
+  "BookingBreakdown.setPromocode": "Fügen Sie Ihren Aktionscode hinzu",
   "BookingDatesForm.bookingEndTitle": "Enddatum",
   "BookingDatesForm.bookingStartTitle": "Startdatum",
   "BookingDatesForm.listingCurrencyInvalid": "Hoppla! Die Währung des Eintrags ist nicht die Währung des Marktplatzes.",

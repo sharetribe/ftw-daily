@@ -68,6 +68,8 @@
   "BookingBreakdown.refundProviderFee": "Remboursement des frais de services Saunatime",
   "BookingBreakdown.subTotal": "Sous-total",
   "BookingBreakdown.total": "Montant total",
+  "BookingBreakdown.totalWithDiscount": "Prix ​​réduit total",
+  "BookingBreakdown.setPromocode": "Ajoutez votre code promotionnel",
   "BookingDatesForm.bookingEndTitle": "Au",
   "BookingDatesForm.bookingStartTitle": "Du",
   "BookingDatesForm.fetchLineItemsError": "Oups, quelque chose n'a pas fonctionné. Veuillez rafraîchir la page et essayer de nouveau.",

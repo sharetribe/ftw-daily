@@ -25,7 +25,8 @@ import LineItemRefundMaybe from './LineItemRefundMaybe';
 import LineItemTotalPrice from './LineItemTotalPrice';
 import LineItemUnknownItemsMaybe from './LineItemUnknownItemsMaybe';
 import LineItemDiscountMaybe from './LineItemDiscountMaybe';
-
+import LineItemPromocodeMaybe from './LineItemPromocodeMaybe';
+import LineItemTotalPriceWithDiscount from './LineItemTotalPriceWithDiscount';
 import css from './BookingBreakdown.module.css';
 
 export const BookingBreakdownComponent = props => {
@@ -43,9 +44,9 @@ export const BookingBreakdownComponent = props => {
 
   const isDaily = dateType === DATE_TYPE_DATE;
   const transactionType = transaction &&
-                          transaction.attributes &&
-                          transaction.attributes.protectedData && 
-                          transaction.attributes.protectedData.type;
+    transaction.attributes &&
+    transaction.attributes.protectedData &&
+    transaction.attributes.protectedData.type;
   const isCustomer = userRole === 'customer';
   const isProvider = userRole === 'provider';
 
@@ -54,9 +55,24 @@ export const BookingBreakdownComponent = props => {
     const hasProviderCommission = isProvider && item.code === LINE_ITEM_PROVIDER_COMMISSION;
     return (hasCustomerCommission || hasProviderCommission) && !item.reversal;
   });
+  const [result, setResult] = React.useState({
+    _sdkType: 'Money',
+    amount: 0,
+    currency: 'GBP',
+  });
 
+  const total = isProvider
+    ? transaction.attributes.payoutTotal
+    : transaction.attributes.payinTotal;
+
+  React.useEffect(() => {
+    total && setResult(total)
+  }, []);
   const classes = classNames(rootClassName || css.root, className);
 
+  const updateResult = (data) => {
+    setResult(data);
+  }
   /**
    * BookingBreakdown contains different line items:
    *
@@ -103,9 +119,9 @@ export const BookingBreakdownComponent = props => {
         timeZone={timeZone}
         isDaily={isDaily}
       />
-      <LineItemUnitsMaybe transaction={transaction} unitType={unitType} isDaily={isDaily} transactionType={transactionType}/>
+      <LineItemUnitsMaybe transaction={transaction} unitType={unitType} isDaily={isDaily} transactionType={transactionType} />
 
-      <LineItemBasePriceMaybe transaction={transaction} unitType={unitType} intl={intl} isDaily={isDaily} transactionType={transactionType}/>
+      <LineItemBasePriceMaybe transaction={transaction} unitType={unitType} intl={intl} isDaily={isDaily} transactionType={transactionType} />
       <LineItemUnknownItemsMaybe transaction={transaction} isProvider={isProvider} intl={intl} />
 
       <LineItemSubTotalMaybe
@@ -141,8 +157,18 @@ export const BookingBreakdownComponent = props => {
         intl={intl}
       />
 
-      <LineItemTotalPrice transaction={transaction} isProvider={isProvider} intl={intl} />
 
+
+      <LineItemTotalPrice transaction={transaction} isProvider={isProvider} intl={intl} />
+      <LineItemTotalPriceWithDiscount result={result} transaction={transaction} intl={intl} isProvider={isProvider} />
+
+      <LineItemPromocodeMaybe
+        updateResult={updateResult}
+        result={result}
+        intl={intl}
+        transaction={transaction}
+        isProvider={isProvider}
+      />
       {hasCommissionLineItem ? (
         <span className={css.feeInfo}>
           <FormattedMessage id="BookingBreakdown.commissionFeeNote" />

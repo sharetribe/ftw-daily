@@ -22,6 +22,26 @@
   flex-direction: row;
   justify-content: space-between;
 }
+.dialogWindow {
+  /* min-width: 300px; */
+}
+.inputDialog {
+  width: 300px;
+  max-width: 500px;
+}
+.buttonDisc {
+
+margin-top: 10px;
+}
+.buttonDisc > button {
+  height: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  min-height: 50px;
+  color: var(--matterColorLight);
+  background-color: var(--marketplaceColor);
+}
 
 .bookingPeriod {
   flex: 1 1;
