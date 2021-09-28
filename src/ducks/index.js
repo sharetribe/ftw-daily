@@ -15,9 +15,11 @@ import paymentMethods from './paymentMethods.duck';
 import stripe from './stripe.duck';
 import stripeConnectAccount from './stripeConnectAccount.duck';
 import user from './user.duck';
+import Promocode from './Promocode.duck';
 
 export {
   Auth,
+  Promocode,
   EmailVerification,
   LocationFilter,
   Newsletter,

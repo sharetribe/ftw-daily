@@ -1,24 +1,23 @@
 import React from 'react';
-import { FormattedMessage, intlShape } from '../../util/reactIntl';
+import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 import { formatMoney } from '../../util/currency';
-import Button from '@material-ui/core/Button';
-import DialogWindow from './DialogWindow';
 import css from '../../components/BookingBreakdown/BookingBreakdown.module.css';
 import Link from '@material-ui/core/Link';
 import { propTypes } from '../../util/types';
-import { bool, func } from 'prop-types';
+import { bool, func, object } from 'prop-types';
+import { addDiscount } from '../../ducks/Promocode.duck';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { Modal, SocialLoginButton } from '../../components';
+import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 
 const voucherifyClient = require('voucherify');
 
-const FieldDiscount = props => {
-  const { transaction, isProvider, intl, updateResult, result } = props;
+const FieldDiscountComponent = props => {
+  const { transaction, isProvider, intl, updateResult, result, onDiscount, onManageDisableScrolling, addDiscountError, addDiscount, scrollingDisabled } = props;
   const [open, setOpen] = React.useState(false);
   const [promocode, setPromocode] = React.useState('');
-  // const [result, setResult] = React.useState({
-  //   _sdkType: 'Money',
-  //   amount: 0,
-  //   currency: 'GBP',
-  // });
+
   const [formData, setFormData] = React.useState('');
 
   const [error, setError] = React.useState();
@@ -26,9 +25,6 @@ const FieldDiscount = props => {
 
   const total = isProvider ? transaction.attributes.payoutTotal : transaction.attributes.payinTotal;
 
-  // React.useEffect( () => {
-  //   // setFormData(formatMoney(intl, result));
-  // }, [result]);
 
   const handleClose = () => {
     setOpen(false);
@@ -37,34 +33,29 @@ const FieldDiscount = props => {
   const handleChange = event => {
     setValue(event.target.value);
   };
-  const client = voucherifyClient({
-    applicationId: '53180639-bb73-4420-93a0-307298c8e5fc',
-    clientSecretKey: 'cbf33a27-9021-4d08-bc55-db3c0b7d7e77',
-  });
+
+  React.useEffect(() => {
+    if (addDiscount?.type === 'PERCENT') {
+      const sum =
+        (result.amount / 100) * addDiscount.percent_off >= addDiscount.amount_limit
+          ? result.amount - addDiscount.amount_limit
+          : (result.amount / 100) * addDiscount.percent_off;
+      updateResult({ ...result, amount: sum });
+      setPromocode(value);
+    } else if (addDiscount?.type === 'AMOUNT') {
+      const sum1 = result.amount - addDiscount.amount_off;
+      updateResult({ ...result, amount: sum1 });
+      setPromocode(value);
+    }
+    error && setError();
+    setOpen(false);
+    addDiscountError && setError(addDiscountError.message);
+  }, [addDiscount, addDiscountError])
+
   const handleSubmit = () => {
-    value &&
-      client.vouchers
-        .get(value)
-        .then(data => {
-          if (data.discount.type === 'PERCENT') {
-            const sum =
-              (result.amount / 100) * data.discount.percent_off >= data.discount.amount_limit
-                ? result.amount - data.discount.amount_limit
-                : (result.amount / 100) * data.discount.percent_off;
-            updateResult({ ...result, amount: sum });
-            setPromocode(value);
-          } else if (data.discount.type === 'AMOUNT') {
-            const sum1 = result.amount - data.discount.amount_off;
-            updateResult({ ...result, amount: sum1 });
-            setPromocode(value);
-          }
-          error && setError();
-          setOpen(false);
-        })
-        .catch(error => {
-          setError(error.message);
-        });
+    value && onDiscount(value);
   };
+
   console.log(result);
   console.log(formData);
 
@@ -82,24 +73,69 @@ const FieldDiscount = props => {
       ) : (
         <Link onClick={() => setOpen(true)}>Set promocode</Link>
       )}
-      <DialogWindow
-        intl={intl}
-        open={open}
-        error={error}
-        promocode={value}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        handleClose={handleClose}
-      />
+      <Modal
+        id="Modal"
+        isOpen={open}
+        onClose={handleClose}
+        onManageDisableScrolling={onManageDisableScrolling}
+        containerClassName={css.modalContainer}
+        usePortal
+      >
+        <div className={css.modalWindow}>
+          <h2><FormattedMessage id="BookingBreakdown.setPromocode" /></h2>
+          <input className={css.inputDialog} type="text" value={value} onChange={handleChange} />
+          {error ? <span>{error}</span> : null}
+          <div className={css.buttonDisc}>
+            <SocialLoginButton onClick={() => handleSubmit()}>Submit</SocialLoginButton>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };
-
-FieldDiscount.propTypes = {
+FieldDiscountComponent.defaultProps = {
+  addDiscountInProgress: false,
+  addDiscountError: null,
+  addDiscount: null,
+};
+FieldDiscountComponent.propTypes = {
   updateResult: func,
   transaction: propTypes.transaction.isRequired,
   isProvider: bool,
+  onManageDisableScrolling: func.isRequired,
   intl: intlShape,
+  addDiscountInProgress: bool,
+  addDiscountError: object,
+  addDiscount: object,
 };
+
+const mapStateToProps = state => {
+  const {
+    addDiscountInProgress,
+    addDiscountError,
+    addDiscount,
+  } = state.Promocode;
+  return {
+    addDiscountInProgress,
+    addDiscountError,
+    addDiscount,
+    scrollingDisabled: isScrollingDisabled(state),
+
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  onDiscount: promo => dispatch(addDiscount(promo)),
+  onManageDisableScrolling: (componentId, disableScrolling) =>
+    dispatch(manageDisableScrolling(componentId, disableScrolling)),
+});
+
+const FieldDiscount = compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  injectIntl
+)(FieldDiscountComponent);
 
 export default FieldDiscount;
