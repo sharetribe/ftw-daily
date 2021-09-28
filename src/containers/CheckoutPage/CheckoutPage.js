@@ -282,9 +282,8 @@ export class CheckoutPageComponent extends Component {
       const { stripe, card, billingDetails, paymentIntent } = handlePaymentParams;
       const stripeElementMaybe = selectedPaymentFlow !== USE_SAVED_CARD ? { card } : {};
 
-      // Note: payment_method could be set here for USE_SAVED_CARD flow.
-      // { payment_method: stripePaymentMethodId }
-      // However, we have set it already on API side, when PaymentIntent was created.
+      // Note: For basic USE_SAVED_CARD scenario, we have set it already on API side, when PaymentIntent was created.
+      // However, the payment_method is save here for USE_SAVED_CARD flow if customer first attempted onetime payment
       const paymentParams =
         selectedPaymentFlow !== USE_SAVED_CARD
           ? {
@@ -293,7 +292,7 @@ export class CheckoutPageComponent extends Component {
                 card: card,
               },
             }
-          : {};
+          : { payment_method: stripePaymentMethodId };
 
       const params = {
         stripePaymentIntentClientSecret,
