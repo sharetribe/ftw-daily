@@ -84,9 +84,15 @@ const priceData = (price, intl) => {
 };
 
 const categoryLabel = (categories, key) => {
+  console.log(key)
+  if (typeof key === 'string') {
+    const cat = categories.find(c => c.key || c.value === key);
+   return cat ? cat.label : key;
+  } else {
   const cat = [...new Set(key.map(item => item.label))];
   // const cat = categories.find(c => c.key || c.value === key);
   return cat.join(' | ');
+  }
 };
 
 export class ListingPageComponent extends Component {
