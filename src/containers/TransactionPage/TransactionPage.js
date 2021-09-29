@@ -89,7 +89,8 @@ export const TransactionPageComponent = props => {
     onFetchTransactionLineItems,
     lineItems,
     fetchLineItemsInProgress,
-    fetchLineItemsError
+    fetchLineItemsError,
+    addDiscount
   } = props;
 
   const currentTransaction = ensureTransaction(transaction);
@@ -175,7 +176,7 @@ export const TransactionPageComponent = props => {
       bookingType,
       ...restOfValues,
     };
-
+  
     const initialValues = {
       listing: currentListing,
       // enquired transaction should be passed to CheckoutPage
@@ -256,6 +257,7 @@ export const TransactionPageComponent = props => {
   // that currently handles showing everything inside layout's main view area.
   const panel = isDataAvailable ? (
     <TransactionPanel
+      promocode={addDiscount ? true : false}
       className={detailsClassName}
       currentUser={currentUser}
       transaction={currentTransaction}
@@ -412,6 +414,8 @@ const mapStateToProps = state => {
     fetchLineItemsInProgress,
     fetchLineItemsError,
   } = state.TransactionPage;
+  const { addDiscount } = state.Promocode;
+
   const { currentUser } = state.user;
 
   const transactions = getMarketplaceEntities(state, transactionRef ? [transactionRef] : []);
@@ -419,6 +423,7 @@ const mapStateToProps = state => {
 
   return {
     currentUser,
+    addDiscount,
     fetchTransactionError,
     acceptSaleError,
     declineSaleError,
@@ -461,7 +466,7 @@ const mapDispatchToProps = dispatch => {
     onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
     onFetchTimeSlots: (listingId, start, end, timeZone) =>
       dispatch(fetchTimeSlotsTime(listingId, start, end, timeZone)),
-    onFetchTransactionLineItems: (bookingData, listingId, isOwnListing) =>
+      onFetchTransactionLineItems: (bookingData, listingId, isOwnListing) =>
       dispatch(fetchTransactionLineItems(bookingData, listingId, isOwnListing)),
   };
 };

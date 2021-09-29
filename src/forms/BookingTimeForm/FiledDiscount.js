@@ -12,7 +12,7 @@ import { Modal, SocialLoginButton } from '../../components';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 
 const FieldDiscountComponent = props => {
-  const { transaction, isProvider, intl, updateResult, result, onDiscount, onManageDisableScrolling, addDiscountError, addDiscount, updateDiscount } = props;
+  const { transaction, isProvider, intl, updateResult, result, onDiscount, onManageDisableScrolling, addDiscountError, addDiscount, updateDiscount, isPromo } = props;
   const [open, setOpen] = React.useState(false);
   const [promocode, setPromocode] = React.useState('');
 
@@ -58,7 +58,7 @@ const FieldDiscountComponent = props => {
 
   return (
     <div className={css.promocode}>
-      {promocode ? (
+      {isPromo ? (
         <Link
           onClick={() => {
             updateResult(total);
@@ -99,6 +99,7 @@ FieldDiscountComponent.defaultProps = {
 FieldDiscountComponent.propTypes = {
   updateResult: func,
   updateDiscount: func,
+  isPromo: bool,
   transaction: propTypes.transaction.isRequired,
   isProvider: bool,
   onManageDisableScrolling: func.isRequired,

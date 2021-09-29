@@ -84,7 +84,6 @@ const priceData = (price, intl) => {
 };
 
 const categoryLabel = (categories, key) => {
-  console.log(key)
   if (typeof key === 'string') {
     const cat = categories.find(c => c.key || c.value === key);
    return cat ? cat.label : key;
@@ -100,6 +99,7 @@ export class ListingPageComponent extends Component {
     super(props);
     const { enquiryModalOpenForListingId, params } = props;
     this.state = {
+      promocode: false,
       pageClassNames: [],
       imageCarouselOpen: false,
       enquiryModalOpen: enquiryModalOpenForListingId === params.id,
@@ -110,8 +110,11 @@ export class ListingPageComponent extends Component {
     this.onContactUser = this.onContactUser.bind(this);
     this.onSubmitEnquiry = this.onSubmitEnquiry.bind(this);
     this.toggleBookingType = this.toggleBookingType.bind(this);
-  }
 
+  }
+  updateDiscount = (val) => {
+    this.setState({ promocode: val })
+ }
   toggleBookingType(bookingType) {
     this.setState({ bookingType });
   }
@@ -131,13 +134,15 @@ export class ListingPageComponent extends Component {
     const { bookingStartTime, bookingEndTime, bookingDates, ...restOfValues } = values;
     const bookingStart = bookingType === HOURLY_PRICE ? timestampToDate(bookingStartTime) : moment(bookingDates.startDate).tz('UTC').startOf('day').toDate();
     const bookingEnd = bookingType === HOURLY_PRICE ? timestampToDate(bookingEndTime) : moment(bookingDates.endDate).tz('UTC').startOf('day').toDate();
+    const promocode = this.state.promocode;
 
     const bookingData = {
       // quantity: calculateQuantityFromHours(bookingStart, bookingEnd),
       bookingType,
+      promocode,
       ...restOfValues,
     };
-
+console.log(bookingData, 'bookingData')
     const initialValues = {
       listing,
       bookingData,
@@ -523,6 +528,8 @@ export class ListingPageComponent extends Component {
                   />
                 </div>
                 <BookingPanel
+                  updateDiscount={this.updateDiscount}
+                  promocode={this.state.promocode}
                   className={css.bookingPanel}
                   listing={currentListing}
                   isOwnListing={isOwnListing}

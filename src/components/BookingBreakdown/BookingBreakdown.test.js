@@ -42,6 +42,7 @@ describe('BookingBreakdown', () => {
     const tree = renderDeep(
       <BookingBreakdownComponent
         userRole="customer"
+        promocode={true}
         unitType={LINE_ITEM_NIGHT}
         dateType={DATE_TYPE_DATE}
         transaction={exampleTransaction({

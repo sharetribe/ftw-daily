@@ -69,6 +69,8 @@ const dateFormattingOptions = { month: 'short', day: 'numeric', weekday: 'short'
 const BookingPanel = props => {
   const {
     unitType,
+    updateDiscount,
+    promocode,
     rootClassName,
     className,
     titleClassName,
@@ -193,6 +195,8 @@ const BookingPanel = props => {
 
         {showBookingDatesForm ? (
           <BookingDatesForm
+            updateDiscount={updateDiscount}
+            promocode={promocode}
             key={bookingType}
             className={css.bookingForm}
             formId="BookingPanel"
@@ -216,6 +220,8 @@ const BookingPanel = props => {
 
         {showBookingTimeForm ? (
           <BookingTimeForm
+            updateDiscount={updateDiscount}
+            promocode={promocode}
             key={bookingType}
             className={css.bookingForm}
             formId="BookingPanel"
@@ -279,6 +285,8 @@ BookingPanel.defaultProps = {
 
 BookingPanel.propTypes = {
   rootClassName: string,
+  updateDiscount: func,
+  promocode: bool,
   className: string,
   titleClassName: string,
   listing: oneOfType([propTypes.listing, propTypes.ownListing]),
