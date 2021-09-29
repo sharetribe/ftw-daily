@@ -281,6 +281,7 @@ const EstimatedBreakdownMaybeComponent = props => {
       dateType={dateType}
     />
     <FieldDiscount
+      isPromo={promocode}
       updateDiscount={props.updateDiscount}
       updateResult={updateResult}
       result={result}

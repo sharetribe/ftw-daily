@@ -26,7 +26,7 @@ const identity = v => v;
 export class BookingDatesFormComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { focusedInput: null, promocode: false };
+    this.state = { focusedInput: null };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.onFocusedInputChange = this.onFocusedInputChange.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -37,9 +37,6 @@ export class BookingDatesFormComponent extends Component {
   // focused input changes.
   onFocusedInputChange(focusedInput) {
     this.setState({ focusedInput });
-  }
-  updateDiscount = (val) => {
-    this.setState({ promocode: val })
   }
 
   // In case start or end date for the booking is missing
@@ -66,7 +63,7 @@ export class BookingDatesFormComponent extends Component {
     const { startDate, endDate } =
       formValues.values && formValues.values.bookingDates ? formValues.values.bookingDates : {};
     const { bookingType, isOwnListing, listingId } = this.props;
-    const promocode = this.state.promocode;
+    const promocode = this.props.promocode;
 
     if (startDate && endDate && !this.props.fetchLineItemsInProgress) {
       this.props.onFetchTransactionLineItems({
@@ -83,7 +80,7 @@ export class BookingDatesFormComponent extends Component {
   }
 
   render() {
-    const { rootClassName, className, price: unitPrice, discount, ...rest } = this.props;
+    const { rootClassName, className, price: unitPrice, discount, promocode, updateDiscount, ...rest } = this.props;
     const classes = classNames(rootClassName || css.root, className);
 
     // if (!unitPrice) {
@@ -132,7 +129,6 @@ export class BookingDatesFormComponent extends Component {
             bookingType,
           } = fieldRenderProps;
           const { startDate, endDate } = values && values.bookingDates ? values.bookingDates : {};
-          const promocode = this.state.promocode;
 
           const bookingStartLabel = intl.formatMessage({
             id: 'BookingDatesForm.bookingStartTitle',
@@ -166,11 +162,10 @@ export class BookingDatesFormComponent extends Component {
                 unitType,
                 startDate,
                 endDate,
-
+                promocode,
                 // NOTE: If unitType is `line-item/units`, a new picker
                 // for the quantity should be added to the form.
                 quantity: 1,
-                promocode
               }
               : null;
 
@@ -182,7 +177,7 @@ export class BookingDatesFormComponent extends Component {
               <h3 className={css.priceBreakdownTitle}>
                 <FormattedMessage id="BookingDatesForm.priceBreakdownTitle" />
               </h3>
-              <EstimatedBreakdownMaybe updateDiscount={this.updateDiscount} bookingData={bookingData} lineItems={lineItems} bookingType={bookingType} />
+              <EstimatedBreakdownMaybe updateDiscount={updateDiscount} bookingData={bookingData} lineItems={lineItems} bookingType={bookingType} />
             </div>
           ) : null;
 
@@ -302,7 +297,7 @@ BookingDatesFormComponent.propTypes = {
   lineItems: array,
   fetchLineItemsInProgress: bool.isRequired,
   fetchLineItemsError: propTypes.error,
-
+  updateDiscount: func,
   // from injectIntl
   intl: intlShape.isRequired,
 
