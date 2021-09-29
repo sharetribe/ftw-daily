@@ -20,6 +20,8 @@ const defaultDirectives = {
   connectSrc: [
     self,
     baseUrl,
+    '*.amazonaws.com',
+    'twemoji.maxcdn.com',
     'perf.hsforms.com',
     'www.gstatic.com',
     '*.facebook.net',
@@ -46,11 +48,14 @@ const defaultDirectives = {
     '*.tidio.co',
     'tidio.co',
     '*.tidiochat.com',
-    'tidiochat.com'
+    'tidiochat.com',
+    'widget-v4.tidiochat.com'
   ],
   fontSrc: [
     self,
     data,
+    '*.amazonaws.com',
+    'twemoji.maxcdn.com',
     'perf.hsforms.com',
     'www.gstatic.com',
     '*.facebook.net',
@@ -69,10 +74,13 @@ const defaultDirectives = {
     '*.tidio.co',
     'tidio.co',
     '*.tidiochat.com',
+    'widget-v4.tidiochat.com',
     'tidiochat.com'
   ],
   frameSrc: [
     self,
+    '*.amazonaws.com',
+    'twemoji.maxcdn.com',
     'perf.hsforms.com',
     'www.gstatic.com',
     '*.facebook.net',
@@ -89,6 +97,7 @@ const defaultDirectives = {
     '*.tidio.co',
     'tidio.co',
     '*.tidiochat.com',
+    'widget-v4.tidiochat.com',
     'tidiochat.com'
   ],
   imgSrc: [
@@ -96,6 +105,8 @@ const defaultDirectives = {
     data,
     blob,
     ...devImagesMaybe,
+    '*.amazonaws.com',
+    'twemoji.maxcdn.com',
     'perf.hsforms.com',
     'www.gstatic.com',
     '*.facebook.net',
@@ -130,6 +141,7 @@ const defaultDirectives = {
     '*.tidio.co',
     'tidio.co',
     '*.tidiochat.com',
+    'widget-v4.tidiochat.com',
     'tidiochat.com'
   ],
   scriptSrc: [
@@ -137,6 +149,7 @@ const defaultDirectives = {
     unsafeInline,
     unsafeEval,
     data,
+    '*.amazonaws.com',
     'perf.hsforms.com',
     '*.stripe.com',
     'www.gstatic.com',
@@ -157,11 +170,14 @@ const defaultDirectives = {
     '*.tidio.co',
     'tidio.co',
     '*.tidiochat.com',
+    'widget-v4.tidiochat.com',
     'tidiochat.com'
   ],
   styleSrc: [
     self,
     unsafeInline,
+    '*.amazonaws.com',
+    'twemoji.maxcdn.com',
     'perf.hsforms.com',
     '*.stripe.com',
     'www.gstatic.com',
@@ -180,6 +196,7 @@ const defaultDirectives = {
     '*.tidio.co',
     'tidio.co',
     '*.tidiochat.com',
+    'widget-v4.tidiochat.com',
     'tidiochat.com'
   ],
 };
