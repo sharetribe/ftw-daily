@@ -11,20 +11,15 @@ import { connect } from 'react-redux';
 import { Modal, SocialLoginButton } from '../../components';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 
-const voucherifyClient = require('voucherify');
-
 const FieldDiscountComponent = props => {
   const { transaction, isProvider, intl, updateResult, result, onDiscount, onManageDisableScrolling, addDiscountError, addDiscount, updateDiscount } = props;
   const [open, setOpen] = React.useState(false);
   const [promocode, setPromocode] = React.useState('');
 
-  const [formData, setFormData] = React.useState('');
-
   const [error, setError] = React.useState();
   const [value, setValue] = React.useState('');
 
   const total = isProvider ? transaction.attributes.payoutTotal : transaction.attributes.payinTotal;
-
 
   const handleClose = () => {
     setOpen(false);
@@ -43,25 +38,26 @@ const FieldDiscountComponent = props => {
       updateResult({ ...result, amount: sum });
       setPromocode(value);
       updateDiscount(true);
+      error && setError();
+      setOpen(false);
     } else if (addDiscount?.type === 'AMOUNT') {
       const sum1 = result.amount - addDiscount.amount_off;
       updateResult({ ...result, amount: sum1 });
       setPromocode(value);
       updateDiscount(true);
+      error && setError();
+      setOpen(false);
+    } else if (addDiscountError) {
+      setError(addDiscountError.message);
     }
-    error && setError();
-    setOpen(false);
-    addDiscountError && setError(addDiscountError.message);
   }, [addDiscount, addDiscountError])
 
   const handleSubmit = () => {
     value && onDiscount(value);
   };
 
-  console.log(result);
-
   return (
-    <div>
+    <div className={css.promocode}>
       {promocode ? (
         <Link
           onClick={() => {

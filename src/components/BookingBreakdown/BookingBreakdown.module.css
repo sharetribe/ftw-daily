@@ -8,7 +8,10 @@
 .nowrap {
   white-space: nowrap;
 }
-
+.promocode {
+  display: flex;
+  justify-content: center;
+}
 .lineItem {
   @apply --marketplaceH4FontStyles;
   margin: 0;

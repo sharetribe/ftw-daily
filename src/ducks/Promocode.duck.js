@@ -67,8 +67,9 @@ export const addDiscount = promo => (dispatch) => {
       return discount;
     })
     .catch(e => {
-      log.error(storableError(e), 'add-discount-failed');
-      dispatch(addDiscountError(storableError(e)));
-    });
+        console.log(e)
+        // log.error(storableError(e), 'add-payment-method-failed');
+        dispatch(addDiscountError(storableError(e)));
+      });
 };
 
