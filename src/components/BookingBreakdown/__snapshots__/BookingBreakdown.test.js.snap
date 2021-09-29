@@ -103,6 +103,25 @@ exports[`BookingBreakdown customer transaction data matches snapshot 1`] = `
         20
       </div>
     </div>,
+    <hr
+      className="totalDivider"
+    />,
+    <div
+      className="lineItemTotal"
+    >
+      <div
+        className="totalLabel"
+      >
+        <span>
+          BookingBreakdown.totalWithDiscount
+        </span>
+      </div>
+      <div
+        className="totalPrice"
+      >
+        20
+      </div>
+    </div>,
   ]
 </div>
 `;

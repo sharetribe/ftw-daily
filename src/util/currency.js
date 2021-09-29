@@ -197,7 +197,6 @@ const isGoogleMathLong = value => {
   return typeof value === 'object' && isNumber(value.low_) && isNumber(value.high_);
 };
 /* eslint-enable no-underscore-dangle */
-
 /**
  * Convert Money to a number
  *

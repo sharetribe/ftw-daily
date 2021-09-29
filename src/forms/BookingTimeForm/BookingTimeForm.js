@@ -16,7 +16,7 @@ import css from './BookingTimeForm.module.css';
 export class BookingTimeFormComponent extends Component {
   constructor(props) {
     super(props);
-
+    this.state = { promocode: false };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
   }
@@ -24,7 +24,9 @@ export class BookingTimeFormComponent extends Component {
   handleFormSubmit(e) {
     this.props.onSubmit(e);
   }
-
+  updateDiscount = (val) => {
+    this.setState({ promocode: val })
+ }
   // When the values of the form are updated we need to fetch
   // lineItems from FTW backend for the EstimatedTransactionMaybe
   // In case you add more fields to the form, make sure you add
@@ -36,10 +38,11 @@ export class BookingTimeFormComponent extends Component {
 
     const listingId = this.props.listingId;
     const isOwnListing = this.props.isOwnListing;
+    const promocode = this.state.promocode;
 
     if (bookingStartTime && bookingEndTime && !this.props.fetchLineItemsInProgress) {
       this.props.onFetchTransactionLineItems({
-        bookingData: { startDate, endDate, type: HOURLY_PRICE },
+        bookingData: { startDate, endDate, type: HOURLY_PRICE, promocode },
         listingId,
         isOwnListing,
       });
@@ -106,6 +109,7 @@ export class BookingTimeFormComponent extends Component {
 
           const startDate = startTime ? timestampToDate(startTime) : null;
           const endDate = endTime ? timestampToDate(endTime) : null;
+          const promocode = this.state.promocode;
 
           // This is the place to collect breakdown estimation data. See the
           // EstimatedBreakdownMaybe component to change the calculations
@@ -117,9 +121,10 @@ export class BookingTimeFormComponent extends Component {
                   startDate,
                   endDate,
                   timeZone,
+                  promocode,
                 }
               : null;
-          
+
           const showEstimatedBreakdown =
             bookingData && lineItems && !fetchLineItemsInProgress && !fetchLineItemsError;
 
@@ -128,7 +133,7 @@ export class BookingTimeFormComponent extends Component {
               <h3 className={css.priceBreakdownTitle}>
                 <FormattedMessage id="BookingTimeForm.priceBreakdownTitle" />
               </h3>
-              <EstimatedBreakdownMaybe bookingData={bookingData} lineItems={lineItems} />
+              <EstimatedBreakdownMaybe updateDiscount={this.updateDiscount} bookingData={bookingData} lineItems={lineItems} />
             </div>
           ) : null;
 
@@ -226,7 +231,7 @@ BookingTimeFormComponent.propTypes = {
   rootClassName: string,
   className: string,
   submitButtonWrapperClassName: string,
-
+  promocode: bool,
   unitType: propTypes.bookingUnitType.isRequired,
   price: propTypes.money,
   isOwnListing: bool,

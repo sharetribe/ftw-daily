@@ -112,8 +112,8 @@ export class ListingPageComponent extends Component {
     this.toggleBookingType = this.toggleBookingType.bind(this);
   }
 
-  toggleBookingType(bookingType){
-    this.setState({bookingType});
+  toggleBookingType(bookingType) {
+    this.setState({ bookingType });
   }
 
   handleSubmit(values) {
@@ -124,7 +124,7 @@ export class ListingPageComponent extends Component {
       callSetInitialValues,
       onInitializeCardPaymentData,
     } = this.props;
-    const {bookingType} = this.state;
+    const { bookingType } = this.state;
     const listingId = new UUID(params.id);
     const listing = getListing(listingId);
 
@@ -300,7 +300,7 @@ export class ListingPageComponent extends Component {
     const subtitle = availabilityPlan
       ? planSubtitle[availabilityPlan.type]
       : '';
-    const bookingSubTitle = intl.formatMessage({ id: 'ListingPage.bookingSubTitle'}, { availabilityPlan: subtitle });
+    const bookingSubTitle = intl.formatMessage({ id: 'ListingPage.bookingSubTitle' }, { availabilityPlan: subtitle });
 
     const topbar = <TopbarContainer />;
 
@@ -376,7 +376,7 @@ export class ListingPageComponent extends Component {
     // banned or deleted display names for the function
     const authorDisplayName = userDisplayNameAsString(ensuredAuthor, '');
 
-    const {key: priceType, value: {amount, currency}} = getLowestPrice(currentListing);
+    const { key: priceType, value: { amount, currency } } = getLowestPrice(currentListing);
 
     const { formattedPrice, priceTitle } = priceData(amount && currency ? new Money(amount, currency) : null, intl);
 
@@ -673,8 +673,10 @@ const mapDispatchToProps = dispatch => ({
   onSendEnquiry: (listingId, message, unitType) => dispatch(sendEnquiry(listingId, message, unitType)),
   callSetInitialValues: (setInitialValues, values, saveToSessionStorage) =>
     dispatch(setInitialValues(values, saveToSessionStorage)),
-  onFetchTransactionLineItems: (bookingData, listingId, isOwnListing) =>
-    dispatch(fetchTransactionLineItems(bookingData, listingId, isOwnListing)),
+  onFetchTransactionLineItems: (bookingData, listingId, isOwnListing) => {
+    console.log(bookingData, 'bookingData');
+    return (dispatch(fetchTransactionLineItems(bookingData, listingId, isOwnListing)))
+  },
   onSendEnquiry: (listingId, message) => dispatch(sendEnquiry(listingId, message)),
   onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
   onFetchTimeSlots: (listingId, start, end, timeZone) =>
