@@ -63,6 +63,7 @@
   "BookingDatesForm.listingPriceMissing": "Ups, dieser Eintrag hat keinen Preis!",
   "BookingDatesForm.ownListing": "Du kannst deinen eigenen Eintrag nicht buchen.",
   "BookingDatesForm.placeholder": "TT.MM.JJJJ",
+  "BookingBreakdown.discountWithPromocode": "Discount",
   "BookingDatesForm.priceBreakdownTitle": "Aufschlüsselung der Buchung",
   "BookingDatesForm.requestToBook": "Buchung anfragen",
   "BookingDatesForm.requiredDate": "Ups! Stelle bitte sicher, dass dein Datum richtig ist.",

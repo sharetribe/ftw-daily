@@ -3,7 +3,7 @@
  * I.e. dates and other details related to payment decision in receipt format.
  */
 import React from 'react';
-import { oneOf, string } from 'prop-types';
+import { bool, oneOf, string } from 'prop-types';
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 import { DATE_TYPE_DATE } from '../../util/types';
 import classNames from 'classnames';
@@ -25,7 +25,7 @@ import LineItemRefundMaybe from './LineItemRefundMaybe';
 import LineItemTotalPrice from './LineItemTotalPrice';
 import LineItemUnknownItemsMaybe from './LineItemUnknownItemsMaybe';
 import LineItemDiscountMaybe from './LineItemDiscountMaybe';
-// import LineItemPromocodeMaybe from './LineItemPromocodeMaybe';
+import LineItemPromocodeMaybe from './LineItemPromocodeMaybe';
 // import LineItemTotalPriceWithDiscount from './LineItemTotalPriceWithDiscount';
 import css from './BookingBreakdown.module.css';
 
@@ -39,7 +39,8 @@ export const BookingBreakdownComponent = props => {
     booking,
     intl,
     dateType,
-    timeZone
+    timeZone,
+    promocode
   } = props;
 
   const isDaily = dateType === DATE_TYPE_DATE;
@@ -49,13 +50,13 @@ export const BookingBreakdownComponent = props => {
     transaction.attributes.protectedData.type;
   const isCustomer = userRole === 'customer';
   const isProvider = userRole === 'provider';
-
   const hasCommissionLineItem = transaction.attributes.lineItems.find(item => {
     const hasCustomerCommission = isCustomer && item.code === LINE_ITEM_CUSTOMER_COMMISSION;
     const hasProviderCommission = isProvider && item.code === LINE_ITEM_PROVIDER_COMMISSION;
     return (hasCustomerCommission || hasProviderCommission) && !item.reversal;
   });
 
+  
   const classes = classNames(rootClassName || css.root, className);
 
   /**
@@ -115,6 +116,7 @@ export const BookingBreakdownComponent = props => {
         userRole={userRole}
         intl={intl}
       />
+      <LineItemPromocodeMaybe promocode={promocode} transaction={transaction} intl={intl} />
 
       <LineItemDiscountMaybe transaction={transaction} intl={intl} />
 
@@ -143,8 +145,7 @@ export const BookingBreakdownComponent = props => {
       />
 
 
-
-      <LineItemTotalPrice transaction={transaction} isProvider={isProvider} intl={intl} />
+      <LineItemTotalPrice transaction={transaction} promocode={promocode} isProvider={isProvider} intl={intl} />
       {/* <LineItemTotalPriceWithDiscount result={result} transaction={transaction} intl={intl} isProvider={isProvider} /> */}
 
       {hasCommissionLineItem ? (
@@ -166,7 +167,7 @@ BookingBreakdownComponent.defaultProps = {
 BookingBreakdownComponent.propTypes = {
   rootClassName: string,
   className: string,
-
+  promocode: bool,
   userRole: oneOf(['customer', 'provider']).isRequired,
   unitType: propTypes.bookingUnitType.isRequired,
   transaction: propTypes.transaction.isRequired,

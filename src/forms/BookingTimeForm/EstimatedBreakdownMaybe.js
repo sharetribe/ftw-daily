@@ -103,7 +103,7 @@ const estimatedTransaction = (bookingStart, bookingEnd, lineItems, userRole, boo
 };
 
 const EstimatedBreakdownMaybeComponent = props => {
-  const { unitType, startDate, endDate, timeZone, intl } = props.bookingData;
+  const { unitType, startDate, endDate, timeZone, intl, promocode } = props.bookingData;
   const { bookingType } = props;
   const lineItems = props.lineItems;
 
@@ -139,6 +139,7 @@ const EstimatedBreakdownMaybeComponent = props => {
 
   return tx ? (<div>
     <BookingBreakdown
+      promocode={promocode}
       className={css.receipt}
       userRole={userRole}
       unitType={unitType}
@@ -148,6 +149,7 @@ const EstimatedBreakdownMaybeComponent = props => {
     />
 
     <FieldDiscount
+      updateDiscount={props.updateDiscount}
       updateResult={updateResult}
       result={result}
       transaction={tx}

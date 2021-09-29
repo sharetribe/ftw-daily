@@ -76,6 +76,7 @@
   "BookingDatesForm.listingCurrencyInvalid": "Oups, la devise de cette annone ne correspond pas à la devise de la place de marché.",
   "BookingDatesForm.listingPriceMissing": "Oups, cette annonce n'a pas de prix.",
   "BookingDatesForm.ownListing": "Vous ne pourrez pas réserver votre propre annonce.",
+  "BookingBreakdown.discountWithPromocode": "Discount",
   "BookingDatesForm.placeholder": "jj/mm/aaaa",
   "BookingDatesForm.priceBreakdownTitle": "Détails de la réservation",
   "BookingDatesForm.requestToBook": "Réserver",

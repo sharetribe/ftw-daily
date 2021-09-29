@@ -11,6 +11,7 @@ const { Money } = types;
 const bookingUnitType = 'line-item/units';
 const CUSTOMER_COMMISSION_PERCENTAGE = 5;
 const PROVIDER_COMMISSION_PERCENTAGE = -5;
+const WITH_DISCOUNT = -10;
 
 /** Returns collection of lineItems (max 50)
  *
@@ -36,7 +37,7 @@ exports.transactionLineItems = (listing, bookingData) => {
   let unitPrice;
   let quantity;
   
-  const { startDate, endDate, type } = bookingData;
+  const { startDate, endDate, type, promocode } = bookingData;
 
   if (type === 'price'){
     unitPrice = listing.attributes.price;
@@ -75,12 +76,18 @@ exports.transactionLineItems = (listing, bookingData) => {
     unitPrice: calculateTotalFromLineItems([booking]),
     percentage: PROVIDER_COMMISSION_PERCENTAGE,
     includeFor: ['provider'],
-  };
+  }; 
 
   const customerCommission = {
     code: 'line-item/customer-commission',
     unitPrice: calculateTotalFromLineItems([booking]),
     percentage: CUSTOMER_COMMISSION_PERCENTAGE,
+    includeFor: ['customer'],
+  };
+  const withDiscount = {
+    code: 'line-item/discount',
+    unitPrice: calculateTotalFromLineItems([booking]),
+    percentage: WITH_DISCOUNT,
     includeFor: ['customer'],
   };
 
@@ -90,9 +97,9 @@ exports.transactionLineItems = (listing, bookingData) => {
   //   percentage: calcedPerc,
   //   includeFor: ['customer', 'provider'],
   // }
-
+  const lineItemsWithDiscount = [booking, customerCommission, withDiscount];
 
   const lineItems = [booking, providerCommission, customerCommission];
 
-  return lineItems;
+  return promocode ? lineItemsWithDiscount : lineItems;
 };

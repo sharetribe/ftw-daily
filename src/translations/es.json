@@ -76,6 +76,7 @@
   "BookingDatesForm.listingCurrencyInvalid": "Ups, la moneda del anuncio no se corresponde con la moneda del marketplace.",
   "BookingDatesForm.listingPriceMissing": "Oops, a tu anuncio le falta el precio!",
   "BookingDatesForm.ownListing": "No puedes reservar tu propio anuncio.",
+  "BookingBreakdown.discountWithPromocode": "Discount",
   "BookingDatesForm.placeholder": "dd/mm/yyyy",
   "BookingDatesForm.priceBreakdownTitle": "Resumen de la reserva",
   "BookingDatesForm.requestToBook": "Solicitar reserva",

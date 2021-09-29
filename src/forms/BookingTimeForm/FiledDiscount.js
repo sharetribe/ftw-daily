@@ -14,7 +14,7 @@ import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck
 const voucherifyClient = require('voucherify');
 
 const FieldDiscountComponent = props => {
-  const { transaction, isProvider, intl, updateResult, result, onDiscount, onManageDisableScrolling, addDiscountError, addDiscount, scrollingDisabled } = props;
+  const { transaction, isProvider, intl, updateResult, result, onDiscount, onManageDisableScrolling, addDiscountError, addDiscount, updateDiscount } = props;
   const [open, setOpen] = React.useState(false);
   const [promocode, setPromocode] = React.useState('');
 
@@ -42,10 +42,12 @@ const FieldDiscountComponent = props => {
           : (result.amount / 100) * addDiscount.percent_off;
       updateResult({ ...result, amount: sum });
       setPromocode(value);
+      updateDiscount(true);
     } else if (addDiscount?.type === 'AMOUNT') {
       const sum1 = result.amount - addDiscount.amount_off;
       updateResult({ ...result, amount: sum1 });
       setPromocode(value);
+      updateDiscount(true);
     }
     error && setError();
     setOpen(false);
@@ -57,7 +59,6 @@ const FieldDiscountComponent = props => {
   };
 
   console.log(result);
-  console.log(formData);
 
   return (
     <div>
@@ -66,6 +67,7 @@ const FieldDiscountComponent = props => {
           onClick={() => {
             updateResult(total);
             setPromocode('');
+            updateDiscount(false);
           }}
         >
           Delete promocode
@@ -100,6 +102,7 @@ FieldDiscountComponent.defaultProps = {
 };
 FieldDiscountComponent.propTypes = {
   updateResult: func,
+  updateDiscount: func,
   transaction: propTypes.transaction.isRequired,
   isProvider: bool,
   onManageDisableScrolling: func.isRequired,
