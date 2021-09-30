@@ -84,11 +84,12 @@ exports.transactionLineItems = (listing, bookingData) => {
     percentage: CUSTOMER_COMMISSION_PERCENTAGE,
     includeFor: ['customer'],
   };
+
   const withDiscount = {
     code: 'line-item/discount',
     unitPrice: calculateTotalFromLineItems([booking]),
     percentage: WITH_DISCOUNT,
-    includeFor: ['customer'],
+    includeFor: ['customer', 'provider'],
   };
 
   // const discount = {
@@ -97,7 +98,7 @@ exports.transactionLineItems = (listing, bookingData) => {
   //   percentage: calcedPerc,
   //   includeFor: ['customer', 'provider'],
   // }
-  const lineItemsWithDiscount = [booking, customerCommission, withDiscount];
+  const lineItemsWithDiscount = [booking, customerCommission, providerCommission, withDiscount];
 
   const lineItems = [booking, providerCommission, customerCommission];
 

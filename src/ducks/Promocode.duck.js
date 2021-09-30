@@ -6,9 +6,9 @@ export const ADD_DISCOUNT_ERROR = 'app/promocode/ADD_DISCOUNT_ERROR';
 
 const voucherifyClient = require('voucherify');
 
-export const client = voucherifyClient({
-    applicationId: '53180639-bb73-4420-93a0-307298c8e5fc',
-    clientSecretKey: 'cbf33a27-9021-4d08-bc55-db3c0b7d7e77',
+const client = voucherifyClient({
+    applicationId: process.env.REACT_APP_VOUCHERIFY_APP_ID,
+    clientSecretKey: process.env.REACT_APP_VOUCHERIFY_SECRET_KEY,
 });
 
 // Reducer

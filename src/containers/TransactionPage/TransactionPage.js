@@ -170,7 +170,7 @@ export const TransactionPageComponent = props => {
     const { bookingStartTime, bookingEndTime, bookingDates, ...restOfValues } = values;
     const bookingStart = bookingType === HOURLY_PRICE ? timestampToDate(bookingStartTime) : moment(bookingDates.startDate).tz('UTC').startOf('day').toDate();
     const bookingEnd = bookingType === HOURLY_PRICE ? timestampToDate(bookingEndTime) : moment(bookingDates.endDate).tz('UTC').startOf('day').toDate();
-
+console.log(restOfValues, 'restOfValues')
     const bookingData = {
       // quantity: calculateQuantityFromHours(bookingStart, bookingEnd),
       bookingType,
@@ -466,7 +466,7 @@ const mapDispatchToProps = dispatch => {
     onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
     onFetchTimeSlots: (listingId, start, end, timeZone) =>
       dispatch(fetchTimeSlotsTime(listingId, start, end, timeZone)),
-      onFetchTransactionLineItems: (bookingData, listingId, isOwnListing) =>{console.log(bookingData, 'dddddbookingData')
+      onFetchTransactionLineItems: (bookingData, listingId, isOwnListing) =>{
       return (dispatch(fetchTransactionLineItems(bookingData, listingId, isOwnListing)))},
   };
 };
