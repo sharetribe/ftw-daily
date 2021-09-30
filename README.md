@@ -7,10 +7,9 @@ customized. It is based on an application bootstrapped with
 [create-react-app](https://github.com/facebookincubator/create-react-app) with some additions,
 namely server side rendering and a custom CSS setup.
 
-> Note: We also have [FTW-hourly](https://github.com/sharetribe/ftw-hourly) for time-based
-> processes. If you are taking time-based booking process into use, you should consider using it
-> instead. You can read more from the related
-> [Flex Docs article](https://www.sharetribe.com/docs/background/time-based-template)
+> Note: We also have two more templates available: [FTW-hourly](https://github.com/sharetribe/ftw-hourly) and [FTW-product](https://github.com/sharetribe/ftw-product).
+> FTW-hourly focuses on time-based booking processes. You can read more in the [Flex Docs article introducing FTW-hourly](https://www.sharetribe.com/docs/ftw-introduction/ftw-hourly/).
+> FTW-product focuses on product marketplace with listing stock management. You can find more information in the [introduction to FTW-product Flex Docs](https://www.sharetribe.com/docs/ftw-introduction/ftw-product/).
 
 ## Quick start
 
