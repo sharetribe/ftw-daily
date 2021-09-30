@@ -681,7 +681,6 @@ const mapDispatchToProps = dispatch => ({
   callSetInitialValues: (setInitialValues, values, saveToSessionStorage) =>
     dispatch(setInitialValues(values, saveToSessionStorage)),
   onFetchTransactionLineItems: (bookingData, listingId, isOwnListing) => {
-    console.log(bookingData, 'bookingData');
     return (dispatch(fetchTransactionLineItems(bookingData, listingId, isOwnListing)))
   },
   onSendEnquiry: (listingId, message) => dispatch(sendEnquiry(listingId, message)),

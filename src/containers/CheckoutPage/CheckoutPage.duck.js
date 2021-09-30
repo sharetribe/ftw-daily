@@ -331,9 +331,9 @@ export const sendMessage = params => (dispatch, getState, sdk) => {
  * pricing info for the booking breakdown to get a proper estimate for
  * the price with the chosen information.
  */
-export const speculateTransaction = (orderParams, transactionId) => (dispatch, getState, sdk) => {
+export const speculateTransaction = (requestParams, transactionId) => (dispatch, getState, sdk) => {
   dispatch(speculateTransactionRequest());
-
+  const {promocode, type, ...orderParams} = requestParams;
   const isTransition = !!transactionId;
   const transition = isTransition
     ? TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY
@@ -342,8 +342,9 @@ export const speculateTransaction = (orderParams, transactionId) => (dispatch, g
 
   const bookingData = {
     startDate: orderParams.bookingStart,
+    promocode,
     endDate: orderParams.bookingEnd,
-    type: orderParams.type
+    type
   };
 
   const processAlias = config.bookingProcessAlias;
@@ -352,8 +353,8 @@ export const speculateTransaction = (orderParams, transactionId) => (dispatch, g
     ...orderParams,
     protectedData: {
       ...(orderParams.protectedData ? orderParams.protectedData : {}),
-      type: orderParams.type,
-      [getTransactionType(orderParams.type)]: true
+      type: type,
+      [getTransactionType(type)]: true
     },
     cardToken: 'CheckoutPage_speculative_card_token',
   };

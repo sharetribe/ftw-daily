@@ -48,7 +48,7 @@ const LineItemUnitPrice = props => {
       <hr className={css.totalDivider} />
       <div className={css.lineItemTotal}>
         <div className={css.totalLabel}>{totalLabel}</div>
-        <div className={css.totalPrice}>{total}</div>
+        <div className={css.totalPrice}>{formattedTotalPrice}</div>
       </div>
     </>
   );

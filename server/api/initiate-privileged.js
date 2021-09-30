@@ -28,7 +28,7 @@ module.exports = (req, res) => {
           lineItems,
         },
       };
-
+    console.log(lineItems, 'body');
       if (isSpeculative) {
         return trustedSdk.transactions.initiateSpeculative(body, queryParams);
       }

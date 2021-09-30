@@ -16,6 +16,8 @@ import css from './BookingTimeForm.module.css';
 export class BookingTimeFormComponent extends Component {
   constructor(props) {
     super(props);
+    this.state = { promo: this.props.promocode };
+
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
   }
@@ -29,7 +31,7 @@ export class BookingTimeFormComponent extends Component {
   // In case you add more fields to the form, make sure you add
   // the values here to the bookingData object.
   handleOnChange(formValues) {
-    const { bookingStartTime, bookingEndTime } = formValues.values;
+    const { bookingStartTime, bookingEndTime } = formValues.values ? formValues.values : formValues;
     const startDate = bookingStartTime ? timestampToDate(bookingStartTime) : null;
     const endDate = bookingEndTime ? timestampToDate(bookingEndTime) : null;
 
@@ -39,10 +41,9 @@ export class BookingTimeFormComponent extends Component {
 
     if (bookingStartTime && bookingEndTime && !this.props.fetchLineItemsInProgress) {
       this.props.onFetchTransactionLineItems({
-        bookingData: { startDate, endDate, type: HOURLY_PRICE },
+        bookingData: { startDate, endDate, type: HOURLY_PRICE, promocode },
         listingId,
         isOwnListing,
-        promocode
       });
     }
   }
@@ -99,6 +100,7 @@ export class BookingTimeFormComponent extends Component {
 
           const startTime = values && values.bookingStartTime ? values.bookingStartTime : null;
           const endTime = values && values.bookingEndTime ? values.bookingEndTime : null;
+          this.state.promo !== promocode ? (this.handleOnChange(values), this.setState({promo: promocode})) : null;
 
           const bookingStartLabel = intl.formatMessage({
             id: 'BookingTimeForm.bookingStartTitle',

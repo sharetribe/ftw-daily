@@ -372,7 +372,8 @@ export class TransactionPanelComponent extends Component {
     );
 
     const classes = classNames(rootClassName || css.root, className);
-
+    console.log(stateData.showBookingPanel, 'stateData.showBookingPanel')
+    console.log(currentTransaction, 'currentTransaction')
     return (
       <div className={classes}>
         <div className={css.container}>
