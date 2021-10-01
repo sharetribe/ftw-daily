@@ -170,7 +170,7 @@ export const TransactionPageComponent = props => {
     const { bookingStartTime, bookingEndTime, bookingDates, ...restOfValues } = values;
     const bookingStart = bookingType === HOURLY_PRICE ? timestampToDate(bookingStartTime) : moment(bookingDates.startDate).tz('UTC').startOf('day').toDate();
     const bookingEnd = bookingType === HOURLY_PRICE ? timestampToDate(bookingEndTime) : moment(bookingDates.endDate).tz('UTC').startOf('day').toDate();
-
+console.log(restOfValues, 'restOfValues')
     const bookingData = {
       // quantity: calculateQuantityFromHours(bookingStart, bookingEnd),
       bookingType,
@@ -257,7 +257,6 @@ export const TransactionPageComponent = props => {
   // that currently handles showing everything inside layout's main view area.
   const panel = isDataAvailable ? (
     <TransactionPanel
-      promocode={addDiscount ? true : false}
       className={detailsClassName}
       currentUser={currentUser}
       transaction={currentTransaction}
@@ -414,7 +413,6 @@ const mapStateToProps = state => {
     fetchLineItemsInProgress,
     fetchLineItemsError,
   } = state.TransactionPage;
-  const { addDiscount } = state.Promocode;
 
   const { currentUser } = state.user;
 
@@ -423,7 +421,6 @@ const mapStateToProps = state => {
 
   return {
     currentUser,
-    addDiscount,
     fetchTransactionError,
     acceptSaleError,
     declineSaleError,
@@ -466,8 +463,8 @@ const mapDispatchToProps = dispatch => {
     onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
     onFetchTimeSlots: (listingId, start, end, timeZone) =>
       dispatch(fetchTimeSlotsTime(listingId, start, end, timeZone)),
-      onFetchTransactionLineItems: (bookingData, listingId, isOwnListing) =>
-      dispatch(fetchTransactionLineItems(bookingData, listingId, isOwnListing)),
+      onFetchTransactionLineItems: (bookingData, listingId, isOwnListing) =>{
+      return (dispatch(fetchTransactionLineItems(bookingData, listingId, isOwnListing)))},
   };
 };
 

@@ -26,7 +26,7 @@ const identity = v => v;
 export class BookingDatesFormComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { focusedInput: null };
+    this.state = { focusedInput: null, promo: this.props.promocode };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.onFocusedInputChange = this.onFocusedInputChange.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -61,7 +61,7 @@ export class BookingDatesFormComponent extends Component {
   // the values here to the bookingData object.
   handleOnChange(formValues) {
     const { startDate, endDate } =
-      formValues.values && formValues.values.bookingDates ? formValues.values.bookingDates : {};
+      formValues.values && formValues.values.bookingDates ? formValues.values.bookingDates : formValues.bookingDates ? formValues.bookingDates : {};
     const { bookingType, isOwnListing, listingId } = this.props;
     const promocode = this.props.promocode;
 
@@ -150,7 +150,7 @@ export class BookingDatesFormComponent extends Component {
               <FormattedMessage id="BookingDatesForm.timeSlotsError" />
             </p>
           ) : null;
-
+          this.state.promo !== promocode ? (this.handleOnChange(values), this.setState({promo: promocode})) : null;
           // This is the place to collect breakdown estimation data.
           // Note: lineItems are calculated and fetched from FTW backend
           // so we need to pass only booking data that is needed otherwise

@@ -224,6 +224,7 @@ export class CheckoutPageComponent extends Component {
       fetchSpeculatedTransaction(
         {
           listingId,
+          promocode: pageData.bookingData.promocode,
           bookingStart: bookingStartForAPI,
           bookingEnd: bookingEndForAPI,
           type: pageData.bookingData.bookingType
@@ -415,7 +416,7 @@ export class CheckoutPageComponent extends Component {
     //   ...optionalPaymentParams,
     // });
 
-    const { bookingType } = pageData.bookingData;
+    const { bookingType, promocode } = pageData.bookingData;
     const seats = pageData.listing.attributes &&
       pageData.listing.attributes.publicData &&
       pageData.listing.attributes.publicData.seats || 1;
@@ -424,6 +425,7 @@ export class CheckoutPageComponent extends Component {
       listingId: pageData.listing.id,
       bookingStart: tx.booking.attributes.start,
       bookingEnd: tx.booking.attributes.end,
+      promocode,
       quantity: pageData.bookingData ? pageData.bookingData.quantity : null,
       type: bookingType,
       seats: bookingType === HOURLY_PRICE ? 1 : seats,
@@ -486,7 +488,7 @@ export class CheckoutPageComponent extends Component {
       selectedPaymentMethod: paymentMethod,
       saveAfterOnetimePayment: !!saveAfterOnetimePayment,
     };
-
+// console.log(this.state.pageData, 'this.state.pageData')
     this.handlePaymentIntent(requestPaymentParams)
       .then(res => {
         const { orderId, messageSuccess, paymentMethodSaved } = res;
@@ -687,7 +689,7 @@ export class CheckoutPageComponent extends Component {
       ? currentListing.attributes.availabilityPlan.timezone
       : 'Etc/UTC';
     const dateType = bookingType === HOURLY_PRICE ? DATE_TYPE_DATETIME : DATE_TYPE_DATE;
-
+    console.log(speculatedTransaction, 'tx')
     const breakdown =
       tx.id && txBooking.id ? (
         <BookingBreakdown

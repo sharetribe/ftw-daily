@@ -177,9 +177,10 @@ export const stripeCustomerError = e => ({
 
 /* ================ Thunks ================ */
 
-export const initiateOrder = (orderParams, transactionId) => (dispatch, getState, sdk) => {
+export const initiateOrder = (data, transactionId) => (dispatch, getState, sdk) => {
   dispatch(initiateOrderRequest());
 
+  const {promocode, ...orderParams} = data;
   const processAlias = config.bookingProcessAlias;
 
   const isTransition = !!transactionId;
@@ -191,7 +192,8 @@ export const initiateOrder = (orderParams, transactionId) => (dispatch, getState
   const bookingData = {
     startDate: orderParams.bookingStart,
     endDate: orderParams.bookingEnd,
-    type: orderParams.type
+    type: orderParams.type,
+    promocode
   };
 
   const bodyParams = isTransition
@@ -203,6 +205,7 @@ export const initiateOrder = (orderParams, transactionId) => (dispatch, getState
           protectedData: {
             ...(orderParams.protectedData ? orderParams.protectedData : {}),
             type: orderParams.type,
+            promocode, 
             [getTransactionType(orderParams.type)]: true
           }
         },
@@ -331,9 +334,9 @@ export const sendMessage = params => (dispatch, getState, sdk) => {
  * pricing info for the booking breakdown to get a proper estimate for
  * the price with the chosen information.
  */
-export const speculateTransaction = (orderParams, transactionId) => (dispatch, getState, sdk) => {
+export const speculateTransaction = (requestParams, transactionId) => (dispatch, getState, sdk) => {
   dispatch(speculateTransactionRequest());
-
+  const {promocode, type, ...orderParams} = requestParams;
   const isTransition = !!transactionId;
   const transition = isTransition
     ? TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY
@@ -342,8 +345,9 @@ export const speculateTransaction = (orderParams, transactionId) => (dispatch, g
 
   const bookingData = {
     startDate: orderParams.bookingStart,
+    promocode,
     endDate: orderParams.bookingEnd,
-    type: orderParams.type
+    type
   };
 
   const processAlias = config.bookingProcessAlias;
@@ -352,8 +356,8 @@ export const speculateTransaction = (orderParams, transactionId) => (dispatch, g
     ...orderParams,
     protectedData: {
       ...(orderParams.protectedData ? orderParams.protectedData : {}),
-      type: orderParams.type,
-      [getTransactionType(orderParams.type)]: true
+      type: type,
+      [getTransactionType(type)]: true
     },
     cardToken: 'CheckoutPage_speculative_card_token',
   };

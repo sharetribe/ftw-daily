@@ -210,7 +210,6 @@ export class TransactionPanelComponent extends Component {
       fetchLineItemsError,
       bookingTypeOnPanel,
       toggleBookingTypeOnPanel,
-      promocode,
     } = this.props;
 
     const currentTransaction = ensureTransaction(transaction);
@@ -372,7 +371,6 @@ export class TransactionPanelComponent extends Component {
     );
 
     const classes = classNames(rootClassName || css.root, className);
-
     return (
       <div className={classes}>
         <div className={css.container}>
@@ -477,7 +475,6 @@ export class TransactionPanelComponent extends Component {
               />
               {stateData.showBookingPanel ? (
                 <BookingPanel
-                  promocode={promocode}
                   className={css.bookingPanel}
                   titleClassName={css.bookingTitle}
                   isOwnListing={false}
@@ -501,7 +498,6 @@ export class TransactionPanelComponent extends Component {
                 />
               ) : null}
               <BreakdownMaybe
-                promocode={promocode}
                 className={css.breakdownContainer}
                 transaction={currentTransaction}
                 transactionRole={transactionRole}

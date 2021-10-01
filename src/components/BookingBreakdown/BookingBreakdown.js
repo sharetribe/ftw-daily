@@ -11,6 +11,7 @@ import {
   propTypes,
   LINE_ITEM_CUSTOMER_COMMISSION,
   LINE_ITEM_PROVIDER_COMMISSION,
+  LINE_ITEM_DISCOUNT
 } from '../../util/types';
 
 import LineItemBookingPeriod from './LineItemBookingPeriod';
@@ -116,7 +117,7 @@ export const BookingBreakdownComponent = props => {
         userRole={userRole}
         intl={intl}
       />
-      <LineItemPromocodeMaybe promocode={promocode} transaction={transaction} intl={intl} />
+      {/* <LineItemPromocodeMaybe promocode={promocode} transaction={transaction} intl={intl} /> */}
 
       <LineItemDiscountMaybe transaction={transaction} intl={intl} />
 
