@@ -416,7 +416,7 @@ export class CheckoutPageComponent extends Component {
     //   ...optionalPaymentParams,
     // });
 
-    const { bookingType } = pageData.bookingData;
+    const { bookingType, promocode } = pageData.bookingData;
     const seats = pageData.listing.attributes &&
       pageData.listing.attributes.publicData &&
       pageData.listing.attributes.publicData.seats || 1;
@@ -425,6 +425,7 @@ export class CheckoutPageComponent extends Component {
       listingId: pageData.listing.id,
       bookingStart: tx.booking.attributes.start,
       bookingEnd: tx.booking.attributes.end,
+      promocode,
       quantity: pageData.bookingData ? pageData.bookingData.quantity : null,
       type: bookingType,
       seats: bookingType === HOURLY_PRICE ? 1 : seats,

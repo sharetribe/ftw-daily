@@ -177,9 +177,10 @@ export const stripeCustomerError = e => ({
 
 /* ================ Thunks ================ */
 
-export const initiateOrder = (orderParams, transactionId) => (dispatch, getState, sdk) => {
+export const initiateOrder = (data, transactionId) => (dispatch, getState, sdk) => {
   dispatch(initiateOrderRequest());
 
+  const {promocode, ...orderParams} = data;
   const processAlias = config.bookingProcessAlias;
 
   const isTransition = !!transactionId;
@@ -191,7 +192,8 @@ export const initiateOrder = (orderParams, transactionId) => (dispatch, getState
   const bookingData = {
     startDate: orderParams.bookingStart,
     endDate: orderParams.bookingEnd,
-    type: orderParams.type
+    type: orderParams.type,
+    promocode
   };
 
   const bodyParams = isTransition
@@ -203,6 +205,7 @@ export const initiateOrder = (orderParams, transactionId) => (dispatch, getState
           protectedData: {
             ...(orderParams.protectedData ? orderParams.protectedData : {}),
             type: orderParams.type,
+            promocode, 
             [getTransactionType(orderParams.type)]: true
           }
         },

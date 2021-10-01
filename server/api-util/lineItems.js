@@ -89,7 +89,7 @@ exports.transactionLineItems = (listing, bookingData) => {
     code: 'line-item/discount',
     unitPrice: calculateTotalFromLineItems([booking]),
     percentage: WITH_DISCOUNT,
-    includeFor: ['customer', 'provider'],
+    includeFor: ['customer'],
   };
 
   // const discount = {
