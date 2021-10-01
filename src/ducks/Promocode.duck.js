@@ -1,15 +1,26 @@
 import { storableError } from '../util/errors';
+import  voucherifyClient from 'voucherify';
+const applicationId = process.env.REACT_APP_VOUCHERIFY_APP_ID;
+const clientSecretKey = process.env.REACT_APP_VOUCHERIFY_SECRET_KEY;
+
 // Actions
 export const ADD_DISCOUNT_REQUEST = 'app/promocode/ADD_DISCOUNT_REQUEST';
 export const ADD_DISCOUNT_SUCCESS = 'app/promocode/ADD_DISCOUNT_SUCCESS';
 export const ADD_DISCOUNT_ERROR = 'app/promocode/ADD_DISCOUNT_ERROR';
 
-const voucherifyClient = require('voucherify');
 
-const client = voucherifyClient({
-    applicationId: process.env.REACT_APP_VOUCHERIFY_APP_ID,
-    clientSecretKey: process.env.REACT_APP_VOUCHERIFY_SECRET_KEY,
-});
+const getClient = () => {
+    if (typeof window === undefined || !applicationId || !clientSecretKey){
+        return null;
+    }
+
+    return voucherifyClient({
+        applicationId,
+        clientSecretKey
+    })
+}
+
+const client = getClient();
 
 // Reducer
 
@@ -58,18 +69,22 @@ export const addDiscountError = e => ({
 // ================ Thunks ================ //
 
 export const addDiscount = promo => (dispatch) => {
+    if (!client){
+        return;
+    }
+
     dispatch(addDiscountRequest());
-  return client.vouchers
-    .get(promo)
-    .then(response => {
-      const discount = response.discount;
-      dispatch(addDiscountSuccess(discount));
-      return discount;
-    })
-    .catch(e => {
-        console.log(e)
-        // log.error(storableError(e), 'add-payment-method-failed');
-        dispatch(addDiscountError(storableError(e)));
-      });
+    return client.vouchers
+        .get(promo)
+        .then(response => {
+        const discount = response.discount;
+        dispatch(addDiscountSuccess(discount));
+        return discount;
+        })
+        .catch(e => {
+            console.log(e)
+            // log.error(storableError(e), 'add-payment-method-failed');
+            dispatch(addDiscountError(storableError(e)));
+        });
 };
 
