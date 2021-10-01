@@ -72,7 +72,6 @@ export const addDiscount = promo => (dispatch) => {
     if (!client){
         return;
     }
-
     dispatch(addDiscountRequest());
     return client.vouchers
         .get(promo)
