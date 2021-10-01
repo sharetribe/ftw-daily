@@ -257,7 +257,6 @@ console.log(restOfValues, 'restOfValues')
   // that currently handles showing everything inside layout's main view area.
   const panel = isDataAvailable ? (
     <TransactionPanel
-      promocode={addDiscount ? true : false}
       className={detailsClassName}
       currentUser={currentUser}
       transaction={currentTransaction}
@@ -414,7 +413,6 @@ const mapStateToProps = state => {
     fetchLineItemsInProgress,
     fetchLineItemsError,
   } = state.TransactionPage;
-  const { addDiscount } = state.Promocode;
 
   const { currentUser } = state.user;
 
@@ -423,7 +421,6 @@ const mapStateToProps = state => {
 
   return {
     currentUser,
-    addDiscount,
     fetchTransactionError,
     acceptSaleError,
     declineSaleError,
