@@ -770,18 +770,25 @@
   --marketplaceModalCloseText {
     /* Font */
     @apply --marketplaceH6FontStyles;
-    margin: -2.5px 0 0 0;
+    margin: 0;
 
     @media (--viewportMedium) {
-      margin-top: -1px;
+      margin: 0;
     }
   }
 
   --marketplaceModalCloseIcon {
     display: inline-block;
     margin-left: 8px;
-    padding: 2px 0 4px;
+
+    /* Move X icon vertically to align it with the close text. */
+    margin-top: 3px;
+
     box-sizing: content-box;
+
+    @media (--viewportMedium) {
+      margin-top: 2px;
+    }
   }
 
   --marketplaceModalErrorStyles {
