@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import loadable from '@loadable/component';
 import getPageDataLoadingAPI from './containers/pageDataLoadingAPI';
 import { NotFoundPage } from './containers';
@@ -11,34 +11,34 @@ import { NamedRedirect } from './components';
 const pageDataLoadingAPI = getPageDataLoadingAPI();
 
 
-const FaqPage = loadable(() => import(/* webpackChunkName: "FaqPage" */ './containers/FaqPage/FaqPage'));
-const FeesPage = loadable(() => import(/* webpackChunkName: "FeesPage" */ './containers/FeesPage/FeesPage'));
-const CancellationPage = loadable(() => import(/* webpackChunkName: "CancellationPage" */ './containers/CancellationPage/CancellationPage'));
-const GuidelinesPage = loadable(() => import(/* webpackChunkName: "GuidelinesPage" */ './containers/GuidelinesPage/GuidelinesPage'));
-const AboutPage = loadable(() => import(/* webpackChunkName: "AboutPage" */ './containers/AboutPage/AboutPage'));
-const AuthenticationPage = loadable(() => import(/* webpackChunkName: "AuthenticationPage" */ './containers/AuthenticationPage/AuthenticationPage'));
-const CheckoutPage = loadable(() => import(/* webpackChunkName: "CheckoutPage" */ './containers/CheckoutPage/CheckoutPage'));
-const ContactDetailsPage = loadable(() => import(/* webpackChunkName: "ContactDetailsPage" */ './containers/ContactDetailsPage/ContactDetailsPage'));
-const EditListingPage = loadable(() => import(/* webpackChunkName: "EditListingPage" */ './containers/EditListingPage/EditListingPage'));
-const EmailVerificationPage = loadable(() => import(/* webpackChunkName: "EmailVerificationPage" */ './containers/EmailVerificationPage/EmailVerificationPage'));
-const InboxPage = loadable(() => import(/* webpackChunkName: "InboxPage" */ './containers/InboxPage/InboxPage'));
-const LandingPage = loadable(() => import(/* webpackChunkName: "LandingPage" */ './containers/LandingPage/LandingPage'));
-const ListingPage = loadable(() => import(/* webpackChunkName: "ListingPage" */ /* webpackPrefetch: true */ './containers/ListingPage/ListingPage'));
-const ManageListingsPage = loadable(() => import(/* webpackChunkName: "ManageListingsPage" */ './containers/ManageListingsPage/ManageListingsPage'));
-const PasswordChangePage = loadable(() => import(/* webpackChunkName: "PasswordChangePage" */ './containers/PasswordChangePage/PasswordChangePage'));
-const PasswordRecoveryPage = loadable(() => import(/* webpackChunkName: "PasswordRecoveryPage" */ './containers/PasswordRecoveryPage/PasswordRecoveryPage'));
-const PasswordResetPage = loadable(() => import(/* webpackChunkName: "PasswordResetPage" */ './containers/PasswordResetPage/PasswordResetPage'));
-const PaymentMethodsPage = loadable(() => import(/* webpackChunkName: "PaymentMethodsPage" */ './containers/PaymentMethodsPage/PaymentMethodsPage'));
-const PrivacyPolicyPage = loadable(() => import(/* webpackChunkName: "PrivacyPolicyPage" */ './containers/PrivacyPolicyPage/PrivacyPolicyPage'));
-const ProfilePage = loadable(() => import(/* webpackChunkName: "ProfilePage" */ './containers/ProfilePage/ProfilePage'));
-const ProfileSettingsPage = loadable(() => import(/* webpackChunkName: "ProfileSettingsPage" */ './containers/ProfileSettingsPage/ProfileSettingsPage'));
-const SearchPage = loadable(() => import(/* webpackChunkName: "SearchPage" */ /* webpackPrefetch: true */  './containers/SearchPage/SearchPage'));
-const StripePayoutPage = loadable(() => import(/* webpackChunkName: "StripePayoutPage" */ './containers/StripePayoutPage/StripePayoutPage'));
-const TermsOfServicePage = loadable(() => import(/* webpackChunkName: "TermsOfServicePage" */ './containers/TermsOfServicePage/TermsOfServicePage'));
-const TransactionPage = loadable(() => import(/* webpackChunkName: "TransactionPage" */ './containers/TransactionPage/TransactionPage'));
+const FaqPage = lazy(() => import(/* webpackChunkName: "FaqPage" */ './containers/FaqPage/FaqPage'));
+const FeesPage = lazy(() => import(/* webpackChunkName: "FeesPage" */ './containers/FeesPage/FeesPage'));
+const CancellationPage = lazy(() => import(/* webpackChunkName: "CancellationPage" */ './containers/CancellationPage/CancellationPage'));
+const GuidelinesPage = lazy(() => import(/* webpackChunkName: "GuidelinesPage" */ './containers/GuidelinesPage/GuidelinesPage'));
+const AboutPage = lazy(() => import(/* webpackChunkName: "AboutPage" */ './containers/AboutPage/AboutPage'));
+const AuthenticationPage = lazy(() => import(/* webpackChunkName: "AuthenticationPage" */ './containers/AuthenticationPage/AuthenticationPage'));
+const CheckoutPage = lazy(() => import(/* webpackChunkName: "CheckoutPage" */ './containers/CheckoutPage/CheckoutPage'));
+const ContactDetailsPage = lazy(() => import(/* webpackChunkName: "ContactDetailsPage" */ './containers/ContactDetailsPage/ContactDetailsPage'));
+const EditListingPage = lazy(() => import(/* webpackChunkName: "EditListingPage" */ './containers/EditListingPage/EditListingPage'));
+const EmailVerificationPage = lazy(() => import(/* webpackChunkName: "EmailVerificationPage" */ './containers/EmailVerificationPage/EmailVerificationPage'));
+const InboxPage = lazy(() => import(/* webpackChunkName: "InboxPage" */ './containers/InboxPage/InboxPage'));
+const LandingPage = lazy(() => import(/* webpackChunkName: "LandingPage" */ './containers/LandingPage/LandingPage'));
+const ListingPage = lazy(() => import(/* webpackChunkName: "ListingPage" */ /* webpackPrefetch: true */ './containers/ListingPage/ListingPage'));
+const ManageListingsPage = lazy(() => import(/* webpackChunkName: "ManageListingsPage" */ './containers/ManageListingsPage/ManageListingsPage'));
+const PasswordChangePage = lazy(() => import(/* webpackChunkName: "PasswordChangePage" */ './containers/PasswordChangePage/PasswordChangePage'));
+const PasswordRecoveryPage = lazy(() => import(/* webpackChunkName: "PasswordRecoveryPage" */ './containers/PasswordRecoveryPage/PasswordRecoveryPage'));
+const PasswordResetPage = lazy(() => import(/* webpackChunkName: "PasswordResetPage" */ './containers/PasswordResetPage/PasswordResetPage'));
+const PaymentMethodsPage = lazy(() => import(/* webpackChunkName: "PaymentMethodsPage" */ './containers/PaymentMethodsPage/PaymentMethodsPage'));
+const PrivacyPolicyPage = lazy(() => import(/* webpackChunkName: "PrivacyPolicyPage" */ './containers/PrivacyPolicyPage/PrivacyPolicyPage'));
+const ProfilePage = lazy(() => import(/* webpackChunkName: "ProfilePage" */ './containers/ProfilePage/ProfilePage'));
+const ProfileSettingsPage = lazy(() => import(/* webpackChunkName: "ProfileSettingsPage" */ './containers/ProfileSettingsPage/ProfileSettingsPage'));
+const SearchPage = lazy(() => import(/* webpackChunkName: "SearchPage" */ /* webpackPrefetch: true */  './containers/SearchPage/SearchPage'));
+const StripePayoutPage = lazy(() => import(/* webpackChunkName: "StripePayoutPage" */ './containers/StripePayoutPage/StripePayoutPage'));
+const TermsOfServicePage = lazy(() => import(/* webpackChunkName: "TermsOfServicePage" */ './containers/TermsOfServicePage/TermsOfServicePage'));
+const TransactionPage = lazy(() => import(/* webpackChunkName: "TransactionPage" */ './containers/TransactionPage/TransactionPage'));
 
 // Styleguide helps you to review current components and develop new ones
-const StyleguidePage = loadable(() => import(/* webpackChunkName: "StyleguidePage" */ './containers/StyleguidePage/StyleguidePage'));
+const StyleguidePage = lazy(() => import(/* webpackChunkName: "StyleguidePage" */ './containers/StyleguidePage/StyleguidePage'));
 
 export const ACCOUNT_SETTINGS_PAGES = [
   'ContactDetailsPage',

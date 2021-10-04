@@ -66,10 +66,10 @@ const FieldDiscountComponent = props => {
             updateDiscount(false);
           }}
         >
-          Delete promocode
+          Delete Discount Code
         </Link>
       ) : (
-        <Link onClick={() => setOpen(true)}>Set promocode</Link>
+        <Link onClick={() => setOpen(true)}>Add Discount Code</Link>
       )}
       <Modal
         id="Modal"

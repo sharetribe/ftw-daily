@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 import { arrayOf, bool, object, func, shape, string } from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -183,10 +183,12 @@ const Routes = (props, context) => {
   // so that React is is not rerendering page component.
   // That's why we pass-in props.routes instead of calling routeConfiguration here.
   return (
+    <Suspense fallback={<div>Loading...</div>}>
     <Switch>
       {routes.map(toRouteComponent)}
       <Route component={NotFoundPage} />
     </Switch>
+    </Suspense>
   );
 };
 
