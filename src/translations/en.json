@@ -79,7 +79,7 @@
   "BookingBreakdown.subTotal": "Subtotal",
   "BookingBreakdown.total": "Total price",
   "BookingBreakdown.totalWithDiscount": "Total discounted price",
-  "BookingBreakdown.setPromocode": "Add your promotional code",
+  "BookingBreakdown.setPromocode": "Add your discount code here",
   "BookingTimeForm.bookingEndTitle": "End date",
   "BookingTimeForm.bookingStartTitle": "Start date",
   "BookingTimeForm.listingCurrencyInvalid": "Oops, the currency on the listing doesn't match the currency of the marketplace.",
