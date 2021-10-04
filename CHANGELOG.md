@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2021-XX-XX
 
+- [fix] Fix modal close button text/icon alignment
+  [#1476](https://github.com/sharetribe/ftw-daily/pull/1476)
+
 ## [v8.3.0] 2021-09-22
 
 - [change] Increase input font size on mobile to avoid Mobile Safari zooming in when focusing on
