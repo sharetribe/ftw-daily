@@ -32,8 +32,10 @@ import { TRANSITION_REQUEST_PAYMENT, TX_TRANSITION_ACTOR_CUSTOMER } from '../../
 import { LINE_ITEM_UNITS } from '../../util/types';
 import { unitDivisor, convertMoneyToNumber, convertUnitToSubUnit } from '../../util/currency';
 import { BookingBreakdown } from '../../components';
+import { injectIntl } from '../../util/reactIntl';
 
 import css from './BookingTimeForm.module.css';
+import FieldDiscount from './FiledDiscount';
 
 const { Money, UUID } = sdkTypes;
 
@@ -100,11 +102,11 @@ const estimatedTransaction = (bookingStart, bookingEnd, lineItems, userRole, boo
   };
 };
 
-const EstimatedBreakdownMaybe = props => {
-  const { unitType, startDate, endDate, timeZone } = props.bookingData;
+const EstimatedBreakdownMaybeComponent = props => {
+  const { unitType, startDate, endDate, timeZone, intl, promocode } = props.bookingData;
   const { bookingType } = props;
   const lineItems = props.lineItems;
-
+console.log(props, 'props')
   // Currently the estimated breakdown is used only on ListingPage where we want to
   // show the breakdown for customer so we can use hard-coded value here
   const userRole = 'customer';
@@ -114,8 +116,30 @@ const EstimatedBreakdownMaybe = props => {
       ? estimatedTransaction(startDate, endDate, lineItems, userRole, bookingType)
       : null;
 
-  return tx ? (
+  const [result, setResult] = React.useState({
+    _sdkType: 'Money',
+    amount: 0,
+    currency: 'GBP',
+  });
+  const isCustomer = userRole === 'customer';
+  const isProvider = userRole === 'provider';
+  const total = isProvider
+    ? tx.attributes.payoutTotal
+    : tx.attributes.payinTotal;
+
+  React.useEffect(() => {
+    total && setResult(total)
+  }, []);
+
+  const updateResult = (data) => {
+    setResult(data);
+  }
+
+  console.log(tx, 'tx')
+
+  return tx ? (<div>
     <BookingBreakdown
+      promo={props.promo}
       className={css.receipt}
       userRole={userRole}
       unitType={unitType}
@@ -123,7 +147,22 @@ const EstimatedBreakdownMaybe = props => {
       booking={tx.booking}
       timeZone={timeZone}
     />
+
+    <FieldDiscount
+      updateDiscount={props.updateDiscount}
+      promo={props.promo}
+      updateResult={updateResult}
+      result={result}
+      transaction={tx}
+      intl={intl}
+      isProvider={isProvider}
+    />
+  </div>
   ) : null;
 };
+const EstimatedBreakdownMaybe = injectIntl(EstimatedBreakdownMaybeComponent);
+
+EstimatedBreakdownMaybe.displayName = 'EstimatedBreakdownMaybe';
 
 export default EstimatedBreakdownMaybe;
+

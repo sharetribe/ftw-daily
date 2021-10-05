@@ -8,7 +8,7 @@ import css from './TransactionPanel.module.css';
 
 // Functional component as a helper to build BookingBreakdown
 const BreakdownMaybe = props => {
-  const { className, rootClassName, breakdownClassName, transaction, transactionRole, unitType } = props;
+  const { className, rootClassName, breakdownClassName, transaction, transactionRole, unitType, promocode } = props;
   const loaded = transaction && transaction.id && transaction.booking && transaction.booking.id;
   const listingAttributes = ensureListing(transaction.listing).attributes;
   const timeZone =
@@ -27,6 +27,7 @@ const BreakdownMaybe = props => {
   return loaded ? (
     <div className={classes}>
       <BookingBreakdown
+        promocode={promocode}
         className={breakdownClasses}
         userRole={transactionRole}
         unitType={unitType}

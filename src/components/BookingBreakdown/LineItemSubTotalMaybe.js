@@ -9,6 +9,7 @@ import {
   propTypes,
   LINE_ITEM_CUSTOMER_COMMISSION,
   LINE_ITEM_PROVIDER_COMMISSION,
+  LINE_ITEM_DISCOUNT
 } from '../../util/types';
 
 import css from './BookingBreakdown.module.css';
@@ -32,7 +33,8 @@ const lineItemsTotal = lineItems => {
 const isCommission = lineItem => {
   return (
     lineItem.code === LINE_ITEM_PROVIDER_COMMISSION ||
-    lineItem.code === LINE_ITEM_CUSTOMER_COMMISSION
+    lineItem.code === LINE_ITEM_CUSTOMER_COMMISSION ||
+    lineItem.code === LINE_ITEM_DISCOUNT
   );
 };
 
@@ -81,7 +83,7 @@ const LineItemSubTotalMaybe = props => {
 
   const formattedSubTotal = subTotalLineItems.length > 0 ? formatMoney(intl, subTotal) : null;
 
-  return formattedSubTotal && showSubTotal ? (
+  return formattedSubTotal ? (
     <>
       <hr className={css.totalDivider} />
       <div className={css.subTotalLineItem}>

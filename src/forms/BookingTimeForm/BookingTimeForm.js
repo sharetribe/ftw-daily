@@ -16,6 +16,7 @@ import css from './BookingTimeForm.module.css';
 export class BookingTimeFormComponent extends Component {
   constructor(props) {
     super(props);
+    this.state = { promo: this.props.promocode };
 
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -30,16 +31,17 @@ export class BookingTimeFormComponent extends Component {
   // In case you add more fields to the form, make sure you add
   // the values here to the bookingData object.
   handleOnChange(formValues) {
-    const { bookingStartTime, bookingEndTime } = formValues.values;
+    const { bookingStartTime, bookingEndTime } = formValues.values ? formValues.values : formValues;
     const startDate = bookingStartTime ? timestampToDate(bookingStartTime) : null;
     const endDate = bookingEndTime ? timestampToDate(bookingEndTime) : null;
 
     const listingId = this.props.listingId;
     const isOwnListing = this.props.isOwnListing;
+    const promocode = this.props.promocode;
 
     if (bookingStartTime && bookingEndTime && !this.props.fetchLineItemsInProgress) {
       this.props.onFetchTransactionLineItems({
-        bookingData: { startDate, endDate, type: HOURLY_PRICE },
+        bookingData: { startDate, endDate, type: HOURLY_PRICE, promocode },
         listingId,
         isOwnListing,
       });
@@ -47,9 +49,9 @@ export class BookingTimeFormComponent extends Component {
   }
 
   render() {
-    const { rootClassName, className, price: unitPrice, ...rest } = this.props;
+    const { rootClassName, className, price: unitPrice, promocode, updateDiscount, ...rest } = this.props;
     const classes = classNames(rootClassName || css.root, className);
-
+    console.log(promocode)
     // if (!unitPrice) {
     //   return (
     //     <div className={classes}>
@@ -98,6 +100,7 @@ export class BookingTimeFormComponent extends Component {
 
           const startTime = values && values.bookingStartTime ? values.bookingStartTime : null;
           const endTime = values && values.bookingEndTime ? values.bookingEndTime : null;
+          this.state.promo !== promocode ? (this.handleOnChange(values), this.setState({promo: promocode})) : null;
 
           const bookingStartLabel = intl.formatMessage({
             id: 'BookingTimeForm.bookingStartTitle',
@@ -117,9 +120,10 @@ export class BookingTimeFormComponent extends Component {
                   startDate,
                   endDate,
                   timeZone,
+                  promocode,
                 }
               : null;
-          
+
           const showEstimatedBreakdown =
             bookingData && lineItems && !fetchLineItemsInProgress && !fetchLineItemsError;
 
@@ -128,7 +132,7 @@ export class BookingTimeFormComponent extends Component {
               <h3 className={css.priceBreakdownTitle}>
                 <FormattedMessage id="BookingTimeForm.priceBreakdownTitle" />
               </h3>
-              <EstimatedBreakdownMaybe bookingData={bookingData} lineItems={lineItems} />
+              <EstimatedBreakdownMaybe updateDiscount={updateDiscount} promo={promocode} bookingData={bookingData} lineItems={lineItems} />
             </div>
           ) : null;
 
@@ -226,7 +230,8 @@ BookingTimeFormComponent.propTypes = {
   rootClassName: string,
   className: string,
   submitButtonWrapperClassName: string,
-
+  promocode: bool,
+  updateDiscount: func,
   unitType: propTypes.bookingUnitType.isRequired,
   price: propTypes.money,
   isOwnListing: bool,

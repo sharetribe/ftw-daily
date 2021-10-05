@@ -89,7 +89,8 @@ export const TransactionPageComponent = props => {
     onFetchTransactionLineItems,
     lineItems,
     fetchLineItemsInProgress,
-    fetchLineItemsError
+    fetchLineItemsError,
+    addDiscount
   } = props;
 
   const currentTransaction = ensureTransaction(transaction);
@@ -169,13 +170,13 @@ export const TransactionPageComponent = props => {
     const { bookingStartTime, bookingEndTime, bookingDates, ...restOfValues } = values;
     const bookingStart = bookingType === HOURLY_PRICE ? timestampToDate(bookingStartTime) : moment(bookingDates.startDate).tz('UTC').startOf('day').toDate();
     const bookingEnd = bookingType === HOURLY_PRICE ? timestampToDate(bookingEndTime) : moment(bookingDates.endDate).tz('UTC').startOf('day').toDate();
-
+console.log(restOfValues, 'restOfValues')
     const bookingData = {
       // quantity: calculateQuantityFromHours(bookingStart, bookingEnd),
       bookingType,
       ...restOfValues,
     };
-
+  
     const initialValues = {
       listing: currentListing,
       // enquired transaction should be passed to CheckoutPage
@@ -412,6 +413,7 @@ const mapStateToProps = state => {
     fetchLineItemsInProgress,
     fetchLineItemsError,
   } = state.TransactionPage;
+
   const { currentUser } = state.user;
 
   const transactions = getMarketplaceEntities(state, transactionRef ? [transactionRef] : []);
@@ -461,8 +463,8 @@ const mapDispatchToProps = dispatch => {
     onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
     onFetchTimeSlots: (listingId, start, end, timeZone) =>
       dispatch(fetchTimeSlotsTime(listingId, start, end, timeZone)),
-    onFetchTransactionLineItems: (bookingData, listingId, isOwnListing) =>
-      dispatch(fetchTransactionLineItems(bookingData, listingId, isOwnListing)),
+      onFetchTransactionLineItems: (bookingData, listingId, isOwnListing) =>{
+      return (dispatch(fetchTransactionLineItems(bookingData, listingId, isOwnListing)))},
   };
 };
 

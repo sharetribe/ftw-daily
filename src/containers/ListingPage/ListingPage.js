@@ -84,8 +84,14 @@ const priceData = (price, intl) => {
 };
 
 const categoryLabel = (categories, key) => {
-  const cat = categories.find(c => c.key === key);
-  return cat ? cat.label : key;
+  if (typeof key === 'string') {
+    const cat = categories.find(c => c.key || c.value === key);
+   return cat ? cat.label : key;
+  } else {
+  const cat = [...new Set(key.map(item => item.label))];
+  // const cat = categories.find(c => c.key || c.value === key);
+  return cat.join(' | ');
+  }
 };
 
 export class ListingPageComponent extends Component {
@@ -93,6 +99,7 @@ export class ListingPageComponent extends Component {
     super(props);
     const { enquiryModalOpenForListingId, params } = props;
     this.state = {
+      promocode: false,
       pageClassNames: [],
       imageCarouselOpen: false,
       enquiryModalOpen: enquiryModalOpenForListingId === params.id,
@@ -103,10 +110,14 @@ export class ListingPageComponent extends Component {
     this.onContactUser = this.onContactUser.bind(this);
     this.onSubmitEnquiry = this.onSubmitEnquiry.bind(this);
     this.toggleBookingType = this.toggleBookingType.bind(this);
+
   }
 
-  toggleBookingType(bookingType){
-    this.setState({bookingType});
+  updateDiscount = (val) => {
+    this.setState({ promocode: val })
+ }
+  toggleBookingType(bookingType) {
+    this.setState({ bookingType });
   }
 
   handleSubmit(values) {
@@ -117,17 +128,19 @@ export class ListingPageComponent extends Component {
       callSetInitialValues,
       onInitializeCardPaymentData,
     } = this.props;
-    const {bookingType} = this.state;
+    const { bookingType } = this.state;
     const listingId = new UUID(params.id);
     const listing = getListing(listingId);
 
     const { bookingStartTime, bookingEndTime, bookingDates, ...restOfValues } = values;
     const bookingStart = bookingType === HOURLY_PRICE ? timestampToDate(bookingStartTime) : moment(bookingDates.startDate).tz('UTC').startOf('day').toDate();
     const bookingEnd = bookingType === HOURLY_PRICE ? timestampToDate(bookingEndTime) : moment(bookingDates.endDate).tz('UTC').startOf('day').toDate();
+    const promocode = this.state.promocode;
 
     const bookingData = {
       // quantity: calculateQuantityFromHours(bookingStart, bookingEnd),
       bookingType,
+      promocode,
       ...restOfValues,
     };
 
@@ -293,7 +306,7 @@ export class ListingPageComponent extends Component {
     const subtitle = availabilityPlan
       ? planSubtitle[availabilityPlan.type]
       : '';
-    const bookingSubTitle = intl.formatMessage({ id: 'ListingPage.bookingSubTitle'}, { availabilityPlan: subtitle });
+    const bookingSubTitle = intl.formatMessage({ id: 'ListingPage.bookingSubTitle' }, { availabilityPlan: subtitle });
 
     const topbar = <TopbarContainer />;
 
@@ -369,7 +382,7 @@ export class ListingPageComponent extends Component {
     // banned or deleted display names for the function
     const authorDisplayName = userDisplayNameAsString(ensuredAuthor, '');
 
-    const {key: priceType, value: {amount, currency}} = getLowestPrice(currentListing);
+    const { key: priceType, value: { amount, currency } } = getLowestPrice(currentListing);
 
     const { formattedPrice, priceTitle } = priceData(amount && currency ? new Money(amount, currency) : null, intl);
 
@@ -424,10 +437,10 @@ export class ListingPageComponent extends Component {
     const amenityOptions = findOptionsForSelectFilter(amenityIds, filterConfig);
     const catIds = config.custom.categories.map(c => c.id);
     const categoryOptions = findOptionsForSelectFilter(catIds, filterConfig);
-
     const category =
       publicData && publicData.category ? (
         <span>
+          
           {categoryLabel(categoryOptions, publicData.category)}
           <span className={css.separator}>•</span>
         </span>
@@ -516,6 +529,8 @@ export class ListingPageComponent extends Component {
                   />
                 </div>
                 <BookingPanel
+                  updateDiscount={this.updateDiscount}
+                  promocode={this.state.promocode}
                   className={css.bookingPanel}
                   listing={currentListing}
                   isOwnListing={isOwnListing}
@@ -666,8 +681,9 @@ const mapDispatchToProps = dispatch => ({
   onSendEnquiry: (listingId, message, unitType) => dispatch(sendEnquiry(listingId, message, unitType)),
   callSetInitialValues: (setInitialValues, values, saveToSessionStorage) =>
     dispatch(setInitialValues(values, saveToSessionStorage)),
-  onFetchTransactionLineItems: (bookingData, listingId, isOwnListing) =>
-    dispatch(fetchTransactionLineItems(bookingData, listingId, isOwnListing)),
+  onFetchTransactionLineItems: (bookingData, listingId, isOwnListing) => {
+    return (dispatch(fetchTransactionLineItems(bookingData, listingId, isOwnListing)))
+  },
   onSendEnquiry: (listingId, message) => dispatch(sendEnquiry(listingId, message)),
   onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
   onFetchTimeSlots: (listingId, start, end, timeZone) =>

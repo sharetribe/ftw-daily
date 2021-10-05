@@ -3,40 +3,40 @@ import { FormattedMessage, intlShape } from '../../util/reactIntl';
 import { formatMoney } from '../../util/currency';
 import { propTypes, LINE_ITEM_DISCOUNT } from '../../util/types';
 import { bool } from 'prop-types';
-
+import { types as sdkTypes } from '../../util/sdkLoader';
 import css from './BookingBreakdown.module.css';
 
-const LineItemDiscountMaybe = props => {
-  const { transaction, isProvider, intl } = props;
+const { Money } = sdkTypes;
+
+const LineItemPromocodeMaybe = props => {
+  const { transaction, intl, promocode } = props;
   const {
     lineItems,
     protectedData
   } = transaction.attributes;
 
   const discount = lineItems.find(
-    item => item.code === LINE_ITEM_DISCOUNT
+    item => item.code === 'line-item/units'
   );
 
-  const { discountReason } = protectedData || {};
-  const reason = discountReason ? `(${ discountReason })` : '';
+  const disc = new Money((discount.lineTotal.amount * 10 / 100), discount.lineTotal.currency);
 
-  return discount && !isProvider ? (
+  return promocode ? (
     <div className={css.lineItem}>
       <span className={css.itemLabel}>
         <FormattedMessage
-          id="BookingBreakdown.discount"
-          values={{ reason }}
+          id="BookingBreakdown.discountWithPromocode"
         />
       </span>
-      <span className={css.itemValue}>{formatMoney(intl, discount.lineTotal)}</span>
+      <span className={css.itemValue}>{formatMoney(intl, disc)}</span>
     </div>
   ) : null;
 };
 
-LineItemDiscountMaybe.propTypes = {
+LineItemPromocodeMaybe.propTypes = {
+  promocode: bool,
   transaction: propTypes.transaction.isRequired,
   intl: intlShape.isRequired,
-  isProvider: bool.isRequired,
 };
 
-export default LineItemDiscountMaybe;
+export default LineItemPromocodeMaybe;

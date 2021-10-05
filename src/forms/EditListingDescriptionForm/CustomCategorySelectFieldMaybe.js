@@ -1,6 +1,6 @@
 import React from 'react';
 import { required } from '../../util/validators';
-import { FieldSelect } from '../../components';
+import { FieldMultiSelect } from '../../components';
 
 import css from './EditListingDescriptionForm.module.css';
 
@@ -17,6 +17,16 @@ const CustomCategorySelectFieldMaybe = props => {
       id: 'EditListingDescriptionForm.categoryRequired',
     })
   );
+
+
+  const newArray = categories.map((item) => {
+    if ('key' in item) {
+      const mem = item['key'];
+      delete item['key'];
+      item['value'] = mem;
+    }
+    return item
+  });
 
   const categoryOptions = categories.map(cat => {
     return cat.children && cat.children.length
@@ -36,21 +46,17 @@ const CustomCategorySelectFieldMaybe = props => {
       )
   });
 
-  return categories ? (
-    <FieldSelect
-      className={css.category}
-      name={name}
-      id={id}
-      label={categoryLabel}
-      validate={categoryRequired}
-    >
-      <option disabled value="">
-        {categoryPlaceholder}
-      </option>
-
-      { categoryOptions }
-    </FieldSelect>
-  ) : null;
+  return categories ? 
+  <FieldMultiSelect
+    className={css.category}
+    name={name}
+    id={id}
+    placeholder={categoryPlaceholder}
+    label={categoryLabel}
+    validate={categoryRequired}
+    options={newArray}
+    />
+ : null;
 };
 
 export default CustomCategorySelectFieldMaybe;

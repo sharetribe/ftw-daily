@@ -26,7 +26,7 @@ const identity = v => v;
 export class BookingDatesFormComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { focusedInput: null };
+    this.state = { focusedInput: null, promo: this.props.promocode };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.onFocusedInputChange = this.onFocusedInputChange.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -61,15 +61,17 @@ export class BookingDatesFormComponent extends Component {
   // the values here to the bookingData object.
   handleOnChange(formValues) {
     const { startDate, endDate } =
-      formValues.values && formValues.values.bookingDates ? formValues.values.bookingDates : {};
-    const {bookingType, isOwnListing, listingId} = this.props;
+      formValues.values && formValues.values.bookingDates ? formValues.values.bookingDates : formValues.bookingDates ? formValues.bookingDates : {};
+    const { bookingType, isOwnListing, listingId } = this.props;
+    const promocode = this.props.promocode;
 
     if (startDate && endDate && !this.props.fetchLineItemsInProgress) {
       this.props.onFetchTransactionLineItems({
         bookingData: {
           startDate: moment(startDate).tz('UTC').startOf('day').toDate(),
           endDate: moment(endDate).tz('UTC').startOf('day').toDate(),
-          type: bookingType
+          type: bookingType,
+          promocode
         },
         listingId,
         isOwnListing,
@@ -78,7 +80,7 @@ export class BookingDatesFormComponent extends Component {
   }
 
   render() {
-    const { rootClassName, className, price: unitPrice, discount, ...rest } = this.props;
+    const { rootClassName, className, price: unitPrice, discount, promocode, updateDiscount, ...rest } = this.props;
     const classes = classNames(rootClassName || css.root, className);
 
     // if (!unitPrice) {
@@ -116,7 +118,6 @@ export class BookingDatesFormComponent extends Component {
             isOwnListing,
             submitButtonWrapperClassName,
             unitPrice,
-            discount,
             unitType,
             minimumLength,
             values,
@@ -149,7 +150,7 @@ export class BookingDatesFormComponent extends Component {
               <FormattedMessage id="BookingDatesForm.timeSlotsError" />
             </p>
           ) : null;
-
+          this.state.promo !== promocode ? (this.handleOnChange(values), this.setState({promo: promocode})) : null;
           // This is the place to collect breakdown estimation data.
           // Note: lineItems are calculated and fetched from FTW backend
           // so we need to pass only booking data that is needed otherwise
@@ -158,15 +159,14 @@ export class BookingDatesFormComponent extends Component {
           const bookingData =
             startDate && endDate
               ? {
-                  unitType,
-                  startDate,
-                  endDate,
-
-                  // NOTE: If unitType is `line-item/units`, a new picker
-                  // for the quantity should be added to the form.
-                  quantity: 1,
-                  discount
-                }
+                unitType,
+                startDate,
+                endDate,
+                promocode,
+                // NOTE: If unitType is `line-item/units`, a new picker
+                // for the quantity should be added to the form.
+                quantity: 1,
+              }
               : null;
 
           const showEstimatedBreakdown =
@@ -177,7 +177,7 @@ export class BookingDatesFormComponent extends Component {
               <h3 className={css.priceBreakdownTitle}>
                 <FormattedMessage id="BookingDatesForm.priceBreakdownTitle" />
               </h3>
-              <EstimatedBreakdownMaybe bookingData={bookingData} lineItems={lineItems} bookingType={bookingType}/>
+              <EstimatedBreakdownMaybe promo={promocode} updateDiscount={updateDiscount} bookingData={bookingData} lineItems={lineItems} bookingType={bookingType} />
             </div>
           ) : null;
 
@@ -292,12 +292,12 @@ BookingDatesFormComponent.propTypes = {
   price: propTypes.money,
   isOwnListing: bool,
   timeSlots: arrayOf(propTypes.timeSlot),
-
+  promocode: bool,
   onFetchTransactionLineItems: func.isRequired,
   lineItems: array,
   fetchLineItemsInProgress: bool.isRequired,
   fetchLineItemsError: propTypes.error,
-
+  updateDiscount: func,
   // from injectIntl
   intl: intlShape.isRequired,
 

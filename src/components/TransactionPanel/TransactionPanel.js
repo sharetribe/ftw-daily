@@ -371,7 +371,6 @@ export class TransactionPanelComponent extends Component {
     );
 
     const classes = classNames(rootClassName || css.root, className);
-
     return (
       <div className={classes}>
         <div className={css.container}>

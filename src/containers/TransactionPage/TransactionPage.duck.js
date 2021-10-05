@@ -603,7 +603,6 @@ const sendReviewAsFirst = (id, params, role, dispatch, sdk) => {
 
 export const sendReview = (role, tx, reviewRating, reviewContent) => (dispatch, getState, sdk) => {
   const params = { reviewRating, reviewContent };
-
   const txStateOtherPartyFirst = txIsInFirstReviewBy(tx, role !== CUSTOMER);
 
   dispatch(sendReviewRequest());

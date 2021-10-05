@@ -31,7 +31,7 @@ import {
 } from '../../util/data';
 import {
   dateFromLocalToAPI,
-  minutesBetween ,
+  minutesBetween,
   hoursBetween,
   daysBetween
 } from '../../util/dates';
@@ -91,8 +91,8 @@ const paymentFlow = (selectedPaymentMethod, saveAfterOnetimePayment) => {
   return selectedPaymentMethod === 'defaultCard'
     ? USE_SAVED_CARD
     : saveAfterOnetimePayment
-    ? PAY_AND_SAVE_FOR_LATER_USE
-    : ONETIME_PAYMENT;
+      ? PAY_AND_SAVE_FOR_LATER_USE
+      : ONETIME_PAYMENT;
 };
 
 const initializeOrderPage = (initialValues, routes, dispatch) => {
@@ -107,8 +107,8 @@ const checkIsPaymentExpired = existingTransaction => {
   return txIsPaymentExpired(existingTransaction)
     ? true
     : txIsPaymentPending(existingTransaction)
-    ? minutesBetween(existingTransaction.attributes.lastTransitionedAt, new Date()) >= 15
-    : false;
+      ? minutesBetween(existingTransaction.attributes.lastTransitionedAt, new Date()) >= 15
+      : false;
 };
 
 export class CheckoutPageComponent extends Component {
@@ -220,10 +220,11 @@ export class CheckoutPageComponent extends Component {
       //   }),
       //   unitType
       // );
-      
+
       fetchSpeculatedTransaction(
         {
           listingId,
+          promocode: pageData.bookingData.promocode,
           bookingStart: bookingStartForAPI,
           bookingEnd: bookingEndForAPI,
           type: pageData.bookingData.bookingType
@@ -321,11 +322,11 @@ export class CheckoutPageComponent extends Component {
       const paymentParams =
         selectedPaymentFlow !== USE_SAVED_CARD
           ? {
-              payment_method: {
-                billing_details: billingDetails,
-                card: card,
-              },
-            }
+            payment_method: {
+              billing_details: billingDetails,
+              card: card,
+            },
+          }
           : {};
 
       const params = {
@@ -405,8 +406,8 @@ export class CheckoutPageComponent extends Component {
       selectedPaymentFlow === USE_SAVED_CARD && hasDefaultPaymentMethod
         ? { paymentMethod: stripePaymentMethodId }
         : selectedPaymentFlow === PAY_AND_SAVE_FOR_LATER_USE
-        ? { setupPaymentMethodForSaving: true }
-        : {};
+          ? { setupPaymentMethodForSaving: true }
+          : {};
 
     // const orderParams = this.customPricingParams({
     //   listing: pageData.listing,
@@ -415,15 +416,16 @@ export class CheckoutPageComponent extends Component {
     //   ...optionalPaymentParams,
     // });
 
-    const { bookingType } = pageData.bookingData;
-    const seats = pageData.listing.attributes && 
-                  pageData.listing.attributes.publicData &&
-                  pageData.listing.attributes.publicData.seats || 1;
+    const { bookingType, promocode } = pageData.bookingData;
+    const seats = pageData.listing.attributes &&
+      pageData.listing.attributes.publicData &&
+      pageData.listing.attributes.publicData.seats || 1;
 
     const orderParams = {
       listingId: pageData.listing.id,
       bookingStart: tx.booking.attributes.start,
       bookingEnd: tx.booking.attributes.end,
+      promocode,
       quantity: pageData.bookingData ? pageData.bookingData.quantity : null,
       type: bookingType,
       seats: bookingType === HOURLY_PRICE ? 1 : seats,
@@ -459,15 +461,15 @@ export class CheckoutPageComponent extends Component {
     const addressMaybe =
       addressLine1 && postal
         ? {
-            address: {
-              city: city,
-              country: country,
-              line1: addressLine1,
-              line2: addressLine2,
-              postal_code: postal,
-              state: state,
-            },
-          }
+          address: {
+            city: city,
+            country: country,
+            line1: addressLine1,
+            line2: addressLine2,
+            postal_code: postal,
+            state: state,
+          },
+        }
         : {};
     const billingDetails = {
       name,
@@ -486,7 +488,7 @@ export class CheckoutPageComponent extends Component {
       selectedPaymentMethod: paymentMethod,
       saveAfterOnetimePayment: !!saveAfterOnetimePayment,
     };
-
+// console.log(this.state.pageData, 'this.state.pageData')
     this.handlePaymentIntent(requestPaymentParams)
       .then(res => {
         const { orderId, messageSuccess, paymentMethodSaved } = res;
@@ -606,6 +608,7 @@ export class CheckoutPageComponent extends Component {
       paymentIntent,
       retrievePaymentIntentError,
       stripeCustomerFetched,
+      bookingData,
     } = this.props;
 
     const { pageData } = this.state;
@@ -678,7 +681,6 @@ export class CheckoutPageComponent extends Component {
     }
     const publicData = currentListing.attributes.publicData || {};
     const unitType = publicData.unitType || config.fallbackUnitType;
-
     // Show breakdown only when speculated transaction and booking are loaded
     // (i.e. have an id)
     const tx = existingTransaction.booking ? existingTransaction : speculatedTransaction;
@@ -687,10 +689,11 @@ export class CheckoutPageComponent extends Component {
       ? currentListing.attributes.availabilityPlan.timezone
       : 'Etc/UTC';
     const dateType = bookingType === HOURLY_PRICE ? DATE_TYPE_DATETIME : DATE_TYPE_DATE;
-
+    console.log(speculatedTransaction, 'tx')
     const breakdown =
       tx.id && txBooking.id ? (
         <BookingBreakdown
+          promocode={this.props.bookingData?.promocode}
           className={css.bookingBreakdown}
           userRole="customer"
           unitType={unitType}
@@ -824,9 +827,9 @@ export class CheckoutPageComponent extends Component {
     // const isDaily = unitType === LINE_ITEM_DAY;
 
     const price = currentListing.attributes.price;
-    const {amount, currency} = bookingType !== HOURLY_PRICE && publicData[bookingType] ? publicData[bookingType] : price;
+    const { amount, currency } = bookingType !== HOURLY_PRICE && publicData[bookingType] ? publicData[bookingType] : price;
     let key = 'perHour';
-    switch(bookingType){
+    switch (bookingType) {
       case DAILY_PRICE:
         key = 'perDay';
         break;
