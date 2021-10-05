@@ -106,7 +106,7 @@ const EstimatedBreakdownMaybeComponent = props => {
   const { unitType, startDate, endDate, timeZone, intl, promocode } = props.bookingData;
   const { bookingType } = props;
   const lineItems = props.lineItems;
-
+console.log(props, 'props')
   // Currently the estimated breakdown is used only on ListingPage where we want to
   // show the breakdown for customer so we can use hard-coded value here
   const userRole = 'customer';
@@ -139,7 +139,7 @@ const EstimatedBreakdownMaybeComponent = props => {
 
   return tx ? (<div>
     <BookingBreakdown
-      promocode={promocode}
+      promo={props.promo}
       className={css.receipt}
       userRole={userRole}
       unitType={unitType}
@@ -149,8 +149,8 @@ const EstimatedBreakdownMaybeComponent = props => {
     />
 
     <FieldDiscount
-      isPromo={promocode}
       updateDiscount={props.updateDiscount}
+      promo={props.promo}
       updateResult={updateResult}
       result={result}
       transaction={tx}
