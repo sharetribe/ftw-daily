@@ -132,7 +132,7 @@ export class BookingTimeFormComponent extends Component {
               <h3 className={css.priceBreakdownTitle}>
                 <FormattedMessage id="BookingTimeForm.priceBreakdownTitle" />
               </h3>
-              <EstimatedBreakdownMaybe updateDiscount={updateDiscount} bookingData={bookingData} lineItems={lineItems} />
+              <EstimatedBreakdownMaybe updateDiscount={updateDiscount} promo={promocode} bookingData={bookingData} lineItems={lineItems} />
             </div>
           ) : null;
 

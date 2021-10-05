@@ -112,6 +112,7 @@ export class ListingPageComponent extends Component {
     this.toggleBookingType = this.toggleBookingType.bind(this);
 
   }
+
   updateDiscount = (val) => {
     this.setState({ promocode: val })
  }
@@ -142,7 +143,7 @@ export class ListingPageComponent extends Component {
       promocode,
       ...restOfValues,
     };
-console.log(bookingData, 'bookingData')
+
     const initialValues = {
       listing,
       bookingData,

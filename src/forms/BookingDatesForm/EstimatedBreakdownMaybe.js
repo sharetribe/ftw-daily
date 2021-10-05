@@ -239,7 +239,7 @@ const EstimatedBreakdownMaybeComponent = props => {
   const isUnits = unitType === LINE_ITEM_UNITS;
   const quantityIfUsingUnits = !isUnits || Number.isInteger(quantity);
   const canEstimatePrice = startDate && endDate && quantityIfUsingUnits;
-
+console.log(props.bookingData)
   const [result, setResult] = React.useState({
   _sdkType: 'Money',
   amount: 0,
@@ -272,7 +272,7 @@ const EstimatedBreakdownMaybeComponent = props => {
   };
   return tx ? (<div>
     <BookingBreakdown
-      promocode={promocode}
+      promo={props.promo}
       className={css.receipt}
       userRole={userRole}
       unitType={unitType}
@@ -281,7 +281,7 @@ const EstimatedBreakdownMaybeComponent = props => {
       dateType={dateType}
     />
     <FieldDiscount
-      isPromo={promocode}
+      promo={props.promo}
       updateDiscount={props.updateDiscount}
       updateResult={updateResult}
       result={result}

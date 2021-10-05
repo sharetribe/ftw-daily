@@ -12,14 +12,15 @@ import { Modal, SocialLoginButton } from '../../components';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 
 const FieldDiscountComponent = props => {
-  const { transaction, isProvider, intl, updateResult, result, onDiscount, onManageDisableScrolling, addDiscountError, addDiscount, updateDiscount, isPromo } = props;
+  const { transaction, isProvider, intl, updateResult, result, onDiscount, onManageDisableScrolling, addDiscountError, addDiscount, updateDiscount, promo } = props;
   const [open, setOpen] = React.useState(false);
-  const [promocode, setPromocode] = React.useState('');
+  const [promocode, setPromocode] = React.useState(false);
 
   const [error, setError] = React.useState();
   const [value, setValue] = React.useState('');
 
   const total = isProvider ? transaction.attributes.payoutTotal : transaction.attributes.payinTotal;
+  console.log(promo)
 
   const handleClose = () => {
     setOpen(false);
@@ -30,39 +31,25 @@ const FieldDiscountComponent = props => {
   };
 
   React.useEffect(() => {
-    if (addDiscount?.type === 'PERCENT') {
-      const sum =
-        (result.amount / 100) * addDiscount.percent_off >= addDiscount.amount_limit
-          ? result.amount - addDiscount.amount_limit
-          : (result.amount / 100) * addDiscount.percent_off;
-      updateResult({ ...result, amount: sum });
-      setPromocode(value);
-      updateDiscount(true);
-      error && setError();
-      setOpen(false);
-    } else if (addDiscount?.type === 'AMOUNT') {
-      const sum1 = result.amount - addDiscount.amount_off;
-      updateResult({ ...result, amount: sum1 });
-      setPromocode(value);
-      updateDiscount(true);
-      error && setError();
-      setOpen(false);
-    } else if (addDiscountError) {
+    if (addDiscountError) {
       setError(addDiscountError.message);
-    }
-  }, [addDiscount, addDiscountError])
+    } else if(promocode && !error && addDiscount ) {
+      updateDiscount(true);
+    }  
+    else setError();
+  }, [addDiscountError, addDiscount])
 
   const handleSubmit = () => {
     value && onDiscount(value);
+    !error && setPromocode(true);
   };
 
   return (
     <div className={css.promocode}>
-      {isPromo ? (
+      {promo ? (
         <Link
           onClick={() => {
-            updateResult(total);
-            setPromocode('');
+            setPromocode(false);
             updateDiscount(false);
           }}
         >
@@ -98,8 +85,9 @@ FieldDiscountComponent.defaultProps = {
 };
 FieldDiscountComponent.propTypes = {
   updateResult: func,
+
   updateDiscount: func,
-  isPromo: bool,
+  promo: bool,
   transaction: propTypes.transaction.isRequired,
   isProvider: bool,
   onManageDisableScrolling: func.isRequired,
