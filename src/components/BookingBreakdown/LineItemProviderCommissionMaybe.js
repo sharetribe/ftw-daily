@@ -3,8 +3,7 @@ import { bool } from 'prop-types';
 import { FormattedMessage, intlShape } from '../../util/reactIntl';
 import { formatMoney } from '../../util/currency';
 import { types as sdkTypes } from '../../util/sdkLoader';
-import { LINE_ITEM_PROVIDER_COMMISSION, propTypes } from '../../util/types';
-
+import { LINE_ITEM_PROVIDER_COMMISSION, LINE_ITEM_DISCOUNT, propTypes } from '../../util/types';
 import css from './BookingBreakdown.module.css';
 
 const { Money } = sdkTypes;
@@ -21,6 +20,9 @@ const LineItemProviderCommissionMaybe = props => {
   const providerCommissionLineItem = transaction.attributes.lineItems.find(
     item => item.code === LINE_ITEM_PROVIDER_COMMISSION && !item.reversal
   );
+  const discount = transaction.attributes.lineItems.find(
+    item => item.code === LINE_ITEM_DISCOUNT
+  );
 
   // If commission is passed it will be shown as a fee already reduces from the total price
   let commissionItem = null;
@@ -36,6 +38,23 @@ const LineItemProviderCommissionMaybe = props => {
     }
 
     const commission = providerCommissionLineItem.lineTotal;
+
+    const formattedCommission = commission ? formatMoney(intl, commission) : null;
+
+    commissionItem = (
+      <div className={css.lineItem}>
+        <span className={css.itemLabel}>
+          <FormattedMessage id="BookingBreakdown.commission" />
+        </span>
+        <span className={css.itemValue}>{formattedCommission}</span>
+      </div>
+    );
+  }
+
+  if (isProvider && discount) {
+
+    const commission = new Money(discount.lineTotal.amount / 2, discount.lineTotal.currency);
+
     const formattedCommission = commission ? formatMoney(intl, commission) : null;
 
     commissionItem = (

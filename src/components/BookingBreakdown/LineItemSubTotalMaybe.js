@@ -83,7 +83,7 @@ const LineItemSubTotalMaybe = props => {
 
   const formattedSubTotal = subTotalLineItems.length > 0 ? formatMoney(intl, subTotal) : null;
 
-  return formattedSubTotal && showSubTotal ? (
+  return formattedSubTotal ? (
     <>
       <hr className={css.totalDivider} />
       <div className={css.subTotalLineItem}>

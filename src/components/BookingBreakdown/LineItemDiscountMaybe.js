@@ -2,11 +2,12 @@ import React from 'react';
 import { FormattedMessage, intlShape } from '../../util/reactIntl';
 import { formatMoney } from '../../util/currency';
 import { propTypes, LINE_ITEM_DISCOUNT } from '../../util/types';
+import { bool } from 'prop-types';
 
 import css from './BookingBreakdown.module.css';
 
 const LineItemDiscountMaybe = props => {
-  const { transaction, intl } = props;
+  const { transaction, isProvider, intl } = props;
   const {
     lineItems,
     protectedData
@@ -19,7 +20,7 @@ const LineItemDiscountMaybe = props => {
   const { discountReason } = protectedData || {};
   const reason = discountReason ? `(${ discountReason })` : '';
 
-  return discount ? (
+  return discount && !isProvider ? (
     <div className={css.lineItem}>
       <span className={css.itemLabel}>
         <FormattedMessage
@@ -35,6 +36,7 @@ const LineItemDiscountMaybe = props => {
 LineItemDiscountMaybe.propTypes = {
   transaction: propTypes.transaction.isRequired,
   intl: intlShape.isRequired,
+  isProvider: bool.isRequired,
 };
 
 export default LineItemDiscountMaybe;
