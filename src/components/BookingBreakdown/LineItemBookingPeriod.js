@@ -96,7 +96,7 @@ const LineItemBookingPeriod = props => {
       <div className={css.lineItem}>
         <BookingPeriod
           startDate={localStartDate}
-          endDate={endDay}
+          endDate={localEndDateRaw}
           dateType={dateType}
           timeZone={timeZone}
           isDaily={isDaily}
