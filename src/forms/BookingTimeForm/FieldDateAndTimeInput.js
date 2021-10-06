@@ -508,11 +508,12 @@ class FieldDateAndTimeInput extends Component {
               onChange={this.onBookingStartTimeChange}
             >
               {bookingStartDate ? (
-                availableStartTimes.map(p => (
-                  <option key={p.timeOfDay} value={p.timestamp}>
-                    {p.timeOfDay}
+                availableStartTimes.map(p => {
+                  return(
+                  <option key={p.timeOfDay === '24:00' ? '00:00' : p.timeOfDay} value={p.timestamp}>
+                     {p.timeOfDay === '24:00' ? '00:00' : p.timeOfDay}
                   </option>
-                ))
+                )})
               ) : (
                 <option>{placeholderTime}</option>
               )}
@@ -531,11 +532,12 @@ class FieldDateAndTimeInput extends Component {
               disabled={endTimeDisabled}
             >
               {bookingStartDate && (bookingStartTime || startTime) ? (
-                availableEndTimes.map(p => (
+                availableEndTimes.map(p => {
+                  return (
                   <option key={p.timeOfDay === '00:00' ? '24:00' : p.timeOfDay} value={p.timestamp}>
                     {p.timeOfDay === '00:00' ? '24:00' : p.timeOfDay}
                   </option>
-                ))
+                )})
               ) : (
                 <option>{placeholderTime}</option>
               )}
