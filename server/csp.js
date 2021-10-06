@@ -147,6 +147,8 @@ const defaultDirectives = {
     'widget-v4.tidiochat.com',
     'tidiochat.com',
     'www.google.co.uk',
+    'www.google.com.ua',
+    'www.google.com.*',
     'www.voucherify.io',
   ],
   scriptSrc: [
