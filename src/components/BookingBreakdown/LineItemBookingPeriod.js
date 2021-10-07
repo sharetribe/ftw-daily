@@ -5,10 +5,10 @@ import { LINE_ITEM_DAY, LINE_ITEM_UNITS, DATE_TYPE_DATE, propTypes } from '../..
 import { dateFromAPIToLocalNoon } from '../../util/dates';
 
 import css from './BookingBreakdown.module.css';
+import { string } from 'prop-types';
 
 const BookingPeriod = props => {
   const { startDate, endDate, dateType, timeZone, isDaily } = props;
-
   const timeFormatOptions =
     dateType === DATE_TYPE_DATE
       ? {
@@ -77,7 +77,7 @@ const BookingPeriod = props => {
 };
 
 const LineItemBookingPeriod = props => {
-  const { booking, unitType, dateType, timeZone, isDaily } = props;
+  const { booking, unitType, dateType, timeZone, isDaily, transactionType } = props;
 
   // Attributes: displayStart and displayEnd can be used to differentiate shown time range
   // from actual start and end times used for availability reservation. It can help in situations
@@ -85,11 +85,9 @@ const LineItemBookingPeriod = props => {
   // Read more: https://www.sharetribe.com/api-reference/marketplace.html#bookings
   const { start, end, displayStart, displayEnd } = booking.attributes;
   const localStartDate = displayStart || start;
-  const localEndDateRaw = displayEnd || end;;
+  const localEndDateRaw = displayEnd || end;
 
-  // const isDaily = unitType === LINE_ITEM_DAY;
-  // const isUnit = unitType === LINE_ITEM_UNITS;
-  const endDay = isDaily ? localEndDateRaw : moment(localEndDateRaw).subtract(1, 'days');
+  const endDay = transactionType && transactionType !== 'price' ? moment(localEndDateRaw).subtract(1, 'days') : localEndDateRaw;
 
   return (
     <>
@@ -111,6 +109,7 @@ LineItemBookingPeriod.defaultProps = { dateType: null };
 LineItemBookingPeriod.propTypes = {
   booking: propTypes.booking.isRequired,
   dateType: propTypes.dateType,
+  transactionType: string,
 };
 
 export default LineItemBookingPeriod;
