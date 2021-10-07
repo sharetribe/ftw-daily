@@ -52,7 +52,6 @@ const defaultDirectives = {
     'widget-v4.tidiochat.com',
     'www.voucherify.io',
     'www.google.com.ua',
-    'www.google.com.*',
   ],
   fontSrc: [
     self,
@@ -81,7 +80,6 @@ const defaultDirectives = {
     'tidiochat.com',
     'www.voucherify.io',
     'www.google.com.ua',
-    'www.google.com.*',
   ],
   frameSrc: [
     self,
@@ -107,7 +105,6 @@ const defaultDirectives = {
     'tidiochat.com',
     'www.voucherify.io',
     'www.google.com.ua',
-    'www.google.com.*',
   ],
   imgSrc: [
     self,
@@ -154,7 +151,6 @@ const defaultDirectives = {
     'tidiochat.com',
     'www.google.co.uk',
     'www.google.com.ua',
-    'www.google.com.*',
     'www.voucherify.io',
   ],
   scriptSrc: [
@@ -187,7 +183,6 @@ const defaultDirectives = {
     'tidiochat.com',
     'www.voucherify.io',
     'www.google.com.ua',
-    'www.google.com.*',
   ],
   styleSrc: [
     self,
@@ -216,7 +211,6 @@ const defaultDirectives = {
     'tidiochat.com',
     'www.voucherify.io',
     'www.google.com.ua',
-    'www.google.com.*',
   ],
   mediaSrc: [
     'widget-v4.tidiochat.com',
