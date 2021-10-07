@@ -57,9 +57,7 @@ export const BookingBreakdownComponent = props => {
     return (hasCustomerCommission || hasProviderCommission) && !item.reversal;
   });
 
-  
   const classes = classNames(rootClassName || css.root, className);
-
   /**
    * BookingBreakdown contains different line items:
    *
@@ -105,6 +103,7 @@ export const BookingBreakdownComponent = props => {
         dateType={dateType}
         timeZone={timeZone}
         isDaily={isDaily}
+        transactionType={transactionType}
       />
       <LineItemUnitsMaybe transaction={transaction} unitType={unitType} isDaily={isDaily} transactionType={transactionType} />
 
