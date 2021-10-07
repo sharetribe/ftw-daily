@@ -87,7 +87,7 @@ const LineItemBookingPeriod = props => {
   const localStartDate = displayStart || start;
   const localEndDateRaw = displayEnd || end;
 
-  const endDay = transactionType ? moment(localEndDateRaw).subtract(1, 'days') : localEndDateRaw;
+  const endDay = transactionType && transactionType !== 'price' ? moment(localEndDateRaw).subtract(1, 'days') : localEndDateRaw;
 
   return (
     <>
