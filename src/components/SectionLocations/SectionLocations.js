@@ -11,6 +11,7 @@ import css from './SectionLocations.module.css';
 import helsinkiImage from './images/location_helsinki.jpg';
 import rovaniemiImage from './images/location_rovaniemi.jpg';
 import rukaImage from './images/location_ruka.jpg';
+import aucklandImage from './images/location_auckland.jpg';
 
 class LocationImage extends Component {
   render() {
@@ -51,9 +52,9 @@ const SectionLocations = props => {
       </div>
       <div className={css.locations}>
         {locationLink(
-          'Helsinki',
-          helsinkiImage,
-          '?address=Helsinki%2C%20Finland&bounds=60.2978389%2C25.254484899999966%2C59.9224887%2C24.782875800000056&origin=60.16985569999999%2C24.93837910000002'
+          'Auckland',
+          aucklandImage,
+          '?address=Auckland%2C%20New%20Zealand&bounds=-36.545%2C175.298%2C-37.047%2C174.498'
         )}
         {locationLink(
           'Rovaniemi',
