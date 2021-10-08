@@ -10,8 +10,8 @@ import { metaTagProps } from '../../util/seo';
 import { canonicalRoutePath } from '../../util/routes';
 import { CookieConsent } from '../../components';
 
-import facebookImage from '../../assets/saunatimeFacebook-1200x630.jpg';
-import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg';
+import facebookImage from '../../assets/cottagedays-facebook-1200x630-by-markus-spiske.jpg';
+import twitterImage from '../../assets/cottagedays-twitter-600x314-by-markus-spiske.jpg';
 import css from './Page.module.css';
 
 const preventDefault = e => {
