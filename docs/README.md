@@ -2,7 +2,7 @@
 
 ## Why Cottage Days?
 
-_Short answer:_ Demonstrate the features of Flex with a marketplace for renting saunas. Because why
+_Short answer:_ Demonstrate the features of Flex with a marketplace for renting Cottages. Because why
 not.
 
 _Long answer:_ Cottage Days works as a template for a marketplace user interface. It can be used as a
@@ -13,7 +13,7 @@ used in a browser environment using the JavaScript SDK.
 
 Marketplace features included in Cottage Days:
 
-- **Location search** shows the user if there are saunas available in a given location.
+- **Location search** shows the user if there are Cottages available in a given location.
 - **The listing page** gives a detailed view about what a particular sauna offers.
 - **Transaction process**: Cottage Days uses nightly booking.
 - **Notifications**: Emails are sent during the booking process to alert customers and providers

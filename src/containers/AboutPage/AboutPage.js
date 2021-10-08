@@ -40,21 +40,21 @@ const AboutPage = () => {
 
           <div className={css.contentWrapper}>
             <div className={css.contentSide}>
-              <p>Did you know that Finland has 3.2 million saunas - almost one sauna per person!</p>
+              <p>Did you know that Finland has 3.2 million cottages - almost one sauna per person!</p>
             </div>
 
             <div className={css.contentMain}>
               <h2>
-                Most of the Finnish saunas are located at the homes of individuals - indeed, most
+                Most of the Finnish cottages are located at the homes of individuals - indeed, most
                 people in Finland live in an apartment with sauna in it. In addition, lots of people
                 have lakeside summer cottages, which also typically come with a separate sauna
                 building near the waterfront.
               </h2>
 
               <p>
-                To truly experience a Finnish sauna, you need to look beyond the public saunas, and
+                To truly experience a Finnish sauna, you need to look beyond the public cottages, and
                 instead visit a real home or cottage sauna. Cottage Days makes this possible for
-                everyone. All our saunas are owned by individuals willing to let tourists and other
+                everyone. All our cottages are owned by individuals willing to let tourists and other
                 curious visitors to enter their sacred spaces.
               </p>
 
