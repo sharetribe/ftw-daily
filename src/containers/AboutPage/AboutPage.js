@@ -35,36 +35,36 @@ const AboutPage = () => {
         </LayoutWrapperTopbar>
 
         <LayoutWrapperMain className={css.staticPageWrapper}>
-          <h1 className={css.pageTitle}>Experience the unique Finnish home sauna.</h1>
+          <h1 className={css.pageTitle}>Experience the unique Finnish home cottage.</h1>
           <img className={css.coverImage} src={image} alt="My first ice cream." />
 
           <div className={css.contentWrapper}>
             <div className={css.contentSide}>
-              <p>Did you know that Finland has 3.2 million cottages - almost one sauna per person!</p>
+              <p>Did you know that Finland has 3.2 million cottages - almost one cottage per person!</p>
             </div>
 
             <div className={css.contentMain}>
               <h2>
                 Most of the Finnish cottages are located at the homes of individuals - indeed, most
-                people in Finland live in an apartment with sauna in it. In addition, lots of people
-                have lakeside summer cottages, which also typically come with a separate sauna
+                people in Finland live in an apartment with cottage in it. In addition, lots of people
+                have lakeside summer cottages, which also typically come with a separate cottage
                 building near the waterfront.
               </h2>
 
               <p>
-                To truly experience a Finnish sauna, you need to look beyond the public cottages, and
-                instead visit a real home or cottage sauna. Cottage Days makes this possible for
+                To truly experience a Finnish cottage, you need to look beyond the public cottages, and
+                instead visit a real home or cottage cottage. Cottage Days makes this possible for
                 everyone. All our cottages are owned by individuals willing to let tourists and other
                 curious visitors to enter their sacred spaces.
               </p>
 
-              <h3 className={css.subtitle}>Are you a sauna owner?</h3>
+              <h3 className={css.subtitle}>Are you a cottage owner?</h3>
 
               <p>
                 Cottage Days offers you a good way to earn some extra cash! If you're not using your
-                sauna every evening, why not rent it to other people while it's free. And even if
-                you are using your sauna every evening (we understand, it's so good), why not invite
-                other people to join you when the sauna is already warm! A shared sauna experience
+                cottage every evening, why not rent it to other people while it's free. And even if
+                you are using your cottage every evening (we understand, it's so good), why not invite
+                other people to join you when the cottage is already warm! A shared cottage experience
                 is often a more fulfilling one.
               </p>
 
