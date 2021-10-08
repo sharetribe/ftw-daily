@@ -1,0 +1,11 @@
+.mainWrapper {
+  width: calc(100% - 48px);
+  max-width: 720px;
+  margin: 24px auto;
+
+  @media (--viewportMedium) {
+    max-width: 650px;
+    width: calc(100% - 72px);
+    margin: 72px auto 36px auto;
+  }
+}
