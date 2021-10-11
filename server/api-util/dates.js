@@ -34,7 +34,7 @@ exports.nightsBetween = (startDate, endDate) => {
  * @returns {Number} number of days between the given dates
  */
 exports.daysBetween = (startDate, endDate) => {
-  const days = moment(endDate).diff(startDate, 'days');
+  const days = moment.utc(endDate).diff(moment.utc(startDate), 'days');
   if (days < 0) {
     throw new Error('End date cannot be before start date');
   }
@@ -43,7 +43,7 @@ exports.daysBetween = (startDate, endDate) => {
 };
 
 exports.weeksBetween = (startDate, endDate) => {
-  const weeks = moment(endDate).diff(startDate, 'weeks');
+  const weeks = moment.utc(endDate).diff(moment.utc(startDate), 'weeks');
   if (weeks < 1) {
     throw new Error('Duration is less than a week');
   }
@@ -52,7 +52,7 @@ exports.weeksBetween = (startDate, endDate) => {
 };
 
 exports.monthsBetween = (startDate, endDate) => {
-  const months = moment(endDate).diff(startDate, 'days') / 30;
+  const months = moment.utc(endDate).diff(moment.utc(startDate), 'days') / 30;
   if (months < 1) {
     throw new Error('Duration is less than a month');
   }
@@ -60,4 +60,4 @@ exports.monthsBetween = (startDate, endDate) => {
   return Math.floor(months);
 };
 
-exports.hoursBeetwen = (startDate, endDate) => moment(endDate).diff(moment(startDate), 'hours', true)
+exports.hoursBeetwen = (startDate, endDate) => moment.utc(endDate).diff(moment.utc(startDate), 'hours', true)

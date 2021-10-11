@@ -133,8 +133,8 @@ export class ListingPageComponent extends Component {
     const listing = getListing(listingId);
 
     const { bookingStartTime, bookingEndTime, bookingDates, ...restOfValues } = values;
-    const bookingStart = bookingType === HOURLY_PRICE ? timestampToDate(bookingStartTime) : moment(bookingDates.startDate).tz('UTC').startOf('day').toDate();
-    const bookingEnd = bookingType === HOURLY_PRICE ? timestampToDate(bookingEndTime) : moment(bookingDates.endDate).tz('UTC').startOf('day').toDate();
+    const bookingStart = bookingType === HOURLY_PRICE ? timestampToDate(bookingStartTime) : moment.utc(bookingDates.startDate).startOf('day').toDate();
+    const bookingEnd = bookingType === HOURLY_PRICE ? timestampToDate(bookingEndTime) : moment.utc(bookingDates.endDate).startOf('day').toDate();
     const promocode = this.state.promocode;
 
     const bookingData = {
