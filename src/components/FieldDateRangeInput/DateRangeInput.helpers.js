@@ -133,11 +133,15 @@ export const pickerEndDateToApiDateForDaily = endDate => {
   return endDate.add(1, 'days').toDate();
 };
 
+const invalidDaySlot = (day, timeSlots, seats) => {
+  return timeSlots.find(timeSlot => moment(timeSlot.attributes.start).isSame(day, 'day') && timeSlot.attributes.seats <= seats);
+}
+
 /**
  * Returns an isDayBlocked function that can be passed to
  * a react-dates DateRangePicker component.
  */
-export const isDayBlockedFn = (timeSlots, startDate, endDate, focusedInput, unitType) => {
+export const isDayBlockedFn = (timeSlots, startDate, endDate, focusedInput, unitType, seats) => {
   const endOfRange = config.dayCountAvailableForBooking - 1;
   const lastBookableDate = moment().add(endOfRange, 'days');
 
@@ -161,7 +165,7 @@ export const isDayBlockedFn = (timeSlots, startDate, endDate, focusedInput, unit
   if (selectingEndDate) {
     // if end date is being selected first, block the day after a booked date
     // (as a booking can end on the day the following booking starts)
-    return day =>
+    return day => !!invalidDaySlot(moment(day).subtract(1, 'days'), timeSlots, seats) ||
       !timeSlots.find(timeSlot => timeSlotEqualsDay(timeSlot, moment(day).subtract(1, 'days')));
   } else if (nextBookingStarts || !timeSlots) {
     // a next booking is found or time slots are not provided
@@ -169,15 +173,31 @@ export const isDayBlockedFn = (timeSlots, startDate, endDate, focusedInput, unit
     return () => false;
   } else {
     // otherwise return standard timeslots check
-    return day => !timeSlots.find(timeSlot => timeSlotEqualsDay(timeSlot, day));
+    return day => !!invalidDaySlot(day, timeSlots, seats) || !timeSlots.find(timeSlot => timeSlotEqualsDay(timeSlot, day));
   }
 };
+
+const findAllInvalid = (slots, seats) => slots.filter(timeSlot => timeSlot.attributes.seats <= seats);
+
+const hasInvalidSlotBefore = (day, slots, selectDate, seats) => {
+  return findAllInvalid(slots, seats).some(slot => {
+    const {start} = slot.attributes;
+    return moment(start).isBefore(day) && moment(start).isAfter(selectDate);
+  })
+}
+
+const hasInvalidSlotAfter = (day, slots, selectDate, seats) => {
+  return findAllInvalid(slots, seats).some(slot => {
+    const {start} = slot.attributes;
+    return moment(start).isAfter(day) && moment(start).isBefore(selectDate);
+  })
+}
 
 /**
  * Returns an isOutsideRange function that can be passed to
  * a react-dates DateRangePicker component.
  */
-export const isOutsideRangeFn = (timeSlots, startDate, endDate, focusedInput, unitType) => {
+export const isOutsideRangeFn = (timeSlots, startDate, endDate, focusedInput, unitType, seats) => {
   const endOfRange = config.dayCountAvailableForBooking - 1;
   const lastBookableDate = moment().add(endOfRange, 'days');
 
@@ -195,7 +215,9 @@ export const isOutsideRangeFn = (timeSlots, startDate, endDate, focusedInput, un
       const lastDayToEndBooking = apiEndDateToPickerDateForDaily(nextBookingStarts.toDate());
 
       return (
-        !isInclusivelyAfterDay(day, startDate) || !isInclusivelyBeforeDay(day, lastDayToEndBooking)
+        hasInvalidSlotBefore(day, timeSlots, startDate, seats) ||
+        !isInclusivelyAfterDay(day, startDate) ||
+        !isInclusivelyBeforeDay(day, lastDayToEndBooking)
       );
     };
   }
@@ -208,16 +230,18 @@ export const isOutsideRangeFn = (timeSlots, startDate, endDate, focusedInput, un
     ? lastBlockedBetween(timeSlots, moment(), endDate)
     : null;
 
+
   if (previousBookedDate) {
     return day => {
       const firstDayToStartBooking = moment(previousBookedDate).add(1, 'days');
       return (
+        hasInvalidSlotAfter(day, timeSlots, previousBookedDate, seats) ||
         !isInclusivelyAfterDay(day, firstDayToStartBooking) ||
         !isInclusivelyBeforeDay(day, lastBookableDate)
       );
     };
   }
-
+  console.log(previousBookedDate)
   // standard isOutsideRange function
   return day => {
     return (

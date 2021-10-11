@@ -163,7 +163,6 @@ const BookingPanel = props => {
   }
 
   const seats = listing && listing.attributes && listing.attributes.publicData && listing.attributes.publicData.seats || 1;
-  const filtTimeSlots = timeSlots => timeSlots && timeSlots.filter(slot => slot.attributes.seats >= seats) || [];
 
   return (
     <div className={classes}>
@@ -208,13 +207,14 @@ const BookingPanel = props => {
             discount={discount}
             listingId={listing.id}
             isOwnListing={isOwnListing}
-            timeSlots={filtTimeSlots(timeSlots)}
+            timeSlots={timeSlots}
             fetchTimeSlotsError={fetchTimeSlotsError}
             onFetchTransactionLineItems={onFetchTransactionLineItems}
             lineItems={lineItems}
             fetchLineItemsInProgress={fetchLineItemsInProgress}
             fetchLineItemsError={fetchLineItemsError}
             bookingType={bookingType}
+            seats={seats}
           />
         ) : null}
 

@@ -218,6 +218,7 @@ class DateRangeInputComponent extends Component {
       render,
       timeSlots,
       minimumLength: minimumNights,
+      seats,
       ...datePickerProps
     } = this.props;
     /* eslint-enable no-unused-vars */
@@ -234,7 +235,8 @@ class DateRangeInputComponent extends Component {
       startDate,
       endDate,
       this.state.focusedInput,
-      unitType
+      unitType,
+      seats
     );
 
     let isOutsideRange = isOutsideRangeFn(
@@ -242,7 +244,8 @@ class DateRangeInputComponent extends Component {
       startDate,
       endDate,
       this.state.focusedInput,
-      unitType
+      unitType,
+      seats
     );
 
     const startDatePlaceholderTxt =

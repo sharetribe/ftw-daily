@@ -127,6 +127,7 @@ export class BookingDatesFormComponent extends Component {
             fetchLineItemsInProgress,
             fetchLineItemsError,
             bookingType,
+            seats
           } = fieldRenderProps;
           const { startDate, endDate } = values && values.bookingDates ? values.bookingDates : {};
 
@@ -242,6 +243,7 @@ export class BookingDatesFormComponent extends Component {
                   bookingDatesRequired(startDateErrorMessage, endDateErrorMessage)
                 )}
                 disabled={fetchLineItemsInProgress}
+                seats={seats}
               />
 
               {bookingInfoMaybe}
