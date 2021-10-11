@@ -51,7 +51,7 @@ export class BookingTimeFormComponent extends Component {
   render() {
     const { rootClassName, className, price: unitPrice, promocode, updateDiscount, ...rest } = this.props;
     const classes = classNames(rootClassName || css.root, className);
-    console.log(promocode)
+
     // if (!unitPrice) {
     //   return (
     //     <div className={classes}>
