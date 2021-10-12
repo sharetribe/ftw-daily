@@ -239,7 +239,7 @@ const EstimatedBreakdownMaybeComponent = props => {
   const isUnits = unitType === LINE_ITEM_UNITS;
   const quantityIfUsingUnits = !isUnits || Number.isInteger(quantity);
   const canEstimatePrice = startDate && endDate && quantityIfUsingUnits;
-console.log(props.bookingData)
+
   const [result, setResult] = React.useState({
   _sdkType: 'Money',
   amount: 0,

@@ -20,7 +20,6 @@ const FieldDiscountComponent = props => {
   const [value, setValue] = React.useState('');
 
   const total = isProvider ? transaction.attributes.payoutTotal : transaction.attributes.payinTotal;
-  console.log(promo)
 
   const handleClose = () => {
     setOpen(false);
