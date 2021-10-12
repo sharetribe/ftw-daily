@@ -29,6 +29,16 @@ const timeSlotsContain = (timeSlots, date) => {
   return timeSlots.findIndex(slot => timeSlotEqualsDay(slot, date)) > -1;
 };
 
+const findFirstInvalid = (slots, day, seats, asc = true) => {
+  const invalidSlots = slots.filter(timeSlot => timeSlot.attributes.seats < seats);
+  const matchedSlot = invalidSlots.find(({attributes: {start}}) => {
+    const s = moment(start);
+    return asc ? s.isAfter(day) : s.isBefore(day);
+  });
+
+  return matchedSlot ? matchedSlot.attributes.start : null;
+};
+
 /**
  * Find first blocked date between two dates.
  * If none is found, null is returned.
@@ -37,15 +47,19 @@ const timeSlotsContain = (timeSlots, date) => {
  * @param {Moment} startDate start date, exclusive
  * @param {Moment} endDate end date, exclusive
  */
-const firstBlockedBetween = (timeSlots, startDate, endDate) => {
+const firstBlockedBetween = (timeSlots, startDate, endDate, seats) => {
   const firstDate = moment(startDate).add(1, 'days');
   if (firstDate.isSame(endDate, 'date')) {
     return null;
   }
 
-  return timeSlotsContain(timeSlots, firstDate)
-    ? firstBlockedBetween(timeSlots, firstDate, endDate)
+  const closestInvalidDateMaybe = seats && findFirstInvalid(timeSlots, startDate, seats);
+  const closestInvalidDateStart = closestInvalidDateMaybe ? moment(closestInvalidDateMaybe).startOf('day') : null;
+  const firstBlocked = timeSlotsContain(timeSlots, firstDate)
+    ? firstBlockedBetween(timeSlots, firstDate, endDate, seats)
     : firstDate;
+
+  return closestInvalidDateStart && moment(closestInvalidDateStart).isBefore(firstBlocked) ? closestInvalidDateStart : firstBlocked;
 };
 
 /**
@@ -56,15 +70,18 @@ const firstBlockedBetween = (timeSlots, startDate, endDate) => {
  * @param {Moment} startDate start date, exclusive
  * @param {Moment} endDate end date, exclusive
  */
-const lastBlockedBetween = (timeSlots, startDate, endDate) => {
+const lastBlockedBetween = (timeSlots, startDate, endDate, seats) => {
   const previousDate = moment(endDate).subtract(1, 'days');
   if (previousDate.isSame(startDate, 'date')) {
     return null;
   }
+  const closestInvalidDateMaybe = seats && findFirstInvalid(timeSlots, endDate, seats, false);
 
-  return timeSlotsContain(timeSlots, previousDate)
-    ? lastBlockedBetween(timeSlots, startDate, previousDate)
+  const closestInvalidDateStart = closestInvalidDateMaybe ? moment(closestInvalidDateMaybe).startOf('day') : null;
+  const firstBlocked = timeSlotsContain(timeSlots, previousDate)
+    ? lastBlockedBetween(timeSlots, previousDate, startDate, seats)
     : previousDate;
+  return closestInvalidDateStart && moment(closestInvalidDateStart).isAfter(firstBlocked) ? closestInvalidDateStart : firstBlocked;
 };
 
 /**
@@ -133,11 +150,15 @@ export const pickerEndDateToApiDateForDaily = endDate => {
   return endDate.add(1, 'days').toDate();
 };
 
+const invalidDaySlot = (day, timeSlots, seats) => {
+  return timeSlots.find(timeSlot => moment(timeSlot.attributes.start).isSame(day, 'day') && timeSlot.attributes.seats <= seats);
+}
+
 /**
  * Returns an isDayBlocked function that can be passed to
  * a react-dates DateRangePicker component.
  */
-export const isDayBlockedFn = (timeSlots, startDate, endDate, focusedInput, unitType) => {
+export const isDayBlockedFn = (timeSlots, startDate, endDate, focusedInput, unitType, seats) => {
   const endOfRange = config.dayCountAvailableForBooking - 1;
   const lastBookableDate = moment().add(endOfRange, 'days');
 
@@ -161,7 +182,7 @@ export const isDayBlockedFn = (timeSlots, startDate, endDate, focusedInput, unit
   if (selectingEndDate) {
     // if end date is being selected first, block the day after a booked date
     // (as a booking can end on the day the following booking starts)
-    return day =>
+    return day => !!invalidDaySlot(moment(day).subtract(1, 'days'), timeSlots, seats) ||
       !timeSlots.find(timeSlot => timeSlotEqualsDay(timeSlot, moment(day).subtract(1, 'days')));
   } else if (nextBookingStarts || !timeSlots) {
     // a next booking is found or time slots are not provided
@@ -169,7 +190,7 @@ export const isDayBlockedFn = (timeSlots, startDate, endDate, focusedInput, unit
     return () => false;
   } else {
     // otherwise return standard timeslots check
-    return day => !timeSlots.find(timeSlot => timeSlotEqualsDay(timeSlot, day));
+    return day => !!invalidDaySlot(day, timeSlots, seats) || !timeSlots.find(timeSlot => timeSlotEqualsDay(timeSlot, day));
   }
 };
 
@@ -177,14 +198,14 @@ export const isDayBlockedFn = (timeSlots, startDate, endDate, focusedInput, unit
  * Returns an isOutsideRange function that can be passed to
  * a react-dates DateRangePicker component.
  */
-export const isOutsideRangeFn = (timeSlots, startDate, endDate, focusedInput, unitType) => {
+export const isOutsideRangeFn = (timeSlots, startDate, endDate, focusedInput, unitType, seats) => {
   const endOfRange = config.dayCountAvailableForBooking - 1;
   const lastBookableDate = moment().add(endOfRange, 'days');
 
   // start date selected, end date missing
   const startDateSelected = isStartDateSelected(timeSlots, startDate, endDate, focusedInput);
   const nextBookingStarts = startDateSelected
-    ? firstBlockedBetween(timeSlots, startDate, moment(lastBookableDate).add(1, 'days'))
+    ? firstBlockedBetween(timeSlots, startDate, moment(lastBookableDate).add(1, 'days'), seats)
     : null;
 
   if (nextBookingStarts) {
@@ -195,7 +216,8 @@ export const isOutsideRangeFn = (timeSlots, startDate, endDate, focusedInput, un
       const lastDayToEndBooking = apiEndDateToPickerDateForDaily(nextBookingStarts.toDate());
 
       return (
-        !isInclusivelyAfterDay(day, startDate) || !isInclusivelyBeforeDay(day, lastDayToEndBooking)
+        !isInclusivelyAfterDay(day, startDate) ||
+        !isInclusivelyBeforeDay(day, lastDayToEndBooking)
       );
     };
   }
@@ -203,9 +225,10 @@ export const isOutsideRangeFn = (timeSlots, startDate, endDate, focusedInput, un
   // end date selected, start date missing
   // -> limit the earliest start date for the booking so that it
   // needs to be after the previous booked date
-  const endDateSelected = timeSlots && endDate && !startDate && focusedInput !== END_DATE;
+  const endDateSelected = timeSlots && endDate && !startDate
+  // && focusedInput !== END_DATE;
   const previousBookedDate = endDateSelected
-    ? lastBlockedBetween(timeSlots, moment(), endDate)
+    ? lastBlockedBetween(timeSlots, moment(), endDate, seats)
     : null;
 
   if (previousBookedDate) {
