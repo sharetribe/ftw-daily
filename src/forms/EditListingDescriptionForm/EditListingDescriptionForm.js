@@ -11,7 +11,7 @@ import CustomCategorySelectFieldMaybe from './CustomCategorySelectFieldMaybe';
 
 import css from './EditListingDescriptionForm.module.css';
 
-const TITLE_MAX_LENGTH = 60;
+const TITLE_MAX_LENGTH = 100;
 
 const EditListingDescriptionFormComponent = props => (
   <FinalForm
