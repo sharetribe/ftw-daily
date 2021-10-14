@@ -23,7 +23,8 @@ import {
   ensureOwnListing,
   ensureUser,
   userDisplayNameAsString,
-  getLowestPrice
+  getLowestPrice,
+  getSelectedCategories
 } from '../../util/data';
 import { timestampToDate, calculateQuantityFromHours } from '../../util/dates';
 import { richText } from '../../util/richText';
@@ -84,14 +85,8 @@ const priceData = (price, intl) => {
 };
 
 const categoryLabel = (categories, key) => {
-  if (typeof key === 'string') {
-    const cat = categories.find(c => c.key || c.value === key);
-   return cat ? cat.label : key;
-  } else {
-  const cat = [...new Set(key.map(item => item.label))];
-  // const cat = categories.find(c => c.key || c.value === key);
-  return cat.join(' | ');
-  }
+  const cats = getSelectedCategories(key, categories);
+  return [...new Set(cats.map(({label}) => label))].join(' | ');
 };
 
 export class ListingPageComponent extends Component {
@@ -440,7 +435,6 @@ export class ListingPageComponent extends Component {
     const category =
       publicData && publicData.category ? (
         <span>
-          
           {categoryLabel(categoryOptions, publicData.category)}
           <span className={css.separator}>•</span>
         </span>
