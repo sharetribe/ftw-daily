@@ -2,7 +2,7 @@ import React from 'react';
 import { bool, func, object, string } from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from '../../util/reactIntl';
-import { ensureOwnListing } from '../../util/data';
+import { ensureOwnListing, getSelectedCategories } from '../../util/data';
 import { findOptionsForSelectFilter } from '../../util/search';
 import { LISTING_STATE_DRAFT } from '../../util/types';
 import { ListingLink } from '../../components';
@@ -48,6 +48,7 @@ const EditListingDescriptionPanel = props => {
   const categoryIds = config.custom.categories.map(cat => cat.id);
   // const categoryOptions = findOptionsForSelectFilter('category', config.custom.filters);
   const categoryOptions = findOptionsForSelectFilter(categoryIds, config.custom.filters);
+
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
@@ -57,7 +58,7 @@ const EditListingDescriptionPanel = props => {
         initialValues={{
           title,
           description,
-          category: publicData.category,
+          category: getSelectedCategories(publicData.category, categoryOptions),
           // availabilityPlan
         }}
         saveActionMsg={submitButtonText}

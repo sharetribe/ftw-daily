@@ -466,3 +466,11 @@ export const currentSearchPrice = search => {
 
   return currentFilter && equalFilterPrice[currentFilter];
 }
+
+export const getSelectedCategories = (selectedCategories, categories) => {
+  if (Array.isArray(selectedCategories)){
+    return selectedCategories;
+  }
+
+  return [categories.find(({value, key}) => key === selectedCategories || value === selectedCategories )];
+}
