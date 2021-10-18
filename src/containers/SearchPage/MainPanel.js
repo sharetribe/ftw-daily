@@ -205,6 +205,7 @@ class MainPanel extends Component {
       showAsModalMaxWidth,
       filterConfig,
       sortConfig,
+      h1,
     } = this.props;
 
     const primaryFilters = filterConfig.filter(f => f.group === 'primary');
@@ -266,6 +267,7 @@ class MainPanel extends Component {
 
     return (
       <div className={classes}>
+        <h1 className={css.h1}>{h1}</h1>
         <SearchFiltersMobile
           className={css.searchFiltersMobile}
           urlQueryParams={urlQueryParams}
@@ -386,7 +388,7 @@ MainPanel.defaultProps = {
 MainPanel.propTypes = {
   className: string,
   rootClassName: string,
-
+  h1: string,
   urlQueryParams: object.isRequired,
   listings: array,
   searchInProgress: bool.isRequired,

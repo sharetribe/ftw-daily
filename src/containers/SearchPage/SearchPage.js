@@ -23,6 +23,7 @@ import {
   pickSearchParamsOnly,
   validURLParamsForExtendedData,
   validFilterParams,
+  createH1,
   createSearchResultSchema,
 } from './SearchPage.helpers';
 import MainPanel from './MainPanel';
@@ -135,7 +136,6 @@ export class SearchPageComponent extends Component {
       latlngBounds: ['bounds'],
     });
     const pub_category = this.props.searchParams.pub_category;
-    console.log(pub_category, 'pub_category')
     // urlQueryParams doesn't contain page specific url params
     // like mapSearch, page or origin (origin depends on config.sortSearchByDistance)
     const urlQueryParams = pickSearchParamsOnly(searchInURL, filterConfig, sortConfig);
@@ -160,14 +160,14 @@ export class SearchPageComponent extends Component {
 
     const { address, bounds, origin } = searchInURL || {};
     const { title, description, schema } = createSearchResultSchema(listings, address, intl, pub_category);
-    console.log(location, 'location')
 
+    const h1 = title.replace(`- ${config.siteTitle}`, "");
     // Set topbar class based on if a modal is open in
     // a child component
     const topbarClasses = this.state.isMobileModalOpen
       ? classNames(css.topbarBehindModal, css.topbar)
       : css.topbar;
-console.log(title, 'title')
+// console.log(title, 'title')
     // N.B. openMobileMap button is sticky.
     // For some reason, stickyness doesn't work on Safari, if the element is <button>
     return (
@@ -184,6 +184,7 @@ console.log(title, 'title')
         />
         <div className={css.container}>
           <MainPanel
+            h1={h1}
             urlQueryParams={validQueryParams}
             listings={listings}
             searchInProgress={searchInProgress}
@@ -199,6 +200,7 @@ console.log(title, 'title')
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             history={history}
           />
+
           <ModalInMobile
             className={css.mapPanel}
             id="SearchPage.map"
