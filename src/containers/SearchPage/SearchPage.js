@@ -80,6 +80,7 @@ export class SearchPageComponent extends Component {
       const { address, bounds, mapSearch, ...rest } = parse(location.search, {
         latlng: ['origin'],
         latlngBounds: ['bounds'],
+
       });
 
       //const viewportMapCenter = SearchMap.getMapCenter(map);
@@ -133,7 +134,8 @@ export class SearchPageComponent extends Component {
       latlng: ['origin'],
       latlngBounds: ['bounds'],
     });
-
+    const pub_category = this.props.searchParams.pub_category;
+    console.log(pub_category, 'pub_category')
     // urlQueryParams doesn't contain page specific url params
     // like mapSearch, page or origin (origin depends on config.sortSearchByDistance)
     const urlQueryParams = pickSearchParamsOnly(searchInURL, filterConfig, sortConfig);
@@ -157,14 +159,15 @@ export class SearchPageComponent extends Component {
     };
 
     const { address, bounds, origin } = searchInURL || {};
-    const { title, description, schema } = createSearchResultSchema(listings, address, intl);
+    const { title, description, schema } = createSearchResultSchema(listings, address, intl, pub_category);
+    console.log(location, 'location')
 
     // Set topbar class based on if a modal is open in
     // a child component
     const topbarClasses = this.state.isMobileModalOpen
       ? classNames(css.topbarBehindModal, css.topbar)
       : css.topbar;
-
+console.log(title, 'title')
     // N.B. openMobileMap button is sticky.
     // For some reason, stickyness doesn't work on Safari, if the element is <button>
     return (
