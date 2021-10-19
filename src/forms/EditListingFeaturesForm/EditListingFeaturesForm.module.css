@@ -45,3 +45,60 @@
   margin-top: 0;
   margin-bottom: 32px;
 }
+body {
+  background: #edf2f7;
+}
+details {
+  display: block;
+  overflow: hidden;
+  max-width: 400px;
+  margin-bottom: 1.5rem;
+}
+
+details summary::-webkit-details-marker,
+details summary::marker {
+ display: none; 
+ content: "";
+}
+
+summary::-moz-list-bullet {
+  list-style-type: none;
+}
+summary::marker {
+  display: none;
+}
+summary {
+  display: block;
+  /* padding: 0.3em 1em 0.3em 0.9em; */
+  font-size: 1.4em;
+  cursor: pointer;
+  position: relative;
+}
+summary:before {
+  /* top: 0.3em; */
+  right: 0.3em;
+  background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTYuNTkgOC41OUwxMiAxMy4xNyA3LjQxIDguNTkgNiAxMGw2IDYgNi02eiIvPjxwYXRoIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48L3N2Zz4=')
+    no-repeat 50% 50% / 1em 1em;
+  width: 1em;
+  height: 1em;
+  content: '';
+  position: absolute;
+  transition: transform 0.5s;
+}
+details[open] > summary:before {
+  transform: scale(1, -1);
+}
+summary ~ * {
+  padding: 0 1em 10px 1.4em;
+}
+details[open] summary ~ * {
+  animation: sweep 0.5s ease-in-out;
+}
+@keyframes sweep {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
