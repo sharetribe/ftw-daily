@@ -159,6 +159,7 @@ export const createSearchResultSchema = (listings, address, intl, pub_category) 
   // http://schema.org
   // We are using JSON-LD format
   const siteTitle = config.siteTitle;
+  console.log(address, 'address')
   const newAdress = address.substring(0, address.indexOf(','));
   const searchAddress = newAdress || intl.formatMessage({ id: 'SearchPage.schemaMapSearch' });
   const schemaDescription = intl.formatMessage({ id: 'SearchPage.schemaDescription' });
