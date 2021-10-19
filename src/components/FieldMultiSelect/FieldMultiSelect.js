@@ -50,7 +50,7 @@ const FieldMultiSelectComponent = props => {
       return({
       ...provided,
       widht: '100%',
-      minHeight: 50,
+      minHeight: 65,
       boxShadow: 'none',
       borderTop: 'none',
       borderLeft: 'none',
@@ -60,7 +60,7 @@ const FieldMultiSelectComponent = props => {
       borderBottomColor: disabled ? 'grey' : hasError ? 'red' : input.value ? '#6BDE98' : 'orange',
       "&:hover": {
         ...provided,
-        minHeight: 50,
+        minHeight: 65,
         backgroundColor: 'none',
         boxShadow: 'none',
         borderTop: 'none',
@@ -70,7 +70,21 @@ const FieldMultiSelectComponent = props => {
         borderRadius: '0px',
         borderBottomColor: state.disabled ? 'grey' : state.hasError ? 'red' : input.value ? '#6BDE98' : 'orange',
       }
-    })}
+    })},
+    placeholder: (provided, state) => {
+      return({
+      ...provided,
+      top: '48%',
+      fontSize: '16px',
+      lineHeight: '22px',
+      color: '#b2b2b2',
+    })},
+    valueContainer: (provided, state) => {
+      return({
+      ...provided,
+      padding: '3px 8px 3px 0',
+      overflow: 'visible',
+    })},
   }
 
   return (

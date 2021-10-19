@@ -99,7 +99,7 @@ const EditListingDescriptionFormComponent = props => (
             id="title"
             name="title"
             className={css.title}
-            type="text"
+            type="textarea"
             label={titleMessage}
             placeholder={titlePlaceholderMessage}
             maxLength={TITLE_MAX_LENGTH}
