@@ -520,6 +520,7 @@ cursor: pointer;
 
 &::placeholder {
    color: var(--matterColorAnti);
+   font-size: 16px;
  }
 
 /* Effects */
