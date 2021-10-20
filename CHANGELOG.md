@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2021-XX-XX
 
+- [fix] Temporarily disallow Node v17, since it causes issues with dependencies.
+  [#1479](https://github.com/sharetribe/ftw-daily/pull/1479)
 - [fix] Fix modal close button text/icon alignment
   [#1476](https://github.com/sharetribe/ftw-daily/pull/1476)
 
