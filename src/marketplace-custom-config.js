@@ -125,14 +125,6 @@ export const filters = [
           label: 'Jacuzzi',
         },
         {
-          key: 'lake_view',
-          label: 'Lake view',
-        },
-        {
-          key: 'sea_view',
-          label: 'Sea view',
-        },
-        {
           key: 'barbeque',
           label: 'Barbeque',
         },
@@ -140,6 +132,23 @@ export const filters = [
           key: 'fireplace',
           label: 'Fireplace',
         },
+      ],
+    },
+  },
+  {
+    id: 'view',
+    label: 'View',
+    type: 'SelectSingleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_view'],
+    config: {
+      // Schema type is enum for SelectSingleFilter
+      schemaType: 'enum',
+      options: [
+        { key: 'sea', label: 'Sea view' },
+        { key: 'lake', label: 'Lake view' },
+        { key: 'forest', label: 'Forest view' },
+        { key: 'garden', label: 'Garden view' },
       ],
     },
   },
