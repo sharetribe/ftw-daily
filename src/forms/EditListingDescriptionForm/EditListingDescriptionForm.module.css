@@ -49,6 +49,20 @@
   flex-shrink: 0;
 }
 
+.titleMinHeight {
+  
+  & textarea {
+    min-height: 70px;
+  }
+}
+
+.descriptionMinHeight {
+  
+  & textarea {
+    min-height: 50px;
+  }
+}
+
 .category {
   @apply --EditListingDescriptionForm_formMargins;
 }
