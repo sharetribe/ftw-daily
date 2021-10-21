@@ -203,3 +203,15 @@ exports.constructValidLineItems = lineItems => {
   });
   return lineItemsWithTotals;
 };
+
+exports.resolveCleaningFeePrice = listing => {
+  const publicData = listing.attributes.publicData;
+  const cleaningFee = publicData && publicData.cleaningFee;
+  const { amount, currency } = cleaningFee;
+
+  if (amount && currency) {
+    return new Money(amount, currency);
+  }
+
+  return null;
+};
