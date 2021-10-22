@@ -45,6 +45,7 @@ const FilterComponent = props => {
       return (
         <SelectMultipleFilter
           id={componentId}
+          filterConfigId={id}
           label={label}
           filterConfig={filterConfig}
           name={name}

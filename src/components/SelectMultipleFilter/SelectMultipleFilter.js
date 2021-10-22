@@ -101,6 +101,7 @@ class SelectMultipleFilter extends Component {
       rootClassName,
       className,
       id,
+      filterConfigId,
       name,
       label,
       options,
@@ -159,7 +160,7 @@ class SelectMultipleFilter extends Component {
 
     const handleSubmit = values => {
       const usedValue = values ? values[name] : values;
-      onSubmit(format(usedValue, queryParamName, searchMode));
+      onSubmit(format(usedValue, queryParamName, searchMode), filterConfigId);
     };
 
     return showAsPopup ? (
