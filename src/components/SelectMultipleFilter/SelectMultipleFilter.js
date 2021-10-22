@@ -128,7 +128,7 @@ class SelectMultipleFilter extends Component {
       ? parseSelectFilterOptions(initialValues[queryParamName])
       : [];
 
-    if (!!isCategory && selectedOptions.length > 0) {
+      if (!!isCategory && selectedOptions.length > 0) {
       const subCategories = catKeys ? catKeys.split(',') : [];
       selectedOptions = selectedOptions.filter(cat=> subCategories.includes(cat));
       if (selectedOptions.length === 0) {

@@ -118,7 +118,7 @@ class MainPanel extends Component {
 
     return updatedURLParams => {
       const updater = prevState => {
-        // Address and bounds are handled outside of MainPanel.
+         // Address and bounds are handled outside of MainPanel.
         // I.e. TopbarSearchForm && search by moving the map.
         // We should always trust urlQueryParams with those.
         const { address, bounds } = urlQueryParams;
@@ -146,20 +146,8 @@ class MainPanel extends Component {
                            {};
 
 
-        // Since we have multiple filters with the same query param, 'pub_category'
+               // Since we have multiple filters with the same query param, 'pub_category'
         // we dont want to lose the prev ones, we want all of them
-
-        const isWindowDefined = typeof window !== 'undefined';
-        const isMobileLayout = isWindowDefined && window.innerWidth < 768;
-
-        const pc = 'pub_category';
-        if (pc in updatedURLParams && pc in mergedQueryParams && !isMobileLayout) {
-          const up_pc = updatedURLParams[pc] ? updatedURLParams[pc].split(',') : [];
-          const mp_pc = mergedQueryParams[pc] ? mergedQueryParams[pc].split(',') : [];
-          if (!!up_pc.length) {
-            updatedURLParams[pc] = [...new Set([...mp_pc, ...up_pc])].join(',');
-          }
-        }
         return {
           currentQueryParams: {...mergedQueryParams, ...updatedURLParams, ...priceMaybe, address, bounds },
         };
@@ -221,7 +209,7 @@ class MainPanel extends Component {
       ? validFilterParams(urlQueryParams, secondaryFilters)
       : {};
     const selectedSecondaryFiltersCount = Object.keys(selectedSecondaryFilters).length;
-
+   
     const isSecondaryFiltersOpen = !!hasSecondaryFilters && this.state.isSecondaryFiltersOpen;
     const propsForSecondaryFiltersToggle = hasSecondaryFilters
       ? {
@@ -267,7 +255,7 @@ class MainPanel extends Component {
 
     return (
       <div className={classes}>
-        <h1 className={css.h1}>{h1}</h1>
+        <h1 className={css.h1}>{h1}</h1>       
         <SearchFiltersMobile
           className={css.searchFiltersMobile}
           urlQueryParams={urlQueryParams}
