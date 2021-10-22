@@ -114,6 +114,7 @@ class SelectMultipleFilter extends Component {
       searchMode,
       intl,
       showAsPopup,
+      filterConfig,
       ...rest
     } = this.props;
 
@@ -140,14 +141,14 @@ class SelectMultipleFilter extends Component {
     const labelForPopup = hasInitialValues
       ? intl.formatMessage(
           { id: 'SelectMultipleFilter.labelSelected' },
-          { labelText: label, count: selectedOptions.length }
+          { labelText: filterConfig.label, count: filterConfig.config.options.map(e => e.key).filter(v => selectedOptions.includes(v)).length }
         )
       : label;
 
     const labelForPlain = hasInitialValues
       ? intl.formatMessage(
           { id: 'SelectMultipleFilterPlainForm.labelSelected' },
-          { labelText: label, count: selectedOptions.length }
+          { labelText: filterConfig.label, count: filterConfig.config.options.map(e => e.key).filter(v => selectedOptions.includes(v)).length }
         )
       : label;
 
@@ -220,6 +221,7 @@ SelectMultipleFilter.propTypes = {
   rootClassName: string,
   className: string,
   id: string.isRequired,
+  filterConfig: object,
   name: string.isRequired,
   queryParamNames: arrayOf(string).isRequired,
   label: node.isRequired,
