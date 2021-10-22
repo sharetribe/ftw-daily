@@ -108,17 +108,18 @@ class MainPanel extends Component {
     const isArray = Array.isArray(queryParamNames);
     return isArray
       ? queryParamNames.reduce((acc, paramName) => {
-          return { ...acc, [paramName]: getInitialValue(paramName) };
-        }, {})
+        return { ...acc, [paramName]: getInitialValue(paramName) };
+      }, {})
       : {};
   }
 
   getHandleChangedValueFn(useHistoryPush) {
     const { urlQueryParams, history, sortConfig, filterConfig } = this.props;
 
-    return updatedURLParams => {
+    return (updatedURLParams, filterConfigId) => {
+
       const updater = prevState => {
-         // Address and bounds are handled outside of MainPanel.
+        // Address and bounds are handled outside of MainPanel.
         // I.e. TopbarSearchForm && search by moving the map.
         // We should always trust urlQueryParams with those.
         const { address, bounds } = urlQueryParams;
@@ -127,10 +128,10 @@ class MainPanel extends Component {
 
         let selectedPrice;
 
-        if (price){
-          selectedPrice = typeof price === 'string' ? 
-                          {price} :
-                          Object.keys(price).reduce((o, key) => ({...o, [`pub_${key}`]: price[key]}), {});
+        if (price) {
+          selectedPrice = typeof price === 'string' ?
+            { price } :
+            Object.keys(price).reduce((o, key) => ({ ...o, [`pub_${key}`]: price[key] }), {});
         } else if (price === null) {
           selectedPrice = null;
         }
@@ -142,14 +143,56 @@ class MainPanel extends Component {
           pub_pricePerMonthFilter: null
         };
         const priceMaybe = selectedPrice || selectedPrice === null ?
-                           {...emptyPrices, ...(selectedPrice || {})} :
-                           {};
+          { ...emptyPrices, ...(selectedPrice || {}) } :
+          {};
 
 
-               // Since we have multiple filters with the same query param, 'pub_category'
+        // Since we have multiple filters with the same query param, 'pub_category'
         // we dont want to lose the prev ones, we want all of them
+
+        const isWindowDefined = typeof window !== 'undefined';
+        const isMobileLayout = isWindowDefined && window.innerWidth < 768;
+
+        const pc = 'pub_category';
+
+        const isCategoryCleared = updatedURLParams && pc in updatedURLParams && !updatedURLParams[pc];
+        const selectedFilter = filterConfig.find(f => f.id === filterConfigId)
+        const selectedFilterOptions = selectedFilter && selectedFilter.config.catKeys.split(',');
+
+
+        if (pc in updatedURLParams) {
+          if (!isCategoryCleared && pc in mergedQueryParams) {
+            const up_pc = updatedURLParams[pc] ? updatedURLParams[pc].split(',') : [];
+            const mp_pc = mergedQueryParams[pc] ? mergedQueryParams[pc].split(',') : [];
+
+            if (!!up_pc.length) {
+
+
+              // const test = mp_pc.reduce((obj, c) => {
+              //   const id = '?????;'
+              //   return {
+              //     ...obj,
+              //     [id]: {
+              //       ...(obj[id] || []),
+              //       c
+              //     }
+              //   }
+              // }, {})
+
+              // console.log(test, "!!!!");
+
+              updatedURLParams[pc] = [...new Set([...mp_pc, ...up_pc])].join(',');
+            }
+          } else if (isCategoryCleared) {
+
+            const mp_pc = mergedQueryParams[pc] ? mergedQueryParams[pc].split(',').filter(item => !selectedFilterOptions.includes(item)) : []
+
+            updatedURLParams[pc] = [...new Set([...mp_pc])].join(',');
+          }
+        }
+
         return {
-          currentQueryParams: {...mergedQueryParams, ...updatedURLParams, ...priceMaybe, address, bounds },
+          currentQueryParams: { ...mergedQueryParams, ...updatedURLParams, ...priceMaybe, address, bounds },
         };
       };
 
@@ -209,16 +252,16 @@ class MainPanel extends Component {
       ? validFilterParams(urlQueryParams, secondaryFilters)
       : {};
     const selectedSecondaryFiltersCount = Object.keys(selectedSecondaryFilters).length;
-   
+
     const isSecondaryFiltersOpen = !!hasSecondaryFilters && this.state.isSecondaryFiltersOpen;
     const propsForSecondaryFiltersToggle = hasSecondaryFilters
       ? {
-          isSecondaryFiltersOpen: this.state.isSecondaryFiltersOpen,
-          toggleSecondaryFiltersOpen: isOpen => {
-            this.setState({ isSecondaryFiltersOpen: isOpen });
-          },
-          selectedSecondaryFiltersCount,
-        }
+        isSecondaryFiltersOpen: this.state.isSecondaryFiltersOpen,
+        toggleSecondaryFiltersOpen: isOpen => {
+          this.setState({ isSecondaryFiltersOpen: isOpen });
+        },
+        selectedSecondaryFiltersCount,
+      }
       : {};
 
     const hasPaginationInfo = !!pagination && pagination.totalItems != null;
@@ -235,9 +278,9 @@ class MainPanel extends Component {
       const mobileClassesMaybe =
         mode === 'mobile'
           ? {
-              rootClassName: css.sortBy,
-              menuLabelRootClassName: css.sortByMenuLabel,
-            }
+            rootClassName: css.sortBy,
+            menuLabelRootClassName: css.sortByMenuLabel,
+          }
           : {};
       return sortConfig.active ? (
         <SortBy
@@ -255,7 +298,7 @@ class MainPanel extends Component {
 
     return (
       <div className={classes}>
-        <h1 className={css.h1}>{h1}</h1>       
+        <h1 className={css.h1}>{h1}</h1>
         <SearchFiltersMobile
           className={css.searchFiltersMobile}
           urlQueryParams={urlQueryParams}
