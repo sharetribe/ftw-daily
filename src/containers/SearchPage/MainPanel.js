@@ -164,6 +164,13 @@ class MainPanel extends Component {
           if (!isCategoryCleared && pc in mergedQueryParams) {
             const up_pc = updatedURLParams[pc] ? updatedURLParams[pc].split(',') : [];
             const mp_pc = mergedQueryParams[pc] ? mergedQueryParams[pc].split(',') : [];
+            const asas = mp_pc.filter(x => !up_pc.includes(x));
+            const newMp = [...new Set([...up_pc, ...mp_pc])].filter(x => !asas.includes(x));
+            // const newMp = mp_pc.filter(x => !up_pc.includes(x)).concat(up_pc.filter(x => !mp_pc.includes(x)));
+            console.log(newMp, 'newMp')
+            console.log(up_pc, 'up_pc')
+            console.log(mp_pc, 'mp_pc')
+            console.log(asas, 'asas')
 
             if (!!up_pc.length) {
 
@@ -181,7 +188,7 @@ class MainPanel extends Component {
 
               // console.log(test, "!!!!");
 
-              updatedURLParams[pc] = [...new Set([...mp_pc, ...up_pc])].join(',');
+              updatedURLParams[pc] = newMp.join(',');
             }
           } else if (isCategoryCleared) {
 
