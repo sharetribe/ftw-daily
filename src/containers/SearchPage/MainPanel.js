@@ -145,8 +145,34 @@ class MainPanel extends Component {
         const priceMaybe = selectedPrice || selectedPrice === null ?
           { ...emptyPrices, ...(selectedPrice || {}) } :
           {};
+          const arrayN = {
+            nail: ['nail-technician',
+            'hair-stylist',
+            'cosmetics',
+            'makeup-artist',
+            'beauty-treatment-room',
+            'barber',],
+            fitness: ['photography', 'art', 'music'],
+            art: ['photography', 'art', 'music'],
+            event: ['event-space', 'outdoor-site', 'shoot-location'], 
+            space: ['desk-space', 'office-space', 'meeting-room-space'],
+            fitness: ['fitness', 'therapy-room', 'wellness-treatment-room']
+          };
+          const findValue = ( value ) => {
+           
+            let res =[];
+            for( let name in arrayN ) {
+                if( arrayN.hasOwnProperty( name ) ) {
+                  value.forEach(e => { 
+                    if(arrayN[name].includes(e) ) {
 
-
+                        return res.includes(name) ? '' : res.push(name);
+                    }
+                  })
+                }
+            }
+            return res;
+        }
         // Since we have multiple filters with the same query param, 'pub_category'
         // we dont want to lose the prev ones, we want all of them
 
@@ -159,21 +185,24 @@ class MainPanel extends Component {
         const selectedFilter = filterConfig.find(f => f.id === filterConfigId)
         const selectedFilterOptions = selectedFilter && selectedFilter.config.catKeys.split(',');
 
-
         if (pc in updatedURLParams) {
           if (!isCategoryCleared && pc in mergedQueryParams) {
             const up_pc = updatedURLParams[pc] ? updatedURLParams[pc].split(',') : [];
             const mp_pc = mergedQueryParams[pc] ? mergedQueryParams[pc].split(',') : [];
             const asas = mp_pc.filter(x => !up_pc.includes(x));
-            const newMp = [...new Set([...up_pc, ...mp_pc])].filter(x => !asas.includes(x));
-            // const newMp = mp_pc.filter(x => !up_pc.includes(x)).concat(up_pc.filter(x => !mp_pc.includes(x)));
-            console.log(newMp, 'newMp')
-            console.log(up_pc, 'up_pc')
-            console.log(mp_pc, 'mp_pc')
-            console.log(asas, 'asas')
+            const newMp = [...new Set([...up_pc, ...mp_pc])].filter(x => !asas.includes(x));           
 
+            if(findValue(mp_pc).filter(x => findValue(up_pc).includes(x)).length === 0) {
+              updatedURLParams[pc] = [...new Set([...up_pc, ...mp_pc])].join(',');
+            }
+            else if(findValue(mp_pc).filter(x => findValue(up_pc).includes(x)).length > 0) {
+              // console.log('dfwlw')
+              let difference = findValue(mp_pc).filter(x => findValue(up_pc).includes(x));
+              let rer = asas.filter(x => !arrayN[difference].includes(x));
+
+              updatedURLParams[pc] =  [...new Set([...rer, ...newMp])].join(',');
+            }
             if (!!up_pc.length) {
-
 
               // const test = mp_pc.reduce((obj, c) => {
               //   const id = '?????;'
@@ -188,7 +217,7 @@ class MainPanel extends Component {
 
               // console.log(test, "!!!!");
 
-              updatedURLParams[pc] = newMp.join(',');
+              
             }
           } else if (isCategoryCleared) {
 
