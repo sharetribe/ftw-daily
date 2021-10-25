@@ -756,6 +756,7 @@
   "SearchPage.schemaMapSearch": "United Kingdom",
   "SearchPage.schemaTitle": "Résultats pour {searchAddress} | {siteTitle}",
   "SearchPage.schemaTitleNail": "Hair, beauty, lash, nail space to rent in {searchAddress} - {siteTitle}",
+  "SearchPage.schemaTitleNew": "{uniqueCategory} in {searchAddress} - {siteTitle}",
   "SearchPage.schemaTitleCoworking": "Coworking, office and meeting room space to hire in {searchAddress} - {siteTitle}",
   "SearchPage.schemaTitleEvents": "Event spaces and venue rental in {searchAddress} - {siteTitle}",
   "SearchPage.schemaTitleStudios": "Photography, Art, podcast studios and creative spaces for hire in {searchAddress} - {siteTitle}",

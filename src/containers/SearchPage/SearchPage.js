@@ -159,7 +159,7 @@ export class SearchPageComponent extends Component {
     };
 
     const { address, bounds, origin } = searchInURL || {};
-    const { title, description, schema } = createSearchResultSchema(listings, address, intl, pub_category);
+    const { title, description, schema } = createSearchResultSchema(listings, address, intl, pub_category, filterConfig);
 
     const h1 = title.replace(`- ${config.siteTitle}`, "");
     // Set topbar class based on if a modal is open in

@@ -137,7 +137,7 @@ class SelectMultipleFilter extends Component {
         hasInitialValues = false;
       }
     }
-
+    
     const labelForPopup = hasInitialValues
       ? intl.formatMessage(
           { id: 'SelectMultipleFilter.labelSelected' },
@@ -158,8 +158,9 @@ class SelectMultipleFilter extends Component {
     // they can be passed to the correct field
     const namedInitialValues = { [name]: selectedOptions };
 
-    const handleSubmit = values => {
+    const handleSubmit = (values) => {
       const usedValue = values ? values[name] : values;
+      // console.log(values, usedValue, '(data, e)')
       onSubmit(format(usedValue, queryParamName, searchMode), filterConfigId);
     };
 
