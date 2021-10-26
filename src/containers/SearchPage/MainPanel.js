@@ -127,6 +127,7 @@ class MainPanel extends Component {
         const { price } = updatedURLParams || {};
 
         let selectedPrice;
+        let selectedDates;
 
         if (price) {
           selectedPrice = typeof price === 'string' ?
@@ -135,6 +136,14 @@ class MainPanel extends Component {
         } else if (price === null) {
           selectedPrice = null;
         }
+
+        // if (dates) {
+        //   selectedDates = typeof dates === 'string' ?
+        //     { dates } :
+        //     Object.keys(dates).reduce((o, key) => ({ ...o, [`pub_${key}`]: price[key] }), {});
+        // } else if (dates === null) {
+        //   selectedDates = null;
+        // }
 
         const emptyPrices = {
           price: null,
@@ -145,6 +154,11 @@ class MainPanel extends Component {
         const priceMaybe = selectedPrice || selectedPrice === null ?
           { ...emptyPrices, ...(selectedPrice || {}) } :
           {};
+
+          // const dateMaybe = selectedDates || selectedDates === null ?
+          // { ...(selectedDates || {}) } :
+          // {};
+          // console.log(priceMaybe, dateMaybe)
           const arrayN = {
             nail: ['nail-technician',
             'hair-stylist',
@@ -226,9 +240,14 @@ class MainPanel extends Component {
             updatedURLParams[pc] = [...new Set([...mp_pc])].join(',');
           }
         }
+        if (updatedURLParams[pc]?.length === 0) {
+          console.log(updatedURLParams, 'updatedURLParams')
 
+          delete updatedURLParams.pub_category;
+        }
+      
         return {
-          currentQueryParams: { ...mergedQueryParams, ...updatedURLParams, ...priceMaybe, address, bounds },
+           currentQueryParams: { ...updatedURLParams, ...priceMaybe, address, bounds },
         };
       };
 
@@ -274,7 +293,7 @@ class MainPanel extends Component {
       sortConfig,
       h1,
     } = this.props;
-
+    
     const primaryFilters = filterConfig.filter(f => f.group === 'primary');
     const secondaryFilters = filterConfig.filter(f => f.group !== 'primary');
     const hasSecondaryFilters = !!(secondaryFilters && secondaryFilters.length > 0);
