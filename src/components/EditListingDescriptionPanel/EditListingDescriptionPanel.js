@@ -51,6 +51,8 @@ const EditListingDescriptionPanel = props => {
   const category = publicData.category ? publicData.category : [];
   const categoryOptionsToSelect = categoryOptions && categoryOptions.filter(item => category.includes(item.value))
 
+  const oldCategoryArr = publicData && publicData.category && !!publicData.category[0].label
+
   
   return (
     <div className={classes}>
@@ -61,7 +63,7 @@ const EditListingDescriptionPanel = props => {
         initialValues={{
           title,
           description,
-          category: categoryOptionsToSelect,
+          category: oldCategoryArr ? category : categoryOptionsToSelect,
           // availabilityPlan
         }}
         saveActionMsg={submitButtonText}
