@@ -166,11 +166,11 @@ class MainPanel extends Component {
             'makeup-artist',
             'beauty-treatment-room',
             'barber',],
-            fitness: ['photography', 'art', 'music'],
-            art: ['photography', 'art', 'music'],
-            event: ['event-space', 'outdoor-site', 'shoot-location'], 
+            fitness: ['fitness', 'therapy-room', 'wellness-treatment-room'],
+            creative: ['photography', 'art', 'music'],
             space: ['desk-space', 'office-space', 'meeting-room-space'],
-            fitness: ['fitness', 'therapy-room', 'wellness-treatment-room']
+            event: ['event-space', 'outdoor-site', 'shoot-location', 'kitchen-space'], 
+            art: ['tattoo-artist', 'piercing-artist'],
           };
           const findValue = ( value ) => {
            
@@ -201,38 +201,26 @@ class MainPanel extends Component {
 
         if (pc in updatedURLParams) {
           if (!isCategoryCleared && pc in mergedQueryParams) {
-            const up_pc = updatedURLParams[pc] ? updatedURLParams[pc].split(',') : [];
-            const mp_pc = mergedQueryParams[pc] ? mergedQueryParams[pc].split(',') : [];
+            const updatedURLParamsCutted = updatedURLParams[pc].includes('has_all:') ? updatedURLParams[pc].replace('has_all:', '') : updatedURLParams[pc];
+            const mergedQueryParamsCutted = mergedQueryParams[pc].includes('has_all:') ? mergedQueryParams[pc].replace('has_all:', '') : mergedQueryParams[pc];
+
+            const up_pc = updatedURLParams[pc] ? updatedURLParamsCutted.split(',') : [];
+            const mp_pc = mergedQueryParams[pc] ? mergedQueryParamsCutted.split(',') : [];
             const asas = mp_pc.filter(x => !up_pc.includes(x));
             const newMp = [...new Set([...up_pc, ...mp_pc])].filter(x => !asas.includes(x));           
 
+ 
             if(findValue(mp_pc).filter(x => findValue(up_pc).includes(x)).length === 0) {
               updatedURLParams[pc] = [...new Set([...up_pc, ...mp_pc])].join(',');
             }
             else if(findValue(mp_pc).filter(x => findValue(up_pc).includes(x)).length > 0) {
-              // console.log('dfwlw')
+              
               let difference = findValue(mp_pc).filter(x => findValue(up_pc).includes(x));
               let rer = asas.filter(x => !arrayN[difference].includes(x));
 
               updatedURLParams[pc] =  [...new Set([...rer, ...newMp])].join(',');
             }
-            if (!!up_pc.length) {
 
-              // const test = mp_pc.reduce((obj, c) => {
-              //   const id = '?????;'
-              //   return {
-              //     ...obj,
-              //     [id]: {
-              //       ...(obj[id] || []),
-              //       c
-              //     }
-              //   }
-              // }, {})
-
-              // console.log(test, "!!!!");
-
-              
-            }
           } else if (isCategoryCleared) {
 
             const mp_pc = mergedQueryParams[pc] ? mergedQueryParams[pc].split(',').filter(item => !selectedFilterOptions.includes(item)) : []
@@ -241,8 +229,7 @@ class MainPanel extends Component {
           }
         }
         if (updatedURLParams[pc]?.length === 0) {
-          console.log(updatedURLParams, 'updatedURLParams')
-
+          
           delete updatedURLParams.pub_category;
         }
       
@@ -293,7 +280,7 @@ class MainPanel extends Component {
       sortConfig,
       h1,
     } = this.props;
-    
+
     const primaryFilters = filterConfig.filter(f => f.group === 'primary');
     const secondaryFilters = filterConfig.filter(f => f.group !== 'primary');
     const hasSecondaryFilters = !!(secondaryFilters && secondaryFilters.length > 0);
