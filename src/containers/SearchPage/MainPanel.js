@@ -166,11 +166,11 @@ class MainPanel extends Component {
             'makeup-artist',
             'beauty-treatment-room',
             'barber',],
-            fitness: ['photography', 'art', 'music'],
-            art: ['photography', 'art', 'music'],
-            event: ['event-space', 'outdoor-site', 'shoot-location'], 
+            fitness: ['fitness', 'therapy-room', 'wellness-treatment-room'],
+            creative: ['photography', 'art', 'music'],
             space: ['desk-space', 'office-space', 'meeting-room-space'],
-            fitness: ['fitness', 'therapy-room', 'wellness-treatment-room']
+            event: ['event-space', 'outdoor-site', 'shoot-location', 'kitchen-space'], 
+            art: ['tattoo-artist', 'piercing-artist'],
           };
           const findValue = ( value ) => {
            
@@ -204,8 +204,13 @@ class MainPanel extends Component {
             const up_pc = updatedURLParams[pc] ? updatedURLParams[pc].split(',') : [];
             const mp_pc = mergedQueryParams[pc] ? mergedQueryParams[pc].split(',') : [];
             const asas = mp_pc.filter(x => !up_pc.includes(x));
-            const newMp = [...new Set([...up_pc, ...mp_pc])].filter(x => !asas.includes(x));           
-
+            const newMp = [...new Set([...up_pc, ...mp_pc])].filter(x => !asas.includes(x));   
+            console.log(updatedURLParams[pc], 'updatedURLParams[pc]')       
+console.log(up_pc, 'up_pc')
+console.log(mp_pc, 'mp_pc')
+console.log(asas, 'asas')
+console.log(newMp, 'newMp')
+console.log(findValue(mp_pc).filter(x => findValue(up_pc).includes(x)), 'findValue(mp_pc).filter(x => findValue(up_pc).includes(x))')
             if(findValue(mp_pc).filter(x => findValue(up_pc).includes(x)).length === 0) {
               updatedURLParams[pc] = [...new Set([...up_pc, ...mp_pc])].join(',');
             }
@@ -293,7 +298,7 @@ class MainPanel extends Component {
       sortConfig,
       h1,
     } = this.props;
-    
+
     const primaryFilters = filterConfig.filter(f => f.group === 'primary');
     const secondaryFilters = filterConfig.filter(f => f.group !== 'primary');
     const hasSecondaryFilters = !!(secondaryFilters && secondaryFilters.length > 0);
