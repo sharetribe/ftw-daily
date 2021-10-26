@@ -23,6 +23,7 @@ import {
   pickSearchParamsOnly,
   validURLParamsForExtendedData,
   validFilterParams,
+  createH1,
   createSearchResultSchema,
 } from './SearchPage.helpers';
 import MainPanel from './MainPanel';
@@ -80,6 +81,7 @@ export class SearchPageComponent extends Component {
       const { address, bounds, mapSearch, ...rest } = parse(location.search, {
         latlng: ['origin'],
         latlngBounds: ['bounds'],
+
       });
 
       //const viewportMapCenter = SearchMap.getMapCenter(map);
@@ -133,7 +135,7 @@ export class SearchPageComponent extends Component {
       latlng: ['origin'],
       latlngBounds: ['bounds'],
     });
-
+    const pub_category = this.props.searchParams.pub_category;
     // urlQueryParams doesn't contain page specific url params
     // like mapSearch, page or origin (origin depends on config.sortSearchByDistance)
     const urlQueryParams = pickSearchParamsOnly(searchInURL, filterConfig, sortConfig);
@@ -157,14 +159,15 @@ export class SearchPageComponent extends Component {
     };
 
     const { address, bounds, origin } = searchInURL || {};
-    const { title, description, schema } = createSearchResultSchema(listings, address, intl);
+    const { title, description, schema } = createSearchResultSchema(listings, address, intl, pub_category, filterConfig);
 
+    const h1 = title.replace(`- ${config.siteTitle}`, "");
     // Set topbar class based on if a modal is open in
     // a child component
     const topbarClasses = this.state.isMobileModalOpen
       ? classNames(css.topbarBehindModal, css.topbar)
       : css.topbar;
-
+// console.log(title, 'title')
     // N.B. openMobileMap button is sticky.
     // For some reason, stickyness doesn't work on Safari, if the element is <button>
     return (
@@ -181,6 +184,7 @@ export class SearchPageComponent extends Component {
         />
         <div className={css.container}>
           <MainPanel
+            h1={h1}
             urlQueryParams={validQueryParams}
             listings={listings}
             searchInProgress={searchInProgress}
@@ -196,6 +200,7 @@ export class SearchPageComponent extends Component {
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             history={history}
           />
+
           <ModalInMobile
             className={css.mapPanel}
             id="SearchPage.map"

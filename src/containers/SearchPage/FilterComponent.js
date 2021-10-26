@@ -27,7 +27,6 @@ const FilterComponent = props => {
   const prefix = idPrefix || 'SearchPage';
   const componentId = `${prefix}.${id.toLowerCase()}`;
   const name = id.replace(/\s+/g, '-').toLowerCase();
-
   switch (type) {
     case 'SelectSingleFilter': {
       return (
@@ -46,7 +45,9 @@ const FilterComponent = props => {
       return (
         <SelectMultipleFilter
           id={componentId}
+          filterConfigId={id}
           label={label}
+          filterConfig={filterConfig}
           name={name}
           queryParamNames={queryParamNames}
           initialValues={initialValues(queryParamNames)}

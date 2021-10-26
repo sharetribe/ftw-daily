@@ -42,7 +42,14 @@
     min-height: calc(100vh - var(--topbarHeightDesktop));
   }
 }
-
+.h1 {
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 16px;
+    letter-spacing: 0.2px;    
+    line-height: 20px;
+    font-family: var(--fontFamily);
+}
 .searchResultContainer {
   flex-grow: 1;
   display: flex;

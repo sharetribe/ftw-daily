@@ -56,37 +56,24 @@ class SearchFiltersSecondaryComponent extends Component {
     }
   }
 
-  renderApplyResetButtons(key) {
-    return (
-      <div key={key} className={css.footer}>
-        <InlineTextButton rootClassName={css.resetAllButton} onClick={this.resetAll}>
-          <FormattedMessage id={'SearchFiltersSecondary.resetAll'} />
-        </InlineTextButton>
-        <InlineTextButton rootClassName={css.cancelButton} onClick={this.cancelFilters}>
-          <FormattedMessage id={'SearchFiltersSecondary.cancel'} />
-        </InlineTextButton>
-        <InlineTextButton rootClassName={css.applyButton} onClick={this.applyFilters}>
-          <FormattedMessage id={'SearchFiltersSecondary.apply'} />
-        </InlineTextButton>
-      </div>
-    );
-  }
-
   render() {
     const { rootClassName, className, children } = this.props;
     const classes = classNames(rootClassName || css.root, className);
 
-    // add reset/clear/apply buttons between each filter, and at the top
-    const childrenWithButtonsBetween = [];
-    children.forEach(filt => {
-      childrenWithButtonsBetween.push(this.renderApplyResetButtons(`before-${filt.key}-buttons`));
-      childrenWithButtonsBetween.push(filt);
-    });
-
     return (
-      <div className={classes}>
-        <div className={css.filtersWrapper}>{childrenWithButtonsBetween}</div>
-        {this.renderApplyResetButtons('end-of-list-buttons')}
+      <div  className={classes}>
+        <div className={css.filtersWrapper}>{children}</div>
+        <div className={css.footer}>
+          <InlineTextButton rootClassName={css.resetAllButton} onClick={this.resetAll}>
+            <FormattedMessage id={'SearchFiltersSecondary.resetAll'} />
+          </InlineTextButton>
+          <InlineTextButton rootClassName={css.cancelButton} onClick={this.cancelFilters}>
+            <FormattedMessage id={'SearchFiltersSecondary.cancel'} />
+          </InlineTextButton>
+          <InlineTextButton rootClassName={css.applyButton} onClick={this.applyFilters}>
+            <FormattedMessage id={'SearchFiltersSecondary.apply'} />
+          </InlineTextButton>
+        </div>
       </div>
     );
   }

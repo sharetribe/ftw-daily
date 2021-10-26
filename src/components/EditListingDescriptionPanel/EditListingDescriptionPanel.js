@@ -48,7 +48,12 @@ const EditListingDescriptionPanel = props => {
   const categoryIds = config.custom.categories.map(cat => cat.id);
   // const categoryOptions = findOptionsForSelectFilter('category', config.custom.filters);
   const categoryOptions = findOptionsForSelectFilter(categoryIds, config.custom.filters);
+  const category = publicData.category ? publicData.category : [];
+  const categoryOptionsToSelect = categoryOptions && categoryOptions.filter(item => category.includes(item.value))
 
+  const oldCategoryArr = publicData && publicData.category && !!publicData.category[0].label
+
+  
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
@@ -58,7 +63,7 @@ const EditListingDescriptionPanel = props => {
         initialValues={{
           title,
           description,
-          category: getSelectedCategories(publicData.category, categoryOptions),
+          category: oldCategoryArr ? category : categoryOptionsToSelect,
           // availabilityPlan
         }}
         saveActionMsg={submitButtonText}
@@ -73,7 +78,7 @@ const EditListingDescriptionPanel = props => {
             title: title.trim(),
             description,
             publicData: {
-              category
+              category: category && category.some(item => !!item) ? category.filter(value => !!value).map(i => i.value) : null,
             },
             // availabilityPlan: {
             //   type,

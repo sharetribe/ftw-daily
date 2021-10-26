@@ -67,23 +67,34 @@ const EditListingFeaturesFormComponent = props => (
           <FormattedMessage id="EditListingFeaturesForm.showListingFailed" />
         </p>
       ) : null;
-
+      
       const amenities = config.custom.amenities || [];
+      // const isCategory = [];
+
       const amenitiesCheckboxGroups = amenities.map((amen, i) => {
         const catGroupForThisAmen = amen.config.catKeys.split(',');
-        const shouldDisplayTheseAmenties = catGroupForThisAmen.includes(category) || amen.config.catKeys === 'all';
+        // for (let i = 0; i < arrayCategory.length; i++) {
+        //   isCategory = catGroupForThisAmen.includes(arrayCategory[i]); 
+        // }
+        const arrayCategory = category.map(a => a.value);
+
+        const shouldDisplayTheseAmenties = catGroupForThisAmen.includes(category) || arrayCategory.some(o => catGroupForThisAmen.includes(o)) || amen.config.catKeys === 'all';
 
         return shouldDisplayTheseAmenties
           ? (
-            <span key={`${i}.${name}`}>
-              <h3>{amen.label}</h3>
+            <details>
+            {/* <span key={`${i}.${name}`}> */}
+            <summary><h3>{amen.label}</h3></summary>
               <FieldCheckboxGroup
                 className={css.features}
                 id={name}
                 name={name}
                 options={amen.config.options}
               />
-            </span>
+              
+            {/* </span> */}
+            
+            </details>
           )
           : null
       });

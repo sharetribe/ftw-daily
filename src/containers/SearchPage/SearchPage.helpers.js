@@ -129,18 +129,17 @@ export const validURLParamsForExtendedData = (params, filters) => {
 // Flatten nested options
 const flattenOptions = options => {
   return options.reduce((acc, o) => {
-    o.children && o.children.length
-      ? o.children.map(c => acc.push(c.key))
-      : acc.push(o.key)
+    o.children && o.children.length ? o.children.map(c => acc.push(c.key)) : acc.push(o.key);
 
-    return acc
-  }, [])
+    return acc;
+  }, []);
 };
 
 // extract search parameters, including a custom URL params
 // which are validated by mapping the values to marketplace custom config.
 export const pickSearchParamsOnly = (params, filters, sortConfig) => {
-  const { address, origin, bounds, ...rest } = params || {};
+  const { address, origin, bounds, pub_category, ...rest } = params || {};
+
   const boundsMaybe = bounds ? { bounds } : {};
   const originMaybe = config.sortSearchByDistance && origin ? { origin } : {};
   const filterParams = validFilterParams(rest, filters);
@@ -155,17 +154,108 @@ export const pickSearchParamsOnly = (params, filters, sortConfig) => {
   };
 };
 
-export const createSearchResultSchema = (listings, address, intl) => {
+export const createSearchResultSchema = (listings, address, intl, pub_category, filterConfig) => {
   // Schema for search engines (helps them to understand what this page is about)
   // http://schema.org
   // We are using JSON-LD format
   const siteTitle = config.siteTitle;
-  const searchAddress = address || intl.formatMessage({ id: 'SearchPage.schemaMapSearch' });
+  const newAdress = address.substring(0, address.indexOf(','));
+  const searchAddress = newAdress || intl.formatMessage({ id: 'SearchPage.schemaMapSearch' });
   const schemaDescription = intl.formatMessage({ id: 'SearchPage.schemaDescription' });
-  const schemaTitle = intl.formatMessage(
+  // const nail = [
+  //   'nail-technician',
+  //   'hair-stylist',
+  //   'cosmetics',
+  //   'makeup-artist',
+  //   'beauty-treatment-room',
+  //   'barber',
+  // ];
+  // const fitness = ['fitness', 'therapy-room', 'wellness-treatment-room'];
+  // const art = ['photography', 'art', 'music'];
+  // const event = ['event-space', 'outdoor-site', 'shoot-location'];
+  // const space = ['desk-space', 'office-space', 'meeting-room-space'];
+  const filt = pub_category ? pub_category.split(',') : '';
+
+    let schemaTitle = intl.formatMessage(
+      { id: 'SearchPage.schemaTitle' },
+      { searchAddress, siteTitle }
+    );
+  const arrayCategory = filterConfig.filter(e => e.queryParamNames[0] === 'pub_category');
+arrayCategory.forEach(e => {
+  const cat = e.config.catKeys.split(',');
+ 
+if (!!filt && filt.every((e)=>cat.includes(e))) {
+  const aaa = e.config.options.filter(el => filt.indexOf(el.key) != -1).map(e => e.label);
+  console.log(aaa.includes('Kitchen Space'), 'aaa')
+  const ddd = aaa.includes('Kitchen Space') && aaa.length >2 ? aaa.filter(item => item !== 'Kitchen Space') : aaa;
+  const uniqueCategory = ddd.join(', ');
+  uniqueCategory === 'Kitchen Space' ? schemaTitle = intl.formatMessage(
     { id: 'SearchPage.schemaTitle' },
     { searchAddress, siteTitle }
+  ) :
+  schemaTitle = intl.formatMessage(
+    { id: 'SearchPage.schemaTitleNew' },
+    { uniqueCategory, searchAddress, siteTitle }
   );
+}
+})
+  // if (
+  //   pub_category?.match(new RegExp('(' + nail.join(')|(') + ')', 'i')) &&
+  //   !pub_category?.match(new RegExp('(' + fitness.join(')|(') + ')', 'i')) &&
+  //   !pub_category?.match(new RegExp('(' + art.join(')|(') + ')', 'i')) &&
+  //   !pub_category?.match(new RegExp('(' + event.join(')|(') + ')', 'i')) &&
+  //   !pub_category?.match(new RegExp('(' + space.join(')|(') + ')', 'i'))
+  // ) {
+  //   schemaTitle = intl.formatMessage(
+  //     { id: 'SearchPage.schemaTitleNail' },
+  //     { searchAddress, siteTitle }
+  //   );
+  // } else if (pub_category?.match(new RegExp('(' + fitness.join(')|(') + ')', 'i'))&&
+  // !pub_category?.match(new RegExp('(' + nail.join(')|(') + ')', 'i')) &&
+  // !pub_category?.match(new RegExp('(' + art.join(')|(') + ')', 'i')) &&
+  // !pub_category?.match(new RegExp('(' + event.join(')|(') + ')', 'i')) &&
+  // !pub_category?.match(new RegExp('(' + space.join(')|(') + ')', 'i'))
+  // ) {
+  //   schemaTitle = intl.formatMessage(
+  //     { id: 'SearchPage.schemaTitleFitness' },
+  //     { searchAddress, siteTitle }
+  //   );
+  // } else if (pub_category?.match(new RegExp('(' + art.join(')|(') + ')', 'i')) &&
+  // !pub_category?.match(new RegExp('(' + nail.join(')|(') + ')', 'i')) &&
+  // !pub_category?.match(new RegExp('(' + fitness.join(')|(') + ')', 'i')) &&
+  // !pub_category?.match(new RegExp('(' + event.join(')|(') + ')', 'i')) &&
+  // !pub_category?.match(new RegExp('(' + space.join(')|(') + ')', 'i'))
+  // ) {
+  //   schemaTitle = intl.formatMessage(
+  //     { id: 'SearchPage.schemaTitleStudios' },
+  //     { searchAddress, siteTitle }
+  //   );
+  // } else if (pub_category?.match(new RegExp('(' + event.join(')|(') + ')', 'i'))&&
+  // !pub_category?.match(new RegExp('(' + nail.join(')|(') + ')', 'i')) &&
+  // !pub_category?.match(new RegExp('(' + fitness.join(')|(') + ')', 'i')) &&
+  // !pub_category?.match(new RegExp('(' + art.join(')|(') + ')', 'i')) &&
+  // !pub_category?.match(new RegExp('(' + space.join(')|(') + ')', 'i'))
+  // ) {
+  //   schemaTitle = intl.formatMessage(
+  //     { id: 'SearchPage.schemaTitleEvents' },
+  //     { searchAddress, siteTitle }
+  //   );
+  // } else if (pub_category?.match(new RegExp('(' + space.join(')|(') + ')', 'i')) &&
+  // !pub_category?.match(new RegExp('(' + nail.join(')|(') + ')', 'i')) &&
+  // !pub_category?.match(new RegExp('(' + fitness.join(')|(') + ')', 'i')) &&
+  // !pub_category?.match(new RegExp('(' + art.join(')|(') + ')', 'i')) &&
+  // !pub_category?.match(new RegExp('(' + event.join(')|(') + ')', 'i'))
+  // ) {
+  //   schemaTitle = intl.formatMessage(
+  //     { id: 'SearchPage.schemaTitleCoworking' },
+  //     { searchAddress, siteTitle }
+  //   );
+  // } else {
+  //   schemaTitle = intl.formatMessage(
+  //     { id: 'SearchPage.schemaTitle' },
+  //     { searchAddress, siteTitle }
+  //   );
+  // }
 
   const schemaListings = listings.map((l, i) => {
     const title = l.attributes.title;

@@ -86,7 +86,9 @@ const priceData = (price, intl) => {
 
 const categoryLabel = (categories, key) => {
   const cats = getSelectedCategories(key, categories);
-  return [...new Set(cats.map(({label}) => label))].join(' | ');
+  const categoryOptionsToSelect = categories && categories.filter(item => cats.includes(item.key))
+  
+  return [...new Set(categoryOptionsToSelect.map(({label}) => label))].join(' | ')
 };
 
 export class ListingPageComponent extends Component {

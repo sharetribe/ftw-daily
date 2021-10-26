@@ -9,7 +9,7 @@
 
   @media (--viewportMedium) {
     flex-basis: 576px;
-    height: 100%;
+    height: auto;
     padding: var(--modalPaddingMedium);
     background-color: var(--matterColorLight);
     margin-top: 12.5vh;

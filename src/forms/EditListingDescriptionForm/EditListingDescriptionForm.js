@@ -30,6 +30,7 @@ const EditListingDescriptionFormComponent = props => (
         updated,
         updateInProgress,
         fetchErrors,
+        values,
         // initialValues: {
         //   availabilityPlan
         // }
@@ -90,6 +91,9 @@ const EditListingDescriptionFormComponent = props => (
       const submitInProgress = updateInProgress;
       const submitDisabled = invalid || disabled || submitInProgress;
 
+      const textareaTitleClass = values && !values.title && css.titleMinHeight;
+      const textareaDescriptionClass = values && !values.description && css.descriptionMinHeight;
+
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessageCreateListingDraft}
@@ -98,8 +102,8 @@ const EditListingDescriptionFormComponent = props => (
           <FieldTextInput
             id="title"
             name="title"
-            className={css.title}
-            type="text"
+            className={classNames(css.title, textareaTitleClass)}
+            type="textarea"
             label={titleMessage}
             placeholder={titlePlaceholderMessage}
             maxLength={TITLE_MAX_LENGTH}
@@ -110,7 +114,7 @@ const EditListingDescriptionFormComponent = props => (
           <FieldTextInput
             id="description"
             name="description"
-            className={css.description}
+            className={classNames(css.title, textareaDescriptionClass)}
             type="textarea"
             label={descriptionMessage}
             placeholder={descriptionPlaceholderMessage}

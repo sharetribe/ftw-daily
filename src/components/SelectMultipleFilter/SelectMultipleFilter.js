@@ -101,6 +101,7 @@ class SelectMultipleFilter extends Component {
       rootClassName,
       className,
       id,
+      filterConfigId,
       name,
       label,
       options,
@@ -113,6 +114,7 @@ class SelectMultipleFilter extends Component {
       searchMode,
       intl,
       showAsPopup,
+      filterConfig,
       ...rest
     } = this.props;
 
@@ -128,25 +130,25 @@ class SelectMultipleFilter extends Component {
       ? parseSelectFilterOptions(initialValues[queryParamName])
       : [];
 
-    if (!!isCategory && selectedOptions.length > 0) {
+      if (!!isCategory && selectedOptions.length > 0) {
       const subCategories = catKeys ? catKeys.split(',') : [];
       selectedOptions = selectedOptions.filter(cat=> subCategories.includes(cat));
       if (selectedOptions.length === 0) {
         hasInitialValues = false;
       }
     }
-
+    
     const labelForPopup = hasInitialValues
       ? intl.formatMessage(
           { id: 'SelectMultipleFilter.labelSelected' },
-          { labelText: label, count: selectedOptions.length }
+          { labelText: filterConfig.label, count: filterConfig.config.options.map(e => e.key).filter(v => selectedOptions.includes(v)).length }
         )
       : label;
 
     const labelForPlain = hasInitialValues
       ? intl.formatMessage(
           { id: 'SelectMultipleFilterPlainForm.labelSelected' },
-          { labelText: label, count: selectedOptions.length }
+          { labelText: filterConfig.label, count: filterConfig.config.options.map(e => e.key).filter(v => selectedOptions.includes(v)).length }
         )
       : label;
 
@@ -156,9 +158,10 @@ class SelectMultipleFilter extends Component {
     // they can be passed to the correct field
     const namedInitialValues = { [name]: selectedOptions };
 
-    const handleSubmit = values => {
+    const handleSubmit = (values) => {
       const usedValue = values ? values[name] : values;
-      onSubmit(format(usedValue, queryParamName, searchMode));
+      // console.log(values, usedValue, '(data, e)')
+      onSubmit(format(usedValue, queryParamName, searchMode), filterConfigId);
     };
 
     return showAsPopup ? (
@@ -219,6 +222,7 @@ SelectMultipleFilter.propTypes = {
   rootClassName: string,
   className: string,
   id: string.isRequired,
+  filterConfig: object,
   name: string.isRequired,
   queryParamNames: arrayOf(string).isRequired,
   label: node.isRequired,
