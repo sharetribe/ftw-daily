@@ -86,7 +86,7 @@ const priceData = (price, intl) => {
 
 const categoryLabel = (categories, key) => {
   const cats = getSelectedCategories(key, categories);
-  const categoryOptionsToSelect = categories && categories.filter(item => cats.includes(item.value))
+  const categoryOptionsToSelect = categories && categories.filter(item => cats.includes(item.key))
   
   return [...new Set(categoryOptionsToSelect.map(({label}) => label))].join(' | ')
 };
