@@ -20,9 +20,9 @@ const flatten = (acc, val) => acc.concat(val);
 export const validURLParamForExtendedData = (queryParamName, paramValueRaw, filters) => {
   //NOTE v2s1 filterupdate -- v5 update deleted below
   // const filtersArray = Object.values(filters);
-
+// console.log(queryParamName, paramValueRaw, filters)
   // Resolve configuration for this filter
-  const filterConfig = filters.find(f => {
+  const filterConfig = filters.filter(f => {
     const isArray = Array.isArray(f.queryParamNames);
     return isArray
       ? f.queryParamNames.includes(queryParamName)
@@ -116,12 +116,10 @@ export const validURLParamsForExtendedData = (params, filters) => {
 
   return paramEntries.reduce((validParams, entry) => {
     const [paramName, paramValue] = entry;
-
     return filterParamNames.includes(paramName)
-      ? {
-          ...validParams,
-          ...validURLParamForExtendedData(paramName, paramValue, filters),
-        }
+      ? 
+          {...validParams,
+          ...validURLParamForExtendedData(paramName, paramValue, filters)}
       : { ...validParams, [paramName]: paramValue };
   }, {});
 };
@@ -186,7 +184,7 @@ arrayCategory.forEach(e => {
  
 if (!!filt && filt.every((e)=>cat.includes(e))) {
   const aaa = e.config.options.filter(el => filt.indexOf(el.key) != -1).map(e => e.label);
-  console.log(aaa.includes('Kitchen Space'), 'aaa')
+  // console.log(aaa.includes('Kitchen Space'), 'aaa')
   const ddd = aaa.includes('Kitchen Space') && aaa.length >2 ? aaa.filter(item => item !== 'Kitchen Space') : aaa;
   const uniqueCategory = ddd.join(', ');
   uniqueCategory === 'Kitchen Space' ? schemaTitle = intl.formatMessage(

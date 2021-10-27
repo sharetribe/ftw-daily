@@ -147,7 +147,7 @@ export class SearchPageComponent extends Component {
     const searchParamsAreInSync = urlQueryString === paramsQueryString;
 
     const validQueryParams = validURLParamsForExtendedData(searchInURL, filterConfig);
-
+    
     const isWindowDefined = typeof window !== 'undefined';
     const isMobileLayout = isWindowDefined && window.innerWidth < MODAL_BREAKPOINT;
     const shouldShowSearchMap =
