@@ -227,13 +227,15 @@ class MainPanel extends Component {
 
           } else if (isCategoryCleared) {
 
+            console.log(isCategoryCleared, "!!!isCategoryClearedisCategoryCleared");
+
             const mp_pc = mergedQueryParams[pc] ? mergedQueryParams[pc].replace('has_any:', '').split(',').filter(item => !selectedFilterOptions.includes(item)) : []
             // const mp_pc = mergedQueryParams[pc] ? mergedQueryParams[pc].split(',').filter(item => !selectedFilterOptions.includes(item)) : []
             
       
-            updatedURLParams[pc] = 'has_any:' + [...new Set([...mp_pc])].join(',');
+            updatedURLParams[pc] = !!mp_pc.length ? 'has_any:' + [...new Set([...mp_pc])].join(',') : [...new Set([...mp_pc])].join(',');
             console.log('444444-------------------------------------------');
-                       
+                                   
           }
         }
         if (updatedURLParams[pc]?.length === 0) {
