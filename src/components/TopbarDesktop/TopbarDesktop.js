@@ -6,6 +6,7 @@ import { ACCOUNT_SETTINGS_PAGES } from '../../routeConfiguration';
 import { propTypes } from '../../util/types';
 import config from '../../config';
 import TopbarDropDown from './TopbarDropDown';
+import { withRouter } from "react-router-dom";
 
 import {
   Avatar,
@@ -25,6 +26,7 @@ const TopbarDesktop = props => {
   const {
     className,
     currentUser,
+    history,
     currentPage,
     rootClassName,
     currentUserHasListings,
@@ -68,12 +70,20 @@ const TopbarDesktop = props => {
 
   let search;
   const onDropDownClick  = selectedText => {
+    const locationParams = 's?address=&bounds=59.49417013%2C4.15978193%2C49.54972301%2C-10.51994741/';
+    const result = categories.filter(obj => {
+      return obj.label === selectedText
+    })
+
     const newCategory = selectedText === 'Clear' ? 'Categories' : selectedText;
+    let link;
     setCategory(newCategory);
+    newCategory !== 'Categories' ? link = '&pub_category=has_any%3A'+ result.map(e => e.config.catKeys)[0]?.split(',')[0] + '%2C' + result.map(e => e.config.catKeys)[0]?.split(',').join('%2C', 1) : '';
     const newGenCats = Object.assign(genCats, {label: newCategory});
     setGenCats(newGenCats);
     search = createSearchBar();
     forceUpdate();
+    return link ? history.push(`${window.location.pathname}${locationParams}${link}`) : '';
   }
 
   const topbarDropDown =
@@ -219,4 +229,4 @@ TopbarDesktop.propTypes = {
   intl: intlShape.isRequired,
 };
 
-export default TopbarDesktop;
+export default withRouter(TopbarDesktop);
