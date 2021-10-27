@@ -18,7 +18,7 @@ const locationParams =            '?address=&bounds=59.49417013%2C4.15978193%2C4
 const hairBeautyUrlParams =       '&pub_category=has_any%3Ahair-stylist%2Cbarber%2Cmakeup-artist%2Cnail-technician%2Ccosmetics%2Cbeauty-treatment-room';
 const fitnessWellnessUrlParams =  '&pub_category=has_any%3Afitness%2Ctherapy-room%2Cwellness-treatment-room';
 const studioSpaceUrlParams =      '&pub_category=has_any%3Aphotography%2Cart%2Cmusic';
-const eventSpaceUrlParams =       '&pub_category=has_any%3Aevent-space%2Coutdoor-site%2Cshoot-location';
+const eventSpaceUrlParams =       '&pub_category=has_any%3Aevent-space%2Coutdoor-site%2Cshoot-location%2Ckitchen-space';
 const coworkingUrlParams =        '&pub_category=has_any%3Adesk-space%2Coffice-space%2Cmeeting-room-space';
 
 class CategoryImage extends Component {
