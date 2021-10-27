@@ -15,11 +15,11 @@ import eventSpaceImage from       './images/event_space.jpg';
 import coworkingImage from        './images/coworking.jpg';
 
 const locationParams =            '?address=&bounds=59.49417013%2C4.15978193%2C49.54972301%2C-10.51994741';
-const hairBeautyUrlParams =       '&pub_category=hair-stylist%2Cbarber%2Cmakeup-artist%2Cnail-technician%2Ccosmetics%2Cbeauty-treatment-room';
-const fitnessWellnessUrlParams =  '&pub_category=fitness%2Ctherapy-room%2Cwellness-treatment-room';
-const studioSpaceUrlParams =      '&pub_category=photography%2Cart%2Cmusic';
-const eventSpaceUrlParams =       '&pub_category=event-space%2Coutdoor-site%2Cshoot-location';
-const coworkingUrlParams =        '&pub_category=desk-space%2Coffice-space%2Cmeeting-room-space';
+const hairBeautyUrlParams =       '&pub_category=has_any%3Ahair-stylist%2Cbarber%2Cmakeup-artist%2Cnail-technician%2Ccosmetics%2Cbeauty-treatment-room';
+const fitnessWellnessUrlParams =  '&pub_category=has_any%3Afitness%2Ctherapy-room%2Cwellness-treatment-room';
+const studioSpaceUrlParams =      '&pub_category=has_any%3Aphotography%2Cart%2Cmusic';
+const eventSpaceUrlParams =       '&pub_category=has_any%3Aevent-space%2Coutdoor-site%2Cshoot-location';
+const coworkingUrlParams =        '&pub_category=has_any%3Adesk-space%2Coffice-space%2Cmeeting-room-space';
 
 class CategoryImage extends Component {
   render() {

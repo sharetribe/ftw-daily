@@ -208,13 +208,9 @@ class MainPanel extends Component {
             // const mp_pc = mergedQueryParams[pc] ? mergedQueryParams[pc].split(',') : [];
             const asas = mp_pc.filter(x => !up_pc.includes(x));
             const newMp = [...new Set([...up_pc, ...mp_pc])].filter(x => !asas.includes(x));           
-
-            console.log('1111-------------------------------------------');
-
    
             if(findValue(mp_pc).filter(x => findValue(up_pc).includes(x)).length === 0) {
               updatedURLParams[pc] = 'has_any:' + [...new Set([...up_pc, ...mp_pc])].join(',');
-              console.log('2222222-------------------------------------------');
             }
             else if(findValue(mp_pc).filter(x => findValue(up_pc).includes(x)).length > 0) {
               
@@ -222,20 +218,15 @@ class MainPanel extends Component {
               let rer = asas.filter(x => !arrayN[difference].includes(x));
 
               updatedURLParams[pc] = 'has_any:' + [...new Set([...rer, ...newMp])].join(',');
-              console.log('333333-------------------------------------------');
             }
 
           } else if (isCategoryCleared) {
 
-            console.log(isCategoryCleared, "!!!isCategoryClearedisCategoryCleared");
-
             const mp_pc = mergedQueryParams[pc] ? mergedQueryParams[pc].replace('has_any:', '').split(',').filter(item => !selectedFilterOptions.includes(item)) : []
             // const mp_pc = mergedQueryParams[pc] ? mergedQueryParams[pc].split(',').filter(item => !selectedFilterOptions.includes(item)) : []
             
-      
             updatedURLParams[pc] = !!mp_pc.length ? 'has_any:' + [...new Set([...mp_pc])].join(',') : [...new Set([...mp_pc])].join(',');
-            console.log('444444-------------------------------------------');
-                                   
+                                         
           }
         }
         if (updatedURLParams[pc]?.length === 0) {
