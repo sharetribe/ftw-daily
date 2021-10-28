@@ -906,7 +906,7 @@
   "SearchMapPriceLabel.pricePerMonth": "m",
   "SearchPage.schemaDescription": "Showing search results",
   "SearchPage.schemaMapSearch": "United Kingdom",
-  "SearchPage.schemaTitle": "Salon, Barber, Nails, Studio, Coworking Event Space to rent and hire in {searchAddress} - {siteTitle}",
+  "SearchPage.schemaTitle": "Salon, Barber, Nails, Fitness, Treatment, Beauty, Studio, Coworking, Office and Event Space to rent and hire in {searchAddress} - {siteTitle}",
   "SearchPage.schemaTitleNail": "Hair, beauty, lash, nail space to rent in {searchAddress} - {siteTitle}",
   "SearchPage.schemaTitleNew": "{uniqueCategory} in {searchAddress} - {siteTitle}",
   "SearchPage.schemaTitleCoworking": "Coworking, office and meeting room space to hire in {searchAddress} - {siteTitle}",
