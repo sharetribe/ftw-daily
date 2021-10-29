@@ -184,17 +184,19 @@ export const createSearchResultSchema = (listings, address, intl, pub_category, 
     // let article = 'to rent';
     const arrToHire = ['photography', 'art', 'music', 'desk-space', 'office-space', 'meeting-room-space'];
     const arrForHire = ['tattoo-artist', 'piercing-artist', 'event-space', 'outdoor-site', 'shoot-location'];
+    const arrForHireSpace = ['hair-stylist', 'barber', 'makeup-artist', 'nail-technician', 'cosmetics', 'beauty-treatment-room'];
     const cat = e.config.catKeys.split(',');
 
     if (!!filt && filt.every((e) => cat.includes(e))) {
       const article = filt.some(e => arrToHire.includes(e)) ? 'to hire' :
-        filt.some(e => arrForHire.includes(e)) ? 'for hire' : 'to rent';
+        filt.some(e => arrForHire.includes(e)) ? 'for hire' : filt.some(e => arrForHireSpace.includes(e)) ? 'space to rent' : 'to rent';
 
       const aaa = e.config.options.filter(el => filt.indexOf(el.key) != -1).map(e => e.label);
       // console.log(aaa.includes('Kitchen Space'), 'aaa')
       const ddd = aaa.includes('Kitchen Space') && aaa.length > 2 ? aaa.filter(item => item !== 'Kitchen Space') : aaa;
       const uniqueCategory = ddd.join(', ');
       console.log(filt, cat)
+console.log(filt.sort().every((value, index) => value === cat.filter(e => e !== 'kitchen-space').sort()[index]))
       uniqueCategory === 'Kitchen Space' ? schemaTitle = intl.formatMessage(
         { id: 'SearchPage.schemaTitle' },
         { searchAddress, siteTitle }
@@ -214,7 +216,11 @@ export const createSearchResultSchema = (listings, address, intl, pub_category, 
               schemaTitle = intl.formatMessage(
                 { id: 'SearchPage.schemaTitleCoworking' },
                 { searchAddress, siteTitle }
-              ) : (filt.sort().every((value, index) => value === cat.sort()[index]) || filt.sort().every((value, index) => value === cat.filter(e => e !== 'kitchen-space').sort()[index])) && filt.includes('event-space') ?
+              ) : filt.sort().every((value, index) => value === cat.filter(e => e !== 'kitchen-space').sort()[index]) && filt.includes('event-space') ?
+              schemaTitle = intl.formatMessage(
+                { id: 'SearchPage.schemaTitleEvents' },
+                { searchAddress, siteTitle }
+              ) : filt.sort().every((value, index) => value === cat.sort()[index]) && filt.includes('event-space') ?
                 schemaTitle = intl.formatMessage(
                   { id: 'SearchPage.schemaTitleEvents' },
                   { searchAddress, siteTitle }
