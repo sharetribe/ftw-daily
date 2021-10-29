@@ -192,48 +192,49 @@ export const createSearchResultSchema = (listings, address, intl, pub_category, 
         filt.some(e => arrForHire.includes(e)) ? 'for hire' : filt.some(e => arrForHireSpace.includes(e)) ? 'space to rent' : 'to rent';
 
       const aaa = e.config.options.filter(el => filt.indexOf(el.key) != -1).map(e => e.label);
-      // console.log(aaa.includes('Kitchen Space'), 'aaa')
-      const ddd = aaa.includes('Kitchen Space') && aaa.length > 2 ? aaa.filter(item => item !== 'Kitchen Space') : aaa;
+      const ddd = aaa.includes('Kitchen Space') && aaa.length >= 2 ? aaa.filter(item => item !== 'Kitchen Space') : aaa;
       const uniqueCategory = ddd.join(', ');
-      console.log(filt, cat)
-console.log(filt.sort().every((value, index) => value === cat.filter(e => e !== 'kitchen-space').sort()[index]))
+      const eventsCat = cat.filter(e => e !== 'kitchen-space');
+      console.log(cat, filt)
+      console.log(filt.sort().join(','), 'ddd', cat.sort().join(','))
+
       uniqueCategory === 'Kitchen Space' ? schemaTitle = intl.formatMessage(
         { id: 'SearchPage.schemaTitle' },
         { searchAddress, siteTitle }
-      ) : filt.sort().every((value, index) => value === cat.sort()[index]) && filt.includes('makeup-artist') ?
+      ) : filt.sort().join(',') === cat.sort().join(',') && filt.includes('makeup-artist') ?
         schemaTitle = intl.formatMessage(
           { id: 'SearchPage.schemaTitleNail' },
           { searchAddress, siteTitle }
-        ) : filt.sort().every((value, index) => value === cat.sort()[index]) && filt.includes('therapy-room') ?
+        ) : filt.sort().join(',') === cat.sort().join(',') && filt.includes('therapy-room') ?
           schemaTitle = intl.formatMessage(
             { id: 'SearchPage.schemaTitleFitness' },
             { searchAddress, siteTitle }
-          ) : filt.sort().every((value, index) => value === cat.sort()[index]) && filt.includes('art') ?
+          ) : filt.sort().join(','), 'ddd', cat.sort().join(',') && filt.includes('art') ?
+          schemaTitle = intl.formatMessage(
+            { id: 'SearchPage.schemaTitleStudios' },
+            { searchAddress, siteTitle }
+          ) : filt.sort().join(','), 'ddd', cat.sort().join(',') && filt.includes('office-space') ?
+          schemaTitle = intl.formatMessage(
+            { id: 'SearchPage.schemaTitleCoworking' },
+            { searchAddress, siteTitle }
+          ) : filt.sort().join(',') === eventsCat.sort().join(',') && filt.includes('event-space') ?
             schemaTitle = intl.formatMessage(
-              { id: 'SearchPage.schemaTitleStudios' },
+              { id: 'SearchPage.schemaTitleEvents' },
               { searchAddress, siteTitle }
-            ) : filt.sort().every((value, index) => value === cat.sort()[index]) && filt.includes('office-space') ?
-              schemaTitle = intl.formatMessage(
-                { id: 'SearchPage.schemaTitleCoworking' },
-                { searchAddress, siteTitle }
-              ) : filt.sort().every((value, index) => value === cat.filter(e => e !== 'kitchen-space').sort()[index]) && filt.includes('event-space') ?
+            ) : filt.sort().join(',') === cat.sort().join(',') && filt.includes('event-space') ?
               schemaTitle = intl.formatMessage(
                 { id: 'SearchPage.schemaTitleEvents' },
                 { searchAddress, siteTitle }
-              ) : filt.sort().every((value, index) => value === cat.sort()[index]) && filt.includes('event-space') ?
+              ) : filt.sort().join(',') === cat.sort().join(',') && filt.includes('tattoo-artist') ?
                 schemaTitle = intl.formatMessage(
-                  { id: 'SearchPage.schemaTitleEvents' },
+                  { id: 'SearchPage.schemaTitleTatoo' },
                   { searchAddress, siteTitle }
-                ) : filt.sort().every((value, index) => value === cat.sort()[index]) && filt.includes('tattoo-artist') ?
-                  schemaTitle = intl.formatMessage(
-                    { id: 'SearchPage.schemaTitleTatoo' },
-                    { searchAddress, siteTitle }
-                  )
-                  :
-                  schemaTitle = intl.formatMessage(
-                    { id: 'SearchPage.schemaTitleNew' },
-                    { uniqueCategory, article, searchAddress, siteTitle }
-                  );
+                )
+                :
+                schemaTitle = intl.formatMessage(
+                  { id: 'SearchPage.schemaTitleNew' },
+                  { uniqueCategory, article, searchAddress, siteTitle }
+                );
     }
   })
   // SearchPage.schemaTitleStudios
