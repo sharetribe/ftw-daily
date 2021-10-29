@@ -906,7 +906,7 @@
   "SearchMapPriceLabel.pricePerMonth": "m",
   "SearchPage.schemaDescription": "Showing search results",
   "SearchPage.schemaMapSearch": "United Kingdom",
-  "SearchPage.schemaTitle": "Rent hair & beauty, fitness, Coworking, studio & event spaces in {searchAddress} - {siteTitle}",
+  "SearchPage.schemaTitle": "Rent hair & beauty, fitness, coworking, studio & event spaces in {searchAddress} - {siteTitle}",
   "SearchPage.schemaTitleNail": "Hair, Barber, Beauty, Lash, Treatment and Nail space to rent in {searchAddress} - {siteTitle}",
   "SearchPage.schemaTitleNew": "{uniqueCategory} {article} in {searchAddress} - {siteTitle}",
   "SearchPage.schemaTitleTatoo": "Tattoo & Piercing space for hire in {searchAddress} - {siteTitle}",
