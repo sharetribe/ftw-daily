@@ -173,26 +173,38 @@ export const createSearchResultSchema = (listings, address, intl, pub_category, 
   // const event = ['event-space', 'outdoor-site', 'shoot-location'];
   // const space = ['desk-space', 'office-space', 'meeting-room-space'];
   const filt = pub_category ? pub_category.replace('has_any:', '').split(',') : '';
-  console.log(filt, 'filt')
     let schemaTitle = intl.formatMessage(
       { id: 'SearchPage.schemaTitle' },
       { searchAddress, siteTitle }
     );
   const arrayCategory = filterConfig.filter(e => e.queryParamNames[0] === 'pub_category');
 arrayCategory.forEach(e => {
+  // let article = 'to rent';
+  const arrToHire = ['photography', 'art', 'music', 'desk-space', 'office-space', 'meeting-room-space'];
+  const arrForHire = ['tattoo-artist', 'piercing-artist', 'event-space', 'outdoor-site', 'shoot-location'];
   const cat = e.config.catKeys.split(',');
+
 if (!!filt && filt.every((e)=>cat.includes(e))) {
+  const article = filt.some(e => arrToHire.includes(e)) ? 'to hire' :
+filt.some(e => arrForHire.includes(e)) ? 'for hire' : 'to rent';
+
   const aaa = e.config.options.filter(el => filt.indexOf(el.key) != -1).map(e => e.label);
   // console.log(aaa.includes('Kitchen Space'), 'aaa')
   const ddd = aaa.includes('Kitchen Space') && aaa.length >2 ? aaa.filter(item => item !== 'Kitchen Space') : aaa;
   const uniqueCategory = ddd.join(', ');
+  console.log(ddd, 'ddd')
   uniqueCategory === 'Kitchen Space' ? schemaTitle = intl.formatMessage(
     { id: 'SearchPage.schemaTitle' },
     { searchAddress, siteTitle }
-  ) :
+  ) : filt.sort().every((value, index) =>  value === cat.sort()[index]) && filt.includes('makeup-artist') ?
+  schemaTitle = intl.formatMessage(
+    { id: 'SearchPage.schemaTitleNail' },
+    { searchAddress, siteTitle }
+  )
+  :
   schemaTitle = intl.formatMessage(
     { id: 'SearchPage.schemaTitleNew' },
-    { uniqueCategory, searchAddress, siteTitle }
+    { uniqueCategory, article, searchAddress, siteTitle }
   );
 }
 })
