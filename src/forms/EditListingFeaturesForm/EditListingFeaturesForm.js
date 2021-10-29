@@ -73,12 +73,10 @@ const EditListingFeaturesFormComponent = props => (
 
       const amenitiesCheckboxGroups = amenities.map((amen, i) => {
         const catGroupForThisAmen = amen.config.catKeys.split(',');
-        // for (let i = 0; i < arrayCategory.length; i++) {
-        //   isCategory = catGroupForThisAmen.includes(arrayCategory[i]); 
-        // }
-        const arrayCategory = category.map(a => a.value);
 
-        const shouldDisplayTheseAmenties = catGroupForThisAmen.includes(category) || arrayCategory.some(o => catGroupForThisAmen.includes(o)) || amen.config.catKeys === 'all';
+        // const arrayCategory = category.map(a => a.value);
+
+        const shouldDisplayTheseAmenties = catGroupForThisAmen.includes(category) || category.some(o => catGroupForThisAmen.includes(o)) || amen.config.catKeys === 'all';
 
         return shouldDisplayTheseAmenties
           ? (
