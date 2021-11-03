@@ -51,6 +51,8 @@ const defaultDirectives = {
     'tidiochat.com',
     'widget-v4.tidiochat.com',
     'www.voucherify.io',
+    'wwww.voucherify.io',
+    'api.voucherify.io',
     'www.google.com.ua',
   ],
   fontSrc: [
