@@ -99,7 +99,7 @@ const siteTwitterHandle = '@HotPatch_';
 const siteInstagramPage = 'https://www.instagram.com/hotpatch_/';
 
 // Facebook page is used in SEO schema (http://schema.org/Organization)
-const siteFacebookPage = 'https://www.facebook.com/hotpatchmakespacework';
+const siteFacebookPage = 'https://www.facebook.com/hotpatchmakespacework/';
 
 // Social logins & SSO
 
@@ -108,7 +108,7 @@ const siteLinkedinPage = 'https://www.linkedin.com/company/hotpatchmakespacework
 
 const siteYoutubePage = 'https://www.youtube.com/channel/UCdPfIbMQFk3vbWZet3uX3XA';
 
-const siteTikTokPage = 'https://www.tiktok.com/@hotpatch_';
+const siteTikTokPage = 'https://www.tiktok.com/@hotpatch_?';
 
 // Facebook counts shares with app or page associated by this id
 // Currently it is unset, but you can read more about fb:app_id from
