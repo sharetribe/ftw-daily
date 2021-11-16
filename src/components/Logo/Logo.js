@@ -16,7 +16,7 @@ const Logo = props => {
   // }
 
   if (format === 'desktop') {
-    return <span />;
+    return <span>X</span>;
   }
 
   return <IconLogo className={mobileClasses} {...rest} />;
