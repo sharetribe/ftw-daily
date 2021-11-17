@@ -263,6 +263,8 @@ class FieldDateAndTimeInput extends Component {
     const startDate = timeOfDayFromLocalToTimeZone(value.date, timeZone);
     const timeSlots = getMonthlyTimeSlots(monthlyTimeSlots, this.state.currentMonth, timeZone);
     const timeSlotsOnSelectedDate = getTimeSlots(timeSlots, startDate, timeZone);
+    console.log(timeSlots, 'timeSlots111')
+    console.log(timeSlotsOnSelectedDate, 'timeSlotsOnSelectedDate')
 
     const { startTime, endDate, endTime } = getAllTimeValues(
       intl,

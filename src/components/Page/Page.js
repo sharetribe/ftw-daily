@@ -145,7 +145,19 @@ class PageComponent extends Component {
     const facebookPage = config.siteFacebookPage;
     const twitterPage = twitterPageURL(config.siteTwitterHandle);
     const instagramPage = config.siteInstagramPage;
-    const sameOrganizationAs = [facebookPage, twitterPage, instagramPage].filter(v => v != null);
+
+    const linkedinPage = config.siteLinkedinPage;
+    const youtubePage = config.siteYoutubePage;
+    const tikTokPage = config.siteTikTokPage;
+
+    const sameOrganizationAs = [
+      facebookPage, 
+      twitterPage, 
+      instagramPage, 
+      linkedinPage, 
+      youtubePage, 
+      tikTokPage,
+    ].filter(v => v != null);
 
     // Schema for search engines (helps them to understand what this page is about)
     // http://schema.org
@@ -160,9 +172,9 @@ class PageComponent extends Component {
       {
         '@context': 'http://schema.org',
         '@type': 'Organization',
-        '@id': `${canonicalRootURL}#organization`,
-        url: canonicalRootURL,
-        name: siteTitle,
+        '@id': `https://www.hotpatch.com#organization`,
+        url: "https://www.hotpatch.com",
+        name: "Hotpatch Ltd",
         sameAs: sameOrganizationAs,
         logo: `${canonicalRootURL}/static/webapp-icon-192x192.png`,
         address: config.address,
@@ -170,11 +182,12 @@ class PageComponent extends Component {
       {
         '@context': 'http://schema.org',
         '@type': 'WebSite',
-        url: canonicalRootURL,
+        url: "https://www.hotpatch.com",
         description: schemaDescription,
         name: schemaTitle,
+        sameAs: sameOrganizationAs,
         publisher: {
-          '@id': `${canonicalRootURL}#organization`,
+          '@id': `https://www.hotpatch.com#organization`,
         },
       },
     ]);
