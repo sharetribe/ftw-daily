@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2021-XX-XX
 
+- [change] Update comment about how scrollIntoView works with links using hash.
+  [#1484](https://github.com/sharetribe/ftw-daily/pull/1484)
 - [fix] Account pages: mobile tab navigation should only scroll horizontally
   [#1481](https://github.com/sharetribe/ftw-daily/pull/1481)
 - [fix] Temporarily disallow Node v17, since it causes issues with dependencies.
