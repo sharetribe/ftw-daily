@@ -88,7 +88,37 @@ const EmailVerificationFormComponent = props => (
         </div>
       );
 
-      return emailVerified && !pendingEmail && !verificationError ? alreadyVerified : verifyEmail;
+      const currentEmail = <strong>{email}</strong>;
+      const alreadyVerifiedButErrorReturned = (
+        <div className={css.root}>
+          <div>
+            <IconEmailSuccess className={css.modalIcon} />
+            <h1 className={css.modalTitle}>
+              <FormattedMessage id="EmailVerificationForm.noPendingTitle" values={{ name }} />
+            </h1>
+
+            <p className={css.modalMessage}>
+              <FormattedMessage
+                id="EmailVerificationForm.noPendingText"
+                values={{ email: currentEmail, breakline: <br /> }}
+              />
+            </p>
+          </div>
+
+          <div className={css.bottomWrapper}>
+            <NamedLink className={css.submitButton} name="LandingPage">
+              <FormattedMessage id="EmailVerificationForm.successButtonText" />
+            </NamedLink>
+          </div>
+        </div>
+      );
+
+      const anyPendingEmailHasBeenVerifiedForCurrentUser = emailVerified && !pendingEmail;
+      return anyPendingEmailHasBeenVerifiedForCurrentUser && verificationError
+        ? alreadyVerifiedButErrorReturned
+        : anyPendingEmailHasBeenVerifiedForCurrentUser
+        ? alreadyVerified
+        : verifyEmail;
     }}
   />
 );

@@ -258,6 +258,8 @@
   "EditListingWizard.tabLabelPolicy": "Sauna rules",
   "EditListingWizard.tabLabelPricing": "Pricing",
   "EmailVerificationForm.finishAccountSetup": "We will need to send you email notifications. To allow this, please verify your email address {email}.",
+  "EmailVerificationForm.noPendingText": "Everything looks good. Your current email address is {email}. {breakline}Time to get out there – have a great day.",
+  "EmailVerificationForm.noPendingTitle": "You didn't have any pending email address, {name}.",
   "EmailVerificationForm.successButtonText": "Continue exploring",
   "EmailVerificationForm.successText": "Everything looks good. Time to get out there – have a great day.",
   "EmailVerificationForm.successTitle": "Thanks for verifying your email address, {name}.",
