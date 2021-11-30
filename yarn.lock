@@ -11693,10 +11693,10 @@ react-app-polyfill@^2.0.0:
     regenerator-runtime "^0.13.7"
     whatwg-fetch "^3.4.1"
 
-react-dates@^21.3.1:
-  version "21.3.1"
-  resolved "https://registry.yarnpkg.com/react-dates/-/react-dates-21.3.1.tgz#7a5937b114611d375f58abacd287e66b04ff740c"
-  integrity sha512-dTEtelwNgu/BAkjlG93/oK1PheKW01ZE15M4hKTeg2zo/Gqyl8GB8FP+KNYYLmmZ7LtyRWsDkxqO6QSPueaW3Q==
+react-dates@^21.8.0:
+  version "21.8.0"
+  resolved "https://registry.yarnpkg.com/react-dates/-/react-dates-21.8.0.tgz#355c3c7a243a7c29568fe00aca96231e171a5e94"
+  integrity sha512-PPriGqi30CtzZmoHiGdhlA++YPYPYGCZrhydYmXXQ6RAvAsaONcPtYgXRTLozIOrsQ5mSo40+DiA5eOFHnZ6xw==
   dependencies:
     airbnb-prop-types "^2.15.0"
     consolidated-events "^1.1.1 || ^2.0.0"
