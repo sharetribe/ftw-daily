@@ -38,7 +38,7 @@
     "moment": "^2.29.1",
     "object.entries": "^1.1.5",
     "object.values": "^1.1.5",
-    "passport": "^0.4.1",
+    "passport": "^0.5.0",
     "passport-facebook": "^3.0.0",
     "passport-google-oauth": "^2.0.0",
     "path-to-regexp": "^6.2.0",
