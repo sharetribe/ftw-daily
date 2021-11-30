@@ -13,7 +13,7 @@
     "@sentry/node": "^6.15.0",
     "array-includes": "^3.1.4",
     "array.prototype.find": "^2.1.2",
-    "autosize": "^4.0.0",
+    "autosize": "^5.0.1",
     "basic-auth": "^2.0.1",
     "body-parser": "^1.18.3",
     "classnames": "^2.3.1",
