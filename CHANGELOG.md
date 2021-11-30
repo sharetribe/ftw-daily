@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2021-XX-XX
 
+- [fix] Double click issue. Show dedicated message, when current user doesn't have a pending email
+  address, but there's a verification error.
+  [#1485](https://github.com/sharetribe/ftw-daily/pull/1485)
 - [change] Update comment about how scrollIntoView works with links using hash.
   [#1484](https://github.com/sharetribe/ftw-daily/pull/1484)
 - [fix] Account pages: mobile tab navigation should only scroll horizontally
