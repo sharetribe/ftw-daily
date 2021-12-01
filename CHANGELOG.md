@@ -14,6 +14,15 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2021-XX-XX
 
+- [fix] Fix bugs in checkout process:
+
+  - Submit button was enabled prematurely for onetime payments
+  - Toggling between default card and onetime payment flows was not working correctly in case of
+    error (e.g. network error).
+  - Calling Stripe.confirmCardPayment when status is requires_capture is unnecessary.
+
+  [#1486](https://github.com/sharetribe/ftw-daily/pull/1486)
+
 - [change] Update many dependencies. See full list in the package.json changes in the PR.
   [#1483](https://github.com/sharetribe/ftw-daily/pull/1483)
 - [fix] Double click issue. Show dedicated message, when current user doesn't have a pending email
