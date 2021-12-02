@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2021-XX-XX
 
+- [change] Update many dependencies. See full list in the package.json changes in the PR.
+  [#1483](https://github.com/sharetribe/ftw-daily/pull/1483)
 - [fix] Double click issue. Show dedicated message, when current user doesn't have a pending email
   address, but there's a verification error.
   [#1485](https://github.com/sharetribe/ftw-daily/pull/1485)
