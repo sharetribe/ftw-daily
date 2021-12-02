@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2021-XX-XX
 
+- [fix] Dependabot: Bump passport-oauth2 from 1.5.0 to 1.6.1
+  [#1487](https://github.com/sharetribe/ftw-daily/pull/1487)
 - [fix] Fix bugs in checkout process:
 
   - Submit button was enabled prematurely for onetime payments
