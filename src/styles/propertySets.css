@@ -528,6 +528,20 @@
     }
   }
 
+  --marketplaceInputFontStyles: {
+    font-family: var(--fontFamily);
+    font-weight: var(--fontWeightMedium);
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.1px;
+    /* No margins for default font */
+
+    @media (--viewportMedium) {
+      font-size: 16px;
+      line-height: 32px;
+    }
+  }
+
   --marketplaceSelectStyles: {
     /* Dimensions */
     display: block;
