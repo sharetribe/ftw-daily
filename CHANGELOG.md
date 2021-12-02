@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2021-XX-XX
 
+## [v8.4.0] 2021-12-02
+
 - [fix] Mobile safari zooms if input-related elements have smaller font-size than 16px. This updates
   textarea and select element styles too. [#1489](https://github.com/sharetribe/ftw-daily/pull/1489)
 - [fix] Dependabot: Bump passport-oauth2 from 1.5.0 to 1.6.1
@@ -40,6 +42,8 @@ way to update this template, but currently, we follow a pattern:
   [#1479](https://github.com/sharetribe/ftw-daily/pull/1479)
 - [fix] Fix modal close button text/icon alignment
   [#1476](https://github.com/sharetribe/ftw-daily/pull/1476)
+
+  [v8.4.0]: https://github.com/sharetribe/ftw-daily/compare/v8.3.0...v8.4.0
 
 ## [v8.3.0] 2021-09-22
 
