@@ -169,6 +169,30 @@ const getPaymentMethod = (selectedPaymentMethod, hasDefaultPaymentMethod) => {
     : selectedPaymentMethod;
 };
 
+// Should we show onetime payment fields and does StripeElements card need attention
+const checkOnetimePaymentFields = (
+  cardValueValid,
+  selectedPaymentMethod,
+  hasDefaultPaymentMethod,
+  hasHandledCardPayment
+) => {
+  const useDefaultPaymentMethod =
+    selectedPaymentMethod === 'defaultCard' && hasDefaultPaymentMethod;
+  // Billing details are known if we have already handled card payment or existing default payment method is used.
+  const billingDetailsKnown = hasHandledCardPayment || useDefaultPaymentMethod;
+
+  // If onetime payment is used, check that the StripeElements card has valid value.
+  const oneTimePaymentMethods = ['onetimeCardPayment', 'replaceCard'];
+  const useOnetimePaymentMethod = oneTimePaymentMethods.includes(selectedPaymentMethod);
+  const onetimePaymentNeedsAttention =
+    !billingDetailsKnown && !(useOnetimePaymentMethod && cardValueValid);
+
+  return {
+    onetimePaymentNeedsAttention,
+    showOnetimePaymentFields: useOnetimePaymentMethod,
+  };
+};
+
 const initialState = {
   error: null,
   cardValueValid: false,
@@ -255,6 +279,7 @@ class StripePaymentForm extends Component {
       this.card.removeEventListener('change', this.handleCardValueChange);
       this.card.unmount();
       this.card = null;
+      this.setState({ cardValueValid: false });
     }
     this.setState({ paymentMethod: changedTo });
   }
@@ -292,8 +317,14 @@ class StripePaymentForm extends Component {
     } = this.props;
     const { initialMessage } = values;
     const { cardValueValid, paymentMethod } = this.state;
-    const billingDetailsKnown = hasHandledCardPayment || defaultPaymentMethod;
-    const onetimePaymentNeedsAttention = !billingDetailsKnown && !cardValueValid;
+    const hasDefaultPaymentMethod = defaultPaymentMethod?.id;
+    const selectedPaymentMethod = getPaymentMethod(paymentMethod, hasDefaultPaymentMethod);
+    const { onetimePaymentNeedsAttention } = checkOnetimePaymentFields(
+      cardValueValid,
+      selectedPaymentMethod,
+      hasDefaultPaymentMethod,
+      hasHandledCardPayment
+    );
 
     if (inProgress || onetimePaymentNeedsAttention) {
       // Already submitting or card value incomplete/invalid
@@ -338,8 +369,17 @@ class StripePaymentForm extends Component {
 
     const ensuredDefaultPaymentMethod = ensurePaymentMethodCard(defaultPaymentMethod);
     const billingDetailsNeeded = !(hasHandledCardPayment || confirmPaymentError);
-    const billingDetailsKnown = hasHandledCardPayment || ensuredDefaultPaymentMethod;
-    const onetimePaymentNeedsAttention = !billingDetailsKnown && !this.state.cardValueValid;
+
+    const { cardValueValid, paymentMethod } = this.state;
+    const hasDefaultPaymentMethod = ensuredDefaultPaymentMethod.id;
+    const selectedPaymentMethod = getPaymentMethod(paymentMethod, hasDefaultPaymentMethod);
+    const { onetimePaymentNeedsAttention, showOnetimePaymentFields } = checkOnetimePaymentFields(
+      cardValueValid,
+      selectedPaymentMethod,
+      hasDefaultPaymentMethod,
+      hasHandledCardPayment
+    );
+
     const submitDisabled = invalid || onetimePaymentNeedsAttention || submitInProgress;
     const hasCardError = this.state.error && !submitInProgress;
     const hasPaymentErrors = confirmCardPaymentError || confirmPaymentError;
@@ -391,19 +431,11 @@ class StripePaymentForm extends Component {
     );
 
     const hasStripeKey = config.stripe.publishableKey;
-    const showPaymentMethodSelector = ensuredDefaultPaymentMethod.id;
-    const selectedPaymentMethod = getPaymentMethod(
-      this.state.paymentMethod,
-      showPaymentMethodSelector
-    );
-    const showOnetimePaymentFields = ['onetimeCardPayment', 'replaceCard'].includes(
-      selectedPaymentMethod
-    );
     return hasStripeKey ? (
       <Form className={classes} onSubmit={handleSubmit} enforcePagePreloadFor="OrderDetailsPage">
         {billingDetailsNeeded && !loadingData ? (
           <React.Fragment>
-            {showPaymentMethodSelector ? (
+            {hasDefaultPaymentMethod ? (
               <PaymentMethodSelector
                 cardClasses={cardClasses}
                 formId={formId}

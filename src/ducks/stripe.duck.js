@@ -1,6 +1,9 @@
 import { storableError } from '../util/errors';
 import * as log from '../util/log';
 
+// https://stripe.com/docs/api/payment_intents/object#payment_intent_object-status
+const STRIPE_PI_HAS_PASSED_CONFIRM = ['processing', 'requires_capture', 'canceled', 'succeeded'];
+
 // ================ Action types ================ //
 
 export const STRIPE_ACCOUNT_CLEAR_ERROR = 'app/stripe/STRIPE_ACCOUNT_CLEAR_ERROR';
@@ -255,14 +258,30 @@ export const confirmCardPayment = params => dispatch => {
     ? [stripePaymentIntentClientSecret, paymentParams]
     : [stripePaymentIntentClientSecret];
 
-  return stripe
-    .confirmCardPayment(...args)
-    .then(response => {
+  const doConfirmCardPayment = () =>
+    stripe.confirmCardPayment(...args).then(response => {
       if (response.error) {
         return Promise.reject(response);
       } else {
         dispatch(confirmCardPaymentSuccess(response));
         return { ...response, transactionId };
+      }
+    });
+
+  // First, check if the payment intent has already been confirmed and it just requires capture.
+  return stripe
+    .retrievePaymentIntent(stripePaymentIntentClientSecret)
+    .then(response => {
+      // Handle response.error or response.paymentIntent
+      if (response.error) {
+        return Promise.reject(response);
+      } else if (STRIPE_PI_HAS_PASSED_CONFIRM.includes(response?.paymentIntent?.status)) {
+        // Payment Intent has been confirmed already, move forward.
+        dispatch(confirmCardPaymentSuccess(response));
+        return { ...response, transactionId };
+      } else {
+        // If payment intent has not been confirmed yet, confirm it.
+        return doConfirmCardPayment();
       }
     })
     .catch(err => {
