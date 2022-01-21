@@ -34,7 +34,6 @@ const EditListingDescriptionFormComponent = props => (
         // initialValues: {
         //   availabilityPlan
         // }
-
       } = formRenderProps;
 
       const titleMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.title' });

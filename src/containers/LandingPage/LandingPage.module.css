@@ -26,7 +26,7 @@
   display: flex;
   flex-direction: column;
   min-height: auto;
-  height: auto;
+  height: 640px;
 
   @media (--viewportLarge) {
     /* min-height: calc(100vh - var(--topbarHeightDesktop)); */
@@ -35,16 +35,15 @@
 
 .hero {
   flex-grow: 1;
+  overflow: hidden;
   justify-content: flex-end;
   padding-bottom: 12px;
-
   @media (--viewportMedium) {
-    padding-bottom: 83px;
+    padding-bottom: 80px;
   }
-
   @media (--viewportLarge) {
+    padding-bottom: 80px;
     justify-content: flex-start;
-    padding-top: 30px;
   }
 }
 
