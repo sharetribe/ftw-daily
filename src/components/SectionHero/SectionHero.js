@@ -5,8 +5,6 @@ import classNames from 'classnames';
 import { NamedLink } from '../../components';
 import Slider from "react-slick";
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import css from './SectionHero.module.css';
 
 import hotPatch1 from './images/newSlider/Hero 1.jpeg';
