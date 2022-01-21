@@ -41,6 +41,15 @@
     padding-bottom: 0;
   }
 }
+.heroTitleBlock {
+  position: absolute;
+  top: 110px;
+  left: 24px;
+  @media (--viewportMedium) {
+    top: 150px;
+    left: 97px;
+  }
+}
 
 .heroImgContent {
   flex: 1;
@@ -121,38 +130,58 @@
 }
 
 .heroMainTitle {
+  color: var(--matterColor);
   @apply --marketplaceHeroTitleFontStyles;
   margin-top: 0;
-
+  font-family: var(--fontFamilySofiapro);
   @apply --SectionHero_animation;
   animation-delay: 0.5s;
-
+  max-width: 250px;
   @media (--viewportMedium) {
-    max-width: var(--SectionHero_desktopTitleMaxWidth);
+    color: #252525;
+    max-width: 437px;
   }
 }
 
 .heroSubTitle {
-  @apply --marketplaceBodyFontStyles;
-
+  color: var(--matterColor);
+  @apply --marketplaceTabNavFontStyles;
+  font-family: var(--fontFamilySofiapro);
   margin: 0 0 25px 0;
-
+  font-size: 14px;
+  font-weight: var(--fontWeightRegular);
   @apply --SectionHero_animation;
   animation-delay: 0.65s;
+  max-width: 253px;
 
   @media (--viewportMedium) {
-    max-width: var(--SectionHero_desktopSubtitleMaxWidth);
+    font-size: 24px;
+    color: #252525;
+    max-width: 437px;
     margin: 0 0 31px 0;
   }
 }
 
 .bold {
-  font-weight: var(--fontWeightSemiBold);
+  font-weight: var(--fontWeightBold);
+  @media (--viewportMedium) {
+    font-weight: var(--fontWeightSemiBold);
+  }
 }
 
-.heroButtonsContatiner {
+.heroButtonsContainer {
+  margin-top: 15px;
+  width: 100%;
   display: flex;
+  justify-content: center;
   align-items: center;
+
+  @media (--viewportMedium) {
+    max-width: 400px;
+    top: 385px;
+    left: 97px;
+    position: absolute;
+  }
 }
 
 .heroButtonPink {
@@ -160,16 +189,22 @@
 
   background-color: var(--marketplaceColorDark);
   color: var(--matterColorLight);
-  padding: 1em 0.25em;
+  padding: 10px 0.25em;
   border-radius: 4px;
   text-align: center;
   opacity: 1;
-  margin-bottom: 5px;
+  height: 53px;
   display: block;
   margin-right: 10px;
   margin-bottom: 0;
-  max-width: 200px;
+  max-width: 121px;
   width: 100%;
+@media (--viewportSmall) {
+  height: 66px;
+  max-width: 185px;
+  padding: 1em 0.25em;
+}
+
 
   border: 1px solid var(--marketplaceColorDark);
 
@@ -185,15 +220,20 @@
 .heroButton {
   @apply --SectionHero_animation;
   display: block;
-  background-color: var(--matterColorLight);
+  background: rgba(255, 255, 255, 0.5);
   color: var(--marketplaceColorDark);
-  padding: 1em 0.25em;
+  padding: 10px 0.25em;
   border-radius: 4px;
   border: 1px solid var(--marketplaceColorDark);
   text-align: center;
-  opacity: 1;
-  max-width: 200px;
-  width: 100%;
+  height: 53px;
+  max-width: 121px;
+  @media (--viewportSmall) {
+    height: 66px;
+    width: 185px;
+    max-width: 185px;
+    padding: 1em 0.25em;
+  }
 
   &:hover {
     background-color: var(--customBlue);
@@ -201,7 +241,6 @@
     border-color: var(--customBlue);
     color: var(--matterColorLight);
   }
-
   animation-delay: 0.8s;
 }
 
@@ -211,3 +250,28 @@
     font-size: 20px;
   }
 }
+
+.blockSlider {
+  @media (--viewportMedium) {
+    top: 150px;
+    left: 97px;
+    position: absolute;
+  }
+}
+.slider {
+  height: 640px;
+
+  & img {
+    position: relative;
+    width: 100vw;
+    max-width: 100%;
+      height: 640px;
+  object-fit: cover;
+  }
+}
+
+
+.card {
+  max-width: 100%;
+}
+

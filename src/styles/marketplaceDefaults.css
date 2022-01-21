@@ -3,7 +3,7 @@
 @import './propertySets.css';
 
 :root {
-  
+
   /* pink */
   --marketplaceColor: #ffabd7; ;
   /* yellow */
@@ -46,6 +46,7 @@
   /* ================ Font ================ */
   --fontFamily: 'poppins', Helvetica, Arial, sans-serif;
   --fontFamilySofiapro: 'sofiapro', Helvetica, Arial, sans-serif;
+  --fontFamilySofiaproNew: 'sofiaproBolt', Helvetica, Arial, sans-serif;
 
   --fontWeightRegular: 400;
   --fontWeightMedium: 500;

@@ -3,64 +3,66 @@ import { string } from 'prop-types';
 import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { NamedLink } from '../../components';
+import Slider from "react-slick";
 
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import css from './SectionHero.module.css';
 
-import yogaImage from './images/yoga.jpg';
-import ptImage from './images/pt.jpg';
-import coWorkImage from './images/cowork.jpg';
-import nailsImage from './images/nails.jpg';
-import tattoImage from './images/tatto.jpg';
-import hairImage from './images/hair.jpg';
+import hotPatch1 from './images/newSlider/Hero 1.jpeg';
+import hotPatch2 from './images/newSlider/Hero 2.jpeg';
+import hotPatch3 from './images/newSlider/Hero 3.jpeg';
+import hotPatch4 from './images/newSlider/Hero 4.jpeg';
+import hotPatch5 from './images/newSlider/Hero 5.jpeg';
 
+const expertArr = [ hotPatch1, hotPatch2, hotPatch3, hotPatch4, hotPatch5 ];
 const SectionHero = props => {
   const { rootClassName, className } = props;
 
   const classes = classNames(rootClassName || css.root, className);
   const makeSpaceWork = <span className={css.bold}><FormattedMessage id="SectionHero.subTitleBold" /></span>;
 
+  const settings = {
+    infinite: true,
+    speed: 500,
+    autoplay: true,
+    slidesToScroll: 1,
+    slidesToShow: 1,
+    autoplaySpeed: 5000,
+    useCSS: true,
+    pauseOnHover: false
+  };
+
   return (
     <div className={classes}>
-      <div className={css.flexContainer}>
-        <div className={css.heroTextContent}>
-          <h1 className={css.heroMainTitle}>
-            <FormattedMessage id="SectionHero.title" />
-          </h1>
-          <h2 className={css.heroSubTitle}>
-            <FormattedMessage
-              id="SectionHero.subTitle"
-              values={{ subText: makeSpaceWork }}
-            />
-          </h2>
-          <div className={css.heroButtonsContatiner}>
-            <NamedLink
+      <Slider className={css.slider} {...settings} >
+        {expertArr.map( el => (
+            <div className={css.card}>
+                <img src={el} alt="avatar" />
+            </div>
+        ))}
+      </Slider>
+          <div className={css.heroTitleBlock}>
+            <h1 className={css.heroMainTitle}>
+              <FormattedMessage id="SectionHero.title" />
+            </h1>
+            <h2 className={css.heroSubTitle}>
+              <FormattedMessage
+                id="SectionHero.subTitle"
+                values={{ subText: makeSpaceWork }}
+              />
+            </h2>
+          </div>
+          <div className={css.heroButtonsContainer}>
+            <NamedLink className={css.heroButtonPink}
               name="SearchPage"
-              to={{
-                search:
-                  'address=&bounds=59.49417013%2C4.15978193%2C49.54972301%2C-10.51994741', // slightly zoomed in UK map
-                }}
-              className={css.heroButtonPink}
-            >
+              to={{search: 'address=&bounds=59.49417013%2C4.15978193%2C49.54972301%2C-10.51994741'}}>
               <FormattedMessage id="SectionHero.browseButton" />
             </NamedLink>
             <NamedLink name="NewListingPage" className={css.heroButton} >
               <FormattedMessage id="SectionHero.listButton" />
             </NamedLink>
           </div>
-        </div>
-        <div className={css.heroImgContent}>
-          {/* <div className={css.emptyMobileDiv} /> */}
-          <div className={css.imgContainer}>
-            <img src={nailsImage} alt='hotpatch make space work' className={css.image}/>
-            <img src={yogaImage} alt='hotpatch make space work' className={css.image}/>
-            <img src={ptImage} alt='hotpatch make space work' className={css.image}/>
-            <img src={hairImage} alt='hotpatch make space work' className={css.image}/>
-            <img src={coWorkImage} alt='hotpatch make space work' className={css.image}/>
-            <img src={tattoImage} alt='hotpatch make space work' className={css.image}/>
-          </div>
-        </div>
-      </div>
-
     </div>
   );
 };
