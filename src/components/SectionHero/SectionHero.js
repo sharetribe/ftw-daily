@@ -7,11 +7,11 @@ import Slider from "react-slick";
 
 import css from './SectionHero.module.css';
 
-import hotPatch1 from './images/newSlider/Hero 1.jpeg';
-import hotPatch2 from './images/newSlider/Hero 2.jpeg';
-import hotPatch3 from './images/newSlider/Hero 3.jpeg';
-import hotPatch4 from './images/newSlider/Hero 4.jpeg';
-import hotPatch5 from './images/newSlider/Hero 5.jpeg';
+import hotPatch1 from './images/newSlider/Hero 1.jpg';
+import hotPatch2 from './images/newSlider/Hero 2.jpg';
+import hotPatch3 from './images/newSlider/Hero 3.jpg';
+import hotPatch4 from './images/newSlider/Hero 4.jpg';
+import hotPatch5 from './images/newSlider/Hero 5.jpg';
 
 const expertArr = [ hotPatch1, hotPatch2, hotPatch3, hotPatch4, hotPatch5 ];
 const SectionHero = props => {

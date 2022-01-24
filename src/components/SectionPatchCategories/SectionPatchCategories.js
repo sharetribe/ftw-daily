@@ -8,11 +8,25 @@ import { NamedLink } from '../../components';
 
 import css from './SectionPatchCategories.module.css';
 
-import hairBeautyImage from       './images/hair_beauty.jpg';
-import fitnessWellnessImage from  './images/fitness_wellness.jpg';
-import studioSpaceImage from      './images/studio_space.jpg';
-import eventSpaceImage from       './images/event_space.jpg';
-import coworkingImage from        './images/coworking.jpg';
+
+// import hairBeautyImage from       './images/hair_beauty.jpg';
+// import fitnessWellnessImage from  './images/fitness_wellness.jpg';
+// import studioSpaceImage from      './images/studio_space.jpg';
+// import eventSpaceImage from       './images/event_space.jpg';
+// import coworkingImage from        './images/coworking.jpg';
+
+
+import coworkingImage from        './newImages/coworking.jpg';
+import events_venuesImage from        './newImages/events_venues.jpg';
+import fitnessImage from        './newImages/fitness.jpg';
+import hair_beautyImage from        './newImages/hair_beauty.jpg';
+import kitchen_popUpsImage from        './newImages/kitchen_popUps.jpg';
+import music_artsImage from        './newImages/music_arts.jpg';
+import photography_filmImage from        './newImages/photography_film.jpg';
+import wellnessImage from        './newImages/wellness.jpg';
+
+
+
 
 const locationParams =            '?address=&bounds=59.49417013%2C4.15978193%2C49.54972301%2C-10.51994741';
 const hairBeautyUrlParams =       '&pub_category=has_any%3Ahair-stylist%2Cbarber%2Cmakeup-artist%2Cnail-technician%2Ccosmetics%2Cbeauty-treatment-room';
@@ -20,6 +34,8 @@ const fitnessWellnessUrlParams =  '&pub_category=has_any%3Afitness%2Ctherapy-roo
 const studioSpaceUrlParams =      '&pub_category=has_any%3Aphotography%2Cart%2Cmusic';
 const eventSpaceUrlParams =       '&pub_category=has_any%3Aevent-space%2Coutdoor-site%2Cshoot-location%2Ckitchen-space';
 const coworkingUrlParams =        '&pub_category=has_any%3Adesk-space%2Coffice-space%2Cmeeting-room-space';
+
+
 
 class CategoryImage extends Component {
   render() {
@@ -58,12 +74,24 @@ const SectionPatchCategories = props => {
       <div className={css.title}>
         <FormattedMessage id="SectionPatchCategories.title" />
       </div>
+      {/*<div className={css.categories}>*/}
+      {/*  {categoryLink('Hair & Beauty', hairBeautyImage, hairBeautyUrlParams)}*/}
+      {/*  {categoryLink('Fitness & Wellness', fitnessWellnessImage, fitnessWellnessUrlParams)}*/}
+      {/*  {categoryLink('Studio Space', studioSpaceImage, studioSpaceUrlParams)}*/}
+      {/*  {categoryLink('Event Space', eventSpaceImage, eventSpaceUrlParams)}*/}
+      {/*  {categoryLink('Coworking', coworkingImage, coworkingUrlParams)}*/}
+      {/*</div>*/}
       <div className={css.categories}>
-        {categoryLink('Hair & Beauty', hairBeautyImage, hairBeautyUrlParams)}
-        {categoryLink('Fitness & Wellness', fitnessWellnessImage, fitnessWellnessUrlParams)}
-        {categoryLink('Studio Space', studioSpaceImage, studioSpaceUrlParams)}
-        {categoryLink('Event Space', eventSpaceImage, eventSpaceUrlParams)}
+        {categoryLink('Hair & Beauty', hair_beautyImage, hairBeautyUrlParams)}
+        {categoryLink('Wellness', wellnessImage, fitnessWellnessUrlParams)}
+        {categoryLink('Fitness', fitnessImage, fitnessWellnessUrlParams)}
+        {categoryLink('Events  & Venues', events_venuesImage, eventSpaceUrlParams)}
+      </div>
+      <div className={css.categories}>
         {categoryLink('Coworking', coworkingImage, coworkingUrlParams)}
+        {categoryLink('Music & Arts', music_artsImage, coworkingUrlParams)}
+        {categoryLink('Photography & Film', photography_filmImage, coworkingUrlParams)}
+        {categoryLink('Kitchen & Pop-ups', kitchen_popUpsImage, coworkingUrlParams)}
       </div>
     </div>
   );
