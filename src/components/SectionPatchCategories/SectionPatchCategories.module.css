@@ -2,27 +2,32 @@
 
 .title {
   @apply --marketplaceH1FontStyles;
-  margin-top: 0;
+  margin-top: 85px;
+  margin-bottom: 64px;
   text-align: center;
-
-  @media (--viewportMedium) {
-    margin-bottom: 23px;
-  }
 }
 
 .categories {
+  flex-wrap: nowrap;
   display: flex;
   flex-direction: column;
   margin-top: 16px;
   justify-content: center;
   align-items: center;
-  
+
+
+@media (--viewportSmall) {
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 32px;
+  align-items: flex-start;
+}
   @media (--viewportMedium) {
-    flex-direction: row;
     margin-top: 32px;
     align-items: flex-start;
+    flex-wrap: nowrap;
   }
-  
+
   @media (--viewportLarge) {
     align-items: center;
   }
@@ -31,6 +36,12 @@
 .category {
   width: 75%;
   margin-top: 25px;
+@media (--viewportSmall) {
+  width: 45%;
+}
+@media (--viewportMedium) {
+  width: 75%;
+}
 
   /* Remove link's hover effect */
   &:hover {
@@ -96,10 +107,11 @@
   color: var(--matterColor);
   margin-top: 15px;
   margin-bottom: 0;
+  line-height: 27px;
   text-align: center;
 
   @media (--viewportMedium) {
-    margin-top: 21px;
+    margin-top: 18px;
   }
 }
 
