@@ -35,9 +35,10 @@
 
 .category {
   width: 75%;
-  margin-top: 25px;
+  margin-top: 48px;
 @media (--viewportSmall) {
   width: 45%;
+  margin-right: 40px;
 }
 @media (--viewportMedium) {
   width: 75%;
@@ -66,6 +67,16 @@
     margin-right: 0;
   }
 }
+
+.category:nth-child(2n) {
+  @media (--viewportSmall) {
+    margin-right: 0;
+  }
+  @media (--viewportMedium) {
+    margin-right: 40px;
+  }
+}
+
 
 /* A wrapper for a responsive image that holds it's aspect ratio */
 .imageWrapper {

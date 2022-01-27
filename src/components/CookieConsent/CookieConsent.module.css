@@ -3,12 +3,13 @@
 .root {
   /* Fixed on top of everything */
   position: fixed;
-  bottom: 0;
+  margin: 16px;
   z-index: 1000;
 
   /* Dimensions */
-  width: 100vw;
-  padding: 5px 0;
+  width: 89vw;
+  padding: 0;
+  top:72px;
 
   /* Layout */
   display: flex;
@@ -20,6 +21,12 @@
   color: var(--matterColorNegative);
 
   /* Cover Topbar on desktop */
+  @media (--viewportSmall) {
+    bottom: 0;
+    top: auto;
+    width: 100vw;
+    margin: 0;
+  }
   @media (--viewportMedium) {
     padding: 8px 0;
   }
@@ -27,12 +34,14 @@
 
 .message {
   @apply --marketplaceH5FontStyles;
-  margin-left: 24px;
+  margin: 16px 8px 16px 16px;
+  line-height: 14px;
 }
 
 .cookieLink {
+  text-decoration: underline;
   color: var(--matterColorLight);
-  border-bottom: 1px solid var(--matterColorNegative);
+  /*border-bottom: 1px solid var(--matterColorNegative);*/
 
   &:hover {
     text-decoration: none;
@@ -45,8 +54,9 @@
   font-weight: var(--fontWeightSemiBold);
 
   /* Dimensions */
-  padding: 3px 12px 3px 12px;
-  margin: 0 24px 0 6px;
+  padding: 2px 8px 2px 8px;
+  margin: 0 16px 0 0;
+  line-height: 21px;
 
   background-color: transparent;
   border: solid 1px var(--matterColorNegative);
