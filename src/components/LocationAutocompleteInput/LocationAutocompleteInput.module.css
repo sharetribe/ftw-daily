@@ -20,7 +20,7 @@
   display: flex;
   flex: 0 0 60%;
   max-width: 60%;
-  
+
   @media (--viewportLarge) {
     flex: 0 0 50%;
     max-width: 50%;
@@ -97,7 +97,6 @@ bottom of the container.
 */
 .poweredByGoogle {
   position: absolute;
-  bottom: 30px;
   width: 100%;
   height: 18px;
   background-image: url(./images/powered_by_google_on_non_white_hdpi.png);
@@ -105,6 +104,7 @@ bottom of the container.
   background-position: center;
 
   @media (--viewportMedium) {
+    bottom: 30px;
     background-position: center center;
   }
 
@@ -121,13 +121,13 @@ bottom of the container.
   padding: 14px 0;
 
   & li {
-    color: var(--matterColorLight);
+    /*color: var(--matterColorLight);*/
     transition: var(--transitionStyleButton);
     margin: 0; /* Remove the double white space */
     line-height: 24px;
 
     /* Assign enough vertical padding to make the element at least 44px high */
-    padding: 9px 24px;
+    padding: 12px 24px;
 
     @media (--viewportMedium) {
       color: var(--matterColorLightTransparent);
@@ -135,7 +135,7 @@ bottom of the container.
       margin: 0;
       font-size: 14px;
     }
-    
+
     @media (--viewportLarge) {
       padding: 10px var(--LocationAutocompleteInput_sidePaddingDesktop);
       font-size: 16px;

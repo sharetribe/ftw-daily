@@ -49,6 +49,7 @@ const stripeErrorTranslation = (intl, stripeError) => {
     return intl.formatMessage({ id: 'StripePaymentForm.genericError' });
   }
 
+  console.log('type', type)
   const translationId =
     type === 'validation_error'
       ? `StripePaymentForm.stripe.validation_error.${code}`

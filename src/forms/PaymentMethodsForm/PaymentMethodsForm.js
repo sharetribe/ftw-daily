@@ -11,6 +11,7 @@ import classNames from 'classnames';
 import config from '../../config';
 import { Form, PrimaryButton, FieldTextInput, StripePaymentAddress } from '../../components';
 import css from './PaymentMethodsForm.module.css';
+import {composeValidators, required} from "../../util/validators";
 
 /**
  * Translate a Stripe API error object.
@@ -132,6 +133,7 @@ class PaymentMethodsForm extends Component {
     const { intl } = this.props;
     const { error, complete } = event;
 
+    console.log('error', error)
     const postalCode = event.value.postalCode;
     if (this.finalFormAPI) {
       this.finalFormAPI.change('postal', postalCode);
@@ -177,6 +179,7 @@ class PaymentMethodsForm extends Component {
       createStripeCustomerError,
       handleCardSetupError,
       form,
+      values,
     } = formRenderProps;
 
     this.finalFormAPI = form;
@@ -214,7 +217,9 @@ class PaymentMethodsForm extends Component {
     const billingAddress = (
       <StripePaymentAddress intl={intl} form={form} fieldId={formId} card={this.card} />
     );
-
+    const descriptionRequiredMessage = intl.formatMessage({
+      id: 'EditListingDescriptionForm.descriptionRequired',
+    });
     const hasStripeKey = config.stripe.publishableKey;
 
     return hasStripeKey ? (
@@ -245,6 +250,7 @@ class PaymentMethodsForm extends Component {
             autoComplete="cc-name"
             label={billingDetailsNameLabel}
             placeholder={billingDetailsNamePlaceholder}
+            validate={composeValidators(required(descriptionRequiredMessage))}
           />
 
           {billingAddress}
