@@ -12,7 +12,7 @@ import { ensureCurrentUser } from '../../util/data';
 import { AvatarLarge, InlineTextButton, NamedLink, NotificationBadge } from '../../components';
 
 import css from './TopbarMobileMenu.module.css';
-
+const AVATAR_SIZES_MEDIUM = '64px';
 const TopbarMobileMenu = props => {
   const {
     isAuthenticated,
@@ -76,7 +76,7 @@ const TopbarMobileMenu = props => {
 
   return (
     <div className={css.root}>
-      <AvatarLarge className={css.avatar} user={currentUser} />
+      <AvatarLarge className={css.avatar} user={currentUser}/>
       <div className={css.content}>
         <span className={css.greeting}>
           <FormattedMessage id="TopbarMobileMenu.greeting" values={{ displayName }} />

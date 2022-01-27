@@ -1210,7 +1210,7 @@
   "TopbarMobileMenu.inboxLink": "Inbox",
   "TopbarMobileMenu.loginLink": "Log in",
   "TopbarMobileMenu.logoutLink": "Log out",
-  "TopbarMobileMenu.newListingLink": "+ List your patch",
+  "TopbarMobileMenu.newListingLink": "List your patch",
   "TopbarMobileMenu.profileSettingsLink": "Profile settings",
   "TopbarMobileMenu.signupLink": "Sign up",
   "TopbarMobileMenu.signupOrLogin": "{signup} or {login}",
