@@ -260,13 +260,12 @@
 }
 .slider {
   height: 640px;
-
   & img {
     position: relative;
     width: 100vw;
     max-width: 100%;
-      height: 640px;
-  object-fit: cover;
+    height: 640px;
+    object-fit: cover;
   }
 }
 

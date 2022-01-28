@@ -125,6 +125,7 @@ bottom of the container.
     transition: var(--transitionStyleButton);
     margin: 0; /* Remove the double white space */
     line-height: 24px;
+    font-weight: var(--fontWeightRegular);
 
     /* Assign enough vertical padding to make the element at least 44px high */
     padding: 12px 24px;
