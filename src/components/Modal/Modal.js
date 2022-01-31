@@ -180,7 +180,7 @@ ModalComponent.defaultProps = {
   children: null,
   className: null,
   scrollLayerClassName: null,
-  closeButtonMessage: null,
+  // closeButtonMessage: null,
   containerClassName: null,
   contentClassName: null,
   lightCloseButton: false,

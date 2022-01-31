@@ -24,14 +24,17 @@
   flex: 0 0 100%;
   max-width: 100%;
 
-  @media(--viewportLarge){
-    flex: 0 0 50%;
-    max-width: 50%;
-  }
+  /*@media(--viewportLarge){*/
+  /*  flex: 0 0 50%;*/
+  /*  max-width: 50%;*/
+  /*}*/
 }
 
 .desktopInputRoot {
   height: var(--topbarHeightDesktop);
+  width: 100%;
+  flex: 0 0 100%;
+  max-width: 100%;
 }
 
 .mobileIcon {
@@ -87,12 +90,12 @@
 }
 
 .desktopIcon {
-  height: var(--topbarHeightDesktop);
+  /*height: var(--topbarHeightDesktop);*/
   border: none;
   padding-top: 3px;
 
   display: flex;
-  width: 18px;
+  width: 24px;
   align-self: stretch;
   background-color: var(--matterColorLight);
 }
@@ -101,12 +104,12 @@
   flex-grow: 1;
   /* Font */
   @apply --marketplaceH4FontStyles;
-  height: var(--topbarHeightDesktop);
+  /*height: var(--topbarHeightDesktop);*/
   line-height: unset;
   border: none;
   padding-top: 0;
   padding-bottom: 0;
-  padding-left: 10px;
+  padding-left: 8px;
 
   /* Search text gets ellipsis if it's too wide */
   text-overflow: ellipsis;
