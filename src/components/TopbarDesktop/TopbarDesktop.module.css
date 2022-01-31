@@ -47,7 +47,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 0 12px 0 0;
+  padding: 0 24px 0 0;
 
   /* fill */
   background-color: var(--matterColorLight);
@@ -56,7 +56,7 @@
   box-shadow: var(--boxShadowLight);
 
   @media (--viewportLarge) {
-    padding: 0 24px 0 0;
+    padding: 0 32px 0 0;
   }
 }
 
@@ -64,28 +64,28 @@
 .logoLink {
   @apply --TopbarDesktop_linkHover;
   flex-shrink: 0;
-  padding: 21px 24px 21px 24px;
+  padding: 26px 24px 26px 24px;
   height: 100%;
 
-  @media (--viewportLarge) {
-    padding: 21px 36px 21px 36px;
+  @media (--viewportMedium) {
+    padding: 22px 32px 22px 32px;
   }
 }
 
 .logo {
   /* If height is increased, change link paddings accordingly */
   height: 20px;
-  
+
   /* Good aspect ratio should be less than 160/27 (width/height) */
   /* NOTE: extremely wide logos, need special handling. */
   width: auto;
   max-width: 220px;
   object-fit: contain;
   object-position: left center;
-  
+
   @media (--viewportLarge) {
     /* If height is increased, change link paddings accordingly */
-    height: 27px;
+    height: 29px;
   }
 }
 
@@ -98,10 +98,10 @@
   border-left-width: 1px;
   border-left-color: var(--matterColorNegative);
   display: flex;
-  
+  padding: 8px 0 8px 32px;
+
   @media (--viewportLarge) {
-    margin-right: 24px;
-    padding-left: 0;
+    margin-right: 12px;
   }
 }
 
@@ -111,7 +111,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  
+
   @media (--viewportLarge) {
     flex: 0 0 50%;
     max-width: 50%;
@@ -129,12 +129,11 @@
 }
 
 .topbarSearchWithLeftPadding {
-  padding-left: 24px;
-  height: var(--topbarHeightDesktop);
-
-  @media (--viewportLarge) {
-    padding-left: 34px;
-  }
+  width: 100%;
+  padding-left: 8px;
+  border: 1px solid #C4C4C4;
+  border-radius: 10px;
+  height: 100%;
 }
 
 /* Create listing (CTA for providers) */
@@ -144,7 +143,7 @@
   font-family: var(--fontFamily);
   flex-shrink: 0;
   height: 100%;
-  padding: 0 10px 0 10px;
+  padding: 0 12px 0 12px;
   color: var(--matterColor);
   margin-top: 0;
   margin-bottom: 0;
@@ -169,7 +168,7 @@
   @apply --marketplaceH5FontStyles;
   font-family: var(--fontFamily);
   height: 100%;
-  padding: 0 10px 0 10px;
+  padding: 0 12px;
   margin-top: 0;
   margin-bottom: 0;
   color: var(--matterColor);
@@ -232,7 +231,7 @@
   align-items: center;
   height: 100%;
   margin: 0;
-  padding: 0 10px 0 10px;
+  padding-left: 12px;
 
   &:active {
     border-bottom: 0;
@@ -258,8 +257,12 @@
 .signupLink {
   @apply --TopbarDesktop_linkHover;
   flex-shrink: 0;
+  width: 64px;
+  text-align: center;
   height: 100%;
-  padding: 0 10px 0 10px;
+  padding-top: 20px;
+  margin-left: 12px;
+
 
   color: var(--matterColor);
 
@@ -272,7 +275,8 @@
   @apply --TopbarDesktop_linkHover;
   flex-shrink: 0;
   height: 100%;
-  padding: 0 10px 0 10px;
+  padding: 0 12px 0 12px;
+
 
   color: var(--matterColor);
 
@@ -286,6 +290,15 @@
   @apply --marketplaceH5FontStyles;
   @apply --TopbarDesktop_label;
   font-family: var(--fontFamily);
+}
+.signup {
+  width: 100%;
+  height: 32px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--marketplaceColor);
 }
 
 /* left animated "border" like hover element */

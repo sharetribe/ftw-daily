@@ -35,7 +35,7 @@ const SectionHero = props => {
     <div className={classes}>
       <Slider className={css.slider} {...settings} >
         {expertArr.map( el => (
-            <div className={css.card}>
+            <div className={css.card} key={el}>
                 <img src={el} alt="avatar" />
             </div>
         ))}

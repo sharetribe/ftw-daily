@@ -2,7 +2,7 @@ import isArray from 'lodash/isArray';
 import reduce from 'lodash/reduce';
 import { sanitizeEntity } from './sanitize';
 import { getDefaultTimeZoneOnBrowser } from './dates';
-import { 
+import {
   AVAILABILITY_PLAN_TIME,
   DAYS_OF_WEEK,
   HOURLY_PRICE,
@@ -398,7 +398,6 @@ export const humanizeLineItemCode = code => {
 
 export const AVAILABILITY_DEFAULT_START = '00:00';
 export const AVAILABILITY_DEFAULT_END = '24:00';
-console.log('test')
 const defaultTimeZone = () =>
   typeof window !== 'undefined' ? getDefaultTimeZoneOnBrowser() : 'Etc/UTC';
 

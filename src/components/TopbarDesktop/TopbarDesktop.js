@@ -16,7 +16,7 @@ import {
   MenuLabel,
   MenuContent,
   MenuItem,
-  NamedLink,
+  NamedLink, ExternalLink,
 } from '../../components';
 import { TopbarSearchForm } from '../../forms';
 
@@ -62,7 +62,7 @@ const TopbarDesktop = props => {
           desktopInputRoot={css.topbarSearchWithLeftPadding}
           onSubmit={onSearchSubmit}
           initialValues={initialSearchFormValues}
-          dropdown={topbarDropDown}
+          // dropdown={topbarDropDown}
           selectedCategories={catKeys}
         />
     );
@@ -115,6 +115,15 @@ const TopbarDesktop = props => {
       </span>
     </NamedLink>
   ) : null;
+
+  const blog = (
+    <ExternalLink href="https://www.hotpatch.com/blog/" className={css.inboxLink}>
+      <span className={css.inbox}>
+        <FormattedMessage id="Footer.toBlogPage" />
+        {notificationDot}
+      </span>
+    </ExternalLink>
+  )
 
   const currentPageClass = page => {
     const isAccountSettingsPage =
@@ -196,10 +205,11 @@ const TopbarDesktop = props => {
           <FormattedMessage id="TopbarDesktop.createListing" />
         </span>
       </NamedLink>
+      {blog}
       {inboxLink}
       {profileMenu}
-      {signupLink}
       {loginLink}
+      {signupLink}
     </nav>
   );
 };
