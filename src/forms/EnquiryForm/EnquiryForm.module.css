@@ -32,3 +32,14 @@
     margin-top: 0;
   }
 }
+
+.containerWarningMessage {
+  text-align: center;
+  & p {
+  margin: 0;
+  font-family: var(--fontFamilySofiapro);
+    font-size: 14px;
+    font-weight: var(--fontWeightBold);
+    line-height: 16px;
+  }
+}

@@ -207,6 +207,7 @@ const findBookingUnitBoundaries = params => {
     timeZone,
   } = params;
 
+
   if (moment(currentBoundary).isBetween(startMoment, endMoment, null, '[]')) {
     const timeOfDay = localizeAndFormatTime(intl, timeZone, currentBoundary);
     // Choose the previous (aka first) sharp hour boundary,
