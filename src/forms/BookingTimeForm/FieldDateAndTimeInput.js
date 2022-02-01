@@ -263,8 +263,6 @@ class FieldDateAndTimeInput extends Component {
     const startDate = timeOfDayFromLocalToTimeZone(value.date, timeZone);
     const timeSlots = getMonthlyTimeSlots(monthlyTimeSlots, this.state.currentMonth, timeZone);
     const timeSlotsOnSelectedDate = getTimeSlots(timeSlots, startDate, timeZone);
-    console.log(timeSlots, 'timeSlots111')
-    console.log(timeSlotsOnSelectedDate, 'timeSlotsOnSelectedDate')
 
     const { startTime, endDate, endTime } = getAllTimeValues(
       intl,
@@ -439,6 +437,8 @@ class FieldDateAndTimeInput extends Component {
      * 3. Remove the css related to hiding the booking end date from the bottom of the FieldDateAndTimeInput.module.css field
      */
 
+    console.log('availableEndTimes', availableEndTimes)
+
     return (
       <div className={classes}>
         <div className={css.formRow}>
@@ -528,8 +528,8 @@ class FieldDateAndTimeInput extends Component {
             <FieldSelect
               name="bookingEndTime"
               id={formId ? `${formId}.bookingEndTime` : 'bookingEndTime'}
-              className={bookingStartDate ? css.fieldSelect : css.fieldSelectDisabled}
-              selectClassName={bookingStartDate ? css.select : css.selectDisabled}
+              className={ bookingStartDate ? css.fieldSelect : css.fieldSelectDisabled }
+              selectClassName={ bookingStartDate ? css.select : css.selectDisabled }
               label={endTimeLabel}
               disabled={endTimeDisabled}
             >
