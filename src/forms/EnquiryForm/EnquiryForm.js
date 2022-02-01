@@ -39,10 +39,15 @@ const EnquiryFormComponent = props => (
         },
         { authorDisplayName }
       );
-      const messageRequiredMessage = intl.formatMessage({
-        id: 'EnquiryForm.messageRequired',
-      });
+      const messageRequiredMessage = intl.formatMessage({id: 'EnquiryForm.messageRequired',});
+
       const messageRequired = validators.requiredAndNonEmptyString(messageRequiredMessage);
+
+      // message warning
+
+      const firstWarning = intl.formatMessage({id: 'TransactionPage.warningNotification1'});
+      const secondWarning = intl.formatMessage({id: 'TransactionPage.warningNotification2'});
+
 
       const classes = classNames(rootClassName || css.root, className);
       const submitInProgress = inProgress;
@@ -63,6 +68,11 @@ const EnquiryFormComponent = props => (
             placeholder={messagePlaceholder}
             validate={messageRequired}
           />
+
+          <div className={css.containerWarningMessage}>
+            <p>{firstWarning}</p>
+            <p>{secondWarning}</p>
+          </div>
           <div className={submitButtonWrapperClassName}>
             {sendEnquiryError ? (
               <p className={css.error}>
