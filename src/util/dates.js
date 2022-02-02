@@ -245,7 +245,15 @@ export const findNextBoundary = (timeZone, currentMomentOrDate) =>
   moment(currentMomentOrDate)
     .clone()
     .tz(timeZone)
-    .add(1, 'hour')
+    .add(30, 'minutes')
+    .startOf('minutes')
+    .toDate();
+
+export const findNextBoundaryHour = (timeZone, currentMomentOrDate) =>
+  moment(currentMomentOrDate)
+    .clone()
+    .tz(timeZone)
+    .add(30, 'minutes')
     .startOf('hour')
     .toDate();
 
@@ -288,7 +296,7 @@ export const getSharpHours = (intl, timeZone, startTime, endTime) => {
 
   // Select a moment before startTime to find next possible sharp hour.
   // I.e. startTime might be a sharp hour.
-  const millisecondBeforeStartTime = new Date(startTime.getTime() - 1);
+  const millisecondBeforeStartTime = new Date(startTime.getTime());
   return findBookingUnitBoundaries({
     currentBoundary: findNextBoundary(timeZone, millisecondBeforeStartTime),
     startMoment: moment(startTime),
@@ -361,7 +369,7 @@ export const getStartHours = (intl, timeZone, startTime, endTime) => {
  */
 export const getEndHours = (intl, timeZone, startTime, endTime) => {
   const hours = getSharpHours(intl, timeZone, startTime, endTime);
-  return hours.length < 2 ? [] : hours.slice(1);
+  return hours.length < 2 ? [] : hours.slice(0.5);
 };
 
 /**
@@ -557,7 +565,7 @@ export const dateIsAfter = (date, compareToDate) => {
 export const isInRange = (date, start, end, scope, timeZone) => {
   // Range usually ends with 00:00, and with day scope,
   // this means that exclusive end is wrongly taken into range.
-  const millisecondBeforeEndTime = new Date(end.getTime() - 1);
+  const millisecondBeforeEndTime = new Date(end.getTime() - 0.5);
   return timeZone
     ? moment(date)
         .tz(timeZone)
