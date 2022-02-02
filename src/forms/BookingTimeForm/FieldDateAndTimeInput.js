@@ -18,7 +18,7 @@ import {
   monthIdStringInTimeZone,
   getMonthStartInTimeZone,
   nextMonthFn,
-  prevMonthFn,
+  prevMonthFn, findNextBoundaryHour,
 } from '../../util/dates';
 import { propTypes } from '../../util/types';
 import { bookingDateRequired } from '../../util/validators';
@@ -424,7 +424,7 @@ class FieldDateAndTimeInput extends Component {
     const placeholderTime = localizeAndFormatTime(
       intl,
       timeZone,
-      findNextBoundary(timeZone, TODAY)
+      findNextBoundaryHour(timeZone, TODAY)
     );
 
     const startTimeLabel = intl.formatMessage({ id: 'FieldDateTimeInput.startTime' });
@@ -510,8 +510,8 @@ class FieldDateAndTimeInput extends Component {
               {bookingStartDate ? (
                 availableStartTimes.map(p => {
                   return(
-                  <option key={p.timeOfDay === '24:00' ? '00:00' : p.timeOfDay} value={p.timestamp}>
-                     {p.timeOfDay === '24:00' ? '00:00' : p.timeOfDay}
+                  <option key={p.timeOfDay === '24:30' ? '00:30' : p.timeOfDay} value={p.timestamp}>
+                     {p.timeOfDay === '24:30' ? '00:30' : p.timeOfDay}
                   </option>
                 )})
               ) : (

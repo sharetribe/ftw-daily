@@ -344,7 +344,6 @@ console.log(monthId, 'monthId')
 
   return dispatch(timeSlotsRequest({ listingId, start, end, ...extraParams }))
     .then(timeSlots => {
-      console.log(timeSlots, 'timeSlotsstimeSlots')
       dispatch(fetchTimeSlotsSuccessTime(monthId, timeSlots));
     })
     .catch(e => {
