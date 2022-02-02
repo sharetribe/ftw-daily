@@ -45,7 +45,7 @@
   position: absolute;
   top: 110px;
   left: 24px;
-  @media (--viewportMedium) {
+  @media (--viewportSmall) {
     top: 150px;
     left: 97px;
   }
@@ -170,13 +170,15 @@
 }
 
 .heroButtonsContainer {
+  position: absolute;
+  top: 520px;
   margin-top: 15px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  @media (--viewportMedium) {
+  @media (--viewportSmall) {
     max-width: 400px;
     top: 385px;
     left: 97px;
@@ -266,9 +268,23 @@
     position: relative;
     width: 100vw;
     max-width: 100%;
-    height: 640px;
+    height: 454px;
     object-fit: cover;
+    @media (--viewportSmall) {
+      min-height: 640px;
+    }
+    @media (--viewportLarge) {
+      height: 640px;
+    }
+
   }
+
+    :global(.slick-slide) {
+      height: 640px;
+      & img {
+        height: 640px;
+      }
+    }
 }
 
 .slider::after {
