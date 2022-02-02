@@ -109,8 +109,7 @@ class SendMessageFormComponent extends Component {
                 </SecondaryButton>
               </div>
               <div className={css.containerWarningMessage}>
-                <p>{firstWarning}</p>
-                <p>{secondWarning}</p>
+               {firstWarning} {secondWarning}
               </div>
             </Form>
           );

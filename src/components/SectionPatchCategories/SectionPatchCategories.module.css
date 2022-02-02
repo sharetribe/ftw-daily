@@ -2,12 +2,9 @@
 
 .title {
   @apply --marketplaceH1FontStyles;
-  margin-top: 120px;
+  margin-top: 85px;
   margin-bottom: 64px;
   text-align: center;
-  @media (--viewportMedium) {
-    margin-top: 85px;
-  }
 }
 
 .categories {

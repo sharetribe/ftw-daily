@@ -478,8 +478,7 @@ class StripePaymentForm extends Component {
         ) : null}
 
         <div className={css.containerWarningMessage}>
-          <p>{firstWarning}</p>
-          <p>{secondWarning}</p>
+          {firstWarning} {secondWarning}
         </div>
 
         <div className={css.submitContainer}>
