@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { string } from 'prop-types';
 import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
@@ -13,10 +13,34 @@ import hotPatch3 from './images/newSlider/Hero 3 (1).jpg';
 import hotPatch4 from './images/newSlider/Hero 4 (1).jpg';
 import hotPatch5 from './images/newSlider/Hero 5(1).jpg';
 
+import hotPatchMobile1 from './images/sliderMobile/hero 111.jpg'
+import hotPatchMobile2 from './images/sliderMobile/hero 222.jpg'
+import hotPatchMobile3 from './images/sliderMobile/hero 333.jpg'
+import hotPatchMobile4 from './images/sliderMobile/hero 444.jpg'
+import hotPatchMobile5 from './images/sliderMobile/hero 555.jpg'
+
 const expertArr = [ hotPatch1, hotPatch2, hotPatch3, hotPatch4, hotPatch5 ];
+const mobileExpertArr = [ hotPatchMobile1, hotPatchMobile2, hotPatchMobile3, hotPatchMobile4, hotPatchMobile5 ];
+
 const SectionHero = props => {
   const { rootClassName, className } = props;
 
+  const [ imageArr, setImageArr ] = useState(expertArr)
+  useEffect( () => {
+    resizeFunc()
+  },[])
+  const resizeFunc = () => {
+    window.addEventListener('resize', () => {
+      console.log('window.innerWidth', window.innerWidth)
+      if (window.innerWidth < 550) {
+        setImageArr(mobileExpertArr)
+      } else {
+        setImageArr(expertArr)
+      }
+    });
+  }
+
+  console.log('imageArr', imageArr)
   const classes = classNames(rootClassName || css.root, className);
   const makeSpaceWork = <span className={css.bold}><FormattedMessage id="SectionHero.subTitleBold" /></span>;
 
@@ -34,7 +58,7 @@ const SectionHero = props => {
   return (
     <div className={classes}>
       <Slider className={css.slider} {...settings} >
-        {expertArr.map( el => (
+        {imageArr && imageArr.map( el => (
             <div className={css.card} key={el}>
                 <img src={el} alt="avatar" />
             </div>

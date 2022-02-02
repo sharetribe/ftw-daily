@@ -26,18 +26,15 @@
   display: flex;
   flex-direction: column;
   min-height: auto;
-  height: 640px;
-
-  /*@media (--viewportLarge) {*/
-  /*  !* min-height: calc(100vh - var(--topbarHeightDesktop)); *!*/
-  /*}*/
+  height: 454px;
+  @media (--viewportMedium) {
+    height: 640px;
+  }
 }
 
 .hero {
   flex-grow: 1;
-  overflow: hidden;
-  justify-content: flex-end;
-  padding-bottom: 12px;
+  /*justify-content: flex-end;*/
   /*@media (--viewportMedium) {*/
   /*  padding-bottom: 80px;*/
   /*}*/
