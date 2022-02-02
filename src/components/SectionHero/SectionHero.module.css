@@ -250,7 +250,9 @@
     font-size: 20px;
   }
 }
-
+.card {
+  max-width: 100%;
+}
 .blockSlider {
   @media (--viewportMedium) {
     top: 150px;
@@ -269,8 +271,20 @@
   }
 }
 
-
-.card {
-  max-width: 100%;
+.slider::after {
+  background: transparent;
+  background: -moz-linear-gradient(to bottom right, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.1) 75%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.8)), color-stop(100%, rgba(255, 255, 255, 0.1)));
+  background: -webkit-linear-gradient(to bottom right, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.1) 75%);
+  background: -o-linear-gradient(to bottom right, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.1) 75%);
+  background: -ms-linear-gradient(to bottom right, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.1) 75%);
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.1) 75%);
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  position: absolute;
 }
 
