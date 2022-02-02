@@ -42,4 +42,7 @@
     font-weight: var(--fontWeightBold);
     line-height: 16px;
   }
+    & p:last-of-type {
+        margin-bottom: 20px;
+      }
 }

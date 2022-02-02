@@ -31,7 +31,6 @@ const SectionHero = props => {
   },[])
   const resizeFunc = () => {
     window.addEventListener('resize', () => {
-      console.log('window.innerWidth', window.innerWidth)
       if (window.innerWidth < 550) {
         setImageArr(mobileExpertArr)
       } else {
@@ -40,7 +39,6 @@ const SectionHero = props => {
     });
   }
 
-  console.log('imageArr', imageArr)
   const classes = classNames(rootClassName || css.root, className);
   const makeSpaceWork = <span className={css.bold}><FormattedMessage id="SectionHero.subTitleBold" /></span>;
 

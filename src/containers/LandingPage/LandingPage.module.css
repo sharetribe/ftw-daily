@@ -34,6 +34,7 @@
 
 .hero {
   flex-grow: 1;
+  overflow: hidden;
   /*justify-content: flex-end;*/
   /*@media (--viewportMedium) {*/
   /*  padding-bottom: 80px;*/
