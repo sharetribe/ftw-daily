@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { func, object, string } from 'prop-types';
+import moment from 'moment-timezone/builds/moment-timezone-with-data-10-year-range.min';
 import classNames from 'classnames';
 import { intlShape } from '../../util/reactIntl';
 import {
@@ -18,7 +19,9 @@ import {
   monthIdStringInTimeZone,
   getMonthStartInTimeZone,
   nextMonthFn,
-  prevMonthFn, findNextBoundaryHour,
+  prevMonthFn,
+  findNextBoundaryHour,
+  getSharpHoursCustom, getEndHoursCustom, findNextBoundaryCustom,
 } from '../../util/dates';
 import { propTypes } from '../../util/types';
 import { bookingDateRequired } from '../../util/validators';
@@ -54,7 +57,16 @@ const getAvailableStartTimes = (intl, timeZone, bookingStart, timeSlotsOnSelecte
     // Otherwise use the end of the timeslot.
     const endLimit = dateIsAfter(endDate, nextDate) ? nextDate : endDate;
 
-    const hours = getStartHours(intl, timeZone, startLimit, endLimit);
+    // const hours = getStartHours(intl, timeZone, startLimit, endLimit);
+    const hours = getSharpHoursCustom(intl, timeZone, startLimit, endLimit);
+    if (hours && hours.length > 0) {
+      hours.unshift({
+        timestamp: +(moment(hours[0].timestamp).tz(timeZone).subtract(30, 'minutes').format('x')),
+        timeOfDay: moment(hours[0].timestamp).tz(timeZone).subtract(30, 'minutes').format('HH:mm'),
+      })
+    }
+    const modifiedAvailableStartTimes = [...hours.slice(0, (hours.length) - 1)];
+    return availableHours.concat(modifiedAvailableStartTimes);
     return availableHours.concat(hours);
   }, []);
   return allHours;
@@ -98,7 +110,7 @@ const getAvailableEndTimes = (
       : dayAfterBookingEnd;
   }
 
-  return getEndHours(intl, timeZone, startLimit, endLimit);
+  return getEndHoursCustom(intl, timeZone, startLimit, endLimit);
 };
 
 const getTimeSlots = (timeSlots, date, timeZone) => {
@@ -141,7 +153,7 @@ const getAllTimeValues = (
   const endDate = selectedEndDate
     ? selectedEndDate
     : startTimeAsDate
-    ? new Date(findNextBoundary(timeZone, startTimeAsDate).getTime() - 1)
+    ? new Date(findNextBoundaryCustom(timeZone, startTimeAsDate).getTime() - 1)
     : null;
 
   const selectedTimeSlot = timeSlots.find(t =>
@@ -387,6 +399,7 @@ class FieldDateAndTimeInput extends Component {
       timeSlotsOnSelectedDate
     );
 
+    console.log('availableStartTimes', availableStartTimes)
     const firstAvailableStartTime =
       availableStartTimes.length > 0 && availableStartTimes[0] && availableStartTimes[0].timestamp
         ? availableStartTimes[0].timestamp
@@ -424,7 +437,7 @@ class FieldDateAndTimeInput extends Component {
     const placeholderTime = localizeAndFormatTime(
       intl,
       timeZone,
-      findNextBoundaryHour(timeZone, TODAY)
+      findNextBoundary(timeZone, TODAY)
     );
 
     const startTimeLabel = intl.formatMessage({ id: 'FieldDateTimeInput.startTime' });
@@ -508,12 +521,11 @@ class FieldDateAndTimeInput extends Component {
               onChange={this.onBookingStartTimeChange}
             >
               {bookingStartDate ? (
-                availableStartTimes.map(p => {
-                  return(
+                availableStartTimes.map(p =>
                   <option key={p.timeOfDay === '24:30' ? '00:30' : p.timeOfDay} value={p.timestamp}>
                      {p.timeOfDay === '24:30' ? '00:30' : p.timeOfDay}
                   </option>
-                )})
+                )
               ) : (
                 <option>{placeholderTime}</option>
               )}
@@ -534,8 +546,8 @@ class FieldDateAndTimeInput extends Component {
               {bookingStartDate && (bookingStartTime || startTime) ? (
                 availableEndTimes.map(p => {
                   return (
-                  <option key={p.timeOfDay === '00:00' ? '24:00' : p.timeOfDay} value={p.timestamp}>
-                    {p.timeOfDay === '00:00' ? '24:00' : p.timeOfDay}
+                  <option key={p.timeOfDay === '24:30' ? '00:30' : p.timeOfDay} value={p.timestamp}>
+                    {p.timeOfDay === '24:30' ? '00:30' : p.timeOfDay}
                   </option>
                 )})
               ) : (
