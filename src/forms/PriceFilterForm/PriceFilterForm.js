@@ -148,7 +148,6 @@ const PriceFilterFormComponent = props => {
                 name="priceType"
                 label={pricePerHourLabel}
                 value="price"
-                labelClassName={css.labelClassName}
               />
               <FieldRadioButton
                 className={css.switherItem}
@@ -156,7 +155,6 @@ const PriceFilterFormComponent = props => {
                 name="priceType"
                 label={pricePerDayLabel}
                 value="pricePerDayFilter"
-                labelClassName={css.labelClassName}
               />
               <FieldRadioButton
                 className={css.switherItem}
@@ -164,7 +162,6 @@ const PriceFilterFormComponent = props => {
                 name="priceType"
                 label={pricePerWeekLabel}
                 value="pricePerWeekFilter"
-                labelClassName={css.labelClassName}
               />
               <FieldRadioButton
                 className={css.switherItem}
@@ -172,7 +169,6 @@ const PriceFilterFormComponent = props => {
                 name="priceType"
                 label={pricePerMonthLabel}
                 value="pricePerMonthFilter"
-                labelClassName={css.labelClassName}
               />
             </div>
 
