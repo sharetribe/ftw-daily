@@ -4,7 +4,7 @@ import { formatMoney } from '../../util/currency';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { Form, FieldRadioButton } from '../../components';
 import { getAvailablePrices, getLowestPrice } from '../../util/data';
-// import { 
+// import {
 //   HOURLY_PRICE,
 // } from '../../util/types';
 
@@ -24,7 +24,7 @@ export default class BookingTypes extends Component {
     const { key } = getLowestPrice(listing);
     const initialValues = {bookingType: key || null};
 
-    return (  
+    return (
       <div>
         <FinalForm
         // {...rest}
@@ -49,7 +49,7 @@ export default class BookingTypes extends Component {
                   const {currency, amount} = value;
                   const price = formatMoney(intl, new Money(amount, currency));
                   return (
-                    <div className={css.sessionCheckboxItem}>
+                    <div className={css.sessionCheckboxItem} key={key}>
                       <FieldRadioButton
                         id={`bookingType${key}`}
                         name="bookingType"
@@ -61,7 +61,7 @@ export default class BookingTypes extends Component {
                   )
                 })}
               </div>
-               
+
               </Form>
           )}}
         />

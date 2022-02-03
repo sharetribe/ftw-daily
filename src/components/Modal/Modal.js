@@ -196,7 +196,7 @@ ModalComponent.propTypes = {
   children: node,
   className: string,
   scrollLayerClassName: string,
-  closeButtonMessage: node,
+  // closeButtonMessage: node,
   containerClassName: string,
   contentClassName: string,
   lightCloseButton: bool,
