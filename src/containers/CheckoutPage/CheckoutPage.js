@@ -488,7 +488,7 @@ export class CheckoutPageComponent extends Component {
       selectedPaymentMethod: paymentMethod,
       saveAfterOnetimePayment: !!saveAfterOnetimePayment,
     };
-// console.log(this.state.pageData, 'this.state.pageData')
+
     this.handlePaymentIntent(requestPaymentParams)
       .then(res => {
         const { orderId, messageSuccess, paymentMethodSaved } = res;
@@ -689,7 +689,7 @@ export class CheckoutPageComponent extends Component {
       ? currentListing.attributes.availabilityPlan.timezone
       : 'Etc/UTC';
     const dateType = bookingType === HOURLY_PRICE ? DATE_TYPE_DATETIME : DATE_TYPE_DATE;
-    console.log(speculatedTransaction, 'tx')
+
     const breakdown =
       tx.id && txBooking.id ? (
         <BookingBreakdown
