@@ -19,25 +19,23 @@ import hotPatchMobile3 from './images/sliderMobile/hero 333.jpg'
 import hotPatchMobile4 from './images/sliderMobile/hero 444.jpg'
 import hotPatchMobile5 from './images/sliderMobile/hero 555.jpg'
 
-const expertArr = [ hotPatch1, hotPatch2, hotPatch3, hotPatch4, hotPatch5 ];
-const mobileExpertArr = [ hotPatchMobile1, hotPatchMobile2, hotPatchMobile3, hotPatchMobile4, hotPatchMobile5 ];
+const expertArr = [  hotPatch4, hotPatch1, hotPatch5, hotPatch3,  hotPatch2 ];
+const mobileExpertArr = [  hotPatchMobile4, hotPatchMobile1, hotPatchMobile5, hotPatchMobile3, hotPatchMobile2 ];
 
 const SectionHero = props => {
   const { rootClassName, className } = props;
 
   const [ imageArr, setImageArr ] = useState(expertArr)
   useEffect( () => {
-    resizeFunc()
+      if ( typeof window !== 'undefined' && window.innerWidth < 550) setImageArr(mobileExpertArr)
+      else setImageArr(expertArr)
   },[])
-  const resizeFunc = () => {
-    window.addEventListener('resize', () => {
-      if (window.innerWidth < 550) {
-        setImageArr(mobileExpertArr)
-      } else {
-        setImageArr(expertArr)
-      }
+
+  typeof window !== 'undefined' && window.addEventListener('resize', () => {
+      if (window.innerWidth < 550) setImageArr(mobileExpertArr)
+      else setImageArr(expertArr)
     });
-  }
+
 
   const classes = classNames(rootClassName || css.root, className);
   const makeSpaceWork = <span className={css.bold}><FormattedMessage id="SectionHero.subTitleBold" /></span>;
