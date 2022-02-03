@@ -7,11 +7,11 @@ import Slider from "react-slick";
 
 import css from './SectionHero.module.css';
 
-import hotPatch1 from './images/newSlider/Hero 1.jpg';
-import hotPatch2 from './images/newSlider/Hero 2.jpg';
-import hotPatch3 from './images/newSlider/Hero 3.jpg';
+import hotPatch1 from './images/newSlider/Hero 11.jpg';
+import hotPatch2 from './images/newSlider/Hero 22.jpg';
+import hotPatch3 from './images/newSlider/Hero 33.jpg';
 import hotPatch4 from './images/newSlider/Hero 4.jpg';
-import hotPatch5 from './images/newSlider/Hero 5.jpg';
+import hotPatch5 from './images/newSlider/Hero 55.jpg';
 
 import hotPatchMobile1 from './images/sliderMobile/hero 111.jpg'
 import hotPatchMobile2 from './images/sliderMobile/hero 222.jpg'
