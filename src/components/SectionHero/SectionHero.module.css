@@ -263,7 +263,7 @@
   }
 }
 .slider {
-  height: 640px;
+  /*height: 640px;*/
   & img {
     position: relative;
     width: 100vw;
@@ -274,17 +274,16 @@
       min-height: 640px;
     }
     @media (--viewportLarge) {
-      height: 640px;
+      height: 900px;
     }
 
   }
-
-    :global(.slick-slide) {
-      height: 640px;
-      & img {
-        height: 640px;
-      }
-    }
+    /*:global(.slick-slide) {*/
+    /*  height: 640px;*/
+    /*  & img {*/
+    /*    height: 640px;*/
+    /*  }*/
+    /*}*/
 }
 
 .slider::after {

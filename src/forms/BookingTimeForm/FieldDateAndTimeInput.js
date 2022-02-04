@@ -59,6 +59,7 @@ const getAvailableStartTimes = (intl, timeZone, bookingStart, timeSlotsOnSelecte
 
     // const hours = getStartHours(intl, timeZone, startLimit, endLimit);
     const hours = getSharpHoursCustom(intl, timeZone, startLimit, endLimit);
+
     if (hours && hours.length > 0) {
       hours.unshift({
         timestamp: +(moment(hours[0].timestamp).tz(timeZone).subtract(30, 'minutes').format('x')),
@@ -399,7 +400,6 @@ class FieldDateAndTimeInput extends Component {
       timeSlotsOnSelectedDate
     );
 
-    console.log('availableStartTimes', availableStartTimes)
     const firstAvailableStartTime =
       availableStartTimes.length > 0 && availableStartTimes[0] && availableStartTimes[0].timestamp
         ? availableStartTimes[0].timestamp
@@ -434,11 +434,16 @@ class FieldDateAndTimeInput extends Component {
           )
       : () => false;
 
+    // hours.unshift({
+    //   timestamp: +(moment(hours[0].timestamp).tz(timeZone).subtract(30, 'minutes').format('x')),
+    //   timeOfDay: moment(hours[0].timestamp).tz(timeZone).subtract(30, 'minutes').format('HH:mm'),
+    // })
     const placeholderTime = localizeAndFormatTime(
       intl,
       timeZone,
-      findNextBoundary(timeZone, TODAY)
+      findNextBoundaryHour(timeZone, TODAY)
     );
+    console.log('placeholderTime', TODAY)
 
     const startTimeLabel = intl.formatMessage({ id: 'FieldDateTimeInput.startTime' });
     const endTimeLabel = intl.formatMessage({ id: 'FieldDateTimeInput.endTime' });
