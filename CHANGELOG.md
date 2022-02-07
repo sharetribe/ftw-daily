@@ -12,7 +12,10 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 
-## Upcoming version 2021-XX-XX
+## Upcoming version 2022-XX-XX
+
+- [add] Code comment about "REACT_APP" prefix in environment variables.
+  [#1492](https://github.com/sharetribe/ftw-daily/pull/1492)
 
 ## [v8.4.0] 2021-12-02
 
