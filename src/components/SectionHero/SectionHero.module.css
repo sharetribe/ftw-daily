@@ -268,10 +268,10 @@
     position: relative;
     width: 100vw;
     max-width: 100%;
-    height: auto;
+    height: 458px;
     object-fit: cover;
     @media (--viewportSmall) {
-      min-height: 640px;
+      min-height: auto;
     }
     @media (--viewportLarge) {
       height: 900px;

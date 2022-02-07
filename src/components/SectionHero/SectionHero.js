@@ -10,7 +10,7 @@ import css from './SectionHero.module.css';
 import hotPatch1 from './images/newSlider/Hero 11.jpg';
 import hotPatch2 from './images/newSlider/Hero 22.jpg';
 import hotPatch3 from './images/newSlider/Hero 33.jpg';
-import hotPatch4 from './images/newSlider/Hero 4.jpg';
+import hotPatch4 from './images/newSlider/Hero 44.jpg';
 import hotPatch5 from './images/newSlider/Hero 55.jpg';
 
 import hotPatchMobile1 from './images/sliderMobile/hero 111.jpg'
@@ -19,8 +19,20 @@ import hotPatchMobile3 from './images/sliderMobile/hero 333.jpg'
 import hotPatchMobile4 from './images/sliderMobile/hero 444.jpg'
 import hotPatchMobile5 from './images/sliderMobile/hero 555.jpg'
 
-const expertArr = [  hotPatch4, hotPatch1, hotPatch5, hotPatch3,  hotPatch2 ];
-const mobileExpertArr = [  hotPatchMobile4, hotPatchMobile1, hotPatchMobile5, hotPatchMobile3, hotPatchMobile2 ];
+const expertArr = [
+  hotPatch4,
+  hotPatch1,
+  hotPatch5,
+  hotPatch3,
+  hotPatch2
+];
+const mobileExpertArr = [
+  hotPatchMobile4,
+  hotPatchMobile1,
+  hotPatchMobile5,
+  hotPatchMobile3,
+  hotPatchMobile2
+];
 
 const SectionHero = props => {
   const { rootClassName, className } = props;
