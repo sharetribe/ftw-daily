@@ -262,7 +262,7 @@ export const findNextBoundaryHour = (timeZone, currentMomentOrDate) =>
     .clone()
     .tz(timeZone)
     .add(30, 'minutes')
-    .startOf('hour')
+    .startOf('minute')
     .toDate();
 
 /**

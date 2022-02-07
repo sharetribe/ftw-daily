@@ -1216,7 +1216,7 @@
   "TopbarMobileMenu.signupOrLogin": "{signup} or {login}",
   "TopbarMobileMenu.unauthorizedGreeting": "Hello there,{lineBreak}would you like to {signupOrLogin}?",
   "TopbarMobileMenu.yourListingsLink": "Your listings",
-  "TopbarSearchForm.placeholder": "Search by activity or location",
+  "TopbarSearchForm.placeholder": "Search by location",
   "TopbarSearchForm.searchHelp": "Tip: You can also search Patches by area code, for example \"00500\" or city district \"Sörnäinen\".",
   "TransactionPage.warningNotification1": "KEEP YOUR ACCOUNT SAFE - NEVER SHARE PERSONAL DETAILS OR ACCOUNT INFORMATION IN THIS CHAT SUCH AS PHONE NUMBERS, EMAIL ADDRESSES, AND PAYMENT DETAILS.",
   "TransactionPage.warningNotification2": "HOTPATCH WILL NEVER ASK FOR THIS INFORMATION OVER CHAT.",
