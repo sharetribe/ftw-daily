@@ -59,19 +59,21 @@
 
   /* Layout */
   margin: 0 24px 0 0;
-  padding: 13px 13px 13px;
+  padding: 11px 13px 13px;
   height: var(--TopbarSearchForm_inputHeight);
   line-height: unset;
 
   /* Borders */
   border-bottom-width: var(--borderRadiusMobileSearch);
+
   &::-moz-placeholder {
     color: #82888a;
   }
-  :-moz-placeholder { /* Firefox 18- */
+  &:-moz-placeholder { /* Firefox 18- */
     color: #82888a;
   }
   &::placeholder {
+     padding-top: 10px;
      line-height: 24px;
      font-weight: var(--fontWeightRegular);
      font-size: 22px;
@@ -82,10 +84,9 @@
     outline: none;
   }
 }
-
 @-moz-document url-prefix() {
   .mobileInput {
-    padding: 20px 13px 13px;
+    padding: 19px 13px 13px;
   }
 }
 
