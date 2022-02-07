@@ -43,11 +43,11 @@ Change `export` to `set` in the package.json file if you're using Windows/DOS. Y
 change to "dev" and "dev-sever" commands.
 
 ```
-"dev": "yarn run config-check&&set NODE_ENV=development REACT_APP_DEV_API_SERVER_PORT=3500&&concurrently --kill-others \"yarn run dev-frontend\" \"yarn run dev-backend\""
+"dev": "yarn run config-check&&set NODE_ENV=development&& set REACT_APP_DEV_API_SERVER_PORT=3500&&concurrently --kill-others \"yarn run dev-frontend\" \"yarn run dev-backend\""
 ```
 
 ```
-"dev-server": "set NODE_ENV=development PORT=4000 REACT_APP_CANONICAL_ROOT_URL=http://localhost:4000&&yarn run build&&nodemon --watch server server/index.js"
+"dev-server": "set NODE_ENV=development&& set PORT=4000&& set REACT_APP_CANONICAL_ROOT_URL=http://localhost:4000&&yarn run build&&nodemon --watch server server/index.js"
 ```
 
 We strongly recommend installing
