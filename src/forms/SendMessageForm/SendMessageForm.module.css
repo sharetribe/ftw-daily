@@ -95,9 +95,12 @@
 }
 .containerWarningMessage {
   margin-top: 20px;
-  text-align: center;
+& p{
+    margin: 0;
+    text-align: center;
     font-family: var(--fontFamilySofiapro);
     font-size: 14px;
     font-weight: var(--fontWeightBold);
     line-height: 16px;
+  }
 }
