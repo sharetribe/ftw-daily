@@ -272,6 +272,7 @@
     object-fit: cover;
     @media (--viewportSmall) {
       min-height: auto;
+      height: 640px;
     }
     @media (--viewportLarge) {
       height: 900px;
