@@ -21,7 +21,9 @@ import {
   nextMonthFn,
   prevMonthFn,
   findNextBoundaryHour,
-  getSharpHoursCustom, getEndHoursCustom, findNextBoundaryCustom,
+  getSharpHoursCustom,
+  getEndHoursCustom,
+  findNextBoundaryCustom,
 } from '../../util/dates';
 import { propTypes } from '../../util/types';
 import { bookingDateRequired } from '../../util/validators';
@@ -42,6 +44,7 @@ const getAvailableStartTimes = (intl, timeZone, bookingStart, timeSlotsOnSelecte
   if (timeSlotsOnSelectedDate.length === 0 || !timeSlotsOnSelectedDate[0] || !bookingStart) {
     return [];
   }
+  console.log('timeSlotsOnSelectedDate', timeSlotsOnSelectedDate)
   const bookingStartDate = resetToStartOfDay(bookingStart, timeZone);
 
   const allHours = timeSlotsOnSelectedDate.reduce((availableHours, t) => {
@@ -51,11 +54,13 @@ const getAvailableStartTimes = (intl, timeZone, bookingStart, timeSlotsOnSelecte
 
     // If the start date is after timeslot start, use the start date.
     // Otherwise use the timeslot start time.
+
     const startLimit = dateIsAfter(bookingStartDate, startDate) ? bookingStartDate : startDate;
 
     // If date next to selected start date is inside timeslot use the next date to get the hours of full day.
     // Otherwise use the end of the timeslot.
     const endLimit = dateIsAfter(endDate, nextDate) ? nextDate : endDate;
+
 
     // const hours = getStartHours(intl, timeZone, startLimit, endLimit);
     const hours = getSharpHoursCustom(intl, timeZone, startLimit, endLimit);
@@ -151,6 +156,7 @@ const getAllTimeValues = (
   // date would be the next day at 00:00 the day in the form is still correct.
   // Because we are only using the date and not the exact time we can remove the
   // 1ms.
+
   const endDate = selectedEndDate
     ? selectedEndDate
     : startTimeAsDate
@@ -283,6 +289,8 @@ class FieldDateAndTimeInput extends Component {
       timeSlotsOnSelectedDate,
       startDate
     );
+
+    console.log('firrrrrrrrst2222222222', new Date(startTime))
 
     form.batch(() => {
       form.change('bookingStartTime', startTime);
@@ -443,7 +451,6 @@ class FieldDateAndTimeInput extends Component {
       timeZone,
       findNextBoundaryHour(timeZone, TODAY)
     );
-    console.log('placeholderTime', TODAY)
 
     const startTimeLabel = intl.formatMessage({ id: 'FieldDateTimeInput.startTime' });
     const endTimeLabel = intl.formatMessage({ id: 'FieldDateTimeInput.endTime' });
