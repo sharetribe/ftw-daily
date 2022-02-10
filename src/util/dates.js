@@ -245,15 +245,15 @@ export const findNextBoundary = (timeZone, currentMomentOrDate) =>
   moment(currentMomentOrDate)
     .clone()
     .tz(timeZone)
-    .add(1, 'hours')
-    .startOf('hour')
+    .add(30 - (moment(currentMomentOrDate).minute ()% 30), 'minutes')
+    .startOf('minute')
     .toDate();
 
 export const findNextBoundaryCustom = (timeZone, currentMomentOrDate) =>
   moment(currentMomentOrDate)
     .clone()
     .tz(timeZone)
-    .add(30, 'minutes')
+    .add(30 - (moment(currentMomentOrDate).minute ()% 30), 'minutes')
     .startOf('minute')
     .toDate();
 
@@ -261,8 +261,8 @@ export const findNextBoundaryHour = (timeZone, currentMomentOrDate) =>
   moment(currentMomentOrDate)
     .clone()
     .tz(timeZone)
-    .add(30, 'minutes')
-    .startOf('minute')
+    .add(30 - (moment(currentMomentOrDate).minute ()% 30), 'minutes')
+    .startOf('minutes')
     .toDate();
 
 /**
