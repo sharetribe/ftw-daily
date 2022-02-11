@@ -30,13 +30,13 @@ reference in Flex Docs.
 
 ## Customizing
 
-See the
-[How to Customize FTW](https://www.sharetribe.com/docs/guides/how-to-customize-ftw/) guide in Flex
-Docs.
+See the [How to Customize FTW](https://www.sharetribe.com/docs/guides/how-to-customize-ftw/) guide
+in Flex Docs.
 
 ## Deploying to Heroku
 
-Every push to master is automatically deployed to the [heroku site](https://rather-rent-ftw.herokuapp.com/)
+Every push to master is automatically deployed to the
+[heroku site](https://rather-rent-ftw.herokuapp.com/)
 
 ## Documentation
 
