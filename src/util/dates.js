@@ -296,7 +296,7 @@ export const getSharpHours = (intl, timeZone, startTime, endTime) => {
 
   // Select a moment before startTime to find next possible sharp hour.
   // I.e. startTime might be a sharp hour.
-  const millisecondBeforeStartTime = new Date(startTime.getTime());
+  const millisecondBeforeStartTime = new Date(startTime.getTime() -1 );
   return findBookingUnitBoundaries({
     currentBoundary: findNextBoundary(timeZone, millisecondBeforeStartTime),
     startMoment: moment(startTime),
@@ -358,6 +358,7 @@ export const getSharpHoursCustom = (intl, timeZone, startTime, endTime) => {
  */
 export const getStartHours = (intl, timeZone, startTime, endTime) => {
   const hours = getSharpHours(intl, timeZone, startTime, endTime);
+  console.log('hours', hours)
   return hours.length < 2 ? hours : hours.slice(0, -1);
 };
 
@@ -591,7 +592,7 @@ export const dateIsAfter = (date, compareToDate) => {
 export const isInRange = (date, start, end, scope, timeZone) => {
   // Range usually ends with 00:00, and with day scope,
   // this means that exclusive end is wrongly taken into range.
-  const millisecondBeforeEndTime = new Date(end.getTime() - 0.5);
+  const millisecondBeforeEndTime = new Date(end.getTime() - 1);
   return timeZone
     ? moment(date)
       .tz(timeZone)
