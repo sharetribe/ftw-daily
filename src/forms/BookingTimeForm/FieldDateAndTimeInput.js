@@ -44,7 +44,6 @@ const getAvailableStartTimes = (intl, timeZone, bookingStart, timeSlotsOnSelecte
   if (timeSlotsOnSelectedDate.length === 0 || !timeSlotsOnSelectedDate[0] || !bookingStart) {
     return [];
   }
-  console.log('timeSlotsOnSelectedDate', timeSlotsOnSelectedDate)
   const bookingStartDate = resetToStartOfDay(bookingStart, timeZone);
 
   const allHours = timeSlotsOnSelectedDate.reduce((availableHours, t) => {
@@ -61,8 +60,19 @@ const getAvailableStartTimes = (intl, timeZone, bookingStart, timeSlotsOnSelecte
     const endLimit = dateIsAfter(endDate, nextDate) ? nextDate : endDate;
 
     const hours = getStartHours(intl, timeZone, startLimit, endLimit);
+
+    // if (hours && hours.length > 0) {
+    //   hours.unshift({
+    //     timestamp: +(moment(hours[0].timestamp).tz(timeZone).subtract(30, 'minutes').format('x')),
+    //     timeOfDay: moment(hours[0].timestamp).tz(timeZone).subtract(30, 'minutes').format('HH:mm'),
+    //   })
+    // }
+    // const modifiedAvailableStartTimes = [...hours.slice(0, (hours.length) - 1)];
+    // return availableHours.concat(modifiedAvailableStartTimes);
+
     return availableHours.concat(hours);
   }, []);
+  console.log('allHours',  allHours)
   return allHours;
 };
 
@@ -126,17 +136,17 @@ const getAllTimeValues = (
   const startTimes = selectedStartTime
     ? []
     : getAvailableStartTimes(
-      intl,
-      timeZone,
-      startDate,
-      getTimeSlots(timeSlots, startDate, timeZone)
-    );
+        intl,
+        timeZone,
+        startDate,
+        getTimeSlots(timeSlots, startDate, timeZone)
+      );
 
   const startTime = selectedStartTime
     ? selectedStartTime
     : startTimes.length > 0 && startTimes[0] && startTimes[0].timestamp
-      ? startTimes[0].timestamp
-      : null;
+    ? startTimes[0].timestamp
+    : null;
 
   const startTimeAsDate = startTime ? timestampToDate(startTime) : null;
 
@@ -148,8 +158,8 @@ const getAllTimeValues = (
   const endDate = selectedEndDate
     ? selectedEndDate
     : startTimeAsDate
-      ? new Date(findNextBoundaryCustom(timeZone, startTimeAsDate).getTime() - 1)
-      : null;
+    ? new Date(findNextBoundaryCustom(timeZone, startTimeAsDate).getTime() - 1)
+    : null;
 
   const selectedTimeSlot = timeSlots.find(t =>
     isInRange(startTimeAsDate, t.attributes.start, t.attributes.end)
@@ -168,8 +178,8 @@ const getMonthlyTimeSlots = (monthlyTimeSlots, date, timeZone) => {
   return !monthlyTimeSlots || Object.keys(monthlyTimeSlots).length === 0
     ? []
     : monthlyTimeSlots[monthId] && monthlyTimeSlots[monthId].timeSlots
-      ? monthlyTimeSlots[monthId].timeSlots
-      : [];
+    ? monthlyTimeSlots[monthId].timeSlots
+    : [];
 };
 
 const Next = props => {
@@ -277,8 +287,6 @@ class FieldDateAndTimeInput extends Component {
       timeSlotsOnSelectedDate,
       startDate
     );
-
-    console.log('firrrrrrrrst2222222222', new Date(startTime))
 
     form.batch(() => {
       form.change('bookingStartTime', startTime);
@@ -420,14 +428,14 @@ class FieldDateAndTimeInput extends Component {
 
     const isDayBlocked = timeSlotsOnSelectedMonth
       ? day =>
-        !timeSlotsOnSelectedMonth.find(timeSlot =>
-          isDayMomentInsideRange(
-            day,
-            timeSlot.attributes.start,
-            timeSlot.attributes.end,
-            timeZone
+          !timeSlotsOnSelectedMonth.find(timeSlot =>
+            isDayMomentInsideRange(
+              day,
+              timeSlot.attributes.start,
+              timeSlot.attributes.end,
+              timeZone
+            )
           )
-        )
       : () => false;
 
     // hours.unshift({
@@ -522,8 +530,8 @@ class FieldDateAndTimeInput extends Component {
             >
               {bookingStartDate ? (
                 availableStartTimes.map(p =>
-                  <option key={p.timeOfDay === '24:30' ? '00:30' : p.timeOfDay} value={p.timestamp}>
-                    {p.timeOfDay === '24:30' ? '00:30' : p.timeOfDay}
+                  <option key={p.timeOfDay === '24:00' ? '00:00' : p.timeOfDay === '24:30' ? '00:30' : p.timeOfDay} value={p.timestamp}>
+                     {p.timeOfDay === '24:00' ? '00:00' : p.timeOfDay === '24:30' ? '00:30' : p.timeOfDay}
                   </option>
                 )
               ) : (
@@ -546,10 +554,10 @@ class FieldDateAndTimeInput extends Component {
               {bookingStartDate && (bookingStartTime || startTime) ? (
                 availableEndTimes.map(p => {
                   return (
-                    <option key={p.timeOfDay === '24:30' ? '00:30' : p.timeOfDay} value={p.timestamp}>
-                      {p.timeOfDay === '24:30' ? '00:30' : p.timeOfDay}
-                    </option>
-                  )})
+                  <option key={p.timeOfDay === '24:30' ? '00:30' : p.timeOfDay} value={p.timestamp}>
+                    {p.timeOfDay === '24:30' ? '00:30' : p.timeOfDay}
+                  </option>
+                )})
               ) : (
                 <option>{placeholderTime}</option>
               )}
