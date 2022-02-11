@@ -35,7 +35,7 @@ in Flex Docs.
 
 ## Deploying to Heroku
 
-Every push to master is automatically deployed to the
+Every push to staging is automatically deployed to the
 [heroku site](https://rather-rent-ftw.herokuapp.com/)
 
 ## Documentation
