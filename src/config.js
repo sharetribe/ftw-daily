@@ -106,6 +106,11 @@ const siteFacebookPage = 'https://www.facebook.com/shrinedev/';
 
 // Social logins & SSO
 
+<<<<<<< HEAD
+=======
+// Social logins & SSO
+
+>>>>>>> 6cd98133265af73b146120c2fe419a6782a6e4c3
 // Note: Facebook app id is also used for tracking:
 // Facebook counts shares with app or page associated by this id
 // Currently it is unset, but you can read more about fb:app_id from

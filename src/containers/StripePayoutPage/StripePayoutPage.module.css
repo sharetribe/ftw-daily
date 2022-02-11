@@ -1,5 +1,12 @@
 @import '../../styles/customMediaQueries.css';
+<<<<<<< HEAD
+<<<<<<< HEAD:src/containers/StripePayoutPage/StripePayoutPage.module.css
 
+=======
+>>>>>>> 6cd98133265af73b146120c2fe419a6782a6e4c3:src/containers/PasswordChangePage/PasswordChangePage.module.css
+=======
+
+>>>>>>> 6cd98133265af73b146120c2fe419a6782a6e4c3
 .content {
   @media (--viewportMedium) {
     margin: 32px auto 0 auto;

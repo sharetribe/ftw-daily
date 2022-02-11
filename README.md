@@ -56,6 +56,23 @@ developing on Windows. These templates are made for Unix-like web services which
 environment type on host-services for web apps. Also, Flex Docs uses Unix-like commands in articles
 instead of DOS commands.
 
+Change `export` to `set` in the package.json file if you're using Windows/DOS. You need to do the
+change to "dev" and "dev-sever" commands.
+
+```
+"dev": "yarn run config-check&&set NODE_ENV=development&& set REACT_APP_DEV_API_SERVER_PORT=3500&&concurrently --kill-others \"yarn run dev-frontend\" \"yarn run dev-backend\""
+```
+
+```
+"dev-server": "set NODE_ENV=development&& set PORT=4000&& set REACT_APP_CANONICAL_ROOT_URL=http://localhost:4000&&yarn run build&&nodemon --watch server server/index.js"
+```
+
+We strongly recommend installing
+[Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/about), if you are
+developing on Windows. These templates are made for Unix-like web services which is the most common
+environment type on host-services for web apps. Also, Flex Docs uses Unix-like commands in articles
+instead of DOS commands.
+
 See the [How to Customize FTW](https://www.sharetribe.com/docs/guides/how-to-customize-ftw/) guide
 in Flex Docs.
 
