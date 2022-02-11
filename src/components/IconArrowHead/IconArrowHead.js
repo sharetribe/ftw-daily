@@ -2,7 +2,7 @@ import React from 'react';
 import { oneOf, string } from 'prop-types';
 import classNames from 'classnames';
 
-import css from './IconArrowHead.css';
+import css from './IconArrowHead.module.css';
 
 const DIRECTION_RIGHT = 'right';
 const DIRECTION_LEFT = 'left';

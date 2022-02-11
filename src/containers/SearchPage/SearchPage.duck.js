@@ -3,7 +3,13 @@ import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { convertUnitToSubUnit, unitDivisor } from '../../util/currency';
 import { formatDateStringToUTC, getExclusiveEndDate } from '../../util/dates';
+import { parse } from '../../util/urlHelpers';
 import config from '../../config';
+
+// Pagination page size might need to be dynamic on responsive page layouts
+// Current design has max 3 columns 12 is divisible by 2 and 3
+// So, there's enough cards to fill all columns on full pagination pages
+const RESULT_PAGE_SIZE = 24;
 
 // ================ Action types ================ //
 
@@ -199,4 +205,24 @@ export const searchMapListings = searchParams => (dispatch, getState, sdk) => {
       dispatch(searchMapListingsError(storableError(e)));
       throw e;
     });
+};
+
+export const loadData = (params, search) => {
+  const queryParams = parse(search, {
+    latlng: ['origin'],
+    latlngBounds: ['bounds'],
+  });
+  const { page = 1, address, origin, ...rest } = queryParams;
+  const originMaybe = config.sortSearchByDistance && origin ? { origin } : {};
+  return searchListings({
+    ...rest,
+    ...originMaybe,
+    page,
+    perPage: RESULT_PAGE_SIZE,
+    include: ['author', 'images'],
+    'fields.listing': ['title', 'geolocation', 'price'],
+    'fields.user': ['profile.displayName', 'profile.abbreviatedName'],
+    'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
+    'limit.images': 1,
+  });
 };

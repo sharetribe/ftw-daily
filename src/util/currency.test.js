@@ -215,10 +215,10 @@ describe('currency utils', () => {
 
   describe('convertMoneyToNumber(value)', () => {
     it('Money as value', () => {
-      expect(convertMoneyToNumber(new Money(10, 'USD'))).toBeCloseTo(0.1);
-      expect(convertMoneyToNumber(new Money(1000, 'USD'))).toBeCloseTo(10);
-      expect(convertMoneyToNumber(new Money(9900, 'USD'))).toBeCloseTo(99);
-      expect(convertMoneyToNumber(new Money(10099, 'USD'))).toBeCloseTo(100.99);
+      expect(convertMoneyToNumber(new Money(10, 'USD'))).toEqual(0.1);
+      expect(convertMoneyToNumber(new Money(1000, 'USD'))).toEqual(10);
+      expect(convertMoneyToNumber(new Money(9900, 'USD'))).toEqual(99);
+      expect(convertMoneyToNumber(new Money(10099, 'USD'))).toEqual(100.99);
     });
 
     it('Wrong type of a parameter', () => {

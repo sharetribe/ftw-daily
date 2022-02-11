@@ -2,11 +2,11 @@
 
 exports[`EditListingPoliciesForm matches snapshot 1`] = `
 <ReactFinalForm
+  disabled={false}
   dispatch={[Function]}
   intl={
     Object {
       "formatDate": [Function],
-      "formatHTMLMessage": [Function],
       "formatMessage": [Function],
       "formatNumber": [Function],
       "formatPlural": [Function],
@@ -17,6 +17,7 @@ exports[`EditListingPoliciesForm matches snapshot 1`] = `
   }
   onSubmit={[Function]}
   publicData={Object {}}
+  ready={false}
   render={[Function]}
   saveActionMsg="Save rules"
   selectedPlace={null}

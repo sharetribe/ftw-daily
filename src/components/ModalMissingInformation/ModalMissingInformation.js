@@ -10,7 +10,7 @@ import { Modal } from '../../components';
 
 import EmailReminder from './EmailReminder';
 import StripeAccountReminder from './StripeAccountReminder';
-import css from './ModalMissingInformation.css';
+import css from './ModalMissingInformation.module.css';
 
 const MISSING_INFORMATION_MODAL_WHITELIST = [
   'LoginPage',
@@ -18,7 +18,7 @@ const MISSING_INFORMATION_MODAL_WHITELIST = [
   'ContactDetailsPage',
   'EmailVerificationPage',
   'PasswordResetPage',
-  'PayoutPreferencesPage',
+  'StripePayoutPage',
 ];
 
 const EMAIL_VERIFICATION = 'EMAIL_VERIFICATION';
@@ -139,6 +139,7 @@ class ModalMissingInformation extends Component {
             hasSeenMissingInformationReminder: true,
           });
         }}
+        usePortal
         onManageDisableScrolling={onManageDisableScrolling}
         closeButtonMessage={closeButtonMessage}
       >

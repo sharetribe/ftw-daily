@@ -37,8 +37,10 @@ import defaultMessages from './translations/en.json';
 // e.g. for French: import 'moment/locale/fr';
 
 // Step 3:
-// If you are using a non-english locale, point `messagesInLocale` to correct .json file
-import messagesInLocale from './translations/fr.json';
+// If you are using a non-english locale, point `messagesInLocale` to correct .json file.
+// Remove "const messagesInLocale" and add import for the correct locale:
+// import messagesInLocale from './translations/fr.json';
+const messagesInLocale = {};
 
 // If translation key is missing from `messagesInLocale` (e.g. fr.json),
 // corresponding key will be added to messages from `defaultMessages` (en.json)
@@ -131,7 +133,7 @@ ServerApp.propTypes = { url: string.isRequired, context: any.isRequired, store: 
  *  - {String} body: Rendered application body of the given route
  *  - {Object} head: Application head metadata from react-helmet
  */
-export const renderApp = (url, serverContext, preloadedState) => {
+export const renderApp = (url, serverContext, preloadedState, collectChunks) => {
   // Don't pass an SDK instance since we're only rendering the
   // component tree with the preloaded store state and components
   // shouldn't do any SDK calls in the (server) rendering lifecycle.
@@ -139,9 +141,13 @@ export const renderApp = (url, serverContext, preloadedState) => {
 
   const helmetContext = {};
 
-  const body = ReactDOMServer.renderToString(
+  // When rendering the app on server, we wrap the app with webExtractor.collectChunks
+  // This is needed to figure out correct chunks/scripts to be included to server-rendered page.
+  // https://loadable-components.com/docs/server-side-rendering/#3-setup-chunkextractor-server-side
+  const WithChunks = collectChunks(
     <ServerApp url={url} context={serverContext} helmetContext={helmetContext} store={store} />
   );
+  const body = ReactDOMServer.renderToString(WithChunks);
   const { helmet: head } = helmetContext;
   return { head, body };
 };

@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import includes from 'lodash/includes';
 
-import css from './PropertyGroup.css';
+import css from './PropertyGroup.module.css';
 
 const checkSelected = (options, selectedOptions) => {
   return options.map(option => ({

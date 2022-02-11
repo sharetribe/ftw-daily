@@ -2,7 +2,6 @@ const path = require('path');
 const fs = require('fs');
 const _ = require('lodash');
 const { types } = require('sharetribe-flex-sdk');
-const { renderApp } = require('./importer');
 
 const buildPath = path.resolve(__dirname, '..', 'build');
 
@@ -91,8 +90,11 @@ const replacer = (key = null, value) => {
   return types.replacer(key, cleanedValue);
 };
 
-exports.render = function(requestUrl, context, preloadedState) {
-  const { head, body } = renderApp(requestUrl, context, preloadedState);
+exports.render = function(requestUrl, context, preloadedState, renderApp, webExtractor) {
+  // Bind webExtractor as "this" for collectChunks call.
+  const collectWebChunks = webExtractor.collectChunks.bind(webExtractor);
+
+  const { head, body } = renderApp(requestUrl, context, preloadedState, collectWebChunks);
 
   // Preloaded state needs to be passed for client side too.
   // For security reasons we ensure that preloaded state is considered as a string
@@ -108,7 +110,7 @@ exports.render = function(requestUrl, context, preloadedState) {
       <script>window.__PRELOADED_STATE__ = ${JSON.stringify(serializedState)};</script>
   `;
 
-  // We want to precicely control where the analytics script is
+  // We want to precisely control where the analytics script is
   // injected in the HTML file so we can catch all events as early as
   // possible. This is why we inject the GA script separately from
   // react-helmet. This script also ensures that all the GA scripts
@@ -133,6 +135,9 @@ exports.render = function(requestUrl, context, preloadedState) {
     script: head.script.toString(),
     preloadedStateScript,
     googleAnalyticsScript,
+    ssrStyles: webExtractor.getStyleTags(),
+    ssrLinks: webExtractor.getLinkTags(),
+    ssrScripts: webExtractor.getScriptTags(),
     body,
   });
 };

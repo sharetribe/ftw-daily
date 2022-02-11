@@ -9,7 +9,7 @@ import { formatMoney } from '../../util/currency';
 import { ensureListing } from '../../util/data';
 import { ResponsiveImage } from '../../components';
 
-import css from './SearchMapInfoCard.css';
+import css from './SearchMapInfoCard.module.css';
 
 // ListingCard is the listing info without overlayview or carousel controls
 const ListingCard = props => {

@@ -1,0 +1,141 @@
+@import '../../styles/propertySets.css';
+
+.root {
+  @apply --marketplaceButtonStyles;
+
+  /* Clear padding that is set for link elements looking like buttons */
+  padding: 0;
+}
+
+.primaryButtonRoot {
+  @apply --marketplaceButtonStylesPrimary;
+
+  /* Clear padding that is set for link elements looking like buttons */
+  padding: 0;
+}
+
+.secondaryButtonRoot {
+  @apply --marketplaceButtonStylesSecondary;
+
+  /* We must lift up the text from the center since it looks better with
+   the button border. Also clears the top padding set for link
+   elements looking like buttons */
+  padding: 0 0 2px 0;
+}
+
+.inlineTextButtonRoot {
+  @apply --marketplaceLinkStyles;
+}
+
+.primaryButton {
+  /* Class handle for primary button state styles */
+}
+.secondaryButton {
+  /* Class handle for secondary button state styles */
+}
+
+.inProgress {
+  padding: 0;
+
+  &:disabled {
+    background-color: var(--marketplaceColor);
+  }
+}
+
+.primaryButton.inProgress:disabled {
+  background-color: var(--successColor);
+}
+
+.secondaryButton.inProgress:disabled {
+  background-color: var(--matterColorLight);
+}
+
+.ready {
+  padding: 0;
+
+  &:disabled {
+    background-color: var(--marketplaceColor);
+  }
+}
+
+.primaryButton.ready:disabled {
+  background-color: var(--successColor);
+}
+
+.secondaryButton.ready:disabled {
+  background-color: var(--matterColorLight);
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  stroke: var(--matterColorLight);
+  stroke-width: 3px;
+}
+
+.checkmark {
+  width: 24px;
+  height: 24px;
+  stroke: var(--matterColorLight);
+
+  /* Animation */
+  animation-name: checkmarkAnimation;
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
+}
+
+@keyframes checkmarkAnimation {
+  0% {
+    opacity: 0;
+    transform: scale(0.75);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.secondaryButton .spinner {
+  stroke: var(--matterColorAnti);
+}
+
+.secondaryButton .checkmark {
+  stroke: var(--matterColorAnti);
+}
+
+/* Social logins && SSO buttons */
+
+.socialButtonRoot {
+  @apply --marketplaceButtonStyles;
+  min-height: 48px;
+  background-color: var(--matterColorLight);
+
+  color: var(--matterColorDark);
+  font-weight: var(--fontWeightMedium);
+  font-size: 14px;
+
+  border: 1px solid #d2d2d2;
+  border-radius: 4px;
+
+  /* We need to add this to position the icon inside button */
+  position: relative;
+
+  @media (--viewportMedium) {
+    padding: 0;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: var(--matterColorLight);
+  }
+  &:disabled {
+    background-color: var(--matterColorNegative);
+  }
+}
+
+.socialButton {
+}

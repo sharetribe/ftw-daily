@@ -5,7 +5,12 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
   scrollingDisabled={false}
   title="EditListingPage.titleCreateListing"
 >
-  <withRouter(Connect(TopbarContainerComponent)) />
+  <withRouter(Connect(TopbarContainerComponent))
+    className="topbar"
+    desktopClassName="desktopTopbar"
+    mobileClassName="mobileTopbar"
+    mobileRootClassName="mobileTopbar"
+  />
   <withViewport(injectIntl(EditListingWizard))
     availability={
       Object {
@@ -16,6 +21,7 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
         "onFetchBookings": [Function],
       }
     }
+    className="wizard"
     currentUser={null}
     errors={
       Object {
@@ -28,6 +34,7 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
       }
     }
     fetchInProgress={false}
+    getAccountLinkInProgress={null}
     history={
       Object {
         "push": [Function],
@@ -48,6 +55,7 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
     newListingPublished={false}
     onChange={[Function]}
     onCreateListingDraft={[Function]}
+    onGetStripeConnectAccountLink={[Function]}
     onImageUpload={[Function]}
     onManageDisableScrolling={[Function]}
     onPayoutDetailsFormChange={[Function]}
@@ -64,6 +72,10 @@ exports[`EditListingPageComponent matches snapshot 1`] = `
         "type": "new",
       }
     }
+    stripeAccount={null}
+    stripeAccountError={null}
+    stripeAccountFetched={null}
+    stripeAccountLinkError={null}
   />
 </Page>
 `;

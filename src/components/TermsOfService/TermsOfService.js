@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import css from './TermsOfService.css';
+import css from './TermsOfService.module.css';
 
 const TermsOfService = props => {
   const { rootClassName, className } = props;

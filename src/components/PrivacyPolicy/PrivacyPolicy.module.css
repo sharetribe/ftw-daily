@@ -1,0 +1,26 @@
+@import '../../styles/propertySets.css';
+
+.root {
+  & p {
+    @apply --marketplaceH4FontStyles;
+  }
+  & h2 {
+    /* Adjust heading margins to work with the reduced body font size */
+    margin: 29px 0 13px 0;
+
+    @media (--viewportMedium) {
+      margin: 32px 0 0 0;
+    }
+  }
+
+  & .lastUpdated {
+    @apply --marketplaceBodyFontStyles;
+    margin-top: 0;
+    margin-bottom: 55px;
+
+    @media (--viewportMedium) {
+      margin-top: 0;
+      margin-bottom: 54px;
+    }
+  }
+}

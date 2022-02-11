@@ -2,7 +2,7 @@ import React from 'react';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
-import { arrayOf, bool, func, node, oneOfType, shape, string } from 'prop-types';
+import { arrayOf, array, bool, func, node, oneOfType, shape, string } from 'prop-types';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
 import { propTypes, LISTING_STATE_CLOSED, LINE_ITEM_NIGHT, LINE_ITEM_DAY } from '../../util/types';
@@ -12,7 +12,7 @@ import config from '../../config';
 import { ModalInMobile, Button } from '../../components';
 import { BookingDatesForm } from '../../forms';
 
-import css from './BookingPanel.css';
+import css from './BookingPanel.module.css';
 
 // This defines when ModalInMobile shows content as Modal
 const MODAL_BREAKPOINT = 1023;
@@ -65,6 +65,10 @@ const BookingPanel = props => {
     history,
     location,
     intl,
+    onFetchTransactionLineItems,
+    lineItems,
+    fetchLineItemsInProgress,
+    fetchLineItemsError,
   } = props;
 
   const price = listing.attributes.price;
@@ -122,9 +126,14 @@ const BookingPanel = props => {
             unitType={unitType}
             onSubmit={onSubmit}
             price={price}
+            listingId={listing.id}
             isOwnListing={isOwnListing}
             timeSlots={timeSlots}
             fetchTimeSlotsError={fetchTimeSlotsError}
+            onFetchTransactionLineItems={onFetchTransactionLineItems}
+            lineItems={lineItems}
+            fetchLineItemsInProgress={fetchLineItemsInProgress}
+            fetchLineItemsError={fetchLineItemsError}
           />
         ) : null}
       </ModalInMobile>
@@ -145,11 +154,11 @@ const BookingPanel = props => {
           >
             <FormattedMessage id="BookingPanel.ctaButtonMessage" />
           </Button>
-        ) : (
+        ) : isClosed ? (
           <div className={css.closedListingButton}>
             <FormattedMessage id="BookingPanel.closedListingButtonText" />
           </div>
-        )}
+        ) : null}
       </div>
     </div>
   );
@@ -164,6 +173,8 @@ BookingPanel.defaultProps = {
   unitType: config.bookingUnitType,
   timeSlots: null,
   fetchTimeSlotsError: null,
+  lineItems: null,
+  fetchLineItemsError: null,
 };
 
 BookingPanel.propTypes = {
@@ -180,6 +191,10 @@ BookingPanel.propTypes = {
   onManageDisableScrolling: func.isRequired,
   timeSlots: arrayOf(propTypes.timeSlot),
   fetchTimeSlotsError: propTypes.error,
+  onFetchTransactionLineItems: func.isRequired,
+  lineItems: array,
+  fetchLineItemsInProgress: bool.isRequired,
+  fetchLineItemsError: propTypes.error,
 
   // from withRouter
   history: shape({

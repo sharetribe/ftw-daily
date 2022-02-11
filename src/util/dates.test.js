@@ -82,11 +82,6 @@ describe('date utils', () => {
   });
 
   describe('minutesBetween()', () => {
-    it('should fail if end Date is before start Date', () => {
-      const start = new Date(2017, 0, 2);
-      const end = new Date(2017, 0, 1);
-      expect(() => minutesBetween(start, end)).toThrow('End Date cannot be before start Date');
-    });
     it('should handle equal start and end Dates', () => {
       const d = new Date(2017, 0, 1, 10, 35, 0);
       expect(minutesBetween(d, d)).toEqual(0);

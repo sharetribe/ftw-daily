@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import css from './IconSocialMediaTwitter.css';
+import css from './IconSocialMediaTwitter.module.css';
 
 const IconSocialMediaTwitter = props => {
   const { rootClassName, className } = props;

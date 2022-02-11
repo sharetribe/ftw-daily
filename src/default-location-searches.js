@@ -7,7 +7,7 @@ const { LatLng, LatLngBounds } = sdkTypes;
 //
 // Each item in the array should be an object with a unique `id` (String) and a
 // `predictionPlace` (util.types.place) properties.
-export default [
+const defaultLocations = [
   {
     id: 'default-detroit',
     predictionPlace: {
@@ -16,3 +16,4 @@ export default [
     },
   },
 ];
+export default defaultLocations;

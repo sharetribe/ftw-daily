@@ -7,7 +7,7 @@ import { obfuscatedCoordinates } from '../../util/maps';
 import { Map } from '../../components';
 import config from '../../config';
 
-import css from './ListingPage.css';
+import css from './ListingPage.module.css';
 
 class SectionMapMaybe extends Component {
   constructor(props) {

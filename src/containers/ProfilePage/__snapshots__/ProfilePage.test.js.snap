@@ -26,12 +26,15 @@ exports[`ProfilePage matches snapshot 1`] = `
       />
     </LayoutWrapperTopbar>
     <LayoutWrapperSideNav
-      className={null}
+      className="aside"
       rootClassName={null}
       tabs={null}
     >
-      <div>
+      <div
+        className="asideContent"
+      >
         <AvatarLarge
+          className="avatar"
           disableProfileLink={true}
           user={
             Object {
@@ -51,8 +54,10 @@ exports[`ProfilePage matches snapshot 1`] = `
             }
           }
         />
-        <h1>
-          <FormattedMessage
+        <h1
+          className="mobileHeading"
+        >
+          <MemoizedFormattedMessage
             id="ProfilePage.mobileHeading"
             values={
               Object {
@@ -68,8 +73,10 @@ exports[`ProfilePage matches snapshot 1`] = `
       rootClassName={null}
     >
       <div>
-        <h1>
-          <FormattedMessage
+        <h1
+          className="desktopHeading"
+        >
+          <MemoizedFormattedMessage
             id="ProfilePage.desktopHeading"
             values={
               Object {
@@ -78,9 +85,11 @@ exports[`ProfilePage matches snapshot 1`] = `
             }
           />
         </h1>
-        <div>
+        <div
+          className="desktopReviews"
+        >
           <ButtonTabNavHorizontal
-            className={null}
+            className="desktopReviewsTabNav"
             rootClassName={null}
             skin="light"
             tabClassName={null}
@@ -90,8 +99,10 @@ exports[`ProfilePage matches snapshot 1`] = `
                 Object {
                   "onClick": [Function],
                   "selected": true,
-                  "text": <h3>
-                    <FormattedMessage
+                  "text": <h3
+                    className="desktopReviewsTitle"
+                  >
+                    <Memo(MemoizedFormattedMessage)
                       id="ProfilePage.reviewsOfProviderTitle"
                       values={
                         Object {
@@ -104,8 +115,10 @@ exports[`ProfilePage matches snapshot 1`] = `
                 Object {
                   "onClick": [Function],
                   "selected": false,
-                  "text": <h3>
-                    <FormattedMessage
+                  "text": <h3
+                    className="desktopReviewsTitle"
+                  >
+                    <Memo(MemoizedFormattedMessage)
                       id="ProfilePage.reviewsOfCustomerTitle"
                       values={
                         Object {

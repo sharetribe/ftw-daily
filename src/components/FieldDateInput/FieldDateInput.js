@@ -12,7 +12,7 @@ import { ValidationError } from '../../components';
 import { propTypes } from '../../util/types';
 
 import DateInput from './DateInput';
-import css from './FieldDateInput.css';
+import css from './FieldDateInput.module.css';
 
 const MAX_MOBILE_SCREEN_WIDTH = 768;
 
@@ -47,7 +47,7 @@ class FieldDateInputComponent extends Component {
       [css.pickerError]: hasError,
     });
 
-    const { onBlur, onFocus, type, ...restOfInput } = input;
+    const { onBlur, onFocus, type, checked, ...restOfInput } = input;
     const inputProps = {
       onBlur: input.onBlur,
       onFocus: input.onFocus,

@@ -12,6 +12,7 @@ import { createResourceLocatorString, pathByRouteName } from '../../util/routes'
 import { propTypes } from '../../util/types';
 import {
   Button,
+  LimitedAccessBanner,
   Logo,
   Modal,
   ModalMissingInformation,
@@ -23,7 +24,7 @@ import { TopbarSearchForm } from '../../forms';
 
 import MenuIcon from './MenuIcon';
 import SearchIcon from './SearchIcon';
-import css from './Topbar.css';
+import css from './Topbar.module.css';
 
 const MAX_MOBILE_SCREEN_WIDTH = 768;
 
@@ -134,6 +135,7 @@ class TopbarComponent extends Component {
       mobileRootClassName,
       mobileClassName,
       isAuthenticated,
+      authScopes,
       authInProgress,
       currentUser,
       currentUserHasListings,
@@ -189,6 +191,13 @@ class TopbarComponent extends Component {
 
     return (
       <div className={classes}>
+        <LimitedAccessBanner
+          isAuthenticated={isAuthenticated}
+          authScopes={authScopes}
+          currentUser={currentUser}
+          onLogout={this.handleLogout}
+          currentPage={currentPage}
+        />
         <div className={classNames(mobileRootClassName || css.container, mobileClassName)}>
           <Button
             rootClassName={css.menu}
@@ -231,6 +240,7 @@ class TopbarComponent extends Component {
           id="TopbarMobileMenu"
           isOpen={isMobileMenuOpen}
           onClose={this.handleMobileMenuClose}
+          usePortal
           onManageDisableScrolling={onManageDisableScrolling}
         >
           {authInProgress ? null : mobileMenu}
@@ -240,6 +250,7 @@ class TopbarComponent extends Component {
           containerClassName={css.modalContainer}
           isOpen={isMobileSearchOpen}
           onClose={this.handleMobileSearchClose}
+          usePortal
           onManageDisableScrolling={onManageDisableScrolling}
         >
           <div className={css.searchContainer}>
@@ -283,9 +294,10 @@ TopbarComponent.defaultProps = {
   currentUserHasOrders: null,
   currentPage: null,
   sendVerificationEmailError: null,
+  authScopes: [],
 };
 
-const { func, number, shape, string } = PropTypes;
+const { array, func, number, shape, string } = PropTypes;
 
 TopbarComponent.propTypes = {
   className: string,
@@ -294,6 +306,7 @@ TopbarComponent.propTypes = {
   mobileRootClassName: string,
   mobileClassName: string,
   isAuthenticated: bool.isRequired,
+  authScopes: array,
   authInProgress: bool.isRequired,
   currentUser: propTypes.currentUser,
   currentUserHasListings: bool.isRequired,

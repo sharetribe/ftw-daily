@@ -19,7 +19,7 @@ import {
   EditListingPricingPanel,
 } from '../../components';
 
-import css from './EditListingWizard.css';
+import css from './EditListingWizard.module.css';
 
 export const AVAILABILITY = 'availability';
 export const DESCRIPTION = 'description';
@@ -150,6 +150,9 @@ const EditListingWizardTab = props => {
       onChange,
       panelUpdated: updatedTab === tab,
       updateInProgress,
+      // newListingPublished and fetchInProgress are flags for the last wizard tab
+      ready: newListingPublished,
+      disabled: fetchInProgress,
     };
   };
 
@@ -244,13 +247,10 @@ const EditListingWizardTab = props => {
         ? 'EditListingWizard.saveNewPhotos'
         : 'EditListingWizard.saveEditPhotos';
 
-      // newListingPublished and fetchInProgress are flags for the last wizard tab
       return (
         <EditListingPhotosPanel
           {...panelProps(PHOTOS)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
-          newListingPublished={newListingPublished}
-          fetchInProgress={fetchInProgress}
           images={images}
           onImageUpload={onImageUpload}
           onRemoveImage={onRemoveImage}

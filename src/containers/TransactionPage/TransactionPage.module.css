@@ -1,0 +1,34 @@
+@import '../../styles/customMediaQueries.css';
+
+.root {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.loading {
+  margin-left: 24px;
+  margin-right: 24px;
+}
+
+.error {
+  margin-left: 24px;
+  margin-right: 24px;
+  color: var(--failColor);
+}
+
+.tabContent {
+  display: none;
+}
+
+.tabContentVisible {
+  display: block;
+}
+
+.footer {
+  display: none;
+
+  @media (--viewportLarge) {
+    display: block;
+  }
+}

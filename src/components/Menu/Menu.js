@@ -21,19 +21,18 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import { MenuContent, MenuLabel } from '../../components';
-import css from './Menu.css';
+import css from './Menu.module.css';
 
 const KEY_CODE_ESCAPE = 27;
 const CONTENT_PLACEMENT_OFFSET = 0;
 const CONTENT_TO_LEFT = 'left';
 const CONTENT_TO_RIGHT = 'right';
+const MAX_MOBILE_SCREEN_WIDTH = 768;
 
 const isControlledMenu = (isOpenProp, onToggleActiveProp) => {
   return isOpenProp !== null && onToggleActiveProp !== null;
 };
 
-// This should work, but it doesn't <div className="foo" onClick={() => {}} role="button" />
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 class Menu extends Component {
   constructor(props) {
     super(props);
@@ -103,12 +102,24 @@ class Menu extends Component {
 
   positionStyleForMenuContent(contentPosition) {
     if (this.menu && this.menuContent) {
+      const windowWidth = window.innerWidth;
+      const rect = this.menu.getBoundingClientRect();
+
       // Calculate wether we should show the menu to the left of the component or right
-      const distanceToRight = window.innerWidth - this.menu.getBoundingClientRect().right;
+      const distanceToRight = windowWidth - rect.right;
       const menuWidth = this.menu.offsetWidth;
       const contentWidthBiggerThanLabel = this.menuContent.offsetWidth - menuWidth;
       const usePositionLeftFromLabel = contentPosition === CONTENT_TO_LEFT;
       const contentPlacementOffset = this.props.contentPlacementOffset;
+
+      if (windowWidth <= MAX_MOBILE_SCREEN_WIDTH) {
+        // Take full screen width on mobile
+        return {
+          left: -1 * (rect.left - 24),
+          width: 'calc(100vw - 48px)',
+        };
+      }
+
       // Render menu content to the left according to the contentPosition
       // prop or if the content does not fit to the right. Otherwise render to
       // the right.
@@ -116,7 +127,11 @@ class Menu extends Component {
         ? { right: contentPlacementOffset, minWidth: menuWidth }
         : { left: contentPlacementOffset, minWidth: menuWidth };
     }
-    return {};
+
+    // When the MenuContent is rendered for the first time
+    // (for the sake of width calculation),
+    // move it outside of viewport to prevent possible overflow.
+    return this.state.isOpen ? {} : { left: '-10000px' };
   }
 
   positionStyleForArrow(isPositionedRight) {
@@ -189,7 +204,6 @@ class Menu extends Component {
     );
   }
 }
-/* eslint-enable jsx-a11y/no-static-element-interactions */
 
 Menu.defaultProps = {
   className: null,

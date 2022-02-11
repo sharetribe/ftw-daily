@@ -1,0 +1,10 @@
+.root {
+}
+
+.marketplaceStroke {
+  stroke: var(--marketplaceColor);
+}
+
+.attentionStroke {
+  stroke: var(--attentionColor);
+}

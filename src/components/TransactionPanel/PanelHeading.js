@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { createSlug, stringify } from '../../util/urlHelpers';
 import { NamedLink } from '../../components';
 
-import css from './TransactionPanel.css';
+import css from './TransactionPanel.module.css';
 
 export const HEADING_ENQUIRED = 'enquired';
 export const HEADING_PAYMENT_PENDING = 'pending-payment';
@@ -13,7 +13,7 @@ export const HEADING_REQUESTED = 'requested';
 export const HEADING_ACCEPTED = 'accepted';
 export const HEADING_DECLINED = 'declined';
 export const HEADING_CANCELED = 'canceled';
-export const HEADING_DELIVERED = 'deliveded';
+export const HEADING_DELIVERED = 'delivered';
 
 const createListingLink = (listingId, label, listingDeleted, searchParams = {}, className = '') => {
   if (!listingDeleted) {
@@ -260,7 +260,7 @@ const PanelHeading = props => {
         />
       );
     default:
-      console.warning('Unknown state given to panel heading.');
+      console.warn('Unknown state given to panel heading.');
       return null;
   }
 };

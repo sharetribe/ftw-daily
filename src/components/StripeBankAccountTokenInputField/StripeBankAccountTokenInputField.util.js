@@ -4,6 +4,8 @@ import config from '../../config';
 
 // Bank account number (used in countries where IBAN is not in use)
 export const ACCOUNT_NUMBER = 'accountNumber';
+// Required for Japan
+export const ACCOUNT_OWNER_NAME = 'accountOwnerName';
 // Australian equivalent for routing number
 export const BSB = 'bsb';
 // Needed for creating full routing number in Canada
@@ -14,8 +16,14 @@ export const TRANSIT_NUMBER = 'transitNumber';
 export const CLEARING_CODE = 'clearingCode';
 // Needed for creating full routing number in Hong Kong and Singapore
 export const BRANCH_CODE = 'branchCode';
-// Needed for creating full routing number in Singapore
+// Required for Japan
+export const BRANCH_NAME = 'branchName';
+// Required for Japan
+export const BANK_NAME = 'bankName';
+// Needed for creating full routing number in e.g. Singapore
 export const BANK_CODE = 'bankCode';
+// Clave Bancaria Estandarizada (standardized banking cipher) used in Mexico
+export const CLABE = 'clabe';
 // International bank account number (e.g. EU countries use this)
 export const IBAN = 'iban';
 // Routing number to separate bank account in different areas
@@ -30,12 +38,16 @@ export const BANK_ACCOUNT_INPUTS = [
   TRANSIT_NUMBER,
   INSTITUTION_NUMBER,
   CLEARING_CODE,
-  BRANCH_CODE,
+  BANK_NAME,
   BANK_CODE,
+  BRANCH_NAME,
+  BRANCH_CODE,
   SORT_CODE,
   ROUTING_NUMBER,
+  ACCOUNT_OWNER_NAME,
   ACCOUNT_NUMBER,
   IBAN,
+  CLABE,
 ];
 
 export const supportedCountries = config.stripe.supportedCountries.map(c => c.code);
@@ -153,15 +165,27 @@ export const mapInputsToStripeAccountKeys = (country, values) => {
   switch (country) {
     case 'AT':
     case 'BE':
+    case 'BG':
+    case 'CY':
+    case 'CZ':
     case 'DK':
+    case 'EE':
     case 'FI':
     case 'FR':
     case 'DE':
+    case 'GR':
     case 'IE':
     case 'IT':
+    case 'LV':
+    case 'LT':
     case 'LU':
+    case 'MT':
     case 'NL':
+    case 'PL':
     case 'PT':
+    case 'RO':
+    case 'SK':
+    case 'SI':
     case 'ES':
     case 'SE':
     case 'CH':
@@ -210,6 +234,19 @@ export const mapInputsToStripeAccountKeys = (country, values) => {
         account_number: cleanedString(values[ACCOUNT_NUMBER]),
       };
 
+    case 'JP':
+      return {
+        bank_name: values[BANK_NAME],
+        branch_name: values[BRANCH_NAME],
+        routing_number: cleanedString(values[BANK_CODE]).concat(values[BRANCH_CODE]),
+        account_number: cleanedString(values[ACCOUNT_NUMBER]),
+        account_holder_name: values[ACCOUNT_OWNER_NAME],
+      };
+
+    case 'MX':
+      return {
+        account_number: cleanedString(values[CLABE]),
+      };
     default:
       throw new Error(`Not supported country (${country}) given to validator`);
   }

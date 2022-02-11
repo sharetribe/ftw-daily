@@ -22,7 +22,9 @@ export const isSafeNumber = decimalValue => {
 // Get the minor unit divisor for the given currency
 export const unitDivisor = currency => {
   if (!has(subUnitDivisors, currency)) {
-    throw new Error(`No minor unit divisor defined for currency: ${currency}`);
+    throw new Error(
+      `No minor unit divisor defined for currency: ${currency} in currency-config.js`
+    );
   }
   return subUnitDivisors[currency];
 };

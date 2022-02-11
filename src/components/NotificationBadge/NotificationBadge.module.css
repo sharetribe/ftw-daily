@@ -1,0 +1,31 @@
+@import '../../styles/propertySets.css';
+
+.root {
+  /* Font */
+  @apply --marketplaceH6FontStyles;
+  color: var(--matterColorLight);
+  text-align: center;
+
+  background-color: var(--failColor);
+
+  /* Layout of a red dot */
+  display: inline-block;
+  width: auto;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  padding-right: 6px;
+  padding-left: 7px;
+  margin-left: 4px;
+
+  /* Font margins off */
+  margin-top: 0;
+  margin-bottom: 0;
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 0;
+
+    top: -10px;
+    position: relative;
+  }
+}

@@ -1,0 +1,104 @@
+
+{{~#*inline "format-money"~}}
+{{money-amount money}} {{money.currency}}
+{{~/inline~}}
+
+{{~#*inline "format-date"~}}
+{{date date format="MMM d, YYYY" tz="Etc/UTC"}}
+{{~/inline~}}
+
+<html>
+  <head>
+    <style type="text/css">
+     table {
+       border-collapse: collapse;
+     }
+     .left {
+       text-align: left;
+     }
+     .right {
+       text-align: right;
+       padding-left: 20px;
+     }
+     .bottom-row > td {
+       padding-bottom: 5px;
+     }
+     .top-row {
+       border-top: 1px solid #CCC;
+     }
+     .top-row > td,
+     .top-row > th
+     {
+       padding-top: 5px;
+     }
+    </style>
+  </head>
+  <body>
+    {{#with transaction}}
+    <h1>You have been paid {{> format-money money=payout-total}}</h1>
+
+    <p>We have sent you {{> format-money money=payout-total}} for the booking of {{listing.title}} from {{> format-date date=booking.start}} to {{> format-date date=booking.end}} by {{customer.display-name}}. It might take up to 7 days for the money to reach your bank account.</p>
+
+    <p>Here's the breakdown.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <td class="left">Start date</td>
+          <td class="right">End date</td>
+        </tr>
+        <tr>
+          <th class="left">{{date booking.start format="EEEE" tz="Etc/UTC"}}</th>
+          <th class="right">{{date booking.end format="EEEE" tz="Etc/UTC"}}</th>
+        </tr>
+        <tr class="bottom-row">
+          <th class="left">{{date booking.start format="MMM d" tz="Etc/UTC"}}</th>
+          <th class="right">{{date booking.end format="MMM d" tz="Etc/UTC"}}</th>
+        </tr>
+      </thead>
+      <tbody>
+      {{#each tx-line-items}}
+        {{#contains include-for "provider"}}
+          {{#eq "line-item/night" code}}
+            {{#if seats}}
+            <tr class="top-row">
+              <td colspan="2">{{> format-money money=unit-price}} &times; {{number units}} {{inflect units "night" "nights"}}</td>
+            </tr>
+            <tr class="bottom-row">
+              <td colspan="2">Seats &times; {{number seats}}</td>
+            </tr>
+            {{else}}
+            <tr class="top-row bottom-row">
+              <td colspan="2">{{> format-money money=unit-price}} &times; {{number quantity}} {{inflect quantity "night" "nights"}}</td>
+            </tr>
+            {{/if}}
+            <tr class="top-row">
+              <th class="left">Subtotal</th>
+              <th class="right">{{> format-money money=line-total}}</th>
+            </tr>
+          {{/eq}}
+
+          {{#eq "line-item/provider-commission" code}}
+            <tr class="bottom-row">
+              <td>{{marketplace.name}} fee</td>
+              <td class="right">{{> format-money money=line-total}}</td>
+            </tr>
+          {{/eq}}
+        {{/contains}}
+      {{/each}}
+      </tbody>
+      <tfoot>
+        <tr class="top-row">
+          <th class="left">You'll make</th>
+          <th class="right">{{> format-money money=payout-total}}</th>
+        </tr>
+      </tfoot>
+    </table>
+
+    {{/with}}
+
+    <hr />
+
+    <p>You have received this email notification because you are a member of {{marketplace.name}}. If you no longer wish to receive these emails, please contact {{marketplace.name}} team.</p>
+  </body>
+</html>

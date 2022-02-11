@@ -1,0 +1,377 @@
+@import '../../styles/propertySets.css';
+
+.coverEverything {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.root {
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  /* Remove link's hover effect */
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.menuOverlayWrapper {
+  /* Positioning */
+  composes: coverEverything;
+}
+
+.menuOverlay {
+  /* Positioning */
+  composes: coverEverything;
+
+  /* Overlay */
+  background-color: var(--matterColorAnti);
+  mix-blend-mode: multiply;
+  opacity: 0;
+  transition: var(--transitionStyleButton);
+}
+
+.menuOverlayContent {
+  /* Positioning */
+  composes: coverEverything;
+  /* Fonts */
+  @apply --marketplaceH4FontStyles;
+  font-weight: var(--fontWeightSemiBold);
+  color: var(--matterColorLight);
+
+  /* Layout */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0;
+  margin-bottom: 0;
+  opacity: 0;
+
+  @media (--viewportMedium) {
+    font-weight: var(--fontWeightSemiBold);
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.threeToTwoWrapper {
+  /* Layout */
+  display: block;
+  width: 100%;
+  position: relative;
+  transition: var(--transitionStyleButton);
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: var(--boxShadowListingCard);
+  }
+}
+
+/* Firefox doesn't support image aspect ratio inside flexbox */
+.aspectWrapper {
+  padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
+  background: var(--matterColorNegative); /* Loading BG color */
+  margin-bottom: 1px; /* Fix 1px bug */
+}
+
+.rootForImage {
+  /* Layout - image will take space defined by aspect ratio wrapper */
+  composes: coverEverything;
+  width: 100%;
+  border-radius: 2px;
+}
+
+.menubarWrapper {
+  /* Position */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 42px;
+}
+
+.menubarGradient {
+  /* Position */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  /* Gradient */
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAqCAYAAACUV/o4AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAALEwAACxMBAJqcGAAAAVlpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDUuNC4wIj4KICAgPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICAgICAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgICAgICAgICAgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iPgogICAgICAgICA8dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KTMInWQAAAGhJREFUKBVjZGBgKANibiAGga8sQAKEf4N4QMAC4vwH4r8gHgiABOAcmMAfEAMGsKrA0DIqAAsvHGFKkwACRRQjzGJQRP2DcUA0LOZAEQ5S9R8mAJIEA6wCyIYSqYVSz4FcxwR1E5gCAD7HLabS/HFUAAAAAElFTkSuQmCC');
+  background-repeat: repeat;
+  opacity: 0.5;
+}
+
+.menubar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.menuLabel {
+  padding: 0px 9px 0 8px;
+}
+
+.iconWrapper {
+  padding: 0px 10px 1px 10px;
+  color: var(--matterColorLight);
+  border-radius: 4px;
+  transition: var(--transitionStyleButton);
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+}
+
+.listingMenuIsOpen {
+  & .iconWrapper {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: var(--matterColorLight);
+  }
+}
+
+.menuContent {
+  position: absolute;
+  right: 0;
+  z-index: var(--zIndexPopup);
+
+  background-color: var(--matterColor);
+  border-radius: 4px;
+  box-shadow: var(--boxShadowPopup);
+}
+
+.menuItem {
+  @apply --marketplaceLinkStyles;
+  @apply --marketplaceH5FontStyles;
+  color: var(--matterColorLight);
+  font-weight: var(--fontWeightMedium);
+  white-space: nowrap;
+  text-align: left;
+  padding: 8px 14px;
+  border-radius: 4px;
+
+  /* Remove default margins from font */
+  margin-top: 0;
+  margin-bottom: 0;
+  transition: var(--transitionStyleButton);
+
+  &:hover {
+    text-decoration: none;
+    background-color: var(--failColor);
+  }
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.menuItemDisabled {
+  color: var(--matterColorNegative);
+
+  &:hover {
+    color: var(--matterColorNegative);
+  }
+}
+
+.info {
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0 2px 0;
+}
+
+.price {
+  /* Layout */
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  flex-shrink: 0;
+
+  padding-top: 4px;
+  padding-bottom: 2px;
+
+  @media (--viewportMedium) {
+    padding-top: 5px;
+    padding-bottom: 3px;
+  }
+}
+
+.priceValue {
+  /* Font */
+  @apply --marketplaceH4FontStyles;
+  color: var(--marketplaceColor);
+  font-weight: var(--fontWeightSemiBold);
+
+  margin-right: 4px;
+
+  /* Remove default margins from font */
+  margin-top: 0;
+  margin-bottom: 0;
+
+  @media (--viewportMedium) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.perUnit {
+  /* Font */
+  @apply --marketplaceTinyFontStyles;
+  color: var(--matterColor);
+
+  /* Remove default margins from font */
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@media (--viewportMedium) {
+  .perUnit {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.noPrice {
+  composes: perUnit;
+  padding: 5px 0 3px 0;
+}
+
+.mainInfo {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.titleWrapper {
+}
+
+.title {
+  @apply --marketplaceLinkStyles;
+  /* Font */
+  @apply --marketplaceH3FontStyles;
+  color: var(--matterColor);
+  text-align: left;
+
+  padding-top: 3px;
+  padding-bottom: 3px;
+
+  /* Remove default margins from font */
+  margin-top: 0;
+  margin-bottom: 0;
+
+  @media (--viewportMedium) {
+    padding-top: 4px;
+    padding-bottom: 4px;
+
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.titlePending {
+  color: var(--attentionColor);
+}
+
+.titleDraft {
+  margin-right: 8px;
+}
+
+/* Solid gray background for draft listings without image */
+.draftNoImage {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: var(--matterColor);
+}
+
+.edit {
+  @apply --marketplaceButtonStylesSecondary;
+
+  /* TODO: Odd font-size */
+  font-size: 14px;
+
+  /* Reset min-height from button styles */
+  min-height: 0;
+
+  /* Reserve space for button */
+  flex-shrink: 0;
+  width: auto;
+  height: 41px;
+  padding: 7px 14px 7px 35px;
+
+  /* Add edit icon as a background image */
+  background-image: url('data:image/svg+xml;utf8,<svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><g stroke="%234A4A4A" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><path d="M5.307 11.155L1 13l1.846-4.308L10.54 1 13 3.46zM11 5L9 3M5 11L3 9"/></g></svg>');
+  background-repeat: no-repeat;
+  background-position: 15px center;
+}
+
+.openListingButton,
+.finishListingDraftLink {
+  @apply --marketplaceButtonStylesPrimary;
+  @apply --marketplaceH5FontStyles;
+
+  /* Reset min-height from button styles */
+  min-height: 0;
+
+  width: 114px;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.menu {
+  display: none;
+}
+
+.cardIsOpen {
+  display: block;
+}
+
+.manageLinks {
+  @apply --marketplaceH5FontStyles;
+  line-height: 18px;
+  padding-top: 2px;
+  padding-bottom: 4px;
+
+  /* Remove default margins from font */
+  margin-top: 0;
+  margin-bottom: 0;
+
+  @media (--viewportMedium) {
+    line-height: 24px;
+    padding-top: 0;
+    padding-bottom: 0;
+
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.manageLink {
+  text-decoration: none;
+  color: var(--matterColor);
+  white-space: pre;
+
+  &:hover {
+    text-decoration: underline;
+    color: var(--matterColorDark);
+  }
+}
+
+.manageLinksSeparator {
+  margin: 0 3px 0 3px;
+}

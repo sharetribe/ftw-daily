@@ -3,7 +3,7 @@ import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { PrimaryButton, SecondaryButton } from '../../components';
 
-import css from './TransactionPanel.css';
+import css from './TransactionPanel.module.css';
 
 // Functional component as a helper to build ActionButtons for
 // provider when state is preauthorized

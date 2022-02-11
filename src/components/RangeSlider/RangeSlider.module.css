@@ -1,0 +1,10 @@
+.root {
+  position: relative;
+  margin: 0 10px;
+  width: calc(100% - 20px);
+  height: 24px;
+}
+
+.activeHandle {
+  z-index: 1;
+}

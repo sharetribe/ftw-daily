@@ -4,13 +4,13 @@
  * It's also handled separately in handleSubmit function.
  */
 import React, { Component } from 'react';
-import { bool, func, object, string } from 'prop-types';
+import { func, object, string } from 'prop-types';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import { Form as FinalForm } from 'react-final-form';
 import classNames from 'classnames';
 import config from '../../config';
 import { Form, PrimaryButton, FieldTextInput, StripePaymentAddress } from '../../components';
-import css from './PaymentMethodsForm.css';
+import css from './PaymentMethodsForm.module.css';
 
 /**
  * Translate a Stripe API error object.
@@ -52,18 +52,22 @@ const stripeErrorTranslation = (intl, stripeError) => {
 const stripeElementsOptions = {
   fonts: [
     {
-      family: 'sofiapro',
+      family: 'poppins',
       fontSmoothing: 'antialiased',
       src:
-        'local("sofiapro"), local("SofiaPro"), local("Sofia Pro"), url("https://assets-sharetribecom.sharetribe.com/webfonts/sofiapro/sofiapro-medium-webfont.woff2") format("woff2")',
+        'local("poppins"), local("Poppins"), url("https://assets-sharetribecom.sharetribe.com/webfonts/poppins/Poppins-Medium.ttf") format("truetype")',
     },
   ],
 };
 
+// card (being a Stripe Elements component), can have own styling passed to it.
+// However, its internal width-calculation seems to break if font-size is too big
+// compared to component's own width.
+const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 const cardStyles = {
   base: {
-    fontFamily: '"sofiapro", Helvetica, Arial, sans-serif',
-    fontSize: '18px',
+    fontFamily: '"poppins", Helvetica, Arial, sans-serif',
+    fontSize: isMobile ? '14px' : '18px',
     fontSmoothing: 'antialiased',
     lineHeight: '24px',
     letterSpacing: '-0.1px',
@@ -114,10 +118,10 @@ class PaymentMethodsForm extends Component {
       this.card.addEventListener('change', this.handleCardValueChange);
       // EventListener is the only way to simulate breakpoints with Stripe.
       window.addEventListener('resize', () => {
-        if (window.innerWidth < 1024) {
-          this.card.update({ style: { base: { fontSize: '18px', lineHeight: '24px' } } });
+        if (window.innerWidth < 768) {
+          this.card.update({ style: { base: { fontSize: '14px', lineHeight: '24px' } } });
         } else {
-          this.card.update({ style: { base: { fontSize: '20px', lineHeight: '32px' } } });
+          this.card.update({ style: { base: { fontSize: '18px', lineHeight: '24px' } } });
         }
       });
     }
@@ -283,8 +287,7 @@ PaymentMethodsForm.defaultProps = {
   className: null,
   rootClassName: null,
   inProgress: false,
-  handleSubmit: null,
-  invalid: false,
+  onSubmit: null,
   addPaymentMethodError: null,
   deletePaymentMethodError: null,
   createStripeCustomerError: null,
@@ -295,8 +298,7 @@ PaymentMethodsForm.defaultProps = {
 PaymentMethodsForm.propTypes = {
   formId: string,
   intl: intlShape.isRequired,
-  invalid: bool,
-  handleSubmit: func,
+  onSubmit: func,
   addPaymentMethodError: object,
   deletePaymentMethodError: object,
   createStripeCustomerError: object,

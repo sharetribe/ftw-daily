@@ -7,7 +7,7 @@ import { LISTING_STATE_DRAFT } from '../../util/types';
 import { ListingLink } from '../../components';
 import { EditListingAvailabilityForm } from '../../forms';
 
-import css from './EditListingAvailabilityPanel.css';
+import css from './EditListingAvailabilityPanel.module.css';
 
 const EditListingAvailabilityPanel = props => {
   const {
@@ -15,6 +15,8 @@ const EditListingAvailabilityPanel = props => {
     rootClassName,
     listing,
     availability,
+    disabled,
+    ready,
     onSubmit,
     onChange,
     submitButtonText,
@@ -67,6 +69,8 @@ const EditListingAvailabilityPanel = props => {
         }}
         onChange={onChange}
         saveActionMsg={submitButtonText}
+        disabled={disabled}
+        ready={ready}
         updated={panelUpdated}
         updateError={errors.updateListingError}
         updateInProgress={updateInProgress}
@@ -94,6 +98,8 @@ EditListingAvailabilityPanel.propTypes = {
     onCreateAvailabilityException: func.isRequired,
     onDeleteAvailabilityException: func.isRequired,
   }).isRequired,
+  disabled: bool.isRequired,
+  ready: bool.isRequired,
   onSubmit: func.isRequired,
   onChange: func.isRequired,
   submitButtonText: string.isRequired,

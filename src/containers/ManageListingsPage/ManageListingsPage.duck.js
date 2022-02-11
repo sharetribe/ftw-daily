@@ -1,5 +1,11 @@
 import { updatedEntities, denormalisedEntities } from '../../util/data';
 import { storableError } from '../../util/errors';
+import { parse } from '../../util/urlHelpers';
+
+// Pagination page size might need to be dynamic on responsive page layouts
+// Current design has max 3 columns 42 is divisible by 2 and 3
+// So, there's enough cards to fill all columns on full pagination pages
+const RESULT_PAGE_SIZE = 42;
 
 // ================ Action types ================ //
 
@@ -258,4 +264,17 @@ export const openListing = listingId => (dispatch, getState, sdk) => {
     .catch(e => {
       dispatch(openListingError(storableError(e)));
     });
+};
+
+export const loadData = (params, search) => {
+  const queryParams = parse(search);
+  const page = queryParams.page || 1;
+  return queryOwnListings({
+    ...queryParams,
+    page,
+    perPage: RESULT_PAGE_SIZE,
+    include: ['images'],
+    'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
+    'limit.images': 1,
+  });
 };

@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { bool, node, string } from 'prop-types';
 import classNames from 'classnames';
+import routeConfiguration from '../../routeConfiguration';
+import { findRouteByRouteName } from '../../util/routes';
 import { IconSpinner, IconCheckmark } from '../../components';
 
-import css from './Button.css';
+import css from './Button.module.css';
 
 class Button extends Component {
   constructor(props) {
@@ -14,7 +16,18 @@ class Button extends Component {
     this.setState({ mounted: true }); // eslint-disable-line react/no-did-mount-set-state
   }
   render() {
-    const { children, className, rootClassName, inProgress, ready, disabled, ...rest } = this.props;
+    const {
+      children,
+      className,
+      rootClassName,
+      spinnerClassName,
+      checkmarkClassName,
+      inProgress,
+      ready,
+      disabled,
+      enforcePagePreloadFor,
+      ...rest
+    } = this.props;
 
     const rootClass = rootClassName || css.root;
     const classes = classNames(rootClass, className, {
@@ -25,12 +38,29 @@ class Button extends Component {
     let content;
 
     if (inProgress) {
-      content = <IconSpinner rootClassName={css.spinner} />;
+      content = <IconSpinner rootClassName={spinnerClassName || css.spinner} />;
     } else if (ready) {
-      content = <IconCheckmark rootClassName={css.checkmark} />;
+      content = <IconCheckmark rootClassName={checkmarkClassName || css.checkmark} />;
     } else {
       content = children;
     }
+
+    const onOverButtonFn = enforcePreloadOfPage => () => {
+      // Enforce preloading of given page (loadable component)
+      const { component: Page } = findRouteByRouteName(enforcePreloadOfPage, routeConfiguration());
+      // Loadable Component has a "preload" function.
+      if (Page.preload) {
+        Page.preload();
+      }
+    };
+
+    const onOverButton = enforcePagePreloadFor ? onOverButtonFn(enforcePagePreloadFor) : null;
+    const onOverButtonMaybe = onOverButton
+      ? {
+          onMouseOver: onOverButton,
+          onTouchStart: onOverButton,
+        }
+      : {};
 
     // All buttons are disabled until the component is mounted. This
     // prevents e.g. being able to submit forms to the backend before
@@ -38,31 +68,35 @@ class Button extends Component {
     const buttonDisabled = this.state.mounted ? disabled : true;
 
     return (
-      <button className={classes} {...rest} disabled={buttonDisabled}>
+      <button className={classes} {...onOverButtonMaybe} {...rest} disabled={buttonDisabled}>
         {content}
       </button>
     );
   }
 }
 
-const { node, string, bool } = PropTypes;
-
 Button.defaultProps = {
   rootClassName: null,
   className: null,
+  spinnerClassName: null,
+  checkmarkClassName: null,
   inProgress: false,
   ready: false,
   disabled: false,
+  enforcePagePreloadFor: null,
   children: null,
 };
 
 Button.propTypes = {
   rootClassName: string,
   className: string,
+  spinnerClassName: string,
+  checkmarkClassName: string,
 
   inProgress: bool,
   ready: bool,
   disabled: bool,
+  enforcePagePreloadFor: string,
 
   children: node,
 };
@@ -86,3 +120,10 @@ export const InlineTextButton = props => {
   return <Button {...props} rootClassName={classes} />;
 };
 InlineTextButton.displayName = 'InlineTextButton';
+
+export const SocialLoginButton = props => {
+  const classes = classNames(props.rootClassName || css.socialButtonRoot, css.socialButton);
+  return <Button {...props} rootClassName={classes} />;
+};
+
+SocialLoginButton.displayName = 'SocialLoginButton';

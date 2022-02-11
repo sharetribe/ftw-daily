@@ -12,7 +12,7 @@ import { CookieConsent } from '../../components';
 
 import facebookImage from '../../assets/saunatimeFacebook-1200x630.jpg';
 import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg';
-import css from './Page.css';
+import css from './Page.module.css';
 
 const preventDefault = e => {
   e.preventDefault();
@@ -43,6 +43,14 @@ class PageComponent extends Component {
     // handling both dragover and drop events.
     document.addEventListener('dragover', preventDefault);
     document.addEventListener('drop', preventDefault);
+
+    // Remove duplicated server-side rendered page schema.
+    // It's in <body> to improve initial rendering performance,
+    // but after web app is initialized, react-helmet-async operates with <head>
+    const pageSchema = document.getElementById('page-schema');
+    if (pageSchema) {
+      pageSchema.remove();
+    }
   }
 
   componentWillUnmount() {
@@ -197,7 +205,9 @@ class PageComponent extends Component {
           <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
           <meta httpEquiv="Content-Language" content={intl.locale} />
           {metaTags}
-          <script type="application/ld+json">{schemaArrayJSONString}</script>
+          <script id="page-schema" type="application/ld+json">
+            {schemaArrayJSONString.replace(/</g, '\\u003c')}
+          </script>
         </Helmet>
         <CookieConsent />
         <div

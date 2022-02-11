@@ -20,6 +20,7 @@ describe('EditListingPhotosForm', () => {
         updated={false}
         ready={false}
         updateInProgress={false}
+        disabled={false}
         onRemoveImage={noop}
       />
     );

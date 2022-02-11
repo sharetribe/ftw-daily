@@ -20,24 +20,48 @@ import {
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { showListingRequest, showListingError, showListing } from './ListingPage.duck';
 
-// routeConfiguration needs to be imported before tests for ListingPageComponent can be made.
-// Otherwise, ListingPage itself is not initialized correctly when routeConfiguration is imported
-// (loadData call fails).
-import routeConfiguration from '../../routeConfiguration';
 import { ListingPageComponent } from './ListingPage';
 import ActionBarMaybe from './ActionBarMaybe';
 
 const { UUID } = sdkTypes;
 const noop = () => null;
 
-const categoriesConfig = [{ key: 'cat1', label: 'Cat 1' }, { key: 'cat2', label: 'Cat 2' }];
-
-const amenitiesConfig = [
-  { key: 'feat1', label: 'Feat 1' },
-  { key: 'feat2', label: 'Feat 2' },
-  { key: 'feat3', label: 'Feat 3' },
+const filterConfig = [
+  {
+    id: 'category',
+    label: 'Category',
+    type: 'SelectSingleFilter',
+    group: 'secondary',
+    queryParamName: 'pub_category',
+    config: {
+      options: [{ key: 'cat1', label: 'Cat 1' }, { key: 'cat2', label: 'Cat 2' }],
+    },
+  },
+  {
+    id: 'amenities',
+    label: 'Amenities',
+    type: 'SelectMultipleFilter',
+    group: 'secondary',
+    queryParamName: 'pub_amenities',
+    config: {
+      mode: 'has_all',
+      options: [
+        {
+          key: 'feat1',
+          label: 'Feat 1',
+        },
+        {
+          key: 'feat2',
+          label: 'Feat 2',
+        },
+        {
+          key: 'feat3',
+          label: 'Feat 3',
+        },
+      ],
+    },
+  },
 ];
-
 describe('ListingPage', () => {
   it('matches snapshot', () => {
     const currentUser = createCurrentUser('user-2');
@@ -76,8 +100,9 @@ describe('ListingPage', () => {
       onInitializeCardPaymentData: noop,
       sendEnquiryInProgress: false,
       onSendEnquiry: noop,
-      categoriesConfig,
-      amenitiesConfig,
+      filterConfig,
+      fetchLineItemsInProgress: false,
+      onFetchTransactionLineItems: () => null,
     };
 
     const tree = renderShallow(<ListingPageComponent {...props} />);

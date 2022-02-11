@@ -9,7 +9,6 @@ import config from '../../config';
 
 import {
   BANK_ACCOUNT_INPUTS,
-  cleanedString,
   formatFieldMessage,
   requiredInputs,
   mapInputsToStripeAccountKeys,
@@ -17,7 +16,7 @@ import {
   translateStripeError,
 } from './StripeBankAccountTokenInputField.util';
 import StripeBankAccountRequiredInput from './StripeBankAccountRequiredInput';
-import css from './StripeBankAccountTokenInputField.css';
+import css from './StripeBankAccountTokenInputField.module.css';
 
 // Since final-form tracks the onBlur event for marking the field as
 // touched (which triggers possible error validation rendering), only
@@ -28,6 +27,7 @@ import css from './StripeBankAccountTokenInputField.css';
 // value and moves on to another input within this component.
 const BLUR_TIMEOUT = 100;
 const DEBOUNCE_WAIT_TIME = 1000;
+const MIN_INPUT_COUNT_FOR_TWO_COLUMNS = 6;
 
 class TokenInputFieldComponent extends Component {
   constructor(props) {
@@ -149,19 +149,16 @@ class TokenInputFieldComponent extends Component {
         return result.token.id;
       })
       .then(token => {
+        // Check if value has changed during async call.
         const changedValues = inputsNeeded.filter(
-          inputType => values[inputType] !== cleanedString(this.state[inputType].value)
+          inputType => values[inputType] !== this.state[inputType].value
         );
         const valuesAreUnchanged = changedValues.length === 0;
 
         // Handle response only if the input values haven't changed
         if (this._isMounted && valuesAreUnchanged) {
           this.setState(prevState => {
-            const errorsClearedFromInputs = inputsNeeded.map(inputType => {
-              const input = prevState[inputType];
-              return { ...input, error: null };
-            });
-            return { ...errorsClearedFromInputs, stripeError: null };
+            return { stripeError: null };
           });
 
           onChange(token);
@@ -180,8 +177,8 @@ class TokenInputFieldComponent extends Component {
   }
 
   handleInputChange(e, inputType, country, intl) {
-    const rawValue = e.target.value;
-    const value = cleanedString(rawValue);
+    const value = e.target.value;
+
     let inputError = null;
 
     // Validate the changed routing number
@@ -193,7 +190,7 @@ class TokenInputFieldComponent extends Component {
 
     // Save changes to the state
     this.setState(prevState => {
-      const input = { ...prevState[inputType], value: rawValue, error: inputError };
+      const input = { ...prevState[inputType], value, error: inputError };
       return {
         [inputType]: input,
         stripeError: null,
@@ -260,6 +257,10 @@ class TokenInputFieldComponent extends Component {
 
     const inputConfiguration = requiredInputs(country);
 
+    // E.g. Japan has 6 fields in the bank account details so we want to
+    // show the inputs in two columns on bigger screens
+    const showInColumns = inputConfiguration.length >= MIN_INPUT_COUNT_FOR_TWO_COLUMNS;
+
     return (
       <div className={classNames(rootClassName || css.root, className)}>
         {inputConfiguration.map(inputType => {
@@ -277,6 +278,7 @@ class TokenInputFieldComponent extends Component {
               isTouched={this.state[inputType].touched || formMeta.touched}
               showStripeError={showStripeError}
               inputError={this.state[inputType].error}
+              showInColumns={showInColumns}
             />
           );
         })}

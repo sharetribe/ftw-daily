@@ -3,7 +3,7 @@ import { FormattedMessage } from '../../util/reactIntl';
 import { isTooManyEmailVerificationRequestsError } from '../../util/errors';
 import { IconEmailAttention, InlineTextButton, NamedLink } from '../../components';
 
-import css from './ModalMissingInformation.css';
+import css from './ModalMissingInformation.module.css';
 
 const EmailReminder = props => {
   const {

@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import { Form, PrimaryButton, FieldTextInput } from '../../components';
 import * as validators from '../../util/validators';
 
-import css from './PasswordResetForm.css';
+import css from './PasswordResetForm.module.css';
 
 const PasswordResetFormComponent = props => (
   <FinalForm

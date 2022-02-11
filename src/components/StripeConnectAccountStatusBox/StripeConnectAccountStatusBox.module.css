@@ -1,0 +1,115 @@
+@import '../../styles/propertySets.css';
+
+.root {
+}
+
+.verificiationBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  padding: 15px 32px 23px 32px;
+  margin-bottom: 24px;
+
+  border-radius: 4px;
+}
+
+@media (--viewportMedium) {
+  .verificiationBox {
+    flex-wrap: nowrap;
+  }
+}
+
+.verificiationBoxTextWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px 24px 3px 0px;
+  margin-bottom: 16px;
+}
+
+@media (--viewportMedium) {
+  .verificiationBoxTextWrapper {
+    margin-bottom: 0px;
+  }
+}
+
+.verificationBoxTitle {
+  @apply --marketplaceH4FontStyles;
+  font-weight: var(--fontWeightSemiBold);
+
+  align-self: center;
+
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.verificationBoxText {
+  @apply --marketplaceH4FontStyles;
+  font-weight: var(--fontWeightRegular);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.getVerifiedButton {
+  @apply --marketplaceH5FontStyles;
+  font-weight: var(--fontWeightSemiBold);
+
+  border-radius: 4px;
+  min-height: 38px;
+  width: 300px;
+  max-width: 110px;
+}
+
+/* Verification required box */
+.verficiationNeededBox {
+  border: 1px solid var(--attentionColor);
+  background: var(--attentionColorLight);
+}
+
+/* Verification error box */
+.verficiationErrorBox {
+  background: var(--failColorLight);
+  border: 1px solid var(--failColor);
+}
+
+/* Verification success box */
+.verficiationSuccessBox {
+  background: var(--successColorLight);
+  border: 1px solid var(--successColor);
+  padding: 8px 24px;
+}
+
+.verificationBoxSuccessTextWrapper {
+  margin-bottom: 0;
+}
+.editVerificationButton {
+  @apply --marketplaceH4FontStyles;
+  color: var(--matterColor);
+  font-weight: var(--fontWeightNormal);
+  min-height: 46px;
+  margin: 0;
+  padding-top: 3px;
+
+  &:hover,
+  &:focus {
+    outline: none;
+    color: var(--matterColorDark);
+  }
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.iconEditPencil {
+  stroke: var(--matterColor);
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  stroke: var(--successColor);
+  stroke-width: 3px;
+}

@@ -4,7 +4,7 @@ import { InlineTextButton } from '../../components';
 import { LINE_ITEM_NIGHT, LINE_ITEM_DAY } from '../../util/types';
 import config from '../../config';
 
-import css from './ListingPage.css';
+import css from './ListingPage.module.css';
 
 const SectionHeading = props => {
   const {
@@ -45,7 +45,11 @@ const SectionHeading = props => {
           {showContactUser ? (
             <span className={css.contactWrapper}>
               <span className={css.separator}>•</span>
-              <InlineTextButton rootClassName={css.contactLink} onClick={onContactUser}>
+              <InlineTextButton
+                rootClassName={css.contactLink}
+                onClick={onContactUser}
+                enforcePagePreloadFor="SignupPage"
+              >
                 <FormattedMessage id="ListingPage.contactUser" />
               </InlineTextButton>
             </span>

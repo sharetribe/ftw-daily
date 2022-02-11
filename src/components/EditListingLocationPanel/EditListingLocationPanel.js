@@ -7,7 +7,7 @@ import { ensureOwnListing } from '../../util/data';
 import { ListingLink } from '../../components';
 import { EditListingLocationForm } from '../../forms';
 
-import css from './EditListingLocationPanel.css';
+import css from './EditListingLocationPanel.module.css';
 
 class EditListingLocationPanel extends Component {
   constructor(props) {
@@ -48,6 +48,8 @@ class EditListingLocationPanel extends Component {
       className,
       rootClassName,
       listing,
+      disabled,
+      ready,
       onSubmit,
       onChange,
       submitButtonText,
@@ -97,6 +99,8 @@ class EditListingLocationPanel extends Component {
           }}
           onChange={onChange}
           saveActionMsg={submitButtonText}
+          disabled={disabled}
+          ready={ready}
           updated={panelUpdated}
           updateInProgress={updateInProgress}
           fetchErrors={errors}
@@ -121,6 +125,8 @@ EditListingLocationPanel.propTypes = {
   // We cannot use propTypes.listing since the listing might be a draft.
   listing: object,
 
+  disabled: bool.isRequired,
+  ready: bool.isRequired,
   onSubmit: func.isRequired,
   onChange: func.isRequired,
   submitButtonText: string.isRequired,

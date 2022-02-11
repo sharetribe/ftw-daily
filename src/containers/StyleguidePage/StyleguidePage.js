@@ -4,7 +4,7 @@ import isEmpty from 'lodash/isEmpty';
 import classNames from 'classnames';
 import { NamedLink } from '../../components';
 
-import css from './StyleguidePage.css';
+import css from './StyleguidePage.module.css';
 
 const ALL = '*';
 const DEFAULT_GROUP = 'misc';

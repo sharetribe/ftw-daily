@@ -2,40 +2,60 @@
 
 exports[`BookingBreakdown customer transaction data matches snapshot 1`] = `
 <div
-  className=""
+  className="root"
 >
   Array [
-    <div>
-      <div>
-        <div>
-          <div>
+    <div
+      className="lineItem"
+    >
+      <div
+        className="bookingPeriod"
+      >
+        <div
+          className="bookingPeriodSection"
+        >
+          <div
+            className="dayLabel"
+          >
             <span>
               BookingBreakdown.bookingStart
             </span>
           </div>
-          <div>
+          <div
+            className="dayInfo"
+          >
             <span>
               Sat 12:00 PM
             </span>
           </div>
-          <div>
+          <div
+            className="itemLabel"
+          >
             <span>
               Jun 10
             </span>
           </div>
         </div>
-        <div>
-          <div>
+        <div
+          className="bookingPeriodSectionRigth"
+        >
+          <div
+            className="dayLabel"
+          >
             <span>
               BookingBreakdown.bookingEnd
             </span>
           </div>
-          <div>
+          <div
+            className="dayInfo"
+          >
             <span>
               Sat 12:00 PM
             </span>
           </div>
-          <div>
+          <div
+            className="itemLabel"
+          >
             <span>
               Jun 10
             </span>
@@ -43,27 +63,43 @@ exports[`BookingBreakdown customer transaction data matches snapshot 1`] = `
         </div>
       </div>
     </div>,
-    <hr />,
+    <hr
+      className="totalDivider"
+    />,
   ]
-  <div>
-    <span>
+  <div
+    className="lineItem"
+  >
+    <span
+      className="itemLabel"
+    >
       <span>
         BookingBreakdown.baseUnitNight
       </span>
     </span>
-    <span>
+    <span
+      className="itemValue"
+    >
       20
     </span>
   </div>
   Array [
-    <hr />,
-    <div>
-      <div>
+    <hr
+      className="totalDivider"
+    />,
+    <div
+      className="lineItemTotal"
+    >
+      <div
+        className="totalLabel"
+      >
         <span>
           BookingBreakdown.total
         </span>
       </div>
-      <div>
+      <div
+        className="totalPrice"
+      >
         20
       </div>
     </div>,
@@ -73,40 +109,60 @@ exports[`BookingBreakdown customer transaction data matches snapshot 1`] = `
 
 exports[`BookingBreakdown pretransaction data matches snapshot 1`] = `
 <div
-  className=""
+  className="root"
 >
   Array [
-    <div>
-      <div>
-        <div>
-          <div>
+    <div
+      className="lineItem"
+    >
+      <div
+        className="bookingPeriod"
+      >
+        <div
+          className="bookingPeriodSection"
+        >
+          <div
+            className="dayLabel"
+          >
             <span>
               BookingBreakdown.bookingStart
             </span>
           </div>
-          <div>
+          <div
+            className="dayInfo"
+          >
             <span>
               Sat 12:00 PM
             </span>
           </div>
-          <div>
+          <div
+            className="itemLabel"
+          >
             <span>
               Jun 10
             </span>
           </div>
         </div>
-        <div>
-          <div>
+        <div
+          className="bookingPeriodSectionRigth"
+        >
+          <div
+            className="dayLabel"
+          >
             <span>
               BookingBreakdown.bookingEnd
             </span>
           </div>
-          <div>
+          <div
+            className="dayInfo"
+          >
             <span>
               Sat 12:00 PM
             </span>
           </div>
-          <div>
+          <div
+            className="itemLabel"
+          >
             <span>
               Jun 10
             </span>
@@ -114,27 +170,43 @@ exports[`BookingBreakdown pretransaction data matches snapshot 1`] = `
         </div>
       </div>
     </div>,
-    <hr />,
+    <hr
+      className="totalDivider"
+    />,
   ]
-  <div>
-    <span>
+  <div
+    className="lineItem"
+  >
+    <span
+      className="itemLabel"
+    >
       <span>
         BookingBreakdown.baseUnitNight
       </span>
     </span>
-    <span>
+    <span
+      className="itemValue"
+    >
       20
     </span>
   </div>
   Array [
-    <hr />,
-    <div>
-      <div>
+    <hr
+      className="totalDivider"
+    />,
+    <div
+      className="lineItemTotal"
+    >
+      <div
+        className="totalLabel"
+      >
         <span>
           BookingBreakdown.total
         </span>
       </div>
-      <div>
+      <div
+        className="totalPrice"
+      >
         20
       </div>
     </div>,
@@ -144,40 +216,60 @@ exports[`BookingBreakdown pretransaction data matches snapshot 1`] = `
 
 exports[`BookingBreakdown provider canceled transaction data matches snapshot 1`] = `
 <div
-  className=""
+  className="root"
 >
   Array [
-    <div>
-      <div>
-        <div>
-          <div>
+    <div
+      className="lineItem"
+    >
+      <div
+        className="bookingPeriod"
+      >
+        <div
+          className="bookingPeriodSection"
+        >
+          <div
+            className="dayLabel"
+          >
             <span>
               BookingBreakdown.bookingStart
             </span>
           </div>
-          <div>
+          <div
+            className="dayInfo"
+          >
             <span>
               Sat 12:00 PM
             </span>
           </div>
-          <div>
+          <div
+            className="itemLabel"
+          >
             <span>
               Jun 10
             </span>
           </div>
         </div>
-        <div>
-          <div>
+        <div
+          className="bookingPeriodSectionRigth"
+        >
+          <div
+            className="dayLabel"
+          >
             <span>
               BookingBreakdown.bookingEnd
             </span>
           </div>
-          <div>
+          <div
+            className="dayInfo"
+          >
             <span>
               Sat 12:00 PM
             </span>
           </div>
-          <div>
+          <div
+            className="itemLabel"
+          >
             <span>
               Jun 10
             </span>
@@ -185,75 +277,119 @@ exports[`BookingBreakdown provider canceled transaction data matches snapshot 1`
         </div>
       </div>
     </div>,
-    <hr />,
+    <hr
+      className="totalDivider"
+    />,
   ]
-  <div>
-    <span>
+  <div
+    className="lineItem"
+  >
+    <span
+      className="itemLabel"
+    >
       <span>
         BookingBreakdown.baseUnitNight
       </span>
     </span>
-    <span>
+    <span
+      className="itemValue"
+    >
       20
     </span>
   </div>
   Array [
-    <hr />,
-    <div>
-      <span>
+    <hr
+      className="totalDivider"
+    />,
+    <div
+      className="subTotalLineItem"
+    >
+      <span
+        className="itemLabel"
+      >
         <span>
           BookingBreakdown.subTotal
         </span>
       </span>
-      <span>
+      <span
+        className="itemValue"
+      >
         20
       </span>
     </div>,
   ]
-  <div>
-    <span>
+  <div
+    className="lineItem"
+  >
+    <span
+      className="itemLabel"
+    >
       <span>
         BookingBreakdown.refund
       </span>
     </span>
-    <span>
+    <span
+      className="itemValue"
+    >
       -20
     </span>
   </div>
-  <div>
-    <span>
+  <div
+    className="lineItem"
+  >
+    <span
+      className="itemLabel"
+    >
       <span>
         BookingBreakdown.commission
       </span>
     </span>
-    <span>
+    <span
+      className="itemValue"
+    >
       -2
     </span>
   </div>
-  <div>
-    <span>
+  <div
+    className="lineItem"
+  >
+    <span
+      className="itemLabel"
+    >
       <span>
         BookingBreakdown.refundProviderFee
       </span>
     </span>
-    <span>
+    <span
+      className="itemValue"
+    >
       2
     </span>
   </div>
   Array [
-    <hr />,
-    <div>
-      <div>
+    <hr
+      className="totalDivider"
+    />,
+    <div
+      className="lineItemTotal"
+    >
+      <div
+        className="totalLabel"
+      >
         <span>
           BookingBreakdown.providerTotalCanceled
         </span>
       </div>
-      <div>
+      <div
+        className="totalPrice"
+      >
         0
       </div>
     </div>,
   ]
-  <span>
+  <span
+    className="feeInfo"
+  >
     <span>
       BookingBreakdown.commissionFeeNote
     </span>
@@ -263,40 +399,60 @@ exports[`BookingBreakdown provider canceled transaction data matches snapshot 1`
 
 exports[`BookingBreakdown provider transaction data matches snapshot 1`] = `
 <div
-  className=""
+  className="root"
 >
   Array [
-    <div>
-      <div>
-        <div>
-          <div>
+    <div
+      className="lineItem"
+    >
+      <div
+        className="bookingPeriod"
+      >
+        <div
+          className="bookingPeriodSection"
+        >
+          <div
+            className="dayLabel"
+          >
             <span>
               BookingBreakdown.bookingStart
             </span>
           </div>
-          <div>
+          <div
+            className="dayInfo"
+          >
             <span>
               Sat 12:00 PM
             </span>
           </div>
-          <div>
+          <div
+            className="itemLabel"
+          >
             <span>
               Jun 10
             </span>
           </div>
         </div>
-        <div>
-          <div>
+        <div
+          className="bookingPeriodSectionRigth"
+        >
+          <div
+            className="dayLabel"
+          >
             <span>
               BookingBreakdown.bookingEnd
             </span>
           </div>
-          <div>
+          <div
+            className="dayInfo"
+          >
             <span>
               Sat 12:00 PM
             </span>
           </div>
-          <div>
+          <div
+            className="itemLabel"
+          >
             <span>
               Jun 10
             </span>
@@ -304,55 +460,87 @@ exports[`BookingBreakdown provider transaction data matches snapshot 1`] = `
         </div>
       </div>
     </div>,
-    <hr />,
+    <hr
+      className="totalDivider"
+    />,
   ]
-  <div>
-    <span>
+  <div
+    className="lineItem"
+  >
+    <span
+      className="itemLabel"
+    >
       <span>
         BookingBreakdown.baseUnitNight
       </span>
     </span>
-    <span>
+    <span
+      className="itemValue"
+    >
       20
     </span>
   </div>
   Array [
-    <hr />,
-    <div>
-      <span>
+    <hr
+      className="totalDivider"
+    />,
+    <div
+      className="subTotalLineItem"
+    >
+      <span
+        className="itemLabel"
+      >
         <span>
           BookingBreakdown.subTotal
         </span>
       </span>
-      <span>
+      <span
+        className="itemValue"
+      >
         20
       </span>
     </div>,
   ]
-  <div>
-    <span>
+  <div
+    className="lineItem"
+  >
+    <span
+      className="itemLabel"
+    >
       <span>
         BookingBreakdown.commission
       </span>
     </span>
-    <span>
+    <span
+      className="itemValue"
+    >
       -2
     </span>
   </div>
   Array [
-    <hr />,
-    <div>
-      <div>
+    <hr
+      className="totalDivider"
+    />,
+    <div
+      className="lineItemTotal"
+    >
+      <div
+        className="totalLabel"
+      >
         <span>
           BookingBreakdown.providerTotalDefault
         </span>
       </div>
-      <div>
+      <div
+        className="totalPrice"
+      >
         18
       </div>
     </div>,
   ]
-  <span>
+  <span
+    className="feeInfo"
+  >
     <span>
       BookingBreakdown.commissionFeeNote
     </span>

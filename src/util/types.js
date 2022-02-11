@@ -22,6 +22,7 @@ import {
   bool,
   func,
   instanceOf,
+  node,
   number,
   object,
   objectOf,
@@ -63,7 +64,7 @@ propTypes.route = shape({
   path: string.isRequired,
   exact: bool,
   strict: bool,
-  component: func.isRequired,
+  component: oneOfType([object, func]).isRequired,
   loadData: func,
 });
 
@@ -307,6 +308,7 @@ propTypes.stripeAccount = shape({
   type: propTypes.value('stripeAccount').isRequired,
   attributes: shape({
     stripeAccountId: string.isRequired,
+    stripeAccountData: object,
   }),
 });
 
@@ -405,36 +407,30 @@ propTypes.pagination = shape({
 });
 
 // Search filter definition
-const filterWithOptions = shape({
-  paramName: string.isRequired,
+propTypes.filterConfig = arrayOf(
+  shape({
+    id: string.isRequired,
+    label: node,
+    type: string.isRequired,
+    group: oneOf(['primary', 'secondary']).isRequired,
+    queryParamNames: arrayOf(string).isRequired,
+    config: object,
+  }).isRequired
+);
+
+propTypes.sortConfig = shape({
+  active: bool,
+  queryParamName: oneOf(['sort']).isRequired,
+  relevanceKey: string.isRequired,
+  conflictingFilters: arrayOf(string),
   options: arrayOf(
     shape({
-      key: oneOfType([string, bool, number]).isRequired,
+      key: oneOf(['createdAt', '-createdAt', 'price', '-price', 'relevance']).isRequired,
       label: string.isRequired,
+      longLabel: string,
     })
-  ).isRequired,
+  ),
 });
-const filterWithPriceConfig = shape({
-  paramName: string.isRequired,
-  config: shape({
-    min: number.isRequired,
-    max: number.isRequired,
-    step: number.isRequired,
-  }).isRequired,
-});
-
-const filterIsActiveConfig = shape({
-  paramName: string.isRequired,
-  config: shape({
-    active: bool.isRequired,
-  }).isRequired,
-});
-
-propTypes.filterConfig = oneOfType([
-  filterWithOptions,
-  filterWithPriceConfig,
-  filterIsActiveConfig,
-]);
 
 export const ERROR_CODE_TRANSACTION_LISTING_NOT_FOUND = 'transaction-listing-not-found';
 export const ERROR_CODE_TRANSACTION_INVALID_TRANSITION = 'transaction-invalid-transition';

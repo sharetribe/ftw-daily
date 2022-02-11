@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import css from './IconReviewStar.css';
+import css from './IconReviewStar.module.css';
 
 const IconReviewStar = props => {
   const { className, rootClassName, isFilled } = props;

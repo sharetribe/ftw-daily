@@ -1,0 +1,143 @@
+@import '../../styles/customMediaQueries.css';
+
+.root {
+}
+
+.tabs {
+  display: none;
+
+  @media (--viewportMedium) {
+    display: flex;
+    justify-content: flex-end;
+    height: 55px;
+    align-items: flex-end;
+    padding: 13px 24px 0 24px;
+  }
+
+  @media (--viewportLarge) {
+    padding: 0 36px;
+  }
+}
+
+.tab {
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+  margin-left: 16px;
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  @media (--viewportLarge) {
+    margin-left: 24px;
+  }
+}
+
+.listingPanel {
+  width: 100%;
+  margin: 24px auto 0 auto;
+
+  @media (--viewportMedium) {
+    margin: 48px auto 0 auto;
+  }
+
+  @media (--viewportLarge) {
+    margin: 80px auto 0 auto;
+    max-width: 62.5vw;
+  }
+}
+
+.title {
+  margin: 0 24px 24px 24px;
+
+  @media (--viewportMedium) {
+    margin: 0 24px 48px 24px;
+  }
+
+  @media (--viewportLarge) {
+    margin: 0 36px 48px 36px;
+  }
+}
+
+.listingCards {
+  padding: 0 24px 96px 24px;
+
+  @media (--viewportMedium) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  @media (--viewportLarge) {
+    padding: 0 36px 36px 36px;
+  }
+}
+
+.listingCard {
+  margin-bottom: 36px;
+  flex-basis: 100%;
+
+  @media (--viewportMedium) {
+    /**
+     * resultPanel: 62.5vw from 1024px = 640px
+     * panelPaddings: - 2*36px = 72px
+     *
+     * columnCount: 2
+     * gutterWidthBetweenColumns: 24px
+     *
+     * (resultPanel - (panelPaddings + gutterWidthBetweenColumns)) / columnCount = listingCardWidth
+     * ergo => listingCardWidth: 272px
+     *
+     * flex-basis: calc((100%/columnCount) - (guttersBetweenColumns / columnCount))
+     */
+    flex-basis: calc(50% - 12px);
+    margin-right: 24px;
+  }
+
+  @media (--viewportXLarge) {
+    /**
+     * resultPanelWidthRatio = 0.625 aka 62.5%
+     *
+     * resultPanel: 62.5vw from 1920px = 1200px
+     * panelPaddings: - 2*36px = 72px
+     *
+     * columnCount: 3
+     * guttersBetweenColumns: 2*24px = 48px
+     *
+     * (resultPanel - (panelPaddings + guttersBetweenColumns)) / columnCount = listingCardWidth
+     * ergo => listingCardWidth: 360px
+     *
+     * flex-basis: calc((100%/columnCount) - (guttersBetweenColumns / columnCount))
+     */
+    flex-basis: calc(33.33% - 16px);
+    margin-right: 24px;
+  }
+}
+
+/**
+ * Remove margin-right from listingCards on the last column
+ * This is a special case in the world of breakpoints. Nth-of-type effects every nth item.
+ * Here we take margin-right away, but we don't want it affect the next column breakpoint.
+ */
+
+.listingCard:nth-of-type(2n) {
+  @media screen and (min-width: 768px) and (max-width: 1920px) {
+    margin-right: 0;
+  }
+}
+
+.listingCard:nth-of-type(3n) {
+  @media (--viewportXLarge) {
+    margin-right: 0;
+  }
+}
+
+.pagination {
+  /* margin-top: auto; pushes pagination to the end of the page. */
+  margin: auto 24px 0 24px;
+
+  @media (--viewportLarge) {
+    margin: auto 36px 0 36px;
+  }
+}

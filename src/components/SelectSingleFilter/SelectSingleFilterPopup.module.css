@@ -1,0 +1,127 @@
+@import '../../styles/propertySets.css';
+
+.root {
+  display: inline-block;
+
+  &:last-of-type {
+    padding-right: 0;
+  }
+}
+
+.menuLabel {
+  @apply --marketplaceButtonStylesSecondary;
+  @apply --marketplaceSearchFilterLabelFontStyles;
+
+  padding: var(--marketplaceButtonSmallDesktopPadding);
+  width: auto;
+  height: auto;
+  min-height: 0;
+  border-radius: 4px;
+
+  &:focus {
+    outline: none;
+    background-color: var(--matterColorLight);
+    border-color: transparent;
+    text-decoration: none;
+    box-shadow: var(--boxShadowFilterButton);
+  }
+}
+
+.menuLabelSelected {
+  @apply --marketplaceButtonStyles;
+  @apply --marketplaceSearchFilterLabelFontStyles;
+  font-weight: var(--fontWeightSemiBold);
+
+  padding: var(--marketplaceButtonSmallDesktopPadding);
+  width: auto;
+  height: auto;
+  min-height: 0;
+  border-radius: 4px;
+  border: 1px solid var(--marketplaceColor);
+
+  &:hover,
+  &:focus {
+    border: 1px solid var(--marketplaceColorDark);
+  }
+}
+
+.menuContent {
+  margin-top: 7px;
+  padding-top: 13px;
+  min-width: 300px;
+  border-radius: 4px;
+}
+
+/* left animated "border" like hover element */
+.menuItemBorder {
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  height: calc(100% - 4px);
+  width: 0;
+  background-color: var(--marketplaceColor);
+  transition: width var(--transitionStyleButton);
+}
+
+/* left static border for selected element */
+.menuItemBorderSelected {
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  height: calc(100% - 7px);
+  width: 6px;
+  background-color: var(--matterColorDark);
+}
+
+.menuItem {
+  @apply --marketplaceListingAttributeFontStyles;
+  color: var(--matterColor);
+
+  /* Layout */
+  position: relative;
+  min-width: 300px;
+  margin: 0;
+  padding: 4px 30px;
+
+  /* Override button styles */
+  outline: none;
+  text-align: left;
+  border: none;
+
+  cursor: pointer;
+
+  &:focus,
+  &:hover {
+    color: var(--matterColorDark);
+  }
+
+  &:hover .menuItemBorder {
+    width: 6px;
+  }
+}
+
+.clearMenuItem {
+  @apply --marketplaceH4FontStyles;
+  font-weight: var(--fontWeightMedium);
+  color: var(--matterColorAnti);
+
+  /* Layout */
+  position: relative;
+  min-width: 300px;
+  margin: 0;
+  padding: 32px 30px 18px 30px;
+
+  /* Override button styles */
+  outline: none;
+  text-align: left;
+  border: none;
+
+  cursor: pointer;
+  transition: width var(--transitionStyleButton);
+
+  &:focus,
+  &:hover {
+    color: var(--matterColor);
+    transition: width var(--transitionStyleButton);
+  }
+}

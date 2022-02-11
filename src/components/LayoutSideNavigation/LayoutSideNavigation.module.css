@@ -1,0 +1,50 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Container for side and content */
+.container {
+  /* parent aka root is flexbox, this container takes all available space */
+  flex-grow: 1;
+  flex-shrink: 0;
+
+  /* This container uses flexbox layout */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  /* When side nav is shown as a column, Topbar's box-shadow should be visible */
+  z-index: calc(var(--zIndexTopbar) - 1);
+
+  @media (--viewportLarge) {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.layoutWrapperMain {
+  /* Expand to the full remaining width of the viewport */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  padding: 24px;
+
+  @media (--viewportLarge) {
+    /**
+     * Calculate right padding to match Footer right border
+     * and left padding together with border should be 60px.
+     */
+    padding: 112px 36px 82px 59px;
+    background-color: var(--matterColorLight);
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-left-color: var(--matterColorNegative);
+  }
+
+  @media (--viewportLargeWithPaddings) {
+    padding: 112px calc((100% - 1056px) / 2) 82px 59px;
+  }
+}

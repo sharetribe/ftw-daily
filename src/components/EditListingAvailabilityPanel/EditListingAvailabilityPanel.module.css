@@ -1,0 +1,23 @@
+.root {
+  flex-grow: 1;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 11px 24px 0 24px;
+}
+
+.form {
+  flex-grow: 1;
+}
+
+.title {
+  margin-bottom: 19px;
+}
+
+@media (--viewportLarge) {
+  .title {
+    margin-bottom: 38px;
+    padding: 1px 0 7px 0;
+  }
+}

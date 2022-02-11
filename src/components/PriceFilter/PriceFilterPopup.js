@@ -1,15 +1,43 @@
 import React, { Component } from 'react';
-import { func, number, shape, string } from 'prop-types';
+import { arrayOf, func, node, number, shape, string } from 'prop-types';
 import classNames from 'classnames';
+
+import config from '../../config';
 import { injectIntl, intlShape } from '../../util/reactIntl';
 import { propTypes } from '../../util/types';
 import { formatCurrencyMajorUnit } from '../../util/currency';
-import config from '../../config';
 
+import { OutsideClickHandler } from '../../components';
 import { PriceFilterForm } from '../../forms';
-import css from './PriceFilterPopup.css';
+import css from './PriceFilterPopup.module.css';
 
 const KEY_CODE_ESCAPE = 27;
+const RADIX = 10;
+
+const getPriceQueryParamName = queryParamNames => {
+  return Array.isArray(queryParamNames)
+    ? queryParamNames[0]
+    : typeof queryParamNames === 'string'
+    ? queryParamNames
+    : 'price';
+};
+
+// Parse value, which should look like "0,1000"
+const parse = priceRange => {
+  const [minPrice, maxPrice] = !!priceRange
+    ? priceRange.split(',').map(v => Number.parseInt(v, RADIX))
+    : [];
+  // Note: we compare to null, because 0 as minPrice is falsy in comparisons.
+  return !!priceRange && minPrice != null && maxPrice != null ? { minPrice, maxPrice } : null;
+};
+
+// Format value, which should look like { minPrice, maxPrice }
+const format = (range, queryParamName) => {
+  const { minPrice, maxPrice } = range || {};
+  // Note: we compare to null, because 0 as minPrice is falsy in comparisons.
+  const value = minPrice != null && maxPrice != null ? `${minPrice},${maxPrice}` : null;
+  return { [queryParamName]: value };
+};
 
 class PriceFilterPopup extends Component {
   constructor(props) {
@@ -29,29 +57,27 @@ class PriceFilterPopup extends Component {
   }
 
   handleSubmit(values) {
-    const { onSubmit, urlParam } = this.props;
+    const { onSubmit, queryParamNames } = this.props;
     this.setState({ isOpen: false });
-    onSubmit(urlParam, values);
+    const priceQueryParamName = getPriceQueryParamName(queryParamNames);
+    onSubmit(format(values, priceQueryParamName));
   }
 
   handleClear() {
-    const { onSubmit, urlParam } = this.props;
+    const { onSubmit, queryParamNames } = this.props;
     this.setState({ isOpen: false });
-    onSubmit(urlParam, null);
+    const priceQueryParamName = getPriceQueryParamName(queryParamNames);
+    onSubmit(format(null, priceQueryParamName));
   }
 
   handleCancel() {
-    const { onSubmit, initialValues, urlParam } = this.props;
+    const { onSubmit, initialValues } = this.props;
     this.setState({ isOpen: false });
-    onSubmit(urlParam, initialValues);
+    onSubmit(initialValues);
   }
 
-  handleBlur(event) {
-    // FocusEvent is fired faster than the link elements native click handler
-    // gets its own event. Therefore, we need to check the origin of this FocusEvent.
-    if (!this.filter.contains(event.relatedTarget)) {
-      this.setState({ isOpen: false });
-    }
+  handleBlur() {
+    this.setState({ isOpen: false });
   }
 
   handleKeyDown(e) {
@@ -97,6 +123,8 @@ class PriceFilterPopup extends Component {
       rootClassName,
       className,
       id,
+      label,
+      queryParamNames,
       initialValues,
       min,
       max,
@@ -105,12 +133,16 @@ class PriceFilterPopup extends Component {
       currencyConfig,
     } = this.props;
     const classes = classNames(rootClassName || css.root, className);
-    const { minPrice, maxPrice } = initialValues || {};
+
+    const priceQueryParam = getPriceQueryParamName(queryParamNames);
+    const initialPrice =
+      initialValues && initialValues[priceQueryParam] ? parse(initialValues[priceQueryParam]) : {};
+    const { minPrice, maxPrice } = initialPrice || {};
 
     const hasValue = value => value != null;
     const hasInitialValues = initialValues && hasValue(minPrice) && hasValue(maxPrice);
 
-    const label = hasInitialValues
+    const currentLabel = hasInitialValues
       ? intl.formatMessage(
           { id: 'PriceFilter.labelSelectedButton' },
           {
@@ -118,41 +150,44 @@ class PriceFilterPopup extends Component {
             maxPrice: formatCurrencyMajorUnit(intl, currencyConfig.currency, maxPrice),
           }
         )
+      : label
+      ? label
       : intl.formatMessage({ id: 'PriceFilter.label' });
 
     const labelStyles = hasInitialValues ? css.labelSelected : css.label;
     const contentStyle = this.positionStyleForContent();
 
     return (
-      <div
-        className={classes}
-        onBlur={this.handleBlur}
-        onKeyDown={this.handleKeyDown}
-        ref={node => {
-          this.filter = node;
-        }}
-      >
-        <button className={labelStyles} onClick={() => this.toggleOpen()}>
-          {label}
-        </button>
-        <PriceFilterForm
-          id={id}
-          initialValues={hasInitialValues ? initialValues : { minPrice: min, maxPrice: max }}
-          onClear={this.handleClear}
-          onCancel={this.handleCancel}
-          onSubmit={this.handleSubmit}
-          intl={intl}
-          contentRef={node => {
-            this.filterContent = node;
+      <OutsideClickHandler onOutsideClick={this.handleBlur}>
+        <div
+          className={classes}
+          onKeyDown={this.handleKeyDown}
+          ref={node => {
+            this.filter = node;
           }}
-          style={contentStyle}
-          min={min}
-          max={max}
-          step={step}
-          showAsPopup
-          isOpen={this.state.isOpen}
-        />
-      </div>
+        >
+          <button className={labelStyles} onClick={() => this.toggleOpen()}>
+            {currentLabel}
+          </button>
+          <PriceFilterForm
+            id={id}
+            initialValues={hasInitialValues ? initialPrice : { minPrice: min, maxPrice: max }}
+            onClear={this.handleClear}
+            onCancel={this.handleCancel}
+            onSubmit={this.handleSubmit}
+            intl={intl}
+            contentRef={node => {
+              this.filterContent = node;
+            }}
+            style={contentStyle}
+            min={min}
+            max={max}
+            step={step}
+            showAsPopup
+            isOpen={this.state.isOpen}
+          />
+        </div>
+      </OutsideClickHandler>
     );
   }
 }
@@ -171,11 +206,11 @@ PriceFilterPopup.propTypes = {
   rootClassName: string,
   className: string,
   id: string.isRequired,
-  urlParam: string.isRequired,
+  label: node,
+  queryParamNames: arrayOf(string).isRequired,
   onSubmit: func.isRequired,
   initialValues: shape({
-    minPrice: number.isRequired,
-    maxPrice: number.isRequired,
+    price: string,
   }),
   contentPlacementOffset: number,
   min: number.isRequired,

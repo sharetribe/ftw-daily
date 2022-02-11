@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 
 import { FilterForm } from '../../forms';
-import css from './FilterPlain.css';
+import css from './FilterPlain.module.css';
 
 class FilterPlainComponent extends Component {
   constructor(props) {
@@ -17,18 +17,18 @@ class FilterPlainComponent extends Component {
   }
 
   handleChange(values) {
-    const { onSubmit, urlParam } = this.props;
-    onSubmit(urlParam, values);
+    const { onSubmit } = this.props;
+    onSubmit(values);
   }
 
   handleClear() {
-    const { onSubmit, onClear, urlParam } = this.props;
+    const { onSubmit, onClear } = this.props;
 
     if (onClear) {
       onClear();
     }
 
-    onSubmit(urlParam, null);
+    onSubmit(null);
   }
 
   toggleIsOpen() {

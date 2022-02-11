@@ -1,0 +1,117 @@
+.root {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.prev,
+.next {
+  display: block;
+
+  /* Dimensions */
+  padding-top: 26px;
+  padding-bottom: 26px;
+
+  /* Reset <a> tag sizing */
+  line-height: 0;
+  font-size: 0;
+}
+
+.prev {
+  /* Minimum touch size 44px (svg width + padding) */
+  padding-right: 33px;
+}
+.next {
+  /* Minimum touch size 44px (svg width + padding) */
+  padding-left: 33px;
+}
+
+.arrowIcon {
+  /* Color for svg icons */
+  fill: var(--marketplaceColor);
+  stroke: var(--marketplaceColor);
+
+  &:hover {
+    fill: var(--marketplaceColorDark);
+    stroke: var(--marketplaceColorDark);
+  }
+}
+
+.disabled,
+.disabled:hover {
+  fill: var(--matterColorAnti);
+  stroke: var(--matterColorAnti);
+}
+
+.pageNumberList {
+  display: flex;
+  justify-content: space-between;
+}
+
+/**
+ * Using 'justify-content: space-between;' we can deal with very narrow mobile screens.
+ * However, since the length of pageNumberList can vary up to 7,
+ * we need to keep track of how much space is allocated for the list
+ * Maximum length of pageNumbersNavLinks is 7 (e.g. [1, '…', 4, 5, 6, '…', 9])
+ */
+.pageNumberList1Items {
+  flex-basis: 30px;
+}
+
+.pageNumberList2Items {
+  flex-basis: 60px;
+}
+
+.pageNumberList3Items {
+  flex-basis: 100px;
+}
+
+.pageNumberList4Items {
+  flex-basis: 160px;
+}
+
+.pageNumberList5Items {
+  flex-basis: 200px;
+}
+
+.pageNumberList6Items {
+  flex-basis: 250px;
+}
+
+.pageNumberList7Items {
+  flex-basis: 275px;
+}
+
+.toPageLink {
+  /* Dimensions */
+  padding: 21px 5px;
+
+  /* Color for svg icons */
+  color: var(--matterColor);
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.currentPage {
+  /* Dimensions */
+  padding: 21px 5px 18px 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  border-bottom-color: var(--matterColorDark);
+
+  /* Color */
+  color: var(--matterColorDark);
+}
+
+.paginationGap {
+  /* Dimensions */
+  padding: 21px 5px;
+
+  /* Color for svg icons */
+  color: var(--matterColor);
+
+  /* Ellipsis is raised from baseline */
+  line-height: 13px;
+}

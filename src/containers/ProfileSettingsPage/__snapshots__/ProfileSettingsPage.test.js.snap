@@ -2,6 +2,7 @@
 
 exports[`ContactDetailsPage matches snapshot 1`] = `
 <Page
+  className="root"
   scrollingDisabled={false}
   title="ProfileSettingsPage.title"
 >
@@ -26,12 +27,17 @@ exports[`ContactDetailsPage matches snapshot 1`] = `
       className={null}
       rootClassName={null}
     >
-      <div>
-        <div>
-          <h1>
-            <FormattedMessage
+      <div
+        className="content"
+      >
+        <div
+          className="headingContainer"
+        >
+          <h1
+            className="heading"
+          >
+            <MemoizedFormattedMessage
               id="ProfileSettingsPage.heading"
-              values={Object {}}
             />
           </h1>
         </div>

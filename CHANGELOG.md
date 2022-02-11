@@ -12,10 +12,505 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 
-## Upcoming version 2019-XX-XX
+## Upcoming version 2022-XX-XX
 
+- [fix] Setting multiple environment variables in Windows requires using the set command before each
+  individual variable. Updated the 'for windows users' section in documentation.
+  [#1491](https://github.com/sharetribe/ftw-daily/pull/1491)
+- [add] Code comment about "REACT_APP" prefix in environment variables.
+  [#1492](https://github.com/sharetribe/ftw-daily/pull/1492)
+
+## [v8.4.0] 2021-12-02
+
+- [fix] Mobile safari zooms if input-related elements have smaller font-size than 16px. This updates
+  textarea and select element styles too. [#1489](https://github.com/sharetribe/ftw-daily/pull/1489)
+- [fix] Dependabot: Bump passport-oauth2 from 1.5.0 to 1.6.1
+  [#1487](https://github.com/sharetribe/ftw-daily/pull/1487)
+- [fix] Fix bugs in checkout process:
+
+  - Submit button was enabled prematurely for onetime payments
+  - Toggling between default card and onetime payment flows was not working correctly in case of
+    error (e.g. network error).
+  - Calling Stripe.confirmCardPayment when status is requires_capture is unnecessary.
+
+  [#1486](https://github.com/sharetribe/ftw-daily/pull/1486)
+
+- [change] Update many dependencies. See full list in the package.json changes in the PR.
+  [#1483](https://github.com/sharetribe/ftw-daily/pull/1483)
+- [fix] Double click issue. Show dedicated message, when current user doesn't have a pending email
+  address, but there's a verification error.
+  [#1485](https://github.com/sharetribe/ftw-daily/pull/1485)
+- [change] Update comment about how scrollIntoView works with links using hash.
+  [#1484](https://github.com/sharetribe/ftw-daily/pull/1484)
+- [fix] Account pages: mobile tab navigation should only scroll horizontally
+  [#1481](https://github.com/sharetribe/ftw-daily/pull/1481)
+- [fix] Temporarily disallow Node v17, since it causes issues with dependencies.
+  [#1479](https://github.com/sharetribe/ftw-daily/pull/1479)
+- [fix] Fix modal close button text/icon alignment
+  [#1476](https://github.com/sharetribe/ftw-daily/pull/1476)
+
+  [v8.4.0]: https://github.com/sharetribe/ftw-daily/compare/v8.3.0...v8.4.0
+
+## [v8.3.0] 2021-09-22
+
+- [change] Increase input font size on mobile to avoid Mobile Safari zooming in when focusing on
+  inputs. [#1473](https://github.com/sharetribe/ftw-daily/pull/1473)
+- [change] Update browserlist data to match modern browsers.
+  [#1468](https://github.com/sharetribe/ftw-daily/pull/1468)
+- [fix] Font-size was too big for Stripe Elements on small screens on PaymentMethodsForm.
+  [#1471](https://github.com/sharetribe/ftw-daily/pull/1471)
+- [fix] Remove unnecessary language import: fr.json
+  [#1469](https://github.com/sharetribe/ftw-daily/pull/1469)
+- [fix] Font-size for Poppins font was too big for Stripe Elements on small screens.
+  [#1465](https://github.com/sharetribe/ftw-daily/pull/1465)
+- [change] Updates to some of the libraries. React Intl had a breaking change v3 -> v5.
+  [#464](https://github.com/sharetribe/ftw-daily/pull/1464)
+- [fix] Adblockers might block Google analytics (window.ga) and cause an error.
+  [#1462](https://github.com/sharetribe/ftw-daily/pull/1462)
+
+  [v8.3.0]: https://github.com/sharetribe/ftw-daily/compare/v8.2.0...v8.3.0
+
+## [v8.2.0] 2021-08-06
+
+- [change] Update lodash version number in package.json resolutions section.
+  [#1459](https://github.com/sharetribe/ftw-daily/pull/1459)
+- [change] Dependabot update: url-parse (v1.5.1)
+  [#1436](https://github.com/sharetribe/ftw-daily/pull/1436)
+- [change] Dependabot update: lodash (v4.17.21)
+  [#1437](https://github.com/sharetribe/ftw-daily/pull/1437)
+- [change] Dependabot update: tar (v4.4.15)
+  [#1457](https://github.com/sharetribe/ftw-daily/pull/1457)
+- [change] Dependabot update: ws (v6.2.2) [#1446](https://github.com/sharetribe/ftw-daily/pull/1446)
+- [change] Dependabot update: hosted-git-info (v2.8.9)
+  [#1438](https://github.com/sharetribe/ftw-daily/pull/1438)
+- [change] Dependabot update: trim-newlines (v3.0.1)
+  [#1449](https://github.com/sharetribe/ftw-daily/pull/1449)
+- [change] Update sharetribe-scripts to version 5.0.1 which improves the instructions that are shown
+  after running yarn build command. [#1458](https://github.com/sharetribe/ftw-daily/pull/1458)
+- [fix] Remove unused dep-resolution: handlebars.
+  [#1456](https://github.com/sharetribe/ftw-daily/pull/1456)
+- [fix] PriceFilterPopup: filter popup is not closing when clicking outside on Safari.
+  [#1455](https://github.com/sharetribe/ftw-daily/pull/1455)
+- [fix] Add missing helper: isNumber. Used when Number.MAX_SAFE_INTEGER is reached.
+  [#1453](https://github.com/sharetribe/ftw-daily/pull/1453)
+- [fix] minutesBetween: remove thrown an error on negative diff.
+  [#1444](https://github.com/sharetribe/ftw-daily/pull/1444)
+- [fix] TransactionPanel: fix typo [#1451](https://github.com/sharetribe/ftw-daily/pull/1451)
+- [fix] searchMode (has_all/has_any) disappeared, when search-by-moving-the-map was used.
+  [#1443](https://github.com/sharetribe/ftw-daily/pull/1443)
+
+  [v8.2.0]: https://github.com/sharetribe/ftw-daily/compare/v8.1.1...v8.2.0
+
+## [v8.1.1] 2021-04-20
+
+- [change] Update jose to v3.11.4 [#1433](https://github.com/sharetribe/ftw-daily/pull/1433)
+- [add] Update fr.json, es.json and partially de.json
+  [#1431](https://github.com/sharetribe/ftw-daily/pull/1431)
+- [fix] currency conversion should not expect that env-variable is set.
+  [#1425](https://github.com/sharetribe/ftw-daily/pull/1425)
+- [fix] LoadableComponentErrorBoundary should be used in prod, not in dev-mode with
+  hot-loading.[#1429](https://github.com/sharetribe/ftw-daily/pull/1429)
+- [fix] currency for Poland (PLN) [#1427](https://github.com/sharetribe/ftw-daily/pull/1427)
+
+  [v8.1.1]: https://github.com/sharetribe/ftw-daily/compare/v8.1.0...v8.1.1
+
+## [v8.1.0] 2021-03-11
+
+- [change] Specify required Node.js versions in package.json and update the node version used in
+  CircleCI. Currently, the required Node.js version comes from
+  [jose](https://github.com/panva/jose#runtime-support-matrix) package which is used with social
+  logins. [#1418](https://github.com/sharetribe/ftw-daily/pull/1418)
+- [fix] enforce upper case for currency and improve error message for it.
+  [#1417](https://github.com/sharetribe/ftw-daily/pull/1417)
+- [add] Add `LoadableComponentErrorBoundary` for handling ChunkLoadErrors with error boundary.
+  [#1416](https://github.com/sharetribe/ftw-daily/pull/1416)
+
+  [v8.1.0]: https://github.com/sharetribe/ftw-daily/compare/v8.0.0...v8.1.0
+
+## [v8.0.0] 2021-02-17
+
+This major release adds support for code-splitting using
+[Loadable Components](https://loadable-components.com/). At this point, we added route-based code
+splitting, which meant changes to routeConfiguration.js and how "loadData" & "setInitialValues"
+functions are defined and passed to routeConfiguration. Read more from
+[Flex Docs](https://www.sharetribe.com/docs/ftw-routing/how-code-splitting-works-in-ftw/) and
+related pull requests:
+
+- [fix] Remove unintended Lodash usage, unspecified window-scope calls and unused vars
+  [#1413](https://github.com/sharetribe/ftw-daily/pull/1413)
+- [add] Route-based code splitting. This is done against sharetribe-scripts v5.0.0 using Loadable
+  components. Read more from the pull request.
+  [#1411](https://github.com/sharetribe/ftw-daily/pull/1411)
+
+  [v8.0.0]: https://github.com/sharetribe/ftw-daily/compare/v7.3.0...v8.0.0
+
+## [v7.3.0] 2021-01-13
+
+- [fix] Move well-known/\* endpoints related to OIDC proxy setup from `apiRouter` to new
+  `wellKnownRouter`so that they can be enabled outside the basic auth setup. It also makes it
+  simpler to set the identity provider url, because we can drop the `/api` part of the path. Also,
+  rename the `RSA_SECRET_KEY`to `RSA_PRIVATE_KEY` for consistency.
+  [#1399](https://github.com/sharetribe/ftw-daily/pull/1399)
+- [fix] Make sure that the verify email API endpoint has been called successfully before redirecting
+  the user away from EmailVerificationPage.
+  [#1397](https://github.com/sharetribe/ftw-daily/pull/1397)
+
+  [v7.3.0]: https://github.com/sharetribe/ftw-daily/compare/v7.2.0...v7.3.0
+
+## [v7.2.0] 2020-12-16
+
+- [add] Add helper functions for setting up your own OIDC authentication and using FTW server as
+  proxy when needed. [#1383](https://github.com/sharetribe/ftw-daily/pull/1383)
+
+  [v7.2.0]: https://github.com/sharetribe/ftw-daily/compare/v7.1.0...v7.2.0
+
+## [v7.1.0] 2020-12-15
+
+- [change] Handle entity update with sparse attributes.
+  [#1392](https://github.com/sharetribe/ftw-daily/pull/1392)
+- [change] Remove react-google-maps dependency. It has not been maintained for 3 years. From now on,
+  we use Google Maps API directly. However, the default map provider is still Mapbox.
+  [#1389](https://github.com/sharetribe/ftw-daily/pull/1389)
+- [fix] Pass metadata through sanitizeUser function.
+  [#1391](https://github.com/sharetribe/ftw-daily/pull/1391)
+- [fix] Call for the same page caused unnecessary rendering
+  [#1388](https://github.com/sharetribe/ftw-daily/pull/1388)
+- [fix] Fix Google Maps default centering if no bounds or center is given.
+  [#1386](https://github.com/sharetribe/ftw-daily/pull/1386)
+- [add] Add timeout and other options for getCurrentLocation call.
+  [#1385](https://github.com/sharetribe/ftw-daily/pull/1385)
+- [fix] Fix FieldCheckbox validation on blur event on Firefox.
+  [#1384](https://github.com/sharetribe/ftw-daily/pull/1384)
+
+  [v7.1.0]: https://github.com/sharetribe/ftw-daily/compare/v7.0.0...v7.1.0
+
+## [v7.0.0] 2020-11-17
+
+This major release renames all the CSS files. If you have made custom components or customized
+existing ones, you should read the related [PR](https://github.com/sharetribe/ftw-daily/pull/1374)
+for more information.
+
+- [change] Update sharetribe-scripts (our fork of create-react-app) to v4.0.0. In addition to
+  changes that CRA@v4 brought along,
+
+  - We started to use`*.module.css` naming pattern for styles that use CSS Modules preprocessor.
+  - We also turned on live CSS Custom Properties (CSS Variables).
+
+  Read the PR for more info: [#1374](https://github.com/sharetribe/ftw-daily/pull/1374)
+
+  [v7.0.0]: https://github.com/sharetribe/ftw-daily/compare/v6.5.0...v7.0.0
+
+## [v6.5.0] 2020-11-16
+
+- [add] Add support for Google login. This works in the same way as Facebook flow so you can check
+  the [Facebook PR](https://github.com/sharetribe/ftw-daily/pull/1364) for the more details.
+  [#1376](https://github.com/sharetribe/ftw-daily/pull/1376)
+- [fix] Routes component got double rendered due to Redux container HOC. Because navigation could
+  happen twice, loadData was also called twice.
+  [#1380](https://github.com/sharetribe/ftw-daily/pull/1380)
+- [fix] 401 return code when rendering on SSR.
+  [#1379](https://github.com/sharetribe/ftw-daily/pull/1379)
+
+  [v6.5.0]: https://github.com/sharetribe/ftw-daily/compare/v6.4.2...v6.5.0
+
+## [v6.4.2] 2020-10-30
+
+- [fix] Fix the issue with form on AuthenticationPage not showing on smaller screens when using
+  Safari as browser. [#1377](https://github.com/sharetribe/ftw-daily/pull/1377)
+
+  [v6.4.2]: https://github.com/sharetribe/ftw-daily/compare/v6.4.1...v6.4.2
+
+## [v6.4.1] 2020-10-20
+
+- [add] Add new Stripe countires Bulgaria, Cyprus, Czech Republic, Malta and Romania to the
+  `StripeConnectAccountForm`. Also reorder BANK_CODE & BRANCH_CODE in UI to more logical order.
+  [#1371](https://github.com/sharetribe/ftw-daily/pull/1371)
+- [fix] Don't pass protected data key through `ConfirmSignupForm` if protected data is empty.
+  [#1370](https://github.com/sharetribe/ftw-daily/pull/1370)
+- [add] Update French translation file (Spanish and German translations have still missing keys).
+  [#1369](https://github.com/sharetribe/ftw-daily/pull/1369)
+- [fix] Pass additional values from `ConfirmSignupForm` forward as user's protected data.
+  [#1368](https://github.com/sharetribe/ftw-daily/pull/1368)
+
+  [v6.4.1]: https://github.com/sharetribe/ftw-daily/compare/v6.4.0...v6.4.1
+
+## [v6.4.0] 2020-10-14
+
+- [add] Add Facebook login as a first step towards supporting social logins and SSO in FTW. This PR
+  introduces new endpoints `createUserWithIdp` and `loginWithIdp` and strategy for logging in with
+  Facebook. See the PR for the more detailed view of the changes.
+  [#1364](https://github.com/sharetribe/ftw-daily/pull/1364)
+- [fix] Fix missing proptype warnings in `TransactionPage` and `TransactionPanel` tests.
+  [#1363](https://github.com/sharetribe/ftw-daily/pull/1363)
+- [fix] Improve error handling by passing error details forward instead of creating a new error that
+  hides the details when making API call to FTW server.
+  [#1361](https://github.com/sharetribe/ftw-daily/pull/1361)
+- [fix] Remove duplicate page schema from body.
+  [#1355](https://github.com/sharetribe/ftw-daily/pull/1355)
+
+  [v6.4.0]: https://github.com/sharetribe/ftw-daily/compare/v6.3.1...v6.4.0
+
+## [v6.3.1] 2020-08-19
+
+- [fix] Fix popup-button in SelectSingleFilterPopup.css and adjust Footer with correct baselines.
+  [#1353](https://github.com/sharetribe/ftw-daily/pull/1353)
+
+[v6.3.1]: https://github.com/sharetribe/ftw-daily/compare/v6.3.0...v6.3.1
+
+## [v6.3.0] 2020-08-19
+
+- [change] We decided to change the default font to Poppins.
+  [#1349](https://github.com/sharetribe/ftw-daily/pull/1349)
+- [change] Update path-to-regexp to v6.1.0
+  [#1348](https://github.com/sharetribe/ftw-daily/pull/1348)
+- [change] Update Helmet to v4.0.0. Show warning if environment variable REACT_APP_CSP is not set or
+  if it's set to 'report' mode in production environmet. Set REACT_APP_CSP to 'report' mode by
+  default in `.env-template` file. [#1347](https://github.com/sharetribe/ftw-daily/pull/1347)
+- [change] In `StripeConnectAccountForm` show error message from Stripe if there is one when
+  fetching account link. [#1346](https://github.com/sharetribe/ftw-daily/pull/1346)
+
+[v6.3.0]: https://github.com/sharetribe/ftw-daily/compare/v6.2.0...v6.3.0
+
+## [v6.2.0] 2020-08-12
+
+This change set was originally released as a patch update 6.1.2 but after reconsideration it's
+released as a minor update 6.2.0.
+
+- [fix] remove typo [#1343](https://github.com/sharetribe/ftw-daily/pull/1343)
+- [change] Request custom image variants for avatar
+  [#1342](https://github.com/sharetribe/ftw-daily/pull/1342)
+- [change] Some dependency updates [#1337](https://github.com/sharetribe/ftw-daily/pull/1337)
+- [fix] Use Stripe's `confirmCardPayment` function instead of deprecated `handleCardPayment` to
+  confirm PaymentIntent. In addition to the rename, the arguments passed to `handleCardPayment` are
+  sligthly different. Otherwise, these changes should not affect the behavior of the function.
+  [#1339](https://github.com/sharetribe/ftw-daily/pull/1339)
+
+[v6.2.0]: https://github.com/sharetribe/flex-template-web/compare/v6.1.1...v6.2.0
+
+## [v6.1.1] 2020-07-21
+
+- [fix] Fix config script for NodeJS v14.5.0
+  [#1327](https://github.com/sharetribe/ftw-daily/pull/1327)
+
+[v6.1.1]: https://github.com/sharetribe/flex-template-web/compare/v6.1.0...v6.1.1
+
+## [v6.1.0] 2020-07-01
+
+- [fix] MainPanel: search filter bug. Address and bounds are handled outside of MainPanel, URL
+  params should be trusted instead of values stored to state.
+  [#1320](https://github.com/sharetribe/ftw-daily/pull/1320)
+- [fix] small typo. [#1319](https://github.com/sharetribe/ftw-daily/pull/1319)
+- [fix] Fix typo (which is copy-pasted in 4 files).
+  [#1318](https://github.com/sharetribe/ftw-daily/pull/1318)
+- [add] Update French translation file (Spanish and German translations have still missing keys).
+  [#1316](https://github.com/sharetribe/ftw-daily/pull/1316)
+- [fix] Sync bookingUnitType variables and update comments. Client app's API (proxy) server needs to
+  know about unit type. [#1317](https://github.com/sharetribe/ftw-daily/pull/1317)
+
+[v6.1.0]: https://github.com/sharetribe/flex-template-web/compare/v6.0.0...v6.1.0
+
+## [v6.0.0] 2020-06-25
+
+- [change] Use privileged transitions for price calculation by default and update the process alias.
+  [#1314](https://github.com/sharetribe/ftw-daily/pull/1314)
+- [add] Add client secret enquiry to 'yarn run config' script
+  [#1313](https://github.com/sharetribe/ftw-daily/pull/1313)
+- [change] Add UI support for flexible pricing and privileged transitions. Note that this requires
+  updating the booking breakdown estimation code that is now done in the backend.
+  [#1310](https://github.com/sharetribe/ftw-daily/pull/1310)
+- [add] Add local API endpoints for flexible pricing and privileged transitions
+  [#1301](https://github.com/sharetribe/ftw-daily/pull/1301)
+- [fix] `yarn run dev-backend` was expecting NODE_ENV.
+  [#1303](https://github.com/sharetribe/ftw-daily/pull/1303)
+
+[v6.0.0]: https://github.com/sharetribe/flex-template-web/compare/v5.0.0...v6.0.0
+
+## [v5.0.0] 2020-06-04
+
+- [change] Streamlining filter setup. Everyone who customizes FTW-templates, needs to update filters
+  and unfortunately the related code has been spread out in multiple UI containers.
+
+  Now, filters are more configurable through marketplace-custom-config.js. You can just add new
+  filter configs to `filters` array in there - and that should be enough for creating new filters
+  for extended data.
+
+  If your are creating a totally new filter component, you can take it into use in a single file:
+  src/containers/SearchPage/FilterComponent.js
+
+  In addition, we have renamed couple of container components:
+
+  - SearchFilters -> SearchFiltersPrimary
+  - SearchFiltersPanel -> SearchFiltersSecondary (SearchFiltersMobile has kept its name.)
+
+  SortBy filter's state is also tracked similarly as filters. From now on, the state is kept in
+  MainPanel and not in those 3 different UI containers.
+
+  [#1296](https://github.com/sharetribe/ftw-daily/pull/1296)
+
+[v5.0.0]: https://github.com/sharetribe/flex-template-web/compare/v4.5.0...v5.0.0
+
+## [v4.5.0] 2020-06-01
+
+- [fix] In some situations, ProfileMenu has began to overflow on TopbarDesktop.
+  [#1290](https://github.com/sharetribe/ftw-daily/pull/1290)
+- [change] Update dependencies (patch updates only)
+  [#1291](https://github.com/sharetribe/ftw-daily/pull/1291)
+- [change] Refactor server API routes into separate files.
+  [#1294](https://github.com/sharetribe/ftw-daily/pull/1294)
+- [change] Start the backend API router in dev mode with a dev server.
+  [#1297](https://github.com/sharetribe/ftw-daily/pull/1297)
+
+[v4.5.0]: https://github.com/sharetribe/flex-template-web/compare/v4.4.3...v4.5.0
+
+## [v4.4.3] 2020-05-13
+
+- [fix] Allow white space on Japanese bank account info. Japan collects bank name and account owner
+  name in addition to routing numbers. [#1287](https://github.com/sharetribe/ftw-daily/pull/1287)
+- [fix] wrongly named default props handleSubmit renamed to onSubmit
+  [#1288](https://github.com/sharetribe/ftw-daily/pull/1288)
+
+[v4.4.3]: https://github.com/sharetribe/flex-template-web/compare/v4.4.2...v4.4.3
+
+## [v4.4.2] 2020-04-09
+
+- [fix] Handle deleted reviews in ActivityFeed
+  [#1283](https://github.com/sharetribe/ftw-daily/pull/1283)
+
+[v4.4.2]: https://github.com/sharetribe/flex-template-web/compare/v4.4.1...v4.4.2
+
+## [v4.4.1] 2020-03-30
+
+- [change] Improve the search page sorting and filters UI for different screen sizes
+  [#1280](https://github.com/sharetribe/ftw-daily/pull/1280)
+
+[v4.4.1]: https://github.com/sharetribe/flex-template-web/compare/v4.4.0...v4.4.1
+
+## [v4.4.0] 2020-03-25
+
+- [add] Search result sorting [#1277](https://github.com/sharetribe/ftw-daily/pull/1277)
+- [change] Move category and amenities search filters from primary filters to secondary filters.
+  [#1275](https://github.com/sharetribe/ftw-daily/pull/1275)
+
+[v4.4.0]: https://github.com/sharetribe/flex-template-web/compare/v4.3.0...v4.4.0
+
+## [v4.3.0] 2020-03-16
+
+- [change] Redirect user back to Stripe during Connect Onboarding Flow when user is returned to
+  failure URL provided that the Account Link generation is successful.
+  [#1269](https://github.com/sharetribe/ftw-daily/pull/1269)
+- [fix] Don't flash listing closed text on mobile view of `BookingPanel` when the listing data is
+  not loaded yet. Instead, check that text is shown only for closed listings.
+  [#1268](https://github.com/sharetribe/ftw-daily/pull/1268)
+- [change] Use some default values to improve Stripe Connect onboarding. When creating a new Stripe
+  the account we will pass the account type, business URL and MCC to Stripe in order to avoid a
+  couple of steps in Connect Onboarding. We will also pass `tos_shown_and_accepted` flag. This PR
+  will bring back the previously used `accountToken` which is now used for passing e.g. the account
+  type to Stripe. [#1267](https://github.com/sharetribe/ftw-daily/pull/1267)
+- [change] Update `Modal` component to have option to use `Portal` with `usePortal` flag. Keep also
+  possibility to use modals without Portal because of `ModalInMobile` component.
+  [#1258](https://github.com/sharetribe/ftw-daily/pull/1258)
+
+  [v4.3.0]: https://github.com/sharetribe/flex-template-web/compare/v4.2.0...v4.3.0
+
+## [v4.2.0] 2020-02-18
+
+- [add] Show a banner when a user is logged in with limited access.
+  [#1259](https://github.com/sharetribe/ftw-daily/pull/1259)
+  [#1261](https://github.com/sharetribe/ftw-daily/pull/1261)
+- [add] Support for logging in as a user from Console.
+  [#1254](https://github.com/sharetribe/ftw-daily/pull/1254)
+- [change] Add `handlebars` 4.5.3 and `serialize-javascript` 2.1.1 to resolutions in `package.json`.
+  [#1251](https://github.com/sharetribe/ftw-daily/pull/1251)
+
+  [v4.2.0]: https://github.com/sharetribe/flex-template-web/compare/v4.1.0...v4.2.0
+
+## [v4.1.0] 2020-02-03
+
+- [fix] Remove unused 'invalid' prop that breaks some versions of Final Form
+  [#1255](https://github.com/sharetribe/ftw-daily/pull/1255)
+- [fix] Fix `console.warn` functions. [#1252](https://github.com/sharetribe/ftw-daily/pull/1252)
+- [add] Add missing countries (e.g. MX and JP) to `StripeBankAccountTokenInput` validations.
+  [#1250](https://github.com/sharetribe/ftw-daily/pull/1250)
+
+  [v4.0.1]: https://github.com/sharetribe/flex-template-web/compare/v4.0.0...v4.1.0
+
+## [v4.0.0] 2019-12-19
+
+- [change] Use Stripe's [Connect onboarding](https://stripe.com/docs/connect/connect-onboarding) for
+  adding and updating the identity information of the Stripe account.
+  - Before updating to this version you should check
+    [the related pull request](https://github.com/sharetribe/ftw-daily/pull/1234)
+  - Read more from documentation:
+    [How to handle provider onboarding and identity verification on FTW](https://www.sharetribe.com/docs/guides/provider-onboarding-and-identity-verification/)
+
+**Note:** In this update we have deprecated the old `PayoutDetailsForm` and `PayoutPreferencesPage`.
+Form now on Stripe will handle collecting the identity information required for verificating the
+Stripe account. On FTW we will only handle creating the new account and adding and updating
+information about bank account (e.g. IBAN number). If you want to keep using the custom form inside
+your application you need to make sure that you are collecting all the required information and
+enabling users to update the account so that it doesn't get restricted.
+
+- [fix] Add missing props to examples related to EditListingWizard
+  [#1247](https://github.com/sharetribe/ftw-daily/pull/1247)
+- [fix] Add missing props to tests related to EditListingWizard
+  [#1246](https://github.com/sharetribe/ftw-daily/pull/1246)
+- [fix] Update links to API Reference docs.
+  [#1231](https://github.com/sharetribe/ftw-daily/pull/1231)
+
+  [v4.0.0]: https://github.com/sharetribe/flex-template-web/compare/v3.7.0...v4.0.0
+
+## [v3.7.0] 2019-12-09
+
+- [change] Make it easier to reorder EditListingWizard tabs/panels.
+  [#1240](https://github.com/sharetribe/ftw-daily/pull/1240)
+- [change] In `PayoutDetailsForm` show states (US and AU) and provinces (CA) in dropdown instead of
+  input. Since November 18, 2019 Stripe has been validating these values (read more
+  https://support.stripe.com/questions/connect-address-validation).
+- [add] Add IconEdit [#1237](https://github.com/sharetribe/ftw-daily/pull/1237)
+
+  [v3.7.0]: https://github.com/sharetribe/flex-template-web/compare/v3.6.1...v3.7.0
+
+## [v3.6.1] 2019-11-26
+
+- [fix] Fix XSS-vulnerability on SearchPage where URL param 'address' was exposed directly to
+  schema, which is just a script tag: <script type="application/ld+json">. On server-side, this
+  could leak malformed HTML through to browsers and made it possible to inject own script tags.
+
+However, CSP prevents any data breach: injected js can't send data to unknonwn 3rd party sites.
+
+NOTE: Check that `REACT_APP_CSP` is in block mode on your production environment. You can read more
+from Flex docs: https://www.sharetribe.com/docs/guides/how-to-set-up-csp-for-ftw/
+[#1233](https://github.com/sharetribe/flex-template-web/pull/1233)
+
+- [change] Rename repository form `flex-template-web` to `ftw-daily`.
+  [#1230](https://github.com/sharetribe/flex-template-web/pull/1230)
+
+  [v3.6.1]: https://github.com/sharetribe/flex-template-web/compare/v3.6.0...v3.6.1
+
+## [v3.6.0] 2019-11-04
+
+- [change] update react-dates from 20.3.0 to 21.3.1
+  [#1223](https://github.com/sharetribe/flex-template-web/pull/1223)
+- [change] Update helmet from 3.18.0 to 3.21.2
+  [#1225](https://github.com/sharetribe/flex-template-web/pull/1225)
+- [change] Update @sentry/browser and @sentry/node from 5.6.2 to 5.7.1. Due to some refactoring
+  Sentry has done internally which is included to this update, you might need to remove
+  `node_modules` and run `yarn install` again.
+  [#1224](https://github.com/sharetribe/flex-template-web/pull/1224)
+- [add] Add default timezone to date formatting in example transaction process email templates.
+  [#1227](https://github.com/sharetribe/flex-template-web/pull/1227)
+- [change] Update @formatjs/intl-relativetimeformat from 2.8.3 to 4.2.1
+  [#1222](https://github.com/sharetribe/flex-template-web/pull/1222)
+- [fix] Use currency of the `lineItem` on every line of the `BookingBreakdown` if possible.
+  [#1221](https://github.com/sharetribe/flex-template-web/pull/1221)
 - [fix] AvailabilityPlan doesn't need to have entries for every day.
   [#1214](https://github.com/sharetribe/flex-template-web/pull/1214)
+- [change] Default transaction process alias changed.
+  [#1219](https://github.com/sharetribe/flex-template-web/pull/1219)
+- [change] Add default tx process definition. Remove default email templates.
+  [#1220](https://github.com/sharetribe/flex-template-web/pull/1220)
+
+  [v3.6.0]: https://github.com/sharetribe/flex-template-web/compare/v3.5.1...v3.6.0
 
 ## [v3.5.1] 2019-09-16
 
@@ -28,6 +523,8 @@ way to update this template, but currently, we follow a pattern:
   overriding `render` method to render child object by using `createPortal` instead of
   `unstable_renderSubtreeIntoContainer`.
   [#1200](https://github.com/sharetribe/flex-template-web/pull/1200)
+
+  [v3.5.1]: https://github.com/sharetribe/flex-template-web/compare/v3.5.0...v3.5.1
 
 ## [v3.5.0] 2019-08-29
 
