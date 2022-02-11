@@ -257,14 +257,6 @@ export const findNextBoundaryCustom = (timeZone, currentMomentOrDate) =>
     .startOf('minute')
     .toDate();
 
-export const findNextBoundaryHour = (timeZone, currentMomentOrDate) =>
-  moment(currentMomentOrDate)
-    .clone()
-    .tz(timeZone)
-    .add(30 - (moment(currentMomentOrDate).minute ()% 30), 'minutes')
-    .startOf('minutes')
-    .toDate();
-
 /**
  * Find sharp hours inside given time window. Returned strings are localized to given time zone.
  *
@@ -398,12 +390,12 @@ export const getStartHours = (intl, timeZone, startTime, endTime) => {
  */
 export const getEndHours = (intl, timeZone, startTime, endTime) => {
   const hours = getSharpHours(intl, timeZone, startTime, endTime);
-  return hours.length < 2 ? [] : hours.slice(1);
+  return hours.length < 1 ? [] : hours.slice(0.5);
 };
 
 export const getEndHoursCustom = (intl, timeZone, startTime, endTime) => {
   const hours = getSharpHoursCustom(intl, timeZone, startTime, endTime);
-  return hours.length < 2 ? [] : hours.slice(0.5);
+  return hours.length < 1 ? [] : hours.slice(0.5);
 };
 
 /**
