@@ -184,7 +184,7 @@ export const createSearchResultSchema = (listings, address, intl, pub_category, 
     // let article = 'to rent';
     const arrToHire = ['photography', 'art', 'music', 'desk-space', 'office-space', 'meeting-room-space'];
     const arrForHire = ['tattoo-artist', 'piercing-artist', 'event-space', 'outdoor-site', 'shoot-location'];
-    const arrForHireSpace = ['hair-stylist', 'barber', 'makeup-artist', 'nail-technician', 'cosmetics', 'beauty-treatment-room'];
+    const arrForHireSpace = ['hair-stylist', 'barber', 'makeup-artist', 'nail-technician', 'cosmetics', 'aesthetics', 'beauty-treatment-room'];
     const cat = e.config.catKeys.split(',');
 
     if (!!filt && filt.every((e) => cat.includes(e))) {
@@ -195,8 +195,8 @@ export const createSearchResultSchema = (listings, address, intl, pub_category, 
       const ddd = aaa.includes('Kitchen Space') && aaa.length >= 2 ? aaa.filter(item => item !== 'Kitchen Space') : aaa;
       const uniqueCategory = ddd.join(', ');
       const eventsCat = cat.filter(e => e !== 'kitchen-space');
-      console.log(cat, filt)
-      console.log(filt.sort().join(','), 'ddd', cat.sort().join(','))
+      // console.log(cat, filt)
+      // console.log(filt.sort().join(','), 'ddd', cat.sort().join(','))
 
       uniqueCategory === 'Kitchen Space' ? schemaTitle = intl.formatMessage(
         { id: 'SearchPage.schemaTitle' },

@@ -20,7 +20,8 @@ export default class OutsideClickHandler extends Component {
   }
 
   handleClick(event) {
-    if (!this.node.contains(event.target)) {
+    
+    if (!this.node.contains(event.target) && event.target.innerText !== "Category") {
       this.props.onOutsideClick();
     }
   }

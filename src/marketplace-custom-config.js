@@ -92,6 +92,7 @@ export const filters = [
   {
     id: 'hair_and_beauty',
     label: 'Hair & Beauty',
+    labelImg: 'hairBeauty',
     type: 'SelectMultipleFilter',
     group: 'primary',
     queryParamNames: ['pub_category'],
@@ -102,26 +103,23 @@ export const filters = [
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
       options: [
-        { key: 'hair-stylist', label: 'Hair Stylist' },
-        { key: 'barber', label: 'Barber' },
-        { key: 'makeup-artist', label: 'Beauty Space' },
-        { key: 'nail-technician', label: 'Nail Station' },
-        { key: 'cosmetics', label: 'Beauty Room' },
-        { key: 'beauty-treatment-room', label: 'Beauty Treatment Room' }
+        { key: 'hair-stylist', label: 'Hair Stylist', labelImg: 'hairStylist' },
+        { key: 'barber', label: 'Barber', labelImg: 'barber' },
+        { key: 'makeup-artist', label: 'Beauty Space', labelImg: 'makeupArtist' },
+        { key: 'nail-technician', label: 'Nail Station', labelImg: 'nailTechnician' },
+        { key: 'cosmetics', label: 'Beauty Room', labelImg: 'cosmetics' },
+        { key: 'aesthetics', label: 'Aesthetics', labelImg: 'aesthetics' },
+        { key: 'tattoo-and-piercing', label: 'Tattoo & Piercing', labelImg: 'tattooAndPiercing' }
       ],
-      // NOTE Old categories migrated, i think??
-      // { key: 'hair-stylist', label: 'Hair Stylist' },
-      // { key: 'barber', label: 'Barber' },
-      // { key: 'makeup-artist', label: 'Makeup Artist' },
-      // { key: 'nail-technician', label: 'Nail Technician' },
-      // { key: 'cosmetics', label: 'Cosmetics' },
+
       isCategory: true,
-      catKeys: 'hair-stylist,barber,makeup-artist,nail-technician,cosmetics,beauty-treatment-room',
+      catKeys: 'hair-stylist,barber,makeup-artist,nail-technician,cosmetics,aesthetics,tattoo-and-piercing',
     },
   },
   {
-    id: 'fitness_and_wellness',
-    label: 'Fitness & Wellness',
+    id: 'wellness',
+    label: 'Wellness',
+    labelImg: 'wellness',
     type: 'SelectMultipleFilter',
     group: 'primary',
     queryParamNames: ['pub_category'],
@@ -132,9 +130,9 @@ export const filters = [
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
       options: [
-        { key: 'fitness', label: 'Fitness Studio' },
-        { key: 'therapy-room', label: 'Therapy Room' },
-        { key: 'wellness-treatment-room', label: 'Wellness Treatment Room' },
+        { key: 'therapy-room', label: 'Therapy Room', labelImg: 'therapyRoom' },
+        { key: 'massage-room', label: 'Massage Room', labelImg: 'massageRoom' },
+        { key: 'clinical-room', label: 'Clinical Room', labelImg: 'clinicalRoom' },
       ],
         // NOTE Old categories, need to migrate!
         // { key: 'fitness', label: 'Fitness' },
@@ -146,12 +144,13 @@ export const filters = [
         // { key: 'acupuncture', label: 'Acupuncture' },
         // { key: 'chiropractor', label: 'Chiropractor' },
       isCategory: true,
-      catKeys: 'fitness,therapy-room,wellness-treatment-room',
+      catKeys: 'therapy-room, massage-room, clinical-room',
     },
   },
   {
-    id: 'creative_studios',
-    label: 'Creative Studios',
+    id: 'fitness',
+    label: 'Fitness',
+    labelImg: 'fitness',
     type: 'SelectMultipleFilter',
     group: 'primary',
     queryParamNames: ['pub_category'],
@@ -162,17 +161,56 @@ export const filters = [
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
       options: [
-        { key: 'photography', label: 'Photography Studio' },
-        { key: 'art', label: 'Art Studio' },
-        { key: 'music', label: 'Music Studio' },
+        { key: 'fitness', label: 'Fitness Studio', labelImg: 'fitness' },
+        { key: 'yoga-studio', label: 'Yoga Studio', labelImg: 'yogaStudio' },
+        { key: 'dance-studio', label: 'Dance Studio', labelImg: 'danceStudio' },
+        { key: 'sports-hall', label: 'Sports Hall', labelImg: 'sportsHall' },
+        { key: 'outdoor-sport-space', label: 'Outdoor Sport Space ', labelImg: 'outdoorSportSpace' },
+        { key: 'activity-room', label: 'Activity Room', labelImg: 'activityRoom' },
+      ],
+        // NOTE Old categories, need to migrate!
+        // { key: 'fitness', label: 'Fitness' },
+        // { key: 'yoga', label: 'Yoga' },
+        // { key: 'dance', label: 'Dance' },
+        // { key: 'martial-arts', label: 'Martial Arts' },
+        // { key: 'massage', label: 'Massage' },
+        // { key: 'reiki', label: 'Reiki' },
+        // { key: 'acupuncture', label: 'Acupuncture' },
+        // { key: 'chiropractor', label: 'Chiropractor' },
+      isCategory: true,
+      catKeys: 'fitness, yoga-studio, dance-studio, sports-hall, outdoor-sport-space, activity-room',
+    },
+  },
+  {
+    id: 'events_and_venues',
+    label: 'Events & Venues',
+    labelImg: 'eventsAndVenues',
+    type: 'SelectMultipleFilter',
+    group: 'primary',
+    queryParamNames: ['pub_category'],
+    config: {
+      searchMode: 'has_any',
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for the UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: [
+        { key: 'music-venue', label: 'Music Venue', labelImg: "musicVenue" },
+        { key: 'private-event-space', label: 'Private Event Space', labelImg: "privateEventSpace" },
+        { key: 'sports-venue', label: 'Sports Venue', labelImg: "sportsVenue" },
+        { key: 'conference-exhibition', label: 'Conference & Exhibition ', labelImg: "conferenceExhibition" },
+        { key: 'outdoor-events', label: 'Outdoor Events', labelImg: "outdoorEvents" },
+        { key: 'private-dining', label: 'Private Dining', labelImg: "privateDining" },
+
       ],
       isCategory: true,
-      catKeys: 'photography,art,music',
+      catKeys: 'music-venue, private-event-space, sports-venue, conference-exhibition, outdoor-events, private-dining',
     },
   },
   {
     id: 'coworking',
     label: 'Coworking',
+    labelImg: 'coworking',
     type: 'SelectMultipleFilter',
     group: 'primary',
     queryParamNames: ['pub_category'],
@@ -183,17 +221,20 @@ export const filters = [
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
       options: [
-        { key: 'desk-space', label: 'Coworking Space' },
-        { key: 'office-space', label: 'Private Office Space' },
-        { key: 'meeting-room-space', label: 'Meeting Room Space' },
+        { key: 'desk-space', label: 'Coworking Space', labelImg: 'deskSpace' },
+        { key: 'office-space', label: 'Private Office Space', labelImg: 'officeSpace' },
+        { key: 'meeting-room-space', label: 'Meeting Room Space', labelImg: 'meetingRoomSpace' },
+        { key: 'conference-room', label: 'Conference Room', labelImg: 'conferenceRoom' },
+        { key: 'classroom', label: 'Classroom', labelImg: 'classroom' }
       ],
       isCategory: true,
-      catKeys: 'desk-space,office-space,meeting-room-space',
+      catKeys: 'desk-space, office-space, meeting-room-space, conference-room, classroom',
     },
   },
   {
-    id: 'events_and_kitchen',
-    label: 'Events & Kitchen',
+    id: 'music_and_arts',
+    label: 'Music & Arts',
+    labelImg: 'musicAndArts',
     type: 'SelectMultipleFilter',
     group: 'primary',
     queryParamNames: ['pub_category'],
@@ -204,18 +245,22 @@ export const filters = [
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
       options: [
-        { key: 'event-space', label: 'Event Space' },
-        { key: 'outdoor-site', label: 'Outdoor Site' },
-        { key: 'shoot-location', label: 'Shoot Location' },
-        { key: 'kitchen-space', label: 'Kitchen Space' },
+        { key: 'music-studio', label: 'Music Studio', labelImg: 'musicStudio' },
+        { key: 'recording-studio', label: 'Recording Studio', labelImg: 'recordingStudio' },
+        { key: 'gallery-space', label: 'Gallery Space', labelImg: 'gallerySpace' },
+        { key: 'art-studio', label: 'Art Studio', labelImg: 'artStudio' },
+        { key: 'rehearsal-space', label: 'Rehearsal Space', labelImg: 'rehearsalSpace' },
+        { key: 'drama-studio', label: 'Drama Studio', labelImg: 'dramaStudio' },
+        { key: 'theatre-space', label: 'Theatre Space', labelImg: 'theatreSpace' },
       ],
       isCategory: true,
-      catKeys: 'event-space,outdoor-site,shoot-location,kitchen-space',
+      catKeys: 'music-studio, recording-studio, gallery-space, art-studio, rehearsal-space, drama-studio, theatre-space',
     },
   },
   {
-    id: 'tattoo_and_piercing',
-    label: 'Tattoo & Piercing',
+    id: 'photography_and_film',
+    label: 'Photography & Film',
+    labelImg: 'photographyAndFilm',
     type: 'SelectMultipleFilter',
     group: 'primary',
     queryParamNames: ['pub_category'],
@@ -226,13 +271,42 @@ export const filters = [
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
       options: [
-        { key: 'tattoo-artist', label: 'Tattoo' },
-        { key: 'piercing-artist', label: 'Piercing' },
+        { key: 'photography', label: 'Photography Studio', labelImg: 'photography' },
+        { key: 'location-shoot', label: 'Location Shoot', labelImg: 'locationShoot' },
+        { key: 'outdoor-site', label: 'Outdoor Site', labelImg: 'outdoorSite' }
       ],
       isCategory: true,
-      catKeys: 'tattoo-artist,piercing-artist',
+      catKeys: 'photography, location-shoot, outdoor-site',
     },
   },
+  {
+    id: 'kitchensand_pop_ups',
+    label: 'Kitchens & Pop-ups',
+    labelImg: 'kitchensAndPopUps',
+    type: 'SelectMultipleFilter',
+    group: 'primary',
+    queryParamNames: ['pub_category'],
+    config: {
+      searchMode: 'has_any',
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for the UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: [
+        { key: 'kitchen-space', label: 'Kitchen space', labelImg: "kitchenSpace" },
+        { key: 'pop-up-space', label: 'Pop-up space', labelImg: "popUpSpace" },
+      ],
+      isCategory: true,
+      catKeys: 'kitchen-space, pop-up-space',
+    },
+  },
+
+
+  // ====================================
+  // SECONDARY FILTERS 
+  // ====================================
+  
+
   {
     id: 'general_amenities',
     label: 'General Amenities',
@@ -306,7 +380,7 @@ export const filters = [
         {key: "washing-point", label: "Washing point / Basin"},
       ],
       isCategory: false,
-      catKeys: 'hair-stylist,barber,makeup-artist,nail-technician,cosmetics,beauty-treatment-room',
+      catKeys: 'hair-stylist,barber,makeup-artist,nail-technician,cosmetics,aesthetics,beauty-treatment-room',
     },
   },
   {

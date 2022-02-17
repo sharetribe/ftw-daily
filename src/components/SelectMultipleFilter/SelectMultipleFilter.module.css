@@ -20,7 +20,7 @@
     background-color: var(--matterColorLight);
     border-color: transparent;
     text-decoration: none;
-    box-shadow: var(--boxShadowFilterButton);
+    /* box-shadow: var(--boxShadowFilterButton); */
   }
 }
 
@@ -67,5 +67,52 @@
 
   @media (--viewportMedium) {
     padding: 4px 0;
+  }
+}
+
+
+.listWithImages {
+  display: flex;
+  flex-wrap: wrap;
+
+  & li {
+    width: 120px;
+    margin-right: 40px;
+    padding: 0; 
+    margin-bottom: 56px;
+
+    &:nth-child(4) {
+      margin-right: 0;
+    }
+  }
+  
+  & li label {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  & input:checked + label span  {
+    font-weight: var(--fontWeightSemiBold);
+  }
+
+  & li label span {
+    font-size: 14px;
+    font-weight: var(--fontWeightRegular);
+    line-height: 21px;
+  }
+
+  & [class*="checkboxWrapper"] {
+    display: none;
+  }
+
+  & img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    margin-bottom: 10px;
   }
 }

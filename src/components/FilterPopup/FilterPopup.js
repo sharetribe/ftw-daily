@@ -7,6 +7,7 @@ import { OutsideClickHandler } from '../../components';
 import { FilterForm } from '../../forms';
 import css from './FilterPopup.module.css';
 
+
 const KEY_CODE_ESCAPE = 27;
 
 class FilterPopup extends Component {
@@ -29,12 +30,14 @@ class FilterPopup extends Component {
   handleSubmit(values) {
     const { onSubmit } = this.props;
     this.setState({ isOpen: false });
+    this.props.onOpenCategoryFilter();
     onSubmit(values);
   }
 
   handleClear() {
     const { onSubmit, onClear } = this.props;
     this.setState({ isOpen: false });
+    this.props.onOpenCategoryFilter();
 
     if (onClear) {
       onClear();
@@ -103,24 +106,61 @@ class FilterPopup extends Component {
       popupClassName,
       id,
       label,
+      labelImg,
       labelMaxWidth,
       isSelected,
       children,
       initialValues,
       keepDirtyOnReinitialize,
       contentPlacementOffset,
+      isCategory,
+      mainCategoriesImages,
+      onOpenCategoryFilter
     } = this.props;
 
-    const classes = classNames(rootClassName || css.root, className);
-    const popupClasses = classNames(css.popup, { [css.isOpen]: this.state.isOpen });
+  
+    const classes = classNames(rootClassName || css.root, className, {[css.categoryFilterItem]: isCategory});
+    const popupClasses = classNames(css.popup, { [css.isOpen]: this.state.isOpen }, {[css.subCategories]: isCategory});
     const popupSizeClasses = popupClassName || css.popupSize;
     const labelStyles = isSelected ? css.labelSelected : css.label;
     const labelMaxWidthMaybe = labelMaxWidth ? { maxWidth: `${labelMaxWidth}px` } : {};
     const labelMaxWidthStyles = labelMaxWidth ? css.labelEllipsis : null;
     const contentStyle = this.positionStyleForContent();
 
+
+    let categoryImg;
+
+    switch(labelImg) {
+      case 'coworking':
+        categoryImg = <img src={mainCategoriesImages.coworking} alt ="coworking" className={css.categoryImg} />
+        break;
+      case 'fitness':
+        categoryImg = <img src={mainCategoriesImages.fitness}  alt="fitness" className={css.categoryImg} />
+        break;
+      case 'hairBeauty':
+        categoryImg = <img src={mainCategoriesImages.hairBeauty}  alt="hairBeauty" className={css.categoryImg} />
+        break;
+      case 'kitchensAndPopUps':
+        categoryImg = <img src={mainCategoriesImages.kitchensAndPopUps}  alt="kitchensAndPopUps" className={css.categoryImg} />
+        break;
+      case 'musicAndArts':
+        categoryImg = <img src={mainCategoriesImages.musicAndArts}  alt="musicAndArts" className={css.categoryImg} />
+        break;
+      case 'eventsAndVenues':
+        categoryImg = <img src={mainCategoriesImages.eventsAndVenues}  alt="eventsAndVenues" className={css.categoryImg} />
+        break;
+      case 'photographyAndFilm':
+        categoryImg = <img src={mainCategoriesImages.photographyAndFilm}  alt="photographyAndFilm" className={css.categoryImg} />
+        break;
+      case 'wellness':
+        categoryImg = <img src={mainCategoriesImages.wellness}  alt="wellness" className={css.categoryImg} />
+        break;
+      default: null;
+    }
+
+  
     return (
-      <OutsideClickHandler onOutsideClick={this.handleBlur}>
+      <OutsideClickHandler onOutsideClick={this.handleBlur} rootClassName={classNames({[css.categoryClickHandler]: isCategory})}>
         <div
           className={classes}
           onKeyDown={this.handleKeyDown}
@@ -133,7 +173,10 @@ class FilterPopup extends Component {
             style={labelMaxWidthMaybe}
             onClick={() => this.toggleOpen()}
           >
-            {label}
+            {isCategory && labelImg && categoryImg}
+            <span className={css.labelText}>
+              {label}
+            </span>
           </button>
           <div
             id={id}
@@ -146,7 +189,7 @@ class FilterPopup extends Component {
             {this.state.isOpen ? (
               <FilterForm
                 id={`${id}.form`}
-                paddingClasses={popupSizeClasses}
+                paddingClasses={!isCategory &&  popupSizeClasses}
                 showAsPopup
                 contentPlacementOffset={contentPlacementOffset}
                 initialValues={initialValues}
@@ -154,6 +197,8 @@ class FilterPopup extends Component {
                 onSubmit={this.handleSubmit}
                 onCancel={this.handleCancel}
                 onClear={this.handleClear}
+                isCategory={isCategory}
+                activeCategory={label}
               >
                 {children}
               </FilterForm>

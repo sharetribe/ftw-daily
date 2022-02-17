@@ -3,9 +3,9 @@ import { bool, func, node, object } from 'prop-types';
 import classNames from 'classnames';
 import { Form as FinalForm, FormSpy } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
-import { injectIntl, intlShape } from '../../util/reactIntl';
+import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 
-import { Form } from '../../components';
+import { Form, IconCloseCustom } from '../../components';
 import css from './FilterForm.module.css';
 
 const FilterFormComponent = props => {
@@ -44,6 +44,8 @@ const FilterFormComponent = props => {
           paddingClasses,
           intl,
           children,
+          isCategory,
+          activeCategory,
         } = formRenderProps;
 
         const handleCancel = () => {
@@ -56,7 +58,7 @@ const FilterFormComponent = props => {
         const cancel = intl.formatMessage({ id: 'FilterForm.cancel' });
         const submit = intl.formatMessage({ id: 'FilterForm.submit' });
 
-        const classes = classNames(css.root);
+        const classes = classNames(css.root, { [css.subCategoryItem]: isCategory });
 
         return (
           <Form
@@ -66,7 +68,25 @@ const FilterFormComponent = props => {
             tabIndex="0"
             style={{ ...style }}
           >
-            <div className={classNames(paddingClasses || css.contentWrapper)}>{children}</div>
+            {isCategory ? (
+              <div>
+                <div className={css.subcategoryHeading}>
+                  <FormattedMessage id="FilterForm.patchCategory" />
+                  <span className={css.activeCategory}>
+                    {activeCategory}
+                  </span>
+                </div>
+                <div className={css.subcategorySubHeading}>
+                  <FormattedMessage id="FilterForm.subcategory" />
+                  <button className={css.subcategoryClearButton} type="button" onClick={onClear}>
+                    <FormattedMessage id="FilterForm.reset" />
+                  </button>
+                </div>
+                <div className={classNames(paddingClasses || css.contentWrapper)}>{children}</div>
+              </div>
+            ) : (
+              <div className={classNames(paddingClasses || css.contentWrapper)}>{children}</div>
+            )}
 
             {liveEdit ? (
               <FormSpy onChange={handleChange} subscription={{ values: true, dirty: true }} />
@@ -76,7 +96,7 @@ const FilterFormComponent = props => {
                   {clear}
                 </button>
                 <button className={css.cancelButton} type="button" onClick={handleCancel}>
-                  {cancel}
+                  {isCategory ? <IconCloseCustom /> : cancel}
                 </button>
                 <button className={css.submitButton} type="submit">
                   {submit}

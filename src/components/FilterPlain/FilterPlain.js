@@ -48,6 +48,7 @@ class FilterPlainComponent extends Component {
       keepDirtyOnReinitialize,
       contentPlacementOffset,
       isCategory,
+      subCategoryImage
     } = this.props;
     const classes = classNames(rootClassName || css.root, className);
 
@@ -78,6 +79,8 @@ class FilterPlainComponent extends Component {
             onChange={this.handleChange}
             initialValues={initialValues}
             keepDirtyOnReinitialize={keepDirtyOnReinitialize}
+            subCategoryImage={subCategoryImage}
+            isCategory={isCategory}
           >
             {children}
           </FilterForm>

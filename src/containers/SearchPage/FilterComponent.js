@@ -18,9 +18,12 @@ const FilterComponent = props => {
     urlQueryParams,
     initialValues,
     getHandleChangedValueFn,
+    mainCategoriesImages,
+    subCategoriesImages,
+    onOpenCategoryFilter,
     ...rest
   } = props;
-  const { id, type, queryParamNames, label, config } = filterConfig;
+  const { id, type, queryParamNames, label, labelImg, config } = filterConfig;
   const { liveEdit, showAsPopup } = rest;
 
   const useHistoryPush = liveEdit || showAsPopup;
@@ -47,11 +50,15 @@ const FilterComponent = props => {
           id={componentId}
           filterConfigId={id}
           label={label}
+          labelImg={labelImg}
           filterConfig={filterConfig}
           name={name}
           queryParamNames={queryParamNames}
           initialValues={initialValues(queryParamNames)}
           onSubmit={getHandleChangedValueFn(useHistoryPush)}
+          mainCategoriesImages={mainCategoriesImages}
+          subCategoriesImages={subCategoriesImages}
+          onOpenCategoryFilter={onOpenCategoryFilter}
           {...config}
           {...rest}
         />

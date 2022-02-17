@@ -2,8 +2,10 @@ import React from 'react';
 import { bool, func, node, number, string } from 'prop-types';
 import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
+import { OutsideClickHandler } from '../../components';
 
 import css from './SearchFiltersPrimary.module.css';
+import { Classnames } from 'react-alice-carousel';
 
 const SearchFiltersPrimaryComponent = props => {
   const {
@@ -17,6 +19,9 @@ const SearchFiltersPrimaryComponent = props => {
     isSecondaryFiltersOpen,
     toggleSecondaryFiltersOpen,
     selectedSecondaryFiltersCount,
+    onOpenCategoryFilter,
+    isCategoryFilterOpen,
+    isCategoryFilterEnabled
   } = props;
 
   const hasNoResult = listingsAreLoaded && resultsCount === 0;
@@ -27,6 +32,7 @@ const SearchFiltersPrimaryComponent = props => {
       ? css.searchFiltersPanelOpen
       : css.searchFiltersPanelClosed;
   const toggleSecondaryFiltersOpenButton = toggleSecondaryFiltersOpen ? (
+
     <button
       className={toggleSecondaryFiltersOpenButtonClasses}
       onClick={() => {
@@ -63,14 +69,43 @@ const SearchFiltersPrimaryComponent = props => {
             </span>
           </div>
         ) : null}
+
+        <button className={classNames(toggleSecondaryFiltersOpenButtonClasses, {[css.active]: isCategoryFilterEnabled || isCategoryFilterOpen})} onClick={onOpenCategoryFilter}>
+          <FormattedMessage id="SearchFiltersPrimary.categoriesBtn" />
+        </button>
         {nonCategoryChildren}
         {toggleSecondaryFiltersOpenButton}
         {sortByComponent}
       </div>
 
       <div className={css.filters}>
-        {categoriesText}
-        {categoryChildren}
+        {/* {categoriesText} */}
+        {/* {categoryChildren} */}
+
+
+        {isCategoryFilterOpen && (
+          <OutsideClickHandler onOutsideClick={onOpenCategoryFilter} >
+            <div className={css.categoryItemsWrapper}>
+              <div className={css.categoryItems}>
+                <h3 className={css.categoryItemsTitle}>
+                  <FormattedMessage id="SearchFiltersPrimary.categories" />
+                </h3>
+
+                <div className={css.categoryItemsHolder}>
+                  {categoryChildren.map((category, i) => {
+                    return (
+                      <div key={`category-${i}`} className={css.categoryItem}>
+                        {category}
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            </div>
+          </OutsideClickHandler>
+        )}
+
+
       </div>
 
       {hasNoResult ? (

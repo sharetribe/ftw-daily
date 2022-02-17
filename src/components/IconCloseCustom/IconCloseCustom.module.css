@@ -1,0 +1,11 @@
+@import '../../styles/propertySets.css';
+
+.root {
+  stroke: var(--matterColorDark);
+  width: 12px;
+  height: 12px;
+
+  & path {
+    stroke-width: 1.5px;
+  }
+}

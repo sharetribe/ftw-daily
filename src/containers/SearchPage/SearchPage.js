@@ -19,15 +19,19 @@ import { SearchMap, ModalInMobile, Page } from '../../components';
 import { TopbarContainer } from '../../containers';
 
 import { searchMapListings, setActiveListing } from './SearchPage.duck';
+
 import {
   pickSearchParamsOnly,
   validURLParamsForExtendedData,
   validFilterParams,
-  createH1,
   createSearchResultSchema,
 } from './SearchPage.helpers';
+
 import MainPanel from './MainPanel';
 import css from './SearchPage.module.css';
+
+import categoryImages from "./filterImages"
+
 
 const MODAL_BREAKPOINT = 768; // Search is in modal on mobile layout
 const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is initiated.
@@ -39,6 +43,7 @@ export class SearchPageComponent extends Component {
     this.state = {
       isSearchMapOpenOnMobile: props.tab === 'map',
       isMobileModalOpen: false,
+      isCategoryFilterOpen: false
     };
 
     this.searchMapListingsInProgress = false;
@@ -46,6 +51,7 @@ export class SearchPageComponent extends Component {
     this.onMapMoveEnd = debounce(this.onMapMoveEnd.bind(this), SEARCH_WITH_MAP_DEBOUNCE);
     this.onOpenMobileModal = this.onOpenMobileModal.bind(this);
     this.onCloseMobileModal = this.onCloseMobileModal.bind(this);
+    this.onOpenCategoryFilter = this.onOpenCategoryFilter.bind(this);
   }
 
   // Callback to determine if new search is needed
@@ -105,12 +111,19 @@ export class SearchPageComponent extends Component {
   onOpenMobileModal() {
     this.setState({ isMobileModalOpen: true });
   }
-
+  
   // Invoked when a modal is closed from a child component,
   // for example when a filter modal is opened in mobile view
   onCloseMobileModal() {
     this.setState({ isMobileModalOpen: false });
   }
+
+
+  onOpenCategoryFilter() {
+    this.setState({ isCategoryFilterOpen: !this.state.isCategoryFilterOpen });
+  }
+
+
 
   render() {
     const {
@@ -170,6 +183,7 @@ export class SearchPageComponent extends Component {
 // console.log(title, 'title')
     // N.B. openMobileMap button is sticky.
     // For some reason, stickyness doesn't work on Safari, if the element is <button>
+
     return (
       <Page
         scrollingDisabled={scrollingDisabled}
@@ -199,6 +213,10 @@ export class SearchPageComponent extends Component {
             searchParamsForPagination={parse(location.search)}
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             history={history}
+            mainCategoriesImages={categoryImages.mainCategoriesImages}
+            subCategoriesImages={categoryImages.subCategoriesImages}
+            isCategoryFilterOpen={this.state.isCategoryFilterOpen}
+            onOpenCategoryFilter={this.onOpenCategoryFilter}
           />
 
           <ModalInMobile
