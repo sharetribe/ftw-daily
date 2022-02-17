@@ -43,7 +43,7 @@ class CookieConsent extends Component {
     const isServer = typeof window === 'undefined';
 
     // Server side doesn't know about cookie consent
-    if (isServer || !this.state.show) {
+    if (1 == 2) {
       return null;
     } else {
       const cookieLink = (
