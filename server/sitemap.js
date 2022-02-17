@@ -67,7 +67,7 @@ exports.sitemapStructure = () => {
       '/fees': ['get'],
       '/guidelines': ['get'],
       '/cancellations': ['get'],
-      '/blog/category/office-space': ['get'],
+      '/blog/category/office-space/': ['get'],
       '/signup': ['get'],
       '/login': ['get'],
       '/blog/what-do-you-need-to-become-a-freelance-hairdresser-barber/': ['get'],
