@@ -41,7 +41,6 @@ const EditListingAvailabilityPanel = props => {
     ],
   };
   const availabilityPlan = currentListing.attributes.availabilityPlan || defaultAvailabilityPlan;
-  console.log(currentListing.attributes.availabilityPlan);
 
   return (
     <div className={classes}>
