@@ -143,6 +143,45 @@ export const filters = [
       ],
     },
   },
+  {
+    id: 'classLevelType',
+    label: 'classLevelType',
+    type: 'SelectSingleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_classLevelType'],
+    config: {
+      options: [
+        { key: 'level', label: 'Level' },
+        { key: 'group', label: 'Group of level' },
+      ],
+    },
+  },
+  {
+    id: 'classLevel',
+    label: 'classLevel',
+    type: 'SelectSingleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_classLevel'],
+    config: {
+      options: [
+        { key: 'grade01', label: 'Grade 1', type: 'level' },
+        { key: 'grade02', label: 'Grade 2', type: 'level' },
+        { key: 'grade03', label: 'Grade 3', type: 'level' },
+        { key: 'grade04', label: 'Grade 4', type: 'level' },
+        { key: 'grade05', label: 'Grade 5', type: 'level' },
+        { key: 'grade06', label: 'Grade 6', type: 'level' },
+        { key: 'grade07', label: 'Grade 7', type: 'level' },
+        { key: 'grade08', label: 'Grade 8', type: 'level' },
+        { key: 'grade09', label: 'Grade 9', type: 'level' },
+        { key: 'grade10', label: 'Grade 10', type: 'level' },
+        { key: 'grade11', label: 'Grade 11', type: 'level' },
+        { key: 'grade12', label: 'Grade 12', type: 'level' },
+        { key: 'primary', label: 'Primary School', type: 'group' },
+        { key: 'secondary', label: 'Secondary School', type: 'group' },
+        { key: 'highschool', label: 'High School', type: 'group' },
+      ],
+    },
+  },
 ];
 
 export const sortConfig = {
