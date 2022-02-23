@@ -31,16 +31,17 @@ const EditListingAvailabilityPanel = props => {
   const defaultAvailabilityPlan = {
     type: 'availability-plan/day',
     entries: [
-      { dayOfWeek: 'mon', seats: 1 },
-      { dayOfWeek: 'tue', seats: 1 },
-      { dayOfWeek: 'wed', seats: 1 },
-      { dayOfWeek: 'thu', seats: 1 },
-      { dayOfWeek: 'fri', seats: 1 },
-      { dayOfWeek: 'sat', seats: 1 },
-      { dayOfWeek: 'sun', seats: 1 },
+      { dayOfWeek: 'mon', seats: 0 },
+      { dayOfWeek: 'tue', seats: 0 },
+      { dayOfWeek: 'wed', seats: 0 },
+      { dayOfWeek: 'thu', seats: 0 },
+      { dayOfWeek: 'fri', seats: 0 },
+      { dayOfWeek: 'sat', seats: 0 },
+      { dayOfWeek: 'sun', seats: 0 },
     ],
   };
   const availabilityPlan = currentListing.attributes.availabilityPlan || defaultAvailabilityPlan;
+  console.log(currentListing.attributes.availabilityPlan);
 
   return (
     <div className={classes}>
