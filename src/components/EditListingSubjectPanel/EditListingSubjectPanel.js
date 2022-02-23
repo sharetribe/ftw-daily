@@ -45,8 +45,8 @@ const EditListingSubjectPanel = props => {
   );
 
   const subject = publicData && publicData.subject;
-  const groupLevelType = publicData && publicData.level.type;
-  const level = publicData && publicData.level.level;
+  const groupLevelType = publicData.level && publicData.level.type;
+  const level = publicData.level && publicData.level.level;
   const initialValues = { subject, groupLevelType, level };
 
   const groupLevelTypeOptions = findOptionsForSelectFilter('classLevelType', config.custom.filters);
