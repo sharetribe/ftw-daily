@@ -8,6 +8,7 @@ import { EditListingPricingForm } from '../../forms';
 import { ensureOwnListing } from '../../util/data';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import config from '../../config';
+import { findOptionsForSelectFilter } from '../../util/search';
 
 import css from './EditListingPricingPanel.module.css';
 
@@ -30,7 +31,7 @@ const EditListingPricingPanel = props => {
 
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
-  const { price } = currentListing.attributes;
+  const { price, publicData } = currentListing.attributes;
 
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
@@ -43,11 +44,21 @@ const EditListingPricingPanel = props => {
   );
 
   const priceCurrencyValid = price instanceof Money ? price.currency === config.currency : true;
+  const paymentTypeOptions = findOptionsForSelectFilter('paymentType', config.custom.filters);
+
   const form = priceCurrencyValid ? (
     <EditListingPricingForm
       className={css.form}
-      initialValues={{ price }}
-      onSubmit={onSubmit}
+      initialValues={{ price, paymentType: publicData.paymentType }}
+      onSubmit={values => {
+        const { price, paymentType } = values;
+        const updateValues = {
+          price,
+          publicData: { paymentType },
+        };
+
+        onSubmit(updateValues);
+      }}
       onChange={onChange}
       saveActionMsg={submitButtonText}
       disabled={disabled}
@@ -55,6 +66,7 @@ const EditListingPricingPanel = props => {
       updated={panelUpdated}
       updateInProgress={updateInProgress}
       fetchErrors={errors}
+      paymentTypes={paymentTypeOptions}
     />
   ) : (
     <div className={css.priceCurrencyInvalid}>
