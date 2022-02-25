@@ -26,6 +26,8 @@ import EditListingWizardTab, {
   LOCATION,
   PRICING,
   PHOTOS,
+  SUBJECT,
+  CLASSURL,
 } from './EditListingWizardTab';
 import css from './EditListingWizard.module.css';
 
@@ -38,9 +40,8 @@ const availabilityMaybe = config.enableAvailability ? [AVAILABILITY] : [];
 // and listing publishing happens after last panel.
 export const TABS = [
   DESCRIPTION,
-  FEATURES,
-  POLICY,
-  LOCATION,
+  SUBJECT,
+  CLASSURL,
   PRICING,
   ...availabilityMaybe,
   PHOTOS,
@@ -68,6 +69,10 @@ const tabLabel = (intl, tab) => {
     key = 'EditListingWizard.tabLabelAvailability';
   } else if (tab === PHOTOS) {
     key = 'EditListingWizard.tabLabelPhotos';
+  } else if (tab === SUBJECT) {
+    key = 'EditListingWizard.tabLabelSubject';
+  } else if (tab === CLASSURL) {
+    key = 'EditListingWizard.tabLabelClassURL';
   }
 
   return intl.formatMessage({ id: key });
@@ -107,6 +112,10 @@ const tabCompleted = (tab, listing) => {
       return !!availabilityPlan;
     case PHOTOS:
       return images && images.length > 0;
+    case SUBJECT:
+      return !!(publicData.subject);
+    case CLASSURL:
+      return !!(publicData.classURL);
     default:
       return false;
   }

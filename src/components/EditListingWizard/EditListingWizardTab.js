@@ -11,12 +11,14 @@ import { ensureListing } from '../../util/data';
 import { createResourceLocatorString } from '../../util/routes';
 import {
   EditListingAvailabilityPanel,
+  EditListingClassURLPanel,
   EditListingDescriptionPanel,
   EditListingFeaturesPanel,
   EditListingLocationPanel,
   EditListingPhotosPanel,
   EditListingPoliciesPanel,
   EditListingPricingPanel,
+  EditListingSubjectPanel,
 } from '../../components';
 
 import css from './EditListingWizard.module.css';
@@ -28,6 +30,8 @@ export const POLICY = 'policy';
 export const LOCATION = 'location';
 export const PRICING = 'pricing';
 export const PHOTOS = 'photos';
+export const SUBJECT = 'subject';
+export const CLASSURL = 'classURL';
 
 // EditListingWizardTab component supports these tabs
 export const SUPPORTED_TABS = [
@@ -38,6 +42,8 @@ export const SUPPORTED_TABS = [
   PRICING,
   AVAILABILITY,
   PHOTOS,
+  SUBJECT,
+  CLASSURL,
 ];
 
 const pathParamsToNextTab = (params, tab, marketplaceTabs) => {
@@ -81,6 +87,7 @@ const EditListingWizardTab = props => {
     newListingPublished,
     history,
     images,
+    mainImage,
     availability,
     listing,
     handleCreateFlowTabScrolling,
@@ -88,8 +95,10 @@ const EditListingWizardTab = props => {
     onUpdateListing,
     onCreateListingDraft,
     onImageUpload,
+    onMainImageUpload,
     onUpdateImageOrder,
     onRemoveImage,
+    onRemoveMainImage,
     onChange,
     updatedTab,
     updateInProgress,
@@ -108,19 +117,28 @@ const EditListingWizardTab = props => {
 
   const onCompleteEditListingWizardTab = (tab, updateValues) => {
     // Normalize images for API call
-    const { images: updatedImages, ...otherValues } = updateValues;
+    const { images: updatedImages, mainImage, ...otherValues } = updateValues;
+    images.push(mainImage[0]);
+
     const imageProperty =
       typeof updatedImages !== 'undefined' ? { images: imageIds(updatedImages) } : {};
     const updateValuesWithImages = { ...otherValues, ...imageProperty };
 
+    if(mainImage && mainImage.length > 0) {
+      const mainImageIds = [...imageIds(mainImage)];
+      updateValuesWithImages.publicData = {
+        mainImage: mainImageIds[0].uuid
+      }
+    }
+    
     if (isNewListingFlow) {
       const onUpsertListingDraft = isNewURI
-        ? (tab, updateValues) => onCreateListingDraft(updateValues)
-        : onUpdateListing;
-
+      ? (tab, updateValues) => onCreateListingDraft(updateValues)
+      : onUpdateListing;
+      
       const upsertValues = isNewURI
-        ? updateValuesWithImages
-        : { ...updateValuesWithImages, id: currentListing.id };
+      ? updateValuesWithImages
+      : { ...updateValuesWithImages, id: currentListing.id };
 
       onUpsertListingDraft(tab, upsertValues)
         .then(r => {
@@ -252,12 +270,43 @@ const EditListingWizardTab = props => {
           {...panelProps(PHOTOS)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           images={images}
+          mainImage={mainImage}
           onImageUpload={onImageUpload}
+          onMainImageUpload={onMainImageUpload}
           onRemoveImage={onRemoveImage}
+          onRemoveMainImage={onRemoveMainImage}
           onSubmit={values => {
             onCompleteEditListingWizardTab(tab, values);
           }}
           onUpdateImageOrder={onUpdateImageOrder}
+        />
+      );
+    }
+    case SUBJECT: {
+      const submitButtonTranslationKey = isNewListingFlow
+        ? 'EditListingWizard.saveNewSubject'
+        : 'EditListingWizard.saveEditSubject';
+      return (
+        <EditListingSubjectPanel
+          {...panelProps(SUBJECT)}
+          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          onSubmit={values => {
+            onCompleteEditListingWizardTab(tab, values);
+          }}
+        />
+      );
+    }
+    case CLASSURL: {
+      const submitButtonTranslationKey = isNewListingFlow
+        ? 'EditListingWizard.saveNewClassURL'
+        : 'EditListingWizard.saveEditClassURL';
+      return (
+        <EditListingClassURLPanel
+          {...panelProps(CLASSURL)}
+          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          onSubmit={values => {
+            onCompleteEditListingWizardTab(tab, values);
+          }}
         />
       );
     }
