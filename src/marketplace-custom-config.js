@@ -182,6 +182,20 @@ export const filters = [
       ],
     },
   },
+  {
+    id: 'paymentType',
+    label: 'paymentType',
+    type: 'SelectSingleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_paymentType'],
+    config: {
+      options: [
+        { key: 'both', label: 'Both'},
+        { key: 'prepaid', label: 'Prepaid'},
+        { key: 'postpaid', label: 'Postpaid' },
+      ],
+    },
+  },
 ];
 
 export const sortConfig = {
