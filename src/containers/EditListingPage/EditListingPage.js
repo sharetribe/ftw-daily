@@ -34,8 +34,10 @@ import {
   requestPublishListingDraft,
   requestUpdateListing,
   requestImageUpload,
+  requestMainImageUpload,
   updateImageOrder,
   removeListingImage,
+  removeMainImage,
   clearUpdatedTab,
   savePayoutDetails,
 } from './EditListingPage.duck';
@@ -71,7 +73,9 @@ export const EditListingPageComponent = props => {
     onPublishListingDraft,
     onUpdateListing,
     onImageUpload,
+    onMainImageUpload,
     onRemoveListingImage,
+    onRemoveMainImage,
     onManageDisableScrolling,
     onPayoutDetailsFormSubmit,
     onPayoutDetailsFormChange,
@@ -111,20 +115,20 @@ export const EditListingPageComponent = props => {
 
     const redirectProps = isPendingApproval
       ? {
-          name: 'ListingPageVariant',
-          params: {
-            id: listingId.uuid,
-            slug: listingSlug,
-            variant: LISTING_PAGE_PENDING_APPROVAL_VARIANT,
-          },
-        }
+        name: 'ListingPageVariant',
+        params: {
+          id: listingId.uuid,
+          slug: listingSlug,
+          variant: LISTING_PAGE_PENDING_APPROVAL_VARIANT,
+        },
+      }
       : {
-          name: 'ListingPage',
-          params: {
-            id: listingId.uuid,
-            slug: listingSlug,
-          },
-        };
+        name: 'ListingPage',
+        params: {
+          id: listingId.uuid,
+          slug: listingSlug,
+        },
+      };
 
     return <NamedRedirect {...redirectProps} />;
   } else if (showForm) {
@@ -151,16 +155,32 @@ export const EditListingPageComponent = props => {
     const disableForm = page.redirectToListing && !showListingsError;
 
     // Images are passed to EditListingForm so that it can generate thumbnails out of them
+    const { publicData } = currentListing.attributes;
+    const currentMainImageId = publicData && publicData.mainImage 
+    ? publicData.mainImage : '';
+
     const currentListingImages =
-      currentListing && currentListing.images ? currentListing.images : [];
+      currentListing && currentListing.images 
+      ? currentListing.images.filter(item => item.id.uuid !== currentMainImageId) 
+      : [];
+
+    const currentListingMainImage = 
+      currentListing && currentListing.images
+      ? currentListing.images.filter(item => item.id.uuid === currentMainImageId)
+      : [];
 
     // Images not yet connected to the listing
     const imageOrder = page.imageOrder || [];
     const unattachedImages = imageOrder.map(i => page.images[i]);
+    const unattachedMainImage = Object.values(page.mainImage) || [];
 
     const allImages = currentListingImages.concat(unattachedImages);
     const removedImageIds = page.removedImageIds || [];
     const images = allImages.filter(img => {
+      return !removedImageIds.includes(img.id);
+    });
+    const allMainImages = currentListingMainImage.concat(unattachedMainImage);
+    const mainImage = allMainImages.filter(img => {
       return !removedImageIds.includes(img.id);
     });
 
@@ -186,6 +206,7 @@ export const EditListingPageComponent = props => {
           newListingPublished={newListingPublished}
           history={history}
           images={images}
+          mainImage={mainImage}
           listing={currentListing}
           availability={{
             calendar: page.availabilityCalendar,
@@ -202,8 +223,10 @@ export const EditListingPageComponent = props => {
           onGetStripeConnectAccountLink={onGetStripeConnectAccountLink}
           getAccountLinkInProgress={getAccountLinkInProgress}
           onImageUpload={onImageUpload}
+          onMainImageUpload={onMainImageUpload}
           onUpdateImageOrder={onUpdateImageOrder}
           onRemoveImage={onRemoveListingImage}
+          onRemoveMainImage={onRemoveMainImage}
           onChange={onChange}
           currentUser={currentUser}
           onManageDisableScrolling={onManageDisableScrolling}
@@ -265,6 +288,7 @@ EditListingPageComponent.propTypes = {
   onCreateListingDraft: func.isRequired,
   onPublishListingDraft: func.isRequired,
   onImageUpload: func.isRequired,
+  onMainImageUpload: func.isRequired,
   onManageDisableScrolling: func.isRequired,
   onPayoutDetailsFormChange: func.isRequired,
   onPayoutDetailsFormSubmit: func.isRequired,
@@ -340,6 +364,7 @@ const mapDispatchToProps = dispatch => ({
   onCreateListingDraft: values => dispatch(requestCreateListingDraft(values)),
   onPublishListingDraft: listingId => dispatch(requestPublishListingDraft(listingId)),
   onImageUpload: data => dispatch(requestImageUpload(data)),
+  onMainImageUpload: data => dispatch(requestMainImageUpload(data)),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
   onPayoutDetailsFormChange: () => dispatch(stripeAccountClearError()),
@@ -349,6 +374,7 @@ const mapDispatchToProps = dispatch => ({
   onGetStripeConnectAccountLink: params => dispatch(getStripeConnectAccountLink(params)),
   onUpdateImageOrder: imageOrder => dispatch(updateImageOrder(imageOrder)),
   onRemoveListingImage: imageId => dispatch(removeListingImage(imageId)),
+  onRemoveMainImage: imageId => dispatch(removeMainImage(imageId)),
   onChange: () => dispatch(clearUpdatedTab()),
 });
 
