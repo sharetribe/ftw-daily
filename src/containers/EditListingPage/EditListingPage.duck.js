@@ -136,12 +136,17 @@ export const DELETE_EXCEPTION_REQUEST = 'app/EditListingPage/DELETE_AVAILABILITY
 export const DELETE_EXCEPTION_SUCCESS = 'app/EditListingPage/DELETE_AVAILABILITY_EXCEPTION_SUCCESS';
 export const DELETE_EXCEPTION_ERROR = 'app/EditListingPage/DELETE_AVAILABILITY_EXCEPTION_ERROR';
 
+export const UPLOAD_MAIN_IMAGE_REQUEST = 'app/EditListingPage/UPLOAD_MAIN_IMAGE_REQUEST';
+export const UPLOAD_MAIN_IMAGE_SUCCESS = 'app/EditListingPage/UPLOAD_MAIN_IMAGE_SUCCESS';
+export const UPLOAD_MAIN_IMAGE_ERROR = 'app/EditListingPage/UPLOAD_MAIN_IMAGE_ERROR';
+
 export const UPLOAD_IMAGE_REQUEST = 'app/EditListingPage/UPLOAD_IMAGE_REQUEST';
 export const UPLOAD_IMAGE_SUCCESS = 'app/EditListingPage/UPLOAD_IMAGE_SUCCESS';
 export const UPLOAD_IMAGE_ERROR = 'app/EditListingPage/UPLOAD_IMAGE_ERROR';
 
 export const UPDATE_IMAGE_ORDER = 'app/EditListingPage/UPDATE_IMAGE_ORDER';
 
+export const REMOVE_MAIN_IMAGE = 'app/EditListingPage/REMOVE_MAIN_IMAGE';
 export const REMOVE_LISTING_IMAGE = 'app/EditListingPage/REMOVE_LISTING_IMAGE';
 
 export const SAVE_PAYOUT_DETAILS_REQUEST = 'app/EditListingPage/SAVE_PAYOUT_DETAILS_REQUEST';
@@ -171,6 +176,7 @@ const initialState = {
     //   fetchBookingsInProgress: false,
     // },
   },
+  mainImage: {},
   images: {},
   imageOrder: [],
   removedImageIds: [],
@@ -339,6 +345,43 @@ export default function reducer(state = initialState, action = {}) {
       return { ...state, availabilityCalendar };
     }
 
+    case UPLOAD_MAIN_IMAGE_REQUEST: {
+      // payload.params: { id: 'tempId', file }
+      const mainImage = {
+        [payload.params.id]: { ...payload.params },
+      };
+      return {
+        ...state,
+        mainImage,
+        uploadImageError: null,
+      };
+    }
+    case UPLOAD_MAIN_IMAGE_SUCCESS: {
+      // payload.params: { id: 'tempId', imageId: 'some-real-id'}
+      const { id, imageId } = payload;
+      const file = state.mainImage[id].file;
+      const mainImage = { ...state.mainImage, [id]: { id, imageId, file } };
+      return { ...state, mainImage };
+    }
+    case UPLOAD_MAIN_IMAGE_ERROR: {
+      // eslint-disable-next-line no-console
+      const { id, error } = payload;
+      const mainImage = omit(state.mainImage, id);
+      return { ...state, mainImage, uploadImageError: error };
+    }
+    case REMOVE_MAIN_IMAGE: {
+      const id = payload.imageId;
+      const removedImageIds = state.images[id]
+        ? state.removedImageIds
+        : state.removedImageIds.concat(id);
+
+      // Always remove from the draft since it might be a new image to
+      // an existing listing.
+      const mainImage = omit(state.mainImage, id);
+
+      return { ...state, removedImageIds, mainImage };
+    }
+
     case UPLOAD_IMAGE_REQUEST: {
       // payload.params: { id: 'tempId', file }
       const images = {
@@ -416,6 +459,11 @@ export const updateImageOrder = imageOrder => ({
   payload: { imageOrder },
 });
 
+export const removeMainImage = imageId => ({
+  type: REMOVE_MAIN_IMAGE,
+  payload: { imageId },
+});
+
 export const removeListingImage = imageId => ({
   type: REMOVE_LISTING_IMAGE,
   payload: { imageId },
@@ -449,6 +497,10 @@ export const showListingsError = errorAction(SHOW_LISTINGS_ERROR);
 export const uploadImage = requestAction(UPLOAD_IMAGE_REQUEST);
 export const uploadImageSuccess = successAction(UPLOAD_IMAGE_SUCCESS);
 export const uploadImageError = errorAction(UPLOAD_IMAGE_ERROR);
+
+export const uploadMainImage = requestAction(UPLOAD_MAIN_IMAGE_REQUEST);
+export const uploadMainImageSuccess = successAction(UPLOAD_MAIN_IMAGE_SUCCESS);
+export const uploadMainImageError = errorAction(UPLOAD_MAIN_IMAGE_ERROR);
 
 // SDK method: bookings.query
 export const fetchBookingsRequest = requestAction(FETCH_BOOKINGS_REQUEST);
@@ -539,13 +591,27 @@ export const requestPublishListingDraft = listingId => (dispatch, getState, sdk)
 
 // Images return imageId which we need to map with previously generated temporary id
 export function requestImageUpload(actionPayload) {
+
   return (dispatch, getState, sdk) => {
     const id = actionPayload.id;
     dispatch(uploadImage(actionPayload));
     return sdk.images
       .upload({ image: actionPayload.file })
-      .then(resp => dispatch(uploadImageSuccess({ data: { id, imageId: resp.data.data.id } })))
+      .then(resp => {
+        dispatch(uploadImageSuccess({ data: { id, imageId: resp.data.data.id } }));
+    })
       .catch(e => dispatch(uploadImageError({ id, error: storableError(e) })));
+  };
+}
+
+export function requestMainImageUpload(actionPayload) {
+  return (dispatch, getState, sdk) => {
+    const id = actionPayload.id;
+    dispatch(uploadMainImage(actionPayload));
+    return sdk.images
+      .upload({ image: actionPayload.file })
+      .then(resp => dispatch(uploadMainImageSuccess({ data: { id, imageId: resp.data.data.id } })))
+      .catch(e => dispatch(uploadMainImageError({ id, error: storableError(e) })));
   };
 }
 
