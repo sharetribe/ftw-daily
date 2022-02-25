@@ -83,6 +83,7 @@ const AddImages = props => {
     images,
     savedImageAltText,
     onRemoveImage,
+    acceptSingleImage
   } = props;
   const classes = classNames(css.root, className);
   return (
@@ -99,7 +100,7 @@ const AddImages = props => {
           />
         );
       })}
-      {children}
+      {(!acceptSingleImage || images.length < 1) ? children : null}
     </div>
   );
 };
