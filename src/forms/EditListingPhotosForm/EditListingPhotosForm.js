@@ -19,6 +19,7 @@ export class EditListingPhotosFormComponent extends Component {
     super(props);
     this.state = { imageUploadRequested: false };
     this.onImageUploadHandler = this.onImageUploadHandler.bind(this);
+    this.onMainImageUploadHandler = this.onMainImageUploadHandler.bind(this);
     this.submittedImages = [];
   }
 
@@ -36,13 +37,28 @@ export class EditListingPhotosFormComponent extends Component {
     }
   }
 
+  onMainImageUploadHandler(file) {
+    if (file) {
+      this.setState({ imageUploadRequested: true });
+      this.props
+        .onMainImageUpload({ id: `${file.name}_${Date.now()}`, file })
+        .then(() => {
+          this.setState({ imageUploadRequested: false });
+        })
+        .catch(() => {
+          this.setState({ imageUploadRequested: false });
+        });
+    }
+  }
+
   render() {
     return (
       <FinalForm
         {...this.props}
         onImageUploadHandler={this.onImageUploadHandler}
+        onMainImageUploadHandler={this.onMainImageUploadHandler}
         imageUploadRequested={this.state.imageUploadRequested}
-        initialValues={{ images: this.props.images }}
+        initialValues={{ images: this.props.images, mainImage: this.props.mainImage }}
         render={formRenderProps => {
           const {
             form,
@@ -50,11 +66,14 @@ export class EditListingPhotosFormComponent extends Component {
             fetchErrors,
             handleSubmit,
             images,
+            mainImage,
             imageUploadRequested,
             intl,
             invalid,
             onImageUploadHandler,
+            onMainImageUploadHandler,
             onRemoveImage,
+            onRemoveMainImage,
             disabled,
             ready,
             saveActionMsg,
@@ -62,10 +81,33 @@ export class EditListingPhotosFormComponent extends Component {
             updateInProgress,
           } = formRenderProps;
 
-          const chooseImageText = (
+          const mainImageLabel = (
+            <label className={css.label}>
+              <FormattedMessage id="EditListingPhotosForm.mainImageLabel" />
+            </label>
+          );
+
+          const subImagesLabel = (
+            <label className={css.label}>
+              <FormattedMessage id="EditListingPhotosForm.subImagesLabel" />
+            </label>
+          );
+
+          const chooseMainImageText = (
             <span className={css.chooseImageText}>
               <span className={css.chooseImage}>
-                <FormattedMessage id="EditListingPhotosForm.chooseImage" />
+                <FormattedMessage id="EditListingPhotosForm.chooseMainImage" />
+              </span>
+              <span className={css.imageTypes}>
+                <FormattedMessage id="EditListingPhotosForm.imageTypes" />
+              </span>
+            </span>
+          );
+
+          const chooseSubImageText = (
+            <span className={css.chooseImageText}>
+              <span className={css.chooseImage}>
+                <FormattedMessage id="EditListingPhotosForm.chooseSubImage" />
               </span>
               <span className={css.imageTypes}>
                 <FormattedMessage id="EditListingPhotosForm.imageTypes" />
@@ -126,7 +168,6 @@ export class EditListingPhotosFormComponent extends Component {
             invalid || disabled || submitInProgress || imageUploadRequested || ready;
 
           const classes = classNames(css.root, className);
-
           return (
             <Form
               className={classes}
@@ -134,12 +175,78 @@ export class EditListingPhotosFormComponent extends Component {
                 this.submittedImages = images;
                 handleSubmit(e);
               }}
+            // enctype='multipart/form-data'
             >
               {updateListingError ? (
                 <p className={css.error}>
                   <FormattedMessage id="EditListingPhotosForm.updateFailed" />
                 </p>
               ) : null}
+
+              {mainImageLabel}
+              <AddImages
+                className={css.imagesField}
+                images={mainImage}
+                thumbnailClassName={css.thumbnail}
+                savedImageAltText={intl.formatMessage({
+                  id: 'EditListingPhotosForm.savedImageAltText',
+                })}
+                onRemoveImage={onRemoveMainImage}
+                acceptSingleImage={true}
+              >
+                <Field
+                  id="mainImage"
+                  name="mainImage"
+                  accept={ACCEPT_IMAGES}
+                  form={null}
+                  label={chooseMainImageText}
+                  type="file"
+                  disabled={imageUploadRequested}
+                  multiple={false}
+                >
+                  {fieldprops => {
+                    const { accept, input, label, disabled: fieldDisabled } = fieldprops;
+                    const { name, type } = input;
+                    const onChange = e => {
+                      const file = e.target.files[0];
+                      form.change(`addImage`, file);
+                      form.blur(`addImage`);
+                      onMainImageUploadHandler(file);
+                    };
+                    const inputProps = { accept, id: name, name, onChange, type };
+                    return (
+                      <div className={css.addImageWrapper}>
+                        <div className={css.aspectRatioWrapper}>
+                          {fieldDisabled ? null : (
+                            <input {...inputProps} className={css.addImageInput} />
+                          )}
+                          <label htmlFor={name} className={css.addImage}>
+                            {label}
+                          </label>
+                        </div>
+                      </div>
+                    );
+                  }}
+                </Field>
+
+                <Field
+                  component={props => {
+                    const { input, meta } = props;
+                    return (
+                      <div className={css.imageRequiredWrapper}>
+                        <input {...input} />
+                        <ValidationError fieldMeta={meta} />
+                      </div>
+                    );
+                  }}
+                  name="images"
+                  type="hidden"
+                  validate={composeValidators(nonEmptyArray(imageRequiredMessage))}
+                />
+              </AddImages>
+              {uploadImageFailed}
+
+              {subImagesLabel}
               <AddImages
                 className={css.imagesField}
                 images={images}
@@ -148,13 +255,14 @@ export class EditListingPhotosFormComponent extends Component {
                   id: 'EditListingPhotosForm.savedImageAltText',
                 })}
                 onRemoveImage={onRemoveImage}
+                acceptSingleImage={false}
               >
                 <Field
                   id="addImage"
                   name="addImage"
                   accept={ACCEPT_IMAGES}
                   form={null}
-                  label={chooseImageText}
+                  label={chooseSubImageText}
                   type="file"
                   disabled={imageUploadRequested}
                 >
@@ -243,6 +351,7 @@ EditListingPhotosFormComponent.propTypes = {
   updated: bool.isRequired,
   updateInProgress: bool.isRequired,
   onRemoveImage: func.isRequired,
+  onRemoveMainImage: func.isRequired,
 };
 
 export default compose(injectIntl)(EditListingPhotosFormComponent);

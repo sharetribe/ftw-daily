@@ -137,12 +137,17 @@
   flex-shrink: 0;
   color: var(--matterColorAnti);
   margin-top: 24px;
-  margin-bottom: 60px;
+  margin-bottom: 100px;
 
   @media (--viewportLarge) {
     margin-top: 0;
-    margin-bottom: 0;
+    margin-bottom: 30px;
   }
+}
+
+.label {
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
 
 .error {
