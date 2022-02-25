@@ -35,7 +35,6 @@ class EditListingPhotosPanel extends Component {
     const rootClass = rootClassName || css.root;
     const classes = classNames(rootClass, className);
     const currentListing = ensureOwnListing(listing);
-    const { publicData } = currentListing.attributes;
 
     const isPublished =
       currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
@@ -56,7 +55,7 @@ class EditListingPhotosPanel extends Component {
           disabled={disabled}
           ready={ready}
           fetchErrors={errors}
-          initialValues={{ images, mainImage: publicData.mainImage }}
+          initialValues={{ images, mainImage }}
           images={images}
           mainImage={mainImage}
           onImageUpload={onImageUpload}
