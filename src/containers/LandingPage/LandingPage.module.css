@@ -30,7 +30,7 @@
   @media (--viewportMedium) {
     height: 640px;
   }
-  @media (--viewportLarge) {
+  @media (--viewportLargeForHero) {
     height: 900px;
   }
 }
