@@ -51,8 +51,10 @@ export class ModalComponent extends Component {
     super(props);
     this.handleBodyKeyUp = this.handleBodyKeyUp.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleResize = this.handleResize.bind(this);
 
     this.refDiv = React.createRef();
+    this.vh = null;
 
     this.state = {
       portalRoot: null,
@@ -62,7 +64,15 @@ export class ModalComponent extends Component {
   componentDidMount() {
     const { id, isOpen, onManageDisableScrolling } = this.props;
     onManageDisableScrolling(id, isOpen);
-    document.body.addEventListener('keyup', this.handleBodyKeyUp);
+    window.document.body.addEventListener('keyup', this.handleBodyKeyUp);
+
+    // A hack to update container height for mobile Safari,
+    // when resizing happens due to scroll.
+    // css.isOpenInPortal has "height: calc(var(--vh, 1vh) * 100)"
+    this.vh = window.innerHeight * 0.01;
+    window.document.documentElement.style.setProperty('--vh', `${this.vh}px`);
+    window.addEventListener('resize', this.handleResize);
+
     this.setState({
       portalRoot: document.getElementById('portal-root'),
     });
@@ -83,7 +93,8 @@ export class ModalComponent extends Component {
 
   componentWillUnmount() {
     const { id, onManageDisableScrolling } = this.props;
-    document.body.removeEventListener('keyup', this.handleBodyKeyUp);
+    window.document.body.removeEventListener('keyup', this.handleBodyKeyUp);
+    window.document.body.removeEventListener('resize', this.handleResize);
     onManageDisableScrolling(id, false);
   }
 
@@ -98,6 +109,11 @@ export class ModalComponent extends Component {
     const { id, onClose, onManageDisableScrolling } = this.props;
     onManageDisableScrolling(id, false);
     onClose(event);
+  }
+
+  handleResize() {
+    this.vh = window.innerHeight * 0.01;
+    window.document.documentElement.style.setProperty('--vh', `${this.vh}px`);
   }
 
   render() {
@@ -136,7 +152,8 @@ export class ModalComponent extends Component {
     // If props doesn't contain isClosedClassName, styles default to css.isClosed
     // This makes it possible to create ModalInMobile on top of Modal where style modes are:
     // visible, hidden, or none (ModalInMobile's children are always visible on desktop layout.)
-    const modalClass = isOpen ? css.isOpen : isClosedClassName;
+    const isOpenClass = usePortal ? css.isOpenInPortal : css.isOpenInPlace;
+    const modalClass = isOpen ? isOpenClass : isClosedClassName;
     const classes = classNames(modalClass, className);
     const scrollLayerClasses = scrollLayerClassName || css.scrollLayer;
     const containerClasses = containerClassName || css.container;

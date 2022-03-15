@@ -2,13 +2,6 @@
 
 /* Content is visible as modal layer */
 .isOpen {
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
   width: 100%;
   z-index: 100;
 
@@ -42,6 +35,34 @@
       min-height: auto;
       height: auto;
     }
+  }
+}
+
+.isOpenInPlace {
+  composes: isOpen;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.isOpenInPortal {
+  composes: isOpen;
+  display: block;
+  height: calc(var(--vh, 1vh) * 100);
+  position: absolute;
+
+  @media (--viewportMedium) {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
   }
 }
 
