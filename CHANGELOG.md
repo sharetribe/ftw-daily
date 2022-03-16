@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2022-XX-XX
 
+- [fix] Portal version of Modals couldn't use 100vh on mobile Safari. Safari changes the window's
+  height based on if the location bar is squeezed or not (and that depends on scroll-effect).
+  [#1501](https://github.com/sharetribe/ftw-daily/pull/1501)
 - [fix] Setting multiple environment variables in Windows requires using the set command before each
   individual variable. Updated the 'for windows users' section in documentation.
   [#1491](https://github.com/sharetribe/ftw-daily/pull/1491)
