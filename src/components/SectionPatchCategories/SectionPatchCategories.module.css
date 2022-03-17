@@ -1,10 +1,36 @@
 @import '../../styles/propertySets.css';
 
+.root {
+
+  @media (--viewportSmall) {
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  @media (--viewportLarge) {
+    max-width: 880px;
+  }
+}
+
+
 .title {
   @apply --marketplaceH1FontStyles;
-  margin-top: 85px;
-  margin-bottom: 64px;
+  /* margin-top: 85px; */
+  /* margin-bottom: 64px; */
+  margin: 0 0 56px;
   text-align: center;
+  font-size: 24px;
+  line-height: 1;
+
+  @media (--viewportSmall) {
+    font-size: 36px;
+    margin: 0 0 48px;
+    text-align: left;
+  }
+
+  @media (--viewportMedium) {
+    text-align: center;
+  }
 }
 
 .categories {
@@ -14,51 +40,52 @@
   margin-top: 16px;
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
 
-
-@media (--viewportSmall) {
-  flex-direction: row;
-  flex-wrap: wrap;
-  margin-top: 32px;
-  align-items: flex-start;
-}
-  @media (--viewportMedium) {
+  @media (--viewportSmall) {
+    flex-direction: row;
+    flex-wrap: wrap;
     margin-top: 32px;
     align-items: flex-start;
-    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+
+  @media (--viewportMedium) {
+    align-items: flex-start;
+    /* flex-wrap: nowrap; */
   }
 
   @media (--viewportLarge) {
     align-items: center;
+    flex-wrap: nowrap;
+    margin-top: 0;
   }
 }
 
-.category {
-  width: 75%;
-  margin-top: 48px;
-@media (--viewportSmall) {
-  width: 45%;
-  margin-right: 40px;
-}
-@media (--viewportMedium) {
-  width: 75%;
+.categories:nth-of-type(3) {
+  margin-top: 0;
 }
 
-  /* Remove link's hover effect */
+.category {
+  width: 100%;
+  max-width: 160px;
+
+  margin: 0 0 48px 0;
+
   &:hover {
     text-decoration: none;
   }
 
-  @media (--viewportMedium) {
-    margin-top: 0;
-    width: 100%;
+  @media (--viewportSmall) {
+    max-width: calc(50% - 20px);
   }
-}
 
-.category {
   @media (--viewportMedium) {
-    margin-right: 40px;
-    margin-bottom: 0;
+    margin: 0 0 40px 0;
+  }
+
+  @media (--viewportLarge) {
+    max-width: calc(25% - 20px);
   }
 }
 
@@ -68,7 +95,7 @@
 /*  }*/
 /*}*/
 
-.category:nth-child(2n) {
+/* .category:nth-child(2n) {
   @media (--viewportSmall) {
     margin-right: 0;
   }
@@ -80,7 +107,7 @@
   @media (--viewportSmall) {
     margin-right: 0;
   }
-}
+} */
 
 
 /* A wrapper for a responsive image that holds it's aspect ratio */
@@ -98,11 +125,15 @@
 
 /* An image wrapper that defines the images aspect ratio */
 .aspectWrapper {
-  padding-bottom: calc(6 / 13 * 100%); /* 13:6 Aspect Ratio */
+  padding-bottom: 80px;
 
-  @media (--viewportMedium) {
-    padding-bottom: calc(2 / 3 * 100% - 13px); /* 3:2 Aspect Ratio */
+  @media (--viewportSmall) {
+    padding-bottom: 120px;
   }
+
+  /* @media (--viewportLarge) {
+    padding-bottom: calc(2 / 3 * 100% - 13px); 
+  } */
 }
 
 .categoryImage {
@@ -121,8 +152,9 @@
 .linkText {
   @apply --marketplaceH2FontStyles;
   color: var(--matterColor);
-  margin-top: 15px;
+  margin-top: 12px;
   margin-bottom: 0;
+  font-size: 18px;
   line-height: 27px;
   text-align: center;
 
@@ -135,4 +167,5 @@
   color: var(--matterColorDark);
   font-size: 18px;
   font-weight: 400;
+  font-family: var(--fontFamily);
 }

@@ -26,12 +26,23 @@
   display: flex;
   flex-direction: column;
   min-height: auto;
-  height: 454px;
-  @media (--viewportMedium) {
-    height: 640px;
+  height: calc(100vh - 60px);
+
+  @media (--viewportSmall) {
+    /* height: 454px; */
+    height: calc(100vh - 368px);
   }
+
+  @media (--viewportMedium) {
+    height: calc(100vh - 375px);
+  }
+
+  @media (--viewportLarge) {
+    height: calc(100vh - 235px);
+  }
+
   @media (--viewportLargeForHero) {
-    height: 900px;
+    height: calc(100vh - 250px);
   }
 }
 
@@ -89,7 +100,7 @@
 
 .sectionContentFirstChild {
   composes: sectionContent;
-  margin-top: 3vh;
+  margin-top: 36px;
 }
 
 .blueBg {
