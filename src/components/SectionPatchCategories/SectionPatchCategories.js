@@ -8,13 +8,11 @@ import { NamedLink } from '../../components';
 
 import css from './SectionPatchCategories.module.css';
 
-
 // import hairBeautyImage from       './images/hair_beauty.jpg';
 // import fitnessWellnessImage from  './images/fitness_wellness.jpg';
 // import studioSpaceImage from      './images/studio_space.jpg';
 // import eventSpaceImage from       './images/event_space.jpg';
 // import coworkingImage from        './images/coworking.jpg';
-
 
 import coworkingImage from        './newImages/coworking.jpg';
 import events_venuesImage from        './newImages/events_venues.jpg';
@@ -24,9 +22,6 @@ import kitchen_popUpsImage from        './newImages/kitchen_popUps.jpg';
 import music_artsImage from        './newImages/music_arts.jpg';
 import photography_filmImage from        './newImages/photography_film.jpg';
 import wellnessImage from        './newImages/wellness.jpg';
-
-
-
 
 const locationParams =            '?address=&bounds=59.49417013%2C4.15978193%2C49.54972301%2C-10.51994741';
 const hairBeautyUrlParams =       '&pub_category=has_any%3Ahair-stylist%2Cbarber%2Cmakeup-artist%2Cnail-technician%2Ccosmetics%2Cbeauty-treatment-room';
