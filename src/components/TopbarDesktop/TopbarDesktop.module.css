@@ -100,7 +100,7 @@
   margin-right: 4px;
   border-left: 0.5px solid var(--matterColor);
   display: flex;
-  padding: 16px 0 16px 16px;
+  padding: 16px 0 16px 12px;
 
   @media (--viewportLarge) {
     margin-right: 12px;
@@ -448,7 +448,7 @@
   border: 1px solid var(--matterColorNegative);
   font-size: 14px;
   padding: 8px 0;
-  margin: 15px 8px 15px 0;
+  margin: 15px 8px 15px 8px;
   text-align: center;
   color: var(--matterColor);
 
