@@ -26,7 +26,7 @@
   display: flex;
   flex-direction: column;
   min-height: auto;
-  height: calc(100vh - 60px);
+  height: calc(100vh - 145px);
 
   @media (--viewportSmall) {
     /* height: 454px; */
@@ -34,15 +34,20 @@
   }
 
   @media (--viewportMedium) {
-    height: calc(100vh - 375px);
+    height: calc(100vh - 360px);
   }
 
   @media (--viewportLarge) {
     height: calc(100vh - 235px);
   }
 
+  @media (--viewportMLarge) {
+    min-height: 480px;
+  }
+
   @media (--viewportLargeForHero) {
-    height: calc(100vh - 250px);
+    height: calc(100vh - 300px);
+    min-height: 450px;
   }
 }
 
@@ -61,7 +66,11 @@
 
 .sections {
   margin: 0;
-  padding-top: 1px;
+  padding-top: 68px;
+
+  @media (--viewportSmall) {
+    padding-top: 1px;
+  }
 }
 
 .section {

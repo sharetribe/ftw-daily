@@ -43,11 +43,11 @@
 }
 .heroTitleBlock {
   position: absolute;
-  top: 110px;
+  top: 16%;
   left: 24px;
 
   @media (--viewportSmall) {
-    top: 125px;
+    top: 15%;
     left: 97px;
     width: 100%;
     max-width: 380px;
@@ -59,7 +59,7 @@
   }
 
   @media (--viewportLarge) { 
-    top: 150px;
+    top: 16%;
   }
 }
 
@@ -148,7 +148,8 @@
   font-family: var(--fontFamilySofiapro);
   /* @apply --SectionHero_animation; */
   animation-delay: 0.5s;
-  max-width: 250px;
+  max-width: 300px;
+
   @media (--viewportMedium) {
     color: #252525;
     max-width: 437px;
@@ -160,11 +161,11 @@
   @apply --marketplaceTabNavFontStyles;
   font-family: var(--fontFamilySofiapro);
   margin: 0 0 25px 0;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: var(--fontWeightRegular);
   /* @apply --SectionHero_animation; */
   animation-delay: 0.65s;
-  max-width: 253px;
+  max-width: 300px;
 
   @media (--viewportMedium) {
     font-size: 24px;
@@ -220,13 +221,15 @@
   position: absolute;
   left: 0;
   bottom: 15px;
-  bottom: 16px;
+  /* bottom: 16px; */
+  bottom: 0;
   margin-top: 15px;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 24px;
+  padding: 24px;
+  background: var(--matterColorLight);
 
   @media (--viewportSmall) {
     display: none;
@@ -332,15 +335,21 @@
     }
 
     @media (--viewportMedium) {
-      height: calc(100vh - 375px);
+      height: calc(100vh - 360px);
     }
   
     @media (--viewportLarge) {
       height: calc(100vh - 235px);
     }
 
+    @media (--viewportMLarge) {
+      min-height: 480px;
+    }
+
+  
     @media (--viewportLargeForHero) {
-      height: calc(100vh - 250px);
+      height: calc(100vh - 300px);
+      min-height: 450px;
     }
   }
     /*:global(.slick-slide) {*/
