@@ -66,10 +66,10 @@
 
 --marketplaceHeroTitleFontStyles: {
   font-family: var(--fontFamilySofiapro);
-  font-weight: var(--fontWeightSemiBold);
-  font-size: 24px;
-  line-height: 27px;
-  letter-spacing: -1px;
+  font-weight: var(--fontWeightBold);
+  font-size: 32px;
+  line-height: 1;
+  /* letter-spacing: -1px; */
   /* margin-top + n * line-height + margin-bottom => x * 6px */
   /* margin-top: 25px; */
   margin-bottom: 20px;
@@ -78,7 +78,7 @@
   font-family: var(--fontFamilySofiapro);
   font-size: 48px;
   line-height: 48px;
-  letter-spacing: -1.5px;
+  /* letter-spacing: -1.5px; */
   /* margin-top + n * line-height + margin-bottom => x * 8px */
   margin-top: 25px;
   margin-bottom: 31px;
