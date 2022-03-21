@@ -447,6 +447,7 @@
   border-radius: 4px;
   border: 1px solid var(--matterColorNegative);
   font-size: 14px;
+  font-weight: var(--fontWeightMedium);
   padding: 8px 0;
   margin: 15px 8px 15px 8px;
   text-align: center;
