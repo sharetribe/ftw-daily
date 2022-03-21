@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { bool, func, shape, string } from 'prop-types';
 import { compose } from 'redux';
 import { Form as FinalForm } from 'react-final-form';
@@ -10,13 +10,19 @@ import {
   DAILY_PRICE,
   WEEKLY_PRICE,
   MONTHLY_PRICE,
-  propTypes
+  propTypes,
+  HOURLY_BOOKING,
+  DAILY_BOOKING,
+  WEEKLY_BOOKING,
+  MONTHLY_BOOKING
 } from '../../util/types';
 import * as validators from '../../util/validators';
 import { formatMoney } from '../../util/currency';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { Button, Form, FieldCurrencyInput, FieldTextInput, FieldSelect } from '../../components';
 import css from './EditListingPricingForm.module.css';
+import {discountCountHours} from "../../marketplace-custom-config";
+import {valueOf} from "lodash/seq";
 
 const { Money } = sdkTypes;
 
@@ -29,6 +35,18 @@ const hasSelectedPrice = values => {
   ].some(key => !!values[key]);
 }
 
+const daysInMonth = (month, year) => {
+  let date1 = new Date(year, month-1, 1);
+  let date2 = new Date(year, month, 1);
+  return Math.round((date2 - date1) / 1000 / 3600 / 24);
+}
+
+const roundNumber = value => {
+  let num = value.toString().split('.')
+  if(!num[1]) return value
+  else return +(num[0]+'.5')
+}
+
 export const EditListingPricingFormComponent = props => (
   <FinalForm
     {...props}
@@ -36,6 +54,7 @@ export const EditListingPricingFormComponent = props => (
       const {
         className,
         disabled,
+        form,
         ready,
         handleSubmit,
         intl,
@@ -47,9 +66,6 @@ export const EditListingPricingFormComponent = props => (
         fetchErrors,
         fetchListingProgress,
         values,
-        values: {
-          discount
-        },
       } = formRenderProps;
 
       // prices
@@ -119,23 +135,40 @@ export const EditListingPricingFormComponent = props => (
       const { updateListingError, showListingsError } = fetchErrors || {};
 
       const parsePercentage = value => {
-        if (!value) {
-          return value;
-        }
-
-        const pattern = /^\d{0,3}(?:\.\d{1,2})?$/;
+        if (!value) return value
+        const pattern = /^\d{0,2}(?:\.\d{1,2})?$/;
         const hasCorrectFormat = value.match(pattern);
         const floatValue = Number.parseFloat(value);
-        const isInRange = 0 <= floatValue && floatValue <= 100;
+        const isInRange = 0 <= floatValue && floatValue <= maxStep;
 
         return hasCorrectFormat && isInRange
-          ? value
+          ? (values.minBookingType !== HOURLY_BOOKING ? Math.round(value) : roundNumber(value))
           : hasCorrectFormat && floatValue < 0
           ? 0
-          : hasCorrectFormat && floatValue > 100
-          ? 100
-          : value.substring(0, value.length - 1);
+          : hasCorrectFormat && floatValue > maxStep
+          ? maxStep
+          : value.substring(0, value.length - 1)
       };
+
+        useEffect( () => {
+          if ( values.minBookingType === HOURLY_BOOKING ) {
+            setStep(0.5)
+            setMaxStep(24)
+            form.change('minBookingCount', 0.5)
+          } else {
+            setStep(1)
+            form.change('minBookingCount', 1)
+          }
+          if ( values.minBookingType === DAILY_BOOKING ) {
+            setMaxStep(daysInMonth(new Date().getMonth(), new Date().getFullYear()))
+          }
+          if ( values.minBookingType === WEEKLY_BOOKING ) setMaxStep(4)
+          if ( values.minBookingType === MONTHLY_BOOKING ) setMaxStep(12)
+
+        }, [values.minBookingType])
+
+        const [ step, setStep ] = useState(0.5)
+        const [ maxStep, setMaxStep ] = useState(24)
 
       return (
         <Form onSubmit={handleSubmit} className={classes}>
@@ -189,6 +222,37 @@ export const EditListingPricingFormComponent = props => (
             disabled={inputsDisabled}
             currencyConfig={config.currencyConfig}
           />
+          <p className={css.labelMinBook}>
+            <FormattedMessage id="EditListingPricingForm.infoTextMinBook" />
+          </p>
+          <div className={css.blockMiningBooking}>
+            <FieldSelect
+              id="minBookingType"
+              name="minBookingType"
+              className={classNames(css.priceInput, css.minBookInput)}
+              // label={intl.formatMessage({ id: 'EditListingPricingForm.discountTypeMessage' })}
+              defaultValue={config.custom.discountTypes[0].key}
+            >
+              {/*<option value="" disabled>-</option>*/}
+              {config.custom.discountTypes.map(({ key, label}) => (
+                <option value={key}>{label}</option>
+              ))}
+            </FieldSelect>
+
+            <FieldTextInput
+              id="minBookingCount"
+              name="minBookingCount"
+              className={classNames(css.inputNumber, css.minBookInput)}
+              type='number'
+              // label={intl.formatMessage({ id: 'EditListingPricingForm.discountAmountMessage' })}
+              defaultValue={step}
+              min={step}
+              max={maxStep}
+              step={step}
+              parse={parsePercentage}
+            />
+          </div>
+
 
           {/* <h3>{intl.formatMessage({ id: 'EditListingPricingForm.discountHeader' })}</h3>
           <p className={css.discountDescription}>{intl.formatMessage({ id: 'EditListingPricingForm.discountSubHeader' })}</p> */}

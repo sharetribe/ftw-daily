@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { func, object, string } from 'prop-types';
 import moment from 'moment-timezone/builds/moment-timezone-with-data-10-year-range.min';
 import classNames from 'classnames';
-import { intlShape } from '../../util/reactIntl';
+import {FormattedMessage, intlShape} from '../../util/reactIntl';
 import {
   getStartHours,
   getEndHours,
@@ -456,7 +456,8 @@ class FieldDateAndTimeInput extends Component {
      * 2. Remove the div containing the line between dates
      * 3. Remove the css related to hiding the booking end date from the bottom of the FieldDateAndTimeInput.module.css field
      */
-
+let minBookTest = '1 hour'
+let minBook = minBookTest ? minBookTest : '1 hour'
     return (
       <div className={classes}>
         <div className={css.formRow}>
@@ -484,6 +485,12 @@ class FieldDateAndTimeInput extends Component {
               validate={bookingDateRequired('Required')}
             />
           </div>
+        </div>
+        <div className={css.infoBlockMinBooking}>
+          <span className={css.infoTextMinBooking}>•</span>
+          <p className={css.infoTextMinBooking}>
+            <FormattedMessage id="FieldDateTimeInput.minBoookTextShow" values={{ minBook }} />
+          </p>
         </div>
         <div className={css.formRow}>
           <div className={classNames(css.field, css.endDateHidden)}>

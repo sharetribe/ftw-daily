@@ -17,7 +17,6 @@ const CustomCategorySelectFieldMaybe = props => {
       id: 'EditListingDescriptionForm.categoryRequired',
     })
   );
-console.log('categories', categories)
 
   const newArray = categories.map((item) => {
     if ('key' in item) {
@@ -46,7 +45,7 @@ console.log('categories', categories)
       )
   });
 
-  return categories ? 
+  return categories ?
   <FieldMultiSelect
     className={css.category}
     name={name}
