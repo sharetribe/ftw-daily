@@ -31,6 +31,7 @@
   @media (--viewportSmall) {
     /* height: 454px; */
     height: calc(100vh - 368px);
+    min-height: 350px;
   }
 
   @media (--viewportMedium) {
