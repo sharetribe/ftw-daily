@@ -164,6 +164,9 @@ export class BookingTimeFormComponent extends Component {
             endDateInputProps,
           };
 
+          // const minBook = '1 hour'
+          const minBook = ''
+
           return (
             <Form onSubmit={handleSubmit} className={classes}>
               <FormSpy
@@ -185,6 +188,7 @@ export class BookingTimeFormComponent extends Component {
                   form={form}
                   pristine={pristine}
                   timeZone={timeZone}
+                  minBook={minBook}
                 />
               ) : null}
 

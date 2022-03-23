@@ -390,7 +390,7 @@
   "EnquiryForm.submitButtonText": "Send enquiry",
   "FieldBoolean.no": "No",
   "FieldBoolean.yes": "Yes",
-  "FieldDateTimeInput.minBoookTextShow": "Minimum {minBook} booking required",
+  "FieldDateTimeInput.minBoookTextShow": "Minimum {minBookText} booking required",
   "FieldDateTimeInput.startTime": "Start time",
   "FieldDateTimeInput.endTime": "End time",
   "FieldDateInput.clearDate": "Clear Date",
