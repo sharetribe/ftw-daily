@@ -96,7 +96,8 @@ const EditListingPricingPanel = props => {
       ...discount,
     }}
   }
-const {minBookingType, minBookingCount } = publicData
+const { minBooking } = publicData
+const { minBookingType, minBookingCount } = minBooking || {}
   const initialValues = {
     price,
     minBookingType,
@@ -132,11 +133,11 @@ const {minBookingType, minBookingCount } = publicData
       fetchListingProgress={fetchListingProgress}
       onSubmit={values => {
         const { price, discount, minBookingType, minBookingCount } = values;
+        const minBooking = { minBookingType, minBookingCount }
         onSubmit({
           price,
           publicData: {
-            minBookingType,
-            minBookingCount,
+            minBooking,
             unitType: null, //remove unittype field from previous realisation
             // discount,
             ...managePrices(values)

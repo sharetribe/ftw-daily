@@ -231,11 +231,11 @@ export const EditListingPricingFormComponent = props => (
               name="minBookingType"
               className={classNames(css.priceInput, css.minBookInput)}
               // label={intl.formatMessage({ id: 'EditListingPricingForm.discountTypeMessage' })}
-              defaultValue={config.custom.discountTypes[0].key}
+              // defaultValue={config.custom.discountTypes[0].key}
             >
-              {/*<option value="" disabled>-</option>*/}
+              <option value="" disabled> </option>
               {config.custom.discountTypes.map(({ key, label}) => (
-                <option value={key}>{label}</option>
+                <option value={key} key={key}>{label}</option>
               ))}
             </FieldSelect>
 

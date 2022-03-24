@@ -96,6 +96,8 @@ export class BookingTimeFormComponent extends Component {
             lineItems,
             fetchLineItemsInProgress,
             fetchLineItemsError,
+            minBookingCount,
+            minBookingType,
           } = fieldRenderProps;
 
           const startTime = values && values.bookingStartTime ? values.bookingStartTime : null;
@@ -164,16 +166,11 @@ export class BookingTimeFormComponent extends Component {
             endDateInputProps,
           };
 
-          // const minBook = '1 hour'
-          const minBook = ''
-
           return (
             <Form onSubmit={handleSubmit} className={classes}>
               <FormSpy
                 subscription={{ values: true }}
-                onChange={values => {
-                  this.handleOnChange(values);
-                }}
+                onChange={values => this.handleOnChange(values)}
               />
               {monthlyTimeSlots && timeZone ? (
                 <FieldDateAndTimeInput
@@ -188,7 +185,8 @@ export class BookingTimeFormComponent extends Component {
                   form={form}
                   pristine={pristine}
                   timeZone={timeZone}
-                  minBook={minBook}
+                  minBookingCount={minBookingCount}
+                  minBookingType={minBookingType}
                 />
               ) : null}
 

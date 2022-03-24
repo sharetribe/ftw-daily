@@ -1,6 +1,7 @@
 import jstz from 'jstimezonedetect';
 import moment from 'moment-timezone/builds/moment-timezone-with-data-10-year-range.min';
 import { getTimeZones, rawTimeZones, timeZonesNames } from "@vvo/tzdb";
+import {HOURLY_BOOKING} from "./types";
 
 /**
  * Input names for the DateRangePicker from react-dates.
@@ -251,9 +252,9 @@ export const findNextBoundary = (timeZone, currentMomentOrDate) =>
     .toDate();
 
 export const findNextBoundaryCustom = (timeZone, currentMomentOrDate, minBooking) => {
-  console.log('2222222', minBooking)
-  const typeTime = minBooking ? 'hour' : 'minutes'
-  const countTime = minBooking ? 1 : 30 - (moment(currentMomentOrDate).minute() % 30)
+
+  const typeTime = minBooking === HOURLY_BOOKING ? 'minutes' : 'hour'
+  const countTime = minBooking === HOURLY_BOOKING ? 30 - (moment(currentMomentOrDate).minute() % 30) : 1
   return moment(currentMomentOrDate)
     .clone()
     .tz(timeZone)
@@ -397,12 +398,15 @@ export const getStartHours = (intl, timeZone, startTime, endTime, minBook) => {
  */
 export const getEndHours = (intl, timeZone, startTime, endTime, minBook) => {
   const hours = getSharpHours(intl, timeZone, startTime, endTime, minBook);
-  return hours.length < 1 ? [] : hours.slice(0.5);
+  return hours.length < 1 ? [] : hours.slice(0);
 };
 
-export const getEndHoursCustom = (intl, timeZone, startTime, endTime, minBook) => {
+export const getEndHoursCustom = (intl, timeZone, startTime, endTime, minBook, countBook) => {
   const hours = getSharpHoursCustom(intl, timeZone, startTime, endTime, minBook);
-  return hours.length < 1 ? [] : hours.slice(0.5);
+  ///////// time count for correct show /////
+  const value = minBook === HOURLY_BOOKING ? (countBook / 0.5) : 0
+  console.log('111111', value)
+  return hours.length < 1 ? [] : hours.slice(value);
 };
 
 /**
