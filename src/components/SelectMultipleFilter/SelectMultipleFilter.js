@@ -119,8 +119,6 @@ class SelectMultipleFilter extends Component {
       ...rest
     } = this.props;
 
-    // console.log(options, "!!!!!!!options");
-
     const classes = classNames(rootClassName || css.root, className);
 
     //NOTE v2s1 filterupdate -- updated in v5
@@ -163,7 +161,6 @@ class SelectMultipleFilter extends Component {
 
     const handleSubmit = (values) => {
       const usedValue = values ? values[name] : values;
-      // console.log(values, usedValue, '(data, e)')
       onSubmit(format(usedValue, queryParamName, searchMode), filterConfigId);
     };
 
