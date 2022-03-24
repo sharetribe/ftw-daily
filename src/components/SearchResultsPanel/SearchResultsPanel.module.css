@@ -6,7 +6,7 @@
 }
 
 .listingCards {
-  padding: 0 24px 96px 24px;
+  padding: 0 24px 120px 24px;
 
   @media (--viewportMedium) {
     display: flex;
@@ -15,7 +15,7 @@
   }
 
   @media (--viewportLarge) {
-    padding: 0 36px 96px 36px;
+    padding: 0 36px 120px 36px;
   }
 }
 

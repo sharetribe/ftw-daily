@@ -39,11 +39,10 @@ const GroupOfFieldCheckboxes = props => {
           //
           // if (option.key) return item(option)
           // return null
-
-          const fieldId = `${id}.${option.key || option.value}`;
+          const fieldId = `${id}.${option.key}`;
           return (
             <li key={fieldId} className={css.item}>
-              <FieldCheckbox id={fieldId} name={name} label={option.label} value={option.key || option.value} />
+              <FieldCheckbox id={fieldId} name={name} label={option.label} value={option.key} />
             </li>
           );
         })}
@@ -142,14 +141,14 @@ class SelectMultipleFilter extends Component {
     const labelForPopup = hasInitialValues
       ? intl.formatMessage(
           { id: 'SelectMultipleFilter.labelSelected' },
-          { labelText: filterConfig.label, count: filterConfig.config.options.map(e => e.key).filter(v => selectedOptions.includes(v)).length || filterConfig.config.options.map(e => e.value).filter(v => selectedOptions.includes(v)).length }
+          { labelText: filterConfig.label, count: filterConfig.config.options.map(e => e.key).filter(v => selectedOptions.includes(v)).length }
         )
       : label;
 
     const labelForPlain = hasInitialValues
       ? intl.formatMessage(
           { id: 'SelectMultipleFilterPlainForm.labelSelected' },
-          { labelText: filterConfig.label, count: filterConfig.config.options.map(e => e.key).filter(v => selectedOptions.includes(v)).length || filterConfig.config.options.map(e => e.value).filter(v => selectedOptions.includes(v)).length }
+          { labelText: filterConfig.label, count: filterConfig.config.options.map(e => e.key).filter(v => selectedOptions.includes(v)).length }
         )
       : label;
 
@@ -161,6 +160,7 @@ class SelectMultipleFilter extends Component {
 
     const handleSubmit = (values) => {
       const usedValue = values ? values[name] : values;
+      // console.log(values, usedValue, '(data, e)')
       onSubmit(format(usedValue, queryParamName, searchMode), filterConfigId);
     };
 
