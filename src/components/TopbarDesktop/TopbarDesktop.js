@@ -190,6 +190,52 @@ const TopbarDesktop = props => {
     </NamedLink>
   );
 
+  const locationParams = '?address=&bounds=59.49417013%2C4.15978193%2C49.54972301%2C-10.51994741';
+  const hairBeautyUrlParams =       `${locationParams}&pub_category=has_any%3Ahair-stylist%2Cbarber%2Cmakeup-artist%2Cnail-technician%2Ccosmetics%2Cbeauty-treatment-room`;
+  const fitnessWellnessUrlParams =  `${locationParams}&pub_category=has_any%3Afitness%2Cwellness-treatment-room%2Ctherapy-room`;
+  const studioSpaceUrlParams =      `${locationParams}&pub_category=has_any%3Aphotography%2Cart%2Cmusic`;
+  const coworkingUrlParams =        `${locationParams}&pub_category=has_any%3Adesk-space%2Coffice-space%2Cmeeting-room-space`;
+  const eventsKitchenUrlParams =    `${locationParams}&pub_category=has_any%3Aevent-space%2Coutdoor-site%2Cshoot-location%2Ckitchen-space`;
+  const tattooPiercingUrlParams =   `${locationParams}&pub_category=has_any%3Atattoo-artist%2Cpiercing-artist`;
+
+  const categoriesMenuContent = [
+    {titleId: "TopbarDesktop.hairBeauty", url: hairBeautyUrlParams},
+    {titleId: "TopbarDesktop.fitnessWellness", url: fitnessWellnessUrlParams},
+    {titleId: "TopbarDesktop.creativeStudios", url: studioSpaceUrlParams},
+    {titleId: "TopbarDesktop.coworking", url: coworkingUrlParams},
+    {titleId: "TopbarDesktop.eventsKitchen", url: eventsKitchenUrlParams},
+    {titleId: "TopbarDesktop.tattooPiercing", url: tattooPiercingUrlParams},
+  ]
+
+
+
+  const categoriesBtn = currentPage !== "SearchPage" && ( 
+    <Menu>
+      <MenuLabel className={css.categoriesBtn}>
+        <FormattedMessage id="TopbarDesktop.categories" />
+      </MenuLabel>
+      <MenuContent className={css.categoriesMenuContent}>
+
+        {categoriesMenuContent.map(item => {
+
+          return (
+          <MenuItem key={item.titleId} >
+            <NamedLink
+              className={css.categoriesLink}
+              name="SearchPage"
+              to={{ search: item.url }}
+            >
+              <span className={css.menuItemBorder} />
+              <FormattedMessage id={item.titleId}  onClick={() => alert("1")}/>
+            </NamedLink>
+          </MenuItem>
+          )
+        })}
+
+      </MenuContent>
+    </Menu>
+  )
+
   return (
     <nav className={classes}>
       <NamedLink className={css.logoLink} name="LandingPage">
@@ -200,6 +246,7 @@ const TopbarDesktop = props => {
         />
       </NamedLink>
       {search}
+      {categoriesBtn}
       <NamedLink className={css.createListingLink} name="NewListingPage">
         <span className={css.createListing}>
           <FormattedMessage id="TopbarDesktop.createListing" />
