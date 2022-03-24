@@ -205,7 +205,7 @@ const findBookingUnitBoundaries = params => {
     nextBoundaryFn,
     intl,
     timeZone,
-    minBook,
+    minBook
   } = params;
 
 
@@ -246,8 +246,8 @@ export const findNextBoundary = (timeZone, currentMomentOrDate) =>
   moment(currentMomentOrDate)
     .clone()
     .tz(timeZone)
-    .add(30 - (moment(currentMomentOrDate).minute ()% 30), 'minutes')
-    .startOf('minute')
+    .add(1, 'hour')
+    .startOf('hour')
     .toDate();
 
 export const findNextBoundaryCustom = (timeZone, currentMomentOrDate, minBooking) => {
@@ -310,7 +310,7 @@ export const getSharpHours = (intl, timeZone, startTime, endTime, minBook) => {
     cumulatedResults: [],
     intl,
     timeZone,
-    minBook,
+    minBook
   });
 };
 
@@ -323,6 +323,11 @@ export const getSharpHoursCustom = (intl, timeZone, startTime, endTime, minBook)
 
   // Select a moment before startTime to find next possible sharp hour.
   // I.e. startTime might be a sharp hour.
+
+
+
+  ////////////////////////////////
+
   const millisecondBeforeStartTime = new Date(startTime.getTime());
   return findBookingUnitBoundaries({
     currentBoundary: findNextBoundaryCustom(timeZone, millisecondBeforeStartTime, minBook),
@@ -332,7 +337,7 @@ export const getSharpHoursCustom = (intl, timeZone, startTime, endTime, minBook)
     cumulatedResults: [],
     intl,
     timeZone,
-    minBook,
+    minBook
   });
 };
 
