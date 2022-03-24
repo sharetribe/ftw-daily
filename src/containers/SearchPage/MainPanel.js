@@ -163,11 +163,13 @@ class MainPanel extends Component {
           
           const arrayN = {
             hair_and_beauty: filterConfig.find(i => i.id === 'hair_and_beauty').config.catKeys.split(','),
-            fitness_and_wellness: filterConfig.find(i => i.id === 'fitness_and_wellness').config.catKeys.split(','),
-            creative_studios: filterConfig.find(i => i.id === 'creative_studios').config.catKeys.split(','),
+            wellness: filterConfig.find(i => i.id === 'wellness').config.catKeys.split(','),
+            fitness: filterConfig.find(i => i.id === 'fitness').config.catKeys.split(','),
+            photography_and_film: filterConfig.find(i => i.id === 'photography_and_film').config.catKeys.split(','),
             coworking: filterConfig.find(i => i.id === 'coworking').config.catKeys.split(','),
-            events_and_kitchen: filterConfig.find(i => i.id === 'events_and_kitchen').config.catKeys.split(','), 
-            tattoo_and_piercing: filterConfig.find(i => i.id === 'tattoo_and_piercing').config.catKeys.split(','),
+            music_and_arts: filterConfig.find(i => i.id === 'music_and_arts').config.catKeys.split(','),
+            events_and_venues: filterConfig.find(i => i.id === 'events_and_venues').config.catKeys.split(','),
+            kitchensand_pop_ups: filterConfig.find(i => i.id === 'kitchensand_pop_ups').config.catKeys.split(','),
           };
 
           const findValue = ( value ) => {

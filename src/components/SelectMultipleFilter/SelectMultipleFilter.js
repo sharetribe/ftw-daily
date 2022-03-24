@@ -39,10 +39,11 @@ const GroupOfFieldCheckboxes = props => {
           //
           // if (option.key) return item(option)
           // return null
-          const fieldId = `${id}.${option.key}`;
+
+          const fieldId = `${id}.${option.key || option.value}`;
           return (
             <li key={fieldId} className={css.item}>
-              <FieldCheckbox id={fieldId} name={name} label={option.label} value={option.key} />
+              <FieldCheckbox id={fieldId} name={name} label={option.label} value={option.key || option.value} />
             </li>
           );
         })}
@@ -118,6 +119,8 @@ class SelectMultipleFilter extends Component {
       ...rest
     } = this.props;
 
+    // console.log(options, "!!!!!!!options");
+
     const classes = classNames(rootClassName || css.root, className);
 
     //NOTE v2s1 filterupdate -- updated in v5
@@ -141,14 +144,14 @@ class SelectMultipleFilter extends Component {
     const labelForPopup = hasInitialValues
       ? intl.formatMessage(
           { id: 'SelectMultipleFilter.labelSelected' },
-          { labelText: filterConfig.label, count: filterConfig.config.options.map(e => e.key).filter(v => selectedOptions.includes(v)).length }
+          { labelText: filterConfig.label, count: filterConfig.config.options.map(e => e.key).filter(v => selectedOptions.includes(v)).length || filterConfig.config.options.map(e => e.value).filter(v => selectedOptions.includes(v)).length }
         )
       : label;
 
     const labelForPlain = hasInitialValues
       ? intl.formatMessage(
           { id: 'SelectMultipleFilterPlainForm.labelSelected' },
-          { labelText: filterConfig.label, count: filterConfig.config.options.map(e => e.key).filter(v => selectedOptions.includes(v)).length }
+          { labelText: filterConfig.label, count: filterConfig.config.options.map(e => e.key).filter(v => selectedOptions.includes(v)).length || filterConfig.config.options.map(e => e.value).filter(v => selectedOptions.includes(v)).length }
         )
       : label;
 

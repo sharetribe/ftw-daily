@@ -17,7 +17,6 @@ const CustomCategorySelectFieldMaybe = props => {
       id: 'EditListingDescriptionForm.categoryRequired',
     })
   );
-console.log('categories', categories)
 
   const newArray = categories.map((item) => {
     if ('key' in item) {
