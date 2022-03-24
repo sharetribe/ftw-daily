@@ -21,7 +21,7 @@
   @media (--viewportMedium) {
     flex-wrap: nowrap;
     padding: 0;
-    margin-top: 24px;
+    margin-top: 10px;
   }
 }
 
@@ -131,7 +131,7 @@
 CSS for hiding the end date
 
 If you want to show the field for the end date e.g. for enabling longer bookings,
-you can remove the following code. 
+you can remove the following code.
 Remember to do required code changes also in FieldDateAndTimeInput.js!
 **/
 
@@ -161,6 +161,19 @@ Remember to do required code changes also in FieldDateAndTimeInput.js!
 
 .lineBetweenDisabled {
   color: var(--matterColorNegative);
+}
+.infoBlockMinBooking {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+}
+.infoTextMinBooking {
+  font-size: 18px;
+  line-height: 18px;
+  color: #EF7171;
+  font-family: var(--fontFamilySofiapro);
+  font-weight: var(--fontWeightLow);
+  margin: 0 10px 0 0;
 }
 
 /**

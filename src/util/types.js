@@ -559,7 +559,7 @@ export const DAILY_PRICE = 'pricePerDay';
 export const WEEKLY_PRICE = 'pricePerWeek';
 export const MONTHLY_PRICE = 'pricePerMonth';
 
-export const HOURLY_DISCOUNT = 'hourlyDiscount';
-export const DAILY_DISCOUNT = 'dailyDiscount';
-export const WEEKLY_DISCOUNT = 'weeklyDiscount';
-export const MONTHLY_DISCOUNT = 'monthlyDiscount';
+export const HOURLY_BOOKING = 'hourlyMinBooking';
+export const DAILY_BOOKING = 'dailyMinBooking';
+export const WEEKLY_BOOKING = 'weeklyMinBooking';
+export const MONTHLY_BOOKING = 'monthlyMinBooking';

@@ -48,6 +48,7 @@
   --fontFamily: 'poppins', Helvetica, Arial, sans-serif;
   --fontFamilySofiapro: 'sofiapro', Helvetica, Arial, sans-serif;
 
+  --fontWeightLow: 300;
   --fontWeightRegular: 400;
   --fontWeightMedium: 500;
   --fontWeightSemiBold: 600;
