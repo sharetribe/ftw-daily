@@ -165,6 +165,7 @@
   color: var(--customDarkBlue);
   font-weight: 600;
   margin-left: 2px;
+  cursor: pointer;
 
   &:after {
     content: "";

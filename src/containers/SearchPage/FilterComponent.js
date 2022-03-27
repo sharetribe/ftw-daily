@@ -21,6 +21,7 @@ const FilterComponent = props => {
     mainCategoriesImages,
     subCategoriesImages,
     onOpenCategoryFilter,
+    isCategoryFilterEnabled,
     ...rest
   } = props;
   const { id, type, queryParamNames, label, labelImg, config } = filterConfig;
@@ -59,6 +60,7 @@ const FilterComponent = props => {
           mainCategoriesImages={mainCategoriesImages}
           subCategoriesImages={subCategoriesImages}
           onOpenCategoryFilter={onOpenCategoryFilter}
+          isCategoryFilterEnabled={isCategoryFilterEnabled}
           {...config}
           {...rest}
         />

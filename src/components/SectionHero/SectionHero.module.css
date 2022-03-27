@@ -43,11 +43,23 @@
 }
 .heroTitleBlock {
   position: absolute;
-  top: 110px;
+  top: 16%;
   left: 24px;
+
   @media (--viewportSmall) {
-    top: 150px;
+    top: 15%;
     left: 97px;
+    width: 100%;
+    max-width: 380px;
+  }
+
+  @media (--viewportMedium) { 
+    width: auto;
+    max-width: none;
+  }
+
+  @media (--viewportLarge) { 
+    top: 16%;
   }
 }
 
@@ -134,9 +146,10 @@
   @apply --marketplaceHeroTitleFontStyles;
   margin-top: 0;
   font-family: var(--fontFamilySofiapro);
-  @apply --SectionHero_animation;
+  /* @apply --SectionHero_animation; */
   animation-delay: 0.5s;
-  max-width: 250px;
+  max-width: 300px;
+
   @media (--viewportMedium) {
     color: #252525;
     max-width: 437px;
@@ -148,11 +161,11 @@
   @apply --marketplaceTabNavFontStyles;
   font-family: var(--fontFamilySofiapro);
   margin: 0 0 25px 0;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: var(--fontWeightRegular);
-  @apply --SectionHero_animation;
+  /* @apply --SectionHero_animation; */
   animation-delay: 0.65s;
-  max-width: 253px;
+  max-width: 300px;
 
   @media (--viewportMedium) {
     font-size: 24px;
@@ -169,25 +182,62 @@
   }
 }
 
-.heroButtonsContainer {
+/* .heroButtonsContainer {
   position: absolute;
-  top: 520px;
+  bottom: 16px;
   margin-top: 15px;
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  padding: 0 24px;
+
 
   @media (--viewportSmall) {
     max-width: 400px;
-    top: 385px;
+    top: 0;
     left: 97px;
     position: absolute;
+    justify-content: center;
+    padding: 0;
+  }
+} */
+
+.heroButtonsContainerDesktop {
+  display: none;
+  bottom: 16px;
+  margin-top: 15px;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 380px;
+  
+  @media (--viewportSmall) {
+    display: flex;
+  }
+}
+
+.heroButtonsContainerMobile {
+  position: absolute;
+  left: 0;
+  bottom: 15px;
+  /* bottom: 16px; */
+  bottom: 0;
+  margin-top: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  background: var(--matterColorLight);
+
+  @media (--viewportSmall) {
+    display: none;
   }
 }
 
 .heroButtonPink {
-  @apply --SectionHero_animation;
+  /* @apply --SectionHero_animation; */
 
   background-color: var(--marketplaceColorDark);
   color: var(--matterColorLight);
@@ -199,16 +249,17 @@
   display: block;
   margin-right: 10px;
   margin-bottom: 0;
-  max-width: 121px;
   width: 100%;
-@media (--viewportSmall) {
-  height: 66px;
-  max-width: 185px;
-  padding: 1em 0.25em;
-}
-
-
+  max-width: calc(50% - 5px);
   border: 1px solid var(--marketplaceColorDark);
+
+  @media (--viewportSmall) {
+    height: 66px;
+    max-width: 185px;
+    padding: 1em 0.25em;
+    width: 100%;
+    max-width: 185px;
+  }
 
   &:hover {
     background-color: var(--customBlue);
@@ -216,11 +267,10 @@
     text-decoration: none;
   }
 
-  animation-delay: 0.8s;
 }
 
 .heroButton {
-  @apply --SectionHero_animation;
+  /* @apply --SectionHero_animation; */
   display: block;
   background: rgba(255, 255, 255, 0.5);
   color: var(--marketplaceColorDark);
@@ -229,7 +279,11 @@
   border: 1px solid var(--marketplaceColorDark);
   text-align: center;
   height: 53px;
-  max-width: 121px;
+  
+
+  width: 100%;
+  max-width: calc(50% - 5px);
+
   @media (--viewportSmall) {
     height: 66px;
     width: 185px;
@@ -243,7 +297,6 @@
     border-color: var(--customBlue);
     color: var(--matterColorLight);
   }
-  animation-delay: 0.8s;
 }
 
 .heroButtonPink span, .heroButton span {
@@ -252,9 +305,11 @@
     font-size: 20px;
   }
 }
+
 .card {
   max-width: 100%;
 }
+
 .blockSlider {
   @media (--viewportMedium) {
     top: 150px;
@@ -262,22 +317,41 @@
     position: absolute;
   }
 }
+
 .slider {
   /*height: 640px;*/
+  height: 100%;
+
   & img {
     position: relative;
     width: 100vw;
     max-width: 100%;
-    height: 458px;
+    height: calc(100vh - 145px);
     object-fit: cover;
+
     @media (--viewportSmall) {
       min-height: auto;
-      height: 640px;
-    }
-    @media (--viewportLarge) {
-      height: 900px;
+      height: calc(100vh - 368px);
+      min-height: 350px;
     }
 
+    @media (--viewportMedium) {
+      height: calc(100vh - 360px);
+    }
+  
+    @media (--viewportLarge) {
+      height: calc(100vh - 235px);
+    }
+
+    @media (--viewportMLarge) {
+      min-height: 480px;
+    }
+
+  
+    @media (--viewportLargeForHero) {
+      height: calc(100vh - 300px);
+      min-height: 450px;
+    }
   }
     /*:global(.slick-slide) {*/
     /*  height: 640px;*/

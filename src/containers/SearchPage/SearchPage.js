@@ -52,6 +52,7 @@ export class SearchPageComponent extends Component {
     this.onOpenMobileModal = this.onOpenMobileModal.bind(this);
     this.onCloseMobileModal = this.onCloseMobileModal.bind(this);
     this.onOpenCategoryFilter = this.onOpenCategoryFilter.bind(this);
+    this.onCloseCategoryFilter = this.onCloseCategoryFilter.bind(this);
   }
 
   // Callback to determine if new search is needed
@@ -64,7 +65,6 @@ export class SearchPageComponent extends Component {
 
     const priceFilterMaybe = search => {
       const activePriceFilter = currentSearchFilter(search);
-      console.log(activePriceFilter)
       return activePriceFilter ? {[activePriceFilter]: search[activePriceFilter]} : {};
     }
 
@@ -121,6 +121,10 @@ export class SearchPageComponent extends Component {
 
   onOpenCategoryFilter() {
     this.setState({ isCategoryFilterOpen: !this.state.isCategoryFilterOpen });
+  }
+
+  onCloseCategoryFilter() {
+    this.setState({ isCategoryFilterOpen: false });
   }
 
 
@@ -217,6 +221,7 @@ export class SearchPageComponent extends Component {
             subCategoriesImages={categoryImages.subCategoriesImages}
             isCategoryFilterOpen={this.state.isCategoryFilterOpen}
             onOpenCategoryFilter={this.onOpenCategoryFilter}
+            onCloseCategoryFilter={this.onCloseCategoryFilter}
           />
 
           <ModalInMobile

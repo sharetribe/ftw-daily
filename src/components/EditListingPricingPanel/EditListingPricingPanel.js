@@ -8,8 +8,8 @@ import {
   MONTHLY_PRICE,
   LINE_ITEM_DAY,
   LINE_ITEM_UNITS,
-  HOURLY_DISCOUNT,
-  DAILY_DISCOUNT,
+  HOURLY_BOOKING,
+  DAILY_BOOKING,
   LISTING_STATE_DRAFT
 } from '../../util/types';
 import { ListingLink } from '../../components';
@@ -92,14 +92,17 @@ const EditListingPricingPanel = props => {
     const {discount = {}} = publicData;
 
     return {discount: {
-      type: publicData[LINE_ITEM_DAY] ? DAILY_DISCOUNT : HOURLY_DISCOUNT,
-      ...discount
+      type: publicData[LINE_ITEM_DAY] ? DAILY_BOOKING : HOURLY_BOOKING,
+      ...discount,
     }}
   }
-
+const { minBooking } = publicData
+const { minBookingType, minBookingCount } = minBooking || {}
   const initialValues = {
     price,
-    ...initialDiscounts(listing),
+    minBookingType,
+    minBookingCount,
+    // ...initialDiscounts(listing),
     ...initialPrices(listing)
   };
 
@@ -129,13 +132,14 @@ const EditListingPricingPanel = props => {
       // unitType={publicData.unitType}
       fetchListingProgress={fetchListingProgress}
       onSubmit={values => {
-        const { price, discount } = values;
-
+        const { price, discount, minBookingType, minBookingCount } = values;
+        const minBooking = { minBookingType, minBookingCount }
         onSubmit({
           price,
           publicData: {
+            minBooking,
             unitType: null, //remove unittype field from previous realisation
-            discount,
+            // discount,
             ...managePrices(values)
           },
           ...(updateAvailabilityMaybe(values) ? {availabilityPlan: createDefaultPlan(publicData.seats || 1, true)} : {}),

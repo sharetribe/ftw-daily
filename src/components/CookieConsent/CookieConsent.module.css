@@ -3,29 +3,32 @@
 .root {
   /* Fixed on top of everything */
   position: fixed;
-  margin: 16px;
+  margin: 0 16px;
   z-index: 1000;
+
+  width: calc(100% - 32px);
 
   /* Dimensions */
   /*width: 89vw;*/
   padding: 0;
-  top:72px;
+  top: 76px;
 
   /* Layout */
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-
+  
   /* Colors */
   background-color: var(--matterColor);
-  color: var(--matterColorNegative);
-
+  color: var(--matterColorLight);
+  
   /* Cover Topbar on desktop */
   @media (--viewportSmall) {
     bottom: 0;
     top: auto;
     width: 100vw;
     margin: 0;
+    justify-content: center;
   }
   @media (--viewportMedium) {
     padding: 8px 0;
@@ -34,8 +37,19 @@
 
 .message {
   @apply --marketplaceH5FontStyles;
+  font-weight: var(--fontWeightSemibold);
   margin: 16px 8px 16px 16px;
-  line-height: 14px;
+  width: 100%;
+  max-width: 148px;
+  
+  @media screen and (min-width: 375px) {
+    max-width: 250px;
+  }
+
+  @media (--viewportSmall) {
+    line-height: 1;
+    max-width: 500px;
+  }
 }
 
 .cookieLink {

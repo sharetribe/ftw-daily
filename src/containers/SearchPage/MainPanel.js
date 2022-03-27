@@ -285,6 +285,7 @@ class MainPanel extends Component {
       mainCategoriesImages,
       subCategoriesImages,
       onOpenCategoryFilter,
+      onCloseCategoryFilter,
       isCategoryFilterOpen
     } = this.props;
 
@@ -394,6 +395,7 @@ class MainPanel extends Component {
           subCategoriesImages={subCategoriesImages}
           isCategoryFilterOpen={isCategoryFilterOpen}
           onOpenCategoryFilter={onOpenCategoryFilter}
+          onCloseCategoryFilter={onCloseCategoryFilter}
           isCategoryFilterEnabled={isCategoryFilterEnabled}
           {...propsForSecondaryFiltersToggle}
         >
@@ -412,6 +414,7 @@ class MainPanel extends Component {
                 mainCategoriesImages={mainCategoriesImages}
                 subCategoriesImages={subCategoriesImages}
                 onOpenCategoryFilter={onOpenCategoryFilter}
+                isCategoryFilterEnabled={isCategoryFilterEnabled}
               />
             );
           })}

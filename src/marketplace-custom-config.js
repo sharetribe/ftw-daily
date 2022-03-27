@@ -1,9 +1,29 @@
 import {
-  HOURLY_DISCOUNT,
-  DAILY_DISCOUNT,
-  WEEKLY_DISCOUNT,
-  MONTHLY_DISCOUNT
+  HOURLY_BOOKING,
+  DAILY_BOOKING,
+  WEEKLY_BOOKING,
+  MONTHLY_BOOKING
 } from './util/types';
+
+import {
+  generalAmenitiesOptions,
+  hairAndBeautyOptions,
+  hairAndBeautyAmenitiesOptions,
+  wellnessOptions,
+  wellnessAmenitiesOptions,
+  fitnessOptions,
+  fitnessAmenitiesOptions,
+  eventsAndVenuesOptions,
+  eventsAndVenuesAmenitiesOptions,
+  coworkingOptions,
+  coworkingAmenitiesOptions,
+  musicAndArtsOptions,
+  musicAndArtsAmenitiesOptions,
+  photographyAndFilmOptions,
+  photographyAndFilmAmenitiesOptions,
+  kitchenOptions,
+  kitchenAmenitiesOptions,
+} from './custom-config-options'
 
 /*
  * Marketplace specific configuration.
@@ -41,11 +61,25 @@ import {
  */
 
 export const discountTypes = [
-  {key: HOURLY_DISCOUNT, label: 'Hours'},
-  {key: DAILY_DISCOUNT, label: 'Days'},
-  {key: WEEKLY_DISCOUNT, label: 'Weeks'},
-  {key: MONTHLY_DISCOUNT, label: 'Months'}
+  {key: HOURLY_BOOKING, label: 'Hours'},
+  {key: DAILY_BOOKING, label: 'Days'},
+  {key: WEEKLY_BOOKING, label: 'Weeks'},
+  {key: MONTHLY_BOOKING, label: 'Months'}
 ];
+
+
+const countArr = (end, count= 1) => {
+  let result = [];
+  // while (end >= 0) {
+  //   result.push( end-- );
+  // }
+  for( let i = count; i <= end; i=i+count ) result.push(i)
+  return result
+}
+export const discountCountHours = countArr( 24)
+export const discountCountDays = countArr( 365)
+export const discountCountWeeks = countArr( 24)
+export const discountCountMonths = countArr( 12)
 
 export const filters = [
   {
@@ -102,15 +136,7 @@ export const filters = [
       // "label" is set here for the UI only.
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
-      options: [
-        { key: 'hair-stylist', label: 'Hair Stylist', labelImg: 'hairStylist' },
-        { key: 'barber', label: 'Barber', labelImg: 'barber' },
-        { key: 'makeup-artist', label: 'Beauty Space', labelImg: 'makeupArtist' },
-        { key: 'nail-technician', label: 'Nail Station', labelImg: 'nailTechnician' },
-        { key: 'cosmetics', label: 'Beauty Room', labelImg: 'cosmetics' },
-        { key: 'aesthetics', label: 'Aesthetics', labelImg: 'aesthetics' },
-        { key: 'tattoo-and-piercing', label: 'Tattoo & Piercing', labelImg: 'tattooAndPiercing' }
-      ],
+      options: hairAndBeautyOptions,
 
       isCategory: true,
       catKeys: 'hair-stylist,barber,makeup-artist,nail-technician,cosmetics,aesthetics,tattoo-and-piercing',
@@ -129,11 +155,7 @@ export const filters = [
       // "label" is set here for the UI only.
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
-      options: [
-        { key: 'therapy-room', label: 'Therapy Room', labelImg: 'therapyRoom' },
-        { key: 'massage-room', label: 'Massage Room', labelImg: 'massageRoom' },
-        { key: 'clinical-room', label: 'Clinical Room', labelImg: 'clinicalRoom' },
-      ],
+      options: wellnessOptions,
         // NOTE Old categories, need to migrate!
         // { key: 'fitness', label: 'Fitness' },
         // { key: 'yoga', label: 'Yoga' },
@@ -144,7 +166,7 @@ export const filters = [
         // { key: 'acupuncture', label: 'Acupuncture' },
         // { key: 'chiropractor', label: 'Chiropractor' },
       isCategory: true,
-      catKeys: 'therapy-room, massage-room, clinical-room',
+      catKeys: 'therapy-room,massage-room,clinical-room',
     },
   },
   {
@@ -160,14 +182,7 @@ export const filters = [
       // "label" is set here for the UI only.
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
-      options: [
-        { key: 'fitness', label: 'Fitness Studio', labelImg: 'fitness' },
-        { key: 'yoga-studio', label: 'Yoga Studio', labelImg: 'yogaStudio' },
-        { key: 'dance-studio', label: 'Dance Studio', labelImg: 'danceStudio' },
-        { key: 'sports-hall', label: 'Sports Hall', labelImg: 'sportsHall' },
-        { key: 'outdoor-sport-space', label: 'Outdoor Sport Space ', labelImg: 'outdoorSportSpace' },
-        { key: 'activity-room', label: 'Activity Room', labelImg: 'activityRoom' },
-      ],
+      options: fitnessOptions,
         // NOTE Old categories, need to migrate!
         // { key: 'fitness', label: 'Fitness' },
         // { key: 'yoga', label: 'Yoga' },
@@ -178,83 +193,7 @@ export const filters = [
         // { key: 'acupuncture', label: 'Acupuncture' },
         // { key: 'chiropractor', label: 'Chiropractor' },
       isCategory: true,
-      catKeys: 'fitness, yoga-studio, dance-studio, sports-hall, outdoor-sport-space, activity-room',
-    },
-  },
-  {
-    id: 'events_and_venues',
-    label: 'Events & Venues',
-    labelImg: 'eventsAndVenues',
-    type: 'SelectMultipleFilter',
-    group: 'primary',
-    queryParamNames: ['pub_category'],
-    config: {
-      searchMode: 'has_any',
-      // "key" is the option you see in Flex Console.
-      // "label" is set here for the UI only.
-      // Note: label is not added through the translation files
-      // to make filter customizations a bit easier.
-      options: [
-        { key: 'music-venue', label: 'Music Venue', labelImg: "musicVenue" },
-        { key: 'private-event-space', label: 'Private Event Space', labelImg: "privateEventSpace" },
-        { key: 'sports-venue', label: 'Sports Venue', labelImg: "sportsVenue" },
-        { key: 'conference-exhibition', label: 'Conference & Exhibition ', labelImg: "conferenceExhibition" },
-        { key: 'outdoor-events', label: 'Outdoor Events', labelImg: "outdoorEvents" },
-        { key: 'private-dining', label: 'Private Dining', labelImg: "privateDining" },
-
-      ],
-      isCategory: true,
-      catKeys: 'music-venue, private-event-space, sports-venue, conference-exhibition, outdoor-events, private-dining',
-    },
-  },
-  {
-    id: 'coworking',
-    label: 'Coworking',
-    labelImg: 'coworking',
-    type: 'SelectMultipleFilter',
-    group: 'primary',
-    queryParamNames: ['pub_category'],
-    config: {
-      searchMode: 'has_any',
-      // "key" is the option you see in Flex Console.
-      // "label" is set here for the UI only.
-      // Note: label is not added through the translation files
-      // to make filter customizations a bit easier.
-      options: [
-        { key: 'desk-space', label: 'Coworking Space', labelImg: 'deskSpace' },
-        { key: 'office-space', label: 'Private Office Space', labelImg: 'officeSpace' },
-        { key: 'meeting-room-space', label: 'Meeting Room Space', labelImg: 'meetingRoomSpace' },
-        { key: 'conference-room', label: 'Conference Room', labelImg: 'conferenceRoom' },
-        { key: 'classroom', label: 'Classroom', labelImg: 'classroom' }
-      ],
-      isCategory: true,
-      catKeys: 'desk-space, office-space, meeting-room-space, conference-room, classroom',
-    },
-  },
-  {
-    id: 'music_and_arts',
-    label: 'Music & Arts',
-    labelImg: 'musicAndArts',
-    type: 'SelectMultipleFilter',
-    group: 'primary',
-    queryParamNames: ['pub_category'],
-    config: {
-      searchMode: 'has_any',
-      // "key" is the option you see in Flex Console.
-      // "label" is set here for the UI only.
-      // Note: label is not added through the translation files
-      // to make filter customizations a bit easier.
-      options: [
-        { key: 'music-studio', label: 'Music Studio', labelImg: 'musicStudio' },
-        { key: 'recording-studio', label: 'Recording Studio', labelImg: 'recordingStudio' },
-        { key: 'gallery-space', label: 'Gallery Space', labelImg: 'gallerySpace' },
-        { key: 'art-studio', label: 'Art Studio', labelImg: 'artStudio' },
-        { key: 'rehearsal-space', label: 'Rehearsal Space', labelImg: 'rehearsalSpace' },
-        { key: 'drama-studio', label: 'Drama Studio', labelImg: 'dramaStudio' },
-        { key: 'theatre-space', label: 'Theatre Space', labelImg: 'theatreSpace' },
-      ],
-      isCategory: true,
-      catKeys: 'music-studio, recording-studio, gallery-space, art-studio, rehearsal-space, drama-studio, theatre-space',
+      catKeys: 'fitness,yoga-studio,dance-studio,sports-hall,outdoor-sport-space,activity-room',
     },
   },
   {
@@ -270,13 +209,63 @@ export const filters = [
       // "label" is set here for the UI only.
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
-      options: [
-        { key: 'photography', label: 'Photography Studio', labelImg: 'photography' },
-        { key: 'location-shoot', label: 'Location Shoot', labelImg: 'locationShoot' },
-        { key: 'outdoor-site', label: 'Outdoor Site', labelImg: 'outdoorSite' }
-      ],
+      options: photographyAndFilmOptions,
       isCategory: true,
-      catKeys: 'photography, location-shoot, outdoor-site',
+      catKeys: 'photography,location-shoot,outdoor-site',
+    },
+  },
+  {
+    id: 'coworking',
+    label: 'Coworking',
+    labelImg: 'coworking',
+    type: 'SelectMultipleFilter',
+    group: 'primary',
+    queryParamNames: ['pub_category'],
+    config: {
+      searchMode: 'has_any',
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for the UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: coworkingOptions,
+      isCategory: true,
+      catKeys: 'desk-space,office-space,meeting-room-space,conference-room,classroom',
+    },
+  },
+  {
+    id: 'music_and_arts',
+    label: 'Music & Arts',
+    labelImg: 'musicAndArts',
+    type: 'SelectMultipleFilter',
+    group: 'primary',
+    queryParamNames: ['pub_category'],
+    config: {
+      searchMode: 'has_any',
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for the UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: musicAndArtsOptions,
+      isCategory: true,
+      catKeys: 'music-studio,recording-studio,gallery-space,art-studio,rehearsal-space,drama-studio,theatre-space',
+    },
+  },
+  {
+    id: 'events_and_venues',
+    label: 'Events & Venues',
+    labelImg: 'eventsAndVenues',
+    type: 'SelectMultipleFilter',
+    group: 'primary',
+    queryParamNames: ['pub_category'],
+    config: {
+      searchMode: 'has_any',
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for the UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: eventsAndVenuesOptions,
+      isCategory: true,
+      catKeys: 'music-venue,private-event-space,sports-venue,conference-exhibition,outdoor-events,private-dining',
     },
   },
   {
@@ -292,21 +281,16 @@ export const filters = [
       // "label" is set here for the UI only.
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
-      options: [
-        { key: 'kitchen-space', label: 'Kitchen space', labelImg: "kitchenSpace" },
-        { key: 'pop-up-space', label: 'Pop-up space', labelImg: "popUpSpace" },
-      ],
+      options: kitchenOptions,
       isCategory: true,
-      catKeys: 'kitchen-space, pop-up-space',
+      catKeys: 'kitchen-space,pop-up-space',
     },
   },
-
 
   // ====================================
   // SECONDARY FILTERS 
   // ====================================
   
-
   {
     id: 'general_amenities',
     label: 'General Amenities',
@@ -321,25 +305,7 @@ export const filters = [
       // "label" is set here for this web app's UI only.
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
-      options: [
-        {key: "air-conditioning",label: "Air conditioning"},
-        {key: "cctv-monitoring",label: "CCTV monitoring"},
-        {key: "cleaner",label: "Cleaner"},
-        {key: "client-refreshments",label: "Client Refreshments"},
-        {key: "wheelchair-access",label: "Disabled access"},
-        {key: "free-parking",label: "Free parking"},
-        {key: "heating",label: "Heating"},
-        {key: "kitchen",label: "Kitchen Facilities"},
-        {key: "key/electronic-access-card",label: "Own Key / Electronic access card"},
-        {key: 'parking', label: 'Paid Parking'},
-        {key: "pets-allowed",label: "Pets Allowed"},
-        {key: "receptionist",label: "Reception"},
-        {key: "secure-locker",label: "Secure locker"},
-        {key: "storage", label: "Storage"},
-        {key: "toilet",label: "Toilet / Washroom"},
-        {key: "waiting-area",label: "Waiting Area"},
-        {key: "wifi",label: "WiFi"},
-      ],
+      options: generalAmenitiesOptions,
       isCategory: false,
       catKeys: 'all',
     },
@@ -358,34 +324,14 @@ export const filters = [
       // "label" is set here for this web app's UI only.
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
-      options: [
-        {key: "backwash-chair", label: "Backwash Chair"},
-        {key: "barber-accessories", label: "Barber Accessories"},
-        {key: "barber-chair", label: "Barber Chair"},
-        {key: "barber-unit", label: "Barber Unit"},
-        {key: "capes-gowns-collars", label: "Capes / Gowns Collars"},
-        {key: "hb-cleaning-supplies", label: "Cleaning Supplies"},
-        {key: "hair-products", label: "Hair Products"},
-        {key: "hairdryer", label: "Hairdryer"},
-        {key: "locked-cupboards", label: "Locked cupboards"},
-        {key: "hb-massage-chair", label: "Massage chair"},
-        {key: "mirror-styling-unit", label: "Mirror / Styling Unit"},
-        {key: "pedicure-chair", label: "Pedicure Chair"},
-        {key: "hb-sterilising-equipment", label: "Sterilising Equipment"},
-        {key: "styling-accessories", label: "Styling Accessories"},
-        {key: "styling-chair", label: "Styling Chair"},
-        {key: "hb-treatment-table", label: "Treatment Table"},
-        {key: "hb-trolley", label: "Trolley"},
-        {key: "led-magnifying-light", label: "UV / LED magnifying light"},
-        {key: "washing-point", label: "Washing point / Basin"},
-      ],
+      options: hairAndBeautyAmenitiesOptions,
       isCategory: false,
-      catKeys: 'hair-stylist,barber,makeup-artist,nail-technician,cosmetics,aesthetics,beauty-treatment-room',
+      catKeys: 'hair-stylist,barber,makeup-artist,nail-technician,cosmetics,aesthetics,tattoo-and-piercing',
     },
   },
   {
-    id: 'fitness_wellness_amenities',
-    label: 'Fitness & Wellness Amenities',
+    id: 'wellness_amenities',
+    label: 'Wellness Amenities',
     type: 'SelectMultipleFilter',
     group: 'secondary',
     queryParamNames: ['pub_amenities'],
@@ -397,32 +343,14 @@ export const filters = [
       // "label" is set here for this web app's UI only.
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
-      options: [
-        {key: "fw-adjustable-lighting", label: "Adjustable Lighting"},
-        {key: "fw-changing-area", label: "Changing Area"},
-        {key: "fw-cleaning-supplies", label: "Cleaning Supplies"},
-        {key: "couch-armchairs", label: "Couch / Armchairs"},
-        {key: "exercise-mats", label: "Exercise Mats"},
-        {key: "fitness-equipment", label: "Fitness Equipment"},
-        {key: "free-weights", label: "Free weights"},
-        {key: "gym-equipment", label: "Gym Equipment"},
-        {key: "fw-massage-chair", label: "Massage Chair"},
-        {key: "massage-table", label: "Massage Table"},
-        {key: "mirrored-wall", label: "Mirrored Wall"},
-        {key: "secure-lockers-(for-user-clients)", label: "Secure lockers (for User clients)"},
-        {key: "fw-speakers-music", label: "Speakers / Music"},
-        {key: "towels", label: "Towels"},
-        {key: "yoga-mats", label: "Yoga mats"},
-        {key: "yoga-props", label: "Yoga props"},
-        {key: "water-point", label: "Water Point"},
-      ],
+      options: wellnessAmenitiesOptions,
       isCategory: false,
-      catKeys: 'fitness,therapy-room,wellness-treatment-room',
+      catKeys: 'therapy-room,massage-room,clinical-room',
     },
   },
   {
-    id: 'creative_studios_amenities',
-    label: 'Creative Studios Amenities',
+    id: 'fitness_amenities',
+    label: 'Fitness Amenities',
     type: 'SelectMultipleFilter',
     group: 'secondary',
     queryParamNames: ['pub_amenities'],
@@ -434,34 +362,28 @@ export const filters = [
       // "label" is set here for this web app's UI only.
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
-      options: [
-        {key: 'cs-adjustable-lighting', label: 'Adjustable Lighting'},
-        {key: 'backdrops', label: 'Backdrops (White, Black, Green)'},
-        {key: 'background-reflectors', label: 'Background Reflectors'},
-        {key: 'blackout-option', label: 'Blackout Option'},
-        {key: 'clothes-rail', label: 'Clothes rail'},
-        {key: 'dj_equipment', label: 'DJ Equipment'},
-        {key: 'easels', label: 'Easels'},
-        {key: 'flipchart', label: 'Flipchart'},
-        {key: 'green-screen', label: 'Green Screen'},
-        {key: 'high-ceilings', label: 'High Ceilings'},
-        {key: 'lighting-equipment', label: 'Lighting Equipment'},
-        {key: 'microphones', label: 'Microphones'},
-        {key: 'mirror-and-makeup-desk', label: 'Mirror and Makeup Desk'},
-        {key: 'mixer', label: 'Mixer'},
-        {key: 'cs-speakers-music', label: 'Speakers / Music'},
-        {key: 'natural-light', label: 'Natural Light'},
-        {key: 'pa-speakers', label: 'PA Speakers'},
-        {key: 'polyboards-and-stands', label: 'Polyboards and Stands'},
-        {key: 'projector', label: 'Projector'},
-        {key: 'seating-area', label: 'Seating area'},
-        {key: 'separate-changing-area', label: 'Seperate changing area'},
-        {key: 'cs-sound-engineer', label: 'Sound Engineer'},
-        {key: 'tables-and-chairs', label: 'Tables and Chairs'},
-        {key: 'white-boards', label: 'Whiteboards'},
-      ],
+      options: fitnessAmenitiesOptions,
       isCategory: false,
-      catKeys: 'photography,art,music',
+      catKeys: 'fitness,yoga-studio,dance-studio,sports-hall,outdoor-sport-space,activity-room',
+    },
+  },
+  {
+    id: 'photography_and_film_amenities',
+    label: 'Photography & Film Amenities',
+    type: 'SelectMultipleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_amenities'],
+    config: {
+      // Optional modes: 'has_all', 'has_any'
+      // https://www.sharetribe.com/api-reference/marketplace.html#extended-data-filtering
+      searchMode: 'has_any',
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for this web app's UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: photographyAndFilmAmenitiesOptions,
+      isCategory: false,
+      catKeys: 'music-studio,recording-studio,gallery-space,art-studio,rehearsal-space,drama-studio,theatre-space',
     },
   },
   {
@@ -478,21 +400,28 @@ export const filters = [
       // "label" is set here for this web app's UI only.
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
-      options: [
-        {key: 'bike-storage', label: 'Bike Storage'},
-        {key: 'breakout-space', label: 'Breakout Space'},
-        {key: 'childcare', label: 'Childcare'},
-        {key: 'cleaning', label: 'Cleaning'},
-        {key: "ethernet-connection", label: "Ethernet connection"},
-        {key: 'lockers', label: 'Lockers'},
-        {key: 'mailing-address', label: 'Mailing Address'},
-        {key: "meeting-room-access", label: "Meeting Rooms"},
-        {key: "laser-printer-and-scanner", label: "Printing"},
-        {key: 'private-phone-booths', label: 'Private phone booths'},
-        {key: 'showers', label: 'Showers'},
-      ],
+      options: coworkingAmenitiesOptions,
       isCategory: false,
-      catKeys: 'desk-space,office-space,meeting-room-space',
+      catKeys: 'desk-space,office-space,meeting-room-space,conference-room,classroom',
+    },
+  },
+  {
+    id: 'music_and_arts_amenities',
+    label: 'Music & Arts Amenities',
+    type: 'SelectMultipleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_amenities'],
+    config: {
+      // Optional modes: 'has_all', 'has_any'
+      // https://www.sharetribe.com/api-reference/marketplace.html#extended-data-filtering
+      searchMode: 'has_any',
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for this web app's UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      options: musicAndArtsAmenitiesOptions,
+      isCategory: false,
+      catKeys: 'music-studio,recording-studio,gallery-space,art-studio,rehearsal-space,drama-studio,theatre-space',
     },
   },
   {
@@ -510,25 +439,9 @@ export const filters = [
       // "label" is set here for this web app's UI only.
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
-      options: [
-        {key: 'bar-hire', label: 'Bar Hire'},
-        {key: 'catering-available', label: 'Catering Available'},
-        {key: 'cloakroom', label: 'Cloakroom'},
-        {key: 'seating', label: 'Seating'},
-        {key: 'tables', label: 'Tables'},
-        {key: 'licensed', label: 'Licensed'},
-        {key: 'e-dj-equipment', label: 'DJ Booth / Equipment'},
-        {key: 'av-equipment', label: 'A/V Equipment'},
-        {key: 'e-sound-engineer', label: 'Sound Engineer'},
-        {key: 'staff', label: 'Staff'},
-        {key: 'stage', label: 'Stage'},
-        {key: 'ceremony location', label: 'Ceremony location'},
-        {key: 'ek-props', label: 'Props'},
-        {key: 'sound system', label: 'Sound system'},
-        {key: 'screen-projector', label: 'Screen/projector'},
-      ],
+      options: eventsAndVenuesAmenitiesOptions,
       isCategory: false,
-      catKeys: 'event-space,outdoor-site,shoot-location',
+      catKeys: 'music-venue,private-event-space,sports-venue,conference-exhibition,outdoor-events,private-dining',
     },
   },
   {
@@ -545,63 +458,11 @@ export const filters = [
       // "label" is set here for this web app's UI only.
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
-      options: [
-        {key: '3-phase-power', label: '3 Phase Power'},
-        {key: 'blender', label: 'Blender'},
-        {key: 'chest-freezer', label: 'Chest Freezer'},
-        {key: 'chopping-board', label: 'Chopping Board'},
-        {key: 'combi-oven', label: 'Combi Oven'},
-        {key: 'commercial-oven', label: 'Commercial oven'},
-        {key: 'counter-space', label: 'Counter Space'},
-        {key: 'dishwasher', label: 'Dishwasher'},
-        {key: 'dry-storage', label: 'Dry Storage'},
-        {key: 'extractor-fan', label: 'Extractor Fan'},
-        {key: 'food-processor', label: 'Food Processor'},
-        {key: 'freezer', label: 'Freezer'},
-        {key: 'fridge', label: 'Fridge'},
-        {key: 'gas-hob', label: 'Gas Hob'},
-        {key: 'grill', label: 'Grill'},
-        {key: 'induction-hob', label: 'Induction Hob'},
-        {key: 'microwave', label: 'Microwave'},
-        {key: 'pots-pans', label: 'Pots and Pans'},
-        {key: 'sink', label: 'Sink'},
-        {key: 'stand-mixer', label: 'Stand Mixer'},
-        {key: 'walkin-fridge', label: 'Walk-in Fridge'},
-      ],
+      options: kitchenAmenitiesOptions,
       isCategory: false,
       catKeys: 'kitchen-space',
     },
   },
-  {
-    id: 'tattoo_and_piercing_amenities',
-    label: 'Tattoo & Piercing Amenities',
-    type: 'SelectMultipleFilter',
-    group: 'secondary',
-    queryParamNames: ['pub_amenities'],
-    config: {
-      // Optional modes: 'has_all', 'has_any'
-      // https://www.sharetribe.com/api-reference/marketplace.html#extended-data-filtering
-      searchMode: 'has_any',
-      // "key" is the option you see in Flex Console.
-      // "label" is set here for this web app's UI only.
-      // Note: label is not added through the translation files
-      // to make filter customizations a bit easier.
-      options: [
-        {key: 'bench', label: 'Bench'},
-        {key: 'clinical-waste-removal', label: 'Clinical Waste Removal'},
-        {key: 'tp-mirror', label: 'Mirror'},
-        {key: 'piercing-equipment', label: 'Piercing Equipment'},
-        {key: 'sharps-collection', label: 'Sharps Collection'},
-        {key: 'tp-sterilising-equipment', label: 'Sterilising Equipment'},
-        {key: 'stool', label: 'Stool'},
-        {key: 'tattoo-equipment', label: 'Tattoo Equipment'},
-        {key: 'tp-trolley', label: 'Trolley'},
-      ],
-      isCategory: false,
-      catKeys: 'tattoo-artist,piercing-artist',
-    },
-  },
-
 ];
 
 // This can be used to populate all of the combined categories

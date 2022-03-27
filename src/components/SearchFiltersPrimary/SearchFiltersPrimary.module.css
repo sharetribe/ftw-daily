@@ -13,7 +13,7 @@
 
 .filters {
   position: relative;
-  height: 0;
+  /* height: 0; */
 
   & > *:not(:last-child) {
     margin-right: 8px;
@@ -110,13 +110,10 @@
 
   &:focus {
     outline: none;
-    /* background-color: var(--matterColorLight);
-    border-color: transparent;
-    text-decoration: none;
-    box-shadow: var(--boxShadowFilterButton); */
+    border-color: var(--matterColorNegative);
+    color: var(--matterColor);
+    /* box-shadow: var(--boxShadowButton); */
     box-shadow: none;
-
-    border-color: var(--marketplaceColor)
   }
 }
 
@@ -134,8 +131,8 @@
   border-radius: 4px;
   border: 1px solid var(--marketplaceColor);
 
-  &:hover,
-  &:focus {
+  /* &:focus, */
+  &:hover {
     border: 1px solid var(--marketplaceColorDark);
   }
 }
@@ -147,9 +144,10 @@
 
 .categoryItemsWrapper {
   position: absolute;
-  left: 14px;
-  top: 0;
+  left: -44px;
+  top: 42px;
   z-index: 2;
+  width: 680px;
 }
 
 .categoryItems {
@@ -197,6 +195,24 @@
   }
 }
 
+.categoryItemSelected {
+  
+}
+
 .active {
   border: 1px solid var(--marketplaceColor);
+  background: var(--marketplaceColor);
+  color: var(--matterColorLight);
+
+  &:focus {
+    border: 1px solid var(--marketplaceColor);
+    background: var(--marketplaceColor);
+    color: var(--matterColorLight);
+  }
+  
+  &:hover {
+    border: 1px solid var(--marketplaceColorDark);
+    background: var(--marketplaceColorDark);
+    color: var(--matterColorLight);
+  }
 }

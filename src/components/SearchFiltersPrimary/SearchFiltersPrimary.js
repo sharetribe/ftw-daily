@@ -20,6 +20,7 @@ const SearchFiltersPrimaryComponent = props => {
     toggleSecondaryFiltersOpen,
     selectedSecondaryFiltersCount,
     onOpenCategoryFilter,
+    onCloseCategoryFilter,
     isCategoryFilterOpen,
     isCategoryFilterEnabled
   } = props;
@@ -70,43 +71,38 @@ const SearchFiltersPrimaryComponent = props => {
           </div>
         ) : null}
 
-        <button className={classNames(toggleSecondaryFiltersOpenButtonClasses, {[css.active]: isCategoryFilterEnabled || isCategoryFilterOpen})} onClick={onOpenCategoryFilter}>
-          <FormattedMessage id="SearchFiltersPrimary.categoriesBtn" />
-        </button>
+        <div className={css.filters}>
+          <OutsideClickHandler onOutsideClick={isCategoryFilterOpen && onOpenCategoryFilter || onCloseCategoryFilter}>
+            <button className={classNames(toggleSecondaryFiltersOpenButtonClasses, {[css.active]: isCategoryFilterEnabled})} onClick={onOpenCategoryFilter}>
+              <FormattedMessage id="SearchFiltersPrimary.categoriesBtn" />
+            </button>
+            {isCategoryFilterOpen && (
+              <div className={css.categoryItemsWrapper}>
+                <div className={css.categoryItems}>
+                  <h3 className={css.categoryItemsTitle}>
+                    <FormattedMessage id="SearchFiltersPrimary.categories" />
+                  </h3>
+
+                  <div className={css.categoryItemsHolder}>
+                    {categoryChildren.map((category, i) => {
+                      return (
+                        <React.Fragment key={`category-${i}`}>
+                          {category}
+                        </React.Fragment>
+                      )
+                    })}
+                  </div>
+                </div>
+              </div>
+            )}
+          </OutsideClickHandler>
+        </div>
+
         {nonCategoryChildren}
         {toggleSecondaryFiltersOpenButton}
         {sortByComponent}
       </div>
 
-      <div className={css.filters}>
-        {/* {categoriesText} */}
-        {/* {categoryChildren} */}
-
-
-        {isCategoryFilterOpen && (
-          <OutsideClickHandler onOutsideClick={onOpenCategoryFilter} >
-            <div className={css.categoryItemsWrapper}>
-              <div className={css.categoryItems}>
-                <h3 className={css.categoryItemsTitle}>
-                  <FormattedMessage id="SearchFiltersPrimary.categories" />
-                </h3>
-
-                <div className={css.categoryItemsHolder}>
-                  {categoryChildren.map((category, i) => {
-                    return (
-                      <div key={`category-${i}`} className={css.categoryItem}>
-                        {category}
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-            </div>
-          </OutsideClickHandler>
-        )}
-
-
-      </div>
 
       {hasNoResult ? (
         <div className={css.noSearchResults}>

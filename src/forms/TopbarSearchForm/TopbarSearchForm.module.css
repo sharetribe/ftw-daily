@@ -93,7 +93,7 @@
 .desktopIcon {
   /*height: var(--topbarHeightDesktop);*/
   border: none;
-  padding-top: 3px;
+  /* padding-top: 3px; */
 
   display: flex;
   width: 24px;

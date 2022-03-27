@@ -46,6 +46,7 @@ const FilterFormComponent = props => {
           children,
           isCategory,
           activeCategory,
+          closeSubCategory,
         } = formRenderProps;
 
         const handleCancel = () => {
@@ -72,7 +73,7 @@ const FilterFormComponent = props => {
               <div>
                 <div className={css.subcategoryHeading}>
                   <FormattedMessage id="FilterForm.patchCategory" />
-                  <span className={css.activeCategory}>
+                  <span className={css.activeCategory} onClick={closeSubCategory}>
                     {activeCategory}
                   </span>
                 </div>

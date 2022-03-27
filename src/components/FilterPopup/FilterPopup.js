@@ -30,14 +30,14 @@ class FilterPopup extends Component {
   handleSubmit(values) {
     const { onSubmit } = this.props;
     this.setState({ isOpen: false });
-    this.props.onOpenCategoryFilter();
+    this.props.isCategory && this.props.onOpenCategoryFilter();
     onSubmit(values);
   }
 
   handleClear() {
     const { onSubmit, onClear } = this.props;
     this.setState({ isOpen: false });
-    this.props.onOpenCategoryFilter();
+    this.props.isCategory && this.props.onOpenCategoryFilter();
 
     if (onClear) {
       onClear();
@@ -115,7 +115,7 @@ class FilterPopup extends Component {
       contentPlacementOffset,
       isCategory,
       mainCategoriesImages,
-      onOpenCategoryFilter
+      isCategoryFilterEnabled
     } = this.props;
 
   
@@ -158,9 +158,16 @@ class FilterPopup extends Component {
       default: null;
     }
 
+    const wrapperClasses = classNames(
+      {[css.categoryClickHandler]: isCategory},
+      {[css.categorySelected]: isSelected},
+      {[css.categoryNotSelected]: !isSelected && !!isCategoryFilterEnabled}
+    )
+
+
   
     return (
-      <OutsideClickHandler onOutsideClick={this.handleBlur} rootClassName={classNames({[css.categoryClickHandler]: isCategory})}>
+      <OutsideClickHandler onOutsideClick={this.handleBlur} rootClassName={wrapperClasses}>
         <div
           className={classes}
           onKeyDown={this.handleKeyDown}
@@ -199,6 +206,7 @@ class FilterPopup extends Component {
                 onClear={this.handleClear}
                 isCategory={isCategory}
                 activeCategory={label}
+                closeSubCategory={this.handleBlur}
               >
                 {children}
               </FilterForm>
