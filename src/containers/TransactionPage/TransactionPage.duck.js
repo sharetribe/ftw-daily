@@ -22,9 +22,9 @@ import {
   denormalisedResponseEntities,
 } from '../../util/data';
 import {
-  findNextBoundary,
+  findNextBoundaryCustom,
   nextMonthFn,
-  monthIdStringInTimeZone
+  monthIdStringInTimeZone,
 } from '../../util/dates';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
 import { fetchCurrentUserNotifications } from '../../ducks/user.duck';
@@ -214,7 +214,7 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
       };
       return { ...state, monthlyTimeSlots };
     }
-    
+
     case FETCH_TIME_SLOTS_SUCCESS_TIME: {
       const monthId = payload.monthId;
       const monthlyTimeSlots = {
@@ -705,7 +705,7 @@ const fetchMonthlyTimeSlots = (dispatch, listing) => {
   // Fetch time-zones on client side only.
   if (hasWindow && listing.id && hasTimeZone) {
     const tz = listing.attributes.availabilityPlan.timezone;
-    const nextBoundary = findNextBoundary(tz, new Date());
+    const nextBoundary = findNextBoundaryCustom(tz, new Date());
 
     const nextMonth = nextMonthFn(nextBoundary, tz);
     const nextAfterNextMonth = nextMonthFn(nextMonth, tz);

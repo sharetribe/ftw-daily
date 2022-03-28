@@ -96,6 +96,8 @@ export class BookingTimeFormComponent extends Component {
             lineItems,
             fetchLineItemsInProgress,
             fetchLineItemsError,
+            minBookingCount,
+            minBookingType,
           } = fieldRenderProps;
 
           const startTime = values && values.bookingStartTime ? values.bookingStartTime : null;
@@ -168,9 +170,7 @@ export class BookingTimeFormComponent extends Component {
             <Form onSubmit={handleSubmit} className={classes}>
               <FormSpy
                 subscription={{ values: true }}
-                onChange={values => {
-                  this.handleOnChange(values);
-                }}
+                onChange={values => this.handleOnChange(values)}
               />
               {monthlyTimeSlots && timeZone ? (
                 <FieldDateAndTimeInput
@@ -185,6 +185,8 @@ export class BookingTimeFormComponent extends Component {
                   form={form}
                   pristine={pristine}
                   timeZone={timeZone}
+                  minBookingCount={minBookingCount}
+                  minBookingType={minBookingType}
                 />
               ) : null}
 

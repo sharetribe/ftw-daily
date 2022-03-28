@@ -29,7 +29,7 @@
   appearance: textfield;
   -webkit-appearance: textfield;
   -moz-appearance: textfield;
-  
+
   &::-webkit-inner-spin-button,
   &::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -60,4 +60,26 @@
   line-height: 24px;
   margin-top: 0;
   margin-bottom: 32px;
+}
+
+.blockMiningBooking {
+  margin-bottom: 40px;
+  margin-top: 10px;
+  display: flex;
+}
+.labelMinBook {
+  margin-top: 10px;
+  font-weight: var(--fontWeightSemiBold);
+  font-size: 16px;
+  line-height: 24px;
+  font-family: var(--fontFamilySofiapro);
+}
+.minBookInput {
+  width: 100px;
+  max-width: 100px;
+  margin-right: 20px;
+  /*@media (--viewportMedium) {*/
+  /*  width: 20%;*/
+  /*  max-width: 20%;*/
+  /*}*/
 }
