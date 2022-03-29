@@ -182,16 +182,36 @@ export const createSearchResultSchema = (listings, address, intl, pub_category, 
   const arrayCategory = filterConfig.filter(e => e.queryParamNames[0] === 'pub_category');
   arrayCategory.forEach(e => {
     // let article = 'to rent';
-    const arrToHire = ['photography', 'art', 'music', 'desk-space', 'office-space', 'meeting-room-space'];
-    const arrForHire = ['tattoo-artist', 'piercing-artist', 'event-space', 'outdoor-site', 'shoot-location'];
+    const arrForHire = [
+      'nail-technician', 
+      'tattoo-and-piercing', 
+      'dance-studio', 
+      'sports-hall', 
+      'outdoor-site', 
+      'meeting-room-space', 
+      'conference-room', 
+      'classroom',
+      'recording-studio', 
+      'gallery-space',
+      'rehearsal-space',
+      'music-venue',
+      'private-event-space',
+      'sports-venue',
+      'conference-exhibition', 
+      'outdoor-events', 
+      'private-dining',
+    ];
+
+    const arrToHire = ['activity-room', 'classroom', 'recording-studio', 'drama-studio', 'theatre-space'];
     const arrForHireSpace = ['hair-stylist', 'barber', 'makeup-artist', 'nail-technician', 'cosmetics', 'beauty-treatment-room'];
     const cat = e.config.catKeys.split(',');
 
     if (!!filt && filt.every((e) => cat.includes(e))) {
       const article = filt.some(e => arrToHire.includes(e)) ? 'to hire' :
-        filt.some(e => arrForHire.includes(e)) ? 'for hire' : filt.some(e => arrForHireSpace.includes(e)) ? 'space to rent' : 'to rent';
+        // filt.some(e => arrForHire.includes(e)) ? 'for hire' : filt.some(e => arrForHireSpace.includes(e)) ? 'space to rent' : 'to rent';
+        filt.some(e => arrForHire.includes(e)) ? 'for hire' : 'to rent';
 
-      const aaa = e.config.options.filter(el => filt.indexOf(el.key) != -1).map(e => e.label);
+      const aaa = e.config.options.filter(el => filt.indexOf(el.key) != -1).map(e => e.metaLabel);
       const ddd = aaa.includes('Kitchen Space') && aaa.length >= 2 ? aaa.filter(item => item !== 'Kitchen Space') : aaa;
       const uniqueCategory = ddd.join(', ');
       const eventsCat = cat.filter(e => e !== 'kitchen-space');

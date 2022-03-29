@@ -45,13 +45,13 @@ export const generalAmenitiesOptions = [
 
 
 export const hairAndBeautyOptions = [
-  { key: 'hair-stylist', label: 'Hair Stylist', labelImg: 'hairStylist' },
-  { key: 'barber', label: 'Barber', labelImg: 'barber' },
-  { key: 'makeup-artist', label: 'Beauty Space', labelImg: 'makeupArtist' },
-  { key: 'nail-technician', label: 'Nail Station', labelImg: 'nailTechnician' },
-  { key: 'cosmetics', label: 'Beauty Room', labelImg: 'cosmetics' },
-  { key: 'aesthetics', label: 'Aesthetics', labelImg: 'aesthetics' },
-  { key: 'tattoo-and-piercing', label: 'Tattoo & Piercing', labelImg: 'tattooAndPiercing' }
+  { key: 'hair-stylist', label: 'Hair Stylist', metaLabel: "Salon Chair", labelImg: 'hairStylist' },
+  { key: 'barber', label: 'Barber', metaLabel: "Barber Chair", labelImg: 'barber' },
+  { key: 'makeup-artist', label: 'Beauty Space', metaLabel: "Beauty Space", labelImg: 'makeupArtist' },
+  { key: 'nail-technician', label: 'Nail Station', metaLabel: "Nail Station", labelImg: 'nailTechnician' },
+  { key: 'cosmetics', label: 'Beauty Room', metaLabel: "Beauty Room", labelImg: 'cosmetics' },
+  { key: 'aesthetics', label: 'Aesthetics', metaLabel: "Aesthetics Space", labelImg: 'aesthetics' },
+  { key: 'tattoo-and-piercing', label: 'Tattoo & Piercing', metaLabel: "Tattoo & Piercing Space",  labelImg: 'tattooAndPiercing' }
 ]
 export const hairAndBeautyAmenitiesOptions = [
   {key: "backwash-chair", label: "Backwash Chair"},
@@ -88,9 +88,9 @@ export const hairAndBeautyAmenitiesOptions = [
 
 
 export const wellnessOptions = [
-  { key: 'therapy-room', label: 'Therapy Room', labelImg: 'therapyRoom' },
-  { key: 'massage-room', label: 'Massage Room', labelImg: 'massageRoom' },
-  { key: 'clinical-room', label: 'Clinical Room', labelImg: 'clinicalRoom' },
+  { key: 'therapy-room', label: 'Therapy Room', metaLabel: "Therapy Room", labelImg: 'therapyRoom' },
+  { key: 'massage-room', label: 'Massage Room', metaLabel: "Massage Room", labelImg: 'massageRoom' },
+  { key: 'clinical-room', label: 'Clinical Room', metaLabel: "Clinical Room", labelImg: 'clinicalRoom' },
 ]
 export const wellnessAmenitiesOptions = [
   {key: "fw-adjustable-lighting", label: "Adjustable Lighting"},
@@ -122,12 +122,12 @@ export const wellnessAmenitiesOptions = [
 
 
 export const fitnessOptions = [
-  { key: 'fitness', label: 'Fitness Studio', labelImg: 'fitness' },
-  { key: 'yoga-studio', label: 'Yoga Studio', labelImg: 'yogaStudio' },
-  { key: 'dance-studio', label: 'Dance Studio', labelImg: 'danceStudio' },
-  { key: 'sports-hall', label: 'Sports Hall', labelImg: 'sportsHall' },
-  { key: 'outdoor-sport-space', label: 'Outdoor Sport Space ', labelImg: 'outdoorSportSpace' },
-  { key: 'activity-room', label: 'Activity Room', labelImg: 'activityRoom' },
+  { key: 'fitness', label: 'Fitness Studio', metaLabel: "Fitness Studio", labelImg: 'fitness' },
+  { key: 'yoga-studio', label: 'Yoga Studio', metaLabel: "Yoga Studio", labelImg: 'yogaStudio' },
+  { key: 'dance-studio', label: 'Dance Studio', metaLabel: "Dance Studio", labelImg: 'danceStudio' },
+  { key: 'sports-hall', label: 'Sports Hall', metaLabel: "Sports Hall", labelImg: 'sportsHall' },
+  { key: 'outdoor-sport-space', label: 'Outdoor Sport Space', metaLabel: "Outdoor Sport Space", labelImg: 'outdoorSportSpace' },
+  { key: 'activity-room', label: 'Activity Room', metaLabel: "Activity Room", labelImg: 'activityRoom' },
 ]
 export const fitnessAmenitiesOptions = [
   {key: "exercise-mats", label: "Exercise Mats"},
@@ -154,12 +154,12 @@ export const fitnessAmenitiesOptions = [
 
 
 export const eventsAndVenuesOptions = [
-  { key: 'music-venue', label: 'Music Venue', labelImg: "musicVenue" },
-  { key: 'private-event-space', label: 'Private Event Space', labelImg: "privateEventSpace" },
-  { key: 'sports-venue', label: 'Sports Venue', labelImg: "sportsVenue" },
-  { key: 'conference-exhibition', label: 'Conference & Exhibition ', labelImg: "conferenceExhibition" },
-  { key: 'outdoor-events', label: 'Outdoor Events', labelImg: "outdoorEvents" },
-  { key: 'private-dining', label: 'Private Dining', labelImg: "privateDining" },
+  { key: 'music-venue', label: 'Music Venue', metaLabel: "Music Venue", labelImg: "musicVenue" },
+  { key: 'private-event-space', label: 'Private Event Space', metaLabel: "Private Event Space", labelImg: "privateEventSpace" },
+  { key: 'sports-venue', label: 'Sports Venue', metaLabel: "Sports Venue", labelImg: "sportsVenue" },
+  { key: 'conference-exhibition', label: 'Conference & Exhibition ', metaLabel: "Conference & Exhibition space", labelImg: "conferenceExhibition" },
+  { key: 'outdoor-events', label: 'Outdoor Events', metaLabel: "Outdoor Event Space", labelImg: "outdoorEvents" },
+  { key: 'private-dining', label: 'Private Dining', metaLabel: "Private Dining Space", labelImg: "privateDining" },
 ]
 export const eventsAndVenuesAmenitiesOptions = [
   {key: 'bar-hire', label: 'Bar Hire'},
@@ -184,11 +184,11 @@ export const eventsAndVenuesAmenitiesOptions = [
 
 
 export const coworkingOptions = [
-  { key: 'desk-space', label: 'Coworking Space', labelImg: 'deskSpace' },
-  { key: 'office-space', label: 'Private Office Space', labelImg: 'officeSpace' },
-  { key: 'meeting-room-space', label: 'Meeting Room Space', labelImg: 'meetingRoomSpace' },
-  { key: 'conference-room', label: 'Conference Room', labelImg: 'conferenceRoom' },
-  { key: 'classroom', label: 'Classroom', labelImg: 'classroom' }
+  { key: 'desk-space', label: 'Coworking Space', metaLabel: "Coworking Space", labelImg: 'deskSpace' },
+  { key: 'office-space', label: 'Private Office Space', metaLabel: "Private Office Space", labelImg: 'officeSpace' },
+  { key: 'meeting-room-space', label: 'Meeting Room Space', metaLabel: "Meeting Room Space", labelImg: 'meetingRoomSpace' },
+  { key: 'conference-room', label: 'Conference Room', metaLabel: "Conference Room", labelImg: 'conferenceRoom' },
+  { key: 'classroom', label: 'Classroom', metaLabel: "Classroom", labelImg: 'classroom' }
 ]
 export const coworkingAmenitiesOptions = [
   {key: 'bike-storage', label: 'Bike Storage'},
@@ -212,13 +212,13 @@ export const coworkingAmenitiesOptions = [
 
 
 export const musicAndArtsOptions = [
-  { key: 'music-studio', label: 'Music Studio', labelImg: 'musicStudio' },
-  { key: 'recording-studio', label: 'Recording Studio', labelImg: 'recordingStudio' },
-  { key: 'gallery-space', label: 'Gallery Space', labelImg: 'gallerySpace' },
-  { key: 'art-studio', label: 'Art Studio', labelImg: 'artStudio' },
-  { key: 'rehearsal-space', label: 'Rehearsal Space', labelImg: 'rehearsalSpace' },
-  { key: 'drama-studio', label: 'Drama Studio', labelImg: 'dramaStudio' },
-  { key: 'theatre-space', label: 'Theatre Space', labelImg: 'theatreSpace' },
+  { key: 'music-studio', label: 'Music Studio', metaLabel: "Music Studio", labelImg: 'musicStudio' },
+  { key: 'recording-studio', label: 'Recording Studio', metaLabel: "Recording Studio", labelImg: 'recordingStudio' },
+  { key: 'gallery-space', label: 'Gallery Space', metaLabel: "Gallery Space", labelImg: 'gallerySpace' },
+  { key: 'art-studio', label: 'Art Studio', metaLabel: "Art Studio", labelImg: 'artStudio' },
+  { key: 'rehearsal-space', label: 'Rehearsal Space', metaLabel: "Rehearsal Space", labelImg: 'rehearsalSpace' },
+  { key: 'drama-studio', label: 'Drama Studio', metaLabel: "Drama Studio", labelImg: 'dramaStudio' },
+  { key: 'theatre-space', label: 'Theatre Space', metaLabel: "Theatre Space", labelImg: 'theatreSpace' },
 ]
 export const musicAndArtsAmenitiesOptions = [
   {key: 'm-air-conditioning', label: 'Air Conditioning'},
@@ -252,9 +252,9 @@ export const musicAndArtsAmenitiesOptions = [
 
 
 export const photographyAndFilmOptions = [
-  { key: 'photography', label: 'Photography Studio', labelImg: 'photography' },
-  { key: 'location-shoot', label: 'Location Shoot', labelImg: 'locationShoot' },
-  { key: 'outdoor-site', label: 'Outdoor Site', labelImg: 'outdoorSite' }
+  { key: 'photography', label: 'Photography Studio', metaLabel: "Photography Studio", labelImg: 'photography' },
+  { key: 'location-shoot', label: 'Location Shoot', metaLabel: "Location Shoot Space", labelImg: 'locationShoot' },
+  { key: 'outdoor-site', label: 'Outdoor Site', metaLabel: "Outdoor Site", labelImg: 'outdoorSite' }
 ]
 export const photographyAndFilmAmenitiesOptions = [
   {key: 'adjustable-lighting', label: 'Adjustable Lighting'},
@@ -303,8 +303,8 @@ export const photographyAndFilmAmenitiesOptions = [
 
 
 export const kitchenOptions = [
-  { key: 'kitchen-space', label: 'Kitchen space', labelImg: "kitchenSpace" },
-  { key: 'pop-up-space', label: 'Pop-up space', labelImg: "popUpSpace" },
+  { key: 'kitchen-space', label: 'Kitchen space', metaLabel: "Kitchen Space", labelImg: "kitchenSpace" },
+  { key: 'pop-up-space', label: 'Pop-up space', metaLabel: "Pop-up Space", labelImg: "popUpSpace" },
 ]
 export const kitchenAmenitiesOptions = [
   {key: '3-phase-power', label: '3 Phase Power'},
