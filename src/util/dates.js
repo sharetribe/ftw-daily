@@ -255,11 +255,12 @@ export const findNextBoundaryCustom = (timeZone, currentMomentOrDate, minBooking
 
   const typeTime = minBooking === HOURLY_BOOKING ? 'minutes' : 'hour'
   const countTime = minBooking === HOURLY_BOOKING ? 30 - (moment(currentMomentOrDate).minute() % 30) : 1
+
   return moment(currentMomentOrDate)
     .clone()
     .tz(timeZone)
-    .add(countTime, typeTime)
-    .startOf(typeTime)
+    .add(30 - (moment(currentMomentOrDate).minute ()% 30), 'minutes')
+    .startOf('minutes')
     .toDate();
 }
 
@@ -403,9 +404,8 @@ export const getEndHours = (intl, timeZone, startTime, endTime, minBook) => {
 
 export const getEndHoursCustom = (intl, timeZone, startTime, endTime, minBook, countBook) => {
   const hours = getSharpHoursCustom(intl, timeZone, startTime, endTime, minBook);
-  ///////// time count for correct show /////
-  const value = minBook === HOURLY_BOOKING ? (countBook / 0.5) : 0
-  console.log('111111', value)
+  const value = minBook === HOURLY_BOOKING ? ((countBook-0.5) / 0.5) : 0
+
   return hours.length < 1 ? [] : hours.slice(value);
 };
 

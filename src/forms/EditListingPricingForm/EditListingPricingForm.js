@@ -21,7 +21,6 @@ import { formatMoney } from '../../util/currency';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { Button, Form, FieldCurrencyInput, FieldTextInput, FieldSelect } from '../../components';
 import css from './EditListingPricingForm.module.css';
-import {discountCountHours} from "../../marketplace-custom-config";
 import {valueOf} from "lodash/seq";
 
 const { Money } = sdkTypes;

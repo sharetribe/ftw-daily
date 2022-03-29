@@ -67,20 +67,6 @@ export const discountTypes = [
   {key: MONTHLY_BOOKING, label: 'Months'}
 ];
 
-
-const countArr = (end, count= 1) => {
-  let result = [];
-  // while (end >= 0) {
-  //   result.push( end-- );
-  // }
-  for( let i = count; i <= end; i=i+count ) result.push(i)
-  return result
-}
-export const discountCountHours = countArr( 24)
-export const discountCountDays = countArr( 365)
-export const discountCountWeeks = countArr( 24)
-export const discountCountMonths = countArr( 12)
-
 export const filters = [
   {
     id: 'dates',
@@ -288,9 +274,9 @@ export const filters = [
   },
 
   // ====================================
-  // SECONDARY FILTERS 
+  // SECONDARY FILTERS
   // ====================================
-  
+
   {
     id: 'general_amenities',
     label: 'General Amenities',

@@ -10,11 +10,13 @@ import { bool, func, object, oneOf, string, number, arrayOf } from 'prop-types';
 import { Field } from 'react-final-form';
 import classNames from 'classnames';
 import { START_DATE, END_DATE } from '../../util/dates';
-import { propTypes } from '../../util/types';
+import {HOURLY_BOOKING, propTypes} from '../../util/types';
 import { ValidationError } from '../../components';
 import moment from 'moment';
 import DateRangeInput from './DateRangeInput';
 import css from './FieldDateRangeInput.module.css';
+import {discountTypes} from "../../marketplace-custom-config";
+import {FormattedMessage} from "../../util/reactIntl";
 
 const MAX_MOBILE_SCREEN_WIDTH = 768;
 
@@ -59,7 +61,7 @@ class FieldDateRangeInputComponent extends Component {
     }
 
     const {startDate, endDate} = values;
-    
+
     return {
       startDate,
       endDate: moment(endDate).subtract(moment(endDate).diff(moment(startDate), 'days')%offsetLength, 'days').toDate()
@@ -85,9 +87,14 @@ class FieldDateRangeInputComponent extends Component {
       // the same values will not be passed on to subcomponents.
       focusedInput,
       onFocusedInputChange,
+      minBookingCount,
+      minBookingType,
       ...rest
     } = this.props;
     /* eslint-disable no-unused-vars */
+
+    const textForMinBook = discountTypes.filter( el => el.key === minBookingType)[0] || ''
+    const minBookText = minBookingType && `${minBookingCount} ${textForMinBook?.label}`
 
     if (startDateLabel && !startDateId) {
       throw new Error('startDateId required when a startDateLabel is given');
@@ -152,6 +159,8 @@ class FieldDateRangeInputComponent extends Component {
       focusedInput: this.state.focusedInput,
       startDateId,
       endDateId,
+      minBookingCount,
+      minBookingType,
     };
     const classes = classNames(rootClassName || css.fieldRoot, className);
     const errorClasses = classNames({ [css.mobileMargins]: useMobileMargins });
@@ -168,6 +177,13 @@ class FieldDateRangeInputComponent extends Component {
           <div className={startDateBorderClasses} />
           <div className={endDateBorderClasses} />
         </div>
+        { minBookingType && minBookingType !== HOURLY_BOOKING &&
+        <div className={css.infoBlockMinBooking}>
+          <span className={css.infoTextMinBooking}>•</span>
+          <p className={css.infoTextMinBooking}>
+            <FormattedMessage id="FieldDateTimeInput.minBoookTextShow" values={{minBookText}}/>
+          </p>
+        </div>}
         <ValidationError className={errorClasses} fieldMeta={meta} />
       </div>
     );
