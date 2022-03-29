@@ -184,7 +184,6 @@ export class SearchPageComponent extends Component {
     const topbarClasses = this.state.isMobileModalOpen
       ? classNames(css.topbarBehindModal, css.topbar)
       : css.topbar;
-// console.log(title, 'title')
     // N.B. openMobileMap button is sticky.
     // For some reason, stickyness doesn't work on Safari, if the element is <button>
 
