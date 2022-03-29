@@ -86,7 +86,7 @@ const SectionPatchCategories = props => {
         {categoryLink('Photography & Film', photography_filmImage, photographyAndFilmUrlParams)}
       </div>
       <div className={css.categories}>
-        {categoryLink('Coworking', coworkingImage, coworkingUrlParams)}
+        {categoryLink('Coworking & Office', coworkingImage, coworkingUrlParams)}
         {categoryLink('Music & Arts', music_artsImage, musicAndArtsUrlParams)}
         {categoryLink('Events  & Venues', events_venuesImage, eventsAndVenuesUrlParams)}
         {categoryLink('Kitchen & Pop-ups', kitchen_popUpsImage, kitchensAndPopUpsUrlParams)}
