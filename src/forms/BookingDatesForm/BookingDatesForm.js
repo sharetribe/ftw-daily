@@ -127,7 +127,9 @@ export class BookingDatesFormComponent extends Component {
             fetchLineItemsInProgress,
             fetchLineItemsError,
             bookingType,
-            seats
+            seats,
+            minBookingCount,
+            minBookingType
           } = fieldRenderProps;
           const { startDate, endDate } = values && values.bookingDates ? values.bookingDates : {};
 
@@ -244,6 +246,8 @@ export class BookingDatesFormComponent extends Component {
                 )}
                 disabled={fetchLineItemsInProgress}
                 seats={seats}
+                minBookingCount={minBookingCount}
+                minBookingType={minBookingType}
               />
 
               {bookingInfoMaybe}

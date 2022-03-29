@@ -215,6 +215,8 @@ const BookingPanel = props => {
             fetchLineItemsError={fetchLineItemsError}
             bookingType={bookingType}
             seats={seats}
+            minBookingCount={minBookingCount}
+            minBookingType={minBookingType}
           />
         ) : null}
 

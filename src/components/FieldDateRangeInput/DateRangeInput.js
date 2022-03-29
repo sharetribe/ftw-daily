@@ -12,7 +12,13 @@ import { intlShape, injectIntl } from '../../util/reactIntl';
 import classNames from 'classnames';
 import moment from 'moment';
 import { START_DATE, END_DATE } from '../../util/dates';
-import { propTypes } from '../../util/types';
+import {
+  DAILY_BOOKING,
+  HOURLY_BOOKING,
+  MONTHLY_BOOKING,
+  propTypes,
+  WEEKLY_BOOKING
+} from '../../util/types';
 import config from '../../config';
 import {
   isDayBlockedFn,
@@ -219,6 +225,8 @@ class DateRangeInputComponent extends Component {
       timeSlots,
       minimumLength: minimumNights,
       seats,
+      minBookingCount,
+      minBookingType,
       ...datePickerProps
     } = this.props;
     /* eslint-enable no-unused-vars */
@@ -248,6 +256,7 @@ class DateRangeInputComponent extends Component {
       seats
     );
 
+    // console.log('11111',startDate)
     const startDatePlaceholderTxt =
       startDatePlaceholderText ||
       intl.formatMessage({ id: 'FieldDateRangeInput.startDatePlaceholderText' });
@@ -268,7 +277,19 @@ class DateRangeInputComponent extends Component {
       [css.withMobileMargins]: useMobileMargins,
     });
 
-    const minimumDays = minimumNights - 1;
+    const typeOfMinBooking = (minBookingCount, minBookingType) => {
+      if(minBookingType === WEEKLY_BOOKING) return minBookingCount*7
+      if(minBookingType === MONTHLY_BOOKING) return minBookingCount*30
+      return minBookingCount
+    }
+
+    const minDaysBlock = minBookingType !== HOURLY_BOOKING && typeOfMinBooking(minBookingCount, minBookingType)
+    const minimumDays = (minDaysBlock || minimumNights) - 1;
+
+    // console.log('isDayBlocked', this.props)
+    // console.log('value.startDate', value?.startDate)
+    // console.log('isDayBlocked', isDayBlocked)
+    // console.log('isOutsideRange', isOutsideRange)
 
     return (
       <div className={classes}>

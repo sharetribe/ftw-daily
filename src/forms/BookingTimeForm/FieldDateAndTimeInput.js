@@ -24,7 +24,7 @@ import {
   getEndHoursCustom,
   findNextBoundaryCustom,
 } from '../../util/dates';
-import { propTypes } from '../../util/types';
+import {HOURLY_BOOKING, propTypes} from '../../util/types';
 import { bookingDateRequired } from '../../util/validators';
 import { FieldDateInput, FieldSelect } from '../../components';
 
@@ -400,7 +400,7 @@ class FieldDateAndTimeInput extends Component {
     const classes = classNames(rootClassName || css.root, className);
 
     const textForMinBook = discountTypes.filter( el => el.key === minBookingType)[0] || ''
-    const minBookText = minBookingType ? `${minBookingCount} ${textForMinBook?.label}` : '1 hour'
+    const minBookText = minBookingType && `${minBookingCount} ${textForMinBook?.label}`
 
     const bookingStartDate =
       values.bookingStartDate && values.bookingStartDate.date ? values.bookingStartDate.date : null;
@@ -521,12 +521,13 @@ class FieldDateAndTimeInput extends Component {
             />
           </div>
         </div>
+        { minBookingType && minBookingType === HOURLY_BOOKING &&
         <div className={css.infoBlockMinBooking}>
           <span className={css.infoTextMinBooking}>•</span>
           <p className={css.infoTextMinBooking}>
-            <FormattedMessage id="FieldDateTimeInput.minBoookTextShow" values={{ minBookText }} />
+            <FormattedMessage id="FieldDateTimeInput.minBoookTextShow" values={{minBookText}}/>
           </p>
-        </div>
+        </div>}
         <div className={css.formRow}>
           <div className={classNames(css.field, css.endDateHidden)}>
             <FieldDateInput

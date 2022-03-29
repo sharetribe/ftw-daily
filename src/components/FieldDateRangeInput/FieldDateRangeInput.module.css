@@ -110,3 +110,17 @@
     }
   }
 }
+
+.infoBlockMinBooking {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+}
+.infoTextMinBooking {
+  font-size: 18px;
+  line-height: 18px;
+  color: #EF7171;
+  font-family: var(--fontFamilySofiapro);
+  font-weight: var(--fontWeightLow);
+  margin: 0 10px 0 0;
+}
