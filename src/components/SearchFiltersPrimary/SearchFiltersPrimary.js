@@ -73,7 +73,7 @@ const SearchFiltersPrimaryComponent = props => {
 
         <div className={css.filters}>
           <OutsideClickHandler onOutsideClick={isCategoryFilterOpen && onOpenCategoryFilter || onCloseCategoryFilter}>
-            <button className={classNames(toggleSecondaryFiltersOpenButtonClasses, {[css.active]: isCategoryFilterEnabled})} onClick={onOpenCategoryFilter}>
+            <button className={classNames(css.searchFiltersPanelClosed, {[css.active]: isCategoryFilterEnabled})} onClick={onOpenCategoryFilter}>
               <FormattedMessage id="SearchFiltersPrimary.categoriesBtn" />
             </button>
             {isCategoryFilterOpen && (

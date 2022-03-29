@@ -197,9 +197,9 @@ export const filters = [
     },
   },
   {
-    id: 'photography_and_film',
-    label: 'Photography & Film',
-    labelImg: 'photographyAndFilm',
+    id: 'events_and_venues',
+    label: 'Events & Venues',
+    labelImg: 'eventsAndVenues',
     type: 'SelectMultipleFilter',
     group: 'primary',
     queryParamNames: ['pub_category'],
@@ -209,9 +209,9 @@ export const filters = [
       // "label" is set here for the UI only.
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
-      options: photographyAndFilmOptions,
+      options: eventsAndVenuesOptions,
       isCategory: true,
-      catKeys: 'photography,location-shoot,outdoor-site',
+      catKeys: 'music-venue,private-event-space,sports-venue,conference-exhibition,outdoor-events,private-dining',
     },
   },
   {
@@ -251,9 +251,9 @@ export const filters = [
     },
   },
   {
-    id: 'events_and_venues',
-    label: 'Events & Venues',
-    labelImg: 'eventsAndVenues',
+    id: 'photography_and_film',
+    label: 'Photography & Film',
+    labelImg: 'photographyAndFilm',
     type: 'SelectMultipleFilter',
     group: 'primary',
     queryParamNames: ['pub_category'],
@@ -263,9 +263,9 @@ export const filters = [
       // "label" is set here for the UI only.
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
-      options: eventsAndVenuesOptions,
+      options: photographyAndFilmOptions,
       isCategory: true,
-      catKeys: 'music-venue,private-event-space,sports-venue,conference-exhibition,outdoor-events,private-dining',
+      catKeys: 'photography,location-shoot,outdoor-site',
     },
   },
   {
@@ -290,6 +290,7 @@ export const filters = [
   // ====================================
   // SECONDARY FILTERS 
   // ====================================
+
   
   {
     id: 'general_amenities',
@@ -312,6 +313,7 @@ export const filters = [
   },
   {
     id: 'hair_beauty_amenities',
+    idCategory: 'hair_and_beauty',
     label: 'Hair & Beauty Amenities',
     type: 'SelectMultipleFilter',
     group: 'secondary',
@@ -331,6 +333,7 @@ export const filters = [
   },
   {
     id: 'wellness_amenities',
+    idCategory: 'wellness',
     label: 'Wellness Amenities',
     type: 'SelectMultipleFilter',
     group: 'secondary',
@@ -347,9 +350,10 @@ export const filters = [
       isCategory: false,
       catKeys: 'therapy-room,massage-room,clinical-room',
     },
-  },
+  },  
   {
     id: 'fitness_amenities',
+    idCategory: 'fitness',
     label: 'Fitness Amenities',
     type: 'SelectMultipleFilter',
     group: 'secondary',
@@ -369,6 +373,7 @@ export const filters = [
   },
   {
     id: 'photography_and_film_amenities',
+    idCategory: 'photography_and_film',
     label: 'Photography & Film Amenities',
     type: 'SelectMultipleFilter',
     group: 'secondary',
@@ -388,6 +393,7 @@ export const filters = [
   },
   {
     id: 'coworking_amenities',
+    idCategory: 'coworking',
     label: 'Coworking Amenities',
     type: 'SelectMultipleFilter',
     group: 'secondary',
@@ -407,6 +413,7 @@ export const filters = [
   },
   {
     id: 'music_and_arts_amenities',
+    idCategory: 'music_and_arts',
     label: 'Music & Arts Amenities',
     type: 'SelectMultipleFilter',
     group: 'secondary',
@@ -423,9 +430,10 @@ export const filters = [
       isCategory: false,
       catKeys: 'music-studio,recording-studio,gallery-space,art-studio,rehearsal-space,drama-studio,theatre-space',
     },
-  },
+  },  
   {
     id: 'events_amenities',
+    idCategory: 'events_and_venues',
     label: 'Events Amenities',
     type: 'SelectMultipleFilter',
     group: 'secondary',
@@ -446,6 +454,7 @@ export const filters = [
   },
   {
     id: 'kitchen_amenities',
+    idCategory: 'kitchensand_pop_ups',
     label: 'Kitchen Amenities',
     type: 'SelectMultipleFilter',
     group: 'secondary',

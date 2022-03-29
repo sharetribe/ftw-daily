@@ -1,4 +1,6 @@
+@import '../../styles/customMediaQueries.css';
 @import '../../styles/propertySets.css';
+
 
 .root {
   display: flex;
@@ -138,4 +140,16 @@
   background-color: var(--marketplaceColor);
   display: inline-block;
   border-radius: 3px;
+}
+
+.categoryItemsHolder {
+
+}
+
+.categoryItem {
+
+}
+
+.categoryItemActive {
+  background: #000;
 }

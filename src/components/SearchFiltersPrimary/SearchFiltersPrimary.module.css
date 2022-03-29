@@ -132,8 +132,10 @@
   border: 1px solid var(--marketplaceColor);
 
   /* &:focus, */
-  &:hover {
+  &:hover, 
+  &:focus {
     border: 1px solid var(--marketplaceColorDark);
+    background: var(--marketplaceColorDark);
   }
 }
 

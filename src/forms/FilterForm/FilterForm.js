@@ -47,6 +47,9 @@ const FilterFormComponent = props => {
           isCategory,
           activeCategory,
           closeSubCategory,
+          // mobile
+          isSubCategoryOpen,
+          toggleIsSubCategoryOpen
         } = formRenderProps;
 
         const handleCancel = () => {
@@ -71,19 +74,23 @@ const FilterFormComponent = props => {
           >
             {isCategory ? (
               <div>
-                <div className={css.subcategoryHeading}>
+                <div className={css.subcategoryHeading} onClick={toggleIsSubCategoryOpen}>
                   <FormattedMessage id="FilterForm.patchCategory" />
                   <span className={css.activeCategory} onClick={closeSubCategory}>
                     {activeCategory}
                   </span>
                 </div>
-                <div className={css.subcategorySubHeading}>
-                  <FormattedMessage id="FilterForm.subcategory" />
-                  <button className={css.subcategoryClearButton} type="button" onClick={onClear}>
-                    <FormattedMessage id="FilterForm.reset" />
-                  </button>
-                </div>
-                <div className={classNames(paddingClasses || css.contentWrapper)}>{children}</div>
+                {isSubCategoryOpen && (
+                  <>
+                    <div className={css.subcategorySubHeading}>
+                      <FormattedMessage id="FilterForm.subcategory" />
+                      <button className={css.subcategoryClearButton} type="button" onClick={onClear}>
+                        <FormattedMessage id="FilterForm.reset" />
+                      </button>
+                    </div>
+                    <div className={classNames(paddingClasses || css.contentWrapper)}>{children}</div>
+                  </>
+                )}
               </div>
             ) : (
               <div className={classNames(paddingClasses || css.contentWrapper)}>{children}</div>

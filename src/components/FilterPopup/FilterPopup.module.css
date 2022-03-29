@@ -123,6 +123,7 @@
     padding: 0;
     color: var(--matterColor);
     box-shadow: none;
+    letter-spacing: -0.5px;
 
     &:hover,
     &:focus {

@@ -9,11 +9,15 @@ import css from './FilterPlain.module.css';
 class FilterPlainComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { isOpen: false };
+    this.state = { 
+      isOpen: false,
+      isSubCategoryOpen: false,
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClear = this.handleClear.bind(this);
     this.toggleIsOpen = this.toggleIsOpen.bind(this);
+    this.toggleIsSubCategoryOpen = this.toggleIsSubCategoryOpen.bind(this);
   }
 
   handleChange(values) {
@@ -33,6 +37,12 @@ class FilterPlainComponent extends Component {
 
   toggleIsOpen() {
     this.setState(prevState => ({ isOpen: !prevState.isOpen }));
+    this.setState(prevState => ({ isSubCategoryOpen: false }));
+  }
+
+  toggleIsSubCategoryOpen() {
+    console.log(111111111);
+    this.setState(prevState => ({ isSubCategoryOpen: !prevState.isSubCategoryOpen }));
   }
 
   render() {
@@ -48,17 +58,51 @@ class FilterPlainComponent extends Component {
       keepDirtyOnReinitialize,
       contentPlacementOffset,
       isCategory,
-      subCategoryImage
+      mainCategoriesImages,
+      subCategoryImage,
+      labelImg
     } = this.props;
     const classes = classNames(rootClassName || css.root, className);
 
     const labelClass = isSelected ? css.filterLabelSelected : css.filterLabel;
     const newLabel = isCategory ? label + ' Categories' : label;
 
+
+    let categoryImg;
+
+    switch(labelImg) {
+      case 'coworking':
+        categoryImg = <img src={mainCategoriesImages.coworking} alt ="coworking" className={css.categoryImg} />
+        break;
+      case 'fitness':
+        categoryImg = <img src={mainCategoriesImages.fitness}  alt="fitness" className={css.categoryImg} />
+        break;
+      case 'hairBeauty':
+        categoryImg = <img src={mainCategoriesImages.hairBeauty}  alt="hairBeauty" className={css.categoryImg} />
+        break;
+      case 'kitchensAndPopUps':
+        categoryImg = <img src={mainCategoriesImages.kitchensAndPopUps}  alt="kitchensAndPopUps" className={css.categoryImg} />
+        break;
+      case 'musicAndArts':
+        categoryImg = <img src={mainCategoriesImages.musicAndArts}  alt="musicAndArts" className={css.categoryImg} />
+        break;
+      case 'eventsAndVenues':
+        categoryImg = <img src={mainCategoriesImages.eventsAndVenues}  alt="eventsAndVenues" className={css.categoryImg} />
+        break;
+      case 'photographyAndFilm':
+        categoryImg = <img src={mainCategoriesImages.photographyAndFilm}  alt="photographyAndFilm" className={css.categoryImg} />
+        break;
+      case 'wellness':
+        categoryImg = <img src={mainCategoriesImages.wellness}  alt="wellness" className={css.categoryImg} />
+        break;
+      default: null;
+    }
+
     return (
       <div className={classes}>
         <div className={labelClass}>
           <button type="button" className={css.labelButton} onClick={this.toggleIsOpen}>
+            {isCategory && labelImg && categoryImg}
             <span className={labelClass}>{newLabel}</span>
           </button>
           <button type="button" className={css.clearButton} onClick={this.handleClear}>
@@ -81,6 +125,8 @@ class FilterPlainComponent extends Component {
             keepDirtyOnReinitialize={keepDirtyOnReinitialize}
             subCategoryImage={subCategoryImage}
             isCategory={isCategory}
+            isSubCategoryOpen={this.state.isSubCategoryOpen}
+            toggleIsSubCategoryOpen={this.toggleIsSubCategoryOpen}
           >
             {children}
           </FilterForm>

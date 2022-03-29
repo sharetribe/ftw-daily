@@ -12,12 +12,17 @@ import css from './SearchFiltersMobile.module.css';
 class SearchFiltersMobileComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { isFiltersOpenOnMobile: false, initialQueryParams: null };
+    this.state = {
+      isFiltersOpenOnMobile: false,
+      initialQueryParams: null,
+      currentActiveCategory: null,
+    };
 
     this.openFilters = this.openFilters.bind(this);
     this.cancelFilters = this.cancelFilters.bind(this);
     this.closeFilters = this.closeFilters.bind(this);
     this.resetAll = this.resetAll.bind(this);
+    this.setCurrentActiveCategory = this.setCurrentActiveCategory.bind(this);
   }
 
   // Open filters modal, set the initial parameters to current ones
@@ -59,6 +64,11 @@ class SearchFiltersMobileComponent extends Component {
     }
   }
 
+  setCurrentActiveCategory(category) {
+    // console.log(category);
+    this.setState({currentActiveCategory: category});
+  }
+
   render() {
     const {
       rootClassName,
@@ -76,6 +86,7 @@ class SearchFiltersMobileComponent extends Component {
     } = this.props;
 
     const classes = classNames(rootClassName || css.root, className);
+    const categoryChildren = children.filter(c => c.props.isCategory);
 
     const resultsFound = (
       <FormattedMessage id="SearchFiltersMobile.foundResults" values={{ count: resultsCount }} />
@@ -127,9 +138,26 @@ class SearchFiltersMobileComponent extends Component {
               <FormattedMessage id={'SearchFiltersMobile.resetAll'} />
             </button>
           </div>
+
           {this.state.isFiltersOpenOnMobile ? (
-            <div className={css.filtersWrapper}>{children}</div>
+            <div className={css.filtersWrapper}>
+              <div className={css.categoryItemsHolder}>
+                {categoryChildren.map((category, i) => {
+                  const categoryAmenities = children.filter(item => item.props.filterConfig.idCategory === category.props.filterConfig.id)
+                  const categoryItemClasses = classNames(css.categoryItem, {[css.categoryItemActive]: category.props.filterConfig.id === this.state.currentActiveCategory})
+                  return (
+                    <div key={`category-${i}`} className={categoryItemClasses} onClick={() => this.setCurrentActiveCategory(category.props.filterConfig.id)}>
+                      {category}
+                      {categoryAmenities}
+                    </div>
+                  )
+                })}
+
+              </div>
+              {children}
+            </div>
           ) : null}
+
 
           <div className={css.showListingsContainer}>
             <Button className={css.showListingsButton} onClick={this.closeFilters}>

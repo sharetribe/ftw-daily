@@ -232,6 +232,7 @@ class SelectMultipleFilter extends Component {
         isCategory={isCategory}
         mainCategoriesImages={mainCategoriesImages}
         subCategoryImage={subCategoriesImages}
+        labelImg={labelImg}
         {...rest}
       >
         <GroupOfFieldCheckboxes

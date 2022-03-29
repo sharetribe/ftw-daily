@@ -365,6 +365,7 @@ class MainPanel extends Component {
           onCloseModal={onCloseModal}
           resetAll={this.resetAll}
           selectedFiltersCount={selectedFiltersCount}
+          mainCategoriesImages={mainCategoriesImages}
           subCategoriesImages={subCategoriesImages}
         >
           {filterConfig.map(config => {
@@ -378,8 +379,10 @@ class MainPanel extends Component {
                 getHandleChangedValueFn={this.getHandleChangedValueFn}
                 liveEdit
                 showAsPopup={false}
+                mainCategoriesImages={mainCategoriesImages}
                 subCategoriesImages={subCategoriesImages}
                 onOpenCategoryFilter={onOpenCategoryFilter}
+                isCategory={!!config.config.isCategory}
               />
             );
           })}

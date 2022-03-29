@@ -22,6 +22,7 @@ const FilterComponent = props => {
     subCategoriesImages,
     onOpenCategoryFilter,
     isCategoryFilterEnabled,
+    isCategory,
     ...rest
   } = props;
   const { id, type, queryParamNames, label, labelImg, config } = filterConfig;

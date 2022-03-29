@@ -47,14 +47,16 @@ class FilterPopup extends Component {
   }
 
   handleCancel() {
-    const { onSubmit, onCancel, initialValues } = this.props;
+    const { onSubmit, onCancel, initialValues, isCategory } = this.props;
     this.setState({ isOpen: false });
 
     if (onCancel) {
       onCancel();
     }
 
-    onSubmit(initialValues);
+    if(!isCategory) {
+      onSubmit(initialValues);
+    }
   }
 
   handleBlur() {
