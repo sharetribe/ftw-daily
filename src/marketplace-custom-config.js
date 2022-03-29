@@ -216,7 +216,7 @@ export const filters = [
   },
   {
     id: 'coworking',
-    label: 'Coworking',
+    label: 'Coworking & Office',
     labelImg: 'coworking',
     type: 'SelectMultipleFilter',
     group: 'primary',
