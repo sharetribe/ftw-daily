@@ -185,7 +185,6 @@ export const createSearchResultSchema = (listings, address, intl, pub_category, 
   arrayCategory.forEach(e => {
     // let article = 'to rent';
     const arrForHire = [
-      'nail-technician', 
       'tattoo-and-piercing', 
       'dance-studio', 
       'sports-hall', 
@@ -247,11 +246,11 @@ export const createSearchResultSchema = (listings, address, intl, pub_category, 
             schemaTitle = intl.formatMessage(
               { id: 'SearchPage.schemaTitleWellness' },
               { searchAddress, siteTitle }
-            ) : filt.sort().join(','), 'ddd', cat.sort().join(',') && filt.includes('fitness') ?
+            ) : filt.sort().join(',') === cat.sort().join(',') && filt.includes('fitness') ?
             schemaTitle = intl.formatMessage(
               { id: 'SearchPage.schemaTitleFitness' },
               { searchAddress, siteTitle }
-            ) : filt.sort().join(','), 'ddd', cat.sort().join(',') && filt.includes('photography') ?
+            ) : filt.sort().join(',') === cat.sort().join(',') && filt.includes('photography') ?
             schemaTitle = intl.formatMessage(
               { id: 'SearchPage.schemaTitlePhotographyFilm' },
               { searchAddress, siteTitle }
