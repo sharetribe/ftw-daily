@@ -7,6 +7,16 @@
   border-bottom: 1px solid var(--matterColorNegative);
 }
 
+.rootCategory {
+  padding: 0;
+  border-bottom: none;
+
+  & > .filterLabel {
+    margin: 0;
+    padding: 0;
+  }
+}
+
 .filterLabel,
 .filterLabelSelected {
   @apply --marketplaceH3FontStyles;
@@ -23,6 +33,17 @@
 
 .filterLabelSelected {
   color: var(--marketplaceColor);
+  padding: 0;
+  margin: 0;
+}
+
+.filterLabelNotSelected {
+  opacity: 0.5;
+  cursor: not-allowed;
+
+  & .labelButtonWithImg {
+    pointer-events: none;
+  }
 }
 
 .labelButton {
@@ -32,6 +53,24 @@
   border: none;
   padding: 0;
   cursor: pointer;
+}
+
+.labelButtonWithImg {
+  width: 100%;
+
+  & img {
+    width: 100%;
+    height: 218px;
+    object-fit: cover;
+  }
+
+  & span {
+    display: block;
+    text-align: center;
+    font-weight: var(--fontWeightRegular);
+    font-size: 14px;
+    line-height: 21px;
+  }
 }
 
 .clearButton {
@@ -56,6 +95,11 @@
   }
 }
 
+.clearCategoryButtonMobile {
+  position: absolute;
+  right: 0;
+}
+
 .plain {
   width: 100%;
   display: none;
@@ -67,4 +111,8 @@
 
 .isOpen {
   display: block;
+}
+
+.categorypPlain {
+  display: none;
 }

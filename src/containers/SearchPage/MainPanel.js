@@ -48,7 +48,11 @@ const cleanSearchFromConflictingParams = (searchParams, sortConfig, filterConfig
 class MainPanel extends Component {
   constructor(props) {
     super(props);
-    this.state = { isSecondaryFiltersOpen: false, currentQueryParams: props.urlQueryParams };
+    this.state = { 
+      isSecondaryFiltersOpen: false, 
+      currentQueryParams: props.urlQueryParams,
+      currentActiveCategory: null,
+    };
 
     this.applyFilters = this.applyFilters.bind(this);
     this.cancelFilters = this.cancelFilters.bind(this);
@@ -56,6 +60,8 @@ class MainPanel extends Component {
 
     this.initialValues = this.initialValues.bind(this);
     this.getHandleChangedValueFn = this.getHandleChangedValueFn.bind(this);
+
+    this.setCurrentActiveCategory = this.setCurrentActiveCategory.bind(this);
 
     // SortBy
     this.handleSortBy = this.handleSortBy.bind(this);
@@ -262,6 +268,15 @@ class MainPanel extends Component {
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   }
 
+  // for mobile filters
+  setCurrentActiveCategory(category) {
+    if(category === this.state.currentActiveCategory) {
+      this.setState({currentActiveCategory: null});
+    } else {
+      this.setState({currentActiveCategory: category});
+    }
+  }
+
   render() {
     const {
       className,
@@ -367,6 +382,7 @@ class MainPanel extends Component {
           selectedFiltersCount={selectedFiltersCount}
           mainCategoriesImages={mainCategoriesImages}
           subCategoriesImages={subCategoriesImages}
+          currentActiveCategory={this.state.currentActiveCategory}
         >
           {filterConfig.map(config => {
             return (
@@ -383,6 +399,8 @@ class MainPanel extends Component {
                 subCategoriesImages={subCategoriesImages}
                 onOpenCategoryFilter={onOpenCategoryFilter}
                 isCategory={!!config.config.isCategory}
+                setCurrentActiveCategory={this.setCurrentActiveCategory}
+                isCategoryFilterEnabled={isCategoryFilterEnabled}
               />
             );
           })}

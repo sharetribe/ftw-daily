@@ -118,6 +118,7 @@ class SelectMultipleFilter extends Component {
       rootClassName,
       className,
       id,
+      filterId,
       filterConfigId,
       name,
       label,
@@ -137,6 +138,7 @@ class SelectMultipleFilter extends Component {
       subCategoriesImages,
       onOpenCategoryFilter,
       isCategoryFilterEnabled,
+      setCurrentActiveCategory,
       ...rest
     } = this.props;
 
@@ -225,6 +227,7 @@ class SelectMultipleFilter extends Component {
         label={labelForPlain}
         isSelected={hasInitialValues}
         id={`${id}.plain`}
+        filterId={filterId}
         liveEdit
         contentPlacementOffset={contentStyle}
         onSubmit={handleSubmit}
@@ -233,10 +236,12 @@ class SelectMultipleFilter extends Component {
         mainCategoriesImages={mainCategoriesImages}
         subCategoryImage={subCategoriesImages}
         labelImg={labelImg}
+        setCurrentActiveCategory={setCurrentActiveCategory}
+        isCategoryFilterEnabled={isCategoryFilterEnabled}
         {...rest}
       >
         <GroupOfFieldCheckboxes
-          className={css.fieldGroupPlain}
+          className={classNames(css.fieldGroupPlain, {[css.fieldGroupPlainCategory]: isCategory})}
           name={name}
           id={`${id}-checkbox-group`}
           options={options}

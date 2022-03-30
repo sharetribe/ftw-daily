@@ -23,10 +23,13 @@ const FilterComponent = props => {
     onOpenCategoryFilter,
     isCategoryFilterEnabled,
     isCategory,
+    setCurrentActiveCategory,
     ...rest
   } = props;
   const { id, type, queryParamNames, label, labelImg, config } = filterConfig;
   const { liveEdit, showAsPopup } = rest;
+
+
 
   const useHistoryPush = liveEdit || showAsPopup;
   const prefix = idPrefix || 'SearchPage';
@@ -50,6 +53,7 @@ const FilterComponent = props => {
       return (
         <SelectMultipleFilter
           id={componentId}
+          filterId={id}
           filterConfigId={id}
           label={label}
           labelImg={labelImg}
@@ -62,6 +66,7 @@ const FilterComponent = props => {
           subCategoriesImages={subCategoriesImages}
           onOpenCategoryFilter={onOpenCategoryFilter}
           isCategoryFilterEnabled={isCategoryFilterEnabled}
+          setCurrentActiveCategory={setCurrentActiveCategory}
           {...config}
           {...rest}
         />

@@ -9,7 +9,7 @@ import css from './FilterPlain.module.css';
 class FilterPlainComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       isOpen: false,
       isSubCategoryOpen: false,
     };
@@ -41,7 +41,6 @@ class FilterPlainComponent extends Component {
   }
 
   toggleIsSubCategoryOpen() {
-    console.log(111111111);
     this.setState(prevState => ({ isSubCategoryOpen: !prevState.isSubCategoryOpen }));
   }
 
@@ -51,6 +50,7 @@ class FilterPlainComponent extends Component {
       className,
       plainClassName,
       id,
+      filterId,
       label,
       isSelected,
       children,
@@ -60,62 +60,90 @@ class FilterPlainComponent extends Component {
       isCategory,
       mainCategoriesImages,
       subCategoryImage,
-      labelImg
+      labelImg,
+      setCurrentActiveCategory,
+      isCategoryFilterEnabled
     } = this.props;
-    const classes = classNames(rootClassName || css.root, className);
+    const classes = classNames(rootClassName || css.root, className, { [css.rootCategory]: isCategory });
 
-    const labelClass = isSelected ? css.filterLabelSelected : css.filterLabel;
+    // const labelClass = isSelected ? css.filterLabelSelected : css.filterLabel;
     const newLabel = isCategory ? label + ' Categories' : label;
+
+    const labelClass = classNames(
+      css.filterLabel,
+      {[css.filterLabelSelected]: isSelected},
+      {[css.filterLabelNotSelected]: !isSelected && !!isCategoryFilterEnabled}
+    )
 
 
     let categoryImg;
 
-    switch(labelImg) {
+    switch (labelImg) {
       case 'coworking':
-        categoryImg = <img src={mainCategoriesImages.coworking} alt ="coworking" className={css.categoryImg} />
+        categoryImg = <img src={mainCategoriesImages.coworking} alt="coworking" className={css.categoryImg} />
         break;
       case 'fitness':
-        categoryImg = <img src={mainCategoriesImages.fitness}  alt="fitness" className={css.categoryImg} />
+        categoryImg = <img src={mainCategoriesImages.fitness} alt="fitness" className={css.categoryImg} />
         break;
       case 'hairBeauty':
-        categoryImg = <img src={mainCategoriesImages.hairBeauty}  alt="hairBeauty" className={css.categoryImg} />
+        categoryImg = <img src={mainCategoriesImages.hairBeauty} alt="hairBeauty" className={css.categoryImg} />
         break;
       case 'kitchensAndPopUps':
-        categoryImg = <img src={mainCategoriesImages.kitchensAndPopUps}  alt="kitchensAndPopUps" className={css.categoryImg} />
+        categoryImg = <img src={mainCategoriesImages.kitchensAndPopUps} alt="kitchensAndPopUps" className={css.categoryImg} />
         break;
       case 'musicAndArts':
-        categoryImg = <img src={mainCategoriesImages.musicAndArts}  alt="musicAndArts" className={css.categoryImg} />
+        categoryImg = <img src={mainCategoriesImages.musicAndArts} alt="musicAndArts" className={css.categoryImg} />
         break;
       case 'eventsAndVenues':
-        categoryImg = <img src={mainCategoriesImages.eventsAndVenues}  alt="eventsAndVenues" className={css.categoryImg} />
+        categoryImg = <img src={mainCategoriesImages.eventsAndVenues} alt="eventsAndVenues" className={css.categoryImg} />
         break;
       case 'photographyAndFilm':
-        categoryImg = <img src={mainCategoriesImages.photographyAndFilm}  alt="photographyAndFilm" className={css.categoryImg} />
+        categoryImg = <img src={mainCategoriesImages.photographyAndFilm} alt="photographyAndFilm" className={css.categoryImg} />
         break;
       case 'wellness':
-        categoryImg = <img src={mainCategoriesImages.wellness}  alt="wellness" className={css.categoryImg} />
+        categoryImg = <img src={mainCategoriesImages.wellness} alt="wellness" className={css.categoryImg} />
         break;
       default: null;
     }
 
+    const labelButtonClasses = classNames(
+      css.labelButton,
+      { [css.labelButtonWithImg]: isCategory }
+    )
+
     return (
       <div className={classes}>
         <div className={labelClass}>
-          <button type="button" className={css.labelButton} onClick={this.toggleIsOpen}>
-            {isCategory && labelImg && categoryImg}
-            <span className={labelClass}>{newLabel}</span>
+          <button type="button" className={labelButtonClasses} onClick={this.toggleIsOpen}>
+            
+            {isCategory && labelImg ? (
+              <div onClick={() => setCurrentActiveCategory(filterId)}>
+                {categoryImg}
+                <span className={labelClass}>{newLabel}</span>
+              </div>
+            ) : (
+              <span className={labelClass}>{newLabel}</span>
+            )}
+
           </button>
-          <button type="button" className={css.clearButton} onClick={this.handleClear}>
-            <FormattedMessage id={'FilterPlain.clear'} />
-          </button>
+          {!isCategory && (
+            <button type="button" className={css.clearButton} onClick={this.handleClear}>
+              <FormattedMessage id={'FilterPlain.clear'} />
+            </button>
+          )}
         </div>
         <div
           id={id}
-          className={classNames(plainClassName, css.plain, { [css.isOpen]: this.state.isOpen })}
+          className={classNames(plainClassName, css.plain, { [css.isOpen]: this.state.isOpen }, { [css.categorypPlain]: isCategory })}
           ref={node => {
             this.filterContent = node;
           }}
         >
+          {isCategory && (
+            <button type="button" className={classNames(css.clearButton, css.clearCategoryButtonMobile)} onClick={this.handleClear}>
+              <FormattedMessage id={'FilterPlain.clear'} />
+            </button>
+          )}
           <FilterForm
             id={`${id}.form`}
             liveEdit

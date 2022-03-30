@@ -55,6 +55,10 @@
   border: none;
 }
 
+.fieldGroupPlainCategory {
+  padding: 0;
+}
+
 .list {
   margin: 0;
 }
@@ -70,19 +74,33 @@
   }
 }
 
-
 .listWithImages {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 275px;
+  margin: 0 auto;
+
+  @media (--viewportMedium) {
+    justify-content: flex-start;
+    max-width: 100%;
+    margin: 0;
+  }
 
   & li {
     width: 122px;
-    margin-right: 36px;
     padding: 0; 
     margin-bottom: 56px;
+    
+    @media (--viewportMedium) {
+      margin-right: 36px;
+    }
 
     &:nth-child(4) {
-      margin-right: 0;
+      @media (--viewportMedium) {
+        margin-right: 0;
+      }
     }
   }
   
@@ -93,8 +111,19 @@
     cursor: pointer;
   }
 
+  & input:checked + label img  {
+    border: 3px solid var(--customDarkBlue);
+    
+    @media (--viewportMedium) {
+      border: none
+    }
+  }
+
   & input:checked + label span  {
-    font-weight: var(--fontWeightSemiBold);
+    
+    @media (--viewportMedium) {
+      font-weight: var(--fontWeightSemiBold);
+    }
   }
 
   & li label span {
