@@ -400,7 +400,8 @@ class FieldDateAndTimeInput extends Component {
     const classes = classNames(rootClassName || css.root, className);
 
     const textForMinBook = discountTypes.filter( el => el.key === minBookingType)[0] || ''
-    const minBookText = minBookingType && `${minBookingCount} ${textForMinBook?.label}`
+    // const minBookText = minBookingType && `${minBookingCount} ${textForMinBook?.label}`
+    const minBookText = null
 
     const bookingStartDate =
       values.bookingStartDate && values.bookingStartDate.date ? values.bookingStartDate.date : null;
@@ -521,13 +522,13 @@ class FieldDateAndTimeInput extends Component {
             />
           </div>
         </div>
-        { minBookingType && minBookingType === HOURLY_BOOKING &&
-        <div className={css.infoBlockMinBooking}>
-          <span className={css.infoTextMinBooking}>•</span>
-          <p className={css.infoTextMinBooking}>
-            <FormattedMessage id="FieldDateTimeInput.minBoookTextShow" values={{minBookText}}/>
-          </p>
-        </div>}
+        {/*{ minBookingType && minBookingType === HOURLY_BOOKING &&*/}
+        {/*<div className={css.infoBlockMinBooking}>*/}
+        {/*  <span className={css.infoTextMinBooking}>•</span>*/}
+        {/*  <p className={css.infoTextMinBooking}>*/}
+        {/*    <FormattedMessage id="FieldDateTimeInput.minBoookTextShow" values={{minBookText}}/>*/}
+        {/*  </p>*/}
+        {/*</div>}*/}
         <div className={css.formRow}>
           <div className={classNames(css.field, css.endDateHidden)}>
             <FieldDateInput

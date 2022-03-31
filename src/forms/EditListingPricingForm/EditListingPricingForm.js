@@ -221,36 +221,37 @@ export const EditListingPricingFormComponent = props => (
             disabled={inputsDisabled}
             currencyConfig={config.currencyConfig}
           />
-          <p className={css.labelMinBook}>
-            <FormattedMessage id="EditListingPricingForm.infoTextMinBook" />
-          </p>
-          <div className={css.blockMiningBooking}>
-            <FieldSelect
-              id="minBookingType"
-              name="minBookingType"
-              className={classNames(css.priceInput, css.minBookInput)}
-              // label={intl.formatMessage({ id: 'EditListingPricingForm.discountTypeMessage' })}
-              // defaultValue={config.custom.discountTypes[0].key}
-            >
-              <option value="" disabled> </option>
-              {config.custom.discountTypes.map(({ key, label}) => (
-                <option value={key} key={key}>{label}</option>
-              ))}
-            </FieldSelect>
 
-            <FieldTextInput
-              id="minBookingCount"
-              name="minBookingCount"
-              className={classNames(css.inputNumber, css.minBookInput)}
-              type='number'
-              // label={intl.formatMessage({ id: 'EditListingPricingForm.discountAmountMessage' })}
-              defaultValue={step}
-              min={step}
-              max={maxStep}
-              step={step}
-              parse={parsePercentage}
-            />
-          </div>
+          {/*<p className={css.labelMinBook}>*/}
+          {/*  <FormattedMessage id="EditListingPricingForm.infoTextMinBook" />*/}
+          {/*</p>*/}
+          {/*<div className={css.blockMiningBooking}>*/}
+          {/*  <FieldSelect*/}
+          {/*    id="minBookingType"*/}
+          {/*    name="minBookingType"*/}
+          {/*    className={classNames(css.priceInput, css.minBookInput)}*/}
+          {/*    // label={intl.formatMessage({ id: 'EditListingPricingForm.discountTypeMessage' })}*/}
+          {/*    // defaultValue={config.custom.discountTypes[0].key}*/}
+          {/*  >*/}
+          {/*    <option value="" disabled> </option>*/}
+          {/*    {config.custom.discountTypes.map(({ key, label}) => (*/}
+          {/*      <option value={key} key={key}>{label}</option>*/}
+          {/*    ))}*/}
+          {/*  </FieldSelect>*/}
+
+          {/*  <FieldTextInput*/}
+          {/*    id="minBookingCount"*/}
+          {/*    name="minBookingCount"*/}
+          {/*    className={classNames(css.inputNumber, css.minBookInput)}*/}
+          {/*    type='number'*/}
+          {/*    // label={intl.formatMessage({ id: 'EditListingPricingForm.discountAmountMessage' })}*/}
+          {/*    defaultValue={step}*/}
+          {/*    min={step}*/}
+          {/*    max={maxStep}*/}
+          {/*    step={step}*/}
+          {/*    parse={parsePercentage}*/}
+          {/*  />*/}
+          {/*</div>*/}
 
 
           {/* <h3>{intl.formatMessage({ id: 'EditListingPricingForm.discountHeader' })}</h3>

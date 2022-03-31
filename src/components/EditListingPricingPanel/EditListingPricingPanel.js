@@ -133,11 +133,11 @@ const { minBookingType, minBookingCount } = minBooking || {}
       fetchListingProgress={fetchListingProgress}
       onSubmit={values => {
         const { price, discount, minBookingType, minBookingCount } = values;
-        const minBooking = { minBookingType, minBookingCount }
+        // const minBooking = { minBookingType, minBookingCount }
         onSubmit({
           price,
           publicData: {
-            minBooking,
+            // minBooking,
             unitType: null, //remove unittype field from previous realisation
             // discount,
             ...managePrices(values)

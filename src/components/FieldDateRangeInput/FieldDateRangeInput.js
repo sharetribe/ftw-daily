@@ -94,7 +94,8 @@ class FieldDateRangeInputComponent extends Component {
     /* eslint-disable no-unused-vars */
 
     const textForMinBook = discountTypes.filter( el => el.key === minBookingType)[0] || ''
-    const minBookText = minBookingType && `${minBookingCount} ${textForMinBook?.label}`
+    // const minBookText = minBookingType && `${minBookingCount} ${textForMinBook?.label}`
+    const minBookText = null
 
     if (startDateLabel && !startDateId) {
       throw new Error('startDateId required when a startDateLabel is given');
@@ -177,13 +178,13 @@ class FieldDateRangeInputComponent extends Component {
           <div className={startDateBorderClasses} />
           <div className={endDateBorderClasses} />
         </div>
-        { minBookingType && minBookingType !== HOURLY_BOOKING &&
-        <div className={css.infoBlockMinBooking}>
-          <span className={css.infoTextMinBooking}>•</span>
-          <p className={css.infoTextMinBooking}>
-            <FormattedMessage id="FieldDateTimeInput.minBoookTextShow" values={{minBookText}}/>
-          </p>
-        </div>}
+        {/*{ minBookingType && minBookingType !== HOURLY_BOOKING &&*/}
+        {/*<div className={css.infoBlockMinBooking}>*/}
+        {/*  <span className={css.infoTextMinBooking}>•</span>*/}
+        {/*  <p className={css.infoTextMinBooking}>*/}
+        {/*    <FormattedMessage id="FieldDateTimeInput.minBoookTextShow" values={{minBookText}}/>*/}
+        {/*  </p>*/}
+        {/*</div>}*/}
         <ValidationError className={errorClasses} fieldMeta={meta} />
       </div>
     );
