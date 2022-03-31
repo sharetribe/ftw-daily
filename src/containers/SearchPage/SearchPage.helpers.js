@@ -234,7 +234,10 @@ export const createSearchResultSchema = (listings, address, intl, pub_category, 
       const uniqueCategory = ddd.join(', ');
       const eventsCat = cat.filter(e => e !== 'kitchen-space');
 
-      uniqueCategory === 'Kitchen Space' ? 
+      // console.log(cat, "!!!!!!!cat");
+      // console.log(uniqueCategory, "!!!!!!!!uniqueCategory");
+
+      !uniqueCategory  ? 
         schemaTitle = intl.formatMessage(
           { id: 'SearchPage.schemaTitle' },
           { searchAddress, siteTitle }
@@ -254,7 +257,7 @@ export const createSearchResultSchema = (listings, address, intl, pub_category, 
             schemaTitle = intl.formatMessage(
               { id: 'SearchPage.schemaTitlePhotographyFilm' },
               { searchAddress, siteTitle }
-            ) : filt.sort().join(',') === eventsCat.sort().join(',') && filt.includes('desk-space') ?
+            ) : filt.sort().join(',') === cat.sort().join(',') && filt.includes('desk-space') ?
               schemaTitle = intl.formatMessage(
                 { id: 'SearchPage.schemaTitleCoworking' },
                 { searchAddress, siteTitle }

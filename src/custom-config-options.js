@@ -232,7 +232,7 @@ export const musicAndArtsAmenitiesOptions = [
   {key: 'pa-speakers', label: 'PA Speakers'},
   {key: 'm-polyboards-and-stands', label: 'Polyboards and Stands'},
   {key: 'projector', label: 'Projector'},
-  {key: 'm-refreshments', label: 'ProRefreshmentsjector'},
+  {key: 'm-refreshments', label: 'Refreshments'},
   {key: 'm-seating-area', label: 'Seating area'},
   {key: 'cs-sound-engineer', label: 'Sound Engineer'},
   {key: 'm-storage-space', label: 'Storage Space'},
