@@ -170,7 +170,7 @@ SelectSingleFilterPopup.propTypes = {
       label: string.isRequired,
     })
   ).isRequired,
-  initialValues: object,
+  // initialValues: object,
   contentPlacementOffset: number,
 };
 

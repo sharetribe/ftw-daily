@@ -41,6 +41,27 @@
     padding-bottom: 0;
   }
 }
+.heroTitleBlock {
+  position: absolute;
+  top: 16%;
+  left: 24px;
+
+  @media (--viewportSmall) {
+    top: 15%;
+    left: 97px;
+    width: 100%;
+    max-width: 380px;
+  }
+
+  @media (--viewportMedium) { 
+    width: auto;
+    max-width: none;
+  }
+
+  @media (--viewportLarge) { 
+    top: 16%;
+  }
+}
 
 .heroImgContent {
   flex: 1;
@@ -121,57 +142,124 @@
 }
 
 .heroMainTitle {
+  color: var(--matterColor);
   @apply --marketplaceHeroTitleFontStyles;
   margin-top: 0;
-
-  @apply --SectionHero_animation;
+  font-family: var(--fontFamilySofiapro);
+  /* @apply --SectionHero_animation; */
   animation-delay: 0.5s;
+  max-width: 300px;
 
   @media (--viewportMedium) {
-    max-width: var(--SectionHero_desktopTitleMaxWidth);
+    color: #252525;
+    max-width: 437px;
   }
 }
 
 .heroSubTitle {
-  @apply --marketplaceBodyFontStyles;
-
+  color: var(--matterColor);
+  @apply --marketplaceTabNavFontStyles;
+  font-family: var(--fontFamilySofiapro);
   margin: 0 0 25px 0;
-
-  @apply --SectionHero_animation;
+  font-size: 16px;
+  font-weight: var(--fontWeightRegular);
+  /* @apply --SectionHero_animation; */
   animation-delay: 0.65s;
+  max-width: 300px;
 
   @media (--viewportMedium) {
-    max-width: var(--SectionHero_desktopSubtitleMaxWidth);
+    font-size: 24px;
+    color: #252525;
+    max-width: 437px;
     margin: 0 0 31px 0;
   }
 }
 
 .bold {
-  font-weight: var(--fontWeightSemiBold);
+  font-weight: var(--fontWeightBold);
+  @media (--viewportMedium) {
+    font-weight: var(--fontWeightSemiBold);
+  }
 }
 
-.heroButtonsContatiner {
+/* .heroButtonsContainer {
+  position: absolute;
+  bottom: 16px;
+  margin-top: 15px;
+  width: 100%;
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  padding: 0 24px;
+
+
+  @media (--viewportSmall) {
+    max-width: 400px;
+    top: 0;
+    left: 97px;
+    position: absolute;
+    justify-content: center;
+    padding: 0;
+  }
+} */
+
+.heroButtonsContainerDesktop {
+  display: none;
+  bottom: 16px;
+  margin-top: 15px;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 380px;
+  
+  @media (--viewportSmall) {
+    display: flex;
+  }
+}
+
+.heroButtonsContainerMobile {
+  position: absolute;
+  left: 0;
+  bottom: 15px;
+  /* bottom: 16px; */
+  bottom: 0;
+  margin-top: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  background: var(--matterColorLight);
+
+  @media (--viewportSmall) {
+    display: none;
+  }
 }
 
 .heroButtonPink {
-  @apply --SectionHero_animation;
+  /* @apply --SectionHero_animation; */
 
   background-color: var(--marketplaceColorDark);
   color: var(--matterColorLight);
-  padding: 1em 0.25em;
+  padding: 10px 0.25em;
   border-radius: 4px;
   text-align: center;
   opacity: 1;
-  margin-bottom: 5px;
+  height: 53px;
   display: block;
   margin-right: 10px;
   margin-bottom: 0;
-  max-width: 200px;
   width: 100%;
-
+  max-width: calc(50% - 5px);
   border: 1px solid var(--marketplaceColorDark);
+
+  @media (--viewportSmall) {
+    height: 66px;
+    max-width: 185px;
+    padding: 1em 0.25em;
+    width: 100%;
+    max-width: 185px;
+  }
 
   &:hover {
     background-color: var(--customBlue);
@@ -179,21 +267,29 @@
     text-decoration: none;
   }
 
-  animation-delay: 0.8s;
 }
 
 .heroButton {
-  @apply --SectionHero_animation;
+  /* @apply --SectionHero_animation; */
   display: block;
-  background-color: var(--matterColorLight);
+  background: rgba(255, 255, 255, 0.5);
   color: var(--marketplaceColorDark);
-  padding: 1em 0.25em;
+  padding: 10px 0.25em;
   border-radius: 4px;
   border: 1px solid var(--marketplaceColorDark);
   text-align: center;
-  opacity: 1;
-  max-width: 200px;
+  height: 53px;
+  
+
   width: 100%;
+  max-width: calc(50% - 5px);
+
+  @media (--viewportSmall) {
+    height: 66px;
+    width: 185px;
+    max-width: 185px;
+    padding: 1em 0.25em;
+  }
 
   &:hover {
     background-color: var(--customBlue);
@@ -201,8 +297,6 @@
     border-color: var(--customBlue);
     color: var(--matterColorLight);
   }
-
-  animation-delay: 0.8s;
 }
 
 .heroButtonPink span, .heroButton span {
@@ -211,3 +305,80 @@
     font-size: 20px;
   }
 }
+
+.card {
+  max-width: 100%;
+}
+
+.blockSlider {
+  @media (--viewportMedium) {
+    top: 150px;
+    left: 97px;
+    position: absolute;
+  }
+}
+
+.slider {
+  /*height: 640px;*/
+  height: 100%;
+
+  & img {
+    position: relative;
+    width: 100vw;
+    max-width: 100%;
+    height: calc(100vh - 145px);
+    object-fit: cover;
+
+    @media (--viewportSmall) {
+      min-height: auto;
+      height: calc(100vh - 368px);
+      min-height: 350px;
+    }
+    
+    @media screen and (min-width: 720px) and (min-width: 720px) {
+      height: calc(100vh - 780px);
+    }
+
+    @media (--viewportMedium) {
+      height: calc(100vh - 360px);
+    }
+  
+    @media (--viewportLarge) {
+      height: calc(100vh - 235px);
+    }
+
+    @media (--viewportMLarge) {
+      min-height: 480px;
+    }
+
+  
+    @media (--viewportLargeForHero) {
+      height: calc(100vh - 300px);
+      min-height: 450px;
+    }
+  }
+    /*:global(.slick-slide) {*/
+    /*  height: 640px;*/
+    /*  & img {*/
+    /*    height: 640px;*/
+    /*  }*/
+    /*}*/
+}
+
+.slider::after {
+  background: transparent;
+  background: -moz-linear-gradient(to bottom right, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.1) 75%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.8)), color-stop(100%, rgba(255, 255, 255, 0.1)));
+  background: -webkit-linear-gradient(to bottom right, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.1) 75%);
+  background: -o-linear-gradient(to bottom right, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.1) 75%);
+  background: -ms-linear-gradient(to bottom right, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.1) 75%);
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.1) 75%);
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  position: absolute;
+}
+

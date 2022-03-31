@@ -65,33 +65,23 @@
 /* ================ Hero title ================ */
 
 --marketplaceHeroTitleFontStyles: {
+  font-family: var(--fontFamilySofiapro);
   font-weight: var(--fontWeightBold);
-  font-size: 30px;
-  line-height: 30px;
-  letter-spacing: -1px;
+  font-size: 32px;
+  line-height: 1;
+  /* letter-spacing: -1px; */
   /* margin-top + n * line-height + margin-bottom => x * 6px */
   /* margin-top: 25px; */
   margin-bottom: 20px;
 
-@media (min-width: 492px) {
-  font-size: 50px;
-  line-height: 50px;
-}
 @media (--viewportMedium) {
-  font-size: 65px;
-  line-height: 65px;
-  letter-spacing: -1.5px;
+  font-family: var(--fontFamilySofiapro);
+  font-size: 48px;
+  line-height: 48px;
+  /* letter-spacing: -1.5px; */
   /* margin-top + n * line-height + margin-bottom => x * 8px */
   margin-top: 25px;
   margin-bottom: 31px;
-}
-@media (--viewportLarge) {
-  font-size: 45px;
-  line-height: 45px;
-}
-@media (min-width: 1390px) {
-  font-size: 65px;
-  line-height: 65px;
 }
 }
 

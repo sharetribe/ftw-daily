@@ -26,31 +26,56 @@
   display: flex;
   flex-direction: column;
   min-height: auto;
-  height: auto;
+  height: calc(100vh - 145px);
+
+  @media (--viewportSmall) {
+    /* height: 454px; */
+    height: calc(100vh - 368px);
+    min-height: 350px;
+  }
+
+  @media screen and (min-width: 720px) and (min-width: 720px) {
+    height: calc(100vh - 780px);
+  }
+
+  @media (--viewportMedium) {
+    height: calc(100vh - 360px);
+  }
 
   @media (--viewportLarge) {
-    /* min-height: calc(100vh - var(--topbarHeightDesktop)); */
+    height: calc(100vh - 235px);
+  }
+
+  @media (--viewportMLarge) {
+    min-height: 480px;
+  }
+
+  @media (--viewportLargeForHero) {
+    height: calc(100vh - 300px);
+    min-height: 450px;
   }
 }
 
 .hero {
   flex-grow: 1;
-  justify-content: flex-end;
-  padding-bottom: 12px;
-
-  @media (--viewportMedium) {
-    padding-bottom: 83px;
-  }
-
+  overflow: hidden;
+  /*justify-content: flex-end;*/
+  /*@media (--viewportMedium) {*/
+  /*  padding-bottom: 80px;*/
+  /*}*/
   @media (--viewportLarge) {
+    /*padding-bottom: 80px;*/
     justify-content: flex-start;
-    padding-top: 30px;
   }
 }
 
 .sections {
   margin: 0;
-  padding-top: 1px;
+  padding-top: 68px;
+
+  @media (--viewportSmall) {
+    padding-top: 1px;
+  }
 }
 
 .section {
@@ -81,20 +106,15 @@
   }
 
   @media (--viewportLarge) {
-    max-width: 1128px;
-    padding: 0 36px 0 36px;
+    max-width: 1000px;
+    padding: 0 40px 0 40px;
     margin: var(--LandingPage_sectionMarginTopLarge) auto 93px auto;
-  }
-
-  @media (--viewportXLarge) {
-    max-width: 1056px;
-    padding: 0;
   }
 }
 
 .sectionContentFirstChild {
   composes: sectionContent;
-  margin-top: 3vh;
+  margin-top: 36px;
 }
 
 .blueBg {

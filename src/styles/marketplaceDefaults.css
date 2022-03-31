@@ -3,7 +3,7 @@
 @import './propertySets.css';
 
 :root {
-  
+
   /* pink */
   --marketplaceColor: #ffabd7; ;
   /* yellow */
@@ -42,11 +42,13 @@
   --matterColorLightTransparent: rgba(255, 255, 255, 0.65);
 
   --customBlue: #aeecf4;
+  --customDarkBlue: #4BB8C5;
 
   /* ================ Font ================ */
   --fontFamily: 'poppins', Helvetica, Arial, sans-serif;
   --fontFamilySofiapro: 'sofiapro', Helvetica, Arial, sans-serif;
 
+  --fontWeightLow: 300;
   --fontWeightRegular: 400;
   --fontWeightMedium: 500;
   --fontWeightSemiBold: 600;
@@ -88,7 +90,7 @@
   /* ================ Border radius ================ */
 
   --borderRadius: 2px;
-  --borderRadiusMobileSearch: 3px;
+  --borderRadiusMobileSearch: 2px;
 
   /* ================ Transition styles ================ */
 
@@ -100,7 +102,7 @@
   --topbarHeight: 60px;
   --topbarHeightDesktop: 72px;
 
-  --TopbarMobileMenu_topMargin: 96px;
+  --TopbarMobileMenu_topMargin: 56px;
 
   --Topbar_logoHeight: 25px;
   --CheckoutPage_logoHeight: 25px;

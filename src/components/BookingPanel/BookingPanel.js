@@ -103,8 +103,8 @@ const BookingPanel = props => {
     publicData
   } = listing.attributes;
 
-  const { discount, minimumLength } = publicData || {};
-
+  const { discount, minimumLength, minBooking } = publicData || {};
+  const { minBookingCount, minBookingType } = minBooking || {}
   const timeZone = availabilityPlan && availabilityPlan.timezone;
   const isClosed = state && state === LISTING_STATE_CLOSED;
   const showClosedListingHelpText = listing.id && isClosed;
@@ -215,6 +215,8 @@ const BookingPanel = props => {
             fetchLineItemsError={fetchLineItemsError}
             bookingType={bookingType}
             seats={seats}
+            minBookingCount={minBookingCount}
+            minBookingType={minBookingType}
           />
         ) : null}
 
@@ -240,6 +242,8 @@ const BookingPanel = props => {
             lineItems={lineItems}
             fetchLineItemsInProgress={fetchLineItemsInProgress}
             fetchLineItemsError={fetchLineItemsError}
+            minBookingCount={minBookingCount}
+            minBookingType={minBookingType}
           />
         ) : null}
 

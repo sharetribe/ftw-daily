@@ -159,8 +159,8 @@ export const createSearchResultSchema = (listings, address, intl, pub_category, 
   // http://schema.org
   // We are using JSON-LD format
   const siteTitle = config.siteTitle;
-  const newAdress = address.substring(0, address.indexOf(','));
-  const searchAddress = newAdress || intl.formatMessage({ id: 'SearchPage.schemaMapSearch' });
+  const newAddress = address && address.substring(0, address.indexOf(','));
+  const searchAddress = newAddress || intl.formatMessage({ id: 'SearchPage.schemaMapSearch' });
   const schemaDescription = intl.formatMessage({ id: 'SearchPage.schemaDescription' });
   // const nail = [
   //   'nail-technician',
@@ -179,64 +179,110 @@ export const createSearchResultSchema = (listings, address, intl, pub_category, 
     { id: 'SearchPage.schemaTitle' },
     { searchAddress, siteTitle }
   );
+  let firstThreeCategoryTitle;
+  
   const arrayCategory = filterConfig.filter(e => e.queryParamNames[0] === 'pub_category');
   arrayCategory.forEach(e => {
     // let article = 'to rent';
-    const arrToHire = ['photography', 'art', 'music', 'desk-space', 'office-space', 'meeting-room-space'];
-    const arrForHire = ['tattoo-artist', 'piercing-artist', 'event-space', 'outdoor-site', 'shoot-location'];
+    const arrForHire = [
+      'tattoo-and-piercing', 
+      'dance-studio', 
+      'sports-hall', 
+      'outdoor-site', 
+      'meeting-room-space', 
+      'conference-room', 
+      'classroom',
+      'recording-studio', 
+      'gallery-space',
+      'rehearsal-space',
+      'music-venue',
+      'private-event-space',
+      'sports-venue',
+      'conference-exhibition', 
+      'outdoor-events', 
+      'private-dining',
+    ];
+
+    const arrToHire = ['activity-room', 'classroom', 'recording-studio', 'drama-studio', 'theatre-space'];
     const arrForHireSpace = ['hair-stylist', 'barber', 'makeup-artist', 'nail-technician', 'cosmetics', 'beauty-treatment-room'];
     const cat = e.config.catKeys.split(',');
 
+    if(!!filt && filt.sort().join(',') === cat.sort().join(',') && filt.includes('hair-stylist')) {
+      firstThreeCategoryTitle = intl.formatMessage(
+        { id: 'SearchPage.schemaTitleNairBeauty' },
+        { searchAddress, siteTitle }
+      )
+    } else if (!!filt && filt.sort().join(',') === cat.sort().join(',') && filt.includes('therapy-room')) {
+      firstThreeCategoryTitle = intl.formatMessage(
+        { id: 'SearchPage.schemaTitleWellness' },
+        { searchAddress, siteTitle }
+      )
+    } else if (!!filt && filt.sort().join(',') === cat.sort().join(',') && filt.includes('fitness')) {
+      firstThreeCategoryTitle = intl.formatMessage(
+        { id: 'SearchPage.schemaTitleFitness' },
+        { searchAddress, siteTitle }
+      )
+    }
+
     if (!!filt && filt.every((e) => cat.includes(e))) {
       const article = filt.some(e => arrToHire.includes(e)) ? 'to hire' :
-        filt.some(e => arrForHire.includes(e)) ? 'for hire' : filt.some(e => arrForHireSpace.includes(e)) ? 'space to rent' : 'to rent';
+        // filt.some(e => arrForHire.includes(e)) ? 'for hire' : filt.some(e => arrForHireSpace.includes(e)) ? 'space to rent' : 'to rent';
+        filt.some(e => arrForHire.includes(e)) ? 'for hire' : 'to rent';
 
-      const aaa = e.config.options.filter(el => filt.indexOf(el.key) != -1).map(e => e.label);
+      const aaa = e.config.options.filter(el => filt.indexOf(el.key) != -1).map(e => e.metaLabel);
       const ddd = aaa.includes('Kitchen Space') && aaa.length >= 2 ? aaa.filter(item => item !== 'Kitchen Space') : aaa;
       const uniqueCategory = ddd.join(', ');
       const eventsCat = cat.filter(e => e !== 'kitchen-space');
-      console.log(cat, filt)
-      console.log(filt.sort().join(','), 'ddd', cat.sort().join(','))
 
-      uniqueCategory === 'Kitchen Space' ? schemaTitle = intl.formatMessage(
-        { id: 'SearchPage.schemaTitle' },
-        { searchAddress, siteTitle }
-      ) : filt.sort().join(',') === cat.sort().join(',') && filt.includes('makeup-artist') ?
+      // console.log(cat, "!!!!!!!cat");
+      // console.log(uniqueCategory, "!!!!!!!!uniqueCategory");
+
+      !uniqueCategory  ? 
         schemaTitle = intl.formatMessage(
-          { id: 'SearchPage.schemaTitleNail' },
+          { id: 'SearchPage.schemaTitle' },
           { searchAddress, siteTitle }
-        ) : filt.sort().join(',') === cat.sort().join(',') && filt.includes('therapy-room') ?
+        ) : filt.sort().join(',') === cat.sort().join(',') && filt.includes('hair-stylist') ?
           schemaTitle = intl.formatMessage(
-            { id: 'SearchPage.schemaTitleFitness' },
+            { id: 'SearchPage.schemaTitleNairBeauty' },
             { searchAddress, siteTitle }
-          ) : filt.sort().join(','), 'ddd', cat.sort().join(',') && filt.includes('art') ?
-          schemaTitle = intl.formatMessage(
-            { id: 'SearchPage.schemaTitleStudios' },
-            { searchAddress, siteTitle }
-          ) : filt.sort().join(','), 'ddd', cat.sort().join(',') && filt.includes('office-space') ?
-          schemaTitle = intl.formatMessage(
-            { id: 'SearchPage.schemaTitleCoworking' },
-            { searchAddress, siteTitle }
-          ) : filt.sort().join(',') === eventsCat.sort().join(',') && filt.includes('event-space') ?
+          ) : filt.sort().join(',') === cat.sort().join(',') && filt.includes('therapy-room') ?
             schemaTitle = intl.formatMessage(
-              { id: 'SearchPage.schemaTitleEvents' },
+              { id: 'SearchPage.schemaTitleWellness' },
               { searchAddress, siteTitle }
-            ) : filt.sort().join(',') === cat.sort().join(',') && filt.includes('event-space') ?
+            ) : filt.sort().join(',') === cat.sort().join(',') && filt.includes('fitness') ?
+            schemaTitle = intl.formatMessage(
+              { id: 'SearchPage.schemaTitleFitness' },
+              { searchAddress, siteTitle }
+            ) : filt.sort().join(',') === cat.sort().join(',') && filt.includes('photography') ?
+            schemaTitle = intl.formatMessage(
+              { id: 'SearchPage.schemaTitlePhotographyFilm' },
+              { searchAddress, siteTitle }
+            ) : filt.sort().join(',') === cat.sort().join(',') && filt.includes('desk-space') ?
               schemaTitle = intl.formatMessage(
-                { id: 'SearchPage.schemaTitleEvents' },
+                { id: 'SearchPage.schemaTitleCoworking' },
                 { searchAddress, siteTitle }
-              ) : filt.sort().join(',') === cat.sort().join(',') && filt.includes('tattoo-artist') ?
+              ) : filt.sort().join(',') === cat.sort().join(',') && filt.includes('music-studio') ?
                 schemaTitle = intl.formatMessage(
-                  { id: 'SearchPage.schemaTitleTatoo' },
+                  { id: 'SearchPage.schemaTitleMusicArts' },
                   { searchAddress, siteTitle }
-                )
-                :
-                schemaTitle = intl.formatMessage(
-                  { id: 'SearchPage.schemaTitleNew' },
-                  { uniqueCategory, article, searchAddress, siteTitle }
-                );
-    }
+                ) : filt.sort().join(',') === cat.sort().join(',') && filt.includes('music-venue') ?
+                  schemaTitle = intl.formatMessage(
+                    { id: 'SearchPage.schemaTitleEventsVenues' },
+                    { searchAddress, siteTitle }
+                  ) : filt.sort().join(',') === cat.sort().join(',') && filt.includes('kitchen-space') ?
+                    schemaTitle = intl.formatMessage(
+                      { id: 'SearchPage.schemaTitleKitchensandPopUps' },
+                      { searchAddress, siteTitle }
+                    ) :
+                  schemaTitle = intl.formatMessage(
+                    { id: 'SearchPage.schemaTitleNew' },
+                    { uniqueCategory, article, searchAddress, siteTitle }
+                  );
+      }
+
   })
+
+
   // SearchPage.schemaTitleStudios
   const schemaListings = listings.map((l, i) => {
     const title = l.attributes.title;
@@ -259,7 +305,7 @@ export const createSearchResultSchema = (listings, address, intl, pub_category, 
     itemListElement: schemaListings,
   });
   return {
-    title: schemaTitle,
+    title: firstThreeCategoryTitle || schemaTitle,
     description: schemaDescription,
     schema: {
       '@context': 'http://schema.org',

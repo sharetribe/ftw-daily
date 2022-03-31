@@ -67,7 +67,7 @@ const EditListingFeaturesFormComponent = props => (
           <FormattedMessage id="EditListingFeaturesForm.showListingFailed" />
         </p>
       ) : null;
-      
+
       const amenities = config.custom.amenities || [];
       // const isCategory = [];
 
@@ -76,7 +76,7 @@ const EditListingFeaturesFormComponent = props => (
 
         // const arrayCategory = category.map(a => a.value);
 
-        const shouldDisplayTheseAmenties = catGroupForThisAmen.includes(category) || category.some(o => catGroupForThisAmen.includes(o)) || amen.config.catKeys === 'all';
+        const shouldDisplayTheseAmenties = catGroupForThisAmen.includes(category) || category?.some(o => catGroupForThisAmen.includes(o)) || amen.config.catKeys === 'all';
 
         return shouldDisplayTheseAmenties
           ? (
@@ -89,9 +89,9 @@ const EditListingFeaturesFormComponent = props => (
                 name={name}
                 options={amen.config.options}
               />
-              
+
             {/* </span> */}
-            
+
             </details>
           )
           : null
@@ -116,7 +116,7 @@ const EditListingFeaturesFormComponent = props => (
             label={miscLabel}
             placeholder={miscPlaceholder}
           />
-          
+
           <FieldTextInput
             id="equipmentProvided"
             name="equipmentProvided"

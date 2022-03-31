@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { func, object, string } from 'prop-types';
+import moment from 'moment-timezone/builds/moment-timezone-with-data-10-year-range.min';
 import classNames from 'classnames';
-import { intlShape } from '../../util/reactIntl';
+import {FormattedMessage, intlShape} from '../../util/reactIntl';
 import {
   getStartHours,
   getEndHours,
@@ -19,14 +20,18 @@ import {
   getMonthStartInTimeZone,
   nextMonthFn,
   prevMonthFn,
+  getSharpHoursCustom,
+  getEndHoursCustom,
+  findNextBoundaryCustom,
 } from '../../util/dates';
-import { propTypes } from '../../util/types';
+import {HOURLY_BOOKING, propTypes} from '../../util/types';
 import { bookingDateRequired } from '../../util/validators';
 import { FieldDateInput, FieldSelect } from '../../components';
 
 import NextMonthIcon from './NextMonthIcon';
 import PreviousMonthIcon from './PreviousMonthIcon';
 import css from './FieldDateAndTimeInput.module.css';
+import {discountTypes} from "../../marketplace-custom-config";
 
 const MAX_TIME_SLOTS_RANGE = 180;
 const TODAY = new Date();
@@ -35,7 +40,7 @@ const endOfRange = (date, timeZone) => {
   return resetToStartOfDay(date, timeZone, MAX_TIME_SLOTS_RANGE - 1);
 };
 
-const getAvailableStartTimes = (intl, timeZone, bookingStart, timeSlotsOnSelectedDate) => {
+const getAvailableStartTimes = (intl, timeZone, bookingStart, timeSlotsOnSelectedDate, minBookingType) => {
   if (timeSlotsOnSelectedDate.length === 0 || !timeSlotsOnSelectedDate[0] || !bookingStart) {
     return [];
   }
@@ -54,7 +59,17 @@ const getAvailableStartTimes = (intl, timeZone, bookingStart, timeSlotsOnSelecte
     // Otherwise use the end of the timeslot.
     const endLimit = dateIsAfter(endDate, nextDate) ? nextDate : endDate;
 
-    const hours = getStartHours(intl, timeZone, startLimit, endLimit);
+    const hours = getStartHours(intl, timeZone, startLimit, endLimit, minBookingType);
+
+    // if (hours && hours.length > 0) {
+    //   hours.unshift({
+    //     timestamp: +(moment(hours[0].timestamp).tz(timeZone).subtract(30, 'minutes').format('x')),
+    //     timeOfDay: moment(hours[0].timestamp).tz(timeZone).subtract(30, 'minutes').format('HH:mm'),
+    //   })
+    // }
+    // const modifiedAvailableStartTimes = [...hours.slice(0, (hours.length) - 1)];
+    // return availableHours.concat(modifiedAvailableStartTimes);
+
     return availableHours.concat(hours);
   }, []);
   return allHours;
@@ -65,7 +80,9 @@ const getAvailableEndTimes = (
   timeZone,
   bookingStartTime,
   bookingEndDate,
-  selectedTimeSlot
+  selectedTimeSlot,
+  minBookingType,
+  minBookingCount
 ) => {
   if (!selectedTimeSlot || !selectedTimeSlot.attributes || !bookingEndDate || !bookingStartTime) {
     return [];
@@ -98,7 +115,7 @@ const getAvailableEndTimes = (
       : dayAfterBookingEnd;
   }
 
-  return getEndHours(intl, timeZone, startLimit, endLimit);
+  return getEndHoursCustom(intl, timeZone, startLimit, endLimit, minBookingType, minBookingCount);
 };
 
 const getTimeSlots = (timeSlots, date, timeZone) => {
@@ -115,22 +132,25 @@ const getAllTimeValues = (
   timeSlots,
   startDate,
   selectedStartTime,
-  selectedEndDate
+  selectedEndDate,
+  minBookingType,
+  minBookingCount
 ) => {
   const startTimes = selectedStartTime
     ? []
     : getAvailableStartTimes(
-        intl,
-        timeZone,
-        startDate,
-        getTimeSlots(timeSlots, startDate, timeZone)
-      );
+      intl,
+      timeZone,
+      startDate,
+      getTimeSlots(timeSlots, startDate, timeZone),
+      minBookingType
+    );
 
   const startTime = selectedStartTime
     ? selectedStartTime
     : startTimes.length > 0 && startTimes[0] && startTimes[0].timestamp
-    ? startTimes[0].timestamp
-    : null;
+      ? startTimes[0].timestamp
+      : null;
 
   const startTimeAsDate = startTime ? timestampToDate(startTime) : null;
 
@@ -138,17 +158,26 @@ const getAllTimeValues = (
   // date would be the next day at 00:00 the day in the form is still correct.
   // Because we are only using the date and not the exact time we can remove the
   // 1ms.
+
   const endDate = selectedEndDate
     ? selectedEndDate
     : startTimeAsDate
-    ? new Date(findNextBoundary(timeZone, startTimeAsDate).getTime() - 1)
-    : null;
+      ? new Date(findNextBoundaryCustom(timeZone, startTimeAsDate, minBookingType).getTime() - 1)
+      : null;
 
   const selectedTimeSlot = timeSlots.find(t =>
     isInRange(startTimeAsDate, t.attributes.start, t.attributes.end)
   );
 
-  const endTimes = getAvailableEndTimes(intl, timeZone, startTime, endDate, selectedTimeSlot);
+  const endTimes = getAvailableEndTimes(
+    intl,
+    timeZone,
+    startTime,
+    endDate,
+    selectedTimeSlot,
+    minBookingType,
+    minBookingCount
+  );
   const endTime =
     endTimes.length > 0 && endTimes[0] && endTimes[0].timestamp ? endTimes[0].timestamp : null;
 
@@ -161,8 +190,8 @@ const getMonthlyTimeSlots = (monthlyTimeSlots, date, timeZone) => {
   return !monthlyTimeSlots || Object.keys(monthlyTimeSlots).length === 0
     ? []
     : monthlyTimeSlots[monthId] && monthlyTimeSlots[monthId].timeSlots
-    ? monthlyTimeSlots[monthId].timeSlots
-    : [];
+      ? monthlyTimeSlots[monthId].timeSlots
+      : [];
 };
 
 const Next = props => {
@@ -245,7 +274,7 @@ class FieldDateAndTimeInput extends Component {
   }
 
   onBookingStartDateChange = value => {
-    const { monthlyTimeSlots, timeZone, intl, form } = this.props;
+    const { monthlyTimeSlots, timeZone, intl, form, minBookingType, minBookingCount } = this.props;
     if (!value || !value.date) {
       form.batch(() => {
         form.change('bookingStartTime', null);
@@ -263,14 +292,16 @@ class FieldDateAndTimeInput extends Component {
     const startDate = timeOfDayFromLocalToTimeZone(value.date, timeZone);
     const timeSlots = getMonthlyTimeSlots(monthlyTimeSlots, this.state.currentMonth, timeZone);
     const timeSlotsOnSelectedDate = getTimeSlots(timeSlots, startDate, timeZone);
-    console.log(timeSlots, 'timeSlots111')
-    console.log(timeSlotsOnSelectedDate, 'timeSlotsOnSelectedDate')
 
     const { startTime, endDate, endTime } = getAllTimeValues(
       intl,
       timeZone,
       timeSlotsOnSelectedDate,
-      startDate
+      startDate,
+      null,
+      null,
+      minBookingType,
+      minBookingCount
     );
 
     form.batch(() => {
@@ -281,7 +312,7 @@ class FieldDateAndTimeInput extends Component {
   };
 
   onBookingStartTimeChange = value => {
-    const { monthlyTimeSlots, timeZone, intl, form, values } = this.props;
+    const { monthlyTimeSlots, timeZone, intl, form, values, minBookingType, minBookingCount } = this.props;
     const timeSlots = getMonthlyTimeSlots(monthlyTimeSlots, this.state.currentMonth, timeZone);
     const startDate = values.bookingStartDate.date;
     const timeSlotsOnSelectedDate = getTimeSlots(timeSlots, startDate, timeZone);
@@ -291,7 +322,10 @@ class FieldDateAndTimeInput extends Component {
       timeZone,
       timeSlotsOnSelectedDate,
       startDate,
-      value
+      value,
+      null,
+      minBookingType,
+      minBookingCount
     );
 
     form.batch(() => {
@@ -301,7 +335,7 @@ class FieldDateAndTimeInput extends Component {
   };
 
   onBookingEndDateChange = value => {
-    const { monthlyTimeSlots, timeZone, intl, form, values } = this.props;
+    const { monthlyTimeSlots, timeZone, intl, form, values, minBookingType, minBookingCount } = this.props;
     if (!value || !value.date) {
       form.change('bookingEndTime', null);
       return;
@@ -322,7 +356,9 @@ class FieldDateAndTimeInput extends Component {
       timeSlotsOnSelectedDate,
       startDate,
       bookingStartTime,
-      endDate
+      endDate,
+      minBookingType,
+      minBookingCount
     );
 
     form.change('bookingEndTime', endTime);
@@ -357,9 +393,15 @@ class FieldDateAndTimeInput extends Component {
       monthlyTimeSlots,
       timeZone,
       intl,
+      minBookingCount,
+      minBookingType
     } = this.props;
 
     const classes = classNames(rootClassName || css.root, className);
+
+    const textForMinBook = discountTypes.filter( el => el.key === minBookingType)[0] || ''
+    // const minBookText = minBookingType && `${minBookingCount} ${textForMinBook?.label}`
+    const minBookText = null
 
     const bookingStartDate =
       values.bookingStartDate && values.bookingStartDate.date ? values.bookingStartDate.date : null;
@@ -386,7 +428,8 @@ class FieldDateAndTimeInput extends Component {
       intl,
       timeZone,
       bookingStartDate,
-      timeSlotsOnSelectedDate
+      timeSlotsOnSelectedDate,
+      minBookingType
     );
 
     const firstAvailableStartTime =
@@ -400,7 +443,9 @@ class FieldDateAndTimeInput extends Component {
       timeSlotsOnSelectedDate,
       bookingStartDate,
       bookingStartTime || firstAvailableStartTime,
-      bookingEndDate || bookingStartDate
+      bookingEndDate || bookingStartDate,
+      minBookingType,
+      minBookingCount
     );
 
     const availableEndTimes = getAvailableEndTimes(
@@ -408,25 +453,35 @@ class FieldDateAndTimeInput extends Component {
       timeZone,
       bookingStartTime || startTime,
       bookingEndDate || endDate,
-      selectedTimeSlot
+      selectedTimeSlot,
+      minBookingType,
+      minBookingCount
     );
 
     const isDayBlocked = timeSlotsOnSelectedMonth
       ? day =>
-          !timeSlotsOnSelectedMonth.find(timeSlot =>
-            isDayMomentInsideRange(
-              day,
-              timeSlot.attributes.start,
-              timeSlot.attributes.end,
-              timeZone
-            )
+        !timeSlotsOnSelectedMonth.find(timeSlot =>
+          isDayMomentInsideRange(
+            day,
+            timeSlot.attributes.start,
+            timeSlot.attributes.end,
+            timeZone
           )
+        )
       : () => false;
+
+    // hours.unshift({
+    //   timestamp: +(moment(hours[0].timestamp).tz(timeZone).subtract(30, 'minutes').format('x')),
+    //   timeOfDay: moment(hours[0].timestamp).tz(timeZone).subtract(30, 'minutes').format('HH:mm'),
+    // })
+
+
+
 
     const placeholderTime = localizeAndFormatTime(
       intl,
       timeZone,
-      findNextBoundary(timeZone, TODAY)
+      findNextBoundaryCustom(timeZone, TODAY, minBookingType)
     );
 
     const startTimeLabel = intl.formatMessage({ id: 'FieldDateTimeInput.startTime' });
@@ -467,6 +522,13 @@ class FieldDateAndTimeInput extends Component {
             />
           </div>
         </div>
+        {/*{ minBookingType && minBookingType === HOURLY_BOOKING &&*/}
+        {/*<div className={css.infoBlockMinBooking}>*/}
+        {/*  <span className={css.infoTextMinBooking}>•</span>*/}
+        {/*  <p className={css.infoTextMinBooking}>*/}
+        {/*    <FormattedMessage id="FieldDateTimeInput.minBoookTextShow" values={{minBookText}}/>*/}
+        {/*  </p>*/}
+        {/*</div>}*/}
         <div className={css.formRow}>
           <div className={classNames(css.field, css.endDateHidden)}>
             <FieldDateInput
@@ -509,16 +571,14 @@ class FieldDateAndTimeInput extends Component {
               disabled={startTimeDisabled}
               onChange={this.onBookingStartTimeChange}
             >
-              {bookingStartDate ? (
-                availableStartTimes.map(p => {
-                  return(
-                  <option key={p.timeOfDay === '24:00' ? '00:00' : p.timeOfDay} value={p.timestamp}>
-                     {p.timeOfDay === '24:00' ? '00:00' : p.timeOfDay}
-                  </option>
-                )})
-              ) : (
-                <option>{placeholderTime}</option>
-              )}
+              {bookingStartDate
+                ? availableStartTimes.map(p => (
+                      <option key={p.timeOfDay === '24:00' ? '00:00' : p.timeOfDay === '24:30' ? '00:30' : p.timeOfDay} value={p.timestamp}>
+                        {p.timeOfDay === '24:00' ? '00:00' : p.timeOfDay === '24:30' ? '00:30' : p.timeOfDay}
+                      </option>
+                    ))
+                : <option>{placeholderTime}</option>
+              }
             </FieldSelect>
           </div>
 
@@ -533,16 +593,14 @@ class FieldDateAndTimeInput extends Component {
               label={endTimeLabel}
               disabled={endTimeDisabled}
             >
-              {bookingStartDate && (bookingStartTime || startTime) ? (
-                availableEndTimes.map(p => {
-                  return (
-                  <option key={p.timeOfDay === '00:00' ? '24:00' : p.timeOfDay} value={p.timestamp}>
-                    {p.timeOfDay === '00:00' ? '24:00' : p.timeOfDay}
-                  </option>
-                )})
-              ) : (
-                <option>{placeholderTime}</option>
-              )}
+              {bookingStartDate && (bookingStartTime || startTime)
+                ?  availableEndTimes.map(p => (
+                    <option key={p.timeOfDay === '24:30' ? '00:30' : p.timeOfDay} value={p.timestamp}>
+                      {p.timeOfDay === '24:30' ? '00:30' : p.timeOfDay}
+                    </option>
+                  ))
+                : <option>{placeholderTime}</option>
+              }
             </FieldSelect>
           </div>
         </div>

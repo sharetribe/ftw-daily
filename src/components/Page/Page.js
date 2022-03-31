@@ -156,7 +156,7 @@ class PageComponent extends Component {
       instagramPage, 
       linkedinPage, 
       youtubePage, 
-      tikTokPage,
+      // tikTokPage,
     ].filter(v => v != null);
 
     // Schema for search engines (helps them to understand what this page is about)
@@ -185,7 +185,6 @@ class PageComponent extends Component {
         url: "https://www.hotpatch.com",
         description: schemaDescription,
         name: schemaTitle,
-        sameAs: sameOrganizationAs,
         publisher: {
           '@id': `https://www.hotpatch.com#organization`,
         },

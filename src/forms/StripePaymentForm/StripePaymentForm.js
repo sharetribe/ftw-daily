@@ -49,6 +49,7 @@ const stripeErrorTranslation = (intl, stripeError) => {
     return intl.formatMessage({ id: 'StripePaymentForm.genericError' });
   }
 
+  console.log('type', type)
   const translationId =
     type === 'validation_error'
       ? `StripePaymentForm.stripe.validation_error.${code}`
@@ -380,6 +381,9 @@ class StripePaymentForm extends Component {
       { messageOptionalText: messageOptionalText }
     );
 
+    const firstWarning = intl.formatMessage({id: 'TransactionPage.warningNotification1'});
+    const secondWarning = intl.formatMessage({id: 'TransactionPage.warningNotification2'});
+
     // Asking billing address is recommended in PaymentIntent flow.
     // In CheckoutPage, we send name and email as billing details, but address only if it exists.
     const billingAddress = (
@@ -472,6 +476,12 @@ class StripePaymentForm extends Component {
             />
           </div>
         ) : null}
+
+        <div className={css.containerWarningMessage}>
+          <p>{firstWarning}</p>
+          <p>{secondWarning}</p>
+        </div>
+
         <div className={css.submitContainer}>
           {hasPaymentErrors ? (
             <span className={css.errorMessage}>{paymentErrorMessage}</span>

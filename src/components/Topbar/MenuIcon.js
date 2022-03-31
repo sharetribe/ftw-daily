@@ -11,8 +11,8 @@ const MenuIcon = props => {
   return (
     <svg
       className={classes}
-      width="18"
-      height="12"
+      width="24"
+      height="16"
       viewBox="0 0 18 12"
       xmlns="http://www.w3.org/2000/svg"
     >

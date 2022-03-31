@@ -1,6 +1,7 @@
 import jstz from 'jstimezonedetect';
 import moment from 'moment-timezone/builds/moment-timezone-with-data-10-year-range.min';
 import { getTimeZones, rawTimeZones, timeZonesNames } from "@vvo/tzdb";
+import {HOURLY_BOOKING} from "./types";
 
 /**
  * Input names for the DateRangePicker from react-dates.
@@ -205,7 +206,9 @@ const findBookingUnitBoundaries = params => {
     nextBoundaryFn,
     intl,
     timeZone,
+    minBook,
   } = params;
+
 
   if (moment(currentBoundary).isBetween(startMoment, endMoment, null, '[]')) {
     const timeOfDay = localizeAndFormatTime(intl, timeZone, currentBoundary);
@@ -217,16 +220,16 @@ const findBookingUnitBoundaries = params => {
       cumulatedResults.slice(-1)[0].timeOfDay === timeOfDay
         ? []
         : [
-            {
-              timestamp: currentBoundary.valueOf(),
-              timeOfDay,
-            },
-          ];
+          {
+            timestamp: currentBoundary.valueOf(),
+            timeOfDay,
+          },
+        ];
 
     return findBookingUnitBoundaries({
       ...params,
       cumulatedResults: [...cumulatedResults, ...newBoundary],
-      currentBoundary: moment(nextBoundaryFn(timeZone, currentBoundary)),
+      currentBoundary: moment(nextBoundaryFn(timeZone, currentBoundary, minBook)),
     });
   }
   return cumulatedResults;
@@ -244,9 +247,22 @@ export const findNextBoundary = (timeZone, currentMomentOrDate) =>
   moment(currentMomentOrDate)
     .clone()
     .tz(timeZone)
+    .add(30 - (moment(currentMomentOrDate).minute ()% 30), 'minutes')
+    .startOf('minute')
+    .toDate();
+
+export const findNextBoundaryCustom = (timeZone, currentMomentOrDate, minBooking) => {
+// if need change 1 hour to 0.5
+  const typeTime = minBooking === HOURLY_BOOKING ? 'minutes' : 'hour'
+  const countTime = minBooking === HOURLY_BOOKING ? 30 - (moment(currentMomentOrDate).minute() % 30) : 1
+
+  return moment(currentMomentOrDate)
+    .clone()
+    .tz(timeZone)
     .add(1, 'hour')
     .startOf('hour')
     .toDate();
+}
 
 /**
  * Find sharp hours inside given time window. Returned strings are localized to given time zone.
@@ -278,7 +294,7 @@ export const findNextBoundary = (timeZone, currentMomentOrDate) =>
  *
  * @returns {Array} an array of objects with keys timestamp and timeOfDay.
  */
-export const getSharpHours = (intl, timeZone, startTime, endTime) => {
+export const getSharpHours = (intl, timeZone, startTime, endTime, minBook) => {
   if (!moment.tz.zone(timeZone)) {
     throw new Error(
       'Time zones are not loaded into moment-timezone. "getSharpHours" function uses time zones.'
@@ -287,15 +303,38 @@ export const getSharpHours = (intl, timeZone, startTime, endTime) => {
 
   // Select a moment before startTime to find next possible sharp hour.
   // I.e. startTime might be a sharp hour.
-  const millisecondBeforeStartTime = new Date(startTime.getTime() - 1);
+  const millisecondBeforeStartTime = new Date(startTime.getTime() -1 );
   return findBookingUnitBoundaries({
-    currentBoundary: findNextBoundary(timeZone, millisecondBeforeStartTime),
+    currentBoundary: findNextBoundaryCustom(timeZone, millisecondBeforeStartTime, minBook),
     startMoment: moment(startTime),
     endMoment: moment(endTime),
-    nextBoundaryFn: findNextBoundary,
+    nextBoundaryFn: findNextBoundaryCustom,
     cumulatedResults: [],
     intl,
     timeZone,
+    minBook,
+  });
+};
+
+export const getSharpHoursCustom = (intl, timeZone, startTime, endTime, minBook) => {
+  if (!moment.tz.zone(timeZone)) {
+    throw new Error(
+      'Time zones are not loaded into moment-timezone. "getSharpHours" function uses time zones.'
+    );
+  }
+
+  // Select a moment before startTime to find next possible sharp hour.
+  // I.e. startTime might be a sharp hour.
+  const millisecondBeforeStartTime = new Date(startTime.getTime());
+  return findBookingUnitBoundaries({
+    currentBoundary: findNextBoundaryCustom(timeZone, millisecondBeforeStartTime, minBook),
+    startMoment: moment(startTime),
+    endMoment: moment(endTime),
+    nextBoundaryFn: findNextBoundaryCustom,
+    cumulatedResults: [],
+    intl,
+    timeZone,
+    minBook,
   });
 };
 
@@ -326,8 +365,8 @@ export const getSharpHours = (intl, timeZone, startTime, endTime) => {
  *
  * @returns {Array} an array of objects with keys timestamp and timeOfDay.
  */
-export const getStartHours = (intl, timeZone, startTime, endTime) => {
-  const hours = getSharpHours(intl, timeZone, startTime, endTime);
+export const getStartHours = (intl, timeZone, startTime, endTime, minBook) => {
+  const hours = getSharpHours(intl, timeZone, startTime, endTime, minBook);
   return hours.length < 2 ? hours : hours.slice(0, -1);
 };
 
@@ -358,9 +397,16 @@ export const getStartHours = (intl, timeZone, startTime, endTime) => {
  *
  * @returns {Array} an array of objects with keys timestamp and timeOfDay.
  */
-export const getEndHours = (intl, timeZone, startTime, endTime) => {
-  const hours = getSharpHours(intl, timeZone, startTime, endTime);
-  return hours.length < 2 ? [] : hours.slice(1);
+export const getEndHours = (intl, timeZone, startTime, endTime, minBook) => {
+  const hours = getSharpHours(intl, timeZone, startTime, endTime, minBook);
+  return hours.length < 1 ? [] : hours.slice(0);
+};
+
+export const getEndHoursCustom = (intl, timeZone, startTime, endTime, minBook, countBook) => {
+  const hours = getSharpHoursCustom(intl, timeZone, startTime, endTime, minBook);
+  const value = minBook === HOURLY_BOOKING ? ((countBook-0.5) / 0.5) : 0
+
+  return hours.length < 1 ? [] : hours.slice(value);
 };
 
 /**
@@ -559,8 +605,8 @@ export const isInRange = (date, start, end, scope, timeZone) => {
   const millisecondBeforeEndTime = new Date(end.getTime() - 1);
   return timeZone
     ? moment(date)
-        .tz(timeZone)
-        .isBetween(start, millisecondBeforeEndTime, scope, '[]')
+      .tz(timeZone)
+      .isBetween(start, millisecondBeforeEndTime, scope, '[]')
     : moment(date).isBetween(start, end, scope, '[)');
 };
 
@@ -733,12 +779,12 @@ export const getExclusiveEndDate = dateString => {
 export const getMonthStartInTimeZone = (date, timeZone) => {
   return timeZone
     ? moment(date)
-        .tz(timeZone)
-        .startOf('month')
-        .toDate()
+      .tz(timeZone)
+      .startOf('month')
+      .toDate()
     : moment(date)
-        .startOf('month')
-        .toDate();
+      .startOf('month')
+      .toDate();
 };
 
 /**
@@ -752,16 +798,16 @@ export const getMonthStartInTimeZone = (date, timeZone) => {
 export const prevMonthFn = (date, timeZone) => {
   return timeZone
     ? moment(date)
-        .clone()
-        .tz(timeZone)
-        .subtract(1, 'months')
-        .startOf('month')
-        .toDate()
+      .clone()
+      .tz(timeZone)
+      .subtract(1, 'months')
+      .startOf('month')
+      .toDate()
     : moment(date)
-        .clone()
-        .subtract(1, 'months')
-        .startOf('month')
-        .toDate();
+      .clone()
+      .subtract(1, 'months')
+      .startOf('month')
+      .toDate();
 };
 
 /**
@@ -775,16 +821,16 @@ export const prevMonthFn = (date, timeZone) => {
 export const nextMonthFn = (currentMoment, timeZone) => {
   return timeZone
     ? moment(currentMoment)
-        .clone()
-        .tz(timeZone)
-        .add(1, 'months')
-        .startOf('month')
-        .toDate()
+      .clone()
+      .tz(timeZone)
+      .add(1, 'months')
+      .startOf('month')
+      .toDate()
     : moment(currentMoment)
-        .clone()
-        .add(1, 'months')
-        .startOf('month')
-        .toDate();
+      .clone()
+      .add(1, 'months')
+      .startOf('month')
+      .toDate();
 };
 
 export const formatDateToText = (intl, date) => {
@@ -851,4 +897,3 @@ export const isDayMomentInsideRange = (dayMoment, start, end, timeZone) => {
 
   return false;
 };
-

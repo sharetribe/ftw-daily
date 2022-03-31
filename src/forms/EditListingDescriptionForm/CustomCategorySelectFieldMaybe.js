@@ -18,7 +18,6 @@ const CustomCategorySelectFieldMaybe = props => {
     })
   );
 
-
   const newArray = categories.map((item) => {
     if ('key' in item) {
       const mem = item['key'];
@@ -46,7 +45,7 @@ const CustomCategorySelectFieldMaybe = props => {
       )
   });
 
-  return categories ? 
+  return categories ?
   <FieldMultiSelect
     className={css.category}
     name={name}

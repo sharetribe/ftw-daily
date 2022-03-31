@@ -34,6 +34,7 @@ const defaultDirectives = {
     '*.tiles.mapbox.com',
     'api.mapbox.com',
     'events.mapbox.com',
+    'staging.hotpatch.com',
 
     // Google Analytics
     'www.google-analytics.com',
@@ -82,6 +83,7 @@ const defaultDirectives = {
     'tidiochat.com',
     'www.voucherify.io',
     'www.google.com.ua',
+    'staging.hotpatch.com',
   ],
   frameSrc: [
     self,
@@ -213,6 +215,7 @@ const defaultDirectives = {
     'tidiochat.com',
     'www.voucherify.io',
     'www.google.com.ua',
+    'staging.hotpatch.com',
   ],
   mediaSrc: [
     'widget-v4.tidiochat.com',

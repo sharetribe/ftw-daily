@@ -69,7 +69,7 @@ export const LandingPageComponent = props => {
           </div>
           <ul className={css.sections}>
             <li className={css.section}>
-              <div className={css.sectionContent}>
+              <div className={classNames(css.sectionContent, css.sectionContentFirstChild)}>
                 <SectionPatchCategories />
               </div>
             </li>

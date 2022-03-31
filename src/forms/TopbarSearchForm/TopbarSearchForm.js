@@ -93,7 +93,7 @@ class TopbarSearchFormComponent extends Component {
                   );
                 }}
               />
-              {this.renderCategoryDropDown()}
+              {/*{this.renderCategoryDropDown()}*/}
             </Form>
           );
         }}

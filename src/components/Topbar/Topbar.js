@@ -216,7 +216,7 @@ class TopbarComponent extends Component {
             name="LandingPage"
             title={intl.formatMessage({ id: 'Topbar.logoIcon' })}
           >
-            <Logo format="mobile" />
+            <Logo format="desktop" />
           </NamedLink>
           <Button
             rootClassName={css.searchMenu}
@@ -246,6 +246,7 @@ class TopbarComponent extends Component {
           isOpen={isMobileMenuOpen}
           onClose={this.handleMobileMenuClose}
           usePortal
+          closeButtonMessage
           onManageDisableScrolling={onManageDisableScrolling}
         >
           {authInProgress ? null : mobileMenu}
@@ -253,9 +254,11 @@ class TopbarComponent extends Component {
         <Modal
           id="TopbarMobileSearch"
           containerClassName={css.modalContainer}
+          rootClassName={css.closeIcon}
           isOpen={isMobileSearchOpen}
           onClose={this.handleMobileSearchClose}
           usePortal
+          closeButtonMessage
           onManageDisableScrolling={onManageDisableScrolling}
         >
           <div className={css.searchContainer}>
