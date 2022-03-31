@@ -256,7 +256,6 @@ class DateRangeInputComponent extends Component {
       seats
     );
 
-    // console.log('11111',startDate)
     const startDatePlaceholderTxt =
       startDatePlaceholderText ||
       intl.formatMessage({ id: 'FieldDateRangeInput.startDatePlaceholderText' });
@@ -284,12 +283,8 @@ class DateRangeInputComponent extends Component {
     }
 
     const minDaysBlock = minBookingType !== HOURLY_BOOKING && typeOfMinBooking(minBookingCount, minBookingType)
-    const minimumDays = (minDaysBlock || minimumNights) - 1;
-
-    // console.log('isDayBlocked', this.props)
-    // console.log('value.startDate', value?.startDate)
-    // console.log('isDayBlocked', isDayBlocked)
-    // console.log('isOutsideRange', isOutsideRange)
+    // const minimumDays = (minDaysBlock || minimumNights) - 1;
+    const minimumDays = minimumNights - 1;
 
     return (
       <div className={classes}>
