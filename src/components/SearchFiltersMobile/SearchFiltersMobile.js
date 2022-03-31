@@ -4,6 +4,8 @@ import classNames from 'classnames';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
 import { withRouter } from 'react-router-dom';
 
+import { parseSelectFilterOptions } from '../../util/search';
+
 import routeConfiguration from '../../routeConfiguration';
 import { createResourceLocatorString } from '../../util/routes';
 import { ModalInMobile, Button } from '../../components';
@@ -77,12 +79,13 @@ class SearchFiltersMobileComponent extends Component {
       selectedFiltersCount,
       intl,
       currentActiveCategory,
-      initialValues,
+      filterConfig,
+      initialValues
     } = this.props;
 
     const classes = classNames(rootClassName || css.root, className);
     const categoryChildren = children.filter(c => c.props.isCategory);
-    
+
     const nonCategoryChildren = children.filter(c => (!c.props.isCategory && !c.props.isCategoryAmenities));
 
     const resultsFound = (
@@ -100,6 +103,14 @@ class SearchFiltersMobileComponent extends Component {
 
     const filtersButtonClasses =
       selectedFiltersCount > 0 ? css.filtersButtonSelected : css.filtersButton;
+
+    // const generalAmenitiesOptions = filterConfig.find(item => item.id === "general_amenities").config.options
+    // const generalAmenitiesSelectedOptions = parseSelectFilterOptions(initialValues(["pub_amenities"]).pub_amenities)
+
+    // const generalAmenitiesFilterActive = generalAmenitiesOptions
+    //   && generalAmenitiesSelectedOptions
+    //   && generalAmenitiesOptions.some(item => item.key === generalAmenitiesSelectedOptions?.[0])
+
 
     return (
       <div className={classes}>
@@ -148,16 +159,15 @@ class SearchFiltersMobileComponent extends Component {
                     const categoryAmenities = children.filter(item => item.props.filterConfig.idCategory === category.props.filterConfig.id)
                     const categoryItemClasses = classNames(
                       css.categoryItem,
-                      {[css.categoryItemActive]: category.props.filterConfig.id === currentActiveCategory },
-                      {[css.categoryItemNotActive]: !!currentActiveCategory && category.props.filterConfig.id !== currentActiveCategory }
-                      )
+                      { [css.categoryItemActive]: category.props.filterConfig.id === currentActiveCategory },
+                      { [css.categoryItemNotActive]: !!currentActiveCategory && category.props.filterConfig.id !== currentActiveCategory },
+                      // { [css.generalAmenitiesFilterActive]: generalAmenitiesFilterActive }
+                    )
 
                     return (
                       <div key={`category-${i}`} className={categoryItemClasses}>
                         {categoryAmenities}
                         {category}
-                        {/* <div className={css.categoryItemAmenities}>
-                        </div> */}
                       </div>
                     )
                   })}

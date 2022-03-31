@@ -122,6 +122,7 @@ class SelectMultipleFilter extends Component {
       name,
       label,
       labelImg,
+      labelMobile,
       options,
       isCategory,
       isCategoryAmenities,
@@ -141,6 +142,8 @@ class SelectMultipleFilter extends Component {
       isAmenitiesFilterEnabled,
       setCurrentActiveCategory,
       currentActiveCategory,
+      isMobileLayout,
+      setSelectedCategoriesLength,
       ...rest
     } = this.props;
 
@@ -164,19 +167,23 @@ class SelectMultipleFilter extends Component {
       }
     }
 
-    const labelForPopup = hasInitialValues && !isCategory
+    const selectedItemsCounter = filterConfig.config.options.map(e => e.key).filter(v => selectedOptions.includes(v)).length || filterConfig.config.options.map(e => e.value).filter(v => selectedOptions.includes(v)).length
+
+    const labelText = isMobileLayout ? !!labelMobile ? labelMobile : label : label
+
+    const labelForPopup = hasInitialValues && !isCategory && !!selectedItemsCounter
       ? intl.formatMessage(
         { id: 'SelectMultipleFilter.labelSelected' },
-        { labelText: filterConfig.label, count: filterConfig.config.options.map(e => e.key).filter(v => selectedOptions.includes(v)).length || filterConfig.config.options.map(e => e.value).filter(v => selectedOptions.includes(v)).length }
+        { labelText: filterConfig.label, count: selectedItemsCounter }
       )
       : label;
 
-    const labelForPlain = hasInitialValues
+    const labelForPlain = hasInitialValues && !!selectedItemsCounter
       ? intl.formatMessage(
         { id: 'SelectMultipleFilterPlainForm.labelSelected' },
-        { labelText: filterConfig.label, count: filterConfig.config.options.map(e => e.key).filter(v => selectedOptions.includes(v)).length || filterConfig.config.options.map(e => e.value).filter(v => selectedOptions.includes(v)).length }
+        { labelText: (isMobileLayout && filterConfig.labelMobile) || filterConfig.label, count: selectedItemsCounter }
       )
-      : label;
+      : labelText;
 
     const filterConfigArr = {
       id: filterConfig.idCategory || filterConfig.id,
@@ -218,6 +225,7 @@ class SelectMultipleFilter extends Component {
         subCategoryImage={subCategoriesImages}
         onOpenCategoryFilter={onOpenCategoryFilter}
         isCategoryFilterEnabled={isCategoryFilterEnabled}
+        setSelectedCategoriesLength={setSelectedCategoriesLength}
         {...rest}
       >
         <GroupOfFieldCheckboxes
@@ -251,6 +259,10 @@ class SelectMultipleFilter extends Component {
         isCategoryFilterEnabled={isCategoryFilterEnabled}
         isAmenitiesFilterEnabled={isAmenitiesFilterEnabled}
         currentActiveCategory={currentActiveCategory}
+        filterConfig={filterConfig}
+        selectedItemsCounter={selectedItemsCounter}
+        isMobileLayout={isMobileLayout}
+        setSelectedCategoriesLength={setSelectedCategoriesLength}
         {...rest}
       >
         <GroupOfFieldCheckboxes

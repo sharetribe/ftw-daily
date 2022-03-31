@@ -34,12 +34,14 @@ class FilterPlainComponent extends Component {
   }
 
   handleClear() {
-    const { onSubmit, onClear } = this.props;
+    const { onSubmit, onClear, setSelectedCategoriesLength } = this.props;
+
 
     if (onClear) {
       onClear();
     }
 
+    setSelectedCategoriesLength(0) 
     onSubmit(null);
   }
 
@@ -74,18 +76,27 @@ class FilterPlainComponent extends Component {
       isCategoryFilterEnabled,
       isAmenitiesFilterEnabled,
       labelWithoutCounter,
-      currentActiveCategory
+      currentActiveCategory,
+      filterConfig,
+      selectedItemsCounter,
+      isMobileLayout,
+      setSelectedCategoriesLength
     } = this.props;
 
+    const isGeneralAmenities = filterConfig?.config?.isGeneralAmenities;
 
     const classes = classNames(
       rootClassName || css.root,
       className,
       { [css.rootCategory]: isCategory },
       { [css.categoryItemAmenities]: isCategoryAmenities },
+      { [css.generalAmenitiesItem]: isGeneralAmenities },
 
       { [css.filterAmenitiesSelected]: isSelected },
       { [css.filterAmenitiesNotSelected]: !isSelected && !!isAmenitiesFilterEnabled && isCategoryAmenities }
+
+      // { [css.filterAmenitiesSelected]: isSelected && !isGeneralAmenities },
+      // { [css.filterAmenitiesNotSelected]: !isSelected && !!isAmenitiesFilterEnabled && !isGeneralAmenities }
     );
 
     // const labelClass = isSelected ? css.filterLabelSelected : css.filterLabel;
@@ -94,6 +105,7 @@ class FilterPlainComponent extends Component {
     const labelClass = classNames(
       css.filterLabel,
       { [css.filterLabelSelected]: isSelected },
+      { [css.filterLabelOpened]: this.state.isOpen },
       { [css.filterLabelNotSelected]: !isSelected && !!isCategoryFilterEnabled && isCategory }
     )
 
@@ -129,8 +141,11 @@ class FilterPlainComponent extends Component {
 
     const labelButtonClasses = classNames(
       css.labelButton,
+      { [css.labelButtonActive]: this.state.isOpen },
       { [css.labelButtonWithImg]: isCategory }
     )
+
+    const amenitiesLabel = !!selectedItemsCounter ? `Patch Amenities • ${selectedItemsCounter}` : 'Patch Amenities'
 
     return (
       <div className={classes}>
@@ -146,7 +161,7 @@ class FilterPlainComponent extends Component {
 
           ) : (
             <button type="button" className={labelButtonClasses} onClick={this.toggleIsOpen}>
-              <span className={labelClass}>{newLabel}</span>
+              <span className={labelClass}>{isMobileLayout && isCategoryAmenities ? amenitiesLabel : newLabel}</span>
             </button>
           )}
 
@@ -185,6 +200,8 @@ class FilterPlainComponent extends Component {
             isSubCategoryOpen={this.state.isSubCategoryOpen}
             toggleIsSubCategoryOpen={this.toggleIsSubCategoryOpen}
             currentActiveCategory={currentActiveCategory}
+            selectedItemsCounter={selectedItemsCounter}
+            setSelectedCategoriesLength={setSelectedCategoriesLength}
           >
             {children}
           </FilterForm>

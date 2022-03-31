@@ -52,6 +52,7 @@ class MainPanel extends Component {
       isSecondaryFiltersOpen: false, 
       currentQueryParams: props.urlQueryParams,
       currentActiveCategory: null,
+      selectedCategoriesLength: null,
     };
 
     this.applyFilters = this.applyFilters.bind(this);
@@ -62,6 +63,7 @@ class MainPanel extends Component {
     this.getHandleChangedValueFn = this.getHandleChangedValueFn.bind(this);
 
     this.setCurrentActiveCategory = this.setCurrentActiveCategory.bind(this);
+    this.setSelectedCategoriesLength = this.setSelectedCategoriesLength.bind(this);
 
     // SortBy
     this.handleSortBy = this.handleSortBy.bind(this);
@@ -92,6 +94,9 @@ class MainPanel extends Component {
 
     // Reset routing params
     const queryParams = omit(urlQueryParams, filterQueryParamNames);
+    !!queryParams?.pub_pricePerDayFilter && delete queryParams.pub_pricePerDayFilter;
+    !!queryParams?.pub_pricePerWeekFilter && delete queryParams.pub_pricePerWeekFilter;
+    !!queryParams?.pub_pricePerMonthFilter && delete queryParams.pub_pricePerMonthFilter;
     history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, queryParams));
   }
 
@@ -120,7 +125,7 @@ class MainPanel extends Component {
   }
 
   getHandleChangedValueFn(useHistoryPush) {
-    const { urlQueryParams, history, sortConfig, filterConfig } = this.props;
+    const { urlQueryParams, history, sortConfig, filterConfig, isMobileLayout } = this.props;
 
     return (updatedURLParams, filterConfigId) => {
 
@@ -130,6 +135,9 @@ class MainPanel extends Component {
         // We should always trust urlQueryParams with those.
         const { address, bounds } = urlQueryParams;
         const mergedQueryParams = { ...urlQueryParams, ...prevState.currentQueryParams };
+        // delete mergedQueryParams.pub_category
+        // !!isMobileLayout && this.state.selectedCategoriesLength == 0 ? delete mergedQueryParams.pub_category : mergedQueryParams
+
         const { price } = updatedURLParams || {};
 
         let selectedPrice;
@@ -161,22 +169,20 @@ class MainPanel extends Component {
           { ...emptyPrices, ...(selectedPrice || {}) } :
           {};
 
-          // const dateMaybe = selectedDates || selectedDates === null ?
-          // { ...(selectedDates || {}) } :
-          // {};
-          // console.log(priceMaybe, dateMaybe)
+        // const dateMaybe = selectedDates || selectedDates === null ?
+        // { ...(selectedDates || {}) } :
+        // {};
 
-          
-          const arrayN = {
-            hair_and_beauty: filterConfig.find(i => i.id === 'hair_and_beauty').config.catKeys.split(','),
-            wellness: filterConfig.find(i => i.id === 'wellness').config.catKeys.split(','),
-            fitness: filterConfig.find(i => i.id === 'fitness').config.catKeys.split(','),
-            photography_and_film: filterConfig.find(i => i.id === 'photography_and_film').config.catKeys.split(','),
-            coworking: filterConfig.find(i => i.id === 'coworking').config.catKeys.split(','),
-            music_and_arts: filterConfig.find(i => i.id === 'music_and_arts').config.catKeys.split(','),
-            events_and_venues: filterConfig.find(i => i.id === 'events_and_venues').config.catKeys.split(','),
-            kitchensand_pop_ups: filterConfig.find(i => i.id === 'kitchensand_pop_ups').config.catKeys.split(','),
-          };
+        const arrayN = {
+          hair_and_beauty: filterConfig.find(i => i.id === 'hair_and_beauty').config.catKeys.split(','),
+          wellness: filterConfig.find(i => i.id === 'wellness').config.catKeys.split(','),
+          fitness: filterConfig.find(i => i.id === 'fitness').config.catKeys.split(','),
+          photography_and_film: filterConfig.find(i => i.id === 'photography_and_film').config.catKeys.split(','),
+          coworking: filterConfig.find(i => i.id === 'coworking').config.catKeys.split(','),
+          music_and_arts: filterConfig.find(i => i.id === 'music_and_arts').config.catKeys.split(','),
+          events_and_venues: filterConfig.find(i => i.id === 'events_and_venues').config.catKeys.split(','),
+          kitchensand_pop_ups: filterConfig.find(i => i.id === 'kitchensand_pop_ups').config.catKeys.split(','),
+        };
 
           const findValue = ( value ) => {
            
@@ -196,16 +202,14 @@ class MainPanel extends Component {
         // Since we have multiple filters with the same query param, 'pub_category'
         // we dont want to lose the prev ones, we want all of them
 
-        const isWindowDefined = typeof window !== 'undefined';
-        const isMobileLayout = isWindowDefined && window.innerWidth < 768;
-
         const pc = 'pub_category';
 
         const isCategoryCleared = updatedURLParams && pc in updatedURLParams && !updatedURLParams[pc];
         const selectedFilter = filterConfig.find(f => f.id === filterConfigId)
         const selectedFilterOptions = selectedFilter && selectedFilter.config.catKeys.split(',');
 
-        if (pc in updatedURLParams) {
+        // if (pc in updatedURLParams) {
+        if (pc in updatedURLParams && !isMobileLayout) {
           if (!isCategoryCleared && pc in mergedQueryParams) {
             const updatedURLParamsCutted = updatedURLParams[pc].includes('has_any:') ? updatedURLParams[pc].replace('has_any:', '') : updatedURLParams[pc];
             const mergedQueryParamsCutted = mergedQueryParams[pc].includes('has_any:') ? mergedQueryParams[pc].replace('has_any:', '') : mergedQueryParams[pc];
@@ -243,14 +247,16 @@ class MainPanel extends Component {
         }
       
         return {
-          currentQueryParams: {...updatedURLParams, ...priceMaybe, address, bounds },
+          currentQueryParams: { ...mergedQueryParams, ...updatedURLParams, ...priceMaybe, address, bounds },
         };
       };
 
       const callback = () => {
         if (useHistoryPush) {
           const searchParams = this.state.currentQueryParams;
+          const {isMobileLayout} = this.props
           const search = cleanSearchFromConflictingParams(searchParams, sortConfig, filterConfig);
+          !isMobileLayout && history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, !!this.state.selectedCategoriesLength && !!search?.pub_category ? search : delete search.pub_category));
           history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, search));
         }
       };
@@ -277,6 +283,10 @@ class MainPanel extends Component {
     }
   }
 
+  setSelectedCategoriesLength(categoriesLength) {
+    this.setState({ selectedCategoriesLength: categoriesLength });
+  }
+
   render() {
     const {
       className,
@@ -301,7 +311,8 @@ class MainPanel extends Component {
       subCategoriesImages,
       onOpenCategoryFilter,
       onCloseCategoryFilter,
-      isCategoryFilterOpen
+      isCategoryFilterOpen,
+      isMobileLayout
     } = this.props;
 
     const primaryFilters = filterConfig.filter(f => f.group === 'primary');
@@ -363,8 +374,6 @@ class MainPanel extends Component {
     const isCategoryFilterEnabled = searchParamsForPagination && !!searchParamsForPagination.pub_category;
     const isAmenitiesFilterEnabled = searchParamsForPagination && !!searchParamsForPagination.pub_amenities;
 
-    // console.log(filterConfig);
-    
     return (
       <div className={classes}>
         <h1 className={css.h1}>{h1}</h1>
@@ -386,6 +395,8 @@ class MainPanel extends Component {
           mainCategoriesImages={mainCategoriesImages}
           subCategoriesImages={subCategoriesImages}
           currentActiveCategory={this.state.currentActiveCategory}
+          initialValues={this.initialValues}
+          filterConfig={filterConfig}
         >
           {filterConfig.map(config => {
             return (
@@ -407,6 +418,7 @@ class MainPanel extends Component {
                 isCategoryFilterEnabled={isCategoryFilterEnabled}
                 isAmenitiesFilterEnabled={isAmenitiesFilterEnabled}
                 currentActiveCategory={this.state.currentActiveCategory}
+                setSelectedCategoriesLength={this.setSelectedCategoriesLength}
               />
             );
           })}
@@ -424,6 +436,7 @@ class MainPanel extends Component {
           onOpenCategoryFilter={onOpenCategoryFilter}
           onCloseCategoryFilter={onCloseCategoryFilter}
           isCategoryFilterEnabled={isCategoryFilterEnabled}
+          // setSelectedCategoriesLength={this.setSelectedCategoriesLength}
           {...propsForSecondaryFiltersToggle}
         >
           {primaryFilters.map(config => {
@@ -442,6 +455,7 @@ class MainPanel extends Component {
                 subCategoriesImages={subCategoriesImages}
                 onOpenCategoryFilter={onOpenCategoryFilter}
                 isCategoryFilterEnabled={isCategoryFilterEnabled}
+                setSelectedCategoriesLength={this.setSelectedCategoriesLength}
               />
             );
           })}
@@ -466,6 +480,7 @@ class MainPanel extends Component {
                     initialValues={this.initialValues}
                     getHandleChangedValueFn={this.getHandleChangedValueFn}
                     showAsPopup={false}
+                    isMobileLayout={isMobileLayout}
                   />
                 );
               })}

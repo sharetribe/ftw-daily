@@ -41,8 +41,9 @@ const SearchFiltersPrimaryComponent = props => {
       }}
     >
       <FormattedMessage
-        id="SearchFiltersPrimary.moreFiltersButton"
-        values={{ count: selectedSecondaryFiltersCount }}
+        id="SearchFiltersPrimary.moreFiltersButtonWithOutCounter"
+        // id="SearchFiltersPrimary.moreFiltersButton"
+        // values={{ count: selectedSecondaryFiltersCount }}
       />
     </button>
   ) : null;

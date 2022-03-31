@@ -60,12 +60,12 @@ export class SearchPageComponent extends Component {
   onMapMoveEnd(viewportBoundsChanged, data) {
     const { viewportBounds, viewportCenter } = data;
 
-    const boundsValid = viewportBounds.ne.lat !== viewportBounds.sw.lat && 
-                        viewportBounds.ne.lng !== viewportBounds.sw.lng;
+    const boundsValid = viewportBounds.ne.lat !== viewportBounds.sw.lat &&
+      viewportBounds.ne.lng !== viewportBounds.sw.lng;
 
     const priceFilterMaybe = search => {
       const activePriceFilter = currentSearchFilter(search);
-      return activePriceFilter ? {[activePriceFilter]: search[activePriceFilter]} : {};
+      return activePriceFilter ? { [activePriceFilter]: search[activePriceFilter] } : {};
     }
 
     const routes = routeConfiguration();
@@ -111,7 +111,7 @@ export class SearchPageComponent extends Component {
   onOpenMobileModal() {
     this.setState({ isMobileModalOpen: true });
   }
-  
+
   // Invoked when a modal is closed from a child component,
   // for example when a filter modal is opened in mobile view
   onCloseMobileModal() {
@@ -152,6 +152,8 @@ export class SearchPageComponent extends Component {
       latlng: ['origin'],
       latlngBounds: ['bounds'],
     });
+
+
     const pub_category = this.props.searchParams.pub_category;
     // urlQueryParams doesn't contain page specific url params
     // like mapSearch, page or origin (origin depends on config.sortSearchByDistance)
@@ -164,7 +166,7 @@ export class SearchPageComponent extends Component {
     const searchParamsAreInSync = urlQueryString === paramsQueryString;
 
     const validQueryParams = validURLParamsForExtendedData(searchInURL, filterConfig);
-    
+
     const isWindowDefined = typeof window !== 'undefined';
     const isMobileLayout = isWindowDefined && window.innerWidth < MODAL_BREAKPOINT;
     const shouldShowSearchMap =
@@ -178,6 +180,8 @@ export class SearchPageComponent extends Component {
     const { address, bounds, origin } = searchInURL || {};
     const { title, description, schema } = createSearchResultSchema(listings, address, intl, pub_category, filterConfig);
 
+
+
     const h1 = title.replace(`- ${config.siteTitle}`, "");
     // Set topbar class based on if a modal is open in
     // a child component
@@ -186,7 +190,6 @@ export class SearchPageComponent extends Component {
       : css.topbar;
     // N.B. openMobileMap button is sticky.
     // For some reason, stickyness doesn't work on Safari, if the element is <button>
-
     return (
       <Page
         scrollingDisabled={scrollingDisabled}
@@ -221,6 +224,7 @@ export class SearchPageComponent extends Component {
             isCategoryFilterOpen={this.state.isCategoryFilterOpen}
             onOpenCategoryFilter={this.onOpenCategoryFilter}
             onCloseCategoryFilter={this.onCloseCategoryFilter}
+            isMobileLayout={isMobileLayout}
           />
 
           <ModalInMobile

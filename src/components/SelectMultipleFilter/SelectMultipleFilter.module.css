@@ -79,7 +79,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
-  max-width: 275px;
+  max-width: 295px;
   margin: 0 auto;
 
   @media (--viewportMedium) {

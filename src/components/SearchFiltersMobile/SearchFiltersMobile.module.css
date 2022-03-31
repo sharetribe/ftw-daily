@@ -90,8 +90,9 @@
 }
 
 .modalHeadingWrapper {
-  padding-bottom: 31px;
-  /* border-bottom: 1px solid var(--matterColorNegative); */
+  padding-bottom: 30px;
+  border-bottom: 1px solid var(--matterColorNegative);
+  margin-bottom: 30px;
 }
 
 .modalHeading {
@@ -126,6 +127,20 @@
    * under the mobile safari bottom bar or the "Show results"
    * button bar */
   padding-bottom: 180px;
+  display: flex;
+  flex-direction: column;
+
+  & .categoryItemsHolder {
+    order: 1;
+  }
+
+  & [class*="FilterPlain_generalAmenitiesItem"] {
+    order: 2;
+  }
+
+  & > div {
+    order: 3;
+  }
 }
 
 .filtersWrapperTitle {
@@ -187,4 +202,18 @@
 
 .categoryItemNotActive {
   display: none;
+}
+
+
+.generalAmenitiesFilterActive {
+
+  & [class*="filterAmenitiesNotSelected"] {
+    opacity: 1;
+    cursor: default;
+
+    & > div,
+    & > div button {
+      pointer-events: all;
+    }
+  }
 }

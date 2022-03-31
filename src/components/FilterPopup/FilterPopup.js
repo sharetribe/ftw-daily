@@ -28,16 +28,22 @@ class FilterPopup extends Component {
   }
 
   handleSubmit(values) {
-    const { onSubmit } = this.props;
+    const { onSubmit, setSelectedCategoriesLength } = this.props;
     this.setState({ isOpen: false });
     this.props.isCategory && this.props.onOpenCategoryFilter();
+
+    const valuesLength = Object.values(values)?.[0]?.length
+    !!setSelectedCategoriesLength && setSelectedCategoriesLength(valuesLength)
+
     onSubmit(values);
   }
 
   handleClear() {
-    const { onSubmit, onClear } = this.props;
+    const { onSubmit, onClear, setSelectedCategoriesLength } = this.props;
     this.setState({ isOpen: false });
     this.props.isCategory && this.props.onOpenCategoryFilter();
+
+    !!setSelectedCategoriesLength && setSelectedCategoriesLength(0)
 
     if (onClear) {
       onClear();
@@ -117,7 +123,7 @@ class FilterPopup extends Component {
       contentPlacementOffset,
       isCategory,
       mainCategoriesImages,
-      isCategoryFilterEnabled
+      isCategoryFilterEnabled,
     } = this.props;
 
   

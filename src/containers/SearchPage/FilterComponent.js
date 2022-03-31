@@ -27,9 +27,11 @@ const FilterComponent = props => {
     isCategoryAmenities,
     setCurrentActiveCategory,
     currentActiveCategory,
+    isMobileLayout,
+    setSelectedCategoriesLength,
     ...rest
   } = props;
-  const { id, type, queryParamNames, label, labelImg, config } = filterConfig;
+  const { id, type, queryParamNames, label, labelImg, labelMobile, config } = filterConfig;
   const { liveEdit, showAsPopup } = rest;
 
   const useHistoryPush = liveEdit || showAsPopup;
@@ -57,6 +59,7 @@ const FilterComponent = props => {
           filterId={id}
           filterConfigId={id}
           label={label}
+          labelMobile={labelMobile}
           labelImg={labelImg}
           filterConfig={filterConfig}
           name={name}
@@ -71,6 +74,8 @@ const FilterComponent = props => {
           setCurrentActiveCategory={setCurrentActiveCategory}
           isCategoryAmenities={isCategoryAmenities}
           currentActiveCategory={currentActiveCategory}
+          isMobileLayout={isMobileLayout}
+          setSelectedCategoriesLength={setSelectedCategoriesLength}
           {...config}
           {...rest}
         />
