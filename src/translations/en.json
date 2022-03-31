@@ -908,7 +908,7 @@
   "SearchMapPriceLabel.pricePerMonth": "m",
   "SearchPage.schemaDescription": "Showing search results",
   "SearchPage.schemaMapSearch": "United Kingdom",
-  "SearchPage.schemaTitle": "Rent Hair & Beauty, Wellness, Fitness, Photography, Film, Coworking, Music, Arts, Events, Venues, Kitchens & Pop-up Space in {searchAddress} - {siteTitle}",
+  "SearchPage.schemaTitle": "Rent Hair & Beauty, Wellness, Fitness, Photography, Film, Coworking, Office, Music, Arts, Events, Venues, Kitchens & Pop-up Space in {searchAddress} - {siteTitle}",
   "SearchPage.schemaTitleNew": "{uniqueCategory} {article} in {searchAddress} - {siteTitle}",
   "SearchPage.schemaTitleNairBeauty": "Salon, Barber, Beauty, Aesthetics, Tattoo & Piercing Space to rent in {searchAddress} - {siteTitle}",
   "SearchPage.schemaTitleWellness": "Therapy, Massage & Clinical Room to rent in {searchAddress} - {siteTitle}",
