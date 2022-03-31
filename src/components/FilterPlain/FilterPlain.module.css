@@ -10,8 +10,9 @@
 .rootCategory {
   padding: 0;
   border-bottom: none;
+  position: static;
 
-  & > .filterLabel {
+  &>.filterLabel {
     margin: 0;
     padding: 0;
   }
@@ -20,6 +21,8 @@
 .filterLabel,
 .filterLabelSelected {
   @apply --marketplaceH3FontStyles;
+  font-size: 16px;
+  line-height: 1;
 
   /* Baseline adjustment for label text */
   margin-top: 0;
@@ -31,12 +34,14 @@
   color: var(--matterColorDark);
 }
 
+.filterAmenitiesSelected + div, 
 .filterLabelSelected {
   color: var(--marketplaceColor);
-  padding: 0;
-  margin: 0;
+  /* padding: 0;
+  margin: 0; */
 }
 
+.filterAmenitiesNotSelected + div, 
 .filterLabelNotSelected {
   opacity: 0.5;
   cursor: not-allowed;
@@ -45,6 +50,8 @@
     pointer-events: none;
   }
 }
+
+
 
 .labelButton {
   /* Override button styles */
@@ -60,8 +67,18 @@
 
   & img {
     width: 100%;
-    height: 218px;
+    height: 96px;
     object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    @media (--viewportSmall) {
+      height: 218px;
+    }
+
+    @media (--viewportMedium) {
+      border-radius: 0;
+    }
   }
 
   & span {
@@ -96,8 +113,9 @@
 }
 
 .clearCategoryButtonMobile {
-  position: absolute;
+  /* position: absolute; */
   right: 0;
+  top: 58px;
 }
 
 .plain {
@@ -116,3 +134,45 @@
 .categorypPlain {
   display: none;
 }
+
+
+
+.categoryItemAmenities {
+  padding: 10px 0 0px;
+  margin-bottom: 20px;
+  letter-spacing: 0;
+
+  & .clearButton {
+    margin: 0;
+  }
+
+  & .filterLabel {
+    font-size: 16px;
+    line-height: 1;
+    padding: 0;
+    font-weight: var(--fontWeightRegular);
+    color: var(--matterColorDarkCustom);
+    margin-bottom: 16px;
+  }
+
+  & fieldset {
+    padding-left: 0;
+  }
+
+  & .labelButton:after {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 8px;
+    background: url("data:image/svg+xml,%3Csvg width='18' height='10' viewBox='0 0 18 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L9 9L17 1' stroke='%23ffabd7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A") no-repeat center;
+    background-size: cover;
+    margin-left: 8px;
+  }
+
+  & ul li label span {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--matterColorDarkCustom);
+  }
+}
+

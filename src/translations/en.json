@@ -414,6 +414,7 @@
   "FilterForm.clear": "Clear All",
   "FilterForm.submit": "Apply",
   "FilterForm.patchCategory": "Patch Category: ",
+  "FilterForm.patchCategoryMobile": "Patch Category",
   "FilterForm.subcategory": "Subcategory",
   "FilterForm.reset": "Reset",
   "FilterPlain.clear": "Clear",

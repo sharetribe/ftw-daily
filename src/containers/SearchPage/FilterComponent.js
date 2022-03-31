@@ -22,14 +22,15 @@ const FilterComponent = props => {
     subCategoriesImages,
     onOpenCategoryFilter,
     isCategoryFilterEnabled,
+    isAmenitiesFilterEnabled,
     isCategory,
+    isCategoryAmenities,
     setCurrentActiveCategory,
+    currentActiveCategory,
     ...rest
   } = props;
   const { id, type, queryParamNames, label, labelImg, config } = filterConfig;
   const { liveEdit, showAsPopup } = rest;
-
-
 
   const useHistoryPush = liveEdit || showAsPopup;
   const prefix = idPrefix || 'SearchPage';
@@ -66,7 +67,10 @@ const FilterComponent = props => {
           subCategoriesImages={subCategoriesImages}
           onOpenCategoryFilter={onOpenCategoryFilter}
           isCategoryFilterEnabled={isCategoryFilterEnabled}
+          isAmenitiesFilterEnabled={isAmenitiesFilterEnabled}
           setCurrentActiveCategory={setCurrentActiveCategory}
+          isCategoryAmenities={isCategoryAmenities}
+          currentActiveCategory={currentActiveCategory}
           {...config}
           {...rest}
         />

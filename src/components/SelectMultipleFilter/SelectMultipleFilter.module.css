@@ -91,10 +91,11 @@
   & li {
     width: 122px;
     padding: 0; 
-    margin-bottom: 56px;
+    margin-bottom: 17px;
     
     @media (--viewportMedium) {
       margin-right: 36px;
+      margin-bottom: 56px;
     }
 
     &:nth-child(4) {

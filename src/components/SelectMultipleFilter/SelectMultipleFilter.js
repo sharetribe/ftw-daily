@@ -18,7 +18,7 @@ const GroupOfFieldCheckboxes = props => {
     name,
     options,
     isCategory,
-    subCategoryImage
+    subCategoryImage,
   } = props;
 
   //NOTE v2s1 filterupdate -- customizations removed in v5 update
@@ -31,7 +31,6 @@ const GroupOfFieldCheckboxes = props => {
   //     </li>
   //   );
   // };
-
 
   return (
     <fieldset className={className}>
@@ -125,6 +124,7 @@ class SelectMultipleFilter extends Component {
       labelImg,
       options,
       isCategory,
+      isCategoryAmenities,
       catKeys,
       initialValues,
       contentPlacementOffset,
@@ -138,7 +138,9 @@ class SelectMultipleFilter extends Component {
       subCategoriesImages,
       onOpenCategoryFilter,
       isCategoryFilterEnabled,
+      isAmenitiesFilterEnabled,
       setCurrentActiveCategory,
+      currentActiveCategory,
       ...rest
     } = this.props;
 
@@ -164,17 +166,24 @@ class SelectMultipleFilter extends Component {
 
     const labelForPopup = hasInitialValues && !isCategory
       ? intl.formatMessage(
-          { id: 'SelectMultipleFilter.labelSelected' },
-          { labelText: filterConfig.label, count: filterConfig.config.options.map(e => e.key).filter(v => selectedOptions.includes(v)).length || filterConfig.config.options.map(e => e.value).filter(v => selectedOptions.includes(v)).length }
-        )
+        { id: 'SelectMultipleFilter.labelSelected' },
+        { labelText: filterConfig.label, count: filterConfig.config.options.map(e => e.key).filter(v => selectedOptions.includes(v)).length || filterConfig.config.options.map(e => e.value).filter(v => selectedOptions.includes(v)).length }
+      )
       : label;
 
     const labelForPlain = hasInitialValues
       ? intl.formatMessage(
-          { id: 'SelectMultipleFilterPlainForm.labelSelected' },
-          { labelText: filterConfig.label, count: filterConfig.config.options.map(e => e.key).filter(v => selectedOptions.includes(v)).length || filterConfig.config.options.map(e => e.value).filter(v => selectedOptions.includes(v)).length }
-        )
+        { id: 'SelectMultipleFilterPlainForm.labelSelected' },
+        { labelText: filterConfig.label, count: filterConfig.config.options.map(e => e.key).filter(v => selectedOptions.includes(v)).length || filterConfig.config.options.map(e => e.value).filter(v => selectedOptions.includes(v)).length }
+      )
       : label;
+
+    const filterConfigArr = {
+      id: filterConfig.idCategory || filterConfig.id,
+      options: filterConfig.config.options
+    }
+
+    const selectedValuePresent = filterConfigArr.options.some(item => item.key === filterConfig.config.options.map(e => e.key).filter(v => selectedOptions.includes(v))[0])
 
     const contentStyle = this.positionStyleForContent();
 
@@ -225,7 +234,8 @@ class SelectMultipleFilter extends Component {
         className={className}
         rootClassName={rootClassName}
         label={labelForPlain}
-        isSelected={hasInitialValues}
+        labelWithoutCounter={label}
+        isSelected={selectedValuePresent}
         id={`${id}.plain`}
         filterId={filterId}
         liveEdit
@@ -233,15 +243,18 @@ class SelectMultipleFilter extends Component {
         onSubmit={handleSubmit}
         initialValues={namedInitialValues}
         isCategory={isCategory}
+        isCategoryAmenities={isCategoryAmenities}
         mainCategoriesImages={mainCategoriesImages}
         subCategoryImage={subCategoriesImages}
         labelImg={labelImg}
         setCurrentActiveCategory={setCurrentActiveCategory}
         isCategoryFilterEnabled={isCategoryFilterEnabled}
+        isAmenitiesFilterEnabled={isAmenitiesFilterEnabled}
+        currentActiveCategory={currentActiveCategory}
         {...rest}
       >
         <GroupOfFieldCheckboxes
-          className={classNames(css.fieldGroupPlain, {[css.fieldGroupPlainCategory]: isCategory})}
+          className={classNames(css.fieldGroupPlain, { [css.fieldGroupPlainCategory]: isCategory })}
           name={name}
           id={`${id}-checkbox-group`}
           options={options}

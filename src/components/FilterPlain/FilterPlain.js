@@ -12,12 +12,20 @@ class FilterPlainComponent extends Component {
     this.state = {
       isOpen: false,
       isSubCategoryOpen: false,
+      isSubCategoryAmenitiesOpen: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClear = this.handleClear.bind(this);
     this.toggleIsOpen = this.toggleIsOpen.bind(this);
     this.toggleIsSubCategoryOpen = this.toggleIsSubCategoryOpen.bind(this);
+  }
+
+  componentDidUpdate(prevProps) {
+
+    if (prevProps?.currentActiveCategory !== this.props.currentActiveCategory) {
+      this.setState({ isOpen: false });
+    }
   }
 
   handleChange(values) {
@@ -58,23 +66,36 @@ class FilterPlainComponent extends Component {
       keepDirtyOnReinitialize,
       contentPlacementOffset,
       isCategory,
+      isCategoryAmenities,
       mainCategoriesImages,
       subCategoryImage,
       labelImg,
       setCurrentActiveCategory,
-      isCategoryFilterEnabled
+      isCategoryFilterEnabled,
+      isAmenitiesFilterEnabled,
+      labelWithoutCounter,
+      currentActiveCategory
     } = this.props;
-    const classes = classNames(rootClassName || css.root, className, { [css.rootCategory]: isCategory });
+
+
+    const classes = classNames(
+      rootClassName || css.root,
+      className,
+      { [css.rootCategory]: isCategory },
+      { [css.categoryItemAmenities]: isCategoryAmenities },
+
+      { [css.filterAmenitiesSelected]: isSelected },
+      { [css.filterAmenitiesNotSelected]: !isSelected && !!isAmenitiesFilterEnabled && isCategoryAmenities }
+    );
 
     // const labelClass = isSelected ? css.filterLabelSelected : css.filterLabel;
     const newLabel = isCategory ? label + ' Categories' : label;
 
     const labelClass = classNames(
       css.filterLabel,
-      {[css.filterLabelSelected]: isSelected},
-      {[css.filterLabelNotSelected]: !isSelected && !!isCategoryFilterEnabled}
+      { [css.filterLabelSelected]: isSelected },
+      { [css.filterLabelNotSelected]: !isSelected && !!isCategoryFilterEnabled && isCategory }
     )
-
 
     let categoryImg;
 
@@ -114,24 +135,31 @@ class FilterPlainComponent extends Component {
     return (
       <div className={classes}>
         <div className={labelClass}>
-          <button type="button" className={labelButtonClasses} onClick={this.toggleIsOpen}>
-            
-            {isCategory && labelImg ? (
+
+          {isCategory && labelImg ? (
+            <button type="button" className={labelButtonClasses} onClick={this.toggleIsOpen}>
               <div onClick={() => setCurrentActiveCategory(filterId)}>
                 {categoryImg}
-                <span className={labelClass}>{newLabel}</span>
+                <span className={css.filterLabel}>{labelWithoutCounter}</span>
               </div>
-            ) : (
-              <span className={labelClass}>{newLabel}</span>
-            )}
+            </button>
 
-          </button>
+          ) : (
+            <button type="button" className={labelButtonClasses} onClick={this.toggleIsOpen}>
+              <span className={labelClass}>{newLabel}</span>
+            </button>
+          )}
+
+
           {!isCategory && (
             <button type="button" className={css.clearButton} onClick={this.handleClear}>
               <FormattedMessage id={'FilterPlain.clear'} />
             </button>
           )}
+
         </div>
+
+
         <div
           id={id}
           className={classNames(plainClassName, css.plain, { [css.isOpen]: this.state.isOpen }, { [css.categorypPlain]: isCategory })}
@@ -153,8 +181,10 @@ class FilterPlainComponent extends Component {
             keepDirtyOnReinitialize={keepDirtyOnReinitialize}
             subCategoryImage={subCategoryImage}
             isCategory={isCategory}
+            isCategoryAmenities={isCategoryAmenities}
             isSubCategoryOpen={this.state.isSubCategoryOpen}
             toggleIsSubCategoryOpen={this.toggleIsSubCategoryOpen}
+            currentActiveCategory={currentActiveCategory}
           >
             {children}
           </FilterForm>

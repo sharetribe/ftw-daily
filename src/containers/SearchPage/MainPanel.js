@@ -361,6 +361,9 @@ class MainPanel extends Component {
 
     const classes = classNames(rootClassName || css.searchResultContainer, className);
     const isCategoryFilterEnabled = searchParamsForPagination && !!searchParamsForPagination.pub_category;
+    const isAmenitiesFilterEnabled = searchParamsForPagination && !!searchParamsForPagination.pub_amenities;
+
+    // console.log(filterConfig);
     
     return (
       <div className={classes}>
@@ -399,8 +402,11 @@ class MainPanel extends Component {
                 subCategoriesImages={subCategoriesImages}
                 onOpenCategoryFilter={onOpenCategoryFilter}
                 isCategory={!!config.config.isCategory}
+                isCategoryAmenities={!!config.config.isCategoryAmenities}
                 setCurrentActiveCategory={this.setCurrentActiveCategory}
                 isCategoryFilterEnabled={isCategoryFilterEnabled}
+                isAmenitiesFilterEnabled={isAmenitiesFilterEnabled}
+                currentActiveCategory={this.state.currentActiveCategory}
               />
             );
           })}

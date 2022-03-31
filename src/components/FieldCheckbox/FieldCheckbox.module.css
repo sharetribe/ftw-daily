@@ -79,7 +79,9 @@
 }
 
 .text {
+
 }
+
 .textRoot {
   @apply --marketplaceListingAttributeFontStyles;
   color: var(--matterColor);
@@ -87,4 +89,3 @@
   margin-bottom: 1px;
   cursor: pointer;
 }
-

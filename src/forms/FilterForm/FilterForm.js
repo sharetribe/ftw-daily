@@ -45,11 +45,13 @@ const FilterFormComponent = props => {
           intl,
           children,
           isCategory,
+          isCategoryAmenities,
           activeCategory,
           closeSubCategory,
           // mobile
           isSubCategoryOpen,
-          toggleIsSubCategoryOpen
+          toggleIsSubCategoryOpen,
+          currentActiveCategory
         } = formRenderProps;
 
         const handleCancel = () => {
@@ -75,7 +77,12 @@ const FilterFormComponent = props => {
             {isCategory ? (
               <div>
                 <div className={css.subcategoryHeading} onClick={toggleIsSubCategoryOpen}>
-                  <FormattedMessage id="FilterForm.patchCategory" />
+                  <span className={css.subcategoryHeadingDesktop}>
+                    <FormattedMessage id="FilterForm.patchCategory" />
+                  </span>
+                  <span className={css.subcategoryHeadingMobile}>
+                    <FormattedMessage id="FilterForm.subcategory" />
+                  </span>
                   <span className={css.activeCategory} onClick={closeSubCategory}>
                     {activeCategory}
                   </span>

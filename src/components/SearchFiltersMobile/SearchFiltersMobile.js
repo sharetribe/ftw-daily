@@ -77,10 +77,13 @@ class SearchFiltersMobileComponent extends Component {
       selectedFiltersCount,
       intl,
       currentActiveCategory,
+      initialValues,
     } = this.props;
 
     const classes = classNames(rootClassName || css.root, className);
     const categoryChildren = children.filter(c => c.props.isCategory);
+    
+    const nonCategoryChildren = children.filter(c => (!c.props.isCategory && !c.props.isCategoryAmenities));
 
     const resultsFound = (
       <FormattedMessage id="SearchFiltersMobile.foundResults" values={{ count: resultsCount }} />
@@ -134,28 +137,35 @@ class SearchFiltersMobileComponent extends Component {
           </div>
 
           {this.state.isFiltersOpenOnMobile ? (
-            <div className={css.filtersWrapper}>
-              <div className={css.categoryItemsHolder}>
-                {categoryChildren.map((category, i) => {
-
-                  const categoryAmenities = children.filter(item => item.props.filterConfig.idCategory === category.props.filterConfig.id)
-                  const categoryItemClasses = classNames(
-                    css.categoryItem,
-                    { [css.categoryItemActive]: category.props.filterConfig.id === currentActiveCategory })
-
-                  return (
-                    <div key={`category-${i}`} className={categoryItemClasses}>
-                      {category}
-                      <div className={css.categoryItemAmenities}>
-                        {categoryAmenities}
-                      </div>
-                    </div>
-                  )
-                })}
-
+            <>
+              <div className={css.filtersWrapperTitle}>
+                <FormattedMessage id={'FilterForm.patchCategoryMobile'} />
               </div>
-              {children}
-            </div>
+              <div className={css.filtersWrapper}>
+                <div className={css.categoryItemsHolder}>
+                  {categoryChildren.map((category, i) => {
+
+                    const categoryAmenities = children.filter(item => item.props.filterConfig.idCategory === category.props.filterConfig.id)
+                    const categoryItemClasses = classNames(
+                      css.categoryItem,
+                      {[css.categoryItemActive]: category.props.filterConfig.id === currentActiveCategory },
+                      {[css.categoryItemNotActive]: !!currentActiveCategory && category.props.filterConfig.id !== currentActiveCategory }
+                      )
+
+                    return (
+                      <div key={`category-${i}`} className={categoryItemClasses}>
+                        {categoryAmenities}
+                        {category}
+                        {/* <div className={css.categoryItemAmenities}>
+                        </div> */}
+                      </div>
+                    )
+                  })}
+
+                </div>
+                {nonCategoryChildren}
+              </div>
+            </>
           ) : null}
 
           <div className={css.showListingsContainer}>

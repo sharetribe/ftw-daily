@@ -328,6 +328,7 @@ export const filters = [
       // to make filter customizations a bit easier.
       options: hairAndBeautyAmenitiesOptions,
       isCategory: false,
+      isCategoryAmenities: true,
       catKeys: 'hair-stylist,barber,makeup-artist,nail-technician,cosmetics,aesthetics,tattoo-and-piercing',
     },
   },
@@ -348,6 +349,7 @@ export const filters = [
       // to make filter customizations a bit easier.
       options: wellnessAmenitiesOptions,
       isCategory: false,
+      isCategoryAmenities: true,
       catKeys: 'therapy-room,massage-room,clinical-room',
     },
   },  
@@ -368,6 +370,7 @@ export const filters = [
       // to make filter customizations a bit easier.
       options: fitnessAmenitiesOptions,
       isCategory: false,
+      isCategoryAmenities: true,
       catKeys: 'fitness,yoga-studio,dance-studio,sports-hall,outdoor-sport-space,activity-room',
     },
   },
@@ -388,6 +391,7 @@ export const filters = [
       // to make filter customizations a bit easier.
       options: photographyAndFilmAmenitiesOptions,
       isCategory: false,
+      isCategoryAmenities: true,
       catKeys: 'music-studio,recording-studio,gallery-space,art-studio,rehearsal-space,drama-studio,theatre-space',
     },
   },
@@ -408,6 +412,7 @@ export const filters = [
       // to make filter customizations a bit easier.
       options: coworkingAmenitiesOptions,
       isCategory: false,
+      isCategoryAmenities: true,
       catKeys: 'desk-space,office-space,meeting-room-space,conference-room,classroom',
     },
   },
@@ -428,6 +433,7 @@ export const filters = [
       // to make filter customizations a bit easier.
       options: musicAndArtsAmenitiesOptions,
       isCategory: false,
+      isCategoryAmenities: true,
       catKeys: 'music-studio,recording-studio,gallery-space,art-studio,rehearsal-space,drama-studio,theatre-space',
     },
   },  
@@ -449,6 +455,7 @@ export const filters = [
       // to make filter customizations a bit easier.
       options: eventsAndVenuesAmenitiesOptions,
       isCategory: false,
+      isCategoryAmenities: true,
       catKeys: 'music-venue,private-event-space,sports-venue,conference-exhibition,outdoor-events,private-dining',
     },
   },
@@ -469,7 +476,8 @@ export const filters = [
       // to make filter customizations a bit easier.
       options: kitchenAmenitiesOptions,
       isCategory: false,
-      catKeys: 'kitchen-space',
+      isCategoryAmenities: true,
+      catKeys: 'kitchen-space, pop-up-space',
     },
   },
 ];
