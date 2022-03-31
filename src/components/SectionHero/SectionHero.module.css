@@ -334,6 +334,10 @@
       height: calc(100vh - 368px);
       min-height: 350px;
     }
+    
+    @media screen and (min-width: 720px) and (min-width: 720px) {
+      height: calc(100vh - 780px);
+    }
 
     @media (--viewportMedium) {
       height: calc(100vh - 360px);

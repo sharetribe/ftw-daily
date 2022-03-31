@@ -68,7 +68,7 @@
 
 .category {
   width: 100%;
-  max-width: 160px;
+  max-width: 100%;
 
   margin: 0 0 48px 0;
 
@@ -125,7 +125,7 @@
 
 /* An image wrapper that defines the images aspect ratio */
 .aspectWrapper {
-  padding-bottom: 80px;
+  padding-bottom: 200px;
 
   @media (--viewportSmall) {
     padding-bottom: 120px;
