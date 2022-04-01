@@ -23,24 +23,24 @@ const defaultLocations = [
     },
   },
   {
-    id: 'default-tampere',
+    id: 'default-ballard',
     predictionPlace: {
-      address: 'Tampere, Finland',
-      bounds: new LatLngBounds(new LatLng(61.83657, 24.11838), new LatLng(61.42728, 23.5422)),
+      address: 'Ballard, Seattle',
+      bounds: new LatLngBounds(new LatLng(47.69895644, -122.36122854), new LatLng(47.65138589, -122.412164)),
     },
   },
   {
-    id: 'default-oulu',
+    id: 'default-green-lake',
     predictionPlace: {
-      address: 'Oulu, Finland',
-      bounds: new LatLngBounds(new LatLng(65.56434, 26.77069), new LatLng(64.8443, 24.11494)),
+      address: 'Green Lake, Seattle',
+      bounds: new LatLngBounds(new LatLng(47.70447299, -122.3076123), new LatLng(47.65582284, -122.3597087)),
     },
   },
   {
-    id: 'default-ruka',
+    id: 'default-greenwood',
     predictionPlace: {
-      address: 'Ruka, Finland',
-      bounds: new LatLngBounds(new LatLng(66.16997, 29.16773), new LatLng(66.16095, 29.13572)),
+      address: 'Greenwood, Seattle',
+      bounds: new LatLngBounds(new LatLng(47.71611129, -122.33177064), new LatLng(47.67226749, -122.37873286)),
     },
   },
 ];
