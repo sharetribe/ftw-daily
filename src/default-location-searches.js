@@ -9,17 +9,17 @@ const { LatLng, LatLngBounds } = sdkTypes;
 // `predictionPlace` (util.types.place) properties.
 const defaultLocations = [
   {
-    id: 'default-helsinki',
+    id: 'default-capitol-hill',
     predictionPlace: {
-      address: 'Helsinki, Finland',
-      bounds: new LatLngBounds(new LatLng(60.29783, 25.25448), new LatLng(59.92248, 24.78287)),
+      address: 'Capitol Hill, Seattle',
+      bounds: new LatLngBounds(new LatLng(47.66329703, -122.27345772), new LatLng(47.59227174, -122.34943804)),
     },
   },
   {
-    id: 'default-turku',
+    id: 'default-central-district',
     predictionPlace: {
-      address: 'Turku, Finland',
-      bounds: new LatLngBounds(new LatLng(60.53045, 22.38197), new LatLng(60.33361, 22.06644)),
+      address: 'Central District, Seattle',
+      bounds: new LatLngBounds(new LatLng(47.63358332, -122.27573765), new LatLng(47.57597304, -122.33733996)),
     },
   },
   {
