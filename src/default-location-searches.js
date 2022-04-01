@@ -16,10 +16,10 @@ const defaultLocations = [
     },
   },
   {
-    id: 'default-turku',
+    id: 'default-central-district',
     predictionPlace: {
-      address: 'Turku, Finland',
-      bounds: new LatLngBounds(new LatLng(60.53045, 22.38197), new LatLng(60.33361, 22.06644)),
+      address: 'Central District, Seattle',
+      bounds: new LatLngBounds(new LatLng(47.63358332, -122.27573765), new LatLng(47.57597304, -122.33733996)),
     },
   },
   {
