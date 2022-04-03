@@ -17,15 +17,15 @@
 :root {
   /* ================ Colors ================ */
 
-  --marketplaceColor: #ff6852;
-  --marketplaceColorLight: #ff4c38;
-  --marketplaceColorDark: #8c291e;
+  --marketplaceColor: #bdd3bE;
+  --marketplaceColorLight: #bdd3bE;
+  --marketplaceColorDark: #ff6852;
 
   /* Used with inline CSS SVGs */
   --marketplaceColorEncoded: %23c0392b;
 
-  --successColor: #2ecc71;
-  --successColorDark: #239954;
+  --successColor: #a6c3a8;
+  --successColorDark: #a6c3a8;
   --successColorLight: #f0fff6;
   --failColor: #ff0000;
   --failColorLight: #fff0f0;
