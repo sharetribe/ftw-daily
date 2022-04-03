@@ -17,9 +17,9 @@
 :root {
   /* ================ Colors ================ */
 
-  --marketplaceColor: #bdd3bE;
-  --marketplaceColorLight: #bdd3bE;
-  --marketplaceColorDark: #ff6852;
+  --marketplaceColor: #a6c3a8;
+  --marketplaceColorLight: #a6c3a8;
+  --marketplaceColorDark: #bdd3bE;
 
   /* Used with inline CSS SVGs */
   --marketplaceColorEncoded: %23c0392b;
