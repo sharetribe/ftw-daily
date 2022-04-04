@@ -109,7 +109,7 @@ class CurrencyInputComponent extends Component {
     // Notify parent component about current price change
     const price = getPrice(ensureDotSeparator(unformattedValue), this.props.currencyConfig);
     this.props.input.onChange(price);
-    console.log(price)
+    // console.log(price)
   }
 
   onInputBlur(event) {
