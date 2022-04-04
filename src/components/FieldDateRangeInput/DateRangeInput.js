@@ -30,6 +30,7 @@ import {
 
 import { IconArrowHead } from '../../components';
 import css from './DateRangeInput.module.css';
+import {currentTypeBook} from "./FieldDateRangeInput";
 
 export const HORIZONTAL_ORIENTATION = 'horizontal';
 export const ANCHOR_LEFT = 'left';
@@ -227,6 +228,7 @@ class DateRangeInputComponent extends Component {
       seats,
       minBookingCount,
       minBookingType,
+      bookingType,
       ...datePickerProps
     } = this.props;
     /* eslint-enable no-unused-vars */
@@ -277,14 +279,15 @@ class DateRangeInputComponent extends Component {
     });
 
     const typeOfMinBooking = (minBookingCount, minBookingType) => {
-      if(minBookingType === WEEKLY_BOOKING) return minBookingCount*7
-      if(minBookingType === MONTHLY_BOOKING) return minBookingCount*30
-      return minBookingCount
+      if(minBookingType===DAILY_BOOKING && currentTypeBook(bookingType) === DAILY_BOOKING) return minBookingCount
+      if(minBookingType===WEEKLY_BOOKING && currentTypeBook(bookingType) === WEEKLY_BOOKING) return minBookingCount*minimumNights
+      if(minBookingType===MONTHLY_BOOKING && currentTypeBook(bookingType) === MONTHLY_BOOKING) return minBookingCount*minimumNights
+      return minimumNights
     }
-
     const minDaysBlock = minBookingType !== HOURLY_BOOKING && typeOfMinBooking(minBookingCount, minBookingType)
     // const minimumDays = (minDaysBlock || minimumNights) - 1;
-    const minimumDays = minimumNights - 1;
+    const minimumDays = typeOfMinBooking(minBookingCount, minBookingType) - 1;
+    // const minimumDays = minimumNights - 1;
 
     return (
       <div className={classes}>
