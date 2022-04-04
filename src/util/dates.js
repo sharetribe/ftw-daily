@@ -259,8 +259,8 @@ export const findNextBoundaryCustom = (timeZone, currentMomentOrDate, minBooking
   return moment(currentMomentOrDate)
     .clone()
     .tz(timeZone)
-    .add(1, 'hour')
-    .startOf('hour')
+    .add(30 - (moment(currentMomentOrDate).minute() % 30), 'minutes')
+    .startOf('minutes')
     .toDate();
 }
 
