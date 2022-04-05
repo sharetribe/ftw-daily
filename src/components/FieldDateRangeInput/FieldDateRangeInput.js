@@ -10,7 +10,15 @@ import { bool, func, object, oneOf, string, number, arrayOf } from 'prop-types';
 import { Field } from 'react-final-form';
 import classNames from 'classnames';
 import { START_DATE, END_DATE } from '../../util/dates';
-import {HOURLY_BOOKING, propTypes} from '../../util/types';
+import {
+  DAILY_BOOKING,
+  DAILY_PRICE,
+  MONTHLY_BOOKING,
+  MONTHLY_PRICE,
+  propTypes,
+  WEEKLY_BOOKING,
+  WEEKLY_PRICE
+} from '../../util/types';
 import { ValidationError } from '../../components';
 import moment from 'moment';
 import DateRangeInput from './DateRangeInput';
@@ -19,6 +27,19 @@ import {discountTypes} from "../../marketplace-custom-config";
 import {FormattedMessage} from "../../util/reactIntl";
 
 const MAX_MOBILE_SCREEN_WIDTH = 768;
+
+export const currentTypeBook = bookingType => {
+  switch(bookingType){
+    case DAILY_PRICE:
+      return DAILY_BOOKING;
+    case WEEKLY_PRICE:
+      return WEEKLY_BOOKING;
+    case MONTHLY_PRICE:
+      return MONTHLY_BOOKING;
+    default:
+      return null;
+  }
+}
 
 class FieldDateRangeInputComponent extends Component {
   constructor(props) {
@@ -89,13 +110,15 @@ class FieldDateRangeInputComponent extends Component {
       onFocusedInputChange,
       minBookingCount,
       minBookingType,
+      bookingType,
       ...rest
     } = this.props;
     /* eslint-disable no-unused-vars */
 
+    // console.log('11111111', this.props)
     const textForMinBook = discountTypes.filter( el => el.key === minBookingType)[0] || ''
-    // const minBookText = minBookingType && `${minBookingCount} ${textForMinBook?.label}`
-    const minBookText = null
+    const minBookText = minBookingType && `${minBookingCount} ${textForMinBook?.label}`
+    // const minBookText = null
 
     if (startDateLabel && !startDateId) {
       throw new Error('startDateId required when a startDateLabel is given');
@@ -162,6 +185,7 @@ class FieldDateRangeInputComponent extends Component {
       endDateId,
       minBookingCount,
       minBookingType,
+      bookingType,
     };
     const classes = classNames(rootClassName || css.fieldRoot, className);
     const errorClasses = classNames({ [css.mobileMargins]: useMobileMargins });
@@ -178,13 +202,15 @@ class FieldDateRangeInputComponent extends Component {
           <div className={startDateBorderClasses} />
           <div className={endDateBorderClasses} />
         </div>
-        {/*{ minBookingType && minBookingType !== HOURLY_BOOKING &&*/}
-        {/*<div className={css.infoBlockMinBooking}>*/}
-        {/*  <span className={css.infoTextMinBooking}>•</span>*/}
-        {/*  <p className={css.infoTextMinBooking}>*/}
-        {/*    <FormattedMessage id="FieldDateTimeInput.minBoookTextShow" values={{minBookText}}/>*/}
-        {/*  </p>*/}
-        {/*</div>}*/}
+
+        { minBookingType && minBookingType === currentTypeBook(bookingType) &&
+        <div className={css.infoBlockMinBooking}>
+          <span className={css.infoTextMinBooking}>•</span>
+          <p className={css.infoTextMinBooking}>
+            <FormattedMessage id="FieldDateTimeInput.minBoookTextShow" values={{minBookText}}/>
+          </p>
+        </div>}
+
         <ValidationError className={errorClasses} fieldMeta={meta} />
       </div>
     );
