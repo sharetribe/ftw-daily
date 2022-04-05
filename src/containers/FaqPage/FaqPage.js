@@ -141,7 +141,8 @@ const FaqPage = () => {
               <h2 id="more-questions-">Have any more questions?</h2>
               <p>Reach out to our awesome team anytime, We’re here to help! You can contact us by email at <a href="mailto:support@hotpatch.com">support@hotpatch.com.</a> 
               or by clicking the Chat icon on the bottom right of the screen. You can also find us on our social media:</p>
-              <p>Instagram: <a href="https://www.instagram.com/hotpatch_/?hl=en" target="_blank">@HotPatch_</a> | Twitter: <a href="https://twitter.com/hotpatch_?lang=en" target="_blank">@HotPatch_</a> | Linkedin: <a href="https:/www.linkedin.com/company/hotpatchmakespacework/" target="_blank">HotPatch</a>
+              <p>Instagram: <a href="https://www.instagram.com/hotpatch_/?hl=en" target="_blank">@HotPatch_</a> | Twitter: <a href="https://twitter.com/hotpatch_?lang=en" target="_blank">@HotPatch_</a> | 
+              Linkedin: <a href="https://www.linkedin.com/company/hotpatchmakespacework/" target="_blank">HotPatch</a>
               </p>
 
 
