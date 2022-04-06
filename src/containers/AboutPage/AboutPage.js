@@ -41,28 +41,18 @@ const AboutPage = () => {
                 More and more, we’re seeing that professionals from around the world are wanting to work on their own terms, in a place that best suits them. Meanwhile business owners are looking to make the most out of their underused space.  
               </p>
               <p>
-                At HotPatch, we work hard to bridge the gap between those seeking a flexible space to work from and those with space available. Whether you’re a flexible worker, or a business looking to benefit from the burgeoning space-sharing economy, this is where we come in.
+                At HotPatch, we work hard to bridge the gap between those seeking a flexible space to work from and those with space available. Whether you’re a flexible worker, or a business looking to benefit from your underused space, this is where HotPatch comes in.
               </p>
 
               <h2>Make Space Work for You</h2>
 
-              <p>In order to remove the disconnect between those with space and those who need it, we are offering a dependable platform that’s easy to use and completely transparent.</p>
+              <p>In order to remove the disconnect between those with space and those who need it, HotPatch is offering a dependable platform that’s easy to use and completely transparent.</p>
 
-              <p>There’s no multi-page enquiry shenanigans here, we let users get straight to browsing our incredible offering of Patches and booking them as quickly as possible. HotPatch are dedicated to making space work for you with as few obstacles as possible.</p>
+              <p>There’s no multi-page enquiry shenanigans here. Get straight to browsing the incredible offering of Patches and booking them as quickly as possible. HotPatch is dedicated to making space work for you with as few obstacles as possible.</p>
 
               <p>Maybe you’re a fitness professional or a hairdresser? An events planner, artist, or photographer? Perhaps a business owner who wants to bring in more income from their awesome space? We’re here to help.</p>
 
               <p>Have any questions? Head over to our <a href="https://www.hotpatch.com/faq">FAQ</a> or reach out to the HotPatch team at <a href="mailto:hello@hotpatch.com.">hello@hotpatch.com</a>.</p>
-
-              <h2>Our Story</h2>
-
-              <p>In 2019 we realised that many professionals who rented or owned space only required it on a flexible basis, but were stuck with paying high monthly or even yearly costs for the space they want.</p>
-
-              <p>HotPatch was born as a way of giving people access to space on far more flexible terms, and likewise helping space owners earn additional income by making their space available to others when they aren’t using it.</p>
-
-              <p>Now more than 2 years old, HotPatch has helped people find spaces to work from all over the country.</p>
-
-              <p>We have big ambitions for the future; we're looking to continuously add new, exciting Patches and expand to as many locations as possible around the country to ensure there is a perfect Patch near you, for whatever you need.</p>
 
               <br></br>
 
