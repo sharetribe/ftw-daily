@@ -10,6 +10,8 @@
 .filterLabel,
 .filterLabelSelected {
   @apply --marketplaceH3FontStyles;
+  font-size: 16px;
+  line-height: 1;
 
   /* Baseline adjustment for label text */
   margin-top: 0;

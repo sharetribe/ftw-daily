@@ -79,7 +79,9 @@
 }
 
 .text {
+
 }
+
 .textRoot {
   @apply --marketplaceListingAttributeFontStyles;
   color: var(--matterColor);

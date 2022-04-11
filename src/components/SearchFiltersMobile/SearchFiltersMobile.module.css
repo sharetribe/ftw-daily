@@ -1,4 +1,6 @@
+@import '../../styles/customMediaQueries.css';
 @import '../../styles/propertySets.css';
+
 
 .root {
   display: flex;
@@ -79,12 +81,18 @@
 .modalContainer {
   width: 100%;
   padding: 94px 0;
-  margin: 0 24px;
+  /* margin: 0 24px; */
+  margin: 0 40px;
+
+  & [class*="ModalInMobile_modalContent"] {
+    position: relative;
+  }
 }
 
 .modalHeadingWrapper {
-  padding-bottom: 31px;
+  padding-bottom: 30px;
   border-bottom: 1px solid var(--matterColorNegative);
+  margin-bottom: 30px;
 }
 
 .modalHeading {
@@ -119,6 +127,28 @@
    * under the mobile safari bottom bar or the "Show results"
    * button bar */
   padding-bottom: 180px;
+  display: flex;
+  flex-direction: column;
+
+  & .categoryItemsHolder {
+    order: 1;
+  }
+
+  & [class*="FilterPlain_generalAmenitiesItem"] {
+    order: 2;
+  }
+
+  & > div {
+    order: 3;
+  }
+}
+
+.filtersWrapperTitle {
+  color: var(--matterColorDarkCustom);
+  font-size: 16px;
+  line-height: 1;
+  font-weight: var(--fontWeightSemiBold);
+  margin: 0 0 23px;
 }
 
 .showListingsContainer {
@@ -138,4 +168,52 @@
   background-color: var(--marketplaceColor);
   display: inline-block;
   border-radius: 3px;
+}
+
+.categoryItemsHolder {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.categoryItem {
+  display: flex;
+  flex-direction: column;
+  width: calc(50% - 14px);
+
+  & [class*="categoryItemAmenities"] {
+    display: none;
+  }
+}
+
+.categoryItemActive {
+  width: 100%;
+
+  & [class*="categoryItemAmenities"] {
+    display: block;
+    order: 2;
+  }
+
+  & [class*="categorypPlain"] {
+    display: block;
+    border-bottom: 1px solid var(--matterColorNegative);
+  }
+}
+
+.categoryItemNotActive {
+  display: none;
+}
+
+
+.generalAmenitiesFilterActive {
+
+  & [class*="filterAmenitiesNotSelected"] {
+    opacity: 1;
+    cursor: default;
+
+    & > div,
+    & > div button {
+      pointer-events: all;
+    }
+  }
 }

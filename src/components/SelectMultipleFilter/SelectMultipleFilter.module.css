@@ -20,7 +20,7 @@
     background-color: var(--matterColorLight);
     border-color: transparent;
     text-decoration: none;
-    box-shadow: var(--boxShadowFilterButton);
+    /* box-shadow: var(--boxShadowFilterButton); */
   }
 }
 
@@ -55,6 +55,10 @@
   border: none;
 }
 
+.fieldGroupPlainCategory {
+  padding: 0;
+}
+
 .list {
   margin: 0;
 }
@@ -67,5 +71,78 @@
 
   @media (--viewportMedium) {
     padding: 4px 0;
+  }
+}
+
+.listWithImages {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 295px;
+  margin: 0 auto;
+
+  @media (--viewportMedium) {
+    justify-content: flex-start;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  & li {
+    width: 122px;
+    padding: 0; 
+    margin-bottom: 17px;
+    
+    @media (--viewportMedium) {
+      margin-right: 36px;
+      margin-bottom: 56px;
+    }
+
+    &:nth-child(4) {
+      @media (--viewportMedium) {
+        margin-right: 0;
+      }
+    }
+  }
+  
+  & li label {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  & input:checked + label img  {
+    border: 3px solid var(--customDarkBlue);
+    
+    @media (--viewportMedium) {
+      border: none
+    }
+  }
+
+  & input:checked + label span  {
+    
+    @media (--viewportMedium) {
+      font-weight: var(--fontWeightSemiBold);
+    }
+  }
+
+  & li label span {
+    font-size: 14px;
+    font-weight: var(--fontWeightRegular);
+    line-height: 21px;
+  }
+
+  & [class*="checkboxWrapper"] {
+    display: none;
+  }
+
+  & img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    margin-bottom: 10px;
   }
 }

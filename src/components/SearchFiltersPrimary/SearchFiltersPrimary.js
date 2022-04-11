@@ -2,8 +2,10 @@ import React from 'react';
 import { bool, func, node, number, string } from 'prop-types';
 import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
+import { OutsideClickHandler } from '../../components';
 
 import css from './SearchFiltersPrimary.module.css';
+import { Classnames } from 'react-alice-carousel';
 
 const SearchFiltersPrimaryComponent = props => {
   const {
@@ -17,6 +19,10 @@ const SearchFiltersPrimaryComponent = props => {
     isSecondaryFiltersOpen,
     toggleSecondaryFiltersOpen,
     selectedSecondaryFiltersCount,
+    onOpenCategoryFilter,
+    onCloseCategoryFilter,
+    isCategoryFilterOpen,
+    isCategoryFilterEnabled
   } = props;
 
   const hasNoResult = listingsAreLoaded && resultsCount === 0;
@@ -27,6 +33,7 @@ const SearchFiltersPrimaryComponent = props => {
       ? css.searchFiltersPanelOpen
       : css.searchFiltersPanelClosed;
   const toggleSecondaryFiltersOpenButton = toggleSecondaryFiltersOpen ? (
+
     <button
       className={toggleSecondaryFiltersOpenButtonClasses}
       onClick={() => {
@@ -34,8 +41,9 @@ const SearchFiltersPrimaryComponent = props => {
       }}
     >
       <FormattedMessage
-        id="SearchFiltersPrimary.moreFiltersButton"
-        values={{ count: selectedSecondaryFiltersCount }}
+        id="SearchFiltersPrimary.moreFiltersButtonWithOutCounter"
+        // id="SearchFiltersPrimary.moreFiltersButton"
+        // values={{ count: selectedSecondaryFiltersCount }}
       />
     </button>
   ) : null;
@@ -63,15 +71,39 @@ const SearchFiltersPrimaryComponent = props => {
             </span>
           </div>
         ) : null}
+
+        <div className={css.filters}>
+          <OutsideClickHandler onOutsideClick={isCategoryFilterOpen && onOpenCategoryFilter || onCloseCategoryFilter}>
+            <button className={classNames(css.searchFiltersPanelClosed, {[css.active]: isCategoryFilterEnabled})} onClick={onOpenCategoryFilter}>
+              <FormattedMessage id="SearchFiltersPrimary.categoriesBtn" />
+            </button>
+            {isCategoryFilterOpen && (
+              <div className={css.categoryItemsWrapper}>
+                <div className={css.categoryItems}>
+                  <h3 className={css.categoryItemsTitle}>
+                    <FormattedMessage id="SearchFiltersPrimary.categories" />
+                  </h3>
+
+                  <div className={css.categoryItemsHolder}>
+                    {categoryChildren.map((category, i) => {
+                      return (
+                        <React.Fragment key={`category-${i}`}>
+                          {category}
+                        </React.Fragment>
+                      )
+                    })}
+                  </div>
+                </div>
+              </div>
+            )}
+          </OutsideClickHandler>
+        </div>
+
         {nonCategoryChildren}
         {toggleSecondaryFiltersOpenButton}
         {sortByComponent}
       </div>
 
-      <div className={css.filters}>
-        {categoriesText}
-        {categoryChildren}
-      </div>
 
       {hasNoResult ? (
         <div className={css.noSearchResults}>

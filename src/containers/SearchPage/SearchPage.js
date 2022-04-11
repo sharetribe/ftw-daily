@@ -19,15 +19,19 @@ import { SearchMap, ModalInMobile, Page } from '../../components';
 import { TopbarContainer } from '../../containers';
 
 import { searchMapListings, setActiveListing } from './SearchPage.duck';
+
 import {
   pickSearchParamsOnly,
   validURLParamsForExtendedData,
   validFilterParams,
-  createH1,
   createSearchResultSchema,
 } from './SearchPage.helpers';
+
 import MainPanel from './MainPanel';
 import css from './SearchPage.module.css';
+
+import categoryImages from "./filterImages"
+
 
 const MODAL_BREAKPOINT = 768; // Search is in modal on mobile layout
 const SEARCH_WITH_MAP_DEBOUNCE = 300; // Little bit of debounce before search is initiated.
@@ -39,6 +43,7 @@ export class SearchPageComponent extends Component {
     this.state = {
       isSearchMapOpenOnMobile: props.tab === 'map',
       isMobileModalOpen: false,
+      isCategoryFilterOpen: false
     };
 
     this.searchMapListingsInProgress = false;
@@ -46,6 +51,8 @@ export class SearchPageComponent extends Component {
     this.onMapMoveEnd = debounce(this.onMapMoveEnd.bind(this), SEARCH_WITH_MAP_DEBOUNCE);
     this.onOpenMobileModal = this.onOpenMobileModal.bind(this);
     this.onCloseMobileModal = this.onCloseMobileModal.bind(this);
+    this.onOpenCategoryFilter = this.onOpenCategoryFilter.bind(this);
+    this.onCloseCategoryFilter = this.onCloseCategoryFilter.bind(this);
   }
 
   // Callback to determine if new search is needed
@@ -54,11 +61,11 @@ export class SearchPageComponent extends Component {
     const { viewportBounds, viewportCenter } = data;
 
     const boundsValid = viewportBounds.ne.lat !== viewportBounds.sw.lat &&
-                        viewportBounds.ne.lng !== viewportBounds.sw.lng;
-
+    viewportBounds.ne.lng !== viewportBounds.sw.lng;
+    
     const priceFilterMaybe = search => {
       const activePriceFilter = currentSearchFilter(search);
-      return activePriceFilter ? {[activePriceFilter]: search[activePriceFilter]} : {};
+      return activePriceFilter ? { [activePriceFilter]: search[activePriceFilter] } : {};
     }
 
     const routes = routeConfiguration();
@@ -111,6 +118,17 @@ export class SearchPageComponent extends Component {
     this.setState({ isMobileModalOpen: false });
   }
 
+
+  onOpenCategoryFilter() {
+    this.setState({ isCategoryFilterOpen: !this.state.isCategoryFilterOpen });
+  }
+
+  onCloseCategoryFilter() {
+    this.setState({ isCategoryFilterOpen: false });
+  }
+
+
+
   render() {
     const {
       intl,
@@ -134,6 +152,8 @@ export class SearchPageComponent extends Component {
       latlng: ['origin'],
       latlngBounds: ['bounds'],
     });
+
+
     const pub_category = this.props.searchParams.pub_category;
     // urlQueryParams doesn't contain page specific url params
     // like mapSearch, page or origin (origin depends on config.sortSearchByDistance)
@@ -159,6 +179,8 @@ export class SearchPageComponent extends Component {
 
     const { address, bounds, origin } = searchInURL || {};
     const { title, description, schema } = createSearchResultSchema(listings, address, intl, pub_category, filterConfig);
+
+
 
     const h1 = title.replace(`- ${config.siteTitle}`, "");
     // Set topbar class based on if a modal is open in
@@ -198,6 +220,12 @@ export class SearchPageComponent extends Component {
             searchParamsForPagination={parse(location.search)}
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             history={history}
+            mainCategoriesImages={categoryImages.mainCategoriesImages}
+            subCategoriesImages={categoryImages.subCategoriesImages}
+            isCategoryFilterOpen={this.state.isCategoryFilterOpen}
+            onOpenCategoryFilter={this.onOpenCategoryFilter}
+            onCloseCategoryFilter={this.onCloseCategoryFilter}
+            isMobileLayout={isMobileLayout}
           />
 
           <ModalInMobile
