@@ -93,8 +93,10 @@ class FilterPlainComponent extends Component {
       { [css.generalAmenitiesItem]: isGeneralAmenities },
 
       { [css.filterAmenitiesSelected]: isSelected },
-      { [css.filterAmenitiesNotSelected]: !isSelected && !!isAmenitiesFilterEnabled && isCategoryAmenities }
+      // { [css.filterAmenitiesNotSelected]: !isSelected && !!isAmenitiesFilterEnabled && isCategoryAmenities }
 
+
+      // not working now
       // { [css.filterAmenitiesSelected]: isSelected && !isGeneralAmenities },
       // { [css.filterAmenitiesNotSelected]: !isSelected && !!isAmenitiesFilterEnabled && !isGeneralAmenities }
     );

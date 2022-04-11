@@ -41,6 +41,10 @@
   margin: 0; */
 }
 
+.filterAmenitiesSelected + div > div img + span {
+  font-weight: var(--fontWeightSemiBold);
+}
+
 .filterAmenitiesNotSelected + div, 
 .filterLabelNotSelected {
   opacity: 0.5;
