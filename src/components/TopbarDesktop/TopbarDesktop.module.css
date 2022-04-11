@@ -98,7 +98,7 @@
   flex-grow: 1;
   height: 100%;
   margin-right: 4px;
-  border-left: 0.5px solid var(--matterColor);
+  border-left: 0.5px solid var(--matterColorNegative);
   display: flex;
   padding: 16px 0 16px 12px;
 

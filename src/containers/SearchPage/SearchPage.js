@@ -61,8 +61,8 @@ export class SearchPageComponent extends Component {
     const { viewportBounds, viewportCenter } = data;
 
     const boundsValid = viewportBounds.ne.lat !== viewportBounds.sw.lat &&
-      viewportBounds.ne.lng !== viewportBounds.sw.lng;
-
+    viewportBounds.ne.lng !== viewportBounds.sw.lng;
+    
     const priceFilterMaybe = search => {
       const activePriceFilter = currentSearchFilter(search);
       return activePriceFilter ? { [activePriceFilter]: search[activePriceFilter] } : {};
@@ -188,6 +188,7 @@ export class SearchPageComponent extends Component {
     const topbarClasses = this.state.isMobileModalOpen
       ? classNames(css.topbarBehindModal, css.topbar)
       : css.topbar;
+
     // N.B. openMobileMap button is sticky.
     // For some reason, stickyness doesn't work on Safari, if the element is <button>
     return (
