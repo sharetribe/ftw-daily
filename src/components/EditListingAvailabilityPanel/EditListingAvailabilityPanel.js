@@ -2,12 +2,12 @@ import React, {useState, useEffect} from 'react';
 import { bool, func, object, shape, string } from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from '../../util/reactIntl';
-import { 
+import {
   ensureOwnListing,
   AVAILABILITY_DEFAULT_START,
   createDefaultPlan
 } from '../../util/data';
-import { 
+import {
   LISTING_STATE_DRAFT,
   AVAILABILITY_PLAN_TIME,
   WEEKLY_PRICE,
@@ -63,7 +63,7 @@ const EditListingAvailabilityPanel = props => {
 
   const numSeats = 'seats' in publicData ? publicData.seats : 1;
   const isPublished = currentListing.id && state !== LISTING_STATE_DRAFT;
- 
+
   const availabilityPlan = planValid(currentAvailabilityPlan, numSeats) ? currentAvailabilityPlan : createDefaultPlan(numSeats);
   // const minimumLength = [publicData.minimumLength] || [1];
 
@@ -84,7 +84,7 @@ const EditListingAvailabilityPanel = props => {
     }
 
   }, [currentListing])
-  
+
 
   return (
     <div className={classes}>
@@ -105,6 +105,7 @@ const EditListingAvailabilityPanel = props => {
         availability={availability}
         availabilityPlan={availabilityPlan}
         onSubmit={values => {
+          console.log('availabilityPlan', values)
           const {daysAvailability} = values;
           // We save the default availability plan
           // I.e. this listing is available every night.
@@ -112,8 +113,8 @@ const EditListingAvailabilityPanel = props => {
           // which is visible on this panel.
           // const minimumLength = values.minimumLength[0]
           onSubmit({
-            availabilityPlan: preparePlan(createDefaultPlan(numSeats), daysAvailability), 
-            // publicData: { minimumLength } 
+            availabilityPlan: preparePlan(createDefaultPlan(numSeats), daysAvailability),
+            // publicData: { minimumLength }
           });
         }}
         onChange={onChange}
