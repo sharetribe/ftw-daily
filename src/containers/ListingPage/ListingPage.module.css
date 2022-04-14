@@ -435,6 +435,9 @@
   }
 }
 
+.capacity {
+  word-wrap: break-word;
+}
 .description, .capacity, .quantity {
   margin-top: 0;
   margin-bottom: 0;

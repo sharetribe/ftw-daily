@@ -204,12 +204,12 @@ class FieldDateRangeInputComponent extends Component {
         </div>
 
         { minBookingType && minBookingType === currentTypeBook(bookingType) &&
-        <div className={css.infoBlockMinBooking}>
-          <span className={css.infoTextMinBooking}>•</span>
-          <p className={css.infoTextMinBooking}>
-            <FormattedMessage id="FieldDateTimeInput.minBoookTextShow" values={{minBookText}}/>
-          </p>
-        </div>}
+          <div className={css.infoBlockMinBooking}>
+            <span className={classNames(css.infoTextMinBooking, css.distans)}>•</span>
+            <p className={css.infoTextMinBooking}>
+              <FormattedMessage id="FieldDateTimeInput.minBoookTextShow" values={{minBookText}}/>
+            </p>
+          </div>}
 
         <ValidationError className={errorClasses} fieldMeta={meta} />
       </div>

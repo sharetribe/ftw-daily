@@ -524,7 +524,7 @@ class FieldDateAndTimeInput extends Component {
         </div>
         { minBookingType && minBookingType === HOURLY_BOOKING &&
         <div className={css.infoBlockMinBooking}>
-          <span className={css.infoTextMinBooking}>•</span>
+          <span className={classNames(css.infoTextMinBooking, css.distans)}>•</span>
           <p className={css.infoTextMinBooking}>
             <FormattedMessage id="FieldDateTimeInput.minBoookTextShow" values={{minBookText}}/>
           </p>
