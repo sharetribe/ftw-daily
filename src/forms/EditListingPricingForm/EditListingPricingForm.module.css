@@ -43,6 +43,14 @@
     & input[type="number"] {
         padding-top: 4px !important;
         padding-bottom: 3px;
+      @media (--viewportMedium) {
+        padding-top: 0px !important;
+        padding-bottom: 0;
+      }
+      /*@media (--viewportMLarge) {*/
+      /*  padding-top: 0px !important;*/
+      /*  padding-bottom: 0;*/
+      /*}*/
      }
   }
 }

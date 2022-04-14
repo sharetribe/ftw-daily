@@ -10,6 +10,14 @@ import { required } from '../../util/validators';
 
 import css from './EditListingCapacityForm.module.css';
 
+const parseMax = (max, currentMin) => value => {
+  const parsedValue = Number.parseInt(value, 10);
+  if (isNaN(parsedValue)) {
+    return '';
+  }
+  return parsedValue < currentMin ? currentMin : parsedValue > max ? max : parsedValue;
+};
+
 export const EditListingCapacityFormComponent = props => (
   <FinalForm
     {...props}
@@ -55,6 +63,7 @@ export const EditListingCapacityFormComponent = props => (
             placeholder="4"
             type='number'
             min='1'
+            // parse={parseMax(10000, 1)}
             validate={capacityRequired}
           />
 

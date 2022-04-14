@@ -114,13 +114,18 @@
 .infoBlockMinBooking {
   margin-top: 12px;
   display: flex;
+  /*height: 18px;*/
+  /*max-height: 18px;*/
   align-items: center;
 }
 .infoTextMinBooking {
-  font-size: 18px;
+  font-size: 17px;
   line-height: 18px;
   color: #EF7171;
   font-family: var(--fontFamilySofiapro);
   font-weight: var(--fontWeightLow);
-  margin: 0 10px 0 0;
+  margin: 0;
+}
+.distans {
+  margin: 0 10px 0 0 !important;
 }
