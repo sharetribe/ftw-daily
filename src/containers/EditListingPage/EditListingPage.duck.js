@@ -513,7 +513,6 @@ export function requestCreateListingDraft(data) {
         listingHasImages: false
       }
     }
-
     return sdk.ownListings
       .createDraft(data, queryParams)
       .then(response => {
