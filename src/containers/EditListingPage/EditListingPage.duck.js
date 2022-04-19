@@ -507,10 +507,12 @@ export function requestCreateListingDraft(data) {
     };
 
     const updatedData = {
+      ...data,
       publicData: {
+        ...data.publicData,
         listingHasImages: false
       }
-    }
+    };
 
     return sdk.ownListings
       .createDraft(data, queryParams)
