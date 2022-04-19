@@ -512,7 +512,7 @@ export function requestCreateListingDraft(data) {
         ...data.publicData,
         listingHasImages: false
       }
-    };
+    }
 
     return sdk.ownListings
       .createDraft(data, queryParams)
