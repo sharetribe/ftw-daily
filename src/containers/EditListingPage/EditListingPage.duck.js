@@ -512,9 +512,10 @@ export function requestCreateListingDraft(data) {
         ...data.publicData,
         listingHasImages: false
       }
-    }
+    };
+
     return sdk.ownListings
-      .createDraft(data, queryParams)
+      .createDraft(updatedData, queryParams)
       .then(response => {
         //const id = response.data.data.id.uuid;
 
