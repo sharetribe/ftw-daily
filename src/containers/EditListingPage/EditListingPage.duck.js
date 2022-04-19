@@ -506,6 +506,12 @@ export function requestCreateListingDraft(data) {
       'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
     };
 
+    const updatedData = {
+      publicData: {
+        listingHasImages: false
+      }
+    }
+
     return sdk.ownListings
       .createDraft(data, queryParams)
       .then(response => {
