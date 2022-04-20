@@ -125,7 +125,17 @@ const EditListingWizardTab = props => {
     const { images: updatedImages, ...otherValues } = updateValues;
     const imageProperty =
       typeof updatedImages !== 'undefined' ? { images: imageIds(updatedImages) } : {};
-    const updateValuesWithImages = { ...otherValues, ...imageProperty };
+    let updateValuesWithImages = { ...otherValues, ...imageProperty };
+
+    if (tab === PHOTOS && isNewListingFlow && updatedImages.length) {
+      updateValuesWithImages = {
+        ...updateValuesWithImages,
+        publicData: {
+          ...updateValuesWithImages.publicData,
+          listinghasImages: true
+        }
+      }
+    }
 
     if (isNewListingFlow) {
       const onUpsertListingDraft = isNewURI
