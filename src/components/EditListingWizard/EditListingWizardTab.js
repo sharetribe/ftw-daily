@@ -132,7 +132,7 @@ const EditListingWizardTab = props => {
         ...updateValuesWithImages,
         publicData: {
           ...updateValuesWithImages.publicData,
-          listinghasImages: true
+          listingHasImages: true
         }
       }
     }
