@@ -183,7 +183,7 @@
   color: var(--matterColor);
 
   margin-top: 0;
-  margin-bottom: 0px;
+  margin-bottom: -5px;
   @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 0;
