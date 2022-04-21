@@ -127,8 +127,6 @@ export class SearchPageComponent extends Component {
     this.setState({ isCategoryFilterOpen: false });
   }
 
-
-
   render() {
     const {
       intl,

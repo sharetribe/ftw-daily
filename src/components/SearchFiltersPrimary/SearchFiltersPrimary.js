@@ -2,7 +2,7 @@ import React from 'react';
 import { bool, func, node, number, string } from 'prop-types';
 import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
-import { OutsideClickHandler } from '../../components';
+import { OutsideClickHandler, IconCloseCustom } from '../../components';
 
 import css from './SearchFiltersPrimary.module.css';
 import { Classnames } from 'react-alice-carousel';
@@ -74,7 +74,7 @@ const SearchFiltersPrimaryComponent = props => {
 
         <div className={css.filters}>
           <OutsideClickHandler onOutsideClick={isCategoryFilterOpen && onOpenCategoryFilter || onCloseCategoryFilter}>
-            <button className={classNames(css.searchFiltersPanelClosed, {[css.active]: isCategoryFilterEnabled})} onClick={onOpenCategoryFilter}>
+            <button className={classNames(css.searchFiltersPanelClosed, { [css.active]: isCategoryFilterEnabled })} onClick={onOpenCategoryFilter}>
               <FormattedMessage id="SearchFiltersPrimary.categoriesBtn" />
             </button>
             {isCategoryFilterOpen && (
@@ -82,6 +82,9 @@ const SearchFiltersPrimaryComponent = props => {
                 <div className={css.categoryItems}>
                   <h3 className={css.categoryItemsTitle}>
                     <FormattedMessage id="SearchFiltersPrimary.categories" />
+                    <div onClick={onCloseCategoryFilter}>
+                      <IconCloseCustom />
+                    </div>
                   </h3>
 
                   <div className={css.categoryItemsHolder}>
