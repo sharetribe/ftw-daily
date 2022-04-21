@@ -8,9 +8,9 @@ export const createMiddleware = handlers => () => next => action => {
   const { type, payload } = action;
 
   if (type === LOCATION_CHANGED) {
-    const { canonicalUrl } = payload;
+    const { canonicalPath } = payload;
     handlers.forEach(handler => {
-      handler.trackPageView(canonicalUrl);
+      handler.trackPageView(canonicalPath);
     });
   }
 
