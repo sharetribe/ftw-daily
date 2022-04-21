@@ -163,10 +163,17 @@
 }
 
 .categoryItemsTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   @apply --marketplaceSearchFilterSublabelFontStyles;
   margin: 0 0 17px;
   line-height: 27px;
   
+  & svg {
+    cursor: pointer;
+  }
 }
 
 .categoryItemsHolder {

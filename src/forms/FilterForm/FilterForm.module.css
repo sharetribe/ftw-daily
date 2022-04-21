@@ -95,8 +95,8 @@
   
   & .cancelButton {
     position: absolute;
-    right: 14px;
-    top: 22px;
+    right: 15px;
+    top: 25px;
     margin: 0;
     height: 12px;
     display: flex;
@@ -151,7 +151,7 @@
   font-family: var(--fontFamilySofiapro);
   font-weight: var(--fontWeightRegular);
   letter-spacing: 0;
-  border-top: 1px solid var(--matterColorNegative);
+  /* border-top: 1px solid var(--matterColorNegative); */
   
   @media (--viewportMedium) {
     padding: 24px 39px;
