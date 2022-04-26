@@ -54,7 +54,6 @@ import subCategoryEventsAndVenuesPrivateDining from "./sub-categories/sub-catego
 import subCategoryKitchensAndPopUpsKitchenSpace from "./sub-categories/sub-category-kitchensAndPopUps-kitchenSpace.jpg"
 import subCategoryKitchensAndPopUpsPopUpSpace from "./sub-categories/sub-category-kitchensAndPopUps-popUpSpace.jpg"
 
-
 const mainCategoriesImages = {
   coworking: mainCategoryCoworking,
   fitness: mainCategoryFitness,
@@ -115,7 +114,6 @@ const subCategoriesImages = {
   kitchenSpace: subCategoryKitchensAndPopUpsKitchenSpace,
   popUpSpace: subCategoryKitchensAndPopUpsPopUpSpace,
 }
-
 
 const categoryImages = {
   mainCategoriesImages,
