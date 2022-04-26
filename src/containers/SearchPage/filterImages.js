@@ -7,13 +7,13 @@ import mainCategoryMusicArts from "./main-categories/main-category-music-arts.jp
 import mainCategoryPhotographyFilm from "./main-categories/main-category-photography-film.jpg"
 import mainCategoryWellness from "./main-categories/main-category-wellness.jpg"
 
-import subCategoryHairBeauty1 from "./sub-categories/sub-category-hair-beauty-1.jpg"
-import subCategoryHairBeauty2 from "./sub-categories/sub-category-hair-beauty-2.jpg"
-import subCategoryHairBeauty3 from "./sub-categories/sub-category-hair-beauty-3.jpg"
-import subCategoryHairBeauty4 from "./sub-categories/sub-category-hair-beauty-4.jpg"
-import subCategoryHairBeauty5 from "./sub-categories/sub-category-hair-beauty-5.jpg"
-import subCategoryHairBeauty6 from "./sub-categories/sub-category-hair-beauty-6.jpg"
-import subCategoryHairBeauty7 from "./sub-categories/sub-category-hair-beauty-7.jpg"
+import subCategoryHairBeautyHairStylist from "./sub-categories/sub-category-hair-beauty-hair-stylist.jpg"
+import subCategoryHairBeautyBarber from "./sub-categories/sub-category-hair-beauty-barber.jpg"
+import subCategoryHairBeautyMakeupArtist from "./sub-categories/sub-category-hair-beauty-beauty-space.jpg"
+import subCategoryHairBeautyNailTechnician from "./sub-categories/sub-category-hair-beauty-nail-station.jpg"
+import subCategoryHairBeautyCosmetics from "./sub-categories/sub-category-hair-beauty-beauty-room.jpg"
+import subCategoryHairBeautyAesthetics from "./sub-categories/sub-category-hair-beauty-aesthetics.jpg"
+import subCategoryHairBeautyTattooAndPiercing from "./sub-categories/sub-category-hair-beauty-tattoo-piercing.jpg"
 
 import subCategoryWellnessTherapyRoom from "./sub-categories/sub-category-wellness-therapyRoom.jpg"
 import subCategoryWellnessClinicalRoom from "./sub-categories/sub-category-wellness-clinicalRoom.jpg"
@@ -55,8 +55,6 @@ import subCategoryKitchensAndPopUpsKitchenSpace from "./sub-categories/sub-categ
 import subCategoryKitchensAndPopUpsPopUpSpace from "./sub-categories/sub-category-kitchensAndPopUps-popUpSpace.jpg"
 
 
-
-
 const mainCategoriesImages = {
   coworking: mainCategoryCoworking,
   fitness: mainCategoryFitness,
@@ -68,16 +66,15 @@ const mainCategoriesImages = {
   wellness: mainCategoryWellness,
 }
 
-
 const subCategoriesImages = {
   // Hair & Beauty
-  hairStylist: subCategoryHairBeauty1,
-  barber: subCategoryHairBeauty2,
-  makeupArtist: subCategoryHairBeauty3,
-  nailTechnician: subCategoryHairBeauty4,
-  cosmetics: subCategoryHairBeauty5,
-  aesthetics: subCategoryHairBeauty6,
-  tattooAndPiercing: subCategoryHairBeauty7,
+  hairStylist: subCategoryHairBeautyHairStylist,
+  barber: subCategoryHairBeautyBarber,
+  makeupArtist: subCategoryHairBeautyMakeupArtist,
+  nailTechnician: subCategoryHairBeautyNailTechnician,
+  cosmetics: subCategoryHairBeautyCosmetics,
+  aesthetics: subCategoryHairBeautyAesthetics,
+  tattooAndPiercing: subCategoryHairBeautyTattooAndPiercing,
   // Wellness
   therapyRoom: subCategoryWellnessTherapyRoom,
   clinicalRoom: subCategoryWellnessClinicalRoom,
@@ -118,8 +115,6 @@ const subCategoriesImages = {
   kitchenSpace: subCategoryKitchensAndPopUpsKitchenSpace,
   popUpSpace: subCategoryKitchensAndPopUpsPopUpSpace,
 }
-
-
 
 
 const categoryImages = {
