@@ -205,6 +205,7 @@ export const createSearchResultSchema = (listings, address, intl, pub_category, 
 
     const arrToHire = ['activity-room', 'classroom', 'recording-studio', 'drama-studio', 'theatre-space'];
     const arrForHireSpace = ['hair-stylist', 'barber', 'makeup-artist', 'nail-technician', 'cosmetics', 'beauty-treatment-room'];
+
     const cat = e.config.catKeys.split(',');
 
     if(!!filt && filt.sort().join(',') === cat.sort().join(',') && filt.includes('hair-stylist')) {

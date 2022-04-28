@@ -18,9 +18,20 @@ const FilterComponent = props => {
     urlQueryParams,
     initialValues,
     getHandleChangedValueFn,
+    mainCategoriesImages,
+    subCategoriesImages,
+    onOpenCategoryFilter,
+    isCategoryFilterEnabled,
+    isAmenitiesFilterEnabled,
+    isCategory,
+    isCategoryAmenities,
+    setCurrentActiveCategory,
+    currentActiveCategory,
+    isMobileLayout,
+    setSelectedCategoriesLength,
     ...rest
   } = props;
-  const { id, type, queryParamNames, label, config } = filterConfig;
+  const { id, type, queryParamNames, label, labelImg, labelMobile, config } = filterConfig;
   const { liveEdit, showAsPopup } = rest;
 
   const useHistoryPush = liveEdit || showAsPopup;
@@ -45,13 +56,26 @@ const FilterComponent = props => {
       return (
         <SelectMultipleFilter
           id={componentId}
+          filterId={id}
           filterConfigId={id}
           label={label}
+          labelMobile={labelMobile}
+          labelImg={labelImg}
           filterConfig={filterConfig}
           name={name}
           queryParamNames={queryParamNames}
           initialValues={initialValues(queryParamNames)}
           onSubmit={getHandleChangedValueFn(useHistoryPush)}
+          mainCategoriesImages={mainCategoriesImages}
+          subCategoriesImages={subCategoriesImages}
+          onOpenCategoryFilter={onOpenCategoryFilter}
+          isCategoryFilterEnabled={isCategoryFilterEnabled}
+          isAmenitiesFilterEnabled={isAmenitiesFilterEnabled}
+          setCurrentActiveCategory={setCurrentActiveCategory}
+          isCategoryAmenities={isCategoryAmenities}
+          currentActiveCategory={currentActiveCategory}
+          isMobileLayout={isMobileLayout}
+          setSelectedCategoriesLength={setSelectedCategoriesLength}
           {...config}
           {...rest}
         />

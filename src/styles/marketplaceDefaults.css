@@ -5,7 +5,7 @@
 :root {
 
   /* pink */
-  --marketplaceColor: #ffabd7; ;
+  --marketplaceColor: #ffabd7;
   /* yellow */
   /* --marketplaceColorLight: #fff5a6; */
   /* slghtly lighter pink */
@@ -43,6 +43,7 @@
 
   --customBlue: #aeecf4;
   --customDarkBlue: #4BB8C5;
+  --matterColorDarkCustom: #111111;
 
   /* ================ Font ================ */
   --fontFamily: 'poppins', Helvetica, Arial, sans-serif;

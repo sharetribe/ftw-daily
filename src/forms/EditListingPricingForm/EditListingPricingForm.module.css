@@ -30,10 +30,28 @@
   -webkit-appearance: textfield;
   -moz-appearance: textfield;
 
+
   &::-webkit-inner-spin-button,
   &::-webkit-outer-spin-button {
     -webkit-appearance: none;
-    margin: 0;
+    margin: 5px;
+  }
+}
+
+@-moz-document url-prefix() {
+  .inputNumber {
+    & input[type="number"] {
+        padding-top: 4px !important;
+        padding-bottom: 3px;
+      @media (--viewportMedium) {
+        padding-top: 0px !important;
+        padding-bottom: 0;
+      }
+      /*@media (--viewportMLarge) {*/
+      /*  padding-top: 0px !important;*/
+      /*  padding-bottom: 0;*/
+      /*}*/
+     }
   }
 }
 

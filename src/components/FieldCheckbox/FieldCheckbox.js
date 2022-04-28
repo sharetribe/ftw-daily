@@ -42,7 +42,10 @@ const FieldCheckboxComponent = props => {
     textClassName,
     id,
     label,
+    labelImg,
     useSuccessColor,
+    isCategory,
+    subCategoryImage,
     ...rest
   } = props;
 
@@ -62,6 +65,11 @@ const FieldCheckboxComponent = props => {
         boxClassName: css.boxSuccess,
       }
     : {};
+  
+    const imgSrc = isCategory && Object.entries(subCategoryImage).filter(el => el[0] === labelImg).map(img => {
+      return img[1]
+    })
+
 
   return (
     <span className={classes}>
@@ -79,9 +87,13 @@ const FieldCheckboxComponent = props => {
         }}
       </Field>
       <label htmlFor={id} className={css.label}>
+
         <span className={css.checkboxWrapper}>
           <IconCheckbox className={svgClassName} {...successColorVariantMaybe} />
         </span>
+
+        {isCategory && <img src={imgSrc} alt={label} />}
+
         <span className={classNames(css.text, textClassName || css.textRoot)}>{label}</span>
       </label>
     </span>

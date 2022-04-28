@@ -19,7 +19,8 @@
   flex-direction: column;
   min-height: 100vh;
   height: auto;
-& [class*="Avatar_largeAvatar"] {
+
+  & [class*="Avatar_largeAvatar"] {
     width: 64px;
     height: 64px;
   }
@@ -50,6 +51,7 @@
   flex-shrink: 0;
   margin: calc(var(--TopbarMobileMenu_topMargin) + 16px) 0 0 0;
 }
+
 .sizeAvatar {
   width: 64px;
   height: 64px;
@@ -98,6 +100,7 @@
   margin-top: 0;
   margin-bottom: 24px;
 }
+
 .currentPageLink {
   color: var(--marketplaceColorDark);
 }
@@ -129,6 +132,7 @@
   margin-bottom: 24px;
   margin-top: var(--TopbarMobileMenu_topMargin);
 }
+
 .authenticationLinks {
   white-space: nowrap;
 }
@@ -138,6 +142,7 @@
   white-space: nowrap;
   color: var(--marketplaceColor);
 }
+
 .loginLink {
   text-decoration: none;
   white-space: nowrap;

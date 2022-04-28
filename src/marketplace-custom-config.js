@@ -90,7 +90,7 @@ export const filters = [
     // Note: unlike most prices this is not handled in subunits
     config: {
       min: 0,
-      max: 10000,
+      max: 50000,
       step: 5,
       isCategory: false,
       catKeys: '',
@@ -183,9 +183,9 @@ export const filters = [
     },
   },
   {
-    id: 'photography_and_film',
-    label: 'Photography & Film',
-    labelImg: 'photographyAndFilm',
+    id: 'events_and_venues',
+    label: 'Events & Venues',
+    labelImg: 'eventsAndVenues',
     type: 'SelectMultipleFilter',
     group: 'primary',
     queryParamNames: ['pub_category'],
@@ -195,9 +195,9 @@ export const filters = [
       // "label" is set here for the UI only.
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
-      options: photographyAndFilmOptions,
+      options: eventsAndVenuesOptions,
       isCategory: true,
-      catKeys: 'photography,location-shoot,outdoor-site',
+      catKeys: 'music-venue,private-event-space,sports-venue,conference-exhibition,outdoor-events,private-dining',
     },
   },
   {
@@ -237,9 +237,9 @@ export const filters = [
     },
   },
   {
-    id: 'events_and_venues',
-    label: 'Events & Venues',
-    labelImg: 'eventsAndVenues',
+    id: 'photography_and_film',
+    label: 'Photography & Film',
+    labelImg: 'photographyAndFilm',
     type: 'SelectMultipleFilter',
     group: 'primary',
     queryParamNames: ['pub_category'],
@@ -249,9 +249,9 @@ export const filters = [
       // "label" is set here for the UI only.
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
-      options: eventsAndVenuesOptions,
+      options: photographyAndFilmOptions,
       isCategory: true,
-      catKeys: 'music-venue,private-event-space,sports-venue,conference-exhibition,outdoor-events,private-dining',
+      catKeys: 'photography,location-shoot,outdoor-site',
     },
   },
   {
@@ -293,12 +293,15 @@ export const filters = [
       // to make filter customizations a bit easier.
       options: generalAmenitiesOptions,
       isCategory: false,
+      isGeneralAmenities: true,
       catKeys: 'all',
     },
   },
   {
     id: 'hair_beauty_amenities',
+    idCategory: 'hair_and_beauty',
     label: 'Hair & Beauty Amenities',
+    labelMobile: 'Patch Amenities',
     type: 'SelectMultipleFilter',
     group: 'secondary',
     queryParamNames: ['pub_amenities'],
@@ -312,12 +315,15 @@ export const filters = [
       // to make filter customizations a bit easier.
       options: hairAndBeautyAmenitiesOptions,
       isCategory: false,
+      isCategoryAmenities: true,
       catKeys: 'hair-stylist,barber,makeup-artist,nail-technician,cosmetics,aesthetics,tattoo-and-piercing',
     },
   },
   {
     id: 'wellness_amenities',
+    idCategory: 'wellness',
     label: 'Wellness Amenities',
+    labelMobile: 'Patch Amenities',
     type: 'SelectMultipleFilter',
     group: 'secondary',
     queryParamNames: ['pub_amenities'],
@@ -331,12 +337,15 @@ export const filters = [
       // to make filter customizations a bit easier.
       options: wellnessAmenitiesOptions,
       isCategory: false,
+      isCategoryAmenities: true,
       catKeys: 'therapy-room,massage-room,clinical-room',
     },
-  },
+  },  
   {
     id: 'fitness_amenities',
+    idCategory: 'fitness',
     label: 'Fitness Amenities',
+    labelMobile: 'Patch Amenities',
     type: 'SelectMultipleFilter',
     group: 'secondary',
     queryParamNames: ['pub_amenities'],
@@ -350,12 +359,15 @@ export const filters = [
       // to make filter customizations a bit easier.
       options: fitnessAmenitiesOptions,
       isCategory: false,
+      isCategoryAmenities: true,
       catKeys: 'fitness,yoga-studio,dance-studio,sports-hall,outdoor-sport-space,activity-room',
     },
   },
   {
     id: 'photography_and_film_amenities',
+    idCategory: 'photography_and_film',
     label: 'Photography & Film Amenities',
+    labelMobile: 'Patch Amenities',
     type: 'SelectMultipleFilter',
     group: 'secondary',
     queryParamNames: ['pub_amenities'],
@@ -369,12 +381,15 @@ export const filters = [
       // to make filter customizations a bit easier.
       options: photographyAndFilmAmenitiesOptions,
       isCategory: false,
+      isCategoryAmenities: true,
       catKeys: 'music-studio,recording-studio,gallery-space,art-studio,rehearsal-space,drama-studio,theatre-space',
     },
   },
   {
     id: 'coworking_amenities',
+    idCategory: 'coworking',
     label: 'Coworking Amenities',
+    labelMobile: 'Patch Amenities',
     type: 'SelectMultipleFilter',
     group: 'secondary',
     queryParamNames: ['pub_amenities'],
@@ -388,12 +403,15 @@ export const filters = [
       // to make filter customizations a bit easier.
       options: coworkingAmenitiesOptions,
       isCategory: false,
+      isCategoryAmenities: true,
       catKeys: 'desk-space,office-space,meeting-room-space,conference-room,classroom',
     },
   },
   {
     id: 'music_and_arts_amenities',
+    idCategory: 'music_and_arts',
     label: 'Music & Arts Amenities',
+    labelMobile: 'Patch Amenities',
     type: 'SelectMultipleFilter',
     group: 'secondary',
     queryParamNames: ['pub_amenities'],
@@ -407,12 +425,15 @@ export const filters = [
       // to make filter customizations a bit easier.
       options: musicAndArtsAmenitiesOptions,
       isCategory: false,
+      isCategoryAmenities: true,
       catKeys: 'music-studio,recording-studio,gallery-space,art-studio,rehearsal-space,drama-studio,theatre-space',
     },
-  },
+  },  
   {
     id: 'events_amenities',
+    idCategory: 'events_and_venues',
     label: 'Events Amenities',
+    labelMobile: 'Patch Amenities',
     type: 'SelectMultipleFilter',
     group: 'secondary',
     queryParamNames: ['pub_amenities'],
@@ -427,12 +448,15 @@ export const filters = [
       // to make filter customizations a bit easier.
       options: eventsAndVenuesAmenitiesOptions,
       isCategory: false,
+      isCategoryAmenities: true,
       catKeys: 'music-venue,private-event-space,sports-venue,conference-exhibition,outdoor-events,private-dining',
     },
   },
   {
     id: 'kitchen_amenities',
+    idCategory: 'kitchensand_pop_ups',
     label: 'Kitchen Amenities',
+    labelMobile: 'Patch Amenities',
     type: 'SelectMultipleFilter',
     group: 'secondary',
     queryParamNames: ['pub_amenities'],
@@ -446,7 +470,8 @@ export const filters = [
       // to make filter customizations a bit easier.
       options: kitchenAmenitiesOptions,
       isCategory: false,
-      catKeys: 'kitchen-space',
+      isCategoryAmenities: true,
+      catKeys: 'kitchen-space, pop-up-space',
     },
   },
 ];

@@ -252,15 +252,15 @@ export const findNextBoundary = (timeZone, currentMomentOrDate) =>
     .toDate();
 
 export const findNextBoundaryCustom = (timeZone, currentMomentOrDate, minBooking) => {
-// if need change 1 hour to 0.5
+    // if minBooking === true  that change 1 hour to 0.5
   const typeTime = minBooking === HOURLY_BOOKING ? 'minutes' : 'hour'
   const countTime = minBooking === HOURLY_BOOKING ? 30 - (moment(currentMomentOrDate).minute() % 30) : 1
 
   return moment(currentMomentOrDate)
     .clone()
     .tz(timeZone)
-    .add(1, 'hour')
-    .startOf('hour')
+    .add(countTime, typeTime)
+    .startOf(typeTime)
     .toDate();
 }
 

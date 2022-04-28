@@ -23,7 +23,7 @@
     background-color: var(--matterColorLight);
     border-color: transparent;
     text-decoration: none;
-    box-shadow: var(--boxShadowFilterButton);
+    /* box-shadow: var(--boxShadowFilterButton); */
   }
 }
 

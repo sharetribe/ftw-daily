@@ -3,10 +3,12 @@ import { bool, func, node, object } from 'prop-types';
 import classNames from 'classnames';
 import { Form as FinalForm, FormSpy } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
-import { injectIntl, intlShape } from '../../util/reactIntl';
+import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 
-import { Form } from '../../components';
+import { Form, IconCloseCustom } from '../../components';
 import css from './FilterForm.module.css';
+
+const MODAL_BREAKPOINT = 768; // Search is in modal on mobile layout
 
 const FilterFormComponent = props => {
   const { liveEdit, onChange, onSubmit, onCancel, onClear, ...rest } = props;
@@ -27,6 +29,8 @@ const FilterFormComponent = props => {
     }
   };
 
+  const isMobileLayout = !!window && window.innerWidth < MODAL_BREAKPOINT;
+
   const formCallbacks = liveEdit ? { onSubmit: () => null } : { onSubmit, onCancel, onClear };
   return (
     <FinalForm
@@ -44,6 +48,14 @@ const FilterFormComponent = props => {
           paddingClasses,
           intl,
           children,
+          isCategory,
+          isCategoryAmenities,
+          activeCategory,
+          closeSubCategory,
+          // mobile
+          isSubCategoryOpen,
+          toggleIsSubCategoryOpen,
+          selectedItemsCounter,
         } = formRenderProps;
 
         const handleCancel = () => {
@@ -56,7 +68,7 @@ const FilterFormComponent = props => {
         const cancel = intl.formatMessage({ id: 'FilterForm.cancel' });
         const submit = intl.formatMessage({ id: 'FilterForm.submit' });
 
-        const classes = classNames(css.root);
+        const classes = classNames(css.root, { [css.subCategoryItem]: isCategory });
 
         return (
           <Form
@@ -66,7 +78,35 @@ const FilterFormComponent = props => {
             tabIndex="0"
             style={{ ...style }}
           >
-            <div className={classNames(paddingClasses || css.contentWrapper)}>{children}</div>
+            {isCategory ? (
+              <div>
+                <div className={classNames(css.subcategoryHeading, {[css.subcategoryHeading]: isSubCategoryOpen})} onClick={toggleIsSubCategoryOpen}>
+                  <span className={css.subcategoryHeadingDesktop}>
+                    <FormattedMessage id="FilterForm.patchCategory" />
+                  </span>
+                  <span className={css.subcategoryHeadingMobile}>
+                    <FormattedMessage id="FilterForm.subcategory" />
+                    {!!selectedItemsCounter && ` • ${selectedItemsCounter}`}
+                  </span>
+                  <span className={css.activeCategory} onClick={closeSubCategory}>
+                    {activeCategory}
+                  </span>
+                </div>
+                {(!isMobileLayout || isSubCategoryOpen) && (
+                  <>
+                    <div className={css.subcategorySubHeading}>
+                      <FormattedMessage id="FilterForm.subcategory" />
+                      <button className={css.subcategoryClearButton} type="button" onClick={onClear}>
+                        <FormattedMessage id="FilterForm.reset" />
+                      </button>
+                    </div>
+                    <div className={classNames(paddingClasses || css.contentWrapper)}>{children}</div>
+                  </>
+                )}
+              </div>
+            ) : (
+              <div className={classNames(paddingClasses || css.contentWrapper)}>{children}</div>
+            )}
 
             {liveEdit ? (
               <FormSpy onChange={handleChange} subscription={{ values: true, dirty: true }} />
@@ -76,7 +116,7 @@ const FilterFormComponent = props => {
                   {clear}
                 </button>
                 <button className={css.cancelButton} type="button" onClick={handleCancel}>
-                  {cancel}
+                  {isCategory ? <IconCloseCustom /> : cancel}
                 </button>
                 <button className={css.submitButton} type="submit">
                   {submit}

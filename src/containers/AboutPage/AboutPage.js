@@ -26,7 +26,7 @@ const AboutPage = () => {
       <LayoutSingleColumn>
         <LayoutWrapperTopbar>
           <TopbarContainer />
-        </LayoutWrapperTopbar>
+      </LayoutWrapperTopbar>
 
         <LayoutWrapperMain className={css.staticPageWrapper}>
           <h1 className={css.pageTitle}>About us</h1>
@@ -34,38 +34,25 @@ const AboutPage = () => {
           <div className={css.contentWrapper}>
             <div className={css.contentMain}>
               <h2>
-                Your Workspace, Unleashed!
+                Discover HotPatch, the space-sharing platform that allows you to book the space you need, whenever you need it.
               </h2>
 
               <p>
-                Around the world, we are seeing more and more professionals looking for flexible working space
-                on their own terms and business owners who want to make sure they are getting the best use out of their space.  
+                More and more, we’re seeing that professionals from around the world are wanting to work on their own terms, in a place that best suits them. Meanwhile business owners are looking to make the most out of their underused space.  
               </p>
               <p>
-                There’s currently a huge gap between those seeking this independence and those with the space
-                available. At HotPatch, we are working hard to fix that.
+                At HotPatch, we work hard to bridge the gap between those seeking a flexible space to work from and those with space available. Whether you’re a flexible worker, or a business looking to benefit from your underused space, this is where HotPatch comes in.
               </p>
 
-              <h2>Make Space Work</h2>
+              <h2>Make Space Work for You</h2>
 
-              <p>Discover HotPatch, the space-sharing platform for the modern workforce.</p>
+              <p>In order to remove the disconnect between those with space and those who need it, HotPatch is offering a dependable platform that’s easy to use and completely transparent.</p>
 
-              <p>HotPatch brings Patch Users and Patch Hosts together. Our ambition is to remove
-              the disconnect between those with space and those who need it, by offering a
-              trustworthy platform that’s easy to use and transparent.</p>
+              <p>There’s no multi-page enquiry shenanigans here. Get straight to browsing the incredible offering of Patches and booking them as quickly as possible. HotPatch is dedicated to making space work for you with as few obstacles as possible.</p>
 
-              <p>Maybe you’re a fitness professional or a hairdresser? Maybe you are a tattoo artist
-              or beautician? Perhaps a business owner who wants to make the most of their
-              awesome space?</p>
+              <p>Maybe you’re a fitness professional or a hairdresser? An events planner, artist, or photographer? Perhaps a business owner who wants to bring in more income from their awesome space? We’re here to help.</p>
 
-              <p>HotPatch has you covered.</p>
-
-              <p>Forget empty and underused workspaces for your business. Forget hours wasted
-              on Craigslist and GumTree looking for the ideal Patch to work from. It’s time to
-              Make Space Work!</p>
-
-              <p>Have any questions about Making Space Work? Head over to our FAQ or reach out
-              to the HotPatch team at <a href="mailto:hello@hotpatch.com.">hello@hotpatch.com.</a></p>
+              <p>Have any questions? Head over to our <a href="https://www.hotpatch.com/faq">FAQ</a> or reach out to the HotPatch team at <a href="mailto:hello@hotpatch.com.">hello@hotpatch.com</a>.</p>
 
               <br></br>
 

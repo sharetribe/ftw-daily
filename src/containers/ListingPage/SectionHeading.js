@@ -33,6 +33,7 @@ const SectionHeading = props => {
   return (
     <div className={css.sectionHeading}>
       <div className={css.desktopPriceContainer}>
+      <p className={css.desktopPerUnit}>from</p>
         <div className={css.desktopPriceValue} title={priceTitle}>
           {formattedPrice}
         </div>

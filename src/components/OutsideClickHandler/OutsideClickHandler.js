@@ -20,6 +20,7 @@ export default class OutsideClickHandler extends Component {
   }
 
   handleClick(event) {
+    
     if (!this.node.contains(event.target)) {
       this.props.onOutsideClick();
     }

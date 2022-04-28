@@ -324,8 +324,8 @@
   color: var(--matterColor);
 
   @media (--viewportMedium) {
-    margin-top: 0;
-    margin-bottom: 0;
+    margin-top: -10px;
+    margin-bottom: -5px;
   }
 }
 
@@ -435,6 +435,9 @@
   }
 }
 
+.capacity {
+  word-wrap: break-word;
+}
 .description, .capacity, .quantity {
   margin-top: 0;
   margin-bottom: 0;

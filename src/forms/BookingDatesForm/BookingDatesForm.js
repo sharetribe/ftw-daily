@@ -248,6 +248,7 @@ export class BookingDatesFormComponent extends Component {
                 seats={seats}
                 minBookingCount={minBookingCount}
                 minBookingType={minBookingType}
+                bookingType={bookingType}
               />
 
               {bookingInfoMaybe}

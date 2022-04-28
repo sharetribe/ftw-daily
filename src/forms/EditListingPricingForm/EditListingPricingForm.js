@@ -150,20 +150,28 @@ export const EditListingPricingFormComponent = props => (
       };
 
         useEffect( () => {
+          if( !values.minBookingType ) {
+            setStep(null)
+            setMaxStep(null)
+            form.change('minBookingCount', null)
+          }
           if ( values.minBookingType === HOURLY_BOOKING ) {
             setStep(0.5)
             setMaxStep(24)
             form.change('minBookingCount', 0.5)
-          } else {
-            setStep(1)
-            form.change('minBookingCount', 1)
           }
           if ( values.minBookingType === DAILY_BOOKING ) {
             setMaxStep(daysInMonth(new Date().getMonth(), new Date().getFullYear()))
+            form.change('minBookingCount', 1)
           }
-          if ( values.minBookingType === WEEKLY_BOOKING ) setMaxStep(4)
-          if ( values.minBookingType === MONTHLY_BOOKING ) setMaxStep(12)
-
+          if ( values.minBookingType === WEEKLY_BOOKING ) {
+            setMaxStep(4)
+            form.change('minBookingCount', 1)
+          }
+          if ( values.minBookingType === MONTHLY_BOOKING ) {
+            setMaxStep(12)
+            form.change('minBookingCount', 1)
+          }
         }, [values.minBookingType])
 
         const [ step, setStep ] = useState(0.5)
@@ -222,36 +230,37 @@ export const EditListingPricingFormComponent = props => (
             currencyConfig={config.currencyConfig}
           />
 
-          {/*<p className={css.labelMinBook}>*/}
-          {/*  <FormattedMessage id="EditListingPricingForm.infoTextMinBook" />*/}
-          {/*</p>*/}
-          {/*<div className={css.blockMiningBooking}>*/}
-          {/*  <FieldSelect*/}
-          {/*    id="minBookingType"*/}
-          {/*    name="minBookingType"*/}
-          {/*    className={classNames(css.priceInput, css.minBookInput)}*/}
-          {/*    // label={intl.formatMessage({ id: 'EditListingPricingForm.discountTypeMessage' })}*/}
-          {/*    // defaultValue={config.custom.discountTypes[0].key}*/}
-          {/*  >*/}
-          {/*    <option value="" disabled> </option>*/}
-          {/*    {config.custom.discountTypes.map(({ key, label}) => (*/}
-          {/*      <option value={key} key={key}>{label}</option>*/}
-          {/*    ))}*/}
-          {/*  </FieldSelect>*/}
+          <p className={css.labelMinBook}>
+            <FormattedMessage id="EditListingPricingForm.infoTextMinBook" />
+          </p>
+          <div className={css.blockMiningBooking}>
+            <FieldSelect
+              id="minBookingType"
+              name="minBookingType"
+              className={classNames(css.priceInput, css.minBookInput)}
+              // label={intl.formatMessage({ id: 'EditListingPricingForm.discountTypeMessage' })}
+              // defaultValue={config.custom.discountTypes[0].key}
+            >
+              {/*<option value="" disabled> </option>*/}
+              <option value=""> </option>
+              {config.custom.discountTypes.map(({ key, label}) => (
+                <option value={key} key={key}>{label}</option>
+              ))}
+            </FieldSelect>
 
-          {/*  <FieldTextInput*/}
-          {/*    id="minBookingCount"*/}
-          {/*    name="minBookingCount"*/}
-          {/*    className={classNames(css.inputNumber, css.minBookInput)}*/}
-          {/*    type='number'*/}
-          {/*    // label={intl.formatMessage({ id: 'EditListingPricingForm.discountAmountMessage' })}*/}
-          {/*    defaultValue={step}*/}
-          {/*    min={step}*/}
-          {/*    max={maxStep}*/}
-          {/*    step={step}*/}
-          {/*    parse={parsePercentage}*/}
-          {/*  />*/}
-          {/*</div>*/}
+            <FieldTextInput
+              id="minBookingCount"
+              name="minBookingCount"
+              className={classNames(css.inputNumber, css.minBookInput)}
+              type='number'
+              // label={intl.formatMessage({ id: 'EditListingPricingForm.discountAmountMessage' })}
+              defaultValue={step}
+              min={step}
+              max={maxStep}
+              step={step}
+              parse={parsePercentage}
+            />
+          </div>
 
 
           {/* <h3>{intl.formatMessage({ id: 'EditListingPricingForm.discountHeader' })}</h3>
