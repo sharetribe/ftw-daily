@@ -382,7 +382,7 @@ export const filters = [
       options: photographyAndFilmAmenitiesOptions,
       isCategory: false,
       isCategoryAmenities: true,
-      catKeys: 'photography,location-shootoutdoor-site',
+      catKeys: 'photography,location-shoot,outdoor-site',
     },
   },
   {
