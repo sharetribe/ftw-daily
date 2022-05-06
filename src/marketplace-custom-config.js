@@ -382,7 +382,7 @@ export const filters = [
       options: photographyAndFilmAmenitiesOptions,
       isCategory: false,
       isCategoryAmenities: true,
-      catKeys: 'music-studio,recording-studio,gallery-space,art-studio,rehearsal-space,drama-studio,theatre-space',
+      catKeys: 'photography,location-shoot,outdoor-site',
     },
   },
   {
@@ -471,10 +471,11 @@ export const filters = [
       options: kitchenAmenitiesOptions,
       isCategory: false,
       isCategoryAmenities: true,
-      catKeys: 'kitchen-space, pop-up-space',
+      catKeys: 'kitchen-space,pop-up-space',
     },
   },
 ];
+
 
 // This can be used to populate all of the combined categories
 // for example, on the new listing page, to select a category

@@ -17,9 +17,11 @@ class SearchFiltersMobileComponent extends Component {
     this.state = {
       isFiltersOpenOnMobile: false,
       initialQueryParams: null,
+      isCategoryFiltersOpenOnMobile: false,
     };
 
     this.openFilters = this.openFilters.bind(this);
+    this.openCategoryFilters = this.openCategoryFilters.bind(this);
     this.cancelFilters = this.cancelFilters.bind(this);
     this.closeFilters = this.closeFilters.bind(this);
     this.resetAll = this.resetAll.bind(this);
@@ -30,6 +32,10 @@ class SearchFiltersMobileComponent extends Component {
     const { onOpenModal, urlQueryParams } = this.props;
     onOpenModal();
     this.setState({ isFiltersOpenOnMobile: true, initialQueryParams: urlQueryParams });
+  }
+
+  openCategoryFilters() {
+    this.setState({ isCategoryFiltersOpenOnMobile: !this.state.isCategoryFiltersOpenOnMobile });
   }
 
   // Close the filters by clicking cancel, revert to the initial params
@@ -149,30 +155,31 @@ class SearchFiltersMobileComponent extends Component {
 
           {this.state.isFiltersOpenOnMobile ? (
             <>
-              <div className={css.filtersWrapperTitle}>
+              <div className={classNames(css.filtersWrapperTitle, {[css.filtersWrapperTitleActive]: this.state.isCategoryFiltersOpenOnMobile})} onClick={this.openCategoryFilters}>
                 <FormattedMessage id={'FilterForm.patchCategoryMobile'} />
               </div>
               <div className={css.filtersWrapper}>
-                <div className={css.categoryItemsHolder}>
-                  {categoryChildren.map((category, i) => {
+                {this.state.isCategoryFiltersOpenOnMobile && (
+                  <div className={css.categoryItemsHolder}>
+                    {categoryChildren.map((category, i) => {
 
-                    const categoryAmenities = children.filter(item => item.props.filterConfig.idCategory === category.props.filterConfig.id)
-                    const categoryItemClasses = classNames(
-                      css.categoryItem,
-                      { [css.categoryItemActive]: category.props.filterConfig.id === currentActiveCategory },
-                      { [css.categoryItemNotActive]: !!currentActiveCategory && category.props.filterConfig.id !== currentActiveCategory },
-                      // { [css.generalAmenitiesFilterActive]: generalAmenitiesFilterActive }
-                    )
+                      const categoryAmenities = children.filter(item => item.props.filterConfig.idCategory === category.props.filterConfig.id)
+                      const categoryItemClasses = classNames(
+                        css.categoryItem,
+                        { [css.categoryItemActive]: category.props.filterConfig.id === currentActiveCategory },
+                        { [css.categoryItemNotActive]: !!currentActiveCategory && category.props.filterConfig.id !== currentActiveCategory },
+                        // { [css.generalAmenitiesFilterActive]: generalAmenitiesFilterActive }
+                      )
 
-                    return (
-                      <div key={`category-${i}`} className={categoryItemClasses}>
-                        {categoryAmenities}
-                        {category}
-                      </div>
-                    )
-                  })}
-
-                </div>
+                      return (
+                        <div key={`category-${i}`} className={categoryItemClasses}>
+                          {categoryAmenities}
+                          {category}
+                        </div>
+                      )
+                    })}
+                  </div>
+                )}
                 {nonCategoryChildren}
               </div>
             </>
