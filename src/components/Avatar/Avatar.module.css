@@ -54,7 +54,11 @@
 .initials {
   font-size: 14px;
   font-weight: var(--fontWeightBold);
-  padding-bottom: 4px;
+  /* padding-bottom: 4px; */
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 .avatarImage {
@@ -76,7 +80,7 @@
 .mediumAvatar .initials {
   font-size: 20px;
   font-weight: var(--fontWeightSemiBold);
-  padding-bottom: 5px;
+  /* padding-bottom: 5px; */
 }
 
 /* Large Avatar */
@@ -92,7 +96,7 @@
 .largeAvatar .initials {
   font-size: 30px;
   font-weight: var(--fontWeightSemiBold);
-  padding-bottom: 6px;
+  /* padding-bottom: 6px; */
 }
 
 .bannedUserIcon {
