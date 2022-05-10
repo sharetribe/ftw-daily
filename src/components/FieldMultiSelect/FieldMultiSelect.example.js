@@ -22,8 +22,8 @@ const FormComponent = props => (
           <FormSpy onChange={onChange} />
           <FieldMultiSelect id="select2" placeholder="placeholder" name="select2" label="Choose an option:" validate={required} 
           options={[
-            {key: 'hair-stylist', label: 'Hair Stylist'},
-            {key: 'barber', label: 'Barber'},
+            {key: 'hair-stylist', label: 'Salon Chair'},
+            {key: 'barber', label: 'Barber Chair'},
             {key: 'makeup-artist', label: 'Beauty Space'}]}
              />
             {/* <option value="">Pick something...</option>

@@ -45,8 +45,8 @@ export const generalAmenitiesOptions = [
 
 
 export const hairAndBeautyOptions = [
-  { key: 'hair-stylist', label: 'Hair Stylist', metaLabel: "Salon Chair", labelImg: 'hairStylist' },
-  { key: 'barber', label: 'Barber', metaLabel: "Barber Chair", labelImg: 'barber' },
+  { key: 'hair-stylist', label: 'Salon Chair', metaLabel: "Salon Chair", labelImg: 'hairStylist' },
+  { key: 'barber', label: 'Barber Chair', metaLabel: "Barber Chair", labelImg: 'barber' },
   { key: 'makeup-artist', label: 'Beauty Space', metaLabel: "Beauty Space", labelImg: 'makeupArtist' },
   { key: 'nail-technician', label: 'Nail Station', metaLabel: "Nail Station", labelImg: 'nailTechnician' },
   { key: 'cosmetics', label: 'Beauty Room', metaLabel: "Beauty Room", labelImg: 'cosmetics' },
