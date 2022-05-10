@@ -40,7 +40,9 @@ const render = (store, shouldHydrate) => {
   // If the server already loaded the auth information, render the app
   // immediately. Otherwise wait for the flag to be loaded and render
   // when auth information is present.
-  const authInfoLoaded = store.getState().Auth.authInfoLoaded;
+  const state = store.getState();
+  const cdnAssetsVersion = state.hostedAssets.version;
+  const authInfoLoaded = state.Auth.authInfoLoaded;
   const info = authInfoLoaded ? Promise.resolve({}) : store.dispatch(authInfo());
   info
     .then(() => {
@@ -49,13 +51,16 @@ const render = (store, shouldHydrate) => {
       // and fetch hosted assets in parallel before initializing the ClientApp
       return Promise.all([
         loadableReady(),
-        store.dispatch(fetchAppAssets(config.appCdnAssets)),
+        store.dispatch(fetchAppAssets(config.appCdnAssets, cdnAssetsVersion)),
       ]);
     })
     .then(([_, fetchedAssets]) => {
       const translations = fetchedAssets?.translations?.data || {};
       if (shouldHydrate) {
-        ReactDOM.hydrate(<ClientApp store={store} />, document.getElementById('root'));
+        ReactDOM.hydrate(
+          <ClientApp store={store} hostedTranslations={translations} />,
+          document.getElementById('root')
+        );
       } else {
         ReactDOM.render(
           <ClientApp store={store} hostedTranslations={translations} />,
@@ -151,4 +156,4 @@ export default renderApp;
 // exporting matchPathname and configureStore for server side rendering.
 // matchPathname helps to figure out which route is called and if it has preloading needs
 // configureStore is used for creating initial store state for Redux after preloading
-export { matchPathname, configureStore, routeConfiguration, config };
+export { matchPathname, configureStore, routeConfiguration, config, fetchAppAssets };

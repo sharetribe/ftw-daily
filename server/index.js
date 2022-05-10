@@ -224,12 +224,12 @@ app.get('*', (req, res) => {
 
   // Server-side entrypoint provides us the functions for server-side data loading and rendering
   const nodeEntrypoint = nodeExtractor.requireEntrypoint();
-  const { default: renderApp, matchPathname, configureStore, routeConfiguration } = nodeEntrypoint;
+  const { default: renderApp, ...appInfo } = nodeEntrypoint;
 
   dataLoader
-    .loadData(req.url, sdk, matchPathname, configureStore, routeConfiguration)
-    .then(preloadedState => {
-      const html = renderer.render(req.url, context, preloadedState, renderApp, webExtractor);
+    .loadData(req.url, sdk, appInfo)
+    .then(data => {
+      const html = renderer.render(req.url, context, data, renderApp, webExtractor);
 
       if (dev) {
         const debugData = {
