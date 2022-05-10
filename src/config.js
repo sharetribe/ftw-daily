@@ -62,6 +62,7 @@ const dayCountAvailableForBooking = 90;
 // exposing server secrets to the client side.
 const sdkClientId = process.env.REACT_APP_SHARETRIBE_SDK_CLIENT_ID;
 const sdkBaseUrl = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL;
+const sdkAssetCdnBaseUrl = process.env.REACT_APP_SHARETRIBE_SDK_ASSET_CDN_BASE_URL;
 const sdkTransitVerbose = process.env.REACT_APP_SHARETRIBE_SDK_TRANSIT_VERBOSE === 'true';
 
 // Marketplace currency.
@@ -203,6 +204,7 @@ const config = {
   sdk: {
     clientId: sdkClientId,
     baseUrl: sdkBaseUrl,
+    assetCdnBaseUrl: sdkAssetCdnBaseUrl,
     transitVerbose: sdkTransitVerbose,
   },
   sortSearchByDistance,

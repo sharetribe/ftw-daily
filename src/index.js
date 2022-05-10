@@ -87,6 +87,9 @@ if (typeof window !== 'undefined') {
   log.setup();
 
   const baseUrl = config.sdk.baseUrl ? { baseUrl: config.sdk.baseUrl } : {};
+  const assetCdnBaseUrl = config.sdk.assetCdnBaseUrl
+    ? { assetCdnBaseUrl: config.sdk.assetCdnBaseUrl }
+    : {};
 
   // eslint-disable-next-line no-underscore-dangle
   const preloadedState = window.__PRELOADED_STATE__ || '{}';
@@ -97,6 +100,7 @@ if (typeof window !== 'undefined') {
     secure: config.usingSSL,
     typeHandlers: apiUtils.typeHandlers,
     ...baseUrl,
+    ...assetCdnBaseUrl,
   });
   const analyticsHandlers = setupAnalyticsHandlers();
   const store = configureStore(initialState, sdk, analyticsHandlers);

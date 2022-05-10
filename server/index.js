@@ -49,6 +49,7 @@ const dev = process.env.REACT_APP_ENV === 'development';
 const PORT = parseInt(process.env.PORT, 10);
 const CLIENT_ID = process.env.REACT_APP_SHARETRIBE_SDK_CLIENT_ID;
 const BASE_URL = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL;
+const ASSET_CDN_BASE_URL = process.env.REACT_APP_SHARETRIBE_SDK_ASSET_CDN_BASE_URL;
 const TRANSIT_VERBOSE = process.env.REACT_APP_SHARETRIBE_SDK_TRANSIT_VERBOSE === 'true';
 const USING_SSL = process.env.REACT_APP_SHARETRIBE_USING_SSL === 'true';
 const TRUST_PROXY = process.env.SERVER_SHARETRIBE_TRUST_PROXY || null;
@@ -199,6 +200,7 @@ app.get('*', (req, res) => {
   });
 
   const baseUrl = BASE_URL ? { baseUrl: BASE_URL } : {};
+  const assetCdnBaseUrl = ASSET_CDN_BASE_URL ? { assetCdnBaseUrl: ASSET_CDN_BASE_URL } : {};
 
   const sdk = sharetribeSdk.createInstance({
     transitVerbose: TRANSIT_VERBOSE,
@@ -208,6 +210,7 @@ app.get('*', (req, res) => {
     tokenStore,
     typeHandlers: sdkUtils.typeHandlers,
     ...baseUrl,
+    ...assetCdnBaseUrl,
   });
 
   // Until we have a better plan for caching dynamic content and we
