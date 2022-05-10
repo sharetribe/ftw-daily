@@ -6,6 +6,13 @@ import { currencyConfiguration } from './currency-config';
 const env = process.env.REACT_APP_ENV;
 const dev = process.env.REACT_APP_ENV === 'development';
 
+// CDN assets for the app. Configurable through Flex Console.
+// Currently, only translation.json is available.
+// Note: the path must match the path defined in Asset Delivery API
+const appCdnAssets = {
+  translations: 'content/translations.json',
+};
+
 // If you want to change the language, remember to also change the
 // locale data and the messages in the app.js file.
 const locale = 'en';
@@ -195,6 +202,7 @@ const maps = {
 const config = {
   env,
   dev,
+  appCdnAssets,
   locale,
   bookingProcessAlias,
   bookingUnitType,
