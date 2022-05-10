@@ -48,6 +48,11 @@ const messagesInLocale = {};
 const addMissingTranslations = (sourceLangTranslations, targetLangTranslations) => {
   const sourceKeys = Object.keys(sourceLangTranslations);
   const targetKeys = Object.keys(targetLangTranslations);
+
+  // if there's no translations defined for target language, return source translations
+  if (targetKeys.length === 0) {
+    return sourceLangTranslations;
+  }
   const missingKeys = difference(sourceKeys, targetKeys);
 
   const addMissingTranslation = (translations, missingKey) => ({
@@ -58,18 +63,15 @@ const addMissingTranslations = (sourceLangTranslations, targetLangTranslations) 
   return missingKeys.reduce(addMissingTranslation, targetLangTranslations);
 };
 
-const isDefaultLanguageInUse = config.locale === 'en';
-
-const messages = isDefaultLanguageInUse
-  ? defaultMessages
-  : addMissingTranslations(defaultMessages, messagesInLocale);
-
+// Get default messages for a given locale.
+//
+// Note: Locale should not affect the tests. We ensure this by providing
+//       messages with the key as the value of each message and discard the value.
+//       { 'My.translationKey1': 'My.translationKey1', 'My.translationKey2': 'My.translationKey2' }
 const isTestEnv = process.env.NODE_ENV === 'test';
-
-// Locale should not affect the tests. We ensure this by providing
-// messages with the key as the value of each message.
-const testMessages = mapValues(messages, (val, key) => key);
-const localeMessages = isTestEnv ? testMessages : messages;
+const localeMessages = isTestEnv
+  ? mapValues(defaultMessages, (val, key) => key)
+  : addMissingTranslations(defaultMessages, messagesInLocale);
 
 const setupLocale = () => {
   if (isTestEnv) {
