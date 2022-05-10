@@ -18,10 +18,12 @@ import routeConfiguration from './routeConfiguration';
 import Routes from './Routes';
 import config from './config';
 
-// Flex template application uses English translations as default.
+// Flex template application uses English translations as default translations.
 import defaultMessages from './translations/en.json';
 
-// If you want to change the language, change the imports to match the wanted locale:
+// If you want to change the language of default (fallback) translations,
+// change the imports to match the wanted locale:
+//
 //   1) Change the language in the config.js file!
 //   2) Import correct locale rules for Moment library
 //   3) Use the `messagesInLocale` import to add the correct translation file.
@@ -87,10 +89,14 @@ const setupLocale = () => {
 };
 
 export const ClientApp = props => {
-  const { store } = props;
+  const { store, hostedTranslations = {} } = props;
   setupLocale();
   return (
-    <IntlProvider locale={config.locale} messages={localeMessages} textComponent="span">
+    <IntlProvider
+      locale={config.locale}
+      messages={{ ...localeMessages, ...hostedTranslations }}
+      textComponent="span"
+    >
       <Provider store={store}>
         <HelmetProvider>
           <BrowserRouter>

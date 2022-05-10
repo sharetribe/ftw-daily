@@ -28,6 +28,7 @@ import * as sample from './util/sample';
 import * as apiUtils from './util/api';
 import config from './config';
 import { authInfo } from './ducks/Auth.duck';
+import { fetchAppAssets } from './ducks/hostedAssets.duck';
 import { fetchCurrentUser } from './ducks/user.duck';
 import routeConfiguration from './routeConfiguration';
 import * as log from './util/log';
@@ -44,13 +45,22 @@ const render = (store, shouldHydrate) => {
   info
     .then(() => {
       store.dispatch(fetchCurrentUser());
-      return loadableReady();
+      // Ensure that Loadable Components is ready
+      // and fetch hosted assets in parallel before initializing the ClientApp
+      return Promise.all([
+        loadableReady(),
+        store.dispatch(fetchAppAssets(config.appCdnAssets)),
+      ]);
     })
-    .then(() => {
+    .then(([_, fetchedAssets]) => {
+      const translations = fetchedAssets?.translations?.data || {};
       if (shouldHydrate) {
         ReactDOM.hydrate(<ClientApp store={store} />, document.getElementById('root'));
       } else {
-        ReactDOM.render(<ClientApp store={store} />, document.getElementById('root'));
+        ReactDOM.render(
+          <ClientApp store={store} hostedTranslations={translations} />,
+          document.getElementById('root')
+        );
       }
     })
     .catch(e => {
