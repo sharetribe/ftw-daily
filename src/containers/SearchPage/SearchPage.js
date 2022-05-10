@@ -189,11 +189,20 @@ export class SearchPageComponent extends Component {
 
     // N.B. openMobileMap button is sticky.
     // For some reason, stickyness doesn't work on Safari, if the element is <button>
+
+    const siteTitle = config.siteTitle;
+    const searchAddress = address || intl.formatMessage({ id: 'SearchPage.schemaMapSearch' });
+
+    const schemaMetaTitle = intl.formatMessage(
+      { id: 'SearchPage.schemaMetaTitle' },
+      { searchAddress, siteTitle }
+    );
+
     return (
       <Page
         scrollingDisabled={scrollingDisabled}
         description={description}
-        title={title}
+        title={schemaMetaTitle}
         schema={schema}
       >
         <TopbarContainer
