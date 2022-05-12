@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2022-XX-XX
 
+- [delete] Remove old unused translation keys.
+  [#1511](https://github.com/sharetribe/ftw-daily/pull/1511)
+
 ## [v8.4.1] 2022-03-16
 
 - [fix] Portal version of Modals couldn't use 100vh on mobile Safari. Safari changes the window's
