@@ -144,6 +144,11 @@ const TopbarDesktop = props => {
       {search}
       <NamedLink className={css.createListingLink} name="NewListingPage">
         <span className={css.createListing}>
+          <FormattedMessage id="TopbarDesktop.createProgramListing" />
+        </span>
+      </NamedLink>
+      <NamedLink className={css.createListingLink} name="NewListingPage">
+        <span className={css.createListing}>
           <FormattedMessage id="TopbarDesktop.createListing" />
         </span>
       </NamedLink>
