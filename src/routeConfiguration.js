@@ -126,26 +126,27 @@ const routeConfiguration = () => {
       component: EditListingPage,
       loadData: pageDataLoadingAPI.EditListingPage.loadData,
     },
+
     {
-      path: '/l/new',
+      path: '/pl/new',
       name: 'NewProgramListingPage',
       auth: true,
       component: () => (
         <NamedRedirect
           name="EditProgramListingPage"
-          params={{ slug: draftSlug, id: draftId, type: 'new', tab: 'description' }}
+          params={{ slug: draftSlug, id: draftId, type: 'new', tab: 'general' }}
         />
       ),
     },
     {
-      path: '/l/:slug/:id/:type/:tab',
-      name: 'EditListingPage',
+      path: '/pl/:slug/:id/:type/:tab',
+      name: 'EditProgramListingPage',
       auth: true,
       component: EditProgramListingPage,
       loadData: pageDataLoadingAPI.EditProgramListingPage.loadData,
     },
     {
-      path: '/l/:slug/:id/:type/:tab/:returnURLType',
+      path: '/pl/:slug/:id/:type/:tab/:returnURLType',
       name: 'EditListingStripeOnboardingPage',
       auth: true,
       component: EditProgramListingPage,
