@@ -15,6 +15,7 @@ const AuthenticationPage = loadable(() => import(/* webpackChunkName: "Authentic
 const CheckoutPage = loadable(() => import(/* webpackChunkName: "CheckoutPage" */ './containers/CheckoutPage/CheckoutPage'));
 const ContactDetailsPage = loadable(() => import(/* webpackChunkName: "ContactDetailsPage" */ './containers/ContactDetailsPage/ContactDetailsPage'));
 const EditListingPage = loadable(() => import(/* webpackChunkName: "EditListingPage" */ './containers/EditListingPage/EditListingPage'));
+const EditProgramListingPage = loadable(() => import(/* webpackChunkName: "EditProgramListingPage" */ './containers/EditProgramListingPage/EditProgramListingPage'))
 const EmailVerificationPage = loadable(() => import(/* webpackChunkName: "EmailVerificationPage" */ './containers/EmailVerificationPage/EmailVerificationPage'));
 const InboxPage = loadable(() => import(/* webpackChunkName: "InboxPage" */ './containers/InboxPage/InboxPage'));
 const LandingPage = loadable(() => import(/* webpackChunkName: "LandingPage" */ './containers/LandingPage/LandingPage'));
@@ -124,6 +125,31 @@ const routeConfiguration = () => {
       auth: true,
       component: EditListingPage,
       loadData: pageDataLoadingAPI.EditListingPage.loadData,
+    },
+    {
+      path: '/l/new',
+      name: 'NewProgramListingPage',
+      auth: true,
+      component: () => (
+        <NamedRedirect
+          name="EditProgramListingPage"
+          params={{ slug: draftSlug, id: draftId, type: 'new', tab: 'description' }}
+        />
+      ),
+    },
+    {
+      path: '/l/:slug/:id/:type/:tab',
+      name: 'EditListingPage',
+      auth: true,
+      component: EditProgramListingPage,
+      loadData: pageDataLoadingAPI.EditProgramListingPage.loadData,
+    },
+    {
+      path: '/l/:slug/:id/:type/:tab/:returnURLType',
+      name: 'EditListingStripeOnboardingPage',
+      auth: true,
+      component: EditProgramListingPage,
+      loadData: pageDataLoadingAPI.EditProgramListingPage.loadData,
     },
 
     // Canonical path should be after the `/l/new` path since they
