@@ -30,6 +30,11 @@ export const required = message => value => {
   return VALID;
 };
 
+const NUMBER_RE = new RegExp(/[^0-9]/, 'g');
+export const requiredNumber = message => value => {
+  return (value || "").match(NUMBER_RE) ? VALID : message;
+};
+
 export const requiredStringNoTrim = message => value => {
   return typeof value === 'string' && value.length > 0 ? VALID : message;
 };

@@ -143,6 +143,22 @@ export const filters = [
       ],
     },
   },
+  {
+    id: 'difficulty',
+    label: 'Difficulty',
+    type: 'SelectMultipleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_difficulty'],
+    config: {
+      searchMode: 'has_all',
+      options: [
+        { key: 'beginer', label: 'Beginer' },
+        { key: 'intermediate', label: 'Intermediate' },
+        { key: 'advanced', label: 'Advanced' },
+        { key: 'expert', label: 'Expert' },
+      ],
+    },
+  },
 ];
 
 export const sortConfig = {

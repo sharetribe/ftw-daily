@@ -347,8 +347,6 @@ class EditProgramListingWizard extends Component {
       return <NamedRedirect name="EditProgramListingPage" params={pathParams} />;
     }
 
-    console.log('bbbbbbbbbbbbbbbbbbbb')
-
     return (
       <div className={classes}>
         <Tabs

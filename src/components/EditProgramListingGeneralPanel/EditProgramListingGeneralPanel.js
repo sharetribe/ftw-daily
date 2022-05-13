@@ -6,10 +6,13 @@ import { ensureOwnListing } from '../../util/data';
 import { findOptionsForSelectFilter } from '../../util/search';
 import { LISTING_STATE_DRAFT } from '../../util/types';
 import { ListingLink } from '..';
-import { EditListingDescriptionForm } from '../../forms';
+import { EditProgramListingGeneralForm } from '../../forms';
 import config from '../../config';
 
 import css from './EditProgramListingGeneralPanel.module.css';
+
+const customHoursMessage = 'Custom hours';
+
 
 const EditProgramListingGeneralPanel = props => {
   const {
@@ -33,30 +36,35 @@ const EditProgramListingGeneralPanel = props => {
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
     <FormattedMessage
-      id="EditListingDescriptionPanel.title"
+      id="EditProgramListingGeneralPanel.title"
       values={{ listingTitle: <ListingLink listing={listing} /> }}
     />
   ) : (
-    <FormattedMessage id="EditListingDescriptionPanel.createListingTitle" />
+    <FormattedMessage id="EditProgramListingGeneralPanel.createListingTitle" />
   );
 
   const categoryOptions = findOptionsForSelectFilter('category', config.custom.filters);
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
-      <EditListingDescriptionForm
+      <EditProgramListingGeneralForm
         className={css.form}
         initialValues={{ title, description, category: publicData.category }}
         saveActionMsg={submitButtonText}
         onSubmit={values => {
-          const { title, description, category } = values;
-          const updateValues = {
-            title: title.trim(),
-            description,
-            publicData: { category },
-          };
+          console.log(values);
+          const { title, description, tags, hours, customHours } = values;
+          if(hours === customHoursMessage) {
+            hours = customHours
+          }
 
-          onSubmit(updateValues);
+          // const updateValues = {
+          //   title: title.trim(),
+          //   description,
+          //   publicData: { category },
+          // };
+
+          // onSubmit(updateValues);
         }}
         onChange={onChange}
         disabled={disabled}
