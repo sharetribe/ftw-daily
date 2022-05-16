@@ -159,6 +159,20 @@ export const filters = [
       ],
     },
   },
+  {
+    id: 'typeLocation',
+    label: 'Type',
+    type: 'SelectMultipleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_typeLocation'],
+    config: {
+      searchMode: 'has_all',
+      options: [
+        { key: 'online', label: 'Online' },
+        { key: 'on-site', label: 'On-site' },
+      ],
+    },
+  },
 ];
 
 export const sortConfig = {

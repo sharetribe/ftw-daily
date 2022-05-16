@@ -175,6 +175,20 @@
   "EditListingDescriptionPanel.createListingTitle": "Add your sauna",
   "EditListingDescriptionPanel.title": "Edit details of {listingTitle}",
 
+  "EditProgramListingLocationPanel.createListingTitle": "Where's your program?",
+  "EditProgramListingLocationPanel.title": "Edit details of {listingTitle}",
+
+  "EditProgramListingLocationForm.locationTypeRequired": "You need to choose location type",
+  "EditProgramListingLocationForm.updateFailed": "Failed to update listing. Please try again.",
+  "EditProgramListingLocationForm.createListingDraftError": "Failed to create a draft listing. Please try again.",
+  "EditProgramListingLocationForm.showListingFailed": "Fetching listing data failed",
+  "EditProgramListingLocationForm.addressPlaceholder": "123 Example Street",
+  "EditProgramListingLocationForm.addressRequired": "You need to provide a location",
+  "EditProgramListingLocationForm.addressNotRecognized": "We didn't recognize this location. Please try another location.",
+  "EditProgramListingLocationForm.address": "Address",
+  "EditProgramListingLocationForm.typeLocationLabel": "Type location",
+
+
   "EditProgramListingGeneralForm.categoryLabel": "Sauna type",
   "EditProgramListingGeneralForm.difficultyLabel": "Difficulty",
   "EditProgramListingGeneralForm.categoryPlaceholder": "Choose the type of your sauna…",

@@ -50,6 +50,7 @@ export const EditListingLocationFormComponent = props => (
         id: 'EditListingLocationForm.optionalText',
       });
 
+
       const buildingMessage = intl.formatMessage(
         { id: 'EditListingLocationForm.building' },
         { optionalText: optionalText }

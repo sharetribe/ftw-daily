@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { bool, func, object, string } from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from '../../util/reactIntl';
@@ -6,7 +6,7 @@ import { ensureOwnListing } from '../../util/data';
 import { findOptionsForSelectFilter } from '../../util/search';
 import { LISTING_STATE_DRAFT } from '../../util/types';
 import { ListingLink } from '..';
-import { EditListingDescriptionForm } from '../../forms';
+import { EditListingDescriptionForm, EditProgramListingLocationForm } from '../../forms';
 import config from '../../config';
 
 import css from './EditProgramListingLocationPanel.module.css';
@@ -26,36 +26,73 @@ const EditProgramListingLocationPanel = props => {
     errors,
   } = props;
 
-  const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
-  const { description, title, publicData } = currentListing.attributes;
+
+  const getInitialValues = () => {
+    const { geolocation, publicData } = currentListing.attributes;
+
+    // Only render current search if full place object is available in the URL params
+    // TODO bounds are missing - those need to be queried directly from Google Places
+    const locationFieldsPresent =
+      publicData && publicData.location && publicData.location.address && geolocation;
+    const location = publicData && publicData.location ? publicData.location : {};
+    const { address, building } = location;
+
+    return {
+      building,
+      location: locationFieldsPresent
+        ? {
+            search: address,
+            selectedPlace: { address, origin: geolocation },
+          }
+        : null,
+    };
+  };
+
+  const [initialValues, setInitialValues] = useState(getInitialValues());
+  const classes = classNames(rootClassName || css.root, className);
+  // const { description, title, publicData } = currentListing.attributes;
 
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
     <FormattedMessage
-      id="EditListingDescriptionPanel.title"
+      id="EditProgramListingLocationPanel.title"
       values={{ listingTitle: <ListingLink listing={listing} /> }}
     />
   ) : (
-    <FormattedMessage id="EditListingDescriptionPanel.createListingTitle" />
+    <FormattedMessage id="EditProgramListingLocationPanel.createListingTitle" />
   );
 
-  const categoryOptions = findOptionsForSelectFilter('category', config.custom.filters);
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
-      <EditListingDescriptionForm
+      <EditProgramListingLocationForm
         className={css.form}
-        initialValues={{ title, description, category: publicData.category }}
+        initialValues={initialValues}
         saveActionMsg={submitButtonText}
         onSubmit={values => {
-          const { title, description, category } = values;
-          const updateValues = {
-            title: title.trim(),
-            description,
-            publicData: { category },
-          };
+          const { location = {}, typeLocation = [] } = values;
+          console.log('---------');
+          console.log(location);
+          console.log(typeLocation);
+          const onSiteSelection = 'on-site';
+          const updateValues = {};
+          if (typeLocation.includes(onSiteSelection)) {
+            console.log('aaa');
+            const {
+              selectedPlace: { address, origin },
+            } = location;
+            updateValues.geolocation = origin;
+            updateValues.publicData = { location: { address }, typeLocation };
 
+            setInitialValues({
+              typeLocation,
+              location: { search: address, selectedPlace: { address, origin } },
+            });
+          } else {
+            updateValues.publicData = { typeLocation };
+            setInitialValues({ typeLocation });
+          }
           onSubmit(updateValues);
         }}
         onChange={onChange}
@@ -64,7 +101,6 @@ const EditProgramListingLocationPanel = props => {
         updated={panelUpdated}
         updateInProgress={updateInProgress}
         fetchErrors={errors}
-        categories={categoryOptions}
       />
     </div>
   );

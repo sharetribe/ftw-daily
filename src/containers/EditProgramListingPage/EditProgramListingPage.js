@@ -168,7 +168,7 @@ export const EditProgramListingPageComponent = props => {
       ? intl.formatMessage({ id: 'EditListingPage.titleCreateListing' })
       : intl.formatMessage({ id: 'EditListingPage.titleEditListing' });
 
-      console.log(history)
+      // console.log(history)
     
 
     return (

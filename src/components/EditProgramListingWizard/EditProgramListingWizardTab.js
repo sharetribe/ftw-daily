@@ -114,11 +114,11 @@ const EditProgramListingWizardTab = props => {
             // Create listing flow: smooth scrolling polyfill to scroll to correct tab
             handleCreateFlowTabScrolling(false);
 
-            console.log('----------------------')
-            console.log(params)
-            console.log(tab)
-            console.log(marketplaceTabs)
-            console.log(history)
+            // console.log('----------------------')
+            // console.log(params)
+            // console.log(tab)
+            // console.log(marketplaceTabs)
+            // console.log(history)
             // After successful saving of draft data, user should be redirected to next tab
             redirectAfterDraftUpdate(r.data.data.id.uuid, params, tab, marketplaceTabs, history);
           } else {

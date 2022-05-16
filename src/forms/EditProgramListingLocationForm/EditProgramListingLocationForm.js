@@ -5,20 +5,28 @@ import { Form as FinalForm } from 'react-final-form';
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { propTypes } from '../../util/types';
-import { maxLength, required, composeValidators } from '../../util/validators';
-import { Form, Button, FieldTextInput } from '../../components';
-import CustomCategorySelectFieldMaybe from './CustomCategorySelectFieldMaybe';
+import {
+  autocompletePlaceSelected,
+  autocompleteSearchRequired,
+  composeValidators,
+  requiredFieldArrayCheckbox,
+} from '../../util/validators';
+import { Form, Button, FieldCheckboxGroup, LocationAutocompleteInputField } from '../../components';
+import config from '../../config';
+import arrayMutators from 'final-form-arrays';
 
 import css from './EditProgramListingLocationForm.module.css';
+import { findOptionsForSelectFilter } from '../../util/search';
 
-const TITLE_MAX_LENGTH = 60;
+const identity = v => v;
 
 const EditProgramListingLocationForm = props => (
   <FinalForm
+    mutators={{ ...arrayMutators }}
     {...props}
     render={formRenderProps => {
       const {
-        categories,
+        values,
         className,
         disabled,
         ready,
@@ -30,91 +38,96 @@ const EditProgramListingLocationForm = props => (
         updated,
         updateInProgress,
         fetchErrors,
+        filterConfig,
       } = formRenderProps;
-
-      const titleMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.title' });
-      const titlePlaceholderMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.titlePlaceholder',
-      });
-      const titleRequiredMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.titleRequired',
-      });
-      const maxLengthMessage = intl.formatMessage(
-        { id: 'EditListingDescriptionForm.maxLength' },
-        {
-          maxLength: TITLE_MAX_LENGTH,
-        }
-      );
-
-      const descriptionMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.description',
-      });
-      const descriptionPlaceholderMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.descriptionPlaceholder',
-      });
-      const maxLength60Message = maxLength(maxLengthMessage, TITLE_MAX_LENGTH);
-      const descriptionRequiredMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.descriptionRequired',
-      });
 
       const { updateListingError, createListingDraftError, showListingsError } = fetchErrors || {};
       const errorMessageUpdateListing = updateListingError ? (
         <p className={css.error}>
-          <FormattedMessage id="EditListingDescriptionForm.updateFailed" />
+          <FormattedMessage id="EditProgramListingLocationForm.updateFailed" />
         </p>
       ) : null;
 
       // This error happens only on first tab (of EditListingWizard)
       const errorMessageCreateListingDraft = createListingDraftError ? (
         <p className={css.error}>
-          <FormattedMessage id="EditListingDescriptionForm.createListingDraftError" />
+          <FormattedMessage id="EditProgramListingLocationForm.createListingDraftError" />
         </p>
       ) : null;
 
       const errorMessageShowListing = showListingsError ? (
         <p className={css.error}>
-          <FormattedMessage id="EditListingDescriptionForm.showListingFailed" />
+          <FormattedMessage id="EditProgramListingLocationForm.showListingFailed" />
         </p>
       ) : null;
+
+      const titleRequiredMessage = intl.formatMessage({
+        id: 'EditProgramListingLocationForm.address',
+      });
+      const addressPlaceholderMessage = intl.formatMessage({
+        id: 'EditProgramListingLocationForm.addressPlaceholder',
+      });
+      const addressRequiredMessage = intl.formatMessage({
+        id: 'EditProgramListingLocationForm.addressRequired',
+      });
+      const addressNotRecognizedMessage = intl.formatMessage({
+        id: 'EditProgramListingLocationForm.addressNotRecognized',
+      });
+
+      const locationTypeRequiredMessage = intl.formatMessage({
+        id: 'EditProgramListingLocationForm.locationTypeRequired',
+      });
+
+      const typeLocationLabel = intl.formatMessage({
+        id: 'EditProgramListingLocationForm.typeLocationLabel',
+      });
 
       const classes = classNames(css.root, className);
       const submitReady = (updated && pristine) || ready;
       const submitInProgress = updateInProgress;
       const submitDisabled = invalid || disabled || submitInProgress;
 
+      const locationTypeKey = 'typeLocation';
+      const onSiteSelection = 'on-site';
+      const options = findOptionsForSelectFilter(locationTypeKey, filterConfig);
+
+      const showAddressInput = values[locationTypeKey]?.includes(onSiteSelection);
+
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessageCreateListingDraft}
           {errorMessageUpdateListing}
           {errorMessageShowListing}
-          <FieldTextInput
-            id="title"
-            name="title"
-            className={css.title}
-            type="text"
-            label={titleMessage}
-            placeholder={titlePlaceholderMessage}
-            maxLength={TITLE_MAX_LENGTH}
-            validate={composeValidators(required(titleRequiredMessage), maxLength60Message)}
-            autoFocus
+
+          <FieldCheckboxGroup
+            label={typeLocationLabel}
+            className={css.features}
+            id={locationTypeKey}
+            name={locationTypeKey}
+            options={options}
+            validate={requiredFieldArrayCheckbox(locationTypeRequiredMessage)}
           />
 
-          <FieldTextInput
-            id="description"
-            name="description"
-            className={css.description}
-            type="textarea"
-            label={descriptionMessage}
-            placeholder={descriptionPlaceholderMessage}
-            validate={composeValidators(required(descriptionRequiredMessage))}
-          />
-
-          <CustomCategorySelectFieldMaybe
-            id="category"
-            name="category"
-            categories={categories}
-            intl={intl}
-          />
+          {showAddressInput && (
+            <LocationAutocompleteInputField
+              className={css.locationAddress}
+              inputClassName={css.locationAutocompleteInput}
+              iconClassName={css.locationAutocompleteInputIcon}
+              predictionsClassName={css.predictionsRoot}
+              validClassName={css.validLocation}
+              autoFocus
+              name="location"
+              label={titleRequiredMessage}
+              placeholder={addressPlaceholderMessage}
+              useDefaultPredictions={false}
+              format={identity}
+              valueFromForm={values.location}
+              validate={composeValidators(
+                autocompleteSearchRequired(addressRequiredMessage),
+                autocompletePlaceSelected(addressNotRecognizedMessage)
+              )}
+            />
+          )}
 
           <Button
             className={css.submitButton}
@@ -131,7 +144,11 @@ const EditProgramListingLocationForm = props => (
   />
 );
 
-EditProgramListingLocationForm.defaultProps = { className: null, fetchErrors: null };
+EditProgramListingLocationForm.defaultProps = {
+  className: null,
+  fetchErrors: null,
+  filterConfig: config.custom.filters,
+};
 
 EditProgramListingLocationForm.propTypes = {
   className: string,
