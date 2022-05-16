@@ -196,10 +196,6 @@ class EditProgramListingWizard extends Component {
   handlePublishListing(id) {
     const { onPublishListingDraft, currentUser, stripeAccount } = this.props;
 
-    console.log(onPublishListingDraft)
-    console.log(currentUser)
-    console.log(stripeAccount)
-
     // const stripeConnected =
     //   currentUser && currentUser.stripeAccount && !!currentUser.stripeAccount.id;
 
@@ -210,14 +206,14 @@ class EditProgramListingWizard extends Component {
     //   (hasRequirements(stripeAccountData, 'past_due') ||
     //     hasRequirements(stripeAccountData, 'currently_due'));
 
-    // if (stripeConnected && !requirementsMissing) {
-    //   onPublishListingDraft(id);
-    // } else {
-    //   this.setState({
-    //     draftId: id,
-    //     showPayoutDetails: true,
-    //   });
-    // }
+    if (stripeConnected && !requirementsMissing) {
+      onPublishListingDraft(id);
+    } else {
+      this.setState({
+        draftId: id,
+        showPayoutDetails: true,
+      });
+    }
   }
 
   handlePayoutModalClose() {
