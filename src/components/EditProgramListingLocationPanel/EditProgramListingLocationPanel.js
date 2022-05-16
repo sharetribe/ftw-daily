@@ -36,16 +36,18 @@ const EditProgramListingLocationPanel = props => {
     const locationFieldsPresent =
       publicData && publicData.location && publicData.location.address && geolocation;
     const location = publicData && publicData.location ? publicData.location : {};
-    const { address, building } = location;
+    const { address } = location;
+
+    const typeLocation = publicData && publicData.typeLocation;
 
     return {
-      building,
       location: locationFieldsPresent
         ? {
-            search: address,
             selectedPlace: { address, origin: geolocation },
+            search: address,
           }
         : null,
+      typeLocation: typeLocation || [],
     };
   };
 
