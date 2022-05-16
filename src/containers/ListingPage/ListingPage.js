@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { InlineShareButtons } from 'sharethis-reactjs';
 import { array, arrayOf, bool, object, func, shape, string, oneOf } from 'prop-types';
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 import { compose } from 'redux';
@@ -493,27 +492,7 @@ export class ListingPageComponent extends Component {
                     onContactUser={this.onContactUser}
                     priceType={priceType}
                   />
-                  <InlineShareButtons 
-                    config={{
-                      alignment: 'left',
-                      color: 'social',
-                      enabled: true,
-                      networks: [
-                        'twitter',
-                        'facebook',
-                        'linkedin',
-                        'whatsapp',
-                        'email'
-                      ],
-                      radius: 4,
-                      size: 45,
 
-                      title: "Check out this listing on HotPatch!",
-                      subject: 'Check out this listing on HotPatch!',
-                      servicePopup: true
-                      }}
-                    />
-                  <p></p>
                   <SectionCapacity publicData={publicData} />
                   {/* <SectionSeats publicData={publicData} /> */}
                   <SectionDescriptionMaybe description={description} />
