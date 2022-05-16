@@ -13,10 +13,9 @@ import {
   EditProgramListingLocationPanel,
   EditProgramListingPricingPanel,
   EditProgramListingAvailabilityPanel,
-  EditProgramListingGeneralPanel
+  EditProgramListingGeneralPanel,
 } from '../../components';
 import css from './EditProgramListingWizard.module.css';
-
 
 export const AVAILABILITY = 'availability';
 export const GENERAL = 'general';
@@ -47,13 +46,19 @@ const redirectAfterDraftUpdate = (listingId, params, tab, marketplaceTabs, histo
   // Replace current "new" path to "draft" path.
   // Browser's back button should lead to editing current draft instead of creating a new one.
   if (params.type === LISTING_PAGE_PARAM_TYPE_NEW) {
-    const draftURI = createResourceLocatorString('EditProgramListingPage', routes, currentPathParams, {});
+    const draftURI = createResourceLocatorString(
+      'EditProgramListingPage',
+      routes,
+      currentPathParams,
+      {}
+    );
     history.replace(draftURI);
   }
 
   // Redirect to next tab
   const nextPathParams = pathParamsToNextTab(currentPathParams, tab, marketplaceTabs);
   const to = createResourceLocatorString('EditProgramListingPage', routes, nextPathParams, {});
+
   history.push(to);
 };
 
@@ -113,12 +118,6 @@ const EditProgramListingWizardTab = props => {
           if (tab !== marketplaceTabs[marketplaceTabs.length - 1]) {
             // Create listing flow: smooth scrolling polyfill to scroll to correct tab
             handleCreateFlowTabScrolling(false);
-
-            // console.log('----------------------')
-            // console.log(params)
-            // console.log(tab)
-            // console.log(marketplaceTabs)
-            // console.log(history)
             // After successful saving of draft data, user should be redirected to next tab
             redirectAfterDraftUpdate(r.data.data.id.uuid, params, tab, marketplaceTabs, history);
           } else {

@@ -83,7 +83,7 @@ const tabCompleted = (tab, listing) => {
     case GENERAL:
       return !!(description && title);
     case LOCATION:
-      return !!(geolocation && publicData && publicData.location && publicData.location.address);
+      return !!(publicData && publicData.typeLocation);
     case PRICING:
       return !!price;
     case AVAILABILITY:
@@ -160,7 +160,7 @@ const handleGetStripeConnectAccountLinkFn = (getLinkFn, commonParams) => type =>
 
 const RedirectToStripe = ({ redirectFn }) => {
   useEffect(redirectFn('custom_account_verification'), []);
-  return <FormattedMessage id="EditListingWizard.redirectingToStripe" />;
+  return <FormattedMessage id="EditProgramListingWizard.redirectingToStripe" />;
 };
 
 // Create a new or edit listing through EditListingWizard
@@ -196,15 +196,15 @@ class EditProgramListingWizard extends Component {
   handlePublishListing(id) {
     const { onPublishListingDraft, currentUser, stripeAccount } = this.props;
 
-    // const stripeConnected =
-    //   currentUser && currentUser.stripeAccount && !!currentUser.stripeAccount.id;
+    const stripeConnected =
+      currentUser && currentUser.stripeAccount && !!currentUser.stripeAccount.id;
 
-    // const stripeAccountData = stripeConnected ? getStripeAccountData(stripeAccount) : null;
+    const stripeAccountData = stripeConnected ? getStripeAccountData(stripeAccount) : null;
 
-    // const requirementsMissing =
-    //   stripeAccount &&
-    //   (hasRequirements(stripeAccountData, 'past_due') ||
-    //     hasRequirements(stripeAccountData, 'currently_due'));
+    const requirementsMissing =
+      stripeAccount &&
+      (hasRequirements(stripeAccountData, 'past_due') ||
+        hasRequirements(stripeAccountData, 'currently_due'));
 
     if (stripeConnected && !requirementsMissing) {
       onPublishListingDraft(id);
@@ -224,7 +224,7 @@ class EditProgramListingWizard extends Component {
     this.props
       .onPayoutDetailsSubmit(values)
       .then(response => {
-        this.props.onManageDisableScrolling('EditListingWizard.payoutModal', false);
+        this.props.onManageDisableScrolling('EditProgramListingWizard.payoutModal', false);
       })
       .catch(() => {
         // do nothing
@@ -380,7 +380,7 @@ class EditProgramListingWizard extends Component {
           })}
         </Tabs>
         <Modal
-          id="EditListingWizard.payoutModal"
+          id="EditProgramListingWizard.payoutModal"
           isOpen={this.state.showPayoutDetails}
           onClose={this.handlePayoutModalClose}
           onManageDisableScrolling={onManageDisableScrolling}
@@ -388,9 +388,9 @@ class EditProgramListingWizard extends Component {
         >
           <div className={css.modalPayoutDetailsWrapper}>
             <h1 className={css.modalTitle}>
-              <FormattedMessage id="EditListingWizard.payoutModalTitleOneMoreThing" />
+              <FormattedMessage id="EditProgramListingWizard.payoutModalTitleOneMoreThing" />
               <br />
-              <FormattedMessage id="EditListingWizard.payoutModalTitlePayoutPreferences" />
+              <FormattedMessage id="EditProgramListingWizard.payoutModalTitlePayoutPreferences" />
             </h1>
             {!currentUserLoaded ? (
               <FormattedMessage id="StripePayoutPage.loadingData" />
@@ -401,7 +401,7 @@ class EditProgramListingWizard extends Component {
             ) : (
               <>
                 <p className={css.modalMessage}>
-                  <FormattedMessage id="EditListingWizard.payoutModalInfo" />
+                  <FormattedMessage id="EditProgramListingWizard.payoutModalInfo" />
                 </p>
                 <StripeConnectAccountForm
                   disabled={formDisabled}

@@ -90,8 +90,7 @@ const EditProgramListingLocationForm = props => (
       const locationTypeKey = 'typeLocation';
       const onSiteSelection = 'on-site';
       const options = findOptionsForSelectFilter(locationTypeKey, filterConfig);
-
-      const showAddressInput = values[locationTypeKey]?.includes(onSiteSelection);
+      const showAddressInput = values[locationTypeKey].includes(onSiteSelection);
 
       return (
         <Form className={classes} onSubmit={handleSubmit}>

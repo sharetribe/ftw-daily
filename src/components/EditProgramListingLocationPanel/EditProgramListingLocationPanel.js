@@ -51,9 +51,8 @@ const EditProgramListingLocationPanel = props => {
     };
   };
 
-  const [initialValues, setInitialValues] = useState(getInitialValues());
+  const [initialValues, setInitialValues] = useState(() => getInitialValues());
   const classes = classNames(rootClassName || css.root, className);
-  // const { description, title, publicData } = currentListing.attributes;
 
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
@@ -88,8 +87,8 @@ const EditProgramListingLocationPanel = props => {
               location: { search: address, selectedPlace: { address, origin } },
             });
           } else {
-            updateValues.publicData = { typeLocation };
-            setInitialValues({ typeLocation });
+            updateValues.publicData = { typeLocation, location: '' };
+            setInitialValues({ typeLocation, location: null });
           }
           onSubmit(updateValues);
         }}

@@ -37,11 +37,13 @@ const EditProgramListingPricingPanel = props => {
   const pricingType = publicData.pricingType || PRICING_TYPE_HOURLY;
   const packageQuantity = publicData && publicData.packageQuantity;
   const pricePerItem =
-    pricingType === PRICING_TYPE_HOURLY
+    publicData.pricingType === PRICING_TYPE_HOURLY
       ? new Money(price.amount / hours, currencyUnit)
       : pricingType === PRICING_TYPE_PACKAGE
       ? new Money(price.amount / packageQuantity, currencyUnit)
-      : new Money(0, currencyUnit);
+      : null;
+    
+      console.log(pricePerItem)
 
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
