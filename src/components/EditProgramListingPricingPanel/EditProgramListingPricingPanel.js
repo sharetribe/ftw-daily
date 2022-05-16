@@ -5,13 +5,12 @@ import { FormattedMessage } from '../../util/reactIntl';
 import { ensureOwnListing } from '../../util/data';
 import { LISTING_STATE_DRAFT } from '../../util/types';
 import { ListingLink } from '..';
-import {  EditProgramListingPricingForm } from '../../forms';
+import { EditProgramListingPricingForm } from '../../forms';
 import config from '../../config';
 import { types as sdkTypes } from '../../util/sdkLoader';
 
 import css from './EditProgramListingPricingPanel.module.css';
 const { Money } = sdkTypes;
-
 
 const PRICING_TYPE_HOURLY = 'hourly';
 const PRICING_TYPE_PACKAGE = 'package';
@@ -30,12 +29,19 @@ const EditProgramListingPricingPanel = props => {
     updateInProgress,
     errors,
   } = props;
-
+  const currencyUnit = process.env.REACT_APP_SHARETRIBE_MARKETPLACE_CURRENCY;
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
-  const { publicData } = currentListing.attributes;
+  const { publicData, price } = currentListing.attributes;
   const hours = publicData.hours;
   const pricingType = publicData.pricingType || PRICING_TYPE_HOURLY;
+  const packageQuantity = publicData && publicData.packageQuantity;
+  const pricePerItem =
+    pricingType === PRICING_TYPE_HOURLY
+      ? new Money(price.amount / hours, currencyUnit)
+      : pricingType === PRICING_TYPE_PACKAGE
+      ? new Money(price.amount / packageQuantity, currencyUnit)
+      : new Money(0, currencyUnit);
 
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
@@ -52,18 +58,18 @@ const EditProgramListingPricingPanel = props => {
       <h1 className={css.title}>{panelTitle}</h1>
       <EditProgramListingPricingForm
         className={css.form}
-        initialValues={{ hours, pricingType }}
+        initialValues={{ hours, pricingType, price: pricePerItem }}
         saveActionMsg={submitButtonText}
         onSubmit={values => {
           const { pricingType, hours, packageQuantity, price } = values;
 
           const totalAmount =
             pricingType === PRICING_TYPE_PACKAGE ? quantity * price.amount : hours * price.amount;
-          const totalPrice = new Money(totalAmount, 'USD');
+          const totalPrice = new Money(totalAmount, currencyUnit);
 
           const updateValues = {
             publicData: { pricingType },
-            price: totalPrice
+            price: totalPrice,
           };
 
           if (pricingType !== PRICING_TYPE_HOURLY) {

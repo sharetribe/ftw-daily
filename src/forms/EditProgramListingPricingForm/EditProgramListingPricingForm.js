@@ -24,6 +24,7 @@ const { Money } = sdkTypes;
 
 const PRICING_TYPE_PACKAGE = 'package';
 const PRICING_TYPE_HOURLY = 'hourly';
+const currencyUnit = process.env.REACT_APP_SHARETRIBE_MARKETPLACE_CURRENCY;
 
 const EditProgramListingPricingForm = props => (
   <FinalForm
@@ -97,11 +98,11 @@ const EditProgramListingPricingForm = props => (
       const { updateListingError, showListingsError } = fetchErrors || {};
 
       const { pricingType = PRICING_TYPE_HOURLY, price, quantity = 0, hours } = values;
-      let totalPrice = new Money(0, 'USD');
+      let totalPrice = new Money(0, currencyUnit);
       if (values.price) {
         const totalAmount =
           pricingType === PRICING_TYPE_PACKAGE ? quantity * price.amount : hours * price.amount;
-        totalPrice = new Money(totalAmount, 'USD');
+        totalPrice = new Money(totalAmount, currencyUnit);
       }
 
       return (
@@ -166,8 +167,7 @@ const EditProgramListingPricingForm = props => (
           />
 
           <div>
-            Total price: {totalPrice.amount / 100}{' '}
-            {process.env.REACT_APP_SHARETRIBE_MARKETPLACE_CURRENCY}
+            Total price: {totalPrice.amount / 100} {currencyUnit}
           </div>
 
           <Button
