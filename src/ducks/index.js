@@ -9,6 +9,7 @@ import EmailVerification from './EmailVerification.duck';
 import LocationFilter from './LocationFilter.duck';
 import Routing from './Routing.duck';
 import UI from './UI.duck';
+import hostedAssets from './hostedAssets.duck';
 import marketplaceData from './marketplaceData.duck';
 import paymentMethods from './paymentMethods.duck';
 import stripe from './stripe.duck';
@@ -21,6 +22,7 @@ export {
   LocationFilter,
   Routing,
   UI,
+  hostedAssets,
   marketplaceData,
   paymentMethods,
   stripe,

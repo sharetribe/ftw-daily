@@ -90,11 +90,20 @@ const replacer = (key = null, value) => {
   return types.replacer(key, cleanedValue);
 };
 
-exports.render = function(requestUrl, context, preloadedState, renderApp, webExtractor) {
+exports.render = function(requestUrl, context, data, renderApp, webExtractor) {
+  const { preloadedState, translations } = data;
+
   // Bind webExtractor as "this" for collectChunks call.
   const collectWebChunks = webExtractor.collectChunks.bind(webExtractor);
 
-  const { head, body } = renderApp(requestUrl, context, preloadedState, collectWebChunks);
+  // Render the app with given route, preloaded state, hosted translations.
+  const { head, body } = renderApp(
+    requestUrl,
+    context,
+    preloadedState,
+    translations,
+    collectWebChunks
+  );
 
   // Preloaded state needs to be passed for client side too.
   // For security reasons we ensure that preloaded state is considered as a string

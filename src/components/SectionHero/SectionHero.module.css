@@ -21,6 +21,7 @@
   animation-duration: 0.5s;
   animation-timing-function: ease-out;
   -webkit-animation-fill-mode: forwards;
+  animation-delay: 3s;
 
   visibility: hidden;
   opacity: 1;
@@ -61,13 +62,14 @@
 .heroMainTitle {
   @apply --marketplaceHeroTitleFontStyles;
   color: var(--matterColorLight);
-
   composes: animation;
-  animation-delay: 0.5s;
 
   @media (--viewportMedium) {
     max-width: var(--SectionHero_desktopTitleMaxWidth);
   }
+}
+.heroMainTitleFEDelay {
+  animation-delay: 0s;
 }
 
 .heroSubTitle {
@@ -75,24 +77,26 @@
 
   color: var(--matterColorLight);
   margin: 0 0 32px 0;
-
   composes: animation;
-  animation-delay: 0.65s;
 
   @media (--viewportMedium) {
     max-width: var(--SectionHero_desktopTitleMaxWidth);
     margin: 0 0 47px 0;
   }
 }
+.heroSubTitleFEDelay {
+  animation-delay: 0.15s;
+}
 
 .heroButton {
   @apply --marketplaceButtonStyles;
   composes: animation;
 
-  animation-delay: 0.8s;
-
   @media (--viewportMedium) {
     display: block;
     width: 260px;
   }
+}
+.heroButtonFEDelay {
+  animation-delay: 0.3s;
 }
