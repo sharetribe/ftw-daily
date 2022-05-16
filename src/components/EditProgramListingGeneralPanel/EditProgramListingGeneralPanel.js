@@ -13,7 +13,6 @@ import css from './EditProgramListingGeneralPanel.module.css';
 
 const customHoursMessage = 'Custom hours';
 
-
 const EditProgramListingGeneralPanel = props => {
   const {
     className,
@@ -49,22 +48,23 @@ const EditProgramListingGeneralPanel = props => {
       <h1 className={css.title}>{panelTitle}</h1>
       <EditProgramListingGeneralForm
         className={css.form}
-        initialValues={{ title, description, category: publicData.category }}
+        initialValues={{ title, description}}
         saveActionMsg={submitButtonText}
         onSubmit={values => {
-          console.log(values);
-          const { title, description, tags, hours, customHours } = values;
-          if(hours === customHoursMessage) {
-            hours = customHours
+          const { title, description, tags = '', hours, customHours } = values;
+          if (hours === customHoursMessage) {
+            hours = customHours;
           }
 
-          // const updateValues = {
-          //   title: title.trim(),
-          //   description,
-          //   publicData: { category },
-          // };
+          const tagsArray = tags.split(',').map(ele => ele.trim());
 
-          // onSubmit(updateValues);
+          const updateValues = {
+            title: title.trim(),
+            description,
+            publicData: { tags: tagsArray, hours },
+          };
+
+          onSubmit(updateValues);
         }}
         onChange={onChange}
         disabled={disabled}

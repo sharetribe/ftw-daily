@@ -375,6 +375,7 @@ class ManageAvailabilityCalendar extends Component {
       monthFormat,
       ...rest
     } = this.props;
+    
     const { focused, date, currentMonth } = this.state;
     const { clientWidth: width } = this.dayPickerWrapper || { clientWidth: 0 };
     const hasWindow = typeof window !== 'undefined';

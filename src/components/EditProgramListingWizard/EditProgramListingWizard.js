@@ -256,6 +256,7 @@ class EditProgramListingWizard extends Component {
       stripeAccountError,
       stripeAccountLinkError,
       currentUser,
+      history,
       ...rest
     } = this.props;
 
@@ -373,6 +374,7 @@ class EditProgramListingWizard extends Component {
                 handleCreateFlowTabScrolling={this.handleCreateFlowTabScrolling}
                 handlePublishListing={this.handlePublishListing}
                 fetchInProgress={fetchInProgress}
+                history={history}
               />
             );
           })}
