@@ -11831,11 +11831,6 @@ shallowequal@^1.1.0:
   resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-1.1.0.tgz#188d521de95b9087404fd4dcb68b13df0ae4e7f8"
   integrity sha512-y0m1JoUZSlPAjXVtPPW70aZWfIL/dSP7AFkRnniLCrK/8MDKog3TySTBmckD+RObVxH0v4Tox67+F14PdED2oQ==
 
-sharethis-reactjs@^1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/sharethis-reactjs/-/sharethis-reactjs-1.6.0.tgz#5b15d3fb936490785e69c731465964c89d5951f0"
-  integrity sha512-cYrf9OgStwfOjPrHhk/0SpFuJNFQQU6OY7pWlhWtu3smuF+rYNF+vOL4aM/pwaP1QGwwrEuHTAqfpG3OWXPIag==
-
 sharetribe-flex-sdk@1.13.0:
   version "1.13.0"
   resolved "https://registry.yarnpkg.com/sharetribe-flex-sdk/-/sharetribe-flex-sdk-1.13.0.tgz#c5a460eda2c751b6cc244237aaa8254caf741a9b"
