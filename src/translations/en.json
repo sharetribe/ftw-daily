@@ -177,6 +177,9 @@
 
   "EditProgramListingPricingPanel.title": "Edit the pricing of {listingTitle}",
   "EditProgramListingPricingPanel.createListingTitle": "How much does it cost?",
+  "EditProgramListingPricingPanel.updateFailed": "Failed to update listing. Please try again.",
+  "EditProgramListingPricingPanel.showListingFailed": "Fetching listing data failed",
+  "EditProgramListingPricingPanel.pricingTypeRequired": "You need to choose a pricing type",
 
 
   "EditProgramListingLocationPanel.createListingTitle": "Where's your program?",
@@ -191,6 +194,10 @@
   "EditProgramListingLocationForm.addressNotRecognized": "We didn't recognize this location. Please try another location.",
   "EditProgramListingLocationForm.address": "Address",
   "EditProgramListingLocationForm.typeLocationLabel": "Type location",
+
+  "EditProgramListingPricingForm.pricePerHour": "Price per hour in usd",
+  "EditProgramListingPricingForm.pricePerPackage": "Price per package in usd",
+  "EditProgramListingPricingForm.quantityRequired": "Quantity of package is required",
 
 
   "EditProgramListingGeneralForm.categoryLabel": "Sauna type",

@@ -3,13 +3,18 @@ import { bool, func, object, string } from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from '../../util/reactIntl';
 import { ensureOwnListing } from '../../util/data';
-import { findOptionsForSelectFilter } from '../../util/search';
 import { LISTING_STATE_DRAFT } from '../../util/types';
 import { ListingLink } from '..';
-import { EditListingDescriptionForm, EditProgramListingPricingForm } from '../../forms';
+import {  EditProgramListingPricingForm } from '../../forms';
 import config from '../../config';
+import { types as sdkTypes } from '../../util/sdkLoader';
 
 import css from './EditProgramListingPricingPanel.module.css';
+const { Money } = sdkTypes;
+
+
+const PRICING_TYPE_HOURLY = 'hourly';
+const PRICING_TYPE_PACKAGE = 'package';
 
 const EditProgramListingPricingPanel = props => {
   const {
@@ -30,6 +35,7 @@ const EditProgramListingPricingPanel = props => {
   const currentListing = ensureOwnListing(listing);
   const { publicData } = currentListing.attributes;
   const hours = publicData.hours;
+  const pricingType = publicData.pricingType || PRICING_TYPE_HOURLY;
 
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
@@ -46,15 +52,23 @@ const EditProgramListingPricingPanel = props => {
       <h1 className={css.title}>{panelTitle}</h1>
       <EditProgramListingPricingForm
         className={css.form}
-        initialValues={{hours}}
+        initialValues={{ hours, pricingType }}
         saveActionMsg={submitButtonText}
         onSubmit={values => {
-          const { title, description, category } = values;
+          const { pricingType, hours, packageQuantity, price } = values;
+
+          const totalAmount =
+            pricingType === PRICING_TYPE_PACKAGE ? quantity * price.amount : hours * price.amount;
+          const totalPrice = new Money(totalAmount, 'USD');
+
           const updateValues = {
-            title: title.trim(),
-            description,
-            publicData: { category },
+            publicData: { pricingType },
+            price: totalPrice
           };
+
+          if (pricingType !== PRICING_TYPE_HOURLY) {
+            updateValues.publicData.packageQuantity = packageQuantity;
+          }
 
           onSubmit(updateValues);
         }}
