@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2022-XX-XX
 
+## [v8.5.0] 2022-05-16
+
 - [add] Add support for hosted translations.
 
   - This PR fetches "content/translation.json" from a new Asset Delivery API. The file is editable
@@ -25,6 +27,8 @@ way to update this template, but currently, we follow a pattern:
 
 - [delete] Remove old unused translation keys.
   [#1511](https://github.com/sharetribe/ftw-daily/pull/1511)
+
+  [v8.5.0]: https://github.com/sharetribe/ftw-daily/compare/v8.4.1...v8.5.0
 
 ## [v8.4.1] 2022-03-16
 
