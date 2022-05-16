@@ -72,13 +72,9 @@ const EditProgramListingLocationPanel = props => {
         saveActionMsg={submitButtonText}
         onSubmit={values => {
           const { location = {}, typeLocation = [] } = values;
-          console.log('---------');
-          console.log(location);
-          console.log(typeLocation);
           const onSiteSelection = 'on-site';
           const updateValues = {};
           if (typeLocation.includes(onSiteSelection)) {
-            console.log('aaa');
             const {
               selectedPlace: { address, origin },
             } = location;

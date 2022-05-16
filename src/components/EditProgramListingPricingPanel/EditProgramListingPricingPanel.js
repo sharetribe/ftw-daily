@@ -6,7 +6,7 @@ import { ensureOwnListing } from '../../util/data';
 import { findOptionsForSelectFilter } from '../../util/search';
 import { LISTING_STATE_DRAFT } from '../../util/types';
 import { ListingLink } from '..';
-import { EditListingDescriptionForm } from '../../forms';
+import { EditListingDescriptionForm, EditProgramListingPricingForm } from '../../forms';
 import config from '../../config';
 
 import css from './EditProgramListingPricingPanel.module.css';
@@ -28,25 +28,25 @@ const EditProgramListingPricingPanel = props => {
 
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
-  const { description, title, publicData } = currentListing.attributes;
+  const { publicData } = currentListing.attributes;
+  const hours = publicData.hours;
 
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
     <FormattedMessage
-      id="EditListingDescriptionPanel.title"
+      id="EditProgramListingPricingPanel.title"
       values={{ listingTitle: <ListingLink listing={listing} /> }}
     />
   ) : (
-    <FormattedMessage id="EditListingDescriptionPanel.createListingTitle" />
+    <FormattedMessage id="EditProgramListingPricingPanel.createListingTitle" />
   );
 
-  const categoryOptions = findOptionsForSelectFilter('category', config.custom.filters);
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
-      <EditListingDescriptionForm
+      <EditProgramListingPricingForm
         className={css.form}
-        initialValues={{ title, description, category: publicData.category }}
+        initialValues={{hours}}
         saveActionMsg={submitButtonText}
         onSubmit={values => {
           const { title, description, category } = values;
@@ -64,7 +64,6 @@ const EditProgramListingPricingPanel = props => {
         updated={panelUpdated}
         updateInProgress={updateInProgress}
         fetchErrors={errors}
-        categories={categoryOptions}
       />
     </div>
   );

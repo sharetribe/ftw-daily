@@ -4,21 +4,22 @@ import { compose } from 'redux';
 import { Form as FinalForm } from 'react-final-form';
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
-import { propTypes } from '../../util/types';
-import { maxLength, required, composeValidators } from '../../util/validators';
-import { Form, Button, FieldTextInput } from '../../components';
-import CustomCategorySelectFieldMaybe from './CustomCategorySelectFieldMaybe';
+import { LINE_ITEM_DAY, LINE_ITEM_NIGHT, propTypes } from '../../util/types';
+import { Form, Button, FieldTextInput, FieldCurrencyInput } from '../../components';
+import * as validators from '../../util/validators';
+import { formatMoney } from '../../util/currency';
+import { types as sdkTypes } from '../../util/sdkLoader';
 
 import css from './EditProgramListingPricingForm.module.css';
+import config from '../../config';
 
-const TITLE_MAX_LENGTH = 60;
+const { Money } = sdkTypes;
 
 const EditProgramListingPricingForm = props => (
   <FinalForm
     {...props}
     render={formRenderProps => {
       const {
-        categories,
         className,
         disabled,
         ready,
@@ -32,88 +33,81 @@ const EditProgramListingPricingForm = props => (
         fetchErrors,
       } = formRenderProps;
 
-      const titleMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.title' });
-      const titlePlaceholderMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.titlePlaceholder',
+      const unitType = config.bookingUnitType;
+      const isNightly = unitType === LINE_ITEM_NIGHT;
+      const isDaily = unitType === LINE_ITEM_DAY;
+
+      const translationKey = isNightly
+        ? 'EditListingPricingForm.pricePerNight'
+        : isDaily
+        ? 'EditListingPricingForm.pricePerDay'
+        : 'EditListingPricingForm.pricePerUnit';
+
+      const pricePerUnitMessage = intl.formatMessage({
+        id: translationKey,
       });
-      const titleRequiredMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.titleRequired',
+
+      const pricePlaceholderMessage = intl.formatMessage({
+        id: 'EditListingPricingForm.priceInputPlaceholder',
       });
-      const maxLengthMessage = intl.formatMessage(
-        { id: 'EditListingDescriptionForm.maxLength' },
-        {
-          maxLength: TITLE_MAX_LENGTH,
-        }
+
+      const priceRequired = validators.required(
+        intl.formatMessage({
+          id: 'EditListingPricingForm.priceRequired',
+        })
       );
-
-      const descriptionMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.description',
-      });
-      const descriptionPlaceholderMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.descriptionPlaceholder',
-      });
-      const maxLength60Message = maxLength(maxLengthMessage, TITLE_MAX_LENGTH);
-      const descriptionRequiredMessage = intl.formatMessage({
-        id: 'EditListingDescriptionForm.descriptionRequired',
-      });
-
-      const { updateListingError, createListingDraftError, showListingsError } = fetchErrors || {};
-      const errorMessageUpdateListing = updateListingError ? (
-        <p className={css.error}>
-          <FormattedMessage id="EditListingDescriptionForm.updateFailed" />
-        </p>
-      ) : null;
-
-      // This error happens only on first tab (of EditListingWizard)
-      const errorMessageCreateListingDraft = createListingDraftError ? (
-        <p className={css.error}>
-          <FormattedMessage id="EditListingDescriptionForm.createListingDraftError" />
-        </p>
-      ) : null;
-
-      const errorMessageShowListing = showListingsError ? (
-        <p className={css.error}>
-          <FormattedMessage id="EditListingDescriptionForm.showListingFailed" />
-        </p>
-      ) : null;
+      const minPrice = new Money(config.listingMinimumPriceSubUnits, config.currency);
+      const minPriceRequired = validators.moneySubUnitAmountAtLeast(
+        intl.formatMessage(
+          {
+            id: 'EditListingPricingForm.priceTooLow',
+          },
+          {
+            minPrice: formatMoney(intl, minPrice),
+          }
+        ),
+        config.listingMinimumPriceSubUnits
+      );
+      const priceValidators = config.listingMinimumPriceSubUnits
+        ? validators.composeValidators(priceRequired, minPriceRequired)
+        : priceRequired;
 
       const classes = classNames(css.root, className);
       const submitReady = (updated && pristine) || ready;
       const submitInProgress = updateInProgress;
       const submitDisabled = invalid || disabled || submitInProgress;
+      const { updateListingError, showListingsError } = fetchErrors || {};
 
       return (
-        <Form className={classes} onSubmit={handleSubmit}>
-          {errorMessageCreateListingDraft}
-          {errorMessageUpdateListing}
-          {errorMessageShowListing}
-          <FieldTextInput
-            id="title"
-            name="title"
-            className={css.title}
+        <Form onSubmit={handleSubmit} className={classes}>
+          {updateListingError ? (
+            <p className={css.error}>
+              <FormattedMessage id="EditListingPricingForm.updateFailed" />
+            </p>
+          ) : null}
+          {showListingsError ? (
+            <p className={css.error}>
+              <FormattedMessage id="EditListingPricingForm.showListingFailed" />
+            </p>
+          ) : null}
+
+           <FieldTextInput
+            id="hours"
+            name="hours"
+            className={css.hours}
             type="text"
-            label={titleMessage}
-            placeholder={titlePlaceholderMessage}
-            maxLength={TITLE_MAX_LENGTH}
-            validate={composeValidators(required(titleRequiredMessage), maxLength60Message)}
+            label='Hours'
+            disabled
+          />
+          <FieldCurrencyInput
+            id="price"
+            name="price"
+            className={css.priceInput}
             autoFocus
-          />
-
-          <FieldTextInput
-            id="description"
-            name="description"
-            className={css.description}
-            type="textarea"
-            label={descriptionMessage}
-            placeholder={descriptionPlaceholderMessage}
-            validate={composeValidators(required(descriptionRequiredMessage))}
-          />
-
-          <CustomCategorySelectFieldMaybe
-            id="category"
-            name="category"
-            categories={categories}
-            intl={intl}
+            label={pricePerUnitMessage}
+            placeholder={pricePlaceholderMessage}
+            currencyConfig={config.currencyConfig}
+            validate={priceValidators}
           />
 
           <Button

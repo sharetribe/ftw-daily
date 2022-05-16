@@ -175,6 +175,10 @@
   "EditListingDescriptionPanel.createListingTitle": "Add your sauna",
   "EditListingDescriptionPanel.title": "Edit details of {listingTitle}",
 
+  "EditProgramListingPricingPanel.title": "Edit the pricing of {listingTitle}",
+  "EditProgramListingPricingPanel.createListingTitle": "How much does it cost?",
+
+
   "EditProgramListingLocationPanel.createListingTitle": "Where's your program?",
   "EditProgramListingLocationPanel.title": "Edit details of {listingTitle}",
 

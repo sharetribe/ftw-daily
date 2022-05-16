@@ -42,26 +42,41 @@ const EditProgramListingGeneralPanel = props => {
     <FormattedMessage id="EditProgramListingGeneralPanel.createListingTitle" />
   );
 
-  const categoryOptions = findOptionsForSelectFilter('category', config.custom.filters);
+  const tagsString = publicData?.tags && publicData.tags.join(', ');
+
+  const difficultyData = publicData?.difficulty && publicData.difficulty;
+
+  const hoursData = publicData?.hours && publicData.hours;
+  const initHours = {};
+  if (hoursData !== 2 && hoursData !== 4 && hoursData !== 8) {
+    initHours.hours = 'Custom hours';
+    initHours.customHours = hoursData;
+  } else {
+    initHours.hours = hoursData;
+  }
+
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
       <EditProgramListingGeneralForm
         className={css.form}
-        initialValues={{ title, description}}
+        initialValues={{
+          title,
+          description,
+          tags: tagsString,
+          difficulty: difficultyData,
+          ...initHours,
+        }}
         saveActionMsg={submitButtonText}
         onSubmit={values => {
-          const { title, description, tags = '', hours, customHours } = values;
-          if (hours === customHoursMessage) {
-            hours = customHours;
-          }
+          const { title, description, tags = '', hours, customHours, difficulty = [] } = values;
 
           const tagsArray = tags.split(',').map(ele => ele.trim());
 
           const updateValues = {
             title: title.trim(),
             description,
-            publicData: { tags: tagsArray, hours },
+            publicData: { tags: tagsArray, hours: hours === customHoursMessage ? customHours : hours, difficulty },
           };
 
           onSubmit(updateValues);
@@ -72,7 +87,6 @@ const EditProgramListingGeneralPanel = props => {
         updated={panelUpdated}
         updateInProgress={updateInProgress}
         fetchErrors={errors}
-        categories={categoryOptions}
       />
     </div>
   );
