@@ -175,6 +175,9 @@
   "EditListingDescriptionPanel.createListingTitle": "Add your sauna",
   "EditListingDescriptionPanel.title": "Edit details of {listingTitle}",
 
+  "EditProgramListingAvailabilityPanel.title": "Edit the availability of {listingTitle}",
+  "EditProgramListingAvailabilityPanel.createListingTitle": "When is it available?",
+
   "EditProgramListingPricingPanel.title": "Edit the pricing of {listingTitle}",
   "EditProgramListingPricingPanel.createListingTitle": "How much does it cost?",
   "EditProgramListingPricingPanel.updateFailed": "Failed to update listing. Please try again.",
@@ -184,6 +187,9 @@
 
   "EditProgramListingLocationPanel.createListingTitle": "Where's your program?",
   "EditProgramListingLocationPanel.title": "Edit details of {listingTitle}",
+
+  "EditProgramListingAvailabilityForm.updateFailed": "Failed to update listing. Please try again.",
+
 
   "EditProgramListingLocationForm.locationTypeRequired": "You need to choose location type",
   "EditProgramListingLocationForm.updateFailed": "Failed to update listing. Please try again.",

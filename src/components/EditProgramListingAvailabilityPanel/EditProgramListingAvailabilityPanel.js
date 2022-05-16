@@ -1,13 +1,11 @@
 import React from 'react';
-import { bool, func, object, string } from 'prop-types';
+import { bool, func, object, shape, string } from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from '../../util/reactIntl';
 import { ensureOwnListing } from '../../util/data';
-import { findOptionsForSelectFilter } from '../../util/search';
 import { LISTING_STATE_DRAFT } from '../../util/types';
-import { ListingLink } from '..';
-import { EditListingDescriptionForm } from '../../forms';
-import config from '../../config';
+import { ListingLink } from '../../components';
+import {  EditProgramListingAvailabilityForm } from '../../forms';
 
 import css from './EditProgramListingAvailabilityPanel.module.css';
 
@@ -16,6 +14,7 @@ const EditProgramListingAvailabilityPanel = props => {
     className,
     rootClassName,
     listing,
+    availability,
     disabled,
     ready,
     onSubmit,
@@ -28,43 +27,53 @@ const EditProgramListingAvailabilityPanel = props => {
 
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
-  const { description, title, publicData } = currentListing.attributes;
-
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
-  const panelTitle = isPublished ? (
-    <FormattedMessage
-      id="EditListingDescriptionPanel.title"
-      values={{ listingTitle: <ListingLink listing={listing} /> }}
-    />
-  ) : (
-    <FormattedMessage id="EditListingDescriptionPanel.createListingTitle" />
-  );
+  const defaultAvailabilityPlan = {
+    type: 'availability-plan/day',
+    entries: [
+      { dayOfWeek: 'mon', seats: 0 },
+      { dayOfWeek: 'tue', seats: 0 },
+      { dayOfWeek: 'wed', seats: 0 },
+      { dayOfWeek: 'thu', seats: 0 },
+      { dayOfWeek: 'fri', seats: 0 },
+      { dayOfWeek: 'sat', seats: 0 },
+      { dayOfWeek: 'sun', seats: 0 },
+    ],
+  };
+  const availabilityPlan = currentListing.attributes.availabilityPlan || defaultAvailabilityPlan;
 
-  const categoryOptions = findOptionsForSelectFilter('category', config.custom.filters);
   return (
     <div className={classes}>
-      <h1 className={css.title}>{panelTitle}</h1>
-      <EditListingDescriptionForm
+      <h1 className={css.title}>
+        {isPublished ? (
+          <FormattedMessage
+            id="EditListingAvailabilityPanel.title"
+            values={{ listingTitle: <ListingLink listing={listing} /> }}
+          />
+        ) : (
+          <FormattedMessage id="EditListingAvailabilityPanel.createListingTitle" />
+        )}
+      </h1>
+      <EditProgramListingAvailabilityForm
         className={css.form}
-        initialValues={{ title, description, category: publicData.category }}
-        saveActionMsg={submitButtonText}
-        onSubmit={values => {
-          const { title, description, category } = values;
-          const updateValues = {
-            title: title.trim(),
-            description,
-            publicData: { category },
-          };
-
-          onSubmit(updateValues);
+        listingId={currentListing.id}
+        initialValues={{ availabilityPlan }}
+        availability={availability}
+        availabilityPlan={availabilityPlan}
+        onSubmit={() => {
+          // We save the default availability plan
+          // I.e. this listing is available every night.
+          // Exceptions are handled with live edit through a calendar,
+          // which is visible on this panel.
+          onSubmit({ availabilityPlan });
         }}
         onChange={onChange}
+        saveActionMsg={submitButtonText}
         disabled={disabled}
         ready={ready}
         updated={panelUpdated}
+        updateError={errors.updateListingError}
         updateInProgress={updateInProgress}
-        fetchErrors={errors}
-        categories={categoryOptions}
       />
     </div>
   );
@@ -73,7 +82,6 @@ const EditProgramListingAvailabilityPanel = props => {
 EditProgramListingAvailabilityPanel.defaultProps = {
   className: null,
   rootClassName: null,
-  errors: null,
   listing: null,
 };
 
@@ -84,6 +92,12 @@ EditProgramListingAvailabilityPanel.propTypes = {
   // We cannot use propTypes.listing since the listing might be a draft.
   listing: object,
 
+  availability: shape({
+    calendar: object.isRequired,
+    onFetchAvailabilityExceptions: func.isRequired,
+    onCreateAvailabilityException: func.isRequired,
+    onDeleteAvailabilityException: func.isRequired,
+  }).isRequired,
   disabled: bool.isRequired,
   ready: bool.isRequired,
   onSubmit: func.isRequired,
