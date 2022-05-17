@@ -35,7 +35,7 @@
     "jose": "3.11.4",
     "lodash": "^4.17.21",
     "mapbox-gl-multitouch": "^1.0.3",
-    "moment": "^2.29.2",
+    "moment": "^2.29.3",
     "object.entries": "^1.1.5",
     "object.values": "^1.1.5",
     "passport": "^0.5.0",
