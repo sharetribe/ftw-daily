@@ -42,7 +42,7 @@
     "passport-facebook": "^3.0.0",
     "passport-google-oauth": "^2.0.0",
     "path-to-regexp": "^6.2.1",
-    "prop-types": "^15.7.2",
+    "prop-types": "^15.8.1",
     "query-string": "^7.1.1",
     "raf": "^3.4.0",
     "react": "^16.13.1",
