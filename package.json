@@ -68,7 +68,7 @@
   "devDependencies": {
     "bfj": "^7.0.2",
     "chalk": "^v4.1.2",
-    "concurrently": "^6.4.0",
+    "concurrently": "^7.2.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "enzyme-to-json": "^3.6.2",
