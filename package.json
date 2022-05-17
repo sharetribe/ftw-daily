@@ -15,7 +15,7 @@
     "array.prototype.find": "^2.1.2",
     "autosize": "^5.0.1",
     "basic-auth": "^2.0.1",
-    "body-parser": "^1.18.3",
+    "body-parser": "^1.20.0",
     "classnames": "^2.3.1",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
