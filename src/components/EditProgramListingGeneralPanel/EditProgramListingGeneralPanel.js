@@ -42,7 +42,7 @@ const EditProgramListingGeneralPanel = props => {
     <FormattedMessage id="EditProgramListingGeneralPanel.createListingTitle" />
   );
 
-  const tagsString = publicData?.tags && publicData.tags.join(', ');
+  const tags = publicData?.tags && publicData.tags;
 
   const difficultyData = publicData?.difficulty && publicData.difficulty;
 
@@ -63,7 +63,7 @@ const EditProgramListingGeneralPanel = props => {
         initialValues={{
           title,
           description,
-          tags: tagsString,
+          tags,
           difficulty: difficultyData,
           ...initHours,
         }}
@@ -71,12 +71,10 @@ const EditProgramListingGeneralPanel = props => {
         onSubmit={values => {
           const { title, description, tags = '', hours, customHours, difficulty = [] } = values;
 
-          const tagsArray = tags.split(',').map(ele => ele.trim());
-
           const updateValues = {
             title: title.trim(),
             description,
-            publicData: { tags: tagsArray, hours: hours === customHoursMessage ? customHours : hours, difficulty },
+            publicData: { tags: tags, hours: hours === customHoursMessage ? customHours : hours, difficulty },
           };
 
           onSubmit(updateValues);

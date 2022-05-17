@@ -12,7 +12,7 @@ const SectionTagsMaybe = ({ className, rootClassName, publicData }) => {
       <h2 className={css.descriptionTitle}>
         <FormattedMessage id="ListingPage.rulesTitle" />
       </h2>
-      <p className={css.rules}>{publicData.tags.join(', ')}</p>
+      <p className={css.rules}>{publicData.tags}</p>
     </div>
   ) : null;
 };
