@@ -18,7 +18,7 @@ class SectionMapMaybe extends Component {
   render() {
     const { className, rootClassName, geolocation, publicData, listingId } = this.props;
 
-    if (!geolocation) {
+    if (!geolocation || publicData.address === '') {
       return null;
     }
 

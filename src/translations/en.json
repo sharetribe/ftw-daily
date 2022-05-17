@@ -184,12 +184,10 @@
   "EditProgramListingPricingPanel.showListingFailed": "Fetching listing data failed",
   "EditProgramListingPricingPanel.pricingTypeRequired": "You need to choose a pricing type",
 
-
   "EditProgramListingLocationPanel.createListingTitle": "Where's your program?",
   "EditProgramListingLocationPanel.title": "Edit details of {listingTitle}",
 
   "EditProgramListingAvailabilityForm.updateFailed": "Failed to update listing. Please try again.",
-
 
   "EditProgramListingLocationForm.locationTypeRequired": "You need to choose location type",
   "EditProgramListingLocationForm.updateFailed": "Failed to update listing. Please try again.",
@@ -204,7 +202,6 @@
   "EditProgramListingPricingForm.pricePerHour": "Price per hour in usd",
   "EditProgramListingPricingForm.pricePerPackage": "Price per package in usd",
   "EditProgramListingPricingForm.quantityRequired": "Quantity of package is required",
-
 
   "EditProgramListingGeneralForm.categoryLabel": "Sauna type",
   "EditProgramListingGeneralForm.difficultyLabel": "Difficulty",
@@ -421,10 +418,14 @@
   "ListingCard.unsupportedPrice": "({currency})",
   "ListingCard.unsupportedPriceTitle": "Unsupported currency ({currency})",
   "ListingPage.bookingSubTitle": "Start by choosing your dates.",
+  "ListingPage.difficultyTitle": "Difficulty",
+  "ListingPage.typeLocationTitle": "Location type ",
+  "ListingPage.pricingTypeTitle": "Pricing type",
   "ListingPage.bookingTitle": "Book {title}",
   "ListingPage.closedListing": "This listing has been closed and can't be booked.",
   "ListingPage.contactUser": "Contact",
-  "ListingPage.descriptionTitle": "About this sauna",
+  "ListingPage.descriptionTitle": "About this program",
+  "ListingPage.hoursTitle": "Hours",
   "ListingPage.editListing": "Edit listing",
   "ListingPage.editProfileLink": "Edit profile",
   "ListingPage.errorLoadingListingMessage": "Could not load listing. Please try again.",
@@ -444,7 +445,8 @@
   "ListingPage.perUnit": "per unit",
   "ListingPage.reviewsError": "Loading reviews failed.",
   "ListingPage.reviewsHeading": "Reviews ({count})",
-  "ListingPage.rulesTitle": "Sauna rules",
+  "ListingPage.rulesTitle": "Program rules",
+  "ListingPage.tagsTitle": "Program rules",
   "ListingPage.schemaTitle": "{title} - {price} | {siteTitle}",
   "ListingPage.viewImagesButton": "View photos ({count})",
   "ListingPage.yourHostHeading": "Your host",

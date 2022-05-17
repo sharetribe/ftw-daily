@@ -11,7 +11,7 @@ const SectionRulesMaybe = props => {
   return publicData && publicData.rules ? (
     <div className={classes}>
       <h2 className={css.title}>
-        <FormattedMessage id="ListingPage.rulesTitle" />
+        <FormattedMessage id="ListingPage.tagsTitle" />
       </h2>
       <p className={css.rules}>{publicData.rules}</p>
     </div>

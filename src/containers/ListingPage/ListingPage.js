@@ -52,6 +52,11 @@ import SectionHostMaybe from './SectionHostMaybe';
 import SectionRulesMaybe from './SectionRulesMaybe';
 import SectionMapMaybe from './SectionMapMaybe';
 import css from './ListingPage.module.css';
+import SectionTagsMaybe from './SectionTagsMaybe';
+import SectionHoursMaybe from './SectionHoursMaybe';
+import SectionDifficultyMaybe from './SectionDifficultyMaybe';
+import SectionTypeLocationMaybe from './SectionTypeLocationMaybe';
+import SectionPricingTypeMaybe from './SectionPricingTypeMaybe';
 
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
 
@@ -377,7 +382,9 @@ export class ListingPageComponent extends Component {
     );
 
     const amenityOptions = findOptionsForSelectFilter('amenities', filterConfig);
+    const difficultyOptions = findOptionsForSelectFilter('difficulty', filterConfig);
     const categoryOptions = findOptionsForSelectFilter('category', filterConfig);
+    const typeLocationOptions = findOptionsForSelectFilter('typeLocation', filterConfig);
     const category =
       publicData && publicData.category ? (
         <span>
@@ -436,7 +443,12 @@ export class ListingPageComponent extends Component {
                   />
                   <SectionDescriptionMaybe description={description} />
                   <SectionFeaturesMaybe options={amenityOptions} publicData={publicData} />
+                  <SectionDifficultyMaybe options={difficultyOptions} publicData={publicData} />
+                  <SectionTypeLocationMaybe options={typeLocationOptions} publicData={publicData} />
                   <SectionRulesMaybe publicData={publicData} />
+                  <SectionTagsMaybe publicData={publicData} />
+                  <SectionHoursMaybe publicData={publicData} />
+                  <SectionPricingTypeMaybe publicData={publicData} />
                   <SectionMapMaybe
                     geolocation={geolocation}
                     publicData={publicData}
