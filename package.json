@@ -73,7 +73,7 @@
     "enzyme-adapter-react-16": "^1.15.6",
     "enzyme-to-json": "^3.6.2",
     "inquirer": "^8.2.4",
-    "nodemon": "^2.0.15",
+    "nodemon": "^2.0.16",
     "prettier": "^1.18.2"
   },
   "resolutions": {
