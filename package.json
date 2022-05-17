@@ -19,7 +19,7 @@
     "classnames": "^2.3.1",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
-    "core-js": "^3.19.2",
+    "core-js": "^3.22.5",
     "cors": "^2.8.5",
     "decimal.js": "^10.3.1",
     "dotenv": "8.2.0",
