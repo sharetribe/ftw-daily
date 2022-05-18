@@ -5,7 +5,6 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@babel/runtime": "^7.17.9",
-    "@formatjs/intl-relativetimeformat": "^9.3.2",
     "@loadable/component": "^5.14.1",
     "@loadable/server": "^5.14.2",
     "@mapbox/polyline": "^1.1.1",

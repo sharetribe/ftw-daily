@@ -27,7 +27,8 @@ import defaultMessages from './translations/en.json';
 //   1) Change the language in the config.js file!
 //   2) Import correct locale rules for Moment library
 //   3) Use the `messagesInLocale` import to add the correct translation file.
-//   4) To support older browsers we need add the correct locale for intl-relativetimeformat to `util/polyfills.js`
+//   4) (optionally) To support older browsers you need add the intl-relativetimeformat npm packages
+//      and take it into use in `util/polyfills.js`
 
 // Note that there is also translations in './translations/countryCodes.js' file
 // This file contains ISO 3166-1 alpha-2 country codes, country names and their translations in our default languages
