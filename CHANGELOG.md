@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2022-XX-XX
 
+- [change] Update some outdated dependencies.
+  [#1514](https://github.com/sharetribe/ftw-daily/pull/1514)
+
 ## [v8.5.0] 2022-05-16
 
 - [add] Add support for hosted translations.
