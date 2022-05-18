@@ -27,6 +27,7 @@ import { TopbarContainer } from '../../containers';
 
 import facebookImage from '../../assets/HotpatchLogo-500x500.png';
 import twitterImage from '../../assets/HotpatchLogo-500x500.png';
+import logoImage from '../../assets/HotPatchLogoNew.png';
 import css from './LandingPage.module.css';
 
 export const LandingPageComponent = props => {
@@ -38,7 +39,7 @@ export const LandingPageComponent = props => {
   const siteTitle = config.siteTitle;
   const schemaTitle = intl.formatMessage({ id: 'LandingPage.schemaTitle' }, { siteTitle });
   const schemaDescription = intl.formatMessage({ id: 'LandingPage.schemaDescription' });
-  const schemaImage = `${config.canonicalRootURL}${facebookImage}`;
+  const schemaImage = `${config.canonicalRootURL}${logoImage}`;
 
   return (
     <Page
