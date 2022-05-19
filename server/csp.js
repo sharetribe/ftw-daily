@@ -32,7 +32,7 @@ const defaultDirectives = {
     'events.mapbox.com',
 
     // Google Analytics
-    '​www.​googletagm­anager.​com',
+    'www.googletagmanager.com',
     'www.google-analytics.com',
     'stats.g.doubleclick.net',
 
@@ -74,7 +74,7 @@ const defaultDirectives = {
     data,
     'maps.googleapis.com',
     'api.mapbox.com',
-    '​www.​googletagm­anager.​com',
+    'www.googletagmanager.com',
     '*.google-analytics.com',
     'js.stripe.com',
   ],
