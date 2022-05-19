@@ -14,6 +14,13 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2022-XX-XX
 
+## [v8.6.2] 2022-05-19
+
+- [fix] There was also invalid characters (zero-width space) on added directive
+  [#1517](https://github.com/sharetribe/ftw-daily/pull/1517)
+
+  [v8.6.2]: https://github.com/sharetribe/ftw-daily/compare/v8.6.1...v8.6.2
+
 ## [v8.6.1] 2022-05-19
 
 - [fix] undefined REACT_APP_GOOGLE_ANALYTICS_ID caused an error.
