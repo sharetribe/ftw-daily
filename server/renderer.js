@@ -129,7 +129,7 @@ exports.render = function(requestUrl, context, data, renderApp, webExtractor) {
   // See: https://developers.google.com/analytics/devguides/collection/gtagjs
   const googleAnalyticsId = process.env.REACT_APP_GOOGLE_ANALYTICS_ID;
   // Add Google Analytics script if correct id exists (it should start with 'G-' prefix)
-  const hasGoogleAnalyticsv4Id = googleAnalyticsId.indexOf('G-') === 0;
+  const hasGoogleAnalyticsv4Id = googleAnalyticsId?.indexOf('G-') === 0;
 
   // Google Analytics: gtag.js
   // NOTE: FTW is a single-page application (SPA).
