@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2022-XX-XX
 
+## [v8.6.0] 2022-05-19
+
 - [change] Google Analytics: remove Universal Analytics and start supporting GA4.
 
   NOTE: you need to update the Google Analytics id to GA4's id (starting with 'G-' prefix).
@@ -22,6 +24,8 @@ way to update this template, but currently, we follow a pattern:
 
 - [change] Update some outdated dependencies.
   [#1514](https://github.com/sharetribe/ftw-daily/pull/1514)
+
+  [v8.6.0]: https://github.com/sharetribe/ftw-daily/compare/v8.5.0...v8.6.0
 
 ## [v8.5.0] 2022-05-16
 
