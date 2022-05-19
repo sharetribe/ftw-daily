@@ -30,7 +30,7 @@ way to update this template, but currently, we follow a pattern:
 
 ## [v8.6.0] 2022-05-19
 
-Note: this caused an error. Use v8.6.1 instead.
+Note: this caused an error. Use v8.6.2 instead.
 
 - [change] Google Analytics: remove Universal Analytics and start supporting GA4.
 
