@@ -694,7 +694,7 @@
   "ReviewForm.reviewRatingRequired": "Rating is required.",
   "ReviewForm.reviewSubmit": "Publish review",
   "ReviewForm.reviewSubmitAlreadySent": "Review already sent. Please refresh the page.",
-  "ReviewForm.reviewSubmitFailed": "Failed to sent a review. Please try again.",
+  "ReviewForm.reviewSubmitFailed": "Failed to send a review. Please try again.",
   "ReviewModal.description": "Reviews are an important part of the Saunatime community. Please share what went well and what could have been improved.",
   "ReviewModal.later": "Later",
   "ReviewModal.title": "Leave a review for {revieweeName}",
