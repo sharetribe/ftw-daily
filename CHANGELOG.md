@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2022-XX-XX
 
+- [fix] Fixing a small typo. [#1518](https://github.com/sharetribe/ftw-daily/pull/1518)
+
 ## [v8.6.2] 2022-05-19
 
 - [fix] There was also invalid characters (zero-width space) on added directive
