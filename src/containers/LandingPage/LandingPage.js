@@ -47,9 +47,9 @@ export const LandingPageComponent = props => {
       contentType="website"
       description={schemaDescription}
       title={schemaTitle}
-      facebookImages={[{ url: facebookImage, width: 500, height: 500 }]}
+      facebookImages={[{ url: facebookImage, width: 458, height: 84 }]}
       twitterImages={[
-        { url: `${config.canonicalRootURL}${twitterImage}`, width: 500, height: 500 },
+        { url: `${config.canonicalRootURL}${twitterImage}`, width: 458, height: 84 },
       ]}
       schema={{
         '@context': 'http://schema.org',
