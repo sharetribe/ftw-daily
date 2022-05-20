@@ -25,8 +25,8 @@ import {
 } from '../../components';
 import { TopbarContainer } from '../../containers';
 
-import facebookImage from '../../assets/HotPatchLogoNew.png';
-import twitterImage from '../../assets/HotPatchLogoNew.png';
+import facebookImage from '../../assets/HotPatchLogoNew-458x84.png';
+import twitterImage from '../../assets/HotPatchLogoNew-458x84.png';
 import css from './LandingPage.module.css';
 
 export const LandingPageComponent = props => {
