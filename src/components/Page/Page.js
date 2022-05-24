@@ -10,8 +10,8 @@ import { metaTagProps } from '../../util/seo';
 import { canonicalRoutePath } from '../../util/routes';
 import { CookieConsent, GTMWrapper } from '../../components';
 
-import facebookImage from '../../components/Logo/hotpatch-logo-new.svg';
-import twitterImage from '../../components/Logo/hotpatch-logo-new.svg';
+import facebookImage from '../../assets/HotPatchLogoNew-458x84.png';
+import twitterImage from '../../assets/HotPatchLogoNew-458x84.png';
 import css from './Page.module.css';
 
 const preventDefault = e => {
