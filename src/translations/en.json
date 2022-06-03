@@ -525,6 +525,7 @@
   "ListingPage.schemaTitle": "{title} - {price} | {siteTitle}",
   "ListingPage.viewImagesButton": "View photos ({count})",
   "ListingPage.yourHostHeading": "Your host",
+  "ListingPage.emailMessageForSharing": "{listingName} - {listingLink}",
   "LoadableComponentErrorBoundaryPage.title": "Page not fetched",
   "LoadableComponentErrorBoundaryPage.heading": "Oops, we couldn't fetch the page.",
   "LoadableComponentErrorBoundaryPage.description": "It looks like the app needs to be updated! Please, refresh the current page or go back to {link}.",
