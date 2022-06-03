@@ -187,6 +187,9 @@ const defaultDirectives = {
     'tidiochat.com',
     'www.voucherify.io',
     'www.google.com.ua',
+    '*.amazonaws.com',
+    'https://platform-api.sharethis.com',
+    '*.platform-api.sharethis.com'
   ],
   styleSrc: [
     self,
