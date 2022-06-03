@@ -55,10 +55,6 @@ const defaultDirectives = {
     'wwww.voucherify.io',
     'api.voucherify.io',
     'www.google.com.ua',
-    'https://platform-api.sharethis.com',
-    '*.platform-api.sharethis.com',
-    'https://l.sharethis.com/',
-    '*.l.sharethis.com/'
   ],
   fontSrc: [
     self,
@@ -113,10 +109,6 @@ const defaultDirectives = {
     'tidiochat.com',
     'www.voucherify.io',
     'www.google.com.ua',
-    'https://platform-api.sharethis.com',
-    '*.platform-api.sharethis.com',
-    'https://l.sharethis.com/',
-    '*.l.sharethis.com/'
   ],
   imgSrc: [
     self,
@@ -164,10 +156,7 @@ const defaultDirectives = {
     'www.google.co.uk',
     'www.google.com.ua',
     'www.voucherify.io',
-    'https://platform-api.sharethis.com',
-    '*.platform-api.sharethis.com',
-    'https://l.sharethis.com/',
-    '*.l.sharethis.com/'
+    'https://platform-cdn.sharethis.com'
   ],
   scriptSrc: [
     self,
@@ -202,7 +191,8 @@ const defaultDirectives = {
     'https://platform-api.sharethis.com',
     '*.platform-api.sharethis.com',
     'https://l.sharethis.com/',
-    '*.l.sharethis.com/'
+    '*.l.sharethis.com/',
+    'https://platform-cdn.sharethis.com'
   ],
   styleSrc: [
     self,
@@ -232,17 +222,12 @@ const defaultDirectives = {
     'www.voucherify.io',
     'www.google.com.ua',
     'staging.hotpatch.com',
-    'https://platform-api.sharethis.com',
-    '*.platform-api.sharethis.com',
-    'https://l.sharethis.com/',
-    '*.l.sharethis.com/'
+    'https://platform-cdn.sharethis.com'
+    
   ],
   mediaSrc: [
     'widget-v4.tidiochat.com',
-    'https://platform-api.sharethis.com',
-    '*.platform-api.sharethis.com',
-    'https://l.sharethis.com/',
-    '*.l.sharethis.com/'
+    'https://platform-cdn.sharethis.com'
   ],
 };
 
