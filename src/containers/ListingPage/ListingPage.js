@@ -88,8 +88,8 @@ const priceData = (price, intl) => {
 const categoryLabel = (categories, key) => {
   const cats = getSelectedCategories(key, categories);
   const categoryOptionsToSelect = categories && categories.filter(item => cats.includes(item.key))
-  
-  return [...new Set(categoryOptionsToSelect.map(({label}) => label))].join(' | ')
+
+  return [...new Set(categoryOptionsToSelect.map(({ label }) => label))].join(' | ')
 };
 
 export class ListingPageComponent extends Component {
@@ -113,7 +113,7 @@ export class ListingPageComponent extends Component {
 
   updateDiscount = (val) => {
     this.setState({ promocode: val })
- }
+  }
   toggleBookingType(bookingType) {
     this.setState({ bookingType });
   }
@@ -502,29 +502,31 @@ export class ListingPageComponent extends Component {
                     onContactUser={this.onContactUser}
                     priceType={priceType}
                   />
-                  <InlineShareButtons
-                    config={{
-                      alignment: 'left',
-                      color: 'social',
-                      enabled: true,
-                      networks: [
-                        'twitter',
-                        'facebook',
-                        'linkedin',
-                        'whatsapp',
-                        'email'
-                      ],
-                      radius: 4,
-                      size: 45,
+                  <div className={css.shareButtons}>
+                    <InlineShareButtons
+                      config={{
+                        alignment: 'left',
+                        color: 'social',
+                        enabled: true,
+                        networks: [
+                          'twitter',
+                          'facebook',
+                          'linkedin',
+                          'whatsapp',
+                          'email'
+                        ],
+                        radius: 4,
+                        size: 45,
 
-                      title: "Check out this listing on HotPatch!",
-                      subject: 'Check out this listing on HotPatch!',
-                      servicePopup: true,
-                      message: emailMessageForSharing,
-                      image: firstImage,
-                      username: title,
-                    }}
-                  />
+                        title: "Check out this listing on HotPatch!",
+                        subject: 'Check out this listing on HotPatch!',
+                        servicePopup: true,
+                        message: emailMessageForSharing,
+                        image: firstImage,
+                        username: title,
+                      }}
+                    />
+                  </div>
                   <p></p>
                   <SectionCapacity publicData={publicData} />
                   {/* <SectionSeats publicData={publicData} /> */}

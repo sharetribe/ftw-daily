@@ -588,3 +588,11 @@
   word-break: break-word;
   hyphens: auto;
 }
+
+.shareButtons {
+  padding: 0 24px;
+
+  @media (--viewportMedium) {
+    padding: 0;
+  }
+}
