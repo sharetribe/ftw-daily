@@ -9,13 +9,14 @@ exports.loadData = function(requestUrl, sdk, appInfo) {
   let translations = {};
   const store = configureStore({}, sdk);
 
-  const dataLoadingCalls = matchedRoutes.reduce((calls, match) => {
-    const { route, params } = match;
-    if (typeof route.loadData === 'function' && !route.auth) {
-      calls.push(store.dispatch(route.loadData(params, query)));
-    }
-    return calls;
-  }, []);
+  const dataLoadingCalls = () =>
+    matchedRoutes.reduce((calls, match) => {
+      const { route, params } = match;
+      if (typeof route.loadData === 'function' && !route.auth) {
+        calls.push(store.dispatch(route.loadData(params, query)));
+      }
+      return calls;
+    }, []);
 
   // First fetch app-wide assets
   // Then make loadData calls
@@ -23,9 +24,9 @@ exports.loadData = function(requestUrl, sdk, appInfo) {
   // This order supports other asset (in the future) that should be fetched before data calls.
   return store
     .dispatch(fetchAppAssets(config.appCdnAssets))
-    .then(fetchedAssets => {
-      translations = fetchedAssets?.translations?.data || {};
-      return Promise.all(dataLoadingCalls);
+    .then(fetchedAppAssets => {
+      translations = fetchedAppAssets?.translations?.data || {};
+      return Promise.all(dataLoadingCalls());
     })
     .then(() => {
       return { preloadedState: store.getState(), translations };
