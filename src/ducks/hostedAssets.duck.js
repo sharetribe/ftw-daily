@@ -7,12 +7,17 @@ export const ASSETS_REQUEST = 'app/assets/REQUEST';
 export const ASSETS_SUCCESS = 'app/assets/SUCCESS';
 export const ASSETS_ERROR = 'app/assets/ERROR';
 
+export const PAGE_ASSETS_REQUEST = 'app/assets/PAGE_ASSETS_REQUEST';
+export const PAGE_ASSETS_SUCCESS = 'app/assets/PAGE_ASSETS_SUCCESS';
+export const PAGE_ASSETS_ERROR = 'app/assets/PAGE_ASSETS_ERROR';
+
 // ================ Reducer ================ //
 
 const initialState = {
-  // List of assets that should be fetched and their path in Asset API.
-  // assets: { assetName: 'path/to/asset.json' }
-  assets: {},
+  // List of app-wide assets that should be fetched and their path in Asset API.
+  // appAssets: { assetName: 'path/to/asset.json' }
+  appAssets: {},
+  pageAssetsData: null,
   // Current version of the saved asset.
   // Typically, the version that is returned by the "latest" alias.
   version: null,
@@ -28,11 +33,18 @@ export default function assetReducer(state = initialState, action = {}) {
     case ASSETS_SUCCESS:
       return {
         ...state,
-        assets: payload.assets,
-        version: payload.version,
+        appAssets: payload.assets,
+        version: state.version || payload.version,
         inProgress: false,
       };
     case ASSETS_ERROR:
+      return { ...state, inProgress: true, error: payload };
+
+    case PAGE_ASSETS_REQUEST:
+      return { ...state, inProgress: true, error: null };
+    case PAGE_ASSETS_SUCCESS:
+      return { ...state, pageAssetsData: payload, inProgress: false };
+    case PAGE_ASSETS_ERROR:
       return { ...state, inProgress: true, error: payload };
 
     default:
@@ -42,20 +54,27 @@ export default function assetReducer(state = initialState, action = {}) {
 
 // ================ Action creators ================ //
 
-export const assetsRequested = () => ({ type: ASSETS_REQUEST });
-export const assetsSuccess = (assets, version) => ({
+export const appAssetsRequested = () => ({ type: ASSETS_REQUEST });
+export const appAssetsSuccess = (assets, version) => ({
   type: ASSETS_SUCCESS,
   payload: { assets, version },
 });
-export const assetsError = error => ({
+export const appAssetsError = error => ({
   type: ASSETS_ERROR,
+  payload: error,
+});
+
+export const pageAssetsRequested = () => ({ type: PAGE_ASSETS_REQUEST });
+export const pageAssetsSuccess = assets => ({ type: PAGE_ASSETS_SUCCESS, payload: assets });
+export const pageAssetsError = error => ({
+  type: PAGE_ASSETS_ERROR,
   payload: error,
 });
 
 // ================ Thunks ================ //
 
 export const fetchAppAssets = (assets, version) => (dispatch, getState, sdk) => {
-  dispatch(assetsRequested());
+  dispatch(appAssetsRequested());
 
   // If version is given fetch assets by the version,
   // otherwise default to "latest" alias
@@ -68,7 +87,7 @@ export const fetchAppAssets = (assets, version) => (dispatch, getState, sdk) => 
   return Promise.all(sdkAssets)
     .then(responses => {
       const version = responses[0]?.data?.meta?.version;
-      dispatch(assetsSuccess(assets, version));
+      dispatch(appAssetsSuccess(assets, version));
 
       // Returned value looks like this for a single asset with name: "translations":
       // {
@@ -84,6 +103,47 @@ export const fetchAppAssets = (assets, version) => (dispatch, getState, sdk) => 
     })
     .catch(e => {
       log.error(e, 'app-asset-fetch-failed', { assets, version });
-      dispatch(assetsError(storableError(e)));
+      dispatch(appAssetsError(storableError(e)));
+    });
+};
+
+export const fetchPageAssets = (assets, hasFallback) => (dispatch, getState, sdk) => {
+  const version = getState()?.hostedAssets?.version;
+  if (typeof version === 'undefined') {
+    throw new Error(
+      'App-wide assets were not fetched first. Asset version missing from Redux store.'
+    );
+  }
+
+  dispatch(pageAssetsRequested());
+
+  // If version is given fetch assets by the version,
+  // otherwise default to "latest" alias
+  const fetchAssets = assetPath => sdk.assetByVersion({ path: assetPath, version });
+  const assetEntries = Object.entries(assets);
+  const sdkAssets = assetEntries.map(([key, assetPath]) => fetchAssets(assetPath));
+
+  return Promise.all(sdkAssets)
+    .then(responses => {
+      // Returned value looks like this for a single asset with name: "translations":
+      // {
+      //    pageAsset1: {
+      //      path: 'content/translations.json', // an example path in Asset Delivery API
+      //      data, // translation key & value pairs
+      //    },
+      //    // etc.
+      // }
+      const pageAssets = assetEntries.reduce((collectedAssets, assetEntry, i) => {
+        const [name, path] = assetEntry;
+        return { ...collectedAssets, [name]: { path, data: responses[i].data.data } };
+      }, {});
+      dispatch(pageAssetsSuccess(pageAssets));
+      return pageAssets;
+    })
+    .catch(e => {
+      if (!hasFallback) {
+        log.error(e, 'page-asset-fetch-failed', { assets, version });
+      }
+      dispatch(pageAssetsError(storableError(e)));
     });
 };

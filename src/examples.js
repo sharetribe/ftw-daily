@@ -95,6 +95,10 @@ import * as StripePaymentForm from './forms/StripePaymentForm/StripePaymentForm.
 // containers
 import * as Colors from './containers/StyleguidePage/Colors.example';
 import * as Typography from './containers/StyleguidePage/Typography.example';
+import * as CMSSections from './containers/PageBuilder/Sections/Sections.example';
+import * as Markdown from './containers/PageBuilder/Markdown.example';
+import * as PageBuilder from './containers/PageBuilder/PageBuilder.example';
+import * as LandingPage from './containers/LandingPage/LandingPage.example';
 
 export {
   ActivityFeed,
@@ -107,6 +111,7 @@ export {
   BookingPanel,
   Button,
   Colors,
+  CMSSections,
   EditListingAvailabilityForm,
   EditListingDescriptionForm,
   EditListingFeaturesForm,
@@ -156,16 +161,19 @@ export {
   IconSuccess,
   ImageCarousel,
   KeywordFilter,
+  LandingPage,
   ListingCard,
   LocationAutocompleteInput,
   LoginForm,
   ManageListingCard,
   Map,
+  Markdown,
   Menu,
   Modal,
   ModalInMobile,
   NamedLink,
   OutsideClickHandler,
+  PageBuilder,
   PaginationLinks,
   PasswordRecoveryForm,
   PasswordResetForm,
