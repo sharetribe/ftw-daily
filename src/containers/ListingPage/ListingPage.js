@@ -443,6 +443,15 @@ export class ListingPageComponent extends Component {
         </span>
       ) : null;
 
+    const hasImages = currentListing.images && currentListing.images.length > 0;
+    const firstImage = hasImages && currentListing.images[0].attributes.variants ? currentListing.images[0].attributes.variants["landscape-crop2x"].url : null;
+
+    const listingLink = typeof window === 'undefined' ? '' : window.location.href;
+    const emailMessageForSharing = intl.formatMessage(
+      { id: "ListingPage.emailMessageForSharing" },
+      { listingLink: listingLink, listingName: currentListing.attributes.title });
+
+
     return (
       <Page
         title={schemaTitle}
@@ -493,7 +502,7 @@ export class ListingPageComponent extends Component {
                     onContactUser={this.onContactUser}
                     priceType={priceType}
                   />
-                  <InlineShareButtons 
+                  <InlineShareButtons
                     config={{
                       alignment: 'left',
                       color: 'social',
@@ -510,9 +519,12 @@ export class ListingPageComponent extends Component {
 
                       title: "Check out this listing on HotPatch!",
                       subject: 'Check out this listing on HotPatch!',
-                      servicePopup: true
-                      }}
-                    />
+                      servicePopup: true,
+                      message: emailMessageForSharing,
+                      image: firstImage,
+                      username: title,
+                    }}
+                  />
                   <p></p>
                   <SectionCapacity publicData={publicData} />
                   {/* <SectionSeats publicData={publicData} /> */}
