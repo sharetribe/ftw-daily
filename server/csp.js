@@ -188,7 +188,8 @@ const defaultDirectives = {
     'www.voucherify.io',
     'www.google.com.ua',
     'https://platform-api.sharethis.com',
-    '*.platform-api.sharethis.com'
+    '*.platform-api.sharethis.com',
+    '*.l.sharethis.com/'
   ],
   styleSrc: [
     self,
