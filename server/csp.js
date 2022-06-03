@@ -189,6 +189,7 @@ const defaultDirectives = {
     'www.google.com.ua',
     'https://platform-api.sharethis.com',
     '*.platform-api.sharethis.com',
+    'https://l.sharethis.com/',
     '*.l.sharethis.com/'
   ],
   styleSrc: [
