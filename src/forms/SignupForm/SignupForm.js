@@ -131,6 +131,16 @@ const SignupFormComponent = props => (
 
       return (
         <Form className={classes} onSubmit={handleSubmit}>
+         <div>
+         <p></p>
+            <p className={css.bottomWrapperText}>
+              <span className={css.password}>
+                <FormattedMessage
+                  id="SignupForm.Intro"
+                />
+              </span>
+            </p>
+          </div>
           <div>
             <FieldTextInput
               type="email"

@@ -30,3 +30,7 @@
 .recoveryLinkInfo {
   @apply --marketplaceModalHelperText;
 }
+
+.Intro {
+  @apply --marketplaceBodyFontStyles;
+}

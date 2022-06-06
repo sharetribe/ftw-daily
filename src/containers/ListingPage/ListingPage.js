@@ -511,7 +511,6 @@ export class ListingPageComponent extends Component {
                         networks: [
                           'twitter',
                           'facebook',
-                          'linkedin',
                           'whatsapp',
                           'email'
                         ],
@@ -523,7 +522,6 @@ export class ListingPageComponent extends Component {
                         servicePopup: true,
                         message: emailMessageForSharing,
                         image: firstImage,
-                        username: title,
                       }}
                     />
                   </div>
