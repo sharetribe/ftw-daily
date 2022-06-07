@@ -1,7 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import Field from '../Fields/Field.js';
+// Block components
+import BlockDefault from './BlockDefault.js';
 
 import css from './BlockBuilder.module.css';
 
@@ -17,26 +18,6 @@ const BlockTag = props => {
   const classes = classNames(rootClassName || css.blockTag, className);
 
   return <Tag className={classes} {...otherProps} />;
-};
-
-///////////////////
-// Custom blocks //
-///////////////////
-
-const BlockDefault = props => {
-  const { blockId, title, text, callToAction, ctaButtonClass, media, options } = props;
-
-  const fieldMedia = <Field data={media} options={options} />;
-  return (
-    <BlockTag id={blockId}>
-      {fieldMedia ? <div className={css.media}>{fieldMedia}</div> : null}
-      <div className="text">
-        <Field data={title} options={options} />
-        <Field data={text} options={options} />
-        <Field data={callToAction} className={ctaButtonClass} options={options} />
-      </div>
-    </BlockTag>
-  );
 };
 
 ////////////////////
@@ -71,7 +52,13 @@ const BlockBuilder = props => {
         const Block = config?.component;
         if (Block) {
           return (
-            <Block key={block.blockId} {...ctaButtonClassMaybe} {...blockOptionsMaybe} {...block} />
+            <Block
+              key={block.blockId}
+              tag={BlockTag}
+              {...ctaButtonClassMaybe}
+              {...blockOptionsMaybe}
+              {...block}
+            />
           );
         } else {
           // If the block type is unknown, the app can't know what to render
