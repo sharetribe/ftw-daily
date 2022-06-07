@@ -1,0 +1,21 @@
+.columns1 {
+}
+
+.columns2 {
+  @media (--viewportMedium) {
+    /* grid-template-columns: repeat(2, 1fr); */
+    grid-template-columns: repeat(2, calc((100% - 36px) / 2));
+  }
+}
+.columns3 {
+  @media (--viewportMedium) {
+    /* grid-template-columns: repeat(3, 1fr); */
+    grid-template-columns: repeat(3, calc((100% - 2 * 36px) / 3));
+  }
+}
+.columns4 {
+  @media (--viewportMedium) {
+    /* grid-template-columns: repeat(4, 1fr); */
+    grid-template-columns: repeat(4, calc((100% - 3 * 36px) / 4));
+  }
+}
