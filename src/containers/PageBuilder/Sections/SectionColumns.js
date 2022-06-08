@@ -3,11 +3,13 @@ import classNames from 'classnames';
 
 import Field, { pickValidProps } from '../Fields/Field.js';
 import BlockBuilder from '../Blocks/BlockBuilder.js';
-import css from './SectionBuilder.module.css';
+
+import SectionTag from './SectionTag.js';
+import css from './SectionColumns.module.css';
 
 const SectionColumns = props => {
   const {
-    tag: SectionTag,
+    className,
     defaultClasses,
     sectionId,
     numColumns,
@@ -56,7 +58,12 @@ const SectionColumns = props => {
       : css.columns1;
 
   return (
-    <SectionTag id={sectionId} style={backgroundColorMaybe} {...backgroundImageMaybe} theme={theme}>
+    <SectionTag
+      id={sectionId}
+      className={className}
+      style={backgroundColorMaybe}
+      {...backgroundImageMaybe}
+    >
       <header className={defaultClasses.sectionDetails}>
         <Field data={title} className={defaultClasses.title} options={fieldOptions} />
         <Field data={ingress} className={defaultClasses.ingress} options={fieldOptions} />

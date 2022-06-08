@@ -5,6 +5,7 @@ import {
   updatedEntities,
   denormalisedEntities,
   humanizeLineItemCode,
+  denormalizeAssetData,
 } from './data';
 
 const { UUID } = sdkTypes;
@@ -344,5 +345,92 @@ describe('humanizeLineItemCode', () => {
 
   it('should reject a code with missing code value', () => {
     expect(() => humanizeLineItemCode('line-item/')).toThrowError(Error);
+  });
+});
+
+describe('denormalizeAssetData', () => {
+  const jsonObjData = {
+    foo: 'bar',
+    num: 6,
+    b: true,
+    nested: { foo: 'bar2' },
+    arr: ['a', { b: 'b' }, { c: { data: 'c' } }],
+  };
+
+  it('should deep clone asset without image references', () => {
+    const jsonObj = {
+      data: jsonObjData,
+      included: [],
+    };
+    expect(JSON.stringify(denormalizeAssetData(jsonObj))).toEqual(JSON.stringify(jsonObj.data));
+  });
+
+  it('should deep clone asset with image references', () => {
+    const jsonObj = {
+      data: {
+        ...jsonObjData,
+        image: {
+          _id: 'hero-1',
+          _resolver: 'image',
+          _path: 'content/landing/background.png',
+          _params: {
+            variants: {
+              scaled: {
+                fit: 'scale',
+                width: 1200,
+                height: 600,
+              },
+              scaled2x: {
+                fit: 'scale',
+                width: 2400,
+                height: 1200,
+              },
+            },
+          },
+        },
+      },
+      included: [
+        {
+          id: 'hero-1',
+          type: 'ref',
+          refSrc: 'content/landing.json',
+          refDst: 'content/landing/background.png',
+          data: {
+            resolver: 'image',
+            variants: {
+              scaled: {
+                url: 'https://something.imgix.com/foo/bar/baz',
+                width: 1200,
+                height: 580,
+              },
+              scaled2x: {
+                url: 'https://something.imgix.com/foo/bar/else',
+                width: 2400,
+                height: 1160,
+              },
+            },
+          },
+        },
+      ],
+    };
+    const expected = {
+      ...jsonObjData,
+      image: {
+        resolver: 'image',
+        variants: {
+          scaled: {
+            url: 'https://something.imgix.com/foo/bar/baz',
+            width: 1200,
+            height: 580,
+          },
+          scaled2x: {
+            url: 'https://something.imgix.com/foo/bar/else',
+            width: 2400,
+            height: 1160,
+          },
+        },
+      },
+    };
+    expect(JSON.stringify(denormalizeAssetData(jsonObj))).toEqual(JSON.stringify(expected));
   });
 });

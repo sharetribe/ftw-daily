@@ -3,12 +3,14 @@ import classNames from 'classnames';
 
 import Field, { pickValidProps } from '../Fields/Field.js';
 import BlockBuilder from '../Blocks/BlockBuilder.js';
-import css from './SectionBuilder.module.css';
+
+import SectionTag from './SectionTag.js';
+import css from './SectionArticle.module.css';
 
 // TODO This is only an example. There's no example for this yet
 const SectionArticle = props => {
   const {
-    tag: SectionTag,
+    className,
     defaultClasses,
     sectionId,
     title,
@@ -46,7 +48,12 @@ const SectionArticle = props => {
     : {};
 
   return (
-    <SectionTag id={sectionId} style={backgroundColorMaybe} {...backgroundImageMaybe} theme={theme}>
+    <SectionTag
+      id={sectionId}
+      className={className}
+      style={backgroundColorMaybe}
+      {...backgroundImageMaybe}
+    >
       <header className={defaultClasses.sectionDetails}>
         <Field className={defaultClasses.title} data={title} options={fieldOptions} />
       </header>
