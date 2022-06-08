@@ -1,28 +1,16 @@
 import React from 'react';
 
 import Field from '../Fields/Field.js';
+import BlockTag from './BlockTag.js';
 
-import css from './BlockBuilder.module.css';
-
-///////////////////
-// Custom blocks //
-///////////////////
+import css from './BlockDefault.module.css';
 
 const BlockDefault = props => {
-  const {
-    tag: BlockTag,
-    blockId,
-    title,
-    text,
-    callToAction,
-    ctaButtonClass,
-    media,
-    options,
-  } = props;
+  const { blockId, className, title, text, callToAction, ctaButtonClass, media, options } = props;
 
   const fieldMedia = <Field data={media} options={options} />;
   return (
-    <BlockTag id={blockId}>
+    <BlockTag id={blockId} className={className}>
       {fieldMedia ? <div className={css.media}>{fieldMedia}</div> : null}
       <div className="text">
         <Field data={title} options={options} />

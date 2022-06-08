@@ -140,6 +140,109 @@ export const denormalisedResponseEntities = sdkResponse => {
   return denormalisedEntities(entities, resources);
 };
 
+/////////////////////////
+// TODO fake image ref //
+/////////////////////////
+const placeholderImage = (width, height, bgColor = '#ff00aa') => {
+  //const bgColor = '#ff00aa';
+  const textColor = '#4a4a4a';
+  const fontFamily = 'sans-serif';
+  const fontSize = '12px';
+  const dy = '10.5';
+  const fontWeight = 'bold';
+  const text = `${width}x${height}`;
+
+  const str = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+    <rect fill="${bgColor}" width="${width}" height="${height}"/>
+    <text fill="${textColor}" font-family="${fontFamily}" font-size="${fontSize}" dy="${dy}" font-weight="${fontWeight}" x="50%" y="50%" text-anchor="middle">${text}</text>
+  </svg>`;
+
+  const cleaned = str
+    .replace(/[\t\n\r]/gim, '') // Strip newlines and tabs
+    .replace(/\s\s+/g, ' ') // Condense multiple spaces
+    .replace(/'/gim, '\\i'); // Normalize quotes
+
+  const encoded = encodeURIComponent(cleaned)
+    .replace(/\(/g, '%28') // Encode brackets
+    .replace(/\)/g, '%29');
+
+  return `data:image/svg+xml;charset=UTF-8,${encoded}`;
+};
+
+/**
+ * Denormalize JSON object.
+ * TODO Currently, this only handles denormalization of image references
+ *
+ * @param {JSON} data from Asset API (e.g. page asset)
+ * @param {JSON} included array of asset references (currently only images supported)
+ * @returns deep copy of data with images denormalized into it.
+ */
+const denormalizeJsonData = (data, included) => {
+  let copy;
+
+  // Handle strings, numbers, booleans, null
+  if (data === null || typeof data !== 'object') {
+    return data;
+  }
+
+  // At this point the data has typeof 'object' (aka Array or Object)
+  // Array is the more specific case (of Object)
+  if (data instanceof Array) {
+    copy = data.map(datum => denormalizeJsonData(datum, included));
+    return copy;
+  }
+
+  // Generic Objects
+  if (data instanceof Object) {
+    copy = {};
+    Object.entries(data).forEach(([key, value]) => {
+      // Handle denormalization of image reference
+      const hasImageRefAsValue =
+        typeof value == 'object' && value._id && value._resolver === 'image';
+      if (hasImageRefAsValue) {
+        const foundRef = included.find(inc => inc.id === value._id);
+        copy[key] = foundRef?.data;
+      } else if (value === 'Image URL, reference, or something, TBD') {
+        /////////////////////////////////////////////////////
+        // TODO this is just a faking the feature. REMOVE! //
+        /////////////////////////////////////////////////////
+        const width = 400;
+        const height = 400;
+        copy[key] = {
+          resolver: 'image',
+          variants: {
+            square1x: {
+              url: placeholderImage(width, height, '#FF00AA'),
+              width,
+              height,
+            },
+            square2x: {
+              url: placeholderImage(2 * width, 2 * height, '#00AAFF'),
+              width: 2 * width,
+              height: 2 * width,
+            },
+          },
+        };
+      } else {
+        copy[key] = denormalizeJsonData(value, included);
+      }
+    });
+    return copy;
+  }
+
+  throw new Error("Unable to traverse data! It's not JSON.");
+};
+
+/**
+ * Denormalize asset json from Asset API.
+ * @param {JSON} assetJson in format: { data, included }
+ * @returns deep copy of asset data with images denormalized into it.
+ */
+export const denormalizeAssetData = assetJson => {
+  const { data, included } = assetJson || {};
+  return denormalizeJsonData(data, included);
+};
+
 /**
  * Create shell objects to ensure that attributes etc. exists.
  *

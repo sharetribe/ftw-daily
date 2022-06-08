@@ -1,24 +1,10 @@
 import React from 'react';
-import classNames from 'classnames';
+
+// Default wrapping element for block components
+import BlockTag from './BlockTag.js';
 
 // Block components
 import BlockDefault from './BlockDefault.js';
-
-import css from './BlockBuilder.module.css';
-
-///////////////////
-// Block wrapper //
-///////////////////
-
-// This element can be used to wrap some common styles and features,
-// if there are multiple blockTypes,
-const BlockTag = props => {
-  const { className, rootClassName, as, ...otherProps } = props;
-  const Tag = as || 'div';
-  const classes = classNames(rootClassName || css.blockTag, className);
-
-  return <Tag className={classes} {...otherProps} />;
-};
 
 ////////////////////
 // Blocks builder //
@@ -52,13 +38,7 @@ const BlockBuilder = props => {
         const Block = config?.component;
         if (Block) {
           return (
-            <Block
-              key={block.blockId}
-              tag={BlockTag}
-              {...ctaButtonClassMaybe}
-              {...blockOptionsMaybe}
-              {...block}
-            />
+            <Block key={block.blockId} {...ctaButtonClassMaybe} {...blockOptionsMaybe} {...block} />
           );
         } else {
           // If the block type is unknown, the app can't know what to render

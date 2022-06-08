@@ -1,3 +1,4 @@
+import { denormalizeAssetData } from '../util/data';
 import { storableError } from '../util/errors';
 import * as log from '../util/log';
 
@@ -135,7 +136,8 @@ export const fetchPageAssets = (assets, hasFallback) => (dispatch, getState, sdk
       // }
       const pageAssets = assetEntries.reduce((collectedAssets, assetEntry, i) => {
         const [name, path] = assetEntry;
-        return { ...collectedAssets, [name]: { path, data: responses[i].data.data } };
+        const assetData = denormalizeAssetData(responses[i].data);
+        return { ...collectedAssets, [name]: { path, data: assetData } };
       }, {});
       dispatch(pageAssetsSuccess(pageAssets));
       return pageAssets;

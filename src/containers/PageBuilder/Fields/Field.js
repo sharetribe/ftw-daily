@@ -1,5 +1,6 @@
 import React from 'react';
-import { AspectRatioWrapper } from '../../../components/index.js';
+import { types as sdkTypes } from '../../../util/sdkLoader';
+import { AspectRatioWrapper, ResponsiveImage } from '../../../components/index.js';
 
 import { H1, H2, H3, H4, H5, H6 } from '../Primitives/Heading.js';
 import { Ul, Ol, Li } from '../Primitives/List.js';
@@ -16,24 +17,69 @@ import {
 } from './Field.helpers.js';
 import css from './Field.module.css';
 
-const PlainImg = props => {
-  return <img className={css.markdownImg} {...props} />;
-};
+///////////////////////
+// Custom components //
+///////////////////////
 
-///////////////////
-// Custom fields //
-///////////////////
-
-// Most fields are primitives but markdown is a bit special case.
-const MarkdownField = ({ content, components }) => renderMarkdown(content, components);
+// Image as a Field (by default only allowed inside a block).
 const ImageField = props => {
   // TODO image dimensions
+  // sizes: should reflect column widths
+  const { alt, variants } = props;
+  const image = {
+    id: new sdkTypes.UUID('empty'),
+    type: 'image',
+    attributes: { variants },
+  };
+  const variantNames = Object.keys(variants);
+  // We assume aspect ratio from the first image variant
+  const firstImageVariant = variants[variantNames[0]];
+  const { width, height } = firstImageVariant || {};
+
   return (
-    <AspectRatioWrapper width={props?.width || 1} height={props?.height || 1}>
-      <img className={css.img} {...props} />
+    <AspectRatioWrapper width={width || 1} height={height || 1}>
+      <ResponsiveImage
+        className={css.fieldImage}
+        alt={alt}
+        image={image}
+        variants={variantNames}
+        sizes="(max-width: 768px) 100vw, 400px"
+      />
     </AspectRatioWrapper>
   );
 };
+
+// BackgroundImage doesn't have enforcable aspectratio
+// It's most likely a scaled image
+const BackgroundImageField = props => {
+  // TODO image dimensions
+  const { alt, variants } = props;
+  const image = {
+    id: new sdkTypes.UUID('empty'),
+    type: 'image',
+    attributes: { variants },
+  };
+  const variantNames = Object.keys(variants);
+  const w = variants[variantNames[0]]?.width;
+  const h = variants[variantNames[0]]?.height;
+
+  return (
+    <ResponsiveImage
+      className={css.backgroundImage}
+      alt={alt}
+      image={image}
+      variants={variantNames}
+    />
+  );
+};
+
+// Images in markdown point to elsewhere (they don't support responsive image variants)
+const MarkdownImg = props => {
+  return <img className={css.markdownImg} {...props} />;
+};
+
+// Most fields are primitives but markdown is a bit special case.
+const MarkdownField = ({ content, components }) => renderMarkdown(content, components);
 
 /////////////
 // Configs //
@@ -62,18 +108,18 @@ const defaultConfigs = {
         h4: H4,
         h5: H5,
         h6: H6,
-        img: PlainImg,
+        img: MarkdownImg,
         code: Code,
         pre: CodeBlock,
         a: Link,
       },
     },
   },
-  // TODO (these doesn't have final specs)
   externalButtonLink: { component: Link, pickValidProps: exposeLinkProps },
   internalButtonLink: { component: Link, pickValidProps: exposeLinkProps },
+  // TODO (these don't have final specs)
   image: { component: ImageField, pickValidProps: exposeImageProps },
-  backgroundImage: { component: PlainImg, pickValidProps: exposeImageProps },
+  backgroundImage: { component: BackgroundImageField, pickValidProps: exposeImageProps },
   hexColor: { pickValidProps: exposeColorProps },
 };
 
