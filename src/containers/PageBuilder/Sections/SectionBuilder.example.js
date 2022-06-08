@@ -36,7 +36,7 @@ const placeholderImage = (width, height, bgColor = '#ff00aa') => {
 const width = 400;
 const height = 400;
 
-const imagePlaceholder = {
+const imagePlaceholder = (width, height) => ({
   resolver: 'image',
   variants: {
     square1x: {
@@ -50,7 +50,7 @@ const imagePlaceholder = {
       height: 2 * width,
     },
   },
-};
+});
 
 /////////////////////////////
 // SectionColumns examples //
@@ -110,7 +110,11 @@ export const SectionColumns = {
         sectionId: 'cms-column-section-no-block-bg-img',
         numColumns: 1,
         background: { type: 'hexColor', color: hexYellow },
-        backgroundImage: { type: 'image', alt: 'Background image', image: imagePlaceholder },
+        backgroundImage: {
+          type: 'image',
+          alt: 'Background image',
+          image: imagePlaceholder(400, 400),
+        },
         title: { type: 'heading2', content: 'One Column, No Blocks, Bg Image' },
         ingress: {
           type: 'paragraph',
@@ -277,25 +281,25 @@ export const SectionColumns = {
           {
             blockType: 'default-block',
             blockId: 'cms-column4-block-1-variant-1',
-            media: { type: 'image', alt: 'First image', image: imagePlaceholder },
+            media: { type: 'image', alt: 'First image', image: imagePlaceholder(400, 400) },
             title: { type: 'heading3', content: 'Image 1' },
           },
           {
             blockType: 'default-block',
             blockId: 'cms-column4-block-2-variant-1',
-            media: { type: 'image', alt: 'Second image', image: imagePlaceholder },
+            media: { type: 'image', alt: 'Second image', image: imagePlaceholder(400, 400) },
             title: { type: 'heading3', content: 'Image 2' },
           },
           {
             blockType: 'default-block',
             blockId: 'cms-column4-block-3-variant-1',
-            media: { type: 'image', alt: 'Third image', image: imagePlaceholder },
+            media: { type: 'image', alt: 'Third image', image: imagePlaceholder(400, 400) },
             title: { type: 'heading3', content: 'Image 3' },
           },
           {
             blockType: 'default-block',
             blockId: 'cms-column4-block-4-variant-1',
-            media: { type: 'image', alt: 'Fourth image', image: imagePlaceholder },
+            media: { type: 'image', alt: 'Fourth image', image: imagePlaceholder(400, 400) },
             title: { type: 'heading3', content: 'Image 4' },
           },
         ],
@@ -305,36 +309,36 @@ export const SectionColumns = {
         sectionId: 'cms-column-section-5',
         numColumns: 4,
         title: { type: 'heading2', content: '4 Columns 5 blocks' },
-        ingress: { type: 'paragraph', content: 'Portrait images (500x400)' },
+        ingress: { type: 'paragraph', content: 'Portrait images (400x500)' },
         blocks: [
           {
             blockType: 'default-block',
             blockId: 'cms-column4-block-1-variant-2',
-            media: { type: 'image', alt: 'First image', image: imagePlaceholder },
+            media: { type: 'image', alt: 'First image', image: imagePlaceholder(400, 500) },
             title: { type: 'heading3', content: 'Image 1' },
           },
           {
             blockType: 'default-block',
             blockId: 'cms-column4-block-2-variant-2',
-            media: { type: 'image', alt: 'Second image', image: imagePlaceholder },
+            media: { type: 'image', alt: 'Second image', image: imagePlaceholder(400, 500) },
             title: { type: 'heading3', content: 'Image 2' },
           },
           {
             blockType: 'default-block',
             blockId: 'cms-column4-block-3-variant-2',
-            media: { type: 'image', alt: 'Third image', image: imagePlaceholder },
+            media: { type: 'image', alt: 'Third image', image: imagePlaceholder(400, 500) },
             title: { type: 'heading3', content: 'Image 3' },
           },
           {
             blockType: 'default-block',
             blockId: 'cms-column4-block-4-variant-2',
-            media: { type: 'image', alt: 'Fourth image', image: imagePlaceholder },
+            media: { type: 'image', alt: 'Fourth image', image: imagePlaceholder(400, 500) },
             title: { type: 'heading3', content: 'Image 4' },
           },
           {
             blockType: 'default-block',
             blockId: 'cms-column4-block-5-variant-2',
-            media: { type: 'image', alt: 'Fifth image', image: imagePlaceholder },
+            media: { type: 'image', alt: 'Fifth image', image: imagePlaceholder(400, 500) },
             title: { type: 'heading3', content: 'Image 5' },
           },
         ],
@@ -344,24 +348,24 @@ export const SectionColumns = {
         sectionId: 'cms-column-section-6',
         numColumns: 4,
         title: { type: 'heading2', content: '4 Columns 3 blocks' },
-        ingress: { type: 'paragraph', content: 'Portrait images (500x400)' },
+        ingress: { type: 'paragraph', content: 'Landscape images (400x300)' },
         blocks: [
           {
             blockType: 'default-block',
             blockId: 'cms-column4-block-1-variant-3',
-            media: { type: 'image', alt: 'First image', image: imagePlaceholder },
+            media: { type: 'image', alt: 'First image', image: imagePlaceholder(400, 300) },
             title: { type: 'heading3', content: 'Image 1' },
           },
           {
             blockType: 'default-block',
             blockId: 'cms-column4-block-2-variant-3',
-            media: { type: 'image', alt: 'Second image', image: imagePlaceholder },
+            media: { type: 'image', alt: 'Second image', image: imagePlaceholder(400, 300) },
             title: { type: 'heading3', content: 'Image 2' },
           },
           {
             blockType: 'default-block',
             blockId: 'cms-column4-block-3-variant-3',
-            media: { type: 'image', alt: 'Third image', image: imagePlaceholder },
+            media: { type: 'image', alt: 'Third image', image: imagePlaceholder(400, 300) },
             title: { type: 'heading3', content: 'Image 3' },
           },
         ],
