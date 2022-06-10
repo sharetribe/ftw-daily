@@ -1,0 +1,36 @@
+@import '../../../styles/customMediaQueries.css';
+
+.singleColumn {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 36px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 36px;
+}
+
+.columns1 {
+  composes: singleColumn;
+}
+
+.columns2 {
+  composes: singleColumn;
+  @media (--viewportMedium) {
+    /* grid-template-columns: repeat(2, 1fr); */
+    grid-template-columns: repeat(2, calc((100% - 36px) / 2));
+  }
+}
+.columns3 {
+  composes: singleColumn;
+  @media (--viewportMedium) {
+    /* grid-template-columns: repeat(3, 1fr); */
+    grid-template-columns: repeat(3, calc((100% - 2 * 36px) / 3));
+  }
+}
+.columns4 {
+  composes: singleColumn;
+  @media (--viewportMedium) {
+    /* grid-template-columns: repeat(4, 1fr); */
+    grid-template-columns: repeat(4, calc((100% - 3 * 36px) / 4));
+  }
+}

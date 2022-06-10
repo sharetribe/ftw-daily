@@ -1,6 +1,7 @@
 @import '../../styles/customMediaQueries.css';
 
 .root {
+  position: relative;
   border-top-style: solid;
   border-top-width: 1px;
   border-top-color: var(--matterColorNegative);

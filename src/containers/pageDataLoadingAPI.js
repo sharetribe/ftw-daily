@@ -1,7 +1,9 @@
 /**
  * Export loadData calls from ducks modules of different containers
  */
+import { loadData as LandingPageLoader } from './LandingPage/LandingPage.duck';
 import { setInitialValues as CheckoutPageInitialValues } from './CheckoutPage/CheckoutPage.duck';
+import { loadData as CMSPageLoader } from './CMSPage/CMSPage.duck';
 import { loadData as ContactDetailsPageLoader } from './ContactDetailsPage/ContactDetailsPage.duck';
 import { loadData as EditListingPageLoader } from './EditListingPage/EditListingPage.duck';
 import { loadData as EmailVerificationPageLoader } from './EmailVerificationPage/EmailVerificationPage.duck';
@@ -19,8 +21,14 @@ import {
 
 const getPageDataLoadingAPI = () => {
   return {
+    LandingPage: {
+      loadData: LandingPageLoader,
+    },
     CheckoutPage: {
       setInitialValues: CheckoutPageInitialValues,
+    },
+    CMSPage: {
+      loadData: CMSPageLoader,
     },
     ContactDetailsPage: {
       loadData: ContactDetailsPageLoader,

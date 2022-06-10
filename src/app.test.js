@@ -14,9 +14,14 @@ afterAll(() => {
 });
 
 describe('Application - JSDOM environment', () => {
-  it('renders in the client without crashing', () => {
+  it('renders the LandingPage without crashing', () => {
     window.google = { maps: {} };
-    const store = configureStore();
+
+    // LandingPage gets rendered and it calls hostedAsset > fetchPageAssets > sdk.assetByVersion
+    const rejectPageAssetCall = () =>
+      Promise.reject(new Error('LandingPage test calling sdk.assetByVersion'));
+    const fakeSdk = { assetByVersion: rejectPageAssetCall };
+    const store = configureStore({}, fakeSdk);
     const div = document.createElement('div');
     ReactDOM.render(<ClientApp store={store} />, div);
     delete window.google;
