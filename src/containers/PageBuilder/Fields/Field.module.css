@@ -1,11 +1,19 @@
-.markdownImg {
-  width: 100%;
-}
-
-.img {
-  border-radius: 8px;
+.backgroundImage {
+  object-fit: cover;
   width: 100%;
   height: 100%;
+}
+
+.fieldImage {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.markdownImg {
+  width: 100%;
+  border-radius: 8px;
   object-fit: cover;
 }
 
@@ -22,15 +30,4 @@
     width: 100%;
     position: absolute;
   }
-}
-
-.backgroundImage {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-}
-
-.fieldImage {
-  width: 100%;
-  height: 100%;
 }

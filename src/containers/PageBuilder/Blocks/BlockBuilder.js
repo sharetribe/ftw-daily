@@ -10,6 +10,7 @@ import BlockDefault from './BlockDefault.js';
 // Blocks builder //
 ////////////////////
 
+// Currently, only one Block-level component is supported.
 const defaultBlockComponents = {
   ['default-block']: { component: BlockDefault },
 };
@@ -18,6 +19,7 @@ const BlockBuilder = props => {
   const { blocks, ctaButtonClass, options } = props;
   const ctaButtonClassMaybe = ctaButtonClass ? { ctaButtonClass } : {};
 
+  // Extract block & field component mappings from props
   // If external mapping has been included for fields
   // E.g. { h1: { component: MyAwesomeHeader } }
   const { blockComponents, fieldComponents } = options || {};
@@ -29,6 +31,7 @@ const BlockBuilder = props => {
   }
 
   // Selection of Block components
+  // Combine component-mapping from props together with the default one:
   const components = { ...defaultBlockComponents, ...blockComponents };
 
   return (

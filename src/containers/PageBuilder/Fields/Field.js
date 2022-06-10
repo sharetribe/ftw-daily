@@ -1,4 +1,6 @@
 import React from 'react';
+import { func, node, number, objectOf, oneOfType, shape, string } from 'prop-types';
+
 import { types as sdkTypes } from '../../../util/sdkLoader';
 import { AspectRatioWrapper, ResponsiveImage } from '../../../components/index.js';
 
@@ -60,8 +62,6 @@ const BackgroundImageField = props => {
     attributes: { variants },
   };
   const variantNames = Object.keys(variants);
-  const w = variants[variantNames[0]]?.width;
-  const h = variants[variantNames[0]]?.height;
 
   return (
     <ResponsiveImage
@@ -74,9 +74,7 @@ const BackgroundImageField = props => {
 };
 
 // Images in markdown point to elsewhere (they don't support responsive image variants)
-const MarkdownImg = props => {
-  return <img className={css.markdownImg} {...props} />;
-};
+const MarkdownImage = props => <img className={css.markdownImg} {...props} />;
 
 // Most fields are primitives but markdown is a bit special case.
 const MarkdownField = ({ content, components }) => renderMarkdown(content, components);
@@ -108,7 +106,7 @@ const defaultConfigs = {
         h4: H4,
         h5: H5,
         h6: H6,
-        img: MarkdownImg,
+        img: MarkdownImage,
         code: Code,
         pre: CodeBlock,
         a: Link,
@@ -145,7 +143,7 @@ export const pickValidProps = (data, options) => {
 // Field selector //
 ////////////////////
 
-// Generic field component that picks a specific field component based on 'type'
+// Generic field component that picks a specific UI component based on 'type'
 const Field = props => {
   const { data, options: fieldOptions, ...propsFromParent } = props;
 
@@ -178,6 +176,47 @@ const Field = props => {
   // If the field type is unknown, the app can't know what to render
   console.warn(`Unknown field type (${data?.type}) detected.`);
   return null;
+};
+
+// Field's prop types
+const typeTextContent = shape({
+  type: string.isRequired,
+  content: string.isRequired,
+});
+const typeColor = shape({
+  color: string.isRequired,
+  href: string.isRequired,
+});
+const typeLink = shape({
+  type: string.isRequired,
+  label: string.isRequired,
+  href: string.isRequired,
+});
+const typeImage = shape({
+  type: string.isRequired,
+  alt: string.isRequired,
+  image: shape({
+    variants: objectOf(
+      shape({
+        width: number.isRequired,
+        height: number.isRequired,
+        url: string.isRequired,
+      })
+    ).isRequired,
+  }).isRequired,
+});
+
+const typeOption = shape({
+  fieldComponents: shape({ component: node, pickValidProps: func }),
+});
+
+Field.defaultProps = {
+  options: null,
+};
+
+Field.propTypes = {
+  data: oneOfType([typeTextContent, typeColor, typeLink, typeImage]),
+  options: typeOption,
 };
 
 export default Field;

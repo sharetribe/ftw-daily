@@ -100,8 +100,8 @@ export const SectionColumns = {
           content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
         },
         callToAction: {
-          type: 'external-button-link',
-          link: 'https://www.sharetribe.com/docs/',
+          type: 'externalButtonLink',
+          href: 'https://www.sharetribe.com/docs/',
           label: 'Flex Docs',
         },
       },
@@ -121,8 +121,8 @@ export const SectionColumns = {
           content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
         },
         callToAction: {
-          type: 'external-button-link',
-          link: 'https://www.sharetribe.com/docs/',
+          type: 'externalButtonLink',
+          href: 'https://www.sharetribe.com/docs/',
           label: 'Flex Docs',
         },
       },
@@ -175,9 +175,9 @@ export const SectionColumns = {
               content: `**Lorem ipsum** dolor sit amet consectetur adepisci elit...`,
             },
             callToAction: {
+              type: 'internalButtonLink',
               href: '/l/wooden-sauna/5aafa4ec-87c1-4043-b82f-14d67389dd19',
               label: 'See the sauna',
-              type: 'internalButtonLink',
             },
           },
           {
@@ -189,9 +189,9 @@ export const SectionColumns = {
               content: `**Lorem ipsum** dolor sit amet consectetur adepisci elit...`,
             },
             callToAction: {
+              type: 'internalButtonLink',
               href: '/l/wooden-sauna/5aafa4ec-87c1-4043-b82f-14d67389dd19',
               label: 'See the sauna',
-              type: 'internalButtonLink',
             },
           },
         ],
@@ -217,9 +217,9 @@ export const SectionColumns = {
               content: `**Lorem ipsum** dolor sit amet consectetur adepisci elit...`,
             },
             callToAction: {
+              type: 'internalButtonLink',
               href: '/l/wooden-sauna/5aafa4ec-87c1-4043-b82f-14d67389dd19',
               label: 'See the sauna',
-              type: 'internalButtonLink',
             },
           },
           {
@@ -231,9 +231,9 @@ export const SectionColumns = {
               content: `**Lorem ipsum** dolor sit amet consectetur adepisci elit...`,
             },
             callToAction: {
+              type: 'internalButtonLink',
               href: '/l/wooden-sauna/5aafa4ec-87c1-4043-b82f-14d67389dd19',
               label: 'See the sauna',
-              type: 'internalButtonLink',
             },
           },
         ],
@@ -251,19 +251,19 @@ export const SectionColumns = {
           {
             blockType: 'default-block',
             blockId: 'cms-column3-block-1',
-            media: { type: 'image', alt: 'First image' },
+            media: { type: 'image', alt: 'First image', image: imagePlaceholder(400, 400) },
             title: { type: 'heading3', content: 'Image 1' },
           },
           {
             blockType: 'default-block',
             blockId: 'cms-column3-block-2',
-            media: { type: 'image', alt: 'Second image' },
+            media: { type: 'image', alt: 'Second image', image: imagePlaceholder(400, 400) },
             title: { type: 'heading3', content: 'Image 2' },
           },
           {
             blockType: 'default-block',
             blockId: 'cms-column3-block-3',
-            media: { type: 'image', alt: 'Third image' },
+            media: { type: 'image', alt: 'Third image', image: imagePlaceholder(400, 400) },
             title: { type: 'heading3', content: 'Image 3' },
           },
         ],

@@ -37,19 +37,98 @@ describe('Field helpers', () => {
     });
   });
 
-  // describe('exposeLinkProps(data)', () => {
-  //   it('should return only "children" prop containing the string from passed-in "content"', () => {
-  //     expect(exposeLinkProps({ content: 'Hello world!' })).toEqual({ content: 'Hello world!' });
-  //     expect(exposeLinkProps({ content: 'Hello world!', blaa: 'blaa' })).toEqual({ content: 'Hello world!' });
-  //   });
-  // });
+  describe('exposeLinkProps(data)', () => {
+    it('should return only "label" and "href" props containing valid strings"', () => {
+      expect(
+        exposeLinkProps({ label: 'Hello world!', href: 'https://my.example.com/some/image.png' })
+      ).toEqual({ children: 'Hello world!', href: 'https://my.example.com/some/image.png' });
+      expect(
+        exposeLinkProps({
+          label: 'Hello world!',
+          href: 'https://my.example.com/some/image.png',
+          blaa: 'blaa',
+        })
+      ).toEqual({ children: 'Hello world!', href: 'https://my.example.com/some/image.png' });
+    });
+    it('should return empty object if data is not valid', () => {
+      expect(exposeLinkProps({ label: 'Hello world!', blaa: 'blaa' })).toEqual({});
+      expect(exposeLinkProps({ label: 0, href: 'https://my.example.com/some/image.png' })).toEqual(
+        {}
+      );
+    });
+    it('should return "about:blank" in href if url in data is not valid', () => {
+      expect(
+        exposeLinkProps({ label: 'Hello world!', href: "jav&#x09;ascript:alert('XSS');" })
+      ).toEqual({ children: 'Hello world!', href: 'about:blank' });
+    });
+  });
 
-  // describe('exposeImageProps(data)', () => {
-  //   it('should return only "children" prop containing the string from passed-in "content"', () => {
-  //     expect(exposeImageProps({ content: 'Hello world!' })).toEqual({ content: 'Hello world!' });
-  //     expect(exposeImageProps({ content: 'Hello world!', blaa: 'blaa' })).toEqual({ content: 'Hello world!' });
-  //   });
-  // });
+  describe('exposeImageProps(data)', () => {
+    it('should return only "alt" and "variants" props', () => {
+      const image = {
+        variants: {
+          square: {
+            url: 'https://something.imgix.com/foo/bar/baz',
+            width: 1200,
+            height: 580,
+          },
+          square2x: {
+            url: 'https://something.imgix.com/foo/bar/baz',
+            width: 2400,
+            height: 1160,
+          },
+        },
+      };
+
+      expect(exposeImageProps({ alt: 'Hello world!', image })).toEqual({
+        alt: 'Hello world!',
+        variants: image.variants,
+      });
+      expect(exposeImageProps({ alt: 'Hello world!', image, blaa: 'blaa' })).toEqual({
+        alt: 'Hello world!',
+        variants: image.variants,
+      });
+    });
+
+    it('should return empty object if data is not valid', () => {
+      const image = {
+        variants: {
+          square: {
+            url: 'https://something.imgix.com/foo/bar/baz',
+            width: 1200,
+            height: 580,
+          },
+        },
+      };
+      expect(exposeLinkProps({ alt: 'Hello world!', blaa: 'blaa' })).toEqual({});
+      expect(exposeLinkProps({ alt: 0, image })).toEqual({});
+      expect(exposeLinkProps({ alt: 'Hello world!', image: {} })).toEqual({});
+    });
+
+    it('should return "about:blank" in href if url in data is not valid', () => {
+      const image = {
+        variants: {
+          square: {
+            url: "jav&#x09;ascript:alert('XSS');",
+            width: 1200,
+            height: 580,
+          },
+        },
+      };
+      const expected = {
+        square: {
+          url: 'about:blank',
+          width: 1200,
+          height: 580,
+        },
+      };
+
+      expect(exposeImageProps({ alt: 'Hello world!', image })).toEqual({
+        alt: 'Hello world!',
+        variants: expected,
+      });
+    });
+  });
 
   describe('exposeColorProps(data)', () => {
     it('should return only "color" prop containing valid hexadecimal color code', () => {
