@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`LandingPage matches snapshot 1`] = `
-<Page
+<PageBuilder
   className="root"
   contentType="website"
   description="LandingPage.schemaDescription"
@@ -14,6 +14,58 @@ exports[`LandingPage matches snapshot 1`] = `
       },
     ]
   }
+  fallbackPage={
+    <PageBuilder
+      className="root"
+      contentType="website"
+      description="LandingPage.schemaDescription"
+      options={
+        Object {
+          "sectionComponents": Object {
+            "custom-explore": Object {
+              "component": [Function],
+            },
+            "custom-hero": Object {
+              "component": [Function],
+            },
+            "custom-how-it-works": Object {
+              "component": [Function],
+            },
+          },
+        }
+      }
+      pageAssetsData={
+        Object {
+          "sections": Array [
+            Object {
+              "sectionId": "hero",
+              "sectionType": "custom-hero",
+            },
+            Object {
+              "sectionId": "explore",
+              "sectionType": "custom-explore",
+            },
+            Object {
+              "sectionId": "how-it-works",
+              "sectionType": "custom-how-it-works",
+            },
+          ],
+        }
+      }
+      schema={
+        Object {
+          "@context": "http://schema.org",
+          "@type": "WebPage",
+          "description": "LandingPage.schemaDescription",
+          "image": Array [
+            "http://localhost:3000saunatimeFacebook-1200x630.jpg",
+          ],
+          "name": "LandingPage.schemaTitle",
+        }
+      }
+      title="LandingPage.schemaTitle"
+    />
+  }
   schema={
     Object {
       "@context": "http://schema.org",
@@ -25,7 +77,6 @@ exports[`LandingPage matches snapshot 1`] = `
       "name": "LandingPage.schemaTitle",
     }
   }
-  scrollingDisabled={false}
   title="LandingPage.schemaTitle"
   twitterImages={
     Array [
@@ -36,74 +87,5 @@ exports[`LandingPage matches snapshot 1`] = `
       },
     ]
   }
->
-  <LayoutSingleColumn
-    className={null}
-    rootClassName={null}
-  >
-    <LayoutWrapperTopbar
-      className={null}
-      rootClassName={null}
-    >
-      <withRouter(Connect(TopbarContainerComponent)) />
-    </LayoutWrapperTopbar>
-    <LayoutWrapperMain
-      className={null}
-      rootClassName={null}
-    >
-      <div
-        className="heroContainer"
-      >
-        <SectionHero
-          className="hero"
-          history={
-            Object {
-              "push": [Function],
-            }
-          }
-          location={
-            Object {
-              "search": "",
-            }
-          }
-          rootClassName={null}
-        />
-      </div>
-      <ul
-        className="sections"
-      >
-        <li
-          className="section"
-        >
-          <div
-            className="sectionContentFirstChild"
-          >
-            <SectionLocations
-              className={null}
-              rootClassName={null}
-            />
-          </div>
-        </li>
-        <li
-          className="section"
-        >
-          <div
-            className="sectionContent"
-          >
-            <SectionHowItWorks
-              className={null}
-              rootClassName={null}
-            />
-          </div>
-        </li>
-      </ul>
-    </LayoutWrapperMain>
-    <LayoutWrapperFooter
-      className={null}
-      rootClassName={null}
-    >
-      <injectIntl(Footer) />
-    </LayoutWrapperFooter>
-  </LayoutSingleColumn>
-</Page>
+/>
 `;
