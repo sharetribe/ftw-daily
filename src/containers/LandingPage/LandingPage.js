@@ -25,8 +25,8 @@ import {
 } from '../../components';
 import { TopbarContainer } from '../../containers';
 
-import facebookImage from '../../assets/hotpatch-logo.png';
-import twitterImage from '../../assets/hotpatch-logo.png';
+import facebookImage from '../../assets/hotpatch-logo-new-social.png';
+import twitterImage from '../../assets/hotpatch-logo-new-social.png';
 import css from './LandingPage.module.css';
 
 export const LandingPageComponent = props => {
