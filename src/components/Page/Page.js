@@ -10,8 +10,8 @@ import { metaTagProps } from '../../util/seo';
 import { canonicalRoutePath } from '../../util/routes';
 import { CookieConsent, GTMWrapper } from '../../components';
 
-import facebookImage from '../../assets/HotPatchLogoNew-458x84.png';
-import twitterImage from '../../assets/HotPatchLogoNew-458x84.png';
+import facebookImage from '../../assets/hotpatch-logo.png';
+import twitterImage from '../../assets/hotpatch-logo.png';
 import css from './Page.module.css';
 
 const preventDefault = e => {
@@ -111,16 +111,16 @@ class PageComponent extends Component {
       {
         name: 'facebook',
         url: `${canonicalRootURL}${facebookImage}`,
-        width: 458,
-        height: 84,
+        width: 500,
+        height: 500,
       },
     ];
     const twitterImgs = twitterImages || [
       {
         name: 'twitter',
         url: `${canonicalRootURL}${twitterImage}`,
-        width: 458,
-        height: 84,
+        width: 500,
+        height: 500,
       },
     ];
 

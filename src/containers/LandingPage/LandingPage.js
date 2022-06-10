@@ -25,8 +25,8 @@ import {
 } from '../../components';
 import { TopbarContainer } from '../../containers';
 
-import facebookImage from '../../assets/HotPatchLogoNew-458x84.png';
-import twitterImage from '../../assets/HotPatchLogoNew-458x84.png';
+import facebookImage from '../../assets/hotpatch-logo.png';
+import twitterImage from '../../assets/hotpatch-logo.png';
 import css from './LandingPage.module.css';
 
 export const LandingPageComponent = props => {
@@ -47,9 +47,9 @@ export const LandingPageComponent = props => {
       contentType="website"
       description={schemaDescription}
       title={schemaTitle}
-      facebookImages={[{ url: facebookImage, width: 458, height: 84 }]}
+      facebookImages={[{ url: facebookImage, width: 500, height: 500 }]}
       twitterImages={[
-        { url: `${config.canonicalRootURL}${twitterImage}`, width: 458, height: 84 },
+        { url: `${config.canonicalRootURL}${twitterImage}`, width: 500, height: 500 },
       ]}
       schema={{
         '@context': 'http://schema.org',
