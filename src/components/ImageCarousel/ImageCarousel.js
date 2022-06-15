@@ -97,19 +97,47 @@ class ImageCarousel extends Component {
       [css.imageLoading]: !currentImageIsLoaded,
     });
 
+    const arrayLength = images.length;
+    const currentIndex = this.state.selectedImageIndex;
+    const prevIndex = (currentIndex + arrayLength - 1) % arrayLength;
+    const nextIndex = (currentIndex + 1) % arrayLength;
     return (
       <div className={classes}>
-        <div className={css.imageWrapper}>
-          <IconSpinner className={loadingIconClasses} />
-          <ResponsiveImage
-            className={imageClasses}
-            alt={imageAltText}
-            image={images[this.state.selectedImageIndex]}
-            onLoad={markImageLoaded(this.state.selectedImageIndex)}
-            onError={markImageLoaded(this.state.selectedImageIndex)}
-            variants={['scaled-small', 'scaled-medium', 'scaled-large', 'scaled-xlarge']}
-            sizes="(max-width: 767px) 100vw, 80vw"
-          />
+        <div className={css.imageViewport}>
+          <div className={css.imageArray}>
+            <div className={css.imageWrapper}>
+              <IconSpinner className={loadingIconClasses} />
+              <ResponsiveImage
+                className={css.image}
+                alt={imageAltText}
+                image={images[prevIndex]}
+                variants={['scaled-small', 'scaled-medium', 'scaled-large', 'scaled-xlarge']}
+                sizes="(max-width: 767px) 100vw, 80vw"
+              />
+            </div>
+            <div className={css.imageWrapper}>
+              <IconSpinner className={loadingIconClasses} />
+              <ResponsiveImage
+                className={imageClasses}
+                alt={imageAltText}
+                image={images[currentIndex]}
+                onLoad={markImageLoaded(currentIndex)}
+                onError={markImageLoaded(currentIndex)}
+                variants={['scaled-small', 'scaled-medium', 'scaled-large', 'scaled-xlarge']}
+                sizes="(max-width: 767px) 100vw, 80vw"
+              />
+            </div>
+            <div className={css.imageWrapper}>
+              <IconSpinner className={loadingIconClasses} />
+              <ResponsiveImage
+                className={css.image}
+                alt={imageAltText}
+                image={images[nextIndex]}
+                variants={['scaled-small', 'scaled-medium', 'scaled-large', 'scaled-xlarge']}
+                sizes="(max-width: 767px) 100vw, 80vw"
+              />
+            </div>
+          </div>
         </div>
         {imageIndex}
         {prevButton}
