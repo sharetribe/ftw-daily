@@ -6,6 +6,7 @@ import { AspectRatioWrapper, ResponsiveImage } from '../../../components/index.j
 
 import { H1, H2, H3, H4, H5, H6 } from '../Primitives/Heading.js';
 import { Ul, Ol, Li } from '../Primitives/List.js';
+import { P } from '../Primitives/P.js';
 import { Code, CodeBlock } from '../Primitives/Code.js';
 import { Link } from '../Primitives/Link.js';
 import renderMarkdown from '../markdownProcessor.js';
@@ -90,7 +91,7 @@ const defaultConfigs = {
   heading4: { component: H4, pickValidProps: exposeContentAsChildren },
   heading5: { component: H5, pickValidProps: exposeContentAsChildren },
   heading6: { component: H6, pickValidProps: exposeContentAsChildren },
-  paragraph: { component: 'p', pickValidProps: exposeContentAsChildren },
+  paragraph: { component: P, pickValidProps: exposeContentAsChildren },
   markdown: {
     component: MarkdownField,
     pickValidProps: exposeContentString,
@@ -106,6 +107,7 @@ const defaultConfigs = {
         h4: H4,
         h5: H5,
         h6: H6,
+        p: P,
         img: MarkdownImage,
         code: Code,
         pre: CodeBlock,
