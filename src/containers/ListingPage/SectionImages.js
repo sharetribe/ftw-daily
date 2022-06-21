@@ -66,7 +66,10 @@ const SectionImages = props => {
         usePortal
         onManageDisableScrolling={onManageDisableScrolling}
       >
-        <ImageCarousel images={listing.images} />
+        <ImageCarousel
+          images={listing.images}
+          imageVariants={['scaled-small', 'scaled-medium', 'scaled-large', 'scaled-xlarge']}
+        />
       </Modal>
     </div>
   );
