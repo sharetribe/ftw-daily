@@ -47,6 +47,7 @@ const EnquiryFormComponent = props => (
 
       const firstWarning = intl.formatMessage({id: 'TransactionPage.warningNotification1'});
       const secondWarning = intl.formatMessage({id: 'TransactionPage.warningNotification2'});
+      const thirdWarning = intl.formatMessage({id: 'TransactionPage.warningNotification3'});
 
 
       const classes = classNames(rootClassName || css.root, className);
@@ -57,7 +58,7 @@ const EnquiryFormComponent = props => (
         <Form className={classes} onSubmit={handleSubmit} enforcePagePreloadFor="OrderDetailsPage">
           <IconEnquiry className={css.icon} />
           <h2 className={css.heading}>
-            <FormattedMessage id="EnquiryForm.heading" values={{ listingTitle }} />
+            <FormattedMessage id="EnquiryForm.heading" values={{ listingTitle, authorDisplayName}} />
           </h2>
           <FieldTextInput
             className={css.field}
@@ -71,7 +72,10 @@ const EnquiryFormComponent = props => (
 
           <div className={css.containerWarningMessage}>
             <p>{firstWarning}</p>
+            <br></br>
             <p>{secondWarning}</p>
+            <br></br>
+            <p>{thirdWarning}</p>
           </div>
           <div className={submitButtonWrapperClassName}>
             {sendEnquiryError ? (

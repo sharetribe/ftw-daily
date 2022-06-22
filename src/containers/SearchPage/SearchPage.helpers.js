@@ -175,10 +175,18 @@ export const createSearchResultSchema = (listings, address, intl, pub_category, 
   // const event = ['event-space', 'outdoor-site', 'shoot-location'];
   // const space = ['desk-space', 'office-space', 'meeting-room-space'];
   const filt = pub_category ? pub_category.replace('has_any:', '').split(',') : '';
-  let schemaTitle = intl.formatMessage(
+  let schemaTitle;
+  if(searchAddress =="United Kingdom") {
+   schemaTitle = intl.formatMessage(
+    {id: 'SearchPage.schemaTitleUK' },
+    { searchAddress, siteTitle }
+    );
+    } else {
+   schemaTitle = intl.formatMessage(
     { id: 'SearchPage.schemaTitle' },
     { searchAddress, siteTitle }
   );
+  };
   let firstThreeCategoryTitle;
   
   const arrayCategory = filterConfig.filter(e => e.queryParamNames[0] === 'pub_category');

@@ -76,6 +76,7 @@ class SendMessageFormComponent extends Component {
 
           const firstWarning = intl.formatMessage({id: 'TransactionPage.warningNotification1'});
           const secondWarning = intl.formatMessage({id: 'TransactionPage.warningNotification2'});
+          const thirdWarning = intl.formatMessage({id: 'TransactionPage.warningNotification3'});
 
           return (
             <Form className={classes} onSubmit={values => handleSubmit(values, form)}>
@@ -110,7 +111,10 @@ class SendMessageFormComponent extends Component {
               </div>
               <div className={css.containerWarningMessage}>
                 <p>{firstWarning}</p>
+                <br></br>
                 <p>{secondWarning}</p>
+                <br></br>
+                <p>{thirdWarning}</p>
               </div>
             </Form>
           );

@@ -383,6 +383,8 @@ class StripePaymentForm extends Component {
 
     const firstWarning = intl.formatMessage({id: 'TransactionPage.warningNotification1'});
     const secondWarning = intl.formatMessage({id: 'TransactionPage.warningNotification2'});
+    const thirdWarning = intl.formatMessage({id: 'TransactionPage.warningNotification3'});
+
 
     // Asking billing address is recommended in PaymentIntent flow.
     // In CheckoutPage, we send name and email as billing details, but address only if it exists.
@@ -479,7 +481,10 @@ class StripePaymentForm extends Component {
 
         <div className={css.containerWarningMessage}>
           <p>{firstWarning}</p>
+          <br></br>
           <p>{secondWarning}</p>
+          <br></br>
+          <p>{thirdWarning}</p>
         </div>
 
         <div className={css.submitContainer}>

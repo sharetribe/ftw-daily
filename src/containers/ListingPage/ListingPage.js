@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { InlineShareButtons } from 'sharethis-reactjs';
 import { array, arrayOf, bool, object, func, shape, string, oneOf } from 'prop-types';
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 import { compose } from 'redux';
@@ -87,8 +88,8 @@ const priceData = (price, intl) => {
 const categoryLabel = (categories, key) => {
   const cats = getSelectedCategories(key, categories);
   const categoryOptionsToSelect = categories && categories.filter(item => cats.includes(item.key))
-  
-  return [...new Set(categoryOptionsToSelect.map(({label}) => label))].join(' | ')
+
+  return [...new Set(categoryOptionsToSelect.map(({ label }) => label))].join(' | ')
 };
 
 export class ListingPageComponent extends Component {
@@ -112,7 +113,7 @@ export class ListingPageComponent extends Component {
 
   updateDiscount = (val) => {
     this.setState({ promocode: val })
- }
+  }
   toggleBookingType(bookingType) {
     this.setState({ bookingType });
   }
@@ -442,6 +443,15 @@ export class ListingPageComponent extends Component {
         </span>
       ) : null;
 
+    const hasImages = currentListing.images && currentListing.images.length > 0;
+    const firstImage = hasImages && currentListing.images[0].attributes.variants ? currentListing.images[0].attributes.variants["landscape-crop2x"].url : null;
+
+    const listingLink = typeof window === 'undefined' ? '' : window.location.href;
+    const emailMessageForSharing = intl.formatMessage(
+      { id: "ListingPage.emailMessageForSharing" },
+      { listingLink: listingLink, listingName: currentListing.attributes.title });
+
+
     return (
       <Page
         title={schemaTitle}
@@ -492,7 +502,30 @@ export class ListingPageComponent extends Component {
                     onContactUser={this.onContactUser}
                     priceType={priceType}
                   />
+                  <div className={css.shareButtons}>
+                    <InlineShareButtons
+                      config={{
+                        alignment: 'left',
+                        color: 'social',
+                        enabled: true,
+                        networks: [
+                          'twitter',
+                          'facebook',
+                          'whatsapp',
+                          'email'
+                        ],
+                        radius: 4,
+                        size: 45,
 
+                        title: "Check out this listing on HotPatch!",
+                        subject: 'Check out this listing on HotPatch!',
+                        servicePopup: true,
+                        message: emailMessageForSharing,
+                        image: firstImage,
+                      }}
+                    />
+                  </div>
+                  <p></p>
                   <SectionCapacity publicData={publicData} />
                   {/* <SectionSeats publicData={publicData} /> */}
                   <SectionDescriptionMaybe description={description} />
