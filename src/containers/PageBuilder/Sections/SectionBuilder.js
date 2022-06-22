@@ -1,5 +1,7 @@
 import React from 'react';
 
+import classNames from 'classnames';
+
 import { BlockTag, BlockDefault } from '../Blocks/BlockBuilder.js';
 
 // Default wrapping element for section components
@@ -12,6 +14,8 @@ import css from './SectionBuilder.module.css';
 // Section components
 import SectionColumns from './SectionColumns.js';
 import SectionArticle from './SectionArticle.js';
+import SectionFeatures from './SectionFeatures.js';
+import SectionCarousel from './SectionCarousel.js';
 
 //////////////////////
 // Section builder //
@@ -20,6 +24,8 @@ import SectionArticle from './SectionArticle.js';
 const defaultSectionComponents = {
   columns: { component: SectionColumns },
   article: { component: SectionArticle },
+  features: { component: SectionFeatures },
+  carousel: { component: SectionCarousel },
 };
 
 const SectionBuilder = props => {
@@ -55,13 +61,14 @@ const SectionBuilder = props => {
         const Section = getComponent(section.sectionType);
         // If the default "dark" theme should be applied
         const isDarkTheme = section.theme === 'dark';
-        const classNameMaybe = isDarkTheme ? { className: css.darkSectionTag } : {};
+        //const classNameMaybe = isDarkTheme ? { className: css.darkTheme } : {};
+        const classes = classNames({ [css.darkTheme]: isDarkTheme });
 
         if (Section) {
           return (
             <Section
               key={section.sectionId}
-              {...classNameMaybe}
+              className={classes}
               defaultClasses={defaultClasses}
               options={otherOption}
               {...section}
@@ -77,6 +84,14 @@ const SectionBuilder = props => {
   );
 };
 
-export { BlockTag, BlockDefault, SectionTag, SectionArticle, SectionColumns };
+export {
+  BlockTag,
+  BlockDefault,
+  SectionTag,
+  SectionArticle,
+  SectionColumns,
+  SectionFeatures,
+  SectionCarousel,
+};
 
 export default SectionBuilder;

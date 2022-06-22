@@ -40,12 +40,12 @@ const imagePlaceholder = (width, height) => ({
   resolver: 'image',
   variants: {
     square1x: {
-      url: placeholderImage(width, height, '#00AAFF'),
+      url: 'https://picsum.photos/300', // placeholderImage(width, height, '#00AAFF'),
       width,
       height,
     },
     square2x: {
-      url: placeholderImage(2 * width, 2 * height, '#FF00AA'),
+      url: 'https://picsum.photos/600', // placeholderImage(2 * width, 2 * height, '#FF00AA'),
       width: 2 * width,
       height: 2 * width,
     },
@@ -62,12 +62,330 @@ export const SectionArticle = {
     sections: [
       {
         sectionType: 'article',
-        sectionId: 'cms-article-section-no-block',
-        title: { type: 'heading2', content: 'Article' },
+        sectionId: 'cms-article-section',
+        title: {
+          type: 'heading1',
+          content: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.',
+        },
         ingress: {
           type: 'paragraph',
-          content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
+          content:
+            'Maecenas sed diam eget risus varius blandit sit amet non magna. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.',
         },
+        callToAction: {
+          type: 'externalButtonLink',
+          href: '#',
+          label: 'Justo Tortor Amet',
+        },
+        blocks: [
+          {
+            blockType: 'default-block',
+            blockId: 'cms-article-section-block-1',
+            media: { type: 'image', alt: 'Cute dog smiling', image: imagePlaceholder(1) },
+            title: {
+              type: 'heading2',
+              content:
+                'Vestibulum id ligula porta felis euismod semper. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.',
+            },
+            text: {
+              type: 'markdown',
+              content: `Donec ullamcorper nulla non metus auctor fringilla. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Etiam porta sem malesuada magna mollis euismod. Maecenas sed diam eget risus varius blandit sit amet non magna.
+Maecenas faucibus mollis interdum. Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna mollis euismod. Etiam porta sem malesuada magna mollis euismod. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Maecenas faucibus mollis interdum.
+              
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id ligula porta felis euismod semper. Nullam id dolor id nibh ultricies vehicula ut id elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+              
+Vestibulum id ligula porta felis euismod semper. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+              
+### Donec ullamcorper nulla non metus auctor fringilla. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Etiam porta sem malesuada magna mollis euismod. Maecenas sed diam eget risus varius blandit sit amet non magna.
+
+- Maecenas faucibus mollis interdum.
+- Sed posuere consectetur est at lobortis.
+- Etiam porta sem malesuada magna mollis euismod. 
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id ligula porta felis euismod semper. Nullam id dolor id nibh ultricies vehicula ut id elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+
+Vestibulum id ligula porta felis euismod semper. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.`,
+            },
+            callToAction: {
+              type: 'externalButtonLink',
+              href: 'https://www.sharetribe.com/academy/marketplace-funding/',
+              label: 'Read the article',
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+
+export const SectionFeatures = {
+  component: SectionBuilder,
+  props: {
+    sections: [
+      {
+        sectionType: 'features',
+        sectionId: 'cms-features-section-no-block',
+        title: {
+          type: 'heading1',
+          content: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.',
+        },
+        ingress: {
+          type: 'paragraph',
+          content:
+            'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit.',
+        },
+        callToAction: {
+          type: 'externalButtonLink',
+          href: '#',
+          label: 'Justo Tortor Amet',
+        },
+        blocks: [
+          {
+            blockType: 'default-block',
+            blockId: 'cms-column3-block-1',
+            media: { type: 'image', alt: 'First image', image: imagePlaceholder(400, 400) },
+            title: {
+              type: 'heading2',
+              content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
+            },
+            text: {
+              type: 'markdown',
+              content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
+            },
+            callToAction: {
+              type: 'internalButtonLink',
+              href: '#',
+              label: 'Ultricies Elit Sem',
+            },
+          },
+          {
+            blockType: 'default-block',
+            blockId: 'cms-column3-block-1',
+            media: { type: 'image', alt: 'First image', image: imagePlaceholder(400, 400) },
+            title: {
+              type: 'heading2',
+              content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
+            },
+            text: {
+              type: 'markdown',
+              content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
+            },
+            callToAction: {
+              type: 'internalButtonLink',
+              href: '#',
+              label: 'Ultricies Elit Sem',
+            },
+          },
+          {
+            blockType: 'default-block',
+            blockId: 'cms-column3-block-1',
+            media: { type: 'image', alt: 'First image', image: imagePlaceholder(400, 400) },
+            title: {
+              type: 'heading2',
+              content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
+            },
+            text: {
+              type: 'markdown',
+              content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
+            },
+            callToAction: {
+              type: 'internalButtonLink',
+              href: '#',
+              label: 'Ultricies Elit Sem',
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+
+export const SectionCarousel = {
+  component: SectionBuilder,
+  props: {
+    sections: [
+      {
+        sectionType: 'carousel',
+        sectionId: 'cms-features-section-no-block',
+        numColumns: 1,
+        title: {
+          type: 'heading1',
+          content: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.',
+        },
+        ingress: {
+          type: 'paragraph',
+          content:
+            'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit.',
+        },
+        callToAction: {
+          type: 'externalButtonLink',
+          href: '#',
+          label: 'Justo Tortor Amet',
+        },
+        blocks: [
+          {
+            blockType: 'default-block',
+            blockId: 'cms-column3-block-1',
+            media: { type: 'image', alt: 'First image', image: imagePlaceholder(16, 9) },
+            title: {
+              type: 'heading2',
+              content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
+            },
+            text: {
+              type: 'markdown',
+              content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
+            },
+            callToAction: {
+              type: 'internalButtonLink',
+              href: '#',
+              label: 'Ultricies Elit Sem',
+            },
+          },
+          {
+            blockType: 'default-block',
+            blockId: 'cms-column3-block-1',
+            media: { type: 'image', alt: 'First image', image: imagePlaceholder(16, 9) },
+            title: {
+              type: 'heading2',
+              content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
+            },
+            text: {
+              type: 'markdown',
+              content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
+            },
+            callToAction: {
+              type: 'internalButtonLink',
+              href: '#',
+              label: 'Ultricies Elit Sem',
+            },
+          },
+          {
+            blockType: 'default-block',
+            blockId: 'cms-column3-block-1',
+            media: { type: 'image', alt: 'First image', image: imagePlaceholder(16, 9) },
+            title: {
+              type: 'heading2',
+              content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
+            },
+            text: {
+              type: 'markdown',
+              content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
+            },
+            callToAction: {
+              type: 'internalButtonLink',
+              href: '#',
+              label: 'Ultricies Elit Sem',
+            },
+          },
+          {
+            blockType: 'default-block',
+            blockId: 'cms-column3-block-1',
+            media: { type: 'image', alt: 'First image', image: imagePlaceholder(16, 9) },
+            title: {
+              type: 'heading2',
+              content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
+            },
+            text: {
+              type: 'markdown',
+              content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
+            },
+            callToAction: {
+              type: 'internalButtonLink',
+              href: '#',
+              label: 'Ultricies Elit Sem',
+            },
+          },
+          {
+            blockType: 'default-block',
+            blockId: 'cms-column3-block-1',
+            media: { type: 'image', alt: 'First image', image: imagePlaceholder(16, 9) },
+            title: {
+              type: 'heading2',
+              content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
+            },
+            text: {
+              type: 'markdown',
+              content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
+            },
+            callToAction: {
+              type: 'internalButtonLink',
+              href: '#',
+              label: 'Ultricies Elit Sem',
+            },
+          },
+          {
+            blockType: 'default-block',
+            blockId: 'cms-column3-block-1',
+            media: { type: 'image', alt: 'First image', image: imagePlaceholder(16, 9) },
+            title: {
+              type: 'heading2',
+              content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
+            },
+            text: {
+              type: 'markdown',
+              content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
+            },
+            callToAction: {
+              type: 'internalButtonLink',
+              href: '#',
+              label: 'Ultricies Elit Sem',
+            },
+          },
+          {
+            blockType: 'default-block',
+            blockId: 'cms-column3-block-1',
+            media: { type: 'image', alt: 'First image', image: imagePlaceholder(16, 9) },
+            title: {
+              type: 'heading2',
+              content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
+            },
+            text: {
+              type: 'markdown',
+              content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
+            },
+            callToAction: {
+              type: 'internalButtonLink',
+              href: '#',
+              label: 'Ultricies Elit Sem',
+            },
+          },
+          {
+            blockType: 'default-block',
+            blockId: 'cms-column3-block-1',
+            media: { type: 'image', alt: 'First image', image: imagePlaceholder(16, 9) },
+            title: {
+              type: 'heading2',
+              content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
+            },
+            text: {
+              type: 'markdown',
+              content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
+            },
+            callToAction: {
+              type: 'internalButtonLink',
+              href: '#',
+              label: 'Ultricies Elit Sem',
+            },
+          },
+          {
+            blockType: 'default-block',
+            blockId: 'cms-column3-block-1',
+            media: { type: 'image', alt: 'First image', image: imagePlaceholder(16, 9) },
+            title: {
+              type: 'heading2',
+              content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
+            },
+            text: {
+              type: 'markdown',
+              content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
+            },
+            callToAction: {
+              type: 'internalButtonLink',
+              href: '#',
+              label: 'Ultricies Elit Sem',
+            },
+          },
+        ],
       },
     ],
   },

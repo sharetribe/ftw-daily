@@ -13,11 +13,11 @@
 }
 
 .sectionContent {
-  padding: 36px 0;
+  padding: 32px 0;
   position: relative;
 
   @media (--viewportMedium) {
-    padding: 72px 0;
+    padding: 64px 0;
   }
 }
 
@@ -27,61 +27,4 @@
   right: 0;
   bottom: 0;
   left: 0;
-}
-
-/**
- * Theme: dark 
- * These styles are at the bottom of the file so that they overwrite rules for default "light" theme.
- */
-.darkSectionTag h1,
-.darkSectionTag h2,
-.darkSectionTag h3,
-.darkSectionTag h4,
-.darkSectionTag h5,
-.darkSectionTag h6,
-.darkSectionTag p,
-.darkSectionTag li,
-.darkSectionTag blockquote {
-  color: var(--matterColorLight);
-
-  &::selection {
-    background-color: cyan;
-    color: unset;
-  }
-}
-
-/* link on dark theme */
-.darkSectionTag a {
-  color: white;
-  text-decoration: underline;
-
-  &:hover {
-    text-decoration: none;
-    color: var(--marketplaceColorLight);
-  }
-}
-
-/* button on dark theme */
-.darkSectionTag .ctaButton {
-  border: 1px solid var(--marketplaceColorDark);
-  text-decoration: none;
-
-  &:hover {
-    color: white;
-  }
-}
-
-.darkSectionTag hr {
-  border-color: var(--matterColor);
-}
-
-/* dark inline code */
-.darkSectionTag code {
-  background-color: var(--matterColor);
-  color: var(--matterColorNegative);
-}
-
-/* dark code block */
-.darkSectionTag pre {
-  background-color: var(--matterColor);
 }

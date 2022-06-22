@@ -5,9 +5,9 @@ import Field, { pickValidProps } from '../Fields/Field.js';
 import BlockBuilder from '../Blocks/BlockBuilder.js';
 
 import SectionTag from './SectionTag.js';
-import css from './SectionColumns.module.css';
+import css from './SectionCarousel.module.css';
 
-const SectionColumns = props => {
+const SectionCarousel = props => {
   const {
     className,
     defaultClasses,
@@ -50,12 +50,12 @@ const SectionColumns = props => {
   // Select class for column container
   const columnsClasses =
     numColumns === 4
-      ? css.columns4
+      ? css.fourColumns
       : numColumns === 3
-      ? css.columns3
+      ? css.threeColumns
       : numColumns === 2
-      ? css.columns2
-      : css.columns1;
+      ? css.twoColumns
+      : css.oneColumn;
 
   return (
     <SectionTag
@@ -72,10 +72,10 @@ const SectionColumns = props => {
       {blocks ? (
         <div className={classNames(defaultClasses.baseColumn, columnsClasses)}>
           <BlockBuilder
+            blockClassName={css.block}
             ctaButtonClass={defaultClasses.ctaButton}
             blocks={blocks}
             options={options}
-            // blockClassName={css.block}
             // mediaClassName={css.media}
             // textClassName={css.text}
           />
@@ -85,4 +85,4 @@ const SectionColumns = props => {
   );
 };
 
-export default SectionColumns;
+export default SectionCarousel;

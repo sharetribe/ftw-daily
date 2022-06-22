@@ -14,6 +14,8 @@ const SectionArticle = props => {
     defaultClasses,
     sectionId,
     title,
+    ingress,
+    callToAction,
     background,
     backgroundImage,
     blocks,
@@ -56,9 +58,11 @@ const SectionArticle = props => {
     >
       <header className={defaultClasses.sectionDetails}>
         <Field className={defaultClasses.title} data={title} options={fieldOptions} />
+        <Field className={defaultClasses.ingress} data={ingress} options={fieldOptions} />
+        <Field className={defaultClasses.ctaButton} data={callToAction} options={fieldOptions} />
       </header>
       {blocks ? (
-        <div className={classNames(defaultClasses.singleColumn, css.articleMain)}>
+        <div className={classNames(defaultClasses.baseColumn, css.articleMain)}>
           <BlockBuilder blocks={blocks} options={options} />
         </div>
       ) : null}

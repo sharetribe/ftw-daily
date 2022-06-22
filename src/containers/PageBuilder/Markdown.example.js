@@ -348,11 +348,11 @@ const SectionBlockquotes = {
 };
 
 const mdImage1 = `
-![Alt text](https://via.placeholder.com/400x400.png)
+![Alt text](https://picsum.photos/400)
 `;
 
 const mdImage2 = `
-![Alt text](https://via.placeholder.com/400x400.png "Title text")
+![Alt text](https://picsum.photos/400 "Title text")
 `;
 
 const mdImageFootnoteStyle = `
@@ -360,7 +360,7 @@ const mdImageFootnoteStyle = `
 
 Like links, Images also have a footnote style syntax with a reference later in the markdown content defining the URL location:
 
-[id]: https://via.placeholder.com/400x400.png  "Title text"
+[id]: https://picsum.photos/400  "Title text"
 `;
 
 const SectionImages = {

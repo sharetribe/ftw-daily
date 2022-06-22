@@ -1,36 +1,45 @@
 @import '../../../styles/customMediaQueries.css';
 
-.singleColumn {
+.baseColumn {
+  max-width: var(--contentMaxWidth);
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  gap: 36px;
-  max-width: 1200px;
+  gap: 32px;
   margin: 0 auto;
-  padding: 36px;
+  padding: 32px;
 }
 
-.columns1 {
-  composes: singleColumn;
+.oneColumn {
+  composes: baseColumn;
 }
 
-.columns2 {
-  composes: singleColumn;
+.twoColumns {
+  composes: baseColumn;
   @media (--viewportMedium) {
     /* grid-template-columns: repeat(2, 1fr); */
-    grid-template-columns: repeat(2, calc((100% - 36px) / 2));
+    grid-template-columns: repeat(2, calc((100% - 32px) / 2));
   }
 }
-.columns3 {
-  composes: singleColumn;
+.threeColumns {
+  composes: baseColumn;
   @media (--viewportMedium) {
     /* grid-template-columns: repeat(3, 1fr); */
-    grid-template-columns: repeat(3, calc((100% - 2 * 36px) / 3));
+    grid-template-columns: repeat(3, calc((100% - 2 * 32px) / 3));
   }
 }
-.columns4 {
-  composes: singleColumn;
+.fourColumns {
+  composes: baseColumn;
   @media (--viewportMedium) {
     /* grid-template-columns: repeat(4, 1fr); */
-    grid-template-columns: repeat(4, calc((100% - 3 * 36px) / 4));
+    grid-template-columns: repeat(4, calc((100% - 3 * 32px) / 4));
   }
+}
+
+.block {
+}
+
+.media {
+}
+
+.text {
 }

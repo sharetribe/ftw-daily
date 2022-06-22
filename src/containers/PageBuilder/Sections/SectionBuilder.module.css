@@ -8,11 +8,11 @@
 }
 
 .sectionDetails {
+  max-width: var(--contentMaxWidth);
   display: grid;
   justify-content: start;
-  max-width: 1200px;
   margin: 0 auto;
-  padding: 36px;
+  padding: 32px;
   position: relative;
 
   @media (--viewportMedium) {
@@ -59,27 +59,19 @@
   }
 }
 
-.singleColumn {
-  display: grid;
-  gap: 36px;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 36px;
-}
-
 /**
  * Theme: dark 
  * These styles are at the bottom of the file so that they overwrite rules for default "light" theme.
  */
-.darkSectionTag h1,
-.darkSectionTag h2,
-.darkSectionTag h3,
-.darkSectionTag h4,
-.darkSectionTag h5,
-.darkSectionTag h6,
-.darkSectionTag p,
-.darkSectionTag li,
-.darkSectionTag blockquote {
+.darkTheme h1,
+.darkTheme h2,
+.darkTheme h3,
+.darkTheme h4,
+.darkTheme h5,
+.darkTheme h6,
+.darkTheme p,
+.darkTheme li,
+.darkTheme blockquote {
   color: var(--matterColorLight);
 
   &::selection {
@@ -89,7 +81,7 @@
 }
 
 /* link on dark theme */
-.darkSectionTag a {
+.darkTheme a {
   color: white;
   text-decoration: underline;
 
@@ -100,7 +92,7 @@
 }
 
 /* button on dark theme */
-.darkSectionTag .ctaButton {
+.darkTheme .ctaButton {
   border: 1px solid var(--marketplaceColorDark);
   text-decoration: none;
 
@@ -109,17 +101,17 @@
   }
 }
 
-.darkSectionTag hr {
+.darkTheme hr {
   border-color: var(--matterColor);
 }
 
 /* dark inline code */
-.darkSectionTag code {
+.darkTheme code {
   background-color: var(--matterColor);
   color: var(--matterColorNegative);
 }
 
 /* dark code block */
-.darkSectionTag pre {
+.darkTheme pre {
   background-color: var(--matterColor);
 }

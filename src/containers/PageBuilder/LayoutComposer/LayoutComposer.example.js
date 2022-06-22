@@ -6,7 +6,7 @@ import LayoutComposer from './LayoutComposer.js';
 const GridContent = props => (
   <div
     style={{
-      backgroundColor: 'white',
+      backgroundColor: props.color || 'white',
       width: '100%',
       height: '100%',
       padding: '24px',
@@ -15,7 +15,7 @@ const GridContent = props => (
       display: 'flex',
       alignItems: 'center',
       justifyItems: 'center',
-      border: `dashed 5px ${props.color}`,
+      borderRadius: props.borderRadius || '0',
     }}
   >
     <h2 style={{ textAlign: 'center', width: '100%', margin: 0 }}>{props.children}</h2>
