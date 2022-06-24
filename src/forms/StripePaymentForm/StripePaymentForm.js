@@ -476,16 +476,14 @@ class StripePaymentForm extends Component {
               placeholder={messagePlaceholder}
               className={css.message}
             />
+
+            <p className={css.containerWarningMessage}>{firstWarning}</p>
+            <br></br>
+            <p className={css.containerWarningMessage}>{secondWarning}</p>
+            <br></br>
+            <p className={css.containerWarningMessage}>{thirdWarning}</p>
           </div>
         ) : null}
-
-        <div className={css.containerWarningMessage}>
-          <p>{firstWarning}</p>
-          <br></br>
-          <p>{secondWarning}</p>
-          <br></br>
-          <p>{thirdWarning}</p>
-        </div>
 
         <div className={css.submitContainer}>
           {hasPaymentErrors ? (
