@@ -1,138 +1,133 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape } from '../../util/reactIntl';
 import classNames from 'classnames';
-import { ResponsiveImage, IconSpinner } from '../../components';
+import ReactImageGallery from 'react-image-gallery';
+
 import { propTypes } from '../../util/types';
+import { injectIntl, intlShape } from '../../util/reactIntl';
+import { IconArrowHead, ResponsiveImage } from '../../components';
+
+// Copied directly from
+// `node_modules/react-image-gallery/styles/css/image-gallery.css`. The
+// copied file is left unedited, and all the overrides are defined in
+// the component CSS file below.
+import './image-gallery.css';
 
 import css from './ImageCarousel.module.css';
 
-const KEY_CODE_LEFT_ARROW = 37;
-const KEY_CODE_RIGHT_ARROW = 39;
+const IMAGE_GALLERY_OPTIONS = {
+  showPlayButton: false,
+  disableThumbnailScroll: true,
+  showThumbnails: false,
+  showFullscreenButton: false,
+  slideDuration: 350,
+};
 
-class ImageCarousel extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { selectedImageIndex: 0, selectedImageLoaded: false };
-    this.onKeyUp = this.onKeyUp.bind(this);
-    this.prev = this.prev.bind(this);
-    this.next = this.next.bind(this);
-  }
-  componentDidMount() {
-    window.addEventListener('keyup', this.onKeyUp);
-  }
-  componentWillUnmount() {
-    window.removeEventListener('keyup', this.onKeyUp);
-  }
-  onKeyUp(e) {
-    if (e.keyCode === KEY_CODE_LEFT_ARROW) {
-      this.prev();
-    } else if (e.keyCode === KEY_CODE_RIGHT_ARROW) {
-      this.next();
-    }
-  }
-  prev() {
-    const count = this.props.images.length;
-    if (count < 2) {
-      return;
-    }
-    this.setState(prevState => {
-      const newIndex = count > 0 ? (count + prevState.selectedImageIndex - 1) % count : 0;
-      return { selectedImageIndex: newIndex, selectedImageLoaded: false };
-    });
-  }
-  next() {
-    const count = this.props.images.length;
-    if (count < 2) {
-      return;
-    }
-    this.setState(prevState => {
-      const newIndex = count > 0 ? (count + prevState.selectedImageIndex + 1) % count : 0;
-      return { selectedImageIndex: newIndex, selectedImageLoaded: false };
-    });
-  }
-  render() {
-    const { rootClassName, className, images, intl } = this.props;
-    const classes = classNames(rootClassName || css.root, className);
+const ListingImageGallery = props => {
+  const [currentIndex, setIndex] = useState(0);
+  const { intl, rootClassName, className, images, imageVariants } = props;
 
-    const naturalIndex = this.state.selectedImageIndex + 1;
-    const imageIndex =
-      images.length > 0 ? (
-        <span className={css.imageIndex}>
-          {naturalIndex}/{images.length}
-        </span>
-      ) : null;
-    const prevButton =
-      images.length > 1 ? <button className={css.prev} onClick={this.prev} /> : null;
-    const nextButton =
-      images.length > 1 ? <button className={css.next} onClick={this.next} /> : null;
-
-    const imageAltText = intl.formatMessage(
-      {
-        id: 'ImageCarousel.imageAltText',
-      },
-      {
-        index: naturalIndex,
-        count: images.length,
-      }
-    );
-
-    const markImageLoaded = index => () => {
-      this.setState(prevState => {
-        if (prevState.selectedImageIndex === index) {
-          // Only mark the image loaded if the current index hasn't
-          // changed, i.e. user hasn't already changed to another
-          // image index.
-          return { selectedImageLoaded: true };
-        }
-        return {};
-      });
+  const items = images.map((img, i) => {
+    return {
+      // We will only use the image resource, but react-image-gallery
+      // requires the `original` key from each item.
+      original: '',
+      alt: intl.formatMessage(
+        { id: 'ImageCarousel.imageAltText' },
+        { index: i + 1, count: images.length }
+      ),
+      image: img,
     };
-
-    const currentImageIsLoaded = images.length === 0 || this.state.selectedImageLoaded;
-    const loadingIconClasses = classNames(css.loading, {
-      [css.loadingVisible]: !currentImageIsLoaded,
-    });
-    const imageClasses = classNames(css.image, {
-      [css.imageLoading]: !currentImageIsLoaded,
-    });
-
+  });
+  const renderItem = item => {
     return (
-      <div className={classes}>
-        <div className={css.imageWrapper}>
-          <IconSpinner className={loadingIconClasses} />
+      <div className={css.imageWrapper}>
+        <div className={css.itemCentering}>
           <ResponsiveImage
-            className={imageClasses}
-            alt={imageAltText}
-            image={images[this.state.selectedImageIndex]}
-            onLoad={markImageLoaded(this.state.selectedImageIndex)}
-            onError={markImageLoaded(this.state.selectedImageIndex)}
-            variants={['scaled-small', 'scaled-medium', 'scaled-large', 'scaled-xlarge']}
+            rootClassName={css.item}
+            image={item.image}
+            alt={item.alt}
+            variants={imageVariants}
             sizes="(max-width: 767px) 100vw, 80vw"
           />
         </div>
-        {imageIndex}
-        {prevButton}
-        {nextButton}
       </div>
     );
-  }
-}
+  };
 
-ImageCarousel.defaultProps = {
+  const renderLeftNav = (onClick, disabled) => {
+    return (
+      <button className={css.navLeft} disabled={disabled} onClick={onClick}>
+        <div className={css.navArrowWrapper}>
+          <IconArrowHead direction="left" size="big" className={css.arrowHead} />
+        </div>
+      </button>
+    );
+  };
+  const renderRightNav = (onClick, disabled) => {
+    return (
+      <button className={css.navRight} disabled={disabled} onClick={onClick}>
+        <div className={css.navArrowWrapper}>
+          <IconArrowHead direction="right" size="big" className={css.arrowHead} />
+        </div>
+      </button>
+    );
+  };
+
+  // If no image is given, rendere empty image.
+  if (items.length === 0) {
+    const classes = classNames(rootClassName || css.noImage, className);
+    return <ResponsiveImage className={classes} image={null} variants={[]} alt="" />;
+  }
+
+  // We render index outside of ReactImageGallery.
+  // This keeps track of current index aka slide changes happening inside gallery.
+  const handleSlide = currentIndex => {
+    setIndex(currentIndex);
+  };
+  const naturalIndex = index => index + 1;
+
+  // Render image index info. E.g. "4/12"
+  const imageIndex =
+    items.length > 0 ? (
+      <span className={css.imageIndex}>
+        {naturalIndex(currentIndex)}/{items.length}
+      </span>
+    ) : null;
+
+  const classes = classNames(rootClassName || css.root, className);
+
+  return (
+    <>
+      <ReactImageGallery
+        additionalClass={classes}
+        items={items}
+        renderItem={renderItem}
+        renderLeftNav={renderLeftNav}
+        renderRightNav={renderRightNav}
+        onSlide={handleSlide}
+        {...IMAGE_GALLERY_OPTIONS}
+      />
+      {imageIndex}
+    </>
+  );
+};
+
+ListingImageGallery.defaultProps = {
   rootClassName: null,
   className: null,
 };
 
 const { string, arrayOf } = PropTypes;
 
-ImageCarousel.propTypes = {
+ListingImageGallery.propTypes = {
   rootClassName: string,
   className: string,
   images: arrayOf(propTypes.image).isRequired,
+  imageVariants: arrayOf(string).isRequired,
 
   // from injectIntl
   intl: intlShape.isRequired,
 };
 
-export default injectIntl(ImageCarousel);
+export default injectIntl(ListingImageGallery);

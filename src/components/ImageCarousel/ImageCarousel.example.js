@@ -120,18 +120,24 @@ const ImageCarouselWrapper = props => {
 
 export const NoImages = {
   component: ImageCarouselWrapper,
-  props: { images: [] },
+  props: { images: [], imageVariants: [imageName, imageName2x, imageName4x, imageName6x] },
   rawOnly: true,
 };
 
 export const SingleImage = {
   component: ImageCarouselWrapper,
-  props: { images: [imageSquare] },
+  props: {
+    images: [imageSquare],
+    imageVariants: [imageName, imageName2x, imageName4x, imageName6x],
+  },
   rawOnly: true,
 };
 
 export const MultipleImages = {
   component: ImageCarouselWrapper,
-  props: { images: [imageLandscape, imagePortrait, imageSquare] },
+  props: {
+    images: [imageLandscape, imagePortrait, imageSquare],
+    imageVariants: [imageName, imageName2x, imageName4x, imageName6x],
+  },
   rawOnly: true,
 };
