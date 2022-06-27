@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2022-XX-XX
 
+- [change] ImageCarousel uses react-image-gallery. It renders all the images early on and supports touch swipes.
+  [#1529](https://github.com/sharetribe/ftw-daily/pull/1529)
 - [fix] Fixing a small typo. [#1518](https://github.com/sharetribe/ftw-daily/pull/1518)
 
 ## [v8.6.2] 2022-05-19
