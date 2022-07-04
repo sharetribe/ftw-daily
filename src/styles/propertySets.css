@@ -1,3 +1,4 @@
+@import './customMediaQueries.css';
 :root {
   /**
  * This file contains only Custom Sets of Properties (@apply-rule).
@@ -135,7 +136,7 @@
 
   /* ================ Modal title ================ */
 
-  --marketplaceModalTitleStyles {
+  --marketplaceModalTitleStyles: {
     font-weight: var(--fontWeightSemiBold);
     font-size: 30px;
     line-height: 36px;
@@ -274,14 +275,14 @@
     }
   }
 
-  --marketplaceMessageFontStyles {
+  --marketplaceMessageFontStyles: {
     font-family: var(--fontFamily);
     font-weight: var(--fontWeightRegular);
     font-size: 16px;
     line-height: 24px;
   }
 
-  --marketplaceMessageDateFontStyles {
+  --marketplaceMessageDateFontStyles: {
     font-family: var(--fontFamily);
     font-weight: var(--fontWeightRegular);
     font-size: 12px;
@@ -294,7 +295,7 @@
     }
   }
 
-  --marketplaceTxTransitionFontStyles {
+  --marketplaceTxTransitionFontStyles: {
     font-family: var(--fontFamily);
     font-weight: var(--fontWeightMedium);
     font-size: 16px;
@@ -306,7 +307,7 @@
     }
   }
 
-  --marketplaceSearchFilterLabelFontStyles {
+  --marketplaceSearchFilterLabelFontStyles: {
     font-family: var(--fontFamily);
     font-weight: var(--fontWeightSemiBold);
     font-size: 13px;
@@ -319,14 +320,14 @@
     }
   }
 
-  --marketplaceSearchFilterSublabelFontStyles {
+  --marketplaceSearchFilterSublabelFontStyles: {
     font-family: var(--fontFamily);
     font-weight: var(--fontWeightMedium);
     font-size: 18px;
     line-height: 18px;
   }
 
-  --marketplaceListingAttributeFontStyles {
+  --marketplaceListingAttributeFontStyles: {
     font-family: var(--fontFamily);
     font-weight: var(--fontWeightMedium);
     font-size: 16px;
@@ -335,7 +336,7 @@
 
   /* ================ Tabbed navigation font styles ================ */
 
-  --marketplaceTabNavFontStyles {
+  --marketplaceTabNavFontStyles: {
     font-weight: var(--fontWeightMedium);
     font-size: 16px;
     line-height: 24px;
@@ -348,7 +349,7 @@
     }
   }
 
-  --marketplaceTabNavHorizontalFontStyles {
+  --marketplaceTabNavHorizontalFontStyles: {
     font-weight: var(--fontWeightMedium);
     font-size: 14px;
     line-height: 24px;
@@ -357,7 +358,7 @@
 
   /* ================ Clearfix solution ================ */
 
-  --clearfix {
+  --clearfix: {
     &::after {
       content: '';
       display: table;
@@ -401,7 +402,7 @@
       /* TODO: Make sure button text aligns with the baseline */
     }
   }
-  --marketplaceButtonStyles {
+  --marketplaceButtonStyles: {
     @apply --marketplaceButtonFontStyles;
 
     /* Dimensions */
@@ -452,7 +453,7 @@
       min-height: 65px;
     }
   }
-  --marketplaceButtonStylesPrimary {
+  --marketplaceButtonStylesPrimary: {
     @apply --marketplaceButtonStyles;
 
     background-color: var(--successColor);
@@ -467,7 +468,7 @@
       color: var(--matterColorLight);
     }
   }
-  --marketplaceButtonStylesSecondary {
+  --marketplaceButtonStylesSecondary: {
     @apply --marketplaceButtonStyles;
 
     background-color: var(--matterColorLight);
@@ -582,7 +583,7 @@
 
   /* ================ Modals ================ */
 
-  --marketplaceModalRootStyles {
+  --marketplaceModalRootStyles: {
     /* Page is using flex: AuthenticationPage's .root takes all available space */
     flex-grow: 1;
 
@@ -595,7 +596,7 @@
     }
   }
 
-  --marketplaceModalFormRootStyles {
+  --marketplaceModalFormRootStyles: {
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -603,7 +604,7 @@
     height: 100%;
   }
 
-  --marketplaceModalBaseStyles {
+  --marketplaceModalBaseStyles: {
     flex-grow: 1;
 
     /* Create context so the close button can be positioned within it */
@@ -629,7 +630,7 @@
     }
   }
 
-  --marketplaceModalInMobileBaseStyles {
+  --marketplaceModalInMobileBaseStyles: {
     flex-grow: 1;
 
     /* Create context so the close button can be positioned within it */
@@ -656,7 +657,7 @@
 
   /* Modal title */
 
-  --marketplaceModalTitleStyles {
+  --marketplaceModalTitleStyles: {
     font-weight: var(--fontWeightSemiBold);
     font-size: 30px;
     line-height: 36px;
@@ -674,7 +675,7 @@
 
   /* Modal message */
 
-  --marketplaceModalParagraphStyles {
+  --marketplaceModalParagraphStyles: {
     margin: 18px 0 0 0;
 
     @media (--viewportMedium) {
@@ -684,7 +685,7 @@
 
   /* Bottom wrapper for the modal */
 
-  --marketplaceModalBottomWrapper {
+  --marketplaceModalBottomWrapper: {
     text-align: center;
     margin-top: 60px;
     align-self: stretch;
@@ -695,7 +696,7 @@
   }
 
   /* Adjust the bottomWrapper's margin to match modals without the helper text */
-  --marketplaceModalBottomWrapperText {
+  --marketplaceModalBottomWrapperText: {
     margin-top: -24px;
     padding-bottom: 8px;
 
@@ -704,7 +705,7 @@
     }
   }
 
-  --marketplaceModalHelperText {
+  --marketplaceModalHelperText: {
     @apply --marketplaceTinyFontStyles;
     color: var(--matterColorAnti);
     margin: 0;
@@ -714,7 +715,7 @@
     }
   }
 
-  --marketplaceModalHelperLink {
+  --marketplaceModalHelperLink: {
     @apply --marketplaceTinyFontStyles;
     color: var(--matterColor);
     margin: 0;
@@ -726,7 +727,7 @@
 
   /* Modal Close icon */
 
-  --marketplaceModalCloseStyles {
+  --marketplaceModalCloseStyles: {
     /* Position inside modal */
     position: fixed;
     top: 0;
@@ -771,7 +772,7 @@
     }
   }
 
-  --marketplaceModalIconStyles {
+  --marketplaceModalIconStyles: {
     height: 48px;
     margin-bottom: 12px;
 
@@ -781,7 +782,7 @@
     }
   }
 
-  --marketplaceModalCloseText {
+  --marketplaceModalCloseText: {
     /* Font */
     @apply --marketplaceH6FontStyles;
     margin: 0;
@@ -791,7 +792,7 @@
     }
   }
 
-  --marketplaceModalCloseIcon {
+  --marketplaceModalCloseIcon: {
     display: inline-block;
     margin-left: 8px;
 
@@ -805,13 +806,13 @@
     }
   }
 
-  --marketplaceModalErrorStyles {
+  --marketplaceModalErrorStyles: {
     @apply --marketplaceH4FontStyles;
     margin-top: 24px;
     color: var(--failColor);
   }
 
-  --marketplaceModalPasswordMargins {
+  --marketplaceModalPasswordMargins: {
     /* Leave space between the input and the button below when the
     viewport height is small */
     margin-top: 24px;
