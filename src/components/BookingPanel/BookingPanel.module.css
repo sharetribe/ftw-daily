@@ -1,3 +1,4 @@
+@import '../../styles/customMediaQueries.css';
 @import '../../styles/propertySets.css';
 
 /* Booking form inside modalContainer needs special handling */
