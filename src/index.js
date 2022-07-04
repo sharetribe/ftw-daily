@@ -17,24 +17,37 @@ import 'core-js/features/map';
 import 'core-js/features/set';
 import 'raf/polyfill';
 
+// Dependency libs
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { loadableReady } from '@loadable/component';
-import { createInstance, types as sdkTypes } from './util/sdkLoader';
-import { ClientApp, renderApp } from './app';
+
+// Import default styles before other CSS-related modules are imported
+// This ensures that the styles in marketplaceDefaults.css are included
+// as first ones in the final build CSS build file.
+import './styles/marketplaceDefaults.css';
+
+// Configs and store setup
+import config from './config';
+import { LoggingAnalyticsHandler, GoogleAnalyticsHandler } from './analytics/handlers';
 import configureStore from './store';
+
+// Utils
+import { createInstance, types as sdkTypes } from './util/sdkLoader';
 import { matchPathname } from './util/routes';
 import * as sample from './util/sample';
 import * as apiUtils from './util/api';
-import config from './config';
+import * as log from './util/log';
+
+// Import relevant global duck files
 import { authInfo } from './ducks/Auth.duck';
 import { fetchAppAssets } from './ducks/hostedAssets.duck';
 import { fetchCurrentUser } from './ducks/user.duck';
-import routeConfiguration from './routeConfiguration';
-import * as log from './util/log';
-import { LoggingAnalyticsHandler, GoogleAnalyticsHandler } from './analytics/handlers';
 
-import './styles/marketplaceDefaults.css';
+// Route config
+import routeConfiguration from './routeConfiguration';
+// App it self
+import { ClientApp, renderApp } from './app';
 
 const render = (store, shouldHydrate) => {
   // If the server already loaded the auth information, render the app
