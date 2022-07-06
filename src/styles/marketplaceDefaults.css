@@ -1,6 +1,5 @@
 @import '../assets/sanitize.css';
 @import './customMediaQueries.css';
-@import './propertySets.css';
 
 /* ================ Custom Properties aka CSS variables ================ */
 
@@ -163,6 +162,12 @@
 }
 
 /* ================ Global element styles ================ */
+/**
+ * Here are the global styles: for elements as well as some
+ * global classes that are composed into component styles.
+ *
+ * NOTE: components use CSS Modules for styles.
+ */
 
 body {
   font-family: Helvetica, Arial, sans-serif;
@@ -183,42 +188,178 @@ body {
   color: var(--matterColorLight);
 }
 
-a {
-  @apply --marketplaceLinkStyles;
+a,
+.a {
+  /* Position and dimensions */
+  display: inline;
+  margin: 0;
+  padding: 0;
+
+  /* Borders */
+  border: none;
+
+  /* Colors */
+  color: var(--marketplaceColor);
+
+  /* Text size should be inherited */
+  text-decoration: none;
+}
+a:hover,
+.a:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
-h1 {
-  @apply --marketplaceH1FontStyles;
-}
-h2 {
-  @apply --marketplaceH2FontStyles;
-}
-h3 {
-  @apply --marketplaceH3FontStyles;
-}
-h4 {
-  @apply --marketplaceH4FontStyles;
-}
-h5 {
-  @apply --marketplaceH5FontStyles;
-}
-h6 {
-  @apply --marketplaceH6FontStyles;
+h1,
+.h1 {
+  font-weight: var(--fontWeightSemiBold);
+  font-size: 24px;
+  line-height: 30px;
+  letter-spacing: -0.5px;
+  /* margin-top + n * line-height + margin-bottom => x * 6px */
+  margin-top: 18px;
+  margin-bottom: 18px;
+
+  @media (--viewportMedium) {
+    font-size: 40px;
+    font-weight: var(--fontWeightSemiBold);
+    line-height: 48px;
+    letter-spacing: -1px;
+    /* margin-top + n * line-height + margin-bottom => x * 8px */
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
 }
 
-li {
-  @apply --marketplaceDefaultFontStyles;
+h2,
+.h2 {
+  font-weight: var(--fontWeightSemiBold);
+  font-size: 21px;
+  line-height: 24px;
+  /* margin-top + n * line-height + margin-bottom => x * 6px */
+  margin-top: 21px;
+  margin-bottom: 17px;
+
+  @media (--viewportMedium) {
+    line-height: 32px;
+    /* margin-top + n * line-height + margin-bottom => x * 8px */
+    margin-top: 21px;
+    margin-bottom: 19px;
+  }
+}
+
+h3,
+.h3 {
+  font-weight: var(--fontWeightSemiBold);
+  font-size: 18px;
+  line-height: 24px;
+  /* margin-top + n * line-height + margin-bottom => x * 6px */
+  margin-top: 16px;
+  margin-bottom: 14px;
+
+  @media (--viewportMedium) {
+    /* margin-top + n * line-height + margin-bottom => x * 8px */
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+}
+
+h4,
+.h4 {
+  font-weight: var(--fontWeightMedium);
+  font-size: 15px;
+  line-height: 24px;
+  letter-spacing: 0;
+  /* margin-top + n * line-height + margin-bottom => x * 6px */
+  margin-top: 12px;
+  margin-bottom: 12px;
+
+  @media (--viewportMedium) {
+    font-weight: var(--fontWeightMedium);
+    /* margin-top + n * line-height + margin-bottom => x * 8px */
+    margin-top: 17px;
+    margin-bottom: 15px;
+  }
+}
+
+h5,
+.h5 {
+  font-weight: var(--fontWeightMedium);
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0;
+  /* margin-top + n * line-height + margin-bottom => x * 6px */
+  margin-top: 10px;
+  margin-bottom: 8px;
+
+  @media (--viewportMedium) {
+    line-height: 16px;
+    /* margin-top + n * line-height + margin-bottom => x * 8px */
+    margin-top: 10px;
+    margin-bottom: 14px;
+  }
+}
+
+h6,
+.h6 {
+  font-weight: var(--fontWeightBold);
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  /* margin-top + n * line-height + margin-bottom => x * 6px */
+  margin-top: 10px;
+  margin-bottom: 8px;
+
+  @media (--viewportMedium) {
+    line-height: 16px;
+    /* margin-top + n * line-height + margin-bottom => x * 8px */
+    margin-top: 10px;
+    margin-bottom: 6px;
+  }
 }
 
 p,
-pre {
-  @apply --marketplaceBodyFontStyles;
+pre,
+.marketplaceBodyFontStyles {
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeightMedium);
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: -0.1px;
+  /* margin-top + n * line-height + margin-bottom => x * 6px */
+  margin-top: 12px;
+  margin-bottom: 12px;
+
+  @media (--viewportMedium) {
+    font-size: 16px;
+    line-height: 32px;
+    /* margin-top + n * line-height + margin-bottom => x * 8px */
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+}
+
+html,
+li,
+.marketplaceDefaultFontStyles {
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeightMedium);
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: -0.1px;
+  /* No margins for default font */
+
+  @media (--viewportMedium) {
+    font-size: 16px;
+    line-height: 32px;
+  }
 }
 
 /* ================ Normalisations ================ */
 
 html {
-  @apply --marketplaceDefaultFontStyles;
+  /* font is set earlier */
   color: var(--matterColor);
   padding: 0;
   margin: 0;
@@ -231,14 +372,19 @@ ul {
 
 legend,
 label {
-  @apply --marketplaceH5FontStyles;
-  font-weight: var(--fontWeightSemiBold);
   display: block;
+
+  font-weight: var(--fontWeightSemiBold);
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0;
+
   margin-top: 0;
   margin-bottom: 0;
 
   @media (--viewportMedium) {
     font-weight: var(--fontWeightSemiBold);
+    line-height: 16px;
     margin-top: 0;
     margin-bottom: 0;
     padding-top: 6px;
@@ -250,20 +396,99 @@ button {
   font-family: Helvetica, Arial, sans-serif;
 }
 
-select {
-  @apply --marketplaceSelectStyles;
-  @apply --marketplaceInputFontStyles;
+/* marketplaceInputFontStyles */
+select,
+input,
+textarea {
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeightMedium);
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.1px;
+  /* No margins for default font */
+
+  @media (--viewportMedium) {
+    font-size: 16px;
+    line-height: 32px;
+  }
 }
 
-input {
-  @apply --marketplaceInputStyles;
-  @apply --marketplaceInputFontStyles;
+select {
+  /* Dimensions */
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 5px 0 5px 0;
+
+  /* Unset user agent styles */
+  appearance: none;
+
+  /* Borders */
+  border: none;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-bottom-color: var(--marketplaceColor);
+  border-radius: 0;
+
+  /* Background */
+  background-image: url('data:image/svg+xml;utf8,<svg width="14" height="9" viewBox="0 0 14 9" xmlns="http://www.w3.org/2000/svg"><path d="M6.53 7.472c.26.26.68.26.94 0l5.335-5.333c.26-.263.26-.684 0-.944-.26-.26-.683-.26-.943 0L7 6.056l-4.862-4.86c-.26-.26-.683-.26-.943 0-.26.26-.26.68 0 .943L6.53 7.47z" stroke="%234A4A4A" fill="%234A4A4A" fill-rule="evenodd"/></svg>');
+  background-size: 16px 16px;
+  background-position: center right;
+
+  /* Effects */
+
+  cursor: pointer;
+  transition: border-bottom-color var(--transitionStyle);
+
+  @media (--viewportMedium) {
+    padding: 4px 0 2px 0;
+  }
+}
+select:hover,
+select:focus {
+  border-bottom-color: var(--matterColor);
+  outline: none;
+}
+
+input,
+textarea,
+.marketplaceInputStyles {
+  /* Dimensions */
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 5px 0 5px 0;
+
+  /* Borders */
+  border: none;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-bottom-color: var(--marketplaceColor);
+  border-radius: 0;
+
+  &::placeholder {
+    color: var(--matterColorAnti);
+  }
+
+  /* Effects */
+
+  transition: border-bottom-color var(--transitionStyle);
+
+  @media (--viewportMedium) {
+    padding: 4px 0 2px 0;
+  }
+}
+input:hover,
+input:focus,
+textarea:hover,
+textarea:focus,
+.marketplaceInputStyles:hover,
+.marketplaceInputStyles:focus {
+  border-bottom-color: var(--matterColor);
+  outline: none;
 }
 
 textarea {
-  @apply --marketplaceInputStyles;
-  @apply --marketplaceInputFontStyles;
-
   /* Todo: All textareas are using auto-sizing extension which currently calculates required space incorrectly when box-sixing is "border-box" */
   box-sizing: content-box;
   padding: 0 0 10px 0;
@@ -283,5 +508,553 @@ textarea {
   }
   & button {
     font-family: 'poppins', Helvetica, Arial, sans-serif;
+  }
+}
+
+/* ================ Plain global CSS glasses ================ */
+
+/* Full screen Background image located in root-folder/src/assets */
+.defaultBackgroundImage {
+  /* Gradient direction and overlaying the black color on top of the image for better readability */
+  background: linear-gradient(-45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)),
+    url('../assets/background-1440.jpg');
+
+  /* Add loading color for the div */
+  background-color: var(--matterColor);
+
+  /* Cover the whole screen with the background image */
+  background-size: cover;
+
+  /* Align the image within the container */
+  background-position: center center;
+
+  @media (--viewportLarge) {
+    border-radius: 40px;
+    border: solid 36px var(--matterColorBright);
+  }
+}
+
+.defaultBackgroundImageForDesktop {
+  /* Gradient direction and overlaying the black color on top of the image for better readability */
+  @media (--viewportMedium) {
+    background: linear-gradient(-45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)),
+      url('../assets/background-1440.jpg');
+
+    /* Add loading color for the div */
+    background-color: var(--matterColor);
+
+    /* Cover the whole screen with the background image */
+    background-size: cover;
+
+    /* Align the image within the container */
+    background-position: center center;
+  }
+  @media (--viewportLarge) {
+    border-radius: 40px;
+    border: solid 36px var(--matterColorBright);
+  }
+}
+
+/* ================ Hero title ================ */
+
+.marketplaceHeroTitleFontStyles {
+  font-weight: var(--fontWeightBold);
+  font-size: 36px;
+  line-height: 36px;
+  letter-spacing: -0.7px;
+  /* margin-top + n * line-height + margin-bottom => x * 6px */
+  margin-top: 25px;
+  margin-bottom: 14px;
+
+  @media (--viewportMedium) {
+    font-size: 64px;
+    line-height: 64px;
+    letter-spacing: -1.5px;
+    /* margin-top + n * line-height + margin-bottom => x * 8px */
+    margin-top: 25px;
+    margin-bottom: 23px;
+  }
+}
+
+/* ================ Other fonts ================ */
+
+.marketplaceTinyFontStyles {
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeightRegular);
+  font-size: 13px;
+  line-height: 18px;
+  /* margin-top + n * line-height + margin-bottom => x * 6px */
+  margin-top: 9.5px;
+  margin-bottom: 8.5px;
+  -webkit-font-smoothing: subpixel-antialiased;
+
+  @media (--viewportMedium) {
+    line-height: 16px;
+    /* margin-top + n * line-height + margin-bottom => x * 8px */
+    margin-top: 10.5px;
+    margin-bottom: 13.5px;
+  }
+}
+
+.marketplaceMessageFontStyles {
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeightRegular);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.marketplaceMessageDateFontStyles {
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeightRegular);
+  font-size: 12px;
+  line-height: 18px;
+
+  @media (--viewportMedium) {
+    font-weight: var(--fontWeightMedium);
+    font-size: 12px;
+    line-height: 24px;
+  }
+}
+
+.marketplaceTxTransitionFontStyles {
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeightMedium);
+  font-size: 16px;
+  line-height: 18px;
+
+  @media (--viewportMedium) {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+.marketplaceSearchFilterLabelFontStyles {
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeightSemiBold);
+  font-size: 13px;
+  line-height: 18px;
+
+  @media (--viewportMedium) {
+    font-weight: var(--fontWeightMedium);
+    font-size: 13px;
+    line-height: 20px;
+  }
+}
+
+.marketplaceSearchFilterSublabelFontStyles {
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeightMedium);
+  font-size: 18px;
+  line-height: 18px;
+}
+
+.marketplaceListingAttributeFontStyles {
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeightMedium);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+/* ================ Clearfix solution ================ */
+
+.clearfix {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+/* ================ Buttons ================ */
+
+/**
+ * For actual buttons, use components: <Button>, <PrimaryButton>, <SecondaryButton>
+ *
+ * To create button look-and-feel for links, etc. combine button classes in CSS Modules:
+ * 
+ * default button:
+ *   composes: button buttonFont buttonText buttonBorders buttonColors from global;
+ * primary button:
+ *   composes: button buttonFont buttonText buttonBorders buttonColorsPrimary from global;
+ * secondary button:
+ *   composes: button buttonFont buttonText buttonBordersSecondary buttonColorsSecondary from global;
+ */
+
+/* Button styles */
+/* Basic styles for button: dimensions, paddings, behaviour, etc. */
+.button {
+  display: block;
+  width: 100%;
+  min-height: 59px;
+  margin: 0;
+
+  /* Padding is only for <a> elements where button styles are applied,
+  buttons elements should have zero padding */
+  padding: 17px 0 17px 0;
+
+  transition: all var(--transitionStyleButton);
+  cursor: pointer;
+
+  @media (--viewportMedium) {
+    padding: 20px 0 20px 0;
+    min-height: 65px;
+  }
+}
+.button:focus,
+.button:hover {
+  outline: none;
+  box-shadow: var(--boxShadowButton);
+}
+.button:disabled {
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* Button font */
+/* Default font style for buttons */
+.buttonFont {
+  font-family: 'poppins', Helvetica, Arial, sans-serif;
+  font-weight: var(--fontWeightSemiBold);
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.2px;
+}
+
+/* Button text styles */
+/* Default button text is centered without decorations */
+.buttonText {
+  text-align: center;
+  text-decoration: none;
+}
+.buttonText:focus,
+.buttonText:hover {
+  text-decoration: none;
+}
+
+/* Button borders */
+/* Default button has no borders */
+.buttonBorders {
+  border: none;
+  border-radius: var(--borderRadius);
+}
+/* Secondary button has clear borders */
+.buttonBordersSecondary {
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--matterColorNegative);
+  border-radius: var(--borderRadius);
+}
+.buttonBordersSecondary:hover,
+.buttonBordersSecondary:focus {
+  border-color: var(--matterColorAnti);
+}
+.buttonBordersSecondary:disabled {
+  border-color: var(--matterColorNegative);
+}
+
+/* Button colors */
+/* Default button uses marketplace color */
+.buttonColors {
+  background-color: var(--marketplaceColor);
+  color: var(--matterColorLight);
+}
+.buttonColors:focus,
+.buttonColors:hover {
+  background-color: var(--marketplaceColorDark);
+}
+.buttonColors:disabled {
+  background-color: var(--matterColorNegative);
+  color: var(--matterColorLight);
+}
+
+/* Button colors: primary */
+.buttonColorsPrimary {
+  background-color: var(--successColor);
+  color: var(--matterColorLight);
+}
+.buttonColorsPrimary:hover,
+.buttonColorsPrimary:focus {
+  background-color: var(--successColorDark);
+  color: var(--matterColorLight);
+}
+.buttonColorsPrimary:disabled {
+  background-color: var(--matterColorNegative);
+  color: var(--matterColorLight);
+}
+
+/* Button colors: secondary */
+.buttonColorsSecondary {
+  background-color: var(--matterColorLight);
+  color: var(--matterColor);
+}
+.buttonColorsSecondary:disabled {
+  background-color: var(--matterColorNegative);
+  color: var(--matterColorLight);
+}
+
+/* ================ Modals ================ */
+
+.marketplaceModalRootStyles {
+  /* Page is using flex: AuthenticationPage's .root takes all available space */
+  flex-grow: 1;
+
+  /* AuthenticationPage's root uses flexbox */
+  display: flex;
+
+  @media (--viewportMedium) {
+    justify-content: center;
+    align-items: flex-start;
+  }
+}
+
+.marketplaceModalFormRootStyles {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.marketplaceModalBaseStyles {
+  flex-grow: 1;
+
+  /* Create context so the close button can be positioned within it */
+  position: relative;
+
+  /* Display and dimensions */
+  display: flex;
+  flex-direction: column;
+  padding: var(--modalPadding);
+
+  background-color: var(--matterColorLight);
+  border-radius: var(--borderRadius);
+  border-bottom: none;
+
+  @media (--viewportMedium) {
+    flex-basis: 480px;
+    flex-grow: 0;
+    /* min-height: 568px; */
+    padding: var(--modalPaddingMedium);
+    margin-top: 12.5vh;
+    margin-bottom: 12.5vh;
+    border-bottom: 8px solid var(--marketplaceColor);
+  }
+}
+
+.marketplaceModalInMobileBaseStyles {
+  flex-grow: 1;
+
+  /* Create context so the close button can be positioned within it */
+  position: relative;
+
+  /* Display and dimensions */
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 0;
+
+  background-color: var(--matterColorLight);
+  border-radius: var(--borderRadius);
+
+  @media (--viewportMedium) {
+    flex-basis: 480px;
+    flex-grow: 0;
+    height: 100%;
+    padding: 0;
+    background-color: transparent;
+    border-radius: 0;
+  }
+}
+
+/* Modal title */
+.marketplaceModalTitleStyles {
+  font-weight: var(--fontWeightBold);
+  font-size: 30px;
+  line-height: 36px;
+  letter-spacing: -0.5px;
+  margin: 0;
+
+  @media (--viewportMedium) {
+    font-weight: var(--fontWeightSemiBold);
+    line-height: 40px;
+    letter-spacing: -0.9px;
+    margin: 0;
+  }
+}
+
+/* Modal message */
+.marketplaceModalParagraphStyles {
+  margin: 18px 0 0 0;
+
+  @media (--viewportMedium) {
+    margin: 24px 0 0 0;
+  }
+}
+
+/* Bottom wrapper for the modal */
+.marketplaceModalBottomWrapper {
+  text-align: center;
+  margin-top: 60px;
+  align-self: stretch;
+
+  @media (--viewportMedium) {
+    margin-top: 96px;
+  }
+}
+
+/* Adjust the bottomWrapper's margin to match modals without the helper text */
+.marketplaceModalBottomWrapperText {
+  margin-top: -24px;
+  padding-bottom: 8px;
+
+  @media (--viewportMedium) {
+    padding-bottom: 0;
+  }
+}
+
+.marketplaceModalHelperText {
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeightRegular);
+  font-size: 13px;
+  line-height: 18px;
+
+  -webkit-font-smoothing: subpixel-antialiased;
+
+  color: var(--matterColorAnti);
+  margin: 0;
+
+  @media (--viewportMedium) {
+    line-height: 16px;
+    margin: 0;
+  }
+}
+
+.marketplaceModalHelperLink {
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeightRegular);
+  font-size: 13px;
+  line-height: 18px;
+
+  -webkit-font-smoothing: subpixel-antialiased;
+
+  color: var(--matterColor);
+  margin: 0;
+
+  @media (--viewportMedium) {
+    line-height: 16px;
+    margin: 0;
+  }
+}
+
+/* Modal Close icon */
+
+.marketplaceModalCloseStyles {
+  /* Position inside modal */
+  position: fixed;
+  top: 0;
+  right: 0;
+
+  /* Some content (like map) is positioning itself on top of close button without z-index handling */
+  z-index: calc(var(--zIndexModal) + 1);
+
+  /* Safari didn't know how to baseline-align svg icon and text */
+  display: flex;
+  align-items: flex-start;
+  width: auto;
+
+  /* Sizing (touch area) */
+  padding: 24px;
+  margin: 0;
+  border: 0;
+
+  @media (--viewportMedium) {
+    padding: 27px 30px;
+    position: absolute;
+  }
+
+  /* Colors */
+  background-color: transparent;
+  color: var(--matterColor);
+
+  cursor: pointer;
+}
+.marketplaceModalCloseStyles:enabled:hover {
+  background-color: transparent;
+  color: var(--matterColorDark);
+  box-shadow: none;
+  text-decoration: none;
+}
+.marketplaceModalCloseStyles:enabled:active {
+  background-color: transparent;
+  color: var(--matterColorDark);
+}
+.marketplaceModalCloseStyles:disabled {
+  background-color: transparent;
+}
+
+.marketplaceModalIconStyles {
+  height: 48px;
+  margin-bottom: 12px;
+
+  @media (--viewportMedium) {
+    height: 64px;
+    margin-bottom: 23px;
+  }
+}
+
+.marketplaceModalCloseText {
+  /* Font */
+  font-weight: var(--fontWeightBold);
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+
+  margin: 0;
+
+  @media (--viewportMedium) {
+    line-height: 16px;
+    margin: 0;
+  }
+}
+
+.marketplaceModalCloseIcon {
+  display: inline-block;
+  margin-left: 8px;
+
+  /* Move X icon vertically to align it with the close text. */
+  margin-top: 3px;
+
+  box-sizing: content-box;
+
+  @media (--viewportMedium) {
+    margin-top: 2px;
+  }
+}
+
+.marketplaceModalErrorStyles {
+  font-weight: var(--fontWeightMedium);
+  font-size: 15px;
+  line-height: 24px;
+  letter-spacing: 0;
+
+  margin-top: 24px;
+  color: var(--failColor);
+
+  @media (--viewportMedium) {
+    font-weight: var(--fontWeightMedium);
+    /* margin-top + n * line-height + margin-bottom => x * 8px */
+    margin-top: 17px;
+    margin-bottom: 15px;
+  }
+}
+
+.marketplaceModalPasswordMargins {
+  /* Leave space between the input and the button below when the
+  viewport height is small */
+  margin-top: 24px;
+
+  @media (--viewportMedium) {
+    margin-top: 32px;
   }
 }
