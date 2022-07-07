@@ -1,5 +1,4 @@
 @import '../../styles/customMediaQueries.css';
-@import '../../styles/propertySets.css';
 
 .root {
   margin-top: 24px;
@@ -130,7 +129,7 @@
 
 .error {
   /* Font */
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   color: var(--failColor);
   margin-top: 18px;
   margin-bottom: 0;
@@ -148,8 +147,7 @@
 
 .changeAvatar {
   /* Font */
-  @apply --marketplaceH5FontStyles;
-
+  composes: h5 from global;
   font-weight: var(--fontWeightMedium);
 
   /* Positioning: right */
@@ -241,7 +239,7 @@
 }
 
 .tip {
-  @apply --marketplaceDefaultFontStyles;
+  composes: marketplaceDefaultFontStyles from global;
   color: var(--matterColorAnti);
   margin-top: 0;
   margin-bottom: 12px;
@@ -257,7 +255,7 @@
 }
 
 .fileInfo {
-  @apply --marketplaceH5FontStyles;
+  composes: h5 from global;
   color: var(--matterColorAnti);
   margin-top: 0;
   margin-bottom: 0;
