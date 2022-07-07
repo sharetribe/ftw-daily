@@ -1,8 +1,7 @@
 @import '../../styles/customMediaQueries.css';
-@import '../../styles/propertySets.css';
 
 .title {
-  @apply --marketplaceH1FontStyles;
+  composes: h1 from global;
   margin-top: 0;
 }
 
