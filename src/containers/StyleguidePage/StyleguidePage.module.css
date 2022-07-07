@@ -1,5 +1,4 @@
 @import '../../styles/customMediaQueries.css';
-@import '../../styles/propertySets.css';
 
 .root {
   display: flex;
@@ -137,11 +136,11 @@
 }
 
 .heroTitle {
-  @apply --marketplaceHeroTitleFontStyles;
+  composes: marketplaceHeroTitleFontStyles from global;
 }
 
 .tinyFont {
-  @apply --marketplaceTinyFontStyles;
+  composes: marketplaceTinyFontStyles from global;
 }
 
 /* Colors.example */
