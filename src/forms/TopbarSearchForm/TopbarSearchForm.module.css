@@ -1,5 +1,4 @@
 @import '../../styles/customMediaQueries.css';
-@import '../../styles/propertySets.css';
 
 .mobileInputRoot {
   width: 100%;
@@ -26,7 +25,7 @@
   flex-grow: 1;
 
   /* Font */
-  @apply --marketplaceH1FontStyles;
+  composes: h1 from global;
 
   /* Layout */
   margin: 0 24px 0 0;
@@ -61,9 +60,9 @@
 }
 
 .desktopInput {
+  composes: h4 from global;
   flex-grow: 1;
   /* Font */
-  @apply --marketplaceH4FontStyles;
   height: var(--topbarHeightDesktop);
   line-height: unset;
   border: none;
