@@ -1,5 +1,4 @@
 @import '../../styles/customMediaQueries.css';
-@import '../../styles/propertySets.css';
 
 .root {
   margin: 0;
@@ -46,7 +45,7 @@
 
 .selectedLabel,
 .notSelectedLabel {
-  @apply --marketplaceBodyFontStyles;
+  composes: marketplaceBodyFontStyles from global;
   line-height: 24px;
   margin: 0;
 }
