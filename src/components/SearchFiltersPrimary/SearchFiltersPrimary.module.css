@@ -1,5 +1,4 @@
 @import '../../styles/customMediaQueries.css';
-@import '../../styles/propertySets.css';
 
 .root {
   display: flex;
@@ -27,7 +26,7 @@
 }
 
 .searchResultSummary {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   line-height: 20px;
   margin-top: 10px;
   margin-bottom: 11px;
@@ -36,7 +35,7 @@
 }
 
 .noSearchResults {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
 
   /* Reserves 48px of vertical space */
   line-height: 20px;
@@ -49,7 +48,7 @@
 }
 
 .loadingResults {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   line-height: 20px;
 
   /* Cover parent element's space*/
@@ -76,8 +75,8 @@
 }
 
 .searchFiltersPanelClosed {
-  @apply --marketplaceButtonStylesSecondary;
-  @apply --marketplaceSearchFilterLabelFontStyles;
+  composes: button marketplaceSearchFilterLabelFontStyles buttonText buttonBordersSecondary buttonColorsSecondary from global;
+  letter-spacing: 0.2px;
 
   display: inline-block;
   padding: var(--marketplaceButtonSmallDesktopPadding);
@@ -96,8 +95,8 @@
 }
 
 .searchFiltersPanelOpen {
-  @apply --marketplaceButtonStyles;
-  @apply --marketplaceSearchFilterLabelFontStyles;
+  composes: button marketplaceSearchFilterLabelFontStyles buttonText buttonBorders buttonColors from global;
+  letter-spacing: 0.2px;
   font-weight: var(--fontWeightSemiBold);
 
   display: inline-block;
