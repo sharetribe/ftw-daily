@@ -1,5 +1,4 @@
 @import '../../styles/customMediaQueries.css';
-@import '../../styles/propertySets.css';
 
 .root {
   position: relative;
@@ -15,7 +14,7 @@
 }
 
 .textarea {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   border-bottom-width: 0;
 
   /* Avoid text going behind the submit button */
@@ -69,15 +68,22 @@
 }
 
 .error {
-  @apply --marketplaceH5FontStyles;
+  composes: h5 from global;
+
   font-weight: var(--fontWeightMedium);
   color: var(--failColor);
   margin: 0;
 }
 
 .submitButton {
-  @apply --marketplaceButtonStylesSecondary;
-  @apply --marketplaceH5FontStyles;
+  composes: button buttonText buttonBordersSecondary buttonColorsSecondary from global;
+
+  font-family: 'poppins', Helvetica, Arial, sans-serif;
+  font-weight: var(--fontWeightMedium);
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0;
+
   font-weight: var(--fontWeightMedium);
 
   float: right;
