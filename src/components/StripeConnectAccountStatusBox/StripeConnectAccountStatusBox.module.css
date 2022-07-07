@@ -1,5 +1,4 @@
 @import '../../styles/customMediaQueries.css';
-@import '../../styles/propertySets.css';
 
 .root {
 }
@@ -36,7 +35,7 @@
 }
 
 .verificationBoxTitle {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   font-weight: var(--fontWeightSemiBold);
 
   align-self: center;
@@ -47,14 +46,14 @@
 }
 
 .verificationBoxText {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   font-weight: var(--fontWeightRegular);
   margin-top: 0;
   margin-bottom: 0;
 }
 
 .getVerifiedButton {
-  @apply --marketplaceH5FontStyles;
+  composes: h5 from global;
   font-weight: var(--fontWeightSemiBold);
 
   border-radius: 4px;
@@ -86,7 +85,7 @@
   margin-bottom: 0;
 }
 .editVerificationButton {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   color: var(--matterColor);
   font-weight: var(--fontWeightNormal);
   min-height: 46px;
