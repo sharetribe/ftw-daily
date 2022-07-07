@@ -1,5 +1,4 @@
 @import '../../styles/customMediaQueries.css';
-@import '../../styles/propertySets.css';
 
 /* Animation for the hero elements */
 
@@ -30,7 +29,7 @@
 }
 
 .root {
-  @apply --backgroundImage;
+  composes: defaultBackgroundImage from global;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -61,7 +60,7 @@
 }
 
 .heroMainTitle {
-  @apply --marketplaceHeroTitleFontStyles;
+  composes: marketplaceHeroTitleFontStyles from global;
   color: var(--matterColorLight);
   composes: animation;
 
@@ -74,7 +73,7 @@
 }
 
 .heroSubTitle {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
 
   color: var(--matterColorLight);
   margin: 0 0 32px 0;
@@ -90,7 +89,7 @@
 }
 
 .heroButton {
-  @apply --marketplaceButtonStyles;
+  composes: button buttonFont buttonText buttonBorders buttonColors from global;
   composes: animation;
 
   @media (--viewportMedium) {
