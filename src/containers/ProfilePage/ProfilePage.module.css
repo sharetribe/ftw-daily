@@ -1,5 +1,4 @@
 @import '../../styles/customMediaQueries.css';
-@import '../../styles/propertySets.css';
 
 .error {
   margin-top: 5px;
@@ -99,7 +98,7 @@
 }
 
 .listingsContainer {
-  @apply --clearfix;
+  composes: clearfix from global;
   border-top: 1px solid var(--matterColorNegative);
   border-bottom: 1px solid var(--matterColorNegative);
   padding-bottom: 23px;
@@ -110,7 +109,7 @@
 }
 
 .listingsTitle {
-  @apply --marketplaceH3FontStyles;
+  composes: h3 from global;
   color: var(--matterColorAnti);
   margin-bottom: 0;
 
@@ -171,7 +170,7 @@
 }
 
 .mobileReviewsTitle {
-  @apply --marketplaceH3FontStyles;
+  composes: h3 from global;
   color: var(--matterColorAnti);
   margin: 24px 0 26px 0;
 }
@@ -194,7 +193,7 @@
 }
 
 .desktopReviewsTitle {
-  @apply --marketplaceH3FontStyles;
+  composes: h3 from global;
   margin-bottom: 0;
 }
 
