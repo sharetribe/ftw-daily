@@ -1,5 +1,3 @@
-@import '../../styles/propertySets.css';
-
 .root {
   display: inline-block;
 
@@ -9,8 +7,8 @@
 }
 
 .menuLabel {
-  @apply --marketplaceButtonStylesSecondary;
-  @apply --marketplaceSearchFilterLabelFontStyles;
+  composes: button marketplaceSearchFilterLabelFontStyles buttonText buttonBordersSecondary buttonColorsSecondary from global;
+  letter-spacing: 0.2px;
 
   padding: var(--marketplaceButtonSmallDesktopPadding);
   width: auto;
@@ -28,8 +26,8 @@
 }
 
 .menuLabelSelected {
-  @apply --marketplaceButtonStyles;
-  @apply --marketplaceSearchFilterLabelFontStyles;
+  composes: button marketplaceSearchFilterLabelFontStyles buttonText buttonBorders buttonColors from global;
+  letter-spacing: 0.2px;
   font-weight: var(--fontWeightSemiBold);
 
   padding: var(--marketplaceButtonSmallDesktopPadding);
@@ -74,7 +72,7 @@
 }
 
 .menuItem {
-  @apply --marketplaceListingAttributeFontStyles;
+  composes: marketplaceListingAttributeFontStyles from global;
   color: var(--matterColor);
 
   /* Layout */
@@ -101,7 +99,7 @@
 }
 
 .clearMenuItem {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   font-weight: var(--fontWeightMedium);
   color: var(--matterColorAnti);
 
