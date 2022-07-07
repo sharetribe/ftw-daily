@@ -1,5 +1,4 @@
 @import '../../styles/customMediaQueries.css';
-@import '../../styles/propertySets.css';
 
 .layoutWrapperMain {
   min-height: calc(100vh - var(--topbarHeight));
@@ -10,17 +9,14 @@
 }
 
 .root {
-  @apply --marketplaceModalRootStyles;
-
-  @media (--viewportMedium) {
-    @apply --backgroundImage;
-  }
+  composes: marketplaceModalRootStyles from global;
+  composes: defaultBackgroundImageForDesktop from global;
 }
 
 .content {
-  @apply --marketplaceModalBaseStyles;
+  composes: marketplaceModalBaseStyles from global;
 }
 
 .error {
-  @apply --marketplaceModalErrorStyles;
+  composes: marketplaceModalPasswordMargins from global;
 }
