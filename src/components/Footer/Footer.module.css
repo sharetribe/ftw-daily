@@ -1,5 +1,4 @@
 @import '../../styles/customMediaQueries.css';
-@import '../../styles/propertySets.css';
 
 .root {
   border-top-style: solid;
@@ -129,7 +128,7 @@
 
 .organizationDescription,
 .organizationCopyright {
-  @apply --marketplaceTinyFontStyles;
+  composes: marketplaceTinyFontStyles from global;
 }
 
 .organizationCopyright {
@@ -175,7 +174,7 @@
 
 .link {
   /* Font */
-  @apply --marketplaceH5FontStyles;
+  composes: h5 from global;
   line-height: 20px;
   color: var(--matterColor);
   transition: var(--transitionStyleButton);
@@ -263,7 +262,7 @@
 .privacy,
 .terms {
   /* Font */
-  @apply --marketplaceTinyFontStyles;
+  composes: marketplaceTinyFontStyles from global;
   color: var(--matterColorAnti);
   transition: var(--transitionStyleButton);
 
@@ -307,7 +306,7 @@
 
 .organizationCopyrightMobile {
   /* Font */
-  @apply --marketplaceTinyFontStyles;
+  composes: marketplaceTinyFontStyles from global;
   color: var(--matterColorAnti);
   transition: var(--transitionStyleButton);
 
