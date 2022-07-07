@@ -1,5 +1,4 @@
 @import '../../styles/customMediaQueries.css';
-@import '../../styles/propertySets.css';
 
 .inputRoot {
   /*
@@ -68,12 +67,16 @@
   }
 
   & :global(.DayPicker_weekHeader_li) {
-    @apply --marketplaceH5FontStyles;
+    font-weight: var(--fontWeightMedium);
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0;
 
     margin-top: 0;
     margin-bottom: 0;
 
     @media (--viewportMedium) {
+      line-height: 16px;
       margin-top: 0;
       margin-bottom: 0;
     }
@@ -85,10 +88,11 @@
 
   & :global(.CalendarMonth_caption) {
     color: var(--matterColor);
-    @apply --marketplaceH3FontStyles;
-    margin: 1px 0 14px;
     font-weight: 400;
+    font-size: 18px;
     line-height: 20px;
+
+    margin: 1px 0 14px;
     padding-top: 31px;
     padding-bottom: 37px;
 
@@ -111,13 +115,18 @@
   }
 
   & :global(.CalendarDay) {
-    @apply --marketplaceH4FontStyles;
+    font-weight: var(--fontWeightMedium);
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: 0;
+
     color: var(--matterColor);
     border: 0;
     margin-top: 0;
     margin-bottom: 0;
 
     @media (--viewportMedium) {
+      font-weight: var(--fontWeightMedium);
       margin-top: 0;
       margin-bottom: 0;
     }
