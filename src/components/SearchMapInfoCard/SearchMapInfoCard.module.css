@@ -1,5 +1,4 @@
 @import '../../styles/customMediaQueries.css';
-@import '../../styles/propertySets.css';
 
 .root {
   display: block;
@@ -30,6 +29,7 @@
 }
 
 .card {
+  composes: h5 from global;
   /**
    * Since caret is absolutely positioned,
    * label must have relative to be included to the same rendering layer
@@ -40,7 +40,6 @@
   min-height: 207px;
 
   /* Font */
-  @apply --marketplaceH5FontStyles;
   color: var(--matterColor);
 
   background-color: var(--matterColorLight);
@@ -114,7 +113,7 @@
 
 .paginationPage {
   /* Font */
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   font-weight: var(--fontWeightSemiBold);
   margin-top: 0;
   margin-bottom: 0;
