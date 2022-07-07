@@ -5,8 +5,8 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@babel/runtime": "^7.17.9",
-    "@loadable/component": "^5.14.1",
-    "@loadable/server": "^5.14.2",
+    "@loadable/component": "^5.15.2",
+    "@loadable/server": "^5.15.2",
     "@mapbox/polyline": "^1.1.1",
     "@sentry/browser": "^6.19.7",
     "@sentry/node": "^6.19.7",
@@ -55,11 +55,11 @@
     "react-redux": "^7.2.8",
     "react-router-dom": "^5.3.2",
     "react-with-direction": "^1.4.0",
-    "redux": "^4.1.2",
+    "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
     "seedrandom": "^3.0.5",
     "sharetribe-flex-sdk": "^1.17.0",
-    "sharetribe-scripts": "5.0.1",
+    "sharetribe-scripts": "6.0.0",
     "smoothscroll-polyfill": "^0.4.0",
     "source-map-support": "^0.5.21",
     "url": "^0.11.0"
@@ -120,7 +120,7 @@
     ]
   },
   "engines": {
-    "node": "^12.19.0 || >=14.15.0 <17"
+    "node": ">=14.15.0"
   },
   "prettier": {
     "singleQuote": true,
