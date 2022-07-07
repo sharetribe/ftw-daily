@@ -1,5 +1,4 @@
 @import '../../styles/customMediaQueries.css';
-@import '../../styles/propertySets.css';
 
 .root {
 }
@@ -19,7 +18,7 @@
 }
 
 .heading {
-  @apply --marketplaceH2FontStyles;
+  composes: h2 from global;
   margin: 20px 0 0 0;
 
   @media (--viewportMedium) {
@@ -37,7 +36,7 @@
   white-space: pre-line;
   margin: 18px 0 0 0;
   transition: all 1s ease-in;
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
 
   @media (--viewportMedium) {
     margin: 0;
@@ -59,13 +58,41 @@
 }
 
 .showMore {
-  @apply --marketplaceLinkStyles;
-  @apply --marketplaceH4FontStyles;
+  /* Position and dimensions */
+  display: inline;
+  padding: 0;
+
+  /* Borders */
+  border: none;
+
+  /* Colors */
+  color: var(--marketplaceColor);
+
+  /* Text size should be inherited */
+  text-decoration: none;
+
+  font-weight: var(--fontWeightMedium);
+  font-size: 15px;
+  line-height: 24px;
+  letter-spacing: 0;
+
   margin: 0 0 0 5px;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  @media (--viewportMedium) {
+    font-weight: var(--fontWeightMedium);
+    /* margin-top + n * line-height + margin-bottom => x * 8px */
+    margin-top: 17px;
+    margin-bottom: 15px;
+  }
 }
 
 .links {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   margin-top: 13px;
 
   @media (--viewportMedium) {
@@ -97,7 +124,7 @@
 }
 
 .editProfileDesktop {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   display: none;
   margin-bottom: 0;
   white-space: nowrap;
@@ -108,7 +135,7 @@
 }
 
 .editProfileMobile {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   display: inline;
 
   @media (--viewportMedium) {
@@ -117,7 +144,34 @@
 }
 
 .contact {
-  @apply --marketplaceLinkStyles;
-  @apply --marketplaceH4FontStyles;
+  /* Position and dimensions */
+  display: inline;
+  padding: 0;
+
+  /* Borders */
+  border: none;
+
+  /* Colors */
+  color: var(--marketplaceColor);
+
+  /* Text size should be inherited */
+  text-decoration: none;
+
+  font-weight: var(--fontWeightMedium);
+  font-size: 15px;
+  line-height: 24px;
+  letter-spacing: 0;
   margin: 0;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  @media (--viewportMedium) {
+    font-weight: var(--fontWeightMedium);
+    /* margin-top + n * line-height + margin-bottom => x * 8px */
+    margin-top: 17px;
+    margin-bottom: 15px;
+  }
 }
