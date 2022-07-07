@@ -1,5 +1,4 @@
 @import '../../styles/customMediaQueries.css';
-@import '../../styles/propertySets.css';
 
 .root {
   display: flex;
@@ -11,7 +10,7 @@
 }
 
 .lineItem {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   margin: 0;
 
   @media (--viewportMedium) {
@@ -41,7 +40,7 @@
 }
 
 .dayLabel {
-  @apply --marketplaceH5FontStyles;
+  composes: h5 from global;
   margin: 0;
   color: var(--matterColorAnti);
   line-height: 24px;
@@ -55,11 +54,11 @@
 }
 
 .dayInfo {
-  @apply --marketplaceButtonFontStyles;
+  composes: buttonFont from global;
 }
 
 .subTotalLineItem {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   font-weight: var(--fontWeightBold);
   margin: 0;
   padding: 5px 0 1px 0;
@@ -74,7 +73,7 @@
 }
 
 .lineItemTotal {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   margin: 0;
   padding-top: 6px;
   padding-bottom: 6px;
@@ -88,13 +87,21 @@
     padding-bottom: 2px;
   }
 }
+
+.smallFontStyles {
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeightMedium);
+  font-size: 14px;
+  line-height: 24px;
+}
+
 .itemLabel {
-  @apply --marketplaceSmallFontStyles;
+  composes: smallFontStyles;
   flex: 1;
 }
 
 .itemValue {
-  @apply --marketplaceSmallFontStyles;
+  composes: smallFontStyles;
   margin: 0 0 0 10px;
 }
 
@@ -113,17 +120,17 @@
 }
 
 .totalLabel {
-  @apply --marketplaceSmallFontStyles;
+  composes: smallFontStyles;
 }
 
 .totalPrice {
-  @apply --marketplaceButtonFontStyles;
+  composes: buttonFont from global;
   margin: 0 0 0 10px;
   padding-top: 0px;
 }
 
 .feeInfo {
-  @apply --marketplaceTinyFontStyles;
+  composes: marketplaceTinyFontStyles from global;
   flex-shrink: 0;
   margin: 0;
   color: var(--matterColorAnti);
