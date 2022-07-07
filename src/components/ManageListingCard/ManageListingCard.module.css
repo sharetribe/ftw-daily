@@ -1,5 +1,4 @@
 @import '../../styles/customMediaQueries.css';
-@import '../../styles/propertySets.css';
 
 .coverEverything {
   position: absolute;
@@ -41,7 +40,7 @@
   /* Positioning */
   composes: coverEverything;
   /* Fonts */
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   font-weight: var(--fontWeightSemiBold);
   color: var(--matterColorLight);
 
@@ -154,10 +153,20 @@
 }
 
 .menuItem {
-  @apply --marketplaceLinkStyles;
-  @apply --marketplaceH5FontStyles;
-  color: var(--matterColorLight);
+  display: inline;
+
+  /* Borders */
+  border: none;
+
+  /* Text size should be inherited */
+  text-decoration: none;
+
   font-weight: var(--fontWeightMedium);
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0;
+
+  color: var(--matterColorLight);
   white-space: nowrap;
   text-align: left;
   padding: 8px 14px;
@@ -171,9 +180,11 @@
   &:hover {
     text-decoration: none;
     background-color: var(--failColor);
+    cursor: pointer;
   }
 
   @media (--viewportMedium) {
+    line-height: 16px;
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -212,7 +223,7 @@
 
 .priceValue {
   /* Font */
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   color: var(--marketplaceColor);
   font-weight: var(--fontWeightSemiBold);
 
@@ -230,7 +241,7 @@
 
 .perUnit {
   /* Font */
-  @apply --marketplaceTinyFontStyles;
+  composes: marketplaceTinyFontStyles from global;
   color: var(--matterColor);
 
   /* Remove default margins from font */
@@ -260,9 +271,20 @@
 }
 
 .title {
-  @apply --marketplaceLinkStyles;
+  /* Position and dimensions */
+  display: inline;
+
+  /* Borders */
+  border: none;
+
+  /* Text size should be inherited */
+  text-decoration: none;
+
   /* Font */
-  @apply --marketplaceH3FontStyles;
+  font-weight: var(--fontWeightSemiBold);
+  font-size: 18px;
+  line-height: 24px;
+
   color: var(--matterColor);
   text-align: left;
 
@@ -272,6 +294,11 @@
   /* Remove default margins from font */
   margin-top: 0;
   margin-bottom: 0;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
 
   @media (--viewportMedium) {
     padding-top: 4px;
@@ -301,7 +328,7 @@
 }
 
 .edit {
-  @apply --marketplaceButtonStylesSecondary;
+  composes: button buttonFont buttonText buttonBordersSecondary buttonColorsSecondary from global;
 
   /* TODO: Odd font-size */
   font-size: 14px;
@@ -323,8 +350,23 @@
 
 .openListingButton,
 .finishListingDraftLink {
-  @apply --marketplaceButtonStylesPrimary;
-  @apply --marketplaceH5FontStyles;
+  composes: button buttonText buttonBorders buttonColorsPrimary from global;
+
+  font-family: 'poppins', Helvetica, Arial, sans-serif;
+  font-weight: var(--fontWeightMedium);
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0;
+  /* margin-top + n * line-height + margin-bottom => x * 6px */
+  margin-top: 10px;
+  margin-bottom: 8px;
+
+  @media (--viewportMedium) {
+    line-height: 16px;
+    /* margin-top + n * line-height + margin-bottom => x * 8px */
+    margin-top: 10px;
+    margin-bottom: 14px;
+  }
 
   /* Reset min-height from button styles */
   min-height: 0;
@@ -343,7 +385,7 @@
 }
 
 .manageLinks {
-  @apply --marketplaceH5FontStyles;
+  composes: h5 from global;
   line-height: 18px;
   padding-top: 2px;
   padding-bottom: 4px;
