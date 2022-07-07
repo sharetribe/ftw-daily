@@ -1,5 +1,3 @@
-@import '../../styles/propertySets.css';
-
 .root {
   position: relative;
   padding-top: 24px;
@@ -9,7 +7,7 @@
 
 .filterLabel,
 .filterLabelSelected {
-  @apply --marketplaceH3FontStyles;
+  composes: h3 from global;
 
   /* Baseline adjustment for label text */
   margin-top: 0;
@@ -35,7 +33,7 @@
 }
 
 .clearButton {
-  @apply --marketplaceH5FontStyles;
+  composes: h5 from global;
   font-weight: var(--fontWeightMedium);
   color: var(--matterColorAnti);
 
