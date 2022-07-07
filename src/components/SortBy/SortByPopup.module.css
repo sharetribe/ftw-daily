@@ -1,5 +1,4 @@
 @import '../../styles/customMediaQueries.css';
-@import '../../styles/propertySets.css';
 
 .root {
 }
@@ -15,8 +14,8 @@
 }
 
 .menuLabel {
-  @apply --marketplaceButtonStylesSecondary;
-  @apply --marketplaceSearchFilterLabelFontStyles;
+  composes: button marketplaceSearchFilterLabelFontStyles buttonText buttonBordersSecondary buttonColorsSecondary from global;
+  letter-spacing: 0.2px;
 
   padding: var(--marketplaceButtonSmallDesktopPadding);
   width: auto;
@@ -73,7 +72,7 @@
 }
 
 .menuItem {
-  @apply --marketplaceListingAttributeFontStyles;
+  composes: marketplaceListingAttributeFontStyles from global;
   color: var(--matterColor);
 
   /* Layout */
@@ -108,7 +107,7 @@
 }
 
 .clearMenuItem {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   font-weight: var(--fontWeightMedium);
   color: var(--matterColorAnti);
 
