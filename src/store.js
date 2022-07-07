@@ -1,5 +1,5 @@
-/* eslint-disable no-underscore-dangle */
-import { createStore, applyMiddleware, compose } from 'redux';
+// We create Redux store directly, instead of using any extra dependencies.
+import { legacy_createStore as createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import createReducer from './reducers';
 import * as analytics from './analytics/analytics';
