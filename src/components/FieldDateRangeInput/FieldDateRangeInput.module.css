@@ -1,5 +1,4 @@
 @import '../../styles/customMediaQueries.css';
-@import '../../styles/propertySets.css';
 
 .fieldRoot {
 }
@@ -13,7 +12,7 @@
 .startDateLabel,
 .endDateLabel {
   flex-basis: 50%;
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   font-weight: 600;
   color: var(--matterColor);
   margin-top: 0;
