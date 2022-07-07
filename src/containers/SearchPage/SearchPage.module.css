@@ -1,5 +1,4 @@
 @import '../../styles/customMediaQueries.css';
-@import '../../styles/propertySets.css';
 
 /* Can be given to Topbar when a modal is opened
  * so that the Topbar is not rendered on top of it.*/
@@ -132,8 +131,8 @@
 }
 
 .sortByMenuLabel {
-  @apply --marketplaceButtonStylesSecondary;
-  @apply --marketplaceTinyFontStyles;
+  composes: button marketplaceTinyFontStyles buttonText buttonBordersSecondary buttonColorsSecondary from global;
+  letter-spacing: 0.2px;
   font-weight: var(--fontWeightMedium);
 
   height: 35px;
