@@ -1,9 +1,24 @@
-@import '../../styles/propertySets.css';
-
 .ratingFieldSet {
   border: none;
   padding: 0;
   margin: 0;
+
+  & legend {
+    font-weight: var(--fontWeightSemiBold);
+    font-size: 18px;
+    line-height: 24px;
+    color: var(--matterColorAnti);
+
+    /* margin-top + n * line-height + margin-bottom => x * 6px */
+    margin-top: 16px;
+    margin-bottom: 14px;
+
+    @media (--viewportMedium) {
+      /* margin-top + n * line-height + margin-bottom => x * 8px */
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+  }
 }
 
 /* fieldset can't use flexbox hence this wrapper exists */
@@ -26,11 +41,6 @@
 .star {
   fill: var(--matterColorNegative);
   transition: var(--transitionStyleButton);
-}
-
-legend {
-  @apply --marketplaceH3FontStyles;
-  color: var(--matterColorAnti);
 }
 
 /***** CSS Magic to Highlight Stars on Hover *****/
