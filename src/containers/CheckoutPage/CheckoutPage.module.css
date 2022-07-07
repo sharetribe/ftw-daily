@@ -1,5 +1,4 @@
 @import '../../styles/customMediaQueries.css';
-@import '../../styles/propertySets.css';
 
 /* Dummy Topbar */
 
@@ -154,7 +153,6 @@
 
 .title {
   /* Font */
-  @apply --marketplaceH1FontStyles;
   color: var(--matterColor);
 
   /* Layout */
@@ -170,7 +168,7 @@
 
 .author {
   width: 100%;
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
 
   /* Reset margins from font styles */
   margin-top: 0;
@@ -303,7 +301,7 @@
 }
 
 .detailsSubtitle {
-  @apply --marketplaceH5FontStyles;
+  composes: h5 from global;
 
   /* Reset margins from font styles */
   margin-top: 0;
