@@ -1,5 +1,4 @@
 @import '../../styles/customMediaQueries.css';
-@import '../../styles/propertySets.css';
 
 .root {
   margin-top: 24px;
@@ -48,11 +47,11 @@
 }
 
 .error {
-  @apply --marketplaceModalErrorStyles;
+  composes: marketplaceModalPasswordMargins from global;
 }
 
 .termsText {
-  @apply --marketplaceModalHelperText;
+  composes: marketplaceModalHelperText from global;
   margin-bottom: 12px;
   text-align: center;
 
@@ -62,7 +61,7 @@
 }
 
 .termsLink {
-  @apply --marketplaceModalHelperLink;
+  composes: marketplaceModalHelperLink from global;
 
   &:hover {
     text-decoration: underline;
@@ -71,7 +70,20 @@
 }
 
 .bankDetailsStripeField p {
-  @apply --marketplaceH4FontStyles;
+  font-weight: var(--fontWeightMedium);
+  font-size: 15px;
+  line-height: 24px;
+  letter-spacing: 0;
+  /* margin-top + n * line-height + margin-bottom => x * 6px */
+  margin-top: 12px;
+  margin-bottom: 12px;
+
+  @media (--viewportMedium) {
+    font-weight: var(--fontWeightMedium);
+    /* margin-top + n * line-height + margin-bottom => x * 8px */
+    margin-top: 17px;
+    margin-bottom: 15px;
+  }
 }
 
 .missingStripeKey {
@@ -79,7 +91,7 @@
 }
 
 .accountInformationTitle {
-  @apply --marketplaceH3FontStyles;
+  composes: h3 from global;
   margin: 0;
   padding-top: 5px;
   padding-bottom: 1px;
