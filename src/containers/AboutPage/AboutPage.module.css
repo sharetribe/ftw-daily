@@ -1,5 +1,4 @@
 @import '../../styles/customMediaQueries.css';
-@import '../../styles/propertySets.css';
 
 .pageTitle {
   text-align: center;
@@ -52,7 +51,6 @@
 }
 
 .subtitle {
-  @apply --marketplaceH3FontStyles;
   margin-top: 32px;
   margin-bottom: 16px;
 }
