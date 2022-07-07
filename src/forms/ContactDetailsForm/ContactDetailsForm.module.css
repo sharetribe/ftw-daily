@@ -1,12 +1,11 @@
 @import '../../styles/customMediaQueries.css';
-@import '../../styles/propertySets.css';
 
 .root {
 }
 
 /* Shared styles for infoText variants */
 .infoText {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
 
   display: inline-block;
   padding-left: 18px;
@@ -134,7 +133,7 @@
 }
 
 .error {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   color: var(--failColor);
   text-align: center;
   display: inline-block;
