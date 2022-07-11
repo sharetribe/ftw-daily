@@ -1,4 +1,4 @@
-@import '../../styles/propertySets.css';
+@import '../../styles/customMediaQueries.css';
 
 .root {
   position: relative;
@@ -249,7 +249,7 @@
 }
 
 .detailCardSubtitle {
-  @apply --marketplaceH5FontStyles;
+  composes: h5 from global;
 
   margin-top: 0;
   margin-bottom: 0;
@@ -262,14 +262,14 @@
 
 /* AddressLinkMaybe subcomponent */
 .address {
-  @apply --marketplaceH5FontStyles;
+  composes: h5 from global;
   color: var(--matterColorAnti);
   margin: 0;
 }
 
 /* Passed-in props for AddressLinkMaybe subcomponent */
 .addressMobile {
-  @apply --marketplaceH5FontStyles;
+  composes: h5 from global;
   color: var(--matterColorAnti);
   margin: 0 24px 24px 24px;
 }
@@ -428,7 +428,7 @@
 }
 
 .actionError {
-  @apply --marketplaceH5FontStyles;
+  composes: h5 from global;
   color: var(--failColor);
   margin: 0 0 11px 0;
 

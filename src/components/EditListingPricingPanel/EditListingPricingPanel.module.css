@@ -1,3 +1,4 @@
+@import '../../styles/customMediaQueries.css';
 .root {
   flex-grow: 1;
   width: 100%;

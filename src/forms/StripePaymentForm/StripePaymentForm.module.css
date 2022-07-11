@@ -1,4 +1,4 @@
-@import '../../styles/propertySets.css';
+@import '../../styles/customMediaQueries.css';
 
 .root {
   display: flex;
@@ -6,7 +6,7 @@
 }
 
 .card {
-  @apply --marketplaceInputStyles;
+  composes: marketplaceInputStyles from global;
 
   /* Layout */
   padding: 8px 0 6px 0;
@@ -84,7 +84,8 @@
 }
 
 .saveForLaterUseLabel {
-  @apply --marketplaceH5FontStyles;
+  composes: h5 from global;
+
   color: var(--matterColor);
   margin-top: 3px;
   margin-bottom: 0px;
@@ -92,7 +93,8 @@
 }
 
 .saveForLaterUseLegalInfo {
-  @apply --marketplaceH5FontStyles;
+  composes: h5 from global;
+
   color: var(--matterColorAnti);
   display: inline-block;
   padding: 0px 0 0px 26px;
@@ -167,7 +169,8 @@
 }
 
 .paymentInfo {
-  @apply --marketplaceH5FontStyles;
+  composes: h5 from global;
+
   color: var(--matterColorAnti);
   text-align: center;
   padding: 0 42px;

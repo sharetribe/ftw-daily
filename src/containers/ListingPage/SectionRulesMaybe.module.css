@@ -1,4 +1,4 @@
-@import '../../styles/propertySets.css';
+@import '../../styles/customMediaQueries.css';
 
 .root {
   padding: 0 24px;
@@ -12,7 +12,7 @@
 
 .title {
   /* Font */
-  @apply --marketplaceH3FontStyles;
+  composes: h3 from global;
   color: var(--matterColorAnti);
 
   margin-top: 0;

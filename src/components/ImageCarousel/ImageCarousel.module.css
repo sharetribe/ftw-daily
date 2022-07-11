@@ -1,4 +1,4 @@
-@import '../../styles/propertySets.css';
+@import '../../styles/customMediaQueries.css';
 
 :global(.image-gallery-content),
 :global(.image-gallery-slide-wrapper),
@@ -136,7 +136,7 @@
 
 .imageIndex {
   /* Fonts */
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   font-weight: var(--fontWeightSemiBold);
 
   /* Position and dimensions */

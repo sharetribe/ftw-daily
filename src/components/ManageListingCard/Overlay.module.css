@@ -1,4 +1,4 @@
-@import '../../styles/propertySets.css';
+@import '../../styles/customMediaQueries.css';
 
 .coverEverything {
   position: absolute;
@@ -23,7 +23,7 @@
 }
 
 .overlayContent {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   color: var(--matterColor);
 
   /* Positioning */

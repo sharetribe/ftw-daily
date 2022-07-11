@@ -1,15 +1,18 @@
-@import '../../styles/propertySets.css';
+@import '../../styles/customMediaQueries.css';
 
 .root {
-  @apply --marketplaceH5FontStyles;
+  composes: h5 from global;
+
   margin-top: 0;
   margin-bottom: 0;
   overflow-x: hidden;
   z-index: 0;
 
   & :global(.CalendarMonth_caption) {
-    @apply --marketplaceH3FontStyles;
     font-weight: var(--fontWeightMedium);
+    font-size: 18px;
+    line-height: 24px;
+
     text-align: left;
     padding-top: 18px;
     padding-bottom: 55px;
@@ -17,6 +20,12 @@
     margin-left: 97px;
     margin-top: 0;
     margin-bottom: 0;
+
+    @media (--viewportMedium) {
+      /* margin-top + n * line-height + margin-bottom => x * 8px */
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
 
     & strong {
       font-weight: 500;
@@ -38,7 +47,20 @@
     top: 65px;
 
     & small {
-      @apply --marketplaceH5FontStyles;
+      font-weight: var(--fontWeightMedium);
+      font-size: 14px;
+      line-height: 18px;
+      letter-spacing: 0;
+      /* margin-top + n * line-height + margin-bottom => x * 6px */
+      margin-top: 10px;
+      margin-bottom: 8px;
+
+      @media (--viewportMedium) {
+        line-height: 16px;
+        /* margin-top + n * line-height + margin-bottom => x * 8px */
+        margin-top: 10px;
+        margin-bottom: 14px;
+      }
     }
   }
   & :global(.DayPicker_weekHeader_li) {
@@ -259,7 +281,7 @@
 }
 
 .error {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   color: var(--failColor);
   margin: 6px 0 24px 0;
 }
@@ -307,7 +329,7 @@
 }
 
 .legendText {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   white-space: nowrap;
   margin: 0;
 }

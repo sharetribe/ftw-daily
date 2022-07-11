@@ -1,5 +1,4 @@
 @import '../../styles/customMediaQueries.css';
-@import '../../styles/propertySets.css';
 
 /* 404 page */
 
@@ -24,7 +23,7 @@
 }
 
 .number {
-  @apply --marketplaceHeroTitleFontStyles;
+  composes: marketplaceHeroTitleFontStyles from global;
   text-align: center;
   color: var(--marketplaceColor);
   margin: 1px 0 0 0;
@@ -35,7 +34,7 @@
 }
 
 .heading {
-  @apply --marketplaceModalTitleStyles;
+  composes: marketplaceModalTitleStyles from global;
   text-align: center;
   margin-top: 16px;
 

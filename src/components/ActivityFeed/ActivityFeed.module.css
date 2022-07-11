@@ -1,17 +1,17 @@
-@import '../../styles/propertySets.css';
+@import '../../styles/customMediaQueries.css';
 
 .root {
   margin: 0;
 
   /* Clearfix */
-  @apply --clearfix;
+  composes: clearfix from global;
 }
 
 .messageItem {
   margin-bottom: 20px;
 
   /* Clearfix */
-  @apply --clearfix;
+  composes: clearfix from global;
 
   @media (--viewportMedium) {
     margin-bottom: 17px;
@@ -48,12 +48,12 @@
 }
 
 .ownMessageContentWrapper {
-  @apply --clearfix;
+  composes: clearfix from global;
 }
 
 .messageContent,
 .ownMessageContent {
-  @apply --marketplaceMessageFontStyles;
+  composes: marketplaceMessageFontStyles from global;
 
   display: inline-block;
   margin: 0;
@@ -79,7 +79,7 @@
 
 .messageDate,
 .ownMessageDate {
-  @apply --marketplaceMessageDateFontStyles;
+  composes: marketplaceMessageDateFontStyles from global;
 
   margin: 11px 0 0 0;
   color: var(--matterColorAnti);
@@ -97,7 +97,7 @@
   margin-bottom: 18px;
 
   /* Clearfix */
-  @apply --clearfix;
+  composes: clearfix from global;
 
   @media (--viewportMedium) {
     margin-bottom: 16px;
@@ -119,12 +119,12 @@
 }
 
 .transitionContent {
-  @apply --marketplaceTxTransitionFontStyles;
+  composes: marketplaceTxTransitionFontStyles from global;
   margin: 0;
 }
 
 .transitionDate {
-  @apply --marketplaceMessageDateFontStyles;
+  composes: marketplaceMessageDateFontStyles from global;
   color: var(--matterColorAnti);
   margin: 7px 0 0 0;
 
@@ -138,7 +138,7 @@
 }
 
 .reviewContent {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   font-style: italic;
   white-space: pre-line;
   margin: 8px 0 0 0;

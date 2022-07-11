@@ -1,19 +1,18 @@
-@import '../../styles/propertySets.css';
-
 .buttonLink {
-  @apply --marketplaceButtonStyles;
+  composes: button buttonFont buttonText buttonBorders buttonColors from global;
 }
 
 .buttonLinkPrimary {
-  @apply --marketplaceButtonStylesPrimary;
+  composes: button buttonFont buttonText buttonBorders buttonColorsPrimary from global;
 }
 
 .buttonLinkSecondary {
-  @apply --marketplaceButtonStylesSecondary;
+  composes: button buttonFont buttonText buttonBordersSecondary buttonColorsSecondary from global;
 }
 
 .customButton {
-  @apply --marketplaceButtonStyles;
+  composes: button buttonFont buttonText buttonBorders buttonColors from global;
+
   padding: 0;
   border-radius: 8px;
   height: 100px;

@@ -1,4 +1,4 @@
-@import '../../styles/propertySets.css';
+@import '../../styles/customMediaQueries.css';
 
 .root {
   /* Layout */
@@ -59,7 +59,7 @@
 
 .priceValue {
   /* Font */
-  @apply --marketplaceH3FontStyles;
+  composes: h2 from global;
 
   /* Remove default margins from font */
   margin-top: 0;
@@ -73,7 +73,7 @@
 
 .perUnit {
   /* Font */
-  @apply --marketplaceTinyFontStyles;
+  composes: marketplaceTinyFontStyles from global;
   color: var(--matterColor);
 
   /* Remove default margins from font */
@@ -93,7 +93,7 @@
 
 .title {
   /* Font */
-  @apply --marketplaceH3FontStyles;
+  composes: h3 from global;
   color: var(--matterColor);
 
   /* Remove default margins from font */
@@ -108,7 +108,7 @@
 
 .authorInfo {
   /* Font */
-  @apply --marketplaceTinyFontStyles;
+  composes: marketplaceTinyFontStyles from global;
   color: var(--matterColor);
 
   /* Remove default margins from font */

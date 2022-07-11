@@ -1,4 +1,4 @@
-@import '../../styles/propertySets.css';
+@import '../../styles/customMediaQueries.css';
 
 .root {
   display: flex;
@@ -52,7 +52,7 @@
 }
 
 .sideBarError {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   color: var(--failColor);
   margin: 0 24px 12px 24px;
 
@@ -62,7 +62,7 @@
 }
 
 .smallPrint {
-  @apply --marketplaceTinyFontStyles;
+  composes: marketplaceTinyFontStyles from global;
   color: var(--matterColorAnti);
   text-align: center;
   margin: auto 24px 20px 24px;

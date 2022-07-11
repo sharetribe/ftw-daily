@@ -1,4 +1,4 @@
-@import '../../styles/propertySets.css';
+@import '../../styles/customMediaQueries.css';
 
 /* Content is visible as modal layer */
 .isOpen {
@@ -7,7 +7,8 @@
 
   /* scrollLayer is the .root for the Modal */
   & .scrollLayer {
-    @apply --marketplaceModalRootStyles;
+    flex-grow: 1;
+    display: flex;
 
     /* Add default background color to avoid bouncing scroll showing the
    page contents from behind the modal. */
@@ -19,6 +20,8 @@
     -webkit-overflow-scrolling: touch;
 
     @media (--viewportMedium) {
+      justify-content: center;
+      align-items: flex-start;
       padding: 0;
       background-color: rgba(0, 0, 0, 0.4);
       background-image: none;
@@ -26,14 +29,33 @@
   }
 
   & .container {
-    @apply --marketplaceModalBaseStyles;
+    flex-grow: 1;
+
+    /* Create context so the close button can be positioned within it */
+    position: relative;
+
+    /* Display and dimensions */
+    display: flex;
+    flex-direction: column;
+    padding: var(--modalPadding);
+
+    background-color: var(--matterColorLight);
+    border-radius: var(--borderRadius);
+    border-bottom: none;
+
     min-height: 100vh;
     height: 100%;
 
     @media (--viewportMedium) {
       flex-basis: 576px;
+      flex-grow: 0;
       min-height: auto;
       height: auto;
+
+      padding: var(--modalPaddingMedium);
+      margin-top: 12.5vh;
+      margin-bottom: 12.5vh;
+      border-bottom: 8px solid var(--marketplaceColor);
     }
   }
 }
@@ -77,15 +99,15 @@
 }
 
 .close {
-  @apply --marketplaceModalCloseStyles;
+  composes: marketplaceModalCloseStyles from global;
 }
 
 .closeText {
-  @apply --marketplaceModalCloseText;
+  composes: marketplaceModalCloseText from global;
 }
 
 .closeIcon {
-  @apply --marketplaceModalCloseIcon;
+  composes: marketplaceModalCloseIcon from global;
 }
 
 .closeLight {

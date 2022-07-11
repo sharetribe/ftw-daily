@@ -2,7 +2,7 @@ version: 2
 jobs:
   format:
     docker:
-      - image: circleci/node:12.20
+      - image: cimg/node:14.19
     steps:
       - checkout
       - restore_cache:
@@ -25,7 +25,7 @@ jobs:
           command: yarn run format-ci
   test:
     docker:
-      - image: circleci/node:12.20
+      - image: cimg/node:14.19
     steps:
       - checkout
       - restore_cache:
@@ -48,7 +48,7 @@ jobs:
           command: yarn run test-ci
   build:
     docker:
-      - image: circleci/node:12.20
+      - image: cimg/node:14.19
     steps:
       - checkout
       - restore_cache:
@@ -71,7 +71,7 @@ jobs:
           command: yarn run build
   audit:
     docker:
-      - image: circleci/node:12.20
+      - image: cimg/node:14.19
     steps:
       - checkout
       - restore_cache:

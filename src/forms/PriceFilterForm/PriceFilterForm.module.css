@@ -1,4 +1,4 @@
-@import '../../styles/propertySets.css';
+@import '../../styles/customMediaQueries.css';
 
 .root {
   display: none;
@@ -62,7 +62,8 @@
 }
 
 .label {
-  @apply --marketplaceH5FontStyles;
+  composes: h5 from global;
+
   font-weight: var(--fontWeightSemiBold);
   padding: 11px 0 13px 0;
   margin: 0 18px 0 0;
@@ -82,7 +83,7 @@
 }
 
 .minPrice {
-  @apply --marketplaceSearchFilterSublabelFontStyles;
+  composes: marketplaceSearchFilterSublabelFontStyles from global;
   width: 48px;
   text-align: center;
   border-bottom-color: var(--attentionColor);
@@ -100,7 +101,7 @@
   }
 }
 .maxPrice {
-  @apply --marketplaceSearchFilterSublabelFontStyles;
+  composes: marketplaceSearchFilterSublabelFontStyles from global;
   width: 48px;
   text-align: center;
   border-bottom-color: var(--attentionColor);
@@ -143,7 +144,7 @@
 }
 
 .clearButton {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   font-weight: var(--fontWeightMedium);
   color: var(--matterColorAnti);
 
@@ -164,7 +165,7 @@
 }
 
 .cancelButton {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   font-weight: var(--fontWeightMedium);
   color: var(--matterColorAnti);
 
@@ -190,7 +191,7 @@
 }
 
 .submitButton {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   font-weight: var(--fontWeightMedium);
   color: var(--marketplaceColor);
 

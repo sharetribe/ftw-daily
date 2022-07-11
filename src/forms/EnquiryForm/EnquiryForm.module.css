@@ -1,4 +1,4 @@
-@import '../../styles/propertySets.css';
+@import '../../styles/customMediaQueries.css';
 
 .root {
 }
@@ -13,7 +13,7 @@
 }
 
 .heading {
-  @apply --marketplaceModalTitleStyles;
+  composes: marketplaceModalTitleStyles from global;
 }
 
 .field {

@@ -1,5 +1,4 @@
 @import '../../styles/customMediaQueries.css';
-@import '../../styles/propertySets.css';
 
 .layoutWrapperMain {
   min-height: calc(100vh - var(--topbarHeight));
@@ -10,15 +9,12 @@
 }
 
 .root {
-  @apply --marketplaceModalRootStyles;
-
-  @media (--viewportMedium) {
-    @apply --backgroundImage;
-  }
+  composes: marketplaceModalRootStyles from global;
+  composes: defaultBackgroundImageForDesktop from global;
 }
 
 .content {
-  @apply --marketplaceModalBaseStyles;
+  composes: marketplaceModalBaseStyles from global;
   padding-top: 29px;
 }
 
@@ -31,7 +27,7 @@
 }
 
 .tab {
-  @apply --marketplaceModalTitleStyles;
+  composes: marketplaceModalTitleStyles from global;
   margin-top: 0;
   margin-bottom: 0;
 
@@ -86,7 +82,7 @@
 }
 
 .bottomWrapper {
-  @apply --marketplaceModalBottomWrapper;
+  composes: marketplaceModalBottomWrapper from global;
 
   /* Align the helper links to the left since there isn't a Primary Button anymore */
   text-align: left;
@@ -105,7 +101,7 @@
 }
 
 .termsHeading {
-  @apply --marketplaceH1FontStyles;
+  composes: h1 from global;
   margin: 0 0 19px 0;
 
   @media (--viewportMedium) {
@@ -126,30 +122,30 @@
 /* ================ Close icon ================ */
 
 .verifyClose {
-  @apply --marketplaceModalCloseStyles;
+  composes: marketplaceModalCloseStyles from global;
 
   /* This is not a real modal, z-index should not be modal's z-index */
   z-index: 1;
 }
 
 .closeText {
-  @apply --marketplaceModalCloseText;
+  composes: marketplaceModalCloseText from global;
 }
 
 .closeIcon {
-  @apply --marketplaceModalCloseIcon;
+  composes: marketplaceModalCloseIcon from global;
 }
 
 /* ================ Typography ================ */
 
 /* Title of the modal */
 .modalTitle {
-  @apply --marketplaceModalTitleStyles;
+  composes: marketplaceModalTitleStyles from global;
 }
 
 /* Paragraph for the Modal */
 .modalMessage {
-  @apply --marketplaceModalParagraphStyles;
+  composes: marketplaceModalParagraphStyles from global;
 }
 
 /* Make the email pop */
@@ -159,17 +155,17 @@
 
 /* Helper links */
 .modalHelperLink {
-  @apply --marketplaceLinkStyles;
-  @apply --marketplaceModalHelperLink;
+  composes: a from global;
+  composes: marketplaceModalHelperLink from global;
 }
 
 /* Helper texts for the links, not the actual links */
 .modalHelperText {
-  @apply --marketplaceModalHelperText;
+  composes: marketplaceModalHelperText from global;
 }
 
 .modalIcon {
-  @apply --marketplaceModalIconStyles;
+  composes: marketplaceModalIconStyles from global;
 
   /* Align the icon and rest of the content in the modal. Sign & Login doesn't use an icon, maybe we should add one? */
   margin-top: 47px;
@@ -182,13 +178,13 @@
 /* ================ Errors ================ */
 
 .error {
-  @apply --marketplaceModalErrorStyles;
+  composes: marketplaceModalPasswordMargins from global;
 }
 
 /* ================ Social logins & SSO ================ */
 
 .signupWithIdpTitle {
-  @apply --marketplaceModalTitleStyles;
+  composes: marketplaceModalTitleStyles from global;
   margin-top: 0;
   margin-bottom: 0;
   padding-top: 16px;
@@ -200,7 +196,7 @@
 }
 
 .confirmInfoText {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
 }
 
 .buttonIcon {

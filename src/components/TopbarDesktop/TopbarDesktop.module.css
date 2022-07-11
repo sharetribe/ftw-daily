@@ -1,4 +1,4 @@
-@import '../../styles/propertySets.css';
+@import '../../styles/customMediaQueries.css';
 
 /* Desktop */
 .root {
@@ -26,7 +26,9 @@
 
 /* logo */
 .logoLink {
-  @apply --TopbarDesktop_linkHover;
+  border-bottom: 0px solid;
+  transition: var(--transitionStyleButton);
+
   flex-shrink: 0;
   padding: 21px 24px 21px 24px;
   height: 100%;
@@ -34,6 +36,11 @@
   @media (--viewportLarge) {
     padding: 21px 36px 21px 36px;
   }
+}
+.logoLink:hover {
+  border-bottom: 4px solid var(--marketplaceColor);
+  border-radius: 0;
+  text-decoration: none;
 }
 
 .logo {
@@ -63,9 +70,19 @@
 }
 
 .search {
-  @apply --marketplaceH4FontStyles;
-  @apply --TopbarDesktop_label;
+  font-weight: var(--fontWeightMedium);
+  font-size: 15px;
+  line-height: 24px;
+  letter-spacing: 0;
   color: var(--matterColor);
+
+  display: inline-block;
+  margin: 28px 0;
+  text-decoration: inherit;
+
+  @media (--viewportMedium) {
+    font-weight: var(--fontWeightMedium);
+  }
 }
 
 .topbarSearchWithLeftPadding {
@@ -79,8 +96,13 @@
 
 /* Create listing (CTA for providers) */
 .createListingLink {
-  @apply --TopbarDesktop_linkHover;
-  @apply --marketplaceH5FontStyles;
+  border-bottom: 0px solid;
+  transition: var(--transitionStyleButton);
+
+  font-weight: var(--fontWeightMedium);
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0;
 
   flex-shrink: 0;
   height: 100%;
@@ -91,22 +113,42 @@
 
   &:hover {
     color: var(--marketplaceColorDark);
+    border-bottom: 4px solid var(--marketplaceColor);
+    border-radius: 0;
+    text-decoration: none;
   }
 
   @media (--viewportMedium) {
+    line-height: 16px;
     margin-top: 0;
     margin-bottom: 0;
   }
 }
 
+.topbarDesktopLabel {
+  display: inline-block;
+  margin: 28px 0;
+  text-decoration: inherit;
+
+  @media (--viewportMedium) {
+    margin: 28px 0;
+  }
+}
+
 .createListing {
-  @apply --TopbarDesktop_label;
+  composes: topbarDesktopLabel;
 }
 
 /* Inbox */
 .inboxLink {
-  @apply --TopbarDesktop_linkHover;
-  @apply --marketplaceH5FontStyles;
+  border-bottom: 0px solid;
+  transition: var(--transitionStyleButton);
+
+  font-weight: var(--fontWeightMedium);
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0;
+
   height: 100%;
   padding: 0 12px 0 12px;
   margin-top: 0;
@@ -115,16 +157,20 @@
 
   &:hover {
     color: var(--matterColorDark);
+    border-bottom: 4px solid var(--marketplaceColor);
+    border-radius: 0;
+    text-decoration: none;
   }
 
   @media (--viewportMedium) {
+    line-height: 16px;
     margin-top: 0;
     margin-bottom: 0;
   }
 }
 
 .inbox {
-  @apply --TopbarDesktop_label;
+  composes: topbarDesktopLabel;
   position: relative;
 }
 
@@ -165,13 +211,21 @@
 
 /* Profile menu */
 .profileMenuLabel {
-  @apply --TopbarDesktop_linkHover;
+  border-bottom: 0px solid;
+  transition: var(--transitionStyleButton);
+
   flex-shrink: 0;
   display: flex;
   align-items: center;
   height: 100%;
   margin: 0;
   padding: 0 12px 0 12px;
+
+  &:hover {
+    border-bottom: 4px solid var(--marketplaceColor);
+    border-radius: 0;
+    text-decoration: none;
+  }
 
   &:active {
     border-bottom: 0;
@@ -195,7 +249,9 @@
 
 /* Authentication */
 .signupLink {
-  @apply --TopbarDesktop_linkHover;
+  border-bottom: 0px solid;
+  transition: var(--transitionStyleButton);
+
   flex-shrink: 0;
   height: 100%;
   padding: 0 12px 0 12px;
@@ -204,11 +260,16 @@
 
   &:hover {
     color: var(--matterColorDark);
+    border-bottom: 4px solid var(--marketplaceColor);
+    border-radius: 0;
+    text-decoration: none;
   }
 }
 
 .loginLink {
-  @apply --TopbarDesktop_linkHover;
+  border-bottom: 0px solid;
+  transition: var(--transitionStyleButton);
+
   flex-shrink: 0;
   height: 100%;
   padding: 0 12px 0 12px;
@@ -217,13 +278,23 @@
 
   &:hover {
     color: var(--matterColorDark);
+    border-bottom: 4px solid var(--marketplaceColor);
+    border-radius: 0;
+    text-decoration: none;
   }
 }
 
 .signup,
 .login {
-  @apply --marketplaceH5FontStyles;
-  @apply --TopbarDesktop_label;
+  composes: h5 from global;
+
+  display: inline-block;
+  margin: 28px 0;
+  text-decoration: inherit;
+
+  @media (--viewportMedium) {
+    margin: 28px 0;
+  }
 }
 
 /* left animated "border" like hover element */
@@ -238,7 +309,7 @@
 
 .profileSettingsLink,
 .yourListingsLink {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
   position: relative;
   display: block;
 
@@ -268,10 +339,16 @@
 }
 
 .logoutButton {
-  @apply --marketplaceLinkStyles;
+  display: inline;
+
+  /* Text size should be inherited */
+  text-decoration: none;
+
   /* Font is specific to this component */
-  @apply --marketplaceH5FontStyles;
+  font-weight: var(--fontWeightMedium);
   font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0;
 
   /* Dimensions */
   position: relative;
@@ -285,11 +362,15 @@
   text-align: left;
   white-space: nowrap;
   transition: var(--transitionStyleButton);
+
+  /* Borders */
+  border: none;
   border-top-width: 1px;
   border-top-style: solid;
   border-top-color: var(--matterColorNegative);
 
   &:hover {
+    cursor: pointer;
     color: var(--matterColorDark);
     text-decoration: none;
 
@@ -302,6 +383,7 @@
   }
 
   @media (--viewportMedium) {
+    line-height: 16px;
     margin-top: 20px;
     margin-bottom: 0;
   }

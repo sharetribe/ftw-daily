@@ -1,5 +1,3 @@
-@import '../../styles/propertySets.css';
-
 .root {
   position: relative;
 }
@@ -81,7 +79,7 @@
 .text {
 }
 .textRoot {
-  @apply --marketplaceListingAttributeFontStyles;
+  composes: marketplaceListingAttributeFontStyles from global;
   color: var(--matterColor);
   margin-top: -1px;
   margin-bottom: 1px;

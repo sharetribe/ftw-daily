@@ -41,10 +41,6 @@ const MarketplaceColors = () => {
         Marketplace colors have three groups: branding color and its variations, action colors, and
         grey palette for fine tuning UI elements.
       </p>
-      <p className={css.spacing2x}>
-        N.B. you should import marketplace.css where ever you are going to use marketplace variables
-        (e.g. <i>@import '../../styles/propertySets.css';</i>).
-      </p>
       <div className={css.colorsContainer}>
         <div className={css.colorsGroup}>
           <ColorCard

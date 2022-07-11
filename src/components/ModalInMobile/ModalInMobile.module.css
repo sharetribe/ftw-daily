@@ -1,4 +1,4 @@
-@import '../../styles/propertySets.css';
+@import '../../styles/customMediaQueries.css';
 
 /* ModalInMobile is visible by default */
 .root {
@@ -11,7 +11,7 @@
 }
 
 .modalContainer {
-  @apply --marketplaceModalInMobileBaseStyles;
+  composes: marketplaceModalInMobileBaseStyles from global;
 
   @media (--viewportMedium) {
     flex-basis: 576px;

@@ -1,4 +1,4 @@
-@import '../../styles/propertySets.css';
+@import '../../styles/customMediaQueries.css';
 
 .inputRoot {
   /* Contain repainting to this component only */
@@ -28,16 +28,36 @@
   }
 
   & :global(.DateInput_input) {
-    @apply --marketplaceDefaultFontStyles;
-    @apply --marketplaceInputStyles;
+    font-family: var(--fontFamily);
+    font-weight: var(--fontWeightMedium);
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: -0.1px;
+
+    /* Dimensions */
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 5px 0 5px 0;
+
+    /* Borders */
+    border: none;
+    border-radius: 0;
     border-bottom-style: solid;
     border-bottom-width: 2px;
     border-bottom-color: var(--attentionColor);
+
     transition: border-bottom-color var(--transitionStyle);
     transition: all 0.15s ease-out;
     background: none;
 
+    &::placeholder {
+      color: var(--matterColorAnti);
+    }
+
     @media (--viewportMedium) {
+      font-size: 16px;
+      line-height: 32px;
       padding: 4px 0 9px 0;
       border-bottom-width: 3px;
     }
@@ -99,12 +119,15 @@
   }
 
   & :global(.CalendarMonth_caption) {
-    color: var(--matterColorLight);
-    @apply --marketplaceH2FontStyles;
-    margin: 1px 0 14px;
     font-weight: 400;
+    font-size: 21px;
+    line-height: 24px;
+    color: var(--matterColorLight);
+
+    margin: 1px 0 14px;
 
     @media (--viewportMedium) {
+      line-height: 32px;
       margin-top: 0;
       margin-bottom: 0;
     }
@@ -118,13 +141,18 @@
     height: 100%;
   }
   & :global(.CalendarDay) {
-    @apply --marketplaceH4FontStyles;
+    font-weight: var(--fontWeightMedium);
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: 0;
+
     color: var(--matterColorLight);
     border: 0;
     margin-top: 0;
     margin-bottom: 0;
 
     @media (--viewportMedium) {
+      font-weight: var(--fontWeightMedium);
       margin-top: 0;
       margin-bottom: 0;
     }

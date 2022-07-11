@@ -14,8 +14,12 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2022-XX-XX
 
-- [change] ImageCarousel uses react-image-gallery. It renders all the images early on and supports touch swipes.
-  [#1529](https://github.com/sharetribe/ftw-daily/pull/1529)
+- [change] sharetribe-scripts is updated to v6.0.0. This causes a new major release for FTW
+  templates. Because most of the CSS files need to be updated!
+  [#1531](https://github.com/sharetribe/ftw-daily/pull/1531)
+
+- [change] ImageCarousel uses react-image-gallery. It renders all the images early on and supports
+  touch swipes. [#1529](https://github.com/sharetribe/ftw-daily/pull/1529)
 - [fix] Fixing a small typo. [#1518](https://github.com/sharetribe/ftw-daily/pull/1518)
 
 ## [v8.6.2] 2022-05-19

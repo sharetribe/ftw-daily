@@ -1,4 +1,4 @@
-@import '../../styles/propertySets.css';
+@import '../../styles/customMediaQueries.css';
 
 .root {
   width: 100%;
@@ -25,7 +25,7 @@
 }
 
 .noImageText {
-  @apply --marketplaceH6FontStyles;
+  composes: h6 from global;
   color: var(--matterColor);
   padding-bottom: 24px;
 

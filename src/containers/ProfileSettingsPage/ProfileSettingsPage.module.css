@@ -1,5 +1,4 @@
 @import '../../styles/customMediaQueries.css';
-@import '../../styles/propertySets.css';
 
 .root {
   background-color: var(--matterColorLight);
@@ -25,8 +24,23 @@
 }
 
 .profileLink {
-  @apply --marketplaceButtonStylesSecondary;
-  @apply --marketplaceH5FontStyles;
+  composes: button buttonText buttonBordersSecondary buttonColorsSecondary from global;
+
+  font-family: 'poppins', Helvetica, Arial, sans-serif;
+  font-weight: var(--fontWeightMedium);
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0;
+  /* margin-top + n * line-height + margin-bottom => x * 6px */
+  margin-top: 10px;
+  margin-bottom: 8px;
+
+  @media (--viewportMedium) {
+    line-height: 16px;
+    /* margin-top + n * line-height + margin-bottom => x * 8px */
+    margin-top: 10px;
+    margin-bottom: 14px;
+  }
 
   display: inline-block;
   width: auto;

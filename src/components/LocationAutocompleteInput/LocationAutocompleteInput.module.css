@@ -1,4 +1,4 @@
-@import '../../styles/propertySets.css';
+@import '../../styles/customMediaQueries.css';
 
 .root {
   position: relative;
@@ -89,7 +89,7 @@ bottom of the container.
 
 /* List of predictions, with a responsive padding size */
 .predictions {
-  @apply --marketplaceBodyFontStyles;
+  composes: marketplaceBodyFontStyles from global;
 
   margin: 0;
   padding: 14px 0;
@@ -121,7 +121,7 @@ bottom of the container.
 }
 
 .currentLocation {
-  @apply --marketplaceH4FontStyles;
+  composes: h4 from global;
 }
 
 .currentLocationIcon {

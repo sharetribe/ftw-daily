@@ -1,4 +1,4 @@
-@import '../../styles/propertySets.css';
+@import '../../styles/customMediaQueries.css';
 
 .root {
   width: 100%;
@@ -43,7 +43,7 @@
 .menu,
 .searchMenu {
   /* Font */
-  @apply --marketplaceH5FontStyles;
+  composes: h5 from global;
   color: var(--matterColor);
 
   /* Layout */
@@ -152,7 +152,7 @@
 /* ================ Modal ================ */
 
 .modalContainer {
-  @apply --marketplaceModalInMobileBaseStyles;
+  composes: marketplaceModalInMobileBaseStyles from global;
   padding: 0;
 
   @media (--viewportMedium) {
@@ -161,18 +161,18 @@
 }
 
 .missingInformationModal {
-  @apply --marketplaceModalBaseStyles;
+  composes: marketplaceModalBaseStyles from global;
   padding-top: 70px;
 }
 
 /* Title of the modal */
 .modalTitle {
-  @apply --marketplaceModalTitleStyles;
+  composes: marketplaceModalTitleStyles from global;
 }
 
 /* Paragraph for the Modal */
 .modalMessage {
-  @apply --marketplaceModalParagraphStyles;
+  composes: marketplaceModalParagraphStyles from global;
 }
 
 /* Make the email pop */
@@ -181,30 +181,30 @@
 }
 
 .helperLink {
-  @apply --marketplaceModalHelperLink;
+  composes: marketplaceModalHelperLink from global;
 }
 
 .helperText {
-  @apply --marketplaceModalHelperText;
+  composes: marketplaceModalHelperText from global;
 }
 
 .error {
-  @apply --marketplaceModalErrorStyles;
+  composes: marketplaceModalPasswordMargins from global;
 }
 
 .bottomWrapper {
-  @apply --marketplaceModalBottomWrapper;
+  composes: marketplaceModalBottomWrapper from global;
 
   /* Align the helper links to the left since there isn't a Primary Button anymore */
   text-align: left;
 }
 
 .modalIcon {
-  @apply --marketplaceModalIconStyles;
+  composes: marketplaceModalIconStyles from global;
 }
 
 .reminderModalLinkButton {
-  @apply --marketplaceButtonStylesPrimary;
+  composes: button buttonFont buttonText buttonBorders buttonColorsPrimary from global;
 }
 
 .genericError {
@@ -248,7 +248,7 @@
 }
 
 .genericErrorText {
-  @apply --marketplaceH5FontStyles;
+  composes: h5 from global;
   font-weight: var(--fontWeightSemiBold);
   margin: 0;
   color: var(--matterColorLight);

@@ -1,4 +1,4 @@
-@import '../../styles/propertySets.css';
+@import '../../styles/customMediaQueries.css';
 
 .root {
   position: relative;
@@ -22,6 +22,7 @@
 }
 
 .priceLabel {
+  composes: h5 from global;
   /**
    * Since caret is absolutely positioned,
    * label must have relative to be included to the same rendering layer
@@ -29,7 +30,6 @@
   position: relative;
 
   /* Font */
-  @apply --marketplaceH5FontStyles;
   font-weight: var(--fontWeightSemiBold);
   color: var(--matterColor);
   letter-spacing: 0.1px;
