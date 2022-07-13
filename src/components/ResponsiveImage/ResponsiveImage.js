@@ -34,7 +34,7 @@
  */
 
 import React from 'react';
-import { arrayOf, string } from 'prop-types';
+import { arrayOf, oneOfType, string } from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage } from '../../util/reactIntl';
 import { propTypes } from '../../util/types';
@@ -95,7 +95,7 @@ ResponsiveImage.propTypes = {
   className: string,
   rootClassName: string,
   alt: string.isRequired,
-  image: propTypes.image,
+  image: oneOfType([propTypes.image, propTypes.imageAsset]),
   variants: arrayOf(string).isRequired,
   noImageMessage: string,
 };

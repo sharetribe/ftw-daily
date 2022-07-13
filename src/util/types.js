@@ -90,6 +90,21 @@ propTypes.image = shape({
   }),
 });
 
+// ImageAsset type from Asset Delivery API
+propTypes.imageAsset = shape({
+  id: string.isRequired,
+  type: propTypes.value('imageAsset').isRequired,
+  attributes: shape({
+    variants: objectOf(
+      shape({
+        width: number.isRequired,
+        height: number.isRequired,
+        url: string.isRequired,
+      })
+    ),
+  }),
+});
+
 // Denormalised user object
 propTypes.currentUser = shape({
   id: propTypes.uuid.isRequired,
