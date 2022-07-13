@@ -14,6 +14,10 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2022-XX-XX
 
+- [fix] the import of customMediaQueries.css was somehow missed with these components:
+  FieldReviewRating, SearchFiltersSecondary and TopbarMobileMenu.
+  [#1537](https://github.com/sharetribe/ftw-daily/pull/1537)
+
 ## [v9.0.0] 2022-07-11
 
 This is a major release since it includes a major update to sharetribe-scripts aka our fork of
