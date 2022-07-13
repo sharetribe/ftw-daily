@@ -12,7 +12,7 @@
   display: grid;
   justify-content: start;
   margin: 0 auto;
-  padding: 32px;
+  padding: 0 32px 64px;
   position: relative;
 
   @media (--viewportMedium) {
@@ -38,18 +38,17 @@
 .ingress {
   composes: align;
   max-width: 65ch;
-  font-size: 21px;
 }
 
 .ctaButton {
   composes: align;
   display: inline-block;
-  padding: 12px 24px;
+  padding: 8px 20px;
+  font-size: 15px;
   background-color: var(--marketplaceColor);
   border-radius: 4px;
   color: white;
   text-decoration: none;
-  margin-top: 8px;
   box-shadow: 0 8px 16px 0 rgb(0 0 0 / 20%);
   font-weight: 500;
 

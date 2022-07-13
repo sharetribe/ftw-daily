@@ -1,13 +1,27 @@
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  margin-top: 0;
+  line-height: 1.33;
+  font-weight: bold;
+}
+
 .h1 {
-  font-size: 32px;
-  line-height: 40px;
-  font-weight: 700;
-  margin-bottom: 8px;
+  font-size: 40px;
 }
 
 .h2 {
+  font-size: 30px;
+  margin-bottom: 19px;
+}
+
+.h3 {
   font-size: 24px;
-  line-height: 32px;
-  font-weight: 600;
-  margin-bottom: 8px;
+}
+
+.h4 {
+  font-size: 21px;
 }

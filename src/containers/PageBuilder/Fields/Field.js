@@ -6,6 +6,7 @@ import { AspectRatioWrapper, ResponsiveImage } from '../../../components/index.j
 
 import { H1, H2, H3, H4, H5, H6 } from '../Primitives/Heading.js';
 import { Ul, Ol, Li } from '../Primitives/List.js';
+import { Ingress } from '../Primitives/Ingress.js';
 import { P } from '../Primitives/P.js';
 import { Code, CodeBlock } from '../Primitives/Code.js';
 import { Link } from '../Primitives/Link.js';
@@ -75,7 +76,7 @@ const BackgroundImageField = props => {
 };
 
 // Images in markdown point to elsewhere (they don't support responsive image variants)
-const MarkdownImage = props => <img className={css.markdownImg} {...props} />;
+const MarkdownImage = props => <img className={css.markdownImage} {...props} />;
 
 // Most fields are primitives but markdown is a bit special case.
 const MarkdownField = ({ content, components }) => renderMarkdown(content, components);
@@ -91,6 +92,7 @@ const defaultConfigs = {
   heading4: { component: H4, pickValidProps: exposeContentAsChildren },
   heading5: { component: H5, pickValidProps: exposeContentAsChildren },
   heading6: { component: H6, pickValidProps: exposeContentAsChildren },
+  ingress: { component: Ingress, pickValidProps: exposeContentAsChildren },
   paragraph: { component: P, pickValidProps: exposeContentAsChildren },
   markdown: {
     component: MarkdownField,

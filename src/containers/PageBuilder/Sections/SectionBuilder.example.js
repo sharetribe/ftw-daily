@@ -40,12 +40,12 @@ const imagePlaceholder = (width, height) => ({
   resolver: 'image',
   variants: {
     square1x: {
-      url: 'https://picsum.photos/300', // placeholderImage(width, height, '#00AAFF'),
+      url: 'https://picsum.photos/600', // placeholderImage(width, height, '#00AAFF'),
       width,
       height,
     },
     square2x: {
-      url: 'https://picsum.photos/600', // placeholderImage(2 * width, 2 * height, '#FF00AA'),
+      url: 'https://picsum.photos/1200', // placeholderImage(2 * width, 2 * height, '#FF00AA'),
       width: 2 * width,
       height: 2 * width,
     },
@@ -68,7 +68,7 @@ export const SectionArticle = {
           content: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.',
         },
         ingress: {
-          type: 'paragraph',
+          type: 'ingress',
           content:
             'Maecenas sed diam eget risus varius blandit sit amet non magna. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.',
         },
@@ -130,7 +130,7 @@ export const SectionFeatures = {
           content: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.',
         },
         ingress: {
-          type: 'paragraph',
+          type: 'ingress',
           content:
             'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit.',
         },
@@ -209,11 +209,11 @@ export const SectionCarousel = {
         sectionId: 'cms-features-section-no-block',
         numColumns: 1,
         title: {
-          type: 'heading1',
+          type: 'heading2',
           content: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.',
         },
         ingress: {
-          type: 'paragraph',
+          type: 'ingress',
           content:
             'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit.',
         },
@@ -228,7 +228,7 @@ export const SectionCarousel = {
             blockId: 'cms-column3-block-1',
             media: { type: 'image', alt: 'First image', image: imagePlaceholder(16, 9) },
             title: {
-              type: 'heading2',
+              type: 'heading3',
               content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
@@ -246,7 +246,7 @@ export const SectionCarousel = {
             blockId: 'cms-column3-block-1',
             media: { type: 'image', alt: 'First image', image: imagePlaceholder(16, 9) },
             title: {
-              type: 'heading2',
+              type: 'heading3',
               content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
@@ -264,7 +264,7 @@ export const SectionCarousel = {
             blockId: 'cms-column3-block-1',
             media: { type: 'image', alt: 'First image', image: imagePlaceholder(16, 9) },
             title: {
-              type: 'heading2',
+              type: 'heading3',
               content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
@@ -282,7 +282,7 @@ export const SectionCarousel = {
             blockId: 'cms-column3-block-1',
             media: { type: 'image', alt: 'First image', image: imagePlaceholder(16, 9) },
             title: {
-              type: 'heading2',
+              type: 'heading3',
               content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
@@ -300,7 +300,7 @@ export const SectionCarousel = {
             blockId: 'cms-column3-block-1',
             media: { type: 'image', alt: 'First image', image: imagePlaceholder(16, 9) },
             title: {
-              type: 'heading2',
+              type: 'heading3',
               content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
@@ -318,7 +318,7 @@ export const SectionCarousel = {
             blockId: 'cms-column3-block-1',
             media: { type: 'image', alt: 'First image', image: imagePlaceholder(16, 9) },
             title: {
-              type: 'heading2',
+              type: 'heading3',
               content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
@@ -336,7 +336,7 @@ export const SectionCarousel = {
             blockId: 'cms-column3-block-1',
             media: { type: 'image', alt: 'First image', image: imagePlaceholder(16, 9) },
             title: {
-              type: 'heading2',
+              type: 'heading3',
               content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
@@ -354,7 +354,7 @@ export const SectionCarousel = {
             blockId: 'cms-column3-block-1',
             media: { type: 'image', alt: 'First image', image: imagePlaceholder(16, 9) },
             title: {
-              type: 'heading2',
+              type: 'heading3',
               content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
@@ -372,7 +372,7 @@ export const SectionCarousel = {
             blockId: 'cms-column3-block-1',
             media: { type: 'image', alt: 'First image', image: imagePlaceholder(16, 9) },
             title: {
-              type: 'heading2',
+              type: 'heading3',
               content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
@@ -402,7 +402,7 @@ export const SectionColumns = {
         background: { color: hexYellow },
         title: { type: 'heading2', content: 'One Column, No Blocks' },
         ingress: {
-          type: 'paragraph',
+          type: 'ingress',
           content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
         },
       },
@@ -414,7 +414,7 @@ export const SectionColumns = {
         theme: 'dark',
         title: { type: 'heading2', content: 'One Column, No Blocks' },
         ingress: {
-          type: 'paragraph',
+          type: 'ingress',
           content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
         },
         callToAction: {
@@ -435,7 +435,7 @@ export const SectionColumns = {
         },
         title: { type: 'heading2', content: 'One Column, No Blocks, Bg Image' },
         ingress: {
-          type: 'paragraph',
+          type: 'ingress',
           content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
         },
         callToAction: {
@@ -450,7 +450,7 @@ export const SectionColumns = {
         numColumns: 1,
         title: { type: 'heading2', content: 'One Column' },
         ingress: {
-          type: 'paragraph',
+          type: 'ingress',
           content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
         },
         blocks: [
@@ -480,7 +480,7 @@ export const SectionColumns = {
         numColumns: 2,
         title: { type: 'heading2', content: '2 Columns' },
         ingress: {
-          type: 'paragraph',
+          type: 'ingress',
           content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
         },
         blocks: [
@@ -522,7 +522,7 @@ export const SectionColumns = {
         theme: 'dark',
         title: { type: 'heading2', content: '2 Columns, Dark' },
         ingress: {
-          type: 'paragraph',
+          type: 'ingress',
           content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
         },
         blocks: [
@@ -562,7 +562,7 @@ export const SectionColumns = {
         numColumns: 3,
         title: { type: 'heading2', content: '3 Columns' },
         ingress: {
-          type: 'paragraph',
+          type: 'ingress',
           content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
         },
         blocks: [
@@ -592,7 +592,7 @@ export const SectionColumns = {
         numColumns: 4,
         title: { type: 'heading2', content: '4 Columns' },
         ingress: {
-          type: 'paragraph',
+          type: 'ingress',
           content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
         },
         blocks: [
