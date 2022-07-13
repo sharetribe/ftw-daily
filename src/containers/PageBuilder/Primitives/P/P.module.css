@@ -1,0 +1,11 @@
+.p {
+  max-width: 80ch;
+  line-height: 1.66;
+  margin-top: 0;
+  margin-bottom: 24px;
+  letter-spacing: 0;
+}
+
+h2 + p {
+  margin-top: 16px;
+}
