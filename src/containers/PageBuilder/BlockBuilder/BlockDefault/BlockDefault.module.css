@@ -1,0 +1,13 @@
+.root {
+}
+
+.media {
+  width: 100%;
+  background-color: var(--matterColorNegative); /* Loading state color for the images */
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.text {
+  width: 100%;
+}
