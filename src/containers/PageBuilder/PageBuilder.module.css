@@ -1,0 +1,14 @@
+.layout {
+  min-height: 100vh;
+  grid-template-rows: auto 1fr auto;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: var(--zIndexTopbar);
+}
+
+.main {
+  display: grid;
+}
