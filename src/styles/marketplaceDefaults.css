@@ -52,7 +52,9 @@
 
   --fontWeightHighlightEmail: var(--fontWeightBold);
 
-  /* ================ Spacing unites ================ */
+  /* ================ Spacing units ================ */
+
+  --contentMaxWidth: 1264px; /* calc(Global width (1200px) + (Horizontal padding (32px) * 2) */
 
   /* Multiples of mobile and desktop spacing units should be used with margins and paddings. */
   --spacingUnit: 6px;
