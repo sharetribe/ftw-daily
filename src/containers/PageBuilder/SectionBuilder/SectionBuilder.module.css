@@ -1,0 +1,110 @@
+@import '../../../styles/customMediaQueries.css';
+
+/* Styles for custom sections: classes shared by <SectionColumns>, <SectionArticle>, <SectionFeatures>, <SectionCarousel> etc. */
+.sectionDetails {
+  max-width: var(--contentMaxWidth);
+  display: grid;
+  justify-content: start;
+  margin: 0 auto;
+  padding: 0 32px 64px;
+  position: relative;
+
+  @media (--viewportMedium) {
+    justify-content: center;
+  }
+}
+
+.align {
+  text-align: left;
+  justify-self: start;
+
+  @media (--viewportMedium) {
+    text-align: center;
+    justify-self: center;
+  }
+}
+
+.title {
+  composes: align;
+  max-width: 30ch;
+}
+
+.ingress {
+  composes: align;
+  max-width: 65ch;
+}
+
+.ctaButton {
+  composes: align;
+  display: inline-block;
+  padding: 8px 20px;
+  font-size: 15px;
+  background-color: var(--marketplaceColor);
+  border-radius: 4px;
+  color: white;
+  text-decoration: none;
+  box-shadow: 0 8px 16px 0 rgb(0 0 0 / 20%);
+  font-weight: 500;
+
+  &:hover {
+    text-decoration: none;
+    background-color: var(--marketplaceColorDark);
+  }
+}
+
+/**
+ * Theme: dark 
+ * These styles are at the bottom of the file so that they overwrite rules for default "light" theme.
+ */
+.darkTheme h1,
+.darkTheme h2,
+.darkTheme h3,
+.darkTheme h4,
+.darkTheme h5,
+.darkTheme h6,
+.darkTheme p,
+.darkTheme li,
+.darkTheme blockquote {
+  color: var(--matterColorLight);
+
+  &::selection {
+    background-color: cyan;
+    color: unset;
+  }
+}
+
+/* link on dark theme */
+.darkTheme a {
+  color: white;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+    color: var(--marketplaceColorLight);
+  }
+}
+
+/* button on dark theme */
+.darkTheme .ctaButton {
+  border: 1px solid var(--marketplaceColorDark);
+  text-decoration: none;
+
+  &:hover {
+    color: white;
+  }
+}
+
+.darkTheme hr {
+  border-color: var(--matterColor);
+}
+
+/* dark inline code */
+.darkTheme code {
+  background-color: var(--matterColor);
+  color: var(--matterColorNegative);
+}
+
+/* dark code block */
+.darkTheme pre {
+  background-color: var(--matterColor);
+}

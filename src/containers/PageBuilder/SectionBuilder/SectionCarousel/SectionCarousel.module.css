@@ -1,0 +1,80 @@
+@import '../../../../styles/customMediaQueries.css';
+
+.baseCarousel {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.oneColumn,
+.twoColumns,
+.threeColumns,
+.fourColumns {
+  composes: baseCarousel;
+}
+
+.block {
+  flex: 0 0 auto;
+  width: calc(100vw - 64px); /* 64px = horizontal layout paddings */
+  margin-right: 16px;
+  scroll-snap-align: center;
+
+  /* Offset the start of the carousel so it follows the global grid layout (1200 / 2 = 600px) */
+  transform: translateX(calc(max(var(--contentMaxWidth), 100vw) / 2 - 600px));
+
+  &:last-of-type {
+    padding-right: 32px;
+    width: calc(100vw - 32px); /* 32px (padding-right above) */
+  }
+}
+
+.oneColumn .block {
+  max-width: calc(var(--contentMaxWidth) - 64px); /* 64px (horizontal layout paddings) */
+
+  &:last-of-type {
+    max-width: calc(var(--contentMaxWidth) - 32px); /* 32px (padding-right above) */
+  }
+}
+
+.twoColumns .block {
+  max-width: calc(
+    (var(--contentMaxWidth) - 64px - 18px) / 2
+  ); /* 64px (horizontal layout paddings) - 18px (gutter) / 2 (number of columns) */
+
+  &:last-of-type {
+    max-width: calc(
+      (var(--contentMaxWidth) - 32px + 18px) / 2
+    ); /* 32px (padding-right above) + 18px (gutter) / 2 (number of columns) */
+  }
+}
+
+.threeColumns .block {
+  max-width: calc(
+    (var(--contentMaxWidth) - 64px - 32px) / 3
+  ); /* 64px (horizontal layout paddings) - 32px (two gutters á 18px) / 3 (number of columns) */
+
+  &:last-of-type {
+    max-width: calc(
+      (var(--contentMaxWidth) - 32px + 32px) / 3
+    ); /* 32px (padding-right above) + 32px (two gutters á 18px) / 3 (number of columns) */
+  }
+}
+
+.fourColumns .block {
+  max-width: calc(
+    (var(--contentMaxWidth) - 64px - 54px) / 4
+  ); /* 64px (horizontal layout paddings) - 54px (three gutters á 18px) / 4 (number of columns) */
+
+  &:last-of-type {
+    max-width: calc(
+      (var(--contentMaxWidth) - 32px + 54px) / 4
+    ); /* 32px (padding-right above) + 54px (three gutters á 18px) / 4 (number of columns) */
+  }
+}
