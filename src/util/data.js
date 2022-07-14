@@ -141,6 +141,62 @@ export const denormalisedResponseEntities = sdkResponse => {
 };
 
 /**
+ * Denormalize JSON object.
+ * NOTE: Currently, this only handles denormalization of image references
+ *
+ * @param {JSON} data from Asset API (e.g. page asset)
+ * @param {JSON} included array of asset references (currently only images supported)
+ * @returns deep copy of data with images denormalized into it.
+ */
+const denormalizeJsonData = (data, included) => {
+  let copy;
+
+  // Handle strings, numbers, booleans, null
+  if (data === null || typeof data !== 'object') {
+    return data;
+  }
+
+  // At this point the data has typeof 'object' (aka Array or Object)
+  // Array is the more specific case (of Object)
+  if (data instanceof Array) {
+    copy = data.map(datum => denormalizeJsonData(datum, included));
+    return copy;
+  }
+
+  // Generic Objects
+  if (data instanceof Object) {
+    copy = {};
+    Object.entries(data).forEach(([key, value]) => {
+      // Handle denormalization of image reference
+      const hasImageRefAsValue =
+        typeof value == 'object' &&
+        value._ref &&
+        value._ref?.type === 'imageAsset' &&
+        value._ref?.id;
+      if (hasImageRefAsValue) {
+        const foundRef = included.find(inc => inc.id === value._ref?.id);
+        copy[key] = foundRef;
+      } else {
+        copy[key] = denormalizeJsonData(value, included);
+      }
+    });
+    return copy;
+  }
+
+  throw new Error("Unable to traverse data! It's not JSON.");
+};
+
+/**
+ * Denormalize asset json from Asset API.
+ * @param {JSON} assetJson in format: { data, included }
+ * @returns deep copy of asset data with images denormalized into it.
+ */
+export const denormalizeAssetData = assetJson => {
+  const { data, included } = assetJson || {};
+  return denormalizeJsonData(data, included);
+};
+
+/**
  * Create shell objects to ensure that attributes etc. exists.
  *
  * @param {Object} transaction entity object, which is to be ensured against null values

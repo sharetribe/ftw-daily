@@ -5,6 +5,7 @@ import {
   updatedEntities,
   denormalisedEntities,
   humanizeLineItemCode,
+  denormalizeAssetData,
 } from './data';
 
 const { UUID } = sdkTypes;
@@ -344,5 +345,79 @@ describe('humanizeLineItemCode', () => {
 
   it('should reject a code with missing code value', () => {
     expect(() => humanizeLineItemCode('line-item/')).toThrowError(Error);
+  });
+});
+
+describe('denormalizeAssetData', () => {
+  const jsonObjData = {
+    foo: 'bar',
+    num: 6,
+    b: true,
+    nested: { foo: 'bar2' },
+    arr: ['a', { b: 'b' }, { c: { data: 'c' } }],
+  };
+
+  it('should deep clone asset without image references', () => {
+    const jsonObj = {
+      data: jsonObjData,
+      included: [],
+    };
+    expect(JSON.stringify(denormalizeAssetData(jsonObj))).toEqual(JSON.stringify(jsonObj.data));
+  });
+
+  it('should deep clone asset with image references', () => {
+    const jsonObj = {
+      data: {
+        ...jsonObjData,
+        image: {
+          _ref: {
+            id: 'hero-1',
+            type: 'imageAsset',
+          },
+        },
+      },
+      included: [
+        {
+          id: 'hero-1',
+          type: 'imageAsset',
+          attributes: {
+            variants: {
+              scaled: {
+                url: 'https://something.imgix.com/foo/bar/baz',
+                width: 1200,
+                height: 580,
+              },
+              scaled2x: {
+                url: 'https://something.imgix.com/foo/bar/else',
+                width: 2400,
+                height: 1160,
+              },
+            },
+          },
+        },
+      ],
+    };
+    const expected = {
+      ...jsonObjData,
+      image: {
+        id: 'hero-1',
+        type: 'imageAsset',
+        attributes: {
+          variants: {
+            scaled: {
+              url: 'https://something.imgix.com/foo/bar/baz',
+              width: 1200,
+              height: 580,
+            },
+            scaled2x: {
+              url: 'https://something.imgix.com/foo/bar/else',
+              width: 2400,
+              height: 1160,
+            },
+          },
+        },
+      },
+    };
+    expect(JSON.stringify(denormalizeAssetData(jsonObj))).toEqual(JSON.stringify(expected));
   });
 });
