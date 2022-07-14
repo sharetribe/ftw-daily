@@ -1,0 +1,33 @@
+@import '../../../../styles/customMediaQueries.css';
+
+.baseColumn {
+  max-width: var(--contentMaxWidth);
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 32px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+.oneColumn {
+  composes: baseColumn;
+}
+
+.twoColumns {
+  composes: baseColumn;
+  @media (--viewportMedium) {
+    grid-template-columns: repeat(2, calc((100% - 32px) / 2));
+  }
+}
+.threeColumns {
+  composes: baseColumn;
+  @media (--viewportMedium) {
+    grid-template-columns: repeat(3, calc((100% - 2 * 32px) / 3));
+  }
+}
+.fourColumns {
+  composes: baseColumn;
+  @media (--viewportMedium) {
+    grid-template-columns: repeat(4, calc((100% - 3 * 32px) / 4));
+  }
+}
