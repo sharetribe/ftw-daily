@@ -50,7 +50,7 @@ const defaultDirectives = {
     'sharetribe.imgix.net', // Safari 9.1 didn't recognize asterisk rule.
 
     // Styleguide placeholder images
-    'lorempixel.com',
+    'picsum.photos',
     'via.placeholder.com',
 
     'api.mapbox.com',
