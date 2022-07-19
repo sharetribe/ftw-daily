@@ -33,7 +33,7 @@ const defaultDirectives = {
 
     // Google Analytics
     'www.googletagmanager.com',
-    'www.google-analytics.com',
+    '*.google-analytics.com',
     'stats.g.doubleclick.net',
 
     'sentry.io',
