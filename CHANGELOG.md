@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2022-XX-XX
 
+- [fix] Add cookie_flags and relax google analytics domain
+  [#1538](https://github.com/sharetribe/ftw-daily/pull/1538)
 - [fix] the import of customMediaQueries.css was somehow missed with these components:
   FieldReviewRating, SearchFiltersSecondary and TopbarMobileMenu.
   [#1537](https://github.com/sharetribe/ftw-daily/pull/1537)

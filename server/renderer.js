@@ -142,7 +142,9 @@ exports.render = function(requestUrl, context, data, renderApp, webExtractor) {
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
       
-        gtag('config', '${googleAnalyticsId}');
+        gtag('config', '${googleAnalyticsId}', {
+          cookie_flags: 'SameSite=None;Secure',
+        });
       </script>
     `;
   const googleAnalyticsScript = hasGoogleAnalyticsv4Id ? gtagScripts : '';
