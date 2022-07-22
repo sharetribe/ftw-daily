@@ -329,7 +329,7 @@
   "EditListingPricingForm.priceTooLow": "Price should be at least {minPrice}.",
   "EditListingPricingForm.showListingFailed": "Fetching listing data failed",
   "EditListingPricingForm.updateFailed": "Failed to update listing. Please try again.",
-  "EditListingPricingForm.infoTextMinBook": "If your Patch has a minimum book requirement, you can specify if by adding it here",
+  "EditListingPricingForm.infoTextMinBook": "If your Patch has a minimum book requirement, you can specify it by adding it here",
   "EditListingPricingPanel.createListingTitle": "How much does it cost?",
   "EditListingPricingPanel.createListingSubTitle": "However you want to rent out your Patch, just set those prices and leave the other spaces empty",
   "EditListingPricingPanel.listingPriceCurrencyInvalid": "Listing currency is different from the marketplace currency. You cannot edit the price.",
