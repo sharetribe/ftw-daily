@@ -37,9 +37,9 @@
     <h1>Your booking request was accepted!</h1>
 
     {{#with transaction}}
-    <p>{{provider.display-name}} has accepted your booking request for {{listing.title}} from {{> format-date date=booking.start}} to {{> format-date date=booking.end}}.</p>
+    <p>{{provider.display-name}} has accepted your booking request for '{{listing.title}}' from {{> format-date date=booking.start}} to {{> format-date date=booking.end}}.</p>
 
-    <p>We have charged {{> format-money money=payin-total}} from your credit card. Here's your receipt.</p>
+    <p>We have charged {{> format-money money=payin-total}} to your associated payment account. Please see your receipt below.</p>
 
     <table>
       <thead>
@@ -98,6 +98,6 @@
 
     <hr />
 
-    <p>You have received this email notification because you are a member of {{marketplace.name}}. If you no longer wish to receive these emails, please contact {{marketplace.name}} team.</p>
+    <p>You have received this email notification because you are a member of {{marketplace.name}}. If you no longer wish to receive these emails, please contact the {{marketplace.name}} team.</p>
   </body>
 </html>
