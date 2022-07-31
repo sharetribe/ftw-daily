@@ -76,7 +76,7 @@ export const filters = [
   {
     id: 'category',
     label: 'Category',
-    type: 'SelectSingleFilter',
+    type: 'SelectMultipleFilter',
     group: 'secondary',
     queryParamNames: ['pub_category'],
     config: {
@@ -85,64 +85,17 @@ export const filters = [
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
       options: [
-        { key: 'smoke', label: 'Smoke' },
+        { key: 'crosscountry-trail', label: 'Cross Country & Trail' },
+        { key: 'all-mountain', label: 'All Mountain' },
+        { key: 'enduro', label: 'Enduro' },
+        { key: 'downhill-freeride', label: 'Downhill & Freeride' },
+        { key: 'gravel', label: 'Gravel' },
         { key: 'electric', label: 'Electric' },
-        { key: 'wood', label: 'Wood' },
-        { key: 'other', label: 'Other' },
+        { key: 'road', label: 'Road' },
       ],
     },
   },
-  {
-    id: 'amenities',
-    label: 'Amenities',
-    type: 'SelectMultipleFilter',
-    group: 'secondary',
-    queryParamNames: ['pub_amenities'],
-    config: {
-      // Optional modes: 'has_all', 'has_any'
-      // https://www.sharetribe.com/api-reference/marketplace.html#extended-data-filtering
-      searchMode: 'has_all',
 
-      // "key" is the option you see in Flex Console.
-      // "label" is set here for this web app's UI only.
-      // Note: label is not added through the translation files
-      // to make filter customizations a bit easier.
-      options: [
-        {
-          key: 'towels',
-          label: 'Towels',
-        },
-        {
-          key: 'bathroom',
-          label: 'Bathroom',
-        },
-        {
-          key: 'swimming_pool',
-          label: 'Swimming pool',
-        },
-        {
-          key: 'own_drinks',
-          label: 'Own drinks allowed',
-        },
-        {
-          key: 'jacuzzi',
-          label: 'Jacuzzi',
-        },
-        {
-          key: 'audiovisual_entertainment',
-          label: 'Audiovisual entertainment',
-        },
-        {
-          key: 'barbeque',
-          label: 'Barbeque',
-        },
-        {
-          key: 'own_food_allowed',
-          label: 'Own food allowed',
-        },
-      ],
-    },
-  },
 ];
 
 export const sortConfig = {

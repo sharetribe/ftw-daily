@@ -2,6 +2,8 @@ import React from 'react';
 import loadable from '@loadable/component';
 import getPageDataLoadingAPI from './containers/pageDataLoadingAPI';
 import { NotFoundPage } from './containers';
+//import FAQPage from '../../containers/FAQPage/FAQPage';
+
 
 // routeConfiguration needs to initialize containers first
 // Otherwise, components will import form container eventually and
@@ -31,6 +33,7 @@ const SearchPage = loadable(() => import(/* webpackChunkName: "SearchPage" */ /*
 const StripePayoutPage = loadable(() => import(/* webpackChunkName: "StripePayoutPage" */ './containers/StripePayoutPage/StripePayoutPage'));
 const TermsOfServicePage = loadable(() => import(/* webpackChunkName: "TermsOfServicePage" */ './containers/TermsOfServicePage/TermsOfServicePage'));
 const TransactionPage = loadable(() => import(/* webpackChunkName: "TransactionPage" */ './containers/TransactionPage/TransactionPage'));
+const FAQPage = loadable(() => import(/* webpackChunkName: "FAQPage" */ './containers/FAQPage/FAQPage'));
 
 // Styleguide helps you to review current components and develop new ones
 const StyleguidePage = loadable(() => import(/* webpackChunkName: "StyleguidePage" */ './containers/StyleguidePage/StyleguidePage'));
@@ -58,6 +61,11 @@ const RedirectToLandingPage = () => <NamedRedirect name="LandingPage" />;
 // See behaviour from Routes.js where Route is created.
 const routeConfiguration = () => {
   return [
+    {
+      path: '/FAQPage',
+      name: 'FAQPage',
+      component: FAQPage,
+        },
     {
       path: '/',
       name: 'LandingPage',

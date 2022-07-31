@@ -9,38 +9,38 @@ const { LatLng, LatLngBounds } = sdkTypes;
 // `predictionPlace` (util.types.place) properties.
 const defaultLocations = [
   {
-    id: 'default-helsinki',
+    id: 'default-western nc',
     predictionPlace: {
-      address: 'Helsinki, Finland',
-      bounds: new LatLngBounds(new LatLng(60.29783, 25.25448), new LatLng(59.92248, 24.78287)),
+      address: 'Western North Carolina, United States',
+      bounds: new LatLngBounds(new LatLng(36.0222834, -82.23134815), new LatLng(34.8875135, -83.22619215)),
     },
   },
   {
-    id: 'default-turku',
+    id: 'default-bentonville',
     predictionPlace: {
-      address: 'Turku, Finland',
-      bounds: new LatLngBounds(new LatLng(60.53045, 22.38197), new LatLng(60.33361, 22.06644)),
+      address: 'Bentonville, Arkansas, United States',
+      bounds: new LatLngBounds(new LatLng(36.472531, -94.13675), new LatLng(36.216762, -94.367823)),
     },
   },
   {
-    id: 'default-tampere',
+    id: 'default-moab',
     predictionPlace: {
-      address: 'Tampere, Finland',
-      bounds: new LatLngBounds(new LatLng(61.83657, 24.11838), new LatLng(61.42728, 23.5422)),
+      address: 'Moab, Utah, United States',
+      bounds: new LatLngBounds(new LatLng(39.23179841, -109.052416), new LatLng(38.03685747, -110.144848)),
     },
   },
   {
-    id: 'default-oulu',
+    id: 'default-sedona',
     predictionPlace: {
-      address: 'Oulu, Finland',
-      bounds: new LatLngBounds(new LatLng(65.56434, 26.77069), new LatLng(64.8443, 24.11494)),
+      address: 'Sedona, Arizona, United States',
+      bounds: new LatLngBounds(new LatLng(35.044516, -111.640967), new LatLng(34.712911, -111.999124)),
     },
   },
   {
-    id: 'default-ruka',
+    id: 'default-durango',
     predictionPlace: {
-      address: 'Ruka, Finland',
-      bounds: new LatLngBounds(new LatLng(66.16997, 29.16773), new LatLng(66.16095, 29.13572)),
+      address: 'Durango, Colorado, United States',
+      bounds: new LatLngBounds(new LatLng(37.67372512, -107.52213474), new LatLng(36.88141499, -108.23320098)),
     },
   },
 ];

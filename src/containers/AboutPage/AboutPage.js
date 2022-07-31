@@ -12,7 +12,7 @@ import {
 } from '../../components';
 
 import css from './AboutPage.module.css';
-import image from './about-us-1056.jpg';
+import image from './sio-v1-newbackground.jpg';
 
 const AboutPage = () => {
   const { siteTwitterHandle, siteFacebookPage } = config;

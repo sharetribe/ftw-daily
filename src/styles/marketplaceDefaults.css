@@ -16,9 +16,9 @@
 :root {
   /* ================ Colors ================ */
 
-  --marketplaceColor: #c0392b;
-  --marketplaceColorLight: #ff4c38;
-  --marketplaceColorDark: #8c291e;
+  --marketplaceColor: #080808;
+  --marketplaceColorLight: #c3c3c3;
+  --marketplaceColorDark: #636363;
 
   /* Used with inline CSS SVGs */
   --marketplaceColorEncoded: %23c0392b;
@@ -517,7 +517,7 @@ textarea {
 .defaultBackgroundImage {
   /* Gradient direction and overlaying the black color on top of the image for better readability */
   background: linear-gradient(-45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)),
-    url('../assets/background-1440.jpg');
+    url('../assets/sio-v1-newbackground.jpg');
 
   /* Add loading color for the div */
   background-color: var(--matterColor);
@@ -671,7 +671,7 @@ textarea {
  * For actual buttons, use components: <Button>, <PrimaryButton>, <SecondaryButton>
  *
  * To create button look-and-feel for links, etc. combine button classes in CSS Modules:
- * 
+ *
  * default button:
  *   composes: button buttonFont buttonText buttonBorders buttonColors from global;
  * primary button:
