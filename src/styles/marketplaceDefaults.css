@@ -538,7 +538,7 @@ textarea {
   /* Gradient direction and overlaying the black color on top of the image for better readability */
   @media (--viewportMedium) {
     background: linear-gradient(-45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)),
-      url('../assets/background-1440.jpg');
+      url('../assets/sio-v1-newbackground.jpg');
 
     /* Add loading color for the div */
     background-color: var(--matterColor);
