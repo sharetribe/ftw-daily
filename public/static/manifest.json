@@ -1,6 +1,6 @@
 {
-  "name": "Saunatime",
-  "short_name": "Saunatime",
+  "name": "Sio",
+  "short_name": "Sio",
   "start_url": "/",
   "display": "standalone",
   "theme_color": "#C0392B",
@@ -12,9 +12,12 @@
       "type": "image/png"
     },
     {
-      "src": "/static/icons/android-chrome-512x512.png",
-      "sizes": "512x512",
+      "src": "/static/icons/android-chrome-256x256.png",
+      "sizes": "256x256",
       "type": "image/png"
     }
+
+
+
   ]
 }
