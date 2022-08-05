@@ -37,7 +37,7 @@
     {{#with transaction}}
     <h1>Please respond to a request by {{customer.display-name}}</h1>
 
-    <p>Good news! {{customer.display-name}} just requested to book {{listing.title}} from {{> format-date date=booking.start}} to {{> format-date date=booking.end}}. Here's the breakdown.</p>
+    <p>Good news! {{customer.display-name}} just requested to book your '{{listing.title}}' from {{> format-date date=booking.start}} to {{> format-date date=booking.end}}. Here's the breakdown.</p>
     <table>
       <thead>
         <tr>
@@ -92,14 +92,14 @@
       </tfoot>
     </table>
 
-    <p>You need to accept the request by {{> format-date date=delayed-transition.run-at}}. Otherwise the request will be expired and you won't get paid. If the booked dates won't work for you, you can also choose to decline the request.</p>
+    <p>You need to accept the request by {{> format-date date=delayed-transition.run-at}}. Otherwise the request will expire and you won't be paid. If the chosen dates won't work for you, you can also choose to decline the request.</p>
 
-    <p><a href="{{marketplace.url}}/sale/{{url-encode id}}/details">Accept or decline the booking</a></p>
+    <p><a href="{{marketplace.url}}/sale/{{url-encode id}}/details">Accept or decline your booking</a></p>
 
     {{/with}}
 
     <hr />
 
-    <p>You have received this email notification because you are a member of {{marketplace.name}}. If you no longer wish to receive these emails, please contact {{marketplace.name}} team.</p>
+    <p>You have received this email notification because you are a member of {{marketplace.name}}. If you no longer wish to receive these emails, please contact the {{marketplace.name}} team.</p>
   </body>
 </html>
