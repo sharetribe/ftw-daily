@@ -303,8 +303,8 @@ export const photographyAndFilmAmenitiesOptions = [
 
 
 export const kitchenOptions = [
-  { key: 'kitchen-space', label: 'Kitchen space', metaLabel: "Kitchen Space", labelImg: "kitchenSpace" },
-  { key: 'pop-up-space', label: 'Pop-up space', metaLabel: "Pop-up Space", labelImg: "popUpSpace" },
+  { key: 'kitchen-space', label: 'Kitchen Space', metaLabel: "Kitchen Space", labelImg: "kitchenSpace" },
+  { key: 'pop-up-space', label: 'Pop-up Space', metaLabel: "Pop-up Space", labelImg: "popUpSpace" },
 ]
 export const kitchenAmenitiesOptions = [
   {key: '3-phase-power', label: '3 Phase Power'},
