@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import config from '../../config';
 import IconLogo from './IconLogo';
-import LogoImage from './saunatime-logo.png';
+import LogoImage from './Borrow Logo_1.1.png';
 import css from './Logo.module.css';
 
 const Logo = props => {
