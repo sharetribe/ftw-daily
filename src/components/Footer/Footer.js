@@ -150,11 +150,7 @@ const Footer = props => {
                     <FormattedMessage id="Footer.toContactPage" />
                   </a>
                 </li>
-                <li className={css.listItem}>
-                  <ExternalLink href="https://www.hotpatch.com/blog/" className={css.link}>
-                    <FormattedMessage id="Footer.toBlogPage" />
-                  </ExternalLink>
-                </li>
+                
               </ul>
             </div>
 
