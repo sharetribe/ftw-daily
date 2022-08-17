@@ -256,6 +256,7 @@ const TopbarDesktop = props => {
           <FormattedMessage id="TopbarDesktop.createListing" />
         </span>
       </NamedLink>
+      {blog}
       {inboxLink}
       {profileMenu}
       {loginLink}
