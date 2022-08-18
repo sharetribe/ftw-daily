@@ -226,17 +226,6 @@ const Footer = props => {
                    <FormattedMessage id="Footer.searchSheffield" />
                  </NamedLink>
                </li>
-                <li className={css.listItem}>
-                 <NamedLink
-                   name="SearchPage"
-                   to={{
-                     search: base_url.replace('CITY', 'Dubai') + `&bounds=${25.35856066265986}%2C${55.56452157241026}%2C${24.79348418590246}%2C${54.89045432509004}`,
-                   }}
-                   className={css.link}
-                 >
-                   <FormattedMessage id="Footer.searchDubai" />
-                 </NamedLink>
-               </li>
              </ul>
            </div>
 
