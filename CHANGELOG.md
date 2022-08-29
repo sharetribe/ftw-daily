@@ -14,6 +14,13 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2022-XX-XX
 
+- [fix] Use sharetribe-scripts v6.0.1. Fixes for
+
+  - GENERATE_SOURCEMAP = false
+  - async Redux Thunks
+
+  [#1546](https://github.com/sharetribe/ftw-daily/pull/1546)
+
 - [fix] Add cookie_flags and relax google analytics domain
   [#1538](https://github.com/sharetribe/ftw-daily/pull/1538)
 - [fix] the import of customMediaQueries.css was somehow missed with these components:
