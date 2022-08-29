@@ -139,6 +139,8 @@ const EditListingWizardTab = props => {
       }
     }
 
+    onCurrentUserUpdateProfile({ publicData: { currency }})
+
     if (isNewListingFlow) {
       const onUpsertListingDraft = isNewURI
         ? (tab, updateValues) => onCreateListingDraft(updateValues)
@@ -159,8 +161,6 @@ const EditListingWizardTab = props => {
           } else if (tab === marketplaceTabs[marketplaceTabs.length - 1]) {
             handlePublishListing(currentListing.id);
           }
-
-          onCurrentUserUpdateProfile({publicData: { currency }})
         })
         .catch(e => {
           if (passThrownErrors) {
