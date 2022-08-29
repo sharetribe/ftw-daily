@@ -4,6 +4,7 @@
   "private": true,
   "license": "Apache-2.0",
   "dependencies": {
+    "@babel/helper-environment-visitor": "^7.18.9",
     "@babel/runtime": "^7.11.2",
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",

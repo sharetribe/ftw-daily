@@ -232,6 +232,7 @@
   "EditListingPricingForm.priceTooLow": "El precio mínimo es de {minPrice}.",
   "EditListingPricingForm.showListingFailed": "Error al recopilar los datos del anuncio",
   "EditListingPricingForm.updateFailed": "Error al actualizar el anuncio. Inténtalo de nuevo.",
+  "EditListingPricingForm.currency": "Divisa",
   "EditListingPricingPanel.createListingTitle": "¿Cuánto cuesta?",
   "EditListingPricingPanel.listingPriceCurrencyInvalid": "La moneda del anuncio es distinta a la moneda del marketplace. No puedes editar el precio.",
   "EditListingPricingPanel.title": "Editar el precio de {listingTitle}",

@@ -65,7 +65,7 @@ if (!!GTM_ID && typeof document !== 'undefined'){
   const tagManagerArgs = {
     gtmId: GTM_ID,
   };
-  
+
   TagManager.initialize(tagManagerArgs);
 }
 

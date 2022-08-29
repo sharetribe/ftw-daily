@@ -314,6 +314,7 @@
   "EditListingPricingForm.discountBreakpointMessage": "Booking length",
   "EditListingPricingForm.discountBreakpointPlaceholder": "7",
   "EditListingPricingForm.discountTypeMessage": "Minimum booking",
+  "EditListingPricingForm.currency": "Currency",
   "EditListingPricingForm.discountTypePlaceholder": "Type",
   "EditListingPricingForm.discountUnitTypeMessage": "Unit type",
   "EditListingPricingForm.discountRequired": "Don't leave me empty.",
@@ -933,7 +934,7 @@
   "SearchPage.schemaTitleMusicArts": "Music, Art & Drama Space to rent in {searchAddress} - {siteTitle}",
   "SearchPage.schemaTitleEventsVenues": "Music, Sports, Exhibition & Dining Venue for hire in {searchAddress} - {siteTitle}",
   "SearchPage.schemaTitleKitchensandPopUps": "Kitchen & Pop-up Space to rent in {searchAddress} - {siteTitle}",
-  
+
   "SearchPage.searchError": "Search failed. Please try again.",
   "SearchResultsPanel.nextPage": "Next page",
   "SearchResultsPanel.previousPage": "Previous page",
