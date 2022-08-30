@@ -157,7 +157,6 @@ export { default as LayoutWrapperAccountSettingsSideNav } from './LayoutWrapperA
 export {default as LoadableComponentErrorBoundary } from './LoadableComponentErrorBoundary/LoadableComponentErrorBoundary'
 export { default as ModalMissingInformation } from './ModalMissingInformation/ModalMissingInformation';
 export { default as ReviewModal } from './ReviewModal/ReviewModal';
-export { default as PrivacyPolicy } from './PrivacyPolicy/PrivacyPolicy';
 export { default as EditListingAvailabilityPanel } from './EditListingAvailabilityPanel/EditListingAvailabilityPanel';
 export { default as EditListingDescriptionPanel } from './EditListingDescriptionPanel/EditListingDescriptionPanel';
 export { default as EditListingFeaturesPanel } from './EditListingFeaturesPanel/EditListingFeaturesPanel';
