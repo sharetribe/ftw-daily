@@ -295,6 +295,7 @@ const routeConfiguration = () => {
       path: '/terms-of-service',
       name: 'TermsOfServicePage',
       component: TermsOfServicePage,
+      loadData: pageDataLoadingAPI.TermsOfServicePage.loadData,
     },
     {
       path: '/privacy-policy',
