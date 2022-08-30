@@ -71,6 +71,6 @@ const PageBuilder = props => {
   );
 };
 
-export { StaticPage };
+export { StaticPage, SectionBuilder };
 
 export default PageBuilder;
