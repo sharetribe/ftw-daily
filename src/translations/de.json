@@ -38,7 +38,6 @@
   "AuthenticationPage.signupLinkText": "Registrieren",
   "AuthenticationPage.signupWithFacebook": "Sign up with Facebook",
   "AuthenticationPage.signupWithGoogle": "Sign up with Google",
-  "AuthenticationPage.termsHeading": "Allgemeine Geschäftsbedingungen",
   "AuthenticationPage.verifyEmailClose": "SPÄTER",
   "AuthenticationPage.verifyEmailText": "Danke fürs Registrieren! Ein kleiner Schritt noch. Wir müssen deine Email verifizieren, um dich kontaktieren zu können. Bitte klicke auf den Link, den wir an {email} geschickt haben.",
   "AuthenticationPage.verifyEmailTitle": "{name}, bitte prüfe deine Email-Inbox um deine Email zu verifizieren",
