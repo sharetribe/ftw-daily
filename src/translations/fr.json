@@ -38,7 +38,6 @@
   "AuthenticationPage.signupLinkText": "S'inscrire",
   "AuthenticationPage.signupWithFacebook": "S'inscrire avec Facebook",
   "AuthenticationPage.signupWithGoogle": "S'inscrire avec Google",
-  "AuthenticationPage.termsHeading": "Conditions d'utilisation",
   "AuthenticationPage.verifyEmailClose": "PLUS TARD",
   "AuthenticationPage.verifyEmailText": "Merci de nous avoir rejoint ! Il ne reste plus qu'une petite étape. Pour que nous puissions vous contacter, nous devons vérifier votre adresse email. Veuillez cliquer sur le lien que nous venons d'envoyer à {email}.",
   "AuthenticationPage.verifyEmailTitle": "{name}, jetez un œil à votre boîte email pour vérifier votre adresse email",
