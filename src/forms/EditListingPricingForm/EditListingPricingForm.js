@@ -67,13 +67,20 @@ export const EditListingPricingFormComponent = props => (
         fetchListingProgress,
         values,
         userPublicData,
+        publicData,
+        price
       } = formRenderProps;
+
+      const hourlyCurrency = price && price.currency || values.currency;
+      const dailyCurrency = publicData[DAILY_PRICE] && publicData[DAILY_PRICE].currency || values.currency;
+      const weeklyCurrency = publicData[WEEKLY_PRICE] && publicData[WEEKLY_PRICE].currency || values.currency;
+      const monthlyCurrency = publicData[MONTHLY_PRICE] && publicData[MONTHLY_PRICE].currency || values.currency;
 
       // prices
       const pricePerHourLabel = intl.formatMessage({
         id: 'EditListingPricingForm.priceLabel',
       }, {
-        currency: values.currency
+        currency: hourlyCurrency
       });
       const pricePlaceholder = intl.formatMessage({
         id: 'EditListingPricingForm.pricePlaceholder',
@@ -83,7 +90,7 @@ export const EditListingPricingFormComponent = props => (
           id: 'EditListingPricingForm.priceRequired',
         })
       );
-      const minPrice = new Money(config.listingMinimumPriceSubUnits, values.currency);
+      const minPrice = new Money(config.listingMinimumPriceSubUnits, hourlyCurrency);
       const minPriceRequired = validators.moneySubUnitAmountAtLeast(
         intl.formatMessage(
           {
@@ -103,19 +110,19 @@ export const EditListingPricingFormComponent = props => (
       const pricePerDayLabel = intl.formatMessage({
         id: 'EditListingPricingForm.pricePerDayLabel'
       }, {
-        currency: values.currency
+        currency: dailyCurrency
       });
 
       const pricePerWeekLabel = intl.formatMessage({
         id: 'EditListingPricingForm.pricePerWeekLabel',
       }, {
-        currency: values.currency
+        currency: weeklyCurrency
       });
 
       const pricePerMonthLabel = intl.formatMessage({
         id: 'EditListingPricingForm.pricePerMonthLabel',
       }, {
-        currency: values.currency
+        currency: monthlyCurrency
       });
 
       const discountRequired = (discount, value) => {
@@ -211,7 +218,7 @@ export const EditListingPricingFormComponent = props => (
             className={css.priceInput}
             label={pricePerHourLabel}
             placeholder={pricePlaceholder}
-            currencyConfig={getMainCurrency(values.currency)}
+            currencyConfig={getMainCurrency(hourlyCurrency)}
             disabled={inputsDisabled}
           />
 
@@ -222,7 +229,7 @@ export const EditListingPricingFormComponent = props => (
             label={pricePerDayLabel}
             placeholder={pricePlaceholder}
             disabled={inputsDisabled}
-            currencyConfig={getMainCurrency(values.currency)}
+            currencyConfig={getMainCurrency(dailyCurrency)}
           />
 
           <FieldCurrencyInput
@@ -232,7 +239,7 @@ export const EditListingPricingFormComponent = props => (
             label={pricePerWeekLabel}
             placeholder={pricePlaceholder}
             disabled={inputsDisabled}
-            currencyConfig={getMainCurrency(values.currency)}
+            currencyConfig={getMainCurrency(weeklyCurrency)}
           />
 
           <FieldCurrencyInput
@@ -242,7 +249,7 @@ export const EditListingPricingFormComponent = props => (
             label={pricePerMonthLabel}
             placeholder={pricePlaceholder}
             disabled={inputsDisabled}
-            currencyConfig={getMainCurrency(values.currency)}
+            currencyConfig={getMainCurrency(monthlyCurrency)}
           />
 
           <p className={css.labelMinBook}>

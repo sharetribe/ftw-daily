@@ -383,9 +383,3 @@ export const sendVerificationEmail = () => (dispatch, getState, sdk) => {
     .then(() => dispatch(sendVerificationEmailSuccess()))
     .catch(e => dispatch(sendVerificationEmailError(storableError(e))));
 };
-
-export const currentUserUpdateProfile = (userData) => (dispatch, getState, sdk) => {
-  return sdk.currentUser.updateProfile({
-    ...userData
-  })
-}

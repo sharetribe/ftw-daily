@@ -157,6 +157,8 @@ const { minBookingType, minBookingCount } = minBooking || {}
       updateInProgress={updateInProgress}
       fetchErrors={errors}
       userPublicData={userPublicData}
+      publicData={publicData}
+      price={price}
     />
   ) : (
     <div className={css.priceCurrencyInvalid}>
