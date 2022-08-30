@@ -175,6 +175,7 @@ const routeConfiguration = () => {
       name: 'SignupPage',
       component: AuthenticationPage,
       extraProps: { tab: 'signup' },
+      loadData: pageDataLoadingAPI.AuthenticationPage.loadData,
     },
     {
       path: '/confirm',
