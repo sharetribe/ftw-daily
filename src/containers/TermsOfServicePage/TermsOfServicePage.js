@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 
 import config from '../../config';
 import { injectIntl, intlShape } from '../../util/reactIntl';
+import { camelize } from '../../util/string';
 
 import { H1 } from '../PageBuilder/Primitives/Heading';
 import PageBuilder, { SectionBuilder } from '../../containers/PageBuilder/PageBuilder';
@@ -69,9 +70,6 @@ const TermsOfServicePageComponent = props => {
     description: schemaDescription,
     name: schemaTitle,
   };
-
-  // Convert kebab-case to camelCase: my-page-asset > myPageAsset
-  const camelize = s => s.replace(/-(.)/g, l => l[1].toUpperCase());
 
   return (
     <PageBuilder
