@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2022-XX-XX
 
+## [v9.0.1] 2022-08-29
+
 - [fix] Use sharetribe-scripts v6.0.1. Fixes for
 
   - GENERATE_SOURCEMAP = false
@@ -26,6 +28,8 @@ way to update this template, but currently, we follow a pattern:
 - [fix] the import of customMediaQueries.css was somehow missed with these components:
   FieldReviewRating, SearchFiltersSecondary and TopbarMobileMenu.
   [#1537](https://github.com/sharetribe/ftw-daily/pull/1537)
+
+  [v9.0.1]: https://github.com/sharetribe/ftw-daily/compare/v9.0.0...v9.0.1
 
 ## [v9.0.0] 2022-07-11
 
@@ -47,6 +51,8 @@ Changes:
 - [change] ImageCarousel uses react-image-gallery. It renders all the images early on and supports
   touch swipes. [#1529](https://github.com/sharetribe/ftw-daily/pull/1529)
 - [fix] Fixing a small typo. [#1518](https://github.com/sharetribe/ftw-daily/pull/1518)
+
+  [v9.0.0]: https://github.com/sharetribe/ftw-daily/compare/v8.6.2...v9.0.0
 
 ## [v8.6.2] 2022-05-19
 
