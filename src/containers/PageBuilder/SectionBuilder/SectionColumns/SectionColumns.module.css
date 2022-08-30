@@ -31,3 +31,8 @@
     grid-template-columns: repeat(4, calc((100% - 3 * 32px) / 4));
   }
 }
+
+.noSidePaddings {
+  padding-left: 0;
+  padding-right: 0;
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { arrayOf, func, node, oneOf, shape, string } from 'prop-types';
+import { arrayOf, bool, func, node, oneOf, shape, string } from 'prop-types';
 import classNames from 'classnames';
 
 // Section components
@@ -42,7 +42,7 @@ const defaultSectionComponents = {
 
 const SectionBuilder = props => {
   const { sections, options } = props;
-  const { sectionComponents = {}, ...otherOption } = options || {};
+  const { sectionComponents = {}, isInsideContainer, ...otherOption } = options || {};
 
   // If there's no sections, we can't render the correct section component
   if (!sections || sections.length === 0) {
@@ -70,6 +70,7 @@ const SectionBuilder = props => {
               key={section.sectionId}
               className={classes}
               defaultClasses={DEFAULT_CLASSES}
+              isInsideContainer={isInsideContainer}
               options={otherOption}
               {...section}
             />
@@ -95,6 +96,9 @@ const propTypeOption = shape({
   fieldComponents: shape({ component: node, pickValidProps: func }),
   blockComponents: shape({ component: node }),
   sectionComponents: shape({ component: node }),
+  // isInsideContainer boolean means that the section is not taking
+  // the full viewport width but is run inside some wrapper.
+  isInsideContainer: bool,
 });
 
 SectionBuilder.defaultProps = {
