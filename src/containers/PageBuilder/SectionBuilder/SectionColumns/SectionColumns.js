@@ -1,5 +1,6 @@
 import React from 'react';
-import { arrayOf, func, node, number, object, oneOf, shape, string } from 'prop-types';
+import { arrayOf, bool, func, node, number, object, oneOf, shape, string } from 'prop-types';
+import classNames from 'classnames';
 
 import Field, { validProps } from '../../Field';
 import BlockBuilder from '../../BlockBuilder';
@@ -38,6 +39,7 @@ const SectionColumns = props => {
     backgroundImage,
     callToAction,
     blocks,
+    isInsideContainer,
     options,
   } = props;
 
@@ -67,7 +69,11 @@ const SectionColumns = props => {
         <Field data={callToAction} className={defaultClasses.ctaButton} options={fieldOptions} />
       </header>
       {hasBlocks ? (
-        <div className={getColumnCSS(numColumns)}>
+        <div
+          className={classNames(getColumnCSS(numColumns), {
+            [css.noSidePaddings]: isInsideContainer,
+          })}
+        >
           <BlockBuilder
             ctaButtonClass={defaultClasses.ctaButton}
             blocks={blocks}
@@ -103,6 +109,7 @@ SectionColumns.defaultProps = {
   backgroundImage: null,
   callToAction: null,
   blocks: [],
+  isInsideContainer: false,
   options: null,
 };
 
@@ -123,6 +130,7 @@ SectionColumns.propTypes = {
   backgroundImage: object,
   callToAction: object,
   blocks: arrayOf(propTypeBlock),
+  isInsideContainer: bool,
   options: propTypeOption,
 };
 

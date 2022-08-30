@@ -6,3 +6,8 @@
   margin: 0 auto;
   padding: 32px;
 }
+
+.noSidePaddings {
+  padding-left: 0;
+  padding-right: 0;
+}
