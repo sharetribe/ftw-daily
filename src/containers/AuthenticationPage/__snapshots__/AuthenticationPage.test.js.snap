@@ -98,16 +98,9 @@ exports[`AuthenticationPageComponent matches snapshot 1`] = `
         <div
           className="termsWrapper"
         >
-          <h2
-            className="termsHeading"
-          >
-            <MemoizedFormattedMessage
-              id="AuthenticationPage.termsHeading"
-            />
-          </h2>
-          <TermsOfService
-            className={null}
-            rootClassName={null}
+          <TermsOfServiceContent
+            error={null}
+            inProgress={false}
           />
         </div>
       </injectIntl(ModalComponent)>
@@ -261,16 +254,9 @@ exports[`AuthenticationPageComponent with Facebook login matches snapshot 1`] = 
         <div
           className="termsWrapper"
         >
-          <h2
-            className="termsHeading"
-          >
-            <MemoizedFormattedMessage
-              id="AuthenticationPage.termsHeading"
-            />
-          </h2>
-          <TermsOfService
-            className={null}
-            rootClassName={null}
+          <TermsOfServiceContent
+            error={null}
+            inProgress={false}
           />
         </div>
       </injectIntl(ModalComponent)>
@@ -469,16 +455,9 @@ exports[`AuthenticationPageComponent with Google and Facebook login matches snap
         <div
           className="termsWrapper"
         >
-          <h2
-            className="termsHeading"
-          >
-            <MemoizedFormattedMessage
-              id="AuthenticationPage.termsHeading"
-            />
-          </h2>
-          <TermsOfService
-            className={null}
-            rootClassName={null}
+          <TermsOfServiceContent
+            error={null}
+            inProgress={false}
           />
         </div>
       </injectIntl(ModalComponent)>
@@ -651,16 +630,9 @@ exports[`AuthenticationPageComponent with Google login matches snapshot 1`] = `
         <div
           className="termsWrapper"
         >
-          <h2
-            className="termsHeading"
-          >
-            <MemoizedFormattedMessage
-              id="AuthenticationPage.termsHeading"
-            />
-          </h2>
-          <TermsOfService
-            className={null}
-            rootClassName={null}
+          <TermsOfServiceContent
+            error={null}
+            inProgress={false}
           />
         </div>
       </injectIntl(ModalComponent)>
