@@ -38,7 +38,6 @@
   "AuthenticationPage.signupLinkText": "Regístrate",
   "AuthenticationPage.signupWithFacebook": "Registrarse con Facebook",
   "AuthenticationPage.signupWithGoogle": "Regístrate con Google",
-  "AuthenticationPage.termsHeading": "Términos de servicio",
   "AuthenticationPage.verifyEmailClose": "MÁS TARDE",
   "AuthenticationPage.verifyEmailText": "¡Gracias por registrarte! Sólo te queda un paso más. Para poder contactarte, necesitamos que verifiques tu cuenta de correo electrónico. Por favor, haz clic en el link que te hemos enviado a {email}.",
   "AuthenticationPage.verifyEmailTitle": "{name}, revisa tu buzón para verificar tu correo electrónico",
