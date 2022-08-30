@@ -38,7 +38,6 @@
   "AuthenticationPage.signupLinkText": "Sign up",
   "AuthenticationPage.signupWithFacebook": "Sign up with Facebook",
   "AuthenticationPage.signupWithGoogle": "Sign up with Google",
-  "AuthenticationPage.termsHeading": "Terms of Service",
   "AuthenticationPage.verifyEmailClose": "LATER",
   "AuthenticationPage.verifyEmailText": "Thanks for signing up! There's one quick step left. To be able to contact you, we need you to verify your email address. Please click the link we sent to {email}.",
   "AuthenticationPage.verifyEmailTitle": "{name}, check your inbox to verify your email",
