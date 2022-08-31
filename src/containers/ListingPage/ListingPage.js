@@ -73,7 +73,7 @@ const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
 const { UUID, Money } = sdkTypes;
 
 const priceData = (price, intl) => {
-  if (price && price.currency === config.currency) {
+  if (price && price.currency === config.currency || price.currency === config.additionalCurrency) {
     const formattedPrice = formatMoney(intl, price);
     return { formattedPrice, priceTitle: formattedPrice };
   } else if (price) {
@@ -383,6 +383,7 @@ export class ListingPageComponent extends Component {
     const { key: priceType, value: { amount, currency } } = getLowestPrice(currentListing);
 
     const { formattedPrice, priceTitle } = priceData(amount && currency ? new Money(amount, currency) : null, intl);
+    console.log({ formattedPrice, priceTitle })
 
 
     const handleBookingSubmit = values => {
