@@ -18,7 +18,7 @@ const { Money } = sdkTypes;
 const MIN_LENGTH_FOR_LONG_WORDS = 10;
 
 const priceData = (price, intl) => {
-  if (price && price.currency === config.currency) {
+  if (price && price.currency === config.currency || price.currency === config.additionalCurrency) {
     const formattedPrice = formatMoney(intl, price);
     return { formattedPrice, priceTitle: formattedPrice };
   } else if (price) {

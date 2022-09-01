@@ -139,7 +139,9 @@ const EditListingWizardTab = props => {
       }
     }
 
-    onCurrentUserUpdateProfile({ publicData: { currency }})
+    if (tab === PRICING) {
+      onCurrentUserUpdateProfile({ publicData: { currency } })
+    }
 
     if (isNewListingFlow) {
       const onUpsertListingDraft = isNewURI
