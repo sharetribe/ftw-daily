@@ -88,6 +88,7 @@ exports.sitemapStructure = () => {
       '/blog/4-reasons-coworking-works-for-your-business/': ['get'],
       '/blog/listing-your-patch-definitive-guide/': ['get'],
       '/blog/tag/event-space-in-east-london/': ['get'],
+      '/l/concert-hall-space-to-hire-in-dalston/62fe5419-e1e3-463e-a1d5-caa116493bac': ['get'],
       // '/signup': ['get'],
       // '/login': ['get'],
       // '/s?address=Helsinki%2C%20Finland%26bounds=60.2978389%2C25.254484899999966%2C59.9224887%2C24.782875800000056%26country=FI%26origin=60.16985569999999%2C24.93837910000002': [
@@ -104,6 +105,11 @@ exports.sitemapStructure = () => {
         priority: 1.0,
       },
       '/faq': {
+        lastmod: now,
+        changefreq: 'daily',
+        priority: 0.9,
+      },
+      '/l/concert-hall-space-to-hire-in-dalston/62fe5419-e1e3-463e-a1d5-caa116493bac': {
         lastmod: now,
         changefreq: 'daily',
         priority: 0.9,
