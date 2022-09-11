@@ -9,6 +9,7 @@
 .topbar {
   @media (--viewportMedium) {
     position: fixed;
+    display: -ms-flexbox;
     top: 0;
     left: 0;
     /* We need to raise Topbar above .container */

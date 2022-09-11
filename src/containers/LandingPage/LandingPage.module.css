@@ -25,7 +25,10 @@
     min-height: 600px;
     height: calc(70vh - var(--topbarHeightDesktop));
   }
+  
 }
+
+
 
 .hero {
   flex-grow: 1;

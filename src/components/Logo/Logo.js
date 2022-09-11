@@ -3,19 +3,37 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import config from '../../config';
-import IconLogo from './IconLogo';
-import LogoImage from './saunatime-logo.png';
+//import IconLogo from './IconLogo';
+//import LogoImage from './CARLO_SCHRIFTZUG.png';
 import css from './Logo.module.css';
+import MobileLogoImage from './CARLO_LOGO.png';
+import DesktopLogoImage from './CARLO_SCHRIFTZUG.png';
+
+//const Logo = props => {
+//  const { className, format, ...rest } = props;
+//  const mobileClasses = classNames(css.logoMobile, className);
+
+//  if (format === 'desktop') {
+//    return <img className={className} src={LogoImage} alt={config.siteTitle} {...rest} />;
+//  }
+//
+//  return <IconLogo className={mobileClasses} {...rest} />;
+//};
 
 const Logo = props => {
   const { className, format, ...rest } = props;
-  const mobileClasses = classNames(css.logoMobile, className);
+  const isMobile = format !== 'desktop';
+  const classes = classNames(className, { [css.logoMobile]: isMobile });
+  const logoImage = isMobile ? MobileLogoImage : DesktopLogoImage;
 
-  if (format === 'desktop') {
-    return <img className={className} src={LogoImage} alt={config.siteTitle} {...rest} />;
-  }
-
-  return <IconLogo className={mobileClasses} {...rest} />;
+  return (
+    <img
+      className={classes}
+      src={logoImage}
+      alt={config.siteTitle}
+      {...rest}
+    />
+  );
 };
 
 const { oneOf, string } = PropTypes;
