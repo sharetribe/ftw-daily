@@ -1,7 +1,22 @@
 @import '../../styles/customMediaQueries.css';
 
 .root {
+    /* ================ Topbar related ================ */
+
+ --topbarHeight: 0px;
+ --topbarHeightDesktop: 0px;
+
+ --TopbarMobileMenu_topMargin: 96px;
+
+ --Topbar_logoHeight: 25px;
+ --CheckoutPage_logoHeight: 25px;
+ --CheckoutPage_logoHeightDesktop: 27px;
+
+ --TopbarSearchForm_inputHeight: 53px;
+ --TopbarSearchForm_topbarMargin: 94px;
+ --TopbarSearchForm_bottomBorder: 3px;
 }
+
 
 /* heroContainer gives the height for SectionHero */
 /* Safari has a bug with vw padding inside flexbox. Therefore we need an extra div (container) */
@@ -27,7 +42,6 @@
   }
   
 }
-
 
 
 .hero {
