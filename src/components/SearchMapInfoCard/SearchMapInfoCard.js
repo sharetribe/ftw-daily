@@ -24,7 +24,7 @@ const ListingCard = props => {
 
   const {key: priceType, value: {amount, currency}} = getLowestPrice(listing, activePrice);
 
-  const formattedPrice = amount && currency && currency === config.currency ? formatMoney(intl, new Money(amount, currency)) : config.currency;
+  const formattedPrice = amount && currency && (currency === config.currency || currency === config.additionalCurrency) ? formatMoney(intl, new Money(amount, currency)) : config.currency;
 
   const unitTranslation = amount && currency ? ` / ${intl.formatMessage({id: `SearchMapInfoCard.${priceType}`})}` : '';
 
