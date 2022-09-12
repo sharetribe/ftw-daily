@@ -47,7 +47,7 @@ const MENU_CONTENT_OFFSET = -12;
 const MAX_LENGTH_FOR_WORDS_IN_TITLE = 7;
 
 const priceData = (price, intl) => {
-  if (price && price.currency === config.currency) {
+  if (price && (price.currency === config.currency || price.currency === config.additionalCurrency)) {
     const formattedPrice = formatMoney(intl, price);
     return { formattedPrice, priceTitle: formattedPrice };
   } else if (price) {
