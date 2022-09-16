@@ -11,7 +11,7 @@ import { canonicalRoutePath } from '../../util/routes';
 import { CookieConsent, GTMWrapper } from '../../components';
 
 import facebookImage from '../../assets/hotpatch-logo-new-social.png';
-import twitterImage from '../../assets/hotpatch-logo-new-social.png';
+import twitterImage from '../../assets/hotpatch-logo-new-social-twitter.png';
 import css from './Page.module.css';
 
 const preventDefault = e => {
