@@ -18,6 +18,7 @@ import {
   Footer,
 } from '../../components';
 import { TopbarContainer } from '../../containers';
+import { TopbarSearchForm } from '../../forms';
 
 import facebookImage from '../../assets/saunatimeFacebook-1200x630.jpg';
 import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg';
@@ -34,6 +35,7 @@ export const LandingPageComponent = props => {
   const schemaDescription = intl.formatMessage({ id: 'LandingPage.schemaDescription' });
   const schemaImage = `${config.canonicalRootURL}${facebookImage}`;
 
+  
   return (
     <Page
       className={css.root}
@@ -55,9 +57,12 @@ export const LandingPageComponent = props => {
     >
       <LayoutSingleColumn>
         <LayoutWrapperTopbar>
-          <TopbarContainer />
         </LayoutWrapperTopbar>
         <LayoutWrapperMain>
+          <TopbarContainer>
+            className = {css.searchform}
+            currentPage = "LandingPage"
+          </TopbarContainer>
           <div className={css.heroContainer}>
             <SectionHero className={css.hero} history={history} location={location} />
           </div>

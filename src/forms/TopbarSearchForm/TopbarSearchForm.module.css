@@ -60,6 +60,7 @@
 }
 
 .desktopInput {
+  z-index: 870;
   composes: h4 from global;
   flex-grow: 1;
   /* Font */

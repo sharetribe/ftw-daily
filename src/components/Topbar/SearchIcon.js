@@ -11,7 +11,7 @@ const SearchIcon = props => {
   return (
     <svg
       className={classes}
-      width="18"
+      width="25"
       height="18"
       viewBox="0 0 18 18"
       xmlns="http://www.w3.org/2000/svg"

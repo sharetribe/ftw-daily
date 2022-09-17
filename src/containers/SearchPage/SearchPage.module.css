@@ -11,7 +11,7 @@
     position: fixed;
     display: -ms-flexbox;
     top: 0;
-    left: 0;
+    left: 50;
     /* We need to raise Topbar above .container */
     z-index: 1;
   }
