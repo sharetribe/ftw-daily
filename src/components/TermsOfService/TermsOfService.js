@@ -93,7 +93,7 @@ const TermsOfService = props => {
           <li>Payment in respect of each Order will be made immediately by debit or credit payment card.</li>
           <li>We fund the Platform by receiving a commission from Patch bookings, which is based on the amounts paid for Reservations. \</li>
       </ol>
-      <h2 id="7-the-relationship-between-hotpatch-you-and-patches">7. The relationship between Hotpatch, you, and patches</h2>
+      <h2 id="7-the-relationship-between-hotpatch-you-and-patches">7. The relationship between HotPatch, you, and Patches</h2>
       <ol>
           <li>All Reservations are sold on the basis of a contract between you and the Host. We are not a party to any contracts or transactions you may enter with other persons or any other business interactions other than the Patch reservation. We are not the seller or supplier of any Reservations made available on the Platform. </li>
           <li>Reservations may be offered subject to additional terms requested by the Host. You should ensure you are aware of any additional terms and agree to be bound by them before making a Reservation.</li>
@@ -204,7 +204,7 @@ const TermsOfService = props => {
           <li>All emails (or other messages) we send are intended for the addressee only.</li>
           <li>We may also contact you about news, discounts and offers.</li>
       </ol>
-      <p>HotPatch Limited <br />
+      <p>Hotpatch Limited <br />
       Registered company number 12325522.  <br />
       Email: <strong>support@hotpatch.com</strong></p>
     </div>
