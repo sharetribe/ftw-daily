@@ -2,7 +2,7 @@ import React from 'react';
 import { arrayOf, bool, func, node, object, oneOf, shape, string } from 'prop-types';
 import classNames from 'classnames';
 
-import Field, { validProps } from '../../Field';
+import Field, { validProps, hasDataInFields } from '../../Field';
 import BlockBuilder from '../../BlockBuilder';
 
 import SectionContainer from '../SectionContainer';
@@ -35,6 +35,7 @@ const SectionArticle = props => {
   const colorProp = validProps(background, fieldOptions);
   const backgroundColorMaybe = colorProp?.color ? { backgroundColor: colorProp.color } : {};
 
+  const hasHeaderFields = hasDataInFields([title, ingress, callToAction], fieldOptions);
   const hasBlocks = blocks?.length > 0;
 
   return (
@@ -46,11 +47,13 @@ const SectionArticle = props => {
       backgroundImage={backgroundImage}
       options={fieldOptions}
     >
-      <header className={defaultClasses.sectionDetails}>
-        <Field data={title} className={defaultClasses.title} options={fieldOptions} />
-        <Field data={ingress} className={defaultClasses.ingress} options={fieldOptions} />
-        <Field data={callToAction} className={defaultClasses.ctaButton} options={fieldOptions} />
-      </header>
+      {hasHeaderFields ? (
+        <header className={defaultClasses.sectionDetails}>
+          <Field data={title} className={defaultClasses.title} options={fieldOptions} />
+          <Field data={ingress} className={defaultClasses.ingress} options={fieldOptions} />
+          <Field data={callToAction} className={defaultClasses.ctaButton} options={fieldOptions} />
+        </header>
+      ) : null}
       {hasBlocks ? (
         <div className={classNames(css.articleMain, { [css.noSidePaddings]: isInsideContainer })}>
           <BlockBuilder blocks={blocks} options={options} />

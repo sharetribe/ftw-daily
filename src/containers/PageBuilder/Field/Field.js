@@ -114,6 +114,17 @@ export const validProps = (data, options) => {
   return null;
 };
 
+// Check that the array of given field data is containing some content
+// (fieldOptions parameter is needed if custom fields are used)
+export const hasDataInFields = (fields, fieldOptions) => {
+  const hasData = fields.reduce((hasFoundValues, fieldData) => {
+    const validPropsFromData = validProps(fieldData, fieldOptions);
+    const hasDataInCurrent = validPropsFromData && Object.keys(validPropsFromData).length > 0;
+    return hasFoundValues || hasDataInCurrent;
+  }, false);
+  return hasData;
+};
+
 ////////////////////
 // Field selector //
 ////////////////////
