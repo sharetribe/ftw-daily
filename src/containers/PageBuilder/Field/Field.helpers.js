@@ -4,7 +4,7 @@ import { sanitizeUrl } from '../../../util/sanitize';
 // Pickers for valid props //
 /////////////////////////////
 
-const hasContent = data => typeof data?.content === 'string';
+const hasContent = data => typeof data?.content === 'string' && data?.content.length > 0;
 
 /**
  * Exposes "content" prop as children property, if "content" has type of string.
@@ -33,7 +33,8 @@ export const exposeContentString = data => (hasContent(data) ? { content: data.c
  */
 export const exposeLinkProps = data => {
   const { label, href } = data;
-  const hasCorrectProps = typeof label === 'string' && typeof href === 'string';
+  const hasCorrectProps =
+    typeof label === 'string' && typeof href === 'string' && label.length > 0 && href.length > 0;
   // Sanitize the URL. See: src/utl/sanitize.js for more information.
   const cleanUrl = hasCorrectProps ? sanitizeUrl(href) : null;
   return cleanUrl ? { children: label, href: cleanUrl } : {};
