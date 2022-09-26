@@ -20,9 +20,11 @@ const AddressLinkMaybe = props => {
 
   const classes = classNames(rootClassName || css.address, className);
   return showAddress && hrefToGoogleMaps ? (
+    <div><p><b>Location:</b></p>
     <p className={classes}>
       <ExternalLink href={hrefToGoogleMaps}>{fullAddress}</ExternalLink>
     </p>
+    <p className={classes}>Click on the address to view it in Google Maps and plot a route to the Patch from wherever you are!</p></div>
   ) : null;
 };
 
