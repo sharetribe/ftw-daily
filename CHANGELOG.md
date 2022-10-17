@@ -14,8 +14,12 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2022-XX-XX
 
+## [v9.0.2] 2022-10-17
+
 - [change] Add links to free Privacy Policy and Terms of Service templates
   [#1553](https://github.com/sharetribe/ftw-daily/pull/1553)
+
+  [v9.0.2]: https://github.com/sharetribe/ftw-daily/compare/v9.0.1...v9.0.2
 
 ## [v9.0.1] 2022-08-29
 
