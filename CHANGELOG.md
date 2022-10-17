@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2022-XX-XX
 
+- [change] Add links to free Privacy Policy and Terms of Service templates
+  [#1553](https://github.com/sharetribe/ftw-daily/pull/1553)
+
 ## [v9.0.1] 2022-08-29
 
 - [fix] Use sharetribe-scripts v6.0.1. Fixes for

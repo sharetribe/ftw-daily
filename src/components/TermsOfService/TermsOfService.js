@@ -14,10 +14,11 @@ const TermsOfService = props => {
       <p className={css.lastUpdated}>Last updated: October 30, 2017</p>
 
       <p>
-        Thank you for using Saunatime! Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        Thank you for using Saunatime! Every marketplace business needs Terms of Service and
+        Privacy Policy agreements. To help you launch your marketplace faster, we've compiled 
+        two templates you can use as a baseline for the agreements between your online marketplace 
+        business and its users. You can access these templates at 
+        https://www.sharetribe.com/docs/operator-guides/free-templates/
       </p>
 
       <h2>1 Lorem ipsum dolor sit amet</h2>
