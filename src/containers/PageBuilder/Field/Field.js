@@ -10,7 +10,7 @@ import { Ingress } from '../Primitives/Ingress';
 import { P } from '../Primitives/P';
 import { Code, CodeBlock } from '../Primitives/Code';
 import { Link } from '../Primitives/Link';
-import { MarkdownImage, BackgroundImage, FieldImage } from '../Primitives/Image';
+import { MarkdownImage, FieldImage } from '../Primitives/Image';
 import { CustomBackground } from '../Primitives/CustomBackground';
 
 import renderMarkdown from '../markdownProcessor';
@@ -47,7 +47,6 @@ const defaultFieldComponents = {
   externalButtonLink: { component: Link, pickValidProps: exposeLinkProps },
   internalButtonLink: { component: Link, pickValidProps: exposeLinkProps },
   image: { component: FieldImage, pickValidProps: exposeImageProps },
-  backgroundImage: { component: BackgroundImage, pickValidProps: exposeImageProps },
   customBackground: { component: CustomBackground, pickValidProps: exposeCustomBackgroundProps },
 
   // markdown content field is pretty complex component
@@ -132,13 +131,15 @@ export const hasDataInFields = (fields, fieldOptions) => {
 // Field selector //
 ////////////////////
 
+const isEmpty = obj => Object.keys(obj).length === 0;
+
 // Generic field component that picks a specific UI component based on 'type'
 const Field = props => {
   const { data, options: fieldOptions, ...propsFromParent } = props;
 
   // Check the data and pick valid props only
   const validPropsFromData = validProps(data, fieldOptions);
-  const hasValidProps = validPropsFromData && Object.keys(validPropsFromData).length > 0;
+  const hasValidProps = validPropsFromData && !isEmpty(validPropsFromData);
 
   // Config contains component, pickValidProps, and potentially also options.
   // E.g. markdown has options.components to override default elements
@@ -178,22 +179,32 @@ const propTypeLink = shape({
   label: string.isRequired,
   href: string.isRequired,
 });
+
 const propTypeImageAsset = shape({
-  type: oneOf(['image', 'backgroundImage']).isRequired,
-  alt: string.isRequired,
-  image: shape({
-    id: string.isRequired,
-    type: oneOf(['imageAsset']).isRequired,
-    attributes: shape({
-      variants: objectOf(
-        shape({
-          width: number.isRequired,
-          height: number.isRequired,
-          url: string.isRequired,
-        })
-      ).isRequired,
-    }).isRequired,
+  id: string.isRequired,
+  type: oneOf(['imageAsset']).isRequired,
+  attributes: shape({
+    variants: objectOf(
+      shape({
+        width: number.isRequired,
+        height: number.isRequired,
+        url: string.isRequired,
+      })
+    ).isRequired,
   }).isRequired,
+});
+
+const propTypeImage = shape({
+  type: oneOf(['image']).isRequired,
+  alt: string.isRequired,
+  image: propTypeImageAsset.isRequired,
+});
+
+const propTypeCustomBackground = shape({
+  type: oneOf(['customBackground']).isRequired,
+  color: string.isRequired,
+  textColor: string.isRequired,
+  backgroundImage: propTypeImageAsset.isRequired,
 });
 
 const propTypeOption = shape({
@@ -215,7 +226,8 @@ Field.propTypes = {
     propTypeTextContent,
     propTypeColor,
     propTypeLink,
-    propTypeImageAsset,
+    propTypeImage,
+    propTypeCustomBackground,
     propTypeEmptyObject,
   ]),
   options: propTypeOption,
