@@ -11,6 +11,7 @@ import { P } from '../Primitives/P';
 import { Code, CodeBlock } from '../Primitives/Code';
 import { Link } from '../Primitives/Link';
 import { MarkdownImage, BackgroundImage, FieldImage } from '../Primitives/Image';
+import { CustomBackground } from '../Primitives/CustomBackground';
 
 import renderMarkdown from '../markdownProcessor';
 
@@ -18,6 +19,7 @@ import {
   exposeContentAsChildren,
   exposeContentString,
   exposeLinkProps,
+  exposeCustomBackgroundProps,
   exposeImageProps,
   exposeColorProps,
 } from './Field.helpers';
@@ -46,6 +48,7 @@ const defaultFieldComponents = {
   internalButtonLink: { component: Link, pickValidProps: exposeLinkProps },
   image: { component: FieldImage, pickValidProps: exposeImageProps },
   backgroundImage: { component: BackgroundImage, pickValidProps: exposeImageProps },
+  customBackground: { component: CustomBackground, pickValidProps: exposeCustomBackgroundProps },
 
   // markdown content field is pretty complex component
   markdown: {
