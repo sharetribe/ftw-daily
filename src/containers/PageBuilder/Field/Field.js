@@ -21,7 +21,6 @@ import {
   exposeLinkProps,
   exposeCustomBackgroundProps,
   exposeImageProps,
-  exposeColorProps,
 } from './Field.helpers';
 
 ////////////////////////
@@ -73,8 +72,6 @@ const defaultFieldComponents = {
       },
     },
   },
-  // hexColor doesn't render component: it's used as an inlined background-color for section component
-  hexColor: { pickValidProps: exposeColorProps },
 };
 
 //////////////////
@@ -169,11 +166,6 @@ const propTypeTextContent = shape({
   ]).isRequired,
   content: string.isRequired,
 });
-const propTypeColor = shape({
-  type: oneOf(['hexColor']).isRequired,
-  color: string.isRequired,
-  href: string.isRequired,
-});
 const propTypeLink = shape({
   type: oneOf(['externalButtonLink', 'internalButtonLink']).isRequired,
   label: string.isRequired,
@@ -202,9 +194,9 @@ const propTypeImage = shape({
 
 const propTypeCustomBackground = shape({
   type: oneOf(['customBackground']).isRequired,
-  color: string.isRequired,
-  textColor: string.isRequired,
-  backgroundImage: propTypeImageAsset.isRequired,
+  color: string,
+  textColor: string,
+  backgroundImage: propTypeImageAsset,
 });
 
 const propTypeOption = shape({
@@ -224,7 +216,6 @@ Field.defaultProps = {
 Field.propTypes = {
   data: oneOfType([
     propTypeTextContent,
-    propTypeColor,
     propTypeLink,
     propTypeImage,
     propTypeCustomBackground,
