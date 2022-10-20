@@ -373,7 +373,7 @@ export const SectionColumns = {
         sectionType: 'columns',
         sectionId: 'cms-column-section-no-block',
         numColumns: 1,
-        background: { type: 'hexColor', color: hexYellow },
+        background: { type: 'customBackground', color: hexYellow },
         title: { type: 'heading2', content: 'One Column, No Blocks' },
         ingress: {
           type: 'paragraph',
@@ -384,7 +384,7 @@ export const SectionColumns = {
         sectionType: 'columns',
         sectionId: 'cms-column-section-no-block-dark',
         numColumns: 1,
-        background: { type: 'hexColor', color: hexBlack },
+        background: { type: 'customBackground', color: hexBlack },
         textColor: 'light',
         title: { type: 'heading2', content: 'One Column, No Blocks' },
         ingress: {
@@ -401,7 +401,7 @@ export const SectionColumns = {
         sectionType: 'columns',
         sectionId: 'cms-column-section-no-block-bg-img',
         numColumns: 1,
-        background: { type: 'hexColor', color: hexYellow },
+        background: { type: 'customBackground', color: hexYellow },
         backgroundImage: {
           type: 'image',
           alt: 'Background image',
@@ -492,7 +492,7 @@ export const SectionColumns = {
         sectionType: 'columns',
         sectionId: 'cms-column-section-2-dark',
         numColumns: 2,
-        background: { type: 'hexColor', color: hexBlack },
+        background: { type: 'customBackground', color: hexBlack },
         textColor: 'light',
         title: { type: 'heading2', content: '2 Columns, Dark' },
         ingress: {
