@@ -1,8 +1,7 @@
 import React from 'react';
-import { func, node, number, objectOf, oneOf, oneOfType, shape, string } from 'prop-types';
+import { number, objectOf, oneOf, shape, string } from 'prop-types';
 import classNames from 'classnames';
 
-import { types as sdkTypes } from '../../../../util/sdkLoader';
 import { AspectRatioWrapper, ResponsiveImage } from '../../../../components/index.js';
 
 import css from './Image.module.css';
@@ -28,56 +27,6 @@ MarkdownImage.propTypes = {
   className: string,
   src: string.isRequired,
   alt: string,
-};
-
-// BackgroundImage doesn't have enforcable aspectratio
-export const BackgroundImage = React.forwardRef((props, ref) => {
-  const { className, rootClassName, alt, image, sizes, ...otherProps } = props;
-
-  const { variants } = image?.attributes || {};
-  const variantNames = Object.keys(variants);
-
-  const classes = classNames(rootClassName || css.backgroundImage, className);
-  return (
-    <ResponsiveImage
-      className={classes}
-      ref={ref}
-      alt={alt}
-      image={image}
-      variants={variantNames}
-      sizes={sizes}
-      {...otherProps}
-    />
-  );
-});
-
-BackgroundImage.displayName = 'BackgroundImage';
-
-BackgroundImage.defaultProps = {
-  rootClassName: null,
-  className: null,
-  alt: 'image',
-  sizes: null,
-};
-
-BackgroundImage.propTypes = {
-  rootClassName: string,
-  className: string,
-  alt: string,
-  image: shape({
-    id: string.isRequired,
-    type: oneOf(['imageAsset']).isRequired,
-    attributes: shape({
-      variants: objectOf(
-        shape({
-          width: number.isRequired,
-          height: number.isRequired,
-          url: string.isRequired,
-        })
-      ).isRequired,
-    }).isRequired,
-  }).isRequired,
-  sizes: string,
 };
 
 // Image as a Field (by default these are only allowed inside a block).

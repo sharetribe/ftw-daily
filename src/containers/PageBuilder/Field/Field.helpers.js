@@ -93,19 +93,6 @@ export const exposeImageProps = data => {
 };
 
 /**
- * Exposes "color" property, if it contains hexadecimal string like "#FF0000" or "#F00".
- *
- * @param {Object} data E.g. "{ type: 'hexColor', color: '#FFFFFF' }"
- * @returns object containing color prop.
- */
-export const exposeColorProps = data => {
-  const color = data?.color;
-  const re = new RegExp('^#([0-9a-f]{3}){1,2}$', 'i');
-  const isValidColor = typeof color === 'string' && re.test(color);
-  return isValidColor ? { color } : {};
-};
-
-/**
  * Helper that exposes "color" value, if it contains hexadecimal string like "#FF0000" or "#F00".
  *
  * @param {String} data E.g. "#FFFFFF"
