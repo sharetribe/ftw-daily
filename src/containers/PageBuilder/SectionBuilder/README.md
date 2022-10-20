@@ -21,7 +21,7 @@ SectionBuilder uses internal component **SectionArticle** to render the section 
       },
       blocks: [
         {
-          blockType: 'default-block',
+          blockType: 'defaultBlock',
           blockId: 'cms-article-section-block-1',
           text: {
             type: 'markdown',

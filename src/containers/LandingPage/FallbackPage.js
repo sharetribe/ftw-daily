@@ -33,7 +33,7 @@ export const fallbackSections = {
       // },
       blocks: [
         {
-          blockType: 'default-block',
+          blockType: 'defaultBlock',
           blockId: 'hero-content',
           media: {
             type: 'image',

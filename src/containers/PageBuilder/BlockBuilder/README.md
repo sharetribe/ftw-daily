@@ -7,7 +7,7 @@ The default schema for page content has 3 levels that can include content fields
     - **blocks** (section might contain blocks)
 
 This is the builder for block types. Although, at the time of writing, there's only one block type
-supported: '**default-block**'. The component called **BlockDefault** handles the rendering of that
+supported: '**defaultBlock**'. The component called **BlockDefault** handles the rendering of that
 block type.
 
 ```jsx
@@ -15,7 +15,7 @@ block type.
   ctaButtonClass={css.myCallToActionButton}
   blocks={[
     {
-      blockType: 'default-block',
+      blockType: 'defaultBlock',
       blockId: 'block-1',
       title: {
         type: 'heading2',
@@ -78,7 +78,7 @@ block type.
 
       ```js
       const defaultBlockComponents = {
-        ['default-block']: { component: BlockDefault },
+        defaultBlock: { component: BlockDefault },
       };
       ```
 
@@ -86,6 +86,6 @@ block type.
 
       ```js
       const defaultBlockComponents = {
-        ['default-block']: { component: BlockMyComponent },
+        defaultBlock: { component: BlockMyComponent },
       };
       ```
