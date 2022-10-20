@@ -1,16 +1,16 @@
 import React from 'react';
-import { arrayOf, bool, func, node, object, oneOf, shape, string } from 'prop-types';
+import { arrayOf, bool, func, node, object, shape, string } from 'prop-types';
 import classNames from 'classnames';
 
-import Field, { validProps, hasDataInFields } from '../../Field';
+import Field, { hasDataInFields } from '../../Field';
 import BlockBuilder from '../../BlockBuilder';
 
 import SectionContainer from '../SectionContainer';
 
 import css from './SectionFeatures.module.css';
 
-// Section component that shows features
-// Blocks are shown in a row-like way:
+// Section component that shows features.
+// Block content are shown in a row-like way:
 // [image] text
 // text [image]
 // [image] text
@@ -23,7 +23,6 @@ const SectionFeatures = props => {
     title,
     ingress,
     background,
-    backgroundImage,
     callToAction,
     blocks,
     isInsideContainer,
@@ -35,10 +34,6 @@ const SectionFeatures = props => {
   const fieldComponents = options?.fieldComponents;
   const fieldOptions = { fieldComponents };
 
-  // Find background color if it is included
-  const colorProp = validProps(background, fieldOptions);
-  const backgroundColorMaybe = colorProp?.color ? { backgroundColor: colorProp.color } : {};
-
   const hasHeaderFields = hasDataInFields([title, ingress, callToAction], fieldOptions);
   const hasBlocks = blocks?.length > 0;
 
@@ -47,8 +42,7 @@ const SectionFeatures = props => {
       id={sectionId}
       className={className}
       rootClassName={rootClassName}
-      style={backgroundColorMaybe}
-      backgroundImage={backgroundImage}
+      background={background}
       options={fieldOptions}
     >
       {hasHeaderFields ? (
@@ -71,13 +65,6 @@ const SectionFeatures = props => {
     </SectionContainer>
   );
 };
-
-const propTypeBlock = shape({
-  blockId: string.isRequired,
-  blockType: oneOf(['default-block']).isRequired,
-  // Plus all kind of unknown fields.
-  // Section doesn't really need to care about those
-});
 
 const propTypeOption = shape({
   fieldComponents: shape({ component: node, pickValidProps: func }),
@@ -113,7 +100,7 @@ SectionFeatures.propTypes = {
   background: object,
   backgroundImage: object,
   callToAction: object,
-  blocks: arrayOf(propTypeBlock),
+  blocks: arrayOf(object),
   isInsideContainer: bool,
   options: propTypeOption,
 };
