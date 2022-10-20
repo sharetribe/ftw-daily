@@ -12,6 +12,7 @@ import { Code, CodeBlock } from '../Primitives/Code';
 import { Link } from '../Primitives/Link';
 import { MarkdownImage, FieldImage } from '../Primitives/Image';
 import { CustomBackground } from '../Primitives/CustomBackground';
+import { YoutubeEmbed } from '../Primitives/YoutubeEmbed';
 
 import renderMarkdown from '../markdownProcessor';
 
@@ -21,6 +22,7 @@ import {
   exposeLinkProps,
   exposeCustomBackgroundProps,
   exposeImageProps,
+  exposeYoutubeProps,
 } from './Field.helpers';
 
 ////////////////////////
@@ -47,6 +49,7 @@ const defaultFieldComponents = {
   internalButtonLink: { component: Link, pickValidProps: exposeLinkProps },
   image: { component: FieldImage, pickValidProps: exposeImageProps },
   customBackground: { component: CustomBackground, pickValidProps: exposeCustomBackgroundProps },
+  youtube: { component: YoutubeEmbed, pickValidProps: exposeYoutubeProps },
 
   // markdown content field is pretty complex component
   markdown: {
