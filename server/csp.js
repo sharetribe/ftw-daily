@@ -40,7 +40,7 @@ const defaultDirectives = {
     '*.stripe.com',
   ],
   fontSrc: [self, data, 'assets-sharetribecom.sharetribe.com', 'fonts.gstatic.com'],
-  frameSrc: [self, '*.stripe.com'],
+  frameSrc: [self, '*.stripe.com', '*.youtube-nocookie.com'],
   imgSrc: [
     self,
     data,
@@ -64,6 +64,9 @@ const defaultDirectives = {
     'www.google.com',
     'www.google-analytics.com',
     'stats.g.doubleclick.net',
+
+    // Youtube (static image)
+    '*.ytimg.com',
 
     '*.stripe.com',
   ],

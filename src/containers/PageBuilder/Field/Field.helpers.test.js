@@ -4,6 +4,7 @@ import {
   exposeLinkProps,
   exposeImageProps,
   exposeCustomBackgroundProps,
+  exposeYoutubeProps,
 } from './Field.helpers';
 
 describe('Field helpers', () => {
@@ -276,6 +277,19 @@ describe('Field helpers', () => {
       const alt = 'gb';
       const testB = exposeCustomBackgroundProps({ backgroundImage, alt, color: 'tomato' });
       expect(testB).toEqual({ backgroundImage, alt });
+    });
+  });
+
+  describe('exposeYoutubeProps(data)', () => {
+    it('should return "youtubeVideoId" prop ', () => {
+      const youtubeVideoId = '9RQlikX4vvw';
+      expect(exposeYoutubeProps({ youtubeVideoId })).toEqual({ youtubeVideoId });
+    });
+    it('should return empty object if invalid "youtubeVideoId" was detected', () => {
+      expect(exposeYoutubeProps({ youtubeVideoId: '9RQli?kX4vvw' })).toEqual({});
+      expect(exposeYoutubeProps({ youtubeVideoId: '9RQli&kX4vvw' })).toEqual({});
+      expect(exposeYoutubeProps({ youtubeVideoId: '9RQli<kX4vvw' })).toEqual({});
+      expect(exposeYoutubeProps({ youtubeVideoId: '9RQli>kX4vvw' })).toEqual({});
     });
   });
 });
