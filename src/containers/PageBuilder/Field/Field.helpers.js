@@ -150,3 +150,31 @@ export const exposeCustomBackgroundProps = data => {
     ...textColorMaybe,
   };
 };
+
+/**
+ * Exposes "youtubeVideoId" and "aspectRatio",
+ * if they meet the regexp rules.
+ *
+ * @param {Object} data E.g. "{ type: 'link', label: 'my title', href: 'https://my.domain.com' }"
+ * @returns object containing children and href.
+ */
+export const exposeYoutubeProps = data => {
+  const { youtubeVideoId, aspectRatio } = data;
+  const isString = str => typeof str === 'string' && str?.length > 0;
+
+  const hasYoutubeVideoId =
+    isString(youtubeVideoId) &&
+    youtubeVideoId.length < 12 &&
+    youtubeVideoId.match(/^[a-zA-Z0-9_-]+$/i);
+  const cleanYoutubeVideoId = hasYoutubeVideoId ? encodeURIComponent(youtubeVideoId) : null;
+
+  const hasAspectRatio = isString(aspectRatio) && aspectRatio.match(/^(\d+)\/(\d+)+$/);
+  const aspectRatioMaybe = hasAspectRatio ? { aspectRatio } : {};
+
+  return cleanYoutubeVideoId
+    ? {
+        youtubeVideoId: cleanYoutubeVideoId,
+        ...aspectRatioMaybe,
+      }
+    : {};
+};
