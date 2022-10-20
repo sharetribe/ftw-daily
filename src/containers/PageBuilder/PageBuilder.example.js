@@ -153,7 +153,7 @@ export const PageWithBuildInSectionColumns = {
           },
           blocks: [
             {
-              blockType: 'default-block',
+              blockType: 'defaultBlock',
               blockId: 'page-builder-columns-section-0-block-1',
               title: { type: 'heading3', content: 'Column 1' },
               text: {
@@ -175,7 +175,7 @@ export const PageWithBuildInSectionColumns = {
           },
           blocks: [
             {
-              blockType: 'default-block',
+              blockType: 'defaultBlock',
               blockId: 'page-builder-columns-section-1-block-1',
               title: { type: 'heading3', content: 'Column 1' },
               text: {
@@ -184,7 +184,7 @@ export const PageWithBuildInSectionColumns = {
               },
             },
             {
-              blockType: 'default-block',
+              blockType: 'defaultBlock',
               blockId: 'page-builder-columns-section-1-block-2',
               title: { type: 'heading3', content: 'Column 2' },
               text: {
@@ -205,13 +205,13 @@ export const PageWithBuildInSectionColumns = {
           },
           blocks: [
             {
-              blockType: 'default-block',
+              blockType: 'defaultBlock',
               blockId: 'page-builder-columns-section-2-block-1',
               title: { type: 'heading3', content: 'Column 1' },
               media: { type: 'image', alt: 'Background image', image: imagePlaceholder(1200, 800) },
             },
             {
-              blockType: 'default-block',
+              blockType: 'defaultBlock',
               blockId: 'page-builder-columns-section-2-block-2',
               title: { type: 'heading3', content: 'Column 2' },
               media: { type: 'image', alt: 'Background image', image: imagePlaceholder(1200, 800) },
@@ -235,19 +235,19 @@ export const PageWithBuildInSectionColumns = {
           textColor: 'light',
           blocks: [
             {
-              blockType: 'default-block',
+              blockType: 'defaultBlock',
               blockId: 'page-builder-columns2-section-3-block-1',
               title: { type: 'heading3', content: 'Column 1' },
               media: { type: 'image', alt: 'Background image', image: imagePlaceholder(1200, 800) },
             },
             {
-              blockType: 'default-block',
+              blockType: 'defaultBlock',
               blockId: 'page-builder-columns2-section-3-block-2',
               title: { type: 'heading3', content: 'Column 2' },
               media: { type: 'image', alt: 'Background image', image: imagePlaceholder(1200, 800) },
             },
             {
-              blockType: 'default-block',
+              blockType: 'defaultBlock',
               blockId: 'page-builder-columns2-section-3-block-3',
               title: { type: 'heading3', content: 'Column 3' },
               media: { type: 'image', alt: 'Background image', image: imagePlaceholder(1200, 800) },
@@ -265,25 +265,25 @@ export const PageWithBuildInSectionColumns = {
           },
           blocks: [
             {
-              blockType: 'default-block',
+              blockType: 'defaultBlock',
               blockId: 'page-builder-columns2-section-4-block-1',
               title: { type: 'heading3', content: 'Column 1' },
               media: { type: 'image', alt: 'Background image', image: imagePlaceholder(1200, 800) },
             },
             {
-              blockType: 'default-block',
+              blockType: 'defaultBlock',
               blockId: 'page-builder-columns2-section-4-block-2',
               title: { type: 'heading3', content: 'Column 2' },
               media: { type: 'image', alt: 'Background image', image: imagePlaceholder(1200, 800) },
             },
             {
-              blockType: 'default-block',
+              blockType: 'defaultBlock',
               blockId: 'page-builder-columns2-section-4-block-3',
               title: { type: 'heading3', content: 'Column 3' },
               media: { type: 'image', alt: 'Background image', image: imagePlaceholder(1200, 800) },
             },
             {
-              blockType: 'default-block',
+              blockType: 'defaultBlock',
               blockId: 'page-builder-columns2-section-4-block-4',
               title: { type: 'heading3', content: 'Column 4' },
               media: { type: 'image', alt: 'Background image', image: imagePlaceholder(1200, 800) },
