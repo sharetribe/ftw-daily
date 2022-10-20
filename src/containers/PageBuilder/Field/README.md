@@ -23,9 +23,6 @@ const defaultFieldComponents = {
   paragraph: { component: Ingress, pickValidProps: exposeContentAsChildren },
   externalButtonLink: { component: Link, pickValidProps: exposeLinkProps },
   image: { component: FieldImage, pickValidProps: exposeImageProps },
-  // In some cases, the data is used without a renderable component.
-  // Data for "background-color" in _style_ prop could be an example of that.
-  hexColor: { pickValidProps: exposeColorProps },
 };
 ```
 

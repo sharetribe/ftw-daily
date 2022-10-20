@@ -3,7 +3,7 @@ import {
   exposeContentString,
   exposeLinkProps,
   exposeImageProps,
-  exposeColorProps,
+  exposeCustomBackgroundProps,
 } from './Field.helpers';
 
 describe('Field helpers', () => {
@@ -149,22 +149,133 @@ describe('Field helpers', () => {
     });
   });
 
-  describe('exposeColorProps(data)', () => {
-    it('should return only "color" prop containing valid hexadecimal color code', () => {
-      expect(exposeColorProps({ color: '#FFAA00' })).toEqual({ color: '#FFAA00' });
-      expect(exposeColorProps({ color: '#FA0' })).toEqual({ color: '#FA0' });
-      expect(exposeColorProps({ color: '#000000' })).toEqual({ color: '#000000' });
+  describe('exposeCustomBackgroundProps(data)', () => {
+    it('should return "color" prop containing valid hexadecimal color code', () => {
+      expect(exposeCustomBackgroundProps({ color: '#FFAA00' })).toEqual({ color: '#FFAA00' });
+      expect(exposeCustomBackgroundProps({ color: '#FA0' })).toEqual({ color: '#FA0' });
+      expect(exposeCustomBackgroundProps({ color: '#000000', foo: 'bar' })).toEqual({
+        color: '#000000',
+      });
     });
     it('should return empty "color" prop if invalid hexadecimal color code was detected', () => {
-      expect(exposeColorProps({ color: '#FFAA0000' })).toEqual({});
-      expect(exposeColorProps({ color: 'FA0' })).toEqual({});
-      expect(exposeColorProps({ color: '000000' })).toEqual({});
-      expect(exposeColorProps({ color: '#XX0000' })).toEqual({});
-      expect(exposeColorProps({ color: '#FFAA0' })).toEqual({});
-      expect(exposeColorProps({ color: 'rgb(100, 100, 100)' })).toEqual({});
-      expect(exposeColorProps({ color: 'hsl(60 100% 50%)' })).toEqual({});
-      expect(exposeColorProps({ color: 'hwb(90 10% 10%)' })).toEqual({});
-      expect(exposeColorProps({ color: 'tomato' })).toEqual({});
+      expect(exposeCustomBackgroundProps({ color: '#FFAA0000' })).toEqual({});
+      expect(exposeCustomBackgroundProps({ color: 'FA0' })).toEqual({});
+      expect(exposeCustomBackgroundProps({ color: '000000' })).toEqual({});
+      expect(exposeCustomBackgroundProps({ color: '#XX0000' })).toEqual({});
+      expect(exposeCustomBackgroundProps({ color: '#FFAA0' })).toEqual({});
+      expect(exposeCustomBackgroundProps({ color: 'rgb(100, 100, 100)' })).toEqual({});
+      expect(exposeCustomBackgroundProps({ color: 'hsl(60 100% 50%)' })).toEqual({});
+      expect(exposeCustomBackgroundProps({ color: 'hwb(90 10% 10%)' })).toEqual({});
+      expect(exposeCustomBackgroundProps({ color: 'tomato' })).toEqual({});
+    });
+
+    it('should return "textColor" prop containing valid value (light or dark)', () => {
+      expect(exposeCustomBackgroundProps({ textColor: 'light' })).toEqual({ textColor: 'light' });
+      expect(exposeCustomBackgroundProps({ textColor: 'dark' })).toEqual({ textColor: 'dark' });
+    });
+    it('should return empty "textColor" prop if invalid hexadecimal color code was detected', () => {
+      expect(exposeCustomBackgroundProps({ textColor: 'blaa' })).toEqual({});
+    });
+
+    it('should return "backgroundImage" prop containing valid imageAsset', () => {
+      const backgroundImage = {
+        id: 'image',
+        type: 'imageAsset',
+        attributes: {
+          variants: {
+            square1x: {
+              url: `https://picsum.photos/100/100`,
+              width: 100,
+              height: 100,
+            },
+            square2x: {
+              url: `https://picsum.photos/200/200`,
+              width: 200,
+              height: 200,
+            },
+          },
+        },
+      };
+      const alt = 'gb';
+      expect(exposeCustomBackgroundProps({ backgroundImage })).toEqual({ backgroundImage });
+      expect(exposeCustomBackgroundProps({ backgroundImage, alt })).toEqual({
+        backgroundImage,
+        alt,
+      });
+    });
+
+    it('should return empty "backgroundImage" prop if invalid value is passed', () => {
+      const backgroundImageWrongType = {
+        id: 'image',
+        type: 'blaa',
+        attributes: {
+          variants: {
+            square1x: {
+              url: `https://picsum.photos/100/100`,
+              width: 100,
+              height: 100,
+            },
+          },
+        },
+      };
+      const backgroundImageNoHeight = {
+        id: 'image',
+        type: 'imageAsset',
+        attributes: {
+          variants: {
+            square1x: {
+              url: `https://picsum.photos/100/100`,
+              width: 100,
+              // height: 100,
+            },
+          },
+        },
+      };
+      const alt = 'gb';
+      const backgroundImage = backgroundImageWrongType;
+      expect(exposeCustomBackgroundProps({ backgroundImage })).toEqual({});
+      expect(exposeCustomBackgroundProps({ backgroundImage, alt })).toEqual({});
+      expect(exposeCustomBackgroundProps({ backgroundImage, color: '#FFAA00' })).toEqual({});
+      expect(exposeCustomBackgroundProps({ backgroundImage: backgroundImageNoHeight })).toEqual({});
+    });
+
+    it('should return partial prop if one of the props is invalid', () => {
+      const backgroundImageNoHeight = {
+        id: 'image',
+        type: 'imageAsset',
+        attributes: {
+          variants: {
+            square1x: {
+              url: `https://picsum.photos/100/100`,
+              width: 100,
+              //height: 100,
+            },
+          },
+        },
+      };
+      const backgroundImage = {
+        id: 'image',
+        type: 'imageAsset',
+        attributes: {
+          variants: {
+            square1x: {
+              url: `https://picsum.photos/100/100`,
+              width: 100,
+              height: 100,
+            },
+          },
+        },
+      };
+
+      const testA = exposeCustomBackgroundProps({
+        backgroundImage: backgroundImageNoHeight,
+        color: '#FFAA00',
+      });
+      expect(testA).toEqual({ color: '#FFAA00' });
+
+      const alt = 'gb';
+      const testB = exposeCustomBackgroundProps({ backgroundImage, alt, color: 'tomato' });
+      expect(testB).toEqual({ backgroundImage, alt });
     });
   });
 });

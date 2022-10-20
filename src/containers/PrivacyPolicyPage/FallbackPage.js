@@ -18,7 +18,7 @@ export const fallbackSections = {
     {
       sectionType: 'article',
       sectionId: 'privacy',
-      background: { type: 'hexColor', color: '#ffffff' },
+      background: { type: 'customBackground', color: '#ffffff' },
       title: { type: 'heading1', content: 'Privacy Policy' },
       blocks: [
         {
