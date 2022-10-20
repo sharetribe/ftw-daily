@@ -9,7 +9,7 @@ import BlockDefault from './BlockDefault';
 ///////////////////////////////////////////
 
 const defaultBlockComponents = {
-  ['default-block']: { component: BlockDefault },
+  defaultBlock: { component: BlockDefault },
 };
 
 ////////////////////
@@ -53,7 +53,7 @@ const BlockBuilder = props => {
 
 const propTypeBlock = shape({
   blockId: string.isRequired,
-  blockType: oneOf(['default-block']).isRequired,
+  blockType: oneOf(['defaultBlock']).isRequired,
   // Plus all kind of unknown fields.
   // BlockBuilder doesn't really need to care about those
 });

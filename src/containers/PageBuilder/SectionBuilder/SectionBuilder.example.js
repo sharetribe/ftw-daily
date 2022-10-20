@@ -50,7 +50,7 @@ export const SectionArticle = {
         },
         blocks: [
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-article-section-block-1',
             media: { type: 'image', alt: 'Cute dog smiling', image: imagePlaceholder(600, 800) },
             title: {
@@ -113,7 +113,7 @@ export const SectionFeatures = {
         },
         blocks: [
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-features-block-1',
             media: { type: 'image', alt: 'First image', image: imagePlaceholder(400, 400) },
             title: {
@@ -131,7 +131,7 @@ export const SectionFeatures = {
             },
           },
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-features-block-2',
             media: { type: 'image', alt: 'First image', image: imagePlaceholder(400, 400) },
             title: {
@@ -149,7 +149,7 @@ export const SectionFeatures = {
             },
           },
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-features-block-3',
             media: { type: 'image', alt: 'First image', image: imagePlaceholder(400, 400) },
             title: {
@@ -197,7 +197,7 @@ export const SectionCarousel = {
         },
         blocks: [
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-carousel-block-1',
             media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
             title: {
@@ -215,7 +215,7 @@ export const SectionCarousel = {
             },
           },
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-carousel-block-2',
             media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
             title: {
@@ -233,7 +233,7 @@ export const SectionCarousel = {
             },
           },
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-carousel-block-3',
             media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
             title: {
@@ -251,7 +251,7 @@ export const SectionCarousel = {
             },
           },
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-carousel-block-4',
             media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
             title: {
@@ -269,7 +269,7 @@ export const SectionCarousel = {
             },
           },
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-carousel-block-5',
             media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
             title: {
@@ -287,7 +287,7 @@ export const SectionCarousel = {
             },
           },
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-carousel-block-6',
             media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
             title: {
@@ -305,7 +305,7 @@ export const SectionCarousel = {
             },
           },
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-carousel-block-7',
             media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
             title: {
@@ -323,7 +323,7 @@ export const SectionCarousel = {
             },
           },
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-carousel-block-8',
             media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
             title: {
@@ -341,7 +341,7 @@ export const SectionCarousel = {
             },
           },
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-carousel-block-9',
             media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
             title: {
@@ -429,7 +429,7 @@ export const SectionColumns = {
         },
         blocks: [
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-column1-block-1',
             title: { type: 'heading3', content: 'Block 1' },
             text: {
@@ -438,7 +438,7 @@ export const SectionColumns = {
             },
           },
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-column1-block-2',
             title: { type: 'heading3', content: 'Block 2' },
             text: {
@@ -459,7 +459,7 @@ export const SectionColumns = {
         },
         blocks: [
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-column2-block-1',
             title: { type: 'heading3', content: 'Column 1' },
             text: {
@@ -473,7 +473,7 @@ export const SectionColumns = {
             },
           },
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-column2-block-2',
             title: { type: 'heading3', content: 'Column 2' },
             text: {
@@ -501,7 +501,7 @@ export const SectionColumns = {
         },
         blocks: [
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-column2-block-1-dark',
             title: { type: 'heading3', content: 'Column 1' },
             text: {
@@ -515,7 +515,7 @@ export const SectionColumns = {
             },
           },
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-column2-block-2-dark',
             title: { type: 'heading3', content: 'Column 2' },
             text: {
@@ -541,19 +541,19 @@ export const SectionColumns = {
         },
         blocks: [
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-column3-block-1',
             media: { type: 'image', alt: 'First image', image: imagePlaceholder(400, 400) },
             title: { type: 'heading3', content: 'Image 1' },
           },
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-column3-block-2',
             media: { type: 'image', alt: 'Second image', image: imagePlaceholder(400, 400) },
             title: { type: 'heading3', content: 'Image 2' },
           },
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-column3-block-3',
             media: { type: 'image', alt: 'Third image', image: imagePlaceholder(400, 400) },
             title: { type: 'heading3', content: 'Image 3' },
@@ -571,25 +571,25 @@ export const SectionColumns = {
         },
         blocks: [
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-column4-block-1-variant-1',
             media: { type: 'image', alt: 'First image', image: imagePlaceholder(400, 400) },
             title: { type: 'heading3', content: 'Image 1' },
           },
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-column4-block-2-variant-1',
             media: { type: 'image', alt: 'Second image', image: imagePlaceholder(400, 400) },
             title: { type: 'heading3', content: 'Image 2' },
           },
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-column4-block-3-variant-1',
             media: { type: 'image', alt: 'Third image', image: imagePlaceholder(400, 400) },
             title: { type: 'heading3', content: 'Image 3' },
           },
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-column4-block-4-variant-1',
             media: { type: 'image', alt: 'Fourth image', image: imagePlaceholder(400, 400) },
             title: { type: 'heading3', content: 'Image 4' },
@@ -604,31 +604,31 @@ export const SectionColumns = {
         ingress: { type: 'paragraph', content: 'Portrait images (400x500)' },
         blocks: [
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-column4-block-1-variant-2',
             media: { type: 'image', alt: 'First image', image: imagePlaceholder(400, 500) },
             title: { type: 'heading3', content: 'Image 1' },
           },
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-column4-block-2-variant-2',
             media: { type: 'image', alt: 'Second image', image: imagePlaceholder(400, 500) },
             title: { type: 'heading3', content: 'Image 2' },
           },
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-column4-block-3-variant-2',
             media: { type: 'image', alt: 'Third image', image: imagePlaceholder(400, 500) },
             title: { type: 'heading3', content: 'Image 3' },
           },
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-column4-block-4-variant-2',
             media: { type: 'image', alt: 'Fourth image', image: imagePlaceholder(400, 500) },
             title: { type: 'heading3', content: 'Image 4' },
           },
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-column4-block-5-variant-2',
             media: { type: 'image', alt: 'Fifth image', image: imagePlaceholder(400, 500) },
             title: { type: 'heading3', content: 'Image 5' },
@@ -643,19 +643,19 @@ export const SectionColumns = {
         ingress: { type: 'paragraph', content: 'Landscape images (400x300)' },
         blocks: [
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-column4-block-1-variant-3',
             media: { type: 'image', alt: 'First image', image: imagePlaceholder(400, 300) },
             title: { type: 'heading3', content: 'Image 1' },
           },
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-column4-block-2-variant-3',
             media: { type: 'image', alt: 'Second image', image: imagePlaceholder(400, 300) },
             title: { type: 'heading3', content: 'Image 2' },
           },
           {
-            blockType: 'default-block',
+            blockType: 'defaultBlock',
             blockId: 'cms-column4-block-3-variant-3',
             media: { type: 'image', alt: 'Third image', image: imagePlaceholder(400, 300) },
             title: { type: 'heading3', content: 'Image 3' },

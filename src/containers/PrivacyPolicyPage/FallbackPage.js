@@ -22,7 +22,7 @@ export const fallbackSections = {
       title: { type: 'heading1', content: 'Privacy Policy' },
       blocks: [
         {
-          blockType: 'default-block',
+          blockType: 'defaultBlock',
           blockId: 'hero-content',
           text: {
             type: 'markdown',
