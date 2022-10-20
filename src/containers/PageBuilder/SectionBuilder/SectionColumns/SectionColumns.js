@@ -1,8 +1,8 @@
 import React from 'react';
-import { arrayOf, bool, func, node, number, object, oneOf, shape, string } from 'prop-types';
+import { arrayOf, bool, func, node, number, object, shape, string } from 'prop-types';
 import classNames from 'classnames';
 
-import Field, { validProps, hasDataInFields } from '../../Field';
+import Field, { hasDataInFields } from '../../Field';
 import BlockBuilder from '../../BlockBuilder';
 
 import SectionContainer from '../SectionContainer';
@@ -36,7 +36,6 @@ const SectionColumns = props => {
     title,
     ingress,
     background,
-    backgroundImage,
     callToAction,
     blocks,
     isInsideContainer,
@@ -48,10 +47,6 @@ const SectionColumns = props => {
   const fieldComponents = options?.fieldComponents;
   const fieldOptions = { fieldComponents };
 
-  // Find background color if it is included
-  const colorProp = validProps(background, fieldOptions);
-  const backgroundColorMaybe = colorProp?.color ? { backgroundColor: colorProp.color } : {};
-
   const hasHeaderFields = hasDataInFields([title, ingress, callToAction], fieldOptions);
   const hasBlocks = blocks?.length > 0;
 
@@ -60,8 +55,7 @@ const SectionColumns = props => {
       id={sectionId}
       className={className}
       rootClassName={rootClassName}
-      style={backgroundColorMaybe}
-      backgroundImage={backgroundImage}
+      background={background}
       options={fieldOptions}
     >
       {hasHeaderFields ? (
@@ -88,13 +82,6 @@ const SectionColumns = props => {
     </SectionContainer>
   );
 };
-
-const propTypeBlock = shape({
-  blockId: string.isRequired,
-  blockType: oneOf(['default-block']).isRequired,
-  // Plus all kind of unknown fields.
-  // Section doesn't really need to care about those
-});
 
 const propTypeOption = shape({
   fieldComponents: shape({ component: node, pickValidProps: func }),
@@ -132,7 +119,7 @@ SectionColumns.propTypes = {
   background: object,
   backgroundImage: object,
   callToAction: object,
-  blocks: arrayOf(propTypeBlock),
+  blocks: arrayOf(object),
   isInsideContainer: bool,
   options: propTypeOption,
 };
