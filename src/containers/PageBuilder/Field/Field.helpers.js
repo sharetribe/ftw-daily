@@ -104,3 +104,64 @@ export const exposeColorProps = data => {
   const isValidColor = typeof color === 'string' && re.test(color);
   return isValidColor ? { color } : {};
 };
+
+/**
+ * Helper that exposes "color" value, if it contains hexadecimal string like "#FF0000" or "#F00".
+ *
+ * @param {String} data E.g. "#FFFFFF"
+ * @returns Object containing valid color prop.
+ */
+ const exposeColorValue = color => {
+  const re = new RegExp('^#([0-9a-f]{3}){1,2}$', 'i');
+  const isValidColor = typeof color === 'string' && re.test(color);
+  return isValidColor ? color : null;
+};
+
+/**
+ * Exposes background props like "backgroundImage", "color" property,
+ * if backgroundImage contains imageAsset entity and
+ * color contains hexadecimal string like "#FF0000" or "#F00".
+ *
+ * @param {ImageAsset} data.
+ * @param {Object} data E.g. "{ type: 'hexColor', color: '#FFFFFF' }"
+ * @param {textColor} data E.g. "{ type: 'hexColor', color: '#FFFFFF' }"
+ * @returns object containing color prop.
+ */
+export const exposeCustomBackgroundProps = data => {
+  const { backgroundImage, color, textColor, alt } = data;
+  const { id, type, attributes } = backgroundImage || {};
+
+  if (!!type && type !== 'imageAsset') {
+    return {};
+  }
+
+  const validColor = exposeColorValue(color);
+  const isValidColor = !!validColor;
+  const backgroundColorMaybe = isValidColor ? { color: validColor } : {};
+  const isValidTextColor = ['light', 'dark'].includes(textColor);
+  const textColorMaybe = isValidTextColor ? { textColor } : {};
+
+  const variantEntries = Object.entries(backgroundImage?.attributes?.variants || {});
+  const variants = variantEntries.reduce((validVariants, entry) => {
+    const [key, value] = entry;
+    const { url, width, height } = value || {};
+
+    const isValid = typeof width === 'number' && typeof height === 'number';
+    return isValid
+      ? {
+          ...validVariants,
+          [key]: { url: sanitizeUrl(url), width, height },
+        }
+      : validVariants;
+  }, {});
+
+  const isValidImage = Object.keys(variants).length > 0;
+  const sanitizedImage = { id, type, attributes: { ...attributes, variants } };
+  const backgroundImageMaybe = isValidImage ? { backgroundImage: sanitizedImage, alt } : {};
+
+  return {
+    ...backgroundImageMaybe,
+    ...backgroundColorMaybe,
+    ...textColorMaybe,
+  };
+};
