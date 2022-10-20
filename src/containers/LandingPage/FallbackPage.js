@@ -8,7 +8,7 @@ export const fallbackSections = {
     {
       sectionType: 'features',
       sectionId: 'hero',
-      background: { type: 'hexColor', color: '#ffff00' },
+      background: { type: 'customBackground', color: '#ffff00' },
       // backgroundImage: {
       //   type: 'image',
       //   alt: 'Background image',

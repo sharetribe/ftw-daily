@@ -167,7 +167,7 @@ export const PageWithBuildInSectionColumns = {
           sectionType: 'columns',
           sectionId: 'page-builder-columns-section-1',
           numColumns: 2,
-          background: { type: 'hexColor', color: hexYellow },
+          background: { type: 'customBackground', color: hexYellow },
           title: { type: 'heading2', content: '2 Columns' },
           ingress: {
             type: 'heading2',
