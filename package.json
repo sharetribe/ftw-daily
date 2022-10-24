@@ -103,7 +103,7 @@
     "test-ci": "yarn run test-server --runInBand && sharetribe-scripts test --runInBand",
     "eject": "sharetribe-scripts eject",
     "start": "node --icu-data-dir=node_modules/full-icu server/index.js",
-    "dev-server": "cross-env-shell NODE_ENV=development PORT=4000 REACT_APP_CANONICAL_ROOT_URL=http://localhost:4000 \"yarn build-web&&yarn build-server&&nodemon --watch server server/index.js\"",
+    "dev-server": "cross-env-shell NODE_ENV=development PORT=4000 REACT_APP_CANONICAL_ROOT_URL=http://localhost:4000 \"yarn run build&&nodemon --watch server server/index.js\"",
     "test-server": "jest ./server/**/*.test.js",
     "heroku-postbuild": "yarn run build",
     "translate": "node scripts/translations.js"
