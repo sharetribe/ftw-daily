@@ -86,7 +86,7 @@ const SectionHero = props => {
             <div className={classNames(css.heroButtonsContainer, css.heroButtonsContainerDesktop)}>
               <NamedLink className={css.heroButtonPink}
                 name="SearchPage"
-                to={{search: 'address=&bounds=81.11461448%2C91.93631978%2C-83.46463423%2C-161.18868022'}}>
+                to={{search: 'address=&bounds=84.73495686%2C90.00272603%2C-78.97853705%2C-163.12227397'}}>
                 <FormattedMessage id="SectionHero.browseButton" />
               </NamedLink>
               <NamedLink name="NewListingPage" className={css.heroButton} >
@@ -96,14 +96,12 @@ const SectionHero = props => {
           </div>
 
           
-          
 
-
-
+  
           <div className={classNames(css.heroButtonsContainer, css.heroButtonsContainerMobile)}>
             <NamedLink className={css.heroButtonPink}
               name="SearchPage"
-              to={{search: 'address=&bounds=81.11461448%2C91.93631978%2C-83.46463423%2C-161.18868022'}}>
+              to={{search: 'address=&bounds=84.73495686%2C90.00272603%2C-78.97853705%2C-163.12227397'}}>
               <FormattedMessage id="SectionHero.browseButton" />
             </NamedLink>
             <NamedLink name="NewListingPage" className={css.heroButton} >
