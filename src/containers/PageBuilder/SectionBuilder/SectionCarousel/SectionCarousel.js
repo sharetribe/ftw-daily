@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { arrayOf, func, node, number, object, shape, string } from 'prop-types';
 
 import Field, { hasDataInFields } from '../../Field';
@@ -49,6 +49,16 @@ const SectionCarousel = props => {
   const hasHeaderFields = hasDataInFields([title, ingress, callToAction], fieldOptions);
   const hasBlocks = blocks?.length > 0;
 
+  const slideLeft = () => {
+    var slider = document.getElementById('slider');
+    slider.scrollLeft = slider.scrollLeft - 610;
+  };
+
+  const slideRight = () => {
+    var slider = document.getElementById('slider');
+    slider.scrollLeft = slider.scrollLeft + 610;
+  };
+
   return (
     <SectionContainer
       id={sectionId}
@@ -65,14 +75,24 @@ const SectionCarousel = props => {
         </header>
       ) : null}
       {hasBlocks ? (
-        <div className={getColumnCSS(numColumns)}>
-          <BlockBuilder
-            rootClassName={css.block}
-            ctaButtonClass={defaultClasses.ctaButton}
-            blocks={blocks}
-            responsiveImageSizes={getResponsiveImageSizes(numColumns)}
-            options={options}
-          />
+        <div className={css.carouselContainer}>
+          <div className={css.carouselArrows}>
+            <button className={css.carouselArrowPrev} onClick={slideLeft}>
+              ‹
+            </button>
+            <button className={css.carouselArrowNext} onClick={slideRight}>
+              ›
+            </button>
+          </div>
+          <div className={getColumnCSS(numColumns)} id="slider">
+            <BlockBuilder
+              rootClassName={css.block}
+              ctaButtonClass={defaultClasses.ctaButton}
+              blocks={blocks}
+              responsiveImageSizes={getResponsiveImageSizes(numColumns)}
+              options={options}
+            />
+          </div>
         </div>
       ) : null}
     </SectionContainer>
