@@ -1,5 +1,58 @@
 @import '../../../../styles/customMediaQueries.css';
 
+.carouselContainer {
+  display: flex;
+  align-items: center;
+  scroll-behavior: smooth;
+
+  @media (--viewportMedium) {
+    &:hover .carouselArrows {
+      opacity: 1;
+    }
+  }
+}
+
+.carouselArrows {
+  opacity: 0;
+  z-index: 2;
+  transition: all ease-in-out 500ms;
+}
+
+.carouselArrowPrev,
+.carouselArrowNext {
+  background-color: lightgrey;
+  width: 48px;
+  height: 48px;
+  border-radius: 100%;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  position: absolute;
+  z-index: 2;
+  border: none;
+  margin-top: -64px;
+  opacity: 0.9;
+  transition: all ease-in-out 100ms;
+
+  &:hover {
+    opacity: 1;
+    cursor: pointer;
+    transition: all ease-in-out 100ms;
+    background: black;
+    color: white;
+  }
+}
+
+.carouselArrowPrev {
+  left: 48px;
+}
+
+.carouselArrowNext {
+  right: 48px;
+}
+
 .baseCarousel {
   display: flex;
   flex-wrap: nowrap;
@@ -7,6 +60,7 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
   scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
 
   &::-webkit-scrollbar {
     display: none;
