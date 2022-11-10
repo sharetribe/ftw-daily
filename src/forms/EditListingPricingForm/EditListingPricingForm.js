@@ -22,6 +22,7 @@ import { types as sdkTypes } from '../../util/sdkLoader';
 import { Button, Form, FieldCurrencyInput, FieldTextInput, FieldSelect } from '../../components';
 import css from './EditListingPricingForm.module.css';
 import {valueOf} from "lodash/seq";
+import { getMainCurrency } from '../../util/moneyHelpers';
 
 const { Money } = sdkTypes;
 
@@ -65,13 +66,21 @@ export const EditListingPricingFormComponent = props => (
         fetchErrors,
         fetchListingProgress,
         values,
+        userPublicData,
+        publicData,
+        price
       } = formRenderProps;
+
+      const hourlyCurrency = price && price.currency || values.currency;
+      const dailyCurrency = publicData[DAILY_PRICE] && publicData[DAILY_PRICE].currency || values.currency;
+      const weeklyCurrency = publicData[WEEKLY_PRICE] && publicData[WEEKLY_PRICE].currency || values.currency;
+      const monthlyCurrency = publicData[MONTHLY_PRICE] && publicData[MONTHLY_PRICE].currency || values.currency;
 
       // prices
       const pricePerHourLabel = intl.formatMessage({
         id: 'EditListingPricingForm.priceLabel',
       }, {
-        currency: config.currency
+        currency: hourlyCurrency
       });
       const pricePlaceholder = intl.formatMessage({
         id: 'EditListingPricingForm.pricePlaceholder',
@@ -81,7 +90,7 @@ export const EditListingPricingFormComponent = props => (
           id: 'EditListingPricingForm.priceRequired',
         })
       );
-      const minPrice = new Money(config.listingMinimumPriceSubUnits, config.currency);
+      const minPrice = new Money(config.listingMinimumPriceSubUnits, hourlyCurrency);
       const minPriceRequired = validators.moneySubUnitAmountAtLeast(
         intl.formatMessage(
           {
@@ -101,19 +110,19 @@ export const EditListingPricingFormComponent = props => (
       const pricePerDayLabel = intl.formatMessage({
         id: 'EditListingPricingForm.pricePerDayLabel'
       }, {
-        currency: config.currency
+        currency: dailyCurrency
       });
 
       const pricePerWeekLabel = intl.formatMessage({
         id: 'EditListingPricingForm.pricePerWeekLabel',
       }, {
-        currency: config.currency
+        currency: weeklyCurrency
       });
 
       const pricePerMonthLabel = intl.formatMessage({
         id: 'EditListingPricingForm.pricePerMonthLabel',
       }, {
-        currency: config.currency
+        currency: monthlyCurrency
       });
 
       const discountRequired = (discount, value) => {
@@ -130,6 +139,8 @@ export const EditListingPricingFormComponent = props => (
       const submitReady = (updated && pristine) || ready;
       const submitInProgress = updateInProgress;
       const submitDisabled = !hasSelectedPrice(values) || invalid || disabled || submitInProgress || fetchListingProgress;
+      // if user has currency field in publicData, he can not change currency field in another listings
+      const disableCurrencyField = userPublicData && userPublicData.currency || !submitDisabled;
       const inputsDisabled = fetchListingProgress;
       const { updateListingError, showListingsError } = fetchErrors || {};
 
@@ -190,13 +201,24 @@ export const EditListingPricingFormComponent = props => (
             </p>
           ) : null}
 
+          <FieldSelect
+            id="currency"
+            name="currency"
+            className={classNames(css.priceInput)}
+            disabled={disableCurrencyField}
+            label={intl.formatMessage({ id: 'EditListingPricingForm.currency' })}
+          >
+            <option value='GBP' key='GBP'>{config.currency}</option>
+            <option value='USD' key='USD'>{config.additionalCurrency}</option>
+          </FieldSelect>
+
           <FieldCurrencyInput
             id={HOURLY_PRICE}
             name={HOURLY_PRICE}
             className={css.priceInput}
             label={pricePerHourLabel}
             placeholder={pricePlaceholder}
-            currencyConfig={config.currencyConfig}
+            currencyConfig={getMainCurrency(hourlyCurrency)}
             disabled={inputsDisabled}
           />
 
@@ -207,7 +229,7 @@ export const EditListingPricingFormComponent = props => (
             label={pricePerDayLabel}
             placeholder={pricePlaceholder}
             disabled={inputsDisabled}
-            currencyConfig={config.currencyConfig}
+            currencyConfig={getMainCurrency(dailyCurrency)}
           />
 
           <FieldCurrencyInput
@@ -217,7 +239,7 @@ export const EditListingPricingFormComponent = props => (
             label={pricePerWeekLabel}
             placeholder={pricePlaceholder}
             disabled={inputsDisabled}
-            currencyConfig={config.currencyConfig}
+            currencyConfig={getMainCurrency(weeklyCurrency)}
           />
 
           <FieldCurrencyInput
@@ -227,7 +249,7 @@ export const EditListingPricingFormComponent = props => (
             label={pricePerMonthLabel}
             placeholder={pricePlaceholder}
             disabled={inputsDisabled}
-            currencyConfig={config.currencyConfig}
+            currencyConfig={getMainCurrency(monthlyCurrency)}
           />
 
           <p className={css.labelMinBook}>

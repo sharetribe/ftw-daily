@@ -92,7 +92,7 @@ export class BookingDatesFormComponent extends Component {
     //     </div>
     //   );
     // }
-    if (unitPrice && unitPrice.currency !== config.currency) {
+    if (unitPrice && ![config.currency, config.additionalCurrency].includes(unitPrice.currency)) {
       return (
         <div className={classes}>
           <p className={css.error}>

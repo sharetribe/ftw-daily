@@ -41,6 +41,7 @@ import {
 } from './EditListingPage.duck';
 
 import css from './EditListingPage.module.css';
+import { updateProfile } from '../ProfileSettingsPage/ProfileSettingsPage.duck';
 
 const STRIPE_ONBOARDING_RETURN_URL_SUCCESS = 'success';
 const STRIPE_ONBOARDING_RETURN_URL_FAILURE = 'failure';
@@ -84,7 +85,8 @@ export const EditListingPageComponent = props => {
     stripeAccountFetched,
     stripeAccount,
     updateStripeAccountError,
-    fetchListingProgress
+    fetchListingProgress,
+    onCurrentUserUpdateProfile
   } = props;
 
   const { id, type, returnURLType } = params;
@@ -223,6 +225,7 @@ export const EditListingPageComponent = props => {
           }
           stripeAccountLinkError={getAccountLinkError}
           fetchListingProgress={fetchListingProgress}
+          onCurrentUserUpdateProfile={onCurrentUserUpdateProfile}
         />
       </Page>
     );
@@ -356,6 +359,7 @@ const mapDispatchToProps = dispatch => ({
   onUpdateImageOrder: imageOrder => dispatch(updateImageOrder(imageOrder)),
   onRemoveListingImage: imageId => dispatch(removeListingImage(imageId)),
   onChange: () => dispatch(clearUpdatedTab()),
+  onCurrentUserUpdateProfile: (userData) => dispatch(updateProfile(userData))
 });
 
 // Note: it is important that the withRouter HOC is **outside** the

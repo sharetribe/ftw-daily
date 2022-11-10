@@ -345,6 +345,7 @@ class EditListingWizard extends Component {
     const ensuredCurrentUser = ensureCurrentUser(currentUser);
     const currentUserLoaded = !!ensuredCurrentUser.id;
     const stripeConnected = currentUserLoaded && !!stripeAccount && !!stripeAccount.id;
+    const userPublicData = currentUser && currentUser.attributes.profile.publicData;
 
     const rootURL = config.canonicalRootURL;
     const routes = routeConfiguration();
@@ -417,6 +418,7 @@ class EditListingWizard extends Component {
                 handlePublishListing={this.handlePublishListing}
                 fetchInProgress={fetchInProgress}
                 onManageDisableScrolling={onManageDisableScrolling}
+                userPublicData={userPublicData}
               />
             );
           })}
@@ -553,6 +555,7 @@ EditListingWizard.propTypes = {
   onPayoutDetailsFormChange: func.isRequired,
   onGetStripeConnectAccountLink: func.isRequired,
   onManageDisableScrolling: func.isRequired,
+  onCurrentUserUpdateProfile: func.isRequired,
 
   // from withViewport
   viewport: shape({

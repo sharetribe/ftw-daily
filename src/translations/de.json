@@ -201,6 +201,7 @@
   "EditListingPricingForm.priceTooLow": "Der Preis sollte mindestens {minPrice} betragen.",
   "EditListingPricingForm.showListingFailed": "Fehler beim Laden der Eintragsdaten",
   "EditListingPricingForm.updateFailed": "Fehler beim Aktualisieren des Eintrags. Bitte erneut versuchen.",
+  "EditListingPricingForm.currency": "Währung",
   "EditListingPricingPanel.createListingTitle": "Wie viel kostet es?",
   "EditListingPricingPanel.listingPriceCurrencyInvalid": "Die Währung des Eintrags entspricht nicht die Währung des Marktplatzes. Du kannst den Preis nicht ändern.",
   "EditListingPricingPanel.title": "Den Preis von {listingTitle} ändern",

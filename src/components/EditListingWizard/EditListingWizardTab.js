@@ -107,7 +107,9 @@ const EditListingWizardTab = props => {
     intl,
     fetchExceptionsInProgress,
     availabilityExceptions,
-    fetchListingProgress
+    fetchListingProgress,
+    onCurrentUserUpdateProfile,
+    userPublicData
   } = props;
 
   const { type } = params;
@@ -122,7 +124,7 @@ const EditListingWizardTab = props => {
 
   const onCompleteEditListingWizardTab = (tab, updateValues, passThrownErrors = false) => {
     // Normalize images for API call
-    const { images: updatedImages, ...otherValues } = updateValues;
+    const { images: updatedImages, currency, ...otherValues } = updateValues;
     const imageProperty =
       typeof updatedImages !== 'undefined' ? { images: imageIds(updatedImages) } : {};
     let updateValuesWithImages = { ...otherValues, ...imageProperty };
@@ -135,6 +137,10 @@ const EditListingWizardTab = props => {
           listingHasImages: true
         }
       }
+    }
+
+    if (tab === PRICING) {
+      onCurrentUserUpdateProfile({ publicData: { currency } })
     }
 
     if (isNewListingFlow) {
@@ -282,6 +288,7 @@ const EditListingWizardTab = props => {
           onSubmit={values => {
             onCompleteEditListingWizardTab(tab, values);
           }}
+          userPublicData={userPublicData}
         />
       );
     }

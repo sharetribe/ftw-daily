@@ -38,7 +38,8 @@ const EditListingPricingPanel = props => {
     panelUpdated,
     updateInProgress,
     errors,
-    fetchListingProgress
+    fetchListingProgress,
+    userPublicData
   } = props;
 
   const classes = classNames(rootClassName || css.root, className);
@@ -99,6 +100,7 @@ const EditListingPricingPanel = props => {
 const { minBooking } = publicData
 const { minBookingType, minBookingCount } = minBooking || {}
   const initialValues = {
+    currency: userPublicData && userPublicData.currency || config.currency,
     price,
     minBookingType,
     minBookingCount,
@@ -123,7 +125,8 @@ const { minBookingType, minBookingCount } = minBooking || {}
            (values[MONTHLY_PRICE] && !initialValues[MONTHLY_PRICE])
   }
 
-  const priceCurrencyValid = price instanceof Money ? price.currency === config.currency : true;
+  // const priceCurrencyValid = price instanceof Money ? price.currency === config.currency : true;
+  const priceCurrencyValid = true;
 
   const form = priceCurrencyValid ? (
     <EditListingPricingForm
@@ -132,10 +135,11 @@ const { minBookingType, minBookingCount } = minBooking || {}
       // unitType={publicData.unitType}
       fetchListingProgress={fetchListingProgress}
       onSubmit={values => {
-        const { price, discount, minBookingType, minBookingCount } = values;
+        const { price, discount, minBookingType, minBookingCount, currency } = values;
         const minBooking = { minBookingType, minBookingCount }
         onSubmit({
           price,
+          currency,
           publicData: {
             minBooking,
             unitType: null, //remove unittype field from previous realisation
@@ -152,6 +156,9 @@ const { minBookingType, minBookingCount } = minBooking || {}
       updated={panelUpdated}
       updateInProgress={updateInProgress}
       fetchErrors={errors}
+      userPublicData={userPublicData}
+      publicData={publicData}
+      price={price}
     />
   ) : (
     <div className={css.priceCurrencyInvalid}>

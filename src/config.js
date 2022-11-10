@@ -65,7 +65,7 @@ const sdkTransitVerbose = process.env.REACT_APP_SHARETRIBE_SDK_TRANSIT_VERBOSE =
 // It should match one of the currencies listed in currency-config.js
 const currencyConf = process.env.REACT_APP_SHARETRIBE_MARKETPLACE_CURRENCY;
 const currency = currencyConf ? currencyConf.toUpperCase() : currencyConf;
-
+const additionalCurrency = process.env.REACT_APP_SHARETRIBE_ADDITIONAL_MARKETPLACE_CURRENCY;
 // Currency formatting options.
 // See: https://github.com/yahoo/react-intl/wiki/API#formatnumber
 const currencyConfig = currencyConfiguration(currency);
@@ -213,6 +213,7 @@ const config = {
   },
   sortSearchByDistance,
   currency,
+  additionalCurrency,
   currencyConfig,
   listingMinimumPriceSubUnits,
   stripe: {

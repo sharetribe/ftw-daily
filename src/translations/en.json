@@ -314,6 +314,7 @@
   "EditListingPricingForm.discountBreakpointMessage": "Booking length",
   "EditListingPricingForm.discountBreakpointPlaceholder": "7",
   "EditListingPricingForm.discountTypeMessage": "Minimum booking",
+  "EditListingPricingForm.currency": "Currency",
   "EditListingPricingForm.discountTypePlaceholder": "Type",
   "EditListingPricingForm.discountUnitTypeMessage": "Unit type",
   "EditListingPricingForm.discountRequired": "Don't leave me empty.",

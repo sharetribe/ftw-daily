@@ -61,15 +61,15 @@ export class BookingTimeFormComponent extends Component {
     //     </div>
     //   );
     // }
-    if (unitPrice && unitPrice.currency !== config.currency) {
-      return (
-        <div className={classes}>
-          <p className={css.error}>
-            <FormattedMessage id="BookingTimeForm.listingCurrencyInvalid" />
-          </p>
-        </div>
-      );
-    }
+    // if (unitPrice && unitPrice.currency !== config.currency) {
+    //   return (
+    //     <div className={classes}>
+    //       <p className={css.error}>
+    //         <FormattedMessage id="BookingTimeForm.listingCurrencyInvalid" />
+    //       </p>
+    //     </div>
+    //   );
+    // }
 
     return (
       <FinalForm

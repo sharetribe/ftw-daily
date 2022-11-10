@@ -35,7 +35,7 @@ const TODAY = new Date();
 const { Money } = sdkTypes;
 
 const priceData = (price, intl) => {
-  if (price && price.currency === config.currency) {
+  if (price && (price.currency === config.currency || price.currency === config.additionalCurrency)) {
     const formattedPrice = formatMoney(intl, price);
     return { formattedPrice, priceTitle: formattedPrice };
   } else if (price) {
