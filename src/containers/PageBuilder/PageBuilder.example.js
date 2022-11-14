@@ -222,10 +222,12 @@ export const PageWithBuildInSectionColumns = {
           sectionType: 'columns',
           sectionId: 'page-builder-columns2-section-3',
           numColumns: 3,
-          backgroundImage: {
-            type: 'image',
+          background: {
+            type: 'customBackground',
+            backgroundImage: imagePlaceholder(1200, 800, '#b6f7f9'),
             alt: 'Background image',
-            image: imagePlaceholder(1200, 800, '#b6f7f9'),
+            color: '#000000',
+            textColor: 'light',
           },
           title: { type: 'heading2', content: '3 Columns' },
           ingress: {
