@@ -5,9 +5,23 @@
   width: 100%;
   background-color: var(--matterColorNegative); /* Loading state color for the images */
   border-radius: 8px;
-  margin-bottom: 24px;
+  margin-bottom: 0;
+
+  /* Don't render the div if there's no image to render */
+  &:empty {
+    display: none;
+  }
+
+  & + div {
+    margin-top: 20px;
+  }
 }
 
 .text {
   width: 100%;
+
+  /* Don't render the div if there's no image to render */
+  &:empty {
+    display: none;
+  }
 }
