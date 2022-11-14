@@ -5,6 +5,7 @@
   margin-bottom: 0;
   letter-spacing: 0;
 
+  /* Handle margin-top of next adjacent element against this p element */
   & + p,
   & + a,
   & + ul,
