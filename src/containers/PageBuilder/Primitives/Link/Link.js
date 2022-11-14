@@ -9,9 +9,10 @@ import { NamedLink, ExternalLink } from '../../../../components/index.js';
 import css from './Link.module.css';
 
 export const Link = React.forwardRef((props, ref) => {
-  const { className, rootClassName, href, children } = props;
+  const { className, rootClassName, href, title, children } = props;
   const classes = classNames(rootClassName || css.link, className);
-  const linkProps = { className: classes, href, children };
+  const titleMaybe = title ? { title } : {};
+  const linkProps = { className: classes, href, children, ...titleMaybe };
 
   // Markdown parser (rehype-sanitize) might return undefined href
   if (!href || !children) {

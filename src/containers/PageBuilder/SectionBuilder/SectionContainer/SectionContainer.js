@@ -2,7 +2,7 @@ import React from 'react';
 import { func, node, object, shape, string } from 'prop-types';
 import classNames from 'classnames';
 
-import Field, { validProps } from '../../Field';
+import Field from '../../Field';
 
 import css from './SectionContainer.module.css';
 
@@ -13,17 +13,15 @@ const SectionContainer = props => {
   const Tag = as || 'section';
   const classes = classNames(rootClassName || css.root, className);
 
-  // Find background color if it is included
-  const colorProp = validProps(background, options);
-  const backgroundColorMaybe = colorProp?.color ? { backgroundColor: colorProp.color } : {};
-
   return (
-    <Tag className={classes} id={id} style={backgroundColorMaybe} {...otherProps}>
-      <Field
-        data={{ ...background, alt: `Background image for ${id}` }}
-        className={className}
-        options={options}
-      />
+    <Tag className={classes} id={id} {...otherProps}>
+      {background ? (
+        <Field
+          data={{ alt: `Background image for ${id}`, ...background }}
+          className={className}
+          options={options}
+        />
+      ) : null}
 
       <div className={css.sectionContent}>{children}</div>
     </Tag>
