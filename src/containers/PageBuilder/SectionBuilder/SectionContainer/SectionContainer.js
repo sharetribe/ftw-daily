@@ -14,16 +14,20 @@ const SectionContainer = props => {
   const classes = classNames(rootClassName || css.root, className);
 
   // Find background color if it is included
-  const colorProp = validProps(background, options);
-  const backgroundColorMaybe = colorProp?.color ? { backgroundColor: colorProp.color } : {};
+  const backgroundProp = validProps(background, options);
+  const backgroundColorMaybe = backgroundProp?.color
+    ? { backgroundColor: backgroundProp.color }
+    : {};
 
   return (
     <Tag className={classes} id={id} style={backgroundColorMaybe} {...otherProps}>
-      <Field
-        data={{ ...background, alt: `Background image for ${id}` }}
-        className={className}
-        options={options}
-      />
+      {backgroundProp ? (
+        <Field
+          data={{ alt: `Background image for ${id}`, ...background }}
+          className={className}
+          options={options}
+        />
+      ) : null}
 
       <div className={css.sectionContent}>{children}</div>
     </Tag>
