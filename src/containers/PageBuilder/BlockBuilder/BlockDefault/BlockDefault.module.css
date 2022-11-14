@@ -12,7 +12,7 @@
     display: none;
   }
 
-  & + div {
+  & + .text {
     margin-top: 20px;
   }
 }
