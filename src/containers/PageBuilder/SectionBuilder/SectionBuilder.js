@@ -102,14 +102,36 @@ const propTypeOption = shape({
   isInsideContainer: bool,
 });
 
+const defaultSections = shape({
+  sections: arrayOf(propTypeSection),
+  options: propTypeOption,
+});
+
+const customSection = shape({
+  sectionId: string.isRequired,
+  sectionType: string.isRequired,
+  // Plus all kind of unknown fields.
+  // BlockBuilder doesn't really need to care about those
+});
+const propTypeOptionForCustomSections = shape({
+  fieldComponents: shape({ component: node, pickValidProps: func }),
+  blockComponents: shape({ component: node }),
+  sectionComponents: shape({ component: node }).isRequired,
+  // isInsideContainer boolean means that the section is not taking
+  // the full viewport width but is run inside some wrapper.
+  isInsideContainer: bool,
+});
+
+const customSections = shape({
+  sections: arrayOf(customSection),
+  options: propTypeOptionForCustomSections.isRequired,
+});
+
 SectionBuilder.defaultProps = {
   sections: [],
   options: null,
 };
 
-SectionBuilder.propTypes = {
-  sections: arrayOf(propTypeSection),
-  options: propTypeOption,
-};
+SectionBuilder.propTypes = oneOf([defaultSections, customSections]).isRequired;
 
 export default SectionBuilder;
