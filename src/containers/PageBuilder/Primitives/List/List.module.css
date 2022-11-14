@@ -14,23 +14,9 @@
       list-style-type: square;
     }
   }
-
-  & + p,
-  & + a,
-  & + ul,
-  & + ol,
-  & + code,
-  & + div,
-  & + h1,
-  & + h2,
-  & + h3,
-  & + h4,
-  & + h5,
-  & + h6 {
-    margin-top: 24px;
-  }
 }
-
+/* Handle margin-top of next adjacent element against this list element */
+.ul,
 .ol {
   & + p,
   & + a,
@@ -53,9 +39,4 @@
 
 .li > p {
   margin: 0;
-}
-
-.ul + p,
-.ol + p {
-  margin-top: 24px;
 }
