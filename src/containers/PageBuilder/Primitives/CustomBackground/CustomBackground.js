@@ -8,16 +8,18 @@ import css from './CustomBackground.module.css';
 
 // BackgroundImage doesn't have enforcable aspectratio
 export const CustomBackground = React.forwardRef((props, ref) => {
-  const { className, rootClassName, alt, backgroundImage, sizes } = props;
+  const { className, rootClassName, color, alt, backgroundImage, sizes } = props;
 
   const getVariantNames = img => {
     const { variants } = img?.attributes || {};
     return variants ? Object.keys(variants) : [];
   };
 
+  const backgroundColorMaybe = color ? { backgroundColor: color } : {};
+
   const classes = classNames(rootClassName || css.backgroundImageWrapper, className);
   return (
-    <div className={classes}>
+    <div className={classes} style={backgroundColorMaybe}>
       {backgroundImage ? (
         <ResponsiveImage
           className={css.backgroundImage}
