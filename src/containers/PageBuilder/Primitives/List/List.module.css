@@ -1,8 +1,8 @@
 .ul {
   display: block;
   list-style-type: disc;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
+  margin-block-start: 0;
+  margin-block-end: 0;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   padding-inline-start: 40px;
@@ -14,9 +14,38 @@
       list-style-type: square;
     }
   }
+
+  & + p,
+  & + a,
+  & + ul,
+  & + ol,
+  & + code,
+  & + div,
+  & + h1,
+  & + h2,
+  & + h3,
+  & + h4,
+  & + h5,
+  & + h6 {
+    margin-top: 24px;
+  }
 }
 
 .ol {
+  & + p,
+  & + a,
+  & + ul,
+  & + ol,
+  & + code,
+  & + div,
+  & + h1,
+  & + h2,
+  & + h3,
+  & + h4,
+  & + h5,
+  & + h6 {
+    margin-top: 24px;
+  }
 }
 
 .li {
@@ -24,4 +53,9 @@
 
 .li > p {
   margin: 0;
+}
+
+.ul + p,
+.ol + p {
+  margin-top: 24px;
 }

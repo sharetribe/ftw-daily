@@ -2,10 +2,21 @@
   max-width: 80ch;
   line-height: 1.66;
   margin-top: 0;
-  margin-bottom: 24px;
+  margin-bottom: 0;
   letter-spacing: 0;
-}
 
-h2 + p {
-  margin-top: 16px;
+  & + p,
+  & + a,
+  & + ul,
+  & + ol,
+  & + code,
+  & + div,
+  & + h1,
+  & + h2,
+  & + h3,
+  & + h4,
+  & + h5,
+  & + h6 {
+    margin-top: 24px;
+  }
 }
