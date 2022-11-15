@@ -144,11 +144,6 @@
   /* ================ TabNav ================ */
   --TabNav_linkWidth: 240px;
 
-  /* ================ LandingPage ================ */
-  --LandingPage_sectionMarginTop: 40px;
-  --LandingPage_sectionMarginTopMedium: 60px;
-  --LandingPage_sectionMarginTopLarge: 94px;
-
   /* ================ EditListingAvailabilityForm, ManageAvailabilityCalendar ================ */
   --ManageAvailabilityCalendar_gridColor: #e0e0e0;
   --ManageAvailabilityCalendar_availableColor: #ffffff;
@@ -162,6 +157,10 @@
   /* ================ ProfileSettingsForm ================ */
   --ProfileSettingsForm_avatarSize: 96px;
   --ProfileSettingsForm_avatarSizeDesktop: 240px;
+
+  /* ================ PageBuilder ================ */
+  /* --carouselWidth will be updated dynamically through JS */
+  --carouselWidth: 100vw;
 }
 
 /* ================ Global element styles ================ */
