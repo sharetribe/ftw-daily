@@ -179,7 +179,7 @@ export const SectionCarousel = {
     sections: [
       {
         sectionType: 'carousel',
-        sectionId: 'cms-features-section-no-block',
+        sectionId: 'cms-features-section-carousel1',
         numColumns: 1,
         title: {
           type: 'heading2',
@@ -202,7 +202,7 @@ export const SectionCarousel = {
             media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
             title: {
               type: 'heading3',
-              content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
+              content: '1 Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
               type: 'markdown',
@@ -220,7 +220,7 @@ export const SectionCarousel = {
             media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
             title: {
               type: 'heading3',
-              content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
+              content: '2 Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
               type: 'markdown',
@@ -238,7 +238,7 @@ export const SectionCarousel = {
             media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
             title: {
               type: 'heading3',
-              content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
+              content: '3 Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
               type: 'markdown',
@@ -256,7 +256,7 @@ export const SectionCarousel = {
             media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
             title: {
               type: 'heading3',
-              content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
+              content: '4 Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
               type: 'markdown',
@@ -274,7 +274,7 @@ export const SectionCarousel = {
             media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
             title: {
               type: 'heading3',
-              content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
+              content: '5 Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
               type: 'markdown',
@@ -292,7 +292,7 @@ export const SectionCarousel = {
             media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
             title: {
               type: 'heading3',
-              content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
+              content: '6 Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
               type: 'markdown',
@@ -310,7 +310,7 @@ export const SectionCarousel = {
             media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
             title: {
               type: 'heading3',
-              content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
+              content: '7 Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
               type: 'markdown',
@@ -328,7 +328,7 @@ export const SectionCarousel = {
             media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
             title: {
               type: 'heading3',
-              content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
+              content: '8 Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
               type: 'markdown',
@@ -346,7 +346,191 @@ export const SectionCarousel = {
             media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
             title: {
               type: 'heading3',
-              content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
+              content: '9 Nullam id dolor id nibh ultricies vehicula ut id elit.',
+            },
+            text: {
+              type: 'markdown',
+              content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
+            },
+            callToAction: {
+              type: 'internalButtonLink',
+              href: '#',
+              label: 'Ultricies Elit Sem',
+            },
+          },
+        ],
+      },
+
+      {
+        sectionType: 'carousel',
+        sectionId: 'cms-features-section-carousel2',
+        numColumns: 3,
+        title: {
+          type: 'heading2',
+          content: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.',
+        },
+        ingress: {
+          type: 'paragraph',
+          content:
+            'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit.',
+        },
+        callToAction: {
+          type: 'externalButtonLink',
+          href: '#',
+          label: 'Justo Tortor Amet',
+        },
+        blocks: [
+          {
+            blockType: 'defaultBlock',
+            blockId: 'cms-carousel2-block-1',
+            media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
+            title: {
+              type: 'heading3',
+              content: '1 Nullam id dolor id nibh ultricies vehicula ut id elit.',
+            },
+            text: {
+              type: 'markdown',
+              content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
+            },
+            callToAction: {
+              type: 'internalButtonLink',
+              href: '#',
+              label: 'Ultricies Elit Sem',
+            },
+          },
+          {
+            blockType: 'defaultBlock',
+            blockId: 'cms-carousel2-block-2',
+            media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
+            title: {
+              type: 'heading3',
+              content: '2 Nullam id dolor id nibh ultricies vehicula ut id elit.',
+            },
+            text: {
+              type: 'markdown',
+              content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
+            },
+            callToAction: {
+              type: 'internalButtonLink',
+              href: '#',
+              label: 'Ultricies Elit Sem',
+            },
+          },
+          {
+            blockType: 'defaultBlock',
+            blockId: 'cms-carousel2-block-3',
+            media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
+            title: {
+              type: 'heading3',
+              content: '3 Nullam id dolor id nibh ultricies vehicula ut id elit.',
+            },
+            text: {
+              type: 'markdown',
+              content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
+            },
+            callToAction: {
+              type: 'internalButtonLink',
+              href: '#',
+              label: 'Ultricies Elit Sem',
+            },
+          },
+          {
+            blockType: 'defaultBlock',
+            blockId: 'cms-carousel2-block-4',
+            media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
+            title: {
+              type: 'heading3',
+              content: '4 Nullam id dolor id nibh ultricies vehicula ut id elit.',
+            },
+            text: {
+              type: 'markdown',
+              content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
+            },
+            callToAction: {
+              type: 'internalButtonLink',
+              href: '#',
+              label: 'Ultricies Elit Sem',
+            },
+          },
+          {
+            blockType: 'defaultBlock',
+            blockId: 'cms-carousel2-block-5',
+            media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
+            title: {
+              type: 'heading3',
+              content: '5 Nullam id dolor id nibh ultricies vehicula ut id elit.',
+            },
+            text: {
+              type: 'markdown',
+              content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
+            },
+            callToAction: {
+              type: 'internalButtonLink',
+              href: '#',
+              label: 'Ultricies Elit Sem',
+            },
+          },
+          {
+            blockType: 'defaultBlock',
+            blockId: 'cms-carousel2-block-6',
+            media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
+            title: {
+              type: 'heading3',
+              content: '6 Nullam id dolor id nibh ultricies vehicula ut id elit.',
+            },
+            text: {
+              type: 'markdown',
+              content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
+            },
+            callToAction: {
+              type: 'internalButtonLink',
+              href: '#',
+              label: 'Ultricies Elit Sem',
+            },
+          },
+          {
+            blockType: 'defaultBlock',
+            blockId: 'cms-carousel2-block-7',
+            media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
+            title: {
+              type: 'heading3',
+              content: '7 Nullam id dolor id nibh ultricies vehicula ut id elit.',
+            },
+            text: {
+              type: 'markdown',
+              content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
+            },
+            callToAction: {
+              type: 'internalButtonLink',
+              href: '#',
+              label: 'Ultricies Elit Sem',
+            },
+          },
+          {
+            blockType: 'defaultBlock',
+            blockId: 'cms-carousel2-block-8',
+            media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
+            title: {
+              type: 'heading3',
+              content: '8 Nullam id dolor id nibh ultricies vehicula ut id elit.',
+            },
+            text: {
+              type: 'markdown',
+              content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
+            },
+            callToAction: {
+              type: 'internalButtonLink',
+              href: '#',
+              label: 'Ultricies Elit Sem',
+            },
+          },
+          {
+            blockType: 'defaultBlock',
+            blockId: 'cms-carousel2-block-9',
+            media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
+            title: {
+              type: 'heading3',
+              content: '9 Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
               type: 'markdown',
