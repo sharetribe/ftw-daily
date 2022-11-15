@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { arrayOf, func, node, number, object, shape, string } from 'prop-types';
 
 import Field, { hasDataInFields } from '../../Field';
@@ -6,6 +6,9 @@ import BlockBuilder from '../../BlockBuilder';
 
 import SectionContainer from '../SectionContainer';
 import css from './SectionCarousel.module.css';
+
+const KEY_CODE_ARROW_LEFT = 37;
+const KEY_CODE_ARROW_RIGHT = 39;
 
 // The number of columns (numColumns) affects styling and responsive images
 const COLUMN_CONFIG = [
@@ -40,6 +43,18 @@ const SectionCarousel = props => {
     blocks,
     options,
   } = props;
+  const sliderId = `${props.sectionId}-slider`;
+
+  useEffect(() => {
+    const setCarouselWidth = () => {
+      const elem = window.document.getElementById(sliderId);
+      elem.style.setProperty('--carouselWidth', `${elem.clientWidth}px`);
+    };
+    setCarouselWidth();
+
+    window.addEventListener('resize', setCarouselWidth);
+    return () => window.removeEventListener('resize', setCarouselWidth);
+  }, []);
 
   // If external mapping has been included for fields
   // E.g. { h1: { component: MyAwesomeHeader } }
@@ -47,7 +62,36 @@ const SectionCarousel = props => {
   const fieldOptions = { fieldComponents };
 
   const hasHeaderFields = hasDataInFields([title, ingress, callToAction], fieldOptions);
-  const hasBlocks = blocks?.length > 0;
+  const numberOfBlocks = blocks?.length;
+  const hasBlocks = numberOfBlocks > 0;
+
+  const onSlideLeft = e => {
+    var slider = window.document.getElementById(sliderId);
+    const slideWidth = numColumns * slider?.firstChild?.clientWidth;
+    slider.scrollLeft = slider.scrollLeft - slideWidth;
+    // Fix for Safari
+    e.target.focus();
+  };
+
+  const onSlideRight = e => {
+    var slider = window.document.getElementById(sliderId);
+    const slideWidth = numColumns * slider?.firstChild?.clientWidth;
+    slider.scrollLeft = slider.scrollLeft + slideWidth;
+    // Fix for Safari
+    e.target.focus();
+  };
+
+  const onKeyDown = e => {
+    if (e.keyCode === KEY_CODE_ARROW_LEFT) {
+      // Prevent changing cursor position in input
+      e.preventDefault();
+      onSlideLeft(e);
+    } else if (e.keyCode === KEY_CODE_ARROW_RIGHT) {
+      // Prevent changing cursor position in input
+      e.preventDefault();
+      onSlideRight(e);
+    }
+  };
 
   return (
     <SectionContainer
@@ -65,14 +109,24 @@ const SectionCarousel = props => {
         </header>
       ) : null}
       {hasBlocks ? (
-        <div className={getColumnCSS(numColumns)}>
-          <BlockBuilder
-            rootClassName={css.block}
-            ctaButtonClass={defaultClasses.ctaButton}
-            blocks={blocks}
-            responsiveImageSizes={getResponsiveImageSizes(numColumns)}
-            options={options}
-          />
+        <div className={css.carouselContainer}>
+          <div className={css.carouselArrows}>
+            <button className={css.carouselArrowPrev} onClick={onSlideLeft} onKeyDown={onKeyDown}>
+              ‹
+            </button>
+            <button className={css.carouselArrowNext} onClick={onSlideRight} onKeyDown={onKeyDown}>
+              ›
+            </button>
+          </div>
+          <div className={getColumnCSS(numColumns)} id={sliderId}>
+            <BlockBuilder
+              rootClassName={css.block}
+              ctaButtonClass={defaultClasses.ctaButton}
+              blocks={blocks}
+              responsiveImageSizes={getResponsiveImageSizes(numColumns)}
+              options={options}
+            />
+          </div>
         </div>
       ) : null}
     </SectionContainer>
