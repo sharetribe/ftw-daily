@@ -4,6 +4,7 @@
   display: flex;
   align-items: center;
   scroll-behavior: smooth;
+  padding: 64px 0 0 0;
 
   @media (--viewportMedium) {
     &:hover .carouselArrows {
@@ -52,10 +53,16 @@
 .carouselArrowNext {
   right: 48px;
 }
+.notEnoughBlocks {
+  @media (--viewportMedium) {
+    display: none;
+  }
+}
 
 .baseCarousel {
   display: flex;
   flex-wrap: nowrap;
+  width: var(--carouselWidth);
   overflow-x: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -76,60 +83,80 @@
 
 .block {
   flex: 0 0 auto;
-  width: calc(var(--carouselWidth) - 64px); /* 64px = horizontal layout paddings */
+  /* 64px = horizontal layout paddings */
+  width: calc(min(var(--contentMaxWidth), var(--carouselWidth)) - 64px);
+
   margin-right: 16px;
   scroll-snap-align: center;
 
-  /* Offset the start of the carousel so it follows the global grid layout (e.g. (1400 - 1200) / 2 = 100px) */
-  /* Removing this uses the full page width for the slider pane */
-  transform: translateX(max(calc((var(--carouselWidth) - var(--contentMaxWidth)) / 2 + 32px), 0px));
+  transform: translateX(32px);
 
   &:last-of-type {
     padding-right: 32px;
-    width: calc(var(--carouselWidth) - 32px); /* 32px (padding-right above) */
+    /* 32px (padding-right above) */
+    width: calc(min(var(--contentMaxWidth), var(--carouselWidth)) - 32px);
+  }
+
+  @media (min-width: 1200px) {
+    /* Offset the start of the carousel so it follows the global grid layout (e.g. (1400 - 1200) / 2 = 100px) */
+    /* Removing this uses the full page width for the slider pane */
+    transform: translateX(
+      max(calc((var(--carouselWidth) - var(--contentMaxWidth)) / 2 + 32px), 0px)
+    );
+
+    &:last-of-type {
+      padding-right: 32px;
+      width: calc(
+        min(var(--contentMaxWidth), var(--carouselWidth)) - 32px
+      ); /* 32px (padding-right above) */
+    }
   }
 }
 
 .oneColumn .block {
-  max-width: calc(var(--contentMaxWidth) - 64px); /* 64px (horizontal layout paddings) */
+  @media (--viewportMedium) {
+    /* 64px (horizontal layout paddings) */
+    width: calc(min(var(--contentMaxWidth), var(--carouselWidth)) - 64px);
 
-  &:last-of-type {
-    max-width: calc(var(--contentMaxWidth) - 32px); /* 32px (padding-right above) */
+    &:last-of-type {
+      /* 32px (padding-right) */
+      width: calc(min(var(--contentMaxWidth), var(--carouselWidth)) - 32px);
+    }
   }
 }
 
 .twoColumns .block {
-  max-width: calc(
-    (min(var(--contentMaxWidth), var(--carouselWidth)) - 64px - 18px) / 2
-  ); /* 64px (horizontal layout paddings) - 18px (gutter) / 2 (number of columns) */
+  @media (--viewportMedium) {
+    /* 64px (horizontal layout paddings) - 18px (gutter) / 2 (number of columns) */
+    width: calc((min(var(--contentMaxWidth), var(--carouselWidth)) - 64px - 18px) / 2);
 
-  &:last-of-type {
-    max-width: calc(
-      (min(var(--contentMaxWidth), var(--carouselWidth)) - 32px + 18px) / 2
-    ); /* 32px (padding-right above) + 18px (gutter) / 2 (number of columns) */
+    &:last-of-type {
+      /* 32px (padding-right above) + 18px (gutter) / 2 (number of columns) */
+      width: calc((min(var(--contentMaxWidth), var(--carouselWidth)) - 32px + 18px) / 2);
+    }
   }
 }
 
 .threeColumns .block {
-  max-width: calc(
-    (min(var(--contentMaxWidth), var(--carouselWidth)) - 64px - 32px) / 3
-  ); /* 64px (horizontal layout paddings) - 32px (two gutters á 18px) / 3 (number of columns) */
+  @media (--viewportMedium) {
+    /* 64px (horizontal layout paddings) - 32px (two gutters á 18px) / 3 (number of columns) */
+    width: calc((min(var(--contentMaxWidth), var(--carouselWidth)) - 64px - 32px) / 3);
 
-  &:last-of-type {
-    max-width: calc(
-      (min(var(--contentMaxWidth), var(--carouselWidth)) - 32px + 32px) / 3
-    ); /* 32px (padding-right above) + 32px (two gutters á 18px) / 3 (number of columns) */
+    &:last-of-type {
+      /* 32px (padding-right above) + 32px (two gutters á 18px) / 2 (number of columns) */
+      width: calc((min(var(--contentMaxWidth), var(--carouselWidth)) - 32px + 32px) / 3);
+    }
   }
 }
 
 .fourColumns .block {
-  max-width: calc(
-    (min(var(--contentMaxWidth), var(--carouselWidth)) - 64px - 54px) / 4
-  ); /* 64px (horizontal layout paddings) - 54px (three gutters á 18px) / 4 (number of columns) */
+  @media (--viewportMedium) {
+    /* 64px (horizontal layout paddings) - 54px (two gutters á 18px) / 3 (number of columns) */
+    width: calc((min(var(--contentMaxWidth), var(--carouselWidth)) - 64px - 54px) / 4);
 
-  &:last-of-type {
-    max-width: calc(
-      (min(var(--contentMaxWidth), var(--carouselWidth)) - 32px + 54px) / 4
-    ); /* 32px (padding-right above) + 54px (three gutters á 18px) / 4 (number of columns) */
+    &:last-of-type {
+      /* 32px (padding-right above) + 54px (two gutters á 18px) / 2 (number of columns) */
+      width: calc((min(var(--contentMaxWidth), var(--carouselWidth)) - 32px + 54px) / 4);
+    }
   }
 }
