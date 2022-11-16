@@ -53,7 +53,11 @@ const SectionFeatures = props => {
         </header>
       ) : null}
       {hasBlocks ? (
-        <div className={classNames(css.featuresMain, { [css.noSidePaddings]: isInsideContainer })}>
+        <div
+          className={classNames(defaultClasses.blockContainer, css.featuresMain, {
+            [css.noSidePaddings]: isInsideContainer,
+          })}
+        >
           <BlockBuilder
             rootClassName={css.block}
             ctaButtonClass={defaultClasses.ctaButton}
