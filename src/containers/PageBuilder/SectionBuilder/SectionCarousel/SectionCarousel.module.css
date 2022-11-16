@@ -6,9 +6,14 @@
   scroll-behavior: smooth;
   padding: 64px 0 0 0;
 
-  @media (--viewportMedium) {
+  &:hover .carouselArrows {
+    opacity: 1;
+  }
+
+  /* smartphones, touchscreens: we don't need to show arrows */
+  @media (hover: none) and (pointer: coarse) {
     &:hover .carouselArrows {
-      opacity: 1;
+      opacity: 0;
     }
   }
 }
