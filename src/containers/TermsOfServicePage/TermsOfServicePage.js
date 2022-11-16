@@ -115,6 +115,7 @@ const TermsOfServicePage = compose(
   injectIntl
 )(TermsOfServicePageComponent);
 
-export { ASSET_NAME as TOS_ASSET_NAME, TermsOfServicePageComponent, TermsOfServiceContent };
+const TOS_ASSET_NAME = ASSET_NAME;
+export { TOS_ASSET_NAME, TermsOfServicePageComponent, TermsOfServiceContent };
 
 export default TermsOfServicePage;
