@@ -115,10 +115,7 @@ const PrivacyPolicyPage = compose(
   injectIntl
 )(PrivacyPolicyPageComponent);
 
-export {
-  ASSET_NAME as PRIVACY_POLICY_ASSET_NAME,
-  PrivacyPolicyPageComponent,
-  PrivacyPolicyContent,
-};
+const PRIVACY_POLICY_ASSET_NAME = ASSET_NAME;
+export { PRIVACY_POLICY_ASSET_NAME, PrivacyPolicyPageComponent, PrivacyPolicyContent };
 
 export default PrivacyPolicyPage;

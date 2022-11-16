@@ -23,6 +23,7 @@ const DEFAULT_CLASSES = {
   title: css.title,
   ingress: css.ingress,
   ctaButton: css.ctaButton,
+  blockContainer: css.blockContainer,
 };
 
 /////////////////////////////////////////////

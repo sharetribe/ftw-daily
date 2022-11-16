@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { arrayOf, func, node, number, object, shape, string } from 'prop-types';
+import classNames from 'classnames';
 
 import Field, { hasDataInFields } from '../../Field';
 import BlockBuilder from '../../BlockBuilder';
@@ -43,12 +44,15 @@ const SectionCarousel = props => {
     blocks,
     options,
   } = props;
+  const sliderContainerId = `${props.sectionId}-container`;
   const sliderId = `${props.sectionId}-slider`;
 
   useEffect(() => {
     const setCarouselWidth = () => {
-      const elem = window.document.getElementById(sliderId);
-      elem.style.setProperty('--carouselWidth', `${elem.clientWidth}px`);
+      const windowWidth = window.innerWidth;
+      const elem = window.document.getElementById(sliderContainerId);
+      const carouselWidth = elem.clientWidth > windowWidth ? windowWidth : elem.clientWidth;
+      elem.style.setProperty('--carouselWidth', `${carouselWidth}px`);
     };
     setCarouselWidth();
 
@@ -109,8 +113,12 @@ const SectionCarousel = props => {
         </header>
       ) : null}
       {hasBlocks ? (
-        <div className={css.carouselContainer}>
-          <div className={css.carouselArrows}>
+        <div className={css.carouselContainer} id={sliderContainerId}>
+          <div
+            className={classNames(css.carouselArrows, {
+              [css.notEnoughBlocks]: numberOfBlocks <= numColumns,
+            })}
+          >
             <button className={css.carouselArrowPrev} onClick={onSlideLeft} onKeyDown={onKeyDown}>
               ‹
             </button>

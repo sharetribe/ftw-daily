@@ -49,7 +49,11 @@ const SectionArticle = props => {
         </header>
       ) : null}
       {hasBlocks ? (
-        <div className={classNames(css.articleMain, { [css.noSidePaddings]: isInsideContainer })}>
+        <div
+          className={classNames(defaultClasses.blockContainer, css.articleMain, {
+            [css.noSidePaddings]: isInsideContainer,
+          })}
+        >
           <BlockBuilder blocks={blocks} options={options} />
         </div>
       ) : null}
