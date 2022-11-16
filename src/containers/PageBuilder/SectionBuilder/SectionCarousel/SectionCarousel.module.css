@@ -21,20 +21,22 @@
 
 .carouselArrowPrev,
 .carouselArrowNext {
-  background-color: lightgrey;
-  width: 48px;
-  height: 48px;
-  border-radius: 100%;
-  color: black;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 30px;
   position: absolute;
   z-index: 2;
-  border: none;
+
+  width: 48px;
+  height: 48px;
   margin-top: -64px;
+  border-radius: 100%;
+  border: none;
+
+  background-color: lightgrey;
   opacity: 0.9;
+  font-size: 30px;
+  color: black;
   transition: all ease-in-out 100ms;
 
   &:hover {
