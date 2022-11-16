@@ -46,8 +46,8 @@ import { ConfirmSignupForm, LoginForm, SignupForm } from '../../forms';
 import { TopbarContainer } from '../../containers';
 
 import {
-  TermsOfServiceContent,
   TOS_ASSET_NAME,
+  TermsOfServiceContent,
 } from '../../containers/TermsOfServicePage/TermsOfServicePage';
 
 import css from './AuthenticationPage.module.css';
