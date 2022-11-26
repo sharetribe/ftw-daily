@@ -115,3 +115,10 @@ export const transitionPrivileged = body => {
 export const createUserWithIdp = body => {
   return post('/api/auth/create-user-with-idp', body);
 };
+
+// Check if user can be deleted and then delete the user. Endpoint logic
+// must be modified to accommodate the transaction processes used in
+// the marketplace.
+export const deleteUserAccount = body => {
+  return post('/api/delete-account', body);
+}

@@ -132,7 +132,7 @@ const EditListingWizardTab = props => {
             redirectAfterDraftUpdate(r.data.data.id.uuid, params, tab, marketplaceTabs, history);
           } else {
             handlePublishListing(currentListing.id);
-          }
+          } 
         })
         .catch(e => {
           // No need for extra actions

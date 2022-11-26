@@ -1,0 +1,20 @@
+
+{{~#*inline "format-date"~}}
+{{date date format="MMM d, YYYY" tz="Etc/UTC"}}
+{{~/inline~}}
+
+<html>
+  <body>
+    <h1>Your booking request has expired.</h1>
+
+    {{#with transaction}}
+    <p>Unfortunately {{provider.display-name}} didn't respond to your booking request for {{listing.title}} from {{> format-date date=booking.start}} to {{> format-date date=booking.end}} on time, so the request has expired. You have not been billed.</p>
+    {{/with}}
+
+    <p><a href="{{marketplace.url}}">Try to book something else instead</a></p>
+
+    <hr />
+
+    <p>You have received this email notification because you are a member of {{marketplace.name}}. If you no longer wish to receive these emails, please contact {{marketplace.name}} team.</p>
+  </body>
+</html>

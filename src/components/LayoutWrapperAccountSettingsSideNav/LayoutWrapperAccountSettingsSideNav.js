@@ -97,7 +97,7 @@ const LayoutWrapperAccountSettingsSideNavComponent = props => {
         name: 'PasswordChangePage',
       },
     },
-    {
+    /*{
       text: <FormattedMessage id="LayoutWrapperAccountSettingsSideNav.paymentsTabTitle" />,
       selected: currentTab === 'StripePayoutPage',
       id: 'StripePayoutPageTab',
@@ -111,6 +111,14 @@ const LayoutWrapperAccountSettingsSideNavComponent = props => {
       id: 'PaymentMethodsPageTab',
       linkProps: {
         name: 'PaymentMethodsPage',
+      },
+    },*/
+    {
+      text: <FormattedMessage id="LayoutWrapperAccountSettingsSideNav.deleteAccountTabTitle" />,
+      selected: currentTab === 'DeleteAccountPage',
+      id: 'DeleteAccountPageTab',
+      linkProps: {
+      name: 'DeleteAccountPage',
       },
     },
   ];

@@ -1,0 +1,14 @@
+<html>
+  <body>
+    {{#with transaction}}
+    <h1>How was your experience with {{listing.title}}? Write a review!</h1>
+
+    <p>You recently booked {{listing.title}} from {{provider.display-name}}. Please write a review to describe your experience. Reviews are important part of the {{marketplace.name}} community.</p>
+
+    <p><a href="{{marketplace.url}}/order/{{url-encode id}}/details">Leave a review</a></p>
+    {{/with}}
+
+    <hr />
+    <p>You have received this email notification because you are a member of {{marketplace.name}}. If you no longer wish to receive these emails, please contact {{marketplace.name}} team.</p>
+  </body>
+</html>

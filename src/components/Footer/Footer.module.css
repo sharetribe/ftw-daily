@@ -93,7 +93,7 @@
   flex-shrink: 0;
   flex-basis: 220px;
   display: none;
-  margin-right: 24px;
+  margin-right: 20px;
   margin-bottom: 24px;
 
   @media (--viewportMedium) {

@@ -9,38 +9,45 @@ const { LatLng, LatLngBounds } = sdkTypes;
 // `predictionPlace` (util.types.place) properties.
 const defaultLocations = [
   {
-    id: 'default-helsinki',
+    id: 'default-wien',
     predictionPlace: {
-      address: 'Helsinki, Finland',
-      bounds: new LatLngBounds(new LatLng(60.29783, 25.25448), new LatLng(59.92248, 24.78287)),
+      address: 'Wien, Wien, Österreich',
+      bounds: new LatLngBounds(new LatLng(48.3225389022517, 16.5775089932135), new LatLng(48.1176450051469, 16.1821500008094)),
     },
   },
   {
-    id: 'default-turku',
+    id: 'default-graz',
     predictionPlace: {
-      address: 'Turku, Finland',
-      bounds: new LatLngBounds(new LatLng(60.53045, 22.38197), new LatLng(60.33361, 22.06644)),
+      address: 'Graz, Steiermark, Österreich',
+      bounds: new LatLngBounds(new LatLng(47.134501, 15.5342), new LatLng(47.011887, 15.349714)),
     },
   },
   {
-    id: 'default-tampere',
+    id: 'default-linz',
     predictionPlace: {
-      address: 'Tampere, Finland',
-      bounds: new LatLngBounds(new LatLng(61.83657, 24.11838), new LatLng(61.42728, 23.5422)),
+      address: 'Linz, Oberösterreich, Österreich',
+      bounds: new LatLngBounds(new LatLng(48.378693, 14.409217), new LatLng(48.211371, 14.24572)),
     },
   },
   {
-    id: 'default-oulu',
+    id: 'default-salzburg',
     predictionPlace: {
-      address: 'Oulu, Finland',
-      bounds: new LatLngBounds(new LatLng(65.56434, 26.77069), new LatLng(64.8443, 24.11494)),
+      address: 'Salzburg, Salzburg, Österreich',
+      bounds: new LatLngBounds(new LatLng(47.854459, 13.127278), new LatLng(47.751214, 12.985622)),
     },
   },
   {
-    id: 'default-ruka',
+    id: 'default-innsbruck',
     predictionPlace: {
-      address: 'Ruka, Finland',
-      bounds: new LatLngBounds(new LatLng(66.16997, 29.16773), new LatLng(66.16095, 29.13572)),
+      address: 'Innsbruck, Tirol, Österreich',
+      bounds: new LatLngBounds(new LatLng(47.36012, 11.45595), new LatLng(47.210776, 11.301648)),
+    },
+  },
+  {
+    id: 'default-klagenfurt',
+    predictionPlace: {
+      address: 'Klagenfurt, Kärnten, Österreich',
+      bounds: new LatLngBounds(new LatLng(46.708708, 14.41626), new LatLng(46.574389, 14.210253)),
     },
   },
 ];
