@@ -202,6 +202,12 @@ const propTypeCustomBackground = shape({
   backgroundImage: propTypeImageAsset,
 });
 
+const propTypeYoutube = shape({
+  type: oneOf(['youtube']).isRequired,
+  aspectRatio: string,
+  youtubeVideoId: string.isRequired,
+});
+
 const propTypeOption = shape({
   fieldComponents: shape({ component: node, pickValidProps: func }),
 });
@@ -222,6 +228,7 @@ Field.propTypes = {
     propTypeLink,
     propTypeImage,
     propTypeCustomBackground,
+    propTypeYoutube,
     propTypeEmptyObject,
   ]),
   options: propTypeOption,
