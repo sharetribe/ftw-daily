@@ -169,9 +169,10 @@ const propTypeTextContent = shape({
   ]).isRequired,
   content: string.isRequired,
 });
+
 const propTypeLink = shape({
   type: oneOf(['externalButtonLink', 'internalButtonLink']).isRequired,
-  label: string.isRequired,
+  label: string,
   href: string.isRequired,
 });
 
@@ -191,7 +192,7 @@ const propTypeImageAsset = shape({
 
 const propTypeImage = shape({
   type: oneOf(['image']).isRequired,
-  alt: string.isRequired,
+  alt: string,
   image: propTypeImageAsset.isRequired,
 });
 
