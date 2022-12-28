@@ -59,7 +59,7 @@ const SectionBuilder = props => {
 
   return (
     <>
-      {sections.map(section => {
+      {sections.map((section, index) => {
         const Section = getComponent(section.sectionType);
         // If the default "dark" theme should be applied
         // By default, this information is stored to customBackground field
@@ -69,7 +69,7 @@ const SectionBuilder = props => {
         if (Section) {
           return (
             <Section
-              key={section.sectionId}
+              key={`${section.sectionId}_${index}`}
               className={classes}
               defaultClasses={DEFAULT_CLASSES}
               isInsideContainer={isInsideContainer}
