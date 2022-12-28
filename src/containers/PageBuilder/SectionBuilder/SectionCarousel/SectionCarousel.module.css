@@ -11,7 +11,7 @@
   }
 
   /* smartphones, touchscreens: we don't need to show arrows */
-  @media (hover: none) and (pointer: coarse) {
+  @media (any-hover: none) and (pointer: coarse) {
     &:hover .carouselArrows {
       opacity: 0;
     }
