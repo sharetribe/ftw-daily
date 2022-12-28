@@ -25,6 +25,17 @@ import {
   exposeYoutubeProps,
 } from './Field.helpers';
 
+const TEXT_CONTENT = [
+  'heading1',
+  'heading2',
+  'heading3',
+  'heading4',
+  'heading5',
+  'heading6',
+  'paragraph',
+  'markdown',
+];
+
 ////////////////////////
 // Markdown component //
 ////////////////////////
@@ -81,16 +92,29 @@ const defaultFieldComponents = {
 // Props picker //
 //////////////////
 
+const hasExactNumKeys = (obj, num) => Object.keys(obj).length === num;
+const isEmptyObject = obj => hasExactNumKeys(obj, 0);
+const hasOnlyProp = (obj, key) => hasExactNumKeys(obj, 1) && obj[key];
+const hasEmptyTextContent = obj =>
+  hasExactNumKeys(obj, 2) && TEXT_CONTENT.includes(obj?.type) && obj?.content?.length === 0;
+
 const getFieldConfig = (data, defaultFieldComponents, options) => {
   const customFieldComponents = options?.fieldComponents || {};
   const fieldMapping = { ...defaultFieldComponents, ...customFieldComponents };
   return fieldMapping[(data?.type)];
 };
 
-// This is useful for fields that are not used as components (e.g. background-color)
+// This is also useful for fields that are not used as components on their own
+// E.g. if some field data is used as an attribute to HTML element.
 export const validProps = (data, options) => {
-  if (!data || Object.keys(data).length === 0) {
-    // If there's no data, the (optional) field in Console has been left untouched.
+  if (
+    !data ||
+    isEmptyObject(data) ||
+    hasOnlyProp(data, 'type') ||
+    hasEmptyTextContent(data) ||
+    ['none'].includes(data?.type)
+  ) {
+    // If there's no data, the (optional) field in Console has been left untouched or it's removed.
     return null;
   }
 
@@ -156,17 +180,7 @@ const Field = props => {
 
 // Field's prop types:
 const propTypeTextContent = shape({
-  type: oneOf([
-    'heading1',
-    'heading2',
-    'heading3',
-    'heading4',
-    'heading5',
-    'heading6',
-    'ingress',
-    'paragraph',
-    'markdown',
-  ]).isRequired,
+  type: oneOf(TEXT_CONTENT).isRequired,
   content: string.isRequired,
 });
 
@@ -216,8 +230,16 @@ const propTypeOption = shape({
 // Empty objects might be received through page data asset for optional fields.
 // If you get a warning "Failed prop type: Invalid prop `data` supplied to `Field`."
 // on localhost environment.
-// This is the catch for those invalid data fields that don't have known "type".
 const propTypeEmptyObject = exact({});
+const propTypeTextEmptyObject = exact({
+  type: oneOf(TEXT_CONTENT).isRequired,
+});
+const propTypeDefaultBackground = shape({
+  type: oneOf(['defaultBackground']).isRequired,
+});
+const propTypeNone = shape({
+  type: oneOf(['none']).isRequired,
+});
 
 Field.defaultProps = {
   options: null,
@@ -231,6 +253,9 @@ Field.propTypes = {
     propTypeCustomBackground,
     propTypeYoutube,
     propTypeEmptyObject,
+    propTypeTextEmptyObject,
+    propTypeDefaultBackground,
+    propTypeNone,
   ]),
   options: propTypeOption,
 };
