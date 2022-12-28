@@ -15,7 +15,7 @@ const SectionContainer = props => {
 
   return (
     <Tag className={classes} id={id} {...otherProps}>
-      {background ? (
+      {background?.type === 'customBackground' ? (
         <Field
           data={{ alt: `Background image for ${id}`, ...background }}
           className={className}
