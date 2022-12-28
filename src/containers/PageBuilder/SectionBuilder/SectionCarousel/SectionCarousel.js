@@ -46,13 +46,17 @@ const SectionCarousel = props => {
   } = props;
   const sliderContainerId = `${props.sectionId}-container`;
   const sliderId = `${props.sectionId}-slider`;
+  const numberOfBlocks = blocks?.length;
+  const hasBlocks = numberOfBlocks > 0;
 
   useEffect(() => {
     const setCarouselWidth = () => {
-      const windowWidth = window.innerWidth;
-      const elem = window.document.getElementById(sliderContainerId);
-      const carouselWidth = elem.clientWidth > windowWidth ? windowWidth : elem.clientWidth;
-      elem.style.setProperty('--carouselWidth', `${carouselWidth}px`);
+      if (hasBlocks) {
+        const windowWidth = window.innerWidth;
+        const elem = window.document.getElementById(sliderContainerId);
+        const carouselWidth = elem.clientWidth > windowWidth ? windowWidth : elem.clientWidth;
+        elem.style.setProperty('--carouselWidth', `${carouselWidth}px`);
+      }
     };
     setCarouselWidth();
 
@@ -66,8 +70,6 @@ const SectionCarousel = props => {
   const fieldOptions = { fieldComponents };
 
   const hasHeaderFields = hasDataInFields([title, ingress, callToAction], fieldOptions);
-  const numberOfBlocks = blocks?.length;
-  const hasBlocks = numberOfBlocks > 0;
 
   const onSlideLeft = e => {
     var slider = window.document.getElementById(sliderId);
