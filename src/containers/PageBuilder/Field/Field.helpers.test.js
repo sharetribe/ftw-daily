@@ -53,9 +53,11 @@ describe('Field helpers', () => {
     });
     it('should return empty object if data is not valid', () => {
       expect(exposeLinkProps({ label: 'Hello world!', blaa: 'blaa' })).toEqual({});
-      expect(exposeLinkProps({ label: 0, href: 'https://my.example.com/some/image.png' })).toEqual(
-        {}
-      );
+    });
+    it('should return href as "children" if label is not valid', () => {
+      const href = 'https://my.example.com/some/image.png';
+      expect(exposeLinkProps({ href })).toEqual({ children: href, href: href });
+      expect(exposeLinkProps({ label: 0, href })).toEqual({ children: href, href: href });
     });
     it('should return "about:blank" in href if url in data is not valid', () => {
       expect(

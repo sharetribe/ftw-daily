@@ -33,11 +33,12 @@ export const exposeContentString = data => (hasContent(data) ? { content: data.c
  */
 export const exposeLinkProps = data => {
   const { label, href } = data;
-  const hasCorrectProps =
-    typeof label === 'string' && typeof href === 'string' && label.length > 0 && href.length > 0;
+  const hasCorrectProps = typeof href === 'string' && href.length > 0;
   // Sanitize the URL. See: src/utl/sanitize.js for more information.
   const cleanUrl = hasCorrectProps ? sanitizeUrl(href) : null;
-  return cleanUrl ? { children: label, href: cleanUrl } : {};
+  // If no label is given, use href.
+  const linkText = typeof label === 'string' && label.length > 0 ? label : cleanUrl;
+  return cleanUrl ? { children: linkText, href: cleanUrl } : {};
 };
 
 /**
@@ -66,6 +67,8 @@ export const exposeLinkProps = data => {
  * @returns object containing alt string and variants.
  */
 export const exposeImageProps = data => {
+  // Note: data includes also "aspectRatio" key,
+  //       but image refs can rely on actual image variants
   const { alt, image } = data;
   const { id, type, attributes } = image || {};
 
@@ -87,9 +90,10 @@ export const exposeImageProps = data => {
       : validVariants;
   }, {});
 
-  const isValidImage = typeof data?.alt === 'string' && Object.keys(variants).length > 0;
+  const alternativeText = typeof alt === 'string' ? alt : '🖼️';
+  const isValidImage = Object.keys(variants).length > 0;
   const sanitizedImage = { id, type, attributes: { ...attributes, variants } };
-  return isValidImage ? { alt, image: sanitizedImage } : {};
+  return isValidImage ? { alt: alternativeText, image: sanitizedImage } : {};
 };
 
 /**
