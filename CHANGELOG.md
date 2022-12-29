@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2022-XX-XX
 
+- [change] Added some dependabot updates: passport-0.6.0, loader-utils-2.0.4,
+  decode-uri-component-0.2.2  
+  Note: Passport-0.6.0 changed login and logout parameter list.
 - [change] Update Browserlist db / caniuse-lite.
   [#1567](https://github.com/sharetribe/ftw-daily/pull/1567)
 - [change] Update minimum Node version to >=16.18.0. (v14.15 had problems with some libs and v14
