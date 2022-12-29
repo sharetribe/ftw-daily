@@ -5,9 +5,6 @@
 // Smoothscroll
 require('smoothscroll-polyfill').polyfill();
 
-// Object.entries
-require('object.entries').shim();
-
 // Object.values
 require('object.values').shim();
 
