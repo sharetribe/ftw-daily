@@ -5,9 +5,6 @@
 // Smoothscroll
 require('smoothscroll-polyfill').polyfill();
 
-// [].find
-require('array.prototype.find').shim();
-
 // Object.entries
 require('object.entries').shim();
 
