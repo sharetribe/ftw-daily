@@ -14,7 +14,18 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2022-XX-XX
 
-- Add the cross-env package to better support Windows command prompts
+- [delete] Remove unnecessary polyfills (dependencies might still use these)
+
+  - array-includes
+  - array.prototype.find
+  - object.entries
+  - object.values
+  - Number.parseFloat, Number.parseInt, Number.isNaN
+
+  [#1565](https://github.com/sharetribe/ftw-daily/pull/1565)
+
+- [add] Add the cross-env package to better support Windows command prompts
+  [#1555](https://github.com/sharetribe/ftw-daily/pull/1555)
 
 ## [v9.0.2] 2022-10-17
 
