@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2022-XX-XX
 
+- Add the cross-env package to better support Windows command prompts
+
 ## [v9.0.2] 2022-10-17
 
 - [change] Add links to free Privacy Policy and Terms of Service templates
