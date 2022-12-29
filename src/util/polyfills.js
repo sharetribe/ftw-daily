@@ -5,9 +5,6 @@
 // Smoothscroll
 require('smoothscroll-polyfill').polyfill();
 
-// Object.values
-require('object.values').shim();
-
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/parseFloat
 if (typeof Number.parseFloat === 'undefined' && typeof window !== 'undefined') {
   Number.parseFloat = window.parseFloat;
