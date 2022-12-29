@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2022-XX-XX
 
+- [change] Update minimum Node version to >=16.18.0. (v14.15 had problems with some libs and v14
+  support ends soon.) [#1566](https://github.com/sharetribe/ftw-daily/pull/1566)
 - [delete] Remove unnecessary polyfills (dependencies might still use these)
 
   - array-includes
