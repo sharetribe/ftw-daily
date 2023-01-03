@@ -8,7 +8,8 @@ const TermsOfService = props => {
   const { rootClassName, className } = props;
   const classes = classNames(rootClassName || css.root, className);
 
-  // prettier-ignore
+  // prettier-ignore 
+  
   return (
     <div className={classes}>
       <p className={css.lastUpdated}>Zuletzt aktualisiert: Jänner 2023</p>
