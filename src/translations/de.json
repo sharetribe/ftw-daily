@@ -967,7 +967,7 @@
   "StripeConnectAccountStatusBox.verificationNeededTitle": "Stripe needs more information",
   "StripeConnectAccountStatusBox.verificationSuccessTitle": "Your Stripe account is up to date!",
   "TermsOfServicePage.heading": "Allgemeine Geschäftsbedingungen",
-  "TermsOfServicePage.privacyTabTitle": "Datenschutzbestimmungen",
+  "TermsOfServicePage.privacyTabTitle": "Datenschutz",
   "TermsOfServicePage.schemaTitle": "Allgemeine Geschätfsbedingungen | {siteTitle}",
   "TermsOfServicePage.tosTabTitle": "AGB",
   "Topbar.genericError": "Hoppla, etwas ist schiefgelaufen. Bitte prüfe deine Netzwerkverbindung und erneut versuchen.",
