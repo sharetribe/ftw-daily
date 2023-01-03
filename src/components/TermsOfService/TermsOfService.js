@@ -14,7 +14,15 @@ const TermsOfService = props => {
       <p className={css.lastUpdated}>Zuletzt aktualisiert: Jänner 2023</p>
 
       <p>
+<<<<<<< HEAD
       Bitte lesen Sie diese Allgemeine Geschäftsbedingungen sorgfältig durch, bevor Sie unseren Service nutzen.
+=======
+        Thank you for using Saunatime! Every marketplace business needs Terms of Service and
+        Privacy Policy agreements. To help you launch your marketplace faster, we've compiled 
+        two templates you can use as a baseline for the agreements between your online marketplace 
+        business and its users. You can access these templates at 
+        https://www.sharetribe.com/docs/operator-guides/free-templates/
+>>>>>>> 0118145f6e7fa6276342adc7204837d52df95daf
       </p>
 
       <h2>1 - Auslegung und Definitionen</h2>

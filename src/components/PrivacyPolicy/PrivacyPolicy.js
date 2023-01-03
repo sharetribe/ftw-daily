@@ -14,6 +14,7 @@ const PrivacyPolicy = props => {
       <p className={css.lastUpdated}>Zuletzt aktualisiert: Jänner 2023</p>
 
       <p>
+<<<<<<< HEAD
       Diese Datenschutzrichtlinie beschreibt unsere Richtlinien und Verfahren zur Erfassung, Verwendung und Offenlegung Ihrer Daten, 
       wenn Sie den Dienst nutzen, und informiert Sie über Ihre Datenschutzrechte und wie das Gesetz Sie schützt.
       </p>
@@ -31,6 +32,13 @@ const PrivacyPolicy = props => {
       <p>
       Die Wörter, deren Anfangsbuchstaben groß geschrieben werden, haben die unter den folgenden Bedingungen definierten Bedeutungen. 
       Die folgenden Definitionen haben dieselbe Bedeutung, unabhängig davon, ob sie im Singular oder im Plural stehen.
+=======
+        Thank you for using Saunatime! Every marketplace business needs Terms of Service and
+        Privacy Policy agreements. To help you launch your marketplace faster, we've compiled 
+        two templates you can use as a baseline for the agreements between your online marketplace 
+        business and its users. You can access these templates at 
+        https://www.sharetribe.com/docs/operator-guides/free-templates/
+>>>>>>> 0118145f6e7fa6276342adc7204837d52df95daf
       </p>
 
       <h3>1.2 - Begriffsbestimmungen</h3>

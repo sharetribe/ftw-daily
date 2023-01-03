@@ -1,6 +1,6 @@
 {
   "name": "app",
-  "version": "9.0.1",
+  "version": "9.0.2",
   "private": true,
   "license": "Apache-2.0",
   "dependencies": {
@@ -10,8 +10,6 @@
     "@mapbox/polyline": "^1.1.1",
     "@sentry/browser": "^6.19.7",
     "@sentry/node": "^6.19.7",
-    "array-includes": "^3.1.5",
-    "array.prototype.find": "^2.2.0",
     "autosize": "^5.0.1",
     "basic-auth": "^2.0.1",
     "body-parser": "^1.20.0",
@@ -30,13 +28,11 @@
     "final-form-arrays": "^3.0.2",
     "full-icu": "^1.4.0",
     "helmet": "^4.6.0",
-    "jose": "4.8.1",
+    "jose": "4.9.2",
     "lodash": "^4.17.21",
     "mapbox-gl-multitouch": "^1.0.3",
     "moment": "^2.29.4",
-    "object.entries": "^1.1.5",
-    "object.values": "^1.1.5",
-    "passport": "^0.5.3",
+    "passport": "^0.6.0",
     "passport-facebook": "^3.0.0",
     "passport-google-oauth": "^2.0.0",
     "path-to-regexp": "^6.2.1",
@@ -68,6 +64,7 @@
     "bfj": "^7.0.2",
     "chalk": "^v4.1.2",
     "concurrently": "^7.2.0",
+    "cross-env": "^7.0.3",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "enzyme-to-json": "^3.6.2",
@@ -91,7 +88,11 @@
     "config-check": "node scripts/config.js --check",
     "dev-frontend": "sharetribe-scripts start",
     "dev-backend": "nodemon server/apiServer.js",
+<<<<<<< HEAD
     "dev": "yarn run config-check&& set NODE_ENV=development REACT_APP_DEV_API_SERVER_PORT=3500&&concurrently --kill-others \"yarn run dev-frontend\" \"yarn run dev-backend\"",
+=======
+    "dev": "yarn run config-check&&cross-env NODE_ENV=development REACT_APP_DEV_API_SERVER_PORT=3500 concurrently --kill-others \"yarn run dev-frontend\" \"yarn run dev-backend\"",
+>>>>>>> 0118145f6e7fa6276342adc7204837d52df95daf
     "build": "yarn build-web&&yarn build-server",
     "build-web": "sharetribe-scripts build",
     "build-server": "sharetribe-scripts build-server",
@@ -102,7 +103,11 @@
     "test-ci": "yarn run test-server --runInBand && sharetribe-scripts test --runInBand",
     "eject": "sharetribe-scripts eject",
     "start": "node --icu-data-dir=node_modules/full-icu server/index.js",
+<<<<<<< HEAD
     "dev-server": "set NODE_ENV=development&& set PORT=4000&& set REACT_APP_CANONICAL_ROOT_URL=http://localhost:4000&&yarn run build&&nodemon --watch server server/index.js",
+=======
+    "dev-server": "cross-env-shell NODE_ENV=development PORT=4000 REACT_APP_CANONICAL_ROOT_URL=http://localhost:4000 \"yarn run build&&nodemon --watch server server/index.js\"",
+>>>>>>> 0118145f6e7fa6276342adc7204837d52df95daf
     "test-server": "jest ./server/**/*.test.js",
     "heroku-postbuild": "yarn run build",
     "translate": "node scripts/translations.js"
@@ -120,7 +125,7 @@
     ]
   },
   "engines": {
-    "node": ">=14.15.0"
+    "node": ">=16.18.0"
   },
   "prettier": {
     "singleQuote": true,
