@@ -1,5 +1,4 @@
 import React from 'react';
-import { arrayOf, func, node, oneOf, shape, string } from 'prop-types';
 
 import { Footer as FooterContent } from '../../components/index.js';
 import { TopbarContainer } from '../../containers/index.js';
