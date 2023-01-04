@@ -7,10 +7,9 @@
 
   /* Handle margin-top of next adjacent element against this p element */
   & + p,
-  & + a,
   & + ul,
   & + ol,
-  & + code,
+  & + pre,
   & + div,
   & + h1,
   & + h2,

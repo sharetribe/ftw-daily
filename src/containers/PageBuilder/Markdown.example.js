@@ -99,7 +99,7 @@ const SectionEmphasis = {
 };
 
 const mdLinks = `
-Plain [link text](https://www.sharetribe.com/docs/) within a parapgraph.
+Plain [link text](https://www.sharetribe.com/docs/) within a parapgraph. Another [link](https://www.sharetribe.com/docs/).
 
 [Link with title](https://www.sharetribe.com/docs/ "title text!") shows a title text, when mouse is hovering on top of it.
 
@@ -411,7 +411,7 @@ const SectionImages = {
 };
 
 const inlineCode = `
-Inline \`code\`
+Inline \`code\` and \`another\`
 `;
 
 const codeBlockIndentation = `
