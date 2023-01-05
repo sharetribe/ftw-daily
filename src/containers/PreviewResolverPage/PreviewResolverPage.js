@@ -24,6 +24,7 @@ const PreviewResolverPage = props => {
   const parsedQueryString = parse(search);
   const assetPath = parsedQueryString?.['asset-path'] || '';
   const pageAssetName = getPageAssetName(assetPath);
+  const hasCMSPagePath = !!pageAssetName;
 
   const toTermsOfServicePage = <NamedRedirect name="TermsOfServicePage" />;
   const toPrivacyPolicyPage = <NamedRedirect name="PrivacyPolicyPage" />;
@@ -36,7 +37,9 @@ const PreviewResolverPage = props => {
     ? toTermsOfServicePage
     : pageAssetName === 'privacy-policy'
     ? toPrivacyPolicyPage
-    : pageAssetName && pageAssetName !== 'landing-page'
+    : pageAssetName === 'landing-page'
+    ? toLandingPage
+    : hasCMSPagePath
     ? toCMSPage
     : toLandingPage;
 };
