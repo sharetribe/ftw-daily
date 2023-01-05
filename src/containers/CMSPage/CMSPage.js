@@ -9,7 +9,7 @@ import PageBuilder from '../../containers/PageBuilder/PageBuilder';
 
 export const CMSPageComponent = props => {
   const { params, pageAssetsData, inProgress, error } = props;
-  const pageId = params.pageId;
+  const pageId = params.pageId || props.pageId;
 
   if (!inProgress && error?.status === 404) {
     return <NotFoundPage />;
