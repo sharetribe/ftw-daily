@@ -14,3 +14,4 @@ build
 .env
 npm-debug.log
 yarn-error.log
+REACT_APP_MAPBOX_ACCESS_TOKEN=pk.eyJ1IjoiYnJwbGF0dGVyIiwiYSI6ImNsY3F2ZmZwMjA5c2szcW12MnY3cWN5YXAifQ.c-AbShiKL_-INMZ2rCzPBg
