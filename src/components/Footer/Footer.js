@@ -128,9 +128,6 @@ const Footer = props => {
                     <FormattedMessage id="Footer.copyright2" />
                   </NamedLink>
                   <br></br>
-                  <NamedLink name="LandingPage" className={css.copyrightLink}>
-                    <FormattedMessage id="Footer.copyright2" />
-                  </NamedLink>
                 </p>
               </div>
             </div>
@@ -293,6 +290,356 @@ const Footer = props => {
                   </li>
                 </ul>
               </div>
+
+            </div>
+          </div>
+          <div className={css.copyrightAndTermsMobile}>
+            <NamedLink name="LandingPage" className={css.organizationCopyrightMobile}>
+              <FormattedMessage id="Footer.copyright" />
+            </NamedLink>
+            <div className={css.tosAndPrivacyMobile}>
+              <NamedLink name="PrivacyPolicyPage" className={css.privacy}>
+                <FormattedMessage id="Footer.privacy" />
+              </NamedLink>
+              <NamedLink name="TermsOfServicePage" className={css.terms}>
+                <FormattedMessage id="Footer.terms" />
+              </NamedLink>
+            </div>
+          </div>
+           <div className={css.links}>
+            <div className={css.infoLinks2}>
+              <ul className={css.list}>
+              <li className={css.listItem}>
+                  <p><strong>
+                    <FormattedMessage id="Footer.categoryHairBeauty" />
+                    </strong>
+                  </p>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink name="NewListingPage" className={css.link}>
+                    <FormattedMessage id="Footer.categorySalonChair" />
+                  </NamedLink>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink name="AboutPage" className={css.link}>
+                    <FormattedMessage id="Footer.categoryBarberChair" />
+                  </NamedLink>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink name="FaqPage" className={css.link}>
+                    <FormattedMessage id="Footer.categoryBeautySpace" />
+                  </NamedLink>
+                </li>
+                <li className={css.listItem}>
+                  <a href="mailto:hello@hotpatch.com" className={css.link}>
+                    <FormattedMessage id="Footer.categoryNailStation" />
+                  </a>
+                </li>
+                <li className={css.listItem}>
+                  <ExternalLink href="https://www.hotpatch.com/blog/" className={css.link}>
+                    <FormattedMessage id="Footer.categoryBeautyRoom" />
+                  </ExternalLink>
+                </li>
+                <li className={css.listItem}>
+                  <ExternalLink href="https://www.hotpatch.com/blog/" className={css.link}>
+                    <FormattedMessage id="Footer.categoryAesthetics" />
+                  </ExternalLink>
+                </li>
+                <li className={css.listItem}>
+                  <ExternalLink href="https://www.hotpatch.com/blog/" className={css.link}>
+                    <FormattedMessage id="Footer.categoryTattooPiercing" />
+                  </ExternalLink>
+                </li>
+               
+              </ul>
+            </div>
+            <div className={css.infoLinks2}>
+              <ul className={css.list}>
+              <li className={css.listItem}>
+                  <p><strong>
+                    <FormattedMessage id="Footer.categoryWellness" />
+                    </strong>
+                  </p>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink name="NewListingPage" className={css.link}>
+                    <FormattedMessage id="Footer.categoryTherapyRoom" />
+                  </NamedLink>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink name="AboutPage" className={css.link}>
+                    <FormattedMessage id="Footer.categoryMassageRoom" />
+                  </NamedLink>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink name="FaqPage" className={css.link}>
+                    <FormattedMessage id="Footer.categoryClinicalRoom" />
+                  </NamedLink>
+                </li>
+                
+              </ul>
+            </div>
+
+           <div className={css.infoLinks2}>
+              <ul className={css.list}>
+              <li className={css.listItem}>
+                  <p><strong>
+                    <FormattedMessage id="Footer.categoryFitness" />
+                    </strong>
+                  </p>
+                </li>
+                
+                <li className={css.listItem}>
+                  <NamedLink name="AboutPage" className={css.link}>
+                    <FormattedMessage id="Footer.categoryFitnessStudio" />
+                  </NamedLink>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink name="FaqPage" className={css.link}>
+                    <FormattedMessage id="Footer.categoryYogaStudio" />
+                  </NamedLink>
+                </li>
+                <li className={css.listItem}>
+                  <a href="mailto:hello@hotpatch.com" className={css.link}>
+                    <FormattedMessage id="Footer.categoryDanceStudio" />
+                  </a>
+                </li>
+                <li className={css.listItem}>
+                  <ExternalLink href="https://www.hotpatch.com/blog/" className={css.link}>
+                    <FormattedMessage id="Footer.categorySportsHall" />
+                  </ExternalLink>
+                </li>
+                <li className={css.listItem}>
+                  <ExternalLink href="https://www.hotpatch.com/blog/" className={css.link}>
+                    <FormattedMessage id="Footer.categoryOutdoorSportSpace" />
+                  </ExternalLink>
+                </li>
+                <li className={css.listItem}>
+                  <ExternalLink href="https://www.hotpatch.com/blog/" className={css.link}>
+                    <FormattedMessage id="Footer.categoryActivityRoom" />
+                  </ExternalLink>
+                </li>
+              </ul>
+            </div>
+
+           {/* <div className={css.searchesExtra}>
+             <ul className={css.list}>
+               <li className={css.listItem}>
+                 <NamedLink
+                   name="SearchPage"
+                   to={{
+                     search: base_url.replace('CITY', 'Sheffield') + `&bounds=${53.40297225}%2C${-1.43730778}%2C${53.34019056}%2C${-1.51371712}`,
+                   }}
+                   className={css.link}
+                 >
+                   <FormattedMessage id="Footer.searchSheffield" />
+                 </NamedLink>
+               </li>
+             </ul>
+           </div> */}
+
+           <div className={css.infoLinks2}>
+              <ul className={css.list}>
+              <li className={css.listItem}>
+                  <p><strong>
+                    <FormattedMessage id="Footer.categoryEvents" />
+                    </strong>
+                  </p>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink name="NewListingPage" className={css.link}>
+                    <FormattedMessage id="Footer.categoryMusicVenue" />
+                  </NamedLink>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink name="AboutPage" className={css.link}>
+                    <FormattedMessage id="Footer.categoryPrivateEventSpace" />
+                  </NamedLink>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink name="FaqPage" className={css.link}>
+                    <FormattedMessage id="Footer.categorySportsVenue" />
+                  </NamedLink>
+                </li>
+                <li className={css.listItem}>
+                  <a href="mailto:hello@hotpatch.com" className={css.link}>
+                    <FormattedMessage id="Footer.categoryConferenceExhibition" />
+                  </a>
+                </li>
+                <li className={css.listItem}>
+                  <ExternalLink href="https://www.hotpatch.com/blog/" className={css.link}>
+                    <FormattedMessage id="Footer.categoryOutdoorEvents" />
+                  </ExternalLink>
+                </li>
+                <li className={css.listItem}>
+                  <ExternalLink href="https://www.hotpatch.com/blog/" className={css.link}>
+                    <FormattedMessage id="Footer.categoryPrivateDining" />
+                  </ExternalLink>
+                </li>
+                
+              </ul>
+            </div>
+          </div>
+          <div className={css.copyrightAndTermsMobile}>
+            <NamedLink name="LandingPage" className={css.organizationCopyrightMobile}>
+              <FormattedMessage id="Footer.copyright" />
+            </NamedLink>
+            <div className={css.tosAndPrivacyMobile}>
+              <NamedLink name="PrivacyPolicyPage" className={css.privacy}>
+                <FormattedMessage id="Footer.privacy" />
+              </NamedLink>
+              <NamedLink name="TermsOfServicePage" className={css.terms}>
+                <FormattedMessage id="Footer.terms" />
+              </NamedLink>
+            </div>
+          </div>
+          <div className={css.links}>
+            <div className={css.infoLinks2}>
+              <ul className={css.list}>
+              <li className={css.listItem}>
+                  <p><strong>
+                    <FormattedMessage id="Footer.categoryCoworking" />
+                    </strong>
+                  </p>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink name="NewListingPage" className={css.link}>
+                    <FormattedMessage id="Footer.categoryCoworkingSpace" />
+                  </NamedLink>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink name="AboutPage" className={css.link}>
+                    <FormattedMessage id="Footer.categoryPrivateOffice" />
+                  </NamedLink>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink name="FaqPage" className={css.link}>
+                    <FormattedMessage id="Footer.categoryMeetingRoom" />
+                  </NamedLink>
+                </li>
+                <li className={css.listItem}>
+                  <a href="mailto:hello@hotpatch.com" className={css.link}>
+                    <FormattedMessage id="Footer.categoryConferenceRoom" />
+                  </a>
+                </li>
+                <li className={css.listItem}>
+                  <ExternalLink href="https://www.hotpatch.com/blog/" className={css.link}>
+                    <FormattedMessage id="Footer.categoryClassroom" />
+                  </ExternalLink>
+                </li>
+                
+              </ul>
+            </div>
+            <div className={css.infoLinks2}>
+              <ul className={css.list}>
+              <li className={css.listItem}>
+                  <p><strong>
+                    <FormattedMessage id="Footer.categoryMusicArts" />
+                    </strong>
+                  </p>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink name="NewListingPage" className={css.link}>
+                    <FormattedMessage id="Footer.categoryMusicStudio" />
+                  </NamedLink>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink name="AboutPage" className={css.link}>
+                    <FormattedMessage id="Footer.categoryRecordingStudio" />
+                  </NamedLink>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink name="FaqPage" className={css.link}>
+                    <FormattedMessage id="Footer.categoryGallerySpace" />
+                  </NamedLink>
+                </li>
+                <li className={css.listItem}>
+                  <a href="mailto:hello@hotpatch.com" className={css.link}>
+                    <FormattedMessage id="Footer.categoryArtStudio" />
+                  </a>
+                </li>
+                <li className={css.listItem}>
+                  <ExternalLink href="https://www.hotpatch.com/blog/" className={css.link}>
+                    <FormattedMessage id="Footer.categoryRehearsalSpace" />
+                  </ExternalLink>
+                </li>
+                <li className={css.listItem}>
+                  <ExternalLink href="https://www.hotpatch.com/blog/" className={css.link}>
+                    <FormattedMessage id="Footer.categoryDramaStudio" />
+                  </ExternalLink>
+                </li>
+                <li className={css.listItem}>
+                  <ExternalLink href="https://www.hotpatch.com/blog/" className={css.link}>
+                    <FormattedMessage id="Footer.categoryTheatreSpace" />
+                  </ExternalLink>
+                </li>
+               
+              </ul>
+            </div>
+
+           <div className={css.infoLinks2}>
+              <ul className={css.list}>
+              <li className={css.listItem}>
+                  <p><strong>
+                    <FormattedMessage id="Footer.categoryPhotographyFilm" />
+                    </strong>
+                  </p>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink name="NewListingPage" className={css.link}>
+                    <FormattedMessage id="Footer.categoryPhotoStudio" />
+                  </NamedLink>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink name="AboutPage" className={css.link}>
+                    <FormattedMessage id="Footer.categoryLocationShoot" />
+                  </NamedLink>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink name="FaqPage" className={css.link}>
+                    <FormattedMessage id="Footer.categoryOutdoorSite" />
+                  </NamedLink>
+                </li>
+                
+              </ul>
+            </div>
+
+           {/* <div className={css.searchesExtra}>
+             <ul className={css.list}>
+               <li className={css.listItem}>
+                 <NamedLink
+                   name="SearchPage"
+                   to={{
+                     search: base_url.replace('CITY', 'Sheffield') + `&bounds=${53.40297225}%2C${-1.43730778}%2C${53.34019056}%2C${-1.51371712}`,
+                   }}
+                   className={css.link}
+                 >
+                   <FormattedMessage id="Footer.searchSheffield" />
+                 </NamedLink>
+               </li>
+             </ul>
+           </div> */}
+
+           <div className={css.infoLinks2}>
+              <ul className={css.list}>
+              <li className={css.listItem}>
+                  <p><strong>
+                    <FormattedMessage id="Footer.categoryKitchenPopup" />
+                    </strong>
+                  </p>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink name="NewListingPage" className={css.link}>
+                    <FormattedMessage id="Footer.categoryKitchen" />
+                  </NamedLink>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink name="AboutPage" className={css.link}>
+                    <FormattedMessage id="Footer.categoryPopup" />
+                  </NamedLink>
+                </li>
+                
+              </ul>
             </div>
           </div>
           <div className={css.copyrightAndTermsMobile}>
@@ -311,8 +658,11 @@ const Footer = props => {
         </div>
       </div>
     </div>
+
   );
 };
+
+
 
 Footer.defaultProps = {
   rootClassName: null,

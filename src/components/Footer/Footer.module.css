@@ -173,6 +173,18 @@
   }
 }
 
+.infoLinks2 {
+  order: 2;
+  flex-basis: 210px;
+  margin-right: 24px;
+  margin-bottom: 24px;
+
+  @media (--viewportMedium) {
+    padding-top: 2px;
+    margin-right: 12px;
+  }
+}
+
 .list {
   margin-top: 0;
   margin-bottom: 0;
