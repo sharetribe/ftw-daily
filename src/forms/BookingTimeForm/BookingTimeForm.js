@@ -49,7 +49,14 @@ export class BookingTimeFormComponent extends Component {
   }
 
   render() {
-    const { rootClassName, className, price: unitPrice, promocode, updateDiscount, ...rest } = this.props;
+    const {
+      rootClassName,
+      className,
+      price: unitPrice,
+      promocode,
+      updateDiscount,
+      ...rest
+    } = this.props;
     const classes = classNames(rootClassName || css.root, className);
 
     // if (!unitPrice) {
@@ -102,7 +109,9 @@ export class BookingTimeFormComponent extends Component {
 
           const startTime = values && values.bookingStartTime ? values.bookingStartTime : null;
           const endTime = values && values.bookingEndTime ? values.bookingEndTime : null;
-          this.state.promo !== promocode ? (this.handleOnChange(values), this.setState({promo: promocode})) : null;
+          this.state.promo !== promocode
+            ? (this.handleOnChange(values), this.setState({ promo: promocode }))
+            : null;
 
           const bookingStartLabel = intl.formatMessage({
             id: 'BookingTimeForm.bookingStartTitle',
@@ -134,7 +143,12 @@ export class BookingTimeFormComponent extends Component {
               <h3 className={css.priceBreakdownTitle}>
                 <FormattedMessage id="BookingTimeForm.priceBreakdownTitle" />
               </h3>
-              <EstimatedBreakdownMaybe updateDiscount={updateDiscount} promo={promocode} bookingData={bookingData} lineItems={lineItems} />
+              <EstimatedBreakdownMaybe
+                updateDiscount={updateDiscount}
+                promo={promocode}
+                bookingData={bookingData}
+                lineItems={lineItems}
+              />
             </div>
           ) : null;
 
