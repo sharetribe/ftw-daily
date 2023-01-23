@@ -1,5 +1,7 @@
 .video {
   position: relative;
+  overflow: hidden;
+  border-radius: 8px;
 }
 .iframe {
   position: absolute;
