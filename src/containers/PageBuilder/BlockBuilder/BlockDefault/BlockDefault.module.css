@@ -12,7 +12,8 @@
     display: none;
   }
 
-  & + .text {
+  /* If there's an image, add margin-top to the following text div */
+  &:not(:empty) + .text {
     margin-top: 20px;
   }
 }

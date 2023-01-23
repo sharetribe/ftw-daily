@@ -93,7 +93,7 @@
   /* 64px = horizontal layout paddings */
   width: calc(min(var(--contentMaxWidth), var(--carouselWidth)) - 64px);
 
-  margin-right: 16px;
+  margin-right: 32px;
   scroll-snap-align: center;
 
   transform: translateX(32px);
@@ -134,36 +134,36 @@
 
 .twoColumns .block {
   @media (--viewportMedium) {
-    /* 64px (horizontal layout paddings) - 18px (gutter) / 2 (number of columns) */
-    width: calc((min(var(--contentMaxWidth), var(--carouselWidth)) - 64px - 18px) / 2);
+    /* 64px (horizontal layout paddings) - 32px (one gutter á 32px) / 2 (number of columns) */
+    width: calc((min(var(--contentMaxWidth), var(--carouselWidth)) - 64px - 32px) / 2);
 
     &:last-of-type {
-      /* 32px (padding-right above) + 18px (gutter) / 2 (number of columns) */
-      width: calc((min(var(--contentMaxWidth), var(--carouselWidth)) - 32px + 18px) / 2);
+      /* 32px (padding-right above) / 2 (number of columns) */
+      width: calc((min(var(--contentMaxWidth), var(--carouselWidth)) - 32px) / 2);
     }
   }
 }
 
 .threeColumns .block {
   @media (--viewportMedium) {
-    /* 64px (horizontal layout paddings) - 32px (two gutters á 18px) / 3 (number of columns) */
-    width: calc((min(var(--contentMaxWidth), var(--carouselWidth)) - 64px - 32px) / 3);
+    /* 64px (horizontal layout paddings) - 32px (two gutters á 32px) / 3 (number of columns) */
+    width: calc((min(var(--contentMaxWidth), var(--carouselWidth)) - 64px - 64px) / 3);
 
     &:last-of-type {
-      /* 32px (padding-right above) + 32px (two gutters á 18px) / 2 (number of columns) */
-      width: calc((min(var(--contentMaxWidth), var(--carouselWidth)) - 32px + 32px) / 3);
+      /* 32px (padding-right above) / 3 (number of columns) */
+      width: calc((min(var(--contentMaxWidth), var(--carouselWidth)) - 32px) / 3);
     }
   }
 }
 
 .fourColumns .block {
   @media (--viewportMedium) {
-    /* 64px (horizontal layout paddings) - 54px (two gutters á 18px) / 3 (number of columns) */
-    width: calc((min(var(--contentMaxWidth), var(--carouselWidth)) - 64px - 54px) / 4);
+    /* 64px (horizontal layout paddings) - 96px (three gutters á 32px) / 4 (number of columns) */
+    width: calc((min(var(--contentMaxWidth), var(--carouselWidth)) - 64px - 96px) / 4);
 
     &:last-of-type {
-      /* 32px (padding-right above) + 54px (two gutters á 18px) / 2 (number of columns) */
-      width: calc((min(var(--contentMaxWidth), var(--carouselWidth)) - 32px + 54px) / 4);
+      /* 32px (padding-right above) / 4 (number of columns) */
+      width: calc((min(var(--contentMaxWidth), var(--carouselWidth)) - 32px) / 4);
     }
   }
 }
