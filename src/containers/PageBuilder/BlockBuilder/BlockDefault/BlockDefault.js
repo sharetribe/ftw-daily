@@ -2,14 +2,15 @@ import React from 'react';
 import { func, node, object, shape, string } from 'prop-types';
 import classNames from 'classnames';
 
-import Field from '../../Field';
+import Field, { hasDataInFields } from '../../Field';
 import BlockContainer from '../BlockContainer';
 
 import css from './BlockDefault.module.css';
 
 const FieldMedia = props => {
   const { className, media, sizes, options } = props;
-  return media ? (
+  const hasMediaField = hasDataInFields([media], options);
+  return hasMediaField ? (
     <div className={classNames(className, css.media)}>
       <Field data={media} sizes={sizes} options={options} />
     </div>
@@ -32,6 +33,8 @@ const BlockDefault = props => {
     options,
   } = props;
   const classes = classNames(rootClassName || css.root, className);
+  const hasTextComponentFields = hasDataInFields([title, text, callToAction], options);
+
   return (
     <BlockContainer id={blockId} className={classes}>
       <FieldMedia
@@ -40,11 +43,13 @@ const BlockDefault = props => {
         className={mediaClassName}
         options={options}
       />
-      <div className={classNames(textClassName, css.text)}>
-        <Field data={title} options={options} />
-        <Field data={text} options={options} />
-        <Field data={callToAction} className={ctaButtonClass} options={options} />
-      </div>
+      {hasTextComponentFields ? (
+        <div className={classNames(textClassName, css.text)}>
+          <Field data={title} options={options} />
+          <Field data={text} options={options} />
+          <Field data={callToAction} className={ctaButtonClass} options={options} />
+        </div>
+      ) : null}
     </BlockContainer>
   );
 };
