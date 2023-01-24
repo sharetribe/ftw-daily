@@ -99,16 +99,16 @@
     margin-top: 12px;
   }
 
-  &:empty + .blockContainer {
-    padding: 0 32px 0 32px;
-  }
-
-  &:not(:empty) + .blockContainer {
-    padding: 64px 32px 0 32px;
-  }
-
   @media (--viewportMedium) {
     justify-content: center;
+  }
+}
+
+.blockContainer {
+  padding: 64px 32px 0 32px;
+
+  &:first-child {
+    padding: 0 32px;
   }
 }
 
