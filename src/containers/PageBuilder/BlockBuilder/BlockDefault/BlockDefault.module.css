@@ -6,23 +6,13 @@
   background-color: var(--matterColorNegative); /* Loading state color for the images */
   border-radius: 8px;
   margin-bottom: 0;
-
-  /* Don't render the div if there's no image to render */
-  &:empty {
-    display: none;
-  }
-
-  /* If there's an image, add margin-top to the following text div */
-  &:not(:empty) + .text {
-    margin-top: 20px;
-  }
 }
 
 .text {
   width: 100%;
+  margin-top: 20px;
 
-  /* Don't render the div if there's no image to render */
-  &:empty {
-    display: none;
+  &:first-child {
+    margin-top: 0;
   }
 }
