@@ -589,7 +589,7 @@ export const SectionColumns = {
           backgroundImage: imagePlaceholder(400, 400),
           alt: 'Background image',
           color: '#000000',
-          textColor: 'light',
+          textColor: 'white',
         },
         title: { type: 'heading2', content: 'One Column, No Blocks, Bg Image' },
         ingress: {
