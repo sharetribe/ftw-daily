@@ -514,7 +514,7 @@ const SectionLinksOnDarkMode = {
   sectionType: 'columns',
   sectionId: 'cms-section-3-dark',
   numColumns: 2,
-  background: { type: 'customBackground', color: '#000000', textColor: 'light' },
+  background: { type: 'customBackground', color: '#000000', textColor: 'white' },
   title: { type: 'heading2', content: 'Links on dark theme' },
   blocks: [
     {
@@ -536,7 +536,7 @@ const SectionCodeOnDarkMode = {
   sectionType: 'columns',
   sectionId: 'cms-section-8',
   numColumns: 2,
-  background: { type: 'customBackground', color: '#000000', textColor: 'light' },
+  background: { type: 'customBackground', color: '#000000', textColor: 'white' },
   title: { type: 'heading2', content: 'Inline code and Code blocks' },
   blocks: [
     {
