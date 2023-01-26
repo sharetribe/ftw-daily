@@ -227,14 +227,13 @@ export const PageWithBuildInSectionColumns = {
             backgroundImage: imagePlaceholder(1200, 800, '#b6f7f9'),
             alt: 'Background image',
             color: '#000000',
-            textColor: 'light',
+            textColor: 'white',
           },
           title: { type: 'heading2', content: '3 Columns' },
           ingress: {
             type: 'heading2',
             content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
           },
-          textColor: 'light',
           blocks: [
             {
               blockType: 'defaultBlock',
