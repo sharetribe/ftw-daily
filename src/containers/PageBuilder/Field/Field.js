@@ -17,6 +17,7 @@ import { YoutubeEmbed } from '../Primitives/YoutubeEmbed';
 import renderMarkdown from '../markdownProcessor';
 
 import {
+  hasContent,
   exposeContentAsChildren,
   exposeContentString,
   exposeLinkProps,
@@ -48,14 +49,22 @@ const MarkdownField = ({ content, components }) => renderMarkdown(content, compo
 // Mapping of field types and components //
 ///////////////////////////////////////////
 
+// For text content (headings, paragraph, markdown), we don't print warning about empty string
+// as that's expected result after removing previously entered string.
+const omitInvalidPropsWarning = data => !hasContent(data);
+
 const defaultFieldComponents = {
-  heading1: { component: H1, pickValidProps: exposeContentAsChildren },
-  heading2: { component: H2, pickValidProps: exposeContentAsChildren },
-  heading3: { component: H3, pickValidProps: exposeContentAsChildren },
-  heading4: { component: H4, pickValidProps: exposeContentAsChildren },
-  heading5: { component: H5, pickValidProps: exposeContentAsChildren },
-  heading6: { component: H6, pickValidProps: exposeContentAsChildren },
-  paragraph: { component: Ingress, pickValidProps: exposeContentAsChildren },
+  heading1: { component: H1, pickValidProps: exposeContentAsChildren, omitInvalidPropsWarning },
+  heading2: { component: H2, pickValidProps: exposeContentAsChildren, omitInvalidPropsWarning },
+  heading3: { component: H3, pickValidProps: exposeContentAsChildren, omitInvalidPropsWarning },
+  heading4: { component: H4, pickValidProps: exposeContentAsChildren, omitInvalidPropsWarning },
+  heading5: { component: H5, pickValidProps: exposeContentAsChildren, omitInvalidPropsWarning },
+  heading6: { component: H6, pickValidProps: exposeContentAsChildren, omitInvalidPropsWarning },
+  paragraph: {
+    component: Ingress,
+    pickValidProps: exposeContentAsChildren,
+    omitInvalidPropsWarning,
+  },
   externalButtonLink: { component: Link, pickValidProps: exposeLinkProps },
   internalButtonLink: { component: Link, pickValidProps: exposeLinkProps },
   image: { component: FieldImage, pickValidProps: exposeImageProps },
@@ -122,10 +131,11 @@ export const validProps = (data, options) => {
   const pickValidProps = config?.pickValidProps;
   if (data && pickValidProps) {
     const validProps = pickValidProps(data);
+    const omitWarning = config?.omitInvalidPropsWarning && config?.omitInvalidPropsWarning(data);
 
     // If picker returns an empty object, data was invalid.
     // Field will render null, but we should warn the dev that data was not valid.
-    if (Object.keys(validProps).length === 0) {
+    if (Object.keys(validProps).length === 0 && !omitWarning) {
       console.warn(`Invalid props detected. Data: ${JSON.stringify(data)}`);
     }
     return validProps;
