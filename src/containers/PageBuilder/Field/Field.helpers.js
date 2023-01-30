@@ -113,7 +113,7 @@ const exposeColorValue = color => {
  * if backgroundImage contains imageAsset entity and
  * color contains hexadecimal string like "#FF0000" or "#F00".
  *
- * @param {Object} data E.g. "{ fieldType: 'customBackground', backgroundImage: imageAssetRef, color: '#000000', textColor: '#FFFFFF' }"
+ * @param {Object} data E.g. "{ fieldType: 'customAppearance', backgroundImage: imageAssetRef, color: '#000000', textColor: '#FFFFFF' }"
  * @returns object containing valid data.
  */
 export const exposeCustomBackgroundProps = data => {

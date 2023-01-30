@@ -11,7 +11,7 @@ import { P } from '../Primitives/P';
 import { Code, CodeBlock } from '../Primitives/Code';
 import { Link } from '../Primitives/Link';
 import { MarkdownImage, FieldImage } from '../Primitives/Image';
-import { CustomBackground } from '../Primitives/CustomBackground';
+import { CustomAppearance } from '../Primitives/CustomAppearance';
 import { YoutubeEmbed } from '../Primitives/YoutubeEmbed';
 
 import renderMarkdown from '../markdownProcessor';
@@ -59,7 +59,7 @@ const defaultFieldComponents = {
   externalButtonLink: { component: Link, pickValidProps: exposeLinkProps },
   internalButtonLink: { component: Link, pickValidProps: exposeLinkProps },
   image: { component: FieldImage, pickValidProps: exposeImageProps },
-  customBackground: { component: CustomBackground, pickValidProps: exposeCustomBackgroundProps },
+  customAppearance: { component: CustomAppearance, pickValidProps: exposeCustomBackgroundProps },
   youtube: { component: YoutubeEmbed, pickValidProps: exposeYoutubeProps },
 
   // markdown content field is pretty complex component
@@ -210,8 +210,8 @@ const propTypeImage = shape({
   image: propTypeImageAsset.isRequired,
 });
 
-const propTypeCustomBackground = shape({
-  fieldType: oneOf(['customBackground']).isRequired,
+const propTypeCustomAppearance = shape({
+  fieldType: oneOf(['customAppearance']).isRequired,
   color: string,
   textColor: string,
   backgroundImage: propTypeImageAsset,
@@ -234,8 +234,8 @@ const propTypeEmptyObject = exact({});
 const propTypeTextEmptyObject = exact({
   fieldType: oneOf(TEXT_CONTENT).isRequired,
 });
-const propTypeDefaultBackground = shape({
-  fieldType: oneOf(['defaultBackground']).isRequired,
+const propTypeDefaultAppearance = shape({
+  fieldType: oneOf(['defaultAppearance']).isRequired,
 });
 const propTypeNone = shape({
   fieldType: oneOf(['none']).isRequired,
@@ -250,11 +250,11 @@ Field.propTypes = {
     propTypeTextContent,
     propTypeLink,
     propTypeImage,
-    propTypeCustomBackground,
+    propTypeCustomAppearance,
     propTypeYoutube,
     propTypeEmptyObject,
     propTypeTextEmptyObject,
-    propTypeDefaultBackground,
+    propTypeDefaultAppearance,
     propTypeNone,
   ]),
   options: propTypeOption,
