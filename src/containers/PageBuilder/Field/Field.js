@@ -212,7 +212,7 @@ const propTypeImage = shape({
 
 const propTypeCustomAppearance = shape({
   fieldType: oneOf(['customAppearance']).isRequired,
-  color: string,
+  backgroundColor: string,
   textColor: string,
   backgroundImage: propTypeImageAsset,
 });

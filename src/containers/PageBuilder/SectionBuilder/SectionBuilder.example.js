@@ -633,7 +633,7 @@ export const SectionColumns = {
         sectionType: 'columns',
         sectionId: 'cms-column-section-no-block',
         numColumns: 1,
-        appearance: { fieldType: 'customAppearance', color: hexYellow },
+        appearance: { fieldType: 'customAppearance', backgroundColor: hexYellow },
         title: { fieldType: 'heading2', content: 'One Column, No Blocks' },
         ingress: {
           fieldType: 'paragraph',
@@ -644,7 +644,11 @@ export const SectionColumns = {
         sectionType: 'columns',
         sectionId: 'cms-column-section-no-block-dark',
         numColumns: 1,
-        appearance: { fieldType: 'customAppearance', color: hexBlack, textColor: 'light' },
+        appearance: {
+          fieldType: 'customAppearance',
+          backgroundColor: hexBlack,
+          textColor: 'light',
+        },
         title: { fieldType: 'heading2', content: 'One Column, No Blocks' },
         ingress: {
           fieldType: 'paragraph',
@@ -664,7 +668,7 @@ export const SectionColumns = {
           fieldType: 'customAppearance',
           backgroundImage: imagePlaceholder(400, 400),
           alt: 'Background image',
-          color: '#000000',
+          backgroundColor: '#000000',
           textColor: 'white',
         },
         title: { fieldType: 'heading2', content: 'One Column, No Blocks, Bg Image' },
@@ -752,7 +756,11 @@ export const SectionColumns = {
         sectionType: 'columns',
         sectionId: 'cms-column-section-2-dark',
         numColumns: 2,
-        appearance: { fieldType: 'customAppearance', color: hexBlack, textColor: 'light' },
+        appearance: {
+          fieldType: 'customAppearance',
+          backgroundColor: hexBlack,
+          textColor: 'light',
+        },
         title: { fieldType: 'heading2', content: '2 Columns, Dark' },
         ingress: {
           fieldType: 'paragraph',

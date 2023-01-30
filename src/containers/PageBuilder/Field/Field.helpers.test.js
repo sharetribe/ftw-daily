@@ -153,23 +153,27 @@ describe('Field helpers', () => {
   });
 
   describe('exposeCustomAppearanceProps(data)', () => {
-    it('should return "color" prop containing valid hexadecimal color code', () => {
-      expect(exposeCustomAppearanceProps({ color: '#FFAA00' })).toEqual({ color: '#FFAA00' });
-      expect(exposeCustomAppearanceProps({ color: '#FA0' })).toEqual({ color: '#FA0' });
-      expect(exposeCustomAppearanceProps({ color: '#000000', foo: 'bar' })).toEqual({
-        color: '#000000',
+    it('should return "backgroundColor" prop containing valid hexadecimal color code', () => {
+      expect(exposeCustomAppearanceProps({ backgroundColor: '#FFAA00' })).toEqual({
+        backgroundColor: '#FFAA00',
+      });
+      expect(exposeCustomAppearanceProps({ backgroundColor: '#FA0' })).toEqual({
+        backgroundColor: '#FA0',
+      });
+      expect(exposeCustomAppearanceProps({ backgroundColor: '#000000', foo: 'bar' })).toEqual({
+        backgroundColor: '#000000',
       });
     });
-    it('should return empty "color" prop if invalid hexadecimal color code was detected', () => {
-      expect(exposeCustomAppearanceProps({ color: '#FFAA0000' })).toEqual({});
-      expect(exposeCustomAppearanceProps({ color: 'FA0' })).toEqual({});
-      expect(exposeCustomAppearanceProps({ color: '000000' })).toEqual({});
-      expect(exposeCustomAppearanceProps({ color: '#XX0000' })).toEqual({});
-      expect(exposeCustomAppearanceProps({ color: '#FFAA0' })).toEqual({});
-      expect(exposeCustomAppearanceProps({ color: 'rgb(100, 100, 100)' })).toEqual({});
-      expect(exposeCustomAppearanceProps({ color: 'hsl(60 100% 50%)' })).toEqual({});
-      expect(exposeCustomAppearanceProps({ color: 'hwb(90 10% 10%)' })).toEqual({});
-      expect(exposeCustomAppearanceProps({ color: 'tomato' })).toEqual({});
+    it('should return empty "backgroundColor" prop if invalid hexadecimal color code was detected', () => {
+      expect(exposeCustomAppearanceProps({ backgroundColor: '#FFAA0000' })).toEqual({});
+      expect(exposeCustomAppearanceProps({ backgroundColor: 'FA0' })).toEqual({});
+      expect(exposeCustomAppearanceProps({ backgroundColor: '000000' })).toEqual({});
+      expect(exposeCustomAppearanceProps({ backgroundColor: '#XX0000' })).toEqual({});
+      expect(exposeCustomAppearanceProps({ backgroundColor: '#FFAA0' })).toEqual({});
+      expect(exposeCustomAppearanceProps({ backgroundColor: 'rgb(100, 100, 100)' })).toEqual({});
+      expect(exposeCustomAppearanceProps({ backgroundColor: 'hsl(60 100% 50%)' })).toEqual({});
+      expect(exposeCustomAppearanceProps({ backgroundColor: 'hwb(90 10% 10%)' })).toEqual({});
+      expect(exposeCustomAppearanceProps({ backgroundColor: 'tomato' })).toEqual({});
     });
 
     it('should return "textColor" prop containing valid value (light or dark)', () => {
@@ -238,7 +242,9 @@ describe('Field helpers', () => {
       const backgroundImage = backgroundImageWrongType;
       expect(exposeCustomAppearanceProps({ backgroundImage })).toEqual({});
       expect(exposeCustomAppearanceProps({ backgroundImage, alt })).toEqual({});
-      expect(exposeCustomAppearanceProps({ backgroundImage, color: '#FFAA00' })).toEqual({});
+      expect(exposeCustomAppearanceProps({ backgroundImage, backgroundColor: '#FFAA00' })).toEqual(
+        {}
+      );
       expect(exposeCustomAppearanceProps({ backgroundImage: backgroundImageNoHeight })).toEqual({});
     });
 
@@ -272,12 +278,16 @@ describe('Field helpers', () => {
 
       const testA = exposeCustomAppearanceProps({
         backgroundImage: backgroundImageNoHeight,
-        color: '#FFAA00',
+        backgroundColor: '#FFAA00',
       });
-      expect(testA).toEqual({ color: '#FFAA00' });
+      expect(testA).toEqual({ backgroundColor: '#FFAA00' });
 
       const alt = 'gb';
-      const testB = exposeCustomAppearanceProps({ backgroundImage, alt, color: 'tomato' });
+      const testB = exposeCustomAppearanceProps({
+        backgroundImage,
+        alt,
+        backgroundColor: 'tomato',
+      });
       expect(testB).toEqual({ backgroundImage, alt });
     });
   });
