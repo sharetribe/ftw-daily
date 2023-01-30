@@ -18,7 +18,7 @@ const SectionArticle = props => {
     defaultClasses,
     title,
     ingress,
-    background,
+    appearance,
     callToAction,
     blocks,
     isInsideContainer,
@@ -38,7 +38,7 @@ const SectionArticle = props => {
       id={sectionId}
       className={className}
       rootClassName={rootClassName}
-      background={background}
+      appearance={appearance}
       options={fieldOptions}
     >
       {hasHeaderFields ? (
@@ -72,7 +72,7 @@ SectionArticle.defaultProps = {
   textClassName: null,
   title: null,
   ingress: null,
-  background: null,
+  appearance: null,
   callToAction: null,
   blocks: [],
   isInsideContainer: false,
@@ -91,7 +91,7 @@ SectionArticle.propTypes = {
   }),
   title: object,
   ingress: object,
-  background: object,
+  appearance: object,
   callToAction: object,
   blocks: arrayOf(object),
   isInsideContainer: bool,

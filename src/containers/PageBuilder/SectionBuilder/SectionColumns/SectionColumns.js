@@ -35,7 +35,7 @@ const SectionColumns = props => {
     numColumns,
     title,
     ingress,
-    background,
+    appearance,
     callToAction,
     blocks,
     isInsideContainer,
@@ -55,7 +55,7 @@ const SectionColumns = props => {
       id={sectionId}
       className={className}
       rootClassName={rootClassName}
-      background={background}
+      appearance={appearance}
       options={fieldOptions}
     >
       {hasHeaderFields ? (
@@ -95,8 +95,7 @@ SectionColumns.defaultProps = {
   numColumns: 1,
   title: null,
   ingress: null,
-  background: null,
-  backgroundImage: null,
+  appearance: null,
   callToAction: null,
   blocks: [],
   isInsideContainer: false,
@@ -116,8 +115,7 @@ SectionColumns.propTypes = {
   numColumns: number,
   title: object,
   ingress: object,
-  background: object,
-  backgroundImage: object,
+  appearance: object,
   callToAction: object,
   blocks: arrayOf(object),
   isInsideContainer: bool,

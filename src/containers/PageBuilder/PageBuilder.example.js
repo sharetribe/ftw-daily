@@ -167,7 +167,7 @@ export const PageWithBuildInSectionColumns = {
           sectionType: 'columns',
           sectionId: 'page-builder-columns-section-1',
           numColumns: 2,
-          background: { fieldType: 'customAppearance', color: hexYellow },
+          appearance: { fieldType: 'customAppearance', color: hexYellow },
           title: { fieldType: 'heading2', content: '2 Columns' },
           ingress: {
             fieldType: 'paragraph',
@@ -230,7 +230,7 @@ export const PageWithBuildInSectionColumns = {
           sectionType: 'columns',
           sectionId: 'page-builder-columns2-section-3',
           numColumns: 3,
-          background: {
+          appearance: {
             fieldType: 'customAppearance',
             backgroundImage: imagePlaceholder(1200, 800, '#b6f7f9'),
             alt: 'Background image',

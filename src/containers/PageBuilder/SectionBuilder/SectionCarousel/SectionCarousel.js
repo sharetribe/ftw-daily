@@ -39,7 +39,7 @@ const SectionCarousel = props => {
     numColumns,
     title,
     ingress,
-    background,
+    appearance,
     callToAction,
     blocks,
     options,
@@ -104,7 +104,7 @@ const SectionCarousel = props => {
       id={sectionId}
       className={className}
       rootClassName={rootClassName}
-      background={background}
+      appearance={appearance}
       options={fieldOptions}
     >
       {hasHeaderFields ? (
@@ -155,8 +155,7 @@ SectionCarousel.defaultProps = {
   numColumns: 1,
   title: null,
   ingress: null,
-  background: null,
-  backgroundImage: null,
+  appearance: null,
   callToAction: null,
   blocks: [],
   options: null,
@@ -175,8 +174,7 @@ SectionCarousel.propTypes = {
   numColumns: number,
   title: object,
   ingress: object,
-  background: object,
-  backgroundImage: object,
+  appearance: object,
   callToAction: object,
   blocks: arrayOf(object),
   options: propTypeOption,
