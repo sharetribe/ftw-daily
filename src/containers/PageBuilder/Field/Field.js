@@ -20,7 +20,7 @@ import {
   exposeContentAsChildren,
   exposeContentString,
   exposeLinkProps,
-  exposeCustomBackgroundProps,
+  exposeCustomAppearanceProps,
   exposeImageProps,
   exposeYoutubeProps,
 } from './Field.helpers';
@@ -59,7 +59,7 @@ const defaultFieldComponents = {
   externalButtonLink: { component: Link, pickValidProps: exposeLinkProps },
   internalButtonLink: { component: Link, pickValidProps: exposeLinkProps },
   image: { component: FieldImage, pickValidProps: exposeImageProps },
-  customAppearance: { component: CustomAppearance, pickValidProps: exposeCustomBackgroundProps },
+  customAppearance: { component: CustomAppearance, pickValidProps: exposeCustomAppearanceProps },
   youtube: { component: YoutubeEmbed, pickValidProps: exposeYoutubeProps },
 
   // markdown content field is pretty complex component

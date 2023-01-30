@@ -3,7 +3,7 @@ import {
   exposeContentString,
   exposeLinkProps,
   exposeImageProps,
-  exposeCustomBackgroundProps,
+  exposeCustomAppearanceProps,
   exposeYoutubeProps,
 } from './Field.helpers';
 
@@ -152,32 +152,32 @@ describe('Field helpers', () => {
     });
   });
 
-  describe('exposeCustomBackgroundProps(data)', () => {
+  describe('exposeCustomAppearanceProps(data)', () => {
     it('should return "color" prop containing valid hexadecimal color code', () => {
-      expect(exposeCustomBackgroundProps({ color: '#FFAA00' })).toEqual({ color: '#FFAA00' });
-      expect(exposeCustomBackgroundProps({ color: '#FA0' })).toEqual({ color: '#FA0' });
-      expect(exposeCustomBackgroundProps({ color: '#000000', foo: 'bar' })).toEqual({
+      expect(exposeCustomAppearanceProps({ color: '#FFAA00' })).toEqual({ color: '#FFAA00' });
+      expect(exposeCustomAppearanceProps({ color: '#FA0' })).toEqual({ color: '#FA0' });
+      expect(exposeCustomAppearanceProps({ color: '#000000', foo: 'bar' })).toEqual({
         color: '#000000',
       });
     });
     it('should return empty "color" prop if invalid hexadecimal color code was detected', () => {
-      expect(exposeCustomBackgroundProps({ color: '#FFAA0000' })).toEqual({});
-      expect(exposeCustomBackgroundProps({ color: 'FA0' })).toEqual({});
-      expect(exposeCustomBackgroundProps({ color: '000000' })).toEqual({});
-      expect(exposeCustomBackgroundProps({ color: '#XX0000' })).toEqual({});
-      expect(exposeCustomBackgroundProps({ color: '#FFAA0' })).toEqual({});
-      expect(exposeCustomBackgroundProps({ color: 'rgb(100, 100, 100)' })).toEqual({});
-      expect(exposeCustomBackgroundProps({ color: 'hsl(60 100% 50%)' })).toEqual({});
-      expect(exposeCustomBackgroundProps({ color: 'hwb(90 10% 10%)' })).toEqual({});
-      expect(exposeCustomBackgroundProps({ color: 'tomato' })).toEqual({});
+      expect(exposeCustomAppearanceProps({ color: '#FFAA0000' })).toEqual({});
+      expect(exposeCustomAppearanceProps({ color: 'FA0' })).toEqual({});
+      expect(exposeCustomAppearanceProps({ color: '000000' })).toEqual({});
+      expect(exposeCustomAppearanceProps({ color: '#XX0000' })).toEqual({});
+      expect(exposeCustomAppearanceProps({ color: '#FFAA0' })).toEqual({});
+      expect(exposeCustomAppearanceProps({ color: 'rgb(100, 100, 100)' })).toEqual({});
+      expect(exposeCustomAppearanceProps({ color: 'hsl(60 100% 50%)' })).toEqual({});
+      expect(exposeCustomAppearanceProps({ color: 'hwb(90 10% 10%)' })).toEqual({});
+      expect(exposeCustomAppearanceProps({ color: 'tomato' })).toEqual({});
     });
 
     it('should return "textColor" prop containing valid value (light or dark)', () => {
-      expect(exposeCustomBackgroundProps({ textColor: 'light' })).toEqual({ textColor: 'light' });
-      expect(exposeCustomBackgroundProps({ textColor: 'dark' })).toEqual({ textColor: 'dark' });
+      expect(exposeCustomAppearanceProps({ textColor: 'light' })).toEqual({ textColor: 'light' });
+      expect(exposeCustomAppearanceProps({ textColor: 'dark' })).toEqual({ textColor: 'dark' });
     });
     it('should return empty "textColor" prop if invalid hexadecimal color code was detected', () => {
-      expect(exposeCustomBackgroundProps({ textColor: 'blaa' })).toEqual({});
+      expect(exposeCustomAppearanceProps({ textColor: 'blaa' })).toEqual({});
     });
 
     it('should return "backgroundImage" prop containing valid imageAsset', () => {
@@ -200,8 +200,8 @@ describe('Field helpers', () => {
         },
       };
       const alt = 'gb';
-      expect(exposeCustomBackgroundProps({ backgroundImage })).toEqual({ backgroundImage });
-      expect(exposeCustomBackgroundProps({ backgroundImage, alt })).toEqual({
+      expect(exposeCustomAppearanceProps({ backgroundImage })).toEqual({ backgroundImage });
+      expect(exposeCustomAppearanceProps({ backgroundImage, alt })).toEqual({
         backgroundImage,
         alt,
       });
@@ -236,10 +236,10 @@ describe('Field helpers', () => {
       };
       const alt = 'gb';
       const backgroundImage = backgroundImageWrongType;
-      expect(exposeCustomBackgroundProps({ backgroundImage })).toEqual({});
-      expect(exposeCustomBackgroundProps({ backgroundImage, alt })).toEqual({});
-      expect(exposeCustomBackgroundProps({ backgroundImage, color: '#FFAA00' })).toEqual({});
-      expect(exposeCustomBackgroundProps({ backgroundImage: backgroundImageNoHeight })).toEqual({});
+      expect(exposeCustomAppearanceProps({ backgroundImage })).toEqual({});
+      expect(exposeCustomAppearanceProps({ backgroundImage, alt })).toEqual({});
+      expect(exposeCustomAppearanceProps({ backgroundImage, color: '#FFAA00' })).toEqual({});
+      expect(exposeCustomAppearanceProps({ backgroundImage: backgroundImageNoHeight })).toEqual({});
     });
 
     it('should return partial prop if one of the props is invalid', () => {
@@ -270,14 +270,14 @@ describe('Field helpers', () => {
         },
       };
 
-      const testA = exposeCustomBackgroundProps({
+      const testA = exposeCustomAppearanceProps({
         backgroundImage: backgroundImageNoHeight,
         color: '#FFAA00',
       });
       expect(testA).toEqual({ color: '#FFAA00' });
 
       const alt = 'gb';
-      const testB = exposeCustomBackgroundProps({ backgroundImage, alt, color: 'tomato' });
+      const testB = exposeCustomAppearanceProps({ backgroundImage, alt, color: 'tomato' });
       expect(testB).toEqual({ backgroundImage, alt });
     });
   });
