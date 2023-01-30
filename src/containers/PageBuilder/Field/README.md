@@ -5,17 +5,17 @@ grouped under Section or Block content. For example, field data could look like 
 
 ```json
 "title": {
-  "type": "heading1",
+  "fieldType": "heading1",
   "content": "Hello World"
 }
 ```
 
 The Field component will check the type of the field and validate the data. If there are valid data
-(e.g. if "content" is valid data for type "heading1"), the field renders the content.
+(e.g. if "content" is valid data for the field type "heading1"), the field renders the content.
 
 ## Mapping of field types and components
 
-The mapping of content type vs component & pickValidProps, could look like this:
+The mapping of field type vs component & pickValidProps, could look like this:
 
 ```js
 const defaultFieldComponents = {

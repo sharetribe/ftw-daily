@@ -9,7 +9,7 @@ const hasContent = data => typeof data?.content === 'string' && data?.content.le
 /**
  * Exposes "content" prop as children property, if "content" has type of string.
  *
- * @param {Object} data E.g. "{ type: 'heading3', content: 'my title' }"
+ * @param {Object} data E.g. "{ fieldType: 'heading3', content: 'my title' }"
  * @returns object containing content string as value for key: children.
  */
 export const exposeContentAsChildren = data => {
@@ -17,9 +17,9 @@ export const exposeContentAsChildren = data => {
 };
 
 /**
- * Exposes "content" property, if "content" has type of string.
+ * Exposes "content" property, if the type of the "content" is string.
  *
- * @param {Object} data E.g. "{ type: 'markdown', content: 'my title' }"
+ * @param {Object} data E.g. "{ fieldType: 'markdown', content: 'my title' }"
  * @returns object containing "content" key if the value is string.
  */
 export const exposeContentString = data => (hasContent(data) ? { content: data.content } : {});
@@ -28,7 +28,7 @@ export const exposeContentString = data => (hasContent(data) ? { content: data.c
  * Exposes "label" and "href" as "children" and "href" props respectively,
  * if both are of type string. Exposed "href" is sanitized.
  *
- * @param {Object} data E.g. "{ type: 'link', label: 'my title', href: 'https://my.domain.com' }"
+ * @param {Object} data E.g. "{ fieldType: 'internalButtonLink', label: 'my title', href: 'https://my.domain.com' }"
  * @returns object containing children and href.
  */
 export const exposeLinkProps = data => {
@@ -63,11 +63,11 @@ export const exposeLinkProps = data => {
  *    },
  * }
  *
- * @param {Object} data E.g. "{ type: 'image', alt: 'my portrait', image: { id, type, attributes } }"
+ * @param {Object} data E.g. "{ fieldType: 'image', alt: 'my portrait', image: { id, type, attributes } }"
  * @returns object containing alt string and variants.
  */
 export const exposeImageProps = data => {
-  // Note: data includes also "aspectRatio" key,
+  // Note: data includes also "aspectRatio" key (and "fieldType"),
   //       but image refs can rely on actual image variants
   const { alt, image } = data;
   const { id, type, attributes } = image || {};
@@ -113,7 +113,7 @@ const exposeColorValue = color => {
  * if backgroundImage contains imageAsset entity and
  * color contains hexadecimal string like "#FF0000" or "#F00".
  *
- * @param {Object} data E.g. "{ type: 'customBackground', backgroundImage: imageAssetRef, color: '#000000', textColor: '#FFFFFF' }"
+ * @param {Object} data E.g. "{ fieldType: 'customBackground', backgroundImage: imageAssetRef, color: '#000000', textColor: '#FFFFFF' }"
  * @returns object containing valid data.
  */
 export const exposeCustomBackgroundProps = data => {
@@ -159,7 +159,7 @@ export const exposeCustomBackgroundProps = data => {
  * Exposes "youtubeVideoId" and "aspectRatio",
  * if they meet the regexp rules.
  *
- * @param {Object} data E.g. "{ type: 'link', label: 'my title', href: 'https://my.domain.com' }"
+ * @param {Object} data E.g. "{ fieldType: 'youtube', youtubeVideoId: '<video-id>', aspectRatio: '16/9' }"
  * @returns object containing children and href.
  */
 export const exposeYoutubeProps = data => {

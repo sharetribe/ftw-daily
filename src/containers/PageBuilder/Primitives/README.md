@@ -6,7 +6,7 @@ example, field data could look like this:
 
 ```json
 "title": {
-  "type": "heading1",
+  "fieldType": "heading1",
   "content": "Hello World"
 }
 ```
