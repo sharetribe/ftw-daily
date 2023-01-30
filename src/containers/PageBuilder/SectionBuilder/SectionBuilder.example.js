@@ -46,7 +46,7 @@ export const SectionArticle = {
         callToAction: {
           fieldType: 'externalButtonLink',
           href: '#',
-          label: 'Justo Tortor Amet',
+          content: 'Justo Tortor Amet',
         },
         blocks: [
           {
@@ -84,7 +84,7 @@ Vestibulum id ligula porta felis euismod semper. Cras justo odio, dapibus ac fac
             callToAction: {
               fieldType: 'externalButtonLink',
               href: 'https://www.sharetribe.com/academy/marketplace-funding/',
-              label: 'Read the article',
+              content: 'Read the article',
             },
           },
         ],
@@ -113,7 +113,7 @@ export const SectionFeatures = {
         callToAction: {
           fieldType: 'externalButtonLink',
           href: '#',
-          label: 'Justo Tortor Amet',
+          content: 'Justo Tortor Amet',
         },
         blocks: [
           {
@@ -131,7 +131,7 @@ export const SectionFeatures = {
             callToAction: {
               fieldType: 'internalButtonLink',
               href: '#',
-              label: 'Ultricies Elit Sem',
+              content: 'Ultricies Elit Sem',
             },
           },
           {
@@ -149,7 +149,7 @@ export const SectionFeatures = {
             callToAction: {
               fieldType: 'internalButtonLink',
               href: '#',
-              label: 'Ultricies Elit Sem',
+              content: 'Ultricies Elit Sem',
             },
           },
           {
@@ -167,7 +167,7 @@ export const SectionFeatures = {
             callToAction: {
               fieldType: 'internalButtonLink',
               href: '#',
-              label: 'Ultricies Elit Sem',
+              content: 'Ultricies Elit Sem',
             },
           },
         ],
@@ -197,7 +197,7 @@ export const SectionCarousel = {
         callToAction: {
           fieldType: 'externalButtonLink',
           href: '#',
-          label: 'Justo Tortor Amet',
+          content: 'Justo Tortor Amet',
         },
         blocks: [
           {
@@ -219,7 +219,7 @@ export const SectionCarousel = {
             callToAction: {
               fieldType: 'internalButtonLink',
               href: '#',
-              label: 'Ultricies Elit Sem',
+              content: 'Ultricies Elit Sem',
             },
           },
           {
@@ -241,7 +241,7 @@ export const SectionCarousel = {
             callToAction: {
               fieldType: 'internalButtonLink',
               href: '#',
-              label: 'Ultricies Elit Sem',
+              content: 'Ultricies Elit Sem',
             },
           },
           {
@@ -263,7 +263,7 @@ export const SectionCarousel = {
             callToAction: {
               fieldType: 'internalButtonLink',
               href: '#',
-              label: 'Ultricies Elit Sem',
+              content: 'Ultricies Elit Sem',
             },
           },
           {
@@ -285,7 +285,7 @@ export const SectionCarousel = {
             callToAction: {
               fieldType: 'internalButtonLink',
               href: '#',
-              label: 'Ultricies Elit Sem',
+              content: 'Ultricies Elit Sem',
             },
           },
           {
@@ -307,7 +307,7 @@ export const SectionCarousel = {
             callToAction: {
               fieldType: 'internalButtonLink',
               href: '#',
-              label: 'Ultricies Elit Sem',
+              content: 'Ultricies Elit Sem',
             },
           },
           {
@@ -329,7 +329,7 @@ export const SectionCarousel = {
             callToAction: {
               fieldType: 'internalButtonLink',
               href: '#',
-              label: 'Ultricies Elit Sem',
+              content: 'Ultricies Elit Sem',
             },
           },
           {
@@ -351,7 +351,7 @@ export const SectionCarousel = {
             callToAction: {
               fieldType: 'internalButtonLink',
               href: '#',
-              label: 'Ultricies Elit Sem',
+              content: 'Ultricies Elit Sem',
             },
           },
           {
@@ -373,7 +373,7 @@ export const SectionCarousel = {
             callToAction: {
               fieldType: 'internalButtonLink',
               href: '#',
-              label: 'Ultricies Elit Sem',
+              content: 'Ultricies Elit Sem',
             },
           },
           {
@@ -395,7 +395,7 @@ export const SectionCarousel = {
             callToAction: {
               fieldType: 'internalButtonLink',
               href: '#',
-              label: 'Ultricies Elit Sem',
+              content: 'Ultricies Elit Sem',
             },
           },
         ],
@@ -417,7 +417,7 @@ export const SectionCarousel = {
         callToAction: {
           fieldType: 'externalButtonLink',
           href: '#',
-          label: 'Justo Tortor Amet',
+          content: 'Justo Tortor Amet',
         },
         blocks: [
           {
@@ -439,7 +439,7 @@ export const SectionCarousel = {
             callToAction: {
               fieldType: 'internalButtonLink',
               href: '#',
-              label: 'Ultricies Elit Sem',
+              content: 'Ultricies Elit Sem',
             },
           },
           {
@@ -461,7 +461,7 @@ export const SectionCarousel = {
             callToAction: {
               fieldType: 'internalButtonLink',
               href: '#',
-              label: 'Ultricies Elit Sem',
+              content: 'Ultricies Elit Sem',
             },
           },
           {
@@ -483,7 +483,7 @@ export const SectionCarousel = {
             callToAction: {
               fieldType: 'internalButtonLink',
               href: '#',
-              label: 'Ultricies Elit Sem',
+              content: 'Ultricies Elit Sem',
             },
           },
           {
@@ -505,7 +505,7 @@ export const SectionCarousel = {
             callToAction: {
               fieldType: 'internalButtonLink',
               href: '#',
-              label: 'Ultricies Elit Sem',
+              content: 'Ultricies Elit Sem',
             },
           },
           {
@@ -527,7 +527,7 @@ export const SectionCarousel = {
             callToAction: {
               fieldType: 'internalButtonLink',
               href: '#',
-              label: 'Ultricies Elit Sem',
+              content: 'Ultricies Elit Sem',
             },
           },
           {
@@ -549,7 +549,7 @@ export const SectionCarousel = {
             callToAction: {
               fieldType: 'internalButtonLink',
               href: '#',
-              label: 'Ultricies Elit Sem',
+              content: 'Ultricies Elit Sem',
             },
           },
           {
@@ -571,7 +571,7 @@ export const SectionCarousel = {
             callToAction: {
               fieldType: 'internalButtonLink',
               href: '#',
-              label: 'Ultricies Elit Sem',
+              content: 'Ultricies Elit Sem',
             },
           },
           {
@@ -593,7 +593,7 @@ export const SectionCarousel = {
             callToAction: {
               fieldType: 'internalButtonLink',
               href: '#',
-              label: 'Ultricies Elit Sem',
+              content: 'Ultricies Elit Sem',
             },
           },
           {
@@ -615,7 +615,7 @@ export const SectionCarousel = {
             callToAction: {
               fieldType: 'internalButtonLink',
               href: '#',
-              label: 'Ultricies Elit Sem',
+              content: 'Ultricies Elit Sem',
             },
           },
         ],
@@ -653,7 +653,7 @@ export const SectionColumns = {
         callToAction: {
           fieldType: 'externalButtonLink',
           href: 'https://www.sharetribe.com/docs/',
-          label: 'Flex Docs',
+          content: 'Flex Docs',
         },
       },
       {
@@ -675,7 +675,7 @@ export const SectionColumns = {
         callToAction: {
           fieldType: 'externalButtonLink',
           href: 'https://www.sharetribe.com/docs/',
-          label: 'Flex Docs',
+          content: 'Flex Docs',
         },
       },
       {
@@ -729,7 +729,7 @@ export const SectionColumns = {
             callToAction: {
               fieldType: 'internalButtonLink',
               href: '/l/wooden-sauna/5aafa4ec-87c1-4043-b82f-14d67389dd19',
-              label: 'See the sauna',
+              content: 'See the sauna',
             },
           },
           {
@@ -743,7 +743,7 @@ export const SectionColumns = {
             callToAction: {
               fieldType: 'internalButtonLink',
               href: '/l/wooden-sauna/5aafa4ec-87c1-4043-b82f-14d67389dd19',
-              label: 'See the sauna',
+              content: 'See the sauna',
             },
           },
         ],
@@ -770,7 +770,7 @@ export const SectionColumns = {
             callToAction: {
               fieldType: 'internalButtonLink',
               href: '/l/wooden-sauna/5aafa4ec-87c1-4043-b82f-14d67389dd19',
-              label: 'See the sauna',
+              content: 'See the sauna',
             },
           },
           {
@@ -784,7 +784,7 @@ export const SectionColumns = {
             callToAction: {
               fieldType: 'internalButtonLink',
               href: '/l/wooden-sauna/5aafa4ec-87c1-4043-b82f-14d67389dd19',
-              label: 'See the sauna',
+              content: 'See the sauna',
             },
           },
         ],
