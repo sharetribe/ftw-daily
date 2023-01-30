@@ -4,7 +4,7 @@ import { sanitizeUrl } from '../../../util/sanitize';
 // Pickers for valid props //
 /////////////////////////////
 
-const hasContent = data => typeof data?.content === 'string' && data?.content.length > 0;
+export const hasContent = data => typeof data?.content === 'string' && data?.content.length > 0;
 
 /**
  * Exposes "content" prop as children property, if "content" has type of string.
