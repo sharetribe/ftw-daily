@@ -109,24 +109,26 @@ const exposeColorValue = color => {
 };
 
 /**
- * Exposes appearance props like "backgroundImage", "color" property,
+ * Exposes appearance props like "backgroundImage", "backgroundColor" property,
  * if backgroundImage contains imageAsset entity and
- * color contains hexadecimal string like "#FF0000" or "#F00".
+ * backgroundColor contains hexadecimal string like "#FF0000" or "#F00".
  *
- * @param {Object} data E.g. "{ fieldType: 'customAppearance', backgroundImage: imageAssetRef, color: '#000000', textColor: '#FFFFFF' }"
+ * @param {Object} data E.g. "{ fieldType: 'customAppearance', backgroundImage: imageAssetRef, backgroundColor: '#000000', textColor: '#FFFFFF' }"
  * @returns object containing valid data.
  */
 export const exposeCustomAppearanceProps = data => {
-  const { backgroundImage, color, textColor, alt } = data;
+  const { backgroundImage, backgroundColor, textColor, alt } = data;
   const { id, type, attributes } = backgroundImage || {};
 
   if (!!type && type !== 'imageAsset') {
     return {};
   }
 
-  const validColor = exposeColorValue(color);
-  const isValidColor = !!validColor;
-  const backgroundColorMaybe = isValidColor ? { color: validColor } : {};
+  const validBackgroundColor = exposeColorValue(backgroundColor);
+  const isValidBackgroundColor = !!validBackgroundColor;
+  const backgroundColorMaybe = isValidBackgroundColor
+    ? { backgroundColor: validBackgroundColor }
+    : {};
   const isValidTextColor = ['light', 'dark'].includes(textColor);
   const textColorMaybe = isValidTextColor ? { textColor } : {};
 
