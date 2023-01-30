@@ -18,14 +18,14 @@ export const fallbackSections = {
     {
       sectionType: 'article',
       sectionId: 'privacy',
-      background: { type: 'customBackground', color: '#ffffff' },
-      title: { type: 'heading1', content: 'Privacy Policy' },
+      background: { fieldType: 'customBackground', color: '#ffffff' },
+      title: { fieldType: 'heading1', content: 'Privacy Policy' },
       blocks: [
         {
           blockType: 'defaultBlock',
           blockId: 'hero-content',
           text: {
-            type: 'markdown',
+            fieldType: 'markdown',
             content: fallbackPrivacyPolicy,
           },
         },

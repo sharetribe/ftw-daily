@@ -18,15 +18,15 @@ block type.
       blockType: 'defaultBlock',
       blockId: 'block-1',
       title: {
-        type: 'heading2',
+        fieldType: 'heading2',
         content: 'Hello world!',
       },
       text: {
-        type: 'markdown',
+        fieldType: 'markdown',
         content: `**Lorem ipsum** consectetur adepisci velit`,
       },
       callToAction: {
-        type: 'internalButtonLink',
+        fieldType: 'internalButtonLink',
         href: '/s',
         label: 'Go to search page',
       },

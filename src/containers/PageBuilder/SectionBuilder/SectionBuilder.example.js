@@ -35,16 +35,16 @@ export const SectionArticle = {
         sectionType: 'article',
         sectionId: 'cms-article-section',
         title: {
-          type: 'heading1',
+          fieldType: 'heading1',
           content: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.',
         },
         ingress: {
-          type: 'paragraph',
+          fieldType: 'paragraph',
           content:
             'Maecenas sed diam eget risus varius blandit sit amet non magna. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.',
         },
         callToAction: {
-          type: 'externalButtonLink',
+          fieldType: 'externalButtonLink',
           href: '#',
           label: 'Justo Tortor Amet',
         },
@@ -52,14 +52,18 @@ export const SectionArticle = {
           {
             blockType: 'defaultBlock',
             blockId: 'cms-article-section-block-1',
-            media: { type: 'image', alt: 'Cute dog smiling', image: imagePlaceholder(600, 800) },
+            media: {
+              fieldType: 'image',
+              alt: 'Cute dog smiling',
+              image: imagePlaceholder(600, 800),
+            },
             title: {
-              type: 'heading2',
+              fieldType: 'heading2',
               content:
                 'Vestibulum id ligula porta felis euismod semper. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.',
             },
             text: {
-              type: 'markdown',
+              fieldType: 'markdown',
               content: `Donec ullamcorper nulla non metus auctor fringilla. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Etiam porta sem malesuada magna mollis euismod. Maecenas sed diam eget risus varius blandit sit amet non magna.
 Maecenas faucibus mollis interdum. Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna mollis euismod. Etiam porta sem malesuada magna mollis euismod. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Maecenas faucibus mollis interdum.
               
@@ -78,7 +82,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id ligula po
 Vestibulum id ligula porta felis euismod semper. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.`,
             },
             callToAction: {
-              type: 'externalButtonLink',
+              fieldType: 'externalButtonLink',
               href: 'https://www.sharetribe.com/academy/marketplace-funding/',
               label: 'Read the article',
             },
@@ -98,16 +102,16 @@ export const SectionFeatures = {
         sectionType: 'features',
         sectionId: 'cms-features-section-no-block',
         title: {
-          type: 'heading1',
+          fieldType: 'heading1',
           content: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.',
         },
         ingress: {
-          type: 'paragraph',
+          fieldType: 'paragraph',
           content:
             'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit.',
         },
         callToAction: {
-          type: 'externalButtonLink',
+          fieldType: 'externalButtonLink',
           href: '#',
           label: 'Justo Tortor Amet',
         },
@@ -115,17 +119,17 @@ export const SectionFeatures = {
           {
             blockType: 'defaultBlock',
             blockId: 'cms-features-block-1',
-            media: { type: 'image', alt: 'First image', image: imagePlaceholder(400, 400) },
+            media: { fieldType: 'image', alt: 'First image', image: imagePlaceholder(400, 400) },
             title: {
-              type: 'heading2',
+              fieldType: 'heading2',
               content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
-              type: 'markdown',
+              fieldType: 'markdown',
               content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
             },
             callToAction: {
-              type: 'internalButtonLink',
+              fieldType: 'internalButtonLink',
               href: '#',
               label: 'Ultricies Elit Sem',
             },
@@ -133,17 +137,17 @@ export const SectionFeatures = {
           {
             blockType: 'defaultBlock',
             blockId: 'cms-features-block-2',
-            media: { type: 'image', alt: 'First image', image: imagePlaceholder(400, 400) },
+            media: { fieldType: 'image', alt: 'First image', image: imagePlaceholder(400, 400) },
             title: {
-              type: 'heading2',
+              fieldType: 'heading2',
               content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
-              type: 'markdown',
+              fieldType: 'markdown',
               content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
             },
             callToAction: {
-              type: 'internalButtonLink',
+              fieldType: 'internalButtonLink',
               href: '#',
               label: 'Ultricies Elit Sem',
             },
@@ -151,17 +155,17 @@ export const SectionFeatures = {
           {
             blockType: 'defaultBlock',
             blockId: 'cms-features-block-3',
-            media: { type: 'image', alt: 'First image', image: imagePlaceholder(400, 400) },
+            media: { fieldType: 'image', alt: 'First image', image: imagePlaceholder(400, 400) },
             title: {
-              type: 'heading2',
+              fieldType: 'heading2',
               content: 'Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
-              type: 'markdown',
+              fieldType: 'markdown',
               content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
             },
             callToAction: {
-              type: 'internalButtonLink',
+              fieldType: 'internalButtonLink',
               href: '#',
               label: 'Ultricies Elit Sem',
             },
@@ -182,16 +186,16 @@ export const SectionCarousel = {
         sectionId: 'cms-features-section-carousel1',
         numColumns: 1,
         title: {
-          type: 'heading2',
+          fieldType: 'heading2',
           content: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.',
         },
         ingress: {
-          type: 'paragraph',
+          fieldType: 'paragraph',
           content:
             'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit.',
         },
         callToAction: {
-          type: 'externalButtonLink',
+          fieldType: 'externalButtonLink',
           href: '#',
           label: 'Justo Tortor Amet',
         },
@@ -199,17 +203,21 @@ export const SectionCarousel = {
           {
             blockType: 'defaultBlock',
             blockId: 'cms-carousel-block-1',
-            media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
+            media: {
+              fieldType: 'image',
+              alt: 'First image: 16:9',
+              image: imagePlaceholder(576, 324),
+            },
             title: {
-              type: 'heading3',
+              fieldType: 'heading3',
               content: '1 Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
-              type: 'markdown',
+              fieldType: 'markdown',
               content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
             },
             callToAction: {
-              type: 'internalButtonLink',
+              fieldType: 'internalButtonLink',
               href: '#',
               label: 'Ultricies Elit Sem',
             },
@@ -217,17 +225,21 @@ export const SectionCarousel = {
           {
             blockType: 'defaultBlock',
             blockId: 'cms-carousel-block-2',
-            media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
+            media: {
+              fieldType: 'image',
+              alt: 'First image: 16:9',
+              image: imagePlaceholder(576, 324),
+            },
             title: {
-              type: 'heading3',
+              fieldType: 'heading3',
               content: '2 Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
-              type: 'markdown',
+              fieldType: 'markdown',
               content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
             },
             callToAction: {
-              type: 'internalButtonLink',
+              fieldType: 'internalButtonLink',
               href: '#',
               label: 'Ultricies Elit Sem',
             },
@@ -235,17 +247,21 @@ export const SectionCarousel = {
           {
             blockType: 'defaultBlock',
             blockId: 'cms-carousel-block-3',
-            media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
+            media: {
+              fieldType: 'image',
+              alt: 'First image: 16:9',
+              image: imagePlaceholder(576, 324),
+            },
             title: {
-              type: 'heading3',
+              fieldType: 'heading3',
               content: '3 Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
-              type: 'markdown',
+              fieldType: 'markdown',
               content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
             },
             callToAction: {
-              type: 'internalButtonLink',
+              fieldType: 'internalButtonLink',
               href: '#',
               label: 'Ultricies Elit Sem',
             },
@@ -253,17 +269,21 @@ export const SectionCarousel = {
           {
             blockType: 'defaultBlock',
             blockId: 'cms-carousel-block-4',
-            media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
+            media: {
+              fieldType: 'image',
+              alt: 'First image: 16:9',
+              image: imagePlaceholder(576, 324),
+            },
             title: {
-              type: 'heading3',
+              fieldType: 'heading3',
               content: '4 Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
-              type: 'markdown',
+              fieldType: 'markdown',
               content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
             },
             callToAction: {
-              type: 'internalButtonLink',
+              fieldType: 'internalButtonLink',
               href: '#',
               label: 'Ultricies Elit Sem',
             },
@@ -271,17 +291,21 @@ export const SectionCarousel = {
           {
             blockType: 'defaultBlock',
             blockId: 'cms-carousel-block-5',
-            media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
+            media: {
+              fieldType: 'image',
+              alt: 'First image: 16:9',
+              image: imagePlaceholder(576, 324),
+            },
             title: {
-              type: 'heading3',
+              fieldType: 'heading3',
               content: '5 Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
-              type: 'markdown',
+              fieldType: 'markdown',
               content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
             },
             callToAction: {
-              type: 'internalButtonLink',
+              fieldType: 'internalButtonLink',
               href: '#',
               label: 'Ultricies Elit Sem',
             },
@@ -289,17 +313,21 @@ export const SectionCarousel = {
           {
             blockType: 'defaultBlock',
             blockId: 'cms-carousel-block-6',
-            media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
+            media: {
+              fieldType: 'image',
+              alt: 'First image: 16:9',
+              image: imagePlaceholder(576, 324),
+            },
             title: {
-              type: 'heading3',
+              fieldType: 'heading3',
               content: '6 Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
-              type: 'markdown',
+              fieldType: 'markdown',
               content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
             },
             callToAction: {
-              type: 'internalButtonLink',
+              fieldType: 'internalButtonLink',
               href: '#',
               label: 'Ultricies Elit Sem',
             },
@@ -307,17 +335,21 @@ export const SectionCarousel = {
           {
             blockType: 'defaultBlock',
             blockId: 'cms-carousel-block-7',
-            media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
+            media: {
+              fieldType: 'image',
+              alt: 'First image: 16:9',
+              image: imagePlaceholder(576, 324),
+            },
             title: {
-              type: 'heading3',
+              fieldType: 'heading3',
               content: '7 Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
-              type: 'markdown',
+              fieldType: 'markdown',
               content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
             },
             callToAction: {
-              type: 'internalButtonLink',
+              fieldType: 'internalButtonLink',
               href: '#',
               label: 'Ultricies Elit Sem',
             },
@@ -325,17 +357,21 @@ export const SectionCarousel = {
           {
             blockType: 'defaultBlock',
             blockId: 'cms-carousel-block-8',
-            media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
+            media: {
+              fieldType: 'image',
+              alt: 'First image: 16:9',
+              image: imagePlaceholder(576, 324),
+            },
             title: {
-              type: 'heading3',
+              fieldType: 'heading3',
               content: '8 Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
-              type: 'markdown',
+              fieldType: 'markdown',
               content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
             },
             callToAction: {
-              type: 'internalButtonLink',
+              fieldType: 'internalButtonLink',
               href: '#',
               label: 'Ultricies Elit Sem',
             },
@@ -343,17 +379,21 @@ export const SectionCarousel = {
           {
             blockType: 'defaultBlock',
             blockId: 'cms-carousel-block-9',
-            media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
+            media: {
+              fieldType: 'image',
+              alt: 'First image: 16:9',
+              image: imagePlaceholder(576, 324),
+            },
             title: {
-              type: 'heading3',
+              fieldType: 'heading3',
               content: '9 Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
-              type: 'markdown',
+              fieldType: 'markdown',
               content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
             },
             callToAction: {
-              type: 'internalButtonLink',
+              fieldType: 'internalButtonLink',
               href: '#',
               label: 'Ultricies Elit Sem',
             },
@@ -366,16 +406,16 @@ export const SectionCarousel = {
         sectionId: 'cms-features-section-carousel2',
         numColumns: 3,
         title: {
-          type: 'heading2',
+          fieldType: 'heading2',
           content: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.',
         },
         ingress: {
-          type: 'paragraph',
+          fieldType: 'paragraph',
           content:
             'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit.',
         },
         callToAction: {
-          type: 'externalButtonLink',
+          fieldType: 'externalButtonLink',
           href: '#',
           label: 'Justo Tortor Amet',
         },
@@ -383,17 +423,21 @@ export const SectionCarousel = {
           {
             blockType: 'defaultBlock',
             blockId: 'cms-carousel2-block-1',
-            media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
+            media: {
+              fieldType: 'image',
+              alt: 'First image: 16:9',
+              image: imagePlaceholder(576, 324),
+            },
             title: {
-              type: 'heading3',
+              fieldType: 'heading3',
               content: '1 Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
-              type: 'markdown',
+              fieldType: 'markdown',
               content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
             },
             callToAction: {
-              type: 'internalButtonLink',
+              fieldType: 'internalButtonLink',
               href: '#',
               label: 'Ultricies Elit Sem',
             },
@@ -401,17 +445,21 @@ export const SectionCarousel = {
           {
             blockType: 'defaultBlock',
             blockId: 'cms-carousel2-block-2',
-            media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
+            media: {
+              fieldType: 'image',
+              alt: 'First image: 16:9',
+              image: imagePlaceholder(576, 324),
+            },
             title: {
-              type: 'heading3',
+              fieldType: 'heading3',
               content: '2 Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
-              type: 'markdown',
+              fieldType: 'markdown',
               content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
             },
             callToAction: {
-              type: 'internalButtonLink',
+              fieldType: 'internalButtonLink',
               href: '#',
               label: 'Ultricies Elit Sem',
             },
@@ -419,17 +467,21 @@ export const SectionCarousel = {
           {
             blockType: 'defaultBlock',
             blockId: 'cms-carousel2-block-3',
-            media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
+            media: {
+              fieldType: 'image',
+              alt: 'First image: 16:9',
+              image: imagePlaceholder(576, 324),
+            },
             title: {
-              type: 'heading3',
+              fieldType: 'heading3',
               content: '3 Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
-              type: 'markdown',
+              fieldType: 'markdown',
               content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
             },
             callToAction: {
-              type: 'internalButtonLink',
+              fieldType: 'internalButtonLink',
               href: '#',
               label: 'Ultricies Elit Sem',
             },
@@ -437,17 +489,21 @@ export const SectionCarousel = {
           {
             blockType: 'defaultBlock',
             blockId: 'cms-carousel2-block-4',
-            media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
+            media: {
+              fieldType: 'image',
+              alt: 'First image: 16:9',
+              image: imagePlaceholder(576, 324),
+            },
             title: {
-              type: 'heading3',
+              fieldType: 'heading3',
               content: '4 Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
-              type: 'markdown',
+              fieldType: 'markdown',
               content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
             },
             callToAction: {
-              type: 'internalButtonLink',
+              fieldType: 'internalButtonLink',
               href: '#',
               label: 'Ultricies Elit Sem',
             },
@@ -455,17 +511,21 @@ export const SectionCarousel = {
           {
             blockType: 'defaultBlock',
             blockId: 'cms-carousel2-block-5',
-            media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
+            media: {
+              fieldType: 'image',
+              alt: 'First image: 16:9',
+              image: imagePlaceholder(576, 324),
+            },
             title: {
-              type: 'heading3',
+              fieldType: 'heading3',
               content: '5 Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
-              type: 'markdown',
+              fieldType: 'markdown',
               content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
             },
             callToAction: {
-              type: 'internalButtonLink',
+              fieldType: 'internalButtonLink',
               href: '#',
               label: 'Ultricies Elit Sem',
             },
@@ -473,17 +533,21 @@ export const SectionCarousel = {
           {
             blockType: 'defaultBlock',
             blockId: 'cms-carousel2-block-6',
-            media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
+            media: {
+              fieldType: 'image',
+              alt: 'First image: 16:9',
+              image: imagePlaceholder(576, 324),
+            },
             title: {
-              type: 'heading3',
+              fieldType: 'heading3',
               content: '6 Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
-              type: 'markdown',
+              fieldType: 'markdown',
               content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
             },
             callToAction: {
-              type: 'internalButtonLink',
+              fieldType: 'internalButtonLink',
               href: '#',
               label: 'Ultricies Elit Sem',
             },
@@ -491,17 +555,21 @@ export const SectionCarousel = {
           {
             blockType: 'defaultBlock',
             blockId: 'cms-carousel2-block-7',
-            media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
+            media: {
+              fieldType: 'image',
+              alt: 'First image: 16:9',
+              image: imagePlaceholder(576, 324),
+            },
             title: {
-              type: 'heading3',
+              fieldType: 'heading3',
               content: '7 Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
-              type: 'markdown',
+              fieldType: 'markdown',
               content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
             },
             callToAction: {
-              type: 'internalButtonLink',
+              fieldType: 'internalButtonLink',
               href: '#',
               label: 'Ultricies Elit Sem',
             },
@@ -509,17 +577,21 @@ export const SectionCarousel = {
           {
             blockType: 'defaultBlock',
             blockId: 'cms-carousel2-block-8',
-            media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
+            media: {
+              fieldType: 'image',
+              alt: 'First image: 16:9',
+              image: imagePlaceholder(576, 324),
+            },
             title: {
-              type: 'heading3',
+              fieldType: 'heading3',
               content: '8 Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
-              type: 'markdown',
+              fieldType: 'markdown',
               content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
             },
             callToAction: {
-              type: 'internalButtonLink',
+              fieldType: 'internalButtonLink',
               href: '#',
               label: 'Ultricies Elit Sem',
             },
@@ -527,17 +599,21 @@ export const SectionCarousel = {
           {
             blockType: 'defaultBlock',
             blockId: 'cms-carousel2-block-9',
-            media: { type: 'image', alt: 'First image: 16:9', image: imagePlaceholder(576, 324) },
+            media: {
+              fieldType: 'image',
+              alt: 'First image: 16:9',
+              image: imagePlaceholder(576, 324),
+            },
             title: {
-              type: 'heading3',
+              fieldType: 'heading3',
               content: '9 Nullam id dolor id nibh ultricies vehicula ut id elit.',
             },
             text: {
-              type: 'markdown',
+              fieldType: 'markdown',
               content: `Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
             },
             callToAction: {
-              type: 'internalButtonLink',
+              fieldType: 'internalButtonLink',
               href: '#',
               label: 'Ultricies Elit Sem',
             },
@@ -557,10 +633,10 @@ export const SectionColumns = {
         sectionType: 'columns',
         sectionId: 'cms-column-section-no-block',
         numColumns: 1,
-        background: { type: 'customBackground', color: hexYellow },
-        title: { type: 'heading2', content: 'One Column, No Blocks' },
+        background: { fieldType: 'customBackground', color: hexYellow },
+        title: { fieldType: 'heading2', content: 'One Column, No Blocks' },
         ingress: {
-          type: 'paragraph',
+          fieldType: 'paragraph',
           content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
         },
       },
@@ -568,14 +644,14 @@ export const SectionColumns = {
         sectionType: 'columns',
         sectionId: 'cms-column-section-no-block-dark',
         numColumns: 1,
-        background: { type: 'customBackground', color: hexBlack, textColor: 'light' },
-        title: { type: 'heading2', content: 'One Column, No Blocks' },
+        background: { fieldType: 'customBackground', color: hexBlack, textColor: 'light' },
+        title: { fieldType: 'heading2', content: 'One Column, No Blocks' },
         ingress: {
-          type: 'paragraph',
+          fieldType: 'paragraph',
           content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
         },
         callToAction: {
-          type: 'externalButtonLink',
+          fieldType: 'externalButtonLink',
           href: 'https://www.sharetribe.com/docs/',
           label: 'Flex Docs',
         },
@@ -585,19 +661,19 @@ export const SectionColumns = {
         sectionId: 'cms-column-section-no-block-bg-img',
         numColumns: 1,
         background: {
-          type: 'customBackground',
+          fieldType: 'customBackground',
           backgroundImage: imagePlaceholder(400, 400),
           alt: 'Background image',
           color: '#000000',
           textColor: 'white',
         },
-        title: { type: 'heading2', content: 'One Column, No Blocks, Bg Image' },
+        title: { fieldType: 'heading2', content: 'One Column, No Blocks, Bg Image' },
         ingress: {
-          type: 'paragraph',
+          fieldType: 'paragraph',
           content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
         },
         callToAction: {
-          type: 'externalButtonLink',
+          fieldType: 'externalButtonLink',
           href: 'https://www.sharetribe.com/docs/',
           label: 'Flex Docs',
         },
@@ -606,27 +682,27 @@ export const SectionColumns = {
         sectionType: 'columns',
         sectionId: 'cms-column-section-1',
         numColumns: 1,
-        title: { type: 'heading2', content: 'One Column' },
+        title: { fieldType: 'heading2', content: 'One Column' },
         ingress: {
-          type: 'paragraph',
+          fieldType: 'paragraph',
           content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
         },
         blocks: [
           {
             blockType: 'defaultBlock',
             blockId: 'cms-column1-block-1',
-            title: { type: 'heading3', content: 'Block 1' },
+            title: { fieldType: 'heading3', content: 'Block 1' },
             text: {
-              type: 'markdown',
+              fieldType: 'markdown',
               content: `**Lorem ipsum** dolor sit amet consectetur adepisci elit...`,
             },
           },
           {
             blockType: 'defaultBlock',
             blockId: 'cms-column1-block-2',
-            title: { type: 'heading3', content: 'Block 2' },
+            title: { fieldType: 'heading3', content: 'Block 2' },
             text: {
-              type: 'markdown',
+              fieldType: 'markdown',
               content: `**Lorem ipsum** dolor sit amet consectetur adepisci elit...`,
             },
           },
@@ -636,22 +712,22 @@ export const SectionColumns = {
         sectionType: 'columns',
         sectionId: 'cms-column-section-2',
         numColumns: 2,
-        title: { type: 'heading2', content: '2 Columns' },
+        title: { fieldType: 'heading2', content: '2 Columns' },
         ingress: {
-          type: 'paragraph',
+          fieldType: 'paragraph',
           content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
         },
         blocks: [
           {
             blockType: 'defaultBlock',
             blockId: 'cms-column2-block-1',
-            title: { type: 'heading3', content: 'Column 1' },
+            title: { fieldType: 'heading3', content: 'Column 1' },
             text: {
-              type: 'markdown',
+              fieldType: 'markdown',
               content: `**Lorem ipsum** dolor sit amet consectetur adepisci elit...`,
             },
             callToAction: {
-              type: 'internalButtonLink',
+              fieldType: 'internalButtonLink',
               href: '/l/wooden-sauna/5aafa4ec-87c1-4043-b82f-14d67389dd19',
               label: 'See the sauna',
             },
@@ -659,13 +735,13 @@ export const SectionColumns = {
           {
             blockType: 'defaultBlock',
             blockId: 'cms-column2-block-2',
-            title: { type: 'heading3', content: 'Column 2' },
+            title: { fieldType: 'heading3', content: 'Column 2' },
             text: {
-              type: 'markdown',
+              fieldType: 'markdown',
               content: `**Lorem ipsum** dolor sit amet consectetur adepisci elit...`,
             },
             callToAction: {
-              type: 'internalButtonLink',
+              fieldType: 'internalButtonLink',
               href: '/l/wooden-sauna/5aafa4ec-87c1-4043-b82f-14d67389dd19',
               label: 'See the sauna',
             },
@@ -676,23 +752,23 @@ export const SectionColumns = {
         sectionType: 'columns',
         sectionId: 'cms-column-section-2-dark',
         numColumns: 2,
-        background: { type: 'customBackground', color: hexBlack, textColor: 'light' },
-        title: { type: 'heading2', content: '2 Columns, Dark' },
+        background: { fieldType: 'customBackground', color: hexBlack, textColor: 'light' },
+        title: { fieldType: 'heading2', content: '2 Columns, Dark' },
         ingress: {
-          type: 'paragraph',
+          fieldType: 'paragraph',
           content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
         },
         blocks: [
           {
             blockType: 'defaultBlock',
             blockId: 'cms-column2-block-1-dark',
-            title: { type: 'heading3', content: 'Column 1' },
+            title: { fieldType: 'heading3', content: 'Column 1' },
             text: {
-              type: 'markdown',
+              fieldType: 'markdown',
               content: `**Lorem ipsum** dolor sit amet consectetur adepisci elit...`,
             },
             callToAction: {
-              type: 'internalButtonLink',
+              fieldType: 'internalButtonLink',
               href: '/l/wooden-sauna/5aafa4ec-87c1-4043-b82f-14d67389dd19',
               label: 'See the sauna',
             },
@@ -700,13 +776,13 @@ export const SectionColumns = {
           {
             blockType: 'defaultBlock',
             blockId: 'cms-column2-block-2-dark',
-            title: { type: 'heading3', content: 'Column 2' },
+            title: { fieldType: 'heading3', content: 'Column 2' },
             text: {
-              type: 'markdown',
+              fieldType: 'markdown',
               content: `**Lorem ipsum** dolor sit amet consectetur adepisci elit...`,
             },
             callToAction: {
-              type: 'internalButtonLink',
+              fieldType: 'internalButtonLink',
               href: '/l/wooden-sauna/5aafa4ec-87c1-4043-b82f-14d67389dd19',
               label: 'See the sauna',
             },
@@ -717,29 +793,29 @@ export const SectionColumns = {
         sectionType: 'columns',
         sectionId: 'cms-column-section-3',
         numColumns: 3,
-        title: { type: 'heading2', content: '3 Columns' },
+        title: { fieldType: 'heading2', content: '3 Columns' },
         ingress: {
-          type: 'paragraph',
+          fieldType: 'paragraph',
           content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
         },
         blocks: [
           {
             blockType: 'defaultBlock',
             blockId: 'cms-column3-block-1',
-            media: { type: 'image', alt: 'First image', image: imagePlaceholder(400, 400) },
-            title: { type: 'heading3', content: 'Image 1' },
+            media: { fieldType: 'image', alt: 'First image', image: imagePlaceholder(400, 400) },
+            title: { fieldType: 'heading3', content: 'Image 1' },
           },
           {
             blockType: 'defaultBlock',
             blockId: 'cms-column3-block-2',
-            media: { type: 'image', alt: 'Second image', image: imagePlaceholder(400, 400) },
-            title: { type: 'heading3', content: 'Image 2' },
+            media: { fieldType: 'image', alt: 'Second image', image: imagePlaceholder(400, 400) },
+            title: { fieldType: 'heading3', content: 'Image 2' },
           },
           {
             blockType: 'defaultBlock',
             blockId: 'cms-column3-block-3',
-            media: { type: 'image', alt: 'Third image', image: imagePlaceholder(400, 400) },
-            title: { type: 'heading3', content: 'Image 3' },
+            media: { fieldType: 'image', alt: 'Third image', image: imagePlaceholder(400, 400) },
+            title: { fieldType: 'heading3', content: 'Image 3' },
           },
         ],
       },
@@ -747,35 +823,35 @@ export const SectionColumns = {
         sectionType: 'columns',
         sectionId: 'cms-column-section-4',
         numColumns: 4,
-        title: { type: 'heading2', content: '4 Columns' },
+        title: { fieldType: 'heading2', content: '4 Columns' },
         ingress: {
-          type: 'paragraph',
+          fieldType: 'paragraph',
           content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
         },
         blocks: [
           {
             blockType: 'defaultBlock',
             blockId: 'cms-column4-block-1-variant-1',
-            media: { type: 'image', alt: 'First image', image: imagePlaceholder(400, 400) },
-            title: { type: 'heading3', content: 'Image 1' },
+            media: { fieldType: 'image', alt: 'First image', image: imagePlaceholder(400, 400) },
+            title: { fieldType: 'heading3', content: 'Image 1' },
           },
           {
             blockType: 'defaultBlock',
             blockId: 'cms-column4-block-2-variant-1',
-            media: { type: 'image', alt: 'Second image', image: imagePlaceholder(400, 400) },
-            title: { type: 'heading3', content: 'Image 2' },
+            media: { fieldType: 'image', alt: 'Second image', image: imagePlaceholder(400, 400) },
+            title: { fieldType: 'heading3', content: 'Image 2' },
           },
           {
             blockType: 'defaultBlock',
             blockId: 'cms-column4-block-3-variant-1',
-            media: { type: 'image', alt: 'Third image', image: imagePlaceholder(400, 400) },
-            title: { type: 'heading3', content: 'Image 3' },
+            media: { fieldType: 'image', alt: 'Third image', image: imagePlaceholder(400, 400) },
+            title: { fieldType: 'heading3', content: 'Image 3' },
           },
           {
             blockType: 'defaultBlock',
             blockId: 'cms-column4-block-4-variant-1',
-            media: { type: 'image', alt: 'Fourth image', image: imagePlaceholder(400, 400) },
-            title: { type: 'heading3', content: 'Image 4' },
+            media: { fieldType: 'image', alt: 'Fourth image', image: imagePlaceholder(400, 400) },
+            title: { fieldType: 'heading3', content: 'Image 4' },
           },
         ],
       },
@@ -783,38 +859,38 @@ export const SectionColumns = {
         sectionType: 'columns',
         sectionId: 'cms-column-section-5',
         numColumns: 4,
-        title: { type: 'heading2', content: '4 Columns 5 blocks' },
-        ingress: { type: 'paragraph', content: 'Portrait images (400x500)' },
+        title: { fieldType: 'heading2', content: '4 Columns 5 blocks' },
+        ingress: { fieldType: 'paragraph', content: 'Portrait images (400x500)' },
         blocks: [
           {
             blockType: 'defaultBlock',
             blockId: 'cms-column4-block-1-variant-2',
-            media: { type: 'image', alt: 'First image', image: imagePlaceholder(400, 500) },
-            title: { type: 'heading3', content: 'Image 1' },
+            media: { fieldType: 'image', alt: 'First image', image: imagePlaceholder(400, 500) },
+            title: { fieldType: 'heading3', content: 'Image 1' },
           },
           {
             blockType: 'defaultBlock',
             blockId: 'cms-column4-block-2-variant-2',
-            media: { type: 'image', alt: 'Second image', image: imagePlaceholder(400, 500) },
-            title: { type: 'heading3', content: 'Image 2' },
+            media: { fieldType: 'image', alt: 'Second image', image: imagePlaceholder(400, 500) },
+            title: { fieldType: 'heading3', content: 'Image 2' },
           },
           {
             blockType: 'defaultBlock',
             blockId: 'cms-column4-block-3-variant-2',
-            media: { type: 'image', alt: 'Third image', image: imagePlaceholder(400, 500) },
-            title: { type: 'heading3', content: 'Image 3' },
+            media: { fieldType: 'image', alt: 'Third image', image: imagePlaceholder(400, 500) },
+            title: { fieldType: 'heading3', content: 'Image 3' },
           },
           {
             blockType: 'defaultBlock',
             blockId: 'cms-column4-block-4-variant-2',
-            media: { type: 'image', alt: 'Fourth image', image: imagePlaceholder(400, 500) },
-            title: { type: 'heading3', content: 'Image 4' },
+            media: { fieldType: 'image', alt: 'Fourth image', image: imagePlaceholder(400, 500) },
+            title: { fieldType: 'heading3', content: 'Image 4' },
           },
           {
             blockType: 'defaultBlock',
             blockId: 'cms-column4-block-5-variant-2',
-            media: { type: 'image', alt: 'Fifth image', image: imagePlaceholder(400, 500) },
-            title: { type: 'heading3', content: 'Image 5' },
+            media: { fieldType: 'image', alt: 'Fifth image', image: imagePlaceholder(400, 500) },
+            title: { fieldType: 'heading3', content: 'Image 5' },
           },
         ],
       },
@@ -822,26 +898,26 @@ export const SectionColumns = {
         sectionType: 'columns',
         sectionId: 'cms-column-section-6',
         numColumns: 4,
-        title: { type: 'heading2', content: '4 Columns 3 blocks' },
-        ingress: { type: 'paragraph', content: 'Landscape images (400x300)' },
+        title: { fieldType: 'heading2', content: '4 Columns 3 blocks' },
+        ingress: { fieldType: 'paragraph', content: 'Landscape images (400x300)' },
         blocks: [
           {
             blockType: 'defaultBlock',
             blockId: 'cms-column4-block-1-variant-3',
-            media: { type: 'image', alt: 'First image', image: imagePlaceholder(400, 300) },
-            title: { type: 'heading3', content: 'Image 1' },
+            media: { fieldType: 'image', alt: 'First image', image: imagePlaceholder(400, 300) },
+            title: { fieldType: 'heading3', content: 'Image 1' },
           },
           {
             blockType: 'defaultBlock',
             blockId: 'cms-column4-block-2-variant-3',
-            media: { type: 'image', alt: 'Second image', image: imagePlaceholder(400, 300) },
-            title: { type: 'heading3', content: 'Image 2' },
+            media: { fieldType: 'image', alt: 'Second image', image: imagePlaceholder(400, 300) },
+            title: { fieldType: 'heading3', content: 'Image 2' },
           },
           {
             blockType: 'defaultBlock',
             blockId: 'cms-column4-block-3-variant-3',
-            media: { type: 'image', alt: 'Third image', image: imagePlaceholder(400, 300) },
-            title: { type: 'heading3', content: 'Image 3' },
+            media: { fieldType: 'image', alt: 'Third image', image: imagePlaceholder(400, 300) },
+            title: { fieldType: 'heading3', content: 'Image 3' },
           },
         ],
       },

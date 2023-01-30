@@ -96,12 +96,12 @@ const hasExactNumKeys = (obj, num) => Object.keys(obj).length === num;
 const isEmptyObject = obj => hasExactNumKeys(obj, 0);
 const hasOnlyProp = (obj, key) => hasExactNumKeys(obj, 1) && obj[key];
 const hasEmptyTextContent = obj =>
-  hasExactNumKeys(obj, 2) && TEXT_CONTENT.includes(obj?.type) && obj?.content?.length === 0;
+  hasExactNumKeys(obj, 2) && TEXT_CONTENT.includes(obj?.fieldType) && obj?.content?.length === 0;
 
 const getFieldConfig = (data, defaultFieldComponents, options) => {
   const customFieldComponents = options?.fieldComponents || {};
   const fieldMapping = { ...defaultFieldComponents, ...customFieldComponents };
-  return fieldMapping[(data?.type)];
+  return fieldMapping[(data?.fieldType)];
 };
 
 // This is also useful for fields that are not used as components on their own
@@ -110,9 +110,9 @@ export const validProps = (data, options) => {
   if (
     !data ||
     isEmptyObject(data) ||
-    hasOnlyProp(data, 'type') ||
+    hasOnlyProp(data, 'fieldType') ||
     hasEmptyTextContent(data) ||
-    ['none'].includes(data?.type)
+    ['none'].includes(data?.fieldType)
   ) {
     // If there's no data, the (optional) field in Console has been left untouched or it's removed.
     return null;
@@ -133,9 +133,9 @@ export const validProps = (data, options) => {
 
   if (data && !config) {
     // If there's no config, the field type is unknown => the app can't know what to render
-    console.warn(`Unknown field type (${data?.type}) detected. Data: ${JSON.stringify(data)}`);
+    console.warn(`Unknown field type (${data?.fieldType}) detected. Data: ${JSON.stringify(data)}`);
   } else if (data && !pickValidProps) {
-    console.warn(`There's no validator (pickValidProps) for this field type (${data?.type}).`);
+    console.warn(`There's no validator (pickValidProps) for this field type (${data?.fieldType}).`);
   }
   return null;
 };
@@ -157,7 +157,7 @@ export const hasDataInFields = (fields, fieldOptions) => {
 
 const isEmpty = obj => Object.keys(obj).length === 0;
 
-// Generic field component that picks a specific UI component based on 'type'
+// Generic field component that picks a specific UI component based on 'fieldType'
 const Field = props => {
   const { data, options: fieldOptions, ...propsFromParent } = props;
 
@@ -180,12 +180,12 @@ const Field = props => {
 
 // Field's prop types:
 const propTypeTextContent = shape({
-  type: oneOf(TEXT_CONTENT).isRequired,
+  fieldType: oneOf(TEXT_CONTENT).isRequired,
   content: string.isRequired,
 });
 
 const propTypeLink = shape({
-  type: oneOf(['externalButtonLink', 'internalButtonLink']).isRequired,
+  fieldType: oneOf(['externalButtonLink', 'internalButtonLink']).isRequired,
   label: string,
   href: string.isRequired,
 });
@@ -205,20 +205,20 @@ const propTypeImageAsset = shape({
 });
 
 const propTypeImage = shape({
-  type: oneOf(['image']).isRequired,
+  fieldType: oneOf(['image']).isRequired,
   alt: string,
   image: propTypeImageAsset.isRequired,
 });
 
 const propTypeCustomBackground = shape({
-  type: oneOf(['customBackground']).isRequired,
+  fieldType: oneOf(['customBackground']).isRequired,
   color: string,
   textColor: string,
   backgroundImage: propTypeImageAsset,
 });
 
 const propTypeYoutube = shape({
-  type: oneOf(['youtube']).isRequired,
+  fieldType: oneOf(['youtube']).isRequired,
   aspectRatio: string,
   youtubeVideoId: string.isRequired,
 });
@@ -232,13 +232,13 @@ const propTypeOption = shape({
 // on localhost environment.
 const propTypeEmptyObject = exact({});
 const propTypeTextEmptyObject = exact({
-  type: oneOf(TEXT_CONTENT).isRequired,
+  fieldType: oneOf(TEXT_CONTENT).isRequired,
 });
 const propTypeDefaultBackground = shape({
-  type: oneOf(['defaultBackground']).isRequired,
+  fieldType: oneOf(['defaultBackground']).isRequired,
 });
 const propTypeNone = shape({
-  type: oneOf(['none']).isRequired,
+  fieldType: oneOf(['none']).isRequired,
 });
 
 Field.defaultProps = {

@@ -16,7 +16,7 @@ SectionBuilder uses internal component **SectionArticle** to render the section 
       sectionType: 'article',
       sectionId: 'my-article-section',
       title: {
-        type: 'heading1',
+        fieldType: 'heading1',
         content: 'Hello World!',
       },
       blocks: [
@@ -24,7 +24,7 @@ SectionBuilder uses internal component **SectionArticle** to render the section 
           blockType: 'defaultBlock',
           blockId: 'cms-article-section-block-1',
           text: {
-            type: 'markdown',
+            fieldType: 'markdown',
             content: 'My article content. _Lorem ipsum_ consectetur adepisci velit',
           },
         },

@@ -8,12 +8,12 @@ solution with headless CMS services, the schema of the page asset represents the
 modeling**. It defines what kind of data needs to be asked from a content writer. In Flex, content
 writing happens in Console, which means that content writers are marketplace operators.
 
-The smallest piece of information in page asset is a field. It defines a piece of data and its type.
+The smallest piece of information in page asset is a field. It defines a piece of data and its fieldType.
 For example:
 
 ```json
 "title": {
-  "type": "heading1",
+  "fieldType": "heading1",
   "content": "Hello World"
 }
 ```
@@ -28,7 +28,7 @@ The default asset schema for page content has 3 levels that can include content 
 **SectionBuilder** to render its content. Similarly, SectionBuilder passes _blocks_ array to
 **BlockBuilder**. All the fields are passed to the **Field** component, which validates and
 sanitizes the data and uses **Primitive** components to actually render them. **MarkdownProcessor**
-is used to render fields with `"type": "markdown"`.
+is used to render fields with `"fieldType": "markdown"`.
 
 Then **LayoutComposer** creates the layout areas for **Topbar**, **Footer**, and for the main
 content, which is created using a page asset.
@@ -67,7 +67,7 @@ don't get content through the Asset Delivery API.
       {
         sectionType: 'customSection',
         sectionId: 'my-ection',
-        foo: { type: 'myField', bar: 'bar' },
+        foo: { fieldType: 'myField', bar: 'bar' },
         blocks: [
           {
             blockType: 'customSectionBlock',
