@@ -1,4 +1,5 @@
 import {
+  hasContent,
   exposeContentAsChildren,
   exposeContentString,
   exposeLinkProps,
@@ -8,6 +9,18 @@ import {
 } from './Field.helpers';
 
 describe('Field helpers', () => {
+  describe('hasContent(data)', () => {
+    it('should return true if data has "content"', () => {
+      expect(hasContent({ content: 'Hello world!' })).toEqual(true);
+      expect(hasContent({ content: 'Hello world!', blaa: 'blaa' })).toEqual(true);
+    });
+
+    it('should return false if "content" is not included or if it is empty string', () => {
+      expect(hasContent({ foo: 'bar' })).toEqual(false);
+      expect(hasContent({ content: '' })).toEqual(false);
+    });
+  });
+
   describe('exposeContentAsChildren(data)', () => {
     it('should return only "children" prop containing the string from passed-in "content"', () => {
       expect(exposeContentAsChildren({ content: 'Hello world!' })).toEqual({
