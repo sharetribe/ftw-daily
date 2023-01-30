@@ -1,1 +1,0 @@
-export { CustomBackground } from './CustomBackground';
