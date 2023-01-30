@@ -63,7 +63,7 @@ const SectionBuilder = props => {
         const Section = getComponent(section.sectionType);
         // If the default "dark" theme should be applied (when text color is white).
         // By default, this information is stored to customAppearance field
-        const isDarkTheme = section?.background?.textColor === 'white';
+        const isDarkTheme = section?.appearance?.textColor === 'white';
         const classes = classNames({ [css.darkTheme]: isDarkTheme });
 
         if (Section) {
