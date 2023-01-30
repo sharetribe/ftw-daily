@@ -186,7 +186,7 @@ const propTypeTextContent = shape({
 
 const propTypeLink = shape({
   fieldType: oneOf(['externalButtonLink', 'internalButtonLink']).isRequired,
-  label: string,
+  content: string,
   href: string.isRequired,
 });
 

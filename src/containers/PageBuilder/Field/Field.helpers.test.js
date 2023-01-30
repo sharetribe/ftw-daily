@@ -39,29 +39,29 @@ describe('Field helpers', () => {
   });
 
   describe('exposeLinkProps(data)', () => {
-    it('should return only "label" and "href" props containing valid strings"', () => {
+    it('should return only "content" and "href" props containing valid strings"', () => {
       expect(
-        exposeLinkProps({ label: 'Hello world!', href: 'https://my.example.com/some/image.png' })
+        exposeLinkProps({ content: 'Hello world!', href: 'https://my.example.com/some/image.png' })
       ).toEqual({ children: 'Hello world!', href: 'https://my.example.com/some/image.png' });
       expect(
         exposeLinkProps({
-          label: 'Hello world!',
+          content: 'Hello world!',
           href: 'https://my.example.com/some/image.png',
           blaa: 'blaa',
         })
       ).toEqual({ children: 'Hello world!', href: 'https://my.example.com/some/image.png' });
     });
     it('should return empty object if data is not valid', () => {
-      expect(exposeLinkProps({ label: 'Hello world!', blaa: 'blaa' })).toEqual({});
+      expect(exposeLinkProps({ content: 'Hello world!', blaa: 'blaa' })).toEqual({});
     });
     it('should return href as "children" if label is not valid', () => {
       const href = 'https://my.example.com/some/image.png';
       expect(exposeLinkProps({ href })).toEqual({ children: href, href: href });
-      expect(exposeLinkProps({ label: 0, href })).toEqual({ children: href, href: href });
+      expect(exposeLinkProps({ content: 0, href })).toEqual({ children: href, href: href });
     });
     it('should return "about:blank" in href if url in data is not valid', () => {
       expect(
-        exposeLinkProps({ label: 'Hello world!', href: "jav&#x09;ascript:alert('XSS');" })
+        exposeLinkProps({ content: 'Hello world!', href: "jav&#x09;ascript:alert('XSS');" })
       ).toEqual({ children: 'Hello world!', href: 'about:blank' });
     });
   });

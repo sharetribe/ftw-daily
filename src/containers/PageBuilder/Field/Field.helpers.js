@@ -28,16 +28,16 @@ export const exposeContentString = data => (hasContent(data) ? { content: data.c
  * Exposes "label" and "href" as "children" and "href" props respectively,
  * if both are of type string. Exposed "href" is sanitized.
  *
- * @param {Object} data E.g. "{ fieldType: 'internalButtonLink', label: 'my title', href: 'https://my.domain.com' }"
+ * @param {Object} data E.g. "{ fieldType: 'internalButtonLink', content: 'my title', href: 'https://my.domain.com' }"
  * @returns object containing children and href.
  */
 export const exposeLinkProps = data => {
-  const { label, href } = data;
+  const { content, href } = data;
   const hasCorrectProps = typeof href === 'string' && href.length > 0;
   // Sanitize the URL. See: src/utl/sanitize.js for more information.
   const cleanUrl = hasCorrectProps ? sanitizeUrl(href) : null;
-  // If no label is given, use href.
-  const linkText = typeof label === 'string' && label.length > 0 ? label : cleanUrl;
+  // If no content is given, use href.
+  const linkText = hasContent(data) ? content : cleanUrl;
   return cleanUrl ? { children: linkText, href: cleanUrl } : {};
 };
 
