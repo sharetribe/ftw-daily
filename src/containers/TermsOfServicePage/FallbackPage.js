@@ -18,7 +18,7 @@ export const fallbackSections = {
     {
       sectionType: 'article',
       sectionId: 'terms',
-      background: { fieldType: 'customBackground', color: '#ffffff' },
+      background: { fieldType: 'customAppearance', color: '#ffffff' },
       title: { fieldType: 'heading1', content: 'Terms of Service' },
       blocks: [
         {

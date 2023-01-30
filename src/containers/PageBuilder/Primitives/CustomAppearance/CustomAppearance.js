@@ -4,10 +4,10 @@ import classNames from 'classnames';
 
 import { ResponsiveImage } from '../../../../components/index.js';
 
-import css from './CustomBackground.module.css';
+import css from './CustomAppearance.module.css';
 
 // BackgroundImage doesn't have enforcable aspectratio
-export const CustomBackground = React.forwardRef((props, ref) => {
+export const CustomAppearance = React.forwardRef((props, ref) => {
   const { className, rootClassName, color, alt, backgroundImage, sizes } = props;
 
   const getVariantNames = img => {
@@ -34,9 +34,9 @@ export const CustomBackground = React.forwardRef((props, ref) => {
   );
 });
 
-CustomBackground.displayName = 'CustomBackground';
+CustomAppearance.displayName = 'CustomAppearance';
 
-CustomBackground.defaultProps = {
+CustomAppearance.defaultProps = {
   rootClassName: null,
   className: null,
   alt: 'background image',
@@ -44,7 +44,7 @@ CustomBackground.defaultProps = {
   backgroundImage: null,
 };
 
-CustomBackground.propTypes = {
+CustomAppearance.propTypes = {
   rootClassName: string,
   className: string,
   alt: string,
