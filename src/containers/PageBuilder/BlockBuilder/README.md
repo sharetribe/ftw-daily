@@ -27,8 +27,8 @@ block type.
       },
       callToAction: {
         fieldType: 'internalButtonLink',
+        content: 'Go to search page',
         href: '/s',
-        label: 'Go to search page',
       },
     },
   ]}
