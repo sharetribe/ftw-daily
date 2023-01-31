@@ -34,7 +34,7 @@ const SectionColumns = props => {
     defaultClasses,
     numColumns,
     title,
-    ingress,
+    description,
     appearance,
     callToAction,
     blocks,
@@ -47,7 +47,7 @@ const SectionColumns = props => {
   const fieldComponents = options?.fieldComponents;
   const fieldOptions = { fieldComponents };
 
-  const hasHeaderFields = hasDataInFields([title, ingress, callToAction], fieldOptions);
+  const hasHeaderFields = hasDataInFields([title, description, callToAction], fieldOptions);
   const hasBlocks = blocks?.length > 0;
 
   return (
@@ -61,7 +61,7 @@ const SectionColumns = props => {
       {hasHeaderFields ? (
         <header className={defaultClasses.sectionDetails}>
           <Field data={title} className={defaultClasses.title} options={fieldOptions} />
-          <Field data={ingress} className={defaultClasses.ingress} options={fieldOptions} />
+          <Field data={description} className={defaultClasses.description} options={fieldOptions} />
           <Field data={callToAction} className={defaultClasses.ctaButton} options={fieldOptions} />
         </header>
       ) : null}
@@ -94,7 +94,7 @@ SectionColumns.defaultProps = {
   textClassName: null,
   numColumns: 1,
   title: null,
-  ingress: null,
+  description: null,
   appearance: null,
   callToAction: null,
   blocks: [],
@@ -109,12 +109,12 @@ SectionColumns.propTypes = {
   defaultClasses: shape({
     sectionDetails: string,
     title: string,
-    ingress: string,
+    description: string,
     ctaButton: string,
   }),
   numColumns: number,
   title: object,
-  ingress: object,
+  description: object,
   appearance: object,
   callToAction: object,
   blocks: arrayOf(object),
