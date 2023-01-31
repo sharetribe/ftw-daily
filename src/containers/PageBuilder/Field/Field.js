@@ -61,6 +61,8 @@ const defaultFieldComponents = {
   heading5: { component: H5, pickValidProps: exposeContentAsChildren, omitInvalidPropsWarning },
   heading6: { component: H6, pickValidProps: exposeContentAsChildren, omitInvalidPropsWarning },
   paragraph: {
+    // By default, page asset schema uses 'paragraph' field type only in the context of
+    // lead paragraph aka ingress
     component: Ingress,
     pickValidProps: exposeContentAsChildren,
     omitInvalidPropsWarning,

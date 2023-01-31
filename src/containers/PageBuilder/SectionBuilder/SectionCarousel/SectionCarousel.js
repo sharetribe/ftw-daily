@@ -38,7 +38,7 @@ const SectionCarousel = props => {
     defaultClasses,
     numColumns,
     title,
-    ingress,
+    description,
     appearance,
     callToAction,
     blocks,
@@ -69,7 +69,7 @@ const SectionCarousel = props => {
   const fieldComponents = options?.fieldComponents;
   const fieldOptions = { fieldComponents };
 
-  const hasHeaderFields = hasDataInFields([title, ingress, callToAction], fieldOptions);
+  const hasHeaderFields = hasDataInFields([title, description, callToAction], fieldOptions);
 
   const onSlideLeft = e => {
     var slider = window.document.getElementById(sliderId);
@@ -110,7 +110,7 @@ const SectionCarousel = props => {
       {hasHeaderFields ? (
         <header className={defaultClasses.sectionDetails}>
           <Field data={title} className={defaultClasses.title} options={fieldOptions} />
-          <Field data={ingress} className={defaultClasses.ingress} options={fieldOptions} />
+          <Field data={description} className={defaultClasses.description} options={fieldOptions} />
           <Field data={callToAction} className={defaultClasses.ctaButton} options={fieldOptions} />
         </header>
       ) : null}
@@ -154,7 +154,7 @@ SectionCarousel.defaultProps = {
   textClassName: null,
   numColumns: 1,
   title: null,
-  ingress: null,
+  description: null,
   appearance: null,
   callToAction: null,
   blocks: [],
@@ -168,12 +168,12 @@ SectionCarousel.propTypes = {
   defaultClasses: shape({
     sectionDetails: string,
     title: string,
-    ingress: string,
+    description: string,
     ctaButton: string,
   }),
   numColumns: number,
   title: object,
-  ingress: object,
+  description: object,
   appearance: object,
   callToAction: object,
   blocks: arrayOf(object),
