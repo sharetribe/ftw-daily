@@ -32,7 +32,7 @@ const SectionHeadings = {
   sectionId: 'cms-section-1',
   numColumns: 2,
   title: { fieldType: 'heading2', content: 'Headings' },
-  ingress: {
+  description: {
     fieldType: 'heading2',
     content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
   },

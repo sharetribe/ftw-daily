@@ -147,7 +147,7 @@ export const PageWithBuildInSectionColumns = {
           sectionId: 'page-builder-columns-section-0',
           numColumns: 1,
           title: { fieldType: 'heading2', content: 'One Column' },
-          ingress: {
+          description: {
             fieldType: 'paragraph',
             content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
           },
@@ -169,7 +169,7 @@ export const PageWithBuildInSectionColumns = {
           numColumns: 2,
           appearance: { fieldType: 'customAppearance', backgroundColor: hexYellow },
           title: { fieldType: 'heading2', content: '2 Columns' },
-          ingress: {
+          description: {
             fieldType: 'paragraph',
             content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
           },
@@ -199,7 +199,7 @@ export const PageWithBuildInSectionColumns = {
           sectionId: 'page-builder-columns-section-2',
           numColumns: 2,
           title: { fieldType: 'heading2', content: '2 Columns' },
-          ingress: {
+          description: {
             fieldType: 'paragraph',
             content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
           },
@@ -238,7 +238,7 @@ export const PageWithBuildInSectionColumns = {
             textColor: 'white',
           },
           title: { fieldType: 'heading2', content: '3 Columns' },
-          ingress: {
+          description: {
             fieldType: 'paragraph',
             content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
           },
@@ -280,7 +280,7 @@ export const PageWithBuildInSectionColumns = {
           sectionId: 'page-builder-columns2-section-4',
           numColumns: 4,
           title: { fieldType: 'heading2', content: '4 Columns' },
-          ingress: {
+          description: {
             fieldType: 'paragraph',
             content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
           },

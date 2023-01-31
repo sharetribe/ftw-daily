@@ -4,6 +4,8 @@ import classNames from 'classnames';
 
 import css from './Ingress.module.css';
 
+// Ingress: a lead paragraph or an opening paragraph
+//          It's usually between a headline and the article
 export const Ingress = React.forwardRef((props, ref) => {
   const { className, rootClassName, ...otherProps } = props;
   const classes = classNames(rootClassName || css.ingress, className);

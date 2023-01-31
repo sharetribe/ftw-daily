@@ -38,7 +38,7 @@ export const SectionArticle = {
           fieldType: 'heading1',
           content: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.',
         },
-        ingress: {
+        description: {
           fieldType: 'paragraph',
           content:
             'Maecenas sed diam eget risus varius blandit sit amet non magna. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.',
@@ -105,7 +105,7 @@ export const SectionFeatures = {
           fieldType: 'heading1',
           content: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.',
         },
-        ingress: {
+        description: {
           fieldType: 'paragraph',
           content:
             'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit.',
@@ -189,7 +189,7 @@ export const SectionCarousel = {
           fieldType: 'heading2',
           content: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.',
         },
-        ingress: {
+        description: {
           fieldType: 'paragraph',
           content:
             'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit.',
@@ -409,7 +409,7 @@ export const SectionCarousel = {
           fieldType: 'heading2',
           content: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.',
         },
-        ingress: {
+        description: {
           fieldType: 'paragraph',
           content:
             'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam id dolor id nibh ultricies vehicula ut id elit.',
@@ -635,7 +635,7 @@ export const SectionColumns = {
         numColumns: 1,
         appearance: { fieldType: 'customAppearance', backgroundColor: hexYellow },
         title: { fieldType: 'heading2', content: 'One Column, No Blocks' },
-        ingress: {
+        description: {
           fieldType: 'paragraph',
           content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
         },
@@ -650,7 +650,7 @@ export const SectionColumns = {
           textColor: 'light',
         },
         title: { fieldType: 'heading2', content: 'One Column, No Blocks' },
-        ingress: {
+        description: {
           fieldType: 'paragraph',
           content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
         },
@@ -672,7 +672,7 @@ export const SectionColumns = {
           textColor: 'white',
         },
         title: { fieldType: 'heading2', content: 'One Column, No Blocks, Bg Image' },
-        ingress: {
+        description: {
           fieldType: 'paragraph',
           content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
         },
@@ -687,7 +687,7 @@ export const SectionColumns = {
         sectionId: 'cms-column-section-1',
         numColumns: 1,
         title: { fieldType: 'heading2', content: 'One Column' },
-        ingress: {
+        description: {
           fieldType: 'paragraph',
           content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
         },
@@ -717,7 +717,7 @@ export const SectionColumns = {
         sectionId: 'cms-column-section-2',
         numColumns: 2,
         title: { fieldType: 'heading2', content: '2 Columns' },
-        ingress: {
+        description: {
           fieldType: 'paragraph',
           content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
         },
@@ -762,7 +762,7 @@ export const SectionColumns = {
           textColor: 'light',
         },
         title: { fieldType: 'heading2', content: '2 Columns, Dark' },
-        ingress: {
+        description: {
           fieldType: 'paragraph',
           content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
         },
@@ -802,7 +802,7 @@ export const SectionColumns = {
         sectionId: 'cms-column-section-3',
         numColumns: 3,
         title: { fieldType: 'heading2', content: '3 Columns' },
-        ingress: {
+        description: {
           fieldType: 'paragraph',
           content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
         },
@@ -832,7 +832,7 @@ export const SectionColumns = {
         sectionId: 'cms-column-section-4',
         numColumns: 4,
         title: { fieldType: 'heading2', content: '4 Columns' },
-        ingress: {
+        description: {
           fieldType: 'paragraph',
           content: 'Lorem ipsum dolor sit amet consectetur adepisci elit...',
         },
@@ -868,7 +868,7 @@ export const SectionColumns = {
         sectionId: 'cms-column-section-5',
         numColumns: 4,
         title: { fieldType: 'heading2', content: '4 Columns 5 blocks' },
-        ingress: { fieldType: 'paragraph', content: 'Portrait images (400x500)' },
+        description: { fieldType: 'paragraph', content: 'Portrait images (400x500)' },
         blocks: [
           {
             blockType: 'defaultBlock',
@@ -907,7 +907,7 @@ export const SectionColumns = {
         sectionId: 'cms-column-section-6',
         numColumns: 4,
         title: { fieldType: 'heading2', content: '4 Columns 3 blocks' },
-        ingress: { fieldType: 'paragraph', content: 'Landscape images (400x300)' },
+        description: { fieldType: 'paragraph', content: 'Landscape images (400x300)' },
         blocks: [
           {
             blockType: 'defaultBlock',

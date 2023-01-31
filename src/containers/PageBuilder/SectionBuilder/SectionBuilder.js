@@ -21,7 +21,7 @@ import css from './SectionBuilder.module.css';
 const DEFAULT_CLASSES = {
   sectionDetails: css.sectionDetails,
   title: css.title,
-  ingress: css.ingress,
+  description: css.description,
   ctaButton: css.ctaButton,
   blockContainer: css.blockContainer,
 };
