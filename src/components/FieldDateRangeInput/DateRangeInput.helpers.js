@@ -151,7 +151,7 @@ export const pickerEndDateToApiDateForDaily = endDate => {
 };
 
 const invalidDaySlot = (day, timeSlots, seats) => {
-  return timeSlots.find(timeSlot => moment(timeSlot.attributes.start).isSame(day, 'day') && timeSlot.attributes.seats <= seats);
+  return timeSlots.find(timeSlot => moment(timeSlot.attributes.start).isSame(day, 'day') && timeSlot.attributes.seats < seats);
 }
 
 /**
