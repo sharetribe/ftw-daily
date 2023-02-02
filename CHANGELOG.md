@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2022-XX-XX
 
+- [change] Norway's stripe config should use NOK not EUR.
+  [#1579](https://github.com/sharetribe/ftw-daily/pull/1579)
 - [delete] Update README.md after changes in [#1555].
   [#1569](https://github.com/sharetribe/ftw-daily/pull/1569)
 - [change] Added some dependabot updates earlier: passport-0.6.0, loader-utils-2.0.4,
