@@ -83,6 +83,7 @@ class PageComponent extends Component {
       facebookImages,
       published,
       schema,
+      socialSharing,
       tags,
       title,
       twitterHandle,
@@ -104,9 +105,17 @@ class PageComponent extends Component {
     const siteTitle = config.siteTitle;
     const schemaTitle = intl.formatMessage({ id: 'Page.schemaTitle' }, { siteTitle });
     const schemaDescription = intl.formatMessage({ id: 'Page.schemaDescription' });
-    const metaTitle = title || schemaTitle;
-    const metaDescription = description || schemaDescription;
-    const facebookImgs = facebookImages || [
+    const pageTitle = title || schemaTitle;
+    const pageDescription = description || schemaDescription;
+    const {
+      title: socialSharingTitle,
+      description: socialSharingDescription,
+      images1200: socialSharingImages1200,
+      // Note: we use image with open graph's aspect ratio (1.91:1) also with Twitter
+      images600: socialSharingImages600,
+    } = socialSharing || {};
+
+    const openGraphFallbackImages = [
       {
         name: 'facebook',
         url: `${canonicalRootURL}${facebookImage}`,
@@ -114,7 +123,7 @@ class PageComponent extends Component {
         height: 630,
       },
     ];
-    const twitterImgs = twitterImages || [
+    const twitterFallbackImages = [
       {
         name: 'twitter',
         url: `${canonicalRootURL}${twitterImage}`,
@@ -122,16 +131,19 @@ class PageComponent extends Component {
         height: 314,
       },
     ];
+    const facebookImgs = socialSharingImages1200 || facebookImages || openGraphFallbackImages;
+    const twitterImgs = socialSharingImages600 || twitterImages || twitterFallbackImages;
 
     const metaToHead = metaTagProps({
       author,
-      description: metaDescription,
       openGraphType,
+      socialSharingTitle: socialSharingTitle || pageTitle,
+      socialSharingDescription: socialSharingDescription || pageDescription,
+      description: pageDescription,
       facebookImages: facebookImgs,
       twitterImages: twitterImgs,
       published,
       tags,
-      title: metaTitle,
       twitterHandle,
       updated,
       url: canonicalUrl,
@@ -195,7 +207,7 @@ class PageComponent extends Component {
             lang: intl.locale,
           }}
         >
-          <title>{title}</title>
+          <title>{pageTitle}</title>
           {referrer ? <meta name="referrer" content={referrer} /> : null}
           <link rel="canonical" href={canonicalUrl} />
           <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -236,6 +248,7 @@ PageComponent.defaultProps = {
   published: null,
   referrer: null,
   schema: null,
+  socialSharing: null,
   tags: null,
   twitterHandle: null,
   updated: null,
@@ -270,8 +283,28 @@ PageComponent.propTypes = {
   ),
   published: string, // article:published_time
   schema: oneOfType([object, array]), // http://schema.org
+  socialSharing: shape({
+    title: string,
+    description: string,
+    images1200: arrayOf(
+      // Page asset file can define this
+      shape({
+        width: number.isRequired,
+        height: number.isRequired,
+        url: string.isRequired,
+      })
+    ),
+    images600: arrayOf(
+      // Page asset file can define this
+      shape({
+        width: number.isRequired,
+        height: number.isRequired,
+        url: string.isRequired,
+      })
+    ),
+  }),
   tags: string, // article:tag
-  title: string.isRequired, // page title
+  title: string, // page title
   twitterHandle: string, // twitter handle
   updated: string, // article:modified_time
 
