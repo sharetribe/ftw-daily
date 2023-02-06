@@ -6,6 +6,7 @@ import {
   exposeImageProps,
   exposeCustomAppearanceProps,
   exposeYoutubeProps,
+  exposeOpenGraphData,
 } from './Field.helpers';
 
 describe('Field helpers', () => {
@@ -315,6 +316,66 @@ describe('Field helpers', () => {
       expect(exposeYoutubeProps({ youtubeVideoId: '9RQli&kX4vvw' })).toEqual({});
       expect(exposeYoutubeProps({ youtubeVideoId: '9RQli<kX4vvw' })).toEqual({});
       expect(exposeYoutubeProps({ youtubeVideoId: '9RQli>kX4vvw' })).toEqual({});
+    });
+  });
+
+  describe('exposeOpenGraphData(data)', () => {
+    it('should return title, description, images1200, and images600 props ', () => {
+      const title = 'Title';
+      const description = 'Description';
+      const imageVariant1200 = {
+        url: `https://picsum.photos/1200/630`,
+        width: 1200,
+        height: 630,
+      };
+      const imageVariant600 = {
+        url: `https://picsum.photos/600/315`,
+        width: 600,
+        height: 315,
+      };
+
+      const image = {
+        id: 'image',
+        type: 'imageAsset',
+        attributes: {
+          variants: {
+            social1200: imageVariant1200,
+            social600: imageVariant600,
+          },
+        },
+      };
+
+      const data = { title, description, image };
+      expect(exposeOpenGraphData(data)).toEqual({
+        title,
+        description,
+        images1200: [imageVariant1200],
+        images600: [imageVariant600],
+      });
+      expect(exposeOpenGraphData({ title })).toEqual({
+        title,
+        description: null,
+        images1200: null,
+        images600: null,
+      });
+      expect(exposeOpenGraphData({ description })).toEqual({
+        title: null,
+        description,
+        images1200: null,
+        images600: null,
+      });
+      expect(exposeOpenGraphData()).toEqual({
+        title: null,
+        description: null,
+        images1200: null,
+        images600: null,
+      });
+      expect(exposeOpenGraphData({ unKnownKey: null })).toEqual({
+        title: null,
+        description: null,
+        images1200: null,
+        images600: null,
+      });
     });
   });
 });

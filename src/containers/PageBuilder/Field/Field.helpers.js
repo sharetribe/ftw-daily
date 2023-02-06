@@ -41,6 +41,28 @@ export const exposeLinkProps = data => {
   return cleanUrl ? { children: linkText, href: cleanUrl } : {};
 };
 
+const getValidSanitizedImage = image => {
+  const { id, type, attributes } = image || {};
+  const variantEntries = Object.entries(attributes?.variants || {});
+  const variants = variantEntries.reduce((validVariants, entry) => {
+    const [key, value] = entry;
+    const { url, width, height } = value || {};
+
+    const isValid = typeof width === 'number' && typeof height === 'number';
+    return isValid
+      ? {
+          ...validVariants,
+          [key]: { url: sanitizeUrl(url), width, height },
+        }
+      : validVariants;
+  }, {});
+
+  const isValidImage = Object.keys(variants).length > 0;
+  const sanitizedImage = { id, type, attributes: { ...attributes, variants } };
+
+  return isValidImage ? sanitizedImage : null;
+};
+
 /**
  * Exposes "alt" and image props.
  * The "image" contains imageAsset entity, which has been denormalized at this point:
@@ -70,30 +92,15 @@ export const exposeImageProps = data => {
   // Note: data includes also "aspectRatio" key (and "fieldType"),
   //       but image refs can rely on actual image variants
   const { alt, image } = data;
-  const { id, type, attributes } = image || {};
+  const { type } = image || {};
 
   if (type !== 'imageAsset') {
     return {};
   }
 
-  const variantEntries = Object.entries(image?.attributes?.variants || {});
-  const variants = variantEntries.reduce((validVariants, entry) => {
-    const [key, value] = entry;
-    const { url, width, height } = value || {};
-
-    const isValid = typeof width === 'number' && typeof height === 'number';
-    return isValid
-      ? {
-          ...validVariants,
-          [key]: { url: sanitizeUrl(url), width, height },
-        }
-      : validVariants;
-  }, {});
-
   const alternativeText = typeof alt === 'string' ? alt : '🖼️';
-  const isValidImage = Object.keys(variants).length > 0;
-  const sanitizedImage = { id, type, attributes: { ...attributes, variants } };
-  return isValidImage ? { alt: alternativeText, image: sanitizedImage } : {};
+  const sanitizedImage = getValidSanitizedImage(image);
+  return sanitizedImage ? { alt: alternativeText, image: sanitizedImage } : {};
 };
 
 /**
@@ -118,7 +125,7 @@ const exposeColorValue = color => {
  */
 export const exposeCustomAppearanceProps = data => {
   const { backgroundImage, backgroundColor, textColor, alt } = data;
-  const { id, type, attributes } = backgroundImage || {};
+  const { type } = backgroundImage || {};
 
   if (!!type && type !== 'imageAsset') {
     return {};
@@ -132,23 +139,8 @@ export const exposeCustomAppearanceProps = data => {
   const isValidTextColor = ['light', 'dark'].includes(textColor);
   const textColorMaybe = isValidTextColor ? { textColor } : {};
 
-  const variantEntries = Object.entries(backgroundImage?.attributes?.variants || {});
-  const variants = variantEntries.reduce((validVariants, entry) => {
-    const [key, value] = entry;
-    const { url, width, height } = value || {};
-
-    const isValid = typeof width === 'number' && typeof height === 'number';
-    return isValid
-      ? {
-          ...validVariants,
-          [key]: { url: sanitizeUrl(url), width, height },
-        }
-      : validVariants;
-  }, {});
-
-  const isValidImage = Object.keys(variants).length > 0;
-  const sanitizedImage = { id, type, attributes: { ...attributes, variants } };
-  const backgroundImageMaybe = isValidImage ? { backgroundImage: sanitizedImage, alt } : {};
+  const sanitizedImage = getValidSanitizedImage(backgroundImage);
+  const backgroundImageMaybe = sanitizedImage ? { backgroundImage: sanitizedImage, alt } : {};
 
   return {
     ...backgroundImageMaybe,
@@ -183,4 +175,26 @@ export const exposeYoutubeProps = data => {
         ...aspectRatioMaybe,
       }
     : {};
+};
+
+export const exposeOpenGraphData = data => {
+  const { title, description, image } = data || {};
+  const { type } = image || {};
+
+  if (!!type && type !== 'imageAsset') {
+    return {};
+  }
+
+  const isString = content => typeof content === 'string' && content.length > 0;
+  const sanitizedImage = getValidSanitizedImage(image);
+  const image1200 = sanitizedImage?.attributes?.variants?.social1200;
+  const image600 = sanitizedImage?.attributes?.variants?.social600;
+
+  return {
+    title: isString(title) ? title : null,
+    description: isString(description) ? description : null,
+    // Open Graph can handle multiple images, so we return arrays for the sake of consistency
+    images1200: image1200 ? [image1200] : null,
+    images600: image600 ? [image600] : null,
+  };
 };

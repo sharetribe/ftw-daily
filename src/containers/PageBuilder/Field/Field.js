@@ -24,6 +24,7 @@ import {
   exposeCustomAppearanceProps,
   exposeImageProps,
   exposeYoutubeProps,
+  exposeOpenGraphData,
 } from './Field.helpers';
 
 const TEXT_CONTENT = [
@@ -35,6 +36,8 @@ const TEXT_CONTENT = [
   'heading6',
   'paragraph',
   'markdown',
+  'metaTitle',
+  'metaDescription',
 ];
 
 ////////////////////////
@@ -97,6 +100,12 @@ const defaultFieldComponents = {
       },
     },
   },
+
+  // Page's metadata goes to <head> and it is not currently rendered as a separate component
+  // Instead, valid data is passed to <Page>, which then renders it using react-helmet-async
+  metaTitle: { component: null, pickValidProps: exposeContentString },
+  metaDescription: { component: null, pickValidProps: exposeContentString },
+  openGraphData: { component: null, pickValidProps: exposeOpenGraphData },
 };
 
 //////////////////
