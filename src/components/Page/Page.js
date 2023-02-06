@@ -95,7 +95,6 @@ class PageComponent extends Component {
     });
 
     this.scrollingDisabledChanged(scrollingDisabled);
-    const referrerMeta = referrer ? <meta name="referrer" content={referrer} /> : null;
 
     const canonicalRootURL = config.canonicalRootURL;
     const shouldReturnPathOnly = referrer && referrer !== 'unsafe-url';
@@ -138,9 +137,6 @@ class PageComponent extends Component {
       url: canonicalUrl,
       locale: intl.locale,
     });
-
-    // eslint-disable-next-line react/no-array-index-key
-    const metaTags = metaToHead.map((metaProps, i) => <meta key={i} {...metaProps} />);
 
     const facebookPage = config.siteFacebookPage;
     const twitterPage = twitterPageURL(config.siteTwitterHandle);
@@ -200,11 +196,13 @@ class PageComponent extends Component {
           }}
         >
           <title>{title}</title>
-          {referrerMeta}
+          {referrer ? <meta name="referrer" content={referrer} /> : null}
           <link rel="canonical" href={canonicalUrl} />
           <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
           <meta httpEquiv="Content-Language" content={intl.locale} />
-          {metaTags}
+          {metaToHead.map((metaProps, i) => (
+            <meta key={i} {...metaProps} />
+          ))}
           <script id="page-schema" type="application/ld+json">
             {schemaArrayJSONString.replace(/</g, '\\u003c')}
           </script>
