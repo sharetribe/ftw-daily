@@ -173,9 +173,18 @@ const denormalizeJsonData = (data, included) => {
         value._ref &&
         value._ref?.type === 'imageAsset' &&
         value._ref?.id;
+      // If there is no image included,
+      // the _ref might contain parameters for image resolver (Asset Delivery API resolves image URLs on the fly)
+      const hasUnresolvedImageRef =
+        typeof value == 'object' && value._ref && value._ref?.resolver === 'image';
+
       if (hasImageRefAsValue) {
         const foundRef = included.find(inc => inc.id === value._ref?.id);
         copy[key] = foundRef;
+      } else if (hasUnresolvedImageRef) {
+        // Don't add faulty image ref
+        // Note: At the time of writing, assets can expose resolver configs,
+        //       which we don't want to deal with.
       } else {
         copy[key] = denormalizeJsonData(value, included);
       }
