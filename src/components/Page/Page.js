@@ -162,7 +162,8 @@ class PageComponent extends Component {
     // Schema attribute can be either single schema object or an array of objects
     // This makes it possible to include several different items from the same page.
     // E.g. Product, Place, Video
-    const schemaFromProps = Array.isArray(schema) ? schema : [schema];
+    const hasSchema = schema != null;
+    const schemaFromProps = hasSchema && Array.isArray(schema) ? schema : hasSchema ? [schema] : [];
     const schemaArrayJSONString = JSON.stringify([
       ...schemaFromProps,
       {
@@ -181,9 +182,6 @@ class PageComponent extends Component {
         url: canonicalRootURL,
         description: schemaDescription,
         name: schemaTitle,
-        publisher: {
-          '@id': `${canonicalRootURL}#organization`,
-        },
       },
     ]);
 
