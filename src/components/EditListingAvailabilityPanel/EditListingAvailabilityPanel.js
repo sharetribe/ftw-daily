@@ -85,7 +85,6 @@ const EditListingAvailabilityPanel = props => {
 
   }, [currentListing])
 
-
   return (
     <div className={classes}>
       <h1 className={css.title}>
@@ -105,7 +104,6 @@ const EditListingAvailabilityPanel = props => {
         availability={availability}
         availabilityPlan={availabilityPlan}
         onSubmit={values => {
-          console.log('availabilityPlan', values)
           const {daysAvailability} = values;
           // We save the default availability plan
           // I.e. this listing is available every night.

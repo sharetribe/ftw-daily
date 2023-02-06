@@ -399,7 +399,7 @@ export const humanizeLineItemCode = code => {
 export const AVAILABILITY_DEFAULT_START = '00:00';
 export const AVAILABILITY_DEFAULT_END = '24:00';
 const defaultTimeZone = () =>
-  typeof window !== 'undefined' ? getDefaultTimeZoneOnBrowser() : 'Etc/UTC';
+  typeof window !== 'undefined' ? 'Etc/UTC' : 'Etc/UTC';
 
 export const createDefaultPlan = (seats = 1, output = false) => {
   return {

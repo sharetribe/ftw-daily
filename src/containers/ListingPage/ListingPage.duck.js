@@ -83,9 +83,8 @@ const listingPageReducer = (state = initialState, action = {}) => {
 
     case FETCH_TIME_SLOTS_REQUEST_DAY:
       return { ...state, fetchTimeSlotsError: null };
-    case FETCH_TIME_SLOTS_SUCCESS_DAY: {
-      return { ...state, timeSlots: payload }
-    };
+    case FETCH_TIME_SLOTS_SUCCESS_DAY:
+      return { ...state, timeSlots: payload };
     case FETCH_TIME_SLOTS_ERROR_DAY:
       return { ...state, fetchTimeSlotsError: payload };
 
@@ -102,7 +101,6 @@ const listingPageReducer = (state = initialState, action = {}) => {
     }
     case FETCH_TIME_SLOTS_SUCCESS_TIME: {
       const monthId = payload.monthId;
-      // console.log(payload.timeSlots, 'payload')
       const monthlyTimeSlots = {
         ...state.monthlyTimeSlots,
         [monthId]: {
@@ -333,7 +331,6 @@ const fetchTimeSlotsDay = listingId => (dispatch, getState, sdk) => {
 
 export const fetchTimeSlotsTime = (listingId, start, end, timeZone) => (dispatch, getState, sdk) => {
   const monthId = monthIdStringInTimeZone(start, timeZone);
-console.log(monthId, 'monthId')
   dispatch(fetchTimeSlotsRequestTime(monthId));
 
   // The maximum pagination page size for timeSlots is 500
@@ -358,7 +355,6 @@ const fetchMonthlyTimeSlots = (dispatch, listing) => {
   // Listing could be ownListing entity too, so we just check if attributes key exists
   const hasTimeZone =
     attributes && attributes.availabilityPlan && attributes.availabilityPlan.timezone;
-// console.log(hasTimeZone, 'hasTimeZone')
     // Fetch time-zones on client side only.
   if (hasWindow && listing.id && hasTimeZone) {
     const tz = listing.attributes.availabilityPlan.timezone;
@@ -366,8 +362,6 @@ const fetchMonthlyTimeSlots = (dispatch, listing) => {
 
     const nextMonth = nextMonthFn(nextBoundary, tz);
     const nextAfterNextMonth = nextMonthFn(nextMonth, tz);
-    // console.log(nextBoundary, 'nextBoundary')
-    // console.log(nextMonth, 'nextMonth')
 
     return Promise.all([
       dispatch(fetchTimeSlotsTime(listing.id, nextBoundary, nextMonth, tz)),

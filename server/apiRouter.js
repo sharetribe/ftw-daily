@@ -81,7 +81,7 @@ router.get('/auth/google', authenticateGoogle);
 router.get('/auth/google/callback', authenticateGoogleCallback);
 
 router.post('/transaction-line-items', transactionLineItems);
-router.post('/initiate-privileged', initiatePrivileged);
+// router.post('/initiate-privileged', initiatePrivileged);
 router.post('/transition-privileged', transitionPrivileged);
 
 module.exports = router;
