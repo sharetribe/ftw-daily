@@ -4,7 +4,6 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import config from '../../config';
 import { injectIntl, intlShape } from '../../util/reactIntl';
 import { camelize } from '../../util/string';
 
@@ -48,45 +47,13 @@ const PrivacyPolicyContent = props => {
 
 // Presentational component for PrivacyPolicyPage
 const PrivacyPolicyPageComponent = props => {
-  const { intl, pageAssetsData, inProgress } = props;
-
-  // Schema for search engines (helps them to understand what this page is about)
-  // http://schema.org
-  // We are using JSON-LD format
-  const siteTitle = config.siteTitle;
-  // schemaTitle is used for <title> tag in addition to page schema for SEO
-  const schemaTitle = intl.formatMessage({ id: 'PrivacyPolicyPage.schemaTitle' }, { siteTitle });
-  // schemaDescription is used for different <meta> tags in addition to page schema for SEO
-  const schemaDescription = intl.formatMessage({ id: 'PrivacyPolicyPage.schemaDescription' });
-  const openGraphContentType = 'website';
-
-  // In addition to this schema for search engines, src/components/Page/Page.js adds some extra schemas
-  // Read more about schema
-  // - https://schema.org/
-  // - https://developers.google.com/search/docs/advanced/structured-data/intro-structured-data
-  const pageSchemaForSEO = {
-    '@context': 'http://schema.org',
-    '@type': 'WebPage',
-    description: schemaDescription,
-    name: schemaTitle,
-  };
+  const { pageAssetsData, inProgress } = props;
 
   return (
     <PageBuilder
       pageAssetsData={pageAssetsData?.[camelize(ASSET_NAME)]?.data}
-      title={schemaTitle}
-      description={schemaDescription}
-      schema={pageSchemaForSEO}
-      contentType={openGraphContentType}
       inProgress={inProgress}
-      fallbackPage={
-        <FallbackPage
-          title={schemaTitle}
-          description={schemaDescription}
-          schema={pageSchemaForSEO}
-          contentType={openGraphContentType}
-        />
-      }
+      fallbackPage={<FallbackPage />}
     />
   );
 };

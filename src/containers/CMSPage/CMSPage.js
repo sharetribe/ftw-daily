@@ -15,41 +15,7 @@ export const CMSPageComponent = props => {
     return <NotFoundPage />;
   }
 
-  // Schema for search engines (helps them to understand what this page is about)
-  // http://schema.org
-  // We are using JSON-LD format
-
-  ////////////////////////////////////////////////////////////////
-  // TODO title and description should come from hosted assets. //
-  ////////////////////////////////////////////////////////////////
-
-  // schemaTitle is used for <title> tag in addition to page schema for SEO
-  const schemaTitle = 'CMS page';
-  // schemaDescription is used for different <meta> tags in addition to page schema for SEO
-  const schemaDescription = 'CMS page';
-  const openGraphContentType = 'website';
-
-  // In addition to this schema for search engines, src/components/Page/Page.js adds some extra schemas
-  // Read more about schema
-  // - https://schema.org/
-  // - https://developers.google.com/search/docs/advanced/structured-data/intro-structured-data
-  const pageSchemaForSEO = {
-    '@context': 'http://schema.org',
-    '@type': 'WebPage',
-    description: schemaDescription,
-    name: schemaTitle,
-  };
-
-  return (
-    <PageBuilder
-      pageAssetsData={pageAssetsData?.[pageId]?.data}
-      title={schemaTitle}
-      description={schemaDescription}
-      schema={pageSchemaForSEO}
-      contentType={openGraphContentType}
-      inProgress={inProgress}
-    />
-  );
+  return <PageBuilder pageAssetsData={pageAssetsData?.[pageId]?.data} inProgress={inProgress} />;
 };
 
 CMSPageComponent.propTypes = {

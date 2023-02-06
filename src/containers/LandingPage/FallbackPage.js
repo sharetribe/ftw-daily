@@ -10,8 +10,20 @@ export const fallbackSections = {
       sectionId: 'maintenance-mode',
     },
   ],
+  meta: {
+    pageTitle: {
+      fieldType: 'metaTitle',
+      content: 'Home page',
+    },
+    pageDescription: {
+      fieldType: 'metaDescription',
+      content: 'Home page fetch failed',
+    },
+  },
 };
 
+// Note: this microcopy/translation does not come from translation file.
+//       It needs to be something that is not part of fetched assets but built-in text
 const SectionMaintenanceMode = props => {
   const { sectionId } = props;
 
@@ -30,7 +42,6 @@ const SectionMaintenanceMode = props => {
 
 // This is the fallback page, in case there's no Landing Page asset defined in Console.
 const FallbackPage = props => {
-  const { title, description, schema, contentType } = props;
   return (
     <PageBuilder
       pageAssetsData={fallbackSections}
@@ -39,10 +50,7 @@ const FallbackPage = props => {
           customMaintenance: { component: SectionMaintenanceMode },
         },
       }}
-      title={title}
-      description={description}
-      schema={schema}
-      contentType={contentType}
+      {...props}
     />
   );
 };

@@ -18,7 +18,7 @@ export const fallbackSections = {
     {
       sectionType: 'article',
       sectionId: 'privacy',
-      appearance: { fieldType: 'customAppearance', color: '#ffffff' },
+      appearance: { fieldType: 'customAppearance', backgroundColor: '#ffffff' },
       title: { fieldType: 'heading1', content: 'Privacy Policy' },
       blocks: [
         {
@@ -32,20 +32,21 @@ export const fallbackSections = {
       ],
     },
   ],
+  meta: {
+    pageTitle: {
+      fieldType: 'metaTitle',
+      content: 'Privacy policy page',
+    },
+    pageDescription: {
+      fieldType: 'metaDescription',
+      content: 'Privacy policy fetch failed',
+    },
+  },
 };
 
 // This is the fallback page, in case there's no Privacy Policy asset defined in Console.
 const FallbackPage = props => {
-  const { title, description, schema, contentType } = props;
-  return (
-    <PageBuilder
-      pageAssetsData={fallbackSections}
-      title={title}
-      description={description}
-      schema={schema}
-      contentType={contentType}
-    />
-  );
+  return <PageBuilder pageAssetsData={fallbackSections} {...props} />;
 };
 
 export default FallbackPage;
