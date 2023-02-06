@@ -18,7 +18,7 @@ export const fallbackSections = {
     {
       sectionType: 'article',
       sectionId: 'terms',
-      appearance: { fieldType: 'customAppearance', color: '#ffffff' },
+      appearance: { fieldType: 'customAppearance', backgroundColor: '#ffffff' },
       title: { fieldType: 'heading1', content: 'Terms of Service' },
       blocks: [
         {
@@ -32,20 +32,21 @@ export const fallbackSections = {
       ],
     },
   ],
+  meta: {
+    pageTitle: {
+      fieldType: 'metaTitle',
+      content: 'Terms of service page',
+    },
+    pageDescription: {
+      fieldType: 'metaDescription',
+      content: 'Terms of service fetch failed',
+    },
+  },
 };
 
 // This is the fallback page, in case there's no Terms of Service asset defined in Console.
 const FallbackPage = props => {
-  const { title, description, schema, contentType } = props;
-  return (
-    <PageBuilder
-      pageAssetsData={fallbackSections}
-      title={title}
-      description={description}
-      schema={schema}
-      contentType={contentType}
-    />
-  );
+  return <PageBuilder pageAssetsData={fallbackSections} {...props} />;
 };
 
 export default FallbackPage;

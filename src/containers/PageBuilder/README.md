@@ -76,6 +76,12 @@ don't get content through the Asset Delivery API.
         ],
       },
     ],
+    meta: {
+      pageTitle: {
+        fieldType: 'metaTitle',
+        content: 'My Custom Page',
+      },
+    },
   }}
   options={{
     sectionComponents: {
@@ -93,9 +99,5 @@ don't get content through the Asset Delivery API.
       },
     },
   }}
-  contentType={openGraphContentType}
-  description={description}
-  title={title}
-  schema={pageSchemaForSEO}
 />
 ```

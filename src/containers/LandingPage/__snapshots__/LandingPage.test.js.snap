@@ -2,55 +2,6 @@
 
 exports[`LandingPage matches snapshot 1`] = `
 <PageBuilder
-  contentType="website"
-  description="LandingPage.schemaDescription"
-  facebookImages={
-    Array [
-      Object {
-        "height": 630,
-        "url": "saunatimeFacebook-1200x630.jpg",
-        "width": 1200,
-      },
-    ]
-  }
-  fallbackPage={
-    <FallbackPage
-      contentType="website"
-      description="LandingPage.schemaDescription"
-      schema={
-        Object {
-          "@context": "http://schema.org",
-          "@type": "WebPage",
-          "description": "LandingPage.schemaDescription",
-          "image": Array [
-            "http://localhost:3000saunatimeFacebook-1200x630.jpg",
-          ],
-          "name": "LandingPage.schemaTitle",
-        }
-      }
-      title="LandingPage.schemaTitle"
-    />
-  }
-  schema={
-    Object {
-      "@context": "http://schema.org",
-      "@type": "WebPage",
-      "description": "LandingPage.schemaDescription",
-      "image": Array [
-        "http://localhost:3000saunatimeFacebook-1200x630.jpg",
-      ],
-      "name": "LandingPage.schemaTitle",
-    }
-  }
-  title="LandingPage.schemaTitle"
-  twitterImages={
-    Array [
-      Object {
-        "height": 314,
-        "url": "http://localhost:3000saunatimeTwitter-600x314.jpg",
-        "width": 600,
-      },
-    ]
-  }
+  fallbackPage={<FallbackPage />}
 />
 `;
