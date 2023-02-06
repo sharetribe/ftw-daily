@@ -15,8 +15,8 @@ const ensureOpenGraphLocale = locale => {
 export const openGraphMetaProps = data => {
   const {
     canonicalRootURL,
-    contentType,
     description,
+    openGraphType,
     facebookAppId,
     facebookImages,
     locale,
@@ -28,12 +28,12 @@ export const openGraphMetaProps = data => {
     url,
   } = data;
 
-  if (!(title && description && contentType && url && facebookImages && canonicalRootURL)) {
+  if (!(title && description && openGraphType && url && facebookImages && canonicalRootURL)) {
     /* eslint-disable no-console */
     if (console && console.warn) {
       console.warn(
         `Can't create Open Graph meta tags:
-        title, description, contentType, url, facebookImages, and canonicalRootURL are needed.`
+        title, description, openGraphType, url, facebookImages, and canonicalRootURL are needed.`
       );
     }
     /* eslint-enable no-console */
@@ -43,7 +43,7 @@ export const openGraphMetaProps = data => {
   const openGraphMeta = [
     { property: 'og:description', content: description },
     { property: 'og:title', content: title },
-    { property: 'og:type', content: contentType },
+    { property: 'og:type', content: openGraphType },
     { property: 'og:url', content: url },
     { property: 'og:locale', content: ensureOpenGraphLocale(locale) },
   ];
