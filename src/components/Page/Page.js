@@ -78,7 +78,7 @@ class PageComponent extends Component {
       scrollingDisabled,
       referrer,
       author,
-      contentType,
+      openGraphType,
       description,
       facebookImages,
       published,
@@ -126,8 +126,8 @@ class PageComponent extends Component {
 
     const metaToHead = metaTagProps({
       author,
-      contentType,
       description: metaDescription,
+      openGraphType,
       facebookImages: facebookImgs,
       twitterImages: twitterImgs,
       published,
@@ -231,7 +231,7 @@ PageComponent.defaultProps = {
   rootClassName: null,
   children: null,
   author: null,
-  contentType: 'website',
+  openGraphType: 'website',
   description: null,
   facebookImages: null,
   twitterImages: null,
@@ -254,7 +254,7 @@ PageComponent.propTypes = {
 
   // SEO related props
   author: string,
-  contentType: string, // og:type
+  openGraphType: string, // og:type
   description: string, // page description
   facebookImages: arrayOf(
     shape({
