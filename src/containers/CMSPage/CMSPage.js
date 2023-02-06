@@ -15,7 +15,13 @@ export const CMSPageComponent = props => {
     return <NotFoundPage />;
   }
 
-  return <PageBuilder pageAssetsData={pageAssetsData?.[pageId]?.data} inProgress={inProgress} />;
+  return (
+    <PageBuilder
+      pageAssetsData={pageAssetsData?.[pageId]?.data}
+      inProgress={inProgress}
+      schemaType="Article"
+    />
+  );
 };
 
 CMSPageComponent.propTypes = {
