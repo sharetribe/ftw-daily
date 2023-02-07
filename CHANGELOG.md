@@ -14,6 +14,7 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2022-XX-XX
 
+## [v9.1.0] 2023-02-07
 - [change] Norway's stripe config should use NOK not EUR.
   [#1579](https://github.com/sharetribe/ftw-daily/pull/1579)
 - [delete] Update README.md after changes in [#1555].
@@ -37,6 +38,8 @@ way to update this template, but currently, we follow a pattern:
 
 - [add] Add the cross-env package to better support Windows command prompts
   [#1555](https://github.com/sharetribe/ftw-daily/pull/1555)
+
+  [v9.1.0]: https://github.com/sharetribe/ftw-daily/compare/v9.0.2...v9.1.0
 
 ## [v9.0.2] 2022-10-17
 
