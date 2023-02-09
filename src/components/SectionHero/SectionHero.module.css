@@ -162,7 +162,7 @@
   font-family: var(--fontFamilySofiapro);
   margin: 0 0 25px 0;
   font-size: 16px;
-  font-weight: var(--fontWeightBold);
+  font-weight: var(--fontWeightSemiBold);
   /* @apply --SectionHero_animation; */
   animation-delay: 0.65s;
   max-width: 400px;
