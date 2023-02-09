@@ -148,7 +148,7 @@
   font-family: var(--fontFamilySofiapro);
   /* @apply --SectionHero_animation; */
   animation-delay: 0.5s;
-  max-width: 300px;
+  max-width: 400px;
 
   @media (--viewportMedium) {
     color: #252525;
@@ -165,7 +165,7 @@
   font-weight: var(--fontWeightRegular);
   /* @apply --SectionHero_animation; */
   animation-delay: 0.65s;
-  max-width: 300px;
+  max-width: 400px;
 
   @media (--viewportMedium) {
     font-size: 24px;
