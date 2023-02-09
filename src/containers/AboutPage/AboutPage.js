@@ -38,15 +38,15 @@ const AboutPage = () => {
               </h2>
 
               <p>
-                More and more, we’re seeing that professionals from around the world are wanting to work on their own terms, in a place that best suits them. Meanwhile business owners are looking to make the most out of their underused space.  
+                More and more, we’re seeing that people from around the world are wanting to rent space on their own terms, in a place that best suits them. Meanwhile space owners and operators are looking to make the most out of their underused space.  
               </p>
               <p>
-                At HotPatch, we work hard to bridge the gap between those seeking a flexible space to work from and those with space available. Whether you’re a flexible worker, or a business looking to benefit from your underused space, this is where HotPatch comes in.
+                At HotPatch, we work hard to bridge the gap between those seeking flexible space on demand and those with space available.
               </p>
 
               <h2>Make Space Work for You</h2>
 
-              <p>In order to remove the disconnect between those with space and those who need it, HotPatch is offering a dependable platform that’s easy to use and completely transparent.</p>
+              <p>In order to remove the disconnect between those with space and those who need it, HotPatch offers a dependable platform that’s easy to use and transparent.</p>
 
               <p>There’s no multi-page enquiry shenanigans here. Get straight to browsing the incredible offering of Patches and booking them as quickly as possible. HotPatch is dedicated to making space work for you with as few obstacles as possible.</p>
 
