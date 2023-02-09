@@ -82,7 +82,7 @@ const FaqPage = () => {
               <br></br>
               <h2 id="is-there-a-cost-to-list-my-space-on-hotpatch-">Is there a cost to list my space on HotPatch?</h2>
               <p>Not a penny! Listing a space is completely free.</p>
-              <p>HotPatch only charges a small transaction fee of 5% on all bookings which we deduct from the payment made by the user.</p>
+              <p>HotPatch only charges a small transaction fee of 10% on all bookings which we deduct from the payment made by the user.</p>
               <br></br>
               <h2 id="how-much-should-i-charge-for-my-patch-">How much should I charge for my Patch?</h2>
               <p>When deciding on your rate, we suggest you look at similar spaces available on HotPatch and base yours accordingly. You can also update your pricing depending on the level of demand you are seeing for your Patch.</p>
