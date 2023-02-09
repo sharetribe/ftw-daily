@@ -37,10 +37,10 @@ const FaqPage = () => {
               </h2>
 
               <p>
-               Great Question! HotPatch is a peer-to-peer platform for people to list and rent space. We connect businesses and space owners with self-employed and freelance professionals who need access to space. You might say we are the Workspace Marketplace! 
+               Great Question! HotPatch is a platform for people to list and rent space. HotPatch connects space owners and operators with people seeking access to flexible space on demand.
               </p>
               <p>
-                HotPatch allows users and hosts to access and share any space: rental chairs in hair salons, fitness studios, offices and anything else in between!
+                HotPatch allows its Users and Hosts to access and share any space on demand, from rental chairs in hair salons to fitness studios, photography studios and anything else in between!
               </p>
 
               <br></br>
@@ -67,7 +67,7 @@ const FaqPage = () => {
               <p>Anybody with a space that fits our requirements can list on HotPatch. All you need to do is make a free account and you'll be able to start listing! It’s completely free to join and list, and you will only be charged when you receive payment for a confirmed booking.</p>
               <br></br>
               <h2 id="how-do-i-list-my-space-on-hotpatch-">How do I list my space on HotPatch?</h2>
-              <p>To start, just click the big 'List your Patch' button on the front page and on the top menu. After completing a basic signup, you’ll be asked to follow an easy step-by-step process providing the details of your space.</p>
+              <p>To start, just click the 'Become a Patch Host' button on the on the navbar. After completing a basic signup, you’ll be asked to follow an easy step-by-step process providing the details of your space.</p>
               <p>The more details you can provide, such as type, photos, and amenities, the easier it will be for people to find and book your Patch!</p>
               <br></br>
               <h2 id="what-category-does-my-patch-go-under-">What category does my Patch go under?</h2>
