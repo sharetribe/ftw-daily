@@ -88,6 +88,9 @@ const classes = classNames(rootClassName || css.root, className);
           >
             <FormattedMessage id="SectionHero.browseButton" />
           </NamedLink>
+          <NamedLink name="NewListingPage" className={css.heroButton}>
+            <FormattedMessage id="SectionHero.listButton" />
+          </NamedLink>
         </div>
       </div>
 
@@ -98,6 +101,9 @@ const classes = classNames(rootClassName || css.root, className);
           to={{ search: 'address=&bounds=59.49417013%2C4.15978193%2C49.54972301%2C-10.51994741' }}
         >
           <FormattedMessage id="SectionHero.browseButton" />
+        </NamedLink>
+        <NamedLink name="NewListingPage" className={css.heroButton}>
+          <FormattedMessage id="SectionHero.listButton" />
         </NamedLink>
       </div>
     </div>
