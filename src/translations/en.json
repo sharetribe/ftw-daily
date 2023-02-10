@@ -562,7 +562,7 @@
   "ListingPage.ownClosedListing": "Your listing has been closed and can't be booked.",
   "ListingPage.ownListing": "This is your own listing.",
   "ListingPage.ownListingDraft": "This listing is a draft.",
-  "ListingPage.ownListingPendingApproval": "Thank you! Our team is reviewing your listing now, our process typically takes 24 hours.",
+  "ListingPage.ownListingPendingApproval": "This listing is pending approval.",
   "ListingPage.price": "per hour",
   "ListingPage.pricePerDay": "per day",
   "ListingPage.pricePerWeek": "per week",
