@@ -54,7 +54,11 @@ const SectionArticle = props => {
             [css.noSidePaddings]: isInsideContainer,
           })}
         >
-          <BlockBuilder blocks={blocks} ctaButtonClass={css.ctaButton} options={options} />
+          <BlockBuilder
+            blocks={blocks}
+            ctaButtonClass={defaultClasses.ctaButton}
+            options={options}
+          />
         </div>
       ) : null}
     </SectionContainer>
