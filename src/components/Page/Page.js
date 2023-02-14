@@ -78,11 +78,12 @@ class PageComponent extends Component {
       scrollingDisabled,
       referrer,
       author,
-      contentType,
+      openGraphType,
       description,
       facebookImages,
       published,
       schema,
+      socialSharing,
       tags,
       title,
       twitterHandle,
@@ -95,7 +96,6 @@ class PageComponent extends Component {
     });
 
     this.scrollingDisabledChanged(scrollingDisabled);
-    const referrerMeta = referrer ? <meta name="referrer" content={referrer} /> : null;
 
     const canonicalRootURL = config.canonicalRootURL;
     const shouldReturnPathOnly = referrer && referrer !== 'unsafe-url';
@@ -105,9 +105,17 @@ class PageComponent extends Component {
     const siteTitle = config.siteTitle;
     const schemaTitle = intl.formatMessage({ id: 'Page.schemaTitle' }, { siteTitle });
     const schemaDescription = intl.formatMessage({ id: 'Page.schemaDescription' });
-    const metaTitle = title || schemaTitle;
-    const metaDescription = description || schemaDescription;
-    const facebookImgs = facebookImages || [
+    const pageTitle = title || schemaTitle;
+    const pageDescription = description || schemaDescription;
+    const {
+      title: socialSharingTitle,
+      description: socialSharingDescription,
+      images1200: socialSharingImages1200,
+      // Note: we use image with open graph's aspect ratio (1.91:1) also with Twitter
+      images600: socialSharingImages600,
+    } = socialSharing || {};
+
+    const openGraphFallbackImages = [
       {
         name: 'facebook',
         url: `${canonicalRootURL}${facebookImage}`,
@@ -115,7 +123,7 @@ class PageComponent extends Component {
         height: 630,
       },
     ];
-    const twitterImgs = twitterImages || [
+    const twitterFallbackImages = [
       {
         name: 'twitter',
         url: `${canonicalRootURL}${twitterImage}`,
@@ -123,24 +131,24 @@ class PageComponent extends Component {
         height: 314,
       },
     ];
+    const facebookImgs = socialSharingImages1200 || facebookImages || openGraphFallbackImages;
+    const twitterImgs = socialSharingImages600 || twitterImages || twitterFallbackImages;
 
     const metaToHead = metaTagProps({
       author,
-      contentType,
-      description: metaDescription,
+      openGraphType,
+      socialSharingTitle: socialSharingTitle || pageTitle,
+      socialSharingDescription: socialSharingDescription || pageDescription,
+      description: pageDescription,
       facebookImages: facebookImgs,
       twitterImages: twitterImgs,
       published,
       tags,
-      title: metaTitle,
       twitterHandle,
       updated,
       url: canonicalUrl,
       locale: intl.locale,
     });
-
-    // eslint-disable-next-line react/no-array-index-key
-    const metaTags = metaToHead.map((metaProps, i) => <meta key={i} {...metaProps} />);
 
     const facebookPage = config.siteFacebookPage;
     const twitterPage = twitterPageURL(config.siteTwitterHandle);
@@ -154,7 +162,8 @@ class PageComponent extends Component {
     // Schema attribute can be either single schema object or an array of objects
     // This makes it possible to include several different items from the same page.
     // E.g. Product, Place, Video
-    const schemaFromProps = Array.isArray(schema) ? schema : [schema];
+    const hasSchema = schema != null;
+    const schemaFromProps = hasSchema && Array.isArray(schema) ? schema : hasSchema ? [schema] : [];
     const schemaArrayJSONString = JSON.stringify([
       ...schemaFromProps,
       {
@@ -173,9 +182,6 @@ class PageComponent extends Component {
         url: canonicalRootURL,
         description: schemaDescription,
         name: schemaTitle,
-        publisher: {
-          '@id': `${canonicalRootURL}#organization`,
-        },
       },
     ]);
 
@@ -199,12 +205,14 @@ class PageComponent extends Component {
             lang: intl.locale,
           }}
         >
-          <title>{title}</title>
-          {referrerMeta}
+          <title>{pageTitle}</title>
+          {referrer ? <meta name="referrer" content={referrer} /> : null}
           <link rel="canonical" href={canonicalUrl} />
           <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
           <meta httpEquiv="Content-Language" content={intl.locale} />
-          {metaTags}
+          {metaToHead.map((metaProps, i) => (
+            <meta key={i} {...metaProps} />
+          ))}
           <script id="page-schema" type="application/ld+json">
             {schemaArrayJSONString.replace(/</g, '\\u003c')}
           </script>
@@ -231,13 +239,14 @@ PageComponent.defaultProps = {
   rootClassName: null,
   children: null,
   author: null,
-  contentType: 'website',
+  openGraphType: 'website',
   description: null,
   facebookImages: null,
   twitterImages: null,
   published: null,
   referrer: null,
   schema: null,
+  socialSharing: null,
   tags: null,
   twitterHandle: null,
   updated: null,
@@ -254,7 +263,7 @@ PageComponent.propTypes = {
 
   // SEO related props
   author: string,
-  contentType: string, // og:type
+  openGraphType: string, // og:type
   description: string, // page description
   facebookImages: arrayOf(
     shape({
@@ -272,8 +281,28 @@ PageComponent.propTypes = {
   ),
   published: string, // article:published_time
   schema: oneOfType([object, array]), // http://schema.org
+  socialSharing: shape({
+    title: string,
+    description: string,
+    images1200: arrayOf(
+      // Page asset file can define this
+      shape({
+        width: number.isRequired,
+        height: number.isRequired,
+        url: string.isRequired,
+      })
+    ),
+    images600: arrayOf(
+      // Page asset file can define this
+      shape({
+        width: number.isRequired,
+        height: number.isRequired,
+        url: string.isRequired,
+      })
+    ),
+  }),
   tags: string, // article:tag
-  title: string.isRequired, // page title
+  title: string, // page title
   twitterHandle: string, // twitter handle
   updated: string, // article:modified_time
 

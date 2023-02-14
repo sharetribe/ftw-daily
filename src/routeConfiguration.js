@@ -2,6 +2,7 @@ import React from 'react';
 import loadable from '@loadable/component';
 import getPageDataLoadingAPI from './containers/pageDataLoadingAPI';
 import { NotFoundPage } from './containers';
+import PreviewResolverPage from './containers/PreviewResolverPage/PreviewResolverPage';
 
 // routeConfiguration needs to initialize containers first
 // Otherwise, components will import form container eventually and
@@ -10,9 +11,9 @@ import { NamedRedirect } from './components';
 
 const pageDataLoadingAPI = getPageDataLoadingAPI();
 
-const AboutPage = loadable(() => import(/* webpackChunkName: "AboutPage" */ './containers/AboutPage/AboutPage'));
 const AuthenticationPage = loadable(() => import(/* webpackChunkName: "AuthenticationPage" */ './containers/AuthenticationPage/AuthenticationPage'));
 const CheckoutPage = loadable(() => import(/* webpackChunkName: "CheckoutPage" */ './containers/CheckoutPage/CheckoutPage'));
+const CMSPage = loadable(() => import(/* webpackChunkName: "CMSPage" */ './containers/CMSPage/CMSPage'));
 const ContactDetailsPage = loadable(() => import(/* webpackChunkName: "ContactDetailsPage" */ './containers/ContactDetailsPage/ContactDetailsPage'));
 const EditListingPage = loadable(() => import(/* webpackChunkName: "EditListingPage" */ './containers/EditListingPage/EditListingPage'));
 const EmailVerificationPage = loadable(() => import(/* webpackChunkName: "EmailVerificationPage" */ './containers/EmailVerificationPage/EmailVerificationPage'));
@@ -62,11 +63,13 @@ const routeConfiguration = () => {
       path: '/',
       name: 'LandingPage',
       component: LandingPage,
+      loadData: pageDataLoadingAPI.LandingPage.loadData,
     },
     {
-      path: '/about',
-      name: 'AboutPage',
-      component: AboutPage,
+      path: '/p/:pageId',
+      name: 'CMSPage',
+      component: CMSPage,
+      loadData: pageDataLoadingAPI.CMSPage.loadData,
     },
     {
       path: '/s',
@@ -167,6 +170,7 @@ const routeConfiguration = () => {
       name: 'SignupPage',
       component: AuthenticationPage,
       extraProps: { tab: 'signup' },
+      loadData: pageDataLoadingAPI.AuthenticationPage.loadData,
     },
     {
       path: '/confirm',
@@ -287,11 +291,13 @@ const routeConfiguration = () => {
       path: '/terms-of-service',
       name: 'TermsOfServicePage',
       component: TermsOfServicePage,
+      loadData: pageDataLoadingAPI.TermsOfServicePage.loadData,
     },
     {
       path: '/privacy-policy',
       name: 'PrivacyPolicyPage',
       component: PrivacyPolicyPage,
+      loadData: pageDataLoadingAPI.PrivacyPolicyPage.loadData,
     },
     {
       path: '/styleguide',
@@ -344,6 +350,14 @@ const routeConfiguration = () => {
       authPage: 'LoginPage',
       component: EmailVerificationPage,
       loadData: pageDataLoadingAPI.EmailVerificationPage.loadData,
+    },
+    // Do not change this path!
+    //
+    // The API expects that the application implements /preview endpoint
+    {
+      path: '/preview',
+      name: 'PreviewResolverPage',
+      component: PreviewResolverPage ,
     },
   ];
 };

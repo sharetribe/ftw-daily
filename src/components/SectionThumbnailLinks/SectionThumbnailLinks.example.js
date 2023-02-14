@@ -8,13 +8,13 @@ export const TwoNamedLinksWithHeadings = {
     linksPerRow: 2,
     links: [
       {
-        imageUrl: 'https://lorempixel.com/648/448/',
+        imageUrl: 'https://picsum.photos/648/448/',
         imageAltText,
         linkProps: { type: 'NamedLink', name: 'SearchPage', to: { search: '?1' } },
         text: 'Link 1',
       },
       {
-        imageUrl: 'https://lorempixel.com/648/448/',
+        imageUrl: 'https://picsum.photos/648/448/',
         imageAltText,
         linkProps: { type: 'NamedLink', name: 'SearchPage', to: { search: '?2' } },
         text: 'Link 2',
@@ -32,19 +32,19 @@ export const ThreeExternalLinksWithHeadings = {
     linksPerRow: 3,
     links: [
       {
-        imageUrl: 'https://lorempixel.com/648/448/',
+        imageUrl: 'https://picsum.photos/648/448/',
         imageAltText,
         linkProps: { type: 'ExternalLink', href: 'http://example.com/1' },
         text: 'Link 1',
       },
       {
-        imageUrl: 'https://lorempixel.com/648/448/',
+        imageUrl: 'https://picsum.photos/648/448/',
         imageAltText,
         linkProps: { type: 'ExternalLink', href: 'http://example.com/2' },
         text: 'Link 2',
       },
       {
-        imageUrl: 'https://lorempixel.com/648/448/',
+        imageUrl: 'https://picsum.photos/648/448/',
         imageAltText,
         linkProps: { type: 'ExternalLink', href: 'http://example.com/3' },
         text: 'Link 3',
@@ -62,25 +62,25 @@ export const FourLinks = {
     linksPerRow: 2,
     links: [
       {
-        imageUrl: 'https://lorempixel.com/648/448/',
+        imageUrl: 'https://picsum.photos/648/448/',
         imageAltText,
         linkProps: { type: 'NamedLink', name: 'SearchPage', to: { search: '?1' } },
         text: 'Link 1 with quite a long text that tests how the items below align',
       },
       {
-        imageUrl: 'https://lorempixel.com/648/448/',
+        imageUrl: 'https://picsum.photos/648/448/',
         imageAltText,
         linkProps: { type: 'NamedLink', name: 'SearchPage', to: { search: '?2' } },
         text: 'Link 2',
       },
       {
-        imageUrl: 'https://lorempixel.com/648/448/',
+        imageUrl: 'https://picsum.photos/648/448/',
         imageAltText,
         linkProps: { type: 'NamedLink', name: 'SearchPage', to: { search: '?3' } },
         text: 'Link 3',
       },
       {
-        imageUrl: 'https://lorempixel.com/648/448/',
+        imageUrl: 'https://picsum.photos/648/448/',
         imageAltText,
         linkProps: { type: 'NamedLink', name: 'SearchPage', to: { search: '?4' } },
         text: 'Link 4',
@@ -96,38 +96,38 @@ export const SixLinks = {
     linksPerRow: 3,
     links: [
       {
-        imageUrl: 'https://lorempixel.com/648/448/',
+        imageUrl: 'https://picsum.photos/648/448/',
         imageAltText,
         linkProps: { type: 'NamedLink', name: 'SearchPage', to: { search: '?1' } },
         text: 'Link 1',
       },
       {
-        imageUrl: 'https://lorempixel.com/648/448/',
+        imageUrl: 'https://picsum.photos/648/448/',
         imageAltText,
         linkProps: { type: 'NamedLink', name: 'SearchPage', to: { search: '?2' } },
         searchQuery: '?2',
         text: 'Link 2',
       },
       {
-        imageUrl: 'https://lorempixel.com/648/448/',
+        imageUrl: 'https://picsum.photos/648/448/',
         imageAltText,
         linkProps: { type: 'NamedLink', name: 'SearchPage', to: { search: '?3' } },
         text: 'Link 3',
       },
       {
-        imageUrl: 'https://lorempixel.com/648/448/',
+        imageUrl: 'https://picsum.photos/648/448/',
         imageAltText,
         linkProps: { type: 'NamedLink', name: 'SearchPage', to: { search: '?4' } },
         text: 'Link 4',
       },
       {
-        imageUrl: 'https://lorempixel.com/648/448/',
+        imageUrl: 'https://picsum.photos/648/448/',
         imageAltText,
         linkProps: { type: 'NamedLink', name: 'SearchPage', to: { search: '?5' } },
         text: 'Link 5',
       },
       {
-        imageUrl: 'https://lorempixel.com/648/448/',
+        imageUrl: 'https://picsum.photos/648/448/',
         imageAltText,
         linkProps: { type: 'NamedLink', name: 'SearchPage', to: { search: '?6' } },
         text: 'Link 6',

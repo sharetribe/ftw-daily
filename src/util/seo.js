@@ -15,25 +15,34 @@ const ensureOpenGraphLocale = locale => {
 export const openGraphMetaProps = data => {
   const {
     canonicalRootURL,
-    contentType,
-    description,
+    openGraphType,
     facebookAppId,
     facebookImages,
     locale,
     published,
     siteTitle,
     tags,
-    title,
+    socialSharingTitle,
+    socialSharingDescription,
     updated,
     url,
   } = data;
 
-  if (!(title && description && contentType && url && facebookImages && canonicalRootURL)) {
+  if (
+    !(
+      socialSharingTitle &&
+      socialSharingDescription &&
+      openGraphType &&
+      url &&
+      facebookImages &&
+      canonicalRootURL
+    )
+  ) {
     /* eslint-disable no-console */
     if (console && console.warn) {
       console.warn(
         `Can't create Open Graph meta tags:
-        title, description, contentType, url, facebookImages, and canonicalRootURL are needed.`
+        socialSharingTitle, socialSharingDescription, openGraphType, url, facebookImages, and canonicalRootURL are needed.`
       );
     }
     /* eslint-enable no-console */
@@ -41,9 +50,9 @@ export const openGraphMetaProps = data => {
   }
 
   const openGraphMeta = [
-    { property: 'og:description', content: description },
-    { property: 'og:title', content: title },
-    { property: 'og:type', content: contentType },
+    { property: 'og:description', content: socialSharingDescription },
+    { property: 'og:title', content: socialSharingTitle },
+    { property: 'og:type', content: openGraphType },
     { property: 'og:url', content: url },
     { property: 'og:locale', content: ensureOpenGraphLocale(locale) },
   ];
@@ -91,20 +100,20 @@ export const openGraphMetaProps = data => {
 export const twitterMetaProps = data => {
   const {
     canonicalRootURL,
-    description,
     siteTwitterHandle,
-    title,
+    socialSharingTitle,
+    socialSharingDescription,
     twitterHandle,
     twitterImages,
     url,
   } = data;
 
-  if (!(title && description && siteTwitterHandle && url)) {
+  if (!(socialSharingTitle && socialSharingDescription && siteTwitterHandle && url)) {
     /* eslint-disable no-console */
     if (console && console.warn) {
       console.warn(
         `Can't create twitter card meta tags:
-        title, description, siteTwitterHandle, and url are needed.`
+        socialSharingTitle, socialSharingDescription, siteTwitterHandle, and url are needed.`
       );
     }
     /* eslint-enable no-console */
@@ -113,8 +122,8 @@ export const twitterMetaProps = data => {
 
   const twitterMeta = [
     { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: title },
-    { name: 'twitter:description', content: description },
+    { name: 'twitter:title', content: socialSharingTitle },
+    { name: 'twitter:description', content: socialSharingDescription },
     { name: 'twitter:site', content: siteTwitterHandle },
     { name: 'twitter:url', content: url },
   ];

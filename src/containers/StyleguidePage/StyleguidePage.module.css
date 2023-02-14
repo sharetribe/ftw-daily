@@ -39,6 +39,7 @@
 
   @media (--viewportMedium) {
     padding: 48px 16px 0 16px;
+    width: calc(100vw - 300px);
   }
 }
 

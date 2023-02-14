@@ -34,6 +34,7 @@
   --bannedColorDark: var(--marketplaceColor);
 
   --matterColorDark: #000000;
+  --matterColorAlmostDark: #1d1d1f;
   --matterColor: #4a4a4a;
   --matterColorAnti: #b2b2b2;
   --matterColorNegative: #e7e7e7;
@@ -52,7 +53,9 @@
 
   --fontWeightHighlightEmail: var(--fontWeightBold);
 
-  /* ================ Spacing unites ================ */
+  /* ================ Spacing units ================ */
+
+  --contentMaxWidth: 1264px; /* calc(Global width (1200px) + (Horizontal padding (32px) * 2) */
 
   /* Multiples of mobile and desktop spacing units should be used with margins and paddings. */
   --spacingUnit: 6px;
@@ -141,11 +144,6 @@
   /* ================ TabNav ================ */
   --TabNav_linkWidth: 240px;
 
-  /* ================ LandingPage ================ */
-  --LandingPage_sectionMarginTop: 40px;
-  --LandingPage_sectionMarginTopMedium: 60px;
-  --LandingPage_sectionMarginTopLarge: 94px;
-
   /* ================ EditListingAvailabilityForm, ManageAvailabilityCalendar ================ */
   --ManageAvailabilityCalendar_gridColor: #e0e0e0;
   --ManageAvailabilityCalendar_availableColor: #ffffff;
@@ -159,6 +157,10 @@
   /* ================ ProfileSettingsForm ================ */
   --ProfileSettingsForm_avatarSize: 96px;
   --ProfileSettingsForm_avatarSizeDesktop: 240px;
+
+  /* ================ PageBuilder ================ */
+  /* --carouselWidth will be updated dynamically through JS */
+  --carouselWidth: 100vw;
 }
 
 /* ================ Global element styles ================ */
@@ -363,6 +365,11 @@ html {
   color: var(--matterColor);
   padding: 0;
   margin: 0;
+  scroll-padding-top: calc(var(--topbarHeight) + 1px);
+
+  @media (--viewportMedium) {
+    scroll-padding-top: calc(var(--topbarHeightDesktop) + 1px);
+  }
 }
 
 ul {

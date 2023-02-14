@@ -26,8 +26,10 @@ const callLoadData = props => {
   if (shouldLoadData) {
     dispatch(loadData(match.params, location.search))
       .then(() => {
-        // eslint-disable-next-line no-console
-        console.log(`loadData success for ${name} route`);
+        if (props.logLoadDataCalls) {
+          // This gives good input for debugging issues on live environments, but with test it's not needed.
+          console.log(`loadData success for ${name} route`);
+        }
       })
       .catch(e => {
         log.error(e, 'load-data-failed', { routeName: name });
@@ -35,7 +37,7 @@ const callLoadData = props => {
   }
 };
 
-const setPageScrollPosition = location => {
+const setPageScrollPosition = (location, delayed) => {
   if (!location.hash) {
     // No hash, scroll to top
     window.scroll({
@@ -58,12 +60,23 @@ const setPageScrollPosition = location => {
         block: 'start',
         behavior: 'smooth',
       });
+    } else {
+      // A naive attempt to make a delayed call to scrollIntoView
+      // Note: 300 milliseconds might not be enough, but adding too much delay
+      // might affect user initiated scrolling.
+      delayed = window.setTimeout(() => {
+        const reTry = document.querySelector(location.hash);
+        reTry.scrollIntoView({
+          block: 'start',
+          behavior: 'smooth',
+        });
+      }, 300);
     }
   }
 };
 
-const handleLocationChanged = (dispatch, location) => {
-  setPageScrollPosition(location);
+const handleLocationChanged = (dispatch, location, delayed) => {
+  setPageScrollPosition(location, delayed);
   const path = canonicalRoutePath(routeConfiguration(), location);
   dispatch(locationChanged(location, path));
 };
@@ -78,9 +91,10 @@ const handleLocationChanged = (dispatch, location) => {
  */
 class RouteComponentRenderer extends Component {
   componentDidMount() {
+    this.delayed = null;
     // Calling loadData on initial rendering (on client side).
     callLoadData(this.props);
-    handleLocationChanged(this.props.dispatch, this.props.location);
+    handleLocationChanged(this.props.dispatch, this.props.location, this.delayed);
   }
 
   componentDidUpdate(prevProps) {
@@ -91,7 +105,13 @@ class RouteComponentRenderer extends Component {
       // This makes it possible to use loadData as default client side data loading technique.
       // However it is better to fetch data before location change to avoid "Loading data" state.
       callLoadData(this.props);
-      handleLocationChanged(this.props.dispatch, this.props.location);
+      handleLocationChanged(this.props.dispatch, this.props.location, this.delayed);
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.delayed) {
+      window.clearTimeout(this.resetTimeoutId);
     }
   }
 

@@ -40,7 +40,7 @@ const defaultDirectives = {
     '*.stripe.com',
   ],
   fontSrc: [self, data, 'assets-sharetribecom.sharetribe.com', 'fonts.gstatic.com'],
-  frameSrc: [self, '*.stripe.com'],
+  frameSrc: [self, '*.stripe.com', '*.youtube-nocookie.com'],
   imgSrc: [
     self,
     data,
@@ -50,7 +50,8 @@ const defaultDirectives = {
     'sharetribe.imgix.net', // Safari 9.1 didn't recognize asterisk rule.
 
     // Styleguide placeholder images
-    'lorempixel.com',
+    'picsum.photos',
+    '*.picsum.photos',
     'via.placeholder.com',
 
     'api.mapbox.com',
@@ -64,6 +65,9 @@ const defaultDirectives = {
     'www.google.com',
     'www.google-analytics.com',
     'stats.g.doubleclick.net',
+
+    // Youtube (static image)
+    '*.ytimg.com',
 
     '*.stripe.com',
   ],

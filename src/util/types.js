@@ -90,6 +90,21 @@ propTypes.image = shape({
   }),
 });
 
+// ImageAsset type from Asset Delivery API
+propTypes.imageAsset = shape({
+  id: string.isRequired,
+  type: propTypes.value('imageAsset').isRequired,
+  attributes: shape({
+    variants: objectOf(
+      shape({
+        width: number.isRequired,
+        height: number.isRequired,
+        url: string.isRequired,
+      })
+    ),
+  }),
+});
+
 // Denormalised user object
 propTypes.currentUser = shape({
   id: propTypes.uuid.isRequired,
@@ -473,13 +488,19 @@ const ERROR_CODES = [
 ];
 
 // API error
-// TODO this is likely to change soonish
 propTypes.apiError = shape({
   id: propTypes.uuid.isRequired,
   status: number.isRequired,
   code: oneOf(ERROR_CODES).isRequired,
   title: string.isRequired,
   meta: object,
+});
+
+propTypes.assetDeliveryApiError = shape({
+  code: oneOf(ERROR_CODES).isRequired,
+  id: string.isRequired,
+  status: number.isRequired,
+  title: string.isRequired,
 });
 
 // Storable error prop type. (Error object should not be stored as it is.)
@@ -489,7 +510,7 @@ propTypes.error = shape({
   message: string,
   status: number,
   statusText: string,
-  apiErrors: arrayOf(propTypes.apiError),
+  apiErrors: arrayOf(oneOfType([propTypes.apiError, propTypes.assetDeliveryApiError])),
 });
 
 // Options for showing just date or date and time on BookingTimeInfo and BookingBreakdown

@@ -8,6 +8,7 @@ import classNames from 'classnames';
 import { isEmpty } from 'lodash';
 
 import routeConfiguration from '../../routeConfiguration';
+import { camelize } from '../../util/string';
 import { pathByRouteName } from '../../util/routes';
 import { apiBaseUrl } from '../../util/api';
 import { FormattedMessage, injectIntl, intlShape } from '../../util/reactIntl';
@@ -18,6 +19,12 @@ import {
   isSignupEmailTakenError,
   isTooManyEmailVerificationRequestsError,
 } from '../../util/errors';
+
+import { login, authenticationInProgress, signup, signupWithIdp } from '../../ducks/Auth.duck';
+import { isScrollingDisabled } from '../../ducks/UI.duck';
+import { sendVerificationEmail } from '../../ducks/user.duck';
+import { manageDisableScrolling } from '../../ducks/UI.duck';
+
 import {
   Page,
   NamedLink,
@@ -33,14 +40,15 @@ import {
   LayoutWrapperFooter,
   Footer,
   Modal,
-  TermsOfService,
 } from '../../components';
 import { ConfirmSignupForm, LoginForm, SignupForm } from '../../forms';
+
 import { TopbarContainer } from '../../containers';
-import { login, authenticationInProgress, signup, signupWithIdp } from '../../ducks/Auth.duck';
-import { isScrollingDisabled } from '../../ducks/UI.duck';
-import { sendVerificationEmail } from '../../ducks/user.duck';
-import { manageDisableScrolling } from '../../ducks/UI.duck';
+
+import {
+  TOS_ASSET_NAME,
+  TermsOfServiceContent,
+} from '../../containers/TermsOfServicePage/TermsOfServicePage';
 
 import css from './AuthenticationPage.module.css';
 import { FacebookLogo, GoogleLogo } from './socialLoginLogos';
@@ -84,6 +92,9 @@ export class AuthenticationPageComponent extends Component {
       sendVerificationEmailError,
       onResendVerificationEmail,
       onManageDisableScrolling,
+      tosAssetsData,
+      tosFetchInProgress,
+      tosFetchError,
     } = this.props;
 
     const isConfirm = tab === 'confirm';
@@ -416,10 +427,11 @@ export class AuthenticationPageComponent extends Component {
               onManageDisableScrolling={onManageDisableScrolling}
             >
               <div className={css.termsWrapper}>
-                <h2 className={css.termsHeading}>
-                  <FormattedMessage id="AuthenticationPage.termsHeading" />
-                </h2>
-                <TermsOfService />
+                <TermsOfServiceContent
+                  inProgress={tosFetchInProgress}
+                  error={tosFetchError}
+                  data={tosAssetsData?.[camelize(TOS_ASSET_NAME)]?.data}
+                />
               </div>
             </Modal>
           </LayoutWrapperMain>
@@ -440,6 +452,9 @@ AuthenticationPageComponent.defaultProps = {
   tab: 'signup',
   sendVerificationEmailError: null,
   showSocialLoginsForTests: false,
+  tosAssetsData: null,
+  tosFetchInProgress: false,
+  tosFetchError: null,
 };
 
 const { bool, func, object, oneOf, shape } = PropTypes;
@@ -462,6 +477,12 @@ AuthenticationPageComponent.propTypes = {
   onResendVerificationEmail: func.isRequired,
   onManageDisableScrolling: func.isRequired,
 
+  // to fetch terms-of-service page asset
+  // which is shown in modal
+  tosAssetsData: object,
+  tosFetchInProgress: bool,
+  tosFetchError: propTypes.error,
+
   // from withRouter
   location: shape({ state: object }).isRequired,
 
@@ -472,6 +493,9 @@ AuthenticationPageComponent.propTypes = {
 const mapStateToProps = state => {
   const { isAuthenticated, loginError, signupError, confirmError } = state.Auth;
   const { currentUser, sendVerificationEmailInProgress, sendVerificationEmailError } = state.user;
+  const { pageAssetsData: tosAssetsData, inProgress: tosFetchInProgress, error: tosFetchError } =
+    state.hostedAssets || {};
+
   return {
     authInProgress: authenticationInProgress(state),
     currentUser,
@@ -482,6 +506,9 @@ const mapStateToProps = state => {
     confirmError,
     sendVerificationEmailInProgress,
     sendVerificationEmailError,
+    tosAssetsData,
+    tosFetchInProgress,
+    tosFetchError,
   };
 };
 

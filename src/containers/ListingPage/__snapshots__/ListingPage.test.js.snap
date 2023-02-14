@@ -3,7 +3,6 @@
 exports[`ListingPage matches snapshot 1`] = `
 <Page
   author="user-1 display name"
-  contentType="website"
   description="listing1 description"
   facebookImages={Array []}
   schema={
