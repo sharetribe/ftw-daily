@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2022-XX-XX
 
+## [v10.0.0] 2023-02-14
+
 - [add] This adds support for page asset files that can be created in Console. These asset files are
   taken into use for
 
@@ -25,6 +27,8 @@ way to update this template, but currently, we follow a pattern:
     /p/:asset-name/)
 
   [#1520](https://github.com/sharetribe/ftw-daily/pull/1520)
+
+  [v10.0.0]: https://github.com/sharetribe/ftw-daily/compare/v9.1.0.../v10.0.0
 
 ## [v9.1.0] 2023-02-07
 
