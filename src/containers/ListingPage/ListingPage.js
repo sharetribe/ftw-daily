@@ -318,7 +318,7 @@ export class ListingPageComponent extends Component {
       const errorTitle = intl.formatMessage({
         id: 'ListingPage.errorLoadingListingTitle',
       });
-
+//temp
       return (
         <Page title={errorTitle} scrollingDisabled={scrollingDisabled}>
           <LayoutSingleColumn className={css.pageRoot}>
@@ -496,6 +496,8 @@ export class ListingPageComponent extends Component {
                     priceTitle={priceTitle}
                     formattedPrice={formattedPrice}
                     richTitle={richTitle}
+                    title={title}
+                    id={listingId.uuid}
                     unitType={unitType}
                     category={category}
                     hostLink={hostLink}

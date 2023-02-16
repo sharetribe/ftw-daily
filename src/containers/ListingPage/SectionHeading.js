@@ -9,6 +9,8 @@ const SectionHeading = props => {
   const {
     priceTitle,
     formattedPrice,
+    title,
+    id,
     richTitle,
     category,
     hostLink,
@@ -30,6 +32,21 @@ const SectionHeading = props => {
   //   ? 'ListingPage.perDay'
   //   : 'ListingPage.perUnit';
 
+  //const patch = JSON.stringify(richTitle);
+  
+  //var data = {subject: JSON.stringify(richTitle)};
+
+  //var params = jQuery.param(data);
+
+  //var patch = 'https://share.hsforms.com/1Zq6xDjz7RCG8gjdC1vBbgA57edm?' + params;
+
+  //console.log('params', JSON.stringify(params));
+
+  var data = title
+  var patchId = id
+
+  var url = "https://share.hsforms.com/1Zq6xDjz7RCG8gjdC1vBbgA57edm?patch_name=" + encodeURIComponent(JSON.stringify(data)) + "&patch_url=https://www.hotpatch.com/l/" + encodeURIComponent(patchId);
+
   return (
     <div className={css.sectionHeading}>
       <div className={css.desktopPriceContainer}>
@@ -49,13 +66,13 @@ const SectionHeading = props => {
           {showContactUser ? (
             <span className={css.contactWrapper}>
               <span className={css.separator}>•</span>
-              <InlineTextButton
-                rootClassName={css.contactLink}
-                onClick={onContactUser}
-                enforcePagePreloadFor="SignupPage"
+              <a
+                ClassName={css.contactLink} target = "_blank"
+                href={url}
+               // enforcePagePreloadFor="SignupPage"
               >
                 <FormattedMessage id="ListingPage.contactUser" />
-              </InlineTextButton>
+              </a>
             </span>
           ) : null}
         </div>
