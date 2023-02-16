@@ -63,7 +63,7 @@ ExpandableBio.propTypes = {
 };
 
 const UserCard = props => {
-  const { rootClassName, className, user, currentUser, onContactUser } = props;
+  const { rootClassName, className, user, currentUser, onContactUser, url } = props;
 
   const userIsCurrentUser = user && user.type === 'currentUser';
   const ensuredUser = userIsCurrentUser ? ensureCurrentUser(user) : ensureUser(user);
@@ -86,13 +86,14 @@ const UserCard = props => {
   const separator = isCurrentUser ? null : <span className={css.linkSeparator}>•</span>;
 
   const contact = (
-    <InlineTextButton
+    <a
       rootClassName={css.contact}
-      onClick={handleContactUserClick}
+      target = "_blank"
+      href={url}
       enforcePagePreloadFor="SignupPage"
     >
       <FormattedMessage id="UserCard.contactUser" />
-    </InlineTextButton>
+    </a>
   );
 
   const editProfileMobile = (

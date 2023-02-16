@@ -545,6 +545,7 @@ export class ListingPageComponent extends Component {
                   <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
                   <SectionHostMaybe
                     title={title}
+                    id={listingId.uuid}
                     listing={currentListing}
                     authorDisplayName={authorDisplayName}
                     onContactUser={this.onContactUser}
