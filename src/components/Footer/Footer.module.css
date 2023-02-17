@@ -269,7 +269,7 @@
 
 .legalMatters {
   /* Get extra space from parent element (which is using flexbox) */
-  flex-grow: 1;
+  flex-grow: 0.5;
 
   /* Layout */
   display: flex;

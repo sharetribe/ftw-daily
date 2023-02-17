@@ -43,7 +43,7 @@ const SectionHero = props => {
       else setImageArr(expertArr);
     });
 
-  const classes = classNames(rootClassName || css.root, className);
+const classes = classNames(rootClassName || css.root, className);
   const makeSpaceWork = (
     <span className={css.bold}>
       <FormattedMessage id="SectionHero.subTitleBold" />
@@ -71,6 +71,7 @@ const SectionHero = props => {
             </div>
           ))}
       </Slider>
+
       <div className={css.heroTitleBlock}>
         <h1 className={css.heroMainTitle}>
           <FormattedMessage id="SectionHero.title" />

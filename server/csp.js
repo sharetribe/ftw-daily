@@ -35,6 +35,9 @@ const defaultDirectives = {
     'api.mapbox.com',
     'events.mapbox.com',
     'staging.hotpatch.com',
+    'https://*.hotjar.com', 
+    'https://*.hotjar.io', 
+    'wss://*.hotjar.com',
 
     // Google Analytics
     'www.google-analytics.com',
@@ -84,6 +87,7 @@ const defaultDirectives = {
     'www.voucherify.io',
     'www.google.com.ua',
     'staging.hotpatch.com',
+    'https://*.hotjar.com',
   ],
   frameSrc: [
     self,
@@ -109,6 +113,7 @@ const defaultDirectives = {
     'tidiochat.com',
     'www.voucherify.io',
     'www.google.com.ua',
+    'https://*.hotjar.com',
   ],
   imgSrc: [
     self,
@@ -126,6 +131,7 @@ const defaultDirectives = {
     'apis.google.com',
     '*.google-analytics.com',
     '*.imgix.net',
+    'https://*.hotjar.com',
     'sharetribe.imgix.net', // Safari 9.1 didn't recognize asterisk rule.
 
     // Styleguide placeholder images
@@ -192,6 +198,7 @@ const defaultDirectives = {
     '*.platform-api.sharethis.com',
     'https://l.sharethis.com/',
     '*.l.sharethis.com/',
+    'https://*.hotjar.com',
     'https://platform-cdn.sharethis.com'
   ],
   styleSrc: [
@@ -222,6 +229,7 @@ const defaultDirectives = {
     'www.voucherify.io',
     'www.google.com.ua',
     'staging.hotpatch.com',
+    'https://*.hotjar.com',
     'https://platform-cdn.sharethis.com'
     
   ],

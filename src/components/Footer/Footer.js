@@ -124,8 +124,6 @@ const Footer = props => {
                 <p className={css.organizationCopyright}>
                   <NamedLink name="LandingPage" className={css.copyrightLink}>
                     <FormattedMessage id="Footer.copyright" />
-                    <br></br>
-                    <FormattedMessage id="Footer.copyright2" />
                   </NamedLink>
                   <br></br>
                 </p>
@@ -238,6 +236,28 @@ const Footer = props => {
                    className={css.link}
                  >
                    <FormattedMessage id="Footer.searchDubai" />
+                 </NamedLink>
+               </li>
+               <li className={css.listItem}>
+                 <NamedLink
+                   name="SearchPage"
+                   to={{
+                     search: base_url.replace('CITY', 'New York') + `&bounds=${40.91757705070789}%2C${-73.70027206817629}%2C${40.47739906045452}%2C${-74.25908991427882}`,
+                   }}
+                   className={css.link}
+                 >
+                   <FormattedMessage id="Footer.searchNewYork" />
+                 </NamedLink>
+               </li>
+               <li className={css.listItem}>
+                 <NamedLink
+                   name="SearchPage"
+                   to={{
+                     search: base_url.replace('CITY', 'Los Angeles') + `&bounds=${34.33730608759191}%2C${-118.155289077463}%2C${33.70365193147634}%2C${-118.6681759484859}`,
+                   }}
+                   className={css.link}
+                 >
+                   <FormattedMessage id="Footer.searchLosAngeles" />
                  </NamedLink>
                </li>
              </ul>
