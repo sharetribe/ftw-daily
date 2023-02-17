@@ -16,10 +16,11 @@ P.displayName = 'P';
 P.defaultProps = {
   rootClassName: null,
   className: null,
+  children: null,
 };
 
 P.propTypes = {
   rootClassName: string,
   className: string,
-  children: node.isRequired,
+  children: node,
 };
