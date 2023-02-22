@@ -14,6 +14,9 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2022-XX-XX
 
+- [fix] AuthenticationPage.duck.js: had wrong asset name.
+  [#1588](https://github.com/sharetribe/ftw-daily/pull/1588)
+
 ## [v10.0.0] 2023-02-14
 
 - [add] This adds support for page asset files that can be created in Console. These asset files are
