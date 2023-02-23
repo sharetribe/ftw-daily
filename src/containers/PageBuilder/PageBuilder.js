@@ -73,9 +73,17 @@ const getMetadata = (meta, schemaType, fieldOptions) => {
  * @returns page component
  */
 const PageBuilder = props => {
-  const { pageAssetsData, inProgress, fallbackPage, schemaType, options, ...pageProps } = props;
+  const {
+    pageAssetsData,
+    inProgress,
+    error,
+    fallbackPage,
+    schemaType,
+    options,
+    ...pageProps
+  } = props;
 
-  if (!pageAssetsData && fallbackPage && !inProgress) {
+  if (!pageAssetsData && fallbackPage && !inProgress && error) {
     return fallbackPage;
   }
 
