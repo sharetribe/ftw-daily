@@ -14,6 +14,8 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2022-XX-XX
 
+- [change] remove background-color from images (to allow opacity).
+  [#1590](https://github.com/sharetribe/ftw-daily/pull/1590)
 - [change] improve error handling possibilities on PageBuilder.
   [#1589](https://github.com/sharetribe/ftw-daily/pull/1589)
 - [fix] AuthenticationPage.duck.js: had wrong asset name.

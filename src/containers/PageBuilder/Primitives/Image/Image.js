@@ -40,7 +40,7 @@ export const FieldImage = React.forwardRef((props, ref) => {
   const firstImageVariant = variants[variantNames[0]];
   const { width: aspectWidth, height: aspectHeight } = firstImageVariant || {};
 
-  const classes = classNames(rootClassName || css.markdownImage, className);
+  const classes = classNames(rootClassName || css.fieldImage, className);
   return (
     <AspectRatioWrapper className={classes} width={aspectWidth || 1} height={aspectHeight || 1}>
       <ResponsiveImage
