@@ -12,7 +12,9 @@ way to update this template, but currently, we follow a pattern:
 
 ---
 
-## Upcoming version 2022-XX-XX
+## Upcoming version 2023-XX-XX
+
+## [v10.1.0] 2023-02-28
 
 - [change] remove background-color from images (to allow opacity).
   [#1590](https://github.com/sharetribe/ftw-daily/pull/1590)
@@ -20,6 +22,10 @@ way to update this template, but currently, we follow a pattern:
   [#1589](https://github.com/sharetribe/ftw-daily/pull/1589)
 - [fix] AuthenticationPage.duck.js: had wrong asset name.
   [#1588](https://github.com/sharetribe/ftw-daily/pull/1588)
+- [change] P.js: remove requirement for mandatory children.
+  [#1587](https://github.com/sharetribe/ftw-daily/pull/1587)
+
+  [v10.1.0]: https://github.com/sharetribe/ftw-daily/compare/v10.0.0.../v10.1.0
 
 ## [v10.0.0] 2023-02-14
 
