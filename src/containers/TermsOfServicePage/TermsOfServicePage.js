@@ -2,11 +2,9 @@ import React from 'react';
 import { bool, object } from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
-import config from '../../config';
-import { injectIntl, intlShape } from '../../util/reactIntl';
 import { camelize } from '../../util/string';
+import { propTypes } from '../../util/types';
 
 import { H1 } from '../PageBuilder/Primitives/Heading';
 import PageBuilder, { SectionBuilder } from '../../containers/PageBuilder/PageBuilder';
@@ -48,27 +46,27 @@ const TermsOfServiceContent = props => {
 
 // Presentational component for TermsOfServicePage
 const TermsOfServicePageComponent = props => {
-  const { pageAssetsData, inProgress } = props;
+  const { pageAssetsData, inProgress, error } = props;
 
   return (
     <PageBuilder
       pageAssetsData={pageAssetsData?.[camelize(ASSET_NAME)]?.data}
       inProgress={inProgress}
+      error={error}
       fallbackPage={<FallbackPage />}
     />
   );
 };
 
 TermsOfServicePageComponent.propTypes = {
-  // from injectIntl
-  intl: intlShape.isRequired,
   pageAssetsData: object,
   inProgress: bool,
+  error: propTypes.error,
 };
 
 const mapStateToProps = state => {
-  const { pageAssetsData, inProgress } = state.hostedAssets || {};
-  return { pageAssetsData, inProgress };
+  const { pageAssetsData, inProgress, error } = state.hostedAssets || {};
+  return { pageAssetsData, inProgress, error };
 };
 
 // Note: it is important that the withRouter HOC is **outside** the
@@ -77,11 +75,7 @@ const mapStateToProps = state => {
 // lifecycle hook.
 //
 // See: https://github.com/ReactTraining/react-router/issues/4671
-const TermsOfServicePage = compose(
-  withRouter,
-  connect(mapStateToProps),
-  injectIntl
-)(TermsOfServicePageComponent);
+const TermsOfServicePage = compose(connect(mapStateToProps))(TermsOfServicePageComponent);
 
 const TOS_ASSET_NAME = ASSET_NAME;
 export { TOS_ASSET_NAME, TermsOfServicePageComponent, TermsOfServiceContent };

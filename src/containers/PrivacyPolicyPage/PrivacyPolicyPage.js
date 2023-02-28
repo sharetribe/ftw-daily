@@ -2,10 +2,9 @@ import React from 'react';
 import { bool, object } from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
-import { injectIntl, intlShape } from '../../util/reactIntl';
 import { camelize } from '../../util/string';
+import { propTypes } from '../../util/types';
 
 import { H1 } from '../PageBuilder/Primitives/Heading';
 import PageBuilder, { SectionBuilder } from '../../containers/PageBuilder/PageBuilder';
@@ -47,27 +46,27 @@ const PrivacyPolicyContent = props => {
 
 // Presentational component for PrivacyPolicyPage
 const PrivacyPolicyPageComponent = props => {
-  const { pageAssetsData, inProgress } = props;
+  const { pageAssetsData, inProgress, error } = props;
 
   return (
     <PageBuilder
       pageAssetsData={pageAssetsData?.[camelize(ASSET_NAME)]?.data}
       inProgress={inProgress}
+      error={error}
       fallbackPage={<FallbackPage />}
     />
   );
 };
 
 PrivacyPolicyPageComponent.propTypes = {
-  // from injectIntl
-  intl: intlShape.isRequired,
   pageAssetsData: object,
   inProgress: bool,
+  error: propTypes.error,
 };
 
 const mapStateToProps = state => {
-  const { pageAssetsData, inProgress } = state.hostedAssets || {};
-  return { pageAssetsData, inProgress };
+  const { pageAssetsData, inProgress, error } = state.hostedAssets || {};
+  return { pageAssetsData, inProgress, error };
 };
 
 // Note: it is important that the withRouter HOC is **outside** the
@@ -76,11 +75,7 @@ const mapStateToProps = state => {
 // lifecycle hook.
 //
 // See: https://github.com/ReactTraining/react-router/issues/4671
-const PrivacyPolicyPage = compose(
-  withRouter,
-  connect(mapStateToProps),
-  injectIntl
-)(PrivacyPolicyPageComponent);
+const PrivacyPolicyPage = compose(connect(mapStateToProps))(PrivacyPolicyPageComponent);
 
 const PRIVACY_POLICY_ASSET_NAME = ASSET_NAME;
 export { PRIVACY_POLICY_ASSET_NAME, PrivacyPolicyPageComponent, PrivacyPolicyContent };
