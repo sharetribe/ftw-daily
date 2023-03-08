@@ -38,7 +38,7 @@ const FeesPage = () => {
               <p>Please remember to include all local taxes, fees, and account for any other expenses in your
               pricing offered, since HotPatch does not and is not liable to pay for these. </p>
               <h2 id="patch-hosts">Patch Users</h2>
-              <p>HotPatch retains 10% of each booking as a Patch service fee. This amount is added to the total
+              <p>HotPatch retains 5% of each booking as a Patch service fee. This amount is added to the total
               amount shown on the booking total before a request is sent. This will be charged to the account
               you entered for payment.</p>
               <p>Booking requests will automatically expire 24 hours after sent if not accepted or responded to by
