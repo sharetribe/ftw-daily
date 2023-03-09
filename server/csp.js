@@ -91,7 +91,6 @@ const defaultDirectives = {
   ],
   frameSrc: [
     self,
-    '*.youtube-nocookie.com',
     '*.amazonaws.com',
     'twemoji.maxcdn.com',
     'perf.hsforms.com',
@@ -150,9 +149,6 @@ const defaultDirectives = {
     'www.google-analytics.com',
     'stats.g.doubleclick.net',
     '*.stripe.com',
-
-    // Youtube (static image)
-    '*.ytimg.com',
 
     '*.googletagmanager.com',
     'googletagmanager.com',

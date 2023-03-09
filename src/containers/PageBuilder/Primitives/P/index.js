@@ -1,1 +1,0 @@
-export { P } from './P';

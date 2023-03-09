@@ -1,1 +1,0 @@
-export { Ingress } from './Ingress';
