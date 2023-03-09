@@ -1,0 +1,16 @@
+.markdownImage {
+  /**
+   * Note: markdown images might be too small for filling the space.
+   */
+  width: auto;
+  max-width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.fieldImage {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}

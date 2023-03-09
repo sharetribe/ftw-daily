@@ -2,6 +2,7 @@ import React from 'react';
 import loadable from '@loadable/component';
 import getPageDataLoadingAPI from './containers/pageDataLoadingAPI';
 import { NotFoundPage } from './containers';
+import PreviewResolverPage from './containers/PreviewResolverPage/PreviewResolverPage';
 
 // routeConfiguration needs to initialize containers first
 // Otherwise, components will import form container eventually and
@@ -317,6 +318,7 @@ const routeConfiguration = () => {
       path: '/privacy-policy',
       name: 'PrivacyPolicyPage',
       component: PrivacyPolicyPage,
+      loadData: pageDataLoadingAPI.PrivacyPolicyPage.loadData,
     },
     {
       path: '/styleguide',
@@ -369,6 +371,14 @@ const routeConfiguration = () => {
       authPage: 'LoginPage',
       component: EmailVerificationPage,
       loadData: pageDataLoadingAPI.EmailVerificationPage.loadData,
+    },
+    // Do not change this path!
+    //
+    // The API expects that the application implements /preview endpoint
+    {
+      path: '/preview',
+      name: 'PreviewResolverPage',
+      component: PreviewResolverPage ,
     },
   ];
 };

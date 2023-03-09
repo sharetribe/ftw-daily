@@ -1,15 +1,6 @@
 import isArray from 'lodash/isArray';
 import reduce from 'lodash/reduce';
 import { sanitizeEntity } from './sanitize';
-import { getDefaultTimeZoneOnBrowser } from './dates';
-import {
-  AVAILABILITY_PLAN_TIME,
-  DAYS_OF_WEEK,
-  HOURLY_PRICE,
-  DAILY_PRICE,
-  WEEKLY_PRICE,
-  MONTHLY_PRICE,
-} from './types';
 
 /**
  * Combine the given relationships objects
@@ -147,6 +138,71 @@ export const denormalisedResponseEntities = sdkResponse => {
 
   const entities = updatedEntities({}, apiResponse);
   return denormalisedEntities(entities, resources);
+};
+
+/**
+ * Denormalize JSON object.
+ * NOTE: Currently, this only handles denormalization of image references
+ *
+ * @param {JSON} data from Asset API (e.g. page asset)
+ * @param {JSON} included array of asset references (currently only images supported)
+ * @returns deep copy of data with images denormalized into it.
+ */
+const denormalizeJsonData = (data, included) => {
+  let copy;
+
+  // Handle strings, numbers, booleans, null
+  if (data === null || typeof data !== 'object') {
+    return data;
+  }
+
+  // At this point the data has typeof 'object' (aka Array or Object)
+  // Array is the more specific case (of Object)
+  if (data instanceof Array) {
+    copy = data.map(datum => denormalizeJsonData(datum, included));
+    return copy;
+  }
+
+  // Generic Objects
+  if (data instanceof Object) {
+    copy = {};
+    Object.entries(data).forEach(([key, value]) => {
+      // Handle denormalization of image reference
+      const hasImageRefAsValue =
+        typeof value == 'object' &&
+        value._ref &&
+        value._ref?.type === 'imageAsset' &&
+        value._ref?.id;
+      // If there is no image included,
+      // the _ref might contain parameters for image resolver (Asset Delivery API resolves image URLs on the fly)
+      const hasUnresolvedImageRef =
+        typeof value == 'object' && value._ref && value._ref?.resolver === 'image';
+
+      if (hasImageRefAsValue) {
+        const foundRef = included.find(inc => inc.id === value._ref?.id);
+        copy[key] = foundRef;
+      } else if (hasUnresolvedImageRef) {
+        // Don't add faulty image ref
+        // Note: At the time of writing, assets can expose resolver configs,
+        //       which we don't want to deal with.
+      } else {
+        copy[key] = denormalizeJsonData(value, included);
+      }
+    });
+    return copy;
+  }
+
+  throw new Error("Unable to traverse data! It's not JSON.");
+};
+
+/**
+ * Denormalize asset json from Asset API.
+ * @param {JSON} assetJson in format: { data, included }
+ * @returns deep copy of asset data with images denormalized into it.
+ */
+export const denormalizeAssetData = assetJson => {
+  const { data, included } = assetJson || {};
+  return denormalizeJsonData(data, included);
 };
 
 /**
@@ -395,81 +451,3 @@ export const humanizeLineItemCode = code => {
 
   return lowercase.charAt(0).toUpperCase() + lowercase.slice(1);
 };
-
-export const AVAILABILITY_DEFAULT_START = '00:00';
-export const AVAILABILITY_DEFAULT_END = '24:00';
-const defaultTimeZone = () =>
-  typeof window !== 'undefined' ? getDefaultTimeZoneOnBrowser() : 'Etc/UTC';
-
-export const createDefaultPlan = (seats = 1, output = false) => {
-  return {
-    type: AVAILABILITY_PLAN_TIME,
-    timezone: defaultTimeZone(),
-    entries: DAYS_OF_WEEK.map(dayOfWeek => ({
-      dayOfWeek,
-      startTime: AVAILABILITY_DEFAULT_START,
-      endTime: output ? AVAILABILITY_DEFAULT_START : AVAILABILITY_DEFAULT_END,
-      seats
-    }))
-  }
-}
-
-export const getAvailablePrices = listing => {
-  const additionalPrices = [
-    DAILY_PRICE,
-    WEEKLY_PRICE,
-    MONTHLY_PRICE,
-  ];
-
-  const {publicData = {}, price} = listing && listing.attributes || {};
-
-  return [
-    ...(price ? [{key: HOURLY_PRICE, value: price}] : []),
-    ...additionalPrices
-      .filter(key => publicData[key])
-      .map(key => ({key, value: publicData[key]}))
-  ];
-}
-
-export const getTypeDuration = bookingType => {
-  switch(bookingType){
-    case WEEKLY_PRICE:
-      return 7;
-    case MONTHLY_PRICE:
-      return 30;
-    default:
-      return null;
-  }
-}
-
-export const getLowestPrice = (listing, predifinedPrice) => {
-  const result = getAvailablePrices(listing).find(({value, key}) => !!predifinedPrice ? key === predifinedPrice : !!value);
-  return result || {value: {}}
-}
-
-export const currentSearchFilter = search => {
-  return [
-    'pub_pricePerDayFilter',
-    'pub_pricePerWeekFilter',
-    'pub_pricePerMonthFilter',
-  ].find(key => !!search[key]) || null;
-}
-
-export const currentSearchPrice = search => {
-  const equalFilterPrice = {
-    pub_pricePerDayFilter: 'pricePerDay',
-    pub_pricePerWeekFilter: 'pricePerWeek',
-    pub_pricePerMonthFilter: 'pricePerMonth'
-  }
-  const currentFilter = currentSearchFilter(search);
-
-  return currentFilter && equalFilterPrice[currentFilter];
-}
-
-export const getSelectedCategories = (selectedCategories, categories) => {
-  if (Array.isArray(selectedCategories)){
-    return selectedCategories;
-  }
-
-  return [categories.find(({value, key}) => key === selectedCategories || value === selectedCategories )];
-}
