@@ -33,7 +33,7 @@ const initialState = {
   transactionRefs: [],
 };
 
-export default function checkoutPageReducer(state = initialState, action = {}) {
+export default function inboxPageReducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
     case FETCH_ORDERS_OR_SALES_REQUEST:
