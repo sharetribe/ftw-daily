@@ -1,0 +1,169 @@
+@import '../../../../styles/customMediaQueries.css';
+
+.carouselContainer {
+  display: flex;
+  align-items: center;
+  scroll-behavior: smooth;
+  padding: 64px 0 0 0;
+
+  &:hover .carouselArrows {
+    opacity: 1;
+  }
+
+  /* smartphones, touchscreens: we don't need to show arrows */
+  @media (any-hover: none) and (pointer: coarse) {
+    &:hover .carouselArrows {
+      opacity: 0;
+    }
+  }
+}
+
+.carouselArrows {
+  opacity: 0;
+  z-index: 2;
+  transition: all ease-in-out 500ms;
+}
+
+.carouselArrowPrev,
+.carouselArrowNext {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 2;
+
+  width: 48px;
+  height: 48px;
+  margin-top: -64px;
+  border-radius: 100%;
+  border: none;
+
+  background-color: lightgrey;
+  opacity: 0.9;
+  font-size: 30px;
+  color: black;
+  transition: all ease-in-out 100ms;
+
+  &:hover {
+    opacity: 1;
+    cursor: pointer;
+    transition: all ease-in-out 100ms;
+    background: black;
+    color: white;
+  }
+}
+
+.carouselArrowPrev {
+  left: 48px;
+}
+
+.carouselArrowNext {
+  right: 48px;
+}
+.notEnoughBlocks {
+  @media (--viewportMedium) {
+    display: none;
+  }
+}
+
+.baseCarousel {
+  display: flex;
+  flex-wrap: nowrap;
+  width: var(--carouselWidth);
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.oneColumn,
+.twoColumns,
+.threeColumns,
+.fourColumns {
+  composes: baseCarousel;
+}
+
+.block {
+  flex: 0 0 auto;
+  /* 64px = horizontal layout paddings */
+  width: calc(min(var(--contentMaxWidth), var(--carouselWidth)) - 64px);
+
+  margin-right: 32px;
+  scroll-snap-align: center;
+
+  transform: translateX(32px);
+
+  &:last-of-type {
+    padding-right: 32px;
+    /* 32px (padding-right above) */
+    width: calc(min(var(--contentMaxWidth), var(--carouselWidth)) - 32px);
+  }
+
+  @media (min-width: 1200px) {
+    /* Offset the start of the carousel so it follows the global grid layout (e.g. (1400 - 1200) / 2 = 100px) */
+    /* Removing this uses the full page width for the slider pane */
+    transform: translateX(
+      max(calc((var(--carouselWidth) - var(--contentMaxWidth)) / 2 + 32px), 0px)
+    );
+
+    &:last-of-type {
+      padding-right: 32px;
+      width: calc(
+        min(var(--contentMaxWidth), var(--carouselWidth)) - 32px
+      ); /* 32px (padding-right above) */
+    }
+  }
+}
+
+.oneColumn .block {
+  @media (--viewportMedium) {
+    /* 64px (horizontal layout paddings) */
+    width: calc(min(var(--contentMaxWidth), var(--carouselWidth)) - 64px);
+
+    &:last-of-type {
+      /* 32px (padding-right) */
+      width: calc(min(var(--contentMaxWidth), var(--carouselWidth)) - 32px);
+    }
+  }
+}
+
+.twoColumns .block {
+  @media (--viewportMedium) {
+    /* 64px (horizontal layout paddings) - 32px (one gutter á 32px) / 2 (number of columns) */
+    width: calc((min(var(--contentMaxWidth), var(--carouselWidth)) - 64px - 32px) / 2);
+
+    &:last-of-type {
+      /* 32px (padding-right above) / 2 (number of columns) */
+      width: calc((min(var(--contentMaxWidth), var(--carouselWidth)) - 32px) / 2);
+    }
+  }
+}
+
+.threeColumns .block {
+  @media (--viewportMedium) {
+    /* 64px (horizontal layout paddings) - 32px (two gutters á 32px) / 3 (number of columns) */
+    width: calc((min(var(--contentMaxWidth), var(--carouselWidth)) - 64px - 64px) / 3);
+
+    &:last-of-type {
+      /* 32px (padding-right above) / 3 (number of columns) */
+      width: calc((min(var(--contentMaxWidth), var(--carouselWidth)) - 32px) / 3);
+    }
+  }
+}
+
+.fourColumns .block {
+  @media (--viewportMedium) {
+    /* 64px (horizontal layout paddings) - 96px (three gutters á 32px) / 4 (number of columns) */
+    width: calc((min(var(--contentMaxWidth), var(--carouselWidth)) - 64px - 96px) / 4);
+
+    &:last-of-type {
+      /* 32px (padding-right above) / 4 (number of columns) */
+      width: calc((min(var(--contentMaxWidth), var(--carouselWidth)) - 32px) / 4);
+    }
+  }
+}

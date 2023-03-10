@@ -1,23 +1,35 @@
 const url = require('url');
 const log = require('./log');
 
-exports.loadData = function(requestUrl, sdk, matchPathname, configureStore, routeConfiguration) {
+exports.loadData = function(requestUrl, sdk, appInfo) {
+  const { matchPathname, configureStore, routeConfiguration, config, fetchAppAssets } = appInfo;
   const { pathname, query } = url.parse(requestUrl);
   const matchedRoutes = matchPathname(pathname, routeConfiguration());
 
+  let translations = {};
   const store = configureStore({}, sdk);
 
-  const dataLoadingCalls = matchedRoutes.reduce((calls, match) => {
-    const { route, params } = match;
-    if (typeof route.loadData === 'function' && !route.auth) {
-      calls.push(store.dispatch(route.loadData(params, query)));
-    }
-    return calls;
-  }, []);
+  const dataLoadingCalls = () =>
+    matchedRoutes.reduce((calls, match) => {
+      const { route, params } = match;
+      if (typeof route.loadData === 'function' && !route.auth) {
+        calls.push(store.dispatch(route.loadData(params, query)));
+      }
+      return calls;
+    }, []);
 
-  return Promise.all(dataLoadingCalls)
+  // First fetch app-wide assets
+  // Then make loadData calls
+  // And return object containing preloaded state and translations
+  // This order supports other asset (in the future) that should be fetched before data calls.
+  return store
+    .dispatch(fetchAppAssets(config.appCdnAssets))
+    .then(fetchedAppAssets => {
+      translations = fetchedAppAssets?.translations?.data || {};
+      return Promise.all(dataLoadingCalls());
+    })
     .then(() => {
-      return store.getState();
+      return { preloadedState: store.getState(), translations };
     })
     .catch(e => {
       log.error(e, 'server-side-data-load-failed');
