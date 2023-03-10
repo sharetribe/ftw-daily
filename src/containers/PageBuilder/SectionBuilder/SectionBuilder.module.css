@@ -1,0 +1,217 @@
+@import '../../../styles/customMediaQueries.css';
+
+/* Styles for custom sections: classes shared by <SectionColumns>, <SectionArticle>, <SectionFeatures>, <SectionCarousel> etc. */
+.sectionDetails {
+  max-width: var(--contentMaxWidth);
+  display: grid;
+  justify-content: start;
+  margin: 0 auto;
+  padding: 0 32px;
+  position: relative;
+
+  & h1 + p,
+  & h1 + a,
+  & h1 + ul,
+  & h1 + ol,
+  & h1 + code,
+  & h1 + div,
+  & h1 + h1,
+  & h1 + h2,
+  & h1 + h3,
+  & h1 + h4,
+  & h1 + h5,
+  & h1 + h6 {
+    margin-top: 12px;
+  }
+
+  & h2 + p,
+  & h2 + a,
+  & h2 + ul,
+  & h2 + ol,
+  & h2 + code,
+  & h2 + div,
+  & h2 + h1,
+  & h2 + h2,
+  & h2 + h3,
+  & h2 + h4,
+  & h2 + h5,
+  & h2 + h6 {
+    margin-top: 12px;
+  }
+
+  & h3 + p,
+  & h3 + a,
+  & h3 + ul,
+  & h3 + ol,
+  & h3 + code,
+  & h3 + div,
+  & h3 + h1,
+  & h3 + h2,
+  & h3 + h3,
+  & h3 + h4,
+  & h3 + h5,
+  & h3 + h6 {
+    margin-top: 12px;
+  }
+
+  & h4 + p,
+  & h4 + a,
+  & h4 + ul,
+  & h4 + ol,
+  & h4 + code,
+  & h4 + div,
+  & h4 + h1,
+  & h4 + h2,
+  & h4 + h3,
+  & h4 + h4,
+  & h4 + h5,
+  & h4 + h6 {
+    margin-top: 12px;
+  }
+
+  & h5 + p,
+  & h5 + a,
+  & h5 + ul,
+  & h5 + ol,
+  & h5 + code,
+  & h5 + div,
+  & h5 + h1,
+  & h5 + h2,
+  & h5 + h3,
+  & h5 + h4,
+  & h5 + h5,
+  & h5 + h6 {
+    margin-top: 12px;
+  }
+
+  & h6 + p,
+  & h6 + a,
+  & h6 + ul,
+  & h6 + ol,
+  & h6 + code,
+  & h6 + div,
+  & h6 + h1,
+  & h6 + h2,
+  & h6 + h3,
+  & h6 + h4,
+  & h6 + h5,
+  & h6 + h6 {
+    margin-top: 12px;
+  }
+
+  @media (--viewportMedium) {
+    justify-content: center;
+  }
+}
+
+.blockContainer {
+  padding: 64px 32px 0 32px;
+
+  &:first-child {
+    padding: 0 32px;
+  }
+}
+
+.align {
+  text-align: left;
+  justify-self: start;
+
+  @media (--viewportMedium) {
+    text-align: center;
+    justify-self: center;
+  }
+}
+
+.title {
+  composes: align;
+  max-width: 30ch;
+}
+
+.description {
+  composes: align;
+  max-width: 65ch;
+}
+
+.ctaButton {
+  composes: align;
+  display: inline-block;
+  padding: 8px 20px;
+  font-size: 15px;
+  background-color: var(--marketplaceColor);
+  border-radius: 4px;
+  color: white;
+  text-decoration: none;
+  box-shadow: 0 8px 16px 0 rgb(0 0 0 / 20%);
+  font-weight: 500;
+  margin-top: 24px;
+
+  &:hover {
+    text-decoration: none;
+    background-color: var(--marketplaceColorDark);
+  }
+}
+
+/**
+ * Theme: dark 
+ * These styles are at the bottom of the file so that they overwrite rules for default "light" theme.
+ */
+.darkTheme h1,
+.darkTheme h2,
+.darkTheme h3,
+.darkTheme h4,
+.darkTheme h5,
+.darkTheme h6 {
+  color: var(--matterColorLight);
+
+  &::selection {
+    background-color: cyan;
+    color: unset;
+  }
+}
+
+.darkTheme p,
+.darkTheme li,
+.darkTheme blockquote {
+  color: rgba(255, 255, 255, 0.85);
+
+  &::selection {
+    background-color: cyan;
+    color: unset;
+  }
+}
+
+/* link on dark theme */
+.darkTheme a {
+  color: white;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+    color: var(--marketplaceColorLight);
+  }
+}
+
+/* button on dark theme */
+.darkTheme .ctaButton {
+  border: 1px solid var(--marketplaceColorDark);
+  text-decoration: none;
+
+  &:hover {
+    color: white;
+  }
+}
+
+.darkTheme hr {
+  border-color: var(--matterColor);
+}
+
+/* dark inline code */
+.darkTheme code {
+  background-color: var(--matterColor);
+  color: var(--matterColorNegative);
+}
+
+/* dark code block */
+.darkTheme pre {
+  background-color: var(--matterColor);
+}

@@ -1,0 +1,14 @@
+.articleMain {
+  /* 720px + (2 * 32px) == 784 */
+  max-width: 784px;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 32px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.noSidePaddings {
+  padding-left: 0;
+  padding-right: 0;
+}
