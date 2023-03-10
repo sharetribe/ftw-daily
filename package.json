@@ -70,10 +70,6 @@
     "react-with-direction": "^1.3.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "rehype-react": "6.2.1",
-    "rehype-sanitize": "4.0.0",
-    "remark-parse": "9.0.0",
-    "remark-rehype": "8.1.0",
     "reqwest": "^2.0.5",
     "seedrandom": "^3.0.5",
     "sharethis-reactjs": "^1.6.0",
@@ -82,7 +78,6 @@
     "slick-carousel": "^1.8.1",
     "smoothscroll-polyfill": "^0.4.0",
     "source-map-support": "^0.5.9",
-    "unified": "9.2.2",
     "url": "^0.11.0",
     "voucherify": "^5.2.0"
   },

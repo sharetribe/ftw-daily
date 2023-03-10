@@ -102,7 +102,6 @@ const defaultDirectives = {
     'js.hsforms.net',
     'apis.google.com',
     '*.stripe.com',
-    '*.youtube-nocookie.com',
     '*.googletagmanager.com',
     'googletagmanager.com',
     '*.facebook.com',
@@ -150,9 +149,6 @@ const defaultDirectives = {
     'www.google-analytics.com',
     'stats.g.doubleclick.net',
     '*.stripe.com',
-
-    // Youtube (static image)
-    '*.ytimg.com',
 
     '*.googletagmanager.com',
     'googletagmanager.com',
