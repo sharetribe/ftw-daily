@@ -612,7 +612,7 @@ const Footer = props => {
               <ul className={css.list}>
               <li className={css.listItem}>
                   <p><strong>
-                    <a href="https://www.hotpatch.com/s?address=&bounds=59.49417013%2C4.15978193%2C49.54972301%2C-10.51994741&pub_category=has_any%3Alocation-shoot%2Coutdoor-site%2Cphotography">
+                    <a href="https://www.hotpatch.com/s?address=&bounds=59.49417013%2C4.15978193%2C49.54972301%2C-10.51994741&pub_category=has_any%3Ashoot-location%2Coutdoor-site%2Cphotography">
                     <FormattedMessage id="Footer.categoryPhotographyFilm" />
                     </a>
                     </strong>
@@ -624,7 +624,7 @@ const Footer = props => {
                   </a>
                 </li>
                 <li className={css.listItem}>
-                  <a href="https://www.hotpatch.com/s?address=&bounds=59.94465441%2C2.08236843%2C48.96664222%2C-8.44253391&pub_category=has_any%3Alocation-shoot" className={css.link}>
+                  <a href="https://www.hotpatch.com/s?address=&bounds=59.94465441%2C2.08236843%2C48.96664222%2C-8.44253391&pub_category=has_any%3Ashoot-location" className={css.link}>
                     <FormattedMessage id="Footer.categoryLocationShoot" />
                   </a>
                 </li>

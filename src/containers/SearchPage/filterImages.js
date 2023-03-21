@@ -27,7 +27,7 @@ import subCategoryFitnessOutdoorSportSpace from "./sub-categories/sub-category-f
 import subCategoryFitnessActivityRoom from "./sub-categories/sub-category-fitness-activityRoom.jpg"
 
 import subCategoryPhotographyPhotographyStudio from "./sub-categories/sub-category-wellness-PhotographyStudio.jpg"
-import subCategoryPhotographyLocationShoot from "./sub-categories/sub-category-wellness-LocationShoot.jpg"
+import subCategoryPhotographyShootLocation from "./sub-categories/sub-category-wellness-LocationShoot.jpg"
 import subCategoryPhotographyOutdoorSite from "./sub-categories/sub-category-wellness-OutdoorSite.jpg"
 
 import subCategoryCoworkingDeskSpace from "./sub-categories/sub-category-coworking-DeskSpace.jpg"
@@ -87,7 +87,7 @@ const subCategoriesImages = {
   activityRoom: subCategoryFitnessActivityRoom,
   // Photography & Film
   photography: subCategoryPhotographyPhotographyStudio,
-  locationShoot: subCategoryPhotographyLocationShoot,
+  shootLocation: subCategoryPhotographyShootLocation,
   outdoorSite: subCategoryPhotographyOutdoorSite,
   // Coworking
   deskSpace: subCategoryCoworkingDeskSpace,

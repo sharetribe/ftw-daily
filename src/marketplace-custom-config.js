@@ -251,7 +251,7 @@ export const filters = [
       // to make filter customizations a bit easier.
       options: photographyAndFilmOptions,
       isCategory: true,
-      catKeys: 'photography,location-shoot,outdoor-site',
+      catKeys: 'photography,shoot-location,outdoor-site',
     },
   },
   {
@@ -382,7 +382,7 @@ export const filters = [
       options: photographyAndFilmAmenitiesOptions,
       isCategory: false,
       isCategoryAmenities: true,
-      catKeys: 'photography,location-shoot,outdoor-site',
+      catKeys: 'photography,shoot-location,outdoor-site',
     },
   },
   {
