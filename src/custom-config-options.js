@@ -253,7 +253,7 @@ export const musicAndArtsAmenitiesOptions = [
 
 export const photographyAndFilmOptions = [
   { key: 'photography', label: 'Photography Studio', metaLabel: "Photography Studio", labelImg: 'photography' },
-  { key: 'location-shoot', label: 'Shoot Location', metaLabel: "Shoot Location", labelImg: 'shootLocation' },
+  { key: 'location-shoot', label: 'Shoot Location', metaLabel: "Shoot Location", labelImg: 'locationShoot' },
   { key: 'outdoor-site', label: 'Outdoor Site', metaLabel: "Outdoor Site", labelImg: 'outdoorSite' }
 ]
 export const photographyAndFilmAmenitiesOptions = [
