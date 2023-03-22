@@ -9,7 +9,7 @@ const { Money } = types;
 // This bookingUnitType needs to be one of the following:
 // line-item/night, line-item/day or line-item/units
 const bookingUnitType = 'line-item/units';
-const CUSTOMER_COMMISSION_PERCENTAGE = -10;
+const CUSTOMER_COMMISSION_PERCENTAGE = 10;
 const PROVIDER_COMMISSION_PERCENTAGE = -10;
 const WITH_DISCOUNT = -10;
 
@@ -36,7 +36,7 @@ const WITH_DISCOUNT = -10;
 exports.transactionLineItems = (listing, bookingData) => {
   let unitPrice;
   let quantity;
-  
+
   const { startDate, endDate, type, promocode } = bookingData;
 
   if (type === 'price'){
@@ -53,7 +53,7 @@ exports.transactionLineItems = (listing, bookingData) => {
     unitPrice = new Money(amount, currency);
     quantity = calculateQuantityFromDates(startDate, endDate, type);
   }
-  
+
   /**
    * If you want to use pre-defined component and translations for printing the lineItems base price for booking,
    * you should use one of the codes:
@@ -76,7 +76,7 @@ exports.transactionLineItems = (listing, bookingData) => {
     unitPrice: calculateTotalFromLineItems([booking]),
     percentage: PROVIDER_COMMISSION_PERCENTAGE,
     includeFor: ['provider'],
-  }; 
+  };
 
   const customerCommission = {
     code: 'line-item/customer-commission',
