@@ -194,7 +194,7 @@ const TopbarDesktop = props => {
   const hairBeautyUrlParams =       `${locationParams}&pub_category=has_any%3Ahair-stylist%2Cbarber%2Cmakeup-artist%2Cnail-technician%2Ccosmetics%2Caesthetics%2Ctattoo-and-piercing`;
   const wellnessUrlParams =  `${locationParams}&pub_category=has_any%3Atherapy-room%2Cmassage-room%2Cclinical-room`;
   const fitnessUrlParams =  `${locationParams}&pub_category=has_any%3Afitness%2Cyoga-studio%2Cdance-studio%2Csports-hall%2Coutdoor-sport-space%2Cactivity-room`;
-  const photographyAndFilmUrlParams =  `${locationParams}&pub_category=has_any%3Ashoot-location%2Coutdoor-site%2Cphotography`;
+  const photographyAndFilmUrlParams =  `${locationParams}&pub_category=has_any%3Alocation-shoot%2Coutdoor-site%2Cphotography`;
   const coworkingUrlParams =  `${locationParams}&pub_category=has_any%3Adesk-space%2Coffice-space%2Cmeeting-room-space%2Cconference-room%2Cclassroom`;
   const musicAndArtsUrlParams =  `${locationParams}&pub_category=has_any%3Amusic-studio%2Crecording-studio%2Cgallery-space%2Cart-studio%2Crehearsal-space%2Cdrama-studio%2Ctheatre-space`;
   const eventsAndVenuesUrlParams =  `${locationParams}&pub_category=has_any%3Amusic-venue%2Cprivate-event-space%2Csports-venue%2Cconference-exhibition%2Coutdoor-events%2Cprivate-dining`;
