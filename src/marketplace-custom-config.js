@@ -73,25 +73,24 @@ export const filters = [
     // You can turn on/off ordering by distance from config.js file.
     config: {},
   },
-  {
-    id: 'category',
-    label: 'Category',
-    type: 'SelectSingleFilter',
-    group: 'secondary',
-    queryParamNames: ['pub_category'],
-    config: {
-      // "key" is the option you see in Flex Console.
-      // "label" is set here for the UI only.
-      // Note: label is not added through the translation files
-      // to make filter customizations a bit easier.
-      options: [
-        { key: 'smoke', label: 'Smoke' },
-        { key: 'electric', label: 'Electric' },
-        { key: 'wood', label: 'Wood' },
-        { key: 'other', label: 'Other' },
-      ],
-    },
-  },
+  // {
+  //   id: 'category',
+  //   label: 'Category',
+  //   type: 'SelectSingleFilter',
+  //   group: 'secondary',
+  //   queryParamNames: ['pub_category'],
+  //   config: {
+  //     // "key" is the option you see in Flex Console.
+  //     // "label" is set here for the UI only.
+  //     // Note: label is not added through the translation files
+  //     // to make filter customizations a bit easier.
+  //     options: [
+  //       { key: 'Overnight Stay', label: 'Overnight Stay' },
+  //       { key: 'Day Care Stay', label: 'Day Care Stay' },
+        
+  //     ],
+  //   },
+  // },
   {
     id: 'amenities',
     label: 'Amenities',
@@ -110,7 +109,8 @@ export const filters = [
       options: [
         {
           key: 'towels',
-          label: 'Towels',
+          label: '0-6kg (small)',
+          
         },
         {
           key: 'bathroom',
@@ -139,6 +139,172 @@ export const filters = [
         {
           key: 'own_food_allowed',
           label: 'Own food allowed',
+        },
+      ],
+    },
+  },
+  {
+    id: 'serviceSetup',
+    label: 'Choose pets',
+    type: 'SelectMultipleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_serviceSetup'],
+    config: {
+      
+      searchMode: 'has_all',
+      options: [
+        {
+          key: 'overnightsStay',
+          label: 'Overnights Stay',
+        },
+        {
+          key: 'dayCareStay',
+          label: 'Day Care Stay',
+        },
+       
+      ],
+    },
+  },
+  {
+    id: 'typeOfpets',
+    label: 'Type of pet',
+    type: 'SelectMultipleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_typeOfpets'],
+    config: {
+      
+      searchMode: 'has_all',
+      options: [
+        {
+          key: 'dog',
+          label: 'Dog',
+        },
+        {
+          key: 'cat',
+          label: 'Cat',
+        },
+       
+      ],
+    },
+  },
+  {
+    id: 'numberOfPets',
+    label: 'Number Of Pets',
+    type: 'SelectSingleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_numberOfPets'],
+    config: {
+      
+      searchMode: 'has_all',
+      options: [
+        {
+          key: 'one',
+          label: '1',
+        },
+        {
+          key: 'two',
+          label: '2',
+        },
+        {
+          key: 'three',
+          label: '3+',
+        },
+       
+      ],
+    },
+  },
+  {
+    id: 'sizeOfdogs',
+    label: 'Size Of Dogs',
+    type: 'SelectMultipleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_sizeOfdogs'],
+    config: {
+      
+      searchMode: 'has_all',
+      options: [
+        {
+          key: 'small',
+          label: '0-6kg (Small)',
+        },
+        {
+          key: 'midium',
+          label: '7-20kg (Midium)',
+        },
+        {
+          key: 'large',
+          label: '20-40kg (Large)',
+        },
+        {
+          key: 'giant',
+          label: '40+kg (Giant)',
+        },
+       
+      ],
+    },
+  },
+  {
+    id: 'housingConditions',
+    label: 'Housing conditions',
+    type: 'SelectMultipleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_housingConditions'],
+    config: {
+      
+      searchMode: 'has_all',
+      options: [
+        {
+          key: 'house',
+          label: 'Has house (excludes apartments)',
+        },
+        {
+          key: 'fenced',
+          label: 'Has fenced backyard',
+        },
+        {
+          key: 'furniture',
+          label: 'Pet allowed on furniture',
+        },
+        {
+          key: 'bed',
+          label: 'Pet allowed on bed',
+        },
+        {
+          key: 'nonSmoking',
+          label: 'Non-smoking home',
+        },
+      ],
+    },
+  },
+  {
+    id: 'petInHome',
+    label: 'Pet in the home',
+    type: 'SelectMultipleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_petInHome'],
+    config: {
+      
+      searchMode: 'has_all',
+      options: [
+        {
+          key: 'doesnotDog',
+          label: 'Does not own a dog',
+        },
+        {
+          key: 'doesnotcat',
+          label: 'Does not own a cat',
+        },
+        {
+          key: 'furniture',
+          label: 'Pet allowed on furniture',
+        },
+        {
+          key: 'acceptoneClient',
+          label: 'Accepts only one client at a time',
+        },
+        {
+          key: 'doesnotpet',
+          label: 'Does not own caged pets',
         },
       ],
     },

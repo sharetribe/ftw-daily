@@ -89,6 +89,9 @@ export const EditListingPricingFormComponent = props => (
               <FormattedMessage id="EditListingPricingForm.showListingFailed" />
             </p>
           ) : null}
+          <p>Overnight Stay</p>
+         <div style={{display:'flex',gap:'10px'}}>
+          
           <FieldCurrencyInput
             id="price"
             name="price"
@@ -99,6 +102,69 @@ export const EditListingPricingFormComponent = props => (
             currencyConfig={config.currencyConfig}
             validate={priceValidators}
           />
+        
+           <FieldCurrencyInput
+            id="price2"
+            name="price2"
+            className={css.priceInput}
+            autoFocus
+            label={pricePerUnitMessage}
+            placeholder={pricePlaceholderMessage}
+            currencyConfig={config.currencyConfig}
+            validate={priceValidators}
+          />
+
+<FieldCurrencyInput
+            id="price3"
+            name="price3"
+            className={css.priceInput}
+            autoFocus
+            label={pricePerUnitMessage}
+            placeholder={pricePlaceholderMessage}
+            currencyConfig={config.currencyConfig}
+            validate={priceValidators}
+          />
+</div>
+
+<p>Day stay</p>
+         <div style={{display:'flex',gap:'10px'}}>
+          
+          <FieldCurrencyInput
+            id="price"
+            name="price"
+            className={css.priceInput}
+            autoFocus
+            label={pricePerUnitMessage}
+            placeholder={pricePlaceholderMessage}
+            currencyConfig={config.currencyConfig}
+          //  validate={priceValidators}
+          />
+        
+           <FieldCurrencyInput
+            id="price2"
+            name="price2"
+            className={css.priceInput}
+            autoFocus
+            label={pricePerUnitMessage}
+            placeholder={pricePlaceholderMessage}
+            currencyConfig={config.currencyConfig}
+            //validate={priceValidators}
+          />
+
+<FieldCurrencyInput
+            id="price3"
+            name="price3"
+            className={css.priceInput}
+            autoFocus
+            label={pricePerUnitMessage}
+            placeholder={pricePlaceholderMessage}
+            currencyConfig={config.currencyConfig}
+            //validate={priceValidators}
+          />
+</div>
+
+<p>Would you like to provide discount rate longer 7 days</p>
+
 
           <Button
             className={css.submitButton}

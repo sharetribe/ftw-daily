@@ -28,6 +28,7 @@ export const POLICY = 'policy';
 export const LOCATION = 'location';
 export const PRICING = 'pricing';
 export const PHOTOS = 'photos';
+export const Location = 'location';
 
 // EditListingWizardTab component supports these tabs
 export const SUPPORTED_TABS = [
@@ -38,6 +39,7 @@ export const SUPPORTED_TABS = [
   PRICING,
   AVAILABILITY,
   PHOTOS,
+  Location,
 ];
 
 const pathParamsToNextTab = (params, tab, marketplaceTabs) => {

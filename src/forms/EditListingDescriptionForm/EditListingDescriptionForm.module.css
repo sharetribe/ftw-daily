@@ -35,7 +35,8 @@
 
 .description {
   composes: formMargins;
-  flex-shrink: 0;
+  margin-top: 25px;
+  
 }
 
 .category {

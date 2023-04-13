@@ -138,6 +138,28 @@ exports[`SearchPageComponent matches snapshot 1`] = `
             ],
             "type": "SelectMultipleFilter",
           },
+           Object {
+            "config": Object {
+              "options": Array [
+                Object {
+                  "key": "Overnights Stay",
+                  "label": "Overnights Stay",
+                },
+                Object {
+                  "key": "Day Care Stay",
+                  "label": "Day Care Stay",
+                },
+              ],
+              "searchMode": "has_all",
+            },
+            "group": "secondary",
+            "id": "amenitiespets",
+            "label": "Choose pets",
+            "queryParamNames": Array [
+              "pub_amenitiespets",
+            ],
+            "type": "SelectMultipleFilter",
+          },
         ]
       }
       history={

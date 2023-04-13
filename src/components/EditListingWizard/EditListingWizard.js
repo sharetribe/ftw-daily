@@ -26,6 +26,7 @@ import EditListingWizardTab, {
   LOCATION,
   PRICING,
   PHOTOS,
+  Location
 } from './EditListingWizardTab';
 import css from './EditListingWizard.module.css';
 
@@ -44,7 +45,8 @@ export const TABS = [
   PRICING,
   ...availabilityMaybe,
   PHOTOS,
-];
+  
+]
 
 // Tabs are horizontal in small screens
 const MAX_HORIZONTAL_NAV_SCREEN_WIDTH = 1023;
@@ -94,11 +96,12 @@ const tabCompleted = (tab, listing) => {
 
   switch (tab) {
     case DESCRIPTION:
-      return !!(description && title);
+      return !!( title, publicData && publicData.email , publicData && publicData.birthday,publicData && publicData, 
+        publicData && publicData.serviceSetup);
     case FEATURES:
-      return !!(publicData && publicData.amenities);
+      return !!(publicData && publicData.typeOfpets);
     case POLICY:
-      return !!(publicData && typeof publicData.rules !== 'undefined');
+      return !!(publicData && typeof publicData.housingConditions);
     case LOCATION:
       return !!(geolocation && publicData && publicData.location && publicData.location.address);
     case PRICING:
