@@ -88,7 +88,7 @@ const SectionColumns = props => {
                 <IconCard brand="search" />
               </span>
               <input
-                type="text"
+                type="text" 
                 placeholder='Search...'
               />
               <span className={css.searchButton}>
