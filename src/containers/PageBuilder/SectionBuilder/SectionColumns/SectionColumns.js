@@ -7,6 +7,7 @@ import BlockBuilder from '../../BlockBuilder';
 
 import SectionContainer from '../SectionContainer';
 import css from './SectionColumns.module.css';
+import { IconCard, PrimaryButton } from '../../../../components';
 
 // The number of columns (numColumns) affects styling and responsive images
 const COLUMN_CONFIG = [
@@ -41,6 +42,8 @@ const SectionColumns = props => {
     isInsideContainer,
     options,
   } = props;
+  console.log(sectionId, '&&&  &&& => sectionId');
+
 
   // If external mapping has been included for fields
   // E.g. { h1: { component: MyAwesomeHeader } }
@@ -67,9 +70,11 @@ const SectionColumns = props => {
       ) : null}
       {hasBlocks ? (
         <div
-          className={classNames(defaultClasses.blockContainer, getColumnCSS(numColumns), {
-            [css.noSidePaddings]: isInsideContainer,
-          })}
+          className={classNames(
+            sectionId == "petcrib-work" ? css.petGrid :
+              sectionId == "intro" ? css.introSection :
+                defaultClasses.blockContainer, getColumnCSS(numColumns),
+            { [css.noSidePaddings]: isInsideContainer, })}
         >
           <BlockBuilder
             ctaButtonClass={defaultClasses.ctaButton}
@@ -77,6 +82,22 @@ const SectionColumns = props => {
             responsiveImageSizes={getResponsiveImageSizes(numColumns)}
             options={options}
           />
+          {sectionId == "intro" ?
+            <div className={css.searchBox}>
+              <span className={css.searchIcon}>
+                <IconCard brand="search" />
+              </span>
+              <input
+                type="text"
+                placeholder='Search...'
+              />
+              <span className={css.searchButton}>
+                <PrimaryButton>
+                  Search
+                </PrimaryButton>
+              </span>
+            </div>
+            : null}
         </div>
       ) : null}
     </SectionContainer>
