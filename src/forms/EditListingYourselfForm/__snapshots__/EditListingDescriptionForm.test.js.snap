@@ -1,0 +1,98 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditListingDescriptionForm matches snapshot 1`] = `
+<form
+  action="/"
+  className="root"
+  method="post"
+  onSubmit={[Function]}
+>
+  <div
+    className="root title"
+  >
+    <label
+      htmlFor="title"
+    >
+      EditListingDescriptionForm.title
+    </label>
+    <input
+      autoFocus={true}
+      className="input"
+      id="title"
+      maxLength={60}
+      name="title"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      placeholder="EditListingDescriptionForm.titlePlaceholder"
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    className="root description"
+  >
+    <label
+      htmlFor="description"
+    >
+      EditListingDescriptionForm.description
+    </label>
+    <textarea
+      className="input textarea"
+      id="description"
+      maxLength={5000}
+      name="description"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      placeholder="EditListingDescriptionForm.descriptionPlaceholder"
+      rows={1}
+      value=""
+    />
+  </div>
+  <div
+    className="root category"
+  >
+    <label
+      htmlFor="category"
+    >
+      EditListingDescriptionForm.categoryLabel
+    </label>
+    <select
+      className="select"
+      id="category"
+      name="category"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      value=""
+    >
+      <option
+        disabled={true}
+        value=""
+      >
+        EditListingDescriptionForm.categoryPlaceholder
+      </option>
+      <option
+        key="cat1"
+        value="cat1"
+      >
+        Cat 1
+      </option>
+      <option
+        key="cat2"
+        value="cat2"
+      >
+        Cat 2
+      </option>
+    </select>
+  </div>
+  <button
+    className="root submitButton"
+    disabled={true}
+    type="submit"
+  >
+    Save description
+  </button>
+</form>
+`;

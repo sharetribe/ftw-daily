@@ -88,7 +88,8 @@ const EditListingFeaturesFormComponent = props => (
             })
           }
           
-{values.typeOfpets&&values.typeOfpets.filter((st)=>st== "dog").length ||values.typeOfpets&&values.typeOfpets.filter((st)=>st== "dog" && st =="cat").length
+{values.typeOfpets&&values.typeOfpets.filter((st)=>st== "dog").length ||values.typeOfpets&&values.typeOfpets.filter((st)=>st== "dog" 
+&& st =="cat").length
   ?
   <div>
  <p>Size of Dogs</p>

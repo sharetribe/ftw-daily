@@ -23,10 +23,12 @@ import EditListingWizardTab, {
   DESCRIPTION,
   FEATURES,
   POLICY,
-  LOCATION,
+  // LOCATION,
   PRICING,
+  YOURSELF,
   PHOTOS,
-  Location
+  Location,
+  VERIFICATION
 } from './EditListingWizardTab';
 import css from './EditListingWizard.module.css';
 
@@ -41,10 +43,13 @@ export const TABS = [
   DESCRIPTION,
   FEATURES,
   POLICY,
-  LOCATION,
+  // LOCATION,
   PRICING,
+
   ...availabilityMaybe,
+  YOURSELF,
   PHOTOS,
+  VERIFICATION,
   
 ]
 
@@ -62,14 +67,23 @@ const tabLabel = (intl, tab) => {
     key = 'EditListingWizard.tabLabelFeatures';
   } else if (tab === POLICY) {
     key = 'EditListingWizard.tabLabelPolicy';
-  } else if (tab === LOCATION) {
-    key = 'EditListingWizard.tabLabelLocation';
-  } else if (tab === PRICING) {
+  // } else if (tab === LOCATION) {
+  //   key = 'EditListingWizard.tabLabelLocation';
+  // } 
+  }
+  else if (tab === PRICING) {
     key = 'EditListingWizard.tabLabelPricing';
-  } else if (tab === AVAILABILITY) {
+  } 
+  else if (tab === AVAILABILITY) {
     key = 'EditListingWizard.tabLabelAvailability';
-  } else if (tab === PHOTOS) {
+  } 
+  else if (tab === YOURSELF) {
+    key = 'EditListingWizard.tabLabelYourself';
+  }else if (tab === PHOTOS) {
     key = 'EditListingWizard.tabLabelPhotos';
+  }
+  else if (tab === VERIFICATION) {
+    key = 'EditListingWizard.tabLabelVerification';
   }
 
   return intl.formatMessage({ id: key });
@@ -102,14 +116,19 @@ const tabCompleted = (tab, listing) => {
       return !!(publicData && publicData.typeOfpets);
     case POLICY:
       return !!(publicData && typeof publicData.housingConditions);
-    case LOCATION:
-      return !!(geolocation && publicData && publicData.location && publicData.location.address);
+    // case LOCATION:
+    //   return !!(geolocation && publicData && publicData.location && publicData.location.address);
     case PRICING:
-      return !!price;
+      return !!( price,publicData && publicData.price);
     case AVAILABILITY:
       return !!availabilityPlan;
+      case YOURSELF:
+        return !!(  publicData && publicData.exp , publicData && publicData.headline,publicData && publicData.service, 
+          publicData && publicData.schedule);
     case PHOTOS:
       return images && images.length > 0;
+      case VERIFICATION:
+        return images && images.length > 0;
     default:
       return false;
   }

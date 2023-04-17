@@ -188,6 +188,27 @@ export const filters = [
     },
   },
   {
+    id: 'discount',
+    label: 'discount',
+    type: 'SelectSingleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_discount'],
+    config: {
+      
+      searchMode: 'has_all',
+      options: [
+        {
+          key: 'dis_yes',
+          label: 'yes',
+        },
+        {
+          key: 'dis_no',
+          label: 'no',
+        },
+      ],
+    },
+  },
+  {
     id: 'numberOfPets',
     label: 'Number Of Pets',
     type: 'SelectSingleFilter',
@@ -210,6 +231,27 @@ export const filters = [
           label: '3+',
         },
        
+      ],
+    },
+  },
+  {
+    id: 'dohavepets',
+    label: 'Have pets',
+    type: 'SelectSingleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_dohavepets'],
+    config: {
+      
+      searchMode: 'has_all',
+      options: [
+        {
+          key: 'yes',
+          label: 'yes',
+        },
+        {
+          key: 'no',
+          label: 'no',
+        },
       ],
     },
   },

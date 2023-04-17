@@ -9,7 +9,16 @@ import { LINE_ITEM_NIGHT, LINE_ITEM_DAY, propTypes } from '../../util/types';
 import * as validators from '../../util/validators';
 import { formatMoney } from '../../util/currency';
 import { types as sdkTypes } from '../../util/sdkLoader';
-import { Button, Form, FieldCurrencyInput } from '../../components';
+import {
+  Button,
+  Form,
+  FieldCurrencyInput,
+  FieldRadioButton,
+  FieldDateRangeInput,
+  FieldDateInput,
+  FieldTextInput,
+  FieldSelect,
+} from '../../components';
 import css from './EditListingPricingForm.module.css';
 
 const { Money } = sdkTypes;
@@ -26,11 +35,15 @@ export const EditListingPricingFormComponent = props => (
         intl,
         invalid,
         pristine,
+        listing,
         saveActionMsg,
         updated,
+        publicData,
+        values,
         updateInProgress,
         fetchErrors,
       } = formRenderProps;
+      className;
 
       const unitType = config.bookingUnitType;
       const isNightly = unitType === LINE_ITEM_NIGHT;
@@ -74,9 +87,11 @@ export const EditListingPricingFormComponent = props => (
       const classes = classNames(css.root, className);
       const submitReady = (updated && pristine) || ready;
       const submitInProgress = updateInProgress;
-      const submitDisabled = invalid || disabled || submitInProgress;
+      const submitDisabled = invalid || disabled || submitInProgress || !values.price;
       const { updateListingError, showListingsError } = fetchErrors || {};
-
+      //const dohavepets = findOptionsForSelectFilter('dohavepets', filterConfig);
+      const detail = listing?.attributes?.publicData?.serviceSetup
+      console.log('detail', detail)
       return (
         <Form onSubmit={handleSubmit} className={classes}>
           {updateListingError ? (
@@ -89,82 +104,68 @@ export const EditListingPricingFormComponent = props => (
               <FormattedMessage id="EditListingPricingForm.showListingFailed" />
             </p>
           ) : null}
-          <p>Overnight Stay</p>
-         <div style={{display:'flex',gap:'10px'}}>
-          
-          <FieldCurrencyInput
-            id="price"
-            name="price"
-            className={css.priceInput}
-            autoFocus
-            label={pricePerUnitMessage}
-            placeholder={pricePlaceholderMessage}
-            currencyConfig={config.currencyConfig}
-            validate={priceValidators}
-          />
         
-           <FieldCurrencyInput
-            id="price2"
-            name="price2"
-            className={css.priceInput}
-            autoFocus
-            label={pricePerUnitMessage}
-            placeholder={pricePlaceholderMessage}
-            currencyConfig={config.currencyConfig}
-            validate={priceValidators}
-          />
+       
+         <p>{detail == "overnightsStay"? "overnightsStay":null}</p>
+           {detail == "overnightsStay" ?
+           
+                              <FieldSelect
+                                id="industries"
+                                name="industries"
+                              >
+                                <option disabled value="">
+                                  Choose the number of pets
+                                </option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                              </FieldSelect>:null} 
 
-<FieldCurrencyInput
-            id="price3"
-            name="price3"
-            className={css.priceInput}
-            autoFocus
-            label={pricePerUnitMessage}
-            placeholder={pricePlaceholderMessage}
-            currencyConfig={config.currencyConfig}
-            validate={priceValidators}
-          />
-</div>
+          <p>{detail == "dayCareStay"? "dayCareStay":null}</p>
+          {detail == "dayCareStay" ?
+                              <FieldSelect
+                                id="industries"
+                                name="industries"
+                              >
+                                <option disabled value="">
+                                  Choose the number of pets
+                                </option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                              </FieldSelect>:null}
+          <div style={{ display: 'flex', gap: '10px' }}>
+            <FieldCurrencyInput
+              id="price"
+              name="price"
+              className={css.priceInput}
+              autoFocus
+              label={pricePerUnitMessage}
+              placeholder={pricePlaceholderMessage}
+              currencyConfig={config.currencyConfig}
+              // validate={priceValidators}
+            />
 
-<p>Day stay</p>
-         <div style={{display:'flex',gap:'10px'}}>
           
-          <FieldCurrencyInput
-            id="price"
-            name="price"
-            className={css.priceInput}
-            autoFocus
-            label={pricePerUnitMessage}
-            placeholder={pricePlaceholderMessage}
-            currencyConfig={config.currencyConfig}
-          //  validate={priceValidators}
-          />
+          </div>
+
+       
         
-           <FieldCurrencyInput
-            id="price2"
-            name="price2"
-            className={css.priceInput}
-            autoFocus
-            label={pricePerUnitMessage}
-            placeholder={pricePlaceholderMessage}
-            currencyConfig={config.currencyConfig}
-            //validate={priceValidators}
-          />
 
-<FieldCurrencyInput
-            id="price3"
-            name="price3"
-            className={css.priceInput}
-            autoFocus
-            label={pricePerUnitMessage}
-            placeholder={pricePlaceholderMessage}
-            currencyConfig={config.currencyConfig}
-            //validate={priceValidators}
-          />
-</div>
+          <p>Would you like to provide discount rate longer 7 days</p>
+          <div style={{ display: 'flex', gap: '20px' }}>
+          {/* {
+            dohavepets.map((num)=>{
+              return(
+               <FieldRadioButtonComponent className={css.features} id={num.key} name={"dohavepets"} value={num.key} label={num.label}/>
+              )
+            })
+          } */}
+          </div>
 
-<p>Would you like to provide discount rate longer 7 days</p>
-
+          <div>
+            <p>Length of Stays</p>
+          </div>
 
           <Button
             className={css.submitButton}

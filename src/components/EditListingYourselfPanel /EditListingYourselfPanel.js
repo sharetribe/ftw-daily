@@ -10,8 +10,9 @@ import { EditListingDescriptionForm } from '../../forms';
 import config from '../../config';
 
 import css from './EditListingDescriptionPanel.module.css';
+import EditListingYourselfForm from '../../forms/EditListingYourselfForm/EditListingYourselfForm';
 
-const EditListingDescriptionPanel = props => {
+const EditListingYourselfPanel = props => {
   const {
     className,
     rootClassName,
@@ -28,9 +29,8 @@ const EditListingDescriptionPanel = props => {
 
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
-  console.log('listing', listing)
   //console.log('currentListing', currentListing)
-  const { email, title,phone,birthday,location, publicData,protectedData } = currentListing.attributes;
+  const {   publicData,protectedData } = currentListing.attributes;
 
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
@@ -46,18 +46,18 @@ const EditListingDescriptionPanel = props => {
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
-      <EditListingDescriptionForm
+      <EditListingYourselfForm
         className={css.form}
-        initialValues={{ title, email:publicData.email,birthday:publicData.birthday,location:publicData.location, 
-          serviceSetup:publicData.serviceSetup }}
+        initialValues={{  exp:publicData.exp,headline:publicData.headline,service:publicData.service, 
+          schedule:publicData.schedule ,dohavepets:publicData.dohavepets}}
         saveActionMsg={submitButtonText}
         onSubmit={values => {
-          const { title, email, phone,birthday,location,serviceSetup } = values;
+          const {  exp,headline,service,schedule ,dohavepets} = values;
           const updateValues = {
-            title: title.trim(),
-            publicData: { birthday,email,location,serviceSetup,phone},
+            
+            publicData: { headline,exp,service,schedule,dohavepets},
            };
-         //console.log('updateValues', updateValues)
+         // console.log('updateValues', updateValues)
 
           onSubmit(updateValues);
         }}
@@ -73,14 +73,14 @@ const EditListingDescriptionPanel = props => {
   );
 };
 
-EditListingDescriptionPanel.defaultProps = {
+EditListingYourselfPanel.defaultProps = {
   className: null,
   rootClassName: null,
   errors: null,
   listing: null,
 };
 
-EditListingDescriptionPanel.propTypes = {
+EditListingYourselfPanel.propTypes = {
   className: string,
   rootClassName: string,
 
@@ -97,4 +97,4 @@ EditListingDescriptionPanel.propTypes = {
   errors: object.isRequired,
 };
 
-export default EditListingDescriptionPanel;
+export default EditListingYourselfPanel;

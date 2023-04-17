@@ -20,6 +20,8 @@ import {
 } from '../../components';
 
 import css from './EditListingWizard.module.css';
+import EditListingYourselfPanel from '../EditListingYourselfPanel /EditListingYourselfPanel';
+import EditListingVerificationPanel from '../EditListingVerificationPanel /EditListingVerificationPanel';
 
 export const AVAILABILITY = 'availability';
 export const DESCRIPTION = 'description';
@@ -27,8 +29,9 @@ export const FEATURES = 'features';
 export const POLICY = 'policy';
 export const LOCATION = 'location';
 export const PRICING = 'pricing';
+export const YOURSELF = 'yourself';
 export const PHOTOS = 'photos';
-export const Location = 'location';
+export const VERIFICATION = 'verification';
 
 // EditListingWizardTab component supports these tabs
 export const SUPPORTED_TABS = [
@@ -37,8 +40,11 @@ export const SUPPORTED_TABS = [
   POLICY,
   LOCATION,
   PRICING,
+ 
   AVAILABILITY,
+  YOURSELF,
   PHOTOS,
+VERIFICATION,
   Location,
 ];
 
@@ -224,6 +230,7 @@ const EditListingWizardTab = props => {
           {...panelProps(PRICING)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={values => {
+            console.log('onSubmit', values)
             onCompleteEditListingWizardTab(tab, values);
           }}
         />
@@ -237,6 +244,20 @@ const EditListingWizardTab = props => {
         <EditListingAvailabilityPanel
           {...panelProps(AVAILABILITY)}
           availability={availability}
+          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          onSubmit={values => {
+            onCompleteEditListingWizardTab(tab, values);
+          }}
+        />
+      );
+    }
+    case YOURSELF: {
+      const submitButtonTranslationKey = isNewListingFlow
+        ? 'EditListingWizard.saveNewDescription'
+        : 'EditListingWizard.saveEditDescription';
+      return (
+        <EditListingYourselfPanel
+          {...panelProps(YOURSELF)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={values => {
             onCompleteEditListingWizardTab(tab, values);
@@ -261,6 +282,24 @@ const EditListingWizardTab = props => {
           }}
           onUpdateImageOrder={onUpdateImageOrder}
         />
+      );
+    }
+    case VERIFICATION: {
+      const submitButtonTranslationKey = isNewListingFlow
+        ? 'EditListingWizard.saveNewDescription'
+        : 'EditListingWizard.saveEditDescription';
+      return (
+        <EditListingVerificationPanel
+          {...panelProps(VERIFICATION)}
+          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          images={images}
+          onImageUpload={onImageUpload}
+          onRemoveImage={onRemoveImage}
+          onSubmit={values => {
+            onCompleteEditListingWizardTab(tab, values);
+          }}
+          onUpdateImageOrder={onUpdateImageOrder}
+          />
       );
     }
     default:
