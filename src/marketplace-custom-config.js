@@ -336,10 +336,7 @@ export const filters = [
           key: 'doesnotcat',
           label: 'Does not own a cat',
         },
-        {
-          key: 'furniture',
-          label: 'Pet allowed on furniture',
-        },
+      
         {
           key: 'acceptoneClient',
           label: 'Accepts only one client at a time',

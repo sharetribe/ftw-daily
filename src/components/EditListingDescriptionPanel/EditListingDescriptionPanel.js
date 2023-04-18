@@ -48,7 +48,7 @@ const EditListingDescriptionPanel = props => {
       <h1 className={css.title}>{panelTitle}</h1>
       <EditListingDescriptionForm
         className={css.form}
-        initialValues={{ title, email:publicData.email,birthday:publicData.birthday,location:publicData.location, 
+        initialValues={{ title, email:publicData.email,birthday:publicData.birthday,location:publicData.location, phone:publicData.phone,
           serviceSetup:publicData.serviceSetup }}
         saveActionMsg={submitButtonText}
         onSubmit={values => {

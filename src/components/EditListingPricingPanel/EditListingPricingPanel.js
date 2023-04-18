@@ -46,7 +46,7 @@ const EditListingPricingPanel = props => {
   const form = priceCurrencyValid ? (
     <EditListingPricingForm
       className={css.form}
-      // initialValues={{ price, price2: publicData.price2 ,price3: publicData.price3,price4: publicData.price4,price5: publicData.price5,price6: publicData.price6}}
+       initialValues={{ price1:publicData.price1, price2: publicData.price2 ,price3: publicData.price3,price4: publicData.price4,price5: publicData.price5,price6: publicData.price6}}
       onSubmit={values => {
         const { price,price1, price2, price3,price4,price5,price6 } = values;
         const updateValues = {

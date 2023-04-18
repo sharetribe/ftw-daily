@@ -58,11 +58,7 @@ const EditListingFeaturesFormComponent = props => (
       
       const sizeOfdogs = findOptionsForSelectFilter('sizeOfdogs', filterConfig);
      
-      const dogcondition =()=>{
-        if(typeOfpets === dog){
-          return sizeOfdogs
-        }
-      }
+      
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessage}

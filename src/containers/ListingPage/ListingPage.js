@@ -47,6 +47,10 @@ import SectionAvatar from './SectionAvatar';
 import SectionHeading from './SectionHeading';
 import SectionDescriptionMaybe from './SectionDescriptionMaybe';
 import SectionFeaturesMaybe from './SectionFeaturesMaybe';
+import SectionFeatures2Maybe from './SectionFeatures2Maybe';
+import SectionFeatures3Maybe from './SectionFeatures3Maybe';
+import SectionFeatures4Maybe from './SectionFeatures4Maybe';
+import SectionFeatures5Maybe from './SectionFeatures5Maybe';
 import SectionReviews from './SectionReviews';
 import SectionHostMaybe from './SectionHostMaybe';
 import SectionRulesMaybe from './SectionRulesMaybe';
@@ -376,7 +380,18 @@ export class ListingPageComponent extends Component {
       </NamedLink>
     );
 
-    const amenityOptions = findOptionsForSelectFilter('amenities', filterConfig);
+     const yourself = publicData && publicData.headline
+     const yourselfexp = publicData && publicData.exp
+     const yourselfservice = publicData && publicData.service
+     const yourselfschedule = publicData && publicData.schedule
+     const Yourselfdohavepets = publicData && publicData.dohavepets
+
+     console.log('yourself', yourself)
+    const amenityOptions = findOptionsForSelectFilter('typeOfpets', filterConfig);
+    const amenityOptions2 = findOptionsForSelectFilter('numberOfPets', filterConfig);
+    const amenityOptions3 = findOptionsForSelectFilter('sizeOfdogs', filterConfig);
+    const amenityOptions4 = findOptionsForSelectFilter('housingConditions', filterConfig);
+    const amenityOptions5 = findOptionsForSelectFilter('petInHome', filterConfig);
     const categoryOptions = findOptionsForSelectFilter('category', filterConfig);
     const category =
       publicData && publicData.category ? (
@@ -435,6 +450,22 @@ export class ListingPageComponent extends Component {
                   />
                   <SectionDescriptionMaybe description={description} />
                   <SectionFeaturesMaybe options={amenityOptions} publicData={publicData} />
+                  
+                  <SectionFeatures2Maybe options={amenityOptions2} publicData={publicData} />
+                  <SectionFeatures3Maybe options={amenityOptions3} publicData={publicData} />
+                  <SectionFeatures4Maybe options={amenityOptions4} publicData={publicData} />
+                  <SectionFeatures5Maybe options={amenityOptions5} publicData={publicData} />
+                  <div className={css.featuresTitle}>Tell us about Yourself</div>
+                  <h4>Years of experince caring for pets</h4>
+                  <p>{yourselfexp}</p>
+                  <h4>Headline details</h4>
+                   <p>{yourself}</p>
+                 <h4>Details about your service and experience</h4>
+                   <p>{yourselfservice}</p>
+                   <h4>Details about your schedule and how does pets care fit into your daily routine</h4>
+                   <p>{yourselfschedule}</p>
+                   <h3>Do you have pets</h3>
+                   <p>{Yourselfdohavepets}</p>
                   <SectionRulesMaybe publicData={publicData} />
                   <SectionMapMaybe
                     geolocation={geolocation}

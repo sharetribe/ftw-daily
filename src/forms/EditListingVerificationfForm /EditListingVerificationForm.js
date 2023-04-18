@@ -8,7 +8,7 @@ import classNames from 'classnames';
 import { propTypes } from '../../util/types';
 import { nonEmptyArray, composeValidators } from '../../util/validators';
 import { isUploadImageOverLimitError } from '../../util/errors';
-import { AddImages, Button, Form, ValidationError } from '../../components';
+import { AddImages, Button, FieldTextInput, Form, ValidationError } from '../../components';
 
 import css from './EditListingPricingForm.module.css';
 
@@ -140,6 +140,7 @@ export class EditListingVerificationFormComponent extends Component {
                   <FormattedMessage id="EditListingPhotosForm.updateFailed" />
                 </p>
               ) : null}
+              <p>Upload Photo ID -- drivers licence and Passport</p>
               <AddImages
                 className={css.imagesField}
                 images={images}
@@ -150,8 +151,8 @@ export class EditListingVerificationFormComponent extends Component {
                 onRemoveImage={onRemoveImage}
               >
                 <Field
-                  id="addImage"
-                  name="addImage"
+                  id="addImageverification"
+                  name="addImageverification"
                   accept={ACCEPT_IMAGES}
                   form={null}
                   label={chooseImageText}
@@ -163,8 +164,8 @@ export class EditListingVerificationFormComponent extends Component {
                     const { name, type } = input;
                     const onChange = e => {
                       const file = e.target.files[0];
-                      form.change(`addImage`, file);
-                      form.blur(`addImage`);
+                      form.change(`addImageverification`, file);
+                      form.blur(`addImageverification`);
                       onImageUploadHandler(file);
                     };
                     const inputProps = { accept, id: name, name, onChange, type };
@@ -193,18 +194,24 @@ export class EditListingVerificationFormComponent extends Component {
                       </div>
                     );
                   }}
-                  name="images"
+                  name="imagesverification"
                   type="hidden"
                   validate={composeValidators(nonEmptyArray(imageRequiredMessage))}
                 />
               </AddImages>
               {uploadImageFailed}
 
-              <p className={css.tip}>
+              {/* <p className={css.tip}>
                 <FormattedMessage id="EditListingPhotosForm.addImagesTip" />
-              </p>
+              </p> */}
+              
               {publishListingFailed}
               {showListingFailed}
+
+              {/* <FieldTextInput
+              type="text"
+              
+              /> */}
 
               <Button
                 className={css.submitButton}

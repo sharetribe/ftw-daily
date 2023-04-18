@@ -59,7 +59,7 @@ class EditListingVerificationPanel extends Component {
           images={images}
           onImageUpload={onImageUpload}
           onSubmit={values => {
-            const { addImage, ...updateValues } = values;
+            const { addImageverification, ...updateValues } = values;
             onSubmit(updateValues);
           }}
           onChange={onChange}

@@ -138,10 +138,10 @@ const EditListingYourselfFormComponent = props => (
       const submitReady = (updated && pristine) || ready;
       const submitInProgress = updateInProgress;
       const submitDisabled = invalid || disabled || submitInProgress;
-      const options = findOptionsForSelectFilter('serviceSetup', filterConfig);
+   
       //console.log('options', options)
-      const discount = findOptionsForSelectFilter('discount', filterConfig);
-      findOt
+      const dohavepets = findOptionsForSelectFilter('dohavepets', filterConfig);
+      
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessageCreateListingDraft}
@@ -193,9 +193,9 @@ const EditListingYourselfFormComponent = props => (
             <p>Do you have pet?</p>
             <div style={{ display: 'flex', gap: '20px' }}>
             {
-           discount.map((num)=>{
+           dohavepets.map((num)=>{
               return(
-               <FieldRadioButtonComponent className={css.features} id={num.key} name={"discount"} value={num.key} label={num.label}/>
+               <FieldRadioButtonComponent className={css.features} id={num.key} name={"dohavepets"} value={num.key} label={num.label}/>
               )
             })
           }

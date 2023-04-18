@@ -144,6 +144,14 @@ export const UPDATE_IMAGE_ORDER = 'app/EditListingPage/UPDATE_IMAGE_ORDER';
 
 export const REMOVE_LISTING_IMAGE = 'app/EditListingPage/REMOVE_LISTING_IMAGE';
 
+export const UPLOAD_IMAGEVERIFICATION_REQUEST = 'app/EditListingPage/UPLOAD_IMAGEVERIFICATION_REQUEST';
+export const UPLOAD_IMAGEVERIFICATION_SUCCESS = 'app/EditListingPage/UPLOAD_IMAGEVERIFICATION_SUCCESS';
+export const UPLOAD_IMAGEVERIFICATION_ERROR = 'app/EditListingPage/UPLOAD_IMAGEVERIFICATION_ERROR';
+
+export const UPDATE_IMAGEVERIFICATION_ORDER = 'app/EditListingPage/UPDATE_IMAGEVERIFICATION_ORDER';
+
+export const REMOVE_LISTING_IMAGEVERIFICATION = 'app/EditListingPage/REMOVE_LISTING_IMAGEVERIFICATION';
+
 export const SAVE_PAYOUT_DETAILS_REQUEST = 'app/EditListingPage/SAVE_PAYOUT_DETAILS_REQUEST';
 export const SAVE_PAYOUT_DETAILS_SUCCESS = 'app/EditListingPage/SAVE_PAYOUT_DETAILS_SUCCESS';
 export const SAVE_PAYOUT_DETAILS_ERROR = 'app/EditListingPage/SAVE_PAYOUT_DETAILS_ERROR';
@@ -174,6 +182,9 @@ const initialState = {
   images: {},
   imageOrder: [],
   removedImageIds: [],
+  imagesverification: {},
+  imageOrderverification: [],
+  removedImageIdsverification: [],
   listingDraft: null,
   updatedTab: null,
   updateInProgress: false,
@@ -450,6 +461,10 @@ export const uploadImage = requestAction(UPLOAD_IMAGE_REQUEST);
 export const uploadImageSuccess = successAction(UPLOAD_IMAGE_SUCCESS);
 export const uploadImageError = errorAction(UPLOAD_IMAGE_ERROR);
 
+// SDK method: images.upload
+export const uploadImageverification = requestAction(UPLOAD_IMAGEVERIFICATION_REQUEST);
+export const uploadImageverificationSuccess = successAction(UPLOAD_IMAGEVERIFICATION_SUCCESS);
+export const uploadImageverificationError = errorAction(UPLOAD_IMAGEVERIFICATION_ERROR);
 // SDK method: bookings.query
 export const fetchBookingsRequest = requestAction(FETCH_BOOKINGS_REQUEST);
 export const fetchBookingsSuccess = successAction(FETCH_BOOKINGS_SUCCESS);

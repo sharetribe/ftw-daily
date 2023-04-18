@@ -38,7 +38,7 @@ const EditListingDescriptionFormComponent = props => (
         fetchErrors,
         values,
       } = formRenderProps;
-      //console.log('values', values)
+    console.log('values', values)
 
       const identity = v => v;
 
@@ -138,8 +138,16 @@ const EditListingDescriptionFormComponent = props => (
             autoFocus
           />
                  
-
-                 <FieldBirthdayInput
+                 <FieldTextInput
+                      className={css.lastName}
+                      type="date"
+                      id="birthday"
+                      name="birthday"
+                      placeholder={birthdatePlaceholderMessage}
+                      label={birthdateMessage}
+                      validate={composeValidators(required(birthdateRequiredMessage))}
+                    />
+                 {/* <FieldBirthdayInput
             id="birthday"
             name="birthday"
             className={css.title}
@@ -149,7 +157,7 @@ const EditListingDescriptionFormComponent = props => (
             validate={composeValidators(required(birthdateRequiredMessage ),)}
             
             autoFocus
-          />
+          /> */}
 
          <LocationAutocompleteInputField
             className={css.locationAddress}

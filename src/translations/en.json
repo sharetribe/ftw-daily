@@ -374,7 +374,7 @@
   "ListingPage.editProfileLink": "Edit profile",
   "ListingPage.errorLoadingListingMessage": "Could not load listing. Please try again.",
   "ListingPage.errorLoadingListingTitle": "Error in loading listing",
-  "ListingPage.featuresTitle": "Amenities",
+  "ListingPage.featuresTitle": "Type of Pets",
   "ListingPage.finishListing": "Finish listing",
   "ListingPage.hostedBy": "Hosted by {name}",
   "ListingPage.loadingListingMessage": "Loading listing…",
