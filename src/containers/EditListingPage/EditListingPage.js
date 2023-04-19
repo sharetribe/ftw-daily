@@ -34,8 +34,11 @@ import {
   requestPublishListingDraft,
   requestUpdateListing,
   requestImageUpload,
+  requestImageverificationUpload,
   updateImageOrder,
+  updateImageverificationOrder,
   removeListingImage,
+  removeListingImageverification,
   clearUpdatedTab,
   savePayoutDetails,
 } from './EditListingPage.duck';
@@ -71,12 +74,15 @@ export const EditListingPageComponent = props => {
     onPublishListingDraft,
     onUpdateListing,
     onImageUpload,
+    onImageverificationUpload,
     onRemoveListingImage,
+    onRemoveListingImageverification,
     onManageDisableScrolling,
     onPayoutDetailsFormSubmit,
     onPayoutDetailsFormChange,
     onGetStripeConnectAccountLink,
     onUpdateImageOrder,
+    onUpdateImageverificationOrder,
     onChange,
     page,
     params,
@@ -154,14 +160,29 @@ export const EditListingPageComponent = props => {
     const currentListingImages =
       currentListing && currentListing.images ? currentListing.images : [];
 
+      // Images are passed to EditListingForm so that it can generate thumbnails out of them
+    const currentListingImagesverification =
+    currentListing && currentListing.imagesverification ? currentListing.imagesverification : [];
+
     // Images not yet connected to the listing
     const imageOrder = page.imageOrder || [];
     const unattachedImages = imageOrder.map(i => page.images[i]);
+
+    // Images not yet connected to the listing
+    const imageverificationOrder = page.imageverificationOrder || [];
+    const unattachedImagesverification = imageverificationOrder.map(i => page.imagesverification[i]);
+
 
     const allImages = currentListingImages.concat(unattachedImages);
     const removedImageIds = page.removedImageIds || [];
     const images = allImages.filter(img => {
       return !removedImageIds.includes(img.id);
+    });
+
+    const allImagesverification = currentListingImagesverification.concat(unattachedImagesverification);
+    const removedImageIdsverification = page.removedImageIdsverification || [];
+    const imagesverification = allImagesverification.filter(img => {
+      return !removedImageIdsverification.includes(img.id);
     });
 
     const title = isNewListingFlow
@@ -186,6 +207,7 @@ export const EditListingPageComponent = props => {
           newListingPublished={newListingPublished}
           history={history}
           images={images}
+          imagesverification={imagesverification}
           listing={currentListing}
           availability={{
             calendar: page.availabilityCalendar,
@@ -202,8 +224,11 @@ export const EditListingPageComponent = props => {
           onGetStripeConnectAccountLink={onGetStripeConnectAccountLink}
           getAccountLinkInProgress={getAccountLinkInProgress}
           onImageUpload={onImageUpload}
+          onImageverificationUpload={onImageverificationUpload}
           onUpdateImageOrder={onUpdateImageOrder}
+          onUpdateImageverificationOrder={onUpdateImageverificationOrder}
           onRemoveImage={onRemoveListingImage}
+          onRemoveImageverification={onRemoveListingImageverification}
           onChange={onChange}
           currentUser={currentUser}
           onManageDisableScrolling={onManageDisableScrolling}
@@ -265,11 +290,14 @@ EditListingPageComponent.propTypes = {
   onCreateListingDraft: func.isRequired,
   onPublishListingDraft: func.isRequired,
   onImageUpload: func.isRequired,
+  onImageverificationUpload: func.isRequired,
   onManageDisableScrolling: func.isRequired,
   onPayoutDetailsFormChange: func.isRequired,
   onPayoutDetailsFormSubmit: func.isRequired,
   onUpdateImageOrder: func.isRequired,
+  onUpdateImageverificationOrder: func.isRequired,
   onRemoveListingImage: func.isRequired,
+  onRemoveListingImageverification: func.isRequired,
   onUpdateListing: func.isRequired,
   onChange: func.isRequired,
   page: object.isRequired,
@@ -340,6 +368,7 @@ const mapDispatchToProps = dispatch => ({
   onCreateListingDraft: values => dispatch(requestCreateListingDraft(values)),
   onPublishListingDraft: listingId => dispatch(requestPublishListingDraft(listingId)),
   onImageUpload: data => dispatch(requestImageUpload(data)),
+  onImageverificationUpload: data => dispatch(requestImageverificationUpload(data)),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
   onPayoutDetailsFormChange: () => dispatch(stripeAccountClearError()),
@@ -348,7 +377,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(savePayoutDetails(values, isUpdateCall)),
   onGetStripeConnectAccountLink: params => dispatch(getStripeConnectAccountLink(params)),
   onUpdateImageOrder: imageOrder => dispatch(updateImageOrder(imageOrder)),
+  onUpdateImageverificationOrder: imageverificationOrder => dispatch(updateImageverificationOrder(imageverificationOrder)),
   onRemoveListingImage: imageId => dispatch(removeListingImage(imageId)),
+  onRemoveListingImageverification: imageId => dispatch(removeListingImageverification(imageId)),
   onChange: () => dispatch(clearUpdatedTab()),
 });
 

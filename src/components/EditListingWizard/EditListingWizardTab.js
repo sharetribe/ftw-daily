@@ -22,6 +22,7 @@ import {
 import css from './EditListingWizard.module.css';
 import EditListingYourselfPanel from '../EditListingYourselfPanel /EditListingYourselfPanel';
 import EditListingVerificationPanel from '../EditListingVerificationPanel /EditListingVerificationPanel';
+import EditListingBasicInfoPanel from '../EditListingBasicInfoPanel/EditListingBasicInfoPanel';
 
 export const AVAILABILITY = 'availability';
 export const DESCRIPTION = 'description';
@@ -89,6 +90,7 @@ const EditListingWizardTab = props => {
     newListingPublished,
     history,
     images,
+    imagesverification,
     availability,
     listing,
     handleCreateFlowTabScrolling,
@@ -96,8 +98,11 @@ const EditListingWizardTab = props => {
     onUpdateListing,
     onCreateListingDraft,
     onImageUpload,
+    onImageverificationUpload,
     onUpdateImageOrder,
+    onUpdateImageverificationOrder,
     onRemoveImage,
+    onRemoveImageverification,
     onChange,
     updatedTab,
     updateInProgress,
@@ -114,12 +119,21 @@ const EditListingWizardTab = props => {
     return images ? images.map(img => img.imageId || img.id) : null;
   };
 
+  const imageverificationIds = imagesverification => {
+    return imagesverification ? imagesverification.map(img => img.imageId || img.id) : null;
+  };
+
   const onCompleteEditListingWizardTab = (tab, updateValues) => {
     // Normalize images for API call
+    const { imagesverification: updatedImagesverification, ...otherValuesverification } = updateValues;
     const { images: updatedImages, ...otherValues } = updateValues;
     const imageProperty =
       typeof updatedImages !== 'undefined' ? { images: imageIds(updatedImages) } : {};
     const updateValuesWithImages = { ...otherValues, ...imageProperty };
+
+    const imageverificationProperty =
+      typeof updatedImagesverification !== 'undefined' ? { imagesverification: imageverificationIds(updatedImagesverification) } : {};
+    const updateValuesWithImagesverification = { ...otherValues, ...imageverificationProperty };
 
     if (isNewListingFlow) {
       const onUpsertListingDraft = isNewURI
@@ -129,6 +143,10 @@ const EditListingWizardTab = props => {
       const upsertValues = isNewURI
         ? updateValuesWithImages
         : { ...updateValuesWithImages, id: currentListing.id };
+
+        const upsertValuesverification = isNewURI
+        ? updateValuesWithImagesverification
+        : { ...updateValuesWithImagesverification, id: currentListing.id };
 
       onUpsertListingDraft(tab, upsertValues)
         .then(r => {
@@ -146,7 +164,7 @@ const EditListingWizardTab = props => {
           // No need for extra actions
         });
     } else {
-      onUpdateListing(tab, { ...updateValuesWithImages, id: currentListing.id });
+      onUpdateListing(tab, { ...updateValuesWithImages, ...updateValuesWithImagesverification, id: currentListing.id });
     }
   };
 
@@ -170,7 +188,7 @@ const EditListingWizardTab = props => {
         ? 'EditListingWizard.saveNewDescription'
         : 'EditListingWizard.saveEditDescription';
       return (
-        <EditListingDescriptionPanel
+        <EditListingBasicInfoPanel
           {...panelProps(DESCRIPTION)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={values => {
@@ -253,8 +271,8 @@ const EditListingWizardTab = props => {
     }
     case YOURSELF: {
       const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditListingWizard.saveNewDescription'
-        : 'EditListingWizard.saveEditDescription';
+        ? 'EditListingWizard.saveNewYourself'
+        : 'EditListingWizard.saveEditYourself';
       return (
         <EditListingYourselfPanel
           {...panelProps(YOURSELF)}
@@ -267,7 +285,7 @@ const EditListingWizardTab = props => {
     }
     case PHOTOS: {
       const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditListingWizard.saveNewPhotos'
+        ? 'EditListingWizard.savePhotos'
         : 'EditListingWizard.saveEditPhotos';
 
       return (
@@ -286,19 +304,19 @@ const EditListingWizardTab = props => {
     }
     case VERIFICATION: {
       const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditListingWizard.saveNewDescription'
-        : 'EditListingWizard.saveEditDescription';
+        ? 'EditListingWizard.saveNewPhotos'
+        : 'EditListingWizard.saveEditVerification';
       return (
         <EditListingVerificationPanel
           {...panelProps(VERIFICATION)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
-          images={images}
-          onImageUpload={onImageUpload}
+          imagesverification={imagesverification}
+          onImageverificationUpload={onImageverificationUpload}
           onRemoveImage={onRemoveImage}
           onSubmit={values => {
             onCompleteEditListingWizardTab(tab, values);
           }}
-          onUpdateImageOrder={onUpdateImageOrder}
+          onUpdateImageverificationOrder={onUpdateImageverificationOrder}
           />
       );
     }
@@ -327,6 +345,7 @@ EditListingWizardTab.propTypes = {
     updateListingError: object,
     showListingsError: object,
     uploadImageError: object,
+    uploadImageverificationError: object,
   }).isRequired,
   fetchInProgress: bool.isRequired,
   newListingPublished: bool.isRequired,
@@ -335,6 +354,7 @@ EditListingWizardTab.propTypes = {
     replace: func.isRequired,
   }).isRequired,
   images: array.isRequired,
+  imagesverification: array.isRequired,
   availability: object.isRequired,
 
   // We cannot use propTypes.listing since the listing might be a draft.
@@ -347,6 +367,7 @@ EditListingWizardTab.propTypes = {
       title: string,
     }),
     images: array,
+    imagesverification: array,
   }),
 
   handleCreateFlowTabScrolling: func.isRequired,
@@ -354,8 +375,11 @@ EditListingWizardTab.propTypes = {
   onUpdateListing: func.isRequired,
   onCreateListingDraft: func.isRequired,
   onImageUpload: func.isRequired,
+  onImageverificationUpload: func.isRequired,
   onUpdateImageOrder: func.isRequired,
+  onUpdateImageverificationOrder: func.isRequired,
   onRemoveImage: func.isRequired,
+  onRemoveImageverification: func.isRequired,
   onChange: func.isRequired,
   updatedTab: string,
   updateInProgress: bool.isRequired,

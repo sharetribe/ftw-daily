@@ -75,7 +75,7 @@ import * as UserDisplayName from './components/UserDisplayName/UserDisplayName.e
 // forms
 import * as BookingDatesForm from './forms/BookingDatesForm/BookingDatesForm.example';
 import * as EditListingAvailabilityForm from './forms/EditListingAvailabilityForm/EditListingAvailabilityForm.example';
-import * as EditListingDescriptionForm from './forms/EditListingDescriptionForm/EditListingDescriptionForm.example';
+import * as EditListingDescriptionForm from './forms/EditListingBasicInfoForm/EditListingDescriptionForm.example';
 import * as EditListingFeaturesForm from './forms/EditListingFeaturesForm/EditListingFeaturesForm.example';
 import * as EditListingLocationForm from './forms/EditListingLocationForm/EditListingLocationForm.example';
 import * as EditListingPhotosForm from './forms/EditListingPhotosForm/EditListingPhotosForm.example';

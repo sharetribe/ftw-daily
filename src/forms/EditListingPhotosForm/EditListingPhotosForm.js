@@ -61,7 +61,7 @@ export class EditListingPhotosFormComponent extends Component {
             updated,
             updateInProgress,
           } = formRenderProps;
-
+console.log('images', images)
           const chooseImageText = (
             <span className={css.chooseImageText}>
               <span className={css.chooseImage}>
@@ -123,7 +123,7 @@ export class EditListingPhotosFormComponent extends Component {
           const submitReady = (updated && pristineSinceLastSubmit) || ready;
           const submitInProgress = updateInProgress;
           const submitDisabled =
-            invalid || disabled || submitInProgress || imageUploadRequested || ready;
+            invalid || disabled || submitInProgress || imageUploadRequested || ready ||!(images.length >= 5) ||!(images.length <= 10);
 
           const classes = classNames(css.root, className);
 
@@ -206,6 +206,7 @@ export class EditListingPhotosFormComponent extends Component {
               {publishListingFailed}
               {showListingFailed}
 
+                   <p></p>
               <Button
                 className={css.submitButton}
                 type="submit"

@@ -54,7 +54,7 @@ export const EditListingPoliciesFormComponent = props => (
       const classes = classNames(css.root, className);
       const submitReady = (updated && pristine) || ready;
       const submitInProgress = updateInProgress;
-      const submitDisabled = invalid || disabled || submitInProgress ;
+      const submitDisabled = invalid || disabled || submitInProgress || !values.housingConditions || !values.petInHome;
 
 
       const housingConditions = findOptionsForSelectFilter('housingConditions', filterConfig);

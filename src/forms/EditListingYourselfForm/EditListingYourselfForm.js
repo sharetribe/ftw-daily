@@ -137,7 +137,7 @@ const EditListingYourselfFormComponent = props => (
       const classes = classNames(css.root, className);
       const submitReady = (updated && pristine) || ready;
       const submitInProgress = updateInProgress;
-      const submitDisabled = invalid || disabled || submitInProgress;
+      const submitDisabled = invalid || disabled || submitInProgress || !values.dohavepets;
    
       //console.log('options', options)
       const dohavepets = findOptionsForSelectFilter('dohavepets', filterConfig);

@@ -19,16 +19,16 @@ class EditListingVerificationPanel extends Component {
       errors,
       disabled,
       ready,
-      images,
+      imagesverification,
       listing,
-      onImageUpload,
-      onUpdateImageOrder,
+      onImageverificationUpload,
+      onUpdateImageverificationOrder,
       submitButtonText,
       panelUpdated,
       updateInProgress,
       onChange,
       onSubmit,
-      onRemoveImage,
+      onRemoveImageverification,
     } = this.props;
 
     const rootClass = rootClassName || css.root;
@@ -55,16 +55,16 @@ class EditListingVerificationPanel extends Component {
           disabled={disabled}
           ready={ready}
           fetchErrors={errors}
-          initialValues={{ images }}
-          images={images}
-          onImageUpload={onImageUpload}
+          initialValues={{ imagesverification }}
+          imagesverification={imagesverification}
+          onImageverificationUpload={onImageverificationUpload}
           onSubmit={values => {
             const { addImageverification, ...updateValues } = values;
             onSubmit(updateValues);
           }}
           onChange={onChange}
-          onUpdateImageOrder={onUpdateImageOrder}
-          onRemoveImage={onRemoveImage}
+          onUpdateImageverificationOrder={onUpdateImageverificationOrder}
+          onRemoveImageverification={onRemoveImageverification}
           saveActionMsg={submitButtonText}
           updated={panelUpdated}
           updateInProgress={updateInProgress}
@@ -78,7 +78,7 @@ EditListingVerificationPanel.defaultProps = {
   className: null,
   rootClassName: null,
   errors: null,
-  images: [],
+  imagesverification: [],
   listing: null,
 };
 
@@ -88,19 +88,19 @@ EditListingVerificationPanel.propTypes = {
   errors: object,
   disabled: bool.isRequired,
   ready: bool.isRequired,
-  images: array,
+  imagesverification: array,
 
   // We cannot use propTypes.listing since the listing might be a draft.
   listing: object,
 
-  onImageUpload: func.isRequired,
-  onUpdateImageOrder: func.isRequired,
+  onImageverificationUpload: func.isRequired,
+  onUpdateImageverificationOrder: func.isRequired,
   onSubmit: func.isRequired,
   onChange: func.isRequired,
   submitButtonText: string.isRequired,
   panelUpdated: bool.isRequired,
   updateInProgress: bool.isRequired,
-  onRemoveImage: func.isRequired,
+  onRemoveImageverification: func.isRequired,
 };
 
 export default EditListingVerificationPanel;

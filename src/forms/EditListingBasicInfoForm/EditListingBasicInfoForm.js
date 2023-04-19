@@ -17,7 +17,7 @@ import config from '../../config';
 
 const TITLE_MAX_LENGTH = 60;
 
-const EditListingDescriptionFormComponent = props => (
+const EditListingBasicInfoFormComponent = props => (
   <FinalForm
     {...props}
     render={formRenderProps => {
@@ -63,6 +63,8 @@ const EditListingDescriptionFormComponent = props => (
       });
       
       const titleMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.title' });
+
+      const locMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.location' });
       const titlePlaceholderMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.titlePlaceholder',
       });
@@ -82,6 +84,9 @@ const EditListingDescriptionFormComponent = props => (
         id: 'EditListingDescriptionForm.phonePlaceholder',
       });
 
+      const phoneRequiredMessage = intl.formatMessage({
+        id: 'EditListingDescriptionForm.phoneRequired',
+      });
       const descriptionMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.description',
       });
@@ -116,7 +121,7 @@ const EditListingDescriptionFormComponent = props => (
       const classes = classNames(css.root, className);
       const submitReady = (updated && pristine) || ready;
       const submitInProgress = updateInProgress;
-      const submitDisabled = invalid || disabled || submitInProgress;
+      const submitDisabled = invalid || disabled || submitInProgress || ! values.email || ! values.phone || !values.serviceSetup;
       const options = findOptionsForSelectFilter('serviceSetup', filterConfig);
       //console.log('options', options)
       
@@ -146,6 +151,7 @@ const EditListingDescriptionFormComponent = props => (
                       placeholder={birthdatePlaceholderMessage}
                       label={birthdateMessage}
                       validate={composeValidators(required(birthdateRequiredMessage))}
+                      autoFocus
                     />
                  {/* <FieldBirthdayInput
             id="birthday"
@@ -158,27 +164,39 @@ const EditListingDescriptionFormComponent = props => (
             
             autoFocus
           /> */}
-
+{/* <div style={{marginTop:'25px'}}>
          <LocationAutocompleteInputField
-            className={css.locationAddress}
+             className={css.loc}
             inputClassName={css.locationAutocompleteInput}
             iconClassName={css.locationAutocompleteInputIcon}
             predictionsClassName={css.predictionsRoot}
             validClassName={css.validLocation}
             autoFocus
             name="location"
-            label={titleRequiredMessage}
+            label={locMessage}
             placeholder={addressPlaceholderMessage}
             useDefaultPredictions={false}
             format={identity}
             valueFromForm={values.location}
             validate={composeValidators(
               autocompleteSearchRequired(addressRequiredMessage),
-              autocompletePlaceSelected(addressNotRecognizedMessage)
+              //autocompletePlaceSelected(addressNotRecognizedMessage)
             )}
           />
-
-             
+</div> */}
+<div style={{marginTop:'25px'}}>
+<FieldTextInput
+            id="location"
+            name="location"
+            className={css.title}
+            type="text"
+            label={locMessage}
+            placeholder={addressPlaceholderMessage}
+            
+            validate={composeValidators(required(addressRequiredMessage))}
+            autoFocus
+          />
+          </div>
           <FieldTextInput
             id="email"
             name="email"
@@ -186,7 +204,8 @@ const EditListingDescriptionFormComponent = props => (
             type="email"
             label={descriptionMessage}
             placeholder={descriptionPlaceholderMessage}
-           // validate={composeValidators(required(descriptionRequiredMessage))}
+            validate={composeValidators(required(descriptionRequiredMessage))}
+            autoFocus
           />
 
           <FieldPhoneNumberInput
@@ -196,7 +215,8 @@ const EditListingDescriptionFormComponent = props => (
           
           label={phoneMessage}
           placeholder={phonePlaceholderMessage}
-        
+          validate={composeValidators(required(phoneRequiredMessage))}
+          autoFocus
           />
 
           {/* <CustomCategorySelectFieldMaybe
@@ -211,7 +231,9 @@ const EditListingDescriptionFormComponent = props => (
           {
             options.map((st)=>{
               return(
-               <FieldCheckbox className={css.features} id={st.key} name={"serviceSetup"} value={st.key} label={st.label}/>
+               <FieldCheckbox className={css.features} id={st.key} name={"serviceSetup"} value={st.key} label={st.label} 
+                validate={composeValidators(required(phoneRequiredMessage))}
+               autoFocus/>
               )
             })
           }
@@ -231,9 +253,9 @@ const EditListingDescriptionFormComponent = props => (
   />
 );
 
-EditListingDescriptionFormComponent.defaultProps = { className: null, fetchErrors: null, filterConfig: config.custom.filters,};
+EditListingBasicInfoFormComponent.defaultProps = { className: null, fetchErrors: null, filterConfig: config.custom.filters,};
 
-EditListingDescriptionFormComponent.propTypes = {
+EditListingBasicInfoFormComponent.propTypes = {
   className: string,
   intl: intlShape.isRequired,
   onSubmit: func.isRequired,
@@ -256,4 +278,4 @@ EditListingDescriptionFormComponent.propTypes = {
   ),
 };
 
-export default compose(injectIntl)(EditListingDescriptionFormComponent);
+export default compose(injectIntl)(EditListingBasicInfoFormComponent);

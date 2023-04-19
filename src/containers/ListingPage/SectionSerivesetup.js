@@ -4,17 +4,17 @@ import { PropertyGroup } from '../../components';
 
 import css from './ListingPage.module.css';
 
-const SectionFeaturesMaybe = props => {
+const SectionServicesetup = props => {
   const { options, publicData } = props;
   if (!publicData) {
     return null;
   }
 
-  const selectedOptions = publicData && publicData.typeOfpets ? publicData.numberOfPets : [];
+  const selectedOptions = publicData && publicData.serviceSetup ? publicData.serviceSetup : [];
   return (
     <div className={css.sectionFeatures}>
       <h2 className={css.featuresTitle}>
-        <FormattedMessage id="ListingPage.featuresnumberpet" />
+        <FormattedMessage id="ListingPage.featuresserviceSetup" />
       </h2>
       <PropertyGroup
         id="ListingPage.typeOfpets"
@@ -26,4 +26,4 @@ const SectionFeaturesMaybe = props => {
   );
 };
 
-export default SectionFeaturesMaybe;
+export default SectionServicesetup;

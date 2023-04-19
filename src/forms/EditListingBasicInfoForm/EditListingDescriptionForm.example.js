@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import EditListingDescriptionForm from './EditListingDescriptionForm';
+import EditListingDescriptionForm from './EditListingBasicInfoForm';
 
 export const Empty = {
   component: EditListingDescriptionForm,

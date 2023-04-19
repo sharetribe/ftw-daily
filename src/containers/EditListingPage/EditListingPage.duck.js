@@ -166,6 +166,7 @@ const initialState = {
   updateListingError: null,
   showListingsError: null,
   uploadImageError: null,
+  uploadImageverificationError: null,
   createListingDraftInProgress: false,
   submittedListingId: null,
   redirectToListing: false,
@@ -183,7 +184,7 @@ const initialState = {
   imageOrder: [],
   removedImageIds: [],
   imagesverification: {},
-  imageOrderverification: [],
+  imageverificationOrder: [],
   removedImageIdsverification: [],
   listingDraft: null,
   updatedTab: null,
@@ -238,6 +239,7 @@ export default function reducer(state = initialState, action = {}) {
         updateListingError: null,
         showListingsError: null,
         uploadImageError: null,
+        uploadImageverificationError: null,
         createListingDraftInProgress: false,
         updateInProgress: false,
       };
@@ -363,12 +365,32 @@ export default function reducer(state = initialState, action = {}) {
         uploadImageError: null,
       };
     }
+    case UPLOAD_IMAGEVERIFICATION_REQUEST: {
+      // payload.params: { id: 'tempId', file }
+      const imagesverification = {
+        ...state.imagesverification,
+        [payload.params.id]: { ...payload.params },
+      };
+      return {
+        ...state,
+        imagesverification,
+        imageverificationOrder: state.imageverificationOrder.concat([payload.params.id]),
+        uploadImageverificationError: null,
+      };
+    }
     case UPLOAD_IMAGE_SUCCESS: {
       // payload.params: { id: 'tempId', imageId: 'some-real-id'}
       const { id, imageId } = payload;
       const file = state.images[id].file;
       const images = { ...state.images, [id]: { id, imageId, file } };
       return { ...state, images };
+    }
+    case UPLOAD_IMAGEVERIFICATION_SUCCESS: {
+      // payload.params: { id: 'tempId', imageId: 'some-real-id'}
+      const { id, imageIdverification } = payload;
+      const file = state.imagesverification[id].file;
+      const imagesverification = { ...state.imagesverification, [id]: { id, imageIdverification, file } };
+      return { ...state, imagesverification };
     }
     case UPLOAD_IMAGE_ERROR: {
       // eslint-disable-next-line no-console
@@ -377,8 +399,20 @@ export default function reducer(state = initialState, action = {}) {
       const images = omit(state.images, id);
       return { ...state, imageOrder, images, uploadImageError: error };
     }
+
+    case UPLOAD_IMAGEVERIFICATION_ERROR: {
+      // eslint-disable-next-line no-console
+      const { id, error } = payload;
+      const imageverificationOrder = state.imageverificationOrder.filter(i => i !== id);
+      const imagesverification = omit(state.imagesverification, id);
+      return { ...state, imageverificationOrder, imagesverification, uploadImageverificationError: error };
+    }
     case UPDATE_IMAGE_ORDER:
       return { ...state, imageOrder: payload.imageOrder };
+
+      case UPDATE_IMAGEVERIFICATION_ORDER:
+        return { ...state, imageverificationOrder: payload.imageverificationOrder };
+  
 
     case REMOVE_LISTING_IMAGE: {
       const id = payload.imageId;
@@ -395,6 +429,23 @@ export default function reducer(state = initialState, action = {}) {
       const imageOrder = state.imageOrder.filter(i => i !== id);
 
       return { ...state, images, imageOrder, removedImageIds };
+    }
+
+    case REMOVE_LISTING_IMAGEVERIFICATION: {
+      const id = payload.imageIdverification;
+
+      // Only mark the image removed if it hasn't been added to the
+      // listing already
+      const removedImageIdsverification = state.imagesverification[id]
+        ? state.removedImageIdsverification
+        : state.removedImageIdsverification.concat(id);
+
+      // Always remove from the draft since it might be a new image to
+      // an existing listing.
+      const imagesverification = omit(state.imagesverification, id);
+      const imageverificationOrder = state.imageverificationOrder.filter(i => i !== id);
+
+      return { ...state, imagesverification, imageverificationOrder, removedImageIdsverification };
     }
 
     case SAVE_PAYOUT_DETAILS_REQUEST:
@@ -427,9 +478,19 @@ export const updateImageOrder = imageOrder => ({
   payload: { imageOrder },
 });
 
+export const updateImageverificationOrder = imageverificationOrder => ({
+  type: UPDATE_IMAGEVERIFICATION_ORDER,
+  payload: { imageverificationOrder },
+});
+
 export const removeListingImage = imageId => ({
   type: REMOVE_LISTING_IMAGE,
   payload: { imageId },
+});
+
+export const removeListingImageverification = imageIdverification => ({
+  type: REMOVE_LISTING_IMAGEVERIFICATION,
+  payload: { imageIdverification },
 });
 
 // All the action creators that don't have the {Success, Error} suffix
@@ -513,7 +574,7 @@ export function requestCreateListingDraft(data) {
 
     const queryParams = {
       expand: true,
-      include: ['author', 'images'],
+      include: ['author', 'images','imagesverification'],
       'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
     };
 
@@ -561,6 +622,18 @@ export function requestImageUpload(actionPayload) {
       .upload({ image: actionPayload.file })
       .then(resp => dispatch(uploadImageSuccess({ data: { id, imageId: resp.data.data.id } })))
       .catch(e => dispatch(uploadImageError({ id, error: storableError(e) })));
+  };
+}
+
+// Images return imageId which we need to map with previously generated temporary id
+export function requestImageverificationUpload(actionPayload) {
+  return (dispatch, getState, sdk) => {
+    const id = actionPayload.id;
+    dispatch(uploadImageverification(actionPayload));
+    return sdk.images
+      .upload({ imageverfication: actionPayload.file })
+      .then(resp => dispatch(uploadImageverificationSuccess({ data: { id, imageIdverification: resp.data.data.id } })))
+      .catch(e => dispatch(uploadImageverificationError({ id, error: storableError(e) })));
   };
 }
 
@@ -674,7 +747,7 @@ export function requestUpdateListing(tab, data) {
         updateResponse = response;
         const payload = {
           id,
-          include: ['author', 'images'],
+          include: ['author', 'images','imagesverification'],
           'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
         };
         return dispatch(requestShowListing(payload));
@@ -690,6 +763,8 @@ export function requestUpdateListing(tab, data) {
       });
   };
 }
+
+
 
 export const savePayoutDetails = (values, isUpdateCall) => (dispatch, getState, sdk) => {
   const upsertThunk = isUpdateCall ? updateStripeAccount : createStripeAccount;
@@ -726,7 +801,7 @@ export const loadData = params => (dispatch, getState, sdk) => {
 
   const payload = {
     id: new UUID(id),
-    include: ['author', 'images'],
+    include: ['author', 'images','imagesverification'],
     'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
   };
 

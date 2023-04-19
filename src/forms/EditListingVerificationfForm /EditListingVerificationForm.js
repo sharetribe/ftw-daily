@@ -26,7 +26,7 @@ export class EditListingVerificationFormComponent extends Component {
     if (file) {
       this.setState({ imageUploadRequested: true });
       this.props
-        .onImageUpload({ id: `${file.name}_${Date.now()}`, file })
+        .onImageverificationUpload({ id: `${file.name}_${Date.now()}`, file })
         .then(() => {
           this.setState({ imageUploadRequested: false });
         })
@@ -42,19 +42,19 @@ export class EditListingVerificationFormComponent extends Component {
         {...this.props}
         onImageUploadHandler={this.onImageUploadHandler}
         imageUploadRequested={this.state.imageUploadRequested}
-        initialValues={{ images: this.props.images }}
+        initialValues={{ imagesverification: this.props.imagesverification }}
         render={formRenderProps => {
           const {
             form,
             className,
             fetchErrors,
             handleSubmit,
-            images,
+            imagesverification,
             imageUploadRequested,
             intl,
             invalid,
             onImageUploadHandler,
-            onRemoveImage,
+            onRemoveImageverification,
             disabled,
             ready,
             saveActionMsg,
@@ -115,7 +115,7 @@ export class EditListingVerificationFormComponent extends Component {
           // imgs can contain added images (with temp ids) and submitted images with uniq ids.
           const arrayOfImgIds = imgs =>
             imgs.map(i => (typeof i.id === 'string' ? i.imageId : i.id));
-          const imageIdsFromProps = arrayOfImgIds(images);
+          const imageIdsFromProps = arrayOfImgIds(imagesverification);
           const imageIdsFromPreviousSubmit = arrayOfImgIds(this.submittedImages);
           const imageArrayHasSameImages = isEqual(imageIdsFromProps, imageIdsFromPreviousSubmit);
           const pristineSinceLastSubmit = submittedOnce && imageArrayHasSameImages;
@@ -131,7 +131,7 @@ export class EditListingVerificationFormComponent extends Component {
             <Form
               className={classes}
               onSubmit={e => {
-                this.submittedImages = images;
+                this.submittedImages = imagesverification;
                 handleSubmit(e);
               }}
             >
@@ -143,12 +143,12 @@ export class EditListingVerificationFormComponent extends Component {
               <p>Upload Photo ID -- drivers licence and Passport</p>
               <AddImages
                 className={css.imagesField}
-                images={images}
+                imagesverification={imagesverification}
                 thumbnailClassName={css.thumbnail}
                 savedImageAltText={intl?.formatMessage({
                   id: 'EditListingPhotosForm.savedImageAltText',
                 })}
-                onRemoveImage={onRemoveImage}
+                onRemoveImageverification={onRemoveImageverification}
               >
                 <Field
                   id="addImageverification"
@@ -239,9 +239,9 @@ EditListingVerificationFormComponent.propTypes = {
     uploadImageError: propTypes.error,
     updateListingError: propTypes.error,
   }),
-  images: array,
+  imagesverification: array,
   intl: intlShape.isRequired,
-  onImageUpload: func.isRequired,
+  onImageverificationUpload: func.isRequired,
   onUpdateImageOrder: func.isRequired,
   onSubmit: func.isRequired,
   saveActionMsg: string.isRequired,
@@ -249,7 +249,7 @@ EditListingVerificationFormComponent.propTypes = {
   ready: bool.isRequired,
   updated: bool.isRequired,
   updateInProgress: bool.isRequired,
-  onRemoveImage: func.isRequired,
+  onRemoveImageverification: func.isRequired,
 };
 
 export default compose(injectIntl)(EditListingVerificationFormComponent);

@@ -56,6 +56,7 @@ import SectionHostMaybe from './SectionHostMaybe';
 import SectionRulesMaybe from './SectionRulesMaybe';
 import SectionMapMaybe from './SectionMapMaybe';
 import css from './ListingPage.module.css';
+import SectionServicesetup from './SectionSerivesetup';
 
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
 
@@ -392,6 +393,7 @@ export class ListingPageComponent extends Component {
     const amenityOptions3 = findOptionsForSelectFilter('sizeOfdogs', filterConfig);
     const amenityOptions4 = findOptionsForSelectFilter('housingConditions', filterConfig);
     const amenityOptions5 = findOptionsForSelectFilter('petInHome', filterConfig);
+    const amenityOptions6 = findOptionsForSelectFilter('serviceSetup', filterConfig);
     const categoryOptions = findOptionsForSelectFilter('category', filterConfig);
     const category =
       publicData && publicData.category ? (
@@ -449,6 +451,7 @@ export class ListingPageComponent extends Component {
                     onContactUser={this.onContactUser}
                   />
                   <SectionDescriptionMaybe description={description} />
+                  <SectionServicesetup options={amenityOptions6} publicData={publicData} />
                   <SectionFeaturesMaybe options={amenityOptions} publicData={publicData} />
                   
                   <SectionFeatures2Maybe options={amenityOptions2} publicData={publicData} />
@@ -456,15 +459,15 @@ export class ListingPageComponent extends Component {
                   <SectionFeatures4Maybe options={amenityOptions4} publicData={publicData} />
                   <SectionFeatures5Maybe options={amenityOptions5} publicData={publicData} />
                   <div className={css.featuresTitle}>Tell us about Yourself</div>
-                  <h4>Years of experince caring for pets</h4>
+                  <h4 className={css.featuresTitle}>Years of experince caring for pets</h4>
                   <p>{yourselfexp}</p>
-                  <h4>Headline details</h4>
+                  <h4 className={css.featuresTitle}>Headline details</h4>
                    <p>{yourself}</p>
-                 <h4>Details about your service and experience</h4>
+                 <h4 className={css.featuresTitle}>Details about your service and experience</h4>
                    <p>{yourselfservice}</p>
-                   <h4>Details about your schedule and how does pets care fit into your daily routine</h4>
+                   <h4 className={css.featuresTitle}>Details about your schedule and how does pets care fit into your daily routine</h4>
                    <p>{yourselfschedule}</p>
-                   <h3>Do you have pets</h3>
+                   <h3 className={css.featuresTitle}>Do you have pets</h3>
                    <p>{Yourselfdohavepets}</p>
                   <SectionRulesMaybe publicData={publicData} />
                   <SectionMapMaybe

@@ -5,13 +5,14 @@ import { FormattedMessage } from '../../util/reactIntl';
 import { ensureOwnListing } from '../../util/data';
 import { findOptionsForSelectFilter } from '../../util/search';
 import { LISTING_STATE_DRAFT } from '../../util/types';
-import { ListingLink } from '../../components';
-import { EditListingDescriptionForm } from '../../forms';
+import { ListingLink } from '..';
+// import { EditListingBasicInfoForm } from '../../forms';
 import config from '../../config';
 
 import css from './EditListingDescriptionPanel.module.css';
+import EditListingBasicInfoForm from '../../forms/EditListingBasicInfoForm/EditListingBasicInfoForm';
 
-const EditListingDescriptionPanel = props => {
+const EditListingBasicInfoPanel = props => {
   const {
     className,
     rootClassName,
@@ -46,7 +47,7 @@ const EditListingDescriptionPanel = props => {
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
-      <EditListingDescriptionForm
+      <EditListingBasicInfoForm
         className={css.form}
         initialValues={{ title, email:publicData.email,birthday:publicData.birthday,location:publicData.location, phone:publicData.phone,
           serviceSetup:publicData.serviceSetup }}
@@ -73,14 +74,14 @@ const EditListingDescriptionPanel = props => {
   );
 };
 
-EditListingDescriptionPanel.defaultProps = {
+EditListingBasicInfoPanel.defaultProps = {
   className: null,
   rootClassName: null,
   errors: null,
   listing: null,
 };
 
-EditListingDescriptionPanel.propTypes = {
+EditListingBasicInfoPanel.propTypes = {
   className: string,
   rootClassName: string,
 
@@ -97,4 +98,4 @@ EditListingDescriptionPanel.propTypes = {
   errors: object.isRequired,
 };
 
-export default EditListingDescriptionPanel;
+export default EditListingBasicInfoPanel;

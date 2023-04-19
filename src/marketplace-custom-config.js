@@ -91,63 +91,63 @@ export const filters = [
   //     ],
   //   },
   // },
-  {
-    id: 'amenities',
-    label: 'Amenities',
-    type: 'SelectMultipleFilter',
-    group: 'secondary',
-    queryParamNames: ['pub_amenities'],
-    config: {
-      // Optional modes: 'has_all', 'has_any'
-      // https://www.sharetribe.com/api-reference/marketplace.html#extended-data-filtering
-      searchMode: 'has_all',
+  // {
+  //   id: 'amenities',
+  //   label: 'Amenities',
+  //   type: 'SelectMultipleFilter',
+  //   group: 'secondary',
+  //   queryParamNames: ['pub_amenities'],
+  //   config: {
+  //     // Optional modes: 'has_all', 'has_any'
+  //     // https://www.sharetribe.com/api-reference/marketplace.html#extended-data-filtering
+  //     searchMode: 'has_all',
 
-      // "key" is the option you see in Flex Console.
-      // "label" is set here for this web app's UI only.
-      // Note: label is not added through the translation files
-      // to make filter customizations a bit easier.
-      options: [
-        {
-          key: 'towels',
-          label: '0-6kg (small)',
+  //     // "key" is the option you see in Flex Console.
+  //     // "label" is set here for this web app's UI only.
+  //     // Note: label is not added through the translation files
+  //     // to make filter customizations a bit easier.
+  //     options: [
+  //       {
+  //         key: 'towels',
+  //         label: '0-6kg (small)',
           
-        },
-        {
-          key: 'bathroom',
-          label: 'Bathroom',
-        },
-        {
-          key: 'swimming_pool',
-          label: 'Swimming pool',
-        },
-        {
-          key: 'own_drinks',
-          label: 'Own drinks allowed',
-        },
-        {
-          key: 'jacuzzi',
-          label: 'Jacuzzi',
-        },
-        {
-          key: 'audiovisual_entertainment',
-          label: 'Audiovisual entertainment',
-        },
-        {
-          key: 'barbeque',
-          label: 'Barbeque',
-        },
-        {
-          key: 'own_food_allowed',
-          label: 'Own food allowed',
-        },
-      ],
-    },
-  },
+  //       },
+  //       {
+  //         key: 'bathroom',
+  //         label: 'Bathroom',
+  //       },
+  //       {
+  //         key: 'swimming_pool',
+  //         label: 'Swimming pool',
+  //       },
+  //       {
+  //         key: 'own_drinks',
+  //         label: 'Own drinks allowed',
+  //       },
+  //       {
+  //         key: 'jacuzzi',
+  //         label: 'Jacuzzi',
+  //       },
+  //       {
+  //         key: 'audiovisual_entertainment',
+  //         label: 'Audiovisual entertainment',
+  //       },
+  //       {
+  //         key: 'barbeque',
+  //         label: 'Barbeque',
+  //       },
+  //       {
+  //         key: 'own_food_allowed',
+  //         label: 'Own food allowed',
+  //       },
+  //     ],
+  //   },
+  // },
   {
     id: 'serviceSetup',
     label: 'Choose pets',
     type: 'SelectMultipleFilter',
-    group: 'secondary',
+    group: 'primary',
     queryParamNames: ['pub_serviceSetup'],
     config: {
       
@@ -169,7 +169,7 @@ export const filters = [
     id: 'typeOfpets',
     label: 'Type of pet',
     type: 'SelectMultipleFilter',
-    group: 'secondary',
+    group: 'primary',
     queryParamNames: ['pub_typeOfpets'],
     config: {
       
@@ -212,7 +212,7 @@ export const filters = [
     id: 'numberOfPets',
     label: 'Number Of Pets',
     type: 'SelectSingleFilter',
-    group: 'secondary',
+    group: 'primary',
     queryParamNames: ['pub_numberOfPets'],
     config: {
       
@@ -259,7 +259,7 @@ export const filters = [
     id: 'sizeOfdogs',
     label: 'Size Of Dogs',
     type: 'SelectMultipleFilter',
-    group: 'secondary',
+    group: 'primary',
     queryParamNames: ['pub_sizeOfdogs'],
     config: {
       
@@ -289,7 +289,7 @@ export const filters = [
     id: 'housingConditions',
     label: 'Housing conditions',
     type: 'SelectMultipleFilter',
-    group: 'secondary',
+    group: 'primary',
     queryParamNames: ['pub_housingConditions'],
     config: {
       
@@ -322,7 +322,7 @@ export const filters = [
     id: 'petInHome',
     label: 'Pet in the home',
     type: 'SelectMultipleFilter',
-    group: 'secondary',
+    group: 'primary',
     queryParamNames: ['pub_petInHome'],
     config: {
       
