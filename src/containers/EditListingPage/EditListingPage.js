@@ -42,7 +42,7 @@ import {
   clearUpdatedTab,
   savePayoutDetails,
 } from './EditListingPage.duck';
-
+//console.log('requestImageUpload', requestImageUpload)
 import css from './EditListingPage.module.css';
 
 const STRIPE_ONBOARDING_RETURN_URL_SUCCESS = 'success';
@@ -160,17 +160,10 @@ export const EditListingPageComponent = props => {
     const currentListingImages =
       currentListing && currentListing.images ? currentListing.images : [];
 
-      // Images are passed to EditListingForm so that it can generate thumbnails out of them
-    const currentListingImagesverification =
-    currentListing && currentListing.imagesverification ? currentListing.imagesverification : [];
 
     // Images not yet connected to the listing
     const imageOrder = page.imageOrder || [];
     const unattachedImages = imageOrder.map(i => page.images[i]);
-
-    // Images not yet connected to the listing
-    const imageverificationOrder = page.imageverificationOrder || [];
-    const unattachedImagesverification = imageverificationOrder.map(i => page.imagesverification[i]);
 
 
     const allImages = currentListingImages.concat(unattachedImages);
@@ -178,13 +171,7 @@ export const EditListingPageComponent = props => {
     const images = allImages.filter(img => {
       return !removedImageIds.includes(img.id);
     });
-
-    const allImagesverification = currentListingImagesverification.concat(unattachedImagesverification);
-    const removedImageIdsverification = page.removedImageIdsverification || [];
-    const imagesverification = allImagesverification.filter(img => {
-      return !removedImageIdsverification.includes(img.id);
-    });
-
+  
     const title = isNewListingFlow
       ? intl.formatMessage({ id: 'EditListingPage.titleCreateListing' })
       : intl.formatMessage({ id: 'EditListingPage.titleEditListing' });
@@ -207,7 +194,6 @@ export const EditListingPageComponent = props => {
           newListingPublished={newListingPublished}
           history={history}
           images={images}
-          imagesverification={imagesverification}
           listing={currentListing}
           availability={{
             calendar: page.availabilityCalendar,
@@ -367,8 +353,8 @@ const mapDispatchToProps = dispatch => ({
   onDeleteAvailabilityException: params => dispatch(requestDeleteAvailabilityException(params)),
   onCreateListingDraft: values => dispatch(requestCreateListingDraft(values)),
   onPublishListingDraft: listingId => dispatch(requestPublishListingDraft(listingId)),
-  onImageUpload: data => dispatch(requestImageUpload(data)),
-  onImageverificationUpload: data => dispatch(requestImageverificationUpload(data)),
+  onImageUpload: (data,imageType) => dispatch(requestImageUpload(data,imageType)),
+  onImageverificationUpload: (data,imageType) => dispatch(requestImageverificationUpload(data,imageType)),
   onManageDisableScrolling: (componentId, disableScrolling) =>
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
   onPayoutDetailsFormChange: () => dispatch(stripeAccountClearError()),

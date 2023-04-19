@@ -56,7 +56,7 @@ const EditListingYourselfFormComponent = props => (
         fetchErrors,
         values,
       } = formRenderProps;
-      console.log('values', values)
+      //console.log('values', values)
 
       const identity = v => v;
 

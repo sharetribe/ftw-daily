@@ -35,11 +35,11 @@ const EditListingYourselfPanel = props => {
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
     <FormattedMessage
-      id="EditListingDescriptionPanel.title"
+      id="EditListingyourselfPanel.title"
       values={{ listingTitle: <ListingLink listing={listing} /> }}
     />
   ) : (
-    <FormattedMessage id="EditListingDescriptionPanel.createListingTitle" />
+    <FormattedMessage id="EditListingYourselfPanel.createListingTitle" />
   );
 
   const categoryOptions = findOptionsForSelectFilter('category', config.custom.filters);

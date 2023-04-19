@@ -141,63 +141,64 @@ console.log('images', images)
                 </p>
               ) : null}
               <AddImages
-                className={css.imagesField}
-                images={images}
-                thumbnailClassName={css.thumbnail}
-                savedImageAltText={intl.formatMessage({
-                  id: 'EditListingPhotosForm.savedImageAltText',
-                })}
-                onRemoveImage={onRemoveImage}
-              >
-                <Field
-                  id="addImage"
-                  name="addImage"
-                  accept={ACCEPT_IMAGES}
-                  form={null}
-                  label={chooseImageText}
-                  type="file"
-                  disabled={imageUploadRequested}
+                  className={classNames(css.imagesField, images.length == 1 && css.imagesField1, images.length == 2 && css.imagesField2, images.length == 3 && css.imagesField3)}
+                  images={images}
+                  thumbnailClassName={css.thumbnail}
+                  savedImageAltText={intl.formatMessage({
+                    id: 'EditListingPhotosForm.savedImageAltText',
+                  })}
+                  onRemoveImage={onRemoveImage}
                 >
-                  {fieldprops => {
-                    const { accept, input, label, disabled: fieldDisabled } = fieldprops;
-                    const { name, type } = input;
-                    const onChange = e => {
-                      const file = e.target.files[0];
-                      form.change(`addImage`, file);
-                      form.blur(`addImage`);
-                      onImageUploadHandler(file);
-                    };
-                    const inputProps = { accept, id: name, name, onChange, type };
-                    return (
-                      <div className={css.addImageWrapper}>
-                        <div className={css.aspectRatioWrapper}>
-                          {fieldDisabled ? null : (
-                            <input {...inputProps} className={css.addImageInput} />
-                          )}
-                          <label htmlFor={name} className={css.addImage}>
-                            {label}
-                          </label>
+                    <Field
+                    id="addImage"
+                    name="addImage"
+                    accept={ACCEPT_IMAGES}
+                    form={null}
+                    label={chooseImageText}
+                    type="file"
+                    disabled={imageUploadRequested}
+                  >
+                    {fieldprops => {
+                      const { accept, input, label, disabled: fieldDisabled } = fieldprops;
+                      const { name, type } = input;
+                      const onChange = e => {
+                        const file = e.target.files[0];
+                        form.change(`addImage`, file);
+                        form.blur(`addImage`);
+                        onImageUploadHandler(file);
+                      };
+                      const inputProps = { accept, id: name, name, onChange, type };
+                      return (
+                        <div className={css.addImageWrapper}>
+                          <div className={css.aspectRatioWrapper}>
+                            {fieldDisabled ? null : (
+                              <input {...inputProps} multiple className={css.addImageInput} />
+                            )}
+                            <label htmlFor={name} className={css.addImage}>
+                              {label}
+                            </label>
+                          </div>
                         </div>
-                      </div>
-                    );
-                  }}
-                </Field>
-
-                <Field
-                  component={props => {
-                    const { input, meta } = props;
-                    return (
-                      <div className={css.imageRequiredWrapper}>
-                        <input {...input} />
-                        <ValidationError fieldMeta={meta} />
-                      </div>
-                    );
-                  }}
-                  name="images"
-                  type="hidden"
-                  validate={composeValidators(nonEmptyArray(imageRequiredMessage))}
-                />
-              </AddImages>
+                      );
+                    }}
+                  </Field>
+                  <Field
+                    component={props => {
+                      const { input, meta } = props;
+                      return (
+                        <div className={css.imageRequiredWrapper}>
+                          <input {...input} />
+                          <ValidationError fieldMeta={meta} />
+                        </div>
+                      );
+                    }}
+                    name="images"
+                    type="hidden"
+                    validate={composeValidators(nonEmptyArray(imageRequiredMessage))}
+                  />
+                    
+                
+                </AddImages>
               {uploadImageFailed}
 
               <p className={css.tip}>

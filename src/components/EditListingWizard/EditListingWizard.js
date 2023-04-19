@@ -27,7 +27,7 @@ import EditListingWizardTab, {
   PRICING,
   YOURSELF,
   PHOTOS,
-  Location,
+  
   VERIFICATION
 } from './EditListingWizardTab';
 import css from './EditListingWizard.module.css';
@@ -107,7 +107,7 @@ const tabCompleted = (tab, listing) => {
     publicData,
   } = listing.attributes;
   const images = listing.images;
-  const imagesverification = listing.imagesverification;
+
 
   switch (tab) {
     case DESCRIPTION:
@@ -129,7 +129,7 @@ const tabCompleted = (tab, listing) => {
     case PHOTOS:
       return images && images.length > 0;
       case VERIFICATION:
-        return imagesverification && imagesverification.length > 0;
+        return images && images.length > 0;
     default:
       return false;
   }
@@ -528,7 +528,7 @@ EditListingWizard.propTypes = {
       title: string,
     }),
     images: array,
-    imagesverification:array,
+  
   }),
 
   errors: shape({

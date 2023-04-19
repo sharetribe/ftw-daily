@@ -183,7 +183,7 @@ const initialState = {
   images: {},
   imageOrder: [],
   removedImageIds: [],
-  imagesverification: {},
+
   imageverificationOrder: [],
   removedImageIdsverification: [],
   listingDraft: null,
@@ -365,33 +365,16 @@ export default function reducer(state = initialState, action = {}) {
         uploadImageError: null,
       };
     }
-    case UPLOAD_IMAGEVERIFICATION_REQUEST: {
-      // payload.params: { id: 'tempId', file }
-      const imagesverification = {
-        ...state.imagesverification,
-        [payload.params.id]: { ...payload.params },
-      };
-      return {
-        ...state,
-        imagesverification,
-        imageverificationOrder: state.imageverificationOrder.concat([payload.params.id]),
-        uploadImageverificationError: null,
-      };
-    }
+  
     case UPLOAD_IMAGE_SUCCESS: {
       // payload.params: { id: 'tempId', imageId: 'some-real-id'}
-      const { id, imageId } = payload;
+      const { id, imageId ,imageType} = payload;
       const file = state.images[id].file;
-      const images = { ...state.images, [id]: { id, imageId, file } };
+      const images = { ...state.images, [id]: { id, imageId, file ,imageType} };
+      console.log('images', images)
       return { ...state, images };
     }
-    case UPLOAD_IMAGEVERIFICATION_SUCCESS: {
-      // payload.params: { id: 'tempId', imageId: 'some-real-id'}
-      const { id, imageIdverification } = payload;
-      const file = state.imagesverification[id].file;
-      const imagesverification = { ...state.imagesverification, [id]: { id, imageIdverification, file } };
-      return { ...state, imagesverification };
-    }
+
     case UPLOAD_IMAGE_ERROR: {
       // eslint-disable-next-line no-console
       const { id, error } = payload;
@@ -400,13 +383,6 @@ export default function reducer(state = initialState, action = {}) {
       return { ...state, imageOrder, images, uploadImageError: error };
     }
 
-    case UPLOAD_IMAGEVERIFICATION_ERROR: {
-      // eslint-disable-next-line no-console
-      const { id, error } = payload;
-      const imageverificationOrder = state.imageverificationOrder.filter(i => i !== id);
-      const imagesverification = omit(state.imagesverification, id);
-      return { ...state, imageverificationOrder, imagesverification, uploadImageverificationError: error };
-    }
     case UPDATE_IMAGE_ORDER:
       return { ...state, imageOrder: payload.imageOrder };
 
@@ -429,23 +405,6 @@ export default function reducer(state = initialState, action = {}) {
       const imageOrder = state.imageOrder.filter(i => i !== id);
 
       return { ...state, images, imageOrder, removedImageIds };
-    }
-
-    case REMOVE_LISTING_IMAGEVERIFICATION: {
-      const id = payload.imageIdverification;
-
-      // Only mark the image removed if it hasn't been added to the
-      // listing already
-      const removedImageIdsverification = state.imagesverification[id]
-        ? state.removedImageIdsverification
-        : state.removedImageIdsverification.concat(id);
-
-      // Always remove from the draft since it might be a new image to
-      // an existing listing.
-      const imagesverification = omit(state.imagesverification, id);
-      const imageverificationOrder = state.imageverificationOrder.filter(i => i !== id);
-
-      return { ...state, imagesverification, imageverificationOrder, removedImageIdsverification };
     }
 
     case SAVE_PAYOUT_DETAILS_REQUEST:
@@ -574,7 +533,7 @@ export function requestCreateListingDraft(data) {
 
     const queryParams = {
       expand: true,
-      include: ['author', 'images','imagesverification'],
+      include: ['author', 'images'],
       'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
     };
 
@@ -614,13 +573,14 @@ export const requestPublishListingDraft = listingId => (dispatch, getState, sdk)
 };
 
 // Images return imageId which we need to map with previously generated temporary id
-export function requestImageUpload(actionPayload) {
+export function requestImageUpload(actionPayload,imageType) {
+  console.log('actionPayload,imageType', actionPayload,imageType)
   return (dispatch, getState, sdk) => {
     const id = actionPayload.id;
-    dispatch(uploadImage(actionPayload));
+    dispatch(uploadImage(actionPayload,imageType));
     return sdk.images
       .upload({ image: actionPayload.file })
-      .then(resp => dispatch(uploadImageSuccess({ data: { id, imageId: resp.data.data.id } })))
+      .then(resp => dispatch(uploadImageSuccess({ data: { id, imageId: resp.data.data.id,imageType } })))
       .catch(e => dispatch(uploadImageError({ id, error: storableError(e) })));
   };
 }
@@ -747,7 +707,7 @@ export function requestUpdateListing(tab, data) {
         updateResponse = response;
         const payload = {
           id,
-          include: ['author', 'images','imagesverification'],
+          include: ['author', 'images'],
           'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
         };
         return dispatch(requestShowListing(payload));
@@ -801,7 +761,7 @@ export const loadData = params => (dispatch, getState, sdk) => {
 
   const payload = {
     id: new UUID(id),
-    include: ['author', 'images','imagesverification'],
+    include: ['author', 'images'],
     'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
   };
 
