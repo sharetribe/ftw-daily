@@ -32,6 +32,9 @@ class EditListingPhotosPanel extends Component {
     const rootClass = rootClassName || css.root;
     const classes = classNames(rootClass, className);
     const currentListing = ensureOwnListing(listing);
+    const {publicData}=currentListing.attributes||{};
+    const {idProofImageId}=publicData||{};
+    console.log('mainImageId', idProofImageId)
 
     const isPublished =
       currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
@@ -43,6 +46,11 @@ class EditListingPhotosPanel extends Component {
     ) : (
       <FormattedMessage id="EditListingPhotosPanel.createListingTitle" />
     );
+    const restImages = images && images.length
+      ? idProofImageId
+        ? images.filter(image => !image.imageType && idProofImageId && image.id && (!image.id.uuid || (image.id.uuid && image.id.uuid != idProofImageId)))
+        : images.filter(image => !image.imageType)
+      : [];
 
     return (
       <div className={classes}>
@@ -53,7 +61,7 @@ class EditListingPhotosPanel extends Component {
           ready={ready}
           fetchErrors={errors}
           initialValues={{ images }}
-          images={images}
+          images={restImages}
           onImageUpload={onImageUpload}
           onSubmit={values => {
             const { addImage, ...updateValues } = values;

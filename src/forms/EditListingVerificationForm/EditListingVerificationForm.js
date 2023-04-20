@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
-import { array, bool, func, shape, string } from 'prop-types';
 import { compose } from 'redux';
+import classNames from 'classnames';
+import { array, bool, func, shape, string } from 'prop-types';
 import { Form as FinalForm, Field } from 'react-final-form';
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
-import isEqual from 'lodash/isEqual';
-import classNames from 'classnames';
-import { propTypes } from '../../util/types';
-import { nonEmptyArray, composeValidators } from '../../util/validators';
-import { isUploadImageOverLimitError } from '../../util/errors';
-import { AddImages, Button, FieldTextInput, Form, IconEdit, ImageFromFile, ValidationError } from '../../components';
 
-import css from './EditListingPricingForm.module.css';
+import { propTypes } from '../../util/types';
+import { isUploadImageOverLimitError } from '../../util/errors';
+import {
+  Form,
+  Button,
+  IconEdit,
+  ImageFromFile,
+  ResponsiveImage
+} from '../../components';
+
+import css from './EditListingVerificationForm.module.css';
 
 const ACCEPT_IMAGES = 'image/*';
 
@@ -53,31 +58,28 @@ export class EditListingVerificationFormComponent extends Component {
             intl,
             invalid,
             onImageUploadHandler,
-            onRemoveImageverification,
             disabled,
             mainImageId,
             ready,
             saveActionMsg,
-            updated,
             images,
             updateInProgress,
           } = formRenderProps;
-          console.log('images', images)
 
-          const chooseImageText = (
-            <span className={css.chooseImageText}>
-              <span className={css.chooseImage}>
-                <FormattedMessage id="EditListingPhotosForm.chooseImage" />
-              </span>
-              <span className={css.imageTypes}>
-                <FormattedMessage id="EditListingPhotosForm.imageTypes" />
-              </span>
-            </span>
-          );
+          // const chooseImageText = (
+          //   <span className={css.chooseImageText}>
+          //     <span className={css.chooseImage}>
+          //       <FormattedMessage id="EditListingPhotosForm.chooseImage" />
+          //     </span>
+          //     <span className={css.imageTypes}>
+          //       <FormattedMessage id="EditListingPhotosForm.imageTypes" />
+          //     </span>
+          //   </span>
+          // );
 
-          const imageRequiredMessage = intl?.formatMessage({
-            id: 'EditListingPhotosForm.imageRequired',
-          });
+          // const imageRequiredMessage = intl?.formatMessage({
+          //   id: 'EditListingPhotosForm.imageRequired',
+          // });
 
           const { publishListingError, showListingsError, updateListingError, uploadImageError } =
             fetchErrors || {};
@@ -280,17 +282,12 @@ export class EditListingVerificationFormComponent extends Component {
                 </Field>
               {uploadImageFailed}
 
-              {/* <p className={css.tip}>
+               <p className={css.tip}>
                 <FormattedMessage id="EditListingPhotosForm.addImagesTip" />
-              </p> */}
+              </p> 
               
               {publishListingFailed}
               {showListingFailed}
-
-              {/* <FieldTextInput
-              type="text"
-              
-              /> */}
 
               <Button
                 className={css.submitButton}

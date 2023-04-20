@@ -3,13 +3,11 @@ import { array, bool, func, object, string } from 'prop-types';
 import { FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
 import { LISTING_STATE_DRAFT } from '../../util/types';
-import { EditListingPhotosForm } from '../../forms';
+import { EditListingVerificationForm } from '../../forms';
 import { ensureOwnListing } from '../../util/data';
-import { ListingLink } from '../../components';
-// import EditListingVerificationFormComponent from '../../forms'
+import { ListingLink } from '..';
 
-import css from './EditListingPhotosPanel.module.css';
-import { EditListingVerificationFormComponent } from '../../forms/EditListingVerificationfForm /EditListingVerificationForm';
+import css from './EditListingVerificationPanel.module.css';
 
 class EditListingVerificationPanel extends Component {
   render() {
@@ -24,7 +22,6 @@ class EditListingVerificationPanel extends Component {
       requestImageUpload,
       onImageUpload,
       imageType,
-      mainImageId,
       onUpdateImageverificationOrder,
       submitButtonText,
       panelUpdated,
@@ -33,11 +30,12 @@ class EditListingVerificationPanel extends Component {
       onSubmit,
       onRemoveImageverification,
     } = this.props;
-    console.log('imageType', imageType)
-console.log('images', images)
+
     const rootClass = rootClassName || css.root;
     const classes = classNames(rootClass, className);
     const currentListing = ensureOwnListing(listing);
+    const { publicData } = currentListing.attributes || {};
+    const { idProofImageId } = publicData || {};
 
     const isPublished =
       currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
@@ -50,23 +48,27 @@ console.log('images', images)
       <FormattedMessage id="EditListingPhotosPanel.createListingTitle" />
     );
     // const restImages = images && images.length
-    //   ? mainImageId
-    //     ? images.filter(image => !image.imageType && mainImageId && image.id && (!image.id.uuid || (image.id.uuid && image.id.uuid != mainImageId)))
+    //   ? idProofImageId
+    //     ? images.filter(image => !image.imageType && idProofImageId && image.id && (!image.id.uuid || (image.id.uuid && image.id.uuid != idProofImageId)))
     //     : images.filter(image => !image.imageType)
     //   : [];
-    const idProofImage = images && images.length
-      ? images.filter(image => image.imageType == 'idProofImage').length
-        ? images.filter(image => image.imageType == 'idProofImage')[images.filter(image => image.imageType == 'idProofImage').length - 1]
-        : images.filter(image => mainImageId && image.id && image.id.uuid == mainImageId).length
-          ? images.filter(image => mainImageId && image.id && image.id.uuid == mainImageId)[0]
+    const idProofImage =
+      images && images.length
+        ? images.filter(image => image.imageType == 'idProofImage').length
+          ? images.filter(image => image.imageType == 'idProofImage')[
+              images.filter(image => image.imageType == 'idProofImage').length - 1
+            ]
+          : images.filter(image => idProofImageId && image.id && image.id.uuid == idProofImageId)
+              .length
+          ? images.filter(image => idProofImageId && image.id && image.id.uuid == idProofImageId)[0]
           : []
-      : [];
+        : [];
 
     return (
       <div className={classes}>
         <h1 className={css.title}>{panelTitle}</h1>
-       
-        <EditListingVerificationFormComponent
+
+        <EditListingVerificationForm
           className={css.form}
           disabled={disabled}
           ready={ready}
@@ -77,30 +79,16 @@ console.log('images', images)
           onImageUpload={onImageUpload}
           onSubmit={values => {
             const { idProofImage: dummyidProofImage, ...updateValues } = values;
-            if (idProofImage && idProofImage.imageId && idProofImage.imageId.uuid) {
-               if (updateValues.images && updateValues.images.length) {
-                updateValues.images.push(idProofImage);
-              } else {
-                updateValues.images = [idProofImage];
-              }
-            }else{
-              if (updateValues.images && updateValues.images.length) {
-                 updateValues.images.push(idProofImage);
-              } else {
-                 updateValues.images = [idProofImage];
-              }
-            }
-            if (updateValues.images && updateValues.images.length) {
-              if (mainImageId) {
-                updateValues.images.filter(image => image.id.uuid != mainImageId);
-              }
-              Object.assign(updateValues, {
-                publicData: {
-                  idProofImageId: idProofImage?.imageId?.uuid ? idProofImage?.imageId?.uuid : mainImageId ? mainImageId : '',
-                 
-                }
-              });
-            }
+
+            Object.assign(updateValues, {
+              publicData: {
+                idProofImageId: idProofImage?.imageId?.uuid
+                  ? idProofImage?.imageId?.uuid
+                  : idProofImageId
+                  ? idProofImageId
+                  : '',
+              },
+            });
             onSubmit(updateValues);
           }}
           onChange={onChange}
@@ -119,7 +107,7 @@ EditListingVerificationPanel.defaultProps = {
   className: null,
   rootClassName: null,
   errors: null,
-  images:[],
+  images: [],
   listing: null,
 };
 
@@ -129,7 +117,7 @@ EditListingVerificationPanel.propTypes = {
   errors: object,
   disabled: bool.isRequired,
   ready: bool.isRequired,
-  images:array,
+  images: array,
 
   // We cannot use propTypes.listing since the listing might be a draft.
   listing: object,

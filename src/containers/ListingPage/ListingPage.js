@@ -381,13 +381,12 @@ export class ListingPageComponent extends Component {
       </NamedLink>
     );
 
-     const yourself = publicData && publicData.headline
-     const yourselfexp = publicData && publicData.exp
-     const yourselfservice = publicData && publicData.service
-     const yourselfschedule = publicData && publicData.schedule
-     const Yourselfdohavepets = publicData && publicData.dohavepets
+     const yourself = publicData && publicData.headline;
+     const yourselfexp = publicData && publicData.exp;
+     const yourselfservice = publicData && publicData.service;
+     const yourselfschedule = publicData && publicData.schedule;
+     const Yourselfdohavepets = publicData && publicData.dohavepets;
 
-     console.log('yourself', yourself)
     const amenityOptions = findOptionsForSelectFilter('typeOfpets', filterConfig);
     const amenityOptions2 = findOptionsForSelectFilter('numberOfPets', filterConfig);
     const amenityOptions3 = findOptionsForSelectFilter('sizeOfdogs', filterConfig);

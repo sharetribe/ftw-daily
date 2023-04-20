@@ -11,18 +11,17 @@ import { ensureListing } from '../../util/data';
 import { createResourceLocatorString } from '../../util/routes';
 import {
   EditListingAvailabilityPanel,
-  EditListingDescriptionPanel,
-  EditListingFeaturesPanel,
   EditListingLocationPanel,
   EditListingPhotosPanel,
   EditListingPoliciesPanel,
   EditListingPricingPanel,
+  EditListingYourselfPanel,
+  EditListingVerificationPanel,
+  EditListingBasicInfoPanel,
+  EditListingPetPrefrencePanel,
 } from '../../components';
 
 import css from './EditListingWizard.module.css';
-import EditListingYourselfPanel from '../EditListingYourselfPanel /EditListingYourselfPanel';
-import EditListingVerificationPanel from '../EditListingVerificationPanel /EditListingVerificationPanel';
-import EditListingBasicInfoPanel from '../EditListingBasicInfoPanel/EditListingBasicInfoPanel';
 
 export const AVAILABILITY = 'availability';
 export const DESCRIPTION = 'description';
@@ -188,7 +187,7 @@ const EditListingWizardTab = props => {
         ? 'EditListingWizard.saveNewFeatures'
         : 'EditListingWizard.saveEditFeatures';
       return (
-        <EditListingFeaturesPanel
+        <EditListingPetPrefrencePanel
           {...panelProps(FEATURES)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={values => {

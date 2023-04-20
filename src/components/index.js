@@ -158,8 +158,10 @@ export {default as LoadableComponentErrorBoundary } from './LoadableComponentErr
 export { default as ModalMissingInformation } from './ModalMissingInformation/ModalMissingInformation';
 export { default as ReviewModal } from './ReviewModal/ReviewModal';
 export { default as EditListingAvailabilityPanel } from './EditListingAvailabilityPanel/EditListingAvailabilityPanel';
-export { default as EditListingDescriptionPanel } from './EditListingBasicInfoPanel/EditListingBasicInfoPanel';
-export { default as EditListingFeaturesPanel } from './EditListingFeaturesPanel/EditListingFeaturesPanel';
+export { default as EditListingBasicInfoPanel } from './EditListingBasicInfoPanel/EditListingBasicInfoPanel';
+export { default as EditListingPetPrefrencePanel } from './EditListingPetPrefrencePanel/EditListingPetPrefrencePanel';
+export { default as EditListingYourselfPanel } from './EditListingYourselfPanel/EditListingYourselfPanel';
+export { default as EditListingVerificationPanel } from './EditListingVerificationPanel/EditListingVerificationPanel';
 export { default as EditListingLocationPanel } from './EditListingLocationPanel/EditListingLocationPanel';
 export { default as EditListingPhotosPanel } from './EditListingPhotosPanel/EditListingPhotosPanel';
 export { default as EditListingPoliciesPanel } from './EditListingPoliciesPanel/EditListingPoliciesPanel';

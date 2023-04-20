@@ -167,6 +167,7 @@ export const EditListingPageComponent = props => {
 
 
     const allImages = currentListingImages.concat(unattachedImages);
+    console.log('allImages', allImages)
     const removedImageIds = page.removedImageIds || [];
     const images = allImages.filter(img => {
       return !removedImageIds.includes(img.id);

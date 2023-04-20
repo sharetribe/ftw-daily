@@ -1,11 +1,11 @@
 /* eslint-disable no-console */
-import EditListingDescriptionForm from './EditListingDescriptionForm';
+import EditListingYourselfForm from './EditListingYourselfForm';
 
 export const Empty = {
-  component: EditListingDescriptionForm,
+  component: EditListingYourselfForm,
   props: {
     onSubmit: values => {
-      console.log('Submit EditListingDescriptionForm with (unformatted) values:', values);
+      console.log('Submit EditListingYourselfForm with (unformatted) values:', values);
     },
     saveActionMsg: 'Save description',
     updated: false,

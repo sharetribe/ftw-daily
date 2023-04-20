@@ -9,7 +9,7 @@ import { ListingLink } from '..';
 // import { EditListingBasicInfoForm } from '../../forms';
 import config from '../../config';
 
-import css from './EditListingDescriptionPanel.module.css';
+import css from "./EditListingbasicInfoPanel.module.css"
 import EditListingBasicInfoForm from '../../forms/EditListingBasicInfoForm/EditListingBasicInfoForm';
 
 const EditListingBasicInfoPanel = props => {

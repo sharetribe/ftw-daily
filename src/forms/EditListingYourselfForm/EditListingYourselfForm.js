@@ -1,35 +1,22 @@
 import React from 'react';
-import { arrayOf, bool, func, shape, string } from 'prop-types';
 import { compose } from 'redux';
-import { Form as FinalForm } from 'react-final-form';
-import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
 import classNames from 'classnames';
+import { Form as FinalForm } from 'react-final-form';
+import { arrayOf, bool, func, shape, string } from 'prop-types';
+import config from '../../config';
 import { propTypes } from '../../util/types';
+import { findOptionsForSelectFilter } from '../../util/search';
+import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
+import { maxLength, required, composeValidators, } from '../../util/validators';
 
-import {
-  maxLength,
-  required,
-  composeValidators,
-  autocompleteSearchRequired,
-  autocompletePlaceSelected,
-} from '../../util/validators';
 import {
   Form,
   Button,
   FieldTextInput,
-  FieldCheckboxGroup,
-  FieldCheckbox,
-  FieldBirthdayInput,
-  LocationAutocompleteInputField,
-  FieldPhoneNumberInput,
   FieldRadioButton,
 } from '../../components';
 
-
-import css from './EditListingDescriptionForm.module.css';
-import { findOptionsForSelectFilter } from '../../util/search';
-import config from '../../config';
-import FieldRadioButtonComponent from '../../components/FieldRadioButton/FieldRadioButton';
+import css from './EditListingYourselfForm.module.css';
 
 const TITLE_MAX_LENGTH = 25;
 const TITLE_MAX50_LENGTH = 50;
@@ -52,7 +39,6 @@ const EditListingYourselfFormComponent = props => (
         filterConfig,
         updated,
         updateInProgress,
-        
         fetchErrors,
         values,
       } = formRenderProps;
@@ -65,7 +51,7 @@ const EditListingYourselfFormComponent = props => (
       const headlinePlaceholderMessage = intl.formatMessage({
         id: 'EditListingYourselfForm.headlinePlaceholder',
       });
-     
+
       const headlineRequiredMessage = intl.formatMessage({
         id: 'EditListingYourselfForm.headlineRequired',
       });
@@ -109,7 +95,7 @@ const EditListingYourselfFormComponent = props => (
       const scheduleRequiredMessage = intl.formatMessage({
         id: 'EditListingYourselfForm.scheduleRequired',
       });
-      
+
       const descriptionRequiredMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.descriptionRequired',
       });
@@ -138,10 +124,8 @@ const EditListingYourselfFormComponent = props => (
       const submitReady = (updated && pristine) || ready;
       const submitInProgress = updateInProgress;
       const submitDisabled = invalid || disabled || submitInProgress || !values.dohavepets;
-   
-      //console.log('options', options)
       const dohavepets = findOptionsForSelectFilter('dohavepets', filterConfig);
-      
+
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessageCreateListingDraft}
@@ -166,7 +150,7 @@ const EditListingYourselfFormComponent = props => (
             type="text"
             label={headlineMessage}
             placeholder={headlinePlaceholderMessage}
-            validate={composeValidators(required(headlineRequiredMessage),maxLength50Message)}
+            validate={composeValidators(required(headlineRequiredMessage), maxLength50Message)}
             autoFocus
           />
 
@@ -176,7 +160,7 @@ const EditListingYourselfFormComponent = props => (
             className={css.description}
             label={serviceMessage}
             placeholder={servicePlaceholderMessage}
-            validate={composeValidators(required(serviceRequiredMessage),maxLength25Message)}
+            validate={composeValidators(required(serviceRequiredMessage), maxLength25Message)}
           />
 
           <FieldTextInput
@@ -185,24 +169,22 @@ const EditListingYourselfFormComponent = props => (
             className={css.description}
             label={scheduleMessage}
             placeholder={schedulePlaceholderMessage}
-            validate={composeValidators(required(scheduleRequiredMessage),maxLength25Message)}
+            validate={composeValidators(required(scheduleRequiredMessage), maxLength25Message)}
           />
-
 
           <div>
             <p>Do you have pet?</p>
             <div style={{ display: 'flex', gap: '20px' }}>
-            {
-           dohavepets.map((num)=>{
-              return(
-               <FieldRadioButtonComponent className={css.features} id={num.key} name={"dohavepets"} value={num.key} label={num.label}/>
-              )
-            })
-          }
-          </div>
-         
+              {dohavepets.map((num) => <FieldRadioButton
+                className={css.features}
+                id={num.key}
+                name={"dohavepets"}
+                value={num.key}
+                label={num.label} />)}
+            </div>
 
           </div>
+
           <Button
             className={css.submitButton}
             type="submit"

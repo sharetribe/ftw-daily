@@ -5,12 +5,11 @@ import { FormattedMessage } from '../../util/reactIntl';
 import { ensureOwnListing } from '../../util/data';
 import { findOptionsForSelectFilter } from '../../util/search';
 import { LISTING_STATE_DRAFT } from '../../util/types';
-import { ListingLink } from '../../components';
-import { EditListingDescriptionForm } from '../../forms';
+import { ListingLink } from '..';
+import { EditListingYourselfForm } from '../../forms';
 import config from '../../config';
 
-import css from './EditListingDescriptionPanel.module.css';
-import EditListingYourselfForm from '../../forms/EditListingYourselfForm/EditListingYourselfForm';
+import css from './EditListingYourselfPanel.module.css';
 
 const EditListingYourselfPanel = props => {
   const {

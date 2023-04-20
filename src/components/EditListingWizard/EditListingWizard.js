@@ -129,7 +129,7 @@ const tabCompleted = (tab, listing) => {
     case PHOTOS:
       return images && images.length > 0;
       case VERIFICATION:
-        return images && images.length > 0;
+        return images && images.length > 0 && (publicData.idProofImageId);
     default:
       return false;
   }

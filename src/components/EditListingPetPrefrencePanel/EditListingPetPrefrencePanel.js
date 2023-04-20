@@ -5,14 +5,14 @@ import { FormattedMessage } from '../../util/reactIntl';
 
 import { LISTING_STATE_DRAFT } from '../../util/types';
 import { ensureListing } from '../../util/data';
-import { EditListingFeaturesForm } from '../../forms';
-import { ListingLink } from '../../components';
+import { ListingLink } from '..';
+import { EditListingPetPrefrenceForm } from '../../forms';
 
 import css from './EditListingFeaturesPanel.module.css';
 
 const FEATURES_NAME = 'amenities';
 
-const EditListingFeaturesPanel = props => {
+const EditListingPetPrefrencePanel = props => {
   const {
     rootClassName,
     className,
@@ -42,20 +42,21 @@ const EditListingFeaturesPanel = props => {
   );
 
   const amenities = publicData && publicData.amenities;
-  const initialValues = {  typeOfpets:publicData.typeOfpets , numberOfPets:publicData.numberOfPets ,sizeOfdogs:publicData.sizeOfdogs};
+  const initialValues = { typeOfpets: publicData.typeOfpets, numberOfPets: publicData.numberOfPets, sizeOfdogs: publicData.sizeOfdogs };
 
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
-      <EditListingFeaturesForm
+
+      <EditListingPetPrefrenceForm
         className={css.form}
         name={FEATURES_NAME}
         initialValues={initialValues}
         onSubmit={values => {
-          const { amenities = [] ,sizeOfdogs,typeOfpets,numberOfPets } = values;
+          const { amenities = [], sizeOfdogs, typeOfpets, numberOfPets } = values;
 
           const updatedValues = {
-            publicData: { amenities,sizeOfdogs,typeOfpets,numberOfPets },
+            publicData: { amenities, sizeOfdogs, typeOfpets, numberOfPets },
           };
           onSubmit(updatedValues);
         }}
@@ -71,7 +72,7 @@ const EditListingFeaturesPanel = props => {
   );
 };
 
-EditListingFeaturesPanel.defaultProps = {
+EditListingPetPrefrencePanel.defaultProps = {
   rootClassName: null,
   className: null,
   listing: null,
@@ -79,7 +80,7 @@ EditListingFeaturesPanel.defaultProps = {
 
 const { bool, func, object, string } = PropTypes;
 
-EditListingFeaturesPanel.propTypes = {
+EditListingPetPrefrencePanel.propTypes = {
   rootClassName: string,
   className: string,
 
@@ -96,4 +97,4 @@ EditListingFeaturesPanel.propTypes = {
   errors: object.isRequired,
 };
 
-export default EditListingFeaturesPanel;
+export default EditListingPetPrefrencePanel;
