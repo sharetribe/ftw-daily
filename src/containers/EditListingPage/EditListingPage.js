@@ -42,7 +42,7 @@ import {
   clearUpdatedTab,
   savePayoutDetails,
 } from './EditListingPage.duck';
-//console.log('requestImageUpload', requestImageUpload)
+
 import css from './EditListingPage.module.css';
 
 const STRIPE_ONBOARDING_RETURN_URL_SUCCESS = 'success';
@@ -165,9 +165,7 @@ export const EditListingPageComponent = props => {
     const imageOrder = page.imageOrder || [];
     const unattachedImages = imageOrder.map(i => page.images[i]);
 
-
     const allImages = currentListingImages.concat(unattachedImages);
-    console.log('allImages', allImages)
     const removedImageIds = page.removedImageIds || [];
     const images = allImages.filter(img => {
       return !removedImageIds.includes(img.id);

@@ -26,7 +26,6 @@ const EditListingYourselfFormComponent = props => (
     {...props}
     render={formRenderProps => {
       const {
-        categories,
         className,
         disabled,
         ready,
@@ -42,9 +41,6 @@ const EditListingYourselfFormComponent = props => (
         fetchErrors,
         values,
       } = formRenderProps;
-      //console.log('values', values)
-
-      const identity = v => v;
 
       // date of birthday
       const headlineMessage = intl.formatMessage({ id: 'EditListingYourselfForm.headline' });

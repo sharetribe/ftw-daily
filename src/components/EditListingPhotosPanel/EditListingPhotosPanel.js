@@ -32,10 +32,8 @@ class EditListingPhotosPanel extends Component {
     const rootClass = rootClassName || css.root;
     const classes = classNames(rootClass, className);
     const currentListing = ensureOwnListing(listing);
-    const {publicData}=currentListing.attributes||{};
-    const {idProofImageId}=publicData||{};
-    console.log('mainImageId', idProofImageId)
-
+    const { publicData } = currentListing.attributes || {};
+    const { idProofImageId } = publicData || {};    
     const isPublished =
       currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
     const panelTitle = isPublished ? (
@@ -46,6 +44,14 @@ class EditListingPhotosPanel extends Component {
     ) : (
       <FormattedMessage id="EditListingPhotosPanel.createListingTitle" />
     );
+
+    const idProofImage = images && images.length
+      ? images.filter(image => image.imageType == 'idProofImage').length
+        ? images.filter(image => image.imageType == 'idProofImage')[images.filter(image => image.imageType == 'idProofImage').length - 1]
+        : images.filter(image => idProofImageId && image.id && image.id.uuid == idProofImageId).length
+          ? images.filter(image => idProofImageId && image.id && image.id.uuid == idProofImageId)[0]
+          : []
+      : [];
     const restImages = images && images.length
       ? idProofImageId
         ? images.filter(image => !image.imageType && idProofImageId && image.id && (!image.id.uuid || (image.id.uuid && image.id.uuid != idProofImageId)))
@@ -65,6 +71,9 @@ class EditListingPhotosPanel extends Component {
           onImageUpload={onImageUpload}
           onSubmit={values => {
             const { addImage, ...updateValues } = values;
+            if (idProofImageId && idProofImage && Object.keys(idProofImage).length) {
+              updateValues.images.push(idProofImage);
+            }
             onSubmit(updateValues);
           }}
           onChange={onChange}

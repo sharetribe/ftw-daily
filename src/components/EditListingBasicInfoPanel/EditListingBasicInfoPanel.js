@@ -29,9 +29,7 @@ const EditListingBasicInfoPanel = props => {
 
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
-  console.log('listing', listing)
-  //console.log('currentListing', currentListing)
-  const { email, title,phone,birthday,location, publicData,protectedData } = currentListing.attributes;
+  const { title, publicData } = currentListing.attributes;
 
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
@@ -49,17 +47,17 @@ const EditListingBasicInfoPanel = props => {
       <h1 className={css.title}>{panelTitle}</h1>
       <EditListingBasicInfoForm
         className={css.form}
-        initialValues={{ title, email:publicData.email,birthday:publicData.birthday,location:publicData.location, phone:publicData.phone,
-          serviceSetup:publicData.serviceSetup }}
+        initialValues={{
+          title, email: publicData.email, birthday: publicData.birthday, location: publicData.location, phone: publicData.phone,
+          serviceSetup: publicData.serviceSetup
+        }}
         saveActionMsg={submitButtonText}
         onSubmit={values => {
-          const { title, email, phone,birthday,location,serviceSetup } = values;
+          const { title, email, phone, birthday, location, serviceSetup } = values;
           const updateValues = {
             title: title.trim(),
-            publicData: { birthday,email,location,serviceSetup,phone},
-           };
-         //console.log('updateValues', updateValues)
-
+            publicData: { birthday, email, location, serviceSetup, phone },
+          };
           onSubmit(updateValues);
         }}
         onChange={onChange}

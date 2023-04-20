@@ -36,7 +36,7 @@ const EditListingPetPrefrenceFormComponent = props => (
         filterConfig,
         values,
       } = formRenderProps;
-      //console.log('values', values)
+
       const classes = classNames(rootClassName || css.root, className);
       const submitReady = (updated && pristine) || ready;
       const submitInProgress = updateInProgress;

@@ -28,8 +28,7 @@ const EditListingYourselfPanel = props => {
 
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
-  //console.log('currentListing', currentListing)
-  const {   publicData,protectedData } = currentListing.attributes;
+  const { publicData, protectedData } = currentListing.attributes;
 
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
@@ -47,16 +46,17 @@ const EditListingYourselfPanel = props => {
       <h1 className={css.title}>{panelTitle}</h1>
       <EditListingYourselfForm
         className={css.form}
-        initialValues={{  exp:publicData.exp,headline:publicData.headline,service:publicData.service, 
-          schedule:publicData.schedule ,dohavepets:publicData.dohavepets}}
+        initialValues={{
+          exp: publicData.exp, headline: publicData.headline, service: publicData.service,
+          schedule: publicData.schedule, dohavepets: publicData.dohavepets
+        }}
         saveActionMsg={submitButtonText}
         onSubmit={values => {
-          const {  exp,headline,service,schedule ,dohavepets} = values;
+          const { exp, headline, service, schedule, dohavepets } = values;
           const updateValues = {
-            
-            publicData: { headline,exp,service,schedule,dohavepets},
-           };
-         // console.log('updateValues', updateValues)
+
+            publicData: { headline, exp, service, schedule, dohavepets },
+          };
 
           onSubmit(updateValues);
         }}

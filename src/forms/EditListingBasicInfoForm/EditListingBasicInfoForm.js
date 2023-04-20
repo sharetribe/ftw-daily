@@ -46,9 +46,6 @@ const EditListingBasicInfoFormComponent = props => (
         fetchErrors,
         values,
       } = formRenderProps;
-    console.log('values', values)
-
-      const identity = v => v;
 
       // date of birthday
       const birthdateMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.birthdate' });
@@ -131,8 +128,6 @@ const EditListingBasicInfoFormComponent = props => (
       const submitInProgress = updateInProgress;
       const submitDisabled = invalid || disabled || submitInProgress || ! values.email || ! values.phone || !values.serviceSetup;
       const options = findOptionsForSelectFilter('serviceSetup', filterConfig);
-      //console.log('options', options)
-      
 
       return (
         <Form className={classes} onSubmit={handleSubmit}>

@@ -31,14 +31,6 @@ export const EditListingPoliciesFormComponent = props => (
         filterConfig,
       } = formRenderProps;
 
-      console.log('values', values)
-      const rulesLabelMessage = intl.formatMessage({
-        id: 'EditListingPoliciesForm.rulesLabel',
-      });
-      const rulesPlaceholderMessage = intl.formatMessage({
-        id: 'EditListingPoliciesForm.rulesPlaceholder',
-      });
-
       const { updateListingError, showListingsError } = fetchErrors || {};
       const errorMessage = updateListingError ? (
         <p className={css.error}>

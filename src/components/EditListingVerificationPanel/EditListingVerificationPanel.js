@@ -19,9 +19,7 @@ class EditListingVerificationPanel extends Component {
       ready,
       images,
       listing,
-      requestImageUpload,
       onImageUpload,
-      imageType,
       onUpdateImageverificationOrder,
       submitButtonText,
       panelUpdated,
@@ -47,22 +45,14 @@ class EditListingVerificationPanel extends Component {
     ) : (
       <FormattedMessage id="EditListingPhotosPanel.createListingTitle" />
     );
-    // const restImages = images && images.length
-    //   ? idProofImageId
-    //     ? images.filter(image => !image.imageType && idProofImageId && image.id && (!image.id.uuid || (image.id.uuid && image.id.uuid != idProofImageId)))
-    //     : images.filter(image => !image.imageType)
-    //   : [];
-    const idProofImage =
-      images && images.length
-        ? images.filter(image => image.imageType == 'idProofImage').length
-          ? images.filter(image => image.imageType == 'idProofImage')[
-              images.filter(image => image.imageType == 'idProofImage').length - 1
-            ]
-          : images.filter(image => idProofImageId && image.id && image.id.uuid == idProofImageId)
-              .length
+
+    const idProofImage = images && images.length
+      ? images.filter(image => image.imageType == 'idProofImage').length
+        ? images.filter(image => image.imageType == 'idProofImage')[images.filter(image => image.imageType == 'idProofImage').length - 1]
+        : images.filter(image => idProofImageId && image.id && image.id.uuid == idProofImageId).length
           ? images.filter(image => idProofImageId && image.id && image.id.uuid == idProofImageId)[0]
           : []
-        : [];
+      : [];
 
     return (
       <div className={classes}>
@@ -82,11 +72,11 @@ class EditListingVerificationPanel extends Component {
 
             Object.assign(updateValues, {
               publicData: {
-                idProofImageId: idProofImage?.imageId?.uuid
-                  ? idProofImage?.imageId?.uuid
+                idProofImageId: idProofImage.imageId && idProofImage.imageId.uuid
+                  ? idProofImage.imageId.uuid
                   : idProofImageId
-                  ? idProofImageId
-                  : '',
+                    ? idProofImageId
+                    : '',
               },
             });
             onSubmit(updateValues);

@@ -371,7 +371,6 @@ export default function reducer(state = initialState, action = {}) {
       const { id, imageId ,imageType} = payload;
       const file = state.images[id].file;
       const images = { ...state.images, [id]: { id, imageId, file ,imageType} };
-      console.log('images', images)
       return { ...state, images };
     }
 
@@ -574,7 +573,6 @@ export const requestPublishListingDraft = listingId => (dispatch, getState, sdk)
 
 // Images return imageId which we need to map with previously generated temporary id
 export function requestImageUpload(actionPayload,imageType) {
-  console.log('actionPayload,imageType', actionPayload,imageType)
   return (dispatch, getState, sdk) => {
     const id = actionPayload.id;
     dispatch(uploadImage(actionPayload,imageType));

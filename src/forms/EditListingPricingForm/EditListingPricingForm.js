@@ -46,8 +46,6 @@ export const EditListingPricingFormComponent = props => (
         updateInProgress,
         fetchErrors,
       } = formRenderProps;
-      className;
-      console.log('values', values)
 
       const unitType = config.bookingUnitType;
       const isNightly = unitType === LINE_ITEM_NIGHT;
@@ -94,10 +92,8 @@ export const EditListingPricingFormComponent = props => (
       const { updateListingError, showListingsError } = fetchErrors || {};
       const discount = findOptionsForSelectFilter('discount', filterConfig);
       const detail = listing?.attributes?.publicData?.serviceSetup;
-      //console.log('detail', detail);
-
       const numberPet = listing?.attributes?.publicData?.numberOfPets;
-console.log('numberPet', numberPet)
+
       return (
         <Form onSubmit={handleSubmit} className={classes}>
           {updateListingError ? (

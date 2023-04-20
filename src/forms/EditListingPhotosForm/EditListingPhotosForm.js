@@ -61,7 +61,7 @@ export class EditListingPhotosFormComponent extends Component {
             updated,
             updateInProgress,
           } = formRenderProps;
-console.log('images', images)
+
           const chooseImageText = (
             <span className={css.chooseImageText}>
               <span className={css.chooseImage}>
