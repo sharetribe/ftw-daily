@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { compose } from 'redux';
 import { Form as FinalForm } from 'react-final-form';
 import { arrayOf, bool, func, shape, string } from 'prop-types';
@@ -50,8 +50,33 @@ const EditListingBasicInfoFormComponent = props => (
       } = formRenderProps;
 
       console.log('values', values)
+      
+      const [birthday, setBirthday] = useState('');
       const identity = v => v;
       // date of birthday
+      // Define the birthday validation function
+      const birth = values.birthday
+      console.log('birth', birth)
+const validateBirthday = (birth) => {
+  // Convert the input date string to a Date object
+  const inputDate = new Date(date);
+  // Calculate the age based on the input date
+  const currentDate = new Date();
+  const age = currentDate.getFullYear() - inputDate.getFullYear();
+  // Check if the calculated age is greater than 18
+  if (age > 18) {
+    // Return true if age is greater than 18
+    return true;
+  } else {
+    // Return false if age is not greater than 18
+    return false;
+  }
+};
+const handleBirthdayChange = (event) => {
+  const { value } = event.target;
+  setBirthday(value);
+}
+console.log('validateBirthday', validateBirthday)
       const birthdateMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.birthdate' });
       const birthdatePlaceholderMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.birthdatePlaceholder',
@@ -171,6 +196,7 @@ const EditListingBasicInfoFormComponent = props => (
                       // valueFromForm={values.birthday}
                       placeholder={birthdatePlaceholderMessage}
                       label={birthdateMessage}
+                      //onChange={handleBirthdayChange}
                       //validate={validators.composeValidators( minAgeRequired)}
                       autoFocus
                     />

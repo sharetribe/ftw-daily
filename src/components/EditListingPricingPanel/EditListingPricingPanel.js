@@ -31,6 +31,7 @@ const EditListingPricingPanel = props => {
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
   const { price ,publicData={}} = currentListing.attributes;
+  console.log('currentListing', currentListing)
   
   // day price
 
@@ -56,23 +57,29 @@ const price3 = Number(overnightsStayPrice3 )
 const price4 = Number(dayCareStay1)
 const price5 = Number(dayCareStay2)
 const price6 = Number(dayCareStay3)
-console.log('price1', price1)
-// prices.push(price1,price2,price3,price4,price5,price6)
-const prices1 = [price1, price2, price3, price4, price5, price6];
-const filteredPrices = prices1.filter(price => price > 0);
-const min = Math.min(...filteredPrices);
-console.log('min', min);
 
-console.log('filteredPrices', filteredPrices)
+ prices.push(price1, price2, price3, price4, price5, price6)
+// const prices1 = [price1, price2, price3, price4, price5, price6];
+// console.log('prices1', prices1)
+// values.overnightsStayPrice1 || values.overnightsStayPrice2 || values.overnightsStayPrice3 ||
 
-//const min =  Math.min(...prices)
+console.log('prices', prices)
+// const min = Math.min(...filteredPrices);
+// console.log(min, '^^^^ ^^^^ => min');
+
+//const [ secondmin,min ]= prices.sort((a,b) => b - a).slice(-2)
+const min =  Math.min(...prices)
+console.log('min', min)
+//console.log('secondmin', secondmin)
+
+
 
  //Check if price values are greater than 0, and push them into the prices array
 
 // Calculate the minimum value from the prices array
 //const min = Math.min(...prices);
 // Output the minimum value
-//console.log('min', min);
+//console.log('min', min);+
 
 
 
@@ -94,20 +101,27 @@ console.log('filteredPrices', filteredPrices)
       className={css.form}
        initialValues={{price, overnightsStayPrice1, overnightsStayPrice2, overnightsStayPrice3, dayCareStay1,dayCareStay2,dayCareStay3,discount,discountlengthOfStays,lengthOfStays}}
       onSubmit={values => {
-        const { price, overnightsStayPrice1, overnightsStayPrice2, overnightsStayPrice3, dayCareStay1,dayCareStay2,dayCareStay3,discount, discountlengthOfStays,lengthOfStays} = values;
+        const {  overnightsStayPrice1, overnightsStayPrice2, overnightsStayPrice3, dayCareStay1,dayCareStay2,dayCareStay3,discount, discountlengthOfStays,lengthOfStays} = values;
+        console.log(values, '^^^^ ^^^^ => values');
+        
+        // const filteredPrices = prices1.length && prices1.filter(price => price != 0);
+        // console.log(filteredPrices, '^^^^ ^^^^ => filteredPrices');
+        
+           
+           
         const updateValues = {
           price:new Money(min, config.currency),
           publicData: {
             pricepet: {
              dayCare:{
-              dayCareStay1 :dayCareStay1 || "",
-              dayCareStay2 :dayCareStay2 || "", 
-              dayCareStay3:dayCareStay3 || "",
+              dayCareStay1 :dayCareStay1 || 0,
+              dayCareStay2 :dayCareStay2 || 0, 
+              dayCareStay3:dayCareStay3 || 0,
              },
              overNight:{
-              overnightsStayPrice1:overnightsStayPrice1 || "", 
-              overnightsStayPrice2:overnightsStayPrice2 || "",
-              overnightsStayPrice3:overnightsStayPrice3 || "",
+              overnightsStayPrice1:overnightsStayPrice1 || 0, 
+              overnightsStayPrice2:overnightsStayPrice2 || 0,
+              overnightsStayPrice3:overnightsStayPrice3 || 0,
              }
             },
             discount,

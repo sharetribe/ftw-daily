@@ -66,24 +66,12 @@ export class EditListingVerificationFormComponent extends Component {
             updateInProgress,
           } = formRenderProps;
 
-          // const chooseImageText = (
-          //   <span className={css.chooseImageText}>
-          //     <span className={css.chooseImage}>
-          //       <FormattedMessage id="EditListingPhotosForm.chooseImage" />
-          //     </span>
-          //     <span className={css.imageTypes}>
-          //       <FormattedMessage id="EditListingPhotosForm.imageTypes" />
-          //     </span>
-          //   </span>
-          // );
-
-          // const imageRequiredMessage = intl?.formatMessage({
-          //   id: 'EditListingPhotosForm.imageRequired',
-          // });
+          console.log('images', images)
 
           const { publishListingError, showListingsError, updateListingError, uploadImageError } =
             fetchErrors || {};
           const uploadOverLimit = isUploadImageOverLimitError(uploadImageError);
+          
 
           const addMainPhoto = (
             <span className={css.chooseImageText}>
@@ -229,7 +217,7 @@ export class EditListingVerificationFormComponent extends Component {
           // const submitReady = (updated && pristineSinceLastSubmit) || ready;
           const submitInProgress = updateInProgress;
           const submitDisabled =
-            invalid || disabled || submitInProgress || idProofImageUploadRequested || ready;
+            invalid || disabled || submitInProgress || idProofImageUploadRequested || ready || !images ;
 
           const classes = classNames(css.root, className);
 
