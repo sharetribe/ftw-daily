@@ -7,6 +7,7 @@ import classNames from 'classnames';
 import config from '../../config';
 import { LINE_ITEM_NIGHT, LINE_ITEM_DAY, propTypes } from '../../util/types';
 import * as validators from '../../util/validators';
+import { maxLength, required, composeValidators, } from '../../util/validators';
 import { formatMoney } from '../../util/currency';
 import { findOptionsForSelectFilter } from '../../util/search';
 import { types as sdkTypes } from '../../util/sdkLoader';
@@ -46,6 +47,7 @@ export const EditListingPricingFormComponent = props => (
         updateInProgress,
         fetchErrors,
       } = formRenderProps;
+      console.log('values', values)
 
       const unitType = config.bookingUnitType;
       const isNightly = unitType === LINE_ITEM_NIGHT;
@@ -54,9 +56,20 @@ export const EditListingPricingFormComponent = props => (
       const translationKey = isNightly
         ? 'EditListingPricingForm.pricePerNight'
         : isDaily
-        ? 'EditListingPricingForm.pricePerDay'
-        : 'EditListingPricingForm.pricePerUnit';
+          ? 'EditListingPricingForm.pricePerDay'
+          : 'EditListingPricingForm.pricePerUnit';
 
+          const TITLE_MAX_LENGTH = 2;
+
+        //  const maxLength2Message = maxLength( TITLE_MAX_LENGTH);
+        const maxLengthMessage = intl.formatMessage(
+          { id: 'EditListingDescriptionForm.maxLength' },
+          {
+            maxLength: TITLE_MAX_LENGTH,
+          }
+        );
+          const maxLength2Message = maxLength(maxLengthMessage, TITLE_MAX_LENGTH);
+          // maxLength: TITLE_MAX_LENGTH,
       const pricePerUnitMessage = intl.formatMessage({
         id: translationKey,
       });
@@ -86,13 +99,17 @@ export const EditListingPricingFormComponent = props => (
         ? validators.composeValidators(priceRequired, minPriceRequired)
         : priceRequired;
       const classes = classNames(css.root, className);
-      const submitReady = (updated && pristine) || ready;
+      const submitReady = (updated && pristine) || ready ;
       const submitInProgress = updateInProgress;
-      const submitDisabled = invalid || disabled || submitInProgress 
+      const submitDisabled = invalid || disabled || submitInProgress|| !values.discount
       const { updateListingError, showListingsError } = fetchErrors || {};
       const discount = findOptionsForSelectFilter('discount', filterConfig);
       const detail = listing?.attributes?.publicData?.serviceSetup;
       const numberPet = listing?.attributes?.publicData?.numberOfPets;
+      const numberPetArray = numberPet && numberPet == "three" ? [1, 2, 3]
+        : numberPet == "two" ? [1, 2] : [1];
+  //console.log(values,"values");
+
 
       return (
         <Form onSubmit={handleSubmit} className={classes}>
@@ -106,471 +123,40 @@ export const EditListingPricingFormComponent = props => (
               <FormattedMessage id="EditListingPricingForm.showListingFailed" />
             </p>
           ) : null}
-          { detail && detail.filter(st => st == 'overnightsStay').length && detail && detail.filter(st => st == 'dayCareStay').length ? (
-            <div>
-              <div>
-                <p>Price for overnightsStay</p>
-                {numberPet == "two" ? <>
-              
-              <FieldCurrencyInput
-                id="price"
-                name="price"
+          {detail && detail.includes("overnightsStay") ? <> <p>Price for overnightsStay</p>
+            <div style={{ display: 'flex', gap: '20px' }}>
+             {numberPetArray.map((st)=> 
+               <FieldTextInput
+                id={"overnightsStayPrice"+st}
+                name={"overnightsStayPrice"+st}
                 className={css.priceInput}
                 autoFocus
-                label={pricePerUnitMessage}
+                label={"priceFor-Pet"+st}
                 placeholder={pricePlaceholderMessage}
-                currencyConfig={config.currencyConfig}
-                // validate={priceValidators}
-              />
-              <FieldCurrencyInput
-                id="price"
-                name="price"
-                className={css.priceInput}
-                autoFocus
-                label={pricePerUnitMessage}
-                placeholder={pricePlaceholderMessage}
-                currencyConfig={config.currencyConfig}
-                // validate={priceValidators}
-              />
-              
-              </>: numberPet == "one" ?
-              <>
-              
-              <FieldCurrencyInput
-                id="price"
-                name="price"
-                className={css.priceInput}
-                autoFocus
-                label={pricePerUnitMessage}
-                placeholder={pricePlaceholderMessage}
-                currencyConfig={config.currencyConfig}
-                // validate={priceValidators}
-              />
-              
-              </>
-            : numberPet == "three" ? 
-            <>
-              
-            <FieldCurrencyInput
-              id="price"
-              name="price"
-              className={css.priceInput}
-              autoFocus
-              label={pricePerUnitMessage}
-              placeholder={pricePlaceholderMessage}
-              currencyConfig={config.currencyConfig}
-              // validate={priceValidators}
-            />
-            <FieldCurrencyInput
-              id="price"
-              name="price"
-              className={css.priceInput}
-              autoFocus
-              label={pricePerUnitMessage}
-              placeholder={pricePlaceholderMessage}
-              currencyConfig={config.currencyConfig}
-              // validate={priceValidators}
-            />
-            <FieldCurrencyInput
-              id="price"
-              name="price"
-              className={css.priceInput}
-              autoFocus
-              label={pricePerUnitMessage}
-              placeholder={pricePlaceholderMessage}
-              currencyConfig={config.currencyConfig}
-              // validate={priceValidators}
-            />
+                //currencyConfig={config.currencyConfig}
             
-            </>
-         :null }
-              </div>
-              <div>
-                <p>Price for dayStay</p>
-                {numberPet == "two" ? <>
-              
-              <FieldCurrencyInput
-                id="price"
-                name="price"
-                className={css.priceInput}
-                autoFocus
-                label={pricePerUnitMessage}
-                placeholder={pricePlaceholderMessage}
-                currencyConfig={config.currencyConfig}
-                // validate={priceValidators}
-              />
-              <FieldCurrencyInput
-                id="price"
-                name="price"
-                className={css.priceInput}
-                autoFocus
-                label={pricePerUnitMessage}
-                placeholder={pricePlaceholderMessage}
-                currencyConfig={config.currencyConfig}
-                // validate={priceValidators}
-              />
-              
-              </>: numberPet == "one" ?
-              <>
-              
-              <FieldCurrencyInput
-                id="price"
-                name="price"
-                className={css.priceInput}
-                autoFocus
-                label={pricePerUnitMessage}
-                placeholder={pricePlaceholderMessage}
-                currencyConfig={config.currencyConfig}
-                // validate={priceValidators}
-              />
-              
-              </>
-            : numberPet == "three" ? 
-            <>
-              
-            <FieldCurrencyInput
-              id="price"
-              name="price"
-              className={css.priceInput}
-              autoFocus
-              label={pricePerUnitMessage}
-              placeholder={pricePlaceholderMessage}
-              currencyConfig={config.currencyConfig}
-              // validate={priceValidators}
-            />
-            <FieldCurrencyInput
-              id="price"
-              name="price"
-              className={css.priceInput}
-              autoFocus
-              label={pricePerUnitMessage}
-              placeholder={pricePlaceholderMessage}
-              currencyConfig={config.currencyConfig}
-              // validate={priceValidators}
-            />
-            <FieldCurrencyInput
-              id="price"
-              name="price"
-              className={css.priceInput}
-              autoFocus
-              label={pricePerUnitMessage}
-              placeholder={pricePlaceholderMessage}
-              currencyConfig={config.currencyConfig}
-              // validate={priceValidators}
-            />
-            
-            </>
-         :null }
-              </div>
+                validate={priceValidators}
+              />) }
             </div>
-          ) : detail && detail.filter(st => st == 'dayCareStay').length ? (
-            <div>
-              <p>Price for DayStay</p>
-              {numberPet == "two" ? <>
-              
-              <FieldCurrencyInput
-                id="price1"
-                name="price1"
+          </>
+            : null}
+          {detail && detail.includes("dayCareStay") ? <>
+            <p>Price for dayStay</p>
+            <div style={{ display: 'flex', gap: '20px' }}>
+            {numberPetArray.map((st)=> 
+               <FieldTextInput
+                id={"dayCareStay"+st}
+                name={"dayCareStay"+st}
                 className={css.priceInput}
                 autoFocus
-                label={pricePerUnitMessage}
+                label={"priceFor-Pet"+st}
                 placeholder={pricePlaceholderMessage}
-                currencyConfig={config.currencyConfig}
-                // validate={priceValidators}
-              />
-              <FieldCurrencyInput
-                id="price2"
-                name="price2"
-                className={css.priceInput}
-                autoFocus
-                label={pricePerUnitMessage}
-                placeholder={pricePlaceholderMessage}
-                currencyConfig={config.currencyConfig}
-                // validate={priceValidators}
-              />
-              
-              </>: numberPet == "one" ?
-              <>
-              
-              <FieldCurrencyInput
-                id="price1"
-                name="price1"
-                className={css.priceInput}
-                autoFocus
-                label={pricePerUnitMessage}
-                placeholder={pricePlaceholderMessage}
-                currencyConfig={config.currencyConfig}
-                // validate={priceValidators}
-              />
-              
-              </>
-            : numberPet == "three" ? 
-            <>
-              
-            <FieldCurrencyInput
-              id="price1"
-              name="price1"
-              className={css.priceInput}
-              autoFocus
-              label={pricePerUnitMessage}
-              placeholder={pricePlaceholderMessage}
-              currencyConfig={config.currencyConfig}
-              // validate={priceValidators}
-            />
-            <FieldCurrencyInput
-              id="price2"
-              name="price2"
-              className={css.priceInput}
-              autoFocus
-              label={pricePerUnitMessage}
-              placeholder={pricePlaceholderMessage}
-              currencyConfig={config.currencyConfig}
-              // validate={priceValidators}
-            />
-            <FieldCurrencyInput
-              id="price3"
-              name="price3"
-              className={css.priceInput}
-              autoFocus
-              label={pricePerUnitMessage}
-              placeholder={pricePlaceholderMessage}
-              currencyConfig={config.currencyConfig}
-              // validate={priceValidators}
-            />
-            
-            </>
-         :null }
+                //currencyConfig={config.currencyConfig}
+                validate={priceValidators}
+              />) }
             </div>
-          ) : detail && detail.filter(st => st == 'overnightsStay').length ? (
-            <>
-              <p>Price for overnightsStay</p>
-
-              {numberPet == "two" ? <>
-              
-              <FieldCurrencyInput
-                id="price1"
-                name="price1"
-                className={css.priceInput}
-                autoFocus
-                label={pricePerUnitMessage}
-                placeholder={pricePlaceholderMessage}
-                currencyConfig={config.currencyConfig}
-                // validate={priceValidators}
-              />
-              <FieldCurrencyInput
-                id="price2"
-                name="price2"
-                className={css.priceInput}
-                autoFocus
-                label={pricePerUnitMessage}
-                placeholder={pricePlaceholderMessage}
-                currencyConfig={config.currencyConfig}
-                // validate={priceValidators}
-              />
-              
-              </>: numberPet == "one" ?
-              <>
-              
-              <FieldCurrencyInput
-                id="price1"
-                name="price1"
-                className={css.priceInput}
-                autoFocus
-                label={pricePerUnitMessage}
-                placeholder={pricePlaceholderMessage}
-                currencyConfig={config.currencyConfig}
-                // validate={priceValidators}
-              />
-              
-              </>
-            : numberPet == "three" ? 
-            <>
-              
-            <FieldCurrencyInput
-              id="price1"
-              name="price12"
-              className={css.priceInput}
-              autoFocus
-              label={pricePerUnitMessage}
-              placeholder={pricePlaceholderMessage}
-              currencyConfig={config.currencyConfig}
-              // validate={priceValidators}
-            />
-            <FieldCurrencyInput
-              id="price2"
-              name="price2"
-              className={css.priceInput}
-              autoFocus
-              label={pricePerUnitMessage}
-              placeholder={pricePlaceholderMessage}
-              currencyConfig={config.currencyConfig}
-              // validate={priceValidators}
-            />
-            <FieldCurrencyInput
-              id="price3"
-              name="price3"
-              className={css.priceInput}
-              autoFocus
-              label={pricePerUnitMessage}
-              placeholder={pricePlaceholderMessage}
-              currencyConfig={config.currencyConfig}
-              // validate={priceValidators}
-            />
-            
-            </>
-         :null }
-              
-            </>
-          ) : null}
-          {/* <div>
-              <p>Price for overnightsStay</p>
-             
-                 
-              <div style={{ display: 'flex', gap: '10px' }}>
-              <FieldCurrencyInput
-                id="price"
-                name="price"
-                className={css.priceInput}
-                autoFocus
-                label={pricePerUnitMessage}
-                placeholder={pricePlaceholderMessage}
-                currencyConfig={config.currencyConfig}
-                // validate={priceValidators}
-              />
-              <FieldCurrencyInput
-                id="price"
-                name="price"
-                className={css.priceInput}
-                autoFocus
-                label={pricePerUnitMessage}
-                placeholder={pricePlaceholderMessage}
-                currencyConfig={config.currencyConfig}
-                // validate={priceValidators}
-              />
-              <FieldCurrencyInput
-                id="price"
-                name="price"
-                className={css.priceInput}
-                autoFocus
-                label={pricePerUnitMessage}
-                placeholder={pricePlaceholderMessage}
-                currencyConfig={config.currencyConfig}
-                // validate={priceValidators}
-              />
-            </div>
-              
-            </div> */}
-
-          {/* <p>{detail == 'overnightsStay' ? 'overnightsStay' : null}</p>
-          {detail == 'overnightsStay' ? (
-            <div style={{ display: 'flex', gap: '10px' }}>
-              <FieldCurrencyInput
-                id="price"
-                name="price"
-                className={css.priceInput}
-                autoFocus
-                label={pricePerUnitMessage}
-                placeholder={pricePlaceholderMessage}
-                currencyConfig={config.currencyConfig}
-                // validate={priceValidators}
-              />
-              <FieldCurrencyInput
-                id="price"
-                name="price"
-                className={css.priceInput}
-                autoFocus
-                label={pricePerUnitMessage}
-                placeholder={pricePlaceholderMessage}
-                currencyConfig={config.currencyConfig}
-                // validate={priceValidators}
-              />
-              <FieldCurrencyInput
-                id="price"
-                name="price"
-                className={css.priceInput}
-                autoFocus
-                label={pricePerUnitMessage}
-                placeholder={pricePlaceholderMessage}
-                currencyConfig={config.currencyConfig}
-                // validate={priceValidators}
-              />
-            </div>
-          ) :  <FieldSelect
-             id="numberOfpets"
-            name="numberOfpets"
-           >
-            <option disabled value="">
-             Choose the number of pets
-           </option>
-            <option>1</option>
-           <option>2</option>
-            <option>3</option>
-          </FieldSelect>
-          null}
-
-          <p>{detail == 'dayCareStay' ? 'dayCareStay' : null}</p>
-
-          {detail == 'dayCareStay' ? (
-            <div style={{ display: 'flex', gap: '10px' }}>
-              <FieldCurrencyInput
-                id="price"
-                name="price"
-                className={css.priceInput}
-                autoFocus
-                label={pricePerUnitMessage}
-                placeholder={pricePlaceholderMessage}
-                currencyConfig={config.currencyConfig}
-                // validate={priceValidators}
-              />
-              <FieldCurrencyInput
-                id="price"
-                name="price"
-                className={css.priceInput}
-                autoFocus
-                label={pricePerUnitMessage}
-                placeholder={pricePlaceholderMessage}
-                currencyConfig={config.currencyConfig}
-                // validate={priceValidators}
-              />
-              <FieldCurrencyInput
-                id="price"
-                name="price"
-                className={css.priceInput}
-                autoFocus
-                label={pricePerUnitMessage}
-                placeholder={pricePlaceholderMessage}
-                currencyConfig={config.currencyConfig}
-                 validate={priceValidators}
-              />
-            </div>
-          ) :  <FieldSelect
-             id="numberOfpets"
-             name="numberOfpets"
-           >
-            <option disabled value="">
-              Choose the number of pets
-           </option>
-            <option>1</option>
-            <option>2</option>
-             <option>3</option>
-           </FieldSelect>
-
-          null} */}
-          <div style={{ display: 'flex', gap: '10px' }}>
-            {values && values.numberOfpets ? (
-              <FieldCurrencyInput
-                id="price"
-                name="price"
-                className={css.priceInput}
-                autoFocus
-                label={pricePerUnitMessage}
-                placeholder={pricePlaceholderMessage}
-                currencyConfig={config.currencyConfig}
-                // validate={priceValidators}
-              />
-            ) : null}
-          </div>
-
+          </>
+            : null}
           <p>Would you like to provide discount rate longer 7 days</p>
           <div style={{ display: 'flex', gap: '20px' }}>
             {discount.map(num => {
@@ -589,7 +175,8 @@ export const EditListingPricingFormComponent = props => (
             <>
               <div>
                 <p>Length of Stays</p>
-                <FieldTextInput type="number" id="lengthOfStays" name="lengthOfStays" />
+                <FieldTextInput type="number" id="lengthOfStays" name="lengthOfStays" 
+                  validate={composeValidators( maxLength2Message)}/>
               </div>
               <div>
                 <p>Discount</p>
@@ -597,6 +184,7 @@ export const EditListingPricingFormComponent = props => (
                   type="number"
                   id="discountlengthOfStays"
                   name="discountlengthOfStays"
+                  validate={composeValidators( maxLength2Message)}
                 />
               </div>
             </>

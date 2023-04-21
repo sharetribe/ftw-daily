@@ -19,15 +19,15 @@ import { Modal, NamedRedirect, Tabs, StripeConnectAccountStatusBox } from '../..
 import { StripeConnectAccountForm } from '../../forms';
 
 import EditListingWizardTab, {
-  AVAILABILITY,
+ 
   DESCRIPTION,
   FEATURES,
   POLICY,
-  // LOCATION,
+ // LOCATION,
   PRICING,
   YOURSELF,
   PHOTOS,
-  
+  AVAILABILITY,
   VERIFICATION
 } from './EditListingWizardTab';
 import css from './EditListingWizard.module.css';
@@ -43,7 +43,7 @@ export const TABS = [
   DESCRIPTION,
   FEATURES,
   POLICY,
-  // LOCATION,
+   //LOCATION,
   PRICING,
 
   ...availabilityMaybe,
@@ -67,10 +67,11 @@ const tabLabel = (intl, tab) => {
     key = 'EditListingWizard.tabLabelFeatures';
   } else if (tab === POLICY) {
     key = 'EditListingWizard.tabLabelPolicy';
+  }
   // } else if (tab === LOCATION) {
   //   key = 'EditListingWizard.tabLabelLocation';
   // } 
-  }
+  
   else if (tab === PRICING) {
     key = 'EditListingWizard.tabLabelPricing';
   } 
@@ -100,8 +101,8 @@ const tabLabel = (intl, tab) => {
 const tabCompleted = (tab, listing) => {
   const {
     availabilityPlan,
-    description,
-    geolocation,
+    // description,
+    // geolocation,
     price,
     title,
     publicData,
@@ -120,7 +121,7 @@ const tabCompleted = (tab, listing) => {
     // case LOCATION:
     //   return !!(geolocation && publicData && publicData.location && publicData.location.address);
     case PRICING:
-      return !!( price,publicData && publicData.price);
+      return !!( price);
     case AVAILABILITY:
       return !!availabilityPlan;
       case YOURSELF:
@@ -149,6 +150,7 @@ const tabsActive = (isNew, listing) => {
     const previousTabIndex = TABS.findIndex(t => t === tab) - 1;
     const isActive =
       previousTabIndex >= 0 ? !isNew || tabCompleted(TABS[previousTabIndex], listing) : true;
+     // console.log('isActive', isActive)
     return { ...acc, [tab]: isActive };
   }, {});
 };

@@ -7,7 +7,7 @@ import config from '../../config';
 import { propTypes } from '../../util/types';
 import { findOptionsForSelectFilter } from '../../util/search';
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
-
+import * as validators from '../../util/validators';
 import {
   maxLength,
   required,
@@ -18,7 +18,8 @@ import {
   Button,
   FieldCheckbox,
   FieldTextInput,
-  FieldPhoneNumberInput
+  FieldPhoneNumberInput,
+  FieldBirthdayInput
 } from '../../components';
 
 import css from './EditListingBasicForm.module.css';
@@ -37,6 +38,7 @@ const EditListingBasicInfoFormComponent = props => (
         name,
         handleSubmit,
         intl,
+       onChange,
         invalid,
         pristine,
         saveActionMsg,
@@ -47,6 +49,8 @@ const EditListingBasicInfoFormComponent = props => (
         values,
       } = formRenderProps;
 
+      console.log('values', values)
+      const identity = v => v;
       // date of birthday
       const birthdateMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.birthdate' });
       const birthdatePlaceholderMessage = intl.formatMessage({
@@ -55,8 +59,13 @@ const EditListingBasicInfoFormComponent = props => (
       const birthdateRequiredMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.birthdateRequired',
       });
+     // const required = validators.required('A valid date is required');
+      // const minAge = 18;
+      // const minYears =2005;
+      // const minAgeRequired = validators.ageAtLeast(`Age should be at least ${minAge,minYears}`, minAge,minYears);
 
-     
+      // const birthdayValid = validators.ageAtLeast();
+      
       const addressPlaceholderMessage = intl.formatMessage({
         id: 'EditListingLocationForm.addressPlaceholder',
       });
@@ -129,6 +138,12 @@ const EditListingBasicInfoFormComponent = props => (
       const submitDisabled = invalid || disabled || submitInProgress || ! values.email || ! values.phone || !values.serviceSetup;
       const options = findOptionsForSelectFilter('serviceSetup', filterConfig);
 
+      
+      
+
+
+
+
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessageCreateListingDraft}
@@ -145,15 +160,18 @@ const EditListingBasicInfoFormComponent = props => (
             validate={composeValidators(required(titleRequiredMessage), maxLength60Message)}
             autoFocus
           />
+         
                  
                  <FieldTextInput
                       className={css.lastName}
                       type="date"
                       id="birthday"
                       name="birthday"
+                      format={identity}
+                      // valueFromForm={values.birthday}
                       placeholder={birthdatePlaceholderMessage}
                       label={birthdateMessage}
-                      validate={composeValidators(required(birthdateRequiredMessage))}
+                      //validate={validators.composeValidators( minAgeRequired)}
                       autoFocus
                     />
                  {/* <FieldBirthdayInput
