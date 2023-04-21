@@ -44,6 +44,7 @@ const SectionCarousel = props => {
     blocks,
     options,
   } = props;
+  
   const sliderContainerId = `${props.sectionId}-container`;
   const sliderId = `${props.sectionId}-slider`;
   const numberOfBlocks = blocks?.length;

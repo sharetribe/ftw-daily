@@ -15,18 +15,23 @@
 
 .twoColumns {
   composes: baseColumn;
+
   @media (--viewportMedium) {
     grid-template-columns: repeat(2, calc((100% - 32px) / 2));
   }
 }
+
 .threeColumns {
   composes: baseColumn;
+
   @media (--viewportMedium) {
     grid-template-columns: repeat(3, calc((100% - 2 * 32px) / 3));
   }
 }
+
 .fourColumns {
   composes: baseColumn;
+
   @media (--viewportMedium) {
     grid-template-columns: repeat(4, calc((100% - 3 * 32px) / 4));
   }
@@ -35,4 +40,55 @@
 .noSidePaddings {
   padding-left: 0;
   padding-right: 0;
+}
+
+.petGrid {
+  grid-template-columns: repeat(3, calc((100% - 2 * 32px) / 3));
+  padding: 64px 32px 0 32px;
+}
+
+.introSection {
+  grid-template-columns: repeat(1, 1fr);
+}
+
+.searchBox {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 50px;
+  position: relative;
+  width: 45%;
+
+  & .searchIcon {
+    position: absolute;
+    left: 25px;
+    top: 19px;
+
+    & svg {
+      & path {
+        fill: #7e7e7e;
+      }
+    }
+  }
+
+  & input {
+    border: none;
+    color: #383838;
+    font-size: 16px;
+    line-height: 32px;
+    font-family: var(--fontFamily);
+    font-weight: var(--fontWeightMedium);
+    padding: 0 50px;
+  }
+
+  & .searchButton {
+    position: absolute;
+    right: 5px;
+    top: 4px;
+
+    & button {
+      width: 100px;
+      border-radius: 50px;
+      background-color: var(--marketplaceColor);
+    }
+  }
 }

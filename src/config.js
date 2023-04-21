@@ -107,10 +107,10 @@ const siteTitle = 'Saunatime';
 const siteTwitterHandle = '@sharetribe';
 
 // Instagram page is used in SEO schema (http://schema.org/Organization)
-const siteInstagramPage = null;
+const siteInstagramPage = 'https://www.instagram.com/petcribau/';
 
 // Facebook page is used in SEO schema (http://schema.org/Organization)
-const siteFacebookPage = 'https://www.facebook.com/Sharetribe/';
+const siteFacebookPage = 'https://www.facebook.com/people/PetCrib/100076349432798/';
 
 // Social logins & SSO
 
