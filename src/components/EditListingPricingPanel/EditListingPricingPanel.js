@@ -76,7 +76,8 @@ const EditListingPricingPanel = props => {
             return prev && current ? Math.min(prev, current) : prev || current;
           });
         }
-        const min =findMinPrice(overnightsStayPrice1,overnightsStayPrice2,overnightsStayPrice3,dayCareStay1,dayCareStay2,dayCareStay3)
+        const min1 =findMinPrice(overnightsStayPrice1,overnightsStayPrice2,overnightsStayPrice3,dayCareStay1,dayCareStay2,dayCareStay3)
+        const min = min1 *100
         //console.log('min', min)
            
            

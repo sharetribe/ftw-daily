@@ -214,7 +214,7 @@ export class EditListingVerificationFormComponent extends Component {
           // const imageArrayHasSameImages = isEqual(imageIdsFromProps, imageIdsFromPreviousSubmit);
           // const pristineSinceLastSubmit = submittedOnce && imageArrayHasSameImages;
 
-          // const submitReady = (updated && pristineSinceLastSubmit) || ready;
+           //onst submitReady = (updated && pristineSinceLastSubmit) || ready;
           const submitInProgress = updateInProgress;
           const submitDisabled =
             invalid || disabled || submitInProgress || idProofImageUploadRequested || ready || !images ;

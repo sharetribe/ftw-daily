@@ -106,14 +106,15 @@ const tabCompleted = (tab, listing) => {
     price,
     title,
     publicData,
+    privateData,
   } = listing.attributes;
   const images = listing.images;
-  console.log(tab, '^^^^ ^^^^ => tab')
+  
 
 
   switch (tab) {
     case DESCRIPTION:
-      return !!( title, publicData && publicData.email , publicData && publicData.birthday,publicData && publicData, 
+      return !!( title,  publicData && publicData.birthday,publicData && publicData, 
         publicData && publicData.serviceSetup);
     case FEATURES:
       return !!(publicData && publicData.typeOfpets);
@@ -152,7 +153,7 @@ const tabsActive = (isNew, listing) => {
     
     const isActive =
       previousTabIndex >= 0 ? !isNew || tabCompleted(TABS[previousTabIndex], listing) : true;
-     console.log('isActive', isActive)
+    
     return { ...acc, [tab]: isActive };
   }, {});
 };
@@ -313,12 +314,12 @@ class EditListingWizard extends Component {
     const classes = classNames(rootClasses, className);
     const currentListing = ensureListing(listing);
     const tabsStatus = tabsActive(isNewListingFlow, currentListing);
-    console.log(tabsStatus,'tabsStatus')
+    
 
     // If selectedTab is not active, redirect to the beginning of wizard
     if (!tabsStatus[selectedTab]) {
       const currentTabIndex = TABS.indexOf(selectedTab);
-      console.log(currentTabIndex, '^^^^ ^^^^ => currentTabIndex');
+     
       
       const nearestActiveTab = TABS.slice(0, currentTabIndex)
         .reverse()
