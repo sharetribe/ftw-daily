@@ -27,7 +27,6 @@ export const AVAILABILITY = 'availability';
 export const DESCRIPTION = 'description';
 export const FEATURES = 'features';
 export const POLICY = 'policy';
-export const LOCATION = 'location';
 export const PRICING = 'pricing';
 export const YOURSELF = 'yourself';
 export const PHOTOS = 'photos';
@@ -39,7 +38,7 @@ export const SUPPORTED_TABS = [
   FEATURES,
   POLICY,
   //LOCATION,
-  PRICING,
+ PRICING,
  
   AVAILABILITY,
   YOURSELF,
@@ -210,20 +209,20 @@ const EditListingWizardTab = props => {
         />
       );
     }
-    case LOCATION: {
-      const submitButtonTranslationKey = isNewListingFlow
-        ? 'EditListingWizard.saveNewLocation'
-        : 'EditListingWizard.saveEditLocation';
-      return (
-        <EditListingLocationPanel
-          {...panelProps(LOCATION)}
-          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
-          onSubmit={values => {
-            onCompleteEditListingWizardTab(tab, values);
-          }}
-        />
-      );
-    }
+    // case LOCATION: {
+    //   const submitButtonTranslationKey = isNewListingFlow
+    //     ? 'EditListingWizard.saveNewLocation'
+    //     : 'EditListingWizard.saveEditLocation';
+    //   return (
+    //     <EditListingLocationPanel
+    //       {...panelProps(LOCATION)}
+    //       submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+    //       onSubmit={values => {
+    //         onCompleteEditListingWizardTab(tab, values);
+    //       }}
+    //     />
+    //   );
+    // }
     case PRICING: {
       const submitButtonTranslationKey = isNewListingFlow
         ? 'EditListingWizard.saveNewPricing'
