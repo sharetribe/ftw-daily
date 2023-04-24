@@ -63,7 +63,12 @@ const SectionColumns = props => {
     >
       {hasHeaderFields ? (
         <header className={defaultClasses.sectionDetails}>
-          <Field data={title} className={defaultClasses.title} options={fieldOptions} />
+          <Field data={title} className={
+            sectionId == "featured-locations" ? css.headingServices :
+              sectionId == "petcrib-work" ? css.headingServices :
+                defaultClasses.title}
+            options={fieldOptions}
+          />
           <Field data={description} className={defaultClasses.description} options={fieldOptions} />
           <Field data={callToAction} className={defaultClasses.ctaButton} options={fieldOptions} />
         </header>
@@ -73,7 +78,8 @@ const SectionColumns = props => {
           className={classNames(
             sectionId == "petcrib-work" ? css.petGrid :
               sectionId == "intro" ? css.introSection :
-                defaultClasses.blockContainer, getColumnCSS(numColumns),
+                sectionId == "featured-locations" ? css.serviceGrid :
+                  defaultClasses.blockContainer, getColumnCSS(numColumns),
             { [css.noSidePaddings]: isInsideContainer, })}
         >
           <BlockBuilder

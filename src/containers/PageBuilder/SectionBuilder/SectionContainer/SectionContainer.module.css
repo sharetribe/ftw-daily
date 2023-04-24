@@ -20,6 +20,10 @@
   position: relative;
   height: 600px;
 
+  @media(max-width: 1024px) {
+    height: auto;
+  }
+
   &:nth-of-type(odd) {
     background-color: #fafafa;
   }

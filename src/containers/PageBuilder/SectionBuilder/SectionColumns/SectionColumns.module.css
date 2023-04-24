@@ -45,10 +45,18 @@
 .petGrid {
   grid-template-columns: repeat(3, calc((100% - 2 * 32px) / 3));
   padding: 64px 32px 0 32px;
+
+  & h3 {
+    color: #E95629;
+  }
 }
 
 .introSection {
   grid-template-columns: repeat(1, 1fr);
+
+  & h1 {
+    color: #fff;
+  }
 }
 
 .searchBox {
@@ -88,7 +96,17 @@
     & button {
       width: 100px;
       border-radius: 50px;
-      background-color: var(--marketplaceColor);
+      background-color: #E95629;
     }
   }
+}
+
+.serviceGrid {
+  & h3 {
+    color: #E95629;
+  }
+}
+
+.headingServices {
+  color: #E95629;
 }
