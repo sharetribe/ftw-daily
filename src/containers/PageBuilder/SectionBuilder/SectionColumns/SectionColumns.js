@@ -42,7 +42,6 @@ const SectionColumns = props => {
     isInsideContainer,
     options,
   } = props;
-  console.log(sectionId, '&&&  &&& => sectionId');
 
 
   // If external mapping has been included for fields
@@ -60,6 +59,7 @@ const SectionColumns = props => {
       rootClassName={rootClassName}
       appearance={appearance}
       options={fieldOptions}
+      sectionId={sectionId}
     >
       {hasHeaderFields ? (
         <header className={defaultClasses.sectionDetails}>
@@ -88,7 +88,7 @@ const SectionColumns = props => {
                 <IconCard brand="search" />
               </span>
               <input
-                type="text" 
+                type="text"
                 placeholder='Search...'
               />
               <span className={css.searchButton}>

@@ -9,12 +9,14 @@ import css from './SectionContainer.module.css';
 // This component can be used to wrap some common styles and features of Section-level components.
 // E.g: const SectionHero = props => (<SectionContainer><H1>Hello World!</H1></SectionContainer>);
 const SectionContainer = props => {
-  const { className, rootClassName, id, as, children, appearance, options, ...otherProps } = props;
+  const { className, rootClassName, id, as, children, appearance, options, sectionId, ...otherProps } = props;
+  console.log(sectionId, '&&&  &&& => sectionId');
+
   const Tag = as || 'section';
   const classes = classNames(rootClassName || css.root, className);
 
   return (
-    <Tag className={classes} id={id} {...otherProps}>
+    <Tag className={sectionId == "intro" ? css.mainBackground : classes} id={id} {...otherProps}>
       {appearance?.fieldType === 'customAppearance' ? (
         <Field
           data={{ alt: `Background image for ${id}`, ...appearance }}
