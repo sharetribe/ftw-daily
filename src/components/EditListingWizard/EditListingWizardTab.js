@@ -210,20 +210,20 @@ const EditListingWizardTab = props => {
         />
       );
     }
-    // case LOCATION: {
-    //   const submitButtonTranslationKey = isNewListingFlow
-    //     ? 'EditListingWizard.saveNewLocation'
-    //     : 'EditListingWizard.saveEditLocation';
-    //   return (
-    //     <EditListingLocationPanel
-    //       {...panelProps(LOCATION)}
-    //       submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
-    //       onSubmit={values => {
-    //         onCompleteEditListingWizardTab(tab, values);
-    //       }}
-    //     />
-    //   );
-    // }
+    case LOCATION: {
+      const submitButtonTranslationKey = isNewListingFlow
+        ? 'EditListingWizard.saveNewLocation'
+        : 'EditListingWizard.saveEditLocation';
+      return (
+        <EditListingLocationPanel
+          {...panelProps(LOCATION)}
+          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          onSubmit={values => {
+            onCompleteEditListingWizardTab(tab, values);
+          }}
+        />
+      );
+    }
     case PRICING: {
       const submitButtonTranslationKey = isNewListingFlow
         ? 'EditListingWizard.saveNewPricing'

@@ -103,6 +103,7 @@ class PageComponent extends Component {
     const canonicalUrl = `${canonicalRootURL}${canonicalPath}`;
 
     const siteTitle = config.siteTitle;
+
     const schemaTitle = intl.formatMessage({ id: 'Page.schemaTitle' }, { siteTitle });
     const schemaDescription = intl.formatMessage({ id: 'Page.schemaDescription' });
     const pageTitle = title || schemaTitle;

@@ -81,6 +81,7 @@ const PayoutDetailsPersonalDetails = props => {
     MIN_STRIPE_ACCOUNT_AGE
   );
 
+  
   const personalIdNumberRequired = validators.required(
     intl.formatMessage({
       id: `PayoutDetailsForm.personalIdNumberRequired`,

@@ -43,6 +43,7 @@ const EditListingBasicInfoFormComponent = props => (
         pristine,
         saveActionMsg,
         filterConfig,
+        fieldId,
         updated,
         updateInProgress,
         fetchErrors,
@@ -76,7 +77,7 @@ const handleBirthdayChange = (event) => {
   const { value } = event.target;
   setBirthday(value);
 }
-console.log('validateBirthday', validateBirthday)
+//console.log('validateBirthday', validateBirthday)
       const birthdateMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.birthdate' });
       const birthdatePlaceholderMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.birthdatePlaceholder',
@@ -164,7 +165,28 @@ console.log('validateBirthday', validateBirthday)
       const options = findOptionsForSelectFilter('serviceSetup', filterConfig);
 
       
-      
+const MIN_STRIPE_ACCOUNT_AGE = 18;
+      const birthdayLabel = intl.formatMessage({ id: 'PayoutDetailsForm.birthdayLabel' });
+      const birthdayLabelMonth = intl.formatMessage({
+        id: 'PayoutDetailsForm.birthdayLabelMonth',
+      });
+      const birthdayLabelYear = intl.formatMessage({ id: 'PayoutDetailsForm.birthdayLabelYear' });
+      const birthdayRequired = validators.required(
+        intl.formatMessage({
+          id: 'PayoutDetailsForm.birthdayRequired',
+        })
+      );
+      const birthdayMinAge = validators.ageAtLeast(
+        intl.formatMessage(
+          {
+            id: 'PayoutDetailsForm.birthdayMinAge',
+          },
+          {
+            minAge: MIN_STRIPE_ACCOUNT_AGE,
+          }
+        ),
+        MIN_STRIPE_ACCOUNT_AGE
+      );
 
 
 
@@ -186,20 +208,42 @@ console.log('validateBirthday', validateBirthday)
             autoFocus
           />
          
+         <p>{birthdateMessage}</p>
                  
-                 <FieldTextInput
+      <div className={css.formRow}>
+        <FieldBirthdayInput
+          id="birthday"
+          name="birthday"
+           
+          disabled={disabled}
+          className={css.field}
+          label={birthdayLabel}
+         // label={birthdateMessage}
+          labelForMonth={birthdayLabelMonth}
+          labelForYear={birthdayLabelYear}
+          format={identity}
+          valueFromForm={values.birthday}
+          validate={validators.composeValidators(birthdayRequired, birthdayMinAge)}
+        />
+      </div>
+
+      
+                {/* <FieldTextInput
                       className={css.lastName}
                       type="date"
                       id="birthday"
-                      name="birthday"
-                      format={identity}
+                     name="birthday"
+                      
                       // valueFromForm={values.birthday}
                       placeholder={birthdatePlaceholderMessage}
                       label={birthdateMessage}
                       //onChange={handleBirthdayChange}
                       //validate={validators.composeValidators( minAgeRequired)}
                       autoFocus
-                    />
+                      //format={identity}
+         // valueFromForm={values.birthday}
+          validate={validators.composeValidators(birthdayRequired, birthdayMinAge)}
+                    /> */}
                  {/* <FieldBirthdayInput
             id="birthday"
             name="birthday"

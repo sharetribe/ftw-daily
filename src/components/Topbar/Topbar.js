@@ -123,7 +123,7 @@ class TopbarComponent extends Component {
         window.location = path;
       }
 
-      console.log('logged out'); // eslint-disable-line
+     // console.log('logged out'); // eslint-disable-line
     });
   }
 

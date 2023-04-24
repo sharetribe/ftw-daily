@@ -271,7 +271,7 @@ export class EditListingVerificationFormComponent extends Component {
               {uploadImageFailed}
 
                <p className={css.tip}>
-                <FormattedMessage id="EditListingPhotosForm.addImagesTip" />
+                <FormattedMessage id="EditListingVerificationForm.addImagesTip" />
               </p> 
               
               {publishListingFailed}

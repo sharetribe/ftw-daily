@@ -101,8 +101,8 @@ const tabLabel = (intl, tab) => {
 const tabCompleted = (tab, listing) => {
   const {
     availabilityPlan,
-    // description,
-    // geolocation,
+    description,
+    geolocation,
     price,
     title,
     publicData,

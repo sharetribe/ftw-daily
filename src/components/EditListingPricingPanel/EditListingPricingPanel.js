@@ -50,41 +50,7 @@ const EditListingPricingPanel = props => {
   const lengthOfStays = publicData && publicData.lengthOfStays
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
 
-  const prices = []
- const price1 = Number(overnightsStayPrice1)
- const price2 = Number(overnightsStayPrice2 )
-const price3 = Number(overnightsStayPrice3 )
-const price4 = Number(dayCareStay1)
-const price5 = Number(dayCareStay2)
-const price6 = Number(dayCareStay3)
-
- prices.push(price1, price2, price3, price4, price5, price6)
-// const prices1 = [price1, price2, price3, price4, price5, price6];
-// console.log('prices1', prices1)
-// values.overnightsStayPrice1 || values.overnightsStayPrice2 || values.overnightsStayPrice3 ||
-
-console.log('prices', prices)
-// const min = Math.min(...filteredPrices);
-// console.log(min, '^^^^ ^^^^ => min');
-
-//const [ secondmin,min ]= prices.sort((a,b) => b - a).slice(-2)
-const min =  Math.min(...prices)
-console.log('min', min)
-//console.log('secondmin', secondmin)
-
-
-
- //Check if price values are greater than 0, and push them into the prices array
-
-// Calculate the minimum value from the prices array
-//const min = Math.min(...prices);
-// Output the minimum value
-//console.log('min', min);+
-
-
-
-
-
+ 
 
   const panelTitle = isPublished ? (
     <FormattedMessage
@@ -99,14 +65,19 @@ console.log('min', min)
   const form = priceCurrencyValid ? (
     <EditListingPricingForm
       className={css.form}
-       initialValues={{price, overnightsStayPrice1, overnightsStayPrice2, overnightsStayPrice3, dayCareStay1,dayCareStay2,dayCareStay3,discount,discountlengthOfStays,lengthOfStays}}
+       initialValues={{ overnightsStayPrice1, overnightsStayPrice2, overnightsStayPrice3, dayCareStay1,dayCareStay2,dayCareStay3,discount,discountlengthOfStays,lengthOfStays}}
       onSubmit={values => {
         const {  overnightsStayPrice1, overnightsStayPrice2, overnightsStayPrice3, dayCareStay1,dayCareStay2,dayCareStay3,discount, discountlengthOfStays,lengthOfStays} = values;
-        console.log(values, '^^^^ ^^^^ => values');
+        //console.log(values, '^^^^ ^^^^ => values');
         
-        // const filteredPrices = prices1.length && prices1.filter(price => price != 0);
-        // console.log(filteredPrices, '^^^^ ^^^^ => filteredPrices');
-        
+       
+        function findMinPrice(var_args) {
+          return Array.prototype.reduce.call(arguments, function (prev, current) {
+            return prev && current ? Math.min(prev, current) : prev || current;
+          });
+        }
+        const min =findMinPrice(overnightsStayPrice1,overnightsStayPrice2,overnightsStayPrice3,dayCareStay1,dayCareStay2,dayCareStay3)
+        //console.log('min', min)
            
            
         const updateValues = {
@@ -132,6 +103,7 @@ console.log('min', min)
 
         onSubmit(updateValues);
         console.log('updateValues', updateValues)
+      
       }}
       onChange={onChange}
       saveActionMsg={submitButtonText}

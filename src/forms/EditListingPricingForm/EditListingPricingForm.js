@@ -128,7 +128,7 @@ export const EditListingPricingFormComponent = props => (
                 name={"overnightsStayPrice"+st}
                 className={css.priceInput}
                 autoFocus
-                label={"priceFor-Pet"+st}
+                label={st+  "    Pet"}
                 placeholder={pricePlaceholderMessage}
                 //currencyConfig={config.currencyConfig}
             
@@ -146,7 +146,7 @@ export const EditListingPricingFormComponent = props => (
                 name={"dayCareStay"+st}
                 className={css.priceInput}
                 autoFocus
-                label={"priceFor-Pet"+st}
+                label={"Pet"+st}
                 placeholder={pricePlaceholderMessage}
                 //currencyConfig={config.currencyConfig}
                 validate={priceValidators}
