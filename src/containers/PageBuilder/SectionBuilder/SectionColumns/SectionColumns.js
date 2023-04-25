@@ -42,7 +42,6 @@ const SectionColumns = props => {
     isInsideContainer,
     options,
   } = props;
-  console.log(sectionId, '&&&  &&& => sectionId');
 
 
   // If external mapping has been included for fields
@@ -60,10 +59,16 @@ const SectionColumns = props => {
       rootClassName={rootClassName}
       appearance={appearance}
       options={fieldOptions}
+      sectionId={sectionId}
     >
       {hasHeaderFields ? (
         <header className={defaultClasses.sectionDetails}>
-          <Field data={title} className={defaultClasses.title} options={fieldOptions} />
+          <Field data={title} className={
+            sectionId == "featured-locations" ? css.headingServices :
+              sectionId == "petcrib-work" ? css.headingServices :
+                defaultClasses.title}
+            options={fieldOptions}
+          />
           <Field data={description} className={defaultClasses.description} options={fieldOptions} />
           <Field data={callToAction} className={defaultClasses.ctaButton} options={fieldOptions} />
         </header>
@@ -73,7 +78,8 @@ const SectionColumns = props => {
           className={classNames(
             sectionId == "petcrib-work" ? css.petGrid :
               sectionId == "intro" ? css.introSection :
-                defaultClasses.blockContainer, getColumnCSS(numColumns),
+                sectionId == "featured-locations" ? css.serviceGrid :
+                  defaultClasses.blockContainer, getColumnCSS(numColumns),
             { [css.noSidePaddings]: isInsideContainer, })}
         >
           <BlockBuilder
@@ -88,7 +94,7 @@ const SectionColumns = props => {
                 <IconCard brand="search" />
               </span>
               <input
-                type="text" 
+                type="text"
                 placeholder='Search...'
               />
               <span className={css.searchButton}>

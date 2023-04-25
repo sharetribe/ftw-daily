@@ -92,6 +92,7 @@ const PageBuilder = props => {
   // - "meta" (which is data that goes inside <head>)
   const { sections = [], meta = {} } = pageAssetsData || {};
 
+console.log(sections, '&&&  &&& => sections');
 
   const pageMetaProps = getMetadata(meta, schemaType, options?.fieldComponents);
 

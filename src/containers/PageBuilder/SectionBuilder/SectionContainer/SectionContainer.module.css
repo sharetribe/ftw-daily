@@ -12,6 +12,23 @@
   }
 }
 
+.mainBackground {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 100%;
+  position: relative;
+  height: 600px;
+
+  @media(max-width: 1024px) {
+    height: auto;
+  }
+
+  &:nth-of-type(odd) {
+    background-color: #fafafa;
+  }
+}
+
 .sectionContent {
   padding: 32px 0;
   position: relative;
