@@ -26,14 +26,19 @@ class EditListingVerificationPanel extends Component {
       updateInProgress,
       onChange,
       onSubmit,
+     
       onRemoveImageverification,
     } = this.props;
 
     const rootClass = rootClassName || css.root;
     const classes = classNames(rootClass, className);
     const currentListing = ensureOwnListing(listing);
+    console.log('currentListing', currentListing)
     const { publicData } = currentListing.attributes || {};
-    const { idProofImageId } = publicData || {};
+   // const { idProofImageId } = publicData || {};
+
+   const viewimage = publicData && publicData.idProofImage?.link
+   console.log('viewimage', viewimage)
 
     const isPublished =
       currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
@@ -46,13 +51,13 @@ class EditListingVerificationPanel extends Component {
       <FormattedMessage id="EditListingPhotosPanel.createListingTitle" />
     );
 
-    const idProofImage = images && images.length
-      ? images.filter(image => image.imageType == 'idProofImage').length
-        ? images.filter(image => image.imageType == 'idProofImage')[images.filter(image => image.imageType == 'idProofImage').length - 1]
-        : images.filter(image => idProofImageId && image.id && image.id.uuid == idProofImageId).length
-          ? images.filter(image => idProofImageId && image.id && image.id.uuid == idProofImageId)[0]
-          : []
-      : [];
+    // const idProofImage = images && images.length
+    //   ? images.filter(image => image.imageType == 'idProofImage').length
+    //     ? images.filter(image => image.imageType == 'idProofImage')[images.filter(image => image.imageType == 'idProofImage').length - 1]
+    //     : images.filter(image => idProofImageId && image.id && image.id.uuid == idProofImageId).length
+    //       ? images.filter(image => idProofImageId && image.id && image.id.uuid == idProofImageId)[0]
+    //       : []
+    //   : [];
 
     return (
       <div className={classes}>
@@ -63,22 +68,19 @@ class EditListingVerificationPanel extends Component {
           disabled={disabled}
           ready={ready}
           fetchErrors={errors}
-          mainImageId={idProofImage}
-          initialValues={{ images }}
+         // mainImageId={idProofImage}
+          initialValues={{ images,publicData:publicData.idProofImage }}
           images={images}
+          viewimage={viewimage}
           onImageUpload={onImageUpload}
           onSubmit={values => {
-            const { idProofImage: dummyidProofImage, ...updateValues } = values;
+            const { idProofImage} = values;
 
-            Object.assign(updateValues, {
+           const updateValues = {
               publicData: {
-                idProofImageId: idProofImage.imageId && idProofImage.imageId.uuid
-                  ? idProofImage.imageId.uuid
-                  : idProofImageId
-                    ? idProofImageId
-                    : '',
+                idProofImage
               },
-            });
+            };
             onSubmit(updateValues);
           }}
           onChange={onChange}
