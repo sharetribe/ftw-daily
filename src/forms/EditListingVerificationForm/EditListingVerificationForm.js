@@ -65,7 +65,7 @@ export class EditListingVerificationFormComponent extends Component {
     }
   }
   onAttachmentUpload(file,form) {
-    console.log(file, '^^^^ ^^^^ => file');
+    //console.log(file, '^^^^ ^^^^ => file');
     
     // this.props.setClearForm(false);
     if (file && file.name ) {
@@ -128,9 +128,7 @@ export class EditListingVerificationFormComponent extends Component {
             values,
           } = formRenderProps;
           console.log(values, '^^^^ ^^^^ => values');
-         // console.log('idProofImage', idProofImage)
-          //console.log('images', images)
-
+      
           const { publishListingError, showListingsError, updateListingError, uploadImageError } =
             fetchErrors || {};
           const uploadOverLimit = isUploadImageOverLimitError(uploadImageError);
@@ -143,21 +141,14 @@ console.log('valueimage', valueimage)
               <span className={css.chooseImage}>
                 <FormattedMessage id="EditListingPhotosForm.chooseMainImage" />
               </span>
-              {/* <span className={css.imageTypes}>
-                <FormattedMessage id="EditListingPhotosForm.imageTypes" />
-              </span> */}
+             
             </span>
           );
-          // const imageRequiredMessage = intl.formatMessage({
-          //   id: 'EditListingPhotosForm.imageRequired',
-          // });
-          // const { publishListingError, showListingsError, updateListingError, uploadImageError } =
-          //   fetchErrors || {};
-          // const uploadOverLimit = isUploadImageOverLimitError(uploadImageError);
+          
           // Main image for what
           const uploadingOverlay = idProofImageUploadRequested ? (
             <div className={css.uploadingImageOverlay}>
-              {/* <IconSpinner /> */}
+            
             </div>
           ) : null;
           const hasUploadError = !!uploadImageError && !idProofImageUploadRequested;
@@ -177,9 +168,7 @@ console.log('valueimage', valueimage)
               {uploadingOverlay}
             </ImageFromFile>
           ) : null;
-          // Avatar is rendered in hidden during the upload delay
-          // Upload delay smoothes image change process:
-          // responsive img has time to load srcset stuff before it is shown to user.
+        
           const avatarComponent =
             !idProofImageUploadRequested && mainImageId && mainImageId.id && mainImageId.id.uuid ? (
               <ResponsiveImage
@@ -202,13 +191,7 @@ console.log('valueimage', valueimage)
               </div>
             ) : (
               <div className={css.avatarPlaceholder}>
-                {/* <IconCamera /> */}
-                {/* <div className={css.avatarPlaceholderText}>
-                  <FormattedMessage id="EditListingPhotosForm.addYourMainPicture" />
-                </div> */}
-                {/* <div className={css.avatarPlaceholderTextMobile}>
-                  <FormattedMessage id="EditListingPhotosForm.addYourMainPictureMobile" />
-                </div> */}
+              
               </div>
             );
           let uploadImageFailed = null;
@@ -239,7 +222,7 @@ console.log('valueimage', valueimage)
             </p>
           ) : null;
 
-          // let uploadImageFailed = null;
+         
 
           if (uploadOverLimit) {
             uploadImageFailed = (
@@ -277,45 +260,9 @@ console.log('valueimage', valueimage)
                 </p>
               ) : null}
               <p>Upload Photo ID -- drivers licence and Passport</p>
-              {/* <Field
-                  id="idProofImage"
-                  name="idProofImage"
-                  accept={ACCEPT_IMAGES}
-                  form={null}
-                  label={chooseAvatarLabel}
-                  type="file"
-                  disabled={idProofImageUploadRequested}
-                >
-                  {fieldprops => {
-                    const { accept, input, label, disabled: fieldDisabled } = fieldprops;
-                    const { name, type } = input;
-                    const onChange = e => {
-                      const file = e.target.files[0];
-                      form.change(`idProofImage`, file);
-                      form.blur(`idProofImage`);
-                      onImageUploadHandler(file,'idProofImage');
-                    };
-                    const inputProps = { accept, id: name, name, onChange, type };
-                    return (
-                      <div className={css.addImageWrapper}>
-                        <div className={css.aspectRatioWrapper}>
-                          {fieldDisabled ? null : (
-                            <input {...inputProps} className={css.addImageInput} />
-                          )}
-                          <label htmlFor={name} className={css.addImage}>
-                            {label}
-                          </label>
-                        </div>
-                      </div>
-                    );
-                  }}
-                </Field> */}
+             
                 <div className={css.imagesField}>
-                {/* <label className={css.imageLabel}>{documentsLabel}</label> */}
-                {/* {uploadedAttachmentsUrls.length >= 3 && (
-                  <h3 className={css.fileUploadLimitMessage}>{fileUploadLimitMessage}</h3>
-                )} */}
-               
+                
                   <Field
                     label={chooseAvatarLabel}
                     id="idProofImage"
@@ -354,11 +301,7 @@ console.log('valueimage', valueimage)
                     }}
                   </Field>
                 
-                {/* {!!fileState && fileState.size > 10000000 && (
-                  <div>
-                    <FormattedMessage id="AttachmentForm.fileSizeExceededMessage" />
-                  </div>
-                )} */}
+             
                 <Field
                   component={props => {
                     const { input, meta } = props;
@@ -372,39 +315,14 @@ console.log('valueimage', valueimage)
                   }}
                   name="images"
                   type="hidden"
-                  // validate={composeValidators(nonEmptyArray(imageRequiredMessage))}
+                  
                 />
               </div>
-              {/* {uploadImageFailed} */}
+             
               <ul >
-                
-                
-                    {/* <div >
-                      <li>
-                       
 
-                        <span
-                          className={css.closer}
-                          onClick={() => this.onRemoveFileLinks(id)}
-                        >
-                          {' '}
-                        </span>
-                      </li>
-
-                      <li className={css.videoBox}>
-                        {/\mp4|MP4|mov|webm/.test (this.state.uploadedAttachmentsUrls?.link) ? (
-                          <vedio src={this.state.uploadedAttachmentsUrls?.link} loop autoPlay={true} muted className={css.video} />
-                        ) : (
-                          <object data={this.state.uploadedAttachmentsUrls?.link}>
-                            <iframe
-                              className="doc"
-                              src={`https://docs.google.com/gview?url=${viewimage.link}&embedded=true`}
-                              
-                            />
-                          </object>
-                        )}
-                      </li>
-                    </div> */}
+                
+                  
                     {
                  
                     <div  className={css.fileUploadName} >

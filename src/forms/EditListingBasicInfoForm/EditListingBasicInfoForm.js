@@ -19,7 +19,9 @@ import {
   FieldCheckbox,
   FieldTextInput,
   FieldPhoneNumberInput,
-  FieldBirthdayInput
+  FieldBirthdayInput,
+  LocationAutocompleteInput,
+  LocationAutocompleteInputField
 } from '../../components';
 
 import css from './EditListingBasicForm.module.css';
@@ -255,8 +257,10 @@ const MIN_STRIPE_ACCOUNT_AGE = 18;
             
             autoFocus
           /> */}
-{/* <div style={{marginTop:'25px'}}>
+<div style={{marginTop:'25px'}}>
+  
          <LocationAutocompleteInputField
+         
              className={css.loc}
             inputClassName={css.locationAutocompleteInput}
             iconClassName={css.locationAutocompleteInputIcon}
@@ -270,13 +274,14 @@ const MIN_STRIPE_ACCOUNT_AGE = 18;
             format={identity}
             valueFromForm={values.location}
             validate={composeValidators(
-              autocompleteSearchRequired(addressRequiredMessage),
+              //autocompleteSearchRequired(addressRequiredMessage),
               //autocompletePlaceSelected(addressNotRecognizedMessage)
             )}
           />
-</div> */}
+        
+</div>
 <div style={{marginTop:'25px'}}>
-<FieldTextInput
+{/* <FieldTextInput
             id="location"
             name="location"
             className={css.title}
@@ -286,7 +291,7 @@ const MIN_STRIPE_ACCOUNT_AGE = 18;
             
             validate={composeValidators(required(addressRequiredMessage))}
             autoFocus
-          />
+          /> */}
           </div>
           <FieldTextInput
             id="email"
