@@ -9,8 +9,9 @@ import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
 import { required, bookingDatesRequired, composeValidators } from '../../util/validators';
 import { START_DATE, END_DATE } from '../../util/dates';
 import { propTypes } from '../../util/types';
-import { Form, IconSpinner, PrimaryButton, FieldDateRangeInput } from '../../components';
+import { Form, IconSpinner, PrimaryButton, FieldDateRangeInput, FieldCheckbox, FieldRadioButton, FieldTextInput, FieldSelect } from '../../components';
 import EstimatedBreakdownMaybe from './EstimatedBreakdownMaybe';
+import { findOptionsForSelectFilter } from '../../util/search';
 
 import css from './BookingDatesForm.module.css';
 
@@ -53,14 +54,18 @@ export class BookingDatesFormComponent extends Component {
   // In case you add more fields to the form, make sure you add
   // the values here to the bookingData object.
   handleOnChange(formValues) {
-    const { startDate, endDate } =
+    const { startDate, endDate  } =
       formValues.values && formValues.values.bookingDates ? formValues.values.bookingDates : {};
+      console.log(formValues, '^^^^ ^^^^ => formValues');
+      const {serviceSetup}=formValues.values;
+      const {numberOfPets}=formValues.values;
+      
     const listingId = this.props.listingId;
     const isOwnListing = this.props.isOwnListing;
 
-    if (startDate && endDate && !this.props.fetchLineItemsInProgress) {
+    if (startDate && endDate && !this.props.fetchLineItemsInProgress ) {
       this.props.onFetchTransactionLineItems({
-        bookingData: { startDate, endDate },
+        bookingData: { startDate, endDate,serviceSetup,numberOfPets},
         listingId,
         isOwnListing,
       });
@@ -107,12 +112,26 @@ export class BookingDatesFormComponent extends Component {
             unitType,
             values,
             timeSlots,
+            filterConfig,
+            numberPet,
             fetchTimeSlotsError,
             lineItems,
             fetchLineItemsInProgress,
             fetchLineItemsError,
           } = fieldRenderProps;
           const { startDate, endDate } = values && values.bookingDates ? values.bookingDates : {};
+
+          const options = findOptionsForSelectFilter('serviceSetup', filterConfig);
+          //const numberPet = findOptionsForSelectFilter('numberOfPets', filterConfig);
+          //console.log(numberPet, numberPet)
+
+          const numberPetArray = numberPet && numberPet == "three" ? [1, 2, 3]
+          : numberPet == "two" ? [1, 2] : [1];
+
+
+          const phoneRequiredMessage = intl.formatMessage({
+            id: 'EditListingDescriptionForm.phoneRequired',
+          });
 
           const bookingStartLabel = intl.formatMessage({
             id: 'BookingDatesForm.bookingStartTitle',
@@ -200,6 +219,35 @@ export class BookingDatesFormComponent extends Component {
                   this.handleOnChange(values);
                 }}
               />
+              {/* <p>hello</p> */}
+             
+            
+          <p>Choose what service you wish to offers...</p>
+          {
+            options.map((st)=>{
+              return(
+               <FieldCheckbox className={css.features} id={st.key} name={"serviceSetup"} value={st.key} label={st.label} 
+                validate={composeValidators(required(phoneRequiredMessage))}
+               autoFocus/>
+              )
+            })
+          }
+          
+          <p>number of pets</p>
+
+              <FieldSelect 
+              id="numberOfPets"
+              name="numberOfPets"
+              label={"numberOfPets"}
+              >
+                 <option  value={""}>select</option>
+                {numberPetArray.map((st)=>{
+                  return(
+                    <option key={st} value={st}>{st}</option>
+                  )
+                })}
+              </FieldSelect>
+               
               <FieldDateRangeInput
                 className={css.bookingDates}
                 name="bookingDates"
@@ -249,6 +297,7 @@ export class BookingDatesFormComponent extends Component {
 }
 
 BookingDatesFormComponent.defaultProps = {
+  filterConfig: config.custom.filters,
   rootClassName: null,
   className: null,
   submitButtonWrapperClassName: null,
@@ -275,7 +324,7 @@ BookingDatesFormComponent.propTypes = {
   lineItems: array,
   fetchLineItemsInProgress: bool.isRequired,
   fetchLineItemsError: propTypes.error,
-
+  filterConfig: propTypes.filterConfig,
   // from injectIntl
   intl: intlShape.isRequired,
 

@@ -6,11 +6,11 @@ import { ensureOwnListing } from '../../util/data';
 import { findOptionsForSelectFilter } from '../../util/search';
 import { LISTING_STATE_DRAFT } from '../../util/types';
 import { ListingLink } from '..';
-// import { EditListingBasicInfoForm } from '../../forms';
 import config from '../../config';
 
-import css from "./EditListingbasicInfoPanel.module.css"
-import EditListingBasicInfoForm from '../../forms/EditListingBasicInfoForm/EditListingBasicInfoForm';
+import { EditListingBasicInfoForm } from '../../forms';
+
+import css from "./EditListingbasicInfoPanel.module.css";
 
 const EditListingBasicInfoPanel = props => {
   const {
@@ -29,7 +29,14 @@ const EditListingBasicInfoPanel = props => {
 
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
-  const { title, publicData } = currentListing.attributes;
+  const { title, geolocation, publicData } = currentListing.attributes;
+
+  // Only render current search if full place object is available in the URL params
+  // TODO bounds are missing - those need to be queried directly from Google Places
+  const locationFieldsPresent =
+    publicData && publicData.location && publicData.location.address && geolocation;
+  const location = publicData && publicData.location ? publicData.location : {};
+  const { address } = location;
 
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
@@ -42,21 +49,42 @@ const EditListingBasicInfoPanel = props => {
   );
 
   const categoryOptions = findOptionsForSelectFilter('category', config.custom.filters);
+
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
       <EditListingBasicInfoForm
         className={css.form}
         initialValues={{
-          title, email: publicData.email, birthday: publicData.birthday, location: publicData.location, phone: publicData.phone,
-          serviceSetup: publicData.serviceSetup
+          title,
+          email: publicData.email,
+          birthday: publicData.birthday,
+          phone: publicData.phone,
+          serviceSetup: publicData.serviceSetup,
+          location: locationFieldsPresent
+            ? {
+              search: address,
+              selectedPlace: { address, origin: geolocation },
+            }
+            : null,
         }}
         saveActionMsg={submitButtonText}
         onSubmit={values => {
           const { title, email, phone, birthday, location, serviceSetup } = values;
+          const {
+            selectedPlace: { address, origin },
+          } = location;
+
           const updateValues = {
             title: title.trim(),
-            publicData: { birthday, email, location, serviceSetup, phone },
+            geolocation: origin,
+            publicData: {
+              email,
+              phone,
+              birthday,
+              serviceSetup,
+              location: { address },
+            },
           };
           onSubmit(updateValues);
         }}

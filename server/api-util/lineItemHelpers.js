@@ -56,6 +56,18 @@ exports.calculateTotalPriceFromPercentage = (unitPrice, percentage) => {
   return new Money(numericTotalPrice, unitPrice.currency);
 };
 
+exports.calculateTotalPrice = (serviceSetup,listing,unitPrice,numberOfPets) => {
+  console.log(serviceSetup,listing, '^^^^ ^^^^ => serviceSetup,listing');
+  console.log('numberOfPets', numberOfPets)
+
+  if(serviceSetup.filter(e=> e =='overnightsStay') && numberOfPets == 1){
+    return new Money(listing.attributes.publicData.pricepet.dayCare.overnightsStayPrice1*100,unitPrice.currency);
+ }
+
+  
+
+}
+
 /**
  * Calculates lineTotal for lineItem based on seats and units.
  * The total will be `unitPrice * units * seats`.

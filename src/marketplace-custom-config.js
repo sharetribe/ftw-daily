@@ -187,6 +187,7 @@ export const filters = [
       ],
     },
   },
+ 
   {
     id: 'discount',
     label: 'discount',

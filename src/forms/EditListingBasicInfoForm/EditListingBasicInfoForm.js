@@ -54,7 +54,7 @@ const EditListingBasicInfoFormComponent = props => (
 
       console.log('values', values)
       
-      const [birthday, setBirthday] = useState('');
+     
       const identity = v => v;
       // date of birthday
       // Define the birthday validation function

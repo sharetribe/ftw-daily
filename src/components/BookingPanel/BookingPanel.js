@@ -70,6 +70,7 @@ const BookingPanel = props => {
     fetchLineItemsInProgress,
     fetchLineItemsError,
   } = props;
+console.log(listing, '^^^^ ^^^^ => listing');
 
   const price = listing.attributes.price;
   const hasListingState = !!listing.attributes.state;
@@ -79,6 +80,9 @@ const BookingPanel = props => {
   const { formattedPrice, priceTitle } = priceData(price, intl);
   const isBook = !!parse(location.search).book;
 
+
+  const numberPet = listing?.attributes?.publicData?.numberOfPets;
+  console.log('numberPet', numberPet)
   const subTitleText = !!subTitle
     ? subTitle
     : showClosedListingHelpText
@@ -125,6 +129,7 @@ const BookingPanel = props => {
             submitButtonWrapperClassName={css.bookingDatesSubmitButtonWrapper}
             unitType={unitType}
             onSubmit={onSubmit}
+            numberPet={numberPet}
             price={price}
             listingId={listing.id}
             isOwnListing={isOwnListing}

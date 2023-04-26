@@ -49,6 +49,7 @@ class MainPanel extends Component {
   constructor(props) {
     super(props);
     this.state = { isSecondaryFiltersOpen: false, currentQueryParams: props.urlQueryParams };
+   
 
     this.applyFilters = this.applyFilters.bind(this);
     this.cancelFilters = this.cancelFilters.bind(this);
@@ -74,6 +75,7 @@ class MainPanel extends Component {
   cancelFilters() {
     this.setState({ currentQueryParams: {} });
   }
+  
 
   // Reset all filter query parameters
   resetAll(e) {
@@ -170,7 +172,25 @@ class MainPanel extends Component {
       sortConfig,
     } = this.props;
 
-    const primaryFilters = filterConfig.filter(f => f.group === 'primary');
+    const primaryFilters = filterConfig.filter((f) => {
+      let checked = true;
+      if (f.id == "sizeOfdogs") {
+        checked = false;
+        if (this.state.currentQueryParams && this.state.currentQueryParams.pub_typeOfpets && this.state.currentQueryParams.pub_typeOfpets.search("dog") > -1) {
+          checked = true;
+        }
+      
+      }
+      else if (f.key == "dayCareStay") {
+        checked = false;
+        if (this.state.currentQueryParams && this.state.currentQueryParams.pub_typeOfpets && this.state.currentQueryParams.pub_typeOfpets.search("dog") > -1) {
+          checked = true;
+        }
+      
+      }
+      
+      return f.group === 'primary' && checked;
+    });
     const secondaryFilters = filterConfig.filter(f => f.group !== 'primary');
     const hasSecondaryFilters = !!(secondaryFilters && secondaryFilters.length > 0);
 

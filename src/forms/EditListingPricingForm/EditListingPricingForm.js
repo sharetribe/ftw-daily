@@ -93,7 +93,7 @@ export const EditListingPricingFormComponent = props => (
         config.listingMinimumPriceSubUnits
       );
       const priceValidators = config.listingMinimumPriceSubUnits
-        ? validators.composeValidators(priceRequired, minPriceRequired)
+        ? validators.composeValidators(priceRequired, minPriceRequired,pricePerUnitMessage)
         : priceRequired;
       const classes = classNames(css.root, className);
       const submitReady = (updated && pristine) || ready ;
