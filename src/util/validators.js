@@ -110,6 +110,11 @@ export const emailFormatValid = message => value => {
   return value && EMAIL_RE.test(value) ? VALID : message;
 };
 
+const FIFTY_RE = /^\b\w+\b(?:\W+\w+){0,49}\W*/;
+export const FiftyFormatValid = message => value => {
+  return value && FIFTY_RE.test(value) ? VALID : message;
+};
+
 export const moneySubUnitAmountAtLeast = (message, minValue) => value => {
   return value instanceof Money && value.amount >= minValue ? VALID : message;
 };

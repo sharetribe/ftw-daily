@@ -19,6 +19,8 @@ export const FETCH_CURRENT_USER_HAS_LISTINGS_REQUEST =
   'app/user/FETCH_CURRENT_USER_HAS_LISTINGS_REQUEST';
 export const FETCH_CURRENT_USER_HAS_LISTINGS_SUCCESS =
   'app/user/FETCH_CURRENT_USER_HAS_LISTINGS_SUCCESS';
+  export const FETCH_CURRENT_USER_HAS_ONE_LISTINGS_SUCCESS =
+  'app/user/FETCH_CURRENT_USER_HAS_ONE_LISTINGS_SUCCESS';
 export const FETCH_CURRENT_USER_HAS_LISTINGS_ERROR =
   'app/user/FETCH_CURRENT_USER_HAS_LISTINGS_ERROR';
 
@@ -89,12 +91,16 @@ export default function reducer(state = initialState, action = {}) {
         currentUserHasListingsError: null,
         currentUserNotificationCount: 0,
         currentUserNotificationCountError: null,
+        currentUserHasOneListing:null,
       };
 
     case FETCH_CURRENT_USER_HAS_LISTINGS_REQUEST:
       return { ...state, currentUserHasListingsError: null };
     case FETCH_CURRENT_USER_HAS_LISTINGS_SUCCESS:
       return { ...state, currentUserHasListings: payload.hasListings };
+      case FETCH_CURRENT_USER_HAS_ONE_LISTINGS_SUCCESS:
+      return { ...state, currentUserHasOneListings: payload.hasListings
+      };
     case FETCH_CURRENT_USER_HAS_LISTINGS_ERROR:
       console.error(payload); // eslint-disable-line
       return { ...state, currentUserHasListingsError: payload };
@@ -180,6 +186,11 @@ export const fetchCurrentUserHasListingsSuccess = hasListings => ({
   payload: { hasListings },
 });
 
+export const fetchCurrentUserHasOneListingsSuccess = hasListings => ({
+  type: FETCH_CURRENT_USER_HAS_ONE_LISTINGS_SUCCESS,
+  payload: { hasListings },
+});
+
 const fetchCurrentUserHasListingsError = e => ({
   type: FETCH_CURRENT_USER_HAS_LISTINGS_ERROR,
   error: true,
@@ -252,11 +263,17 @@ export const fetchCurrentUserHasListings = () => (dispatch, getState, sdk) => {
     .query(params)
     .then(response => {
       const hasListings = response.data.data && response.data.data.length > 0;
+      const isCurrentUserListing = response?.data?.data?.at(0)
+     // console.log(response?.data?.data?.at(0), '^^^^ ^^^^ => hasListings');
+      
 
       const hasPublishedListings =
         hasListings &&
         ensureOwnListing(response.data.data[0]).attributes.state !== LISTING_STATE_DRAFT;
+        //console.log(hasPublishedListings, '^^^^ ^^^^ => hasPublishedListings');
+        
       dispatch(fetchCurrentUserHasListingsSuccess(!!hasPublishedListings));
+      dispatch(fetchCurrentUserHasOneListingsSuccess(isCurrentUserListing))
     })
     .catch(e => dispatch(fetchCurrentUserHasListingsError(storableError(e))));
 };

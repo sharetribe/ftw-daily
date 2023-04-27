@@ -127,7 +127,7 @@ const tabCompleted = (tab, listing) => {
     case AVAILABILITY:
       return !!availabilityPlan;
       case YOURSELF:
-        return !!(  publicData && publicData.exp , publicData && publicData.headline,publicData && publicData.service, 
+        return !!(   publicData && publicData.headline,publicData && publicData.service, 
           publicData && publicData.schedule);
     case PHOTOS:
       return images && images.length > 0;

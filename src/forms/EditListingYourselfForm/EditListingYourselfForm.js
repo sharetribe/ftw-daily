@@ -7,7 +7,8 @@ import config from '../../config';
 import { propTypes } from '../../util/types';
 import { findOptionsForSelectFilter } from '../../util/search';
 import { intlShape, injectIntl, FormattedMessage } from '../../util/reactIntl';
-import { maxLength, required, composeValidators, } from '../../util/validators';
+import { maxLength, required, composeValidator} from '../../util/validators';
+import * as validators from '../../util/validators';
 
 import {
   Form,
@@ -122,12 +123,22 @@ const EditListingYourselfFormComponent = props => (
       const submitDisabled = invalid || disabled || submitInProgress || !values.dohavepets;
       const dohavepets = findOptionsForSelectFilter('dohavepets', filterConfig);
 
+      const emailRequiredMessage = intl.formatMessage({
+        id: 'SignupForm.emailRequired',
+      });
+     
+      const emailRequired = validators.required(emailRequiredMessage);
+      const emailInvalidMessage = intl.formatMessage({
+        id: 'SignupForm.emailInvalid',
+      });
+      const emailValid = validators.FiftyFormatValid(emailInvalidMessage);
+      console.log('emailValid', emailValid)
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessageCreateListingDraft}
           {errorMessageUpdateListing}
           {errorMessageShowListing}
-          <FieldTextInput
+          {/* <FieldTextInput
             id="exp"
             name="exp"
             className={css.title}
@@ -137,7 +148,7 @@ const EditListingYourselfFormComponent = props => (
             maxLength={TITLE_MAX_LENGTH}
             validate={composeValidators(required(expRequiredMessage))}
             autoFocus
-          />
+          /> */}
 
           <FieldTextInput
             id="headline"
@@ -146,7 +157,8 @@ const EditListingYourselfFormComponent = props => (
             type="text"
             label={headlineMessage}
             placeholder={headlinePlaceholderMessage}
-            validate={composeValidators(required(headlineRequiredMessage), maxLength50Message)}
+             //validate={composeValidators(required(headlineRequiredMessage))}
+          
             autoFocus
           />
 
@@ -156,7 +168,8 @@ const EditListingYourselfFormComponent = props => (
             className={css.description}
             label={serviceMessage}
             placeholder={servicePlaceholderMessage}
-            validate={composeValidators(required(serviceRequiredMessage), maxLength25Message)}
+           // validate={composeValidators(required(serviceRequiredMessage), maxLength25Message)}
+           validate={validators.composeValidators(emailRequired, emailValid)}
           />
 
           <FieldTextInput
@@ -165,7 +178,8 @@ const EditListingYourselfFormComponent = props => (
             className={css.description}
             label={scheduleMessage}
             placeholder={schedulePlaceholderMessage}
-            validate={composeValidators(required(scheduleRequiredMessage), maxLength25Message)}
+          //  validate={composeValidators(required(scheduleRequiredMessage), maxLength25Message)}
+          validate={validators.composeValidators(emailRequired, emailValid)}
           />
 
           <div>

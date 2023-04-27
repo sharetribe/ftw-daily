@@ -138,6 +138,7 @@ class TopbarComponent extends Component {
       authScopes,
       authInProgress,
       currentUser,
+      currentUserHasOneListings,
       currentUserHasListings,
       currentUserHasOrders,
       currentPage,
@@ -151,6 +152,8 @@ class TopbarComponent extends Component {
       sendVerificationEmailError,
       showGenericError,
     } = this.props;
+
+   // console.log(' currentUserHasOneListings',  currentUserHasOneListings)
 
     const { mobilemenu, mobilesearch, address, origin, bounds } = parse(location.search, {
       latlng: ['origin'],
@@ -226,10 +229,12 @@ class TopbarComponent extends Component {
           <TopbarDesktop
             className={desktopClassName}
             currentUserHasListings={currentUserHasListings}
+            currentUserHasOneListings={ currentUserHasOneListings}
             currentUser={currentUser}
             currentPage={currentPage}
             initialSearchFormValues={initialSearchFormValues}
             intl={intl}
+            
             isAuthenticated={isAuthenticated}
             notificationCount={notificationCount}
             onLogout={this.handleLogout}

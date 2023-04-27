@@ -17,6 +17,7 @@ import {
 import { TopbarSearchForm } from '../../forms';
 
 import css from './TopbarDesktop.module.css';
+import { createSlug } from '../../util/urlHelpers';
 
 const TopbarDesktop = props => {
   const {
@@ -29,11 +30,17 @@ const TopbarDesktop = props => {
     intl,
     isAuthenticated,
     onLogout,
+    currentUserHasOneListings,
     onSearchSubmit,
     initialSearchFormValues,
   } = props;
   const [mounted, setMounted] = useState(false);
 
+ const listingId = currentUserHasOneListings && currentUserHasOneListings?.id?.uuid 
+ const title = currentUserHasOneListings?.id && currentUserHasOneListings?.attributes?.title||''
+ const slug = createSlug(title);
+ console.log(currentUserHasOneListings && currentUserHasOneListings?.attributes?.title,slug, '^^^^ ^^^^ => listingId');
+ 
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -79,10 +86,11 @@ const TopbarDesktop = props => {
         <Avatar className={css.avatar} user={currentUser} disableProfileLink />
       </MenuLabel>
       <MenuContent className={css.profileMenuContent}>
-        <MenuItem key="ManageListingsPage">
+        <MenuItem key="ListingPage">
           <NamedLink
-            className={classNames(css.yourListingsLink, currentPageClass('ManageListingsPage'))}
-            name="ManageListingsPage"
+            className={classNames(css.yourListingsLink, currentPageClass('ListingPage'))}
+            params={{id:listingId,slug:slug}}
+            name="ListingPage"
           >
             <span className={css.menuItemBorder} />
             <FormattedMessage id="TopbarDesktop.yourListingsLink" />
@@ -142,11 +150,13 @@ const TopbarDesktop = props => {
         />
       </NamedLink>
       {search}
-      <NamedLink className={css.createListingLink} name="NewListingPage">
+
+   { !(currentUserHasOneListings?.id && currentUserHasOneListings) ? <> <NamedLink className={css.createListingLink} name="NewListingPage">
         <span className={css.createListing}>
           <FormattedMessage id="TopbarDesktop.createListing" />
         </span>
-      </NamedLink>
+      </NamedLink></>:null}
+     
       {inboxLink}
       {profileMenu}
       {signupLink}

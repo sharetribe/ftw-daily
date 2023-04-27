@@ -38,6 +38,7 @@ import {
   LayoutWrapperFooter,
   Footer,
   BookingPanel,
+  UserNav,
 } from '../../components';
 import { TopbarContainer, NotFoundPage } from '../../containers';
 
@@ -107,7 +108,7 @@ export class ListingPageComponent extends Component {
     const listing = getListing(listingId);
 
     const { bookingDates, ...bookingData } = values;
-    console.log(values, '^^^^ ^^^^ => values');
+   // console.log(values, '^^^^ ^^^^ => values');
     
 
     const initialValues = {
@@ -282,6 +283,7 @@ console.log(initialValues, '^^^^ ^^^^ => initialValues');
         <Page title={errorTitle} scrollingDisabled={scrollingDisabled}>
           <LayoutSingleColumn className={css.pageRoot}>
             <LayoutWrapperTopbar>{topbar}</LayoutWrapperTopbar>
+            <UserNav selectedPageName="ListingPage" />
             <LayoutWrapperMain>
               <p className={css.errorText}>
                 <FormattedMessage id="ListingPage.errorLoadingListingMessage" />

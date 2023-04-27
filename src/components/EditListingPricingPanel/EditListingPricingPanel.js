@@ -65,10 +65,10 @@ const EditListingPricingPanel = props => {
   const form = priceCurrencyValid ? (
     <EditListingPricingForm
       className={css.form}
-       initialValues={{ overnightsStayPrice1, overnightsStayPrice2, overnightsStayPrice3, dayCareStay1,dayCareStay2,dayCareStay3,discount,discountlengthOfStays,lengthOfStays}}
+       initialValues={{overnightsStayPrice1: new Money(overnightsStayPrice1,config.currency), overnightsStayPrice2:new Money(overnightsStayPrice2,config.currency), overnightsStayPrice3 : new Money(overnightsStayPrice3,config.currency), dayCareStay1: new Money(dayCareStay1,config.currency),dayCareStay2:new Money(dayCareStay2,config.currency),dayCareStay3:new Money(dayCareStay3,config.currency),discount,discountlengthOfStays,lengthOfStays}}
       onSubmit={values => {
         const {  overnightsStayPrice1, overnightsStayPrice2, overnightsStayPrice3, dayCareStay1,dayCareStay2,dayCareStay3,discount, discountlengthOfStays,lengthOfStays} = values;
-        //console.log(values, '^^^^ ^^^^ => values');
+        console.log(values, '^^^^ ^^^^ => values');
         
        
         function findMinPrice(var_args) {
@@ -86,14 +86,14 @@ const EditListingPricingPanel = props => {
           publicData: {
             pricepet: {
              dayCare:{
-              dayCareStay1 :dayCareStay1 || 0,
-              dayCareStay2 :dayCareStay2 || 0, 
-              dayCareStay3:dayCareStay3 || 0,
+              dayCareStay1 :dayCareStay1.amount || 0,
+              dayCareStay2 :dayCareStay2.amount || 0, 
+              dayCareStay3:dayCareStay3.amount || 0,
              },
              overNight:{
-              overnightsStayPrice1:overnightsStayPrice1 || 0, 
-              overnightsStayPrice2:overnightsStayPrice2 || 0,
-              overnightsStayPrice3:overnightsStayPrice3 || 0,
+              overnightsStayPrice1:overnightsStayPrice1.amount || 0, 
+              overnightsStayPrice2:overnightsStayPrice2.amount || 0,
+              overnightsStayPrice3:overnightsStayPrice3.amount || 0,
              }
             },
             discount,

@@ -17,6 +17,7 @@ import {
   Form,
   
   FieldTextInput,
+  FieldCurrencyInput,
   
 } from '../../components';
 import css from './EditListingPricingForm.module.css';
@@ -123,14 +124,14 @@ export const EditListingPricingFormComponent = props => (
           {detail && detail.includes("overnightsStay") ? <> <p>Price for overnightsStay</p>
             <div style={{ display: 'flex', gap: '20px' }}>
              {numberPetArray.map((st)=> 
-               <FieldTextInput
+               <FieldCurrencyInput
                 id={"overnightsStayPrice"+st}
                 name={"overnightsStayPrice"+st}
                 className={css.priceInput}
                 autoFocus
                 label={st+  "    Pet"}
                 placeholder={pricePlaceholderMessage}
-                //currencyConfig={config.currencyConfig}
+                currencyConfig={config.currencyConfig}
             
                 validate={priceValidators}
               />) }
@@ -141,14 +142,14 @@ export const EditListingPricingFormComponent = props => (
             <p>Price for dayStay</p>
             <div style={{ display: 'flex', gap: '20px' }}>
             {numberPetArray.map((st)=> 
-               <FieldTextInput
+               <FieldCurrencyInput
                 id={"dayCareStay"+st}
                 name={"dayCareStay"+st}
                 className={css.priceInput}
                 autoFocus
                 label={"Pet"+st}
                 placeholder={pricePlaceholderMessage}
-                //currencyConfig={config.currencyConfig}
+                currencyConfig={config.currencyConfig}
                 validate={priceValidators}
               />) }
             </div>

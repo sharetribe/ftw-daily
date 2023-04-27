@@ -227,7 +227,7 @@ export class BookingDatesFormComponent extends Component {
               {/* <p>hello</p> */}
              
             
-          <p>Choose what service you wish to offers...</p>
+          {/* <p>Choose what service you wish to offers...</p>
           {
             options.map((st)=>{
               return(
@@ -236,9 +236,18 @@ export class BookingDatesFormComponent extends Component {
                autoFocus/>
               )
             })
+          } */}
+  <p>Choose what service you wish to offers...</p>
+  {
+            detail.map((st)=>{
+              return(
+               <FieldCheckbox className={css.features} id={st} name={"serviceSetup"} value={st} label={st} 
+                //validate={composeValidators(required(phoneRequiredMessage))}
+               autoFocus/>
+              )
+            })
           }
- {/* <p>Choose what service you wish to offers...</p>
-<FieldSelect 
+{/* <FieldSelect 
               id="serviceSetup"
               name="serviceSetup"
               label={"serviceSetup"}
@@ -249,9 +258,9 @@ export class BookingDatesFormComponent extends Component {
                     <option key={st} value={st}>{st}</option>
                   )
                 })}
-              </FieldSelect> */}
+              </FieldSelect>  */}
           
-          <p>number of pets</p>
+          {/* <p>number of pets</p> */}
 
               <FieldSelect 
               id="numberOfPets"
