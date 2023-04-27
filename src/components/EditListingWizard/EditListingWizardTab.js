@@ -101,6 +101,7 @@ const EditListingWizardTab = props => {
     onRemoveImageverification,
     onChange,
     updatedTab,
+    currentUser,
     updateInProgress,
     intl,
   } = props;
@@ -178,6 +179,7 @@ const EditListingWizardTab = props => {
           onSubmit={values => {
             onCompleteEditListingWizardTab(tab, values);
           }}
+          currentUser={ currentUser}
         />
       );
     }

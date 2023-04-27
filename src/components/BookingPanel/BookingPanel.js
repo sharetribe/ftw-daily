@@ -69,6 +69,7 @@ const BookingPanel = props => {
     lineItems,
     fetchLineItemsInProgress,
     fetchLineItemsError,
+    dayUnitType,
   } = props;
 console.log(listing, '^^^^ ^^^^ => listing');
 
@@ -128,9 +129,11 @@ console.log(listing, '^^^^ ^^^^ => listing');
             formId="BookingPanel"
             submitButtonWrapperClassName={css.bookingDatesSubmitButtonWrapper}
             unitType={unitType}
+            dayUnitType={dayUnitType}
             onSubmit={onSubmit}
             numberPet={numberPet}
             price={price}
+            listing={listing}
             listingId={listing.id}
             isOwnListing={isOwnListing}
             timeSlots={timeSlots}

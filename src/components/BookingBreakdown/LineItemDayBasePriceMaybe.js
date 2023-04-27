@@ -5,10 +5,12 @@ import { LINE_ITEM_NIGHT, LINE_ITEM_DAY, propTypes } from '../../util/types';
 
 import css from './BookingBreakdown.module.css';
 
-const LineItemBasePriceMaybe = props => {
+const LineItemDayBasePriceMaybe = props => {
   const { transaction, unitType, intl } = props;
+  console.log(unitType, '^^^^ ^^^^ => unitType');
+  
   const isNightly = unitType === LINE_ITEM_NIGHT;
-  const isDaily = unitType === LINE_ITEM_DAY;
+  const isDaily = LINE_ITEM_DAY === LINE_ITEM_DAY;
   const translationKey = isNightly
     ? 'BookingBreakdown.baseUnitNight'
     : isDaily
@@ -25,6 +27,8 @@ const LineItemBasePriceMaybe = props => {
   const quantity = unitPurchase ? unitPurchase.quantity.toString() : null;
   const unitPrice = unitPurchase ? formatMoney(intl, unitPurchase.unitPrice) : null;
   const total = unitPurchase ? formatMoney(intl, unitPurchase.lineTotal) : null;
+  console.log(total, '^^^^ ^^^^ => total');
+  
 
   return quantity && total ? (
     <div className={css.lineItem}>
@@ -37,10 +41,10 @@ const LineItemBasePriceMaybe = props => {
   ) : null;
 };
 
-LineItemBasePriceMaybe.propTypes = {
+LineItemDayBasePriceMaybe.propTypes = {
   transaction: propTypes.transaction.isRequired,
   unitType: propTypes.bookingUnitType.isRequired,
   intl: intlShape.isRequired,
 };
 
-export default LineItemBasePriceMaybe;
+export default LineItemDayBasePriceMaybe;

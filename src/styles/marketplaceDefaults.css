@@ -743,6 +743,7 @@ textarea {
 .buttonBorders {
   border: none;
   border-radius: var(--borderRadius);
+ 
 }
 /* Secondary button has clear borders */
 .buttonBordersSecondary {
@@ -750,6 +751,7 @@ textarea {
   border-style: solid;
   border-color: var(--matterColorNegative);
   border-radius: var(--borderRadius);
+ 
 }
 .buttonBordersSecondary:hover,
 .buttonBordersSecondary:focus {
@@ -757,13 +759,14 @@ textarea {
 }
 .buttonBordersSecondary:disabled {
   border-color: var(--matterColorNegative);
+  border: solid 2px red;
 }
 
 /* Button colors */
 /* Default button uses marketplace color */
 .buttonColors {
   background-color: var(--marketplaceColor);
-  color: var(--matterColorLight);
+  color: black;
 }
 .buttonColors:focus,
 .buttonColors:hover {
@@ -777,7 +780,7 @@ textarea {
 /* Button colors: primary */
 .buttonColorsPrimary {
   background-color: var(--successColor);
-  color: var(--matterColorLight);
+  color: black;
 }
 .buttonColorsPrimary:hover,
 .buttonColorsPrimary:focus {

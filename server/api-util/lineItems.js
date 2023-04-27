@@ -1,10 +1,11 @@
-const { calculateQuantityFromDates, calculateTotalFromLineItems, calculateTotalPrice } = require('./lineItemHelpers');
+const { calculateQuantityFromDates, calculateTotalFromLineItems, calculateTotalPrice, calculateTotalPrices } = require('./lineItemHelpers');
 const { types } = require('sharetribe-flex-sdk');
 const { Money } = types;
 
 // This bookingUnitType needs to be one of the following:
 // line-item/night, line-item/day or line-item/units
 const bookingUnitType = 'line-item/night';
+const bookingUnitDatType = 'line-item/day';
 const PROVIDER_COMMISSION_PERCENTAGE = -10;
 
 /** Returns collection of lineItems (max 50)
@@ -28,6 +29,7 @@ const PROVIDER_COMMISSION_PERCENTAGE = -10;
  * @returns {Array} lineItems
  */
 exports.transactionLineItems = (listing, bookingData) => {
+  let lineItems=[]
   const unitPrice = listing.attributes.price;
   const { startDate, endDate,serviceSetup ,numberOfPets} = bookingData;
   console.log(bookingData, '^^^^ ^^^^ => bookingData');
@@ -43,23 +45,42 @@ exports.transactionLineItems = (listing, bookingData) => {
    *
    * By default BookingBreakdown prints line items inside LineItemUnknownItemsMaybe if the lineItem code is not recognized. */
 
-  const booking = {
-    code: bookingUnitType,
-    unitPrice:calculateTotalPrice(serviceSetup,listing,unitPrice,numberOfPets),
-    quantity: calculateQuantityFromDates(startDate, endDate, bookingUnitType),
+
+  if(serviceSetup.filter(e=> e =='overnightsStay')?.length){
+
+    const booking = {
+      code: bookingUnitType,
+      unitPrice:calculateTotalPrice(serviceSetup,listing,unitPrice,numberOfPets),
+      quantity: calculateQuantityFromDates(startDate, endDate, bookingUnitType),
+      includeFor: ['customer', 'provider'],
+    };
+    console.log(booking, '^^^^ ^^^^ => booking');
+    lineItems.push(booking)
+  
+  }
+  
+  
+if(serviceSetup.filter(e=> e =='dayCareStay')?.length){
+
+  const dayCareStay = {
+    code: bookingUnitDatType,
+    unitPrice: calculateTotalPrices(serviceSetup,listing,unitPrice,numberOfPets),
+    quantity: calculateQuantityFromDates(startDate, endDate, bookingUnitDatType),
     includeFor: ['customer', 'provider'],
   };
-  console.log(booking, '^^^^ ^^^^ => booking');
-  
+  console.log(dayCareStay, '^^^^ ^^^^ => dayCareStay');
+   lineItems.push(dayCareStay)
 
-  const providerCommission = {
-    code: 'line-item/provider-commission',
-    unitPrice: calculateTotalFromLineItems([booking]),
-    percentage: PROVIDER_COMMISSION_PERCENTAGE,
-    includeFor: ['provider'],
-  };
+}
 
-  const lineItems = [booking, providerCommission];
+// const providerCommissions = {
+//   code: 'line-item/provider-commission',
+//   unitPrice: calculateTotalFromLineItems([booking]),
+//   percentage: PROVIDER_COMMISSION_PERCENTAGE,
+//   includeFor: ['provider'],
+// };
 
   return lineItems;
 };
+
+

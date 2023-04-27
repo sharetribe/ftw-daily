@@ -145,7 +145,7 @@ export const filters = [
   // },
   {
     id: 'serviceSetup',
-    label: 'Choose pets',
+    label: 'Type of Services',
     type: 'SelectMultipleFilter',
     group: 'primary',
     queryParamNames: ['pub_serviceSetup'],
@@ -155,7 +155,7 @@ export const filters = [
       options: [
         {
           key: 'overnightsStay',
-          label: 'Overnights Stay',
+          label: 'Overnight Stay',
         },
         {
           key: 'dayCareStay',
@@ -182,6 +182,36 @@ export const filters = [
         {
           key: 'cat',
           label: 'Cat',
+        },
+       
+      ],
+    },
+  },
+  {
+    id: 'sizeOfdogs',
+    label: 'Size Of Dogs',
+    type: 'SelectMultipleFilter',
+    group: 'primary',
+    queryParamNames: ['pub_sizeOfdogs'],
+    config: {
+      
+      searchMode: 'has_all',
+      options: [
+        {
+          key: 'small',
+          label: '0-6kg (Small)',
+        },
+        {
+          key: 'midium',
+          label: '7-20kg (Midium)',
+        },
+        {
+          key: 'large',
+          label: '20-40kg (Large)',
+        },
+        {
+          key: 'giant',
+          label: '40+kg (Giant)',
         },
        
       ],
@@ -256,36 +286,7 @@ export const filters = [
       ],
     },
   },
-  {
-    id: 'sizeOfdogs',
-    label: 'Size Of Dogs',
-    type: 'SelectMultipleFilter',
-    group: 'primary',
-    queryParamNames: ['pub_sizeOfdogs'],
-    config: {
-      
-      searchMode: 'has_all',
-      options: [
-        {
-          key: 'small',
-          label: '0-6kg (Small)',
-        },
-        {
-          key: 'midium',
-          label: '7-20kg (Midium)',
-        },
-        {
-          key: 'large',
-          label: '20-40kg (Large)',
-        },
-        {
-          key: 'giant',
-          label: '40+kg (Giant)',
-        },
-       
-      ],
-    },
-  },
+  
   {
     id: 'housingConditions',
     label: 'Housing conditions',

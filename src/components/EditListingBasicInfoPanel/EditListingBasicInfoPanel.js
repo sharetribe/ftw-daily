@@ -24,9 +24,16 @@ const EditListingBasicInfoPanel = props => {
     submitButtonText,
     panelUpdated,
     updateInProgress,
+    currentUser,
     errors,
   } = props;
 
+//console.log('currentUser,', currentUser)
+
+const useremail = currentUser.attributes.email
+console.log('useremail', useremail)
+      
+ 
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
   const { title, geolocation, publicData } = currentListing.attributes;
@@ -57,7 +64,7 @@ const EditListingBasicInfoPanel = props => {
         className={css.form}
         initialValues={{
           title,
-          email: publicData.email,
+          email: useremail,
           birthday: publicData.birthday,
           phone: publicData.phone,
           serviceSetup: publicData.serviceSetup,
@@ -95,6 +102,7 @@ const EditListingBasicInfoPanel = props => {
         updateInProgress={updateInProgress}
         fetchErrors={errors}
         categories={categoryOptions}
+        currentUser={ currentUser}
       />
     </div>
   );

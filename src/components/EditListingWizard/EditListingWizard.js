@@ -306,6 +306,7 @@ class EditListingWizard extends Component {
       ...rest
     } = this.props;
 
+   
     const selectedTab = params.tab;
     const isNewListingFlow = [LISTING_PAGE_PARAM_TYPE_NEW, LISTING_PAGE_PARAM_TYPE_DRAFT].includes(
       params.type
@@ -419,6 +420,7 @@ class EditListingWizard extends Component {
                 params={params}
                 listing={listing}
                 marketplaceTabs={TABS}
+                currentUser={ currentUser}
                 errors={errors}
                 handleCreateFlowTabScrolling={this.handleCreateFlowTabScrolling}
                 handlePublishListing={this.handlePublishListing}

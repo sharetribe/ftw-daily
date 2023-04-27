@@ -25,6 +25,7 @@ import LineItemTotalPrice from './LineItemTotalPrice';
 import LineItemUnknownItemsMaybe from './LineItemUnknownItemsMaybe';
 
 import css from './BookingBreakdown.module.css';
+import LineItemDayBasePriceMaybe from './LineItemDayBasePriceMaybe';
 
 export const BookingBreakdownComponent = props => {
   const {
@@ -32,6 +33,7 @@ export const BookingBreakdownComponent = props => {
     className,
     userRole,
     unitType,
+    dayUnitType,
     transaction,
     booking,
     intl,
@@ -92,6 +94,7 @@ export const BookingBreakdownComponent = props => {
       <LineItemUnitsMaybe transaction={transaction} unitType={unitType} />
 
       <LineItemBasePriceMaybe transaction={transaction} unitType={unitType} intl={intl} />
+      <LineItemDayBasePriceMaybe transaction={transaction} unitType={dayUnitType} intl={intl} />
       <LineItemUnknownItemsMaybe transaction={transaction} isProvider={isProvider} intl={intl} />
 
       <LineItemSubTotalMaybe

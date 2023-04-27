@@ -47,38 +47,20 @@ const EditListingBasicInfoFormComponent = props => (
         filterConfig,
         fieldId,
         updated,
+        currentUser,
         updateInProgress,
         fetchErrors,
         values,
       } = formRenderProps;
 
       console.log('values', values)
-      
-     
+
+    
+     //console.log(' currentUser',  currentUser)
       const identity = v => v;
-      // date of birthday
-      // Define the birthday validation function
-      const birth = values.birthday
-      console.log('birth', birth)
-const validateBirthday = (birth) => {
-  // Convert the input date string to a Date object
-  const inputDate = new Date(date);
-  // Calculate the age based on the input date
-  const currentDate = new Date();
-  const age = currentDate.getFullYear() - inputDate.getFullYear();
-  // Check if the calculated age is greater than 18
-  if (age > 18) {
-    // Return true if age is greater than 18
-    return true;
-  } else {
-    // Return false if age is not greater than 18
-    return false;
-  }
-};
-const handleBirthdayChange = (event) => {
-  const { value } = event.target;
-  setBirthday(value);
-}
+     
+
+
 //console.log('validateBirthday', validateBirthday)
       const birthdateMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.birthdate' });
       const birthdatePlaceholderMessage = intl.formatMessage({
@@ -87,12 +69,7 @@ const handleBirthdayChange = (event) => {
       const birthdateRequiredMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.birthdateRequired',
       });
-     // const required = validators.required('A valid date is required');
-      // const minAge = 18;
-      // const minYears =2005;
-      // const minAgeRequired = validators.ageAtLeast(`Age should be at least ${minAge,minYears}`, minAge,minYears);
-
-      // const birthdayValid = validators.ageAtLeast();
+    
       
       const addressPlaceholderMessage = intl.formatMessage({
         id: 'EditListingLocationForm.addressPlaceholder',
@@ -293,6 +270,7 @@ const MIN_STRIPE_ACCOUNT_AGE = 18;
             autoFocus
           /> */}
           </div>
+        
           <FieldTextInput
             id="email"
             name="email"
@@ -302,6 +280,7 @@ const MIN_STRIPE_ACCOUNT_AGE = 18;
             placeholder={descriptionPlaceholderMessage}
             validate={composeValidators(required(descriptionRequiredMessage))}
             autoFocus
+            disabled={true}
           />
 
           <FieldPhoneNumberInput
@@ -323,7 +302,7 @@ const MIN_STRIPE_ACCOUNT_AGE = 18;
           /> */}
 
           <p> Service Setup</p>
-          <p>Choose what service you wish to offers...</p>
+          <p>Choose what service you wish to offer...</p>
           {
             options.map((st)=>{
               return(

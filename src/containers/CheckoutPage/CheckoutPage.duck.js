@@ -171,8 +171,12 @@ export const initiateOrder = (orderParams, transactionId) => (dispatch, getState
     ? TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY
     : TRANSITION_REQUEST_PAYMENT;
   const isPrivilegedTransition = isPrivileged(transition);
+  console.log(orderParams, '^^^^ ^^^^ => orderParams');
+  
 
   const bookingData = {
+    serviceSetup:orderParams.bookingData.serviceSetup,
+    numberOfPets:orderParams.bookingData.numberOfPets,
     startDate: orderParams.bookingStart,
     endDate: orderParams.bookingEnd,
   };
@@ -303,6 +307,8 @@ export const speculateTransaction = (orderParams, transactionId) => (dispatch, g
 
   // If we already have a transaction ID, we should transition, not
   // initiate.
+  console.log(orderParams.bookingData.serviceSetup, '^^^^ ^^^^ => orderParams');
+  
   const isTransition = !!transactionId;
   const transition = isTransition
     ? TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY
@@ -310,6 +316,8 @@ export const speculateTransaction = (orderParams, transactionId) => (dispatch, g
   const isPrivilegedTransition = isPrivileged(transition);
 
   const bookingData = {
+    serviceSetup:orderParams.bookingData.serviceSetup,
+    numberOfPets:orderParams.bookingData.numberOfPets,
     startDate: orderParams.bookingStart,
     endDate: orderParams.bookingEnd,
   };

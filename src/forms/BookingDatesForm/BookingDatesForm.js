@@ -112,12 +112,14 @@ export class BookingDatesFormComponent extends Component {
             unitType,
             values,
             timeSlots,
+            listing,
             filterConfig,
             numberPet,
             fetchTimeSlotsError,
             lineItems,
             fetchLineItemsInProgress,
             fetchLineItemsError,
+            dayUnitType,
           } = fieldRenderProps;
           const { startDate, endDate } = values && values.bookingDates ? values.bookingDates : {};
 
@@ -128,6 +130,8 @@ export class BookingDatesFormComponent extends Component {
           const numberPetArray = numberPet && numberPet == "three" ? [1, 2, 3]
           : numberPet == "two" ? [1, 2] : [1];
 
+          const detail = listing?.attributes?.publicData?.serviceSetup;
+          console.log('detail', detail)
 
           const phoneRequiredMessage = intl.formatMessage({
             id: 'EditListingDescriptionForm.phoneRequired',
@@ -163,6 +167,7 @@ export class BookingDatesFormComponent extends Component {
             startDate && endDate
               ? {
                   unitType,
+                  dayUnitType,
                   startDate,
                   endDate,
                 }
@@ -232,6 +237,19 @@ export class BookingDatesFormComponent extends Component {
               )
             })
           }
+ {/* <p>Choose what service you wish to offers...</p>
+<FieldSelect 
+              id="serviceSetup"
+              name="serviceSetup"
+              label={"serviceSetup"}
+              >
+                 <option  value={""}>select</option>
+                {detail.map((st)=>{
+                  return(
+                    <option key={st} value={st}>{st}</option>
+                  )
+                })}
+              </FieldSelect> */}
           
           <p>number of pets</p>
 
@@ -252,6 +270,7 @@ export class BookingDatesFormComponent extends Component {
                 className={css.bookingDates}
                 name="bookingDates"
                 unitType={unitType}
+                dayUnitType={dayUnitType}
                 startDateId={`${formId}.bookingStartDate`}
                 startDateLabel={bookingStartLabel}
                 startDatePlaceholderText={startDatePlaceholderText}

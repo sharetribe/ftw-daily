@@ -107,6 +107,8 @@ export class ListingPageComponent extends Component {
     const listing = getListing(listingId);
 
     const { bookingDates, ...bookingData } = values;
+    console.log(values, '^^^^ ^^^^ => values');
+    
 
     const initialValues = {
       listing,
@@ -117,6 +119,7 @@ export class ListingPageComponent extends Component {
       },
       confirmPaymentError: null,
     };
+console.log(initialValues, '^^^^ ^^^^ => initialValues');
 
     const saveToSessionStorage = !this.props.currentUser;
 
@@ -180,6 +183,7 @@ export class ListingPageComponent extends Component {
   render() {
     const {
       unitType,
+      dayUnitType,
       isAuthenticated,
       currentUser,
       getListing,
@@ -494,6 +498,7 @@ export class ListingPageComponent extends Component {
                   listing={currentListing}
                   isOwnListing={isOwnListing}
                   unitType={unitType}
+                  dayUnitType={dayUnitType}
                   onSubmit={handleBookingSubmit}
                   title={bookingTitle}
                   subTitle={bookingSubTitle}
@@ -520,6 +525,7 @@ export class ListingPageComponent extends Component {
 
 ListingPageComponent.defaultProps = {
   unitType: config.bookingUnitType,
+  dayUnitType:config.bookingDayUnitType,
   currentUser: null,
   enquiryModalOpenForListingId: null,
   showListingError: null,
@@ -543,6 +549,7 @@ ListingPageComponent.propTypes = {
   }).isRequired,
 
   unitType: propTypes.bookingUnitType,
+  dayUnitType:propTypes.bookingDayUnitType,
   // from injectIntl
   intl: intlShape.isRequired,
 

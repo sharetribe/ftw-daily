@@ -164,6 +164,7 @@ export class CheckoutPageComponent extends Component {
     const pageData = hasDataInProps
       ? { bookingData, bookingDates, listing, transaction }
       : storedData(STORAGE_KEY);
+      console.log(pageData,"pageData")
 
     // Check if a booking is already created according to stored data.
     const tx = pageData ? pageData.transaction : null;
@@ -183,6 +184,7 @@ export class CheckoutPageComponent extends Component {
       const listingId = pageData.listing.id;
       const transactionId = tx ? tx.id : null;
       const { bookingStart, bookingEnd } = pageData.bookingDates;
+      const bookingData = pageData.bookingData||{}
 
       // Convert picked date to date that will be converted on the API as
       // a noon of correct year-month-date combo in UTC
@@ -194,6 +196,7 @@ export class CheckoutPageComponent extends Component {
       // The way to pass it to checkout page is through pageData.bookingData
       fetchSpeculatedTransaction(
         {
+          bookingData,
           listingId,
           bookingStart: bookingStartForAPI,
           bookingEnd: bookingEndForAPI,
@@ -247,6 +250,8 @@ export class CheckoutPageComponent extends Component {
     // Step 1: initiate order by requesting payment from Marketplace API
     const fnRequestPayment = fnParams => {
       // fnParams should be { listingId, bookingStart, bookingEnd }
+      console.log(fnParams, '^^^^ ^^^^ => fnParams');
+      
       const hasPaymentIntents =
         storedTx.attributes.protectedData && storedTx.attributes.protectedData.stripePaymentIntents;
 
@@ -373,9 +378,11 @@ export class CheckoutPageComponent extends Component {
         : selectedPaymentFlow === PAY_AND_SAVE_FOR_LATER_USE
         ? { setupPaymentMethodForSaving: true }
         : {};
+        const bookingData = pageData.bookingData||{};
 
     const orderParams = {
       listingId: pageData.listing.id,
+      bookingData,
       bookingStart: tx.booking.attributes.start,
       bookingEnd: tx.booking.attributes.end,
       ...optionalPaymentParams,
@@ -588,6 +595,7 @@ export class CheckoutPageComponent extends Component {
           className={css.bookingBreakdown}
           userRole="customer"
           unitType={config.bookingUnitType}
+          dayUnitType={config.bookingDayUnitType}
           transaction={tx}
           booking={txBooking}
           dateType={DATE_TYPE_DATE}
