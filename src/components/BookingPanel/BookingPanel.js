@@ -71,7 +71,7 @@ const BookingPanel = props => {
     fetchLineItemsError,
     dayUnitType,
   } = props;
-console.log(listing, '^^^^ ^^^^ => listing');
+//console.log(listing, '^^^^ ^^^^ => listing');
 
   const price = listing.attributes.price;
   const hasListingState = !!listing.attributes.state;
@@ -83,7 +83,7 @@ console.log(listing, '^^^^ ^^^^ => listing');
 
 
   const numberPet = listing?.attributes?.publicData?.numberOfPets;
-  console.log('numberPet', numberPet)
+  //console.log('numberPet', numberPet)
   const subTitleText = !!subTitle
     ? subTitle
     : showClosedListingHelpText

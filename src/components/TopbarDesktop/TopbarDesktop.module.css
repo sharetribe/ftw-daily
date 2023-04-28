@@ -44,6 +44,71 @@
   text-decoration: none;
 }
 
+.navLink {
+  cursor: pointer;
+  position: relative;
+  color: var(--matterColor);
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: var(--fontWeightMedium);
+  margin-left: 20px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 16px;
+  line-height: 27px;
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  &:hover {
+    text-decoration: none;
+    color: var(--marketplaceColor);
+  }
+
+  & .inbox {
+    color: var(--matterColor);
+    text-decoration: none;
+    position: relative;
+
+    &:hover {
+      color: var(--marketplaceColor);
+    }
+  }
+
+  & .badge {
+    background-color: var(--matterColorDark);
+    color: var(--matterColorLight);
+    font-size: 12px;
+    line-height: 16px;
+    border-radius: 100px;
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -5px;
+    right: -9px;
+  }
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  & > svg {
+    color: var(--matterColor);
+
+    &:hover {
+      color: var(--marketplaceColor);
+    }
+
+    &.cartIcon {
+      width: 25px;
+    }
+  }
+}
+
 .logo {
   /* If height is increased, change link paddings accordingly */
   height: 40px;

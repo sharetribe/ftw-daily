@@ -52,7 +52,7 @@ export class ManageListingsPageComponent extends Component {
     } = this.props;
 
 
-   // console.log('currentUserHasOneListings', currentUserHasOneListings)
+   console.log('currentUserHasOneListings', currentUserHasOneListings)
     const hasPaginationInfo = !!pagination && pagination.totalItems != null;
     const listingsAreLoaded = !queryInProgress && hasPaginationInfo;
 
@@ -117,7 +117,9 @@ export class ManageListingsPageComponent extends Component {
         <LayoutSingleColumn>
           <LayoutWrapperTopbar>
             <TopbarContainer currentPage="ManageListingsPage" />
-            <UserNav selectedPageName="ManageListingsPage" />
+            <UserNav selectedPageName="ManageListingsPage"
+            
+            currentUserHasOneListings={currentUserHasOneListings}/>
           </LayoutWrapperTopbar>
           <LayoutWrapperMain>
             {queryInProgress ? loadingResults : null}

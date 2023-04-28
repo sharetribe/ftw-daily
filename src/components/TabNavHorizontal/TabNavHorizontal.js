@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { InlineTextButton, NamedLink } from '../../components';
+import { InlineTextButton, ListingLink, NamedLink } from '../../components';
 
 import css from './TabNavHorizontal.module.css';
 
@@ -11,7 +11,7 @@ export const DARK_SKIN = 'dark';
 const { arrayOf, bool, func, node, object, oneOf, string, shape } = PropTypes;
 
 const Tab = props => {
-  const { className, disabled, text, selected, onClick, linkProps, isDark } = props;
+  const { className, disabled, text, selected, onClick, linkProps, isDark,currentUserHasOneListings } = props;
   const darkSkinClasses = isDark
     ? classNames(css.tabContentDarkSkin, {
         [css.selectedTabContentDarkSkin]: selected,
@@ -43,13 +43,17 @@ const Tab = props => {
   return (
     <div className={className}>
       {isButton ? (
-        <InlineTextButton rootClassName={buttonClasses} onClick={onClick}>
+       
+       <InlineTextButton rootClassName={buttonClasses} onClick={onClick}>
           {text}
         </InlineTextButton>
+        
       ) : (
+       
         <NamedLink className={linkClasses} {...linkProps}>
           {text}
         </NamedLink>
+     
       )}
     </div>
   );
@@ -68,15 +72,21 @@ Tab.propTypes = {
 };
 
 const TabNavHorizontal = props => {
-  const { className, rootClassName, tabRootClassName, tabs, skin } = props;
+  const { className, rootClassName, tabRootClassName, tabs, skin,currentUserHasOneListings } = props;
   const isDark = skin === DARK_SKIN;
   const classes = classNames(rootClassName || css.root, { [css.darkSkin]: isDark }, className);
   const tabClasses = tabRootClassName || css.tab;
   return (
     <nav className={classes}>
+      <ListingLink
+       // className={css.navLink}
+        style={{color:"white"}}
+        listing={currentUserHasOneListings}
+        children={"UpdateProfile"}
+      />
       {tabs.map((tab, index) => {
         const key = typeof tab.text === 'string' ? tab.text : index;
-        return <Tab key={key} className={tabClasses} {...tab} isDark={isDark} />;
+        return <Tab key={key} className={tabClasses} {...tab} isDark={isDark} currentUserHasOneListings={currentUserHasOneListings}/>;
       })}
     </nav>
   );

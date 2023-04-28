@@ -11,6 +11,7 @@ import {
   LISTING_PAGE_PARAM_TYPES,
   LISTING_PAGE_PENDING_APPROVAL_VARIANT,
   createSlug,
+  LISTING_PAGE_PARAM_TYPE_EDIT,
 } from '../../util/urlHelpers';
 import { LISTING_STATE_DRAFT, LISTING_STATE_PENDING_APPROVAL, propTypes } from '../../util/types';
 import { ensureOwnListing } from '../../util/data';
@@ -89,8 +90,13 @@ export const EditListingPageComponent = props => {
     scrollingDisabled,
     stripeAccountFetched,
     stripeAccount,
+    allowOnlyOneListing,
     updateStripeAccountError,
+    currentUserListingFetched,
+    currentUserListing,
   } = props;
+  console.log(allowOnlyOneListing, '^^^^ ^^^^ => allowOnlyOneListing');
+  
 
   const { id, type, returnURLType } = params;
   const isNewURI = type === LISTING_PAGE_PARAM_TYPE_NEW;
@@ -133,7 +139,21 @@ export const EditListingPageComponent = props => {
         };
 
     return <NamedRedirect {...redirectProps} />;
-  } else if (showForm) {
+  }else if (allowOnlyOneListing&& isNewURI && currentUserListingFetched && currentUserListing) {
+    // If we allow only one listing per provider, we need to redirect to correct listing.
+    return (
+      <NamedRedirect
+        name="EditListingPage"
+        params={{
+          id: currentUserListing.id.uuid,
+          slug: createSlug(currentUserListing.attributes.title),
+          type: LISTING_PAGE_PARAM_TYPE_DRAFT,
+          tab: 'description',
+        }}
+      />
+    );
+  } 
+  else if (showForm) {
     const {
       createListingDraftError = null,
       publishListingError = null,
@@ -319,7 +339,7 @@ const mapStateToProps = state => {
     stripeAccountFetched,
   } = state.stripeConnectAccount;
 
-  const { currentUser } = state.user;
+  const { currentUser ,currentUserListingFetched,currentUserListing} = state.user;
 
   const fetchInProgress = createStripeAccountInProgress;
 
@@ -330,6 +350,8 @@ const mapStateToProps = state => {
   };
   return {
     getAccountLinkInProgress,
+    currentUserListingFetched,
+    currentUserListing,
     getAccountLinkError,
     createStripeAccountError,
     updateStripeAccountError,

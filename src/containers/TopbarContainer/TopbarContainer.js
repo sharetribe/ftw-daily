@@ -29,6 +29,8 @@ export const TopbarContainerComponent = props => {
     sendVerificationEmailInProgress,
     sendVerificationEmailError,
     onResendVerificationEmail,
+    currentUserListingFetched , 
+    currentUserListing,
     ...rest
   } = props;
 
@@ -36,6 +38,8 @@ export const TopbarContainerComponent = props => {
   return (
     <Topbar
       authInProgress={authInProgress}
+      currentUserListingFetched={currentUserListingFetched}
+      currentUserListing={currentUserListing}
       currentPage={currentPage}
       currentSearchParams={currentSearchParams}
       currentUser={currentUser}
@@ -95,7 +99,10 @@ TopbarContainerComponent.propTypes = {
 const mapStateToProps = state => {
   // Topbar needs isAuthenticated
   const { isAuthenticated, logoutError, authScopes } = state.Auth;
-  // Topbar needs user info.
+ 
+  
+  
+  // Topbar needs user info.currentUserListingFetched
   const {
     currentUser,
     currentUserHasListings,
@@ -104,7 +111,10 @@ const mapStateToProps = state => {
     sendVerificationEmailInProgress,
     sendVerificationEmailError,
     currentUserHasOneListings,
+    currentUserListing,
+    currentUserListingFetched
   } = state.user;
+  console.log(currentUserListingFetched, '^^^^ ^^^^ => currentUserListingFetched');
   //console.log(state,currentUserHasOneListings, '^^^^ ^^^^ => currentUserHasListings');
   
   const hasGenericError = !!(logoutError || hasCurrentUserErrors(state));
@@ -114,6 +124,7 @@ const mapStateToProps = state => {
     currentUserHasListings,
     currentUserHasOrders,
     notificationCount,
+    currentUserListingFetched , currentUserListing,
     isAuthenticated,
     authScopes,
     sendVerificationEmailInProgress,

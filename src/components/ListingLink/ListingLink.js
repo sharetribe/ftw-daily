@@ -23,6 +23,8 @@ const MIN_LENGTH_FOR_LONG_WORDS = 16;
 
 const ListingLink = props => {
   const { className, listing, children } = props;
+ // console.log(props, '^^^^ ^^^^ => props');
+  
   const listingLoaded = listing && listing.id;
   if (!listingLoaded) {
     return null;

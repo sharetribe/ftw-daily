@@ -181,12 +181,11 @@ class MainPanel extends Component {
         }
       
       }
-      else if (f.key == "dayCareStay") {
+      else if (f.id == "dates") {
         checked = false;
-        if (this.state.currentQueryParams && this.state.currentQueryParams.pub_typeOfpets && this.state.currentQueryParams.pub_typeOfpets.search("dog") > -1) {
+        if (this.state.currentQueryParams && this.state.currentQueryParams.pub_serviceSetup && this.state.currentQueryParams.pub_serviceSetup.search("overnightsStay") > -1) {
           checked = true;
         }
-      
       }
       
       return f.group === 'primary' && checked;

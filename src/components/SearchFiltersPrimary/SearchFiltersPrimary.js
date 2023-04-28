@@ -27,17 +27,18 @@ const SearchFiltersPrimaryComponent = props => {
       ? css.searchFiltersPanelOpen
       : css.searchFiltersPanelClosed;
   const toggleSecondaryFiltersOpenButton = toggleSecondaryFiltersOpen ? (
-    <button
-      className={toggleSecondaryFiltersOpenButtonClasses}
-      onClick={() => {
-        toggleSecondaryFiltersOpen(!isSecondaryFiltersOpen);
-      }}
-    >
-      <FormattedMessage
-        id="SearchFiltersPrimary.moreFiltersButton"
-        values={{ count: selectedSecondaryFiltersCount }}
-      />
-    </button>
+    // <button
+    //   className={toggleSecondaryFiltersOpenButtonClasses}
+    //   onClick={() => {
+    //     toggleSecondaryFiltersOpen(!isSecondaryFiltersOpen);
+    //   }}
+    // >
+    //   <FormattedMessage
+    //     id="SearchFiltersPrimary.moreFiltersButton"
+    //     values={{ count: selectedSecondaryFiltersCount }}
+    //   />
+    // </button>
+    <></>
   ) : null;
 
   return (

@@ -34,16 +34,7 @@
  */
 
 export const filters = [
-  {
-    id: 'dates',
-    label: 'Dates',
-    type: 'BookingDateRangeFilter',
-    group: 'primary',
-    // Note: BookingDateRangeFilter is fixed filter,
-    // you can't change "queryParamNames: ['dates'],"
-    queryParamNames: ['dates'],
-    config: {},
-  },
+ 
   {
     id: 'price',
     label: 'Price',
@@ -55,7 +46,7 @@ export const filters = [
     // Price filter configuration
     // Note: unlike most prices this is not handled in subunits
     config: {
-      min: 0,
+      min: 500,
       max: 1000,
       step: 5,
     },
@@ -164,6 +155,16 @@ export const filters = [
        
       ],
     },
+  },
+  {
+    id: 'dates',
+    label: 'Dates',
+    type: 'BookingDateRangeFilter',
+    group: 'primary',
+    // Note: BookingDateRangeFilter is fixed filter,
+    // you can't change "queryParamNames: ['dates'],"
+    queryParamNames: ['dates'],
+    config: {},
   },
   {
     id: 'typeOfpets',

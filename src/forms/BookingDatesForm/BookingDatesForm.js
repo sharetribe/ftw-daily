@@ -56,7 +56,7 @@ export class BookingDatesFormComponent extends Component {
   handleOnChange(formValues) {
     const { startDate, endDate  } =
       formValues.values && formValues.values.bookingDates ? formValues.values.bookingDates : {};
-      console.log(formValues, '^^^^ ^^^^ => formValues');
+     // console.log(formValues, '^^^^ ^^^^ => formValues');
       const {serviceSetup}=formValues.values;
       const {numberOfPets}=formValues.values;
       
@@ -131,7 +131,7 @@ export class BookingDatesFormComponent extends Component {
           : numberPet == "two" ? [1, 2] : [1];
 
           const detail = listing?.attributes?.publicData?.serviceSetup;
-          console.log('detail', detail)
+         // console.log('detail', detail)
 
           const phoneRequiredMessage = intl.formatMessage({
             id: 'EditListingDescriptionForm.phoneRequired',

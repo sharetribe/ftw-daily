@@ -13,6 +13,7 @@ import {
   MenuContent,
   MenuItem,
   NamedLink,
+  ListingLink,
 } from '../../components';
 import { TopbarSearchForm } from '../../forms';
 
@@ -33,22 +34,30 @@ const TopbarDesktop = props => {
     currentUserHasOneListings,
     onSearchSubmit,
     initialSearchFormValues,
+    currentUserListingFetched, 
+    currentUserListing,
   } = props;
-  const [mounted, setMounted] = useState(false);
-  console.log('currentUserHasOneListings', currentUserHasOneListings)
 
- const listingId = currentUserHasOneListings && currentUserHasOneListings?.id?.uuid 
- const title = currentUserHasOneListings?.id && currentUserHasOneListings?.attributes?.title||''
- //onst slug = createSlug(title);
- //console.log(currentUserHasOneListings && currentUserHasOneListings?.attributes?.title, '^^^^ ^^^^ => listingId');
- 
+  const [mounted, setMounted] = useState(false);
+  
+  //console.log(currentUserHasListings, '^^^^ ^^^^ => currentUserHasListings');
+  
+  const listingId = currentUserHasOneListings && currentUserHasOneListings?.id?.uuid 
+  const title = currentUserHasOneListings?.id && currentUserHasOneListings?.attributes?.title||''
+
+ // console.log(!!(currentUserHasOneListings && currentUserHasOneListings.id), '^^^^ ^^^^ => currentUserHasOneListings?.length');
+  
+  //onst slug = createSlug(title);
+  //console.log(currentUserHasOneListings && currentUserHasOneListings?.attributes?.title, '^^^^ ^^^^ => listingId');
+  
   useEffect(() => {
     setMounted(true);
   }, []);
-
+  
   const authenticatedOnClientSide = mounted && isAuthenticated;
   const isAuthenticatedOrJustHydrated = isAuthenticated || !mounted;
-
+  
+  //console.log(authenticatedOnClientSide , currentUserListingFetched , currentUserListing , '^^^^ ^^^^ => authenticatedOnClientSide && currentUserListingFetched && currentUserListing ');
   const classes = classNames(rootClassName || css.root, className);
 
   const search = (
@@ -81,33 +90,34 @@ const TopbarDesktop = props => {
     return currentPage === page || isAccountSettingsPage ? css.currentPage : null;
   };
 
+
+  //console.log(authenticatedOnClientSide && !!(currentUserHasOneListings && currentUserHasOneListings.id), '^^^^ ^^^^ => authenticatedOnClientSide && !!(currentUserHasOneListings && currentUserHasOneListings.id)');
+  
+  const listingLink =
+    authenticatedOnClientSide && !!(currentUserHasOneListings && currentUserHasOneListings.id) ? (
+      // <ListingLink
+      //   className={css.navLink}
+      //   listing={currentUserHasOneListings}
+      //   children={""}
+      // />
+      <></>
+    ) : null;
+
   const profileMenu = authenticatedOnClientSide ? (
     <Menu>
       <MenuLabel className={css.profileMenuLabel} isOpenClassName={css.profileMenuIsOpen}>
         <Avatar className={css.avatar} user={currentUser} disableProfileLink />
       </MenuLabel>
+     
       <MenuContent className={css.profileMenuContent}>
         <MenuItem key="ManageListingsPage">
-          <NamedLink
-            className={classNames(css.yourListingsLink, currentPageClass('ManageListingsPage'))}
-            name="ManageListingsPage"
-          >
-            <span className={css.menuItemBorder} />
-            <FormattedMessage id="TopbarDesktop.yourListingsLink" />
-          </NamedLink>
+        <ListingLink
+         className={classNames(css.profileSettingsLink, currentPageClass('ProfileSettingsPage'))}
+        listing={currentUserHasOneListings}
+        children={"UpdateProfile"}
+      />
         </MenuItem>
-        </MenuContent>
-      {/* <MenuContent className={css.profileMenuContent}>
-        <MenuItem key="ListingPage">
-          <NamedLink
-            className={classNames(css.yourListingsLink, currentPageClass('ListingPage'))}
-            //params={{id:listingId,slug:slug}}
-            name="ListingPage"
-          >
-            <span className={css.menuItemBorder} />
-            <FormattedMessage id="TopbarDesktop.yourListingsLink" />
-          </NamedLink>
-        </MenuItem>
+       
         <MenuItem key="ProfileSettingsPage">
           <NamedLink
             className={classNames(css.profileSettingsLink, currentPageClass('ProfileSettingsPage'))}
@@ -132,7 +142,7 @@ const TopbarDesktop = props => {
             <FormattedMessage id="TopbarDesktop.logout" />
           </InlineTextButton>
         </MenuItem>
-      </MenuContent> */}
+      </MenuContent>
     </Menu>
   ) : null;
 
@@ -169,6 +179,7 @@ const TopbarDesktop = props => {
         </span>
       </NamedLink></>:null}
      
+      {listingLink}
       {inboxLink}
       {profileMenu}
       {signupLink}

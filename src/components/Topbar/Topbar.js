@@ -151,6 +151,8 @@ class TopbarComponent extends Component {
       sendVerificationEmailInProgress,
       sendVerificationEmailError,
       showGenericError,
+      currentUserListingFetched, 
+     currentUserListing,
     } = this.props;
 
    // console.log(' currentUserHasOneListings',  currentUserHasOneListings)
@@ -231,6 +233,8 @@ class TopbarComponent extends Component {
             currentUserHasListings={currentUserHasListings}
             currentUserHasOneListings={ currentUserHasOneListings}
             currentUser={currentUser}
+            currentUserListingFetched={currentUserListingFetched}
+            currentUserListing={currentUserListing}
             currentPage={currentPage}
             initialSearchFormValues={initialSearchFormValues}
             intl={intl}

@@ -122,9 +122,12 @@ export const ManageListingCardComponent = props => {
     onCloseListing,
     onOpenListing,
     onToggleMenu,
+    currentUserHasOneListings,
     renderSizes,
     availabilityEnabled,
   } = props;
+
+  console.log('currentUserHasOneListings', currentUserHasOneListings)
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
   const id = currentListing.id.uuid;
