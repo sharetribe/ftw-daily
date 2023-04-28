@@ -52,7 +52,17 @@
 }
 
 .introSection {
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+
+  &>div {
+    &:nth-child(1) {
+      order: 2;
+    }
+
+    &:nth-child(2) {
+      order: 1;
+    }
+  }
 
   & h1 {
     color: #fff;
@@ -60,32 +70,55 @@
 }
 
 .searchBox {
-  background-color: #ffffff;
+  background-color: #000000c4;
   padding: 20px;
-  border-radius: 50px;
+  border-radius: 5px;
   position: relative;
-  width: 45%;
+  width: 100%;
 
-  & .searchIcon {
-    position: absolute;
-    left: 25px;
-    top: 19px;
+  & label {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
 
-    & svg {
-      & path {
-        fill: #7e7e7e;
-      }
+  & select {
+    background-color: #fff;
+    padding: 5px 15px;
+    border-radius: 5px;
+  }
+
+  & .formRow {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 22px;
+
+    & .selectForm {
+      width: calc(50% - 9px);
     }
   }
 
-  & input {
-    border: none;
-    color: #383838;
-    font-size: 16px;
-    line-height: 32px;
-    font-family: var(--fontFamily);
-    font-weight: var(--fontWeightMedium);
-    padding: 0 50px;
+  & .daysCalender {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 22px;
+
+    & label {
+      color: #fff;
+    }
+
+    & input {
+      background-color: #fff;
+      padding: 5px 15px;
+      border-radius: 5px;
+    }
+
+    & .dateInput {
+      width: calc(50% - 9px);
+    }
   }
 
   & .searchButton {
@@ -109,4 +142,151 @@
 
 .headingServices {
   color: #E95629;
+}
+
+.servicesNeedTime {
+  margin-top: 22px;
+
+  & .needServicesHeading {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    line-height: 16px;
+    padding-bottom: 6px;
+  }
+
+  & .servicesSelect {
+    display: flex;
+    justify-content: space-between;
+
+    & .service {
+      width: calc(50% - 9px);
+      border: 2px solid #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 5px 15px;
+
+      & svg {
+        width: 25px;
+        height: 25px;
+
+        & path {
+          fill: #fff;
+        }
+      }
+
+      & span {
+        font-size: 14px;
+        color: #fff;
+      }
+    }
+
+    & .selected {
+      background-color: #E95629;
+    }
+  }
+}
+
+.daysSelected {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 22px;
+
+  & label {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    line-height: 16px;
+    padding-bottom: 6px;
+  }
+
+  & .daysWeek {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+
+    & span {
+      border: 1px solid #fff;
+      color: #fff;
+      padding: 3px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+  }
+
+  & .daysRight {
+    width: calc(41% - 9px);
+
+    & input {
+      background-color: #fff;
+      padding: 5px 15px;
+      border-radius: 5px;
+    }
+  }
+}
+
+.locationForm {
+  margin-top: 22px;
+
+  & label {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    line-height: 16px;
+    padding-bottom: 6px;
+  }
+
+  & .inputBox {
+    & input {
+      background-color: #fff;
+      padding: 5px 15px;
+      border-radius: 5px;
+    }
+  }
+}
+
+.weightBox {
+  display: flex;
+  width: 100%;
+  margin-top: 22px;
+
+  & .weightList {
+    border: 1px solid #c5c5c5;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px 5px;
+    cursor: pointer;
+
+    & .weightKg {
+      color: #fff;
+      font-size: 14px;
+      line-height: 18px;
+    }
+
+    & .weightType {
+      color: #fff;
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
+}
+
+.bottomButton {
+  margin-top: 22px;
+
+  & button {
+    width: 100%;
+    /* background: #000; */
+  }
 }

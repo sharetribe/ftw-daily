@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { arrayOf, bool, func, node, number, object, shape, string } from 'prop-types';
 import classNames from 'classnames';
 
@@ -7,7 +7,7 @@ import BlockBuilder from '../../BlockBuilder';
 
 import SectionContainer from '../SectionContainer';
 import css from './SectionColumns.module.css';
-import { IconCard, PrimaryButton } from '../../../../components';
+import { Button, IconCard, PrimaryButton } from '../../../../components';
 
 // The number of columns (numColumns) affects styling and responsive images
 const COLUMN_CONFIG = [
@@ -43,7 +43,12 @@ const SectionColumns = props => {
     options,
   } = props;
 
+  const [toggle, setToggle] = useState(false);
 
+  const handleToggleState = () => {
+    setToggle(prev => !prev);
+    onShowMap()
+  };
   // If external mapping has been included for fields
   // E.g. { h1: { component: MyAwesomeHeader } }
   const fieldComponents = options?.fieldComponents;
@@ -90,18 +95,126 @@ const SectionColumns = props => {
           />
           {sectionId == "intro" ?
             <div className={css.searchBox}>
-              <span className={css.searchIcon}>
-                <IconCard brand="search" />
-              </span>
-              <input
-                type="text"
-                placeholder='Search...'
-              />
-              <span className={css.searchButton}>
-                <PrimaryButton>
+              <div className={css.formRow}>
+                <div className={css.selectForm}>
+                  <label>Type of Pet</label>
+                  <select>
+                    <option>Dog </option>
+                    <option>Cat</option>
+                  </select>
+                </div>
+                <div className={css.selectForm}>
+                  <label>Number of Pets</label>
+                  <select>
+                    <option>1 </option>
+                    <option>2</option>
+                    <option>3+</option>
+                  </select>
+                </div>
+              </div>
+              <div className={css.selectForm}>
+                <label>Type of Hosting Services</label>
+                <select>
+                  <option>Overnight Stay	</option>
+                  <option>Day Care Stay	</option>
+                </select>
+              </div>
+              <div className={css.daysCalender}>
+                <div className={css.dateInput}>
+                  <label>Start date</label>
+                  <div className={css.dateInputBox}>
+                    <input
+                      type='date'
+                    />
+                  </div>
+                </div>
+                <div className={css.dateInput}>
+                  <label>End date</label>
+                  <div className={css.dateInputBox}>
+                    <input
+                      type='date'
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className={css.servicesNeedTime}>
+                <div className={css.needServicesHeading}>How often do you need this service?</div>
+                <div className={css.servicesSelect}>
+                  <div
+                    className={classNames(css.service, {
+                      [css.selected]: toggle,
+                    })}
+                    onClick={handleToggleState}
+                  >
+                    <IconCard brand="calender" />
+                    <span>One Time</span>
+                  </div>
+                  <div
+                    onClick={handleToggleState}
+                    className={classNames(css.service, {
+                      [css.selected]: toggle,
+                    })}
+                  >
+                    <IconCard brand="repeat" />
+                    <span>Repeat Weekly</span>
+                  </div>
+                </div>
+              </div>
+              <div className={css.daysSelected}>
+                <div className={css.daysLeft}>
+                  <label>For which days?</label>
+                  <div className={css.daysWeek}>
+                    <span>Sun</span>
+                    <span>Mon</span>
+                    <span>Tue</span>
+                    <span>Wed</span>
+                    <span>Thu</span>
+                    <span>Fri</span>
+                    <span>Sat</span>
+                  </div>
+                </div>
+                <div className={css.daysRight}>
+                  <div className={css.dateInput}>
+                    <label>Start date</label>
+                    <div className={css.dateInputBox}>
+                      <input
+                        type='date'
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className={css.locationForm}>
+                <div className={css.inputBox}>
+                  <input
+                    type='text'
+                    placeholder='Location (Postcode)'
+                  />
+                </div>
+              </div>
+              <div className={css.weightBox}>
+                <div className={css.weightList}>
+                  <div className={css.weightKg}>0-6 Kg</div>
+                  <div className={css.weightType}>Small</div>
+                </div>
+                <div className={css.weightList}>
+                  <div className={css.weightKg}>7-20 Kgs</div>
+                  <div className={css.weightType}>Medium</div>
+                </div>
+                <div className={css.weightList}>
+                  <div className={css.weightKg}>20-40 Kgs</div>
+                  <div className={css.weightType}>Large</div>
+                </div>
+                <div className={css.weightList}>
+                  <div className={css.weightKg}>40+ Kg</div>
+                  <div className={css.weightType}>Gaint</div>
+                </div>
+              </div>
+              <div className={css.bottomButton}>
+                <Button>
                   Search
-                </PrimaryButton>
-              </span>
+                </Button>
+              </div>
             </div>
             : null}
         </div>
