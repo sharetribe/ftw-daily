@@ -40,7 +40,7 @@ const EditListingBasicInfoFormComponent = props => (
         name,
         handleSubmit,
         intl,
-       onChange,
+        onChange,
         invalid,
         pristine,
         saveActionMsg,
@@ -55,13 +55,13 @@ const EditListingBasicInfoFormComponent = props => (
 
       console.log('values', values)
 
-    
-     //console.log(' currentUser',  currentUser)
+
+      //console.log(' currentUser',  currentUser)
       const identity = v => v;
-     
 
 
-//console.log('validateBirthday', validateBirthday)
+
+      //console.log('validateBirthday', validateBirthday)
       const birthdateMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.birthdate' });
       const birthdatePlaceholderMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.birthdatePlaceholder',
@@ -69,8 +69,8 @@ const EditListingBasicInfoFormComponent = props => (
       const birthdateRequiredMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.birthdateRequired',
       });
-    
-      
+
+
       const addressPlaceholderMessage = intl.formatMessage({
         id: 'EditListingLocationForm.addressPlaceholder',
       });
@@ -80,7 +80,7 @@ const EditListingBasicInfoFormComponent = props => (
       const addressNotRecognizedMessage = intl.formatMessage({
         id: 'EditListingLocationForm.addressNotRecognized',
       });
-      
+
       const titleMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.title' });
 
       const locMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.location' });
@@ -140,11 +140,11 @@ const EditListingBasicInfoFormComponent = props => (
       const classes = classNames(css.root, className);
       const submitReady = (updated && pristine) || ready;
       const submitInProgress = updateInProgress;
-      const submitDisabled = invalid || disabled || submitInProgress || ! values.email || ! values.phone || !values.serviceSetup;
+      const submitDisabled = invalid || disabled || submitInProgress || !values.email || !values.phone || !values.serviceSetup;
       const options = findOptionsForSelectFilter('serviceSetup', filterConfig);
 
-      
-const MIN_STRIPE_ACCOUNT_AGE = 18;
+
+      const MIN_STRIPE_ACCOUNT_AGE = 18;
       const birthdayLabel = intl.formatMessage({ id: 'PayoutDetailsForm.birthdayLabel' });
       const birthdayLabelMonth = intl.formatMessage({
         id: 'PayoutDetailsForm.birthdayLabelMonth',
@@ -186,28 +186,28 @@ const MIN_STRIPE_ACCOUNT_AGE = 18;
             validate={composeValidators(required(titleRequiredMessage), maxLength60Message)}
             autoFocus
           />
-         
-         <p>{birthdateMessage}</p>
-                 
-      <div className={css.formRow}>
-        <FieldBirthdayInput
-          id="birthday"
-          name="birthday"
-           
-          disabled={disabled}
-          className={css.field}
-          label={birthdayLabel}
-         // label={birthdateMessage}
-          labelForMonth={birthdayLabelMonth}
-          labelForYear={birthdayLabelYear}
-          format={identity}
-          valueFromForm={values.birthday}
-          validate={validators.composeValidators(birthdayRequired, birthdayMinAge)}
-        />
-      </div>
 
-      
-                {/* <FieldTextInput
+          <p>{birthdateMessage}</p>
+
+          <div className={css.formRow}>
+            <FieldBirthdayInput
+              id="birthday"
+              name="birthday"
+
+              disabled={disabled}
+              className={css.field}
+              label={birthdayLabel}
+              // label={birthdateMessage}
+              labelForMonth={birthdayLabelMonth}
+              labelForYear={birthdayLabelYear}
+              format={identity}
+              valueFromForm={values.birthday}
+              validate={validators.composeValidators(birthdayRequired, birthdayMinAge)}
+            />
+          </div>
+
+
+          {/* <FieldTextInput
                       className={css.lastName}
                       type="date"
                       id="birthday"
@@ -223,7 +223,7 @@ const MIN_STRIPE_ACCOUNT_AGE = 18;
          // valueFromForm={values.birthday}
           validate={validators.composeValidators(birthdayRequired, birthdayMinAge)}
                     /> */}
-                 {/* <FieldBirthdayInput
+          {/* <FieldBirthdayInput
             id="birthday"
             name="birthday"
             className={css.title}
@@ -234,31 +234,31 @@ const MIN_STRIPE_ACCOUNT_AGE = 18;
             
             autoFocus
           /> */}
-<div style={{marginTop:'25px'}}>
-  
-         <LocationAutocompleteInputField
-         
-             className={css.loc}
-            inputClassName={css.locationAutocompleteInput}
-            iconClassName={css.locationAutocompleteInputIcon}
-            predictionsClassName={css.predictionsRoot}
-            validClassName={css.validLocation}
-            autoFocus
-            name="location"
-            label={locMessage}
-            placeholder={addressPlaceholderMessage}
-            useDefaultPredictions={false}
-            format={identity}
-            valueFromForm={values.location}
-            validate={composeValidators(
-              //autocompleteSearchRequired(addressRequiredMessage),
-              //autocompletePlaceSelected(addressNotRecognizedMessage)
-            )}
-          />
-        
-</div>
-<div style={{marginTop:'25px'}}>
-{/* <FieldTextInput
+          <div style={{ marginTop: '25px' }}>
+
+            <LocationAutocompleteInputField
+
+              className={css.loc}
+              inputClassName={css.locationAutocompleteInput}
+              iconClassName={css.locationAutocompleteInputIcon}
+              predictionsClassName={css.predictionsRoot}
+              validClassName={css.validLocation}
+              autoFocus
+              name="location"
+              label={locMessage}
+              placeholder={addressPlaceholderMessage}
+              useDefaultPredictions={false}
+              format={identity}
+              valueFromForm={values.location}
+              validate={composeValidators(
+                //autocompleteSearchRequired(addressRequiredMessage),
+                //autocompletePlaceSelected(addressNotRecognizedMessage)
+              )}
+            />
+
+          </div>
+          <div style={{ marginTop: '25px' }}>
+            {/* <FieldTextInput
             id="location"
             name="location"
             className={css.title}
@@ -270,7 +270,7 @@ const MIN_STRIPE_ACCOUNT_AGE = 18;
             autoFocus
           /> */}
           </div>
-        
+
           <FieldTextInput
             id="email"
             name="email"
@@ -284,14 +284,14 @@ const MIN_STRIPE_ACCOUNT_AGE = 18;
           />
 
           <FieldPhoneNumberInput
-          id="phone"
-          name="phone"
-          className={css.description}
-          
-          label={phoneMessage}
-          placeholder={phonePlaceholderMessage}
-          validate={composeValidators(required(phoneRequiredMessage))}
-          autoFocus
+            id="phone"
+            name="phone"
+            className={css.description}
+
+            label={phoneMessage}
+            placeholder={phonePlaceholderMessage}
+            validate={composeValidators(required(phoneRequiredMessage))}
+            autoFocus
           />
 
           {/* <CustomCategorySelectFieldMaybe
@@ -303,15 +303,24 @@ const MIN_STRIPE_ACCOUNT_AGE = 18;
 
           <p> Service Setup</p>
           <p>Choose what service you wish to offer...</p>
-          {
-            options.map((st)=>{
-              return(
-               <FieldCheckbox className={css.features} id={st.key} name={"serviceSetup"} value={st.key} label={st.label} 
-                validate={composeValidators(required(phoneRequiredMessage))}
-               autoFocus/>
+          <div className={css.servicesSetup}>
+            {options.map((st) => {
+              return (
+                <div className={css.cardSelectPet}>
+                  <FieldCheckbox
+                    className={css.features}
+                    id={st.key}
+                    name={"serviceSetup"}
+                    value={st.key}
+                    label={st.label}
+                    validate={composeValidators(required(phoneRequiredMessage))}
+                    autoFocus
+                  />
+                </div>
               )
             })
-          }
+            }
+          </div>
 
           <Button
             className={css.submitButton}
@@ -328,7 +337,7 @@ const MIN_STRIPE_ACCOUNT_AGE = 18;
   />
 );
 
-EditListingBasicInfoFormComponent.defaultProps = { className: null, fetchErrors: null, filterConfig: config.custom.filters,};
+EditListingBasicInfoFormComponent.defaultProps = { className: null, fetchErrors: null, filterConfig: config.custom.filters, };
 
 EditListingBasicInfoFormComponent.propTypes = {
   className: string,

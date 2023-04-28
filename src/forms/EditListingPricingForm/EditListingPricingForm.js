@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { bool, func, shape, string } from 'prop-types';
 import { compose } from 'redux';
 import { Form as FinalForm } from 'react-final-form';
@@ -20,7 +20,8 @@ import {
 
 } from '../../components';
 import css from './EditListingPricingForm.module.css';
-
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 const { Money } = sdkTypes;
 
 export const EditListingPricingFormComponent = props => (
@@ -106,6 +107,15 @@ export const EditListingPricingFormComponent = props => (
       const numberPetArray = numberPet && numberPet == "three" ? [1, 2, 3]
         : numberPet == "two" ? [1, 2] : [1];
       //console.log(values,"values");
+      const [stayRange, setStayRange] = useState([7, 90]);
+      const [discountRange, setDiscountRange] = useState([0, 50]);
+
+      const handlePriceChange = (value) => {
+        setStayRange(value);
+      };
+      const handleDiscountChange = (value) => {
+        setDiscountRange(value);
+      };
 
 
       return (
@@ -173,18 +183,45 @@ export const EditListingPricingFormComponent = props => (
           {values && values.discount == 'dis_yes' ? (
             <>
               <div>
-                <p>Length of Stays</p>
-                {/* <FieldTextInput type="number" id="lengthOfStays" name="lengthOfStays"
-                  validate={composeValidators(maxLength2Message)} /> */}
+                {/* <FieldTextInput
+                  type="number"
+                  id="lengthOfStays"
+                  name="lengthOfStays"
+                validate={composeValidators(maxLength2Message)} /> */}
+                <div className={css.rangeBox}>
+                  <p>Length of Stays</p>
+                  <Slider
+                    min={7}
+                    max={90}
+                    id="lengthOfStays"
+                    name="lengthOfStays"
+                    range
+                    defaultValue={stayRange}
+                    onChange={handlePriceChange}
+                    validate={composeValidators(maxLength2Message)}
+                  />
+                  <div> ${stayRange[0]} - ${stayRange[1]}</div>
+                </div>
               </div>
-              <div>
+              <div className={css.rangeBox}>
                 <p>Discount</p>
-                <FieldTextInput
+                {/* <FieldTextInput
                   type="number"
                   id="discountlengthOfStays"
                   name="discountlengthOfStays"
                   validate={composeValidators(maxLength2Message)}
+                /> */}
+                <Slider
+                  min={0}
+                  max={50}
+                  range
+                  id="discountlengthOfStays"
+                  name="discountlengthOfStays"
+                  validate={composeValidators(maxLength2Message)}
+                  defaultValue={discountRange}
+                  onChange={handleDiscountChange}
                 />
+                <div> ${discountRange[0]} - ${discountRange[1]}</div>
               </div>
             </>
           ) : null}

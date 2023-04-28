@@ -33,3 +33,14 @@
     margin-top: 100px;
   }
 }
+
+.fileUploadName {
+  &>div {
+    width: 230px;
+    border: 1px solid #333;
+
+    & object {
+      width: 225px;
+    }
+  }
+}
