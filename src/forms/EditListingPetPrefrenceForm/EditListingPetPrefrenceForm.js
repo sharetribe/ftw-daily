@@ -7,9 +7,9 @@ import { FormattedMessage } from '../../util/reactIntl';
 import { findOptionsForSelectFilter } from '../../util/search';
 import { propTypes } from '../../util/types';
 import config from '../../config';
-import { 
+import {
   Form,
-  Button, 
+  Button,
   FieldCheckbox,
   FieldRadioButton,
 } from '../../components';
@@ -71,43 +71,54 @@ const EditListingPetPrefrenceFormComponent = props => (
           {errorMessageShowListing}
 
           <p>Types of Pets</p>
-          {typeOfpets.map(st => (
-            <FieldCheckbox
-              className={css.features}
-              id={st.key}
-              key={st.key}
-              name={'typeOfpets'}
-              value={st.key}
-              label={st.label}
-            />
-          ))}
-          <p>Number of Pets</p>
-
-          {numberOfPets.map(num => (
-            <FieldRadioButton
-              className={css.features}
-              id={num.key}
-              key={num.key}
-              name={'numberOfPets'}
-              value={num.key}
-              label={num.label}
-            />
-          ))}
-
-          {(values.typeOfpets && values.typeOfpets.filter(st => st == 'dog').length) ||
-          (values.typeOfpets &&
-            values.typeOfpets.filter(st => st == 'dog' && st == 'cat').length) ? (
-            <div>
-              <p>Size of Dogs</p>
-              {sizeOfdogs.map(num => (
+          <div className={css.numberPets}>
+            {typeOfpets.map(st => (
+              <div className={css.cardSelectPet}>
                 <FieldCheckbox
-                  className={css.features}
+                  // className={css.features}
+                  id={st.key}
+                  key={st.key}
+                  name={'typeOfpets'}
+                  value={st.key}
+                  label={st.label}
+                />
+              </div>
+            ))}
+          </div>
+          <p>Number of Pets</p>
+          <div className={css.numberPets}>
+            {numberOfPets.map(num => (
+              <div className={css.cardSelectPet}>
+                <FieldRadioButton
+                  // className={css.features}
                   id={num.key}
-                  name={'sizeOfdogs'}
+                  key={num.key}
+                  name={'numberOfPets'}
                   value={num.key}
                   label={num.label}
                 />
-              ))}
+              </div>
+            ))}
+          </div>
+
+          {(values.typeOfpets && values.typeOfpets.filter(st => st == 'dog').length) ||
+            (values.typeOfpets &&
+              values.typeOfpets.filter(st => st == 'dog' && st == 'cat').length) ? (
+            <div>
+              <p>Size of Dogs</p>
+              <div className={css.numberPets}>
+                {sizeOfdogs.map(num => (
+                  <div className={css.cardSelectPet}>
+                    <FieldCheckbox
+                      // className={css.features}
+                      id={num.key}
+                      name={'sizeOfdogs'}
+                      value={num.key}
+                      label={num.label}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           ) : null}
 

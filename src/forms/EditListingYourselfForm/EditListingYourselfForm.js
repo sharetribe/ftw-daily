@@ -185,12 +185,17 @@ const EditListingYourselfFormComponent = props => (
           <div>
             <p>Do you have pet?</p>
             <div style={{ display: 'flex', gap: '20px' }}>
-              {dohavepets.map((num) => <FieldRadioButton
-                className={css.features}
-                id={num.key}
-                name={"dohavepets"}
-                value={num.key}
-                label={num.label} />)}
+              {dohavepets.map((num) =>
+                <div className={css.cardSelectPet}>
+                  <FieldRadioButton
+                    className={css.features}
+                    id={num.key}
+                    name={"dohavepets"}
+                    value={num.key}
+                    label={num.label}
+                  />
+                </div>
+              )}
             </div>
 
           </div>
