@@ -114,7 +114,7 @@ const TopbarDesktop = props => {
         <ListingLink
          className={classNames(css.profileSettingsLink, currentPageClass('ProfileSettingsPage'))}
         listing={currentUserHasOneListings}
-        children={"UpdateProfile"}
+        children={"Update Profile"}
       />
         </MenuItem>
        
