@@ -93,3 +93,22 @@
   color: var(--matterColorDark);
   opacity: 0.3;
 }
+
+.navLinkProfile {
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+  padding: 16px 10px 14px 10px;
+  font-weight: var(--fontWeightMedium);
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: var(--matterColorAnti);
+  border-bottom: 4px solid #3330;
+
+  &:hover {
+    text-decoration: none;
+    color: var(--matterColorLight);
+    /* border-bottom: 4px solid #fff; */
+  }
+}

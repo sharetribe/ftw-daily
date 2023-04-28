@@ -79,8 +79,7 @@ const TabNavHorizontal = props => {
   return (
     <nav className={classes}>
       <ListingLink
-       // className={css.navLink}
-        style={{color:"white"}}
+       className={css.navLinkProfile}
         listing={currentUserHasOneListings}
         children={"UpdateProfile"}
       />
