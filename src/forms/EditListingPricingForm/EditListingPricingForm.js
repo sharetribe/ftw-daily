@@ -21,7 +21,7 @@ import {
 } from '../../components';
 import css from './EditListingPricingForm.module.css';
 import Slider from 'rc-slider';
-import 'rc-slider/assets/index.css';
+import './slider.css';
 const { Money } = sdkTypes;
 
 export const EditListingPricingFormComponent = props => (

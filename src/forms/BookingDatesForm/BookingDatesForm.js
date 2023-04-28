@@ -56,7 +56,7 @@ export class BookingDatesFormComponent extends Component {
   handleOnChange(formValues) {
     const { startDate, endDate  } =
       formValues.values && formValues.values.bookingDates ? formValues.values.bookingDates : {};
-     // console.log(formValues, '^^^^ ^^^^ => formValues');
+     console.log(formValues, '^^^^ ^^^^ => formValues');
       const {serviceSetup}=formValues.values;
       const {numberOfPets}=formValues.values;
       

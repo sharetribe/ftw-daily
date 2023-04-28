@@ -10,6 +10,8 @@ import SectionBuilder from './SectionBuilder/SectionBuilder.js';
 import StaticPage from './StaticPage.js';
 
 import css from './PageBuilder.module.css';
+import MainPanel from '../SearchPage/MainPanel.js';
+import { pickSearchParamsOnly,  validURLParamsForExtendedData } from '../SearchPage/SearchPage.helpers.js';
 
 const getMetadata = (meta, schemaType, fieldOptions) => {
   const { pageTitle, pageDescription, socialSharing } = meta;
@@ -80,6 +82,9 @@ const PageBuilder = props => {
     fallbackPage,
     schemaType,
     options,
+    filterConfig,
+    sortConfig,
+    listings,
     ...pageProps
   } = props;
 
@@ -92,7 +97,8 @@ const PageBuilder = props => {
   // - "meta" (which is data that goes inside <head>)
   const { sections = [], meta = {} } = pageAssetsData || {};
 
-console.log(sections, '&&&  &&& => sections');
+// const urlQueryParams = pickSearchParamsOnly( filterConfig, sortConfig);
+// const validQueryParams = validURLParamsForExtendedData(searchInURL, filterConfig);
 
   const pageMetaProps = getMetadata(meta, schemaType, options?.fieldComponents);
 
@@ -113,6 +119,23 @@ console.log(sections, '&&&  &&& => sections');
               </Topbar>
               <Main as="main" className={css.main}>
                 <SectionBuilder sections={sections} options={options} />
+                
+                {/* <MainPanel
+            // urlQueryParams={validQueryParams}
+            listings={listings}
+            searchInProgress={searchInProgress}
+            searchListingsError={searchListingsError}
+            searchParamsAreInSync={searchParamsAreInSync}
+            onActivateListing={onActivateListing}
+            onManageDisableScrolling={onManageDisableScrolling}
+            onOpenModal={this.onOpenMobileModal}
+            onCloseModal={this.onCloseMobileModal}
+            onMapIconClick={onMapIconClick}
+            pagination={pagination}
+            searchParamsForPagination={parse(location.search)}
+            showAsModalMaxWidth={MODAL_BREAKPOINT}
+            history={history}
+          /> */}
               </Main>
               <Footer>
                 <FooterContent />

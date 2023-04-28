@@ -165,7 +165,7 @@
   "EditListingDescriptionForm.createListingDraftError": "Failed to create a draft listing. Please try again.",
   "EditListingDescriptionForm.description": "Add your email address",
   "EditListingDescriptionForm.descriptionPlaceholder": "write here your email",
-  "EditListingDescriptionForm.phoneRequired": "add a mobile phone number  is required.",
+  "EditListingDescriptionForm.phoneRequired": "A phone number  is required.",
   "EditListingDescriptionForm.phone": "you add a mobile phone number",
   "EditListingDescriptionForm.phonePlaceholder": "0000 000 000",
  
