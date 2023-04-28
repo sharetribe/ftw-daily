@@ -15,10 +15,9 @@ import FieldRadioButtonComponent from '../../components/FieldRadioButton/FieldRa
 import {
   Button,
   Form,
-  
+
   FieldTextInput,
-  FieldCurrencyInput,
-  
+
 } from '../../components';
 import css from './EditListingPricingForm.module.css';
 
@@ -57,17 +56,17 @@ export const EditListingPricingFormComponent = props => (
           ? 'EditListingPricingForm.pricePerDay'
           : 'EditListingPricingForm.pricePerUnit';
 
-          const TITLE_MAX_LENGTH = 2;
+      const TITLE_MAX_LENGTH = 2;
 
-        //  const maxLength2Message = maxLength( TITLE_MAX_LENGTH);
-        const maxLengthMessage = intl.formatMessage(
-          { id: 'EditListingDescriptionForm.maxLength' },
-          {
-            maxLength: TITLE_MAX_LENGTH,
-          }
-        );
-          const maxLength2Message = maxLength(maxLengthMessage, TITLE_MAX_LENGTH);
-          // maxLength: TITLE_MAX_LENGTH,
+      //  const maxLength2Message = maxLength( TITLE_MAX_LENGTH);
+      const maxLengthMessage = intl.formatMessage(
+        { id: 'EditListingDescriptionForm.maxLength' },
+        {
+          maxLength: TITLE_MAX_LENGTH,
+        }
+      );
+      const maxLength2Message = maxLength(maxLengthMessage, TITLE_MAX_LENGTH);
+      // maxLength: TITLE_MAX_LENGTH,
       const pricePerUnitMessage = intl.formatMessage({
         id: translationKey,
       });
@@ -94,19 +93,19 @@ export const EditListingPricingFormComponent = props => (
         config.listingMinimumPriceSubUnits
       );
       const priceValidators = config.listingMinimumPriceSubUnits
-        ? validators.composeValidators(priceRequired, minPriceRequired,pricePerUnitMessage)
+        ? validators.composeValidators(priceRequired, minPriceRequired, pricePerUnitMessage)
         : priceRequired;
       const classes = classNames(css.root, className);
-      const submitReady = (updated && pristine) || ready ;
+      const submitReady = (updated && pristine) || ready;
       const submitInProgress = updateInProgress;
-      const submitDisabled = invalid || disabled || submitInProgress|| !values.discount
+      const submitDisabled = invalid || disabled || submitInProgress || !values.discount
       const { updateListingError, showListingsError } = fetchErrors || {};
       const discount = findOptionsForSelectFilter('discount', filterConfig);
       const detail = listing?.attributes?.publicData?.serviceSetup;
       const numberPet = listing?.attributes?.publicData?.numberOfPets;
       const numberPetArray = numberPet && numberPet == "three" ? [1, 2, 3]
         : numberPet == "two" ? [1, 2] : [1];
-  //console.log(values,"values");
+      //console.log(values,"values");
 
 
       return (
@@ -123,35 +122,35 @@ export const EditListingPricingFormComponent = props => (
           ) : null}
           {detail && detail.includes("overnightsStay") ? <> <p>Price for overnightsStay</p>
             <div style={{ display: 'flex', gap: '20px' }}>
-             {numberPetArray.map((st)=> 
-               <FieldCurrencyInput
-                id={"overnightsStayPrice"+st}
-                name={"overnightsStayPrice"+st}
-                className={css.priceInput}
-                autoFocus
-                label={st+  "    Pet"}
-                placeholder={pricePlaceholderMessage}
-                currencyConfig={config.currencyConfig}
-            
-                validate={priceValidators}
-              />) }
+              {numberPetArray.map((st) =>
+                <FieldTextInput
+                  id={"overnightsStayPrice" + st}
+                  name={"overnightsStayPrice" + st}
+                  className={css.priceInput}
+                  autoFocus
+                  label={st + "    Pet"}
+                  placeholder={pricePlaceholderMessage}
+                  //currencyConfig={config.currencyConfig}
+
+                  validate={priceValidators}
+                />)}
             </div>
           </>
             : null}
           {detail && detail.includes("dayCareStay") ? <>
             <p>Price for dayStay</p>
             <div style={{ display: 'flex', gap: '20px' }}>
-            {numberPetArray.map((st)=> 
-               <FieldCurrencyInput
-                id={"dayCareStay"+st}
-                name={"dayCareStay"+st}
-                className={css.priceInput}
-                autoFocus
-                label={"Pet"+st}
-                placeholder={pricePlaceholderMessage}
-                currencyConfig={config.currencyConfig}
-                validate={priceValidators}
-              />) }
+              {numberPetArray.map((st) =>
+                <FieldTextInput
+                  id={"dayCareStay" + st}
+                  name={"dayCareStay" + st}
+                  className={css.priceInput}
+                  autoFocus
+                  label={"Pet" + st}
+                  placeholder={pricePlaceholderMessage}
+                  //currencyConfig={config.currencyConfig}
+                  validate={priceValidators}
+                />)}
             </div>
           </>
             : null}
@@ -159,13 +158,15 @@ export const EditListingPricingFormComponent = props => (
           <div style={{ display: 'flex', gap: '20px' }}>
             {discount.map(num => {
               return (
-                <FieldRadioButtonComponent
-                  className={css.features}
-                  id={num.key}
-                  name={'discount'}
-                  value={num.key}
-                  label={num.label}
-                />
+                <div className={css.cardSelectPet}>
+                  <FieldRadioButtonComponent
+                    className={css.features}
+                    id={num.key}
+                    name={'discount'}
+                    value={num.key}
+                    label={num.label}
+                  />
+                </div>
               );
             })}
           </div>
@@ -173,8 +174,8 @@ export const EditListingPricingFormComponent = props => (
             <>
               <div>
                 <p>Length of Stays</p>
-                <FieldTextInput type="number" id="lengthOfStays" name="lengthOfStays" 
-                  validate={composeValidators( maxLength2Message)}/>
+                {/* <FieldTextInput type="number" id="lengthOfStays" name="lengthOfStays"
+                  validate={composeValidators(maxLength2Message)} /> */}
               </div>
               <div>
                 <p>Discount</p>
@@ -182,7 +183,7 @@ export const EditListingPricingFormComponent = props => (
                   type="number"
                   id="discountlengthOfStays"
                   name="discountlengthOfStays"
-                  validate={composeValidators( maxLength2Message)}
+                  validate={composeValidators(maxLength2Message)}
                 />
               </div>
             </>
@@ -223,3 +224,8 @@ EditListingPricingFormComponent.propTypes = {
 };
 
 export default compose(injectIntl)(EditListingPricingFormComponent);
+
+
+
+
+

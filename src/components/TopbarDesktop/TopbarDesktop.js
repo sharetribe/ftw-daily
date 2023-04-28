@@ -35,11 +35,12 @@ const TopbarDesktop = props => {
     initialSearchFormValues,
   } = props;
   const [mounted, setMounted] = useState(false);
+  console.log('currentUserHasOneListings', currentUserHasOneListings)
 
  const listingId = currentUserHasOneListings && currentUserHasOneListings?.id?.uuid 
  const title = currentUserHasOneListings?.id && currentUserHasOneListings?.attributes?.title||''
- const slug = createSlug(title);
- console.log(currentUserHasOneListings && currentUserHasOneListings?.attributes?.title,slug, '^^^^ ^^^^ => listingId');
+ //onst slug = createSlug(title);
+ //console.log(currentUserHasOneListings && currentUserHasOneListings?.attributes?.title, '^^^^ ^^^^ => listingId');
  
   useEffect(() => {
     setMounted(true);
@@ -86,10 +87,21 @@ const TopbarDesktop = props => {
         <Avatar className={css.avatar} user={currentUser} disableProfileLink />
       </MenuLabel>
       <MenuContent className={css.profileMenuContent}>
+        <MenuItem key="ManageListingsPage">
+          <NamedLink
+            className={classNames(css.yourListingsLink, currentPageClass('ManageListingsPage'))}
+            name="ManageListingsPage"
+          >
+            <span className={css.menuItemBorder} />
+            <FormattedMessage id="TopbarDesktop.yourListingsLink" />
+          </NamedLink>
+        </MenuItem>
+        </MenuContent>
+      {/* <MenuContent className={css.profileMenuContent}>
         <MenuItem key="ListingPage">
           <NamedLink
             className={classNames(css.yourListingsLink, currentPageClass('ListingPage'))}
-            params={{id:listingId,slug:slug}}
+            //params={{id:listingId,slug:slug}}
             name="ListingPage"
           >
             <span className={css.menuItemBorder} />
@@ -120,7 +132,7 @@ const TopbarDesktop = props => {
             <FormattedMessage id="TopbarDesktop.logout" />
           </InlineTextButton>
         </MenuItem>
-      </MenuContent>
+      </MenuContent> */}
     </Menu>
   ) : null;
 

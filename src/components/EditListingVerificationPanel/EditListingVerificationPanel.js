@@ -44,11 +44,11 @@ class EditListingVerificationPanel extends Component {
       currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
     const panelTitle = isPublished ? (
       <FormattedMessage
-        id="EditListingPhotosPanel.title"
+        id="EditListingVeificationPanel.title"
         values={{ listingTitle: <ListingLink listing={listing} /> }}
       />
     ) : (
-      <FormattedMessage id="EditListingPhotosPanel.createListingTitle" />
+      <FormattedMessage id="EditListingVeificationPanel.createListingTitle" />
     );
 
     // const idProofImage = images && images.length
