@@ -64,6 +64,8 @@ export const validURLParamForExtendedData = (queryParamName, paramValueRaw, filt
  * @param {Object} filters Filters configuration
  */
 export const validFilterParams = (params, filters) => {
+  
+  
   const filterParamNames = filters.map(f => f.queryParamNames).reduce(flatten, []);
   const paramEntries = Object.entries(params);
 
@@ -106,13 +108,14 @@ export const validURLParamsForExtendedData = (params, filters) => {
 // extract search parameters, including a custom URL params
 // which are validated by mapping the values to marketplace custom config.
 export const pickSearchParamsOnly = (params, filters, sortConfig) => {
+  console.log('filters', filters)
   const { address, origin, bounds, ...rest } = params || {};
   const boundsMaybe = bounds ? { bounds } : {};
   const originMaybe = config.sortSearchByDistance && origin ? { origin } : {};
   const filterParams = validFilterParams(rest, filters);
   const sort = rest[sortConfig.queryParamName];
   const sortMaybe = sort ? { sort } : {};
-
+  
   return {
     ...boundsMaybe,
     ...originMaybe,
