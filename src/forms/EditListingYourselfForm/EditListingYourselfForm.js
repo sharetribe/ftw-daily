@@ -89,8 +89,17 @@ const EditListingYourselfFormComponent = props => (
       const schedulePlaceholderMessage = intl.formatMessage({
         id: 'EditListingYourselfForm.schedulePlaceholder',
       });
+      const yespetMessage = intl.formatMessage({
+        id: 'EditListingYourselfForm.yespet',
+      });
+      const yespetPlaceholderMessage = intl.formatMessage({
+        id: 'EditListingYourselfForm.yespetPlaceholder',
+      });
       const scheduleRequiredMessage = intl.formatMessage({
         id: 'EditListingYourselfForm.scheduleRequired',
+      });
+      const yespetRequiredMessage = intl.formatMessage({
+        id: 'EditListingYourselfForm.yespetRequired',
       });
 
       const descriptionRequiredMessage = intl.formatMessage({
@@ -120,7 +129,7 @@ const EditListingYourselfFormComponent = props => (
       const classes = classNames(css.root, className);
       const submitReady = (updated && pristine) || ready;
       const submitInProgress = updateInProgress;
-      const submitDisabled = invalid || disabled || submitInProgress || !values.dohavepets;
+      const submitDisabled = invalid || disabled || submitInProgress || !values.dohavepets || !values.yespet ;
       const dohavepets = findOptionsForSelectFilter('dohavepets', filterConfig);
 
       const emailRequiredMessage = intl.formatMessage({
@@ -197,6 +206,17 @@ const EditListingYourselfFormComponent = props => (
                 </div>
               )}
             </div>
+            {values && values.dohavepets == 'yes' ? (
+            <div>
+              <FieldTextInput
+              id="yespet"
+              name="yespet"
+              className={css.description}
+              label={yespetMessage}
+              placeholder={yespetPlaceholderMessage}
+              validate={validators.composeValidators(required(yespetRequiredMessage))}
+              />
+            </div>):null}
 
           </div>
 

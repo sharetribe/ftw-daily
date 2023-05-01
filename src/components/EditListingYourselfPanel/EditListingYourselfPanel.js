@@ -48,17 +48,18 @@ const EditListingYourselfPanel = props => {
         className={css.form}
         initialValues={{
           headline: publicData.headline, service: publicData.service,
-          schedule: publicData.schedule, dohavepets: publicData.dohavepets
+          schedule: publicData.schedule, dohavepets: publicData.dohavepets, yespet:publicData.yespet
         }}
         saveActionMsg={submitButtonText}
         onSubmit={values => {
-          const {  headline, service, schedule, dohavepets } = values;
+          const {  headline, service, schedule, dohavepets,yespet } = values;
           const updateValues = {
 
-            publicData: { headline,service, schedule, dohavepets },
+            publicData: { headline,service, schedule, dohavepets,yespet },
           };
 
           onSubmit(updateValues);
+          console.log('updateValues', updateValues)
         }}
         onChange={onChange}
         disabled={disabled}
