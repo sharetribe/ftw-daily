@@ -55,7 +55,8 @@
 
   /* ================ Spacing units ================ */
 
-  --contentMaxWidth: 1264px; /* calc(Global width (1200px) + (Horizontal padding (32px) * 2) */
+  --contentMaxWidth: 1264px;
+  /* calc(Global width (1200px) + (Horizontal padding (32px) * 2) */
 
   /* Multiples of mobile and desktop spacing units should be used with margins and paddings. */
   --spacingUnit: 6px;
@@ -173,20 +174,24 @@
 
 body {
   font-family: Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased; /* http://szafranek.net/blog/2009/02/22/font-smoothing-explained/ */
-  -moz-osx-font-smoothing: grayscale; /* http://szafranek.net/blog/2009/02/22/font-smoothing-explained/ */
+  -webkit-font-smoothing: antialiased;
+  /* http://szafranek.net/blog/2009/02/22/font-smoothing-explained/ */
+  -moz-osx-font-smoothing: grayscale;
+  /* http://szafranek.net/blog/2009/02/22/font-smoothing-explained/ */
   text-rendering: optimizeSpeed;
 
   background-color: var(--matterColorBright);
 }
 
 ::selection {
-  background: var(--marketplaceColor); /* WebKit/Blink Browsers */
+  background: var(--marketplaceColor);
+  /* WebKit/Blink Browsers */
   color: var(--matterColorLight);
 }
 
 ::-moz-selection {
-  background: var(--marketplaceColor); /* Gecko Browsers */
+  background: var(--marketplaceColor);
+  /* Gecko Browsers */
   color: var(--matterColorLight);
 }
 
@@ -206,6 +211,7 @@ a,
   /* Text size should be inherited */
   text-decoration: none;
 }
+
 a:hover,
 .a:hover {
   text-decoration: underline;
@@ -432,10 +438,10 @@ select {
 
   /* Borders */
   border: none;
-  /* border-bottom-width: 2px;
+  border-bottom-width: 2px;
   border-bottom-style: solid;
-  border-bottom-color: var(--marketplaceColor); */
-  /* border-radius: 0; */
+  border-bottom-color: var(--marketplaceColor);
+  border-radius: 0;
 
   /* Background */
   background-image: url('data:image/svg+xml;utf8,<svg width="14" height="9" viewBox="0 0 14 9" xmlns="http://www.w3.org/2000/svg"><path d="M6.53 7.472c.26.26.68.26.94 0l5.335-5.333c.26-.263.26-.684 0-.944-.26-.26-.683-.26-.943 0L7 6.056l-4.862-4.86c-.26-.26-.683-.26-.943 0-.26.26-.26.68 0 .943L6.53 7.47z" stroke="%234A4A4A" fill="%234A4A4A" fill-rule="evenodd"/></svg>');
@@ -451,6 +457,7 @@ select {
     padding: 4px 0 2px 0;
   }
 }
+
 select:hover,
 select:focus {
   /* border-bottom-color: var(--matterColor); */
@@ -468,10 +475,10 @@ textarea,
 
   /* Borders */
   border: none;
-  /* border-bottom-width: 2px;
+  border-bottom-width: 2px;
   border-bottom-style: solid;
   border-bottom-color: var(--marketplaceColor);
-  border-radius: 0; */
+  border-radius: 0;
 
   &::placeholder {
     color: var(--matterColorAnti);
@@ -485,6 +492,7 @@ textarea,
     padding: 4px 0 2px 0;
   }
 }
+
 input:hover,
 input:focus,
 textarea:hover,
@@ -513,6 +521,7 @@ textarea {
   & body {
     font-family: 'poppins', Helvetica, Arial, sans-serif;
   }
+
   & button {
     font-family: 'poppins', Helvetica, Arial, sans-serif;
   }
@@ -523,8 +532,8 @@ textarea {
 /* Full screen Background image located in root-folder/src/assets */
 .defaultBackgroundImage {
   /* Gradient direction and overlaying the black color on top of the image for better readability */
-  background: linear-gradient(-45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)),
-    url('../assets/background-1440.jpg');
+  /* background: linear-gradient(-45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)),
+    url('../assets/background-1440.jpg'); */
 
   /* Add loading color for the div */
   background-color: var(--matterColor);
@@ -542,10 +551,11 @@ textarea {
 }
 
 .defaultBackgroundImageForDesktop {
+
   /* Gradient direction and overlaying the black color on top of the image for better readability */
   @media (--viewportMedium) {
-    background: linear-gradient(-45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)),
-      url('../assets/background-1440.jpg');
+    /* background: linear-gradient(-45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)),
+      url('../assets/background-1440.jpg'); */
 
     /* Add loading color for the div */
     background-color: var(--matterColor);
@@ -556,6 +566,7 @@ textarea {
     /* Align the image within the container */
     background-position: center center;
   }
+
   @media (--viewportLarge) {
     border-radius: 40px;
     border: solid 36px var(--matterColorBright);
@@ -707,11 +718,13 @@ textarea {
     min-height: 65px;
   }
 }
+
 .button:focus,
 .button:hover {
   outline: none;
   box-shadow: var(--boxShadowButton);
 }
+
 .button:disabled {
   box-shadow: none;
   cursor: not-allowed;
@@ -733,6 +746,7 @@ textarea {
   text-align: center;
   text-decoration: none;
 }
+
 .buttonText:focus,
 .buttonText:hover {
   text-decoration: none;
@@ -743,20 +757,23 @@ textarea {
 .buttonBorders {
   border: none;
   border-radius: var(--borderRadius);
- 
+
 }
+
 /* Secondary button has clear borders */
 .buttonBordersSecondary {
   border-width: 1px;
   border-style: solid;
   border-color: var(--matterColorNegative);
   border-radius: var(--borderRadius);
- 
+
 }
+
 .buttonBordersSecondary:hover,
 .buttonBordersSecondary:focus {
   border-color: var(--matterColorAnti);
 }
+
 .buttonBordersSecondary:disabled {
   border-color: var(--matterColorNegative);
   border: solid 2px red;
@@ -768,10 +785,12 @@ textarea {
   background-color: var(--marketplaceColor);
   color: black;
 }
+
 .buttonColors:focus,
 .buttonColors:hover {
   background-color: var(--marketplaceColorDark);
 }
+
 .buttonColors:disabled {
   background-color: var(--matterColorNegative);
   color: var(--matterColorLight);
@@ -782,11 +801,13 @@ textarea {
   background-color: var(--successColor);
   color: black;
 }
+
 .buttonColorsPrimary:hover,
 .buttonColorsPrimary:focus {
   background-color: var(--successColorDark);
   color: var(--matterColorLight);
 }
+
 .buttonColorsPrimary:disabled {
   background-color: var(--matterColorNegative);
   color: var(--matterColorLight);
@@ -797,6 +818,7 @@ textarea {
   background-color: var(--matterColorLight);
   color: var(--matterColor);
 }
+
 .buttonColorsSecondary:disabled {
   background-color: var(--matterColorNegative);
   color: var(--matterColorLight);
@@ -988,16 +1010,19 @@ textarea {
 
   cursor: pointer;
 }
+
 .marketplaceModalCloseStyles:enabled:hover {
   background-color: transparent;
   color: var(--matterColorDark);
   box-shadow: none;
   text-decoration: none;
 }
+
 .marketplaceModalCloseStyles:enabled:active {
   background-color: transparent;
   color: var(--matterColorDark);
 }
+
 .marketplaceModalCloseStyles:disabled {
   background-color: transparent;
 }

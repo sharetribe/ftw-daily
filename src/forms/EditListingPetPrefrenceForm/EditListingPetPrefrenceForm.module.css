@@ -36,8 +36,9 @@
 
   @media (--viewportLarge) {
     display: inline-block;
-    width: 241px;
     margin-top: 100px;
+    width: fit-content;
+    padding: 0 27px;
   }
 }
 

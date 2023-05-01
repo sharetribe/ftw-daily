@@ -240,7 +240,7 @@
   "EditListingPoliciesPanel.createListingTitle": "Step 3 - About your PetCrib",
   "EditListingPoliciesPanel.title": "Edit the About your PetCribs of {listingTitle}",
   "EditListingPricingForm.priceInputPlaceholder": "Choose your price…",
-  "EditListingPricingForm.pricePerDay": "Price per day in euros",
+  "EditListingPricingForm.pricePerDay": "Price per day in euros", 
   "EditListingPricingForm.pricePerNight": "Price for 1 Pet",
   "EditListingPricingForm.pricePerUnit": "Price per unit in euros",
   "EditListingPricingForm.priceRequired": "You need to add a valid price.",
