@@ -8,6 +8,8 @@ import BlockBuilder from '../../BlockBuilder';
 import SectionContainer from '../SectionContainer';
 import css from './SectionColumns.module.css';
 import { Button, IconCard, PrimaryButton } from '../../../../components';
+import MainPanel from '../../../SearchPage/MainPanel';
+import { parse } from '../../../../util/urlHelpers';
 
 // The number of columns (numColumns) affects styling and responsive images
 const COLUMN_CONFIG = [
@@ -42,6 +44,7 @@ const SectionColumns = props => {
     isInsideContainer,
     options,
   } = props;
+  console.log(options, '^^^^ ^^^^ => options');
 
   const [toggle, setToggle] = useState(false);
 
@@ -57,6 +60,9 @@ const SectionColumns = props => {
   const hasHeaderFields = hasDataInFields([title, description, callToAction], fieldOptions);
   const hasBlocks = blocks?.length > 0;
 
+
+
+  
   return (
     <SectionContainer
       id={sectionId}
@@ -94,7 +100,29 @@ const SectionColumns = props => {
             options={options}
           />
           {sectionId == "intro" ?
+
+
             <div className={css.searchBox}>
+              {/* <MainPanel
+                urlQueryParams={options.validQueryParams}
+                listings={options.listings}
+                searchInProgress={options.searchInProgress}
+                searchListingsError={options.searchListingsError}
+                searchParamsAreInSync={options.searchParamsAreInSync}
+                onActivateListing={options.onActivateListing}
+                onManageDisableScrolling={() => { }}
+                //onOpenModal={onOpenMobileModal}
+                // onCloseModal={() => {
+                //   setonOpenMobileModal(false)
+                // }}
+                onMapIconClick={() => {
+                  // onMapIconClick
+                }}
+                pagination={options.pagination}
+                searchParamsForPagination={parse(options.location.search)}
+                //showAsModalMaxWidth={MODAL_BREAKPOINT}
+                history={options.history}
+              /> */}
               <div className={css.formRow}>
                 <div className={css.selectForm}>
                   <label>Type of Pet</label>

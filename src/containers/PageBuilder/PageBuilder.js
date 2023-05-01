@@ -11,7 +11,7 @@ import StaticPage from './StaticPage.js';
 
 import css from './PageBuilder.module.css';
 import MainPanel from '../SearchPage/MainPanel.js';
-import { pickSearchParamsOnly,  validURLParamsForExtendedData } from '../SearchPage/SearchPage.helpers.js';
+import { pickSearchParamsOnly, validURLParamsForExtendedData } from '../SearchPage/SearchPage.helpers.js';
 import { parse, stringify } from '../../util/urlHelpers.js';
 const MODAL_BREAKPOINT = 768;
 
@@ -100,13 +100,13 @@ const PageBuilder = props => {
     ...pageProps
   } = props;
   console.log(history, '^^^^ ^^^^ => history');
-  
+
 
   if (!pageAssetsData && fallbackPage && !inProgress && error) {
     return fallbackPage;
   }
-  console.log(' sortConfig', sortConfig    )
-  console.log(' filterConfig',  filterConfig)
+  console.log(' sortConfig', sortConfig)
+  console.log(' filterConfig', filterConfig)
   // Page asset contains UI info and metadata related to it.
   // - "sections" (data that goes inside <body>)
   // - "meta" (which is data that goes inside <head>)
@@ -115,18 +115,18 @@ const PageBuilder = props => {
     latlng: ['origin'],
     latlngBounds: ['bounds'],
   });
-  const [ onOpenMobile ,setonOpenMobileModal] = useState(false)
+  const [onOpenMobile, setonOpenMobileModal] = useState(false)
 
   const onOpenMobileModal = () => {
-    setonOpenMobileModal( true);
+    setonOpenMobileModal(true);
   }
 
   const onMapIconClick = () => {
     this.useLocationSearchBounds = true;
     this.setState({ isSearchMapOpenOnMobile: true });
   };
- const urlQueryParams = pickSearchParamsOnly(null, filterConfig, sortConfig);
-const validQueryParams = validURLParamsForExtendedData(searchInURL, filterConfig);
+  const urlQueryParams = pickSearchParamsOnly(null, filterConfig, sortConfig);
+  const validQueryParams = validURLParamsForExtendedData(searchInURL, filterConfig);
 
   const pageMetaProps = getMetadata(meta, schemaType, options?.fieldComponents);
   const urlQueryString = stringify(urlQueryParams);
@@ -150,29 +150,51 @@ const validQueryParams = validURLParamsForExtendedData(searchInURL, filterConfig
               <Topbar as="header" className={css.topbar}>
                 <TopbarContainer />
               </Topbar>
+               
               <Main as="main" className={css.main}>
-                <SectionBuilder sections={sections} options={options} />
+              <MainPanel
+                  urlQueryParams={validQueryParams}
+                  listings={listings}
+                  searchInProgress={searchInProgress}
+                  searchListingsError={searchListingsError}
+                  searchParamsAreInSync={searchParamsAreInSync}
+                  onActivateListing={onActivateListing}
+                  onManageDisableScrolling={() => { }}
+                  onOpenModal={onOpenMobileModal}
+                  onCloseModal={() => {
+                    setonOpenMobileModal(false)
+                  }}
+                  onMapIconClick={() => {
+                    // onMapIconClick
+                  }}
+                  pagination={pagination}
+                  searchParamsForPagination={parse(location.search)}
+                  showAsModalMaxWidth={MODAL_BREAKPOINT}
+                  history={history}
+                />
+                <SectionBuilder sections={sections} options={options}
                 
-                <MainPanel
-            urlQueryParams={validQueryParams}
-            listings={listings}
-            searchInProgress={searchInProgress}
-            searchListingsError={searchListingsError}
-            searchParamsAreInSync={searchParamsAreInSync}
-            onActivateListing={onActivateListing}
-            onManageDisableScrolling={()=>{}}
-            onOpenModal={onOpenMobileModal}
-            onCloseModal={()=>{
-              setonOpenMobileModal(false)
-            }}
-            onMapIconClick={()=>{
-              // onMapIconClick
-            }}
-            pagination={pagination}
-            searchParamsForPagination={parse(location.search)}
-            showAsModalMaxWidth={MODAL_BREAKPOINT}
-            history={history}
-          />
+                urlQueryParams={validQueryParams}
+                listings={listings}
+                searchInProgress={searchInProgress}
+                searchListingsError={searchListingsError}
+                searchParamsAreInSync={searchParamsAreInSync}
+                onActivateListing={onActivateListing}
+                onManageDisableScrolling={() => { }}
+                onOpenModal={onOpenMobileModal}
+                onCloseModal={() => {
+                  setonOpenMobileModal(false)
+                }}
+                onMapIconClick={() => {
+                  // onMapIconClick
+                }}
+                pagination={pagination}
+                searchParamsForPagination={parse(location.search)}
+                showAsModalMaxWidth={MODAL_BREAKPOINT}
+                history={history}
+                
+                />
+              
               </Main>
               <Footer>
                 <FooterContent />

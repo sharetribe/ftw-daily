@@ -130,7 +130,7 @@ export const EditListingPricingFormComponent = props => (
               <FormattedMessage id="EditListingPricingForm.showListingFailed" />
             </p>
           ) : null}
-          {detail && detail.includes("overnightsStay") ? <> <p>Price for overnightsStay</p>
+          {detail && detail.includes("overnightsStay") ? <> <p>Price for overnight stay</p>
             <div style={{ display: 'flex', gap: '20px' }}>
               {numberPetArray.map((st) =>
                 <FieldTextInput
@@ -138,25 +138,28 @@ export const EditListingPricingFormComponent = props => (
                   name={"overnightsStayPrice" + st}
                   className={css.priceInput}
                   autoFocus
+                  type="number"
                   label={st + "    Pet"}
                   placeholder={pricePlaceholderMessage}
                   //currencyConfig={config.currencyConfig}
 
                   validate={priceValidators}
+                
                 />)}
             </div>
           </>
             : null}
           {detail && detail.includes("dayCareStay") ? <>
-            <p>Price for dayStay</p>
+            <p>Price for day stay</p>
             <div style={{ display: 'flex', gap: '20px' }}>
               {numberPetArray.map((st) =>
                 <FieldTextInput
                   id={"dayCareStay" + st}
                   name={"dayCareStay" + st}
                   className={css.priceInput}
+                  type="Number"
                   autoFocus
-                  label={"Pet" + st}
+                  label={st + "    Pet"}
                   placeholder={pricePlaceholderMessage}
                   //currencyConfig={config.currencyConfig}
                   validate={priceValidators}
@@ -164,7 +167,8 @@ export const EditListingPricingFormComponent = props => (
             </div>
           </>
             : null}
-          <p>Would you like to provide discount rate longer 7 days</p>
+           
+          <p>Would you like to provide a discount rate for a stay longer than 7 days</p>
           <div style={{ display: 'flex', gap: '20px' }}>
             {discount.map(num => {
               return (
@@ -189,7 +193,7 @@ export const EditListingPricingFormComponent = props => (
                   name="lengthOfStays"
                 validate={composeValidators(maxLength2Message)} /> */}
                 <div className={css.rangeBox}>
-                  <p>Length of Stays</p>
+                  <p>$ to days</p>
                   <Slider
                     min={7}
                     max={90}

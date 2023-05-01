@@ -29,7 +29,7 @@ const EditListingBasicInfoPanel = props => {
   } = props;
 
 //console.log('currentUser,', currentUser)
-
+console.log('listing', listing)
 const useremail = currentUser.attributes.email
 console.log('useremail', useremail)
       

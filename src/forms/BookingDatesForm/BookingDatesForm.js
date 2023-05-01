@@ -121,6 +121,8 @@ export class BookingDatesFormComponent extends Component {
             fetchLineItemsError,
             dayUnitType,
           } = fieldRenderProps;
+
+          console.log('listing', listing)
           const { startDate, endDate } = values && values.bookingDates ? values.bookingDates : {};
 
           const options = findOptionsForSelectFilter('serviceSetup', filterConfig);

@@ -46,8 +46,8 @@ export const filters = [
     // Price filter configuration
     // Note: unlike most prices this is not handled in subunits
     config: {
-      min: 500,
-      max: 1000,
+      min: 0,
+      max: 500,
       step: 5,
     },
   },
@@ -204,7 +204,7 @@ export const filters = [
         },
         {
           key: 'midium',
-          label: '7-20kg (Midium)',
+          label: '7-20kg (Medium)',
         },
         {
           key: 'large',

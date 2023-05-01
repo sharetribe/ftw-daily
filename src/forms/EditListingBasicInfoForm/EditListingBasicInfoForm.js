@@ -187,15 +187,13 @@ const EditListingBasicInfoFormComponent = props => (
             autoFocus
           />
 
-          <p>{birthdateMessage}</p>
+          <p  className={css.title}>{birthdateMessage}</p>
 
           <div className={css.formRow}>
             <FieldBirthdayInput
               id="birthday"
               name="birthday"
-
-              disabled={disabled}
-              className={css.field}
+              className={css.title}
               label={birthdayLabel}
               // label={birthdateMessage}
               labelForMonth={birthdayLabelMonth}

@@ -14,22 +14,22 @@ import config from '../../config';
 import { withRouter } from 'react-router-dom';
 
 export const LandingPageComponent = props => {
-  const { pageAssetsData, inProgress, error , sortConfig,
-    filterConfig,  currentPageResultIds,
+  const { pageAssetsData, inProgress, error, sortConfig,
+    filterConfig, currentPageResultIds,
     pagination,
     searchInProgress,
     searchListingsError,
     searchParams,
     searchMapListingIds,
     activeListingId,
-    location,history} = props;
+    location, history } = props;
 
   return (
     <PageBuilder
       pageAssetsData={pageAssetsData?.[camelize(ASSET_NAME)]?.data}
       inProgress={inProgress}
       history={history}
-      filterConfig={ filterConfig}
+      filterConfig={filterConfig}
       sortConfig={sortConfig}
       currentPageResultIds={currentPageResultIds}
       pagination={pagination}
@@ -41,15 +41,27 @@ export const LandingPageComponent = props => {
       activeListingId={activeListingId}
       error={error}
       fallbackPage={<FallbackPage error={error} />}
+      options={{
+        filterConfig: filterConfig,
+        currentPageResultIds: currentPageResultIds,
+        pagination: pagination,
+        searchInProgress: searchInProgress,
+        searchListingsError: searchListingsError,
+        searchParams: searchParams,
+        searchMapListingIds: searchMapListingIds,
+        activeListingId: activeListingId,
+        location: location,
+        history: history
+      }}
     />
   );
 };
 
 LandingPageComponent.defaultProps = {
-  
+
   filterConfig: config.custom.filters,
   sortConfig: config.custom.sortConfig,
- 
+
 };
 
 
@@ -77,13 +89,15 @@ const mapStateToProps = state => {
     searchMapListingIds,
     activeListingId,
   } = state.SearchPage;
-  return { pageAssetsData, inProgress, error,  currentPageResultIds,
+  return {
+    pageAssetsData, inProgress, error, currentPageResultIds,
     pagination,
     searchInProgress,
     searchListingsError,
     searchParams,
     searchMapListingIds,
-    activeListingId,};
+    activeListingId,
+  };
 };
 
 // Note: it is important that the withRouter HOC is **outside** the
@@ -92,6 +106,6 @@ const mapStateToProps = state => {
 // lifecycle hook.
 //
 // See: https://github.com/ReactTraining/react-router/issues/4671
-const LandingPage = compose(withRouter,connect(mapStateToProps))(LandingPageComponent);
+const LandingPage = compose(withRouter, connect(mapStateToProps))(LandingPageComponent);
 
 export default LandingPage;
