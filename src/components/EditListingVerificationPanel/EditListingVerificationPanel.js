@@ -29,6 +29,7 @@ class EditListingVerificationPanel extends Component {
      
       onRemoveImageverification,
     } = this.props;
+    console.log('listing', listing)
 
     const rootClass = rootClassName || css.root;
     const classes = classNames(rootClass, className);

@@ -49,7 +49,8 @@ class MainPanelLandingPage extends Component {
   constructor(props) {
     super(props);
     this.state = { isSecondaryFiltersOpen: false, currentQueryParams: props.urlQueryParams };
-   
+    
+    
 
     this.applyFilters = this.applyFilters.bind(this);
     this.cancelFilters = this.cancelFilters.bind(this);
@@ -61,6 +62,8 @@ class MainPanelLandingPage extends Component {
     // SortBy
     this.handleSortBy = this.handleSortBy.bind(this);
   }
+
+  
 
   // Apply the filters by redirecting to SearchPage with new filters.
   applyFilters() {
@@ -113,6 +116,7 @@ class MainPanelLandingPage extends Component {
         }, {})
       : {};
   }
+  
 
   getHandleChangedValueFn(useHistoryPush) {
     const { urlQueryParams, history, sortConfig, filterConfig } = this.props;
@@ -272,7 +276,15 @@ class MainPanelLandingPage extends Component {
             );
           })}
         </SearchFiltersPrimary>
-        <SearchFiltersMobile
+        <Button
+          className={css.searchButton}
+          onClick={() => {
+            history.push(createResourceLocatorString('SearchPage', routeConfiguration, {}, this.state.currentQueryParams));
+          }}
+        >
+          Search listing
+        </Button>
+        {/* <SearchFiltersMobile
           className={css.searchFiltersMobile}
           urlQueryParams={urlQueryParams}
           sortByComponent={sortBy('mobile')}
@@ -302,8 +314,8 @@ class MainPanelLandingPage extends Component {
               />
             );
           })}
-        </SearchFiltersMobile>
-        {isSecondaryFiltersOpen ? (
+        </SearchFiltersMobile> */}
+        {/* {isSecondaryFiltersOpen ? (
           <div className={classNames(css.searchFiltersPanel)}>
             <SearchFiltersSecondary
               urlQueryParams={urlQueryParams}
@@ -347,7 +359,7 @@ class MainPanelLandingPage extends Component {
               setActiveListing={onActivateListing}
             />
           </div>
-        )}
+        )} */}
       </div>
     );
   }

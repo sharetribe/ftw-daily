@@ -3,7 +3,7 @@ import { arrayOf, bool, func, node, number, object, string } from 'prop-types';
 import { injectIntl, intlShape } from '../../util/reactIntl';
 import { parseDateFromISO8601, stringifyDateToISO8601 } from '../../util/dates';
 
-import { FieldDateRangeController, FilterPopup, FilterPlain } from '../../components';
+import { FieldDateRangeController, FilterPopup, FilterPlain, FieldDateRangeInput } from '../../components';
 import css from './BookingDateRangeFilter.module.css';
 
 const getDatesQueryParamName = queryParamNames => {
@@ -129,7 +129,7 @@ export class BookingDateRangeFilterComponent extends Component {
         initialValues={initialDates}
         {...rest}
       >
-        <FieldDateRangeController
+        <FieldDateRangeInput
           name="dates"
           controllerRef={node => {
             this.popupControllerRef = node;
@@ -150,7 +150,7 @@ export class BookingDateRangeFilterComponent extends Component {
         initialValues={initialDates}
         {...rest}
       >
-        <FieldDateRangeController
+        <FieldDateRangeInput
           name="dates"
           controllerRef={node => {
             this.plainControllerRef = node;
