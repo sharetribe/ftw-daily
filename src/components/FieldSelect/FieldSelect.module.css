@@ -1,15 +1,17 @@
-.root {
-}
+@import '../../styles/marketplaceDefaults.css';
+
+.root {}
 
 .select {
   color: var(--matterColorAnti);
   border-bottom-color: var(--attentionColor);
   padding-right: 20px;
 
-  & > option {
+  &>option {
     color: var(--matterColor);
   }
-  & > option:disabled {
+
+  &>option:disabled {
     color: var(--matterColorAnti);
   }
 }
