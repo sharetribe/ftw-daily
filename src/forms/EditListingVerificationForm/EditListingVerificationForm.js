@@ -350,7 +350,7 @@ export class EditListingVerificationFormComponent extends Component {
                 className={css.submitButton}
                 type="submit"
                 inProgress={submitInProgress}
-                disabled={submitDisabled}
+                
                 ready={ready}
               >
                 {saveActionMsg}

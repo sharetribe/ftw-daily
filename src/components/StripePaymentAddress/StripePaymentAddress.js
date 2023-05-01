@@ -53,6 +53,11 @@ const StripePaymentAddress = props => {
       id: 'StripePaymentAddress.cityRequired',
     })
   );
+  const stateRequired = validators.required(
+    intl.formatMessage({
+      id: 'StripePaymentAddress.stateRequired',
+    })
+  );
 
   const stateLabel = intl.formatMessage(
     { id: 'StripePaymentAddress.stateLabel' },
@@ -143,6 +148,7 @@ const StripePaymentAddress = props => {
           autoComplete="billing address-level1"
           label={stateLabel}
           placeholder={statePlaceholder}
+          validate={stateRequired}
           onUnmount={() => form.change('state', undefined)}
         />
 
