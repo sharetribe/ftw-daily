@@ -50,8 +50,9 @@
 
   @media (--viewportLarge) {
     display: inline-block;
-    width: 241px;
+    width: fit-content;
     margin-top: 100px;
+    padding: 0 27px;
   }
 }
 

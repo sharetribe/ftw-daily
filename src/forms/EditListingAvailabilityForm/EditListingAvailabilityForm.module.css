@@ -51,7 +51,8 @@
   }
   .submitButton {
     display: inline-block;
-    width: 241px;
-    margin-top: 86px;
+    width: fit-content;
+    margin-top: 100px;
+    padding: 0 27px;
   }
 }
