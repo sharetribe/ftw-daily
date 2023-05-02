@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { arrayOf, bool, func, node, number, object, shape, string } from 'prop-types';
 import classNames from 'classnames';
 
+
 import Field, { hasDataInFields } from '../../Field';
 import BlockBuilder from '../../BlockBuilder';
 
@@ -9,7 +10,15 @@ import SectionContainer from '../SectionContainer';
 import css from './SectionColumns.module.css';
 import { Button, IconCard, PrimaryButton } from '../../../../components';
 import MainPanel from '../../../SearchPage/MainPanel';
-import { parse } from '../../../../util/urlHelpers';
+import { parse, stringify } from '../../../../util/urlHelpers';
+import config from '../../../../config';
+import { compose } from 'redux';
+import { withRouter } from 'react-router-dom/cjs/react-router-dom.min';
+import { connect } from 'react-redux';
+import { pickSearchParamsOnly, validURLParamsForExtendedData } from '../../../SearchPage/SearchPage.helpers';
+import { getListingsById } from '../../../../ducks/marketplaceData.duck';
+import { setActiveListing } from '../../../SearchPage/SearchPage.duck';
+import MainPanelLandingPage from '../../../SearchPage/MainPanelLandingpage';
 
 // The number of columns (numColumns) affects styling and responsive images
 const COLUMN_CONFIG = [
@@ -29,7 +38,7 @@ const getResponsiveImageSizes = numColumns => {
 };
 
 // Section component that's able to show blocks in multiple different columns (defined by "numColumns" prop)
-const SectionColumns = props => {
+const SectionColumnsComponent = props => {
   const {
     sectionId,
     className,
@@ -43,9 +52,21 @@ const SectionColumns = props => {
     blocks,
     isInsideContainer,
     options,
-  } = props;
-  console.log(options, '^^^^ ^^^^ => options');
+    sortConfig,
+    filterConfig, currentPageResultIds,
+    pagination,
+    searchInProgress,
+    searchListingsError,
+    searchParams,
+    listings,
+    searchMapListingIds,
+    activeListingId,
+    location, history,
+    onActivateListing
 
+  } = props;
+
+ // console.log('options', filterConfig)
   const [toggle, setToggle] = useState(false);
 
   const handleToggleState = () => {
@@ -60,9 +81,29 @@ const SectionColumns = props => {
   const hasHeaderFields = hasDataInFields([title, description, callToAction], fieldOptions);
   const hasBlocks = blocks?.length > 0;
 
+  const [onOpenMobile, setonOpenMobileModal] = useState(false)
 
+  const onOpenMobileModal = () => {
+    setonOpenMobileModal(true);
+  }
+  const { mapSearch, page, ...searchInURL } = parse(location.search, {
+    latlng: ['origin'],
+    latlngBounds: ['bounds'],
+  });
 
-  
+  const onMapIconClick = () => {
+    this.useLocationSearchBounds = true;
+    this.setState({ isSearchMapOpenOnMobile: true });
+  };
+  const urlQueryParams = pickSearchParamsOnly(searchInURL, filterConfig, sortConfig);
+  const validQueryParams = validURLParamsForExtendedData(searchInURL, filterConfig);
+
+  // const pageMetaProps = getMetadata(meta, schemaType, options?.fieldComponents);
+  const urlQueryString = stringify(urlQueryParams);
+  const paramsQueryString = stringify(
+    pickSearchParamsOnly(searchParams, filterConfig, sortConfig)
+  );
+  const searchParamsAreInSync = urlQueryString === paramsQueryString;
   return (
     <SectionContainer
       id={sectionId}
@@ -103,146 +144,27 @@ const SectionColumns = props => {
 
 
             <div className={css.searchBox}>
-              {/* <MainPanel
-                urlQueryParams={options.validQueryParams}
-                listings={options.listings}
-                searchInProgress={options.searchInProgress}
-                searchListingsError={options.searchListingsError}
-                searchParamsAreInSync={options.searchParamsAreInSync}
-                onActivateListing={options.onActivateListing}
+              <MainPanelLandingPage
+                className={css.filterSearch}
+                urlQueryParams={validQueryParams}
+                //listings={listings}
+                searchInProgress={searchInProgress}
+                searchListingsError={searchListingsError}
+                searchParamsAreInSync={searchParamsAreInSync}
+                onActivateListing={onActivateListing}
                 onManageDisableScrolling={() => { }}
-                //onOpenModal={onOpenMobileModal}
-                // onCloseModal={() => {
-                //   setonOpenMobileModal(false)
-                // }}
-                onMapIconClick={() => {
-                  // onMapIconClick
+                onOpenModal={onOpenMobileModal}
+                onCloseModal={() => {
+                  setonOpenMobileModal(false)
                 }}
-                pagination={options.pagination}
-                searchParamsForPagination={parse(options.location.search)}
+                onMapIconClick={() => {
+                  onMapIconClick
+                }}
+                pagination={pagination}
+                searchParamsForPagination={parse(location.search)}
                 //showAsModalMaxWidth={MODAL_BREAKPOINT}
-                history={options.history}
-              /> */}
-              <div className={css.formRow}>
-                <div className={css.selectForm}>
-                  <label>Type of Pet</label>
-                  <select>
-                    <option>Dog </option>
-                    <option>Cat</option>
-                  </select>
-                </div>
-                <div className={css.selectForm}>
-                  <label>Number of Pets</label>
-                  <select>
-                    <option>1 </option>
-                    <option>2</option>
-                    <option>3+</option>
-                  </select>
-                </div>
-              </div>
-              <div className={css.selectForm}>
-                <label>Type of Hosting Services</label>
-                <select>
-                  <option>Overnight Stay	</option>
-                  <option>Day Care Stay	</option>
-                </select>
-              </div>
-              <div className={css.daysCalender}>
-                <div className={css.dateInput}>
-                  <label>Start date</label>
-                  <div className={css.dateInputBox}>
-                    <input
-                      type='date'
-                    />
-                  </div>
-                </div>
-                <div className={css.dateInput}>
-                  <label>End date</label>
-                  <div className={css.dateInputBox}>
-                    <input
-                      type='date'
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className={css.servicesNeedTime}>
-                <div className={css.needServicesHeading}>How often do you need this service?</div>
-                <div className={css.servicesSelect}>
-                  <div
-                    className={classNames(css.service, {
-                      [css.selected]: toggle,
-                    })}
-                    onClick={handleToggleState}
-                  >
-                    <IconCard brand="calender" />
-                    <span>One Time</span>
-                  </div>
-                  <div
-                    onClick={handleToggleState}
-                    className={classNames(css.service, {
-                      [css.selected]: toggle,
-                    })}
-                  >
-                    <IconCard brand="repeat" />
-                    <span>Repeat Weekly</span>
-                  </div>
-                </div>
-              </div>
-              <div className={css.daysSelected}>
-                <div className={css.daysLeft}>
-                  <label>For which days?</label>
-                  <div className={css.daysWeek}>
-                    <span>Sun</span>
-                    <span>Mon</span>
-                    <span>Tue</span>
-                    <span>Wed</span>
-                    <span>Thu</span>
-                    <span>Fri</span>
-                    <span>Sat</span>
-                  </div>
-                </div>
-                <div className={css.daysRight}>
-                  <div className={css.dateInput}>
-                    <label>Start date</label>
-                    <div className={css.dateInputBox}>
-                      <input
-                        type='date'
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className={css.locationForm}>
-                <div className={css.inputBox}>
-                  <input
-                    type='text'
-                    placeholder='Location (Postcode)'
-                  />
-                </div>
-              </div>
-              <div className={css.weightBox}>
-                <div className={css.weightList}>
-                  <div className={css.weightKg}>0-6 Kg</div>
-                  <div className={css.weightType}>Small</div>
-                </div>
-                <div className={css.weightList}>
-                  <div className={css.weightKg}>7-20 Kgs</div>
-                  <div className={css.weightType}>Medium</div>
-                </div>
-                <div className={css.weightList}>
-                  <div className={css.weightKg}>20-40 Kgs</div>
-                  <div className={css.weightType}>Large</div>
-                </div>
-                <div className={css.weightList}>
-                  <div className={css.weightKg}>40+ Kg</div>
-                  <div className={css.weightType}>Gaint</div>
-                </div>
-              </div>
-              <div className={css.bottomButton}>
-                <Button>
-                  Search
-                </Button>
-              </div>
+                history={history}
+              />
             </div>
             : null}
         </div>
@@ -255,7 +177,7 @@ const propTypeOption = shape({
   fieldComponents: shape({ component: node, pickValidProps: func }),
 });
 
-SectionColumns.defaultProps = {
+SectionColumnsComponent.defaultProps = {
   className: null,
   rootClassName: null,
   defaultClasses: null,
@@ -268,11 +190,14 @@ SectionColumns.defaultProps = {
   blocks: [],
   isInsideContainer: false,
   options: null,
+  filterConfig: config.custom.filters,
+  sortConfig: config.custom.sortConfig,
 };
 
-SectionColumns.propTypes = {
+SectionColumnsComponent.propTypes = {
   sectionId: string.isRequired,
   className: string,
+
   rootClassName: string,
   defaultClasses: shape({
     sectionDetails: string,
@@ -287,7 +212,47 @@ SectionColumns.propTypes = {
   callToAction: object,
   blocks: arrayOf(object),
   isInsideContainer: bool,
+
   options: propTypeOption,
+
+
+
+  location: shape({
+    search: string.isRequired,
+  }).isRequired,
+  history: shape({
+    push: func.isRequired,
+  }).isRequired,
 };
 
+const mapStateToProps = state => {
+
+  const {
+    currentPageResultIds,
+    pagination,
+    searchInProgress,
+    searchListingsError,
+    searchParams,
+    searchMapListingIds,
+    activeListingId,
+  } = state.SearchPage;
+  const pageListings = getListingsById(state, currentPageResultIds);
+  return {
+    listings: pageListings,
+    pagination,
+    searchInProgress,
+    searchListingsError,
+    searchParams,
+    searchMapListingIds,
+    activeListingId,
+  };
+};
+const mapDispatchToProps = dispatch => ({
+  // onManageDisableScrolling: (componentId, disableScrolling) =>
+  //   dispatch(manageDisableScrolling(componentId, disableScrolling)),
+  // onSearchMapListings: searchParams => dispatch(searchMapListings(searchParams)),
+  onActivateListing: listingId => dispatch(setActiveListing(listingId)),
+});
+
+const SectionColumns = compose(withRouter, connect(mapStateToProps, mapDispatchToProps))(SectionColumnsComponent);
 export default SectionColumns;

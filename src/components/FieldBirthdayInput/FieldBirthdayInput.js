@@ -41,7 +41,7 @@ const isValidDate = (date, year, month, day) => {
 
 // Create a Date from the selected values. Return null if the date
 // is invalid.
-const dateFromSelected = ({ day, month, year }) => {
+export const dateFromSelected = ({ day, month, year }) => {
   const dayNum = parseNum(day);
   const monthNum = parseNum(month);
   const yearNum = parseNum(year);

@@ -75,6 +75,7 @@ const SectionBuilder = props => {
               defaultClasses={DEFAULT_CLASSES}
               isInsideContainer={isInsideContainer}
               options={otherOption}
+           
               {...section}
             />
           );

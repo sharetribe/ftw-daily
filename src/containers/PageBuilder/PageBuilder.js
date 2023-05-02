@@ -99,14 +99,14 @@ const PageBuilder = props => {
     history,
     ...pageProps
   } = props;
-  console.log(history, '^^^^ ^^^^ => history');
+  //console.log('onActivateListing', listings)
 
 
   if (!pageAssetsData && fallbackPage && !inProgress && error) {
     return fallbackPage;
   }
-  console.log(' sortConfig', sortConfig)
-  console.log(' filterConfig', filterConfig)
+  //console.log(' sortConfig', sortConfig)
+  //console.log(' filterConfig', filterConfig)
   // Page asset contains UI info and metadata related to it.
   // - "sections" (data that goes inside <body>)
   // - "meta" (which is data that goes inside <head>)
@@ -152,26 +152,7 @@ const PageBuilder = props => {
               </Topbar>
                
               <Main as="main" className={css.main}>
-              <MainPanel
-                  urlQueryParams={validQueryParams}
-                  listings={listings}
-                  searchInProgress={searchInProgress}
-                  searchListingsError={searchListingsError}
-                  searchParamsAreInSync={searchParamsAreInSync}
-                  onActivateListing={onActivateListing}
-                  onManageDisableScrolling={() => { }}
-                  onOpenModal={onOpenMobileModal}
-                  onCloseModal={() => {
-                    setonOpenMobileModal(false)
-                  }}
-                  onMapIconClick={() => {
-                    // onMapIconClick
-                  }}
-                  pagination={pagination}
-                  searchParamsForPagination={parse(location.search)}
-                  showAsModalMaxWidth={MODAL_BREAKPOINT}
-                  history={history}
-                />
+             
                 <SectionBuilder sections={sections} options={options}
                 
                 urlQueryParams={validQueryParams}
@@ -179,15 +160,8 @@ const PageBuilder = props => {
                 searchInProgress={searchInProgress}
                 searchListingsError={searchListingsError}
                 searchParamsAreInSync={searchParamsAreInSync}
-                onActivateListing={onActivateListing}
-                onManageDisableScrolling={() => { }}
-                onOpenModal={onOpenMobileModal}
-                onCloseModal={() => {
-                  setonOpenMobileModal(false)
-                }}
-                onMapIconClick={() => {
-                  // onMapIconClick
-                }}
+              
+                
                 pagination={pagination}
                 searchParamsForPagination={parse(location.search)}
                 showAsModalMaxWidth={MODAL_BREAKPOINT}

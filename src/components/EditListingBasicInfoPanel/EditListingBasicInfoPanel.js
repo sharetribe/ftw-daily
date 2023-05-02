@@ -28,12 +28,8 @@ const EditListingBasicInfoPanel = props => {
     errors,
   } = props;
 
-//console.log('currentUser,', currentUser)
-console.log('listing', listing)
-const useremail = currentUser.attributes.email
-console.log('useremail', useremail)
-      
- 
+  const useremail = currentUser.attributes.email;
+
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
   const { title, geolocation, publicData } = currentListing.attributes;
@@ -102,7 +98,7 @@ console.log('useremail', useremail)
         updateInProgress={updateInProgress}
         fetchErrors={errors}
         categories={categoryOptions}
-        currentUser={ currentUser}
+        currentUser={currentUser}
       />
     </div>
   );

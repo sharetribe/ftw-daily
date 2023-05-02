@@ -13,13 +13,17 @@ import {
  */
 const FilterComponent = props => {
   const {
+    PageName,
     idPrefix,
     filterConfig,
     urlQueryParams,
     initialValues,
     getHandleChangedValueFn,
+    pageName,
     ...rest
   } = props;
+  console.log(PageName, '^^^^ ^^^^ => PageName');
+  
   const { id, type, queryParamNames, label, config } = filterConfig;
   const { liveEdit, showAsPopup } = rest;
 
@@ -36,7 +40,9 @@ const FilterComponent = props => {
           label={label}
           queryParamNames={queryParamNames}
           initialValues={initialValues(queryParamNames)}
-          onSelect={getHandleChangedValueFn(useHistoryPush)}
+          PageName={PageName}
+          // onSelect={(e) => PageName == "LandingPage" ? getHandleChangedValueFn(e) : getHandleChangedValueFn(useHistoryPush)}
+          onSubmit={ pageName != "SearchPage" ?  (e)=> getHandleChangedValueFn(e) : getHandleChangedValueFn(useHistoryPush)}
           {...config}
           {...rest}
         />
@@ -50,7 +56,7 @@ const FilterComponent = props => {
           name={name}
           queryParamNames={queryParamNames}
           initialValues={initialValues(queryParamNames)}
-          onSubmit={getHandleChangedValueFn(useHistoryPush)}
+          onSubmit={ pageName != "SearchPage" ?  (e)=> getHandleChangedValueFn(e) : getHandleChangedValueFn(useHistoryPush)}
           {...config}
           {...rest}
         />
@@ -62,8 +68,10 @@ const FilterComponent = props => {
           id={componentId}
           label={label}
           queryParamNames={queryParamNames}
+          // filtersFor={Landingpage}
           initialValues={initialValues(queryParamNames)}
-          onSubmit={getHandleChangedValueFn(useHistoryPush)}
+          // onSelect={(e) => PageName == "LandingPage" ? getHandleChangedValueFn(useHistoryPush) : getHandleChangedValueFn(e)}
+          onSubmit={ pageName != "SearchPage" ?  (e)=> getHandleChangedValueFn(e) : getHandleChangedValueFn(useHistoryPush)}
           {...config}
           {...rest}
         />
@@ -71,30 +79,21 @@ const FilterComponent = props => {
     }
     case 'PriceFilter': {
       return (
-        <PriceFilter
+        PageName == "LandingPage" 
+        ? null: <PriceFilter
           id={componentId}
           label={label}
           queryParamNames={queryParamNames}
           initialValues={initialValues(queryParamNames)}
-          onSubmit={getHandleChangedValueFn(useHistoryPush)}
+          onSubmit={ pageName != "SearchPage" ?  (e)=> getHandleChangedValueFn(e) : getHandleChangedValueFn(useHistoryPush)}
           {...config}
           {...rest}
-        />
-      );
+        /> 
+        );
     }
-    // case 'KeywordFilter':
-    //   return (
-    //     <KeywordFilter
-    //       id={componentId}
-    //       label={label}
-    //       name={name}
-    //       queryParamNames={queryParamNames}
-    //       initialValues={initialValues(queryParamNames)}
-    //       onSubmit={getHandleChangedValueFn(useHistoryPush)}
-    //       {...config}
-    //       {...rest}
-    //     />
-    //   );
+    
+    
+   
     default:
       return null;
   }

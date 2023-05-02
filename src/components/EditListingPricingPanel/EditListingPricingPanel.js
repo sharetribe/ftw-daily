@@ -30,27 +30,22 @@ const EditListingPricingPanel = props => {
 
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
-  const { price ,publicData={}} = currentListing.attributes;
-  console.log('currentListing', currentListing)
-  
-  // day price
+  const { price, publicData = {} } = currentListing.attributes;
 
-  const dayCareStay1 = publicData && publicData.pricepet && publicData.pricepet.dayCare && publicData.pricepet.dayCare.dayCareStay1 || "" ;
-  const dayCareStay2= publicData && publicData.pricepet && publicData.pricepet.dayCare && publicData.pricepet.dayCare.dayCareStay2 || "" ;
-  const dayCareStay3= publicData && publicData.pricepet && publicData.pricepet.dayCare && publicData.pricepet.dayCare.dayCareStay3 || "" ;
+  // day price
+  const dayCareStay1 = publicData && publicData.pricepet && publicData.pricepet.dayCare && publicData.pricepet.dayCare.dayCareStay1 || "";
+  const dayCareStay2 = publicData && publicData.pricepet && publicData.pricepet.dayCare && publicData.pricepet.dayCare.dayCareStay2 || "";
+  const dayCareStay3 = publicData && publicData.pricepet && publicData.pricepet.dayCare && publicData.pricepet.dayCare.dayCareStay3 || "";
 
   //price for OverNight Stay
-
-  const overnightsStayPrice1= publicData && publicData.pricepet && publicData.pricepet.overNight && publicData.pricepet.overNight.overnightsStayPrice1 || "";
-  const overnightsStayPrice2= publicData && publicData.pricepet && publicData.pricepet.overNight && publicData.pricepet.overNight.overnightsStayPrice2 || "";
-  const overnightsStayPrice3= publicData && publicData.pricepet && publicData.pricepet.overNight && publicData.pricepet.overNight.overnightsStayPrice3 || "";
+  const overnightsStayPrice1 = publicData && publicData.pricepet && publicData.pricepet.overNight && publicData.pricepet.overNight.overnightsStayPrice1 || "";
+  const overnightsStayPrice2 = publicData && publicData.pricepet && publicData.pricepet.overNight && publicData.pricepet.overNight.overnightsStayPrice2 || "";
+  const overnightsStayPrice3 = publicData && publicData.pricepet && publicData.pricepet.overNight && publicData.pricepet.overNight.overnightsStayPrice3 || "";
 
   const discount = publicData && publicData.discount
-  const discountlengthOfStays =publicData && publicData.discountlengthOfStays
+  const discountlengthOfStays = publicData && publicData.discountlengthOfStays
   const lengthOfStays = publicData && publicData.lengthOfStays
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
-
- 
 
   const panelTitle = isPublished ? (
     <FormattedMessage
@@ -65,46 +60,40 @@ const EditListingPricingPanel = props => {
   const form = priceCurrencyValid ? (
     <EditListingPricingForm
       className={css.form}
-       initialValues={{ overnightsStayPrice1, overnightsStayPrice2, overnightsStayPrice3, dayCareStay1,dayCareStay2,dayCareStay3,discount,discountlengthOfStays,lengthOfStays}}
+      initialValues={{ overnightsStayPrice1, overnightsStayPrice2, overnightsStayPrice3, dayCareStay1, dayCareStay2, dayCareStay3, discount, discountlengthOfStays, lengthOfStays }}
       onSubmit={values => {
-        const {  overnightsStayPrice1, overnightsStayPrice2, overnightsStayPrice3, dayCareStay1,dayCareStay2,dayCareStay3,discount, discountlengthOfStays,lengthOfStays} = values;
-        //console.log(values, '^^^^ ^^^^ => values');
-        
-       
+        const { overnightsStayPrice1, overnightsStayPrice2, overnightsStayPrice3, dayCareStay1, dayCareStay2, dayCareStay3, discount, discountlengthOfStays, lengthOfStays } = values;
+
         function findMinPrice(var_args) {
           return Array.prototype.reduce.call(arguments, function (prev, current) {
             return prev && current ? Math.min(prev, current) : prev || current;
           });
         }
-        const min1 =findMinPrice(overnightsStayPrice1,overnightsStayPrice2,overnightsStayPrice3,dayCareStay1,dayCareStay2,dayCareStay3)
-        const min = min1 *100
-        //console.log('min', min)
-           
-           
+        const min1 = findMinPrice(overnightsStayPrice1, overnightsStayPrice2, overnightsStayPrice3, dayCareStay1, dayCareStay2, dayCareStay3)
+        const min = min1 * 100
+
         const updateValues = {
-          price:new Money(min, config.currency),
+          price: new Money(min, config.currency),
           publicData: {
             pricepet: {
-             dayCare:{
-              dayCareStay1 :dayCareStay1 || 0,
-              dayCareStay2 :dayCareStay2 || 0, 
-              dayCareStay3:dayCareStay3 || 0,
-             },
-             overNight:{
-              overnightsStayPrice1:overnightsStayPrice1 || 0, 
-              overnightsStayPrice2:overnightsStayPrice2 || 0,
-              overnightsStayPrice3:overnightsStayPrice3 || 0,
-             }
+              dayCare: {
+                dayCareStay1: dayCareStay1 || 0,
+                dayCareStay2: dayCareStay2 || 0,
+                dayCareStay3: dayCareStay3 || 0,
+              },
+              overNight: {
+                overnightsStayPrice1: overnightsStayPrice1 || 0,
+                overnightsStayPrice2: overnightsStayPrice2 || 0,
+                overnightsStayPrice3: overnightsStayPrice3 || 0,
+              }
             },
             discount,
             discountlengthOfStays,
             lengthOfStays
           },
-         };
+        };
 
         onSubmit(updateValues);
-        console.log('updateValues', updateValues)
-      
       }}
       onChange={onChange}
       saveActionMsg={submitButtonText}

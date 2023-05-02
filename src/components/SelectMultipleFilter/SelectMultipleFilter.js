@@ -91,7 +91,8 @@ class SelectMultipleFilter extends Component {
       showAsPopup,
       ...rest
     } = this.props;
-
+//console.log('onSelect', onSelect)
+  //  console.log('onSubmit', onSubmit)
     const classes = classNames(rootClassName || css.root, className);
 
     const queryParamName = getQueryParamName(queryParamNames);

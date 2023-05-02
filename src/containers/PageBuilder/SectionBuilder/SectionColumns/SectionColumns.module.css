@@ -47,14 +47,14 @@
   padding: 64px 32px 0 32px;
 
   & h3 {
-    color: #E95629;
+    color: #e95629;
   }
 }
 
 .introSection {
   grid-template-columns: repeat(2, 1fr);
 
-  &>div {
+  & > div {
     &:nth-child(1) {
       order: 2;
     }
@@ -129,19 +129,19 @@
     & button {
       width: 100px;
       border-radius: 50px;
-      background-color: #E95629;
+      background-color: #e95629;
     }
   }
 }
 
 .serviceGrid {
   & h3 {
-    color: #E95629;
+    color: #e95629;
   }
 }
 
 .headingServices {
-  color: #E95629;
+  color: #e95629;
 }
 
 .servicesNeedTime {
@@ -185,7 +185,7 @@
     }
 
     & .selected {
-      background-color: #E95629;
+      background-color: #e95629;
     }
   }
 }
@@ -289,4 +289,7 @@
     width: 100%;
     /* background: #000; */
   }
+}
+.filterSearch {
+  background-color: red;
 }

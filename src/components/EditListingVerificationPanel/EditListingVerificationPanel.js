@@ -26,19 +26,14 @@ class EditListingVerificationPanel extends Component {
       updateInProgress,
       onChange,
       onSubmit,
-     
       onRemoveImageverification,
     } = this.props;
 
     const rootClass = rootClassName || css.root;
     const classes = classNames(rootClass, className);
     const currentListing = ensureOwnListing(listing);
-    console.log('currentListing', currentListing)
     const { publicData } = currentListing.attributes || {};
-   // const { idProofImageId } = publicData || {};
-
-   const viewimage = publicData && publicData.idProofImage?.link
-   console.log('viewimage', viewimage)
+    const { idProofImage } = publicData || {}; //, idProofImageId
 
     const isPublished =
       currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
@@ -68,15 +63,13 @@ class EditListingVerificationPanel extends Component {
           disabled={disabled}
           ready={ready}
           fetchErrors={errors}
-         // mainImageId={idProofImage}
-          initialValues={{ images,publicData:publicData.idProofImage }}
+          // mainImageId={idProofImage}
+          initialValues={{ idProofImage }}
           images={images}
-          viewimage={viewimage}
           onImageUpload={onImageUpload}
           onSubmit={values => {
-            const { idProofImage} = values;
-
-           const updateValues = {
+            const { idProofImage } = values;
+            const updateValues = {
               publicData: {
                 idProofImage
               },
