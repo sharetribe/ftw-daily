@@ -19,8 +19,11 @@ const FilterComponent = props => {
     urlQueryParams,
     initialValues,
     getHandleChangedValueFn,
+    pageName,
     ...rest
   } = props;
+  console.log(PageName, '^^^^ ^^^^ => PageName');
+  
   const { id, type, queryParamNames, label, config } = filterConfig;
   const { liveEdit, showAsPopup } = rest;
 
@@ -37,10 +40,9 @@ const FilterComponent = props => {
           label={label}
           queryParamNames={queryParamNames}
           initialValues={initialValues(queryParamNames)}
+          PageName={PageName}
           // onSelect={(e) => PageName == "LandingPage" ? getHandleChangedValueFn(e) : getHandleChangedValueFn(useHistoryPush)}
-          onSubmit={(e) =>PageName == "SearchPage"
-          ? getHandleChangedValueFn(useHistoryPush)(e)
-          : getHandleChangedValueFn(e)}
+          onSubmit={ pageName != "SearchPage" ?  (e)=> getHandleChangedValueFn(e) : getHandleChangedValueFn(useHistoryPush)}
           {...config}
           {...rest}
         />
@@ -54,7 +56,7 @@ const FilterComponent = props => {
           name={name}
           queryParamNames={queryParamNames}
           initialValues={initialValues(queryParamNames)}
-          onSelect={(e) => PageName == "LandingPage" ? getHandleChangedValueFn(e) : getHandleChangedValueFn(useHistoryPush)}
+          onSubmit={ pageName != "SearchPage" ?  (e)=> getHandleChangedValueFn(e) : getHandleChangedValueFn(useHistoryPush)}
           {...config}
           {...rest}
         />
@@ -69,9 +71,7 @@ const FilterComponent = props => {
           // filtersFor={Landingpage}
           initialValues={initialValues(queryParamNames)}
           // onSelect={(e) => PageName == "LandingPage" ? getHandleChangedValueFn(useHistoryPush) : getHandleChangedValueFn(e)}
-          onSubmit={(e) =>PageName == "SearchPage"
-          ? getHandleChangedValueFn(useHistoryPush)(e)
-          : getHandleChangedValueFn(e)}
+          onSubmit={ pageName != "SearchPage" ?  (e)=> getHandleChangedValueFn(e) : getHandleChangedValueFn(useHistoryPush)}
           {...config}
           {...rest}
         />
@@ -85,9 +85,7 @@ const FilterComponent = props => {
           label={label}
           queryParamNames={queryParamNames}
           initialValues={initialValues(queryParamNames)}
-          onSubmit={(e) =>PageName == "SearchPage"
-          ? getHandleChangedValueFn(useHistoryPush)(e)
-          : getHandleChangedValueFn(e)}
+          onSubmit={ pageName != "SearchPage" ?  (e)=> getHandleChangedValueFn(e) : getHandleChangedValueFn(useHistoryPush)}
           {...config}
           {...rest}
         /> 

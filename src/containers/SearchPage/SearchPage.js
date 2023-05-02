@@ -186,6 +186,7 @@ export class SearchPageComponent extends Component {
             searchParamsForPagination={parse(location.search)}
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             history={history}
+            pageName='SearchPage'
           />
           <ModalInMobile
             className={css.mapPanel}

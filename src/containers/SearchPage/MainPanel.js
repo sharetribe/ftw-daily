@@ -116,12 +116,13 @@ class MainPanel extends Component {
 
   getHandleChangedValueFn(useHistoryPush) {
     const { urlQueryParams, history, sortConfig, filterConfig } = this.props;
-
+    
+    
     return updatedURLParams => {
       const updater = prevState => {
         const { address, bounds } = urlQueryParams;
         const mergedQueryParams = { ...urlQueryParams, ...prevState.currentQueryParams };
-
+        
         // Address and bounds are handled outside of MainPanel.
         // I.e. TopbarSearchForm && search by moving the map.
         // We should always trust urlQueryParams with those.
@@ -129,8 +130,9 @@ class MainPanel extends Component {
           currentQueryParams: { ...mergedQueryParams, ...updatedURLParams, address, bounds },
         };
       };
-
+      
       const callback = () => {
+        console.log(useHistoryPush, '^^^^ ^^^^ => useHistoryPush');
         if (useHistoryPush) {
           const searchParams = this.state.currentQueryParams;
           const search = cleanSearchFromConflictingParams(searchParams, sortConfig, filterConfig);
@@ -170,6 +172,7 @@ class MainPanel extends Component {
       showAsModalMaxWidth,
       filterConfig,
       sortConfig,
+      pageName,
     } = this.props;
 
     const primaryFilters = filterConfig.filter((f) => {
@@ -264,6 +267,7 @@ class MainPanel extends Component {
                 idPrefix="SearchFiltersPrimary"
                 filterConfig={config}
                 urlQueryParams={urlQueryParams}
+                pageName={pageName}
                 initialValues={this.initialValues}
                 getHandleChangedValueFn={this.getHandleChangedValueFn}
                 showAsPopup

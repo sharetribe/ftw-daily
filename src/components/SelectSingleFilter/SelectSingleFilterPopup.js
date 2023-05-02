@@ -30,7 +30,7 @@ class SelectSingleFilterPopup extends Component {
 
   selectOption(queryParamName, option) {
     this.setState({ isOpen: false });
-    this.props.onSelect({ [queryParamName]: option });
+    this.props.onSubmit({ [queryParamName]: option });
   }
 
   render() {
@@ -108,7 +108,7 @@ SelectSingleFilterPopup.propTypes = {
   className: string,
   queryParamNames: arrayOf(string).isRequired,
   label: node.isRequired,
-  onSelect: func.isRequired,
+  onSubmit: func.isRequired,
   options: arrayOf(
     shape({
       key: string.isRequired,

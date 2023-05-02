@@ -85,7 +85,6 @@ class SelectMultipleFilter extends Component {
       initialValues,
       contentPlacementOffset,
       onSubmit,
-      onSelect,
       queryParamNames,
       searchMode,
       intl,
@@ -125,7 +124,7 @@ class SelectMultipleFilter extends Component {
 
     const handleSubmit = values => {
       const usedValue = values ? values[name] : values;
-      onSelect(format(usedValue, queryParamName, searchMode));
+      onSubmit(format(usedValue, queryParamName, searchMode));
     };
 
     return showAsPopup ? (

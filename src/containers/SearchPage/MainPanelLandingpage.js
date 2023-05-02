@@ -19,6 +19,7 @@ import FilterComponent from './FilterComponent';
 import { validFilterParams } from './SearchPage.helpers';
 
 import css from './SearchPage.module.css';
+import { TopbarSearchForm } from '../../forms';
 
 // Primary filters have their content in dropdown-popup.
 // With this offset we move the dropdown to the left a few pixels on desktop layout.
@@ -49,7 +50,7 @@ class MainPanelLandingPage extends Component {
     super(props);
     this.state = { isSecondaryFiltersOpen: false, currentQueryParams: props.urlQueryParams };
 
-
+    this.handleSubmit = this.handleSubmit.bind(this);
 
     this.applyFilters = this.applyFilters.bind(this);
     this.cancelFilters = this.cancelFilters.bind(this);
@@ -63,6 +64,7 @@ class MainPanelLandingPage extends Component {
   }
 
 
+  
 
   // Apply the filters by redirecting to SearchPage with new filters.
   applyFilters() {
@@ -119,6 +121,7 @@ class MainPanelLandingPage extends Component {
 
   getHandleChangedValueFn(useHistoryPush) {
     const { urlQueryParams, history, sortConfig, filterConfig } = this.props;
+    console.log(useHistoryPush, '^^^^ ^^^^ => useHistoryPush');
 
     return updatedURLParams => {
       const updater = prevState => {
@@ -132,6 +135,8 @@ class MainPanelLandingPage extends Component {
           currentQueryParams: { ...mergedQueryParams, ...updatedURLParams, address, bounds },
         };
       };
+     
+
 
       const callback = () => {
         if (useHistoryPush) {
@@ -144,6 +149,22 @@ class MainPanelLandingPage extends Component {
       this.setState(updater, callback);
     };
   }
+
+  handleSubmit(values) {
+    const { currentSearchParams } = this.props;
+    const { search, selectedPlace } = values.location;
+    const { history } = this.props;
+    const { origin, bounds } = selectedPlace;
+    const originMaybe = config.sortSearchByDistance ? { origin } : {};
+    const searchParams = {
+      ...currentSearchParams,
+      ...originMaybe,
+      address: search,
+      bounds,
+    };
+    history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, searchParams));
+  }
+
 
   handleSortBy(urlParam, values) {
     const { history, urlQueryParams } = this.props;
@@ -164,8 +185,10 @@ class MainPanelLandingPage extends Component {
       searchParamsAreInSync,
       history,
       pagination,
+      initialSearchFormValues,
       filterConfig,
       sortConfig,
+      onSearchSubmit,
     } = this.props;
 
 const landingfilter = filterConfig.filter(e => e.id != "petInHome" && e.id !=  "housingConditions" )
@@ -270,6 +293,16 @@ const landingfilter = filterConfig.filter(e => e.id != "petInHome" && e.id !=  "
           })}
         </SearchFiltersPrimary>
 
+       
+    <TopbarSearchForm
+      className={css.searchLink}
+      desktopInputRoot={css.topbarSearchWithLeftPadding}
+      onSubmit={(e) => {this.setState({ currentQueryParams: { ...this.state.currentQueryParams, ...e } }) }}
+      initialValues={initialSearchFormValues}
+    />
+    
+  
+
         {/* <div className={css.formRow}>
           <div className={css.selectForm}>
             <label>Type of Pet</label>
@@ -342,7 +375,31 @@ const landingfilter = filterConfig.filter(e => e.id != "petInHome" && e.id !=  "
         </div> */}
         <div className={css.bottomButton}>
           <Button
-            onClick={() => history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, this.state.currentQueryParams))}
+            onClick={() => {
+              if(this.state.currentQueryParams.location){
+                const { currentSearchParams } = this.props;
+              const { search, selectedPlace } = this.state.currentQueryParams.location;
+              console.log(this.state.currentQueryParams, '^^^^ ^^^^ => this.state.currentQueryParams');
+              
+              const { history } = this.props;
+              const { origin, bounds } = selectedPlace;
+              const originMaybe = config.sortSearchByDistance ? { origin } : {};
+              const searchParams = {
+                ...this.state.currentQueryParams,
+                ...currentSearchParams,
+                ...originMaybe,
+                address: search,
+                bounds,
+              };
+              console.log(searchParams, '^^^^ ^^^^ => searchParams');
+              
+              history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, searchParams));
+              }else{
+
+                history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, this.state.currentQueryParams))
+              }
+          
+          }}
           >
             Search
           </Button>
@@ -361,6 +418,7 @@ MainPanelLandingPage.defaultProps = {
   searchParamsForPagination: {},
   filterConfig: config.custom.filters,
   sortConfig: config.custom.sortConfig,
+  initialSearchFormValues: {},
 };
 
 MainPanelLandingPage.propTypes = {
@@ -378,6 +436,8 @@ MainPanelLandingPage.propTypes = {
   onCloseModal: func.isRequired,
   onMapIconClick: func.isRequired,
   pagination: propTypes.pagination,
+  onSearchSubmit: func.isRequired,
+  initialSearchFormValues: object,
   searchParamsForPagination: object,
   // showAsModalMaxWidth: number.isRequired,
   filterConfig: propTypes.filterConfig,
