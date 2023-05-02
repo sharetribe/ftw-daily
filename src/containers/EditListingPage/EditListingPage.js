@@ -95,8 +95,6 @@ export const EditListingPageComponent = props => {
     currentUserListingFetched,
     currentUserListing,
   } = props;
-  console.log(allowOnlyOneListing, '^^^^ ^^^^ => allowOnlyOneListing');
-  
 
   const { id, type, returnURLType } = params;
   const isNewURI = type === LISTING_PAGE_PARAM_TYPE_NEW;

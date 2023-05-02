@@ -9,10 +9,9 @@ import { createResourceLocatorString } from '../../util/routes';
 import { isAnyFilterActive } from '../../util/search';
 import { propTypes } from '../../util/types';
 import {
-  SearchResultsPanel,
-  SearchFiltersMobile,
+  Button,
+  NamedLink,
   SearchFiltersPrimary,
-  SearchFiltersSecondary,
   SortBy,
 } from '../../components';
 
@@ -49,8 +48,8 @@ class MainPanelLandingPage extends Component {
   constructor(props) {
     super(props);
     this.state = { isSecondaryFiltersOpen: false, currentQueryParams: props.urlQueryParams };
-    
-    
+
+
 
     this.applyFilters = this.applyFilters.bind(this);
     this.cancelFilters = this.cancelFilters.bind(this);
@@ -63,7 +62,7 @@ class MainPanelLandingPage extends Component {
     this.handleSortBy = this.handleSortBy.bind(this);
   }
 
-  
+
 
   // Apply the filters by redirecting to SearchPage with new filters.
   applyFilters() {
@@ -78,7 +77,7 @@ class MainPanelLandingPage extends Component {
   cancelFilters() {
     this.setState({ currentQueryParams: {} });
   }
-  
+
 
   // Reset all filter query parameters
   resetAll(e) {
@@ -112,11 +111,11 @@ class MainPanelLandingPage extends Component {
     const isArray = Array.isArray(queryParamNames);
     return isArray
       ? queryParamNames.reduce((acc, paramName) => {
-          return { ...acc, [paramName]: getInitialValue(paramName) };
-        }, {})
+        return { ...acc, [paramName]: getInitialValue(paramName) };
+      }, {})
       : {};
   }
-  
+
 
   getHandleChangedValueFn(useHistoryPush) {
     const { urlQueryParams, history, sortConfig, filterConfig } = this.props;
@@ -160,45 +159,38 @@ class MainPanelLandingPage extends Component {
       className,
       rootClassName,
       urlQueryParams,
-      listings,
       searchInProgress,
       searchListingsError,
       searchParamsAreInSync,
-      onActivateListing,
-      onManageDisableScrolling,
-      onOpenModal,
-      onCloseModal,
-      onMapIconClick,
+      history,
       pagination,
-      searchParamsForPagination,
-      showAsModalMaxWidth,
       filterConfig,
       sortConfig,
     } = this.props;
 
-    const primaryFilters = filterConfig.filter((f) => {
+const landingfilter = filterConfig.filter(e => e.id != "petInHome" && e.id !=  "housingConditions" )
+
+    const primaryFilters = landingfilter.filter((f) => {
       let checked = true;
       if (f.id == "sizeOfdogs") {
         checked = false;
         if (this.state.currentQueryParams && this.state.currentQueryParams.pub_typeOfpets && this.state.currentQueryParams.pub_typeOfpets.search("dog") > -1) {
           checked = true;
         }
-      
-      }
-      else if (f.id == "dates") {
+
+      } else if (f.id == "dates") {
         checked = false;
         if (this.state.currentQueryParams && this.state.currentQueryParams.pub_serviceSetup && this.state.currentQueryParams.pub_serviceSetup.search("overnightsStay") > -1) {
           checked = true;
         }
       }
-      
       return f.group === 'primary' && checked;
     });
-    const secondaryFilters = filterConfig.filter(f => f.group !== 'primary');
+    const secondaryFilters = landingfilter.filter(f => f.group !== 'primary');
     const hasSecondaryFilters = !!(secondaryFilters && secondaryFilters.length > 0);
 
     // Selected aka active filters
-    const selectedFilters = validFilterParams(urlQueryParams, filterConfig);
+    const selectedFilters = validFilterParams(urlQueryParams, landingfilter);
     const selectedFiltersCount = Object.keys(selectedFilters).length;
 
     // Selected aka active secondary filters
@@ -207,16 +199,16 @@ class MainPanelLandingPage extends Component {
       : {};
     const selectedSecondaryFiltersCount = Object.keys(selectedSecondaryFilters).length;
 
-    const isSecondaryFiltersOpen = !!hasSecondaryFilters && this.state.isSecondaryFiltersOpen;
-    const propsForSecondaryFiltersToggle = hasSecondaryFilters
-      ? {
-          isSecondaryFiltersOpen: this.state.isSecondaryFiltersOpen,
-          toggleSecondaryFiltersOpen: isOpen => {
-            this.setState({ isSecondaryFiltersOpen: isOpen });
-          },
-          selectedSecondaryFiltersCount,
-        }
-      : {};
+    // const isSecondaryFiltersOpen = !!hasSecondaryFilters && this.state.isSecondaryFiltersOpen;
+    // const propsForSecondaryFiltersToggle = hasSecondaryFilters
+    //   ? {
+    //       isSecondaryFiltersOpen: this.state.isSecondaryFiltersOpen,
+    //       toggleSecondaryFiltersOpen: isOpen => {
+    //         this.setState({ isSecondaryFiltersOpen: isOpen });
+    //       },
+    //       selectedSecondaryFiltersCount,
+    //     }
+    //   : {};
 
     const hasPaginationInfo = !!pagination && pagination.totalItems != null;
     const totalItems = searchParamsAreInSync && hasPaginationInfo ? pagination.totalItems : 0;
@@ -226,15 +218,15 @@ class MainPanelLandingPage extends Component {
       const conflictingFilterActive = isAnyFilterActive(
         sortConfig.conflictingFilters,
         urlQueryParams,
-        filterConfig
+        landingfilter
       );
 
       const mobileClassesMaybe =
         mode === 'mobile'
           ? {
-              rootClassName: css.sortBy,
-              menuLabelRootClassName: css.sortByMenuLabel,
-            }
+            rootClassName: css.sortBy,
+            menuLabelRootClassName: css.sortByMenuLabel,
+          }
           : {};
       return sortConfig.active ? (
         <SortBy
@@ -249,117 +241,112 @@ class MainPanelLandingPage extends Component {
     };
 
     const classes = classNames(rootClassName || css.searchResultContainer, className);
+    console.log(this.state.currentQueryParams, '^^^^ ^^^^ => this.state.currentQueryParams');
 
     return (
       <div className={classes}>
         <SearchFiltersPrimary
           className={css.searchFiltersPrimary}
-          sortByComponent={sortBy('desktop')}
+          // sortByComponent={sortBy('desktop')}
           listingsAreLoaded={listingsAreLoaded}
           resultsCount={totalItems}
           searchInProgress={searchInProgress}
           searchListingsError={searchListingsError}
-          {...propsForSecondaryFiltersToggle}
+        // {...propsForSecondaryFiltersToggle}
         >
           {primaryFilters.map(config => {
             return (
               <FilterComponent
                 key={`SearchFiltersPrimary.${config.id}`}
                 idPrefix="SearchFiltersPrimary"
+                PageName="LandingPage"
                 filterConfig={config}
                 urlQueryParams={urlQueryParams}
                 initialValues={this.initialValues}
-                getHandleChangedValueFn={this.getHandleChangedValueFn}
-                showAsPopup
+                getHandleChangedValueFn={(e) => this.setState({ currentQueryParams: { ...this.state.currentQueryParams, ...e } })}
                 contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
               />
             );
           })}
         </SearchFiltersPrimary>
-        <Button
-          className={css.searchButton}
-          onClick={() => {
-            history.push(createResourceLocatorString('SearchPage', routeConfiguration, {}, this.state.currentQueryParams));
-          }}
-        >
-          Search listing
-        </Button>
-        {/* <SearchFiltersMobile
-          className={css.searchFiltersMobile}
-          urlQueryParams={urlQueryParams}
-          sortByComponent={sortBy('mobile')}
-          listingsAreLoaded={listingsAreLoaded}
-          resultsCount={totalItems}
-          searchInProgress={searchInProgress}
-          searchListingsError={searchListingsError}
-          showAsModalMaxWidth={showAsModalMaxWidth}
-          onMapIconClick={onMapIconClick}
-          onManageDisableScrolling={onManageDisableScrolling}
-          onOpenModal={onOpenModal}
-          onCloseModal={onCloseModal}
-          resetAll={this.resetAll}
-          selectedFiltersCount={selectedFiltersCount}
-        >
-          {filterConfig.map(config => {
-            return (
-              <FilterComponent
-                key={`SearchFiltersMobile.${config.id}`}
-                idPrefix="SearchFiltersMobile"
-                filterConfig={config}
-                urlQueryParams={urlQueryParams}
-                initialValues={this.initialValues}
-                getHandleChangedValueFn={this.getHandleChangedValueFn}
-                liveEdit
-                showAsPopup={false}
-              />
-            );
-          })}
-        </SearchFiltersMobile> */}
-        {/* {isSecondaryFiltersOpen ? (
-          <div className={classNames(css.searchFiltersPanel)}>
-            <SearchFiltersSecondary
-              urlQueryParams={urlQueryParams}
-              listingsAreLoaded={listingsAreLoaded}
-              applyFilters={this.applyFilters}
-              cancelFilters={this.cancelFilters}
-              resetAll={this.resetAll}
-              onClosePanel={() => this.setState({ isSecondaryFiltersOpen: false })}
-            >
-              {secondaryFilters.map(config => {
-                return (
-                  <FilterComponent
-                    key={`SearchFiltersSecondary.${config.id}`}
-                    idPrefix="SearchFiltersSecondary"
-                    filterConfig={config}
-                    urlQueryParams={urlQueryParams}
-                    initialValues={this.initialValues}
-                    getHandleChangedValueFn={this.getHandleChangedValueFn}
-                    showAsPopup={false}
-                  />
-                );
-              })}
-            </SearchFiltersSecondary>
+
+        {/* <div className={css.formRow}>
+          <div className={css.selectForm}>
+            <label>Type of Pet</label>
+            <select>
+              <option>Dog </option>
+              <option>Cat</option>
+            </select>
           </div>
-        ) : (
-          <div
-            className={classNames(css.listings, {
-              [css.newSearchInProgress]: !listingsAreLoaded,
-            })}
-          >
-            {searchListingsError ? (
-              <h2 className={css.error}>
-                <FormattedMessage id="SearchPage.searchError" />
-              </h2>
-            ) : null}
-            <SearchResultsPanel
-              className={css.searchListingsPanel}
-              listings={listings}
-              pagination={listingsAreLoaded ? pagination : null}
-              search={searchParamsForPagination}
-              setActiveListing={onActivateListing}
+          <div className={css.selectForm}>
+            <label>Number of Pets</label>
+            <select>
+              <option>1 </option>
+              <option>2</option>
+              <option>3+</option>
+            </select>
+          </div>
+        </div>
+        <div className={css.selectForm}>
+          <label>Type of Hosting Services</label>
+          <select>
+            <option>Overnight Stay	</option>
+            <option>Day Care Stay	</option>
+          </select>
+        </div>
+        <div className={css.daysCalender}>
+          <div className={css.dateInput}>
+            <label>Start date</label>
+            <div className={css.dateInputBox}>
+              <input
+                type='date'
+              />
+            </div>
+          </div>
+          <div className={css.dateInput}>
+            <label>End date</label>
+            <div className={css.dateInputBox}>
+              <input
+                type='date'
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className={css.locationForm}>
+          <label>Location</label>
+          <div className={css.inputBox}>
+            <input
+              type='text'
+              placeholder='Location (Postcode)'
             />
           </div>
-        )} */}
+        </div>
+        <div className={css.weightBox}>
+          <div className={css.weightList}>
+            <div className={css.weightKg}>0-6 Kg</div>
+            <div className={css.weightType}>Small</div>
+          </div>
+          <div className={css.weightList}>
+            <div className={css.weightKg}>7-20 Kgs</div>
+            <div className={css.weightType}>Medium</div>
+          </div>
+          <div className={css.weightList}>
+            <div className={css.weightKg}>20-40 Kgs</div>
+            <div className={css.weightType}>Large</div>
+          </div>
+          <div className={css.weightList}>
+            <div className={css.weightKg}>40+ Kg</div>
+            <div className={css.weightType}>Gaint</div>
+          </div>
+        </div> */}
+        <div className={css.bottomButton}>
+          <Button
+            onClick={() => history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, this.state.currentQueryParams))}
+          >
+            Search
+          </Button>
+        </div>
       </div>
     );
   }
@@ -392,7 +379,7 @@ MainPanelLandingPage.propTypes = {
   onMapIconClick: func.isRequired,
   pagination: propTypes.pagination,
   searchParamsForPagination: object,
-  showAsModalMaxWidth: number.isRequired,
+  // showAsModalMaxWidth: number.isRequired,
   filterConfig: propTypes.filterConfig,
   sortConfig: propTypes.sortConfig,
 

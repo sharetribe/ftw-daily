@@ -40,6 +40,7 @@ export const filters = [
     label: 'Price',
     type: 'PriceFilter',
     group: 'primary',
+    filtersFor: ["SearchPage"],
     // Note: PriceFilter is fixed filter,
     // you can't change "queryParamNames: ['price'],"
     queryParamNames: ['price'],
@@ -139,6 +140,7 @@ export const filters = [
     label: 'Type of Services',
     type: 'SelectMultipleFilter',
     group: 'primary',
+    filtersFor: ["SearchPage","LandingPage"],
     queryParamNames: ['pub_serviceSetup'],
     config: {
       
@@ -160,6 +162,7 @@ export const filters = [
     id: 'dates',
     label: 'Dates',
     type: 'BookingDateRangeFilter',
+    filtersFor: ["SearchPage","LandingPage"],
     group: 'primary',
     // Note: BookingDateRangeFilter is fixed filter,
     // you can't change "queryParamNames: ['dates'],"
@@ -171,6 +174,7 @@ export const filters = [
     label: 'Type of pet',
     type: 'SelectMultipleFilter',
     group: 'primary',
+    filtersFor: ["SearchPage","LandingPage"],
     queryParamNames: ['pub_typeOfpets'],
     config: {
       
@@ -192,6 +196,7 @@ export const filters = [
     id: 'sizeOfdogs',
     label: 'Size Of Dogs',
     type: 'SelectMultipleFilter',
+    filtersFor: ["SearchPage","LandingPage"],
     group: 'primary',
     queryParamNames: ['pub_sizeOfdogs'],
     config: {
@@ -245,6 +250,7 @@ export const filters = [
     label: 'Number Of Pets',
     type: 'SelectSingleFilter',
     group: 'primary',
+    filtersFor: ["SearchPage","LandingPage"],
     queryParamNames: ['pub_numberOfPets'],
     config: {
       
@@ -293,6 +299,7 @@ export const filters = [
     label: 'Housing conditions',
     type: 'SelectMultipleFilter',
     group: 'primary',
+    filtersFor: ["SearchPage"],
     queryParamNames: ['pub_housingConditions'],
     config: {
       
@@ -326,6 +333,7 @@ export const filters = [
     label: 'Pet in the home',
     type: 'SelectMultipleFilter',
     group: 'primary',
+    filtersFor: ["SearchPage"],
     queryParamNames: ['pub_petInHome'],
     config: {
       

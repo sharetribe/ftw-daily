@@ -85,13 +85,15 @@ class SelectMultipleFilter extends Component {
       initialValues,
       contentPlacementOffset,
       onSubmit,
+      onSelect,
       queryParamNames,
       searchMode,
       intl,
       showAsPopup,
       ...rest
     } = this.props;
-
+//console.log('onSelect', onSelect)
+  //  console.log('onSubmit', onSubmit)
     const classes = classNames(rootClassName || css.root, className);
 
     const queryParamName = getQueryParamName(queryParamNames);
@@ -123,7 +125,7 @@ class SelectMultipleFilter extends Component {
 
     const handleSubmit = values => {
       const usedValue = values ? values[name] : values;
-      onSubmit(format(usedValue, queryParamName, searchMode));
+      onSelect(format(usedValue, queryParamName, searchMode));
     };
 
     return showAsPopup ? (

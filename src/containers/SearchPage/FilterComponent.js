@@ -13,6 +13,7 @@ import {
  */
 const FilterComponent = props => {
   const {
+    PageName,
     idPrefix,
     filterConfig,
     urlQueryParams,
@@ -36,7 +37,10 @@ const FilterComponent = props => {
           label={label}
           queryParamNames={queryParamNames}
           initialValues={initialValues(queryParamNames)}
-          onSelect={getHandleChangedValueFn(useHistoryPush)}
+          // onSelect={(e) => PageName == "LandingPage" ? getHandleChangedValueFn(e) : getHandleChangedValueFn(useHistoryPush)}
+          onSubmit={(e) =>PageName == "SearchPage"
+          ? getHandleChangedValueFn(useHistoryPush)(e)
+          : getHandleChangedValueFn(e)}
           {...config}
           {...rest}
         />
@@ -50,7 +54,7 @@ const FilterComponent = props => {
           name={name}
           queryParamNames={queryParamNames}
           initialValues={initialValues(queryParamNames)}
-          onSubmit={getHandleChangedValueFn(useHistoryPush)}
+          onSelect={(e) => PageName == "LandingPage" ? getHandleChangedValueFn(e) : getHandleChangedValueFn(useHistoryPush)}
           {...config}
           {...rest}
         />
@@ -62,8 +66,12 @@ const FilterComponent = props => {
           id={componentId}
           label={label}
           queryParamNames={queryParamNames}
+          // filtersFor={Landingpage}
           initialValues={initialValues(queryParamNames)}
-          onSubmit={getHandleChangedValueFn(useHistoryPush)}
+          // onSelect={(e) => PageName == "LandingPage" ? getHandleChangedValueFn(useHistoryPush) : getHandleChangedValueFn(e)}
+          onSubmit={(e) =>PageName == "SearchPage"
+          ? getHandleChangedValueFn(useHistoryPush)(e)
+          : getHandleChangedValueFn(e)}
           {...config}
           {...rest}
         />
@@ -71,30 +79,23 @@ const FilterComponent = props => {
     }
     case 'PriceFilter': {
       return (
-        <PriceFilter
+        PageName == "LandingPage" 
+        ? null: <PriceFilter
           id={componentId}
           label={label}
           queryParamNames={queryParamNames}
           initialValues={initialValues(queryParamNames)}
-          onSubmit={getHandleChangedValueFn(useHistoryPush)}
+          onSubmit={(e) =>PageName == "SearchPage"
+          ? getHandleChangedValueFn(useHistoryPush)(e)
+          : getHandleChangedValueFn(e)}
           {...config}
           {...rest}
-        />
-      );
+        /> 
+        );
     }
-    // case 'KeywordFilter':
-    //   return (
-    //     <KeywordFilter
-    //       id={componentId}
-    //       label={label}
-    //       name={name}
-    //       queryParamNames={queryParamNames}
-    //       initialValues={initialValues(queryParamNames)}
-    //       onSubmit={getHandleChangedValueFn(useHistoryPush)}
-    //       {...config}
-    //       {...rest}
-    //     />
-    //   );
+    
+    
+   
     default:
       return null;
   }

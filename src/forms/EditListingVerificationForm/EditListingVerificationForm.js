@@ -65,15 +65,10 @@ export class EditListingVerificationFormComponent extends Component {
     }
   }
   onAttachmentUpload(file, form) {
-    //console.log(file, '^^^^ ^^^^ => file');
-
     // this.props.setClearForm(false);
     if (file && file.name) {
       ReactS3Client.uploadFile(file, file.name)
-        // console.log('file', file)
         .then(data => {
-          console.log(data, '^^^^ ^^^^ => data');
-
           //  const updateduploadedAttachmentsUrls = [...this.state.uploadedAttachmentsUrls];
           const { location } = data;
           const currentDate = moment().format('MM-DD-YYYY hh:mm:ss');
@@ -89,13 +84,11 @@ export class EditListingVerificationFormComponent extends Component {
             attachmentDeleteRequested: false,
             uploadAttachmentToAwsRequested: false,
           });
-          form.change("idProofImage", updateduploadedAttachmentsUrls)
+          form.change("idProofImage", updateduploadedAttachmentsUrls);
         })
         .catch(e => {
-          console.log(e, '^^^^ ^^^^ => e');
-
+          console.error(e, '^^^^ ^^^^ => e');
           this.setState({ uploadAttachmentToAwsRequested: false });
-          // console.error(e);
         });
     }
   }
@@ -106,43 +99,37 @@ export class EditListingVerificationFormComponent extends Component {
         {...this.props}
         onImageUploadHandler={this.onImageUploadHandler}
         idProofImageUploadRequested={this.state.idProofImageUploadRequested}
-        initialValues={{ images: this.props.images }}
         render={formRenderProps => {
           const {
             form,
             className,
             fetchErrors,
             handleSubmit,
-            idProofImageUploadRequested,
-            intl,
+            ready,
+            images,
+            values,
             invalid,
-            onImageUploadHandler,
             disabled,
             mainImageId,
-            ready,
             saveActionMsg,
-            images,
-            viewimage,
-            idProofImage,
             updateInProgress,
-            values,
+            idProofImageUploadRequested,
           } = formRenderProps;
 
           const { publishListingError, showListingsError, updateListingError, uploadImageError } =
             fetchErrors || {};
           const uploadOverLimit = isUploadImageOverLimitError(uploadImageError);
 
-          const valueimage = values?.idProofImage?.link
-          console.log('valueimage', valueimage)
-          const addMainPhoto = (
-            <span className={css.chooseImageText}>
-              {/* <IconCamera /> */}
-              <span className={css.chooseImage}>
-                <FormattedMessage id="EditListingPhotosForm.chooseMainImage" />
-              </span>
+          // const valueimage = values?.idProofImage?.link;
+          // const addMainPhoto = (
+          //   <span className={css.chooseImageText}>
+          //     {/* <IconCamera /> */}
+          //     <span className={css.chooseImage}>
+          //       <FormattedMessage id="EditListingPhotosForm.chooseMainImage" />
+          //     </span>
 
-            </span>
-          );
+          //   </span>
+          // );
 
           // Main image for what
           const uploadingOverlay = idProofImageUploadRequested ? (
@@ -207,6 +194,7 @@ export class EditListingVerificationFormComponent extends Component {
               </p>
             );
           }
+
           // NOTE: These error messages are here since Photos panel is the last visible panel
           // before creating a new listing. If that order is changed, these should be changed too.
           // Create and show listing errors are shown above submit button
@@ -220,8 +208,6 @@ export class EditListingVerificationFormComponent extends Component {
               <FormattedMessage id="EditListingPhotosForm.showListingFailed" />
             </p>
           ) : null;
-
-
 
           if (uploadOverLimit) {
             uploadImageFailed = (
@@ -237,13 +223,10 @@ export class EditListingVerificationFormComponent extends Component {
             );
           }
 
-
           const submitInProgress = updateInProgress;
-          const submitDisabled =
-            invalid || disabled || submitInProgress || idProofImageUploadRequested || ready || !values.idProofImage;
+          const submitDisabled = invalid || disabled || submitInProgress || idProofImageUploadRequested || ready || !values.idProofImage;
 
           const classes = classNames(css.root, className);
-          console.log('this.state.uploadedAttachmentsUrls', this.state.uploadedAttachmentsUrls)
 
           return (
             <Form
@@ -280,7 +263,6 @@ export class EditListingVerificationFormComponent extends Component {
                         this.setState({ uploadAttachmentToAwsRequested: true, stopLoop: false });
                         this.onAttachmentUpload(file, form);
                         e.target.value = null;
-                        console.log('file', file)
                       }
                     };
 
@@ -321,20 +303,19 @@ export class EditListingVerificationFormComponent extends Component {
               <ul>
                 {<div className={css.fileUploadName} >
                   <div>
-                    {/\mp4|MP4|mov|webm/.test(values?.idProofImage?.link ? values?.idProofImage?.link : viewimage) ? (
-                      <video src={values?.idProofImage?.link ? values?.idProofImage?.link : viewimage} loop autoPlay={true} muted style={{ height: '200px' }} />
+                    {/\mp4|MP4|mov|webm/.test(values.idProofImage && values.idProofImage.link) ? (
+                      <video src={values.idProofImage && values.idProofImage.link} loop autoPlay={true} muted style={{ height: '200px' }} />
                     ) : (
-                      <object data={values?.idProofImage?.link ? values?.idProofImage?.link : viewimage}>
+                      <object data={values.idProofImage && values.idProofImage.link}>
                         <iframe
                           className="doc"
-                          src={`https://docs.google.com/gview?url=${values?.idProofImage?.link ? values?.idProofImage?.link : viewimage}&embedded=true`}
+                          src={`https://docs.google.com/gview?url=${values.idProofImage && values.idProofImage.link}&embedded=true`}
                         />
                       </object>
                     )}
                   </div>
                 </div>
                 }
-                {/* {viewimage} */}
 
               </ul>
               {uploadImageFailed}
@@ -350,7 +331,7 @@ export class EditListingVerificationFormComponent extends Component {
                 className={css.submitButton}
                 type="submit"
                 inProgress={submitInProgress}
-                
+                disabled={submitDisabled}
                 ready={ready}
               >
                 {saveActionMsg}

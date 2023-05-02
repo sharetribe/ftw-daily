@@ -18,6 +18,7 @@ import { connect } from 'react-redux';
 import { pickSearchParamsOnly, validURLParamsForExtendedData } from '../../../SearchPage/SearchPage.helpers';
 import { getListingsById } from '../../../../ducks/marketplaceData.duck';
 import { setActiveListing } from '../../../SearchPage/SearchPage.duck';
+import MainPanelLandingPage from '../../../SearchPage/MainPanelLandingpage';
 
 // The number of columns (numColumns) affects styling and responsive images
 const COLUMN_CONFIG = [
@@ -143,7 +144,7 @@ const SectionColumnsComponent = props => {
 
 
             <div className={css.searchBox}>
-              <MainPanel
+              <MainPanelLandingPage
                 className={css.filterSearch}
                 urlQueryParams={validQueryParams}
                 //listings={listings}
@@ -164,81 +165,6 @@ const SectionColumnsComponent = props => {
                 //showAsModalMaxWidth={MODAL_BREAKPOINT}
                 history={history}
               />
-              <div className={css.formRow}>
-                <div className={css.selectForm}>
-                  <label>Type of Pet</label>
-                  <select>
-                    <option>Dog </option>
-                    <option>Cat</option>
-                  </select>
-                </div>
-                <div className={css.selectForm}>
-                  <label>Number of Pets</label>
-                  <select>
-                    <option>1 </option>
-                    <option>2</option>
-                    <option>3+</option>
-                  </select>
-                </div>
-              </div>
-              <div className={css.selectForm}>
-                <label>Type of Hosting Services</label>
-                <select>
-                  <option>Overnight Stay	</option>
-                  <option>Day Care Stay	</option>
-                </select>
-              </div>
-              <div className={css.daysCalender}>
-                <div className={css.dateInput}>
-                  <label>Start date</label>
-                  <div className={css.dateInputBox}>
-                    <input
-                      type='date'
-                    />
-                  </div>
-                </div>
-                <div className={css.dateInput}>
-                  <label>End date</label>
-                  <div className={css.dateInputBox}>
-                    <input
-                      type='date'
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className={css.locationForm}>
-                <label>Location</label>
-                <div className={css.inputBox}>
-                  <input
-                    type='text'
-                    placeholder='Location (Postcode)'
-                  />
-                </div>
-              </div>
-              <div className={css.weightBox}>
-                <div className={css.weightList}>
-                  <div className={css.weightKg}>0-6 Kg</div>
-                  <div className={css.weightType}>Small</div>
-                </div>
-                <div className={css.weightList}>
-                  <div className={css.weightKg}>7-20 Kgs</div>
-                  <div className={css.weightType}>Medium</div>
-                </div>
-                <div className={css.weightList}>
-                  <div className={css.weightKg}>20-40 Kgs</div>
-                  <div className={css.weightType}>Large</div>
-                </div>
-                <div className={css.weightList}>
-                  <div className={css.weightKg}>40+ Kg</div>
-                  <div className={css.weightType}>Gaint</div>
-                </div>
-              </div>
-              <div className={css.bottomButton}>
-                <Button>
-                  Search
-                </Button>
-              </div>
             </div>
             : null}
         </div>

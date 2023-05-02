@@ -18,9 +18,9 @@ class SelectSingleFilterPlain extends Component {
   }
 
   selectOption(option, e) {
-    const { queryParamNames, onSelect } = this.props;
+    const { queryParamNames, onSubmit} = this.props;
     const queryParamName = getQueryParamName(queryParamNames);
-    onSelect({ [queryParamName]: option });
+    onSubmit({ [queryParamName]: option });
 
     // blur event target if event is passed
     if (e && e.currentTarget) {
@@ -114,7 +114,7 @@ SelectSingleFilterPlain.propTypes = {
   className: string,
   queryParamNames: arrayOf(string).isRequired,
   label: node.isRequired,
-  onSelect: func.isRequired,
+  onSubmit: func.isRequired,
 
   options: arrayOf(
     shape({

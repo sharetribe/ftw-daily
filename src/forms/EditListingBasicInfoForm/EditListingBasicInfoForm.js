@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { compose } from 'redux';
 import { Form as FinalForm } from 'react-final-form';
 import { arrayOf, bool, func, shape, string } from 'prop-types';
@@ -20,7 +20,6 @@ import {
   FieldTextInput,
   FieldPhoneNumberInput,
   FieldBirthdayInput,
-  LocationAutocompleteInput,
   LocationAutocompleteInputField
 } from '../../components';
 
@@ -33,35 +32,23 @@ const EditListingBasicInfoFormComponent = props => (
     {...props}
     render={formRenderProps => {
       const {
-        categories,
-        className,
-        disabled,
         ready,
-        name,
+        disabled,
+        className,
         handleSubmit,
         intl,
-        onChange,
-        invalid,
-        pristine,
-        saveActionMsg,
-        filterConfig,
-        fieldId,
-        updated,
-        currentUser,
-        updateInProgress,
-        fetchErrors,
         values,
+        invalid,
+        updated,
+        pristine,
+        fetchErrors,
+        filterConfig,
+        saveActionMsg,
+        updateInProgress,
       } = formRenderProps;
 
-      console.log('values', values)
-
-
-      //console.log(' currentUser',  currentUser)
       const identity = v => v;
 
-
-
-      //console.log('validateBirthday', validateBirthday)
       const birthdateMessage = intl.formatMessage({ id: 'EditListingDescriptionForm.birthdate' });
       const birthdatePlaceholderMessage = intl.formatMessage({
         id: 'EditListingDescriptionForm.birthdatePlaceholder',
@@ -167,9 +154,6 @@ const EditListingBasicInfoFormComponent = props => (
         MIN_STRIPE_ACCOUNT_AGE
       );
 
-
-
-
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessageCreateListingDraft}
@@ -187,7 +171,7 @@ const EditListingBasicInfoFormComponent = props => (
             autoFocus
           />
 
-          <p  className={css.title}>{birthdateMessage}</p>
+          <p className={css.title}>{birthdateMessage}</p>
 
           <div className={css.formRow}>
             <FieldBirthdayInput
@@ -195,47 +179,18 @@ const EditListingBasicInfoFormComponent = props => (
               name="birthday"
               className={css.title}
               label={birthdayLabel}
-              // label={birthdateMessage}
               labelForMonth={birthdayLabelMonth}
               labelForYear={birthdayLabelYear}
               format={identity}
-              valueFromForm={values.birthday}
+              valueFromForm={values.birthday && values.birthday.day
+                ? new Date(`${values.birthday.year}-${values.birthday.month}-${values.birthday.day}`)
+                : new Date(values.birthday)}
               validate={validators.composeValidators(birthdayRequired, birthdayMinAge)}
             />
           </div>
 
-
-          {/* <FieldTextInput
-                      className={css.lastName}
-                      type="date"
-                      id="birthday"
-                     name="birthday"
-                      
-                      // valueFromForm={values.birthday}
-                      placeholder={birthdatePlaceholderMessage}
-                      label={birthdateMessage}
-                      //onChange={handleBirthdayChange}
-                      //validate={validators.composeValidators( minAgeRequired)}
-                      autoFocus
-                      //format={identity}
-         // valueFromForm={values.birthday}
-          validate={validators.composeValidators(birthdayRequired, birthdayMinAge)}
-                    /> */}
-          {/* <FieldBirthdayInput
-            id="birthday"
-            name="birthday"
-            className={css.title}
-            type="text"
-            label={birthdateMessage}
-            placeholder={birthdatePlaceholderMessage}
-            validate={composeValidators(required(birthdateRequiredMessage ),)}
-            
-            autoFocus
-          /> */}
           <div style={{ marginTop: '25px' }}>
-
             <LocationAutocompleteInputField
-
               className={css.loc}
               inputClassName={css.locationAutocompleteInput}
               iconClassName={css.locationAutocompleteInputIcon}
@@ -248,15 +203,15 @@ const EditListingBasicInfoFormComponent = props => (
               useDefaultPredictions={false}
               format={identity}
               valueFromForm={values.location}
-              validate={composeValidators(
-                //autocompleteSearchRequired(addressRequiredMessage),
-                //autocompletePlaceSelected(addressNotRecognizedMessage)
-              )}
+            // validate={composeValidators(
+            //   //autocompleteSearchRequired(addressRequiredMessage),
+            //   //autocompletePlaceSelected(addressNotRecognizedMessage)
+            // )}
             />
-
           </div>
-          <div style={{ marginTop: '25px' }}>
-            {/* <FieldTextInput
+
+          {/* <div style={{ marginTop: '25px' }}>
+            <FieldTextInput
             id="location"
             name="location"
             className={css.title}
@@ -266,8 +221,8 @@ const EditListingBasicInfoFormComponent = props => (
             
             validate={composeValidators(required(addressRequiredMessage))}
             autoFocus
-          /> */}
-          </div>
+          />
+          </div> */}
 
           <FieldTextInput
             id="email"
@@ -292,19 +247,12 @@ const EditListingBasicInfoFormComponent = props => (
             autoFocus
           />
 
-          {/* <CustomCategorySelectFieldMaybe
-            id="category"
-            name="category"
-            categories={categories}
-            intl={intl}
-          /> */}
-
-          <p> Service Setup</p>
+          <p>Service Setup</p>
           <p>Choose what service you wish to offer...</p>
           <div className={css.servicesSetup}>
             {options.map((st) => {
               return (
-                <div className={css.cardSelectPet}>
+                <div className={css.cardSelectPet} key={st.key}>
                   <FieldCheckbox
                     className={css.features}
                     id={st.key}
