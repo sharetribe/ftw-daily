@@ -108,7 +108,7 @@ export const EditListingPricingFormComponent = props => (
         : numberPet == "two" ? [1, 2] : [1];
       //console.log(values,"values");
       const [stayRange, setStayRange] = useState([7, 90]);
-      const [discountRange, setDiscountRange] = useState([0, 50]);
+      const [discountRange, setDiscountRange] = useState([1, 50]);
 
       const handlePriceChange = (value) => {
         setStayRange(value);
@@ -130,7 +130,7 @@ export const EditListingPricingFormComponent = props => (
               <FormattedMessage id="EditListingPricingForm.showListingFailed" />
             </p>
           ) : null}
-          {detail && detail.includes("overnightsStay") ? <> <p>Price for overnight stay</p>
+          {detail && detail.includes("overnightsStay") ? <>  <FormattedMessage id="EditListingPricingForm.priceovernight" />
             <div style={{ display: 'flex', gap: '20px' }}>
               {numberPetArray.map((st) =>
                 <FieldTextInput
@@ -144,13 +144,14 @@ export const EditListingPricingFormComponent = props => (
                   //currencyConfig={config.currencyConfig}
 
                   validate={priceValidators}
-                
+
                 />)}
             </div>
           </>
             : null}
           {detail && detail.includes("dayCareStay") ? <>
-            <p>Price for day stay</p>
+          <FormattedMessage id="EditListingPricingForm.priceday" />
+           
             <div style={{ display: 'flex', gap: '20px' }}>
               {numberPetArray.map((st) =>
                 <FieldTextInput
@@ -167,8 +168,8 @@ export const EditListingPricingFormComponent = props => (
             </div>
           </>
             : null}
-           
-          <p>Would you like to provide a discount rate for a stay longer than 7 days</p>
+ <FormattedMessage id="EditListingPricingForm.pricediscount" />
+          
           <div style={{ display: 'flex', gap: '20px' }}>
             {discount.map(num => {
               return (
@@ -225,7 +226,7 @@ export const EditListingPricingFormComponent = props => (
                   defaultValue={discountRange}
                   onChange={handleDiscountChange}
                 />
-                <div> ${discountRange[0]} - ${discountRange[1]}</div>
+                <div> {discountRange[0]}% - {discountRange[1]}%</div>
               </div>
             </>
           ) : null}

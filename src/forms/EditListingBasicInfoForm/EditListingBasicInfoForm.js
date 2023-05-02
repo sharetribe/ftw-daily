@@ -246,9 +246,9 @@ const EditListingBasicInfoFormComponent = props => (
             validate={composeValidators(required(phoneRequiredMessage))}
             autoFocus
           />
+          <FormattedMessage className={css.description} id="EditListingDescriptionForm.categoryLabel" />
+          <FormattedMessage className={css.description} id="EditListingDescriptionForm.categorytext" />
 
-          <p>Service Setup</p>
-          <p>Choose what service you wish to offer...</p>
           <div className={css.servicesSetup}>
             {options.map((st) => {
               return (

@@ -60,7 +60,8 @@ export const EditListingPoliciesFormComponent = props => (
 
          
 <div>
-  <p>Housing Conditions</p>
+<FormattedMessage  id="EditListingaboutpetForm.houseLabel" />
+  
 
   {
             housingConditions.map((st)=>{
@@ -74,7 +75,7 @@ export const EditListingPoliciesFormComponent = props => (
 
 
 <div>
-  <p>Pets in the home</p>
+<FormattedMessage  id="EditListingaboutpetForm.petLabel" />
 
   {
             petInHome.map((st)=>{

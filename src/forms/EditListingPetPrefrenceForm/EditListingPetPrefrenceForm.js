@@ -69,8 +69,8 @@ const EditListingPetPrefrenceFormComponent = props => (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessage}
           {errorMessageShowListing}
-
-          <p>Types of Pets</p>
+          <FormattedMessage  id="EditListingPetForm.categoryLabel" />
+         
           <div className={css.numberPets}>
             {typeOfpets.map(st => (
               <div className={css.cardSelectPet}>
@@ -85,7 +85,8 @@ const EditListingPetPrefrenceFormComponent = props => (
               </div>
             ))}
           </div>
-          <p>Number of Pets</p>
+          <FormattedMessage  id="EditListingPetForm.numberLabel" />
+        
           <div className={css.numberPets}>
             {numberOfPets.map(num => (
               <div className={css.cardSelectPet}>
@@ -105,7 +106,9 @@ const EditListingPetPrefrenceFormComponent = props => (
             (values.typeOfpets &&
               values.typeOfpets.filter(st => st == 'dog' && st == 'cat').length) ? (
             <div>
-              <p>Size of Dogs</p>
+                <FormattedMessage  id="EditListingPetForm.sizeLabel" />
+        
+              {/* <p>Size of Dogs</p> */}
               <div className={css.numberPets}>
                 {sizeOfdogs.map(num => (
                   <div className={css.cardSelectPet}>
