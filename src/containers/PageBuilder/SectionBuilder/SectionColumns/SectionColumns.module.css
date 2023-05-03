@@ -389,6 +389,7 @@
             &:nth-child(2) {
               display: flex;
               gap: 10px;
+              height: auto;
               padding-bottom: 10px;
 
               & button {
