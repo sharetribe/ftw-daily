@@ -357,6 +357,7 @@
           &:nth-child(4) {
             /* width: auto; */
             padding: 0;
+            width: 40% !important;
             /* background-color: pink; */
           }
 
