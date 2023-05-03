@@ -167,3 +167,46 @@
     width: 37.5vw;
   }
 }
+
+.dateSelect {
+  width: 100%;
+  padding: 0;
+  margin-top: 42px;
+  /* border-bottom: 1px solid #fff; */
+
+  & button {
+    border: 1.5px solid rgb(255 255 255);
+    border-radius: 10px;
+    background: #fff0;
+    height: 46px;
+    color: #fff;
+
+    &:hover {
+      text-decoration: none !important;
+      background-color: #E95629;
+      border: 1.5px solid rgb(255 255 255);
+    }
+
+    &:focus {
+      background: #fff0;
+      border: 1.5px solid rgb(255 255 255);
+      border-radius: 10px;
+    }
+  }
+
+  &>div {
+    /* position: relative; */
+    left: 0 !important;
+    /* width: 330px; */
+
+    & form {
+      &>div {
+        &:nth-child(2) {
+          & button {
+            color: #333;
+          }
+        }
+      }
+    }
+  }
+}

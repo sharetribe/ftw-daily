@@ -18,6 +18,8 @@ const SearchFiltersPrimaryComponent = props => {
     toggleSecondaryFiltersOpen,
     selectedSecondaryFiltersCount,
   } = props;
+  console.log(children, '&&&  &&& => children');
+  
 
   const hasNoResult = listingsAreLoaded && resultsCount === 0;
   const classes = classNames(rootClassName || css.root, className);

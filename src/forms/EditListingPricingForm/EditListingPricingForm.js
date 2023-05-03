@@ -15,7 +15,6 @@ import FieldRadioButtonComponent from '../../components/FieldRadioButton/FieldRa
 import {
   Button,
   Form,
-
   FieldTextInput,
 
 } from '../../components';
@@ -150,8 +149,8 @@ export const EditListingPricingFormComponent = props => (
           </>
             : null}
           {detail && detail.includes("dayCareStay") ? <>
-          <FormattedMessage id="EditListingPricingForm.priceday" />
-           
+            <FormattedMessage id="EditListingPricingForm.priceday" />
+
             <div style={{ display: 'flex', gap: '20px' }}>
               {numberPetArray.map((st) =>
                 <FieldTextInput
@@ -168,8 +167,8 @@ export const EditListingPricingFormComponent = props => (
             </div>
           </>
             : null}
- <FormattedMessage id="EditListingPricingForm.pricediscount" />
-          
+          <FormattedMessage id="EditListingPricingForm.pricediscount" />
+
           <div style={{ display: 'flex', gap: '20px' }}>
             {discount.map(num => {
               return (

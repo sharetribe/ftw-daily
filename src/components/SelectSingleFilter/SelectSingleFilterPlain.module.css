@@ -6,6 +6,11 @@
   border-bottom: 1px solid var(--matterColorNegative);
 }
 
+.sectionWrapper {
+  width: 100% !important;
+  /* background-color: blue; */
+}
+
 .filterLabel,
 .filterLabelSelected {
   composes: h3 from global;
@@ -148,4 +153,8 @@
   &:hover {
     color: var(--matterColor);
   }
+}
+
+.selectBox {
+  background-color: #E95629 !important;
 }

@@ -138,10 +138,10 @@ const SectionColumnsComponent = props => {
             options={options}
           />
           {sectionId == "intro" ?
-
-
             <div className={css.searchBox}>
               <MainPanelLandingPage
+                isSelect={true}
+                isDateSelect={true}
                 className={css.filterSearch}
                 urlQueryParams={validQueryParams}
                 //listings={listings}
