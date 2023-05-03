@@ -10,7 +10,6 @@ import css from './SectionContainer.module.css';
 // E.g: const SectionHero = props => (<SectionContainer><H1>Hello World!</H1></SectionContainer>);
 const SectionContainer = props => {
   const { className, rootClassName, id, as, children, appearance, options, sectionId, ...otherProps } = props;
-  //console.log(sectionId, '&&&  &&& => sectionId');
 
 
   const Tag = as || 'section';
