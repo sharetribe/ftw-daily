@@ -19,8 +19,8 @@ import {
 
 import css from './EditListingYourselfForm.module.css';
 
-const TITLE_MAX_LENGTH = 25;
-const TITLE_MAX50_LENGTH = 50;
+const TITLE_MAX_LENGTH = 500;
+const TITLE_MAX50_LENGTH = 500;
 
 const EditListingYourselfFormComponent = props => (
   <FinalForm
@@ -163,10 +163,10 @@ const EditListingYourselfFormComponent = props => (
             id="headline"
             name="headline"
             className={css.title}
-            type="text"
+            type="textarea"
             label={headlineMessage}
             placeholder={headlinePlaceholderMessage}
-             //validate={composeValidators(required(headlineRequiredMessage))}
+             validate={validators.composeValidators(required(headlineRequiredMessage))}
           
             autoFocus
           />
@@ -174,16 +174,18 @@ const EditListingYourselfFormComponent = props => (
           <FieldTextInput
             id="service"
             name="service"
+            type="textarea"
             className={css.description}
             label={serviceMessage}
             placeholder={servicePlaceholderMessage}
-           // validate={composeValidators(required(serviceRequiredMessage), maxLength25Message)}
-           validate={validators.composeValidators(emailRequired, emailValid)}
+            validate={validators.composeValidators(required(serviceRequiredMessage), maxLength25Message)}
+           
           />
 
           <FieldTextInput
             id="schedule"
             name="schedule"
+            type="textarea"
             className={css.description}
             label={scheduleMessage}
             placeholder={schedulePlaceholderMessage}
@@ -211,6 +213,7 @@ const EditListingYourselfFormComponent = props => (
               <FieldTextInput
               id="yespet"
               name="yespet"
+              type="textarea"
               className={css.description}
               label={yespetMessage}
               placeholder={yespetPlaceholderMessage}

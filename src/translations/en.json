@@ -176,7 +176,7 @@
   "EditListingDescriptionForm.phonePlaceholder": "XXXX XXX XXX",
  
   "EditListingDescriptionForm.descriptionRequired": "A email is required.",
-  "EditListingDescriptionForm.maxLength": "Must be {maxLength} characters or less",
+  "EditListingDescriptionForm.maxLength": "Must be {maxLength} word or less",
   "EditListingDescriptionForm.showListingFailed": "Fetching listing data failed",
   "EditListingDescriptionForm.birthdate": "Add your date of birth",
   "EditListingDescriptionForm.birthdatePlaceholder": "What's your Birth Date",
