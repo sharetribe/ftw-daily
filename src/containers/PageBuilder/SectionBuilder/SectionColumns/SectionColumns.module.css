@@ -52,15 +52,15 @@
 }
 
 .introSection {
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
 
-  & > div {
+  &>div {
     &:nth-child(1) {
-      order: 2;
+      order: 1;
     }
 
     &:nth-child(2) {
-      order: 1;
+      order: 2;
     }
   }
 
@@ -71,10 +71,10 @@
 
 .searchBox {
   background-color: #000000c4;
-  padding: 20px;
+  padding: 30px;
   border-radius: 5px;
   position: relative;
-  width: 100%;
+  width: 65%;
 
   & label {
     color: #fff;
@@ -290,6 +290,263 @@
     /* background: #000; */
   }
 }
+
 .filterSearch {
-  background-color: red;
+  padding: 0 !important;
+
+  &>form {
+    background-color: #fff;
+    margin: 0;
+    border-radius: 10px;
+    padding: 0 15px;
+
+    &>div {
+      &>div {
+        &:nth-child(1) {
+          border-radius: 10px 0 0 10px
+        }
+      }
+    }
+  }
+
+  &>div {
+    background-color: #00000000;
+    padding: 0;
+
+    &:nth-child(3) {
+      margin: 37px 0 0;
+
+      & button {
+        width: 200px;
+        background-color: #E95629;
+        color: #fff;
+      }
+    }
+
+    &>div {
+      &:nth-child(1) {
+        margin: 0;
+      }
+
+      &:nth-child(2) {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+
+        &>div {
+          width: 100%;
+          margin: 0;
+          border: none;
+          padding: 0;
+
+          &:nth-child(1) {
+            width: auto;
+            /* background-color: red; */
+          }
+
+          &:nth-child(2) {
+            width: auto;
+            /* background-color: green; */
+          }
+
+          &:nth-child(3) {
+            width: auto;
+            /* background-color: pink; */
+          }
+
+          &:nth-child(4) {
+            /* width: auto; */
+            padding: 0;
+            /* background-color: pink; */
+          }
+
+          &>div {
+            & form {
+              &>div {
+                margin-bottom: 0;
+              }
+            }
+
+            &:nth-child(1) {
+              & button {
+                &:nth-child(1) {
+                  &:hover {
+                    text-decoration-color: #fff !important;
+                    text-decoration: underline;
+                  }
+
+                  & span {
+                    color: #fff;
+                  }
+                }
+
+                &:nth-child(2) {
+                  color: #fff;
+                }
+              }
+            }
+
+            &:nth-child(2) {
+              display: flex;
+              gap: 10px;
+              padding-bottom: 10px;
+
+              & button {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #fff;
+                width: fit-content;
+                border-radius: 10px;
+                height: 46px;
+                padding: 5px 20px;
+                background: rgba(109, 80, 114, 0.1);
+                border: 1.5px solid rgb(255 255 255);
+              }
+
+              & fieldset {
+                margin: 0;
+                border: none;
+                padding: 0;
+
+                & ul {
+                  display: flex;
+                  gap: 10px;
+                }
+
+                & li {
+                  position: relative;
+                  cursor: pointer;
+                  padding: 0;
+
+                  @media(max-width: 800px) {
+                    width: 100%;
+                  }
+
+                  & {
+                    &:hover {
+                      cursor: pointer;
+                      transition: all ease 0.5s;
+
+                      &>span {
+                        &>input {
+                          cursor: pointer;
+                        }
+
+                        &>label {
+                          cursor: pointer;
+                          background-color: #E95629;
+
+                          &>span {
+                            color: #fff;
+                          }
+                        }
+                      }
+                    }
+
+                    &>span {
+                      &>input {
+
+                        &:checked+label,
+                        &:hover {
+                          background-color: #E95629;
+                        }
+                      }
+                    }
+                  }
+
+                  &:last-child {
+                    margin-bottom: 0;
+                  }
+
+                  &>span {
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+
+                    &>input {
+                      position: absolute;
+                      top: 0;
+                      left: 0;
+                      opacity: 0;
+                      width: 100%;
+                      height: 100%;
+
+                      &:checked+label,
+                      &:hover {
+                        width: 100%;
+                        color: #fff;
+                        font-weight: 500;
+                        justify-content: center;
+
+                        &>span {
+                          color: #fff !important;
+                          font-weight: 500;
+
+                          &:first-child {
+                            opacity: 0;
+                          }
+                        }
+                      }
+                    }
+
+                    &>label {
+                      background: rgba(109, 80, 114, 0.1);
+                      border: 1.5px solid rgb(255 255 255);
+                      border-radius: 10px;
+                      text-align: center;
+                      height: 48px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      cursor: pointer;
+                      color: #525961;
+                      width: 100%;
+                      height: 100%;
+                      padding: 10px;
+                      margin: 0;
+                      min-width: 120px;
+                      min-height: 40px;
+
+                      &>span {
+                        font-weight: 500;
+                        font-size: 14px;
+                        line-height: 23px;
+                        text-transform: capitalize;
+                        height: unset;
+                        margin: 0;
+                        color: #fff;
+
+                        &:first-child {
+                          opacity: 0;
+                          width: 0;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            &:nth-child(3) {
+              /* background-color: red; */
+
+              & fieldset {
+                margin: 0;
+                border: none;
+                padding: 0;
+
+                & ul {
+                  display: flex;
+                  gap: 10px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

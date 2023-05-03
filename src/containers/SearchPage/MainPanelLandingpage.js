@@ -64,7 +64,7 @@ class MainPanelLandingPage extends Component {
   }
 
 
-  
+
 
   // Apply the filters by redirecting to SearchPage with new filters.
   applyFilters() {
@@ -121,7 +121,7 @@ class MainPanelLandingPage extends Component {
 
   getHandleChangedValueFn(useHistoryPush) {
     const { urlQueryParams, history, sortConfig, filterConfig } = this.props;
-    console.log(useHistoryPush, '^^^^ ^^^^ => useHistoryPush');
+
 
     return updatedURLParams => {
       const updater = prevState => {
@@ -135,7 +135,7 @@ class MainPanelLandingPage extends Component {
           currentQueryParams: { ...mergedQueryParams, ...updatedURLParams, address, bounds },
         };
       };
-     
+
 
 
       const callback = () => {
@@ -189,9 +189,11 @@ class MainPanelLandingPage extends Component {
       filterConfig,
       sortConfig,
       onSearchSubmit,
+      isSelect,
+      isDateSelect,
     } = this.props;
 
-const landingfilter = filterConfig.filter(e => e.id != "petInHome" && e.id !=  "housingConditions" )
+    const landingfilter = filterConfig.filter(e => e.id != "petInHome" && e.id != "housingConditions")
 
     const primaryFilters = landingfilter.filter((f) => {
       let checked = true;
@@ -264,7 +266,6 @@ const landingfilter = filterConfig.filter(e => e.id != "petInHome" && e.id !=  "
     };
 
     const classes = classNames(rootClassName || css.searchResultContainer, className);
-    console.log(this.state.currentQueryParams, '^^^^ ^^^^ => this.state.currentQueryParams');
 
     return (
       <div className={classes}>
@@ -283,6 +284,8 @@ const landingfilter = filterConfig.filter(e => e.id != "petInHome" && e.id !=  "
                 key={`SearchFiltersPrimary.${config.id}`}
                 idPrefix="SearchFiltersPrimary"
                 PageName="LandingPage"
+                isSelect={isSelect}
+                isDateSelect={isDateSelect}
                 filterConfig={config}
                 urlQueryParams={urlQueryParams}
                 initialValues={this.initialValues}
@@ -292,114 +295,37 @@ const landingfilter = filterConfig.filter(e => e.id != "petInHome" && e.id !=  "
             );
           })}
         </SearchFiltersPrimary>
-
-       
-    <TopbarSearchForm
-      className={css.searchLink}
-      desktopInputRoot={css.topbarSearchWithLeftPadding}
-      onSubmit={(e) => {this.setState({ currentQueryParams: { ...this.state.currentQueryParams, ...e } }) }}
-      initialValues={initialSearchFormValues}
-    />
-    
-  
-
-        {/* <div className={css.formRow}>
-          <div className={css.selectForm}>
-            <label>Type of Pet</label>
-            <select>
-              <option>Dog </option>
-              <option>Cat</option>
-            </select>
-          </div>
-          <div className={css.selectForm}>
-            <label>Number of Pets</label>
-            <select>
-              <option>1 </option>
-              <option>2</option>
-              <option>3+</option>
-            </select>
-          </div>
-        </div>
-        <div className={css.selectForm}>
-          <label>Type of Hosting Services</label>
-          <select>
-            <option>Overnight Stay	</option>
-            <option>Day Care Stay	</option>
-          </select>
-        </div>
-        <div className={css.daysCalender}>
-          <div className={css.dateInput}>
-            <label>Start date</label>
-            <div className={css.dateInputBox}>
-              <input
-                type='date'
-              />
-            </div>
-          </div>
-          <div className={css.dateInput}>
-            <label>End date</label>
-            <div className={css.dateInputBox}>
-              <input
-                type='date'
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className={css.locationForm}>
-          <label>Location</label>
-          <div className={css.inputBox}>
-            <input
-              type='text'
-              placeholder='Location (Postcode)'
-            />
-          </div>
-        </div>
-        <div className={css.weightBox}>
-          <div className={css.weightList}>
-            <div className={css.weightKg}>0-6 Kg</div>
-            <div className={css.weightType}>Small</div>
-          </div>
-          <div className={css.weightList}>
-            <div className={css.weightKg}>7-20 Kgs</div>
-            <div className={css.weightType}>Medium</div>
-          </div>
-          <div className={css.weightList}>
-            <div className={css.weightKg}>20-40 Kgs</div>
-            <div className={css.weightType}>Large</div>
-          </div>
-          <div className={css.weightList}>
-            <div className={css.weightKg}>40+ Kg</div>
-            <div className={css.weightType}>Gaint</div>
-          </div>
-        </div> */}
+        <TopbarSearchForm
+          className={css.searchLink}
+          desktopInputRoot={css.topbarSearchWithLeftPadding}
+          onSubmit={(e) => { this.setState({ currentQueryParams: { ...this.state.currentQueryParams, ...e } }) }}
+          initialValues={initialSearchFormValues}
+        />
         <div className={css.bottomButton}>
           <Button
             onClick={() => {
-              if(this.state.currentQueryParams.location){
+              if (this.state.currentQueryParams.location) {
                 const { currentSearchParams } = this.props;
-              const { search, selectedPlace } = this.state.currentQueryParams.location;
-              console.log(this.state.currentQueryParams, '^^^^ ^^^^ => this.state.currentQueryParams');
-              
-              const { history } = this.props;
-              const { origin, bounds } = selectedPlace;
-              const originMaybe = config.sortSearchByDistance ? { origin } : {};
-              const searchParams = {
-                ...this.state.currentQueryParams,
-                ...currentSearchParams,
-                ...originMaybe,
-                address: search,
-                bounds,
-              };
-              console.log(searchParams, '^^^^ ^^^^ => searchParams');
-              
-              history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, searchParams));
-              }else{
+                const { search, selectedPlace } = this.state.currentQueryParams.location;
+
+                const { history } = this.props;
+                const { origin, bounds } = selectedPlace;
+                const originMaybe = config.sortSearchByDistance ? { origin } : {};
+                const searchParams = {
+                  ...this.state.currentQueryParams,
+                  ...currentSearchParams,
+                  ...originMaybe,
+                  address: search,
+                  bounds,
+                };
+
+                history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, searchParams));
+              } else {
 
                 history.push(createResourceLocatorString('SearchPage', routeConfiguration(), {}, this.state.currentQueryParams))
               }
-          
-          }}
+
+            }}
           >
             Search
           </Button>

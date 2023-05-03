@@ -18,7 +18,7 @@ class SelectSingleFilterPlain extends Component {
   }
 
   selectOption(option, e) {
-    const { queryParamNames, onSubmit} = this.props;
+    const { queryParamNames, onSubmit } = this.props;
     const queryParamName = getQueryParamName(queryParamNames);
     onSubmit({ [queryParamName]: option });
 
@@ -42,6 +42,7 @@ class SelectSingleFilterPlain extends Component {
       initialValues,
       twoColumns,
       useBullets,
+      isSelect,
     } = this.props;
 
     const queryParamName = getQueryParamName(queryParamNames);
@@ -59,8 +60,10 @@ class SelectSingleFilterPlain extends Component {
 
     const classes = classNames(rootClassName || css.root, className);
 
+
+
     return (
-      <div className={classes}>
+      <div className={isSelect ? css.sectionWrapper : classes}>
         <div className={labelClass}>
           <button className={css.labelButton} onClick={this.toggleIsOpen}>
             <span className={labelClass}>{label}</span>
@@ -77,20 +80,21 @@ class SelectSingleFilterPlain extends Component {
             // menu item selected bullet or border class
             const optionBorderClass = hasBullets
               ? classNames({
-                  [css.optionBulletSelected]: selected,
-                  [css.optionBullet]: !selected,
-                })
+                [css.optionBulletSelected]: selected,
+                [css.optionBullet]: !selected,
+              })
               : classNames({
-                  [css.optionBorderSelected]: selected,
-                  [css.optionBorder]: !selected,
-                });
+                [css.optionBorderSelected]: selected,
+                [css.optionBorder]: !selected,
+              });
+            const checkSelect = isSelect && selected;
             return (
               <button
                 key={option.key}
-                className={optionClass}
+                className={checkSelect ? css.selectBox : optionClass}
                 onClick={() => this.selectOption(option.key)}
               >
-                <span className={optionBorderClass} />
+                <span className={isSelect ? null : optionBorderClass} />
                 {option.label}
               </button>
             );

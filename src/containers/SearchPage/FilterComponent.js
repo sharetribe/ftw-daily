@@ -6,6 +6,7 @@ import {
   SelectSingleFilter,
   SelectMultipleFilter,
 } from '../../components';
+import css from './SearchPage.module.css';
 
 /**
  * FilterComponent is used to map configured filter types
@@ -20,10 +21,11 @@ const FilterComponent = props => {
     initialValues,
     getHandleChangedValueFn,
     pageName,
+    isSelect,
+    isDateSelect,
     ...rest
   } = props;
-  console.log(PageName, '^^^^ ^^^^ => PageName');
-  
+
   const { id, type, queryParamNames, label, config } = filterConfig;
   const { liveEdit, showAsPopup } = rest;
 
@@ -37,12 +39,13 @@ const FilterComponent = props => {
       return (
         <SelectSingleFilter
           id={componentId}
+          isSelect={isSelect}
           label={label}
           queryParamNames={queryParamNames}
           initialValues={initialValues(queryParamNames)}
           PageName={PageName}
           // onSelect={(e) => PageName == "LandingPage" ? getHandleChangedValueFn(e) : getHandleChangedValueFn(useHistoryPush)}
-          onSubmit={ pageName != "SearchPage" ?  (e)=> getHandleChangedValueFn(e) : getHandleChangedValueFn(useHistoryPush)}
+          onSubmit={pageName != "SearchPage" ? (e) => getHandleChangedValueFn(e) : getHandleChangedValueFn(useHistoryPush)}
           {...config}
           {...rest}
         />
@@ -56,7 +59,7 @@ const FilterComponent = props => {
           name={name}
           queryParamNames={queryParamNames}
           initialValues={initialValues(queryParamNames)}
-          onSubmit={ pageName != "SearchPage" ?  (e)=> getHandleChangedValueFn(e) : getHandleChangedValueFn(useHistoryPush)}
+          onSubmit={pageName != "SearchPage" ? (e) => getHandleChangedValueFn(e) : getHandleChangedValueFn(useHistoryPush)}
           {...config}
           {...rest}
         />
@@ -71,7 +74,9 @@ const FilterComponent = props => {
           // filtersFor={Landingpage}
           initialValues={initialValues(queryParamNames)}
           // onSelect={(e) => PageName == "LandingPage" ? getHandleChangedValueFn(useHistoryPush) : getHandleChangedValueFn(e)}
-          onSubmit={ pageName != "SearchPage" ?  (e)=> getHandleChangedValueFn(e) : getHandleChangedValueFn(useHistoryPush)}
+          onSubmit={pageName != "SearchPage" ? (e) => getHandleChangedValueFn(e) : getHandleChangedValueFn(useHistoryPush)}
+          isDateSelect={isDateSelect}
+          className={isDateSelect ? css.dateSelect : null}
           {...config}
           {...rest}
         />
@@ -79,21 +84,21 @@ const FilterComponent = props => {
     }
     case 'PriceFilter': {
       return (
-        PageName == "LandingPage" 
-        ? null: <PriceFilter
-          id={componentId}
-          label={label}
-          queryParamNames={queryParamNames}
-          initialValues={initialValues(queryParamNames)}
-          onSubmit={ pageName != "SearchPage" ?  (e)=> getHandleChangedValueFn(e) : getHandleChangedValueFn(useHistoryPush)}
-          {...config}
-          {...rest}
-        /> 
-        );
+        PageName == "LandingPage"
+          ? null : <PriceFilter
+            id={componentId}
+            label={label}
+            queryParamNames={queryParamNames}
+            initialValues={initialValues(queryParamNames)}
+            onSubmit={pageName != "SearchPage" ? (e) => getHandleChangedValueFn(e) : getHandleChangedValueFn(useHistoryPush)}
+            {...config}
+            {...rest}
+          />
+      );
     }
-    
-    
-   
+
+
+
     default:
       return null;
   }
