@@ -61,13 +61,13 @@ const TopbarDesktop = props => {
   const classes = classNames(rootClassName || css.root, className);
 
   const search = (
-    // <TopbarSearchForm
-    //   className={css.searchLink}
-    //   desktopInputRoot={css.topbarSearchWithLeftPadding}
-    //   onSubmit={onSearchSubmit}
-    //   initialValues={initialSearchFormValues}
-    // />
-    <></>
+    <TopbarSearchForm
+      className={css.searchLink}
+      desktopInputRoot={css.topbarSearchWithLeftPadding}
+      onSubmit={onSearchSubmit}
+      initialValues={initialSearchFormValues}
+    />
+    
     
   );
 

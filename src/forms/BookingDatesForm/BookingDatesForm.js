@@ -54,18 +54,18 @@ export class BookingDatesFormComponent extends Component {
   // In case you add more fields to the form, make sure you add
   // the values here to the bookingData object.
   handleOnChange(formValues) {
-    const { startDate, endDate  } =
+    const { startDate, endDate } =
       formValues.values && formValues.values.bookingDates ? formValues.values.bookingDates : {};
-     console.log(formValues, '^^^^ ^^^^ => formValues');
-      const {serviceSetup}=formValues.values;
-      const {numberOfPets}=formValues.values;
-      
+    console.log(formValues, '^^^^ ^^^^ => formValues');
+    const { serviceSetup } = formValues.values;
+    const { numberOfPets } = formValues.values;
+
     const listingId = this.props.listingId;
     const isOwnListing = this.props.isOwnListing;
 
-    if (startDate && endDate && !this.props.fetchLineItemsInProgress ) {
+    if (startDate && endDate && !this.props.fetchLineItemsInProgress) {
       this.props.onFetchTransactionLineItems({
-        bookingData: { startDate, endDate,serviceSetup,numberOfPets},
+        bookingData: { startDate, endDate, serviceSetup, numberOfPets },
         listingId,
         isOwnListing,
       });
@@ -130,10 +130,10 @@ export class BookingDatesFormComponent extends Component {
           //console.log(numberPet, numberPet)
 
           const numberPetArray = numberPet && numberPet == "three" ? [1, 2, 3]
-          : numberPet == "two" ? [1, 2] : [1];
+            : numberPet == "two" ? [1, 2] : [1];
 
           const detail = listing?.attributes?.publicData?.serviceSetup;
-         // console.log('detail', detail)
+          // console.log('detail', detail)
 
           const phoneRequiredMessage = intl.formatMessage({
             id: 'EditListingDescriptionForm.phoneRequired',
@@ -168,11 +168,11 @@ export class BookingDatesFormComponent extends Component {
           const bookingData =
             startDate && endDate
               ? {
-                  unitType,
-                  dayUnitType,
-                  startDate,
-                  endDate,
-                }
+                unitType,
+                dayUnitType,
+                startDate,
+                endDate,
+              }
               : null;
 
           const showEstimatedBreakdown =
@@ -226,57 +226,35 @@ export class BookingDatesFormComponent extends Component {
                   this.handleOnChange(values);
                 }}
               />
-              {/* <p>hello</p> */}
-             
-            
-          {/* <p>Choose what service you wish to offers...</p>
-          {
-            options.map((st)=>{
-              return(
-               <FieldCheckbox className={css.features} id={st.key} name={"serviceSetup"} value={st.key} label={st.label} 
-                validate={composeValidators(required(phoneRequiredMessage))}
-               autoFocus/>
-              )
-            })
-          } */}
-  <p>Choose what service you wish to offers...</p>
-  {
-            detail.map((st)=>{
-              return(
-               <FieldCheckbox className={css.features} id={st} name={"serviceSetup"} value={st} label={st} 
-                //validate={composeValidators(required(phoneRequiredMessage))}
-               autoFocus/>
-              )
-            })
-          }
-{/* <FieldSelect 
-              id="serviceSetup"
-              name="serviceSetup"
-              label={"serviceSetup"}
-              >
-                 <option  value={""}>select</option>
-                {detail.map((st)=>{
-                  return(
-                    <option key={st} value={st}>{st}</option>
-                  )
-                })}
-              </FieldSelect>  */}
-          
-          {/* <p>number of pets</p> */}
 
-              <FieldSelect 
-              id="numberOfPets"
-              name="numberOfPets"
-              label={"numberOfPets"}
+              {/* <p>Choose what service you wish to offers...</p> */}
+
+              <FormattedMessage className={css.description} id="EditListingDescriptionForm.categoryLabel" />
+              <FormattedMessage className={css.description} id="EditListingDescriptionForm.categorytext" />
+              {
+                detail.map((st) => {
+                  return (
+                    <FieldCheckbox className={css.features} id={st} name={"serviceSetup"} value={st} label={st}
+
+                      autoFocus />
+                  )
+                })
+              }
+
+
+              <FieldSelect
+                id="numberOfPets"
+                name="numberOfPets"
+                label={"Number Of Pets"}
               >
-                 <option  value={""}>select</option>
-                {numberPetArray.map((st)=>{
-                  return(
+                <option value={""}>select</option>
+                {numberPetArray.map((st) => {
+                  return (
                     <option key={st} value={st}>{st}</option>
                   )
                 })}
               </FieldSelect>
-               
+
               <FieldDateRangeInput
                 className={css.bookingDates}
                 name="bookingDates"

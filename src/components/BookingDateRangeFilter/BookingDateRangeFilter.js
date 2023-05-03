@@ -130,7 +130,7 @@ export class BookingDateRangeFilterComponent extends Component {
         {...rest}
       >
         <FieldDateRangeInput
-          name="dates"
+           name="dates"
           controllerRef={node => {
             this.popupControllerRef = node;
           }}
