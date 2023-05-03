@@ -34,7 +34,6 @@ export const TopbarContainerComponent = props => {
     ...rest
   } = props;
 
-  //console.log('currentUserHasOneListings', currentUserHasOneListings)
   return (
     <Topbar
       authInProgress={authInProgress}
@@ -114,8 +113,6 @@ const mapStateToProps = state => {
     currentUserListing,
     currentUserListingFetched
   } = state.user;
- /// console.log(currentUserListingFetched, '^^^^ ^^^^ => currentUserListingFetched');
-  //console.log(state,currentUserHasOneListings, '^^^^ ^^^^ => currentUserHasListings');
   
   const hasGenericError = !!(logoutError || hasCurrentUserErrors(state));
   return {
