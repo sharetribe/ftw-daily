@@ -109,6 +109,7 @@ class FilterPopup extends Component {
       initialValues,
       keepDirtyOnReinitialize,
       contentPlacementOffset,
+      isDateSelect
     } = this.props;
 
     const classes = classNames(rootClassName || css.root, className);
@@ -128,6 +129,7 @@ class FilterPopup extends Component {
             this.filter = node;
           }}
         >
+          {isDateSelect ? <div className={css.dateLabelName}>Booking Date</div> : null}
           <button
             className={classNames(labelStyles, labelMaxWidthStyles)}
             style={labelMaxWidthMaybe}

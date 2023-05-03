@@ -10,8 +10,8 @@ const getDatesQueryParamName = queryParamNames => {
   return Array.isArray(queryParamNames)
     ? queryParamNames[0]
     : typeof queryParamNames === 'string'
-    ? queryParamNames
-    : 'dates';
+      ? queryParamNames
+      : 'dates';
 };
 
 // Parse query parameter, which should look like "2020-05-28,2020-05-31"
@@ -51,6 +51,7 @@ export class BookingDateRangeFilterComponent extends Component {
       queryParamNames,
       label,
       intl,
+      isDateSelect,
       ...rest
     } = this.props;
 
@@ -74,25 +75,25 @@ export class BookingDateRangeFilterComponent extends Component {
 
     const labelForPlain = isSelected
       ? intl.formatMessage(
-          { id: 'BookingDateRangeFilter.labelSelectedPlain' },
-          {
-            dates: `${formattedStartDate} - ${formattedEndDate}`,
-          }
-        )
+        { id: 'BookingDateRangeFilter.labelSelectedPlain' },
+        {
+          dates: `${formattedStartDate} - ${formattedEndDate}`,
+        }
+      )
       : label
-      ? label
-      : intl.formatMessage({ id: 'BookingDateRangeFilter.labelPlain' });
+        ? label
+        : intl.formatMessage({ id: 'BookingDateRangeFilter.labelPlain' });
 
     const labelForPopup = isSelected
       ? intl.formatMessage(
-          { id: 'BookingDateRangeFilter.labelSelectedPopup' },
-          {
-            dates: `${formattedStartDate} - ${formattedEndDate}`,
-          }
-        )
+        { id: 'BookingDateRangeFilter.labelSelectedPopup' },
+        {
+          dates: `${formattedStartDate} - ${formattedEndDate}`,
+        }
+      )
       : label
-      ? label
-      : intl.formatMessage({ id: 'BookingDateRangeFilter.labelPopup' });
+        ? label
+        : intl.formatMessage({ id: 'BookingDateRangeFilter.labelPopup' });
 
     const handleSubmit = values => {
       onSubmit(formatValue(values, datesQueryParamName));
@@ -114,28 +115,31 @@ export class BookingDateRangeFilterComponent extends Component {
         : {};
 
     return showAsPopup ? (
-      <FilterPopup
-        className={className}
-        rootClassName={rootClassName}
-        popupClassName={css.popupSize}
-        label={labelForPopup}
-        isSelected={isSelected}
-        id={`${id}.popup`}
-        showAsPopup
-        contentPlacementOffset={contentPlacementOffset}
-        onSubmit={handleSubmit}
-        {...onClearPopupMaybe}
-        {...onCancelPopupMaybe}
-        initialValues={initialDates}
-        {...rest}
-      >
-        <FieldDateRangeInput
-           name="dates"
-          controllerRef={node => {
-            this.popupControllerRef = node;
-          }}
-        />
-      </FilterPopup>
+      <div>
+        <FilterPopup
+          className={className}
+          rootClassName={rootClassName}
+          popupClassName={css.popupSize}
+          label={labelForPopup}
+          isSelected={isSelected}
+          isDateSelect={isDateSelect}
+          id={`${id}.popup`}
+          showAsPopup
+          contentPlacementOffset={contentPlacementOffset}
+          onSubmit={handleSubmit}
+          {...onClearPopupMaybe}
+          {...onCancelPopupMaybe}
+          initialValues={initialDates}
+          {...rest}
+        >
+          <FieldDateRangeInput
+            name="dates"
+            controllerRef={node => {
+              this.popupControllerRef = node;
+            }}
+          />
+        </FilterPopup>
+      </div>
     ) : (
       <FilterPlain
         className={className}

@@ -39,6 +39,7 @@
     border: 1px solid var(--marketplaceColorDark);
   }
 }
+
 .labelEllipsis {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -77,4 +78,11 @@
   visibility: visible;
   opacity: 1;
   pointer-events: auto;
+}
+
+.dateLabelName {
+  color: #fff;
+  margin-top: 0;
+  margin-bottom: 12px;
+  padding: 4px 0 2px 0;
 }

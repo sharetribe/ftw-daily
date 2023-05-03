@@ -12,7 +12,10 @@
 }
 
 .filters {
-  & > *:not(:last-child) {
+  display: flex;
+  flex-wrap: wrap;
+
+  &>*:not(:last-child) {
     margin-right: 8px;
     margin-bottom: 8px;
     height: auto;

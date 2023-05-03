@@ -171,7 +171,7 @@ const EditListingBasicInfoFormComponent = props => (
             autoFocus
           />
 
-          <p className={css.title}>{birthdateMessage}</p>
+          <label className={css.title}>{birthdateMessage}</label>
 
           <div className={css.formRow}>
             <FieldBirthdayInput
@@ -246,8 +246,12 @@ const EditListingBasicInfoFormComponent = props => (
             validate={composeValidators(required(phoneRequiredMessage))}
             autoFocus
           />
-          <FormattedMessage className={css.description} id="EditListingDescriptionForm.categoryLabel" />
-          <FormattedMessage className={css.description} id="EditListingDescriptionForm.categorytext" />
+          <div className={css.serviceLabel}>
+            <FormattedMessage className={css.description} id="EditListingDescriptionForm.categoryLabel" />
+          </div>
+          <div className={css.serviceLabel}>
+            <FormattedMessage className={css.description} id="EditListingDescriptionForm.categorytext" />
+          </div>
 
           <div className={css.servicesSetup}>
             {options.map((st) => {

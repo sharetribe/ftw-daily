@@ -171,7 +171,7 @@
 .dateSelect {
   width: 100%;
   padding: 0;
-  margin-top: 42px;
+  margin-top: 0;
   /* border-bottom: 1px solid #fff; */
 
   & button {
@@ -195,9 +195,11 @@
   }
 
   &>div {
-    /* position: relative; */
     left: 0 !important;
-    /* width: 330px; */
+    margin-bottom: 12px;
+    font-size: 18px;
+    line-height: 24px;
+
 
     & form {
       &>div {

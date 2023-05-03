@@ -185,3 +185,13 @@
   display: flex;
   gap: 10px;
 }
+
+.serviceLabel {
+  font-weight: var(--fontWeightSemiBold);
+  line-height: 16px;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 6px;
+  padding-bottom: 2px;
+  font-size: 14px;
+}

@@ -314,10 +314,10 @@
     padding: 0;
 
     &:nth-child(3) {
-      margin: 37px 0 0;
+      margin: 15px 0 0;
 
       & button {
-        width: 200px;
+        width: 100%;
         background-color: #E95629;
         color: #fff;
       }
