@@ -203,11 +203,30 @@ class MainPanelLandingPage extends Component {
           checked = true;
         }
 
-      } else if (f.id == "dates") {
-        checked = false;
-        if (this.state.currentQueryParams && this.state.currentQueryParams.pub_serviceSetup && this.state.currentQueryParams.pub_serviceSetup.search("overnightsStay") > -1) {
-          checked = true;
+      }
+      //  else if (f.id == "dates") {
+      //   checked = false;
+      //   if (this.state.currentQueryParams && this.state.currentQueryParams.pub_serviceSetup && this.state.currentQueryParams.pub_serviceSetup.search("overnightsStay") > -1) {
+      //     checked = true;
+      //   }
+      // }
+
+      else if (this.state.currentQueryParams && this.state.currentQueryParams.pub_serviceSetup && this.state.currentQueryParams.pub_serviceSetup.search("dayCareStay") > -1) {
+        if (f.id == "typeOfPets") {
+          f.config.options = [{
+            key: 'dog',
+            label: 'Dog',
+          }];
         }
+      } else if (f.id == "typeOfPets") {
+        f.config.options = [{
+          key: 'dog',
+          label: 'Dog',
+        },
+        {
+          key: 'cat',
+          label: 'Cat',
+        }];
       }
       return f.group === 'primary' && checked;
     });
@@ -355,14 +374,14 @@ MainPanelLandingPage.propTypes = {
   listings: array,
   searchInProgress: bool.isRequired,
   searchListingsError: propTypes.error,
-  searchParamsAreInSync: bool.isRequired,
-  onActivateListing: func.isRequired,
+  // searchParamsAreInSync: bool.isRequired,
+  // onActivateListing: func.isRequired,
   onManageDisableScrolling: func.isRequired,
-  onOpenModal: func.isRequired,
-  onCloseModal: func.isRequired,
-  onMapIconClick: func.isRequired,
-  pagination: propTypes.pagination,
-  onSearchSubmit: func.isRequired,
+  // onOpenModal: func.isRequired,
+  // onCloseModal: func.isRequired,
+  // onMapIconClick: func.isRequired,
+  // pagination: propTypes.pagination,
+  // onSearchSubmit: func.isRequired,
   initialSearchFormValues: object,
   searchParamsForPagination: object,
   // showAsModalMaxWidth: number.isRequired,
@@ -375,3 +394,4 @@ MainPanelLandingPage.propTypes = {
 };
 
 export default MainPanelLandingPage;
+

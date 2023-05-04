@@ -42,7 +42,7 @@ const EditListingPetPrefrencePanel = props => {
   );
 
   const amenities = publicData && publicData.amenities;
-  const initialValues = { typeOfpets: publicData.typeOfpets, numberOfPets: publicData.numberOfPets, sizeOfdogs: publicData.sizeOfdogs };
+  const initialValues = { typeOfPets: publicData.typeOfPets, numberOfPets: publicData.numberOfPets, sizeOfdogs: publicData.sizeOfdogs };
 
   return (
     <div className={classes}>
@@ -53,10 +53,10 @@ const EditListingPetPrefrencePanel = props => {
         name={FEATURES_NAME}
         initialValues={initialValues}
         onSubmit={values => {
-          const { amenities = [], sizeOfdogs, typeOfpets, numberOfPets } = values;
+          const { amenities = [], sizeOfdogs, typeOfPets, numberOfPets } = values;
 
           const updatedValues = {
-            publicData: { amenities, sizeOfdogs, typeOfpets, numberOfPets },
+            publicData: { amenities, sizeOfdogs, typeOfPets, numberOfPets },
           };
           onSubmit(updatedValues);
         }}

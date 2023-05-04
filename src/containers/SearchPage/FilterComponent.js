@@ -28,7 +28,10 @@ const FilterComponent = props => {
 
   const { id, type, queryParamNames, label, config } = filterConfig;
   const { liveEdit, showAsPopup } = rest;
+  
 
+
+ 
   const useHistoryPush = liveEdit || showAsPopup;
   const prefix = idPrefix || 'SearchPage';
   const componentId = `${prefix}.${id.toLowerCase()}`;

@@ -44,7 +44,10 @@ const FilterFormComponent = props => {
           paddingClasses,
           intl,
           children,
+          values,
         } = formRenderProps;
+       // console.log(values, '^^^^ ^^^^ => values');
+        
 
         const handleCancel = () => {
           // reset the final form to initialValues

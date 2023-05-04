@@ -49,7 +49,7 @@ class MainPanel extends Component {
   constructor(props) {
     super(props);
     this.state = { isSecondaryFiltersOpen: false, currentQueryParams: props.urlQueryParams };
-   
+
 
     this.applyFilters = this.applyFilters.bind(this);
     this.cancelFilters = this.cancelFilters.bind(this);
@@ -75,7 +75,7 @@ class MainPanel extends Component {
   cancelFilters() {
     this.setState({ currentQueryParams: {} });
   }
-  
+
 
   // Reset all filter query parameters
   resetAll(e) {
@@ -109,20 +109,20 @@ class MainPanel extends Component {
     const isArray = Array.isArray(queryParamNames);
     return isArray
       ? queryParamNames.reduce((acc, paramName) => {
-          return { ...acc, [paramName]: getInitialValue(paramName) };
-        }, {})
+        return { ...acc, [paramName]: getInitialValue(paramName) };
+      }, {})
       : {};
   }
 
   getHandleChangedValueFn(useHistoryPush) {
     const { urlQueryParams, history, sortConfig, filterConfig } = this.props;
-    
-    
+
+
     return updatedURLParams => {
       const updater = prevState => {
         const { address, bounds } = urlQueryParams;
         const mergedQueryParams = { ...urlQueryParams, ...prevState.currentQueryParams };
-        
+
         // Address and bounds are handled outside of MainPanel.
         // I.e. TopbarSearchForm && search by moving the map.
         // We should always trust urlQueryParams with those.
@@ -130,9 +130,9 @@ class MainPanel extends Component {
           currentQueryParams: { ...mergedQueryParams, ...updatedURLParams, address, bounds },
         };
       };
-      
+
       const callback = () => {
-        console.log(useHistoryPush, '^^^^ ^^^^ => useHistoryPush');
+        //console.log(useHistoryPush, '^^^^ ^^^^ => useHistoryPush');
         if (useHistoryPush) {
           const searchParams = this.state.currentQueryParams;
           const search = cleanSearchFromConflictingParams(searchParams, sortConfig, filterConfig);
@@ -182,15 +182,33 @@ class MainPanel extends Component {
         if (this.state.currentQueryParams && this.state.currentQueryParams.pub_typeOfpets && this.state.currentQueryParams.pub_typeOfpets.search("dog") > -1) {
           checked = true;
         }
-      
       }
-      else if (f.id == "dates") {
-        checked = false;
-        if (this.state.currentQueryParams && this.state.currentQueryParams.pub_serviceSetup && this.state.currentQueryParams.pub_serviceSetup.search("overnightsStay") > -1) {
-          checked = true;
+      // else if (f.id == "dates" ) {
+      //   checked = false;
+      //   if (this.state.currentQueryParams && this.state.currentQueryParams.pub_serviceSetup && this.state.currentQueryParams.pub_serviceSetup.search("overnightsStay") > -1) {
+      //     checked = true;
+      //   }
+
+      // }
+
+      else if (this.state.currentQueryParams && this.state.currentQueryParams.pub_serviceSetup && this.state.currentQueryParams.pub_serviceSetup.search("dayCareStay") > -1) {
+        if (f.id == "typeOfPets") {
+          f.config.options = [{
+            key: 'dog',
+            label: 'Dog',
+          }];
         }
+      } else if (f.id == "typeOfPets") {
+        f.config.options = [{
+          key: 'dog',
+          label: 'Dog',
+        },
+        {
+          key: 'cat',
+          label: 'Cat',
+        }];
       }
-      
+
       return f.group === 'primary' && checked;
     });
     const secondaryFilters = filterConfig.filter(f => f.group !== 'primary');
@@ -209,12 +227,12 @@ class MainPanel extends Component {
     const isSecondaryFiltersOpen = !!hasSecondaryFilters && this.state.isSecondaryFiltersOpen;
     const propsForSecondaryFiltersToggle = hasSecondaryFilters
       ? {
-          isSecondaryFiltersOpen: this.state.isSecondaryFiltersOpen,
-          toggleSecondaryFiltersOpen: isOpen => {
-            this.setState({ isSecondaryFiltersOpen: isOpen });
-          },
-          selectedSecondaryFiltersCount,
-        }
+        isSecondaryFiltersOpen: this.state.isSecondaryFiltersOpen,
+        toggleSecondaryFiltersOpen: isOpen => {
+          this.setState({ isSecondaryFiltersOpen: isOpen });
+        },
+        selectedSecondaryFiltersCount,
+      }
       : {};
 
     const hasPaginationInfo = !!pagination && pagination.totalItems != null;
@@ -231,9 +249,9 @@ class MainPanel extends Component {
       const mobileClassesMaybe =
         mode === 'mobile'
           ? {
-              rootClassName: css.sortBy,
-              menuLabelRootClassName: css.sortByMenuLabel,
-            }
+            rootClassName: css.sortBy,
+            menuLabelRootClassName: css.sortByMenuLabel,
+          }
           : {};
       return sortConfig.active ? (
         <SortBy
