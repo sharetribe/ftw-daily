@@ -345,7 +345,7 @@
           }
 
           &:nth-child(2) {
-            width: auto;
+            width: 300px;
             /* background-color: green; */
           }
 
@@ -357,7 +357,7 @@
           &:nth-child(4) {
             /* width: auto; */
             padding: 0;
-            width: 40% !important;
+            width: 100% !important;
             /* background-color: pink; */
           }
 
@@ -365,6 +365,7 @@
             & form {
               &>div {
                 margin-bottom: 0;
+                padding: 0;
               }
             }
 

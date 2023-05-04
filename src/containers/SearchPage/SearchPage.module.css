@@ -199,11 +199,40 @@
     margin-bottom: 12px;
     font-size: 18px;
     line-height: 24px;
-
+    position: relative;
+    background-color: #ffffff00;
+    border-radius: 0px;
+    box-shadow: none;
+    border-top: 1px solid #ffffff00;
+    transition: none;
 
     & form {
+
       &>div {
+        &:nth-child(1) {
+          &>div {
+            &>div {
+              &>div {
+                &>div {
+                  &>div {
+                    &>div {
+                      background: #fff0;
+                      border-bottom: 5px solid #ff000000;
+
+                      & input {
+                        color: #fff;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
         &:nth-child(2) {
+          display: none;
+
           & button {
             color: #333;
           }
