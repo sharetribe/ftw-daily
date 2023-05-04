@@ -166,9 +166,9 @@
 
       &>span {
         font-weight: 600;
-        font-size: 18px;
-        line-height: 23px;
-        text-transform: uppercase;
+        font-size: 16px;
+        line-height: 20px;
+        text-transform: capitalize;
         height: unset;
         margin: 0;
 
@@ -192,6 +192,6 @@
   margin-top: 0;
   margin-bottom: 0;
   padding-top: 6px;
-  padding-bottom: 2px;
+  padding-bottom: 15px;
   font-size: 14px;
 }

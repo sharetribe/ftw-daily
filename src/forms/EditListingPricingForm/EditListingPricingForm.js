@@ -129,8 +129,11 @@ export const EditListingPricingFormComponent = props => (
               <FormattedMessage id="EditListingPricingForm.showListingFailed" />
             </p>
           ) : null}
-          {detail && detail.includes("overnightsStay") ? <>  <FormattedMessage id="EditListingPricingForm.priceovernight" />
-            <div style={{ display: 'flex', gap: '20px' }}>
+          {detail && detail.includes("overnightsStay") ? <>
+            <div className={css.priceDays}>
+              <FormattedMessage id="EditListingPricingForm.priceovernight" />
+            </div>
+            <div className={css.rowBox}>
               {numberPetArray.map((st) =>
                 <FieldTextInput
                   id={"overnightsStayPrice" + st}
@@ -149,9 +152,8 @@ export const EditListingPricingFormComponent = props => (
           </>
             : null}
           {detail && detail.includes("dayCareStay") ? <>
-            <FormattedMessage id="EditListingPricingForm.priceday" />
-
-            <div style={{ display: 'flex', gap: '20px' }}>
+            <div className={css.priceDays}><FormattedMessage id="EditListingPricingForm.priceday" /></div>
+            <div className={css.rowBox}>
               {numberPetArray.map((st) =>
                 <FieldTextInput
                   id={"dayCareStay" + st}
@@ -167,9 +169,10 @@ export const EditListingPricingFormComponent = props => (
             </div>
           </>
             : null}
-          <FormattedMessage id="EditListingPricingForm.pricediscount" />
-
-          <div style={{ display: 'flex', gap: '20px' }}>
+          <div className={css.priceDays}>
+            <FormattedMessage id="EditListingPricingForm.pricediscount" />
+          </div>
+          <div className={css.rowBox}>
             {discount.map(num => {
               return (
                 <div className={css.cardSelectPet}>

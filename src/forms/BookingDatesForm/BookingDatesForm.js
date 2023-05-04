@@ -229,20 +229,28 @@ export class BookingDatesFormComponent extends Component {
 
               {/* <p>Choose what service you wish to offers...</p> */}
 
-              <FormattedMessage className={css.description} id="EditListingDescriptionForm.categoryLabel" />
-              <FormattedMessage className={css.description} id="EditListingDescriptionForm.categorytext" />
-              {
-                detail.map((st) => {
+              <div className={css.categoryText}>
+                <FormattedMessage className={css.description} id="EditListingDescriptionForm.categoryLabel" />
+              </div>
+              <div className={css.categoryText}>
+                <FormattedMessage className={css.description} id="EditListingDescriptionForm.categorytext" />
+              </div>
+              <div className={css.categoryCheck}>
+                {detail.map((st) => {
                   return (
-                    <FieldCheckbox className={css.features} id={st} name={"serviceSetup"} value={st} label={st}
-
-                      autoFocus />
+                    <FieldCheckbox
+                      className={css.features}
+                      id={st}
+                      name={"serviceSetup"}
+                      value={st}
+                      label={st}
+                      autoFocus
+                    />
                   )
-                })
-              }
-
-
+                })}
+              </div>
               <FieldSelect
+              className={css.numberPets}
                 id="numberOfPets"
                 name="numberOfPets"
                 label={"Number Of Pets"}

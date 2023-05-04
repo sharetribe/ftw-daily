@@ -57,35 +57,26 @@ export const EditListingPoliciesFormComponent = props => (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessage}
           {errorMessageShowListing}
-
-         
-<div>
-<FormattedMessage  id="EditListingaboutpetForm.houseLabel" />
-  
-
-  {
-            housingConditions.map((st)=>{
-              return(
-               <FieldCheckbox className={css.features} id={st.key} name={"housingConditions"} value={st.key} label={st.label} />
-              )
-            })
-          }
-          
-</div>
-
-
-<div>
-<FormattedMessage  id="EditListingaboutpetForm.petLabel" />
-
-  {
-            petInHome.map((st)=>{
-              return(
-               <FieldCheckbox className={css.features} id={st.key} name={"petInHome"} value={st.key} label={st.label} />
-              )
-            })
-          }
-          
-</div>
+          <div className={css.checkList}>
+            <FormattedMessage id="EditListingaboutpetForm.houseLabel" />
+            {
+              housingConditions.map((st) => {
+                return (
+                  <FieldCheckbox className={css.features} id={st.key} name={"housingConditions"} value={st.key} label={st.label} />
+                )
+              })
+            }
+          </div>
+          <div>
+            <FormattedMessage id="EditListingaboutpetForm.petLabel" />
+            {
+              petInHome.map((st) => {
+                return (
+                  <FieldCheckbox className={css.features} id={st.key} name={"petInHome"} value={st.key} label={st.label} />
+                )
+              })
+            }
+          </div>
           <Button
             className={css.submitButton}
             type="submit"
@@ -105,7 +96,7 @@ EditListingPoliciesFormComponent.defaultProps = {
   selectedPlace: null,
   updateError: null,
   filterConfig: config.custom.filters,
-  
+
 };
 EditListingPoliciesFormComponent.propTypes = {
   intl: intlShape.isRequired,
