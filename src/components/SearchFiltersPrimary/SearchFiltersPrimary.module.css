@@ -15,6 +15,22 @@
   display: flex;
   flex-wrap: wrap;
 
+  &>div {
+    &:nth-child(3) {
+      &>div {
+        &>div {
+          &>div {
+            position: relative;
+            width: 300px;
+            left: 0 !important;
+            margin: 0;
+            border-top: 1px solid #e7e7e700;
+          }
+        }
+      }
+    }
+  }
+
   &>*:not(:last-child) {
     margin-right: 8px;
     margin-bottom: 8px;
