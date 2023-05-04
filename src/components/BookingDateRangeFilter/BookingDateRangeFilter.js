@@ -84,6 +84,9 @@ export class BookingDateRangeFilterComponent extends Component {
         ? label
         : intl.formatMessage({ id: 'BookingDateRangeFilter.labelPlain' });
 
+       // console.log(labelForPlain, '^^^^ ^^^^ => labelForPlain');
+        
+
     const labelForPopup = isSelected
       ? intl.formatMessage(
         { id: 'BookingDateRangeFilter.labelSelectedPopup' },
@@ -101,7 +104,7 @@ export class BookingDateRangeFilterComponent extends Component {
 
     const onClearPopupMaybe =
       this.popupControllerRef && this.popupControllerRef.onReset
-        ? { onClear: () => this.popupControllerRef.onReset(null, null) }
+        ? { onClear: () => this.popupControllerRef.onReset(startDate, endDate) }
         : {};
 
     const onCancelPopupMaybe =
@@ -123,6 +126,8 @@ export class BookingDateRangeFilterComponent extends Component {
           label={labelForPopup}
           isSelected={isSelected}
           isDateSelect={isDateSelect}
+          formattedStartDate={formattedStartDate}
+        formattedEndDate={formattedEndDate}
           id={`${id}.popup`}
           showAsPopup
           contentPlacementOffset={contentPlacementOffset}

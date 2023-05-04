@@ -37,7 +37,7 @@ const BookingDateRangeFilterWrapper = withRouter(props => {
       {...props}
       initialValues={initialValues}
       onSubmit={(urlParam, values) => {
-        console.log('Submit BookingDateRangeFilter with (unformatted) values:', values);
+       // console.log('Submit BookingDateRangeFilter with (unformatted) values:', values);
         handleSubmit(urlParam, values, history);
       }}
     />

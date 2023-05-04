@@ -43,7 +43,7 @@ const EditListingPetPrefrenceFormComponent = props => (
       const submitDisabled =
         disabled ||
         submitInProgress ||
-        !(values.typeOfpets && values.typeOfpets.length) ||
+        !(values.typeOfPets && values.typeOfPets.length) ||
         !values.numberOfPets;
 
       const { updateListingError, showListingsError } = fetchErrors || {};
@@ -59,7 +59,7 @@ const EditListingPetPrefrenceFormComponent = props => (
         </p>
       ) : null;
 
-      const typeOfpets = findOptionsForSelectFilter('typeOfpets', filterConfig);
+      const typeOfPets = findOptionsForSelectFilter('typeOfPets', filterConfig);
 
       const numberOfPets = findOptionsForSelectFilter('numberOfPets', filterConfig);
 
@@ -72,13 +72,13 @@ const EditListingPetPrefrenceFormComponent = props => (
           <FormattedMessage  id="EditListingPetForm.categoryLabel" />
          
           <div className={css.numberPets}>
-            {typeOfpets.map(st => (
+            {typeOfPets.map(st => (
               <div className={css.cardSelectPet}>
                 <FieldCheckbox
                   // className={css.features}
                   id={st.key}
                   key={st.key}
-                  name={'typeOfpets'}
+                  name={'typeOfPets'}
                   value={st.key}
                   label={st.label}
                 />
@@ -102,9 +102,9 @@ const EditListingPetPrefrenceFormComponent = props => (
             ))}
           </div>
 
-          {(values.typeOfpets && values.typeOfpets.filter(st => st == 'dog').length) ||
-            (values.typeOfpets &&
-              values.typeOfpets.filter(st => st == 'dog' && st == 'cat').length) ? (
+          {(values.typeOfPets && values.typeOfPets.filter(st => st == 'dog').length) ||
+            (values.typeOfPets &&
+              values.typeOfPets.filter(st => st == 'dog' && st == 'cat').length) ? (
             <div>
                 <FormattedMessage  id="EditListingPetForm.sizeLabel" />
         

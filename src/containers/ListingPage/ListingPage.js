@@ -120,7 +120,7 @@ export class ListingPageComponent extends Component {
       },
       confirmPaymentError: null,
     };
-console.log(initialValues, '^^^^ ^^^^ => initialValues');
+
 
     const saveToSessionStorage = !this.props.currentUser;
 
@@ -393,7 +393,7 @@ console.log(initialValues, '^^^^ ^^^^ => initialValues');
      const yourselfschedule = publicData && publicData.schedule;
      const Yourselfdohavepets = publicData && publicData.dohavepets;
 
-    const amenityOptions = findOptionsForSelectFilter('typeOfpets', filterConfig);
+    const amenityOptions = findOptionsForSelectFilter('typeOfPets', filterConfig);
     const amenityOptions2 = findOptionsForSelectFilter('numberOfPets', filterConfig);
     const amenityOptions3 = findOptionsForSelectFilter('sizeOfdogs', filterConfig);
     const amenityOptions4 = findOptionsForSelectFilter('housingConditions', filterConfig);

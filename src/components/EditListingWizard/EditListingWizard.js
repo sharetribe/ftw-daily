@@ -117,7 +117,7 @@ const tabCompleted = (tab, listing) => {
       return !!( title,  publicData && publicData.birthday,publicData && publicData, 
         publicData && publicData.serviceSetup);
     case FEATURES:
-      return !!(publicData && publicData.typeOfpets);
+      return !!(publicData && publicData.typeOfPets);
     case POLICY:
       return !!(publicData &&  publicData.housingConditions);
     // case LOCATION:

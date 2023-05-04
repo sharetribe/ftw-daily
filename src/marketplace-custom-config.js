@@ -170,14 +170,13 @@ export const filters = [
     config: {},
   },
   {
-    id: 'typeOfpets',
+    id: 'typeOfPets',
     label: 'Type of pet',
     type: 'SelectMultipleFilter',
     group: 'primary',
     filtersFor: ["SearchPage","LandingPage"],
     queryParamNames: ['pub_typeOfpets'],
     config: {
-      
       searchMode: 'has_all',
       options: [
         {
@@ -187,8 +186,7 @@ export const filters = [
         {
           key: 'cat',
           label: 'Cat',
-        },
-       
+        }
       ],
     },
   },

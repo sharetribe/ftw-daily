@@ -17,7 +17,7 @@ const SectionServicesetup = props => {
         <FormattedMessage id="ListingPage.featuresserviceSetup" />
       </h2>
       <PropertyGroup
-        id="ListingPage.typeOfpets"
+        id="ListingPage.typeOfPets"
         options={options}
         selectedOptions={selectedOptions}
         twoColumns={true}

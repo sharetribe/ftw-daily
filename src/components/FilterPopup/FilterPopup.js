@@ -3,7 +3,7 @@ import { bool, func, node, number, object, string } from 'prop-types';
 import classNames from 'classnames';
 import { injectIntl, intlShape } from '../../util/reactIntl';
 
-import { OutsideClickHandler } from '../../components';
+import { Button, OutsideClickHandler } from '../../components';
 import { FilterForm } from '../../forms';
 import css from './FilterPopup.module.css';
 
@@ -13,7 +13,8 @@ class FilterPopup extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { isOpen: false };
+    const { label } = this.props;
+    this.state = { isOpen: label == "Dates" ? true : false };
     this.filter = null;
     this.filterContent = null;
 
@@ -26,6 +27,7 @@ class FilterPopup extends Component {
     this.positionStyleForContent = this.positionStyleForContent.bind(this);
   }
 
+
   handleSubmit(values) {
     const { onSubmit } = this.props;
     this.setState({ isOpen: false });
@@ -33,8 +35,16 @@ class FilterPopup extends Component {
   }
 
   handleClear() {
-    const { onSubmit, onClear } = this.props;
-    this.setState({ isOpen: false });
+    const { onSubmit, onClear, label,formattedStartDate,
+    formattedEndDate,} = this.props;
+    const dates = `${formattedStartDate} - ${formattedEndDate}`;
+    //console.log(label,dates, '^^^^ ^^^^ => label');
+    
+    if (label == dates) {
+      this.setState({ isOpen: true });
+    } else {
+      this.setState({ isOpen: false });
+    }
 
     if (onClear) {
       onClear();
@@ -44,18 +54,19 @@ class FilterPopup extends Component {
   }
 
   handleCancel() {
-    const { onSubmit, onCancel, initialValues } = this.props;
-    this.setState({ isOpen: false });
+    const { onSubmit, onCancel, initialValues,label } = this.props;
+    this.setState();
 
     if (onCancel) {
       onCancel();
     }
 
-    onSubmit(initialValues);
+    onSubmit();
   }
 
   handleBlur() {
-    this.setState({ isOpen: false });
+    const {  label } = this.props;
+    this.setState({ isOpen: label == "Dates" ? true : false });
   }
 
   handleKeyDown(e) {
@@ -111,7 +122,7 @@ class FilterPopup extends Component {
       contentPlacementOffset,
       isDateSelect
     } = this.props;
-
+   // console.log(this.state.isOpen, '^^^^ ^^^^ => this.satte.isOpen');
     const classes = classNames(rootClassName || css.root, className);
     const popupClasses = classNames(css.popup, { [css.isOpen]: this.state.isOpen });
     const popupSizeClasses = popupClassName || css.popupSize;
@@ -130,13 +141,15 @@ class FilterPopup extends Component {
           }}
         >
           {isDateSelect ? <div className={css.dateLabelName}>Booking Date</div> : null}
-          <button
-            className={classNames(labelStyles, labelMaxWidthStyles)}
-            style={labelMaxWidthMaybe}
-            onClick={() => this.toggleOpen()}
-          >
-            {label}
-          </button>
+          {label == "Dates"
+            ? null
+            : <Button
+              className={classNames(labelStyles, labelMaxWidthStyles)}
+              style={labelMaxWidthMaybe}
+              onClick={() => this.toggleOpen()}
+            >
+              {label}
+            </Button>}
           <div
             id={id}
             className={popupClasses}
@@ -154,7 +167,7 @@ class FilterPopup extends Component {
                 initialValues={initialValues}
                 keepDirtyOnReinitialize={keepDirtyOnReinitialize}
                 onSubmit={this.handleSubmit}
-                onCancel={this.handleCancel}
+                 onCancel={this.handleCancel}
                 onClear={this.handleClear}
               >
                 {children}
