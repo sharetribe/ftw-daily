@@ -88,6 +88,7 @@ class SelectMultipleFilter extends Component {
       queryParamNames,
       searchMode,
       intl,
+      liveEdit,
       showAsPopup,
       ...rest
     } = this.props;

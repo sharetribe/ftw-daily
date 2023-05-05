@@ -48,7 +48,7 @@ const cleanSearchFromConflictingParams = (searchParams, sortConfig, filterConfig
 class MainPanelLandingPage extends Component {
   constructor(props) {
     super(props);
-    this.state = { isSecondaryFiltersOpen: false, currentQueryParams: props.urlQueryParams };
+    this.state = { isSecondaryFiltersOpen: false, currentQueryParams: props.urlQueryParams ,isplain:false};
 
     this.handleSubmit = this.handleSubmit.bind(this);
 
@@ -304,6 +304,7 @@ class MainPanelLandingPage extends Component {
                 idPrefix="SearchFiltersPrimary"
                 PageName="LandingPage"
                 isSelect={isSelect}
+                isplain={true}
                 isDateSelect={isDateSelect}
                 filterConfig={config}
                 urlQueryParams={urlQueryParams}

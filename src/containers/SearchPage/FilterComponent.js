@@ -23,12 +23,14 @@ const FilterComponent = props => {
     pageName,
     isSelect,
     isDateSelect,
+    isplain,
     ...rest
   } = props;
+  console.log('rest', rest)
 
   const { id, type, queryParamNames, label, config } = filterConfig;
   const { liveEdit, showAsPopup } = rest;
-  
+ 
 
 
  
@@ -73,13 +75,15 @@ const FilterComponent = props => {
         <BookingDateRangeFilter
           id={componentId}
           label={label}
+          isSelect={isSelect}
           queryParamNames={queryParamNames}
           // filtersFor={Landingpage}
+          isplain={isplain}
           initialValues={initialValues(queryParamNames)}
           // onSelect={(e) => PageName == "LandingPage" ? getHandleChangedValueFn(useHistoryPush) : getHandleChangedValueFn(e)}
           onSubmit={pageName != "SearchPage" ? (e) => getHandleChangedValueFn(e) : getHandleChangedValueFn(useHistoryPush)}
-          isDateSelect={isDateSelect}
-          className={isDateSelect ? css.dateSelect : null}
+          // isDateSelect={isDateSelect}
+          // className={isDateSelect ? css.dateSelect : null}
           {...config}
           {...rest}
         />

@@ -51,6 +51,8 @@ export class BookingDateRangeFilterComponent extends Component {
       queryParamNames,
       label,
       intl,
+
+      isplain,
       isDateSelect,
       ...rest
     } = this.props;
@@ -102,10 +104,15 @@ export class BookingDateRangeFilterComponent extends Component {
       onSubmit(formatValue(values, datesQueryParamName));
     };
 
+    // const onClearPopupMaybe =
+    //   this.popupControllerRef && this.popupControllerRef.onReset
+    //     ? { onClear: () => this.popupControllerRef.onReset(startDate, endDate) }
+    //     : {};
+
     const onClearPopupMaybe =
-      this.popupControllerRef && this.popupControllerRef.onReset
-        ? { onClear: () => this.popupControllerRef.onReset(startDate, endDate) }
-        : {};
+    this.popupControllerRef && this.popupControllerRef.onReset
+      ? { onClear: () => this.popupControllerRef.onReset(null, null) }
+      : {};
 
     const onCancelPopupMaybe =
       this.popupControllerRef && this.popupControllerRef.onReset
@@ -117,7 +124,7 @@ export class BookingDateRangeFilterComponent extends Component {
         ? { onClear: () => this.plainControllerRef.onReset(null, null) }
         : {};
 
-    return showAsPopup ? (
+    return showAsPopup && !isplain? (
       <div>
         <FilterPopup
           className={className}

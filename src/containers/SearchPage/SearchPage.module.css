@@ -168,13 +168,13 @@
   }
 }
 
-.dateSelect {
+/* .dateSelect {
   width: 100%;
   padding: 0;
   margin-top: 0;
   /* border-bottom: 1px solid #fff; */
 
-  & button {
+  /* & button {
     border: 1.5px solid rgb(255 255 255);
     border-radius: 10px;
     background: #fff0;
@@ -185,16 +185,16 @@
       text-decoration: none !important;
       background-color: #E95629;
       border: 1.5px solid rgb(255 255 255);
-    }
+    } */
 
-    &:focus {
+    /* &:focus {
       background: #fff0;
       border: 1.5px solid rgb(255 255 255);
       border-radius: 10px;
     }
-  }
+  } */
 
-  &>div {
+  /* &>div {
     left: 0 !important;
     margin-bottom: 12px;
     font-size: 18px;
@@ -228,16 +228,16 @@
               }
             }
           }
-        }
+        } */
 
-        &:nth-child(2) {
-          display: none;
+        
+      /* }
+    }
+  } 
+  /* &:nth-child(2) { */
+          /* display: none;
 
           & button {
             color: #333;
-          }
-        }
-      }
-    }
-  }
-}
+          } */
+      
