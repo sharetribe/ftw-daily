@@ -480,8 +480,9 @@ export class ListingPageComponent extends Component {
                     publicData={publicData}
                     listingId={currentListing.id}
                   />
-                  <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
-                  <SectionHostMaybe
+                 {reviews == 0 ? null:<SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />}
+                  {/* <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} /> */}
+                  {/* <SectionHostMaybe
                     title={title}
                     listing={currentListing}
                     authorDisplayName={authorDisplayName}
@@ -493,7 +494,7 @@ export class ListingPageComponent extends Component {
                     onSubmitEnquiry={this.onSubmitEnquiry}
                     currentUser={currentUser}
                     onManageDisableScrolling={onManageDisableScrolling}
-                  />
+                  /> */}
                 </div>
                 <BookingPanel
                   className={css.bookingPanel}
