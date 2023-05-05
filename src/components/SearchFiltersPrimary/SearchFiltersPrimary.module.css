@@ -20,11 +20,11 @@
       &>div {
         &>div {
           &>div {
-            position: relative;
+            /* position: relative;
             width: 300px;
             left: 0 !important;
             margin: 0;
-            border-top: 1px solid #e7e7e700;
+            border-top: 1px solid #e7e7e700; */
           }
         }
       }

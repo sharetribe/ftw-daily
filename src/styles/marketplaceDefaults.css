@@ -782,8 +782,8 @@ textarea {
 /* Button colors */
 /* Default button uses marketplace color */
 .buttonColors {
-  background-color: #E95629;
-  color: black;
+  background-color: #E95629 !important;
+  color: black !important;
 }
 
 .buttonColors:focus,
