@@ -13,6 +13,13 @@ import { ModalInMobile, Button } from '../../components';
 import { BookingDatesForm } from '../../forms';
 
 import css from './BookingPanel.module.css';
+import SectionFeatures5Maybe from '../../containers/ListingPage/SectionFeatures5Maybe';
+import SectionServicesetup from '../../containers/ListingPage/SectionSerivesetup';
+import { findOptionsForSelectFilter } from '../../util/search';
+import SectionFeaturesMaybe from '../../containers/ListingPage/SectionFeaturesMaybe';
+import SectionFeatures3Maybe from '../../containers/ListingPage/SectionFeatures3Maybe';
+import SectionFeatures4Maybe from '../../containers/ListingPage/SectionFeatures4Maybe';
+import SectionFeatures2Maybe from '../../containers/ListingPage/SectionFeatures2Maybe'
 
 // This defines when ModalInMobile shows content as Modal
 const MODAL_BREAKPOINT = 1023;
@@ -65,14 +72,19 @@ const BookingPanel = props => {
     history,
     location,
     intl,
+    hostLink,
+    filterConfig,
     onFetchTransactionLineItems,
     lineItems,
     fetchLineItemsInProgress,
     fetchLineItemsError,
     dayUnitType,
-  } = props;
-//console.log(listing, '^^^^ ^^^^ => listing');
 
+
+    publicData,
+  } = props;
+  //console.log(listing, '^^^^ ^^^^ => listing');
+  console.log('publicData ', publicData)
   const price = listing.attributes.price;
   const hasListingState = !!listing.attributes.state;
   const isClosed = hasListingState && listing.attributes.state === LISTING_STATE_CLOSED;
@@ -87,8 +99,8 @@ const BookingPanel = props => {
   const subTitleText = !!subTitle
     ? subTitle
     : showClosedListingHelpText
-    ? intl.formatMessage({ id: 'BookingPanel.subTitleClosedListing' })
-    : null;
+      ? intl.formatMessage({ id: 'BookingPanel.subTitleClosedListing' })
+      : null;
 
   const isNightly = unitType === LINE_ITEM_NIGHT;
   const isDaily = unitType === LINE_ITEM_DAY;
@@ -96,12 +108,18 @@ const BookingPanel = props => {
   const unitTranslationKey = isNightly
     ? 'BookingPanel.perNight'
     : isDaily
-    ? 'BookingPanel.perDay'
-    : 'BookingPanel.perUnit';
+      ? 'BookingPanel.perDay'
+      : 'BookingPanel.perUnit';
 
   const classes = classNames(rootClassName || css.root, className);
   const titleClasses = classNames(titleClassName || css.bookingTitle);
 
+  const amenityOptions = findOptionsForSelectFilter('typeOfPets', filterConfig);
+  const amenityOptions2 = findOptionsForSelectFilter('numberOfPets', filterConfig);
+  const amenityOptions3 = findOptionsForSelectFilter('sizeOfdogs', filterConfig);
+  const amenityOptions4 = findOptionsForSelectFilter('housingConditions', filterConfig);
+  const amenityOptions5 = findOptionsForSelectFilter('petInHome', filterConfig);
+  const amenityOptions6 = findOptionsForSelectFilter('serviceSetup', filterConfig);
   return (
     <div className={classes}>
       <ModalInMobile
@@ -113,14 +131,15 @@ const BookingPanel = props => {
         onManageDisableScrolling={onManageDisableScrolling}
       >
         <div className={css.modalHeading}>
-          <h1 className={css.title}>{title}</h1>
+          <h1 className={css.title}>{hostLink}</h1>
           <div className={css.author}>
             <FormattedMessage id="BookingPanel.hostedBy" values={{ name: authorDisplayName }} />
           </div>
         </div>
 
         <div className={css.bookingHeading}>
-          <h2 className={titleClasses}>{title}</h2>
+          {/* hostLink={hostLink} */}
+          <h2 className={titleClasses}>{hostLink}</h2>
           {subTitleText ? <div className={css.bookingHelp}>{subTitleText}</div> : null}
         </div>
         {showBookingDatesForm ? (
@@ -168,6 +187,19 @@ const BookingPanel = props => {
           </div>
         ) : null}
       </div>
+
+<div>   <FormattedMessage id="BookingPanel.servicetect" values={{ name: hostLink }} /></div>
+    
+      <SectionServicesetup options={amenityOptions6} publicData={publicData} />
+      <SectionFeaturesMaybe options={amenityOptions} publicData={publicData} />
+
+      <SectionFeatures2Maybe options={amenityOptions2} publicData={publicData} />
+      <SectionFeatures3Maybe options={amenityOptions3} publicData={publicData} />
+      <SectionFeatures4Maybe options={amenityOptions4} publicData={publicData} />
+      <SectionFeatures5Maybe options={amenityOptions5} publicData={publicData} />
+
+
+
     </div>
   );
 };
@@ -183,6 +215,7 @@ BookingPanel.defaultProps = {
   fetchTimeSlotsError: null,
   lineItems: null,
   fetchLineItemsError: null,
+  filterConfig: config.custom.filters,
 };
 
 BookingPanel.propTypes = {
@@ -203,7 +236,7 @@ BookingPanel.propTypes = {
   lineItems: array,
   fetchLineItemsInProgress: bool.isRequired,
   fetchLineItemsError: propTypes.error,
-
+  filterConfig: array,
   // from withRouter
   history: shape({
     push: func.isRequired,

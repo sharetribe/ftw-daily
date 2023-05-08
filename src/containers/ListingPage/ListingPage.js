@@ -108,8 +108,8 @@ export class ListingPageComponent extends Component {
     const listing = getListing(listingId);
 
     const { bookingDates, ...bookingData } = values;
-   // console.log(values, '^^^^ ^^^^ => values');
-    
+    // console.log(values, '^^^^ ^^^^ => values');
+
 
     const initialValues = {
       listing,
@@ -208,6 +208,8 @@ export class ListingPageComponent extends Component {
       fetchLineItemsError,
     } = this.props;
 
+
+
     const listingId = new UUID(rawParams.id);
     const isPendingApprovalVariant = rawParams.variant === LISTING_PAGE_PENDING_APPROVAL_VARIANT;
     const isDraftVariant = rawParams.variant === LISTING_PAGE_DRAFT_VARIANT;
@@ -251,6 +253,7 @@ export class ListingPageComponent extends Component {
       title = '',
       publicData,
     } = currentListing.attributes;
+    console.log('currentListing', currentListing)
 
     const richTitle = (
       <span>
@@ -387,18 +390,13 @@ export class ListingPageComponent extends Component {
       </NamedLink>
     );
 
-     const yourself = publicData && publicData.headline;
-     const yourselfexp = publicData && publicData.exp;
-     const yourselfservice = publicData && publicData.service;
-     const yourselfschedule = publicData && publicData.schedule;
-     const Yourselfdohavepets = publicData && publicData.dohavepets;
+    const yourself = publicData && publicData.headline;
+    const yourselfexp = publicData && publicData.yespet;
+    const yourselfservice = publicData && publicData.service;
+    const yourselfschedule = publicData && publicData.schedule;
+    const Yourselfdohavepets = publicData && publicData.dohavepets;
 
-    const amenityOptions = findOptionsForSelectFilter('typeOfPets', filterConfig);
-    const amenityOptions2 = findOptionsForSelectFilter('numberOfPets', filterConfig);
-    const amenityOptions3 = findOptionsForSelectFilter('sizeOfdogs', filterConfig);
-    const amenityOptions4 = findOptionsForSelectFilter('housingConditions', filterConfig);
-    const amenityOptions5 = findOptionsForSelectFilter('petInHome', filterConfig);
-    const amenityOptions6 = findOptionsForSelectFilter('serviceSetup', filterConfig);
+
     const categoryOptions = findOptionsForSelectFilter('category', filterConfig);
     const category =
       publicData && publicData.category ? (
@@ -452,36 +450,37 @@ export class ListingPageComponent extends Component {
                     richTitle={richTitle}
                     category={category}
                     hostLink={hostLink}
+                    fetchReviewsError={fetchReviewsError}
+                    reviews={reviews}
                     showContactUser={showContactUser}
                     onContactUser={this.onContactUser}
+                    yourself={yourself}
                   />
                   <SectionDescriptionMaybe description={description} />
-                  <SectionServicesetup options={amenityOptions6} publicData={publicData} />
-                  <SectionFeaturesMaybe options={amenityOptions} publicData={publicData} />
-                  
-                  <SectionFeatures2Maybe options={amenityOptions2} publicData={publicData} />
-                  <SectionFeatures3Maybe options={amenityOptions3} publicData={publicData} />
-                  <SectionFeatures4Maybe options={amenityOptions4} publicData={publicData} />
-                  <SectionFeatures5Maybe options={amenityOptions5} publicData={publicData} />
-                  <div className={css.featuresTitle}>Tell us about Yourself</div>
-                  <h4 className={css.featuresTitle}>Years of experince caring for pets</h4>
-                  <p>{yourselfexp}</p>
-                  <h4 className={css.featuresTitle}>Headline details</h4>
-                   <p>{yourself}</p>
-                 <h4 className={css.featuresTitle}>Details about your service and experience</h4>
-                   <p>{yourselfservice}</p>
-                   <h4 className={css.featuresTitle}>Details about your schedule and how does pets care fit into your daily routine</h4>
-                   <p>{yourselfschedule}</p>
-                   <h3 className={css.featuresTitle}>Do you have pets</h3>
-                   <p>{Yourselfdohavepets}</p>
+                  <FormattedMessage id="ListingPage.about" values={{ name: hostLink }} />
+
+                  <p className={css.featuresTitle}>{yourselfservice}</p>
+
+                  <div> <FormattedMessage id="ListingPage.schedule" values={{ name: hostLink }} /></div>
+
+                  <p className={css.featuresTitle}>{yourselfschedule}</p>
+
+                  <div> <FormattedMessage id="ListingPage.havepet" values={{ name: hostLink }} /></div>
+
+                  <p className={css.featuresTitle}>{Yourselfdohavepets}</p>
+
+                  <div> <FormattedMessage id="ListingPage.yespet" values={{ name: hostLink }} /></div>
+
+                  < p className={css.featuresTitle}> {yourselfexp}</p>
+
                   <SectionRulesMaybe publicData={publicData} />
                   <SectionMapMaybe
                     geolocation={geolocation}
                     publicData={publicData}
                     listingId={currentListing.id}
                   />
-                 {reviews == 0 ? null:<SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />}
-                  {/* <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} /> */}
+                  {/* {reviews == 0 ? null:<SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />} */}
+                  <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
                   {/* <SectionHostMaybe
                     title={title}
                     listing={currentListing}
@@ -504,6 +503,7 @@ export class ListingPageComponent extends Component {
                   dayUnitType={dayUnitType}
                   onSubmit={handleBookingSubmit}
                   title={bookingTitle}
+                  hostLink={hostLink}
                   subTitle={bookingSubTitle}
                   authorDisplayName={authorDisplayName}
                   onManageDisableScrolling={onManageDisableScrolling}
@@ -513,6 +513,7 @@ export class ListingPageComponent extends Component {
                   lineItems={lineItems}
                   fetchLineItemsInProgress={fetchLineItemsInProgress}
                   fetchLineItemsError={fetchLineItemsError}
+                  publicData={publicData}
                 />
               </div>
             </div>
@@ -528,7 +529,7 @@ export class ListingPageComponent extends Component {
 
 ListingPageComponent.defaultProps = {
   unitType: config.bookingUnitType,
-  dayUnitType:config.bookingDayUnitType,
+  dayUnitType: config.bookingDayUnitType,
   currentUser: null,
   enquiryModalOpenForListingId: null,
   showListingError: null,
@@ -552,7 +553,7 @@ ListingPageComponent.propTypes = {
   }).isRequired,
 
   unitType: propTypes.bookingUnitType,
-  dayUnitType:propTypes.bookingDayUnitType,
+  dayUnitType: propTypes.bookingDayUnitType,
   // from injectIntl
   intl: intlShape.isRequired,
 
