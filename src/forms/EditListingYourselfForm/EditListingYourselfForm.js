@@ -129,7 +129,7 @@ const EditListingYourselfFormComponent = props => (
       const classes = classNames(css.root, className);
       const submitReady = (updated && pristine) || ready;
       const submitInProgress = updateInProgress;
-      const submitDisabled = invalid || disabled || submitInProgress || !values.dohavepets || !values.yespet ;
+      const submitDisabled = invalid || disabled || submitInProgress || !values.dohavepets  ;
       const dohavepets = findOptionsForSelectFilter('dohavepets', filterConfig);
 
       const emailRequiredMessage = intl.formatMessage({

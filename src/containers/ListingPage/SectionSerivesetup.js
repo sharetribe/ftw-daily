@@ -5,7 +5,7 @@ import { PropertyGroup } from '../../components';
 import css from './ListingPage.module.css';
 
 const SectionServicesetup = props => {
-  const { options, publicData } = props;
+  const { options, publicData ,hostLink} = props;
   if (!publicData) {
     return null;
   }
@@ -14,7 +14,8 @@ const SectionServicesetup = props => {
   return (
     <div className={css.sectionFeatures}>
       <h2 className={css.featuresTitle}>
-        <FormattedMessage id="ListingPage.featuresserviceSetup" />
+        <FormattedMessage id="ListingPage.featuresserviceSetup"/>
+        {/* <FormattedMessage id="BookingPanel.servicetect" values={{ name: hostLink }} /> */}
       </h2>
       <PropertyGroup
         id="ListingPage.typeOfPets"

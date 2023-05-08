@@ -22,6 +22,7 @@ import {
 } from '../../components';
 
 import css from './EditListingVerificationForm.module.css';
+import { CONFIRM_ERROR } from '../../ducks/Auth.duck';
 
 const ACCEPT_FILE = 'image/*';
 
@@ -115,21 +116,14 @@ export class EditListingVerificationFormComponent extends Component {
             updateInProgress,
             idProofImageUploadRequested,
           } = formRenderProps;
+          CONFIRM_ERROR
 
+      
           const { publishListingError, showListingsError, updateListingError, uploadImageError } =
             fetchErrors || {};
           const uploadOverLimit = isUploadImageOverLimitError(uploadImageError);
 
-          // const valueimage = values?.idProofImage?.link;
-          // const addMainPhoto = (
-          //   <span className={css.chooseImageText}>
-          //     {/* <IconCamera /> */}
-          //     <span className={css.chooseImage}>
-          //       <FormattedMessage id="EditListingPhotosForm.chooseMainImage" />
-          //     </span>
-
-          //   </span>
-          // );
+          
 
           // Main image for what
           const uploadingOverlay = idProofImageUploadRequested ? (
@@ -301,21 +295,24 @@ export class EditListingVerificationFormComponent extends Component {
               </div>
 
               <ul>
-                {<div className={css.fileUploadName} >
-                  <div>
-                    {/\mp4|MP4|mov|webm/.test(values.idProofImage && values.idProofImage.link) ? (
-                      <video src={values.idProofImage && values.idProofImage.link} loop autoPlay={true} muted style={{ height: '200px' }} />
-                    ) : (
-                      <object data={values.idProofImage && values.idProofImage.link}>
-                        <iframe
-                          className="doc"
-                          src={`https://docs.google.com/gview?url=${values.idProofImage && values.idProofImage.link}&embedded=true`}
-                        />
-                      </object>
-                    )}
+                {values.idProofImage && Object.keys(values.idProofImage).length
+                  ? <div className={css.fileUploadName} >
+                    <div>
+                      {/\mp4|MP4|mov|webm/.test(values.idProofImage.link) ? (
+                        <video src={values.idProofImage && values.idProofImage.link} loop autoPlay={true} muted style={{ height: '200px' }} />
+                      ) : /\png|jpeg|jpg/.test(values.idProofImage.link) ? (
+                        <img alt={values.idProofImage.name} src={values.idProofImage.link} style={{ height: '200px' }} />
+                      ) : (
+                        <object data={values.idProofImage.link}>
+                          <iframe
+                            className="doc"
+                            src={`https://docs.google.com/gview?url=${values.idProofImage.link}&embedded=true`}
+                          />
+                        </object>
+                      )}
+                    </div>
                   </div>
-                </div>
-                }
+                  : null}
 
               </ul>
               {uploadImageFailed}

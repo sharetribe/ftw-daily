@@ -5,6 +5,7 @@ import { LINE_ITEM_NIGHT, LINE_ITEM_DAY } from '../../util/types';
 import config from '../../config';
 
 import css from './ListingPage.module.css';
+import SectionReviews from './SectionReviews';
 
 const SectionHeading = props => {
   const {
@@ -15,6 +16,9 @@ const SectionHeading = props => {
     hostLink,
     showContactUser,
     onContactUser,
+    reviews,
+    fetchReviewsError,
+    yourself,
   } = props;
 
   const unitType = config.bookingUnitType;
@@ -38,10 +42,12 @@ const SectionHeading = props => {
         </div>
       </div>
       <div className={css.heading}>
-        <h1 className={css.title}>{richTitle}</h1>
+        <h1 className={css.title}>{hostLink}</h1>
         <div className={css.author}>
           {category}
-          <FormattedMessage id="ListingPage.hostedBy" values={{ name: hostLink }} />
+          {/* <FormattedMessage id="ListingPage.hostedBy" values={{ name: hostLink }} /> */}
+         <p>{yourself}</p>
+          <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
           {showContactUser ? (
             <span className={css.contactWrapper}>
               <span className={css.separator}>•</span>

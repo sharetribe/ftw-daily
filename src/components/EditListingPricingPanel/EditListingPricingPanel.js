@@ -101,6 +101,8 @@ const EditListingPricingPanel = props => {
       ready={ready}
       listing={listing}
       publicData={publicData}
+      lengthOfStays={lengthOfStays}
+      discountlengthOfStays={discountlengthOfStays}
       updated={panelUpdated}
       updateInProgress={updateInProgress}
       fetchErrors={errors}
