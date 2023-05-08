@@ -203,18 +203,7 @@ export const EditListingPricingFormComponent = props => (
                 validate={composeValidators(maxLength2Message)} /> */}
                 <div className={css.rangeBox}>
                   <p>length Of Stays</p>
-                  {/* <Slider
-                    min={7}
-                    max={90}
-                    id="lengthOfStays"
-                    name="lengthOfStays"
-                    range
-                    defaultValue={stayRange}
-                    onChange={handlePriceChange}
-                    validate={composeValidators(maxLength2Message)}
-                  /> */}
-                  <input
-                    type="range"
+                  <Slider
                     min={7}
                     max={90}
                     id="lengthOfStays"
@@ -224,26 +213,26 @@ export const EditListingPricingFormComponent = props => (
                     onChange={handlePriceChange}
                     validate={composeValidators(maxLength2Message)}
                   />
+                  {/* <input
+                    type="range"
+                    min={7}
+                    max={90}
+                    id="lengthOfStays"
+                    name="lengthOfStays"
+                    
+                    defaultValue={stayRange}
+                    onChange={handlePriceChange}
+                    validate={composeValidators(maxLength2Message)}
+                  /> */}
 
-                  <div>{stayRange[0]} days - {stayRange[1]} days</div>
+                  <div>{stayRange[0]} days / {stayRange[1]} days</div>
                   <p>apply - {stayRange[0]} days</p>
                 </div>
               </div>
               <div className={css.rangeBox}>
                 <p>Discount</p>
 
-                {/* <Slider
-                  min={0}
-                  max={50}
-                  range
-                  id="discountlengthOfStays"
-                  name="discountlengthOfStays"
-                  validate={composeValidators(maxLength2Message)}
-                  defaultValue={discountRange}
-                  onChange={handleDiscountChange}
-                /> */}
-                <input
-                  type="range"
+                <Slider
                   min={0}
                   max={50}
                   range
@@ -253,7 +242,18 @@ export const EditListingPricingFormComponent = props => (
                   defaultValue={discountRange}
                   onChange={handleDiscountChange}
                 />
-                <div> {discountRange[0]}% - {discountRange[1]}%</div>
+                {/* <input
+                  type="range"
+                  min={0}
+                  max={50}
+                  range
+                  id="discountlengthOfStays"
+                  name="discountlengthOfStays"
+                  validate={composeValidators(maxLength2Message)}
+                  defaultValue={discountRange}
+                  onChange={handleDiscountChange}
+                /> */}
+                <div> {discountRange[0]}% / {discountRange[1]}%</div>
                 <p> Apply - {discountRange[0]}%</p>
               </div>
             </>
