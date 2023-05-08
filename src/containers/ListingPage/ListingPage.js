@@ -108,8 +108,8 @@ export class ListingPageComponent extends Component {
     const listing = getListing(listingId);
 
     const { bookingDates, ...bookingData } = values;
-   // console.log(values, '^^^^ ^^^^ => values');
-    
+    // console.log(values, '^^^^ ^^^^ => values');
+
 
     const initialValues = {
       listing,
@@ -387,11 +387,11 @@ export class ListingPageComponent extends Component {
       </NamedLink>
     );
 
-     const yourself = publicData && publicData.headline;
-     const yourselfexp = publicData && publicData.exp;
-     const yourselfservice = publicData && publicData.service;
-     const yourselfschedule = publicData && publicData.schedule;
-     const Yourselfdohavepets = publicData && publicData.dohavepets;
+    const yourself = publicData && publicData.headline;
+    const yourselfexp = publicData && publicData.exp;
+    const yourselfservice = publicData && publicData.service;
+    const yourselfschedule = publicData && publicData.schedule;
+    const Yourselfdohavepets = publicData && publicData.dohavepets;
 
     const amenityOptions = findOptionsForSelectFilter('typeOfPets', filterConfig);
     const amenityOptions2 = findOptionsForSelectFilter('numberOfPets', filterConfig);
@@ -458,7 +458,7 @@ export class ListingPageComponent extends Component {
                   <SectionDescriptionMaybe description={description} />
                   <SectionServicesetup options={amenityOptions6} publicData={publicData} />
                   <SectionFeaturesMaybe options={amenityOptions} publicData={publicData} />
-                  
+
                   <SectionFeatures2Maybe options={amenityOptions2} publicData={publicData} />
                   <SectionFeatures3Maybe options={amenityOptions3} publicData={publicData} />
                   <SectionFeatures4Maybe options={amenityOptions4} publicData={publicData} />
@@ -467,20 +467,20 @@ export class ListingPageComponent extends Component {
                   <h4 className={css.featuresTitle}>Years of experince caring for pets</h4>
                   <p>{yourselfexp}</p>
                   <h4 className={css.featuresTitle}>Headline details</h4>
-                   <p>{yourself}</p>
-                 <h4 className={css.featuresTitle}>Details about your service and experience</h4>
-                   <p>{yourselfservice}</p>
-                   <h4 className={css.featuresTitle}>Details about your schedule and how does pets care fit into your daily routine</h4>
-                   <p>{yourselfschedule}</p>
-                   <h3 className={css.featuresTitle}>Do you have pets</h3>
-                   <p>{Yourselfdohavepets}</p>
+                  <p>{yourself}</p>
+                  <h4 className={css.featuresTitle}>Details about your service and experience</h4>
+                  <p>{yourselfservice}</p>
+                  <h4 className={css.featuresTitle}>Details about your schedule and how does pets care fit into your daily routine</h4>
+                  <p>{yourselfschedule}</p>
+                  <h3 className={css.featuresTitle}>Do you have pets</h3>
+                  <p>{Yourselfdohavepets}</p>
                   <SectionRulesMaybe publicData={publicData} />
                   <SectionMapMaybe
                     geolocation={geolocation}
                     publicData={publicData}
                     listingId={currentListing.id}
                   />
-                 {reviews == 0 ? null:<SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />}
+                  {reviews == 0 ? null : <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />}
                   {/* <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} /> */}
                   {/* <SectionHostMaybe
                     title={title}
@@ -528,7 +528,7 @@ export class ListingPageComponent extends Component {
 
 ListingPageComponent.defaultProps = {
   unitType: config.bookingUnitType,
-  dayUnitType:config.bookingDayUnitType,
+  dayUnitType: config.bookingDayUnitType,
   currentUser: null,
   enquiryModalOpenForListingId: null,
   showListingError: null,
@@ -552,7 +552,7 @@ ListingPageComponent.propTypes = {
   }).isRequired,
 
   unitType: propTypes.bookingUnitType,
-  dayUnitType:propTypes.bookingDayUnitType,
+  dayUnitType: propTypes.bookingDayUnitType,
   // from injectIntl
   intl: intlShape.isRequired,
 

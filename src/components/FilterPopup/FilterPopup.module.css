@@ -33,6 +33,7 @@
   min-height: 0;
   border-radius: 4px;
   border: 1px solid var(--marketplaceColor);
+  color: #fff !important;
 
   &:hover,
   &:focus {
