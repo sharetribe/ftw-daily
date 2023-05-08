@@ -229,9 +229,9 @@ export class BookingDatesFormComponent extends Component {
 
               {/* <p>Choose what service you wish to offers...</p> */}
 
-              <div className={css.categoryText}>
+              {/* <div className={css.categoryText}>
                 <FormattedMessage className={css.description} id="EditListingDescriptionForm.categoryLabel" />
-              </div>
+              </div> */}
               <div className={css.categoryText}>
                 <FormattedMessage className={css.description} id="EditListingDescriptionForm.categorytext" />
               </div>

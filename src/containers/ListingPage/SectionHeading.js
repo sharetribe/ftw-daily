@@ -46,7 +46,7 @@ const SectionHeading = props => {
         <div className={css.author}>
           {category}
           {/* <FormattedMessage id="ListingPage.hostedBy" values={{ name: hostLink }} /> */}
-         <p>{yourself}</p>
+         <p className={css.yourSelfText}>{yourself}</p>
           <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
           {showContactUser ? (
             <span className={css.contactWrapper}>
