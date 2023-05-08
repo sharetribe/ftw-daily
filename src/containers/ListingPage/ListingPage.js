@@ -457,22 +457,30 @@ export class ListingPageComponent extends Component {
                     yourself={yourself}
                   />
                   <SectionDescriptionMaybe description={description} />
-                  <FormattedMessage id="ListingPage.about" values={{ name: hostLink }} />
-
-                  <p className={css.featuresTitle}>{yourselfservice}</p>
-
-                  <div> <FormattedMessage id="ListingPage.schedule" values={{ name: hostLink }} /></div>
-
-                  <p className={css.featuresTitle}>{yourselfschedule}</p>
-
-                  <div> <FormattedMessage id="ListingPage.havepet" values={{ name: hostLink }} /></div>
-
-                  <p className={css.featuresTitle}>{Yourselfdohavepets}</p>
-
-                  <div> <FormattedMessage id="ListingPage.yespet" values={{ name: hostLink }} /></div>
-
-                  < p className={css.featuresTitle}> {yourselfexp}</p>
-
+                  <div className={css.featureList}>
+                    <div className={css.headingFeature}>
+                      <FormattedMessage id="ListingPage.about" values={{ name: hostLink }} />
+                    </div>
+                    <p className={css.featuresDescription}>{yourselfservice}</p>
+                  </div>
+                  <div className={css.featureList}>
+                    <div className={css.headingFeature}>
+                      <FormattedMessage id="ListingPage.schedule" values={{ name: hostLink }} />
+                    </div>
+                    <p className={css.featuresDescription}>{yourselfschedule}</p>
+                  </div>
+                  <div className={css.featureList}>
+                    <div className={css.headingFeature}>
+                      <FormattedMessage id="ListingPage.havepet" values={{ name: hostLink }} />
+                    </div>
+                    <p className={css.featuresDescription}>{Yourselfdohavepets}</p>
+                  </div>
+                  <div className={css.featureList}>
+                    <div className={css.headingFeature}>
+                      <FormattedMessage id="ListingPage.yespet" values={{ name: hostLink }} />
+                    </div>
+                    <p className={css.featuresDescription}> {yourselfexp}</p>
+                  </div>
                   <SectionRulesMaybe publicData={publicData} />
                   <SectionMapMaybe
                     geolocation={geolocation}

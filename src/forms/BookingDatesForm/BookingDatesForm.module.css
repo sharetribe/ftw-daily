@@ -11,6 +11,11 @@
 
   /* Ensure that calendar dropdown gets some stacking context relative to other form items below */
   z-index: 1;
+
+  & label {
+    color: var(--matterColor);
+    font-size: 14px;
+  }
 }
 
 .priceBreakdownContainer {
@@ -95,11 +100,18 @@
   color: var(--matterColor);
   font-size: 14px;
   line-height: 18px;
-  margin-bottom: 10px;
+  margin-bottom: 0;
+  font-weight: 600;
 }
 
 .categoryCheck {
   margin: 20px 0;
+
+  & label {
+    & span {
+      font-size: 14px;
+    }
+  }
 }
 
 .numberPets {

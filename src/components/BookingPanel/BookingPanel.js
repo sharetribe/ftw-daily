@@ -188,12 +188,14 @@ const BookingPanel = props => {
         ) : null}
       </div>
 
-<div>   <FormattedMessage id="BookingPanel.servicetect" values={{ name: hostLink }} /></div>
-    
-      <SectionServicesetup options={amenityOptions6} publicData={publicData}  />
+      <div className={css.hostLink}>
+        <FormattedMessage id="BookingPanel.servicetect" values={{ name: hostLink }} />
+      </div>
+
+      <SectionServicesetup options={amenityOptions6} publicData={publicData} />
       <SectionFeaturesMaybe options={amenityOptions} publicData={publicData} />
 
-      <SectionFeatures2Maybe options={amenityOptions2} publicData={publicData} hostLink ={hostLink } />
+      <SectionFeatures2Maybe options={amenityOptions2} publicData={publicData} hostLink={hostLink} />
       <SectionFeatures3Maybe options={amenityOptions3} publicData={publicData} />
       <SectionFeatures4Maybe options={amenityOptions4} publicData={publicData} />
       <SectionFeatures5Maybe options={amenityOptions5} publicData={publicData} />

@@ -38,6 +38,15 @@
   }
 }
 
+.hostLink {
+  margin: 20px 0;
+  font-weight: bold;
+
+  & a {
+    text-decoration: underline;
+  }
+}
+
 .title {
   /* Font */
   color: var(--matterColor);
@@ -46,6 +55,7 @@
   width: 100%;
   margin-top: 0;
   margin-bottom: 0;
+
   @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 5px;
@@ -169,6 +179,7 @@
 
   margin-top: 0;
   margin-bottom: 0px;
+
   @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 0;
@@ -182,6 +193,7 @@
 
   margin-top: 0;
   margin-bottom: 0px;
+
   @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 0;

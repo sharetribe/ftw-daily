@@ -26,7 +26,7 @@
   composes: button marketplaceSearchFilterLabelFontStyles buttonText buttonBorders buttonColors from global;
   letter-spacing: 0.2px;
   font-weight: var(--fontWeightSemiBold);
-
+  color: #fff !important;
   padding: var(--marketplaceButtonSmallDesktopPadding);
   width: auto;
   height: auto;

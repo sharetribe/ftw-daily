@@ -54,7 +54,12 @@
 }
 
 .selectedLabel {
-  font-weight: var(--fontWeightSemiBold);
+  font-weight: 500;
+  color: #6b6b6b;
+  margin-top: -1px;
+  margin-bottom: 1px;
+  cursor: pointer;
+  font-size: 14px;
 }
 
 .notSelectedLabel {

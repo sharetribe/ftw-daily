@@ -52,7 +52,12 @@
 }
 
 .introSection {
-  grid-template-columns: repeat(1, 1fr);
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 
   &>div {
     &:nth-child(1) {
@@ -66,11 +71,14 @@
 
   & h1 {
     color: #fff;
+    width: 57%;
+    text-align: center;
+    margin: auto;
   }
 }
 
 .searchBox {
-  background-color: #000000c4;
+  background-color: #0000005c;
   padding: 30px;
   border-radius: 5px;
   position: relative;
@@ -302,7 +310,15 @@
     z-index: 0;
 
     &>div {
+      height: 50px;
+
+      & input {
+        height: 50px;
+      }
+
       &>div {
+        height: 50px;
+
         &:nth-child(1) {
           border-radius: 10px 0 0 10px
         }
@@ -320,7 +336,7 @@
       & button {
         width: 100%;
         background-color: #E95629;
-        color: #fff;
+        color: #fff !important;
       }
     }
 
@@ -342,22 +358,26 @@
 
           &:nth-child(1) {
             width: auto;
+            order: 2;
             /* background-color: red; */
           }
 
           &:nth-child(2) {
             width: 300px;
+            order: 1;
             /* background-color: green; */
           }
 
           &:nth-child(3) {
             width: auto;
+            order: 3;
             /* background-color: pink; */
           }
 
           &:nth-child(4) {
             /* width: auto; */
             padding: 0;
+            order: 4;
             width: 100% !important;
             /* background-color: pink; */
           }

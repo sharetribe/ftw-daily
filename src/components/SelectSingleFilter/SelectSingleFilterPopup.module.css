@@ -38,7 +38,7 @@
   min-height: 0;
   border-radius: 4px;
   border: 1px solid var(--matterColorNegative);
-  color: var(--matterColor);
+  color: #ffffff !important;
 
   &:hover,
   &:focus {
