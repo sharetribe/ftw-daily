@@ -3,10 +3,10 @@
  * of 555 01234567
  */
 const sliceLocal = numbers => {
-  if (numbers.length <= 3) {
+  if (numbers.length <= 4) {
     return numbers;
   }
-  return `${numbers.slice(0, 3)} ${numbers.slice(3, 10)}`;
+  return `${numbers.slice(0, 4)} ${numbers.slice(4, 10)}`;
 };
 
 /**

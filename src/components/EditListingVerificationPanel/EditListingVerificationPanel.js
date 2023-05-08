@@ -46,13 +46,7 @@ class EditListingVerificationPanel extends Component {
       <FormattedMessage id="EditListingVeificationPanel.createListingTitle" />
     );
 
-    // const idProofImage = images && images.length
-    //   ? images.filter(image => image.imageType == 'idProofImage').length
-    //     ? images.filter(image => image.imageType == 'idProofImage')[images.filter(image => image.imageType == 'idProofImage').length - 1]
-    //     : images.filter(image => idProofImageId && image.id && image.id.uuid == idProofImageId).length
-    //       ? images.filter(image => idProofImageId && image.id && image.id.uuid == idProofImageId)[0]
-    //       : []
-    //   : [];
+   
 
     return (
       <div className={classes}>
