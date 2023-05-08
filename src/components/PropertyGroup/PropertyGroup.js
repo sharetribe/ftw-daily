@@ -40,7 +40,7 @@ const Item = props => {
   const { label, isSelected } = props;
   const labelClass = isSelected ? css.selectedLabel : css.notSelectedLabel;
   return (
-    <li className={css.item}>
+    <li className={isSelected ? css.item : css.noDisplay}>
       <span className={css.iconWrapper}>
         <IconCheck isVisible={isSelected} />
       </span>
