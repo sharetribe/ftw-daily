@@ -93,7 +93,7 @@ export const ListingCardComponent = props => {
         </div>
         <div className={css.mainInfo}>
           <div className={css.title}>
-            {richText(title, {
+            {richText( authorName , {
               longWordMinLength: MIN_LENGTH_FOR_LONG_WORDS,
               longWordClass: css.longWord,
             })}

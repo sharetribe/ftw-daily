@@ -115,3 +115,8 @@ export const transitionPrivileged = body => {
 export const createUserWithIdp = body => {
   return post('/api/auth/create-user-with-idp', body);
 };
+
+export const fetchTotalBooking = body => {
+  console.log('body', body)
+  return post('/api/fetch-total-bookings', body);
+};

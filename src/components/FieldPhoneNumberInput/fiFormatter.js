@@ -6,7 +6,7 @@ const sliceLocal = numbers => {
   if (numbers.length <= 4) {
     return numbers;
   }
-  return `${numbers.slice(0, 4)} ${numbers.slice(4, 10)}`;
+  return `${numbers.slice(0, 4)} ${numbers.slice(4, 7)} ${numbers.slice(7, 10)}`;
 };
 
 /**

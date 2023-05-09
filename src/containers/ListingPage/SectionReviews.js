@@ -3,6 +3,7 @@ import { FormattedMessage } from '../../util/reactIntl';
 import { Reviews } from '../../components';
 
 import css from './ListingPage.module.css';
+import SectionHeading from './SectionHeading';
 
 const SectionReviews = props => {
   const { reviews, fetchReviewsError } = props;
@@ -19,6 +20,8 @@ const SectionReviews = props => {
         <FormattedMessage id="ListingPage.reviewsHeading" values={{ count: reviews.length }} />
       </h2>
       {fetchReviewsError ? reviewsError : null}
+
+     
       <Reviews reviews={reviews} />
     </div>
   );

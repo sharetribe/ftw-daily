@@ -646,3 +646,13 @@
   word-break: break-word;
   hyphens: auto;
 }
+
+.reviewRatingStar {
+  height: 12px;
+  width: 12px;
+  margin-right: 2px;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}

@@ -47,11 +47,6 @@ import SectionImages from './SectionImages';
 import SectionAvatar from './SectionAvatar';
 import SectionHeading from './SectionHeading';
 import SectionDescriptionMaybe from './SectionDescriptionMaybe';
-import SectionFeaturesMaybe from './SectionFeaturesMaybe';
-import SectionFeatures2Maybe from './SectionFeatures2Maybe';
-import SectionFeatures3Maybe from './SectionFeatures3Maybe';
-import SectionFeatures4Maybe from './SectionFeatures4Maybe';
-import SectionFeatures5Maybe from './SectionFeatures5Maybe';
 import SectionReviews from './SectionReviews';
 import SectionHostMaybe from './SectionHostMaybe';
 import SectionRulesMaybe from './SectionRulesMaybe';
@@ -206,9 +201,9 @@ export class ListingPageComponent extends Component {
       lineItems,
       fetchLineItemsInProgress,
       fetchLineItemsError,
+      totalbooking,
+      ratings
     } = this.props;
-
-
 
     const listingId = new UUID(rawParams.id);
     const isPendingApprovalVariant = rawParams.variant === LISTING_PAGE_PENDING_APPROVAL_VARIANT;
@@ -253,7 +248,6 @@ export class ListingPageComponent extends Component {
       title = '',
       publicData,
     } = currentListing.attributes;
-    console.log('currentListing', currentListing)
 
     const richTitle = (
       <span>
@@ -452,6 +446,8 @@ export class ListingPageComponent extends Component {
                     hostLink={hostLink}
                     fetchReviewsError={fetchReviewsError}
                     reviews={reviews}
+                    ratings={ratings}
+                    totalbooking={totalbooking}
                     showContactUser={showContactUser}
                     onContactUser={this.onContactUser}
                     yourself={yourself}
@@ -607,6 +603,8 @@ const mapStateToProps = state => {
     sendEnquiryInProgress,
     sendEnquiryError,
     lineItems,
+    totalbooking,
+    ratings,
     fetchLineItemsInProgress,
     fetchLineItemsError,
     enquiryModalOpenForListingId,
@@ -630,6 +628,8 @@ const mapStateToProps = state => {
     currentUser,
     getListing,
     getOwnListing,
+    ratings,
+    totalbooking,
     scrollingDisabled: isScrollingDisabled(state),
     enquiryModalOpenForListingId,
     showListingError,
@@ -651,7 +651,7 @@ const mapDispatchToProps = dispatch => ({
   callSetInitialValues: (setInitialValues, values, saveToSessionStorage) =>
     dispatch(setInitialValues(values, saveToSessionStorage)),
   onFetchTransactionLineItems: (bookingData, listingId, isOwnListing) =>
-    dispatch(fetchTransactionLineItems(bookingData, listingId, isOwnListing)),
+    dispatch(fetchTransactionLineItems(bookingData, listingId, isOwnListing,totalbooking)),
   onSendEnquiry: (listingId, message) => dispatch(sendEnquiry(listingId, message)),
   onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
 });

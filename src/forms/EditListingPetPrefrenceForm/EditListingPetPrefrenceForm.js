@@ -40,11 +40,7 @@ const EditListingPetPrefrenceFormComponent = props => (
       const classes = classNames(rootClassName || css.root, className);
       const submitReady = (updated && pristine) || ready;
       const submitInProgress = updateInProgress;
-      const submitDisabled =
-        disabled ||
-        submitInProgress ||
-        !(values.typeOfPets && values.typeOfPets.length) ||
-        !values.numberOfPets;
+      const submitDisabled = disabled || submitInProgress || !(values.typeOfPets && values.typeOfPets.length) || !values.numberOfPets;
 
       const { updateListingError, showListingsError } = fetchErrors || {};
       const errorMessage = updateListingError ? (
@@ -60,9 +56,7 @@ const EditListingPetPrefrenceFormComponent = props => (
       ) : null;
 
       const typeOfPets = findOptionsForSelectFilter('typeOfPets', filterConfig);
-
       const numberOfPets = findOptionsForSelectFilter('numberOfPets', filterConfig);
-
       const sizeOfdogs = findOptionsForSelectFilter('sizeOfdogs', filterConfig);
 
       return (

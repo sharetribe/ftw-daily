@@ -34,7 +34,7 @@ const FilterComponent = props => {
   const prefix = idPrefix || 'SearchPage';
   const componentId = `${prefix}.${id.toLowerCase()}`;
   const name = id.replace(/\s+/g, '-').toLowerCase();
-  console.log(filterConfig, '^^^^ ^^^^ => filterConfig');
+ // console.log(filterConfig, '^^^^ ^^^^ => filterConfig');
 
   switch (type) {
     case 'SelectSingleFilter': {

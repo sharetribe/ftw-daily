@@ -4,7 +4,7 @@ import config from '../../config';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import { storableError } from '../../util/errors';
 import { addMarketplaceEntities } from '../../ducks/marketplaceData.duck';
-import { transactionLineItems } from '../../util/api';
+import { fetchTotalBooking, transactionLineItems } from '../../util/api';
 import * as log from '../../util/log';
 import { denormalisedResponseEntities } from '../../util/data';
 import { TRANSITION_ENQUIRE } from '../../util/transaction';
@@ -26,7 +26,8 @@ export const SHOW_LISTING_ERROR = 'app/ListingPage/SHOW_LISTING_ERROR';
 export const FETCH_REVIEWS_REQUEST = 'app/ListingPage/FETCH_REVIEWS_REQUEST';
 export const FETCH_REVIEWS_SUCCESS = 'app/ListingPage/FETCH_REVIEWS_SUCCESS';
 export const FETCH_REVIEWS_ERROR = 'app/ListingPage/FETCH_REVIEWS_ERROR';
-
+export const FETCH_TOTALBOOKING_SUCCESS = 'app/ListingPage/FETCH_TOTALBOOKING_SUCCESS';
+export const FETCH_AVERAGE_RATING_SUCCESS = 'app/ListingPage/FETCH_AVERAGE_RATING_SUCCESS';
 export const FETCH_TIME_SLOTS_REQUEST = 'app/ListingPage/FETCH_TIME_SLOTS_REQUEST';
 export const FETCH_TIME_SLOTS_SUCCESS = 'app/ListingPage/FETCH_TIME_SLOTS_SUCCESS';
 export const FETCH_TIME_SLOTS_ERROR = 'app/ListingPage/FETCH_TIME_SLOTS_ERROR';
@@ -43,6 +44,7 @@ export const SEND_ENQUIRY_ERROR = 'app/ListingPage/SEND_ENQUIRY_ERROR';
 
 const initialState = {
   id: null,
+  ratings: 0,
   showListingError: null,
   reviews: [],
   fetchReviewsError: null,
@@ -71,6 +73,10 @@ const listingPageReducer = (state = initialState, action = {}) => {
       return { ...state, fetchReviewsError: null };
     case FETCH_REVIEWS_SUCCESS:
       return { ...state, reviews: payload };
+    case FETCH_TOTALBOOKING_SUCCESS:
+      return { ...state, totalbooking: payload };
+    case FETCH_AVERAGE_RATING_SUCCESS:
+      return { ...state, ratings: payload };
     case FETCH_REVIEWS_ERROR:
       return { ...state, fetchReviewsError: payload };
 
@@ -122,6 +128,8 @@ export const showListingError = e => ({
 
 export const fetchReviewsRequest = () => ({ type: FETCH_REVIEWS_REQUEST });
 export const fetchReviewsSuccess = reviews => ({ type: FETCH_REVIEWS_SUCCESS, payload: reviews });
+export const fetchTotalBookingSuccess = totalbooking => ({ type: FETCH_TOTALBOOKING_SUCCESS, payload: totalbooking });
+export const saveListingsRatings = ratings => ({ type: FETCH_AVERAGE_RATING_SUCCESS, payload: ratings });
 export const fetchReviewsError = error => ({
   type: FETCH_REVIEWS_ERROR,
   error: true,
@@ -158,6 +166,7 @@ export const sendEnquiryError = e => ({ type: SEND_ENQUIRY_ERROR, error: true, p
 
 export const showListing = (listingId, isOwn = false) => (dispatch, getState, sdk) => {
   dispatch(showListingRequest(listingId));
+  dispatch(fetchReviewsRequest());
   dispatch(fetchCurrentUser());
   const params = {
     id: listingId,
@@ -189,18 +198,10 @@ export const showListing = (listingId, isOwn = false) => (dispatch, getState, sd
 
   return show
     .then(data => {
-     
-      console.log(listingId, '^^^^ ^^^^ => listingId');
-      
       dispatch(addMarketplaceEntities(data));
-      const today = new Date();
-       sdk.bookings
-      .query({
-        listingId: listingId,
-        start:new Date(data.data.data.attributes.createdAt),
-        end: today
-      }).then(res => {
-       console.log('res', res)
+      fetchTotalBooking({ listingId: listingId }).then(res => {
+        const totalbooking = res.result.data.data.filter((e) => e.relationships.listing.data.id.uuid == listingId.uuid)
+        dispatch(fetchTotalBookingSuccess(totalbooking));
       });
       return data;
     })
@@ -221,23 +222,17 @@ export const fetchReviews = listingId => (dispatch, getState, sdk) => {
     .then(response => {
       const reviews = denormalisedResponseEntities(response);
       dispatch(fetchReviewsSuccess(reviews));
+      const reviewsData = response.data.data;
+      const filteredReviews = reviewsData.filter(r => r.id && r.attributes.rating != null && r.attributes.state == 'public');
+      if (filteredReviews && filteredReviews.length) {
+        const ratings = Math.round(filteredReviews.reduce((prev, curr) => prev + (parseInt(curr.attributes.rating) || 0), 0) / filteredReviews.length);
+        dispatch(saveListingsRatings(ratings));
+      }
     })
     .catch(e => {
       dispatch(fetchReviewsError(storableError(e)));
     });
 };
-
-// const ratings = {};
-//           sdk.reviews
-//             .query({ listingId: listing.id, })
-//             .then(res => {
-//               const reviewsData = res.data.data;
-//               const filteredReviews = reviewsData.filter(r => r.id && r.attributes.rating != null && r.attributes.state == 'public');
-//               if (filteredReviews && filteredReviews.length) {
-//                 ratings = Math.round(filteredReviews.reduce((prev, curr) => prev + (parseInt(curr.attributes.rating) || 0), 0) / filteredReviews.length);
-//               }
-//               dispatch(saveListingsRatings(ratings));
-//             });
 
 const timeSlotsRequest = params => (dispatch, getState, sdk) => {
   return sdk.timeslots.query(params).then(response => {

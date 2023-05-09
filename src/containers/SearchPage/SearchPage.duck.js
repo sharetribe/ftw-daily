@@ -167,6 +167,9 @@ export const searchListings = searchParams => (dispatch, getState, sdk) => {
     per_page: perPage,
   };
 
+  if (params.pub_numberOfPets) {
+    params.pub_numberOfPets = ',' + (params.pub_numberOfPets + 1);
+  }
   return sdk.listings
     .query(params)
     .then(response => {
@@ -220,7 +223,6 @@ export const loadData = (params, search) => {
     page,
     perPage: RESULT_PAGE_SIZE,
     include: ['author', 'images'],
-    'fields.listing': ['title', 'geolocation', 'price'],
     'fields.user': ['profile.displayName', 'profile.abbreviatedName'],
     'fields.image': ['variants.landscape-crop', 'variants.landscape-crop2x'],
     'limit.images': 1,
