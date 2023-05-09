@@ -230,6 +230,7 @@ class MainPanelLandingPage extends Component {
       }
       return f.group === 'primary' && checked;
     });
+    console.log(primaryFilters, '^^^^ ^^^^ => primaryFilters');
     const secondaryFilters = landingfilter.filter(f => f.group !== 'primary');
     const hasSecondaryFilters = !!(secondaryFilters && secondaryFilters.length > 0);
 
@@ -293,6 +294,7 @@ class MainPanelLandingPage extends Component {
           // sortByComponent={sortBy('desktop')}
           listingsAreLoaded={listingsAreLoaded}
           resultsCount={totalItems}
+          pageName="LandingPage"
           searchInProgress={searchInProgress}
           searchListingsError={searchListingsError}
         // {...propsForSecondaryFiltersToggle}
@@ -302,7 +304,7 @@ class MainPanelLandingPage extends Component {
               <FilterComponent
                 key={`SearchFiltersPrimary.${config.id}`}
                 idPrefix="SearchFiltersPrimary"
-                PageName="LandingPage"
+                pageName="LandingPage"
                 isSelect={isSelect}
                 isplain={true}
                 isDateSelect={isDateSelect}

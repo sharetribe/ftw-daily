@@ -6,6 +6,7 @@ import {
   SelectSingleFilter,
   SelectMultipleFilter,
 } from '../../components';
+
 import css from './SearchPage.module.css';
 
 /**
@@ -14,7 +15,6 @@ import css from './SearchPage.module.css';
  */
 const FilterComponent = props => {
   const {
-    PageName,
     idPrefix,
     filterConfig,
     urlQueryParams,
@@ -26,18 +26,15 @@ const FilterComponent = props => {
     isplain,
     ...rest
   } = props;
-  console.log('rest', rest)
 
   const { id, type, queryParamNames, label, config } = filterConfig;
   const { liveEdit, showAsPopup } = rest;
- 
 
-
- 
   const useHistoryPush = liveEdit || showAsPopup;
   const prefix = idPrefix || 'SearchPage';
   const componentId = `${prefix}.${id.toLowerCase()}`;
   const name = id.replace(/\s+/g, '-').toLowerCase();
+  console.log(filterConfig, '^^^^ ^^^^ => filterConfig');
 
   switch (type) {
     case 'SelectSingleFilter': {
@@ -48,7 +45,7 @@ const FilterComponent = props => {
           label={label}
           queryParamNames={queryParamNames}
           initialValues={initialValues(queryParamNames)}
-          PageName={PageName}
+          PageName={pageName}
           // onSelect={(e) => PageName == "LandingPage" ? getHandleChangedValueFn(e) : getHandleChangedValueFn(useHistoryPush)}
           onSubmit={pageName != "SearchPage" ? (e) => getHandleChangedValueFn(e) : getHandleChangedValueFn(useHistoryPush)}
           {...config}
@@ -91,8 +88,9 @@ const FilterComponent = props => {
     }
     case 'PriceFilter': {
       return (
-        PageName == "LandingPage"
-          ? null : <PriceFilter
+        pageName == "LandingPage"
+          ? null 
+          : <PriceFilter
             id={componentId}
             label={label}
             queryParamNames={queryParamNames}
@@ -103,8 +101,6 @@ const FilterComponent = props => {
           />
       );
     }
-
-
 
     default:
       return null;

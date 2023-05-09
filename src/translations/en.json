@@ -423,7 +423,7 @@
   "ListingPage.perNight": "per night",
   "ListingPage.perUnit": "per unit",
   "ListingPage.reviewsError": "Loading reviews failed.",
-  "ListingPage.reviewsHeading": "Reviews ({count})",
+  "ListingPage.reviewsHeading": "{count} Reviews ",
   "ListingPage.rulesTitle": "Sauna rules",
   "ListingPage.schemaTitle": "{title} - {price} | {siteTitle}",
   "ListingPage.viewImagesButton": "View photos ({count})",

@@ -10,6 +10,7 @@ const SearchFiltersPrimaryComponent = props => {
     rootClassName,
     className,
     children,
+    pageName,
     sortByComponent,
     listingsAreLoaded,
     resultsCount,
@@ -18,15 +19,14 @@ const SearchFiltersPrimaryComponent = props => {
     toggleSecondaryFiltersOpen,
     selectedSecondaryFiltersCount,
   } = props;
-  
 
   const hasNoResult = listingsAreLoaded && resultsCount === 0;
   const classes = classNames(rootClassName || css.root, className);
 
-  const toggleSecondaryFiltersOpenButtonClasses =
-    isSecondaryFiltersOpen || selectedSecondaryFiltersCount > 0
-      ? css.searchFiltersPanelOpen
-      : css.searchFiltersPanelClosed;
+  // const toggleSecondaryFiltersOpenButtonClasses =
+  //   isSecondaryFiltersOpen || selectedSecondaryFiltersCount > 0
+  //     ? css.searchFiltersPanelOpen
+  //     : css.searchFiltersPanelClosed;
   const toggleSecondaryFiltersOpenButton = toggleSecondaryFiltersOpen ? (
     // <button
     //   className={toggleSecondaryFiltersOpenButtonClasses}
@@ -44,16 +44,18 @@ const SearchFiltersPrimaryComponent = props => {
   return (
     <div className={classes}>
       <div className={css.searchOptions}>
-        {listingsAreLoaded ? (
-          <div className={css.searchResultSummary}>
-            <span className={css.resultsFound}>
-              <FormattedMessage
-                id="SearchFiltersPrimary.foundResults"
-                values={{ count: resultsCount }}
-              />
-            </span>
-          </div>
-        ) : null}
+        {pageName == "LandingPage"
+          ? null
+          : listingsAreLoaded ? (
+            <div className={css.searchResultSummary}>
+              <span className={css.resultsFound}>
+                <FormattedMessage
+                  id="SearchFiltersPrimary.foundResults"
+                  values={{ count: resultsCount }}
+                />
+              </span>
+            </div>
+          ) : null}
         {sortByComponent}
       </div>
 

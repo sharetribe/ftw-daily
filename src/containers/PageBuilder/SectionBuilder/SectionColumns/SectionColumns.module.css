@@ -358,26 +358,26 @@
 
           &:nth-child(1) {
             width: auto;
-            order: 2;
+            /* order: 2; */
             /* background-color: red; */
           }
 
           &:nth-child(2) {
             width: 300px;
-            order: 1;
+            /* order: 1; */
             /* background-color: green; */
           }
 
           &:nth-child(3) {
             width: auto;
-            order: 3;
+            /* order: 3; */
             /* background-color: pink; */
           }
 
           &:nth-child(4) {
             /* width: auto; */
             padding: 0;
-            order: 4;
+            /* order: 4; */
             width: 100% !important;
             /* background-color: pink; */
           }
