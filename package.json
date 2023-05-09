@@ -42,7 +42,6 @@
     "rc-slider": "^10.1.1",
     "react": "^16.13.1",
     "react-aws-s3": "^1.5.0",
-    "react-bootstrap-range-slider": "^3.0.8",
     "react-dates": "^21.8.0",
     "react-dom": "^16.13.1",
     "react-final-form": "^6.5.9",

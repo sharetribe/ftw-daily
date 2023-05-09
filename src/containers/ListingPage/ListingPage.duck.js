@@ -227,6 +227,18 @@ export const fetchReviews = listingId => (dispatch, getState, sdk) => {
     });
 };
 
+// const ratings = {};
+//           sdk.reviews
+//             .query({ listingId: listing.id, })
+//             .then(res => {
+//               const reviewsData = res.data.data;
+//               const filteredReviews = reviewsData.filter(r => r.id && r.attributes.rating != null && r.attributes.state == 'public');
+//               if (filteredReviews && filteredReviews.length) {
+//                 ratings = Math.round(filteredReviews.reduce((prev, curr) => prev + (parseInt(curr.attributes.rating) || 0), 0) / filteredReviews.length);
+//               }
+//               dispatch(saveListingsRatings(ratings));
+//             });
+
 const timeSlotsRequest = params => (dispatch, getState, sdk) => {
   return sdk.timeslots.query(params).then(response => {
     return denormalisedResponseEntities(response);
