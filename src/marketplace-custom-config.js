@@ -171,7 +171,7 @@ export const filters = [
   },
   {
     id: 'typeOfPets',
-    label: 'Type of pet',
+    label: 'Type of Pet',
     type: 'SelectMultipleFilter',
     group: 'primary',
     filtersFor: ["SearchPage","LandingPage"],

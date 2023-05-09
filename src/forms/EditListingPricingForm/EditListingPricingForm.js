@@ -12,6 +12,9 @@ import { formatMoney } from '../../util/currency';
 import { findOptionsForSelectFilter } from '../../util/search';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import FieldRadioButtonComponent from '../../components/FieldRadioButton/FieldRadioButton';
+import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
+import RangeSlider from 'react-bootstrap-range-slider';
+
 import {
   Button,
   Form,
@@ -47,7 +50,7 @@ export const EditListingPricingFormComponent = props => (
         discountlengthOfStays,
         form
       } = formRenderProps;
-     
+
 
       const unitType = config.bookingUnitType;
       const isNightly = unitType === LINE_ITEM_NIGHT;
@@ -109,19 +112,19 @@ export const EditListingPricingFormComponent = props => (
       const numberPetArray = numberPet && numberPet == "three" ? [1, 2, 3]
         : numberPet == "two" ? [1, 2] : [1];
       //console.log(values,"values");
-      const [stayRange, setStayRange] = useState([lengthOfStays?lengthOfStays:7, 90]);
-      const [discountRange, setDiscountRange] = useState([discountlengthOfStays?discountlengthOfStays:1, 50]);
+      const [stayRange, setStayRange] = useState([lengthOfStays ? lengthOfStays : 7, 90]);
+      const [discountRange, setDiscountRange] = useState([discountlengthOfStays ? discountlengthOfStays : 1, 50]);
 
       const handlePriceChange = (value) => {
-        
-        form.change('lengthOfStays',value.at(0))
+
+        form.change('lengthOfStays', value.at(0))
         setStayRange(value);
       };
       const handleDiscountChange = (value) => {
-        form.change('discountlengthOfStays',value.at(0))
+        form.change('discountlengthOfStays', value.at(0))
         setDiscountRange(value);
       };
-
+      const [ value, setValue ] = useState([discountlengthOfStays ? discountlengthOfStays : 1]); 
 
       return (
         <Form onSubmit={handleSubmit} className={classes}>
@@ -213,17 +216,29 @@ export const EditListingPricingFormComponent = props => (
                     onChange={handlePriceChange}
                     validate={composeValidators(maxLength2Message)}
                   />
-                 
-                  <div >  {stayRange[0]} days - {stayRange[1]} days</div>
+                  {/* <input
+                    type="range"
+                    min={7}
+                    max={90}
+                    id="lengthOfStays"
+                    name="lengthOfStays"
+                    
+                    defaultValue={stayRange}
+                    onChange={handlePriceChange}
+                    validate={composeValidators(maxLength2Message)}
+                  /> */}
 
-                 
-                  <p 
-                    >apply - {stayRange[0]} days</p>
+                  <div>{stayRange[0]} days / 90 days</div>
+                  {/* <p>apply - {stayRange[0]} days</p> */}
                 </div>
               </div>
               <div className={css.rangeBox}>
                 <p>Discount</p>
-               
+{/* 
+                <RangeSlider
+      value={value}
+      onChange={handleDiscountChange}
+    /> */}
                 <Slider
                   min={0}
                   max={50}
@@ -234,8 +249,19 @@ export const EditListingPricingFormComponent = props => (
                   defaultValue={discountRange}
                   onChange={handleDiscountChange}
                 />
-                <div> {discountRange[0]}% - {discountRange[1]}%</div>
-                <p> apply - {discountRange[0]}%</p>
+                {/* <input
+                  type="range"
+                  min={0}
+                  max={50}
+                  range
+                  id="discountlengthOfStays"
+                  name="discountlengthOfStays"
+                  validate={composeValidators(maxLength2Message)}
+                  defaultValue={discountRange}
+                  onChange={handleDiscountChange}
+                /> */}
+                <div> {discountRange[0]}% / 50%</div>
+                {/* <p> Apply - {discountRange[0]}%</p> */}
               </div>
             </>
           ) : null}
