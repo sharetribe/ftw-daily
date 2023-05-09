@@ -317,7 +317,7 @@
       }
 
       &>div {
-        height: 50px;
+        height: unset;
 
         &:nth-child(1) {
           border-radius: 10px 0 0 10px
@@ -365,6 +365,7 @@
           &:nth-child(2) {
             width: 300px;
             order: 1;
+            z-index: 99;
             /* background-color: green; */
           }
 

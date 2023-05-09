@@ -38,6 +38,16 @@
   }
 }
 
+.locationFeat {
+  padding: 32px 0;
+  position: relative;
+  z-index: -1;
+
+  @media (--viewportMedium) {
+    padding: 64px 0;
+  }
+}
+
 .backgroundImageWrapper {
   position: absolute;
   top: 0;

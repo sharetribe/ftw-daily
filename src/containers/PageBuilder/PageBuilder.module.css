@@ -6,7 +6,7 @@
 .topbar {
   position: sticky;
   top: 0;
-  z-index: var(--zIndexTopbar);
+  z-index: 999;
 }
 
 .main {

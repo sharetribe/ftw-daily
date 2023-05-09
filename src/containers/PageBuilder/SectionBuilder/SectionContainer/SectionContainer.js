@@ -25,7 +25,7 @@ const SectionContainer = props => {
         />
       ) : null}
 
-      <div className={css.sectionContent}>{children}</div>
+      <div className={sectionId == "featured-locations" ? css.locationFeat : css.sectionContent}>{children}</div>
     </Tag>
   );
 };
