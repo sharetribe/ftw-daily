@@ -136,6 +136,17 @@ export const filters = [
   //   },
   // },
   {
+    id: 'dates',
+    label: 'Dates',
+    type: 'BookingDateRangeFilter',
+    filtersFor: ["SearchPage","LandingPage"],
+    group: 'primary',
+    // Note: BookingDateRangeFilter is fixed filter,
+    // you can't change "queryParamNames: ['dates'],"
+    queryParamNames: ['dates'],
+    config: {},
+  },
+  {
     id: 'serviceSetup',
     label: 'Type of Services',
     type: 'SelectMultipleFilter',
@@ -158,17 +169,7 @@ export const filters = [
       ],
     },
   },
-  {
-    id: 'dates',
-    label: 'Dates',
-    type: 'BookingDateRangeFilter',
-    filtersFor: ["SearchPage","LandingPage"],
-    group: 'primary',
-    // Note: BookingDateRangeFilter is fixed filter,
-    // you can't change "queryParamNames: ['dates'],"
-    queryParamNames: ['dates'],
-    config: {},
-  },
+
   {
     id: 'typeOfPets',
     label: 'Type of Pet',

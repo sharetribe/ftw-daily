@@ -365,13 +365,14 @@
           &:nth-child(2) {
             width: 300px;
             /* order: 1; */
-            order: 1;
+            /* order: 1; */
             z-index: 99;
             /* background-color: green; */
           }
 
           &:nth-child(3) {
             width: auto;
+            z-index: 0;
             /* order: 3; */
             /* background-color: pink; */
           }

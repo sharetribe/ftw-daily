@@ -189,7 +189,19 @@ export const showListing = (listingId, isOwn = false) => (dispatch, getState, sd
 
   return show
     .then(data => {
+     
+      console.log(listingId, '^^^^ ^^^^ => listingId');
+      
       dispatch(addMarketplaceEntities(data));
+      const today = new Date();
+       sdk.bookings
+      .query({
+        listingId: listingId,
+        start:new Date(data.data.data.attributes.createdAt),
+        end: today
+      }).then(res => {
+       console.log('res', res)
+      });
       return data;
     })
     .catch(e => {

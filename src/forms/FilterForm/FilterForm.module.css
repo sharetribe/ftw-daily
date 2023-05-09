@@ -1,6 +1,6 @@
 .root {
   outline: none;
-  z-index: 9;
+  z-index: 9999;
 }
 
 .contentWrapper {

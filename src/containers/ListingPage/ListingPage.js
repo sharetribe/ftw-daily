@@ -482,13 +482,14 @@ export class ListingPageComponent extends Component {
                     <p className={css.featuresDescription}> {yourselfexp}</p>
                   </div>
                   <SectionRulesMaybe publicData={publicData} />
+                  <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
                   <SectionMapMaybe
                     geolocation={geolocation}
                     publicData={publicData}
                     listingId={currentListing.id}
                   />
                   {/* {reviews == 0 ? null:<SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />} */}
-                  <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
+               
                   {/* <SectionHostMaybe
                     title={title}
                     listing={currentListing}
