@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import moment from 'moment';
 import config from '../../config';
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
-import { required, bookingDatesRequired, composeValidators } from '../../util/validators';
+import { required, bookingDatesRequired, composeValidators, requiredFieldArrayCheckbox } from '../../util/validators';
 import { START_DATE, END_DATE } from '../../util/dates';
 import { propTypes } from '../../util/types';
 import { Form, IconSpinner, PrimaryButton, FieldDateRangeInput, FieldCheckbox, FieldRadioButton, FieldTextInput, FieldSelect } from '../../components';
@@ -148,6 +148,10 @@ export class BookingDatesFormComponent extends Component {
           const requiredMessage = intl.formatMessage({
             id: 'BookingDatesForm.requiredDate',
           });
+
+          const requiredpetMessage = intl.formatMessage({
+            id: 'BookingDatesForm.requiredNumberofpet',
+          });
           const startDateErrorMessage = intl.formatMessage({
             id: 'FieldDateRangeInput.invalidStartDate',
           });
@@ -216,7 +220,7 @@ export class BookingDatesFormComponent extends Component {
           const submitButtonClasses = classNames(
             submitButtonWrapperClassName || css.submitButtonWrapper
           );
-
+          const submitDisabled = !detail || !numberPetArray;
           return (
             <Form onSubmit={handleSubmit} className={classes} enforcePagePreloadFor="CheckoutPage">
               {timeSlotsError}
@@ -227,11 +231,7 @@ export class BookingDatesFormComponent extends Component {
                 }}
               />
 
-              {/* <p>Choose what service you wish to offers...</p> */}
-
-              {/* <div className={css.categoryText}>
-                <FormattedMessage className={css.description} id="EditListingDescriptionForm.categoryLabel" />
-              </div> */}
+      
               <div className={css.categoryText}>
                 <FormattedMessage className={css.description} id="EditListingDescriptionForm.categorytext" />
               </div>
@@ -244,16 +244,27 @@ export class BookingDatesFormComponent extends Component {
                       name={"serviceSetup"}
                       value={st}
                       label={st}
-                      autoFocus
+                      disabled={ submitDisabled }
+                      validate={composeValidators(
+                        requiredFieldArrayCheckbox(requiredMessage),
+                       
+                      )}
                     />
                   )
                 })}
+              
+               
               </div>
               <FieldSelect
               className={css.numberPets}
                 id="numberOfPets"
                 name="numberOfPets"
                 label={"Number Of Pets"}
+                disabled={ submitDisabled }
+                validate={composeValidators(
+                  required(requiredpetMessage),
+                 
+                )}
               >
                 <option value={""}>select</option>
                 {numberPetArray.map((st) => {
@@ -261,6 +272,8 @@ export class BookingDatesFormComponent extends Component {
                     <option key={st} value={st}>{st}</option>
                   )
                 })}
+               
+           
               </FieldSelect>
 
               <FieldDateRangeInput
@@ -300,7 +313,7 @@ export class BookingDatesFormComponent extends Component {
                 />
               </p>
               <div className={submitButtonClasses}>
-                <PrimaryButton type="submit">
+                <PrimaryButton type="submit" disabled={submitDisabled}>
                   <FormattedMessage id="BookingDatesForm.requestToBook" />
                 </PrimaryButton>
               </div>

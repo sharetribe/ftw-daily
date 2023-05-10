@@ -16,6 +16,7 @@ const FeedSection = props => {
     fetchMessagesInProgress,
     initialMessageFailed,
     messages,
+    providerName,
     oldestMessagePageFetched,
     onShowMoreMessages,
     onOpenReviewModal,
@@ -50,6 +51,7 @@ const FeedSection = props => {
       <ActivityFeed
         className={css.feed}
         messages={messages}
+        
         transaction={currentTransaction}
         currentUser={currentUser}
         hasOlderMessages={hasOlderMessages && !fetchMessagesInProgress}

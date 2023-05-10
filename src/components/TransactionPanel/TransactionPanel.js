@@ -388,6 +388,7 @@ export class TransactionPanelComponent extends Component {
               rootClassName={css.feedContainer}
               currentTransaction={currentTransaction}
               currentUser={currentUser}
+              providerName={authorDisplayName}
               fetchMessagesError={fetchMessagesError}
               fetchMessagesInProgress={fetchMessagesInProgress}
               initialMessageFailed={initialMessageFailed}
@@ -431,6 +432,7 @@ export class TransactionPanelComponent extends Component {
                 showDetailCardHeadings={stateData.showDetailCardHeadings}
                 listingTitle={listingTitle}
                 subTitle={bookingSubTitle}
+                providerName={authorDisplayName}
                 location={location}
                 geolocation={geolocation}
                 showAddress={stateData.showAddress}

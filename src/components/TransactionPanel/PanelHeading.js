@@ -15,14 +15,17 @@ export const HEADING_DECLINED = 'declined';
 export const HEADING_CANCELED = 'canceled';
 export const HEADING_DELIVERED = 'delivered';
 
+
 const createListingLink = (listingId, label, listingDeleted, searchParams = {}, className = '') => {
   if (!listingDeleted) {
     const params = { id: listingId, slug: createSlug(label) };
     const to = { search: stringify(searchParams) };
     return (
-      <NamedLink className={className} name="ListingPage" params={params} to={to}>
-        {label}
-      </NamedLink>
+      // <NamedLink className={className} name="ListingPage" params={params} to={to}>
+      //   {label}
+      // </NamedLink>
+      
+      <></>
     );
   } else {
     return <FormattedMessage id="TransactionPanel.deletedListingOrderTitle" />;
@@ -174,7 +177,7 @@ const PanelHeading = props => {
           id="TransactionPanel.orderPreauthorizedTitle"
           values={{ customerName }}
           subtitleId="TransactionPanel.orderPreauthorizedSubtitle"
-          subtitleValues={{ listingLink }}
+          subtitleValues={{ providerName }}
         >
           {!listingDeleted ? (
             <p className={css.transactionInfoMessage}>
