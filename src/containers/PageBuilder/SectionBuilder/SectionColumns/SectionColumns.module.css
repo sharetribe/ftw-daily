@@ -365,7 +365,7 @@
           &:nth-child(2) {
             width: 300px;
             /* order: 1; */
-            order: 1;
+            /* order: 1; */
             z-index: 99;
             /* background-color: green; */
           }
