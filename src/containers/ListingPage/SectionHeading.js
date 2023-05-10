@@ -53,12 +53,13 @@ const SectionHeading = props => {
           <p className={css.yourSelfText}>{yourself}</p>
 
           <div className={css.reviewBookingRow}>
-            <div className={css.reviewBox}>
-              <SectionReviewsheading reviews={reviews} fetchReviewsError={fetchReviewsError} />
-            </div>
+           
             {/* <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} /> */}
             <div className={css.numberBooking}>
               <p>{totalbooking?.length} Bookings </p>
+            </div>
+            <div className={css.reviewBox}>
+              <SectionReviewsheading reviews={reviews} fetchReviewsError={fetchReviewsError} />
             </div>
             {ratings ?
               <div className={css.ratingStar}>
