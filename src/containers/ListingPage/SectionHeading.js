@@ -23,7 +23,7 @@ const SectionHeading = props => {
     fetchReviewsError,
     yourself,
   } = props;
-  
+
 
   const unitType = config.bookingUnitType;
   const isNightly = unitType === LINE_ITEM_NIGHT;
@@ -32,8 +32,8 @@ const SectionHeading = props => {
   const unitTranslationKey = isNightly
     ? 'ListingPage.perNight'
     : isDaily
-    ? 'ListingPage.perDay'
-    : 'ListingPage.perUnit';
+      ? 'ListingPage.perDay'
+      : 'ListingPage.perUnit';
 
   return (
     <div className={css.sectionHeading}>
@@ -50,18 +50,27 @@ const SectionHeading = props => {
         <div className={css.author}>
           {category}
           {/* <FormattedMessage id="ListingPage.hostedBy" values={{ name: hostLink }} /> */}
-         <p className={css.yourSelfText}>{yourself}</p>
-         
-         <SectionReviewsheading reviews={reviews} fetchReviewsError={fetchReviewsError}/>
-          {/* <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} /> */}
-          <p>Number of booking {totalbooking?.length}</p>
-          {ratings ? <p>Average ratings: &nbsp;
-            <ReviewRating
-              rating={ratings}
-              reviewStarClassName={css.reviewRatingStar}
-            />
-          </p> : null}
-       
+          <p className={css.yourSelfText}>{yourself}</p>
+
+          <div className={css.reviewBookingRow}>
+            <div className={css.reviewBox}>
+              <SectionReviewsheading reviews={reviews} fetchReviewsError={fetchReviewsError} />
+            </div>
+            {/* <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} /> */}
+            <div className={css.numberBooking}>
+              <p>Number of booking {totalbooking?.length}</p>
+            </div>
+            {ratings ?
+              <div className={css.ratingStar}>
+                <ReviewRating
+                  rating={ratings}
+                  reviewStarClassName={css.reviewRatingStar}
+                />
+              </div>
+              : null}
+          </div>
+
+
           {showContactUser ? (
             <span className={css.contactWrapper}>
               <span className={css.separator}>•</span>

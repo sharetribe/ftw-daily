@@ -361,6 +361,46 @@
   }
 }
 
+.reviewBookingRow {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+
+  & .numberBooking {
+    background-color: #e9e9e9;
+    width: fit-content;
+    padding: 0px 15px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+
+    & p {
+      font-weight: 600;
+    }
+  }
+
+  & .ratingStar {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.reviewBox {
+
+  & h2 {
+    background-color: #e9e9e9;
+    width: fit-content;
+    padding: 0px 15px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+  }
+}
+
 .author {
   width: 100%;
   composes: h5 from global;
@@ -384,6 +424,7 @@
 
   @media (--viewportMedium) {
     display: inline;
+    margin-top: 20px;
   }
 }
 
@@ -398,7 +439,7 @@
 
   /* Borders */
   border: none;
-
+  margin-top: 20px !important;
   /* Colors */
   color: var(--marketplaceColor);
 
@@ -538,6 +579,7 @@
 
 .yourSelfText {
   margin-bottom: 0;
+  font-weight: 600;
 }
 
 .reviewsHeading {
