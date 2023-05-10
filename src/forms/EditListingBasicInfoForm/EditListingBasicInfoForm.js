@@ -168,7 +168,6 @@ const EditListingBasicInfoFormComponent = props => (
             placeholder={titlePlaceholderMessage}
             maxLength={TITLE_MAX_LENGTH}
             validate={composeValidators(required(titleRequiredMessage), maxLength60Message)}
-            autoFocus
           />
 
           <label className={css.title}>{birthdateMessage}</label>
@@ -196,7 +195,6 @@ const EditListingBasicInfoFormComponent = props => (
               iconClassName={css.locationAutocompleteInputIcon}
               predictionsClassName={css.predictionsRoot}
               validClassName={css.validLocation}
-              autoFocus
               name="location"
               label={locMessage}
               placeholder={addressPlaceholderMessage}
@@ -220,7 +218,6 @@ const EditListingBasicInfoFormComponent = props => (
             placeholder={addressPlaceholderMessage}
             
             validate={composeValidators(required(addressRequiredMessage))}
-            autoFocus
           />
           </div> */}
 
@@ -232,7 +229,6 @@ const EditListingBasicInfoFormComponent = props => (
             label={descriptionMessage}
             placeholder={descriptionPlaceholderMessage}
             validate={composeValidators(required(descriptionRequiredMessage))}
-            autoFocus
             disabled={true}
           />
 
@@ -240,11 +236,9 @@ const EditListingBasicInfoFormComponent = props => (
             id="phone"
             name="phone"
             className={css.description}
-
             label={phoneMessage}
             placeholder={phonePlaceholderMessage}
             validate={composeValidators(required(phoneRequiredMessage))}
-            autoFocus
           />
           <div className={css.serviceLabel}>
             <FormattedMessage className={css.description} id="EditListingDescriptionForm.categoryLabel" />
@@ -264,7 +258,6 @@ const EditListingBasicInfoFormComponent = props => (
                     value={st.key}
                     label={st.label}
                     validate={composeValidators(required(phoneRequiredMessage))}
-                    autoFocus
                   />
                 </div>
               )

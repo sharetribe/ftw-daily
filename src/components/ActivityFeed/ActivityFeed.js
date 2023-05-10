@@ -118,7 +118,8 @@ const resolveTransitionMessage = (
   switch (currentTransition) {
     case TRANSITION_CONFIRM_PAYMENT:
       return isOwnTransition ? (
-        <FormattedMessage id="ActivityFeed.ownTransitionRequest" values={{ listingTitle }} />
+         <FormattedMessage id="ActivityFeed.ownTransitionRequest" values={{ listingTitle }} />
+      
       ) : (
         <FormattedMessage
           id="ActivityFeed.transitionRequest"
@@ -335,7 +336,10 @@ export const ActivityFeedComponent = props => {
     onShowOlderMessages,
     fetchMessagesInProgress,
     intl,
+    providerName,
   } = props;
+
+  console.log('providerName,', providerName,)
   const classes = classNames(rootClassName || css.root, className);
 
   const currentTransaction = ensureTransaction(transaction);

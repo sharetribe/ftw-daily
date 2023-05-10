@@ -84,7 +84,7 @@ const BookingPanel = props => {
     publicData,
   } = props;
   //console.log(listing, '^^^^ ^^^^ => listing');
-  console.log('publicData ', publicData)
+ 
   const price = listing.attributes.price;
   const hasListingState = !!listing.attributes.state;
   const isClosed = hasListingState && listing.attributes.state === LISTING_STATE_CLOSED;

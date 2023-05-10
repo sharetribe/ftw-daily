@@ -5,7 +5,7 @@ import { Reviews } from '../../components';
 import css from './ListingPage.module.css';
 import SectionHeading from './SectionHeading';
 
-const SectionReviews = props => {
+const SectionReviewsheading = props => {
   const { reviews, fetchReviewsError } = props;
 
   const reviewsError = (
@@ -21,10 +21,10 @@ const SectionReviews = props => {
       </h2>
       {fetchReviewsError ? reviewsError : null}
 
-     
-      <Reviews reviews={reviews} />
+{/*      
+      <Reviews reviews={reviews} /> */}
     </div>
   );
 };
 
-export default SectionReviews;
+export default SectionReviewsheading;

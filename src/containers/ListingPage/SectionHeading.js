@@ -1,11 +1,12 @@
 import React from 'react';
 import { FormattedMessage } from '../../util/reactIntl';
-import { InlineTextButton } from '../../components';
+import { InlineTextButton, ReviewRating } from '../../components';
 import { LINE_ITEM_NIGHT, LINE_ITEM_DAY } from '../../util/types';
 import config from '../../config';
 
 import css from './ListingPage.module.css';
 import SectionReviews from './SectionReviews';
+import SectionReviewsheading from './SectionReviewsHeading';
 
 const SectionHeading = props => {
   const {
@@ -17,9 +18,12 @@ const SectionHeading = props => {
     showContactUser,
     onContactUser,
     reviews,
+    ratings,
+    totalbooking,
     fetchReviewsError,
     yourself,
   } = props;
+  
 
   const unitType = config.bookingUnitType;
   const isNightly = unitType === LINE_ITEM_NIGHT;
@@ -47,7 +51,17 @@ const SectionHeading = props => {
           {category}
           {/* <FormattedMessage id="ListingPage.hostedBy" values={{ name: hostLink }} /> */}
          <p className={css.yourSelfText}>{yourself}</p>
-          <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
+         
+         <SectionReviewsheading reviews={reviews} fetchReviewsError={fetchReviewsError}/>
+          {/* <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} /> */}
+          <p>Number of booking {totalbooking?.length}</p>
+          {ratings ? <p>Average ratings: &nbsp;
+            <ReviewRating
+              rating={ratings}
+              reviewStarClassName={css.reviewRatingStar}
+            />
+          </p> : null}
+       
           {showContactUser ? (
             <span className={css.contactWrapper}>
               <span className={css.separator}>•</span>

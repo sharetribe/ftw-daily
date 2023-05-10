@@ -136,6 +136,17 @@ export const filters = [
   //   },
   // },
   {
+    id: 'dates',
+    label: 'Dates',
+    type: 'BookingDateRangeFilter',
+    filtersFor: ["SearchPage","LandingPage"],
+    group: 'primary',
+    // Note: BookingDateRangeFilter is fixed filter,
+    // you can't change "queryParamNames: ['dates'],"
+    queryParamNames: ['dates'],
+    config: {},
+  },
+  {
     id: 'serviceSetup',
     label: 'Type of Services',
     type: 'SelectMultipleFilter',
@@ -158,24 +169,14 @@ export const filters = [
       ],
     },
   },
-  {
-    id: 'dates',
-    label: 'Dates',
-    type: 'BookingDateRangeFilter',
-    filtersFor: ["SearchPage","LandingPage"],
-    group: 'primary',
-    // Note: BookingDateRangeFilter is fixed filter,
-    // you can't change "queryParamNames: ['dates'],"
-    queryParamNames: ['dates'],
-    config: {},
-  },
+
   {
     id: 'typeOfPets',
     label: 'Type of Pet',
     type: 'SelectMultipleFilter',
     group: 'primary',
     filtersFor: ["SearchPage","LandingPage"],
-    queryParamNames: ['pub_typeOfpets'],
+    queryParamNames: ['pub_typeOfPets'],
     config: {
       searchMode: 'has_all',
       options: [
@@ -248,22 +249,21 @@ export const filters = [
     label: 'Number Of Pets',
     type: 'SelectSingleFilter',
     group: 'primary',
-    filtersFor: ["SearchPage","LandingPage"],
+    filtersFor: ["SearchPage", "LandingPage"],
     queryParamNames: ['pub_numberOfPets'],
-    config: {
-      
-      searchMode: 'has_all',
+    config: {      
+      // searchMode: 'has_all',
       options: [
         {
-          key: 'one',
+          key: '1',
           label: '1',
         },
         {
-          key: 'two',
+          key: '2',
           label: '2',
         },
         {
-          key: 'three',
+          key: '3',
           label: '3+',
         },
        

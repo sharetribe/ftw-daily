@@ -3046,6 +3046,11 @@ boolbase@^1.0.0, boolbase@~1.0.0:
   resolved "https://registry.npmjs.org/boolbase/-/boolbase-1.0.0.tgz"
   integrity "sha1-aN/1++YMUes3cl6p4+0xDcwed24= sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww=="
 
+bottleneck@^2.19.5:
+  version "2.19.5"
+  resolved "https://registry.yarnpkg.com/bottleneck/-/bottleneck-2.19.5.tgz#5df0b90f59fd47656ebe63c78a98419205cadd91"
+  integrity sha512-VHiNCbI1lKdl44tGrhNfU3lup0Tj/ZBMJB5/2ZbNXRCPuRCO7ed2mgcK4r17y+KB2EfuYuRaVlwNbAeaWGSpbw==
+
 boxen@^5.0.0:
   version "5.1.2"
   resolved "https://registry.npmjs.org/boxen/-/boxen-5.1.2.tgz"
@@ -3113,6 +3118,11 @@ buffer-crc32@~0.2.3:
   version "0.2.13"
   resolved "https://registry.npmjs.org/buffer-crc32/-/buffer-crc32-0.2.13.tgz"
   integrity "sha1-DTM+PwDqxQqhRUq9MO+MKl2ackI= sha512-VO9Ht/+p3SN7SKWqcrgEzjGbRSJYTx+Q1pTQC0wrWqHx0vpJraQ6GtHx8tvcg1rlK1byhU5gccxgOgj7B0TDkQ=="
+
+buffer-equal-constant-time@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/buffer-equal-constant-time/-/buffer-equal-constant-time-1.0.1.tgz#f8e71132f7ffe6e01a5c9697a4c6f3e48d5cc819"
+  integrity sha512-zRpUiDwd/xk6ADqPMATG8vc9VPrkck7T07OIx0gnjmJAnHnTVXNQG3vfvWNuiZIkwu9KrKdA1iJKfsfTVxE6NA==
 
 buffer-from@^1.0.0:
   version "1.1.2"
@@ -4242,6 +4252,13 @@ duplexer@^0.1.2:
   resolved "https://registry.npmjs.org/duplexer/-/duplexer-0.1.2.tgz"
   integrity sha512-jtD6YG370ZCIi/9GTaJKQxWTZD045+4R4hTk/x1UyoqadyJ9x9CgSi1RlVDQF8U2sxLLSnFkCaMihqljHIWgMg==
 
+ecdsa-sig-formatter@1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/ecdsa-sig-formatter/-/ecdsa-sig-formatter-1.0.11.tgz#ae0f0fa2d85045ef14a817daa3ce9acd0489e5bf"
+  integrity sha512-nagl3RYrbNv6kQkeJIpt6NJZy8twLB/2vtz6yN9Z4vRKHN4/QZJIEbqohALSgwKdnksuY3k5Addp5lg8sVoVcQ==
+  dependencies:
+    safe-buffer "^5.0.1"
+
 ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz"
@@ -4318,6 +4335,11 @@ entities@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/entities/-/entities-2.0.0.tgz"
   integrity sha512-D9f7V0JSRwIxlRI2mjMqufDrRDnx8p+eEOz7aUM9SuvF8gsBzra0/6tbjl1m8eQHrZlYj6PxqE00hZ1SAIKPLw==
+
+env-paths@^2.2.0:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/env-paths/-/env-paths-2.2.1.tgz#420399d416ce1fbe9bc0a07c62fa68d67fd0f8f2"
+  integrity sha512-+h1lkLKhZMTYjog1VEpJNG7NZJWcuc2DDk/qsqSTRRCOXiLjeQ1d1/udrUGhqMxUgAlwKNZ0cf2uqan5GLuS2A==
 
 enzyme-adapter-react-16@^1.15.6:
   version "1.15.6"
@@ -6733,6 +6755,16 @@ jsonpointer@^5.0.0:
   resolved "https://registry.npmjs.org/jsonpointer/-/jsonpointer-5.0.0.tgz"
   integrity sha512-PNYZIdMjVIvVgDSYKTT63Y+KZ6IZvGRNNWcxwD+GNnUz1MKPfv30J8ueCjdwcN0nDx2SlshgyB7Oy0epAzVRRg==
 
+jsonwebtoken@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/jsonwebtoken/-/jsonwebtoken-9.0.0.tgz#d0faf9ba1cc3a56255fe49c0961a67e520c1926d"
+  integrity sha512-tuGfYXxkQGDPnLJ7SibiQgVgeDgfbPq2k2ICcbgqW8WxWLBAxKQM/ZCu/IT8SOSwmaYl4dpTFCW5xZv7YbbWUw==
+  dependencies:
+    jws "^3.2.2"
+    lodash "^4.17.21"
+    ms "^2.1.1"
+    semver "^7.3.8"
+
 "jsx-ast-utils@^2.4.1 || ^3.0.0", jsx-ast-utils@^3.3.1:
   version "3.3.2"
   resolved "https://registry.npmjs.org/jsx-ast-utils/-/jsx-ast-utils-3.3.2.tgz"
@@ -6740,6 +6772,23 @@ jsonpointer@^5.0.0:
   dependencies:
     array-includes "^3.1.5"
     object.assign "^4.1.2"
+
+jwa@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/jwa/-/jwa-1.4.1.tgz#743c32985cb9e98655530d53641b66c8645b039a"
+  integrity sha512-qiLX/xhEEFKUAJ6FiBMbes3w9ATzyk5W7Hvzpa/SLYdxNtng+gcurvrI7TbACjIXlsJyr05/S1oUhZrc63evQA==
+  dependencies:
+    buffer-equal-constant-time "1.0.1"
+    ecdsa-sig-formatter "1.0.11"
+    safe-buffer "^5.0.1"
+
+jws@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/jws/-/jws-3.2.2.tgz#001099f3639468c9414000e99995fa52fb478304"
+  integrity sha512-YHlZCB6lMTllWDtSPHz/ZXTsi8S00usEV6v1tjq8tOUZzw7DpSDWVXjXDre6ed1w/pd495ODpHZYSdkRTsa0HA==
+  dependencies:
+    jwa "^1.4.1"
+    safe-buffer "^5.0.1"
 
 keyv@^3.0.0:
   version "3.1.0"
@@ -8621,7 +8670,7 @@ raw-body@2.5.1:
 
 rc-slider@^10.1.1:
   version "10.1.1"
-  resolved "https://registry.yarnpkg.com/rc-slider/-/rc-slider-10.1.1.tgz#5e82036e60b61021aba3ea0e353744dd7c74e104"
+  resolved "https://registry.npmjs.org/rc-slider/-/rc-slider-10.1.1.tgz"
   integrity sha512-gn8oXazZISEhnmRinI89Z/JD/joAaM35jp+gDtIVSTD/JJMCCBqThqLk1SVJmvtfeiEF/kKaFY0+qt4SDHFUDw==
   dependencies:
     "@babel/runtime" "^7.10.1"
@@ -8665,14 +8714,6 @@ react-aws-s3@^1.5.0:
   dependencies:
     crypto-js "^3.1.9-1"
     short-uuid "^3.1.0"
-
-react-bootstrap-range-slider@^3.0.8:
-  version "3.0.8"
-  resolved "https://registry.yarnpkg.com/react-bootstrap-range-slider/-/react-bootstrap-range-slider-3.0.8.tgz#5efc36314dc02195914b3dbdaed00da41af83682"
-  integrity sha512-FpDd1J1BW23jNN3fXmpy5nNDJ3PwMZ2/0dNse9RORwQ/z2rmpMQp/g6iNRpW6SjQkLKyGeNHyctK6dP+3zUXQA==
-  dependencies:
-    classnames "^2.3.1"
-    prop-types "^15.7.2"
 
 react-dates@^21.8.0:
   version "21.8.0"
@@ -9311,7 +9352,7 @@ safe-buffer@5.1.2, safe-buffer@>=5.1.0, safe-buffer@^5.1.0, safe-buffer@~5.1.0, 
   resolved "https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.1.2.tgz"
   integrity sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g==
 
-safe-buffer@5.2.1, safe-buffer@~5.2.0:
+safe-buffer@5.2.1, safe-buffer@^5.0.1, safe-buffer@~5.2.0:
   version "5.2.1"
   resolved "https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.2.1.tgz"
   integrity sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==
@@ -9460,6 +9501,13 @@ semver@^7.3.5, semver@^7.3.7:
   dependencies:
     lru-cache "^6.0.0"
 
+semver@^7.3.8:
+  version "7.5.0"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-7.5.0.tgz#ed8c5dc8efb6c629c88b23d41dc9bf40c1d96cd0"
+  integrity sha512-+XC0AD/R7Q2mPSRuy2Id0+CGTZ98+8f+KvwirxOKIEyid+XSx6HbC63p+O4IndTHuX5Z+JxQ0TghCkO5Cg/2HA==
+  dependencies:
+    lru-cache "^6.0.0"
+
 send@0.18.0:
   version "0.18.0"
   resolved "https://registry.npmjs.org/send/-/send-0.18.0.tgz"
@@ -9536,13 +9584,27 @@ shallowequal@^1.1.0:
   resolved "https://registry.npmjs.org/shallowequal/-/shallowequal-1.1.0.tgz"
   integrity sha512-y0m1JoUZSlPAjXVtPPW70aZWfIL/dSP7AFkRnniLCrK/8MDKog3TySTBmckD+RObVxH0v4Tox67+F14PdED2oQ==
 
-sharetribe-flex-sdk@^1.17.0:
-  version "1.17.0"
-  resolved "https://registry.npmjs.org/sharetribe-flex-sdk/-/sharetribe-flex-sdk-1.17.0.tgz"
-  integrity sha512-E7I6k9S9s5EOV3oCdBwsJOThIqSUaNLju8cAO0HE/YeHBaK2/5wiQrHhZe5dZdAgcKOkR+jVEfcj5XLVL00p8A==
+sharetribe-flex-integration-sdk@^1.9.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/sharetribe-flex-integration-sdk/-/sharetribe-flex-integration-sdk-1.9.0.tgz#252acbf4b32cea59dc818ea008c33ec0df4f7f7e"
+  integrity sha512-HvOXfFUBxLquBX88HK3S/+JFp203LOiOWt0aDWSIhHinkpFs3ie0czaxitcy0gd2YsU2VXC5eynixdIGbrAV3A==
+  dependencies:
+    axios "^0.21.1"
+    bottleneck "^2.19.5"
+    env-paths "^2.2.0"
+    form-data "^3.0.0"
+    lodash "^4.17.10"
+    transit-js "^0.8.861"
+    xdg-basedir "^4.0.0"
+
+sharetribe-flex-sdk@^1.19.0:
+  version "1.19.0"
+  resolved "https://registry.yarnpkg.com/sharetribe-flex-sdk/-/sharetribe-flex-sdk-1.19.0.tgz#fe640e42f3662d0eda236d4fbcc1f3b120ed4bff"
+  integrity sha512-w/cSUVL3NCb3i4a7xyUz5PrfuHgRabV5Sc/zxyp/vsEU3bhUISO9it4Ce0L7TSN8M8eCxm4zaXAZD7daroRGtw==
   dependencies:
     axios "^0.21.1"
     js-cookie "^2.1.3"
+    jsonwebtoken "^9.0.0"
     lodash "^4.17.10"
     transit-js "^0.8.861"
 

@@ -372,6 +372,7 @@
 
           &:nth-child(3) {
             width: auto;
+            z-index: 0;
             /* order: 3; */
             /* background-color: pink; */
           }

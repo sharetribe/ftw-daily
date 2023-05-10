@@ -26,10 +26,11 @@ const EditListingPetPrefrencePanel = props => {
     updateInProgress,
     errors,
   } = props;
-
+console.log('listing', listing)
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureListing(listing);
   const { publicData } = currentListing.attributes;
+  const { typeOfPets, numberOfPets, sizeOfdogs } = publicData || {};
 
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
   const panelTitle = isPublished ? (
@@ -41,9 +42,6 @@ const EditListingPetPrefrencePanel = props => {
     <FormattedMessage id="EditListingFeaturesPanel.createListingTitle" />
   );
 
-  const amenities = publicData && publicData.amenities;
-  const initialValues = { typeOfPets: publicData.typeOfPets, numberOfPets: publicData.numberOfPets, sizeOfdogs: publicData.sizeOfdogs };
-
   return (
     <div className={classes}>
       <h1 className={css.title}>{panelTitle}</h1>
@@ -51,12 +49,11 @@ const EditListingPetPrefrencePanel = props => {
       <EditListingPetPrefrenceForm
         className={css.form}
         name={FEATURES_NAME}
-        initialValues={initialValues}
+        initialValues={{ typeOfPets, numberOfPets: (numberOfPets + ''), sizeOfdogs }}
         onSubmit={values => {
           const { amenities = [], sizeOfdogs, typeOfPets, numberOfPets } = values;
-
           const updatedValues = {
-            publicData: { amenities, sizeOfdogs, typeOfPets, numberOfPets },
+            publicData: { amenities, sizeOfdogs, typeOfPets, numberOfPets: parseInt(numberOfPets) },
           };
           onSubmit(updatedValues);
         }}

@@ -12,11 +12,12 @@ const DetailCardHeadingsMaybe = props => {
     location,
     geolocation,
     showAddress,
+    providerName,
   } = props;
 
   return showDetailCardHeadings ? (
     <div className={css.detailCardHeadings}>
-      <h2 className={css.detailCardTitle}>{listingTitle}</h2>
+      <h2 className={css.detailCardTitle}>{providerName}</h2>
       <p className={css.detailCardSubtitle}>{subTitle}</p>
       <AddressLinkMaybe location={location} geolocation={geolocation} showAddress={showAddress} />
     </div>

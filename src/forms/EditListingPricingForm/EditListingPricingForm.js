@@ -12,8 +12,7 @@ import { formatMoney } from '../../util/currency';
 import { findOptionsForSelectFilter } from '../../util/search';
 import { types as sdkTypes } from '../../util/sdkLoader';
 import FieldRadioButtonComponent from '../../components/FieldRadioButton/FieldRadioButton';
-import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
-import RangeSlider from 'react-bootstrap-range-slider';
+
 
 import {
   Button,
@@ -234,11 +233,7 @@ export const EditListingPricingFormComponent = props => (
               </div>
               <div className={css.rangeBox}>
                 <p>Discount</p>
-{/* 
-                <RangeSlider
-      value={value}
-      onChange={handleDiscountChange}
-    /> */}
+
                 <Slider
                   min={0}
                   max={50}

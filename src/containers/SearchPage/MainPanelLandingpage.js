@@ -199,7 +199,7 @@ class MainPanelLandingPage extends Component {
       let checked = true;
       if (f.id == "sizeOfdogs") {
         checked = false;
-        if (this.state.currentQueryParams && this.state.currentQueryParams.pub_typeOfpets && this.state.currentQueryParams.pub_typeOfpets.search("dog") > -1) {
+        if (this.state.currentQueryParams && this.state.currentQueryParams.pub_typeOfPets && this.state.currentQueryParams.pub_typeOfPets.search("dog") > -1) {
           checked = true;
         }
 

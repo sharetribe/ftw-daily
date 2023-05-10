@@ -17,9 +17,9 @@ const initiatePrivileged = require('./api/initiate-privileged');
 const transitionPrivileged = require('./api/transition-privileged');
 
 const createUserWithIdp = require('./api/auth/createUserWithIdp');
-
 const { authenticateFacebook, authenticateFacebookCallback } = require('./api/auth/facebook');
 const { authenticateGoogle, authenticateGoogleCallback } = require('./api/auth/google');
+const { fetchTotalBooking } = require('./api/totalBooking');
 
 const router = express.Router();
 
@@ -52,6 +52,7 @@ router.use((req, res, next) => {
 router.get('/initiate-login-as', initiateLoginAs);
 router.get('/login-as', loginAs);
 router.post('/transaction-line-items', transactionLineItems);
+router.post('/fetch-total-bookings',fetchTotalBooking );
 router.post('/initiate-privileged', initiatePrivileged);
 router.post('/transition-privileged', transitionPrivileged);
 
@@ -79,5 +80,6 @@ router.get('/auth/google', authenticateGoogle);
 // with Google. In this route a Passport.js custom callback is used for calling
 // loginWithIdp endpoint in Flex API to authenticate user to Flex
 router.get('/auth/google/callback', authenticateGoogleCallback);
+
 
 module.exports = router;
