@@ -252,7 +252,7 @@ export class BookingDatesFormComponent extends Component {
                     />
                   )
                 })}
-              
+              {/* {values.serviceSetup ? "required this field" :null} */}
                
               </div>
               <FieldSelect

@@ -58,7 +58,7 @@ const SectionHeading = props => {
             </div>
             {/* <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} /> */}
             <div className={css.numberBooking}>
-              <p>Number of booking {totalbooking?.length}</p>
+              <p>{totalbooking?.length} Bookings </p>
             </div>
             {ratings ?
               <div className={css.ratingStar}>
