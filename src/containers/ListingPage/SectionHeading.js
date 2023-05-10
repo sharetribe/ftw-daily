@@ -6,6 +6,7 @@ import config from '../../config';
 
 import css from './ListingPage.module.css';
 import SectionReviews from './SectionReviews';
+import SectionReviewsheading from './SectionReviewsHeading';
 
 const SectionHeading = props => {
   const {
@@ -50,7 +51,9 @@ const SectionHeading = props => {
           {category}
           {/* <FormattedMessage id="ListingPage.hostedBy" values={{ name: hostLink }} /> */}
          <p className={css.yourSelfText}>{yourself}</p>
-          <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
+         
+         <SectionReviewsheading reviews={reviews} fetchReviewsError={fetchReviewsError}/>
+          {/* <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} /> */}
           <p>Number of booking {totalbooking?.length}</p>
           {ratings ? <p>Average ratings: &nbsp;
             <ReviewRating
