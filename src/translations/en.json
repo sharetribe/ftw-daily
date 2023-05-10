@@ -151,7 +151,7 @@
   "ContactDetailsPage.title": "Contact details",
   "CookieConsent.continue": "Continue",
   "CookieConsent.cookieLink": "cookies",
-  "CookieConsent.message": "Welcome to Saunatime, friend! We use {cookieLink} to enhance your browsing experience.",
+  "CookieConsent.message": "Welcome to PetCrib, friend! We use {cookieLink} to enhance your browsing experience.",
   "EditListingAvailabilityForm.fetchMonthDataFailed": "Oops, couldn't load data for {month}, please try again.",
   "EditListingAvailabilityForm.availableDay": "Available",
   "EditListingAvailabilityForm.blockedDay": "Not available",
