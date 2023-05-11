@@ -11,9 +11,13 @@ import {
   Logo,
   ExternalLink,
   NamedLink,
+  ListingLink,
 } from '../../components';
 
 import css from './Footer.module.css';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom/cjs/react-router-dom.min';
 
 const renderSocialMediaLinks = intl => {
   const { siteFacebookPage, siteInstagramPage } = config;
@@ -40,8 +44,8 @@ const renderSocialMediaLinks = intl => {
   return [fbLink, instragramLink].filter(v => v != null);
 };
 
-const Footer = props => {
-  const { rootClassName, className, intl } = props;
+const FooterComponent = props => {
+  const { rootClassName, className, intl,currentUserHasOneListings } = props;
   const socialMediaLinks = renderSocialMediaLinks(intl);
   const classes = classNames(rootClassName || css.root, className);
 
@@ -69,9 +73,18 @@ const Footer = props => {
             <div className={css.infoLinks}>
               <ul className={css.list}>
                 <li className={css.listItem}>
-                  <NamedLink name="LandingPage" className={css.link}>
+                { !(currentUserHasOneListings?.id && currentUserHasOneListings) ? <> <NamedLink className={css.createListingLink} name="NewListingPage">
+        <span className={css.createListing}>
+          <FormattedMessage id="TopbarDesktop.createListing" />
+        </span>
+      </NamedLink></>: <ListingLink
+         className={classNames(css.profileSettingsLink)}
+        listing={currentUserHasOneListings}
+        children={"Update Profile"}
+      />}
+                  {/* <NamedLink name="NewListingPage" className={css.link}>
                     <FormattedMessage id="Footer.becomePartner" />
-                  </NamedLink>
+                  </NamedLink> */}
                 </li>
                 <li className={css.listItem}>
                   <NamedLink name="LandingPage" className={css.link}>
@@ -80,9 +93,9 @@ const Footer = props => {
                 </li>
                 <li className={css.listItem}>
                   <NamedLink
-                    name="CMSPage"
-                    params={{ pageId: 'about' }}
-                    to={{ hash: '#contact' }}
+                    name="ContactDetailsPage"
+                    // params={{ pageId: 'about' }}
+                    // to={{ hash: '#contact' }}
                     className={css.link}
                   >
                     <FormattedMessage id="Footer.toContactPage" />
@@ -127,15 +140,47 @@ const Footer = props => {
   );
 };
 
-Footer.defaultProps = {
+FooterComponent.defaultProps = {
   rootClassName: null,
   className: null,
 };
 
-Footer.propTypes = {
+FooterComponent.propTypes = {
   rootClassName: string,
   className: string,
   intl: intlShape.isRequired,
 };
 
+const mapStateToProps = state => {
+  // Topbar needs isAuthenticated
+  
+ 
+  
+  
+  // Topbar needs user info.currentUserListingFetched
+  const {
+   
+    currentUserHasOneListings,
+   
+  } = state.user;
+  //console.log(currentUserListingFetched, '^^^^ ^^^^ => currentUserListingFetched');
+  //console.log(state,currentUserHasOneListings, '^^^^ ^^^^ => currentUserHasListings');
+  
+ 
+  return {
+    
+   
+    currentUserHasOneListings,
+  };
+};
+
+const Footer = compose(
+  withRouter,
+  connect(
+    mapStateToProps,
+  
+  )
+)(FooterComponent);
+
+// export default UserNav;
 export default injectIntl(Footer);

@@ -92,12 +92,6 @@ const mapStateToProps = state => {
   };
 };
 
-// const mapDispatchToProps = dispatch => ({
-//   onLogout: historyPush => dispatch(logout(historyPush)),
-//   onManageDisableScrolling: (componentId, disableScrolling) =>
-//     dispatch(manageDisableScrolling(componentId, disableScrolling)),
-//   onResendVerificationEmail: () => dispatch(sendVerificationEmail()),
-// });
 const UserNav = compose(
   withRouter,
   connect(
@@ -108,4 +102,4 @@ const UserNav = compose(
 
 export default UserNav;
 
-//export default UserNav;
+

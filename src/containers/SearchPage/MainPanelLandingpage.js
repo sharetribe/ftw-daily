@@ -230,7 +230,7 @@ class MainPanelLandingPage extends Component {
       }
       return f.group === 'primary' && checked;
     });
-    console.log(primaryFilters, '^^^^ ^^^^ => primaryFilters');
+    
     const secondaryFilters = landingfilter.filter(f => f.group !== 'primary');
     const hasSecondaryFilters = !!(secondaryFilters && secondaryFilters.length > 0);
 

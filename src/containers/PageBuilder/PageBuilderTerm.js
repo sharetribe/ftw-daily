@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Footer as FooterContent } from '../../components/index.js';
 import { TopbarContainer } from '../../containers/index.js';
@@ -10,10 +10,6 @@ import SectionBuilder from './SectionBuilder/SectionBuilder.js';
 import StaticPage from './StaticPage.js';
 
 import css from './PageBuilder.module.css';
-import MainPanel from '../SearchPage/MainPanel.js';
-import { pickSearchParamsOnly, validURLParamsForExtendedData } from '../SearchPage/SearchPage.helpers.js';
-import { parse, stringify } from '../../util/urlHelpers.js';
-const MODAL_BREAKPOINT = 768;
 
 const getMetadata = (meta, schemaType, fieldOptions) => {
   const { pageTitle, pageDescription, socialSharing } = meta;
@@ -76,7 +72,7 @@ const getMetadata = (meta, schemaType, fieldOptions) => {
  * @param {Object} props
  * @returns page component
  */
-const PageBuilder = props => {
+const PageBuilderTerm = props => {
   const {
     pageAssetsData,
     inProgress,
@@ -84,56 +80,18 @@ const PageBuilder = props => {
     fallbackPage,
     schemaType,
     options,
-    onActivateListing,
-    sortConfig,
-    filterConfig,
-    listings,
-    onManageDisableScrolling,
-    pagination,
-    searchInProgress,
-    searchListingsError,
-    searchParams,
-    searchMapListingIds,
-    activeListingId,
-    location,
-    history,
     ...pageProps
   } = props;
-  //console.log('onActivateListing', listings)
-
 
   if (!pageAssetsData && fallbackPage && !inProgress && error) {
     return fallbackPage;
   }
-  //console.log(' sortConfig', sortConfig)
-  //console.log(' filterConfig', filterConfig)
+
   // Page asset contains UI info and metadata related to it.
   // - "sections" (data that goes inside <body>)
   // - "meta" (which is data that goes inside <head>)
   const { sections = [], meta = {} } = pageAssetsData || {};
-  const { mapSearch, page, ...searchInURL } = parse(location?.search, {
-    latlng: ['origin'],
-    latlngBounds: ['bounds'],
-  });
-  const [onOpenMobile, setonOpenMobileModal] = useState(false)
-
-  const onOpenMobileModal = () => {
-    setonOpenMobileModal(true);
-  }
-
-  const onMapIconClick = () => {
-    this.useLocationSearchBounds = true;
-    this.setState({ isSearchMapOpenOnMobile: true });
-  };
-  const urlQueryParams = pickSearchParamsOnly(null, filterConfig, sortConfig);
-  const validQueryParams = validURLParamsForExtendedData(searchInURL, filterConfig);
-
   const pageMetaProps = getMetadata(meta, schemaType, options?.fieldComponents);
-  const urlQueryString = stringify(urlQueryParams);
-  const paramsQueryString = stringify(
-    pickSearchParamsOnly(searchParams, filterConfig, sortConfig)
-  );
-  const searchParamsAreInSync = urlQueryString === paramsQueryString;
 
   const layoutAreas = `
     topbar
@@ -150,25 +108,8 @@ const PageBuilder = props => {
               <Topbar as="header" className={css.topbar}>
                 <TopbarContainer />
               </Topbar>
-               
               <Main as="main" className={css.main}>
-             
-                <SectionBuilder sections={sections} options={options}
-                
-                urlQueryParams={validQueryParams}
-                listings={listings}
-                searchInProgress={searchInProgress}
-                searchListingsError={searchListingsError}
-                searchParamsAreInSync={searchParamsAreInSync}
-              
-                
-                pagination={pagination}
-                searchParamsForPagination={parse(location.search)}
-                showAsModalMaxWidth={MODAL_BREAKPOINT}
-                history={history}
-                
-                />
-              
+                <SectionBuilder sections={sections} options={options} />
               </Main>
               <Footer>
                 <FooterContent />
@@ -183,4 +124,4 @@ const PageBuilder = props => {
 
 export { StaticPage, SectionBuilder };
 
-export default PageBuilder;
+export default PageBuilderTerm;

@@ -11,6 +11,7 @@ import PageBuilder, { SectionBuilder } from '../../containers/PageBuilder/PageBu
 
 import FallbackPage, { fallbackSections } from './FallbackPage';
 import { ASSET_NAME } from './PrivacyPolicyPage.duck';
+import PageBuilderTerm from '../PageBuilder/PageBuilderTerm';
 
 // This "content-only" component can be used in modals etc.
 const PrivacyPolicyContent = props => {
@@ -49,7 +50,7 @@ const PrivacyPolicyPageComponent = props => {
   const { pageAssetsData, inProgress, error } = props;
 
   return (
-    <PageBuilder
+    <PageBuilderTerm
       pageAssetsData={pageAssetsData?.[camelize(ASSET_NAME)]?.data}
       inProgress={inProgress}
       error={error}
