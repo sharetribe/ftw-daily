@@ -57,6 +57,9 @@
 .plain {
   width: 100%;
   display: none;
+  & form{
+    
+  }
 }
 
 .isOpen {
