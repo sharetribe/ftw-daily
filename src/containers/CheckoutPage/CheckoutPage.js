@@ -530,8 +530,11 @@ export class CheckoutPageComponent extends Component {
     const speculatedTransaction = ensureTransaction(speculatedTransactionMaybe, {}, null);
     const currentListing = ensureListing(listing);
     const currentAuthor = ensureUser(currentListing.author);
+    console.log('currentAuthor', currentAuthor)
 
-    const listingTitle = currentListing.attributes.title;
+    const listingTitle = currentAuthor.attributes.profile.displayName;;
+   // const Displayname = currentAuthor.attributes.profile.displayName;
+   
     const title = intl.formatMessage({ id: 'CheckoutPage.title' }, { listingTitle });
 
     const pageProps = { title, scrollingDisabled };
