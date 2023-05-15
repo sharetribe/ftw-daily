@@ -651,7 +651,7 @@ const mapDispatchToProps = dispatch => ({
   callSetInitialValues: (setInitialValues, values, saveToSessionStorage) =>
     dispatch(setInitialValues(values, saveToSessionStorage)),
   onFetchTransactionLineItems: ( listingId, isOwnListing) =>
-    dispatch(fetchTransactionLineItems( listingId, isOwnListing,totalbooking)),
+    dispatch(fetchTransactionLineItems( listingId, isOwnListing)),
   onSendEnquiry: (listingId, message) => dispatch(sendEnquiry(listingId, message)),
   onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
 });
