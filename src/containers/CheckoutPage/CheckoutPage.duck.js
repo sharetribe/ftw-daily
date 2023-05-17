@@ -307,7 +307,7 @@ export const speculateTransaction = (orderParams, transactionId) => (dispatch, g
 
   // If we already have a transaction ID, we should transition, not
   // initiate.
-  console.log(orderParams.bookingData.serviceSetup, '^^^^ ^^^^ => orderParams');
+  // console.log(orderParams.bookingData.serviceSetup, '^^^^ ^^^^ => orderParams');
   
   const isTransition = !!transactionId;
   const transition = isTransition

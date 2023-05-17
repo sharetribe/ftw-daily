@@ -7,7 +7,7 @@ import css from './BookingBreakdown.module.css';
 
 const LineItemDayBasePriceMaybe = props => {
   const { transaction, unitType, intl } = props;
-  console.log(unitType, '^^^^ ^^^^ => unitType');
+  // console.log(unitType, '^^^^ ^^^^ => unitType');
   
   const isNightly = unitType === LINE_ITEM_NIGHT;
   const isDaily = LINE_ITEM_DAY === LINE_ITEM_DAY;
@@ -27,7 +27,7 @@ const LineItemDayBasePriceMaybe = props => {
   const quantity = unitPurchase ? unitPurchase.quantity.toString() : null;
   const unitPrice = unitPurchase ? formatMoney(intl, unitPurchase.unitPrice) : null;
   const total = unitPurchase ? formatMoney(intl, unitPurchase.lineTotal) : null;
-  console.log(total, '^^^^ ^^^^ => total');
+  
   
 
   return quantity && total ? (

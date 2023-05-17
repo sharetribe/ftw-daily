@@ -83,7 +83,7 @@ const BookingPanel = props => {
 
     publicData,
   } = props;
-  //console.log(listing, '^^^^ ^^^^ => listing');
+  // console.log(listing, '^^^^ ^^^^ => listing');
  
   const price = listing.attributes.price;
   const hasListingState = !!listing.attributes.state;
@@ -140,7 +140,7 @@ const BookingPanel = props => {
         <div className={css.bookingHeading}>
           {/* hostLink={hostLink} */}
           <h2 className={titleClasses}>{hostLink}</h2>
-          {subTitleText ? <div className={css.bookingHelp}>{subTitleText}</div> : null}
+          {/* {subTitleText ? <div className={css.bookingHelp}>{subTitleText}</div> : null} */}
         </div>
         {showBookingDatesForm ? (
           <BookingDatesForm

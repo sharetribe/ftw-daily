@@ -164,7 +164,7 @@ export class CheckoutPageComponent extends Component {
     const pageData = hasDataInProps
       ? { bookingData, bookingDates, listing, transaction }
       : storedData(STORAGE_KEY);
-      console.log(pageData,"pageData")
+      // console.log(pageData,"pageData")
 
     // Check if a booking is already created according to stored data.
     const tx = pageData ? pageData.transaction : null;
@@ -250,7 +250,7 @@ export class CheckoutPageComponent extends Component {
     // Step 1: initiate order by requesting payment from Marketplace API
     const fnRequestPayment = fnParams => {
       // fnParams should be { listingId, bookingStart, bookingEnd }
-      console.log(fnParams, '^^^^ ^^^^ => fnParams');
+      // console.log(fnParams, '^^^^ ^^^^ => fnParams');
       
       const hasPaymentIntents =
         storedTx.attributes.protectedData && storedTx.attributes.protectedData.stripePaymentIntents;
@@ -530,7 +530,7 @@ export class CheckoutPageComponent extends Component {
     const speculatedTransaction = ensureTransaction(speculatedTransactionMaybe, {}, null);
     const currentListing = ensureListing(listing);
     const currentAuthor = ensureUser(currentListing.author);
-    console.log('currentAuthor', currentAuthor)
+   
 
     const listingTitle = currentAuthor.attributes.profile.displayName;;
    // const Displayname = currentAuthor.attributes.profile.displayName;

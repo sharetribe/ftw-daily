@@ -106,11 +106,15 @@ export const EditListingPricingFormComponent = props => (
       const submitDisabled = invalid || disabled || submitInProgress || !values.discount
       const { updateListingError, showListingsError } = fetchErrors || {};
       const discount = findOptionsForSelectFilter('discount', filterConfig);
+
       const detail = listing?.attributes?.publicData?.serviceSetup;
       const numberPet = listing?.attributes?.publicData?.numberOfPets;
-      const numberPetArray = numberPet && numberPet == "three" ? [1, 2, 3]
-        : numberPet == "two" ? [1, 2] : [1];
-      //console.log(values,"values");
+      
+      const numberPetArray = numberPet && numberPet == 3
+        ? [1, 2, 3]
+        : numberPet == 2 
+          ? [1, 2] 
+          : [1];
       const [stayRange, setStayRange] = useState([lengthOfStays ? lengthOfStays : 7, 90]);
       const [discountRange, setDiscountRange] = useState([discountlengthOfStays ? discountlengthOfStays : 1, 50]);
 
@@ -142,14 +146,14 @@ export const EditListingPricingFormComponent = props => (
               <FormattedMessage id="EditListingPricingForm.priceovernight" />
             </div>
             <div className={css.rowBox}>
-              {numberPetArray.map((st) =>
+              {new Array(numberPet).fill('0').map((st, i) =>
                 <FieldTextInput
-                  id={"overnightsStayPrice" + st}
-                  name={"overnightsStayPrice" + st}
+                  id={"overnightsStayPrice" + (i + 1)}
+                  name={"overnightsStayPrice" + (i + 1)}
                   className={css.priceInput}
                   autoFocus
                   type="number"
-                  label={st + "    Pet"}
+                  label={(i + 1) + "    Pet"}
                   placeholder={pricePlaceholderMessage}
                   //currencyConfig={config.currencyConfig}
 
@@ -162,14 +166,14 @@ export const EditListingPricingFormComponent = props => (
           {detail && detail.includes("dayCareStay") ? <>
             <div className={css.priceDays}><FormattedMessage id="EditListingPricingForm.priceday" /></div>
             <div className={css.rowBox}>
-              {numberPetArray.map((st) =>
+              {new Array(numberPet).fill('0').map((st, i) =>
                 <FieldTextInput
-                  id={"dayCareStay" + st}
-                  name={"dayCareStay" + st}
+                  id={"dayCareStay" + (i + 1)}
+                  name={"dayCareStay" + (i + 1)}
                   className={css.priceInput}
                   type="Number"
                   autoFocus
-                  label={st + "    Pet"}
+                  label={(i + 1) + "    Pet"}
                   placeholder={pricePlaceholderMessage}
                   //currencyConfig={config.currencyConfig}
                   validate={priceValidators}
@@ -296,8 +300,3 @@ EditListingPricingFormComponent.propTypes = {
 };
 
 export default compose(injectIntl)(EditListingPricingFormComponent);
-
-
-
-
-

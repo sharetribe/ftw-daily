@@ -159,7 +159,7 @@ export const filters = [
       options: [
         {
           key: 'overnightsStay',
-          label: 'Overnight Stay',
+          label: 'Over night stay',
         },
         {
           key: 'dayCareStay',
@@ -200,7 +200,7 @@ export const filters = [
     queryParamNames: ['pub_sizeOfdogs'],
     config: {
       
-      searchMode: 'has_all',
+      // searchMode: 'has_all',
       options: [
         {
           key: 'small',

@@ -94,6 +94,10 @@ export class BookingDatesFormComponent extends Component {
         </div>
       );
     }
+    const getLabel = (category, key) => {
+      const label = category.find(c => c.key === key);
+      return label ? label.label : key;
+    };
 
     return (
       <FinalForm
@@ -129,11 +133,13 @@ export class BookingDatesFormComponent extends Component {
           //const numberPet = findOptionsForSelectFilter('numberOfPets', filterConfig);
           //console.log(numberPet, numberPet)
 
-          const numberPetArray = numberPet && numberPet == "three" ? [1, 2, 3]
-            : numberPet == "two" ? [1, 2] : [1];
+          const numberPetArray = numberPet && numberPet == 3
+            ? [1, 2, 3]
+            : numberPet == 2
+              ? [1, 2]
+              : [1];
 
           const detail = listing?.attributes?.publicData?.serviceSetup;
-          // console.log('detail', detail)
 
           const phoneRequiredMessage = intl.formatMessage({
             id: 'EditListingDescriptionForm.phoneRequired',
@@ -221,6 +227,7 @@ export class BookingDatesFormComponent extends Component {
             submitButtonWrapperClassName || css.submitButtonWrapper
           );
           const submitDisabled = !detail || !numberPetArray;
+
           return (
             <Form onSubmit={handleSubmit} className={classes} enforcePagePreloadFor="CheckoutPage">
               {timeSlotsError}
@@ -243,7 +250,7 @@ export class BookingDatesFormComponent extends Component {
                       id={st}
                       name={"serviceSetup"}
                       value={st}
-                      label={st}
+                      label={getLabel(options, st)}
                       disabled={ submitDisabled }
                       validate={composeValidators(
                         requiredFieldArrayCheckbox(requiredMessage),
@@ -259,7 +266,7 @@ export class BookingDatesFormComponent extends Component {
               className={css.numberPets}
                 id="numberOfPets"
                 name="numberOfPets"
-                label={"Number Of Pets"}
+                label={"How many Pets?"}
                 disabled={ submitDisabled }
                 validate={composeValidators(
                   required(requiredpetMessage),
@@ -267,12 +274,7 @@ export class BookingDatesFormComponent extends Component {
                 )}
               >
                 <option value={""}>select</option>
-                {numberPetArray.map((st) => {
-                  return (
-                    <option key={st} value={st}>{st}</option>
-                  )
-                })}
-               
+                {new Array(numberPet).fill('0').map((st) => <option key={st} value={st}>{st}</option>)}
            
               </FieldSelect>
 
