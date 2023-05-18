@@ -139,7 +139,9 @@ export class BookingDatesFormComponent extends Component {
               ? [1, 2]
               : [1];
 
+             
           const detail = listing?.attributes?.publicData?.serviceSetup;
+         
 
           const phoneRequiredMessage = intl.formatMessage({
             id: 'EditListingDescriptionForm.phoneRequired',
@@ -274,7 +276,12 @@ export class BookingDatesFormComponent extends Component {
                 )}
               >
                 <option value={""}>select</option>
-                {new Array(numberPet).fill('0').map((st) => <option key={st} value={st}>{st}</option>)}
+                {/* {new Array(numberPetArray).fill('0').map((st) => <option key={st} value={st}>{st}</option>)} */}
+                {numberPetArray.map((st) => {
+                  return (
+                    <option key={st} value={st}>{st}</option>
+                  )
+                })}
            
               </FieldSelect>
 
