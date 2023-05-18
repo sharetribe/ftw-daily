@@ -6,7 +6,8 @@ import { ListingCard, PaginationLinks } from '../../components';
 import css from './SearchResultsPanel.module.css';
 
 const SearchResultsPanel = props => {
-  const { className, rootClassName, listings, pagination, search, setActiveListing } = props;
+  const { className, rootClassName, listings, pagination,currentUser, search, setActiveListing, favoriteData,onLike,pageName } = props;
+  console.log('  favoriteData',   favoriteData)
   const classes = classNames(rootClassName || css.root, className);
 
   const paginationLinks =
@@ -37,7 +38,11 @@ const SearchResultsPanel = props => {
             className={css.listingCard}
             key={l.id.uuid}
             listing={l}
+            onLike ={onLike}
+           pageName={pageName}
             renderSizes={cardRenderSizes}
+            favoriteData={favoriteData}
+            currentUser={currentUser}
             setActiveListing={setActiveListing}
           />
         ))}

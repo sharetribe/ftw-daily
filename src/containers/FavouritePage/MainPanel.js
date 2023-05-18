@@ -174,44 +174,10 @@ class MainPanel extends Component {
       sortConfig,
       pageName,
       favoriteData,
+      currentUser,
     } = this.props;
 
-    const primaryFilters = filterConfig.filter((f) => {
-      let checked = true;
-      if (f.id == "sizeOfdogs") {
-        checked = false;
-        if (this.state.currentQueryParams && this.state.currentQueryParams.pub_typeOfPets && this.state.currentQueryParams.pub_typeOfPets.search("dog") > -1) {
-          checked = true;
-        }
-      }
-      // else if (f.id == "dates" ) {
-      //   checked = false;
-      //   if (this.state.currentQueryParams && this.state.currentQueryParams.pub_serviceSetup && this.state.currentQueryParams.pub_serviceSetup.search("overnightsStay") > -1) {
-      //     checked = true;
-      //   }
-
-      // }
-
-      else if (this.state.currentQueryParams && this.state.currentQueryParams.pub_serviceSetup && this.state.currentQueryParams.pub_serviceSetup.search("dayCareStay") > -1) {
-        if (f.id == "typeOfPets") {
-          f.config.options = [{
-            key: 'dog',
-            label: 'Dog',
-          }];
-        }
-      } else if (f.id == "typeOfPets") {
-        f.config.options = [{
-          key: 'dog',
-          label: 'Dog',
-        },
-        {
-          key: 'cat',
-          label: 'Cat',
-        }];
-      }
-
-      return f.group === 'primary' && checked;
-    });
+   
     const secondaryFilters = filterConfig.filter(f => f.group !== 'primary');
     const hasSecondaryFilters = !!(secondaryFilters && secondaryFilters.length > 0);
 
@@ -267,7 +233,6 @@ class MainPanel extends Component {
     };
 
     const classes = classNames(rootClassName || css.searchResultContainer, className);
-    const add = [];
     const onLike = () => {
      
       add.push()
@@ -275,110 +240,17 @@ class MainPanel extends Component {
     }
     return (
       <div className={classes}>
-        <SearchFiltersPrimary
-          className={css.searchFiltersPrimary}
-          sortByComponent={sortBy('desktop')}
-          listingsAreLoaded={listingsAreLoaded}
-          resultsCount={totalItems}
-          searchInProgress={searchInProgress}
-          searchListingsError={searchListingsError}
-          {...propsForSecondaryFiltersToggle}
-        >
-          {primaryFilters.map(config => {
-            return (
-              <FilterComponent
-                key={`SearchFiltersPrimary.${config.id}`}
-                idPrefix="SearchFiltersPrimary"
-                filterConfig={config}
-                urlQueryParams={urlQueryParams}
-                pageName={pageName}
-                initialValues={this.initialValues}
-                getHandleChangedValueFn={this.getHandleChangedValueFn}
-                showAsPopup
-                contentPlacementOffset={FILTER_DROPDOWN_OFFSET}
-              />
-            );
-          })}
-        </SearchFiltersPrimary>
-        <SearchFiltersMobile
-          className={css.searchFiltersMobile}
-          urlQueryParams={urlQueryParams}
-          sortByComponent={sortBy('mobile')}
-          listingsAreLoaded={listingsAreLoaded}
-          resultsCount={totalItems}
-          searchInProgress={searchInProgress}
-          searchListingsError={searchListingsError}
-          showAsModalMaxWidth={showAsModalMaxWidth}
-          onMapIconClick={onMapIconClick}
-          onManageDisableScrolling={onManageDisableScrolling}
-          onOpenModal={onOpenModal}
-          onCloseModal={onCloseModal}
-          resetAll={this.resetAll}
-          selectedFiltersCount={selectedFiltersCount}
-        >
-          {filterConfig.map(config => {
-            return (
-              <FilterComponent
-                key={`SearchFiltersMobile.${config.id}`}
-                idPrefix="SearchFiltersMobile"
-                filterConfig={config}
-                urlQueryParams={urlQueryParams}
-                initialValues={this.initialValues}
-                getHandleChangedValueFn={this.getHandleChangedValueFn}
-                liveEdit
-                showAsPopup={false}
-              />
-            );
-          })}
-        </SearchFiltersMobile>
-        {isSecondaryFiltersOpen ? (
-          <div className={classNames(css.searchFiltersPanel)}>
-            <SearchFiltersSecondary
-              urlQueryParams={urlQueryParams}
-              listingsAreLoaded={listingsAreLoaded}
-              applyFilters={this.applyFilters}
-              cancelFilters={this.cancelFilters}
-              resetAll={this.resetAll}
-              onClosePanel={() => this.setState({ isSecondaryFiltersOpen: false })}
-            >
-              {secondaryFilters.map(config => {
-                return (
-                  <FilterComponent
-                    key={`SearchFiltersSecondary.${config.id}`}
-                    idPrefix="SearchFiltersSecondary"
-                    filterConfig={config}
-                    urlQueryParams={urlQueryParams}
-                    initialValues={this.initialValues}
-                    getHandleChangedValueFn={this.getHandleChangedValueFn}
-                    showAsPopup={false}
-                  />
-                );
-              })}
-            </SearchFiltersSecondary>
-          </div>
-        ) : (
-          <div
-            className={classNames(css.listings, {
-              [css.newSearchInProgress]: !listingsAreLoaded,
-            })}
-          >
-            {searchListingsError ? (
-              <h2 className={css.error}>
-                <FormattedMessage id="SearchPage.searchError" />
-              </h2>
-            ) : null}
-            <SearchResultsPanel
+        
+        <SearchResultsPanel
               className={css.searchListingsPanel}
               listings={listings}
               pagination={listingsAreLoaded ? pagination : null}
               search={searchParamsForPagination}
               onLike ={onLike}
-              pageName={pageName}
               favoriteData={favoriteData}
+              currentUser={currentUser}
               setActiveListing={onActivateListing}
             />
-          </div>
-        )}
       </div>
     );
   }

@@ -42,7 +42,7 @@ class ListingImage extends Component {
 const LazyImage = lazyLoadWithDimensions(ListingImage, { loadAfterInitialRendering: 3000 });
 
 export const ListingCardComponent = props => {
-  const { className, rootClassName, intl, listing, renderSizes, setActiveListing } = props;
+  const { className, rootClassName, intl, listing, renderSizes, setActiveListing,currentUser ,favoriteData,pageName} = props;
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureListing(listing);
   const id = currentListing.id.uuid;
@@ -66,6 +66,35 @@ export const ListingCardComponent = props => {
     : isDaily
     ? 'ListingCard.perDay'
     : 'ListingCard.perUnit';
+
+    
+    const favorite =
+    currentUser?.attributes?.profile.protectedData?.favorite || [];
+    console.log(currentUser, '^^^^ ^^^^ => currentUser');
+    
+    console.log(favorite, '^^^^ ^^^^ => favorite');
+    
+   //console.log('currentUser', currentUser)
+   const index = favorite.findIndex(i => i === id)
+   console.log(index, '^^^^ ^^^^ => index');
+   
+  const handleClick = e => {
+    e.preventDefault();
+    if (index > -1) {
+      favorite.splice(index,1),
+        favoriteData({
+           protectedData: 
+           { favorite }
+           });
+    } else {
+      favorite.push(id), 
+      favoriteData({
+         protectedData: 
+         { favorite }
+         });
+      console.log('favorite', favorite)
+    }
+  };
 
   return (
     <NamedLink className={classes} name="ListingPage" params={{ id, slug }}>
@@ -103,6 +132,20 @@ export const ListingCardComponent = props => {
           <div className={css.authorInfo}>
             <FormattedMessage id="ListingCard.hostedBy" values={{ authorName }} />
           </div>
+          {pageName == "SearchPage"
+          ? null :
+       <div>
+       {
+       index > -1 ?(
+<span  onClick={e => handleClick(e)}><p>empty</p> </span>
+        ):
+        (
+          
+          <span onClick={e => handleClick(e)}><p>fill</p> </span>
+        )
+        
+      }
+       </div>}
         </div>
       </div>
     </NamedLink>

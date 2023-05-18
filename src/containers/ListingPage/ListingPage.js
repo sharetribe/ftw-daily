@@ -202,9 +202,11 @@ export class ListingPageComponent extends Component {
       fetchLineItemsInProgress,
       fetchLineItemsError,
       totalbooking,
-      ratings
+      ratings,
+      favoriteData
     } = this.props;
 
+    console.log('favoriteData', favoriteData)
     const listingId = new UUID(rawParams.id);
     const isPendingApprovalVariant = rawParams.variant === LISTING_PAGE_PENDING_APPROVAL_VARIANT;
     const isDraftVariant = rawParams.variant === LISTING_PAGE_DRAFT_VARIANT;
@@ -212,7 +214,8 @@ export class ListingPageComponent extends Component {
       isPendingApprovalVariant || isDraftVariant
         ? ensureOwnListing(getOwnListing(listingId))
         : ensureListing(getListing(listingId));
-
+        // const currentListing = ensureListing(listing);
+        const id = currentListing.id.uuid;
     const listingSlug = rawParams.slug || createSlug(currentListing.attributes.title || '');
     const params = { slug: listingSlug, ...rawParams };
 
@@ -446,6 +449,9 @@ export class ListingPageComponent extends Component {
                     hostLink={hostLink}
                     fetchReviewsError={fetchReviewsError}
                     reviews={reviews}
+                    id={id}
+                    currentUser={currentUser}
+                    favoriteData={favoriteData}
                     ratings={ratings}
                     totalbooking={totalbooking}
                     showContactUser={showContactUser}
@@ -471,12 +477,15 @@ export class ListingPageComponent extends Component {
                     </div>
                     <p className={css.featuresDescription}>{Yourselfdohavepets}</p>
                   </div>
-                  <div className={css.featureList}>
+                  {
+                    yourselfexp?<div className={css.featureList}>
                     <div className={css.headingFeature}>
                       <FormattedMessage id="ListingPage.yespet" values={{ name: hostLink }} />
                     </div>
                     <p className={css.featuresDescription}> {yourselfexp}</p>
-                  </div>
+                  </div>:null
+                  }
+                  
                   <SectionRulesMaybe publicData={publicData} />
                   <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
                   <SectionMapMaybe
@@ -654,6 +663,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(fetchTransactionLineItems( listingId, isOwnListing)),
   onSendEnquiry: (listingId, message) => dispatch(sendEnquiry(listingId, message)),
   onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
+  favoriteData: id => dispatch(updateProfile(id)),
 });
 
 // Note: it is important that the withRouter HOC is **outside** the

@@ -15,9 +15,9 @@ import { propTypes } from '../../util/types';
 import { getListingsById } from '../../ducks/marketplaceData.duck';
 import { manageDisableScrolling, isScrollingDisabled } from '../../ducks/UI.duck';
 import { SearchMap, ModalInMobile, Page } from '../../components';
-import { TopbarContainer } from '../../containers';
+import { TopbarContainer } from '..';
 
-import { searchMapListings, setActiveListing } from './SearchPage.duck';
+import { searchMapListings, setActiveListing } from './FavouritePage.duck';
 import {
   pickSearchParamsOnly,
   validURLParamsForExtendedData,
@@ -117,9 +117,9 @@ export class SearchPageComponent extends Component {
       searchParams,
       activeListingId,
       onActivateListing,
-      favoriteData
+      favoriteData,
+      currentUser,
     } = this.props;
-
     // console.log('filterConfig', filterConfig)
     // eslint-disable-next-line no-unused-vars
     const { mapSearch, page, ...searchInURL } = parse(location.search, {
@@ -187,10 +187,11 @@ export class SearchPageComponent extends Component {
             onCloseModal={this.onCloseMobileModal}
             onMapIconClick={onMapIconClick}
             pagination={pagination}
-            favoriteData={favoriteData}
+            favoriteData={ favoriteData}
             searchParamsForPagination={parse(location.search)}
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             history={history}
+            currentUser={currentUser}
             pageName='SearchPage'
           />
           <ModalInMobile
@@ -201,7 +202,7 @@ export class SearchPageComponent extends Component {
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             onManageDisableScrolling={onManageDisableScrolling}
           >
-            <div className={css.mapWrapper}>
+            {/* <div className={css.mapWrapper}>
               {shouldShowSearchMap ? (
                 <SearchMap
                   reusableContainerClassName={css.map}
@@ -218,7 +219,7 @@ export class SearchPageComponent extends Component {
                   messages={intl.messages}
                 />
               ) : null}
-            </div>
+            </div> */}
           </ModalInMobile>
         </div>
       </Page>
@@ -275,6 +276,7 @@ const mapStateToProps = state => {
     searchMapListingIds,
     activeListingId,
   } = state.SearchPage;
+  const {currentUser}=state.user
   const pageListings = getListingsById(state, currentPageResultIds);
   const mapListings = getListingsById(
     state,
@@ -282,9 +284,15 @@ const mapStateToProps = state => {
   );
 
   return {
-    listings: pageListings,
+    listings: pageListings.filter(listing =>
+      currentUser?.attributes?.profile.protectedData?.favorite?.includes(
+        listing.id.uuid
+      )
+    ),
+    
     mapListings,
     pagination,
+    currentUser,
     scrollingDisabled: isScrollingDisabled(state),
     searchInProgress,
     searchListingsError,

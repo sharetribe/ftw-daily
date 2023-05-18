@@ -8,6 +8,7 @@ import css from './ListingPage.module.css';
 import SectionReviews from './SectionReviews';
 import SectionReviewsheading from './SectionReviewsHeading';
 
+
 const SectionHeading = props => {
   const {
     priceTitle,
@@ -20,10 +21,14 @@ const SectionHeading = props => {
     reviews,
     ratings,
     totalbooking,
+    id,
     fetchReviewsError,
     yourself,
+    currentUser ,
+    favoriteData,
   } = props;
 
+  console.log('favoriteData,', favoriteData,)
 
   const unitType = config.bookingUnitType;
   const isNightly = unitType === LINE_ITEM_NIGHT;
@@ -34,6 +39,32 @@ const SectionHeading = props => {
     : isDaily
       ? 'ListingPage.perDay'
       : 'ListingPage.perUnit';
+
+      const favorite =
+    currentUser?.attributes?.profile.protectedData?.favorite || [];
+   console.log('currentUser', currentUser)
+   
+  const handleClick = e => {
+    e.preventDefault();
+    if (favorite.findIndex(i => i === id) > -1) {
+      favorite.splice(
+        favorite.findIndex(i => i === id),
+        1
+      ),
+        favoriteData({
+           protectedData: 
+           { favorite }
+           });
+    } else {
+      favorite.push(id), 
+      favoriteData({
+         protectedData: 
+         { favorite }
+         });
+      console.log('favorite', favorite)
+    }
+  };
+
 
   return (
     <div className={css.sectionHeading}>
@@ -69,6 +100,22 @@ const SectionHeading = props => {
                 />
               </div>
               : null}
+
+              <div>
+
+                {/* <p>fill</p>
+                <p>empty</p> */}
+              {
+        favorite.findIndex(i => i === id) > -1 ?(
+<span  onClick={e => handleClick(e)}><p>fill</p> </span>
+        ):
+        (
+          
+          <span onClick={e => handleClick(e)}><p>empty</p> </span>
+        )
+        
+      }
+              </div>
           </div>
 
 

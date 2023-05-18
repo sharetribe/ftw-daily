@@ -32,7 +32,7 @@ exports.transactionLineItems = (listing, bookingData) => {
   let lineItems=[]
   const unitPrice = listing.attributes.price;
   const { startDate, endDate,serviceSetup ,numberOfPets} = bookingData;
-  console.log(bookingData, '^^^^ ^^^^ => bookingData');
+  // console.log(bookingData, '^^^^ ^^^^ => bookingData');
   
 
   /**

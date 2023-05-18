@@ -8,6 +8,7 @@ import PreviewResolverPage from './containers/PreviewResolverPage/PreviewResolve
 // Otherwise, components will import form container eventually and
 // at that point css bundling / imports will happen in wrong order.
 import { NamedRedirect } from './components';
+// import { FavouritePageComponent } from './containers/FavouritePage/FavouritePage';
 
 const pageDataLoadingAPI = getPageDataLoadingAPI();
 
@@ -17,6 +18,7 @@ const CMSPage = loadable(() => import(/* webpackChunkName: "CMSPage" */ './conta
 const ContactDetailsPage = loadable(() => import(/* webpackChunkName: "ContactDetailsPage" */ './containers/ContactDetailsPage/ContactDetailsPage'));
 const EditListingPage = loadable(() => import(/* webpackChunkName: "EditListingPage" */ './containers/EditListingPage/EditListingPage'));
 const EmailVerificationPage = loadable(() => import(/* webpackChunkName: "EmailVerificationPage" */ './containers/EmailVerificationPage/EmailVerificationPage'));
+
 const InboxPage = loadable(() => import(/* webpackChunkName: "InboxPage" */ './containers/InboxPage/InboxPage'));
 const LandingPage = loadable(() => import(/* webpackChunkName: "LandingPage" */ './containers/LandingPage/LandingPage'));
 const ListingPage = loadable(() => import(/* webpackChunkName: "ListingPage" */ /* webpackPrefetch: true */ './containers/ListingPage/ListingPage'));
@@ -32,6 +34,7 @@ const SearchPage = loadable(() => import(/* webpackChunkName: "SearchPage" */ /*
 const StripePayoutPage = loadable(() => import(/* webpackChunkName: "StripePayoutPage" */ './containers/StripePayoutPage/StripePayoutPage'));
 const TermsOfServicePage = loadable(() => import(/* webpackChunkName: "TermsOfServicePage" */ './containers/TermsOfServicePage/TermsOfServicePage'));
 const TransactionPage = loadable(() => import(/* webpackChunkName: "TransactionPage" */ './containers/TransactionPage/TransactionPage'));
+const FavouritePage = loadable(() => import(/* webpackChunkName: "SearchPage" */ /* webpackPrefetch: true */  './containers/FavouritePage/FavouritePage'));
 
 // Styleguide helps you to review current components and develop new ones
 const StyleguidePage = loadable(() => import(/* webpackChunkName: "StyleguidePage" */ './containers/StyleguidePage/StyleguidePage'));
@@ -232,6 +235,13 @@ const routeConfiguration = () => {
       extraProps: { transactionRole: 'provider' },
       loadData: params =>
         pageDataLoadingAPI.TransactionPage.loadData({ ...params, transactionRole: 'provider' }),
+    },
+
+    {
+      path: '/favourite',
+      name: 'FavouritePage',
+      component: FavouritePage,
+      loadData: pageDataLoadingAPI.FavouritePage.loadData,
     },
     {
       path: '/listings',

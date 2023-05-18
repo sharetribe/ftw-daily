@@ -1008,6 +1008,7 @@
   "Topbar.mobileSearchHelp": "Tip: You can also search petcrib by zip code, for example \"00500\" or city district – \"Sörnäinen\".",
   "Topbar.searchIcon": "Open search",
   "TopbarDesktop.accountSettingsLink": "Account settings",
+  "TopbarDesktop.FavouriteSettingLink":"Favourite Page",
   "TopbarDesktop.createListing": "Become a host",
   "TopbarDesktop.inbox": "Inbox",
   "TopbarDesktop.login": "Log in",

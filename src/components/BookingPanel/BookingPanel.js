@@ -196,7 +196,12 @@ const BookingPanel = props => {
       <SectionFeaturesMaybe options={amenityOptions} publicData={publicData} />
 
       <SectionFeatures2Maybe options={amenityOptions2} publicData={publicData} hostLink={hostLink} />
-      <SectionFeatures3Maybe options={amenityOptions3} publicData={publicData} />
+      {amenityOptions3 ?
+       <SectionFeatures3Maybe options={amenityOptions3} publicData={publicData} />
+       :null
+
+      }
+     
       <SectionFeatures4Maybe options={amenityOptions4} publicData={publicData} />
       <SectionFeatures5Maybe options={amenityOptions5} publicData={publicData} />
 
