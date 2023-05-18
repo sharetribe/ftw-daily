@@ -53,6 +53,7 @@ import SectionRulesMaybe from './SectionRulesMaybe';
 import SectionMapMaybe from './SectionMapMaybe';
 import css from './ListingPage.module.css';
 import SectionServicesetup from './SectionSerivesetup';
+import { updateProfile } from '../ProfileSettingsPage/ProfileSettingsPage.duck';
 
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
 
