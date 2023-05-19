@@ -207,7 +207,11 @@ export class ListingPageComponent extends Component {
       favoriteData
     } = this.props;
 
-    console.log('favoriteData', favoriteData)
+  
+
+  //  const firstName = currentUser?.attributes?.profile?.firstName
+  //  console.log('firstName', firstName)
+
     const listingId = new UUID(rawParams.id);
     const isPendingApprovalVariant = rawParams.variant === LISTING_PAGE_PENDING_APPROVAL_VARIANT;
     const isDraftVariant = rawParams.variant === LISTING_PAGE_DRAFT_VARIANT;
@@ -216,13 +220,15 @@ export class ListingPageComponent extends Component {
         ? ensureOwnListing(getOwnListing(listingId))
         : ensureListing(getListing(listingId));
         // const currentListing = ensureListing(listing);
-        const id = currentListing.id.uuid;
+    const id = currentListing?.id?.uuid;
     const listingSlug = rawParams.slug || createSlug(currentListing.attributes.title || '');
     const params = { slug: listingSlug, ...rawParams };
 
     const listingType = isDraftVariant
       ? LISTING_PAGE_PARAM_TYPE_DRAFT
       : LISTING_PAGE_PARAM_TYPE_EDIT;
+      console.log(listingType, '^^^^ ^^^^ => listingType');
+      
     const listingTab = isDraftVariant ? 'photos' : 'description';
 
     const isApproved =
@@ -376,7 +382,7 @@ export class ListingPageComponent extends Component {
       { id: 'ListingPage.schemaTitle' },
       { title, price: formattedPrice, siteTitle }
     );
-
+const firstname = authorDisplayName.split(" ")[0];
     const hostLink = (
       <NamedLink
         className={css.authorNameLink}
@@ -387,6 +393,7 @@ export class ListingPageComponent extends Component {
         {authorDisplayName}
       </NamedLink>
     );
+    
 
     const yourself = publicData && publicData.headline;
     const yourselfexp = publicData && publicData.yespet;
@@ -446,8 +453,10 @@ export class ListingPageComponent extends Component {
                     priceTitle={priceTitle}
                     formattedPrice={formattedPrice}
                     richTitle={richTitle}
+                    isOwnListing={isOwnListing}
                     category={category}
                     hostLink={hostLink}
+                
                     fetchReviewsError={fetchReviewsError}
                     reviews={reviews}
                     id={id}
@@ -519,6 +528,7 @@ export class ListingPageComponent extends Component {
                   onSubmit={handleBookingSubmit}
                   title={bookingTitle}
                   hostLink={hostLink}
+                  firstname={firstname}
                   subTitle={bookingSubTitle}
                   authorDisplayName={authorDisplayName}
                   onManageDisableScrolling={onManageDisableScrolling}

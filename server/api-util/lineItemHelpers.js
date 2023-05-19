@@ -156,7 +156,7 @@ exports.calculateQuantityFromDates = (startDate, endDate, type) => {
  */
 exports.calculateLineTotal = lineItem => {
   const { code, unitPrice, quantity, percentage, seats, units } = lineItem;
-
+console.log('unitPrice', unitPrice)
   if (quantity) {
     return this.calculateTotalPriceFromQuantity(unitPrice, quantity);
   } else if (percentage) {
@@ -179,13 +179,14 @@ exports.calculateLineTotal = lineItem => {
 exports.calculateTotalFromLineItems = lineItems => {
   const totalPrice = lineItems.reduce((sum, lineItem) => {
     const lineTotal = this.calculateLineTotal(lineItem);
+   
     return getAmountAsDecimalJS(lineTotal).add(sum);
   }, 0);
 
   // Get total price as Number (and validate that the conversion is safe)
   const numericTotalPrice = convertDecimalJSToNumber(totalPrice);
   const unitPrice = lineItems[0].unitPrice;
-
+console.log('numericTotalPrice', numericTotalPrice)
   return new Money(numericTotalPrice, unitPrice.currency);
 };
 

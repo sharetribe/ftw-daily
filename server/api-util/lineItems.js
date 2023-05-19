@@ -7,6 +7,7 @@ const { Money } = types;
 const bookingUnitType = 'line-item/night';
 const bookingUnitDatType = 'line-item/day';
 const PROVIDER_COMMISSION_PERCENTAGE = -12;
+const CUSTOMER_COMMISSION_PERCENTAGE = 3;
 
 /** Returns collection of lineItems (max 50)
  *
@@ -45,53 +46,72 @@ exports.transactionLineItems = (listing, bookingData) => {
    *
    * By default BookingBreakdown prints line items inside LineItemUnknownItemsMaybe if the lineItem code is not recognized. */
 
+  const booking = {
+    code: bookingUnitType,
+    unitPrice:calculateTotalPrice(serviceSetup,listing,unitPrice,numberOfPets),
+    quantity: calculateQuantityFromDates(startDate, endDate, bookingUnitType),
+    includeFor: ['customer', 'provider'],
+  };
+console.log(booking,"booking"
+)
+  // const providerCommissions = {
+  //   code: 'line-item/provider-commission',
+  //   unitPrice: calculateTotalFromLineItems(lineItems),
+  //   percentage: PROVIDER_COMMISSION_PERCENTAGE,
+  //   includeFor: ['provider'],
+  // };
+  // if(providerCommissions){
+  
+  //   lineItems.push(providerCommissions)
+  // }
+  // const customerCommissions = {
+  //   code: 'line-item/customer-commission',
+  //   unitPrice: calculateTotalFromLineItems(lineItems),
+  //   percentage: CUSTOMER_COMMISSION_PERCENTAGE,
+  //   includeFor: ['customer'],
+  // };
+  // if(customerCommissions){
+  
+  //   lineItems.push(customerCommissions)
+  // }
 
   if(serviceSetup.filter(e=> e =='overnightsStay')?.length){
-
-    const booking = {
-      code: bookingUnitType,
-      unitPrice:calculateTotalPrice(serviceSetup,listing,unitPrice,numberOfPets),
-      quantity: calculateQuantityFromDates(startDate, endDate, bookingUnitType),
-      includeFor: ['customer', 'provider'],
-    };
-    console.log(booking, '^^^^ ^^^^ => booking');
     lineItems.push(booking)
-    const providerCommissions = {
-      code: 'line-item/provider-commission',
-      unitPrice: calculateTotalFromLineItems([booking]),
-      percentage: PROVIDER_COMMISSION_PERCENTAGE,
-      includeFor: ['provider'],
-    };
-    if(providerCommissions){
-    
-      lineItems.push(providerCommissions)
-    }
+   }
   
-  }
-  
-  
-if(serviceSetup.filter(e=> e =='dayCareStay')?.length){
-
   const dayCareStay = {
     code: bookingUnitDatType,
     unitPrice: calculateTotalPrices(serviceSetup,listing,unitPrice,numberOfPets),
     quantity: calculateQuantityFromDates(startDate, endDate, bookingUnitDatType),
     includeFor: ['customer', 'provider'],
   };
-  console.log(dayCareStay, '^^^^ ^^^^ => dayCareStay');
-   lineItems.push(dayCareStay)
-   const providerCommissions = {
+
+  if(serviceSetup.filter(e=> e =='dayCareStay')?.length){
+    lineItems.push(dayCareStay)
+   }
+
+
+  const providerCommissions = {
     code: 'line-item/provider-commission',
-    unitPrice: calculateTotalFromLineItems([dayCareStay]),
+    unitPrice: calculateTotalFromLineItems(lineItems),
     percentage: PROVIDER_COMMISSION_PERCENTAGE,
     includeFor: ['provider'],
   };
   if(providerCommissions){
-  
-    lineItems.push(providerCommissions)
+   lineItems.push(providerCommissions)
   }
 
+  const customerCommissions = {
+    code: 'line-item/customer-commission',
+    unitPrice: calculateTotalFromLineItems(lineItems),
+    percentage: CUSTOMER_COMMISSION_PERCENTAGE,
+    includeFor: ['customer'],
+  };
+  if(customerCommissions){
+    lineItems.push(customerCommissions)
 }
+
+console.log('customerCommissions', customerCommissions)
 
   return lineItems;
 };

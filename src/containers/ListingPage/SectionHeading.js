@@ -26,9 +26,10 @@ const SectionHeading = props => {
     yourself,
     currentUser ,
     favoriteData,
+    isOwnListing,
   } = props;
 
-  console.log('favoriteData,', favoriteData,)
+  
 
   const unitType = config.bookingUnitType;
   const isNightly = unitType === LINE_ITEM_NIGHT;
@@ -42,7 +43,7 @@ const SectionHeading = props => {
 
       const favorite =
     currentUser?.attributes?.profile.protectedData?.favorite || [];
-   console.log('currentUser', currentUser)
+ 
    
   const handleClick = e => {
     e.preventDefault();
@@ -61,7 +62,7 @@ const SectionHeading = props => {
          protectedData: 
          { favorite }
          });
-      console.log('favorite', favorite)
+     
     }
   };
 
@@ -100,22 +101,21 @@ const SectionHeading = props => {
                 />
               </div>
               : null}
+            {
+              isOwnListing ? null :
+                <div>
+                  {
+                    favorite.findIndex(i => i === id) > -1 ? (
+                      <span onClick={e => handleClick(e)}><p>fill</p> </span>
+                    ) :
+                      (
 
-              <div>
+                        <span onClick={e => handleClick(e)}><p>empty</p> </span>
+                      )
 
-                {/* <p>fill</p>
-                <p>empty</p> */}
-              {
-        favorite.findIndex(i => i === id) > -1 ?(
-<span  onClick={e => handleClick(e)}><p>fill</p> </span>
-        ):
-        (
-          
-          <span onClick={e => handleClick(e)}><p>empty</p> </span>
-        )
-        
-      }
-              </div>
+                  }
+                </div>
+            }
           </div>
 
 

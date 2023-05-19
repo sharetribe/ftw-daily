@@ -10,7 +10,8 @@ const SectionFeaturesMaybe = props => {
     return null;
   }
 
-  const selectedOptions = publicData && publicData.typeOfPets ? publicData.numberOfPets : [];
+  const selectedOptions = publicData && publicData.numberOfPets ? publicData.numberOfPets : [];
+  console.log('selectedOptions', selectedOptions)
   return (
     <div className={css.sectionFeatures}>
       <h2 className={css.featuresTitle}>

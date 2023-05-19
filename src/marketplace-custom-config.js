@@ -200,7 +200,7 @@ export const filters = [
     queryParamNames: ['pub_sizeOfdogs'],
     config: {
       
-      // searchMode: 'has_all',
+      searchMode: 'has_any',
       options: [
         {
           key: 'small',

@@ -126,7 +126,9 @@ export class BookingDatesFormComponent extends Component {
             dayUnitType,
           } = fieldRenderProps;
 
-      
+      console.log('listing', listing)
+      const pricepet = listing?.attributes?.publicData?.pricepet
+      console.log('pricepet', pricepet)
           const { startDate, endDate } = values && values.bookingDates ? values.bookingDates : {};
 
           const options = findOptionsForSelectFilter('serviceSetup', filterConfig);

@@ -73,6 +73,7 @@ const BookingPanel = props => {
     location,
     intl,
     hostLink,
+    firstname,
     filterConfig,
     onFetchTransactionLineItems,
     lineItems,
@@ -83,8 +84,7 @@ const BookingPanel = props => {
 
     publicData,
   } = props;
-  // console.log(listing, '^^^^ ^^^^ => listing');
- 
+
   const price = listing.attributes.price;
   const hasListingState = !!listing.attributes.state;
   const isClosed = hasListingState && listing.attributes.state === LISTING_STATE_CLOSED;
@@ -189,7 +189,7 @@ const BookingPanel = props => {
       </div>
 
       <div className={css.hostLink}>
-        <FormattedMessage id="BookingPanel.servicetect" values={{ name: hostLink }} />
+        <FormattedMessage id="BookingPanel.servicetect" values={{ name: firstname }} />
       </div>
 
       <SectionServicesetup options={amenityOptions6} publicData={publicData} />
