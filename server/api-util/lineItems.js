@@ -6,7 +6,7 @@ const { Money } = types;
 // line-item/night, line-item/day or line-item/units
 const bookingUnitType = 'line-item/night';
 const bookingUnitDatType = 'line-item/day';
-const PROVIDER_COMMISSION_PERCENTAGE = -10;
+const PROVIDER_COMMISSION_PERCENTAGE = -12;
 
 /** Returns collection of lineItems (max 50)
  *
@@ -56,6 +56,16 @@ exports.transactionLineItems = (listing, bookingData) => {
     };
     console.log(booking, '^^^^ ^^^^ => booking');
     lineItems.push(booking)
+    const providerCommissions = {
+      code: 'line-item/provider-commission',
+      unitPrice: calculateTotalFromLineItems([booking]),
+      percentage: PROVIDER_COMMISSION_PERCENTAGE,
+      includeFor: ['provider'],
+    };
+    if(providerCommissions){
+    
+      lineItems.push(providerCommissions)
+    }
   
   }
   
@@ -70,15 +80,18 @@ if(serviceSetup.filter(e=> e =='dayCareStay')?.length){
   };
   console.log(dayCareStay, '^^^^ ^^^^ => dayCareStay');
    lineItems.push(dayCareStay)
+   const providerCommissions = {
+    code: 'line-item/provider-commission',
+    unitPrice: calculateTotalFromLineItems([dayCareStay]),
+    percentage: PROVIDER_COMMISSION_PERCENTAGE,
+    includeFor: ['provider'],
+  };
+  if(providerCommissions){
+  
+    lineItems.push(providerCommissions)
+  }
 
 }
-
-// const providerCommissions = {
-//   code: 'line-item/provider-commission',
-//   unitPrice: calculateTotalFromLineItems([booking]),
-//   percentage: PROVIDER_COMMISSION_PERCENTAGE,
-//   includeFor: ['provider'],
-// };
 
   return lineItems;
 };
