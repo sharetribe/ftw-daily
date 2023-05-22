@@ -37,7 +37,6 @@ const LineItemProviderCommissionMaybe = props => {
 
     const commission = providerCommissionLineItem.lineTotal;
     const formattedCommission = commission ? formatMoney(intl, commission) : null;
-    console.log(formattedCommission, '^^^^ ^^^^ => formattedCommission');
     
 
     commissionItem = (

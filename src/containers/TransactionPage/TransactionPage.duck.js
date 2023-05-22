@@ -12,6 +12,7 @@ import {
   txIsInFirstReviewBy,
   TRANSITION_ACCEPT,
   TRANSITION_DECLINE,
+  TRANSITION_CUSTOMER_CANCEL,
 } from '../../util/transaction';
 import { transactionLineItems } from '../../util/api';
 import * as log from '../../util/log';
@@ -391,6 +392,32 @@ export const declineSale = id => (dispatch, getState, sdk) => {
       log.error(e, 'reject-sale-failed', {
         txId: id,
         transition: TRANSITION_DECLINE,
+      });
+      throw e;
+    });
+};
+
+
+
+export const cancelBooking = id => (dispatch, getState, sdk) => {
+  if (acceptOrDeclineInProgress(getState())) {
+    return Promise.reject(new Error('Accept or decline already in progress'));
+  }
+  dispatch(declineSaleRequest());
+
+  return sdk.transactions
+    .transition({ id, transition: TRANSITION_CUSTOMER_CANCEL, params: {} }, { expand: true })
+    .then(response => {
+      dispatch(addMarketplaceEntities(response));
+      dispatch(declineSaleSuccess());
+      dispatch(fetchCurrentUserNotifications());
+      return response;
+    })
+    .catch(e => {
+      dispatch(declineSaleError(storableError(e)));
+      log.error(e, 'reject-sale-failed', {
+        txId: id,
+        transition: TRANSITION_CUSTOMER_CANCEL,
       });
       throw e;
     });

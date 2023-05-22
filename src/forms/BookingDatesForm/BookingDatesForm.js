@@ -56,7 +56,7 @@ export class BookingDatesFormComponent extends Component {
   handleOnChange(formValues) {
     const { startDate, endDate } =
       formValues.values && formValues.values.bookingDates ? formValues.values.bookingDates : {};
-    
+
     const { serviceSetup } = formValues.values;
     const { numberOfPets } = formValues.values;
 
@@ -124,11 +124,21 @@ export class BookingDatesFormComponent extends Component {
             fetchLineItemsInProgress,
             fetchLineItemsError,
             dayUnitType,
+            firstname,
           } = fieldRenderProps;
 
-      console.log('listing', listing)
-      const pricepet = listing?.attributes?.publicData?.pricepet
-      console.log('pricepet', pricepet)
+          const pricepet = listing?.attributes?.publicData?.pricepet
+
+          const dayprice = listing.attributes.publicData.pricepet.dayCare.dayCareStay1
+
+
+          const nightprice = listing?.attributes?.publicData?.pricepet?.overNight.overnightsStayPrice1
+          function findMinPrice(var_args) {
+            return Array.prototype.reduce.call(arguments, function (prev, current) {
+              return prev && current ? Math.min(prev, current) : prev || current;
+            });
+          }
+          const min = findMinPrice(nightprice,dayprice)
           const { startDate, endDate } = values && values.bookingDates ? values.bookingDates : {};
 
           const options = findOptionsForSelectFilter('serviceSetup', filterConfig);
@@ -141,9 +151,9 @@ export class BookingDatesFormComponent extends Component {
               ? [1, 2]
               : [1];
 
-             
+
           const detail = listing?.attributes?.publicData?.serviceSetup;
-         
+          console.log('values.serviceSetup ', values.serviceSetup )
 
           const phoneRequiredMessage = intl.formatMessage({
             id: 'EditListingDescriptionForm.phoneRequired',
@@ -242,7 +252,7 @@ export class BookingDatesFormComponent extends Component {
                 }}
               />
 
-      
+
               <div className={css.categoryText}>
                 <FormattedMessage className={css.description} id="EditListingDescriptionForm.categorytext" />
               </div>
@@ -255,28 +265,29 @@ export class BookingDatesFormComponent extends Component {
                       name={"serviceSetup"}
                       value={st}
                       label={getLabel(options, st)}
-                      disabled={ submitDisabled }
+                      disabled={submitDisabled}
                       validate={composeValidators(
                         requiredFieldArrayCheckbox(requiredMessage),
-                       
+
                       )}
                     />
                   )
                 })}
-              {/* {values.serviceSetup ? "required this field" :null} */}
-               
+                {/* {values.serviceSetup ? "required this field" :null} */}
+
               </div>
               <FieldSelect
-              className={css.numberPets}
+                className={css.numberPets}
                 id="numberOfPets"
                 name="numberOfPets"
                 label={"How many Pets?"}
-                disabled={ submitDisabled }
+                disabled={submitDisabled}
                 validate={composeValidators(
                   required(requiredpetMessage),
-                 
+
                 )}
               >
+
                 <option value={""}>select</option>
                 {/* {new Array(numberPetArray).fill('0').map((st) => <option key={st} value={st}>{st}</option>)} */}
                 {numberPetArray.map((st) => {
@@ -284,7 +295,7 @@ export class BookingDatesFormComponent extends Component {
                     <option key={st} value={st}>{st}</option>
                   )
                 })}
-           
+
               </FieldSelect>
 
               <FieldDateRangeInput
@@ -328,6 +339,25 @@ export class BookingDatesFormComponent extends Component {
                   <FormattedMessage id="BookingDatesForm.requestToBook" />
                 </PrimaryButton>
               </div>
+
+              <div className={css.hostLink}>
+                <FormattedMessage id="BookingPanel.servicetect" values={{ name: firstname }} />
+              </div>
+
+
+              <div>Pricing</div>
+
+              {(values.serviceSetup == "overnightsStay") ? <>
+              Over night rate = AUD{nightprice}  per night </> : null}
+
+              {(values.serviceSetup == "dayCareStay") ? <>
+                Day Care Stay = AUD{dayprice}  per day</> : null}
+
+              {(values.serviceSetup) ? <>
+               Rate AUD {min} </> : null}
+
+              
+
             </Form>
           );
         }}

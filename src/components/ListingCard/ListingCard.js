@@ -47,8 +47,7 @@ export const ListingCardComponent = props => {
   const currentListing = ensureListing(listing);
   const id = currentListing.id.uuid;
   const { title = '', price } = currentListing.attributes;
-// console.log('hostLink', hostLink)
-//   console.log('title', title)
+
   const slug = createSlug(title);
   const author = ensureUser(listing.author);
   const authorName = author.attributes.profile.displayName;
@@ -70,13 +69,13 @@ export const ListingCardComponent = props => {
     
     const favorite =
     currentUser?.attributes?.profile.protectedData?.favorite || [];
-    console.log(currentUser, '^^^^ ^^^^ => currentUser');
+   
     
-    console.log(favorite, '^^^^ ^^^^ => favorite');
+
     
-   //console.log('currentUser', currentUser)
+  
    const index = favorite.findIndex(i => i === id)
-   console.log(index, '^^^^ ^^^^ => index');
+  
    
   const handleClick = e => {
     e.preventDefault();
@@ -92,7 +91,7 @@ export const ListingCardComponent = props => {
          protectedData: 
          { favorite }
          });
-      console.log('favorite', favorite)
+     
     }
   };
 

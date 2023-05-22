@@ -34,6 +34,7 @@ import {
   sendReview,
   fetchMoreMessages,
   fetchTransactionLineItems,
+  cancelBooking,
 } from './TransactionPage.duck';
 import css from './TransactionPage.module.css';
 
@@ -81,8 +82,9 @@ export const TransactionPageComponent = props => {
     lineItems,
     fetchLineItemsInProgress,
     fetchLineItemsError,
+    transactionCancel
   } = props;
-
+console.log(' onFetchTransactionLineItems',  onFetchTransactionLineItems)
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
   const isProviderRole = transactionRole === PROVIDER;
@@ -250,6 +252,7 @@ export const TransactionPageComponent = props => {
       lineItems={lineItems}
       fetchLineItemsInProgress={fetchLineItemsInProgress}
       fetchLineItemsError={fetchLineItemsError}
+      transactionCancel={transactionCancel}
     />
   ) : (
     loadingOrFailedFetching
@@ -413,6 +416,7 @@ const mapDispatchToProps = dispatch => {
     onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
     onFetchTransactionLineItems: (bookingData, listingId, isOwnListing) =>
       dispatch(fetchTransactionLineItems(bookingData, listingId, isOwnListing)),
+    transactionCancel: (id) => dispatch(cancelBooking(id))
   };
 };
 

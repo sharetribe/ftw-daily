@@ -282,11 +282,11 @@ export const filters = [
       options: [
         {
           key: 'yes',
-          label: 'yes',
+          label: 'Yes',
         },
         {
           key: 'no',
-          label: 'no',
+          label: 'No',
         },
       ],
     },

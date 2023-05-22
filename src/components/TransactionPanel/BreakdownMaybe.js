@@ -8,7 +8,7 @@ import css from './TransactionPanel.module.css';
 
 // Functional component as a helper to build BookingBreakdown
 const BreakdownMaybe = props => {
-  const { className, rootClassName, breakdownClassName, transaction, transactionRole } = props;
+  const { className, rootClassName, breakdownClassName, transaction, transactionRole ,dayUnitType} = props;
   const loaded = transaction && transaction.id && transaction.booking && transaction.booking.id;
 
   const classes = classNames(rootClassName || css.breakdownMaybe, className);
@@ -20,6 +20,7 @@ const BreakdownMaybe = props => {
         className={breakdownClasses}
         userRole={transactionRole}
         unitType={config.bookingUnitType}
+         dayUnitType = {config.bookingDayUnitType}
         transaction={transaction}
         booking={transaction.booking}
         dateType={DATE_TYPE_DATE}

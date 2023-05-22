@@ -11,7 +11,7 @@ const SectionFeaturesMaybe = props => {
   }
 
   const selectedOptions = publicData && publicData.numberOfPets ? publicData.numberOfPets : [];
-  console.log('selectedOptions', selectedOptions)
+
   return (
     <div className={css.sectionFeatures}>
       <h2 className={css.featuresTitle}>
@@ -24,6 +24,7 @@ const SectionFeaturesMaybe = props => {
         twoColumns={true}
       />
     </div>
+    
   );
 };
 

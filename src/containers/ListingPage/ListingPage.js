@@ -104,7 +104,7 @@ export class ListingPageComponent extends Component {
     const listing = getListing(listingId);
 
     const { bookingDates, ...bookingData } = values;
-    // console.log(values, '^^^^ ^^^^ => values');
+
 
 
     const initialValues = {
@@ -210,7 +210,7 @@ export class ListingPageComponent extends Component {
   
 
   //  const firstName = currentUser?.attributes?.profile?.firstName
-  //  console.log('firstName', firstName)
+
 
     const listingId = new UUID(rawParams.id);
     const isPendingApprovalVariant = rawParams.variant === LISTING_PAGE_PENDING_APPROVAL_VARIANT;
@@ -227,7 +227,7 @@ export class ListingPageComponent extends Component {
     const listingType = isDraftVariant
       ? LISTING_PAGE_PARAM_TYPE_DRAFT
       : LISTING_PAGE_PARAM_TYPE_EDIT;
-      console.log(listingType, '^^^^ ^^^^ => listingType');
+     
       
     const listingTab = isDraftVariant ? 'photos' : 'description';
 
@@ -485,8 +485,9 @@ const firstname = authorDisplayName.split(" ")[0];
                     <div className={css.headingFeature}>
                       <FormattedMessage id="ListingPage.havepet" values={{ name: hostLink }} />
                     </div>
-                    <p className={css.featuresDescription}>{Yourselfdohavepets}</p>
+                    <p className={css.featuresDescription}>  {Yourselfdohavepets == "yes" ?<>Yes</>:<>No</>}</p>
                   </div>
+                 
                   {
                     yourselfexp?<div className={css.featureList}>
                     <div className={css.headingFeature}>
@@ -497,12 +498,13 @@ const firstname = authorDisplayName.split(" ")[0];
                   }
                   
                   <SectionRulesMaybe publicData={publicData} />
-                  <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
+                  
                   <SectionMapMaybe
                     geolocation={geolocation}
                     publicData={publicData}
                     listingId={currentListing.id}
                   />
+                  <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
                   {/* {reviews == 0 ? null:<SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />} */}
                
                   {/* <SectionHostMaybe

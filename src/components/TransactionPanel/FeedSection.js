@@ -17,6 +17,7 @@ const FeedSection = props => {
     initialMessageFailed,
     messages,
     providerName,
+    authorDisplayName,
     oldestMessagePageFetched,
     onShowMoreMessages,
     onOpenReviewModal,

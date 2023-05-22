@@ -26,6 +26,7 @@ import {
   AvatarLarge,
   BookingPanel,
   NamedLink,
+  PrimaryButton,
   ReviewModal,
   UserDisplayName,
 } from '../../components';
@@ -195,7 +196,10 @@ export class TransactionPanelComponent extends Component {
       lineItems,
       fetchLineItemsInProgress,
       fetchLineItemsError,
+      transactionCancel
     } = this.props;
+
+   
 
     const currentTransaction = ensureTransaction(transaction);
     const currentListing = ensureListing(currentTransaction.listing);
@@ -247,6 +251,7 @@ export class TransactionPanelComponent extends Component {
           headingState: HEADING_ACCEPTED,
           showDetailCardHeadings: isCustomer,
           showAddress: isCustomer,
+          showCancelButton:isCustomer,
         };
       } else if (txIsDeclined(tx)) {
         return {
@@ -288,8 +293,10 @@ export class TransactionPanelComponent extends Component {
       : currentListing.attributes.title;
 
     const unitType = config.bookingUnitType;
+    const dayUnitType = config.bookingDayUnitType;
     const isNightly = unitType === LINE_ITEM_NIGHT;
     const isDaily = unitType === LINE_ITEM_DAY;
+
 
     const unitTranslationKey = isNightly
       ? 'TransactionPanel.perNight'
@@ -436,7 +443,9 @@ export class TransactionPanelComponent extends Component {
                 location={location}
                 geolocation={geolocation}
                 showAddress={stateData.showAddress}
+
               />
+            
               {stateData.showBookingPanel ? (
                 <BookingPanel
                   className={css.bookingPanel}
@@ -459,12 +468,15 @@ export class TransactionPanelComponent extends Component {
               <BreakdownMaybe
                 className={css.breakdownContainer}
                 transaction={currentTransaction}
+                dayUnitType={dayUnitType}
                 transactionRole={transactionRole}
               />
 
               {stateData.showSaleButtons ? (
                 <div className={css.desktopActionButtons}>{saleButtons}</div>
               ) : null}
+
+{stateData.showCancelButton?<PrimaryButton onClick={()=>transactionCancel(transaction.id.uuid)} >Cancel</PrimaryButton>:null}
             </div>
           </div>
         </div>

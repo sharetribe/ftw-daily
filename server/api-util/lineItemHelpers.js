@@ -182,9 +182,9 @@ exports.calculateTotalFromLineItems = lineItems => {
    
     return getAmountAsDecimalJS(lineTotal).add(sum);
   }, 0);
-
   // Get total price as Number (and validate that the conversion is safe)
   const numericTotalPrice = convertDecimalJSToNumber(totalPrice);
+  console.log(numericTotalPrice, 'hre')
   const unitPrice = lineItems[0].unitPrice;
 console.log('numericTotalPrice', numericTotalPrice)
   return new Money(numericTotalPrice, unitPrice.currency);

@@ -70,12 +70,12 @@ const SectionHeading = props => {
   return (
     <div className={css.sectionHeading}>
       <div className={css.desktopPriceContainer}>
-        <div className={css.desktopPriceValue} title={priceTitle}>
+        {/* <div className={css.desktopPriceValue} title={priceTitle}>
           {formattedPrice}
-        </div>
-        <div className={css.desktopPerUnit}>
+        </div> */}
+        {/* <div className={css.desktopPerUnit}>
           <FormattedMessage id={unitTranslationKey} />
-        </div>
+        </div> */}
       </div>
       <div className={css.heading}>
         <h1 className={css.title}>{hostLink}</h1>

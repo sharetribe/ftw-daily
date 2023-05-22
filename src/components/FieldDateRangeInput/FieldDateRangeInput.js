@@ -132,6 +132,8 @@ class FieldDateRangeInputComponent extends Component {
       startDateId,
       endDateId,
     };
+
+   
     const classes = classNames(rootClassName || css.fieldRoot, className);
     const errorClasses = classNames({ [css.mobileMargins]: useMobileMargins });
 
