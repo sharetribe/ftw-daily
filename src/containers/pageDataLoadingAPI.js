@@ -61,6 +61,12 @@ const getPageDataLoadingAPI = () => {
     PrivacyPolicyPage: {
       loadData: PrivacyPolicyPageLoader,
     },
+    // ContactPage: {
+    //   loadData: ContactPageLoader,
+    // },
+    // FaqPage: {
+    //   loadData: FaqPageLoader,
+    // },
     ProfilePage: {
       loadData: ProfilePageLoader,
     },

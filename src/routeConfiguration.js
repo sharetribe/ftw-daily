@@ -8,6 +8,9 @@ import PreviewResolverPage from './containers/PreviewResolverPage/PreviewResolve
 // Otherwise, components will import form container eventually and
 // at that point css bundling / imports will happen in wrong order.
 import { NamedRedirect } from './components';
+import AboutUs from './containers/AboutUs';
+// import Contact from './containers/Contact';
+
 // import { FavouritePageComponent } from './containers/FavouritePage/FavouritePage';
 
 const pageDataLoadingAPI = getPageDataLoadingAPI();
@@ -28,6 +31,8 @@ const PasswordRecoveryPage = loadable(() => import(/* webpackChunkName: "Passwor
 const PasswordResetPage = loadable(() => import(/* webpackChunkName: "PasswordResetPage" */ './containers/PasswordResetPage/PasswordResetPage'));
 const PaymentMethodsPage = loadable(() => import(/* webpackChunkName: "PaymentMethodsPage" */ './containers/PaymentMethodsPage/PaymentMethodsPage'));
 const PrivacyPolicyPage = loadable(() => import(/* webpackChunkName: "PrivacyPolicyPage" */ './containers/PrivacyPolicyPage/PrivacyPolicyPage'));
+const Contact = loadable(() => import(/* webpackChunkName: "PrivacyPolicyPage" */ './containers/Contact'));
+const Faq = loadable(() => import(/* webpackChunkName: "PrivacyPolicyPage" */ './containers/Faq'));
 const ProfilePage = loadable(() => import(/* webpackChunkName: "ProfilePage" */ './containers/ProfilePage/ProfilePage'));
 const ProfileSettingsPage = loadable(() => import(/* webpackChunkName: "ProfileSettingsPage" */ './containers/ProfileSettingsPage/ProfileSettingsPage'));
 const SearchPage = loadable(() => import(/* webpackChunkName: "SearchPage" */ /* webpackPrefetch: true */  './containers/SearchPage/SearchPage'));
@@ -308,6 +313,24 @@ const routeConfiguration = () => {
       name: 'PrivacyPolicyPage',
       component: PrivacyPolicyPage,
       loadData: pageDataLoadingAPI.PrivacyPolicyPage.loadData,
+    },
+    {
+      path: '/petcrib-contact',
+      name: 'ContactPage',
+      component:Contact,
+      // loadData: pageDataLoadingAPI.ContactPage.loadData,
+    },
+    {
+      path: '/petcrib-faq',
+      name: 'FaqPage',
+      component: Faq,
+      // loadData: pageDataLoadingAPI.FaqPage.loadData,
+    },
+    {
+      path: '/petcrib-aboutUs',
+      name: 'AboutUsPage',
+      component: AboutUs,
+      // loadData: pageDataLoadingAPI.FaqPage.loadData,
     },
     {
       path: '/styleguide',

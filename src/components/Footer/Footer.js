@@ -87,18 +87,28 @@ const FooterComponent = props => {
                   </NamedLink> */}
                 </li>
                 <li className={css.listItem}>
-                  <NamedLink name="LandingPage" className={css.link}>
+                  <NamedLink name="FaqPage" className={css.link}>
                     <FormattedMessage id="Footer.toFAQPage" />
                   </NamedLink>
                 </li>
                 <li className={css.listItem}>
                   <NamedLink
-                    name="ContactDetailsPage"
+                    name="ContactPage"
                     // params={{ pageId: 'about' }}
                     // to={{ hash: '#contact' }}
                     className={css.link}
                   >
                     <FormattedMessage id="Footer.toContactPage" />
+                  </NamedLink>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink
+                    name="AboutUsPage"
+                    // params={{ pageId: 'about' }}
+                    // to={{ hash: '#contact' }}
+                    className={css.link}
+                  >
+                    <FormattedMessage id="About Us" />
                   </NamedLink>
                 </li>
               </ul>
