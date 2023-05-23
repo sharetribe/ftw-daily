@@ -8,7 +8,8 @@ import PreviewResolverPage from './containers/PreviewResolverPage/PreviewResolve
 // Otherwise, components will import form container eventually and
 // at that point css bundling / imports will happen in wrong order.
 import { NamedRedirect } from './components';
-import AboutUs from './containers/AboutUs';
+
+
 
 
 
@@ -33,7 +34,8 @@ const PasswordResetPage = loadable(() => import(/* webpackChunkName: "PasswordRe
 const PaymentMethodsPage = loadable(() => import(/* webpackChunkName: "PaymentMethodsPage" */ './containers/PaymentMethodsPage/PaymentMethodsPage'));
 const PrivacyPolicyPage = loadable(() => import(/* webpackChunkName: "PrivacyPolicyPage" */ './containers/PrivacyPolicyPage/PrivacyPolicyPage'));
 const ContactPage = loadable(() => import(/* webpackChunkName: "PrivacyPolicyPage" */ './containers/ContactPage/ContactPage'));
-const Faq = loadable(() => import(/* webpackChunkName: "PrivacyPolicyPage" */ './containers/Faq'));
+const AboutUsPage = loadable(() => import(/* webpackChunkName: "PrivacyPolicyPage" */ './containers/AboutUs/AboutUs'));
+const FaqPage = loadable(() => import(/* webpackChunkName: "PrivacyPolicyPage" */ './containers/FaqPage/FaqPage'));
 const ProfilePage = loadable(() => import(/* webpackChunkName: "ProfilePage" */ './containers/ProfilePage/ProfilePage'));
 const ProfileSettingsPage = loadable(() => import(/* webpackChunkName: "ProfileSettingsPage" */ './containers/ProfileSettingsPage/ProfileSettingsPage'));
 const SearchPage = loadable(() => import(/* webpackChunkName: "SearchPage" */ /* webpackPrefetch: true */  './containers/SearchPage/SearchPage'));
@@ -324,13 +326,13 @@ const routeConfiguration = () => {
     {
       path: '/petcrib-faq',
       name: 'FaqPage',
-      component: Faq,
-      // loadData: pageDataLoadingAPI.FaqPage.loadData,
+      component: FaqPage,
+       //loadData: pageDataLoadingAPI.FaqPage.loadData,
     },
     {
       path: '/petcrib-aboutUs',
       name: 'AboutUsPage',
-      component: AboutUs,
+      component: AboutUsPage,
       // loadData: pageDataLoadingAPI.FaqPage.loadData,
     },
     {

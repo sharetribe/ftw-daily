@@ -10,13 +10,13 @@ import { H1 } from '../PageBuilder/Primitives/Heading';
 import PageBuilder, { SectionBuilder } from '../../containers/PageBuilder/PageBuilder';
 
 import FallbackPage, { fallbackSections } from './FallbackPage';
-import { ASSET_NAME } from './ContactPage.duck';
+import { ASSET_NAME } from './Faq.duck';
 import PageBuilderTerm from '../PageBuilder/PageBuilderTerm';
 
 // This "content-only" component can be used in modals etc.
-const ContactContent = props => {
+const FaqPageContent = props => {
   const { inProgress, error, data } = props;
-
+  this.state = {  isfaqpage:false};
   if (inProgress) {
     return null;
   }
@@ -46,7 +46,7 @@ const ContactContent = props => {
 };
 
 // Presentational component for PrivacyPolicyPage
-const ContactPageComponent = props => {
+const FaqPageComponent = props => {
   const { pageAssetsData, inProgress, error } = props;
 
   return (
@@ -54,13 +54,14 @@ const ContactPageComponent = props => {
       pageAssetsData={pageAssetsData?.[camelize(ASSET_NAME)]?.data}
       inProgress={inProgress}
       error={error}
+      isfaqpage={true}
       fallbackPage={<FallbackPage />}
     />
   
   );
 };
 
-ContactPageComponent.propTypes = {
+FaqPageComponent.propTypes = {
   pageAssetsData: object,
   inProgress: bool,
   error: propTypes.error,
@@ -77,9 +78,9 @@ const mapStateToProps = state => {
 // lifecycle hook.
 //
 // See: https://github.com/ReactTraining/react-router/issues/4671
-const ContactPage = compose(connect(mapStateToProps))(ContactPageComponent);
+const FaqPage = compose(connect(mapStateToProps))(FaqPageComponent);
 
 const CONTACT_ASSET_NAME = ASSET_NAME;
-export { CONTACT_ASSET_NAME, ContactPageComponent, ContactContent };
+export { CONTACT_ASSET_NAME, FaqPageComponent, FaqPageContent };
 
-export default ContactPage;
+export default FaqPage;
