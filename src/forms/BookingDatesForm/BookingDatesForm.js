@@ -354,18 +354,18 @@ export class BookingDatesFormComponent extends Component {
                    <>
                    {(values.serviceSetup) ?
                   <div className={css.pricingDescription}>
-                   <span>Rate</span>= AUD{min}
+                   <span>Minimum_Price</span> = AUD{min}.00
                   </div> : null}
                    </>
                    :
                    <>
                     {(values?.serviceSetup?.find((e)=>e == "overnightsStay"))  ?
                   <div className={css.pricingDescription}>
-                    <span>Over night rate</span> = AUD{nightprice}  per night </div> : null}
+                    <span>Over night rate</span> = AUD{nightprice}.00  per night </div> : null}
 
                 {(values?.serviceSetup?.find((e)=>e == "dayCareStay"))  ?
                   <div className={css.pricingDescription}>
-                    <span>Day Care Stay</span> = AUD{dayprice}  per day</div> : null}
+                    <span>Day Care Stay</span> = AUD{dayprice}.00  per day</div> : null}
                    </>
                 }
               </div>
