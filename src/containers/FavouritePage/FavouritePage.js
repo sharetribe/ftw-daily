@@ -23,9 +23,9 @@ import {
   validURLParamsForExtendedData,
   validFilterParams,
   createSearchResultSchema,
-} from './SearchPage.helpers';
-import MainPanel from './MainPanel';
-import css from './SearchPage.module.css';
+} from './FavouritePage.helpers';
+import MainPanel from './FavouritePanel';
+import css from './FavouritePage.module.css';
 import { updateProfile } from '../ProfileSettingsPage/ProfileSettingsPage.duck';
 
 const MODAL_BREAKPOINT = 768; // Search is in modal on mobile layout
@@ -174,6 +174,7 @@ export class SearchPageComponent extends Component {
           currentPage="SearchPage"
           currentSearchParams={urlQueryParams}
         />
+        
         <div className={css.container}>
           <MainPanel
             urlQueryParams={validQueryParams}
@@ -194,33 +195,7 @@ export class SearchPageComponent extends Component {
             currentUser={currentUser}
             pageName='SearchPage'
           />
-          <ModalInMobile
-            className={css.mapPanel}
-            id="SearchPage.map"
-            isModalOpenOnMobile={this.state.isSearchMapOpenOnMobile}
-            onClose={() => this.setState({ isSearchMapOpenOnMobile: false })}
-            showAsModalMaxWidth={MODAL_BREAKPOINT}
-            onManageDisableScrolling={onManageDisableScrolling}
-          >
-            {/* <div className={css.mapWrapper}>
-              {shouldShowSearchMap ? (
-                <SearchMap
-                  reusableContainerClassName={css.map}
-                  activeListingId={activeListingId}
-                  bounds={bounds}
-                  center={origin}
-                  isSearchMapOpenOnMobile={this.state.isSearchMapOpenOnMobile}
-                  location={location}
-                  listings={mapListings || []}
-                  onMapMoveEnd={this.onMapMoveEnd}
-                  onCloseAsModal={() => {
-                    onManageDisableScrolling('SearchPage.map', false);
-                  }}
-                  messages={intl.messages}
-                />
-              ) : null}
-            </div> */}
-          </ModalInMobile>
+        
         </div>
       </Page>
     );

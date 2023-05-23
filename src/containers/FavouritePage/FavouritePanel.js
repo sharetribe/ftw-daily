@@ -16,10 +16,10 @@ import {
   SortBy,
 } from '../../components';
 
-import FilterComponent from './FilterComponent';
-import { validFilterParams } from './SearchPage.helpers';
 
-import css from './SearchPage.module.css';
+import { validFilterParams } from './FavouritePage.helpers';
+
+import css from './FavouritePage.module.css';
 
 // Primary filters have their content in dropdown-popup.
 // With this offset we move the dropdown to the left a few pixels on desktop layout.

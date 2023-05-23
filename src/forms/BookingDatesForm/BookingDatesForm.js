@@ -354,7 +354,7 @@ export class BookingDatesFormComponent extends Component {
                 Day Care Stay = AUD{dayprice}  per day</> : null}
 
               {(values.serviceSetup) ? <>
-               Rate AUD {min} </> : null}
+               whole day rate = AUD {min} </> : null}
 
               
 
