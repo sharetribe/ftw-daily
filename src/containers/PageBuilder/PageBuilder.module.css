@@ -12,3 +12,72 @@
 .main {
   display: grid;
 }
+
+
+.accordion {
+  transition: all 0.3s ease-in-out;
+  padding: 24px 22px;
+  background: #FFFFFF;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  border: 1px solid #d8d8d8;
+  -webkit-box-shadow: 0px 0px 5px 0px rgb(0 0 0 / 8%);
+  -moz-box-shadow: 0px 0px 5px 0px rgb(0 0 0 / 8%);
+  box-shadow: 0px 0px 5px 0px rgb(0 0 0 / 8%);
+}
+
+.accordion[open] .accordionTitle {
+  background-image: url("../../assets/uparrow.png");
+}
+
+.accordion .accordanceBoxWrap {
+  padding-top: 23px;
+
+  & .dotsList {
+    list-style-type: disc;
+    padding-left: 3em;
+  }
+
+  & .dashList {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  & .maxPreferences {
+    padding-left: 2em;
+  }
+}
+
+.accordion .accordionTitle {
+  list-style-type: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #555555;
+  background-image: url("../../assets/downarrow.png");
+  background-repeat: no-repeat;
+  background-position: right 0.35rem top 0.625rem;
+  background-size: 16px 8px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 26px;
+  letter-spacing: 0.05em;
+  color: #212121;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.accordion .accordionTitle::marker::-webkit-details-marker {
+  display: none;
+}
+
+.faqPageWrapper {
+  margin: 0 auto 70px auto;
+  width: 1280px;
+
+  & .petHeading {
+    margin: 40px 0;
+  }
+}
