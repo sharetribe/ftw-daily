@@ -1,6 +1,6 @@
 import isEmpty from 'lodash/isEmpty';
 import { clearCurrentUser, fetchCurrentUser } from './user.duck';
-import { createUserWithIdp } from '../util/api';
+import { contact_us, createUserWithIdp } from '../util/api';
 import { storableError } from '../util/errors';
 import * as log from '../util/log';
 
@@ -211,6 +211,7 @@ export const signup = params => (dispatch, getState, sdk) => {
     .create(createUserParams)
     .then(() => dispatch(signupSuccess()))
     .then(() => dispatch(login(email, password)))
+    // .then(()=> contact_us())
     .catch(e => {
       dispatch(signupError(storableError(e)));
       log.error(e, 'signup-failed', {

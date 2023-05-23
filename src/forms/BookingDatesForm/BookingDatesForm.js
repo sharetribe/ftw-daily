@@ -155,9 +155,9 @@ export class BookingDatesFormComponent extends Component {
 
           const detail = listing?.attributes?.publicData?.serviceSetup;
           const discount = listing.attributes.publicData.discountlengthOfStays
-          console.log('discount', discount)
+        
           const letofstay = listing.attributes.publicData.lengthOfStays
-   console.log('letofstay', letofstay)
+ 
 
           const phoneRequiredMessage = intl.formatMessage({
             id: 'EditListingDescriptionForm.phoneRequired',

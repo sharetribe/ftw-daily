@@ -50,13 +50,13 @@ const ContactPageComponent = props => {
   const { pageAssetsData, inProgress, error } = props;
 
   return (
-    <PageBuilderTerm
-      pageAssetsData={pageAssetsData?.[camelize(ASSET_NAME)]?.data}
-      inProgress={inProgress}
-      error={error}
-      fallbackPage={<FallbackPage />}
-    />
-  
+    // <PageBuilderTerm
+    //   pageAssetsData={pageAssetsData?.[camelize(ASSET_NAME)]?.data}
+    //   inProgress={inProgress}
+    //   error={error}
+    //   fallbackPage={<FallbackPage />}
+    // />
+  <>fgfth</>
   );
 };
 

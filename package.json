@@ -8,6 +8,7 @@
     "@loadable/component": "^5.15.2",
     "@loadable/server": "^5.15.2",
     "@mapbox/polyline": "^1.1.1",
+    "@sendgrid/mail": "^7.7.0",
     "@sentry/browser": "^6.19.7",
     "@sentry/node": "^6.19.7",
     "autosize": "^5.0.1",
