@@ -9,7 +9,8 @@ import PreviewResolverPage from './containers/PreviewResolverPage/PreviewResolve
 // at that point css bundling / imports will happen in wrong order.
 import { NamedRedirect } from './components';
 import AboutUs from './containers/AboutUs';
-// import Contact from './containers/Contact';
+
+
 
 // import { FavouritePageComponent } from './containers/FavouritePage/FavouritePage';
 
@@ -31,7 +32,7 @@ const PasswordRecoveryPage = loadable(() => import(/* webpackChunkName: "Passwor
 const PasswordResetPage = loadable(() => import(/* webpackChunkName: "PasswordResetPage" */ './containers/PasswordResetPage/PasswordResetPage'));
 const PaymentMethodsPage = loadable(() => import(/* webpackChunkName: "PaymentMethodsPage" */ './containers/PaymentMethodsPage/PaymentMethodsPage'));
 const PrivacyPolicyPage = loadable(() => import(/* webpackChunkName: "PrivacyPolicyPage" */ './containers/PrivacyPolicyPage/PrivacyPolicyPage'));
-const Contact = loadable(() => import(/* webpackChunkName: "PrivacyPolicyPage" */ './containers/Contact'));
+const ContactPage = loadable(() => import(/* webpackChunkName: "PrivacyPolicyPage" */ './containers/ContactPage/ContactPage'));
 const Faq = loadable(() => import(/* webpackChunkName: "PrivacyPolicyPage" */ './containers/Faq'));
 const ProfilePage = loadable(() => import(/* webpackChunkName: "ProfilePage" */ './containers/ProfilePage/ProfilePage'));
 const ProfileSettingsPage = loadable(() => import(/* webpackChunkName: "ProfileSettingsPage" */ './containers/ProfileSettingsPage/ProfileSettingsPage'));
@@ -317,8 +318,8 @@ const routeConfiguration = () => {
     {
       path: '/petcrib-contact',
       name: 'ContactPage',
-      component:Contact,
-      // loadData: pageDataLoadingAPI.ContactPage.loadData,
+      component:ContactPage,
+      //  loadData: pageDataLoadingAPI.ContactPage.loadData,
     },
     {
       path: '/petcrib-faq',

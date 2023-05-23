@@ -127,6 +127,7 @@ export class BookingDatesFormComponent extends Component {
             firstname,
           } = fieldRenderProps;
 
+
           const pricepet = listing?.attributes?.publicData?.pricepet
 
           const dayprice = listing.attributes.publicData.pricepet.dayCare.dayCareStay1
@@ -154,7 +155,7 @@ export class BookingDatesFormComponent extends Component {
 
           const detail = listing?.attributes?.publicData?.serviceSetup;
          
-          console.log('values.serviceSetup ', values.serviceSetup)
+   
 
           const phoneRequiredMessage = intl.formatMessage({
             id: 'EditListingDescriptionForm.phoneRequired',
@@ -348,18 +349,25 @@ export class BookingDatesFormComponent extends Component {
               <div className={css.pricingBox}>
                 {values.serviceSetup ? <div className={css.pricingHeading}>Pricing</div> : null}
 
-                {(values.serviceSetup == "overnightsStay") ?
+                {
+                  values?.serviceSetup?.length === 2 ? 
+                   <>
+                   {(values.serviceSetup) ?
+                  <div className={css.pricingDescription}>
+                   <span>Rate</span>= AUD{min}
+                  </div> : null}
+                   </>
+                   :
+                   <>
+                    {(values?.serviceSetup?.find((e)=>e == "overnightsStay"))  ?
                   <div className={css.pricingDescription}>
                     <span>Over night rate</span> = AUD{nightprice}  per night </div> : null}
 
-                {(values.serviceSetup == "dayCareStay") ?
+                {(values?.serviceSetup?.find((e)=>e == "dayCareStay"))  ?
                   <div className={css.pricingDescription}>
                     <span>Day Care Stay</span> = AUD{dayprice}  per day</div> : null}
-
-                {(values.serviceSetup) ?
-                  <div className={css.pricingDescription}>
-                    Rate AUD {min}
-                  </div> : null}
+                   </>
+                }
               </div>
 
 

@@ -110,6 +110,7 @@ const PageBuilderTerm = props => {
               </Topbar>
               <Main as="main" className={css.main}>
                 <SectionBuilder sections={sections} options={options} />
+             
               </Main>
               <Footer>
                 <FooterContent />
