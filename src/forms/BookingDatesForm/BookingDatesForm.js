@@ -154,8 +154,10 @@ export class BookingDatesFormComponent extends Component {
 
 
           const detail = listing?.attributes?.publicData?.serviceSetup;
-         
-   
+          const discount = listing.attributes.publicData.discountlengthOfStays
+          console.log('discount', discount)
+          const letofstay = listing.attributes.publicData.lengthOfStays
+   console.log('letofstay', letofstay)
 
           const phoneRequiredMessage = intl.formatMessage({
             id: 'EditListingDescriptionForm.phoneRequired',
@@ -276,7 +278,7 @@ export class BookingDatesFormComponent extends Component {
                   )
                 })}
                 {/* {values.serviceSetup ? "required this field" :null} */}
-
+                <div>If you booking {letofstay}days or above you got {discount}% discount</div>
               </div>
               <FieldSelect
                 className={css.numberPets}
@@ -289,7 +291,7 @@ export class BookingDatesFormComponent extends Component {
 
                 )}
               >
-
+                   
                 <option value={""}>select</option>
                 {/* {new Array(numberPetArray).fill('0').map((st) => <option key={st} value={st}>{st}</option>)} */}
                 {numberPetArray.map((st) => {
