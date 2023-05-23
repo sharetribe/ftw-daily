@@ -143,7 +143,7 @@ export class BookingDatesFormComponent extends Component {
 
           const options = findOptionsForSelectFilter('serviceSetup', filterConfig);
           //const numberPet = findOptionsForSelectFilter('numberOfPets', filterConfig);
-          //console.log(numberPet, numberPet)
+         
 
           const numberPetArray = numberPet && numberPet == 3
             ? [1, 2, 3]
@@ -153,7 +153,7 @@ export class BookingDatesFormComponent extends Component {
 
 
           const detail = listing?.attributes?.publicData?.serviceSetup;
-          console.log('values.serviceSetup ', values.serviceSetup )
+         
 
           const phoneRequiredMessage = intl.formatMessage({
             id: 'EditListingDescriptionForm.phoneRequired',

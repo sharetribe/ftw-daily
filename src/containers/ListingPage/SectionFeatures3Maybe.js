@@ -13,9 +13,9 @@ const SectionFeatures3Maybe = props => {
   const selectedOptions = publicData && publicData.typeOfPets ? publicData.sizeOfdogs : [];
   return (
     <div className={css.sectionFeatures}>
-      <h2 className={css.featuresTitle}>
+   { selectedOptions?  <h2 className={css.featuresTitle}>
         <FormattedMessage id="ListingPage.featuressizedogs" />
-      </h2>
+      </h2>:null}
       <PropertyGroup
         id="ListingPage.typeOfPets"
         options={options}

@@ -209,12 +209,11 @@ const BookingPanel = props => {
         <FormattedMessage id="ListingPage.featuresnumberpet" values={{ name: hostLink }}  />
       </h2>
       <div className={css.sectionFeatures}>  {selectedOptions}</div>
-    
-      {amenityOptions3 ?
-       <SectionFeatures3Maybe options={amenityOptions3} publicData={publicData} />
-       :null
 
-      }
+       <SectionFeatures3Maybe options={amenityOptions3} publicData={publicData} />
+      
+
+      
     
      
       <SectionFeatures4Maybe options={amenityOptions4} publicData={publicData} />
