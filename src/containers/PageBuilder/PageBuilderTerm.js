@@ -85,9 +85,9 @@ const PageBuilderTerm = props => {
     ...pageProps
   } = props;
 
-  if (!pageAssetsData && fallbackPage && !inProgress && error) {
-    return fallbackPage;
-  }
+  // if (!pageAssetsData && fallbackPage && !inProgress && error) {
+  //   return fallbackPage;
+  // }
 
   // Page asset contains UI info and metadata related to it.
   // - "sections" (data that goes inside <body>)

@@ -66,7 +66,7 @@ const getPageDataLoadingAPI = () => {
     ContactPage: {
       loadData: ContactPageLoader,
     },
-    // },
+    
     FaqPage: {
       loadData: FaqPageLoader,
     },

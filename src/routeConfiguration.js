@@ -318,22 +318,22 @@ const routeConfiguration = () => {
       loadData: pageDataLoadingAPI.PrivacyPolicyPage.loadData,
     },
     {
-      path: '/petcrib-contact',
+      path: '/contact',
       name: 'ContactPage',
       component:ContactPage,
-      //  loadData: pageDataLoadingAPI.ContactPage.loadData,
+       loadData: pageDataLoadingAPI.ContactPage.loadData,
     },
     {
-      path: '/petcrib-faq',
+      path: '/faq',
       name: 'FaqPage',
       component: FaqPage,
-       //loadData: pageDataLoadingAPI.FaqPage.loadData,
+       loadData: pageDataLoadingAPI.FaqPage.loadData,
     },
     {
-      path: '/petcrib-aboutUs',
+      path: '/aboutUs',
       name: 'AboutUsPage',
       component: AboutUsPage,
-      // loadData: pageDataLoadingAPI.FaqPage.loadData,
+      loadData: pageDataLoadingAPI.FaqPage.loadData,
     },
     {
       path: '/styleguide',

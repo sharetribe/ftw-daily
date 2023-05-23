@@ -28,6 +28,7 @@ const PreviewResolverPage = props => {
 
   const toTermsOfServicePage = <NamedRedirect name="TermsOfServicePage" />;
   const toPrivacyPolicyPage = <NamedRedirect name="PrivacyPolicyPage" />;
+  const toContactPage = <NamedRedirect name="ContactPage" />;
   const toCMSPage = <NamedRedirect name="CMSPage" params={{ pageId: pageAssetName }} />;
   const toLandingPage = <NamedRedirect name="LandingPage" />;
 

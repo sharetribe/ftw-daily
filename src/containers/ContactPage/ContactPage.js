@@ -80,6 +80,7 @@ const mapStateToProps = state => {
 const ContactPage = compose(connect(mapStateToProps))(ContactPageComponent);
 
 const CONTACT_ASSET_NAME = ASSET_NAME;
+console.log('CONTACT_ASSET_NAME', CONTACT_ASSET_NAME)
 export { CONTACT_ASSET_NAME, ContactPageComponent, ContactContent };
 
 export default ContactPage;
