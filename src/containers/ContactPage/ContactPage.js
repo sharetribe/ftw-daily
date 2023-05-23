@@ -12,11 +12,13 @@ import PageBuilder, { SectionBuilder } from '../../containers/PageBuilder/PageBu
 import FallbackPage, { fallbackSections } from './FallbackPage';
 import { ASSET_NAME } from './ContactPage.duck';
 import PageBuilderTerm from '../PageBuilder/PageBuilderTerm';
+import ContactForm from './ContactForm';
+import ContactUsForm from './contactUsForm';
 
 // This "content-only" component can be used in modals etc.
 const ContactContent = props => {
   const { inProgress, error, data } = props;
-
+  this.state = { isContact: false };
   if (inProgress) {
     return null;
   }
@@ -31,6 +33,8 @@ const ContactContent = props => {
 
   const hasData = error === null && data;
   const sectionsData = hasData ? data : fallbackSections;
+
+ 
 
   return (
     <SectionBuilder
@@ -54,9 +58,16 @@ const ContactPageComponent = props => {
     //   pageAssetsData={pageAssetsData?.[camelize(ASSET_NAME)]?.data}
     //   inProgress={inProgress}
     //   error={error}
+    //   isContact={true}
     //   fallbackPage={<FallbackPage />}
     // />
-  <>fgfth</>
+    <div>
+      {/* <ContactForm
+
+      /> */}
+      <ContactUsForm/>
+    </div>
+
   );
 };
 

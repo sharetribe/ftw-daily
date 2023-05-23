@@ -8,6 +8,7 @@ import PreviewResolverPage from './containers/PreviewResolverPage/PreviewResolve
 // Otherwise, components will import form container eventually and
 // at that point css bundling / imports will happen in wrong order.
 import { NamedRedirect } from './components';
+import ContactUsPage from './containers/ContactPage/ContactUs';
 
 
 
@@ -320,7 +321,7 @@ const routeConfiguration = () => {
     {
       path: '/contact',
       name: 'ContactPage',
-      component:ContactPage,
+      component:ContactUsPage,
        loadData: pageDataLoadingAPI.ContactPage.loadData,
     },
     {
