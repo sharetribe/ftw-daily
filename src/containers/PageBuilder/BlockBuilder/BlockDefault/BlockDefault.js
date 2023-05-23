@@ -32,6 +32,8 @@ const BlockDefault = props => {
     responsiveImageSizes,
     options,
   } = props;
+  // console.log(blockId, '&&&  &&& => blockId');
+
   const classes = classNames(rootClassName || css.root, className);
   const hasTextComponentFields = hasDataInFields([title, text, callToAction], options);
 
@@ -44,9 +46,12 @@ const BlockDefault = props => {
         options={options}
       />
       {hasTextComponentFields ? (
-        <div className={classNames(textClassName, css.text)}>
+        <div className={classNames(blockId === "all-host" ? css.hostBack : textClassName, css.text)}>
           <Field data={title} options={options} />
-          <Field data={text} options={options} />
+          <Field
+            data={text}
+            options={options}
+          />
           <Field data={callToAction} className={ctaButtonClass} options={options} />
         </div>
       ) : null}

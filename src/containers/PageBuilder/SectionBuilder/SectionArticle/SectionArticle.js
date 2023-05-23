@@ -24,6 +24,7 @@ const SectionArticle = props => {
     isInsideContainer,
     options,
   } = props;
+  console.log(sectionId, '&&&  &&& => sectionId');
 
   // If external mapping has been included for fields
   // E.g. { h1: { component: MyAwesomeHeader } }
@@ -50,7 +51,7 @@ const SectionArticle = props => {
       ) : null}
       {hasBlocks ? (
         <div
-          className={classNames(defaultClasses.blockContainer, css.articleMain, {
+          className={classNames(sectionId == "host-verified" ? css.hostWrap : defaultClasses.blockContainer, css.articleMain, {
             [css.noSidePaddings]: isInsideContainer,
           })}
         >

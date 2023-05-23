@@ -69,17 +69,16 @@
     }
   }
 
-  & h1 {
+  & p {
     color: #fff;
-    width: 57%;
     text-align: center;
     margin: auto;
-
-    &::first-word {
-      color: red;
-    }
+    font-size: 40px;
+    line-height: 1.33;
+    font-weight: bold;
   }
 }
+
 
 .searchBox {
   background-color: #0000005c;
