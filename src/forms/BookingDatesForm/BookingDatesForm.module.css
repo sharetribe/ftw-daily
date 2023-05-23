@@ -117,3 +117,37 @@
 .numberPets {
   margin-bottom: 20px;
 }
+
+.serviceNameHeading {
+  line-height: 32px;
+  font-weight: var(--fontWeightSemiBold);
+  font-size: 21px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.pricingHeading {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: var(--matterColor);
+  font-size: 16px;
+  font-weight: var(--fontWeightSemiBold);
+}
+
+.pricingDescription {
+  font-weight: 500;
+  color: #6b6b6b;
+  margin-top: -1px;
+  margin-bottom: 1px;
+  cursor: pointer;
+  font-size: 14px;
+
+  & span {
+    font-weight: 600;
+  }
+}
+
+.pricingBox {
+  padding: 0;
+  margin-bottom: 52px;
+}

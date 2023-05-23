@@ -38,6 +38,24 @@
   }
 }
 
+.countOption {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.pricingBox {
+  padding: 0;
+  margin-bottom: 52px;
+}
+
+.pricingHeading {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: var(--matterColor);
+  font-size: 16px;
+  font-weight: var(--fontWeightSemiBold);
+}
+
 .hostLink {
   margin: 20px 0;
   font-weight: bold;

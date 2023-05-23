@@ -26,8 +26,10 @@
 
 /* Firefox doesn't support image aspect ratio inside flexbox */
 .aspectWrapper {
-  padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
-  background: var(--matterColorNegative); /* Loading BG color */
+  padding-bottom: 66.6667%;
+  /* 3:2 Aspect Ratio */
+  background: var(--matterColorNegative);
+  /* Loading BG color */
 }
 
 .rootForImage {
@@ -46,6 +48,25 @@
   display: flex;
   flex-direction: row;
   padding: 16px 0 2px 0;
+  align-items: center;
+  gap: 20px;
+}
+
+.favInfo {
+  display: flex;
+  flex-direction: row;
+  padding: 16px 0 2px 0;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+
+  &>div {
+    @media(max-width: 768px) {
+      &:nth-child(1) {
+        width: 100%;
+      }
+    }
+  }
 }
 
 .price {
@@ -55,6 +76,10 @@
   justify-content: flex-start;
   flex-shrink: 0;
   margin-right: 18px;
+
+  @media(max-width: 768px) {
+    margin-right: 0;
+  }
 }
 
 .priceValue {
@@ -95,7 +120,10 @@
   /* Font */
   composes: h3 from global;
   color: var(--matterColor);
-
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   /* Remove default margins from font */
   margin-top: 0;
   margin-bottom: 0;
@@ -114,6 +142,10 @@
   /* Remove default margins from font */
   margin-top: 0;
   margin-bottom: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 
   @media (--viewportMedium) {
     margin-top: 0;

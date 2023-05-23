@@ -194,6 +194,7 @@ export class SearchPageComponent extends Component {
             history={history}
             currentUser={currentUser}
             pageName='SearchPage'
+            favCard={true}
           />
         
         </div>

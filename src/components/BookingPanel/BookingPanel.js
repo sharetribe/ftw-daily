@@ -86,7 +86,7 @@ const BookingPanel = props => {
   } = props;
 
   const price = listing.attributes.price;
- 
+
   const hasListingState = !!listing.attributes.state;
   const isClosed = hasListingState && listing.attributes.state === LISTING_STATE_CLOSED;
   const showBookingDatesForm = hasListingState && !isClosed;
@@ -97,7 +97,7 @@ const BookingPanel = props => {
 
 
   const numberPet = listing?.attributes?.publicData?.numberOfPets;
- 
+
   const subTitleText = !!subTitle
     ? subTitle
     : showClosedListingHelpText
@@ -123,9 +123,9 @@ const BookingPanel = props => {
   const amenityOptions5 = findOptionsForSelectFilter('petInHome', filterConfig);
   const amenityOptions6 = findOptionsForSelectFilter('serviceSetup', filterConfig);
   const selectedOptions = publicData && publicData.numberOfPets ? publicData.numberOfPets : [];
- 
+
   const detail = listing?.attributes?.publicData?.serviceSetup;
- 
+
   return (
     <div className={classes}>
       <ModalInMobile
@@ -194,7 +194,7 @@ const BookingPanel = props => {
           </div>
         ) : null}
       </div>
-{/* 
+      {/* 
       <div className={css.hostLink}>
         <FormattedMessage id="BookingPanel.servicetect" values={{ name: firstname }} />
       </div> */}
@@ -205,22 +205,30 @@ const BookingPanel = props => {
       <SectionFeaturesMaybe options={amenityOptions} publicData={publicData} />
 
       {/* <SectionFeatures2Maybe options={amenityOptions2} publicData={publicData} hostLink={hostLink} /> */}
-      <h2 className={css.featuresTitle}>
+      {/* <h2 className={css.featuresTitle}>
         <FormattedMessage id="ListingPage.featuresnumberpet" values={{ name: hostLink }}  />
       </h2>
       <div className={css.sectionFeatures}>  {selectedOptions}</div>
 
-       <SectionFeatures3Maybe options={amenityOptions3} publicData={publicData} />
+       <SectionFeatures3Maybe options={amenityOptions3} publicData={publicData} /> */}
       
 
       
     
      
+      <div className={css.pricingBox}>
+        <div className={css.pricingHeading}>
+          <FormattedMessage id="ListingPage.featuresnumberpet" values={{ name: hostLink }} />
+        </div>
+        <div className={css.countOption}> {selectedOptions}</div>
+      </div>
+
+      {amenityOptions3 ?
+        <SectionFeatures3Maybe options={amenityOptions3} publicData={publicData} />
+        : null
+      }
       <SectionFeatures4Maybe options={amenityOptions4} publicData={publicData} />
       <SectionFeatures5Maybe options={amenityOptions5} publicData={publicData} />
-
-
-
     </div>
   );
 };

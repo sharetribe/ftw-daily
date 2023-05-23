@@ -138,7 +138,7 @@ export class BookingDatesFormComponent extends Component {
               return prev && current ? Math.min(prev, current) : prev || current;
             });
           }
-          const min = findMinPrice(nightprice,dayprice)
+          const min = findMinPrice(nightprice, dayprice)
           const { startDate, endDate } = values && values.bookingDates ? values.bookingDates : {};
 
           const options = findOptionsForSelectFilter('serviceSetup', filterConfig);
@@ -154,6 +154,7 @@ export class BookingDatesFormComponent extends Component {
 
           const detail = listing?.attributes?.publicData?.serviceSetup;
          
+          console.log('values.serviceSetup ', values.serviceSetup)
 
           const phoneRequiredMessage = intl.formatMessage({
             id: 'EditListingDescriptionForm.phoneRequired',
@@ -340,23 +341,28 @@ export class BookingDatesFormComponent extends Component {
                 </PrimaryButton>
               </div>
 
-              <div className={css.hostLink}>
+              <div className={css.serviceNameHeading}>
                 <FormattedMessage id="BookingPanel.servicetect" values={{ name: firstname }} />
               </div>
 
+              <div className={css.pricingBox}>
+                {values.serviceSetup ? <div className={css.pricingHeading}>Pricing</div> : null}
 
-              <div>Pricing</div>
+                {(values.serviceSetup == "overnightsStay") ?
+                  <div className={css.pricingDescription}>
+                    <span>Over night rate</span> = AUD{nightprice}  per night </div> : null}
 
-              {(values.serviceSetup == "overnightsStay") ? <>
-              Over night rate = AUD{nightprice}  per night </> : null}
+                {(values.serviceSetup == "dayCareStay") ?
+                  <div className={css.pricingDescription}>
+                    <span>Day Care Stay</span> = AUD{dayprice}  per day</div> : null}
 
-              {(values.serviceSetup == "dayCareStay") ? <>
-                Day Care Stay = AUD{dayprice}  per day</> : null}
+                {(values.serviceSetup) ?
+                  <div className={css.pricingDescription}>
+                    Rate AUD {min}
+                  </div> : null}
+              </div>
 
-              {(values.serviceSetup) ? <>
-               whole day rate = AUD {min} </> : null}
 
-              
 
             </Form>
           );

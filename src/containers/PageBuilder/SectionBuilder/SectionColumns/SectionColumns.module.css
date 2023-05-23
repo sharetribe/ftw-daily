@@ -74,6 +74,10 @@
     width: 57%;
     text-align: center;
     margin: auto;
+
+    &::first-word {
+      color: red;
+    }
   }
 }
 

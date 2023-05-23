@@ -175,9 +175,10 @@ class MainPanel extends Component {
       pageName,
       favoriteData,
       currentUser,
+      favCard
     } = this.props;
 
-   
+
     const secondaryFilters = filterConfig.filter(f => f.group !== 'primary');
     const hasSecondaryFilters = !!(secondaryFilters && secondaryFilters.length > 0);
 
@@ -232,25 +233,25 @@ class MainPanel extends Component {
       ) : null;
     };
 
-    const classes = classNames(rootClassName || css.searchResultContainer, className);
+    const classes = classNames(favCard ? css.fabGridBox : rootClassName || css.searchResultContainer, className);
     const onLike = () => {
-     
+
       add.push()
-     console.log('arr', add)
+      console.log('arr', add)
     }
     return (
       <div className={classes}>
-        
         <SearchResultsPanel
-              className={css.searchListingsPanel}
-              listings={listings}
-              pagination={listingsAreLoaded ? pagination : null}
-              search={searchParamsForPagination}
-              onLike ={onLike}
-              favoriteData={favoriteData}
-              currentUser={currentUser}
-              setActiveListing={onActivateListing}
-            />
+          className={css.searchListingsPanel}
+          listings={listings}
+          pagination={listingsAreLoaded ? pagination : null}
+          search={searchParamsForPagination}
+          onLike={onLike}
+          favoriteData={favoriteData}
+          currentUser={currentUser}
+          setActiveListing={onActivateListing}
+          favCard={favCard}
+        />
       </div>
     );
   }
