@@ -292,7 +292,7 @@ export class ListingPageComponent extends Component {
             <LayoutWrapperTopbar>{topbar}</LayoutWrapperTopbar>
 
             <LayoutWrapperMain>
-            <UserNav selectedPageName="ListingPage" />
+           
 
               <p className={css.errorText}>
                 <FormattedMessage id="ListingPage.errorLoadingListingMessage" />

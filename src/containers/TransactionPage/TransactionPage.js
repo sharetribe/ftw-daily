@@ -84,7 +84,7 @@ export const TransactionPageComponent = props => {
     fetchLineItemsError,
     transactionCancel
   } = props;
-console.log(' onFetchTransactionLineItems',  onFetchTransactionLineItems)
+
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
   const isProviderRole = transactionRole === PROVIDER;
