@@ -1,7 +1,7 @@
 const sgMail=require('@sendgrid/mail');
 const { serialize } = require('../api-util/sdk');
 
-function listingInReviewTemplate() {
+function listingInReviewTemplate(data) {
     return `<!doctype html>
     <html lang="en">
 
@@ -138,21 +138,21 @@ function listingInReviewTemplate() {
         <div>
           <h1
             style="font-family: 'Karla', sans-serif; font-style: normal;font-weight: 500;font-size: 18px;line-height: 100%; letter-spacing: -0.04em; margin:0;color: #484848;">
-            Enquiry from byBorrow user
+            Contact from petcrib user
           </h1>
           <br/>
           <p
             style="font-family: 'Karla', sans-serif; font-style: normal;font-weight: 500;font-size: 16px;line-height: 100%; letter-spacing: -0.04em; margin:0;color: #484848;">
-            email:&nbsp${"data.email"}
+            email:&nbsp${data.email}
             <br/>
-            message:&nbsp${"data.message"}
+            message:&nbsp${data.message}
           </p>
 
           <div style="margin-top: 22px;">
           <p
             style="margin:46px 0 24px; font-family: 'Karla', sans-serif;font-style: normal;font-weight: normal;font-size: 18px;line-height: 140%;letter-spacing: -0.04em;color: #767676;">
               Thank you, <br>
-              The byBorrow </p>
+              The Petcrib </p>
           </div>
         </div>
 
@@ -168,7 +168,7 @@ function listingInReviewTemplate() {
 module.exports = {
     // this api create or update the contact.
     contact_us: async (req, res) => {
-    //    const {data}=req.body;
+        const {data}=req.body;
        const key = process.env.SENDGRID_KEY;
        console.log('key', key)
         sgMail.setApiKey(key);
@@ -179,7 +179,7 @@ module.exports = {
         from:"hello@byborrow.com",
           subject:"Enquiry",
           text:"process.env.BYBORROW_EMAIL",
-          html:listingInReviewTemplate(),
+          html:listingInReviewTemplate(data),
           listingStatus:"state",
         };
        await sgMail.send(message).then(

@@ -9,10 +9,11 @@ import {
   Footer,
 } from '../../components';
 
-import { contact_us } from '../../util/api';
+
 import TopbarContainer from '../TopbarContainer/TopbarContainer';
 import ContactUsForm from './contactUsForm';
 import css from './ContactForm.module.css';
+import { contact_us } from '../../util/api';
 
 function ContactUsPage() {
   const [error2, SetError] = useState(false);
@@ -43,6 +44,7 @@ function ContactUsPage() {
           <div className={css.contactPageWrapper}>
             <div className={css.contactContent}>
               <div className={css.leftContact}>
+                  {/* {error2 == true ? <p>Email sent</p> : null} */}
                 {/* <h1>Contact Us</h1>
                 <p>hello@byborrow.com</p> */}
                 {/* <div className={css.socialIcons}>
@@ -52,12 +54,13 @@ function ContactUsPage() {
                 </div> */}
               </div>
               <div>
-                {/* {error2 == true ? <p>Email sent</p> : null} */}
+            
                 <ContactUsForm
                   onSubmit={handleSubmit}
                   onChange={handleChange}
                   error2={error2 ? error2 : null}
                 />
+                 
               </div>
             </div>
           </div>

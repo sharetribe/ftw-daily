@@ -34,7 +34,7 @@ const PasswordRecoveryPage = loadable(() => import(/* webpackChunkName: "Passwor
 const PasswordResetPage = loadable(() => import(/* webpackChunkName: "PasswordResetPage" */ './containers/PasswordResetPage/PasswordResetPage'));
 const PaymentMethodsPage = loadable(() => import(/* webpackChunkName: "PaymentMethodsPage" */ './containers/PaymentMethodsPage/PaymentMethodsPage'));
 const PrivacyPolicyPage = loadable(() => import(/* webpackChunkName: "PrivacyPolicyPage" */ './containers/PrivacyPolicyPage/PrivacyPolicyPage'));
-const ContactPage = loadable(() => import(/* webpackChunkName: "PrivacyPolicyPage" */ './containers/ContactPage/ContactPage'));
+// const ContactPage = loadable(() => import(/* webpackChunkName: "PrivacyPolicyPage" */ './containers/ContactPage/ContactPage'));
 const AboutUsPage = loadable(() => import(/* webpackChunkName: "PrivacyPolicyPage" */ './containers/AboutUs/AboutUs'));
 const FaqPage = loadable(() => import(/* webpackChunkName: "PrivacyPolicyPage" */ './containers/FaqPage/FaqPage'));
 const ProfilePage = loadable(() => import(/* webpackChunkName: "ProfilePage" */ './containers/ProfilePage/ProfilePage'));

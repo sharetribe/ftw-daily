@@ -278,7 +278,7 @@ export class BookingDatesFormComponent extends Component {
                   )
                 })}
                 {/* {values.serviceSetup ? "required this field" :null} */}
-                <div>If you booking {letofstay}days or above you got {discount}% discount</div>
+              { letofstay && discount ? <div>If you booking {letofstay}days or above you got {discount}% discount</div>:null}
               </div>
               <FieldSelect
                 className={css.numberPets}

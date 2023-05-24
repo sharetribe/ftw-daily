@@ -12,7 +12,7 @@ const ContactUsFormComponent = props => (
   <FinalForm
     {...props}
     render={formRenderProps  => {
-      const { formId, handleSubmit, onChange, intl, values } = formRenderProps;
+      const { formId, handleSubmit, onChange, intl, values,error2 ,form} = formRenderProps;
 
       const emailPlaceholder = intl.formatMessage({
         id: 'InviteForm.emailPlaceholder',
@@ -45,6 +45,7 @@ const ContactUsFormComponent = props => (
         <Form
           onSubmit={e => {
             handleSubmit(e);
+            form.reset();
             onChange(e);
           }}
           enforcePagePreloadFor="OrderDetailsPage"
@@ -52,29 +53,37 @@ const ContactUsFormComponent = props => (
           {/* <h2 className={css.heading}>Contact the byBorrow team</h2> */}
 
           <FieldTextInput
+          className={css.inputForm}
             type="email"
             id={formId ? `${formId}.email` : 'email'}
             name="email"
             autoComplete="email"
             label={'Email *'}
-            // placeholder={emailPlaceholder}
-            validate={validators.composeValidators(emailRequired, emailValid)}
+            placeholder='Enter your email'
+            //validate={validators.composeValidators(emailRequired, emailValid)}
           />
           <FieldTextInput
-            className={css.field}
+           className={css.inputForm}
             type="textarea"
             name="message"
             id={formId ? `${formId}.message` : 'message'}
             label={'Message *'}
-            // placeholder={'Enter your message'}
-            validate={messageRequired}
+            placeholder='Enter your message..'
+            //validate={messageRequired}
           />
-          <PrimaryButton
+           {/* {error2 == true ? <p>Email sent</p> : null} */}
+          <div className={css.submitButton}>
+                            <button 
+                             type="submit"
+                             disabled={!values.email || !values.message}>Submit</button>
+                        </div>
+                       
+          {/* <PrimaryButton
             type="submit"
             disabled={!values.email || !values.message}
           >
             Send
-          </PrimaryButton>
+          </PrimaryButton> */}
         </Form>
         </div>
         </div>
