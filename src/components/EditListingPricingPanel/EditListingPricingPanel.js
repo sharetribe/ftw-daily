@@ -55,6 +55,9 @@ const EditListingPricingPanel = props => {
   ) : (
     <FormattedMessage id="EditListingPricingPanel.createListingTitle" />
   );
+  const updateValues1 =(e) => {
+    console.log(e,'setData');
+            }
 
   const priceCurrencyValid = price instanceof Money ? price.currency === config.currency : true;
   const form = priceCurrencyValid ? (
@@ -62,6 +65,7 @@ const EditListingPricingPanel = props => {
       className={css.form}
       initialValues={{ overnightsStayPrice1, overnightsStayPrice2, overnightsStayPrice3, dayCareStay1, dayCareStay2, dayCareStay3, discount, discountlengthOfStays, lengthOfStays }}
       onSubmit={values => {
+       
         const { overnightsStayPrice1, overnightsStayPrice2, overnightsStayPrice3, dayCareStay1, dayCareStay2, dayCareStay3, discount, discountlengthOfStays, lengthOfStays } = values;
 
         function findMinPrice(var_args) {
@@ -92,6 +96,7 @@ const EditListingPricingPanel = props => {
             lengthOfStays
           },
         };
+       
 
         onSubmit(updateValues);
       }}
