@@ -109,16 +109,18 @@ export const EditListingPricingFormComponent = props => (
 
       const detail = listing?.attributes?.publicData?.serviceSetup;
       const numberPet = listing?.attributes?.publicData?.numberOfPets;
-      
+
       const numberPetArray = numberPet && numberPet == 3
         ? [1, 2, 3]
-        : numberPet == 2 
-          ? [1, 2] 
+        : numberPet == 2
+          ? [1, 2]
           : [1];
-      const [stayRange, setStayRange] = useState([lengthOfStays ? lengthOfStays : 7, 90]);
+      console.log(lengthOfStays);
+      const [stayRange, setStayRange] = useState(lengthOfStays ? lengthOfStays : 7);
+
       const [discountRange, setDiscountRange] = useState([discountlengthOfStays ? discountlengthOfStays : 1, 50]);
 
-      const handlePriceChange = (value) => {
+      const handlePriceChange = (e) => {
 
         form.change('lengthOfStays', value.at(0))
         setStayRange(value);
@@ -127,7 +129,7 @@ export const EditListingPricingFormComponent = props => (
         form.change('discountlengthOfStays', value.at(0))
         setDiscountRange(value);
       };
-      const [ value, setValue ] = useState([discountlengthOfStays ? discountlengthOfStays : 1]); 
+      const [value, setValue] = useState([discountlengthOfStays ? discountlengthOfStays : 1]);
 
       return (
         <Form onSubmit={handleSubmit} className={classes}>
@@ -209,7 +211,7 @@ export const EditListingPricingFormComponent = props => (
                 validate={composeValidators(maxLength2Message)} /> */}
                 <div className={css.rangeBox}>
                   <p>length Of Stays</p>
-                  <Slider
+                  {/* <Slider
                     min={7}
                     max={90}
                     id="lengthOfStays"
@@ -218,38 +220,26 @@ export const EditListingPricingFormComponent = props => (
                     defaultValue={stayRange}
                     onChange={handlePriceChange}
                     validate={composeValidators(maxLength2Message)}
-                  />
-                  {/* <input
+                  /> */}
+                  <input
                     type="range"
                     min={7}
                     max={90}
                     id="lengthOfStays"
                     name="lengthOfStays"
-                    
                     defaultValue={stayRange}
                     onChange={handlePriceChange}
                     validate={composeValidators(maxLength2Message)}
-                  /> */}
+                  />
 
-                  <div>{stayRange[0]} days / 90 days</div>
+                  <div>{stayRange} days</div>
                   {/* <p>apply - {stayRange[0]} days</p> */}
                 </div>
               </div>
               <div className={css.rangeBox}>
                 <p>Discount</p>
 
-                <Slider
-                  min={0}
-                  max={50}
-                  range
-                  id="discountlengthOfStays"
-                  name="discountlengthOfStays"
-                  validate={composeValidators(maxLength2Message)}
-                  defaultValue={discountRange}
-                  onChange={handleDiscountChange}
-                />
-                {/* <input
-                  type="range"
+                {/* <Slider
                   min={0}
                   max={50}
                   range
@@ -259,6 +249,17 @@ export const EditListingPricingFormComponent = props => (
                   defaultValue={discountRange}
                   onChange={handleDiscountChange}
                 /> */}
+                <input
+                  type="range"
+                  min={0}
+                  max={50}
+                  range
+                  id="discountlengthOfStays"
+                  name="discountlengthOfStays"
+                  validate={composeValidators(maxLength2Message)}
+                  defaultValue={discountRange}
+                  onChange={handleDiscountChange}
+                />
                 <div> {discountRange[0]}% / 50%</div>
                 {/* <p> Apply - {discountRange[0]}%</p> */}
               </div>
