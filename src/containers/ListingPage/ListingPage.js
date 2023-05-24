@@ -395,7 +395,7 @@ export class ListingPageComponent extends Component {
       <>
         {authorDisplayName}
       </>
-      // </NamedLink>
+      
     );
 
 
@@ -510,7 +510,7 @@ export class ListingPageComponent extends Component {
                     listingId={currentListing.id}
                   />
                   <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
-                  {/* {reviews == 0 ? null:<SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />} */}
+                
 
                    <SectionHostMaybe
                     title={title}

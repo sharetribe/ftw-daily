@@ -18,7 +18,7 @@ export const LISTING_PAGE_PARAM_TYPES = [
 // Create slug from random texts
 // From Gist thread: https://gist.github.com/mathewbyrne/1280286
 export const createSlug = str => {
- // console.log(str, '^^^^ ^^^^ => str');
+ 
   
   let text = str
     .toString()

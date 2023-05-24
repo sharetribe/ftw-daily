@@ -18,7 +18,6 @@ const DetailCardHeadingsMaybe = props => {
   return showDetailCardHeadings ? (
     <div className={css.detailCardHeadings}>
       <h2 className={css.detailCardTitle}>{providerName}</h2>
-      {/* <p className={css.detailCardSubtitle}>{subTitle}</p> */}
       <AddressLinkMaybe location={location} geolocation={geolocation} showAddress={showAddress} />
     </div>
   ) : null;

@@ -339,7 +339,7 @@ export const ActivityFeedComponent = props => {
     providerName,
   } = props;
 
-  console.log('providerName,', providerName,)
+ 
   const classes = classNames(rootClassName || css.root, className);
 
   const currentTransaction = ensureTransaction(transaction);

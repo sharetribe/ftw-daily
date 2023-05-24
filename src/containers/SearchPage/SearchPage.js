@@ -120,7 +120,6 @@ export class SearchPageComponent extends Component {
       favoriteData
     } = this.props;
 
-    // console.log('filterConfig', filterConfig)
     // eslint-disable-next-line no-unused-vars
     const { mapSearch, page, ...searchInURL } = parse(location.search, {
       latlng: ['origin'],

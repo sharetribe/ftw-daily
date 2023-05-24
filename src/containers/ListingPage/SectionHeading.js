@@ -11,9 +11,6 @@ import SectionReviewsheading from './SectionReviewsHeading';
 
 const SectionHeading = props => {
   const {
-    priceTitle,
-    formattedPrice,
-    richTitle,
     category,
     hostLink,
     showContactUser,
@@ -70,23 +67,15 @@ const SectionHeading = props => {
   return (
     <div className={css.sectionHeading}>
       <div className={css.desktopPriceContainer}>
-        {/* <div className={css.desktopPriceValue} title={priceTitle}>
-          {formattedPrice}
-        </div> */}
-        {/* <div className={css.desktopPerUnit}>
-          <FormattedMessage id={unitTranslationKey} />
-        </div> */}
+      
       </div>
       <div className={css.heading}>
         <h1 className={css.title}>{hostLink}</h1>
         <div className={css.author}>
           {category}
-          {/* <FormattedMessage id="ListingPage.hostedBy" values={{ name: hostLink }} /> */}
           <p className={css.yourSelfText}>{yourself}</p>
 
           <div className={css.reviewBookingRow}>
-
-            {/* <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} /> */}
             <div className={css.numberBooking}>
               <p>{totalbooking?.length} Bookings </p>
             </div>

@@ -142,7 +142,7 @@ export class CheckoutPageComponent extends Component {
       fetchStripeCustomer,
       history,
     } = this.props;
-    console.log('transaction', transaction)
+    
 
     // Fetch currentUser with stripeCustomer entity
     // Note: since there's need for data loading in "componentWillMount" function,
@@ -165,11 +165,11 @@ export class CheckoutPageComponent extends Component {
     const pageData = hasDataInProps
       ? { bookingData, bookingDates, listing, transaction }
       : storedData(STORAGE_KEY);
-      // console.log(pageData,"pageData")
+     
 
     // Check if a booking is already created according to stored data.
     const tx = pageData ? pageData.transaction : null;
-    console.log('pageData', pageData)
+  
     const isBookingCreated = tx && tx.booking && tx.booking.id;
 
     const shouldFetchSpeculatedTransaction =
@@ -252,7 +252,7 @@ export class CheckoutPageComponent extends Component {
     // Step 1: initiate order by requesting payment from Marketplace API
     const fnRequestPayment = fnParams => {
       // fnParams should be { listingId, bookingStart, bookingEnd }
-      // console.log(fnParams, '^^^^ ^^^^ => fnParams');
+  
       
       const hasPaymentIntents =
         storedTx.attributes.protectedData && storedTx.attributes.protectedData.stripePaymentIntents;
@@ -737,9 +737,9 @@ export class CheckoutPageComponent extends Component {
       ? 'CheckoutPage.perDay'
       : 'CheckoutPage.perUnit';
 
-    const price = currentListing.attributes.price;
-    const formattedPrice = formatMoney(intl, price);
-    const detailsSubTitle = `${formattedPrice} ${intl.formatMessage({ id: unitTranslationKey })}`;
+    // const price = currentListing.attributes.price;
+    // const formattedPrice = formatMoney(intl, price);
+    // const detailsSubTitle = `${formattedPrice} ${intl.formatMessage({ id: unitTranslationKey })}`;
 
     const showInitialMessageInput = !(
       existingTransaction && existingTransaction.attributes.lastTransition === TRANSITION_ENQUIRE
@@ -851,7 +851,7 @@ export class CheckoutPageComponent extends Component {
             </div>
             <div className={css.detailsHeadings}>
               <h2 className={css.detailsTitle}>{listingTitle}</h2>
-              <p className={css.detailsSubtitle}>{detailsSubTitle}</p>
+              {/* <p className={css.detailsSubtitle}>{detailsSubTitle}</p> */}
             </div>
             {speculateTransactionErrorMessage}
             {breakdown}
