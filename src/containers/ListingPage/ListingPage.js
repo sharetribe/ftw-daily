@@ -290,8 +290,10 @@ export class ListingPageComponent extends Component {
         <Page title={errorTitle} scrollingDisabled={scrollingDisabled}>
           <LayoutSingleColumn className={css.pageRoot}>
             <LayoutWrapperTopbar>{topbar}</LayoutWrapperTopbar>
-            <UserNav selectedPageName="ListingPage" />
+
             <LayoutWrapperMain>
+            <UserNav selectedPageName="ListingPage" />
+
               <p className={css.errorText}>
                 <FormattedMessage id="ListingPage.errorLoadingListingMessage" />
               </p>
@@ -468,6 +470,24 @@ const firstname = authorDisplayName.split(" ")[0];
                     onContactUser={this.onContactUser}
                     yourself={yourself}
                   />
+                  {/* <Modal
+        id="ListingPage.enquiry"
+        contentClassName={css.enquiryModalContent}
+        isOpen={isEnquiryModalOpen}
+        onClose={onCloseEnquiryModal}
+        usePortal
+        onManageDisableScrolling={onManageDisableScrolling}
+      >
+        <EnquiryForm
+          className={css.enquiryForm}
+          submitButtonWrapperClassName={css.enquirySubmitButtonWrapper}
+          listingTitle={title}
+          authorDisplayName={authorDisplayName}
+          sendEnquiryError={sendEnquiryError}
+          onSubmit={onSubmitEnquiry}
+          inProgress={sendEnquiryInProgress}
+        />
+      </Modal> */}
                   <SectionDescriptionMaybe description={description} />
                   <div className={css.featureList}>
                     <div className={css.headingFeature}>
@@ -507,7 +527,7 @@ const firstname = authorDisplayName.split(" ")[0];
                   <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
                   {/* {reviews == 0 ? null:<SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />} */}
                
-                  {/* <SectionHostMaybe
+                   <SectionHostMaybe
                     title={title}
                     listing={currentListing}
                     authorDisplayName={authorDisplayName}
@@ -519,7 +539,7 @@ const firstname = authorDisplayName.split(" ")[0];
                     onSubmitEnquiry={this.onSubmitEnquiry}
                     currentUser={currentUser}
                     onManageDisableScrolling={onManageDisableScrolling}
-                  /> */}
+                  /> 
                 </div>
                 <BookingPanel
                   className={css.bookingPanel}

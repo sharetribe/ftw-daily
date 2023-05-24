@@ -142,6 +142,7 @@ export class CheckoutPageComponent extends Component {
       fetchStripeCustomer,
       history,
     } = this.props;
+    console.log('transaction', transaction)
 
     // Fetch currentUser with stripeCustomer entity
     // Note: since there's need for data loading in "componentWillMount" function,
@@ -168,6 +169,7 @@ export class CheckoutPageComponent extends Component {
 
     // Check if a booking is already created according to stored data.
     const tx = pageData ? pageData.transaction : null;
+    console.log('pageData', pageData)
     const isBookingCreated = tx && tx.booking && tx.booking.id;
 
     const shouldFetchSpeculatedTransaction =

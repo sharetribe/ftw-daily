@@ -39,7 +39,11 @@ exports.transactionLineItems = (listing, bookingData) => {
   console.log('numberOfPets', numberOfPets)
   // console.log(bookingData, '^^^^ ^^^^ => bookingData');
 console.log('listing', listing)
-const DISCOUNT_COMMISSION_PERCENTAGE = listing.attributes.publicData.discountlengthOfStays
+
+const discount = listing.attributes.publicData.discountlengthOfStays
+console.log('discount', discount)
+const DISCOUNT_COMMISSION_PERCENTAGE = -discount
+
 const letofstay = listing.attributes.publicData.lengthOfStays
 
 
@@ -105,7 +109,7 @@ const yy = letofstay <= diffBetweenDays;
     code: 'line-item/discount-commission',
     unitPrice: calculateTotalFromLineItems(lineItems),
     percentage: DISCOUNT_COMMISSION_PERCENTAGE,
-    includeFor: ['customer'],
+    includeFor: ['customer','provider'],
   };
  
     if (discount_price && yy) {
@@ -119,9 +123,6 @@ const yy = letofstay <= diffBetweenDays;
     percentage: CUSTOMER_COMMISSION_PERCENTAGE,
     includeFor: ['customer'],
   };
-  if (customerCommissions) {
-    lineItems.push(customerCommissions)
-  }
 
   const providerCommissions = {
     code: 'line-item/provider-commission',
@@ -129,12 +130,15 @@ const yy = letofstay <= diffBetweenDays;
     percentage: PROVIDER_COMMISSION_PERCENTAGE,
     includeFor: ['provider'],
   };
-  if (providerCommissions) {
-    lineItems.push(providerCommissions)
+  if (PROVIDER_COMMISSION_PERCENTAGE && typeof PROVIDER_COMMISSION_PERCENTAGE == 'number') {
+    lineItems.push(providerCommissions);
+  }
+  if ((CUSTOMER_COMMISSION_PERCENTAGE && typeof CUSTOMER_COMMISSION_PERCENTAGE == 'number')) {
+    lineItems.push(customerCommissions);
   }
  
 
-  console.log('customerCommieeeeeeessions', lineItems)
+  // console.log('customerCommieeeeeeessions', lineItems)
 
   return lineItems;
 };

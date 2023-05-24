@@ -177,7 +177,7 @@ module.exports = {
         to:"petcribtest@yopmail.com",
         //   from: process.env.SENDER_EMAIL,
         from:"hello@byborrow.com",
-          subject:"Enquiry",
+          subject:"Contact",
           text:"process.env.BYBORROW_EMAIL",
           html:listingInReviewTemplate(data),
           listingStatus:"state",
