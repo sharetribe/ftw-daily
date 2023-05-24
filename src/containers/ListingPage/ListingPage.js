@@ -207,9 +207,9 @@ export class ListingPageComponent extends Component {
       favoriteData
     } = this.props;
 
-  
 
-  //  const firstName = currentUser?.attributes?.profile?.firstName
+
+    //  const firstName = currentUser?.attributes?.profile?.firstName
 
 
     const listingId = new UUID(rawParams.id);
@@ -219,7 +219,7 @@ export class ListingPageComponent extends Component {
       isPendingApprovalVariant || isDraftVariant
         ? ensureOwnListing(getOwnListing(listingId))
         : ensureListing(getListing(listingId));
-        // const currentListing = ensureListing(listing);
+    // const currentListing = ensureListing(listing);
     const id = currentListing?.id?.uuid;
     const listingSlug = rawParams.slug || createSlug(currentListing.attributes.title || '');
     const params = { slug: listingSlug, ...rawParams };
@@ -227,8 +227,8 @@ export class ListingPageComponent extends Component {
     const listingType = isDraftVariant
       ? LISTING_PAGE_PARAM_TYPE_DRAFT
       : LISTING_PAGE_PARAM_TYPE_EDIT;
-     
-      
+
+
     const listingTab = isDraftVariant ? 'photos' : 'description';
 
     const isApproved =
@@ -382,18 +382,20 @@ export class ListingPageComponent extends Component {
       { id: 'ListingPage.schemaTitle' },
       { title, price: formattedPrice, siteTitle }
     );
-const firstname = authorDisplayName.split(" ")[0];
+    const firstname = authorDisplayName.split(" ")[0];
     const hostLink = (
-      <NamedLink
-        className={css.authorNameLink}
-        name="ListingPage"
-        params={params}
-        to={{ hash: '#host' }}
-      >
+      // <NamedLink
+      //   className={css.authorNameLink}
+      //   name="ListingPage"
+      //   params={params}
+      //   to={{ hash: '#host' }}
+      // >
+      <div>
         {authorDisplayName}
-      </NamedLink>
+      </div>
+      // </NamedLink>
     );
-    
+
 
     const yourself = publicData && publicData.headline;
     const yourselfexp = publicData && publicData.yespet;
@@ -456,7 +458,7 @@ const firstname = authorDisplayName.split(" ")[0];
                     isOwnListing={isOwnListing}
                     category={category}
                     hostLink={hostLink}
-                
+
                     fetchReviewsError={fetchReviewsError}
                     reviews={reviews}
                     id={id}
@@ -485,20 +487,20 @@ const firstname = authorDisplayName.split(" ")[0];
                     <div className={css.headingFeature}>
                       <FormattedMessage id="ListingPage.havepet" values={{ name: hostLink }} />
                     </div>
-                    <p className={css.featuresDescription}>  {Yourselfdohavepets == "yes" ?<>Yes</>:<>No</>}</p>
+                    <p className={css.featuresDescription}>  {Yourselfdohavepets == "yes" ? <>Yes</> : <>No</>}</p>
                   </div>
-                 
+
                   {
-                    yourselfexp?<div className={css.featureList}>
-                    <div className={css.headingFeature}>
-                      <FormattedMessage id="ListingPage.yespet" values={{ name: hostLink }} />
-                    </div>
-                    <p className={css.featuresDescription}> {yourselfexp}</p>
-                  </div>:null
+                    yourselfexp ? <div className={css.featureList}>
+                      <div className={css.headingFeature}>
+                        <FormattedMessage id="ListingPage.yespet" values={{ name: hostLink }} />
+                      </div>
+                      <p className={css.featuresDescription}> {yourselfexp}</p>
+                    </div> : null
                   }
-                  
+
                   <SectionRulesMaybe publicData={publicData} />
-                  
+
                   <SectionMapMaybe
                     geolocation={geolocation}
                     publicData={publicData}
@@ -506,7 +508,7 @@ const firstname = authorDisplayName.split(" ")[0];
                   />
                   <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
                   {/* {reviews == 0 ? null:<SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />} */}
-               
+
                   {/* <SectionHostMaybe
                     title={title}
                     listing={currentListing}
@@ -672,8 +674,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
   callSetInitialValues: (setInitialValues, values, saveToSessionStorage) =>
     dispatch(setInitialValues(values, saveToSessionStorage)),
-  onFetchTransactionLineItems: ( listingId, isOwnListing) =>
-    dispatch(fetchTransactionLineItems( listingId, isOwnListing)),
+  onFetchTransactionLineItems: (listingId, isOwnListing) =>
+    dispatch(fetchTransactionLineItems(listingId, isOwnListing)),
   onSendEnquiry: (listingId, message) => dispatch(sendEnquiry(listingId, message)),
   onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
   favoriteData: id => dispatch(updateProfile(id)),

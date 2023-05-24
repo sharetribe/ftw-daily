@@ -115,10 +115,10 @@ const PageBuilderTerm = props => {
               <Main as="main" className={css.main}>
                 <>
                   <SectionBuilder sections={sections} options={options} />
-                  {isaboutuspage ? <div>
-                    <p>
+                  {isaboutuspage ? <div className={css.faqPageWrapper}>
+                    <h1 className={css.headingName}>
                       Welcome to PetCrib!
-                    </p>
+                    </h1>
                     We are passionate about pets and understand the need for reliable and
                     trustworthy pet care services. Our platform connects Pet Owners with Pet
                     Hosts who are committed to providing the best possible care for your furry
