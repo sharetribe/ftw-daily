@@ -195,7 +195,7 @@ export class ProfilePageComponent extends Component {
             <ul className={css.listings}>
               {listings.map(l => (
                 <li className={css.listing} key={l.id.uuid}>
-                  <ListingCard listing={l} />
+                  <ListingCard listing={l}  pageName='SearchPage'/>
                 </li>
               ))}
             </ul>

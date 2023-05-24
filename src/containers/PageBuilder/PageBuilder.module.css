@@ -81,3 +81,9 @@
     margin: 40px 0;
   }
 }
+
+.headingName {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 40px;
+}

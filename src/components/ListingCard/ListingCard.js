@@ -134,7 +134,7 @@ export const ListingCardComponent = props => {
             <FormattedMessage id="ListingCard.hostedBy" values={{ authorName }} />
           </div>
         </div>
-        {pageName == "SearchPage"
+        {pageName == "SearchPage" 
           ? null :
           <div>
             {

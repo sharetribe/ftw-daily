@@ -363,6 +363,7 @@
 
 .favIconBox {
   cursor: pointer;
+  margin-left: 40px;
 }
 
 .reviewBookingRow {

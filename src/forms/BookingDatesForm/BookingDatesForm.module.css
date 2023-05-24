@@ -151,3 +151,10 @@
   padding: 0;
   margin-bottom: 52px;
 }
+
+.discountBooking {
+  color: var(--marketplaceColor);
+  margin: 10px 0;
+  line-height: 26px;
+  font-size: 16px;
+}

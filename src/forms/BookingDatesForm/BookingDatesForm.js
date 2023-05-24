@@ -144,7 +144,7 @@ export class BookingDatesFormComponent extends Component {
 
           const options = findOptionsForSelectFilter('serviceSetup', filterConfig);
           //const numberPet = findOptionsForSelectFilter('numberOfPets', filterConfig);
-         
+
 
           const numberPetArray = numberPet && numberPet == 3
             ? [1, 2, 3]
@@ -155,9 +155,9 @@ export class BookingDatesFormComponent extends Component {
 
           const detail = listing?.attributes?.publicData?.serviceSetup;
           const discount = listing.attributes.publicData.discountlengthOfStays
-        
+
           const letofstay = listing.attributes.publicData.lengthOfStays
- 
+
 
           const phoneRequiredMessage = intl.formatMessage({
             id: 'EditListingDescriptionForm.phoneRequired',
@@ -278,7 +278,9 @@ export class BookingDatesFormComponent extends Component {
                   )
                 })}
                 {/* {values.serviceSetup ? "required this field" :null} */}
-              { letofstay && discount ? <div>If you booking {letofstay}days or above you got {discount}% discount</div>:null}
+                {letofstay && discount ?
+                  <div className={css.discountBooking}>If you booking {letofstay}days or above you got {discount}% discount</div>
+                  : null}
               </div>
               <FieldSelect
                 className={css.numberPets}
@@ -291,7 +293,7 @@ export class BookingDatesFormComponent extends Component {
 
                 )}
               >
-                   
+
                 <option value={""}>select</option>
                 {/* {new Array(numberPetArray).fill('0').map((st) => <option key={st} value={st}>{st}</option>)} */}
                 {numberPetArray.map((st) => {
@@ -352,23 +354,23 @@ export class BookingDatesFormComponent extends Component {
                 {values.serviceSetup ? <div className={css.pricingHeading}>Pricing</div> : null}
 
                 {
-                  values?.serviceSetup?.length === 2 ? 
-                   <>
-                   {(values.serviceSetup) ?
-                  <div className={css.pricingDescription}>
-                   <span>Minimum_Price</span> = AUD{min}.00
-                  </div> : null}
-                   </>
-                   :
-                   <>
-                    {(values?.serviceSetup?.find((e)=>e == "overnightsStay"))  ?
-                  <div className={css.pricingDescription}>
-                    <span>Over night rate</span> = AUD{nightprice}.00  per night </div> : null}
+                  values?.serviceSetup?.length === 2 ?
+                    <>
+                      {(values.serviceSetup) ?
+                        <div className={css.pricingDescription}>
+                          <span>Minimum_Price</span> = AUD{min}.00
+                        </div> : null}
+                    </>
+                    :
+                    <>
+                      {(values?.serviceSetup?.find((e) => e == "overnightsStay")) ?
+                        <div className={css.pricingDescription}>
+                          <span>Over night rate</span> = AUD{nightprice}.00  per night </div> : null}
 
-                {(values?.serviceSetup?.find((e)=>e == "dayCareStay"))  ?
-                  <div className={css.pricingDescription}>
-                    <span>Day Care Stay</span> = AUD{dayprice}.00  per day</div> : null}
-                   </>
+                      {(values?.serviceSetup?.find((e) => e == "dayCareStay")) ?
+                        <div className={css.pricingDescription}>
+                          <span>Day Care Stay</span> = AUD{dayprice}.00  per day</div> : null}
+                    </>
                 }
               </div>
 

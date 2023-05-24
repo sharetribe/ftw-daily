@@ -64,6 +64,10 @@
     & label {
         color: #000;
     }
+
+    & textarea {
+        padding: 4px 0 2px 0;
+    }
 }
 
 .headingBox {
@@ -90,4 +94,11 @@
             width: 90%;
         }
     }
+}
+
+.disableButton {
+    color: #fff;
+    background-color: #6c757d !important;
+    border-color: #6c757d !important;
+    opacity: .65;
 }
