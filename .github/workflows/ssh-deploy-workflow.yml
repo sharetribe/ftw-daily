@@ -28,7 +28,7 @@ jobs:
           SSH_KNOWN_HOSTS: ${{ secrets.STAGING_SSH_KNOWN_HOSTS }}
 
       - name: Deploy
-        run: ssh staging 'cd /home/sharetribe/web/staging.hotpatch.com/public_html && git checkout staging && git pull && rvm 2.3.4 do cap staging deploy'
+        run: ssh staging -o ServerAliveInterval=60 'cd /home/sharetribe/web/staging.hotpatch.com/public_html && git checkout staging && git pull && rvm 2.3.4 do cap staging deploy'
 
   deploy_prod:
     name: "Deploy to production"
@@ -57,4 +57,4 @@ jobs:
           SSH_KNOWN_HOSTS: ${{ secrets.STAGING_SSH_KNOWN_HOSTS }}
 
       - name: Deploy
-        run: ssh staging 'cd /home/sharetribe/web/staging.hotpatch.com/public_html && git checkout production && git pull && rvm 2.3.4 do cap production deploy'
+        run: ssh staging -o ServerAliveInterval=60 'cd /home/sharetribe/web/staging.hotpatch.com/public_html && git checkout production && git pull && rvm 2.3.4 do cap production deploy'
