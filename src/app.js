@@ -39,7 +39,7 @@ import defaultMessages from './translations/en.json';
 
 // Step 3:
 // If you are using a non-english locale, point `messagesInLocale` to correct .json file
-import messagesInLocale from './translations/fr.json';
+import messagesInLocale from './translations/en.json';
 
 // If translation key is missing from `messagesInLocale` (e.g. fr.json),
 // corresponding key will be added to messages from `defaultMessages` (en.json)
@@ -47,6 +47,10 @@ import messagesInLocale from './translations/fr.json';
 const addMissingTranslations = (sourceLangTranslations, targetLangTranslations) => {
   const sourceKeys = Object.keys(sourceLangTranslations);
   const targetKeys = Object.keys(targetLangTranslations);
+    // if there's no translations defined for target language, return source translations
+    if (targetKeys.length === 0) {
+      return sourceLangTranslations;
+    }
   const missingKeys = difference(sourceKeys, targetKeys);
 
   const addMissingTranslation = (translations, missingKey) => ({
@@ -57,18 +61,15 @@ const addMissingTranslations = (sourceLangTranslations, targetLangTranslations) 
   return missingKeys.reduce(addMissingTranslation, targetLangTranslations);
 };
 
-const isDefaultLanguageInUse = config.locale === 'en';
-
-const messages = isDefaultLanguageInUse
-  ? defaultMessages
-  : addMissingTranslations(defaultMessages, messagesInLocale);
-
+// Get default messages for a given locale.
+//
+// Note: Locale should not affect the tests. We ensure this by providing
+//       messages with the key as the value of each message and discard the value.
+//       { 'My.translationKey1': 'My.translationKey1', 'My.translationKey2': 'My.translationKey2' }
 const isTestEnv = process.env.NODE_ENV === 'test';
-
-// Locale should not affect the tests. We ensure this by providing
-// messages with the key as the value of each message.
-const testMessages = mapValues(messages, (val, key) => key);
-const localeMessages = isTestEnv ? testMessages : messages;
+const localeMessages = isTestEnv
+  ? mapValues(defaultMessages, (val, key) => key)
+  : addMissingTranslations(defaultMessages, messagesInLocale);
 
 const setupLocale = () => {
   if (isTestEnv) {
@@ -84,10 +85,14 @@ const setupLocale = () => {
 };
 
 export const ClientApp = props => {
-  const { store } = props;
+  const { store, hostedTranslations = {} } = props;
   setupLocale();
   return (
-    <IntlProvider locale={config.locale} messages={localeMessages} textComponent="span">
+    <IntlProvider
+      locale={config.locale}
+      messages={{ ...localeMessages, ...hostedTranslations }}
+      textComponent="span"
+    >
       <Provider store={store}>
         <HelmetProvider>
           <BrowserRouter>
@@ -104,11 +109,15 @@ const { any, string } = PropTypes;
 ClientApp.propTypes = { store: any.isRequired };
 
 export const ServerApp = props => {
-  const { url, context, helmetContext, store } = props;
+  const { url, context, helmetContext, store, hostedTranslations = {} } = props;
   setupLocale();
   HelmetProvider.canUseDOM = false;
   return (
-    <IntlProvider locale={config.locale} messages={localeMessages} textComponent="span">
+    <IntlProvider
+      locale={config.locale}
+      messages={{ ...localeMessages, ...hostedTranslations }}
+      textComponent="span"
+    >
       <Provider store={store}>
         <HelmetProvider context={helmetContext}>
           <StaticRouter location={url} context={context}>
@@ -132,7 +141,13 @@ ServerApp.propTypes = { url: string.isRequired, context: any.isRequired, store: 
  *  - {String} body: Rendered application body of the given route
  *  - {Object} head: Application head metadata from react-helmet
  */
-export const renderApp = (url, serverContext, preloadedState, collectChunks) => {
+export const renderApp = (
+  url,
+  serverContext,
+  preloadedState,
+  hostedTranslations,
+  collectChunks
+) => {
   // Don't pass an SDK instance since we're only rendering the
   // component tree with the preloaded store state and components
   // shouldn't do any SDK calls in the (server) rendering lifecycle.
@@ -144,7 +159,13 @@ export const renderApp = (url, serverContext, preloadedState, collectChunks) => 
   // This is needed to figure out correct chunks/scripts to be included to server-rendered page.
   // https://loadable-components.com/docs/server-side-rendering/#3-setup-chunkextractor-server-side
   const WithChunks = collectChunks(
-    <ServerApp url={url} context={serverContext} helmetContext={helmetContext} store={store} />
+    <ServerApp
+      url={url}
+      context={serverContext}
+      helmetContext={helmetContext}
+      store={store}
+      hostedTranslations={hostedTranslations}
+    />
   );
   const body = ReactDOMServer.renderToString(WithChunks);
   const { helmet: head } = helmetContext;
