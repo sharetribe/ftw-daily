@@ -10,6 +10,7 @@ import LocationFilter from './LocationFilter.duck';
 import Newsletter from './Newsletter.duck';
 import Routing from './Routing.duck';
 import UI from './UI.duck';
+import hostedAssets from './hostedAssets.duck';
 import marketplaceData from './marketplaceData.duck';
 import paymentMethods from './paymentMethods.duck';
 import stripe from './stripe.duck';
@@ -25,6 +26,7 @@ export {
   Newsletter,
   Routing,
   UI,
+  hostedAssets,
   marketplaceData,
   paymentMethods,
   stripe,

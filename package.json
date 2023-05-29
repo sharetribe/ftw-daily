@@ -77,7 +77,7 @@
     "reqwest": "^2.0.5",
     "seedrandom": "^3.0.5",
     "sharethis-reactjs": "^1.6.0",
-    "sharetribe-flex-sdk": "1.13.0",
+    "sharetribe-flex-sdk": "^1.17.0",
     "sharetribe-scripts": "5.0.0",
     "slick-carousel": "^1.8.1",
     "smoothscroll-polyfill": "^0.4.0",

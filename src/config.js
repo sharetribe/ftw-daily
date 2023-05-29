@@ -8,6 +8,12 @@ const dev = process.env.REACT_APP_ENV === 'development';
 
 // If you want to change the language, remember to also change the
 // locale data and the messages in the app.js file.
+
+// Note: the path must match the path defined in Asset Delivery API
+const appCdnAssets = {
+  translations: 'content/translations.json',
+};
+
 const locale = 'en';
 const i18n = {
   /*
@@ -59,6 +65,7 @@ const dayCountAvailableForBooking = 90;
 // exposing server secrets to the client side.
 const sdkClientId = process.env.REACT_APP_SHARETRIBE_SDK_CLIENT_ID;
 const sdkBaseUrl = process.env.REACT_APP_SHARETRIBE_SDK_BASE_URL;
+const sdkAssetCdnBaseUrl = process.env.REACT_APP_SHARETRIBE_SDK_ASSET_CDN_BASE_URL;
 const sdkTransitVerbose = process.env.REACT_APP_SHARETRIBE_SDK_TRANSIT_VERBOSE === 'true';
 
 // Marketplace currency.
@@ -200,6 +207,7 @@ const config = {
   env,
   dev,
   locale,
+  appCdnAssets,
   bookingProcessAlias,
   fallbackUnitType,
   enableAvailability,
@@ -210,6 +218,7 @@ const config = {
     clientId: sdkClientId,
     baseUrl: sdkBaseUrl,
     transitVerbose: sdkTransitVerbose,
+    assetCdnBaseUrl: sdkAssetCdnBaseUrl,
   },
   sortSearchByDistance,
   currency,
