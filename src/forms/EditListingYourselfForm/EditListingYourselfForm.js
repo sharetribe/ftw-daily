@@ -194,7 +194,7 @@ const EditListingYourselfFormComponent = props => (
           />
 
           <div>
-            <p>Do you have Pet?</p>
+            <p>Do you have Pets?</p>
             <div style={{ display: 'flex', gap: '20px' }}>
               {dohavepets.map((num) =>
                 <div className={css.cardSelectPet}>

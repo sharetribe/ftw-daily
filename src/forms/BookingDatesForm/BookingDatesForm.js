@@ -279,7 +279,8 @@ export class BookingDatesFormComponent extends Component {
                 })}
                 {/* {values.serviceSetup ? "required this field" :null} */}
                 {letofstay && discount ?
-                  <div className={css.discountBooking}>If you booking {letofstay}days or above you got {discount}% discount</div>
+                
+                  <div className={css.discountBooking}>" {firstname} is offering a {discount}% discount if you book more than {letofstay} days "</div>
                   : null}
               </div>
               <FieldSelect
@@ -369,7 +370,7 @@ export class BookingDatesFormComponent extends Component {
 
                       {(values?.serviceSetup?.find((e) => e == "dayCareStay")) ?
                         <div className={css.pricingDescription}>
-                          <span>Day Care Stay</span> = AUD{dayprice}.00  per day</div> : null}
+                          <span>Day care stay</span> = AUD{dayprice}.00  per day</div> : null}
                     </>
                 }
               </div>

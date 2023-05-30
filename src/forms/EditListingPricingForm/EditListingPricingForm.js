@@ -211,7 +211,7 @@ export const EditListingPricingFormComponent = props => (
               <div>
                
                 <div className={css.rangeBox}>
-                  <p>length Of Stays</p>
+                  <p>Length of Stays </p>
                 
                   <input
                     type="range"
