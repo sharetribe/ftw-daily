@@ -476,7 +476,7 @@ export class TransactionPanelComponent extends Component {
                 <div className={css.desktopActionButtons}>{saleButtons}</div>
               ) : null}
 
-{stateData.showCancelButton?<PrimaryButton onClick={()=>transactionCancel(transaction.id.uuid)} >Cancel</PrimaryButton>:null}
+          {stateData.showCancelButton?<PrimaryButton onClick={()=>transactionCancel(transaction.id.uuid)} >Cancel</PrimaryButton>:null}
             </div>
           </div>
         </div>

@@ -352,8 +352,16 @@ export class BookingDatesFormComponent extends Component {
               </div>
 
               <div className={css.pricingBox}>
-                {values.serviceSetup ? <div className={css.pricingHeading}>Pricing</div> : null}
+                 <div className={css.pricingHeading}>Pricing</div>
 
+                 <div className={css.pricingDescription}>
+                          <span>Minimum_Price</span> = AUD{min}.00
+                        </div> 
+                        <div className={css.pricingDescription}>
+                          <span>Over night rate</span> = AUD{nightprice}.00  per night </div>
+                          <div className={css.pricingDescription}>
+                          <span>Day care stay</span> = AUD{dayprice}.00  per day</div>
+                
                 {
                   values?.serviceSetup?.length === 2 ?
                     <>

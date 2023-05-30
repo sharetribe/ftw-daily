@@ -103,6 +103,7 @@ export class ListingPageComponent extends Component {
     const listingId = new UUID(params.id);
     const listing = getListing(listingId);
 
+  
     const { bookingDates, ...bookingData } = values;
 
 
@@ -267,7 +268,7 @@ export class ListingPageComponent extends Component {
         })}
       </span>
     );
-
+  
     const bookingTitle = (
       <FormattedMessage id="ListingPage.bookingTitle" values={{ title: richTitle }} />
     );
@@ -340,10 +341,14 @@ export class ListingPageComponent extends Component {
 
     const currentAuthor = authorAvailable ? currentListing.author : null;
     const ensuredAuthor = ensureUser(currentAuthor);
-
+console.log('currentListing', currentListing)
     // When user is banned or deleted the listing is also deleted.
     // Because listing can be never showed with banned or deleted user we don't have to provide
     // banned or deleted display names for the function
+
+    const Verificationphoto = currentListing?.attributes?.publicData?.idProofImage?.link
+
+    console.log('Verificationphoto', Verificationphoto)
     const authorDisplayName = userDisplayNameAsString(ensuredAuthor, '');
 
     const { formattedPrice, priceTitle } = priceData(price, intl);
@@ -505,6 +510,14 @@ export class ListingPageComponent extends Component {
                     publicData={publicData}
                     listingId={currentListing.id}
                   />
+
+                  {/* <p>Verification</p>
+                
+                          <iframe
+                            className="doc"
+                            src={`https://docs.google.com/gview?url=${Verificationphoto}&embedded=true`}
+                          /> */}
+                    
                   <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
                 
 
