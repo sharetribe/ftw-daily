@@ -177,7 +177,7 @@ export const searchListings = searchParams => (dispatch, getState, sdk) => {
   return sdk.listings
     .query(params)
     .then(response => {
-      console.log('response', response)
+     
       for (const l of response.data.data) {
         sdk.reviews
           .query({

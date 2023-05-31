@@ -347,7 +347,7 @@ export class ListingPageComponent extends Component {
 
     const Verificationphoto = currentListing?.attributes?.publicData?.idProofImage?.link
 
-    console.log('ratings', ratings)
+    
     
     const authorDisplayName = userDisplayNameAsString(ensuredAuthor, '');
 

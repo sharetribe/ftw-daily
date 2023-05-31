@@ -46,7 +46,6 @@ const AboutUsContent = props => {
   );
 };
 
-// Presentational component for PrivacyPolicyPage
 const AboutUsComponent = props => {
   const { pageAssetsData, inProgress, error } = props;
 

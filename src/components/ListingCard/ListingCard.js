@@ -56,7 +56,7 @@ export const ListingCardComponent = props => {
     pageName,
     fetchReviewsError,
   } = props;
-console.log('listing', listing)
+
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureListing(listing);
   const id = currentListing.id.uuid;
@@ -81,7 +81,7 @@ console.log('listing', listing)
   //     : 'ListingCard.perUnit';
 
   const headline = listing?.attributes?.publicData?.headline
-  console.log('headline', headline)
+ 
 
   const favorites = (currentUser && currentUser.id && currentUser.attributes.profile.protectedData.favorite) || [];
   const index = favorites.findIndex(i => i == id);

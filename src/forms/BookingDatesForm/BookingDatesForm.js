@@ -127,7 +127,6 @@ export class BookingDatesFormComponent extends Component {
             firstname,
           } = fieldRenderProps;
 
-
           const pricepet = listing?.attributes?.publicData?.pricepet
 
           const dayprice = listing.attributes.publicData.pricepet.dayCare.dayCareStay1
@@ -155,7 +154,6 @@ export class BookingDatesFormComponent extends Component {
 
           const detail = listing?.attributes?.publicData?.serviceSetup;
           const discount = listing.attributes.publicData.discountlengthOfStays
-
           const letofstay = listing.attributes.publicData.lengthOfStays
 
 
@@ -375,27 +373,23 @@ export class BookingDatesFormComponent extends Component {
                             <span>Day care stay</span> = AUD{dayprice}.00  per day</div> : null}
                       </>
                   }</> : <div>
+                  {(detail) ?
+                    <div className={css.pricingDescription}>
+                      <span>Minimum_Price</span> = AUD{min}.00
+                    </div> : null}
 
+                  {(detail?.find((e) => e == "overnightsStay")) ?
+                    <div className={css.pricingDescription}>
+                      <span>Over night rate</span> = AUD{nightprice}.00  per night </div> : null}
 
-
-                  <div className={css.pricingDescription}>
-                    <span>Minimum_Price</span> = AUD{min}.00
-                  </div>
-                  <div className={css.pricingDescription}>
-                    <span>Over night rate</span> = AUD{nightprice}.00  per night </div>
-                  <div className={css.pricingDescription}>
-                    <span>Day care stay</span> = AUD{dayprice}.00  per day</div>
-
+                  {(detail?.find((e) => e == "dayCareStay")) ?
+                    <div className={css.pricingDescription}>
+                      <span>Day care stay</span> = AUD{dayprice}.00  per day</div> : null}
                 </div>
 
                 }
-
-
-              </div>
-
-
-
-            </Form>
+                </div>
+  </Form>
           );
         }}
       />

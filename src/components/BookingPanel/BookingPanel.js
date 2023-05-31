@@ -144,9 +144,7 @@ const BookingPanel = props => {
         </div>
 
         <div className={css.bookingHeading}>
-          {/* hostLink={hostLink} */}
           <h2 className={titleClasses}>{hostLink}</h2>
-          {/* {subTitleText ? <div className={css.bookingHelp}>{subTitleText}</div> : null} */}
         </div>
         {showBookingDatesForm ? (
           <BookingDatesForm
@@ -194,28 +192,10 @@ const BookingPanel = props => {
           </div>
         ) : null}
       </div>
-      {/* 
-      <div className={css.hostLink}>
-        <FormattedMessage id="BookingPanel.servicetect" values={{ name: firstname }} />
-      </div> */}
-
-
-
+     
       <SectionServicesetup options={amenityOptions6} publicData={publicData} />
       <SectionFeaturesMaybe options={amenityOptions} publicData={publicData} />
 
-      {/* <SectionFeatures2Maybe options={amenityOptions2} publicData={publicData} hostLink={hostLink} /> */}
-      {/* <h2 className={css.featuresTitle}>
-        <FormattedMessage id="ListingPage.featuresnumberpet" values={{ name: hostLink }}  />
-      </h2>
-      <div className={css.sectionFeatures}>  {selectedOptions}</div>
-
-       <SectionFeatures3Maybe options={amenityOptions3} publicData={publicData} /> */}
-      
-
-      
-    
-     
       <div className={css.pricingBox}>
         <div className={css.pricingHeading}>
           <FormattedMessage id="ListingPage.featuresnumberpet" values={{ name: hostLink }} />

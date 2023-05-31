@@ -24,7 +24,7 @@ const SectionArticle = props => {
     isInsideContainer,
     options,
   } = props;
-  console.log(sectionId, '&&&  &&& => sectionId');
+  
 
   // If external mapping has been included for fields
   // E.g. { h1: { component: MyAwesomeHeader } }
