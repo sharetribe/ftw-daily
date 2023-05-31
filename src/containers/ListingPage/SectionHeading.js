@@ -22,7 +22,7 @@ const SectionHeading = props => {
     fetchReviewsError,
     yourself,
     currentUser,
-    favoriteData,
+    onUpdateProfile,
     isOwnListing,
   } = props;
 
@@ -49,13 +49,13 @@ const SectionHeading = props => {
         favorite.findIndex(i => i === id),
         1
       ),
-        favoriteData({
+        onUpdateProfile({
           protectedData:
             { favorite }
         });
     } else {
       favorite.push(id),
-        favoriteData({
+        onUpdateProfile({
           protectedData:
             { favorite }
         });

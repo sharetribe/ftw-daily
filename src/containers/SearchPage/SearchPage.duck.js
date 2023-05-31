@@ -5,6 +5,7 @@ import { convertUnitToSubUnit, unitDivisor } from '../../util/currency';
 import { formatDateStringToUTC, getExclusiveEndDate } from '../../util/dates';
 import { parse } from '../../util/urlHelpers';
 import config from '../../config';
+import { denormalisedResponseEntities } from '../../util/data';
 
 // Pagination page size might need to be dynamic on responsive page layouts
 // Current design has max 3 columns 12 is divisible by 2 and 3
@@ -176,7 +177,27 @@ export const searchListings = searchParams => (dispatch, getState, sdk) => {
   return sdk.listings
     .query(params)
     .then(response => {
-      dispatch(addMarketplaceEntities(response));
+      console.log('response', response)
+      for (const l of response.data.data) {
+        sdk.reviews
+          .query({
+            listing_id: l.id,
+            state: 'public',
+          })
+          .then(reviewResponse => {
+            const reviewsData = reviewResponse.data.data;
+            const filteredReviews = reviewsData.filter(r => r.id && r.attributes.rating != null);
+            if (filteredReviews && filteredReviews.length) {
+              const reviews = denormalisedResponseEntities(reviewResponse);
+              const ratings = Math.round(filteredReviews.reduce((prev, curr) => prev + (parseInt(curr.attributes.rating) || 0), 0) / filteredReviews.length);
+              Object.assign(l.attributes.publicData, {
+                reviews,
+                ratings,
+              })
+            }
+            dispatch(addMarketplaceEntities(response));
+          });
+      }
       dispatch(searchListingsSuccess(response));
       return response;
     })

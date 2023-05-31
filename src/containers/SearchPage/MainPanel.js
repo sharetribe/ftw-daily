@@ -172,9 +172,7 @@ class MainPanel extends Component {
       filterConfig,
       sortConfig,
       pageName,
-      favoriteData,
-      ratings,
-      reviews,
+      onUpdateProfile,
     } = this.props;
 
     const primaryFilters = filterConfig.filter((f) => {
@@ -375,9 +373,7 @@ class MainPanel extends Component {
               search={searchParamsForPagination}
               onLike ={onLike}
               pageName={pageName}
-              favoriteData={favoriteData}
-              ratings={ratings}
-              reviews={reviews}
+              onUpdateProfile={onUpdateProfile}
               setActiveListing={onActivateListing}
             />
           </div>

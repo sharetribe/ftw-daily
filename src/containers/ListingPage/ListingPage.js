@@ -205,7 +205,7 @@ export class ListingPageComponent extends Component {
       fetchLineItemsError,
       totalbooking,
       ratings,
-      favoriteData
+      onUpdateProfile
     } = this.props;
 
 
@@ -466,7 +466,7 @@ export class ListingPageComponent extends Component {
                     reviews={reviews}
                     id={id}
                     currentUser={currentUser}
-                    favoriteData={favoriteData}
+                    onUpdateProfile={onUpdateProfile}
                     ratings={ratings}
                     totalbooking={totalbooking}
                     showContactUser={showContactUser}
@@ -690,7 +690,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(fetchTransactionLineItems(listingId, isOwnListing)),
   onSendEnquiry: (listingId, message) => dispatch(sendEnquiry(listingId, message)),
   onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
-  favoriteData: id => dispatch(updateProfile(id)),
+  onUpdateProfile: payload => dispatch(updateProfile(payload)),
   
 });
 

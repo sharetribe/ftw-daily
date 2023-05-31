@@ -173,7 +173,7 @@ class MainPanel extends Component {
       filterConfig,
       sortConfig,
       pageName,
-      favoriteData,
+      onUpdateProfile,
       currentUser,
       favCard
     } = this.props;
@@ -247,7 +247,7 @@ class MainPanel extends Component {
           pagination={listingsAreLoaded ? pagination : null}
           search={searchParamsForPagination}
           onLike={onLike}
-          favoriteData={favoriteData}
+          onUpdateProfile={onUpdateProfile}
           currentUser={currentUser}
           setActiveListing={onActivateListing}
           favCard={favCard}

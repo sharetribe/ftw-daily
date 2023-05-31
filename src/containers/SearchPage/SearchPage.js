@@ -117,9 +117,7 @@ export class SearchPageComponent extends Component {
       searchParams,
       activeListingId,
       onActivateListing,
-      favoriteData,
-     ratings,
-     reviews,
+      onUpdateProfile,
     } = this.props;
 
 
@@ -189,9 +187,7 @@ export class SearchPageComponent extends Component {
             onCloseModal={this.onCloseMobileModal}
             onMapIconClick={onMapIconClick}
             pagination={pagination}
-            favoriteData={favoriteData}
-            ratings={ratings}
-            reviews={reviews}
+            onUpdateProfile={onUpdateProfile}
             searchParamsForPagination={parse(location.search)}
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             history={history}
@@ -280,13 +276,8 @@ const mapStateToProps = state => {
     searchParams,
     searchMapListingIds,
     activeListingId,
-   
   } = state.SearchPage;
-  
-  const {
-    ratings,
-    reviews
-  }=  state.ListingPage;
+
   const pageListings = getListingsById(state, currentPageResultIds);
   const mapListings = getListingsById(
     state,
@@ -301,8 +292,6 @@ const mapStateToProps = state => {
     searchInProgress,
     searchListingsError,
     searchParams,
-    ratings,
-    reviews,
     activeListingId,
   };
 };
@@ -312,7 +301,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
   onSearchMapListings: searchParams => dispatch(searchMapListings(searchParams)),
   onActivateListing: listingId => dispatch(setActiveListing(listingId)),
-  favoriteData: id => dispatch(updateProfile(id)),
+  onUpdateProfile: payload => dispatch(updateProfile(payload)),
 });
 
 // Note: it is important that the withRouter HOC is **outside** the

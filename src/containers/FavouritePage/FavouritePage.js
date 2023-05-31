@@ -117,7 +117,7 @@ export class SearchPageComponent extends Component {
       searchParams,
       activeListingId,
       onActivateListing,
-      favoriteData,
+      onUpdateProfile,
       currentUser,
     } = this.props;
     // console.log('filterConfig', filterConfig)
@@ -188,7 +188,7 @@ export class SearchPageComponent extends Component {
             onCloseModal={this.onCloseMobileModal}
             onMapIconClick={onMapIconClick}
             pagination={pagination}
-            favoriteData={ favoriteData}
+            onUpdateProfile={ onUpdateProfile}
             searchParamsForPagination={parse(location.search)}
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             history={history}
@@ -282,7 +282,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(manageDisableScrolling(componentId, disableScrolling)),
   onSearchMapListings: searchParams => dispatch(searchMapListings(searchParams)),
   onActivateListing: listingId => dispatch(setActiveListing(listingId)),
-  favoriteData: id => dispatch(updateProfile(id)),
+  onUpdateProfile: payload => dispatch(updateProfile(payload)),
 });
 
 // Note: it is important that the withRouter HOC is **outside** the
