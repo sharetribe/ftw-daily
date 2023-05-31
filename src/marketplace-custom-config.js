@@ -163,7 +163,7 @@ export const filters = [
         },
         {
           key: 'dayCareStay',
-          label: 'Day Care Stay',
+          label: 'Day care stay',
         },
        
       ],

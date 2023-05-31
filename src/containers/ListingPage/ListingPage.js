@@ -341,14 +341,14 @@ export class ListingPageComponent extends Component {
 
     const currentAuthor = authorAvailable ? currentListing.author : null;
     const ensuredAuthor = ensureUser(currentAuthor);
-console.log('currentListing', currentListing)
     // When user is banned or deleted the listing is also deleted.
     // Because listing can be never showed with banned or deleted user we don't have to provide
     // banned or deleted display names for the function
 
     const Verificationphoto = currentListing?.attributes?.publicData?.idProofImage?.link
 
-    console.log('Verificationphoto', Verificationphoto)
+    console.log('ratings', ratings)
+    
     const authorDisplayName = userDisplayNameAsString(ensuredAuthor, '');
 
     const { formattedPrice, priceTitle } = priceData(price, intl);
@@ -691,6 +691,7 @@ const mapDispatchToProps = dispatch => ({
   onSendEnquiry: (listingId, message) => dispatch(sendEnquiry(listingId, message)),
   onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
   favoriteData: id => dispatch(updateProfile(id)),
+  
 });
 
 // Note: it is important that the withRouter HOC is **outside** the

@@ -82,7 +82,8 @@ export const TransactionPageComponent = props => {
     lineItems,
     fetchLineItemsInProgress,
     fetchLineItemsError,
-    transactionCancel
+    transactionCancel,
+    cancelCustomerInProgress
   } = props;
 
   const currentTransaction = ensureTransaction(transaction);
@@ -239,6 +240,7 @@ export const TransactionPageComponent = props => {
       onSendReview={onSendReview}
       transactionRole={transactionRole}
       onAcceptSale={onAcceptSale}
+      cancelCustomerInProgress={cancelCustomerInProgress}
       onDeclineSale={onDeclineSale}
       acceptInProgress={acceptInProgress}
       declineInProgress={declineInProgress}
@@ -367,6 +369,7 @@ const mapStateToProps = state => {
     lineItems,
     fetchLineItemsInProgress,
     fetchLineItemsError,
+    cancelCustomerInProgress
   } = state.TransactionPage;
   const { currentUser } = state.user;
 
@@ -399,6 +402,7 @@ const mapStateToProps = state => {
     lineItems,
     fetchLineItemsInProgress,
     fetchLineItemsError,
+    cancelCustomerInProgress
   };
 };
 
@@ -416,7 +420,7 @@ const mapDispatchToProps = dispatch => {
     onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
     onFetchTransactionLineItems: (bookingData, listingId, isOwnListing) =>
       dispatch(fetchTransactionLineItems(bookingData, listingId, isOwnListing)),
-    transactionCancel: (id) => dispatch(cancelBooking(id))
+    transactionCancel: (id,canCancelBooking) => dispatch(cancelBooking(id,canCancelBooking))
   };
 };
 

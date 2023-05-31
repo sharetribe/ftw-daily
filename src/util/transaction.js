@@ -42,6 +42,8 @@ export const TRANSITION_CANCEL = 'transition/cancel';
 
 export const TRANSITION_CUSTOMER_CANCEL= "transition/cancel-customer";
 
+export const TRANSITION_CUSTOMER_CANCEL_NO_REFUND = "transition/cancel-customer-no-refund"
+
 // The backend will mark the transaction completed.
 export const TRANSITION_COMPLETE = 'transition/complete';
 
@@ -150,6 +152,7 @@ const stateDescription = {
       on: {
         [TRANSITION_CANCEL]: STATE_CANCELED,
         [TRANSITION_CUSTOMER_CANCEL]:STATE_CANCELED,
+        [TRANSITION_CUSTOMER_CANCEL_NO_REFUND]:STATE_CANCELED,
         [TRANSITION_COMPLETE]: STATE_DELIVERED,
       },
     },
@@ -304,6 +307,7 @@ export const isRelevantPastTransition = transition => {
     TRANSITION_ACCEPT,
     TRANSITION_CANCEL,
     TRANSITION_CUSTOMER_CANCEL,
+    TRANSITION_CUSTOMER_CANCEL_NO_REFUND,
     TRANSITION_COMPLETE,
     TRANSITION_CONFIRM_PAYMENT,
     TRANSITION_DECLINE,

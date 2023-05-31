@@ -68,6 +68,7 @@
     {:name :action/stripe-refund-payment}],
    :from :state/preauthorized,
    :to :state/declined}
+
   {:name :transition/complete,
    :at {:fn/timepoint [:time/booking-end]},
    :actions [{:name :action/stripe-create-payout}],
@@ -81,7 +82,8 @@
     {:name :action/stripe-refund-payment}],
    :from :state/accepted,
    :to :state/cancelled}
-    {:name :transition/cancel-customer,
+
+  {:name :transition/cancel-customer,
    :actor :actor.role/customer,
    :actions
    [{:name :action/cancel-booking}
@@ -89,6 +91,16 @@
     {:name :action/stripe-refund-payment}],
    :from :state/accepted,
    :to :state/cancelled}
+
+   {:name :transition/cancel-customer-no-refund,
+   :actor :actor.role/customer,
+   :actions
+   [{:name :action/cancel-booking}],
+   :from :state/accepted,
+   :to :state/cancelled}
+
+
+
   {:name :transition/review-1-by-provider,
    :actor :actor.role/provider,
    :actions [{:name :action/post-review-by-provider}],

@@ -9,9 +9,10 @@ import { ensureListing, ensureUser } from '../../util/data';
 import { richText } from '../../util/richText';
 import { createSlug } from '../../util/urlHelpers';
 import config from '../../config';
-import { NamedLink, ResponsiveImage } from '../../components';
+import { NamedLink, ResponsiveImage, ReviewRating } from '../../components';
 
 import css from './ListingCard.module.css';
+import SectionReviewsheading from '../../containers/ListingPage/SectionReviewsHeading';
 
 const MIN_LENGTH_FOR_LONG_WORDS = 10;
 
@@ -42,7 +43,10 @@ class ListingImage extends Component {
 const LazyImage = lazyLoadWithDimensions(ListingImage, { loadAfterInitialRendering: 3000 });
 
 export const ListingCardComponent = props => {
-  const { className, rootClassName, intl, listing, renderSizes, setActiveListing, currentUser, favoriteData, pageName, favCard } = props;
+  const { className, rootClassName, intl, listing, renderSizes, setActiveListing, currentUser, favoriteData, pageName, favCard, ratings,reviews, fetchReviewsError, } = props;
+
+  console.log('ratings', ratings)
+
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureListing(listing);
   const id = currentListing.id.uuid;
@@ -69,14 +73,7 @@ export const ListingCardComponent = props => {
 
   const favorite =
     currentUser?.attributes?.profile.protectedData?.favorite || [];
-
-
-
-
-
   const index = favorite.findIndex(i => i === id)
-
-
   const handleClick = e => {
     e.preventDefault();
     if (index > -1) {
@@ -133,8 +130,19 @@ export const ListingCardComponent = props => {
           <div className={css.authorInfo}>
             <FormattedMessage id="ListingCard.hostedBy" values={{ authorName }} />
           </div>
+          <p>{ratings ?
+            <div className={css.ratingStar}>
+              <ReviewRating
+                rating={ratings}
+                reviewStarClassName={css.reviewRatingStar}
+              />
+            </div>
+            : null}</p>
+             <SectionReviewsheading reviews={reviews} fetchReviewsError={fetchReviewsError} />
         </div>
-        {pageName == "SearchPage" 
+
+
+        {pageName == "SearchPage"
           ? null :
           <div>
             {

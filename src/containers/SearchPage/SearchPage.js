@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { array, bool, func, oneOf, object, shape, string } from 'prop-types';
+import { array, bool, func, oneOf, object, shape, string, arrayOf } from 'prop-types';
 import { injectIntl, intlShape } from '../../util/reactIntl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -117,8 +117,11 @@ export class SearchPageComponent extends Component {
       searchParams,
       activeListingId,
       onActivateListing,
-      favoriteData
+      favoriteData,
+     ratings,
+     reviews,
     } = this.props;
+
 
     // eslint-disable-next-line no-unused-vars
     const { mapSearch, page, ...searchInURL } = parse(location.search, {
@@ -187,6 +190,8 @@ export class SearchPageComponent extends Component {
             onMapIconClick={onMapIconClick}
             pagination={pagination}
             favoriteData={favoriteData}
+            ratings={ratings}
+            reviews={reviews}
             searchParamsForPagination={parse(location.search)}
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             history={history}
@@ -228,6 +233,7 @@ export class SearchPageComponent extends Component {
 SearchPageComponent.defaultProps = {
   listings: [],
   mapListings: [],
+  reviews: [],
   pagination: null,
   searchListingsError: null,
   searchParams: {},
@@ -247,6 +253,7 @@ SearchPageComponent.propTypes = {
   scrollingDisabled: bool.isRequired,
   searchInProgress: bool.isRequired,
   searchListingsError: propTypes.error,
+  reviews: arrayOf(propTypes.review),
   searchParams: object,
   tab: oneOf(['filters', 'listings', 'map']).isRequired,
   filterConfig: propTypes.filterConfig,
@@ -273,7 +280,13 @@ const mapStateToProps = state => {
     searchParams,
     searchMapListingIds,
     activeListingId,
+   
   } = state.SearchPage;
+  
+  const {
+    ratings,
+    reviews
+  }=  state.ListingPage;
   const pageListings = getListingsById(state, currentPageResultIds);
   const mapListings = getListingsById(
     state,
@@ -288,6 +301,8 @@ const mapStateToProps = state => {
     searchInProgress,
     searchListingsError,
     searchParams,
+    ratings,
+    reviews,
     activeListingId,
   };
 };

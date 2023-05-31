@@ -132,7 +132,6 @@ class MainPanel extends Component {
       };
 
       const callback = () => {
-        //console.log(useHistoryPush, '^^^^ ^^^^ => useHistoryPush');
         if (useHistoryPush) {
           const searchParams = this.state.currentQueryParams;
           const search = cleanSearchFromConflictingParams(searchParams, sortConfig, filterConfig);
@@ -174,6 +173,8 @@ class MainPanel extends Component {
       sortConfig,
       pageName,
       favoriteData,
+      ratings,
+      reviews,
     } = this.props;
 
     const primaryFilters = filterConfig.filter((f) => {
@@ -375,6 +376,8 @@ class MainPanel extends Component {
               onLike ={onLike}
               pageName={pageName}
               favoriteData={favoriteData}
+              ratings={ratings}
+              reviews={reviews}
               setActiveListing={onActivateListing}
             />
           </div>

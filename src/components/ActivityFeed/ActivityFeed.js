@@ -27,6 +27,8 @@ import {
   txRoleIsCustomer,
   getUserTxRole,
   isRelevantPastTransition,
+  TRANSITION_CUSTOMER_CANCEL_NO_REFUND,
+  TRANSITION_CUSTOMER_CANCEL,
 } from '../../util/transaction';
 import { propTypes } from '../../util/types';
 import * as log from '../../util/log';
@@ -144,6 +146,11 @@ const resolveTransitionMessage = (
       ) : (
         <FormattedMessage id="ActivityFeed.transitionExpire" values={{ displayName }} />
       );
+      case TRANSITION_CUSTOMER_CANCEL_NO_REFUND:
+        return <FormattedMessage id="ActivityFeed.transitionCancel" />;
+        case TRANSITION_CUSTOMER_CANCEL:
+          return <FormattedMessage id="ActivityFeed.transitionCancel" />;   
+
     case TRANSITION_CANCEL:
       return <FormattedMessage id="ActivityFeed.transitionCancel" />;
     case TRANSITION_COMPLETE:

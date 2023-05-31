@@ -313,9 +313,10 @@ const PageBuilderTerm = props => {
                           Once this has been reported to PetCrib, we will review what has happened
                           and discuss with both parties to attempt to reach an agreement around a
                           solution. This is also outlined in our Terms of Service.
-                          For Pet Hosts:
+                         
                         </div>
                       </details>
+                      <h2 className={css.petHeading}>For Pet Hosts:</h2>
                       <details className={css.accordion}>
                         <summary className={css.accordionTitle}>What is Pet Hosting?</summary>
                         <div className={css.accordanceBoxWrap}>

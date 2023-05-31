@@ -196,12 +196,19 @@ export class TransactionPanelComponent extends Component {
       lineItems,
       fetchLineItemsInProgress,
       fetchLineItemsError,
-      transactionCancel
+      transactionCancel,
+      cancelCustomerInProgress
     } = this.props;
 
-   
+
 
     const currentTransaction = ensureTransaction(transaction);
+
+    const startDate = currentTransaction && currentTransaction.id && currentTransaction?.booking?.attributes?.start
+    const currentDate = new Date();
+    const timeDifference = startDate && (new Date(startDate).getTime() - currentDate.getTime());
+    const differenceInHours = timeDifference && Math.floor(timeDifference / (1000 * 60 * 60));
+    const canCancelBooking = differenceInHours >= 48;
     const currentListing = ensureListing(currentTransaction.listing);
     const currentProvider = ensureUser(currentTransaction.provider);
     const currentCustomer = ensureUser(currentTransaction.customer);
@@ -216,24 +223,23 @@ export class TransactionPanelComponent extends Component {
     const isProviderLoaded = !!currentProvider.id;
     const isProviderBanned = isProviderLoaded && currentProvider.attributes.banned;
     const isProviderDeleted = isProviderLoaded && currentProvider.attributes.deleted;
-
     const stateDataFn = tx => {
       if (txIsEnquired(tx)) {
         const transitions = Array.isArray(nextTransitions)
-          ? nextTransitions.map(transition => {
-              return transition.attributes.name;
-            })
+        ? nextTransitions.map(transition => {
+          return transition.attributes.name;
+        })
           : [];
         const hasCorrectNextTransition =
           transitions.length > 0 && transitions.includes(TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY);
-        return {
-          headingState: HEADING_ENQUIRED,
-          showBookingPanel: isCustomer && !isProviderBanned && hasCorrectNextTransition,
-        };
-      } else if (txIsPaymentPending(tx)) {
-        return {
-          headingState: HEADING_PAYMENT_PENDING,
-          showDetailCardHeadings: isCustomer,
+          return {
+            headingState: HEADING_ENQUIRED,
+            showBookingPanel: isCustomer && !isProviderBanned && hasCorrectNextTransition,
+          };
+        } else if (txIsPaymentPending(tx)) {
+          return {
+            headingState: HEADING_PAYMENT_PENDING,
+            showDetailCardHeadings: isCustomer,
         };
       } else if (txIsPaymentExpired(tx)) {
         return {
@@ -251,7 +257,7 @@ export class TransactionPanelComponent extends Component {
           headingState: HEADING_ACCEPTED,
           showDetailCardHeadings: isCustomer,
           showAddress: isCustomer,
-          showCancelButton:isCustomer,
+          showCancelButton: isCustomer,
         };
       } else if (txIsDeclined(tx)) {
         return {
@@ -278,7 +284,7 @@ export class TransactionPanelComponent extends Component {
     const deletedListingTitle = intl.formatMessage({
       id: 'TransactionPanel.deletedListingTitle',
     });
-
+    
     const {
       authorDisplayName,
       customerDisplayName,
@@ -289,44 +295,45 @@ export class TransactionPanelComponent extends Component {
     const { publicData, geolocation } = currentListing.attributes;
     const location = publicData && publicData.location ? publicData.location : {};
     const listingTitle = currentListing.attributes.deleted
-      ? deletedListingTitle
-      : currentListing.attributes.title;
-
+    ? deletedListingTitle
+    : currentListing.attributes.title;
+    
     const unitType = config.bookingUnitType;
     const dayUnitType = config.bookingDayUnitType;
     const isNightly = unitType === LINE_ITEM_NIGHT;
     const isDaily = unitType === LINE_ITEM_DAY;
 
-
+    
     const unitTranslationKey = isNightly
-      ? 'TransactionPanel.perNight'
-      : isDaily
-      ? 'TransactionPanel.perDay'
-      : 'TransactionPanel.perUnit';
-
+    ? 'TransactionPanel.perNight'
+    : isDaily
+    ? 'TransactionPanel.perDay'
+    : 'TransactionPanel.perUnit';
+    
     const price = currentListing.attributes.price;
     const bookingSubTitle = price
-      ? `${formatMoney(intl, price)} ${intl.formatMessage({ id: unitTranslationKey })}`
-      : '';
-
+    ? `${formatMoney(intl, price)} ${intl.formatMessage({ id: unitTranslationKey })}`
+    : '';
+    
     const firstImage =
-      currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
-
+    currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
+    
     const saleButtons = (
       <SaleActionButtonsMaybe
-        showButtons={stateData.showSaleButtons}
-        acceptInProgress={acceptInProgress}
-        declineInProgress={declineInProgress}
-        acceptSaleError={acceptSaleError}
-        declineSaleError={declineSaleError}
-        onAcceptSale={() => onAcceptSale(currentTransaction.id)}
-        onDeclineSale={() => onDeclineSale(currentTransaction.id)}
+      showButtons={stateData.showSaleButtons}
+      acceptInProgress={acceptInProgress}
+      declineInProgress={declineInProgress}
+      acceptSaleError={acceptSaleError}
+      declineSaleError={declineSaleError}
+      onAcceptSale={() => onAcceptSale(currentTransaction.id)}
+      onDeclineSale={() => onDeclineSale(currentTransaction.id)}
       />
-    );
-
-    const showSendMessageForm =
+      );
+      
+      const showSendMessageForm =
       !isCustomerBanned && !isCustomerDeleted && !isProviderBanned && !isProviderDeleted;
-
+     
+      
     const sendMessagePlaceholder = intl.formatMessage(
       { id: 'TransactionPanel.sendMessagePlaceholder' },
       { name: otherUserDisplayNameString }
@@ -445,7 +452,7 @@ export class TransactionPanelComponent extends Component {
                 showAddress={stateData.showAddress}
 
               />
-            
+
               {stateData.showBookingPanel ? (
                 <BookingPanel
                   className={css.bookingPanel}
@@ -476,7 +483,9 @@ export class TransactionPanelComponent extends Component {
                 <div className={css.desktopActionButtons}>{saleButtons}</div>
               ) : null}
 
-          {stateData.showCancelButton?<PrimaryButton onClick={()=>transactionCancel(transaction.id.uuid)} >Cancel</PrimaryButton>:null}
+              {stateData.showCancelButton ? <PrimaryButton inProgress={cancelCustomerInProgress} onClick={() => transactionCancel(transaction.id.uuid , canCancelBooking)} >Cancel</PrimaryButton> : null}
+               {/* <PrimaryButton onClick={() => transactionCancel(transaction.id.uuid , canCancelBooking)} >Cancel</PrimaryButton>  */}
+
             </div>
           </div>
         </div>

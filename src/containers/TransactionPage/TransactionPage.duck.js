@@ -13,6 +13,7 @@ import {
   TRANSITION_ACCEPT,
   TRANSITION_DECLINE,
   TRANSITION_CUSTOMER_CANCEL,
+  TRANSITION_CUSTOMER_CANCEL_NO_REFUND,
 } from '../../util/transaction';
 import { transactionLineItems } from '../../util/api';
 import * as log from '../../util/log';
@@ -49,6 +50,10 @@ export const DECLINE_SALE_REQUEST = 'app/TransactionPage/DECLINE_SALE_REQUEST';
 export const DECLINE_SALE_SUCCESS = 'app/TransactionPage/DECLINE_SALE_SUCCESS';
 export const DECLINE_SALE_ERROR = 'app/TransactionPage/DECLINE_SALE_ERROR';
 
+export const CANCEL_CUSTOMER_REQUEST = 'app/TransactionPage/CANCEL_CUSTOMER_REQUEST';
+export const CANCEL_CUSTOMER_SUCCESS = 'app/TransactionPage/CANCEL_CUSTOMER_SUCCESS';
+export const CANCEL_CUSTOMER_ERROR = 'app/TransactionPage/CANCEL_CUSTOMER_ERROR';
+
 export const FETCH_MESSAGES_REQUEST = 'app/TransactionPage/FETCH_MESSAGES_REQUEST';
 export const FETCH_MESSAGES_SUCCESS = 'app/TransactionPage/FETCH_MESSAGES_SUCCESS';
 export const FETCH_MESSAGES_ERROR = 'app/TransactionPage/FETCH_MESSAGES_ERROR';
@@ -78,6 +83,10 @@ const initialState = {
   acceptInProgress: false,
   acceptSaleError: null,
   declineInProgress: false,
+
+  cancelCustomerInProgress: false,
+  cancelCustomerError:null,
+
   declineSaleError: null,
   fetchMessagesInProgress: false,
   fetchMessagesError: null,
@@ -141,12 +150,19 @@ export default function checkoutPageReducer(state = initialState, action = {}) {
     case ACCEPT_SALE_ERROR:
       return { ...state, acceptInProgress: false, acceptSaleError: payload };
 
-    case DECLINE_SALE_REQUEST:
-      return { ...state, declineInProgress: true, declineSaleError: null, acceptSaleError: null };
-    case DECLINE_SALE_SUCCESS:
-      return { ...state, declineInProgress: false };
-    case DECLINE_SALE_ERROR:
-      return { ...state, declineInProgress: false, declineSaleError: payload };
+    case CANCEL_CUSTOMER_REQUEST:
+      return { ...state, cancelCustomerInProgress: true, cancelCustomerError: null };
+    case CANCEL_CUSTOMER_SUCCESS:
+      return { ...state, cancelCustomerInProgress: false };
+    case CANCEL_CUSTOMER_ERROR:
+      return { ...state, cancelCustomerInProgress: false, cancelCustomerError: payload };
+
+      case DECLINE_SALE_REQUEST:
+        return { ...state, declineInProgress: true, declineSaleError: null, acceptSaleError: null };
+      case DECLINE_SALE_SUCCESS:
+        return { ...state, declineInProgress: false };
+      case DECLINE_SALE_ERROR:
+        return { ...state, declineInProgress: false, declineSaleError: payload };
 
     case FETCH_MESSAGES_REQUEST:
       return { ...state, fetchMessagesInProgress: true, fetchMessagesError: null };
@@ -236,8 +252,13 @@ const acceptSaleSuccess = () => ({ type: ACCEPT_SALE_SUCCESS });
 const acceptSaleError = e => ({ type: ACCEPT_SALE_ERROR, error: true, payload: e });
 
 const declineSaleRequest = () => ({ type: DECLINE_SALE_REQUEST });
-const declineSaleSuccess = () => ({ type: DECLINE_SALE_SUCCESS });
 const declineSaleError = e => ({ type: DECLINE_SALE_ERROR, error: true, payload: e });
+
+const declineSaleSuccess = () => ({ type: DECLINE_SALE_SUCCESS });
+
+const cancelcustomerSuccess = () => ({ type: CANCEL_CUSTOMER_SUCCESS });
+const cancelcustomerRequest = () => ({ type: CANCEL_CUSTOMER_REQUEST });
+const cancelcustomerError = e => ({ type: CANCEL_CUSTOMER_ERROR, error: true, payload: e });
 
 const fetchMessagesRequest = () => ({ type: FETCH_MESSAGES_REQUEST });
 const fetchMessagesSuccess = (messages, pagination) => ({
@@ -399,25 +420,28 @@ export const declineSale = id => (dispatch, getState, sdk) => {
 
 
 
-export const cancelBooking = id => (dispatch, getState, sdk) => {
+export const cancelBooking = (id, canCancelBooking) => (dispatch, getState, sdk) => {
+ 
   if (acceptOrDeclineInProgress(getState())) {
     return Promise.reject(new Error('Accept or decline already in progress'));
   }
-  dispatch(declineSaleRequest());
+  dispatch(cancelcustomerRequest());
 
   return sdk.transactions
-    .transition({ id, transition: TRANSITION_CUSTOMER_CANCEL, params: {} }, { expand: true })
+    .transition({ id, transition: canCancelBooking ?  TRANSITION_CUSTOMER_CANCEL : TRANSITION_CUSTOMER_CANCEL_NO_REFUND, params: {} }, { expand: true })
     .then(response => {
       dispatch(addMarketplaceEntities(response));
-      dispatch(declineSaleSuccess());
+      dispatch(cancelcustomerSuccess());
       dispatch(fetchCurrentUserNotifications());
+      
+
       return response;
     })
     .catch(e => {
-      dispatch(declineSaleError(storableError(e)));
+      dispatch(cancelcustomerError(storableError(e)));
       log.error(e, 'reject-sale-failed', {
         txId: id,
-        transition: TRANSITION_CUSTOMER_CANCEL,
+        transition: canCancelBooking ?  TRANSITION_CUSTOMER_CANCEL : TRANSITION_CUSTOMER_CANCEL_NO_REFUND,
       });
       throw e;
     });
