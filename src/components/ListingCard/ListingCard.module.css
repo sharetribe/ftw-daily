@@ -137,7 +137,7 @@
 .ratingStar {
   display: flex;
   align-items: center;
-  gap: 50px;
+  gap: 13px;
   margin-top: 5px;
 
   &>div {
@@ -154,12 +154,12 @@
   }
 
   & span {
-    line-height: 18px;
+    line-height: 16px;
 
     & svg {
       margin-left: 5px;
-      width: 18px;
-      height: 18px;
+      width: 15px;
+      height: 15px;
     }
   }
 }
