@@ -81,7 +81,7 @@ export const ListingCardComponent = props => {
   //     : 'ListingCard.perUnit';
 
   const headline = listing?.attributes?.publicData?.headline
- 
+
 
   const favorites = (currentUser && currentUser.id && currentUser.attributes.profile.protectedData.favorite) || [];
   const index = favorites.findIndex(i => i == id);
@@ -89,8 +89,8 @@ export const ListingCardComponent = props => {
     e.preventDefault();
     if (index > -1) {
       onUpdateProfile({
-        protectedData: { 
-          favorite: favorites.filter(i => i != id) 
+        protectedData: {
+          favorite: favorites.filter(i => i != id)
         }
       });
     } else {
@@ -139,16 +139,20 @@ export const ListingCardComponent = props => {
           </div> */}
           <div className={css.authorInfo}>
             <FormattedMessage id="ListingCard.hostedBy" values={{ authorName }} />
-           
+
           </div>
           <div> {headline}</div>
-          {pageName == "SearchPage" && ratings && reviews
-            ? <div className={css.ratingStar}>
+          {pageName == "SearchPage" && ratings && reviews ?
+            <div className={css.ratingStar}>
+              <SectionReviewsheading
+                reviews={reviews}
+                fetchReviewsError={fetchReviewsError}
+                className={css.reviewHeading}
+              />
               <ReviewRating
                 rating={ratings}
                 reviewStarClassName={css.reviewRatingStar}
               />
-              <SectionReviewsheading reviews={reviews} fetchReviewsError={fetchReviewsError} />
             </div>
             : null}
         </div>

@@ -277,7 +277,6 @@ export class BookingDatesFormComponent extends Component {
                 })}
                 {/* {values.serviceSetup ? "required this field" :null} */}
                 {letofstay && discount ?
-
                   <div className={css.discountBooking}>" {firstname} is offering a {discount}% discount if you book more than {letofstay} days "</div>
                   : null}
               </div>
@@ -359,18 +358,18 @@ export class BookingDatesFormComponent extends Component {
                       <>
                         {(values.serviceSetup) ?
                           <div className={css.pricingDescription}>
-                            <span>Minimum_Price</span> = AUD{min}.00
+                            <span className={css.boldText}>Minimum_Price</span> = AUD{min}.00
                           </div> : null}
                       </>
                       :
                       <>
                         {(values?.serviceSetup?.find((e) => e == "overnightsStay")) ?
                           <div className={css.pricingDescription}>
-                            <span>Over night rate</span> = AUD{nightprice}.00  per night </div> : null}
+                            <span className={css.boldText}>Over night rate</span> = AUD{nightprice}.00  per night </div> : null}
 
                         {(values?.serviceSetup?.find((e) => e == "dayCareStay")) ?
                           <div className={css.pricingDescription}>
-                            <span>Day care stay</span> = AUD{dayprice}.00  per day</div> : null}
+                            <span className={css.boldText}>Day care stay</span> = AUD{dayprice}.00  per day</div> : null}
                       </>
                   }</> : <div>
                   {(detail) ?
@@ -388,8 +387,8 @@ export class BookingDatesFormComponent extends Component {
                 </div>
 
                 }
-                </div>
-  </Form>
+              </div>
+            </Form>
           );
         }}
       />
