@@ -134,6 +134,38 @@
   }
 }
 
+.ratingStar {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  margin-top: 5px;
+
+  &>div {
+    margin: 0;
+
+    & h2 {
+      margin: 0;
+      background: #e9e9e9;
+      padding: 0 10px;
+      border-radius: 3px;
+      color: var(--matterColor);
+      font-size: 12px;
+    }
+  }
+
+  & span {
+    line-height: 18px;
+
+    & svg {
+      margin-left: 5px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+
+
 .authorInfo {
   /* Font */
   composes: marketplaceTinyFontStyles from global;
