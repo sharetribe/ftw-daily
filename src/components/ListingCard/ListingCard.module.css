@@ -50,6 +50,7 @@
   padding: 16px 0 2px 0;
   align-items: center;
   gap: 20px;
+  justify-content: space-between;
 }
 
 .favInfo {
