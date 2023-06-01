@@ -175,6 +175,9 @@ class MainPanel extends Component {
       onUpdateProfile,
     } = this.props;
 
+    console.log('filterConfig', filterConfig)
+    const mobilefilter = filterConfig.filter(e => e.id != "dohavepets" && e.id != "discount")
+    console.log('mobilefilter', mobilefilter)
     const primaryFilters = filterConfig.filter((f) => {
       let checked = true;
       if (f.id == "sizeOfdogs") {

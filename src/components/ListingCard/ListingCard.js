@@ -143,13 +143,19 @@ export const ListingCardComponent = props => {
           </div>
           <div> {headline}</div>
           {pageName == "SearchPage" && ratings && reviews
-            ? <div className={css.ratingStar}>
+            ?
+            <>
+            <div className={css.reviewBox}>
+              <SectionReviewsheading reviews={reviews} fetchReviewsError={fetchReviewsError} />
+            </div>
+            <div className={css.ratingStar}>
               <ReviewRating
                 rating={ratings}
                 reviewStarClassName={css.reviewRatingStar}
               />
-              <SectionReviewsheading reviews={reviews} fetchReviewsError={fetchReviewsError} />
+             
             </div>
+            </>
             : null}
         </div>
 
