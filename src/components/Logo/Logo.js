@@ -7,7 +7,7 @@ import config from '../../config';
 //import LogoImage from './CARLO_SCHRIFTZUG.png';
 import css from './Logo.module.css';
 import MobileLogoImage from './CARLO_LOGO.png';
-import DesktopLogoImage from './CARLO_SCHRIFTZUG.png';
+import DesktopLogoImage from './Logo_Schrift_red_FAHRGO.png';
 
 //const Logo = props => {
 //  const { className, format, ...rest } = props;

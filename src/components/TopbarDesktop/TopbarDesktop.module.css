@@ -44,8 +44,8 @@
 }
 
 .logo {
-  /* If height is increased, change link paddings accordingly */
-  height: 75px;
+  /* If height is increased, change link paddings accordingly / 75px */
+  height: 70px;
 
   /* Good aspect ratio should be less than 160/27 (width/height) */
   /* NOTE: extremely wide logos, need special handling. */
@@ -88,6 +88,7 @@
 .topbarSearchWithLeftPadding {
   padding-left: 24px;
   height: var(--topbarHeightDesktop);
+  color: var(--matterColor);
 
   @media (--viewportLarge) {
     padding-left: 34px;
@@ -239,7 +240,7 @@
 }
 
 .avatar {
-  margin-top: 70px;
+  margin-top: 0px;
 }
 
 .profileMenuContent {

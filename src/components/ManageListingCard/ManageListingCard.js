@@ -305,23 +305,9 @@ export const ManageListingCardComponent = props => {
         ) : null}
       </div>
 
+      
       <div className={css.info}>
-        <div className={css.price}>
-          {formattedPrice ? (
-            <React.Fragment>
-              <div className={css.priceValue} title={priceTitle}>
-                {formattedPrice}
-              </div>
-              <div className={css.perUnit}>
-                <FormattedMessage id={unitTranslationKey} />
-              </div>
-            </React.Fragment>
-          ) : (
-            <div className={css.noPrice}>
-              <FormattedMessage id="ManageListingCard.priceNotSet" />
-            </div>
-          )}
-        </div>
+        
 
         <div className={css.mainInfo}>
           <div className={css.titleWrapper}>
@@ -365,6 +351,27 @@ export const ManageListingCardComponent = props => {
     </div>
   );
 };
+
+/* folgednes wurde in css.info entfernt:
+
+<div className={css.price}>
+          {formattedPrice ? (
+            <React.Fragment>
+              <div className={css.priceValue} title={priceTitle}>
+                {formattedPrice}
+              </div>
+              <div className={css.perUnit}>
+                <FormattedMessage id={unitTranslationKey} />
+              </div>
+            </React.Fragment>
+          ) : (
+            <div className={css.noPrice}>
+              <FormattedMessage id="ManageListingCard.priceNotSet" />
+            </div>
+          )}
+        </div>
+
+*/
 
 ManageListingCardComponent.defaultProps = {
   className: null,

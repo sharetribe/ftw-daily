@@ -13,18 +13,24 @@
 .item {
   display: flex;
   align-items: center;
-  padding: 3px 0;
+  padding: 0px 0;
 
   @media (--viewportMedium) {
-    padding: 4px 0;
+    padding: 0px 0;
   }
 }
 
 .checkIcon {
+
 }
 
 .hidden {
   visibility: hidden;
+}
+
+.none {
+  display: none;
+  
 }
 
 .marketplaceFill {
@@ -33,10 +39,10 @@
 
 .iconWrapper {
   align-self: baseline;
-  margin-right: 8px;
+  margin-right: 7px;
 
   /* This follows line-height */
-  height: 24px;
+  /*height: 24px;*/
 }
 
 .labelWrapper {
@@ -57,6 +63,7 @@
 .notSelectedLabel {
   color: var(--matterColorNegative);
   position: relative;
+  display: none;
 
   /* line-through */
   background-image: linear-gradient(

@@ -2,6 +2,7 @@ import React from 'react';
 import loadable from '@loadable/component';
 import getPageDataLoadingAPI from './containers/pageDataLoadingAPI';
 import { NotFoundPage } from './containers';
+import PreviewResolverPage from './containers/PreviewResolverPage/PreviewResolverPage';
 
 // routeConfiguration needs to initialize containers first
 // Otherwise, components will import form container eventually and
@@ -11,6 +12,7 @@ import { NamedRedirect } from './components';
 const pageDataLoadingAPI = getPageDataLoadingAPI();
 
 const AboutPage = loadable(() => import(/* webpackChunkName: "AboutPage" */ './containers/AboutPage/AboutPage'));
+const ProviderPage = loadable(() => import(/* webpackChunkName: "ProviderPage" */ './containers/ProviderPage/ProviderPage'));
 const FAQPage = loadable(() => import(/* webpackChunkName: "FAQPage" */ './containers/FAQPage/FAQPage'));
 const AuthenticationPage = loadable(() => import(/* webpackChunkName: "AuthenticationPage" */ './containers/AuthenticationPage/AuthenticationPage'));
 const CheckoutPage = loadable(() => import(/* webpackChunkName: "CheckoutPage" */ './containers/CheckoutPage/CheckoutPage'));
@@ -27,6 +29,7 @@ const PasswordRecoveryPage = loadable(() => import(/* webpackChunkName: "Passwor
 const PasswordResetPage = loadable(() => import(/* webpackChunkName: "PasswordResetPage" */ './containers/PasswordResetPage/PasswordResetPage'));
 const PaymentMethodsPage = loadable(() => import(/* webpackChunkName: "PaymentMethodsPage" */ './containers/PaymentMethodsPage/PaymentMethodsPage'));
 const PrivacyPolicyPage = loadable(() => import(/* webpackChunkName: "PrivacyPolicyPage" */ './containers/PrivacyPolicyPage/PrivacyPolicyPage'));
+const ImpressumPage = loadable(() => import(/* webpackChunkName: "ImpressumPage" */ './containers/ImpressumPage/ImpressumPage'));
 const ProfilePage = loadable(() => import(/* webpackChunkName: "ProfilePage" */ './containers/ProfilePage/ProfilePage'));
 const ProfileSettingsPage = loadable(() => import(/* webpackChunkName: "ProfileSettingsPage" */ './containers/ProfileSettingsPage/ProfileSettingsPage'));
 const SearchPage = loadable(() => import(/* webpackChunkName: "SearchPage" */ /* webpackPrefetch: true */  './containers/SearchPage/SearchPage'));
@@ -36,6 +39,7 @@ const TransactionPage = loadable(() => import(/* webpackChunkName: "TransactionP
 
 // Styleguide helps you to review current components and develop new ones
 const StyleguidePage = loadable(() => import(/* webpackChunkName: "StyleguidePage" */ './containers/StyleguidePage/StyleguidePage'));
+
 
 /*
 export const ACCOUNT_SETTINGS_PAGES = [
@@ -69,6 +73,13 @@ const routeConfiguration = () => {
       path: '/',
       name: 'LandingPage',
       component: LandingPage,
+      loadData: pageDataLoadingAPI.LandingPage.loadData,
+    },
+    {
+      path: '/provider-page',
+      name: 'ProviderPage',
+      component: ProviderPage,
+      loadData: pageDataLoadingAPI.ProviderPage.loadData,
     },
     {
       path: '/about',
@@ -196,7 +207,7 @@ const routeConfiguration = () => {
       name: 'InboxBasePage',
       auth: true,
       authPage: 'LoginPage',
-      component: () => <NamedRedirect name="InboxPage" params={{ tab: 'sales' }} />,
+      component: () => <NamedRedirect name="InboxPage" params={{ tab: 'orders'}} />, //isProvider ? 'sales' : 'orders') }} />, // if clause angepasst
     },
     {
       path: '/inbox/:tab',
@@ -313,6 +324,12 @@ const routeConfiguration = () => {
       component: PrivacyPolicyPage,
     },
     {
+      path: '/impressum',
+      name: 'ImpressumPage',
+      component: ImpressumPage,
+    },
+
+    {
       path: '/styleguide',
       name: 'Styleguide',
       component: StyleguidePage,
@@ -363,6 +380,12 @@ const routeConfiguration = () => {
       authPage: 'LoginPage',
       component: EmailVerificationPage,
       loadData: pageDataLoadingAPI.EmailVerificationPage.loadData,
+    },
+    // The API expects that the application implements /preview endpoint
+    {
+      path: '/preview',
+      name: 'PreviewResolverPage',
+      component: PreviewResolverPage ,
     },
   ];
 };

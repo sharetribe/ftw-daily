@@ -13,11 +13,32 @@ import css from './EditListingPricingPanel.module.css';
 
 const { Money } = sdkTypes;
 
+const getInitialValues = params => {
+  const { listing } = params;
+  const { price } = listing?.attributes || {};
+
+  return { price };
+};
+
+
+
+/*
+const getInitialValues = params => {
+  const { listing } = params;
+  const { price } = listing?.attributes || {};
+
+  return { price };
+};
+*/
+
+
 const EditListingPricingPanel = props => {
   const {
     className,
     rootClassName,
     listing,
+    marketplaceCurrency,
+    listingMinimumPriceSubUnits,
     disabled,
     ready,
     onSubmit,
@@ -28,47 +49,64 @@ const EditListingPricingPanel = props => {
     errors,
   } = props;
 
-  const classes = classNames(rootClassName || css.root, className);
-  const currentListing = ensureOwnListing(listing);
-  const { price } = currentListing.attributes;
+const classes = classNames(rootClassName || css.root, className);
+const initialValues = getInitialValues(props);
+const isPublished = listing?.id && listing?.attributes?.state !== LISTING_STATE_DRAFT;
+const priceCurrencyValid =
+  initialValues.price instanceof Money
+    ? initialValues.price.currency === marketplaceCurrency
+    : true;
+const unitType = listing?.attributes?.publicData?.unitType;
 
-  const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
-  const panelTitle = isPublished ? (
-    <FormattedMessage
-      id="EditListingPricingPanel.title"
-      values={{ listingTitle: <ListingLink listing={listing} /> }}
-    />
-  ) : (
-    <FormattedMessage id="EditListingPricingPanel.createListingTitle" />
-  );
 
-  const priceCurrencyValid = price instanceof Money ? price.currency === config.currency : true;
-  const form = priceCurrencyValid ? (
-    <EditListingPricingForm
-      className={css.form}
-      initialValues={{ price }}
-      onSubmit={onSubmit}
-      onChange={onChange}
-      saveActionMsg={submitButtonText}
-      disabled={disabled}
-      ready={ready}
-      updated={panelUpdated}
-      updateInProgress={updateInProgress}
-      fetchErrors={errors}
-    />
-  ) : (
-    <div className={css.priceCurrencyInvalid}>
-      <FormattedMessage id="EditListingPricingPanel.listingPriceCurrencyInvalid" />
-    </div>
-  );
 
-  return (
+return (
     <div className={classes}>
-      <h1 className={css.title}>{panelTitle}</h1>
-      {form}
+      <H3 as="h1">
+        {isPublished ? (
+          <FormattedMessage
+            id="EditListingPricingPanel.title"
+            values={{ listingTitle: <ListingLink listing={listing} />, lineBreak: <br /> }}
+          />
+        ) : (
+          <FormattedMessage
+            id="EditListingPricingPanel.createListingTitle"
+            values={{ lineBreak: <br /> }}
+          />
+        )}
+      </H3>
+      {priceCurrencyValid ? (
+        <EditListingPricingForm
+          className={css.form}
+          initialValues={initialValues}
+          onSubmit={values => {
+            const { price } = values;
+
+            // New values for listing attributes
+            const updateValues = {
+              price: new Money(0, "EUR"),
+            };
+            onSubmit(updateValues);
+          }}
+          marketplaceCurrency={marketplaceCurrency}
+          unitType={unitType}
+          listingMinimumPriceSubUnits={listingMinimumPriceSubUnits}
+          saveActionMsg={submitButtonText}
+          disabled={disabled}
+          ready={ready}
+          updated={panelUpdated}
+          updateInProgress={updateInProgress}
+          fetchErrors={errors}
+        />
+      ) : (
+        <div className={css.priceCurrencyInvalid}>
+          <FormattedMessage id="EditListingPricingPanel.listingPriceCurrencyInvalid" />
+        </div>
+      )}
     </div>
   );
 };
+  
 
 const { func, object, string, bool } = PropTypes;
 

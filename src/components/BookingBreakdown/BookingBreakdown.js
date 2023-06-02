@@ -89,6 +89,33 @@ export const BookingBreakdownComponent = props => {
   return (
     <div className={classes}>
       <LineItemBookingPeriod booking={booking} unitType={unitType} dateType={dateType} />
+      
+
+      
+      
+      
+
+      
+
+      <LineItemProviderCommissionMaybe
+        transaction={transaction}
+        isProvider={isProvider}
+        intl={intl}
+      />
+      
+
+      {hasCommissionLineItem ? (
+        <span className={css.feeInfo}>
+          <FormattedMessage id="BookingBreakdown.commissionFeeNote" />
+        </span>
+      ) : null}
+    </div>
+  );
+
+/*
+return (
+    <div className={classes}>
+      <LineItemBookingPeriod booking={booking} unitType={unitType} dateType={dateType} />
       <LineItemUnitsMaybe transaction={transaction} unitType={unitType} />
 
       <LineItemBasePriceMaybe transaction={transaction} unitType={unitType} intl={intl} />
@@ -133,6 +160,8 @@ export const BookingBreakdownComponent = props => {
       ) : null}
     </div>
   );
+*/
+
 };
 
 BookingBreakdownComponent.defaultProps = { rootClassName: null, className: null, dateType: null };

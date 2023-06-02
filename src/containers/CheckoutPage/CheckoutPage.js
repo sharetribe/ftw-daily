@@ -27,7 +27,7 @@ import {
 } from '../../util/errors';
 import { formatMoney } from '../../util/currency';
 import {
-  AvatarMedium,
+  //AvatarMedium,
   Button,
   BookingBreakdown,
   Logo,
@@ -482,6 +482,8 @@ export class CheckoutPageComponent extends Component {
                   />
                 </div>
               ) : null}
+              <p>
+              </p>
               <div className={css.submitContainer}>
                 <PrimaryButton
                   className={css.submitButton}
@@ -489,7 +491,7 @@ export class CheckoutPageComponent extends Component {
                   inProgress={this.state.submitting}
                   disabled={false}
                 >
-                  Confirm booking
+                  Buchung bestätigen
                 </PrimaryButton>
               </div>
             </Form>
@@ -509,9 +511,6 @@ export class CheckoutPageComponent extends Component {
               image={firstImage}
               variants={['landscape-crop', 'landscape-crop2x']}
             />
-          </div>
-          <div className={classNames(css.avatarWrapper, css.avatarMobile)}>
-            <AvatarMedium user={currentAuthor} disableProfileLink />
           </div>
           <div className={css.bookListingContainer}>
             <div className={css.heading}>
@@ -541,9 +540,7 @@ export class CheckoutPageComponent extends Component {
                 variants={['landscape-crop', 'landscape-crop2x']}
               />
             </div>
-            <div className={css.avatarWrapper}>
-              <AvatarMedium user={currentAuthor} disableProfileLink />
-            </div>
+            
             <div className={css.detailsHeadings}>
               <h2 className={css.detailsTitle}>{listingTitle}</h2>
             </div>

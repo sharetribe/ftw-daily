@@ -39,6 +39,7 @@ import DetailCardHeadingsMaybe from './DetailCardHeadingsMaybe';
 import DetailCardImage from './DetailCardImage';
 import FeedSection from './FeedSection';
 import SaleActionButtonsMaybe from './SaleActionButtonsMaybe';
+import SaleCancelButton from './CancelSaleButton';
 import PanelHeading, {
   HEADING_ENQUIRED,
   HEADING_PAYMENT_PENDING,
@@ -183,10 +184,13 @@ export class TransactionPanelComponent extends Component {
       intl,
       onAcceptSale,
       onDeclineSale,
+      onCancelSale,
       acceptInProgress,
       declineInProgress,
+      cancelInProgress,
       acceptSaleError,
       declineSaleError,
+      cancelSaleError,
       onSubmitBookingRequest,
       timeSlots,
       fetchTimeSlotsError,
@@ -247,6 +251,7 @@ export class TransactionPanelComponent extends Component {
           headingState: HEADING_ACCEPTED,
           showDetailCardHeadings: isCustomer,
           showAddress: isCustomer,
+          showCancelButton: isProvider || isCustomer,
         };
       } else if (txIsDeclined(tx)) {
         return {
@@ -317,6 +322,15 @@ export class TransactionPanelComponent extends Component {
       />
     );
 
+    const cancelButton = (
+      <SaleCancelButton
+        showButtons={stateData.showCancelButton}
+        cancelInProgress={cancelInProgress}
+        cancelSaleError={cancelSaleError}
+        onCancelSale={() => onCancelSale(currentTransaction.id)}
+      />
+    );
+
     const showSendMessageForm =
       !isCustomerBanned && !isCustomerDeleted && !isProviderBanned && !isProviderDeleted;
 
@@ -346,8 +360,8 @@ export class TransactionPanelComponent extends Component {
               avatarWrapperClassName={css.avatarWrapperMobile}
               listingTitle={listingTitle}
               image={firstImage}
-              provider={currentProvider}
-              isCustomer={isCustomer}
+              //provider={currentProvider}
+              //isCustomer={isCustomer}
             />
             {isProvider ? (
               <div className={css.avatarWrapperProviderDesktop}>
@@ -415,22 +429,26 @@ export class TransactionPanelComponent extends Component {
             {stateData.showSaleButtons ? (
               <div className={css.mobileActionButtons}>{saleButtons}</div>
             ) : null}
+
+            {stateData.showCancelButton ? (
+              <div className={css.mobileActionButtons}>{cancelButton}</div>
+            ) : null}
           </div>
 
           <div className={css.asideDesktop}>
-            <div className={css.detailCard}>
+            <div className={css.detailCard}>                
               <DetailCardImage
                 avatarWrapperClassName={css.avatarWrapperDesktop}
                 listingTitle={listingTitle}
                 image={firstImage}
-                provider={currentProvider}
-                isCustomer={isCustomer}
+                //provider={currentProvider}
+                //isCustomer={isCustomer}
               />
 
               <DetailCardHeadingsMaybe
                 showDetailCardHeadings={stateData.showDetailCardHeadings}
                 listingTitle={listingTitle}
-                subTitle={bookingSubTitle}
+                //subTitle={bookingSubTitle}
                 location={location}
                 geolocation={geolocation}
                 showAddress={stateData.showAddress}
@@ -442,7 +460,7 @@ export class TransactionPanelComponent extends Component {
                   isOwnListing={false}
                   listing={currentListing}
                   title={listingTitle}
-                  subTitle={bookingSubTitle}
+                  //subTitle={bookingSubTitle}
                   authorDisplayName={authorDisplayName}
                   onSubmit={onSubmitBookingRequest}
                   onManageDisableScrolling={onManageDisableScrolling}
@@ -462,6 +480,10 @@ export class TransactionPanelComponent extends Component {
 
               {stateData.showSaleButtons ? (
                 <div className={css.desktopActionButtons}>{saleButtons}</div>
+              ) : null}
+
+              {stateData.showCancelButton ? (
+                <div className={css.desktopActionButtons}>{cancelButton}</div>
               ) : null}
             </div>
           </div>
@@ -488,6 +510,7 @@ TransactionPanelComponent.defaultProps = {
   currentUser: null,
   acceptSaleError: null,
   declineSaleError: null,
+  cancelSaleError: null,
   fetchMessagesError: null,
   initialMessageFailed: false,
   savePaymentMethodFailed: false,
@@ -529,10 +552,13 @@ TransactionPanelComponent.propTypes = {
   // Sale related props
   onAcceptSale: func.isRequired,
   onDeclineSale: func.isRequired,
+  onCancelSale: func.isRequired,
   acceptInProgress: bool.isRequired,
   declineInProgress: bool.isRequired,
+  cancelInProgress: bool.isRequired,
   acceptSaleError: propTypes.error,
   declineSaleError: propTypes.error,
+  cancelSaleError: propTypes.error,
 
   // line items
   onFetchTransactionLineItems: func.isRequired,
@@ -547,3 +573,4 @@ TransactionPanelComponent.propTypes = {
 const TransactionPanel = injectIntl(TransactionPanelComponent);
 
 export default TransactionPanel;
+

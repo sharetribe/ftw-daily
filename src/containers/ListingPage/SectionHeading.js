@@ -33,9 +33,7 @@ const SectionHeading = props => {
         <div className={css.desktopPriceValue} title={priceTitle}>
           {formattedPrice}
         </div>
-        <div className={css.desktopPerUnit}>
-          <FormattedMessage id={unitTranslationKey} />
-        </div>
+        
       </div>
       <div className={css.heading}>
         <h1 className={css.title}>{richTitle}</h1>

@@ -1,6 +1,8 @@
 /**
  * Export loadData calls from ducks modules of different containers
  */
+//import { loadData as AuthenticationPageLoader } from './AuthenticationPage/AuthenticationPage.duck';
+import { loadData as LandingPageLoader } from './LandingPage/LandingPage.duck';
 import { setInitialValues as CheckoutPageInitialValues } from './CheckoutPage/CheckoutPage.duck';
 import { loadData as ContactDetailsPageLoader } from './ContactDetailsPage/ContactDetailsPage.duck';
 import { loadData as EditListingPageLoader } from './EditListingPage/EditListingPage.duck';
@@ -11,7 +13,9 @@ import { loadData as ManageListingsPageLoader } from './ManageListingsPage/Manag
 import { loadData as PaymentMethodsPageLoader } from './PaymentMethodsPage/PaymentMethodsPage.duck';
 import { loadData as ProfilePageLoader } from './ProfilePage/ProfilePage.duck';
 import { loadData as SearchPageLoader } from './SearchPage/SearchPage.duck';
+import { loadData as ProviderPageLoader } from './ProviderPage/ProviderPage.duck';
 import { loadData as StripePayoutPageLoader } from './StripePayoutPage/StripePayoutPage.duck';
+
 import {
   loadData as TransactionPageLoader,
   setInitialValues as TransactionPageInitialValues,
@@ -19,6 +23,12 @@ import {
 
 const getPageDataLoadingAPI = () => {
   return {
+    LandingPage: {
+      loadData: LandingPageLoader,
+    },
+    ProviderPage: {
+      loadData: ProviderPageLoader,
+    },
     CheckoutPage: {
       setInitialValues: CheckoutPageInitialValues,
     },

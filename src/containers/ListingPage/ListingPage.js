@@ -47,6 +47,7 @@ import SectionAvatar from './SectionAvatar';
 import SectionHeading from './SectionHeading';
 import SectionDescriptionMaybe from './SectionDescriptionMaybe';
 import SectionFeaturesMaybe from './SectionFeaturesMaybe';
+import SectionExtrasMaybe from './SectionExtrasMaybe';
 import SectionReviews from './SectionReviews';
 import SectionHostMaybe from './SectionHostMaybe';
 import SectionRulesMaybe from './SectionRulesMaybe';
@@ -56,6 +57,10 @@ import css from './ListingPage.module.css';
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
 
 const { UUID } = sdkTypes;
+
+//const { Money } = require('sharetribe-flex-sdk').types;
+
+//const price = new Money(0, 'EUR');
 
 const priceData = (price, intl) => {
   if (price && price.currency === config.currency) {
@@ -69,6 +74,8 @@ const priceData = (price, intl) => {
   }
   return {};
 };
+
+
 
 const categoryLabel = (categories, key) => {
   const cat = categories.find(c => c.key === key);
@@ -365,6 +372,7 @@ export class ListingPageComponent extends Component {
       { title, price: formattedPrice, siteTitle }
     );
 
+    /*
     const hostLink = (
       <NamedLink
         className={css.authorNameLink}
@@ -375,8 +383,10 @@ export class ListingPageComponent extends Component {
         {authorDisplayName}
       </NamedLink>
     );
+    */
 
     const amenityOptions = findOptionsForSelectFilter('amenities', filterConfig);
+    const extrasOptions = findOptionsForSelectFilter('extras', filterConfig);
     const categoryOptions = findOptionsForSelectFilter('category', filterConfig);
     const category =
       publicData && publicData.category ? (
@@ -423,39 +433,29 @@ export class ListingPageComponent extends Component {
                 onManageDisableScrolling={onManageDisableScrolling}
               />
               <div className={css.contentContainer}>
-                <SectionAvatar user={currentAuthor} params={params} />
+                
                 <div className={css.mainContent}>
                   <SectionHeading
-                    priceTitle={priceTitle}
-                    formattedPrice={formattedPrice}
+                    //priceTitle={priceTitle}
+                    //formattedPrice={formattedPrice}
                     richTitle={richTitle}
                     category={category}
-                    hostLink={hostLink}
-                    showContactUser={showContactUser}
+                    //hostLink={hostLink}
+                    //showContactUser={showContactUser}
                     onContactUser={this.onContactUser}
                   />
                   <SectionDescriptionMaybe description={description} />
                   <SectionFeaturesMaybe options={amenityOptions} publicData={publicData} />
+                  <SectionExtrasMaybe options={extrasOptions} publicData={publicData} />
                   <SectionRulesMaybe publicData={publicData} />
                   <SectionMapMaybe
                     geolocation={geolocation}
                     publicData={publicData}
                     listingId={currentListing.id}
+                    
                   />
                   <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
-                  <SectionHostMaybe
-                    title={title}
-                    listing={currentListing}
-                    authorDisplayName={authorDisplayName}
-                    onContactUser={this.onContactUser}
-                    isEnquiryModalOpen={isAuthenticated && this.state.enquiryModalOpen}
-                    onCloseEnquiryModal={() => this.setState({ enquiryModalOpen: false })}
-                    sendEnquiryError={sendEnquiryError}
-                    sendEnquiryInProgress={sendEnquiryInProgress}
-                    onSubmitEnquiry={this.onSubmitEnquiry}
-                    currentUser={currentUser}
-                    onManageDisableScrolling={onManageDisableScrolling}
-                  />
+                  
                 </div>
                 <BookingPanel
                   className={css.bookingPanel}

@@ -16,31 +16,31 @@ exports[`EditListingAvailabilityForm matches snapshot 1`] = `
       "entries": Array [
         Object {
           "dayOfWeek": "mon",
-          "seats": 1,
+          "seats": 15,
         },
         Object {
           "dayOfWeek": "tue",
-          "seats": 1,
+          "seats": 15,
         },
         Object {
           "dayOfWeek": "wed",
-          "seats": 1,
+          "seats": 15,
         },
         Object {
           "dayOfWeek": "thu",
-          "seats": 1,
+          "seats": 15,
         },
         Object {
           "dayOfWeek": "fri",
-          "seats": 1,
+          "seats": 15,
         },
         Object {
           "dayOfWeek": "sat",
-          "seats": 1,
+          "seats": 15,
         },
         Object {
           "dayOfWeek": "sun",
-          "seats": 1,
+          "seats": 15,
         },
       ],
       "type": "availability-plan/day",

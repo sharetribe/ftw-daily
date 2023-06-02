@@ -23,7 +23,7 @@ const checkSelected = (options, selectedOptions) => {
 
 const IconCheck = props => {
   const isVisible = props.isVisible;
-  const classes = isVisible ? css.checkIcon : classNames(css.checkIcon, css.hidden);
+  const classes = isVisible ? css.checkIcon : classNames(css.checkIcon, css.none);
 
   return (
     <svg width="9" height="9" xmlns="http://www.w3.org/2000/svg" className={classes}>
@@ -38,7 +38,7 @@ const IconCheck = props => {
 
 const Item = props => {
   const { label, isSelected } = props;
-  const labelClass = isSelected ? css.selectedLabel : css.notSelectedLabel;
+  const labelClass = isSelected ? css.selectedLabel : css.none;
   return (
     <li className={css.item}>
       <span className={css.iconWrapper}>

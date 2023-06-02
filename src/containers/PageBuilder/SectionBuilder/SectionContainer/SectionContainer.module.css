@@ -1,0 +1,30 @@
+@import '../../../../styles/customMediaQueries.css';
+
+.root {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 100%;
+  position: relative;
+
+  &:nth-of-type(odd) {
+    background-color: #fafafa;
+  }
+}
+
+.sectionContent {
+  padding: 32px 0;
+  position: relative;
+
+  @media (--viewportMedium) {
+    padding: 64px 0;
+  }
+}
+
+.backgroundImageWrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}

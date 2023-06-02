@@ -13,6 +13,7 @@
   z-index: 1;
 }
 
+/*
 .priceBreakdownContainer {
   padding: 0 24px;
   margin-bottom: 24px;
@@ -23,6 +24,21 @@
     margin-top: 1px;
   }
 }
+*/
+
+.priceBreakdownContainer {
+  padding: 0 24px;
+  margin-bottom: 37px;
+
+  @media (--viewportMedium) {
+    margin-bottom: 38px;
+  }
+  @media (--viewportLarge) {
+    /* we don't show price breakdown since it will be visible within 2nd column (detailsContainerDesktop) */
+    display: none;
+  }
+}
+
 
 .priceBreakdownTitle {
   /* Font */

@@ -64,7 +64,7 @@ class ProfileSettingsFormComponent extends Component {
           } = fieldRenderProps;
 
           const user = ensureCurrentUser(currentUser);
-
+          const isProvider = false  ; // neu: Hier muss noch eine Logik die den Provider identifiziert um dann die Bio info ein und auszublenden
           // First name
           const firstNameLabel = intl.formatMessage({
             id: 'ProfileSettingsForm.firstNameLabel',
@@ -277,6 +277,7 @@ class ProfileSettingsFormComponent extends Component {
                   />
                 </div>
               </div>
+              {!isProvider && ( //neu
               <div className={classNames(css.sectionContainer, css.lastSection)}>
                 <h3 className={css.sectionTitle}>
                   <FormattedMessage id="ProfileSettingsForm.bioHeading" />
@@ -292,6 +293,7 @@ class ProfileSettingsFormComponent extends Component {
                   <FormattedMessage id="ProfileSettingsForm.bioInfo" />
                 </p>
               </div>
+              )} {/* neu */}
               {submitError}
               <Button
                 className={css.submitButton}

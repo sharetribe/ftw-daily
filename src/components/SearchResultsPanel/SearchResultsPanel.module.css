@@ -3,25 +3,32 @@
 .root {
   display: flex;
   flex-direction: column;
+  
 }
 
 .listingCards {
   padding: 0 24px 96px 24px;
+  
+  
 
   @media (--viewportMedium) {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    
   }
 
   @media (--viewportLarge) {
     padding: 0 36px 96px 36px;
+    
   }
 }
 
 .listingCard {
   margin-bottom: 36px;
   flex-basis: 100%;
+  
+  
 
   @media (--viewportLarge) {
     /**
@@ -40,6 +47,7 @@
     */
     flex-basis: calc(50% - 12px);
     margin-right: 24px;
+    
   }
 
   @media (--viewportXLarge) {
@@ -60,6 +68,7 @@
 
     flex-basis: calc(33.33% - 16px);
     margin-right: 24px;
+    
   }
 }
 
@@ -72,6 +81,7 @@
 .listingCard:nth-of-type(2n) {
   @media screen and (min-width: 1024px) and (max-width: 1920px) {
     margin-right: 0;
+    
   }
 }
 
@@ -86,8 +96,10 @@
   margin-top: auto;
   background-color: var(--matterColorLight);
   padding: 0 24px;
+  
 
   @media (--viewportLarge) {
     padding: 0 36px;
+    
   }
 }

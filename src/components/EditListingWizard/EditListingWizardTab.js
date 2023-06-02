@@ -13,6 +13,7 @@ import {
   EditListingAvailabilityPanel,
   EditListingDescriptionPanel,
   EditListingFeaturesPanel,
+  EditListingExtrasPanel,
   EditListingLocationPanel,
   EditListingPhotosPanel,
   EditListingPoliciesPanel,
@@ -24,6 +25,7 @@ import css from './EditListingWizard.module.css';
 export const AVAILABILITY = 'availability';
 export const DESCRIPTION = 'description';
 export const FEATURES = 'features';
+export const EXTRAS = 'extras';
 export const POLICY = 'policy';
 export const LOCATION = 'location';
 export const PRICING = 'pricing';
@@ -33,9 +35,10 @@ export const PHOTOS = 'photos';
 export const SUPPORTED_TABS = [
   DESCRIPTION,
   FEATURES,
+  EXTRAS,
   POLICY,
   LOCATION,
-  PRICING,
+  //PRICING,
   AVAILABILITY,
   PHOTOS,
 ];
@@ -185,6 +188,20 @@ const EditListingWizardTab = props => {
         />
       );
     }
+    case EXTRAS: {
+      const submitButtonTranslationKey = isNewListingFlow
+        ? 'EditListingWizard.saveNewExtras'
+        : 'EditListingWizard.saveEditExtras';
+      return (
+        <EditListingExtrasPanel
+          {...panelProps(EXTRAS)}
+          submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
+          onSubmit={values => {
+            onCompleteEditListingWizardTab(tab, values);
+          }}
+        />
+      );
+    }
     case POLICY: {
       const submitButtonTranslationKey = isNewListingFlow
         ? 'EditListingWizard.saveNewPolicies'
@@ -213,6 +230,7 @@ const EditListingWizardTab = props => {
         />
       );
     }
+    /*
     case PRICING: {
       const submitButtonTranslationKey = isNewListingFlow
         ? 'EditListingWizard.saveNewPricing'
@@ -227,6 +245,7 @@ const EditListingWizardTab = props => {
         />
       );
     }
+    */
     case AVAILABILITY: {
       const submitButtonTranslationKey = isNewListingFlow
         ? 'EditListingWizard.saveNewAvailability'

@@ -9,11 +9,12 @@
 
 <html>
   <body>
-    <h1>Your booking request was accepted!</h1>
+    <h1>Ihre Buchungsanfrage wurde akzeptiert!</h1>
 
     {{#with transaction}}
-    <p>{{provider.display-name}} has accepted your booking request for {{listing.title}} from {{> format-date date=booking.start}} to {{> format-date date=booking.end}}.</p>
+    <p>{{provider.display-name}} hat Ihre Buchungsanfrage für {{listing.title}} von {{> format-date date=booking.start}} bis {{> format-date date=booking.end}} angenommen.</p>
 
+    <!--
     <p>We have charged {{> format-money money=payin-total}} from your credit card. Here's your receipt.</p>
 
     <table>
@@ -77,12 +78,12 @@
           <th style="text-align: left; padding-left: 20px;">{{> format-money money=payin-total}}</th>
         </tr>
       </tfoot>
-    </table>
+    </table> -->
 
     {{/with}}
 
     <hr />
 
-    <p>You have received this email notification because you are a member of {{marketplace.name}}. If you no longer wish to receive these emails, please contact {{marketplace.name}} team.</p>
+    <p>Sie haben diese E-Mail-Benachrichtigung erhalten, weil Sie ein Nutzer von {{marketplace.name}} sind. Wenn Sie diese E-Mails nicht mehr erhalten möchten, wenden Sie sich bitte an das {{Marktplatz.name}}-Team.</p>
   </body>
 </html>

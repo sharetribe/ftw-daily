@@ -57,13 +57,17 @@ const ListingCard = props => {
           </div>
         </div>
         <div className={classNames(css.info, { [css.borderRadiusInheritBottom]: !isInCarousel })}>
-          <div className={css.price}>{formattedPrice}</div>
+          
           <div className={css.name}>{title}</div>
         </div>
       </div>
     </a>
   );
 };
+
+/* entnommen line vor ClassName={css.name...
+<div className={css.price}>{formattedPrice}</div>
+*/ 
 
 ListingCard.defaultProps = {
   className: null,

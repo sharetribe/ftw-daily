@@ -1,7 +1,7 @@
 @import '../../styles/customMediaQueries.css';
 
 .mobileInputRoot {
-  width: 100%;
+  width: 50%;
 }
 
 .desktopInputRoot {
@@ -15,8 +15,8 @@
   /* Borders */
   border-bottom-width: var(--borderRadiusMobileSearch);
 
-  display: flex;
-  width: 24px;
+  display: absolute;
+  width: 21px;
   align-self: stretch;
   background-color: var(--matterColorLight);
 }

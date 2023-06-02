@@ -73,6 +73,22 @@ const TopbarDesktop = props => {
     return currentPage === page || isAccountSettingsPage ? css.currentPage : null;
   };
 
+  const isProvider = currentUserHasListings;
+
+  //neu
+  const yourListingsLink = isProvider ? (
+    <MenuItem key="ManageListingsPage">
+      <NamedLink
+        className={classNames(css.yourListingsLink, currentPageClass('ManageListingsPage'))}
+        name="ManageListingsPage"
+      >
+        <span className={css.menuItemBorder} />
+        <FormattedMessage id="TopbarDesktop.yourListingsLink" />
+      </NamedLink>
+    </MenuItem>
+  ) : null;
+// neu ende
+
   const profileMenu = authenticatedOnClientSide ? (
     <Menu>
       <MenuLabel className={css.profileMenuLabel} isOpenClassName={css.profileMenuIsOpen}>
@@ -80,13 +96,14 @@ const TopbarDesktop = props => {
       </MenuLabel>
       <MenuContent className={css.profileMenuContent}>
         <MenuItem key="ManageListingsPage">
-          <NamedLink
+          {yourListingsLink} 
+         {/*  <NamedLink
             className={classNames(css.yourListingsLink, currentPageClass('ManageListingsPage'))}
             name="ManageListingsPage"
           >
             <span className={css.menuItemBorder} />
             <FormattedMessage id="TopbarDesktop.yourListingsLink" />
-          </NamedLink>
+          </NamedLink> */}
         </MenuItem>
         <MenuItem key="ProfileSettingsPage">
           <NamedLink
@@ -142,7 +159,7 @@ const TopbarDesktop = props => {
         />
       </NamedLink>
       {search}
-      <NamedLink className={css.createListingLink} name="NewListingPage">
+      <NamedLink className={css.createListingLink} name="ProviderPage">
         <span className={css.createListing}>
           <FormattedMessage id="TopbarDesktop.createListing" />
         </span>

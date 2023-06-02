@@ -57,6 +57,7 @@
   composes: buttonFont from global;
 }
 
+/*
 .subTotalLineItem {
   composes: h4 from global;
   font-weight: var(--fontWeightBold);
@@ -71,6 +72,8 @@
   flex-direction: row;
   justify-content: space-between;
 }
+*/
+
 
 .lineItemTotal {
   composes: h4 from global;
@@ -88,13 +91,14 @@
   }
 }
 
+
 .smallFontStyles {
   font-family: var(--fontFamily);
   font-weight: var(--fontWeightMedium);
   font-size: 14px;
   line-height: 24px;
 }
-
+/*
 .itemLabel {
   composes: smallFontStyles;
   flex: 1;
@@ -104,9 +108,10 @@
   composes: smallFontStyles;
   margin: 0 0 0 10px;
 }
-
+*/
+/*
 .totalDivider {
-  /* dimensions */
+  // dimensions 
   width: 100%;
   height: 1px;
   margin: 12px 0 5px 0;
@@ -118,15 +123,19 @@
     margin: 7px 0 0px 0;
   }
 }
+*/
 
+/*
 .totalLabel {
   composes: smallFontStyles;
 }
 
+/*
 .totalPrice {
   composes: buttonFont from global;
   margin: 0 0 0 10px;
   padding-top: 0px;
+  
 }
 
 .feeInfo {
@@ -142,3 +151,4 @@
     padding-bottom: 21px;
   }
 }
+*/

@@ -1,0 +1,29 @@
+.code {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+  font-size: 90%;
+  padding: 0.2rem 0.5rem;
+  margin: 0 0.2rem;
+  white-space: nowrap;
+  background-color: var(--matterColorNegative);
+  border: 1px solid var(--matterColorAnti);
+  border-radius: 4px;
+}
+
+.codeBlock {
+  display: block;
+  margin: 8px 0;
+  padding: 8px;
+  background-color: var(--matterColorNegative);
+  border: 1px solid var(--matterColorAnti);
+  border-radius: 4px;
+  overflow-x: auto;
+
+  & .code {
+    padding: 0;
+    margin: 0;
+    background-color: inherit;
+    border: 0;
+    border-radius: 0;
+    white-space: pre-wrap;
+  }
+}

@@ -85,8 +85,8 @@
 
   /* ================ Border radius ================ */
 
-  --borderRadius: 2px;
-  --borderRadiusMobileSearch: 3px;
+  --borderRadius: 5px;
+  --borderRadiusMobileSearch: 5px;
 
   /* ================ Transition styles ================ */
 

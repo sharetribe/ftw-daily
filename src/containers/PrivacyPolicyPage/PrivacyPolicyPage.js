@@ -24,6 +24,13 @@ const PrivacyPolicyPageComponent = props => {
 
   const tabs = [
     {
+      text: intl.formatMessage({ id: 'ImpressumPage.ImpressumTabTitle' }),
+      selected: false,
+      linkProps: {
+        name: 'ImpressumPage',
+      },
+    },
+    {
       text: intl.formatMessage({ id: 'PrivacyPolicyPage.privacyTabTitle' }),
       selected: true,
       linkProps: {

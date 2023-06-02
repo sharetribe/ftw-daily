@@ -42,6 +42,10 @@
   composes: formMargins;
 }
 
+.kontaktanrede {
+  composes: formMargins;
+}
+
 .submitButton {
   margin-top: auto;
   margin-bottom: 24px;
@@ -51,5 +55,47 @@
     display: inline-block;
     width: 241px;
     margin-top: 100px;
+  }
+}
+
+.firstName {
+  width: calc(34% - 9px);
+}
+
+.lastName {
+  width: calc(66% - 9px);
+}
+
+
+
+.teilklein {
+  width: calc(16% - 9px);
+}
+
+.teilmittel {
+  width: calc(34% - 9px);
+}
+
+.teilgross {
+  width: calc(45% - 9px);
+}
+
+
+
+.halb {
+  width: calc(48% - 9px);
+}
+
+
+
+
+
+.nameContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+
+  @media (--viewportMedium) {
+    margin-bottom: 32px;
   }
 }

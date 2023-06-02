@@ -5,16 +5,17 @@
 
 <html>
   <body>
-    <h1>Your booking request was declined.</h1>
+    <h1>Ihre Buchungsanfrage wurde abgelehnt.</h1>
 
     {{#with transaction}}
-    <p>Unfortunately {{provider.display-name}} decided to decline your booking request for {{listing.title}} from {{> format-date date=booking.start}} to {{> format-date date=booking.end}}. You have not been billed.</p>
+    <p>Leider hat {{provider.display-name}} beschlossen, Ihre Buchungsanfrage für {{listing.title}} von {{> format-date date=booking.start}} bis {{> format-date date=booking.end}} abzulehnen.</p>
     {{/with}}
 
-    <p><a href="{{marketplace.url}}">Try to book something else instead</a></p>
+    <p><a href="{{marketplace.url}}">Versuchen Sie stattdessen, etwas anderes zu buchen</a></p>
 
     <hr />
 
-    <p>You have received this email notification because you are a member of {{marketplace.name}}. If you no longer wish to receive these emails, please contact {{marketplace.name}} team.</p>
+    <p>Sie haben diese E-Mail-Benachrichtigung erhalten, weil Sie ein Mitglied von {{Marktplatz.name}} sind. Wenn Sie diese E-Mails nicht mehr erhalten möchten, wenden Sie sich bitte an das {{Marktplatz.name}}-Team.</p>
   </body>
 </html>
+

@@ -25,11 +25,11 @@ class SearchMapPriceLabel extends Component {
   render() {
     const { className, rootClassName, intl, listing, onListingClicked, isActive } = this.props;
     const currentListing = ensureListing(listing);
-    const { price } = currentListing.attributes;
+    const { price } = "..." ;
 
     // Create formatted price if currency is known or alternatively show just the unknown currency.
     const formattedPrice =
-      price && price.currency === config.currency ? formatMoney(intl, price) : price.currency;
+      "...";
 
     const classes = classNames(rootClassName || css.root, className);
     const priceLabelClasses = classNames(css.priceLabel, { [css.priceLabelActive]: isActive });

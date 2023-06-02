@@ -9,6 +9,7 @@ import config from '../../config';
 
 import css from './ListingPage.module.css';
 
+
 class SectionMapMaybe extends Component {
   constructor(props) {
     super(props);
@@ -48,6 +49,8 @@ class SectionMapMaybe extends Component {
         ) : (
           <div className={css.map}>{map}</div>
         )}
+        
+        
       </div>
     );
   }

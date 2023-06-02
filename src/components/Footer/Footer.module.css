@@ -283,7 +283,7 @@
 /* Mobile: copyright mark and legal links for mobile */
 .copyrightAndTermsMobile {
   /* Positioning */
-  position: absolute;
+  position: relative;
   bottom: 0;
   left: 0;
   right: 0;
@@ -296,6 +296,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  
 
   background-color: var(--matterColorLight);
 
@@ -323,7 +324,12 @@
 }
 
 .tosAndPrivacyMobile {
-  flex-basis: 172px;
+  
+
+}
+
+.terms {
+  margin-right: 24px;
 }
 
 .privacy {

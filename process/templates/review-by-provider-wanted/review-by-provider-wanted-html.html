@@ -1,15 +1,15 @@
 <html>
   <body>
     {{#with transaction}}
-    <h1>How was your experience with {{customer.display-name}}? Write a review!</h1>
+    <h1>Wie war Ihre Erfahrung mit {{customer.display-name}}? Schreiben Sie eine Bewertung!</h1>
 
-    <p>{{customer.display-name}} recently booked {{listing.title}} from you. Please write {{customer.display-name}} a review to describe your experience. Reviews are important part of the {{marketplace.name}} community.</p>
+    <p>{{Kunde.display-name}} hat kürzlich {{listing.title}} bei Ihnen gebucht. Bitte schreiben Sie {{customer.display-name}} eine Bewertung, um Ihre Erfahrung zu beschreiben. Bewertungen sind ein wichtiger Teil der {{marketplace.name}} Community.</p>
 
-    <p><a href="{{marketplace.url}}/sale/{{url-encode id}}/details">Leave a review</a></p>
+    <p><a href="{{marketplace.url}}/sale/{{url-encode id}}/details">Eine Rezension hinterlassen</a></p>
     {{/with}}
 
     <hr />
 
-    <p>You have received this email notification because you are a member of {{marketplace.name}}. If you no longer wish to receive these emails, please contact {{marketplace.name}} team.</p>
+    <p>Sie haben diese E-Mail-Benachrichtigung erhalten, weil Sie ein Nutzer von {{marketplace.name}} sind. Wenn Sie diese E-Mails nicht mehr erhalten möchten, wenden Sie sich bitte an das {{Marktplatz.name}}-Team.</p>
   </body>
 </html>

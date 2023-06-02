@@ -305,9 +305,9 @@
     padding: 0;
   }
 }
-
+/*
 .desktopPriceValue {
-  /* Font */
+  
   composes: marketplaceModalTitleStyles from global;
   color: var(--marketplaceColor);
 
@@ -316,6 +316,7 @@
     margin-bottom: 1px;
   }
 }
+*/
 
 .desktopPerUnit {
   /* Font */
@@ -347,6 +348,7 @@
   width: 100%;
   margin-top: 0;
   margin-bottom: 0;
+  
   @media (--viewportMedium) {
     margin-top: 0;
     margin-bottom: 2px;

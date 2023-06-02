@@ -225,7 +225,7 @@ export class BookingDatesFormComponent extends Component {
               {bookingInfoMaybe}
               {loadingSpinnerMaybe}
               {bookingInfoErrorMaybe}
-
+            
               <p className={css.smallPrint}>
                 <FormattedMessage
                   id={
@@ -234,7 +234,7 @@ export class BookingDatesFormComponent extends Component {
                       : 'BookingDatesForm.youWontBeChargedInfo'
                   }
                 />
-              </p>
+              </p> 
               <div className={submitButtonClasses}>
                 <PrimaryButton type="submit">
                   <FormattedMessage id="BookingDatesForm.requestToBook" />

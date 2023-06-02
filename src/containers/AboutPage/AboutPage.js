@@ -35,53 +35,53 @@ const AboutPage = () => {
         </LayoutWrapperTopbar>
 
         <LayoutWrapperMain className={css.staticPageWrapper}>
-          <h1 className={css.pageTitle}>Experience the unique Finnish home sauna.</h1>
+          <h1 className={css.pageTitle}>Erfahren Sie mehr über unsere Plattform!</h1>
           <img className={css.coverImage} src={image} alt="My first ice cream." />
 
           <div className={css.contentWrapper}>
             <div className={css.contentSide}>
-              <p>Did you know that Finland has 3.2 million saunas - almost one sauna per person!</p>
+              <p>Wussten Sie, dass es allein in Wien über 500 Kfz-Werkstätten gibt? </p>
             </div>
 
             <div className={css.contentMain}>
               <h2>
-                Most of the Finnish saunas are located at the homes of individuals - indeed, most
-                people in Finland live in an apartment with sauna in it. In addition, lots of people
-                have lakeside summer cottages, which also typically come with a separate sauna
-                building near the waterfront.
+              Carlo bietet Autofahrern in Österreich die Möglichkeit, ihre Werkstatttermine 
+              bequem und einfach online zu buchen. Wir bieten eine schnelle und unkomplizierte Lösung, 
+              um Zeit und Mühe zu sparen. Unser Ziel ist es, sowohl Autofahrern als auch Werkstätten 
+              einen besseren Service zu bieten.
               </h2>
 
               <p>
-                To truly experience a Finnish sauna, you need to look beyond the public saunas, and
-                instead visit a real home or cottage sauna. Saunatime makes this possible for
-                everyone. All our saunas are owned by individuals willing to let tourists and other
-                curious visitors to enter their sacred spaces.
+              Sie möchten den richtigen Anbieter finden, um Ihren Werkstatttermin zu buchen? Mit unserer 
+              Plattform können Sie aus einer Vielzahl verschiedener Werkstätten wählen und den besten Service 
+              für Sie finden. Buchen Sie Ihren Werkstatttermin bequem und kostenlos online und sparen Sie Zeit und Mühe!
+
               </p>
 
-              <h3 className={css.subtitle}>Are you a sauna owner?</h3>
+              <h3 className={css.subtitle}>Betreiben Sie ein Werkstatt?</h3>
 
               <p>
-                Saunatime offers you a good way to earn some extra cash! If you're not using your
-                sauna every evening, why not rent it to other people while it's free. And even if
-                you are using your sauna every evening (we understand, it's so good), why not invite
-                other people to join you when the sauna is already warm! A shared sauna experience
-                is often a more fulfilling one.
+              Unsere Plattform bietet Werkstätten viele Vorteile. 
+              Sie ermöglicht es ihnen, mehr Kunden zu erreichen und ihren Service zu verbessern. 
+              Außerdem können sie ihre Termine online verwalten und Kunden eine bequeme Möglichkeit bieten, 
+              Termine zu buchen. Dadurch können sie Zeit und Mühe sparen und mehr Umsatz generieren.
               </p>
-
-              <h3 id="contact" className={css.subtitle}>
-                Create your own marketplace like Saunatime
-              </h3>
+              
+              <p> <b>&ensp;Verbessern Sie Ihren Service </b></p>
+              <p> <b>&ensp;Erreichen Sie mehr Kunden </b></p>
+              <p> <b>&ensp;Sparen Sie Zeit und Mühe </b></p>
+              <p> <b>&ensp;Generieren Sie mehr Umsatz </b></p>
+              
+              
+              <p><em>
+              Registrieren Sie sich jetzt!
+              </em></p>
+      
+              
               <p>
-                Saunatime is brought to you by the good folks at{' '}
-                <ExternalLink href="http://sharetribe.com">Sharetribe</ExternalLink>. Would you like
-                to create your own marketplace platform a bit like Saunatime? Or perhaps a mobile
-                app? With Sharetribe it's really easy. If you have a marketplace idea in mind, do
-                get in touch!
-              </p>
-              <p>
-                You can also checkout our{' '}
-                <ExternalLink href={siteFacebookPage}>Facebook</ExternalLink> and{' '}
-                <ExternalLink href={siteTwitterPage}>Twitter</ExternalLink>.
+                Sie können uns auch auf{' '}
+                <ExternalLink href={siteFacebookPage}>Facebook</ExternalLink> und{' '}
+                <ExternalLink href={siteTwitterPage}>Twitter</ExternalLink> besuchen.
               </p>
             </div>
           </div>

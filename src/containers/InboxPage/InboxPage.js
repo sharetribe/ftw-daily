@@ -267,8 +267,14 @@ export const InboxPageComponent = props => {
     providerNotificationCount,
     scrollingDisabled,
     transactions,
+    //neu
+    isProvider
   } = props;
-  const { tab } = params;
+  const defaultTab = isProvider ? 'sales' : 'orders';
+  const { tab  = defaultTab  } = params;
+/*     transactions,
+  } = props;
+  const { tab } = params; */
   const ensuredCurrentUser = ensureCurrentUser(currentUser);
 
   const validTab = tab === 'orders' || tab === 'sales';
@@ -281,6 +287,7 @@ export const InboxPageComponent = props => {
   const ordersTitle = intl.formatMessage({ id: 'InboxPage.ordersTitle' });
   const salesTitle = intl.formatMessage({ id: 'InboxPage.salesTitle' });
   const title = isOrders ? ordersTitle : salesTitle;
+  
 
   const toTxItem = tx => {
     const type = isOrders ? 'order' : 'sale';
@@ -326,14 +333,16 @@ export const InboxPageComponent = props => {
 
   const providerNotificationBadge =
     providerNotificationCount > 0 ? <NotificationBadge count={providerNotificationCount} /> : null;
-  const tabs = [
+    const tabs = [
     {
       text: (
+        isOrders && !isProvider && (
         <span>
           <FormattedMessage id="InboxPage.ordersTabTitle" />
         </span>
+        )
       ),
-      selected: isOrders,
+      selected: isOrders && !isProvider,
       linkProps: {
         name: 'InboxPage',
         params: { tab: 'orders' },
@@ -341,18 +350,22 @@ export const InboxPageComponent = props => {
     },
     {
       text: (
+        !(isOrders && !isProvider) && (
         <span>
           <FormattedMessage id="InboxPage.salesTabTitle" />
           {providerNotificationBadge}
         </span>
+        )
       ),
-      selected: !isOrders,
+      selected: !(isOrders && !isProvider),
       linkProps: {
         name: 'InboxPage',
         params: { tab: 'sales' },
       },
     },
   ];
+  
+ 
   const nav = <TabNav rootClassName={css.tabs} tabRootClassName={css.tab} tabs={tabs} />;
 
   return (
@@ -425,6 +438,8 @@ InboxPageComponent.propTypes = {
 const mapStateToProps = state => {
   const { fetchInProgress, fetchOrdersOrSalesError, pagination, transactionRefs } = state.InboxPage;
   const { currentUser, currentUserNotificationCount: providerNotificationCount } = state.user;
+  const isProvider = currentUser && currentUser.attributes && currentUser.attributes.provider;
+
   return {
     currentUser,
     fetchInProgress,
@@ -433,6 +448,7 @@ const mapStateToProps = state => {
     providerNotificationCount,
     scrollingDisabled: isScrollingDisabled(state),
     transactions: getMarketplaceEntities(state, transactionRefs),
+    isProvider,
   };
 };
 

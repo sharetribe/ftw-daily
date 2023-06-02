@@ -44,6 +44,8 @@ export const filters = [
     queryParamNames: ['dates'],
     config: {},
   },
+  
+  /*
   {
     id: 'price',
     label: 'Price',
@@ -60,6 +62,8 @@ export const filters = [
       step: 5,
     },
   },
+  */
+
   {
     id: 'keyword',
     label: 'Keyword',
@@ -73,30 +77,56 @@ export const filters = [
     // You can turn on/off ordering by distance from config.js file.
     config: {},
   },
+  
   {
     id: 'category',
     label: 'Category',
-    type: 'SelectSingleFilter',
-    group: 'secondary',
+    type: 'SelectMultipleFilter',
+    group: 'primary',
     queryParamNames: ['pub_category'],
     config: {
+
+      
       // "key" is the option you see in Flex Console.
       // "label" is set here for the UI only.
       // Note: label is not added through the translation files
       // to make filter customizations a bit easier.
+      //searchMode: 'has_all',
       options: [
-        { key: 'smoke', label: 'Smoke' },
-        { key: 'electric', label: 'Electric' },
-        { key: 'wood', label: 'Wood' },
-        { key: 'other', label: 'Other' },
+        { key: 'allemarken', label: 'Alle Marken' },
+        { key: 'marken', label: 'Vertragswerkstatt' },
+        { key: 'bestimmtemarken', label: 'Nur bestimmte Marken' },
+        { key: 'alleelektrisch', label: 'Alle E-Auto Marken' },
+        { key: 'oldtimer', label: 'Oldtimer' },
+        { key: 'audi', label: 'Audi' },
+        { key: 'bmw', label: 'BMW' },
+        { key: 'fiat', label: 'Fiat' },
+        { key: 'ford', label: 'Ford' },
+        { key: 'hyundai', label: 'Hyundai' },
+        { key: 'kia', label: 'KIA' },
+        { key: 'mazda', label: 'Mazda' },
+        { key: 'mercedes', label: 'Mercedes-Benz' },
+        { key: 'opel', label: 'Opel' },
+        { key: 'porsche', label: 'Porsche' },
+        { key: 'seat', label: 'Seat' },
+        { key: 'skoda', label: 'Skoda' },
+        { key: 'toyota', label: 'Toyota' },
+        { key: 'volvo', label: 'Volvo' },
+        { key: 'vw', label: 'Volkswagen' },
+
+        { key: 'sonstige', label: 'Sonstige' },
+
       ],
     },
   },
+
+  
+  
   {
     id: 'amenities',
     label: 'Amenities',
     type: 'SelectMultipleFilter',
-    group: 'secondary',
+    group: 'primary',
     queryParamNames: ['pub_amenities'],
     config: {
       // Optional modes: 'has_all', 'has_any'
@@ -109,41 +139,325 @@ export const filters = [
       // to make filter customizations a bit easier.
       options: [
         {
-          key: 'towels',
-          label: 'Towels',
+          key: 'reparatur',
+          label: 'Reparatur / Terminvereinbarung',
         },
         {
-          key: 'bathroom',
-          label: 'Bathroom',
+          key: 'fehleranalyse',
+          label: 'Problem- und Fehleranalyse',
         },
         {
-          key: 'swimming_pool',
-          label: 'Swimming pool',
+          key: 'sonstiges',
+          label: 'Sonstiges',
         },
         {
-          key: 'own_drinks',
-          label: 'Own drinks allowed',
+          key: 'reifen',
+          label: 'Reifen',
         },
         {
-          key: 'jacuzzi',
-          label: 'Jacuzzi',
+          key: 'reifenwechsel',
+          label: 'Reifenwechsel ',
         },
         {
-          key: 'audiovisual_entertainment',
-          label: 'Audiovisual entertainment',
+          key: 'reifenwuchten',
+          label: 'Reifen Wuchten',
         },
         {
-          key: 'barbeque',
-          label: 'Barbeque',
+          key: 'reinfeneinlagerung',
+          label: 'Reifeneinlagerung',
         },
         {
-          key: 'own_food_allowed',
-          label: 'Own food allowed',
+          key: 'reifenwaesche',
+          label: 'Reifenwäsche',
         },
+        {
+          key: 'reifenmontage',
+          label: 'Reifenmontage ',
+        },
+        {
+          key: 'reifenkauf',
+          label: 'Reifenkauf',
+        },
+        {
+          key: 'pickerl',
+          label: 'Pickerl-Überprüfung (§57a)',
+        },
+        {
+          key: 'klima',
+          label: 'Klima-Service',
+        },
+        {
+          key: 'inspektion',
+          label: 'Inspektion',
+        },
+        {
+          key: 'oelwechsel',
+          label: 'Ölwechsel',
+        },
+        {
+          key: 'urlaubscheck',
+          label: 'Urlaubscheck',
+        },
+        {
+          key: 'wintercheck',
+          label: 'Winter-Check',
+        },
+        {
+          key: 'fruehjahrscheck',
+          label: 'Frühjahrs-Check',
+        },
+        {
+          key: 'sicherheitscheck',
+          label: 'Sicherheits-Check',
+        },
+        {
+          key: 'mobilitaetscheck',
+          label: 'Mobilitäts-Check',
+        },
+        {
+          key: 'lichttest',
+          label: 'Lichttest',
+        },
+        {
+          key: 'fehlerdiagnose',
+          label: 'Fehlerdiagnose',
+        },
+        {
+          key: 'elektrik',
+          label: 'Elektrik',
+        },
+        {
+          key: 'lichtmaschine',
+          label: 'Lichtmaschine',
+        },
+        {
+          key: 'achsvermessung',
+          label: 'Achsvermessung',
+        },
+        {
+          key: 'zahnriemen',
+          label: 'Zahnriemen',
+        },
+        {
+          key: 'bremsenservice',
+          label: 'Bremsenservice',
+        },
+        {
+          key: 'bremsbelaege',
+          label: 'Bremsbeläge / -scheiben',
+        },
+        {
+          key: 'bremsfluessigkeitswechsel',
+          label: 'Bremsflüssigkeitswechsel',
+        },
+        {
+          key: 'abgasuntersuchung',
+          label: 'Abgasuntersuchung ',
+        },
+        {
+          key: 'autobatterie',
+          label: 'Autobatterie ',
+        },
+        {
+          key: 'auspuff',
+          label: 'Auspuff',
+        },
+        {
+          key: 'anlasser',
+          label: 'Anlasser',
+        },
+        {
+          key: 'fahrwerk',
+          label: 'Fahrwerk',
+        },
+        {
+          key: 'getriebe',
+          label: 'Getriebe',
+        },
+        {
+          key: 'glasreparatur',
+          label: 'Glasreparatur',
+        },
+        {
+          key: 'felgenaufbereitung',
+          label: 'Felgenaufbereitung ',
+        },
+        {
+          key: 'dachbox',
+          label: 'Dachbox-Montage ',
+        },
+        {
+          key: 'reinigung',
+          label: 'Reinigung',
+        },
+        {
+          key: 'reinigunginterieur',
+          label: 'Reinigung Interieur',
+        },
+        {
+          key: 'reinigungexterieur',
+          label: 'Reinigung Exterieur',
+        },
+        {
+          key: 'kratzerentfernen',
+          label: 'Kratzer und Dellen entfernen',
+        },
+        {
+          key: 'kratzerlackieren',
+          label: 'Kratzer lackieren',
+        },
+        {
+          key: 'pflege',
+          label: 'Pflege',
+        },
+        {
+          key: 'lackierarbeiten',
+          label: 'Lackierarbeiten',
+        },
+        {
+          key: 'spenglerarbeiten',
+          label: 'Spenglerarbeiten',
+        },
+        {
+          key: 'unfallschaden',
+          label: 'Unfallschaden reparieren',
+        },
+        {
+          key: 'abschlepphilfe',
+          label: 'Abschlepphilfe',
+        },
+        {
+          key: 'radio',
+          label: 'Radio und Soundsysteme',
+        },
+        {
+          key: 'altfahrzeugankauf',
+          label: 'Altfahrzeugankauf',
+        },
+        {
+          key: 'tuningauspuff',
+          label: 'Auspuff-Tuning',
+        },
+        {
+          key: 'tuningbremsen',
+          label: 'Bremsen-Tuning',
+        },
+        {
+          key: 'tuningfahrwerk',
+          label: 'Fahrwerk-Tuning',
+        },
+        {
+          key: 'tuningfelgen',
+          label: 'Felgen-Tuning',
+        },
+        {
+          key: 'tuninginterieurexterieur',
+          label: 'Tuning Interieur / Exterieur',
+        },
+        {
+          key: 'tuningzubehoer',
+          label: 'Tuning-Zubehör',
+        },
+        {
+          key: 'tuningchiptuning',
+          label: 'Chip-Tuning',
+        },
+        
       ],
     },
   },
+
+
+
+  
+
+  {
+    id: 'extras',
+    label: 'Zusatzservices',
+    type: 'SelectMultipleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_extras'],
+    config: {
+      // Optional modes: 'has_all', 'has_any'
+      // https://www.sharetribe.com/api-reference/marketplace.html#extended-data-filtering
+      searchMode: 'has_all',
+      options: [
+        { key: 'expresstermin', label: 'Express-Termin' },
+        { key: 'holservice', label: 'Hol- und Bringservice' },
+        { key: 'nachtannahme', label: 'Nachtannahme' },
+        { key: 'ersatzfahrzeug', label: 'Ersatzfahrzeug' },
+        { key: 'zubehoer', label: 'Zubehör-Shop' },
+        { key: 'finanzierungsberatung', label: 'Finanzierungsberatung' },
+        { key: 'versicherungsberatung', label: 'Versicherungsberatung' },
+        { key: 'waschstraße', label: 'Waschstraße' },
+        { key: 'bankomat', label: 'Bankomatkassa' },
+        { key: 'wlan', label: 'WLAN' },
+        { key: 'oeffentlicherverkehr', label: 'Gute öffentliche Verkehranbindung' },
+        { key: 'kaffee', label: 'Kaffee' },
+        { key: 'warten', label: 'Warteraum' },
+
+      ],
+    },
+  },
+
+  {
+    id: 'branche',
+    label: 'Branche',
+    type: 'SelectMultipleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_category'],
+    config: {
+
+      
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for the UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      //searchMode: 'has_all',
+      options: [
+        { key: 'kfzmeister', label: 'Kfz Reparatur Meisterbetrieb' },
+        { key: 'karosseriefachbetrieb', label: 'Karosserie Fachbetrieb' },
+        { key: 'lackierfachbetrieb', label: 'Autolackier Fachbetrieb' },
+        { key: 'pruefstelle', label: 'Prüfstelle nach §57a' },
+        { key: 'meisterbetrieb', label: 'Meisterbetrieb' },
+        { key: 'dellentechniker', label: 'Zertifizierter Dellentechniker' },
+        { key: 'fahrzeugaufbereitung', label: 'Zertifizierter Fachbetrieb Fahrzeugaufbereitung' },
+        { key: 'service', label: 'Service Leistungen' },
+        { key: 'sonstige', label: 'Sonstige' },
+
+      ],
+    },
+  },
+
+  {
+    id: 'land',
+    label: 'Land',
+    //type: 'SelectSingleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_category'],
+    config: {
+
+      
+      // "key" is the option you see in Flex Console.
+      // "label" is set here for the UI only.
+      // Note: label is not added through the translation files
+      // to make filter customizations a bit easier.
+      //searchMode: 'has_all',
+      options: [
+        { key: 'austria', label: 'AT - Österreich' },
+
+      ],
+    },
+  },
+
+
+
+
 ];
+
+  //expresstermin, holservice, nachtannahme, ersatzfahrzeug, waschstraße, wlan, bankomat, zubehoer, versicherungsberatung, finanzierungsberatung, oeffentlicherverkehr, 
+  //dellentechniker, karosseriefachbetrieb, meisterbetrieb, pruefstelle, 
+  //allemarken, marken
 
 export const sortConfig = {
   // Enable/disable the sorting control in the SearchPage

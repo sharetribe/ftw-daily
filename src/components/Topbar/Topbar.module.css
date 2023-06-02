@@ -33,6 +33,7 @@
 .home {
   display: flex;
   padding: calc((var(--topbarHeight) - var(--Topbar_logoHeight)) / 2) 24px;
+  
 }
 
 .logoutButton {
@@ -79,6 +80,7 @@
 .menuIcon,
 .searchMenuIcon {
   margin: 9px 0;
+  
 }
 
 .notificationDot {
@@ -137,6 +139,7 @@
   position: relative;
   height: 100%;
   margin-top: 94px;
+  
 }
 
 .mobileHelp {
