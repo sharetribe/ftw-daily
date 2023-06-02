@@ -26,8 +26,6 @@ const SectionHeading = props => {
     isOwnListing,
   } = props;
 
-
-
   const unitType = config.bookingUnitType;
   const isNightly = unitType === LINE_ITEM_NIGHT;
   const isDaily = unitType === LINE_ITEM_DAY;
@@ -40,7 +38,6 @@ const SectionHeading = props => {
 
   const favorite =
     currentUser?.attributes?.profile.protectedData?.favorite || [];
-
 
   const handleClick = e => {
     e.preventDefault();
@@ -59,16 +56,15 @@ const SectionHeading = props => {
           protectedData:
             { favorite }
         });
-
     }
   };
-
 
   return (
     <div className={css.sectionHeading}>
       <div className={css.desktopPriceContainer}>
-      
+
       </div>
+
       <div className={css.heading}>
         <h1 className={css.title}>{hostLink}</h1>
         <div className={css.author}>

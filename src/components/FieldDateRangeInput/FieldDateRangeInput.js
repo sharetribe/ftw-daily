@@ -121,7 +121,7 @@ class FieldDateRangeInputComponent extends Component {
     const { onBlur, onFocus, type, checked, ...restOfInput } = input;
     const inputProps = {
       unitType,
-      dayUnitType,
+     
       onBlur: this.handleBlur,
       onFocus: this.handleFocus,
       useMobileMargins,

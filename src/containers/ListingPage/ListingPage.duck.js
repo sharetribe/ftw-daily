@@ -70,7 +70,7 @@ const listingPageReducer = (state = initialState, action = {}) => {
       return { ...state, showListingError: payload };
 
     case FETCH_REVIEWS_REQUEST:
-      return { ...state, fetchReviewsError: null };
+      return { ...state, fetchReviewsError: null, ratings: 0, reviews: [] };
     case FETCH_REVIEWS_SUCCESS:
       return { ...state, reviews: payload };
     case FETCH_TOTALBOOKING_SUCCESS:
