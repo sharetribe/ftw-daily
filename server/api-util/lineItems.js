@@ -32,25 +32,15 @@ const CUSTOMER_COMMISSION_PERCENTAGE = 3;
  * @returns {Array} lineItems
  */
 exports.transactionLineItems = (listing, bookingData) => {
-  let lineItems = []
+  let lineItems = [];
   const unitPrice = listing.attributes.price;
   const { startDate, endDate, serviceSetup, numberOfPets } = bookingData;
-  console.log('serviceSetup', serviceSetup)
-  console.log('numberOfPets', numberOfPets)
-  // console.log(bookingData, '^^^^ ^^^^ => bookingData');
-console.log('listing', listing)
 
-const discount = listing.attributes.publicData.discountlengthOfStays
-console.log('discount', discount)
-const DISCOUNT_COMMISSION_PERCENTAGE = -discount
-
-const letofstay = listing.attributes.publicData.lengthOfStays
-
-
-const diffBetweenDays = moment(endDate).diff(startDate, 'days');
-
-
-const yy = letofstay <= diffBetweenDays;
+  const discount = listing.attributes.publicData.discountlengthOfStays
+  const DISCOUNT_COMMISSION_PERCENTAGE = -discount
+  const letofstay = listing.attributes.publicData.lengthOfStays
+  const diffBetweenDays = moment(endDate).diff(startDate, 'days');
+  const yy = letofstay <= diffBetweenDays;
 
   /**
    * If you want to use pre-defined component and translations for printing the lineItems base price for booking,
@@ -68,27 +58,6 @@ const yy = letofstay <= diffBetweenDays;
     quantity: calculateQuantityFromDates(startDate, endDate, bookingUnitType),
     includeFor: ['customer', 'provider'],
   };
-  // )
-  // const providerCommissions = {
-  //   code: 'line-item/provider-commission',
-  //   unitPrice: calculateTotalFromLineItems(lineItems),
-  //   percentage: PROVIDER_COMMISSION_PERCENTAGE,
-  //   includeFor: ['provider'],
-  // };
-  // if(providerCommissions){
-
-  //   lineItems.push(providerCommissions)
-  // }
-  // const customerCommissions = {
-  //   code: 'line-item/customer-commission',
-  //   unitPrice: calculateTotalFromLineItems(lineItems),
-  //   percentage: CUSTOMER_COMMISSION_PERCENTAGE,
-  //   includeFor: ['customer'],
-  // };
-  // if(customerCommissions){
-
-  //   lineItems.push(customerCommissions)
-  // }
 
   if (serviceSetup.filter(e => e == 'overnightsStay')?.length) {
     lineItems.push(booking)
@@ -109,13 +78,12 @@ const yy = letofstay <= diffBetweenDays;
     code: 'line-item/discount-commission',
     unitPrice: calculateTotalFromLineItems(lineItems),
     percentage: DISCOUNT_COMMISSION_PERCENTAGE,
-    includeFor: ['customer','provider'],
+    includeFor: ['customer', 'provider'],
   };
- 
-    if (discount_price && yy) {
+
+  if (discount_price && yy) {
     lineItems.push(discount_price)
   }
-
 
   const customerCommissions = {
     code: 'line-item/customer-commission',
@@ -130,17 +98,13 @@ const yy = letofstay <= diffBetweenDays;
     percentage: PROVIDER_COMMISSION_PERCENTAGE,
     includeFor: ['provider'],
   };
+
   if (PROVIDER_COMMISSION_PERCENTAGE && typeof PROVIDER_COMMISSION_PERCENTAGE == 'number') {
     lineItems.push(providerCommissions);
   }
   if ((CUSTOMER_COMMISSION_PERCENTAGE && typeof CUSTOMER_COMMISSION_PERCENTAGE == 'number')) {
     lineItems.push(customerCommissions);
   }
- 
-
-  // console.log('customerCommieeeeeeessions', lineItems)
 
   return lineItems;
 };
-
-

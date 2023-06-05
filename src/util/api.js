@@ -117,10 +117,13 @@ export const createUserWithIdp = body => {
 };
 
 export const fetchTotalBooking = body => {
- 
   return post('/api/fetch-total-bookings', body);
 };
+
 export const contact_us = body => {
-  
   return post('/api/sendmail', body);
+};
+
+export const updateTransactionMetaData = body => {
+  return post('/api/update-meta-data', body);
 };

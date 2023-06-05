@@ -1,3 +1,5 @@
+const moment = require('moment');
+const { updateTransactionMetaData } = require('./intergation-api');
 const { transactionLineItems } = require('../api-util/lineItems');
 const { getSdk, getTrustedSdk, handleError, serialize } = require('../api-util/sdk');
 
@@ -17,7 +19,7 @@ module.exports = (req, res) => {
 
       return getTrustedSdk(req);
     })
-    .then(trustedSdk => {
+    .then(async trustedSdk => {
       const { params } = bodyParams;
 
       // Add lineItems to the body params
@@ -29,10 +31,26 @@ module.exports = (req, res) => {
         },
       };
 
+      const diffOfDays = moment(bookingData.startDate).diff(moment(), 'days');
+
+      let transaction;
       if (isSpeculative) {
         return trustedSdk.transactions.initiateSpeculative(body, queryParams);
+      } else {
+        transaction = await trustedSdk.transactions.initiate(body, queryParams);
       }
-      return trustedSdk.transactions.initiate(body, queryParams);
+      transaction = transaction.data.data;
+      return updateTransactionMetaData({
+        body: {
+          id: transaction.id.uuid,
+          metadata: {
+            acceptedDate: diffOfDays > 2
+              ? moment().add(48, 'hours').format("MMM D, YYYY")
+              : moment(bookingData.startDate).format("MMM D, YYYY")
+          },
+          fallBack: true
+        }
+      });
     })
     .then(apiResponse => {
       const { status, statusText, data } = apiResponse;

@@ -372,10 +372,10 @@ export class BookingDatesFormComponent extends Component {
                             <span className={css.boldText}>Day care stay</span> = AUD{dayprice}.00  per day</div> : null}
                       </>
                   }</> : <div>
-                  {(detail) ?
+                  {/* {(detail) ?
                     <div className={css.pricingDescription}>
                       <span>Minimum_Price</span> = AUD{min}.00
-                    </div> : null}
+                    </div> : null} */}
 
                   {(detail?.find((e) => e == "overnightsStay")) ?
                     <div className={css.pricingDescription}>

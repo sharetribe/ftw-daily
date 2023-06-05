@@ -56,42 +56,24 @@ exports.calculateTotalPriceFromPercentage = (unitPrice, percentage) => {
   return new Money(numericTotalPrice, unitPrice.currency);
 };
 
-exports.calculateTotalPrice = (serviceSetup,listing,unitPrice,numberOfPets) => {
-  //console.log(listing.attributes.publicData.pricepet.dayCare.overnightsStayPrice1*100, '^^^^ ^^^^ => listing.attributes.publicData.pricepet.dayCare.overnightsStayPrice1*100');
-  
-  if(serviceSetup.filter(e=> e =='overnightsStay')?.length && numberOfPets == 1){
- console.log(new Money(parseInt(listing.attributes.publicData.pricepet.overNight.overnightsStayPrice1*100),unitPrice.currency), '^^^^ ^^^^ => new Money(parseInt(listing.attributes.publicData.pricepet.overNight.overnightsStayPrice1*100),unitPrice.currency)');
- 
-     return new Money(parseInt(listing.attributes.publicData.pricepet.overNight.overnightsStayPrice1*100),unitPrice.currency);
- }
- else if(serviceSetup.filter(e=> e =='overnightsStay')?.length && numberOfPets == 2){
-  
-   return new Money(parseInt(listing.attributes.publicData.pricepet.overNight.overnightsStayPrice2*100),unitPrice.currency);
-}
-else if(serviceSetup.filter(e=> e =='overnightsStay')?.length && numberOfPets == 3){
-  
-   return new Money(parseInt(listing.attributes.publicData.pricepet.overNight.overnightsStayPrice3*100),unitPrice.currency);
+exports.calculateTotalPrice = (serviceSetup, listing, unitPrice, numberOfPets) => {
+  if (serviceSetup.filter(e => e == 'overnightsStay')?.length && numberOfPets == 1) {
+    return new Money(parseInt(listing.attributes.publicData.pricepet.overNight.overnightsStayPrice1 * 100), unitPrice.currency);
+  } else if (serviceSetup.filter(e => e == 'overnightsStay')?.length && numberOfPets == 2) {
+    return new Money(parseInt(listing.attributes.publicData.pricepet.overNight.overnightsStayPrice2 * 100), unitPrice.currency);
+  } else if (serviceSetup.filter(e => e == 'overnightsStay')?.length && numberOfPets == 3) {
+    return new Money(parseInt(listing.attributes.publicData.pricepet.overNight.overnightsStayPrice3 * 100), unitPrice.currency);
+  }
 }
 
-}
-
-exports.calculateTotalPrices = (serviceSetup,listing,unitPrice,numberOfPets) => {
-  //console.log(listing.attributes.publicData.pricepet.dayCare.overnightsStayPrice1*100, '^^^^ ^^^^ => listing.attributes.publicData.pricepet.dayCare.overnightsStayPrice1*100');
-  
- 
- if(serviceSetup.filter(e=> e =='dayCareStay')?.length && numberOfPets == 1){
- 
-   return new Money(parseInt(listing.attributes.publicData.pricepet.dayCare.dayCareStay1*100),unitPrice.currency);
-}
-else if(serviceSetup.filter(e=> e =='dayCareStay')?.length && numberOfPets == 2){
-  
-   return new Money(parseInt(listing.attributes.publicData.pricepet.dayCare.dayCareStay2*100),unitPrice.currency);
-}
-else if(serviceSetup.filter(e=> e =='dayCareStay')?.length && numberOfPets == 3){
-  //console.log(new Money(parseInt(listing.attributes.publicData.pricepet.overNight.overnightsStayPrice1*100),unitPrice.currency), '^^^^ ^^^^ => new Money(listing.attributes.publicData.pricepet.overNight.overnightsStayPrice1*100,unitPrice.currency)');
-   return new Money(parseInt(listing.attributes.publicData.pricepet.dayCare.dayCareStay3*100),unitPrice.currency);
-}
-
+exports.calculateTotalPrices = (serviceSetup, listing, unitPrice, numberOfPets) => {
+  if (serviceSetup.filter(e => e == 'dayCareStay')?.length && numberOfPets == 1) {
+    return new Money(parseInt(listing.attributes.publicData.pricepet.dayCare.dayCareStay1 * 100), unitPrice.currency);
+  } else if (serviceSetup.filter(e => e == 'dayCareStay')?.length && numberOfPets == 2) {
+    return new Money(parseInt(listing.attributes.publicData.pricepet.dayCare.dayCareStay2 * 100), unitPrice.currency);
+  } else if (serviceSetup.filter(e => e == 'dayCareStay')?.length && numberOfPets == 3) {
+    return new Money(parseInt(listing.attributes.publicData.pricepet.dayCare.dayCareStay3 * 100), unitPrice.currency);
+  }
 }
 
 
@@ -156,7 +138,7 @@ exports.calculateQuantityFromDates = (startDate, endDate, type) => {
  */
 exports.calculateLineTotal = lineItem => {
   const { code, unitPrice, quantity, percentage, seats, units } = lineItem;
-console.log('unitPrice', unitPrice)
+
   if (quantity) {
     return this.calculateTotalPriceFromQuantity(unitPrice, quantity);
   } else if (percentage) {
@@ -179,14 +161,12 @@ console.log('unitPrice', unitPrice)
 exports.calculateTotalFromLineItems = lineItems => {
   const totalPrice = lineItems.reduce((sum, lineItem) => {
     const lineTotal = this.calculateLineTotal(lineItem);
-   
+
     return getAmountAsDecimalJS(lineTotal).add(sum);
   }, 0);
   // Get total price as Number (and validate that the conversion is safe)
   const numericTotalPrice = convertDecimalJSToNumber(totalPrice);
-  console.log(numericTotalPrice, 'hre')
   const unitPrice = lineItems[0].unitPrice;
-console.log('numericTotalPrice', numericTotalPrice)
   return new Money(numericTotalPrice, unitPrice.currency);
 };
 
