@@ -122,13 +122,17 @@ export const ListingCardComponent = props => {
       <div className={css.info}>
         <div className={css.price}>
           {/* <div className={favCard ? css.favInfo : css.info}> */}
-          <div className={css.price}>
+          <div className={css.priceBox}>
             <div className={css.priceValue} title={priceTitle}>
               {formattedPrice}
             </div>
             {/* <div className={css.perUnit}>
                 <FormattedMessage id={unitTranslationKey} />
               </div> */}
+
+            <div className={css.authorInfo}>
+              <FormattedMessage id="ListingCard.hostedBy" values={{ authorName }} />
+            </div>
           </div>
 
           <div className={css.mainInfo}>
@@ -139,10 +143,6 @@ export const ListingCardComponent = props => {
               longWordClass: css.longWord,
             })}
           </div> */}
-            <div className={css.authorInfo}>
-              <FormattedMessage id="ListingCard.hostedBy" values={{ authorName }} />
-
-            </div>
             <div> {headline}</div>
             {pageName == "SearchPage" && ratings && reviews ?
               <div className={css.ratingStar}>

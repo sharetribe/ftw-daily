@@ -39,8 +39,12 @@
 }
 
 .countOption {
-  font-weight: 600;
-  font-size: 20px;
+  font-weight: 500;
+  color: #6b6b6b;
+  margin-top: -1px;
+  margin-bottom: 1px;
+  cursor: pointer;
+  font-size: 14px;
 }
 
 .pricingBox {

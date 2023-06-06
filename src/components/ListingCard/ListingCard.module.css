@@ -70,6 +70,12 @@
   }
 }
 
+.priceBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .price {
   /* Layout */
   display: flex;
@@ -77,6 +83,7 @@
   justify-content: flex-start;
   flex-shrink: 0;
   margin-right: 18px;
+  width: 100%;
 
   @media(max-width: 768px) {
     margin-right: 0;
