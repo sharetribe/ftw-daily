@@ -72,6 +72,20 @@
             </tr>
             {{/if}}
           {{/eq}}
+          {{#eq "line-item/day" code}}
+          {{#if seats}}
+          <tr class="top-row">
+            <td colspan="2">{{> format-money money=unit-price}} &times; {{number units}} {{inflect units "day" "days"}}</td>
+          </tr>
+          <tr class="bottom-row">
+            <td colspan="2">Seats &times; {{number seats}}</td>
+          </tr>
+          {{else}}
+          <tr class="top-row bottom-row">
+            <td colspan="2">{{> format-money money=unit-price}} &times; {{number quantity}} {{inflect quantity "day" "days"}}</td>
+          </tr>
+          {{/if}}
+        {{/eq}}
         {{/contains}}
       {{/each}}
       </tbody>

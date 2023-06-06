@@ -77,6 +77,24 @@
               <th class="right">{{> format-money money=line-total}}</th>
             </tr>
           {{/eq}}
+          {{#eq "line-item/day" code}}
+          {{#if seats}}
+          <tr class="top-row">
+            <td colspan="2">{{> format-money money=unit-price}} &times; {{number units}} {{inflect units "day" "days"}}</td>
+          </tr>
+          <tr class="bottom-row">
+            <td colspan="2">Seats &times; {{number seats}}</td>
+          </tr>
+          {{else}}
+          <tr class="top-row bottom-row">
+            <td colspan="2">{{> format-money money=unit-price}} &times; {{number quantity}} {{inflect quantity "day" "days"}}</td>
+          </tr>
+          {{/if}}
+          <tr class="top-row">
+            <th class="left">Subtotal</th>
+            <th class="right">{{> format-money money=line-total}}</th>
+          </tr>
+        {{/eq}}
 
           {{#eq "line-item/provider-commission" code}}
             <tr class="bottom-row">
