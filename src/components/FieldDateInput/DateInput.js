@@ -201,7 +201,7 @@ class DateInputComponent extends Component {
           onFocusChange={this.onFocusChange}
           date={date}
           onDateChange={this.onDateChange}
-          placeholder={placeholder}
+          placeholder={"choose date"}
           screenReaderInputMessage={screenReaderInputText}
           phrases={{ closeDatePicker: closeDatePickerText, clearDate: clearDateText }}
           isDayBlocked={isDayBlocked}

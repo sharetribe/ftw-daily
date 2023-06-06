@@ -60,11 +60,13 @@
    :from :state/preauthorized,
    :to :state/declined}
   {:name :transition/expire,
-   :at
-   {:fn/plus
-     [{:fn/timepoint [:time/first-entered-state :state/preauthorized]}
+  :at
+   {:fn/min
+    [{:fn/plus
+      [{:fn/timepoint [:time/first-entered-state :state/preauthorized]}
        {:fn/period ["P2D"]}]}
-    
+     {:fn/minus
+      [{:fn/timepoint [:time/booking-start]} {:fn/period ["PT1M"]}]}]},    
    :actions
    [{:name :action/decline-booking}
     {:name :action/calculate-full-refund}

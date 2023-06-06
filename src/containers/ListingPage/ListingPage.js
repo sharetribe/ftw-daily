@@ -103,7 +103,7 @@ export class ListingPageComponent extends Component {
     const listingId = new UUID(params.id);
     const listing = getListing(listingId);
 
-  
+
     const { bookingDates, ...bookingData } = values;
 
 
@@ -208,11 +208,6 @@ export class ListingPageComponent extends Component {
       onUpdateProfile
     } = this.props;
 
-
-
-    //  const firstName = currentUser?.attributes?.profile?.firstName
-
-
     const listingId = new UUID(rawParams.id);
     const isPendingApprovalVariant = rawParams.variant === LISTING_PAGE_PENDING_APPROVAL_VARIANT;
     const isDraftVariant = rawParams.variant === LISTING_PAGE_DRAFT_VARIANT;
@@ -228,7 +223,6 @@ export class ListingPageComponent extends Component {
     const listingType = isDraftVariant
       ? LISTING_PAGE_PARAM_TYPE_DRAFT
       : LISTING_PAGE_PARAM_TYPE_EDIT;
-
 
     const listingTab = isDraftVariant ? 'photos' : 'description';
 
@@ -268,7 +262,7 @@ export class ListingPageComponent extends Component {
         })}
       </span>
     );
-  
+
     const bookingTitle = (
       <FormattedMessage id="ListingPage.bookingTitle" values={{ title: richTitle }} />
     );
@@ -293,7 +287,7 @@ export class ListingPageComponent extends Component {
             <LayoutWrapperTopbar>{topbar}</LayoutWrapperTopbar>
 
             <LayoutWrapperMain>
-            
+
             </LayoutWrapperMain>
             <LayoutWrapperFooter>
               <Footer />
@@ -345,10 +339,7 @@ export class ListingPageComponent extends Component {
     // Because listing can be never showed with banned or deleted user we don't have to provide
     // banned or deleted display names for the function
 
-    const Verificationphoto = currentListing?.attributes?.publicData?.idProofImage?.link
-
-    
-    
+    // const Verificationphoto = currentListing?.attributes?.publicData?.idProofImage?.link
     const authorDisplayName = userDisplayNameAsString(ensuredAuthor, '');
 
     const { formattedPrice, priceTitle } = priceData(price, intl);
@@ -396,16 +387,15 @@ export class ListingPageComponent extends Component {
       <>
         {authorDisplayName}
       </>
-      
     );
 
-
-    const yourself = publicData && publicData.headline;
-    const yourselfexp = publicData && publicData.yespet;
-    const yourselfservice = publicData && publicData.service;
-    const yourselfschedule = publicData && publicData.schedule;
-    const Yourselfdohavepets = publicData && publicData.dohavepets;
-
+    const {
+      headline: yourself,
+      yespet: yourselfexp,
+      service: yourselfservice,
+      schedule: yourselfschedule,
+      dohavepets: Yourselfdohavepets,
+    } = publicData || {};
 
     const categoryOptions = findOptionsForSelectFilter('category', filterConfig);
     const category =
@@ -473,7 +463,7 @@ export class ListingPageComponent extends Component {
                     onContactUser={this.onContactUser}
                     yourself={yourself}
                   />
-                 
+
                   <SectionDescriptionMaybe description={description} />
                   <div className={css.featureList}>
                     <div className={css.headingFeature}>
@@ -513,15 +503,14 @@ export class ListingPageComponent extends Component {
 
                   {/* <p>Verification</p>
                 
-                          <iframe
-                            className="doc"
-                            src={`https://docs.google.com/gview?url=${Verificationphoto}&embedded=true`}
-                          /> */}
-                    
-                  <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
-                
+                    <iframe
+                      className="doc"
+                      src={`https://docs.google.com/gview?url=${Verificationphoto}&embedded=true`}
+                    /> */}
 
-                   <SectionHostMaybe
+                  <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
+
+                  <SectionHostMaybe
                     title={title}
                     listing={currentListing}
                     authorDisplayName={authorDisplayName}
@@ -533,7 +522,7 @@ export class ListingPageComponent extends Component {
                     onSubmitEnquiry={this.onSubmitEnquiry}
                     currentUser={currentUser}
                     onManageDisableScrolling={onManageDisableScrolling}
-                  />  
+                  />
                 </div>
                 <BookingPanel
                   className={css.bookingPanel}
@@ -691,7 +680,7 @@ const mapDispatchToProps = dispatch => ({
   onSendEnquiry: (listingId, message) => dispatch(sendEnquiry(listingId, message)),
   onInitializeCardPaymentData: () => dispatch(initializeCardPaymentData()),
   onUpdateProfile: payload => dispatch(updateProfile(payload)),
-  
+
 });
 
 // Note: it is important that the withRouter HOC is **outside** the

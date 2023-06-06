@@ -120,7 +120,7 @@ const estimatedTransaction = (bookingStart, bookingEnd, lineItems, userRole) => 
 };
 
 const EstimatedBreakdownMaybe = props => {
-  const { unitType,dayUnitType, startDate, endDate } = props.bookingData;
+  const { unitType, dayUnitType, startDate, endDate, singlebooking } = props.bookingData;
   const lineItems = props.lineItems;
 
   // Currently the estimated breakdown is used only on ListingPage where we want to
@@ -138,6 +138,7 @@ const EstimatedBreakdownMaybe = props => {
       userRole={userRole}
       unitType={unitType}
       dayUnitType={dayUnitType}
+      singlebooking={singlebooking}
       transaction={tx}
       booking={tx.booking}
       dateType={DATE_TYPE_DATE}

@@ -56,7 +56,6 @@ class FieldDateRangeInputComponent extends Component {
       className,
       rootClassName,
       unitType,
-      dayUnitType,
       startDateId,
       startDateLabel,
       endDateId,

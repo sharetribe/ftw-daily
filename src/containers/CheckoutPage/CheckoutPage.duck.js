@@ -171,7 +171,7 @@ export const initiateOrder = (orderParams, transactionId) => (dispatch, getState
     ? TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY
     : TRANSITION_REQUEST_PAYMENT;
   const isPrivilegedTransition = isPrivileged(transition);
-  console.log(orderParams, '^^^^ ^^^^ => orderParams');
+ 
   
 
   const bookingData = {
@@ -307,7 +307,7 @@ export const speculateTransaction = (orderParams, transactionId) => (dispatch, g
 
   // If we already have a transaction ID, we should transition, not
   // initiate.
-  // console.log(orderParams.bookingData.serviceSetup, '^^^^ ^^^^ => orderParams');
+  
   
   const isTransition = !!transactionId;
   const transition = isTransition

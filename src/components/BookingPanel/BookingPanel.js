@@ -12,14 +12,15 @@ import config from '../../config';
 import { ModalInMobile, Button } from '../../components';
 import { BookingDatesForm } from '../../forms';
 
-import css from './BookingPanel.module.css';
 import SectionFeatures5Maybe from '../../containers/ListingPage/SectionFeatures5Maybe';
 import SectionServicesetup from '../../containers/ListingPage/SectionSerivesetup';
 import { findOptionsForSelectFilter } from '../../util/search';
 import SectionFeaturesMaybe from '../../containers/ListingPage/SectionFeaturesMaybe';
 import SectionFeatures3Maybe from '../../containers/ListingPage/SectionFeatures3Maybe';
 import SectionFeatures4Maybe from '../../containers/ListingPage/SectionFeatures4Maybe';
-import SectionFeatures2Maybe from '../../containers/ListingPage/SectionFeatures2Maybe'
+// import SectionFeatures2Maybe from '../../containers/ListingPage/SectionFeatures2Maybe'
+
+import css from './BookingPanel.module.css';
 
 // This defines when ModalInMobile shows content as Modal
 const MODAL_BREAKPOINT = 1023;
@@ -80,8 +81,6 @@ const BookingPanel = props => {
     fetchLineItemsInProgress,
     fetchLineItemsError,
     dayUnitType,
-
-
     publicData,
   } = props;
 
@@ -90,19 +89,18 @@ const BookingPanel = props => {
   const hasListingState = !!listing.attributes.state;
   const isClosed = hasListingState && listing.attributes.state === LISTING_STATE_CLOSED;
   const showBookingDatesForm = hasListingState && !isClosed;
-  const showClosedListingHelpText = listing.id && isClosed;
+  // const showClosedListingHelpText = listing.id && isClosed;
   const { formattedPrice, priceTitle } = priceData(price, intl);
   const isBook = !!parse(location.search).book;
-  const letofstay = listing.attributes.publicData.lengthOfStays
 
-
+  // const letofstay = listing.attributes.publicData.lengthOfStays;
   const numberPet = listing?.attributes?.publicData?.numberOfPets;
 
-  const subTitleText = !!subTitle
-    ? subTitle
-    : showClosedListingHelpText
-      ? intl.formatMessage({ id: 'BookingPanel.subTitleClosedListing' })
-      : null;
+  // const subTitleText = !!subTitle
+  //   ? subTitle
+  //   : showClosedListingHelpText
+  //     ? intl.formatMessage({ id: 'BookingPanel.subTitleClosedListing' })
+  //     : null;
 
   const isNightly = unitType === LINE_ITEM_NIGHT;
   const isDaily = unitType === LINE_ITEM_DAY;
@@ -117,14 +115,13 @@ const BookingPanel = props => {
   const titleClasses = classNames(titleClassName || css.bookingTitle);
 
   const amenityOptions = findOptionsForSelectFilter('typeOfPets', filterConfig);
-  const amenityOptions2 = findOptionsForSelectFilter('numberOfPets', filterConfig);
+  // const amenityOptions2 = findOptionsForSelectFilter('numberOfPets', filterConfig);
   const amenityOptions3 = findOptionsForSelectFilter('sizeOfdogs', filterConfig);
   const amenityOptions4 = findOptionsForSelectFilter('housingConditions', filterConfig);
   const amenityOptions5 = findOptionsForSelectFilter('petInHome', filterConfig);
   const amenityOptions6 = findOptionsForSelectFilter('serviceSetup', filterConfig);
   const selectedOptions = publicData && publicData.numberOfPets ? publicData.numberOfPets : [];
-
-  const detail = listing?.attributes?.publicData?.serviceSetup;
+  // const detail = listing?.attributes?.publicData?.serviceSetup;
 
   return (
     <div className={classes}>

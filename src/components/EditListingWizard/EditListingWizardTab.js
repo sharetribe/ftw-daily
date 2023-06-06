@@ -38,13 +38,13 @@ export const SUPPORTED_TABS = [
   FEATURES,
   POLICY,
   //LOCATION,
- PRICING,
- 
+  PRICING,
+
   AVAILABILITY,
   YOURSELF,
   PHOTOS,
-VERIFICATION,
- 
+  VERIFICATION,
+
 ];
 
 const pathParamsToNextTab = (params, tab, marketplaceTabs) => {
@@ -179,7 +179,7 @@ const EditListingWizardTab = props => {
           onSubmit={values => {
             onCompleteEditListingWizardTab(tab, values);
           }}
-          currentUser={ currentUser}
+          currentUser={currentUser}
         />
       );
     }
@@ -234,7 +234,7 @@ const EditListingWizardTab = props => {
           {...panelProps(PRICING)}
           submitButtonText={intl.formatMessage({ id: submitButtonTranslationKey })}
           onSubmit={values => {
-           // console.log(values,"values");
+            // console.log(values,"values");
             onCompleteEditListingWizardTab(tab, values);
           }}
         />
@@ -303,7 +303,7 @@ const EditListingWizardTab = props => {
             onCompleteEditListingWizardTab(tab, values);
           }}
           onUpdateImageverificationOrder={onUpdateImageverificationOrder}
-          />
+        />
       );
     }
     default:
@@ -353,7 +353,7 @@ EditListingWizardTab.propTypes = {
       title: string,
     }),
     images: array,
- 
+
   }),
 
   handleCreateFlowTabScrolling: func.isRequired,

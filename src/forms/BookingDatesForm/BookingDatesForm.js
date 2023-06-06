@@ -6,10 +6,10 @@ import classNames from 'classnames';
 import moment from 'moment';
 import config from '../../config';
 import { FormattedMessage, intlShape, injectIntl } from '../../util/reactIntl';
-import { required, bookingDatesRequired, composeValidators, requiredFieldArrayCheckbox } from '../../util/validators';
+import { required, bookingDatesRequired, composeValidators, requiredFieldArrayCheckbox, bookingDateRequired } from '../../util/validators';
 import { START_DATE, END_DATE } from '../../util/dates';
 import { propTypes } from '../../util/types';
-import { Form, IconSpinner, PrimaryButton, FieldDateRangeInput, FieldCheckbox, FieldRadioButton, FieldTextInput, FieldSelect } from '../../components';
+import { Form, IconSpinner, PrimaryButton, FieldDateRangeInput, FieldCheckbox, FieldRadioButton, FieldTextInput, FieldSelect, FieldDateInput } from '../../components';
 import EstimatedBreakdownMaybe from './EstimatedBreakdownMaybe';
 import { findOptionsForSelectFilter } from '../../util/search';
 
@@ -37,7 +37,15 @@ export class BookingDatesFormComponent extends Component {
   // focus on that input, otherwise continue with the
   // default handleSubmit function.
   handleFormSubmit(e) {
-    const { startDate, endDate } = e.bookingDates || {};
+    let { startDate, endDate, date } = e.bookingDates || {};
+    const { serviceSetup } = e;
+    const singlebooking = serviceSetup && serviceSetup.length == 1 && serviceSetup.filter((e) => e == "dayCareStay").length == 1;
+
+    if (singlebooking) {
+      startDate = date;
+      endDate = moment(startDate).add(1, 'day').toDate();
+      Object.assign(e.bookingDates, { startDate, endDate });
+    }
     if (!startDate) {
       e.preventDefault();
       this.setState({ focusedInput: START_DATE });
@@ -54,11 +62,16 @@ export class BookingDatesFormComponent extends Component {
   // In case you add more fields to the form, make sure you add
   // the values here to the bookingData object.
   handleOnChange(formValues) {
-    const { startDate, endDate } =
+    let { startDate, endDate, date } =
       formValues.values && formValues.values.bookingDates ? formValues.values.bookingDates : {};
 
-    const { serviceSetup } = formValues.values;
-    const { numberOfPets } = formValues.values;
+    const { serviceSetup, numberOfPets } = formValues.values;
+    const singlebooking = serviceSetup && serviceSetup.length == 1 && serviceSetup.filter((e) => e == "dayCareStay").length == 1;
+
+    if (singlebooking) {
+      startDate = date;
+      endDate = moment(startDate).add(1, 'day').toDate();
+    }
 
     const listingId = this.props.listingId;
     const isOwnListing = this.props.isOwnListing;
@@ -114,6 +127,7 @@ export class BookingDatesFormComponent extends Component {
             isOwnListing,
             submitButtonWrapperClassName,
             unitType,
+            dayUnitType,
             values,
             timeSlots,
             listing,
@@ -123,27 +137,22 @@ export class BookingDatesFormComponent extends Component {
             lineItems,
             fetchLineItemsInProgress,
             fetchLineItemsError,
-            dayUnitType,
             firstname,
           } = fieldRenderProps;
 
-          const pricepet = listing?.attributes?.publicData?.pricepet
+          const dayprice = listing.attributes.publicData.pricepet.dayCare.dayCareStay1;
+          const nightprice = listing?.attributes?.publicData?.pricepet?.overNight.overnightsStayPrice1;
 
-          const dayprice = listing.attributes.publicData.pricepet.dayCare.dayCareStay1
-
-
-          const nightprice = listing?.attributes?.publicData?.pricepet?.overNight.overnightsStayPrice1
           function findMinPrice(var_args) {
             return Array.prototype.reduce.call(arguments, function (prev, current) {
               return prev && current ? Math.min(prev, current) : prev || current;
             });
           }
-          const min = findMinPrice(nightprice, dayprice)
-          const { startDate, endDate } = values && values.bookingDates ? values.bookingDates : {};
+
+          const min = findMinPrice(nightprice, dayprice);
+          let { startDate, endDate, date } = values && values.bookingDates ? values.bookingDates : {};
 
           const options = findOptionsForSelectFilter('serviceSetup', filterConfig);
-          //const numberPet = findOptionsForSelectFilter('numberOfPets', filterConfig);
-
 
           const numberPetArray = numberPet && numberPet == 3
             ? [1, 2, 3]
@@ -151,15 +160,20 @@ export class BookingDatesFormComponent extends Component {
               ? [1, 2]
               : [1];
 
+          const singlebooking = values.serviceSetup && values.serviceSetup.length == 1 && values.serviceSetup.filter((e) => e == "dayCareStay").length == 1;
 
+          if (singlebooking) {
+            startDate = date;
+            endDate = moment(startDate).add(1, 'day').toDate();
+          }
+      
           const detail = listing?.attributes?.publicData?.serviceSetup;
-          const discount = listing.attributes.publicData.discountlengthOfStays
-          const letofstay = listing.attributes.publicData.lengthOfStays
+          const discount = listing.attributes.publicData.discountlengthOfStays;
+          const letofstay = listing.attributes.publicData.lengthOfStays;
 
-
-          const phoneRequiredMessage = intl.formatMessage({
-            id: 'EditListingDescriptionForm.phoneRequired',
-          });
+          // const phoneRequiredMessage = intl.formatMessage({
+          //   id: 'EditListingDescriptionForm.phoneRequired',
+          // });
 
           const bookingStartLabel = intl.formatMessage({
             id: 'BookingDatesForm.bookingStartTitle',
@@ -198,6 +212,7 @@ export class BookingDatesFormComponent extends Component {
                 dayUnitType,
                 startDate,
                 endDate,
+                singlebooking
               }
               : null;
 
@@ -276,8 +291,10 @@ export class BookingDatesFormComponent extends Component {
                   )
                 })}
                 {/* {values.serviceSetup ? "required this field" :null} */}
-                {letofstay && discount ?
-                  <div className={css.discountBooking}>" {firstname} is offering a {discount}% discount if you book more than {letofstay} days "</div>
+                {letofstay && discount
+                  ? <div className={css.discountBooking}>
+                    " {firstname} is offering a {discount}% discount if you book more than {letofstay} days "
+                  </div>
                   : null}
               </div>
               <FieldSelect
@@ -302,28 +319,40 @@ export class BookingDatesFormComponent extends Component {
 
               </FieldSelect>
 
-              <FieldDateRangeInput
-                className={css.bookingDates}
-                name="bookingDates"
-                unitType={unitType}
-                dayUnitType={dayUnitType}
-                startDateId={`${formId}.bookingStartDate`}
-                startDateLabel={bookingStartLabel}
-                startDatePlaceholderText={startDatePlaceholderText}
-                endDateId={`${formId}.bookingEndDate`}
-                endDateLabel={bookingEndLabel}
-                endDatePlaceholderText={endDatePlaceholderText}
-                focusedInput={this.state.focusedInput}
-                onFocusedInputChange={this.onFocusedInputChange}
-                format={identity}
-                timeSlots={timeSlots}
-                useMobileMargins
-                validate={composeValidators(
-                  required(requiredMessage),
-                  bookingDatesRequired(startDateErrorMessage, endDateErrorMessage)
-                )}
-                disabled={fetchLineItemsInProgress}
-              />
+              {singlebooking
+                ? <FieldDateInput
+                  className={css.bookingDates}
+                  name="bookingDates"
+                  startDatePlaceholderText={startDatePlaceholderText}
+                  format={identity}
+                  timeSlots={timeSlots}
+                  validate={composeValidators(
+                    required(requiredMessage),
+                    bookingDateRequired(startDateErrorMessage)
+                  )}
+               
+                />
+                : <FieldDateRangeInput
+                  className={css.bookingDates}
+                  name="bookingDates"
+                  unitType={singlebooking ? dayUnitType : unitType}
+                  startDateId={`${formId}.bookingStartDate`}
+                  startDateLabel={bookingStartLabel}
+                  startDatePlaceholderText={startDatePlaceholderText}
+                  endDateId={`${formId}.bookingEndDate`}
+                  endDateLabel={bookingEndLabel}
+                  endDatePlaceholderText={endDatePlaceholderText}
+                  focusedInput={this.state.focusedInput}
+                  onFocusedInputChange={this.onFocusedInputChange}
+                  format={identity}
+                  timeSlots={timeSlots}
+                  useMobileMargins
+                  validate={composeValidators(
+                    required(requiredMessage),
+                    bookingDatesRequired(startDateErrorMessage, endDateErrorMessage)
+                  )}
+                  disabled={fetchLineItemsInProgress}
+                />}
 
               {bookingInfoMaybe}
               {loadingSpinnerMaybe}
@@ -351,40 +380,37 @@ export class BookingDatesFormComponent extends Component {
               <div className={css.pricingBox}>
                 <div className={css.pricingHeading}>Pricing</div>
 
-
-                {values?.serviceSetup ? <>
-                  {
-                    values?.serviceSetup?.length === 2 ?
-                      <>
-                        {(values.serviceSetup) ?
-                          <div className={css.pricingDescription}>
-                            <span className={css.boldText}>Minimum_Price</span> = AUD{min}.00
-                          </div> : null}
-                      </>
-                      :
-                      <>
-                        {(values?.serviceSetup?.find((e) => e == "overnightsStay")) ?
-                          <div className={css.pricingDescription}>
-                            <span className={css.boldText}>Over night rate</span> = AUD{nightprice}.00  per night </div> : null}
-
-                        {(values?.serviceSetup?.find((e) => e == "dayCareStay")) ?
-                          <div className={css.pricingDescription}>
-                            <span className={css.boldText}>Day care stay</span> = AUD{dayprice}.00  per day</div> : null}
-                      </>
-                  }</> : <div>
-                  {/* {(detail) ?
+                {values?.serviceSetup
+                  ? values?.serviceSetup?.length === 2
+                    ? values.serviceSetup
+                      ? <div className={css.pricingDescription}>
+                        <span className={css.boldText}>Minimum_Price</span> = AUD{min}.00
+                      </div>
+                      : null
+                    : <>
+                      {values?.serviceSetup?.find((e) => e == "overnightsStay")
+                        ? <div className={css.pricingDescription}>
+                          <span className={css.boldText}>Over night rate</span> = AUD{nightprice}.00  per night </div>
+                        : null}
+                      {values?.serviceSetup?.find((e) => e == "dayCareStay")
+                        ? <div className={css.pricingDescription}>
+                          <span className={css.boldText}>Day care stay</span> = AUD{dayprice}.00  per day</div>
+                        : null}
+                    </>
+                  : <div>
+                    {/* {(detail) ?
                     <div className={css.pricingDescription}>
                       <span>Minimum_Price</span> = AUD{min}.00
                     </div> : null} */}
 
-                  {(detail?.find((e) => e == "overnightsStay")) ?
-                    <div className={css.pricingDescription}>
-                      <span>Over night rate</span> = AUD{nightprice}.00  per night </div> : null}
+                    {(detail?.find((e) => e == "overnightsStay")) ?
+                      <div className={css.pricingDescription}>
+                        <span>Over night rate</span> = AUD{nightprice}.00  per night </div> : null}
 
-                  {(detail?.find((e) => e == "dayCareStay")) ?
-                    <div className={css.pricingDescription}>
-                      <span>Day care stay</span> = AUD{dayprice}.00  per day</div> : null}
-                </div>
+                    {(detail?.find((e) => e == "dayCareStay")) ?
+                      <div className={css.pricingDescription}>
+                        <span>Day care stay</span> = AUD{dayprice}.00  per day</div> : null}
+                  </div>
 
                 }
               </div>

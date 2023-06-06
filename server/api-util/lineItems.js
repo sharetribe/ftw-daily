@@ -1,12 +1,12 @@
 const { calculateQuantityFromDates, calculateTotalFromLineItems, calculateTotalPrice, calculateTotalPrices } = require('./lineItemHelpers');
 const moment = require('moment');
 const { types } = require('sharetribe-flex-sdk');
-const { Money } = types;
+// const { Money } = types;
 
 // This bookingUnitType needs to be one of the following:
 // line-item/night, line-item/day or line-item/units
 const bookingUnitType = 'line-item/night';
-const bookingUnitDatType = 'line-item/day';
+const bookingUnitDayType = 'line-item/day';
 const PROVIDER_COMMISSION_PERCENTAGE = -12;
 const CUSTOMER_COMMISSION_PERCENTAGE = 3;
 
@@ -32,13 +32,13 @@ const CUSTOMER_COMMISSION_PERCENTAGE = 3;
  * @returns {Array} lineItems
  */
 exports.transactionLineItems = (listing, bookingData) => {
-  let lineItems = [];
+  const lineItems = [];
   const unitPrice = listing.attributes.price;
   const { startDate, endDate, serviceSetup, numberOfPets } = bookingData;
 
-  const discount = listing.attributes.publicData.discountlengthOfStays
-  const DISCOUNT_COMMISSION_PERCENTAGE = -discount
-  const letofstay = listing.attributes.publicData.lengthOfStays
+  const discount = listing.attributes.publicData.discountlengthOfStays;
+  const DISCOUNT_COMMISSION_PERCENTAGE = -discount;
+  const letofstay = listing.attributes.publicData.lengthOfStays;
   const diffBetweenDays = moment(endDate).diff(startDate, 'days');
   const yy = letofstay <= diffBetweenDays;
 
@@ -59,18 +59,18 @@ exports.transactionLineItems = (listing, bookingData) => {
     includeFor: ['customer', 'provider'],
   };
 
-  if (serviceSetup.filter(e => e == 'overnightsStay')?.length) {
+  if (serviceSetup.filter(e => e == 'overnightsStay').length) {
     lineItems.push(booking)
   }
 
   const dayCareStay = {
-    code: bookingUnitDatType,
+    code: bookingUnitDayType,
     unitPrice: calculateTotalPrices(serviceSetup, listing, unitPrice, numberOfPets),
-    quantity: calculateQuantityFromDates(startDate, endDate, bookingUnitDatType),
+    quantity: calculateQuantityFromDates(startDate, endDate, bookingUnitDayType),
     includeFor: ['customer', 'provider'],
   };
 
-  if (serviceSetup.filter(e => e == 'dayCareStay')?.length) {
+  if (serviceSetup.filter(e => e == 'dayCareStay').length) {
     lineItems.push(dayCareStay)
   }
 
