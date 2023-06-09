@@ -5,11 +5,13 @@
 
 <html>
   <body>
-    <h1>Customer cancel booking.</h1>
+    <h1>"Booking Cancellation"</h1>
 
     {{#with transaction}}
-    <p>Unfortunately {{customer.display-name}} decided to cancel your booking request for {{listing.title}} from {{> format-date date=booking.start}} to {{> format-date date=booking.end}}. </p>
-    <p>{{customer.display-name}} will be refunded fully  because cancel before 48 hr.</p>
+    <p>Unfortunately {{customer.display-name}} decided to cancel your booking request for {{provider.display-name}}from {{> format-date date=booking.start}} to {{> format-date date=booking.end}}. </p>
+    
+    <p> The hosting fee will be refunded in the full to the {{customer.display-name}} since the cancellation was made
+      before 48 hrs from start date of the service”.</p>
     {{/with}}
    
 

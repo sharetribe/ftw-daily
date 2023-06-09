@@ -25,6 +25,7 @@ import { formatMoney } from '../../util/currency';
 import {
   AvatarLarge,
   BookingPanel,
+  Modal,
   NamedLink,
   PrimaryButton,
   ReviewModal,
@@ -88,6 +89,7 @@ export class TransactionPanelComponent extends Component {
       sendMessageFormFocused: false,
       isReviewModalOpen: false,
       reviewSubmitted: false,
+      tosModalOpen: false,
     };
     this.isMobSaf = false;
     this.sendMessageFormName = 'TransactionPanel.SendMessageForm';
@@ -197,7 +199,8 @@ export class TransactionPanelComponent extends Component {
       fetchLineItemsInProgress,
       fetchLineItemsError,
       transactionCancel,
-      cancelCustomerInProgress
+      cancelCustomerInProgress,
+      tosModalOpen
     } = this.props;
 
 
@@ -226,20 +229,20 @@ export class TransactionPanelComponent extends Component {
     const stateDataFn = tx => {
       if (txIsEnquired(tx)) {
         const transitions = Array.isArray(nextTransitions)
-        ? nextTransitions.map(transition => {
-          return transition.attributes.name;
-        })
+          ? nextTransitions.map(transition => {
+            return transition.attributes.name;
+          })
           : [];
         const hasCorrectNextTransition =
           transitions.length > 0 && transitions.includes(TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY);
-          return {
-            headingState: HEADING_ENQUIRED,
-            showBookingPanel: isCustomer && !isProviderBanned && hasCorrectNextTransition,
-          };
-        } else if (txIsPaymentPending(tx)) {
-          return {
-            headingState: HEADING_PAYMENT_PENDING,
-            showDetailCardHeadings: isCustomer,
+        return {
+          headingState: HEADING_ENQUIRED,
+          showBookingPanel: isCustomer && !isProviderBanned && hasCorrectNextTransition,
+        };
+      } else if (txIsPaymentPending(tx)) {
+        return {
+          headingState: HEADING_PAYMENT_PENDING,
+          showDetailCardHeadings: isCustomer,
         };
       } else if (txIsPaymentExpired(tx)) {
         return {
@@ -284,7 +287,7 @@ export class TransactionPanelComponent extends Component {
     const deletedListingTitle = intl.formatMessage({
       id: 'TransactionPanel.deletedListingTitle',
     });
-    
+
     const {
       authorDisplayName,
       customerDisplayName,
@@ -295,45 +298,50 @@ export class TransactionPanelComponent extends Component {
     const { publicData, geolocation } = currentListing.attributes;
     const location = publicData && publicData.location ? publicData.location : {};
     const listingTitle = currentListing.attributes.deleted
-    ? deletedListingTitle
-    : currentListing.attributes.title;
-    
+      ? deletedListingTitle
+      : currentListing.attributes.title;
+
     const unitType = config.bookingUnitType;
     const dayUnitType = config.bookingDayUnitType;
     const isNightly = unitType === LINE_ITEM_NIGHT;
     const isDaily = unitType === LINE_ITEM_DAY;
 
-    
+
+    const handleClick = () => {
+      this.setState({ tosModalOpen: true })
+    };
+
+
     const unitTranslationKey = isNightly
-    ? 'TransactionPanel.perNight'
-    : isDaily
-    ? 'TransactionPanel.perDay'
-    : 'TransactionPanel.perUnit';
-    
+      ? 'TransactionPanel.perNight'
+      : isDaily
+        ? 'TransactionPanel.perDay'
+        : 'TransactionPanel.perUnit';
+
     const price = currentListing.attributes.price;
     const bookingSubTitle = price
-    ? `${formatMoney(intl, price)} ${intl.formatMessage({ id: unitTranslationKey })}`
-    : '';
-    
+      ? `${formatMoney(intl, price)} ${intl.formatMessage({ id: unitTranslationKey })}`
+      : '';
+
     const firstImage =
-    currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
-    
+      currentListing.images && currentListing.images.length > 0 ? currentListing.images[0] : null;
+
     const saleButtons = (
       <SaleActionButtonsMaybe
-      showButtons={stateData.showSaleButtons}
-      acceptInProgress={acceptInProgress}
-      declineInProgress={declineInProgress}
-      acceptSaleError={acceptSaleError}
-      declineSaleError={declineSaleError}
-      onAcceptSale={() => onAcceptSale(currentTransaction.id)}
-      onDeclineSale={() => onDeclineSale(currentTransaction.id)}
+        showButtons={stateData.showSaleButtons}
+        acceptInProgress={acceptInProgress}
+        declineInProgress={declineInProgress}
+        acceptSaleError={acceptSaleError}
+        declineSaleError={declineSaleError}
+        onAcceptSale={() => onAcceptSale(currentTransaction.id)}
+        onDeclineSale={() => onDeclineSale(currentTransaction.id)}
       />
-      );
-      
-      const showSendMessageForm =
+    );
+
+    const showSendMessageForm =
       !isCustomerBanned && !isCustomerDeleted && !isProviderBanned && !isProviderDeleted;
-     
-      
+
+
     const sendMessagePlaceholder = intl.formatMessage(
       { id: 'TransactionPanel.sendMessagePlaceholder' },
       { name: otherUserDisplayNameString }
@@ -483,8 +491,10 @@ export class TransactionPanelComponent extends Component {
                 <div className={css.desktopActionButtons}>{saleButtons}</div>
               ) : null}
 
-              {stateData.showCancelButton ? <PrimaryButton inProgress={cancelCustomerInProgress} onClick={() => transactionCancel(transaction.id.uuid , canCancelBooking)} >Cancel</PrimaryButton> : null}
-               {/* <PrimaryButton onClick={() => transactionCancel(transaction.id.uuid , canCancelBooking)} >Cancel</PrimaryButton>  */}
+              {/* {stateData.showCancelButton ? <PrimaryButton inProgress={cancelCustomerInProgress} onClick={() => transactionCancel(transaction.id.uuid, canCancelBooking)} >Cancel</PrimaryButton> : null} */}
+
+              {stateData.showCancelButton ? <PrimaryButton inProgress={cancelCustomerInProgress} onClick={handleClick}>Cancel</PrimaryButton> : null}
+
 
             </div>
           </div>
@@ -500,6 +510,31 @@ export class TransactionPanelComponent extends Component {
           sendReviewInProgress={sendReviewInProgress}
           sendReviewError={sendReviewError}
         />
+         {stateData.showCancelButton ?
+        <Modal
+          id="AuthenticationPage.tos"
+          isOpen={this.state.tosModalOpen}
+          onClose={() => this.setState({ tosModalOpen: false })}
+          usePortal
+          onManageDisableScrolling={onManageDisableScrolling}
+        >
+          <div className={css.termsWrapper}>
+            {canCancelBooking ? 
+            <div>
+              “Are you sure you want to cancel this booking? 100% refund of
+              the hosting fee will be applicable provided the booking is requested to be
+              cancelled before 48 hrs of the start date of the service”.
+              </div> 
+              :
+               <div>
+                “Are you sure you want to cancel this booking? No refund of the
+                hosting fee will be applicable provided the booking is requested to be cancelled
+                within 48 hrs of the start date of the service”.
+                </div>}
+            {stateData.showCancelButton ? <PrimaryButton inProgress={cancelCustomerInProgress} onClick={() => transactionCancel(transaction.id.uuid, canCancelBooking)} >Yes</PrimaryButton> : null}
+            <PrimaryButton  onClick={() => this.setState({ tosModalOpen: false })}>No</PrimaryButton>
+          </div>
+        </Modal>:null}
       </div>
     );
   }

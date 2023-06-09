@@ -177,6 +177,17 @@
    :on :transition/cancel-customer-no-refund,
    :to :actor.role/provider,
    :template :booking-cancel-customer-no-refund}
+
+   {:name :notification/booking-request-cancel-customer-mail,
+   :on :transition/cancel-customer,
+   :to :actor.role/customer,
+   :template :booking-request-cancel-customer-mail}
+
+  {:name :notification/booking-no-refund-customer-mail,
+   :on :transition/cancel-customer-no-refund,
+   :to :actor.role/customer,
+   :template :booking-no-refund-customer-mail}
+
   {:name :notification/money-paid,
    :on :transition/complete,
    :to :actor.role/provider,

@@ -1,1 +1,1 @@
-{{transaction.customer.display-name}} declined your booking request
+{{transaction.customer.display-name}} Booking Cancellation 
