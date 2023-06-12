@@ -33,6 +33,9 @@
 .home {
   display: flex;
   padding: calc((var(--topbarHeight) - var(--Topbar_logoHeight)) / 2) 24px;
+  & img{
+    width: 100%;
+  }
 }
 
 .logoutButton {
