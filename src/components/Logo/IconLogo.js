@@ -19,9 +19,9 @@ const IconLogo = props => {
     //     fillRule="evenodd"
     //   />
     // </svg>
-    <>
+    <div className={className}>
       <img src={planeLogo} />
-    </>
+    </div>
   );
 };
 

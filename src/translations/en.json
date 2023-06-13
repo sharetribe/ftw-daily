@@ -46,6 +46,7 @@
   "BookingBreakdown.baseUnitDay": "{unitPrice} * {quantity, number} {quantity, plural, one {day} other {days}}",
   "BookingBreakdown.baseUnitNight": "{unitPrice} * {quantity, number} {quantity, plural, one {night} other {nights}}",
   "BookingBreakdown.baseUnitQuantity": "{unitPrice} * {quantity, number} {quantity, plural, one {person} other {persons}}",
+  "BookingBreakdown.bookingStart": "Booking start",
   "BookingBreakdown.bookingEnd": "Booking end",
   "BookingBreakdown.commission": "Booking fee *",
   "BookingBreakdown.commissionFeeNote": "* The fee helps us run the platform and provide the best possible service to you!",
