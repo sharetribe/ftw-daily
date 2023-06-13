@@ -510,31 +510,39 @@ export class TransactionPanelComponent extends Component {
           sendReviewInProgress={sendReviewInProgress}
           sendReviewError={sendReviewError}
         />
-         {stateData.showCancelButton ?
-        <Modal
-          id="AuthenticationPage.tos"
-          isOpen={this.state.tosModalOpen}
-          onClose={() => this.setState({ tosModalOpen: false })}
-          usePortal
-          onManageDisableScrolling={onManageDisableScrolling}
-        >
-          <div className={css.termsWrapper}>
-            {canCancelBooking ? 
-            <div>
-              “Are you sure you want to cancel this booking? 100% refund of
-              the hosting fee will be applicable provided the booking is requested to be
-              cancelled before 48 hrs of the start date of the service”.
-              </div> 
-              :
-               <div>
-                “Are you sure you want to cancel this booking? No refund of the
-                hosting fee will be applicable provided the booking is requested to be cancelled
-                within 48 hrs of the start date of the service”.
+        {stateData.showCancelButton ?
+          <Modal
+            id="AuthenticationPage.tos"
+            isOpen={this.state.tosModalOpen}
+            onClose={() => this.setState({ tosModalOpen: false })}
+            usePortal
+            onManageDisableScrolling={onManageDisableScrolling}
+          >
+            <div className={css.termsWrapper}>
+              {canCancelBooking ?
+                <div>
+                  Are you sure you want to cancel this booking? 
+                  <p>
+                  100% refund of
+                  the hosting fee will be applicable provided the booking is requested to be
+                  cancelled before 48 hrs of the start date of the service.
+                  </p>
+                </div>
+                :
+                <div>
+                  Are you sure you want to cancel this booking? 
+                  <p> refund of the
+                  hosting fee will be applicable provided the booking is requested to be cancelled
+                  within 48 hrs of the start date of the service.
+                  </p>
                 </div>}
-            {stateData.showCancelButton ? <PrimaryButton inProgress={cancelCustomerInProgress} onClick={() => transactionCancel(transaction.id.uuid, canCancelBooking)} >Yes</PrimaryButton> : null}
-            <PrimaryButton  onClick={() => this.setState({ tosModalOpen: false })}>No</PrimaryButton>
-          </div>
-        </Modal>:null}
+              <div className={css.bottomButton}>
+                {stateData.showCancelButton ?
+                  <PrimaryButton inProgress={cancelCustomerInProgress} onClick={() => transactionCancel(transaction.id.uuid, canCancelBooking)} >Yes</PrimaryButton> : null}
+                <PrimaryButton onClick={() => this.setState({ tosModalOpen: false })}>No</PrimaryButton>
+              </div>
+            </div>
+          </Modal> : null}
       </div>
     );
   }

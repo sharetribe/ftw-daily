@@ -75,7 +75,7 @@ exports.transactionLineItems = (listing, bookingData) => {
   }
 
   const discount_price = {
-    code: 'line-item/discount-commission',
+    code: 'line-item/discount',
     unitPrice: calculateTotalFromLineItems(lineItems),
     percentage: DISCOUNT_COMMISSION_PERCENTAGE,
     includeFor: ['customer', 'provider'],

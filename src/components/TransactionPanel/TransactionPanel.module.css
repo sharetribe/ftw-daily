@@ -480,3 +480,12 @@
   margin-top: 0;
   margin-bottom: 1px;
 }
+
+.bottomButton {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+  @media (max-width: 460px) {
+    flex-wrap: wrap;
+  }
+}
