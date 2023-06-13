@@ -166,7 +166,7 @@ export class BookingDatesFormComponent extends Component {
             startDate = date;
             endDate = moment(startDate).add(1, 'day').toDate();
           }
-      
+
           const detail = listing?.attributes?.publicData?.serviceSetup;
           const discount = listing.attributes.publicData.discountlengthOfStays;
           const letofstay = listing.attributes.publicData.lengthOfStays;
@@ -330,7 +330,7 @@ export class BookingDatesFormComponent extends Component {
                     required(requiredMessage),
                     bookingDateRequired(startDateErrorMessage)
                   )}
-               
+
                 />
                 : <FieldDateRangeInput
                   className={css.bookingDates}
@@ -384,7 +384,10 @@ export class BookingDatesFormComponent extends Component {
                   ? values?.serviceSetup?.length === 2
                     ? values.serviceSetup
                       ? <div className={css.pricingDescription}>
-                        <span className={css.boldText}>Minimum_Price</span> = AUD{min}.00
+                        <div>
+                          <span className={css.boldText}>Over night rate</span> = AUD{nightprice}.00  per night
+                        </div>
+                        <span className={css.boldText}>Day care stay</span> = AUD{dayprice}.00  per day
                       </div>
                       : null
                     : <>
