@@ -5,7 +5,7 @@
 
 <html>
   <body>
-    <h1>"Booking Cancellation"</h1>
+    <h1>Booking Cancellation</h1>
 
     {{#with transaction}}
     <!-- Unfortunately, Joseph S decided to cancel your booking request for Monika U from Jun 10, 
@@ -13,7 +13,7 @@
     <p>Unfortunately {{customer.display-name}} decided to cancel your booking request for {{provider.display-name}} from {{> format-date date=booking.start}} to {{> format-date date=booking.end}}.</p>
     {{/with}}
     <p> You will receive 100% of the hosting fee  to your nominated 
-      account since the cancellation was made within 48 hrs from start date of the service”..</p>
+      account since the cancellation was made within 48 hrs from start date of the service.</p>
 
     <!-- <p><a href="{{marketplace.url}}">Try to book something else instead</a></p> -->
 
