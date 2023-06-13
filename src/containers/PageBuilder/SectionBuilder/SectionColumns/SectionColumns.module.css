@@ -46,6 +46,10 @@
   grid-template-columns: repeat(3, calc((100% - 2 * 32px) / 3));
   padding: 64px 32px 0 32px;
 
+  @media(max-width: 650px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
   & h3 {
     color: #e95629;
   }
@@ -76,6 +80,9 @@
     font-size: 40px;
     line-height: 1.33;
     font-weight: bold;
+    @media(max-width: 768px) {
+      font-size: 26px;
+    }
   }
 }
 
@@ -86,6 +93,10 @@
   border-radius: 5px;
   position: relative;
   width: 65%;
+
+  @media(max-width: 1150px) {
+    width: 100%;
+  }
 
   & label {
     color: #fff;
@@ -153,6 +164,10 @@
 
 .headingServices {
   color: #e95629;
+
+  @media(max-width: 768px) {
+    font-size: 26px;
+  }
 }
 
 .servicesNeedTime {

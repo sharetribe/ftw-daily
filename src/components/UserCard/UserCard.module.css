@@ -1,11 +1,15 @@
 @import '../../styles/customMediaQueries.css';
 
-.root {
-}
+.root {}
 
 .content {
   display: flex;
   flex-direction: row;
+
+  @media(max-width: 768px) {
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
 }
 
 .avatar {

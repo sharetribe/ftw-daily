@@ -50,6 +50,10 @@
 .pricingBox {
   padding: 0;
   margin-bottom: 52px;
+
+  @media(max-width: 768px) {
+    padding: 0 24px;
+  }
 }
 
 .pricingHeading {
