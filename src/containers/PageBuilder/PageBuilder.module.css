@@ -94,8 +94,22 @@
   text-align: center;
   margin-top: 50px;
   margin-bottom: 40px;
+  color: #fff;
 }
 
 .aboutData {
   text-align: justify;
+  margin-top: 20px;
+}
+
+.coverBox {
+  background-image: url(../../assets/bg2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
 }

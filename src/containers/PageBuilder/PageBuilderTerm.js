@@ -11,6 +11,7 @@ import StaticPage from './StaticPage.js';
 
 import css from './PageBuilder.module.css';
 import contactCover from '../../assets/Contact-Us-cover.jpg';
+import coverImage from '../../assets/bg2.jpg';
 
 const getMetadata = (meta, schemaType, fieldOptions) => {
   const { pageTitle, pageDescription, socialSharing } = meta;
@@ -116,37 +117,39 @@ const PageBuilderTerm = props => {
                 <>
                   <SectionBuilder sections={sections} options={options} />
                   {isaboutuspage ? <div className={css.faqPageWrapper}>
-                    <h1 className={css.headingName}>
-                      Welcome to PetCrib!
-                    </h1>
+                    <div className={css.coverBox}>
+                      <h1 className={css.headingName}>
+                        Welcome to PetCrib!
+                      </h1>
+                    </div>
                     <div className={css.aboutData}>
-                      We are passionate about pets and understand the need for reliable and
-                      trustworthy pet care services. Our platform connects Pet Owners with Pet
-                      Hosts who are committed to providing the best possible care for your furry
-                      family members.
-                      Our mission is to make pet care services accessible and affordable for
-                      everyone, while also providing a platform for Pet Hosts to build their
-                      business and gain exposure to new clients. We believe that by creating a
-                      community of Pet Owners and Pet Hosts, we can make a positive impact
-                      on the lives of pets and their humans.
-                      Our team consists of experienced professionals in the pet care industry,
-                      as well as technology experts who are dedicated to creating a seamless
-                      and user-friendly platform.
-                      We understand that pets are an important part of your life, and we are
-                      committed to making sure they receive the attention, care, and love they
-                      deserve while you are away.
-                      We take the safety and well-being of pets very seriously and have
-                      implemented strict vetting processes for our Pet Hosts so you can feel
-                      confident that your pet is in good hands. All Pet Hosts must provide
-                      information about their experience, credentials and pass a safety test and
-                      we encourage Pet Owners to review Pet Hosts' profiles and ratings before
-                      booking.
-                      We are based in Sydney, Australia and are committed to serving the
-                      Australian community. We believe that by supporting local Pet Hosts and
-                      Pet Owners, we can create a stronger and more connected pet care
-                      community across Australia. We are not trying to sell you fancy products
-                      or other pet services. Our focus is on pet care and we are constantly
-                      working to improve our platform and welcome feedback from our users.
+                      <p>We are passionate about pets and understand the need for reliable and
+                        trustworthy pet care services. Our platform connects Pet Owners with Pet
+                        Hosts who are committed to providing the best possible care for your furry
+                        family members.</p>
+                      <p>Our mission is to make pet care services accessible and affordable for
+                        everyone, while also providing a platform for Pet Hosts to build their
+                        business and gain exposure to new clients. We believe that by creating a
+                        community of Pet Owners and Pet Hosts, we can make a positive impact
+                        on the lives of pets and their humans.</p>
+                      <p>Our team consists of experienced professionals in the pet care industry,
+                        as well as technology experts who are dedicated to creating a seamless
+                        and user-friendly platform.</p>
+                      <p>We understand that pets are an important part of your life, and we are
+                        committed to making sure they receive the attention, care, and love they
+                        deserve while you are away.</p>
+                      <p>We take the safety and well-being of pets very seriously and have
+                        implemented strict vetting processes for our Pet Hosts so you can feel
+                        confident that your pet is in good hands. All Pet Hosts must provide
+                        information about their experience, credentials and pass a safety test and
+                        we encourage Pet Owners to review Pet Hosts' profiles and ratings before
+                        booking.</p>
+                      <p>We are based in Sydney, Australia and are committed to serving the
+                        Australian community. We believe that by supporting local Pet Hosts and
+                        Pet Owners, we can create a stronger and more connected pet care
+                        community across Australia. We are not trying to sell you fancy products
+                        or other pet services. Our focus is on pet care and we are constantly
+                        working to improve our platform and welcome feedback from our users.</p>
 
                       We look forward to connecting you with the best Pet Hosts in your area!
                     </div>
@@ -315,7 +318,7 @@ const PageBuilderTerm = props => {
                           Once this has been reported to PetCrib, we will review what has happened
                           and discuss with both parties to attempt to reach an agreement around a
                           solution. This is also outlined in our Terms of Service.
-                         
+
                         </div>
                       </details>
                       <h2 className={css.petHeading}>For Pet Hosts:</h2>
