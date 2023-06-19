@@ -1005,7 +1005,7 @@
   "Topbar.genericError": "Oh no, something went wrong. Please check your network connection and try again.",
   "Topbar.logoIcon": "Go to homepage",
   "Topbar.menuIcon": "Open menu",
-  "Topbar.mobileSearchHelp": "Tip: You can also search petcrib by zip code, for example \"00500\" or city district – \"Sörnäinen\".",
+  "Topbar.mobileSearchHelp": "Tip: You can also search petcrib by postcode, for example \"2000\" or city district – \"Sydney\".",
   "Topbar.searchIcon": "Open search",
   "TopbarDesktop.accountSettingsLink": "Account settings",
   "TopbarDesktop.FavouriteSettingLink":"Favourite Page",
