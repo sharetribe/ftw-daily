@@ -56,3 +56,11 @@
 .Intro {
   @apply --marketplaceBodyFontStyles;
 }
+
+.phone {
+  margin-top: 24px;
+
+  @media (--viewportMedium) {
+    margin-top: 32px;
+  }
+}
