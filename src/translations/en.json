@@ -173,7 +173,7 @@
   "EditListingDescriptionForm.description": "Add your email address",
   "EditListingDescriptionForm.descriptionPlaceholder": "write here your email",
   "EditListingDescriptionForm.phoneRequired": "your mobile  is required.",
-  "EditListingDescriptionForm.phone": "Add your contact details",
+  "EditListingDescriptionForm.phone": "Add your mobile number",
   "EditListingDescriptionForm.phonePlaceholder": "XXXX XXX XXX",
   "EditListingDescriptionForm.descriptionRequired": "A email is required.",
   "EditListingDescriptionForm.maxLength": "Must be 250 word or less",
