@@ -166,7 +166,7 @@
   "EditListingPetForm.sizeLabel": "Size of Dogs",
   "EditListingaboutpetForm.houseLabel": "Housing Conditions",
   "EditListingaboutpetForm.petLabel": "Pets in the home",
-  "EditListingDescriptionForm.categorytext": "Choose what service you wish to book",
+  "EditListingDescriptionForm.categorytext": "Choose what service you wish to offer",
   "EditListingDescriptionForm.categoryPlaceholder": "Choose what services you wish to offer…",
   "EditListingDescriptionForm.categoryRequired": "You need to select a category for your sauna.",
   "EditListingDescriptionForm.createListingDraftError": "Failed to create a draft listing. Please try again.",
