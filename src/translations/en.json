@@ -708,7 +708,7 @@
   "ProfilePage.desktopHeading": "Hello, I'm {name}.",
   "ProfilePage.editProfileLinkDesktop": "Edit profile",
   "ProfilePage.editProfileLinkMobile": "Edit",
-  "ProfilePage.listingsTitle": "My petcrib ({count})",
+  "ProfilePage.listingsTitle": "",
   "ProfilePage.loadingDataFailed": "Whoops, something went wrong. Please try again.",
   "ProfilePage.loadingReviewsFailed": "Loading reviews failed.",
   "ProfilePage.mobileHeading": "{name}",
