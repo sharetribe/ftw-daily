@@ -345,7 +345,8 @@ export class BookingDatesFormComponent extends Component {
                   focusedInput={this.state.focusedInput}
                   onFocusedInputChange={this.onFocusedInputChange}
                   format={identity}
-                  timeSlots={timeSlots?.slice(1, timeSlots?.length)}
+                  // timeSlots={timeSlots}
+                   timeSlots={timeSlots?.slice(2, timeSlots?.length)}
                   useMobileMargins
                   validate={composeValidators(
                     required(requiredMessage),
