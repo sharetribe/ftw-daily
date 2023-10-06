@@ -23,6 +23,9 @@ import {
 
 import css from './EditListingVerificationForm.module.css';
 import { CONFIRM_ERROR } from '../../ducks/Auth.duck';
+import { findOptionsForSelectFilter } from '../../util/search';
+import config from '../../config';
+import FieldRadioButtonComponent from '../../components/FieldRadioButton/FieldRadioButton';
 
 const ACCEPT_FILE = 'image/*';
 
@@ -112,6 +115,7 @@ export class EditListingVerificationFormComponent extends Component {
             invalid,
             disabled,
             mainImageId,
+            filterConfig,
             saveActionMsg,
             updateInProgress,
             idProofImageUploadRequested,
@@ -218,10 +222,10 @@ export class EditListingVerificationFormComponent extends Component {
           }
 
           const submitInProgress = updateInProgress;
-          const submitDisabled = invalid || disabled || submitInProgress || idProofImageUploadRequested || ready || !values.idProofImage;
+          const submitDisabled = invalid || disabled || submitInProgress || idProofImageUploadRequested || ready || !values.idProofImage || !values.policeCheck;
 
           const classes = classNames(css.root, className);
-
+          const policeCheck = findOptionsForSelectFilter('policeCheck', filterConfig);
           return (
             <Form
               className={classes}
@@ -324,6 +328,22 @@ export class EditListingVerificationFormComponent extends Component {
               {publishListingFailed}
               {showListingFailed}
 
+              <p>Background/ Police Check</p>
+              <div className={css.rowBox}>
+            {policeCheck.map(num => {
+              return (
+                <div className={css.cardSelectPet}>
+                  <FieldRadioButtonComponent
+                    className={css.features}
+                    id={num.key}
+                    name={'policeCheck'}
+                    value={num.key}
+                    label={num.label}
+                  />
+                </div>
+              );
+            })}
+          </div>
               <Button
                 className={css.submitButton}
                 type="submit"
@@ -341,7 +361,10 @@ export class EditListingVerificationFormComponent extends Component {
   }
 }
 
-EditListingVerificationFormComponent.defaultProps = { fetchErrors: null, images: [] };
+EditListingVerificationFormComponent.defaultProps = { fetchErrors: null, 
+  images: [] ,
+  filterConfig: config.custom.filters,
+};
 
 EditListingVerificationFormComponent.propTypes = {
   fetchErrors: shape({
@@ -350,6 +373,7 @@ EditListingVerificationFormComponent.propTypes = {
     uploadImageError: propTypes.error,
     updateListingError: propTypes.error,
   }),
+  filterConfig: propTypes.filterConfig,
   image: array,
   intl: intlShape.isRequired,
   onImageverificationUpload: func.isRequired,

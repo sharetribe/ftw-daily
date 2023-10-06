@@ -34,7 +34,6 @@ const FilterComponent = props => {
   const prefix = idPrefix || 'SearchPage';
   const componentId = `${prefix}.${id.toLowerCase()}`;
   const name = id.replace(/\s+/g, '-').toLowerCase();
- // console.log(filterConfig, '^^^^ ^^^^ => filterConfig');
 
   switch (type) {
     case 'SelectSingleFilter': {
@@ -46,7 +45,6 @@ const FilterComponent = props => {
           queryParamNames={queryParamNames}
           initialValues={initialValues(queryParamNames)}
           PageName={pageName}
-          // onSelect={(e) => PageName == "LandingPage" ? getHandleChangedValueFn(e) : getHandleChangedValueFn(useHistoryPush)}
           onSubmit={pageName != "SearchPage" ? (e) => getHandleChangedValueFn(e) : getHandleChangedValueFn(useHistoryPush)}
           {...config}
           {...rest}

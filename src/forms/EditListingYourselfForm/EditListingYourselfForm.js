@@ -19,9 +19,9 @@ import {
 
 import css from './EditListingYourselfForm.module.css';
 
-const TITLE_MAX_LENGTH = 500;
-const TITLE_MAX50_LENGTH = 500;
-
+const TITLE_MAX_LENGTH = 200;
+const TITLE_MAX50_LENGTH = 200;
+const TITLE_MAX15_LENGTH = 15;
 const EditListingYourselfFormComponent = props => (
   <FinalForm
     {...props}
@@ -66,9 +66,15 @@ const EditListingYourselfFormComponent = props => (
           maxLength: TITLE_MAX50_LENGTH,
         }
       );
+      const maxLengthheadlineMessage = intl.formatMessage(
+        { id: 'EditListingDescriptionForm.max15Length' },
+        {
+          maxLength: TITLE_MAX15_LENGTH,
+        }
+      );
       const maxLength50Message = maxLength(maxLengthMessage, TITLE_MAX50_LENGTH);
       const maxLengthserviceMessage = intl.formatMessage(
-        { id: 'EditListingDescriptionForm.maxLength' },
+        { id: 'EditListingDescriptionForm.max2Length' },
         {
           maxLength: TITLE_MAX_LENGTH,
         }
@@ -76,6 +82,11 @@ const EditListingYourselfFormComponent = props => (
       const maxLength25Message = maxLength(maxLengthMessage, TITLE_MAX_LENGTH);
       const serviceMessage = intl.formatMessage({
         id: 'EditListingYourselfForm.service',
+      });
+
+      const maxLength15Message = maxLength(maxLengthheadlineMessage, TITLE_MAX15_LENGTH);
+      const headlinelimitMessage = intl.formatMessage({
+        id: 'EditListingYourselfForm.headlineRequired',
       });
       const servicePlaceholderMessage = intl.formatMessage({
         id: 'EditListingYourselfForm.servicePlaceholder',
@@ -141,7 +152,7 @@ const EditListingYourselfFormComponent = props => (
         id: 'SignupForm.emailInvalid',
       });
       const emailValid = validators.FiftyFormatValid(emailInvalidMessage);
-      console.log('emailValid', emailValid)
+     
       return (
         <Form className={classes} onSubmit={handleSubmit}>
           {errorMessageCreateListingDraft}
@@ -166,7 +177,7 @@ const EditListingYourselfFormComponent = props => (
             type="textarea"
             label={headlineMessage}
             placeholder={headlinePlaceholderMessage}
-             validate={validators.composeValidators(required(headlineRequiredMessage))}
+             validate={validators.composeValidators(required(headlineRequiredMessage),maxLength15Message)}
           
             autoFocus
           />
@@ -189,8 +200,8 @@ const EditListingYourselfFormComponent = props => (
             className={css.description}
             label={scheduleMessage}
             placeholder={schedulePlaceholderMessage}
-          //  validate={composeValidators(required(scheduleRequiredMessage), maxLength25Message)}
-          validate={validators.composeValidators(emailRequired, emailValid)}
+            validate={validators.composeValidators(required(scheduleRequiredMessage), maxLength25Message)}
+          // validate={validators.composeValidators(emailRequired, emailValid)}
           />
 
           <div>

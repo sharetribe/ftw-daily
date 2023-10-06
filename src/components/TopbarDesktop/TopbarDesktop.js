@@ -39,25 +39,16 @@ const TopbarDesktop = props => {
   } = props;
 
   const [mounted, setMounted] = useState(false);
-  
-  //console.log(currentUserHasListings, '^^^^ ^^^^ => currentUserHasListings');
-  
   const listingId = currentUserHasOneListings && currentUserHasOneListings?.id?.uuid 
   const title = currentUserHasOneListings?.id && currentUserHasOneListings?.attributes?.title||''
 
- // console.log(!!(currentUserHasOneListings && currentUserHasOneListings.id), '^^^^ ^^^^ => currentUserHasOneListings?.length');
-  
-  //onst slug = createSlug(title);
-  //console.log(currentUserHasOneListings && currentUserHasOneListings?.attributes?.title, '^^^^ ^^^^ => listingId');
-  
   useEffect(() => {
     setMounted(true);
   }, []);
   
   const authenticatedOnClientSide = mounted && isAuthenticated;
   const isAuthenticatedOrJustHydrated = isAuthenticated || !mounted;
-  
-  //console.log(authenticatedOnClientSide , currentUserListingFetched , currentUserListing , '^^^^ ^^^^ => authenticatedOnClientSide && currentUserListingFetched && currentUserListing ');
+
   const classes = classNames(rootClassName || css.root, className);
 
   const search = (
@@ -92,9 +83,6 @@ const TopbarDesktop = props => {
     return currentPage === page || isAccountSettingsPage ? css.currentPage : null;
   };
 
-
-  //console.log(authenticatedOnClientSide && !!(currentUserHasOneListings && currentUserHasOneListings.id), '^^^^ ^^^^ => authenticatedOnClientSide && !!(currentUserHasOneListings && currentUserHasOneListings.id)');
-  
   const listingLink =
     authenticatedOnClientSide && !!(currentUserHasOneListings && currentUserHasOneListings.id) ? (
       // <ListingLink

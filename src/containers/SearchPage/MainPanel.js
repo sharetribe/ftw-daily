@@ -271,9 +271,7 @@ class MainPanel extends Component {
     const classes = classNames(rootClassName || css.searchResultContainer, className);
     const add = [];
     const onLike = () => {
-     
       add.push()
-     console.log('arr', add)
     }
     return (
       <div className={classes}>

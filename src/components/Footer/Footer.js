@@ -162,24 +162,13 @@ FooterComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  // Topbar needs isAuthenticated
-  
- 
-  
-  
-  // Topbar needs user info.currentUserListingFetched
   const {
-   
     currentUserHasOneListings,
    
   } = state.user;
-  //console.log(currentUserListingFetched, '^^^^ ^^^^ => currentUserListingFetched');
-  //console.log(state,currentUserHasOneListings, '^^^^ ^^^^ => currentUserHasListings');
   
  
   return {
-    
-   
     currentUserHasOneListings,
   };
 };

@@ -34,7 +34,7 @@ class EditListingVerificationPanel extends Component {
     const currentListing = ensureOwnListing(listing);
     const { publicData } = currentListing.attributes || {};
     const { idProofImage } = publicData || {}; //, idProofImageId
-
+    const { policeCheck } = publicData || {};
     const isPublished =
       currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
     const panelTitle = isPublished ? (
@@ -58,14 +58,15 @@ class EditListingVerificationPanel extends Component {
           ready={ready}
           fetchErrors={errors}
           // mainImageId={idProofImage}
-          initialValues={{ idProofImage }}
+          initialValues={{ idProofImage,policeCheck }}
           images={images}
           onImageUpload={onImageUpload}
           onSubmit={values => {
-            const { idProofImage } = values;
+            const { idProofImage,policeCheck } = values;
             const updateValues = {
               publicData: {
-                idProofImage
+                idProofImage,
+                policeCheck
               },
             };
             onSubmit(updateValues);

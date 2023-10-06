@@ -132,7 +132,6 @@ class MainPanel extends Component {
       };
 
       const callback = () => {
-        //console.log(useHistoryPush, '^^^^ ^^^^ => useHistoryPush');
         if (useHistoryPush) {
           const searchParams = this.state.currentQueryParams;
           const search = cleanSearchFromConflictingParams(searchParams, sortConfig, filterConfig);
@@ -237,10 +236,10 @@ class MainPanel extends Component {
     const onLike = () => {
 
       add.push()
-      console.log('arr', add)
     }
     return (
       <div className={classes}>
+        <h2 className={css.favHeading}> Favourite Hosts</h2>
         <SearchResultsPanel
           className={css.searchListingsPanel}
           listings={listings}

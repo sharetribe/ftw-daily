@@ -245,6 +245,27 @@ export const filters = [
     },
   },
   {
+    id: 'policeCheck',
+    label: 'Background/ Police Check',
+    type: 'SelectSingleFilter',
+    group: 'primary',
+    queryParamNames: ['pub_policeCheck'],
+    config: {
+      
+      searchMode: 'has_all',
+      options: [
+        {
+          key: 'police_yes',
+          label: 'Yes',
+        },
+        {
+          key: 'police_no',
+          label: 'No',
+        },
+      ],
+    },
+  },
+  {
     id: 'numberOfPets',
     label: 'Number Of Pets',
     type: 'SelectSingleFilter',

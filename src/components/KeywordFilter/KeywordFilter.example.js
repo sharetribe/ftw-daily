@@ -6,7 +6,6 @@ import { stringify, parse } from '../../util/urlHelpers';
 const URL_PARAM = 'keywords';
 
 const handleSubmit = (values, history) => {
-  console.log('Submitting values', values);
   const queryParams = values ? `?${stringify(values)}` : '';
   history.push(`${window.location.pathname}${queryParams}`);
 };

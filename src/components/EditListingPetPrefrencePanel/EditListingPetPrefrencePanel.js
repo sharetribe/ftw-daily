@@ -26,7 +26,7 @@ const EditListingPetPrefrencePanel = props => {
     updateInProgress,
     errors,
   } = props;
-console.log('listing', listing)
+
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureListing(listing);
   const { publicData } = currentListing.attributes;

@@ -99,14 +99,11 @@ const PageBuilder = props => {
     history,
     ...pageProps
   } = props;
-  //console.log('onActivateListing', listings)
-
-
+ 
   if (!pageAssetsData && fallbackPage && !inProgress && error) {
     return fallbackPage;
   }
-  //console.log(' sortConfig', sortConfig)
-  //console.log(' filterConfig', filterConfig)
+  
   // Page asset contains UI info and metadata related to it.
   // - "sections" (data that goes inside <body>)
   // - "meta" (which is data that goes inside <head>)

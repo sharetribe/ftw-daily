@@ -122,8 +122,6 @@ class TopbarComponent extends Component {
       } else if (typeof window !== 'undefined') {
         window.location = path;
       }
-
-     // console.log('logged out'); // eslint-disable-line
     });
   }
 
@@ -154,8 +152,6 @@ class TopbarComponent extends Component {
       currentUserListingFetched, 
      currentUserListing,
     } = this.props;
-
-   // console.log(' currentUserHasOneListings',  currentUserHasOneListings)
 
     const { mobilemenu, mobilesearch, address, origin, bounds } = parse(location.search, {
       latlng: ['origin'],

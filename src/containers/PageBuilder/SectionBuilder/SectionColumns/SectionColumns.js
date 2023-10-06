@@ -63,7 +63,7 @@ const SectionColumnsComponent = props => {
 
   } = props;
 
-  // console.log('options', filterConfig)
+  
   const [toggle, setToggle] = useState(false);
 
   const handleToggleState = () => {
