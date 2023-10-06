@@ -264,6 +264,7 @@ export const InboxPageComponent = props => {
     intl,
     pagination,
     params,
+    currentUserHasOneListings,
     providerNotificationCount,
     scrollingDisabled,
     transactions,
@@ -353,7 +354,8 @@ export const InboxPageComponent = props => {
       },
     },
   ];
-  const nav = <TabNav rootClassName={css.tabs} tabRootClassName={css.tab} tabs={tabs} />;
+  const nav = <TabNav rootClassName={css.tabs} tabRootClassName={css.tab} tabs={
+    currentUserHasOneListings ? tabs : tabs.filter(tab => tab.linkProps.params.tab === "orders")} />;
 
   return (
     <Page title={title} scrollingDisabled={scrollingDisabled}>
@@ -424,12 +426,13 @@ InboxPageComponent.propTypes = {
 
 const mapStateToProps = state => {
   const { fetchInProgress, fetchOrdersOrSalesError, pagination, transactionRefs } = state.InboxPage;
-  const { currentUser, currentUserNotificationCount: providerNotificationCount } = state.user;
+  const { currentUser, currentUserNotificationCount: providerNotificationCount,currentUserHasOneListings } = state.user;
   return {
     currentUser,
     fetchInProgress,
     fetchOrdersOrSalesError,
     pagination,
+    currentUserHasOneListings,
     providerNotificationCount,
     scrollingDisabled: isScrollingDisabled(state),
     transactions: getMarketplaceEntities(state, transactionRefs),

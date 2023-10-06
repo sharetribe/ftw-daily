@@ -155,6 +155,7 @@ FooterComponent.defaultProps = {
   className: null,
 };
 
+
 FooterComponent.propTypes = {
   rootClassName: string,
   className: string,

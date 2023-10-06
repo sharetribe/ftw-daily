@@ -11,6 +11,8 @@ import { withViewport } from '../../util/contextHelpers';
 import { LayoutWrapperSideNav } from '../../components';
 
 import { createGlobalState } from './hookGlobalState';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom/cjs/react-router-dom.min';
 
 const MAX_HORIZONTAL_NAV_SCREEN_WIDTH = 1023;
 
@@ -56,9 +58,11 @@ const scrollToTab = (currentTab, scrollLeft, setScrollLeft) => {
 };
 
 const LayoutWrapperAccountSettingsSideNavComponent = props => {
+  const { currentUserHasOneListings } = props;
+
   const [scrollLeft, setScrollLeft] = useGlobalState('scrollLeft');
   useEffect(() => {
-    const { currentTab, viewport } = props;
+    const { currentTab, viewport,currentUserHasOneListings } = props;
 
     const { width } = viewport;
     const hasViewport = width > 0;
@@ -97,6 +101,8 @@ const LayoutWrapperAccountSettingsSideNavComponent = props => {
         name: 'PasswordChangePage',
       },
     },
+    
+    // currentUserHasOneListings
     {
       text: <FormattedMessage id="LayoutWrapperAccountSettingsSideNav.paymentsTabTitle" />,
       selected: currentTab === 'StripePayoutPage',
@@ -115,7 +121,7 @@ const LayoutWrapperAccountSettingsSideNavComponent = props => {
     },
   ];
 
-  return <LayoutWrapperSideNav tabs={tabs} />;
+  return <LayoutWrapperSideNav tabs={currentUserHasOneListings ? tabs : tabs.filter(item => item.id !== 'StripePayoutPageTab')}  />;
 };
 
 LayoutWrapperAccountSettingsSideNavComponent.defaultProps = {
@@ -138,7 +144,35 @@ LayoutWrapperAccountSettingsSideNavComponent.propTypes = {
   }).isRequired,
 };
 
-const LayoutWrapperAccountSettingsSideNav = compose(withViewport)(
+
+const mapStateToProps = state => {
+  const {
+    currentUserHasOneListings,
+  } = state.user;
+
+  return {
+    currentUserHasOneListings,
+  };
+};
+
+// const UserNav = compose(
+//   withRouter,
+//   connect(
+//     mapStateToProps,
+
+//   )
+// )(UserNavComponent);
+
+
+
+
+const LayoutWrapperAccountSettingsSideNav = compose(withViewport ,
+  
+  withRouter,
+  connect(
+    mapStateToProps,
+
+  ))(
   LayoutWrapperAccountSettingsSideNavComponent
 );
 
