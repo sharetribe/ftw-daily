@@ -149,7 +149,7 @@ export const filters = [
   {
     id: 'serviceSetup',
     label: 'Type of Services',
-    type: 'SelectMultipleFilter',
+    type: 'SelectSingleFilter',
     group: 'primary',
     filtersFor: ["SearchPage","LandingPage"],
     queryParamNames: ['pub_serviceSetup'],
@@ -246,7 +246,7 @@ export const filters = [
   },
   {
     id: 'policeCheck',
-    label: 'Background/ Police Check',
+    label: ' Police Verification',
     type: 'SelectSingleFilter',
     group: 'primary',
     queryParamNames: ['pub_policeCheck'],
@@ -260,6 +260,27 @@ export const filters = [
         },
         {
           key: 'police_no',
+          label: 'No',
+        },
+      ],
+    },
+  },
+  {
+    id: 'dropPick',
+    label: ' drop off/ pick up service',
+    type: 'SelectSingleFilter',
+    group: 'secondary',
+    queryParamNames: ['pub_dropPick'],
+    config: {
+      
+      searchMode: 'has_all',
+      options: [
+        {
+          key: 'dropPick_yes',
+          label: 'Yes',
+        },
+        {
+          key: 'dropPick_no',
           label: 'No',
         },
       ],

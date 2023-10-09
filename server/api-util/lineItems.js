@@ -59,7 +59,7 @@ exports.transactionLineItems = (listing, bookingData) => {
     includeFor: ['customer', 'provider'],
   };
 
-  if (serviceSetup.filter(e => e == 'overnightsStay').length) {
+  if (serviceSetup === 'overnightsStay') {
     lineItems.push(booking)
   }
 
@@ -70,7 +70,7 @@ exports.transactionLineItems = (listing, bookingData) => {
     includeFor: ['customer', 'provider'],
   };
 
-  if (serviceSetup.filter(e => e == 'dayCareStay').length) {
+  if (serviceSetup === 'dayCareStay') {
     lineItems.push(dayCareStay)
   }
 

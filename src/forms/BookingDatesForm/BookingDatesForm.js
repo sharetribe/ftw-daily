@@ -39,7 +39,8 @@ export class BookingDatesFormComponent extends Component {
   handleFormSubmit(e) {
     let { startDate, endDate, date } = e.bookingDates || {};
     const { serviceSetup } = e;
-    const singlebooking = serviceSetup && serviceSetup.length == 1 && serviceSetup.filter((e) => e == "dayCareStay").length == 1;
+
+    const singlebooking = serviceSetup && serviceSetup.length == 1 && serviceSetup === "dayCareStay" == 1;
 
     if (singlebooking) {
       startDate = date;
@@ -66,7 +67,7 @@ export class BookingDatesFormComponent extends Component {
       formValues.values && formValues.values.bookingDates ? formValues.values.bookingDates : {};
 
     const { serviceSetup, numberOfPets } = formValues.values;
-    const singlebooking = serviceSetup && serviceSetup.length == 1 && serviceSetup.filter((e) => e == "dayCareStay").length == 1;
+    const singlebooking = serviceSetup && serviceSetup.length == 1 && serviceSetup === "dayCareStay" == 1;
 
     if (singlebooking) {
       startDate = date;
@@ -140,6 +141,41 @@ export class BookingDatesFormComponent extends Component {
             firstname,
           } = fieldRenderProps;
 
+          const retrievedDataString = localStorage.getItem("myData");
+          const retrievedDataObject = JSON.parse(retrievedDataString);
+          const retrievedServiceSetup = retrievedDataObject?.serviceSetup || '';
+          const retrievedNumberOfPets = retrievedDataObject?.numberOfPets || '';
+
+          // Check the conditions for rendering the components
+          const shouldRenderComponents = (
+            retrievedNumberOfPets === "dayCareStay" ||
+            retrievedNumberOfPets === "overnightsStay" ||
+            retrievedServiceSetup === '1' ||
+            retrievedServiceSetup === '2' ||
+            retrievedServiceSetup === '3'
+          );
+
+
+const handleStartTimeChange = (e) => {
+  const selectedStartTime = e.target.value;
+  const maxEndTime = moment(selectedStartTime, 'HH:mm').add(10, 'hours');
+
+  // Generate end time options up to 10 hours after the selected start time
+  const endTimeOptions = [];
+  let currentTime = moment(selectedStartTime, 'HH:mm');
+  while (currentTime.isSameOrBefore(maxEndTime)) {
+    endTimeOptions.push({
+      label: currentTime.format('HH:mm'),
+      value: currentTime.format('HH:mm'),
+    });
+    currentTime = currentTime.add(1, 'hour');
+  }
+
+  this.setState({ endTimeOptions });
+};
+
+
+
           const dayprice = listing.attributes.publicData.pricepet.dayCare.dayCareStay1;
           const nightprice = listing?.attributes?.publicData?.pricepet?.overNight.overnightsStayPrice1;
 
@@ -160,7 +196,8 @@ export class BookingDatesFormComponent extends Component {
               ? [1, 2]
               : [1];
 
-          const singlebooking = values.serviceSetup && values.serviceSetup.length == 1 && values.serviceSetup.filter((e) => e == "dayCareStay").length == 1;
+          const singlebooking = values.serviceSetup && values.serviceSetup === "dayCareStay"
+
 
           if (singlebooking) {
             startDate = date;
@@ -273,51 +310,118 @@ export class BookingDatesFormComponent extends Component {
               <div className={css.categoryText}>
                 <FormattedMessage className={css.description} id="EditListingDescriptionForm.categorytext" />
               </div>
-              <div className={css.categoryCheck}>
-                {detail.map((st) => {
-                  return (
-                    <FieldCheckbox
-                      className={css.features}
-                      id={st}
-                      name={"serviceSetup"}
-                      value={st}
-                      label={getLabel(options, st)}
-                      disabled={submitDisabled}
-                      validate={composeValidators(
-                        requiredFieldArrayCheckbox(requiredMessage),
 
-                      )}
-                    />
-                  )
-                })}
-                {/* {values.serviceSetup ? "required this field" :null} */}
-                {letofstay && discount
-                  ? <div className={css.discountBooking}>
-                    " {firstname} is offering a {discount}% discount if you book more than {letofstay} days "
-                  </div>
-                  : null}
+
+              <div>
+                <div className={css.categoryCheck}>
+                  {detail.map((st) => {
+                    return (
+                      <FieldRadioButton
+
+                        className={css.features}
+                        id={st}
+                        name={"serviceSetup"}
+                        value={st}
+                        label={getLabel(options, st)}
+                        disabled={submitDisabled}
+                        validate={composeValidators(
+                          requiredFieldArrayCheckbox(requiredMessage),
+
+                        )}
+                      />
+                    )
+                  })}
+
+                  {letofstay && discount
+                    ? <div className={css.discountBooking}>
+                      " {firstname} is offering a {discount}% discount if you book more than {letofstay} days "
+                    </div>
+                    : null
+                  }
+                </div>
+                <FieldSelect
+                  className={css.numberPets}
+                  id="numberOfPets"
+                  name="numberOfPets"
+                  label={"How many Pets?"}
+                  disabled={submitDisabled}
+                  validate={composeValidators(
+                    required(requiredpetMessage),
+
+                  )}
+                >
+
+                  <option value={""}>select</option>
+                  {/* {new Array(numberPetArray).fill('0').map((st) => <option key={st} value={st}>{st}</option>)} */}
+                  {numberPetArray.map((st) => {
+                    return (
+                      <option key={st} value={st}>{st}</option>
+                    )
+                  })}
+
+                </FieldSelect>
               </div>
-              <FieldSelect
-                className={css.numberPets}
-                id="numberOfPets"
-                name="numberOfPets"
-                label={"How many Pets?"}
-                disabled={submitDisabled}
-                validate={composeValidators(
-                  required(requiredpetMessage),
 
-                )}
-              >
+              <div>
+                <p>select time </p>
+                <FieldSelect
+                  className={css.startTime} // Add a className for styling
+                  id={'startTime'} // Give it a unique ID
+                  name={'startTime'} // Set a unique name for the field
+                  label="Start Time" // Label for the dropdown
+                >
+                  <option disabled value="">
+                    Select start time
+                  </option>
+                  {singlebooking // Check if it's "daysbase" service
+                    ? Array.from({ length: 13 }, (_, index) => {
+                      const hour = String(index + 7).padStart(2, '0'); // Start from 7 am
+                      return (
+                        <option key={hour} value={hour + ':00'}>
+                          {hour + ':00'}
+                        </option>
+                      );
+                    })
+                    : Array.from({ length: 24 }, (_, index) => {
+                      const hour = String(index).padStart(2, '0'); // Show 24-hour time options
+                      return (
+                        <option key={hour} value={hour + ':00'}>
+                          {hour + ':00'}
+                        </option>
+                      );
+                    })}
+                </FieldSelect>
 
-                <option value={""}>select</option>
-                {/* {new Array(numberPetArray).fill('0').map((st) => <option key={st} value={st}>{st}</option>)} */}
-                {numberPetArray.map((st) => {
-                  return (
-                    <option key={st} value={st}>{st}</option>
-                  )
-                })}
+                <FieldSelect
+                  className={css.endTime} // Add a className for styling
+                  id={'endTime'} // Give it a unique ID
+                  name={'endTime'} // Set a unique name for the field
+                  label="End Time" // Label for the dropdown
+                >
+                  <option disabled value="">
+                    Select end time
+                  </option>
+                    {singlebooking
+ // Check if it's "daysbase" service
+                    ? Array.from({ length: 13 }, (_, index) => {
+                      const hour = String(index + 7).padStart(2, '0'); // Start from 7 am
+                      return (
+                        <option key={hour} value={hour + ':00'}>
+                          {hour + ':00'}
+                        </option>
+                      );
+                    })
+                    : Array.from({ length: 24 }, (_, index) => {
+                      const hour = String(index).padStart(2, '0'); // Show 24-hour time options
+                      return (
+                        <option key={hour} value={hour + ':00'}>
+                          {hour + ':00'}
+                        </option>
+                      );
+                    })}
+                </FieldSelect>
 
-              </FieldSelect>
+              </div>
 
               {singlebooking
                 ? <FieldDateInput
@@ -325,7 +429,7 @@ export class BookingDatesFormComponent extends Component {
                   name="bookingDates"
                   startDatePlaceholderText={startDatePlaceholderText}
                   format={identity}
-                  timeSlots={timeSlots}
+                  timeSlots={timeSlots?.slice(2, timeSlots?.length)}
                   validate={composeValidators(
                     required(requiredMessage),
                     bookingDateRequired(startDateErrorMessage)
@@ -346,7 +450,7 @@ export class BookingDatesFormComponent extends Component {
                   onFocusedInputChange={this.onFocusedInputChange}
                   format={identity}
                   // timeSlots={timeSlots}
-                   timeSlots={timeSlots?.slice(2, timeSlots?.length)}
+                  timeSlots={timeSlots?.slice(2, timeSlots?.length)}
                   useMobileMargins
                   validate={composeValidators(
                     required(requiredMessage),
@@ -378,7 +482,7 @@ export class BookingDatesFormComponent extends Component {
                 <FormattedMessage id="BookingPanel.servicetect" values={{ name: firstname }} />
               </div>
 
-              <div className={css.pricingBox}>
+              {/* <div className={css.pricingBox}>
                 <div className={css.pricingHeading}>Pricing</div>
 
                 {values?.serviceSetup
@@ -402,10 +506,7 @@ export class BookingDatesFormComponent extends Component {
                         : null}
                     </>
                   : <div>
-                    {/* {(detail) ?
-                    <div className={css.pricingDescription}>
-                      <span>Minimum_Price</span> = AUD{min}.00
-                    </div> : null} */}
+                  
 
                     {(detail?.find((e) => e == "overnightsStay")) ?
                       <div className={css.pricingDescription}>
@@ -417,7 +518,7 @@ export class BookingDatesFormComponent extends Component {
                   </div>
 
                 }
-              </div>
+              </div> */}
             </Form>
           );
         }}

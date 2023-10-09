@@ -564,6 +564,7 @@ export const requestPublishListingDraft = listingId => (dispatch, getState, sdk)
       // Add the created listing to the marketplace data
       dispatch(addMarketplaceEntities(response));
       dispatch(publishListingSuccess(response));
+      console.log('response', response)
       return response;
     })
     .catch(e => {

@@ -18,6 +18,7 @@ import {
   ImageFromFile,
   ResponsiveImage,
   ValidationError,
+  FieldTextInput,
 
 } from '../../components';
 
@@ -122,12 +123,12 @@ export class EditListingVerificationFormComponent extends Component {
           } = formRenderProps;
           CONFIRM_ERROR
 
-      
+
           const { publishListingError, showListingsError, updateListingError, uploadImageError } =
             fetchErrors || {};
           const uploadOverLimit = isUploadImageOverLimitError(uploadImageError);
 
-          
+
 
           // Main image for what
           const uploadingOverlay = idProofImageUploadRequested ? (
@@ -234,116 +235,129 @@ export class EditListingVerificationFormComponent extends Component {
                 handleSubmit(e);
               }}
             >
+
+
+
               {updateListingError ? (
                 <p className={css.error}>
                   <FormattedMessage id="EditListingPhotosForm.updateFailed" />
                 </p>
               ) : null}
-              <p>Upload Photo ID -- drivers licence and Passport</p>
-
-              <div className={css.imagesField}>
-
-                <Field
-                  label={chooseAvatarLabel}
-                  id="idProofImage"
-                  name="idProofImage"
-                  accept={ACCEPT_FILE}
-                  form={null}
-                  type="file"
-                >
-                  {fieldprops => {
-                    const { accept, input, label, meta, disabled: fieldDisabled } = fieldprops;
-                    const { name, type } = input;
-                    const onChange = e => {
-                      const file = e.target.files[0];
-                      this.setState({ fileState: file });
-                      if (file && file.name && file.size < 10000000) {
-                        this.setState({ uploadAttachmentToAwsRequested: true, stopLoop: false });
-                        this.onAttachmentUpload(file, form);
-                        e.target.value = null;
-                      }
-                    };
-
-                    const inputProps = { accept, id: name, name, onChange, type };
-                    return (
-                      <div className={css.addImageWrapper}>
-                        <div className={css.aspectRatioWrapper}>
-                          {fieldDisabled ? null : (
-                            <input {...inputProps} className={css.addImageInput} />
-                          )}
-                          <label htmlFor={name} className={css.addImage}>
-                            {label}
-                          </label>
-                        </div>
-                      </div>
-                    );
-                  }}
-                </Field>
 
 
-                <Field
-                  component={props => {
-                    const { input, meta } = props;
-                    return (
-                      <div className={css.imageRequiredWrapper}>
-                        <input {...input} />
-                        <ValidationError fieldMeta={meta} />
-
-                      </div>
-                    );
-                  }}
-                  name="images"
-                  type="hidden"
-
-                />
+              <p>Do you have Police Check</p>
+              <div className={css.rowBox}>
+                {policeCheck.map(num => {
+                  return (
+                    <div className={css.cardSelectPet}>
+                      <FieldRadioButtonComponent
+                        className={css.features}
+                        id={num.key}
+                        name={'policeCheck'}
+                        value={num.key}
+                        label={num.label}
+                      />
+                    </div>
+                  );
+                })}
               </div>
 
-              <ul>
-                {values.idProofImage && Object.keys(values.idProofImage).length
-                  ? <div className={css.fileUploadName} >
-                    <div>
-                      {/\mp4|MP4|mov|webm/.test(values.idProofImage.link) ? (
-                        <video src={values.idProofImage && values.idProofImage.link} loop autoPlay={true} muted style={{ height: '200px' }} />
-                      ) : /\png|jpeg|jpg/.test(values.idProofImage.link) ? (
-                        <img alt={values.idProofImage.name} src={values.idProofImage.link} style={{ height: '200px' }} />
-                      ) : (
-                        <object data={values.idProofImage.link}>
-                          <iframe
-                            className="doc"
-                            src={`https://docs.google.com/gview?url=${values.idProofImage.link}&embedded=true`}
-                          />
-                        </object>
-                      )}
-                    </div>
+              {values && values.policeCheck == 'police_yes' ? (
+                <div>
+
+                  <p>Upload Photo ID -- drivers licence and Passport</p>
+
+                  <div className={css.imagesField}>
+
+                    <Field
+                      label={chooseAvatarLabel}
+                      id="idProofImage"
+                      name="idProofImage"
+                      accept={ACCEPT_FILE}
+                      form={null}
+                      type="file"
+                    >
+                      {fieldprops => {
+                        const { accept, input, label, meta, disabled: fieldDisabled } = fieldprops;
+                        const { name, type } = input;
+                        const onChange = e => {
+                          const file = e.target.files[0];
+                          this.setState({ fileState: file });
+                          if (file && file.name && file.size < 10000000) {
+                            this.setState({ uploadAttachmentToAwsRequested: true, stopLoop: false });
+                            this.onAttachmentUpload(file, form);
+                            e.target.value = null;
+                          }
+                        };
+
+                        const inputProps = { accept, id: name, name, onChange, type };
+                        return (
+                          <div className={css.addImageWrapper}>
+                            <div className={css.aspectRatioWrapper}>
+                              {fieldDisabled ? null : (
+                                <input {...inputProps} className={css.addImageInput} />
+                              )}
+                              <label htmlFor={name} className={css.addImage}>
+                                {label}
+                              </label>
+                            </div>
+                          </div>
+                        );
+                      }}
+                    </Field>
+
+
+                    <Field
+                      component={props => {
+                        const { input, meta } = props;
+                        return (
+                          <div className={css.imageRequiredWrapper}>
+                            <input {...input} />
+                            <ValidationError fieldMeta={meta} />
+
+                          </div>
+                        );
+                      }}
+                      name="images"
+                      type="hidden"
+
+                    />
                   </div>
-                  : null}
 
-              </ul>
-              {uploadImageFailed}
+                  <ul>
+                    {values.idProofImage && Object.keys(values.idProofImage).length
+                      ? <div className={css.fileUploadName} >
+                        <div>
+                          {/\mp4|MP4|mov|webm/.test(values.idProofImage.link) ? (
+                            <video src={values.idProofImage && values.idProofImage.link} loop autoPlay={true} muted style={{ height: '200px' }} />
+                          ) : /\png|jpeg|jpg/.test(values.idProofImage.link) ? (
+                            <img alt={values.idProofImage.name} src={values.idProofImage.link} style={{ height: '200px' }} />
+                          ) : (
+                            <object data={values.idProofImage.link}>
+                              <iframe
+                                className="doc"
+                                src={`https://docs.google.com/gview?url=${values.idProofImage.link}&embedded=true`}
+                              />
+                            </object>
+                          )}
+                        </div>
+                      </div>
+                      : null}
 
-              <p className={css.tip}>
-                <FormattedMessage id="EditListingVerificationForm.addImagesTip" />
-              </p>
+                  </ul>
+                  {uploadImageFailed}
 
-              {publishListingFailed}
-              {showListingFailed}
+                  <p className={css.tip}>
+                    <FormattedMessage id="EditListingVerificationForm.addImagesTip" />
+                  </p>
 
-              <p>Background/ Police Check</p>
-              <div className={css.rowBox}>
-            {policeCheck.map(num => {
-              return (
-                <div className={css.cardSelectPet}>
-                  <FieldRadioButtonComponent
-                    className={css.features}
-                    id={num.key}
-                    name={'policeCheck'}
-                    value={num.key}
-                    label={num.label}
-                  />
-                </div>
-              );
-            })}
-          </div>
+                  {publishListingFailed}
+                  {showListingFailed}
+
+                </div>) : null}
+
+
+
               <Button
                 className={css.submitButton}
                 type="submit"
@@ -361,8 +375,9 @@ export class EditListingVerificationFormComponent extends Component {
   }
 }
 
-EditListingVerificationFormComponent.defaultProps = { fetchErrors: null, 
-  images: [] ,
+EditListingVerificationFormComponent.defaultProps = {
+  fetchErrors: null,
+  images: [],
   filterConfig: config.custom.filters,
 };
 

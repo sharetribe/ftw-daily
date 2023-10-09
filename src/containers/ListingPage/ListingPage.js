@@ -208,6 +208,18 @@ export class ListingPageComponent extends Component {
       onUpdateProfile
     } = this.props;
 
+
+var retrievedDataString = localStorage.getItem("myData");
+
+// Convert the JSON string back to an object
+var retrievedDataObject = JSON.parse(retrievedDataString);
+
+// Access the properties of the retrieved object
+var retrievedNumberOfPets = retrievedDataObject.numberOfPets;
+var retrievedServiceSetup = retrievedDataObject.serviceSetup;
+
+// console.log("numberOfPets: " + retrievedNumberOfPets);
+// console.log("serviceSetup: " + retrievedServiceSetup);
     const listingId = new UUID(rawParams.id);
     const isPendingApprovalVariant = rawParams.variant === LISTING_PAGE_PENDING_APPROVAL_VARIANT;
     const isDraftVariant = rawParams.variant === LISTING_PAGE_DRAFT_VARIANT;
@@ -216,6 +228,9 @@ export class ListingPageComponent extends Component {
         ? ensureOwnListing(getOwnListing(listingId))
         : ensureListing(getListing(listingId));
     // const currentListing = ensureListing(listing);
+    const searchParams = history?.location?.state?.rawParams && history?.location?.state?.rawParams;
+    console.log('searchParams', searchParams)
+  const searchedCare = !!searchParams?.keywords ? searchParams?.keywords : !!searchParams?.pub_kindOfCareLabel ? searchParams?.pub_kindOfCareLabel : "";
     const id = currentListing?.id?.uuid;
     const listingSlug = rawParams.slug || createSlug(currentListing.attributes.title || '');
     const params = { slug: listingSlug, ...rawParams };

@@ -18,6 +18,7 @@ import {
   Button,
   Form,
   FieldTextInput,
+  FieldRadioButton,
 
 } from '../../components';
 import css from './EditListingPricingForm.module.css';
@@ -106,7 +107,7 @@ export const EditListingPricingFormComponent = props => (
       const submitDisabled = invalid || disabled || submitInProgress || !values.discount
       const { updateListingError, showListingsError } = fetchErrors || {};
       const discount = findOptionsForSelectFilter('discount', filterConfig);
-
+      const dropPick = findOptionsForSelectFilter('dropPick', filterConfig);
       const detail = listing?.attributes?.publicData?.serviceSetup;
       const numberPet = listing?.attributes?.publicData?.numberOfPets;
 
@@ -115,24 +116,24 @@ export const EditListingPricingFormComponent = props => (
         : numberPet == 2
           ? [1, 2]
           : [1];
-     
+
       const [stayRange, setStayRange] = useState(lengthOfStays ? lengthOfStays : 7);
 
       const [discountRange, setDiscountRange] = useState(discountlengthOfStays ? discountlengthOfStays : 1);
 
       const handlePriceChange = (e) => {
-     
+
 
         // form.change('lengthOfStays', value.at(0))
         setStayRange(e.target.value);
-        form.change('lengthOfStays',e.target.value )
+        form.change('lengthOfStays', e.target.value)
 
-       
+
       };
       const handleDiscountChange = (e) => {
         setDiscountRange(e.target.value);
         form.change('discountlengthOfStays', e.target.value)
-       
+
       };
       const [value, setValue] = useState([discountlengthOfStays ? discountlengthOfStays : 1]);
 
@@ -209,10 +210,10 @@ export const EditListingPricingFormComponent = props => (
           {values && values.discount == 'dis_yes' ? (
             <>
               <div>
-               
+
                 <div className={css.rangeBox}>
                   <p>Length of Stays </p>
-                
+
                   <input
                     type="range"
                     min={7}
@@ -225,13 +226,13 @@ export const EditListingPricingFormComponent = props => (
                   />
 
                   <div>{stayRange} days</div>
-                  
+
                 </div>
               </div>
               <div className={css.rangeBox}>
                 <p>Discount</p>
 
-              
+
                 <input
                   type="range"
                   min={0}
@@ -244,10 +245,58 @@ export const EditListingPricingFormComponent = props => (
                   onChange={handleDiscountChange}
                 />
                 <div> {discountRange}% </div>
-               
+
               </div>
+
             </>
           ) : null}
+
+          <div>
+            <p>Do you offer drop off/ pick up service?</p>
+            <div style={{ display: 'flex', gap: '20px' }}>
+              {dropPick.map((num) =>
+                <div className={css.cardSelectPet}>
+                  <FieldRadioButton
+                    className={css.features}
+                    id={num.key}
+                    name={"dropPick"}
+                    value={num.key}
+                    label={num.label}
+                  />
+                </div>
+              )}
+            </div>
+            {values && values.dropPick == 'dropPick_yes' ? (
+              <div>
+              <div>
+                <FieldTextInput
+                  id="dropyes"
+                  name="dropyes"
+                  type="Number"
+                  autoFocus
+                  className={css.description}
+                  label={"Price For Drop Off"}
+                  placeholder={"price for drop off"}
+                  validate={priceValidators}
+                />
+              </div>
+               <div>
+               <FieldTextInput
+                 id="pickyes"
+                 name="pickyes"
+                 type="Number"
+                 autoFocus
+                 className={css.description}
+                 label={"Price For Pick Up"}
+                 placeholder={"price for pick up"}
+                 validate={priceValidators}
+               />
+             </div>
+              </div>
+              ) : null}
+
+          </div>
+
           <Button
             className={css.submitButton}
             type="submit"

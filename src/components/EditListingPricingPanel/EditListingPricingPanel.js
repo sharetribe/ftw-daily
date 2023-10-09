@@ -42,8 +42,11 @@ const EditListingPricingPanel = props => {
   const overnightsStayPrice2 = publicData && publicData.pricepet && publicData.pricepet.overNight && publicData.pricepet.overNight.overnightsStayPrice2 || "";
   const overnightsStayPrice3 = publicData && publicData.pricepet && publicData.pricepet.overNight && publicData.pricepet.overNight.overnightsStayPrice3 || "";
 
-  const discount = publicData && publicData.discount
+  const discount = publicData && publicData.discount  
+  const dropPick=  publicData && publicData.dropPick
   const discountlengthOfStays = publicData && publicData.discountlengthOfStays
+  const dropyes =publicData && publicData.dropyes
+  const pickyes =publicData && publicData.pickyes
   const lengthOfStays = publicData && publicData.lengthOfStays
   const isPublished = currentListing.id && currentListing.attributes.state !== LISTING_STATE_DRAFT;
 
@@ -63,10 +66,10 @@ const EditListingPricingPanel = props => {
   const form = priceCurrencyValid ? (
     <EditListingPricingForm
       className={css.form}
-      initialValues={{ overnightsStayPrice1, overnightsStayPrice2, overnightsStayPrice3, dayCareStay1, dayCareStay2, dayCareStay3, discount, discountlengthOfStays, lengthOfStays }}
+      initialValues={{ overnightsStayPrice1, overnightsStayPrice2, overnightsStayPrice3, dayCareStay1, dayCareStay2, dayCareStay3,dropPick,pickyes,dropyes, discount, discountlengthOfStays, lengthOfStays }}
       onSubmit={values => {
        
-        const { overnightsStayPrice1, overnightsStayPrice2, overnightsStayPrice3, dayCareStay1, dayCareStay2, dayCareStay3, discount, discountlengthOfStays, lengthOfStays } = values;
+        const { overnightsStayPrice1, overnightsStayPrice2, overnightsStayPrice3, dayCareStay1, dayCareStay2, dayCareStay3, discount,pickyes,dropyes, discountlengthOfStays, lengthOfStays ,dropPick} = values;
 
         function findMinPrice(var_args) {
           return Array.prototype.reduce.call(arguments, function (prev, current) {
@@ -92,6 +95,9 @@ const EditListingPricingPanel = props => {
               }
             },
             discount,
+            dropPick,
+            pickyes,
+            dropyes,
             discountlengthOfStays,
             lengthOfStays
           },
@@ -107,6 +113,8 @@ const EditListingPricingPanel = props => {
       listing={listing}
       publicData={publicData}
       lengthOfStays={lengthOfStays}
+      pickyes={pickyes}
+      dropyes={dropyes}
       discountlengthOfStays={discountlengthOfStays}
       updated={panelUpdated}
       updateInProgress={updateInProgress}

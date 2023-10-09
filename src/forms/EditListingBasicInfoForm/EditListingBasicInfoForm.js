@@ -20,7 +20,8 @@ import {
   FieldTextInput,
   FieldPhoneNumberInput,
   FieldBirthdayInput,
-  LocationAutocompleteInputField
+  LocationAutocompleteInputField,
+  FieldRadioButton
 } from '../../components';
 
 import css from './EditListingBasicForm.module.css';
@@ -251,7 +252,7 @@ const EditListingBasicInfoFormComponent = props => (
             {options.map((st) => {
               return (
                 <div className={css.cardSelectPet} key={st.key}>
-                  <FieldCheckbox
+                  <FieldRadioButton
                     className={css.features}
                     id={st.key}
                     name={"serviceSetup"}

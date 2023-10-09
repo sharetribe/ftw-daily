@@ -57,21 +57,21 @@ exports.calculateTotalPriceFromPercentage = (unitPrice, percentage) => {
 };
 
 exports.calculateTotalPrice = (serviceSetup, listing, unitPrice, numberOfPets) => {
-  if (serviceSetup.filter(e => e == 'overnightsStay')?.length && numberOfPets == 1) {
+  if (serviceSetup === 'overnightsStay'&& numberOfPets == 1) {
     return new Money(parseInt(listing.attributes.publicData.pricepet.overNight.overnightsStayPrice1 * 100), unitPrice.currency);
-  } else if (serviceSetup.filter(e => e == 'overnightsStay')?.length && numberOfPets == 2) {
+  } else if (serviceSetup === 'overnightsStay'&& numberOfPets == 2) {
     return new Money(parseInt(listing.attributes.publicData.pricepet.overNight.overnightsStayPrice2 * 100), unitPrice.currency);
-  } else if (serviceSetup.filter(e => e == 'overnightsStay')?.length && numberOfPets == 3) {
+  } else if (serviceSetup === 'overnightsStay' && numberOfPets == 3) {
     return new Money(parseInt(listing.attributes.publicData.pricepet.overNight.overnightsStayPrice3 * 100), unitPrice.currency);
   }
 }
 
 exports.calculateTotalPrices = (serviceSetup, listing, unitPrice, numberOfPets) => {
-  if (serviceSetup.filter(e => e == 'dayCareStay')?.length && numberOfPets == 1) {
+  if (serviceSetup === 'dayCareStay'&& numberOfPets == 1) {
     return new Money(parseInt(listing.attributes.publicData.pricepet.dayCare.dayCareStay1 * 100), unitPrice.currency);
-  } else if (serviceSetup.filter(e => e == 'dayCareStay')?.length && numberOfPets == 2) {
+  } else if (serviceSetup === 'dayCareStay' && numberOfPets == 2) {
     return new Money(parseInt(listing.attributes.publicData.pricepet.dayCare.dayCareStay2 * 100), unitPrice.currency);
-  } else if (serviceSetup.filter(e => e == 'dayCareStay')?.length && numberOfPets == 3) {
+  } else if (serviceSetup === 'dayCareStay' && numberOfPets == 3) {
     return new Money(parseInt(listing.attributes.publicData.pricepet.dayCare.dayCareStay3 * 100), unitPrice.currency);
   }
 }
