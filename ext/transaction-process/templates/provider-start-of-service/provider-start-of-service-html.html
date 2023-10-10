@@ -1,0 +1,27 @@
+
+{{~#*inline "format-date"~}}
+{{date date format="MMM d, YYYY" tz="Etc/UTC"}}
+{{~/inline~}}
+
+<html>
+  <body>
+    <h1>
+      Notification
+    </h1>
+
+    {{#with transaction}}
+    <p>
+      email get reminder of commencement of service {{customer.display-name}} booking request, and it will expire by {{> format-date date=booking.start}}.
+      
+    </p>
+  
+    {{/with}}
+   
+
+    <!-- <p><a href="{{marketplace.url}}">Try to book something else instead</a></p> -->
+
+    <hr />
+
+    <p>You have received this email notification because you are a member of {{marketplace.name}}. If you no longer wish to receive these emails, please contact {{marketplace.name}} team.</p>
+  </body>
+</html>

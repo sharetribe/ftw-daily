@@ -1,0 +1,1 @@
+{{transaction.customer.display-name}} customer-reminder-of-cancellation-policy

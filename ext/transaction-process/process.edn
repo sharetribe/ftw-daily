@@ -25,6 +25,10 @@
    :from :state/enquiry,
    :to :state/pending-payment
    :privileged? true}
+
+  
+
+
   {:name :transition/expire-payment,
    :at
    {:fn/plus
@@ -36,6 +40,7 @@
     {:name :action/stripe-refund-payment}],
    :from :state/pending-payment,
    :to :state/payment-expired}
+
   {:name :transition/confirm-payment,
    :actor :actor.role/customer,
    :actions [
@@ -73,6 +78,16 @@
     {:name :action/stripe-refund-payment}],
    :from :state/preauthorized,
    :to :state/declined}
+;; mail confirmation serving as a reminder to respond to the owners booking request, and it will expire 
+{:name :transition/host-notification-forAcceptorNot,
+   :at
+   {:fn/plus
+    [{:fn/timepoint [:time/first-entered-state :state/preauthorized]}
+     {:fn/period ["P1D"]}]},
+   :actions
+   [],
+   :from :state/preauthorized,
+   :to :state/preauthorized}
 
   {:name :transition/complete,
    :at {:fn/timepoint [:time/booking-end]},
@@ -104,8 +119,33 @@
    [{:name :action/cancel-booking}],
    :from :state/accepted,
    :to :state/cancelled}
+;; 48 hours before service, get reminder of commencement of service, and reminder of cancellation policy. 
+ {:name :transition/customer-reminder-of-cancellation-policy,
+   :at
+   {:fn/minus
+    [{:fn/timepoint [:time/booking-start]} {:fn/period ["P2D"]}]},
+   :actions [],
+   :from :state/accepted,
+   :to :state/accepted}
 
+   {:name :transition/provider-commencement-of-service,
+   :at
+   {:fn/minus
+    [{:fn/timepoint [:time/booking-start]} {:fn/period ["P2D"]}]},
+   :actions [],
+   :from :state/accepted,
+   :to :state/accepted}
 
+   
+   {:name :transition/provider-reviews-customer-profile,
+   :at
+   {:fn/plus
+    [{:fn/timepoint [:time/first-entered-state :state/accepted]}
+     {:fn/period ["PT2M"]}]},
+   :actions
+   [],
+   :from :state/accepted,
+   :to :state/accepted}
 
   {:name :transition/review-1-by-provider,
    :actor :actor.role/provider,
@@ -187,6 +227,30 @@
    :on :transition/cancel-customer-no-refund,
    :to :actor.role/customer,
    :template :booking-no-refund-customer-mail}
+;; host-notification-forAcceptorNot
+  {:name :notification/host-mail-forAcceptorNot,
+   :on :transition/host-notification-forAcceptorNot,
+   :to :actor.role/provider,
+   :template :host-mail-forAcceptorNot}
+
+;; customer-reminder-of-cancellation-policy
+ {:name :notification/customer-reminder-of-cancellation-policy,
+   :on :transition/customer-reminder-of-cancellation-policy,
+   :to :actor.role/customer,
+   :template :customer-reminder-of-cancellation-policy}
+
+;; provider-commencement-of-service
+ {:name :notification/provider-start-of-service,
+   :on :transition/provider-commencement-of-service,
+   :to :actor.role/provider,
+   :template :provider-start-of-service}
+
+;; provider-reviews-customer-profile
+
+{:name :notification/provider-reviews-customer-profile,
+   :on :transition/provider-reviews-customer-profile,
+   :to :actor.role/provider,
+   :template :provider-reviews-customer-profile}
 
   {:name :notification/money-paid,
    :on :transition/complete,
