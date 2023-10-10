@@ -124,6 +124,10 @@ export const contact_us = body => {
   return post('/api/sendmail', body);
 };
 
+export const Hostcreate_profile = body => {
+  return post('/sendmail_Hostcreate_profile', body);
+};
+
 export const updateTransactionMetaData = body => {
   return post('/api/update-meta-data', body);
 };

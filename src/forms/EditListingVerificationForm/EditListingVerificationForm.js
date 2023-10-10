@@ -223,7 +223,7 @@ export class EditListingVerificationFormComponent extends Component {
           }
 
           const submitInProgress = updateInProgress;
-          const submitDisabled = invalid || disabled || submitInProgress || idProofImageUploadRequested || ready || !values.idProofImage || !values.policeCheck;
+          const submitDisabled = invalid || disabled || submitInProgress || idProofImageUploadRequested || ready || !values.policeCheck;
 
           const classes = classNames(css.root, className);
           const policeCheck = findOptionsForSelectFilter('policeCheck', filterConfig);

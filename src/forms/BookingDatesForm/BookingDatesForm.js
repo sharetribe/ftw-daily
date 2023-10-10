@@ -156,23 +156,23 @@ export class BookingDatesFormComponent extends Component {
           );
 
 
-const handleStartTimeChange = (e) => {
-  const selectedStartTime = e.target.value;
-  const maxEndTime = moment(selectedStartTime, 'HH:mm').add(10, 'hours');
+          const handleStartTimeChange = (e) => {
+            const selectedStartTime = e.target.value;
+            const maxEndTime = moment(selectedStartTime, 'HH:mm').add(10, 'hours');
 
-  // Generate end time options up to 10 hours after the selected start time
-  const endTimeOptions = [];
-  let currentTime = moment(selectedStartTime, 'HH:mm');
-  while (currentTime.isSameOrBefore(maxEndTime)) {
-    endTimeOptions.push({
-      label: currentTime.format('HH:mm'),
-      value: currentTime.format('HH:mm'),
-    });
-    currentTime = currentTime.add(1, 'hour');
-  }
+            // Generate end time options up to 10 hours after the selected start time
+            const endTimeOptions = [];
+            let currentTime = moment(selectedStartTime, 'HH:mm');
+            while (currentTime.isSameOrBefore(maxEndTime)) {
+              endTimeOptions.push({
+                label: currentTime.format('HH:mm'),
+                value: currentTime.format('HH:mm'),
+              });
+              currentTime = currentTime.add(1, 'hour');
+            }
 
-  this.setState({ endTimeOptions });
-};
+            this.setState({ endTimeOptions });
+          };
 
 
 
@@ -205,6 +205,8 @@ const handleStartTimeChange = (e) => {
           }
 
           const detail = listing?.attributes?.publicData?.serviceSetup;
+          console.log('listing', listing)
+          console.log('detail', detail)
           const discount = listing.attributes.publicData.discountlengthOfStays;
           const letofstay = listing.attributes.publicData.lengthOfStays;
 
@@ -314,7 +316,20 @@ const handleStartTimeChange = (e) => {
 
               <div>
                 <div className={css.categoryCheck}>
-                  {detail.map((st) => {
+                  <FieldRadioButton
+
+                    className={css.features}
+                    id={detail}
+                    name={"serviceSetup"}
+                    value={detail}
+                    label={getLabel(options,detail)}
+                    disabled={submitDisabled}
+                    validate={composeValidators(
+                      requiredFieldArrayCheckbox(requiredMessage),
+
+                    )}
+                  />
+                  {/* {detail?.map((st) => {
                     return (
                       <FieldRadioButton
 
@@ -330,7 +345,7 @@ const handleStartTimeChange = (e) => {
                         )}
                       />
                     )
-                  })}
+                  })} */}
 
                   {letofstay && discount
                     ? <div className={css.discountBooking}>
@@ -401,8 +416,8 @@ const handleStartTimeChange = (e) => {
                   <option disabled value="">
                     Select end time
                   </option>
-                    {singlebooking
- // Check if it's "daysbase" service
+                  {singlebooking
+                    // Check if it's "daysbase" service
                     ? Array.from({ length: 13 }, (_, index) => {
                       const hour = String(index + 7).padStart(2, '0'); // Start from 7 am
                       return (

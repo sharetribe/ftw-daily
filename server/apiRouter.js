@@ -22,6 +22,8 @@ const { authenticateGoogle, authenticateGoogleCallback } = require('./api/auth/g
 const { fetchTotalBooking } = require('./api/totalBooking');
 const { updateTransactionMetaData } = require('./api/intergation-api');
 
+const { Hostcreate_profile } = require('./api/HostcreateListing');
+
 const router = express.Router();
 
 // ================ API router middleware: ================ //
@@ -56,6 +58,8 @@ router.post('/transaction-line-items', transactionLineItems);
 router.post('/fetch-total-bookings', fetchTotalBooking);
 router.post('/update-meta-data', updateTransactionMetaData);
 router.post('/sendmail', contact_us)
+
+router.post('/sendmail_Hostcreate_profile', Hostcreate_profile)
 router.post('/initiate-privileged', initiatePrivileged);
 router.post('/transition-privileged', transitionPrivileged);
 

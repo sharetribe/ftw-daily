@@ -11,6 +11,7 @@ import {
   fetchStripeAccount,
 } from '../../ducks/stripeConnectAccount.duck';
 import { fetchCurrentUser } from '../../ducks/user.duck';
+import { Hostcreate_profile, contact_us } from '../../util/api';
 
 const { UUID } = sdkTypes;
 
@@ -365,12 +366,12 @@ export default function reducer(state = initialState, action = {}) {
         uploadImageError: null,
       };
     }
-  
+
     case UPLOAD_IMAGE_SUCCESS: {
       // payload.params: { id: 'tempId', imageId: 'some-real-id'}
-      const { id, imageId ,imageType} = payload;
+      const { id, imageId, imageType } = payload;
       const file = state.images[id].file;
-      const images = { ...state.images, [id]: { id, imageId, file ,imageType} };
+      const images = { ...state.images, [id]: { id, imageId, file, imageType } };
       return { ...state, images };
     }
 
@@ -385,9 +386,9 @@ export default function reducer(state = initialState, action = {}) {
     case UPDATE_IMAGE_ORDER:
       return { ...state, imageOrder: payload.imageOrder };
 
-      case UPDATE_IMAGEVERIFICATION_ORDER:
-        return { ...state, imageverificationOrder: payload.imageverificationOrder };
-  
+    case UPDATE_IMAGEVERIFICATION_ORDER:
+      return { ...state, imageverificationOrder: payload.imageverificationOrder };
+
 
     case REMOVE_LISTING_IMAGE: {
       const id = payload.imageId;
@@ -557,7 +558,7 @@ export function requestCreateListingDraft(data) {
 
 export const requestPublishListingDraft = listingId => (dispatch, getState, sdk) => {
   dispatch(publishListing(listingId));
-
+  //send mail
   return sdk.ownListings
     .publishDraft({ id: listingId }, { expand: true })
     .then(response => {
@@ -565,6 +566,9 @@ export const requestPublishListingDraft = listingId => (dispatch, getState, sdk)
       dispatch(addMarketplaceEntities(response));
       dispatch(publishListingSuccess(response));
       console.log('response', response)
+      const data = response.data.data.attributes.publicData.email
+      console.log('data', data)
+      Hostcreate_profile(data)
       return response;
     })
     .catch(e => {
@@ -573,13 +577,13 @@ export const requestPublishListingDraft = listingId => (dispatch, getState, sdk)
 };
 
 // Images return imageId which we need to map with previously generated temporary id
-export function requestImageUpload(actionPayload,imageType) {
+export function requestImageUpload(actionPayload, imageType) {
   return (dispatch, getState, sdk) => {
     const id = actionPayload.id;
-    dispatch(uploadImage(actionPayload,imageType));
+    dispatch(uploadImage(actionPayload, imageType));
     return sdk.images
       .upload({ image: actionPayload.file })
-      .then(resp => dispatch(uploadImageSuccess({ data: { id, imageId: resp.data.data.id,imageType } })))
+      .then(resp => dispatch(uploadImageSuccess({ data: { id, imageId: resp.data.data.id, imageType } })))
       .catch(e => dispatch(uploadImageError({ id, error: storableError(e) })));
   };
 }

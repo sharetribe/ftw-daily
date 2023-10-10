@@ -25,6 +25,7 @@ export const ActionBarMaybe = props => {
 
     if (isPendingApproval) {
       ownListingTextTranslationId = 'ListingPage.ownListingPendingApproval';
+      
     } else if (isClosed) {
       ownListingTextTranslationId = 'ListingPage.ownClosedListing';
     } else if (isDraft) {
