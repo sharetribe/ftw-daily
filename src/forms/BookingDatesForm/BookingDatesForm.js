@@ -39,8 +39,7 @@ export class BookingDatesFormComponent extends Component {
   handleFormSubmit(e) {
     let { startDate, endDate, date } = e.bookingDates || {};
     const { serviceSetup } = e;
-
-    const singlebooking = serviceSetup && serviceSetup.length == 1 && serviceSetup === "dayCareStay" == 1;
+    const singlebooking = serviceSetup === "dayCareStay" ;length == 1;
 
     if (singlebooking) {
       startDate = date;
@@ -63,12 +62,12 @@ export class BookingDatesFormComponent extends Component {
   // In case you add more fields to the form, make sure you add
   // the values here to the bookingData object.
   handleOnChange(formValues) {
-    let { startDate, endDate, date } =
+    let { startDate, endDate, date ,endTime,startTime
+    } =
       formValues.values && formValues.values.bookingDates ? formValues.values.bookingDates : {};
 
     const { serviceSetup, numberOfPets } = formValues.values;
-    const singlebooking = serviceSetup && serviceSetup.length == 1 && serviceSetup === "dayCareStay" == 1;
-
+    const singlebooking = serviceSetup === "dayCareStay" ;
     if (singlebooking) {
       startDate = date;
       endDate = moment(startDate).add(1, 'day').toDate();
@@ -79,7 +78,7 @@ export class BookingDatesFormComponent extends Component {
 
     if (startDate && endDate && !this.props.fetchLineItemsInProgress) {
       this.props.onFetchTransactionLineItems({
-        bookingData: { startDate, endDate, serviceSetup, numberOfPets },
+        bookingData: { startDate, endDate, serviceSetup, numberOfPets,endTime,startTime},
         listingId,
         isOwnListing,
       });
@@ -109,7 +108,7 @@ export class BookingDatesFormComponent extends Component {
       );
     }
     const getLabel = (category, key) => {
-      const label = category.find(c => c.key === key);
+      const label = category?.find(c => c.key === key);
       return label ? label.label : key;
     };
 
@@ -140,42 +139,7 @@ export class BookingDatesFormComponent extends Component {
             fetchLineItemsError,
             firstname,
           } = fieldRenderProps;
-
-          const retrievedDataString = localStorage.getItem("myData");
-          const retrievedDataObject = JSON.parse(retrievedDataString);
-          const retrievedServiceSetup = retrievedDataObject?.serviceSetup || '';
-          const retrievedNumberOfPets = retrievedDataObject?.numberOfPets || '';
-
-          // Check the conditions for rendering the components
-          const shouldRenderComponents = (
-            retrievedNumberOfPets === "dayCareStay" ||
-            retrievedNumberOfPets === "overnightsStay" ||
-            retrievedServiceSetup === '1' ||
-            retrievedServiceSetup === '2' ||
-            retrievedServiceSetup === '3'
-          );
-
-
-          const handleStartTimeChange = (e) => {
-            const selectedStartTime = e.target.value;
-            const maxEndTime = moment(selectedStartTime, 'HH:mm').add(10, 'hours');
-
-            // Generate end time options up to 10 hours after the selected start time
-            const endTimeOptions = [];
-            let currentTime = moment(selectedStartTime, 'HH:mm');
-            while (currentTime.isSameOrBefore(maxEndTime)) {
-              endTimeOptions.push({
-                label: currentTime.format('HH:mm'),
-                value: currentTime.format('HH:mm'),
-              });
-              currentTime = currentTime.add(1, 'hour');
-            }
-
-            this.setState({ endTimeOptions });
-          };
-
-
-
+console.log('values', values.startTime)
           const dayprice = listing.attributes.publicData.pricepet.dayCare.dayCareStay1;
           const nightprice = listing?.attributes?.publicData?.pricepet?.overNight.overnightsStayPrice1;
 
@@ -196,8 +160,7 @@ export class BookingDatesFormComponent extends Component {
               ? [1, 2]
               : [1];
 
-          const singlebooking = values.serviceSetup && values.serviceSetup === "dayCareStay"
-
+          const singlebooking = values.serviceSetup  === "dayCareStay";
 
           if (singlebooking) {
             startDate = date;
@@ -205,8 +168,6 @@ export class BookingDatesFormComponent extends Component {
           }
 
           const detail = listing?.attributes?.publicData?.serviceSetup;
-          console.log('listing', listing)
-          console.log('detail', detail)
           const discount = listing.attributes.publicData.discountlengthOfStays;
           const letofstay = listing.attributes.publicData.lengthOfStays;
 
@@ -250,6 +211,8 @@ export class BookingDatesFormComponent extends Component {
                 unitType,
                 dayUnitType,
                 startDate,
+                startTime:values.startTime,
+                endTime:values.endTime,
                 endDate,
                 singlebooking
               }
@@ -312,70 +275,51 @@ export class BookingDatesFormComponent extends Component {
               <div className={css.categoryText}>
                 <FormattedMessage className={css.description} id="EditListingDescriptionForm.categorytext" />
               </div>
+              <div className={css.categoryCheck}>
+                {detail?.map((st) => {
+                  return (
+                    <FieldRadioButton
+                      className={css.features}
+                      id={st}
+                      name={"serviceSetup"}
+                      value={st}
+                      label={getLabel(options, st)}
+                      disabled={submitDisabled}
+                      validate={composeValidators(
+                        requiredFieldArrayCheckbox(requiredMessage),
 
-
-              <div>
-                <div className={css.categoryCheck}>
-                  <FieldRadioButton
-
-                    className={css.features}
-                    id={detail}
-                    name={"serviceSetup"}
-                    value={detail}
-                    label={getLabel(options,detail)}
-                    disabled={submitDisabled}
-                    validate={composeValidators(
-                      requiredFieldArrayCheckbox(requiredMessage),
-
-                    )}
-                  />
-                  {/* {detail?.map((st) => {
-                    return (
-                      <FieldRadioButton
-
-                        className={css.features}
-                        id={st}
-                        name={"serviceSetup"}
-                        value={st}
-                        label={getLabel(options, st)}
-                        disabled={submitDisabled}
-                        validate={composeValidators(
-                          requiredFieldArrayCheckbox(requiredMessage),
-
-                        )}
-                      />
-                    )
-                  })} */}
-
-                  {letofstay && discount
-                    ? <div className={css.discountBooking}>
-                      " {firstname} is offering a {discount}% discount if you book more than {letofstay} days "
-                    </div>
-                    : null
-                  }
-                </div>
-                <FieldSelect
-                  className={css.numberPets}
-                  id="numberOfPets"
-                  name="numberOfPets"
-                  label={"How many Pets?"}
-                  disabled={submitDisabled}
-                  validate={composeValidators(
-                    required(requiredpetMessage),
-
-                  )}
-                >
-
-                  <option value={""}>select</option>
-                  {/* {new Array(numberPetArray).fill('0').map((st) => <option key={st} value={st}>{st}</option>)} */}
-                  {numberPetArray.map((st) => {
-                    return (
-                      <option key={st} value={st}>{st}</option>
-                    )
-                  })}
-
-                </FieldSelect>
+                      )}
+                    />
+                  )
+                })}
+                {/* {values.serviceSetup ? "required this field" :null} */}
+                {letofstay && discount
+                  ? <div className={css.discountBooking}>
+                    " {firstname} is offering a {discount}% discount if you book more than {letofstay} days "
+                  </div>
+                  : null}
               </div>
+              <FieldSelect
+                className={css.numberPets}
+                id="numberOfPets"
+                name="numberOfPets"
+                label={"How many Pets?"}
+                disabled={submitDisabled}
+                validate={composeValidators(
+                  required(requiredpetMessage),
+
+                )}
+              >
+
+                <option value={""}>select</option>
+                {/* {new Array(numberPetArray).fill('0').map((st) => <option key={st} value={st}>{st}</option>)} */}
+                {numberPetArray.map((st) => {
+                  return (
+                    <option key={st} value={st}>{st}</option>
+                  )
+                })}
+
+              </FieldSelect>
 
               <div>
                 <p>select time </p>
@@ -384,7 +328,8 @@ export class BookingDatesFormComponent extends Component {
                   id={'startTime'} // Give it a unique ID
                   name={'startTime'} // Set a unique name for the field
                   label="Start Time" // Label for the dropdown
-                >
+                  // value={start_time}
+                > 
                   <option disabled value="">
                     Select start time
                   </option>
@@ -412,6 +357,7 @@ export class BookingDatesFormComponent extends Component {
                   id={'endTime'} // Give it a unique ID
                   name={'endTime'} // Set a unique name for the field
                   label="End Time" // Label for the dropdown
+                  // value={end_time}
                 >
                   <option disabled value="">
                     Select end time
@@ -438,13 +384,14 @@ export class BookingDatesFormComponent extends Component {
 
               </div>
 
+
               {singlebooking
                 ? <FieldDateInput
                   className={css.bookingDates}
                   name="bookingDates"
                   startDatePlaceholderText={startDatePlaceholderText}
                   format={identity}
-                  timeSlots={timeSlots?.slice(2, timeSlots?.length)}
+                  timeSlots={timeSlots?.slice(1, timeSlots?.length)}
                   validate={composeValidators(
                     required(requiredMessage),
                     bookingDateRequired(startDateErrorMessage)
@@ -464,8 +411,7 @@ export class BookingDatesFormComponent extends Component {
                   focusedInput={this.state.focusedInput}
                   onFocusedInputChange={this.onFocusedInputChange}
                   format={identity}
-                  // timeSlots={timeSlots}
-                  timeSlots={timeSlots?.slice(2, timeSlots?.length)}
+                  timeSlots={timeSlots?.slice(1, timeSlots?.length)}
                   useMobileMargins
                   validate={composeValidators(
                     required(requiredMessage),
@@ -497,10 +443,10 @@ export class BookingDatesFormComponent extends Component {
                 <FormattedMessage id="BookingPanel.servicetect" values={{ name: firstname }} />
               </div>
 
-              {/* <div className={css.pricingBox}>
+              <div className={css.pricingBox}>
                 <div className={css.pricingHeading}>Pricing</div>
 
-                {values?.serviceSetup
+                {/* {values?.serviceSetup
                   ? values?.serviceSetup?.length === 2
                     ? values.serviceSetup
                       ? <div className={css.pricingDescription}>
@@ -521,7 +467,7 @@ export class BookingDatesFormComponent extends Component {
                         : null}
                     </>
                   : <div>
-                  
+                   
 
                     {(detail?.find((e) => e == "overnightsStay")) ?
                       <div className={css.pricingDescription}>
@@ -532,8 +478,8 @@ export class BookingDatesFormComponent extends Component {
                         <span>Day care stay</span> = AUD{dayprice}.00  per day</div> : null}
                   </div>
 
-                }
-              </div> */}
+                } */}
+              </div>
             </Form>
           );
         }}

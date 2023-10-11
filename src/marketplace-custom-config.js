@@ -155,7 +155,7 @@ export const filters = [
     queryParamNames: ['pub_serviceSetup'],
     config: {
       
-      searchMode: 'has_all',
+      searchMode: 'has_any',
       options: [
         {
           key: 'overnightsStay',

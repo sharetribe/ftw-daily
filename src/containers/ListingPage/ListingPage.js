@@ -215,8 +215,8 @@ var retrievedDataString = localStorage.getItem("myData");
 var retrievedDataObject = JSON.parse(retrievedDataString);
 
 // Access the properties of the retrieved object
-var retrievedNumberOfPets = retrievedDataObject.numberOfPets;
-var retrievedServiceSetup = retrievedDataObject.serviceSetup;
+// var retrievedNumberOfPets = retrievedDataObject.numberOfPets;
+// var retrievedServiceSetup = retrievedDataObject.serviceSetup;
 
 // console.log("numberOfPets: " + retrievedNumberOfPets);
 // console.log("serviceSetup: " + retrievedServiceSetup);

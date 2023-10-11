@@ -166,7 +166,7 @@ export class CheckoutPageComponent extends Component {
       ? { bookingData, bookingDates, listing, transaction }
       : storedData(STORAGE_KEY);
      
-
+console.log('pageData', pageData)
     // Check if a booking is already created according to stored data.
     const tx = pageData ? pageData.transaction : null;
   
@@ -180,6 +180,8 @@ export class CheckoutPageComponent extends Component {
       pageData.bookingDates &&
       pageData.bookingDates.bookingStart &&
       pageData.bookingDates.bookingEnd &&
+      pageData.bookingData.startTime &&
+      pageData.bookingData.endTime &&
       !isBookingCreated;
 
     if (shouldFetchSpeculatedTransaction) {
@@ -601,6 +603,7 @@ export class CheckoutPageComponent extends Component {
           userRole="customer"
           unitType={config.bookingUnitType}
           dayUnitType={config.bookingDayUnitType}
+   
           transaction={tx}
           booking={txBooking}
           dateType={DATE_TYPE_DATE}

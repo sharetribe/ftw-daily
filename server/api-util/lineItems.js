@@ -59,7 +59,7 @@ exports.transactionLineItems = (listing, bookingData) => {
     includeFor: ['customer', 'provider'],
   };
 
-  if (serviceSetup === 'overnightsStay') {
+  if (serviceSetup  === 'overnightsStay') {
     lineItems.push(booking)
   }
 

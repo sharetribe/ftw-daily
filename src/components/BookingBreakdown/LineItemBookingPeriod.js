@@ -7,8 +7,7 @@ import { dateFromAPIToLocalNoon } from '../../util/dates';
 import css from './BookingBreakdown.module.css';
 
 const BookingPeriod = props => {
-  const { startDate, endDate, dateType } = props;
-
+  const { startDate, endDate, dateType,startTime,endTime } = props;
   const timeFormatOptions =
     dateType === DATE_TYPE_DATE
       ? {
@@ -27,14 +26,22 @@ const BookingPeriod = props => {
 
   return (
     <>
+    <div>
+      
+    </div>
       <div className={css.bookingPeriod}>
         <div className={css.bookingPeriodSection}>
           <div className={css.dayLabel}>
             <FormattedMessage id="BookingBreakdown.bookingStart" />
           </div>
+          
           <div className={css.dayInfo}>
             <FormattedDate value={startDate} {...timeFormatOptions} />
           </div>
+          <div className={css.dayInfo}>
+          {startTime}
+          </div>
+        
           <div className={css.itemLabel}>
             <FormattedDate value={startDate} {...dateFormatOptions} />
           </div>
@@ -47,17 +54,21 @@ const BookingPeriod = props => {
           <div className={css.dayInfo}>
             <FormattedDate value={endDate} {...timeFormatOptions} />
           </div>
+          <div className={css.dayInfo}>
+            {endTime}
+          </div>
           <div className={css.itemLabel}>
             <FormattedDate value={endDate} {...dateFormatOptions} />
           </div>
         </div>
       </div>
+      
     </>
   );
 };
 
 const LineItemBookingPeriod = props => {
-  const { booking, unitType, dateType } = props;
+  const { booking, unitType, dateType ,startTime,endTime} = props;
 
   // Attributes: displayStart and displayEnd can be used to differentiate shown time range
   // from actual start and end times used for availability reservation. It can help in situations
@@ -73,7 +84,8 @@ const LineItemBookingPeriod = props => {
   return (
     <>
       <div className={css.lineItem}>
-        <BookingPeriod startDate={localStartDate} endDate={endDay} dateType={dateType} />
+        <BookingPeriod startDate={localStartDate} endDate={endDay} dateType={dateType} startTime={startTime}
+        endTime={endTime}/>
       </div>
       <hr className={css.totalDivider} />
     </>

@@ -252,7 +252,7 @@ const EditListingBasicInfoFormComponent = props => (
             {options.map((st) => {
               return (
                 <div className={css.cardSelectPet} key={st.key}>
-                  <FieldRadioButton
+                  <FieldCheckbox
                     className={css.features}
                     id={st.key}
                     name={"serviceSetup"}
