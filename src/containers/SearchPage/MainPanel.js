@@ -167,6 +167,7 @@ class MainPanel extends Component {
       onCloseModal,
       onMapIconClick,
       pagination,
+      searchQuery,
       searchParamsForPagination,
       showAsModalMaxWidth,
       filterConfig,
@@ -371,6 +372,7 @@ class MainPanel extends Component {
               className={css.searchListingsPanel}
               listings={listings}
               pagination={listingsAreLoaded ? pagination : null}
+              searchQuery={searchQuery}
               search={searchParamsForPagination}
               onLike ={onLike}
               pageName={pageName}

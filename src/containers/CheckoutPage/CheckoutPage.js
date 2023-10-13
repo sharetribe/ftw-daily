@@ -73,8 +73,8 @@ const paymentFlow = (selectedPaymentMethod, saveAfterOnetimePayment) => {
   return selectedPaymentMethod === 'defaultCard'
     ? USE_SAVED_CARD
     : saveAfterOnetimePayment
-    ? PAY_AND_SAVE_FOR_LATER_USE
-    : ONETIME_PAYMENT;
+      ? PAY_AND_SAVE_FOR_LATER_USE
+      : ONETIME_PAYMENT;
 };
 
 const initializeOrderPage = (initialValues, routes, dispatch) => {
@@ -89,8 +89,8 @@ const checkIsPaymentExpired = existingTransaction => {
   return txIsPaymentExpired(existingTransaction)
     ? true
     : txIsPaymentPending(existingTransaction)
-    ? minutesBetween(existingTransaction.attributes.lastTransitionedAt, new Date()) >= 15
-    : false;
+      ? minutesBetween(existingTransaction.attributes.lastTransitionedAt, new Date()) >= 15
+      : false;
 };
 
 export class CheckoutPageComponent extends Component {
@@ -142,7 +142,7 @@ export class CheckoutPageComponent extends Component {
       fetchStripeCustomer,
       history,
     } = this.props;
-    
+
 
     // Fetch currentUser with stripeCustomer entity
     // Note: since there's need for data loading in "componentWillMount" function,
@@ -165,11 +165,10 @@ export class CheckoutPageComponent extends Component {
     const pageData = hasDataInProps
       ? { bookingData, bookingDates, listing, transaction }
       : storedData(STORAGE_KEY);
-     
-console.log('pageData', pageData)
+
     // Check if a booking is already created according to stored data.
     const tx = pageData ? pageData.transaction : null;
-  
+
     const isBookingCreated = tx && tx.booking && tx.booking.id;
 
     const shouldFetchSpeculatedTransaction =
@@ -178,17 +177,16 @@ console.log('pageData', pageData)
       pageData.listing.id &&
       pageData.bookingData &&
       pageData.bookingDates &&
-      pageData.bookingDates.bookingStart &&
-      pageData.bookingDates.bookingEnd &&
-      pageData.bookingData.startTime &&
-      pageData.bookingData.endTime &&
       !isBookingCreated;
 
     if (shouldFetchSpeculatedTransaction) {
       const listingId = pageData.listing.id;
+      const {pickyes,dropyes} =pageData.listing.attributes.publicData
       const transactionId = tx ? tx.id : null;
       const { bookingStart, bookingEnd } = pageData.bookingDates;
-      const bookingData = pageData.bookingData||{}
+      const { dropPick, startTime,
+        endTime, } = pageData.bookingData || {};
+      const bookingData = pageData.bookingData || {}
 
       // Convert picked date to date that will be converted on the API as
       // a noon of correct year-month-date combo in UTC
@@ -202,6 +200,11 @@ console.log('pageData', pageData)
         {
           bookingData,
           listingId,
+          pickyes,
+          dropyes,
+          startTime,
+          dropPick,
+          endTime,
           bookingStart: bookingStartForAPI,
           bookingEnd: bookingEndForAPI,
         },
@@ -254,8 +257,8 @@ console.log('pageData', pageData)
     // Step 1: initiate order by requesting payment from Marketplace API
     const fnRequestPayment = fnParams => {
       // fnParams should be { listingId, bookingStart, bookingEnd }
-  
-      
+
+
       const hasPaymentIntents =
         storedTx.attributes.protectedData && storedTx.attributes.protectedData.stripePaymentIntents;
 
@@ -296,11 +299,11 @@ console.log('pageData', pageData)
       const paymentParams =
         selectedPaymentFlow !== USE_SAVED_CARD
           ? {
-              payment_method: {
-                billing_details: billingDetails,
-                card: card,
-              },
-            }
+            payment_method: {
+              billing_details: billingDetails,
+              card: card,
+            },
+          }
           : { payment_method: stripePaymentMethodId };
 
       const params = {
@@ -380,9 +383,9 @@ console.log('pageData', pageData)
       selectedPaymentFlow === USE_SAVED_CARD && hasDefaultPaymentMethod
         ? { paymentMethod: stripePaymentMethodId }
         : selectedPaymentFlow === PAY_AND_SAVE_FOR_LATER_USE
-        ? { setupPaymentMethodForSaving: true }
-        : {};
-        const bookingData = pageData.bookingData||{};
+          ? { setupPaymentMethodForSaving: true }
+          : {};
+    const bookingData = pageData.bookingData || {};
 
     const orderParams = {
       listingId: pageData.listing.id,
@@ -421,15 +424,15 @@ console.log('pageData', pageData)
     const addressMaybe =
       addressLine1 && postal
         ? {
-            address: {
-              city: city,
-              country: country,
-              line1: addressLine1,
-              line2: addressLine2,
-              postal_code: postal,
-              state: state,
-            },
-          }
+          address: {
+            city: city,
+            country: country,
+            line1: addressLine1,
+            line2: addressLine2,
+            postal_code: postal,
+            state: state,
+          },
+        }
         : {};
     const billingDetails = {
       name,
@@ -534,11 +537,11 @@ console.log('pageData', pageData)
     const speculatedTransaction = ensureTransaction(speculatedTransactionMaybe, {}, null);
     const currentListing = ensureListing(listing);
     const currentAuthor = ensureUser(currentListing.author);
-   
+
 
     const listingTitle = currentAuthor.attributes.profile.displayName;;
-   // const Displayname = currentAuthor.attributes.profile.displayName;
-   
+    // const Displayname = currentAuthor.attributes.profile.displayName;
+
     const title = intl.formatMessage({ id: 'CheckoutPage.title' }, { listingTitle });
 
     const pageProps = { title, scrollingDisabled };
@@ -603,7 +606,7 @@ console.log('pageData', pageData)
           userRole="customer"
           unitType={config.bookingUnitType}
           dayUnitType={config.bookingDayUnitType}
-   
+
           transaction={tx}
           booking={txBooking}
           dateType={DATE_TYPE_DATE}
@@ -737,8 +740,8 @@ console.log('pageData', pageData)
     const unitTranslationKey = isNightly
       ? 'CheckoutPage.perNight'
       : isDaily
-      ? 'CheckoutPage.perDay'
-      : 'CheckoutPage.perUnit';
+        ? 'CheckoutPage.perDay'
+        : 'CheckoutPage.perUnit';
 
     // const price = currentListing.attributes.price;
     // const formattedPrice = formatMoney(intl, price);

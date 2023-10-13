@@ -64,8 +64,7 @@ const BookingPanel = props => {
     isOwnListing,
     unitType,
     onSubmit,
-    title,
-    subTitle,
+    search,
     authorDisplayName,
     onManageDisableScrolling,
     timeSlots,
@@ -81,10 +80,9 @@ const BookingPanel = props => {
     fetchLineItemsInProgress,
     fetchLineItemsError,
     dayUnitType,
-    publicData,
   } = props;
 
-  const price = listing.attributes.price;
+  const { price, publicData } = listing.attributes || {};
 
   const hasListingState = !!listing.attributes.state;
   const isClosed = hasListingState && listing.attributes.state === LISTING_STATE_CLOSED;
@@ -95,12 +93,6 @@ const BookingPanel = props => {
 
   // const letofstay = listing.attributes.publicData.lengthOfStays;
   const numberPet = listing?.attributes?.publicData?.numberOfPets;
-
-  // const subTitleText = !!subTitle
-  //   ? subTitle
-  //   : showClosedListingHelpText
-  //     ? intl.formatMessage({ id: 'BookingPanel.subTitleClosedListing' })
-  //     : null;
 
   const isNightly = unitType === LINE_ITEM_NIGHT;
   const isDaily = unitType === LINE_ITEM_DAY;
@@ -121,7 +113,6 @@ const BookingPanel = props => {
   const amenityOptions5 = findOptionsForSelectFilter('petInHome', filterConfig);
   const amenityOptions6 = findOptionsForSelectFilter('serviceSetup', filterConfig);
   const selectedOptions = publicData && publicData.numberOfPets ? publicData.numberOfPets : [];
-  // const detail = listing?.attributes?.publicData?.serviceSetup;
 
   return (
     <div className={classes}>
@@ -153,6 +144,10 @@ const BookingPanel = props => {
             onSubmit={onSubmit}
             numberPet={numberPet}
             price={price}
+            initialValues={{
+              serviceSetup: search.pub_serviceSetup,
+              numberOfPets: search.pub_numberOfPets
+            }}
             listing={listing}
             firstname={firstname}
             listingId={listing.id}
@@ -189,7 +184,7 @@ const BookingPanel = props => {
           </div>
         ) : null}
       </div>
-     
+
       <SectionServicesetup options={amenityOptions6} publicData={publicData} />
       <SectionFeaturesMaybe options={amenityOptions} publicData={publicData} />
 

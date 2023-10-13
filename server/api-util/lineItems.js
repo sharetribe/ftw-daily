@@ -1,11 +1,13 @@
 const { calculateQuantityFromDates, calculateTotalFromLineItems, calculateTotalPrice, calculateTotalPrices } = require('./lineItemHelpers');
 const moment = require('moment');
 const { types } = require('sharetribe-flex-sdk');
-// const { Money } = types;
+const { Money } = types;
 
 // This bookingUnitType needs to be one of the following:
 // line-item/night, line-item/day or line-item/units
 const bookingUnitType = 'line-item/night';
+const servicespickupUnitType = 'line-item/pickup_price';
+const servicesdropupUnitType = 'line-item/dropup_price';
 const bookingUnitDayType = 'line-item/day';
 const PROVIDER_COMMISSION_PERCENTAGE = -12;
 const CUSTOMER_COMMISSION_PERCENTAGE = 3;
@@ -34,7 +36,9 @@ const CUSTOMER_COMMISSION_PERCENTAGE = 3;
 exports.transactionLineItems = (listing, bookingData) => {
   const lineItems = [];
   const unitPrice = listing.attributes.price;
-  const { startDate, endDate, serviceSetup, numberOfPets } = bookingData;
+  const { startDate, endDate, serviceSetup, numberOfPets, pickyes, dropPick, dropyes } = bookingData;
+  const pickyesprice = pickyes * 100;
+  const dropyesprice = dropyes * 100;
 
   const discount = listing.attributes.publicData.discountlengthOfStays;
   const DISCOUNT_COMMISSION_PERCENTAGE = -discount;
@@ -59,9 +63,32 @@ exports.transactionLineItems = (listing, bookingData) => {
     includeFor: ['customer', 'provider'],
   };
 
-  if (serviceSetup  === 'overnightsStay') {
+  if (serviceSetup === 'overnightsStay') {
     lineItems.push(booking)
   }
+
+  const pickservices = {
+    code: servicespickupUnitType,
+    unitPrice: new Money(pickyesprice,unitPrice.currency),
+    quantity: 1,
+    includeFor: ['customer', 'provider'],
+  };
+  if (dropPick === 'dropPick_yes') {
+    lineItems.push(pickservices)
+  }
+
+
+  const dropservices = {
+    code: servicesdropupUnitType,
+    unitPrice: new Money(dropyesprice,unitPrice.currency),
+    quantity: 1,
+    includeFor: ['customer',],
+  };
+  if (dropPick === 'dropPick_yes') {
+     lineItems.push(dropservices)
+  }
+
+
 
   const dayCareStay = {
     code: bookingUnitDayType,
@@ -85,24 +112,22 @@ exports.transactionLineItems = (listing, bookingData) => {
     lineItems.push(discount_price)
   }
 
-  const customerCommissions = {
-    code: 'line-item/customer-commission',
-    unitPrice: calculateTotalFromLineItems(lineItems),
-    percentage: CUSTOMER_COMMISSION_PERCENTAGE,
-    includeFor: ['customer'],
-  };
-
-  const providerCommissions = {
-    code: 'line-item/provider-commission',
-    unitPrice: calculateTotalFromLineItems(lineItems),
-    percentage: PROVIDER_COMMISSION_PERCENTAGE,
-    includeFor: ['provider'],
-  };
-
   if (PROVIDER_COMMISSION_PERCENTAGE && typeof PROVIDER_COMMISSION_PERCENTAGE == 'number') {
+    const providerCommissions = {
+      code: 'line-item/provider-commission',
+      unitPrice: calculateTotalFromLineItems(lineItems),
+      percentage: PROVIDER_COMMISSION_PERCENTAGE,
+      includeFor: ['provider'],
+    };
     lineItems.push(providerCommissions);
   }
   if ((CUSTOMER_COMMISSION_PERCENTAGE && typeof CUSTOMER_COMMISSION_PERCENTAGE == 'number')) {
+    const customerCommissions = {
+      code: 'line-item/customer-commission',
+      unitPrice: calculateTotalFromLineItems(lineItems),
+      percentage: CUSTOMER_COMMISSION_PERCENTAGE,
+      includeFor: ['customer'],
+    };
     lineItems.push(customerCommissions);
   }
 

@@ -15,6 +15,7 @@ import {
   LISTING_PAGE_PARAM_TYPE_DRAFT,
   LISTING_PAGE_PARAM_TYPE_EDIT,
   createSlug,
+  parse,
 } from '../../util/urlHelpers';
 import { formatMoney } from '../../util/currency';
 import { createResourceLocatorString, findRouteByRouteName } from '../../util/routes';
@@ -208,29 +209,15 @@ export class ListingPageComponent extends Component {
       onUpdateProfile
     } = this.props;
 
-
-var retrievedDataString = localStorage.getItem("myData");
-
-// Convert the JSON string back to an object
-var retrievedDataObject = JSON.parse(retrievedDataString);
-
-// Access the properties of the retrieved object
-// var retrievedNumberOfPets = retrievedDataObject.numberOfPets;
-// var retrievedServiceSetup = retrievedDataObject.serviceSetup;
-
-// console.log("numberOfPets: " + retrievedNumberOfPets);
-// console.log("serviceSetup: " + retrievedServiceSetup);
     const listingId = new UUID(rawParams.id);
+    const search = parse(location.search);
     const isPendingApprovalVariant = rawParams.variant === LISTING_PAGE_PENDING_APPROVAL_VARIANT;
     const isDraftVariant = rawParams.variant === LISTING_PAGE_DRAFT_VARIANT;
     const currentListing =
       isPendingApprovalVariant || isDraftVariant
         ? ensureOwnListing(getOwnListing(listingId))
         : ensureListing(getListing(listingId));
-    // const currentListing = ensureListing(listing);
-    const searchParams = history?.location?.state?.rawParams && history?.location?.state?.rawParams;
-    console.log('searchParams', searchParams)
-  const searchedCare = !!searchParams?.keywords ? searchParams?.keywords : !!searchParams?.pub_kindOfCareLabel ? searchParams?.pub_kindOfCareLabel : "";
+    
     const id = currentListing?.id?.uuid;
     const listingSlug = rawParams.slug || createSlug(currentListing.attributes.title || '');
     const params = { slug: listingSlug, ...rawParams };
@@ -541,6 +528,7 @@ var retrievedDataObject = JSON.parse(retrievedDataString);
                 </div>
                 <BookingPanel
                   className={css.bookingPanel}
+                  search={search}
                   listing={currentListing}
                   isOwnListing={isOwnListing}
                   unitType={unitType}

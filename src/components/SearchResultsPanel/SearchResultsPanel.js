@@ -13,6 +13,7 @@ const SearchResultsPanel = props => {
     pagination,
     currentUser,
     search,
+    searchQuery,
     setActiveListing,
     onUpdateProfile,
     onLike,
@@ -51,6 +52,7 @@ const SearchResultsPanel = props => {
             key={l.id.uuid}
             listing={l}
             onLike={onLike}
+            searchQuery={searchQuery}
             pageName={pageName}
             renderSizes={cardRenderSizes}
             onUpdateProfile={onUpdateProfile}

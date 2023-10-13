@@ -34,6 +34,7 @@ export class ProfileSettingsPageComponent extends Component {
     const {
       currentUser,
       image,
+      form,
       onImageUpload,
       onUpdateProfile,
       scrollingDisabled,
@@ -43,10 +44,32 @@ export class ProfileSettingsPageComponent extends Component {
       uploadInProgress,
       intl,
     } = this.props;
-
+console.log('form', form)
     const handleSubmit = values => {
-      const { firstName, lastName, bio: rawBio } = values;
-
+      const { firstName, lastName, bio: rawBio ,pets,
+        Energy_level,Feeding_schedule,
+        Health_info,
+        Medication,
+      Pet_Insurance,
+      Potty_break,
+      Weight,
+      about_pet,
+      anything_host,
+      children_pet,
+      desexed,
+      house_trained,
+      idPetImage,
+      left_alone,
+      microchipped,
+      other_pet,
+      pet_breed,
+      pet_des,
+      pet_month,
+      pet_year,
+      pet_name
+        
+         } = values;
+console.log('values', values)
       // Ensure that the optional bio is a string
       const bio = rawBio || '';
 
@@ -54,6 +77,28 @@ export class ProfileSettingsPageComponent extends Component {
         firstName: firstName.trim(),
         lastName: lastName.trim(),
         bio,
+        publicData:{
+          pets,Energy_level,Feeding_schedule,
+          Health_info,
+          Medication,
+        Pet_Insurance,
+        Potty_break,
+        Weight,
+        about_pet,
+        anything_host,
+        children_pet,
+        desexed,
+        firstName,
+        house_trained,
+        idPetImage,
+        left_alone,
+        microchipped,
+        other_pet,
+        pet_breed,
+        pet_des,
+        pet_month,
+        pet_year,
+        pet_name,}
       };
       const uploadedImage = this.props.image;
 
@@ -68,6 +113,26 @@ export class ProfileSettingsPageComponent extends Component {
 
     const user = ensureCurrentUser(currentUser);
     const { firstName, lastName, bio } = user.attributes.profile;
+    const {pets,Energy_level,Feeding_schedule,
+      Health_info,
+      Medication,
+    Pet_Insurance,
+    Potty_break,
+    Weight,
+    about_pet,
+    anything_host,
+    children_pet,
+    desexed,
+    house_trained,
+    idPetImage,
+    left_alone,
+    microchipped,
+    other_pet,
+    pet_breed,
+    pet_des,
+    pet_month,
+    pet_year,
+    pet_name,}= user?.attributes?.profile?.publicData;
     const profileImageId = user.profileImage ? user.profileImage.id : null;
     const profileImage = image || { imageId: profileImageId };
 
@@ -75,7 +140,31 @@ export class ProfileSettingsPageComponent extends Component {
       <ProfileSettingsForm
         className={css.form}
         currentUser={currentUser}
-        initialValues={{ firstName, lastName, bio, profileImage: user.profileImage }}
+        initialValues={{ firstName, lastName, bio, profileImage: user.profileImage ,
+          pets,Energy_level,Feeding_schedule,
+          Health_info,
+          Medication,
+        Pet_Insurance,
+        Potty_break,
+        Weight,
+        about_pet,
+        anything_host,
+        children_pet,
+        desexed,
+        firstName,
+        house_trained,
+        idPetImage,
+        left_alone,
+        microchipped,
+        other_pet,
+        pet_breed,
+        pet_des,
+        pet_month,
+        pet_year,
+        pet_name,
+        
+        
+        }}
         profileImage={profileImage}
         onImageUpload={e => onImageUploadHandler(e, onImageUpload)}
         uploadInProgress={uploadInProgress}

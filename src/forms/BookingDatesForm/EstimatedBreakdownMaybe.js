@@ -120,8 +120,9 @@ const estimatedTransaction = (bookingStart, bookingEnd, lineItems, userRole) => 
 };
 
 const EstimatedBreakdownMaybe = props => {
-  const { unitType, dayUnitType, startDate, endDate, singlebooking ,endTime,startTime  } = props.bookingData;
-  console.log(startTime, '^^^^ ^^^^ => startTime');
+  const { unitType, dayUnitType, startDate, endDate, singlebooking ,endTime,startTime,
+     } = props.bookingData;
+ 
   
   const lineItems = props.lineItems;
 

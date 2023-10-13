@@ -59,7 +59,6 @@ const EditListingYourselfPanel = props => {
           };
 
           onSubmit(updateValues);
-          //console.log('updateValues', updateValues)
         }}
         onChange={onChange}
         disabled={disabled}

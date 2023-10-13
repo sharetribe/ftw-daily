@@ -30,7 +30,8 @@ module.exports = (req, res) => {
           lineItems,
         },
       };
-
+     
+      
       const diffOfDays = moment(bookingData.startDate).diff(moment(), 'days');
 
       let transaction;

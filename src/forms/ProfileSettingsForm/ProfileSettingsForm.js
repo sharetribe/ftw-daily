@@ -9,13 +9,28 @@ import { ensureCurrentUser } from '../../util/data';
 import { propTypes } from '../../util/types';
 import * as validators from '../../util/validators';
 import { isUploadImageOverLimitError } from '../../util/errors';
-import { Form, Avatar, Button, ImageFromFile, IconSpinner, FieldTextInput } from '../../components';
-
+import { Form, Avatar, Button, ImageFromFile, IconSpinner, FieldTextInput, FieldRadioButton, FieldCheckbox } from '../../components';
+import { FieldArray } from 'react-final-form-arrays';
+import arrayMutators from 'final-form-arrays';
 import css from './ProfileSettingsForm.module.css';
+import S3 from 'react-aws-s3';
+import { v4 as uuidv4 } from 'uuid';
+import moment from 'moment';
+import { Energy_level, Feeding_schedule, Medication, Pet_Insurance, Potty_break, Weight, children_pet, desexed, house_trained, left_alone, microchipped, other_pet, typeOfPet } from '../../marketplace-custom-config';
 
 const ACCEPT_IMAGES = 'image/*';
 const UPLOAD_CHANGE_DELAY = 2000; // Show spinner so that browser has time to load img srcset
+const ACCEPT_FILE = 'image/*';
+const configS3 = {
+  bucketName: process.env.REACT_APP_S3_BUCKET_NAME,
+  region: process.env.REACT_APP_S3_REGION,
+  accessKeyId: process.env.REACT_APP_S3_ACCESS_ID,
+  secretAccessKey: process.env.REACT_APP_S3_ACCESS_KEY,
+};
 
+//const ACCEPT_FILE = 'application/pdf,video/*';
+
+const ReactS3Client = new S3(configS3);
 class ProfileSettingsFormComponent extends Component {
   constructor(props) {
     super(props);
@@ -39,11 +54,44 @@ class ProfileSettingsFormComponent extends Component {
   componentWillUnmount() {
     window.clearTimeout(this.uploadDelayTimeoutId);
   }
-
+  componentDidUpdate() {
+    if (typeof window !== 'undefined') {
+      window.Buffer = window.Buffer || require('buffer').Buffer;
+    }
+  }
+  onAttachmentUpload(file, form) {
+    // this.props.setClearForm(false);
+    if (file && file.name) {
+      ReactS3Client.uploadFile(file, file.name)
+        .then(data => {
+          //  const updateduploadedAttachmentsUrls = [...this.state.uploadedAttachmentsUrls];
+          const { location } = data;
+          const currentDate = moment().format('MM-DD-YYYY hh:mm:ss');
+          const updateduploadedAttachmentsUrls = ({
+            link: location,
+            date: currentDate,
+            name: file.name,
+            id: uuidv4(),
+            size: file.size
+          });
+          this.setState({
+            uploadedAttachmentsUrls: updateduploadedAttachmentsUrls,
+            attachmentDeleteRequested: false,
+            uploadAttachmentToAwsRequested: false,
+          });
+          form.change("idPetImage", updateduploadedAttachmentsUrls);
+        })
+        .catch(e => {
+          console.error(e, '^^^^ ^^^^ => e');
+          this.setState({ uploadAttachmentToAwsRequested: false });
+        });
+    }
+  }
   render() {
     return (
       <FinalForm
         {...this.props}
+        mutators={{ ...arrayMutators }}
         render={fieldRenderProps => {
           const {
             className,
@@ -62,7 +110,7 @@ class ProfileSettingsFormComponent extends Component {
             form,
             values,
           } = fieldRenderProps;
-
+          console.log('values', values)
           const user = ensureCurrentUser(currentUser);
 
           // First name
@@ -96,6 +144,18 @@ class ProfileSettingsFormComponent extends Component {
           const bioPlaceholder = intl.formatMessage({
             id: 'ProfileSettingsForm.bioPlaceholder',
           });
+
+          const ACCEPT_FILE = 'image/*';
+          const configS3 = {
+            bucketName: process.env.REACT_APP_S3_BUCKET_NAME,
+            region: process.env.REACT_APP_S3_REGION,
+            accessKeyId: process.env.REACT_APP_S3_ACCESS_ID,
+            secretAccessKey: process.env.REACT_APP_S3_ACCESS_KEY,
+          };
+
+          //const ACCEPT_FILE = 'application/pdf,video/*';
+
+          const ReactS3Client = new S3(configS3);
 
           const uploadingOverlay =
             uploadInProgress || this.state.uploadDelay ? (
@@ -175,8 +235,62 @@ class ProfileSettingsFormComponent extends Component {
           const submitDisabled =
             invalid || pristine || pristineSinceLastSubmit || uploadInProgress || submitInProgress;
 
+            const petarray =[
+              values.Energy_level,
+              values. Feeding_schedule,
+              values.Health_info,
+              values.Medication,
+              values.Pet_Insurance,
+              values.Potty_break,
+              values.Weight,
+              values.about_pet,
+              values.anything_host,
+              values.children_pet,
+              values.desexed,
+              values.firstName,
+              values.house_trained,
+              values.idPetImage,
+              values.left_alone,
+              values.microchipped,
+              values.other_pet,
+              values.pet_breed,
+              values.pet_des,
+              values.pet_month,
+              values.pet_year,
+              values.pet_name,
+              values.pets,];
+            console.log('petarray', petarray)
+            petarray.push(
+              values,
+              values.Energy_level,
+              values. Feeding_schedule,
+              values.Health_info,
+              values.Medication,
+              values.Pet_Insurance,
+              values.Potty_break,
+              values.Weight,
+              values.about_pet,
+              values.anything_host,
+              values.children_pet,
+              values.desexed,
+              values.firstName,
+              values.house_trained,
+              values.idPetImage,
+              values.left_alone,
+              values.microchipped,
+              values.other_pet,
+              values.pet_breed,
+              values.pet_des,
+              values.pet_month,
+              values.pet_year,
+              values.pet_name,
+              values.pets,
+
+              )
+
           return (
             <Form
+
               className={classes}
               onSubmit={e => {
                 this.submittedValues = values;
@@ -292,6 +406,409 @@ class ProfileSettingsFormComponent extends Component {
                   <FormattedMessage id="ProfileSettingsForm.bioInfo" />
                 </p>
               </div>
+              {/* <button>add pet</button> */}
+
+              <FieldArray name="pets">
+                {({ fields }) => (
+                  <div>
+                    <h3>Add Pet</h3>
+                    <React.Fragment>
+                      {fields.map((name, index) => (
+                        <div key={name}>
+                          {/* <button
+                            type="button"
+                            onClick={() => fields.remove(index)}
+                          >
+                            Remove Pet
+                          </button> */}
+                            
+                            
+                          
+                             <h2 as="h2" className={css.sectionTitle}>
+                          <FormattedMessage id={`Pet ${index + 1}`} />
+                        </h2>
+                        {/* {index ?  : null} */}
+                        <button className={css.removeButton} type="button" onClick={() => fields.remove(index)}>x</button>
+                          <div>
+                            <FieldTextInput
+                              type="text"
+                              // id="pet_des"
+                              // name="pet_des"
+                               id={`pet_des${index}`}
+                              name={`pet_des${index}`}
+                              label={"Provide a description of your pet"}
+                              placeholder={bioPlaceholder}
+                            />
+
+                            {typeOfPet.map((st) => {
+                              return (
+                                <div className={css.cardSelectPet} key={st.key}>
+                                  <FieldRadioButton
+                                    className={css.features}
+                                    id={st.key}
+                                    name={`typeOfPet${index}`}
+                                    value={st.key}
+                                    label={st.label}
+                                  // validate={composeValidators(required(phoneRequiredMessage))}
+                                  />
+                                </div>
+                              )
+                            })
+                            }
+
+                            <FieldTextInput
+                              type="text"
+                              id={`pet_name${index}`}
+                              name={`pet_name${index}`}
+                              label={"What is your Pet's name?"}
+                              placeholder={bioPlaceholder}
+                            />
+
+                            <Field
+                              label={chooseAvatarLabel}
+                              id={`idPetImage${index}`}
+                              name={`idPetImage${index}`}
+                              accept={ACCEPT_FILE}
+                              form={null}
+                              type="file"
+                            >
+                              {fieldprops => {
+                                const { accept, input, label, meta, disabled: fieldDisabled } = fieldprops;
+                                const { name, type } = input;
+                                const onChange = e => {
+                                  const file = e.target.files[0];
+                                  this.setState({ fileState: file });
+                                  if (file && file.name && file.size < 10000000) {
+                                    this.setState({ uploadAttachmentToAwsRequested: true, stopLoop: false });
+                                    this.onAttachmentUpload(file, form);
+                                    e.target.value = null;
+                                  }
+                                };
+
+                                const inputProps = { accept, id: name, name, onChange, type };
+                                return (
+                                  <div className={css.addImageWrapper}>
+                                    <div className={css.aspectRatioWrapper}>
+                                      {fieldDisabled ? null : (
+                                        <input {...inputProps} className={css.addImageInput} />
+                                      )}
+                                      <label htmlFor={name} className={css.addImage}>
+                                        {label}
+                                      </label>
+                                    </div>
+                                  </div>
+                                );
+                              }}
+                            </Field>
+                            {/* <Field
+                              component={props => {
+                                const { input, meta } = props;
+                                return (
+                                  <div className={css.imageRequiredWrapper}>
+                                    <input {...input} />
+                                    
+
+                                  </div>
+                                );
+                              }}
+                              name="images"
+                              type="hidden"
+
+                            /> */}
+                            <ul>
+                              {values.idPetImage && Object.keys(values.idPetImage).length
+                                ? <div className={css.fileUploadName} >
+                                  <div>
+                                    {/\mp4|MP4|mov|webm/.test(values.idPetImage.link) ? (
+                                      <video src={values.idPetImage && values.idPetImage.link} loop autoPlay={true} muted style={{ height: '200px' }} />
+                                    ) : /\png|jpeg|jpg/.test(values.idPetImage.link) ? (
+                                      <img alt={values.idPetImage.name} src={values.idPetImage.link} style={{ height: '200px' }} />
+                                    ) : (
+                                      <object data={values.idPetImage.link}>
+                                        <iframe
+                                          className="doc"
+                                          src={`https://docs.google.com/gview?url=${values.idPetImage.link}&embedded=true`}
+                                        />
+                                      </object>
+                                    )}
+                                  </div>
+                                </div>
+                                : null}
+
+                            </ul>
+                            
+
+                            {Weight.map((st) => {
+                              return (
+                                <div className={css.cardSelectPet} key={st.key}>
+                                  <FieldRadioButton
+                                    className={css.features}
+                                    id={st.key}
+                                    name={"Weight"}
+                                    value={st.key}
+                                    label={st.label}
+                                  // validate={composeValidators(required(phoneRequiredMessage))}
+                                  />
+                                </div>
+                              )
+                            })
+                            }
+                            <FieldTextInput
+                              type="number"
+                              id="pet_month"
+                              name="pet_month"
+                              label={"What is your Pet's age(month)?"}
+                              placeholder={bioPlaceholder}
+                            />
+                            <FieldTextInput
+                              type="number"
+                              id="pet_year"
+                              name="pet_year"
+                              label={"What is your Pet's age(year)?"}
+                              placeholder={bioPlaceholder}
+                            />
+                            <FieldTextInput
+                              type="text"
+                              id="pet_breed"
+                              name="pet_breed"
+                              label={"Enter all breeds that apply. If your dog is a mixed breed, add ‘Mixed’ as well."}
+                              placeholder={bioPlaceholder}
+                            />
+
+                            <h3>Additional Details</h3>
+                            <p>Is your Pet microchipped?</p>
+                            {microchipped.map((st) => {
+                              return (
+                                <div className={css.cardSelectPet} key={st.key}>
+                                  <FieldRadioButton
+                                    className={css.features}
+                                    id={st.key}
+                                    name={"microchipped"}
+                                    value={st.key}
+                                    label={st.label}
+                                  // validate={composeValidators(required(phoneRequiredMessage))}
+                                  />
+                                </div>
+                              )
+                            })
+                            }
+
+                            <p>Is your Pet desexed? </p>
+                            {desexed.map((st) => {
+                              return (
+                                <div className={css.cardSelectPet} key={st.key}>
+                                  <FieldRadioButton
+                                    className={css.features}
+                                    id={st.key}
+                                    name={"desexed"}
+                                    value={st.key}
+                                    label={st.label}
+                                  // validate={composeValidators(required(phoneRequiredMessage))}
+                                  />
+                                </div>
+                              )
+                            })
+                            }
+
+                            <p>Is your Pet house trained? </p>
+                            {house_trained.map((st) => {
+                              return (
+                                <div className={css.cardSelectPet} key={st.key}>
+                                  <FieldRadioButton
+                                    className={css.features}
+                                    id={st.key}
+                                    name={"house_trained"}
+                                    value={st.key}
+                                    label={st.label}
+                                  // validate={composeValidators(required(phoneRequiredMessage))}
+                                  />
+                                </div>
+                              )
+                            })
+                            }
+                            <p>Friendly with children?  </p>
+                            {children_pet.map((st) => {
+                              return (
+                                <div className={css.cardSelectPet} key={st.key}>
+                                  <FieldRadioButton
+                                    className={css.features}
+                                    id={st.key}
+                                    name={"children_pet"}
+                                    value={st.key}
+                                    label={st.label}
+                                  // validate={composeValidators(required(phoneRequiredMessage))}
+                                  />
+                                </div>
+                              )
+                            })
+                            }
+                            <p>Friendly with other Pets? </p>
+                            {other_pet.map((st) => {
+                              return (
+                                <div className={css.cardSelectPet} key={st.key}>
+                                  <FieldRadioButton
+                                    className={css.features}
+                                    id={st.key}
+                                    name={"other_pet"}
+                                    value={st.key}
+                                    label={st.label}
+                                  // validate={composeValidators(required(phoneRequiredMessage))}
+                                  />
+                                </div>
+                              )
+                            })
+                            }
+
+                            <FieldTextInput
+                              type="text"
+                              id="about_pet"
+                              name="about_pet"
+                              label={"About your Pet?"}
+                              placeholder={bioPlaceholder}
+                            />
+
+                            <p>Care info</p>
+                            <p>Provide your Pet Host with instructions for walking, feeding and other care</p>
+
+                            <p>Potty break schedule</p>
+                            {Potty_break.map((st) => {
+                              return (
+                                <div className={css.cardSelectPet} key={st.key}>
+                                  <FieldRadioButton
+                                    className={css.features}
+                                    id={st.key}
+                                    name={"Potty_break"}
+                                    value={st.key}
+                                    label={st.label}
+                                  // validate={composeValidators(required(phoneRequiredMessage))}
+                                  />
+                                </div>
+                              )
+                            })
+                            }
+                            <p>Energy level</p>
+                            {Energy_level.map((st) => {
+                              return (
+                                <div className={css.cardSelectPet} key={st.key}>
+                                  <FieldRadioButton
+                                    className={css.features}
+                                    id={st.key}
+                                    name={"Energy_level"}
+                                    value={st.key}
+                                    label={st.label}
+                                  // validate={composeValidators(required(phoneRequiredMessage))}
+                                  />
+                                </div>
+                              )
+                            })
+                            }
+                            <p>Feeding schedule</p>
+                            {Feeding_schedule.map((st) => {
+                              return (
+                                <div className={css.cardSelectPet} key={st.key}>
+                                  <FieldRadioButton
+                                    className={css.features}
+                                    id={st.key}
+                                    name={"Feeding_schedule"}
+                                    value={st.key}
+                                    label={st.label}
+                                  // validate={composeValidators(required(phoneRequiredMessage))}
+                                  />
+                                </div>
+                              )
+                            })
+                            }
+                            <p>Can be left alone</p>
+                            {left_alone.map((st) => {
+                              return (
+                                <div className={css.cardSelectPet} key={st.key}>
+                                  <FieldRadioButton
+                                    className={css.features}
+                                    id={st.key}
+                                    name={"left_alone"}
+                                    value={st.key}
+                                    label={st.label}
+                                  // validate={composeValidators(required(phoneRequiredMessage))}
+                                  />
+                                </div>
+                              )
+                            })
+                            }
+                            <p>Medication (select all that apply)</p>
+                            {Medication.map((st) => {
+                              return (
+                                <div className={css.cardSelectPet} key={st.key}>
+                                  <FieldRadioButton
+                                    className={css.features}
+                                    id={st.key}
+                                    name={"Medication"}
+                                    value={st.key}
+                                    label={st.label}
+                                  // validate={composeValidators(required(phoneRequiredMessage))}
+                                  />
+                                </div>
+                              )
+                            })
+                            }
+
+                            <FieldTextInput
+                              type="text"
+                              id="anything_host"
+                              name="anything_host"
+                              label={"Anything else a Pet Host should know?"}
+                              placeholder={bioPlaceholder}
+                            />
+                            <p>Health info</p>
+
+
+                            <FieldTextInput
+                              type="text"
+                              id="Health_info"
+                              name="Health_info"
+                              label={"Add details about your pet's health and care providers"}
+                              placeholder={bioPlaceholder}
+                            />
+                            <h3>
+
+                              Veterinary info
+                            </h3>
+
+                            <p>Do you have Pet Insurance for your Pet's?</p>
+                            {Pet_Insurance.map((st) => {
+                              return (
+                                <div className={css.cardSelectPet} key={st.key}>
+                                  <FieldRadioButton
+                                    className={css.features}
+                                    id={st.key}
+                                    name={"Pet_Insurance"}
+                                    value={st.key}
+                                    label={st.label}
+                                  // validate={composeValidators(required(phoneRequiredMessage))}
+                                  />
+                                </div>
+                              )
+                            })
+                            }
+
+                          </div>
+                        </div>
+                      ))}
+                    </React.Fragment>
+                    <button
+                      type="button"
+                      onClick={() => fields.push({})}
+                    >
+                      Add Pet
+                    </button>
+                  </div >
+                )
+                }
+              </ FieldArray>
+
+
+
+
+
               {submitError}
               <Button
                 className={css.submitButton}
@@ -304,7 +821,8 @@ class ProfileSettingsFormComponent extends Component {
               </Button>
             </Form>
           );
-        }}
+        }
+        }
       />
     );
   }

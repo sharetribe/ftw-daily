@@ -171,27 +171,30 @@ export const initiateOrder = (orderParams, transactionId) => (dispatch, getState
     ? TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY
     : TRANSITION_REQUEST_PAYMENT;
   const isPrivilegedTransition = isPrivileged(transition);
- 
-  
 
   const bookingData = {
-    serviceSetup:orderParams.bookingData.serviceSetup,
-    numberOfPets:orderParams.bookingData.numberOfPets,
+    serviceSetup: orderParams.bookingData.serviceSetup,
+    numberOfPets: orderParams.bookingData.numberOfPets,
+    endTime: orderParams.bookingData.endTime,
+    startTime: orderParams.bookingData.startTime,
     startDate: orderParams.bookingStart,
     endDate: orderParams.bookingEnd,
+    pickyes: orderParams.pickyes,
+    dropyes: orderParams.pickyes,
+    dropPick: orderParams.dropPick,
   };
 
   const bodyParams = isTransition
     ? {
-        id: transactionId,
-        transition,
-        params: orderParams,
-      }
+      id: transactionId,
+      transition,
+      params: orderParams,
+    }
     : {
-        processAlias: config.bookingProcessAlias,
-        transition,
-        params: orderParams,
-      };
+      processAlias: config.bookingProcessAlias,
+      transition,
+      params: orderParams,
+    };
   const queryParams = {
     include: ['booking', 'provider'],
     expand: true,
@@ -304,11 +307,8 @@ export const sendMessage = params => (dispatch, getState, sdk) => {
  */
 export const speculateTransaction = (orderParams, transactionId) => (dispatch, getState, sdk) => {
   dispatch(speculateTransactionRequest());
-
   // If we already have a transaction ID, we should transition, not
   // initiate.
-  
-  
   const isTransition = !!transactionId;
   const transition = isTransition
     ? TRANSITION_REQUEST_PAYMENT_AFTER_ENQUIRY
@@ -316,28 +316,37 @@ export const speculateTransaction = (orderParams, transactionId) => (dispatch, g
   const isPrivilegedTransition = isPrivileged(transition);
 
   const bookingData = {
-    serviceSetup:orderParams.bookingData.serviceSetup,
-    numberOfPets:orderParams.bookingData.numberOfPets,
+    serviceSetup: orderParams.bookingData.serviceSetup,
+    endTime: orderParams.bookingData.endTime,
+    startTime: orderParams.bookingData.startTime,
+    numberOfPets: orderParams.bookingData.numberOfPets,
     startDate: orderParams.bookingStart,
     endDate: orderParams.bookingEnd,
+    pickyes: orderParams.pickyes,
+    dropyes: orderParams.dropyes,
+    dropPick: orderParams.dropPick,
+  
   };
 
   const params = {
-    ...orderParams,
+    // ...orderParams,
+    listingId:orderParams.listingId,
+    bookingStart: orderParams.bookingStart,
+    bookingEnd: orderParams.bookingEnd,
     cardToken: 'CheckoutPage_speculative_card_token',
   };
 
   const bodyParams = isTransition
     ? {
-        id: transactionId,
-        transition,
-        params,
-      }
+      id: transactionId,
+      transition,
+      params,
+    }
     : {
-        processAlias: config.bookingProcessAlias,
-        transition,
-        params,
-      };
+      processAlias: config.bookingProcessAlias,
+      transition,
+      params,
+    };
 
   const queryParams = {
     include: ['booking', 'provider'],

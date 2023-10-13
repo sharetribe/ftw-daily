@@ -49,6 +49,7 @@ export const ListingCardComponent = props => {
     className,
     rootClassName,
     intl,
+    searchQuery,
     listing,
     renderSizes,
     setActiveListing,
@@ -103,7 +104,7 @@ export const ListingCardComponent = props => {
   };
 
   return (
-    <NamedLink className={classes} name="ListingPage" params={{ id, slug }}>
+    <NamedLink className={classes} name="ListingPage" params={{ id, slug }} to={{ search: searchQuery }}>
       <div
         className={css.threeToTwoWrapper}
         onMouseEnter={() => setActiveListing(currentListing.id)}

@@ -33,8 +33,224 @@
  *         (i.e. pub_<key> or meta_<key>).
  */
 
-export const filters = [
+export const typeOfPet = [
+  // {
+  //   key: 'overnightsStay',
+  //   label: 'Over night stay',
+  // },
+  // {
+  //   key: 'dayCareStay',
+  //   label: 'Day care stay',
+  // },
+  {
+    key: 'dog',
+    label: 'Dog',
+  },
+  {
+    key: 'cat',
+    label: 'Cat',
+  }
+]
+export const Weight=[
+  {
+    key: 'small',
+    label: '0-6kg (Small)',
+  },
+  {
+    key: 'midium',
+    label: '7-20kg (Medium)',
+  },
+  {
+    key: 'large',
+    label: '20-40kg (Large)',
+  },
+  {
+    key: 'giant',
+    label: '40+kg (Giant)',
+  },
+]
+export const microchipped=[
+  {
+    key: 'microchipped_yes',
+    label: 'Yes',
+  },
+  {
+    key: 'microchipped_no',
+    label: 'No',
+  },
+]
+export const desexed=[
+  {
+    key: 'desexed_yes',
+    label: 'Yes',
+  },
+  {
+    key: 'desexed_no',
+    label: 'No',
+  },
+]
+export const house_trained=[
+  {
+    key: 'trained_yes',
+    label: 'Yes',
+  },
+  {
+    key: 'trained_no',
+    label: 'No',
+  },
+  {
+    key: 'trained_Unsure',
+    label: 'Unsure',
+  },
+  {
+    key: 'trained_Depends',
+    label: 'Depends',
+  },
  
+]
+export const children_pet=[
+  {
+    key: 'children_yes',
+    label: 'Yes',
+  },
+  {
+    key: 'children_no',
+    label: 'No',
+  },
+  {
+    key: 'children_Unsure',
+    label: 'Unsure',
+  },
+  {
+    key: 'children_Depends',
+    label: 'Depends',
+  },
+ 
+]
+export const Potty_break=[
+  {
+    key: 'every_hour',
+    label: 'Every hour',
+  },
+  {
+    key: 'two_hr',
+    label: '2 hours',
+  },
+  {
+    key: 'four_hr',
+    label: '4 hours',
+  },
+  {
+    key: 'eight_hr',
+    label: '8 hours',
+  },
+  {
+    key: 'custom',
+    label: 'Custom',
+  },
+]
+export const Energy_level=[
+  {
+    key: 'high',
+    label: 'High ',
+  },
+  {
+    key: 'medium',
+    label: 'Medium',
+  },
+  {
+    key: 'low',
+    label: 'Low',
+  },
+ 
+ 
+]
+export const Feeding_schedule=[
+  {
+    key: 'morning',
+    label: 'Morning',
+  },
+  {
+    key: 'twice',
+    label: 'Twice a day',
+  },
+  {
+    key: 'feed_custom',
+    label: 'Custom',
+  },
+  {
+    key: 'other_Depends',
+    label: 'Depends',
+  },
+ 
+]
+export const left_alone=[
+  {
+    key: 'less_one',
+    label: '<1 hour',
+  },
+  {
+    key: 'one_four',
+    label: '1 - 4 hours',
+  },
+  {
+    key: 'four_eight',
+    label: '4 - 8 hours',
+  },
+  {
+    key: 'alone_custom',
+    label: 'Custom',
+  },
+ 
+]
+export const Medication=[
+  {
+    key: 'pill',
+    label: 'Pill',
+  },
+  {
+    key: 'topical',
+    label: 'Topical',
+  },
+  {
+    key: 'injection',
+    label: 'Injection',
+  },
+ 
+]
+export const other_pet=[
+  {
+    key: 'other_yes',
+    label: 'Yes',
+  },
+  {
+    key: 'other_no',
+    label: 'No',
+  },
+  {
+    key: 'other_Unsure',
+    label: 'Unsure',
+  },
+  {
+    key: 'other_Depends',
+    label: 'Depends',
+  },
+ 
+]
+export const Pet_Insurance=[
+  {
+    key: 'insurance_yes',
+    label: 'Yes',
+  },
+  {
+    key: 'insurance_no',
+    label: 'No',
+  },
+ 
+ 
+]
+export const filters = [
+
   {
     id: 'price',
     label: 'Price',
@@ -79,7 +295,7 @@ export const filters = [
   //     options: [
   //       { key: 'Overnight Stay', label: 'Overnight Stay' },
   //       { key: 'Day Care Stay', label: 'Day Care Stay' },
-        
+
   //     ],
   //   },
   // },
@@ -102,7 +318,7 @@ export const filters = [
   //       {
   //         key: 'towels',
   //         label: '0-6kg (small)',
-          
+
   //       },
   //       {
   //         key: 'bathroom',
@@ -139,7 +355,7 @@ export const filters = [
     id: 'dates',
     label: 'Dates',
     type: 'BookingDateRangeFilter',
-    filtersFor: ["SearchPage","LandingPage"],
+    filtersFor: ["SearchPage", "LandingPage"],
     group: 'primary',
     // Note: BookingDateRangeFilter is fixed filter,
     // you can't change "queryParamNames: ['dates'],"
@@ -151,10 +367,9 @@ export const filters = [
     label: 'Type of Services',
     type: 'SelectSingleFilter',
     group: 'primary',
-    filtersFor: ["SearchPage","LandingPage"],
+    filtersFor: ["SearchPage", "LandingPage"],
     queryParamNames: ['pub_serviceSetup'],
     config: {
-      
       searchMode: 'has_any',
       options: [
         {
@@ -165,7 +380,7 @@ export const filters = [
           key: 'dayCareStay',
           label: 'Day care stay',
         },
-       
+
       ],
     },
   },
@@ -175,7 +390,7 @@ export const filters = [
     label: 'Type of Pet',
     type: 'SelectMultipleFilter',
     group: 'primary',
-    filtersFor: ["SearchPage","LandingPage"],
+    filtersFor: ["SearchPage", "LandingPage"],
     queryParamNames: ['pub_typeOfPets'],
     config: {
       searchMode: 'has_all',
@@ -195,11 +410,11 @@ export const filters = [
     id: 'sizeOfdogs',
     label: 'Size Of Dogs',
     type: 'SelectMultipleFilter',
-    filtersFor: ["SearchPage","LandingPage"],
+    filtersFor: ["SearchPage", "LandingPage"],
     group: 'primary',
     queryParamNames: ['pub_sizeOfdogs'],
     config: {
-      
+
       searchMode: 'has_any',
       options: [
         {
@@ -218,11 +433,11 @@ export const filters = [
           key: 'giant',
           label: '40+kg (Giant)',
         },
-       
+
       ],
     },
   },
- 
+
   {
     id: 'discount',
     label: 'discount',
@@ -230,7 +445,7 @@ export const filters = [
     group: 'secondary',
     queryParamNames: ['pub_discount'],
     config: {
-      
+
       searchMode: 'has_all',
       options: [
         {
@@ -251,7 +466,7 @@ export const filters = [
     group: 'primary',
     queryParamNames: ['pub_policeCheck'],
     config: {
-      
+
       searchMode: 'has_all',
       options: [
         {
@@ -272,7 +487,7 @@ export const filters = [
     group: 'secondary',
     queryParamNames: ['pub_dropPick'],
     config: {
-      
+
       searchMode: 'has_all',
       options: [
         {
@@ -293,7 +508,7 @@ export const filters = [
     group: 'primary',
     filtersFor: ["SearchPage", "LandingPage"],
     queryParamNames: ['pub_numberOfPets'],
-    config: {      
+    config: {
       // searchMode: 'has_all',
       options: [
         {
@@ -308,7 +523,7 @@ export const filters = [
           key: '3',
           label: '3+',
         },
-       
+
       ],
     },
   },
@@ -319,7 +534,7 @@ export const filters = [
     group: 'secondary',
     queryParamNames: ['pub_dohavepets'],
     config: {
-      
+
       searchMode: 'has_all',
       options: [
         {
@@ -333,7 +548,7 @@ export const filters = [
       ],
     },
   },
-  
+
   {
     id: 'housingConditions',
     label: 'Housing conditions',
@@ -342,7 +557,7 @@ export const filters = [
     filtersFor: ["SearchPage"],
     queryParamNames: ['pub_housingConditions'],
     config: {
-      
+
       searchMode: 'has_all',
       options: [
         {
@@ -376,7 +591,7 @@ export const filters = [
     filtersFor: ["SearchPage"],
     queryParamNames: ['pub_petInHome'],
     config: {
-      
+
       searchMode: 'has_all',
       options: [
         {
@@ -387,7 +602,7 @@ export const filters = [
           key: 'doesnotcat',
           label: 'Does not own a cat',
         },
-      
+
         {
           key: 'acceptoneClient',
           label: 'Accepts only one client at a time',

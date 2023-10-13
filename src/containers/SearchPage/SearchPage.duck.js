@@ -171,9 +171,7 @@ export const searchListings = searchParams => (dispatch, getState, sdk) => {
   if (params.pub_numberOfPets) {
     params.pub_numberOfPets = (params.pub_numberOfPets) + ',';
   }
-  // if (params.pub_sizeOfdogs) {
-  //   params.pub_sizeOfdogs = ',' + (params.pub_sizeOfdogs );
-  // }
+
   return sdk.listings
     .query(params)
     .then(response => {

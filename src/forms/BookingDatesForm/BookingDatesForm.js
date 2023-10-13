@@ -39,7 +39,7 @@ export class BookingDatesFormComponent extends Component {
   handleFormSubmit(e) {
     let { startDate, endDate, date } = e.bookingDates || {};
     const { serviceSetup } = e;
-    const singlebooking = serviceSetup === "dayCareStay" ;length == 1;
+    const singlebooking = serviceSetup === "dayCareStay"; length == 1;
 
     if (singlebooking) {
       startDate = date;
@@ -62,23 +62,31 @@ export class BookingDatesFormComponent extends Component {
   // In case you add more fields to the form, make sure you add
   // the values here to the bookingData object.
   handleOnChange(formValues) {
-    let { startDate, endDate, date ,endTime,startTime
-    } =
-      formValues.values && formValues.values.bookingDates ? formValues.values.bookingDates : {};
+    let { startDate, endDate, date, endTime, startTime } = formValues.values && formValues.values.bookingDates ? formValues.values.bookingDates : {};
 
-    const { serviceSetup, numberOfPets } = formValues.values;
-    const singlebooking = serviceSetup === "dayCareStay" ;
+    const { serviceSetup, numberOfPets, dropPick } = formValues.values;
+    const singlebooking = serviceSetup === "dayCareStay";
     if (singlebooking) {
       startDate = date;
       endDate = moment(startDate).add(1, 'day').toDate();
     }
 
-    const listingId = this.props.listingId;
-    const isOwnListing = this.props.isOwnListing;
+    const { listing, listingId, isOwnListing } = this.props;
+    const { pickyes, dropyes, } = (listing && listing.id && listing.attributes.publicData) || {};
 
     if (startDate && endDate && !this.props.fetchLineItemsInProgress) {
       this.props.onFetchTransactionLineItems({
-        bookingData: { startDate, endDate, serviceSetup, numberOfPets,endTime,startTime},
+        bookingData: {
+          startDate,
+          endDate,
+          serviceSetup,
+          numberOfPets,
+          endTime,
+          startTime,
+          dropPick,
+          pickyes,
+          dropyes
+        },
         listingId,
         isOwnListing,
       });
@@ -139,9 +147,18 @@ export class BookingDatesFormComponent extends Component {
             fetchLineItemsError,
             firstname,
           } = fieldRenderProps;
-console.log('values', values.startTime)
-          const dayprice = listing.attributes.publicData.pricepet.dayCare.dayCareStay1;
-          const nightprice = listing?.attributes?.publicData?.pricepet?.overNight.overnightsStayPrice1;
+
+          const {
+            pricepet,
+            serviceSetup: detail,
+            discountlengthOfStays: discount,
+            lengthOfStays: letofstay,
+            dropPick: dropupService
+          } = (listing && listing.id && listing.attributes.publicData) || {};
+
+          const { dayCare, overNight } = pricepet || {};
+          const { dayCareStay1: dayprice } = dayCare || {};
+          const { overnightsStayPrice1: nightprice } = overNight || {};
 
           function findMinPrice(var_args) {
             return Array.prototype.reduce.call(arguments, function (prev, current) {
@@ -149,10 +166,10 @@ console.log('values', values.startTime)
             });
           }
 
-          const min = findMinPrice(nightprice, dayprice);
           let { startDate, endDate, date } = values && values.bookingDates ? values.bookingDates : {};
 
           const options = findOptionsForSelectFilter('serviceSetup', filterConfig);
+          const services = findOptionsForSelectFilter('dropPick', filterConfig);
 
           const numberPetArray = numberPet && numberPet == 3
             ? [1, 2, 3]
@@ -160,20 +177,12 @@ console.log('values', values.startTime)
               ? [1, 2]
               : [1];
 
-          const singlebooking = values.serviceSetup  === "dayCareStay";
+          const singlebooking = values.serviceSetup === "dayCareStay";
 
           if (singlebooking) {
             startDate = date;
             endDate = moment(startDate).add(1, 'day').toDate();
           }
-
-          const detail = listing?.attributes?.publicData?.serviceSetup;
-          const discount = listing.attributes.publicData.discountlengthOfStays;
-          const letofstay = listing.attributes.publicData.lengthOfStays;
-
-          // const phoneRequiredMessage = intl.formatMessage({
-          //   id: 'EditListingDescriptionForm.phoneRequired',
-          // });
 
           const bookingStartLabel = intl.formatMessage({
             id: 'BookingDatesForm.bookingStartTitle',
@@ -211,8 +220,8 @@ console.log('values', values.startTime)
                 unitType,
                 dayUnitType,
                 startDate,
-                startTime:values.startTime,
-                endTime:values.endTime,
+                startTime: values.startTime,
+                endTime: values.endTime,
                 endDate,
                 singlebooking
               }
@@ -321,6 +330,32 @@ console.log('values', values.startTime)
 
               </FieldSelect>
 
+              {dropupService == "dropPick_no"
+                ? null
+                : <>
+                  <div>This host provide drop off and pick up service.
+                  </div>
+                  <div>
+                    {services?.map((st) => {
+                      return (
+                        <FieldRadioButton
+                          className={css.features}
+                          id={st.key}
+                          name={"dropPick"}
+                          value={st.key}
+                          label={getLabel(services, st.label)}
+                        // disabled={submitDisabled}
+                        // validate={composeValidators(
+                        //   requiredFieldArrayCheckbox(requiredMessage),
+
+                        // )}
+                        />
+                      )
+                    })}
+
+                  </div>
+                </>}
+
               <div>
                 <p>select time </p>
                 <FieldSelect
@@ -328,8 +363,8 @@ console.log('values', values.startTime)
                   id={'startTime'} // Give it a unique ID
                   name={'startTime'} // Set a unique name for the field
                   label="Start Time" // Label for the dropdown
-                  // value={start_time}
-                > 
+                // value={start_time}
+                >
                   <option disabled value="">
                     Select start time
                   </option>
@@ -357,7 +392,7 @@ console.log('values', values.startTime)
                   id={'endTime'} // Give it a unique ID
                   name={'endTime'} // Set a unique name for the field
                   label="End Time" // Label for the dropdown
-                  // value={end_time}
+                // value={end_time}
                 >
                   <option disabled value="">
                     Select end time

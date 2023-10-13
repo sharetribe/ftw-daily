@@ -120,24 +120,11 @@ export class SearchPageComponent extends Component {
       onUpdateProfile,
     } = this.props;
 
-console.log('searchParams', searchParams)
-var dataObject = {
-  numberOfPets: searchParams.pub_numberOfPets,
-  serviceSetup: searchParams.pub_serviceSetup
-};
-
-// Convert the object to a JSON string
-var dataString = JSON.stringify(dataObject);
-// Save the JSON string to local storage
-localStorage.setItem("myData", dataString);
-console.log('dataString', dataString)
     // eslint-disable-next-line no-unused-vars
     const { mapSearch, page, ...searchInURL } = parse(location.search, {
       latlng: ['origin'],
       latlngBounds: ['bounds'],
     });
-  
-
 
     // urlQueryParams doesn't contain page specific url params
     // like mapSearch, page or origin (origin depends on config.sortSearchByDistance)
@@ -171,7 +158,7 @@ console.log('dataString', dataString)
       ? classNames(css.topbarBehindModal, css.topbar)
       : css.topbar;
 
-     
+
     // N.B. openMobileMap button is sticky.
     // For some reason, stickyness doesn't work on Safari, if the element is <button>
     return (
@@ -201,6 +188,7 @@ console.log('dataString', dataString)
             onMapIconClick={onMapIconClick}
             pagination={pagination}
             onUpdateProfile={onUpdateProfile}
+            searchQuery={location.search}
             searchParamsForPagination={parse(location.search)}
             showAsModalMaxWidth={MODAL_BREAKPOINT}
             history={history}
