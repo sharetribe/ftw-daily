@@ -178,10 +178,7 @@ export const Feeding_schedule=[
     key: 'feed_custom',
     label: 'Custom',
   },
-  {
-    key: 'other_Depends',
-    label: 'Depends',
-  },
+
  
 ]
 export const left_alone=[

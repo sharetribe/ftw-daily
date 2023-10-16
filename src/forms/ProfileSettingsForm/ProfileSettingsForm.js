@@ -36,7 +36,7 @@ class ProfileSettingsFormComponent extends Component {
     super(props);
 
     this.uploadDelayTimeoutId = null;
-    this.state = { uploadDelay: false, hideshowbutton: 0, isshowBTn: false,isFieldsVisible: [], };
+    this.state = { uploadDelay: false, hideshowbutton: 0, isshowBTn: false, isFieldsVisible: [], };
     this.submittedValues = {};
   }
 
@@ -120,7 +120,7 @@ class ProfileSettingsFormComponent extends Component {
 
 
   render() {
-    const {isFieldsVisible}= this.state
+    const { isFieldsVisible } = this.state
     return (
       <FinalForm
         {...this.props}
@@ -397,90 +397,84 @@ class ProfileSettingsFormComponent extends Component {
 
                     <React.Fragment>
                       {fields.map((name, index) => (
-                 
+
                         <div key={name}>
-                            <h2 as="h2" className={css.sectionTitle}>
+                          <h2 as="h2" className={css.sectionTitle}>
                             <FormattedMessage id={`Pet ${index + 1}`} />
                           </h2>
                           <button className={css.removeButton} type="button" onClick={() => fields.remove(index)}>x</button>
                           <button
-                                type="button"
-                                onClick={() => this.toggleFieldsVisibility(index)}
-                              >
-                                {isFieldsVisible[index] ? 'Hide' : 'Show'}
-                              </button>
-                              {isFieldsVisible[index] && (
-                                       <div>
-                      
-                        
-                          {/* {index ?  : null} */}
-                        
-                          {/* <button onClick={()=> this.hideshow(index)}>{this.state.isshowBTn ? "show":"hide"}</button> */}
-                          {/* {this.state.isshowBTn && */}
-                          <div>
+                            type="button"
+                            onClick={() => this.toggleFieldsVisibility(index)}
+                          >
+                            {isFieldsVisible[index] ? 'Hide' : 'Show'}
+                          </button>
+                          {isFieldsVisible[index] && (
+                            <div>
+                              <div>
 
-                            <FieldTextInput
-                              type="text"
-                              id="pet_des"
-                              name={`${name}.pet_des`}
+                                <FieldTextInput
+                                  type="text"
+                                  id="pet_des"
+                                  name={`${name}.pet_des`}
 
-                              label={"Provide a description of your pet"}
-                              placeholder={bioPlaceholder}
-                            />
-                            <h2>Type of Pet</h2>
-                            {typeOfPet.map((st) => (
-                              <div className={css.cardSelectPet} key={st.key}>
-                                <Field name={`${name}.typeOfPet`} component="input" type="radio" value={st.key} />
-                                {st.label}
-                              </div>)
-                            )}
-                            
+                                  label={"Provide a description of your pet"}
+                                  placeholder={bioPlaceholder}
+                                />
+                                <h2>Type of Pet</h2>
+                                {typeOfPet.map((st) => (
+                                  <div className={css.cardSelectPet} key={st.key}>
+                                    <Field name={`${name}.typeOfPet`} component="input" type="radio" value={st.key} />
+                                    {st.label}
+                                  </div>)
+                                )}
 
-                            <FieldTextInput
-                              type="text"
-                              id={"pet_name"}
-                              name={`${name}.pet_name`}
-                              label={"What is your Pet's name?"}
-                              placeholder={bioPlaceholder}
-                            />
 
-                            <Field
-                              label={chooseAvatarLabel}
-                              id={`${name}.idPetImage`}
-                              name={`${name}.idPetImage`}
-                              accept={ACCEPT_FILE}
-                              form={null}
-                              type="file"
-                            >
-                              {fieldprops => {
-                                const { accept, input, label, meta, disabled: fieldDisabled } = fieldprops;
-                                const { name, type } = input;
-                                const onChange = e => {
-                                  const file = e.target.files[0];
-                                  this.setState({ fileState: file });
-                                  if (file && file.name && file.size < 10000000) {
-                                    this.setState({ uploadAttachmentToAwsRequested: true, stopLoop: false });
-                                    this.onAttachmentUpload(file, form);
-                                    e.target.value = null;
-                                  }
-                                };
+                                <FieldTextInput
+                                  type="text"
+                                  id={"pet_name"}
+                                  name={`${name}.pet_name`}
+                                  label={"What is your Pet's name?"}
+                                  placeholder={bioPlaceholder}
+                                />
 
-                                const inputProps = { accept, id: name, name, onChange, type };
-                                return (
-                                  <div className={css.addImageWrapper}>
-                                    <div className={css.aspectRatioWrapper}>
-                                      {fieldDisabled ? null : (
-                                        <input {...inputProps} className={css.addImageInput} />
-                                      )}
-                                      <label htmlFor={name} className={css.addImage}>
-                                        {label}
-                                      </label>
-                                    </div>
-                                  </div>
-                                );
-                              }}
-                            </Field>
-                            {/* <Field
+                                <Field
+                                  label={chooseAvatarLabel}
+                                  id={`${name}.idPetImage`}
+                                  name={`${name}.idPetImage`}
+                                  accept={ACCEPT_FILE}
+                                  form={null}
+                                  type="file"
+                                >
+                                  {fieldprops => {
+                                    const { accept, input, label, meta, disabled: fieldDisabled } = fieldprops;
+                                    const { name, type } = input;
+                                    const onChange = e => {
+                                      const file = e.target.files[0];
+                                      this.setState({ fileState: file });
+                                      if (file && file.name && file.size < 10000000) {
+                                        this.setState({ uploadAttachmentToAwsRequested: true, stopLoop: false });
+                                        this.onAttachmentUpload(file, form);
+                                        e.target.value = null;
+                                      }
+                                    };
+
+                                    const inputProps = { accept, id: name, name, onChange, type };
+                                    return (
+                                      <div className={css.addImageWrapper}>
+                                        <div className={css.aspectRatioWrapper}>
+                                          {fieldDisabled ? null : (
+                                            <input {...inputProps} className={css.addImageInput} />
+                                          )}
+                                          <label htmlFor={name} className={css.addImage}>
+                                            {label}
+                                          </label>
+                                        </div>
+                                      </div>
+                                    );
+                                  }}
+                                </Field>
+                                {/* <Field
                               component={props => {
                                 const { input, meta } = props;
                                 return (
@@ -495,29 +489,29 @@ class ProfileSettingsFormComponent extends Component {
                               type="hidden"
 
                             /> */}
-                            <ul>
-                              {values.idPetImage && Object.keys(values.idPetImage).length
-                                ? <div className={css.fileUploadName} >
-                                  <div>
-                                    {/\mp4|MP4|mov|webm/.test(values.idPetImage.link) ? (
-                                      <video src={values.idPetImage && values.idPetImage.link} loop autoPlay={true} muted style={{ height: '200px' }} />
-                                    ) : /\png|jpeg|jpg/.test(values.idPetImage.link) ? (
-                                      <img alt={values.idPetImage.name} src={values.idPetImage.link} style={{ height: '200px' }} />
-                                    ) : (
-                                      <object data={values.idPetImage.link}>
-                                        <iframe
-                                          className="doc"
-                                          src={`https://docs.google.com/gview?url=${values.idPetImage.link}&embedded=true`}
-                                        />
-                                      </object>
-                                    )}
-                                  </div>
-                                </div>
-                                : null}
+                                <ul>
+                                  {values.idPetImage && Object.keys(values.idPetImage).length
+                                    ? <div className={css.fileUploadName} >
+                                      <div>
+                                        {/\mp4|MP4|mov|webm/.test(values.idPetImage.link) ? (
+                                          <video src={values.idPetImage && values.idPetImage.link} loop autoPlay={true} muted style={{ height: '200px' }} />
+                                        ) : /\png|jpeg|jpg/.test(values.idPetImage.link) ? (
+                                          <img alt={values.idPetImage.name} src={values.idPetImage.link} style={{ height: '200px' }} />
+                                        ) : (
+                                          <object data={values.idPetImage.link}>
+                                            <iframe
+                                              className="doc"
+                                              src={`https://docs.google.com/gview?url=${values.idPetImage.link}&embedded=true`}
+                                            />
+                                          </object>
+                                        )}
+                                      </div>
+                                    </div>
+                                    : null}
 
-                            </ul>
+                                </ul>
 
-                            {/* <h2>Weight</h2>
+                                {/* <h2>Weight</h2>
                             {Weight.map((st) => {
                               return (
                                 <div className={css.cardSelectPet} key={st.key}>
@@ -534,163 +528,204 @@ class ProfileSettingsFormComponent extends Component {
                             })
                             
                             } */}
-                            <h2>Weight</h2>
-                            {Weight.map((st) => (
-                              <div className={css.cardSelectPet} key={st.key}>
-                                <Field type="radio" component="input" name={`${name}.Weight`} value={st.key} />
-                                {st.label}
+                                <h2>Weight</h2>
+                                {Weight.map((st) => (
+                                  <div className={css.cardSelectPet} key={st.key}>
+                                    <Field type="radio" component="input" name={`${name}.Weight`} value={st.key} />
+                                    {st.label}
+                                  </div>
+                                ))}
+                                <FieldTextInput
+                                  type="number"
+                                  id="pet_month"
+                                  name={`${name}.pet_month`}
+                                  label={"What is your Pet's age(month)?"}
+                                  placeholder={bioPlaceholder}
+                                />
+                                <FieldTextInput
+                                  type="number"
+                                  id="pet_year"
+                                  name={`${name}.pet_year`}
+                                  label={"What is your Pet's age(year)?"}
+                                  placeholder={bioPlaceholder}
+                                />
+                                <FieldTextInput
+                                  type="text"
+                                  id="pet_breed"
+                                  name={`${name}.pet_breed`}
+                                  label={"Enter all breeds that apply. If your dog is a mixed breed, add ‘Mixed’ as well."}
+                                  placeholder={bioPlaceholder}
+                                />
+
+                                <h3>Additional Details</h3>
+                                <p>Is your Pet microchipped?</p>
+
+                                {microchipped.map((st) => (
+                                  <div className={css.cardSelectPet} key={st.key}>
+                                    <Field name={`${name}.microchipped`} component="input" type="radio" value={st.key} />
+                                    {st.label}
+                                  </div>)
+                                )}
+
+                                <p>Is your Pet desexed? </p>
+                                {desexed.map((st) => (
+                                  <div className={css.cardSelectPet} key={st.key}>
+                                    <Field name={`${name}.desexed`} component="input" type="radio" value={st.key} />
+                                    {st.label}
+                                  </div>)
+                                )}
+
+
+                                <p>Is your Pet house trained? </p>
+                                {house_trained.map((st) => (
+                                  <div className={css.cardSelectPet} key={st.key}>
+                                    <Field name={`${name}.house_trained`} component="input" type="radio" value={st.key} />
+                                    {st.label}
+                                  </div>)
+                                )}
+
+                                <p>Friendly with children?  </p>
+                                {children_pet.map((st) => (
+                                  <div className={css.cardSelectPet} key={st.key}>
+                                    <Field name={`${name}.children_pet`} component="input" type="radio" value={st.key} />
+                                    {st.label}
+                                  </div>)
+                                )}
+                                <p>Friendly with other Pets? </p>
+                                {other_pet.map((st) => (
+                                  <div className={css.cardSelectPet} key={st.key}>
+                                    <Field name={`${name}.other_pet`} component="input" type="radio" value={st.key} />
+                                    {st.label}
+                                  </div>)
+                                )}
+
+
+                                <FieldTextInput
+                                  type="text"
+                                  id="about_pet"
+                                  name={`${name}.about_pet`}
+                                  label={"About your Pet?"}
+                                  placeholder={bioPlaceholder}
+                                />
+
+                                <p>Care info</p>
+                                <p>Provide your Pet Host with instructions for walking, feeding and other care</p>
+
+                                <p>Potty break schedule</p>
+                                {Potty_break.map((st) => (
+                                  <div className={css.cardSelectPet} key={st.key}>
+                                    <Field name={`${name}.Potty_break`} component="input" type="radio" value={st.key} />
+                                    {st.label}
+                                  </div>)
+                                )}
+                                {values.pets[index].Potty_break === "custom" ? (
+                                  <div>
+                                    <Field
+                                      name={`${name}.customPottyBreakName`}
+                                      render={({ input }) => (
+                                        <input
+                                          type="text"
+                                          {...input}
+                                          placeholder="Enter custom Potty Break"
+                                        />
+                                      )}
+                                    />
+                                  </div>
+                                ) : null}
+
+
+                                <p>Energy level</p>
+                                {Energy_level.map((st) => (
+                                  <div className={css.cardSelectPet} key={st.key}>
+                                    <Field name={`${name}.Energy_level`} component="input" type="radio" value={st.key} />
+                                    {st.label}
+                                  </div>)
+                                )}
+
+                                <p>Feeding schedule</p>
+                                {Feeding_schedule.map((st) => (
+                                  <div className={css.cardSelectPet} key={st.key}>
+                                    <Field name={`${name}.Feeding_schedule`} component="input" type="radio" value={st.key} />
+                                    {st.label}
+                                  </div>)
+                                )}
+                                {values.pets[index].Feeding_schedule === "feed_custom" ? (
+                                  <div>
+                                    <Field
+                                      name={`${name}.customFeedSchedule`}
+                                      render={({ input }) => (
+                                        <input
+                                          type="text"
+                                          {...input}
+                                          placeholder="Enter custom Feed Schedule"
+                                        />
+                                      )}
+                                    />
+                                  </div>
+                                ) : null}
+                                <p>Can be left alone</p>
+                                {left_alone.map((st) => (
+                                  <div className={css.cardSelectPet} key={st.key}>
+                                    <Field name={`${name}.left_alone`} component="input" type="radio" value={st.key} />
+                                    {st.label}
+                                  </div>)
+                                )}
+                                {values.pets[index].left_alone === "alone_custom" ? (
+                                  <div>
+                                    <Field
+                                      name={`${name}.customLeftAlone`}
+                                      render={({ input }) => (
+                                        <input
+                                          type="text"
+                                          {...input}
+                                          placeholder="Enter custom Left Alone"
+                                        />
+                                      )}
+                                    />
+                                  </div>
+                                ) : null}
+                                <p>Medication (select all that apply)</p>
+                                {Medication.map((st) => (
+                                  <div className={css.cardSelectPet} key={st.key}>
+                                    <Field name={`${name}.Medication`} component="input" type="radio" value={st.key} />
+                                    {st.label}
+                                  </div>)
+                                )}
+
+                                <FieldTextInput
+                                  type="text"
+                                  id="anything_host"
+                                  name={`${name}.anything_host`}
+                                  label={"Anything else a Pet Host should know?"}
+                                  placeholder={bioPlaceholder}
+                                />
+                                <p>Health info</p>
+
+
+                                <FieldTextInput
+                                  type="text"
+                                  id="Health_info"
+                                  name={`${name}.Health_info`}
+                                  label={"Add details about your pet's health and care providers"}
+                                  placeholder={bioPlaceholder}
+                                />
+                                <h3>
+
+                                  Veterinary info
+                                </h3>
+
+                                <p>Do you have Pet Insurance for your Pet's?</p>
+                                {Pet_Insurance.map((st) => (
+                                  <div className={css.cardSelectPet} key={st.key}>
+                                    <Field name={`${name}.Pet_Insurance`} component="input" type="radio" value={st.key} />
+                                    {st.label}
+                                  </div>)
+                                )}
+
+
                               </div>
-                            ))}
-                            <FieldTextInput
-                              type="number"
-                              id="pet_month"
-                              name={`${name}.pet_month`}
-                              label={"What is your Pet's age(month)?"}
-                              placeholder={bioPlaceholder}
-                            />
-                            <FieldTextInput
-                              type="number"
-                              id="pet_year"
-                              name={`${name}.pet_year`}
-                              label={"What is your Pet's age(year)?"}
-                              placeholder={bioPlaceholder}
-                            />
-                            <FieldTextInput
-                              type="text"
-                              id="pet_breed"
-                              name={`${name}.pet_breed`}
-                              label={"Enter all breeds that apply. If your dog is a mixed breed, add ‘Mixed’ as well."}
-                              placeholder={bioPlaceholder}
-                            />
-
-                            <h3>Additional Details</h3>
-                            <p>Is your Pet microchipped?</p>
-
-                            {microchipped.map((st) => (
-                              <div className={css.cardSelectPet} key={st.key}>
-                                <Field name={`${name}.microchipped`} component="input" type="radio" value={st.key} />
-                                {st.label}
-                              </div>)
-                            )}
-
-                            <p>Is your Pet desexed? </p>
-                            {desexed.map((st) => (
-                              <div className={css.cardSelectPet} key={st.key}>
-                                <Field name={`${name}.desexed`} component="input" type="radio" value={st.key} />
-                                {st.label}
-                              </div>)
-                            )}
-
-
-                            <p>Is your Pet house trained? </p>
-                            {house_trained.map((st) => (
-                              <div className={css.cardSelectPet} key={st.key}>
-                                <Field name={`${name}.house_trained`} component="input" type="radio" value={st.key} />
-                                {st.label}
-                              </div>)
-                            )}
-
-                            <p>Friendly with children?  </p>
-                            {children_pet.map((st) => (
-                              <div className={css.cardSelectPet} key={st.key}>
-                                <Field name={`${name}.children_pet`} component="input" type="radio" value={st.key} />
-                                {st.label}
-                              </div>)
-                            )}
-                            <p>Friendly with other Pets? </p>
-                            {other_pet.map((st) => (
-                              <div className={css.cardSelectPet} key={st.key}>
-                                <Field name={`${name}.other_pet`} component="input" type="radio" value={st.key} />
-                                {st.label}
-                              </div>)
-                            )}
-
-
-                            <FieldTextInput
-                              type="text"
-                              id="about_pet"
-                              name={`${name}.about_pet`}
-                              label={"About your Pet?"}
-                              placeholder={bioPlaceholder}
-                            />
-
-                            <p>Care info</p>
-                            <p>Provide your Pet Host with instructions for walking, feeding and other care</p>
-
-                            <p>Potty break schedule</p>
-                            {Potty_break.map((st) => (
-                              <div className={css.cardSelectPet} key={st.key}>
-                                <Field name={`${name}.Potty_break`} component="input" type="radio" value={st.key} />
-                                {st.label}
-                              </div>)
-                            )}
-
-                            <p>Energy level</p>
-                            {Energy_level.map((st) => (
-                              <div className={css.cardSelectPet} key={st.key}>
-                                <Field name={`${name}.Energy_level`} component="input" type="radio" value={st.key} />
-                                {st.label}
-                              </div>)
-                            )}
-
-                            <p>Feeding schedule</p>
-                            {Feeding_schedule.map((st) => (
-                              <div className={css.cardSelectPet} key={st.key}>
-                                <Field name={`${name}.Feeding_schedule`} component="input" type="radio" value={st.key} />
-                                {st.label}
-                              </div>)
-                            )}
-
-                            <p>Can be left alone</p>
-                            {left_alone.map((st) => (
-                              <div className={css.cardSelectPet} key={st.key}>
-                                <Field name={`${name}.left_alone`} component="input" type="radio" value={st.key} />
-                                {st.label}
-                              </div>)
-                            )}
-                          
-                            <p>Medication (select all that apply)</p>
-                            {Medication.map((st) => (
-                              <div className={css.cardSelectPet} key={st.key}>
-                                <Field name={`${name}.Medication`} component="input" type="radio" value={st.key} />
-                                {st.label}
-                              </div>)
-                            )}
-                          
-                            <FieldTextInput
-                              type="text"
-                              id="anything_host"
-                              name={`${name}.anything_host`}
-                              label={"Anything else a Pet Host should know?"}
-                              placeholder={bioPlaceholder}
-                            />
-                            <p>Health info</p>
-
-
-                            <FieldTextInput
-                              type="text"
-                              id="Health_info"
-                              name={`${name}.Health_info`}
-                              label={"Add details about your pet's health and care providers"}
-                              placeholder={bioPlaceholder}
-                            />
-                            <h3>
-
-                              Veterinary info
-                            </h3>
-
-                            <p>Do you have Pet Insurance for your Pet's?</p>
-                            {Pet_Insurance.map((st) => (
-                              <div className={css.cardSelectPet} key={st.key}>
-                                <Field name={`${name}.Pet_Insurance`} component="input" type="radio" value={st.key} />
-                                {st.label}
-                              </div>)
-                            )}
-                        
-
-                          </div>
-                  </div>
-                              )}
+                            </div>
+                          )}
                         </div>
                       ))}
                     </React.Fragment>
@@ -698,7 +733,7 @@ class ProfileSettingsFormComponent extends Component {
                       type="button"
                       // onClick={() => fields.push({})}
                       onClick={() => {
-                        fields.push({ });
+                        fields.push({});
                         // Set default visibility for the newly added form
                         const newIndex = fields.length;
                         this.setState(prevState => {

@@ -147,7 +147,8 @@ export class BookingDatesFormComponent extends Component {
             fetchLineItemsError,
             firstname,
           } = fieldRenderProps;
-
+          console.log('listing', listing)
+          console.log('values', values)
           const {
             pricepet,
             serviceSetup: detail,
@@ -158,7 +159,11 @@ export class BookingDatesFormComponent extends Component {
 
           const { dayCare, overNight } = pricepet || {};
           const { dayCareStay1: dayprice } = dayCare || {};
+          const { dayCareStay2: dayprice2 } = dayCare || {};
+          const { dayCareStay3: dayprice3 } = dayCare || {};
           const { overnightsStayPrice1: nightprice } = overNight || {};
+          const { overnightsStayPrice2: nightprice2 } = overNight || {};
+          const { overnightsStayPrice3: nightprice3 } = overNight || {};
 
           function findMinPrice(var_args) {
             return Array.prototype.reduce.call(arguments, function (prev, current) {
@@ -480,17 +485,87 @@ export class BookingDatesFormComponent extends Component {
 
               <div className={css.pricingBox}>
                 <div className={css.pricingHeading}>Pricing</div>
+{values?.serviceSetup?
+  <>
+                      {values?.serviceSetup?.find((e) => e == "overnightsStay")
+                        ? <div className={css.pricingDescription}>
+                          <span className={css.boldText}>Over night rate</span> = AUD{nightprice}.00  per night </div>
+                        : null}
+                      {values?.serviceSetup?.find((e) => e == "dayCareStay")
+                        ? <div className={css.pricingDescription}>
+                          <span className={css.boldText}>Day care stay</span> = AUD{dayprice}.00  per day
+                          <span className={css.boldText}>Day care stay</span> = AUD{dayprice2}.00  per day
+                        </div>
 
-                {/* {values?.serviceSetup
+                        : null}
+                    </>:
+
+<div>
+
+
+{(detail?.find((e) => e == "overnightsStay")) ?
+  <div className={css.pricingDescription}>
+    <span>Over night rate Price of 1 pet</span> = AUD{nightprice}.00  per night 
+    {
+      nightprice2 > 0 ?
+     
+        <div>
+    <span>Over night rate Price of 2 pet</span> = AUD{nightprice2}.00  per night 
+    </div>
+   
+ 
+    :null
+    }
+  {
+    nightprice3 >0 ?  <div>
+    <span>Over night rate Price of 3 pet</span> = AUD{nightprice3}.00  per night
+    </div>:null
+  }
+  
+    
+    </div> : null}
+
+{(detail?.find((e) => e == "dayCareStay")) ?
+  <div className={css.pricingDescription}>
+    
+    <span>Day care stay Price of 1 pet</span> = AUD{dayprice}.00  per day
+    {
+        dayprice2 > 0 ?
+        <div>
+
+      <span >Day care stay Price of 2 pets</span> = AUD{dayprice2}.00  per day
+      
+    </div>:null
+    }
+    {
+      dayprice3 > 0 ?
+      <div>
+      <span >Day care stay Price of 3+ pets</span> = AUD{dayprice3}.00  per day
+      
+    </div>:null
+    }
+   
+
+  </div> : null}
+
+</div>
+
+}
+
+                {values?.serviceSetup
                   ? values?.serviceSetup?.length === 2
                     ? values.serviceSetup
-                      ? <div className={css.pricingDescription}>
-                        <div>
-                          <span className={css.boldText}>Over night rate</span> = AUD{nightprice}.00  per night
-                        </div>
-                        <span className={css.boldText}>Day care stay</span> = AUD{dayprice}.00  per day
-                      </div>
-                      : null
+                      // ? <div className={css.pricingDescription}>
+                      //   <div>
+                      //     <span className={css.boldText}>Over night rate</span> = AUD{nightprice}.00  per night
+                      //     <span className={css.boldText}>Over night rate</span> = AUD{nightprice2}.00  per night
+                      //     <span className={css.boldText}>Over night rate</span> = AUD{nightprice3}.00  per night
+                      //   </div>
+                      //   <span className={css.boldText}>Day care stay</span> = AUD{dayprice}.00  per day
+                      //   <span className={css.boldText}>Day care stay</span> = AUD{dayprice2}.00  per day
+                      //   <span className={css.boldText}>Day care stay</span> = AUD{dayprice3}.00  per day
+                      // </div>
+                      // : null
                     : <>
                       {values?.serviceSetup?.find((e) => e == "overnightsStay")
                         ? <div className={css.pricingDescription}>
@@ -498,22 +573,64 @@ export class BookingDatesFormComponent extends Component {
                         : null}
                       {values?.serviceSetup?.find((e) => e == "dayCareStay")
                         ? <div className={css.pricingDescription}>
-                          <span className={css.boldText}>Day care stay</span> = AUD{dayprice}.00  per day</div>
+                          <span className={css.boldText}>Day care stay</span> = AUD{dayprice}.00  per day
+                          <span className={css.boldText}>Day care stay</span> = AUD{dayprice2}.00  per day
+                        </div>
+
                         : null}
                     </>
-                  : <div>
-                   
+                  : 
+                  <div>
+
 
                     {(detail?.find((e) => e == "overnightsStay")) ?
                       <div className={css.pricingDescription}>
-                        <span>Over night rate</span> = AUD{nightprice}.00  per night </div> : null}
+                        <span>Over night rate Price of 1 pet</span> = AUD{nightprice}.00  per night 
+                        {
+                          nightprice2 > 0 ?
+                         
+                            <div>
+                        <span>Over night rate Price of 2 pet</span> = AUD{nightprice2}.00  per night 
+                        </div>
+                       
+                     
+                        :null
+                        }
+                      {
+                        nightprice3 >0 ?  <div>
+                        <span>Over night rate Price of 3 pet</span> = AUD{nightprice3}.00  per night
+                        </div>:null
+                      }
+                      
+                        
+                        </div> : null}
 
                     {(detail?.find((e) => e == "dayCareStay")) ?
                       <div className={css.pricingDescription}>
-                        <span>Day care stay</span> = AUD{dayprice}.00  per day</div> : null}
+                        
+                        <span>Day care stay Price of 1 pet</span> = AUD{dayprice}.00  per day
+                        {
+                            dayprice2 > 0 ?
+                            <div>
+
+                          <span >Day care stay Price of 2 pets</span> = AUD{dayprice2}.00  per day
+                          
+                        </div>:null
+                        }
+                        {
+                          dayprice3 > 0 ?
+                          <div>
+                          <span >Day care stay Price of 3+ pets</span> = AUD{dayprice3}.00  per day
+                          
+                        </div>:null
+                        }
+                       
+
+                      </div> : null}
+
                   </div>
 
-                } */}
+                }
               </div>
             </Form>
           );
