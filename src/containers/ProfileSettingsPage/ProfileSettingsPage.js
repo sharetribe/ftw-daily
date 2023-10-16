@@ -44,30 +44,10 @@ export class ProfileSettingsPageComponent extends Component {
       uploadInProgress,
       intl,
     } = this.props;
-console.log('form', form)
+console.log('currentUser', currentUser)
     const handleSubmit = values => {
       const { firstName, lastName, bio: rawBio ,pets,
-        Energy_level,Feeding_schedule,
-        Health_info,
-        Medication,
-      Pet_Insurance,
-      Potty_break,
-      Weight,
-      about_pet,
-      anything_host,
-      children_pet,
-      desexed,
-      house_trained,
-      idPetImage,
-      left_alone,
-      microchipped,
-      other_pet,
-      pet_breed,
-      pet_des,
-      pet_month,
-      pet_year,
-      pet_name
-        
+      
          } = values;
 console.log('values', values)
       // Ensure that the optional bio is a string
@@ -78,27 +58,7 @@ console.log('values', values)
         lastName: lastName.trim(),
         bio,
         publicData:{
-          pets,Energy_level,Feeding_schedule,
-          Health_info,
-          Medication,
-        Pet_Insurance,
-        Potty_break,
-        Weight,
-        about_pet,
-        anything_host,
-        children_pet,
-        desexed,
-        firstName,
-        house_trained,
-        idPetImage,
-        left_alone,
-        microchipped,
-        other_pet,
-        pet_breed,
-        pet_des,
-        pet_month,
-        pet_year,
-        pet_name,}
+          pets}
       };
       const uploadedImage = this.props.image;
 
@@ -113,26 +73,7 @@ console.log('values', values)
 
     const user = ensureCurrentUser(currentUser);
     const { firstName, lastName, bio } = user.attributes.profile;
-    const {pets,Energy_level,Feeding_schedule,
-      Health_info,
-      Medication,
-    Pet_Insurance,
-    Potty_break,
-    Weight,
-    about_pet,
-    anything_host,
-    children_pet,
-    desexed,
-    house_trained,
-    idPetImage,
-    left_alone,
-    microchipped,
-    other_pet,
-    pet_breed,
-    pet_des,
-    pet_month,
-    pet_year,
-    pet_name,}= user?.attributes?.profile?.publicData;
+     const {pets}= user?.attributes?.profile?.publicData || {};
     const profileImageId = user.profileImage ? user.profileImage.id : null;
     const profileImage = image || { imageId: profileImageId };
 
@@ -140,28 +81,28 @@ console.log('values', values)
       <ProfileSettingsForm
         className={css.form}
         currentUser={currentUser}
-        initialValues={{ firstName, lastName, bio, profileImage: user.profileImage ,
-          pets,Energy_level,Feeding_schedule,
-          Health_info,
-          Medication,
-        Pet_Insurance,
-        Potty_break,
-        Weight,
-        about_pet,
-        anything_host,
-        children_pet,
-        desexed,
-        firstName,
-        house_trained,
-        idPetImage,
-        left_alone,
-        microchipped,
-        other_pet,
-        pet_breed,
-        pet_des,
-        pet_month,
-        pet_year,
-        pet_name,
+        initialValues={{ firstName, lastName, bio, profileImage: user.profileImage ,pets
+        //   pets,Energy_level,Feeding_schedule,
+        //   Health_info,
+        //   Medication,
+        // Pet_Insurance,
+        // Potty_break,
+        // Weight,
+        // about_pet,
+        // anything_host,
+        // children_pet,
+        // desexed,
+        // firstName,
+        // house_trained,
+        // idPetImage,
+        // left_alone,
+        // microchipped,
+        // other_pet,
+        // pet_breed,
+        // pet_des,
+        // pet_month,
+        // pet_year,
+        // pet_name,
         
         
         }}
