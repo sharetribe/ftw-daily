@@ -174,7 +174,7 @@
   background-color: var(--matterColorLight);
   box-shadow: var(--boxShadowTop);
   display: flex;
-
+  justify-content: space-between;
   /* Contain repainting to this component only */
   /* 3D painting container helps scrolling */
   transform: translate3d(0, 0, 0);
@@ -185,6 +185,10 @@
 
   @media (--viewportLarge) {
     display: none;
+  }
+
+  & button {
+    width: 200px;
   }
 }
 

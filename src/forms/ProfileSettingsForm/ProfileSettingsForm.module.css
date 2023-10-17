@@ -52,17 +52,21 @@
 }
 
 .uploadAvatarWrapper {
-  margin-top: 18px;
-  margin-bottom: 18px;
+  margin: 23px 0;
 
   @media (--viewportMedium) {
     margin-top: 44px;
     margin-bottom: 20px;
   }
+
+  & input {
+    display: none;
+  }
 }
 
 .label {
   width: var(--ProfileSettingsForm_avatarSize);
+
   @media (--viewportMedium) {
     width: var(--ProfileSettingsForm_avatarSizeDesktop);
   }
@@ -110,6 +114,7 @@
     display: none;
   }
 }
+
 .avatarPlaceholderText {
   display: none;
 
@@ -192,7 +197,8 @@
 
   /* Image fitted to container */
   object-fit: cover;
-  background-color: var(--matterColorNegative); /* Loading BG color */
+  background-color: var(--matterColorNegative);
+  /* Loading BG color */
   border-radius: calc(var(--ProfileSettingsForm_avatarSize) / 2);
   overflow: hidden;
 
@@ -281,11 +287,11 @@
 }
 
 .firstName {
-  width: calc(34% - 9px);
+  width: calc(50% - 9px);
 }
 
 .lastName {
-  width: calc(66% - 9px);
+  width: calc(50% - 9px);
 }
 
 .bioInfo {
@@ -299,4 +305,138 @@
 
 .submitButton {
   margin-top: 24px;
+}
+
+.fieldBox {
+  padding: 20px;
+  margin-bottom: 14px;
+  border: 1px solid #eee;
+  background-color: #f7f7f7;
+
+  & .headingBoxRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & .accorHeading {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 500;
+      color: #878787;
+      line-height: normal;
+    }
+  }
+
+  & .rightSideBox {
+    display: flex;
+    gap: 30px;
+
+    & .removeButton {
+      border: none;
+      cursor: pointer;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    & .updownArrow {
+      cursor: pointer;
+      border: 1px solid #cac7c7;
+    }
+  }
+}
+
+.providerBox {
+  margin-top: 20px;
+
+  & .radioBox {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    & .cardSelectPet {
+      display: flex;
+      align-items: center;
+
+      & input {
+        width: 15px;
+        height: 15px;
+      }
+
+      & .radioLabel {
+        margin-left: 8px;
+        font-size: 14px;
+      }
+    }
+  }
+
+  & .headingDetail {}
+
+  & .detailsPet {
+    margin-bottom: 20px;
+
+    & p {
+      margin: 0 0 5px 0;
+      font-size: 14px;
+    }
+  }
+
+  & .headingData {
+    margin-bottom: 6px;
+    font-size: 18px;
+  }
+
+  & .mainHeadingBox {
+    margin-bottom: 20px;
+
+    & p {}
+  }
+}
+
+.careInformation {
+  margin: 25px 0 21px 0;
+
+  & p {
+    margin: 0;
+    font-size: 14px;
+  }
+}
+
+.petName {
+  margin: 23px 0;
+}
+
+
+.addImageWrapper {
+  position: relative;
+  width: 100%;
+  margin: 24px 0 0 0;
+  overflow: hidden;
+
+  &::after {
+    content: '.';
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
+  }
+
+  @media (--viewportLarge) {
+    margin: 0 0 24px 0;
+    width: calc(50% - 12px);
+  }
+}
+
+.petBoxWrapper {
+  &>div {
+    margin-bottom: 22px;
+  }
+}
+
+.addPetButton {
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 3px;
+  background-color: #E95629 !important;
+  border: 1px solid #E95629 !important;
 }

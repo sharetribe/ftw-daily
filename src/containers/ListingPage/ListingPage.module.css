@@ -194,6 +194,8 @@
 }
 
 .contentContainer {
+  flex-wrap: wrap;
+
   @media (--viewportMedium) {
     max-width: 1056px;
     margin: 0 auto;
@@ -249,6 +251,15 @@
     /* The calendar needs 312px */
     flex-basis: 312px;
     flex-shrink: 0;
+  }
+
+  @media(max-width: 1200px) {
+    padding-left: 20px;
+    margin-left: 20px;
+  }
+  @media(max-width: 1200px) {
+    padding-left: 0;
+    margin-left: 0;
   }
 }
 
@@ -582,9 +593,11 @@
 .sectionReviews {
   padding: 0 24px;
   margin-bottom: 5px;
+
   @media(max-width: 768px) {
     margin: 0;
   }
+
   @media (--viewportMedium) {
     padding: 0;
   }
@@ -695,6 +708,16 @@
 
   @media (--viewportLarge) {
     height: 417px;
+  }
+
+  @media(max-width: 1024px) {
+    max-width: 100%;
+  }
+
+  &>div {
+    @media(max-width: 1024px) {
+      max-width: 100% !important;
+    }
   }
 }
 

@@ -211,6 +211,22 @@
   gap: 20px;
 }
 
+.rowBoxNumber {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+
+  @media(max-width:520px) {
+    flex-wrap: wrap;
+  }
+
+  &>div {
+    @media(max-width:520px) {
+      width: 100%;
+    }
+  }
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -220,4 +236,10 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+.pickService {
+  @media(max-width:1024px) {
+    margin-bottom: 20px;
+  }
 }

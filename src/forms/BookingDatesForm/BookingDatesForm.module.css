@@ -162,3 +162,13 @@
   line-height: 26px;
   font-size: 16px;
 }
+
+.rowBox {
+  display: flex;
+  margin-bottom: 20px;
+  justify-content: space-between;
+
+  & .startTime {
+    width: calc(50% - 9px);
+  }
+}

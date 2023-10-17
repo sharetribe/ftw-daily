@@ -14,6 +14,9 @@ const BRAND_VISA = 'visa';
 const SEARCH = "search";
 const CALENDER = "calender";
 const REPEAT = "repeat";
+const DOWNARROW = "downarrow";
+const UPARROW = "uparrow";
+const TRASH = "trash";
 
 const IconCard = props => {
   const { className, rootClassName, brand } = props;
@@ -53,6 +56,18 @@ const IconCard = props => {
             </g>
           </g>
         </svg>
+      );
+    case TRASH:
+      return (
+        <svg fill="#000000" width="30px" height="30px" viewBox="0 0 1.35 1.35" version="1.1" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink"><path class="clr-i-outline clr-i-outline-path-1" d="M1.018 1.275H0.332A0.11 0.11 0 0 1 0.225 1.162V0.421h0.075V1.162a0.035 0.035 0 0 0 0.032 0.037h0.685a0.035 0.035 0 0 0 0.032 -0.037V0.421h0.075V1.162a0.11 0.11 0 0 1 -0.107 0.112Z" /><path class="clr-i-outline clr-i-outline-path-2" d="M1.154 0.337H0.188a0.037 0.037 0 0 1 0 -0.075h0.967a0.037 0.037 0 0 1 0 0.075Z" /><path class="clr-i-outline clr-i-outline-path-3" x="21" y="13" width="2" height="15" d="M0.787 0.487H0.862V1.05H0.787V0.487z" /><path class="clr-i-outline clr-i-outline-path-4" x="13" y="13" width="2" height="15" d="M0.487 0.487H0.563V1.05H0.487V0.487z" /><path class="clr-i-outline clr-i-outline-path-5" d="M0.862 0.22h-0.071V0.15h-0.232v0.07H0.487V0.15a0.075 0.075 0 0 1 0.071 -0.075h0.232A0.075 0.075 0 0 1 0.862 0.15Z" /><path x="0" y="0" width="36" height="36" fill-opacity="0" d="M0 0H1.35V1.35H0V0z" /></svg>
+      );
+    case UPARROW:
+      return (
+        <svg fill="#000000" xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 1.95 1.95" enable-background="new 0 0 52 52"><path d="M1.639 1.425H0.311c-0.037 0 -0.064 -0.049 -0.034 -0.083l0.649 -0.795c0.022 -0.03 0.071 -0.03 0.094 0l0.656 0.795c0.026 0.034 0.004 0.083 -0.037 0.083z" /></svg>
+      );
+    case DOWNARROW:
+      return (
+        <svg fill="#000000" xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 1.95 1.95" enable-background="new 0 0 52 52"><path d="M0.311 0.525h1.327c0.037 0 0.064 0.049 0.034 0.083L1.024 1.402c-0.022 0.03 -0.071 0.03 -0.094 0L0.274 0.607c-0.026 -0.034 -0.004 -0.083 0.037 -0.083z" /></svg>
       );
     case REPEAT:
       return (

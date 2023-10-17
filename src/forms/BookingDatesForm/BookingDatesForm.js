@@ -363,65 +363,66 @@ export class BookingDatesFormComponent extends Component {
 
               <div>
                 <p>select time </p>
-                <FieldSelect
-                  className={css.startTime} // Add a className for styling
-                  id={'startTime'} // Give it a unique ID
-                  name={'startTime'} // Set a unique name for the field
-                  label="Start Time" // Label for the dropdown
-                // value={start_time}
-                >
-                  <option disabled value="">
-                    Select start time
-                  </option>
-                  {singlebooking // Check if it's "daysbase" service
-                    ? Array.from({ length: 13 }, (_, index) => {
-                      const hour = String(index + 7).padStart(2, '0'); // Start from 7 am
-                      return (
-                        <option key={hour} value={hour + ':00'}>
-                          {hour + ':00'}
-                        </option>
-                      );
-                    })
-                    : Array.from({ length: 24 }, (_, index) => {
-                      const hour = String(index).padStart(2, '0'); // Show 24-hour time options
-                      return (
-                        <option key={hour} value={hour + ':00'}>
-                          {hour + ':00'}
-                        </option>
-                      );
-                    })}
-                </FieldSelect>
+                <div className={css.rowBox}>
+                  <FieldSelect
+                    className={css.startTime} // Add a className for styling
+                    id={'startTime'} // Give it a unique ID
+                    name={'startTime'} // Set a unique name for the field
+                    label="Start Time" // Label for the dropdown
+                  // value={start_time}
+                  >
+                    <option disabled value="">
+                      Start Time
+                    </option>
+                    {singlebooking // Check if it's "daysbase" service
+                      ? Array.from({ length: 13 }, (_, index) => {
+                        const hour = String(index + 7).padStart(2, '0'); // Start from 7 am
+                        return (
+                          <option key={hour} value={hour + ':00'}>
+                            {hour + ':00'}
+                          </option>
+                        );
+                      })
+                      : Array.from({ length: 24 }, (_, index) => {
+                        const hour = String(index).padStart(2, '0'); // Show 24-hour time options
+                        return (
+                          <option key={hour} value={hour + ':00'}>
+                            {hour + ':00'}
+                          </option>
+                        );
+                      })}
+                  </FieldSelect>
 
-                <FieldSelect
-                  className={css.endTime} // Add a className for styling
-                  id={'endTime'} // Give it a unique ID
-                  name={'endTime'} // Set a unique name for the field
-                  label="End Time" // Label for the dropdown
-                // value={end_time}
-                >
-                  <option disabled value="">
-                    Select end time
-                  </option>
-                  {singlebooking
-                    // Check if it's "daysbase" service
-                    ? Array.from({ length: 13 }, (_, index) => {
-                      const hour = String(index + 7).padStart(2, '0'); // Start from 7 am
-                      return (
-                        <option key={hour} value={hour + ':00'}>
-                          {hour + ':00'}
-                        </option>
-                      );
-                    })
-                    : Array.from({ length: 24 }, (_, index) => {
-                      const hour = String(index).padStart(2, '0'); // Show 24-hour time options
-                      return (
-                        <option key={hour} value={hour + ':00'}>
-                          {hour + ':00'}
-                        </option>
-                      );
-                    })}
-                </FieldSelect>
-
+                  <FieldSelect
+                    className={css.startTime} // Add a className for styling
+                    id={'endTime'} // Give it a unique ID
+                    name={'endTime'} // Set a unique name for the field
+                    label="End Time" // Label for the dropdown
+                  // value={end_time}
+                  >
+                    <option disabled value="">
+                      End Time
+                    </option>
+                    {singlebooking
+                      // Check if it's "daysbase" service
+                      ? Array.from({ length: 13 }, (_, index) => {
+                        const hour = String(index + 7).padStart(2, '0'); // Start from 7 am
+                        return (
+                          <option key={hour} value={hour + ':00'}>
+                            {hour + ':00'}
+                          </option>
+                        );
+                      })
+                      : Array.from({ length: 24 }, (_, index) => {
+                        const hour = String(index).padStart(2, '0'); // Show 24-hour time options
+                        return (
+                          <option key={hour} value={hour + ':00'}>
+                            {hour + ':00'}
+                          </option>
+                        );
+                      })}
+                  </FieldSelect>
+                </div>
               </div>
 
 

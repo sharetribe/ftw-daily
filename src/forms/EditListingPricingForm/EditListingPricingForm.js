@@ -251,9 +251,9 @@ export const EditListingPricingFormComponent = props => (
             </>
           ) : null}
 
-          <div>
+          <div className={css.pickService}>
             <p>Do you offer drop off/ pick up service?</p>
-            <div style={{ display: 'flex', gap: '20px' }}>
+            <div className={css.rowBox}>
               {dropPick.map((num) =>
                 <div className={css.cardSelectPet}>
                   <FieldRadioButton
@@ -267,33 +267,33 @@ export const EditListingPricingFormComponent = props => (
               )}
             </div>
             {values && values.dropPick == 'dropPick_yes' ? (
-              <div>
-              <div>
-                <FieldTextInput
-                  id="dropyes"
-                  name="dropyes"
-                  type="Number"
-                  autoFocus
-                  className={css.description}
-                  label={"Price For Drop Off"}
-                  placeholder={"price for drop off"}
-                  validate={priceValidators}
-                />
+              <div className={css.rowBoxNumber}>
+                <div>
+                  <FieldTextInput
+                    id="dropyes"
+                    name="dropyes"
+                    type="Number"
+                    autoFocus
+                    className={css.description}
+                    label={"Price For Drop Off"}
+                    placeholder={"price for drop off"}
+                    validate={priceValidators}
+                  />
+                </div>
+                <div>
+                  <FieldTextInput
+                    id="pickyes"
+                    name="pickyes"
+                    type="Number"
+                    autoFocus
+                    className={css.description}
+                    label={"Price For Pick Up"}
+                    placeholder={"price for pick up"}
+                    validate={priceValidators}
+                  />
+                </div>
               </div>
-               <div>
-               <FieldTextInput
-                 id="pickyes"
-                 name="pickyes"
-                 type="Number"
-                 autoFocus
-                 className={css.description}
-                 label={"Price For Pick Up"}
-                 placeholder={"price for pick up"}
-                 validate={priceValidators}
-               />
-             </div>
-              </div>
-              ) : null}
+            ) : null}
 
           </div>
 
