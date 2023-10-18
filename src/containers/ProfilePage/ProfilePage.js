@@ -75,8 +75,7 @@ export class ProfilePageComponent extends Component {
     const displayName = profileUser.attributes.profile.displayName;
     const bio = profileUser.attributes.profile.bio;
     const {pets} = profileUser?.attributes?.profile?.publicData || {};
-    console.log('pets', pets)
-    console.log('profileUser', profileUser)
+
     const hasBio = !!bio;
     const hasListings = listings.length > 0;
     const isMobileLayout = viewport.width < MAX_MOBILE_SCREEN_WIDTH;
