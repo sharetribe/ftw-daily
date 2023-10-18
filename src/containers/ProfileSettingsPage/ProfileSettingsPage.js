@@ -49,7 +49,7 @@ console.log('currentUser', currentUser)
       const { firstName, lastName, bio: rawBio ,pets,
       
          } = values;
-console.log('values', values)
+
       // Ensure that the optional bio is a string
       const bio = rawBio || '';
 

@@ -194,6 +194,9 @@ export class ProfilePageComponent extends Component {
                 <FormattedMessage id={`Pet ${index + 1}`} />
               </h2>
               <h3 className={css.mainHeading}>Pet Details</h3>
+              <div>
+                <img src={e.idPetImage?.link} alt="" width='200px' height='200px' />
+              </div>
               <div className={css.dataBox}>
                 <h4 className={css.HeadingName}>Description of pet</h4>
                 <div className={css.petsData}>{e.pet_des}</div>
