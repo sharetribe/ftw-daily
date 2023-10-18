@@ -36,7 +36,10 @@ class ProfileSettingsFormComponent extends Component {
     super(props);
 
     this.uploadDelayTimeoutId = null;
-    this.state = { uploadDelay: false, hideshowbutton: 0, isshowBTn: false, isFieldsVisible: [], };
+    this.state = {
+      uploadDelay: false, hideshowbutton: 0, isshowBTn: false, isFieldsVisible: [], petImages: [],
+      selectedPetIndex: -1,
+    };
     this.submittedValues = {};
   }
 
@@ -59,7 +62,8 @@ class ProfileSettingsFormComponent extends Component {
       window.Buffer = window.Buffer || require('buffer').Buffer;
     }
   }
-  onAttachmentUpload(file, form) {
+  onAttachmentUpload(file, form, index, values) {
+    console.log(form.values, 'form');
     // this.props.setClearForm(false);
     if (file && file.name) {
       ReactS3Client.uploadFile(file, file.name)
@@ -79,7 +83,12 @@ class ProfileSettingsFormComponent extends Component {
             attachmentDeleteRequested: false,
             uploadAttachmentToAwsRequested: false,
           });
-          form.change("idPetImage", updateduploadedAttachmentsUrls);
+          // form.change("idPetImage", uspdateduploadedAttachmentsUrls);
+          // const petImages = [...this.state.petImages];
+          // petImages[index] = file;
+          // this.setState({ petImages });
+          // form.setFieldValue(`pets[${index}].idPetImage`, updateduploadedAttachmentsUrls);
+          values.pets[index].idPetImage = updateduploadedAttachmentsUrls;
         })
         .catch(e => {
           console.error(e, '^^^^ ^^^^ => e');
@@ -428,7 +437,7 @@ class ProfileSettingsFormComponent extends Component {
                                   type="text"
                                   id="pet_des"
                                   name={`${name}.pet_des`}
-
+                                  validate={lastNameRequired}
                                   label={"Provide a description of your pet"}
                                   placeholder={bioPlaceholder}
                                 />
@@ -437,7 +446,9 @@ class ProfileSettingsFormComponent extends Component {
                                   <div className={css.radioBox}>
                                     {typeOfPet.map((st) => (
                                       <div className={css.cardSelectPet} key={st.key}>
-                                        <Field name={`${name}.typeOfPet`} component="input" type="radio" value={st.key} />
+                                        <Field name={`${name}.typeOfPet`} component="input" type="radio" value={st.key}
+                                          validate={lastNameRequired}
+                                        />
                                         <div className={css.radioLabel}>{st.label}</div>
                                       </div>)
                                     )}
@@ -452,15 +463,17 @@ class ProfileSettingsFormComponent extends Component {
                                   name={`${name}.pet_name`}
                                   label={"What is your Pet's name?"}
                                   placeholder={bioPlaceholder}
+                                  validate={lastNameRequired}
                                 />
-                                <div className={css.uploadAvatarWrapper}>
+                                <div >
                                   <Field
-                                    label={chooseAvatarLabel}
-                                    id={`${name}.idPetImage`}
+                                    // label={chooseAvatarLabel}
+                                    id={`idPetImage_${index}`}
                                     name={`${name}.idPetImage`}
                                     accept={ACCEPT_FILE}
                                     form={null}
                                     type="file"
+                                    validate={lastNameRequired}
                                   >
                                     {fieldprops => {
                                       const { accept, input, label, meta, disabled: fieldDisabled } = fieldprops;
@@ -470,7 +483,7 @@ class ProfileSettingsFormComponent extends Component {
                                         this.setState({ fileState: file });
                                         if (file && file.name && file.size < 10000000) {
                                           this.setState({ uploadAttachmentToAwsRequested: true, stopLoop: false });
-                                          this.onAttachmentUpload(file, form);
+                                          this.onAttachmentUpload(file, form, index, values);
                                           e.target.value = null;
                                         }
                                       };
@@ -492,7 +505,36 @@ class ProfileSettingsFormComponent extends Component {
                                   </Field>
                                 </div>
                                 <ul>
-                                  {values.idPetImage && Object.keys(values.idPetImage).length
+                                  <button
+                                    type="button"
+                                    onClick={() => this.setState({ selectedPetIndex: index })}
+                                    className={css.viewImageButton}
+                                  >
+                                    View Image
+                                  </button>
+                                  {this.state.selectedPetIndex === index && (
+                                    <div className={css.fileUploadName}>
+                                      <div>
+                                        {/\.(mp4|MP4|mov|webm)$/.test(values.pets[index]?.idPetImage?.link) ? (
+                                          <video src={values.pets[index]?.idPetImage?.link} loop autoPlay={true} muted style={{ height: '200px' }} />
+                                        ) : /\.(png|jpeg|jpg)$/.test(values.pets[index]?.idPetImage?.link) ? (
+                                          <img alt={values.pets[index]?.idPetImage?.name} src={values.pets[index]?.idPetImage?.link} style={{ height: '200px' }} />
+                                        ) : (
+                                          <object data={values.pets[index]?.idPetImage?.link}>
+                                            <iframe
+                                              className="doc"
+                                              src={`https://docs.google.com/gview?url=${values.pets[index]?.idPetImage?.link}&embedded=true`}
+                                            />
+                                          </object>
+                                        )}
+                                      </div>
+                                    </div>
+                                  )}
+
+
+
+
+                                  {/* {values.pets.idPetImage && Object.keys(values.idPetImage).length
                                     ? <div className={css.fileUploadName} >
                                       <div>
                                         {/\mp4|MP4|mov|webm/.test(values.idPetImage.link) ? (
@@ -509,7 +551,7 @@ class ProfileSettingsFormComponent extends Component {
                                         )}
                                       </div>
                                     </div>
-                                    : null}
+                                    : null} */}
 
                                 </ul>
                                 <div className={css.mainHeadingBox}>
@@ -530,6 +572,7 @@ class ProfileSettingsFormComponent extends Component {
                                     name={`${name}.pet_month`}
                                     label={"What is your Pet's age(month)?"}
                                     placeholder={bioPlaceholder}
+                                    validate={lastNameRequired}
                                   />
                                   <FieldTextInput
                                     type="number"
@@ -537,6 +580,7 @@ class ProfileSettingsFormComponent extends Component {
                                     name={`${name}.pet_year`}
                                     label={"What is your Pet's age(year)?"}
                                     placeholder={bioPlaceholder}
+                                    validate={lastNameRequired}
                                   />
                                   <FieldTextInput
                                     type="text"
@@ -544,6 +588,7 @@ class ProfileSettingsFormComponent extends Component {
                                     name={`${name}.pet_breed`}
                                     label={"Enter all breeds that apply. If your dog is a mixed breed, add ‘Mixed’ as well."}
                                     placeholder={bioPlaceholder}
+                                    validate={lastNameRequired}
                                   />
                                 </div>
                                 <div className={css.mainHeading}>
@@ -564,7 +609,9 @@ class ProfileSettingsFormComponent extends Component {
                                     <div className={css.radioBox}>
                                       {desexed.map((st) => (
                                         <div className={css.cardSelectPet} key={st.key}>
-                                          <Field name={`${name}.desexed`} component="input" type="radio" value={st.key} />
+                                          <Field name={`${name}.desexed`} component="input" type="radio" value={st.key}
+                                           validate={lastNameRequired}
+                                          />
                                           <div className={css.radioLabel}>{st.label}</div>
                                         </div>)
                                       )}
@@ -576,7 +623,9 @@ class ProfileSettingsFormComponent extends Component {
                                     <div className={css.radioBox}>
                                       {house_trained.map((st) => (
                                         <div className={css.cardSelectPet} key={st.key}>
-                                          <Field name={`${name}.house_trained`} component="input" type="radio" value={st.key} />
+                                          <Field name={`${name}.house_trained`} component="input" type="radio" value={st.key} 
+                                           validate={lastNameRequired}
+                                          />
                                           <div className={css.radioLabel}>{st.label}</div>
                                         </div>)
                                       )}
@@ -587,7 +636,9 @@ class ProfileSettingsFormComponent extends Component {
                                     <div className={css.radioBox}>
                                       {children_pet.map((st) => (
                                         <div className={css.cardSelectPet} key={st.key}>
-                                          <Field name={`${name}.children_pet`} component="input" type="radio" value={st.key} />
+                                          <Field name={`${name}.children_pet`} component="input" type="radio" value={st.key}
+                                           validate={lastNameRequired}
+                                          />
                                           <div className={css.radioLabel}>{st.label}</div>
                                         </div>)
                                       )}
@@ -598,7 +649,9 @@ class ProfileSettingsFormComponent extends Component {
                                     <div className={css.radioBox}>
                                       {other_pet.map((st) => (
                                         <div className={css.cardSelectPet} key={st.key}>
-                                          <Field name={`${name}.other_pet`} component="input" type="radio" value={st.key} />
+                                          <Field name={`${name}.other_pet`} component="input" type="radio" value={st.key}
+                                           validate={lastNameRequired}
+                                          />
                                           <div className={css.radioLabel}>{st.label}</div>
                                         </div>)
                                       )}
@@ -611,6 +664,7 @@ class ProfileSettingsFormComponent extends Component {
                                   name={`${name}.about_pet`}
                                   label={"About your Pet?"}
                                   placeholder={bioPlaceholder}
+                                  validate={lastNameRequired}
                                 />
 
                                 <div className={css.careInformation}>
@@ -622,7 +676,9 @@ class ProfileSettingsFormComponent extends Component {
                                   <div className={css.radioBox}>
                                     {Potty_break.map((st) => (
                                       <div className={css.cardSelectPet} key={st.key}>
-                                        <Field name={`${name}.Potty_break`} component="input" type="radio" value={st.key} />
+                                        <Field name={`${name}.Potty_break`} component="input" type="radio" value={st.key} 
+                                         validate={lastNameRequired}
+                                        />
                                         <div className={css.radioLabel}>{st.label}</div>
                                       </div>)
                                     )}
@@ -633,7 +689,9 @@ class ProfileSettingsFormComponent extends Component {
                                   <div className={css.radioBox}>
                                     {Energy_level.map((st) => (
                                       <div className={css.cardSelectPet} key={st.key}>
-                                        <Field name={`${name}.Energy_level`} component="input" type="radio" value={st.key} />
+                                        <Field name={`${name}.Energy_level`} component="input" type="radio" value={st.key} 
+                                         validate={lastNameRequired}
+                                        />
                                         <div className={css.radioLabel}>{st.label}</div>
                                       </div>)
                                     )}

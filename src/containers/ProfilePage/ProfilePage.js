@@ -201,6 +201,9 @@ export class ProfilePageComponent extends Component {
                 {e.pet_des}
               </div>
               <div>
+                <img src={e.idPetImage?.link} alt="" width='200px' height='200px'/>
+              </div>
+              <div>
                 <h2>Pet Name</h2>
                 {e.pet_name}
               </div>
