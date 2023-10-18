@@ -63,7 +63,7 @@ class ProfileSettingsFormComponent extends Component {
     }
   }
   onAttachmentUpload(file, form, index, values) {
-    console.log(form.values, 'form');
+    
     // this.props.setClearForm(false);
     if (file && file.name) {
       ReactS3Client.uploadFile(file, file.name)
@@ -152,7 +152,7 @@ class ProfileSettingsFormComponent extends Component {
             form,
             values,
           } = fieldRenderProps;
-          console.log('values', values)
+  
           const user = ensureCurrentUser(currentUser);
 
           // First name
