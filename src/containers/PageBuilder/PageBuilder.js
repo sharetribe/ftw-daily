@@ -99,7 +99,7 @@ const PageBuilder = props => {
     history,
     ...pageProps
   } = props;
- 
+
   if (!pageAssetsData && fallbackPage && !inProgress && error) {
     return fallbackPage;
   }
@@ -125,11 +125,13 @@ const PageBuilder = props => {
   const urlQueryParams = pickSearchParamsOnly(null, filterConfig, sortConfig);
   const validQueryParams = validURLParamsForExtendedData(searchInURL, filterConfig);
 
+
   const pageMetaProps = getMetadata(meta, schemaType, options?.fieldComponents);
   const urlQueryString = stringify(urlQueryParams);
   const paramsQueryString = stringify(
     pickSearchParamsOnly(searchParams, filterConfig, sortConfig)
   );
+
   const searchParamsAreInSync = urlQueryString === paramsQueryString;
 
   const layoutAreas = `
