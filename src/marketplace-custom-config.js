@@ -456,27 +456,7 @@ export const filters = [
       ],
     },
   },
-  {
-    id: 'policeCheck',
-    label: ' Police Verification',
-    type: 'SelectSingleFilter',
-    group: 'primary',
-    queryParamNames: ['pub_policeCheck'],
-    config: {
-
-      searchMode: 'has_all',
-      options: [
-        {
-          key: 'police_yes',
-          label: 'Yes',
-        },
-        {
-          key: 'police_no',
-          label: 'No',
-        },
-      ],
-    },
-  },
+ 
   {
     id: 'dropPick',
     label: ' drop off/ pick up service',
@@ -521,6 +501,27 @@ export const filters = [
           label: '3+',
         },
 
+      ],
+    },
+  },
+  {
+    id: 'policeCheck',
+    label: ' Police Verification',
+    type: 'SelectSingleFilter',
+    group: 'primary',
+    queryParamNames: ['pub_policeCheck'],
+    config: {
+
+      searchMode: 'has_all',
+      options: [
+        {
+          key: 'police_yes',
+          label: 'Yes',
+        },
+        {
+          key: 'police_no',
+          label: 'No',
+        },
       ],
     },
   },
