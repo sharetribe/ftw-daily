@@ -42,7 +42,7 @@ const LineItemProviderCommissionMaybe = props => {
     commissionItem = (
       <div className={css.lineItem}>
         <span className={css.itemLabel}>
-          <FormattedMessage id="BookingBreakdown.commission" />
+          <FormattedMessage id="BookingBreakdown.provider" />
         </span>
         <span className={css.itemValue}>{formattedCommission}</span>
       </div>

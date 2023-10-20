@@ -21,6 +21,7 @@ import SectionFeatures4Maybe from '../../containers/ListingPage/SectionFeatures4
 // import SectionFeatures2Maybe from '../../containers/ListingPage/SectionFeatures2Maybe'
 
 import css from './BookingPanel.module.css';
+import SectionFeatures6Maybe from '../../containers/ListingPage/SectionFeatures6Maybe';
 
 // This defines when ModalInMobile shows content as Modal
 const MODAL_BREAKPOINT = 1023;
@@ -111,6 +112,7 @@ const BookingPanel = props => {
   const amenityOptions3 = findOptionsForSelectFilter('sizeOfdogs', filterConfig);
   const amenityOptions4 = findOptionsForSelectFilter('housingConditions', filterConfig);
   const amenityOptions5 = findOptionsForSelectFilter('petInHome', filterConfig);
+  const amenityOptions7 = findOptionsForSelectFilter('policeCheck', filterConfig);
   const amenityOptions6 = findOptionsForSelectFilter('serviceSetup', filterConfig);
   const selectedOptions = publicData && publicData.numberOfPets ? publicData.numberOfPets : [];
 
@@ -194,13 +196,14 @@ const BookingPanel = props => {
         </div>
         <div className={css.countOption}> {selectedOptions}</div>
       </div>
-
+      <SectionFeatures6Maybe options={amenityOptions7} publicData={publicData} />
       {amenityOptions3 ?
         <SectionFeatures3Maybe options={amenityOptions3} publicData={publicData} />
         : null
       }
       <SectionFeatures4Maybe options={amenityOptions4} publicData={publicData} />
       <SectionFeatures5Maybe options={amenityOptions5} publicData={publicData} />
+     
     </div>
   );
 };

@@ -48,7 +48,8 @@
   "BookingBreakdown.baseUnitQuantity": "{unitPrice} * {quantity, number} {quantity, plural, one {person} other {persons}}",
   "BookingBreakdown.bookingStart": "Booking start",
   "BookingBreakdown.bookingEnd": "Booking end",
-  "BookingBreakdown.commission": "Service Fee *",
+  "BookingBreakdown.commission": "Booking Fee *",
+  "BookingBreakdown.provider" : "Service Fee*",
   "BookingBreakdown.commissionFeeNote": "* The fee helps us run the platform and provide the best possible service to you!",
   "BookingBreakdown.pricePerDay": "Price per day",
   "BookingBreakdown.pricePerNight": "Price per night",
@@ -60,7 +61,7 @@
   "BookingBreakdown.quantity": "{quantity, number} {quantity, plural, one {person} other {persons}}",
   "BookingBreakdown.quantityUnit": "Number of persons",
   "BookingBreakdown.refund": "Refund",
-  "BookingBreakdown.refundCustomerFee": "Refund Service Fee",
+  "BookingBreakdown.refundCustomerFee": "Refund Booking Fee",
   "BookingBreakdown.refundProviderFee": "Refund Service Fee",
   "BookingBreakdown.subTotal": "Subtotal",
   "BookingBreakdown.total": "Total price",
@@ -738,7 +739,62 @@
   "ProfileSettingsForm.updateProfileFailed": "Whoops, something went wrong. Please try again.",
   "ProfileSettingsForm.yourName": "Your name",
   "ProfileSettingsForm.yourProfilePicture": "Your profile picture",
+
+
+
+  "ProfileSettingsForm.petDescriptionLabel": "Provide a description of your pet",
+  "ProfileSettingsForm.petDescriptionPlaceHolder": "Provide a description of your pet",
+
+  "ProfileSettingsForm.petNameLabel": "What is your Pet's name?",
+  "ProfileSettingsForm.petNamePlaceholder": "What is your Pet's name?",
+
+
+  "ProfileSettingsForm.petMonthLabel": "What is your Pet's age(month)?",
+  "ProfileSettingsForm.petMonthPlaceHolder": "What is your Pet's age(month)?",
+
+  "ProfileSettingsForm.petYearLabel": "What is your Pet's age(year)?",
+  "ProfileSettingsForm.petYearPlaceHolder": "What is your Pet's age(year)?",
+
+  "ProfileSettingsForm.petBreedLabel": "Enter all breeds that apply. If your dog is a mixed breed, add ‘Mixed’ as well.",
+  "ProfileSettingsForm.petBreedPlaceHolder": "Enter all breeds that apply. If your dog is a mixed breed, add ‘Mixed’ as well.",
+
+  
+  "ProfileSettingsForm.petAboutLabel": "About your Pet?",
+  "ProfileSettingsForm.petAboutPlaceHolder": "About your Pet?",
+  
+  "ProfileSettingsForm.petHostLabel": "Anything else a Pet Host should know?",
+  "ProfileSettingsForm.petHostPlaceHolder": "Anything else a Pet Host should know?",
+
+  
+  "ProfileSettingsForm.petHealthInfoLabel": "Add details about your pet's health and care providers",
+  "ProfileSettingsForm.petHealthInfoPlaceHolder": "Add details about your pet's health and care providers",
+  
+
+
   "ProfileSettingsPage.heading": "Profile settings",
+
+  "ProfileSettingsForm.petInsuranceTitle": "Do you have Pet Insurance for your Pet's?",
+  "ProfileSettingsForm.healthInfoHeading": "Health info",
+  "ProfileSettingsForm.medicationHeading": "Medication (select all that apply)",
+  "ProfileSettingsForm.leftAloneHeading": "Can be left alone",
+  "ProfileSettingsForm.feedingScheduleHeading": "Feeding schedule",
+  "ProfileSettingsForm.energyLevelHeading": "Energy level",
+  "ProfileSettingsForm.pottyBreakScheduleHeading": "Potty break schedule",
+  "ProfileSettingsForm.patCareInfoDescription": "Provide your Pet Host with instructions for walking, feeding and other care",
+  "ProfileSettingsForm.patCareInfoHeading": "Care info",
+  "ProfileSettingsForm.patFriendlyWithOtherHeading": "Friendly with other Pets?",
+  "ProfileSettingsForm.patFriendlyWithChildrenHeading": "Friendly with children?",
+  "ProfileSettingsForm.isPatHouseTrainedHeading": "Is your Pet house trained? ",
+  "ProfileSettingsForm.isPatHouseDesexedHeading": "Is your Pet desexed? ",
+  "ProfileSettingsForm.microchippedHeading": "Is your Pet microchipped? ",
+  "ProfileSettingsForm.additionalHeading": "Additional Details",
+  "ProfileSettingsForm.weightHeading": "Weight",
+  "ProfileSettingsForm.typeOfPetHeading": "Type of Pet",
+  "ProfileSettingsForm.addPetHeading": "Add Pet",
+
+
+  "ProfileSettingsForm.petVeterinaryHeading": "Veterinary info",
+
   "ProfileSettingsPage.title": "Profile settings",
   "ProfileSettingsPage.viewProfileLink": "View your profile",
   "ResponsiveImage.noImage": "No image",

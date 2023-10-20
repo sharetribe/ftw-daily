@@ -147,8 +147,6 @@ export class BookingDatesFormComponent extends Component {
             fetchLineItemsError,
             firstname,
           } = fieldRenderProps;
-          console.log('listing', listing)
-          console.log('values', values)
           const {
             pricepet,
             serviceSetup: detail,
@@ -432,7 +430,7 @@ export class BookingDatesFormComponent extends Component {
                   name="bookingDates"
                   startDatePlaceholderText={startDatePlaceholderText}
                   format={identity}
-                  timeSlots={timeSlots?.slice(1, timeSlots?.length)}
+                  timeSlots={timeSlots?.slice(2, timeSlots?.length)}
                   validate={composeValidators(
                     required(requiredMessage),
                     bookingDateRequired(startDateErrorMessage)
@@ -452,7 +450,7 @@ export class BookingDatesFormComponent extends Component {
                   focusedInput={this.state.focusedInput}
                   onFocusedInputChange={this.onFocusedInputChange}
                   format={identity}
-                  timeSlots={timeSlots?.slice(1, timeSlots?.length)}
+                  timeSlots={timeSlots?.slice(2, timeSlots?.length)}
                   useMobileMargins
                   validate={composeValidators(
                     required(requiredMessage),
@@ -486,7 +484,57 @@ export class BookingDatesFormComponent extends Component {
 
               <div className={css.pricingBox}>
                 <div className={css.pricingHeading}>Pricing</div>
-                {values?.serviceSetup ?
+                <div>
+
+
+{(detail?.find((e) => e == "overnightsStay")) ?
+  <div className={css.pricingDescription}>
+    <span>Over night rate Price of 1 pet</span> = AUD{nightprice}.00  per night
+    {
+      nightprice2 > 0 ?
+
+        <div>
+          <span>Over night rate Price of 2 pet</span> = AUD{nightprice2}.00  per night
+        </div>
+
+
+        : null
+    }
+    {
+      nightprice3 > 0 ? <div>
+        <span>Over night rate Price of 3 pet</span> = AUD{nightprice3}.00  per night
+      </div> : null
+    }
+
+
+  </div> : null}
+
+{(detail?.find((e) => e == "dayCareStay")) ?
+  <div className={css.pricingDescription}>
+
+    <span>Day care stay Price of 1 pet</span> = AUD{dayprice}.00  per day
+    {
+      dayprice2 > 0 ?
+        <div>
+
+          <span >Day care stay Price of 2 pets</span> = AUD{dayprice2}.00  per day
+
+        </div> : null
+    }
+    {
+      dayprice3 > 0 ?
+        <div>
+          <span >Day care stay Price of 3+ pets</span> = AUD{dayprice3}.00  per day
+
+        </div> : null
+    }
+
+
+  </div> : null}
+
+</div>
+
+                {/* {values?.serviceSetup ?
                   <>
                     {values?.serviceSetup?.find((e) => e == "overnightsStay")
                       ? <div className={css.pricingDescription}>
@@ -552,8 +600,9 @@ export class BookingDatesFormComponent extends Component {
                   </div>
 
                 }
+                } */}
 
-                {values?.serviceSetup
+                {/* {values?.serviceSetup
                   ? values?.serviceSetup?.length === 2
                     ? values.serviceSetup
                     // ? <div className={css.pricingDescription}>
@@ -631,7 +680,7 @@ export class BookingDatesFormComponent extends Component {
 
                   </div>
 
-                }
+                } */}
               </div>
             </Form>
           );
