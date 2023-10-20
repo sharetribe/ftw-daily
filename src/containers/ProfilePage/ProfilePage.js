@@ -191,16 +191,15 @@ export class ProfilePageComponent extends Component {
               <h2 className={css.mainHeading}>
                 <FormattedMessage id={`Pet ${index + 1}`} />
               </h2>
-              <h3 className={css.mainHeading}>Pet Details</h3>
-              <div>
+              <div className={css.petImage}>
                 <img src={e.idPetImage?.link} alt="" width='200px' height='200px' />
               </div>
+              <h3 className={css.mainHeading}>Pet Details</h3>
               <div className={css.dataBox}>
                 <h4 className={css.HeadingName}>Description of pet</h4>
                 <div className={css.petsData}>{e.pet_des}</div>
               </div>
               <div className={css.threeRowBox}>
-
                 <div className={css.dataBox}>
                   <h4 className={css.HeadingName}>Pet Name</h4>
                   <div className={css.petsData}>{e.pet_name}</div>
@@ -225,70 +224,8 @@ export class ProfilePageComponent extends Component {
                 </div>
               </div>
               <div>
-                <h4 className={css.HeadingName}>Breed</h4>
-                <div className={css.petsData}>{e.pet_breed}</div>
-              </div>
-              <h3 className={css.mainHeading}>Additional Details</h3>
-              <div className={css.threeRowBox}>
-                <div className={css.dataBox}>
-                  <h4 className={css.HeadingName}>Pet microchipped?</h4>
-                  {e.microchipped === "microchipped_no" ?
-                    <div className={css.petsData}>NO</div> :
-                    <div className={css.petsData}>Yes</div>
-                  }
-                </div>
-                <div>
-                  <h4 className={css.HeadingName}> Is your Pet desexed? </h4>
-                  {e.desexed === "desexed_no" ?
-                    <div className={css.petsData}>NO</div> :
-                    <div className={css.petsData}>Yes</div>}
-                </div>
-                <div>
-                  <h4 className={css.HeadingName}>Pet house trained? </h4>
-                  {e.house_trained === "trained_yes" ? (
-                    <div className={css.petsData}>Yes</div>
-                  ) : e.house_trained === "trained_no" ? (
-                    <div className={css.petsData}>No</div>
-                  ) : e.house_trained === "trained_Unsure" ? (
-                    <div className={css.petsData}>Unsure</div>
-                  ) : e.house_trained === "trained_Depends" ? (
-                    <div className={css.petsData}>Depends</div>
-                  ) : null}
-                </div>
-              </div>
-              <div className={css.threeRowBox}>
-                <div>
-                  <h4 className={css.HeadingName}>Friendly with children?</h4>
-                  {e.children_pet
-                    === "children_yes" ? (
-                    <div className={css.petsData}>Yes</div>
-                  ) : e.children_pet
-                    === "children_no" ? (
-                    <div className={css.petsData}>No</div>
-                  ) : e.children_pet
-                    === "children_Unsure" ? (
-                    <div className={css.petsData}>Unsure</div>
-                  ) : e.children_pet
-                    === "children_Depends" ? (
-                    <div className={css.petsData}>Depends</div>
-                  ) : null}
-                </div>
-                <div>
-                  <h4 className={css.HeadingName}>Friendly with other Pets? </h4>
-                  {e.other_pet
-                    === "other_yes" ? (
-                    <div className={css.petsData}>Yes</div>
-                  ) : e.other_pet
-                    === "other_no" ? (
-                    <div className={css.petsData}>No</div>
-                  ) : e.other_pet
-                    === "other_Unsure" ? (
-                    <div className={css.petsData}>Unsure</div>
-                  ) : e.other_pet
-                    === "other_Depends" ? (
-                    <div className={css.petsData}>Depends</div>
-                  ) : null}
-                </div>
+                <h4 className={css.HeadingName}>Pet Name</h4>
+                <div className={css.petsData}>{e.pet_name}</div>
               </div>
               <div>
                 <h3 className={css.HeadingName}>About  Pet</h3>

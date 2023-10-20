@@ -226,6 +226,12 @@
   }
 }
 
+.petImage {
+  & img {
+    object-fit: cover;
+  }
+}
+
 .HeadingName {
   margin: 0;
   font-size: 16px;
