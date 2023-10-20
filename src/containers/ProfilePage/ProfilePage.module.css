@@ -6,6 +6,7 @@
   @media (--viewportMedium) {
     margin-top: 4px;
   }
+
   @media (--viewportLarge) {
     margin-top: 3px;
   }
@@ -47,6 +48,7 @@
   @media (--viewportMedium) {
     margin: 49px 0 0 0;
   }
+
   @media (--viewportLarge) {
     display: none;
   }
@@ -61,6 +63,7 @@
   @media (--viewportMedium) {
     margin-top: 20px;
   }
+
   @media (--viewportLarge) {
     display: none;
   }
@@ -91,6 +94,7 @@
   @media (--viewportMedium) {
     margin: 4px 0 51px 0;
   }
+
   @media (--viewportLarge) {
     margin: 0 0 56px 0;
     max-width: 600px;
@@ -117,6 +121,7 @@
     margin-top: 48px;
     margin-bottom: 8px;
   }
+
   @media (--viewportLarge) {
     margin-top: 58px;
     margin-bottom: 8px;
@@ -143,6 +148,7 @@
 
   /* Single column in mobile */
   margin-top: 34px;
+
   &:first-of-type {
     margin-top: 18px;
   }
@@ -156,12 +162,14 @@
     &:nth-of-type(odd) {
       margin-right: 12px;
     }
+
     &:nth-of-type(even) {
       margin-left: 12px;
     }
 
     /* Vertical space */
     margin-top: 0;
+
     &:nth-of-type(1),
     &:nth-of-type(2) {
       margin-top: 20px;
@@ -199,4 +207,46 @@
 
 .desktopReviewsTabNav {
   margin-bottom: 32px;
+}
+
+.petsInformation {
+  padding: 25px;
+  background-color: #efefef;
+
+  & h2 {
+    margin: 0;
+    font-size: 22px;
+    color: var(--matterColor);
+    text-align: center;
+  }
+
+  & .threeRowBox {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.petImage {
+  & img {
+    object-fit: cover;
+  }
+}
+
+.HeadingName {
+  margin: 0;
+  font-size: 16px;
+  color: #565656;
+}
+
+.petsData {
+  margin: 0;
+  font-size: 16px;
+  color: #959595;
+  font-weight: 400;
+}
+
+.petWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }

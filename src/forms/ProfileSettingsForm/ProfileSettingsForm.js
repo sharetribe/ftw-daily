@@ -61,11 +61,7 @@ class ProfileSettingsFormComponent extends Component {
 
     this.uploadDelayTimeoutId = null;
     this.state = {
-      uploadDelay: false,
-      hideshowbutton: 0,
-      isshowBTn: false,
-      isFieldsVisible: [],
-      petImages: [],
+      uploadDelay: false, hideshowbutton: 0, isshowBTn: false, isFieldsVisible: [], petImages: [],
       selectedPetIndex: -1,
     };
     this.submittedValues = {};
@@ -91,7 +87,7 @@ class ProfileSettingsFormComponent extends Component {
     }
   }
   onAttachmentUpload(file, form, index, values) {
-    console.log(form.values, 'form');
+    
     // this.props.setClearForm(false);
     if (file && file.name) {
       ReactS3Client.uploadFile(file, file.name)
@@ -174,7 +170,7 @@ class ProfileSettingsFormComponent extends Component {
             form,
             values,
           } = fieldRenderProps;
-          console.log('values', values);
+  
           const user = ensureCurrentUser(currentUser);
 
           // First name
@@ -516,12 +512,8 @@ class ProfileSettingsFormComponent extends Component {
                                   id="pet_des"
                                   name={`${name}.pet_des`}
                                   validate={lastNameRequired}
-                                  label={intl.formatMessage({
-                                    id: 'ProfileSettingsForm.petDescriptionLabel',
-                                  })}
-                                  placeholder={intl.formatMessage({
-                                    id: 'ProfileSettingsForm.petDescriptionPlaceHolder',
-                                  })}
+                                  label={"Provide a description of your pet"}
+                                  placeholder={bioPlaceholder}
                                 />
                                 <div className={css.mainHeading}>
                                   <h2 >
@@ -530,11 +522,7 @@ class ProfileSettingsFormComponent extends Component {
                                   <div className={css.radioBox}>
                                     {typeOfPet.map(st => (
                                       <div className={css.cardSelectPet} key={st.key}>
-                                        <Field
-                                          name={`${name}.typeOfPet`}
-                                          component="input"
-                                          type="radio"
-                                          value={st.key}
+                                        <Field name={`${name}.typeOfPet`} component="input" type="radio" value={st.key}
                                           validate={lastNameRequired}
                                         />
                                         <div className={css.radioLabel}>{st.label}</div>
@@ -548,15 +536,11 @@ class ProfileSettingsFormComponent extends Component {
                                   type="text"
                                   id={'pet_name'}
                                   name={`${name}.pet_name`}
-                                  label={intl.formatMessage({
-                                    id: 'ProfileSettingsForm.petNameLabel',
-                                  })}
-                                  placeholder={intl.formatMessage({
-                                    id: 'ProfileSettingsForm.petNamePlaceholder',
-                                  })}
+                                  label={"What is your Pet's name?"}
+                                  placeholder={bioPlaceholder}
                                   validate={lastNameRequired}
                                 />
-                                <div>
+                                <div >
                                   <Field
                                     // label={chooseAvatarLabel}
                                     id={`idPetImage_${index}`}
@@ -579,10 +563,7 @@ class ProfileSettingsFormComponent extends Component {
                                         const file = e.target.files[0];
                                         this.setState({ fileState: file });
                                         if (file && file.name && file.size < 10000000) {
-                                          this.setState({
-                                            uploadAttachmentToAwsRequested: true,
-                                            stopLoop: false,
-                                          });
+                                          this.setState({ uploadAttachmentToAwsRequested: true, stopLoop: false });
                                           this.onAttachmentUpload(file, form, index, values);
                                           e.target.value = null;
                                         }
@@ -618,24 +599,10 @@ class ProfileSettingsFormComponent extends Component {
                                   {this.state.selectedPetIndex === index && (
                                     <div className={css.fileUploadName}>
                                       <div>
-                                        {/\.(mp4|MP4|mov|webm)$/.test(
-                                          values.pets[index]?.idPetImage?.link
-                                        ) ? (
-                                          <video
-                                            src={values.pets[index]?.idPetImage?.link}
-                                            loop
-                                            autoPlay={true}
-                                            muted
-                                            style={{ height: '200px' }}
-                                          />
-                                        ) : /\.(png|jpeg|jpg)$/.test(
-                                            values.pets[index]?.idPetImage?.link
-                                          ) ? (
-                                          <img
-                                            alt={values.pets[index]?.idPetImage?.name}
-                                            src={values.pets[index]?.idPetImage?.link}
-                                            style={{ height: '200px' }}
-                                          />
+                                        {/\.(mp4|MP4|mov|webm)$/.test(values.pets[index]?.idPetImage?.link) ? (
+                                          <video src={values.pets[index]?.idPetImage?.link} loop autoPlay={true} muted style={{ height: '200px' }} />
+                                        ) : /\.(png|jpeg|jpg)$/.test(values.pets[index]?.idPetImage?.link) ? (
+                                          <img alt={values.pets[index]?.idPetImage?.name} src={values.pets[index]?.idPetImage?.link} style={{ height: '200px' }} />
                                         ) : (
                                           <object data={values.pets[index]?.idPetImage?.link}>
                                             <iframe
@@ -647,6 +614,9 @@ class ProfileSettingsFormComponent extends Component {
                                       </div>
                                     </div>
                                   )}
+
+
+
 
                                   {/* {values.pets.idPetImage && Object.keys(values.idPetImage).length
                                     ? <div className={css.fileUploadName} >
@@ -690,36 +660,24 @@ class ProfileSettingsFormComponent extends Component {
                                     type="number"
                                     id="pet_month"
                                     name={`${name}.pet_month`}
-                                    label={intl.formatMessage({
-                                      id: 'ProfileSettingsForm.petMonthLabel',
-                                    })}
-                                    placeholder={intl.formatMessage({
-                                      id: 'ProfileSettingsForm.petMonthPlaceHolder',
-                                    })}
+                                    label={"What is your Pet's age(month)?"}
+                                    placeholder={bioPlaceholder}
                                     validate={lastNameRequired}
                                   />
                                   <FieldTextInput
                                     type="number"
                                     id="pet_year"
                                     name={`${name}.pet_year`}
-                                    label={intl.formatMessage({
-                                      id: 'ProfileSettingsForm.petYearLabel',
-                                    })}
-                                    placeholder={intl.formatMessage({
-                                      id: 'ProfileSettingsForm.petYearPlaceHolder',
-                                    })}
+                                    label={"What is your Pet's age(year)?"}
+                                    placeholder={bioPlaceholder}
                                     validate={lastNameRequired}
                                   />
                                   <FieldTextInput
                                     type="text"
                                     id="pet_breed"
                                     name={`${name}.pet_breed`}
-                                    label={intl.formatMessage({
-                                      id: 'ProfileSettingsForm.petBreedLabel',
-                                    })}
-                                    placeholder={intl.formatMessage({
-                                      id: 'ProfileSettingsForm.petBreedPlaceHolder',
-                                    })}
+                                    label={"Enter all breeds that apply. If your dog is a mixed breed, add ‘Mixed’ as well."}
+                                    placeholder={bioPlaceholder}
                                     validate={lastNameRequired}
                                   />
                                 </div>
@@ -752,12 +710,8 @@ class ProfileSettingsFormComponent extends Component {
                                     <div className={css.radioBox}>
                                       {desexed.map(st => (
                                         <div className={css.cardSelectPet} key={st.key}>
-                                          <Field
-                                            name={`${name}.desexed`}
-                                            component="input"
-                                            type="radio"
-                                            value={st.key}
-                                            validate={lastNameRequired}
+                                          <Field name={`${name}.desexed`} component="input" type="radio" value={st.key}
+                                           validate={lastNameRequired}
                                           />
                                           <div className={css.radioLabel}>{st.label}</div>
                                         </div>
@@ -772,12 +726,8 @@ class ProfileSettingsFormComponent extends Component {
                                     <div className={css.radioBox}>
                                       {house_trained.map(st => (
                                         <div className={css.cardSelectPet} key={st.key}>
-                                          <Field
-                                            name={`${name}.house_trained`}
-                                            component="input"
-                                            type="radio"
-                                            value={st.key}
-                                            validate={lastNameRequired}
+                                          <Field name={`${name}.house_trained`} component="input" type="radio" value={st.key} 
+                                           validate={lastNameRequired}
                                           />
                                           <div className={css.radioLabel}>{st.label}</div>
                                         </div>
@@ -791,12 +741,8 @@ class ProfileSettingsFormComponent extends Component {
                                     <div className={css.radioBox}>
                                       {children_pet.map(st => (
                                         <div className={css.cardSelectPet} key={st.key}>
-                                          <Field
-                                            name={`${name}.children_pet`}
-                                            component="input"
-                                            type="radio"
-                                            value={st.key}
-                                            validate={lastNameRequired}
+                                          <Field name={`${name}.children_pet`} component="input" type="radio" value={st.key}
+                                           validate={lastNameRequired}
                                           />
                                           <div className={css.radioLabel}>{st.label}</div>
                                         </div>
@@ -810,12 +756,8 @@ class ProfileSettingsFormComponent extends Component {
                                     <div className={css.radioBox}>
                                       {other_pet.map(st => (
                                         <div className={css.cardSelectPet} key={st.key}>
-                                          <Field
-                                            name={`${name}.other_pet`}
-                                            component="input"
-                                            type="radio"
-                                            value={st.key}
-                                            validate={lastNameRequired}
+                                          <Field name={`${name}.other_pet`} component="input" type="radio" value={st.key}
+                                           validate={lastNameRequired}
                                           />
                                           <div className={css.radioLabel}>{st.label}</div>
                                         </div>
@@ -827,12 +769,8 @@ class ProfileSettingsFormComponent extends Component {
                                   type="text"
                                   id="about_pet"
                                   name={`${name}.about_pet`}
-                                  label={intl.formatMessage({
-                                    id: 'ProfileSettingsForm.petAboutLabel',
-                                  })}
-                                  placeholder={intl.formatMessage({
-                                    id: 'ProfileSettingsForm.petAboutPlaceHolder',
-                                  })}
+                                  label={"About your Pet?"}
+                                  placeholder={bioPlaceholder}
                                   validate={lastNameRequired}
                                 />
 
@@ -852,12 +790,8 @@ class ProfileSettingsFormComponent extends Component {
                                   <div className={css.radioBox}>
                                     {Potty_break.map(st => (
                                       <div className={css.cardSelectPet} key={st.key}>
-                                        <Field
-                                          name={`${name}.Potty_break`}
-                                          component="input"
-                                          type="radio"
-                                          value={st.key}
-                                          validate={lastNameRequired}
+                                        <Field name={`${name}.Potty_break`} component="input" type="radio" value={st.key} 
+                                         validate={lastNameRequired}
                                         />
                                         <div className={css.radioLabel}>{st.label}</div>
                                       </div>
@@ -871,12 +805,8 @@ class ProfileSettingsFormComponent extends Component {
                                   <div className={css.radioBox}>
                                     {Energy_level.map(st => (
                                       <div className={css.cardSelectPet} key={st.key}>
-                                        <Field
-                                          name={`${name}.Energy_level`}
-                                          component="input"
-                                          type="radio"
-                                          value={st.key}
-                                          validate={lastNameRequired}
+                                        <Field name={`${name}.Energy_level`} component="input" type="radio" value={st.key} 
+                                         validate={lastNameRequired}
                                         />
                                         <div className={css.radioLabel}>{st.label}</div>
                                       </div>
