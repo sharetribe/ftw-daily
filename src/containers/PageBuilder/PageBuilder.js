@@ -152,7 +152,8 @@ const PageBuilder = props => {
                
               <Main as="main" className={css.main}>
              
-                <SectionBuilder sections={sections} options={options}
+                <SectionBuilder
+                 sections={sections} options={options}
                 
                 urlQueryParams={validQueryParams}
                 listings={listings}

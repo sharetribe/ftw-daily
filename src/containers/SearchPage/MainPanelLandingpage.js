@@ -193,7 +193,7 @@ class MainPanelLandingPage extends Component {
       isDateSelect,
     } = this.props;
 
-    const landingfilter = filterConfig.filter(e => e.id != "petInHome" && e.id != "housingConditions")
+    const landingfilter = filterConfig.filter(e => e.id != "petInHome" && e.id != "housingConditions" && e.id !='policeCheck')
 
     const primaryFilters = landingfilter.filter((f) => {
       let checked = true;
