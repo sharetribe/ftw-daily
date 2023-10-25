@@ -557,8 +557,35 @@ export class BookingDatesFormComponent extends Component {
                     </div> : null}
 
                 </div>
+                 {/* {values?.serviceSetup?.find((e) => e == "overnightsStay")
+                      ? <div className={css.pricingDescription}>
+                        <span className={css.boldText}>Over night rate</span> = AUD{nightprice}.00  per night </div>
+                      : null} */}
+                    {/* {values?.serviceSetup == "dayCareStay"
+                      ?
+                      <div className={css.pricingDescription}>
+
+                      <span>Day care stay Price of 1 pet</span> = AUD{dayprice}.00  per day
+                      {
+                        dayprice2 > 0 ?
+                          <div>
+
+                            <span >Day care stay Price of 2 pets</span> = AUD{dayprice2}.00  per day
+
+                          </div> : null
+                      }
+                      {
+                        dayprice3 > 0 ?
+                          <div>
+                            <span >Day care stay Price of 3+ pets</span> = AUD{dayprice3}.00  per day
+
+                          </div> : null
+                      }
 
 
+                    </div>
+
+                      : null}  */}
 
 
                 {/* {values?.serviceSetup ?

@@ -276,7 +276,7 @@ export const EditListingPricingFormComponent = props => (
                     autoFocus
                     className={css.description}
                     label={"Price For Drop Off"}
-                    placeholder={"price for drop off"}
+                    placeholder={"price for Drop Off"}
                     validate={priceValidators}
                   />
                 </div>
@@ -288,7 +288,7 @@ export const EditListingPricingFormComponent = props => (
                     autoFocus
                     className={css.description}
                     label={"Price For Pick Up"}
-                    placeholder={"price for pick up"}
+                    placeholder={"price for Pick Up"}
                     validate={priceValidators}
                   />
                 </div>
