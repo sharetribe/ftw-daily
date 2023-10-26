@@ -147,8 +147,8 @@ const BookingPanel = props => {
             numberPet={numberPet}
             price={price}
             initialValues={{
-              serviceSetup: search.pub_serviceSetup,
-              numberOfPets: search.pub_numberOfPets
+              serviceSetup: search?.pub_serviceSetup?search.pub_serviceSetup:null,
+              numberOfPets: search?.pub_numberOfPets?search.pub_numberOfPets:null
             }}
             listing={listing}
             firstname={firstname}

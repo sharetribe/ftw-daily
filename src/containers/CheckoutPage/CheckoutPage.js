@@ -280,6 +280,7 @@ export class CheckoutPageComponent extends Component {
 
       const hasPaymentIntents =
         order.attributes.protectedData && order.attributes.protectedData.stripePaymentIntents;
+       
 
       if (!hasPaymentIntents) {
         throw new Error(
@@ -386,15 +387,19 @@ export class CheckoutPageComponent extends Component {
           ? { setupPaymentMethodForSaving: true }
           : {};
     const bookingData = pageData.bookingData || {};
-
+    
+         const startTime = bookingData.startTime;
+         const endTime = bookingData.endTime;
+       
     const orderParams = {
       listingId: pageData.listing.id,
       bookingData,
       bookingStart: tx.booking.attributes.start,
       bookingEnd: tx.booking.attributes.end,
       ...optionalPaymentParams,
+      protectedData: {startTime,endTime}
     };
-
+console.log('orderParams', orderParams)
     return handlePaymentIntentCreation(orderParams);
   }
 
@@ -598,7 +603,10 @@ export class CheckoutPageComponent extends Component {
     // Show breakdown only when speculated transaction and booking are loaded
     // (i.e. have an id)
     const tx = existingTransaction.booking ? existingTransaction : speculatedTransaction;
+    console.log('tx', tx)
     const txBooking = ensureBooking(tx.booking);
+    const {  startTime,
+      endTime, } = this.state.pageData.bookingData || {};
     const breakdown =
       tx.id && txBooking.id ? (
         <BookingBreakdown
@@ -606,13 +614,14 @@ export class CheckoutPageComponent extends Component {
           userRole="customer"
           unitType={config.bookingUnitType}
           dayUnitType={config.bookingDayUnitType}
-
+          endTime={endTime}
+          startTime={startTime}
           transaction={tx}
           booking={txBooking}
           dateType={DATE_TYPE_DATE}
         />
       ) : null;
-
+      
     const isPaymentExpired = checkIsPaymentExpired(existingTransaction);
     const hasDefaultPaymentMethod = !!(
       stripeCustomerFetched &&

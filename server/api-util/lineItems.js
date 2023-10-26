@@ -37,6 +37,7 @@ exports.transactionLineItems = (listing, bookingData) => {
   const lineItems = [];
   const unitPrice = listing.attributes.price;
   const { startDate, endDate, serviceSetup, numberOfPets, pickyes, dropPick, dropyes } = bookingData;
+  
   const pickyesprice = pickyes * 100;
   const dropyesprice = dropyes * 100;
 
