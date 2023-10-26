@@ -79,15 +79,15 @@
    :from :state/preauthorized,
    :to :state/declined}
 ;; mail confirmation serving as a reminder to respond to the owners booking request, and it will expire 
-{:name :transition/host-notification-forAcceptorNot,
-   :at
-   {:fn/plus
-    [{:fn/timepoint [:time/first-entered-state :state/preauthorized]}
-     {:fn/period ["P1D"]}]},
-   :actions
-   [],
-   :from :state/preauthorized,
-   :to :state/preauthorized}
+;; {:name :transition/host-notification-forAcceptorNot,
+;;    :at
+;;    {:fn/plus
+;;     [{:fn/timepoint [:time/first-entered-state :state/preauthorized]}
+;;      {:fn/period ["P1D"]}]},
+;;    :actions
+;;    [],
+;;    :from :state/preauthorized,
+;;    :to :state/preauthorized}
 
   {:name :transition/complete,
    :at {:fn/timepoint [:time/booking-end]},
@@ -193,7 +193,8 @@
    :from :state/reviewed-by-provider,
    :to :state/reviewed}],
  :notifications
- [{:name :notification/new-booking-request,
+ [
+  {:name :notification/new-booking-request,
    :on :transition/confirm-payment,
    :to :actor.role/provider,
    :template :new-booking-request}
@@ -228,11 +229,18 @@
    :to :actor.role/customer,
    :template :booking-no-refund-customer-mail}
 ;; host-notification-forAcceptorNot
-  {:name :notification/host-mail-forAcceptorNot,
-  :on :transition/host-notification-forAcceptorNot,
-   :to :actor.role/provider,
-   :template :host-mail-forAcceptorNot}
+  ;; {:name :notification/host-mail-forAcceptorNot,
+  ;; :on :transition/host-notification-forAcceptorNot,
+  ;;  :to :actor.role/provider,
+  ;;  :template :host-mail-forAcceptorNot}
 
+ {:name :notification/host-mail-forAcceptorNot,
+   :on :transition/confirm-payment,
+   :to :actor.role/provider,
+   :at  {:fn/plus
+     [{:fn/timepoint [:time/first-entered-state :state/preauthorized]}
+      {:fn/period ["P1D"]}]},
+   :template :host-mail-forAcceptorNot}
   ;;     {:name :notification/host-mail-forAcceptorNot,
   ;;  :on :state/preauthorized,
   ;;  :to :actor.role/provider,
