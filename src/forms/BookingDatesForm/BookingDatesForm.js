@@ -147,9 +147,9 @@ export class BookingDatesFormComponent extends Component {
             fetchLineItemsError,
             firstname,
           } = fieldRenderProps;
-         
-         
-         
+
+
+
           const {
             pricepet,
             serviceSetup: detail,
@@ -274,7 +274,7 @@ export class BookingDatesFormComponent extends Component {
           const submitButtonClasses = classNames(
             submitButtonWrapperClassName || css.submitButtonWrapper
           );
-          const submitDisabled = !detail || !numberPetArray ;
+          const submitDisabled = !detail || !numberPetArray;
 
           return (
             <Form onSubmit={handleSubmit} className={classes} enforcePagePreloadFor="CheckoutPage">
@@ -339,7 +339,7 @@ export class BookingDatesFormComponent extends Component {
               {dropupService == "dropPick_no"
                 ? null
                 : <>
-                  <div>This host provide drop off and pick up service.
+                  <div>Would you like to add on a pick up and drop off service to your booking?
                   </div>
                   <div>
                     {services?.map((st) => {
@@ -370,7 +370,7 @@ export class BookingDatesFormComponent extends Component {
                     className={css.startTime} // Add a className for styling
                     id={'startTime'} // Give it a unique ID
                     name={'startTime'} // Set a unique name for the field
-                  
+
                   // value={start_time}
                   >
                     <option disabled value="">
@@ -401,18 +401,18 @@ export class BookingDatesFormComponent extends Component {
                     name={'endTime'} // Set a unique name for the field
                   // label="End Time" // Label for the dropdown
                   // value={end_time}
-                // disabled={this.state.disabledDaytime}
+                  // disabled={this.state.disabledDaytime}
                   >
                     <option disabled value="">
                       End Time
                     </option>
                     {singlebooking
                       // Check if it's "daysbase" service
-                      ? Array.from({ length:values && values.startTime && [7,8].includes(+values.startTime.split(":")[0]) ? (+values.startTime.split(":")[0]==7 ? 11 : 12) : 13 }, (_, index) => {
+                      ? Array.from({ length: values && values.startTime && [7, 8].includes(+values.startTime.split(":")[0]) ? (+values.startTime.split(":")[0] == 7 ? 11 : 12) : 13 }, (_, index) => {
                         const hour = String(index + 7).padStart(2, '0'); // Start from 7 am
-                      
-                        
-                        if(values && values.startTime && +values.startTime.split(":")[0] >= (+hour)){
+
+
+                        if (values && values.startTime && +values.startTime.split(":")[0] >= (+hour)) {
                           return null;
                         }
                         return (
@@ -423,7 +423,7 @@ export class BookingDatesFormComponent extends Component {
                       })
                       : Array.from({ length: 24 }, (_, index) => {
                         const hour = String(index).padStart(2, '0'); // Show 24-hour time options
-                        if(values && values.startTime && +values.startTime.split(":")[0] <= (+hour)){
+                        if (values && values.startTime && +values.startTime.split(":")[0] <= (+hour)) {
                           return null;
                         }
                         return (
@@ -513,12 +513,13 @@ export class BookingDatesFormComponent extends Component {
 
                   {(detail?.find((e) => e == "overnightsStay")) ?
                     <div className={css.pricingDescription}>
-                      <span>Over night rate Price of 1 pet</span> = AUD{nightprice}.00  per night
+                      <h3>Over night rate Price of</h3>
+                      <span>1 pet</span> = AUD{nightprice}.00  per night
                       {
                         nightprice2 > 0 ?
 
                           <div>
-                            <span>Over night rate Price of 2 pet</span> = AUD{nightprice2}.00  per night
+                            <span> 2 pet</span> = AUD{nightprice2}.00  per night
                           </div>
 
 
@@ -526,7 +527,7 @@ export class BookingDatesFormComponent extends Component {
                       }
                       {
                         nightprice3 > 0 ? <div>
-                          <span>Over night rate Price of 3 pet</span> = AUD{nightprice3}.00  per night
+                          <span> 3 pet</span> = AUD{nightprice3}.00  per night
                         </div> : null
                       }
 
@@ -535,20 +536,20 @@ export class BookingDatesFormComponent extends Component {
 
                   {(detail?.find((e) => e == "dayCareStay")) ?
                     <div className={css.pricingDescription}>
-
-                      <span>Day care stay Price of 1 pet</span> = AUD{dayprice}.00  per day
+                      <h3>Day care stay Price of</h3>
+                      <span> 1 pet</span> = AUD{dayprice}.00  per day
                       {
                         dayprice2 > 0 ?
                           <div>
 
-                            <span >Day care stay Price of 2 pets</span> = AUD{dayprice2}.00  per day
+                            <span > 2 pets</span> = AUD{dayprice2}.00  per day
 
                           </div> : null
                       }
                       {
                         dayprice3 > 0 ?
                           <div>
-                            <span >Day care stay Price of 3+ pets</span> = AUD{dayprice3}.00  per day
+                            <span > 3+ pets</span> = AUD{dayprice3}.00  per day
 
                           </div> : null
                       }
@@ -557,11 +558,11 @@ export class BookingDatesFormComponent extends Component {
                     </div> : null}
 
                 </div>
-                 {/* {values?.serviceSetup?.find((e) => e == "overnightsStay")
+                {/* {values?.serviceSetup?.find((e) => e == "overnightsStay")
                       ? <div className={css.pricingDescription}>
                         <span className={css.boldText}>Over night rate</span> = AUD{nightprice}.00  per night </div>
                       : null} */}
-                    {/* {values?.serviceSetup == "dayCareStay"
+                {/* {values?.serviceSetup == "dayCareStay"
                       ?
                       <div className={css.pricingDescription}>
 

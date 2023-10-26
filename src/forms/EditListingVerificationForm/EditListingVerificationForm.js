@@ -98,6 +98,36 @@ export class EditListingVerificationFormComponent extends Component {
     }
   }
 
+  onAttachmentUploadPolice(file, form) {
+    // this.props.setClearForm(false);
+    if (file && file.name) {
+      ReactS3Client.uploadFile(file, file.name)
+        .then(data => {
+          //  const updateduploadedAttachmentsUrls = [...this.state.uploadedAttachmentsUrls];
+          const { location } = data;
+          const currentDate = moment().format('MM-DD-YYYY hh:mm:ss');
+          const updateduploadedAttachmentsUrls = ({
+            link: location,
+            date: currentDate,
+            name: file.name,
+            id: uuidv4(),
+            size: file.size
+          });
+          this.setState({
+            uploadedAttachmentsUrls: updateduploadedAttachmentsUrls,
+            attachmentDeleteRequested: false,
+            uploadAttachmentToAwsRequested: false,
+          });
+          form.change("idPoliceImage", updateduploadedAttachmentsUrls);
+        })
+        .catch(e => {
+          console.error(e, '^^^^ ^^^^ => e');
+          this.setState({ uploadAttachmentToAwsRequested: false });
+        });
+    }
+  }
+
+
   render() {
     return (
       <FinalForm
@@ -122,7 +152,6 @@ export class EditListingVerificationFormComponent extends Component {
             idProofImageUploadRequested,
           } = formRenderProps;
           CONFIRM_ERROR
-
 
           const { publishListingError, showListingsError, updateListingError, uploadImageError } =
             fetchErrors || {};
@@ -223,7 +252,7 @@ export class EditListingVerificationFormComponent extends Component {
           }
 
           const submitInProgress = updateInProgress;
-          const submitDisabled = invalid || disabled || submitInProgress || idProofImageUploadRequested || ready || !values.policeCheck;
+          const submitDisabled = invalid || disabled || submitInProgress || idProofImageUploadRequested || ready || !values.policeCheck || !values.idProofImage;
 
           const classes = classNames(css.root, className);
           const policeCheck = findOptionsForSelectFilter('policeCheck', filterConfig);
@@ -236,7 +265,98 @@ export class EditListingVerificationFormComponent extends Component {
               }}
             >
 
+              <div>
 
+                <p>Upload Photo ID -- drivers licence and Passport</p>
+
+                <div className={css.imagesField}>
+
+                  <Field
+                    label={chooseAvatarLabel}
+                    id="idProofImage"
+                    name="idProofImage"
+                    accept={ACCEPT_FILE}
+                    form={null}
+                    type="file"
+                  >
+                    {fieldprops => {
+                      const { accept, input, label, meta, disabled: fieldDisabled } = fieldprops;
+                      const { name, type } = input;
+                      const onChange = e => {
+                        const file = e.target.files[0];
+                        this.setState({ fileState: file });
+                        if (file && file.name && file.size < 10000000) {
+                          this.setState({ uploadAttachmentToAwsRequested: true, stopLoop: false });
+                          this.onAttachmentUpload(file, form);
+                          e.target.value = null;
+                        }
+                      };
+
+                      const inputProps = { accept, id: name, name, onChange, type };
+                      return (
+                        <div className={css.addImageWrapper}>
+                          <div className={css.aspectRatioWrapper}>
+                            {fieldDisabled ? null : (
+                              <input {...inputProps} className={css.addImageInput} />
+                            )}
+                            <label htmlFor={name} className={css.addImage}>
+                              {label}
+                            </label>
+                          </div>
+                        </div>
+                      );
+                    }}
+                  </Field>
+
+
+                  <Field
+                    component={props => {
+                      const { input, meta } = props;
+                      return (
+                        <div className={css.imageRequiredWrapper}>
+                          <input {...input} />
+                          <ValidationError fieldMeta={meta} />
+
+                        </div>
+                      );
+                    }}
+                    name="images"
+                    type="hidden"
+
+                  />
+                </div>
+
+                <ul>
+                  {values.idProofImage && Object.keys(values.idProofImage).length
+                    ? <div className={css.fileUploadName} >
+                      <div>
+                        {/\mp4|MP4|mov|webm/.test(values.idProofImage.link) ? (
+                          <video src={values.idProofImage && values.idProofImage.link} loop autoPlay={true} muted style={{ height: '200px' }} />
+                        ) : /\png|jpeg|jpg/.test(values.idProofImage.link) ? (
+                          <img alt={values.idProofImage.name} src={values.idProofImage.link} style={{ height: '200px' }} />
+                        ) : (
+                          <object data={values.idProofImage.link}>
+                            <iframe
+                              className="doc"
+                              src={`https://docs.google.com/gview?url=${values.idProofImage.link}&embedded=true`}
+                            />
+                          </object>
+                        )}
+                      </div>
+                    </div>
+                    : null}
+
+                </ul>
+                {uploadImageFailed}
+
+                {/* <p className={css.tip}>
+                  <FormattedMessage id="EditListingVerificationForm.addImagesTip" />
+                </p> */}
+
+                {publishListingFailed}
+                {showListingFailed}
+
+              </div>
 
               {updateListingError ? (
                 <p className={css.error}>
@@ -245,7 +365,7 @@ export class EditListingVerificationFormComponent extends Component {
               ) : null}
 
 
-              <p>Do you have Police Check</p>
+              <p>Do you have Police Check ?</p>
               <div className={css.rowBox}>
                 {policeCheck.map(num => {
                   return (
@@ -265,14 +385,14 @@ export class EditListingVerificationFormComponent extends Component {
               {values && values.policeCheck == 'police_yes' ? (
                 <div>
 
-                  <p>Upload Photo ID -- drivers licence and Passport</p>
+                  <p>Upload Police verification </p>
 
                   <div className={css.imagesField}>
 
                     <Field
                       label={chooseAvatarLabel}
-                      id="idProofImage"
-                      name="idProofImage"
+                      id="idPoliceImage"
+                      name="idPoliceImage"
                       accept={ACCEPT_FILE}
                       form={null}
                       type="file"
@@ -285,7 +405,7 @@ export class EditListingVerificationFormComponent extends Component {
                           this.setState({ fileState: file });
                           if (file && file.name && file.size < 10000000) {
                             this.setState({ uploadAttachmentToAwsRequested: true, stopLoop: false });
-                            this.onAttachmentUpload(file, form);
+                            this.onAttachmentUploadPolice(file, form);
                             e.target.value = null;
                           }
                         };
@@ -325,18 +445,18 @@ export class EditListingVerificationFormComponent extends Component {
                   </div>
 
                   <ul>
-                    {values.idProofImage && Object.keys(values.idProofImage).length
+                    {values.idPoliceImage && Object.keys(values.idPoliceImage).length
                       ? <div className={css.fileUploadName} >
                         <div>
-                          {/\mp4|MP4|mov|webm/.test(values.idProofImage.link) ? (
-                            <video src={values.idProofImage && values.idProofImage.link} loop autoPlay={true} muted style={{ height: '200px' }} />
-                          ) : /\png|jpeg|jpg/.test(values.idProofImage.link) ? (
-                            <img alt={values.idProofImage.name} src={values.idProofImage.link} style={{ height: '200px' }} />
+                          {/\mp4|MP4|mov|webm/.test(values.idPoliceImage.link) ? (
+                            <video src={values.idPoliceImage && values.idPoliceImage.link} loop autoPlay={true} muted style={{ height: '200px' }} />
+                          ) : /\png|jpeg|jpg/.test(values.idPoliceImage.link) ? (
+                            <img alt={values.idPoliceImage.name} src={values.idPoliceImage.link} style={{ height: '200px' }} />
                           ) : (
-                            <object data={values.idProofImage.link}>
+                            <object data={values.idPoliceImage.link}>
                               <iframe
                                 className="doc"
-                                src={`https://docs.google.com/gview?url=${values.idProofImage.link}&embedded=true`}
+                                src={`https://docs.google.com/gview?url=${values.idPoliceImage.link}&embedded=true`}
                               />
                             </object>
                           )}
@@ -347,9 +467,9 @@ export class EditListingVerificationFormComponent extends Component {
                   </ul>
                   {uploadImageFailed}
 
-                  <p className={css.tip}>
+                  {/* <p className={css.tip}>
                     <FormattedMessage id="EditListingVerificationForm.addImagesTip" />
-                  </p>
+                  </p> */}
 
                   {publishListingFailed}
                   {showListingFailed}
