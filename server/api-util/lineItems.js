@@ -83,7 +83,7 @@ exports.transactionLineItems = (listing, bookingData) => {
     code: servicesdropupUnitType,
     unitPrice: new Money(dropyesprice,unitPrice.currency),
     quantity: 1,
-    includeFor: ['customer',],
+    includeFor: ['customer','provider'],
   };
   if (dropPick === 'dropPick_yes') {
      lineItems.push(dropservices)

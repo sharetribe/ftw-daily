@@ -387,19 +387,21 @@ export class CheckoutPageComponent extends Component {
           ? { setupPaymentMethodForSaving: true }
           : {};
     const bookingData = pageData.bookingData || {};
-    
+   
          const startTime = bookingData.startTime;
          const endTime = bookingData.endTime;
-       
+       const dropyes = pageData?.listing?.attributes?.publicData?.dropyes ||{}
+       const pickyes = pageData?.listing?.attributes?.publicData?.pickyes ||{}
+
     const orderParams = {
       listingId: pageData.listing.id,
       bookingData,
       bookingStart: tx.booking.attributes.start,
       bookingEnd: tx.booking.attributes.end,
       ...optionalPaymentParams,
-      protectedData: {startTime,endTime}
+      protectedData: {startTime,endTime,pickyes,dropyes}
     };
-console.log('orderParams', orderParams)
+
     return handlePaymentIntentCreation(orderParams);
   }
 

@@ -164,6 +164,7 @@ export const stripeCustomerError = e => ({
 export const initiateOrder = (orderParams, transactionId) => (dispatch, getState, sdk) => {
   dispatch(initiateOrderRequest());
 
+
   // If we already have a transaction ID, we should transition, not
   // initiate.
   const isTransition = !!transactionId;
@@ -179,9 +180,9 @@ export const initiateOrder = (orderParams, transactionId) => (dispatch, getState
     startTime: orderParams.bookingData.startTime,
     startDate: orderParams.bookingStart,
     endDate: orderParams.bookingEnd,
-    pickyes: orderParams.pickyes,
-    dropyes: orderParams.pickyes,
-    dropPick: orderParams.dropPick,
+    pickyes: orderParams.protectedData.pickyes,
+    dropyes: orderParams.protectedData.pickyes,
+    dropPick: orderParams.bookingData.dropPick,
   };
 
   const bodyParams = isTransition
@@ -306,6 +307,7 @@ export const sendMessage = params => (dispatch, getState, sdk) => {
  * the price with the chosen information.
  */
 export const speculateTransaction = (orderParams, transactionId) => (dispatch, getState, sdk) => {
+  
   dispatch(speculateTransactionRequest());
   // If we already have a transaction ID, we should transition, not
   // initiate.
