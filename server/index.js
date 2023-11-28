@@ -14,6 +14,7 @@
  */
 
 // This enables nice stacktraces from the minified production bundle
+
 require('source-map-support').install();
 
 // Configure process.env with .env.* files
@@ -223,54 +224,55 @@ app.get('*', (req, res) => {
   const { nodeExtractor, webExtractor } = getExtractors();
 
   // Server-side entrypoint provides us the functions for server-side data loading and rendering
-  const nodeEntrypoint = nodeExtractor.requireEntrypoint();
-  const { default: renderApp, ...appInfo } = nodeEntrypoint;
 
-  dataLoader
-    .loadData(req.url, sdk, appInfo)
-    .then(data => {
-      const html = renderer.render(req.url, context, data, renderApp, webExtractor);
+  nodeExtractor.requireEntrypoint().then(response => {
+    const { default: renderApp, ...appInfo } = response;
+    dataLoader
+      .loadData(req.url, sdk, appInfo)
+      .then(data => {
+        const html = renderer.render(req.url, context, data, renderApp, webExtractor);
 
-      if (dev) {
-        const debugData = {
-          url: req.url,
-          context,
-        };
-        console.log(`\nRender info:\n${JSON.stringify(debugData, null, '  ')}`);
-      }
+        if (dev) {
+          const debugData = {
+            url: req.url,
+            context,
+          };
+          console.log(`\nRender info:\n${JSON.stringify(debugData, null, '  ')}`);
+        }
 
-      if (context.unauthorized) {
-        // Routes component injects the context.unauthorized when the
-        // user isn't logged in to view the page that requires
-        // authentication.
-        sdk.authInfo().then(authInfo => {
-          if (authInfo && authInfo.isAnonymous === false) {
-            // It looks like the user is logged in.
-            // Full verification would require actual call to API
-            // to refresh the access token
-            res.status(200).send(html);
-          } else {
-            // Current token is anonymous.
-            res.status(401).send(html);
-          }
-        });
-      } else if (context.forbidden) {
-        res.status(403).send(html);
-      } else if (context.url) {
-        // React Router injects the context.url if a redirect was rendered
-        res.redirect(context.url);
-      } else if (context.notfound) {
-        // NotFoundPage component injects the context.notfound when a
-        // 404 should be returned
-        res.status(404).send(html);
-      } else {
-        res.send(html);
-      }
-    })
-    .catch(e => {
-      log.error(e, 'server-side-render-failed');
-      res.status(500).send(errorPage);
-    });
+        if (context.unauthorized) {
+          // Routes component injects the context.unauthorized when the
+          // user isn't logged in to view the page that requires
+          // authentication.
+          sdk.authInfo().then(authInfo => {
+            if (authInfo && authInfo.isAnonymous === false) {
+              // It looks like the user is logged in.
+              // Full verification would require actual call to API
+              // to refresh the access token
+              res.status(200).send(html);
+            } else {
+              // Current token is anonymous.
+              res.status(401).send(html);
+            }
+          });
+        } else if (context.forbidden) {
+          res.status(403).send(html);
+        } else if (context.url) {
+          // React Router injects the context.url if a redirect was rendered
+          res.redirect(context.url);
+        } else if (context.notfound) {
+          // NotFoundPage component injects the context.notfound when a
+          // 404 should be returned
+          res.status(404).send(html);
+        } else {
+          res.send(html);
+        }
+      })
+      .catch(e => {
+        log.error(e, 'server-side-render-failed');
+        res.status(500).send(errorPage);
+      });
+  });
 });
 
 // Set error handler. If Sentry is set up, all error responses
