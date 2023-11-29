@@ -61,7 +61,7 @@ export class BookingDatesFormComponent extends Component {
   // lineItems from FTW backend for the EstimatedTransactionMaybe
   // In case you add more fields to the form, make sure you add
   // the values here to the bookingData object.
-  handleOnChange(formValues) {
+  handleOnChange(formValues,form) {
     let { startDate, endDate, date, endTime, startTime } = formValues.values && formValues.values.bookingDates ? formValues.values.bookingDates : {};
 
     const { serviceSetup, numberOfPets, dropPick } = formValues.values;
@@ -70,6 +70,8 @@ export class BookingDatesFormComponent extends Component {
       startDate = date;
       endDate = moment(startDate).add(1, 'day').toDate();
     }
+   form.change("singlebooking",singlebooking)
+   form.change("date",date)
 
     const { listing, listingId, isOwnListing } = this.props;
     const { pickyes, dropyes, } = (listing && listing.id && listing.attributes.publicData) || {};
@@ -79,9 +81,11 @@ export class BookingDatesFormComponent extends Component {
         bookingData: {
           startDate,
           endDate,
+          singlebooking,
           serviceSetup,
           numberOfPets,
           endTime,
+          date,
           startTime,
           dropPick,
           pickyes,
@@ -137,6 +141,8 @@ export class BookingDatesFormComponent extends Component {
             unitType,
             dayUnitType,
             values,
+            search,
+            form,
             timeSlots,
             listing,
             filterConfig,
@@ -149,7 +155,7 @@ export class BookingDatesFormComponent extends Component {
           } = fieldRenderProps;
 
 
-
+console.log('values', values)
           const {
             pricepet,
             serviceSetup: detail,
@@ -199,6 +205,12 @@ export class BookingDatesFormComponent extends Component {
           const requiredMessage = intl.formatMessage({
             id: 'BookingDatesForm.requiredDate',
           });
+          const starttimerequiredMessage = intl.formatMessage({
+            id: 'BookingDatesForm.startrequiredDate',
+          });
+          const endtimerequiredMessage = intl.formatMessage({
+            id: 'BookingDatesForm.endrequiredDate',
+          });
 
           const requiredpetMessage = intl.formatMessage({
             id: 'BookingDatesForm.requiredNumberofpet',
@@ -229,10 +241,11 @@ export class BookingDatesFormComponent extends Component {
                 startTime: values.startTime,
                 endTime: values.endTime,
                 endDate,
-                singlebooking
+                singlebooking,
+                date
               }
               : null;
-
+              console.log('bookingData', bookingData)
           const showEstimatedBreakdown =
             bookingData && lineItems && !fetchLineItemsInProgress && !fetchLineItemsError;
 
@@ -282,7 +295,7 @@ export class BookingDatesFormComponent extends Component {
               <FormSpy
                 subscription={{ values: true }}
                 onChange={values => {
-                  this.handleOnChange(values);
+                  this.handleOnChange(values,form);
                 }}
               />
 
@@ -362,6 +375,44 @@ export class BookingDatesFormComponent extends Component {
                   </div>
                 </>}
 
+              {singlebooking
+                ? <FieldDateInput
+                  className={css.bookingDates}
+                  name="bookingDates"
+                  startDatePlaceholderText={startDatePlaceholderText}
+                  format={identity}
+                  timeSlots={timeSlots?.slice(2, timeSlots?.length)}
+                  validate={composeValidators(
+                    required(requiredMessage),
+                    bookingDateRequired(startDateErrorMessage)
+                  )}
+
+                />
+                : <FieldDateRangeInput
+                  className={css.bookingDates}
+                  name="bookingDates"
+                  unitType={singlebooking ? dayUnitType : unitType}
+                  startDateId={`${formId}.bookingStartDate`}
+                  startDateLabel={bookingStartLabel}
+                  startDatePlaceholderText={startDatePlaceholderText}
+                  endDateId={`${formId}.bookingEndDate`}
+                  endDateLabel={bookingEndLabel}
+                  endDatePlaceholderText={endDatePlaceholderText}
+                  focusedInput={this.state.focusedInput}
+                  onFocusedInputChange={this.onFocusedInputChange}
+                  format={identity}
+                  timeSlots={timeSlots?.slice(2, timeSlots?.length)}
+                  useMobileMargins
+                  initialValues={{
+                      bookingDates:search?.dates?search.dates:null,
+      
+                  }}
+                  validate={composeValidators(
+                    required(requiredMessage),
+                    bookingDatesRequired(startDateErrorMessage, endDateErrorMessage)
+                  )}
+                  disabled={fetchLineItemsInProgress}
+                />}
 
               <div>
 
@@ -370,8 +421,10 @@ export class BookingDatesFormComponent extends Component {
                     className={css.startTime} // Add a className for styling
                     id={'startTime'} // Give it a unique ID
                     name={'startTime'} // Set a unique name for the field
-
-                  // value={start_time}
+                    validate={composeValidators(
+                      required(starttimerequiredMessage),
+             
+                    )}
                   >
                     <option disabled value="">
                       Start Time
@@ -399,9 +452,10 @@ export class BookingDatesFormComponent extends Component {
                     className={css.startTime} // Add a className for styling
                     id={'endTime'} // Give it a unique ID
                     name={'endTime'} // Set a unique name for the field
-                  // label="End Time" // Label for the dropdown
-                  // value={end_time}
-                  // disabled={this.state.disabledDaytime}
+                    validate={composeValidators(
+                      required(endtimerequiredMessage),
+                    
+                    )}
                   >
                     <option disabled value="">
                       End Time
@@ -435,45 +489,6 @@ export class BookingDatesFormComponent extends Component {
                   </FieldSelect>
                 </div>
               </div>
-
-
-
-              {singlebooking
-                ? <FieldDateInput
-                  className={css.bookingDates}
-                  name="bookingDates"
-                  startDatePlaceholderText={startDatePlaceholderText}
-                  format={identity}
-                  timeSlots={timeSlots?.slice(2, timeSlots?.length)}
-                  validate={composeValidators(
-                    required(requiredMessage),
-                    bookingDateRequired(startDateErrorMessage)
-                  )}
-
-                />
-                : <FieldDateRangeInput
-                  className={css.bookingDates}
-                  name="bookingDates"
-                  unitType={singlebooking ? dayUnitType : unitType}
-                  startDateId={`${formId}.bookingStartDate`}
-                  startDateLabel={bookingStartLabel}
-                  startDatePlaceholderText={startDatePlaceholderText}
-                  endDateId={`${formId}.bookingEndDate`}
-                  endDateLabel={bookingEndLabel}
-                  endDatePlaceholderText={endDatePlaceholderText}
-                  focusedInput={this.state.focusedInput}
-                  onFocusedInputChange={this.onFocusedInputChange}
-                  format={identity}
-                  timeSlots={timeSlots?.slice(2, timeSlots?.length)}
-                  useMobileMargins
-                  validate={composeValidators(
-                    required(requiredMessage),
-                    bookingDatesRequired(startDateErrorMessage, endDateErrorMessage)
-                  )}
-                  disabled={fetchLineItemsInProgress}
-                />}
-
-
 
               {bookingInfoMaybe}
               {loadingSpinnerMaybe}

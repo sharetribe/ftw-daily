@@ -307,7 +307,7 @@ export const sendMessage = params => (dispatch, getState, sdk) => {
  * the price with the chosen information.
  */
 export const speculateTransaction = (orderParams, transactionId) => (dispatch, getState, sdk) => {
-  
+  console.log('orderParams', orderParams)
   dispatch(speculateTransactionRequest());
   // If we already have a transaction ID, we should transition, not
   // initiate.

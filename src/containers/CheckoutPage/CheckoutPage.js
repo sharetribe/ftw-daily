@@ -102,6 +102,7 @@ export class CheckoutPageComponent extends Component {
       dataLoaded: false,
       submitting: false,
     };
+
     this.stripe = null;
 
     this.onStripeInitialized = this.onStripeInitialized.bind(this);
@@ -184,14 +185,20 @@ export class CheckoutPageComponent extends Component {
       const {pickyes,dropyes} =pageData.listing.attributes.publicData
       const transactionId = tx ? tx.id : null;
       const { bookingStart, bookingEnd } = pageData.bookingDates;
+      console.log('bookingStart', bookingStart)
       const { dropPick, startTime,
-        endTime, } = pageData.bookingData || {};
+        endTime,singlebooking,date } = pageData.bookingData || {};
+        // if (singlebooking) {
+        //   bookingStart = date;
+        //   bookingEnd = moment(startDate).add(1, 'day').toDate();
+        // }
+        console.log('singlebooking', singlebooking)
       const bookingData = pageData.bookingData || {}
-
+console.log('bookingData', bookingData)
       // Convert picked date to date that will be converted on the API as
       // a noon of correct year-month-date combo in UTC
-      const bookingStartForAPI = dateFromLocalToAPI(bookingStart);
-      const bookingEndForAPI = dateFromLocalToAPI(bookingEnd);
+      const bookingStartForAPI = dateFromLocalToAPI(date);
+      const bookingEndForAPI = dateFromLocalToAPI(date);
 
       // Fetch speculated transaction for showing price in booking breakdown
       // NOTE: if unit type is line-item/units, quantity needs to be added.
@@ -205,8 +212,8 @@ export class CheckoutPageComponent extends Component {
           startTime,
           dropPick,
           endTime,
-          bookingStart: bookingStartForAPI,
-          bookingEnd: bookingEndForAPI,
+          date: bookingStartForAPI,
+          date: bookingEndForAPI,
         },
         transactionId
       );
@@ -397,7 +404,7 @@ export class CheckoutPageComponent extends Component {
       listingId: pageData.listing.id,
       bookingData,
       bookingStart: tx.booking.attributes.start,
-      bookingEnd: tx.booking.attributes.end,
+      date: tx.booking.attributes.end,
       ...optionalPaymentParams,
       protectedData: {startTime,endTime,pickyes,dropyes}
     };

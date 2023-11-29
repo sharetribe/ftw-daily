@@ -566,8 +566,13 @@ export const requestPublishListingDraft = listingId => (dispatch, getState, sdk)
       dispatch(addMarketplaceEntities(response));
       dispatch(publishListingSuccess(response));
       console.log('response', response)
-      const data = response.data.data.attributes.publicData.email
-      console.log('data', data)
+      const dataemail = response.data.data.attributes.publicData.email
+      const data = {
+        data: {
+          email: dataemail,
+        },
+      };
+      contact_us(data);
       Hostcreate_profile(data)
       return response;
     })

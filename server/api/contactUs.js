@@ -169,14 +169,14 @@ module.exports = {
     // this api create or update the contact.
     contact_us: async (req, res) => {
         const {data}=req.body;
+        console.log('data', data)
        const key = process.env.SENDGRID_KEY;
        console.log('key', key)
         sgMail.setApiKey(key);
         const message = {
         //   to:process.env.BYBORROW_EMAIL,
         to:"petcribtest@yopmail.com",
-        //   from: process.env.SENDER_EMAIL,
-        from:"hello@byborrow.com",
+        from: process.env.SENDER_EMAIL,
           subject:"Contact",
           text:"process.env.BYBORROW_EMAIL",
           html:listingInReviewTemplate(data),

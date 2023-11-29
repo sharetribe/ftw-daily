@@ -82,7 +82,7 @@ const BookingPanel = props => {
     fetchLineItemsError,
     dayUnitType,
   } = props;
-
+console.log('search', search)
   const { price, publicData } = listing.attributes || {};
 
   const hasListingState = !!listing.attributes.state;
@@ -146,9 +146,12 @@ const BookingPanel = props => {
             onSubmit={onSubmit}
             numberPet={numberPet}
             price={price}
+            search={search}
             initialValues={{
               serviceSetup: search?.pub_serviceSetup?search.pub_serviceSetup:null,
-              numberOfPets: search?.pub_numberOfPets?search.pub_numberOfPets:null
+              numberOfPets: search?.pub_numberOfPets?search.pub_numberOfPets:null,
+                bookingDates:search?.dates?search.dates:null,
+
             }}
             listing={listing}
             firstname={firstname}

@@ -36,6 +36,7 @@ export class ProfileSettingsPageComponent extends Component {
       image,
       form,
       onImageUpload,
+      currentUserHasOneListings,
       onUpdateProfile,
       scrollingDisabled,
       updateInProgress,
@@ -106,6 +107,7 @@ export class ProfileSettingsPageComponent extends Component {
         
         
         }}
+        currentUserHasOneListings={currentUserHasOneListings}
         profileImage={profileImage}
         onImageUpload={e => onImageUploadHandler(e, onImageUpload)}
         uploadInProgress={uploadInProgress}
@@ -183,7 +185,7 @@ ProfileSettingsPageComponent.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { currentUser } = state.user;
+  const { currentUser,currentUserHasOneListings } = state.user;
   const {
     image,
     uploadImageError,
@@ -199,6 +201,7 @@ const mapStateToProps = state => {
     updateProfileError,
     uploadImageError,
     uploadInProgress,
+    currentUserHasOneListings,
   };
 };
 

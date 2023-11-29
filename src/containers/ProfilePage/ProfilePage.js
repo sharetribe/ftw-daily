@@ -139,18 +139,18 @@ export class ProfilePageComponent extends Component {
     );
 
     const desktopReviewTabs = [
-      {
-        text: (
-          <h3 className={css.desktopReviewsTitle}>
-            <FormattedMessage
-              id="ProfilePage.reviewsOfProviderTitle"
-              values={{ count: reviewsOfProvider.length }}
-            />
-          </h3>
-        ),
-        selected: this.state.showReviewsType === REVIEW_TYPE_OF_PROVIDER,
-        onClick: this.showOfProviderReviews,
-      },
+      // {
+      //   text: (
+      //     <h3 className={css.desktopReviewsTitle}>
+      //       <FormattedMessage
+      //         id="ProfilePage.reviewsOfProviderTitle"
+      //         values={{ count: reviewsOfProvider.length }}
+      //       />
+      //     </h3>
+      //   ),
+      //   selected: this.state.showReviewsType === REVIEW_TYPE_OF_PROVIDER,
+      //   onClick: this.showOfProviderReviews,
+      // },
       {
         text: (
           <h3 className={css.desktopReviewsTitle}>

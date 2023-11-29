@@ -136,7 +136,9 @@ export class ListingPageComponent extends Component {
       createResourceLocatorString(
         'CheckoutPage',
         routes,
-        { id: listing.id.uuid, slug: createSlug(listing.attributes.title) },
+        { id: listing.id.uuid, slug: createSlug(listing.author.attributes.profile.displayName) },
+
+
         {}
       )
     );
@@ -343,7 +345,6 @@ export class ListingPageComponent extends Component {
 
     // const Verificationphoto = currentListing?.attributes?.publicData?.idProofImage?.link
     const authorDisplayName = userDisplayNameAsString(ensuredAuthor, '');
-
     const { formattedPrice, priceTitle } = priceData(price, intl);
 
     const handleBookingSubmit = values => {
@@ -376,7 +377,7 @@ export class ListingPageComponent extends Component {
     const siteTitle = config.siteTitle;
     const schemaTitle = intl.formatMessage(
       { id: 'ListingPage.schemaTitle' },
-      { title, price: formattedPrice, siteTitle }
+      { title:authorDisplayName, price: formattedPrice, siteTitle }
     );
     const firstname = authorDisplayName.split(" ")[0];
     const hostLink = (
@@ -420,7 +421,7 @@ export class ListingPageComponent extends Component {
           '@context': 'http://schema.org',
           '@type': 'ItemPage',
           description: description,
-          name: schemaTitle,
+          name: authorDisplayName,
           image: schemaImages,
         }}
       >
