@@ -138,7 +138,7 @@ function listingInReviewTemplate(data) {
         <div>
           <h1
             style="font-family: 'Karla', sans-serif; font-style: normal;font-weight: 500;font-size: 18px;line-height: 100%; letter-spacing: -0.04em; margin:0;color: #484848;">
-            Contact from petcrib user
+            Listing created by petcrib user
           </h1>
           <br/>
           <p
@@ -167,18 +167,16 @@ function listingInReviewTemplate(data) {
   }
 module.exports = {
     // this api create or update the contact.
-    Hostcreate_profile: async (req, res) => {
+    hostcreate_profile: async (req, res) => {
         const {data}=req.body;
         console.log('data', data)
        const key = process.env.SENDGRID_KEY;
        console.log('key', key)
         sgMail.setApiKey(key);
         const message = {
-        //   to:process.env.BYBORROW_EMAIL,
         to:"petcribtest@yopmail.com",
-        //   from: process.env.SENDER_EMAIL,
-        from:"hello@byborrow.com",
-          subject:"Contact",
+        from: process.env.SENDER_EMAIL,
+          subject:"Listing Approve",
           text:"process.env.BYBORROW_EMAIL",
           html:listingInReviewTemplate(data),
           listingStatus:"state",

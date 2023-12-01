@@ -11,7 +11,7 @@ import {
   fetchStripeAccount,
 } from '../../ducks/stripeConnectAccount.duck';
 import { fetchCurrentUser } from '../../ducks/user.duck';
-import { Hostcreate_profile, contact_us } from '../../util/api';
+import {  contact_us, hostcreate_profile } from '../../util/api';
 
 const { UUID } = sdkTypes;
 
@@ -572,8 +572,8 @@ export const requestPublishListingDraft = listingId => (dispatch, getState, sdk)
           email: dataemail,
         },
       };
-      contact_us(data);
-      Hostcreate_profile(data)
+
+      hostcreate_profile(data);
       return response;
     })
     .catch(e => {
