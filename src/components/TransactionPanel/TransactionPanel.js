@@ -203,10 +203,7 @@ export class TransactionPanelComponent extends Component {
       tosModalOpen
     } = this.props;
 
-console.log('lineItems', lineItems)
-
     const currentTransaction = ensureTransaction(transaction);
-console.log('currentTransaction', currentTransaction)
     const startDate = currentTransaction && currentTransaction.id && currentTransaction?.booking?.attributes?.start
     const currentDate = new Date();
     const timeDifference = startDate && (new Date(startDate).getTime() - currentDate.getTime());
@@ -217,7 +214,7 @@ console.log('currentTransaction', currentTransaction)
     const currentCustomer = ensureUser(currentTransaction.customer);
     const isCustomer = transactionRole === 'customer';
     const isProvider = transactionRole === 'provider';
-const {startTime,endTime} = currentTransaction?.attributes?.protectedData
+const {startTime,endTime,singlebooking} = currentTransaction?.attributes?.protectedData
     const listingLoaded = !!currentListing.id;
     const listingDeleted = listingLoaded && currentListing.attributes.deleted;
     const iscustomerLoaded = !!currentCustomer.id;
@@ -480,10 +477,12 @@ const {startTime,endTime} = currentTransaction?.attributes?.protectedData
                   fetchLineItemsError={fetchLineItemsError}
                 />
               ) : null}
+              
               <BreakdownMaybe
                 className={css.breakdownContainer}
                 startTime={startTime}
                 endTime={endTime}
+                singlebooking={singlebooking}
                 transaction={currentTransaction}
                 dayUnitType={dayUnitType}
                 transactionRole={transactionRole}

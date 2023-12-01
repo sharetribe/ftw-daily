@@ -102,7 +102,6 @@ export class CheckoutPageComponent extends Component {
       dataLoaded: false,
       submitting: false,
     };
-
     this.stripe = null;
 
     this.onStripeInitialized = this.onStripeInitialized.bind(this);
@@ -185,20 +184,14 @@ export class CheckoutPageComponent extends Component {
       const {pickyes,dropyes} =pageData.listing.attributes.publicData
       const transactionId = tx ? tx.id : null;
       const { bookingStart, bookingEnd } = pageData.bookingDates;
-      console.log('bookingStart', bookingStart)
       const { dropPick, startTime,
-        endTime,singlebooking,date } = pageData.bookingData || {};
-        // if (singlebooking) {
-        //   bookingStart = date;
-        //   bookingEnd = moment(startDate).add(1, 'day').toDate();
-        // }
-        console.log('singlebooking', singlebooking)
+        endTime, } = pageData.bookingData || {};
       const bookingData = pageData.bookingData || {}
-console.log('bookingData', bookingData)
+
       // Convert picked date to date that will be converted on the API as
       // a noon of correct year-month-date combo in UTC
-      const bookingStartForAPI = dateFromLocalToAPI(date);
-      const bookingEndForAPI = dateFromLocalToAPI(date);
+      const bookingStartForAPI = dateFromLocalToAPI(bookingStart);
+      const bookingEndForAPI = dateFromLocalToAPI(bookingEnd);
 
       // Fetch speculated transaction for showing price in booking breakdown
       // NOTE: if unit type is line-item/units, quantity needs to be added.
@@ -212,8 +205,8 @@ console.log('bookingData', bookingData)
           startTime,
           dropPick,
           endTime,
-          date: bookingStartForAPI,
-          date: bookingEndForAPI,
+          bookingStart: bookingStartForAPI,
+          bookingEnd: bookingEndForAPI,
         },
         transactionId
       );
@@ -394,9 +387,9 @@ console.log('bookingData', bookingData)
           ? { setupPaymentMethodForSaving: true }
           : {};
     const bookingData = pageData.bookingData || {};
-   
          const startTime = bookingData.startTime;
          const endTime = bookingData.endTime;
+         const singlebooking = bookingData.singlebooking ||{};
        const dropyes = pageData?.listing?.attributes?.publicData?.dropyes ||{}
        const pickyes = pageData?.listing?.attributes?.publicData?.pickyes ||{}
 
@@ -404,9 +397,9 @@ console.log('bookingData', bookingData)
       listingId: pageData.listing.id,
       bookingData,
       bookingStart: tx.booking.attributes.start,
-      date: tx.booking.attributes.end,
+      bookingEnd: tx.booking.attributes.end,
       ...optionalPaymentParams,
-      protectedData: {startTime,endTime,pickyes,dropyes}
+      protectedData: {startTime,endTime,pickyes,dropyes,singlebooking}
     };
 
     return handlePaymentIntentCreation(orderParams);
@@ -612,10 +605,9 @@ console.log('bookingData', bookingData)
     // Show breakdown only when speculated transaction and booking are loaded
     // (i.e. have an id)
     const tx = existingTransaction.booking ? existingTransaction : speculatedTransaction;
-    console.log('tx', tx)
     const txBooking = ensureBooking(tx.booking);
     const {  startTime,
-      endTime, } = this.state.pageData.bookingData || {};
+      endTime, singlebooking,    } = this.state.pageData.bookingData || {};
     const breakdown =
       tx.id && txBooking.id ? (
         <BookingBreakdown
@@ -625,6 +617,7 @@ console.log('bookingData', bookingData)
           dayUnitType={config.bookingDayUnitType}
           endTime={endTime}
           startTime={startTime}
+          singlebooking={singlebooking}
           transaction={tx}
           booking={txBooking}
           dateType={DATE_TYPE_DATE}

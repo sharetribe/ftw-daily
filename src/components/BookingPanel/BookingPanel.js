@@ -82,7 +82,6 @@ const BookingPanel = props => {
     fetchLineItemsError,
     dayUnitType,
   } = props;
-console.log('search', search)
   const { price, publicData } = listing.attributes || {};
 
   const hasListingState = !!listing.attributes.state;

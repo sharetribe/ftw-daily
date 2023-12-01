@@ -153,9 +153,6 @@ export class BookingDatesFormComponent extends Component {
             fetchLineItemsError,
             firstname,
           } = fieldRenderProps;
-
-
-console.log('values', values)
           const {
             pricepet,
             serviceSetup: detail,
@@ -245,7 +242,6 @@ console.log('values', values)
                 date
               }
               : null;
-              console.log('bookingData', bookingData)
           const showEstimatedBreakdown =
             bookingData && lineItems && !fetchLineItemsInProgress && !fetchLineItemsError;
 
@@ -381,7 +377,8 @@ console.log('values', values)
                   name="bookingDates"
                   startDatePlaceholderText={startDatePlaceholderText}
                   format={identity}
-                  timeSlots={timeSlots?.slice(2, timeSlots?.length)}
+                  timeSlots={timeSlots}
+                  // timeSlots={timeSlots?.slice(2, timeSlots?.length)}
                   validate={composeValidators(
                     required(requiredMessage),
                     bookingDateRequired(startDateErrorMessage)
