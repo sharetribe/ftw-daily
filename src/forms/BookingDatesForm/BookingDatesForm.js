@@ -377,8 +377,7 @@ export class BookingDatesFormComponent extends Component {
                   name="bookingDates"
                   startDatePlaceholderText={startDatePlaceholderText}
                   format={identity}
-                  timeSlots={timeSlots}
-                  // timeSlots={timeSlots?.slice(2, timeSlots?.length)}
+                   timeSlots={timeSlots?.slice(2, timeSlots?.length)}
                   validate={composeValidators(
                     required(requiredMessage),
                     bookingDateRequired(startDateErrorMessage)

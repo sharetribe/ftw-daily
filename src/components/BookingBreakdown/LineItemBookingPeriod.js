@@ -80,6 +80,7 @@ const LineItemBookingPeriod = props => {
 
   const isNightly = unitType === LINE_ITEM_NIGHT;
   const endDay = isNightly ? localEndDateRaw : moment(localEndDateRaw).subtract(1, 'days');
+  
 
   return (
     <>

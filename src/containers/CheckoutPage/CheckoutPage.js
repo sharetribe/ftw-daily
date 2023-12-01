@@ -390,6 +390,9 @@ export class CheckoutPageComponent extends Component {
          const startTime = bookingData.startTime;
          const endTime = bookingData.endTime;
          const singlebooking = bookingData.singlebooking ||{};
+        //  const singleenddate = {
+        //   singlebooking? 
+        //  }
        const dropyes = pageData?.listing?.attributes?.publicData?.dropyes ||{}
        const pickyes = pageData?.listing?.attributes?.publicData?.pickyes ||{}
 
