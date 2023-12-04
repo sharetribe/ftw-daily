@@ -225,7 +225,7 @@ export const fetchReviews = listingId => (dispatch, getState, sdk) => {
       const reviewsData = response.data.data;
       const filteredReviews = reviewsData.filter(r => r.id && r.attributes.rating != null && r.attributes.state == 'public');
       if (filteredReviews && filteredReviews.length) {
-        const ratings = Math.round(filteredReviews.reduce((prev, curr) => prev + (parseInt(curr.attributes.rating) || 0), 0) / filteredReviews.length);
+        const ratings =  filteredReviews.reduce((prev, curr) => prev + (parseInt(curr.attributes.rating) || 0), 0) / filteredReviews.length;
         dispatch(saveListingsRatings(ratings));
       }
     })

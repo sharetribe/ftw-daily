@@ -187,8 +187,8 @@ export const searchListings = searchParams => (dispatch, getState, sdk) => {
             const filteredReviews = reviewsData.filter(r => r.id && r.attributes.rating != null);
             if (filteredReviews && filteredReviews.length) {
               const reviews = denormalisedResponseEntities(reviewResponse);
-              const ratings = Math.round(filteredReviews.reduce((prev, curr) => prev + (parseInt(curr.attributes.rating) || 0), 0) / filteredReviews.length);
-          
+              const ratings = filteredReviews.reduce((prev, curr) => prev + (parseInt(curr.attributes.rating) || 0), 0) / filteredReviews.length;
+console.log('ratings', ratings)
               Object.assign(l.attributes.publicData, {
                 reviews,
                 ratings,

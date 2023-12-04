@@ -65,7 +65,6 @@ export const ListingCardComponent = props => {
   const { title = '', price, publicData ,} = currentListing.attributes;
   const {displayName} = currentListing.author.attributes.profile
   const { reviews, ratings } = publicData || {};
-
   const slug = createSlug(displayName);
   const author = ensureUser(listing.author);
   const authorName = author.attributes.profile.displayName;
@@ -153,6 +152,7 @@ export const ListingCardComponent = props => {
                   fetchReviewsError={fetchReviewsError}
                   className={css.reviewHeading}
                 />
+                <p> rating={ratings}</p>
                 <ReviewRating
                   rating={ratings}
                   reviewStarClassName={css.reviewRatingStar}

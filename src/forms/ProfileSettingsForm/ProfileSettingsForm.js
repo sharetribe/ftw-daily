@@ -470,8 +470,8 @@ class ProfileSettingsFormComponent extends Component {
                 </p>
               </div>
               {/* <button>add pet</button> */}
-              {currentUserHasOneListings
-                ?
+              {/* {currentUserHasOneListings
+                ? */}
                 <FieldArray name="pets">
                   {({ fields }) => (
                     <div>
@@ -941,7 +941,7 @@ class ProfileSettingsFormComponent extends Component {
                     </div>
                   )}
                 </FieldArray>
-                : null}
+                {/* : null} */}
 
 
               {submitError}
