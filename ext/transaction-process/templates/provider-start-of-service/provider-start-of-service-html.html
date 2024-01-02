@@ -1,4 +1,3 @@
-
 {{~#*inline "format-date"~}}
 {{date date format="MMM d, YYYY" tz="Etc/UTC"}}
 {{~/inline~}}
@@ -6,22 +5,22 @@
 <html>
   <body>
     <h1>
-      Notification
+      Confirmation of Booking with {{customer.display-name}}
     </h1>
 
     {{#with transaction}}
     <p>
-      email get reminder of commencement of service {{customer.display-name}} booking request, and it will expire by {{> format-date date=booking.start}}.
-      
+     Congratulations, your Hosting Servce with {{customer.display-name}} has now been confirmed.
+     <!-- email get reminder of commencement of service {{customer.display-name}} booking request, and it will expire by {{> format-date date=booking.start}}. -->
     </p>
-  
+    
     {{/with}}
    
 
-    <!-- <p><a href="{{marketplace.url}}">Try to book something else instead</a></p> -->
+    <!-- <p><a href="{{marketplace.url}}">Remember to reach out to {{customer.display-name}} and ask them any questions about the upcoming Booking and the Pets you will be caring for.</a></p> -->
 
     <hr />
 
-    <p>You have received this email notification because you are a member of {{marketplace.name}}. If you no longer wish to receive these emails, please contact {{marketplace.name}} team.</p>
+    <p>You have received this email notification because you are a member of {{marketplace.name}}. If you no longer wish to receive these emails, please contact the {{marketplace.name}} team.</p>
   </body>
 </html>

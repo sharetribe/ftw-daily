@@ -6,22 +6,18 @@
 <html>
   <body>
     <h1>
-      Notification
+      Reminder about the Booking Request from {{customer.display-name}}
     </h1>
 
     {{#with transaction}}
     <p>
-      email confirmation serving as a reminder to respond to the {{customer.display-name}} booking request, and it will expire by {{> format-date date=booking.start}}.
-      
+      This is a reminder that {{customer.display-name}} has requested to book your Hosting Service. If you don't respond the booking request will expire by {{> format-date date=booking.start}}.      
     </p>
   
     {{/with}}
    
-
-    <!-- <p><a href="{{marketplace.url}}">Try to book something else instead</a></p> -->
-
     <hr />
 
-    <p>You have received this email notification because you are a member of {{marketplace.name}}. If you no longer wish to receive these emails, please contact {{marketplace.name}} team.</p>
+    <p>You have received this email notification because you are a member of {{marketplace.name}}. If you no longer wish to receive these emails, please contact the {{marketplace.name}} team.</p>
   </body>
 </html>

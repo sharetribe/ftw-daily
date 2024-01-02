@@ -1,4 +1,3 @@
-
 {{~#*inline "format-date"~}}
 {{date date format="MMM d, YYYY" tz="Etc/UTC"}}
 {{~/inline~}}
@@ -10,11 +9,11 @@
     {{#with transaction}}
     <p>Unfortunately {{customer.display-name}} has decided to cancel your booking request from {{> format-date date=booking.start}} to {{> format-date date=booking.end}}. </p>
     
-    <p> Since the cancellation was made before 48 hours from the start date of the planned service you will not receive the Pet Service Fee from the Pet Owner.</p>
+    <p> The hosting fee will be refunded in full to {{customer.display-name}} since the cancellation was made before 48 hrs from start date of the service.</p>
     {{/with}}
 
     <hr />
 
-    <p>You have received this email notification because you are a member of {{marketplace.name}}. If you no longer wish to receive these emails, please contact {{marketplace.name}} team.</p>
+    <p>You have received this email notification because you are a member of {{marketplace.name}}. If you no longer wish to receive these emails, please contact the {{marketplace.name}} team.</p>
   </body>
 </html>
