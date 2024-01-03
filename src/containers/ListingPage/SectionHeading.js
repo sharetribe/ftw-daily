@@ -25,6 +25,7 @@ const SectionHeading = props => {
     onUpdateProfile,
     isOwnListing,
   } = props;
+
   const unitType = config.bookingUnitType;
   const isNightly = unitType === LINE_ITEM_NIGHT;
   const isDaily = unitType === LINE_ITEM_DAY;
@@ -79,7 +80,7 @@ const SectionHeading = props => {
             </div>
             {ratings ?
               <div className={css.ratingStar}>
-                <p> rating={ratings}</p>
+               
                 <ReviewRating
                   rating={ratings}
                   reviewStarClassName={css.reviewRatingStar}

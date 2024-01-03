@@ -152,7 +152,7 @@ export const ListingCardComponent = props => {
                   fetchReviewsError={fetchReviewsError}
                   className={css.reviewHeading}
                 />
-                <p> rating={ratings}</p>
+               
                 <ReviewRating
                   rating={ratings}
                   reviewStarClassName={css.reviewRatingStar}

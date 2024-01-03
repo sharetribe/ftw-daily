@@ -210,7 +210,6 @@ export class ListingPageComponent extends Component {
       ratings,
       onUpdateProfile
     } = this.props;
-
     const listingId = new UUID(rawParams.id);
     const search = parse(location.search);
     const isPendingApprovalVariant = rawParams.variant === LISTING_PAGE_PENDING_APPROVAL_VARIANT;
@@ -511,7 +510,7 @@ export class ListingPageComponent extends Component {
                       src={`https://docs.google.com/gview?url=${Verificationphoto}&embedded=true`}
                     /> */}
 
-                  <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} />
+                  {/* <SectionReviews reviews={reviews} fetchReviewsError={fetchReviewsError} /> */}
 
                   <SectionHostMaybe
                     title={title}

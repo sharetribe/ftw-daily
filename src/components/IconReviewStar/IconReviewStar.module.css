@@ -1,7 +1,12 @@
 .root {
-  fill: var(--matterColorNegative);
+  fill: #8a8a8abb;
 }
 
 .filled {
+  /* fill: var(--marketplaceColor); */
+  fill: var(--marketplaceColor);
+}
+
+.isHalfFilled {
   fill: var(--marketplaceColor);
 }
