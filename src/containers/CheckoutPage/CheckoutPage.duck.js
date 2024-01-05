@@ -179,7 +179,7 @@ export const initiateOrder = (orderParams, transactionId) => (dispatch, getState
     startDate: orderParams.bookingStart,
     endDate: orderParams.bookingEnd,
     pickyes: orderParams.protectedData.pickyes,
-    dropyes: orderParams.protectedData.pickyes,
+    dropyes: orderParams.protectedData.dropyes,
     dropPick: orderParams.bookingData.dropPick,
   };
 

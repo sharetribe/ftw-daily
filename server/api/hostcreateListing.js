@@ -1,8 +1,8 @@
-const sgMail=require('@sendgrid/mail');
+const sgMail = require('@sendgrid/mail');
 const { serialize } = require('../api-util/sdk');
 
 function listingInReviewTemplate(data) {
-    return `<!doctype html>
+  return `<!doctype html>
     <html lang="en">
 
 <head>
@@ -164,29 +164,29 @@ function listingInReviewTemplate(data) {
 
 </html>
       `;
-  }
+}
 module.exports = {
-    // this api create or update the contact.
-    hostcreate_profile: async (req, res) => {
-        const {data}=req.body;
-       const key = process.env.SENDGRID_KEY;
-        sgMail.setApiKey(key);
-        const message = {
-        to:"petcribtest@yopmail.com",
-        from: process.env.SENDER_EMAIL,
-          subject:"Listing Approve",
-          text:"process.env.BYBORROW_EMAIL",
-          html:listingInReviewTemplate(data),
-          listingStatus:"state",
-        };
-       await sgMail.send(message).then(
-          () => {
-            return res
-              .status(200)
-              .set('Content-Type', 'application/transit+json')
-              .send(serialize({ message: 'Email Sent' }))
-              .end();
-          },
-        )
-    },
-  };
+  // this api create or update the contact.
+  hostcreate_profile: async (req, res) => {
+    const { data } = req.body;
+    const key = process.env.SENDGRID_KEY;
+    sgMail.setApiKey(key);
+    const message = {
+      to: "petcribtest@yopmail.com",
+      from: process.env.SENDER_EMAIL,
+      subject: "Listing Approve",
+      text: "process.env.BYBORROW_EMAIL",
+      html: listingInReviewTemplate(data),
+      listingStatus: "state",
+    };
+    await sgMail.send(message).then(
+      () => {
+        return res
+          .status(200)
+          .set('Content-Type', 'application/transit+json')
+          .send(serialize({ message: 'Email Sent' }))
+          .end();
+      },
+    )
+  },
+};

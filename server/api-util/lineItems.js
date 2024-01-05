@@ -6,8 +6,8 @@ const { Money } = types;
 // This bookingUnitType needs to be one of the following:
 // line-item/night, line-item/day or line-item/units
 const bookingUnitType = 'line-item/night';
-const servicespickupUnitType = 'line-item/pickup_price';
-const servicesdropupUnitType = 'line-item/dropup_price';
+const servicespickupUnitType = 'line-item/pick Up price';
+const servicesdropupUnitType = 'line-item/drop Off price';
 const bookingUnitDayType = 'line-item/day';
 const PROVIDER_COMMISSION_PERCENTAGE = -12;
 const CUSTOMER_COMMISSION_PERCENTAGE = 3;
@@ -37,7 +37,8 @@ exports.transactionLineItems = (listing, bookingData) => {
   const lineItems = [];
   const unitPrice = listing.attributes.price;
   const { startDate, endDate, serviceSetup, numberOfPets, pickyes, dropPick, dropyes } = bookingData;
-  
+
+
   const pickyesprice = pickyes * 100;
   const dropyesprice = dropyes * 100;
 

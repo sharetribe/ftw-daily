@@ -616,28 +616,6 @@ class ProfileSettingsFormComponent extends Component {
                                         </div>
                                       </div>
                                     )}
-
-
-
-
-                                    {/* {values.pets.idPetImage && Object.keys(values.idPetImage).length
-                                    ? <div className={css.fileUploadName} >
-                                      <div>
-                                        {/\mp4|MP4|mov|webm/.test(values.idPetImage.link) ? (
-                                          <video src={values.idPetImage && values.idPetImage.link} loop autoPlay={true} muted style={{ height: '200px' }} />
-                                        ) : /\png|jpeg|jpg/.test(values.idPetImage.link) ? (
-                                          <img alt={values.idPetImage.name} src={values.idPetImage.link} style={{ height: '200px' }} />
-                                        ) : (
-                                          <object data={values.idPetImage.link}>
-                                            <iframe
-                                              className="doc"
-                                              src={`https://docs.google.com/gview?url=${values.idPetImage.link}&embedded=true`}
-                                            />
-                                          </object>
-                                        )}
-                                      </div>
-                                    </div>
-                                    : null} */}
                                   </ul>
                                   <div className={css.mainHeadingBox}>
                                     <h2 className={css.headingData}>

@@ -83,29 +83,6 @@ export class ProfileSettingsPageComponent extends Component {
         className={css.form}
         currentUser={currentUser}
         initialValues={{ firstName, lastName, bio, profileImage: user.profileImage ,pets
-        //   pets,Energy_level,Feeding_schedule,
-        //   Health_info,
-        //   Medication,
-        // Pet_Insurance,
-        // Potty_break,
-        // Weight,
-        // about_pet,
-        // anything_host,
-        // children_pet,
-        // desexed,
-        // firstName,
-        // house_trained,
-        // idPetImage,
-        // left_alone,
-        // microchipped,
-        // other_pet,
-        // pet_breed,
-        // pet_des,
-        // pet_month,
-        // pet_year,
-        // pet_name,
-        
-        
         }}
         currentUserHasOneListings={currentUserHasOneListings}
         profileImage={profileImage}

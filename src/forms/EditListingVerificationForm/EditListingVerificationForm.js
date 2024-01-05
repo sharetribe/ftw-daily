@@ -266,8 +266,8 @@ export class EditListingVerificationFormComponent extends Component {
             >
 
               <div>
-
-                <p>Upload Photo ID -- drivers licence and Passport</p>
+              
+                <p> <FormattedMessage id="EditListingVeificationForm.driver" /></p>
 
                 <div className={css.imagesField}>
 
@@ -365,7 +365,7 @@ export class EditListingVerificationFormComponent extends Component {
               ) : null}
 
 
-              <p>Do you have Police Check ?</p>
+              <p> <FormattedMessage id="EditListingVeificationForm.police" /></p>
               <div className={css.rowBox}>
                 {policeCheck.map(num => {
                   return (
