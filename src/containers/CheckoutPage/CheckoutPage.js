@@ -611,6 +611,7 @@ export class CheckoutPageComponent extends Component {
     const txBooking = ensureBooking(tx.booking);
     const {  startTime,
       endTime, singlebooking,    } = this.state.pageData.bookingData || {};
+      console.log('his.state.pageData.bookingData', this.state.pageData.bookingData)
     const breakdown =
       tx.id && txBooking.id ? (
         <BookingBreakdown

@@ -106,18 +106,37 @@ export class ListingPageComponent extends Component {
 
 
     const { bookingDates, ...bookingData } = values;
-
+         console.log('values', values)
 
 
     const initialValues = {
       listing,
       bookingData,
       bookingDates: {
-        bookingStart: bookingDates.startDate,
-        bookingEnd: bookingDates.endDate,
+        bookingStart:
+        bookingDates.startDate,
+
+        bookingEnd:
+        bookingDates.endDate,
       },
       confirmPaymentError: null,
     };
+
+//  bookingDates: {
+//         bookingStart: bookingDates.date
+//         ?
+//         bookingDates.date
+//         :
+//         bookingDates.startDate,
+        
+//         bookingEnd:bookingDates.date
+//         ?
+//         bookingDates.date
+//         :
+//         bookingDates.endDate,
+//       },
+//       confirmPaymentError: null,
+//     };
 
 
     const saveToSessionStorage = !this.props.currentUser;

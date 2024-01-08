@@ -96,7 +96,7 @@ export const BookingBreakdownComponent = props => {
 
   return (
     <div className={classes}>
-      <LineItemBookingPeriod booking={booking} unitType={singlebooking ? dayUnitType :unitType} dateType={dateType} 
+      <LineItemBookingPeriod booking={booking} singlebooking={singlebooking} unitType={unitType} dateType={dateType} 
       startTime={startTime} endTime={endTime} 
       />
       {/* <LineItemBookingPeriod booking={booking} startTime={startTime} endTime={endTime} /> */}

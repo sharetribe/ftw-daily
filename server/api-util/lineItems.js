@@ -37,8 +37,6 @@ exports.transactionLineItems = (listing, bookingData) => {
   const lineItems = [];
   const unitPrice = listing.attributes.price;
   const { startDate, endDate, serviceSetup, numberOfPets, pickyes, dropPick, dropyes } = bookingData;
-
-
   const pickyesprice = pickyes * 100;
   const dropyesprice = dropyes * 100;
 
@@ -95,7 +93,7 @@ exports.transactionLineItems = (listing, bookingData) => {
   const dayCareStay = {
     code: bookingUnitDayType,
     unitPrice: calculateTotalPrices(serviceSetup, listing, unitPrice, numberOfPets),
-    quantity: calculateQuantityFromDates(startDate, endDate, bookingUnitDayType),
+    quantity: 1,
     includeFor: ['customer', 'provider'],
   };
 
