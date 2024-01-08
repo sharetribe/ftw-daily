@@ -54,19 +54,19 @@ export const typeOfPet = [
 export const Weight=[
   {
     key: 'small',
-    label: '0-6kg (Small)',
+    label: '0-6kgs (Small)',
   },
   {
     key: 'midium',
-    label: '7-20kg (Medium)',
+    label: '7-20kgs (Medium)',
   },
   {
     key: 'large',
-    label: '20-40kg (Large)',
+    label: '20-40kgs (Large)',
   },
   {
     key: 'giant',
-    label: '40+kg (Giant)',
+    label: '40+kgs (Giant)',
   },
 ]
 export const microchipped=[
@@ -196,7 +196,7 @@ export const left_alone=[
   },
   {
     key: 'alone_custom',
-    label: 'Custom',
+    label: '> 8 hours',
   },
  
 ]
@@ -568,11 +568,11 @@ export const filters = [
         },
         {
           key: 'furniture',
-          label: 'Pet allowed on furniture',
+          label: 'Pets allowed on furniture',
         },
         {
           key: 'bed',
-          label: 'Pet allowed on bed',
+          label: 'Pets allowed on bed',
         },
         {
           key: 'nonSmoking',
@@ -583,7 +583,7 @@ export const filters = [
   },
   {
     id: 'petInHome',
-    label: 'Pet in the home',
+    label: 'Pets in the home',
     type: 'SelectMultipleFilter',
     group: 'primary',
     filtersFor: ["SearchPage"],
@@ -604,10 +604,6 @@ export const filters = [
         {
           key: 'acceptoneClient',
           label: 'Accepts only one client at a time',
-        },
-        {
-          key: 'doesnotpet',
-          label: 'Does not own caged pets',
         },
       ],
     },

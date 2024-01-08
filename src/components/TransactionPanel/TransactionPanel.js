@@ -214,7 +214,7 @@ export class TransactionPanelComponent extends Component {
     const currentCustomer = ensureUser(currentTransaction.customer);
     const isCustomer = transactionRole === 'customer';
     const isProvider = transactionRole === 'provider';
-const {startTime,endTime,singlebooking} = currentTransaction?.attributes?.protectedData
+    const { startTime, endTime, singlebooking } = currentTransaction?.attributes?.protectedData
     const listingLoaded = !!currentListing.id;
     const listingDeleted = listingLoaded && currentListing.attributes.deleted;
     const iscustomerLoaded = !!currentCustomer.id;
@@ -477,7 +477,7 @@ const {startTime,endTime,singlebooking} = currentTransaction?.attributes?.protec
                   fetchLineItemsError={fetchLineItemsError}
                 />
               ) : null}
-              
+
               <BreakdownMaybe
                 className={css.breakdownContainer}
                 startTime={startTime}
@@ -522,19 +522,19 @@ const {startTime,endTime,singlebooking} = currentTransaction?.attributes?.protec
             <div className={css.termsWrapper}>
               {canCancelBooking ?
                 <div>
-                  Are you sure you want to cancel this booking? 
+                  Are you sure you want to cancel this booking?
                   <p>
-                  100% refund of
-                  the hosting fee will be applicable provided the booking is requested to be
-                  cancelled before 48 hrs of the start date of the service.
+                    100% refund of
+                    the hosting fee will be applicable provided the booking is requested to be
+                    cancelled before 48 hrs of the start date of the service.
                   </p>
                 </div>
                 :
                 <div>
-                  Are you sure you want to cancel this booking? 
-                  <p> refund of the
-                  hosting fee will be applicable provided the booking is requested to be cancelled
-                  within 48 hrs of the start date of the service.
+                  Are you sure you want to cancel this booking?
+                  <p>
+
+                    A refund will not be provided if the booking is cancelled within 48 hours of the start date of the service
                   </p>
                 </div>}
               <div className={css.bottomButton}>

@@ -31,7 +31,10 @@
     border-bottom: none;
   }
 }
-
+.twoRowBox {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
 .avatar {
   margin: 30px 26px 29px 0;
   flex-shrink: 0;

@@ -133,6 +133,11 @@
   font-size: 16px;
   font-weight: var(--fontWeightSemiBold);
 }
+.pricingTitle {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--matterColor);
+}
 
 .pricingDescription {
   font-weight: 500;
@@ -144,6 +149,13 @@
 
   & span {
     font-weight: 600;
+  }
+  & .featuresTitle {
+    color: var(--matterColor);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    margin-bottom: 8px;
   }
 }
 

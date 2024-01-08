@@ -471,17 +471,32 @@ export class BookingDatesFormComponent extends Component {
                           </option>
                         );
                       })
-                      : Array.from({ length: 24 }, (_, index) => {
+                      :
+                      //  Array.from({ length: 24 }, (_, index) => {
+                      //   const hour = String(index).padStart(2, '0'); // Show 24-hour time options
+                      //   if (values && values.startTime && +values.startTime.split(":")[0] <= (+hour)) {
+                      //     return null;
+                      //   }
+                      //   return (
+                      //     <option key={hour} value={hour + ':00'}>
+                      //       {hour + ':00'}
+                      //     </option>
+                      //   );
+                      // })
+                      Array.from({ length: 24 }, (_, index) => {
                         const hour = String(index).padStart(2, '0'); // Show 24-hour time options
                         if (values && values.startTime && +values.startTime.split(":")[0] <= (+hour)) {
                           return null;
                         }
+                        const endTime = String((index + 2) % 24).padStart(2, '0'); // Add 2 hours to the hour and ensure it wraps around
                         return (
-                          <option key={hour} value={hour + ':00'}>
-                            {hour + ':00'}
+                          <option key={hour} value={endTime + ':00'}>
+                            {endTime + ':00'}
                           </option>
                         );
-                      })}
+                      })
+                      
+                      }
                   </FieldSelect>
                 </div>
               </div>
@@ -516,7 +531,7 @@ export class BookingDatesFormComponent extends Component {
 
 
               <div className={css.pricingBox}>
-                <div className={css.pricingHeading}>Pricing</div>
+                <div className={css.pricingTitle}>Pricing</div>
 
 
                 <div>
@@ -524,7 +539,7 @@ export class BookingDatesFormComponent extends Component {
 
                   {(detail?.find((e) => e == "overnightsStay")) ?
                     <div className={css.pricingDescription}>
-                      <h3>Over night rate Price of</h3>
+                      <h2 className={css.featuresTitle}>Over night rate Price of</h2>
                       <span>1 pet</span> = AUD{nightprice}.00  per night
                       {
                         nightprice2 > 0 ?
@@ -547,7 +562,7 @@ export class BookingDatesFormComponent extends Component {
 
                   {(detail?.find((e) => e == "dayCareStay")) ?
                     <div className={css.pricingDescription}>
-                      <h3>Day care stay Price of</h3>
+                      <h2 className={css.featuresTitle}>Day care stay Price of</h2>
                       <span> 1 pet</span> = AUD{dayprice}.00  per day
                       {
                         dayprice2 > 0 ?

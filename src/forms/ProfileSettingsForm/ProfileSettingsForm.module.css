@@ -295,8 +295,13 @@
 }
 
 .bioInfo {
-  color: var(--matterColorAnti);
+  color: var(--matterColor);
   margin-top: 11px;
+  font-size: 14px;
+  @media (--viewportLarge) {
+    font-weight: var(--fontWeightSemiBold);
+    line-height: 16px;
+  }
 
   @media (--viewportMedium) {
     margin-top: 16px;
@@ -368,7 +373,8 @@
     }
   }
 
-  & .headingDetail {}
+  & .headingDetail {
+  }
 
   & .detailsPet {
     margin-bottom: 20px;
@@ -381,16 +387,19 @@
 
   & .headingData {
     margin-bottom: 6px;
-    font-size: 18px;
+    font-size: 14px;
   }
 
   & .mainHeadingBox {
     margin-bottom: 20px;
 
-    & p {}
+    & p {
+    }
   }
 }
-
+.viewImageButton{
+  margin-bottom: 20px;
+}
 .careInformation {
   margin: 25px 0 21px 0;
 
@@ -403,7 +412,6 @@
 .petName {
   margin: 23px 0;
 }
-
 
 .addImageWrapper {
   position: relative;
@@ -426,7 +434,7 @@
 }
 
 .petBoxWrapper {
-  &>div {
+  & > div {
     margin-bottom: 22px;
   }
 }
@@ -437,6 +445,13 @@
   font-size: 14px;
   font-weight: 500;
   border-radius: 3px;
-  background-color: #E95629 !important;
-  border: 1px solid #E95629 !important;
+  background-color: #e95629 !important;
+  border: 1px solid #e95629 !important;
+}
+.inputRow {
+  display: flex;
+  justify-content: space-between;
+  & .inputBox {
+    width: calc(50% - 12px);
+  }
 }

@@ -189,16 +189,12 @@ export class ProfilePageComponent extends Component {
           {pets?.map((e, index) => (
             <div className={css.petsInformation}>
               <h2 className={css.mainHeading}>
-                <FormattedMessage id={`Pet ${index + 1}`} />
+                <div>{e.pet_name}</div>
               </h2>
               <div className={css.petImage}>
                 <img src={e.idPetImage?.link} alt="" width='200px' height='200px' />
               </div>
               <h3 className={css.mainHeading}>Pet Details</h3>
-              <div className={css.dataBox}>
-                <h4 className={css.HeadingName}>Description of pet</h4>
-                <div className={css.petsData}>{e.pet_des}</div>
-              </div>
               <div className={css.threeRowBox}>
                 <div className={css.dataBox}>
                   <h4 className={css.HeadingName}>Pet Name</h4>
@@ -214,21 +210,53 @@ export class ProfilePageComponent extends Component {
                   <h4 className={css.HeadingName}>Weight</h4>
                   <div className={css.petsData}>{e.Weight}</div>
                 </div>
-                <div className={css.dataBox}>
-                  <h4 className={css.HeadingName}>Age (Months)</h4>
-                  <div className={css.petsData}>{e.pet_month}</div>
+
+                {
+                  e?.pet_year?.length > 0 ?
+                    <div className={css.dataBox}>
+                      <h4 className={css.HeadingName}>Age (Year)</h4>
+                      <div className={css.petsData}>{e.pet_year}</div>
+                    </div>
+                    : null
+                }
+                {
+                  e?.pet_month?.length > 0 ? <div className={css.dataBox}>
+                    <h4 className={css.HeadingName}>Age (Months)</h4>
+                    <div className={css.petsData}>{e.pet_month}</div>
+                  </div> : null
+                }
+              </div>
+             
+            
+              <div>
+                <h3 className={css.HeadingName}><FormattedMessage id="ProfileSettingsForm.petBreedLabel" /> </h3>
+                <div className={css.petsData}>{e.pet_breed}</div>
+              </div>
+              <h3>  <FormattedMessage id="ProfileSettingsForm.additionalHeading" /></h3>
+              <div className={css.twoRowBox}>
+                <div>
+                  <h4> <FormattedMessage id="ProfileSettingsForm.microchippedHeading" /></h4>
+                  <div className={css.petsData}>{e.microchipped}</div>
                 </div>
-                <div className={css.dataBox}>
-                  <h4 className={css.HeadingName}>Age (Year)</h4>
-                  <div className={css.petsData}>{e.pet_year}</div>
+                <div>
+                  <h4>  <FormattedMessage id="ProfileSettingsForm.isPatHouseDesexedHeading" /></h4>
+                  <div className={css.petsData}>{e.desexed}</div>
+                </div>
+                <div>
+                  <h4>   <FormattedMessage id="ProfileSettingsForm.isPatHouseTrainedHeading" /></h4>
+                  <div className={css.petsData}>{e.house_trained}</div>
+                </div>
+                <div>
+                  <h4><FormattedMessage id="ProfileSettingsForm.patFriendlyWithChildrenHeading" /></h4>
+                  <div className={css.petsData}>{e.children_pet}</div>
+                </div>
+                <div>
+                  <h4>   <FormattedMessage id="ProfileSettingsForm.patFriendlyWithOtherHeading" /></h4>
+                  <div className={css.petsData}>{e.other_pet}</div>
                 </div>
               </div>
               <div>
-                <h4 className={css.HeadingName}>Pet Name</h4>
-                <div className={css.petsData}>{e.pet_name}</div>
-              </div>
-              <div>
-                <h3 className={css.HeadingName}>About  Pet</h3>
+                <h3 className={css.HeadingName}><FormattedMessage id="ProfileSettingsForm.petdetazilhead" /></h3>
                 <div className={css.petsData}>{e.about_pet}</div>
               </div>
               <h3>Care info</h3>
@@ -236,86 +264,46 @@ export class ProfilePageComponent extends Component {
               <div className={css.threeRowBox}>
                 <div>
                   <h4 className={css.HeadingName}>Potty break schedule</h4>
-                  {e.Potty_break
-                    === "every_hour" ? (
-                    <div className={css.petsData}>Every hour</div>
-                  ) : e.Potty_break
-                    === "two_hr" ? (
-                    <div className={css.petsData}>2 Hours</div>
-                  ) : e.Potty_break
-                    === "four_hr" ? (
-                    <div className={css.petsData}>4 Hours</div>
-                  ) : e.Potty_break
-                    === "eight_hr" ? (
-                    <div className={css.petsData}>8 Hours</div>
-                  ) :
-                    e.Potty_break
-                      === "custom" ? (
-                      <div className={css.petsData}>{e.customPottyBreakName}
-                      </div>) : null}
+                  <div className={css.petsData}>{e.Potty_break}</div>
                 </div>
                 <div>
                   <h4 className={css.HeadingName}>Energy level</h4>
-                  {e.Energy_level
-                    === "high" ? (
-                    <div className={css.petsData}>High</div>
-                  ) : e.Energy_level
-                    === "medium" ? (
-                    <div className={css.petsData}>Medium</div>
-                  ) : e.Energy_level
-                    === "low" ? (
-                    <div className={css.petsData}>Low</div>
-                  ) : null}
+                  <div className={css.petsData}>{e.Energy_level}</div>
+
 
                 </div>
                 <div>
                   <h4 className={css.HeadingName}>Feeding schedule</h4>
-                  {e.Feeding_schedule
-                    === "morning" ? (
-                    <div className={css.petsData}>High</div>
-                  ) : e.Feeding_schedule
-                    === "twice" ? (
-                    <div className={css.petsData}>Medium</div>
-                  ) : e.Feeding_schedule
-                    === "feed_custom" ? (
-                    <div className={css.petsData}>{e.customFeedSchedule}</div>
-                  ) : null}
+                  <div className={css.petsData}>{e.Feeding_schedule}</div>
+
                 </div>
                 <div>
                   <h4 className={css.HeadingName}>Can be left alone</h4>
-                  {e.left_alone
-                    === "less_one" ? (
-                    <div className={css.petsData}>Less 1 hour</div>
-                  ) : e.left_alone
-                    === "one_four" ? (
-                    <div className={css.petsData}>1 - 4 hours</div>
-                  ) : e.left_alone
-                    === "four_eight" ? (
-                    <div className={css.petsData}>4 - 8 hours</div>
-                  ) : e.left_alone
-                    === "feed_custom" ? (
-                    <div className={css.petsData}>{e.customLeftAlone}</div>
-                  ) : null}
+                  <div className={css.petsData}>{e.left_alone}</div>
                 </div>
-              </div>
-              <div className={css.threeRowBox}>
                 <div>
                   <h4 className={css.HeadingName}>Medication</h4>
                   <div className={css.petsData}>{e.Medication}</div>
                 </div>
-                <div>
-                  <h4 className={css.HeadingName}>About Pet Host </h4>
-                  <div className={css.petsData}>{e.anything_host}</div>
-                </div>
               </div>
-              <h3>Anything else a Pet Host should know?</h3>
+
+
+              {e.anything_host?.length > 0 ?
+                <div>  <h4 className={css.HeadingName}>Anything else a Pet Host should know?</h4>
+                  <div className={css.petsData}>{e.anything_host}</div></div> : null
+
+              }
+
+              {
+                e?.Health_info?.length > 0 ? <div>
+                  <h4 className={css.HeadingName}>Health info</h4>
+                  <div className={css.petsData}>{e.Health_info}</div>
+                </div> : null
+              }
+
               <div>
-                <h3>Health info</h3>
-                <h4 className={css.HeadingName}>Add details about your pet's health and care providers</h4>
-                <div className={css.petsData}>{e.Health_info}</div>
-              </div>
-              <div>
-                <h3>Veterinary info</h3>
+                <h4 className={css.HeadingName}>Veterinary info</h4>
+                <div className={css.petsData}>{e.detailvet_pet}</div>
               </div>
               <div>
                 <h4 className={css.HeadingName}> have Pet Insurance for your Pet's?</h4>

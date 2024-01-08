@@ -1,1 +1,1 @@
-{{transaction.customer.display-name}} customer-reminder-of-cancellation-policy
+{{transaction.customer.display-name}} Reminder about your upcoming PetCrib booking

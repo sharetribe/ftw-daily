@@ -19,9 +19,9 @@ import {
 
 import css from './EditListingYourselfForm.module.css';
 
-const TITLE_MAX_LENGTH = 200;
-const TITLE_MAX50_LENGTH = 200;
-const TITLE_MAX15_LENGTH = 15;
+const TITLE_MAX_LENGTH = 1000;
+const TITLE_MAX50_LENGTH = 1000;
+const TITLE_MAX15_LENGTH = 75;
 const EditListingYourselfFormComponent = props => (
   <FinalForm
     {...props}
