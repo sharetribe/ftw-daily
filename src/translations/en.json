@@ -181,6 +181,7 @@
   "EditListingDescriptionForm.descriptionRequired": "A email is required.",
   "EditListingDescriptionForm.maxLength": "Must be 1000 characters or less",
   "EditListingDescriptionForm.max15Length": "Must be 750 characters or less",
+  "EditListingDescriptionForm.max75Length": "Must be 75 characters or less",
   "ProfileSettingsForm.petdetail":"Add your pet details",
   "ProfileSettingsForm.petdetailPlaceholder":"Add details of your pet (including description, and specific requirements that would be helpful for a Pet Host to know)",
   "ProfileSettingsForm.monthPlaceholder":"month",

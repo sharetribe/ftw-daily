@@ -537,13 +537,13 @@ export class BookingDatesFormComponent extends Component {
 
                   {(detail?.find((e) => e == "overnightsStay")) ?
                     <div className={css.pricingDescription}>
-                      <h2 className={css.featuresTitle}>Over night rate Price of</h2>
+                      <h2 className={css.featuresTitle}>Over night rate</h2>
                       <span>1 pet</span> = AUD{nightprice}.00  per night
                       {
                         nightprice2 > 0 ?
 
                           <div>
-                            <span> 2 pet</span> = AUD{nightprice2}.00  per night
+                            <span> 2 pets</span> = AUD{nightprice2}.00  per night
                           </div>
 
 
@@ -551,7 +551,7 @@ export class BookingDatesFormComponent extends Component {
                       }
                       {
                         nightprice3 > 0 ? <div>
-                          <span> 3 pet</span> = AUD{nightprice3}.00  per night
+                          <span> 3+ pets</span> = AUD{nightprice3}.00  per night
                         </div> : null
                       }
 
@@ -560,7 +560,7 @@ export class BookingDatesFormComponent extends Component {
 
                   {(detail?.find((e) => e == "dayCareStay")) ?
                     <div className={css.pricingDescription}>
-                      <h2 className={css.featuresTitle}>Day care stay Price of</h2>
+                      <h2 className={css.featuresTitle}>Day care rate</h2>
                       <span> 1 pet</span> = AUD{dayprice}.00  per day
                       {
                         dayprice2 > 0 ?

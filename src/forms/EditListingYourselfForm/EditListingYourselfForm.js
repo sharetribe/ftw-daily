@@ -67,7 +67,7 @@ const EditListingYourselfFormComponent = props => (
         }
       );
       const maxLengthheadlineMessage = intl.formatMessage(
-        { id: 'EditListingDescriptionForm.max15Length' },
+        { id: 'EditListingDescriptionForm.max75Length' },
         {
           maxLength: TITLE_MAX15_LENGTH,
         }
