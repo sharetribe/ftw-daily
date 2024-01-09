@@ -36,7 +36,22 @@
     <h1>Your booking request was accepted!</h1>
 
     {{#with transaction}}
-    <p>{{provider.display-name}} has accepted your booking request for {{listing.title}} from {{> format-date date=booking.start}} to {{> format-date date=booking.end}}.</p>
+    <p>{{provider.display-name}} has accepted your booking request for 
+      {{#each tx-line-items}}
+      {{#contains include-for "customer"}} 
+      {{#eq "line-item/night" code}}
+      Over Night Stay  from {{> format-date date=booking.start}} to {{> format-date date=booking.end}}.
+      {{/eq}}
+       {{/contains}}
+      {{/each}}
+       {{#each tx-line-items}}
+      {{#contains include-for "customer"}}
+       {{#eq "line-item/day" code}}
+       Day Care Stay for  {{> format-date date=booking.start}}.
+       {{/eq}}  
+        {{/contains}}
+      {{/each}}
+     </p>
 
     <p>We have charged {{> format-money money=payin-total}} from your credit card. Here's your receipt.</p>
 
@@ -46,7 +61,10 @@
           <td class="left">Start date</td>
           <td class="right">End date</td>
         </tr>
-        <tr>
+        {{#each tx-line-items}}
+        {{#contains include-for "customer"}} 
+        {{#eq "line-item/night" code}}
+        <tr class="bottom-row">
           <th class="left">{{date booking.start format="EEEE" tz="Etc/UTC"}}</th>
           <th class="right">{{date booking.end format="EEEE" tz="Etc/UTC"}}</th>
         </tr>
@@ -54,11 +72,32 @@
           <th class="left">{{date booking.start format="MMM d" tz="Etc/UTC"}}</th>
           <th class="right">{{date booking.end format="MMM d" tz="Etc/UTC"}}</th>
         </tr>
+        {{/eq}}
+        {{/contains}}
+        {{/each}}
+        {{#each tx-line-items}}
+        {{#contains include-for "customer"}} 
+        {{#eq "line-item/day" code}}
+        <tr class="bottom-row">
+          <th class="left">{{date booking.start format="EEEE" tz="Etc/UTC"}}</th>
+          <th class="right">{{date booking.start format="EEEE" tz="Etc/UTC"}}</th>
+        </tr>
+        <tr class="bottom-row">
+          <th class="left">{{date booking.start format="MMM d" tz="Etc/UTC"}}</th>
+          <th class="right">{{date booking.start format="MMM d" tz="Etc/UTC"}}</th>
+        </tr>
+        {{/eq}}
+        {{/contains}}
+        {{/each}}
+        <tr class="bottom-row">
+          <th class="left">{{protected-data.startTime}}</th>
+          <th class="right">{{protected-data.endTime}}</th>
+        </tr>
       </thead>
       {{#each tx-line-items}}
         {{#contains include-for "customer"}}
           {{#eq "line-item/night" code}}
-            {{#if seats}}
+          {{#if seats}}
             <tr class="top-row">
               <td colspan="2">{{> format-money money=unit-price}} &times; {{number units}} {{inflect units "night" "nights"}}</td>
             </tr>
@@ -69,40 +108,42 @@
             <tr class="top-row bottom-row">
               <td colspan="2">{{> format-money money=unit-price}} &times; {{number quantity}} {{inflect quantity "night" "nights"}}</td>
             </tr>
-            {{/if}}
+          {{/if}}
+          <tr class="top-row">
+            <th class="left">Subtotal</th>
+            <th class="right">{{> format-money money=line-total}}</th>
+          </tr>
           {{/eq}}
           {{#eq "line-item/day" code}}
-          {{#if seats}}
-          <tr class="top-row">
-            <td colspan="2">{{> format-money money=unit-price}} &times; {{number units}} {{inflect units "day" "days"}}</td>
-          </tr>
-          <tr class="bottom-row">
-            <td colspan="2">Seats &times; {{number seats}}</td>
-          </tr>
-          {{else}}
           <tr class="top-row bottom-row">
             <td colspan="2">{{> format-money money=unit-price}} &times; {{number quantity}} {{inflect quantity "day" "days"}}</td>
           </tr>
-          {{/if}}
+          <tr class="top-row">
+            <th class="left">Subtotal</th>
+            <th class="right">{{> format-money money=line-total}}</th>
+          </tr>
+
         {{/eq}}
+
         {{#eq "line-item/pick Up price" code}}
         <tr class="bottom-row">
-          <td>PickUp Price</td>
+          <td>Pick Up rate</td>
           <td class="right">{{> format-money money=line-total}}</td>
         </tr>
       {{/eq}}
       {{#eq "line-item/drop Off price" code}}
       <tr class="bottom-row">
-        <td>PickUp Price</td>
+        <td>Drop Off Rate</td>
         <td class="right">{{> format-money money=line-total}}</td>
       </tr>
+      
     {{/eq}}
-          {{#eq "line-item/provider-commission" code}}
-            <tr class="bottom-row">
-              <td>Service fee</td>
-              <td class="right">{{> format-money money=line-total}}</td>
-            </tr>
-          {{/eq}}
+    {{#eq "line-item/customer-commission" code}}
+    <tr class="bottom-row">
+      <td>Booking fee</td>
+      <td class="right">{{> format-money money=line-total}}</td>
+    </tr>
+  {{/eq}}
         {{/contains}}
       {{/each}}
       </tbody>
@@ -113,6 +154,8 @@
         </tr>
       </tfoot>
     </table>
+
+  
     <p>If you have not already done so, be sure to reach out to your Pet Host to exchange any further information about your Pets upcoming stay with them.  A reminder of our cancellation policy is provided in our Terms of Service.</p> 
     
     {{/with}}

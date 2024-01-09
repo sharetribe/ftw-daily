@@ -37,7 +37,21 @@
     {{#with transaction}}
     <h1>You have been paid {{> format-money money=payout-total}}</h1>
 
-    <p>We have sent you {{> format-money money=payout-total}} for the booking of {{listing.title}} from {{> format-date date=booking.start}} to {{> format-date date=booking.end}} by {{customer.display-name}}. It might take up to 7 days for the money to reach your nominated bank account.</p>
+    <p>We have sent you {{> format-money money=payout-total}} for the booking of  {{#each tx-line-items}}
+      {{#contains include-for "provider"}} 
+      {{#eq "line-item/night" code}}
+      Over Night Stay  from {{> format-date date=booking.start}} to {{> format-date date=booking.end}}.
+      {{/eq}}
+       {{/contains}}
+      {{/each}}
+       {{#each tx-line-items}}
+      {{#contains include-for "provider"}}
+       {{#eq "line-item/day" code}}
+       Day Care Stay from  {{> format-date date=booking.start}} to {{> format-date date=booking.start}}.
+       {{/eq}}  
+        {{/contains}}
+      {{/each}} It might take up to 7 days for the money to reach your nominated bank account.</p>
+
 
     <p>Here's the breakdown.</p>
 
@@ -47,13 +61,37 @@
           <td class="left">Start date</td>
           <td class="right">End date</td>
         </tr>
-        <tr>
+        {{#each tx-line-items}}
+        {{#contains include-for "provider"}} 
+        {{#eq "line-item/night" code}}
+        <tr class="bottom-row">
           <th class="left">{{date booking.start format="EEEE" tz="Etc/UTC"}}</th>
           <th class="right">{{date booking.end format="EEEE" tz="Etc/UTC"}}</th>
         </tr>
         <tr class="bottom-row">
           <th class="left">{{date booking.start format="MMM d" tz="Etc/UTC"}}</th>
           <th class="right">{{date booking.end format="MMM d" tz="Etc/UTC"}}</th>
+        </tr>
+        {{/eq}}
+        {{/contains}}
+        {{/each}}
+        {{#each tx-line-items}}
+        {{#contains include-for "provider"}} 
+        {{#eq "line-item/day" code}}
+        <tr class="bottom-row">
+          <th class="left">{{date booking.start format="EEEE" tz="Etc/UTC"}}</th>
+          <th class="right">{{date booking.start format="EEEE" tz="Etc/UTC"}}</th>
+        </tr>
+        <tr class="bottom-row">
+          <th class="left">{{date booking.start format="MMM d" tz="Etc/UTC"}}</th>
+          <th class="right">{{date booking.start format="MMM d" tz="Etc/UTC"}}</th>
+        </tr>
+        {{/eq}}
+        {{/contains}}
+        {{/each}}
+        <tr class="bottom-row">
+          <th class="left">{{protected-data.startTime}}</th>
+          <th class="right">{{protected-data.endTime}}</th>
         </tr>
       </thead>
       <tbody>
@@ -95,7 +133,19 @@
             <th class="right">{{> format-money money=line-total}}</th>
           </tr>
         {{/eq}}
-
+            {{#eq "line-item/pick Up price" code}}
+                <tr class="bottom-row">
+              <td>Pick Up rate</td>
+              <td class="right">{{> format-money money=line-total}}</td>
+                  </tr>
+                 {{/eq}}
+               {{#eq "line-item/drop Off price" code}}
+                 <tr class="bottom-row">
+                  <td>Drop Off Rate</td>
+                <td class="right">{{> format-money money=line-total}}</td>
+                     </tr>
+      
+                         {{/eq}}
           {{#eq "line-item/provider-commission" code}}
             <tr class="bottom-row">
               <td>{{marketplace.name}} fee</td>

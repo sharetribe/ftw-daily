@@ -85,7 +85,6 @@ export const TransactionPageComponent = props => {
     transactionCancel,
     cancelCustomerInProgress
   } = props;
-  console.log('transaction', transaction)
   const currentTransaction = ensureTransaction(transaction);
   const currentListing = ensureListing(currentTransaction.listing);
   const isProviderRole = transactionRole === PROVIDER;

@@ -389,7 +389,7 @@ export class CheckoutPageComponent extends Component {
     const bookingData = pageData.bookingData || {};
          const startTime = bookingData.startTime;
          const endTime = bookingData.endTime;
-         const singlebooking = bookingData.singlebooking ||{};
+         const singlebooking = bookingData.singlebooking ?bookingData.singlebooking : null;
         //  const singleenddate = {
         //   singlebooking? 
         //  }
@@ -611,7 +611,6 @@ export class CheckoutPageComponent extends Component {
     const txBooking = ensureBooking(tx.booking);
     const {  startTime,
       endTime, singlebooking,    } = this.state.pageData.bookingData || {};
-      console.log('his.state.pageData.bookingData', this.state.pageData.bookingData)
     const breakdown =
       tx.id && txBooking.id ? (
         <BookingBreakdown

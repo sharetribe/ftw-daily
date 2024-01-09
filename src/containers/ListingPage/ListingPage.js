@@ -106,7 +106,7 @@ export class ListingPageComponent extends Component {
 
 
     const { bookingDates, ...bookingData } = values;
-         console.log('values', values)
+     
 
 
     const initialValues = {

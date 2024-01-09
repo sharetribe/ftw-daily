@@ -36,20 +36,58 @@
     {{#with transaction}}
     <h1>Please respond to a request by {{customer.display-name}}</h1>
 
-    <p>Good news! {{customer.display-name}} just requested to book {{listing.title}} from {{> format-date date=booking.start}} to {{> format-date date=booking.end}}. Here's the breakdown.</p>
+    <p>Good news! {{customer.display-name}} just requested to book  
+      {{#each tx-line-items}}
+      {{#contains include-for "provider"}} 
+      {{#eq "line-item/night" code}}
+      Over Night Stay  from {{> format-date date=booking.start}} to {{> format-date date=booking.end}}.
+      {{/eq}}
+       {{/contains}}
+      {{/each}}
+       {{#each tx-line-items}}
+      {{#contains include-for "provider"}}
+       {{#eq "line-item/day" code}}
+       Day Care Stay from  {{> format-date date=booking.start}} to {{> format-date date=booking.start}}.
+       {{/eq}}  
+        {{/contains}}
+      {{/each}} Here's the breakdown.</p>
     <table>
       <thead>
         <tr>
           <td class="left">Start date</td>
           <td class="right">End date</td>
         </tr>
-        <tr>
+        {{#each tx-line-items}}
+        {{#contains include-for "provider"}} 
+        {{#eq "line-item/night" code}}
+        <tr class="bottom-row">
           <th class="left">{{date booking.start format="EEEE" tz="Etc/UTC"}}</th>
           <th class="right">{{date booking.end format="EEEE" tz="Etc/UTC"}}</th>
         </tr>
         <tr class="bottom-row">
           <th class="left">{{date booking.start format="MMM d" tz="Etc/UTC"}}</th>
           <th class="right">{{date booking.end format="MMM d" tz="Etc/UTC"}}</th>
+        </tr>
+        {{/eq}}
+        {{/contains}}
+        {{/each}}
+        {{#each tx-line-items}}
+        {{#contains include-for "provider"}} 
+        {{#eq "line-item/day" code}}
+        <tr class="bottom-row">
+          <th class="left">{{date booking.start format="EEEE" tz="Etc/UTC"}}</th>
+          <th class="right">{{date booking.start format="EEEE" tz="Etc/UTC"}}</th>
+        </tr>
+        <tr class="bottom-row">
+          <th class="left">{{date booking.start format="MMM d" tz="Etc/UTC"}}</th>
+          <th class="right">{{date booking.start format="MMM d" tz="Etc/UTC"}}</th>
+        </tr>
+        {{/eq}}
+        {{/contains}}
+        {{/each}}
+        <tr class="bottom-row">
+          <th class="left">{{protected-data.startTime}}</th>
+          <th class="right">{{protected-data.endTime}}</th>
         </tr>
       </thead>
       <tbody>
@@ -65,7 +103,7 @@
             </tr>
             {{else}}
             <tr class="top-row bottom-row">
-              <td colspan="2">{{> format-money money=unit-price}} &times; {{number quantity}} {{inflect quantity "night" "nights"}}</td>
+              <td colspan="2">{{> format-money money=unit-price}} &times; {{number quantity}} {{inflect quantity "night" "nights"}}</td> 
             </tr>
             {{/if}}
             <tr class="top-row">
@@ -81,6 +119,7 @@
           <tr class="bottom-row">
             <td colspan="2">Seats &times; {{number seats}}</td>
           </tr>
+          
           {{else}}
           <tr class="top-row bottom-row">
             <td colspan="2">{{> format-money money=unit-price}} &times; {{number quantity}} {{inflect quantity "day" "days"}}</td>
@@ -90,20 +129,20 @@
             <th class="left">Subtotal</th>
             <th class="right">{{> format-money money=line-total}}</th>
           </tr>
-        {{/eq}}
+          {{/eq}}
         
-        {{#eq "line-item/pick Up price" code}}
-        <tr class="bottom-row">
-          <td>PickUp Price</td>
+          {{#eq "line-item/pick Up price" code}}
+          <tr class="bottom-row">
+          <td>Pick Up Price</td>
           <td class="right">{{> format-money money=line-total}}</td>
-        </tr>
-      {{/eq}}
-      {{#eq "line-item/drop Off price" code}}
-      <tr class="bottom-row">
-        <td>PickUp Price</td>
-        <td class="right">{{> format-money money=line-total}}</td>
-      </tr>
-    {{/eq}}
+          </tr>
+         {{/eq}}
+         {{#eq "line-item/drop Off price" code}}
+         <tr class="bottom-row">
+         <td>Drop off Price</td>
+         <td class="right">{{> format-money money=line-total}}</td>
+         </tr>
+         {{/eq}}
           {{#eq "line-item/provider-commission" code}}
             <tr class="bottom-row">
               <td>Service fee</td>

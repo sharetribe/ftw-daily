@@ -153,7 +153,7 @@ export class BookingDatesFormComponent extends Component {
             fetchLineItemsError,
             firstname,
           } = fieldRenderProps;
-          console.log('values', values)
+         
           const {
             pricepet,
             serviceSetup: detail,

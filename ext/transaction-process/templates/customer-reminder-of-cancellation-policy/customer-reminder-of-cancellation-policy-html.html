@@ -8,12 +8,16 @@
 
     {{#with transaction}}
     <p>
-      Your upcoming booking is starting soon with {{provider.display-name}} from {{> format-date date=booking.start}} to {{> format-date date=booking.end}}.
-      
+      Your upcoming booking is starting on {{#eq  protected-data.singlebooking}}
+       {{> format-date date=booking.start}} to {{> format-date date=booking.end}}
+     {{else}}
+     {{> format-date date=booking.start}} 
+      {{/eq}} with {{provider.display-name}}.
     </p>
-    
+  
     <p> 
-     Remember to reach out to your Host to exchange any necessary information if you haven't done so already. The cancellation policy can be viewed in the Terms of Service.
+     Remember to reach out to your Host to exchange any necessary information if you haven't done so already. 
+     A reminder of the cancellation policy can be viewed <link>.
     </p>
     {{/with}}
    

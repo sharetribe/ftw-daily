@@ -69,20 +69,16 @@ const BookingPeriod = props => {
 
 const LineItemBookingPeriod = props => {
   const { booking, unitType, dateType ,startTime,endTime,singlebooking} = props;
-console.log('singlebooking', singlebooking)
   // Attributes: displayStart and displayEnd can be used to differentiate shown time range
   // from actual start and end times used for availability reservation. It can help in situations
   // where there are preparation time needed between bookings.
   // Read more: https://www.sharetribe.com/api-reference/marketplace.html#bookings
   const { start, end, displayStart, displayEnd } = booking.attributes;
-  console.log('booking.attributes', booking.attributes)
   const localStartDate = dateFromAPIToLocalNoon(displayStart || start);
   const localEndDateRaw = dateFromAPIToLocalNoon(displayEnd || end);
-console.log('localEndDateRaw', localEndDateRaw)
   const isNightly = unitType === LINE_ITEM_NIGHT;
   // const endDay = isNightly ? localEndDateRaw : moment(localEndDateRaw).subtract(1, 'days');
   const endDay = singlebooking === true ? moment(localEndDateRaw).subtract(1, 'days') : localEndDateRaw;
-  console.log('endDay', endDay)
 
   return (
     <>

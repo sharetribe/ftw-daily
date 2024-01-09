@@ -67,6 +67,17 @@ exports.transactionLineItems = (listing, bookingData) => {
     lineItems.push(booking)
   }
 
+  const dayCareStay = {
+    code: bookingUnitDayType,
+    unitPrice: calculateTotalPrices(serviceSetup, listing, unitPrice, numberOfPets),
+    quantity: 1,
+    includeFor: ['customer', 'provider'],
+  };
+
+  if (serviceSetup === 'dayCareStay') {
+    lineItems.push(dayCareStay)
+  }
+
   const pickservices = {
     code: servicespickupUnitType,
     unitPrice: new Money(pickyesprice,unitPrice.currency),
@@ -86,19 +97,6 @@ exports.transactionLineItems = (listing, bookingData) => {
   };
   if (dropPick === 'dropPick_yes') {
      lineItems.push(dropservices)
-  }
-
-
-
-  const dayCareStay = {
-    code: bookingUnitDayType,
-    unitPrice: calculateTotalPrices(serviceSetup, listing, unitPrice, numberOfPets),
-    quantity: 1,
-    includeFor: ['customer', 'provider'],
-  };
-
-  if (serviceSetup === 'dayCareStay') {
-    lineItems.push(dayCareStay)
   }
 
   const discount_price = {

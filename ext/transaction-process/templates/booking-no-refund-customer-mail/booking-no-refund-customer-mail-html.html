@@ -9,8 +9,13 @@
 
     {{#with transaction}}
     <p>
-      You have decided to cancel your booking request with {{provider.display-name}} from {{> format-date date=booking.start}} to {{> format-date date=booking.end}}.
-      
+      You have decided to cancel your booking request with {{provider.display-name}}
+      {{#eq  protected-data.singlebooking}}
+      from {{> format-date date=booking.start}} to {{> format-date date=booking.end}}.
+      {{else}}
+        for  {{> format-date date=booking.start}}.
+      {{/eq}}  
+
     </p>
     
     <p> 
