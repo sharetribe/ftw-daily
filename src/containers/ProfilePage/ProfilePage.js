@@ -274,7 +274,8 @@ export class ProfilePageComponent extends Component {
                 </div>
                 <div>
                   <h4 className={css.HeadingName}>Feeding schedule</h4>
-                  <div className={css.petsData}>{e.Feeding_schedule}</div>
+                  <div className={css.petsData}>{e.Feeding_schedule === "Custom" ? <>{e.Feeding_schedule_custom}</>:
+                  <>{e.Feeding_schedule}</>} </div>
 
                 </div>
                 <div>

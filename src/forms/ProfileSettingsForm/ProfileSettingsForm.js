@@ -173,7 +173,7 @@ class ProfileSettingsFormComponent extends Component {
             form,
             values,
           } = fieldRenderProps;
-        
+        console.log('values', values)
           const user = ensureCurrentUser(currentUser);
 
           // First name
@@ -198,8 +198,11 @@ class ProfileSettingsFormComponent extends Component {
           const lastNameRequiredMessage = intl.formatMessage({
             id: 'ProfileSettingsForm.lastNameRequired',
           });
+          const customVMessage = intl.formatMessage({
+            id: 'ProfileSettingsForm.customRequired',
+          });
           const lastNameRequired = validators.required(lastNameRequiredMessage);
-
+ const customRequired = validators.required(customVMessage);
           const maxLengthheadlineMessage = intl.formatMessage(
             { id: 'EditListingDescriptionForm.max50Length' },
             {
@@ -930,6 +933,22 @@ class ProfileSettingsFormComponent extends Component {
                                         <div className={css.radioLabel}>{st.label}</div>
                                       </div>
                                     ))}
+                                    {
+                                   
+                                      values?.pets[index]?.Feeding_schedule === "Custom" ?
+                                      <FieldTextInput
+                                      type="text"
+                                      id="Feeding_schedule_custom"
+                                      name={`${name}.Feeding_schedule_custom`}
+                                      label={intl.formatMessage({
+                                        id: 'ProfileSettingsForm.feedcustomHeading',
+                                      })}
+                                      placeholder={intl.formatMessage({
+                                        id: 'ProfileSettingsForm.feedcustomHplaceholder',
+                                      })}
+                                      validate={customRequired}
+                                    />:null
+                                    }
                                   </div>
                                 </div>
                                 <div className={css.detailsPet}>
@@ -982,10 +1001,6 @@ class ProfileSettingsFormComponent extends Component {
                                   maxLength={TITLE_MAX150_LENGTH}
                                   validate={validators.composeValidators(maxLength500Message)}
                                 />
-
-                                {/* <h2>
-                                  <FormattedMessage id="ProfileSettingsForm.healthInfoHeading" />
-                                </h2> */}
                                 <FieldTextInput
                                   type="text"
                                   id="Health_info"
