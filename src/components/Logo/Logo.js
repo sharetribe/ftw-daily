@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import config from '../../config';
 import IconLogo from './IconLogo';
-import LogoImage from '../../assets/plane-logo.png';
+import LogoImage from '../../assets/PetCrib_Logo-Orange.jpg';
 import css from './Logo.module.css';
 
 const Logo = props => {
