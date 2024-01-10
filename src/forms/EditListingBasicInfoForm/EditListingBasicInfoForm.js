@@ -161,8 +161,8 @@ const EditListingBasicInfoFormComponent = props => (
           {errorMessageUpdateListing}
           {errorMessageShowListing}
           <FieldTextInput
-            id="title"
-            name="title"
+            id="fullname"
+            name="fullname"
             className={css.title}
             type="text"
             label={titleMessage}

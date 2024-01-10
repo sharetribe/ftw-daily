@@ -173,7 +173,7 @@ class ProfileSettingsFormComponent extends Component {
             form,
             values,
           } = fieldRenderProps;
-        console.log('values', values)
+          console.log('values', values)
           const user = ensureCurrentUser(currentUser);
 
           // First name
@@ -201,8 +201,12 @@ class ProfileSettingsFormComponent extends Component {
           const customVMessage = intl.formatMessage({
             id: 'ProfileSettingsForm.customRequired',
           });
+          const custompottyMessage = intl.formatMessage({
+            id: 'ProfileSettingsForm.custompottyRequired',
+          });
           const lastNameRequired = validators.required(lastNameRequiredMessage);
- const customRequired = validators.required(customVMessage);
+          const customRequired = validators.required(customVMessage);
+          const custompottyRequired = validators.required(custompottyMessage);
           const maxLengthheadlineMessage = intl.formatMessage(
             { id: 'EditListingDescriptionForm.max50Length' },
             {
@@ -323,7 +327,7 @@ class ProfileSettingsFormComponent extends Component {
           const petdetailsheading = intl.formatMessage({
             id: 'ProfileSettingsForm.petdetazilhead',
           });
-          
+
           const ACCEPT_FILE = 'image/*';
           const configS3 = {
             bucketName: process.env.REACT_APP_S3_BUCKET_NAME,
@@ -584,7 +588,7 @@ class ProfileSettingsFormComponent extends Component {
                                   <div className={css.radioBox}>
                                     {typeOfPet.map(st => (
                                       <div className={css.cardSelectPet} key={st.key}>
-                                        <Field name={`${name}.typeOfPet`} component="input" type="radio" value={st.key}
+                                        <Field name={`${name}.typeOfPet`} component="input" type="radio" value={st.label}
                                           validate={lastNameRequired}
 
                                         />
@@ -900,7 +904,24 @@ class ProfileSettingsFormComponent extends Component {
                                         <div className={css.radioLabel}>{st.label}</div>
                                       </div>
                                     ))}
+
+
                                   </div>
+                                  {
+                                    values?.pets[index]?.Potty_break === "Custom" ?
+                                      <FieldTextInput
+                                        type="text"
+                                        id="Potty_break_custom"
+                                        name={`${name}.Potty_break_custom`}
+                                        label={intl.formatMessage({
+                                          id: 'ProfileSettingsForm.pottycustomHeading',
+                                        })}
+                                        placeholder={intl.formatMessage({
+                                          id: 'ProfileSettingsForm.pottycustomHplaceholder',
+                                        })}
+                                        validate={custompottyRequired}
+                                      /> : null
+                                  }
                                 </div>
                                 <div className={css.detailsPet}>
                                   <p className={css.bioInfo}>
@@ -933,23 +954,23 @@ class ProfileSettingsFormComponent extends Component {
                                         <div className={css.radioLabel}>{st.label}</div>
                                       </div>
                                     ))}
-                                    {
-                                   
-                                      values?.pets[index]?.Feeding_schedule === "Custom" ?
-                                      <FieldTextInput
-                                      type="text"
-                                      id="Feeding_schedule_custom"
-                                      name={`${name}.Feeding_schedule_custom`}
-                                      label={intl.formatMessage({
-                                        id: 'ProfileSettingsForm.feedcustomHeading',
-                                      })}
-                                      placeholder={intl.formatMessage({
-                                        id: 'ProfileSettingsForm.feedcustomHplaceholder',
-                                      })}
-                                      validate={customRequired}
-                                    />:null
-                                    }
+
                                   </div>
+                                  {
+                                    values?.pets[index]?.Feeding_schedule === "Custom" ?
+                                      <FieldTextInput
+                                        type="text"
+                                        id="Feeding_schedule_custom"
+                                        name={`${name}.Feeding_schedule_custom`}
+                                        label={intl.formatMessage({
+                                          id: 'ProfileSettingsForm.feedcustomHeading',
+                                        })}
+                                        placeholder={intl.formatMessage({
+                                          id: 'ProfileSettingsForm.feedcustomHplaceholder',
+                                        })}
+                                        validate={customRequired}
+                                      /> : null
+                                  }
                                 </div>
                                 <div className={css.detailsPet}>
                                   <p className={css.bioInfo}>

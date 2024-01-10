@@ -256,30 +256,29 @@ export class ProfilePageComponent extends Component {
                 </div>
               </div>
               <div>
-                <h3 className={css.HeadingName}><FormattedMessage id="ProfileSettingsForm.petdetazilhead" /></h3>
+                <h4 className={css.HeadingName}><FormattedMessage id="ProfileSettingsForm.petdetazilhead" /></h4>
                 <div className={css.petsData}>{e.about_pet}</div>
               </div>
               <h3>Care info</h3>
-              <h3>Provide your Pet Host with instructions for walking, feeding and other care</h3>
               <div className={css.threeRowBox}>
                 <div>
-                  <h4 className={css.HeadingName}>Potty break schedule</h4>
-                  <div className={css.petsData}>{e.Potty_break}</div>
+                  <h4 className={css.HeadingName}>Potty Break Schedule</h4>
+                  <div className={css.petsData}>{e.Potty_break  === "Custom" ? <>{e.Potty_break_custom}</>:<>{e.Potty_break}</>}</div>
                 </div>
                 <div>
-                  <h4 className={css.HeadingName}>Energy level</h4>
+                  <h4 className={css.HeadingName}>Energy Level</h4>
                   <div className={css.petsData}>{e.Energy_level}</div>
 
 
                 </div>
                 <div>
-                  <h4 className={css.HeadingName}>Feeding schedule</h4>
+                  <h4 className={css.HeadingName}>Feeding Schedule</h4>
                   <div className={css.petsData}>{e.Feeding_schedule === "Custom" ? <>{e.Feeding_schedule_custom}</>:
                   <>{e.Feeding_schedule}</>} </div>
 
                 </div>
                 <div>
-                  <h4 className={css.HeadingName}>Can be left alone</h4>
+                  <h4 className={css.HeadingName}>Can Be Left Alone</h4>
                   <div className={css.petsData}>{e.left_alone}</div>
                 </div>
                 <div>
@@ -307,7 +306,7 @@ export class ProfilePageComponent extends Component {
                 <div className={css.petsData}>{e.detailvet_pet}</div>
               </div>
               <div>
-                <h4 className={css.HeadingName}> have Pet Insurance for your Pet's?</h4>
+                <h4 className={css.HeadingName}> Do you have Pet Insurance for your Pet?</h4>
                 {e.Pet_Insurance === "insurance_yes" ?
                   <div className={css.petsData}>Yes</div> :
                   <div className={css.petsData}>No</div>}

@@ -27,9 +27,8 @@ const EditListingBasicInfoPanel = props => {
     currentUser,
     errors,
   } = props;
-
   const useremail = currentUser.attributes.email;
-
+ const displayname = currentUser.attributes.profile.displayName;
   const classes = classNames(rootClassName || css.root, className);
   const currentListing = ensureOwnListing(listing);
   const { title, geolocation, publicData } = currentListing.attributes;
@@ -59,7 +58,8 @@ const EditListingBasicInfoPanel = props => {
       <EditListingBasicInfoForm
         className={css.form}
         initialValues={{
-          title,
+          title:displayname,
+          fullname:publicData.fullname,
           email: useremail,
           birthday: publicData.birthday,
           phone: publicData.phone,
@@ -73,7 +73,7 @@ const EditListingBasicInfoPanel = props => {
         }}
         saveActionMsg={submitButtonText}
         onSubmit={values => {
-          const { title, email, phone, birthday, location, serviceSetup } = values;
+          const { title, email, phone,fullname, birthday, location, serviceSetup } = values;
           const {
             selectedPlace: { address, origin },
           } = location;
@@ -84,6 +84,7 @@ const EditListingBasicInfoPanel = props => {
             publicData: {
               email,
               phone,
+              fullname,
               birthday,
               serviceSetup,
               location: { address },
