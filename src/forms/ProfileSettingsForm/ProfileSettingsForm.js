@@ -917,7 +917,7 @@ class ProfileSettingsFormComponent extends Component {
                                           id: 'ProfileSettingsForm.pottycustomHeading',
                                         })}
                                         placeholder={intl.formatMessage({
-                                          id: 'ProfileSettingsForm.pottycustomHplaceholder',
+                                          id: 'ProfileSettingsForm.pottycustomPlaceholder',
                                         })}
                                         validate={custompottyRequired}
                                       /> : null
@@ -966,7 +966,7 @@ class ProfileSettingsFormComponent extends Component {
                                           id: 'ProfileSettingsForm.feedcustomHeading',
                                         })}
                                         placeholder={intl.formatMessage({
-                                          id: 'ProfileSettingsForm.feedcustomHplaceholder',
+                                          id: 'ProfileSettingsForm.feedcustomPlaceholder',
                                         })}
                                         validate={customRequired}
                                       /> : null
