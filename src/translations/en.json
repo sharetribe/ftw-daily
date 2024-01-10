@@ -796,7 +796,7 @@
 "ProfileSettingsForm.photopetLabel":"Upload Pet Photo",
 "ProfileSettingsForm.Petbreed":"Enter all breeds that apply. If your dog is a mixed breed, add ‘Mixed’ as well.",
 "ProfileSettingsForm.Petbreedvalidation":"you need to add breed ",
-"ProfileSettingsForm.PetHeading":"Provide a description of your Pet details",
+"ProfileSettingsForm.PetHeading":"Pet details",
 "ProfileSettingsForm.viewphotopetLabel":"View Pet Photo",
   "ProfileSettingsForm.petVeterinaryHeading": "Veterinary info",
   "ProfileSettingsForm.petveterinaryplaceholder":"Add your vet's name, address and contact details",
