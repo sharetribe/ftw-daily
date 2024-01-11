@@ -5,20 +5,19 @@
 
 <html>
   <body>
-    <h1>
-      customer profile reviews 
-    </h1>
-
-    {{#with transaction}}
-    <p>
-      email confirmation serving as a reminder   {{customer.display-name}} profile reviews , and it will expire by {{> format-date date=booking.start}}.
-      
-    </p>
-  
-    {{/with}}
    
 
-    <!-- <p><a href="{{marketplace.url}}">Try to book something else instead</a></p> -->
+    {{#with transaction}}
+    <h1>
+      Confirmation of Booking with {{customer.display-name}}
+    </h1>
+    <p>
+      Congratulations, your Hosting Servce with {{customer.display-name}} has now been confirmed.
+    </p>
+
+    <p><a href="{{marketplace.url}}">Remember to reach out to the Pet Owner and ask them any questions about the Booking and the Pets you will be caring for. </a></p> 
+    {{/with}}
+    
 
     <hr />
 

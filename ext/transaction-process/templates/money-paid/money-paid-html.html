@@ -146,6 +146,12 @@
                      </tr>
       
                          {{/eq}}
+                         {{#eq "line-item/discount" code}}
+                         <tr class="bottom-row">
+                           <td>Discount</td>
+                           <td class="right">{{> format-money money=line-total}}</td>
+                         </tr>
+                       {{/eq}}
           {{#eq "line-item/provider-commission" code}}
             <tr class="bottom-row">
               <td>{{marketplace.name}} fee</td>

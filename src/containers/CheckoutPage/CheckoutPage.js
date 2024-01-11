@@ -550,6 +550,7 @@ export class CheckoutPageComponent extends Component {
 
 
     const listingTitle = currentAuthor.attributes.profile.displayName;;
+   
     // const Displayname = currentAuthor.attributes.profile.displayName;
 
     const title = intl.formatMessage({ id: 'CheckoutPage.title' }, { listingTitle });

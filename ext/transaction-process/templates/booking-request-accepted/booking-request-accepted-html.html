@@ -138,6 +138,13 @@
       </tr>
       
     {{/eq}}
+   
+    {{#eq "line-item/discount" code}}
+    <tr class="bottom-row">
+      <td>Discount</td>
+      <td class="right">{{> format-money money=line-total}}</td>
+    </tr>
+  {{/eq}}
     {{#eq "line-item/customer-commission" code}}
     <tr class="bottom-row">
       <td>Booking fee</td>

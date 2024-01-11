@@ -5,15 +5,14 @@
 <html>
   <body>
     <h1>
-      Confirmation of Booking with {{customer.display-name}}
+      Reminder about your Upcoming PetCrib Hosting Service
     </h1>
 
     {{#with transaction}}
-    <p>
-     Congratulations, your Hosting Servce with {{customer.display-name}} has now been confirmed.
-     <!-- email get reminder of commencement of service {{customer.display-name}} booking request, and it will expire by {{> format-date date=booking.start}}. -->
-    </p>
-    
+<p>Your Upcoming Hosting Service is starting on {{> format-date date=booking.start}} with {{customer.display-name}}.</p>
+
+<p><a href="{{marketplace.url}}"> Remember to reach out to {{customer.display-name}} to exchange any necessary information if you haven't done so already.
+</a></p>
     {{/with}}
     <!-- <p><a href="{{marketplace.url}}">Remember to reach out to {{customer.display-name}} and ask them any questions about the upcoming Booking and the Pets you will be caring for.</a></p> -->
 

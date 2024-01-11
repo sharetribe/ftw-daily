@@ -108,7 +108,7 @@
   "CheckoutPage.retrievingStripePaymentIntentFailed": "Oops, something went wrong. Please refresh the page. If the error persists, go back to {listingLink} and try again after 15 minutes",
   "CheckoutPage.speculateFailedMessage": "Oops, something went wrong. Please refresh the page and try again.",
   "CheckoutPage.speculateTransactionError": "Failed to fetch breakdown information.",
-  "CheckoutPage.title": "Book {displayName}",
+  "CheckoutPage.title": "Book {listingTitle}",
   "ConfirmSignupForm.emailInvalid": "A valid email address is required",
   "ConfirmSignupForm.emailLabel": "Email",
   "ConfirmSignupForm.emailPlaceholder": "john.doe@example.com",

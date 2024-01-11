@@ -36,18 +36,18 @@
     {{#with transaction}}
     <h1>Please respond to a request by {{customer.display-name}}</h1>
 
-    <p>Good news! {{customer.display-name}} just requested to book  
+    <p>Good news! {{customer.display-name}} just requested to book {{provider.display-name}}
       {{#each tx-line-items}}
       {{#contains include-for "provider"}} 
       {{#eq "line-item/night" code}}
-      Over Night Stay  from {{> format-date date=booking.start}} to {{> format-date date=booking.end}}.
+       from {{> format-date date=booking.start}} to {{> format-date date=booking.end}}.
       {{/eq}}
        {{/contains}}
       {{/each}}
        {{#each tx-line-items}}
       {{#contains include-for "provider"}}
        {{#eq "line-item/day" code}}
-       Day Care Stay from  {{> format-date date=booking.start}} to {{> format-date date=booking.start}}.
+       from  {{> format-date date=booking.start}} to {{> format-date date=booking.start}}.
        {{/eq}}  
         {{/contains}}
       {{/each}} Here's the breakdown.</p>
@@ -143,6 +143,12 @@
          <td class="right">{{> format-money money=line-total}}</td>
          </tr>
          {{/eq}}
+         {{#eq "line-item/discount" code}}
+         <tr class="bottom-row">
+           <td>Discount</td>
+           <td class="right">{{> format-money money=line-total}}</td>
+         </tr>
+       {{/eq}}
           {{#eq "line-item/provider-commission" code}}
             <tr class="bottom-row">
               <td>Service fee</td>
@@ -161,9 +167,10 @@
     </table>
 
     <p>
-      For further details of the booking request click on the link below to view the Pet and Pet Owner's Profile. You need to accept the request by {{ metadata.acceptedDate }}. Otherwise the request will be expired and you won't get paid. If the booked dates won't work for you, you can also choose to decline the request.
+      For further details of the booking request click on the link below to view the Pet and Pet Owner's Profile. 
     </p>
-
+    <p>You need to accept the request by {{ metadata.acceptedDate }}. Otherwise the request will be expired and you won't get paid.</p>
+ <p>If the booked dates won't work for you, you can also choose to decline the request.</p>
     <p><a href="{{marketplace.url}}/sale/{{url-encode id}}/details">Accept or decline the booking</a></p>
 
     {{/with}}

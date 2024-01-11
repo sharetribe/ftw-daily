@@ -9,10 +9,10 @@
 
     {{#with transaction}}
     <p>
-      You have decided to cancel your booking request with {{provider.display-name}} for {{#eq  protected-data.singlebooking}}
-      Over Night Stay  from {{> format-date date=booking.start}} to {{> format-date date=booking.end}}.
+      You have decided to cancel your booking request with {{provider.display-name}}  {{#eq  protected-data.singlebooking}}
+      from {{> format-date date=booking.start}} to {{> format-date date=booking.end}}.
       {{else}}
-      Day Care Stay  for  {{> format-date date=booking.start}}.
+       for  {{> format-date date=booking.start}}.
       {{/eq}}
       
     </p>
@@ -24,7 +24,7 @@
     {{/with}}
   
 
-    <!-- <p><a href="{{marketplace.url}}">You can revisit the PetCrib site to search for another Pet Host.</a></p> -->
+     <p><a href="{{marketplace.url}}">You can revisit the PetCrib site to search for another Pet Host.</a></p> 
 
     <hr />
 
