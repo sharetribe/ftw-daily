@@ -1,9 +1,9 @@
 <html>
   <body>
     {{#with transaction}}
-    <h1>How was your experience with {{listing.title}}? Write a review!</h1>
+    <h1>How was your experience with {{provider.display-name}}? Write a review!</h1>
 
-    <p>You recently booked {{listing.title}}. Please write a review to describe your experience. Reviews are important part of the {{marketplace.name}} community. You need to leave a review before you can view the Pet Host's review of your services.</p>
+    <p>You recently booked {{provider.display-name}}. Please write a review to describe your experience. Reviews are important part of the {{marketplace.name}} community. You need to leave a review before you can view the Pet Host's review of your services.</p>
 
     <p><a href="{{marketplace.url}}/order/{{url-encode id}}/details">Leave a review</a></p>
     {{/with}}

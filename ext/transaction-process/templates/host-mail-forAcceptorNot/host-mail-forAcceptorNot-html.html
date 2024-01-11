@@ -10,9 +10,11 @@
     <h1>
       Reminder about the Booking Request from {{customer.display-name}}
     </h1>
-
     <p>
-      This is a reminder that {{customer.display-name}} has requested to book your Hosting Service. If you don't respond the booking request will expire by {{> format-date date=booking.start}}.      
+      This is a reminder that {{customer.display-name}} has requested to book your Hosting Service starting on {{> format-date date=booking.start}} . 
+    </p>
+    <p>
+      If you don't respond within 48 hours the booking request will expire.      
     </p>
   
     {{/with}}
