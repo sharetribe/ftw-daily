@@ -375,7 +375,7 @@
           padding: 0;
 
           &:nth-child(1) {
-            width: auto;
+            /* width: auto; */
             z-index: 999;
             /* order: 2; */
             /* background-color: red; */
@@ -390,7 +390,7 @@
           }
 
           &:nth-child(3) {
-            width: auto;
+            /* width: auto; */
             z-index: 0;
             /* order: 3; */
             /* background-color: pink; */
