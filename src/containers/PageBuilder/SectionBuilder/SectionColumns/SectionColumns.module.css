@@ -443,10 +443,10 @@
             &:nth-child(1) {
               & button {
                 &:nth-child(1) {
-                  &:hover {
+                  /* &:hover {
                     text-decoration-color: #fff !important;
                     text-decoration: underline;
-                  }
+                  } */
 
                   & span {
                     color: #fff;
