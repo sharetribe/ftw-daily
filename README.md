@@ -1,6 +1,6 @@
 # Deprecated - Sharetribe Flex Template for Web with daily bookings
 
-**Note**: you should use Sharetribe Web Template when starting a new project!
+**Note**: you should use Sharetribe Web Template instead when starting a new project!  
 [https://github.com/sharetribe/web-template](https://github.com/sharetribe/web-template)
 
 
